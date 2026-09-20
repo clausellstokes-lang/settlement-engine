@@ -1120,7 +1120,7 @@ check_caught "prose-presence/a sense leaves the published lexicon and the spread
 #     grammar walker's arm D. C-sibling stayed green a second time, on a file with five more
 #     assertions than the first run. Restored cmp-exact => 26 passed.
 #     ⛔ RE-ANCHORED AT MEASURE CAR 3 (the fold's R2, cure 3). Car 0e inserted `branchReads: [],`
-#     between `predicate: []` and `fieldsRead: []` (wiringCensus.js:699-702) and this anchor
+#     between `predicate: []` and `fieldsRead: []` (wiringCensus.js:719) and this anchor
 #     stopped matching: executed standalone against the committed bytes, md5
 #     0a28c398a1b6cff56183212bed8fa7fd BEFORE and AFTER — the plant mutated nothing and the
 #     sweep reported it as a BROKEN GAP nobody read. Car 11's lesson, which this sweep quotes
@@ -1604,6 +1604,21 @@ check_caught "phone-floor/a sub-floor size loses its helper and renders at its d
 #      by name and A4), 3 passed, title_matches=1; restored => 5 passed.
 perl -0pi -e 's/asObject\(asObject\(item\.save\)\.settlement \|\| item\.settlement\)/asObject(item.settlement)/' src/domain/worldPulse/factionDensityKernel.js
 check_caught "irreversible-raw-roster/the R18 law reads the participation view and proposes a dissolution" src/domain/worldPulse/factionDensityKernel.js "npx vitest run tests/domain/irreversibleRawRoster.contract.test.js --no-file-parallelism" "A1 — the dissolution is never PROPOSED: the law reads the raw roster, so a shelved sole member mints no reaction"
+
+# 113. CITATION INTEGRITY. Land an UNTRACKED module under scripts/ carrying a
+#      `<path>:<line>` address past the end of the file it names. The EOF arm must
+#      convict it. The plant is untracked on purpose: the walker reads FROM DISK
+#      rather than from the git index precisely so its own mutant is visible, and
+#      an index-based walk would pass this sweep while seeing nothing. No existing
+#      file is touched, so this variant needs no MUTATED_FILES row.
+#      THE LINE NUMBER IS AN ARITHMETIC EXPANSION, not a literal, so that the
+#      address is NOT written contiguously in THIS file: spelled out, it would be
+#      a genuine past-EOF citation here and the gate would convict its own plant
+#      text. The shell writes the resolved number into the planted module.
+check_caught_planted "citations/past-EOF address planted in live code" \
+  scripts/_mutsweepStaleCitation.mjs \
+  "// The census roster is assembled in scripts/wiring-census.mjs:$((999999))." \
+  "npx vitest run tests/lint/sourceCitationIntegrity.walker.test.js --no-file-parallelism"
 
 echo ""
 echo "── Mutation sweep results ──────────────────────────────"

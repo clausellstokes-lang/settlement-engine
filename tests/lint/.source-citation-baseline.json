@@ -1,0 +1,347 @@
+{
+  "_law": "ONLY SHRINKS. Every row is a <path>:<line> citation in a LIVE document whose line is PAST THE END of the file it addresses — an address that cannot be right, whatever it meant to name. A citation not listed here FAILS tests/lint/sourceCitationIntegrity.walker.test.js; a listed row that has gone also fails, with 'delete its entry', so the set can only fall. It holds the SET, never counts: a count assertion would red every time a doc legitimately re-states an address it already carries, and a gate that reds on correct behaviour gets turned off. THE DOOR: re-address the citation to the symbol it names and DELETE its row. A row is NEVER silenced by editing a document's path into the archival rule — that rule is measured and listed in the walker's header.",
+  "_door": "To clear a row: open the citing document, find the symbol the sentence names, locate it in the target, write the true line, delete the row here. To add one: you cannot — a new past-EOF citation in a live document is a RED, not a baseline entry. src/, tests/ and scripts/ have NO baseline at all: past-EOF there is always red.",
+  "frozenAt": {
+    "date": "2026-09-20",
+    "branch": "fix-citations-2026-09-20",
+    "base": "63e40fe57",
+    "ruling": "ODQ §934.47 addendum 44 (FIX-C2)",
+    "docsLiveFiles": 481,
+    "docsArchivalFiles": 29,
+    "rowsAtFreeze": 47,
+    "citingFilesAtFreeze": 25
+  },
+  "archivalExclusionAtFreeze": {
+    "_why": "Frozen records of their day. Re-addressing these to today's tree would FALSIFY a record rather than repair it — docs/review-r2/VERIFY_SUBSYSTEMS_RESULTS.json pins a sha and states that all cited lines matched AT THAT SHA. Measured 2026-09-20: these files carry 377 past-EOF citations that this gate deliberately does not see.",
+    "pastEofCitationsExcluded": 377,
+    "byRule": {
+      "banner": 7,
+      "dated": 5,
+      "sha-pin": 1,
+      "tree": 16
+    },
+    "files": {
+      "banner": [
+        "docs/A_PLUS_ROADMAP.md",
+        "docs/CAPABILITY_REMEDIATION_PLAN.md",
+        "docs/GENERATION_COHERENCE_AUDIT.md",
+        "docs/LANDING_HANDOFF_AMENDMENTS.md",
+        "docs/SIMULATION_LOGIC_AUDIT.md",
+        "docs/SOL_QUEUE.md",
+        "docs/UIUX_AUDIT_AND_PLAN.md"
+      ],
+      "dated": [
+        "docs/COMPREHENSIVE_REVIEW_2026-07-13.md",
+        "docs/COMPREHENSIVE_REVIEW_2026-07-15.md",
+        "docs/COMPREHENSIVE_REVIEW_2026-08-01.md",
+        "docs/HANDOFF_2026-08-01_PAUSE.md",
+        "docs/implementation/surveys/SIM-SEALS-SURVEY-2026-09-19.md"
+      ],
+      "sha-pin": [
+        "docs/SETTLEMENT_CAPABILITY_ATLAS.md"
+      ],
+      "tree": [
+        "docs/review-r2/G2_SHIFT_MAP.md",
+        "docs/review-r2/LIGHT_SHIFT_MAP.md",
+        "docs/review-r2/RAW_SURVEY_RESULTS.json",
+        "docs/review-r2/VERIFY_DIMS_RESULTS.json",
+        "docs/review-r2/VERIFY_SUBSYSTEMS_RESULTS.json",
+        "docs/shift-records/2026-09-16-genesis-freeze-generator-golden-master.json",
+        "docs/shift-records/2026-09-17-dossier-contradictions.json",
+        "docs/shift-records/2026-09-18-content-coherence.json",
+        "docs/shift-records/2026-09-18-pressure-sentence-agreement.json",
+        "docs/shift-records/2026-09-19-food-balance-arithmetic.json",
+        "docs/shift-records/2026-09-19-layout-sacred-house.json",
+        "docs/shift-records/2026-09-19-parish-church-text.json",
+        "docs/shift-records/2026-09-19-preset-lighting-witness.json",
+        "docs/shift-records/2026-09-19-religious-quarter-text.json",
+        "docs/shift-records/README.md",
+        "docs/shift-records/_TEMPLATE.json"
+      ]
+    }
+  },
+  "rows": [
+    {
+      "from": "docs/briefs/RP1_REGRESSIONS_BRIEF.md",
+      "cite": "AuthPanel.jsx:373-375,194",
+      "target": "src/components/auth/AuthPanel.jsx",
+      "targetLines": 349
+    },
+    {
+      "from": "docs/briefs/W4a_LIBRARY_IMPLEMENTER_BRIEF.md",
+      "cite": "settlementSlice.js:1835",
+      "target": "src/store/settlementSlice.js",
+      "targetLines": 1737
+    },
+    {
+      "from": "docs/briefs/W4g_ADMIN_BRIEF.md",
+      "cite": "AdminPanel.jsx:374",
+      "target": "src/components/AdminPanel.jsx",
+      "targetLines": 238
+    },
+    {
+      "from": "docs/COHESION_REMEDIATION_PLAN.md",
+      "cite": "mutate.js:314-325",
+      "target": "src/domain/events/mutate.js",
+      "targetLines": 227
+    },
+    {
+      "from": "docs/COHESION_REMEDIATION_PLAN.md",
+      "cite": "mutate.js:489-543",
+      "target": "src/domain/events/mutate.js",
+      "targetLines": 227
+    },
+    {
+      "from": "docs/COHESION_REMEDIATION_PLAN.md",
+      "cite": "powerGenerator.js:1855",
+      "target": "src/generators/powerGenerator.js",
+      "targetLines": 14
+    },
+    {
+      "from": "docs/COHESION_REMEDIATION_PLAN.md",
+      "cite": "servicesGenerator.js:806-898",
+      "target": "src/generators/servicesGenerator.js",
+      "targetLines": 378
+    },
+    {
+      "from": "docs/DESIGN_FP_ARCH_INT.md",
+      "cite": "subsystemRowsVirtual.js:925",
+      "target": "src/domain/certification/subsystemRowsVirtual.js",
+      "targetLines": 596
+    },
+    {
+      "from": "docs/DESIGN_FP_ARCH_POP.md",
+      "cite": "subsystemRowsVirtual.js:1101",
+      "target": "src/domain/certification/subsystemRowsVirtual.js",
+      "targetLines": 596
+    },
+    {
+      "from": "docs/DESIGN_FP_ARCH_SP.md",
+      "cite": "settlementStrategy.js:1356",
+      "target": "src/domain/worldPulse/settlementStrategy.js",
+      "targetLines": 1295
+    },
+    {
+      "from": "docs/DESIGN_FP_ARCH_WC.md",
+      "cite": "settlementStrategy.js:1360",
+      "target": "src/domain/worldPulse/settlementStrategy.js",
+      "targetLines": 1295
+    },
+    {
+      "from": "docs/DESIGN_FP_GRAMMAR.md",
+      "cite": "peaceTerms.js:1322-1354",
+      "target": "src/domain/worldPulse/peaceTerms.js",
+      "targetLines": 1265
+    },
+    {
+      "from": "docs/DESIGN_HOOK_NONREDUNDANCY.md",
+      "cite": "pdf/lib/viewModel.js:1124",
+      "target": "src/pdf/lib/viewModel.js",
+      "targetLines": 943
+    },
+    {
+      "from": "docs/DESIGN_HOOK_NONREDUNDANCY.md",
+      "cite": "viewModel.js:1124",
+      "target": "src/pdf/lib/viewModel.js",
+      "targetLines": 943
+    },
+    {
+      "from": "docs/DESIGN_WAR_CONVENIENCE_AND_TRIBUTE.md",
+      "cite": "peaceTerms.js:1337-1353",
+      "target": "src/domain/worldPulse/peaceTerms.js",
+      "targetLines": 1265
+    },
+    {
+      "from": "docs/FABLE_VALIDATION_QUEUE.md",
+      "cite": "commandEnvelope.js:3304",
+      "target": "src/application/commands/commandEnvelope.js",
+      "targetLines": 270
+    },
+    {
+      "from": "docs/FABLE_VALIDATION_QUEUE.md",
+      "cite": "src/application/commands/commandEnvelope.js:4233",
+      "target": "src/application/commands/commandEnvelope.js",
+      "targetLines": 270
+    },
+    {
+      "from": "docs/GEOPOLITICAL_WAR_LAYER.md",
+      "cite": "advanceCampaignWorld.js:206",
+      "target": "src/domain/worldPulse/advanceCampaignWorld.js",
+      "targetLines": 40
+    },
+    {
+      "from": "docs/GEOPOLITICAL_WAR_LAYER.md",
+      "cite": "advanceCampaignWorld.js:221",
+      "target": "src/domain/worldPulse/advanceCampaignWorld.js",
+      "targetLines": 40
+    },
+    {
+      "from": "docs/GEOPOLITICAL_WAR_LAYER.md",
+      "cite": "advanceCampaignWorld.js:385",
+      "target": "src/domain/worldPulse/advanceCampaignWorld.js",
+      "targetLines": 40
+    },
+    {
+      "from": "docs/GEOPOLITICAL_WAR_LAYER.md",
+      "cite": "economicGenerator.js:2541",
+      "target": "src/generators/economicGenerator.js",
+      "targetLines": 15
+    },
+    {
+      "from": "docs/GEOPOLITICAL_WAR_LAYER.md",
+      "cite": "powerGenerator.js:1223",
+      "target": "src/generators/powerGenerator.js",
+      "targetLines": 14
+    },
+    {
+      "from": "docs/GEOPOLITICAL_WAR_LAYER.md",
+      "cite": "relationshipEvolution.js:1265",
+      "target": "src/domain/worldPulse/relationshipEvolution.js",
+      "targetLines": 680
+    },
+    {
+      "from": "docs/GEOPOLITICAL_WAR_LAYER.md",
+      "cite": "relationshipEvolution.js:1542-1562",
+      "target": "src/domain/worldPulse/relationshipEvolution.js",
+      "targetLines": 680
+    },
+    {
+      "from": "docs/GEOPOLITICAL_WAR_LAYER.md",
+      "cite": "relationshipEvolution.js:1869",
+      "target": "src/domain/worldPulse/relationshipEvolution.js",
+      "targetLines": 680
+    },
+    {
+      "from": "docs/GEOPOLITICAL_WAR_LAYER.md",
+      "cite": "relationshipEvolution.js:2039",
+      "target": "src/domain/worldPulse/relationshipEvolution.js",
+      "targetLines": 680
+    },
+    {
+      "from": "docs/GEOPOLITICAL_WAR_LAYER.md",
+      "cite": "relationshipEvolution.js:994",
+      "target": "src/domain/worldPulse/relationshipEvolution.js",
+      "targetLines": 680
+    },
+    {
+      "from": "docs/implementation/INDEX.md",
+      "cite": "subsystemRowsVirtual.js:1268",
+      "target": "src/domain/certification/subsystemRowsVirtual.js",
+      "targetLines": 596
+    },
+    {
+      "from": "docs/implementation/packets/fp/WF-1B.md",
+      "cite": "subsystemRowsVirtual.js:1248",
+      "target": "src/domain/certification/subsystemRowsVirtual.js",
+      "targetLines": 596
+    },
+    {
+      "from": "docs/implementation/packets/fp/WF-1C.md",
+      "cite": "subsystemRowsVirtual.js:1248",
+      "target": "src/domain/certification/subsystemRowsVirtual.js",
+      "targetLines": 596
+    },
+    {
+      "from": "docs/implementation/packets/fp/WF-1D.md",
+      "cite": "subsystemRowsVirtual.js:1268",
+      "target": "src/domain/certification/subsystemRowsVirtual.js",
+      "targetLines": 596
+    },
+    {
+      "from": "docs/implementation/packets/fp/WF-1F.md",
+      "cite": "src/domain/certification/subsystemRowsVirtual.js:1268",
+      "target": "src/domain/certification/subsystemRowsVirtual.js",
+      "targetLines": 596
+    },
+    {
+      "from": "docs/implementation/packets/website/WEB-8.md",
+      "cite": "PublicDossierView.jsx:147",
+      "target": "src/components/PublicDossierView.jsx",
+      "targetLines": 122
+    },
+    {
+      "from": "docs/implementation/preambles/INT-PREAMBLE.md",
+      "cite": "subsystemRowsVirtual.js:925",
+      "target": "src/domain/certification/subsystemRowsVirtual.js",
+      "targetLines": 596
+    },
+    {
+      "from": "docs/legal/LEGAL_CONSULT_PACKET.md",
+      "cite": "logo.js:130",
+      "target": "src/design/organic/logo.js",
+      "targetLines": 102
+    },
+    {
+      "from": "docs/PHASE4_FAITH_DELTA.md",
+      "cite": "src/components/compendium/customCategories.js:75-82",
+      "target": "src/components/compendium/customCategories.js",
+      "targetLines": 55
+    },
+    {
+      "from": "docs/REGIONAL_ENGINE_AUDIT.md",
+      "cite": "advanceCampaignWorld.js:356-380",
+      "target": "src/domain/worldPulse/advanceCampaignWorld.js",
+      "targetLines": 40
+    },
+    {
+      "from": "docs/REGIONAL_ENGINE_AUDIT.md",
+      "cite": "advanceCampaignWorld.js:439-447",
+      "target": "src/domain/worldPulse/advanceCampaignWorld.js",
+      "targetLines": 40
+    },
+    {
+      "from": "docs/REGIONAL_ENGINE_AUDIT.md",
+      "cite": "relationshipEvolution.js:1501-1565",
+      "target": "src/domain/worldPulse/relationshipEvolution.js",
+      "targetLines": 680
+    },
+    {
+      "from": "docs/REGIONAL_ENGINE_AUDIT.md",
+      "cite": "stressors.js:861,879-883",
+      "target": "src/domain/worldPulse/stressors.js",
+      "targetLines": 818
+    },
+    {
+      "from": "docs/RISK_REGISTER.md",
+      "cite": "domain/events/mutate.js:1391",
+      "target": "src/domain/events/mutate.js",
+      "targetLines": 227
+    },
+    {
+      "from": "docs/RISK_REGISTER.md",
+      "cite": "SettlementsPanel.jsx:941-1054",
+      "target": "src/components/SettlementsPanel.jsx",
+      "targetLines": 848
+    },
+    {
+      "from": "docs/SUBSYSTEM_INTEGRATION_PLAN.md",
+      "cite": "advanceCampaignWorld.js:163",
+      "target": "src/domain/worldPulse/advanceCampaignWorld.js",
+      "targetLines": 40
+    },
+    {
+      "from": "docs/SUBSYSTEM_INTEGRATION_PLAN.md",
+      "cite": "advanceCampaignWorld.js:221",
+      "target": "src/domain/worldPulse/advanceCampaignWorld.js",
+      "targetLines": 40
+    },
+    {
+      "from": "docs/SUBSYSTEM_INTEGRATION_PLAN.md",
+      "cite": "advanceCampaignWorld.js:349",
+      "target": "src/domain/worldPulse/advanceCampaignWorld.js",
+      "targetLines": 40
+    },
+    {
+      "from": "docs/SUBSYSTEM_INTEGRATION_PLAN.md",
+      "cite": "relationshipEvolution.js:1404",
+      "target": "src/domain/worldPulse/relationshipEvolution.js",
+      "targetLines": 680
+    },
+    {
+      "from": "docs/SUBSYSTEM_INTEGRATION_PLAN.md",
+      "cite": "stressors.js:969",
+      "target": "src/domain/worldPulse/stressors.js",
+      "targetLines": 818
+    }
+  ]
+}
