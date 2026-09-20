@@ -143,6 +143,17 @@ test.describe('Tier 3.7 Flow F — single-dossier recovery', () => {
     await retry.click();
     await expect(page.getByRole('heading', { name: /Your dossier is ready/i })).toBeVisible({ timeout: 30_000 });
     await expect(page.getByText('Stashed Hollow', { exact: false })).toBeVisible();
-    await expect(page.getByRole('button', { name: /Download (PDF|again)/i })).toBeVisible();
+    // ⚠ THE SAME THREE-STATE LABEL AS THE ARM ABOVE, AND THIS COPY ONLY EVER HAD TWO OF
+    // THEM. SingleDossierSuccessPage.jsx renders `downloading ? 'Preparing PDF…' :
+    // autoDownloadedRef.current ? 'Download again' : 'Download PDF'` and the auto-download
+    // fires on mount, so the disabled "Preparing PDF…" is a state this assertion can land
+    // in — which is exactly what it did, on BOTH attempts of both CI runs of PR #53, where
+    // a cold single-worker dev server is still building the client-side PDF five seconds
+    // after the heading paints. The arm above was given all three spellings when the same
+    // omission made it a race; this one was missed. All three are the SAME affordance, so
+    // the pin covers the state machine instead of two thirds of it.
+    await expect(
+      page.getByRole('button', { name: /Download (PDF|again)|Preparing PDF/i }),
+    ).toBeVisible();
   });
 });
