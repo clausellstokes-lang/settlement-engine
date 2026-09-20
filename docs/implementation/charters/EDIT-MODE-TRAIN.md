@@ -696,3 +696,11 @@ CURE-A `08cb42e31` (the model walker's mask: findings identical under both forms
 - **FIX-P9 (NEW; after FIX-P5 composes):** the two F14 surfaces FIX-P5 registered — the Compendium's `titleCase(id)` label in a byte-pinned generated artifact (regenerated through its own re-mint idiom) and the gallery's facet-wide `capitalize` (a tier-aware label), with the lane's executed register rows deleted the day each lands.
 - **TOOL-20 (NEW; after FIX-T2):** the 43 local `stripComments` copies in `tests/` hoisted onto CURE-J's scanner-grade helper, string-blind ones first.
 - **TOOL-21 (NEW; measure-first):** 47 of 50 frozen golden-register rows carry `proofForm: null`, so the door's `PROOF_FORM_MISMATCH` refusal is unreachable (§555.8 inert on the map family) — which rows should carry a proof form, what the door would then refuse, and whether the register edit is the owner's door or the chair's mint.
+
+## Amendments of 2026-09-20 09:15 EDT — the re-seal deadlock; TOOL-22; FIX-D9's rulings; FIX-B3, TOOL-23 chartered (ODQ §934.47 addendum 87)
+
+- **TOOL-22 (NEW; a seat when one frees):** `implementation:dispatch --reseal` — archives the prior session capsule under `<ID>.sealed-at-<head>` and seals afresh on a clean tree; until it lands the chair rotates the capsule by hand (LANE-EM-BUILD's rule).
+- **FIX-D9:** dispositions written, nothing deleted; the packet slot for the dark trio is Register VII's wiring car (chartered when the owner signs `REGISTER_VII_SIGNATURE`); `tests/lint/deadCodeDisposition.walker.test.js` minted; §934.70 asks keep-dark vs retire with the table.
+- **FIX-B3 (NEW; FIX-B2's family, after B2 lands):** `ENGINE_SHARED_DOMAIN` seeded from the REACHABLE graph, not every file under `src/generators/` (the dark trio charges first paint by construction: ESD 51 → 49, EAGER 268 → 266 without it); measured with a build; the first-paint budget's honest headroom re-measured.
+- **TOOL-23 (NEW; measure-first):** the reachability census — 248 of 2,247 `src/` modules reachable from no build entry; FIX-D9's resolved-path scanner reused; the seven entries enumerated (including `src/utils/pdfRender.worker.js`).
+- **The next lighting refreeze MEASURES `suiteTitles`** (the walker asserts its five figures in order and stops at the first miss; two lanes today could not evaluate it).
