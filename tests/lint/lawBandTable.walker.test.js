@@ -97,10 +97,11 @@ function walk(dir, out = []) {
 /**
  * Blank every comment, preserving line count.
  * ⛔ LINE-PRESERVING BY CONSTRUCTION, AND ASSERTED SO BELOW. This fence reports `file:line`,
- * and the landed HB-1 walker's own mask collapses what it removes, so its blob stops being
- * line-addressable and every address it prints afterwards is wrong. That defect is
- * INHERITED here as a lesson, not as code: it is docketed for infra as HB-1's own
- * one-character fix and is not proposed as a WC edit.
+ * so a mask that collapses what it removes makes every address it prints afterwards wrong.
+ * The two HB-1 masks that carried that defect were cured on 2026-09-19 (CURE-A / CURE-A2, in
+ * `chooserTotality.walker.test.js` and `strategyMoveVocabulary.walker.test.js`), each with a
+ * line-structure arm of its own: a new copy of that import pattern must blank the indentation
+ * with `[ \t]*`, never `\s*`, because `\s` matches a newline under the multiline flag.
  */
 function codeOnly(source) {
   const blank = (match) => match.replace(/[^\n]/g, ' ');

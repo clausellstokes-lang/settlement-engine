@@ -157,13 +157,27 @@ function walk(dir, out = []) {
   return out;
 }
 
-/** Comments and import specifiers blanked; a JSDoc mention is not a branch. */
+/**
+ * Comments and import specifiers blanked; a JSDoc mention is not a branch.
+ *
+ * ⛔ THE IMPORT MASK IS HORIZONTAL WHITESPACE ONLY, AND `[ \t]` IS THE WHOLE CURE (2026-09-19,
+ * CURE-A2). The two comment strips above are line-preserving by construction; the import mask
+ * was not. It replaces its match with spaces of the same LENGTH, so any newline it swallows
+ * comes back as a SPACE — and anchored `^\s*` under the multiline flag it swallowed the blank
+ * line standing above an import, because `\s` matches `\n`. The blob kept every offset and
+ * lost lines. MEASURED before the cure over every file this walker scans: 41,675 newlines
+ * destroyed across 1,493 of 2,246 files, with this walker's OWN findings identical either way
+ * (the vocabulary home, the ten branching modules, the move-keyed literals of every scanned
+ * file, both per-row foreign sets and both guard-the-guard plants). `[^\n]*?` already holds the
+ * body to one line; the two `\s` classes were the leak. The twin mask in
+ * `chooserTotality.walker.test.js` took the same cure in the same sitting. Pinned below.
+ */
 function codeOnly(src) {
   const stripped = src
     .replace(/\/\*[\s\S]*?\*\//g, (m) => m.replace(/[^\n]/g, ' '))
     .replace(/(^|[^:])\/\/[^\n]*/g, (m, lead) => lead + ' '.repeat(m.length - lead.length));
   return stripped.replace(
-    /^\s*(?:import|export)\b[^\n]*?from\s*['"][^'"]*['"];?[^\n]*$/gm,
+    /^[ \t]*(?:import|export)\b[^\n]*?from[ \t]*['"][^'"]*['"];?[^\n]*$/gm,
     (m) => ' '.repeat(m.length),
   );
 }
@@ -237,6 +251,31 @@ describe('HB-1 — one exporter of the move vocabulary, and every branch outside
     const declared = strategyRows().flatMap(([, row]) => Object.keys(foreignTokensOf(row)));
     expect(declared.length, 'no foreign token is declared — the exactness arm is vacuous')
       .toBeGreaterThan(0);
+  });
+
+  test('the strip keeps every scanned file\'s LINE STRUCTURE, not merely its length', () => {
+    // ⛔ THE MASK'S OWN GUARD (CURE-A2). Both comment strips here are length- AND line-
+    // preserving by construction; the import mask replaces its match with spaces of the same
+    // length, so a newline inside the match returns as a SPACE and the blanked blob silently
+    // loses lines while every offset still lines up. That is why the arm is a LINE COUNT and
+    // not a length: a length pin is green over the exact defect it is meant to catch. The
+    // fixture is the defect's shape — a blank line standing above an INDENTED import.
+    const fixture = ['const first = 1;', '', "  import { x } from './x.js';", "const move = 'defend';", ''].join('\n');
+    const blanked = codeOnly(fixture);
+    expect(blanked, 'the strip stopped preserving offsets').toHaveLength(fixture.length);
+    expect(
+      blanked.split('\n'),
+      'the import mask ate the newline of the blank line above the import. Blank the'
+      + ' indentation with HORIZONTAL whitespace only — `[ \\t]*`, never `\\s*`.',
+    ).toHaveLength(fixture.split('\n').length);
+    expect(blanked.split('\n')[2].trim(), 'the import line itself was left unmasked').toBe('');
+    // …and the whole live corpus, which is what the arms below actually read.
+    const collapsed = SRC_FILES.filter((f) => f.code.split('\n').length !== f.src.split('\n').length);
+    expect(
+      collapsed.map((f) => f.rel),
+      'the strip collapsed lines on live files, so every line-structured read below it is'
+      + ' aimed at the wrong line',
+    ).toEqual([]);
   });
 
   test('AT MOST ONE MODULE EXPORTS THE CLOSED MOVE VOCABULARY', () => {
