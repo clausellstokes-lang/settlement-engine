@@ -688,3 +688,11 @@ CURE-A `08cb42e31` (the model walker's mask: findings identical under both forms
 - **FIX-L3 (NEW; low; after FIX-L2):** `tests/edgeFunctions/contracts.test.js`'s three other park-reason families cured.
 - **TOOL-9's hand-off gains two lines:** the lighting walker's `:2318` comment re-cut to the measured survivors (a comment, no title); `stopConditions.test.js` 14 vitest tests vs 16 walker titles reconciled in the census note.
 - **Lane law:** eslint runs bare — the mutex's shared tier refuses a command with no worker cap, and a refused line prints no count.
+
+## Amendments of 2026-09-20 09:09 EDT — CURE-J half landed; §934.71 asked; EM-B1f re-sealed; FIX-P9, TOOL-20, TOOL-21 chartered (ODQ §934.47 addendum 86)
+
+- **CURE-J:** commit 1 composed at `c127cdfb2` (comment-insensitive recorder identity). Commit 2 — the provenance-only re-record — is the OWNER's door (§934.71): the chair drafts `docs/shift-records/2026-09-20-cure-j-provenance.json` at EM-B1f's flip sitting with the measured figures (rows 1050 → 1050, `rowsSha` `e972c0d0…2559` unchanged, whole-file `921c51cf…db41` → `0f64dbd8…879a`, `predictedRows` 2 → 2); on the owner's word a lane runs `recordGolden` under `GOLDEN_SHIFT_SIGNED`. Until then every full check reds on that one title.
+- **EM-B1f** re-seals at `c127cdfb2` and lands with check 7's one title a NAMED PRE-EXISTING RED (addendum 78's precedent); §6's text re-cut at the flip to the haystack-cast form the build proved.
+- **FIX-P9 (NEW; after FIX-P5 composes):** the two F14 surfaces FIX-P5 registered — the Compendium's `titleCase(id)` label in a byte-pinned generated artifact (regenerated through its own re-mint idiom) and the gallery's facet-wide `capitalize` (a tier-aware label), with the lane's executed register rows deleted the day each lands.
+- **TOOL-20 (NEW; after FIX-T2):** the 43 local `stripComments` copies in `tests/` hoisted onto CURE-J's scanner-grade helper, string-blind ones first.
+- **TOOL-21 (NEW; measure-first):** 47 of 50 frozen golden-register rows carry `proofForm: null`, so the door's `PROOF_FORM_MISMATCH` refusal is unreachable (§555.8 inert on the map family) — which rows should carry a proof form, what the door would then refuse, and whether the register edit is the owner's door or the chair's mint.
