@@ -21,8 +21,29 @@ export const CODE_TREES = ['src', 'tests', 'scripts'];
 /** Extensions a citation can be written in (prose and code alike). */
 export const TEXT_EXT = /\.(js|jsx|mjs|cjs|ts|tsx|md|json|sh|yml|yaml|css|html|txt)$/;
 
-/** Never walked: vendored, generated or build output. */
-export const SKIP_DIRS = new Set(['node_modules', '.git', 'dist', 'coverage', '.vite', 'build']);
+/**
+ * Never walked: vendored or generated output.
+ *
+ * ⛔ `build` WAS IN THIS SET AND WAS A BLIND SPOT, not a saving (FIX-C2b, measured
+ * 2026-09-20). `collectFiles` matches a bare name at EVERY depth, so the entry meant
+ * for a repo-root build output silently hid `tests/build/` — 59 test files — from the
+ * walk AND from `buildTargetIndex`. The cost was paid twice: the 7 citations written
+ * inside those files were scanned by no arm, and every citation ELSEWHERE that named
+ * one of them (`vendorPdfLazy.test.js` x18, `townMapLazy.test.js` x6, …, 44 in all)
+ * resolved to nothing and was SKIPPED as an unreadable target rather than checked.
+ *
+ * It could never have earned its keep: `collectFiles` is only ever called on the eight
+ * INDEX_ROOTS, and `buildTargetIndex` reads root-level FILES only — a repo-root
+ * `build/` is unreachable from either, so this entry could only ever hide a NESTED
+ * directory that is source. Measured at this tip: the only directory named `build`
+ * under any indexed root is `tests/build`, there is no root `build/`, and `.gitignore`
+ * does not name one. Re-admitting the directory adds ZERO past-EOF findings to ARM 1
+ * (measured: 0) and moves ARM 3 from 2 findings to 3.
+ *
+ * ⚠ THE LAW THIS LEAVES BEHIND: a skip list matched by bare name is matched at every
+ * depth. Any entry added here must be a name that can NEVER be a source directory.
+ */
+export const SKIP_DIRS = new Set(['node_modules', '.git', 'dist', 'coverage', '.vite']);
 
 /**
  * Trees searched for citation TARGETS. A token that resolves to no file here —
@@ -371,6 +392,107 @@ export function symbolFindings({ files, resolve, read }) {
           const inBlock = declaredAt.some((d) => d <= c.start && c.start <= blockEnd(targetLines, d));
           if (!inBlock) rows.push({ from, line: i + 1, cite: `${c.token}:${c.spec}`, symbol, target, declaredAt });
           break;
+        }
+      }
+    }
+  }
+  return rows;
+}
+
+// ── THE BARE `:NNN` ARM (report-only) ────────────────────────────────────────
+
+/**
+ * A bare line address — `:83`, `:383-394`, `:211,229` — with no path in front of
+ * it, inheriting its file from a `<path>:<line>` citation earlier in the SAME
+ * SENTENCE — as in `peaceTerms.js:213, :269` (both true here, deliberately: this
+ * arm reads its own header, so an illustrative address must be a real one). The
+ * CITATION regex
+ * cannot see these at all: it requires a path token, so every arm is blind to
+ * them. MEASURED 2026-09-20 (FIX-C2b): 661 of them live in the estate, 59 in
+ * live code and 602 in live docs — four times the population of ARM 1's whole
+ * reach — and 6 address a line past the end of the file their sentence names.
+ */
+export const BARE_ADDRESS = /(?<![\w/.\-:])[:](\d+(?:-\d+)?(?:\s*,\s*\d+(?:-\d+)?)*)(?![\d\-,])/g;
+
+/**
+ * Sentence-ish spans of one line, each with its start offset. The scope is a
+ * SENTENCE and not a paragraph on purpose: widening ARM 3's window to a
+ * paragraph took its finding count from 38 to 8,120. A span ends at `.`/`!`/`?`
+ * followed by a space (never after a digit, so `:1-17.` and `v1.2` survive) or
+ * at a table-cell pipe.
+ * @param {string} text
+ * @returns {{ start: number, text: string }[]}
+ */
+export function sentenceSpans(text) {
+  /** @type {{ start: number, text: string }[]} */
+  const out = [];
+  let start = 0;
+  for (let i = 0; i < text.length; i += 1) {
+    const ch = text[i];
+    const next = text[i + 1];
+    const ends = (ch === '.' || ch === '!' || ch === '?')
+      && (next === ' ' || next === undefined) && !/\d/.test(text[i - 1] ?? '');
+    if (ends || ch === '|') {
+      out.push({ start, text: text.slice(start, i + 1) });
+      start = i + 1;
+    }
+  }
+  if (start < text.length) out.push({ start, text: text.slice(start) });
+  return out;
+}
+
+/**
+ * THE BARE-ADDRESS ARM — REPORT-ONLY, and the reason is measured rather than
+ * cautious. A bare `:NNN` inherits the NEAREST PRECEDING path citation in its
+ * sentence — never the sentence's last, which mis-attributed `peaceTerms.js:230,
+ * :863` to a `peaceTermsSale.js` named later and convicted a true citation.
+ *
+ * ⛔ AND THE ATTRIBUTION IS STILL NOT SOUND, WHICH IS WHY IT MUST NEVER GATE. A
+ * bare number can inherit a path that the sentence names WITHOUT a line number,
+ * which is invisible to this reader. MEASURED: MF-UC1.md:178 cites
+ * `resolveTerrain.js:57`, then lists seven `TERRAIN_DATA` classes as `:51`,
+ * `:128` … `:623` — those inherit `src/data/geographyData.js`, named two clauses
+ * later as a bare grep argument. Six of the twelve past-EOF findings are that one
+ * sentence. Restricting to sentences with a single path citation does NOT fix it
+ * (measured: the same six survive), so there is no precision knob that makes this
+ * arm gateable. It prints leads for a reader, exactly as ARM 3 does.
+ *
+ * @param {object} args
+ * @param {string[]} args.files
+ * @param {(token: string) => string | null} args.resolve
+ * @param {(rel: string) => string[] | null} args.read
+ * @param {{ seen: number }} [args.stats] filled in place with the whole population
+ * @returns {{ from: string, line: number, bare: string, inherits: string, target: string, targetLines: number }[]}
+ */
+export function bareFindings({ files, resolve, read, stats }) {
+  /** @type {{ from: string, line: number, bare: string, inherits: string, target: string, targetLines: number }[]} */
+  const rows = [];
+  for (const from of files) {
+    if (from === BASELINE_REL) continue;
+    const lines = read(from);
+    if (!lines) continue;
+    for (let i = 0; i < lines.length; i += 1) {
+      const text = lines[i];
+      if (!text.includes(':') || !MAY_CITE.test(text)) continue;
+      for (const span of sentenceSpans(text)) {
+        const anchors = citationsIn(span.text);
+        if (anchors.length === 0) continue;
+        BARE_ADDRESS.lastIndex = 0;
+        let m = BARE_ADDRESS.exec(span.text);
+        while (m !== null) {
+          const isAnchorsOwn = anchors.some((a) => a.column + a.token.length === m.index);
+          const before = anchors.filter((a) => a.column < m.index);
+          if (!isAnchorsOwn && before.length > 0) {
+            if (stats) stats.seen += 1;
+            const anchor = before[before.length - 1];
+            const target = resolve(anchor.token);
+            const targetLines = target ? read(target)?.length : null;
+            const start = Number((m[1].match(/\d+/) ?? ['0'])[0]);
+            if (target && targetLines && start > targetLines) {
+              rows.push({ from, line: i + 1, bare: `:${m[1]}`, inherits: anchor.token, target, targetLines });
+            }
+          }
+          m = BARE_ADDRESS.exec(span.text);
         }
       }
     }

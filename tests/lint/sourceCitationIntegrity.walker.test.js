@@ -40,7 +40,7 @@
  * assertion would red every time a document legitimately restates an address it
  * already carries, and a gate that reds on correct behaviour gets turned off.
  *
- * ⚠ THE ARCHIVAL EXCLUSION, MEASURED AND LISTED. 29 documents are frozen records
+ * ⚠ THE ARCHIVAL EXCLUSION, MEASURED AND LISTED. 30 documents are frozen records
  * of their day, and re-addressing them to today's tree would FALSIFY a record
  * rather than repair it — `docs/review-r2/VERIFY_SUBSYSTEMS_RESULTS.json` pins a
  * sha and states that all its cited lines matched AT THAT SHA. They carry 377
@@ -48,12 +48,16 @@
  * each checkable, and the full roster is committed in the baseline's
  * `archivalExclusionAtFreeze.files`:
  *   tree (16)    docs/review-r2/**, docs/shift-records/**
- *   banner (7)   a blockquote status banner naming HISTORICAL in the opening ten
+ *   banner (8)   a blockquote status banner naming HISTORICAL in the opening ten
  *                lines — the estate's OWN marker (docs/README.md §"HISTORICAL —
  *                point-in-time audit / plan / status exhaust (not maintained)"):
- *                A_PLUS_ROADMAP, CAPABILITY_REMEDIATION_PLAN,
+ *                A_PLUS_ROADMAP, CAPABILITY_REMEDIATION_PLAN, GAME_GRADE_AUDIT,
  *                GENERATION_COHERENCE_AUDIT, LANDING_HANDOFF_AMENDMENTS,
  *                SIMULATION_LOGIC_AUDIT, SOL_QUEUE, UIUX_AUDIT_AND_PLAN
+ *                (GAME_GRADE_AUDIT joined 2026-09-20, FIX-C2b: a 2026-07-24 audit
+ *                pinning composite-r4 @ 69b7a8d3 whose citations address a town-map
+ *                surface deleted at 43c3ac3805. It hid nothing — the excluded
+ *                past-EOF count stayed 377 and ARM 2 was 0 on both sides.)
  *   dated (5)    an ISO date in the filename: the three COMPREHENSIVE_REVIEWs,
  *                HANDOFF_2026-08-01_PAUSE, SIM-SEALS-SURVEY-2026-09-19
  *   sha-pin (1)  a header that pins the tree it describes (`**Snapshot base:**`):
@@ -97,12 +101,63 @@
  *     builds. Unresolvable is SKIPPED, never convicted: this gate judges only an
  *     address it can read, which is also what makes the synthetic `fixture.ts:1`
  *     inside a test assertion a non-event rather than an allowlist entry.
- *   · a bare `:NNN` inheriting its path from earlier in the sentence.
  *   · a stale address that still lands inside the file.
+ *
+ * ── ARM 4 · THE BARE `:NNN` ARM (REPORT-ONLY, LIVE CODE + LIVE DOCS) ─────────
+ * A line address with no path in front of it, inheriting its file from a citation
+ * earlier in the same SENTENCE, as in `peaceTerms.js:213, :269` — both true here
+ * on purpose, because this arm reads its own header and an illustrative address
+ * that is false would be a finding the walker itself planted.
+ * The CITATION regex requires a path token, so ARMS 1-3 are blind to the whole
+ * form. MEASURED 2026-09-20: 661 of them — 59 in live code, 602 in live docs, more
+ * than four times ARM 1's entire live-code reach — and 12 address a line past the
+ * end of the file their sentence names.
+ *
+ * ⛔ IT NEVER GATES, and like ARM 3 the reason is arithmetic. A bare number can
+ * inherit a path the sentence names WITHOUT a line, which this reader cannot see:
+ * MF-UC1.md:178 cites `resolveTerrain.js:57` and then lists seven TERRAIN_DATA
+ * classes as `:51`…`:623`, which belong to a `geographyData.js` named two clauses
+ * later as a grep argument. SIX of the twelve findings are that one sentence, and
+ * restricting the arm to single-path sentences does not remove them (measured).
+ * There is no precision knob that makes it gateable, so it prints and the reader
+ * judges — the same contract ARM 3 earns for the same measured reason.
+ *
+ * ⛔ AND IT HAD A BLIND SPOT OF ITS OWN, FOUND BY MEASUREMENT (FIX-C2b, 2026-09-20).
+ * `SKIP_DIRS` carried a bare `build`, and `collectFiles` matches a bare name at EVERY
+ * depth, so the entry meant for a repo-root build output hid `tests/build/` — 59 test
+ * files — from the walk and from the target index. Both halves of the estate paid: the
+ * 7 citations written inside those files were read by no arm, and 44 citations
+ * elsewhere that NAMED one of them (`vendorPdfLazy.test.js` x18, `townMapLazy.test.js`
+ * x6, …) resolved to nothing and were skipped as unreadable rather than checked — which
+ * is why they surfaced as "absent target paths" in FIX-C2's recon when the files were
+ * there all along. PROVED by planting a past-EOF citation inside `tests/build/`: the
+ * pre-cure walk saw 5,208 files and ZERO findings, the cured walk 5,268 and the plant.
+ * Re-admitting the directory added no past-EOF finding (ARM 1 stays 0); ARM 3 went 2→3.
+ * THE LAW: a skip list matched by bare name is matched at every depth, so every entry
+ * must be a name that can never be a source directory.
  *
  * ⚠ IT READS FROM DISK, DELIBERATELY. `git grep` without a rev reads the INDEX,
  * and the mutation sweep proves this gate by PLANTING an untracked file, so an
  * index-based walk would be blind to its own mutant.
+ *
+ * ⛔⛔ THREE FILES ARE READ BY THIS GATE BUT MUST NOT BE CURED FROM IT. The prose
+ * manifest golden pins its RECORDER by the RAW SHA of three files —
+ * `tests/helpers/dossierManifest.js`, `tests/helpers/goldenMasterCorpus.js` and
+ * `scripts/prose-rate-corpus.mjs` (`MANIFEST_RECORDER_FILES`,
+ * `tests/helpers/dossierManifest.js:335`). A raw-byte pin cannot tell a comment
+ * from a behaviour change, so re-addressing a CITATION inside one of them breaks
+ * the fixture's provenance and `tests/property/dossierProseManifest.test.js`
+ * REFUSES it. It has already happened once: FIX-C2's one-line docblock re-address
+ * in `scripts/prose-rate-corpus.mjs` (`EconomicsTab.jsx:251-257` -> `:272`) moved
+ * that file's sha with ZERO of the golden's 1,050 rows moved, and reddened run 21
+ * (ODQ §934.47 addendum 84). MEASURED at this tip: two of the three recorder shas
+ * still MATCH the fixture and only `prose-rate-corpus.mjs` diverges.
+ * ⇒ IF AN ARM EVER PRINTS A FINDING WHOSE CITING FILE IS ONE OF THOSE THREE, DO
+ * NOT CURE IT. Record it "left — recorder file" and hand it to the lane that owns
+ * the recorder identity (CURE-J), because the cure costs a golden re-record that a
+ * citation lane may not perform. Measured 2026-09-20: ARMS 1, 3 and 4 each report
+ * ZERO findings inside the three, so there is no bait TODAY — this note exists for
+ * the day an address in one of them rots.
  *
  * ⚠ ONE FILE IS EXCLUDED BY NAME: .source-citation-baseline.json, which is a
  * register of convicted addresses and would otherwise convict this gate of its
@@ -120,6 +175,7 @@ import {
   BASELINE_REL,
   CODE_TREES,
   archivalReason,
+  bareFindings,
   buildTargetIndex,
   citationsIn,
   citedLines,
@@ -128,6 +184,7 @@ import {
   eofFindings,
   partitionDocs,
   rowKey,
+  sentenceSpans,
   symbolFindings,
 } from './sourceCitationIntegrity.shared.mjs';
 
@@ -196,6 +253,34 @@ describe('source citation integrity — the controls (each proves an arm can RED
       .map((r) => r.symbol)).toEqual(['gammaRay']);
     expect(symbolFindings({ files: ['b/two.md'], resolve: fakeResolve, read: readOf(fresh) })).toEqual([]);
     files['a/one.js'] = ['line1', 'line2', 'line3'];
+  });
+
+  test('CONTROL: a bare `:NNN` inherits the NEAREST PRECEDING path, and is convicted past EOF', () => {
+    // `one.js` has three lines. The bare `:9` belongs to it and is past its end.
+    const bare = (text) => {
+      files['b/two.md'] = [text];
+      return bareFindings({ files: ['b/two.md'], resolve: fakeResolve, read: fakeRead });
+    };
+    expect(bare('`one.js:1`, and also :9').map((r) => r.bare)).toEqual([':9']);
+    expect(bare('`one.js:1`, and also :2')).toEqual([]);
+    // ⛔ NEAREST PRECEDING, never the sentence's LAST: a later path must not steal
+    // a bare address written before it. `one.js:1 … :9 … nowhere.js:4` — the `:9`
+    // is one.js's, and reading the last anchor would attribute it to an
+    // unresolvable target and silently drop a real finding.
+    expect(bare('`one.js:1` then :9 then `nowhere.js:4`').map((r) => r.target)).toEqual(['a/one.js']);
+    // A bare address with NO preceding citation in its sentence is not a citation.
+    expect(bare('the ratio is :9 by itself')).toEqual([]);
+    // The anchor's OWN line number is never re-counted as a bare address.
+    expect(bare('`one.js:9`').map((r) => r.bare)).toEqual([]);
+    // A sentence boundary ends inheritance: `one.js` cannot reach past the stop.
+    expect(bare('`one.js:1` is the roster. And :9 is something else.')).toEqual([]);
+  });
+
+  test('CONTROL: sentenceSpans splits on stops and cells, but not inside a number', () => {
+    expect(sentenceSpans('a. b').map((s) => s.text)).toEqual(['a.', ' b']);
+    expect(sentenceSpans('| a | b').map((s) => s.text)).toEqual(['|', ' a |', ' b']);
+    // A digit before the stop is a version or a range end, never a sentence end.
+    expect(sentenceSpans('v1.2 holds').map((s) => s.text)).toEqual(['v1.2 holds']);
   });
 
   test('CONTROL: the archival rule DISCRIMINATES — it is four checkable predicates, not a hunch', () => {
@@ -288,6 +373,26 @@ describe('source citation integrity — the live estate', () => {
       + `${lines.join('\n')}\n\n`,
     );
     expect(Array.isArray(findings)).toBe(true);
+  });
+
+  test('ARM 4 — REPORT-ONLY: bare `:NNN` addresses past the end of the file their sentence names', () => {
+    const stats4 = { seen: 0 };
+    const findings = bareFindings({ files: [...codeFiles, ...docs.live], resolve, read, stats: stats4 });
+    // No assertion on the count, for ARM 3's reason: the attribution is not sound
+    // (a bare address can inherit a path named without a line), so a ratchet here
+    // would freeze a heuristic rather than the estate. It prints leads.
+    const lines = findings.map(
+      (r) => `  ${r.from}:${r.line}  ${r.bare} inherits ${r.inherits} -> ${r.target} (${r.targetLines} lines)`,
+    );
+    process.stdout.write(
+      `\nBARE-ADDRESS ARM (report-only): ${stats4.seen} bare \`:NNN\` address(es) read; `
+      + `${findings.length} point past the end of the file their sentence names.\n`
+      + `${lines.join('\n')}\n\n`,
+    );
+    // The population itself is a floor, not a ratchet: a walk that stops finding
+    // the form entirely has broken, and that is worth a red even here.
+    expect(stats4.seen, 'the bare-address reader matched nothing — the form cannot have vanished')
+      .toBeGreaterThanOrEqual(400);
   });
 
   test('the archival exclusion is still the set this walker documents', () => {
