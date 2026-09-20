@@ -223,7 +223,19 @@ jobs:
   e2e:
     name: Chromium end-to-end
     runs-on: ubuntu-latest
-    timeout-minutes: 15
+    # This job's suite MORE THAN DOUBLED on this branch and its cap was never revisited:
+    # 8 -> 14 chromium spec files and 39 -> 81 `test(` declarations (measured at this tip
+    # against master b9c494afe, excluding e2e/performance/** which playwright.config.js
+    # testIgnores and the performance job owns). It took 5.2 minutes on master's last run
+    # (35127725833) with the OLD suite. The branch also adds a 120s and a 60s per-test
+    # budget, taking the explicitly-budgeted total from 1155s to 1335s — and `retries: 1`
+    # in CI means a single flaky retry of the 420s auth/checkout test can spend 14 minutes
+    # by itself. 25 is the measured figure with headroom for runner variance; a timeout is
+    # not a test verdict. The same master run's coverage-floors job was CUT at its
+    # 45-minute cap, which skipped both deploy jobs and has left production un-deployed
+    # since 2026-09-16 (raised to 60 in 743779742); a cap that cuts a passing run blocks
+    # the production deploy, and this is that failure mode one job over.
+    timeout-minutes: 25
     steps:
       - uses: actions/checkout@v4
 
