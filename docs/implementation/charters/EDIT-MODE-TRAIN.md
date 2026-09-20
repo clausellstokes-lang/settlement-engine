@@ -681,3 +681,10 @@ CURE-A `08cb42e31` (the model walker's mask: findings identical under both forms
 - **TOOL-15 WIDENED:** the unpoliced figure-in-a-symbol shape now covers `retiredSymbols` and every numeric manifest row (EM-B1k2's `"uncoveredBaseline": 186` is the third instance).
 - **TOOL-13b → TOOL-13a:** the denominator field (M1, figures from the rung's own post-widening scan), the M12 docblock correction (M2) and the header correction (M3) are bundle members of the schema-23 rung (governed detector sources refuse a comment byte outside the bundle); `minRows` 8-vs-40 a candidate member; TOOL-13b lands only the erasure guard.
 - **FIX-C2b's rulings:** the `:425`/`:429-455`/`:466-468` family in LANDED packets is frozen evidence (untouched); ARM 4 report-only; the chair's two brief premises corrected in the record.
+
+## Amendments of 2026-09-20 08:57 EDT — FIX-L1 complete; FIX-L3 chartered; TOOL-9's hand-off; the composition order (ODQ §934.47 addendum 85)
+
+- **FIX-L1 is complete on its lane** (`188f64b60`, `38f119cac`); composed at the composition sitting after EM-B1f lands with CURE-J, in the order FIX-L1 → FIX-P3 → FIX-P4 → FIX-P5 → FIX-C2b → TOOL-13b → FIX-B2, each lane re-proving at the composed tip; then RUN 22.
+- **FIX-L3 (NEW; low; after FIX-L2):** `tests/edgeFunctions/contracts.test.js`'s three other park-reason families cured.
+- **TOOL-9's hand-off gains two lines:** the lighting walker's `:2318` comment re-cut to the measured survivors (a comment, no title); `stopConditions.test.js` 14 vitest tests vs 16 walker titles reconciled in the census note.
+- **Lane law:** eslint runs bare — the mutex's shared tier refuses a command with no worker cap, and a refused line prints no count.
