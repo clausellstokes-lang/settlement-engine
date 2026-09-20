@@ -824,11 +824,11 @@
       "suite": "tests/property/dossierProseManifest.test.js",
       "recordEnv": null,
       "proofForm": null,
-      "sha256": "921c51cf6799ffdfdbffa3715fb496f7d15ce44fff508864653d8ebf3bb4db41",
+      "sha256": "88983938ddcf28341031e186d855fef950e6b299ec4b8fc87f170ece1b994084",
       "rows": 2,
       "seedSet": null,
       "distinctFloor": null,
-      "ownerRow": "§933",
+      "ownerRow": "§934.71",
       "note": "FROZEN AT THE GENESIS 2026-09-16 at the bytes committed at d22ceff01 (the owner's signature 'sign the golden'; record docs/shift-records/2026-09-16-genesis-freeze-generator-golden-master.json); measured, not moved: sha256 = bytes of `path`, rows = the manifest's key count where it is JSON. ENROLLED, NOT RECORDED, AND THE DIFFERENCE IS THE WHOLE ROW. The chair's enroll record, verbatim: \"ENROLL dossier-prose-manifest — chair Fable 5.1, 2026-09-08, ARCH-COMPOSED-PROSE-v2 §3.7 / MEASURE car 1: a new golden carrier for the dossier's composed text (DRIFT corpus 525 × 2 audiences); the generator golden master cannot see a dossier sentence; every later change to this carrier is a declared shift on the SHIFT REGISTER, signed per cell class by the classifier's print.\" WHY THE RECORD IS QUOTED HERE AND NOT CUT AS A FILE, and why no capture arm runs through the door today: this register is UNFROZEN, and two of its own arms refuse both acts. goldenFreeze.walker.test.js asserts that while frozenAt is null NO surface row carries a sha256, rows or ownerRow — and recordGolden writes exactly those three in the same act that writes the fixture — and it asserts that docs/shift-records/ holds no cut record at all before the freeze act's own genesis record. A capture arm routed through the door today would therefore poison this register and red two green arms. This row follows the preset-lighting-witness precedent verbatim in shape: tests/helpers/dossierManifest.js is the SINGLE WRITER of the measurement and is imported by the suite, by scripts/prose-manifest-cells.mjs and by scripts/prose-duplicate-units.mjs, so the recorded world and the asserted world cannot diverge; the fixture bytes are exactly manifestBytes(driftRun().rows) and the suite asserts that identity by sha on every run. The path is deliberately named `-golden` so arm 2's tests/fixtures/*golden*.json glob claims it: a carrier named outside that glob would be enrolled only by this lane's good faith, and a later deletion of this row would red nothing. Enrolled by lane MEASURE car 1 (seat Opus 5 — Fable-unvalidated) in the same commit that minted the surface. When the freeze act arms this register, its re-record path becomes the door like every other."
     },
     {

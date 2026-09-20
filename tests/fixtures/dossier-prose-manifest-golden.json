@@ -3,12 +3,12 @@
     "shift": "PROSE",
     "ruling": "OWNER ORDERS 2026-09-17: \"Fix the contradiction.\" and \"fix the remaining contradictions\"; the owner signed the re-record (\"I approve\"); docs/shift-records/2026-09-17-dossier-contradictions.json.",
     "car": "DOSSIER AND REALM POLISH, parts 1 and 3 (docs/FIRST_CONTACT_BACKLOG.md)",
-    "recordedOverSha": "a62dcbb907a14daa4e2555f638ad7a7e82883d22",
-    "note": "Three predicates now read the same truth as the surface beside them. DS-STR-1's no-banner rung composes on a town with NO crisis banner instead of on every town with one (all 1,050 rows: 516 golden-master-v3 towns lose the cell, the three calm gm-seed towns gain it); DS-GEN-16's UNMARKED (\"No great blow stands on the record\") no longer composes over a record carrying a major or catastrophic row (15 towns, 30 rows lose that cell); and DS-POW-2's stability header follows the label beneath it now that an infiltrated town no longer reads `Stable` beside its own ACTIVE CRISIS card (958 cells = 479 towns x 2 audiences, all in `power.stabilityHeader`, leaving the `stable matched` pool for the plain-description floor; the CELL COUNT does not move for this one, only the content). 73,284 cells become 72,240. `recordedOverSha` is DECLARATIVE (the base the change was built on); `recorder` is the executable half.",
+    "recordedOverSha": "4416e8f9d68fd06a380bd84715681b6e69829ff9",
+    "note": "Three predicates now read the same truth as the surface beside them. DS-STR-1's no-banner rung composes on a town with NO crisis banner instead of on every town with one (all 1,050 rows: 516 golden-master-v3 towns lose the cell, the three calm gm-seed towns gain it); DS-GEN-16's UNMARKED (\"No great blow stands on the record\") no longer composes over a record carrying a major or catastrophic row (15 towns, 30 rows lose that cell); and DS-POW-2's stability header follows the label beneath it now that an infiltrated town no longer reads `Stable` beside its own ACTIVE CRISIS card (958 cells = 479 towns x 2 audiences, all in `power.stabilityHeader`, leaving the `stable matched` pool for the plain-description floor; the CELL COUNT does not move for this one, only the content). 73,284 cells become 72,240. `recordedOverSha` is DECLARATIVE (the base the change was built on); `recorder` is the executable half. 2026-09-20 (CURE-J, docs/shift-records/2026-09-20-cure-j-provenance.json): re-recorded with ZERO rows moved (rowsSha unchanged) after the recorder identity became comment-insensitive — FIX-C2's citation re-address in scripts/prose-rate-corpus.mjs had moved the raw sha of a recorder file.",
     "recorder": {
-      "tests/helpers/dossierManifest.js": "5ee87f0b0bf90aae4e1f9968a71f3dedafb4596642012774291d1348ba75b2bc",
-      "tests/helpers/goldenMasterCorpus.js": "7f09210e8723c77f3a93020ea2be524e2129a0933da6e53ed5b9cc0ecf926d5d",
-      "scripts/prose-rate-corpus.mjs": "0f0efb35cc4357cd01f0c7d4f7be48efdb6069546746d3575b6430b54dc62864"
+      "tests/helpers/dossierManifest.js": "7849068873a639340f3739e4f905977225c3c87703d3a569dfe5589debd4a9cb",
+      "tests/helpers/goldenMasterCorpus.js": "a10b1170d43db59b1ea9c49ef5f5d35a57afa5462516575e8ea3f2906db8061d",
+      "scripts/prose-rate-corpus.mjs": "9d5d9f6ddfa7a6933fa2ec6a8e949066aacffad0d614caf22bb51e6efe39a399"
     },
     "rows": 1050,
     "rowsSha": "e972c0d0c177256a5db45ee502bd65f580426289093edfa9ae320d76f6832559"
