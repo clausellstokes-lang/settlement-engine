@@ -180,7 +180,7 @@ export const HOLDER_SOURCES = Object.freeze({
   exploitation: Object.freeze({ kind: 'market', cite: 'src/generators/resourceGenerator.js:417', read: true }),
 
   // ── the toll bar: the route, and what may and may not pass along it ──
-  tradeRouteAccess: Object.freeze({ kind: 'toll-bar', cite: 'src/generators/steps/resolveConfig.js:195', read: true }),
+  tradeRouteAccess: Object.freeze({ kind: 'toll-bar', cite: 'src/generators/steps/resolveConfig.js:198', read: true }),
   blockaded: Object.freeze({ kind: 'toll-bar', cite: 'src/domain/worldPulse/foodStockpile.js:417', read: true }),
   blockadeBypass: Object.freeze({ kind: 'toll-bar', cite: 'src/domain/worldPulse/foodStockpile.js:418', read: true }),
 
@@ -230,8 +230,8 @@ export const HOLDER_SOURCES = Object.freeze({
   yearsAgo: Object.freeze({ kind: 'elders', cite: 'src/generators/historyGenerator.js:289', read: true }),
 
   // ── the road: the look of the country, which anyone travelling it can see ──
-  terrainType: Object.freeze({ kind: 'road', cite: 'src/generators/steps/resolveConfig.js:203', read: true }),
-  monsterThreat: Object.freeze({ kind: 'road', cite: 'src/generators/steps/resolveConfig.js:198', read: true }),
+  terrainType: Object.freeze({ kind: 'road', cite: 'src/generators/steps/resolveConfig.js:206', read: true }),
+  monsterThreat: Object.freeze({ kind: 'road', cite: 'src/generators/steps/resolveConfig.js:201', read: true }),
 
   // ── the office itself: the record's own audit of the record ──
   structuralViolations: Object.freeze({ kind: 'office', cite: 'src/generators/steps/assembleSettlement.js:119', read: true }),
