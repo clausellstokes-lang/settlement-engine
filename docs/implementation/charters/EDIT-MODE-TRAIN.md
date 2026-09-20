@@ -824,3 +824,7 @@ CURE-A `08cb42e31` (the model walker's mask: findings identical under both forms
 - **Composed:** DOC-4 `532ba71cc`; FIX-D9's four by its lane, tip `48450e98c` (incl. FIX-B2b). Next: TOOL-19 (2) and FIX-C2c (3) by the chair, FIX-P1's OSR cure by its lane, then FIX-P9 (+ the chair's OSR absorb), TOOL-25, FIX-P10 as they land; the eighth refreeze; RUN 23; EM-R0d v4 placed.
 - **THE LANDING ORDER gains a sentence (from TOOL-19):** a seal licenses the retiree burn only in the worktree that dispatched it — NEVER PUSH WITH A PACKET READY.
 - **FIX-D10 chartered** (after RUN 23): the reachability walker learns the three edge classes before any retirement; the eight orphans; the vocabulary and headers for the 205 that keep; the 36 test-only fixtures classified against the design docs; the seven register-moving rows stay. **§934.75** the TE-STRIP tail is the owner's word (recommendation: finish the strip).
+
+## Amendment of 2026-09-20 13:57 EDT — the account-switch handoff (ODQ §934.47 addendum 108)
+
+- The sitting was cut mid-composition by an account switch; the kit's RESUME-NOTE ACCOUNT-SWITCH HANDOFF block holds the exact live state and the tail's order (six picks → P1's cure → P9 → P10 → the eighth refreeze → RUN 23 → EM-R0d v4 placed → its build). TOOL-25 landed the docs-wide control-bytes walker with an empty exemption register; the estate carries zero raw NUL bytes in tracked text.
