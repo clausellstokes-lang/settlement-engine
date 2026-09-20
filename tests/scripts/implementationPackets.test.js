@@ -1,8 +1,10 @@
+import { execFileSync } from 'node:child_process';
 import { createHash } from 'node:crypto';
 import {
   mkdirSync,
   mkdtempSync,
   readFileSync,
+  realpathSync,
   rmSync,
   writeFileSync,
 } from 'node:fs';
@@ -12,6 +14,7 @@ import { afterEach, beforeEach, describe, expect, it } from 'vitest';
 
 import {
   PACKET_AUTHORITY_NOTICE,
+  SEAL_ENVELOPE_SCHEMA_VERSION,
   buildCodingCapsule,
   canonicalSerialize,
   capsuleDigestOf,
@@ -23,10 +26,16 @@ import {
   packetPathProblem,
   parseIndexPacketStatuses,
   parsePacketHeader,
+  readDispatchSeal,
   runImplementationPacketsCli,
+  sha256,
   validatePacketManifest,
   verifyCodingCapsule,
 } from '../../scripts/implementation-packets.mjs';
+import {
+  SESSION_SCHEMA_VERSION,
+  createImplementationSession,
+} from '../../scripts/implementation-session.mjs';
 
 const COUPLING_LEAF = 'src/domain/certification/couplingRegistryEspionage.js';
 const COUPLING_HEAD = 'src/domain/certification/couplingRegistry.js';
@@ -129,15 +138,21 @@ describe('IA-1 implementation packet manifest and capsule', () => {
   let root;
   /** @type {ReturnType<typeof canonicalManifest>} */
   let manifest;
+  /** The §7.4 arm's SECOND fixture: a real Git worktree, so a real seal can be minted. */
+  /** @type {string|null} */
+  let sealRoot;
 
   beforeEach(() => {
     root = mkdtempSync(join(tmpdir(), 'settlementforge-packets-'));
+    sealRoot = null;
     manifest = canonicalManifest();
     materializeFixture(root, manifest);
   });
 
   afterEach(() => {
     rmSync(root, { recursive: true, force: true });
+    if (sealRoot) rmSync(sealRoot, { recursive: true, force: true });
+    sealRoot = null;
   });
 
   it('accepts the canonical fixture and exposes pure header/index/path helpers', () => {
@@ -1082,5 +1097,244 @@ describe('IA-1 implementation packet manifest and capsule', () => {
       .toBeGreaterThan(0);
     // Every live annotation cites a §; none is a bare truthy string that slipped past.
     expect(retiredRows.filter((row) => !/§\d+/.test(String(row.retiredBy)))).toEqual([]);
+  });
+
+  // ── §7.4 (chair ruling, ODQ §934.47 addendum 84) — THE SEALED-BURN EXEMPTION ─────────
+  // The non-terminal retiree rule assumed the retiree survives until the packet lands. It
+  // does not, in the one case the estate actually ships: a packet whose change manifest
+  // orders its own retiree burned, while `validate` sits inside that same packet's sealed
+  // `checks`. EM-B1f proved the manifest and the packet's own gate mutually unsatisfiable
+  // while READY, three ways, and stopped rather than improvise.
+  //
+  // THE DISCRIMINATOR IS THE SEAL, AND THIS ARM MINTS A REAL ONE. The seal is written by
+  // `createImplementationSession`, which refuses to write anything until this very
+  // validator is green — so the seal cannot exist unless the retiree was PRESENT at
+  // dispatch. Hand-rolling the envelope here would have proved only that the reader agrees
+  // with the test's idea of the writer; minting it through the shipped writer is what pins
+  // the two halves together, and it is why this arm carries a Git worktree of its own.
+  //
+  // ⚠ THE TABLE BELOW IS A `for` LOOP INSIDE ONE `it` BODY, for this file's standing reason
+  // (see the HK-5 arm above): a per-row vitest table would PARK the whole file in the
+  // lighting walker and cost it every credited title it has.
+  it('⭐ lets one live seal license the burn of the retiree its own packet ordered burned', () => {
+    const RETIREE_PATH = 'src/retiree.js';
+    const RETIREE_SYMBOL = 'const UNDISPOSITIONED_CEILING = 7';
+    const BURNED = 'const UNDISPOSITIONED_CEILING = 6;\n';
+
+    // THE CONSTANT AGREEMENT, PINNED RATHER THAN ASSUMED. The envelope version belongs to
+    // implementation-session.mjs, which imports FROM the validator and so cannot be
+    // imported back without a cycle. The duplicate is therefore held honest here: if the
+    // session ever bumps its schema, this reds instead of the reader silently going blind
+    // and every sealed burn quietly turning back into a refusal.
+    expect(SEAL_ENVELOPE_SCHEMA_VERSION).toBe(SESSION_SCHEMA_VERSION);
+
+    // A tree that is not a Git worktree at all has no seal, and fails CLOSED.
+    expect(readDispatchSeal(root, 'P-1')).toBeNull();
+
+    sealRoot = realpathSync(mkdtempSync(join(tmpdir(), 'settlementforge-seal-')));
+    const repo = sealRoot;
+    /** @param {string[]} args */
+    const git = (args) => execFileSync('git', args, {
+      cwd: repo, encoding: 'utf8', stdio: ['ignore', 'pipe', 'pipe'],
+    }).trim();
+
+    git(['init', '-q', '-b', 'fixture']);
+    git(['config', 'user.email', 'fixture@example.test']);
+    git(['config', 'user.name', 'Fixture']);
+    git(['config', 'commit.gpgsign', 'false']);
+    write(repo, 'src/alpha.js', 'export function alphaFeature() { return 1; }\n');
+    write(repo, RETIREE_PATH, `${RETIREE_SYMBOL};\n`);
+    git(['add', '.']);
+    git(['commit', '-q', '-m', 'fixture base']);
+    const base = git(['rev-parse', 'HEAD']);
+
+    /** @param {string} status */
+    const sealedManifest = (status) => ({
+      schemaVersion: 1,
+      indexPath: INDEX_PATH,
+      packets: [{
+        id: 'P-1',
+        status,
+        packetPath: 'docs/implementation/packets/P-1.md',
+        verifiedBase: base,
+        changeManifest: [{ action: 'MODIFY', path: RETIREE_PATH }],
+        requiredSymbols: [{ path: 'src/alpha.js', symbol: 'alphaFeature' }],
+        retiredSymbols: [{ path: RETIREE_PATH, symbol: RETIREE_SYMBOL }],
+        acceptanceCases: [{ id: 'A1', case: 'The ceiling is burned, never padded.' }],
+        checks: [['node', 'scripts/implementation-packets.mjs', 'validate']],
+      }],
+    });
+
+    const sealed = sealedManifest('READY');
+    write(repo, INDEX_PATH, [
+      '| Packet | Status |', '|---|---|', '| [P-1](./packets/P-1.md) | **READY** |', '',
+    ].join('\n'));
+    write(repo, 'docs/implementation/packets/P-1.md', packetMarkdown('P-1', 'READY', base));
+    write(repo, MANIFEST_PATH, `${JSON.stringify(sealed, null, 2)}\n`);
+    git(['add', '.']);
+    git(['commit', '-q', '-m', 'packet authority']);
+    const head = git(['rev-parse', 'HEAD']);
+
+    /** @param {ReturnType<typeof sealedManifest>} candidate */
+    const validateSealed = (candidate) => {
+      /** @type {string[]} */
+      const notes = [];
+      const result = validatePacketManifest(candidate, {
+        rootDir: repo, onNote: (note) => { notes.push(note); },
+      });
+      return { ...result, notes };
+    };
+
+    // ── STATE (a) — the retiree is PRESENT and there is no seal at all: valid. This is the
+    // clean control; without it every refusal below would prove only that the fixture broke.
+    expect(readDispatchSeal(repo, 'P-1')).toBeNull();
+    expect(validateSealed(sealed)).toEqual({ ok: true, errors: [], notes: [] });
+
+    // ── STATE (b) — the retiree is BURNED with nothing licensing it. The placement is
+    // stale, and the refusal is the one the estate already shipped, spelled EXACTLY as
+    // before: this arm is also the pin that the cure did not quietly reword state (b).
+    write(repo, RETIREE_PATH, BURNED);
+    const unlicensed = validateSealed(sealed);
+    expect(unlicensed.errors).toEqual([
+      `P-1.retiredSymbols[0].symbol is already absent from ${RETIREE_PATH} before READY: ${RETIREE_SYMBOL}`,
+    ]);
+    expect(unlicensed.notes).toEqual([]);
+
+    // ── THE SEAL IS MINTED BY THE SHIPPED WRITER, and it can only be minted because the
+    // retiree is put back first: `createImplementationSession` runs this validator and
+    // refuses to write a seal over a red manifest. That refusal IS the receipt the
+    // exemption rests on, so it is asserted rather than described.
+    write(repo, RETIREE_PATH, `${RETIREE_SYMBOL};\n`);
+    const session = createImplementationSession({ rootDir: repo, packetId: 'P-1' });
+    const sealFile = session.sealPath;
+    const sealBytes = readFileSync(sealFile);
+    expect(session.seal.head).toBe(head);
+    expect(readDispatchSeal(repo, 'P-1'))
+      .toEqual({ digest: session.sealDigest, head, gitDir: session.gitDir });
+
+    // …and with the retiree still standing, the live seal changes NOTHING: no note, no
+    // error. The exemption speaks only where the refusal was about to be raised.
+    expect(validateSealed(sealed)).toEqual({ ok: true, errors: [], notes: [] });
+
+    // ── STATE (c) — THE CURE. The sealed build burns its own retiree, exactly as its change
+    // manifest ordered, and the manifest is VALID with a note naming the real seal.
+    write(repo, RETIREE_PATH, BURNED);
+    const licensed = validateSealed(sealed);
+    expect(licensed.ok).toBe(true);
+    expect(licensed.errors).toEqual([]);
+    expect(licensed.notes).toEqual([
+      `P-1.retiredSymbols[0].symbol: retiree burned under seal ${session.sealDigest}`
+      + ` (bound HEAD ${head}): ${RETIREE_SYMBOL}`,
+    ]);
+    // The CLI is what an operator and the gate actually read, so the note must reach stdout
+    // on a run that exits 0 — a note nobody prints is a silence, not an exemption.
+    let stdout = '';
+    let stderr = '';
+    expect(runImplementationPacketsCli(['validate'], {
+      rootDir: repo,
+      stdout: { write: (chunk) => { stdout += String(chunk); } },
+      stderr: { write: (chunk) => { stderr += String(chunk); } },
+    })).toBe(0);
+    expect(stdout).toContain(`note: P-1.retiredSymbols[0].symbol: retiree burned under seal ${session.sealDigest}`);
+    expect(stdout).toContain('valid: 1 packets (1 READY)');
+    expect(stderr).toBe('');
+
+    // ── THE COUNTERFORCES. Each rewrites the seal on disk, validates, and puts the exact
+    // bytes back. A seal that is not THIS packet's, not THIS worktree's, not the payload
+    // its digest was taken over, or not bound to a commit this tree ever reached licenses
+    // NOTHING — and only the stale-HEAD row is still a readable seal, which is why it alone
+    // gets to name itself in the refusal instead of vanishing into the ordinary message.
+    const orphan = git(['commit-tree', git(['hash-object', '-t', 'tree', '/dev/null']), '-m', 'orphan']);
+    const plainRefusal = `P-1.retiredSymbols[0].symbol is already absent from ${RETIREE_PATH} before READY: ${RETIREE_SYMBOL}`;
+    const counterforces = [
+      {
+        what: 'a HEAD forged to a real commit this tree never reached',
+        mutate: (payload) => { payload.head = orphan; },
+        recompute: true,
+        readable: true,
+        message: `${plainRefusal} — dispatch seal `,
+        alsoNames: orphan,
+      },
+      {
+        what: 'a HEAD that names no object at all',
+        mutate: (payload) => { payload.head = 'f'.repeat(40); },
+        recompute: true,
+        readable: true,
+        message: `${plainRefusal} — dispatch seal `,
+        alsoNames: 'is not an ancestor',
+      },
+      {
+        what: 'a payload edited AFTER the digest was taken',
+        mutate: (payload) => { payload.verifiedBase = 'b'.repeat(40); },
+        recompute: false,
+        readable: false,
+        message: plainRefusal,
+        alsoNames: null,
+      },
+      {
+        what: 'a well-formed seal belonging to a different packet',
+        mutate: (payload) => { payload.id = 'P-9'; },
+        recompute: true,
+        readable: false,
+        message: plainRefusal,
+        alsoNames: null,
+      },
+      {
+        what: 'a seal copied in from another worktree',
+        mutate: (payload) => { payload.gitDir = join(repo, 'elsewhere', '.git'); },
+        recompute: true,
+        readable: false,
+        message: plainRefusal,
+        alsoNames: null,
+      },
+    ];
+    for (const counterforce of counterforces) {
+      const envelope = JSON.parse(readFileSync(sealFile, 'utf8'));
+      counterforce.mutate(envelope.payload);
+      if (counterforce.recompute) {
+        envelope.integrityDigest = sha256(canonicalSerialize({
+          schemaVersion: envelope.schemaVersion, payload: envelope.payload,
+        }));
+      }
+      writeFileSync(sealFile, `${JSON.stringify(envelope, null, 2)}\n`);
+      const refused = validateSealed(sealed);
+      expect(refused.ok, `${counterforce.what} must license nothing`).toBe(false);
+      expect(refused.notes, `${counterforce.what} must emit no note`).toEqual([]);
+      expect(refused.errors.length, `${counterforce.what} must red exactly once`).toBe(1);
+      expect(refused.errors[0], counterforce.what).toContain(counterforce.message);
+      if (counterforce.alsoNames) expect(refused.errors[0]).toContain(counterforce.alsoNames);
+      expect(Boolean(readDispatchSeal(repo, 'P-1')), `${counterforce.what} readability`)
+        .toBe(counterforce.readable);
+      writeFileSync(sealFile, sealBytes);
+    }
+
+    // The restore is load-bearing, not tidy: the exact original bytes must still license
+    // the burn, which proves the loop above measured the mutations and not a broken seal.
+    expect(validateSealed(sealed).ok).toBe(true);
+
+    // ⛔ AND THE EXEMPTION IS SCOPED TO THE ONE ARM IT WAS RULED FOR. A seal does not
+    // discharge a missing FILE, a missing requiredSymbol, or a LANDED retirement whose
+    // symbol survived; each of those reds with the seal sitting right there, live.
+    const missingFile = sealedManifest('READY');
+    missingFile.packets[0].retiredSymbols[0].path = 'src/never-written.js';
+    expect(validateSealed(missingFile).errors).toEqual([
+      'P-1.retiredSymbols[0].path does not exist: src/never-written.js',
+    ]);
+    const missingSymbol = sealedManifest('READY');
+    missingSymbol.packets[0].requiredSymbols[0].symbol = 'notActuallyExported';
+    expect(validateSealed(missingSymbol).errors).toEqual([
+      'P-1.requiredSymbols[0].symbol is missing from src/alpha.js: notActuallyExported',
+    ]);
+    write(repo, RETIREE_PATH, `${RETIREE_SYMBOL};\n`);
+    const landed = sealedManifest('LANDED');
+    write(repo, INDEX_PATH, [
+      '| Packet | Status |', '|---|---|', '| [P-1](./packets/P-1.md) | **LANDED** |', '',
+    ].join('\n'));
+    write(repo, 'docs/implementation/packets/P-1.md', packetMarkdown('P-1', 'LANDED', base));
+    const survived = validateSealed(landed);
+    expect(survived.notes).toEqual([]);
+    expect(survived.errors).toEqual([
+      `P-1.retiredSymbols[0].symbol survives in ${RETIREE_PATH} for LANDED retirement: ${RETIREE_SYMBOL}`,
+    ]);
   });
 });
