@@ -38,9 +38,26 @@
 
 import { chromium, test, expect } from '@playwright/test';
 import { layoutArrow } from '../src/components/nav/arrowGeometry.js';
+import { barNav } from '../src/lib/routes.js';
 
 /** Sub-pixel slack for comparisons between independently snapped boxes. */
 const EPS = 0.1;
+
+/**
+ * ⛔ THE BAR'S SEATS ARE READ FROM THE PRODUCT, NEVER RETYPED HERE.
+ *
+ * The tablet arm below carried the literal ['Create','Library','Realm','Gallery',
+ * 'Compendium','About'] — the order of `MOBILE_NAV_PRIORITY`, the hand-kept array in
+ * App.jsx that `barNav()` retired. The owner's ODQ §934.26 ADDENDUM ("i swap compendium
+ * before gallery because that is also how it is on the desktop arrow") put Compendium
+ * first, and `barNav`'s own docblock declares the visible consequence: the TABLET's bar
+ * now reads Compendium before Gallery, as the painting does. The literal disagreed with
+ * the shipped product from that moment, and nothing noticed, because `npm run check` does
+ * not run the browser suite — it reddened in CI a day later.
+ *
+ * `barNav(false)` IS what src/App.jsx maps the seats over, so the two cannot drift again.
+ */
+const TABLET_SEATS = barNav(false).map((item) => item.label);
 
 /** In-page helper source: the topmost PAINTED element at a point. */
 const PAINTED_AT = `(x, y) => {
@@ -390,7 +407,10 @@ test.describe('desktop (Chromium)', () => {
     expect(m.mode).toBe('compact');
     expect(m.nav).toBe(0);
     expect(Math.abs(m.headerH - layoutArrow({ clientWidth: m.layoutWidth, full: false }).bandPx)).toBeLessThanOrEqual(EPS);
-    expect(m.seats).toEqual(['Create', 'Library', 'Realm', 'Gallery', 'Compendium', 'About']);
+    // ⛔ ANTI-VACUITY: an emptied nav table would make the equality below trivially true
+    // for a bar that drew nothing. Six is the tablet's seat count (the phone drops one).
+    expect(TABLET_SEATS.length, 'the nav derivation is empty — has src/lib/routes.js moved?').toBe(6);
+    expect(m.seats, 'the tablet bar no longer reads the one nav order (ODQ §934.26 addendum)').toEqual(TABLET_SEATS);
     expect(m.footerPosition, 'the footer pins only with the full arrow').toBe('relative');
     expect(m.inset).toBe('0px');
     expect(m.footerBottom, 'at the end of the page the whole footer clears the bar').toBeLessThanOrEqual(m.barTop + 1);
