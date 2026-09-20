@@ -355,7 +355,7 @@ describe('THE HONESTY RULE — a column is `closed` only where every source the 
     // exactly that, and only the observed-shape ratchet could see it, because the arm above
     // and its fixture agreed with the code about the wrong path. THE ONLY WRITER of a coin
     // ledger anywhere in the estate is `advanceTreasury`, which writes it INSIDE
-    // `economicState` (src/domain/worldPulse/treasury.js:1253), and the module's own reader
+    // `economicState` (src/domain/worldPulse/treasury.js:1257), and the module's own reader
     // takes it from there (`treasuryRecordOf`, :625) — so the produced path is the only path
     // a read may use. This arm drives BOTH shapes through the real function.
     const base = { id: 'coin', institutions: [], npcs: [], availableServices: {} };

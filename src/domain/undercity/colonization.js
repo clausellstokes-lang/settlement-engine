@@ -53,7 +53,7 @@
  *  - FIRST-PAINT CLOSURE (§441.5(d)): `src/domain/undercity/**` never imports `src/domain/townMap/**`.
  *  - ONE TRUTH WITH THE TRAIN: the seeds come from UC-0's `deriveStrataExistence`, the anchor key
  *    from UC-0's `institutionAnchorKey`, the joint kinds from UC-0's `jointVocabulary.js`, the wall
- *    fact from the accessor MF-UC0's packet NAMED (`defenseProfileHasWalls`, causalState.js:306).
+ *    fact from the accessor MF-UC0's packet NAMED (`defenseProfileHasWalls`, causalState.js:380).
  *    Nothing here restates any of them.
  *  - THE UNIVERSAL FRONT (§175.1): every colonized piece names its surface cover. Where the seed is
  *    a REAL institution the front IS that institution, by canonical key; where the seed is UC-1's

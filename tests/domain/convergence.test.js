@@ -510,7 +510,7 @@ describe('W-CONVERGENCE §7 — the verbs are REGISTERED (the W-COMPOSER-2 lift 
 
 // ── CS-B3 (`cs-6`) — AN ALLIED NEIGHBOUR IS VISIBLE TO THE MOTIVE SCORER ───────
 // `FRIENDLY_REL` held `ally`, and `relType` reaches it RAW off a regional-graph edge
-// (`neighborsOf`, convergence.js:822 — no canonicalization), while those edges carry
+// (`neighborsOf`, convergence.js:781 — no canonicalization), while those edges carry
 // CANONICAL labels. Executed at this base: canonicalRelationshipLabel maps `ally`,
 // `alliance` and `allies` ALL onto `allied`, and RELATIONSHIP_SELECTIONS offers `allied`
 // and never `ally`. The set therefore admitted a token nothing in the tree can produce

@@ -22,10 +22,10 @@
  *     wizard_news.81.world_pulse.applied.world_outcome.strategy_deploy.e.f.81   (deploy for e->f)
  *   Both deploys are genuinely cross-tick (deploy@81 -> conquest@83 / @104). The raw war OUTCOMES
  *   carry no top-level sourceEventId/causedBy, but their APPLIED NEWS ENTRIES do
- *   (newsEntryForOutcome, applyWorldPulse.js:290: `sourceEventId: outcome.id`), so they land as keys.
+ *   (newsEntryForOutcome, applyWorldPulse.js:900: `sourceEventId: outcome.id`), so they land as keys.
  *
  * V2 CROSS-TICK PARENT-KEY DERIVABILITY = NO. At each conquest's RECORD seam
- *   (appendPulseHistoryWithProvenance, pulseKernel.js:2497), `worldState.deployments[occupier]` is
+ *   (appendPulseHistoryWithProvenance, pulseKernel.js:2487), `worldState.deployments[occupier]` is
  *   ABSENT (measured `depAtRecord === null`): the siege resolves and the besieger's deployment is
  *   moved into resolvedDeployments at pulseKernel.js:870 — ~1600 lines and all movers before the
  *   recorder — so the deploy tick (`sinceTick=81`, the ONLY persisted carrier of the deploy tick)

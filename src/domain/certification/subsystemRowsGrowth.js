@@ -40,7 +40,7 @@ const INSTITUTION_EVENT_TYPES = Object.freeze([
 ]);
 
 // The SIX pressure-condition literals. pressureConditionCandidate composes
-// `candidateType: `${pressure.kind}_pressure`` (candidateEvents.js:243) and returns null
+// `candidateType: `${pressure.kind}_pressure`` (candidateEvents.js:252) and returns null
 // for any kind outside its archetype map, so the six kinds the map names (food, disease,
 // conflict, trade, legitimacy, crime) are the whole vocabulary.
 //

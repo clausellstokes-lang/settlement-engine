@@ -543,7 +543,7 @@ export function OverviewTab({ settlement:r, narrativeNote, onNavigateTab, public
           route line and never instead of it.
           ⛔ IT SITS ABOVE THE FOLD, AND THAT PLACEMENT IS THE POINT. It was drawn INSIDE
           the Settlement Origin section, which is `collapsible defaultOpen={false}`, and
-          `Primitives.jsx:114` renders `{open && children}` — so this position produced NO
+          `Primitives.jsx:120` renders `{open && children}` — so this position produced NO
           BYTES for any reader on any world, while the reachability arm, the public-dossier
           guard and the registry law were all green over it. The line now FRAMES the fold
           (the DS-HK-1 arrangement) and no longer waits on `r.settlementReason`, so a town

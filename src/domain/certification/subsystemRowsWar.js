@@ -65,8 +65,8 @@
 
 // The candidate-type vocabulary that is reachable ONLY through the war layer.
 // Traced to the emitting `candidateType` literal, not to a consumer that merely
-// reads the archetype: warDeployment.js:1539 (conquest) and its warConditionOutcome
-// calls at 2000/2014/2033/2054/2101 (war_drain, army_deployed, reinforcement_cost,
+// reads the archetype: warDeployment.js:829 (conquest) and the warConditionOutcome
+// calls at warHomeCosts.js:486/500/519/540/587 (war_drain, army_deployed, reinforcement_cost,
 // war_exhaustion) plus warRecordMode.js:130 (war_exhaustion_cleared);
 // deploymentReturn.js:202/334/360/396 (war_exhaustion, army_homecoming,
 // occupation_lifted, siege_lifted); occupation.js:559/687/998 (occupation_resistance,
@@ -76,7 +76,7 @@
 // DELIBERATELY ABSENT, each for a traced reason:
 //   strategy_deploy  settlementStrategy.js:498 emits `strategy_${move}` from the
 //                    settlementStrategyEnabled chooser, so the literal is shared.
-//   war_pressure     candidateEvents.js:225, tradeWar.js:594 and warDeployment.js:1492
+//   war_pressure     candidateEvents.js:234, tradeWar.js:673 and warDeployment.js:854
 //                    all emit it; a shared archetype cannot carry one row.
 //   war_conscription / war_levy  each belongs to its own sub-flag row below.
 const WAR_LAYER_EVENT_TYPES = Object.freeze([
@@ -159,7 +159,7 @@ export const WAR_SUBSYSTEM_ROWS = Object.freeze([
     title: 'War economy population drain',
     module: 'src/domain/worldPulse/warHomeCosts.js',
     aliveness: Object.freeze({
-      // warDeployment.js:1877. The only emitter of this literal in the estate.
+      // warHomeCosts.js:365. The only emitter of this literal in the estate.
       eventTypes: Object.freeze(['war_conscription']),
       moverFamilies: Object.freeze([]),
       // DELIBERATELY EMPTY. The conscripted head-count is banked at
@@ -168,7 +168,7 @@ export const WAR_SUBSYSTEM_ROWS = Object.freeze([
       // descends into them, so declaring `deployments` here would grade this row
       // ALIVE off the parent war layer's own ledger.
       stateKeys: Object.freeze([]),
-      other: 'Nested under warLayerEnabled (read at warDeployment.js:1281, inside the gate at 1082). MEASURED alive in every completed release case: war_conscription reads 8 in the 30-year 12-settlement seed1 case and 18 in the one-year 24-settlement case. The public count is a floor, not the tick rate: warDeployment.js:1877 stamps recordMode state_only once deploymentAge exceeds 0, so only the first tick of each deployment episode is a public event. The matching return credit rides deploymentReturn, so the books balance as deployed minus returned equals war dead.',
+      other: 'Nested under warLayerEnabled (read at warDeployment.js:470, inside the gate at 243). MEASURED alive in every completed release case: war_conscription reads 8 in the 30-year 12-settlement seed1 case and 18 in the one-year 24-settlement case. The public count is a floor, not the tick rate: warHomeCosts.js:365 stamps recordMode state_only once deploymentAge exceeds 0, so only the first tick of each deployment episode is a public event. The matching return credit rides deploymentReturn, so the books balance as deployed minus returned equals war dead.',
     }),
     // The drain exists only while an army is in the field. Its cadence is the
     // war's, not the calendar's, so a quiet decade is correct rather than slow.
@@ -192,7 +192,7 @@ export const WAR_SUBSYSTEM_ROWS = Object.freeze([
     title: 'War levy',
     module: 'src/domain/worldPulse/warHomeCosts.js',
     aliveness: Object.freeze({
-      // warDeployment.js:1970. The only emitter of this literal in the estate.
+      // warHomeCosts.js:458. The only emitter of this literal in the estate.
       eventTypes: Object.freeze(['war_levy']),
       moverFamilies: Object.freeze([]),
       // DELIBERATELY EMPTY, for the same reason as war conscription: the per-vassal
@@ -226,8 +226,8 @@ export const WAR_SUBSYSTEM_ROWS = Object.freeze([
     aliveness: Object.freeze({
       // DELIBERATELY EMPTY, all three channels. The sack has no vocabulary: it
       // rides the EXISTING conquest outcome as extra populationDeltas
-      // (computeSackTransfer, warDeployment.js:1518) and foodStockpileDeltas
-      // (computeSackFoodTransfer, 1526), so eventTypeCounts cannot tell a sacking
+      // (computeSackTransfer, warDeployment.js:810) and foodStockpileDeltas
+      // (computeSackFoodTransfer, 816), so eventTypeCounts cannot tell a sacking
       // conquest from a bloodless one, and no container is written.
       eventTypes: Object.freeze([]),
       moverFamilies: Object.freeze([]),
@@ -289,7 +289,7 @@ export const WAR_SUBSYSTEM_ROWS = Object.freeze([
       // writes it back only when non-null. That
       // makes it a genuinely dispositive channel, readable from a v5 census.
       stateKeys: Object.freeze(['defenderSiegeLedger']),
-      other: 'Nested under warLayerEnabled (read at warDeployment.js:1280). The ledger seeds from the target\'s fresh homeDefense on the first besieged tick, wears down through applyAttritionToRecord with isAttacker false, feeds the siege verdict as defenderStrengthOverride, and is RETIRED the moment the siege ends, with a final prune at warDeployment.js:2133 dropping every target that is no longer besieged. So a census year with no live siege legitimately reads zero: maxEntries over the span is the aliveness signal and finalEntries is not. The completed release receipts are envelope v4 and carry no subsystems census at all, which is why this row reports an INSTRUMENT GAP rather than a silence; a v5 rerun of the same cases reads it for free.',
+      other: 'Nested under warLayerEnabled (read at warDeployment.js:469). The ledger seeds from the target\'s fresh homeDefense on the first besieged tick, wears down through applyAttritionToRecord with isAttacker false, feeds the siege verdict as defenderStrengthOverride, and is RETIRED the moment the siege ends, with a final prune at warDeployment.js:1334 dropping every target that is no longer besieged. So a census year with no live siege legitimately reads zero: maxEntries over the span is the aliveness signal and finalEntries is not. The completed release receipts are envelope v4 and carry no subsystems census at all, which is why this row reports an INSTRUMENT GAP rather than a silence; a v5 rerun of the same cases reads it for free.',
     }),
     // The ledger exists only while somebody is under siege.
     expectedTempo: 'reactive',

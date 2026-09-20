@@ -184,7 +184,7 @@ afterEach(() => {
  * (tests/joins/ordering.test.js:289 and twenty pglite siblings), and against this file's
  * own measurements it is 17.4x the worst ISOLATED test and 6.1x the worst CONTENDED one —
  * i.e. it absorbs another six-fold degradation on top of the contention actually
- * reproduced. ⛔ The suite-wide `testTimeout` at vite.config.js:810 is NOT touched: raising
+ * reproduced. ⛔ The suite-wide `testTimeout` at vite.config.js:912 is NOT touched: raising
  * it would hide the next row and would make a genuinely hung test slower to report.
  *
  * Each row carries its OWN measured figure below, so the headroom is auditable per case

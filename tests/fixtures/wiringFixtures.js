@@ -37,7 +37,7 @@ export const COMPOSER_ONE_BRANCH = COMPOSER_TWO_BRANCHES
 
 /**
  * THE SHIPPED LADDER SHAPE — four `if` branches before the last literal, modelled on
- * `economyStateProse.js:557`'s `shadowEconomyPoolKey`.
+ * `economyStateProse.js:558`'s `shadowEconomyPoolKey`.
  *
  * ⛔ THIS FIXTURE EXISTS BECAUSE `COMPOSER_TWO_BRANCHES` COULD NOT FAIL ON THE ESTATE'S OWN
  * SHAPE (INSTR-912 car 10, cure 1). The guard reader anchored its `$`-terminated match at the
@@ -99,7 +99,7 @@ export function fixtureProse(settlement, readings, options) {
 
 /**
  * A module-level key table written as a PAIR ARRAY and consulted through `.find`, the shape
- * `powerStateProse.js:304`'s `STABILITY_LADDER` uses. Rung 3 read only the object-literal
+ * `powerStateProse.js:305`'s `STABILITY_LADDER` uses. Rung 3 read only the object-literal
  * shape, so four DS-POW-2 pools carried the reason *no module-level key table names it* while
  * a module-level key table named every one (car 10, cure 6).
  */
@@ -340,7 +340,7 @@ export function fixtureProse(settlement, forces, gate, tier, options) {
 `;
 
 /**
- * THE SHIPPED LADDER, WHOLE — `defenseStateProse.js:747`'s `wallRationalePoolKey` as a
+ * THE SHIPPED LADDER, WHOLE — `defenseStateProse.js:962`'s `wallRationalePoolKey` as a
  * fixture, because the BRANCH GRAIN (SITTING §O.1) has three distinct shapes to get right
  * and only this one carries all three at once:
  *

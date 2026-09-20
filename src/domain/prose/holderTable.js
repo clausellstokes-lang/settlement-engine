@@ -776,7 +776,7 @@ export function sourceOfForTown(row, settlement, world = {}) {
 
 /**
  * THE CENSUS OF THE TABLE ITSELF — what each kind holds, for a receipt to print beside
- * SITTING §Q.1's own enumeration. The shape follows `columnCensus` (`institutionTable.js:582`)
+ * SITTING §Q.1's own enumeration. The shape follows `columnCensus` (`institutionTable.js:596`)
  * so the two registers read the same way.
  * @returns {Array<{kind: string, fields: number, services: number, dutyNamed: number,
  *   rosterBacked: boolean, tokens: string}>}

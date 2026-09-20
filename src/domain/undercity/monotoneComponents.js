@@ -423,7 +423,7 @@ export function quarterTradeVolume(worldState, sid) {
 /**
  * THE SMUGGLER LICENCE (§311.8.2(b), "the smuggler subset by criminal share at gates/waterfronts").
  * Two facts, both landed: a GATE — the wall predicate UC-0's §441.5(d) walk NAMED,
- * `defenseProfileHasWalls` (`causalState.js:306`), because a gate is a way through a wall — or a
+ * `defenseProfileHasWalls` (`causalState.js:380`), because a gate is a way through a wall — or a
  * WATERFRONT, the published route vocabulary UC-1 pinned; and the criminal share at or above the
  * tuned floor, read through corruption.js's ONE reading (§441.3), consumed and never re-weighted.
  * @param {MonotoneInput} s @param {number} criminalShare @returns {{ licensed: boolean, waterfront: boolean }}

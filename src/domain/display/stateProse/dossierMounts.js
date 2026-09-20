@@ -88,8 +88,8 @@
  * no writer produces is a DEFECT (remove it). They get different treatment.
  *
  * ── ⛔⛔ THE FIRST-PAINT LAW: A LIT SENTENCE A READER CANNOT SEE IS DARK ──────────────
- * A mount is not a position until a reader reaches it. `Primitives.jsx:114` (and
- * `Collapsible` at :83) render a closed section as `{open && <div>{children}</div>}` — a
+ * A mount is not a position until a reader reaches it. `Primitives.jsx:120` (and
+ * `Collapsible` at :89) render a closed section as `{open && <div>{children}</div>}` — a
  * collapsed host emits NO BYTES AT ALL, not hidden ones. So a SENTENCE row drawn inside a
  * `collapsible` host that is not open on first paint is lit in this table and dark on the
  * page, and every instrument this subsystem owns is green over it: the reachability arm
@@ -153,7 +153,7 @@ export const MOUNT_RUNGS = Object.freeze({
  *   the only one. Its one legal value is `'closed-section'`.
  *
  *   A SENTENCE row whose draw sits inside a `collapsible` host that is not open on first
- *   paint reds the visibility arm, because `Primitives.jsx:114` renders `{open &&
+ *   paint reds the visibility arm, because `Primitives.jsx:120` renders `{open &&
  *   children}`: a collapsed host produces NO BYTES and the position is lit in the registry
  *   and dark to every reader. A row may declare instead of moving, and then it OWES a
  *   `visibilityReason`. The arm is TWO-SIDED: a row declaring this whose host is actually

@@ -437,7 +437,7 @@ export function institutionTableOf(settlement, world = {}) {
   // ⛔ THE PATH IS `economicState.treasury`, NEVER `settlement.treasury` (INSTR-912 car 11,
   // measured). Car 9 read the TOP LEVEL, and no writer in the estate produces it: the only
   // writer of a coin ledger anywhere is `advanceTreasury`, which writes it INSIDE
-  // `economicState` (worldPulse/treasury.js:1253), and the module's own reader takes it from
+  // `economicState` (worldPulse/treasury.js:1257), and the module's own reader takes it from
   // there (`treasuryRecordOf`, :625). A guarded top-level read cannot throw — it degrades to
   // `NaN` forever — so the ABSENT branch was structurally the only reachable one and the
   // observed-shape ratchet convicted it (`treasury on settlement`, a key no writer produces).

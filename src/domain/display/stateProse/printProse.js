@@ -235,7 +235,7 @@ function printed(mount, rung) {
 
 /**
  * The world stressor this settlement sits inside, normalized — or null in a world that has
- * not been played. MIRRORS `OverviewTab.jsx:120-134` (`worldStressorFor`) exactly: a world
+ * not been played. MIRRORS `OverviewTab.jsx:155` (`worldStressorFor`) exactly: a world
  * stressor names its settlements in `affectedSettlementIds`, so this is a membership
  * SELECTION and the FIRST match is the one DS-STR-2's two lenses describe.
  * @param {{stressors?: unknown}|null|undefined} worldState
@@ -373,7 +373,7 @@ export function buildPrintProse(settlement, ctx = {}) {
   });
 
   // ── THE ECONOMY DESK, through its ONE caller ────────────────────────────────────────
-  // ⚠ `flowDrift` IS NULL AND THAT IS A READING, NOT A GAP. `EconomicsTab.jsx:251-257`
+  // ⚠ `flowDrift` IS NULL AND THAT IS A READING, NOT A GAP. `EconomicsTab.jsx:272`
   // projects the live trade-flow drift out of the campaigns store; no export boundary carries
   // it, and DS-ECO-3's flow lens is written for a town whose flow has moved. A town with no
   // live flow draws nothing there on screen either.

@@ -519,7 +519,7 @@ export function EconomicsTab({economicState, settlement, narrativeNote, saveId =
           the corpus has nothing to say (R-DST-K), and silent when the registry mounts this
           position at a glance.
           ⛔ IT SITS ABOVE THE FOLD, AND THAT PLACEMENT IS THE POINT. The section below opens
-          only `defaultOpen={!!fb.deficit}` and `Primitives.jsx:114` renders `{open &&
+          only `defaultOpen={!!fb.deficit}` and `Primitives.jsx:120` renders `{open &&
           children}`, so drawn inside, this sentence reached NO READER ON ANY TOWN THAT FEEDS
           ITSELF — the majority case, and the one the block's surplus pools were authored
           for. `tests/ui/economicsTabFlow.test.js` had already answered that by choosing a
@@ -731,7 +731,7 @@ export function EconomicsTab({economicState, settlement, narrativeNote, saveId =
             so printing both is the page saying one thing twice. Undrawn (public dossier, or the
             corpus silent) ⇒ scaleNote stands and the surface is byte-identical.
             ⛔ IT SITS ABOVE THE FOLD, AND THE FIGURE IS WHY. The section below opens only
-            `defaultOpen={bmc>=15}` and `Primitives.jsx:114` renders `{open && children}`;
+            `defaultOpen={bmc>=15}` and `Primitives.jsx:120` renders `{open && children}`;
             measured over 60 generated towns (5 tiers x 4 cultures x 3 seeds) that cut is
             true on 1 of 60, so drawn inside, DS-ECO-6's
             ONE speaking position reached a first-paint reader on under two percent of the

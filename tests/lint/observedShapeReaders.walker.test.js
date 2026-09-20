@@ -60,7 +60,7 @@
  *                                          :138 `settlement.trade`    @settlement
  *                                          :140 `row.exports`         @economicState
  *                                          :142 `container.exports`   @economicState
- *   TCD-3  lineageMemberBirth.js:178            `satellite.foundingTier` @steadings
+ *   TCD-3  lineageMemberBirth.js:194            `satellite.foundingTier` @steadings
  *
  * ⚠ THE ACCEPTANCE RUN IS NOT RE-EXECUTED HERE. It needs a second checkout of a
  * historical sha, and this program's concurrency law refuses a second worktree.

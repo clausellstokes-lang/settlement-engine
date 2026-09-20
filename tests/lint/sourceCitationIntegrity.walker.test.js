@@ -77,6 +77,20 @@
  * coverage trade directly, and this arm keeps the precision and prints what it
  * sees, exactly as proseWiringCensus gates three identities and reports the rest.
  *
+ * ⛔ AND IT HAS A MEASURED FALSE POSITIVE, WHICH IS WHY IT MUST NEVER GATE. Of the
+ * 31 findings in its first run, ONE was wrong, and it was wrong in the way this
+ * arm is structurally able to be wrong: a NEIGHBOURING backtick wins the
+ * attribution. `scripts/wiring-census.mjs` cites `defenseGenerator.js:189-191`
+ * for a `milUpkeepMult` derivation, with `economicGates.military` backticked
+ * beside it; the arm attributed `economicGates` (declared far below) to the span
+ * and convicted a citation that was TRUE. It was caught only by reading the
+ * re-address diff line by line — the automated cure had already broken the
+ * correct address. Two survivors of the same audit went the other way
+ * (`EconomicsTab.jsx:251-257`, `OverviewTab.jsx:120-134` were genuinely stale),
+ * so the class is not "ranges are safe": it is that a SPAN addresses what its
+ * sentence says it addresses, and only a reader knows which name that is.
+ * TREAT EVERY LINE THIS ARM PRINTS AS A LEAD, NEVER AS A VERDICT.
+ *
  * ── WHAT THIS WALKER CANNOT SEE (measured, not guessed) ──────────────────────
  *   · a citation whose target does not resolve — 357 point at files absent from
  *     this tree, 170 at an ambiguous basename, 12 at vendored `node_modules`

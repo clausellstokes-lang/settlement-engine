@@ -599,7 +599,7 @@ export function DefenseTab({ settlement:r, narrativeNote, publicDossier = false,
           holds its water, in its own voice. Two lenses of one block at one position; the
           capability rows below are untouched.
           ⛔ IT SITS ABOVE THE FOLD, AND THAT PLACEMENT IS THE POINT. The section beneath is
-          `collapsible defaultOpen={false}` and `Primitives.jsx:114` renders `{open &&
+          `collapsible defaultOpen={false}` and `Primitives.jsx:120` renders `{open &&
           children}`, so a child of it produces NO BYTES for a reader until the header is
           clicked. Drawn inside, this position was a sentence the registry called lit and no
           reader ever saw — the walker's reachability arm, the public-dossier guard and the

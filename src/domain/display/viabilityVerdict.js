@@ -63,7 +63,7 @@
  * banked behind a ratchet row.
  *
  * ⚠ THE PRINT SLICE'S OWN `verdict` IS NOT A COUNTER-EXAMPLE, and it is worth naming because
- * it looks like one. `pdf/lib/viewModel.js:586-587` synthesises `verdict` and `verdictTone`
+ * it looks like one. `pdf/lib/viewModel.js:587-588` synthesises `verdict` and `verdictTone`
  * onto its viability slice — but both are DERIVED FROM `viable` right there
  * (`v?.viable === true ? 'viable' : …`), so reading them back here was reading this
  * function's own input through a second spelling. The two branches they fed were exactly
