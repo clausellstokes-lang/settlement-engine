@@ -799,6 +799,54 @@ export default defineConfig({
           if (id.includes('/src/generators/stressPriority.js'))
             return 'stress-priority';
 
+          // ══ FIX-B2, THE MED PAIR (TOOL-12 moves 2 and 3) ═════════════════
+          // Same defect, same cure, two closures instead of four leaves. Each
+          // closure below was proved EDGE-FREE before it was written: every
+          // outward static edge lands in a NAMED chunk (data, data-lazy, kernel,
+          // engine-core, content-identity, custom-registry) and none reaches back
+          // into `engine`, which is what makes these cuts rather than re-parents.
+          // Neither closure is in the eager first-paint graph and no static
+          // importer of either is, so neither chunk can enter the first-paint
+          // closure. Both rules MUST stay before the /src/generators/ rule below.
+
+          // ── The active-chain closure (LAZY, three modules) ────────────────
+          // `realmManifest` (104,632 B) statically imported the whole 677,935 B
+          // engine to reach computeActiveChains through two worldPulse readers
+          // (institutionLifecycle, resourceDynamicsKernel). The three modules
+          // travel together because computeActiveChains statically reaches the
+          // other two and nothing else in the engine: chainMagicSubstitution is a
+          // zero-import leaf, and prebuiltResourceChains is the FP-G10 registry
+          // enumerator whose own edges are data-lazy + custom-registry.
+          // ⚠ prebuiltResourceChains ALONE was TOOL-12 move 7 and the chair
+          // REFUSED it: measured, it has ZERO consumers outside the engine, so
+          // pinning it by itself shrinks the ledger and cuts no anchor. It rides
+          // HERE only because it is inside this closure — which is the difference
+          // between a cure and a ceiling dodge, and the reason it is named.
+          if (
+            id.includes('/src/generators/computeActiveChains.js')
+            || id.includes('/src/generators/chainMagicSubstitution.js')
+            || id.includes('/src/lib/prebuiltResourceChains.js')
+          )
+            return 'resource-chains';
+
+          // ── The generator helper pair (LAZY, a CYCLE) ─────────────────────
+          // helpers.js and priorityHelpers.js import EACH OTHER, so they are one
+          // indivisible unit: pinning either alone would split a cycle across two
+          // chunks. Their outside consumers are components/new/dailyLifeLogic.js
+          // (-> DailyLifeTab, 17,645 B) and TradeDynamicsPanel.jsx (-> the
+          // GenerateWizard chunk, 103,998 B), both of which had to fetch the whole
+          // engine to read a helper. MEASURED before the move: 25 in-engine
+          // importers of helpers.js and 2 of priorityHelpers.js — 27 edges across
+          // the pair — all of which simply re-point at this chunk (engine -> lazy,
+          // the safe direction). Outward: data/constants.js (eager data),
+          // kernel/rngContext.js (eager kernel), content/customContentSemanticAuthority.js
+          // (eager engine-core) — all lazy -> eager, none back into the engine.
+          if (
+            id.includes('/src/generators/helpers.js')
+            || id.includes('/src/generators/priorityHelpers.js')
+          )
+            return 'generator-helpers';
+
           // ── Strict content identity (small, legitimately EAGER) ───
           // Campaign rows are synchronously hash-checked before entering state.
           // Isolate that authority from the conservative generator-shared
@@ -999,10 +1047,32 @@ export default defineConfig({
           // stressTypes.js USED to be routed here too (same reason), but its
           // executable, rng-capturing summary closures were split out into
           // stressTypesMeta.js — the file is now pure data with zero imports.
-          // It MUST NOT stay in 'engine': helpers.js (engine-core) re-exports
-          // STRESS_INSTITUTION_EFFECTS from it, so an 'engine' assignment would
-          // make engine-core → engine and drag the 656 kB engine chunk back
-          // into first paint. Let it fall through to the 'data' rule below.
+          // Let it fall through to the 'data' rule below.
+          // ⛔ AND THE STATED MECHANISM FOR THAT WAS ALSO REFUTED (corrected FIX-B2,
+          // 2026-09-20; measured by TOOL-12 and re-measured by this lane — the SECOND
+          // false claim in this one comment block, which is why the chair docketed both).
+          // It used to read: "It MUST NOT stay in 'engine': helpers.js (engine-core)
+          // re-exports STRESS_INSTITUTION_EFFECTS from it, so an 'engine' assignment
+          // would make engine-core -> engine and drag the 656 kB engine chunk back into
+          // first paint." Every load-bearing clause of that is false on the tree:
+          //   • helpers.js is NOT in engine-core. Executed through the shipped
+          //     manualChunks, src/generators/helpers.js ruled into `engine` — and as of
+          //     the rule above it rides `generator-helpers`. There is no
+          //     src/domain/helpers.js at all; the three helpers.js files in the tree are
+          //     generators/, components/settlements/ and
+          //     components/settlement/eventComposer/.
+          //   • helpers.js has NO stressTypes edge, re-export or otherwise. Its three
+          //     static deps are data/constants.js, kernel/rngContext.js and
+          //     priorityHelpers.js.
+          //   • The seven real importers of data/stressTypes.js are three src/domain/**
+          //     and four src/generators/** modules — none of them engine-core.
+          // So the engine-core -> engine edge this sentence feared cannot arise by the
+          // route it names. ⚠ THE RULE IS NOT RE-LITIGATED HERE: stressTypes.js keeps
+          // falling through to 'data', and whether that is still the right home is a
+          // question for whoever next prices it against the eager/lazy data split. A
+          // wrong reason for a rule is not a wrong rule — but it is a trap for the next
+          // reader, which is the whole reason this correction was docketed rather than
+          // left standing.
           if (id.includes('/src/data/narrativeData.js'))
             return 'engine';
           // Only the tables an eager chunk statically reaches ride the
