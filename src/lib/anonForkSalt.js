@@ -100,6 +100,14 @@ export const ANON_SALT_HEX = 12;
 export const FORK_SUFFIX_MAX = Math.max(ACCOUNT_DIGEST_HEX, ANON_SALT_HEX);
 
 /**
+ * A DECLARED SYNTHETIC account id, handed to `forkIdentity` only to measure the
+ * ceiling below. It names no account, it is deliberately not UUID-shaped so it cannot
+ * be mistaken for one in a grep, and the only property of it that matters is being a
+ * NON-EMPTY string — that is what keeps the measurement on the pure signed-in branch.
+ */
+const WIDEST_SUFFIX_PROBE_ID = 'synthetic-ceiling-probe-not-an-account';
+
+/**
  * ⭐ THE LONGEST SEED THIS PRODUCT CAN HAND A READER BACK, and therefore the
  * `SeedField`'s `maxLength` (owner-signed, ODQ §934.72).
  *
@@ -134,10 +142,33 @@ export const FORK_SUFFIX_MAX = Math.max(ACCOUNT_DIGEST_HEX, ANON_SALT_HEX);
  * question without reading a shape at all, and answers it BETTER: the ceiling can
  * no longer drift from the seed's actual format, because the format is the thing
  * being measured rather than a second spelling of it.
+ *
+ * ⛔⛔ AND THE PROBE IS A RESOLVED IDENTITY, NOT A BARE STRING (CURE-L, 2026-09-20).
+ * The first cut measured with `'x'.repeat(FORK_SUFFIX_MAX)`, and the fork-door walker
+ * (tests/data/sampleSettlements.test.js) convicted it: it reads EVERY `forkSeedFor(`
+ * under src/, and a bare second argument is exactly the defect REVIEW-P F1 cured. The
+ * walker was RIGHT to read this line — a measurement that bypasses `forkIdentity` is
+ * still a call the rule is about, and exempting this file by name would have left the
+ * next one unguarded. So the probe goes through the real resolver.
+ *
+ * ⚠ IT IS PURE AT MODULE EVALUATION, WHICH IS THE PRECONDITION. A NON-EMPTY id takes
+ * `forkIdentity`'s signed-in branch, which is `accountDigest` — two `fnv1a32` rounds
+ * and nothing else. It never reaches `anonForkSalt()`, so no `window`, no
+ * localStorage, no clock and no rng runs while this module is being evaluated. Hand it
+ * an empty id and that would stop being true, which is why the probe id is a declared
+ * constant rather than anything computed.
+ *
+ * ⚠ AND IT IS STILL THE WIDEST, BY THE MODULE'S OWN ARITHMETIC: `accountDigest` emits
+ * exactly ACCOUNT_DIGEST_HEX characters for every input, and FORK_SUFFIX_MAX is the max
+ * of that and ANON_SALT_HEX. The two are equal today. tests/lib/anonForkSalt.test.js
+ * pins both halves — `FORK_SEED_MAX === longestCard + 1 + FORK_SUFFIX_MAX` and the same
+ * measurement recomputed through `forkIdentity` — so if ANON_SALT_HEX ever grew past
+ * ACCOUNT_DIGEST_HEX, that arm reds rather than this ceiling silently going short.
  */
-const WIDEST_SUFFIX_PROBE = 'x'.repeat(FORK_SUFFIX_MAX);
 export const FORK_SEED_MAX = Math.max(
-  ...SAMPLE_SETTLEMENTS.map((sample) => (forkSeedFor(sample, WIDEST_SUFFIX_PROBE) ?? '').length),
+  ...SAMPLE_SETTLEMENTS.map(
+    (sample) => (forkSeedFor(sample, forkIdentity(WIDEST_SUFFIX_PROBE_ID)) ?? '').length,
+  ),
 );
 
 // Fallback when localStorage is unavailable (private mode, sandboxed iframe,

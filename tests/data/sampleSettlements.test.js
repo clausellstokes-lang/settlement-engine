@@ -240,6 +240,26 @@ describe('forkSeedFor()', () => {
  * A source scan rather than a render: it costs nothing, it cannot be satisfied
  * by a mock, and it reds for a THIRD door added tomorrow that nobody thought to
  * write a component test for.
+ *
+ * ⭐ AMENDED 2026-09-20 (CURE-L, ODQ §934.47 addendum 114): THE IMPORT ARM EXEMPTS A
+ * DEFINER, BECAUSE A DEFINITION IS STRONGER THAN AN IMPORT.
+ * `src/lib/anonForkSalt.js` entered this walker's corpus when FIX-P1d made it measure
+ * `FORK_SEED_MAX` by RUNNING the real derivation — `forkSeedFor(sample,
+ * forkIdentity(<declared synthetic id>))`. The CALL arm was right to read it and the
+ * call now satisfies it. The IMPORT arm, though, asked that module for something no
+ * module can do: import `forkIdentity` from itself. So the arm learned one predicate,
+ * `definesForkIdentity`, and the exemption is the DEFINITION — never the filename. A
+ * file exempts itself only by owning the rule; everybody else still imports, and its
+ * counterforce arm proves that a file merely QUOTING the definition in a comment is
+ * still convicted.
+ *
+ * ⚠ WHY NOT EXEMPT THE MEASUREMENT INSTEAD. A `// walker-exempt:` marker on the call,
+ * or a filename skip beside `src/data/sampleSettlements.js`, would both have worked
+ * today and both would have been weaker forever: the first is a hatch any future door
+ * can copy, the second stops reading the very file that owns the resolver. Making the
+ * measurement obey the rule is the only shape that leaves the claim unweakened — after
+ * this amendment a planted bare-id call, in a real door OR in this module, still reds
+ * both arms.
  */
 describe('the fork doors — the forker is resolved, never assumed', () => {
   const SRC = resolve(process.cwd(), 'src');
@@ -280,6 +300,26 @@ describe('the fork doors — the forker is resolved, never assumed', () => {
       out += '\n';
     }
     return out;
+  }
+
+  /**
+   * ⭐ DOES THIS FILE *DEFINE* `forkIdentity`? A DEFINITION IS STRONGER THAN AN IMPORT
+   * (CURE-L, 2026-09-20), and this is the smallest honest amendment to the import arm.
+   *
+   * `src/lib/anonForkSalt.js` is where `forkIdentity` lives, and it also measures
+   * `FORK_SEED_MAX` by RUNNING the real derivation — a genuine `forkSeedFor(` call that
+   * this walker reads, and should read. It cannot import the resolver from itself, so
+   * the import arm asked it for something unsatisfiable. The exemption is therefore the
+   * DEFINITION and never the filename: a file that owns the rule obeys it by owning it,
+   * and any other file must still import.
+   *
+   * Judged over CODE, not prose — this module's docstrings name `forkIdentity`
+   * repeatedly while explaining why the doors must call it, and a walker a file trips by
+   * describing itself accurately teaches the next author to delete the explanation (the
+   * same reasoning the purity arm below already records).
+   */
+  function definesForkIdentity(text) {
+    return /export\s+function\s+forkIdentity\b/.test(stripComments(text));
   }
 
   it('guard-the-guard: the scan actually finds the fork doors', () => {
@@ -337,12 +377,39 @@ describe('the fork doors — the forker is resolved, never assumed', () => {
     ).toEqual([]);
   });
 
-  it('every door that calls forkSeedFor imports forkIdentity', () => {
+  it('every door that calls forkSeedFor imports forkIdentity, unless it DEFINES it', () => {
     const offenders = sites
       .filter(([file]) => file !== 'src/data/sampleSettlements.js')
+      .filter(([, text]) => !definesForkIdentity(text))
       .filter(([, text]) => !/import\s*\{[^}]*\bforkIdentity\b[^}]*\}\s*from\s*['"][^'"]*anonForkSalt\.js['"]/.test(text))
       .map(([file]) => file);
-    expect(offenders).toEqual([]);
+    expect(
+      offenders,
+      'a file calls forkSeedFor without the resolver in scope: import forkIdentity from '
+      + 'lib/anonForkSalt.js, or define it there. The only exemption is DEFINING it, '
+      + 'never being named anonForkSalt.js.',
+    ).toEqual([]);
+  });
+
+  it('guard-the-guard: only a DEFINER is exempt, and a mere mentioner still convicts', () => {
+    // ⛔ THE COUNTERFORCE FOR THE EXEMPTION ABOVE. The arm exempts the module that
+    // DEFINES forkIdentity; that exemption has to be the definition and nothing
+    // weaker, or a third door added tomorrow could buy its way out by writing the
+    // words in a comment. Judged over synthetic sources so this guard cannot pass by
+    // reading the tree, and collected then asserted ONCE rather than looped.
+    const DEFINER = 'export function forkIdentity(userId) { return userId; }\n';
+    const QUOTER = '// see `export function forkIdentity` in lib/anonForkSalt.js\nforkSeedFor(s, x);\n';
+    const IMPORTER = "import { forkIdentity } from '../lib/anonForkSalt.js';\nforkSeedFor(s, forkIdentity(u));\n";
+    const BARE = 'forkSeedFor(sample, authUserId);\n';
+    const cases = [
+      ['a real definition is exempt', DEFINER, true],
+      ['a comment quoting the definition is not', QUOTER, false],
+      ['an importer is not a definer', IMPORTER, false],
+      ['a bare-id door is not a definer', BARE, false],
+      ['an empty file is not a definer', '', false],
+    ];
+    expect(cases.map(([why, text]) => `${why}: ${definesForkIdentity(text)}`))
+      .toEqual(cases.map(([why, , want]) => `${why}: ${want}`));
   });
 
   it('src/data stays pure: the definition never reaches for the salt itself', () => {
