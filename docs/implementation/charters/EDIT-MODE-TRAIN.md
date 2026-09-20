@@ -773,3 +773,8 @@ CURE-A `08cb42e31` (the model walker's mask: findings identical under both forms
 - **TOOL-20 gains:** `negativeAssertionAnchor.walker`'s matcher counter routed to `commentsOnly` (a comment naming a matcher must not convict).
 - **FIX-P4b gains:** rewrite `embeddedMapConsoleGate.walker.test.js`'s `test.each(MUTED_CHANNELS)` as a literal table or body loop so the file is credited (`eachOnly` 111 → 110; `literalTableStillParked` 50/50 watched).
 - **The second composition's order (after EM-R0a lands):** CURE-K → the shift record → CURE-J commit 2 → FIX-B2 (3) → FIX-T2 → FIX-D9 (3) → TOOL-19 → TOOL-15 (2) → TOOL-22 → TOOL-24 (3); then the eighth refreeze and RUN 23.
+
+## Amendments of 2026-09-20 12:38 EDT — CURE-J closed; the second composition's order re-cut (ODQ §934.47 addendum 99)
+
+- **The second composition's order (after EM-R0a lands):** CURE-K (`3e9a6c261`) → CURE-J's three (`4416e8f9d` `efc4ecf49` `b077f6e79`, in place of the consist's record commit) → FIX-B2 (`5cc0e6c14` `2fa685264` `fd4be7c07`) → FIX-T2 → FIX-D9 (3) → FIX-P1c → TOOL-19 → TOOL-15 (2) → TOOL-22 → TOOL-24 (3) as each lands; then the eighth refreeze and RUN 23 (expected: no red).
+- **Door law (CURE-J):** `recordGolden` refuses a tree dirty beyond the register, the fixture and the record — a `MANIFEST_PROVENANCE` amendment is committed BEFORE the door runs; the door's own throw (EXIT 1, 'golden RE-RECORDED') is the success line.
