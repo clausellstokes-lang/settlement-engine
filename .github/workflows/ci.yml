@@ -3,9 +3,31 @@ name: CI
 on:
   # Run on every branch push (not just master/main) so feature branches — where
   # the work actually happens — get the same gate before they ever reach a PR
-  # (finding F35: CI was advisory to feature branches).
+  # (finding F35: CI was advisory to feature branches). F35's purpose is UNCHANGED
+  # by the one exclusion below: every CODE branch still gets the whole gate on every
+  # push, before it reaches a PR.
+  #
+  # THE ONE EXCLUSION is `review-fixes-2026-07-08`, the LEDGER branch — the charter,
+  # the decision queue and the docs. Its `src/` is a FOSSIL by design (no code commit
+  # on it since 08-11), so a CI run there can only fail, and it only spends runner
+  # minutes: measured 2026-09-20, that branch's push (run 35534817791) reddened
+  # build-and-dist, the Deno edge tests and the browser suite, and had its two long
+  # jobs killed at their caps. Syntax, from GitHub's filter-pattern rules: a matching
+  # NEGATIVE pattern placed AFTER a positive one excludes the ref, so the order here
+  # is load-bearing, and at least one positive pattern must remain or the event would
+  # stop triggering altogether.
+  #
+  # CAUTION, and it bounds what this line can do: a push run uses the workflow file
+  # AT THE PUSHED REF. So this exclusion suppresses ledger runs only once the LEDGER
+  # branch's own copy of this file carries it. That same run is the proof — its two
+  # long jobs were cut at 30 and 10 minutes, which are the FOSSIL's caps on that
+  # branch, not this file's.
+  #
+  # CAUTION, second: this is the TRIGGER only. The "Fetch the ledger branch" step in
+  # check-tests and coverage-floors still fetches that ref from origin, because two
+  # suites read the ledger by ref, and it is deliberately untouched here.
   push:
-    branches: ['**']
+    branches: ['**', '!review-fixes-2026-07-08']
   pull_request:
     branches: [master, main]
   # Manual trigger + weekly cron drive the opt-in mutation-sweep job below (it is
