@@ -42,6 +42,7 @@ import { useStore } from '../../store/index.js';
 import RefusalNotice from '../primitives/RefusalNotice.jsx';
 import { GENERATION_INTENT_SAMPLE_FORK } from '../../lib/generationIntent.js';
 import { raisedHere, REFUSAL_SURFACES } from '../../lib/refusalReasons.js';
+import { forkIdentity } from '../../lib/anonForkSalt.js';
 import { SAMPLE_SETTLEMENTS, forkConfigFor, forkSeedFor } from '../../data/sampleSettlements.js';
 import { tierStockImage } from '../../domain/display/tierStockImage.js';
 
@@ -79,8 +80,13 @@ export default function FoundingWorlds({ onNavigate }) {
 
   // 'Fork this sample' — identical wiring to the Library's SettlementsPanel.forkSample:
   // load the sample's config minus its seed (forkConfigFor), run the engine with a
-  // user-suffixed seed (so two users forking the same sample get mechanically-different
-  // towns), and reveal the dossier.
+  // seed suffixed by WHO IS FORKING (so two people forking the same sample get
+  // mechanically-different towns), and reveal the dossier.
+  // ⛔ THE SUFFIX GOES THROUGH forkIdentity, AND A BARE auth id IS THE BUG IT CURES.
+  // A signed-out reader has no id, and this door used to let forkSeedFor fall back to
+  // the constant 'anon' — one constant in every browser on earth, so two anonymous
+  // visitors forking Cnocby were handed the same seed and byte-identically the same
+  // town, while the lead-in below promises "no two the same" (REVIEW-P F1).
   // The auto-save-to-Library and purchase-modal branches are Library-dashboard concerns
   // and do not apply on the create-landing strip; a tier-gated null result still routes
   // to the wizard where the existing upgrade path lives.
@@ -89,7 +95,7 @@ export default function FoundingWorlds({ onNavigate }) {
     clearRefusal?.();
     setBusyId(sample.id);
     try {
-      const seed = forkSeedFor(sample, authUserId);
+      const seed = forkSeedFor(sample, forkIdentity(authUserId));
       // The seed is the generation argument, never a config key (forkConfigFor); the
       // INTENT is an argument for the same reason — the config is persisted, so an
       // exemption stamped there would outlive the fork that earned it.

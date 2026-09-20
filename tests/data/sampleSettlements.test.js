@@ -5,7 +5,16 @@
  * dashboard or strip required fields. Three integrity checks:
  *   1. Every sample has the fields the UI reads (name, teaser, tags, config).
  *   2. Sample configs match the live generator's config shape.
- *   3. forkSeedFor produces stable, user-distinguished seeds.
+ *   3. forkSeedFor produces stable, forker-distinguished seeds.
+ *
+ * ⭐ AND SINCE 2026-09-20 (REVIEW-P F1 + noticed 8, ODQ §934.63) IT CARRIES THE
+ * FORK-IDENTITY LAW AND ITS WALKER. Two anonymous visitors used to fork
+ * byte-identical worlds, because a signed-out reader's suffix was the constant
+ * 'anon'; two accounts whose ids agreed on eight hex characters collided for the
+ * same reason one layer along. The suffix is now WHO IS FORKING, whole: the
+ * account id untruncated, or this visitor's minted salt. Because src/data may
+ * not mint one (its purity rule), the resolution lives in the two fork doors and
+ * the walker at the foot of this file is what keeps both of them obeying it.
  *
  * And, since 2026-09-19 (ODQ §934.30): the trio's third card is CNOCBY, the
  * landing page's own fixture town, asserted against the fixture rather than
@@ -15,6 +24,8 @@
  */
 
 import { describe, it, expect } from 'vitest';
+import { readdirSync, readFileSync, statSync } from 'node:fs';
+import { join, relative, resolve } from 'node:path';
 import { expectAbsentWithAnchor } from '../helpers/anchoredNegatives.js';
 import { SAMPLE_SETTLEMENTS, forkConfigFor, forkSeedFor } from '../../src/data/sampleSettlements.js';
 import { DEFAULT_CONFIG, isAllowedConfigKey } from '../../src/store/configSlice.js';
@@ -159,31 +170,199 @@ describe('forkSeedFor()', () => {
     expect(seed).toContain(sample.config.seed);
   });
 
-  it('appends the user id suffix so different users get different forks', () => {
+  it('appends the forker suffix so different forkers get different forks', () => {
     const a = forkSeedFor(sample, 'aaaaaaaa-1111');
     const b = forkSeedFor(sample, 'bbbbbbbb-2222');
     expect(a).not.toBe(b);
   });
 
-  it('truncates the user-id suffix to keep seeds short and stable', () => {
-    // forkSeedFor uses the first 8 chars of the user id, so two users
-    // whose ids differ only after char 8 collide deliberately — same
-    // session, same fork.
+  // ⭐ THE LAW THIS TEST USED TO DENY (REVIEW-P noticed 8, cured 2026-09-20).
+  // It read "truncates the user-id suffix to keep seeds short and stable" and
+  // asserted these two seeds were EQUAL, with a comment calling the collision
+  // deliberate. It is not deliberate to anyone it happens to: Supabase ids are
+  // UUIDs, so any two accounts agreeing on eight hex characters forked the same
+  // world, and at 32 bits of suffix that is an even-odds collision somewhere in
+  // the first ~77,000 accounts. The id is now used WHOLE.
+  it('uses the account id WHOLE, so two ids sharing eight characters diverge', () => {
     const a = forkSeedFor(sample, 'aaaaaaaa-different-tail-1');
     const b = forkSeedFor(sample, 'aaaaaaaa-different-tail-2');
-    expect(a).toBe(b);
+    expect(a).not.toBe(b);
+    expect(a).toBe(`${sample.config.seed}-aaaaaaaa-different-tail-1`);
   });
 
-  it('handles anonymous (no user id) gracefully', () => {
+  it('carries the full id even when it is a whole UUID', () => {
+    const id = '7c9e6679-7425-40de-944b-e07fc1f90ae7';
+    expect(forkSeedFor(sample, id)).toBe(`${sample.config.seed}-${id}`);
+  });
+
+  it('is a pure function of its two arguments', () => {
+    // The suffix arrives ALREADY RESOLVED (see forkIdentity), because src/data
+    // may not mint or read one — the purity rule this directory is held to by
+    // eslint + tests/domain/dataPurity.test.js. Two calls, one answer, no IO.
+    expect(forkSeedFor(sample, 'steady')).toBe(forkSeedFor(sample, 'steady'));
+  });
+
+  it('falls back to the bare constant only when handed no forker at all', () => {
+    // This is what a fork door that FORGOT forkIdentity would produce, and the
+    // walker below is what stops one existing. Kept total rather than throwing:
+    // a null seed here would fail a fork silently at the generate call.
     const seed = forkSeedFor(sample, null);
-    expect(typeof seed).toBe('string');
-    expect(seed).toContain('anon');
+    expect(seed).toBe(`${sample.config.seed}-anon`);
   });
 
   it('returns null for a malformed sample', () => {
     expect(forkSeedFor(null, 'x')).toBeNull();
     expect(forkSeedFor({}, 'x')).toBeNull();
     expect(forkSeedFor({ config: {} }, 'x')).toBeNull();
+  });
+});
+
+/**
+ * ⛔ THE WALKER — every fork door resolves WHO IS FORKING, and none passes a bare id.
+ *
+ * `forkSeedFor` is pure and cannot defend itself: handed nothing it yields the
+ * constant `-anon`, which is the same constant in every browser and is exactly
+ * the defect REVIEW-P walked (two anonymous contexts, one Cnocby, id
+ * `s_01773858621d9a94` on both). The cure lives one layer up, in the two doors,
+ * and a rule that lives in two places needs something checking that both obey
+ * it — this estate has already shipped the failure of that exact shape, when the
+ * sample-fork INTENT was passed on the create landing and silently not in the
+ * Library (ODQ §934.24(b)).
+ *
+ * A source scan rather than a render: it costs nothing, it cannot be satisfied
+ * by a mock, and it reds for a THIRD door added tomorrow that nobody thought to
+ * write a component test for.
+ */
+describe('the fork doors — the forker is resolved, never assumed', () => {
+  const SRC = resolve(process.cwd(), 'src');
+
+  /** Every .js/.jsx file under src/ that mentions forkSeedFor. */
+  function forkCallSites(dir = SRC, out = []) {
+    for (const entry of readdirSync(dir)) {
+      const full = join(dir, entry);
+      if (statSync(full).isDirectory()) forkCallSites(full, out);
+      else if (/\.(js|jsx)$/.test(entry)) {
+        const text = readFileSync(full, 'utf-8');
+        if (text.includes('forkSeedFor(')) out.push([relative(process.cwd(), full), text]);
+      }
+    }
+    return out;
+  }
+
+  const sites = forkCallSites();
+
+  /** Source with comment spans removed, so a guard judges code and not prose. */
+  function stripComments(src) {
+    let out = '';
+    let inBlock = false;
+    for (const line of src.split('\n')) {
+      let i = 0;
+      while (i < line.length) {
+        if (inBlock) {
+          const end = line.indexOf('*/', i);
+          if (end === -1) { i = line.length; } else { i = end + 2; inBlock = false; }
+        } else {
+          const b = line.indexOf('/*', i);
+          const l = line.indexOf('//', i);
+          if (l !== -1 && (b === -1 || l < b)) { out += line.slice(i, l); i = line.length; }
+          else if (b !== -1) { out += line.slice(i, b); i = b + 2; inBlock = true; }
+          else { out += line.slice(i); i = line.length; }
+        }
+      }
+      out += '\n';
+    }
+    return out;
+  }
+
+  it('guard-the-guard: the scan actually finds the fork doors', () => {
+    // A walk that found nothing would pass every assertion below forever.
+    const files = sites.map(([f]) => f);
+    expect(files).toContain('src/data/sampleSettlements.js');           // the definition
+    expect(files).toContain('src/components/generate/FoundingWorlds.jsx'); // door 1
+    expect(files).toContain('src/components/SettlementsPanel.jsx');        // door 2
+    expect(files.length).toBeGreaterThanOrEqual(3);
+  });
+
+  /**
+   * The argument list of every `forkSeedFor(` in `text`, read by BALANCING
+   * parentheses rather than by a regex. `forkSeedFor(sample, forkIdentity(id))`
+   * nests, and a `[^)]*` pattern either stops at the inner `)` or runs past the
+   * outer one into whatever follows — which is how a walker comes to read the
+   * next line's text as part of the call it is judging.
+   */
+  function forkSeedForArgs(text) {
+    const out = [];
+    const NEEDLE = 'forkSeedFor(';
+    for (let i = text.indexOf(NEEDLE); i !== -1; i = text.indexOf(NEEDLE, i + 1)) {
+      let depth = 0;
+      for (let j = i + NEEDLE.length - 1; j < text.length; j++) {
+        if (text[j] === '(') depth++;
+        else if (text[j] === ')') {
+          depth--;
+          if (depth === 0) { out.push(text.slice(i, j + 1)); break; }
+        }
+      }
+    }
+    return out;
+  }
+
+  it('guard-the-guard: the argument reader balances nested calls', () => {
+    expect(forkSeedForArgs('const s = forkSeedFor(a, forkIdentity(b)); next(c);'))
+      .toEqual(['forkSeedFor(a, forkIdentity(b))']);
+    expect(forkSeedForArgs('forkSeedFor(a, b);\nlater(forkIdentity(c));'))
+      .toEqual(['forkSeedFor(a, b)']);
+  });
+
+  it('every CALL of forkSeedFor passes an identity resolved by forkIdentity', () => {
+    const offenders = [];
+    for (const [file, text] of sites) {
+      if (file === 'src/data/sampleSettlements.js') continue; // the definition, not a call
+      for (const call of forkSeedForArgs(text)) {
+        if (!call.includes('forkIdentity(')) offenders.push(`${file}: ${call.trim()}`);
+      }
+    }
+    expect(
+      offenders,
+      'a fork door passed a bare id: a signed-out reader then falls back to the '
+      + "constant 'anon' and shares one world with every other visitor (REVIEW-P F1). "
+      + 'Wrap it: forkSeedFor(sample, forkIdentity(authUserId)) — lib/anonForkSalt.js',
+    ).toEqual([]);
+  });
+
+  it('every door that calls forkSeedFor imports forkIdentity', () => {
+    const offenders = sites
+      .filter(([file]) => file !== 'src/data/sampleSettlements.js')
+      .filter(([, text]) => !/import\s*\{[^}]*\bforkIdentity\b[^}]*\}\s*from\s*['"][^'"]*anonForkSalt\.js['"]/.test(text))
+      .map(([file]) => file);
+    expect(offenders).toEqual([]);
+  });
+
+  it('src/data stays pure: the definition never reaches for the salt itself', () => {
+    // The temptation is to cure this INSIDE forkSeedFor, which would be one
+    // writer instead of two doors. It is forbidden: src/data/** may not import
+    // lib (eslint no-restricted-imports + tests/domain/dataPurity.test.js),
+    // because a data table that reads storage is no longer data.
+    //
+    // ⚠ SCANNED OVER CODE, NOT OVER PROSE, and the first cut of this arm got it
+    // wrong: it matched the bare word `localStorage` and so reddened on the
+    // DOCSTRING that explains why the salt is not read here. A guard that a file
+    // trips by describing itself accurately teaches the next author to delete the
+    // explanation. Comments are stripped first — the same reasoning
+    // tests/domain/dataPurity.test.js records for restricting itself to import
+    // specifiers rather than to any occurrence of a substring.
+    const [, text] = sites.find(([f]) => f === 'src/data/sampleSettlements.js');
+    const code = stripComments(text);
+    // THE LIVENESS ANCHOR, and it is not a formality: a stripper that returned ''
+    // would make both negatives below pass forever, and this guard would go on
+    // reporting purity about a file it had stopped reading.
+    expect(code, 'comment-stripping gutted the file it is meant to judge')
+      .toMatch(/export function forkSeedFor/);
+    // anchored: the assertion above proves `code` still holds the definition this judges
+    expect(code, 'the pure-data layer imported the salt').not.toMatch(/from\s*['"][^'"]*anonForkSalt/);
+    // anchored: same live `code`, proven to still carry forkSeedFor two lines above
+    expect(code, 'the pure-data layer reached for storage').not.toMatch(/localStorage/);
+    // …and the prose that explains the rule is still there to be read.
+    expect(text).toMatch(/localStorage/);
   });
 });
 

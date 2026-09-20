@@ -124,8 +124,17 @@ installGlobalErrorHandlers();
 
 // A tab left open across a deploy fails its next lazy load (the previous build's
 // chunks are gone). Confirm a new build is live, then reload, but only when no
-// settlement or campaign is on screen: generated worlds are not persisted locally,
-// so with work on screen the notice asks for the reload instead (lib/staleDeploy.js).
+// settlement or campaign is on screen; with work on screen the notice asks for the
+// reload instead, and the reader decides (lib/staleDeploy.js decideRecovery).
+// ⚠ THE REASON THIS COMMENT USED TO GIVE WAS FALSE, and the arm is right anyway.
+// It said generated worlds are not persisted locally. ONE is: an anonymous visitor's
+// draft rides the `anonDraft` envelope in the persisted store projection
+// (store/persistProjection.js, ODQ §934.8), so a reload would in fact find it again.
+// Nothing here reasons FROM that premise, though — work on screen returns true and
+// decideRecovery answers true with 'notice', which is the arm that asks rather than
+// reloads under a reader. A campaign, and any signed-in world, genuinely are not held
+// locally, so the honest rule is the one the code already follows: never reload a tab
+// that has something on screen, whatever holds it.
 installStaleDeployRecovery({
   hasWorkOnScreen: () => {
     try {

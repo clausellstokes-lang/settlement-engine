@@ -115,8 +115,8 @@ export const SAMPLE_SETTLEMENTS = Object.freeze([
   // never heard of, while the place they HAD just read about was unreachable.
   //
   // ⚠ THIS IS A CURATED SEED, NOT A COPY OF THE FIXTURE, and the difference is
-  // the fork: forkSeedFor() suffixes every fork with the user id, so no sample
-  // ever re-derives its canonical settlement (that is the whole design — "they
+  // the fork: forkSeedFor() suffixes every fork with whoever is forking, so no
+  // sample ever re-derives its canonical settlement (that is the whole design — "they
   // share the card's name, not their people or history"). What travels is the
   // CHARACTER, which lives in the dials. These dials are lf-033's own RESOLVED
   // config, read off the fixture run: a celtic mountain village the road reaches,
@@ -159,13 +159,56 @@ export const SAMPLE_SETTLEMENTS = Object.freeze([
 ]);
 
 /**
- * Build a fork seed unique to the user but stable per sample. Forks
- * land in the user's saves with a unique name + seed so two users who
- * fork Mossgate get visually-similar but mechanically-different towns.
+ * Build a fork seed unique to the forker but stable per sample. Forks land in
+ * the user's saves with a unique name + seed so two people who fork Mossgate
+ * get visually-similar but mechanically-different towns.
+ *
+ * ⭐ THE SUFFIX IS WHO IS FORKING, AND BOTH HALVES OF THAT WERE WRONG (REVIEW-P
+ * F1 + noticed 8, cured 2026-09-20 under ODQ §934.63).
+ *
+ *   1. A SIGNED-OUT READER WAS THE CONSTANT 'anon', so every anonymous visitor
+ *      on earth shared one seed. Walked on two independent browser contexts:
+ *      both forks of Cnocby returned id `s_01773858621d9a94`, seed
+ *      `cnocby-033a-anon`, the same population and the same four NPCs. The
+ *      cure is a per-visitor salt (lib/anonForkSalt.js), minted once and held,
+ *      so two visitors differ while a visitor's own re-fork still repeats.
+ *   2. AN ACCOUNT WAS TRUNCATED TO EIGHT CHARACTERS, so two accounts whose ids
+ *      agree on the first eight hex characters forked the same world. The id is
+ *      now used WHOLE. There is nothing for the truncation to buy: the seed is
+ *      never a fixed-width field, and the only length constant in the tree is a
+ *      defensive 200-char cap in lib/errorReporter.js.
+ *
+ * ⛔ AND THE SALT IS RESOLVED BY THE CALLER, BECAUSE THIS LAYER MAY NOT MINT IT.
+ * `src/data/**` is PURE DATA by a rule with two enforcers (eslint
+ * no-restricted-imports on this directory + tests/domain/dataPurity.test.js): no
+ * runtime import of generators, store or lib, precisely so ambient entropy and
+ * IO cannot enter the tables. A salt is both — localStorage and a random mint —
+ * so it is read in the component layer and arrives here already resolved, and
+ * this function stays a pure function of its two arguments.
+ *
+ * ⚠ THAT PUTS THE ONE RULE ON THE DOORS, SO A WALKER HOLDS IT: every
+ * `forkSeedFor` call site in `src/` must pass an identity resolved through
+ * `forkIdentity` (lib/anonForkSalt.js), pinned by
+ * tests/data/sampleSettlements.test.js. Without it this is exactly the shape
+ * that bit the sample-fork INTENT, which was passed on one fork door and
+ * silently not on the other (ODQ §934.24(b)) — two doors, one rule, and nothing
+ * checking that both obeyed it. The `'anon'` fallback below is what a door that
+ * forgot would produce, and the walker is what stops one existing.
+ *
+ * ⛔ WHAT THIS DOES NOT CHANGE: a saved world keeps the seed it was born with
+ * (normalizeSettlement stamps its id from `_seed` once), and the same forker
+ * re-forking the same card still lands on the same town. Whether a SECOND CLICK
+ * should draw fresh is a separate, owner-parked question
+ * (docs/DESIGN_FP_ARCH_EP.md §7a row 1) and is deliberately left standing.
+ *
+ * @param {{ config?: { seed?: string } } | null | undefined} sample
+ * @param {string | null | undefined} forkerId who is forking, ALREADY RESOLVED —
+ *   the signed-in account id, or this visitor's anonymous fork salt
+ * @returns {string|null}
  */
-export function forkSeedFor(sample, userId) {
+export function forkSeedFor(sample, forkerId) {
   if (!sample || !sample.config?.seed) return null;
-  const suffix = (userId || 'anon').slice(0, 8);
+  const suffix = typeof forkerId === 'string' && forkerId !== '' ? forkerId : 'anon';
   return `${sample.config.seed}-${suffix}`;
 }
 

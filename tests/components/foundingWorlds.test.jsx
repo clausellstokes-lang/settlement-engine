@@ -78,8 +78,15 @@ describe('FoundingWorlds', () => {
     const forkButtons = screen.getAllByRole('button', { name: /Fork this sample/i });
     fireEvent.click(forkButtons[0]);
 
-    // No auth.user in the mock → the seed suffix is 'anon' (forkSeedFor default).
-    const seed = forkSeedFor(first, undefined);
+    // No auth.user in the mock, so the door resolves the suffix through
+    // forkIdentity and gets THIS VISITOR'S salt (lib/anonForkSalt.js). It used to
+    // get the constant 'anon', which is the same constant in every browser — two
+    // anonymous visitors forked byte-identical worlds (REVIEW-P F1, ODQ §934.63).
+    // Recomputed here through the same seam rather than pinned to a literal: the
+    // salt is minted, and both sides read it from the one jsdom localStorage.
+    const { forkIdentity } = await import('../../src/lib/anonForkSalt.js');
+    const seed = forkSeedFor(first, forkIdentity(undefined));
+    expect(seed).not.toBe(`${first.config.seed}-anon`);
     expect(actions.updateConfig).toHaveBeenCalledWith(
       expect.objectContaining({ ...migrateConfig(forkConfigFor(first)), _forkedFromSample: first.id }),
     );

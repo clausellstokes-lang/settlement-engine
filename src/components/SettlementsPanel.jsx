@@ -26,6 +26,7 @@ import LibraryToolbar, { applyLibraryFilters as _applyLibraryFilters } from './l
 import SettlementDetail from './SettlementDetail';
 import { forkConfigFor, forkSeedFor } from '../data/sampleSettlements.js';
 import { GENERATION_INTENT_SAMPLE_FORK } from '../lib/generationIntent.js';
+import { forkIdentity } from '../lib/anonForkSalt.js';
 import {
   migrateConfig, findSaveById, saveCountBand, dayGapBand,
   canonPhaseOf, lastEditedMs, hasAiData,
@@ -155,7 +156,13 @@ export default function SettlementsPanel({ onNavigate, routeId }) {
     if (!sample?.config || forkingId) return;
     clearRefusal?.();
     setForkingId(sample.id);
-    const seed = forkSeedFor(sample, authUser?.id);
+    // ⛔ forkIdentity, NEVER A BARE auth id — the same rule the create landing's fork
+    // door obeys, and the reason it is one function rather than two spellings. A
+    // signed-out reader has no id, and the constant 'anon' that used to stand in for
+    // one is the same constant in every browser, so two anonymous visitors forked
+    // byte-identical towns (REVIEW-P F1); a signed-in id is used WHOLE, because
+    // truncating it to eight characters collided two real accounts (noticed 8).
+    const seed = forkSeedFor(sample, forkIdentity(authUser?.id));
     // The seed is the generation argument, never a config key (forkConfigFor).
     const forkedConfig = {
       ...migrateConfig(forkConfigFor(sample)),
