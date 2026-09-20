@@ -115,7 +115,12 @@ function runStrike() {
   ];
   const digest = digestFor();
   return advanceCalamity({
-    settlementUpdates: settlements.map((it) => ({ saveId: it.id, settlement: it.settlement })),
+    // ⛔ THE PARAMETER MAY NOT BE NAMED `it`. The lighting walker resolves an opener only where
+    // the module binds that name EXACTLY ONCE and that one binding is the vitest import; a
+    // second binding anywhere in the file — even a nested arrow's parameter — makes the word
+    // unresolvable, and all seven `it` arms below park on `OPENER_UNRESOLVED:it`. This file
+    // landed parked for exactly that reason, so its pins proved nothing to the contract.
+    settlementUpdates: settlements.map((update) => ({ saveId: update.id, settlement: update.settlement })),
     worldState: { tick: 52, simulationRules: { disastersEnabled: true }, spatialCanonVersion: 1, spatialDigest: digest },
     snapshot: {
       settlements,
