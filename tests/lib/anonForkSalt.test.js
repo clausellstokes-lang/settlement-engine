@@ -21,6 +21,13 @@
  * The lifecycle arms below are the ones the cure was ruled against by name: the
  * salt survives a reload, survives a cleared editor, and stands aside the moment
  * an account id exists.
+ *
+ * ⭐ FIX-P1b — THE ACCOUNT BRANCH IS A DIGEST, AND THE ADDRESS IS PINNED. The
+ * first cut used the account id WHOLE, which cured the collision and made a
+ * signed-in seed ~48 characters; §7a row 1 calls a fork seed "the address …
+ * typeable in the `SeedField`". The suffix is now a short fixed-width digest of
+ * the whole id, so BOTH properties hold at once, and the last describe block
+ * pins the seed's length against the module's own declared width.
  */
 
 import { describe, it, expect, beforeEach, afterEach, vi } from 'vitest';
@@ -28,9 +35,14 @@ import {
   anonForkSalt,
   forkIdentity,
   ANON_FORK_SALT_KEY,
+  ACCOUNT_DIGEST_HEX,
+  FORK_SUFFIX_MAX,
   __resetAnonForkSaltMemory,
 } from '../../src/lib/anonForkSalt.js';
 import { SAMPLE_SETTLEMENTS, forkSeedFor } from '../../src/data/sampleSettlements.js';
+// The estate's declared short-hash idiom, imported so the entropy arm below can
+// PROVE its pinned pair collides under one round instead of asserting that it does.
+import { fnv1a32 } from '../../src/kernel/proseHash.js';
 
 const CNOCBY = SAMPLE_SETTLEMENTS.find((s) => s.id === 'sample-cnocby') ?? SAMPLE_SETTLEMENTS[0];
 
@@ -101,9 +113,59 @@ describe('anonForkSalt — minted once, then held', () => {
 });
 
 describe('forkIdentity — who is forking', () => {
-  it('is the account id, WHOLE, when one exists', () => {
+  it('is a short fixed-width digest of the account id, never the id itself', () => {
     const id = '7c9e6679-7425-40de-944b-e07fc1f90ae7';
-    expect(forkIdentity(id)).toBe(id);
+    const suffix = forkIdentity(id);
+    expect(suffix).not.toBe(id);
+    expect(suffix).toHaveLength(ACCOUNT_DIGEST_HEX);
+    expect(suffix).toMatch(/^[0-9a-f]+$/);
+  });
+
+  it('reads the WHOLE id, so a shared eight-character prefix still diverges', () => {
+    // The digest is what lets the suffix be short AND still distinguish two
+    // accounts — truncation could do only the first (REVIEW-P noticed 8).
+    expect(forkIdentity('aaaaaaaa-1111-4000-8000-000000000001'))
+      .not.toBe(forkIdentity('aaaaaaaa-1111-4000-8000-000000000002'));
+  });
+
+  it('is stable for one account, which is what THE PROMISE requires', () => {
+    const id = '7c9e6679-7425-40de-944b-e07fc1f90ae7';
+    expect(forkIdentity(id)).toBe(forkIdentity(id));
+  });
+
+  // ⛔⛔ THE ARM THAT CATCHES A COSMETIC WIDENING, and it proves its own premise
+  // rather than trusting a comment. The suffix is twelve characters because at
+  // eight (32 bits) two accounts collide at even odds somewhere around 77,000 of
+  // them. TWO ways of reaching twelve characters are worthless, both measured
+  // before the real one was written, and both look correct in a diff:
+  //   · padStart a single 32-bit round out to twelve — the extra characters are
+  //     leading zeros, carrying no information;
+  //   · append a domain for the second round — FNV-1a is iterative, so two ids
+  //     already in the same state stay in it, and every appended byte is applied
+  //     to that one state.
+  // This pair is the receipt: it COLLIDES under one round (asserted below, not
+  // assumed) and must diverge under the digest. Either wrong turn reds here.
+  it('carries real entropy past the eighth character, not filler', () => {
+    const a = 'acct-d36f';
+    const b = 'acct-bb799';
+    // The premise, EXECUTED: one round cannot tell these two apart.
+    expect(fnv1a32(a), 'the pinned pair no longer collides under one round')
+      .toBe(fnv1a32(b));
+    // …and the appended-domain variant cannot either, which is why it is not used.
+    expect(fnv1a32(`${a}sf.fork`)).toBe(fnv1a32(`${b}sf.fork`));
+    // The digest must separate them anyway.
+    expect(forkIdentity(a)).not.toBe(forkIdentity(b));
+    // And the separation has to live in the characters a single round could not
+    // have produced, so a revert to `padStart` cannot pass this by accident.
+    expect(forkIdentity(a).slice(0, 8)).toBe(forkIdentity(b).slice(0, 8));
+    expect(forkIdentity(a).slice(8)).not.toBe(forkIdentity(b).slice(8));
+  });
+
+  it('spends every character of the suffix (no leading-zero filler)', () => {
+    // A 32-bit round padded to twelve would start `0000` for EVERY account.
+    const digests = Array.from({ length: 64 }, (_, i) => forkIdentity(`acct-${i}-${'z'.repeat(i)}`));
+    expect(digests.every((d) => d.length === ACCOUNT_DIGEST_HEX)).toBe(true);
+    expect(digests.every((d) => d.startsWith('0000'))).toBe(false);
   });
 
   it('never consults, and never mints, a salt for a signed-in account', () => {
@@ -123,9 +185,55 @@ describe('forkIdentity — who is forking', () => {
     // once auth has it, so the switch is automatic and needs no migration.
     const salt = anonForkSalt();
     expect(forkIdentity(null)).toBe(salt);
-    expect(forkIdentity('account-1')).toBe('account-1');
+    const signedIn = forkIdentity('account-1');
+    expect(signedIn).not.toBe(salt);
+    expect(signedIn).toHaveLength(ACCOUNT_DIGEST_HEX);
     // And signing out returns the SAME device to the SAME salt.
     expect(forkIdentity(null)).toBe(salt);
+  });
+});
+
+/**
+ * ⭐ THE ADDRESS PIN (FIX-P1b). §7a row 1 calls a fork seed "the address …
+ * typeable in the `SeedField`", and that is the whole reason the account branch
+ * is a digest rather than the id itself: FIX-P1 cured the collision by using the
+ * id WHOLE, which made a signed-in seed ~48 characters — a string a reader copies
+ * rather than types.
+ *
+ * ⚠ PINNED AGAINST THE MODULE'S DECLARED WIDTH, BECAUSE THE FIELD DECLARES NONE.
+ * The ruling asked for this to be pinned against the SeedField's own limit. There
+ * is none to read: `generate/LayeredConfigurationPanel.jsx#SeedField` renders a
+ * bare `<input type="text">` with no `maxLength` — only a layout width
+ * (`flex: '1 1 200px', minWidth: 160`), which is pixels and not characters. So the
+ * anchor is `FORK_SUFFIX_MAX`, the width the module itself declares, and the seed's
+ * length is asserted as a FUNCTION of the card's own seed plus that constant —
+ * never a number chosen in this file. If the field is ever given a real
+ * `maxLength`, this is the arm that should read it instead.
+ */
+describe('a fork seed stays an address, not a pasted blob', () => {
+  it('a signed-in fork seed is the card seed plus one declared-width suffix', () => {
+    const id = '7c9e6679-7425-40de-944b-e07fc1f90ae7';
+    const seed = forkSeedFor(CNOCBY, forkIdentity(id));
+    expect(seed).toBe(`${CNOCBY.config.seed}-${forkIdentity(id)}`);
+    expect(seed).toHaveLength(CNOCBY.config.seed.length + 1 + ACCOUNT_DIGEST_HEX);
+  });
+
+  it('no forker, signed in or out, can push a seed past the declared ceiling', () => {
+    const ceiling = (sample) => sample.config.seed.length + 1 + FORK_SUFFIX_MAX;
+    const forkers = [
+      null,
+      'a',
+      '7c9e6679-7425-40de-944b-e07fc1f90ae7',
+      // A pathological id: whatever the account layer hands over, the address holds.
+      'x'.repeat(4096),
+    ];
+    for (const sample of SAMPLE_SETTLEMENTS) {
+      for (const who of forkers) {
+        const seed = forkSeedFor(sample, forkIdentity(who));
+        expect(seed.length, `${sample.id} / ${String(who).slice(0, 12)}`)
+          .toBeLessThanOrEqual(ceiling(sample));
+      }
+    }
   });
 });
 

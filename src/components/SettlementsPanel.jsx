@@ -160,8 +160,9 @@ export default function SettlementsPanel({ onNavigate, routeId }) {
     // door obeys, and the reason it is one function rather than two spellings. A
     // signed-out reader has no id, and the constant 'anon' that used to stand in for
     // one is the same constant in every browser, so two anonymous visitors forked
-    // byte-identical towns (REVIEW-P F1); a signed-in id is used WHOLE, because
-    // truncating it to eight characters collided two real accounts (noticed 8).
+    // byte-identical towns (REVIEW-P F1); a signed-in id becomes a short DIGEST of
+    // the WHOLE id, because truncating it to eight characters collided two real
+    // accounts (noticed 8) while the id itself is too long to be an address.
     const seed = forkSeedFor(sample, forkIdentity(authUser?.id));
     // The seed is the generation argument, never a config key (forkConfigFor).
     const forkedConfig = {

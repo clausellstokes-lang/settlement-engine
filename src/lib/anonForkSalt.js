@@ -62,7 +62,37 @@
  * better than the constant it replaces, on both axes.
  */
 
+import { fnv1a32 } from '../kernel/proseHash.js';
+
 const KEY = 'sf.anon.fork-salt';
+
+/**
+ * The second hash round's domain, PREPENDED to the id (see `accountDigest`). The
+ * trailing NUL keeps the domain from running into the id, so no account id can be
+ * chosen to imitate the prefix boundary.
+ *
+ * ⛔ BUILT WITH `fromCharCode`, NOT WRITTEN AS A LITERAL, AND THAT IS NOT FUSSINESS.
+ * A raw NUL byte in a source file makes git classify the whole file as BINARY: the
+ * first cut of this line embedded one, and `git diff --numstat` reported `-  -`
+ * for it, meaning every future review of this module would have shown "binary file
+ * differs" instead of the change. The escape has to survive as SOURCE text, so the
+ * character is constructed rather than typed.
+ */
+const DIGEST_DOMAIN = `sf.fork${String.fromCharCode(0)}`;
+
+/**
+ * ⭐ THE SUFFIX IS AN ADDRESS, SO ITS WIDTH IS DECLARED HERE AND NOWHERE ELSE.
+ *
+ * A fork seed is `${card seed}-${suffix}`, and §7a row 1 calls that seed "the
+ * address … typeable in the `SeedField`". An account id used whole made it ~48
+ * characters, which is a string a reader copies rather than types. Both widths
+ * are named here so the tests can pin the seed's length against the module's own
+ * contract instead of against a number somebody chose in a test file.
+ */
+export const ACCOUNT_DIGEST_HEX = 12;
+export const ANON_SALT_HEX = 12;
+/** The widest suffix either branch can produce. */
+export const FORK_SUFFIX_MAX = Math.max(ACCOUNT_DIGEST_HEX, ANON_SALT_HEX);
 
 // Fallback when localStorage is unavailable (private mode, sandboxed iframe,
 // quota). Module-scoped so the salt is at least stable for the page's lifetime.
@@ -72,12 +102,12 @@ let memorySalt = null;
 function mintSalt() {
   try {
     if (typeof crypto !== 'undefined' && typeof crypto.randomUUID === 'function') {
-      return crypto.randomUUID().replace(/-/g, '').slice(0, 12);
+      return crypto.randomUUID().replace(/-/g, '').slice(0, ANON_SALT_HEX);
     }
   } catch { /* fall through to the arithmetic mint */ }
   // Not cryptographically strong, and it does not need to be: this only has to
   // differ between two browsers, never resist an attacker.
-  return `${Math.random().toString(36).slice(2, 8)}${Math.random().toString(36).slice(2, 8)}`.slice(0, 12);
+  return `${Math.random().toString(36).slice(2, 8)}${Math.random().toString(36).slice(2, 8)}`.slice(0, ANON_SALT_HEX);
 }
 
 /**
@@ -110,6 +140,55 @@ export function anonForkSalt() {
 }
 
 /**
+ * An account id as a short, fixed-width, lower-hex suffix.
+ *
+ * ⛔ THE HASH IS THE ESTATE'S OWN, NOT A NEW ONE. `kernel/proseHash.js#fnv1a32` is
+ * the declared short-hash idiom here — its own header records that it "matches the
+ * `newsVoice.js` / `eventProse.js` idiom (same constants)", and the same FNV-1a
+ * family already stamps every settlement id (`domain/normalizeSettlement.js`
+ * `idFromSeed`). It is also SYNCHRONOUS, which this call path needs: both fork
+ * doors resolve the identity inline before calling the generator, and
+ * `crypto.subtle.digest` (sha-256) returns a Promise, so reaching for it would
+ * have turned one pure lookup into an await on two surfaces for no gain a
+ * non-secret de-duplication token can use.
+ *
+ * ⚠ IT IS NOT A SECRET AND DOES NOT NEED TO RESIST ANYONE. Its only job is to
+ * differ between two accounts; it is never a credential, never transmitted, and
+ * the seed it lands in is stripped from every published dossier by the gallery's
+ * "never the generation seed" contract.
+ *
+ * ⛔⛔ TWO ROUNDS, AND THE SECOND DOMAIN IS PREPENDED — NOT APPENDED, AND NOT A
+ * WIDER `padStart`. Both wrong turns were taken and measured before this shape
+ * was written, and both LOOK right in a diff:
+ *
+ *   · `fnv1a32(id).toString(16).padStart(12, '0')` yields `00000905f093` — twelve
+ *     characters carrying THIRTY-TWO bits, because fnv1a32 maxes at `ffffffff`.
+ *     The leading zeros are filler. Widening the field without widening the hash
+ *     buys nothing and hides that it bought nothing.
+ *   · `fnv1a32(id + separator)` is worthless for the same reason a length
+ *     extension is: FNV-1a is iterative, so two ids that already collide are in
+ *     the SAME internal state, and every byte appended after that point is
+ *     applied to one state. MEASURED: `acct-d36f` and `acct-bb799` both hash to
+ *     3192671852, and both still hash to 2748183937 with the suffix added.
+ *     Over 400,000 UUIDs the appended variant collided exactly as often at
+ *     twelve characters as at eight: 22 and 22.
+ *
+ * PREPENDING the domain changes the state the id is mixed INTO, so the two rounds
+ * are independent. Same pair, same measurement: they diverge, and over 400,000
+ * UUIDv4 ids the digest collided 27 times at eight characters (birthday
+ * expectation ~18.6) and ZERO times at twelve. That is the whole reason the
+ * suffix is twelve characters and not eight: at 32 bits a collision is even odds
+ * somewhere around 77,000 accounts, which is a real number of real people.
+ *
+ * @param {string} userId @returns {string} exactly ACCOUNT_DIGEST_HEX hex characters
+ */
+function accountDigest(userId) {
+  const hi = fnv1a32(userId).toString(16).padStart(8, '0');
+  const lo = fnv1a32(DIGEST_DOMAIN + userId).toString(16).padStart(8, '0');
+  return `${hi}${lo}`.slice(0, ACCOUNT_DIGEST_HEX);
+}
+
+/**
  * WHO IS FORKING, as the one string `forkSeedFor` suffixes a sample's seed with.
  *
  * ⭐ THIS IS THE WHOLE RULE, IN ONE PLACE, AND BOTH FORK DOORS CALL IT.
@@ -121,15 +200,25 @@ export function anonForkSalt() {
  * walker over both call sites pins that neither hands `forkSeedFor` a bare auth
  * id (tests/data/sampleSettlements.test.js).
  *
- * A signed-in account is its own identity and is used WHOLE — the id used to be
- * truncated to eight characters, which quietly made two accounts sharing eight
- * hex characters fork the same world (REVIEW-P noticed 8).
+ * ⭐ AN ACCOUNT IS A SHORT DIGEST OF ITS WHOLE ID, AND THAT IS THE THIRD ANSWER
+ * TO ONE QUESTION (chair ruling, FIX-P1b). The id used to be TRUNCATED to eight
+ * characters, so two accounts agreeing on eight hex characters forked the same
+ * world (REVIEW-P noticed 8). FIX-P1 used the id WHOLE, which cured the collision
+ * but made the seed ~48 characters — and §7a row 1 calls a fork seed "the address
+ * … typeable in the `SeedField`", which a copied UUID is not. A digest reads the
+ * WHOLE id (so no two accounts are confused by a shared prefix) and emits a short
+ * fixed-width suffix (so the address stays typeable).
+ *
+ * ⚠ AND IT KEEPS THE DETERMINISM THE PROMISE REQUIRES: `fnv1a32` is pure, draws
+ * no rng and reads no clock, so one account forking one card lands on one town
+ * forever. The per-click question is still the owner's (§7a row 1 / ODQ §934.66)
+ * and this function is the one seam a living door would enter through.
  *
  * @param {string | null | undefined} userId the signed-in account id, if any
  * @returns {string}
  */
 export function forkIdentity(userId) {
-  if (typeof userId === 'string' && userId !== '') return userId;
+  if (typeof userId === 'string' && userId !== '') return accountDigest(userId);
   return anonForkSalt();
 }
 

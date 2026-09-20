@@ -173,10 +173,11 @@ export const SAMPLE_SETTLEMENTS = Object.freeze([
  *      cure is a per-visitor salt (lib/anonForkSalt.js), minted once and held,
  *      so two visitors differ while a visitor's own re-fork still repeats.
  *   2. AN ACCOUNT WAS TRUNCATED TO EIGHT CHARACTERS, so two accounts whose ids
- *      agree on the first eight hex characters forked the same world. The id is
- *      now used WHOLE. There is nothing for the truncation to buy: the seed is
- *      never a fixed-width field, and the only length constant in the tree is a
- *      defensive 200-char cap in lib/errorReporter.js.
+ *      agree on the first eight hex characters forked the same world. This
+ *      function no longer shortens anything it is handed; the doors send a short
+ *      DIGEST of the whole account id (lib/anonForkSalt.js `forkIdentity`), which
+ *      reads every character — so no shared prefix collides — while keeping the
+ *      seed an address a reader can type rather than a pasted UUID.
  *
  * ⛔ AND THE SALT IS RESOLVED BY THE CALLER, BECAUSE THIS LAYER MAY NOT MINT IT.
  * `src/data/**` is PURE DATA by a rule with two enforcers (eslint

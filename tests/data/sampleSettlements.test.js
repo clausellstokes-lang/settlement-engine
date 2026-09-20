@@ -11,8 +11,8 @@
  * FORK-IDENTITY LAW AND ITS WALKER. Two anonymous visitors used to fork
  * byte-identical worlds, because a signed-out reader's suffix was the constant
  * 'anon'; two accounts whose ids agreed on eight hex characters collided for the
- * same reason one layer along. The suffix is now WHO IS FORKING, whole: the
- * account id untruncated, or this visitor's minted salt. Because src/data may
+ * same reason one layer along. The suffix is now WHO IS FORKING: a short digest
+ * of the whole account id, or this visitor's minted salt. Because src/data may
  * not mint one (its purity rule), the resolution lives in the two fork doors and
  * the walker at the foot of this file is what keeps both of them obeying it.
  *
@@ -182,15 +182,23 @@ describe('forkSeedFor()', () => {
   // deliberate. It is not deliberate to anyone it happens to: Supabase ids are
   // UUIDs, so any two accounts agreeing on eight hex characters forked the same
   // world, and at 32 bits of suffix that is an even-odds collision somewhere in
-  // the first ~77,000 accounts. The id is now used WHOLE.
-  it('uses the account id WHOLE, so two ids sharing eight characters diverge', () => {
+  // the first ~77,000 accounts.
+  //
+  // ⚠ THE CURE MOVED ONE LAYER UP, AND THIS ARM MOVED WITH IT. Distinguishing two
+  // accounts is now `forkIdentity`'s job (it digests the WHOLE id); what belongs
+  // to THIS function is that it never truncates what it is handed, so two
+  // different suffixes can never arrive at one seed. Pinned on suffixes that share
+  // their first eight characters, which is the shape the old truncation ate.
+  it('never truncates its suffix, so two that share eight characters diverge', () => {
     const a = forkSeedFor(sample, 'aaaaaaaa-different-tail-1');
     const b = forkSeedFor(sample, 'aaaaaaaa-different-tail-2');
     expect(a).not.toBe(b);
     expect(a).toBe(`${sample.config.seed}-aaaaaaaa-different-tail-1`);
   });
 
-  it('carries the full id even when it is a whole UUID', () => {
+  it('passes a long suffix through verbatim rather than shortening it', () => {
+    // The DOORS keep the address short by handing over a digest (FIX-P1b); this
+    // function does not second-guess them, so the two concerns stay separable.
     const id = '7c9e6679-7425-40de-944b-e07fc1f90ae7';
     expect(forkSeedFor(sample, id)).toBe(`${sample.config.seed}-${id}`);
   });
