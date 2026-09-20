@@ -105,8 +105,8 @@ describe('bounded migration rehearsal plan', () => {
 
   it('covers the exact applied-head to repository-head gap in semantic waves', () => {
     expect(plan.appliedHead).toBe(121);
-    expect(plan.repoHead).toBe(202);
-    expect(plan.pendingCount).toBe(81);
+    expect(plan.repoHead).toBe(203);
+    expect(plan.pendingCount).toBe(82);
     expect(plan.waves.map(({ from, to }) => [from, to])).toEqual([
       [122, 136],
       [137, 156],
@@ -129,13 +129,14 @@ describe('bounded migration rehearsal plan', () => {
       [200, 200],
       [201, 201],
       [202, 202],
+      [203, 203],
     ]);
     expect(MIGRATION_WAVES.at(-1).to).toBe(MIGRATION_TRAIN_REPO_HEAD);
 
     const covered = plan.waves.flatMap((wave) =>
       wave.migrations.map((migration) => migration.number));
     expect(covered).toEqual(
-      Array.from({ length: 81 }, (_, index) => 122 + index),
+      Array.from({ length: 82 }, (_, index) => 122 + index),
     );
     expect(new Set(covered).size).toBe(covered.length);
 
@@ -356,6 +357,24 @@ describe('bounded migration rehearsal plan', () => {
         name: '_gallery_world_snapshot_is_safe',
       }],
     });
+    // ⭐ THE NEW TAIL WAVE (203, ODQ §934.55): the same function again, re-stated so the server
+    // denylist finally MIRRORS the client one. 202 copied 136's hard_deny array verbatim, and
+    // that array had gone stale three times — factionPairStates, envoyErrands and concludedWars
+    // landed on the client WORLD_SNAPSHOT_HARD_DENY after 136 froze it, and nothing carried them
+    // to the SQL. 203 adds exactly those three and rewrites the array's comment to name the RULE
+    // instead of a snapshot; everything else in the body is byte-identical to 202, contracted by
+    // tests/security/galleryScannerMirrorTotality.test.js. No table, no column, no policy, no
+    // row. Deployment stays the owner's manual act, so the applied head (200) now sits THREE
+    // migrations behind this repo head by design.
+    expect(plan.waves.find((wave) => wave.id === 'gallery-scanner-client-mirror-totality')).toMatchObject({
+      id: 'gallery-scanner-client-mirror-totality',
+      from: 203,
+      to: 203,
+      expectedObjects: [{
+        kind: 'function',
+        name: '_gallery_world_snapshot_is_safe',
+      }],
+    });
     // …and 199, like 197, takes its posture from its OWN annotation rather than the wave
     // policy — but for the opposite reason: 197's data half is deliberately unscripted,
     // while 199's whole reversal IS one scripted statement. Both are
@@ -378,8 +397,9 @@ describe('bounded migration rehearsal plan', () => {
   // must — land first. Inert until the owner's `supabase db push`, like every migration here.
   it('denies the settlement editor keys in the net-current gallery scanner, and rejects nothing that exists', () => {
     const scanner = netCurrentGalleryScanner();
-    // 202 IS the net-current scanner (latest-wins), and it hard-denies both edit keys.
-    expect(scanner.owner).toBe('202_edit_registry_public_denylist.sql');
+    // 203 IS the net-current scanner (latest-wins) since EM-B3c re-stated it, and it hard-denies
+    // both edit keys — 202 added them and 203 carries them forward untouched.
+    expect(scanner.owner).toBe('203_gallery_scanner_client_mirror_totality.sql');
     expect(hardDenyMembers(scanner.sql)).toEqual(expect.arrayContaining(['dmlayer', 'decrees']));
     // `decrees` now matches the covert/private alternation as a WHOLE key — the membership
     // property the drift test will check EM-B3a's client token against. `dmLayer` already
@@ -493,13 +513,14 @@ describe('bounded migration rehearsal plan', () => {
       rollbackDirectory: ROLLBACK,
       appliedHead: 200,
     });
-    expect(live).toMatchObject({ appliedHead: 200, repoHead: 202, pendingCount: 2 });
+    expect(live).toMatchObject({ appliedHead: 200, repoHead: 203, pendingCount: 3 });
     expect(live.waves.map(({ id, from, to }) => [id, from, to])).toEqual([
       ['staff-unlock-surveyor-entitlement', 201, 201],
       ['edit-registry-public-denylist', 202, 202],
+      ['gallery-scanner-client-mirror-totality', 203, 203],
     ]);
-    // The ledger itself does NOT move for 202: the owner bumps appliedHead in the same act
-    // as `supabase db push`, so the repo sits two migrations ahead until that hand falls.
+    // The ledger itself does NOT move for 202 or 203: the owner bumps appliedHead in the same
+    // act as `supabase db push`, so the repo sits three migrations ahead until that hand falls.
     const ledgerHead = JSON.parse(
       readFileSync(join(ROOT, 'supabase', 'applied-head.json'), 'utf8'),
     ).appliedHead;
@@ -508,7 +529,7 @@ describe('bounded migration rehearsal plan', () => {
       migrationDirectory: MIGRATIONS,
       rollbackDirectory: ROLLBACK,
       appliedHead: 150,
-    })).toThrow(/wave boundaries are 121, 136, 156, .*200, 201, 202, but the ledger says 150/);
+    })).toThrow(/wave boundaries are 121, 136, 156, .*200, 201, 202, 203, but the ledger says 150/);
   });
 
   it('stages no migration beyond the selected wave boundary', () => {
@@ -518,8 +539,8 @@ describe('bounded migration rehearsal plan', () => {
     const numbers = staged.copied.map((name) => Number(name.split('_')[0]));
 
     expect(snapshot).toMatchObject({
-      repoHead: 202,
-      migrationCount: 202,
+      repoHead: 203,
+      migrationCount: 203,
       configSha256: expect.stringMatching(/^[a-f0-9]{64}$/),
       workspaceSourceSha256: expect.stringMatching(/^[a-f0-9]{64}$/),
     });
@@ -641,7 +662,7 @@ describe('clone admission is positive and source-bound', () => {
     const liveAppliedHead = JSON.parse(readFileSync(join(ROOT, 'supabase', 'applied-head.json'), 'utf8')).appliedHead;
     expect(JSON.parse(result.stdout)).toMatchObject({
       appliedHead: liveAppliedHead,
-      repoHead: 202,
+      repoHead: 203,
     });
   });
 });

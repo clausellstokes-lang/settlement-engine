@@ -16,7 +16,7 @@ import { existsSync, readFileSync, readdirSync } from 'node:fs';
 import { basename, join } from 'node:path';
 
 export const MIGRATION_TRAIN_BASE_HEAD = 121;
-export const MIGRATION_TRAIN_REPO_HEAD = 202;
+export const MIGRATION_TRAIN_REPO_HEAD = 203;
 
 const FORWARD_ONLY_REASON = [
   'No automatic schema rollback is admitted for this wave.',
@@ -576,6 +576,40 @@ export const MIGRATION_WAVES = Object.freeze([
         + 'taking the wave policy. Nothing is destroyed on reversal: the function holds no '
         + 'state and no row was minted; the only consequence is that a stored gallery '
         + 'snapshot carrying the editor\'s keys is accepted server-side exactly as today.',
+      ].join(' '),
+    }),
+    expectedObjects: Object.freeze([
+      Object.freeze({ kind: 'function', name: '_gallery_world_snapshot_is_safe' }),
+    ]),
+  }),
+  Object.freeze({
+    id: 'gallery-scanner-client-mirror-totality',
+    from: 203,
+    to: 203,
+    purpose: 'Design §12.4 / ODQ §934.55: ONE re-stated SECURITY DEFINER function. '
+      + 'public._gallery_world_snapshot_is_safe is 202\'s body VERBATIM outside the hard_deny '
+      + 'array literal, which gains the three client hard-deny members no migration named — '
+      + 'factionPairStates, envoyErrands and concludedWars, conditional ledgers that landed on '
+      + 'the client after 136 froze the array and that 202 copied forward unchanged. It also '
+      + 'corrects the array comment 136 and 202 both carried ("every CONDITIONAL_LEDGER_KEY but '
+      + 'pantheon"), which was true when written and went stale three times, by naming the RULE '
+      + 'rather than a snapshot. A stored gallery world snapshot carrying any of the three is '
+      + 'now rejected SERVER-side. It creates no table, no column, no policy and no row, and '
+      + 're-points publish_map (089), the saved_maps guard (091) and the campaign-tiles RPC '
+      + '(148) by name with no signature change and no re-grant. DEPLOYMENT remains the owner\'s '
+      + 'manual act (`supabase db push` plus the applied-head bump in that same act), and until '
+      + 'it the repo head sits three migrations ahead of the applied head by design.',
+    rollback: Object.freeze({
+      mode: 'forward-only',
+      reason: [
+        FORWARD_ONLY_REASON,
+        'Like 201 and 202, this wave is one re-stated function and its own @rollback annotation '
+        + 'spells the whole reversal out: recreate 202\'s body verbatim, i.e. the same function '
+        + 'with the three hard_deny members removed — which is why 203 classifies as '
+        + 'documented-manual-reversal rather than taking the wave policy. Nothing is destroyed '
+        + 'on reversal: the function holds no state and no row was minted; the only consequence '
+        + 'is that a stored gallery snapshot carrying those three ledgers is accepted '
+        + 'server-side exactly as today.',
       ].join(' '),
     }),
     expectedObjects: Object.freeze([

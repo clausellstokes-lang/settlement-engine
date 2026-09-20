@@ -2,7 +2,7 @@
 
 > **BANKED 2026-07-26 (THE BANKING FOLD).** Everything this document describes as
 > "uncommitted integration" is now committed on claude/composite-r4 as 12 lane
-> commits (b503fe05..7a6603de) plus follow-ups; migrations are contiguous to 202 at
+> commits (b503fe05..7a6603de) plus follow-ups; migrations are contiguous to 203 at
 > HEAD. Governance home: the ledger branch (review-fixes-2026-07-08) — owner
 > decisions live in ONE surface, `docs/OWNER_DECISION_QUEUE.md` there; the
 > 2026-07-26 ledger rows carry the pivot ratification, the golden-regen
@@ -76,12 +76,15 @@ evidence must be checked independently.
 
 ## Current release blockers
 
-1. **Migration train.** Working-tree migration head 202 is 2 migrations ahead
+1. **Migration train.** Working-tree migration head 203 is 3 migrations ahead
    of the live-verified production head 200 (`supabase/applied-head.json`; the
    owner applied 122–200 to production on 2026-09-16; 201 — the staff unlock of
-   ODQ §934.28 — and 202 — design §12.4's gallery-scanner denial of the
-   settlement editor's two DM-private keys, `dmLayer` and `decrees` — both wait
-   on the owner's `supabase db push`). Both
+   ODQ §934.28 — 202 — design §12.4's gallery-scanner denial of the
+   settlement editor's two DM-private keys, `dmLayer` and `decrees` — and 203 —
+   the client-mirror totality of that same gallery scanner, adding the three
+   hard-denied conditional ledgers (`factionPairStates`, `envoyErrands`,
+   `concludedWars`) that landed on the client after 136 froze the SQL array —
+   all wait on the owner's `supabase db push`). Both
    figures are derived by the freshness pin rather than kept by hand. The eleven
    declared waves need clone rehearsal, wave receipts, rollback practice, and then
    an authorized deployment.
