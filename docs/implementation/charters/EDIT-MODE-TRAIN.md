@@ -799,3 +799,10 @@ CURE-A `08cb42e31` (the model walker's mask: findings identical under both forms
 
 - **TOOL-13a (RE-CUT):** the schema-23 rung = M1 (the `--report` denominator field, computed outside the byte-frozen blob, naming the four roots the frozen detector's header claims and the two it binds) + M2 (the M12 docblock correction) + the `scanStats` re-freeze, all in `scripts/check-observed-shape-readers.mjs`; minted by the chair through the migration-bundle door on a branch cut at the integration tip after EM-R0a lands, per the compile's §7. The root widening, P1a and `minRows` are CLOSED with reason (§934.73): the legacy detector is frozen as the historical instrument, and the door re-asserts the freeze.
 - **Recorded facts for any future OSR rung:** `writer-reach-scan.mjs` imports the frozen `makeResolver` directly and pins it in its own register — a detector change owes a second re-freeze; `predecessorIncreased` has never been non-zero in the register's history.
+
+## Amendments of 2026-09-20 13:08 EDT — the first composition verified; the lane law; FIX-P4c and DOC-4 chartered (ODQ §934.47 addendum 104)
+
+- **Lane law:** every lane that touches `src/` or `tests/` runs `tests/lint` WHOLE once before its commit (the walkers govern the whole tree; a focused batch never shows them the file).
+- **FIX-P4c (NEW; after FIX-P4b composes):** the two fork-owned files with one unguarded console call each (`public/map/modules/ui/layers.js`, `notes-editor.js`) under the widened F15 walker.
+- **DOC-4 (NEW; the chair's, at a docs sitting):** `docs/implementation/packets/settlement-editor/EM-P2.md:333`'s raw NUL byte in a fenced listing replaced by the `String.fromCharCode(0)` spelling with a note.
+- **TOOL-25 (re-cut):** extend `controlBytes.test.js` (NUL-only tree-wide over `git ls-files`, `.gitattributes` first; the whole-C0 predicate stays on `src`/`tests`); convert the two script/src carriers; `*.glb binary` declared.
