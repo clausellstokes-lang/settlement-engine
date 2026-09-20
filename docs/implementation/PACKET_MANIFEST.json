@@ -32000,6 +32000,295 @@
           "validate"
         ]
       ]
+    },
+    {
+      "id": "EM-B1k2",
+      "status": "READY",
+      "packetPath": "docs/implementation/packets/settlement-editor/EM-B1k2.md",
+      "verifiedBase": "154bd7c07a2e4f6bf900fd8a7572050b9692c79e",
+      "changeManifest": [
+        {
+          "action": "MODIFY",
+          "path": "src/domain/worldPulse/factionDensityKernel.js",
+          "symbol": "advanceFactionDensity",
+          "_note": "⛔ ONE LINE REPLACED, NONE ADDED, +0 EFFECTIVE LINES (395 -> 395, eslint Linter, max-lines skipBlankLines+skipComments, re-measured at 63e40fe57). The tickStart read at :699 becomes `asObject(item.save?.settlement || item.settlement)` — saveSettlement()'s exact meaning (worldSnapshot.js:11-13), inlined. `item` is read nowhere else in the loop but :698, and `reading` is consumed only for `governed` (:714) and `reactions` (:732), so the change is isolated to the IRREVERSIBLE lifecycle decision and the `fresh` fallback (:721-723). Every REVERSIBLE reading (applyCadence's arrival append at :579, the marks) keeps the participation view. Plus a WHY comment; no helper, no import, no reformat. RE-MEASURED at the landed tip: the reaction is produced 7/7 from the filtered read and 0/7 from the raw one, with the 6 legitimate beats identical either way."
+        },
+        {
+          "action": "MODIFY",
+          "path": "src/domain/worldPulse/settlementLifecycleFirstClass.js",
+          "symbol": "applySettlementLifecycleOutcomeToSettlement",
+          "_note": "⛔ COMMENT ONLY — ZERO CODE BYTES, +0 EFFECTIVE LINES (462 -> 462). The function opens at :578 and the dispersal at :611-614 writes a PERMANENT stamp over whatever roster its caller hands it; it has NO save in its signature, so it cannot read raw itself. Its base is applyWorldPulse.js:717's entry.settlement, reaching it through applyOutcomeToSettlement (:733 -> the writer call at :155), made RAW by EM-B1k. Handed the participation view it drops every off-stage soul — MEASURED: roster out 2, dispersed stamps 2, the shelved soul absent, against 3/3/present on the raw base. The comment says so. Precedent for a comment-only MODIFY row: LANDED EM-B1d on src/domain/density/factionLifecycle.js; RULED not logic-bearing by the chair (ODQ §934.47 addendum 39, Q1)."
+        },
+        {
+          "action": "MODIFY",
+          "path": "src/domain/worldPulse/successorNpc.js",
+          "symbol": "replaceOustedNpcs",
+          "_note": "⛔ COMMENT ONLY — ZERO CODE BYTES, +0 EFFECTIVE LINES (50 -> 50), and ⛔ ZERO RENDERED BYTES REQUIRED: this module is in the eager first-paint closure, RE-DERIVED at the tip through vite.config.js's own exported EAGER_FIRST_PAINT_MODULES (268 modules; the earlier replica figure of 251 is retired) — main.jsx -> store/index.js:46 -> settlementSlice.js:72 -> domain/events/mutateEntities.js:37 -> successorNpc.js — and the first-paint closure budget is OWNER-SIGNED with roughly 795 B of recorded margin (CLOSURE_BUDGET_BYTES 1_048_000 at vendorPdfLazy.test.js:565; last measured 1,047,205 at :539). The comment must carry NO /*! , @license or @preserve token — those survive minification. Same shape as the row above: no save in the signature (:64); base is npcVerdictPulse.js:133 <- :99 <- pulseKernel.js:617-618, made RAW by EM-B1k; MEASURED short by every off-stage soul on a filtered base."
+        },
+        {
+          "action": "MODIFY",
+          "path": "src/domain/worldPulse/roadsKernel.js",
+          "symbol": "fullRoster",
+          "_note": "⛔ COMMENT ONLY — ZERO CODE BYTES, +0 EFFECTIVE LINES (838 -> 838). This file sits at EXACTLY its scripts/.size-baseline.json:14 figure of 838, tolerance-zero in BOTH directions (LANDED EP-3A's own requiredSymbols note says so in terms), so a comment is the only lawful edit into it. The region is the THREE-LINE comment at :1094-1096 above the full-roster emit; the symbol `const fullRoster` is at :425 (EM-B1k's §5 ':395' hint was corrected at its LANDED flip, ODQ §934.47 addendum 42). The by-id merge becomes redundant under EM-B1k's raw write base; the CODE stays (harmless and self-consistent) and the comment's sentence 'this full-roster update is the last word, so a hostage is never lost even under a naive save merge' is re-pointed at EM-B1k so the next reader does not take it for the estate's only defence."
+        },
+        {
+          "action": "CREATE",
+          "path": "tests/domain/irreversibleRawRoster.contract.test.js",
+          "symbol": "A1 · A2 · A4 · A5 · A6",
+          "_note": "The red-first suite. ⭐ THE `contract` TOKEN IS DELIBERATE (chair, ODQ §934.47 addendum 43 ruling 3): EXECUTED at the tip, NAME_PATTERN.test('irreversibleRawRoster.contract.test.js') -> TRUE while '…RawRoster.test.js' -> false, so the file opts itself into enumerateInvariants (706 files today) from birth and owes the mutation-coverage row below. ⛔ Opener imported from 'vitest'; ONE literal describe; FIVE straight-line literal `it`s; no .each, no loop or conditional registration, no nested describe; ⛔ never name a variable or parameter `it`, `test` or `describe` (the census resolves an opener only where the module binds that word EXACTLY ONCE). Snapshot items MUST carry `save`: tests/generators/densityLaw.test.js's snapOf (:1412, :1571) builds items WITHOUT one across all 13 drives, which exercises the || fallback and can never prove the cure. ≤250 effective lines. The lighting census is unaffected by the name: parkReasonsFor is classify(src).reasons (sovereigntyLightingContract.walker.test.js:1670) and reads SOURCE, never a path."
+        },
+        {
+          "action": "REGISTER",
+          "path": "scripts/mutation-coverage-manifest.json",
+          "symbol": "invariants[\"tests/domain/irreversibleRawRoster.contract.test.js\"]",
+          "_note": "⛔ ONE ROW, kind 'mutation', with a `label` and a `what`. MEASURED: the register holds 706 invariant entries (rationale 430 / mutation 90 / uncovered 186) and fails closed against a newly enumerated file with no row. `uncovered` is REFUSED — it would be the first RAISE of uncoveredBaseline (186) in the register's life (ODQ §934.47 addendum 43); `rationale` would be false (this suite is not a scanner). The `label` MUST join one-to-one to the plant in scripts/mutation-sweep.sh (mutationCoverageManifest.test.js:130, 'LABEL JOIN'). ⛔ Do not touch uncoveredBaseline. ⛔ COLLISION: EM-B3c (READY) reserves this exact path — see the packet's §13 Q2."
+        },
+        {
+          "action": "REGISTER",
+          "path": "scripts/mutation-sweep.sh",
+          "symbol": "MUTATED_FILES + the new check_caught plant",
+          "_note": "⛔ ~4 LINES. (a) Add src/domain/worldPulse/factionDensityKernel.js to MUTATED_FILES — MEASURED absent (84 entries today), and check_caught's dirty guard plus the leftover check are both scoped to that array. (b) Add the plant in the file's own idiom (the newest three are at :1559-1585): a one-line `perl -0pi -e` that REVERTS §6.1 (asObject(item.save?.settlement || item.settlement) -> asObject(item.settlement)), then `check_caught \"<label>\" src/domain/worldPulse/factionDensityKernel.js \"npx vitest run tests/domain/irreversibleRawRoster.contract.test.js --no-file-parallelism\" \"<A1's EXACT it title>\"`. ⛔ check_caught (:158-190) reds unless the expected title matches EXACTLY ONE FAIL line and the target restores byte-identically. The convicting mutant IS A1's red, so the build lane proves it once and records it twice, with the cp-backup / md5 / cp-restore discipline every neighbouring plant carries. Reserved by NO other packet (zero manifest rows name this file)."
+        },
+        {
+          "action": "TEST",
+          "path": "tests/domain/roadsParticipation.test.js",
+          "symbol": "foundReaders + EXPECTED + the :104 message",
+          "_note": "EM-B1k's reservation is DISCHARGED (LANDED). Its +118 lines moved every address: foundReaders is now :425 with the grep call at :426, UNDISPOSITIONED_NPCS_READERS at :409, UNDISPOSITIONED_CEILING = 7 at :422, the via-snapshot blanket at :191, the EXPECTED rows at :257 (factionDensityKernel, disposition TE-DENSITY-1 at :246-256), :366 (roadsKernel), :367 (settlementLifecycleFirstClass), :368 (successorNpc), and the exactness arm at :430. THE EDIT: (a) the scan gains TWO extra roots (src/domain/density, src/generators/density) and a SECOND -e pattern ('factionRosterOf') — ⛔ two -e flags, NEVER a BRE \\| alternation, because execFileSync('grep') resolves to BSD grep on macOS and GNU grep in CI; measured 41 -> 44 under both engines. (b) THREE new EXPECTED rows WITH dispositions: src/domain/density/factionLifecycle.js (irreversible => RAW), src/generators/density/applyDensityLaw.js (disperseNamedRoster at :317 reads input.npcs at :319 at GENERATION time — its one importer is narrativeGenerator.js:33/:995, where no snapshot exists), src/generators/density/titularSuccession.js (DARK — no src/ importer; reachable only through the second pattern; the packet that wires it owes the raw base). ⛔ MEASURED CORRECTION to the chair's brief: the fourth ROOT alone convicts applyDensityLaw.js, NOT titularSuccession.js, whose file never spells the literal '.npcs' — packet §13 Q1 carries the two options. (c) rewrite three dispositions (factionDensityKernel keeps its TE-DENSITY-1 clause and GAINS a lifecycle clause; settlementLifecycleFirstClass and successorNpc stop inheriting the :191 via-snapshot blanket, which is false for both). (d) the one-apostrophe possessive fix at :104 ('the estate own lifecycle reader' -> \"the estate's own lifecycle reader\") — EM-B1k's receipt item 7, fated here by addendum 42. A3 extends the EXISTING exactness arm — NO NEW `it`, so ZERO title delta in this file. ⛔ UNDISPOSITIONED_NPCS_READERS and UNDISPOSITIONED_CEILING = 7 stay byte-identical."
+        }
+      ],
+      "requiredSymbols": [
+        {
+          "path": "src/domain/worldPulse/factionDensityKernel.js",
+          "symbol": "export function advanceFactionDensity",
+          "_note": "The host of the one changed line (:671). Survives the edit verbatim."
+        },
+        {
+          "path": "src/domain/worldPulse/factionDensityKernel.js",
+          "symbol": "function applyReactions",
+          "_note": "The confirmation's home (:234) — the `stillEmpty` read over `fresh` (:262) and the interregnum mark-clearing arm (:287). Untouched."
+        },
+        {
+          "path": "src/domain/worldPulse/factionDensityKernel.js",
+          "symbol": "function applyCadence",
+          "_note": "The REVERSIBLE reader that keeps the participation view (:579, the emergence founder append). Untouched — naming it makes the no-change provable."
+        },
+        {
+          "path": "src/domain/density/factionLifecycle.js",
+          "symbol": "export function readFactionLifecycle",
+          "_note": "The R18 law (:155). Its reaction list is what stops being minted once its base is raw (A1, re-measured 7/7 -> 0/7 at the landed tip)."
+        },
+        {
+          "path": "src/domain/density/factionLifecycle.js",
+          "symbol": "export function factionRosterOf",
+          "_note": "The roster filter (:113) both the law and the confirmation consume — and, from version 2, the second pattern of the census scan."
+        },
+        {
+          "path": "src/domain/density/factionLifecycle.js",
+          "symbol": "export const ROSTER_ABSENT_STATUSES",
+          "_note": "EM-B1d's LANDED byte-identical pin (:87). Untouched; named so the no-change is provable across the collision."
+        },
+        {
+          "path": "src/domain/worldPulse/worldSnapshot.js",
+          "symbol": "export function buildWorldSnapshot",
+          "_note": "⛔ FORBIDDEN TO EDIT (an input of two edge-shared bundles — though measured 0 hits across all five metas' inputs for the paths this packet touches). The participation view differs from saveSettlement(save) in `npcs` and nothing else (:124-133), which is what makes the one-token swap equivalent to a roster swap; `settlement = _s` at :132 is the by-reference identity when nobody is off-stage."
+        },
+        {
+          "path": "src/domain/worldPulse/pulseKernel.js",
+          "symbol": "function buildSettlementMap",
+          "_note": "EM-B1k's seam, now LANDED: :184 reads `localSettlements.get(String(item.id)) || item.save?.settlement || item.settlement`. ⛔ NOT edited here. The symbol survives EM-B1k's replacement verbatim. ⚠ CURE-F is rewriting :579's comparand in the same window."
+        },
+        {
+          "path": "src/domain/worldPulse/applyWorldPulse.js",
+          "symbol": "function applyOutcomeToSettlement",
+          "_note": "Permanent writer 1's caller: :717 reads entry.settlement from the settlementUpdates map built from buildSettlementMap (:290) and hands it over at :733; the writer itself is invoked at :155. The proposal paths at :1209 and :1308 build their maps from `save.settlement || save` and are already raw; the priced re-set at :607-609 cannot mint an entry without .settlement (its producer, applyLegitimacyHits, only ever maps entries)."
+        },
+        {
+          "path": "src/domain/worldPulse/settlementLifecycleFirstClass.js",
+          "symbol": "export function applySettlementLifecycleOutcomeToSettlement",
+          "_note": "Permanent writer 1 (:578). Comment-only edit; the symbol survives."
+        },
+        {
+          "path": "src/domain/worldPulse/successorNpc.js",
+          "symbol": "export function replaceOustedNpcs",
+          "_note": "Permanent writer 2 (:64). Comment-only edit; the symbol survives. Its name join (:65, :70) is CLOSED by the 525-row census: 0 duplicate display names across 5,171 rostered NPCs."
+        },
+        {
+          "path": "src/domain/worldPulse/npcVerdictPulse.js",
+          "symbol": "export function applyOrganicNpcVerdicts",
+          "_note": "Permanent writer 2's caller (:79; the call at :133-135, replacementSource bound at :99). Untouched. ⚠ It also sits in the ratchet's quarantine (:409-421) — not this packet's debt to bank."
+        },
+        {
+          "path": "src/domain/worldPulse/roadsKernel.js",
+          "symbol": "const fullRoster",
+          "_note": "The by-id merge (:425) whose comment at :1094-1096 is re-pointed. Code untouched; tolerance-zero file."
+        },
+        {
+          "path": "src/domain/roads/state.js",
+          "symbol": "export function isOffStage",
+          "_note": "⛔ THE ONE PARTICIPATION CHOKEPOINT (:157). Untouched — ODQ §934.60 forbids adding anything to it before EM-B1k lands, and this packet adds nothing to it ever."
+        },
+        {
+          "path": "tests/domain/roadsParticipation.test.js",
+          "symbol": "function foundReaders",
+          "_note": "The live scan, now at :425. Its BODY gains two roots and a second -e pattern; the symbol text survives verbatim."
+        },
+        {
+          "path": "tests/domain/roadsParticipation.test.js",
+          "symbol": "const UNDISPOSITIONED_NPCS_READERS",
+          "_note": "⛔ The quarantine, at :409. Byte-identical: the three new convictions go to EXPECTED with dispositions, never here."
+        },
+        {
+          "path": "tests/domain/roadsParticipation.test.js",
+          "symbol": "const UNDISPOSITIONED_CEILING = 7",
+          "_note": "⭐ ADDED in version 2 (nothing removed): the ceiling at :422, quoted WITH its value so the no-raise is provable verbatim rather than by inspection."
+        },
+        {
+          "path": "src/generators/density/applyDensityLaw.js",
+          "symbol": "export function disperseNamedRoster",
+          "_note": "⭐ NEW in version 2. The fourth root's REAL conviction (:317; the `.npcs` read at :319). Untouched — it earns an EXPECTED row and a disposition, not an edit. Its one importer is src/generators/narrativeGenerator.js:33, called at :995 (generation time, no snapshot)."
+        },
+        {
+          "path": "src/generators/density/titularSuccession.js",
+          "symbol": "import { factionRosterOf } from '../../domain/density/factionLifecycle.js';",
+          "_note": "⭐ NEW in version 2. The DARK caller the chair named (:74; the reads at :177 and :231). The literal '.npcs' never appears in this file, which is why the census's second -e pattern is what reaches it. No src/ importer exists. Untouched."
+        },
+        {
+          "path": "scripts/mutation-sweep.sh",
+          "symbol": "MUTATED_FILES=(",
+          "_note": "⭐ NEW in version 2. The guard array (84 entries; factionDensityKernel.js absent) the plant must join, quoted verbatim so the insertion point is unambiguous."
+        },
+        {
+          "path": "scripts/mutation-coverage-manifest.json",
+          "symbol": "\"uncoveredBaseline\": 186",
+          "_note": "⭐ NEW in version 2. Quoted WITH its value: this packet adds one `mutation` row and must leave the uncovered baseline exactly where it is. A raise would be the first in the register's life."
+        }
+      ],
+      "retiredSymbols": [],
+      "acceptanceCases": [
+        {
+          "id": "A1",
+          "case": "THE HABITAT IS GONE — with the sole member of a non-governing house shelved through applyNpcOp('stasis-npc'), readFactionLifecycle over the tick-start base mints NO reaction for that house (today, over the filtered view, it mints faction_dissolved — re-measured 7 of 7 at the landed tip), while the town's already-empty houses still mint theirs (6 of 6, the non-vacuity control)."
+        },
+        {
+          "id": "A2",
+          "case": "NOTHING MOVES — advanceFactionDensity driven with a filtered and a raw tick-start base over the same raw update entry returns deep-equal {changed, newsEntries, settlementUpdates}; and a v1 world returns the same worldState and settlementUpdates references with zero beats."
+        },
+        {
+          "id": "A3",
+          "case": "THE CENSUS'S NEW CONVICTIONS — the widened four-root, two-pattern scan returns exactly EXPECTED ∪ UNDISPOSITIONED_NPCS_READERS (44 files), the three new members being src/domain/density/factionLifecycle.js, src/generators/density/applyDensityLaw.js and src/generators/density/titularSuccession.js, with the quarantine list and its ceiling unchanged and the honesty arm green. (43 and two members under §13 Q1 option (b).)"
+        },
+        {
+          "id": "A4",
+          "case": "THE FALLBACK ARM — with an update entry carrying no .settlement, so fresh falls back to tickStart, the shelved sole member's house is not dissolved and no faction_dissolved beat names it (today it is dissolved 7/7 across the stride, even with EM-B1k's raw write base). The arm is defence-in-depth by construction: the pre-proof traced both producers and neither can mint such an entry today, and nothing in the tree asserts that."
+        },
+        {
+          "id": "A5",
+          "case": "THE DISPERSAL CARRIES THE OFF-STAGE SOUL — applySettlementLifecycleOutcomeToSettlement driven at its real trigger (a terminal_death lifecyclePatch on a bottom-rung thorp; settlementLifecycleEnabled is lit in all four presets) over the raw base stamps dispersed:true on every soul including the shelved one, and the same outcome over the participation view shows them missing."
+        },
+        {
+          "id": "A6",
+          "case": "THE SUCCESSOR PASS KEEPS THE OFF-STAGE SOUL AND THE NAME JOIN IS SAFE — replaceOustedNpcs driven at its real trigger (an 'ousted' exposure, minted by advanceNpcCorruption which pulseKernel.js:388 calls unconditionally) over the raw base replaces the ousted person AND keeps the shelved one, the same drive over the participation view shows them missing, and the drive's own roster carries no two NPCs sharing String(name).toLowerCase() — the uniqueness the chair's Q4 ruling folds in, anchored on the measured corpus fact of 0 duplicates across 525 rows / 5,171 NPCs. (Addendum 39 says A5; the join lives here — packet §13 Q4.)"
+        },
+        {
+          "id": "A7",
+          "case": "THE GOLDENS AND THE PARTICIPATION GUARANTEES — generatorGoldenMaster, dossierProseManifest, roadsDormancyGolden and the preset-lighting witness are bytewise unchanged, and roadsParticipation's master-gate and ladder-belt arms stay green untouched. Justified by measurement: no fixture in tests/fixtures/ holds \"stasis\" or \"whereabouts\"."
+        },
+        {
+          "id": "A8",
+          "case": "THE CEILINGS AND THE REGISTERS HELD — 395/462/50/838 effective lines after the edits, tests/lint/sizeBaseline.test.js green, and tests/lint/mutationCoverageManifest.test.js green with the new row and its plant joined one-to-one and uncoveredBaseline unmoved at 186. The byte arms are the chair's landing measurement (a real build + verify:dist): zero attributed movement for successorNpc.js and ≤200 B for factionDensityKernel.js."
+        }
+      ],
+      "checks": [
+        [
+          "npx",
+          "eslint",
+          "src/domain/worldPulse/factionDensityKernel.js",
+          "src/domain/worldPulse/settlementLifecycleFirstClass.js",
+          "src/domain/worldPulse/successorNpc.js",
+          "src/domain/worldPulse/roadsKernel.js",
+          "tests/domain/irreversibleRawRoster.contract.test.js",
+          "tests/domain/roadsParticipation.test.js"
+        ],
+        [
+          "npm",
+          "run",
+          "typecheck:ratchet"
+        ],
+        [
+          "npm",
+          "run",
+          "typecheck:domain:strict"
+        ],
+        [
+          "npx",
+          "vitest",
+          "run",
+          "--pool=threads",
+          "--maxWorkers=2",
+          "tests/domain/irreversibleRawRoster.contract.test.js",
+          "tests/domain/roadsParticipation.test.js",
+          "tests/domain/settlementLifecycleFirstClass.test.js",
+          "tests/domain/successorNpc.test.js",
+          "tests/domain/demographicsFloor.test.js",
+          "tests/domain/settlementLifecycleVerbs.test.js",
+          "tests/domain/warH2VerdictComposition.test.js"
+        ],
+        [
+          "npx",
+          "vitest",
+          "run",
+          "--pool=threads",
+          "--maxWorkers=2",
+          "tests/generators/densityLaw.test.js"
+        ],
+        [
+          "npx",
+          "vitest",
+          "run",
+          "--pool=threads",
+          "--maxWorkers=2",
+          "tests/property/generatorGoldenMaster.test.js",
+          "tests/property/dossierProseManifest.test.js",
+          "tests/property/roadsDormancyGolden.test.js"
+        ],
+        [
+          "npx",
+          "vitest",
+          "run",
+          "--pool=threads",
+          "--maxWorkers=2",
+          "tests/lint/sizeBaseline.test.js"
+        ],
+        [
+          "npx",
+          "vitest",
+          "run",
+          "--pool=threads",
+          "--maxWorkers=2",
+          "tests/lint/mutationCoverageManifest.test.js"
+        ],
+        [
+          "node",
+          "scripts/check-observed-shape-readers.mjs"
+        ],
+        [
+          "node",
+          "scripts/check-writer-reach.mjs"
+        ],
+        [
+          "npx",
+          "vitest",
+          "run",
+          "--pool=threads",
+          "--maxWorkers=2",
+          "tests/lint/contractTestAntiVacuity.walker.test.js"
+        ],
+        [
+          "node",
+          "scripts/implementation-packets.mjs",
+          "validate"
+        ]
+      ]
     }
   ]
 }
