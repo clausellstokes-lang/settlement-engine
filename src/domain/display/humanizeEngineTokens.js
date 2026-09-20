@@ -22,8 +22,11 @@ const WEEKS_PER_YEAR = 52;
 const WEEKS_PER_SEASON = 13;
 const SEASONS = Object.freeze(['spring', 'summer', 'autumn', 'winter']);
 /** @type {Readonly<Record<string, string>>} */
+// ⚠ `thorp` READS AS "Thorpe" (ODQ §934.63 F14): one word on every reader-facing
+// surface. Pinned equal to config/tierFacts.js SIZE_LABEL by
+// tests/copy/tierWord.census.test.js.
 const SETTLEMENT_SIZE_LABELS = Object.freeze({
-  thorp: 'Thorp',
+  thorp: 'Thorpe',
   hamlet: 'Hamlet',
   village: 'Village',
   town: 'Town',

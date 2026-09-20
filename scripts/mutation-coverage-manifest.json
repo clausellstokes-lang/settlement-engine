@@ -399,6 +399,11 @@
     "tests/copy/spellBreakCensus.test.js": {
       "kind": "uncovered"
     },
+    "tests/copy/tierWord.census.test.js": {
+      "kind": "rationale",
+      "rationale": "THE TIER WORD (ODQ §934.63 F14: the refusal printed 'thorpe' where the Compendium and the gallery printed 'Thorp'). Its catching power is EXECUTED IN-SUITE ON EVERY GATE RUN rather than weekly, and by the only means that would work here: the census PARSES THE SHIPPED src/ TREE on every run and derives both halves of its claim from production modules -- the one word from config/tierFacts.js SIZE_LABEL, and the population from the source itself, so a SIXTH tier-label table written tomorrow is judged the moment it exists. Its predicate is the part that could go silently vacuous, and four executed controls hand `tablesIn` real source strings in both directions: a table agreeing on three rungs and spelling the smallest 'Thorp' IS convicted and its value carried out of the scan; the wizard's size HINTS, a lower-case slug map and a numeric tier map are NOT (the first run met all three shapes in src/, and a looser predicate had claimed seven objects that do not name tiers at all). Two further arms cannot go vacuous by construction: the walk asserts it read at least 500 files and found at least five tables across at least two layers, and the REGISTER's compendium row is re-derived LIVE from the generated artifact -- it asserts the artifact still says 'Thorp', so the day that handover is done the row REDS and must be deleted instead of outliving its cause. A STANDING SWEEP PLANT IS NOT OFFERED: every mutable target is a shared display table (src/components/new/design.js, src/pdf/lib/viewModel.js, src/domain/display/humanizeEngineTokens.js, src/config/tierFacts.js) that concurrent lanes hold uncommitted work in, and check_caught's revert is a `git checkout --` that would discard it. Promote to kind:mutation when the lane program folds.",
+      "kindNote": "rationale rather than a standing sweep plant: the predicate and the register are both proved by controls that execute on every gate, and every plantable target is a file concurrent lanes edit."
+    },
     "tests/copy/voiceMechanics.test.js": {
       "kind": "mutation",
       "label": "voice/exclamation in scanned data prose"

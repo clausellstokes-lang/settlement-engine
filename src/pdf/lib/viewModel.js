@@ -51,8 +51,12 @@ const LEGITIMACY_FACTOR_LABELS = {
   food:       'Food security',
 };
 
+// ⚠ `thorp` READS AS "Thorpe" (ODQ §934.63 F14) — the same word the screen prints, for
+// the same reason labelCase.js gives for living where it lives: a DM who reads "Thorpe"
+// on screen and "Thorp" in the document they paid for has met two spellings of one rung.
+// Pinned equal to config/tierFacts.js SIZE_LABEL by tests/copy/tierWord.census.test.js.
 const TIER_LABELS = {
-  thorp: 'Thorp', hamlet: 'Hamlet', village: 'Village',
+  thorp: 'Thorpe', hamlet: 'Hamlet', village: 'Village',
   town: 'Town', city: 'City', metropolis: 'Metropolis',
 };
 
