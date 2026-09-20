@@ -429,9 +429,16 @@ export const en = Object.freeze({
       rubric: 'Free settlements',
       body:   'Today’s free settlements are spent. Sign in, free, to keep forging and to reach {sizes}.',
     },
+    // ⛔ "THIS ACCOUNT" WAS SAID TO A VISITOR WITH NO ACCOUNT (REVIEW-P F13). The
+    // 2026-09-20 anonymous walk forked the Black Crag sample and was told "A City is
+    // past what THIS ACCOUNT forges" — a sentence that names a thing the reader does
+    // not have, on the one surface whose next clause is an invitation to make one.
+    // `{holder}` is the same class of fact as `{size}` and `{max}`: measured at the
+    // gate, which is the only place the tier is known, and derived in ONE home
+    // (config/tierFacts.js accountHolderPhrase) so the two phrasings cannot drift.
     tier: {
       rubric: 'A bigger settlement',
-      body:   'A {size} is past what this account forges; it reaches up to a {max}. Sign in (free) to reach {sizes}.',
+      body:   'A {size} is past what {holder} forges; it reaches up to a {max}. Sign in (free) to reach {sizes}.',
     },
     // ⛔ THE FLOOR IS NOT THE CEILING, AND THE CEILING'S SENTENCE WAS FALSE ON IT
     // (§934.34). `isTierAllowed` refuses a RANGE; for a thorpe at an anonymous visitor
@@ -443,9 +450,12 @@ export const en = Object.freeze({
       rubric: 'A smaller settlement',
       body:   'A {size} takes an account. Without one the forge starts at a {min}. Sign in (free) to reach {sizes}.',
     },
+    // The SAME "this account" defect as `tier` above, reached by the other door: this
+    // is the sentence an anonymous visitor meets when a 'random' roll lands over the
+    // ceiling, so it is cured in the same edit rather than left as the next lane's find.
     resolvedTier: {
       rubric: 'A bigger settlement',
-      body:   'That roll came out a {size}, past what this account forges, so it was not kept. Pick a size yourself, or sign in (free) to reach every one.',
+      body:   'That roll came out a {size}, past what {holder} forges, so it was not kept. Pick a size yourself, or sign in (free) to reach every one.',
     },
     generationFailed: {
       rubric:  'Generation failed',
@@ -478,6 +488,30 @@ export const en = Object.freeze({
     realmNeedsTablet: {
       rubric: 'The Realm',
       body:   'The realm map opens on a tablet or larger screen. Your world is saved and waiting, exactly here, when you next sit down at one.',
+    },
+    // ⛔ THE NARRATIVE LAYER READS A TOWN, IT NEVER INVENTS ONE (REVIEW-P F4). The
+    // landing's "Narrate" navigated to /create with nothing said and nothing forged.
+    // The sentence states the ORDER of the two acts rather than a price, because the
+    // credits plate beside the button already carries the price and the reader's
+    // problem here is that there is no dossier to read.
+    narrateNeedsTown: {
+      rubric: 'Nothing to narrate yet',
+      body:   'The Narrative Layer reads a town that already exists; it never invents one. Forge a settlement first, and the voice is waiting on its dossier.',
+    },
+    // ⛔ THE DESTINATION WAS KEPT AND THE REASON DROPPED (REVIEW-P F10). `{page}` is the
+    // guarded route's own label from lib/routes.js, so this sentence can never name a
+    // page the router does not have. The door is the form directly below it, which is
+    // why this reason offers no second control of its own.
+    authRequired: {
+      rubric: 'Sign in to continue',
+      body:   '{page} belongs to an account. Sign in below and you land there.',
+    },
+    // ⛔ A DEAD LINK LOOKED LIKE IT WORKED (REVIEW-P F11). The address is quoted back
+    // because it is the only fact the reader can act on: it tells them whether they
+    // mistyped it or whether the link they followed has rotted.
+    pageNotFound: {
+      rubric: 'No such page',
+      body:   'There is no page at {path}, so this is the Create page instead. The address may be mistyped, or the link that sent you here may have gone stale.',
     },
   },
 

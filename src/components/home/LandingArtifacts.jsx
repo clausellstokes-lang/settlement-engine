@@ -43,6 +43,7 @@ import {
 } from '../theme.js';
 import { useStore } from '../../store/index.js';
 import RefusalNotice from '../primitives/RefusalNotice.jsx';
+import { raisedHere, REFUSAL_REASONS, REFUSAL_SURFACES, refusalOf } from '../../lib/refusalReasons.js';
 import { trackLandingFixtureForge } from '../../lib/landingFunnelAnalytics.js';
 import { tl } from '../../copy/landing.js';
 import { fixture } from './landingFixture.js';
@@ -173,7 +174,10 @@ function ForgeExactButton({ onNavigate }) {
       setRandomSliderMode(fixture.forge.randomSliderMode);
       clearNeighbour();
       updateConfig({ ...fixture.forge.config });
-      const forged = await generate(fixture.seed);
+      // `at` names WHERE the reader clicked (REVIEW-P F12): one store record was
+      // painted by every mount on the page, so one refusal was announced twice. The
+      // gate stamps this key; only this surface says what it raised.
+      const forged = await generate(fixture.seed, { at: REFUSAL_SURFACES.LANDING_ARTIFACTS });
       // ⛔ A REFUSAL NEVER NAVIGATES. The old `finally` navigated on EVERY path, so a
       // refused or failed forge still threw the reader at /create with no settlement
       // and no reason — which is indistinguishable, from the chair, from nothing
@@ -194,7 +198,7 @@ function ForgeExactButton({ onNavigate }) {
       <Button variant="secondary" size="sm" busy={forging} onClick={forgeExact}>
         {tl('brief.forgeExact')}
       </Button>
-      <RefusalNotice refusal={lastRefusal} />
+      <RefusalNotice refusal={raisedHere(lastRefusal, REFUSAL_SURFACES.LANDING_ARTIFACTS) ? lastRefusal : null} />
     </span>
   );
 }
@@ -276,6 +280,54 @@ export function MiniDossierCard({ onNavigate }) {
         </div>
       </div>
     </div>
+  );
+}
+
+// ── 03 · Voice — the section's own ask ───────────────────────────────────────
+//
+// ⛔ AN ENABLED "NARRATE" THAT NARRATED NOTHING (REVIEW-P F4, ODQ §934.24(c)). The
+// §03 button sat under a "5 credits" plate and called `onNavigate('generate')` on
+// EVERY click: measured from a clean anonymous context the walk recorded
+// `store.settlement: false`, `dialogs: []`, `alerts: []` and an `href` of /create —
+// the reader asked for narration, got no narration, no notice, and a different page.
+// That is this register's founding shape ("three of the four answered a refusal by
+// navigating") wearing a call-to-action's coat.
+//
+// THE NARRATIVE LAYER READS A TOWN. It is grounded in the dossier and never invents
+// facts (the section's own `voice.aiNote` says so three lines above the button), so
+// with nothing on the store there is nothing for it to read — and that, not the
+// price, is the reader's actual problem. With a settlement in hand the navigation is
+// not a refusal at all and is left exactly as it was: the dossier is where the
+// Narrate control lives.
+//
+// The reason is raised by this SURFACE rather than by a gate in the generation lane,
+// like the Realm's and the wizard's locked options; it is held in local state and
+// never on the store, so it cannot travel to another page and cannot collide with a
+// generation refusal raised beside it.
+export function VoiceNarrateButton({ onNavigate }) {
+  const settlement = useStore((s) => s.settlement);
+  const [refusal, setRefusal] = useState(null);
+
+  const narrate = () => {
+    if (!settlement) { setRefusal(refusalOf(REFUSAL_REASONS.NARRATE_NEEDS_TOWN)); return; }
+    setRefusal(null);
+    onNavigate('generate');
+  };
+
+  return (
+    // The control and its refusal are ONE block — the notice renders directly beneath
+    // the button the reader pressed, never on another page (the ForgeExactButton idiom).
+    <span style={{ display: 'inline-flex', flexDirection: 'column', alignItems: 'flex-start', gap: SP.sm }}>
+      <Button variant="ai" onClick={narrate}>{tl('voice.cta')}</Button>
+      <RefusalNotice
+        refusal={refusal}
+        actions={(
+          <Button variant="secondary" size="sm" onClick={() => onNavigate('generate')}>
+            {tl('voice.narrateDoor')}
+          </Button>
+        )}
+      />
+    </span>
   );
 }
 

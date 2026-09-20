@@ -56,7 +56,7 @@ import { isConfigured as galleryBackendConfigured } from '../../lib/supabase.js'
 // single-sourced without making the landing pay for the create page's closure.
 const FoundingWorlds = lazy(() => import('../generate/FoundingWorlds.jsx'));
 import {
-  MiniDossierCard, VoiceCards, AdvanceTimeCard, RealmMapCard, SCENE, cardStyle,
+  MiniDossierCard, VoiceCards, VoiceNarrateButton, AdvanceTimeCard, RealmMapCard, SCENE, cardStyle,
 } from './LandingArtifacts.jsx';
 import { settlementCardImage, tierStockImage } from '../../domain/display/tierStockImage.js';
 
@@ -588,7 +588,14 @@ export default function LandingBelowFold({ isMobile, onNavigate }) {
           </div>
           <VoiceCards />
           <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: SP.md, marginTop: SP.xl, flexWrap: 'wrap' }}>
-            <Button variant="ai" onClick={() => onNavigate('generate')}>{tl('voice.cta')}</Button>
+            {/* ⛔ THE ASK IS A CONTROL WITH A REASON NOW (REVIEW-P F4). It used to be a
+                bare `onNavigate('generate')` that moved the reader off the landing with
+                nothing forged and nothing said; VoiceNarrateButton keeps the navigation
+                for a reader who HAS a town and raises the registered reason where the
+                click happened for a reader who does not. It lives in LandingArtifacts
+                beside its sibling ForgeExactButton, which already carries this chunk's
+                store and notice imports, so this section gains no module of its own. */}
+            <VoiceNarrateButton onNavigate={onNavigate} />
             <Button
               variant="ghost"
               size="sm"

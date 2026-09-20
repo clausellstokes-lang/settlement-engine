@@ -84,11 +84,30 @@ async function runLane(store, seed, options) {
   }
 }
 
+/**
+ * EVERY FACT ANY REGISTERED REASON'S SENTENCE INTERPOLATES, in one bag.
+ *
+ * ⛔ THIS BAG IS THE ARM'S DENOMINATOR, SO IT GROWS WITH THE REGISTER. The arms below
+ * assert that a reason's words RESOLVE — no dotted key, no `{placeholder}` reaching a
+ * reader — and `t()` leaves a var it was not given as the literal `{name}`. So a reason
+ * that names a new fact must be named here in the same edit, exactly as it must be given
+ * a copy row and a raiser; a reason whose fact is missing here still reds, which is what
+ * keeps this a measurement rather than a blanket.
+ *
+ * `page` and `path` joined on 2026-09-20 with `authRequired` and `pageNotFound`
+ * (REVIEW-P F10 and F11). `holder` is deliberately ABSENT: RefusalNotice supplies it as a
+ * default beside `{sizes}`, and leaving it out of this bag is what proves that default
+ * is live.
+ */
+const EVERY_VAR = Object.freeze({
+  size: 'City', max: 'Town', min: 'Hamlet', page: 'Account', path: '/this-page-does-not-exist',
+});
+
 describe('the refusal register reaches a reader', () => {
   test('every registered reason resolves to real words (no dotted key, no blank)', () => {
     expect(REFUSAL_REASON_IDS.length).toBeGreaterThanOrEqual(5);
     for (const reason of REFUSAL_REASON_IDS) {
-      const copy = refusalCopy(reason, { size: 'City', max: 'Town', min: 'Hamlet' });
+      const copy = refusalCopy(reason, EVERY_VAR);
       expect(copy, `${reason} resolves to nothing`).not.toBeNull();
       expect(copy.rubric.length, `${reason} rubric is blank`).toBeGreaterThan(2);
       expect(copy.body.length, `${reason} body is blank`).toBeGreaterThan(20);
@@ -103,7 +122,7 @@ describe('the refusal register reaches a reader', () => {
 
   test('every registered reason RENDERS as an announced notice', () => {
     for (const reason of REFUSAL_REASON_IDS) {
-      const { unmount } = render(<RefusalNotice refusal={refusalOf(reason, { size: 'City', max: 'Town', min: 'Hamlet' })} />);
+      const { unmount } = render(<RefusalNotice refusal={refusalOf(reason, EVERY_VAR)} />);
       const alert = screen.getByRole('alert');
       expect(alert.textContent, `${reason} rendered nothing`).toContain(refusalCopy(reason).rubric);
       unmount();

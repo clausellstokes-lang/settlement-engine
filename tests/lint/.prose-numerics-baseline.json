@@ -139,7 +139,7 @@
           },
           {
                     "path": "src/components/home/LandingArtifacts.jsx",
-                    "line": 238,
+                    "line": 242,
                     "category": "floatInterpolation",
                     "snippet": "{town.pressure}"
           },

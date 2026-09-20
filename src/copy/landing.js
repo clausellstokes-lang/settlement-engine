@@ -142,6 +142,13 @@ export const landing = {
     rawTag: 'what the engine derived',
     credit:      '5 credits',
     cta:         'Narrate',
+    // ⛔ THE DOOR OUT OF THE NARRATE REFUSAL (REVIEW-P F4, ODQ §934.24(c)). The CTA
+    // used to navigate to /create on every click with nothing said; it now raises the
+    // registered `narrateNeedsTown` reason where the reader clicked, and THIS is the
+    // control on that notice — the reader's second, informed click. The label names
+    // the act rather than the destination, because the notice above it has already
+    // said why the forge has to come first.
+    narrateDoor: 'Forge a settlement',
     pricingLink: 'Credit pricing',
   },
 

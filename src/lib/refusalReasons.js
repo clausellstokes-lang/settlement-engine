@@ -95,10 +95,96 @@ export const REFUSAL_REASONS = Object.freeze({
    * a property of the surface, not of the reader's request.
    */
   REALM_NEEDS_TABLET: 'realmNeedsTablet',
+  /**
+   * ⛔ THE LANDING'S "NARRATE" MOVED THE READER AND SAID NOTHING (REVIEW-P F4).
+   * The §03 voice section offers an ENABLED "Narrate" under a "5 credits" plate;
+   * clicking it from a clean anonymous context navigated to /create with no
+   * settlement and no notice — the reader asked for narration and was silently
+   * moved off the page, which is this register's founding shape wearing a CTA's
+   * coat. The Narrative Layer READS a town (domain/aiGrounding.js: it never
+   * invents facts), so with no town on the store there is nothing for it to read.
+   * Raised by the SURFACE, like the Realm's and the wizard's locked options: it
+   * states a property of the click, not of a gate in the generation lane.
+   */
+  NARRATE_NEEDS_TOWN: 'narrateNeedsTown',
+  /**
+   * ⛔ THE GUARD KEPT THE DESTINATION AND DROPPED THE REASON (REVIEW-P F10).
+   * App's auth guard sends an anonymous visitor at a guarded route to
+   * `/signin?next=<path>` — a door, not a refusal, and that redirect stays. But
+   * the sign-in page led with the generic "Welcome back", so a reader who had
+   * clicked /account was given no account of why they were suddenly at a form.
+   * The page reads `next`, and when it names a route whose guard is 'auth' this
+   * reason names the page that is waiting. Its `{page}` var is the route's own
+   * label (lib/routes.js routeLabelForView), never a path and never a raw view id.
+   */
+  AUTH_REQUIRED: 'authRequired',
+  /**
+   * ⛔ A DEAD LINK LOOKED LIKE IT WORKED (REVIEW-P F11). lib/routes.js has always
+   * returned `notFound: true` for an unknown path, and the canonical-URL upgrade
+   * rewrote the address to /create and discarded it — so a mistyped or rotted link
+   * landed a visitor on the Create page with the door closed behind them and
+   * nothing said. Raised by the ROUTE, like the Realm's; its `{path}` var is the
+   * address the reader actually asked for, which is the only fact they can use.
+   */
+  PAGE_NOT_FOUND: 'pageNotFound',
 });
 
 /** The ids, as an array, for walkers and for exhaustiveness checks. */
 export const REFUSAL_REASON_IDS = Object.freeze(Object.values(REFUSAL_REASONS));
+
+/**
+ * ⛔ THE MIRROR-IMAGE DEFECT: ONE RECORD, RENDERED WHERE NOBODY CLICKED (REVIEW-P F12).
+ *
+ * The law is that a refusal is said WHERE THE READER CLICKED. `lastRefusal` is ONE
+ * record on the store and every surface renders it, so on a page carrying two forging
+ * controls the reader was told twice: the 2026-09-20 walk forked the Black Crag city
+ * card on /create and measured TWO `role="alert"` nodes with byte-identical copy — one
+ * above the hero CTA, one above the Founding Worlds strip. An assistive reader hears
+ * the same sentence announced twice for one click, and the copy points at a control
+ * the reader did not touch.
+ *
+ * ⚠ THE WALK SAW THE SMALLEST INSTANCE. Reading every store-fed mount: the /create
+ * CONFIG stage pairs GenerateWizard with LayeredConfigurationPanel's SeedField, and
+ * /home on desktop carries THREE (the hero, §02's forge-this-town, the commons strip).
+ *
+ * ⭐ SO THE RECORD NAMES WHERE IT WAS EARNED. A surface asks with its own key
+ * (`generateSettlement(seed, { at })`, beside the `intent` that names who is asking),
+ * the gate stamps it on the record, and a surface renders only what it raised.
+ *
+ * ⛔ AN UNKEYED RECORD IS RENDERED BY EVERYONE, DELIBERATELY. That is the behaviour
+ * every surface had before this existed, so a raiser that does not key itself — a
+ * route-raised reason, a hand-built record in a test, a caller written before this
+ * field — loses nothing and says its piece exactly as it did. Keying is how a surface
+ * OPTS IN to being the only one that speaks, never a condition of being heard.
+ *
+ * The keys are registered rather than spelled at the call sites for the same reason
+ * the reason ids are: a walker can then prove each one is both passed and compared,
+ * and a typo cannot silently produce a surface that never speaks.
+ */
+export const REFUSAL_SURFACES = Object.freeze({
+  /** The landing + create-empty-state hero CTA (components/HomeHero.jsx). */
+  HOME_HERO: 'homeHero',
+  /** The curated sample strip (components/generate/FoundingWorlds.jsx). */
+  FOUNDING_WORLDS: 'foundingWorlds',
+  /** §02's "Forge this exact town" (components/home/LandingArtifacts.jsx). */
+  LANDING_ARTIFACTS: 'landingArtifacts',
+  /** The wizard's own Generate + the dossier's Regenerate (components/GenerateWizard.jsx). */
+  GENERATE_WIZARD: 'generateWizard',
+  /** The exact-seed forge (components/generate/LayeredConfigurationPanel.jsx). */
+  SEED_FIELD: 'seedField',
+});
+
+/**
+ * Is this record this surface's to say? True for a record raised HERE, and true for an
+ * unkeyed record, which every surface renders exactly as it always has.
+ *
+ * @param {{ reason: string, at?: string|null }|null|undefined} refusal the store's record
+ * @param {string} surface one of REFUSAL_SURFACES
+ * @returns {boolean}
+ */
+export function raisedHere(refusal, surface) {
+  return !!refusal && (!refusal.at || refusal.at === surface);
+}
 
 /**
  * Is this a registered reason?
@@ -121,10 +207,16 @@ export function isRefusalReason(id) {
  * label, a ceiling) and never an id, a name or anything a reader did not already see
  * on the surface they clicked.
  *
+ * `at` is not a fact about the refusal, it is a fact about the CLICK: which surface
+ * asked. It is compared, never rendered, so it can never reach a sentence — and it is
+ * optional, because an unkeyed record must go on behaving exactly as records did
+ * before the field existed (see REFUSAL_SURFACES).
+ *
  * @param {string} reason one of REFUSAL_REASONS
  * @param {Record<string, string|number>|null} [vars]
- * @returns {{ reason: string, vars: Record<string, string|number>|null }}
+ * @param {string|null} [at] one of REFUSAL_SURFACES — the surface that asked
+ * @returns {{ reason: string, vars: Record<string, string|number>|null, at: string|null }}
  */
-export function refusalOf(reason, vars = null) {
-  return { reason, vars: vars && Object.keys(vars).length ? vars : null };
+export function refusalOf(reason, vars = null, at = null) {
+  return { reason, vars: vars && Object.keys(vars).length ? vars : null, at: at || null };
 }
