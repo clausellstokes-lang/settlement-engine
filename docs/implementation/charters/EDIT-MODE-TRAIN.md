@@ -832,3 +832,7 @@ CURE-A `08cb42e31` (the model walker's mask: findings identical under both forms
 ## Amendment of 2026-09-20 14:03 EDT — the clean pause (ODQ §934.47 addendum 109)
 
 - Every lane stopped clean with a note; FIX-P1's cure `61c5f1722` committed; FIX-P9 two commits (one owed sweep, one missing trailer recorded); FIX-P10 no commit, its paddingTop divergence accepted. The successor's first acts are listed in addendum 109 and the kit's handoff block.
+
+## Amendment of 2026-09-20 14:06 EDT — the owner's word at the pause (ODQ §934.47 addendum 110)
+
+- "For the transfer state that I also go with all your recommendations, including the ones owed to me they require my sign off up to you" — every recommendation approved; the push chain, migrations 201–203, the redeploy and §934.75 are the chair's to execute in that order after RUN 23 is fully green, never with a packet READY. Nothing is owed to the owner.
