@@ -847,6 +847,19 @@ export default defineConfig({
           )
             return 'generator-helpers';
 
+          // ── Terrain helpers (LAZY LEAF) — THE LAST ANCHOR OF THE MASS ─────
+          // FIX-B2, TOOL-12 move 9. The smallest module on the board (1,289
+          // rendered bytes) and the one holding the MOST chunks against the
+          // engine: 49 outside modules reach it, the whole worldPulse family
+          // among them, so realmManifest (104,632 B) and its neighbours stayed
+          // anchored through every earlier move until this one. Its outside
+          // consumers are ConfigurationPanel.jsx and
+          // worldPulse/resourceDynamicsKernel.js. One outward edge, to
+          // resourceTerrainCompatibility.js in eager engine-core — lazy -> eager,
+          // so this chunk can drag nothing. MUST stay before /src/generators/.
+          if (id.includes('/src/generators/terrainHelpers.js'))
+            return 'terrain-helpers';
+
           // ── Strict content identity (small, legitimately EAGER) ───
           // Campaign rows are synchronously hash-checked before entering state.
           // Isolate that authority from the conservative generator-shared
@@ -894,6 +907,21 @@ export default defineConfig({
             || id.includes('/src/domain/townScene/customBuildingPresentation.js')
             || id.includes('/src/domain/cultureProfiles.js')
             || id.includes('/src/domain/customCategories.js')
+            // FIX-B2 (TOOL-12 move 8) joins magicFilter.js on the same reasoning as
+            // customCategories above, and with the same measured basis: an ESD excision that
+            // matched no rule, so Rollup co-located it into the lazy `engine` chunk and its
+            // two consumers (InstitutionalGrid.jsx, store/selectors.js) reached it only by
+            // fetching the whole generator. Its single outward edge is
+            // arcaneInstitutionVocabulary.js in eager engine-core — an edge THIS chunk
+            // already has — so the join adds no chunk, no chunk edge and no preload entry.
+            // ⚠ AND THE CYCLE IS THE POINT, not an afterthought: bootSmoke.test.js freezes
+            // the exact incident where engine-core reached into the lazy engine chunk FOR
+            // MAGICFILTER'S TWO ARCANE VOCABULARIES while engine reached back for
+            // FACTION_ARCHETYPES, and dist stopped booting. That cycle needed engine-core ->
+            // engine; this pin creates engine-core-lazy -> engine-core, the opposite
+            // direction, and engine-core does not import engine-core-lazy (measured on the
+            // emitted graph). bootSmoke's cycle finder re-proves it on every build.
+            || id.includes('/src/domain/magicFilter.js')
           )
             return 'engine-core-lazy';
 

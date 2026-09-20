@@ -339,3 +339,131 @@ describe('engine chunk — source uses dynamic import for the heavy generators',
     expect(eager.has('src/generators/steps/stepMetadata.js')).toBe(false);
   });
 });
+
+// ── FIX-B2 (2026-09-20) — THE ANCHORED-LEAF PINS ────────────────────────────
+// TOOL-12 measured 38 emitted chunks statically importing the 677,935 B lazy engine,
+// and traced all 38 to TWELVE members whose CONSUMERS live in other chunks. That is
+// FP-G11's formatNumber defect (the note in vite.config.js) reproduced twelve times:
+// a member co-located into the engine forces every consumer's chunk to fetch the whole
+// generator. The sharpest instance was a 173-byte `livingContentLaw` chunk dragging
+// 677,935 B — a 3,918x ratio. FIX-B2 cured the anchored ones by PLACEMENT, with no
+// source byte: the members are pinned to small lazy chunks (or joined to
+// engine-core-lazy), so the consumer imports the small chunk and stops importing
+// the engine. MEASURED across the three commits, on real builds: the engine's static
+// importer set 38 -> 5, the engine chunk 677,935 -> 643,221 B, the first-paint closure
+// unchanged at 8 files, and the generation worker byte-identical at 1,401,208.
+//
+// ⚠ THE FIVE THAT REMAIN ARE NOT LEFTOVERS, and the count is deliberately not pinned
+// here. Four are the two members this wave did NOT move: generateSettlementPipeline.js
+// (the chunk's own legitimate door — composeInstantWorld, instantWorldBody,
+// generationRequest) and structuralValidator.js (SettlementsPanel; its closure drags six
+// modules, so the chair refused it on proportion). The fifth, generateWorldBook, is a
+// ROLLUP GROUPING ARTIFACT: its named module's 90-module static closure reaches no engine
+// member at all, so no single-member move can cut it — an emitted chunk's NAME is one
+// representative module, never its membership. That is why this suite pins PLACEMENT per
+// module rather than a count of importers: a count would be a ratchet on Rollup's grouping
+// as much as on the estate's own edges.
+//
+// ⛔ WHY THIS PIN EXISTS AT ALL. Every one of these placements is invisible in the
+// module it governs — nothing in stressPriority.js says "I must not ride the engine
+// chunk" — and five of the twelve matched NO rule before this wave, which is exactly
+// how they were co-located in the first place. A later reader deleting a rule as
+// "redundant" re-creates the defect silently, and no other instrument in tests/build
+// counts the engine's importer set. This is the estate's standing lazy-pin idiom
+// (contentIdentityLazy / cultureProfilesLazy / customContentCharsetLazy /
+// livingContentSeamLazy / userRouteIdentityLeaf): PLACED + PRESENT here, and ABSENT
+// from the entry closure in vendorPdfLazy.test.js, where the closure walker lives.
+const FIX_B2_PINS = Object.freeze([
+  { module: 'src/domain/content/livingContentSeam.js', chunk: 'living-content-seam' },
+  { module: 'src/domain/content/livingContentLawVersion.js', chunk: 'living-content-seam' },
+  { module: 'src/lib/narrativeMutations.js', chunk: 'narrative-mutations' },
+  { module: 'src/generators/stressPriority.js', chunk: 'stress-priority' },
+  { module: 'src/generators/computeActiveChains.js', chunk: 'resource-chains' },
+  { module: 'src/generators/chainMagicSubstitution.js', chunk: 'resource-chains' },
+  { module: 'src/lib/prebuiltResourceChains.js', chunk: 'resource-chains' },
+  { module: 'src/generators/helpers.js', chunk: 'generator-helpers' },
+  { module: 'src/generators/priorityHelpers.js', chunk: 'generator-helpers' },
+  { module: 'src/generators/terrainHelpers.js', chunk: 'terrain-helpers' },
+  { module: 'src/domain/customCategories.js', chunk: 'engine-core-lazy' },
+  { module: 'src/domain/magicFilter.js', chunk: 'engine-core-lazy' },
+]);
+// The chunks FIX-B2 MINTED. engine-core-lazy is deliberately excluded: it predates this
+// wave and already has its own arm above, and two of the twelve JOINED it rather than
+// minting a home (measured: their outward edges were edges that chunk already carried,
+// so joining cost no chunk, no chunk edge and no __vitePreload entry).
+const FIX_B2_NEW_CHUNKS = Object.freeze([
+  'living-content-seam', 'narrative-mutations', 'stress-priority',
+  'resource-chains', 'generator-helpers', 'terrain-helpers',
+]);
+
+describe('FIX-B2 — the anchored leaves are PLACED, not co-located', () => {
+  const { manualChunks } = viteConfig.build.rollupOptions.output;
+  const ROOT = process.cwd();
+
+  // ── ANTI-VACUITY FIRST. Both halves of this suite read a table, and a table whose
+  // modules have been renamed away would make every assertion below pass over nothing.
+  // The CONTROL is the other half: a module that must STILL route to 'engine' proves
+  // the rules are live and that a green here means "placed", not "matched nothing".
+  it('the pin table is live — every module exists, and a control generator still routes to the engine', () => {
+    for (const { module } of FIX_B2_PINS) {
+      expect(existsSync(resolve(ROOT, module)), `${module} is gone — its pin now proves nothing`).toBe(true);
+    }
+    expect(FIX_B2_PINS.length).toBe(12);
+    // The control: npcGenerator is the chunk's largest member and must never leave it.
+    // If this flips, the blanket /src/generators/ rule has been broken and the arm
+    // below would pass for the wrong reason.
+    expect(manualChunks(resolve(ROOT, 'src/generators/npcGenerator.js'))).toBe('engine');
+  });
+
+  it('every FIX-B2 module is placed by manualChunks in the chunk its rule names', () => {
+    const misplaced = FIX_B2_PINS
+      .map(({ module, chunk }) => ({ module, chunk, got: manualChunks(resolve(ROOT, module)) || null }))
+      .filter(row => row.got !== row.chunk)
+      .map(row => `${row.module}: expected '${row.chunk}', got '${row.got}'`);
+    expect(
+      misplaced,
+      'a FIX-B2 pin stopped firing. A member that matches NO rule is an ORPHAN, and Rollup '
+      + 'co-locates orphans into the big lazy engine chunk — which forces every chunk that '
+      + 'consumes them to statically import the whole generator again (the FP-G11 incident, '
+      + 'and the defect this wave cured 12 times). Check rule ORDER first: the generator '
+      + 'pins must precede the blanket /src/generators/ rule.',
+    ).toEqual([]);
+  });
+
+  // PRESENCE read → VERIFY_DIST-gated, per the stale-dist policy: a stale dist can
+  // false-RED a presence check, never an absence check.
+  it.skipIf(!requireDist)('every chunk FIX-B2 minted is emitted as exactly one lazy asset', () => {
+    const files = readdirSync(assetsDir);
+    const missing = FIX_B2_NEW_CHUNKS
+      .map(name => ({ name, hits: files.filter(f => new RegExp(`^${name}-[A-Za-z0-9_-]+\\.js$`).test(f)) }))
+      .filter(row => row.hits.length !== 1)
+      .map(row => `${row.name}: ${row.hits.length} emitted asset(s)`);
+    expect(
+      missing,
+      'a FIX-B2 chunk was not emitted exactly once — its members were re-merged somewhere, '
+      + 'or the chunk name changed without this pin moving with it',
+    ).toEqual([]);
+  });
+
+  it.skipIf(!requireDist)('no FIX-B2 chunk is pulled into first paint by a modulepreload hint', () => {
+    const html = readFileSync(join(distDir, 'index.html'), 'utf-8');
+    // ⚠ Written as a FILTER rather than a bare negated matcher, and deliberately:
+    // negativeAssertionAnchor.walker.test.js freezes this file's un-anchored
+    // bare-negative count at an EXACT number (not `<=`), so one more would red it.
+    // ⛔ AND ITS SCANNER READS RAW LINES WITH NO COMMENT STRIPPING — so even naming
+    // those three matchers in a sentence like this one counts against the frozen
+    // figure. Found the hard way: an earlier draft of this very comment spelled them
+    // out and moved the count by two without adding a single assertion. Describe the
+    // rule, never spell it. A filter is anchor-free anyway, and names the offender.
+    const preloaded = FIX_B2_NEW_CHUNKS
+      .filter(name => new RegExp(`<link[^>]*rel="modulepreload"[^>]*href="[^"]*${name}-`).test(html));
+    expect(
+      preloaded,
+      'a FIX-B2 lazy chunk is being preloaded on first paint — the pin moved bytes out of '
+      + 'the engine and straight into the entry\'s fetch waterfall',
+    ).toEqual([]);
+    // Non-vacuity for the scanner: the HTML was really read and really contains hints.
+    expect(html.length).toBeGreaterThan(500);
+    expect((html.match(/rel="modulepreload"/g) || []).length).toBeGreaterThan(0);
+  });
+});

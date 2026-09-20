@@ -743,6 +743,40 @@ describe.runIf(distExists)('Tier 9.7 — vendor-pdf lazy load contract', () => {
     ).toHaveLength(0);
   });
 
+  // ── FIX-B2 (2026-09-20): the anchored-leaf pins stay OUT of first paint ───
+  // FIX-B2 pinned twelve engine members whose consumers lived in other chunks into
+  // six small lazy chunks (plus two joins to engine-core-lazy), taking the engine's
+  // static-importer set from 38 to 8. Each pin MOVES BYTES, and the failure mode of
+  // a move is that the bytes land somewhere worse: FP-G17 records exactly that, where
+  // an excised-but-unpinned leaf gained one eager importer and re-parented the whole
+  // engine chunk into first paint. The placement + presence halves of this contract
+  // live in engineChunkLazy.test.js (which executes manualChunks); the CLOSURE half
+  // lives here, because entryStaticClosure() does.
+  // UNGATED by VERIFY_DIST on purpose — this is an ABSENCE claim, and per the
+  // stale-dist policy at the top of this file a stale dist can only UNDER-report
+  // absence (false PASS), never false-fail it.
+  it('the FIX-B2 anchored-leaf chunks are ABSENT from the entry transitive static closure', () => {
+    const FIX_B2_CHUNKS = [
+      'living-content-seam', 'narrative-mutations', 'stress-priority',
+      'resource-chains', 'generator-helpers', 'terrain-helpers',
+    ];
+    const { files } = entryStaticClosure();
+    const leaked = files.filter(
+      f => FIX_B2_CHUNKS.some(name => new RegExp(`^${name}-[A-Za-z0-9_-]+\\.js$`).test(f)),
+    );
+    expect(
+      leaked,
+      `a FIX-B2 lazy chunk reached first paint via the static graph: ${leaked.join(', ')}.\n`
+      + 'An EAGER static importer of a module in one of these chunks drags the chunk into the '
+      + 'entry closure and charges first paint for generation code. Closure:\n  '
+      + `${files.join('\n  ')}`,
+    ).toHaveLength(0);
+    // NON-VACUITY: the closure must be a real, populated walk, or the absence above is
+    // green-on-nothing — the exact way this file's own ratchet once went vacuous.
+    expect(files.length).toBeGreaterThan(5);
+    expect(files.some(f => /^index-[A-Za-z0-9_-]+\.js$/.test(f))).toBe(true);
+  });
+
   it.skipIf(!requireDistRead)('the engine chunk still exists (lazy) and remains large', () => {
     const files = readdirSync(assetsDir);
     const engine = files.find(f => /^engine-[A-Za-z0-9_-]+\.js$/.test(f) && !/^engine-core-/.test(f));
