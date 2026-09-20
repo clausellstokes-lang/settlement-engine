@@ -145,25 +145,100 @@ describe('the authored display lexicon — typed buckets, closed and enumerable'
    * through to the humanizer and nobody would learn the bucket had a hole. So
    * this arm reads `resolveConfig.js` and requires the two sets to be EQUAL —
    * a new route reds here, and a label for a route nobody produces reds too.
+   *
+   * ⛔ IT READS THE DECLARATION, NEVER A SECOND UNRELATED MARKER (CURE-E).
+   * The first cut sliced from `const TERRAIN_ROUTE_POOLS` to `export const
+   * CULTURES`. EM-P3 (f4e5b64c5) hoisted the CULTURES re-export ABOVE the table
+   * for reasons that had nothing to do with routes; the two markers INVERTED
+   * (1061/1632 → 1646/1601) and `String.prototype.slice(start > end)` returned
+   * '' SILENTLY — no throw, no -1, no signal at all. The pin went half-blind,
+   * 5 tokens to 3, losing exactly `port` and `river` (the two that live only
+   * inside the table), and stayed that way across five landings. A scan that
+   * cannot find its target must RED, never return an empty string. So:
+   *   · the table is brace-matched from its OWN declaration, which cannot be
+   *     reordered away from itself;
+   *   · every anchor is asserted FOUND, and a two-anchor span is asserted
+   *     ORDERED, BEFORE any slice is taken;
+   *   · the scan parses ARRAY LITERALS rather than filtering lines — a line
+   *     that merely names a pool is not where a token is born, and the old
+   *     line filter both missed the else-branch pools (their literals sit on
+   *     continuation lines that do not say "pool") and scooped tokens out of
+   *     comparisons that mint nothing.
    */
   it('covers EVERY trade-route token the generator can actually produce', () => {
     const source = readFileSync('src/generators/steps/resolveConfig.js', 'utf8');
-    const pools = source.slice(
-      source.indexOf('const TERRAIN_ROUTE_POOLS'),
-      source.indexOf('export const CULTURES'),
-    );
+
+    /**
+     * Brace-match an object literal from its OWN declaration (the estate's
+     * `objectLiteralKeys` idiom). Asserts the declaration is found and that a
+     * literal opens after it, so an absent target reds instead of scanning ''.
+     */
+    const declarationBody = (src, decl) => {
+      const at = src.indexOf(decl);
+      expect(at, `resolveConfig.js no longer declares \`${decl}\``).toBeGreaterThanOrEqual(0);
+      const open = src.indexOf('{', at);
+      expect(open, `\`${decl}\` is no longer followed by an object literal`).toBeGreaterThan(at);
+      let depth = 0;
+      for (let i = open; i < src.length; i++) {
+        if (src[i] === '{') depth++;
+        else if (src[i] === '}' && --depth === 0) return src.slice(open, i + 1);
+      }
+      throw new Error(`unbalanced object literal for \`${decl}\``);
+    };
+
+    /** A span between two anchors, both asserted FOUND and asserted ORDERED. */
+    const spanBetween = (src, startAnchor, endAnchor) => {
+      const from = src.indexOf(startAnchor);
+      const to = src.indexOf(endAnchor);
+      expect(from, `resolveConfig.js no longer contains \`${startAnchor}\``).toBeGreaterThanOrEqual(0);
+      expect(to, `resolveConfig.js no longer contains \`${endAnchor}\``).toBeGreaterThanOrEqual(0);
+      // ⛔ THE ASSERTION THE FIRST CUT LACKED. Without it an inverted span is ''.
+      expect(from, `\`${startAnchor}\` no longer precedes \`${endAnchor}\``).toBeLessThan(to);
+      return src.slice(from, to);
+    };
+
+    // The terrain table, read from its own declaration, PLUS the route-production
+    // block, which carries the inline fallbacks and the two else-branch pools that
+    // no terrain key reaches.
+    const table = declarationBody(source, 'const TERRAIN_ROUTE_POOLS');
+    const production = spanBetween(source, 'let routePool = null;', 'const rawRoute = routePool');
+
+    // PARSED, NOT LINE-FILTERED. A route token is born in an ARRAY LITERAL. The
+    // innermost-bracket match therefore reads `['road', …]` and skips the index
+    // `[resolvedTerrain]`; `pool.filter(r => r !== 'isolated')` and
+    // `tradeRoute === 'isolated'` carry no literal and contribute nothing.
     const produced = new Set();
-    // The terrain table plus every inline fallback pool: any array literal on a
-    // line that names a pool is a place a route token can be born.
-    for (const block of [pools, ...source.split('\n').filter((l) => /pool/i.test(l))]) {
-      for (const [, token] of block.matchAll(/'([a-z_]+)'/g)) produced.add(token);
+    for (const block of [table, production]) {
+      for (const literal of block.matchAll(/\[[^[\]]*\]/g)) {
+        for (const [, token] of literal[0].matchAll(/'([a-z_]+)'/g)) produced.add(token);
+      }
     }
-    // ANTI-VACUITY: a scan that stopped matching would report an empty set, and
-    // "every member of {} is covered" is true of any table at all.
+
+    // ANTI-VACUITY, ANCHORED ON NAMED MEMBERS and not on a bare count: a scan that
+    // stopped matching would report an empty set, and "every member of {} is
+    // covered" is true of any table at all. `port` and `river` are named because
+    // they are reachable ONLY through the terrain table — they are precisely what
+    // a silently-empty table span loses.
     expect(produced.size).toBeGreaterThanOrEqual(5);
-    expect([...produced].sort()).toEqual(
-      Object.keys(DISPLAY_LEXICON.tradeRouteAccess).sort(),
-    );
+    expect([...produced], 'the terrain table stopped contributing').toContain('port');
+    expect([...produced], 'the terrain table stopped contributing').toContain('river');
+
+    // EXACT, BOTH DIRECTIONS (the vocabularyTotality.walker spelling), so each
+    // direction can say which way the table rotted.
+    const setDiff = (a, b) => a.filter((x) => !b.includes(x)).sort();
+    const producers = [...produced].sort();
+    const consumers = Object.keys(DISPLAY_LEXICON.tradeRouteAccess).sort();
+    expect(
+      setDiff(producers, consumers),
+      'the generator can roll a trade route with NO lexicon row — it would reach a reader as '
+      + 'a raw engine token. Author its label in DISPLAY_LEXICON.tradeRouteAccess rather than '
+      + 'widening this scan.',
+    ).toEqual([]);
+    expect(
+      setDiff(consumers, producers),
+      'a lexicon row has no producer left — delete it in the same commit that removes its pool '
+      + 'entry, so the table cannot rot into a list of words nothing can say.',
+    ).toEqual([]);
   });
 
   it('says what the token means where the token alone would mislead', () => {

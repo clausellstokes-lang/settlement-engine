@@ -214,8 +214,27 @@ describe('faithPanelModel', () => {
     // ⛔ SECTION-SLICED ON BOTH SIDES, never a whole-document match: a document-wide
     // `includes` goes vacuous on the block's own surrounding prose, which names these keys
     // too — the recorded doc-agreement vacuity class.
-    const docSection = doc.slice(doc.indexOf('### DS-FTH-1'), doc.indexOf('### DS-FTH-2'));
-    const genSection = gen.slice(gen.indexOf('"DS-FTH-1"'), gen.indexOf('"DS-FTH-2"'));
+    //
+    // ⛔ AND EVERY MARKER IS ASSERTED FOUND AND ORDERED BEFORE THE SLICE (CURE-E's
+    // class, closed here rather than at one instance). `String.prototype.slice` is
+    // silent on a bad span and fails in two directions, only one of which a bare
+    // `length > 0` guard catches: INVERTED markers return '' (caught), but a MISSING
+    // END marker is indexOf → -1, which silently OVER-CAPTURES to the end of the
+    // document and sails past a length check with the wrong section in hand. CURE-E's
+    // first instance — the trade-route token floor — went half-blind for five landings
+    // exactly this way, when a refactor hoisted an unrelated declaration past the
+    // marker that bounded the span. Both markers are sound here today; the assertions
+    // are what keep them sound.
+    const section = (src, startMarker, endMarker, what) => {
+      const from = src.indexOf(startMarker);
+      const to = src.indexOf(endMarker);
+      expect(from, `${what} no longer contains ${startMarker}`).toBeGreaterThanOrEqual(0);
+      expect(to, `${what} no longer contains ${endMarker}`).toBeGreaterThanOrEqual(0);
+      expect(from, `${what}: ${startMarker} no longer precedes ${endMarker}`).toBeLessThan(to);
+      return src.slice(from, to);
+    };
+    const docSection = section(doc, '### DS-FTH-1', '### DS-FTH-2', 'RECEIPT_POOLS_DOSSIER_STATE.md');
+    const genSection = section(gen, '"DS-FTH-1"', '"DS-FTH-2"', 'warFaith.generated.js');
     expect(docSection.length).toBeGreaterThan(0);
     expect(genSection.length).toBeGreaterThan(0);
     const docKeys = SIG.exec(docSection)[1].split(',').map((s) => s.trim());
