@@ -828,3 +828,7 @@ CURE-A `08cb42e31` (the model walker's mask: findings identical under both forms
 ## Amendment of 2026-09-20 13:57 EDT — the account-switch handoff (ODQ §934.47 addendum 108)
 
 - The sitting was cut mid-composition by an account switch; the kit's RESUME-NOTE ACCOUNT-SWITCH HANDOFF block holds the exact live state and the tail's order (six picks → P1's cure → P9 → P10 → the eighth refreeze → RUN 23 → EM-R0d v4 placed → its build). TOOL-25 landed the docs-wide control-bytes walker with an empty exemption register; the estate carries zero raw NUL bytes in tracked text.
+
+## Amendment of 2026-09-20 14:03 EDT — the clean pause (ODQ §934.47 addendum 109)
+
+- Every lane stopped clean with a note; FIX-P1's cure `61c5f1722` committed; FIX-P9 two commits (one owed sweep, one missing trailer recorded); FIX-P10 no commit, its paddingTop divergence accepted. The successor's first acts are listed in addendum 109 and the kit's handoff block.
