@@ -24,13 +24,13 @@
     "The derivation history — every prior row, its cause, and the census laws — stays in the walker",
     "beside the assertions, deliberately. Only the live tuple moved."
   ],
-  "measuredAtSha": "069de409f8da7f126790041852c7bacf0023da67",
+  "measuredAtSha": "8d1337e58d8e656775d7ee502505a8d1e108cef7",
   "measuredBy": "chair-fable-4a1823e2",
   "date": "2026-09-20",
-  "note": "the tenth refreeze: CURE-M (PR 53 brand derivatives, arms A B C and the pure platform helper) adds 20 titles and 1 suite title in tests/build/brandDerivatives.test.js",
+  "note": "the eleventh refreeze: CURE-N family C adds one title in tests/lint/phoneBarOrder.walker.test.js (the bar DECLARES itself); CURE-O and the other five CURE-N commits add no vitest title",
   "files": 2665,
   "parked": 359,
   "credited": 2306,
-  "titles": 25550,
+  "titles": 25551,
   "suiteTitles": 6816
 }
