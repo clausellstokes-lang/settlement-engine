@@ -71,7 +71,12 @@ const LIFTED = Object.freeze({
   'src/components/AiAnalystPanel.jsx': 1,
   'src/components/FeedbackWidget.jsx': 1,
   'src/components/InterviewPanel.jsx': 1,
-  'src/components/PostGenCoach.jsx': 1,
+  // ⛔ src/components/PostGenCoach.jsx IS DELIBERATELY ABSENT (REVIEW-P F5, ODQ §934.63).
+  // It held one lifted site until the post-generate coach stopped being viewport chrome:
+  // the card now docks in the page's own flow at every width, because a fixed bottom-right
+  // box covered 244 px of the dossier's reading column at 1440x900 and its whole 340 px
+  // width at 1024. The row is struck rather than left as spare budget, so re-introducing a
+  // fixed bottom-anchored site in that file reds here, which is the point of the register.
   'src/components/map/WorldMapOverlays.jsx': 1,
   'src/components/pricing/PricingMomentCard.jsx': 1,
   'src/components/surveyor/SurveyorWorkshop.jsx': 1,
