@@ -397,6 +397,25 @@ export function titleForView(view) {
   return `${r.title} · ${SITE_NAME}`;
 }
 
+/**
+ * The route's own SHORT label — the table's `title` without the site suffix that
+ * `titleForView` composes for the document head.
+ *
+ * ⛔ IT EXISTS SO A SENTENCE CAN NAME A PAGE WITHOUT TYPING ITS NAME (REVIEW-P F10).
+ * The sign-in surface tells a bounced visitor which page is waiting for them, and the
+ * only honest source for that word is the routing table the guard itself reads: a
+ * hand-typed "your account" would go stale the day a route is renamed, and
+ * `titleForView` is the wrong shape there ("Account · SettlementForge" mid-sentence).
+ * `undefined` for an unknown view, so a caller must decide what to do about it rather
+ * than printing a raw view id at a reader.
+ *
+ * @param {string} view
+ * @returns {string|undefined}
+ */
+export function routeLabelForView(view) {
+  return VIEW_TO_ROUTE[view] ? VIEW_TO_ROUTE[view].title : undefined;
+}
+
 /** Guard requirement for a view ('auth' | 'elevated' | undefined). */
 export function guardForView(view) {
   return VIEW_TO_ROUTE[view] ? VIEW_TO_ROUTE[view].guard : undefined;

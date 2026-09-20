@@ -268,7 +268,10 @@ const ROUTE_BASELINE = Object.freeze({
   '/covenant':              { roots: 1, files: 5, floored: 2, ruled: 0, bare: 0 },
   '/bounty':                { roots: 1, files: 5, floored: 2, ruled: 0, bare: 0 },
   '/screen':                { roots: 1, files: 14, floored: 31, ruled: 3, bare: 0 },
-  '/signin':                { roots: 1, files: 11, floored: 4, ruled: 1, bare: 0 },
+    // ⭐ floored 4 -> 5 on 2026-09-20 (REVIEW-P F10): the sign-in surface now raises the
+    // guarded route's reason through primitives/RefusalNotice.jsx, and ClerkNote's rubric
+    // is a chrome line that takes the phone floor. A NEW floored line, not a cured bare one.
+  '/signin':                { roots: 1, files: 11, floored: 5, ruled: 1, bare: 0 },
   '/register':              { roots: 1, files: 11, floored: 4, ruled: 1, bare: 0 },
   '/reset-password':        { roots: 1, files: 11, floored: 4, ruled: 1, bare: 0 },
   '/set-new-password':      { roots: 1, files: 7, floored: 3, ruled: 1, bare: 0 },

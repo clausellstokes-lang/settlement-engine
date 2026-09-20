@@ -14,15 +14,44 @@
 import { useEffect } from 'react';
 import { useStore } from '../../store/index.js';
 import { navigate, navigatePath } from '../../hooks/useRoute.js';
-import { viewToPath } from '../../lib/routes.js';
+import { guardForView, isSafeNextPath, resolveLocation, routeLabelForView, viewToPath } from '../../lib/routes.js';
 import AuthPanel, { AUTH_MODE_VIEW } from './AuthPanel.jsx';
 import { AuthPageShell, FooterLink } from './authUI.jsx';
+import RefusalNotice from '../primitives/RefusalNotice.jsx';
+import { REFUSAL_REASONS, refusalOf } from '../../lib/refusalReasons.js';
 import { t } from '../../copy/index.js';
 import { SP } from '../theme.js';
 
 function readNext() {
   if (typeof window === 'undefined') return '/create';
   return new URLSearchParams(window.location.search).get('next') || '/create';
+}
+
+/**
+ * ⛔ THE GUARD KEPT THE DESTINATION AND DROPPED THE REASON (REVIEW-P F10, ODQ
+ * §934.24(c)). App's auth guard sends an anonymous visitor at a guarded route to
+ * `/signin?next=<path>` and that redirect STAYS — it is a door, not a refusal, and it
+ * lands the reader back where they were aiming. What was missing is the account of
+ * WHY: the 2026-09-20 walk clicked /account, measured `href: /signin?next=%2Faccount`,
+ * `notices: []`, and a lead of the generic "Welcome back". The destination was
+ * preserved and the cause was thrown away.
+ *
+ * THIS READS THE SAME `next` THE REDIRECT ALREADY CARRIES and says the one line. It
+ * speaks ONLY for a route the router itself calls guarded, so a visitor who opened
+ * /signin of their own accord is told nothing they did not ask about, and a `next`
+ * that is unsafe, unknown or ungated resolves to no notice at all.
+ *
+ * @returns {{ reason: string, vars: Record<string, string>|null }|null}
+ */
+function guardedNextRefusal() {
+  const next = typeof window === 'undefined' ? null : new URLSearchParams(window.location.search).get('next');
+  // The SAME predicate the post-auth redirect trusts, so a path this page refuses to
+  // describe is exactly a path it would refuse to travel to.
+  if (!next || !isSafeNextPath(next)) return null;
+  const { view } = resolveLocation(next);
+  if (guardForView(view) !== 'auth') return null;
+  const page = routeLabelForView(view);
+  return page ? refusalOf(REFUSAL_REASONS.AUTH_REQUIRED, { page }) : null;
 }
 
 export default function SignInPage() {
@@ -78,6 +107,11 @@ export default function SignInPage() {
         </span>
       }
     >
+      {/* The reason sits ABOVE the form, which is its door: the notice names the page
+          that is waiting and the next control the reader meets is the one that gets
+          them there. Read at render, not latched, so a `next` that changes takes the
+          sentence with it. */}
+      <RefusalNotice refusal={guardedNextRefusal()} style={{ marginBottom: SP.md }} />
       <AuthPanel
         initialMode="signin"
         showTabs={false}
