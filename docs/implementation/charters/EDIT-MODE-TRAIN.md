@@ -474,6 +474,10 @@ CURE-A `08cb42e31` (the model walker's mask: findings identical under both forms
 
 - **TOOL-7** carries: the marker-slice lint (string-and-comment-skipping form), the shared `objectLiteralKeys`/`fnBody` helpers moved to `tests/helpers/`, and the root-anchor tidy-up of `humanizeEngineTokens.test.js`. **TOOL-6b** carries the sweep plant for `pulseKernel.js`. **EM-P3b** carries `GENERATED_ROUTE_VALUES`'s pin and the two fixture oddities, with `landingFixture.js:47`'s reader check deciding whether **FIX-P5** cures it on the public landing now.
 
+## Amendments of 2026-09-20 03:39 EDT — EM-B1k2 pre-proofed (the fourth root cured to the reader token; EM-B1k3 not chartered); placed after EM-B3c; FIX-P4 dispatched (ODQ §934.47 addendum 48)
+
+- **EM-B1k2** (kit `packets-waiting/EM-B1k2.*`, version 2): the participation census gains `-e 'factionRosterOf'` (41 → 44, three files dispositioned); a `mutation` row with its sweep plant; the display-name census closed at zero duplicates; the save writers closed; placed the sitting EM-B3c flips to LANDED, its window re-run over CURE-E/F/G and the refreeze. **EM-E0's compile** carries the access-state precondition (an inactive save must not be walked by a tick). **EM-B1f's pre-proof** banks `npcVerdictPulse.js`'s quarantine row.
+
 ## Pre-proof tasks (Opus, read-only, before each packet is READY)
 1. Name every "verified fact" with file:line at the base; 2. fill the change manifest and required symbols; 3. measure the budget (files, lines) and split if over; 4. name the tests the packet's proof shape copies; 5. run the sealed dispatch dry.
 
