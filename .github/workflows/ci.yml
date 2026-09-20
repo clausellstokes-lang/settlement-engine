@@ -378,13 +378,20 @@ jobs:
     # critical path's wall-clock.
     name: Coverage floors (money / security)
     runs-on: ubuntu-latest
-    # Under v8 coverage the suite took 41–43 minutes on ubuntu-latest (measured 2026-09-16, two
-    # runs) and was cut at 45 on the master merge commit b9c494afe the same afternoon; the
-    # 10-minute cap before that had cut it on every run since 08-15. 60 is the measured figure
-    # with headroom for runner variance; a timeout is not a coverage verdict. The Vercel build
-    # gate (scripts/vercel-ignore-build.mjs) requires this job green, so a cap that cuts a
-    # passing run blocks the production deploy.
-    timeout-minutes: 60
+    # This cap follows its suite, exactly as the test ratchet's does. Measured 2026-09-20: BOTH
+    # of PR #53's runs were CUT at the old 60-minute cap without concluding — push 35534822592
+    # (20:13:06Z → 21:13:21Z, 60m15s) and pull_request 35534903945 (20:14:36Z → 21:14:52Z,
+    # 60m16s), both "cancelled". That is the third cap this job has outgrown: 10 cut it on every
+    # run since 08-15, and 45 cut it on master's merge commit b9c494afe on 09-16. The last runs
+    # that CONCLUDED were on 2026-09-17, all three green: 51m52s (35184404284), 52m46s
+    # (35168257017) and 53m41s (35230176250) — already up from the 41–43 minutes measured on
+    # 09-16, and the suite has grown by about five hundred commits since. 100 is twice the
+    # longest concluded run, the same rule the test ratchet's cap uses above, and it is likewise
+    # to be TIGHTENED to measured-plus-headroom once a run concludes on this branch. A timeout
+    # is not a coverage verdict, and the Vercel build gate (scripts/vercel-ignore-build.mjs)
+    # requires this job green, so a cap that cuts a passing run blocks the production deploy —
+    # which is why production has not deployed since 09-16.
+    timeout-minutes: 100
     steps:
       - uses: actions/checkout@v4
       # Two suites read the LEDGER BRANCH by its local ref (scripts/audit/ledger-citations.mjs and
