@@ -644,11 +644,21 @@ export default function App() {
                   onClick={() => handleNavClick(id)}
                   aria-current={active ? 'page' : undefined}
                   style={{
-                    // minWidth:0 lets a flex child shrink below its content width so
-                    // the longest label ellipsis-fits at 375px. Equal columns (five on
-                    // phones, six from 640).
+                    // ⭐ THE SEATS ARE SIZED BY THEIR WORDS, NOT BY EQUAL SHARE (ODQ §934.63
+                    // F8). This read `flex: 1`, which is `1 1 0%` — five identical columns.
+                    // At 375 px that is 75 px a seat, 71 px of content after the 2 px side
+                    // padding, and the review measured COMPENDIUM needing 82: it was the one
+                    // label of the owner's five that ellipsised, rendering "COMPEND…" on
+                    // every page of the phone (the other four fit exactly: 45, 49, 53, 42).
+                    // Equal share cannot hold a ten-character word in a fifth of a phone at
+                    // the 12 px floor, and the floor is not negotiable, so the share is what
+                    // gives. `1 1 auto` makes each seat's basis its own label and splits the
+                    // slack evenly: the bar still fills the width, the short seats stay well
+                    // over the 44 px target, and nothing is clipped.
+                    // ⚠ minWidth:0 and the ellipsis below STAY, as the last resort for a
+                    // label longer than a phone rather than as the everyday behaviour.
                     // `relative` is the positioning context for the flow chevron.
-                    flex: 1, minWidth: 0, position: 'relative',
+                    flex: '1 1 auto', minWidth: 0, position: 'relative',
                     display: 'flex', flexDirection: 'column',
                     alignItems: 'center', justifyContent: 'center', gap: SP.xs,
                     minHeight: 44,

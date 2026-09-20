@@ -39,6 +39,7 @@ import {
   featherShown, fullScale, layoutArrow, padTarget,
 } from '../../src/components/nav/arrowGeometry.js';
 import { NAV } from '../../src/lib/routes.js';
+import { legacy } from '../../src/design/tokens.js';
 
 const EPS = 1e-6;
 const UNCUT_BELOW = STRIP_W * S_MAX + SHARES * MIN_SHARE_PX;
@@ -470,5 +471,78 @@ describe('(j) the hover glow boxes', () => {
     expect(LOGO_PLATE.x1).toBeLessThanOrEqual(HOME.x1);
     expect(GLOW_ROWS.top).toBeGreaterThanOrEqual(0);
     expect(GLOW_ROWS.bottom).toBeLessThanOrEqual(BAND_H);
+  });
+});
+
+/**
+ * ⭐⭐ (k) THE 44 PX CONTROL IS BIGGER THAN THE PAINTED BAND, AND THAT IS PAID FOR
+ * (ODQ §934.63 noticed 7).
+ *
+ * The review measured the phone `<header>` box at 22 px with two 44 px buttons inside it
+ * and slotted the question: "check whether anything depends on the header's box height".
+ * The box really is that small — it is `HEADER_H`, which ArrowHeader writes as the painted
+ * BAND's height, and at 375 px the band is 22.47 px — while `padTarget` grows both painted
+ * plates to the 44 px touch floor. So each control hangs about 21.5 px BELOW its own
+ * header.
+ *
+ * ⛔ THE CURE IS NOT TO GROW THE HEADER. `HEADER_H` is the sticky offset the whole shell
+ * is hung from: the feather layer sticks at `top: HEADER_H`, the wizard toolbar pins
+ * there, the landing pulls its hero up by it. Growing the box to 44 would slide the
+ * painted feather 21.5 px down the page, which is re-cutting the owner's painting to fix
+ * a hit target — and the painting is the owner's (§934.26). The controls are absolutely
+ * positioned, so the overhang costs no layout; what it could cost is a COLLISION, and
+ * that is what this arm measures instead of assuming.
+ *
+ * Two facts, executed over the shipped geometry at every narrow width:
+ *   PAID      — the target really reaches 44 x 44, which is the whole reason it overhangs.
+ *   CLEAR     — the overhang lands inside the reserve that already sits under the header:
+ *               ARROW_HANG (the feather's own hang, `pointerEvents: 'none'`) plus the
+ *               phone's `main` top padding. So the last row of the control is still above
+ *               the first line of content, and neither can swallow the other's taps.
+ * If a re-cut ever shrinks the hang under the overhang, CLEAR reds here rather than a
+ * reader finding it with their thumb.
+ */
+describe('(k) the touch target overhangs the painted band, and the overhang is clear', () => {
+  /** The touch floor ArrowHeader pads a phone control to (its own TOUCH_TARGET). */
+  const TOUCH = 44;
+  /** App.jsx's phone `main` top padding above `calc(ARROW_HANG + …)`: SP.md. */
+  const MAIN_PAD_PHONE = legacy.SP.md;
+
+  it('every narrow width pays the 44 px target on both painted plates', () => {
+    const short = [];
+    for (let cw = 280; cw < FULL_MIN_VIEWPORT; cw += 1) {
+      const layout = layoutArrow({ clientWidth: cw, full: false });
+      for (const key of ['home', 'plate']) {
+        const box = padTarget(layout.hits[key], TOUCH, layout.width);
+        if (box.h < TOUCH - EPS || box.w < TOUCH - EPS) short.push(`${cw}px ${key} ${box.w}x${box.h}`);
+      }
+    }
+    expect(short, 'a painted control is under the 44px touch floor at some narrow width').toEqual([]);
+  });
+
+  it('the band really is SHORTER than the target, so this describe is about something', () => {
+    // ⛔ ANTI-VACUITY. If the band ever grew past 44 the overhang would be zero and every
+    // arm here would pass on nothing; the review's finding would also have gone away, and
+    // a reader deserves to be told which world they are in.
+    const band = layoutArrow({ clientWidth: 375, full: false }).bandPx;
+    expect(band).toBeLessThan(TOUCH);
+    expect(Number(band.toFixed(2)), "the review's 22px header box").toBe(22.47);
+  });
+
+  it('the overhang never reaches the first line of content, at any narrow width', () => {
+    const collisions = [];
+    for (let cw = 280; cw < FULL_MIN_VIEWPORT; cw += 1) {
+      const { bandPx, hangPx } = layoutArrow({ clientWidth: cw, full: false });
+      const overhang = Math.max(0, TOUCH - bandPx);      // how far the control passes the box
+      const reserve = hangPx + MAIN_PAD_PHONE;           // what already sits under the box
+      if (overhang > reserve + EPS) collisions.push(`${cw}px overhang ${overhang.toFixed(2)} > reserve ${reserve.toFixed(2)}`);
+    }
+    expect(
+      collisions,
+      '\nThe painted control now hangs past the arrow\'s own reserve and into the page, so its last rows '
+      + 'sit over content a reader is trying to touch. Do NOT grow HEADER_H: that is the sticky offset the '
+      + 'shell hangs from and moving it moves the painting. Either the hang shrank or the touch floor rose; '
+      + 'measure which, and give `main` the clearance instead.\n',
+    ).toEqual([]);
   });
 });

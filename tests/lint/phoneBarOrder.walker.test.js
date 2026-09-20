@@ -144,6 +144,87 @@ describe('THE PHONE BAR — one order, derived from the painting', () => {
     expect(PHONE_NAV_EXCLUDED.length, 'the exclusion list is empty — the Realm is back on the phone').toBeGreaterThanOrEqual(1);
   });
 
+  /**
+   * ⭐⭐ THE FIFTH SEAT'S WORD FITS IN IT (ODQ §934.63 F8).
+   *
+   * The order this file exists for is the owner's FIVE WORDS. It held the order and said
+   * nothing about whether the words could be READ, and one of them could not: the
+   * anonymous public-path walk measured "Compendium" at 375 px with `scrollWidth 82`
+   * against `clientWidth 71` and `text-overflow: ellipsis` — "COMPEND…" on every page of
+   * the phone — while Create (45/45), Library (49/49), Gallery (53/53) and About (42/42)
+   * fit exactly. The cause was `flex: 1` on the seat, which is `1 1 0%`: five identical
+   * fifths of the viewport, 75 px each, 71 px of content after the 2 px side padding.
+   *
+   * ⛔ THE ARITHMETIC IS WHY A SMALLER FACE WAS NEVER AN OPTION. 375 / 5 = 75 < 82, so at
+   * the 12 px chrome floor no equal-share bar can hold that word at any padding. The floor
+   * is §934.24(4)'s and the words are §934.26's; the SHARE is the only one of the three
+   * nobody ordered, so the share is what gave.
+   *
+   * ⚠ THE WIDTHS BELOW ARE A RECORDED BROWSER MEASUREMENT, AND THIS FILE SAYS SO RATHER
+   * THAN PRETENDING TO COMPUTE THEM. jsdom lays nothing out; these five numbers come from
+   * Chromium at 375x812 with a mobile user agent — REVIEW-P's `walk4-phone.json` §G, the
+   * capture `02-landing-phone.png`. What is EXECUTED here is the arithmetic over them and
+   * the wiring that makes the arithmetic the one that applies: a hand-copied number with
+   * no arm over it is the drift the floor censuses warn about, and an arm with no numbers
+   * is not a measurement at all.
+   */
+  describe('the five seats hold their five words at 375', () => {
+    /** Chromium at 375x812, 12 px, uppercase, tracking `normal` (REVIEW-P walk4-phone §G). */
+    const MEASURED_LABEL_PX = Object.freeze({
+      Create: 45, Library: 49, Compendium: 82, Gallery: 53, About: 42,
+    });
+    /** App.jsx's seat padding: `padding: ${SP.sm + 2}px 2px` — 2 px each side. */
+    const SEAT_SIDE_PAD = 2;
+    /** The narrowest viewport the phone bar is claimed at. */
+    const PHONE_W = 375;
+
+    test('the measured set IS the bar the owner ordered, so the arithmetic is about this bar', () => {
+      // ⛔ ANTI-VACUITY: without this the numbers could outlive the labels they were taken
+      // from, and the sums below would go on passing for a bar that no longer exists.
+      expect(Object.keys(MEASURED_LABEL_PX)).toEqual(PHONE_BAR_LABELS);
+      expect(barNav(true).map((item) => item.label)).toEqual(Object.keys(MEASURED_LABEL_PX));
+    });
+
+    test('the five words plus their padding fit the phone, so no seat ellipsises', () => {
+      const labels = Object.values(MEASURED_LABEL_PX);
+      const needed = labels.reduce((a, b) => a + b, 0) + labels.length * SEAT_SIDE_PAD * 2;
+      expect(
+        needed,
+        `\nThe five phone-bar labels need ${needed}px at the 12px floor and the phone is ${PHONE_W}px wide, so a `
+        + 'seat must clip. Neither the words (§934.26, the owner) nor the floor (§934.24(4)) may give; if a '
+        + 'label has grown, shorten the LABEL in src/lib/routes.js and re-measure in a browser.\n',
+      ).toBeLessThanOrEqual(PHONE_W);
+      // …and the widest word, which is the one that clipped, has room on its own seat.
+      const slack = (PHONE_W - needed) / labels.length;
+      expect(
+        MEASURED_LABEL_PX.Compendium + SEAT_SIDE_PAD * 2 + slack,
+        'the Compendium seat is narrower than the word it has to draw',
+      ).toBeGreaterThanOrEqual(MEASURED_LABEL_PX.Compendium);
+      // Every seat still clears the touch floor, which equal share gave for free and
+      // content sizing has to be checked for: About is the narrowest word.
+      expect(
+        MEASURED_LABEL_PX.About + SEAT_SIDE_PAD * 2 + slack,
+        'the narrowest seat fell under the 44px touch target',
+      ).toBeGreaterThanOrEqual(44);
+    });
+
+    test('the seats really are sized by their content in the shipped source', () => {
+      // The arithmetic above is only the rule in force while the seat takes its basis
+      // from its label. `flex: 1` would silently restore equal fifths and every number
+      // above would go on agreeing with itself.
+      expect(
+        APP_CODE,
+        '\nThe phone bar seat is back on equal share (`flex: 1` is `1 1 0%`). At 375px that is 71px of '
+        + 'content per seat and "COMPENDIUM" needs 82 — the exact clip ODQ §934.63 F8 recorded.\n',
+      ).toMatch(/flex:\s*'1 1 auto'/);
+      // anchored: the positive toMatch on the SAME string one line above proves APP_CODE is live and still carries the seat's flex declaration, so this excludes a member from a collection already shown to exist.
+      expect(APP_CODE, 'a seat reverted to equal share').not.toMatch(/flex:\s*1\s*,\s*minWidth:\s*0/);
+      // The label still measures as one unbroken word, which is what makes its basis its
+      // own width rather than a wrapped fragment.
+      expect(APP_CODE).toMatch(/whiteSpace:\s*'nowrap'/);
+    });
+  });
+
   test('the derivation discriminates (executed control)', () => {
     // Every arm above is an equality between two derived lists. If `barNav` stopped
     // filtering, the phone and tablet lists would be equal and several arms would still
