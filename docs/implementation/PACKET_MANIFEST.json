@@ -32140,7 +32140,7 @@
         },
         {
           "path": "tests/domain/roadsParticipation.test.js",
-          "symbol": "const UNDISPOSITIONED_CEILING = 7",
+          "symbol": "const UNDISPOSITIONED_CEILING",
           "_note": "⭐ ADDED in version 2 (nothing removed): the ceiling at :422, quoted WITH its value so the no-raise is provable verbatim rather than by inspection."
         },
         {
