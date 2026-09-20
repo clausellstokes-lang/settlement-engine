@@ -794,3 +794,8 @@ CURE-A `08cb42e31` (the model walker's mask: findings identical under both forms
 
 - **FIX-P1c** (`5fbe2d82c`) composes after FIX-T2 at the second composition; §934.72 and §934.66 are executed and closed.
 - **EM-R0d version 4** is pre-proofed at the composed tip (its badge-capitals TEST row re-cut; two comment-only movers admitted) and placed at EM-R0a's flip under the fourth amendment's hash; the placement window runs from the v4 pre-proof tip.
+
+## Amendments of 2026-09-20 12:58 EDT — TOOL-13a narrowed to the mintable rung (ODQ §934.47 addendum 103)
+
+- **TOOL-13a (RE-CUT):** the schema-23 rung = M1 (the `--report` denominator field, computed outside the byte-frozen blob, naming the four roots the frozen detector's header claims and the two it binds) + M2 (the M12 docblock correction) + the `scanStats` re-freeze, all in `scripts/check-observed-shape-readers.mjs`; minted by the chair through the migration-bundle door on a branch cut at the integration tip after EM-R0a lands, per the compile's §7. The root widening, P1a and `minRows` are CLOSED with reason (§934.73): the legacy detector is frozen as the historical instrument, and the door re-asserts the freeze.
+- **Recorded facts for any future OSR rung:** `writer-reach-scan.mjs` imports the frozen `makeResolver` directly and pins it in its own register — a detector change owes a second re-freeze; `predecessorIncreased` has never been non-zero in the register's history.
