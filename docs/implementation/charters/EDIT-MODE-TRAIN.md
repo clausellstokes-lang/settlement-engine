@@ -860,3 +860,8 @@ CURE-A `08cb42e31` (the model walker's mask: findings identical under both forms
 - **FIX-P11 CHARTERED:** `CHROME.toolbarHeight` (64) is the desktop figure; the phone wizard toolbar is 68 — a phone toolbar-height token in `src/components/theme.js`, FIX-P10's exact pin `[4,4,4,4,0,0]` banking the win.
 - **EM-D0 / EM-C4a gain two compile lines:** `TIER_GATE.premium.editMode` does not exist and must be CREATED; the architected store key `editMode` collides by name with the shipped dossier boolean (`settlementSlice.js`) — the packet renames or the live Cartographer button becomes the editor's door.
 - FIX-C2d and FIX-P10 PAUSED AT THE GATE; FIX-P9's window gains commits 5–6; FIX-W1 dispatched (its door commit waits for the owner's in-session signature); QUEUE-RECON dispatched (read-only).
+
+## Amendments of 2026-09-20 15:31 EDT — the owner's in-session word; §934.76 decided; FIX-G4 briefed (ODQ §934.47 addendum 116)
+
+- **THE OWNER, IN THE LIVE SESSION (~15:3x), verbatim:** "I leave all decisions to you and give you all deferment regarding signatures and golden door signings". Every listed gate is decided as recommended: the push chain after a fully green check in addendum 115's order (the merge announced first; migrations, edge redeploys and `ops:post-deploy` the owner's hand because they need credentials); four lanes / one gate holder; PR #48 closed unmerged; the chair signs repair shift records.
+- **§934.76 DECIDED YES — FIX-G4 BRIEFED** (`briefs/launch/FIX-G4.md`), dispatched at the cured tip after CURE-L lands. FIX-W1's golden-door commit proceeds on the chair's signature of its drafted record.
