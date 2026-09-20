@@ -865,7 +865,7 @@
           },
           {
                     "path": "src/domain/display/worldSnapshotPublic.js",
-                    "line": 615,
+                    "line": 628,
                     "category": "floatInterpolation",
                     "snippet": "Math.floor(finiteNum(options.maxHeadlinesPerTick, 12))"
           },
@@ -931,7 +931,7 @@
           },
           {
                     "path": "src/domain/worldPulse/calamityKernel.js",
-                    "line": 710,
+                    "line": 745,
                     "category": "floatInterpolation",
                     "snippet": "Math.round(exposure.factor * 10000)"
           },
