@@ -49,6 +49,7 @@ import Disclosure from '../primitives/Disclosure.jsx';
 import DesktopOnlyGate from '../primitives/DesktopOnlyGate.jsx';
 import RefusalNotice from '../primitives/RefusalNotice.jsx';
 import { raisedHere, REFUSAL_REASONS, REFUSAL_SURFACES, refusalOf } from '../../lib/refusalReasons.js';
+import { FORK_SEED_MAX } from '../../lib/anonForkSalt.js';
 import Button from '../primitives/Button.jsx';
 import useIsMobile from '../../hooks/useIsMobile.js';
 import { INK, MUTED, SECOND, BORDER, CARD, sans, serif_, FS, SP } from '../theme.js';
@@ -165,6 +166,13 @@ function SeedField() {
           onChange={(e) => setValue(e.target.value)}
           onKeyDown={(e) => { if (e.key === 'Enter') forge(); }}
           placeholder="Enter a seed"
+          // ⭐ THE ADDRESS HAS A DECLARED LENGTH (owner-signed, ODQ §934.72). This
+          // field carried NO limit, which is how a fork seed came to be ~48
+          // characters without anything noticing: the address pin had no limit to
+          // read and had to anchor on the suffix width instead. The number is
+          // DERIVED from the card seeds and the fork suffix (lib/anonForkSalt.js),
+          // never typed here, so the field and the pin cannot drift apart.
+          maxLength={FORK_SEED_MAX}
           style={{ flex: '1 1 200px', minWidth: 160, padding: '6px 10px', border: `1px solid ${BORDER}`, fontSize: FS.sm, fontFamily: sans, boxSizing: 'border-box', background: CARD, color: INK }}
         />
         <Button variant="secondary" size="sm" busy={busy} disabled={!value.trim()} onClick={forge}>

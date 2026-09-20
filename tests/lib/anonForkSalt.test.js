@@ -37,6 +37,7 @@ import {
   ANON_FORK_SALT_KEY,
   ACCOUNT_DIGEST_HEX,
   FORK_SUFFIX_MAX,
+  FORK_SEED_MAX,
   __resetAnonForkSaltMemory,
 } from '../../src/lib/anonForkSalt.js';
 import { SAMPLE_SETTLEMENTS, forkSeedFor } from '../../src/data/sampleSettlements.js';
@@ -218,6 +219,19 @@ describe('a fork seed stays an address, not a pasted blob', () => {
     expect(seed).toHaveLength(CNOCBY.config.seed.length + 1 + ACCOUNT_DIGEST_HEX);
   });
 
+  // ⭐ OWNER-SIGNED, ODQ §934.72: the field now declares this same number, so the
+  // pin finally has the field limit it was always supposed to read. Asserted as an
+  // identity between two derivations, never against a literal.
+  it('FORK_SEED_MAX is exactly the ceiling this pin enforces', () => {
+    const longestCard = Math.max(...SAMPLE_SETTLEMENTS.map((s) => s.config.seed.length));
+    expect(FORK_SEED_MAX).toBe(longestCard + 1 + FORK_SUFFIX_MAX);
+    // …and it is reached, not merely respected: one card sits exactly on it, so a
+    // ceiling quietly lowered by one would red rather than pass with slack.
+    const widest = SAMPLE_SETTLEMENTS
+      .map((s) => forkSeedFor(s, forkIdentity('7c9e6679-7425-40de-944b-e07fc1f90ae7')).length);
+    expect(Math.max(...widest)).toBe(FORK_SEED_MAX);
+  });
+
   it('no forker, signed in or out, can push a seed past the declared ceiling', () => {
     const ceiling = (sample) => sample.config.seed.length + 1 + FORK_SUFFIX_MAX;
     const forkers = [
@@ -270,5 +284,31 @@ describe('the cure, end to end: the two halves of the promise', () => {
     const a = forkSeedFor(CNOCBY, forkIdentity('aaaaaaaa-1111-4000-8000-000000000001'));
     const b = forkSeedFor(CNOCBY, forkIdentity('aaaaaaaa-1111-4000-8000-000000000002'));
     expect(a).not.toBe(b);
+  });
+
+  // ⭐⭐ THE OWNER SIGNED DETERMINISM (ODQ §934.66): a repeat fork of one card by one
+  // identity yields the SAME world, and §7a row 1's living door stays closed until
+  // the owner opens it. This is the arm that makes that a fact rather than a
+  // reading of the source — a timestamp or a counter anywhere in the derivation
+  // would show up here as a second distinct seed.
+  it('ONE ACCOUNT re-forking ONE card is byte-identical, a thousand times over', () => {
+    const id = '7c9e6679-7425-40de-944b-e07fc1f90ae7';
+    const seeds = new Set();
+    for (let i = 0; i < 1000; i += 1) seeds.add(forkSeedFor(CNOCBY, forkIdentity(id)));
+    expect(seeds.size, 'a repeat fork drew a different world: something in the derivation varies')
+      .toBe(1);
+    expect([...seeds][0]).toBe(`${CNOCBY.config.seed}-${forkIdentity(id)}`);
+  });
+
+  it('a signed-in repeat fork survives a reload AND a cleared device salt', () => {
+    // The account branch must not consult the device at all, so neither a reload
+    // nor a visitor clearing their storage can move a signed-in reader's world.
+    const id = '7c9e6679-7425-40de-944b-e07fc1f90ae7';
+    const first = forkSeedFor(CNOCBY, forkIdentity(id));
+    __resetAnonForkSaltMemory();               // the reload
+    window.localStorage.clear();               // the cleared device
+    expect(forkSeedFor(CNOCBY, forkIdentity(id))).toBe(first);
+    anonForkSalt();                            // and a NEW device salt is minted
+    expect(forkSeedFor(CNOCBY, forkIdentity(id))).toBe(first);
   });
 });

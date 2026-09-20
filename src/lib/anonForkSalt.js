@@ -63,6 +63,11 @@
  */
 
 import { fnv1a32 } from '../kernel/proseHash.js';
+// For FORK_SEED_MAX only. Costs nothing in the bundle: GenerateWizard already pulls
+// both this module's consumers and the sample table into the same create chunk
+// (it imports LayeredConfigurationPanel and FoundingWorlds side by side), and the
+// dependency runs lib -> data, which is the direction the purity rule permits.
+import { SAMPLE_SETTLEMENTS } from '../data/sampleSettlements.js';
 
 const KEY = 'sf.anon.fork-salt';
 
@@ -93,6 +98,31 @@ export const ACCOUNT_DIGEST_HEX = 12;
 export const ANON_SALT_HEX = 12;
 /** The widest suffix either branch can produce. */
 export const FORK_SUFFIX_MAX = Math.max(ACCOUNT_DIGEST_HEX, ANON_SALT_HEX);
+
+/**
+ * ⭐ THE LONGEST SEED THIS PRODUCT CAN HAND A READER BACK, and therefore the
+ * `SeedField`'s `maxLength` (owner-signed, ODQ §934.72).
+ *
+ * DERIVED, NEVER TYPED. The field used to declare no limit at all, which is why
+ * the address pin had nothing to read and had to anchor on `FORK_SUFFIX_MAX`
+ * instead. One number, computed from the card seeds and the suffix width, is what
+ * lets the field and the pin agree by construction rather than by a maintainer
+ * remembering to change two places.
+ *
+ * ⚠ IT COVERS THE MINTED SEEDS TOO, measured rather than assumed: `kernel/prng.js`
+ * mints `<base36 wall-clock><3 sequence><6 entropy>`, which is 17 characters today
+ * and 18 once the millisecond clock needs a ninth base36 digit — comfortably under
+ * the fork ceiling, so capping the field at this number cannot truncate a seed the
+ * engine itself produced.
+ *
+ * ⛔ DECLARED BEHAVIOUR CHANGE: a reader who typed a seed LONGER than this could do
+ * so before and cannot now. Seeds are opaque strings, so a long typed phrase was
+ * legal; it is now clipped by the field. That is the cost of giving the address a
+ * readable limit, and it is stated here rather than left for someone to discover.
+ */
+export const FORK_SEED_MAX = Math.max(
+  ...SAMPLE_SETTLEMENTS.map((sample) => String(sample.config?.seed ?? '').length),
+) + 1 + FORK_SUFFIX_MAX;
 
 // Fallback when localStorage is unavailable (private mode, sandboxed iframe,
 // quota). Module-scoped so the salt is at least stable for the page's lifetime.
