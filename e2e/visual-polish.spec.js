@@ -139,20 +139,41 @@ test('the phone landing does not scroll sideways, and is the hero alone (§934.2
   await page.goto('/');
   await page.waitForSelector('section.sf-landing-hero', { timeout: 30_000 });
   await settleRoute(page);
-  const m = await page.evaluate(() => ({
-    scroll: document.documentElement.scrollWidth,
-    client: document.documentElement.clientWidth,
-    belowFold: ['forge', 'voice', 'realm', 'commons', 'closer'].filter((id) => document.getElementById(id)),
-    heroMinH: getComputedStyle(document.querySelector('section.sf-landing-hero')).minHeight,
-    images: [...document.querySelectorAll('*')]
-      .flatMap((el) => [...String(el.getAttribute('style') || '').matchAll(/url\((['"]?)([^'")]+)\1\)/g)])
-      .map((x) => x[2])
-      .concat([...document.querySelectorAll('img, picture, video')].map((el) => el.tagName)),
-  }));
+  const m = await page.evaluate(() => {
+    const main = document.querySelector('main');
+    const hero = document.querySelector('section.sf-landing-hero');
+    // ⛔ THE CENSUS IS THE LANDING'S OWN BODY, NOT THE DOCUMENT. §934.27 rules the phone
+    // landing "the hero alone on its one painting" AND, in the same sentence, keeps the
+    // chrome: "the hero fills the viewport between the arrow header (logo and Sign In,
+    // §934.26) and the bottom bar". The painted arrow's filler is chrome on every page;
+    // counting it made this arm read 12 images against 1 in CI (job 106141849116), four
+    // of them the header's own painting. `--page-bg` on the shell is in the same class:
+    // on `home` the wrapper carries NEITHER `.page-bg` NOR `.page-painted`
+    // (config/pageBackgrounds.js), so the custom property is a value no rule consumes and
+    // no byte is fetched for it — a DOM artefact, not a painting on the landing.
+    const body = main ? [main, ...main.querySelectorAll('*')] : [];
+    return {
+      scroll: document.documentElement.scrollWidth,
+      client: document.documentElement.clientWidth,
+      belowFold: ['forge', 'voice', 'realm', 'commons', 'closer'].filter((id) => document.getElementById(id)),
+      heroMinH: getComputedStyle(hero).minHeight,
+      mainCount: document.querySelectorAll('main').length,
+      heroInMain: Boolean(main && hero && main.contains(hero)),
+      images: body
+        .flatMap((el) => [...String(el.getAttribute('style') || '').matchAll(/url\((['"]?)([^'")]+)\1\)/g)])
+        .map((x) => x[2])
+        .concat(body.filter((el) => /^(IMG|PICTURE|VIDEO)$/.test(el.tagName)).map((el) => el.tagName)),
+    };
+  });
   expect(m.scroll).toBeLessThanOrEqual(m.client);
   expect(m.belowFold, 'a below-fold section mounted at phone width').toEqual([]);
   // The hero really fills the band: a min-height in px, at least most of the viewport.
   expect(Number.parseFloat(m.heroMinH)).toBeGreaterThan(600);
+  // ⛔ ANTI-VACUITY FOR THE SCOPE: the census counts nothing outside <main>, so a page with
+  // no <main>, or a hero that has left it, would satisfy "one image" by measuring an empty
+  // set. Both are asserted before the count is believed.
+  expect(m.mainCount, 'the landing has no single <main> for the census to scope to').toBe(1);
+  expect(m.heroInMain, 'the hero is not inside <main>, so the census is not the landing body').toBe(true);
   // "and its background image as the only one" — the hero's scene, and nothing else.
   expect(m.images).toHaveLength(1);
   expect(m.images[0]).toMatch(/still-0-desk/);
