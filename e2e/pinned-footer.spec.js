@@ -435,13 +435,38 @@ test('Tab to the tucked home button reveals the whole footer without scrolling, 
   expect(before.scrollY, 'focusing a band link does not scroll').toBe(0);
   expectBandOnly(before);
 
-  await page.keyboard.press('Tab');
-  await raf(page);
-  const focused = await page.evaluate(() => ({
-    label: document.activeElement.getAttribute('aria-label'),
-    visible: document.activeElement.matches(':focus-visible'),
-  }));
-  expect(focused, 'presence control: keyboard focus is on the home button').toEqual({ label: 'SettlementForge home', visible: true });
+  // ⛔ WALKED TO BY IDENTITY, NEVER BY A COUNTED NUMBER OF TABS. This pressed Tab exactly
+  // ONCE, on the belief that Privacy was the last control in the band. It has not been
+  // since the two orphan routes joined the row (87755aeea, 2026-09-18: /about/guide and
+  // /roadmap had no inbound link anywhere outside lib/routes.js), so one Tab lands on
+  // "Guide" — a ghost Button with no aria-label — and the arm reddened in CI on
+  // `label: null`. The band's membership is a LIVE PREDICATE (`footerLinks` in
+  // components/footer/LegalRibbonRow.jsx hides a link the primary nav already draws at
+  // this width), so any Tab count here is a literal of something the product derives.
+  // The walk is BOUNDED, so a home button that never takes focus still reds; and the
+  // footer is re-measured at every intermediate stop, because a band link that revealed
+  // the footer early would make the `open` measurement below meaningless.
+  const HOME_LABEL = 'SettlementForge home';
+  /** Six band links today; the bound is generous and finite, never a "keep going". */
+  const MAX_TABS = 12;
+  let tabs = 0;
+  let focused = null;
+  while (tabs < MAX_TABS) {
+    await page.keyboard.press('Tab');
+    tabs += 1;
+    await raf(page);
+    focused = await page.evaluate(() => ({
+      label: document.activeElement.getAttribute('aria-label'),
+      visible: document.activeElement.matches(':focus-visible'),
+    }));
+    if (focused.label === HOME_LABEL) break;
+    expectBandOnly(await footerBox(page));
+  }
+  expect(
+    focused,
+    `presence control: keyboard focus is on the home button (reached after ${tabs} Tab press(es); `
+    + `the bound is ${MAX_TABS})`,
+  ).toEqual({ label: HOME_LABEL, visible: true });
   const open = await footerBox(page);
   expect(open.scrollY, 'the reveal moves the footer, not the page').toBe(0);
   expect(open.homeTop, 'the home button is inside the viewport').toBeGreaterThanOrEqual(0);
