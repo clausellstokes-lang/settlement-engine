@@ -14,8 +14,8 @@
  * recorded invariant). So every fixture below is planted as an opaque literal
  * and asserted by DEEP EQUALITY plus a JSON byte-compare; not one assertion
  * names a field inside either value, and nothing here imports from
- * `src/domain/edit/**` (which does not exist at this commit — importing it would
- * make this packet depend on its own dependant, and is a STOP).
+ * `src/domain/edit/**` (a directory that exists since EM-R0a landed its record class
+ * register; importing it would make this packet depend on its own dependant, and is a STOP).
  *
  * WHY THE FIXTURES STILL CARRY STRUCTURE: an opaque blob that is a bare scalar
  * could not tell a faithful round trip from a normalisation. Each key therefore

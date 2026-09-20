@@ -12,8 +12,8 @@
  * mechanism this suite drives is name-based or whole-value — an allowlist
  * membership, a key-name regex, an explicit delete, a destructure-drop — so not
  * one assertion names a field inside either value, and nothing here imports from
- * `src/domain/edit/**`. THE VEIL PRECEDES THE WRITER: `EM-B2a` (the layer's
- * writer) and `EM-C1` (the registry's) land AFTER this packet and depend on it,
+ * `src/domain/edit/**`, a directory EM-R0a created. THE VEIL PRECEDES THE WRITER:
+ * `EM-B2a` (the layer's writer) and `EM-C1` (the registry's) land AFTER this packet and depend on it,
  * which is why every case below runs on HAND-PLANTED fixtures through code that
  * already exists.
  *
