@@ -24,13 +24,13 @@
     "The derivation history — every prior row, its cause, and the census laws — stays in the walker",
     "beside the assertions, deliberately. Only the live tuple moved."
   ],
-  "measuredAtSha": "d279d13ebe718f07b278ec6d1a705a0870159079",
-  "measuredBy": "chair-fable-a9df403c",
+  "measuredAtSha": "da5310f302d447e5f7a6b7e65e47dd4a9acccf02",
+  "measuredBy": "chair-fable-4a1823e2",
   "date": "2026-09-20",
-  "note": "after the first composition sitting (21 lane commits: FIX-L1 parked -25 / credited +25 / titles +330 / suites +108; FIX-P3 +5 files; FIX-P4 +1; FIX-P5 +1; FIX-P1 +1; FIX-C2b +3 titles; TOOL-13b +1); the seventh refreeze at d279d13eb before run 22",
-  "files": 2664,
+  "note": "after the second composition sitting and the successor chair picks (EM-R0a landing and flip; CURE-K; CURE-J x3; FIX-B2 x3; FIX-T2 x2; FIX-P1c; DOC-4; FIX-D9 x3 + FIX-B2b; TOOL-19 x2; FIX-C2c x3; TOOL-25; FIX-P1d; the CURE-J archival-roster line). Declared deltas: EM-R0a files +1 credited +1 titles +7 suites +1; CURE-J titles +2; FIX-T2 titles +4 suites +1; FIX-C2c titles +3; TOOL-19 titles +1; TOOL-25 titles +5; FIX-D9 titles +3 (files net 0); FIX-P1c titles +2. The eighth refreeze at da5310f30 before run 23",
+  "files": 2665,
   "parked": 359,
-  "credited": 2305,
-  "titles": 25501,
-  "suiteTitles": 6812
+  "credited": 2306,
+  "titles": 25529,
+  "suiteTitles": 6815
 }
