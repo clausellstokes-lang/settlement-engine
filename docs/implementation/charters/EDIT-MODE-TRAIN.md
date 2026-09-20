@@ -419,6 +419,10 @@ CURE-A `08cb42e31` (the model walker's mask: findings identical under both forms
 
 - **EM-R6 version 3.1** (kit `packets-waiting/EM-R6.*`) folds the nine rulings of addendum 34 with a declared `rewrite` field and an import-time `readable` resolver; FIX-D5 rides (eleven sentinel spellings, 3 live / 8 dark; +5 effective lines, +245 B). **Its pre-proof adds:** a closed-vocabulary pin on `LABEL_REWRITE` (OrphanKind's shape) and a set-equality arm joining `servicesGenerator.js`'s sentinel literals to the domain's declared list. **EM-R7 adds** a `tests/lint` source-scan arm enforcing `readable` on both cascade ledgers. **EM-B1c's pre-proof** carries the faction-side `readable` typing.
 
+## Amendments of 2026-09-20 02:47 EDT — EM-R0b version 3 accepted (`CHECK_META`; 33 checks; three duplicated-leaf checks); EM-R0a's pre-proof gains the `history` group; EM-R7 gains the duplicated-leaf sweep (ODQ §934.47 addendum 38)
+
+- **EM-R0b v3** (kit `packets-waiting/EM-R0b.*`; v2 superseded): `CHECK_META` total over 33 checks with a violation carrying the keys of the arm that fired; EM-R0c's STOP-4 discharged. **EM-R0a's pre-proof** adds one consistency group rooted at `history` (prevention for `founding.age ≡ history.age`). **EM-R7** carries the exhaustive one-fact-two-paths sweep and records `readiness.score`'s unresolved relation. **EM-R0d's pre-proof** names `severityBands()` as `severityBand`'s plural sibling.
+
 ## Pre-proof tasks (Opus, read-only, before each packet is READY)
 1. Name every "verified fact" with file:line at the base; 2. fill the change manifest and required symbols; 3. measure the budget (files, lines) and split if over; 4. name the tests the packet's proof shape copies; 5. run the sealed dispatch dry.
 
