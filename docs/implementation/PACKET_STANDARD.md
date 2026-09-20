@@ -310,7 +310,15 @@ proven — which is why it is written down here rather than left to the next aut
 ⛔ The row is added surgically beside its siblings. That manifest is never re-serialised whole:
 a formatter's diff would bury the one row that matters.
 
-Authority: `OWNER_DECISION_QUEUE.md` §49, §50.2, §53.6, §85.4, §102.3.
+**A new `.js` leaf under `src/generators/**` or `src/domain/**` carries one obligation: its
+wiring-census row.** `scripts/wiring-census.mjs` stamps a producer-file COUNT
+(`producerIndexFiles`) over those two roots into `docs/content/wiring-census.json`, so a
+new leaf moves the census even when no pool or variant moved — discovered at a sealed build
+(EM-P2 v4, 2026-09-20) whose checks did not name the register. The wave declares the file
+as a GENERATED row, its build runs `node scripts/wiring-census.mjs` in its last gated batch,
+and the regenerated file lands with the packet.
+
+Authority: `OWNER_DECISION_QUEUE.md` §49, §50.2, §53.6, §85.4, §102.3, §934.47 addendum 78.
 
 ## Burning a census row
 
@@ -456,6 +464,13 @@ dispatch, all of these limits bind:
 Generated artifacts do not count as handwritten files, but the packet must name
 their generator and expected artifact set. Documentation receipts do not count
 as production lines.
+
+An ADDRESSES-ONLY citation row — a production file whose only edit is the
+`path:line` addresses inside its comments or string literals, no logic byte —
+does not count against the three-modified-logic-files cap. It stays a
+change-manifest row with its stated comment-line delta and it runs the
+source-citation walker; it is never a logic home and never splits a packet.
+Authority: `OWNER_DECISION_QUEUE.md` §934.47 addendum 72 (2026-09-20).
 
 If the work cannot fit, the agent stops and proposes the smallest split. The
 agent may not quietly renegotiate the budget or convert a registration file
@@ -616,6 +631,11 @@ order:
 7. Run focused verification.
 8. Run the packet's wave-end gate and produce the completion receipt.
 
+A written-contract arm — an assertion that already holds at the base — cannot fail
+first; it is proved by its counterforce measured (a planted mutant or a perturbed
+input that reds the named title, then restored) and the counterforce is quoted in
+the receipt (ODQ §934.47 addendum 61).
+
 The agent must not start by changing a golden, baseline, budget, or persisted
 shape.
 
@@ -636,6 +656,10 @@ shape.
 - If a full gate is red, compare failure identities with a committed-base run
   or an integrity-counted archive. Do not repair unrelated rows.
 - Never raise a baseline, budget, timeout, or ceiling to finish a packet.
+- A `tests/lint` step that excludes the lighting walker
+  (`npx vitest run --pool=threads --maxWorkers=2 tests/lint --exclude=tests/lint/sovereigntyLightingContract.walker.test.js`)
+  may be a sealed check while that walker reds by design under a train;
+  `tests/lint` whole remains the lane's instrument step (ODQ §934.47 addendum 61).
 
 Focused commands and expected exit codes belong in each packet. `Run relevant
 tests` is not an instruction.
