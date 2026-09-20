@@ -220,3 +220,177 @@ update — `tests/lint/.domain-any-baseline.json` total **2248 → 2230** (remov
 `provenance.js` −1); ≤ constitution cap 2248 and ≤ CEILING 2252. The domain-strict baseline (0
 files), the `labelJoins` frozen inventory, and the `layerBoundaries`/`architectureFreshness` walkers
 list/enumerate none of the deleted files. No walker required a RAISE.
+
+---
+
+## Round-3 additions (dark modules — reachable from no build entry)
+
+**NOTHING IS DELETED IN THIS ROUND.** Deleting shipped code is an owner-visible act; this section
+exists so that what was measured is not re-found, and so the two owner decision points below are
+asked once rather than rediscovered. (FIX-D9, 2026-09-20, at `6a3e8089f`; TOOL-12's ⛔ items 1
+and 8. Full receipts: the lane's evidence file, reproduced by `node` instruments only — no build.)
+
+### Why this round needed a different method
+
+This doc's original *Method* is an import census by `grep` plus hand-resolution. That answers
+"does anything name this file?" It does **not** answer "does any build entry REACH it?", and the
+four modules below are exactly the gap: each has a live, green test importing it, so every
+grep-shaped census reports it as consumed.
+
+The measurement here walks static AND dynamic edges from **all seven build entries** —
+`src/main.jsx` (`index.html:95`) and the six worker entries (`advanceInterval`,
+`customContentPreview`, `generation`, `townSceneExport`, `townScene` under `src/workers/`, plus
+`src/utils/pdfRender.worker.js`, which is **not** under `src/workers/` and is missed by a census
+that assumes it is). Rollup emits only what an entry reaches, so unreachable ⇒ in no chunk.
+
+⛔ **248 of 2,247 `src/` modules are reachable from no build entry at all.** The four below are
+four of them; the other 244 are named as a follow-up, not dispositioned here.
+
+### Recommendation vocabulary, extended
+
+The round-1 words (**DELETE** · **MOUNT** · **KEEP-AS-SEAM** · **OWNER-VERIFY**) do not have a
+term for code that is dark *on purpose* — landed ahead of its caller, behind a gate the owner
+controls. Three words are added:
+
+- **DARK-BY-DESIGN** — unreachable, and that is the intended state today. A named gate holds it
+  dark. Deleting it would delete a landed law, not free a byte. The module carries a
+  `// dark-until:` header block naming the gate.
+- **RETIRE-PROPOSED** — unreachable with no consumer planned, because a named successor took
+  over. The owner's decision point, with the tests that would go with it.
+- **LIVE** — the zero was refuted; the importer is named and the finding corrected. *(No module
+  in this round took this disposition; TOOL-12's zero was reproduced exactly.)*
+
+### The table
+
+| File | Lines | Reachable from an entry | Only importer | Disposition |
+|---|---|---|---|---|
+| `src/generators/density/densityAscension.js` | 157 | **no** | `tests/generators/densityLaw.test.js` | **DARK-BY-DESIGN** |
+| `src/generators/density/successionGrammar.js` | 557 | **no** | `tests/generators/densityLaw.test.js` | **DARK-BY-DESIGN** |
+| `src/generators/density/titularSuccession.js` | 257 | **no** | `tests/generators/densityLaw.test.js` | **DARK-BY-DESIGN** |
+| `src/domain/region/foldTradeCategories.js` | 44 | **no** | `tests/domain/foldTradeCategories.test.js` | **RETIRED** |
+
+All four have **zero** static, dynamic, `require` and `vi.mock` importers across `src`, `tests`,
+`e2e`, `scripts`, `api` and `supabase` other than the single test named. All four are absent from
+every one of the 726 emitted `.js` assets of the chair's dist copy.
+
+### `src/generators/density/{densityAscension,successionGrammar,titularSuccession}.js` — **DARK-BY-DESIGN**
+
+| Property | Value |
+|---|---|
+| What they are | Register VII's un-wired half. `applyDensityLaw.js:41` cites §810.6 R21's *"birth · growth · ascension — one law, never three"*: birth is built, **ascension** is `densityAscension.js`. `titularSuccession.js` is §810.7 R22's reading half (which titles stand vacant, who may claim them); `successionGrammar.js` is §810.8 R23/R24/R25's deciding half (continuity · transfer · overthrow). Each header quotes the owner's own words. |
+| The gate, named | `densityBands.js` — `REGISTER_VII_SIGNATURE = Object.freeze({ signed: false, live: false })`. `densityLaw.js` derives `NEW_SETTLEMENT_DENSITY_LAW_VERSION` from that pair, so it is `DEFAULT_DENSITY_LAW_VERSION` (**1**) against `REGISTER_VII_DENSITY_LAW_VERSION` (**2**). The law is UNSIGNED and UNLIT by the owner's own sign → soak → light discipline. |
+| Dormant even if wired | `planSeatAscension` guards on `rollsRegisterVii(config)` **first** and returns `declined('dormant_law')`. Wiring these today would draw nothing until the dial moves. |
+| Obligations a deletion would break | (1) `scripts/mutation-coverage-manifest.json`'s `densityLaw.test.js` rationale names `successionGrammar.js` as the **PROMOTION PATH** for the R25 mutation plant. (2) `tests/domain/roadsParticipation.test.js` carries an **EXPECTED disposition row** for `titularSuccession.js` (EM-B1k2 §13 Q1 option (a)), reading *"the packet that wires it owes the raw-base disposition"*. (3) `scripts/lib/writer-dark-register.mjs` cites `titularSuccession.js:29` **twice** as the estate's own evidence that `densityRungRole` is written and unread. (4) All three carry content-addressed rows (`sha256` + `size`) in `scripts/.observed-shape-readers-baseline.json` and rows in `tests/lint/.tuning-inventory.json`. |
+| ⭐ They are not free | `ENGINE_SHARED_DOMAIN` is seeded by walking **every file under `src/generators/`**, not the reachable graph, and the eager first-paint graph then seeds itself from ESD. `titularSuccession.js` is the **sole generator importer** of `domain/density/factionLifecycle.js` and `domain/spatial/cohesionWeave.js`, so these three modules alone hold both in ESD and in the eager set: re-running both shipped derivations with the trio skipped moves ESD **51 → 49** and `EAGER_FIRST_PAINT_MODULES` **268 → 266**. ⚠ Asking "are they in `EAGER_FIRST_PAINT_MODULES`?" answers itself and says *yes* — the check is circular, because ESD membership is what puts them there. The counterfactual is the only honest instrument. |
+| Byte claim, bounded | The two modules total **35,400 B of SOURCE** (624 lines). That is **not** an emitted-byte figure and must not be reported as one: no build was run, both modules have live consumers so they would still be emitted, and they would move out of eager `engine-core` rather than vanish. |
+| ⭐ **THE PACKET SLOT** (chair's ruling, ODQ §934.47 addendum 87) | Register VII's wiring car — chartered the day the owner signs `REGISTER_VII_SIGNATURE`; until then DELIBERATE-DARK by the owner's unsigned register |
+| What that ruling replaced | FIX-D9 measured no chartered packet: `EDIT-MODE-TRAIN.md` once named `densityAscension.js` as EM-P1's mint site, but the same charter records EM-P1 **WITHDRAWN** and *"the wrong mint site … CLOSED with the decision not to mint"*; the wiring existed only as prose (`docs/FABLE_VALIDATION_QUEUE.md` twice says *"until the wiring car"*) and `git grep "TE-DENSITY-1" -- docs/implementation/charters` returns **nothing**. The chair's ruling turns "a car with a name and no charter" into a **named slot with a named trigger**: the owner's signature is the event that charters it. |
+| Header marker | Each module carries the slot above as a byte-exact `// dark-until:` line, placed below every line address cited from `scripts/` or `docs/` so no citation moved (proved: the shipped citation detector's finding set is byte-identical before and after). **Pinned by `tests/lint/deadCodeDisposition.walker.test.js`** — the sentence in that line, the one in this table, and the walker's constant are one string in three places, and the walker reds if any of them drifts. |
+
+### `src/domain/region/foldTradeCategories.js` — **RETIRED 2026-09-20**
+
+**SIGNED AND APPLIED.** The owner's standing grant of 2026-09-20 ("I sign everything. Anything
+that you need for a signature now or in the future I give.") signed §934.70; the chair applied it
+as **ODQ §934.47 addendum 98**, recorded as the chair's use of the grant and **vetoable**. The
+same grant signs KEEP-DARK for the three density modules, which is why they are unchanged.
+
+**What went, by explicit path:**
+
+| Removed | Why |
+|---|---|
+| `src/domain/region/foldTradeCategories.js` (44 lines) | the module; zero importers outside its own test |
+| `tests/domain/foldTradeCategories.test.js` (1 suite, 7 titles) | it asserted a dead copy of logic that no longer ships |
+| the `'/src/domain/region/foldTradeCategories.js'` row in `vite.config.js`'s `ENGINE_SHARED_DOMAIN_EXCISIONS` | 1 of 18 rows whose `.delete()` was a no-op; a note records why, in place |
+
+**Collateral, comment-only and byte-neutral in the dist:** `src/domain/customContentSchema.js`'s
+header asserted **EIGHT** non-UI importers and named this module among the two readers of
+`tradeCategoryLabelOf`. The retirement made that false, so the roster is re-measured to **SEVEN**
+and the sentence *"seven of the eight are inside the generation worker's static graph;
+`foldTradeCategories.js` is the one that is not"* now reads that all seven are — which is the
+retirement's own reason, stated where the next reader meets it. ⚠ **This file is outside the
+chair's named scope for the retirement commit and is flagged for veto**: it is here because the
+deletion falsified a claim in it, and TOOL-12's item 2 named exactly this class (a comment that
+is a false statement about the tree) as a defect worth its own slot.
+
+**Nothing else moved, measured:** the goldens are byte-identical (a module no entry reaches cannot
+move a generated corpus); `engineChunkLazy.test.js` treats the excision list as a PARTITION
+(`unreached + reachable === length`) with an anti-vacuity floor on `reachable`, so a row leaving
+keeps both arms true; `customContentCharsetLazy.test.js` only asserts no row names
+`customContentCharset`; and the module contributed **zero** findings to the observed-shape
+register — it appeared in the `manifests` trees alone, never in `inventory`, `identities` or
+`rowTags`.
+
+**The record of what it was, kept because a retirement should not erase its own reasoning:**
+
+| Property | Value |
+|---|---|
+| Symbol | `export function foldTradeCategories(labels, satisfiesIndex, priorCustom)` (44 lines) |
+| Born with a consumer | `d855b58fc8` (§14, 2026-06-08) created the module **and** its importer, `src/generators/steps/generateEconomy.js`. That generator edge is why it was ever an `ENGINE_SHARED_DOMAIN` member, and it is the membership `tests/build/vendorPdfLazy.test.js` records FP-G7 excising on 2026-07-15. |
+| Superseded, not abandoned | `c1ea091f7a` ("Generation remediation") removed that import and replaced the call with **`projectOwnedCustomTradeDirection`** (`src/domain/content/customTradeEndpointProjection.js`), wired today at `generateEconomy.js:167,178`. The successor takes the old input under the parameter name **`legacySatisfies`** — it absorbed this module's job by name. |
+| The §14 behaviour still ships | `generateEconomy.js:304-316` still writes `customCategoryExports` / `customCategoryImports`, read by `customTradeLabelOwnership.js:77-78`, `settlementContentProvenance.js:235-236` and `pdf/lib/viewModelBodySlices.js:68-69`. **What died is this module, not the feature.** No user-visible behaviour depends on it. |
+| ⛔ Its test asserts a dead copy | `tests/domain/foldTradeCategories.test.js` — 7 `it`s, green, testing logic that no longer ships. It is the reason every grep-shaped census reports this module as consumed. A retirement takes the test with it. |
+| ⛔ Its excision row is a no-op | `vite.config.js`'s `ENGINE_SHARED_DOMAIN_EXCISIONS` still lists `/src/domain/region/foldTradeCategories.js`. Re-running the shipped `computeEngineSharedDomain()` at this tip: the derived closure has **68** members, the module is **not** among them, and this is **1 of 18** rows that deletes nothing. It is a fossil of the pre-remediation graph. This also answers TOOL-12's ⛔ item 8: the module is not "co-located somewhere unexamined" — it is in no chunk because no entry reaches it. |
+| Behavior impact of a deletion | **None.** No consumer ⇒ generation output unchanged ⇒ goldens byte-identical. |
+| What a retirement touches | the module, its dedicated test, and the no-op `vite.config.js` excision row. Nothing else: it has no row in `scripts/.size-baseline.json`, none in `tests/lint/.source-citation-baseline.json`, and no walker enumerates it. |
+
+### ⛔ Owner decision points (asked with this table, not decided here)
+
+**⭐ BOTH ARE NOW SIGNED AND APPLIED (§934.47 addendum 98).** §934.70 asked the owner to confirm
+keep-dark versus retire on both rows; the owner's standing grant of 2026-09-20 signed both, and
+the chair applied them — **KEEP-DARK** for the three density modules, **RETIRE** for
+`foldTradeCategories.js`. Recorded as the chair's use of the grant, **vetoable**. The questions
+are kept below as they were put, because a decision reads differently beside the case for it.
+
+1. **The three density modules: KEEP DARK, or RETIRE.** → **SIGNED: KEEP DARK.** The chair has ruled the slot (the wiring
+   car is chartered the day the register is signed), so the question left to the owner is not
+   *when* but *whether*: these are a landed, tested, owner-authored law — §810.6 R21, §810.7 R22,
+   §810.8 R23/R24/R25 — sitting behind the owner's own unsigned `REGISTER_VII_SIGNATURE`.
+   **KEEP-DARK** accepts the measured cost recorded above (two modules held in ESD and in the
+   eager first-paint set by code nothing can reach) and is what the tree does today.
+   **RETIRE** would delete §810.6-810.8 from the tree and forfeit the R25 mutation-plant
+   promotion path. **This lane recommends KEEP-DARK; it does not recommend RETIRE.**
+2. **`foldTradeCategories.js`: RETIRE.** → **SIGNED AND APPLIED 2026-09-20.** A superseded
+   module whose successor is named and wired, and which still ships §14. Retention cost a green
+   test that proved nothing and a census row that read as a consumer. Its `vite.config.js`
+   excision row deleted nothing and went with it. See the RETIRED block above for what was
+   removed and what was measured not to move.
+
+### Fated by the chair from this lane's findings (recorded here so they are not re-found)
+
+| Finding | Slot |
+|---|---|
+| `ENGINE_SHARED_DOMAIN` is seeded by walking every file under `src/generators/` rather than the reachable graph, so the dark trio charges first paint (ESD 51 → 49, EAGER 268 → 266; `titularSuccession.js` alone holds `factionLifecycle.js` and `cohesionWeave.js`) | **FIX-B3**, in FIX-B2's family, after B2 lands, measured with a build |
+| 248 `src/` modules are reachable from no build entry | **TOOL-23** — a reachability census, measure-first, reusing this lane's scanner |
+| A mutation plant in a module imported only by its own test can be killed by that one file alone, which is weaker than the promotion-path sentence implies | noted for **TOOL-6b**'s family |
+
+### ⭐ This doc is executable — `tests/lint/deadCodeDisposition.walker.test.js`
+
+FIX-D9 measured that `git grep -l 'DEAD_CODE_DISPOSITION' -- tests` returned **nothing**: no test
+governed this file, so every row above was a promise. The chair minted the walker
+(ODQ §934.47 addendum 87). **This section's rows are now enforced, in three directions:**
+
+1. **The roster is PARSED FROM THE TABLE ABOVE, never hand-listed in the walker.** The parser keys
+   on column NAME (`File`, `Disposition`), so re-ordering or widening the table cannot silently
+   re-point the walk, and **every** table in this doc carrying both columns is read — a Round-4
+   section is governed the day it lands. Strike a row and enforcement stops with it; add a row and
+   enforcement starts. The doc is the register.
+2. **Each DARK-BY-DESIGN module's `// dark-until:` line is byte-exact** against the chair's ruled
+   slot. Remove it, reword it, or let two modules drift to two spellings, and it reds. The same
+   sentence is required to appear in this doc, so the headers and the disposition rows cannot
+   say different things.
+3. **Each DARK-BY-DESIGN and RETIRE-PROPOSED module is re-measured to have ZERO importers outside
+   `tests/`**, by resolving every import specifier to a path rather than matching a name. A
+   revival reds **and names the importer**, because the cure then is to strike or re-grade the
+   row — never to silence the walker, which is the only thing that would have noticed.
+
+It carries four controls that each drive the same function the live arm calls: the importer
+scanner must find a real importer of a known-live module (else every arm passes vacuously), the
+specifier reader must see all five import shapes and none out of a comment, the header detector
+must report absence and refuse a near-miss spelling, and the table parser must key on column name
+and refuse a table lacking one. Its mutation-coverage row is a `rationale` for the reason its
+siblings are: every figure is an exact set derived from disk in both directions, so the only
+available mutation is deleting a row or a marker, which is what the arms already assert.
+
+**Known limit, stated rather than discovered later:** the walker proves *zero importers*, which is
+weaker than *unreachable from any build entry*. A module imported only by another dark module
+would pass. That stronger census is **TOOL-23**'s, which reuses this lane's scanner.

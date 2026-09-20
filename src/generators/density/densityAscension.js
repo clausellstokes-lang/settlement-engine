@@ -42,6 +42,13 @@
  *      how a new law joins an existing world without moving it.
  */
 
+// dark-until: Register VII's wiring car — chartered the day the owner signs `REGISTER_VII_SIGNATURE`; until then DELIBERATE-DARK by the owner's unsigned register
+// Having no importer is BY DESIGN here, not orphanhood: this is R21's third caller, landed
+// ahead of its wiring, and the guard at planSeatAscension refuses under the shipped dial
+// (REGISTER_VII_SIGNATURE is {signed: false, live: false} in domain/density/densityBands.js).
+// Disposition, obligations and the owner decision point: docs/DEAD_CODE_DISPOSITION.md
+// section "Round-3 additions" (FIX-D9, 2026-09-20).
+// @enforced-by tests/lint/deadCodeDisposition.walker.test.js
 import { bandsForTier, tierKey } from '../../domain/density/densityBands.js';
 import { rollsRegisterVii } from '../../domain/density/densityLaw.js';
 import { rollInBand, rollRoster } from './densityRoll.js';
