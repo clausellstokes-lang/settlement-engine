@@ -330,6 +330,11 @@ export async function driftRun(options = {}) {
  * cell is composed through, and the corpus that decides which towns exist. If any of the
  * three moves and the fixture does not, the fixture was recorded by a recorder that no longer
  * exists — which is exactly the state P12 says nothing refuses today.
+ *
+ * ⛔ AND WHAT "MOVES" MEANS HERE IS THE CODE, NOT THE BYTES (CURE-J, 2026-09-20). `recorderShas`
+ * digests each file's COMMENT-STRIPPED source, because a raw-byte pin cannot tell a re-worded
+ * docblock from a re-written function and charged an owner-signed golden re-record for the
+ * first. See `stripComments`.
  * @type {ReadonlyArray<string>}
  */
 export const MANIFEST_RECORDER_FILES = Object.freeze([
@@ -338,14 +343,162 @@ export const MANIFEST_RECORDER_FILES = Object.freeze([
   'scripts/prose-rate-corpus.mjs',
 ]);
 
+/** A character that may appear inside a JavaScript identifier. */
+const IDENT_CHAR = /[A-Za-z0-9_$]/;
+
 /**
- * The recorder's own bytes, as one sha per file, read from the tree.
+ * The word tokens after which a `/` opens a REGEX LITERAL rather than dividing. After any
+ * other identifier, number, `)` or `]` a `/` is division.
+ */
+const REGEX_AFTER_KEYWORD = Object.freeze(new Set([
+  'return', 'typeof', 'instanceof', 'in', 'of', 'new', 'delete', 'void', 'throw',
+  'case', 'do', 'else', 'yield', 'await',
+]));
+
+/**
+ * ⭐ THE RECORDER'S CODE, WITHOUT ITS PROSE — the executable half of "a comment is not a
+ * behaviour" (CURE-J, 2026-09-20).
+ *
+ * ⛔ THE CLASS THIS CURES, RECORDED WHERE THE NEXT READER WILL SEE IT. `recorderShas()` used to
+ * hash each recorder file's RAW bytes, which is blind to the difference between a comment edit
+ * and a behaviour edit. On 2026-09-20 FIX-C2 re-addressed a source citation inside a JSDoc
+ * block of `scripts/prose-rate-corpus.mjs` — ONE line, `EconomicsTab.jsx:251-257` becoming
+ * `EconomicsTab.jsx:272`, not a token of code — and the provenance arm refused the fixture with
+ * ZERO rows moved. A citation re-address is a CONTINUING act in this estate (FIX-C2b was
+ * re-addressing more of them as this cure was written), so a raw-sha pin on a source file turns
+ * every one of them into a golden re-record, which is an owner-signed door. The identity a
+ * provenance pin wants is the identity of the CODE.
+ *
+ * THE EXACT RULE, so a reader never has to infer it from the scanner:
+ *   1. Line comments (a double slash to end of line) and block comments (slash-star to
+ *      star-slash) are REMOVED.
+ *   2. String literals, template literals (whole, from backtick to matching backtick, `${}`
+ *      nesting tracked) and regex literals are copied BYTE-FOR-BYTE. Nothing inside a literal
+ *      is ever read as a comment — which is exactly where the estate's two regex-based
+ *      strippers fail, and why this is a scanner rather than a third copy of them.
+ *   3. Every run of whitespace OUTSIDE a literal collapses to a single space, and the result
+ *      is trimmed. Never to nothing: `return x` can never become `returnx`.
+ *
+ * ⚠ RULE 3 IS A DELIBERATE WIDENING BEYOND "COMMENTS", AND IT IS WHAT MAKES THE PROPERTY TRUE.
+ * Removing a comment leaves its surrounding whitespace behind, so a stripper that preserved
+ * whitespace would still move the sha when a comment was APPENDED (a newline survives) or
+ * REFLOWED (a line count changes). The identity is therefore insensitive to reformatting —
+ * indentation and line breaks — as well as to comments. Both are non-behavioural, so the
+ * widening costs the pin nothing it was protecting; it is named here rather than discovered.
+ *
+ * ⚠ AND THE ONE PLACE IT IS DELIBERATELY OVER-SENSITIVE: a template literal is opaque, so a
+ * comment written INSIDE a `${...}` interpolation survives into the digest and would move it.
+ * That is the safe direction — an extra re-record, never a missed behaviour change — and no
+ * recorder file carries one today.
+ *
+ * @param {string} source
+ * @returns {string} the source's code, comments removed and whitespace collapsed
+ */
+export function stripComments(source) {
+  const text = String(source);
+  /** @type {string[]} */
+  const out = [];
+  let i = 0;
+  let pendingSpace = false;
+  let prevChar = '';
+  let prevWord = '';
+
+  const emit = (chunk) => {
+    if (pendingSpace) { out.push(' '); pendingSpace = false; }
+    out.push(chunk);
+    prevChar = chunk[chunk.length - 1];
+    prevWord = IDENT_CHAR.test(prevChar) ? (/[A-Za-z0-9_$]+$/.exec(chunk) || [''])[0] : '';
+  };
+  const regexAllowed = () => {
+    if (prevChar === '') return true;
+    if (prevChar === ')' || prevChar === ']') return false;
+    if (IDENT_CHAR.test(prevChar)) return REGEX_AFTER_KEYWORD.has(prevWord);
+    return true;
+  };
+
+  while (i < text.length) {
+    const ch = text[i];
+    const next = text[i + 1];
+    if (ch === '/' && next === '/') {
+      const nl = text.indexOf('\n', i);
+      i = nl === -1 ? text.length : nl;
+      pendingSpace = true;
+    } else if (ch === '/' && next === '*') {
+      const end = text.indexOf('*/', i + 2);
+      i = end === -1 ? text.length : end + 2;
+      pendingSpace = true;
+    } else if (ch === ' ' || ch === '\t' || ch === '\n' || ch === '\r') {
+      pendingSpace = true;
+      i += 1;
+    } else if (ch === '\'' || ch === '"') {
+      let j = i + 1;
+      while (j < text.length) {
+        if (text[j] === '\\') { j += 2; continue; }
+        if (text[j] === ch) { j += 1; break; }
+        j += 1;
+      }
+      emit(text.slice(i, j));
+      i = j;
+    } else if (ch === '`') {
+      let j = i + 1;
+      let depth = 0;
+      while (j < text.length) {
+        if (text[j] === '\\') { j += 2; continue; }
+        if (depth === 0 && text[j] === '`') { j += 1; break; }
+        if (depth === 0 && text[j] === '$' && text[j + 1] === '{') { depth = 1; j += 2; continue; }
+        if (depth > 0 && text[j] === '{') { depth += 1; j += 1; continue; }
+        if (depth > 0 && text[j] === '}') { depth -= 1; j += 1; continue; }
+        j += 1;
+      }
+      emit(text.slice(i, j));
+      i = j;
+    } else {
+      let consumed = false;
+      if (ch === '/' && regexAllowed()) {
+        let j = i + 1;
+        let inClass = false;
+        let closed = false;
+        while (j < text.length) {
+          const c = text[j];
+          if (c === '\\') { j += 2; continue; }
+          if (c === '\n') break;
+          if (c === '[') { inClass = true; j += 1; continue; }
+          if (c === ']') { inClass = false; j += 1; continue; }
+          if (c === '/' && !inClass) { j += 1; closed = true; break; }
+          j += 1;
+        }
+        if (closed) {
+          while (j < text.length && /[a-z]/.test(text[j])) j += 1;
+          emit(text.slice(i, j));
+          i = j;
+          consumed = true;
+        }
+      }
+      if (!consumed) {
+        emit(ch);
+        i += 1;
+      }
+    }
+  }
+  return out.join('').trim();
+}
+
+/**
+ * The recorder's own CODE, as one sha per file, read from the tree.
+ *
+ * ⛔ COMMENT-INSENSITIVE SINCE 2026-09-20 (CURE-J). The digest is taken over
+ * `stripComments(source)`, never over the raw bytes: a prose edit to a recorder file is not a
+ * change of what the recorder RECORDS, and pinning it as one made every source-citation
+ * re-address into an owner-signed golden re-record. See `stripComments` for the exact rule and
+ * for the two directions the suite drives it in.
  * @returns {Record<string, string>}
  */
 export function recorderShas() {
   /** @type {Record<string, string>} */
   const out = {};
-  for (const rel of MANIFEST_RECORDER_FILES) out[rel] = sha256(readFileSync(join(ROOT, rel), 'utf8'));
+  for (const rel of MANIFEST_RECORDER_FILES) {
+    out[rel] = sha256(stripComments(readFileSync(join(ROOT, rel), 'utf8')));
+  }
   return out;
 }
 
