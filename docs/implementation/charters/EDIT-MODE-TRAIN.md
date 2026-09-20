@@ -478,6 +478,11 @@ CURE-A `08cb42e31` (the model walker's mask: findings identical under both forms
 
 - **EM-B1k2** (kit `packets-waiting/EM-B1k2.*`, version 2): the participation census gains `-e 'factionRosterOf'` (41 → 44, three files dispositioned); a `mutation` row with its sweep plant; the display-name census closed at zero duplicates; the save writers closed; placed the sitting EM-B3c flips to LANDED, its window re-run over CURE-E/F/G and the refreeze. **EM-E0's compile** carries the access-state precondition (an inactive save must not be walked by a tick). **EM-B1f's pre-proof** banks `npcVerdictPulse.js`'s quarantine row.
 
+## Amendments of 2026-09-20 03:53 EDT — run 18 red by one test (the `contract` token's second enforcer); CURE-H ruled; the terminal is run 19 after EM-B3c and CURE-H (ODQ §934.47 addendum 49)
+
+- **CURE-H** (the slot, after EM-B3c lands): A8 of `participationWriteBase.contract.test.js` derives the clock chain from `pulseKernel.js` by the found-and-ordered source read; no `src/` change; the anti-vacuity walker green. **The pre-proof brief's step 12** gains: a rename is a change to every walker keyed on the filename token. **TOOL-6b's brief** gains the token-consumer census.
+- **The terminal's order:** EM-B3c's batches → its landing and flip (EM-B1k2 and EM-P2 v4 placed at that sitting) → CURE-H → the chair's refreeze → **run 19** → the composition train's gate queue (FIX-G, TOOL-2b, FIX-F2b, TOOL-3, FIX-C2, FIX-P1, the P/L lanes as they pause).
+
 ## Pre-proof tasks (Opus, read-only, before each packet is READY)
 1. Name every "verified fact" with file:line at the base; 2. fill the change manifest and required symbols; 3. measure the budget (files, lines) and split if over; 4. name the tests the packet's proof shape copies; 5. run the sealed dispatch dry.
 
