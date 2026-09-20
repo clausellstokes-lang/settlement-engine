@@ -1,10 +1,11 @@
 # `settlement editor / wave 1` — EM-B1f: status-based absence at THE ONE PARTICIPATION CHOKEPOINT
 
-- **Status:** `READY`
+- **Status:** `LANDED`
   READY-able at `141a1d775` (pre-proof version 4); version 2 waited on EM-B1k; version 3 lifted the wait by modelling EM-B1k's kernel at `32602dc60`. **Version 4 is the
   re-run the charter owed after EM-B1k2's landing** (ODQ §934.47 addenda 39, 46, 61): both
   dependencies are now REAL in the tree, the promotion measurement is re-executed against them
   at `141a1d775`, and the walker machinery the chair's Q5 ruling needs is measured and carried.
+- **Landed at:** `6b57180ef51ed06ce8ed9048be7602351b497f1d` — the eleventh landing — 13 files (+206/−24): the chokepoint reads the NPC's status beside stasis and hostage; the union-totality walker's ninth roster row spelled `derived` with the machinery that makes the kind real; the undispositioned ceiling burned by one; two edge bundles and five metas re-stamped; sealed at c127cdfb2 (digest `4fe12b75…295c`, the capsule re-taken after the chair rotated the first seal aside), 17 steps in both sealed verbs with ONE named pre-existing red (check 7, the prose manifest's provenance title — the owner's door, §934.71) and the third amendment's sealed `tests/lint` step green on its first execution (173 files, 2757/2757); §6's contract and §13.0's base table re-cut at this flip; the chair's build + `verify:dist` at the landing in flight
 - **Packet version:** `4`
 - **Verified base:** `fixes-2026-09-18-consist` at `0cea60c7a78ac66184468db743c240cfa62f05cf`
 - **Last revalidated:** 2026-09-20 at `0cea60c7a78ac66184468db743c240cfa62f05cf` — stamped by the chair (session a9df403c) at placement, the window re-run in the same command as the stamp: over every path of this packet except the expected movers (none) `git diff --stat 141a1d775..HEAD` printed NOTHING; every `requiredSymbols` row resolves; the CREATE targets are absent and untracked; no non-terminal packet reserves a change path. THE CHAIR'S CUTS AT PLACEMENT: none beyond the stamp. The Status value stands alone on its line (the parser's law). Its gated batches PAUSE-AND-RESUME.
@@ -377,6 +378,8 @@ PRNG stream, time source or writer; no files outside the manifest.
 
 ## 6. Exact contracts
 
+> **RE-CUT AT THE FLIP (the chair, 2026-09-20; ODQ §934.47 addenda 84, 86):** the verbatim contract as pre-proofed did not typecheck — `NPC_UNAVAILABLE_STATUSES` is `readonly NpcStatus[]`, so `.includes(<string>)` is `TS2345` on BOTH sealed configs (+1 against a baseline of 0). The sealed build cured it with the file's adjacent idiom, widening the HAYSTACK (`/** @type {readonly string[]} */ (OFF_STAGE_STATUSES)`), never casting the untrusted runtime string into `NpcStatus`; nothing measured moved (293 effective, +184 B, the declaration line byte-identical; both typechecks at their ceilings). The two lines above now read as the tree does.
+
 ### The predicate, after this packet — the whole diff, verbatim (FORM B, the chair's)
 
 ```js
@@ -398,7 +401,7 @@ export const OFF_STAGE_STATUSES = Object.freeze(
 export function isOffStage(npc) {
   if (isInStasis(/** @type {Parameters<typeof isInStasis>[0]} */ (npc))) return true;
   const o = npc && typeof npc === 'object' ? /** @type {Record<string, unknown>} */ (npc) : null;
-  if (o && OFF_STAGE_STATUSES.includes(String(o.status || '').toLowerCase())) return true;
+  if (o && /** @type {readonly string[]} */ (OFF_STAGE_STATUSES).includes(String(o.status || '').toLowerCase())) return true;
   const w = o ? o.whereabouts : null;
   return !!(w && typeof w === 'object' && /** @type {Record<string, unknown>} */ (w).state === 'hostage');
 }
@@ -638,7 +641,7 @@ instance of the same habit; the rows themselves are symbol-pinned and unaffected
 ```text
 1. isInStasis(npc)                                            ⇒ off-stage
 2. o := (npc is a non-null object) ? npc : null
-3. OFF_STAGE_STATUSES.includes(String(o?.status||'').toLowerCase())  ⇒ off-stage
+3. /** @type {readonly string[]} */ (OFF_STAGE_STATUSES).includes(String(o?.status||'').toLowerCase())  ⇒ off-stage
 4. w := o ? o.whereabouts : null ; w?.state === 'hostage'      ⇒ off-stage
 5. otherwise                                                   ⇒ on-stage
 ```
@@ -806,6 +809,8 @@ arm OFF, with the liveness anchor printed in both runs.**
 
 ## 13. ⭐⭐ THE PROMOTION MEASUREMENT — RE-EXECUTED AT `141a1d775` AGAINST BOTH LANDED CURES
 
+> **RE-CUT AT THE FLIP (the chair, 2026-09-20; ODQ §934.47 addendum 84):** the sealed build re-executed this table against the real tree at `c127cdfb2` and REFUTED its base claim for `exiled`/`removed`: the house IS swept from `powerStructure.factions` (`[The Crown]`) and a `faction_dissolved` beat DOES fire — seed-stable, the premise files unmoved. It is ARM-INDEPENDENT and the person is kept in every cell, so it does not touch the promotion verdict (both arms identical row for row; the liveness anchor `false`/`true`); v3's 'dissolved, person kept' is what reproduces. The prose above stands as the pre-proof wrote it, with this correction beside it — a landed packet's record is not rewritten, it is annotated.
+
 Version 2's block was: *the participation filter is the base the tick's writes are built from, so
 adding `jailed` to it would erase a person from the save and dissolve their house.* Version 3
 lifted the block by MODELLING the cure. **Version 4 does not model anything: both cures are in
@@ -852,7 +857,7 @@ Ashford: two houses, one member each, the Weaver's status varied; one committed 
 | shelved (`stasis`) | off / **on** | `[Crown, Weavers]` / **identical** | 2 of 2 / **2 of 2** | crewed / **crewed** | no / **no** |
 
 ⭐⭐ **THE ARM-ON AND ARM-OFF TABLES ARE IDENTICAL, ROW FOR ROW.** Nobody is erased from the roster
-in any cell (2 of 2 everywhere), **no house leaves `powerStructure.factions` in any cell**, and no
+in any cell (2 of 2 everywhere), **no house leaves `powerStructure.factions` in any cell** *(REFUTED AT THE BUILD — see the re-cut below: for `exiled`/`removed` the house IS swept)*, and no
 dissolution beat fires in any cell.
 
 ⛔ **And the `exiled`/`removed` `dissolved` reading is NOT this packet's and NOT a sweep.** It is
