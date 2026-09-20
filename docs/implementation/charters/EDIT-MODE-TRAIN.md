@@ -439,6 +439,11 @@ CURE-A `08cb42e31` (the model walker's mask: findings identical under both forms
 - **EM-B1k LANDED** at `19c4cb853` (flip `63e40fe57`): the tick's settlement descends from the raw save roster; a shelved or hostage NPC is never erased and a sole-member house never dissolved; goldens byte-identical; the chair's build + `verify:dist` at the tip green (538). The fix reaches players only through the paused push chain.
 - **THE SLOT WINDOW BEFORE EM-B3c:** CURE-E (the marker-slice scanner) and **CURE-F** (the `:579` comparand becomes the tick's input roster; the cast goes; a stubbed-clock pin) land as two pathspec commits; then the chair's ONE lighting refreeze in the slot (B1k's `+6` and CURE-F's `+1` titles); then **run 18** — train EM-T3's terminal — bare and detached in the consist, its log at the scratchpad root; EM-B3c builds in the slot during it, its batches paused until it exits.
 
+## Amendments of 2026-09-20 03:09 EDT — TOOL-6 measured; CURE-G joins the slot window; TOOL-6b chartered as the `tests/store` admission dock (ODQ §934.47 addendum 43)
+
+- **CURE-G** (the cure lane's window, after CURE-E/F): EM-B1k's suite renamed to `participationWriteBase.contract.test.js` (the register's own opt-in token), its `mutation` row with a convicting mutant, and `baseStateCapsule.test.js:369`'s stale floor raised to the live count.
+- **TOOL-6b (NEW; a tooling dock after train EM-T4's terminal):** `tests/store` admitted to the mutation register's enforcer set under its own, stricter predicate (134 surgical rows; the vacuity floor 686 → 840; the admitted-tree arm generalised); its first commit gives the shrink-only ratchet a ratchet over itself; it sweeps the manifest sentence the admission falsifies. **EM-B1k2's** test file carries the `contract` token from its pre-proof.
+
 ## Pre-proof tasks (Opus, read-only, before each packet is READY)
 1. Name every "verified fact" with file:line at the base; 2. fill the change manifest and required symbols; 3. measure the budget (files, lines) and split if over; 4. name the tests the packet's proof shape copies; 5. run the sealed dispatch dry.
 
