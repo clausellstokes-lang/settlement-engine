@@ -163,9 +163,16 @@ describe('gallery scanner client-mirror totality — the server refuses every ke
     const lexicalOwner = [...SCANNER.declarers].sort().at(-1);
     expect([SCANNER.owner, lexicalOwner], 'the orders disagree or the owner is not the highest-numbered declarer:'
       + ` numeric ${numericOwner}, lexical ${lexicalOwner}, extractor owner ${SCANNER.owner}`).toEqual([numericOwner, numericOwner]);
+    // A5's SORT FIXTURES, not references. A FOUR-DIGIT prefix is the case that distinguishes
+    // numeric order from lexical order, and the live corpus has none — so these name no
+    // migration, and tests/security/migrationRefIntegrity.meta.test.js is TOLD so, per literal,
+    // rather than left to read them as broken references (run 19's one red; CURE-I).
+    // synthetic-migration-name: A5's numeric-vs-lexical sort fixtures; no such migrations exist
     const synthetic = ['089_a.sql', '1000_z.sql', '202_b.sql'];
     expect([[...synthetic].sort().at(-1), [...synthetic].sort((a, b) => numericPrefix(a) - numericPrefix(b)).at(-1)],
-      'a four-digit prefix must be a distinguishing case, or A5 asserts nothing about the sort').toEqual(['202_b.sql', '1000_z.sql']);
+      'a four-digit prefix must be a distinguishing case, or A5 asserts nothing about the sort')
+      // synthetic-migration-name: the same two fixtures, written out INDEPENDENTLY as the expected
+      .toEqual(['202_b.sql', '1000_z.sql']);
   });
 
   it('A6 — the hard_deny arm is exact equality, not substring, and the mechanism is recorded per key', () => {
