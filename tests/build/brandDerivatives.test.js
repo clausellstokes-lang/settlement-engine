@@ -31,6 +31,42 @@
  * committed bytes proves the commit matches THIS host; comparing two fresh runs
  * against each other proves the script has no ambient input at all. Either alone
  * would pass for a script that had, say, baked a timestamp into a PNG chunk.
+ *
+ * ⛔ THE ENCODER IS NOT THE SAME ON EVERY PLATFORM, AND THAT IS WHY THE BYTE ARM WAS
+ * RE-CUT INTO THREE (2026-09-20, PR #53's first CI run). The arm below used to compare
+ * the committed bytes against a fresh run, full stop. It was green on the owner's Mac
+ * and had never run in CI; the first time it did, it failed on ubuntu x64 — because
+ * sharp ships a different prebuilt libvips per platform (@img/sharp-darwin-arm64 vs
+ * @img/sharp-linux-x64, the same version numbers, different compiled binaries) and the
+ * palette-PNG quantiser and deflate do not emit identical bytes for identical input
+ * pixels. The sibling "two fresh runs agree" arm PASSED there, which is the measurement
+ * that localises it: the derivation is deterministic on each platform and differs only
+ * BETWEEN them. The PIXELS never differ — the crops, masks, gradients and glyph
+ * outlines are computed in JavaScript.
+ *
+ * So the claim is made TRUE EVERYWHERE rather than skipped anywhere:
+ *   ARM A  the shipped files are the files tests/fixtures/brand-derivatives.mint.json
+ *          certifies                                        — runs on every platform
+ *   ARM B  the painting, the provenance register, the two Lora faces and the script's
+ *          own import closure are the inputs that record was minted over
+ *                                                            — runs on every platform
+ *   ARM C  a fresh run is byte-identical to the record ON THE MINTING STACK; on any
+ *          other stack it must still produce all ten paths, each DECODING to the same
+ *          pixel size as its committed twin, and it prints one line to the CI log
+ *          naming the foreign stack and what it did instead.
+ *
+ * ⭐ THIS IS STRICTLY STRONGER THAN WHAT IT REPLACED, not a weakening. An edit to the
+ * script or to the painting without a re-mint now reds on EVERY platform (ARM B);
+ * before, that drift surfaced only as an output byte difference, which only whoever ran
+ * the build tests on the minting platform could ever see. What is given up is narrow and
+ * named: off the minting stack, a change that altered the ENCODED bytes while leaving
+ * the inputs, the shipped files and the pixel geometry all identical would not be seen —
+ * and no such change exists that is not already an input change.
+ *
+ * ⛔ THE RECORD IS GENERATED, NEVER HAND-WRITTEN, AND IT IS NOT TRUSTED FOR BEING
+ * GENERATED. `node scripts/derive-brand-marks.mjs --record` derives into a temp dir,
+ * refuses to write while any shipped file differs from what it just produced, and
+ * touches nothing under public/. A doctored row in it reds ARM A all the same.
  */
 import { describe, it, expect, beforeAll, afterAll } from 'vitest';
 import { execFileSync } from 'node:child_process';
@@ -44,7 +80,9 @@ import sharp from 'sharp';
 import HouseDevice, { HOUSE_SEAL_SRC } from '../../src/components/brand/HouseDevice.jsx';
 import { BRAND_SEAL_PNG } from '../../src/pdf/assets/brandSeal.js';
 import {
-  CARD, PDF_SEAL_MODULE, PLAQUE_CROP, PLAQUE_PLATE, SEAL, SEAL_CROP, STRIP, WORDMARK,
+  CARD, DERIVATION_INPUTS, MINT_MODES, MINT_RECORD, PDF_SEAL_MODULE, PLAQUE_CROP, PLAQUE_PLATE,
+  SEAL, SEAL_CROP, SIGNATURE_FIELDS, STRIP, WORDMARK,
+  foreignStackLine, mintComparisonMode, runningSignature,
 } from '../../scripts/derive-brand-marks.mjs';
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), '../..');
@@ -129,6 +167,93 @@ function pdfNodes(node, out = []) {
   if (typeof node.type === 'function') return pdfNodes(node.type(node.props || {}), out);
   out.push(node);
   return pdfNodes(node.props ? node.props.children : null, out);
+}
+
+/* ── THE MINT RECORD, AND THE TWO PURE COMPARATORS THE PLANTS DRIVE ──────────────
+ * See the ⚠ THE ENCODER IS NOT THE SAME ON EVERY PLATFORM note in the header. Both
+ * comparators take their byte READER as a parameter, so every plant below runs this
+ * exact live code over a doctored in-memory COPY and the repository is never touched.
+ */
+let MINT = null;
+let MINT_PROBLEM = null;
+try {
+  MINT = JSON.parse(readFileSync(join(ROOT, MINT_RECORD), 'utf8'));
+} catch (error) {
+  MINT_PROBLEM = error.message;
+}
+
+/** This host's encoder signature, and what it means for the byte comparison. */
+const RUNNING = runningSignature(sharp.versions);
+const VERDICT = mintComparisonMode(RUNNING, MINT === null ? null : MINT.mintedOn);
+
+/** Which recorded OUTPUTS a tree does not match. */
+function staleAgainst(outputs, read) {
+  const stale = [];
+  for (const [rel, row] of Object.entries(outputs ?? {})) {
+    let bytes;
+    try {
+      bytes = read(rel);
+    } catch {
+      stale.push(`${rel}: not on disk at all`);
+      continue;
+    }
+    const actual = sha256(bytes);
+    if (actual !== row.sha256) stale.push(`${rel}: minted ${row.sha256.slice(0, 12)}, tree ${actual.slice(0, 12)}`);
+    else if (bytes.length !== row.bytes) stale.push(`${rel}: minted ${row.bytes} B, tree ${bytes.length} B`);
+  }
+  return stale;
+}
+
+/** Which recorded INPUTS a tree does not match. */
+function driftedInputs(inputs, read) {
+  const drift = [];
+  for (const [rel, minted] of Object.entries(inputs ?? {})) {
+    let actual;
+    try {
+      actual = sha256(read(rel));
+    } catch {
+      drift.push(`${rel}: not on disk at all`);
+      continue;
+    }
+    if (actual !== minted) drift.push(`${rel}: minted ${minted.slice(0, 12)}, tree ${actual.slice(0, 12)}`);
+  }
+  return drift;
+}
+
+/**
+ * The DECODED shape of a derivative, whatever container it ships in: a bare PNG, the
+ * ICO's packed layers, or the base64 PNG inside the PDF's seal module.
+ *
+ * ⚠ IT DECODES, IT DOES NOT READ A HEADER. Measured 2026-09-20: `sharp(buf).metadata()`
+ * RESOLVES on a PNG truncated to half its length, so a header read would call a mangled
+ * file the right size. `.raw().toBuffer()` decodes the pixels and rejects it.
+ *
+ * Width and height are the comparison; CHANNELS are reported but not asserted, because a
+ * foreign quantiser may legitimately drop an all-opaque alpha plane and that is not the
+ * failure this arm is looking for.
+ */
+async function decodedShapeOf(rel, bytes) {
+  const decode = async (buf) => {
+    const { info } = await sharp(buf).raw().toBuffer({ resolveWithObject: true });
+    return { size: `${info.width}x${info.height}`, channels: info.channels };
+  };
+  if (rel === PDF_SEAL_MODULE) {
+    const body = (bytes.toString('utf8').match(/data:image\/png;base64,([A-Za-z0-9+/=]+)/) || [])[1];
+    if (!body) throw new Error(`${rel} carries no PNG data URI`);
+    const one = await decode(Buffer.from(body, 'base64'));
+    return { size: `module ${one.size}`, channels: one.channels };
+  }
+  if (rel.endsWith('.ico')) {
+    const sizes = [];
+    const channels = [];
+    for (const layer of icoLayers(bytes)) {
+      const one = await decode(layer.png);
+      sizes.push(`${layer.size}:${one.size}`);
+      channels.push(one.channels);
+    }
+    return { size: `ico [${sizes.join(', ')}]`, channels: channels.join('/') };
+  }
+  return decode(bytes);
 }
 
 let outA;
@@ -272,16 +397,110 @@ describe('the derivation is deterministic and the committed bytes are its output
     ).toEqual([]);
   });
 
-  it('every committed derivative is exactly what the script produces today', () => {
-    const stale = [];
-    for (const rel of DERIVED) {
-      const committed = readFileSync(join(ROOT, rel));
-      if (sha256(committed) !== sha256(readFileSync(join(outA, rel)))) stale.push(rel);
-    }
+  it('the mint record is readable and certifies exactly the ten files the script writes', () => {
+    // NON-VACUITY FIRST. Every arm below is a statement about this record's contents, so
+    // a record that is missing, truncated or certifying nothing must red HERE, loudly,
+    // rather than letting the three arms pass over an empty object.
+    expect(MINT_PROBLEM, `${MINT_RECORD} could not be read — re-mint with`
+      + ` \`node scripts/derive-brand-marks.mjs --record\`: ${MINT_PROBLEM}`).toBe(null);
+    expect(Object.keys(MINT.outputs), 'the record certifies a different file set than the script writes')
+      .toEqual([...DERIVED]);
+    expect(Object.keys(MINT.inputs), 'the record pins a different input set than the script declares')
+      .toEqual([...DERIVATION_INPUTS]);
+    expect(VERDICT.problem, 'the record carries no usable platform signature').toBe(null);
+    expect(VERDICT.mode, 'the platform decision could not be made at all').not.toBe(MINT_MODES.INVALID);
+  });
+
+  it('ARM A — every shipped derivative is byte-for-byte the file the record certifies', () => {
+    // Runs on EVERY platform. A hand-edited icon, a half-committed re-cut or a file that
+    // never landed reds here wherever the suite is run, which the old byte comparison
+    // could only do for whoever happened to be on the minting stack.
+    const stale = staleAgainst(MINT.outputs, (rel) => readFileSync(join(ROOT, rel)));
     expect(
       stale,
-      'a shipped brand derivative is not the output of the committed script. Re-run'
-      + ` node scripts/derive-brand-marks.mjs and commit the result:\n  ${stale.join('\n  ')}`,
+      'a shipped brand derivative is not the file the mint record certifies. Either it was'
+      + ' hand-edited (restore it), or the art was legitimately re-cut and never re-minted:'
+      + ' re-run `node scripts/derive-brand-marks.mjs`, commit the art, then'
+      + ` \`--record\`:\n  ${stale.join('\n  ')}`,
+    ).toEqual([]);
+  });
+
+  it('ARM B — every input the derivation reads is the input the record was minted over', () => {
+    // Runs on EVERY platform, and this is the arm that is strictly STRONGER than what it
+    // replaced: an edit to the script, to its import closure, to the provenance register
+    // or to the painting now reds everywhere the moment it lands without a re-mint.
+    // Before, that drift was visible only to whoever ran the build tests on the minting
+    // platform, because it was caught as a byte difference in the output rather than as a
+    // change to the input.
+    const drift = driftedInputs(MINT.inputs, (rel) => readFileSync(join(ROOT, rel)));
+    expect(
+      drift,
+      'the derivation\'s inputs moved without a re-mint, so the record no longer certifies'
+      + ' anything about what the script would produce today. Re-run the derivation, commit'
+      + ` the art, then \`node scripts/derive-brand-marks.mjs --record\`:\n  ${drift.join('\n  ')}`,
+    ).toEqual([]);
+  });
+
+  it('ARM B — the record was minted over the same painting this file pins by hand', () => {
+    // Two pins for one fact is a drift waiting to happen; this is the arm that binds them.
+    expect(MINT.inputs[STRIP], 'the mint record and STRIP_SHA256 name different paintings')
+      .toBe(STRIP_SHA256);
+  });
+
+  it('ARM C — on the minting stack the fresh run is byte-identical; elsewhere it matches dimensions', async () => {
+    // ⛔ WHY THIS ARM IS CONDITIONAL AND THE TWO ABOVE ARE NOT. sharp ships a different
+    // prebuilt libvips per platform, so the palette-PNG and deflate encoders do not emit
+    // identical bytes on darwin/arm64 and linux/x64 for identical input pixels. Comparing
+    // encoder BYTES against a fresh run is therefore only a true statement on the stack
+    // the committed art was minted on. Nothing is lost off it: arms A and B still bind
+    // every shipped byte and every input, on every platform.
+    const missing = DERIVED.filter((rel) => !existsSync(join(outA, rel)));
+    expect(missing, `the fresh run did not produce every declared path:\n  ${missing.join('\n  ')}`)
+      .toEqual([]);
+
+    if (VERDICT.mode === MINT_MODES.BYTES) {
+      const stale = staleAgainst(MINT.outputs, (rel) => readFileSync(join(outA, rel)));
+      expect(
+        stale,
+        'on the MINTING stack a fresh derivation must reproduce the certified bytes exactly.'
+        + ' Something ambient reached the render, or the encoder moved under the same version'
+        + ` numbers:\n  ${stale.join('\n  ')}`,
+      ).toEqual([]);
+      return;
+    }
+
+    const rows = [];
+    let identical = 0;
+    for (const rel of DERIVED) {
+      const fresh = readFileSync(join(outA, rel));
+      const committed = readFileSync(join(ROOT, rel));
+      if (sha256(fresh) === sha256(committed)) identical += 1;
+      rows.push({
+        rel,
+        fresh: await decodedShapeOf(rel, fresh),
+        committed: await decodedShapeOf(rel, committed),
+      });
+    }
+    const off = rows
+      .filter((row) => row.fresh.size !== row.committed.size)
+      .map((row) => `${row.rel}: fresh ${row.fresh.size}, shipped ${row.committed.size}`);
+    const channelDrift = rows
+      .filter((row) => String(row.fresh.channels) !== String(row.committed.channels))
+      .map((row) => `${row.rel} ${row.committed.channels}->${row.fresh.channels}`);
+    // A report-only line written with process.stdout.write: vitest's DEFAULT reporter drops
+    // a PASSING test's console.log, and CI's log is the only place this is ever read.
+    process.stdout.write(
+      `\n[brandDerivatives] ARM C compared DIMENSIONS, not bytes: ${foreignStackLine(RUNNING, MINT.mintedOn, VERDICT.differing)}.`
+      + ` ${identical}/${DERIVED.length} derivatives were byte-identical anyway; all ${DERIVED.length}`
+      + ' were decoded and compared by pixel size.'
+      + (channelDrift.length > 0 ? ` Channel counts moved (reported, not asserted): ${channelDrift.join(', ')}.` : '')
+      + ' Arms A and B bound every shipped byte and every input on this platform.\n',
+    );
+    expect(
+      off,
+      'a fresh derivation on a FOREIGN encoder stack produced a different pixel size. That is'
+      + ' not an encoder difference — the geometry is pure arithmetic and must be identical'
+      + ` everywhere:\n  ${off.join('\n  ')}`,
     ).toEqual([]);
   });
 
@@ -290,6 +509,144 @@ describe('the derivation is deterministic and the committed bytes are its output
     for (const rel of DERIVED) {
       expect(readFileSync(join(outA, rel)).length, `${rel} is empty`).toBeGreaterThan(1000);
     }
+  });
+});
+
+describe('the platform decision is pure, and every arm is proven able to see', () => {
+  // ⭐ ALL PLANTS ARE IN-MEMORY, over COPIES. The repository is never mutated: each plant
+  // hands the LIVE comparator a reader that doctors one buffer on its way out, exactly as
+  // tests/lint/goldenFreeze.walker.test.js does. A plant that re-implemented the detector
+  // would prove nothing about the detector.
+  const HERE = Object.freeze({ platform: 'darwin', arch: 'arm64', sharp: '0.35.3', vips: '8.18.3' });
+  const PROBE = 'public/favicon-192.png';
+
+  it('an identical signature chooses the byte comparison', () => {
+    expect(mintComparisonMode(HERE, { ...HERE }))
+      .toEqual({ mode: MINT_MODES.BYTES, differing: [], problem: null });
+  });
+
+  it('ANY one differing field chooses the dimension comparison and names that field', () => {
+    const verdicts = SIGNATURE_FIELDS.map((field) => {
+      const foreign = { ...HERE, [field]: `${HERE[field]}-elsewhere` };
+      const seen = mintComparisonMode(HERE, foreign);
+      return `${field}: ${seen.mode} [${seen.differing.join(',')}]`;
+    });
+    expect(verdicts).toEqual(SIGNATURE_FIELDS.map((f) => `${f}: ${MINT_MODES.DIMENSIONS} [${f}]`));
+  });
+
+  it("CI's own stack against this record chooses dimensions, not a silent pass", () => {
+    // The literal case this cure exists for: ubuntu x64 reading a record minted on a Mac.
+    const ci = { platform: 'linux', arch: 'x64', sharp: '0.35.3', vips: '8.18.3' };
+    const seen = mintComparisonMode(ci, HERE);
+    expect(seen.mode).toBe(MINT_MODES.DIMENSIONS);
+    expect(seen.differing).toEqual(['platform', 'arch']);
+    expect(seen.problem).toBe(null);
+  });
+
+  it('a MISSING record is a hard failure, never a quietly weaker arm', () => {
+    const modes = [undefined, null, 'a string', [], 42].map((bad) => mintComparisonMode(HERE, bad).mode);
+    expect(modes).toEqual(Array(5).fill(MINT_MODES.INVALID));
+  });
+
+  it('a MALFORMED signature is a hard failure, and the problem names every bad field', () => {
+    const seen = mintComparisonMode(HERE, { platform: 'linux', arch: '   ', sharp: null });
+    expect(seen.mode).toBe(MINT_MODES.INVALID);
+    const named = ['arch', 'sharp', 'vips'].filter((field) => seen.problem.includes(field));
+    expect(named).toEqual(['arch', 'sharp', 'vips']);
+  });
+
+  it('a malformed RUNNING signature fails closed too — the check is not one-sided', () => {
+    expect(mintComparisonMode({}, HERE).mode).toBe(MINT_MODES.INVALID);
+  });
+
+  it('this host reports a well-formed signature, so the live decision is a real one', () => {
+    expect(mintComparisonMode(RUNNING, { ...RUNNING }).mode).toBe(MINT_MODES.BYTES);
+  });
+
+  it('PLANT: one flipped byte in a shipped derivative reds ARM A, by name', () => {
+    const doctored = (rel) => {
+      const bytes = Buffer.from(readFileSync(join(ROOT, rel)));
+      if (rel === PROBE) bytes[bytes.length - 1] ^= 0x01;
+      return bytes;
+    };
+    const stale = staleAgainst(MINT.outputs, doctored);
+    expect(stale.length, 'the comparator did not see a flipped byte at all').toBe(1);
+    expect(stale[0].startsWith(`${PROBE}:`), `the comparator named the wrong file: ${stale[0]}`).toBe(true);
+    // ...and the tree really is untouched, so the plant proved the arm and not a dirty worktree.
+    expect(staleAgainst(MINT.outputs, (rel) => readFileSync(join(ROOT, rel)))).toEqual([]);
+  });
+
+  it('PLANT: a derivative that is not on disk reds ARM A rather than being skipped', () => {
+    const stale = staleAgainst(MINT.outputs, (rel) => {
+      if (rel === 'public/og-craft.png') throw new Error('ENOENT (planted)');
+      return readFileSync(join(ROOT, rel));
+    });
+    expect(stale).toEqual(['public/og-craft.png: not on disk at all']);
+  });
+
+  it('PLANT: a doctored record row reds ARM A even when the file is untouched', () => {
+    // The record is not trusted just because it is generated: a hand-edit to it convicts.
+    const doctored = { ...MINT.outputs, [PROBE]: { ...MINT.outputs[PROBE], bytes: 1 } };
+    expect(staleAgainst(doctored, (rel) => readFileSync(join(ROOT, rel))))
+      .toEqual([`${PROBE}: minted 1 B, tree ${MINT.outputs[PROBE].bytes} B`]);
+  });
+
+  it('PLANT: an edited script closure reds ARM B — the drift the byte arm could never see off-platform', () => {
+    const drift = driftedInputs(MINT.inputs, (rel) => (
+      rel === 'scripts/derive-brand-marks.mjs'
+        ? Buffer.concat([readFileSync(join(ROOT, rel)), Buffer.from('\n// a later edit\n')])
+        : readFileSync(join(ROOT, rel))
+    ));
+    expect(drift.length, 'an edited script was treated as the minted script').toBe(1);
+    expect(drift[0].startsWith('scripts/derive-brand-marks.mjs:')).toBe(true);
+  });
+
+  it('PLANT: a re-cut painting reds ARM B on every platform', () => {
+    const drift = driftedInputs(MINT.inputs, (rel) => (
+      rel === STRIP ? Buffer.from('not the painting') : readFileSync(join(ROOT, rel))
+    ));
+    expect(drift.length).toBe(1);
+    expect(drift[0].startsWith(`${STRIP}:`)).toBe(true);
+  });
+
+  it('PLANT: the dimension comparison is not a byte comparison wearing a hat', async () => {
+    // ⭐ THE CONTROL THAT MAKES ARM C WORTH ITS LINES. Re-encode the same pixels with
+    // different encoder settings — precisely the shape of the cross-platform difference —
+    // and the bytes must move while the decoded size does not. Without this, ARM C's
+    // dimension branch could be an arm that only ever sees identical files.
+    const committed = readFileSync(join(ROOT, PROBE));
+    const reEncoded = await sharp(committed).png({ compressionLevel: 1 }).toBuffer();
+    expect(sha256(reEncoded), 'the re-encode produced identical bytes, so this plant proves nothing')
+      .not.toBe(sha256(committed));
+    expect((await decodedShapeOf(PROBE, reEncoded)).size)
+      .toBe((await decodedShapeOf(PROBE, committed)).size);
+  });
+
+  it('PLANT: a resized derivative REDS the dimension comparison', async () => {
+    const committed = readFileSync(join(ROOT, PROBE));
+    const resized = await sharp(committed).resize(191, 191).png().toBuffer();
+    expect((await decodedShapeOf(PROBE, resized)).size)
+      .not.toBe((await decodedShapeOf(PROBE, committed)).size);
+  });
+
+  it('PLANT: a truncated derivative REDS — the shape reader decodes, it does not read a header', async () => {
+    // Measured 2026-09-20: sharp's metadata() RESOLVES on a PNG cut in half, so a header
+    // read would call a mangled file the right size. This is why ARM C decodes.
+    const committed = readFileSync(join(ROOT, PROBE));
+    await expect(decodedShapeOf(PROBE, committed.subarray(0, Math.floor(committed.length / 2))))
+      .rejects.toThrow();
+  });
+
+  it('the shape reader decodes all three containers the derivation ships', async () => {
+    const shapes = [];
+    for (const rel of ['public/favicon-512.png', 'public/favicon.ico', PDF_SEAL_MODULE]) {
+      shapes.push(`${rel} -> ${(await decodedShapeOf(rel, readFileSync(join(ROOT, rel)))).size}`);
+    }
+    expect(shapes).toEqual([
+      'public/favicon-512.png -> 512x512',
+      'public/favicon.ico -> ico [16:16x16, 32:32x32]',
+      `${PDF_SEAL_MODULE} -> module 192x192`,
+    ]);
   });
 });
 
