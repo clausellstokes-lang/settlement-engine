@@ -63,7 +63,7 @@ export const MANIFEST_PROVENANCE = Object.freeze({
   ruling: 'OWNER ORDERS 2026-09-17: "Fix the contradiction." and "fix the remaining contradictions";'
     + ' the owner signed the re-record ("I approve"); docs/shift-records/2026-09-17-dossier-contradictions.json.',
   car: 'DOSSIER AND REALM POLISH, parts 1 and 3 (docs/FIRST_CONTACT_BACKLOG.md)',
-  recordedOverSha: 'a62dcbb907a14daa4e2555f638ad7a7e82883d22',
+  recordedOverSha: '4416e8f9d68fd06a380bd84715681b6e69829ff9',
   note: 'Three predicates now read the same truth as the surface beside them. DS-STR-1\'s no-banner'
     + ' rung composes on a town with NO crisis banner instead of on every town with one (all 1,050'
     + ' rows: 516 golden-master-v3 towns lose the cell, the three calm gm-seed towns gain it);'
@@ -74,7 +74,11 @@ export const MANIFEST_PROVENANCE = Object.freeze({
     + ' `power.stabilityHeader`, leaving the `stable matched` pool for the plain-description floor;'
     + ' the CELL COUNT does not move for this one, only the content). 73,284 cells become 72,240.'
     + ' `recordedOverSha` is DECLARATIVE (the base the change was built on); `recorder` is the'
-    + ' executable half.',
+    + ' executable half.'
+    + ' 2026-09-20 (CURE-J, docs/shift-records/2026-09-20-cure-j-provenance.json): re-recorded with'
+    + ' ZERO rows moved (rowsSha unchanged) after the recorder identity became comment-insensitive'
+    + ' — FIX-C2\'s citation re-address in scripts/prose-rate-corpus.mjs had moved the raw sha of a'
+    + ' recorder file.',
 });
 
 /** This surface's identity in tests/fixtures/.golden-freeze-register.json. */
