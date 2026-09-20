@@ -429,6 +429,11 @@ CURE-A `08cb42e31` (the model walker's mask: findings identical under both forms
 - **FIX-D4** is a BUILD lane at the next composition train: N-3 (the pool literal) priced first, then (b) resolve-or-drop the handle and (d) the sanitiser's regex and predicate repaired with culture-correct copy; its golden (159 rows) and prose movement are the owner's signature — two records, one sitting. **TOOL-8 (NEW):** the dark-guard census.
 - **Preamble amendment owed at the chair's next placement sitting:** §P2.11 says a `skipIf(!requireDistRead)` byte arm in a focused run is not evidence about bytes; the byte row names `factionLifecycle.js` as EAGER. **TOOL-3's resume** records the first-paint closure's live margin in the test's header.
 
+## Amendments of 2026-09-20 02:55 EDT — run 17's one red ruled (a marker-slice scanner, not the product); CURE-E lands in the slot before EM-B3c; run 18 is the terminal; TOOL-7 widens; EM-P3b gains two rows (ODQ §934.47 addendum 41)
+
+- **CURE-E** (the trade-route token scanner re-cut to the found-and-ordered idiom; the second marker-slice instance in `faithPanelModel.test.js` cured with it) lands in the slot between EM-B1k's landing and EM-B3c's dispatch; **run 18** re-runs train EM-T3's terminal on that tip (its log at the scratchpad root, copied into the kit at refresh — never written into the kit while running).
+- **TOOL-7** is now the silent-failure-idiom lint (two arms: `in` against a frozen literal; a marker slice with no ordered-markers assertion), measure-first. **EM-P3b** gains: the canonical trade-route list pinning `GENERATED_ROUTE_VALUES` to the pools (the three-copy collapse), and the two fixture oddities (`landingFixture.js:47`'s `random_trade` sentinel; `sampleDossier.json:15`'s unscoreable `"salt road"`).
+
 ## Pre-proof tasks (Opus, read-only, before each packet is READY)
 1. Name every "verified fact" with file:line at the base; 2. fill the change manifest and required symbols; 3. measure the budget (files, lines) and split if over; 4. name the tests the packet's proof shape copies; 5. run the sealed dispatch dry.
 
