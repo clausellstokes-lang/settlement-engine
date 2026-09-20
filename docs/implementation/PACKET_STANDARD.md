@@ -471,6 +471,8 @@ A hot file sits within a handful of effective lines of a ceiling that will not b
 | `src/components/OutputContainer.jsx` | 599 | 600 | 1 |
 | `src/domain/worldPulse/convergence.js` | 764 | 800 | 36 |
 | `src/domain/worldPulse/institutionLifecycle.js` | 798 | 800 | 2 |
+| `src/App.jsx` | 575 | 600 | 25 |
+| `src/components/SettlementsPanel.jsx` | 577 | 600 | 23 |
 | `src/domain/worldPulse/peaceTerms.js` | 797 | 800 | 3 |
 | `src/domain/worldPulse/informationStatecraft.js` | 780 | 800 | 20 |
 
@@ -489,6 +491,8 @@ the executed measurement `GAP-1` §2.4 carries — it is tighter than two of the
 rows that were already here, and it had no entry, no `scripts/.size-baseline.json`
 row and no door. All four figures above were re-executed at `5d6a0e7c` with eslint's
 own `Linter` under `max-lines` `{ skipBlankLines: true, skipComments: true }`.
+⭐ `App.jsx` and `SettlementsPanel.jsx` joined on 2026-09-20 (FIX-P3's lane measured both within a handful of lines of the 600 component ceiling with no `.size-baseline.json` row; the chair re-measured at EM-B3c's landing with eslint's own `Linter`): FIX-P3 mounted its `NotFoundNotice` in `AppViews.jsx` for exactly this reason.
+
 ⭐ Re-measured 2026-09-20 by the chair at `32602dc60` with eslint's own `Linter` (`max-lines`, `skipBlankLines` and `skipComments`): `convergence.js` reads **764** (the 798 above stood from 2026-08-14; EM-R6's compile lane noticed the drift), and `src/domain/worldPulse/institutionLifecycle.js` JOINS the list at **798** of 800 — EM-B1h's compile found it within a handful of lines of its ceiling with no `scripts/.size-baseline.json` row and no door (ODQ §934.47 addendum 28); EM-B1a's pre-proof, the next packet likely to reach into it, prices the extraction. ⚠ `src/domain/worldPulse/pulseKernel.js` sits at EXACTLY its ceiling (1581 of 1581) but carries a `scripts/.size-baseline.json` row, so that register governs it, not this list — EM-B1k is contracted net-zero against it.
 
 ⚠ The measurement is what earned the row: `convergence.js` rebinds a short local six
