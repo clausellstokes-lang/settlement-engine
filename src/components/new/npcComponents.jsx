@@ -145,7 +145,7 @@ export function NPCRelCard2({rel, style={color:'#6b5340',bg:'#faf8f4',border:'#e
               <span style={{...serif,fontSize:FS.lg,fontWeight:700,color:swatch.inkMag}}>{rel.npc1Name}</span>
               <span style={{fontSize:chromeFontSize(FS.micro, mobile),fontWeight:800,color:style.color,background:style.bg,border:`1px solid ${style.border}`,padding:'1px 6px',letterSpacing:'0.05em'}}>{rel.typeName||rel.type}</span>
               <span style={{...serif,fontSize:FS.lg,fontWeight:700,color:swatch.inkMag}}>{rel.npc2Name}</span>
-              {rel.flagDriven&&<span style={{fontSize:chromeFontSize(FS.micro, mobile),fontWeight:700,color:swatch.magic,background:swatch['#F0EBFF'],padding:'1px 6px'}}>◆ EMERGENT</span>}
+              {rel.flagDriven&&<span style={{fontSize:chromeFontSize(FS.micro, mobile),fontWeight:700,color:swatch.magic,background:swatch['#F0EBFF'],padding:'1px 6px',textTransform:'uppercase'}}>◆ Emergent</span>}
             </div>
             <div data-sf-chrome="" style={{fontSize:chromeFontSize(FS.xs,mobile),color:MUTED}}>{rel.npc1Role} · {rel.strength} · {rel.npc2Role}</div>
           </div>

@@ -31,6 +31,7 @@ import Button from '../primitives/Button.jsx';
 import useIsMobile from '../../hooks/useIsMobile.js';
 import { chromeFontSize, proseFontSize } from '../../design/proseScale.js';
 import { literaryTitle, tokenCase } from './labelLadder.js';
+import { TIER_LABELS } from './design.js';
 
 const GOLD = swatch['#8C6F32'];
 const INK = swatch['#1B1408'];
@@ -99,7 +100,16 @@ export default function SummaryTabV2({ settlement, onOpenTableView }) {
           fontSize: chromeFontSize(FS.xxs, mobile), color: MUTED,
           letterSpacing: '0.04em',
         }}>
-          {String(settlement.tier || 'SETTLEMENT').toUpperCase()}
+          {/* ⭐ THE TIER IS A WORD WEARING A STYLE, AND IT IS THE ESTATE'S WORD (ODQ §934.63
+              F14 + noticed 6). This read `String(settlement.tier).toUpperCase()`, which
+              upper-cases the raw machine TOKEN: the smallest rung printed "THORP" here while
+              the refusal sentence and the wizard both say "Thorpe". Reading TIER_LABELS
+              fixes the word and `textTransform` carries the capitals, so the look is
+              unchanged for every other rung. The transform is on the tier alone rather than
+              the row: "624 pop" and "road" beside it are not kickers. */}
+          <span style={{ textTransform: 'uppercase' }}>
+            {TIER_LABELS[settlement.tier] || settlement.tier || 'Settlement'}
+          </span>
           {settlement.population != null && (
             <> · {formatCount(settlement.population)} pop</>
           )}
@@ -251,9 +261,9 @@ export default function SummaryTabV2({ settlement, onOpenTableView }) {
               </span>
               <span style={{
                 fontSize: chromeFontSize(FS['7.5'], mobile), fontWeight: 800,
-                color: AMBER, letterSpacing: '0.08em',
+                color: AMBER, letterSpacing: '0.08em', textTransform: 'uppercase',
               }}>
-                HOOK
+                Hook
               </span>
             </div>
             <div style={{

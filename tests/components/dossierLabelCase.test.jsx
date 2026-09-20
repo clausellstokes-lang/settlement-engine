@@ -46,8 +46,9 @@ import React from 'react';
 import { afterEach, beforeAll, describe, expect, test } from 'vitest';
 import { cleanup, fireEvent, render } from '@testing-library/react';
 
-import { readFileSync } from 'node:fs';
-import { resolve } from 'node:path';
+import { readdirSync, readFileSync, statSync } from 'node:fs';
+import { join, resolve } from 'node:path';
+import { parse } from 'espree';
 
 import { generateSettlementPipeline } from '../../src/generators/generateSettlementPipeline.js';
 import { SAFETY_BANDS, STABILITY_BANDS } from '../../src/domain/display/labelBands.js';
@@ -304,6 +305,96 @@ describe('a badge\'s capitals belong to its style, never to its word', () => {
     }
     cleanup();
   }, 60000);
+
+  /**
+   * ⭐⭐ THE SAME RULE AS A FACT ABOUT THE SOURCE, OVER THE WHOLE DOSSIER
+   * (ODQ §934.63 noticed 6).
+   *
+   * The arm above is the rule proved on ONE badge, rendered. The public-path walk found the
+   * class it could not see: `FOUNDED` and `NOW` on the History timeline's axis, `STILL
+   * RELEVANT TODAY` on an anchored-event banner, and the tier printed as `VILLAGE` on the
+   * DM Summary — capitals typed into the CONTENT, a few lines from kickers that set the
+   * identical look with `textTransform`. A rendered walk cannot catch them (they look
+   * exactly like a styled kicker on screen, which is the point), and no grep can tell a
+   * shouted word from an acronym.
+   *
+   * ⛔ THE RULING, PER SITE, AS THE CHAIR PUT IT: a status word takes the case ladder, a
+   * genuine acronym stays, a kicker's capitals go in its style. Measured over the dossier,
+   * all THIRTEEN remaining sites were kickers or badges and all thirteen are now written
+   * words wearing `textTransform`. There is no acronym among them, so the census is held to
+   * ZERO with no register — the exemption can be written the day a real acronym needs one,
+   * by somebody who has to say which word it is.
+   *
+   * ⚠ THE BAR IS FOUR LETTERS, and that is a judgment rather than a measurement. Three-letter
+   * stamps ('REQ', 'YOU') are legend CODES, each glossed in words on the same screen
+   * ("REQ = Historically required"), and sentence-casing a two-or-three character stamp buys
+   * a reader nothing. Raising the bar would let a shouted word back in; lowering it would
+   * convict the legend.
+   */
+  test('no dossier component types a shouted word into its content', () => {
+    const DOSSIER = resolve(process.cwd(), 'src/components/new');
+    /** A SHOUTED WORD: four or more capitals, optionally a run of such words. */
+    const SHOUT = /(?:^|[^A-Za-z])([A-Z]{4,}(?:[ '-][A-Z]{2,})*)(?:[^A-Za-z]|$)/;
+
+    const files = [];
+    (function walk(dir) {
+      for (const entry of readdirSync(dir)) {
+        const p = join(dir, entry);
+        if (statSync(p).isDirectory()) walk(p);
+        else if (/\.jsx?$/.test(entry) && !/\.test\./.test(entry)) files.push(p);
+      }
+    }(DOSSIER));
+
+    const offenders = [];
+    let textNodes = 0;
+    for (const abs of files) {
+      const rel = abs.slice(process.cwd().length + 1).replace(/\\/g, '/');
+      const src = readFileSync(abs, 'utf8');
+      let ast;
+      // A parse failure THROWS: a scanner that silently drops what it cannot read is the
+      // vacuity this arm exists against.
+      try {
+        ast = parse(src, { ecmaVersion: 2024, sourceType: 'module', loc: true, ecmaFeatures: { jsx: true } });
+      } catch (e) { throw new Error(`${rel} did not parse: ${e.message}`, { cause: e }); }
+      const stack = [ast];
+      while (stack.length) {
+        const node = stack.pop();
+        if (!node || typeof node.type !== 'string') continue;
+        if (node.type === 'JSXText') {
+          const text = node.value.trim();
+          if (text) {
+            textNodes += 1;
+            const m = SHOUT.exec(text);
+            if (m) offenders.push(`  ${rel}:${node.loc.start.line}  "${text.slice(0, 60)}"  (${m[1]})`);
+          }
+        }
+        for (const key in node) {
+          if (key === 'loc' || key === 'range') continue;
+          const v = node[key];
+          if (Array.isArray(v)) {
+            for (const c of v) if (c && typeof c.type === 'string') stack.push(c);
+          } else if (v && typeof v.type === 'string') stack.push(v);
+        }
+      }
+    }
+
+    // ⛔ ANTI-VACUITY, both halves: the tree and the detector.
+    expect(files.length, 'the dossier tree is empty — has src/components/new moved?').toBeGreaterThanOrEqual(45);
+    expect(textNodes, 'the walk found no JSX text at all — the node shape has changed').toBeGreaterThanOrEqual(100);
+    expect(SHOUT.test('STILL RELEVANT TODAY'), 'the detector no longer convicts a shouted phrase').toBe(true);
+    expect(SHOUT.test('Still relevant today'), 'the detector convicts a written word').toBe(false);
+    expect(SHOUT.test('REQ = Historically required'), 'the detector convicts a three-letter legend code').toBe(false);
+
+    expect(
+      offenders,
+      '\nA dossier component types capitals into its CONTENT where the estate puts them in the STYLE.\n'
+      + 'Write the word and add `textTransform: \'uppercase\'` to the element\'s style: literal capitals '
+      + 'cannot be re-cased by anything downstream, they read as a different voice beside the kickers that '
+      + 'do it properly, and a screen reader spells some of them out.\n'
+      + 'If the word is a genuine ACRONYM it stays — say which it is, here, in a register with its reason.\n'
+      + `${offenders.join('\n')}\n`,
+    ).toEqual([]);
+  });
 });
 
 describe('the two casing helpers', () => {

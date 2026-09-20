@@ -109,7 +109,7 @@ const OutputNode = ({ label, isExport }) => {
       color: isExport ? '#1a5a28' : '#6b5340' }}>
       {label}
     </span>
-    {isExport && <span style={{ fontSize: chromeFontSize(FS.micro, mobile), fontWeight: 800, color: swatch.success, marginLeft: 2 }}>EXPORT</span>}
+    {isExport && <span style={{ fontSize: chromeFontSize(FS.micro, mobile), fontWeight: 800, color: swatch.success, marginLeft: 2, textTransform: 'uppercase' }}>Export</span>}
   </div>
   );
 };
@@ -166,7 +166,7 @@ export function ChainRow({ chain, instNames, primaryExports, mobile }) {
             An unguarded span emitted an empty box that still ate the flex gap. */}
         {chain.resourceIcon && <span style={{ fontSize: FS.sm }}>{chain.resourceIcon}</span>}
         <span style={{ fontSize: FS.sm, fontWeight: 700, color: st.color, flex: 1 }}>{chain.label}</span>
-        {hasExport && <span style={{ fontSize: chromeFontSize(FS.micro, mobile), fontWeight: 800, color: swatch.success, background: swatch['#E8F5EC'], border: '1px solid #a8d8b0', padding: '1px 5px' }}>EXPORT</span>}
+        {hasExport && <span style={{ fontSize: chromeFontSize(FS.micro, mobile), fontWeight: 800, color: swatch.success, background: swatch['#E8F5EC'], border: '1px solid #a8d8b0', padding: '1px 5px', textTransform: 'uppercase' }}>Export</span>}
         {missing.length > 0 && <span style={{ fontSize: chromeFontSize(FS.micro, mobile), color: swatch.info, background: swatch['#FAF8F4'], border: '1px solid #a0b0d8', padding: '1px 5px' }}>imported</span>}
         <span style={{ fontSize: chromeFontSize(FS.micro, mobile), fontWeight: 700, color: st.color }}>{st.dot}</span>
       </div>

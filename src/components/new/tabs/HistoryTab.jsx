@@ -152,10 +152,10 @@ export function HistoryTab({settlement:r, narrativeNote, recentEvents = [], onRe
                 </span>
                 {event.at&&<span style={{fontSize:chromeFontSize(FS.micro, mobile),color:MUTED,fontWeight:700}}>{formatRecentDate(event.at)}</span>}
                 {event.partyCaused
-                  ? <span title="Caused by the party" style={{fontSize:chromeFontSize(FS.micro, mobile),color:PARTY,background:PARTY_BG,border:`1px solid ${PARTY}`,padding:'0 5px',fontWeight:800}}>PARTY</span>
+                  ? <span title="Caused by the party" style={{fontSize:chromeFontSize(FS.micro, mobile),color:PARTY,background:PARTY_BG,border:`1px solid ${PARTY}`,padding:'0 5px',fontWeight:800,textTransform:'uppercase'}}>Party</span>
                   : event.source==='manual'
-                    ? <span title="A change you authored" style={{fontSize:chromeFontSize(FS.micro, mobile),color:SRC_EDIT,background:SRC_EDIT_BG,padding:'0 5px',fontWeight:800}}>EDIT</span>
-                    : <span title="The world engine produced this" style={{fontSize:chromeFontSize(FS.micro, mobile),color:swatch.info,background:swatch['#F4F6FD'],padding:'0 5px',fontWeight:800}}>WORLD</span>}
+                    ? <span title="A change you authored" style={{fontSize:chromeFontSize(FS.micro, mobile),color:SRC_EDIT,background:SRC_EDIT_BG,padding:'0 5px',fontWeight:800,textTransform:'uppercase'}}>Edit</span>
+                    : <span title="The world engine produced this" style={{fontSize:chromeFontSize(FS.micro, mobile),color:swatch.info,background:swatch['#F4F6FD'],padding:'0 5px',fontWeight:800,textTransform:'uppercase'}}>World</span>}
                 {event.severity&&<span style={{fontSize:chromeFontSize(FS.micro, mobile),color:swatch['#5A3010'],background:swatch['#FDF4EC'],padding:'0 5px',fontWeight:800}}>{String(event.severity)}</span>}
               </div>
               {event.summary&&<p style={{fontSize:proseFontSize(FS.sm, mobile),color:swatch.inkMag2,lineHeight:1.5,margin:0}}>{event.summary}</p>}
@@ -171,10 +171,13 @@ export function HistoryTab({settlement:r, narrativeNote, recentEvents = [], onRe
         <div style={{position:'relative',height:36,background:swatch['#F0EAD8'],overflow:'visible',marginTop:14,marginBottom:20}}>
           {/* Axis line */}
           <div style={{position:'absolute',top:'50%',left:0,right:0,height:2,background:swatch['#D0B880'],transform:'translateY(-50%)'}}/>
-          {/* "Founded" */}
-          <div style={{position:'absolute',left:0,bottom:-16,fontSize:chromeFontSize(FS.micro, mobile),color:MUTED,fontWeight:600}}>FOUNDED</div>
-          {/* "Now" */}
-          <div style={{position:'absolute',right:0,bottom:-16,fontSize:chromeFontSize(FS.micro, mobile),color:MUTED,fontWeight:600}}>NOW</div>
+          {/* ⭐ THE AXIS ENDS ARE WORDS WEARING A STYLE (ODQ §934.63 noticed 6). They were
+              the literals FOUNDED and NOW — capitals typed into the content while the
+              kicker six lines above sets the very same look with `textTransform`. The
+              comments beside them already said what they are ("Founded", "Now"), which is
+              how long the two spellings had been sitting next to each other. */}
+          <div style={{position:'absolute',left:0,bottom:-16,fontSize:chromeFontSize(FS.micro, mobile),color:MUTED,fontWeight:600,textTransform:'uppercase'}}>Founded</div>
+          <div style={{position:'absolute',right:0,bottom:-16,fontSize:chromeFontSize(FS.micro, mobile),color:MUTED,fontWeight:600,textTransform:'uppercase'}}>Now</div>
           {/* Event dots + year labels with collision avoidance */}
           {(() => {
             // Sort by position to detect collisions
@@ -323,7 +326,8 @@ export function HistoryTab({settlement:r, narrativeNote, recentEvents = [], onRe
               }} role="button" tabIndex={0} onClick={()=>setExpandedEvent(isExp?null:i)} onKeyDown={e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();setExpandedEvent(isExp?null:i);}}}>
                 {/* Anchored banner */}
                 {isAnchored&&<div style={{background:ec.color,padding:'3px 12px',display:'flex',alignItems:'center',gap:6}}>
-                  <span style={{fontSize:chromeFontSize(FS.xxs, mobile),fontWeight:800,color:swatch.white,letterSpacing:'0.06em'}}>STILL RELEVANT TODAY</span>
+                  {/* A kicker, so its capitals belong to its style (ODQ §934.63 noticed 6). */}
+                  <span style={{fontSize:chromeFontSize(FS.xxs, mobile),fontWeight:800,color:swatch.white,letterSpacing:'0.06em',textTransform:'uppercase'}}>Still relevant today</span>
                 </div>}
                 {/* Event header */}
                 <div style={{padding:'10px 14px'}}>

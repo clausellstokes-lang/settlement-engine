@@ -225,7 +225,7 @@ export function RelationshipsTab({ settlement:r, neighboursOnly=false, saveId=nu
       {/* Emergent conditions banner */}
       {!neighboursOnly&&<>
       {flagDriven.length>0&&<div style={{background:swatch['#F8F4FD'],border:'1px solid #d0b8e8',borderLeft:'3px solid #5a2a8a',padding:'10px 14px',marginBottom:16}}>
-        <div style={{fontSize:chromeFontSize(FS.xs, mobile),fontWeight:700,color:swatch.magic,marginBottom:4}}>◆ EMERGENT CONDITIONS ACTIVE</div>
+        <div style={{fontSize:chromeFontSize(FS.xs, mobile),fontWeight:700,color:swatch.magic,marginBottom:4,textTransform:'uppercase'}}>◆ Emergent conditions active</div>
         <p style={{fontSize:proseFontSize(FS.sm,mobile),color:swatch.inkMag2,margin:0,lineHeight:1.5}}>
           {flagDriven.length} relationship{flagDriven.length>1?'s':''} shaped by the settlement's compound dynamics. These would not exist under neutral slider conditions.
         </p>

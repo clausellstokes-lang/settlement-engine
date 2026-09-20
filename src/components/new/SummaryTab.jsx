@@ -203,7 +203,7 @@ function SummaryTab({ settlement:r }) {
           <div key={i} style={{border:`2px solid ${v.colour}`,padding:'14px 16px',background:`${v.colour}10`}}>
             <div style={{display:'flex',alignItems:'center',gap:10,marginBottom:8}}>
               <span style={{...serif,fontSize: FS['18'],fontWeight:700,color:v.colour}}>{v.label}</span>
-              <span style={{fontSize:chromeFontSize(FS.micro, isMobile),fontWeight:800,color:swatch.white,background:v.colour,padding:'2px 7px',letterSpacing:'0.07em'}}>ACTIVE CRISIS</span>
+              <span style={{fontSize:chromeFontSize(FS.micro, isMobile),fontWeight:800,color:swatch.white,background:v.colour,padding:'2px 7px',letterSpacing:'0.07em',textTransform:'uppercase'}}>Active crisis</span>
             </div>
             <p style={{fontSize:FS.md,color:ink,lineHeight:1.55,marginBottom:8}}>{v.summary}</p>
             <div style={{borderTop:`1px solid ${v.colour}35`,paddingTop:8}}>

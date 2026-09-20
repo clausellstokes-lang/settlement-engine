@@ -91,7 +91,7 @@ export function ResourcesTab({settlement:r, narrativeNote, publicDossier = false
           {unexploited.map((chain,i)=>(
             <div key={i} style={{background:swatch['#FDF8E8'],border:'1px solid #e0c060',borderLeft:'3px solid #b8860b',padding:'10px 14px'}}>
               <div style={{display:'flex',alignItems:'center',gap:8,marginBottom:6,flexWrap:'wrap'}}>
-                <span style={{fontSize:chromeFontSize(FS.micro, mobile),fontWeight:800,color:swatch['#7A5010'],background:swatch['#F5E8C0'],padding:'1px 6px',letterSpacing:'0.05em'}}>UNEXPLOITED</span>
+                <span style={{fontSize:chromeFontSize(FS.micro, mobile),fontWeight:800,color:swatch['#7A5010'],background:swatch['#F5E8C0'],padding:'1px 6px',letterSpacing:'0.05em',textTransform:'uppercase'}}>Unexploited</span>
                 <span style={{fontSize:FS.md,fontWeight:700,color:swatch.inkMag}}>{resourceDisplayName(chain.rawResource)}</span>
                 <span style={{fontSize:chromeFontSize(FS.xxs, mobile),fontWeight:600,color:valColor(chain.exportValue),background:valBg(chain.exportValue),padding:'0 5px'}}>{chain.exportValue} value</span>
               </div>
@@ -121,7 +121,7 @@ export function ResourcesTab({settlement:r, narrativeNote, publicDossier = false
           {partExploited.map((chain,i)=>(
             <div key={i} style={{background:swatch['#F4FAF4'],border:'1px solid #a8d8b0',borderLeft:'3px solid #5a6a1a',padding:'10px 14px'}}>
               <div style={{display:'flex',alignItems:'center',gap:8,marginBottom:4,flexWrap:'wrap'}}>
-                <span style={{fontSize:chromeFontSize(FS.micro, mobile),fontWeight:800,color:swatch['#3A5A1A'],background:swatch['#D8ECD8'],padding:'1px 6px',letterSpacing:'0.05em'}}>PARTIAL</span>
+                <span style={{fontSize:chromeFontSize(FS.micro, mobile),fontWeight:800,color:swatch['#3A5A1A'],background:swatch['#D8ECD8'],padding:'1px 6px',letterSpacing:'0.05em',textTransform:'uppercase'}}>Partial</span>
                 <span style={{fontSize:FS.md,fontWeight:700,color:swatch.inkMag}}>{resourceDisplayName(chain.rawResource)}</span>
                 <span style={{fontSize:chromeFontSize(FS.xxs, mobile),fontWeight:600,color:valColor(chain.exportValue),background:valBg(chain.exportValue),padding:'0 5px'}}>{chain.exportValue} value</span>
               </div>
@@ -138,7 +138,7 @@ export function ResourcesTab({settlement:r, narrativeNote, publicDossier = false
           {fullExploited.map((chain,i)=>(
             <div key={i} style={{background:swatch['#FAF8F4'],border:'1px solid #a8d8b0',borderLeft:'3px solid #1a5a28',padding:'8px 14px'}}>
               <div style={{display:'flex',alignItems:'center',gap:8,flexWrap:'wrap'}}>
-                <span style={{fontSize:chromeFontSize(FS.micro, mobile),fontWeight:800,color:swatch.success,background:swatch['#C8ECD4'],padding:'1px 6px',letterSpacing:'0.05em'}}>✓ FULLY EXPLOITED</span>
+                <span style={{fontSize:chromeFontSize(FS.micro, mobile),fontWeight:800,color:swatch.success,background:swatch['#C8ECD4'],padding:'1px 6px',letterSpacing:'0.05em',textTransform:'uppercase'}}>✓ Fully exploited</span>
                 <span style={{fontSize:FS.sm,fontWeight:700,color:swatch.inkMag}}>{resourceDisplayName(chain.rawResource)}</span>
                 <span style={{fontSize:chromeFontSize(FS.xxs, mobile),fontWeight:600,color:valColor(chain.exportValue),background:valBg(chain.exportValue),padding:'0 5px'}}>{chain.exportValue} value</span>
               </div>
