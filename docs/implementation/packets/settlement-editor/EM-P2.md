@@ -330,11 +330,13 @@ vi.mock('../../src/kernel/proseHash.js', async (importOriginal) => {
   const actual = await importOriginal();
   return {
     ...actual,
-    pickVariant: (pool, seed) => { if (hashCensus.on) hashCensus.picks.push({ seed: seed === undefined ? ' undefined' : String(seed), poolLen: Array.isArray(pool) ? pool.length : -1 }); return actual.pickVariant(pool, seed); },
+    pickVariant: (pool, seed) => { if (hashCensus.on) hashCensus.picks.push({ seed: seed === undefined ? '\0undefined' : String(seed), poolLen: Array.isArray(pool) ? pool.length : -1 }); return actual.pickVariant(pool, seed); },
     fnv1a32: (str) => { if (hashCensus.on) hashCensus.hashes.push(String(str)); return actual.fnv1a32(str); },
   };
 });
 ```
+
+> *(ANNOTATED AT DOC-4, the chair, 2026-09-20 — ODQ §934.47 addendum 106: the listing above carried the census probe's NUL separator as the RAW BYTE (the only one under docs/, which made git classify this landed record as binary); it is now spelled as the two-character JavaScript escape the source uses. Nothing else in this landed packet changed. The class: a control-character escape passed through a JSON-encoded tool parameter arrives as the byte — TOOL-25's walker guards docs/ for it.)*
 
 `pickVariant` has no intra-module caller, so its wrapper is total over its callers. `pickVariant` calls `fnv1a32` intra-module (VF-9), so the `fnv1a32` wrapper counts only EXTERNAL hash sites — the two censuses are **disjoint by construction and nothing is double-counted**. That is a property, not a convenience, and A6 asserts it.
 
