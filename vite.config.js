@@ -174,7 +174,7 @@ export const ENGINE_SHARED_DOMAIN_EXCISIONS = [
   '/src/domain/cultureProfiles.js',
   '/src/domain/customCategories.js',
   '/src/domain/magicFilter.js',
-  '/src/domain/region/foldTradeCategories.js',
+  // region/foldTradeCategories.js RETIRED 2026-09-20 (FIX-D9, ODQ §934.47 addendum 98) — its row here deleted nothing; docs/DEAD_CODE_DISPOSITION.md, Round-3. ⛔ ONE line replacing one, so no address below this point moves.
   '/src/domain/settlement.schema.js',
   '/src/domain/formatNumber.js',
   '/src/domain/deterministicSort.js',

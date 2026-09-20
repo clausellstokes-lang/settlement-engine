@@ -8,24 +8,27 @@
  * treated as a second semantic schema.
  *
  * ⛔ WHY EVERY DERIVED `_KEYS` CONSTANT BELOW CARRIES A ROLLUP PURE ANNOTATION, AND
- * WHY THAT IS NOT DECORATION. EIGHT non-UI modules import this file, and all eight want
+ * WHY THAT IS NOT DECORATION. SEVEN non-UI modules import this file, and all seven want
  * exactly two symbols from it (counted by grep, 2026-09-18; an earlier draft of this
  * paragraph said five and named four - it had missed `resolveResources`,
  * `customSupplyChainActivation` and `foldTradeCategories`, which is precisely the kind of
- * hand-kept roster this file should not have asserted without re-measuring):
+ * hand-kept roster this file should not have asserted without re-measuring. ⚠ EIGHT -> SEVEN
+ * on 2026-09-20: `domain/region/foldTradeCategories.js` was RETIRED by FIX-D9 - it had no
+ * importer at all, its work having moved to `content/customTradeEndpointProjection.js` at
+ * c1ea091f7a. The roster is re-measured here rather than decremented on trust):
  *
  *   `passesTierGate`       - `lib/dependencyEngine.js`, `generators/steps/assembleInstitutions.js`,
  *                            `generators/steps/economyReconcilePass.js`,
  *                            `generators/steps/resolveResources.js`,
  *                            `generators/services/institutionServices.js`,
  *                            `domain/content/customSupplyChainActivation.js`
- *   `tradeCategoryLabelOf` - `domain/content/customTradeEndpointProjection.js`,
- *                            `domain/region/foldTradeCategories.js`
+ *   `tradeCategoryLabelOf` - `domain/content/customTradeEndpointProjection.js`
  *
- * Seven of the eight are inside the generation worker's static graph;
- * `foldTradeCategories.js` is the one that is not. Not one engine, worker, kernel or data
- * module reads a single authoring vocabulary below - they are the compendium editor's, the
- * deity panel's and the gallery map's, and they are the main thread's alone.
+ * ALL SEVEN are now inside the generation worker's static graph. `foldTradeCategories.js`
+ * used to be the one that was not, and that is exactly why it was retired: a module outside
+ * every entry's reach is not a consumer. Not one engine, worker, kernel or data module reads
+ * a single authoring vocabulary below - they are the compendium editor's, the deity panel's
+ * and the gallery map's, and they are the main thread's alone.
  *
  * Rollup could not drop them all the same, and the reason is worth writing down
  * because it recurs: a `const X = Object.freeze(Y.map(f))` lets rollup drop the
