@@ -747,6 +747,118 @@ describe('reader-with-no-writer ratchet: the live scan', () => {
     expect(stale).toEqual([]);
   });
 
+  /**
+   * ⭐⭐ THE ERASURE GUARD (TOOL-13 §6.4, built by TOOL-13b) — A WIDER VOCABULARY
+   * DELETES BANKED ROWS, AND THE SHRINK-ONLY ARM ABOVE CANNOT SAY SO.
+   *
+   * ── THE HAZARD, AND IT IS NOT INTUITIVE ─────────────────────────────────────
+   * Resolution is NOT MONOTONE in findings. `scanReaders` refuses to emit a finding
+   * unless the receiver resolves to EXACTLY ONE shape (the `objects.length === 1`
+   * ambiguity guard, and that guard is right — see its own comment). So a receiver
+   * that used to bind to one shape and now binds to TWO produces no finding at all:
+   * a BETTER resolver silently DELETES banked debt. Every arm TOOL-13 measured that
+   * widened the vocabulary erased rows; only the destructuring arm erased none.
+   *
+   * ── WHAT THIS ARM ADDS OVER THE SHRINK-ONLY ARM ABOVE ───────────────────────
+   * `compare` reports a vanished row as STALE — and STALE is ALSO exactly what a
+   * genuine REPAIR looks like. That is the right red with the wrong diagnosis, and
+   * the lane that hits it reads "the fix landed, re-freeze" rather than "the
+   * instrument stopped seeing it". This arm asks the SECOND question, which
+   * separates the two: IS THE READ STILL WRITTEN IN THE FILE? A row that vanished
+   * while its read still stands is instrument erosion, never a repair.
+   *
+   * ⚠ AND `assertClassADebtPreserved` DOES NOT COVER THIS. That guard watches the
+   * POST-FILTERS (M6/M11/M12/M13); the erasure happens INSIDE the detector, upstream
+   * of every filter, so no filter ever reports the cleared identity. MEASURED: none
+   * of the thirteen rows below is a class-(a) identity, so even extending that guard
+   * to this path would not have caught one of them.
+   *
+   * ── ⚠ PROVED BY ITS COUNTERFORCE, NOT RED-FIRST, BECAUSE IT ALREADY HOLDS ───
+   * The shipped configuration erases nothing today, so there is no pre-cure red to
+   * quote. What proves the arm is the COUNTERFORCE, measured at this base in a
+   * throwaway copy of the byte-frozen detector with all SIX corpus walk roots
+   * admitted to the root prior (the widening the detector's own header claims it
+   * already makes — `campaign`, `worldState`, `pulseResult` and `wizardNews` are in
+   * fact all filtered out by `rows >= minRows`):
+   *
+   *     shipped   files=2232 reads=128225 resolved=9780  (7.627%)  raw findings=2105
+   *               rows live=1459 frozen=1390   ERASED=0
+   *     six roots files=2232 reads=128225 resolved=12368 (9.646%)  raw findings=2124
+   *               rows live=1491 frozen=1390   ERASED=13
+   *
+   * THE THIRTEEN, and EVERY ONE of them still had its read written in source:
+   *     src/components/map/WorldPulseData.js   institutionName|outcome|settlementIds on stressors
+   *     src/components/map/heraldFeed.js       covert|impactKind|outcome|significance on stressors
+   *     src/domain/display/chronicleGraph.js   applyMode|proposalPayload on raw
+   *     src/domain/realm/heraldRouting.js      impactKind|outcome|section|sectionAuthority on stressors
+   *
+   * ⭐ AND THE CLASSIFIER IS DRIVEN ON PLANTED ROWS BELOW rather than only on the
+   * live inventory, because at this base the live half is empty by construction — an
+   * arm whose message has never been seen to form is indistinguishable from one that
+   * cannot form it.
+   *
+   * ⚠ THE `.key` PROBE IS TEXTUAL AND IS REPORTED AS SUCH. It proves a spelling is
+   * PRESENT, never that the read reaches the shape under test — the same honest limit
+   * the instrument's own `WRITE_SHAPE_SPELLINGS` docblock states. It is used here for
+   * one job, classifying a row that has ALREADY vanished, where a false "still
+   * present" costs a triage and a false "repaired" costs nothing the STALE arm above
+   * does not already catch.
+   *
+   * COST: no new scan. This reuses `live.raw.findings` from the shared `beforeAll`
+   * (the `scansRun` budget above is untouched) and reads a file only for a row that
+   * has already vanished — zero of them at this base.
+   */
+  test('THE ERASURE GUARD: no frozen row has vanished from the DETECTOR while its read still stands', () => {
+    const rawRows = new Set(live.raw.findings.map((f) => `${f.file} / ${identityOf(f)}`));
+    /** Frozen rows absent from the RAW detector output, each classified by whether
+     *  the read it banks is still written in the file it was banked at. */
+    const erasedRowsOf = (inventory) => {
+      const out = [];
+      for (const [file, row] of Object.entries(inventory)) {
+        for (const identity of Object.keys(row)) {
+          const label = `${file} / ${identity}`;
+          if (rawRows.has(label)) continue;
+          const path = join(ROOT, file);
+          const key = identity.split(' on ')[0];
+          const source = existsSync(path) ? readFileSync(path, 'utf8') : '';
+          out.push(`${label} — ${new RegExp(`\\.\\s*${key}(?![\\w$])`).test(source)
+            ? 'THE READ IS STILL WRITTEN: the detector stopped resolving it (INSTRUMENT EROSION)'
+            : 'the read is gone from the file (a lawful repair)'}`);
+        }
+      }
+      return out.sort();
+    };
+
+    expect(
+      erasedRowsOf(baseline.inventory),
+      'A FROZEN ROW VANISHED FROM THE DETECTOR ITSELF, upstream of every post-filter.\n'
+      + 'If the row is marked INSTRUMENT EROSION the read is still written and the detector\n'
+      + 'stopped resolving it — that is NOT a repair and a `--write` re-freeze would BANK THE\n'
+      + 'LOSS. The usual cause is a WIDER shape vocabulary (more roots, a lower minRows, a\n'
+      + 'richer corpus): the receiver now binds to two shapes and legacy-reader-shape-scan\'s\n'
+      + '`objects.length === 1` guard suppresses the finding. Triage the named row against its\n'
+      + 'site before any re-freeze; a class-(a) identity among them is a STOP.',
+    ).toEqual([]);
+
+    // ⭐ THE CLASSIFIER IS NON-VACUOUS — both branches driven on planted rows. The
+    // shape `__synthetic__` is observed by nothing, so neither row can be in `rawRows`.
+    const planted = erasedRowsOf({
+      'src/domain/realm/heraldRouting.js': {
+        'outcome on __synthetic__': 1,
+        '__noSuchKeyIsWrittenAnywhere on __synthetic__': 1,
+      },
+    });
+    expect(planted).toHaveLength(2);
+    expect(planted.filter((row) => row.includes('INSTRUMENT EROSION'))).toEqual([
+      'src/domain/realm/heraldRouting.js / outcome on __synthetic__ — THE READ IS STILL WRITTEN:'
+      + ' the detector stopped resolving it (INSTRUMENT EROSION)',
+    ]);
+    expect(planted.filter((row) => row.includes('a lawful repair'))).toEqual([
+      'src/domain/realm/heraldRouting.js / __noSuchKeyIsWrittenAnywhere on __synthetic__ —'
+      + ' the read is gone from the file (a lawful repair)',
+    ]);
+  });
+
   test('ANTI-VACUITY: the corpus and the resolver have not collapsed', () => {
     expect(sentinelFailures(sentinelOf(corpus, live.stats, BASELINE_SCAN_MODE), baseline.sentinel))
       .toEqual([]);
