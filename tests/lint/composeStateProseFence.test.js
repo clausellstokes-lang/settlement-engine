@@ -120,14 +120,28 @@ const SRC_FILES = walk(join(ROOT, 'src'))
 const read = (rel) => readFileSync(join(ROOT, rel), 'utf8');
 
 /**
- * Strip line and block comments so a scan reads CODE. The composer's own header names
- * `localeCompare` and `Intl` in the sentence that bans them, and a scanner that counted the
- * ban as a violation would force the guard to go undocumented to stay green.
+ * Strip line and block comments so a scan reads CODE, LINE STRUCTURE PRESERVED. The composer's
+ * own header names `localeCompare` and `Intl` in the sentence that bans them, and a scanner
+ * that counted the ban as a violation would force the guard to go undocumented to stay green.
+ *
+ * ⛔ A COMMENT IS BLANKED, NEVER COLLAPSED, AND THAT IS THE WHOLE CURE (CURE-A3). The block
+ * arm used to replace its match with a single `' '`, and `[\s\S]` crosses newlines, so a
+ * comment spanning N lines came back as ONE SPACE and N-1 newlines were destroyed. That is
+ * CURE-A's defect one walker over — but where CURE-A's was latent, THIS ONE WAS NOT:
+ * `IMPORT_RE` is anchored `(?:^|\n)`, so an import whose preceding newline a collapsed comment
+ * ate stopped being an import to `importersOf`, and the fence went blind to a live eager edge
+ * in the safe-looking direction. MEASURED before the cure, over every file this test reads:
+ * 156,526 newlines destroyed across 2,207 of 2,246 src files, with every finding of this file
+ * — `specifiersIn`, every `importersOf` roster, `bannedApisIn`, the six desks' candidates-call
+ * arguments, the `pools` reach and the comparator pin — IDENTICAL either way. The line arm
+ * below never had the defect: `.` does not cross a newline. Pinned by the line-structure arm.
  * @param {string} source
  * @returns {string}
  */
 function codeOnly(source) {
-  return source.replace(/\/\*[\s\S]*?\*\//g, ' ').replace(/(^|[^:])\/\/.*$/gm, '$1');
+  return source
+    .replace(/\/\*[\s\S]*?\*\//g, (m) => m.replace(/[^\n]/g, ' '))
+    .replace(/(^|[^:])\/\/.*$/gm, '$1');
 }
 
 /**
@@ -309,6 +323,42 @@ describe('the composer\'s import fence (ARCH §4.1, car 3a)', () => {
     expect(kernelImporters, 'the composer is a live kernel importer').toContain(COMPOSER);
     expect(kernelImporters.filter((rel) => ROUTED_COMPOSERS.includes(rel)),
       'a routed desk reaches the kernel through the composer, never directly').toEqual([]);
+  });
+
+  test('⛔ THE COMMENT MASK KEEPS THE SOURCE\'S LINE STRUCTURE, so an import below one is still seen', () => {
+    // ⛔ CURE-A3, AND IT IS CURE-A'S DEFECT ONE WALKER OVER. `codeOnly` replaced a BLOCK
+    // COMMENT with a SINGLE SPACE, and `[\s\S]` crosses newlines, so a comment spanning N
+    // lines came back as one space and N-1 newlines were destroyed. It looked inert because
+    // this file prints no line addresses. IT IS NOT INERT: `IMPORT_RE` is anchored
+    // `(?:^|\n)`, so an import whose preceding newline a collapsed comment ate STOPS BEING AN
+    // IMPORT to `importersOf` — the fence goes blind to a real eager edge, silently, and in
+    // the safe-looking direction, which is the direction nobody audits.
+    //
+    // MEASURED at this tip over every file this test reads, both mask forms driven through
+    // this file's own scan rules: 156,526 newlines destroyed across 2,207 of 2,246 src files,
+    // with `specifiersIn` over all 2,246, every `importersOf` roster, `bannedApisIn`, the six
+    // desks' candidates-call arguments, the `pools` reach and the comparator pin ALL IDENTICAL
+    // either way. So the cure is behaviour-preserving TODAY and this arm is what keeps it so.
+    const fixture = [
+      "import { a } from './a.js';",
+      '/* a note',
+      '   spanning two lines */',
+      "import { b } from './b.js';",
+      '',
+    ].join('\n');
+    expect(
+      codeOnly(fixture).split('\n'),
+      'the mask ate the newlines inside a block comment. Blank a comment rather than collapsing'
+      + ' it, or every ^- or \\n-anchored read below it is aimed at the wrong line.',
+    ).toHaveLength(fixture.split('\n').length);
+    // AND THE CONSEQUENCE IN THE SAME ARM, so this cannot be read as a cosmetic pin: the
+    // import standing immediately after a collapsed comment is INVISIBLE to the fence's own
+    // reader. A line-count pin alone would go green the day somebody re-collapsed the mask in
+    // a way that happened to keep the count; this says what the count is FOR.
+    const blinded = "import { a } from './a.js'; /* note\n*/ import { b } from './b.js';\n";
+    expect(specifiersIn(blinded), 'an import whose preceding newline a comment ate went unseen,'
+      + ' so an eager edge could reach the composer without this fence ever saying so')
+      .toEqual(['./a.js', './b.js']);
   });
 });
 
