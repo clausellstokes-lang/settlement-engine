@@ -78,17 +78,53 @@
  * the register's `_derived_marks` block names them and what they descend from, and
  * tests/build/brandDerivatives.test.js keeps that block honest.
  *
+ * THE ENCODER IS NOT THE SAME ON EVERY PLATFORM, AND THAT IS WHY A MINT RECORD EXISTS.
+ * Everything ABOVE this paragraph is about pixels, and the pixels are pure arithmetic:
+ * the crops, the masks, the gradients and the glyph outlines are computed in JavaScript
+ * and are identical on every host. The BYTES are not. sharp ships a different prebuilt
+ * libvips per platform (`@img/sharp-darwin-arm64` here, `@img/sharp-linux-x64` on CI —
+ * the same version numbers, different compiled binaries), and the palette PNG path runs
+ * libimagequant plus a deflate through SIMD code chosen at build time. Measured
+ * 2026-09-20: the committed art reproduces byte-for-byte on darwin/arm64 and does NOT on
+ * ubuntu/x64, where `tests/build/brandDerivatives.test.js` had never run before PR #53.
+ *
+ * So the committed bytes are certified by a RECORD rather than by re-running the encoder
+ * everywhere. `--record` writes tests/fixtures/brand-derivatives.mint.json: the signature
+ * of the stack that minted them, the sha256 of every input the derivation reads, and the
+ * sha256 and length of every file it wrote. The test then asserts on EVERY platform that
+ * the shipped files are the minted files and the inputs are the minted inputs, and re-runs
+ * the byte comparison only where the running stack equals the minting stack. A hand-edited
+ * derivative, an edited script and an edited painting all red everywhere — which is
+ * strictly more than the byte comparison caught, because it caught them only for whoever
+ * happened to run the build tests on the minting platform.
+ *
+ * THE RECORD CARRIES NO TIMESTAMP, ON PURPOSE. Its provenance is the platform signature
+ * and six input digests, all derived, so `--record` is byte-reproducible: re-run it and
+ * `git diff` is empty unless something it certifies really moved.
+ *
+ * CANNOT-CATCH: the record pins the inputs this file DECLARES in DERIVATION_INPUTS. A new
+ * input read by a future edit is covered only because that edit moves this file's own
+ * sha256 and reds the arm until someone re-mints — at which point they must add it to
+ * DERIVATION_INPUTS by hand. Adding a read without declaring it leaves that one file
+ * unpinned from the next mint onward. Declare it in the same edit.
+ *
  * Regenerate:  node scripts/derive-brand-marks.mjs
  * Verify:      node scripts/derive-brand-marks.mjs --out <dir>
  *   writes the same ten files under <dir>, mirroring their repo-relative paths and
  *   touching nothing in the tree. That is how the test re-runs the derivation and
  *   diffs it against the committed bytes without racing another suite reading
  *   public/ — and it is how a reviewer checks the art without a dirty worktree.
+ * Re-mint:     node scripts/derive-brand-marks.mjs --record
+ *   derives into a temp dir, REFUSES if what it produced is not what is on disk, and
+ *   writes only tests/fixtures/brand-derivatives.mint.json. It never touches public/,
+ *   and it is never a side effect of a plain run or of --out.
  *
  * @enforced-by tests/build/brandDerivatives.test.js
  */
-import { readFileSync, writeFileSync, mkdirSync } from 'node:fs';
-import { dirname, resolve } from 'node:path';
+import { readFileSync, writeFileSync, mkdirSync, mkdtempSync, rmSync } from 'node:fs';
+import { createHash } from 'node:crypto';
+import { tmpdir } from 'node:os';
+import { dirname, join, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 import { buildXmpPacket, injectPngXmp } from './inject-ai-provenance.mjs';
@@ -180,6 +216,99 @@ const CARD_GOLD_RIGHT = '#C9A24C';
 const CARD_HAIRLINE = '#E8D9B0';
 const CARD_LINE_1 = '#4A3B22';
 const CARD_LINE_2 = '#6A511F';
+
+/* ── THE MINT RECORD ───────────────────────────────────────────────────────────
+ * See "THE ENCODER IS NOT THE SAME ON EVERY PLATFORM" in the header for why these
+ * exist. Everything here is pure: no I/O, no sharp, no process state except through
+ * an argument — so the test can drive the decision over synthetic signatures.
+ */
+
+/** Where `--record` writes, and where the test reads. */
+export const MINT_RECORD = 'tests/fixtures/brand-derivatives.mint.json';
+
+/**
+ * Every file the derivation READS, repo-relative. The record pins each one's sha256,
+ * so an edit to any of them reds on every platform until it is re-minted. Measured
+ * 2026-09-20 from this file's own `readFileSync`/`openSync` sites and its local import
+ * closure (`inject-ai-provenance.mjs`, which imports nothing but node builtins).
+ * See CANNOT-CATCH in the header before adding a read.
+ */
+export const DERIVATION_INPUTS = Object.freeze([
+  'scripts/derive-brand-marks.mjs',
+  'scripts/inject-ai-provenance.mjs',
+  'scripts/ai-media-provenance.json',
+  STRIP,
+  'public/fonts/Lora-Bold.ttf',
+  'public/fonts/Lora-Regular.ttf',
+]);
+
+/** The fields that decide whether comparing encoder BYTES means anything. */
+export const SIGNATURE_FIELDS = Object.freeze(['platform', 'arch', 'sharp', 'vips']);
+
+/**
+ * BYTES where the running stack is the minting stack; DIMENSIONS anywhere else;
+ * INVALID for a record that cannot be read, which is a hard failure and never a
+ * silently skipped arm.
+ */
+export const MINT_MODES = Object.freeze({
+  BYTES: 'bytes',
+  DIMENSIONS: 'dimensions',
+  INVALID: 'invalid',
+});
+
+/** This host's encoder signature. `sharp.versions` is passed in so this stays pure. */
+export function runningSignature(versions) {
+  return {
+    platform: process.platform,
+    arch: process.arch,
+    sharp: versions?.sharp ?? null,
+    vips: versions?.vips ?? null,
+  };
+}
+
+/** A signature is four non-blank strings, or it is not a signature. */
+function signatureProblem(label, signature) {
+  if (!signature || typeof signature !== 'object' || Array.isArray(signature)) {
+    return `the ${label} platform signature is not an object`;
+  }
+  const bad = SIGNATURE_FIELDS.filter(
+    (field) => typeof signature[field] !== 'string' || signature[field].trim() === '',
+  );
+  return bad.length > 0
+    ? `the ${label} platform signature is missing or malformed: ${bad.join(', ')}`
+    : null;
+}
+
+/**
+ * THE PLATFORM DECISION, as a pure function of two signatures.
+ *
+ * A byte comparison against a FRESH run can only hold where the encoder stack equals
+ * the stack the committed bytes were minted on. Equal on all four fields → compare
+ * bytes. Any field differing → compare decoded pixel DIMENSIONS instead, and say so.
+ * Either signature unreadable → INVALID, so a missing or truncated record fails the
+ * suite rather than quietly choosing the weaker arm.
+ *
+ * @param {unknown} running - this host's signature
+ * @param {unknown} minted - the signature the record carries
+ * @returns {{mode: string, differing: string[], problem: string|null}}
+ */
+export function mintComparisonMode(running, minted) {
+  const problem = signatureProblem('running', running) ?? signatureProblem('minted', minted);
+  if (problem) return { mode: MINT_MODES.INVALID, differing: [], problem };
+  const differing = SIGNATURE_FIELDS.filter((field) => running[field] !== minted[field]);
+  return {
+    mode: differing.length === 0 ? MINT_MODES.BYTES : MINT_MODES.DIMENSIONS,
+    differing,
+    problem: null,
+  };
+}
+
+/** One human line naming a foreign stack, for the CI log to carry. */
+export function foreignStackLine(running, minted, differing) {
+  const side = (s) => `${s.platform}/${s.arch} sharp ${s.sharp} vips ${s.vips}`;
+  return `running ${side(running)} against a record minted on ${side(minted)}`
+    + ` (differs on ${differing.join(', ')})`;
+}
 
 /**
  * A minimal ICO container embedding PNG images (the modern-browser-accepted
@@ -340,13 +469,25 @@ async function main() {
 
   // --out <dir> mirrors the repo-relative paths under <dir> and leaves the tree alone.
   const outAt = process.argv.indexOf('--out');
-  const OUT_ROOT = outAt >= 0 && process.argv[outAt + 1] ? resolve(process.argv[outAt + 1]) : ROOT;
+  const outGiven = outAt >= 0 && process.argv[outAt + 1] ? resolve(process.argv[outAt + 1]) : null;
+  // --record is its own mode, never a side effect of a plain run or of --out.
+  const recording = process.argv.includes('--record');
+  if (recording && outGiven) {
+    console.error('[derive-brand-marks] --record and --out are different jobs: --record derives'
+      + ' into a temp dir and writes only the mint record. Run them separately.');
+    process.exit(2);
+  }
+  const scratch = recording ? mkdtempSync(join(tmpdir(), 'sf-brand-mint-')) : null;
+  const OUT_ROOT = scratch ?? outGiven ?? ROOT;
   mkdirSync(resolve(OUT_ROOT, 'public', 'brand'), { recursive: true });
   mkdirSync(resolve(OUT_ROOT, dirname(PDF_SEAL_MODULE)), { recursive: true });
 
   const strip = readFileSync(resolve(ROOT, STRIP));
   const register = JSON.parse(readFileSync(resolve(ROOT, 'scripts', 'ai-media-provenance.json'), 'utf8'));
   const wrote = [];
+  /** Every file this run produced, as the mint record measures them. */
+  const produced = [];
+  const sha256 = (buf) => createHash('sha256').update(buf).digest('hex');
 
   /**
    * Quantise to a 256-entry palette. MEASURED on the plaque cut (2026-09-19):
@@ -362,6 +503,7 @@ async function main() {
     const out = row ? injectPngXmp(buf, buildXmpPacket(rel, row)) : buf;
     writeFileSync(resolve(OUT_ROOT, rel), out);
     wrote.push(`${rel} ${out.length}`);
+    produced.push({ rel, sha256: sha256(out), bytes: out.length });
     return out;
   };
 
@@ -448,6 +590,11 @@ async function main() {
     + `export const BRAND_SEAL_PNG = 'data:image/png;base64,${pdfSeal.toString('base64')}';\n`;
   writeFileSync(resolve(OUT_ROOT, PDF_SEAL_MODULE), pdfModule);
   wrote.push(`${PDF_SEAL_MODULE} ${Buffer.byteLength(pdfModule)}`);
+  produced.push({
+    rel: PDF_SEAL_MODULE,
+    sha256: sha256(Buffer.from(pdfModule)),
+    bytes: Buffer.byteLength(pdfModule),
+  });
 
   /* ── 5. the share cards: the plaque under Lora type ────────────────────────── */
   const faces = {
@@ -508,6 +655,56 @@ async function main() {
       .keepMetadata()
       .toBuffer();
     emit(`public/${name}`, card);
+  }
+
+  if (recording) {
+    // The record certifies the SHIPPED bytes. If what this run produced is not what is
+    // on disk, the tree is mid-edit and a record cut now would certify bytes nobody
+    // shipped — the one failure this mode can have. Refuse, naming the files.
+    const drift = produced.filter(({ rel, sha256: fresh }) => {
+      try {
+        return sha256(readFileSync(resolve(ROOT, rel))) !== fresh;
+      } catch {
+        return true;
+      }
+    });
+    rmSync(scratch, { recursive: true, force: true });
+    if (drift.length > 0) {
+      console.error('[derive-brand-marks] REFUSING TO MINT: these shipped files are not what the'
+        + ' script produces on this host, so a record cut now would certify bytes nobody ships.'
+        + ' Run the script plainly, commit the result, then re-mint:'
+        + `\n  ${drift.map((d) => d.rel).join('\n  ')}`);
+      process.exit(1);
+    }
+    const record = {
+      _doc: [
+        'GENERATED by `node scripts/derive-brand-marks.mjs --record`. NEVER HAND-EDIT.',
+        'It certifies that the brand derivatives committed under public/ (and the PDF seal',
+        'module under src/) are the output of the committed script over the committed',
+        'inputs, measured on the stack named in mintedOn.',
+        'WHY IT EXISTS: sharp ships a different prebuilt libvips per platform, so the PNG',
+        'palette and deflate encoders do not emit identical bytes on darwin/arm64 and',
+        'linux/x64 for identical input pixels. A byte comparison against a fresh run is',
+        'therefore only meaningful on the minting stack; everywhere else the test compares',
+        'decoded pixel dimensions and leans on the two digest arms below.',
+        'It carries no timestamp on purpose: every field is derived, so --record is',
+        'byte-reproducible and a re-run leaves an empty git diff unless something moved.',
+        'TO RE-MINT: re-run the derivation plainly, commit the art, then --record. The mode',
+        'refuses to write while any shipped file differs from what the script produces.',
+      ],
+      mintedOn: runningSignature(sharp.versions),
+      inputs: Object.fromEntries(
+        DERIVATION_INPUTS.map((rel) => [rel, sha256(readFileSync(resolve(ROOT, rel)))]),
+      ),
+      outputs: Object.fromEntries(
+        produced.map(({ rel, sha256: hash, bytes }) => [rel, { sha256: hash, bytes }]),
+      ),
+    };
+    writeFileSync(resolve(ROOT, MINT_RECORD), `${JSON.stringify(record, null, 2)}\n`);
+    console.log(`[derive-brand-marks] minted ${MINT_RECORD} on ${record.mintedOn.platform}/`
+      + `${record.mintedOn.arch} (sharp ${record.mintedOn.sharp}, vips ${record.mintedOn.vips}):`
+      + ` ${Object.keys(record.inputs).length} inputs, ${Object.keys(record.outputs).length} outputs`);
+    return;
   }
 
   console.log(`[derive-brand-marks] ${wrote.length} files from ${STRIP}, seal ${seal.length} B\n  ${wrote.join('\n  ')}`);
