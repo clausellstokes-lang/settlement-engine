@@ -9,10 +9,20 @@
  *     violator escapes via the baseline; no stale entry lingers after a cleanup);
  *   - it can never grow past its committed ceiling (you may shrink it, not pad it).
  */
+/**
+ * ⛔ THE DETECTOR READS CODE, NOT PROSE — FIX-T2, 2026-09-20. `FORK_RE` matches a `const`
+ * binding to a quoted hex, which is exactly how a comment explains why a token was forked
+ * or why one must not be. The ceiling here is ZERO, so a single such sentence would red the
+ * gate outright. Measured at the cure: 0 comment-resident matches today, so the file list
+ * and the ceiling do not move — this removes the habitat, it does not repair a break.
+ * ⛔ `commentsOnly`, never `codeOnly`: the hex lives inside the quotes `codeOnly` blanks.
+ */
 import { readFileSync, readdirSync, statSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
 import { dirname, join, relative } from 'node:path';
 import { describe, expect, test } from 'vitest';
+
+import { commentsOnly } from '../helpers/codeOnlySource.js';
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), '../..');
 const BASELINE_CEILING = 0; // committed max — lower it as files are cleaned; never raise it
@@ -32,7 +42,7 @@ function walk(dir, out = []) {
 const currentForkFiles = walk(join(ROOT, 'src/components'))
   .map(p => relative(ROOT, p).replace(/\\/g, '/'))
   .filter(rel => !isTokenSource(rel))
-  .filter(rel => readFileSync(join(ROOT, rel), 'utf8').split('\n').some(l => FORK_RE.test(l)))
+  .filter(rel => commentsOnly(readFileSync(join(ROOT, rel), 'utf8')).split('\n').some(l => FORK_RE.test(l)))
   .sort();
 
 const baseline = JSON.parse(readFileSync(join(ROOT, 'scripts/.forked-color-baseline.json'), 'utf8')).sort();

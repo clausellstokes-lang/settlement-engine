@@ -25,7 +25,6 @@
   "src/components/new/npcComponents.jsx",
   "src/components/new/tabs/OverviewTab.jsx",
   "src/components/new/tabs/ServicesTab.jsx",
-  "src/components/pricing/PricingTierCards.jsx",
   "src/components/settlement/CatalogPicker.jsx",
   "src/components/settlement/ExportSheet.jsx",
   "src/components/settlement/SuccessorPrompt.jsx",
