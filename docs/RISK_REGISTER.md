@@ -113,8 +113,8 @@ On **2026-06-16** the 15 **critical + high** items were re-verified against the 
 | `refund_credits` callable by any authenticated user (free generations) — **CRITICAL¹** | ✅ fixed (revoked to `service_role`; service-role callers) | `migration 033`; `generate-narrative/index.ts:1981`, `generate-chronicle/index.ts:84` |
 | PDF Overview renders object/array `settlementReason` raw | ✅ fixed (`coerceProse`) | `pdf/lib/viewModel.js:405-407` |
 | Canonical save skips neighbour-network migration + back-link | ✅ fixed (moved into `lib/saves.js`) | `saves.js:131-150,213-231,324-342` |
-| Library search/sort/filter UI inert | ✅ fixed (renders the filtered set) | `SettlementsPanel.jsx:941-1054` |
-| `findFaction` searches wrong list (faction events no-op) | ✅ fixed (union of `powerStructure.factions` + `factions`) | `domain/events/mutate.js:1391` |
+| Library search/sort/filter UI inert | ✅ fixed (renders the filtered set) | `SettlementsPanel.jsx:604` (`filteredSaves`) |
+| `findFaction` searches wrong list (faction events no-op) | ✅ fixed (union of `powerStructure.factions` + `factions`) | `domain/events/mutateHelpers.js:47` |
 | "Tonight at the Table" renders `[object Object]` for NPC secrets | ✅ fixed (`npcSecretText`) | `tonightAtTheTable.js:31-63` |
 | "Tonight at the Table" HOOK cards never render | ✅ fixed (`collectPlotHooks`) | `tonightAtTheTable.js:75-81` |
 | "Tonight at the Table" TWIST reads nonexistent fields | ✅ fixed | `tonightAtTheTable.js` |

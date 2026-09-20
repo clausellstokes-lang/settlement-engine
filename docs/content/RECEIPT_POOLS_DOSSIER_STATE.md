@@ -5292,7 +5292,7 @@ shared letter would collide.*
 
 ### DS-GEN-3: Overview › Systems Health dashboard . `defenseProfile.scores{military,monster,internal,economic,magical} · economicState.prosperity · safetyProfile.safetyLabel · economicViability.viable · defenseProfile.readiness.label · economicState.foodSecurity{label,resilienceScore}`
 
-**RECEIPT:** `src/components/new/tabs/OverviewTab.jsx:169-224` (the framing sentence at `:177`; the food band at `:210-218`) · bands `src/domain/display/defenseScoreBands.js` (`STRONG` ≥65 / `ADEQUATE` ≥40 / `WEAK` ≥20 / `CRITICAL`) · readiness `src/generators/defenseGenerator.js:525-531` · prosperity `src/components/new/tabConstants.js:17` · food labels `src/generators/foodGenerator.js:339-357`
+**RECEIPT:** `src/components/new/tabs/OverviewTab.jsx:406-466` — the Systems Health section (the first-survey framing sentence at `:408-413`; the food band at `:455-466`) · bands `src/domain/display/defenseScoreBands.js` (`STRONG` ≥65 / `ADEQUATE` ≥40 / `WEAK` ≥20 / `CRITICAL`) · readiness `src/generators/defenseGenerator.js:525-531` · prosperity `src/components/new/tabConstants.js:17` · food labels `src/generators/foodGenerator.js:339-357`
 **STATE-KEY:** five score axes × four bands (**frozen**) · `prosperity` (ten spellings, five tiers — **frozen**) · `safetyLabel` head word (**frozen**) · `viable` true/false (**frozen**) · `readiness.label` (six, **frozen**) · `foodSecurity.label` (six — **the declared LIVE exception**)
 **SLOTS:** `{settlement}`
 **SECTION-TARGET:** `defense` (the three defence axes) · `economy` (economic resilience, prosperity, food) · `power` (internal security) · `overview` (viability, readiness)

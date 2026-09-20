@@ -111,7 +111,7 @@ there TODAY at :111 with no certification row). A manifest member OWES its
 AUTHORED certification row — ⛔ the "declared-pending entry" and
 "backlog" doors are STRUCK (C-POPF-1): both pending surfaces are
 frozen-and-pinned EMPTY at two homes (walker `:234`/`:836`;
-`subsystemRowsVirtual.js:1101`/test `:403`) and the backlog is capped
+`subsystemRowsVirtual.js:595`/test `:403`) and the backlog is capped
 17/17 shrink-only — lighting a POP flag means authoring the real row.
 CONSEQUENCE for every POP wave: the flag
 joins the MANIFEST + its AUTHORED certification row in the SAME

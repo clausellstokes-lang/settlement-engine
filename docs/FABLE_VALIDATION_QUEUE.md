@@ -6835,8 +6835,8 @@ was killed and the passing run acquired the slot atomically.
 executing inside one concrete invocation. It therefore had no call view, and the resolver
 replayed all callers despite having already selected one. The resolver now carries the active
 effect call chain through the allocation owner only after the fresh-receiver proof succeeds.
-The exact `src/application/commands/commandEnvelope.js:4233:4251`
-(`ownerRef.accountId`) probe passes over a healthy **2,074-file / 8,637-origin** estate:
+The exact `ownerRef.accountId` probe (ADDRESS STRUCK 2026-09-20 — the old commandEnvelope.js lines
+4233-4251 name the ANALYSER's corpus, not this tree, whose module is 270 lines) passes over a healthy **2,074-file / 8,637-origin** estate:
 **106 tokens**, known local container, fixed point in 3 iterations, maximum token length 313,
 and **9,925 / 16,384** state-growth steps. The temporary probe driver and all debug plumbing
 were removed. This is a focused correctness receipt, not proof that the repository-scale scan
@@ -6852,7 +6852,7 @@ does not exist. Native sample evidence is retained at
 This proves active pathological scaling, not a lock wait and not an acceptable routine gate.
 
 Reader-level instrumentation localized the dominant path. One demand on the recursive
-`commandEnvelope.js:3304` fresh `{}` allocation repeatedly scanned a 2,357-effect estate
+fresh `{}` allocation in commandEnvelope (ADDRESS STRUCK — the old line-3304 cite is the same analyser corpus) repeatedly scanned a 2,357-effect estate
 across 1,061 owners, enumerated 63–71 occurrence contexts, and instantiated 40 even though
 only five effects could be relevant. The safe repair combines a pre-indexed call closure,
 read-scoped active-effect slice, approximation-version heap memo keyed by the full execution

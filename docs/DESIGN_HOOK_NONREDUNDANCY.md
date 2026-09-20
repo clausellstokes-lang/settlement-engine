@@ -114,7 +114,7 @@ at-ceiling file); id-less news drop N/A (no news minted here).
 | Display aggregator | src/domain/dossier/plotHooks.js:212 `collectPlotHooks` — sources: npcs[].plotHooks, conflicts[].plotHooks, history.currentTensions[].plotHooks, relationships[].tension (category 'relationship', :259-274), economicViability.plotHooks, economicState.safetyProfile.plotHooks, history.historicalEvents[].plotHooks, traditions mirror; priority-sorted :329, then dedup | BUILT |
 | Existing dedup (two layers) | plotHooks.js:119-133 `dedupeHooks` — exact-text (`normHookText` :91) + echo-family (`hookFamilyId` :102, ECHO_PREFIXES :81-87), first-kept on the priority-sorted list | BUILT — text-identity only; blind to thematic redundancy |
 | Structured collector (the second walker) | src/domain/hookEscalation.js:43 `collectAllHooks` — additionally walks settlement.plotHooks (aggregate), defenseProfile.plotHooks, powerStructure.plotHooks; `deriveEscalationClocks` same module | BUILT — NOT deduped; wider source set than display |
-| Display consumers | PlotHooksTab.jsx:23, SummaryTab.jsx:115, SessionMode.jsx:190 ("the canonical hook collector"), OutputContainer.jsx:479, pdf/lib/viewModel.js:1124 (maps categories + priority bands) | BUILT — all route through collectPlotHooks |
+| Display consumers | PlotHooksTab.jsx:23, SummaryTab.jsx:115, SessionMode.jsx:190 ("the canonical hook collector"), OutputContainer.jsx:479, pdf/lib/viewModel.js:779 (maps categories + priority bands) | BUILT — all route through collectPlotHooks |
 | DM hook edits | src/domain/userEdits.js:5 (prose edits for "NPC secrets, plot hooks"), :76 `hook` field family, :309-310 + :363-364 ('hooks'/'plotHooks' → edit kinds 'hook'/'plotHook') | BUILT — the edit lane HK-LAW-2 protects |
 | AI context | src/domain/aiGrounding.js consumes hooks (grep-verified consumer) | BUILT — exact wiring VERIFY-AT-BUILD; must consume the retained projection |
 | Advance path | src/domain/timeProgression.js consumes hookEscalation; whether advancement MINTS new hooks into persisted arrays (vs re-deriving) | VERIFY-AT-BUILD — if advancement mints via pool draws, HK-3's registry covers it; if it re-derives, HK-2 covers it; either way one of the two layers catches it |
@@ -170,7 +170,7 @@ HK-LAW-8:
 - Output preserves the input's priority ordering (a projection reorder is a UI
   regression); dropped hooks simply vanish from the projection — persisted
   state untouched (HK-LAW-5).
-- The PDF path (viewModel.js:1124) inherits automatically (it maps
+- The PDF path (viewModel.js:779) inherits automatically (it maps
   collectPlotHooks output); SessionMode/SummaryTab/PlotHooksTab likewise. The
   hookEscalation surface adopts the same helper for its structured list so
   clocks and dossier agree on the visible story set.

@@ -28,7 +28,7 @@ builds — and every spec below is recompiled against that reality.
 | S2 | Legitimacy readers end-to-end incl. the fragility cliff | momentum.js:713-717 `cliffStockFor` consumes `legitimacyFragility01`; :826-828 `entityThreshold` returns it; rulingPowerCoup.js:141/:173 economicAdj | VERIFIED |
 | S3 | Coup lane: verdict recomputed live; war-sentiment weight 0.22; `economicCoupReadEnabled` VIRTUAL-dark | coup.js:45 `WAR_SENTIMENT_PHOLD_WEIGHT = 0.22`, :113 warSentimentAdj, :118-127 economicCoupReadEnabled strict `=== true` virtual read | VERIFIED |
 | S4 | Bloc substrate: MAX 3, formation floor 0.55, warm-tie 1.4, rivalry 0.12, MIN_DWELL 8, clamp 1 ± DECISION_LOAD_SPAN, revanchism pull, leaderTiePosture | settlementPolitics.js:81/:89/:96/:101/:115/:140 (`DECISION_LOAD_SPAN: 0.3`), :596-617 `blocDecisionFactor` + clamp, :610 revanchism comment verbatim, :328 `leaderTiePosture`, :164 `settlementPoliticsActive` = both flags `=== true` | VERIFIED (consumption MOVED: settlementStrategy.js:1220, was :1044 — navigate by symbol) |
-| S5 | `factionCompetitionEnabled` default TRUE; `quiet_local` sets it false | simulationRules.js:45 (exact); :339-345 quiet_local preset `factionCompetitionEnabled: false` (was :306 — rot) | VERIFIED |
+| S5 | `factionCompetitionEnabled` default TRUE; `quiet_local` sets it false | simulationRules.js:70 (exact, re-measured 2026-09-20 — the "(exact)" claim at :45 was itself rot); :743 quiet_local preset `factionCompetitionEnabled: false` (was :306, then :339-345 — rot twice) | VERIFIED |
 | S6 | relationshipMemory D5 seam: half-life 4, lookback 24, hard-zero BEFORE half-life, both constants threadable, seam comment documents the deferral | relationshipMemory.js:12-13 (both constants), :14-23 (D5 SEAM comment verbatim, names the wiring point), :116-117 (threadable options), :127 `if (age > maxLookbackTicks) return 0`, :128 half-life after | VERIFIED at census-exact lines |
 | S7 | The D5 band multiplier the seam adopts exists | relationshipEvolution.js:168 `memoryHorizonMultiplierOf` | VERIFIED |
 | S8 | Grievance read: 0.65/0.35 composite, per-wound 0.35, OPEN substring regex is the only wound typing | grievanceRead.js:29-30/:33, :48 `WOUND_TYPE_RE` (verbatim the open regex), :56 `scoreGrievanceLean`, :82 iteration | VERIFIED |
@@ -154,7 +154,7 @@ members at the INT-F stamp (⚠ RE-DERIVE at each wave's own base — the
 drafted FIVE and its hand list are the 08-04 survey; the manifest is
 walker-enforced BOTH WAYS, with `settlementPoliticsEnabled` a member at
 `simulationRules.js:278` and its authored row at
-`subsystemRowsVirtual.js:925`, the VIRTUAL lane) with matching rows in
+`subsystemRowsCompact.js:332`, the COMPACT lane) with matching rows in
 subsystemRowsVirtual.js. The five dark WR flags are NOT members — they certify
 in the subsystemRowsWar.js LANE instead ("Lane placement is free …
 the totality walker asserts the PARTITION, not the address"). The binding

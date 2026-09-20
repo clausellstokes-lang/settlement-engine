@@ -12,7 +12,7 @@
   (`draft-UNDERCITY-PLAN.md`, ruled ODQ §441, ratified §445.2) except where a row says so and
   names the re-derivation. ⚠ The charter states no census tuple on purpose (§441.5(e)); it is
   re-derived here. ⚠ The status value above stands ALONE on its line because `parsePacketHeader`
-  (`scripts/implementation-packets.mjs:165`) anchors the status row at end-of-line (J-TEWF1B-1).
+  (`scripts/implementation-packets.mjs:297`) anchors the status row at end-of-line (J-TEWF1B-1).
 - **Charter and rulings:** `draft-UNDERCITY-PLAN.md` §4 UC-1 (this member), §1 (the binding law
   quoted), §2 (the fabric-vs-engine split), §3 (the live estate and the license-home audit), §7 F2
   (the CT-4 fact contract this member produces), §8–§11. Doctrine citation: **ODQ §311** — and

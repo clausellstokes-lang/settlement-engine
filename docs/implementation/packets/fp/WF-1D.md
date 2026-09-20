@@ -567,7 +567,7 @@ npm run typecheck:ratchet ; npm run typecheck:domain:strict
 - ⚠ **RAISED-4 — TWO LANDED SENTENCES THIS WAVE FALSIFIES, NEITHER IN THIS PACKET'S MANIFEST.**
   Offered with their measurements rather than edited, because out-of-manifest editing invalidates
   the session:
-  1. `subsystemRowsVirtual.js:1268` predicts *"WF-1d lands the war-dissolution join … and WF-1b
+  1. `subsystemRowsVirtual.js:460` predicts *"WF-1d lands the war-dissolution join … and WF-1b
      the obituary beat."* The first clause is what THIS packet makes true; **the second is wrong**
      — §309 re-filed the obituary beat to WF-8. ⚠ The row still grades UNOBSERVED after this
      landing, so nothing about the layer's certification moves; only the sentence is stale. If the

@@ -108,7 +108,7 @@ arithmetic — the strongest form available.
 
 ## §3 · THE TWO PROSE REPAIRS
 
-**Item 2 — `src/domain/certification/subsystemRowsVirtual.js:1268`**, the `faithUnseatingEnabled`
+**Item 2 — `src/domain/certification/subsystemRowsVirtual.js:460`**, the `faithUnseatingEnabled`
 row's `other:` value. ONE physical line, changed in place (`git diff --numstat` = `1 1`). Two
 clauses were false at this base and a third was found false while measuring:
 

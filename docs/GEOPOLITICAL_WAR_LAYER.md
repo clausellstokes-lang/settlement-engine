@@ -62,8 +62,8 @@ trust/resentment/fear** — `tradeBalance/dependency/leverage/pactStrength` ratc
 ### Stressor lifecycle (`stressors.js`)
 `STRESSOR_CATALOG` (`stressors.js:56-269`), policies transient/episodic/structural/dormant_residual;
 birth via `evaluateStressorRules`, age/decay/resolve in `ageRoamingStressors` (`stressors.js:628`,
-run at `advanceCampaignWorld.js:206`), `originContext.attackerSettlementId` for the aggressor link,
-and the `coupVerdictOutcomes` interception (`coup.js:69`, wired `advanceCampaignWorld.js:221`) — the
+run at `pulseKernel.js:454`), `originContext.attackerSettlementId` (`stressorDynamics.js:748`) for the aggressor link,
+and the `coupVerdictOutcomes` interception (`coup.js:69`, wired `pulseKernel.js:454`) — the
 template for "a resolving stressor reads a target's live state and emits a regime-change outcome."
 
 ### The determinism contract (sacred — must be honored everywhere below)
@@ -81,7 +81,7 @@ template for "a resolving stressor reads a target's live state and emits a regim
 
 A 7-subsystem blast-radius audit found the engine is only ~half-ready and that several of the doc's own assumptions don't hold yet. The non-negotiable ones:
 
-- **The economy is FROZEN at generation.** `economicState` (prosperity, economicComplexity, primaryExports, incomeSources) is generated once (`economicGenerator.js:2541`) and **never recomputed in the pulse**. The only economic quantities that move per tick are the **food granary** (`foodStockpile.js`) and the **causal `trade_connectivity` score** (moved by conditions, `causalState.js:386`). The layer's "economicStrength" must read the **live** `trade_connectivity` and/or a **new `economic_capacity` variable** — never the frozen `prosperity` string, or the homeostasis loop reads a stale value and never converges.
+- **The economy is FROZEN at generation.** `economicState` (prosperity, economicComplexity, primaryExports, incomeSources) is generated once (`economy/economicState.js:27`) and **never recomputed in the pulse**. The only economic quantities that move per tick are the **food granary** (`foodStockpile.js`) and the **causal `trade_connectivity` score** (moved by conditions, `causalState.js:386`). The layer's "economicStrength" must read the **live** `trade_connectivity` and/or a **new `economic_capacity` variable** — never the frozen `prosperity` string, or the homeostasis loop reads a stale value and never converges.
 - **🔴→✅ THE HOMEOSTASIS LOOP (the #1 blocker) — RESOLVED by OQ7=A.** There is **no `economy`/`economic_capacity` causal variable** today (only `trade_connectivity`, which reads routes/chains, not prosperity/war-drain) **and `settlementStrength` — the confidence input — has no economic term at all** (`relationshipEvolution.js:479-489` = tier+pop+inverse-pressure; the existing `trade_connectivity`→`pressure.trade` path feeds it at only ~0.1). **Phase 0 fixes this:** add a dedicated `economic_capacity` SYSTEM_VARIABLE + an economic term in `settlementStrength`/confidence (OQ7=A), so "drain → `economic_capacity` falls → confidence falls → peace" can fire.
 - **No treasury / wealth ledger exists.** Tribute, occupation extraction, and the trade-war prize can move only as channel **STRENGTH** + relationship `tradeBalance` — the occupier/overlord gains leverage, **not coin**. Conservation (§5) nets in channel strength, never a wealth balance.
 - **`tax_revenue` is a DEAD signal** — not one of the 14 causal variables (`causalState.js:67-82`). Any war effect routed through it silently no-ops (the retired `merchant_wealth` bug class, `activeConditions.js:157-161`). Use a real variable.
@@ -147,7 +147,7 @@ confidence(X vs T) = coalitionStrength(X) / (coalitionStrength(T) + ε)
 go_hostile  ⟺  confidence ≥ HOSTILE_CONFIDENCE (≈1.25, tunable)
             AND economicHeadroom(X) ≥ WAR_HEADROOM   // §2.4 — won't start a war it can't afford
 ```
-This already half-exists as `rival_power_play`'s `confidenceGap` (`relationshipEvolution.js:1542-1562`)
+This already half-exists as `rival_power_play`'s `confidenceGap` (`relationshipRulesAdversarial.js:81-84`)
 and `protectorBackingScore`. Coalitions are read from the snapshot's `allied`/`patron` edges +
 `military_protection` channels. **Determinism:** sum over a codepoint-sorted ally set.
 
@@ -216,7 +216,7 @@ subjugation gate.
 
 ### 2.6 Contextual return outcomes (troops come home to trouble) — **LOCKED**
 When a `deployed_troops`/army record **resolves** (returns home), consume it beside `coupVerdictOutcomes`
-(`advanceCampaignWorld.js:221`) in a new `deploymentReturnOutcomes` resolver (clone of `coup.js`). The
+(`pulseKernel.js:454`) in a new `deploymentReturnOutcomes` resolver (clone of `coup.js`). The
 outcome is **contextual to the home's predicament**, "maintaining the dynamics of the settlement":
 | Home state on return | Outcome |
 |---|---|
@@ -283,7 +283,7 @@ of channel strength).
 
 ### 3.4 The rivalry itself — cold_war-with-cause (NOT a new type) — **LOCKED**
 A trade war is a **`cold_war` on the A↔B edge** whose cause is the contest over C. Emit it as a
-cross-cutting candidate (sibling of `sharedEnemyAllianceCandidate`, `relationshipEvolution.js:2039`) on
+cross-cutting candidate (sibling of `sharedEnemyAllianceCandidate`, `relationshipRuleHelpers.js:566`) on
 the **sorted A↔B edge**, stashing `{ contestedThirdPartyId: C, commodity: K }` in edge metadata. Reuse
 `cold_war_supply_sanctions` (`1631-1675`) for ongoing pressure and the **`market_shock`** stressor
 (`stressors.js:207`) as the **loser's** consequence. Single-key contract preserved: C's preference shift
@@ -309,18 +309,18 @@ aggressiveness(S) = squash( w_gov·govBaseline(S) + w_pers·personalityDrive(S) 
 - **personalityDrive** = importance-weighted mean of a trait score over S's NPCs: `Σ traitScore(npc) · dotRank(npc) · normFactionPower(npc.faction) / Σ weights`, with the **governing faction up-weighted**. `traitScore` reads the **authored `npc.personality.{dominant,flaw,modifier}`** strings via a NEW frozen `TRAIT_AGGRESSION` lexicon over the `npcData` vocab (flaw cruel/callous/ruthless/cold-blooded/domineering → **+**; dominant merciful/compassionate/diplomatic/generous → **−**; modifier zealous/ambitious → mild **+**). **Use the authored strings, NOT the RNG-rolled `npcStates.alignment`** — they don't correspond, and the authored ones are what the dossier shows. Reuse `factionArchetype` / `governingFactionOf` / `dotRankFor` / `factionPower` / `seatNpcsIntoFactions` — all present, all snapshot-readable.
 - **historyDrive** = `tanh(k·(warWins−warLosses)) − tanh(k·(tradeWins−tradeLosses))` — "we succeed more at war / at trade." **Needs a NET-NEW persisted ledger** `worldState.dispositionStats[S] = {warWins,warLosses,tradeWins,tradeLosses}`, **ratcheted (non-mean-reverting** — or the relax passes erase it), defaulted in `ensureWorldState`, **populated by the war/trade resolvers we're already adding** (§2.6, §3). Until it ships, a lossy interim proxy (sign of `tradeBalance` + war-incident density on S's edges — but that conflates victim and victor).
 
-**How it modulates ALL relationship dynamics (not just war):** thread aggressiveness as a **centered-on-1.0 multiplier** into the per-candidate severity/probability of `evaluateRelationshipRules` (the `candidateBase`, `relationshipEvolution.js:369`) — hostility/war candidates ×(1+aggr), peace/alliance/trade candidates ×(1−aggr). **It MUST default to 1.0 (neutral) for legacy saves with no disposition state**, or it moves every relationship determinism fixture and breaks the mutual-case byte-identity test (gate #1). The same centered-multiplier idiom `hesitation` already uses (`relationshipEvolution.js:994`).
+**How it modulates ALL relationship dynamics (not just war):** thread aggressiveness as a **centered-on-1.0 multiplier** into the per-candidate severity/probability of `evaluateRelationshipRules` (the `candidateBase`, `relationshipRulesAdversarial.js:188`) — hostility/war candidates ×(1+aggr), peace/alliance/trade candidates ×(1−aggr). **It MUST default to 1.0 (neutral) for legacy saves with no disposition state**, or it moves every relationship determinism fixture and breaks the mutual-case byte-identity test (gate #1). The same centered-multiplier idiom `hesitation` already uses (`relationshipRulesCore.js:325`).
 
 ### C.2 The strategy chooser (intelligence + efficiency, RNG-varied)
 `evaluateSettlementStrategyRules(snapshot, {tick})` — a sibling of `evaluateNpcRules`/`evaluateFactionRules`, registered in `candidateEvents.js` behind a `strategyEnabled` simulation-rules flag. For each settlement **party to a conflict** (has a `war_front`/siege/occupation/hostile edge in the snapshot):
 
-1. **HARD OVERRIDE first — return-home is the priority.** If home (or a vassal) is occupied/under-siege while S's army is deployed away, emit **return-home deterministically** (probability 1, via the deterministic-bypass path that `coupVerdictOutcomes`/`structuralCandidates` use at `advanceCampaignWorld.js:385`). Skip the weighted sample entirely — an *override* cannot be out-competed by a high deploy weight; a mere utility floor can. (Mirrors `contestOverThirdParty`'s `hardOverride`, §1.)
+1. **HARD OVERRIDE first — return-home is the priority.** If home (or a vassal) is occupied/under-siege while S's army is deployed away, emit **return-home deterministically** (probability 1, via the deterministic-bypass path that `coupVerdictOutcomes`/`structuralCandidates` use at `pulseKernel.js:1481`). Skip the weighted sample entirely — an *override* cannot be out-competed by a high deploy weight; a mere utility floor can. (Mirrors `contestOverThirdParty`'s `hardOverride`, §1.)
 2. **Enumerate legal moves** (filtered by the one-army constraint + gates), **codepoint-sorted**: `defend · deploy-offensive(T) · relieve(ally) · liberate(occupied-ally) · hold-occupation · war-of-attrition · rout · sue-for-peace`.
 3. **Score each move's utility** `u = f(settlementStrength, coalition backing via protectorBackingScore, the relevant edge's relationship dynamics, aggressiveness, economic exhaustion)`.
 4. **Sample one** with `weightedPick` over **softmax weights `exp(k·u)`** (k = decisiveness — "best most likely, RNG varies it"; OQ3), forked **once** on `strategy:<settlementId>:<tick>`; any two-settlement target choice (relieve/liberate which ally) uses the sorted-pair `hash01(sortedPair+':'+tick)` key.
 5. **Emit ONE candidate** with exclusiveTag `[strategy:<settlementId>]` so `resolveCandidateConflicts` enforces one move per settlement, at **probability 1** — the move was *already* sampled in step 4; a second `rollCandidates` Bernoulli would double-randomize. Major moves (deploy / sue-for-peace) carry applyMode `proposal`.
 
-**Sue-for-peace** — GATE: neither S nor any of S's vassals (enumerate via `relationshipRoles`) is currently occupied/under-siege (pure snapshot read). WEIGHT ∝ **economic exhaustion** (the `attackerAttrition` mean, `hostileRules:1742`, until OQ7's `economic_capacity` lands). When chosen it pulls **existing levers** — no new peace machinery: a `labelProposal` toward `cold_war` (the `hostile_truce` shape, `relationshipEvolution.js:1869`) or `rival` (`cold_war_thaw`, `:1696`), and on apply calls the LOCKED **`windDownSponsoredStressors`** (`stressorDynamics.js:920`) to drop the sponsored siege/occupation below the structural gate so the next aging tick ends it; `recordWarResolutionIncidents` writes the peace into edge memory.
+**Sue-for-peace** — GATE: neither S nor any of S's vassals (enumerate via `relationshipRoles`) is currently occupied/under-siege (pure snapshot read). WEIGHT ∝ **economic exhaustion** (the `attackerAttrition` mean, `hostileRules:1742`, until OQ7's `economic_capacity` lands). When chosen it pulls **existing levers** — no new peace machinery: a `labelProposal` toward `cold_war` (the `hostile_truce` shape, `relationshipRulesAdversarial.js:418`) or `rival` (`cold_war_thaw`, `relationshipRulesAdversarial.js:243`), and on apply calls the LOCKED **`windDownSponsoredStressors`** (`stressorDynamics.js:920`) to drop the sponsored siege/occupation below the structural gate so the next aging tick ends it; `recordWarResolutionIncidents` writes the peace into edge memory.
 
 **Coordination with the reactive layer (critical).** The per-edge rules (`hostileRules` raid/truce, etc.) keep firing for the same settlements. The chooser must **suppress the per-edge war rules for conflict-involved settlements** (or share their `label:<key>` exclusiveTags) — else a settlement could "deploy offensive" (chooser) AND "sue truce" (`hostileRules`) in one tick. The strategy layer is **inter-settlement posture**; `npcAgency` is **intra-settlement politics** — they must emit **non-overlapping conflictTags** or `resolveCandidateConflicts`' budgets starve one out.
 
@@ -463,7 +463,7 @@ Gallery filters (importable + 3-tab content type) are **unrelated** and ship in 
 A war/trade state is never just a channel + a condition — it ripples through economics, resources, defense, institutions, NPCs/power, population, and the narrative surfacing. The audit's verdict per subsystem: what **rides existing rails** (reuse), what's a **gap to close**, and what's a **net-new lift**.
 
 ### Economics
-- **Reuse:** the condition→`trade_connectivity` seam (`causalState.js:386`) is the ONLY economic mover — route ALL war economics through conditions, never a bespoke mutation. `vassal_tribute_extraction` (`relationshipEvolution.js:1265`) already drains a junior; `tradeScarcityFlows` (`flows.js:114`) already cascades a supplier-in-crisis to its dependents (the trade-war loser is exactly that); a sustained low-economy streak already CLOSES institutions (`institutionLifecycle.js:113,563`).
+- **Reuse:** the condition→`trade_connectivity` seam (`causalState.js:386`) is the ONLY economic mover — route ALL war economics through conditions, never a bespoke mutation. `vassal_tribute_extraction` (`relationshipRulesCore.js:617`) already drains a junior; `tradeScarcityFlows` (`flows.js:114`) already cascades a supplier-in-crisis to its dependents (the trade-war loser is exactly that); a sustained low-economy streak already CLOSES institutions (`institutionLifecycle.js:113,563`).
 - **Gap:** occupation carries no `trade_connectivity` hit (lighter than siege); the trade war's `economicStrength(X)` term has no live home; demand never shifts to military provisioning under war (`demandProfile.js:39`, generation-frozen); `economicComplexity` never degrades.
 - **New:** the `economic_capacity` variable + its fold into confidence (OQ7); a `war_drain` condition (severity ∝ `war_front` count via `countChannels`, `pressureModel.js:142`); occupation extraction = attach `vassal_extraction` to the occupied settlement.
 
@@ -475,7 +475,7 @@ A war/trade state is never just a channel + a condition — it ripples through e
 
 ### Defense / Military
 - **Reuse:** `deriveDefenseReadiness` (`causalState.js:445`) walks any `defense_readiness`-tagged condition and applies a reversible delta — the **exact, engine-ready seam** for the deploy debuff (restore = remove the condition, never recompute the clamped score). Three relevant archetypes already tag it: `war_pressure` (besieger drain), `alliance_burden` (relief burden), `vassal_extraction` (vassal constraint). `windDownSponsoredStressors` is the LOCKED failed-vassalization lever.
-- **Gap:** **occupation-disarm is generation-only** (`powerGenerator.js:1223` faction ×0.3; `defenseGenerator.js:383` military −35) — a mid-campaign occupation gets the readiness condition but NOT the faction disarm (powerStructure is frozen); walls never degrade from siege duration.
+- **Gap:** **occupation-disarm is generation-only** (powerGenerator — ADDRESS STRUCK 2026-09-20: the faction ×0.3 disarm is not in the `./power/*` split at this tip; `defenseGenerator.js:388` military −35) — a mid-campaign occupation gets the readiness condition but NOT the faction disarm (powerStructure is frozen); walls never degrade from siege duration.
 - **New (DECISION):** **military attrition** — `settlementStrength` reads only mean-reverting pressure, so a defeated aggressor snaps back to full in ~9 ticks → war-spam. A durable post-war penalty needs net-new **non-mean-reverting** state (a long-`maxAge` `war_exhaustion` condition, or an attrition term ratcheted like `leverage`). The singleton "one army" has no magnitude to deplete — attrition must live on the settlement (OQ9). **Dedup rule needed:** one act of besieging must not stack `war_pressure` + the deploy debuff + the `war_front` pressure bump into a triple defense hit.
 
 ### Institutions (the doc never mentioned them — major omission)
@@ -565,6 +565,6 @@ A war/trade state is never just a channel + a condition — it ripples through e
 | Conquest history | `withCampaignHistoryEvent` graduation ("The Sack of X" / "The Liberation of X") — distinct from the no-echo deployment return |
 | Aggressiveness disposition | per-tick signed scalar = `govBaseline` (`COUP_COERCION`-shaped) + importance-weighted NPC personality (`TRAIT_AGGRESSION` lexicon × `dotRank` × `factionPower`) + win/loss history — modulates `candidateBase` (`relationshipEvolution.js:369`) |
 | Strategy chooser | `evaluateSettlementStrategyRules` — a settlement-tier generalization of `npcAgency.evaluateNpcRules` (enumerate → score → `weightedPick(exp(k·u))` → one move) |
-| Return-home priority | a HARD OVERRIDE (probability-1 deterministic bypass, `advanceCampaignWorld.js:385`), never a high weight |
+| Return-home priority | a HARD OVERRIDE (probability-1 deterministic bypass, `pulseKernel.js:1481`), never a high weight |
 | Sue-for-peace | gated chooser pulling existing levers: `hostile_truce`/`cold_war_thaw` labelProposal + `windDownSponsoredStressors` |
 | Disposition win/loss ledger | net-new ratcheted `worldState.dispositionStats[S]={warWins,warLosses,tradeWins,tradeLosses}`, populated by the war/trade resolvers |

@@ -26,7 +26,7 @@
  * RED at the moment the reconstruction wave does its job. Every anchor below is a SHIPPED
  * BREACH, and the wave's whole purpose is to cure shipped breaches. The first wave car that
  * rewrites `newsVoice.js:97`, `RECEIPT_POOLS_DOSSIER_STATE.md:5233`, its leaf twin
- * `general.generated.js:855` or `factionDynamics.js:466` reds this file twice: once with the
+ * `general.generated.js:1323` or `factionDynamics.js:466` reds this file twice: once with the
  * named "the breach text is no longer in the corpus" message, and once at the census bound
  * `failing > FAILING_FLOOR`. Neither red is a defect. THE PROCEDURE, in the order a wave car
  * must follow it:
@@ -376,21 +376,21 @@ describe('THE ANTI-VACUITY GUARD — the walker must fail on the corpus it ships
    */
   const BREACHES = [
     {
-      where: 'src/domain/display/newsVoice.js:97',
+      where: 'src/domain/display/newsVoice.js:97 (in VOICE_LINES, :90)',
       find: 'every household is counted for the levy',
       arm: 'a totality over an open column',
       word: 'every household',
       cure: 'the households are counted for the levy',
     },
     {
-      where: 'src/data/dossierStateProse/general.generated.js:855 (the leaf twin)',
+      where: 'src/data/dossierStateProse/general.generated.js:1323 (the leaf twin, the "ledger" angle entry)',
       find: 'the same trades exempt',
       arm: 'exemption on a null column',
       word: 'exempt',
       cure: 'the same trades listed',
     },
     {
-      where: 'src/generators/factionDynamics.js:466',
+      where: 'src/generators/factionDynamics.js:466 (the merchant-vs-religious `tense` narrative)',
       find: 'Church land exemptions',
       arm: 'exemption on a null column',
       word: 'exemptions',

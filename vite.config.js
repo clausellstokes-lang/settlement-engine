@@ -305,7 +305,7 @@ const EAGER_MODULES = computeEagerModuleGraph();
 // green the whole tests/build/ family exists to prevent. Absolute paths, since
 // that is what the walk produces. Vite ignores extra named exports on a config
 // module, so this costs the build nothing.
-// @consumed-by tests/build/vendorPdfLazy.test.js (the goods surface-law arms).
+// @consumed-by tests/build/vendorPdfLazy.test.js (the goods surface-law arms), tests/build/generationWorkerLazy.test.js, tests/build/engineChunkLazy.test.js, tests/build/customContentCharsetLazy.test.js, tests/build/livingContentSeamLazy.test.js — FIVE importers, re-counted 2026-09-20 (FIX-C2b); the annotation had named only the first, and an @consumed-by that under-counts invites a "only one test reads this" deletion.
 export const EAGER_FIRST_PAINT_MODULES = EAGER_MODULES;
 
 // ── Map-only lucide icons (split them out of the first-paint vendor-icons) ────

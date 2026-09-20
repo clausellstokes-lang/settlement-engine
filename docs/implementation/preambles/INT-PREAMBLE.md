@@ -297,7 +297,7 @@ The immutable candidate is named in the packet and left un-mutated by design.
 3. ⛔ **No `subsystemRowsInterior.js` may be minted without a chair ruling.** The ARCH volume's
    §2 JUDGMENT and §6 Q4 both assume the interior's flags will certify in a NEW lane — but
    `settlementPoliticsEnabled`, the interior's ONE live flag, joined the manifest on 2026-08-14
-   (`simulationRules.js:278`) with its authored row at **`subsystemRowsVirtual.js:925`**. A new
+   (`simulationRules.js:278`) with its authored row at **`subsystemRowsCompact.js:332`**. A new
    lane would split the interior's certification across two files on its very first wave.
 4. ⛔ **`reframeEnabled` is an unaccounted strict gate.** `reframeKernel.js:80` reads
    `(rules).reframeEnabled === true` through a JSDoc-cast local, yet the key appears in NEITHER

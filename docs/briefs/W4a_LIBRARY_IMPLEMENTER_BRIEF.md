@@ -33,7 +33,7 @@ the ledger cites THEIRS' paths. Adopt onto OUR floor; preserve OUR logic.
 2. BULK MULTI-SELECT + BulkActionBar (ledger §3 #14). Adopt settlements/BulkActionBar.jsx +
    useLibraryBulkSelect + computeBulkDelete (helpers.js:65). Actions: add-to-campaign,
    canonize, export, delete — each wired to OUR existing store actions (canonize =
-   settlementSlice.js:1835; verify the others exist, STOP+report any that don't).
+   settlementSlice.js:1682; verify the others exist, STOP+report any that don't).
 
 3. SaveQuotaMeter (ledger §3 #14). OURS already computes the counts
    (SettlementsPanel.jsx:184-185); render the meter + upgrade funnel (their
