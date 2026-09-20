@@ -32,6 +32,7 @@ import AnonTierTeaser from './AnonTierTeaser.jsx';
 import Button from './primitives/Button.jsx';
 import { ClerkNote } from './generate/ClerkNote.jsx';
 import RefusalNotice from './primitives/RefusalNotice.jsx';
+import { raisedHere, REFUSAL_SURFACES } from '../lib/refusalReasons.js';
 import { recoverFromChunkError } from '../lib/staleDeploy.js';
 import useIsMobile from '../hooks/useIsMobile.js';
 import { chromeFontSize, proseFontSize } from '../design/proseScale.js';
@@ -225,7 +226,10 @@ export default function HomeHero({ onSignIn, onNavigate, bare = false }) {
       // set their own mode, so Back from THOSE correctly returns to that config.
       setWizardMode(null);
       updateConfig({ settType: pickedSize });
-      const generated = await generate();
+      // `at` names WHERE the reader clicked (REVIEW-P F12): the hero shares /create
+      // with the Founding Worlds strip and /home with that strip and §02's forge, and
+      // all of them painted the same store record. Only this surface says its own.
+      const generated = await generate(undefined, { at: REFUSAL_SURFACES.HOME_HERO });
       // ⛔ A NULL IS A GATE, NOT A STALL. The lane recorded WHICH gate before it returned,
       // and the notice below renders that. Manufacturing a throw here put the generic
       // failure sentence on top of the real reason, so the one surface that knew the most
@@ -502,7 +506,7 @@ export default function HomeHero({ onSignIn, onNavigate, bare = false }) {
                 </ClerkNote>
               </div>
             ) : (
-              <RefusalNotice refusal={lastRefusal} style={{ marginTop: SP.sm, textAlign: 'left' }} />
+              <RefusalNotice refusal={raisedHere(lastRefusal, REFUSAL_SURFACES.HOME_HERO) ? lastRefusal : null} style={{ marginTop: SP.sm, textAlign: 'left' }} />
             )}
             {isAnon && (
               <p style={{

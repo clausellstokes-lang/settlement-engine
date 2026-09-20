@@ -48,7 +48,7 @@ import PlaceInRegionCard from './PlaceInRegionCard.jsx';
 import Disclosure from '../primitives/Disclosure.jsx';
 import DesktopOnlyGate from '../primitives/DesktopOnlyGate.jsx';
 import RefusalNotice from '../primitives/RefusalNotice.jsx';
-import { REFUSAL_REASONS, refusalOf } from '../../lib/refusalReasons.js';
+import { raisedHere, REFUSAL_REASONS, REFUSAL_SURFACES, refusalOf } from '../../lib/refusalReasons.js';
 import Button from '../primitives/Button.jsx';
 import useIsMobile from '../../hooks/useIsMobile.js';
 import { INK, MUTED, SECOND, BORDER, CARD, sans, serif_, FS, SP } from '../theme.js';
@@ -131,7 +131,10 @@ function SeedField() {
       // A null is a GATE: the reason is already recorded and the notice below renders it.
       // Nothing else is owed — and in particular not a navigation, which is how three of
       // the four original offenders answered a refusal.
-      await generate(seed);
+      // `at` names WHERE the reader clicked (REVIEW-P F12): one store record was
+      // painted by every mount on the page, so one refusal was announced twice. The
+      // gate stamps this key; only this surface says what it raised.
+      await generate(seed, { at: REFUSAL_SURFACES.SEED_FIELD });
     } catch {
       // The lane records the reason before it re-throws; the notice below renders it.
     } finally {
@@ -169,7 +172,7 @@ function SeedField() {
         </Button>
       </div>
       {/* The reason, under the control the reader used, announced as well as shown. */}
-      <RefusalNotice refusal={lastRefusal} style={{ margin: `${SP.sm}px ${SP.xs}px 0` }} />
+      <RefusalNotice refusal={raisedHere(lastRefusal, REFUSAL_SURFACES.SEED_FIELD) ? lastRefusal : null} style={{ margin: `${SP.sm}px ${SP.xs}px 0` }} />
       {lastSeed != null && (
         <div style={{ display: 'flex', alignItems: 'center', gap: SP.sm, marginTop: SP.xs, padding: `0 ${SP.xs}px`, flexWrap: 'wrap' }}>
           <span style={{ fontSize: FS.xs, color: MUTED }}>Current draft seed</span>

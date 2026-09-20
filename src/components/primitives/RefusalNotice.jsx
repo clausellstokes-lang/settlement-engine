@@ -38,7 +38,7 @@
  */
 import { ClerkNote } from '../generate/ClerkNote.jsx';
 import { tOptional } from '../../copy/index.js';
-import { signInUnlocksSizes } from '../../config/tierFacts.js';
+import { accountHolderPhrase, signInUnlocksSizes } from '../../config/tierFacts.js';
 import { isRefusalReason } from '../../lib/refusalReasons.js';
 
 /**
@@ -60,7 +60,13 @@ export function refusalCopy(reason, vars = null) {
   // the gates that raise them (the daily cap, the tier door) have no business holding the
   // size ladder. The gate's OWN vars are spread last, so a raiser that passes `sizes`
   // still wins: a fact measured at the gate always beats a default computed here.
-  const withDefaults = { sizes: signInUnlocksSizes(), ...(vars ?? {}) };
+  // ⭐ `{holder}` IS A DEFAULT VAR FOR THE SAME REASON `{sizes}` IS (REVIEW-P F13).
+  // Two sentences said "past what this account forges" to a visitor with no account.
+  // The tier is known only at the GATE, so the gate passes the measured phrase and
+  // wins here; the default keeps the sentence resolving — a missing var renders the
+  // literal `{holder}` at a reader — and it is deliberately the words those sentences
+  // already carried, so an unmeasured raiser claims nothing new.
+  const withDefaults = { sizes: signInUnlocksSizes(), holder: accountHolderPhrase(), ...(vars ?? {}) };
   const body = ref ? tOptional(ref, withDefaults) : tOptional(`refusals.${reason}.body`, withDefaults);
   if (!rubric || !body) return null;
   return { rubric, body };

@@ -111,6 +111,32 @@ export function signInUnlocksSizes() {
 }
 
 /**
+ * ⛔ WHOSE FORGE IS BEING DESCRIBED, IN THE READER'S OWN TERMS (REVIEW-P F13).
+ *
+ * Two refusal sentences said "past what THIS ACCOUNT forges" to a visitor who has no
+ * account — measured on the 2026-09-20 anonymous walk, on the Black Crag fork, one
+ * clause before the same sentence invites them to make one. The two phrasings live
+ * HERE, in one home, for the reason every other fact on this module does: they are
+ * derived from the tier, they are said on more than one surface, and a second copy
+ * would agree on the day it was written and drift by the month.
+ *
+ * Deliberately NOT a tier-by-tier table. The only distinction the sentences draw is
+ * "has an account" versus "does not", and inventing a row per tier would invite a
+ * future sentence to name a tier where it means an entitlement — which is the class
+ * this whole module exists against.
+ *
+ * @param {string} [tier] the stored auth tier ('anon' | 'free' | 'premium'); omitted
+ *   means the raiser measured no tier, and the phrase then reads exactly as it read
+ *   before this cure. That is deliberately the STATUS QUO and not a new claim: the
+ *   only raiser in the tree is the generation lane, which always has the tier in
+ *   hand, so the fallback is reached by a hand-built record and by nothing shipped.
+ * @returns {string}
+ */
+export function accountHolderPhrase(tier) {
+  return tier === 'anon' ? 'an account-less visit' : 'this account';
+}
+
+/**
  * Does signing in unlock the PRE-GENERATION OPTIONS? Derived from the two rows rather
  * than asserted, so the sentence stops claiming it the day an anonymous visitor gets
  * them — or the day a free account loses them.

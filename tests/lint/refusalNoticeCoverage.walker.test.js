@@ -65,7 +65,7 @@ import { describe, expect, test } from 'vitest';
 import { readdirSync, readFileSync, statSync } from 'node:fs';
 import { join, relative } from 'node:path';
 
-import { REFUSAL_REASON_IDS } from '../../src/lib/refusalReasons.js';
+import { REFUSAL_REASON_IDS, REFUSAL_SURFACES } from '../../src/lib/refusalReasons.js';
 import { en } from '../../src/copy/index.js';
 import { codeOnly } from '../helpers/codeOnlySource.js';
 
@@ -159,6 +159,65 @@ function silentSurfacesIn(files, admitted = GENERATION_CALLERS_ADMITTED) {
   const srcOf = new Map(files.map((f) => [f.rel, f.src]));
   return refusalSurfacesIn(files)
     .filter((rel) => !(rel in admitted) && !/<RefusalNotice\b/.test(codeOnly(srcOf.get(rel) || '')));
+}
+
+/**
+ * ⛔ THE MIRROR-IMAGE DEFECT, AND WHY IT NEEDS ITS OWN ARMS (REVIEW-P F12).
+ *
+ * Arms 1–4 prove a refusal is never SILENT. They say nothing about it being said in the
+ * wrong place, and `lastRefusal` is ONE record that every mount renders — so on
+ * /create, forking the Black Crag city card raised TWO `role="alert"` nodes with
+ * byte-identical copy, one above the hero CTA and one above the sample strip. One
+ * click, announced twice, with the copy pointing at a control the reader never touched.
+ * The walk met the smallest instance; the config stage pairs the wizard with SeedField,
+ * and /home on desktop carries three.
+ *
+ * A surface now names itself when it asks (`{ at: REFUSAL_SURFACES.X }`) and renders
+ * only what it raised (`raisedHere(lastRefusal, REFUSAL_SURFACES.X)`). Those are TWO
+ * halves of one join in two different expressions, so either can rot alone and neither
+ * rots loudly: a key passed but never compared silences a surface for its own clicks; a
+ * key compared but never passed leaves it mute for every click. Arm 6 holds them
+ * together the way arm 2 holds a reason to its raiser.
+ */
+const PASSES_KEY_RE = /\bat:\s*REFUSAL_SURFACES\.([A-Z0-9_]+)/g;
+const COMPARES_KEY_RE = /raisedHere\([^)]*REFUSAL_SURFACES\.([A-Z0-9_]+)/g;
+
+/**
+ * ⛔ WHO MAY RENDER AN UNATTRIBUTED RECORD, AND WHY.
+ *
+ * Attribution costs a surface nothing when it is alone on its page, and a rule nobody
+ * can fail is a rule nobody reads. These two are the ONLY store-fed mounts in the tree
+ * with no second mount able to share a page with them, so they keep the pre-cure
+ * behaviour — an unkeyed record, said by whoever is there. A row here must say why the
+ * file can never be doubled; if one ever gains a neighbour it attributes like the rest.
+ * @type {Readonly<Record<string, string>>}
+ */
+const ATTRIBUTION_EXEMPT = Object.freeze({
+  'src/components/SettlementsPanel.jsx':
+    'THE LIBRARY IS ALONE ON ITS ROUTE. /library renders this panel and nothing else that '
+    + 'can receive a refusal, so its notice can never be the second copy of anyone\'s.',
+  'src/components/howto/ForgeExactDemo.jsx':
+    'ONE CONTROL ON /about/guide. The how-to page carries a single forging demo and no '
+    + 'other store-fed mount, so there is no other surface for a record to reach.',
+});
+
+/**
+ * `rel -> [files]` for each surface key a pattern finds, read through `codeOnly` so a
+ * key mentioned in prose is not mistaken for a join.
+ * @param {{rel: string, src: string}[]} files
+ * @param {RegExp} re a /g pattern whose first group is the key
+ * @returns {Map<string, string[]>}
+ */
+function keysBy(files, re) {
+  const out = new Map();
+  for (const { rel, src } of files) {
+    for (const m of codeOnly(src).matchAll(new RegExp(re.source, 'g'))) {
+      const rows = out.get(m[1]) || [];
+      if (!rows.includes(rel)) rows.push(rel);
+      out.set(m[1], rows);
+    }
+  }
+  return out;
 }
 
 /** `dailyCap` -> `DAILY_CAP`, the register's own SCREAMING_SNAKE spelling. */
@@ -331,6 +390,80 @@ describe('THE REFUSAL REGISTER — every reason has words, a raiser and a render
       Object.keys(CAP_READERS_ADMITTED).filter((rel) => !readers.includes(rel)),
       'CAP_READERS_ADMITTED names a module that no longer reads the counter — delete the stale row',
     ).toEqual([]);
+  });
+
+  test('6. ATTRIBUTED: every registered surface key is both PASSED and COMPARED, by one file', () => {
+    const passed = keysBy(SOURCES, PASSES_KEY_RE);
+    const compared = keysBy(SOURCES, COMPARES_KEY_RE);
+    const broken = [];
+    for (const key of Object.keys(REFUSAL_SURFACES)) {
+      const p = passed.get(key) || [];
+      const c = compared.get(key) || [];
+      if (p.length !== 1 || c.length !== 1) {
+        broken.push(`${key}: passed by ${p.length} file(s) [${p}], compared by ${c.length} [${c}]`);
+      } else if (p[0] !== c[0]) {
+        broken.push(`${key}: passed in ${p[0]} but compared in ${c[0]} — a surface that speaks for another surface's clicks`);
+      }
+    }
+    expect(
+      broken,
+      '\nA refusal surface key is not a join any more. A key that is PASSED and never COMPARED '
+      + 'silences that surface for its own clicks; COMPARED and never passed leaves it mute for '
+      + 'every click; passed in one file and compared in another makes a surface answer for a '
+      + 'control the reader never touched — which is F12 with the blame moved rather than removed:\n'
+      + `${broken.join('\n')}\n`,
+    ).toEqual([]);
+    // …and the LANE really stamps what the surfaces pass. Without this the arm above
+    // proves a convention among components while every record ships unkeyed.
+    const lane = codeOnly(SOURCES.find((f) => f.rel === 'src/store/settlementGenerateAction.js').src);
+    expect(lane, 'the generation lane no longer reads options.at').toMatch(/options\?\.at/);
+    expect(
+      /refusalOf\(/.test(lane.replace(/const refusedAt[^\n]*\n/, '')),
+      'a refusal in the generation lane is minted around the click-keyed helper, so the '
+      + 'record it records carries no surface and every mount paints it again',
+    ).toBe(false);
+  });
+
+  test('6a. no store-fed mount goes unattributed without a named reason', () => {
+    const srcOf = new Map(SOURCES.map((f) => [f.rel, f.src]));
+    // A fresh, NON-global copy: `/g`.test() carries `lastIndex` between calls, so the
+    // shared pattern would skip every other file and quietly under-convict.
+    const comparesKey = new RegExp(COMPARES_KEY_RE.source);
+    const unattributed = refusalSurfacesIn(SOURCES)
+      .filter((rel) => !comparesKey.test(codeOnly(srcOf.get(rel) || '')))
+      .filter((rel) => !(rel in ATTRIBUTION_EXEMPT));
+    expect(
+      unattributed,
+      '\nA surface renders the store\'s ONE refusal record without asking whether it raised it. '
+      + 'On any page carrying a second such mount, one click is then announced twice with '
+      + 'identical copy (REVIEW-P F12, measured on /create forking the Black Crag card).\n'
+      + 'Pass `at: REFUSAL_SURFACES.<key>` with the generation call and render through '
+      + '`raisedHere(lastRefusal, REFUSAL_SURFACES.<key>)`, or admit the file in '
+      + 'ATTRIBUTION_EXEMPT with the reason it can never be doubled:\n'
+      + `${unattributed.join('\n')}\n`,
+    ).toEqual([]);
+    expect(
+      Object.keys(ATTRIBUTION_EXEMPT).filter((rel) => !refusalSurfacesIn(SOURCES).includes(rel)),
+      'ATTRIBUTION_EXEMPT names a file that can no longer receive a refusal — delete the stale row',
+    ).toEqual([]);
+  });
+
+  test('6b. GUARD-THE-GUARD: the key detectors convict a planted half-join', () => {
+    const planted = [
+      { rel: 'src/components/PlantedBoth.jsx', src: 'generate(s, { at: REFUSAL_SURFACES.HOME_HERO });\nraisedHere(r, REFUSAL_SURFACES.HOME_HERO)' },
+      { rel: 'src/components/PlantedPassOnly.jsx', src: 'generate(s, { at: REFUSAL_SURFACES.SEED_FIELD });' },
+      { rel: 'src/components/PlantedCompareOnly.jsx', src: 'raisedHere(r, REFUSAL_SURFACES.GENERATE_WIZARD)' },
+      // A file that only TALKS about a key is prose, not a join.
+      { rel: 'src/components/PlantedProse.jsx', src: '// at: REFUSAL_SURFACES.HOME_HERO is passed by the hero' },
+    ];
+    expect(
+      [...keysBy(planted, PASSES_KEY_RE).entries()].sort(),
+      'the PASSES detector stopped seeing an `at:` key, or it now reads a comment',
+    ).toEqual([['HOME_HERO', ['src/components/PlantedBoth.jsx']], ['SEED_FIELD', ['src/components/PlantedPassOnly.jsx']]]);
+    expect(
+      [...keysBy(planted, COMPARES_KEY_RE).entries()].sort(),
+      'the COMPARES detector stopped seeing a `raisedHere` key',
+    ).toEqual([['GENERATE_WIZARD', ['src/components/PlantedCompareOnly.jsx']], ['HOME_HERO', ['src/components/PlantedBoth.jsx']]]);
   });
 
   test('5. the exemption is an ARGUMENT, never a persisted config key', () => {

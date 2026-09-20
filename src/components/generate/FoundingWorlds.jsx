@@ -41,6 +41,7 @@ import Button from '../primitives/Button.jsx';
 import { useStore } from '../../store/index.js';
 import RefusalNotice from '../primitives/RefusalNotice.jsx';
 import { GENERATION_INTENT_SAMPLE_FORK } from '../../lib/generationIntent.js';
+import { raisedHere, REFUSAL_SURFACES } from '../../lib/refusalReasons.js';
 import { SAMPLE_SETTLEMENTS, forkConfigFor, forkSeedFor } from '../../data/sampleSettlements.js';
 import { tierStockImage } from '../../domain/display/tierStockImage.js';
 
@@ -93,7 +94,10 @@ export default function FoundingWorlds({ onNavigate }) {
       // INTENT is an argument for the same reason — the config is persisted, so an
       // exemption stamped there would outlive the fork that earned it.
       updateConfig({ ...normalizeConfig(forkConfigFor(sample)), _forkedFromSample: sample.id });
-      const forged = await generate(seed, { intent: GENERATION_INTENT_SAMPLE_FORK });
+      // `at` names WHERE the reader clicked (REVIEW-P F12): this strip renders beside
+      // the hero on /create and beside the hero AND §02 on /home, and all three used to
+      // paint the same record. The gate stamps it; only this surface says it.
+      const forged = await generate(seed, { intent: GENERATION_INTENT_SAMPLE_FORK, at: REFUSAL_SURFACES.FOUNDING_WORLDS });
       // A refusal is already recorded by the gate that made it; rendering it is all
       // that is left, and NAVIGATING AWAY FROM IT is what left the reader with nothing.
       if (!forged) return;
@@ -118,7 +122,7 @@ export default function FoundingWorlds({ onNavigate }) {
       </p>
       {/* The refusal sits directly under the lead-in, above the cards the reader
           clicked, announced as well as shown (role=alert inside the notice). */}
-      <RefusalNotice refusal={lastRefusal} style={{ marginBottom: SP.md }} />
+      <RefusalNotice refusal={raisedHere(lastRefusal, REFUSAL_SURFACES.FOUNDING_WORLDS) ? lastRefusal : null} style={{ marginBottom: SP.md }} />
       <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 280px), 1fr))', gap: SP.md }}>
         {SAMPLE_SETTLEMENTS.map((sample) => (
           <article key={sample.id}

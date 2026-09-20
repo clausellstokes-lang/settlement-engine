@@ -35,7 +35,7 @@ import { afterEach, beforeEach, describe, expect, test, vi } from 'vitest';
 import { cleanup, fireEvent, render, screen, waitFor } from '@testing-library/react';
 
 import { GENERATION_INTENT_SAMPLE_FORK } from '../../src/lib/generationIntent.js';
-import { REFUSAL_REASONS, refusalOf } from '../../src/lib/refusalReasons.js';
+import { REFUSAL_REASONS, REFUSAL_SURFACES, refusalOf } from '../../src/lib/refusalReasons.js';
 import { DEFAULT_CONFIG } from '../../src/store/configSlice.js';
 import { refusalCopy } from '../../src/components/primitives/RefusalNotice.jsx';
 import { t } from '../../src/copy/index.js';
@@ -200,7 +200,11 @@ describe('SeedField — the exact-seed forge says why it stopped', () => {
 
     const said = (await screen.findByRole('alert')).textContent;
     expect(said).toContain(capWords().rubric);
-    expect(storeState.generateSettlement).toHaveBeenCalledWith('ABC-123');
+    // The seed is still the generation ARGUMENT, and the bag beside it now names WHERE
+    // the reader clicked (REVIEW-P F12), so this field's notice is the only one that
+    // speaks for this field's click.
+    expect(storeState.generateSettlement)
+      .toHaveBeenCalledWith('ABC-123', { at: REFUSAL_SURFACES.SEED_FIELD });
   });
 
   test('CONTROL: with nothing refused the field is quiet', async () => {

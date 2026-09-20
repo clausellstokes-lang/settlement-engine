@@ -126,7 +126,9 @@ describe('THE REALM ON A PHONE — a notice, never a blank and never a redirect'
   });
 
   test('the refusal record is the registered reason, with no vars', () => {
-    expect(REALM_PHONE_REFUSAL).toEqual({ reason: 'realmNeedsTablet', vars: null });
+    // `at` is the click key (REVIEW-P F12): null here, because this reason is raised by the
+    // ROUTE rather than by a surface's click, so every mount that can receive it may say it.
+    expect(REALM_PHONE_REFUSAL).toEqual({ reason: 'realmNeedsTablet', vars: null, at: null });
   });
 });
 

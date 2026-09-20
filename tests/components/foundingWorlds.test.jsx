@@ -23,6 +23,7 @@
 import { afterEach, describe, expect, test, vi } from 'vitest';
 import { cleanup, render, screen, fireEvent, waitFor } from '@testing-library/react';
 import { GENERATION_INTENT_SAMPLE_FORK } from '../../src/lib/generationIntent.js';
+import { REFUSAL_SURFACES } from '../../src/lib/refusalReasons.js';
 
 const actions = {
   generateSettlement: vi.fn(() => Promise.resolve({ name: 'x', tier: 'town' })),
@@ -86,8 +87,11 @@ describe('FoundingWorlds', () => {
     const patch = actions.updateConfig.mock.calls.at(-1)[0];
     expect(Object.hasOwn(patch, 'seed')).toBe(false);
     expect(Object.hasOwn(patch, 'intent'), 'the intent rode the PERSISTED config').toBe(false);
+    // The options bag carries TWO facts about the click now: WHO is asking (the
+    // curated-seed intent, ODQ §934.24(b)) and WHERE they clicked (REVIEW-P F12, so
+    // this strip and the hero beside it stop painting one refusal twice).
     await waitFor(() => expect(actions.generateSettlement)
-      .toHaveBeenCalledWith(seed, { intent: GENERATION_INTENT_SAMPLE_FORK }));
+      .toHaveBeenCalledWith(seed, { intent: GENERATION_INTENT_SAMPLE_FORK, at: REFUSAL_SURFACES.FOUNDING_WORLDS }));
     await waitFor(() => expect(onNavigate).toHaveBeenCalledWith('generate'));
   });
 });

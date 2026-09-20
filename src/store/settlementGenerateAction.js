@@ -84,7 +84,7 @@ const allowedTierPoolOf = (st) => {
   const pool = TIER_ORDER.filter((rung) => st.isTierAllowed(rung) === true);
   return pool.length > 0 && pool.length < TIER_ORDER.length ? pool : null;
 };
-import { SIZE_LABEL, TIER_FACTS } from '../config/tierFacts.js';
+import { accountHolderPhrase, SIZE_LABEL, TIER_FACTS } from '../config/tierFacts.js';
 // THE LADDER the generator's 'random' rolls over, read here so the pool this lane sends
 // is cut from the same array `resolveConfig` picks from rather than from a parallel list.
 // No new first-paint cost: components/HomeHero.jsx already holds this leaf eagerly.
@@ -130,8 +130,13 @@ async function inThreadGeneration(request, onStep) {
  * @param {(fn: (draft: any) => void) => void} set
  * @param {() => any} get
  * @param {string} [seedOverride]
- * @param {{ intent?: string }} [options] who is asking (lib/generationIntent.js); only
- *   the anonymous daily cap reads it, and only to exempt a curated sample fork.
+ * @param {{ intent?: string, at?: string }} [options] `intent` names WHO is asking
+ *   (lib/generationIntent.js); only the anonymous daily cap reads it, and only to
+ *   exempt a curated sample fork. `at` names WHERE they clicked (REFUSAL_SURFACES in
+ *   lib/refusalReasons.js): it changes nothing about the generation and is stamped on
+ *   any refusal this call records, so one page's two controls stop announcing one
+ *   refusal twice. Omitting it leaves the record unkeyed and said by every surface,
+ *   which is the behaviour every caller had before the field existed.
  * @returns {Promise<any>} the activated settlement, or null when a gate refused
  */
 export async function generateSettlementAction(set, get, seedOverride, options) {
@@ -143,6 +148,15 @@ export async function generateSettlementAction(set, get, seedOverride, options) 
   // recognise reads as an ordinary generation, so the exemption must be asked for by
   // its exact name and an older or mistyped caller is still capped.
   const isSampleFork = intentOf(options) === GENERATION_INTENT_SAMPLE_FORK;
+  // ⛔ WHERE THE READER CLICKED TRAVELS WITH THE REASON (REVIEW-P F12). `lastRefusal`
+  // is ONE record and every surface renders it, so a page with two forging controls
+  // announced one refusal twice — measured on /create, forking the Black Crag card.
+  // A surface names itself here and renders only its own; an unkeyed call is left
+  // exactly as it was, said by everyone, so nothing outside the keyed surfaces moves.
+  // Compared, never rendered: it cannot reach a sentence, so no id can reach a reader.
+  const at = typeof options?.at === 'string' ? options.at : null;
+  /** Every reason this lane records carries the click that earned it. */
+  const refusedAt = (reason, vars = null) => refusalOf(reason, vars, at);
   const state = get();
   const {
     config: storedConfig,
@@ -221,15 +235,23 @@ export async function generateSettlementAction(set, get, seedOverride, options) 
       // reaches up to a Town" — the opposite of the truth, on the one rung the floor
       // exists for. The slice answers which bound it was; a floor refusal gets its own
       // reason and names the floor instead of a ceiling the reader never approached.
+      //
+      // ⛔ AND IT NAMES WHOSE FORGE IT IS TALKING ABOUT (REVIEW-P F13). The ceiling
+      // sentence read "past what THIS ACCOUNT forges" for everybody, so an anonymous
+      // visitor forking the Black Crag sample was told about an account they do not
+      // have, one clause before being invited to make one. The tier is known HERE and
+      // nowhere else the sentence passes through, so the phrase is measured here and
+      // derived from the one home that holds both spellings.
       set(s => {
         s.lastRefusal = belowFloor(state, settType)
-          ? refusalOf(REFUSAL_REASONS.TIER_TOO_SMALL, {
+          ? refusedAt(REFUSAL_REASONS.TIER_TOO_SMALL, {
             size: sizeLabelOf(settType),
             min: sizeLabelOf(state.minAllowedTier?.()),
           })
-          : refusalOf(REFUSAL_REASONS.TIER, {
+          : refusedAt(REFUSAL_REASONS.TIER, {
             size: sizeLabelOf(settType),
             max: ceilingLabelOf(state.auth?.tier) || sizeLabelOf(state.maxAllowedTier?.()),
+            holder: accountHolderPhrase(state.auth?.tier),
           });
       });
       return null;
@@ -256,7 +278,7 @@ export async function generateSettlementAction(set, get, seedOverride, options) 
   // an exemption written only here would have got wrong.
   if (!isSampleFork && isAnon && anonAtCap()) {
     console.warn('[settlementSlice] anonymous daily generation cap reached.');
-    set(s => { s.lastRefusal = refusalOf(REFUSAL_REASONS.DAILY_CAP); });
+    set(s => { s.lastRefusal = refusedAt(REFUSAL_REASONS.DAILY_CAP); });
     return null;
   }
 
@@ -412,7 +434,7 @@ export async function generateSettlementAction(set, get, seedOverride, options) 
     // helps. `isChunkLoadError` is the same pure predicate lib/staleDeploy.js gives
     // HomeHero, so the two surfaces cannot disagree about what happened.
     set(s => {
-      s.lastRefusal = refusalOf(isChunkLoadError(genErr)
+      s.lastRefusal = refusedAt(isChunkLoadError(genErr)
         ? REFUSAL_REASONS.STALE_BUILD
         : REFUSAL_REASONS.GENERATION_FAILED);
     });
@@ -453,12 +475,16 @@ export async function generateSettlementAction(set, get, seedOverride, options) 
     const rolled = get();
     set(s => {
       s.lastRefusal = belowFloor(rolled, withRoster?.tier)
-        ? refusalOf(REFUSAL_REASONS.TIER_TOO_SMALL, {
+        ? refusedAt(REFUSAL_REASONS.TIER_TOO_SMALL, {
           size: sizeLabelOf(withRoster?.tier),
           min: sizeLabelOf(rolled.minAllowedTier?.()),
         })
-        : refusalOf(REFUSAL_REASONS.RESOLVED_TIER, {
+        : refusedAt(REFUSAL_REASONS.RESOLVED_TIER, {
           size: sizeLabelOf(withRoster?.tier),
+          // The same measured phrase as the pre-flight above (F13): this is the other
+          // door onto the same false sentence, and an anonymous 'random' roll is
+          // exactly who arrives through it.
+          holder: accountHolderPhrase(rolled.auth?.tier),
         });
     });
     return null;

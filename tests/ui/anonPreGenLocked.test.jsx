@@ -54,7 +54,7 @@ import { immer } from 'zustand/middleware/immer';
 
 import { DEFAULT_CONFIG } from '../../src/store/configSlice.js';
 import { TIER_GATE, createAuthSlice } from '../../src/store/authSlice.js';
-import { ANON_SIZES, SIZE_LADDER } from '../../src/config/tierFacts.js';
+import { accountHolderPhrase, ANON_SIZES, SIZE_LADDER } from '../../src/config/tierFacts.js';
 import { refusalCopy } from '../../src/components/primitives/RefusalNotice.jsx';
 import { REFUSAL_REASONS } from '../../src/lib/refusalReasons.js';
 
@@ -276,8 +276,17 @@ describe('THE LANE — what an anonymous forge actually generates', () => {
     expect(await runLane(store)).toBeNull();
     expect(store.state.lastRefusal.reason).toBe(REFUSAL_REASONS.TIER);
     const said = refusalCopy(store.state.lastRefusal.reason, store.state.lastRefusal.vars).body;
-    expect(said).toContain('A City is past what this account forges');
+    // ⛔ AND IT NAMES WHOSE FORGE IT IS TALKING ABOUT (REVIEW-P F13, 2026-09-20). This arm
+    // used to type "A City is past what THIS ACCOUNT forges" — the sentence an anonymous
+    // visitor really met, and a claim about an account they do not have. The phrase is now
+    // DERIVED from the same single home the gate reads (config/tierFacts.js), so the arm
+    // cannot restate a stale sentence again; what it pins is that the gate MEASURED the
+    // tier rather than defaulting, which is the whole of the cure.
+    expect(store.state.lastRefusal.vars.holder).toBe(accountHolderPhrase('anon'));
+    expect(said).toContain(`A City is past what ${accountHolderPhrase('anon')} forges`);
     expect(said).toContain('it reaches up to a Town');
+    // anchored: the two lines above prove `said` is the resolved ceiling sentence, so the absence below is real.
+    expect(said).not.toContain(accountHolderPhrase('free'));
   });
 
   test('a free account forges a thorpe: the floor is anon\'s alone', async () => {

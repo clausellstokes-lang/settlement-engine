@@ -29,7 +29,7 @@ import { afterEach, beforeEach, describe, expect, test, vi } from 'vitest';
 import { cleanup, fireEvent, render, screen, waitFor } from '@testing-library/react';
 
 import { GENERATION_INTENT_SAMPLE_FORK } from '../../src/lib/generationIntent.js';
-import { REFUSAL_REASONS, refusalOf } from '../../src/lib/refusalReasons.js';
+import { REFUSAL_REASONS, REFUSAL_SURFACES, refusalOf } from '../../src/lib/refusalReasons.js';
 import { TIER_GATE } from '../../src/store/authSlice.js';
 import { ANON_MAX_TIER } from '../../src/config/tierFacts.js';
 
@@ -95,7 +95,7 @@ describe("'Fork this sample' — the reviewed click, under the owner's rulings",
     const [seed, options] = store.generateSettlement.mock.calls[0];
     expect(typeof seed, 'the seed is still the generation ARGUMENT').toBe('string');
     expect(options, 'the fork did not declare its intent — it would be capped like any generation')
-      .toEqual({ intent: GENERATION_INTENT_SAMPLE_FORK });
+      .toEqual({ intent: GENERATION_INTENT_SAMPLE_FORK, at: REFUSAL_SURFACES.FOUNDING_WORLDS });
     await waitFor(() => expect(onNavigate).toHaveBeenCalledWith('generate'));
     expect(screen.queryByRole('alert'), 'a successful fork raised a notice').toBeNull();
   });
