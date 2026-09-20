@@ -840,3 +840,10 @@ CURE-A `08cb42e31` (the model walker's mask: findings identical under both forms
 ## Amendment of 2026-09-20 14:36 EDT — the successor chair seated (ODQ §934.47 addendum 112)
 
 - The owner restated the seat law and the lane law at the seating: FOUR lanes live, ONE gated lane or chair terminal at a time (the two-lane shared-tier overlap is CLOSED), pause-and-resume at every gate. The six chair picks composed (slot tip `20d460375`); FIX-P1 holds the slot and the gate for its cure, the archival-roster line and the composed-tip proofs; RUN 23 follows the eighth refreeze and does not wait for FIX-P9 or FIX-P10. The push chain waits for the owner's word in this session.
+
+## Amendments of 2026-09-20 14:57 EDT — FIX-P1 composed; the eighth refreeze; RUN 23; §934.76 and FIX-G4; the seats (ODQ §934.47 addendum 113)
+
+- FIX-P1d `ee204c827` and the CURE-J archival-roster line `da5310f30` composed and proven at the tip (`tests/lint` whole red on the lighting walker only; `tests/scripts`, `tests/build`, `tests/lib` whole green; FIX-D9's two owed proofs discharged). The eighth lighting refreeze `e45c4738b` = `2665·359·2306·25529·6815`. RUN 23 launched 14:53:51 at that tip.
+- **FIX-G4 CHARTERED (dispatched on the owner's word at §934.76):** the golden door learns a null register row's `proofForm` at first use from an owner-signed record; a walker arm and a plant; the shift-records README's two false sentences corrected; the six fixtureless dormancy suites' ruling; the rider fence's enrollment recorded. TOOL-21 closed with its report.
+- **FIX-P9 gains commit 4** (the rendered sample's hard-coded 'Thorp'); **FIX-P10 gains commit 5** (`GenerateWizard`'s scroll-padding derived from `HEADER_H` and `TOUCH_TARGET`). FIX-C2d's gate hand-off carries FIX-P1's noticed items 1 and 3; item 2 is closed into TOOL-9.
+- COMPILE-EM-B3d dispatched (train EM-T7's first member); DEPLOY-PREFLIGHT dispatched (read-only) ahead of the push chain, which waits for the owner's word in session.
