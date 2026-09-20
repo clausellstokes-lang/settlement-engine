@@ -483,6 +483,10 @@ CURE-A `08cb42e31` (the model walker's mask: findings identical under both forms
 - **CURE-H** (the slot, after EM-B3c lands): A8 of `participationWriteBase.contract.test.js` derives the clock chain from `pulseKernel.js` by the found-and-ordered source read; no `src/` change; the anti-vacuity walker green. **The pre-proof brief's step 12** gains: a rename is a change to every walker keyed on the filename token. **TOOL-6b's brief** gains the token-consumer census.
 - **The terminal's order:** EM-B3c's batches → its landing and flip (EM-B1k2 and EM-P2 v4 placed at that sitting) → CURE-H → the chair's refreeze → **run 19** → the composition train's gate queue (FIX-G, TOOL-2b, FIX-F2b, TOOL-3, FIX-C2, FIX-P1, the P/L lanes as they pause).
 
+## Amendments of 2026-09-20 04:04 EDT — FIX-P3 and FIX-P4 at their gates; the coach's docking is the owner's to veto; FIX-P5 gains the inert-chip rule; the hot-file list gains two rows at the next docs sitting (ODQ §934.47 addendum 50)
+
+- **FIX-P5** carries: decorative chips read as inert (the landing's 'Save to Library' span). **The chair's docs sitting at EM-B3c's landing:** `App.jsx` (575/600) and `SettlementsPanel.jsx` (577/600) join the hot-file list, re-measured. **FIX-P4's** in-flow docking of the desktop coach (§934.29's lifted card changed) stands unless the owner vetoes.
+
 ## Pre-proof tasks (Opus, read-only, before each packet is READY)
 1. Name every "verified fact" with file:line at the base; 2. fill the change manifest and required symbols; 3. measure the budget (files, lines) and split if over; 4. name the tests the packet's proof shape copies; 5. run the sealed dispatch dry.
 
