@@ -44,7 +44,7 @@ Consequences compiled into WF-6: (i) GR-3's faith rows land in
 peaceTermsCatalog.js, NOT peaceTerms.js; (ii) every WF-6 sizing pin derives its
 family census from the live `TERM_FAMILIES`, never a hand count; (iii) landing
 faith families MECHANICALLY grows `TERM_FAMILIES` and trips the WR-10 tripwire
-`catalogGrewSinceWr10()` (sovereigntyBundle.js:166) — see §5 seam 1.
+`catalogGrewSinceWr10()` (sovereigntyBundle.js:191) — see §5 seam 1.
 
 **R2 — "the Schism realm arc EXISTS (realmEvents.js:104)" is FALSE at HEAD.**
 Executed enumeration of `COMPOUND_SIGNATURES` (realmEvents.js:24-~90): exactly

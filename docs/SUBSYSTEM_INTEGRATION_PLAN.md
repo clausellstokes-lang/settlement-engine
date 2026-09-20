@@ -257,7 +257,7 @@ phases consume it.
   emitted (first ever).
 - **Determinism guards:** deployment ids deterministic (home+target+tick+channel);
   timers ride `queuedImpacts` delayTicks (queue-this-tick / mature-next via
-  `advanceRegionalImpacts` at `applyWorldPulse.js:504`); **war_drain severity is derived
+  `advanceRegionalImpacts` at `applyWorldPulse.js:341-343`); **war_drain severity is derived
   from the PRE-TICK postTimeSnapshot channel count, NOT this-tick's freshly-minted
   channels** (the deploy mint affects war_drain only next tick — avoids intra-tick
   read-after-write); army-as-record (no echo); one-army existence guard.

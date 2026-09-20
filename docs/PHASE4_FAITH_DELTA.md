@@ -309,7 +309,7 @@ cannot re-enter this tick's piety.
 ### 2.2 Schema shape (derived read-model, never a stored ledger)
 
 Extend the existing projection (projectReligionStateOntoSettlement,
-religionState.js:491-513) — `config.faithProfile.piety`:
+religionState.js:614) — `config.faithProfile.piety`:
 
 ```js
 faithProfile.piety = {

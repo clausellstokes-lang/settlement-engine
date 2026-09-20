@@ -13,7 +13,7 @@ yours: settlements/**, map/**, account/**, OutputContainer. NO git add/commit/st
 1. IMPORT A SHARED SETTLEMENT (ledger §6, ranked #3 — single largest gallery gap). ABSENT
    end-to-end in OURS. Adopt: the import button/flow on GalleryDetail (their
    GalleryDetail.jsx:244-276), the `importDossier` hook action (their :304-324), and the
-   store action `importGallerySettlement` (their campaignSlice.js:628). VERIFY FIRST that a
+   store action `importGallerySettlement` (their campaignSlice.js:673). VERIFY FIRST that a
    shared gallery entry persists enough data to reconstruct a saved settlement (grep OUR
    gallery share/publish path + the gallery row shape). If the shared payload is a snapshot
    sufficient to import → wire it. If it only stores facets/preview (not the full settlement)

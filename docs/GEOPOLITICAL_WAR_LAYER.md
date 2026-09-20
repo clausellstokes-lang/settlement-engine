@@ -63,7 +63,7 @@ trust/resentment/fear** — `tradeBalance/dependency/leverage/pactStrength` ratc
 `STRESSOR_CATALOG` (`stressors.js:56-269`), policies transient/episodic/structural/dormant_residual;
 birth via `evaluateStressorRules`, age/decay/resolve in `ageRoamingStressors` (`stressors.js:628`,
 run at `pulseKernel.js:454`), `originContext.attackerSettlementId` (`stressorDynamics.js:748`) for the aggressor link,
-and the `coupVerdictOutcomes` interception (`coup.js:69`, wired `pulseKernel.js:454`) — the
+and the `coupVerdictOutcomes` interception (`coup.js:89`, wired `pulseKernel.js:454`) — the
 template for "a resolving stressor reads a target's live state and emits a regime-change outcome."
 
 ### The determinism contract (sacred — must be honored everywhere below)
@@ -474,7 +474,7 @@ A war/trade state is never just a channel + a condition — it ripples through e
 - **Key insight:** **the food layer IS the siege clock** — `storageMonths` is simultaneously the granary, the famine-immunity shield (≥4 months), and a leg of the siege counterforce. §2.2/OQ1's "occupation odds" must read it (and carve out the magic-transit bypass — a teleport metropolis doesn't starve on schedule).
 
 ### Defense / Military
-- **Reuse:** `deriveDefenseReadiness` (`causalState.js:445`) walks any `defense_readiness`-tagged condition and applies a reversible delta — the **exact, engine-ready seam** for the deploy debuff (restore = remove the condition, never recompute the clamped score). Three relevant archetypes already tag it: `war_pressure` (besieger drain), `alliance_burden` (relief burden), `vassal_extraction` (vassal constraint). `windDownSponsoredStressors` is the LOCKED failed-vassalization lever.
+- **Reuse:** `deriveDefenseReadiness` (`causalState.js:1034`) walks any `defense_readiness`-tagged condition and applies a reversible delta — the **exact, engine-ready seam** for the deploy debuff (restore = remove the condition, never recompute the clamped score). Three relevant archetypes already tag it: `war_pressure` (besieger drain), `alliance_burden` (relief burden), `vassal_extraction` (vassal constraint). `windDownSponsoredStressors` is the LOCKED failed-vassalization lever.
 - **Gap:** **occupation-disarm is generation-only** (powerGenerator — ADDRESS STRUCK 2026-09-20: the faction ×0.3 disarm is not in the `./power/*` split at this tip; `defenseGenerator.js:388` military −35) — a mid-campaign occupation gets the readiness condition but NOT the faction disarm (powerStructure is frozen); walls never degrade from siege duration.
 - **New (DECISION):** **military attrition** — `settlementStrength` reads only mean-reverting pressure, so a defeated aggressor snaps back to full in ~9 ticks → war-spam. A durable post-war penalty needs net-new **non-mean-reverting** state (a long-`maxAge` `war_exhaustion` condition, or an attrition term ratcheted like `leverage`). The singleton "one army" has no magnitude to deplete — attrition must live on the settlement (OQ9). **Dedup rule needed:** one act of besieging must not stack `war_pressure` + the deploy debuff + the `war_front` pressure bump into a triple defense hit.
 

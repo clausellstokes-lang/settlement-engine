@@ -81,7 +81,7 @@ that builds on it).
 | S33 | negotiationPictures (WR-7) built — TR-5 consumes, never duplicates | `negotiationPictures.js` (512 effective lines): per-party picture create/normalize/mutate machinery | VERIFIED |
 | S34 | WR-7 envoy estate + WR-7b hold writer landed — TR-8's substrate | `envoyErrand{Offer,Records,Evidence,Vocabulary}.js`, `foreignGuestHold.js` (one writer), `envoyDiplomacyEnabled: false` simulationRules.js:472 | VERIFIED |
 | S35 | Treaties carry the orientation reader + victor-free mint road | `treatyOrientation.js` — `TREATY_ORIENTATION_KINDS = ['unknown','wartime','sale']`, `treatyOrientationOf` :120 (CR-WR10-G, landed @ e564e135) | VERIFIED |
-| S36 | TR-5 degradation contract pinned BOTH ways with tripwire | `catalogGrewSinceWr10()` sovereigntyBundle.js:166 (derives families from `TERM_FAMILIES` at call time, peaceTermsCatalog.js:77 import); pins tests/domain/sovereigntyBundleWr10.test.js:321, :388 | VERIFIED |
+| S36 | TR-5 degradation contract pinned BOTH ways with tripwire | `catalogGrewSinceWr10()` sovereigntyBundle.js:191 (derives families from `TERM_FAMILIES` at call time, peaceTermsCatalog.js:77 import); pins tests/domain/sovereigntyBundleWr10.test.js:321, :388 | VERIFIED |
 | S37 | War taxonomy parallel: "war's 13↔13 has no commercial sibling" | `warReasonTaxonomy.js:24-60` — the live taxonomy is **16↔16** (lineage_claim, alliance_obligation, atrocity_answer + mirrors landed since the survey). The "no commercial sibling" half stands (commercialReasons: zero hits). NO TR pin may hard-code war's count | **REFUTED** (count; the bijection discipline and the absence both stand) |
 
 ### 1f 2026-08 estate mechanics (not in the volume's census; binding on every wave)

@@ -116,7 +116,7 @@ re-measured by this lane without reading the round's own receipts:
 | **F-1** | the spine is BUILT (`errandMint.js`, flag `errandSpineEnabled` live in the manifest); `ERRAND_CONSUMERS` reserves `legateErrand.js`/`religious` and `pilgrimErrand.js`/**`personal`** by exact path, both `built:false`; `ENVOY_PURPOSES` still closed at two | WF-S030, WF-S031, WF-S032 |
 | **F-2** | five `family:'faith'` rows LANDED at `peaceTermsCatalog.js:228/:231/:236/:240/:245`; `peaceTerms.js` measures **797** effective against the 800 layer ceiling ⇒ **3 lines of headroom, exactly as §78 says** | WF-S011, WF-S012 |
 | **F-3** | exactly THREE `suppressed: true` write sites — `religionState.js:262`, `:277`, `:485` — the third inside `resolvePatronContest`'s siege-resolution loop | WF-S001, WF-S002 |
-| **F-4** | `religionStates` is `CONDITIONAL_LEDGER_KEYS` member **2** (`worldState.js:440`) and there is additionally a live per-record migration at `:259-287` that rewrites religionStates keys and stamps `schemaVersion: 2` | WF-S040, WF-S041 |
+| **F-4** | `religionStates` is `CONDITIONAL_LEDGER_KEYS` member **2** (`worldState.js:452`) and there is additionally a live per-record migration at `:259-287` that rewrites religionStates keys and stamps `schemaVersion: 2` | WF-S040, WF-S041 |
 | **F-5** | the eight named tuning homes all resolve; `pilgrimage.js` really does carry six BARE module constants (`:32`, `:33`, `:34`, `:38`, …) with no frozen table — the volume's own counter-example is real | WF-S050 |
 
 ⚠ **Q1 AND Q4 REMAIN OPEN FOR THE WF FAMILY SITTING.** This annex grades their PREMISES (both

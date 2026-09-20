@@ -182,7 +182,7 @@ Live code outranks every table in this file — re-verify anything you build on.
 | V-8 | Enforcement reads bite from one dependency-free leaf; expiry lifts same tick | `treatyEnforcement.js` (179 raw; `treatyBlocksWar` :117); expiry drop `peaceTerms.js:637-641` | VERIFIED |
 | V-9 | Conserved grain streams + accumulators | `computeTreatyGrainDraw` (`treatyTransfer.js`), `extractedFromLoser`/`deliveredToVictor` `peaceTerms.js:670-672` | VERIFIED |
 | V-10 | Expiry/prune are SILENT in every feed | spent treaty ⇒ `delete nextLedger[key]` `peaceTerms.js:686` — no beat, no kind | VERIFIED, one addendum: WR-2 disposition learning now OBSERVES these moments (`treatyDispositionDeltas` outcome `'held'` :684, `'defaulted'` :700). GR-0's beats COEXIST with (never replace, never feed) that learning — §5 GR-0 collision map |
-| V-11 | Fraying legibility + house-voice totality table | `frayingTermOf`/`treatyFrayingSummary`/`treatyDocument` in `peaceTermsDocument.js` (297); `TREATY_COMPLIANCE_VOICE` family×state at `display/treatyDocument.js:35` with FLOOR fallback :102 | VERIFIED — GR-3 adds family rows to BOTH the domain and display tables, walker-guarded |
+| V-11 | Fraying legibility + house-voice totality table | `frayingTermOf`/`treatyFrayingSummary`/`treatyDocument` in `peaceTermsDocument.js` (297); `TREATY_COMPLIANCE_VOICE` family×state at `display/treatyDocument.js:51` with FLOOR fallback :102 | VERIFIED — GR-3 adds family rows to BOTH the domain and display tables, walker-guarded |
 | V-12 | Repudiation gate requires a LIVE `non_aggression` term; composer surface `repudiableTreatyPairs`; verb registered | `treatyBreach.js:47-51` `isRepudiableTreaty`; :62 `repudiableTreatyPairs`; `realmManifest.js:288` `REPUDIATE_TREATY` (src/domain/events/), offerability :301; `changeAuthorityPolicy.js` (src/domain/worldPulse/) | VERIFIED — J-GR-16's factoring premise holds exactly as ruled; treatyBreach.js is 175 raw / ~127 effective, room for the split |
 | V-13 | Broken-oath cascade tellable-now | `scoreTreatyDefault` `warReasons.js:553`; war-block lift `treatyEnforcement.js`; `defaultedBy` write with CR-WR10-G needs-guard `peaceTerms.js:694-699` | VERIFIED |
 | V-14 | Mediation single-source, war-exit occasions only | `findCrossPressuredMediator` `peaceTermsGraph.js:103`; invoked in `mintTreaty` `peaceTerms.js:783`; `accrueMediationTrust` `peaceTermsOverlay.js:84`, called `peaceTerms.js:1045` | VERIFIED — GR-6 adds occasions, never a second finder |
@@ -623,7 +623,7 @@ finder, no new relationship vocabulary.
 ## §6 SEAM CONTRACTS (pre-pinned both ways, each with its tripwire)
 
 1. **GR-3 ↔ WR-10 (the catalog tripwire — ALREADY PINNED FROM THE OTHER
-   SIDE):** `catalogGrewSinceWr10()` (`sovereigntyBundle.js:166`) reds at GR-3
+   SIDE):** `catalogGrewSinceWr10()` (`sovereigntyBundle.js:191`) reds at GR-3
    by RECORDED DESIGN; GR-3's commit executes the tripwire's instruction
    (re-read WAR §5's degradation note, assert the mechanical bundle widening,
    update the two test assertions and the WAR §3 row). Honored, not fought.
