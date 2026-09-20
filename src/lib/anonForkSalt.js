@@ -67,7 +67,7 @@ import { fnv1a32 } from '../kernel/proseHash.js';
 // both this module's consumers and the sample table into the same create chunk
 // (it imports LayeredConfigurationPanel and FoundingWorlds side by side), and the
 // dependency runs lib -> data, which is the direction the purity rule permits.
-import { SAMPLE_SETTLEMENTS } from '../data/sampleSettlements.js';
+import { SAMPLE_SETTLEMENTS, forkSeedFor } from '../data/sampleSettlements.js';
 
 const KEY = 'sf.anon.fork-salt';
 
@@ -119,10 +119,26 @@ export const FORK_SUFFIX_MAX = Math.max(ACCOUNT_DIGEST_HEX, ANON_SALT_HEX);
  * so before and cannot now. Seeds are opaque strings, so a long typed phrase was
  * legal; it is now clipped by the field. That is the cost of giving the address a
  * readable limit, and it is stated here rather than left for someone to discover.
+ *
+ * ⛔⛔ MEASURED BY RUNNING THE REAL DERIVATION, NOT BY RE-DOING ITS ARITHMETIC, and
+ * the observed-shape instrument is why. The first cut computed this as
+ * `max(sample.config?.seed.length) + 1 + FORK_SUFFIX_MAX`, and
+ * `scripts/check-observed-shape-readers.mjs` convicted it: "NEW seed on config —
+ * 1 read(s); this file has no frozen row for it". The instrument is RIGHT, and
+ * about the very bug this estate already shipped once — `seed` is not a key of the
+ * generator's config (`forkConfigFor` deletes it; a `seed` left in a persisted
+ * config broke every later generation in that browser), so a module outside the
+ * data table has no business reading one.
+ *
+ * Running `forkSeedFor` at the widest suffix it can ever be handed answers the same
+ * question without reading a shape at all, and answers it BETTER: the ceiling can
+ * no longer drift from the seed's actual format, because the format is the thing
+ * being measured rather than a second spelling of it.
  */
+const WIDEST_SUFFIX_PROBE = 'x'.repeat(FORK_SUFFIX_MAX);
 export const FORK_SEED_MAX = Math.max(
-  ...SAMPLE_SETTLEMENTS.map((sample) => String(sample.config?.seed ?? '').length),
-) + 1 + FORK_SUFFIX_MAX;
+  ...SAMPLE_SETTLEMENTS.map((sample) => (forkSeedFor(sample, WIDEST_SUFFIX_PROBE) ?? '').length),
+);
 
 // Fallback when localStorage is unavailable (private mode, sandboxed iframe,
 // quota). Module-scoped so the salt is at least stable for the page's lifetime.
