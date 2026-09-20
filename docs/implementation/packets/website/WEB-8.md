@@ -43,6 +43,15 @@ ships (the pricing table stops claiming a paywall that does not exist), with a c
 pin that every advertised Cartographer-only row has an enforcement symbol; at map activation
 (D3b/P6) the rows return WITH their gates."
 
+⛔ **ADDRESS NOTE, 2026-09-20 (FIX-C2b).** Every `SettlementMapPane.jsx`, `useTownMapPresentation.js`,
+`MapTabShell.jsx`, `SettlementMapEditControls.jsx`, `SettlementMapNotes.jsx` and `fog/SettlementMapFogControls.jsx`
+address below is **STRUCK as a live address and KEPT as evidence**: the whole legacy town-map surface was
+deleted at `43c3ac3805` ("TE-STRIP-1 (1/4): the legacy settlement map leaves the website — UI + assets",
+2026-08-29, an ancestor of this tip), so the files exist nowhere in the tree. The rows are this packet's own
+frozen measurement of the tip it landed at; re-pointing them would falsify the measurement and striking the
+prose would destroy it, so they stand as written and this note carries the truth. When the map returns at
+D3b/P6, the returning packet re-measures them rather than inheriting them.
+
 **Its premise was measured FALSE for four of the six rows that actually claimed anything**
 (§449's later correction, CONFIRMED by the §471 skeptic and re-executed here). §449 hunted
 for a `canUse*` symbol and found none, and concluded there was no gate. There is a gate; it
@@ -70,7 +79,7 @@ against 13 under the wrong one).
 | every-size | account | true / true | no | `TIER_GATE.free.maxTier === TIER_GATE.premium.maxTier === 'capital'` (authSlice.js:53-54) | parity, TRUE | unchanged |
 | saves | account | `3 saves` / `unlimited` | YES | `TIER_GATE.maxSaves` free 3 vs premium Infinity → `maxSaves()` authSlice.js:693 | BOTH | unchanged |
 | custom-content | authoring | false / true | YES | `TIER_GATE.customContent` → `canUseCustomContent()` authSlice.js:681 | BOTH | unchanged |
-| gallery-viewing | viewing | true / true | no | none needed; `PublicDossierView.jsx:147` mounts the pane `canEdit={false}` for everyone | parity, TRUE | marker → `parity` |
+| gallery-viewing | viewing | true / true | no | none needed; `PublicDossierView.jsx:118` mounts the pane `readOnly` for everyone | parity, TRUE | marker → `parity` |
 | same-engine | account | true / true | no | constitutional — the engine is never tier-gated | parity, TRUE | unchanged |
 | living-realm | account | false / true | YES | `TIER_GATE.neighbour` → `canUseNeighbour()` authSlice.js:654 | BOTH | unchanged |
 | map-chains | **viewing** | false / true | YES | `TIER_GATE.mapChains` → `canUseMapChains()` authSlice.js:674, plus three affordance consumers (MapOverlay.jsx:62, LayersPanel.jsx:54, RoutesToolbar.jsx:50) | BOTH | unchanged |
