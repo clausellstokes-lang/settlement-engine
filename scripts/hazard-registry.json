@@ -110,14 +110,15 @@
         "w-r2-d7-reframe-layer-shipped.md",
         "fable-build-era-takeover.md"
       ],
-      "enforcer": { "paths": ["tests/lint/controlBytes.test.js"], "inChain": true, "note": "DETECTS but does not PREVENT — it caught all 7, which is why 7 instances did not become 7 shipped defects. Still costs a repair each time." },
-      "instances": 7,
-      "instanceEvidence": "CONFIRMED: authored-nul-byte-in-agent-edits.md carries an explicit count correction — 'the class has BIT 6×, not 4× (2026-08-06)'; cw0w-walkers-landed-two-stops.md records 'A raw NUL was authored again (7th time)'.",
+      "enforcer": { "paths": ["tests/lint/controlBytes.test.js"], "inChain": true, "note": "DETECTS at gate time; it does not PREVENT, and running it is not automatic. The claim that it 'caught all 7' was withdrawn by TOOL-25 on 2026-09-20: the 8th instance (FIX-P1b, src/lib/anonForkSalt.js) was INSIDE this enforcer's own roots and still reached review, because that lane ran three named tests/lint files and never the directory whole. TOOL-25 widened the reach from src/ and tests/ to every TRACKED text file, scoped by git ls-files with text-ness read from .gitattributes; the whole-C0 rule stays at src/ and tests/, a NUL-only arm covers the rest of the tree, and a numstat census asserts no text-extension blob is classified binary. Reach is now wide; the procedural gap that let the 8th through is NOT closed by this enforcer and is tracked separately." },
+      "instances": 10,
+      "instanceEvidence": "CONFIRMED by execution. Seven through 2026-09-19: authored-nul-byte-in-agent-edits.md carries an explicit count correction — 'the class has BIT 6×, not 4× (2026-08-06)' — and cw0w-walkers-landed-two-stops.md records 'A raw NUL was authored again (7th time)'. THREE MORE ON 2026-09-20, every one of them through TOOLING rather than typing: (8) FIX-P1b's src/lib/anonForkSalt.js, which git then classified binary and printed a dash for both numstat columns; (9) EM-R0a's new walker, cured structurally with JSON.stringify so that key carries no separator at all; (10) TOOL-25's own four bytes in tests/lint/controlBytes.test.js, planted while widening this very pin and caught by it before the commit. One non-file instance the same day is deliberately NOT counted in this figure: a commit message that needed a NUL stripped.",
       "triggers": [
         "any Edit/Write authoring a quoted single-character separator",
-        "any .join()/Set-key/template-literal edit by an agent"
+        "any .join()/Set-key/template-literal edit by an agent",
+        "any control-character escape passed through a JSON-encoded tool parameter — a backslash-u-0000 or backslash-x-00 escape in a Write tool's content arrives in the file as the RAW BYTE, because the JSON decoder resolves the escape before anything writes it. This is the vector behind all three 2026-09-20 instances, so the escape spelling is the hazard and not the protection; spell it in words when documenting the class."
       ],
-      "upgradePath": "Byte-scan at the Write-tool boundary rather than at gate time, so the repair cost drops to zero."
+      "upgradePath": "Byte-scan at the Write-tool boundary rather than at gate time, so the repair cost drops to zero. Until that exists the cheapest real control is the cure ladder in the pin's header: a composite key needs no separator at all (JSON.stringify the parts, as EM-R0a did); if a separator is genuinely unavoidable, BUILD it at runtime with String.fromCharCode(0), which is the same string and so keeps a converted key's identity exactly; and never spell a control-character escape in a file a tool writes."
     },
     {
       "id": "HZ-FACTIONKEY",
