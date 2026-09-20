@@ -737,3 +737,8 @@ CURE-A `08cb42e31` (the model walker's mask: findings identical under both forms
 - **TOOL-25 (NEW; measure-first):** a walker that no tracked text file contains a NUL byte (git classifies it binary and every review reads 'binary file differs'; no instrument catches it today).
 - **The landing order gains one sentence (TOOL-19's scope):** the validator's seal exemption for a burned retiree is WORKTREE-LOCAL — a packet left READY with a burned retiree still reds `validate` elsewhere; the row turns lawful under the LANDED arm at the flip, so the flip follows the landing without an intervening placement.
 - **§934.72 (owner):** `SeedField`'s `maxLength` — recommend the module's declared width.
+
+## Amendments of 2026-09-20 11:45 EDT — EM-B1f LANDED and flipped; the composition sitting (ODQ §934.47 addendum 93)
+
+- **EM-B1f is LANDED at `6b57180ef`** (flipped `7a6f85d20`). EM-T6's order proceeds: EM-B1h next (its compile names `isOffStage`'s docblock arm and the walker's `:402` message), then B1i, B1j (after FIX-T1 composes), A2b, B1a. EM-R0a is placed at this sitting's end (after the composition and the fourth preamble amendment's sentence).
+- **The composition sitting's order:** FIX-L1 → FIX-P3 → FIX-P4 → FIX-P5 → FIX-P1b → FIX-C2b → TOOL-13b, one re-proof lane at the composed tip; FIX-B2, FIX-D9, FIX-T2, TOOL-19 and the rest compose at the next sitting as they land.
