@@ -730,3 +730,10 @@ CURE-A `08cb42e31` (the model walker's mask: findings identical under both forms
 - **FIX-C2c (NEW; brief `briefs/launch/FIX-C2c.md`; after FIX-C2b composes):** ARM 3 reaches the docs scope (report-only; LANDED packets' bodies excluded by the manifest's status); the 170 ambiguous-basename citations resolved or named as a class; `PINNED-UNCOMMITTED` classified; the five stale docs citations re-addressed by symbol.
 - **DOC-3 (NEW; the chair's, at a docs sitting):** `WC-PREAMBLE.md:70`'s stale `:1360`/`:1366` corrected — a family preamble's SHA re-stamps its members, so the LANDED members' historical hashes are noted as such.
 - **ARM 4 stays report-only** (a shrink-only baseline over a half-false set is refused by measurement — the chair's standing ruling for heuristic arms).
+
+## Amendments of 2026-09-20 09:36 EDT — FIX-P1b's judgment; TOOL-25 chartered; the seal exemption's scope (ODQ §934.47 addendum 92)
+
+- **FIX-P1b** (`92e959285`) composes after FIX-P5: the account digest is a two-round `fnv1a32` with the domain PREPENDED (a widened hash, not a widened field); accepted because nothing deployed carries the old digest (FIX-P1 is on the same undeployed lane) — a derivation change on a DEPLOYED digest would be the owner's migration.
+- **TOOL-25 (NEW; measure-first):** a walker that no tracked text file contains a NUL byte (git classifies it binary and every review reads 'binary file differs'; no instrument catches it today).
+- **The landing order gains one sentence (TOOL-19's scope):** the validator's seal exemption for a burned retiree is WORKTREE-LOCAL — a packet left READY with a burned retiree still reds `validate` elsewhere; the row turns lawful under the LANDED arm at the flip, so the flip follows the landing without an intervening placement.
+- **§934.72 (owner):** `SeedField`'s `maxLength` — recommend the module's declared width.
