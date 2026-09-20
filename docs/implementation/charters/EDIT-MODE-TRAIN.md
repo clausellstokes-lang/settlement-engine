@@ -487,6 +487,12 @@ CURE-A `08cb42e31` (the model walker's mask: findings identical under both forms
 
 - **FIX-P5** carries: decorative chips read as inert (the landing's 'Save to Library' span). **The chair's docs sitting at EM-B3c's landing:** `App.jsx` (575/600) and `SettlementsPanel.jsx` (577/600) join the hot-file list, re-measured. **FIX-P4's** in-flow docking of the desktop coach (§934.29's lifted card changed) stands unless the owner vetoes.
 
+## Amendments of 2026-09-20 04:15 EDT — ⭐ EM-B3c LANDED (the eighth landing; migration 203); EM-B1k2 placed READY; TOOL-9 chartered; FIX-L1 at its gate with CURE-A3 live (ODQ §934.47 addendum 51)
+
+- **EM-B3c LANDED** at `ae4a643f7` (flip `154bd7c07`): the gallery scanner refuses every key the client hard-denies; applying 201–203 stays the owner's hand. **EM-B1k2 READY** at `154bd7c07` (`16e1ec88d`), builds in the slot after CURE-H lands and the chair's refreeze and run 19 start. **EM-P2 v4** is placed when EM-B1k2 lands.
+- **TOOL-9 (NEW, tooling; small; the next composition train):** the lighting walker gains a read-only print mode (`LIGHTING_CENSUS_PRINT=1`) so a lane can record the whole tuple without the refreeze door.
+- **FIX-L2** carries the walker's stale ':2318' comment (30 → 5 after FIX-L1) and the mixed-family park of `tests/edgeFunctions/contracts.test.js`.
+
 ## Pre-proof tasks (Opus, read-only, before each packet is READY)
 1. Name every "verified fact" with file:line at the base; 2. fill the change manifest and required symbols; 3. measure the budget (files, lines) and split if over; 4. name the tests the packet's proof shape copies; 5. run the sealed dispatch dry.
 
