@@ -789,3 +789,8 @@ CURE-A `08cb42e31` (the model walker's mask: findings identical under both forms
 - **FIX-T2** (`f2e2e54fa`, `6d7a73a12`) composes after FIX-B2 at the second composition.
 - **TOOL-20 gains:** `tests/design/deepCraftKillList.test.js` (raw lines against `CEILINGS`) and `tests/helpers/sourceContract.js:245` (raw brace counting) routed to `commentsOnly`; the `significanceMigration` `/g` regex made one idiom with its neighbour's factory.
 - **FIX-C2c gains as inputs:** the three citation drifts `tests/lint` whole's report-only arms print at the composed tip (`roadsParticipation.test.js:415` — a proved ARM 3 false positive; `dossierMountRegistry.walker.test.js:1287`; `scripts/wiring-census.mjs:349`) and the 18-row `[A3s]` comparand disagreement.
+
+## Amendments of 2026-09-20 12:48 EDT — FIX-P1c; EM-R0d's version 4 (ODQ §934.47 addendum 102)
+
+- **FIX-P1c** (`5fbe2d82c`) composes after FIX-T2 at the second composition; §934.72 and §934.66 are executed and closed.
+- **EM-R0d version 4** is pre-proofed at the composed tip (its badge-capitals TEST row re-cut; two comment-only movers admitted) and placed at EM-R0a's flip under the fourth amendment's hash; the placement window runs from the v4 pre-proof tip.
