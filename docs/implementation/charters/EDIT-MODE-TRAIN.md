@@ -460,6 +460,11 @@ CURE-A `08cb42e31` (the model walker's mask: findings identical under both forms
 | **FIX-P5** | F7/F8/F9 the floors and the phone bar; F14 one tier word by a walker; F16 the lock mark; noticed 4–7 | the next composition train |
 | **REVIEW-P2** | the seven unwalked public routes, the gallery hubs, `/world/:code`, and an account walk under the persona on the production build | after the composition train |
 
+## Amendments of 2026-09-20 03:34 EDT — CURE-E/F/G landed; the second refreeze; run 18 is running as train EM-T3's terminal; EM-B3c re-pinned and next in the slot (ODQ §934.47 addendum 45)
+
+- The branch: `9f3455b84` CURE-E · `96036427f` CURE-F · `c71782e7f` CURE-G · `21b991118` the refreeze (`2651·383·2268·25035·6678`) · `dbd077481` EM-B3c re-pinned. **Run 18** validates `21b991118`; EM-B3c builds in the slot from the first freed working seat, its batches behind run 18; on its landing: the flip, EM-P2 v4 placed, then the composition train EM-T4.
+- **FIX-C2b's first commit** is the certification file's whole citation set (`subsystemRowsWar.js`, ~40 stale addresses) re-addressed by symbol.
+
 ## Pre-proof tasks (Opus, read-only, before each packet is READY)
 1. Name every "verified fact" with file:line at the base; 2. fill the change manifest and required symbols; 3. measure the budget (files, lines) and split if over; 4. name the tests the packet's proof shape copies; 5. run the sealed dispatch dry.
 
