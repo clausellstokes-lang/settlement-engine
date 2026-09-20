@@ -24,13 +24,13 @@
     "The derivation history — every prior row, its cause, and the census laws — stays in the walker",
     "beside the assertions, deliberately. Only the live tuple moved."
   ],
-  "measuredAtSha": "c71782e7f4ea17572cb7aecca3b8314b19fc4bc5",
+  "measuredAtSha": "902580c712998022cf815c067bf004863d54009f",
   "measuredBy": "chair-fable-a9df403c",
   "date": "2026-09-20",
-  "note": "after EM-B1k landed (+1 file, +6 titles, +1 suite) and CURE-E/F/G (CURE-F +1 title); train EM-T3 terminal, second refreeze before run 18",
-  "files": 2651,
+  "note": "after EM-B3c landed (+1 file, +8 titles, +1 suite) and CURE-H (no title moved); train EM-T3 terminal, third refreeze before run 19",
+  "files": 2652,
   "parked": 383,
-  "credited": 2268,
-  "titles": 25035,
-  "suiteTitles": 6678
+  "credited": 2269,
+  "titles": 25043,
+  "suiteTitles": 6679
 }
