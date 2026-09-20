@@ -390,6 +390,20 @@ CURE-A `08cb42e31` (the model walker's mask: findings identical under both forms
 | eslint's `Linter` here is flat-config only (`configType: 'flat'`; the eslintrc form throws) | **CLOSED** — a note in the kit's `tools/chair-scripts-a9df403c/README.md`; the build brief for EM-B1k carries the working snippet |
 | EM-B1k2's compile has no launch file yet | SLOT: **the chair writes `briefs/launch/COMPILE-EM-B1k2.md`** (from §934.60 addendum 2 and B1k's §12.1) and dispatches it into the next free working seat |
 
+## Amendments of 2026-09-20 02:25 EDT — EM-R6 VERSION 3 accepted with nine rulings; twelve items fated; version 3.1 queued; the delegation applied to the standing decision points (ODQ §934.47 addendum 34, §934.62 addendum)
+
+- **EM-R6 version 3 is READY-able** (kit `packets-waiting/EM-R6.*`; version 2 superseded): the four kinds of §934.61 applied and measured over 525 rows; two new pin arms (catalogue-name, normalised-name) with a red control; five paths version 2 had missed, two reader-visible. The nine rulings are in ODQ §934.47 addendum 34; **version 3.1** (a resume of the same lane, `briefs/launch/RESUME-EM-R6-v31.md`) folds in FIX-D5, the `readable` flag on NON_CASCADED rows, and four small measured additions. **The charter's EM-R6 row gains two facts:** the corpus emits 231 of the catalogue's 280 institution names (every 'total over the corpus' is total over 231; both collision scans are empty), and FIX-D5 rides in version 3.1. **TOOL-4's row gains a second customer** (EM-R6 rebuilt the 63-row structured sample inline).
+- **The delegation applied (§934.62 addendum):** decided NO on a repair for already-damaged saves; the golden signatures (FIX-D2, FIX-D3, EM-P1d) stay the owner's; §934.57 is decided by the chair at the composition train's sitting against EM-R0d's ladders.
+
+| item (where it surfaced) | fate |
+|---|---|
+| `compound.inst`'s frozen flags under an editor REMOVAL (`hasCourtSystem` stays true after the courthouse is removed) | SLOT: **EM-R0c's compile** decides from EM-R0a's class of `compound.inst` — a READING is recomputed by the merge; a HELD/CONSTANT stamp owes a declared-falsehood row on **EM-C2**'s guard; the chair's decision point at EM-R0c's placement |
+| the 12-character-prefix processor matcher (`computeActiveChains.js`) — three reader-visible falsehoods; FIX-D3 cures the symptom | SLOT: **FIX-D3's own packet** if the owner signs it, else **EM-P1b**'s class |
+| `resourceChains[].processingInstitutions[]` has no UI reader (3,212 stored values) | SLOT: **the chair's next docs sitting** on the branch — one line in `docs/DEAD_CODE_DISPOSITION.md` |
+| the 318 orphan `"Thieves' Guild"` affiliations (`npcGenerator.js:1337`) | **FIX-D4** (already slotted; measure-first, the next composition train) |
+| A1's failure message for a `catalogId` path crossing the 50 % threshold; the stale 0-of-703 figure on `availableServices.legal[].name`; the aliased frozen stamp declared twice; the 231-of-280 coverage line | SLOT: **EM-R6 version 3.1** |
+| EM-B1c and FIX-D3's deferral (175 stale `Via` values after a rename) | **RULED:** not a gate on EM-B1c; the price is declared by count in A2; FIX-D3's moment is before EM-B1c's promotion |
+
 ## Pre-proof tasks (Opus, read-only, before each packet is READY)
 1. Name every "verified fact" with file:line at the base; 2. fill the change manifest and required symbols; 3. measure the budget (files, lines) and split if over; 4. name the tests the packet's proof shape copies; 5. run the sealed dispatch dry.
 
