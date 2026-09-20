@@ -23,6 +23,7 @@ import { IconsContext } from './components/primitives/IconsContext.js';
 import { MUTED, sans } from './components/theme.js';
 import HouseDevice from './components/brand/HouseDevice.jsx';
 import { useStore } from './store/index.js';
+import useMissedPath from './hooks/useMissedPath.js';
 import {
   createRetryableCampaignLazy,
   createRetryableLazy,
@@ -57,6 +58,11 @@ const AdminPanel       = campaignLazy(() => import('./components/AdminPanel.jsx'
 // machinery (RefusalNotice → ClerkNote → the copy registry) stays off the
 // first-paint closure.
 const StaffOnlyPage    = lazy(() => import('./components/StaffOnlyPage.jsx'));
+// What a visitor meets when the address they asked for is not a page (REVIEW-P F11).
+// Lazy for the same reason StaffOnlyPage is, and it is the same reason twice: the
+// refusal machinery must not ride the eager entry closure to say something almost
+// nobody will be told.
+const NotFoundNotice   = lazy(() => import('./components/NotFoundNotice.jsx'));
 const PricingPage      = lazy(() => import('./components/PricingPage.jsx'));
 const GalleryPage      = campaignLazy(() => import('./components/GalleryPage.jsx'));
 const SingleDossierSuccessPage = lazy(() => import('./components/SingleDossierSuccessPage.jsx'));
@@ -119,8 +125,32 @@ export function Loading() {
  * Suspense + FeatureErrorBoundary, so this returns bare view content.
  */
 export function AppViews({ view, isMobile, setView, setAuthModalOpen, authTier, isElevated, authLoading, params }) {
+  const { missedPath, dismiss } = useMissedPath();
   return (
     <>
+      {/* ⛔ THE FRONT DOOR SAYS WHEN IT HAD NO SUCH PAGE (REVIEW-P F11, ODQ §934.24(c)).
+          An unknown address was rewritten to /create and the router's own `notFound`
+          was discarded, so a dead link was indistinguishable from a link that worked.
+          The line renders ABOVE whatever view absorbed the visitor — never a redirect
+          and never a blank page, the same shape the Realm and the staff route take.
+          Mounted here rather than in App.jsx on a MEASURED budget: App.jsx stands at
+          575 of its 600 effective-line ceiling with no size-baseline row, and this file
+          at 113. The latch itself lives in hooks/useMissedPath.js, which records why
+          the flag cannot simply be rendered.
+          ⛔ LAZY, AND FOR THE REASON RECORDED ON StaffOnlyPage ABOVE: the refusal
+          machinery (RefusalNotice → ClerkNote → the copy registry) must stay off the
+          first-paint closure, and this file is EAGER. The hook is two effects over the
+          route store App already subscribes to, so it costs the closure nothing; the
+          notice itself is fetched only by the visitor who actually mistyped an address.
+          ⚠ NO SUSPENSE OF ITS OWN, and that is the estate's own precedent rather than an
+          omission: RealmPhoneNotice below is the same shape — a lazy refusal leaf in this
+          table — and it leans on the shell's boundary too. A local null fallback would be a
+          NEW SILENT boundary, which tests/lint/loadingNarrationRatchet.test.js pins at
+          exactly 38 across src/ (measured: it reds at 39 — and it counts the literal
+          wherever it appears, including in a sentence like this one, so the spelling here
+          is deliberately prose). The destination view is lazy as
+          well, so the shell is already showing its Loading mark while both chunks land. */}
+      {missedPath && <NotFoundNotice path={missedPath} onDismiss={dismiss} />}
       {view === 'generate'    && <GenerateWizard isMobile={isMobile} onSignIn={() => setAuthModalOpen(true)} onNavigate={setView} />}
       {/* Home is the Welcome landing. A bare root visit ('/') canonicalizes here
           for logged-out visitors (the front-door effect in App); members are sent
