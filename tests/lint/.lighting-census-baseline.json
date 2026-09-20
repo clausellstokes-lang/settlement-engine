@@ -24,13 +24,13 @@
     "The derivation history — every prior row, its cause, and the census laws — stays in the walker",
     "beside the assertions, deliberately. Only the live tuple moved."
   ],
-  "measuredAtSha": "f4c395e2d7d70fdab300f32ba1cdb78f77c7a21c",
+  "measuredAtSha": "7a6f85d207615363219bd003bd315a4113e5efab",
   "measuredBy": "chair-fable-a9df403c",
   "date": "2026-09-20",
-  "note": "after EM-P2 landed (+2 test files: generationForkCensus.test.js, generationForkRegistry.contract.test.js) and FIX-C2 composed (+1: sourceCitationIntegrity.walker.test.js, +12 titles, +2 suites); the fifth refreeze at f4c395e2d before run 21 and EM-B1f sealed build; the third preamble amendment and EM-B1f placed are docs only",
+  "note": "after EM-B1f landed (+4 titles, no new file; the walker's suiteTitles figure measured, not carried); the sixth refreeze at 7a6f85d20 before the composition sitting and run 22",
   "files": 2656,
   "parked": 383,
   "credited": 2273,
-  "titles": 25074,
+  "titles": 25080,
   "suiteTitles": 6684
 }
