@@ -434,6 +434,11 @@ CURE-A `08cb42e31` (the model walker's mask: findings identical under both forms
 - **CURE-E** (the trade-route token scanner re-cut to the found-and-ordered idiom; the second marker-slice instance in `faithPanelModel.test.js` cured with it) lands in the slot between EM-B1k's landing and EM-B3c's dispatch; **run 18** re-runs train EM-T3's terminal on that tip (its log at the scratchpad root, copied into the kit at refresh — never written into the kit while running).
 - **TOOL-7** is now the silent-failure-idiom lint (two arms: `in` against a frozen literal; a marker slice with no ordered-markers assertion), measure-first. **EM-P3b** gains: the canonical trade-route list pinning `GENERATED_ROUTE_VALUES` to the pools (the three-copy collapse), and the two fixture oddities (`landingFixture.js:47`'s `random_trade` sentinel; `sampleDossier.json:15`'s unscoreable `"salt road"`).
 
+## Amendments of 2026-09-20 03:08 EDT — ⭐ EM-B1k LANDED (the seventh landing; the data-loss cure on the branch); the dist measurement green; CURE-F ruled; the terminal's order (ODQ §934.47 addendum 42)
+
+- **EM-B1k LANDED** at `19c4cb853` (flip `63e40fe57`): the tick's settlement descends from the raw save roster; a shelved or hostage NPC is never erased and a sole-member house never dissolved; goldens byte-identical; the chair's build + `verify:dist` at the tip green (538). The fix reaches players only through the paused push chain.
+- **THE SLOT WINDOW BEFORE EM-B3c:** CURE-E (the marker-slice scanner) and **CURE-F** (the `:579` comparand becomes the tick's input roster; the cast goes; a stubbed-clock pin) land as two pathspec commits; then the chair's ONE lighting refreeze in the slot (B1k's `+6` and CURE-F's `+1` titles); then **run 18** — train EM-T3's terminal — bare and detached in the consist, its log at the scratchpad root; EM-B3c builds in the slot during it, its batches paused until it exits.
+
 ## Pre-proof tasks (Opus, read-only, before each packet is READY)
 1. Name every "verified fact" with file:line at the base; 2. fill the change manifest and required symbols; 3. measure the budget (files, lines) and split if over; 4. name the tests the packet's proof shape copies; 5. run the sealed dispatch dry.
 
