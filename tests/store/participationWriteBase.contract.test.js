@@ -30,6 +30,7 @@
  *
  * @enforced-by the EM-B1k acceptance matrix (A1, A2, A4, A8) + CURE-F
  */
+import { readFileSync } from 'node:fs';
 import { describe, it, expect, vi } from 'vitest';
 import { generateSettlementPipeline } from '../../src/generators/generateSettlementPipeline.js';
 import { applyNpcOp } from '../../src/store/settlementPendingEditWriters.js';
@@ -115,6 +116,97 @@ function commitOneTick(settlement, simulationRules, rngSeed, tick = simulateCamp
 /** Ids in roster order, as strings — the shape both persisted homes are compared in. */
 function rosterIds(settlement) {
   return (settlement?.npcs || []).map((npc) => String(npc.id)).sort();
+}
+
+/**
+ * ⛔ A8's STEP POPULATION IS READ FROM ITS PRODUCER, NEVER TRANSCRIBED (CURE-H, 2026-09-20).
+ *
+ * A8 claims something about EVERY step of the settlement_clock chain. CURE-G's rename opted
+ * this suite into tests/lint/contractTestAntiVacuity.walker.test.js, whose Rule 2 refuses
+ * exactly that shape when the population backing it is a local literal — and it is right to.
+ * A hardcoded list of four functions drifts SILENTLY from the stage it claims to mirror: the
+ * day a FIFTH step joins the chain, "every step" quietly means four of five, the new step's
+ * roster write is never measured, and nothing reds. That is the same class EM-B1k itself came
+ * from, one level up.
+ *
+ * SO THE POPULATION IS DERIVED, AND THE ARM DRIVES THE DERIVED LIST. The stage is located by
+ * its own marker — the one tests/domain/pulseStageTopology.test.js already pins as present,
+ * ordered and UNIQUE — and the chain is then walked BY DATA FLOW from the stage's seed
+ * expression: each link is a declaration whose callee is handed the PREVIOUS link's binding.
+ * Following the settlement rather than a list of names is what makes a spliced-in fifth stage
+ * impossible to miss (it must take the previous binding and feed the next) and a step named in
+ * the kernel's prose impossible to count.
+ *
+ * EVERY ANCHOR IS ASSERTED FOUND AND THE TWO-MARKER SPAN ASSERTED ORDERED BEFORE ANY SLICE
+ * (CURE-E's rule, from the lane that watched `String.prototype.slice` return '' in silence for
+ * five landings): a scan that cannot find its target must RED, never scan an empty string.
+ */
+const KERNEL_SOURCE = readFileSync(
+  new URL('../../src/domain/worldPulse/pulseKernel.js', import.meta.url),
+  'utf8',
+);
+/** The stage marker that opens the chain's home, and the prefix that closes the span. */
+const CLOCK_STAGE_MARKER = '// @pulse-stage: settlement_clock';
+const STAGE_MARKER_PREFIX = '// @pulse-stage:';
+/** The expression the stage's chain starts from — the tick's own input settlement. */
+const CLOCK_CHAIN_SEED = 'item.settlement';
+
+/**
+ * Comment-blanked source: quote-aware (so a `//` inside a string cannot open a comment) and
+ * length-preserving. The kernel's settlement_clock commentary NAMES three of the four steps in
+ * prose; without this, a sentence about a step would be derived as a step.
+ * @param {string} src
+ * @returns {string}
+ */
+function commentBlanked(src) {
+  let out = ''; let i = 0; let quote = '';
+  while (i < src.length) {
+    const c = src[i]; const c2 = src[i + 1];
+    if (quote) {
+      if (c === '\\') { out += src.slice(i, i + 2); i += 2; continue; }
+      if (c === quote) quote = '';
+      out += c; i += 1; continue;
+    }
+    if (c === '"' || c === "'" || c === '`') { quote = c; out += c; i += 1; continue; }
+    if (c === '/' && c2 === '/') { while (i < src.length && src[i] !== '\n') { out += ' '; i += 1; } continue; }
+    if (c === '/' && c2 === '*') {
+      while (i < src.length && !(src[i] === '*' && src[i + 1] === '/')) { out += src[i] === '\n' ? '\n' : ' '; i += 1; }
+      out += '  '; i += 2; continue;
+    }
+    out += c; i += 1;
+  }
+  return out;
+}
+
+/** @param {string} s */
+const reEscape = (s) => s.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+
+/**
+ * The ordered callee names of the chain that starts at `seedExpr`. Each step is a declaration
+ * `const <binding> = <callee>(<the previous link>…)`, so the walk follows the settlement and
+ * stops where the chain stops feeding itself. Returns [] when the seed is gone — which the
+ * caller's floor reds, loudly, rather than treating as "no steps to check".
+ * @param {string} span
+ * @param {string} seedExpr
+ * @returns {string[]}
+ */
+function chainFrom(span, seedExpr) {
+  const code = commentBlanked(span);
+  const chain = [];
+  let cursor = reEscape(seedExpr);
+  let at = 0;
+  for (;;) {
+    const link = new RegExp(
+      `(?:const|let|var)\\s+([A-Za-z_$][\\w$]*)\\s*=\\s*([A-Za-z_$][\\w$]*)\\s*\\(\\s*${cursor}\\b`,
+      'g',
+    );
+    link.lastIndex = at;
+    const m = link.exec(code);
+    if (!m) return chain;
+    chain.push(m[2]);
+    at = m.index + m[0].length;
+    cursor = reEscape(m[1]);
+  }
 }
 
 describe('EM-B1k — the tick writes the roster it was given, never the one participation hid', () => {
@@ -242,6 +334,11 @@ describe('EM-B1k — the tick writes the roster it was given, never the one part
     // blockade PRESENT and ABSENT, and three intervals, and asserts the roster comes back as the
     // SAME ARRAY. The day somebody adds a roster write to this stage, this reds and names the
     // line that would silently drop it.
+    //
+    // ⛔ AND "ALL FOUR" IS THE KERNEL'S ANSWER, NOT THIS ARM'S (CURE-H). The chain below is
+    // DERIVED from the stage — see the derivation's own note above `KERNEL_SOURCE` — and the
+    // ordered list this arm drives is asserted EQUAL to it before a single town is ticked, so a
+    // fifth step reds the pin here instead of escaping the claim in silence.
     const stressors = [{ id: 'siege-em-b1k', type: 'siege', severity: 0.8, lifecycleStage: 'active', affectedSettlementIds: [SAVE_ID] }];
     const rows = goldenCorpus();
     const towns = [];
@@ -271,6 +368,108 @@ describe('EM-B1k — the tick writes the roster it was given, never the one part
     let granaryMoves = 0;
     let vaultSummaries = 0;
     let dockImpairments = 0;
+
+    // ── THE DERIVATION ───────────────────────────────────────────────────────────────────
+    // Both anchors FOUND and the span ORDERED before the slice, then the seed asserted present
+    // inside it: four ways for the producer to move, four loud reds, none of them an empty scan.
+    const stageFrom = KERNEL_SOURCE.indexOf(CLOCK_STAGE_MARKER);
+    expect(
+      stageFrom,
+      'pulseKernel.js `// @pulse-stage: settlement_clock` is gone. The chain this arm measures '
+      + 'is located by that marker; re-anchor the derivation on whatever replaced it rather than '
+      + 'typing the step names back in.',
+    ).toBeGreaterThanOrEqual(0);
+    const stageTo = KERNEL_SOURCE.indexOf(STAGE_MARKER_PREFIX, stageFrom + CLOCK_STAGE_MARKER.length);
+    expect(
+      stageTo,
+      'no pulse-stage marker follows settlement_clock any more, so the span would run to the end '
+      + 'of the kernel and the walk would leave the stage without saying so.',
+    ).toBeGreaterThanOrEqual(0);
+    expect(
+      stageFrom,
+      'the settlement_clock marker no longer precedes the stage after it — an inverted span slices '
+      + "to '' in silence, which is the class CURE-E closed.",
+    ).toBeLessThan(stageTo);
+    const clockStage = KERNEL_SOURCE.slice(stageFrom, stageTo);
+    expect(
+      clockStage,
+      `the settlement_clock stage no longer seeds its chain from \`${CLOCK_CHAIN_SEED}\``,
+    ).toContain(CLOCK_CHAIN_SEED);
+
+    // THE DERIVATION IS ITS OWN HARNESS, on fixtures rather than on the live kernel, so both
+    // directions execute on every run: a step that is only TALKED ABOUT is not a step, and a step
+    // SPLICED INTO the chain cannot hide from the population.
+    const chainFixture = [
+      'for (const item of snapshot.settlements) {',
+      '  const a = stepOne(item.settlement, {});',
+      '  // const ghost = stepGhost(a.out, {}); — named in prose, never called',
+      '  /* const ghost2 = stepGhost2(a.out, {}); */',
+      '  const b = stepTwo(a.out, {});',
+      '  const c = stepThree(b.out, {});',
+      '  sink.set(id, c.out);',
+      '}',
+    ].join('\n');
+    expect(
+      chainFrom(chainFixture, CLOCK_CHAIN_SEED),
+      'a step named only in a comment must not be derived as a step — the walk reads code, not prose',
+    ).toEqual(['stepOne', 'stepTwo', 'stepThree']);
+    expect(
+      chainFrom(
+        chainFixture.replace(
+          '  const b = stepTwo(a.out, {});',
+          '  const ghost = stepGhost(a.out, {});\n  const b = stepTwo(ghost.out, {});',
+        ),
+        CLOCK_CHAIN_SEED,
+      ),
+      'a step spliced INTO the chain must appear in the derived population, or a fifth stage '
+      + "escapes this arm's claim silently — the whole reason the population is derived",
+    ).toEqual(['stepOne', 'stepGhost', 'stepTwo', 'stepThree']);
+
+    const clockChain = chainFrom(clockStage, CLOCK_CHAIN_SEED);
+    // A floor, not a budget: it says the walk really found a chain. The equality below carries
+    // the exact count and the order.
+    expect(
+      clockChain.length,
+      'the settlement_clock chain derivation came back with (almost) nothing, so "every step" '
+      + 'would be a claim about an empty list. The stage still exists — the WALK stopped '
+      + 'following it. Re-read the stage and fix the derivation; never pin the names instead.',
+    ).toBeGreaterThanOrEqual(4);
+
+    // ── WHAT THIS ARM DRIVES, IN ORDER ───────────────────────────────────────────────────
+    // Named by the functions themselves (a rename reds at the import first, then here), each
+    // closing over its own liveness counter, each handed the previous step's settlement.
+    const chainSteps = [
+      { fn: advanceTime, run: (settlement, ctx) => {
+        const out = advanceTime(settlement, { interval: ctx.interval, previousTickState: null });
+        if (out.newSettlement !== settlement) settlementIdentityChanges += 1;
+        return out.newSettlement;
+      } },
+      { fn: advanceFoodStockpile, run: (settlement, ctx) => {
+        const out = advanceFoodStockpile(settlement, { interval: ctx.interval, tick: 4, blockade: ctx.blockade, famine: null, deployment: null, seasonal: null });
+        if (out.changed) granaryMoves += 1;
+        return out.settlement;
+      } },
+      { fn: applyBlockadeTransportImpairment, run: (settlement, ctx) => {
+        const out = applyBlockadeTransportImpairment(settlement, ctx.blockade, { now: NOW });
+        if (out !== settlement) dockImpairments += 1;
+        return out;
+      } },
+      { fn: advanceTreasury, run: (settlement, ctx) => {
+        const out = advanceTreasury(settlement, { interval: ctx.interval, tick: 4, deployment: null, blockade: ctx.blockade, rules: { treasuryEnabled: ctx.treasuryEnabled } });
+        if (out.summary) vaultSummaries += 1;
+        return out.settlement;
+      } },
+    ];
+    const driven = chainSteps.map((step) => step.fn.name);
+    expect(
+      driven,
+      'THE SETTLEMENT_CLOCK CHAIN MOVED IN ITS PRODUCER AND THIS ARM DID NOT FOLLOW IT. The stage '
+      + `now runs ${clockChain.join(' -> ')}; this arm drives ${driven.join(' -> ')}. Until the two `
+      + 'agree, the by-reference claim below covers only the steps listed second — and an unmeasured '
+      + "step is exactly where a roster write would be dropped by the seed line. Add the step's own "
+      + 'call shape to the list above (it keeps its own liveness counter) rather than relaxing this.',
+    ).toEqual(clockChain);
+
     for (const { label, town } of towns) {
       rosterRows += town.npcs.length;
       for (const interval of ['one_week', 'one_month', 'one_season']) {
@@ -278,19 +477,14 @@ describe('EM-B1k — the tick writes the roster it was given, never the one part
           for (const besieged of [false, true]) {
             const blockade = besieged ? blockadeFor(stressors, SAVE_ID) : null;
             const where = `${label}/${interval}/treasury:${treasuryEnabled}/siege:${besieged}`;
-            const timed = advanceTime(town, { interval, previousTickState: null });
-            if (timed.newSettlement !== town) settlementIdentityChanges += 1;
-            if (timed.newSettlement.npcs !== town.npcs) broken.push(`advanceTime @ ${where}`);
-            const stocked = advanceFoodStockpile(timed.newSettlement, { interval, tick: 4, blockade, famine: null, deployment: null, seasonal: null });
-            if (stocked.changed) granaryMoves += 1;
-            if (stocked.settlement.npcs !== timed.newSettlement.npcs) broken.push(`advanceFoodStockpile @ ${where}`);
-            const sieged = applyBlockadeTransportImpairment(stocked.settlement, blockade, { now: NOW });
-            if (sieged !== stocked.settlement) dockImpairments += 1;
-            if (sieged.npcs !== stocked.settlement.npcs) broken.push(`applyBlockadeTransportImpairment @ ${where}`);
-            const vaulted = advanceTreasury(sieged, { interval, tick: 4, deployment: null, blockade, rules: { treasuryEnabled } });
-            if (vaulted.summary) vaultSummaries += 1;
-            if (vaulted.settlement.npcs !== sieged.npcs) broken.push(`advanceTreasury @ ${where}`);
-            steps += 4;
+            const ctx = { interval, blockade, treasuryEnabled };
+            let flowing = town;
+            for (const step of chainSteps) {
+              const out = step.run(flowing, ctx);
+              if (out.npcs !== flowing.npcs) broken.push(`${step.fn.name} @ ${where}`);
+              flowing = out;
+              steps += 1;
+            }
           }
         }
       }
