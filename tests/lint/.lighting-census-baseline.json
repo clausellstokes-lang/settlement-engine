@@ -24,13 +24,13 @@
     "The derivation history — every prior row, its cause, and the census laws — stays in the walker",
     "beside the assertions, deliberately. Only the live tuple moved."
   ],
-  "measuredAtSha": "835f81812311788e3e78f60347a3543da9de52f7",
+  "measuredAtSha": "069de409f8da7f126790041852c7bacf0023da67",
   "measuredBy": "chair-fable-4a1823e2",
   "date": "2026-09-20",
-  "note": "after CURE-L (RUN 23 two causes): its first commit 65cbf86e1 adds ONE title in tests/data/sampleSettlements.test.js (guard-the-guard: only a DEFINER is exempt, and a mere mentioner still convicts) and renames one; 85cd9f4a8 (the A4 arm reads the freeze register) and 835f81812 (the e2e CI cap) add none. The ninth refreeze at 835f81812 before run 24",
+  "note": "the tenth refreeze: CURE-M (PR 53 brand derivatives, arms A B C and the pure platform helper) adds 20 titles and 1 suite title in tests/build/brandDerivatives.test.js",
   "files": 2665,
   "parked": 359,
   "credited": 2306,
-  "titles": 25530,
-  "suiteTitles": 6815
+  "titles": 25550,
+  "suiteTitles": 6816
 }
