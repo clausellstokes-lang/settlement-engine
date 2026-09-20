@@ -778,3 +778,8 @@ CURE-A `08cb42e31` (the model walker's mask: findings identical under both forms
 
 - **The second composition's order (after EM-R0a lands):** CURE-K (`3e9a6c261`) → CURE-J's three (`4416e8f9d` `efc4ecf49` `b077f6e79`, in place of the consist's record commit) → FIX-B2 (`5cc0e6c14` `2fa685264` `fd4be7c07`) → FIX-T2 → FIX-D9 (3) → FIX-P1c → TOOL-19 → TOOL-15 (2) → TOOL-22 → TOOL-24 (3) as each lands; then the eighth refreeze and RUN 23 (expected: no red).
 - **Door law (CURE-J):** `recordGolden` refuses a tree dirty beyond the register, the fixture and the record — a `MANIFEST_PROVENANCE` amendment is committed BEFORE the door runs; the door's own throw (EXIT 1, 'golden RE-RECORDED') is the success line.
+
+## Amendments of 2026-09-20 12:43 EDT — the roster of what is left (ODQ §934.47 addendum 100)
+
+- **Landed:** EM-B3a, B3b, P3, P0, B1d, B1e, B3c, B1k, B1k2, P2, B1f (eleven). **Building:** EM-R0a. **Compiled and waiting (place in order as each lands):** EM-R0d → R0b → R0f → R0c; EM-B1h, B1i, B1j (after FIX-T1), A2b, B1a; EM-R6. **To compile:** EM-R1–R5, R7; B1j′, B1j″, B1l; the later waves (EM-B2a, EM-C1, the tick hook, the surfaces).
+- **Fix/tool lanes:** dispatched — FIX-P4b, COMPILE-TOOL-13a, FIX-C2c; staged with briefs — FIX-P9, FIX-P10, FIX-B3, FIX-L3, TOOL-15b, TOOL-16, TOOL-17, TOOL-20, TOOL-21, TOOL-23, TOOL-25 (corrected: extend `controlBytes.test.js`); chartered without briefs — FIX-D6, FIX-W1, FIX-P6/P7/P8, TOOL-6b/10/11/14, FIX-F4/F5/G3, TOOL-7b/7c/8b, REVIEW-P2, DOC-1/2/3.
