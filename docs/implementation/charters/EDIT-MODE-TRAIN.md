@@ -718,3 +718,8 @@ CURE-A `08cb42e31` (the model walker's mask: findings identical under both forms
 - **FIX-P10 (NEW; after FIX-P5 composes; measure-first):** the phone-floor family's leftovers — five prose-shaped 12–13 px lines on lane 28's surfaces (`src/App.jsx:916`, `:946`, …); `phoneChromeFloor`'s stale `/create` and `/settlements` rows re-measured shrink-only; `WizardOutputToolbar`'s sticky offset against the painted header's real height; `dossierPhoneFloorAllViews.test.jsx` extended to `/pricing`.
 - **FIX-P9 gains:** the taste-approved sample's `†` (`PricingSample.jsx`) checked against the shipped registry.
 - **§934.64 sharpened by measurement:** 12 px cannot fit the painted slip at any phone width (misses by 2.11 px at 375); the chair recommends keeping 10 px.
+
+## Amendments of 2026-09-20 09:22 EDT — FIX-T2's rulings; TOOL-20's routing (ODQ §934.47 addendum 90)
+
+- **Two comment strippers, two contracts:** CURE-J's `stripComments` (`tests/helpers/dossierManifest.js`) is DIGEST-grade — identities; FIX-T2's `commentsOnly` (`tests/helpers/codeOnlySource.js`) is COUNTER-grade — offset-preserving counts. TOOL-20 hoists the 51 local copies (27 string-blind) onto the one that matches each caller's contract; never a third.
+- **FIX-T2** lands after FIX-D9 in the gate queue; `significanceMigration.census.test.js` is settled by an unedited run first.
