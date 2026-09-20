@@ -40,14 +40,20 @@
  * assertion would red every time a document legitimately restates an address it
  * already carries, and a gate that reds on correct behaviour gets turned off.
  *
- * ⚠ THE ARCHIVAL EXCLUSION, MEASURED AND LISTED. 30 documents are frozen records
+ * ⚠ THE ARCHIVAL EXCLUSION, MEASURED AND LISTED. 31 documents are frozen records
  * of their day, and re-addressing them to today's tree would FALSIFY a record
  * rather than repair it — `docs/review-r2/VERIFY_SUBSYSTEMS_RESULTS.json` pins a
  * sha and states that all its cited lines matched AT THAT SHA. They carry 377
  * past-EOF citations this gate deliberately does not see. FOUR rules select them,
  * each checkable, and the full roster is committed in the baseline's
  * `archivalExclusionAtFreeze.files`:
- *   tree (16)    docs/review-r2/**, docs/shift-records/**
+ *   tree (17)    docs/review-r2/**, docs/shift-records/**
+ *                (2026-09-20-cure-j-provenance.json joined 2026-09-20, 16 -> 17:
+ *                CURE-J's provenance-only re-record of the prose manifest golden,
+ *                born inside docs/shift-records/ at 0d0598a75. A GROWTH, not a
+ *                class move — no live document left the gated corpus — and it hid
+ *                nothing: the excluded past-EOF count stayed 377 and ARM 2 stayed
+ *                0 on both sides.)
  *   banner (8)   a blockquote status banner naming HISTORICAL in the opening ten
  *                lines — the estate's OWN marker (docs/README.md §"HISTORICAL —
  *                point-in-time audit / plan / status exhaust (not maintained)"):

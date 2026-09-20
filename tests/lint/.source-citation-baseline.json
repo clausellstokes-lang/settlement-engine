@@ -17,12 +17,13 @@
   "archivalExclusionAtFreeze": {
     "_why": "Frozen records of their day. Re-addressing these to today's tree would FALSIFY a record rather than repair it — docs/review-r2/VERIFY_SUBSYSTEMS_RESULTS.json pins a sha and states that all cited lines matched AT THAT SHA. Measured 2026-09-20: these files carry 377 past-EOF citations that this gate deliberately does not see.",
     "_rosterMove2026-09-20": "ONE document changed class, deliberately, and it hid NOTHING: docs/GAME_GRADE_AUDIT.md joined `banner` (7 -> 8; live 483 -> 482, archival 29 -> 30) when FIX-C2b gave it the estate's own HISTORICAL marker. WHY: it is a point-in-time audit whose own blockquote pins `composite-r4 @ 69b7a8d3` / `8033ddbe` plus uncommitted work, it has not been touched since 2026-07-24, and its citations address a town-map surface DELETED at 43c3ac3805 (TE-STRIP-1, 2026-08-29) — the atlas test exactly. THE PROOF THAT IT SILENCES NOTHING: pastEofCitationsExcluded is UNCHANGED at 377 and ARM 2 was already 0 before and after, so the move buys no green. A class move that changed that number would be a silencing and is forbidden by _law.",
+    "_rosterGrowth2026-09-20": "ONE document JOINED the roster by being BORN into it, and it hid NOTHING: docs/shift-records/2026-09-20-cure-j-provenance.json joined `tree` (16 -> 17) when CURE-J's provenance-only re-record of the prose manifest golden landed at 0d0598a75. It is a GROWTH, not a class move — no live document left the gated corpus, because the file entered the tree already inside docs/shift-records/ and the ARCHIVAL_TREES rule classified it on its first commit. WHY IT IS ARCHIVAL: a shift record states what moved in ONE named golden at ONE named sha and is never re-addressed to today's tree, which is the frozen-record contract docs/review-r2/ carries — it is the same class as the nine shift records already on this roster. THE PROOF THAT IT SILENCES NOTHING: pastEofCitationsExcluded is UNCHANGED at 377 (the record carries ZERO past-EOF citations of its own, measured file-by-file) and ARM 2 over live docs is 0 on both sides, so the growth buys no green. Re-measured with the shipped detector at the composition: all 515, live 484, archival 31. Recorded by FIX-P1's lane.",
     "pastEofCitationsExcluded": 377,
     "byRule": {
       "banner": 8,
       "dated": 5,
       "sha-pin": 1,
-      "tree": 16
+      "tree": 17
     },
     "files": {
       "banner": [
@@ -60,6 +61,7 @@
         "docs/shift-records/2026-09-19-parish-church-text.json",
         "docs/shift-records/2026-09-19-preset-lighting-witness.json",
         "docs/shift-records/2026-09-19-religious-quarter-text.json",
+        "docs/shift-records/2026-09-20-cure-j-provenance.json",
         "docs/shift-records/README.md",
         "docs/shift-records/_TEMPLATE.json"
       ]
