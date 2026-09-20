@@ -24,13 +24,13 @@
     "The derivation history — every prior row, its cause, and the census laws — stays in the walker",
     "beside the assertions, deliberately. Only the live tuple moved."
   ],
-  "measuredAtSha": "da5310f302d447e5f7a6b7e65e47dd4a9acccf02",
+  "measuredAtSha": "835f81812311788e3e78f60347a3543da9de52f7",
   "measuredBy": "chair-fable-4a1823e2",
   "date": "2026-09-20",
-  "note": "after the second composition sitting and the successor chair picks (EM-R0a landing and flip; CURE-K; CURE-J x3; FIX-B2 x3; FIX-T2 x2; FIX-P1c; DOC-4; FIX-D9 x3 + FIX-B2b; TOOL-19 x2; FIX-C2c x3; TOOL-25; FIX-P1d; the CURE-J archival-roster line). Declared deltas: EM-R0a files +1 credited +1 titles +7 suites +1; CURE-J titles +2; FIX-T2 titles +4 suites +1; FIX-C2c titles +3; TOOL-19 titles +1; TOOL-25 titles +5; FIX-D9 titles +3 (files net 0); FIX-P1c titles +2. The eighth refreeze at da5310f30 before run 23",
+  "note": "after CURE-L (RUN 23 two causes): its first commit 65cbf86e1 adds ONE title in tests/data/sampleSettlements.test.js (guard-the-guard: only a DEFINER is exempt, and a mere mentioner still convicts) and renames one; 85cd9f4a8 (the A4 arm reads the freeze register) and 835f81812 (the e2e CI cap) add none. The ninth refreeze at 835f81812 before run 24",
   "files": 2665,
   "parked": 359,
   "credited": 2306,
-  "titles": 25529,
+  "titles": 25530,
   "suiteTitles": 6815
 }
