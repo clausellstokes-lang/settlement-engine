@@ -748,3 +748,9 @@ CURE-A `08cb42e31` (the model walker's mask: findings identical under both forms
 - **TE-26 amended by measurement:** a symbol row's figure is a TRAP where the row asserts PRESENCE and LOAD-BEARING where a terminal `retiredSymbols` row asserts ABSENCE; presence rows are re-spelled figure-free, terminal retirees keep their figures, and `packetSymbolFigureCensus.walker` admits them by shape.
 - **TOOL-15b (NEW; after TOOL-15 composes):** the figure-in-a-symbol predicate beside HK-3/HK-5 in `scripts/implementation-packets.mjs` (the gate and the pre-commit hook), and `tests/scripts/implementationPackets.test.js`'s census arms brought under the guard-of-guards.
 - **The composition law (the FIX-C2 idiom, generalised):** the chair composes only what cherry-picks clean, proving file-set and blob equality; a conflicting commit is composed by the lane that owns it, in the slot, for that one step, keeping both hunks and re-proving both lanes' pins.
+
+## Amendments of 2026-09-20 11:58 EDT — the first composition sitting composed (ODQ §934.47 addendum 95)
+
+- **Composed at `d279d13eb`:** FIX-L1, FIX-P3, FIX-P4, FIX-P5, FIX-P1, FIX-P1b, FIX-C2b, TOOL-13b (21 commits). The seventh refreeze, COMPOSE-REPROOF-1 and RUN 22 follow at that tip; the chair's build + `verify:dist` run separately after run 22 (the `&&` chain stops at the ratchet on the owner-gated provenance red).
+- **TOOL-25 gains an arm:** `git diff --numstat` must never report `-` for a tracked source file (FIX-P1b's commit message needed a NUL stripped too).
+- **A dispatch note for `src/components/generate/FoundingWorlds.jsx`:** its `generate(seed, {...})` call now carries FIX-P3's options bag and FIX-P1's seed argument; a third lane at that line conflicts with both.
