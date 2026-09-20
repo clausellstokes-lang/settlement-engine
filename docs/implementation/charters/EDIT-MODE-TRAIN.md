@@ -764,3 +764,12 @@ CURE-A `08cb42e31` (the model walker's mask: findings identical under both forms
 
 - **EM-R0a is READY at `2dc08a595` (placed `680eacb8d`) and building under seal;** EM-R0d (conditional on FIX-C2, now composed) is placed at R0a's flip; EM-R0b v4 after R0a and R0d land; EM-R0f after R0b; EM-R0c after R0f and R0b.
 - **Compile law:** a compiled manifest writes `retiredSymbols: []`, never `null` or a word — the validator refuses a non-array when the key is present; the placement script normalises an empty marker and refuses anything else.
+
+## Amendments of 2026-09-20 12:28 EDT — the owner's standing signature grant; CURE-K; the second composition's order (ODQ §934.47 addendum 98)
+
+- **The owner's standing signature grant (12:2x) executes every open signature point:** §934.71 through the door (CURE-J's lane); §934.70 through FIX-D9 (retire `foldTradeCategories.js`; the trio dark); §934.72 + §934.66 through FIX-P1c; §934.68's two raises ratified (FIX-B3 records it in the header); §934.64, §934.65, §934.69 closed as recommended. The push chain is not a signature and stays the owner's explicit word.
+- **CURE-K:** the edge-shared bundles regenerated at the composed tip (FIX-P5's F14 changed an input); LANE-PARALLEL gains the input law; composed after EM-R0a lands.
+- **TOOL-17's brief re-cut:** the ratchet freezes the importers that reach an engine member by a STATIC EDGE; Rollup grouping artifacts (`generateWorldBook`) are admitted by name, never counted.
+- **TOOL-20 gains:** `negativeAssertionAnchor.walker`'s matcher counter routed to `commentsOnly` (a comment naming a matcher must not convict).
+- **FIX-P4b gains:** rewrite `embeddedMapConsoleGate.walker.test.js`'s `test.each(MUTED_CHANNELS)` as a literal table or body loop so the file is credited (`eachOnly` 111 → 110; `literalTableStillParked` 50/50 watched).
+- **The second composition's order (after EM-R0a lands):** CURE-K → the shift record → CURE-J commit 2 → FIX-B2 (3) → FIX-T2 → FIX-D9 (3) → TOOL-19 → TOOL-15 (2) → TOOL-22 → TOOL-24 (3); then the eighth refreeze and RUN 23.
