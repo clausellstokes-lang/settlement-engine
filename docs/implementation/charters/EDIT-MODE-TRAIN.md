@@ -806,3 +806,9 @@ CURE-A `08cb42e31` (the model walker's mask: findings identical under both forms
 - **FIX-P4c (NEW; after FIX-P4b composes):** the two fork-owned files with one unguarded console call each (`public/map/modules/ui/layers.js`, `notes-editor.js`) under the widened F15 walker.
 - **DOC-4 (NEW; the chair's, at a docs sitting):** `docs/implementation/packets/settlement-editor/EM-P2.md:333`'s raw NUL byte in a fenced listing replaced by the `String.fromCharCode(0)` spelling with a note.
 - **TOOL-25 (re-cut):** extend `controlBytes.test.js` (NUL-only tree-wide over `git ls-files`, `.gitattributes` first; the whole-C0 predicate stays on `src`/`tests`); convert the two script/src carriers; `*.glb binary` declared.
+
+## Amendments of 2026-09-20 13:19 EDT — EM-R0a LANDED; the second composition's first nine; R0d v4 READY-ABLE (ODQ §934.47 addendum 105)
+
+- **EM-R0a is LANDED at `26f22d394`** (flipped `d8bf52f82`). EM-R0d v4 is READY-ABLE at `578272a99` and is placed at this sitting after FIX-P1c composes (under the fourth preamble amendment); then R0b, R0f, R0c per the family order; the three sibling packets re-measure their inherited effective-line tables at their pre-proofs (R0a's 164 predicted vs 139 measured).
+- **Composed at `85c27f95d`:** CURE-K, the signed shift record, CURE-J's amendment and re-record, FIX-B2 (3), FIX-T2 (2). Next in the slot: FIX-P1c (by its lane), DOC-4, R0d v4's placement, FIX-D9 (3), TOOL-19; then the eighth refreeze and RUN 23.
+- **A memory and brief line:** a backslash-u-0000 escape passed through a JSON-encoded tool parameter becomes the raw byte — the NUL class recurs through tooling; composite keys are `JSON.stringify(key.map(...))`; the spelling in any tool-written text is the words, never the escape.
