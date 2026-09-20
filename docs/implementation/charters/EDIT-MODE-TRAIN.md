@@ -836,3 +836,7 @@ CURE-A `08cb42e31` (the model walker's mask: findings identical under both forms
 ## Amendment of 2026-09-20 14:06 EDT — the owner's word at the pause (ODQ §934.47 addendum 110)
 
 - "For the transfer state that I also go with all your recommendations, including the ones owed to me they require my sign off up to you" — every recommendation approved; the push chain, migrations 201–203, the redeploy and §934.75 are the chair's to execute in that order after RUN 23 is fully green, never with a packet READY. Nothing is owed to the owner.
+
+## Amendment of 2026-09-20 14:36 EDT — the successor chair seated (ODQ §934.47 addendum 112)
+
+- The owner restated the seat law and the lane law at the seating: FOUR lanes live, ONE gated lane or chair terminal at a time (the two-lane shared-tier overlap is CLOSED), pause-and-resume at every gate. The six chair picks composed (slot tip `20d460375`); FIX-P1 holds the slot and the gate for its cure, the archival-roster line and the composed-tip proofs; RUN 23 follows the eighth refreeze and does not wait for FIX-P9 or FIX-P10. The push chain waits for the owner's word in this session.
