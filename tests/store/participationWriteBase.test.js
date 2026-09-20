@@ -16,14 +16,21 @@
  * settlement-level work. The update's roster is therefore the raw roster FROM BIRTH, so there
  * is exactly one roster again and every mover's write lands on it.
  *
+ * CURE-F NARROWED THE SEED'S CONDITION (2026-09-20) without weakening it. The landed line asked
+ * whether the CLOCK CHAIN'S OUTPUT roster differed from the save's; it now asks whether the
+ * TICK'S INPUT roster did. The two agree on every tree A8 can measure — no clock step writes
+ * `npcs` — but they part the moment one does: the old question read a legitimate clock roster
+ * write as evidence of filtering and discarded it for EVERY settlement, the new one discards
+ * nothing that participation did not hide. The off-stage guarantee above is untouched.
+ *
  * ⛔ THE SEAM IS THE SUBJECT, NEVER A RE-IMPLEMENTATION OF IT. Every arm below drives the
  * SHIPPED entry points — `applyNpcOp` (the Availability control's own writer),
  * `simulateCampaignWorldPulse`, and the real `applyWorldPulseResultToState` — and reads the
  * roster the save WOULD HOLD, in both homes the store writes.
  *
- * @enforced-by the EM-B1k acceptance matrix (A1, A2, A4, A8)
+ * @enforced-by the EM-B1k acceptance matrix (A1, A2, A4, A8) + CURE-F
  */
-import { describe, it, expect } from 'vitest';
+import { describe, it, expect, vi } from 'vitest';
 import { generateSettlementPipeline } from '../../src/generators/generateSettlementPipeline.js';
 import { applyNpcOp } from '../../src/store/settlementPendingEditWriters.js';
 import { simulateCampaignWorldPulse } from '../../src/domain/worldPulse/pulseKernel.js';
@@ -49,8 +56,9 @@ const TOWN_CONFIG = {
 };
 /** The overwrite this suite exists to keep honest, named once so every failure points at it. */
 const OVERWRITE_SITE = 'src/domain/worldPulse/pulseKernel.js — the localSettlements seed in the'
-  + ' settlement_clock stage, which replaces the roster the clock chain hands it with the raw'
-  + ' save roster';
+  + ' settlement_clock stage, which restores the raw save roster over the roster the clock chain'
+  + " hands it WHENEVER PARTICIPATION FILTERED THE TICK'S INPUT (CURE-F: the comparand is"
+  + " `item.settlement`, the tick's own input, not `vaulted.settlement`, the clock's output)";
 
 /** A real generated town, pinned by seed. @param {string} seed */
 function generatedTown(seed) {
@@ -68,8 +76,12 @@ function shelveThroughTheDmWriter(settlement, targetId, reason) {
   });
 }
 
-/** One tick through the SHIPPED entry, then the REAL store commit. */
-function commitOneTick(settlement, simulationRules, rngSeed) {
+/**
+ * One tick through the SHIPPED entry, then the REAL store commit.
+ * `tick` is the pulse entry point, defaulted to the shipped one; CURE-F's arm passes a
+ * freshly-imported kernel whose treasury step is stubbed, so no other arm's module graph moves.
+ */
+function commitOneTick(settlement, simulationRules, rngSeed, tick = simulateCampaignWorldPulse) {
   const save = {
     id: SAVE_ID,
     name: settlement.name,
@@ -85,7 +97,7 @@ function commitOneTick(settlement, simulationRules, rngSeed) {
     regionalGraph: ensureRegionalGraph({ edges: [], channels: [] }),
     wizardNews: { currentTick: 4, entries: [] },
   };
-  const result = simulateCampaignWorldPulse({
+  const result = tick({
     campaign, saves: [save], interval: 'one_month', commit: true, now: NOW,
   });
   return { save, campaign, result, commit: () => {
@@ -220,8 +232,11 @@ describe('EM-B1k — the tick writes the roster it was given, never the one part
   });
 
   it('A8 — the settlement_clock chain returns the roster BY REFERENCE at every step, over corpus towns', () => {
-    // ⛔ THE PREMISE OF THE OVERWRITE. The seed line replaces the roster the clock chain hands
-    // it with the save's, which is right ONLY because that chain never writes `npcs`. This drives
+    // ⛔ THE PREMISE OF THE OVERWRITE. When participation filtered the tick's input, the seed
+    // line restores the save's roster over the one the clock chain hands it — which is right ONLY
+    // because that chain never writes `npcs`. (Since CURE-F a clock roster write DOES survive a
+    // tick with nobody off-stage, so the premise now binds the off-stage case alone; it is no
+    // weaker there, and the arm below is what keeps it true.) This drives
     // all four exported clock functions IN THE KERNEL'S OWN ORDER — advanceTime, then the
     // granary, then the blockaded dock, then the vault — with the treasury DARK and LIT, a
     // blockade PRESENT and ABSENT, and three intervals, and asserts the roster comes back as the
@@ -290,9 +305,94 @@ describe('EM-B1k — the tick writes the roster it was given, never the one part
     expect(
       [...new Set(broken)],
       'A SETTLEMENT_CLOCK STEP NOW WRITES `npcs`. That breaks the premise of'
-      + ` ${OVERWRITE_SITE}: the seed keeps the RAW save roster, so a roster written by this`
-      + ' stage would be silently discarded for EVERY settlement, every tick. Cure the seed'
-      + ' line to merge that write — do not relax this assertion.',
+      + ` ${OVERWRITE_SITE}: for a settlement carrying an off-stage person the seed restores the`
+      + ' RAW save roster, so a roster written by this stage would be silently discarded for'
+      + ' exactly those settlements — the ones whose rosters are already the fragile case. (Since'
+      + " CURE-F the write survives when nobody is off-stage, so this is no longer EVERY"
+      + ' settlement every tick; it is still a silent loss where it bites.) Cure the seed line to'
+      + ' MERGE that write — do not relax this assertion.',
     ).toEqual([]);
+  });
+
+  it('CURE-F — a clock-stage roster write survives a dormant tick, and an off-stage person is still restored', async () => {
+    // ⛔ THE COMPARAND IS THE TICK'S INPUT ROSTER, NOT THE CLOCK'S OUTPUT. EM-B1k's seed line
+    // asked `item.save.settlement.npcs !== vaulted.settlement.npcs` — a question about the
+    // CLOCK CHAIN'S OUTPUT. A8 measures that no clock step writes `npcs` today, so the two were
+    // indistinguishable and the cure was correct as landed. But the moment a step DOES write a
+    // roster, that comparand reads its new array as "participation filtered this" and restores
+    // the raw save roster over it, dropping the write for EVERY settlement — including the
+    // dormant ones the filter never touched. CURE-F asks `item.save.settlement.npcs !==
+    // item.settlement.npcs` instead: a question about what the tick was HANDED. With nobody
+    // off-stage `item.settlement` IS `saveSettlement(item.save)` by reference
+    // (worldSnapshot.js:131, the `else` branch), so the condition is false and the clock's
+    // settlement passes through whole; with somebody off-stage the filtered copy's `npcs` is a
+    // NEW array, the condition is true, and the raw roster is restored exactly as before.
+    //
+    // ⚠ A STUB, AND IT IS NAMED AS ONE. No shipped clock step writes `npcs` (that is A8's
+    // measurement), so the only way to drive this branch is to make one. The smallest lawful
+    // stub is the real treasury module with its ONE clock writer replaced, applied through
+    // `vi.doMock` + a fresh kernel import so that no other arm's module graph moves — A8 drives
+    // the REAL `advanceTreasury` and must keep doing so.
+    let clockRosterWrites = 0;
+    const CLOCK_HIRE = createNpc({ name: 'Wystan the Clerk', role: 'factor', importance: 'minor', _idSeed: 'cure-f-clock' });
+    vi.resetModules();
+    vi.doMock('../../src/domain/worldPulse/treasury.js', async (importOriginal) => ({
+      .../** @type {Record<string, unknown>} */ (await importOriginal()),
+      advanceTreasury: (/** @type {any} */ settlement) => {
+        clockRosterWrites += 1;
+        return { settlement: { ...settlement, npcs: [...(settlement?.npcs || []), CLOCK_HIRE] }, summary: null };
+      },
+    }));
+    const { simulateCampaignWorldPulse: tickWithRosterWritingClock } = await import('../../src/domain/worldPulse/pulseKernel.js');
+
+    // HALF ONE — NOBODY OFF-STAGE. The clock's hire must reach both persisted homes.
+    const dormant = generatedTown('cure-f-dormant');
+    const dormantRoster = rosterIds(dormant);
+    expect((dormant.npcs || []).some((npc) => isOffStage(npc)), 'half one requires a town with NOBODY off-stage').toBe(false);
+    const withHire = [...dormantRoster, String(CLOCK_HIRE.id)].sort();
+    expect(withHire.length, 'the hire must really be a new roster member').toBe(dormantRoster.length + 1);
+    const dormantTick = commitOneTick(dormant, {}, 'cure-f-dormant-world', tickWithRosterWritingClock);
+    const dormantCommit = dormantTick.commit();
+    // Liveness: a claim about a stubbed step is worth nothing if the step never ran.
+    expect(clockRosterWrites, 'the stubbed clock step must really have run').toBeGreaterThan(0);
+    expect(
+      rosterIds(dormantCommit.persistUpdates[0].settlement),
+      'THE CLOCK STAGE\'S ROSTER WRITE WAS DROPPED ON A TICK WITH NOBODY OFF-STAGE. '
+      + `${OVERWRITE_SITE}. The comparand read the clock's OUTPUT array as evidence that`
+      + " participation had filtered the input, and restored the raw roster over a write nothing"
+      + ' had hidden.',
+    ).toEqual(withHire);
+    expect(
+      rosterIds(dormantCommit.state.savedSettlements[0].settlement),
+      'the store save must carry the clock write too — the two homes may never disagree',
+    ).toEqual(withHire);
+
+    // HALF TWO — ONE PERSON SHELVED. Raw wins, exactly as EM-B1k landed it: the off-stage
+    // person is restored and the clock's hire is dropped with the rest of the filtered copy.
+    // Green before CURE-F and after it — this half is the control that the cure narrowed the
+    // condition without weakening it.
+    const shelvedTown = generatedTown('cure-f-offstage');
+    const shelvedRoster = rosterIds(shelvedTown);
+    const hidden = shelvedTown.npcs[0];
+    shelveThroughTheDmWriter(shelvedTown, hidden.id, 'sequestered');
+    expect(
+      isOffStage(shelvedTown.npcs.find((npc) => String(npc.id) === String(hidden.id))),
+      'half two requires somebody genuinely off-stage, or it is half one wearing a second seed',
+    ).toBe(true);
+    const shelvedTick = commitOneTick(shelvedTown, {}, 'cure-f-offstage-world', tickWithRosterWritingClock);
+    const shelvedCommit = shelvedTick.commit();
+    const shelvedPersisted = rosterIds(shelvedCommit.persistUpdates[0].settlement);
+    expect(
+      shelvedPersisted,
+      `THE RAW ROSTER MUST STILL WIN WHEN PARTICIPATION FILTERED THE INPUT. ${OVERWRITE_SITE}.`
+      + " EM-B1k's guarantee is unchanged by CURE-F: the off-stage person comes back, and the"
+      + ' clock write is discarded with the filtered copy it rode in on.',
+    ).toEqual(shelvedRoster);
+    expect(
+      shelvedPersisted.includes(String(hidden.id)),
+      'the shelved person must be restored from the raw save — this is the data-loss defect EM-B1k cured',
+    ).toBe(true);
+    // anchored: the roster equality one assertion above proves the list is populated and is the raw roster, so this absence is the filtered copy losing its rider rather than an empty scan
+    expect(shelvedPersisted.includes(String(CLOCK_HIRE.id)), 'the clock hire rode the filtered copy and goes with it').toBe(false);
   });
 });
