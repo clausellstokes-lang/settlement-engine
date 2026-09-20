@@ -12,6 +12,7 @@
  */
 import { describe, it, expect } from 'vitest';
 import { execFileSync } from 'node:child_process';
+import { readFileSync } from 'node:fs';
 import { buildWorldSnapshot } from '../../src/domain/worldPulse/worldSnapshot.js';
 import { eligibleMembersOf, ladderFactionKey } from '../../src/domain/worldPulse/npcLadderState.js';
 import { npcId } from '../../src/domain/worldPulse/npcAgency.js';
@@ -60,6 +61,48 @@ describe('participation chokepoint — the master gate (buildWorldSnapshot, §8)
     const plain = { id: 'p', name: 'P', phase: 'canon', settlement: { name: 'P', npcs: [{ id: 'a', importance: 'notable' }] }, campaignState: { phase: 'canon', eventLog: [], locks: {} } };
     const snap = buildWorldSnapshot({ campaign: { ...campaign, settlementIds: ['p'] }, saves: [plain], worldState: campaign.worldState });
     expect(snap.byId.get('p').settlement, 'no allocation when nobody is off-stage').toBe(plain.settlement);
+  });
+
+  it('EM-B1f A4 — a JAILED NPC is off-stage for participation while the SAVE still holds them by id', () => {
+    const roster = [
+      { id: 'free', name: 'Alia', importance: 'notable', status: 'active' },
+      { id: 'held', name: 'Bram', importance: 'notable', status: 'jailed' },
+    ];
+    const jailedSave = { id: 'j', name: 'J', phase: 'canon', settlement: { name: 'J', npcs: roster }, campaignState: { phase: 'canon', eventLog: [], locks: {} } };
+    const snap = buildWorldSnapshot({ campaign: { ...campaign, settlementIds: ['j'] }, saves: [jailedSave], worldState: campaign.worldState });
+    expect(
+      (snap.byId.get('j').settlement.npcs || []).map((n) => String(n.id)),
+      'the participation view keeps the active member and drops the jailed one — a jailed holder cannot keep a seat (design §15)',
+    ).toEqual(['free']);
+    expect(
+      jailedSave.settlement.npcs.map((n) => String(n.id)).sort(),
+      'ABSENCE FROM PARTICIPATION IS NOT ABSENCE FROM THE RECORD: the save still holds the jailed person, so the dossier still shows them as jailed',
+    ).toEqual(['free', 'held']);
+  });
+
+  it('EM-B1f A7 — the union walker carries the chokepoint as its ninth row, spelled `derived`, with the machinery that makes the kind real', () => {
+    const here = (rel) => readFileSync(new URL(rel, import.meta.url), 'utf8');
+    const chokepoint = here('../../src/domain/roads/state.js');
+    const walker = here('../lint/statusUnionTotality.walker.test.js');
+    // LIVENESS FIRST: the arm is what puts state.js in the walker's FLAGGED set (it spells a
+    // trigger word to SUBTRACT it), which is what makes the ninth row load-bearing instead of
+    // decorative. Deleting the row reds A3's set-equality BY NAME — executed at the build.
+    expect(
+      chokepoint,
+      'the chokepoint must DERIVE its arm from the availability vocabulary (FORM B), never spell the union a third time',
+    ).toContain("NPC_UNAVAILABLE_STATUSES.filter((s) => s !== 'dead')");
+    expect(
+      walker,
+      'without `derived` among the flaggable spellings the ninth row drops out of DECLARED_FLAGGABLE and A3 convicts the honest consumer',
+    ).toContain("FLAGGABLE_SPELLINGS = Object.freeze(['literals', 'derived'])");
+    expect(
+      walker,
+      'the ninth roster row IS the participation chokepoint, appended at the end so A3\'s probes keep their aim',
+    ).toContain("{ file: 'src/domain/roads/state.js', symbol: 'isOffStage', spelling: 'derived', enumerator: false, omits: ALL_BUT_DEAD,");
+    expect(
+      walker,
+      'the `derived` kind must be REAL WORK: a row that stops reading the vocabulary it claims to derive from is convicted by name',
+    ).toContain('declared DERIVED but does not read ${AVAILABILITY_VOCABULARY}');
   });
 
   it('EM-B1k A3 — a house whose SOLE member is shelved survives the tick: crewed, seated, no dissolution beat', () => {
@@ -393,6 +436,28 @@ describe('participation chokepoint — the .npcs-reader inventory ratchet (§8 c
     // stay atomic. Dormant by default (npcConsequencesEnabled is declared false in the
     // full_simulation spread and lit in no preset), and nothing calls it from the pulse yet.
     'src/domain/worldPulse/npcVerdictApply.js',
+    // ⭐ EM-B1f — PERMANENT ROSTER WRITER 2's DIRECT CALLER, and the row that closes the gap
+    // EM-B1k2 left. `successorNpc.js`'s row below is ABOUT `replaceOustedNpcs` and names this
+    // file as the binder of its base — yet this file itself sat in the quarantine with no
+    // disposition at all. ⛔ NOT via-snapshot, and RAW BY ITS CALLER.
+    // `applyOrganicNpcVerdicts` reads `.npcs` once (:109) off `verdictSettlement`, bound at
+    // :100 from the `settlement` parameter, and pulseKernel.js `const verdicts = applyOrganicNpcVerdicts({`
+    // hands it `s` — the tick's settlement, made RAW by EM-B1k at :184/:579. (The seam is cited
+    // by CONTENT, never by line: tests/lint/pulseKernelLineAddress.walker.test.js freezes
+    // hand-keyed kernel addresses at zero and proves this backticked token still exists.) Its
+    // second roster use is `replacementSource` (:99), handed to `replaceOustedNpcs` (:133): the
+    // same raw object, which is why writer 2's contract holds.
+    // PARTICIPATION-INDEPENDENT AND REQUIRED TO BE, for the npcVerdictApply / stripNpcInfluence
+    // reason: an ouster verdict is a MUTATION read, and it lands on a person whether or not they
+    // were on stage this tick — read through the participation view a shelved or jailed figure
+    // could not be sentenced at all, and `replaceOustedNpcs`, which RETURNS A WHOLE ROSTER,
+    // would drop everyone the filter removed.
+    // ⚠ And one honest residual, recorded rather than hidden: `npcId` (npcAgency.js:194) falls
+    // back to a positional `npc_<index>` for a record carrying no id, name or label, so on a
+    // FILTERED base such a record could be misaddressed. EM-B1k2's A6 measured 0 of 5,171 corpus
+    // NPCs without a display name, so the fallback is unreachable today and the raw base keeps
+    // it that way.
+    'src/domain/worldPulse/npcVerdictPulse.js',
     'src/domain/worldPulse/partyImpact.js',
     'src/domain/worldPulse/pulseKernel.js',
     'src/domain/worldPulse/religionLegitimacy.js',
@@ -446,10 +511,10 @@ describe('participation chokepoint — the .npcs-reader inventory ratchet (§8 c
    * These are NOT dispositions and they must never be moved into EXPECTED without a
    * written §8 disposition: every entry in EXPECTED above carries (or inherits) a
    * judgement about whether the reader is via-snapshot, a deliberate raw read, or a
-   * belt that had to be widened. Nobody has made that judgement about these seven.
+   * belt that had to be widened. Nobody has made that judgement about these six.
    * They are `.npcs` readers that landed in worldPulse WITHOUT being dispositioned at
    * all, and they are named here so this ratchet can tell the debt it already knows
-   * about from an EIGHTH new reader.
+   * about from a SEVENTH new reader.
    *
    * WHY THEY ARE HERE RATHER THAN IN THE TEST CENSUS. Until 2026-08-07 the row
    * `tests/domain/roadsParticipation.test.js :: … the set of participation .npcs readers
@@ -479,7 +544,6 @@ describe('participation chokepoint — the .npcs-reader inventory ratchet (§8 c
    */
   const UNDISPOSITIONED_NPCS_READERS = Object.freeze([
     'src/domain/worldPulse/envoyCasting.js',
-    'src/domain/worldPulse/npcVerdictPulse.js',
     'src/domain/worldPulse/oathHolder.js',
     'src/domain/worldPulse/sovereigntyNews.js',
     'src/domain/worldPulse/warDeployment.js',
@@ -490,7 +554,9 @@ describe('participation chokepoint — the .npcs-reader inventory ratchet (§8 c
   // A LITERAL, not a figure read out of the list it is supposed to cap — a ceiling
   // derived from its own array proves list == list and rises silently with every entry.
   // MONOTONE DOWN from here. You may burn it; you may never pad it.
-  const UNDISPOSITIONED_CEILING = 7;
+  // ⭐ BURNED 7 → 6 by EM-B1f, which banked `npcVerdictPulse.js` into EXPECTED above with a
+  // written disposition (ODQ §934.47 addendum 61 item 5). Six rows remain, all still unjudged.
+  const UNDISPOSITIONED_CEILING = 6;
 
   /**
    * The live scan this whole block is about.

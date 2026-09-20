@@ -17,10 +17,15 @@ import fc from 'fast-check';
 import { createNpc, killNpc, inferImportance, importanceWeight } from '../../src/domain/entities/npcs.js';
 
 const importance = fc.constantFrom('minor', 'notable', 'key', 'pillar');
+// EM-B1f: createNpc FORWARDS a caller's status (`status: (input.status || 'active')`), so an
+// arbitrary that never draws one leaves the shape arm below pinning a constant. The draw is the
+// whole SEVEN-member NpcStatus union, `jailed` and `removed` included.
+const status = fc.constantFrom('active', 'dead', 'exiled', 'jailed', 'missing', 'removed', 'retired');
 const npcInput = fc.record({
   name:                 fc.string({ minLength: 1, maxLength: 20 }),
   role:                 fc.string({ maxLength: 20 }),
   importance,
+  status,
   linkedInstitutionIds: fc.array(fc.string({ minLength: 1, maxLength: 12 }), { maxLength: 4 }),
   linkedFactionIds:     fc.array(fc.string({ minLength: 1, maxLength: 12 }), { maxLength: 4 }),
 }, { requiredKeys: ['name'] });
@@ -37,7 +42,7 @@ describe('npcs (property-based)', () => {
       expect(typeof npc.name).toBe('string');
       expect(typeof npc.role).toBe('string');
       expect(['minor', 'notable', 'key', 'pillar']).toContain(npc.importance);
-      expect(['active', 'dead', 'missing', 'exiled', 'retired']).toContain(npc.status);
+      expect(['active', 'dead', 'exiled', 'jailed', 'missing', 'removed', 'retired']).toContain(npc.status);
       expect(Array.isArray(npc.linkedInstitutionIds)).toBe(true);
       expect(Array.isArray(npc.linkedFactionIds)).toBe(true);
       expect(Array.isArray(npc.serviceContribution)).toBe(true);

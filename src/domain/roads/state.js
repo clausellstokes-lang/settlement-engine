@@ -33,7 +33,7 @@
  */
 import { isInStasis } from '../npc/npcOps.js';
 import { detPow } from '../../kernel/detPow.js';
-import { importanceWeight } from '../entities/npcs.js';
+import { NPC_UNAVAILABLE_STATUSES, importanceWeight } from '../entities/npcs.js';
 import { PROSPERITY_TIERS, prosperityRank } from '../../data/constants.js';
 import { clamp01 } from '../../kernel/math.js';
 import { provenanceLedgerActive } from '../worldPulse/provenanceKernel.js';
@@ -145,6 +145,15 @@ export function roadsActive(worldState) {
 
 // ── §8 THE ONE PARTICIPATION CHOKEPOINT ────────────────────────────────────────
 /**
+ * The statuses that put a person OFF-STAGE, DERIVED from the availability vocabulary so this
+ * file never spells the union a third time (entities/npcs.js owns it; EM-B1d v5's law).
+ * `dead` is subtracted because the three seat/ladder consumers pair `=== 'dead'` themselves.
+ */
+export const OFF_STAGE_STATUSES = Object.freeze(
+  NPC_UNAVAILABLE_STATUSES.filter((s) => s !== 'dead'),
+);
+
+/**
  * Is this NPC OFF-STAGE — excluded from every participation read? Built ON the existing
  * stasis predicate (npcOps.js:151): a DM-shelved NPC (isInStasis) OR a roads hostage
  * (whereabouts.state === 'hostage'). TRAVELERS (outbound/visiting/returning) are NEVER
@@ -156,7 +165,12 @@ export function roadsActive(worldState) {
  */
 export function isOffStage(npc) {
   if (isInStasis(/** @type {Parameters<typeof isInStasis>[0]} */ (npc))) return true;
-  const w = npc && typeof npc === 'object' ? /** @type {Record<string, unknown>} */ (npc).whereabouts : null;
+  const o = npc && typeof npc === 'object' ? /** @type {Record<string, unknown>} */ (npc) : null;
+  // ⓘ The HAYSTACK is widened to `readonly string[]` for this membership test only. The needle is
+  // an UNTRUSTED runtime value and the question is exactly whether it is a member, so casting the
+  // NEEDLE into NpcStatus would assert the thing being asked. Comment-only: +0 effective, +0 bytes.
+  if (o && /** @type {readonly string[]} */ (OFF_STAGE_STATUSES).includes(String(o.status || '').toLowerCase())) return true;
+  const w = o ? o.whereabouts : null;
   return !!(w && typeof w === 'object' && /** @type {Record<string, unknown>} */ (w).state === 'hostage');
 }
 

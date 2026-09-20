@@ -107,12 +107,13 @@ const RETIRED_FOREIGN_SPELLINGS = Object.freeze(['killed', 'imprisoned']);
 const AVAILABILITY_VOCABULARY = 'NPC_UNAVAILABLE_STATUSES';
 
 /**
- * THE DECLARED CONSUMER ROSTER — eight rows. Five are this packet's own files; three were
- * found by the trigger and are NOT edited, because all three pair `=== 'dead'` with
- * `isOffStage`, the one participation chokepoint, and status-based absence joins that
- * chokepoint in EM-B1f rather than here.
+ * THE DECLARED CONSUMER ROSTER — NINE rows. Five are EM-B1d's own files; three were found by
+ * the trigger and are NOT edited, because all three pair `=== 'dead'` with `isOffStage`, the
+ * one participation chokepoint. ⭐ THE NINTH IS THAT CHOKEPOINT, which joined the roster when
+ * EM-B1f put status-based absence there, as this header's earlier version said it would.
  *
- * `spelling` is CHECKED against the tree, never trusted: a `literals` row must be flagged and
+ * `spelling` is CHECKED against the tree, never trusted: a `literals` row must be flagged, a
+ * `derived` row must read the vocabulary it derives from (EM-B1f's third kind, below), and
  * a `union-read` row must be unflagged, import the union, and spell no retired foreign word.
  * That is what keeps a cured consumer cured — a regression to hand-spelled literals reds here
  * even though the file would still "contain the union's own words".
@@ -132,6 +133,14 @@ const CONSUMER_ROSTER = Object.freeze([
   { file: 'src/domain/worldPulse/warSeatBooks.js', symbol: 'rosterNpcById', spelling: 'literals', enumerator: false, omits: ALL_BUT_DEAD, why: CHOKEPOINT },
   { file: 'src/domain/worldPulse/npcLadderState.js', symbol: 'eligibleMembersOf', spelling: 'literals', enumerator: false, omits: ALL_BUT_DEAD, why: CHOKEPOINT },
   { file: 'src/domain/worldPulse/npcLadderKernel.js', symbol: 'advanceLitLadder', spelling: 'literals', enumerator: false, omits: ALL_BUT_DEAD, why: CHOKEPOINT },
+  // ⛔ APPENDED, NEVER INSERTED: A3 drives three synthetic probes off CONSUMER_ROSTER[3] (the
+  // envoyCasting row), and an insertion would silently re-aim them at a different consumer.
+  { file: 'src/domain/roads/state.js', symbol: 'isOffStage', spelling: 'derived', enumerator: false, omits: ALL_BUT_DEAD,
+    why: 'THE PARTICIPATION CHOKEPOINT ITSELF. It spells only \'dead\', and only to SUBTRACT it: the'
+      + ' members it acts on — exiled, jailed, removed — are DERIVED from NPC_UNAVAILABLE_STATUSES and'
+      + ' never spelled here, so `omits` lists words this file does not WRITE rather than words it'
+      + ' ignores. `missing` and `retired` are genuinely excluded: a reversible absence keeps the'
+      + ' place (R18).' },
 ]);
 
 /**
@@ -260,8 +269,18 @@ function foreignVocabularies() {
 const FOREIGN = foreignVocabularies();
 const TRIGGER = NPC_STATUS.filter((m) => FOREIGN.get(m).length === 0);
 const FLAGGED = SRC_FILES.filter((rel) => wordsIn(SOURCE.get(rel) || '', TRIGGER).length > 0);
-const LITERAL_ROWS = CONSUMER_ROSTER.filter((r) => r.spelling === 'literals').map((r) => r.file).sort();
-const DECLARED_FLAGGABLE = [...new Set([...LITERAL_ROWS, ...EXEMPTION_REGISTER.map((r) => r.file)])].sort();
+/**
+ * ⭐ EM-B1f — THE TWO FLAGGABLE KINDS, and why `derived` had to become real machinery rather
+ * than a decorative field. A `literals` row SPELLS the union's words. A `derived` row spells
+ * at most the word it SUBTRACTS and takes the rest from the availability vocabulary (FORM B,
+ * `roads/state.js`'s `OFF_STAGE_STATUSES`). Both kinds leave a trigger word in the file, so
+ * both must enter DECLARED_FLAGGABLE — a `derived` row outside this set is convicted BY NAME
+ * in A3's set-equality even though the consumer is the honest one. Measured before it was
+ * written: the ninth row reds A3 without this line.
+ */
+const FLAGGABLE_SPELLINGS = Object.freeze(['literals', 'derived']);
+const FLAGGABLE_ROWS = CONSUMER_ROSTER.filter((r) => FLAGGABLE_SPELLINGS.includes(r.spelling)).map((r) => r.file).sort();
+const DECLARED_FLAGGABLE = [...new Set([...FLAGGABLE_ROWS, ...EXEMPTION_REGISTER.map((r) => r.file)])].sort();
 
 /** Files whose source LISTS two or more distinct non-active members: the enumerator shape. */
 const DISCOVERED_ENUMERATORS = SRC_FILES
@@ -278,6 +297,15 @@ function offencesOf(row, source) {
   const stale = row.omits.filter((m) => !NON_ACTIVE.includes(m));
   if (stale.length) out.push(`${row.file}: omits a word that is not a member of the live union: ${stale.join(', ')}`);
   if (row.omits.length && row.why.trim().length < 40) out.push(`${row.file}: omits ${row.omits.join(', ')} with no written reason`);
+  // ⭐ EM-B1f — THE DERIVED KIND. Unlike a `union-read` row it MAY spell a trigger word, because
+  // subtracting `'dead'` from the vocabulary is exactly how FORM B is written; what it may NOT do
+  // is spell a RETIRED foreign word, or stop reading the vocabulary it claims to derive from.
+  if (row.spelling === 'derived') {
+    const spelled = wordsIn(source, RETIRED_FOREIGN_SPELLINGS);
+    if (spelled.length) out.push(`${row.file}: declared DERIVED but spells ${spelled.join(', ')} at ${hits(source, spelled).join(' ')}`);
+    if (!stripComments(source).includes(AVAILABILITY_VOCABULARY)) out.push(`${row.file}: declared DERIVED but does not read ${AVAILABILITY_VOCABULARY}`);
+    return out;
+  }
   if (row.spelling === 'union-read') {
     const spelled = wordsIn(source, [...TRIGGER, ...RETIRED_FOREIGN_SPELLINGS]);
     if (spelled.length) out.push(`${row.file}: declared a union READ but spells ${spelled.join(', ')} at ${hits(source, spelled).join(' ')}`);
@@ -364,6 +392,17 @@ describe('EM-B1d — the NpcStatus union is total, and no consumer enumerates pa
     expect(offencesOf({ ...row, omits: ['jailed'], why: 'x'.repeat(40) }, "const S = ['dead', 'exiled', 'missing', 'removed', 'retired'];")).toEqual([]);
     expect(offencesOf({ ...row, omits: ['jailed'], why: 'too short' }, "const S = ['dead'];").length).toBeGreaterThan(0);
     expect(wordsIn("const FIFTH = ['dead', 'exiled'];", NON_ACTIVE).length).toBeGreaterThanOrEqual(2);
+    // ⭐ EM-B1f — THE `derived` KIND IS REAL WORK IN BOTH DIRECTIONS, on planted sources rather
+    // than on the one live row, so the green above is not a snapshot of itself. FORM B's honest
+    // shape passes; a source that hand-spells the members instead of deriving them is convicted
+    // by name; a source that brings back a retired foreign spelling is convicted with its line.
+    const derivedRow = { file: 'probe.js', spelling: 'derived', omits: ALL_BUT_DEAD, why: 'x'.repeat(40) };
+    const formB = "import { NPC_UNAVAILABLE_STATUSES } from '../entities/npcs.js';\n"
+      + "export const OFF_STAGE_STATUSES = Object.freeze(NPC_UNAVAILABLE_STATUSES.filter((s) => s !== 'dead'));";
+    expect(offencesOf(derivedRow, formB), 'the honest FORM B shape itself must pass, or the two convictions below prove nothing').toEqual([]);
+    expect(offencesOf(derivedRow, "export const OFF_STAGE_STATUSES = Object.freeze(['exiled', 'jailed', 'removed']);"))
+      .toEqual([`probe.js: declared DERIVED but does not read ${AVAILABILITY_VOCABULARY}`]);
+    expect(offencesOf(derivedRow, `${formB}\nconst legacy = 'imprisoned';`)[0], 'a retired foreign spelling must come back convicted WITH its line').toContain('spells imprisoned at 3:imprisoned');
   });
 
   test('A3 — T2: the trigger is DERIVED, the flagged set is SET-EQUAL both directions to roster plus register, and the CANNOT-CATCH is measured', () => {
