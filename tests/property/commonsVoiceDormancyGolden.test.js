@@ -34,7 +34,7 @@ function build({ legit, corrupt = false, tick = 100, priorLedger = undefined }) 
     tick, calendar: { elapsedWeeks: tick, year: 2 },
     spatialLedgers: priorLedger ? { commonsVoice: priorLedger } : {},
   };
-  return { snapshot: { settlements }, worldState, settlementUpdates: settlements.map((it) => ({ saveId: it.id, settlement: it.settlement })) };
+  return { snapshot: { settlements }, worldState, settlementUpdates: settlements.map((update) => ({ saveId: update.id, settlement: update.settlement })) };
 }
 function run(rules, opts) {
   const fx = build(opts);

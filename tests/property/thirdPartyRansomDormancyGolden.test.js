@@ -39,7 +39,7 @@ function build(rules) {
 }
 function run(rules) {
   const fx = build(rules);
-  return advanceRoads({ snapshot: { settlements: fx.settlements }, worldState: fx.worldState, settlementUpdates: fx.settlements.map((it) => ({ saveId: it.id, settlement: it.settlement })), saves: fx.saves, graph, tick: 100, now: null });
+  return advanceRoads({ snapshot: { settlements: fx.settlements }, worldState: fx.worldState, settlementUpdates: fx.settlements.map((update) => ({ saveId: update.id, settlement: update.settlement })), saves: fx.saves, graph, tick: 100, now: null });
 }
 const sha = (v) => createHash('sha256').update(JSON.stringify(v)).digest('hex');
 

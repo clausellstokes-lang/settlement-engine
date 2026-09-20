@@ -71,7 +71,7 @@ const boomCond = { id: 'condition.boom.t', archetype: 'boom', label: 'Boom', sev
 function makeWorld({ settlements, lit = true, ledger = null, tick = 300 }) {
   const items = Object.entries(settlements).map(([id, s]) => ({ id, name: s.name, settlement: s }));
   const snapshot = { settlements: items };
-  const updates = items.map((it) => ({ saveId: it.id, settlement: it.settlement }));
+  const updates = items.map((update) => ({ saveId: update.id, settlement: update.settlement }));
   const worldState = {
     tick,
     simulationRules: lit ? { settlementLifecycleEnabled: true } : {},

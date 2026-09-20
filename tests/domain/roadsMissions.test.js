@@ -211,7 +211,7 @@ describe('roads genesis — dispatch refusal (§5): a cautious court believing t
     const h = { name: 'Home', tier: 'town', npcs: [homeNpc], economicState: { prosperity: 'Comfortable' }, powerStructure: { publicLegitimacy: { score: 55 }, factions: [] } };
     const d = { name: 'Dest', tier: 'town', npcs: [], economicState: { prosperity: 'Comfortable' }, powerStructure: { publicLegitimacy: { score: 55 }, factions: [] } };
     const settlements = [{ id: 'h', name: 'Home', settlement: h }, { id: 'd', name: 'Dest', settlement: d }];
-    return { snapshot: { settlements }, worldState, settlementUpdates: settlements.map((it) => ({ saveId: it.id, settlement: it.settlement })), graph, tick: 1, now: null };
+    return { snapshot: { settlements }, worldState, settlementUpdates: settlements.map((update) => ({ saveId: update.id, settlement: update.settlement })), graph, tick: 1, now: null };
   }
   // Find a seed whose cadence draw fires for npcKey 'h:m' in year 1 (deterministic search).
   function seedThatFires(npcKey) {

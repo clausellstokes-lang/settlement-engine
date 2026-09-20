@@ -34,7 +34,7 @@ function run(rules, extraLedgers, seed) {
   const settlements = saves.map((s) => ({ id: s.id, name: s.name, settlement: s.settlement }));
   const m = { id: 'road.h.h:env.90', npcKey: 'h:env', npcName: 'The Envoy', homeId: 'h', destId: 'p', purpose: { kind: 'diplomacy', ref: 'h~p' }, phase: 'outbound', path: ['h', 'p'], legModes: ['sea'], departTick: 98, legArrivalTick: 110, stayWeeks: 1, escort01: 1, riskTolerance01: 0.65, knownDangerAtDispatch: 0, trappedBySiege: false, startedYear: 2 };
   const worldState = { rngSeed: seed || 's', tick: 100, simulationRules: rules, calendar: { elapsedWeeks: 100, year: 2 }, spatialCanonVersion: 1, spatialDigest: DIGEST, spatialLedgers: { roads: { missions: { [m.id]: m } }, ...extraLedgers } };
-  return advanceRoads({ snapshot: { settlements }, worldState, settlementUpdates: settlements.map((it) => ({ saveId: it.id, settlement: it.settlement })), saves, graph, tick: 100, now: null });
+  return advanceRoads({ snapshot: { settlements }, worldState, settlementUpdates: settlements.map((update) => ({ saveId: update.id, settlement: update.settlement })), saves, graph, tick: 100, now: null });
 }
 const sha = (v) => createHash('sha256').update(JSON.stringify(v)).digest('hex');
 const ransomsOf = (r) => Object.values(r.worldState?.spatialLedgers?.roads?.ransoms || {});

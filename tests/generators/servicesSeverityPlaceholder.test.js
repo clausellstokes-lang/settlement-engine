@@ -24,7 +24,7 @@ function serviceDescs(s) {
   const av = s.availableServices || {};
   for (const k of Object.keys(av)) {
     const v = av[k];
-    if (Array.isArray(v)) for (const it of v) if (it && typeof it.desc === 'string') out.push(it.desc);
+    if (Array.isArray(v)) for (const entry of v) if (entry && typeof entry.desc === 'string') out.push(entry.desc);
   }
   return out;
 }

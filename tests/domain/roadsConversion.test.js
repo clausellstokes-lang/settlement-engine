@@ -39,7 +39,7 @@ describe('§10 the roads deposit — gated on the web being LIT', () => {
     const c = { id: 'c', settlement: { name: 'Captorhold', npcs: [], economicState: { prosperity: 'Comfortable' }, powerStructure: { publicLegitimacy: { score: 55 }, factions: [] } } };
     const worldState = { rngSeed: 's', tick: 100, simulationRules: rules, calendar: { elapsedWeeks: 100, year: 2 }, spatialCanonVersion: 1, spatialDigest: DIGEST, spatialLedgers: { roads: { missions: { [mission.id]: mission } } } };
     const settlements = [{ id: 'h', name: 'Home', settlement: h.settlement }, { id: 'c', name: 'Captorhold', settlement: c.settlement }];
-    return advanceRoads({ snapshot: { settlements }, worldState, settlementUpdates: settlements.map((it) => ({ saveId: it.id, settlement: it.settlement })), saves: [h, c], graph, tick: 100, now: null });
+    return advanceRoads({ snapshot: { settlements }, worldState, settlementUpdates: settlements.map((update) => ({ saveId: update.id, settlement: update.settlement })), saves: [h, c], graph, tick: 100, now: null });
   }
   it('web LIT ⇒ the returned-captive channel is deposited (captor→home, npcKey pinned)', () => {
     const r = run(WEB_LIT);

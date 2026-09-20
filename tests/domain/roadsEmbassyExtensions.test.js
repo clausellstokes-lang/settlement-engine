@@ -47,8 +47,8 @@ function argsFor(worldState, homeNpcs) {
   const settlements = SIDS.map((id) => ({ id, name: s[id].name, settlement: s[id] }));
   return {
     snapshot: { settlements }, worldState,
-    settlementUpdates: settlements.map((it) => ({ saveId: it.id, settlement: it.settlement })),
-    saves: settlements.map((it) => ({ id: it.id, settlement: it.settlement })),
+    settlementUpdates: settlements.map((update) => ({ saveId: update.id, settlement: update.settlement })),
+    saves: settlements.map((save) => ({ id: save.id, settlement: save.settlement })),
     graph, tick: TICK, now: null,
   };
 }
@@ -89,7 +89,7 @@ describe('§11b THE ESCORT REFINEMENT', () => {
     const home = town('Home', [envoy()]);
     const world = { rngSeed: seedThatFires('h:env'), tick: TICK, simulationRules: { roadsEnabled: true, warLayerEnabled: true }, calendar: { elapsedWeeks: 51, year: 1 }, spatialCanonVersion: 1, spatialDigest: DIGEST, relationshipStates: {} };
     const settlements = SIDS.map((id) => ({ id, name: id, settlement: id === 'h' ? home : town(id) }));
-    const r = advanceRoads({ snapshot: { settlements }, worldState: world, settlementUpdates: settlements.map((it) => ({ saveId: it.id, settlement: it.settlement })), saves: settlements.map((it) => ({ id: it.id, settlement: it.settlement })), graph: g, tick: TICK, now: null });
+    const r = advanceRoads({ snapshot: { settlements }, worldState: world, settlementUpdates: settlements.map((update) => ({ saveId: update.id, settlement: update.settlement })), saves: settlements.map((save) => ({ id: save.id, settlement: save.settlement })), graph: g, tick: TICK, now: null });
     const mission = Object.values(r.worldState?.spatialLedgers?.roads?.missions || {})[0];
     expect(mission, 'a mission dispatched').toBeTruthy();
     const expected = militaryQuality01({ readiness01: readinessOf(home), experience01: experienceOf(home), capacityBand01: militaryCapacityScalar(home) }) * settlementWeight01(home);
@@ -167,7 +167,7 @@ describe('§11b THE PEACE AMNESTY', () => {
     const settle = (id) => ({ name: id, tier: 'town', economicState: { prosperity: 'Comfortable' }, powerStructure: { publicLegitimacy: { score: 55 }, factions: [{ faction: 'C', isGoverning: true, power: 55 }] }, npcs: id === 'a' ? [hostage('a')] : id === 'b' ? [hostage('b')] : [] });
     const settlements = AB.map((id) => ({ id, name: id, settlement: settle(id) }));
     const world = { rngSeed: 'amnesty', tick: TICK, simulationRules: { roadsEnabled: true, warLayerEnabled: true }, calendar: { elapsedWeeks: TICK, year: 2 }, spatialCanonVersion: 1, spatialDigest: dg, relationshipStates: {}, spatialLedgers: { roads: { missions: {}, ransoms: { 'ransom.ab': ransomAB, 'ransom.ba': ransomBA } } } };
-    const r = advanceRoads({ snapshot: { settlements }, worldState: world, settlementUpdates: settlements.map((it) => ({ saveId: it.id, settlement: it.settlement })), saves: settlements.map((it) => ({ id: it.id, settlement: it.settlement })), graph: g, tick: TICK, now: null });
+    const r = advanceRoads({ snapshot: { settlements }, worldState: world, settlementUpdates: settlements.map((update) => ({ saveId: update.id, settlement: update.settlement })), saves: settlements.map((save) => ({ id: save.id, settlement: save.settlement })), graph: g, tick: TICK, now: null });
     const ransoms = r.worldState?.spatialLedgers?.roads?.ransoms || {};
     expect(Object.keys(ransoms).length, 'BOTH hostages released under the amnesty (no ransom stands)').toBe(0);
     // both are now returning home.

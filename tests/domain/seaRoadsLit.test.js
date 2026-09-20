@@ -43,7 +43,7 @@ function run(rules, extraLedgers, seed, season) {
   const fx = build(rules, extraLedgers);
   const ws = { ...fx.worldState, rngSeed: seed || 's' };
   if (season) ws.calendar = { ...ws.calendar, season };
-  return advanceRoads({ snapshot: { settlements: fx.settlements }, worldState: ws, settlementUpdates: fx.settlements.map((it) => ({ saveId: it.id, settlement: it.settlement })), saves: fx.saves, graph, tick: 100, now: null });
+  return advanceRoads({ snapshot: { settlements: fx.settlements }, worldState: ws, settlementUpdates: fx.settlements.map((update) => ({ saveId: update.id, settlement: update.settlement })), saves: fx.saves, graph, tick: 100, now: null });
 }
 const graph = ensureRegionalGraph({ edges: [{ id: 'e.h.e', from: 'h', to: 'e', relationshipType: 'hostile' }], channels: [] });
 const BLOCKADE = { navalTransit: { b1: { armyId: 'B', role: 'blockade', ownerId: 'e', targetId: 'p' } } };

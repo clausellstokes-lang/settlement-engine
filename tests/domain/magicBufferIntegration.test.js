@@ -131,7 +131,7 @@ function runStrike({ lit = false, regime = REGIME_INDUSTRIAL, priorCharge = null
     ...(Object.keys(spatialLedgers).length ? { spatialLedgers } : {}),
   };
   const result = advanceCalamity({
-    settlementUpdates: settlements.map((it) => ({ saveId: it.id, settlement: it.settlement })),
+    settlementUpdates: settlements.map((update) => ({ saveId: update.id, settlement: update.settlement })),
     worldState,
     snapshot,
     digest: null,

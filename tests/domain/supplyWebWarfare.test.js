@@ -89,7 +89,7 @@ function makeWorld({ aggressorArchetype = 'merchant', aggressorMalice = 45, aggr
     item('irondell', 'Irondell', { tier: 'village', population: 400, exports: [IRON], malice: 12, lawfulness: 55 }),
     item('oldford', 'Oldford', { tier: 'town', population: 2500 }),
   ];
-  const byId = new Map(items.map((it) => [it.id, it]));
+  const byId = new Map(items.map((entry) => [entry.id, entry]));
   const relationshipStates = {
     'edge.aggressor.crownhold': { relationshipType: 'hostile', resentment: 0.6, trust: 0.1 },
   };

@@ -516,7 +516,7 @@ describe('M4 — THE CONSERVATION INVARIANT (multi-tick, end-to-end)', () => {
     const pIndex = makePIndex(pMap);
 
     let worldState = baseWorld(digest);
-    const localSettlements = new Map(snapshot.settlements.map((it) => [String(it.id), { ...it.settlement }]));
+    const localSettlements = new Map(snapshot.settlements.map((entry) => [String(entry.id), { ...entry.settlement }]));
 
     let totalDepartures = 0;
     let totalDeaths = 0;
@@ -580,7 +580,7 @@ describe('M4 — regional soak: bounded, no megacity, no annihilation', () => {
       })),
       regionalGraph: { edges: [] },
     };
-    const localSettlements = new Map(snapshot.settlements.map((it) => [String(it.id), { ...it.settlement }]));
+    const localSettlements = new Map(snapshot.settlements.map((entry) => [String(entry.id), { ...entry.settlement }]));
     const rng = createPRNG('regional');
     const pMap = {};
     for (const id of ids) { pMap[`${id}:conflict`] = 0.55; pMap[`${id}:food`] = 0.45; }
@@ -669,7 +669,7 @@ describe('M4 — mortality is AGGREGATE-ONLY: named NPCs are never touched', () 
     expect(JSON.stringify(dispatch.receipts)).not.toContain('Vale');
 
     // Release the arrivals — still no NPC touched.
-    const localSettlements = new Map(snapshot.settlements.map((it) => [String(it.id), { ...it.settlement }]));
+    const localSettlements = new Map(snapshot.settlements.map((entry) => [String(entry.id), { ...entry.settlement }]));
     for (let t = 3; t < 60; t++) {
       const ws = { ...worldState, tick: t };
       const rel = releaseMigrationArrivals({ worldState: ws, localSettlements, settlements: snapshot.settlements, tick: t });
