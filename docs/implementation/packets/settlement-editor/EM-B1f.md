@@ -27,6 +27,7 @@
   export; the edge-shared write set by generator AND by precedent; every `.status` writer in
   `src/`; the line-addressed and stamped registers; effective lines before and after under
   eslint's own `Linter`
+- **Retired symbols — WITHDRAWN at the seal (the chair, 2026-09-20 08:5x; ODQ §934.47 addendum 84):** the packet's one `retiredSymbols` row (EM-B1k2's `const UNDISPOSITIONED_CEILING = 7`) was moot before the seal — EM-B1k2's `requiredSymbols` row was re-spelled figure-free at `fff247009`, so nothing cross-packet names the figure this packet burns — and the validator's rule that a non-terminal packet's retiree must still be PRESENT (`scripts/implementation-packets.mjs:844-848`) reds the build's own §7 burn (7 → 6) at its `validate` step: state 2 EXIT 1, state 3 (row removed) EXIT 0, proven by the build lane. The row is removed from the manifest; the packet's §7.2 burn stands. The validator's third trap shape is TOOL-19's.
 - **Preamble:** `docs/implementation/preambles/EM-PREAMBLE.md` (SHA-256: ce516004a5d8e680f4160b03ce660c66d78261988b78a82239664c596600af4b — stamped by the chair at placement)
   — ⓘ measured live at `141a1d775`:
   `16dfb96fa79320abc7dcfbdd8f5152b6aa66998c269287a951079df6c8223195` (the SECOND amendment,

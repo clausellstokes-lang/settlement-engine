@@ -32897,13 +32897,7 @@
           "note": "NEW IN v4. EM-B1k2s raw IRREVERSIBLE read: :719s tickStart is asObject(asObject(item.save).settlement || item.settlement), so the 810.4 R18 law is computed from truth rather than from the participation projection. Section 13s second premise, and the reason this packets widening cannot reach a dissolution. Guarded by tests/domain/irreversibleRawRoster.contract.test.js. NOT EDITED by this packet."
         }
       ],
-      "retiredSymbols": [
-        {
-          "path": "tests/domain/roadsParticipation.test.js",
-          "symbol": "const UNDISPOSITIONED_CEILING = 7",
-          "_note": "The ceiling this packet BURNS to 6 (ODQ 934.47 addendum 61 item 5). EM-B1k2 [LANDED] requires this exact text; 379.2 discharge fires ONLY when a LANDED packet retires the pair, so this row discharges EM-B1k2s guard at EM-B1fs OWN flip and not before. See packet 7.4 and Q1: the chair must re-spell EM-B1k2s row as the figure-free `const UNDISPOSITIONED_CEILING` BEFORE dispatch, or `validate` — a sealed check of this packet — reds for the whole build and the packet cannot pass its own seal."
-        }
-      ],
+      "retiredSymbols": [],
       "acceptanceCases": [
         {
           "id": "A1",
