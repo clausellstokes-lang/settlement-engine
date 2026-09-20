@@ -930,6 +930,10 @@
       "kind": "mutation",
       "label": "discourse/lexicon relation-type coverage gap"
     },
+    "tests/lint/embeddedMapConsoleGate.walker.test.js": {
+      "kind": "rationale",
+      "rationale": "SELF-PROVING, and its control is the regression itself. The walker lifts each diagnostic channel's gate expression out of public/map/main.js and EXECUTES it under a synthetic deployed-host environment and a synthetic localhost one, so an arm fails when the gate's MEANING regresses rather than only its spelling. Its embedded control pushes the PRE-CURE source shape (the flat `const WARN = true;` the FMG fork was vendored with at f386f48d96, which is exactly what REVIEW-P F15 measured printing on /realm) through the same extractor and evaluator and asserts the detector catches it -- so the muting arms cannot be green because the extractor found nothing. A standing sweep mutation would additionally have to plant inside public/map/main.js, which is (a) eslint-ignored vendored fork source a re-vendor rewrites wholesale, and (b) a file the sweep's `git checkout --` revert would discard a maintainer's in-flight FMG upgrade from. Promote to kind:mutation if the fork's flag block ever moves into a linted src/ module."
+    },
     "tests/lint/engineTelemetryWall.walker.test.js": {
       "kind": "rationale",
       "rationale": "Self-proving engine/telemetry wall walker, and the successor to telemetrySimulationSeparation.test.js: an embedded fixture exercises static import, dynamic import and require spellings in both directions, every arm carries a planted control inside its own body, and the production scans carry per-root non-vacuity floors over the four deterministic-core roots, the analytics-module roster and the simulation registry. A standing source mutation would duplicate those fixtures while editing broad shared engine, analytics or migration surfaces during the sweep."
