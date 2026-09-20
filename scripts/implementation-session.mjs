@@ -17,6 +17,20 @@ export const SESSION_SCHEMA_VERSION = 1;
 const DEFAULT_ROOT = resolve(dirname(fileURLToPath(import.meta.url)), '..');
 const DEFAULT_MANIFEST_PATH = 'docs/implementation/PACKET_MANIFEST.json';
 const ID_TOKEN = /^[A-Za-z0-9][A-Za-z0-9+._-]*$/;
+/** A seal's head, shape-checked before any of it becomes a directory name. */
+const SEALED_HEAD = /^[0-9a-f]{40}$/;
+/**
+ * The archive name's head width. NINE, because that is what this estate's `git log --oneline`
+ * abbreviates to and what the chair's hand rotation already spelled
+ * (`EM-B1f.sealed-at-c33446830`). A fixed slice rather than `git rev-parse --short`
+ * deliberately: an archive name is evidence, and a width that moves with the object count
+ * would let two archives of the same head disagree about what to call it.
+ */
+const ARCHIVE_HEAD_WIDTH = 9;
+/** A bound on the `-2`, `-3`, … collision suffix, so a wedged caller cannot spin forever. */
+const ARCHIVE_ORDINAL_LIMIT = 999;
+const DISPATCH_CLI_USAGE = 'usage: implementation-session.mjs dispatch <ID>\n'
+  + '   or: implementation-session.mjs dispatch --reseal <ID>';
 function gitBuffer(rootDir, args) {
   return execFileSync('git', args, {
     cwd: rootDir, encoding: 'buffer', stdio: ['ignore', 'pipe', 'pipe'],
@@ -336,10 +350,17 @@ function assertCurrentAuthority(session) {
   assertCapsuleMatchesManifest(session.dispatch.capsule, live.manifest, live.packet, live.packetText);
   return live;
 }
-export function createImplementationSession(options = {}) {
-  const rootDir = resolve(options.rootDir ?? DEFAULT_ROOT);
-  const packetId = options.packetId ?? options.packet?.id;
-  const manifestPath = options.manifestPath ?? DEFAULT_MANIFEST_PATH;
+/**
+ * Every dispatch precondition, in dispatch's own order, writing NOTHING.
+ *
+ * Factored out of createImplementationSession for the re-seal below, which must refuse on
+ * exactly these grounds BEFORE it moves a capsule aside: an archive whose fresh seal cannot
+ * follow it would leave a READY packet with no live capsule at all. A second copy of the
+ * refusals would drift from this one silently — which is the class this estate spends most of
+ * its guards on — so the re-seal calls this and then calls the ordinary dispatch, and the two
+ * doors can never disagree about what a dispatchable tree is.
+ */
+function prepareImplementationDispatch(rootDir, manifestPath, packetId, options = {}) {
   const live = loadLiveAuthority(rootDir, manifestPath, packetId);
   const capsule = buildCodingCapsule(live.manifest, packetId, { rootDir });
   verifyCodingCapsule(capsule);
@@ -354,6 +375,15 @@ export function createImplementationSession(options = {}) {
   }
   assertAncestorAndSubstrate(rootDir, live.packet, capsule, snapshot.head);
   assertTargetPreflight(rootDir, live.packet);
+  return { live, capsule, snapshot, targetStates };
+}
+export function createImplementationSession(options = {}) {
+  const rootDir = resolve(options.rootDir ?? DEFAULT_ROOT);
+  const packetId = options.packetId ?? options.packet?.id;
+  const manifestPath = options.manifestPath ?? DEFAULT_MANIFEST_PATH;
+  const {
+    live, capsule, snapshot, targetStates,
+  } = prepareImplementationDispatch(rootDir, manifestPath, packetId, options);
   const paths = sessionPaths(rootDir, packetId);
   if (existsSync(paths.sessionDir)) throw new Error(`implementation session already exists: ${packetId}`);
   ensurePrivateDirectory(paths.sessionDir);
@@ -363,6 +393,11 @@ export function createImplementationSession(options = {}) {
     (entry) => entryPaths(entry).every((path) => !targets.has(path)),
   );
   const dispatch = { schemaVersion: SESSION_SCHEMA_VERSION, id: packetId, capsule };
+  // The evidence chain, written INTO the dispatch rather than beside it: a capsule that
+  // replaced an earlier one names where that one went, so a reader of this session can walk
+  // back to the seal it superseded. Absent on an ordinary dispatch, so that payload — and
+  // therefore its digest and the seal that pins it — is byte-identical to what it always was.
+  if (options.resealedFrom) dispatch.resealedFrom = options.resealedFrom;
   const dispatchPath = writeImmutable(paths.dispatchPath, dispatch);
   const dispatchDigest = readEnvelope(dispatchPath).digest;
   const seal = {
@@ -386,6 +421,72 @@ export function createImplementationSession(options = {}) {
   };
   writeImmutable(paths.sealPath, seal);
   const session = openImplementationSession({ rootDir, packetId, capsule }); const finalSnapshot = assertImplementationScope(session).snapshot; if (finalSnapshot.gitFingerprint !== snapshot.fingerprint || canonicalSerialize(finalSnapshot.targetStates) !== canonicalSerialize(seal.targetStates)) throw new Error('worktree moved during implementation dispatch'); return session;
+}
+/**
+ * Move one packet's session capsule aside, under the head its own seal pins, and return the
+ * archive's NAME (not its path — `seal.gitDir` already records where these live).
+ *
+ * ⛔ NEVER OVERWRITES AND NEVER DELETES. The name is RESERVED with an exclusive mkdirSync —
+ * the acquireSessionRunLock idiom below — so a name already taken by an earlier archive, or by
+ * a chair's hand rotation, is skipped for `-2`, `-3`, and so on rather than replaced. The
+ * reservation matters: an unreserved `renameSync` onto an EMPTY directory of the same name
+ * succeeds silently on this platform, which is precisely the overwrite this rule forbids.
+ */
+function archiveSessionCapsule(paths, head) {
+  const stem = `${paths.id}.sealed-at-${head.slice(0, ARCHIVE_HEAD_WIDTH)}`;
+  const parent = dirname(paths.sessionDir);
+  for (let ordinal = 1; ordinal <= ARCHIVE_ORDINAL_LIMIT; ordinal += 1) {
+    const name = ordinal === 1 ? stem : `${stem}-${ordinal}`;
+    const archivePath = join(parent, name);
+    try {
+      mkdirSync(archivePath, { mode: 0o700 });
+    } catch (error) {
+      if (error?.code === 'EEXIST') continue;
+      throw error;
+    }
+    try {
+      renameSync(paths.sessionDir, archivePath);
+    } catch (error) {
+      // The reservation is empty by construction, so clearing it keeps a failed rotation from
+      // burning the next attempt's name. Its own failure must not mask the rename's.
+      try { rmdirSync(archivePath); } catch { /* the reservation outlives this call */ }
+      throw error;
+    }
+    fsyncDirectory(parent);
+    return name;
+  }
+  throw new Error(`session archive names are exhausted for ${paths.id}: ${stem}`);
+}
+/**
+ * THE SANCTIONED RE-SEAL. A branch moving under a paused sealed build is routine under
+ * pause-and-resume, and it deadlocks the packet: dispatch refuses because the capsule exists,
+ * while check:packet and resume refuse because that capsule's sealed HEAD drifted. Neither end
+ * is a lane's to force, and hand-rotating immutable session evidence is exactly what the
+ * existence guard is there to stop. This is the door: the prior capsule is ARCHIVED under the
+ * head it pins, and the ordinary dispatch then seals afresh at HEAD.
+ *
+ * The refusals come first and in full — no capsule, no readable seal, a packet that is not
+ * READY, a tree that is not Git-clean — because the archive must never happen without a seal
+ * able to follow it.
+ */
+export function resealImplementationSession(options = {}) {
+  const rootDir = resolve(options.rootDir ?? DEFAULT_ROOT);
+  const packetId = options.packetId ?? options.packet?.id;
+  const manifestPath = options.manifestPath ?? DEFAULT_MANIFEST_PATH;
+  const paths = sessionPaths(rootDir, packetId);
+  if (!pathExists(paths.sessionDir)) {
+    throw new Error(`no implementation session to re-seal: ${packetId}.`
+      + ` A packet with no capsule is dispatched, not re-sealed: implementation-session.mjs dispatch ${packetId}`);
+  }
+  const sealedHead = readEnvelope(paths.sealPath).payload.head;
+  if (typeof sealedHead !== 'string' || !SEALED_HEAD.test(sealedHead)) {
+    throw new Error(`existing session seal names no head to archive under for ${packetId}`);
+  }
+  prepareImplementationDispatch(rootDir, manifestPath, packetId, options);
+  const resealedFrom = archiveSessionCapsule(paths, sealedHead);
+  return createImplementationSession({
+    ...options, rootDir, packetId, manifestPath, resealedFrom,
+  });
 }
 export function openImplementationSession(options = {}) {
   const rootDir = resolve(options.rootDir ?? DEFAULT_ROOT);
@@ -627,19 +728,24 @@ export function runImplementationSessionCli(argv, options = {}) {
   const stdout = options.stdout ?? process.stdout;
   const stderr = options.stderr ?? process.stderr;
   try {
-    if (argv.length !== 2 || argv[0] !== 'dispatch' || !ID_TOKEN.test(argv[1])) {
-      throw new Error('usage: implementation-session.mjs dispatch <ID>');
+    const reseal = argv.length === 3 && argv[1] === '--reseal';
+    const packetId = reseal ? argv[2] : argv[1];
+    if (argv[0] !== 'dispatch' || (argv.length !== 2 && !reseal)
+      || typeof packetId !== 'string' || !ID_TOKEN.test(packetId)) {
+      throw new Error(DISPATCH_CLI_USAGE);
     }
-    const session = createImplementationSession({
-      rootDir: options.rootDir ?? DEFAULT_ROOT,
-      packetId: argv[1],
-    });
-    stdout.write(`${JSON.stringify({
+    const rootDir = options.rootDir ?? DEFAULT_ROOT;
+    const session = reseal
+      ? resealImplementationSession({ rootDir, packetId })
+      : createImplementationSession({ rootDir, packetId });
+    const report = {
       id: session.id,
       sessionDir: session.sessionDir,
       sealDigest: session.sealDigest,
       capsule: session.dispatch.capsule,
-    }, null, 2)}\n`);
+    };
+    if (session.dispatch.resealedFrom) report.resealedFrom = session.dispatch.resealedFrom;
+    stdout.write(`${JSON.stringify(report, null, 2)}\n`);
     return 0;
   } catch (error) {
     stderr.write(`[implementation-session] ${error instanceof Error ? error.message : String(error)}\n`);

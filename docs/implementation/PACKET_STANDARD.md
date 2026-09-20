@@ -116,6 +116,14 @@ instead of an error, while a seal naming another packet, another worktree, a pay
 integrity digest no longer matches, or a HEAD that is not an ancestor of this tree licenses
 nothing and the refusal stands.
 
+When the branch has moved under a paused session — dispatch refusing because the capsule
+exists while `check:packet` and `resume` refuse because that capsule's sealed HEAD drifted —
+`npm run implementation:dispatch -- --reseal <ID>` archives the prior capsule by rename under
+`<ID>.sealed-at-<short head>` (never overwriting and never deleting; `-2`, `-3`, … on
+collision) and then runs the ordinary dispatch, sealing afresh at HEAD with `resealedFrom`
+recorded in the new `dispatch.json`; it refuses, before any rename, unless a capsule exists,
+the packet is READY, and the tree is Git-clean.
+
 Dispatch and resume do not create/delete worktrees, stage, commit, merge, restore,
 clean files, infer affected tests, or interpret or waive semantic line budgets.
 Those remain operator decisions; only the complete `npm run check` chain is landing authority.
