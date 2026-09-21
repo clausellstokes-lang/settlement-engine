@@ -183,13 +183,27 @@ function emptyServiceRecordsLike(serviceRecords) {
   };
 }
 
+/** The settlement-level drop EM-B3a landed, extracted verbatim so the entry's live
+ *  settlement and every settlement its timeline nests take the IDENTICAL operation.
+ *  Reference-identical when neither key is present. The destructure-drop spelling and
+ *  the `// eslint-disable-next-line no-unused-vars` directive are EM-B3a's, unchanged.
+ *  @param {any} settlement @returns {any} the same value, or a copy minus both keys */
+function withoutEditKeys(settlement) {
+  if (!settlement || typeof settlement !== 'object' || Array.isArray(settlement)) return settlement;
+  // eslint-disable-next-line no-unused-vars -- intentional drop of the two editor keys
+  const { dmLayer, decrees, ...rest } = /** @type {Record<string, any>} */ (settlement);
+  return Object.keys(rest).length === Object.keys(settlement).length ? settlement : rest;
+}
+
 /**
  * A saved-settlement entry as an EXPORT carries it: the DM's layer and the decree
  * registry are the owner's own working save state and never leave it (EM-B3a;
  * design §11 "edits do not travel"; ARCH §3 "a personal backup export omits them
  * under the same rule"). This is the one seam through which either key could leave
  * the account at all — every public projection already drops them by name — so the
- * omission is spelled here and nowhere else.
+ * omission is spelled here and nowhere else, and it reaches EVERY settlement the
+ * entry carries: the live one, and every settlement its `versionHistory` nests,
+ * which `revertToSnapshotAction` can promote back onto the live record (EM-B3e).
  *
  * ⭐ REFERENCE-IDENTICAL WHEN THERE IS NOTHING TO DROP, and that is the contract
  * rather than an optimisation. No writer of either key exists yet (the veil lands
@@ -204,14 +218,30 @@ function emptyServiceRecordsLike(serviceRecords) {
  * at zero. Presence is likewise inferred from the destructure's own result.
  *
  * @param {Record<string, any>} entry a save envelope
- * @returns {Record<string, any>} the same entry, or a copy whose settlement lost both keys
+ * @returns {Record<string, any>} the same entry, or a copy whose settlement and whose nested snapshots lost both keys
  */
 function withoutEditState(entry) {
-  const s = entry?.settlement;
-  if (!s || typeof s !== 'object' || Array.isArray(s)) return entry;
-  // eslint-disable-next-line no-unused-vars -- intentional drop of the two editor keys
-  const { dmLayer, decrees, ...rest } = /** @type {Record<string, any>} */ (s);
-  return Object.keys(rest).length === Object.keys(s).length ? entry : { ...entry, settlement: rest };
+  const { settlement: liveSettlement, versionHistory: history } = /** @type {Record<string, any>} */ (entry || {});
+  const nextSettlement = withoutEditKeys(liveSettlement);
+  let nextHistory = history;
+  if (Array.isArray(history)) {
+    let moved = false;
+    const mapped = history.map((element) => {
+      if (!element || typeof element !== 'object' || Array.isArray(element)) return element;
+      const { settlement } = /** @type {Record<string, any>} */ (element);
+      const scrubbed = withoutEditKeys(settlement);
+      if (scrubbed === settlement) return element;
+      moved = true;
+      return { ...element, settlement: scrubbed };
+    });
+    if (moved) nextHistory = mapped;
+  }
+  if (nextSettlement === liveSettlement && nextHistory === history) return entry;
+  return {
+    ...entry,
+    ...(nextSettlement === liveSettlement ? {} : { settlement: nextSettlement }),
+    ...(nextHistory === history ? {} : { versionHistory: nextHistory }),
+  };
 }
 
 /**

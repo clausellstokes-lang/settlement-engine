@@ -73,6 +73,12 @@ const saveRow = (id, settlement) => ({
   config: { settType: settlement.tier }, campaignState: null, versionHistory: [],
 });
 
+/** ONE version-history element, the shape `recordSnapshotAction` writes: a whole
+ *  settlement under a labelled, timestamped envelope (EM-B3e). */
+const snapshot = (id, settlement) => ({
+  id, ts: '2026-01-01T00:00:00.000Z', kind: 'manual', label: `snap ${id}`, settlement,
+});
+
 function expectByteEqual(actual, expected) {
   expect(actual).toEqual(expected);
   expect(JSON.stringify(actual)).toBe(JSON.stringify(expected));
@@ -258,5 +264,178 @@ describe('EM-B3a — HZ-TRAVEL: a fork, a backup export and a realm snapshot car
     );
     expect(unedited.ok).toBe(true);
     expectByteEqual(edited.entry, unedited.entry);
+  });
+
+  test('B1 — the IMPORT at the configuration the product uses: every settlement the restored timeline nests is stripped too', async () => {
+    // ⭐ EM-B3e. A6 above drives the door at its DEFAULT, where the lifecycle resets and
+    // no timeline can arrive. The product's own account door (accountImportBody.js) passes
+    // `restoreLifecycle: true`, and on that path the restored history rides in VERBATIM —
+    // a whole settlement per snapshot, one `revertToSnapshot` away from the live record.
+    await ensureNormalizeLoaded();
+    const META = {
+      importedAt: '2026-01-01T00:00:00.000Z', sourceName: 'keeper-export', restoreLifecycle: true,
+    };
+    const prepared = prepareSettlementEntry({
+      name: 'Ashford',
+      tier: 'town',
+      settlement: editedSettlement(),
+      versionHistory: [snapshot('v1', editedSettlement()), snapshot('v2', editedSettlement())],
+    }, META);
+    expect(prepared.ok).toBe(true);
+
+    // Anchored: the keeper's timeline is still THERE and still THEIRS — both snapshots, both
+    // labels, in order, each keeping every other key it arrived with — and the entry itself
+    // demonstrably carries the world, so the two absences below measure an omission rather
+    // than an emptied entry or a dropped history.
+    expect(prepared.entry.versionHistory).toHaveLength(2);
+    expect(prepared.entry.versionHistory.map((element) => element.label)).toEqual(['snap v1', 'snap v2']);
+    expect(prepared.entry.versionHistory[0].settlement.institutions)
+      .toEqual([{ id: 'inst.market', name: 'Market' }]);
+    expect(prepared.entry.name).toBe('Ashford');
+    expect(prepared.entry.tier).toBe('town');
+    expect(prepared.entry.settlement.importedFrom.source).toBe('account-export');
+
+    // Neither key survives at ANY depth of the prepared entry — the live settlement and
+    // both snapshots alike.
+    const serializedEntry = JSON.stringify(prepared.entry);
+    expect(serializedEntry.includes('"dmLayer"')).toBe(false);
+    expect(serializedEntry.includes('"decrees"')).toBe(false);
+  });
+
+  test('B2 — the EXPORT, the parity arm: a timeline leaves the account stripped beside the live settlement', () => {
+    // ⭐ EM-B3e, the way OUT. A7 above proves the live settlement; `withoutEditState`
+    // replaced only that one, so an edited snapshot rode the owner's own backup whole.
+    const edited = {
+      ...saveRow('save-edited', editedSettlement()),
+      versionHistory: [snapshot('v1', editedSettlement())],
+    };
+    const payload = buildAccountExport({
+      auth: { user: { email: 'keeper@example.com' }, displayName: 'Keeper', tier: 'free' },
+      savedSettlements: [edited],
+      campaigns: [],
+    });
+    const serializedExport = JSON.stringify(payload);
+
+    // Anchored: the export demonstrably carries the save, its name and its timeline, so the
+    // two absences below are measuring an omission rather than an empty export.
+    expect(payload.settlements).toHaveLength(1);
+    expect(payload.settlements[0].name).toBe('Ashford');
+    expect(payload.settlements[0].versionHistory).toHaveLength(1);
+    expect(payload.settlements[0].versionHistory[0].label).toBe('snap v1');
+    expect(serializedExport.includes('"dmLayer"')).toBe(false);
+    expect(serializedExport.includes('"decrees"')).toBe(false);
+
+    // Every sibling survives BYTE-EXACT at BOTH levels: the omission is surgical, and the
+    // surviving key order is the entry's own and the snapshot's own.
+    const expectedEdited = JSON.parse(JSON.stringify(edited));
+    delete expectedEdited.settlement.dmLayer;
+    delete expectedEdited.settlement.decrees;
+    delete expectedEdited.versionHistory[0].settlement.dmLayer;
+    delete expectedEdited.versionHistory[0].settlement.decrees;
+    expectByteEqual(payload.settlements[0], expectedEdited);
+  });
+
+  test('B3 — DORMANCY with a timeline present: both doors hand back the very objects they were given', async () => {
+    // ⭐ THE DORMANCY PROOF, now with a history. No writer of either key exists at this
+    // commit, so this is the case 100% of real records take on both doors; a copy-always
+    // walk would silently move the bytes of every export and every import ever taken.
+    await ensureNormalizeLoaded();
+    const META = {
+      importedAt: '2026-01-01T00:00:00.000Z', sourceName: 'keeper-export', restoreLifecycle: true,
+    };
+
+    // (i) an export row carrying neither key anywhere, with a two-element history.
+    const plainHistory = [snapshot('v1', uneditedSettlement()), snapshot('v2', uneditedSettlement())];
+    const unedited = Object.freeze({
+      ...saveRow('save-plain', uneditedSettlement()), versionHistory: plainHistory,
+    });
+    const payload = buildAccountExport({
+      auth: { user: { email: 'keeper@example.com' }, displayName: 'Keeper', tier: 'free' },
+      savedSettlements: [unedited],
+      campaigns: [],
+    });
+    // Anchored: the export really carried the row and its timeline before identity is claimed.
+    expect(payload.settlements[0].versionHistory).toHaveLength(2);
+    expect(payload.settlements[0]).toBe(unedited);
+    expect(payload.settlements[0].versionHistory).toBe(plainHistory);
+    expect(payload.settlements[0].versionHistory[1]).toBe(plainHistory[1]);
+
+    // (ii) the same row with an EMPTY history: the sibling of A7's pin.
+    const emptyHistory = { ...saveRow('save-empty', uneditedSettlement()), versionHistory: [] };
+    const emptied = buildAccountExport({
+      auth: { user: { email: 'keeper@example.com' }, displayName: 'Keeper', tier: 'free' },
+      savedSettlements: [emptyHistory],
+      campaigns: [],
+    });
+    expect(emptied.settlements[0]).toBe(emptyHistory);
+
+    // (iii) the import's admitted timeline, carrying neither key: the VERY array, every
+    // element by reference.
+    const admitted = [snapshot('v1', uneditedSettlement())];
+    const restored = prepareSettlementEntry({
+      name: 'Redhollow', tier: 'village', settlement: uneditedSettlement(), versionHistory: admitted,
+    }, META);
+    expect(restored.ok).toBe(true);
+    expect(restored.entry.versionHistory).toBe(admitted);
+    expect(restored.entry.versionHistory[0]).toBe(admitted[0]);
+
+    // (iv) an ABSENT and a NON-ARRAY history: nothing throws, and the admission's own reset
+    // rides through untouched.
+    const absent = prepareSettlementEntry({
+      name: 'Redhollow', tier: 'village', settlement: uneditedSettlement(),
+    }, META);
+    const nonArray = prepareSettlementEntry({
+      name: 'Redhollow', tier: 'village', settlement: uneditedSettlement(), versionHistory: 'nonsense',
+    }, META);
+    expect(absent.entry.versionHistory).toEqual([]);
+    expect(nonArray.entry.versionHistory).toEqual([]);
+  });
+
+  test('B5 — a MALFORMED timeline never throws and never swallows, on both doors', async () => {
+    // A hostile or legacy file can hand either door an array of anything. A bad neighbour
+    // must never shelter a real one, and no element may be dropped, reordered or copied.
+    await ensureNormalizeLoaded();
+    const malformed = () => ([
+      null, undefined, 'a string', 7, [], { id: 'no-settlement' },
+      { id: 'arr', settlement: [] }, { id: 'nul', settlement: null },
+      snapshot('good', editedSettlement()),
+    ]);
+    const META = {
+      importedAt: '2026-01-01T00:00:00.000Z', sourceName: 'keeper-export', restoreLifecycle: true,
+    };
+
+    const importedSource = malformed();
+    const imported = prepareSettlementEntry({
+      name: 'Ashford', tier: 'town', settlement: uneditedSettlement(), versionHistory: importedSource,
+    }, META);
+    const exportedSource = malformed();
+    const payload = buildAccountExport({
+      auth: { user: { email: 'keeper@example.com' }, displayName: 'Keeper', tier: 'free' },
+      savedSettlements: [{ ...saveRow('save-mal', uneditedSettlement()), versionHistory: exportedSource }],
+      campaigns: [],
+    });
+    const importedOut = imported.entry.versionHistory;
+    const exportedOut = payload.settlements[0].versionHistory;
+
+    // Length and order first: nothing was dropped and nothing was re-ordered.
+    expect(importedOut).toHaveLength(9);
+    expect(exportedOut).toHaveLength(9);
+
+    // The eight malformed elements come back BY REFERENCE on both doors. Collected, then
+    // asserted ONCE: a loop of expects reports a lower bound, never a count.
+    const importedRefs = importedOut.slice(0, 8).map((element, index) => element === importedSource[index]);
+    const exportedRefs = exportedOut.slice(0, 8).map((element, index) => element === exportedSource[index]);
+    expect(importedRefs).toEqual([true, true, true, true, true, true, true, true]);
+    expect(exportedRefs).toEqual([true, true, true, true, true, true, true, true]);
+
+    // Anchored: the one well-formed snapshot is still there, with its label and its world…
+    expect(importedOut[8].label).toBe('snap good');
+    expect(exportedOut[8].label).toBe('snap good');
+    expect(importedOut[8].settlement.institutions).toEqual([{ id: 'inst.market', name: 'Market' }]);
+    // …and it is still STRIPPED, on both doors, beside its eight bad neighbours.
+    expect(JSON.stringify(importedOut[8]).includes('"dmLayer"')).toBe(false);
+    expect(JSON.stringify(importedOut[8]).includes('"decrees"')).toBe(false);
+    expect(JSON.stringify(exportedOut[8]).includes('"dmLayer"')).toBe(false);
+    expect(JSON.stringify(exportedOut[8]).includes('"decrees"')).toBe(false);
   });
 });

@@ -545,6 +545,50 @@ export function restoreIntraEnvelopeWiring(rawSettlement, { idMap, ownSaveId }) 
 }
 
 /**
+ * THE VEIL REACHES THE SNAPSHOTS (EM-B3e, design §11 and §12 item 4).
+ *
+ * `admitRestoredLifecycle` restores `versionHistory` VERBATIM on the account surface —
+ * that is the point of §359.10, and it is right. But every element of that timeline
+ * carries a WHOLE settlement (`recordSnapshotAction` writes `snapshotSettlement(...)`),
+ * and `revertToSnapshotAction` promotes a snapshot onto the live saved record and
+ * persists it. So a strip that reaches only `entry.settlement` leaves a keeper's
+ * imported timeline carrying another account's editor state, one revert away from the
+ * live world. The estate has already been bitten by exactly this shape at exactly this
+ * seam, for the custom-content roster (`src/store/accountImportBody.js`).
+ *
+ * ⛔ WHY THE STRIP IS APPLIED HERE AND NOT IN `admitRestoredLifecycle`: that function
+ * answers ONE question — does this field pass the live save-admission wall — and a
+ * field that fails falls back to the reset value with a notice. A scrub is not an
+ * admission: it never refuses, never notices, and must run on the admitted value.
+ *
+ * ⛔ AND WHY NOT IN `src/store/accountImportBody.js`, where the roster cure lives: the
+ * roster remap needs the import session's identity map, which only the store has. This
+ * strip needs nothing but the record — so one level down covers `prepareSettlementEntry`'s
+ * OTHER caller (the reconciliation session) by construction, today and forever.
+ *
+ * Pure. REFERENCE-IDENTICAL when nothing is dropped: the array that went in comes back,
+ * and so does every element that did not move. Reads every field by DESTRUCTURE, never
+ * by a property access, so the observed-shape register cannot move (EM-B3d §6).
+ *
+ * @param {unknown} versionHistory the admitted lifecycle's timeline
+ * @returns {unknown} the same array when nothing was dropped, else a new array
+ */
+function scrubRestoredHistoryEditState(versionHistory) {
+  if (!Array.isArray(versionHistory)) return versionHistory;
+  let moved = false;
+  const next = versionHistory.map((element) => {
+    if (!isPlainRecord(element)) return element;
+    const { settlement } = element;
+    if (!isPlainRecord(settlement)) return element;
+    const scrubbed = scrubImportedEditState(settlement);
+    if (scrubbed === settlement) return element;
+    moved = true;
+    return { ...element, settlement: scrubbed };
+  });
+  return moved ? next : versionHistory;
+}
+
+/**
  * Canonicalize + harden ONE raw settlement save envelope into a fresh,
  * ownership-remapped save entry — the multi-record sibling of the scrub
  * `importGallerySettlement` performs (campaignSlice.js).
@@ -651,7 +695,7 @@ export function prepareSettlementEntry(rawEntry, meta = {}) {
     seed: null,
     aiData: lifecycle.aiData,
     campaignState: lifecycle.campaignState,
-    versionHistory: lifecycle.versionHistory,
+    versionHistory: scrubRestoredHistoryEditState(lifecycle.versionHistory),
   };
 
   return lifecycle.notices.length > 0

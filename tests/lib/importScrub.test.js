@@ -394,4 +394,22 @@ describe('EM-B3d — scrubImportedEditState: an import carries no editor state',
     // replacing it, so one seam cannot shadow the other on the way through.
     expect(Object.hasOwn(out.economicState, 'treasury')).toBe(false);
   });
+
+  it('B4 — an INHERITED key is not an OWN key: the strip stays reference-identical and the heir keeps its own', () => {
+    // ⭐ EM-B3e. `Object.hasOwn` is the mechanism, and the distinction is the dormancy
+    // contract itself: an `in` probe would find the PROTOTYPE's two keys, clone a record
+    // that owns neither, and move the bytes of an import that had nothing to strip.
+    const child = Object.create({ dmLayer: {}, decrees: [] });
+    child.name = 'Heir';
+
+    // Liveness first: the prototype really carries what an `in` probe would have found,
+    // and the child really owns neither — so the identity below is measuring the guard.
+    expect('dmLayer' in child).toBe(true);
+    expect('decrees' in child).toBe(true);
+    expect(Object.hasOwn(child, 'dmLayer')).toBe(false);
+    expect(Object.hasOwn(child, 'decrees')).toBe(false);
+
+    expect(scrubImportedEditState(child)).toBe(child);
+    expect(child.name).toBe('Heir');
+  });
 });
