@@ -1407,4 +1407,271 @@ describe('IA-1 implementation packet manifest and capsule', () => {
       `P-1.retiredSymbols[0].symbol survives in ${RETIREE_PATH} for LANDED retirement: ${RETIREE_SYMBOL}`,
     ]);
   });
+
+  // ── §379.2b (chair ruling, judgment 88; TOOL-29) — THE SEAL-AWARE CROSS-PACKET DISCHARGE ──
+  // TOOL-19 above taught the OWN-retiree rule the seal. Nothing taught §379.2's CROSS-PACKET
+  // discharge the same lesson: its loop opens `rawPacket.status !== 'LANDED'`, so only a LANDED
+  // retirement answers ANOTHER packet's requiredSymbols rows. A sealed build that moves a symbol
+  // a LANDED packet requires therefore cannot pass `validate`, `check:packet` or `resume` after
+  // its own edits — measured on EM-P4's estate: with a VALID seal live, the packet's own half
+  // went quiet and SIX cross-packet errors survived, which is the whole distance between a
+  // buildable packet and an unbuildable one.
+  //
+  // THE FIXTURE IS THAT COLLISION IN MINIATURE. P-0 is the older LANDED packet whose
+  // requiredSymbols names the retiree; P-1 is the READY packet that retires it and whose sealed
+  // build burns it. Both halves must go quiet for the tree to be valid, and every fence that
+  // licenses the first must license the second — which is why the counterforces below assert the
+  // CROSS-PACKET refusal exactly, and the own-retiree refusal only as its companion.
+  //
+  // ⚠ ONE `it` WITH `for` LOOPS INSIDE, for this file's standing reason (see TOOL-19's arm
+  // above): a per-row vitest table would PARK the whole file in the lighting walker and cost it
+  // every credited title it has.
+  it('⭐ lets one live seal discharge the requiredSymbols row ANOTHER packet holds on its retiree', () => {
+    const RETIREE_PATH = 'src/retiree.js';
+    const RETIREE_SYMBOL = 'const UNDISPOSITIONED_CEILING = 7';
+    const STANDING = `${RETIREE_SYMBOL};\n`;
+    const BURNED = 'const UNDISPOSITIONED_CEILING = 6;\n';
+    const NEVER_RETIRED = 'const UNDISPOSITIONED_FLOOR = 1';
+
+    sealRoot = realpathSync(mkdtempSync(join(tmpdir(), 'settlementforge-cross-')));
+    const repo = sealRoot;
+    /** @param {string[]} args */
+    const git = (args) => execFileSync('git', args, {
+      cwd: repo, encoding: 'utf8', stdio: ['ignore', 'pipe', 'pipe'],
+    }).trim();
+
+    git(['init', '-q', '-b', 'fixture']);
+    git(['config', 'user.email', 'fixture@example.test']);
+    git(['config', 'user.name', 'Fixture']);
+    git(['config', 'commit.gpgsign', 'false']);
+    write(repo, 'src/alpha.js', 'export function alphaFeature() { return 1; }\n');
+    write(repo, RETIREE_PATH, STANDING);
+    git(['add', '.']);
+    git(['commit', '-q', '-m', 'fixture base']);
+    const base = git(['rev-parse', 'HEAD']);
+
+    /**
+     * @param {string} retirerStatus P-1's status, the variable under test
+     * @param {Array<{path:string,symbol:string}>} [extraRequired] rows added to P-0
+     */
+    const crossManifest = (retirerStatus, extraRequired = []) => ({
+      schemaVersion: 1,
+      indexPath: INDEX_PATH,
+      packets: [
+        {
+          id: 'P-0',
+          status: 'LANDED',
+          packetPath: 'docs/implementation/packets/P-0.md',
+          verifiedBase: base,
+          changeManifest: [{ action: 'MODIFY', path: RETIREE_PATH }],
+          requiredSymbols: [{ path: RETIREE_PATH, symbol: RETIREE_SYMBOL }, ...extraRequired],
+          acceptanceCases: [{ id: 'A1', case: 'The ceiling was readable when this landed.' }],
+          checks: [['node', 'scripts/implementation-packets.mjs', 'validate']],
+        },
+        {
+          id: 'P-1',
+          status: retirerStatus,
+          packetPath: 'docs/implementation/packets/P-1.md',
+          verifiedBase: base,
+          changeManifest: [{ action: 'MODIFY', path: RETIREE_PATH }],
+          requiredSymbols: [{ path: 'src/alpha.js', symbol: 'alphaFeature' }],
+          retiredSymbols: [{ path: RETIREE_PATH, symbol: RETIREE_SYMBOL }],
+          acceptanceCases: [{ id: 'A1', case: 'The ceiling is burned, never padded.' }],
+          checks: [['node', 'scripts/implementation-packets.mjs', 'validate']],
+        },
+      ],
+    });
+
+    /** The index and P-1's own Markdown must agree with the status under test. */
+    const placeStatus = (retirerStatus) => {
+      write(repo, INDEX_PATH, [
+        '| Packet | Status |', '|---|---|',
+        '| [P-0](./packets/P-0.md) | **LANDED** |',
+        `| [P-1](./packets/P-1.md) | **${retirerStatus}** |`, '',
+      ].join('\n'));
+      write(repo, 'docs/implementation/packets/P-0.md', packetMarkdown('P-0', 'LANDED', base));
+      write(repo, 'docs/implementation/packets/P-1.md', packetMarkdown('P-1', retirerStatus, base));
+    };
+
+    placeStatus('READY');
+    write(repo, MANIFEST_PATH, `${JSON.stringify(crossManifest('READY'), null, 2)}\n`);
+    git(['add', '.']);
+    git(['commit', '-q', '-m', 'packet authority']);
+    const head = git(['rev-parse', 'HEAD']);
+
+    /** @param {ReturnType<typeof crossManifest>} candidate */
+    const validateCross = (candidate) => {
+      /** @type {string[]} */
+      const notes = [];
+      const result = validatePacketManifest(candidate, {
+        rootDir: repo, onNote: (note) => { notes.push(note); },
+      });
+      return { ...result, notes };
+    };
+
+    const crossed = crossManifest('READY');
+    const crossRefusal = `P-0.requiredSymbols[0].symbol is missing from ${RETIREE_PATH}: ${RETIREE_SYMBOL}`;
+    const ownRefusal = `P-1.retiredSymbols[0].symbol is already absent from ${RETIREE_PATH} before READY: ${RETIREE_SYMBOL}`;
+
+    // ── STATE (a) — the retiree STANDS and there is no seal: valid. The clean control, without
+    // which every refusal below would prove only that the fixture broke.
+    expect(readDispatchSeal(repo, 'P-1')).toBeNull();
+    expect(validateCross(crossed)).toEqual({ ok: true, errors: [], notes: [] });
+
+    // ── STATE (b) — the retiree is BURNED with nothing licensing it, and BOTH halves refuse,
+    // spelled EXACTLY as the estate already spells them. This is also the pin that the cure
+    // reworded neither sentence.
+    write(repo, RETIREE_PATH, BURNED);
+    const unlicensed = validateCross(crossed);
+    expect(unlicensed.errors).toEqual([crossRefusal, ownRefusal]);
+    expect(unlicensed.notes).toEqual([]);
+
+    // ── THE SEAL IS MINTED BY THE SHIPPED WRITER, which runs this very validator and refuses to
+    // write over a red manifest — so the retiree is put back first, and that refusal is the
+    // receipt the whole exemption rests on.
+    write(repo, RETIREE_PATH, STANDING);
+    const session = createImplementationSession({ rootDir: repo, packetId: 'P-1' });
+    const sealFile = session.sealPath;
+    const sealBytes = readFileSync(sealFile);
+    expect(session.seal.head).toBe(head);
+
+    // …and with the retiree still standing, the live seal changes NOTHING in either half.
+    expect(validateCross(crossed)).toEqual({ ok: true, errors: [], notes: [] });
+
+    // ── STATE (c) — THE CURE, AND EM-P4'S SCENARIO IN MINIATURE. The sealed build burns the
+    // retiree its own change manifest ordered burned; P-0's row is answered as a NOTE that names
+    // the sealing packet and says what it becomes at the flip; the tree is VALID.
+    write(repo, RETIREE_PATH, BURNED);
+    const crossNote = `P-0.requiredSymbols[0].symbol: discharged by P-1's SEALED READY retirement`
+      + ` under seal ${session.sealDigest} (bound HEAD ${head}): ${RETIREE_SYMBOL}`
+      + ' — an ordinary §379.2 LANDED discharge the moment P-1 flips.';
+    const ownNote = `P-1.retiredSymbols[0].symbol: retiree burned under seal ${session.sealDigest}`
+      + ` (bound HEAD ${head}): ${RETIREE_SYMBOL}`;
+    const licensed = validateCross(crossed);
+    expect(licensed.errors).toEqual([]);
+    expect(licensed.ok).toBe(true);
+    // Emission order is the packet loop's order — P-0's requiredSymbols before P-1's
+    // retiredSymbols — and it is asserted rather than sorted so a silent reorder is visible.
+    expect(licensed.notes).toEqual([crossNote, ownNote]);
+
+    // The CLI is what an operator and the gate actually read, so BOTH notes must reach stdout on
+    // a run that exits 0: a note nobody prints is a silence, not a discharge.
+    let stdout = '';
+    let stderr = '';
+    expect(runImplementationPacketsCli(['validate'], {
+      rootDir: repo,
+      stdout: { write: (chunk) => { stdout += String(chunk); } },
+      stderr: { write: (chunk) => { stderr += String(chunk); } },
+    })).toBe(0);
+    expect(stdout).toContain(`note: ${crossNote}`);
+    expect(stdout).toContain(`note: ${ownNote}`);
+    expect(stdout).toContain('valid: 2 packets (1 READY)');
+    expect(stderr).toBe('');
+
+    // ── THE FIVE COUNTERFORCES, each by the name the ruling gives it. Every one puts the
+    // CROSS-PACKET refusal back verbatim and emits no note at all; the own-retiree refusal rides
+    // along as its companion, and only the stale-HEAD row gets to name its seal in the sentence.
+    const orphan = git(['commit-tree', git(['hash-object', '-t', 'tree', '/dev/null']), '-m', 'orphan']);
+    const counterforces = [
+      {
+        what: 'READY with NO seal at all',
+        mutate: null,
+        recompute: false,
+        companion: ownRefusal,
+        alsoNames: null,
+      },
+      {
+        what: 'a STALE seal whose payload was edited after its digest was taken',
+        mutate: (payload) => { payload.verifiedBase = 'b'.repeat(40); },
+        recompute: false,
+        companion: ownRefusal,
+        alsoNames: null,
+      },
+      {
+        what: "a FOREIGN packet's seal",
+        mutate: (payload) => { payload.id = 'P-9'; },
+        recompute: true,
+        companion: ownRefusal,
+        alsoNames: null,
+      },
+      {
+        what: "ANOTHER worktree's git dir",
+        mutate: (payload) => { payload.gitDir = join(repo, 'elsewhere', '.git'); },
+        recompute: true,
+        companion: ownRefusal,
+        alsoNames: null,
+      },
+      {
+        what: 'a sealed head that is NOT an ancestor of this tree HEAD',
+        mutate: (payload) => { payload.head = orphan; },
+        recompute: true,
+        companion: `${ownRefusal} — dispatch seal `,
+        alsoNames: orphan,
+      },
+    ];
+    for (const counterforce of counterforces) {
+      if (counterforce.mutate) {
+        const envelope = JSON.parse(readFileSync(sealFile, 'utf8'));
+        counterforce.mutate(envelope.payload);
+        if (counterforce.recompute) {
+          envelope.integrityDigest = sha256(canonicalSerialize({
+            schemaVersion: envelope.schemaVersion, payload: envelope.payload,
+          }));
+        }
+        writeFileSync(sealFile, `${JSON.stringify(envelope, null, 2)}\n`);
+      } else rmSync(sealFile);
+      const refused = validateCross(crossed);
+      expect(refused.ok, `${counterforce.what} must license nothing`).toBe(false);
+      expect(refused.notes, `${counterforce.what} must emit no note`).toEqual([]);
+      expect(refused.errors.length, `${counterforce.what} reds both halves`).toBe(2);
+      expect(refused.errors[0], `${counterforce.what} — the cross-packet row`).toBe(crossRefusal);
+      expect(refused.errors[1], `${counterforce.what} — the own-retiree row`)
+        .toContain(counterforce.companion);
+      if (counterforce.alsoNames) expect(refused.errors[1]).toContain(counterforce.alsoNames);
+      writeFileSync(sealFile, sealBytes);
+    }
+
+    // The restore is load-bearing, not tidy: the exact original bytes must still license both
+    // halves, which proves the loop measured the mutations and not a broken seal.
+    expect(validateCross(crossed)).toEqual({ ok: true, errors: [], notes: [crossNote, ownNote] });
+
+    // ── ⛔ DRAFT NEVER DISCHARGES, and it is the sharpest discriminator the estate has: §7.4 is
+    // blind to which non-terminal status a packet holds, so the live seal still licenses P-1's
+    // OWN burn at DRAFT — while the cross-packet row comes straight back. A promise may not
+    // silence another packet's live guard, and only the READY promise is a dispatchable one.
+    placeStatus('DRAFT');
+    const drafted = validateCross(crossManifest('DRAFT'));
+    expect(drafted.errors).toEqual([crossRefusal]);
+    expect(drafted.notes).toEqual([ownNote]);
+    placeStatus('READY');
+
+    // ── ⛔ A PACKET NAMING ONE PAIR AS BOTH REQUIRED AND RETIRED CONTRIBUTES NO DISCHARGE, seal
+    // or no seal. The contradiction is convicted BY NAME, and a red manifest may not go on to
+    // silence a live guard in a different packet.
+    const contradictory = crossManifest('READY');
+    contradictory.packets[1].requiredSymbols.push({ path: RETIREE_PATH, symbol: RETIREE_SYMBOL });
+    const selfConvicted = validateCross(contradictory);
+    expect(selfConvicted.notes).toEqual([]);
+    expect(selfConvicted.errors).toEqual([
+      crossRefusal,
+      `P-1 names ${RETIREE_PATH} :: ${RETIREE_SYMBOL} as BOTH required and retired`,
+      `P-1.requiredSymbols[1].symbol is missing from ${RETIREE_PATH}: ${RETIREE_SYMBOL}`,
+    ]);
+
+    // ── ⛔ EXISTENCE ENFORCEMENT IS NOT WEAKENED. A symbol NOBODY retired still reds from the
+    // same packet, in the same run, beside the row the seal discharged.
+    const undischarged = validateCross(crossManifest('READY', [
+      { path: RETIREE_PATH, symbol: NEVER_RETIRED },
+    ]));
+    expect(undischarged.errors).toEqual([
+      `P-0.requiredSymbols[1].symbol is missing from ${RETIREE_PATH}: ${NEVER_RETIRED}`,
+    ]);
+    expect(undischarged.notes).toEqual([crossNote, ownNote]);
+
+    // ── ⛔ LANDED BEHAVIOUR IS BYTE-IDENTICAL. At the flip the discharge is the ordinary §379.2
+    // one: valid, and NO note, because a landed retirement needs no seal and makes no promise.
+    placeStatus('LANDED');
+    expect(validateCross(crossManifest('LANDED')))
+      .toEqual({ ok: true, errors: [], notes: [] });
+  });
 });
