@@ -1,9 +1,21 @@
 # Settlement editor / EM-B1a — the op vocabulary and the FOURTEEN HOME ops: one constructor, one validator, and the stage partition asserted set-equal
 
-- **Status:** DRAFT
+- **Status:** `READY`
   ⚠ The status value above stands ALONE on its line because `parsePacketHeader`
   (`scripts/implementation-packets.mjs`) anchors the status row at end-of-line (J-TEWF1B-1).
-- **Packet version:** 8
+- **Packet version:** 11
+  ⭐ **VERSION 11 (the chair at placement, 2026-09-21; judgment 102 Q2): re-stamped to the fifth amendment's preamble hash; the interim-rules row struck. No other byte moves. The prior version is 10.**
+  ⭐⭐ **VERSION 10 (the independent pre-proof of version 9, 2026-09-21; the chair's dispatch of session 50b1776f). FOUR EDITS, EVERY ONE MEASURED, AND NOT ONE COUNT, CASE, OP TYPE, PAYLOAD KEY OR LIGHTING FIGURE MOVES.** The prior version is **9**.
+  1. ⛔⛔ **THE DORMANCY ROSTER IS ONE ENTRY, NOT FIVE — TOOL-32 LANDS BEFORE THIS PACKET'S BASE AND THE ARM NOW READS CODE.** TOOL-32 (picked on the train EM-T11 branch before the placement, beside TOOL-30/31/33) routes `tests/domain/editDeclarations.test.js`'s scan through the estate's one shared comment strip (`commentsOnly`, `tests/helpers/codeOnlySource.js`) inside a module-level `dormancyImporters(entries)`, so a JSDoc `@typedef {import('…')}` is no longer an importer and a runtime `import … from '…'` still is. MEASURED on a copy-only estate (read tip `583f8f644` + the composed EM-T10 tip `e1f1a7bb8` + EM-P4 `6981d1eff`), 2,258 modules scanned against the arm's floor of 400: the prefix WITHOUT this packet reads **2 under the landed matcher (EM-D0d's two) and `[]` under TOOL-32's**; the prefix WITH version 9 reads **5** and **ONE**. The one is `src/domain/edit/operations.js imports src/domain/edit/fieldDeclarations.js` — this leaf's single RUNTIME edge. Its two `./types.js` references are `@typedef` lines and drop out with EM-D0d's. Controls: a planted runtime import still convicts through the cure; a planted JSDoc typedef does not, and DOES under the pre-change matcher. ⇒ **R12 is CLOSED — the prefix's red is TOOL-32's to cure and it is cured**, and the roster row, its message and its address are re-aimed at TOOL-32's shape.
+  2. ⭐ **A6's EXACT IMPORT LIST GAINS `../entities/npcs.js` (judgment 115 Q6, MEASURED).** Version 9's `operations.js` imports **five** specifiers; the arm as built at version 8 asserts four, so it reds on version 9's own cure. Run through the acceptance file's OWN `codeOf` + `importsOf`, the list in source order is `'../deterministicSort.js'`, `'../entities/npcs.js'`, `'../entities/status.js'`, `'../worldPulse/relationshipCompatibility.js'`, `'./fieldDeclarations.js'`. §9's A6 row now SPELLS it so the build lane cannot write four.
+  3. ⭐ **THE FIRST-PAINT MEMBERSHIP PROBE NAMES THIS PACKET'S OWN LEAVES.** §3 states the pass condition as *"both leaves stay OUT"*, but the probe version 9 spells tests only EM-R6's two paths and therefore could not convict if either of THIS packet's leaves entered the closure. The probe's path list now carries `src/domain/edit/operations.js` and `src/domain/edit/worldConditions.js` beside EM-R6's, in §3, §10 and the capsule's `checks` row. EXECUTED on the estate: `EAGER_FIRST_PAINT_MODULES: 270 | EM-B1a leaves: NONE | EM-R6 leaves: NONE`, `src/main.jsx` IN the set as the anti-vacuity control, nothing under `src/domain/edit/` in it.
+  4. **The first-paint ABSOLUTE is re-stated as a dated pair** (interim rule 9: executed history keeps its figure with an as-of mark): **269 at `bdbf7c89c`** stands as the ESTATE-REPAIR lane's receipt, and **270** is measured at this packet's own base (EM-P4's relocation, judgment 86). This member's figure remains the DELTA `N → N`.
+  ⭐⭐ **VERSION 9 (the chair, judgment 110, 2026-09-21; EM-B1a CUT from train EM-T10 after window 21 job 5 exited 1 on FOUR classes; it rides EM-T11). THREE OF THE FOUR CLASSES ARE CURED BY A TYPING CONTRACT AND ONE IMPORT; THE FOURTH IS TWO NEW `TEST` ROWS. No op type, payload key, acceptance COUNT (eight), `describe`, `it`, lighting figure or non-goal moves.** The prior version is **8**.
+  1. **TYPES.** `operations.js` read **+33 / +33** and `worldConditions.js` **+7 / +15** against allowances of **0** (neither file has a row in `scripts/.full-typecheck-baseline.json`, `scripts/.domain-strict-baseline.json` or `tests/lint/.domain-any-baseline.json`), plus **8 and 10 `any` holes**. §6 now SPELLS the typing contract that makes both leaves strict-clean with **ZERO `any`**, and it is proved by execution: the TypeScript compiler API in plain node over both configs, with the probe's faithfulness established by reproducing the gate's own four figures on the version-8 text (33 · 33 · 7 · 15) — then **0 · 0 · 0 · 0** on version 9, and **0 · 0** from the ratchet's own `countText`. ⛔ **No baseline is widened; no `@ts-ignore`; no `any` anywhere.**
+  2. **THE `NpcStatus` UNION.** `tests/lint/statusUnionTotality.walker.test.js` reds on **T1 AND T2**, and the measured cause is ONE line: version 8's `const NPC_STATUS_POOL = Object.freeze([…the seven literals…])` is a SCREAMING_SNAKE vocabulary in a **non-roster** file, so the walker's `foreignVocabularies()` credited it with `dead`, `exiled` and `retired`, the DERIVED trigger collapsed to **empty** (*"the matcher stopped firing"*) and the file became a fourth discovered enumerator. ⭐ **The cure is the chair's: the pool READS EM-P4's value-level `NPC_STATUS_VALUES`** (`src/domain/entities/npcs.js`, minted for exactly this reason), never a literal list. Driven on the walker's own extracted derivation over a scratch estate: base `TRIGGER ['dead','exiled','retired']` → v8 `[]` → **v9 `['dead','exiled','retired']`, both set-equalities restored to the base's values.** ⇒ **NO ENUMERATOR ROW IS OWED**, `Depends on` gains **EM-P4 LANDED** and `requiredSymbols` gains that export.
+  3. **DORMANCY** — `tests/domain/editDeclarations.test.js`. A new `TEST` row WIDENS that arm to an **EXACT importer roster, both directions**. ⛔⛔ **MEASURED, AND IT REFUTES THE CHEAPER OPTION AND MORE:** the arm's regex runs over **raw source with no comment strip**, so a JSDoc `@typedef {import('./types.js').Op}` counts exactly as a runtime import — "types by JSDoc only" is not available. **AND THE ARM IS ALREADY RED AT TRAIN EM-T10's COMPOSED PREFIX WITHOUT THIS PACKET:** EM-D0d's `src/components/edit/FreeField.jsx` and `PoolField.jsx` each carry that typedef. ⭐⭐ **VERSION 10 SUPERSEDES THAT ROSTER: TOOL-32 lands before this packet's base and the arm now reads COMMENT-STRIPPED source, so EM-D0d's two typedef edges and this leaf's two `./types.js` typedef edges all drop out and the roster is ONE entry — `src/domain/edit/operations.js imports src/domain/edit/fieldDeclarations.js`, the leaf's single runtime edge.** §13 R12 is CLOSED by that pick. The **+0 B** price is restated and still true: **nothing under `src/` imports either of this packet's leaves** (second-order scan `[]`), and the membership probe reads `N → N` with both leaves OUT of the eager closure.
+  4. **THE B4 CONSUMER ROSTER** — `tests/domain/relationshipCompatibility.test.js`. A second `TEST` row adds this packet's **three** readers to `SANCTIONED` and asserts those three in **both** directions. ⛔ **MEASURED: no lawful re-export of `PRIMARY_RELATIONSHIP_TYPES` exists** (the one `export` is the module itself; the sanctioned `signalRegistry.js` imports it directly), so a `TEST` row is the only path. ⛔ **AND TWO SANCTIONED ROWS ARE ALREADY STALE** — `tests/data/stringCouplingRegistry.test.js` does not exist in the tree and `tests/domain/tradeSalience.test.js` no longer mentions the module — so a both-ways arm over the WHOLE roster cannot be green; this packet asserts both directions **over its own three rows only** and §13 R13 hands the two legacy rows to the chair.
+  ⭐ Also: §3's two line estimates are replaced by the **MEASURED** figures the version-8 build reported (`operations.js` **231**, `worldConditions.js` **156 → 165**, both of 250); A7's first half is re-aimed from *"parse the typedef here"* to *"the pool IS `NPC_STATUS_VALUES` by identity"*, with the typedef-to-value pin delegated to EM-P4's landed `tests/domain/statusVocabularies.test.js` by name; §10's `checks` gain the two walkers that govern the widened files. ⛔ **The lighting delta does NOT move** — both new `TEST` rows add **zero** `it` and **zero** `describe`, each widening living inside the arm it strengthens.
   ⭐ **VERSION 8 (the chair, judgment 99, 2026-09-21; the build lane's STOP at `583f8f644`, `lane-em-b1a-t10-scratch/EM-B1a.STOP.md`) — TWO SEALED CASES RE-AIMED AT THE FOURTEEN, NOT ONE COUNT MOVED.** Version 7's A5 and A8 still carried version 1's eighteen-op text (R8's sweep named §2, §3, §7, §8, A1, A3, A4 and the manifest `_note`; A5 and A8 were outside it): A5 required three `rename-*` rows that A1 asserts ABSENT, and A8 required `validateOp` to validate a type that is not a key of `OP_TYPES`. Version 8 strikes each case's stale first clause and keeps its satisfiable half — A5: the delegation source scan, with the absence restated as the reason; A8: the `ok`/`errors` invariant, with `set-world-fact` answered as `unknown op type` at the fourteen. Also: "ten fields" becomes "eleven" wherever the ROW was meant (§2, §3, §7, A1, the capsule's A1 and test-file note; EM-A1's `Op` still carries ten), the test-file note's "eighteen" becomes "fourteen", and §16.1's `npcPresent` reads active-or-absent (`entities/npcs.js:160` writes `status: input.status || 'active'`, so an absent key is the writer's own spelling of active). Cases stay 8 of 8; the test home, §7, the `changeManifest`, the `checks`, every count and the lighting delta are untouched, so the count prover is green unchanged. The prior version is 7.
   - ⭐⭐ **Version 7 is the EM-T10 PRE-PROOF revision, measured whole at `429141e2d` (the read tip
     `read-tip-em-t8-tip`, detached; `git status --short` EMPTY before and after).** The J-T1 window
@@ -80,7 +92,7 @@
   and the STOP conditions are version 1's, untouched; §3's budget is re-measured because the two new
   live readers add lines to `worldConditions.js`. Every figure re-measured at `023eda2ec`;
   `EM-B1a.evidence.md` §10–§15 carries the commands.
-- **Verified base:** `fixes-2026-09-18-consist` at `d31af2ceebf643818201b2e2ab4a556765d2fc7c`
+- **Verified base:** `em-t11-b1a-2026-09-21` at `252d7ba4eaa7e531abd2ff2d82e3f34c322d3a08`
   ⚠ Ten commits moved the branch under this lane (11:01→11:33 EDT), all docs plus `.gitignore` and
   one edit to an existing test file. `d31af2cee` **IS an ancestor** of `7aa769830`, and **every
   path this packet measures is blob-identical across the window** (evidence §0). Held at
@@ -93,9 +105,24 @@
   `d31af2cee`**; the chair re-pins at promotion, not this lane. ⚠ The lighting census baseline DID
   move in the window (evidence §15.2) — which is why **§7 now states this packet's own DELTA and no
   absolute tuple at all** (chair's ruling R11). Nothing here needs to move when the base does.
-- **Last revalidated:** 2026-09-19 11:33 EDT at `d31af2cee`; **version 2 re-measured 2026-09-19 at
+- **Last revalidated:** ⭐⭐ **VERSION 9 re-measured 2026-09-21 at the read tip `583f8f644` (detached,
+  `git status --short` EMPTY), PLUS train EM-T10's six-member prefix read as lane commits** — EM-P4
+  `6981d1eff`, EM-B2a1 `3400361a1`, EM-D0d `2524e94df`, EM-B3e `f00d44040`, EM-D0c `3bfa9825b` — since
+  this packet rides **train EM-T11**, which is cut at EM-T10's landed tip. ⛔ **The chair re-pins
+  `Verified base` at promotion; this lane pins nothing.** Version 9's figures that depend on the
+  prefix are named as such at §7 and §13 R12/R13. Earlier: 2026-09-19 11:33 EDT at `d31af2cee`;
+  **version 2 re-measured 2026-09-19 at
   `023eda2ec2f8dd2d9286584d2496c6ac4ea5309e`** (the §16 roster and §3's budget only)
-- **Depends on:** ⭐⭐ **RE-MEASURED AT THE EM-T10 PRE-PROOF, `429141e2d`: only ONE of the three is still unlanded.**
+- **Depends on:** ⭐⭐ **RE-MEASURED AT VERSION 9 ON THE READ TIP `583f8f644` PLUS TRAIN EM-T10's SIX-MEMBER PREFIX.**
+  ⭐⭐ **`EM-P4` — MUST BE LANDED, AND IT IS IN THE EM-T10 PREFIX THIS PACKET'S TRAIN IS CUT AFTER.**
+  It mints `export const NPC_STATUS_VALUES` in `src/domain/entities/npcs.js` (`@type {readonly NpcStatus[]}`,
+  frozen, the typedef's own seven in its own order) — the union's value-level home, in the walker's
+  FIRST consumer-roster file, which is the whole reason a value-level home was minted. ⛔ **MEASURED
+  BOTH WAYS:** with EM-P4's `npcs.js` the leaf reads **0 / 0** under both typecheck configs; without
+  it the same text reads **1 / 1**, and the one diagnostic is
+  `TS2305 Module '"../entities/npcs.js"' has no exported member 'NPC_STATUS_VALUES'`. EM-P4's landed
+  `tests/domain/statusVocabularies.test.js` is the typedef-to-value pin A7 now delegates to by name.
+  **The three below were re-measured at the EM-T10 pre-proof, `429141e2d`.**
   **`EM-B1e` — LANDED**: `export function ruinInstitution(inst, { reason, fate })` at
   `src/domain/worldPulse/calamityKernel.js:242`. ⛔ **This packet DECLARES that writer and CALLS it
   nowhere** — it lands DARK with `guards: []`, and `ruinInstitution` is deliberately NOT a
@@ -105,7 +132,11 @@
   — the SEVEN, in codepoint order — and exports `NPC_UNAVAILABLE_STATUSES`. ⛔ **It did NOT widen
   `EntityStatus`**, which stands at the FIVE (`status.js:23`, blob-identical across the window), exactly
   as ODQ §934.47 add. 6 ruled; `ruined` is this op's POOL member and is not a union member.
-  **`EM-A1` — NOT LANDED (train EM-T9, BUILT on `em-t9-a1`).** It is the ONLY hard gate left:
+  **`EM-A1` — LANDED at train EM-T9 (its two leaves `src/domain/edit/types.js` and
+  `fieldDeclarations.js` are present at `583f8f644`, `git ls-tree`). ⛔ VERSION 9 CARRIES A `TEST`
+  ROW ON EM-A1's OWN DORMANCY ARM** (§7), because this packet's `operations.js` imports both leaves
+  and the landed arm asserts that nothing under `src/` does. The text below is version 8's record of
+  the state before EM-A1 landed, retained rather than deleted:
   `src/domain/edit/types.js` is absent at the tip (`git ls-files src/domain/edit` lists
   `recordRegister.js` alone), and `@typedef {import('./types.js').Op}` under the sealed
   `npm run typecheck:domain:strict` has no home without it.
@@ -127,8 +158,8 @@
   returns `{ violations, suggestions }`; `GATE_FEATURES` is the live `requires` table;
   `FACTION_ARCHETYPES` 13. ⛔ **The lighting census is carried as a DELTA, never an absolute tuple**
   (§7, chair's ruling R11) — the baseline is the chair's to stamp at promotion. No test was run.
-- **Preamble:** docs/implementation/preambles/EM-PREAMBLE.md (SHA-256: TO BE STAMPED BY THE CHAIR)
-- **Interim compile rules:** `COMPILE-RULES.interim.md` (the chair, 2026-09-20) — the fifth amendment's rules **1–17 as of 2026-09-21**, obeyed before they land. Where this packet and `EM-PREAMBLE.md` (SHA-256 `c9f33c8d2940372bde8a6d931e3d389b79516a90ed45405cbbbf3e698cc46675`, **RE-MEASURED with `shasum -a 256` at the read tip `429141e2d` on 2026-09-21 and unmoved** — the FOURTH amendment, still the tree's live text) disagree, the interim rules govern and this row is the record of it.
+- **Preamble:** docs/implementation/preambles/EM-PREAMBLE.md (SHA-256: fdecd426828665cad2dfaf872871f29f46fa4816e1bd4c43c20ccd84dacc9e7c — stamped by the chair at placement)
+> **Compile rules:** the fifth amendment of `EM-PREAMBLE.md` (SHA-256 above) — the interim sheet is superseded; nothing in this packet needs it.
   ⓘ Per the chair's ruling (6) this lane does not stamp it; the hash has moved with each ruling.
 
 ---
@@ -229,12 +260,23 @@ nothing more; the registry (EM-C1), the layer (EM-B2), the persisted keys (EM-B3
 | New logic-bearing production leaves | `2` — `operations.js` + `worldConditions.js` (§16.2) | ≤2 |
 | Existing logic-bearing production files modified | `0` | ≤3 |
 | Additional registration-only files | `0` | ≤3 |
-| Handwritten files total | `3` (+1 deferred census row) | ≤12 |
-| New/changed effective production lines | **≈296–320 (estimate range)** | ≤400 |
-| **Effective lines — leaf 1, `operations.js`** (FOURTEEN rows, R8) | ✅ **≈213–227 of 250 — inside, with ≥23 lines of margin** (at eighteen it was ≈231–249) | ≤250 |
-| **Effective lines — leaf 2, `worldConditions.js`** (ten predicates, SCOPED per R9) | ✅ **≈83–93 of 250 — inside, with ≥157 lines of margin** (version 1 ≈60; version 2 pre-scoping ≈73–83) | ≤250 |
+| Handwritten files total | `5` — the three CREATEs plus the **two `TEST` widenings** of version 9 (+1 deferred census row) | ≤12 |
+| Existing TEST files modified (version 9) | `2` — `tests/domain/editDeclarations.test.js`, `tests/domain/relationshipCompatibility.test.js`; **zero new `it`, zero new `describe`** | — |
+| New/changed effective production lines | ⭐ **396 — MEASURED, not estimated** | ≤400 |
+| **Effective lines — leaf 1, `operations.js`** (FOURTEEN rows, R8) | ✅ **231 of 250 — MEASURED, inside, with 19 lines of margin** | ≤250 |
+| **Effective lines — leaf 2, `worldConditions.js`** (ten predicates, SCOPED per R9) | ✅ **165 of 250 — MEASURED (version 8 built 156; version 9's typing contract adds 9), inside, with 85 lines of margin** | ≤250 |
 | Delta in a shared/hot file | `0` — names no hot file | ≤15 |
 | Acceptance cases | `8` | ≤8 |
+
+⭐⭐ **VERSION 9 REPLACES TWO ESTIMATES WITH TWO MEASUREMENTS, AND SAYS SO RATHER THAN QUIETLY
+RE-RANGING.** The version-8 build measured `operations.js` at **231** (against an estimate of
+≈213–227) and `worldConditions.js` at **156** (against ≈83–93) with eslint's own `Linter` under
+`skipBlankLines` + `skipComments`, and reported both as "noticed, not mine to fix"
+(`lane-em-b1a-t10-scratch/EM-B1a.receipt.md`). This lane reproduced **both figures exactly** with a
+plain-node counter of the same definition, then measured version 9 at **231 / 165**. The arithmetic
+tables below are RETAINED as the record of how the split was decided — they are how the roster came
+to be fourteen — and they are no longer this packet's budget claim. ⛔ **Crossing 250 on either leaf
+remains a STOP (§11), and neither leaf is near it.**
 
 Overrides approved before dispatch: `NONE`. **HOT FILES: none named.**
 
@@ -350,6 +392,88 @@ Every row found BY SYMBOL at `d31af2cee`; commands in `EM-B1a.evidence.md`.
 ---
 
 ## 6. Exact contracts
+
+### ⭐⭐ 6.0 · THE TYPING CONTRACT — BOTH LEAVES STRICT-CLEAN AT ZERO, WITH NO `any` (version 9)
+
+⛔ **THIS SUBSECTION IS A CONTRACT, NOT A STYLE NOTE.** `src/domain/edit/**` has **no row** in
+`scripts/.full-typecheck-baseline.json`, `scripts/.domain-strict-baseline.json` or
+`tests/lint/.domain-any-baseline.json`, so every allowance is **ZERO** and a new leaf must land at
+zero under `npm run typecheck:ratchet`, `npm run typecheck:domain:strict` **and** the any-cast
+ratchet. Version 8 landed **33 / 33 / 7 / 15 errors and 8 + 10 `any` holes**. ⛔ **Widening a
+baseline is not the cure and neither is a `DECLARED_OVERRUN` row** — both ledger ceilings are
+monotone-down literals, so a row only moves the red to the ceiling arm (`domainAnyCastBaseline.test.js`
+says so in its own failure text). **The cure is the types, and here they are.**
+
+**1 · A FROZEN CLOSED VOCABULARY IS FROZEN *AND* LITERAL-TYPED.** `Object.freeze([…])` infers
+`readonly string[]`, so `OP_STAGES[0]` is `string`, and `stage`/`consequence` on all fourteen rows
+plus `kind` on all five field helpers are `TS2322` — **33 of 33 errors in leaf 1 come from this one
+shape.** All three closed vocabularies are written
+`Object.freeze(/** @type {const} */ ([…]))` — frozen at run time, literal at compile time:
+
+```js
+export const OP_STAGES = Object.freeze(/** @type {const} */ (['home', 'off-stage']));
+export const OP_CONSEQUENCE_POLICIES = Object.freeze(/** @type {const} */ (['home', 'by-target-reality']));
+const PAYLOAD_SPEC_KINDS = Object.freeze(/** @type {const} */ (['pool', 'free', 'ref', 'int', 'enum']));
+```
+
+⚠ `TARGET_KINDS` is deliberately **not** const-asserted: it is read only by `.includes()`, and a
+literal tuple's `.includes(string)` is itself an error.
+
+**2 · THE ROW MAP IS TYPED AT ITS DECLARATION.** `PayloadSpecKind` is extracted as its own typedef
+and `PayloadFieldSpec.kind` reads it; `OP_TYPES` stays `@type {Readonly<Record<string, OpTypeDeclaration>>}`
+and `row(decl)` stays `@param {OpTypeDeclaration} @returns {OpTypeDeclaration}`. The declaration's
+**eleven** keys are unchanged, `requires` is still the `{ world, registry }` split, and `makeOp`
+still FLATTENS it onto EM-A1's `Op.requires: readonly string[]`.
+
+**3 · EVERY DOOR IS `unknown`, AND THE NARROWING IS A TYPE PREDICATE.** Both leaves' entry points
+take `@param {unknown}`, never `@param {any}`. The two shape guards return **predicates**, which is
+what makes the bodies index what they tested without a cast:
+
+```js
+/** @param {unknown} value @returns {value is Record<string, unknown>} */ function isPlainObject(value) …   // operations.js
+/** @param {unknown} value @returns {value is Record<string, unknown>} */ function isRecordObject(value) …  // worldConditions.js
+/** @param {unknown} target @returns {target is EntityRef} */            function isEntityRef(target) …
+```
+
+⛔ **A `boolean` return is the reason an `any` looks cheap**: it narrows nothing, so every subsequent
+index is a strict error. The predicate spends one JSDoc word and buys the whole file.
+
+**4 · THE PREDICATE SIGNATURE IS `(record: unknown, campaignState: unknown) => boolean`,** and the
+reader gate is `((campaignState: unknown) => boolean)|null`. A row as its AUTHOR writes it has no
+`source` — `liveRow` stamps it — so `liveRow` takes a **`WorldConditionRowDraft`** (the row minus
+`source`); taking the finished row is `TS2345 "Property 'source' is missing"` on **all seven** live
+rows. ⭐ **`openRoute` is built by `liveRow` like every other live row**, not by an inline
+`Object.freeze`: `liveRow` produces the same three keys, the same frozen `readers` and the same
+`source: 'live'`, and the inline form left its two parameters and its reader `gate` with no
+contextual type (three `TS7006`). The row still declares **two** readers and the second still carries
+the live `routeLifecycleActive` gate.
+
+**5 · THE READER LOOKUPS ARE NARROWED AT THE DOORWAY, NOT AT EACH CALL.** `worldOf` and `graphOf`
+answer **`Record<string, unknown>|null`**: a campaign whose `worldState` is not an object is
+indistinguishable from one that has none, which is this leaf's own false-on-absence law spelled as a
+type. That is what lets `hasBeliefMaps`, `getSpatialLedger`, `routeLifecycleActive`,
+`readRouteNetwork` and `atWarWith` be called **at their own declared parameters** with no `any`.
+Two small helpers carry the rest: `listOf(value) → readonly unknown[]` (because `Array.isArray(x) ? x : []`
+infers a UNION of array types, which does not contextually type a `.some` callback — three `TS7006`),
+and `edgesOf(graph) → readonly GraphEdgeLike[]` where
+`GraphEdgeLike = { from?: unknown, to?: unknown, id?: unknown }` is `edgeKeyBetween`'s own declared
+shape. ⛔ **Every assertion in these leaves WIDENS; none narrows a value to a type it has not been
+tested for.** `activeChannelsFrom`'s graph is asserted to `RegionGraph` (all-optional fields) with
+`?? {}`, which is byte-equivalent because that function's own first line is `ensureRegionalGraph(graph || {})`;
+`spec.values` is widened to `readonly unknown[]` at the membership test so a non-string payload value
+reads as *"not one of the declared values"* rather than being cast to `string`, which would be a lie.
+
+**6 · `Op.requires` FLATTENS; the `Op` literal keeps its one `/** @type {Op} */` assertion** (the
+`type` argument arrives `unknown` and `declarationOf` does not narrow it). That assertion names `Op`,
+not `any`, so the ratchet counts nothing.
+
+⭐ **PROVED BY EXECUTION, WITH THE PROBE'S FAITHFULNESS PROVED FIRST.** The TypeScript compiler API in
+plain node, the two configs transcribed from `tsconfig.full.json` and `tsconfig.domain-strict.json`,
+the leaves supplied as a virtual overlay so no tree is written: on the **version-8** text the probe
+reports **33 · 33 · 7 · 15**, which is `b3-typecheck-ratchet.log` and `b4-typecheck-domain-strict.log`
+figure for figure; on **version 9** it reports **0 · 0 · 0 · 0**, with a planted error still seen in
+each leaf. The any-cast ratchet's own `countText` reports **8 → 0** and **10 → 0**.
+`EM-B1a.evidence.md` §1–§3 carries the commands.
 
 ### Inputs and outputs
 
@@ -641,8 +765,23 @@ those are EM-B3's (§P2.6).
 | `CREATE` | `src/domain/edit/operations.js` | `OP_STAGES`, `OP_CONSEQUENCE_POLICIES`, `OP_TYPES`, `makeOp`, `validateOp` | **250 eff (cap); ≈213–227 estimated** | The vocabulary of §6 with exactly **THE FOURTEEN HOME ROWS of §6's one list** (R8), every row carrying all eleven fields (§6's `OpTypeDeclaration`). Both closed vocabularies carry BOTH members. Import no PRNG, no `src/store/**`, no `src/components/**`. Author `consequenceFor` nowhere; call `rederive` nowhere. Leave the structure open for B1b to append. |
 | `CREATE` | `src/domain/edit/worldConditions.js` | `WORLD_CONDITIONS` — the frozen id → `{ predicate, readers, source }` map, TEN ids | **250 eff (cap); ≈83–93 estimated (§16.2)** | The ten predicates of §16.1, each `(record, campaignState) => boolean`, PURE, TOTAL and FALSE-ON-ABSENCE. ⭐ **Every predicate is SCOPED to the card's SUBJECT and to its process's LIVE stage** (the chair's ruling R9). Read every fact at its source module and through its exported gate, never a bare string or a raw flag. The two honestly-absent rows declare `source: 'EM-E4'` and `readers: []`. |
 | `CREATE` | `tests/domain/editOperations.test.js` | A1–A8 | `n/a` | ONE literal `describe`, **eight straight-line `it`**, no `.each`/`runIf`/nesting (§P3.4). Table arms report a FULL offender list. Negatives carry `// anchored:` on the line immediately above. |
+| `TEST` | `tests/domain/editDeclarations.test.js` | the ONE arm `DORMANCY: no module under src/ imports either new leaf…` (`:226`) | **≤ 25 eff; adds ZERO `it` and ZERO `describe`** | ⛔ **WIDEN IN PLACE, NEVER DELETE.** The arm's `importers` list becomes an **EXACT ROSTER asserted SET-EQUAL both directions** (sort both sides — `walkSources` order is `readdirSync` order and is not stable across filesystems), and its message keeps the +0 B claim it exists for. ⛔ **THE ARM YOU WIDEN IS TOOL-32's, NOT THE PRE-CHANGE ONE** (TOOL-32 is picked on the train branch BEFORE this placement; it extracts the matcher into a module-level `dormancyImporters(entries)` that runs `commentsOnly(source)` before the specifier regex, and it adds an in-body guard-the-guard pair). Widen the ONE `expect(importers, …).toEqual([])` at its call site. The roster is **ONE** entry, MEASURED at that shape over the composed prefix: `src/domain/edit/operations.js imports src/domain/edit/fieldDeclarations.js` — this leaf's single RUNTIME edge. ⛔ **NOT five:** under TOOL-32 a JSDoc `@typedef {import('…')}` is not an importer, so EM-D0d's two `FreeField.jsx`/`PoolField.jsx` edges and this leaf's own two `./types.js` typedef edges all drop out. If the arm at the build's base still reads RAW source, TOOL-32 has not been picked: **STOP** rather than write either roster. ⭐ **The widening is a STRENGTHENING and it adds the claim that matters:** a SECOND-ORDER scan asserts that **no module under `src/` imports either of THIS packet's leaves**, so EM-A1's declaration table still reaches no bundle closure and the +0 B price is true by construction rather than by an absence that is no longer empty. The arm's message names the one entry as this leaf's **only runtime edge into EM-A1's volume**, and says that the leaf's `Op`/`EntityRef` typedefs reach `types.js` by JSDoc alone, which TOOL-32's strip correctly does not count. Keep every negative `// anchored:`. |
+| `TEST` | `tests/domain/relationshipCompatibility.test.js` | the ONE arm `only the sanctioned B4 consumers import relationshipCompatibility` (`:164`) | **≤ 15 eff; adds ZERO `it` and ZERO `describe`** | ⛔ **ADD TO `SANCTIONED`, NEVER REMOVE FROM IT.** Three rows join, each with its one-line reason: `src/domain/edit/operations.js` (READ-ONLY vocabulary — `PRIMARY_RELATIONSHIP_TYPES` as `set-relationship`'s closed `enum`; evaluates no compatibility and writes no rule), `src/domain/edit/worldConditions.js` (READ-ONLY — the `trade_partner` member taken out of the closed list so an upstream rename empties the lookup and reds), `tests/domain/editOperations.test.js` (the packet's own battery). ⭐ **BOTH DIRECTIONS, OVER THIS PACKET'S OWN THREE ROWS ONLY:** a second assertion requires each of the three to BE a live hit, so a row that stops reading the vocabulary reds instead of ageing silently. ⛔ **The legacy roster is NOT made set-equal** — measured, `tests/data/stringCouplingRegistry.test.js` does not exist in the tree and `tests/domain/tradeSalience.test.js` no longer mentions the module, so a whole-roster both-ways arm cannot be green; §13 **R13** hands those two rows to the chair rather than deleting them here. The file's frozen unanchored-negative count (`negativeAssertionAnchor.walker.test.js:498`, **2**) must not move: every negative added carries `// anchored:`. |
 
-Generated artifacts: `NONE`. ⛔ **Edge-shared closure NOT owed** — zero existing files modified.
+Generated artifacts: `NONE`. ⛔ **Edge-shared closure NOT owed** — **zero existing PRODUCTION files
+modified**; version 9's two modified files are both under `tests/`, which the edge-shared closure
+does not read.
+
+> ⭐⭐ **VERSION 9's TWO `TEST` ROWS — WHY THEY ARE CONTRACT, NOT CURE (judgment 110).** A landed arm
+> is widened only by the packet whose landing needs it, under its own seal: a cure lane cannot add a
+> §7 row, and the chair widening it at a terminal would be the chair editing another packet's
+> guarantee. ⛔ **Both files EXIST at the verified base** (interim rule 4, so `TEST` and not `CREATE`),
+> both enter `changeManifest` (rule 6), neither homes an acceptance case (rule 12 — §9's eight all
+> live in `tests/domain/editOperations.test.js`, and each widening lives INSIDE the landed arm it
+> strengthens), and neither moves any lighting figure (rule 9 — **zero new `it`, zero new `describe`**).
+> ⛔ **Interim rule 13, measured:** `git grep -n -F '<path>' -- tests/lint scripts` over both paths
+> finds no line-addressed register row — only `negativeAssertionAnchor.walker.test.js:498`, which is a
+> per-FILE count, and `editDeclarations.walker.test.js:26`, a prose citation. **No re-address row is owed.**
 
 > ⭐ **TWO §7 CORRECTIONS (ESTATE-REPAIR-2, 2026-09-20), BOTH SET-EQUALITY, NEITHER A SCOPE CHANGE.**
 > (1) **`src/domain/edit/worldConditions.js` IS ADDED to §7.** The JSON capsule has CREATEd it all
@@ -660,13 +799,13 @@ Generated artifacts: `NONE`. ⛔ **Edge-shared closure NOT owed** — zero exist
 | # | Obligation | Verdict | Measurement |
 |---|---|---|---|
 | P2.1 | lighting census | **OWED — a DELTA of `+1 / +0 / +1 / +8 / +1`, INTERIOR RED** | ⛔ **STATED AS A DELTA, NEVER AS AN ABSOLUTE TUPLE** (chair's ruling R11). Each figure derived from **this packet's own CREATE/TEST rows** and from `measureCensus()`'s four expressions (`sovereigntyLightingContract.walker.test.js:601-604`) — see the derivation below. Re-derived whole at the terminal (§P3.2). |
-| P2.2 | mutation-coverage row (interim rule 15) | **NOT OWED — MEASURED, not recalled** | ⭐ **`ENFORCER_DIRS` READ AT `429141e2d` (`tests/lint/mutationCoverage.shared.mjs:36-45`) IS EIGHT, NOT ONE:** `tests/lint`, `tests/design`, `tests/docs`, `tests/data`, `tests/copy`, `tests/security`, `tests/edgeFunctions`, `tests/generators`. **`tests/domain` is in none of them**, and the sibling arm — `NAME_PATTERN` (`:48-49`, `census\|scan\|baseline\|ratchet\|walker\|killlist\|parity\|coverage\|governance\|freshness\|integrity\|exhaustiveness\|roundtrip\|golden\|contract\|pin`) — does not match the basename `editOperations.test.js`. ⇒ the packet's one `tests/` CREATE owes NO `scripts/mutation-coverage-manifest.json` row and names no `rowKey`, so it contends for that register with nobody. The walker's own row went to EM-B1b with the walker. |
+| P2.2 | mutation-coverage row (interim rule 15) | **NOT OWED — MEASURED, not recalled** | ⭐ **`ENFORCER_DIRS` READ AT `429141e2d` (`tests/lint/mutationCoverage.shared.mjs:36-45`) IS EIGHT, NOT ONE:** `tests/lint`, `tests/design`, `tests/docs`, `tests/data`, `tests/copy`, `tests/security`, `tests/edgeFunctions`, `tests/generators`. **`tests/domain` is in none of them**, and the sibling arm — `NAME_PATTERN` (`:48-49`, `census\|scan\|baseline\|ratchet\|walker\|killlist\|parity\|coverage\|governance\|freshness\|integrity\|exhaustiveness\|roundtrip\|golden\|contract\|pin`) — does not match the basename `editOperations.test.js`. ⇒ the packet's one `tests/` CREATE owes NO `scripts/mutation-coverage-manifest.json` row and names no `rowKey`, so it contends for that register with nobody. The walker's own row went to EM-B1b with the walker. ⭐ **VERSION 9 CHANGES NOTHING HERE:** rule 15 binds a `CREATE` under an enforcer directory, and version 9's two additions are `TEST` rows on files that already exist — `tests/domain/editDeclarations.test.js` and `tests/domain/relationshipCompatibility.test.js`, both under the same non-enforcer `tests/domain`. |
 | P2.3 | observed-shape exemption | **NOT OWED** | No save-time key read; nothing persisted. Scanner covers every `.js` under `src/` (`:250`); the check is in `checks`. |
 | P2.4 | writer-reach | **CANNOT MOVE** | `SURFACE_CLOSURE_STOP` includes `'src/store/'` (`writer-reach-scan.mjs:115-117`). |
 | P2.5 | decision-fork + mechanism-coverage | **NOT OWED** | This packet mints no seeded chooser and no pool; it draws nothing at all. |
 | P2.7 | prose-numerics | **NOT OWED** | No figure rendered. |
 | ⭐ P2.11 | **EM-R6's DEFERRED FIRST-PAINT LIABILITY** | ⛔ **OWED — PRICED HERE, AT THIS MEMBER'S PRE-PROOF, NEVER AT ITS BUILD** | See the door below; the membership probe is a `checks` row of §10 and it always executes. |
-| ⭐ **P2.14** | **the TUNING INVENTORY (interim rule 17)** | ✅ **NOT OWED — MEASURED 0 / 0, WITH A POSITIVE CONTROL** | Both CREATEs are `.js` leaves under `src/domain/**`, which `scripts/lib/tuning-inventory.mjs` counts (`TREES_P2P3 = ['src/domain','src/generators']`, `:60`). The library's OWN `countUnregisteredNamed` and `countBareDecimals` were run over this contract's planned text at `429141e2d`: **P2 `{}` · P3 `{}` — zero unregistered named dials and zero bare decimals in either leaf**, which is the ZERO the walker holds a new file to. The instrument is proved live: a planted control (`export const CONTROL_LIMIT = 12;` + `0.75` + `1.5`) returned **P2 2 · P3 1**. ⛔ **The contract is what keeps it at zero and it is stated once here:** every op row's `duration` is `null`, both closed vocabularies and every relation are frozen STRING arrays, and `worldConditions.js`'s live-stage set is four strings — **no module-top-level `const UPPER_SNAKE = <number>;` and no fractional decimal is authored in either leaf**. A number that later proves necessary is an input bound spelled as an integer member of a frozen object, never a top-level numeric const; a genuine simulation dial would be a tuning-register row and the OWNER signs tuning. |
+| ⭐ **P2.14** | **the TUNING INVENTORY (interim rule 17)** | ✅ **NOT OWED — RE-MEASURED AT VERSION 9 OVER THE BUILT TEXT, 0 / 0, WITH THE CHAIR'S POSITIVE CONTROL** | Both CREATEs are `.js` leaves under `src/domain/**`, which `scripts/lib/tuning-inventory.mjs` counts (`TREES_P2P3 = ['src/domain','src/generators']`, `:60`). ⭐ **VERSION 9 ran the library's own `measureTree(root, loadTuningRegister(root))` over a copy-only scratch estate carrying train EM-T10's prefix AND version 9's two leaves as built:** `operations.js` **P2 0 · P3 0**, `worldConditions.js` **P2 0 · P3 0**, and the estate's TOTALS `unregisteredNamed 535 · bareDecimals 6985` **identical to the base tree's** — a relocation would have moved them. POSITIVE CONTROL, the chair's own: `src/domain/activeConditions.js` **P2 = 3** (P3 = 60), live on both trees. Version 8's figure (over the planned text at `429141e2d`) was the same 0 / 0. ⛔ **The contract is what keeps it at zero and it is stated once here:** every op row's `duration` is `null`, both closed vocabularies and every relation are frozen STRING arrays, and `worldConditions.js`'s live-stage set is four strings — **no module-top-level `const UPPER_SNAKE = <number>;` and no fractional decimal is authored in either leaf**. A number that later proves necessary is an input bound spelled as an integer member of a frozen object, never a top-level numeric const; a genuine simulation dial would be a tuning-register row and the OWNER signs tuning. |
 | ⭐ **P2.13** | **wiring census — the PRODUCER COUNT** | ⛔ **OWED — A DEFERRED ROW, delta only (interim rule 1)** | `docs/content/wiring-census.json` — **a named INTERIOR RED, delta only.** `stamp.producerIndexFiles` **+2**: this member's new `.js` leaves under the two counted roots, named one by one — `src/domain/edit/operations.js` · `src/domain/edit/worldConditions.js`. **Re-measured from this packet's own CREATE rows at `bdbf7c89c2569679bcccdb188d5d831ccfaa0e6d`.** ⛔ `producerIndexFiles` **NAMES NOTHING — IT IS A NUMBER** (**RE-READ FROM THE STAMP AT `429141e2d`: still `1172`, so the delta is `1172 → 1174`**), counting every `.js` under `src/generators/**` plus every `.js` under `src/domain/**`; so the answer is a DELTA, and "the register does not name mine" would be a category error. `stamp.files` (**7 entries, re-counted at `429141e2d`**) and `stamp.candidateLeaves` (**6, re-counted**) **UNMOVED** — both key on `src/domain/display/stateProse/` paths this member does not touch. `totals.*` **UNMOVED** — this member produces no pool, variant or relation. ⛔ **Regenerated WHOLE at the train's terminal, BY THE CHAIR** — a member never runs `node scripts/wiring-census.mjs`, because N lanes each regenerating a global COUNT produce N conflicting blobs. ⛔ **The path is in NEITHER §7, NOR the `changeManifest`, NOR `checks`** — naming it reserves the estate's most contended path against every sibling. |
 
 ### ⛔ EM-R6's DEFERRED FIRST-PAINT LIABILITY — THE DOOR THIS MEMBER OWES
@@ -699,7 +838,7 @@ exported `EAGER_FIRST_PAINT_MODULES`"*; EM-B1k2 §3.2: *"Re-derived through `vit
 executes — it reads no `dist` and can never skip:
 
 ```sh
-node -e "const{pathToFileURL}=require('node:url');import(pathToFileURL('vite.config.js').href).then(m=>{const S=Array.from(m.EAGER_FIRST_PAINT_MODULES);const bad=['src/domain/institutionRename.js','src/domain/institutionRemoval.js'].filter(p=>S.some(x=>String(x).includes(p)));console.log('EAGER_FIRST_PAINT_MODULES:',S.length,'| EM-R6 leaves in the eager closure:',bad.length?bad.join(', '):'NONE');if(bad.length)process.exit(1);})"
+node -e "const{pathToFileURL}=require('node:url');import(pathToFileURL('vite.config.js').href).then(m=>{const S=Array.from(m.EAGER_FIRST_PAINT_MODULES);const bad=['src/domain/institutionRename.js','src/domain/institutionRemoval.js','src/domain/edit/operations.js','src/domain/edit/worldConditions.js'].filter(p=>S.some(x=>String(x).includes(p)));console.log('EAGER_FIRST_PAINT_MODULES:',S.length,'| EM-R6 + EM-B1a leaves in the eager closure:',bad.length?bad.join(', '):'NONE');if(bad.length)process.exit(1);})"
 ```
 
 ⭐ **EXECUTED by the ESTATE-REPAIR lane at the integration tip `bdbf7c89c`:**
@@ -759,8 +898,8 @@ expressions (`measureCensus()`, `sovereigntyLightingContract.walker.test.js:601-
 | `files` | `TEST_FILES.length` — every `tests/**/*.test.{js,jsx}` (`:515-518`) | **+1** | the packet's one `CREATE` TEST row, `tests/domain/editOperations.test.js`. ⛔ **The two `src/domain/edit/**` leaves move this figure by ZERO** — the census counts TEST files (ruling 8 accepts this), so the driver is the test file alone |
 | `parked` | `TEST_FILES.filter(parkReasonsFor(src).length > 0).length` | **+0** | the new file carries **no park reason** — §P3.4's straight-line shape has nothing to park |
 | `credited` | the complement, `parkReasonsFor(src).length === 0` (`:601-602`) | **+1** | it is unparked, so it lands in `credited` — `files` and `credited` move together, and `parked` does not move at all |
-| `titles` | `credited.reduce(sum + liveTitlesIn(src).length)` (`:603`) | **+8** | the packet's **eight straight-line `it`** arms, A1–A8 (§9), all live, none skipped — **one per acceptance case, so this figure IS the acceptance count** |
-| `suiteTitles` | `credited.reduce(sum + liveSuiteTitlesIn(src).length)` (`:604`) | **+1** | the packet's **ONE literal `describe`** (§7's coding instruction; §P3.4 forbids nesting), so exactly one suite title |
+| `titles` | `credited.reduce(sum + liveTitlesIn(src).length)` (`:603`) | **+8** | the packet's **eight straight-line `it`** arms, A1–A8 (§9), all live, none skipped — **one per acceptance case, so this figure IS the acceptance count**. ⭐ **VERSION 9's two `TEST` rows contribute ZERO**: each widening is written INSIDE the landed arm it strengthens, so neither file gains an `it` |
+| `suiteTitles` | `credited.reduce(sum + liveSuiteTitlesIn(src).length)` (`:604`) | **+1** | the packet's **ONE literal `describe`** (§7's coding instruction; §P3.4 forbids nesting), so exactly one suite title. ⭐ **VERSION 9's two `TEST` rows contribute ZERO** — neither gains a `describe` |
 
 ⚠ **INTERIOR RED, NAMED IN ADVANCE — THE SHAPE, WITH PLACEHOLDERS.** ⛔ **This is an EXAMPLE of
 the message's form, NOT a figure to match.** `‹B›` is whatever `files` reads in
@@ -786,6 +925,17 @@ the run, and the chair stamps the absolute tuple once, at promotion.
 3. Implement the pure data contract: `OP_STAGES`, `OP_CONSEQUENCE_POLICIES`, the payload-spec
    vocabulary, then **the fourteen `OP_TYPES` rows of §6's one list** (R8).
 4. Implement `makeOp`, then `validateOp`.
+   ⭐ **VERSION 9: steps 3 and 4 are written TO §6.0's typing contract from the first keystroke, not
+   typed afterwards.** `$SP/lane-em-compile-EM-B1a-v9-scratch/EM-B1a.v9-typing.patch` carries both
+   leaves exactly as this lane proved them **0 / 0 / 0 / 0**; apply it and re-measure rather than
+   re-deriving the shape. ⛔ **Before the seal, re-run both typechecks and the any-cast counter and
+   quote all six figures; a leaf over zero on any of them is a STOP, never a baseline row.**
+4b. ⭐ **VERSION 9 — WIDEN THE TWO LANDED ARMS (§7's two `TEST` rows), each in place, each by
+   ADDITION.** `tests/domain/editDeclarations.test.js`'s DORMANCY arm — **TOOL-32's `dormancyImporters` shape, picked on the train branch before this placement** — takes the **ONE-entry** importer roster (`src/domain/edit/operations.js imports src/domain/edit/fieldDeclarations.js`) set-equal both ways **plus** the second-order scan that keeps the +0 B claim true;
+   `tests/domain/relationshipCompatibility.test.js`'s B4 arm gains this packet's three readers with
+   their reasons **plus** the both-ways assertion over exactly those three. ⛔ **No `it`, no
+   `describe`, no deletion, no sanctioned row removed, every new negative `// anchored:`.** Run each
+   file's own suite AND its governing walker (§10's `checks`) before and after.
 5. Extend the sole writer / wire consumers: **NOT APPLICABLE** — no writer, no consumer, lands
    DARK. Record both steps as skipped.
 6. Registrations: none owed (§7). The prevention guard is A4's relational-integrity arm.
@@ -843,8 +993,8 @@ make `validateOp` refuse an ACTION, which §6 forbids it to do (*"`ok: false` me
 | **A3** | **⛔ THE STAGE PARTITION SET-EQUAL, AND THE SEAT'S FLAG** | ⭐ `set-power-holder`'s payload names a HOLDER and its declared writer is `rulingPower.js`'s transfer path; a source scan proves this module writes neither `governingName` nor `government` (matcher proved live on a planted string) — the name follows the `isGoverning` flag, as `rulingStructure.js:787`'s own comment requires. Then: `OP_STAGES` is exactly `['home','off-stage']` and `OP_CONSEQUENCE_POLICIES` exactly `['home','by-target-reality']`, both frozen. **Every one of §6's FOURTEEN rows (R8) is `stage:'home'` AND `consequence:'home'`**, and the two sets are asserted **SET-EQUAL to each other** so the fields can never drift apart. ⭐ The off-stage members are declared but provably **unreached at this tip** — asserted as an empty selection — which is what lets B1b append without editing a frozen constant. Counterforce: a source scan proves `consequenceFor` is defined **nowhere** in this module (it is EM-F1's), and `rederive` is called nowhere (it is EM-B2's). |
 | **A4** | **⛔ RELATIONAL INTEGRITY, TOTAL AND CLOSED (the prevention guard)** | Every string in every `requires`/`enables`/`relatedTo`/`conflictsWith` is a key of `OP_TYPES` (full offender list). `conflictsWith` is symmetric both directions; `requires`/`enables` are exact inverses; `relatedTo` is symmetric. ⭐ **No home row names an off-stage type, and none names one of EM-B1c's five** — §6's FOURTEEN (R8) are closed over themselves at this tip, asserted by name, which is the arm B1b re-runs over all twenty-five. |
 | **A5** | **Boundary — the rename ops delegate and re-implement nothing** | ⭐ **VERSION 8 (judgment 99): the three `rename-*` rows are EM-B1c's (R8), so this arm asserts the DELEGATION half alone.** `rename-faction`, `rename-npc` and `rename-settlement` are absent from `OP_TYPES` by name — the same absence A1 pins, restated here as the reason this module owns no rename row — and a source scan proves this module defines **no rename logic of its own** and re-implements no path in `FACTION_RENAME_SURFACES` (the join-key law honoured by delegation, HZ-JOINKEY), with the matcher proved live on a planted string. |
-| **A6** | **Purity, dormancy and the import fence** | `makeOp` / `validateOp` are proved pure: identical inputs give `toEqual` results, the input `payload` is proved unmutated against a pre-call clone, and 100 calls change nothing observable. The import list is asserted EXACTLY and contains **none of** `src/kernel/prng.js`, `src/kernel/rngContext.js`, any `src/store/**`, any `src/components/**`, and **no force/muster/casualty/upkeep module**. A scan over `src/**` finds **zero importers**, with guard-the-guard arms on the walk and the matcher. |
-| **A7** | **⛔ THE TWO VOCABULARIES ARE THE TREE'S, AND THE FIELD IS `category`** | ⭐⭐ **RE-PINNED AT VERSION 7 TO THE MEASURED TIP.** `set-npc-status.payload.status` is `kind:'enum'` with exactly the `NpcStatus` **SEVEN** (`active, dead, exiled, jailed, missing, removed, retired`) — **parsed from `npcs.js`'s own typedef by the test**, so a typedef edit reds here — and `jailed` is asserted **PRESENT by name**, the record that EM-B1d landed it. `set-institution-state.payload.state` is `kind:'enum'` with the op's **SIX-MEMBER POOL** (`active, destroyed, impaired, removed, ruined, vacant`), and **`EntityStatus` is parsed from `status.js` and asserted UNWIDENED at its FIVE with `ruined` ABSENT from the union by name** — the two are different facts and the arm asserts both, so neither the pool nor the union can drift into the other. Neither field is `kind:'free'`. ⭐ **`set-field` and `add-faction` spell `category`, never `archetype` or `type`** — asserted by a source scan finding no `archetype`/`type` payload key, because `archetype` is a DERIVATION (`factionArchetype(f)` from `f.category`) and design §14 forbids editing one. And `set-institution-state('destroyed')` and `remove-institution` are asserted DISTINCT op types. |
+| **A6** | **Purity, dormancy and the import fence** | `makeOp` / `validateOp` are proved pure: identical inputs give `toEqual` results, the input `payload` is proved unmutated against a pre-call clone, and 100 calls change nothing observable. ⭐⭐ **VERSION 10 SPELLS THE EXACT LIST, because version 9's own `NPC_STATUS_VALUES` import adds a fifth specifier the version-8 arm did not carry (judgment 115 Q6, measured through this file's own `codeOf`+`importsOf`):** in source order `'../deterministicSort.js'`, `'../entities/npcs.js'`, `'../entities/status.js'`, `'../worldPulse/relationshipCompatibility.js'`, `'./fieldDeclarations.js'` — FIVE, asserted EXACTLY. It contains **none of** `src/kernel/prng.js`, `src/kernel/rngContext.js`, any `src/store/**`, any `src/components/**`, and **no force/muster/casualty/upkeep module**. A scan over `src/**` finds **zero importers**, with guard-the-guard arms on the walk and the matcher. |
+| **A7** | **⛔ THE TWO VOCABULARIES ARE THE TREE'S, AND THE FIELD IS `category`** | ⭐⭐ **VERSION 9 RE-AIMS THE FIRST HALF AT AN IDENTITY, AND IT IS A STRONGER ARM THAN A RE-PARSE.** `set-npc-status.payload.status` is `kind:'enum'` and its `values` **ARE `NPC_STATUS_VALUES` BY REFERENCE** (`toBe`, not `toEqual`) — EM-P4's value-level home of the `NpcStatus` union in `src/domain/entities/npcs.js` — so the op's pool cannot be a copy that drifts, and it still reads the **SEVEN** (`active, dead, exiled, jailed, missing, removed, retired`) with `jailed` asserted **PRESENT by name**, the record that EM-B1d landed it. ⛔ **THE TYPEDEF-TO-VALUE PIN IS DELEGATED, BY NAME, TO `tests/domain/statusVocabularies.test.js`** (EM-P4's, which reads the typedef's source text and reds in both directions): this file must NOT re-parse the typedef, because a SCREAMING_SNAKE list of those seven literals anywhere outside a consumer-roster file is what emptied `statusUnionTotality`'s derived trigger in version 8, and the same hazard reaches a test file's own source scan. ⭐ The arm ALSO asserts that this module's source contains **no quoted `'dead'`, `'exiled'` or `'retired'` literal**, which is the walker's own trigger condition made local. `set-institution-state.payload.state` is `kind:'enum'` with the op's **SIX-MEMBER POOL** (`active, destroyed, impaired, removed, ruined, vacant`), and **`EntityStatus` is parsed from `status.js` and asserted UNWIDENED at its FIVE with `ruined` ABSENT from the union by name** — the two are different facts and the arm asserts both, so neither the pool nor the union can drift into the other. Neither field is `kind:'free'`. ⭐ **`set-field` and `add-faction` spell `category`, never `archetype` or `type`** — asserted by a source scan finding no `archetype`/`type` payload key, because `archetype` is a DERIVATION (`factionArchetype(f)` from `f.category`) and design §14 forbids editing one. And `set-institution-state('destroyed')` and `remove-institution` are asserted DISTINCT op types. |
 | **A8** | **The `ok`/`errors` invariant, and `set-world-fact` as a DECLARATION** | For every case in a table of valid and invalid ops, `result.ok === (result.errors.length === 0)`. `errors` is FROZEN and `compareCodepoint`-sorted (a three-error case asserted in exact sorted order). ⭐ **VERSION 8 (judgment 99): the `set-world-fact` ROW is EM-B1c's (R8 moved it with the other four; §6 spells only its payload shape here), so at the fourteen `validateOp` answers a `set-world-fact` op with `ok: false` and an `errors` entry of exactly `unknown op type: set-world-fact` — the same protection, stated at the fourteen; the FIVE world-fact keys (`terrain, culture, monsterThreat, resources, stressors`), the PRESENCE of `value` and the ABSENCE by name of `goods`, `services` and `tradeAccess` (the chair's BLOCK-7 ruling, judgment 33) are EM-B1c's to assert when it lands the row.** This module is asserted **not to resolve any pool and not to re-derive anything** — proved by a source scan finding no `rederive` and no pool import, so the §14 engine stays EM-B2's. |
 
 **8 of ≤8.**
@@ -854,13 +1004,24 @@ make `validateOp` refuse an ACTION, which §6 forbids it to do (*"`ok: false` me
 ## 10. Verification commands
 
 ```sh
-npx eslint src/domain/edit/operations.js tests/domain/editOperations.test.js
-npm run typecheck:ratchet
+npx eslint src/domain/edit/operations.js src/domain/edit/worldConditions.js \
+  tests/domain/editOperations.test.js tests/domain/editDeclarations.test.js \
+  tests/domain/relationshipCompatibility.test.js
+npm run typecheck:ratchet                # ZERO for both leaves — no baseline row exists for either
 npm run typecheck:domain:strict          # src/domain/edit/** must be strict-clean (§P4)
 
 GATE_MUTEX_TIER=shared GATE_MUTEX_MAX_POLLS=100000 GATE_MUTEX_POLL_SECONDS=20 \
   sh scripts/gate-mutex.sh --run -- npx vitest run --pool=threads --maxWorkers=2 \
   tests/domain/editOperations.test.js
+
+# ⭐ VERSION 9 — the two WIDENED arms and the three walkers that govern them or the union
+# (interim rule 8: `git grep -l -F '<basename>' -- tests` over every path this packet changes).
+GATE_MUTEX_TIER=shared GATE_MUTEX_MAX_POLLS=100000 GATE_MUTEX_POLL_SECONDS=20 \
+  sh scripts/gate-mutex.sh --run -- npx vitest run --pool=threads --maxWorkers=2 \
+  tests/domain/editDeclarations.test.js tests/domain/relationshipCompatibility.test.js \
+  tests/lint/editDeclarations.walker.test.js tests/lint/heraldRouting.walker.test.js \
+  tests/lint/statusUnionTotality.walker.test.js tests/lint/domainAnyCastBaseline.test.js \
+  tests/domain/statusVocabularies.test.js
 
 GATE_MUTEX_TIER=shared GATE_MUTEX_MAX_POLLS=100000 GATE_MUTEX_POLL_SECONDS=20 \
   sh scripts/gate-mutex.sh --run -- npx vitest run --pool=threads --maxWorkers=2 \
@@ -874,8 +1035,11 @@ node scripts/check-observed-shape-readers.mjs
 
 # ⭐ EM-R6's DEFERRED FIRST-PAINT DOOR (§7). A MEMBERSHIP probe, not a byte arm: it imports
 # vite.config.js's own exported set, reads no dist, and therefore can never skip. Exit 1 if
-# either EM-R6 leaf has entered the eager closure. Measured at bdbf7c89c: 269 modules, NONE.
-node -e "const{pathToFileURL}=require('node:url');import(pathToFileURL('vite.config.js').href).then(m=>{const S=Array.from(m.EAGER_FIRST_PAINT_MODULES);const bad=['src/domain/institutionRename.js','src/domain/institutionRemoval.js'].filter(p=>S.some(x=>String(x).includes(p)));console.log('EAGER_FIRST_PAINT_MODULES:',S.length,'| EM-R6 leaves in the eager closure:',bad.length?bad.join(', '):'NONE');if(bad.length)process.exit(1);})"
+# either EM-R6 leaf OR EITHER OF THIS PACKET'S OWN LEAVES has entered the eager closure.
+# Measured at bdbf7c89c: 269 modules, NONE; re-measured at this packet's own base (the composed
+# EM-T10 tip + EM-P4): 270 modules, NONE — 270 is EM-P4's relocation (judgment 86), and this
+# member's own figure is the DELTA N -> N with src/main.jsx in the set as the anti-vacuity control.
+node -e "const{pathToFileURL}=require('node:url');import(pathToFileURL('vite.config.js').href).then(m=>{const S=Array.from(m.EAGER_FIRST_PAINT_MODULES);const bad=['src/domain/institutionRename.js','src/domain/institutionRemoval.js','src/domain/edit/operations.js','src/domain/edit/worldConditions.js'].filter(p=>S.some(x=>String(x).includes(p)));console.log('EAGER_FIRST_PAINT_MODULES:',S.length,'| EM-R6 + EM-B1a leaves in the eager closure:',bad.length?bad.join(', '):'NONE');if(bad.length)process.exit(1);})"
 
 node scripts/implementation-packets.mjs validate
 npm run check:packet -- EM-B1a
@@ -914,6 +1078,18 @@ npx vitest run --pool=threads --maxWorkers=2 tests/lint/sovereigntyLightingContr
 npx vitest run --pool=threads --maxWorkers=2 tests/lint/proseWiringCensus.walker.test.js
 ```
 
+```sh
+# 5 · ⭐ VERSION 9's PRE-SEAL TYPE PROOF, in plain node — the same probe the compile lane used, whose
+#     faithfulness is established by reproducing version 8's 33 · 33 · 7 · 15 before it is trusted.
+#     Run it AND the two npm typechecks; the probe localises, the gates are the authority.
+node $SP/lane-em-compile-EM-B1a-v9-scratch/ts-probe.mjs <the built leaves' directory> preseal
+#     expect: operations.js 0 / 0 · worldConditions.js 0 / 0 · LIVENESS (planted) 1 · 1
+
+# 6 · ⭐ VERSION 9's ANY-CAST COUNT, by the ratchet's OWN counter (not a grep):
+node -e "import('./scripts/count-domain-any.mjs').then(m=>{const fs=require('fs');for(const f of ['src/domain/edit/operations.js','src/domain/edit/worldConditions.js'])console.log(f,JSON.stringify(m.countText(fs.readFileSync(f,'utf8'))));console.log('control',JSON.stringify(m.countText('/** @param {any} x */')));})"
+#     expect: {"any":0,"suppress":0} for both, and {"any":1} for the control
+```
+
 ⚠ The rename cascade's own suite should be re-run unchanged; **this lane did not measure its
 path** and names none — the implementer resolves it at preflight (`ls tests/domain | grep -i
 rename`) and records it. An unmeasured path is not a verified fact.
@@ -937,6 +1113,28 @@ or the prose manifest moves by one byte; a §15 vocabulary would have to be type
 than `enum`; `set-state` would have to be restored; `renormalizeFactionPower` is found to be pure
 (it is not — it mutates in place); `applyFactionRenameToSettlement`'s return shape has changed.
 
+⭐⭐ **VERSION 9 ADDS FIVE STOPS, EACH OF WHICH VERSION 8 WOULD HAVE CAUGHT AT THE GATE INSTEAD:**
+
+1. **EITHER LEAF READS NON-ZERO** on `npm run typecheck:ratchet`, on `npm run typecheck:domain:strict`,
+   or on `countText` from `scripts/count-domain-any.mjs`. ⛔ **Adding a baseline row, a
+   `DECLARED_OVERRUN` row, an `@ts-ignore`, an `@ts-expect-error` or one `any` is NOT the cure and is
+   itself a STOP** — the two ledger ceilings are monotone-down literals, so a row only moves the red
+   to the ceiling arm.
+2. **`NPC_STATUS_VALUES` IS ABSENT** from `src/domain/entities/npcs.js` at the build's base ⇒ EM-P4
+   has not landed and this packet cannot build. ⛔ **Spelling the seven literals here instead is a
+   STOP, not a workaround:** it empties `statusUnionTotality`'s derived trigger (measured).
+3. **THE DORMANCY ROSTER DOES NOT MATCH.** If `tests/domain/editDeclarations.test.js`'s arm, run at
+   the build's base **before** any edit, reports ANY importer (it must read `[]`, because TOOL-32's
+   cure has already cleared EM-D0d's two typedef edges), the base is not the one version 10
+   measured. **STOP and report the roster**; never adjust the roster to whatever the run prints.
+   ⛔ Equally a STOP: the arm at that base still reading RAW source — TOOL-32 has not been picked.
+4. **A LANDED ARM WOULD HAVE TO LOSE A ROW OR A DIRECTION.** Both `TEST` rows are ADDITIONS. Deleting
+   a `SANCTIONED` entry, deleting the DORMANCY arm, weakening either message, or making the B4 arm
+   set-equal over the WHOLE roster (which cannot be green — two rows are already stale) is a STOP.
+5. **THE LIGHTING DELTA MOVES.** If either widening needs a new `it` or a new `describe`, the delta is
+   no longer `+1 / +0 / +1 / +8 / +1` and §3's acceptance budget is implicated. **STOP** — the chair
+   re-cuts the case, the lane does not.
+
 ---
 
 ## 12. Completion receipt
@@ -950,6 +1148,24 @@ tip) · census tuple before and at the tip with the interior red quoted verbatim
 artifacts `NONE` · deviations `NONE | STOP` · out-of-scope observations without investigation ·
 **judgment calls: `NONE`**.
 
+⭐⭐ **VERSION 9 ADDS SIX FIGURES THE RECEIPT MUST QUOTE, EACH FROM AN EXECUTED COMMAND:**
+
+1. **`npm run typecheck:ratchet` and `npm run typecheck:domain:strict`, both quoted with their exit
+   lines** — `src/domain/edit/operations.js` and `src/domain/edit/worldConditions.js` must appear in
+   **NEITHER** regression list. ⛔ Never through a pipe (§P7); use `sh scripts/gate-tail.sh`.
+2. **The any-cast count from the ratchet's own `countText`**, both leaves: `{"any":0,"suppress":0}`,
+   with the `{any:1}` liveness control beside it. **No baseline file is in the staged set.**
+3. **`tests/lint/statusUnionTotality.walker.test.js` GREEN**, and the DERIVED trigger quoted:
+   `['dead','exiled','retired']`. ⛔ A green with a *shrunken* trigger is the failure mode this
+   version exists to prevent — quote the list, never the exit code alone.
+4. **The DORMANCY roster, printed BEFORE the first edit and after the last**, both times as the arm
+   itself sorts it — `[]` before, the ONE runtime entry after — with the note that TOOL-32's strip
+   is why neither EM-D0d's two typedef edges nor this leaf's own two appear.
+5. **The B4 arm's offenders `[]` and the three new `SANCTIONED` rows proved to be live hits**, plus
+   the confirmation that no row was removed and that `negativeAssertionAnchor.walker.test.js` is green.
+6. **Effective lines by eslint's own `Linter`: `operations.js` and `worldConditions.js`, each of 250** —
+   version 9 predicts **231** and **165**, and a divergence is reported rather than re-ranged.
+
 ---
 
 ## 13. RAISED — for the chair
@@ -957,6 +1173,8 @@ artifacts `NONE` · deviations `NONE | STOP` · out-of-scope observations withou
 | # | Item |
 |---|---|
 | **R1** | **The ≈231–249 estimate leaves ≤19 lines of margin** against the 250 cap at eighteen rows. **EM-B1c** (the three `rename-*` ops + `set-world-fact`, ≈36 effective) is pre-declared at §3 as the next split, on the principled line *rows that delegate to another packet's machinery*. Ratify the contingency, or direct a different line now. |
+| ✅ **R12 — CLOSED BY TOOL-32 (measured at version 10; kept for the record)** | **TRAIN EM-T10's COMPOSED PREFIX REDS `tests/domain/editDeclarations.test.js`'s DORMANCY ARM WITHOUT THIS PACKET, AND THE RED IS EM-D0d's.** Measured by running the arm's own `walkSources` + specifier regex over a copy-only estate carrying the prefix and NOT carrying EM-B1a: the importer list is `src/components/edit/FreeField.jsx imports src/domain/edit/types.js` and `src/components/edit/PoolField.jsx imports src/domain/edit/types.js`, against an asserted `[]`. Both are `/** @typedef {import('../../domain/edit/types.js').FieldDeclaration} */` — **type-only edges that the arm's regex cannot distinguish from runtime ones, because it reads raw source with no comment strip.** `FreeField.jsx:6` says of itself *"imports nothing from the edit volume at runtime"*, which is true and invisible to the arm. EM-D0d touched no file under `tests/domain`, so no per-member whole-directory run met this arm; the composed terminal's one full check is where it surfaces. ⭐ **At the base read tip `583f8f644` the arm is GREEN** (`grep -rln` over `src` finds no importer), so the red is the prefix's, not the estate's. **THE CHAIR'S CALL, and it is in front of EM-T11:** (a) EM-D0d carries its own one-line `TEST` row widening the arm to its two typedef edges — the smallest lawful act and this lane's recommendation; (b) the prefix truncates before EM-D0d; (c) EM-B1a v9's `TEST` row is pulled forward into EM-T10. ⭐⭐ **THE CHAIR TOOK A FOURTH PATH: TOOL-32**, which cures the matcher itself (`commentsOnly` before the specifier regex) and is picked on the train EM-T11 branch before this placement. MEASURED at version 10 over the composed prefix: the arm reads `[]` without this packet and **ONE** entry with it. R12 is therefore CLOSED and version 10's roster is the one-entry form; the five-entry form of version 9 is dead text kept here only so the change is legible. ⛔ If TOOL-32 is NOT an ancestor of this packet's base, the build lane STOPS rather than choosing a roster. |
+| ⛔ **R13** | **TWO `SANCTIONED` ROWS IN `tests/domain/relationshipCompatibility.test.js` ARE ALREADY STALE, WHICH IS WHY VERSION 9's WIDENING IS BOTH-WAYS OVER ITS OWN THREE ROWS AND NOT THE WHOLE ROSTER.** Measured at `583f8f644`: `tests/data/stringCouplingRegistry.test.js` **does not exist in the tree** (`git ls-files \| grep -i stringCoupling` → nothing) and `tests/domain/tradeSalience.test.js` exists but contains **zero** occurrences of `relationshipCompatibility`. The arm as landed is one-way (`hits.filter(p => !SANCTIONED.some(s => p.endsWith(s)))`), so neither row has ever convicted anything and neither is a live red. ⛔ **Making the whole roster set-equal — the chair's brief's "both ways" — cannot be green until those two rows are re-aimed or retired, and re-aiming another packet's row is not this packet's act.** The chair's call: (a) accept the narrow both-ways form this packet ships and slot the two legacy rows as their own intake item — this lane's recommendation; (b) EM-B1a additionally retires the two rows with the measurement written beside each; (c) a separate hygiene packet. ⛔ **No row is deleted here.** |
 | **R2** | ⭐ **`set-world-fact`'s `fact` values are EM-A1 version 5's FIVE, so `worldFact.tradeAccess` is NOT among them** (§6 item 2; `goods` and `services` left by BLOCK-7 and their two POOLS rode EM-P3c with the chair's ESTATE-REPAIR-4 ruling 1, judgment 54). **Its POOL is separately BLOCKED in EM-A2b** (no canonical option list; the wizard's six disagree with the generator's five). This packet is **not** blocked by it — `validateOp` checks `fact` membership and `value` presence and resolves no pool — but the chair should know the two packets touch the same gap from opposite sides. |
 | **R3** | **The rename cascade's test path was not measured by this lane** and is named nowhere; §10 directs the implementer to resolve it at preflight. |
 | **R12** | ⛔⛔ **CROSS-PACKET, AND THE ONLY ONE THAT COSTS A TRAIN IF IT IS WRONG: `makeOp` FLATTENS `requires`.** EM-A1 is BUILT and its `Op.requires` is `readonly string[]` (read in `lane-em-a1-t9/src/domain/edit/types.js`), while §16.3 makes the DECLARATION's `requires` a `{ world, registry }` pair. Version 7 rules the flatten inside this packet (§6), because `typecheck:domain:strict` is a sealed `checks` row and re-opening a built EM-A1 to widen its typedef is the dearer cure. **Ratify the flatten, or direct EM-A1 to widen `Op.requires` before EM-T9 lands.** |
