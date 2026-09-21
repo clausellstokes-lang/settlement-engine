@@ -1,0 +1,286 @@
+/**
+ * editDeclarations.walker.test.js — EM-A1's DECLARATION WALKER (cases A5, A5b, A6).
+ *
+ * Three arms, each holding the declaration table against a PRODUCER rather than against
+ * a second spelling of itself:
+ *   ARM I-2  POOLS   — every `kind: 'pool'` row carries a non-blank, unique pool id and
+ *                      no row of any other kind carries one. The id set is PRINTED so
+ *                      EM-A2a's own totality arm can be held against it. ⛔ MEMBERSHIP of
+ *                      `POOLS` is asserted NOWHERE here: `POOLS` does not exist at this
+ *                      base and that half of the arm is EM-A2a's (§11 BLOCK-4).
+ *   ARM P    PENCIL  — the marker EM-D1 will mint is found EXACTLY ZERO times under
+ *                      `src/components/**`, over a corpus asserted non-empty in the same
+ *                      test. A totality over the empty set with a proven denominator: it
+ *                      becomes load-bearing the day EM-D1 mints the first pencil, with no
+ *                      edit here.
+ *   ARM I-4  ROOTS   — three branches; a root row joins `GENERATION_TIER2` on (card,
+ *                      outputKey) or carries a `createdBy`; an annotation row is out of
+ *                      the population; a world-fact row's field is a `WORLD_FACT_SOURCES`
+ *                      key whose Tier-1 pair resolves and holds its record path.
+ *   ARM I-3  WRITERS — every `writer` parses as `path#symbol`, the path exists, and the
+ *                      symbol is declared in it EXACTLY ONCE by the LANDED resolver.
+ *
+ * ⛔ NOTHING HERE RE-TYPES A PRODUCER'S SET. `GENERATION_TIER1`, `GENERATION_TIER2`,
+ * their cardShape strings, `WORLD_FACT_SOURCES`'s keys and `DECL_FORMS` are all IMPORTED.
+ * The frozen wave-1 packet id list is NOT here either: it has one home, and it is
+ * `tests/domain/editDeclarations.test.js`, with ARM I-1, the arm that owns the question.
+ * ARM I-4 takes `createdBy` PRESENCE only.
+ *
+ * ⭐ EVERY ARM IS A FUNCTION ITS PLANTS RE-ENTER, so a guard-the-guard drives the detector
+ * under test rather than a re-implementation of it.
+ */
+import { existsSync, readFileSync, readdirSync, statSync } from 'node:fs';
+import { fileURLToPath } from 'node:url';
+import { dirname, join, relative } from 'node:path';
+import { describe, expect, test } from 'vitest';
+import { FIELD_DECLARATIONS } from '../../src/domain/edit/fieldDeclarations.js';
+import {
+  GENERATION_TIER1,
+  GENERATION_TIER2,
+  tier1For,
+  tier2For,
+} from '../../src/domain/generation/generationForkRegistry.js';
+import { WORLD_FACT_SOURCES } from '../../src/domain/worldFactOptions.js';
+import { declaredSymbols } from '../helpers/generationForkCensus.js';
+
+const ROOT = join(dirname(fileURLToPath(import.meta.url)), '../..');
+const ALL_ROWS = Object.values(FIELD_DECLARATIONS).flat();
+
+/**
+ * ⚠ THE PENCIL MARKER, IN ONE PLACE. §11 BLOCK-3 is REPORTED and not blocking: whether
+ * the pencil binds by a minted attribute, by file, or by an export EM-D1 adds is the
+ * chair's ruling, and nothing waits on it. The arm below is written so that ruling costs
+ * exactly one constant: EM-D1 re-points this line and the arm becomes load-bearing.
+ */
+const PENCIL_MARKER = 'data-edit-pencil';
+
+/**
+ * ARM I-2 — the pool arm. Returns one message per offending row.
+ * @param {readonly import('../../src/domain/edit/types.js').FieldDeclaration[]} rows
+ * @returns {string[]}
+ */
+function poolOffenders(rows) {
+  const offenders = [];
+  const claimed = new Map();
+  for (const row of rows) {
+    const at = `${row.card}.${row.field}`;
+    const carries = Object.hasOwn(row, 'pool');
+    if (row.kind === 'pool') {
+      if (!carries || typeof row.pool !== 'string' || row.pool.trim().length === 0) {
+        offenders.push(`${at}: a kind 'pool' row carries a non-blank pool id`);
+        continue;
+      }
+      if (claimed.has(row.pool)) offenders.push(`${at}: pool id '${row.pool}' is already claimed by ${claimed.get(row.pool)}`);
+      else claimed.set(row.pool, at);
+    } else if (carries) {
+      offenders.push(`${at}: kind '${row.kind}' carries a pool id ('${row.pool}'), and only a 'pool' row may`);
+    }
+  }
+  return offenders;
+}
+
+/**
+ * ARM I-4 — the root arm, three branches. Returns one message per offending row, each
+ * naming the card, the field, the key it joined on and the branch it took.
+ * @param {readonly import('../../src/domain/edit/types.js').FieldDeclaration[]} rows
+ * @returns {string[]}
+ */
+function rootOffenders(rows) {
+  const offenders = [];
+  for (const row of rows) {
+    const at = `${row.card}.${row.field}`;
+    // (b) an annotation row is OUT of this arm's population by construction. The §6.2
+    // shape law owns "an annotation row carries no outputKey"; asserting it here too is
+    // what made version 4's plants red on two arms at once.
+    if (row.provenance === 'annotation') continue;
+    if (row.provenance === 'root') {
+      // (a) PRESENCE only: membership of the frozen wave-1 list is ARM I-1's, in the
+      // domain file, which is the one home that list has.
+      if (Object.hasOwn(row, 'createdBy')) continue;
+      if (tier2For(row.card, row.outputKey).length < 1) {
+        offenders.push(`${at} [branch a, root]: no GENERATION_TIER2 row joins (cardShape '${row.card}', outputKey '${row.outputKey}') and the row carries no createdBy`);
+      }
+      continue;
+    }
+    // (c) world-fact.
+    if (!Object.hasOwn(WORLD_FACT_SOURCES, row.field)) {
+      offenders.push(`${at} [branch c, world-fact]: '${row.field}' is not a key of WORLD_FACT_SOURCES`);
+      continue;
+    }
+    const pair = row.tier1 ?? { step: '', key: '' };
+    const held = tier1For(pair.step, pair.key);
+    if (!held) {
+      offenders.push(`${at} [branch c, world-fact]: no GENERATION_TIER1 row joins (step '${pair.step}', key '${pair.key}')`);
+      continue;
+    }
+    const want = `record.${row.outputKey}`;
+    // Two forms only, and the packet says which row takes which: equality, or a PREFIX,
+    // the second solely because GENERATION_BLIND_HALVES' field-rootness row states that
+    // Tier 1 classes a (step, key) PAIR and never a field inside the key.
+    const exact = held.recordPath === want;
+    const prefix = typeof held.recordPath === 'string' && want.startsWith(`${held.recordPath}.`);
+    if (!exact && !prefix) {
+      offenders.push(`${at} [branch c, world-fact]: Tier-1 pair (${pair.step}, ${pair.key}) holds recordPath '${held.recordPath}', which neither equals nor prefixes '${want}'`);
+    }
+  }
+  return offenders;
+}
+
+/**
+ * ARM I-3 — the writer arm. Returns one message per offending row.
+ * @param {readonly import('../../src/domain/edit/types.js').FieldDeclaration[]} rows
+ * @returns {string[]}
+ */
+function writerOffenders(rows) {
+  const offenders = [];
+  for (const row of rows) {
+    // A row with no `writer` is OUT of this arm's population, by construction: every
+    // world-fact row, every annotation row, and the one `createdBy` root row.
+    if (!Object.hasOwn(row, 'writer')) continue;
+    const at = `${row.card}.${row.field}`;
+    const parts = String(row.writer).split('#');
+    if (parts.length !== 2 || parts[0].length === 0 || parts[1].length === 0) {
+      offenders.push(`${at}: writer '${row.writer}' does not parse as exactly one 'path#symbol' pair`);
+      continue;
+    }
+    const [path, symbol] = parts;
+    if (!existsSync(join(ROOT, path))) {
+      offenders.push(`${at}: writer path '${path}' does not exist`);
+      continue;
+    }
+    const count = declaredSymbols(readFileSync(join(ROOT, path), 'utf8')).get(symbol) ?? 0;
+    if (count !== 1) {
+      offenders.push(`${at}: '${symbol}' is declared ${count} times in ${path} (exactly once required)`);
+    }
+  }
+  return offenders;
+}
+
+/** Every `.js` / `.jsx` file under a directory, repo-relative. */
+function walkSources(dir, out = []) {
+  for (const entry of readdirSync(dir)) {
+    const full = join(dir, entry);
+    if (statSync(full).isDirectory()) walkSources(full, out);
+    else if (/\.jsx?$/.test(entry)) out.push(relative(ROOT, full).replace(/\\/g, '/'));
+  }
+  return out;
+}
+
+describe('EM-A1 — the declaration walker: pools, the pencil, the root join and the writers', () => {
+  test('A5: every pool row names a unique pool id, no other kind does, and no pencil exists yet', () => {
+    // ARM I-2. The population is asserted non-empty before zero offenders means anything.
+    const poolRows = ALL_ROWS.filter((row) => row.kind === 'pool');
+    expect(poolRows.length, 'no pool row at all, so the pool arm would report zero offenders vacuously').toBe(11);
+    expect(poolOffenders(ALL_ROWS)).toEqual([]);
+
+    // PRINTED for EM-A2a's totality arm to be held against. process.stdout.write, not
+    // console.log: vitest's default reporter drops a PASSING test's console output, and a
+    // report-only arm written that way is silent.
+    const ids = poolRows.map((row) => row.pool).sort();
+    process.stdout.write(`\nEM-A1 ARM I-2 — the ${ids.length} declared pool ids:\n  ${ids.join('\n  ')}\n`);
+
+    // ARM P. A totality over the empty set WITH a proven non-empty denominator.
+    const components = walkSources(join(ROOT, 'src/components'));
+    expect(components.length, 'the src/components walk found nothing, so the absence below would be vacuous').toBeGreaterThan(200);
+    const pencils = components.filter((rel) => readFileSync(join(ROOT, rel), 'utf8').includes(PENCIL_MARKER));
+    expect(
+      pencils,
+      `a component carries the pencil marker '${PENCIL_MARKER}' while wave 1 is still headless.`
+      + ' Every card that grows a pencil must first have a declaration in FIELD_DECLARATIONS,'
+      + ' which is the whole contract this arm exists to hold. EM-D1 mints the first one.',
+    ).toEqual([]);
+  });
+
+  test('A5b: ARM I-4 — every root row joins the register or names its maker, every world fact holds its record path, and four planted rows RED', () => {
+    // Step 0: the arm REDS on an empty producer rather than passing vacuously.
+    expect(GENERATION_TIER2.length, 'GENERATION_TIER2 is empty, so branch (a) could not convict').toBeGreaterThan(0);
+    expect(GENERATION_TIER1.length, 'GENERATION_TIER1 is empty, so branch (c) could not convict').toBeGreaterThan(0);
+    expect(Object.keys(WORLD_FACT_SOURCES).length, 'WORLD_FACT_SOURCES is empty, so branch (c) could not convict').toBeGreaterThan(0);
+
+    // The root rows' cards are a SUBSET of the register's own distinct cardShape set, read
+    // from the register and never re-typed. The world-fact card is the fifth spelling the
+    // register is silent on, which is itself a measurement rather than a preference.
+    const registerShapes = new Set(GENERATION_TIER2.map((registerRow) => registerRow.cardShape));
+    const rootCards = [...new Set(ALL_ROWS.filter((row) => row.provenance === 'root').map((row) => row.card))];
+    expect(rootCards.filter((card) => !registerShapes.has(card))).toEqual([]);
+    const worldFactCards = [...new Set(ALL_ROWS.filter((row) => row.provenance === 'world-fact').map((row) => row.card))];
+    expect(worldFactCards.filter((card) => registerShapes.has(card))).toEqual([]);
+    expect(worldFactCards.length, 'the world-fact rows use one card spelling').toBe(1);
+
+    expect(rootOffenders(ALL_ROWS)).toEqual([]);
+
+    // GUARD-THE-GUARD, four plants, each through the SAME predicate and each reddening on
+    // its own branch only.
+    const withRow = (extra) => [...ALL_ROWS, Object.freeze(extra)];
+
+    // P1 — a REAL derived reading of the power structure, present on every record.
+    expect(rootOffenders(withRow({
+      card: 'powerSeat', field: 'stability', kind: 'share', provenance: 'root', label: 'Stability', group: 'standing', outputKey: 'powerStructure.stability', writer: 'src/generators/steps/generatePower.js#generatePower',
+    }))).toEqual([
+      "powerSeat.stability [branch a, root]: no GENERATION_TIER2 row joins (cardShape 'powerSeat', outputKey 'powerStructure.stability') and the row carries no createdBy",
+    ]);
+
+    // P2 — a REAL outputKey on the WRONG card, proving the join takes BOTH halves of the key.
+    expect(rootOffenders(withRow({
+      card: 'faction', field: 'isGoverning', kind: 'pool', provenance: 'root', label: 'Governing', group: 'standing', outputKey: 'powerStructure.factions[].isGoverning', pool: 'faction.governing', writer: 'src/generators/steps/generatePower.js#generatePower',
+    }))).toEqual([
+      "faction.isGoverning [branch a, root]: no GENERATION_TIER2 row joins (cardShape 'faction', outputKey 'powerStructure.factions[].isGoverning') and the row carries no createdBy",
+    ]);
+
+    // P3 — the charter's own eighth world fact, which WORLD_FACT_SOURCES does not carry.
+    expect(rootOffenders(withRow({
+      card: 'worldFact', field: 'tradeAccess', kind: 'pool', provenance: 'world-fact', label: 'Trade access', group: 'world', outputKey: 'config.tradeRouteAccess', pool: 'worldFact.tradeAccess', tier1: { step: 'resolveConfig', key: 'effectiveConfig' },
+    }))).toEqual([
+      "worldFact.tradeAccess [branch c, world-fact]: 'tradeAccess' is not a key of WORLD_FACT_SOURCES",
+    ]);
+
+    // P4 — a real world fact whose Tier-1 pair resolves to nothing.
+    expect(rootOffenders(withRow({
+      card: 'worldFact', field: 'terrain', kind: 'pool', provenance: 'world-fact', label: 'Terrain', group: 'world', outputKey: 'config.terrainType', pool: 'worldFact.terrain.planted', tier1: { step: 'resolveConfig', key: 'noSuchCtxKey' },
+    }))).toEqual([
+      "worldFact.terrain [branch c, world-fact]: no GENERATION_TIER1 row joins (step 'resolveConfig', key 'noSuchCtxKey')",
+    ]);
+  });
+
+  test('A6: ARM I-3 — every writer resolves to exactly one declaration, and three planted rows RED', () => {
+    const writerRows = ALL_ROWS.filter((row) => Object.hasOwn(row, 'writer'));
+    expect(writerRows.length, 'no row carries a writer, so this arm would report zero offenders vacuously').toBe(9);
+    expect(writerOffenders(ALL_ROWS)).toEqual([]);
+
+    // ⭐⭐ THE REGRESSION CONTROL, and the ONE place the SUPERSEDED predicate survives.
+    // Every Tier-2 step symbol is declared only by `registerStep('<name>', …)`. The LANDED
+    // resolver finds exactly one; version 3's two-form set — "a function declaration or a
+    // const arrow" — finds ZERO for the same symbol, which is why a resolver without the
+    // registerStep form would have reported every writer in this table as undeclared.
+    const stepPath = 'src/generators/steps/assembleInstitutions.js';
+    const stepSource = readFileSync(join(ROOT, stepPath), 'utf8');
+    expect(declaredSymbols(stepSource).get('assembleInstitutions')).toBe(1);
+    const supersededForms = [
+      /^[ \t]*(?:export[ \t]+)?(?:async[ \t]+)?function[ \t]+([A-Za-z_$][\w$]*)/gm,
+      /^[ \t]*(?:export[ \t]+)?const[ \t]+([A-Za-z_$][\w$]*)[ \t]*=[ \t]*(?:async[ \t]*)?\(/gm,
+    ];
+    const supersededHits = supersededForms.flatMap((form) => [...stepSource.matchAll(form)])
+      .filter((hit) => hit[1] === 'assembleInstitutions');
+    expect(supersededHits).toEqual([]);
+
+    // GUARD-THE-GUARD, three plants, each through the SAME predicate.
+    const replacing = (card, field, writer) => ALL_ROWS.map((row) => (row.card === card && row.field === field
+      ? Object.freeze({ ...row, writer })
+      : row));
+
+    // P5 — a symbol that module declares zero times.
+    expect(writerOffenders(replacing('npc', 'role', 'src/generators/steps/generatePopulation.js#noSuchChooser'))).toEqual([
+      "npc.role: 'noSuchChooser' is declared 0 times in src/generators/steps/generatePopulation.js (exactly once required)",
+    ]);
+
+    // P6 — a path that does not exist.
+    expect(writerOffenders(replacing('npc', 'role', 'src/generators/steps/noSuchStep.js#generatePopulation'))).toEqual([
+      "npc.role: writer path 'src/generators/steps/noSuchStep.js' does not exist",
+    ]);
+
+    // P7 — version 3's spelling, on the LIVE npc.status row: a packet id is not a path.
+    expect(writerOffenders(replacing('npc', 'status', 'EM-B1a#set-npc-status'))).toEqual([
+      "npc.status: writer path 'EM-B1a' does not exist",
+    ]);
+  });
+});
