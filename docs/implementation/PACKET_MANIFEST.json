@@ -35737,6 +35737,450 @@
       ],
       "_checksNote": "TWELVE invocations. Interim rule 8: sealed checks name FILES, never the tests/lint directory, never the lighting walker, and END WITH THE VALIDATOR. The set was computed at e80a6a3f4 in the interim form (scripts/governing-tests.mjs has NOT landed): git grep -l -F over each changed basename and each changed symbol -- 'lookups' -> 17 files under tests+scripts of which 8 are live test files; 'entities/npcs' -> 12 test files; 'entities/status' -> 8; getInstitutionsForTier/getInstitutionalCatalog/getFullCatalogWithTierMeta/institutionAvailableAtTier -> catalogTierGateParity, metropolisCatalogReachable, catalogTabsRestore, selectors' UI flows. ⭐ Invocation 9 is the FIRST-PAINT MEMBERSHIP PROBE: it IMPORTS vite.config.js's own exported derivation, reads no dist and therefore can never skip, and it asserts the +1 in BOTH directions -- the new data home IS eager, the domain address is NOT. ⛔ tests/build/vendorPdfLazy.test.js's dist-gated byte arm is NOT here (interim rule 2) and EM-P4 carries NO row on it: EM-D0b is train EM-T9's byte-arm holder (interim rule 14).",
       "_deferredRows": "FOUR, none in §7's table, none in this capsule, none in checks. (1) docs/content/wiring-census.json -- interim rule 1: a named INTERIOR RED, delta only. stamp.producerIndexFiles +1, for the ONE new .js leaf under the two producer roots src/generators/** and src/domain/** (that is src/domain/institutionLookups.js; src/data/institutionLookups.js is NOT under a producer root, measured by reading scripts/wiring-census.mjs's own two jsFilesUnder roots). stamp.files, stamp.candidateLeaves and totals.* UNMOVED -- all key on src/domain/display/stateProse/ paths this member does not touch. Regenerated WHOLE at the train's terminal BY THE CHAIR. (2) tests/lint/.lighting-census-baseline.json -- the delta in the register's own order, counted from the two CREATEs' authorized arms: files +2 · parked +0 · credited +2 · titles +11 · suiteTitles +2. The +11 is 6 + 5; credited rather than parked is CONDITIONAL on both files' pinned shape (one top-level literal describe, straight-line literal-titled its, no loop, no .each, no nesting, openers bound once from the file's own vitest import). ANY OTHER TUPLE IS A STOP, not a refreeze. The row names the BASELINE JSON, never the walker, and this member never sets LIGHTING_CENSUS_REFREEZE. (3) tests/build/vendorPdfLazy.test.js's CLOSURE_BUDGET_BYTES = 1_048_000 -- NO ROW (interim rule 14, EM-D0b holds it). EM-P4's predicted price: EAGER first paint +1 MODULE (269 -> 270, measured by importing vite.config.js's own derivation in a scratch estate) and +0 B +/- minifier noise, because the added module is code RELOCATED inside the same eager closure and its one eager importer is routed to the 'data' chunk; generation worker +0 B EXACTLY (the worker's 219-module static closure does not contain src/generators/lookups.js, measured); lazy engine +0 B; the five edge-shared metas +0 B (grep -c 'institutionLookups' scripts/build-edge-shared.mjs -> 0). (4) scripts/mutation-coverage-manifest.json -- NOT OWED and a voluntary row would be unlawful: tests/domain is not one of the eight ENFORCER_DIRS (read by importing tests/lint/mutationCoverage.shared.mjs at the tip) and neither basename matches a NAME_PATTERN token. ⛔ scripts/.observed-shape-readers-baseline.json -- NO ROW: neither changed file is an `inventory` or `rowTags` key (git grep -F finds src/generators/lookups.js only inside the three content-addressed tree manifests), the additions introduce no property read on an unvalidated object, and the LANDED PRECEDENT is exact -- EM-P3 (f4e5b64c5) created src/data/worldFactOptions.js and src/domain/worldFactOptions.js and modified a src/generators leaf while carrying no row on that register."
+    },
+    {
+      "id": "EM-B3f",
+      "status": "READY",
+      "packetPath": "docs/implementation/packets/settlement-editor/EM-B3f.md",
+      "verifiedBase": "252d7ba4eaa7e531abd2ff2d82e3f34c322d3a08",
+      "changeManifest": [
+        {
+          "action": "MODIFY",
+          "path": "src/lib/accountData.js",
+          "_note": "THREE new module-private pure helpers placed after `withoutEditState` and before `preflightAccountExport`'s docblock (+46 eff, re-measured by the pre-proof with eslint's max-lines semantics; version 1 said +33): `isPlainRecord(value)` (the byte-identical twin of src/lib/accountImport.js:267 (re-confirmed at the pre-proof tip), spelled here rather than imported because that module is the import half and this packet declares no dependency on it), `withoutSnapshotEditState(snapshot)` and `withoutParkedSnapshotEditState(campaign)`; plus EXACTLY ONE CHANGED LINE at :272 — `const campaigns = Array.isArray(state.campaigns) ? state.campaigns : [];` becomes the two-line `.map(withoutParkedSnapshotEditState)` form, the same wrap-the-ternary-then-.map spelling `settlements` already uses at :268-271. The walk applies EM-B3e's `withoutEditKeys` to every `worldState.pausedAdvance.preIntervalUndo.saves[i].settlement` and to `...preIntervalUndo.active.settlement`; it does NOT re-implement the drop. PURE and COPY-ON-WRITE: `state.campaigns` is the LIVE store array by reference (measured: the export returns the same array object today), so an in-place drop would erase a DM's running parked snapshot from the session and, at the next cacheCampaignState, from their save — acceptance case C5 deep-freezes the live campaigns and convicts that mutant. REFERENCE-IDENTICAL when nothing moves (no pausedAdvance, an old-shape cursor with no preIntervalUndo, or a snapshot carrying neither key — which is 100% of real records at this landing). Every field is read by DESTRUCTURE, never by a property access: measured with the tree's own TypeScript against scanReaders' own rule, the contracted spelling's only two counted property reads are `Array.isArray`, so the observed-shape register moves by ZERO rows (EM-B3f.evidence.md E-SPELL, with a 10-read failing control). EM-B3a's docblock above `withoutEditState` is amended IN PLACE (at most two raw comment lines, 0 eff) because its 'this is the one seam through which either key could leave the account at all ... spelled here and nowhere else' is false once a second seam exists some forty lines below (:204 -> the helper block at approximately :247). `preflightAccountExport`'s signature, arity, return shape, error codes and statement ORDER are untouched. NOTHING on any import path: the launch brief's import half was REFUTED by this lane's first measurement (accountImportBody.js:839-850 passes createImportedCampaign only {settlementIds, contentBinding, contentBindingHistory}; campaignImportedCreation.js:57 mints a fresh worldState; importReconciliationAdmission.js:396 declares world_state_not_imported)."
+        },
+        {
+          "action": "TEST",
+          "path": "tests/lib/accountData.test.js",
+          "_note": "FIVE literal-titled `it`s (C1-C5) appended INSIDE the EXISTING `describe('buildAccountExport')` (:86), after the last existing `it` (:340). No existing arm is edited; no new `describe` is opened; suiteTitles +0, titles +5. Reuses the file's own `load()` helper (:29-33) and adds one local `pausedCampaign(...)` fixture helper that is not a test. No `.each`, no loop-generated test, no nesting, and no variable, parameter or binding named `it`, `test` or `describe`. FROZEN_UNANCHORED_NEGATIVES['tests/lib/accountData.test.js'] = 1 (tests/lint/negativeAssertionAnchor.walker.test.js:603) is SHRINK-ONLY: the existing un-anchored `expect(JSON.stringify(out)).not.toMatch(/credits|\"role\"/)` at :161 must NOT be anchored, and no new un-anchored negative may be added — every absence is asserted as `expect(serialized.includes('\"dmLayer\"')).toBe(false)` beside a liveness anchor. THIS FILE AND NOT tests/lib/editTravel.test.js: editTravel is claimed by EM-C4a (a member of this same train EM-T11), by EM-B3d (READY, which reserves because READY is not terminal) and by EM-B3e; a row on it here would refuse at placement with `duplicate change path across packets`. tests/lib/accountData.test.js is claimed by NOBODY and already holds the suite that drives this packet's exact seam."
+        },
+        {
+          "action": "TEST",
+          "path": "tests/lint/snapshotPromotion.census.walker.test.js",
+          "_note": "CREATED BY THE NAMED SIBLING `TOOL-30`, WHICH LANDS FIRST IN THIS TRAIN, so this is a TEST row and not a CREATE (interim rule 4; the live precedent is EM-B1j's ruinShapeReplica row naming FIX-T1). Re-words ONLY promoter 3's declared `why` string, to add the sentence THIS packet makes true: the parked snapshot's member settlements leave the account STRIPPED, so the veil holds through the export door. ZERO new `it`s, +0 eff, +0 titles. NOT ONE OTHER BYTE: no arm added, edited, removed or renamed; no assertion; no roster entry; no test title. The census's §6b foreign-reach sentence is NOT this packet's to correct — this lane REFUTED it and the chair resumed TOOL-30's own lane for it (judgment 97 clause 2). If TOOL-30's landed `why` already carries a correct export sentence at the dispatch base, this row is a NO-OP and the completion receipt records it as such with the landed text quoted, rather than inventing a change. No scripts/mutation-coverage-manifest.json row is owed here: this packet CREATEs nothing, and TOOL-30 owes the row for the file it creates (a second holder would collide on the rowKey)."
+        }
+      ],
+      "requiredSymbols": [
+        {
+          "path": "src/lib/accountData.js",
+          "symbol": "export function preflightAccountExport"
+        },
+        {
+          "path": "src/lib/accountData.js",
+          "symbol": "function withoutEditState(entry)"
+        }
+      ],
+      "_pendingRequiredSymbols": [
+        {
+          "path": "src/lib/accountData.js",
+          "symbol": "function withoutEditKeys(settlement)",
+          "_note": "Interim rule 3: a sibling key, never an element of requiredSymbols, because the array form refuses twice — once on the row's path and once on its symbol — for a symbol absent at the read tip. `withoutEditKeys` is CREATED BY EM-B3e (its §6, version 2) and does not exist at 429141e2d. The chair promotes this row into requiredSymbols when EM-B3e flips LANDED; the dispatch preflight then resolves all three at count 1. This packet CALLS it and must never re-implement the drop (§11)."
+        }
+      ],
+      "acceptanceCases": [
+        {
+          "id": "C1",
+          "case": "the parked snapshot is stripped in BOTH positions: a campaign whose worldState.pausedAdvance.preIntervalUndo carries two saves[] members AND an active, each settlement carrying both keys, exports with neither key at any depth, while the cursor, its interval, the member order (a,b), each member's campaignState.phase and settlement.population, and the campaign's name/settlementIds/tick all survive."
+        },
+        {
+          "id": "C2",
+          "case": "DORMANCY, reference identity: (i) a paused campaign whose snapshot carries neither key, (ii) a campaign with no pausedAdvance, (iii) a campaign with no worldState, and (iv) an OLD-SHAPE cursor with no preIntervalUndo each come back as the very object that went in (toBe). This is 100% of real records at this landing and it is the contract, not an optimisation."
+        },
+        {
+          "id": "C3",
+          "case": "a malformed snapshot never throws and never shelters a real member: a saves of eight elements (null, a string, a number, [], {id} with no settlement, {settlement: []}, {settlement: null}, and one well-formed member carrying both keys) with active: null, plus worldState: [], pausedAdvance: 'x' and preIntervalUndo: null as sibling inputs — nothing throws, length and order are unchanged, the seven malformed elements return by reference, the well-formed member is still stripped, and each sibling input returns by reference."
+        },
+        {
+          "id": "C4",
+          "case": "the whole door, and the live settlement's parity: a state carrying BOTH a saved settlement with both keys AND a paused campaign whose snapshot carries them exports a payload containing neither key anywhere — settlements clean (EM-B3a/EM-B3e's landed work, re-asserted as the parity anchor) and campaigns clean — with preflight.counts.settlements and counts.campaigns unchanged, so the strip dropped no record."
+        },
+        {
+          "id": "C5",
+          "case": "COPY-ON-WRITE: the export must not erase the DM's running snapshot. A paused campaign carrying both keys is DEEP-FROZEN (Object.freeze applied recursively to the campaign, its worldState, its cursor, the snapshot, every member and every settlement) and passed as state.campaigns[0]; buildAccountExport does not throw, the exported campaign carries neither key, and the frozen live campaign STILL CARRIES BOTH — proving the walk never wrote through its input. This is the arm that convicts the strips-in-place mutant."
+        }
+      ],
+      "checks": [
+        [
+          "npx",
+          "vitest",
+          "run",
+          "--pool=threads",
+          "--maxWorkers=2",
+          "tests/lib/accountData.test.js",
+          "tests/lib/editTravel.test.js",
+          "tests/lib/accountImport.test.js",
+          "tests/lib/importScrub.test.js",
+          "tests/lib/importReconciliation.test.js",
+          "tests/lib/importReconciliationRecovery.test.js",
+          "tests/lib/accountSettlementContentPortability.test.js"
+        ],
+        [
+          "npx",
+          "vitest",
+          "run",
+          "--pool=threads",
+          "--maxWorkers=2",
+          "tests/store/accountImportSlice.test.js"
+        ],
+        [
+          "npx",
+          "vitest",
+          "run",
+          "--pool=threads",
+          "--maxWorkers=2",
+          "tests/lint/negativeAssertionAnchor.walker.test.js",
+          "tests/lint/publicIdentitySingleRender.walker.test.js",
+          "tests/lint/contractTestAntiVacuity.walker.test.js",
+          "tests/lint/snapshotPromotion.census.walker.test.js"
+        ],
+        [
+          "npx",
+          "vitest",
+          "run",
+          "--pool=threads",
+          "--maxWorkers=2",
+          "tests/ui/accountDataPrivacySection.test.jsx",
+          "tests/ui/accountW4d.test.jsx"
+        ],
+        [
+          "npx",
+          "vitest",
+          "run",
+          "--pool=threads",
+          "--maxWorkers=2",
+          "tests/components/campaignImportPanel.test.jsx",
+          "tests/components/covenantClaimsParity.test.js"
+        ],
+        [
+          "npx",
+          "vitest",
+          "run",
+          "--pool=threads",
+          "--maxWorkers=2",
+          "tests/property/generatorGoldenMaster.test.js",
+          "tests/property/dossierProseManifest.test.js"
+        ],
+        [
+          "node",
+          "scripts/implementation-packets.mjs",
+          "validate"
+        ]
+      ],
+      "_preproof": "version 2, re-measured by an independent Opus PRE-PROOF at f00d44040539c4586e21ae2bafb4e10f64a3d2aa: line hints refreshed (+30/+14 for EM-B3e's landing), withoutEditState re-quoted from real code, withoutEditKeys CONFIRMED at :191 count 1, +33 eff corrected to +46, parkReasonsFor printed ([] = CREDITED, titles +5 CONFIRMED). No contract, case, check or STOP changed."
+    },
+    {
+      "id": "EM-A2a",
+      "status": "READY",
+      "packetPath": "docs/implementation/packets/settlement-editor/EM-A2a.md",
+      "verifiedBase": "252d7ba4eaa7e531abd2ff2d82e3f34c322d3a08",
+      "changeManifest": [
+        {
+          "action": "CREATE",
+          "path": "src/domain/edit/pools.js",
+          "_note": "THE POOL MACHINERY AND THE ELEVEN TABLE POOLS. POOLS (frozen), poolValues(poolId, world) -> a FROZEN, codepoint-sorted, duplicate-free string[] that is never null and never throws, and rollFrom(poolId, world, seed, entryId, n) -> string|null — the signature the chair ruled (3). THE STREAM IS A ROOT COMPOSITION, NEVER A FORK: createPRNG(`edit-pool:${poolId}:${seed}:${entryId}:${n}`) then one .pick — no `::` is spelled, so tests/kernel/prngForkLabelDelimiter.test.js's EMBEDDED_DELIMITER_FAMILIES and its RESERVED `epoch` head cannot move; `n` rides IN the key rather than as a number of advances, so reopening a card at roll 3 reproduces roll 3 without replaying 0..2 (design §11). CONSUMES NO WORLD DRAW: nothing from src/kernel/rngContext.js (§P5 HZ-PRNG) — and VERSION 6's re-aim removes it from the leaf's CLOSURE as well, where version 5 carried it two hops away through src/generators/steps/resolveConfig.js. THE ELEVEN TABLE POOLS: institution.class (getInstitutionsForTier — a Set, 85 at town — imported from src/domain/institutionLookups.js, EM-P4's stable domain address, whose export is === the one src/generators/lookups.js and src/data/institutionLookups.js expose), faction.category (13 — the chair's fact (2): no faction record carries `type` or `archetype`, the field is `category`, and `archetype` is a DERIVATION design §14 forbids editing; `stance` is dropped with it), cause.remove (the owner's five), commodity (RESOURCE_DATA 33 + SPECIAL_RESOURCES 6, 34 distinct after normalization), tier (TIER_ORDER, 6, the ONE pool exempt from the codepoint sort because its order is meaning), npc.status (NPC_STATUS_VALUES imported from src/domain/entities/npcs.js — SEVEN members, `jailed` PRESENT since 95e494bdb) and institution.state (ENTITY_STATUS_VALUES imported from src/domain/entities/status.js — five), THE WIZARD'S OWN SETS read at EM-P3's landed domain address src/domain/worldFactOptions.js rather than at the generator step: worldFact.terrain (TERRAIN_WEIGHTS' seven keys, EXECUTED set-equal to the wizard's own seven <option> values) and worldFact.culture (CULTURES, 11), plus worldFact.monsterThreat (MONSTER_THREAT_TIERS, 3, frozen) and worldFact.stressors (STRESS_TYPE_MAP's 15 keys). ⛔ THE IMPORT FENCE IS ELEVEN MODULES AND NOT ONE MORE (A7, both directions): src/kernel/prng.js, src/domain/deterministicSort.js, src/domain/institutionLookups.js, src/domain/factionArchetypes.js, src/domain/entities/npcs.js, src/domain/entities/status.js, src/domain/worldFactOptions.js, src/data/resourceData.js, src/data/constants.js, src/data/monsterThreat.js, src/data/stressTypes.js. ⛔ NO src/generators/** PATH OF ANY KIND — tests/build/domainGeneratorsBoundary.test.js is a landed SHRINK-ONLY ratchet whose own message forbids widening BASELINE_EDGES, and tests/lint/catalogTierGateParity.walker.test.js A5 reds on any module under src/{generators,domain,lib} importing a specifier ending /lookups.js; both were EXECUTED, green for this contract and red for version 5's spelling. ⛔ NO JSX. ⛔ src/domain/dossier/powerStrata.js is NOT in the fence (judgment 79 ruling 5: the retired `stance` pool's residue, no §6 row reads it, a 93-module closure, and eslint — a sealed check — convicts an unused import). ⛔ NO UNION LITERAL IS SPELLED IN THIS LEAF: a frozen SCREAMING_SNAKE mirror of either status union would be read by tests/lint/statusUnionTotality.walker.test.js as a FOREIGN VOCABULARY and would collapse its DERIVED trigger from [dead, exiled, retired] to [], reddening A3—T2 twice; re-ruling R6' is the chair's, never a lane's. Measured with the walker's own head: TRIGGER UNMOVED, FLAGGED\\DECLARED [], DISCOVERED_ENUMERATORS 3 and this leaf is not one of them. ⛔ INTERIM RULE 17: no module-top-level `const UPPER_SNAKE = <number>;` and no fractional decimal literal may be written in this file. Executed with scripts/lib/tuning-inventory.mjs's own countUnregisteredNamed and countBareDecimals over this contract's text: P2 = 0, P3 = 0 for this leaf, totals UNMOVED at 535 / 6985. No number here is a simulation dial, so NO tuning-register row is owed. ≈140 effective of the 250 leaf cap (an ESTIMATE, re-measured with eslint's own Linter at implementation; crossing 250 is a STOP, never a squeeze). Lands DARK, zero importers. EM-A2b appends SIX world-derived rows to this file and is placed only after EM-A2a is LANDED (the two packets share this path and tests/domain/editPools.test.js, and the validator refuses one path claimed by two non-terminal packets). POOLS therefore holds SEVENTEEN ids after both land: this packet's eleven plus A2b's six."
+        },
+        {
+          "action": "CREATE",
+          "path": "tests/domain/editPools.test.js",
+          "_note": "THE ACCEPTANCE — eight arms, ONE literal describe, eight straight-line `it`, no .each / runIf / nested describe (§P3.4). Every one of the eight is HOMED in this file, which §7's second CREATE row authorizes (interim rule 12). A1 is guard-the-guard and runs FIRST so no later arm passes on nothing, and it set-equals POOLS against the ELEVEN declared ids in both directions. A3 carries the WIZARD-PARITY arm: worldFact.terrain is asserted set-equal to the wizard's seven <option> values read from ConfigurationPanel.jsx BY THE TEST (never by the module), so a drift between the wizard's menu and the generator's table reds HERE; its source scan also proves NO src/generators/** specifier is imported at all. A6 is load-bearing: the ambient stream is fixed with setActiveRng, fifty-five rollFrom calls are made across all ELEVEN pools, and the NEXT ambient draw is asserted equal to the pre-recorded value — the world's sequence did not advance by one step. A7 is the prevention guard, asserting the ELEVEN-module import list EXACTLY in both directions. A8 pins the two vocabularies AT THEIR HOMES: npc.status set-equals NPC_STATUS_VALUES (the SEVEN, with `jailed` asserted PRESENT by name — the tree gained it at 95e494bdb, so version 5's \"asserted ABSENT\" was a statement about a world that had ended) and institution.state set-equals ENTITY_STATUS_VALUES (five), as exact sorted lists, never lengths. `destroyed` and `removed` are asserted present and DISTINCT. The test does NOT re-implement EM-P4's typedef-to-array pin and spells no union literal it does not read from those two exports. Every negative carries its `// anchored:` marker on the line immediately above it. ⛔ No variable or parameter in this file is named `it`, `test` or `describe` (the lighting census resolves an opener only where the module binds the word exactly once; 26 of the estate's parked files park for that alone). A CREATE row, not TEST — the validator refuses a non-CREATE row whose path does not exist."
+        }
+      ],
+      "requiredSymbols": [
+        {
+          "path": "src/data/institutionLookups.js",
+          "symbol": "export const getInstitutionsForTier"
+        },
+        {
+          "path": "src/data/institutionLookups.js",
+          "symbol": "export const getInstitutionalCatalog"
+        },
+        {
+          "path": "src/data/institutionLookups.js",
+          "symbol": "export const institutionAvailableAtTier"
+        },
+        {
+          "path": "src/domain/institutionLookups.js",
+          "symbol": "getInstitutionsForTier"
+        },
+        {
+          "path": "src/kernel/prng.js",
+          "symbol": "export function createPRNG"
+        },
+        {
+          "path": "src/domain/npc/npcOps.js",
+          "symbol": "export function instantNpc"
+        },
+        {
+          "path": "src/domain/factionArchetypes.js",
+          "symbol": "export const FACTION_ARCHETYPES"
+        },
+        {
+          "path": "src/data/resourceData.js",
+          "symbol": "export const RESOURCE_DATA"
+        },
+        {
+          "path": "src/data/resourceData.js",
+          "symbol": "export const SPECIAL_RESOURCES"
+        },
+        {
+          "path": "src/data/constants.js",
+          "symbol": "export const TIER_ORDER"
+        },
+        {
+          "path": "src/domain/worldFactOptions.js",
+          "symbol": "TERRAIN_WEIGHTS"
+        },
+        {
+          "path": "src/domain/worldFactOptions.js",
+          "symbol": "CULTURES"
+        },
+        {
+          "path": "src/data/stressTypes.js",
+          "symbol": "export const STRESS_TYPE_MAP"
+        },
+        {
+          "path": "src/data/monsterThreat.js",
+          "symbol": "export const MONSTER_THREAT_TIERS"
+        },
+        {
+          "path": "src/domain/deterministicSort.js",
+          "symbol": "export const compareCodepoint"
+        },
+        {
+          "path": "src/domain/entities/npcs.js",
+          "symbol": "export const NPC_STATUS_VALUES"
+        },
+        {
+          "path": "src/domain/entities/npcs.js",
+          "symbol": "NpcStatus"
+        },
+        {
+          "path": "src/domain/entities/status.js",
+          "symbol": "export const ENTITY_STATUS_VALUES"
+        },
+        {
+          "path": "src/domain/entities/status.js",
+          "symbol": "EntityStatus"
+        }
+      ],
+      "acceptanceCases": [
+        {
+          "id": "A1",
+          "case": "MAIN BEHAVIOUR AND GUARD-THE-GUARD, ASSERTED FIRST: POOLS holds exactly the ELEVEN declared ids (set-equal both directions, full offender list); every pool returns a frozen, non-empty, duplicate-free string[] on a real town world; institution.class is exactly 85 and SET-EQUALS [...getInstitutionsForTier('town')] imported from src/domain/institutionLookups.js; faction.category set-equals Object.values(FACTION_ARCHETYPES) (13); tier equals TIER_ORDER (6). AND THE TOTALITY ARM EM-A1 ASSIGNS TO THIS PACKET: POOLS' ids are held against FIELD_DECLARATIONS' `kind: 'pool'` ids in BOTH directions with a full offender list each way, and the two lawful residues are asserted EXACTLY so neither can silently grow — DECLARED-BUT-UNPOOLED is exactly ['npc.role','power.holder','worldFact.resources'] (EM-A2b's three, PENDING: its landing shrinks that set to [] and a FOURTH reds here) and POOLED-BUT-UNDECLARED is exactly ['cause.remove','commodity','tier'] (this packet's own three, offered to a verb that declares no field today). tests/lint/editDeclarations.walker.test.js asserts POOLS membership NOWHERE — its own header says so and assigns this half to EM-A2a — and its ARM I-2 PRINTS the declared id set for exactly this arm to be held against. Measured at 583f8f644: eleven declared ids, eleven POOLS ids, 8 shared / 3 / 3.",
+          "home": "tests/domain/editPools.test.js",
+          "authorizedBy": "§7 CREATE row 2 — tests/domain/editPools.test.js"
+        },
+        {
+          "id": "A2",
+          "case": "ABSENCE IS THE TYPED VALUE AND NOTHING THROWS. null, undefined, {}, { tier: 'nonsense' }, { institutions: null } and an unknown pool id each return a FROZEN ARRAY — never null, never undefined, never a throw — and rollFrom returns null for each empty pool. THE TIER GATE IS ANCHORED ON A REAL TIER so the arm cannot be vacuous: { tier: 'town' } yields 85 and { tier: 'city' } yields 81; ABSENCE (null, undefined, {} — no tier at all) reads THIS MODULE'S OWN `?? 'village'` default and yields 58; a NON-CATALOGUE tier string yields [] — 'nonsense', and with it the wizard's sentinels 'random' and 'custom'. MEASURED AT THE PRE-PROOF, AND VERSION 5/6's CLAIM IS REFUTED: getInstitutionsForTier is `institutionalCatalog[t] || {}` and has NO random/custom case — 'random', 'custom', 'nonsense', 'all', '', null and undefined ALL return an EMPTY Set, so the old anchor was vacuous and the 58 was this packet's own default, never the lookups'. The random/custom/no-tier special case belongs to getInstitutionalCatalog ('a sane default for previews'), which this leaf does not import. It needs no special case either: a STORED settlement's tier is always a concrete catalogue tier — resolveConfig.js:92-94 is the one resolver, popToTier's codomain is TIER_ORDER, assembleSettlement.js:116 writes the resolved value, and in all of src/ exactly two expressions put settType in a key named `tier` (an analytics payload and a custom-content eligibility filter), neither of them a settlement record.",
+          "home": "tests/domain/editPools.test.js",
+          "authorizedBy": "§7 CREATE row 2 — tests/domain/editPools.test.js"
+        },
+        {
+          "id": "A3",
+          "case": "SOURCE IDENTITY, AND WIZARD PARITY. Each catalogue pool SET-EQUALS its source live, and a source scan proves pools.js imports neither display seam, NO JSX AT ALL and NO src/generators/** specifier, with the matcher proved live on a planted string. worldFact.terrain SET-EQUALS the wizard's own seven <option> values — read from ConfigurationPanel.jsx by the TEST, never by the module — and worldFact.culture set-equals CULTURES (11) read at src/domain/worldFactOptions.js. worldFact.monsterThreat set-equals MONSTER_THREAT_TIERS (the three heartland, frontier, plagued as a sorted list, never a length) and is asserted NOT equal to MONSTER_THREAT_RANDOM_POOL. The tier gate is proved LIVE rather than inherited: a row carrying minTier 'metropolis' is ABSENT from institution.class at city (81) and PRESENT at metropolis (115).",
+          "home": "tests/domain/editPools.test.js",
+          "authorizedBy": "§7 CREATE row 2 — tests/domain/editPools.test.js"
+        },
+        {
+          "id": "A4",
+          "case": "BOUNDARY — STABLE ORDER AND THE ONE STATED EXCEPTION. Every pool except `tier` is in compareCodepoint order, asserted by re-sorting and comparing. `tier` is TIER_ORDER's semantic small-to-large sequence VERBATIM and is asserted NOT to be codepoint-sorted ('city' precedes 'hamlet' alphabetically but follows it here), so the exemption is pinned in both directions and cannot be silently repaired.",
+          "home": "tests/domain/editPools.test.js",
+          "authorizedBy": "§7 CREATE row 2 — tests/domain/editPools.test.js"
+        },
+        {
+          "id": "A5",
+          "case": "IDEMPOTENCY AND THE REOPEN GUARANTEE. rollFrom(p, w, s, e, 3) returns the same value on three calls (toBe). Rolls 0..9 are taken in order, then roll 3 is taken ALONE on a fresh call and equals the earlier roll 3 — the reopen guarantee of design §11, which an advancing single stream would break. Different entryIds at the same n differ for at least one pool, and different seeds likewise, so both key segments are proved live.",
+          "home": "tests/domain/editPools.test.js",
+          "authorizedBy": "§7 CREATE row 2 — tests/domain/editPools.test.js"
+        },
+        {
+          "id": "A6",
+          "case": "THE NO-DRAW LAW AND THE GOLDEN'S STRUCTURAL PROOF (§P5 HZ-PRNG). With setActiveRng(createPRNG('probe')) live, the ambient sequence is fixed by recording two draws; after re-seeding, fifty-five rollFrom calls across all ELEVEN pools are made and the NEXT ambient draw is asserted EQUAL to the recorded second value — the world's stream did not advance by one step. With NO active RNG, rollFrom does not throw. Plus the dormancy half: a source scan over src/** finds ZERO importers of src/domain/edit/pools.js, with guard-the-guard arms proving the walk non-empty and the matcher live.",
+          "home": "tests/domain/editPools.test.js",
+          "authorizedBy": "§7 CREATE row 2 — tests/domain/editPools.test.js"
+        },
+        {
+          "id": "A7",
+          "case": "THE IMPORT FENCE, BOTH DIRECTIONS — the packet's prevention guard. pools.js's import list is asserted EXACTLY: it contains the ELEVEN modules src/kernel/prng.js, src/domain/deterministicSort.js, src/domain/institutionLookups.js, src/domain/factionArchetypes.js, src/domain/entities/npcs.js, src/domain/entities/status.js, src/domain/worldFactOptions.js, src/data/resourceData.js, src/data/constants.js, src/data/monsterThreat.js and src/data/stressTypes.js, and it contains NONE OF src/generators/lookups.js, src/generators/steps/resolveConfig.js, any other src/generators/** path, src/kernel/rngContext.js, src/data/namingData.js, src/generators/npcGenerator.js, src/domain/dossier/powerStrata.js, any *.jsx, any src/components/** or src/store/** path. The list is proved non-empty first.",
+          "home": "tests/domain/editPools.test.js",
+          "authorizedBy": "§7 CREATE row 2 — tests/domain/editPools.test.js"
+        },
+        {
+          "id": "A8",
+          "case": "THE TWO STATE VOCABULARIES ARE THE TREE'S, READ AT THEIR HOMES. npc.status set-equals NPC_STATUS_VALUES imported from src/domain/entities/npcs.js — the SEVEN active, dead, exiled, jailed, missing, removed, retired — and institution.state set-equals ENTITY_STATUS_VALUES imported from src/domain/entities/status.js — the five active, destroyed, impaired, removed, vacant; exact sorted lists, never lengths, both frozen. `jailed` is asserted PRESENT BY NAME: it has been a member of NpcStatus since 95e494bdb (EM-B1d, train EM-T3), so the value design §15's prose named is now the tree's own. `destroyed` and `removed` are both present and DISTINCT, which is design §15's 'destruction is a state the record keeps; removal is erasure' made structural. The test spells no union literal it does not read from those two exports and does not re-implement EM-P4's typedef pin.",
+          "home": "tests/domain/editPools.test.js",
+          "authorizedBy": "§7 CREATE row 2 — tests/domain/editPools.test.js"
+        }
+      ],
+      "checks": [
+        [
+          "npx",
+          "vitest",
+          "run",
+          "--pool=threads",
+          "--maxWorkers=2",
+          "tests/domain/editPools.test.js"
+        ],
+        [
+          "npx",
+          "vitest",
+          "run",
+          "--pool=threads",
+          "--maxWorkers=2",
+          "tests/build/domainGeneratorsBoundary.test.js"
+        ],
+        [
+          "npx",
+          "vitest",
+          "run",
+          "--pool=threads",
+          "--maxWorkers=2",
+          "tests/lint/statusUnionTotality.walker.test.js",
+          "tests/lint/catalogTierGateParity.walker.test.js",
+          "tests/lint/tuningRegister.walker.test.js",
+          "tests/lint/negativeAssertionAnchor.walker.test.js"
+        ],
+        [
+          "npx",
+          "vitest",
+          "run",
+          "--pool=threads",
+          "--maxWorkers=2",
+          "tests/property/generatorGoldenMaster.test.js",
+          "tests/property/dossierProseManifest.test.js"
+        ],
+        [
+          "npx",
+          "vitest",
+          "run",
+          "--pool=threads",
+          "--maxWorkers=2",
+          "tests/kernel/prngForkLabelDelimiter.test.js"
+        ],
+        [
+          "npx",
+          "eslint",
+          "src/domain/edit/pools.js",
+          "tests/domain/editPools.test.js"
+        ],
+        [
+          "node",
+          "scripts/check-observed-shape-readers.mjs"
+        ],
+        [
+          "npm",
+          "run",
+          "typecheck:ratchet"
+        ],
+        [
+          "npm",
+          "run",
+          "typecheck:domain:strict"
+        ],
+        [
+          "node",
+          "scripts/implementation-packets.mjs",
+          "validate"
+        ]
+      ],
+      "_pendingPoolIds": "EM-A2b's THREE pool ids are declared by EM-A1 and pooled by nobody until EM-A2b lands: npc.role, power.holder, worldFact.resources. They are NOT rows of this packet's POOLS and NOT requiredSymbols; A1's totality arm names them as the exact expected residue, so EM-A2b's landing must shrink that residue to [] and any FOURTH undeclared-by-A2a pool id reds A1 the day it appears. The mirror residue — cause.remove, commodity, tier — is EM-A2a's own and is permanent until a field declares each.",
+      "_tierReadNote": "institution.class reads [...getInstitutionsForTier(world?.tier ?? 'village')] from src/domain/institutionLookups.js. Executed at 583f8f644 with EM-P4 materialised: village 58, town 85, city 81, metropolis 115, thorp 19, hamlet 37; and 0 for 'random', 'custom', 'nonsense', 'all', '', null and undefined. The 58 for absence is this packet's own ?? 'village' default. A stored settlement's tier is always one of the six TIER_ORDER members (resolveConfig.js:92-94 -> assembleSettlement.js:116), so the sentinels never reach this read.",
+      "_governorNote": "FOUR governors beyond the three named in checks were hunted at the version-7 pre-proof and priced NOT OWED, each with a convicting control: tests/lint/determinismBanCoverage.test.js (this leaf resolves to no-restricted-syntax severity 2 with 34 selectors, identical to its landed sibling fieldDeclarations.js; kernel/prng.js resolves to 30 with Math.random allowed); tests/lint/entropyRootCensus.walker.test.js (read sites 22 = 22, zero under src/domain/edit, SEED_IDENTS 16 without this leaf, compositions 30 = 30 — the leaf mints no entropy root); tests/lint/goldenFreeze.walker.test.js (2,671 test files scanned, 53 carry an UPDATE_* env MemberExpression, this packet's test file carries none, positive control fires on a planted process.env.UPDATE_PROBE); scripts/.size-baseline.json + tests/lint/sizeBaseline.test.js (7 entries, 0 under src/domain/edit; the src/domain layer ceiling is max-lines 800 and this contract measures 55 effective lines). None is a checks entry and none is a §7 row; all four are §11 STOPs."
+    },
+    {
+      "id": "EM-V10",
+      "status": "READY",
+      "packetPath": "docs/implementation/packets/settlement-editor/EM-V10.md",
+      "verifiedBase": "252d7ba4eaa7e531abd2ff2d82e3f34c322d3a08",
+      "changeManifest": [
+        {
+          "action": "TEST",
+          "path": "tests/components/editFields.test.jsx",
+          "_note": "acceptance cases V1 and V2 as 2 literal-titled `it`s named `A9:` and `A10:`, appended INSIDE the EXISTING single describe (`EM-D0d: the editor two pure input controls`), after A8. NO new describe; NO existing arm edited (A1-A8 byte-untouched); NO new module-level binding. Reuses the file's own ROLE_DECL, OPTIONS, EMPTY_SPELLINGS, rollOf, selectOf, buttonOf, optionValues, LEAF_PATHS and LEAF_SOURCES. A9 pins BOTH of PoolField's roller guards: the button gate by BEHAVIOUR (rendered with no `roll` prop, the button is disabled, a click commits nothing and shows no refusal notice) and the handler belt by SPELLING (the leaf source, read non-empty, contains `if (typeof roll !== 'function') return;`). The spelling instrument is MEASURED, not chosen: React decides onClick dispatch from the element's React PROPS, so re-enabling the DOM node never reaches the handler while the gate holds, and with both guards struck React reports the thrown TypeError rather than rethrowing it into fireEvent -- the verifier's FIX-D1 prescription, written exactly as given, convicts M10 and leaves M1 alive (EM-V10.evidence.md E-REFUTE). A10 pins the select's CONTROLLED state on '', undefined and null by driving a change the parent does not accept and asserting the element returns to '': three rows collected, asserted ONCE (the seed-loop law). No .each, no nesting, no binding named it/test/describe, and no bare not.toContain / not.toMatch / not.toHaveProperty -- this file carries no FROZEN_UNANCHORED_NEGATIVES row and must not acquire one. +69 raw / +48 effective test lines; ZERO production lines. Lighting: titles 8 -> 10, suiteTitles 1 -> 1, parkReasonsFor [] before and after (measured by the walker's own classify)."
+        },
+        {
+          "action": "TEST",
+          "path": "tests/components/primitives/editorHalo.test.jsx",
+          "_note": "acceptance case V4 as 1 literal-titled `it` named `A7 `, appended INSIDE the EXISTING single describe (`the editor halo is an optional prop on two shared primitives`), after the anti-vacuity arm. NO new describe; NO existing arm edited (A1-A6 and the anti-vacuity arm byte-untouched); the three CAPTURE literals are not read, not re-taken and not moved; NO new module-level binding. Reuses the file's own popupOf and its already-imported EDITOR_GROUND. The arm asserts EDITOR_GROUND is exactly `color-mix(in srgb, var(--oc-ink-deepest) 76%, transparent)` and then renders the lit desktop popup and asserts the scrim's style.background is that SAME literal, spelled again rather than read from the token -- the shape tests/design/houseBloom.test.js arm 1 already uses for the bloom's 34 %. A3 and A4 cannot see this: both sides of their equality are read from the one producer, so a re-mixed ground moves both and lands green (mutant N6, 76% -> 20%, survived the landed battery; re-executed at this read tip). +15 raw / +6 effective test lines; ZERO production lines. Lighting: titles 8 -> 9, suiteTitles 1 -> 1, parkReasonsFor [] before and after."
+        },
+        {
+          "action": "TEST",
+          "path": "tests/lib/editTravel.test.js",
+          "_note": "acceptance case V3 as 1 literal-titled `test` named `B6 - `, appended INSIDE the EXISTING second describe (`EM-B3a - HZ-TRAVEL: a fork, a backup export and a realm snapshot carry neither key`), after B5; plus ONE module-level helper `deepFreeze(value)` placed immediately after `expectByteEqual`, WHICH IS NOT A TEST. NO new describe; NO existing arm edited -- in particular B2's expectation order is NOT repaired, because B6 is the pin and a repaired B2 would hide which arm does the work. Reuses editedSettlement(), saveRow(), snapshot() and buildAccountExport. The arm deep-freezes a save row carrying both editor keys on its live settlement AND on versionHistory[0].settlement, captures its serialized form BEFORE the export call, and after the call asserts the export is stripped (anchored on its name and its one-element timeline) AND that the live row serializes to the exact bytes captured before with dmLayer and decrees still own properties at BOTH levels. It convicts mutant P11 (withoutEditKeys mutates its input and returns the same reference) twice: the frozen object makes the mutant's delete throw in this module's strict mode, and the byte identity convicts a mutant that mutated without throwing. deepFreeze's guard is VALUE-RETURNING (`return value`), so contractTestAntiVacuity Rule 1a does not reach it. No .each, no loop-generated test, no nesting, no binding named it/test/describe, and no bare negative matcher -- this file carries no FROZEN_UNANCHORED_NEGATIVES row and must not acquire one. +44 raw / +29 effective test lines; ZERO production lines. Lighting: titles 8 -> 9, suiteTitles 2 -> 2, parkReasonsFor [] before and after."
+        }
+      ],
+      "requiredSymbols": [
+        {
+          "path": "src/components/edit/PoolField.jsx",
+          "symbol": "if (typeof roll !== 'function') return;"
+        },
+        {
+          "path": "src/components/edit/PoolField.jsx",
+          "symbol": "disabled={disabled || empty || !rollable}"
+        },
+        {
+          "path": "src/components/edit/PoolField.jsx",
+          "symbol": "const selected = String(value ?? '');"
+        },
+        {
+          "path": "src/components/theme.js",
+          "symbol": "export const EDITOR_GROUND = 'color-mix(in srgb, var(--oc-ink-deepest) 76%, transparent)';"
+        }
+      ],
+      "_pinNote": "All four rows verified VERBATIM at count 1 at the read tip f00d44040 (EM-V10.evidence.md E-SYM): PoolField.jsx:73, :124, :68 and theme.js:102. Every one of them SURVIVES this packet's own edits untouched, because this packet edits no src/ file -- the post-edit simulation of LANE-EM-PREPROOF step 10 is therefore trivially discharged and retiredSymbols is EMPTY. `withoutEditKeys` is deliberately NOT a row: it is module-private and EM-B3f version 2 carries src/lib/accountData.js as a MODIFY row, so a verbatim pin on a body another packet may lawfully re-shape would refuse that packet for no safety gain. V3 pins the PROPERTY at runtime instead, which is what survives a re-shaping.",
+      "retiredSymbols": [],
+      "acceptanceCases": [
+        {
+          "id": "V1",
+          "case": "THE ROLLER-ABSENT REFUSAL, BOTH GUARDS (the verifier's FIX-D1; kills M10 and M1). PoolField rendered with a non-empty pool and NO `roll` prop: the select is enabled and carries ['', ...options] (the liveness anchor), the roll button is disabled, a click commits nothing and leaves the refusal notice absent, and the leaf's own source -- read non-empty -- contains `if (typeof roll !== 'function') return;`. Homed in tests/components/editFields.test.jsx."
+        },
+        {
+          "id": "V2",
+          "case": "THE SELECT IS CONTROLLED ON EVERY EMPTY SPELLING (the verifier's FIX-D2; kills M6). Three mounts with value '', undefined and null, each taking a change to 'Miller': all three rows equal { before: '', reported: ['Miller'], after: '' } -- the change is reported to the parent and the element returns to the parent's unchanged empty value. Collected, then asserted once. Homed in tests/components/editFields.test.jsx."
+        },
+        {
+          "id": "V3",
+          "case": "THE EXPORT IS A READ, NOT A WRITE BASE (the verifier's FIX-B1; kills P11). A deep-frozen save row with both editor keys on its live settlement and on versionHistory[0].settlement, serialized BEFORE buildAccountExport is called: the export carries the save, its name and its one-element timeline and contains neither key, and the live row serializes to the exact bytes captured before with dmLayer and decrees still own properties at both levels. Homed in tests/lib/editTravel.test.js."
+        },
+        {
+          "id": "V4",
+          "case": "EDITOR_GROUND'S VALUE, SPELLED (the verifier's FIX-C1; kills N6). EDITOR_GROUND is exactly `color-mix(in srgb, var(--oc-ink-deepest) 76%, transparent)`, and the lit desktop popup's scrim carries that same literal as its style.background -- so the pin holds the value a DM sees and not merely a module constant. Homed in tests/components/primitives/editorHalo.test.jsx."
+        }
+      ],
+      "checks": [
+        [
+          "npx",
+          "vitest",
+          "run",
+          "--pool=threads",
+          "--maxWorkers=2",
+          "tests/components/editFields.test.jsx"
+        ],
+        [
+          "npx",
+          "vitest",
+          "run",
+          "--pool=threads",
+          "--maxWorkers=2",
+          "tests/components/primitives/editorHalo.test.jsx"
+        ],
+        [
+          "npx",
+          "vitest",
+          "run",
+          "--pool=threads",
+          "--maxWorkers=2",
+          "tests/lib/editTravel.test.js",
+          "tests/lib/importScrub.test.js"
+        ],
+        [
+          "node",
+          "scripts/implementation-packets.mjs",
+          "validate"
+        ]
+      ],
+      "_checksNote": "Interim rule 8, computed at the read tip f00d44040: the governing set of each changed file is the file ITSELF and nothing else. `git grep -l -F 'editFields' 2524e94df -- tests`, `git grep -l -F 'editorHalo' 3bfa9825b -- tests` and `git grep -l -F 'editTravel' f00d44040 -- tests` each return exactly one path, that file. No exported symbol's call shape changes, and this packet CREATEs or RENAMEs no test file, so no directory walker is opted into. tests/lib/importScrub.test.js rides the tests/lib array as the second battery over the same src/lib seam V3 constrains -- it is not a change-manifest row and no arm of it is touched (19 arms, unmoved). The lighting walker is NEVER a sealed check (it reds by design under a train); it and the EXCLUDED tests/lint directory run are the build lane's INSTRUMENTS in the packet's section 10, together with judgment 108's tests/components and tests/lib whole-directory runs. eslint runs BARE over the three test files, never through the mutex, and no src/ file is in its argument list because this packet changes none."
     }
   ]
 }
