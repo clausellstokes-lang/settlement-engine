@@ -796,7 +796,7 @@ describe('EP-0 · the closure record, re-run rather than transcribed', () => {
     expect({ lines, files: hits.length }).toEqual({ lines: 73, files: 31 });
   });
 
-  test('`createPRNG(` sites: 35 in src/domain, 45 whole-src; `generateSeed()` 9 hits / 6 call sites', () => {
+  test('`createPRNG(` sites: 36 in src/domain, 47 whole-src; `generateSeed()` 9 hits / 6 call sites', () => {
     const count = (pred, re) => ALL_FILES.filter(pred)
       .reduce((n, f) => n + read(f).split('\n').filter((l) => re.test(l)).length, 0);
     // ── RE-RECORDED 2026-08-30 BY TE-STRIP-4 (ODQ §725/§772): a SHRINK on both halves, TWICE,
@@ -808,12 +808,28 @@ describe('EP-0 · the closure record, re-run rather than transcribed', () => {
     // counter" is exactly the one that would have shipped a stale figure: the 27-file draw-stack
     // delete took ONE more seeded stream with it, 36 → 35 / 46 → 45. Re-read from its own red
     // run, never carried forward from the car-1 note above.
-    expect(count((f) => f.startsWith('src/domain/'), /createPRNG\(/)).toBe(35);
+    // ⭐ RE-RECORDED 2026-09-21 BY EM-A2a: 35 → 36 in src/domain and 46 → 47 whole-src, ONE
+    // site and nothing else, and the two halves move together because the site is inside
+    // src/domain. src/domain/edit/pools.js — `rollFrom`'s ROOT composition
+    // createPRNG(`edit-pool:${poolId}:${String(seed)}:${entryId}:${rollIndex}`) — is the
+    // settlement editor's dice button beside a typed field, the shape ruling 4 ordered from
+    // `instantNpc`: a root composed from a seed the caller PASSES IN, never a fork and never
+    // a value read off a world root. NOT ONE DRAW OF THE WORLD'S SEQUENCE IS CONSUMED — the
+    // leaf imports rngContext nowhere and its acceptance re-seeds the ambient stream, takes
+    // fifty-five rolls across all eleven pools and finds the next ambient draw unmoved — and
+    // the same seed and key roll the same value forever, so THE PROMISE is untouched. The
+    // read-site census above is UNMOVED at twenty-two and `COMPOSITIONS` is untouched,
+    // because this is a seed-keyed ROOT and not a tick- or year-anchored composition.
+    // Re-read from EM-A2a's own red run (queue window 28, section c1), never carried forward.
+    expect(count((f) => f.startsWith('src/domain/'), /createPRNG\(/)).toBe(36);
     // 45 → 46 on 2026-09-19: the store's size-gate draw (src/store/settlementGenerateAction.js,
     // lane 35 car 11) aims a capped account's 'random' size on its OWN stream —
     // createPRNG(`${seed}:size-gate`) — before the pipeline runs, so not one draw of the
     // world's sequence is consumed; a whole-src site outside src/domain, hence 35 there still.
-    expect(count(() => true, /createPRNG\(/)).toBe(46);
+    // 46 → 47 on 2026-09-21 for the SAME single reason as the domain figure above, which is
+    // why this one may not be re-read on its own: the new site is IN src/domain, so a
+    // whole-src move without a domain move would mean a second site nobody named.
+    expect(count(() => true, /createPRNG\(/)).toBe(47);
     // ⚠ THE INSTRUCTIVE ONE: a bare hit count over a symbol that also appears in prose and in
     // its own definition over-reports by 60%. HITS and CALL SITES are recorded separately.
     const hits = ALL_FILES.reduce((n, f) => n + read(f).split('\n').filter((l) => l.includes('generateSeed()')).length, 0);
