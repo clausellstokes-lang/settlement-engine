@@ -76,15 +76,16 @@ evidence must be checked independently.
 
 ## Current release blockers
 
-1. **Migration train.** Working-tree migration head 203 is 3 migrations ahead
-   of the live-verified production head 200 (`supabase/applied-head.json`; the
-   owner applied 122–200 to production on 2026-09-16; 201 — the staff unlock of
-   ODQ §934.28 — 202 — design §12.4's gallery-scanner denial of the
-   settlement editor's two DM-private keys, `dmLayer` and `decrees` — and 203 —
-   the client-mirror totality of that same gallery scanner, adding the three
-   hard-denied conditional ledgers (`factionPairStates`, `envoyErrands`,
-   `concludedWars`) that landed on the client after 136 froze the SQL array —
-   all wait on the owner's `supabase db push`). Both
+1. **Migration train.** Working-tree migration head 203 is 0 migrations ahead
+   of the live-verified production head 203 (`supabase/applied-head.json`; the
+   owner applied 122–200 to production on 2026-09-16 and 201–203 on 2026-09-20:
+   201 — the staff unlock of ODQ §934.28 — 202 — design §12.4's gallery-scanner
+   denial of the settlement editor's two DM-private keys, `dmLayer` and
+   `decrees` — and 203 — the client-mirror totality of that same gallery
+   scanner, adding the three hard-denied conditional ledgers
+   (`factionPairStates`, `envoyErrands`, `concludedWars`) that landed on the
+   client after 136 froze the SQL array; nothing waits on a `supabase db push`
+   at this commit). Both
    figures are derived by the freshness pin rather than kept by hand. The eleven
    declared waves need clone rehearsal, wave receipts, rollback practice, and then
    an authorized deployment.
