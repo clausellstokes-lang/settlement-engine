@@ -670,12 +670,44 @@ export function readDispatchSeal(rootDir, packetId) {
 }
 
 /**
+ * The (path, symbol) keys ONE packet's `retiredSymbols` contributes to the cross-packet
+ * discharge below. Extracted so the LANDED pass and the §379.2b sealed-READY pass read the
+ * rows through one expression rather than two that can drift apart.
+ *
+ * Malformed rows contribute nothing — they are convicted elsewhere, by their own shape — and
+ * neither does a pair the SAME packet also names in `requiredSymbols`: that contradiction is
+ * already an error, and a red manifest must not quietly silence a live guard somewhere else.
+ *
+ * @param {Record<string, unknown>} rawPacket
+ * @returns {string[]}
+ */
+function retiredDischargeKeys(rawPacket) {
+  const retiredRows = Array.isArray(rawPacket.retiredSymbols) ? rawPacket.retiredSymbols : [];
+  if (retiredRows.length === 0) return [];
+  const requiredRows = Array.isArray(rawPacket.requiredSymbols) ? rawPacket.requiredSymbols : [];
+  const ownRequired = new Set(requiredRows
+    .filter((row) => isRecord(row) && typeof row.path === 'string' && typeof row.symbol === 'string')
+    .map((row) => `${row.path}\0${row.symbol}`));
+  /** @type {string[]} */
+  const keys = [];
+  for (const row of retiredRows) {
+    if (!isRecord(row) || typeof row.path !== 'string' || typeof row.symbol !== 'string') continue;
+    if (packetPathProblem(row.path) || row.symbol.trim().length === 0) continue;
+    const key = `${row.path}\0${row.symbol}`;
+    if (!ownRequired.has(key)) keys.push(key);
+  }
+  return keys;
+}
+
+/**
  * Validate manifest structure plus its joins to the index, packet Markdown, and
  * live source files. It returns every measured error instead of stopping at the
  * first one, but no caller may treat a partial result as valid.
  *
- * `onNote` receives observations that are NOT errors — today, the one sealed burn described
- * at THE SEALED-BURN EXEMPTION above. It is an optional sink rather than a third key on the
+ * `onNote` receives observations that are NOT errors — today, the two a live dispatch seal
+ * licenses: the OWN sealed burn described at THE SEALED-BURN EXEMPTION above, and the
+ * CROSS-PACKET discharge described at §379.2b inside this function. It is an optional sink
+ * rather than a third key on the
  * return value on purpose: every caller in the estate asserts the exact shape
  * `{ ok, errors }`, and a validator that quietly changed its answer's shape to announce that
  * it had changed nothing would be its own kind of lie.
@@ -752,19 +784,80 @@ export function validatePacketManifest(manifest, options = {}) {
   const dischargedSymbolKeys = new Set();
   for (const rawPacket of packets) {
     if (!isRecord(rawPacket) || rawPacket.status !== 'LANDED') continue;
-    const retiredRows = Array.isArray(rawPacket.retiredSymbols) ? rawPacket.retiredSymbols : [];
-    if (retiredRows.length === 0) continue;
-    const requiredRows = Array.isArray(rawPacket.requiredSymbols) ? rawPacket.requiredSymbols : [];
-    const ownRequired = new Set(requiredRows
-      .filter((row) => isRecord(row) && typeof row.path === 'string' && typeof row.symbol === 'string')
-      .map((row) => `${row.path}\0${row.symbol}`));
-    for (const row of retiredRows) {
-      if (!isRecord(row) || typeof row.path !== 'string' || typeof row.symbol !== 'string') continue;
-      if (packetPathProblem(row.path) || row.symbol.trim().length === 0) continue;
-      const key = `${row.path}\0${row.symbol}`;
-      if (!ownRequired.has(key)) dischargedSymbolKeys.add(key);
+    for (const key of retiredDischargeKeys(rawPacket)) dischargedSymbolKeys.add(key);
+  }
+
+  // ── §379.2b THE SEAL-AWARE CROSS-PACKET DISCHARGE (chair ruling, judgment 88; TOOL-29) ──
+  // §7.4 above taught the OWN-retiree rule the seal. It could not teach THIS loop, whose first
+  // line reads `status !== 'LANDED'` — so a sealed build that moves a symbol some LANDED packet
+  // requires could never pass `validate`, `check:packet` or `implementation:resume` after its
+  // own edits. EM-P4 measured exactly that, on its own estate: with a VALID seal live, the
+  // packet's own half went quiet and SIX cross-packet errors survived, and no ordering of lane
+  // acts made the honest manifest green. The packet was unbuildable, not wrong.
+  //
+  // A READY packet holding a VALID seal FOR THIS WORKTREE therefore discharges other packets'
+  // rows exactly as its LANDED state would — and says so, as a NOTE naming the sealing packet,
+  // because the discharge is PROVISIONAL in a way a landed one is not: it lasts as long as the
+  // seal, and becomes an ordinary §379.2 discharge at the flip.
+  //
+  // THE FENCES ARE NOT RE-IMPLEMENTED HERE. `readDispatchSeal` and `isAncestorOfHead` are the
+  // same two functions §7.4 consults, so the envelope schema, the recomputed integrity digest,
+  // the packet's own id, this worktree's Git directory and the ancestor test are one
+  // implementation with two callers rather than two that can drift. A DRAFT retirement is still
+  // a promise and discharges nothing; an unsealed READY one likewise.
+  //
+  // ⚠ A LANDED DISCHARGE WINS AND IS SILENT. The LANDED pass runs FIRST and completely, so a
+  // pair some landed packet already retired never reaches this map — no seal is consulted for
+  // it, no note is minted, and LANDED behaviour is byte-identical to what it has always been.
+  //
+  // THE LOOKUP STAYS LAZY, which is §7.4's discipline and not merely its optimization: this
+  // pass reads ROWS only and spawns no `git` at all. The seal is consulted below, at the exact
+  // point a refusal was about to be raised, so a tree whose required symbols are all present
+  // costs precisely what it cost before.
+  /** @type {Map<string, string[]>} */
+  const sealedRetirers = new Map();
+  for (const rawPacket of packets) {
+    if (!isRecord(rawPacket) || rawPacket.status !== 'READY') continue;
+    if (typeof rawPacket.id !== 'string') continue;
+    for (const key of retiredDischargeKeys(rawPacket)) {
+      if (dischargedSymbolKeys.has(key)) continue;
+      const claimants = sealedRetirers.get(key);
+      if (claimants) claimants.push(rawPacket.id);
+      else sealedRetirers.set(key, [rawPacket.id]);
     }
   }
+
+  // Read AT MOST ONCE per packet id, and only where an absence was about to be refused: the
+  // seal lookup shells out to Git, and the overwhelmingly common case reaches none of it. The
+  // memo is shared by §379.2b above and §7.4's own-retiree arm below — one packet cannot need
+  // two answers about one seal.
+  /** @type {Map<unknown, { digest:string, head:string, gitDir:string }|null>} */
+  const sealProbes = new Map();
+  /** @param {unknown} packetId */
+  const dispatchSealOf = (packetId) => {
+    if (!sealProbes.has(packetId)) sealProbes.set(packetId, readDispatchSeal(rootDir, packetId));
+    return sealProbes.get(packetId) ?? null;
+  };
+
+  // The ancestor fence costs a second `git` call, so its verdict is memoized per KEY rather
+  // than recomputed for every row that names the same retiree.
+  /** @type {Map<string, { id:string, digest:string, head:string }|null>} */
+  const sealedDischarges = new Map();
+  /** @param {string} key @returns {{ id:string, digest:string, head:string }|null} */
+  const sealedDischargeOf = (key) => {
+    const known = sealedDischarges.get(key);
+    if (known !== undefined) return known;
+    /** @type {{ id:string, digest:string, head:string }|null} */
+    let answer = null;
+    for (const claimant of sealedRetirers.get(key) ?? []) {
+      const seal = dispatchSealOf(claimant);
+      if (!seal || !isAncestorOfHead(rootDir, seal.head)) continue;
+      answer = { id: claimant, digest: seal.digest, head: seal.head };
+      break;
+    }
+    sealedDischarges.set(key, answer);
+    return answer;
+  };
 
   for (let packetIndex = 0; packetIndex < packets.length; packetIndex += 1) {
     const rawPacket = packets[packetIndex];
@@ -961,14 +1054,31 @@ export function validatePacketManifest(manifest, options = {}) {
       const symbolRetirement = retirementOf(row);
       if (symbolRetirement.error) addError(errors, `${at}${symbolRetirement.error}`);
       if (symbolRetirement.retired) continue;
-      if (!fileExists(rootDir, row.path)) {
-        addError(errors, `${at}.path does not exist: ${row.path}`);
+      // The two absences this row can suffer, named before either is raised. Both are answered
+      // by a LANDED retirement above — the estate's arm pins that a retirement which deleted
+      // the whole FILE discharges too — so both must be answerable by a sealed READY one.
+      const absence = !fileExists(rootDir, row.path)
+        ? `${at}.path does not exist: ${row.path}`
+        : (readRepositoryFile(rootDir, row.path).includes(row.symbol)
+          ? null
+          : `${at}.symbol is missing from ${row.path}: ${row.symbol}`);
+      if (absence === null) continue;
+      // §379.2b: a READY packet's retirement of this exact pair discharges the row too, when
+      // THAT packet holds a valid seal for this worktree — see THE SEAL-AWARE CROSS-PACKET
+      // DISCHARGE above. ⛔ CONSULTED ONLY HERE, BELOW THE EXISTENCE READ, for the reason §7.4
+      // states and a first draft of this arm broke: a discharge asserted BEFORE the read fires
+      // on a symbol that is standing right there, and prints a note claiming a burn that never
+      // happened. The exemption speaks only where the refusal was about to be raised.
+      const sealedDischarge = sealedDischargeOf(key);
+      if (sealedDischarge) {
+        addNote(
+          `${at}.symbol: discharged by ${sealedDischarge.id}'s SEALED READY retirement under`
+          + ` seal ${sealedDischarge.digest} (bound HEAD ${sealedDischarge.head}): ${row.symbol}`
+          + ` — an ordinary §379.2 LANDED discharge the moment ${sealedDischarge.id} flips.`,
+        );
         continue;
       }
-      const source = readRepositoryFile(rootDir, row.path);
-      if (!source.includes(row.symbol)) {
-        addError(errors, `${at}.symbol is missing from ${row.path}: ${row.symbol}`);
-      }
+      addError(errors, absence);
     }
 
     const retiredSymbols = rawPacket.retiredSymbols;
@@ -977,15 +1087,12 @@ export function validatePacketManifest(manifest, options = {}) {
     }
     const retired = Array.isArray(retiredSymbols) ? retiredSymbols : [];
     const retiredKeys = new Set();
-    // Read AT MOST ONCE per packet, and only when a retiree has actually gone missing:
-    // the seal lookup shells out to Git, and the overwhelmingly common case reaches none
-    // of it. `undefined` is "not yet asked"; `null` is "asked, and there is no seal".
-    /** @type {{ digest:string, head:string, gitDir:string }|null|undefined} */
-    let sealProbe;
-    const dispatchSeal = () => {
-      if (sealProbe === undefined) sealProbe = readDispatchSeal(rootDir, id);
-      return sealProbe;
-    };
+    // Read AT MOST ONCE per packet, and only when a retiree has actually gone missing: the
+    // seal lookup shells out to Git, and the overwhelmingly common case reaches none of it.
+    // The memo now lives at function scope (see §379.2b above) because a seal is a fact about
+    // a PACKET, not about a loop — but the call site is unchanged, and so is the rule that it
+    // is reached only where the refusal was about to be raised.
+    const dispatchSeal = () => dispatchSealOf(id);
     for (let index = 0; index < retired.length; index += 1) {
       const row = retired[index];
       const at = `${idLabel}.retiredSymbols[${index}]`;

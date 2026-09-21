@@ -116,6 +116,17 @@ instead of an error, while a seal naming another packet, another worktree, a pay
 integrity digest no longer matches, or a HEAD that is not an ancestor of this tree licenses
 nothing and the refusal stands.
 
+That same seal also answers the `requiredSymbols` rows OTHER packets hold on the retiree. A
+`READY` packet holding a valid seal in this worktree discharges those rows exactly as its
+`LANDED` state would (§379.2), and each such discharge is a printed note naming the sealing
+packet — a note rather than a silence because the discharge is provisional: it lasts as long
+as the seal and becomes an ordinary `LANDED` discharge at the flip. Without it a sealed build
+that moves a symbol a landed packet requires cannot run `validate:packets`, `check:packet` or
+`implementation:resume` after its own edits, so the packet is unbuildable rather than wrong.
+The five fences above are the same five, applied by the same reader; a `DRAFT` retirement, an
+unsealed `READY` one, and a packet naming one pair as both required and retired discharge
+nothing, and a row whose symbol is still present is never discharged or noted at all.
+
 When the branch has moved under a paused session — dispatch refusing because the capsule
 exists while `check:packet` and `resume` refuse because that capsule's sealed HEAD drifted —
 `npm run implementation:dispatch -- --reseal <ID>` archives the prior capsule by rename under
