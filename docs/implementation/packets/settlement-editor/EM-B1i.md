@@ -3,7 +3,8 @@
 - **Status:** `READY`
   ⚠ The status value above stands ALONE on its line because `parsePacketHeader`
   (`scripts/implementation-packets.mjs`) anchors the status row at end-of-line (J-TEWF1B-1).
-- **Packet version:** 4
+- **Packet version:** 5
+  ⭐ **VERSION 5 (the chair, judgment 105, 2026-09-21; the second build lane's STOP at `af15f8458`, `lane-em-b1i-t10-scratch/EM-B1i.STOP-v4.md`) — §6.1's CURE TEXT RE-SPELLED SO THE PACKET'S OWN REGISTER ROW AND §9'S STRICT-CLEAN REQUIREMENT CAN BOTH HOLD; NO COUNT MOVES.** Measured at `af15f8458`: `objectLiteralKeys` (the walker `tests/lint/vocabularyTotality.walker.test.js:88-103`) anchors every key at a LINE START, so §6.1's one-line `DESTROYED_BY_FATE_KIND` literal yielded `["closure"]` and §6.5's contracted row (`setDiff(KINDS, keys)` = `[]`) was FALSE against the packet's own cure (the control `THREAT_DISPLAY` read three keys); and §6.1 verbatim raised two domain-strict diagnostics (TS2538: `fate` is still `unknown` at `WORLD_PULSE_FATE_KIND[fate]` because `isWorldPulseFate` returns `boolean`, not a type predicate; TS7053: the literal carries no `@type`, so it infers as a three-key literal with no index signature) against §9's allowance of 0 (the file has no row in any of the three baselines). Version 5 spells the literal ONE KEY PER LINE under `/** @type {Readonly<Record<string, boolean>>} */` and casts the index `WORLD_PULSE_FATE_KIND[/** @type {string} */ (fate)]`; both typechecks read 0 diagnostics, the any-cast holes stay `{any:0, suppress:0}` (a planted `@type {any}` proves the counter live), `objectLiteralKeys` reads three keys and A5's own regex the same three pairs. The effective-line figures follow the measurement: `+5` → `+8`, `376 → 381` → `376 → 384` (eslint's own Linter, control `roadsKernel.js` 838 = its frozen row), inside §3's cap of ≤10. Cases 7 of 7, +8 titles, one CREATE, §7, the `changeManifest`, the `checks`, every mutant and the lighting delta are untouched. Rejected: changing `objectLiteralKeys` (outside §7; four landed rows read it). The prior version is 4.
   ⭐ **VERSION 4 (the chair, judgment 101, 2026-09-21; the build lane's STOP at `583f8f644`, `lane-em-b1i-t10-scratch/EM-B1i.STOP.md`) — A7 RE-AIMED AT THE LEAF'S OWN RULE, NO COUNT MOVED.** Version 3's A7 asserted that the three non-`closure` write-site literals carry no `status:` key; `upswingKernel.js:763` founds an Academy with `status: 'active'` — a true `rise`, exactly as §5 and EM-B1h's leaf (`worldPulseFates.js:53`) say. Version 4's A7 asserts NO NON-ACTIVE `status` (an absent key or `'active'` both pass), which is strictly stronger on the `closure` negation the arm exists for and non-vacuous over three real literals. Three citations ride the same version: §5's `calamityKernel.js:309` → `:311` (the demote branch `:294-311` → `:296-313`, re-found at `583f8f644`); §8 step 0's `…KIND` grep gains its `=` so the `…KINDS` line stops matching; the EM-B1h arm this packet called "A6/T4" lives in the walker's T4 (`worldPulseFateTotality.walker.test.js:407-408`). Cases stay 7 of 7 (+8 titles); §7, the `changeManifest`, the `checks` and the lighting delta are untouched. The prior version is 3.
   - Version 3 is the EM-T10 PRE-PROOF revision, measured whole at `e80a6a3f4` (the integration
     tip merged to master). ⛔ **ONE DEFECT THAT WOULD HAVE FAILED PLACEMENT:** the `Verified base`
@@ -236,13 +237,13 @@ against the `src/domain/**` ceiling of **800** (`eslint.config.js`, the *code-qu
 size ratchet* block):
 
 ```
-causeLifecycle.js     376 / 800   HEADROOM 424   ← the ONLY edited production file (+5 eff)
+causeLifecycle.js     376 / 800   HEADROOM 424   ← the ONLY edited production file (+8 eff, measured at version 5)
 CONTROL roadsKernel.js  838  —  EXACTLY its frozen scripts/.size-baseline.json value of 838
 ```
 
 ⇒ the control proves the counter reproduces eslint's own arithmetic. `causeLifecycle.js` carries
 **no** per-file override and **no** `.size-baseline.json` entry, so the plain 800 ceiling applies
-and 381/800 is the post-edit figure §12 must report.
+and 384/800 is the post-edit figure §12 must report (version 5: the multi-line literal and its `@type` line).
 
 ### §3.2 · Bundles — ⭐ THE NEW IMPORT EDGE COSTS ZERO MODULES
 
@@ -338,7 +339,12 @@ import { WORLD_PULSE_FATE_KIND, isWorldPulseFate } from './worldPulseFates.js';
  * WORLD_PULSE_FATE_KINDS — a fourth kind declared by the leaf and not spelled here reds
  * tests/lint/vocabularyTotality.walker.test.js rather than defaulting silently to "standing".
  */
-const DESTROYED_BY_FATE_KIND = Object.freeze({ closure: true, rise: false, standing: false });
+/** @type {Readonly<Record<string, boolean>>} */
+const DESTROYED_BY_FATE_KIND = Object.freeze({
+  closure: true,
+  rise: false,
+  standing: false,
+});
 
 function institutionDestroyed(inst) {
   if (!inst) return false;
@@ -349,14 +355,14 @@ function institutionDestroyed(inst) {
   // is a Set test, never `in`: `in` walks Object.prototype and would read 'constructor',
   // 'toString', 'valueOf' and '__proto__' as members.
   if (fate && !isWorldPulseFate(fate)) return true;
-  if (fate && DESTROYED_BY_FATE_KIND[WORLD_PULSE_FATE_KIND[fate]] === true) return true;
+  if (fate && DESTROYED_BY_FATE_KIND[WORLD_PULSE_FATE_KIND[/** @type {string} */ (fate)]] === true) return true;
   return NONSTANDING_STATUS.has(norm(inst.status));
 }
 ```
 
 ⛔ **`:137`, `:138` and the final `NONSTANDING_STATUS` line are BYTE-IDENTICAL to today and keep
 their positions.** Only `:139` is replaced, by two lines, and one `const` and one `import` are
-added. ⇒ **+5 effective lines.**
+added. ⇒ **+8 effective lines** (version 5, measured with eslint's own Linter: the import, the `@type` line, the five-line literal and three body lines, replacing one).
 
 ### §6.2 · The absence and unknown-value rules, stated exactly
 
@@ -635,7 +641,7 @@ Swept by LITERAL and by VALUE (evidence §6.3, §6.5, §14).
 ## 13. Completion receipt
 
 Base SHA · seal identity · final tree state · **the pre- and post-edit `max-lines` figures of
-`causeLifecycle.js`** (expect **376 → 381** of 800) · exact changed files and effective-line
+`causeLifecycle.js`** (expect **376 → 384** of 800) · exact changed files and effective-line
 deltas · acceptance A1–A7 executed · ⭐ **the step-2 RED quoted verbatim** (A1's three divergence
 arms failing against today's truthiness reader — the packet's own reproduction of the defect) ·
 ⭐ **the step-4 RED quoted verbatim** (EM-B1h's no-reader arm firing the moment the cure lands,
