@@ -96,19 +96,31 @@ jobs:
   check-tests:  # deploy-gate: optional — required transitively by the `check` aggregate
     name: Gate / test ratchet
     runs-on: ubuntu-latest
-    # The ratchet executes the real full suite, and this cap follows that suite. Measured
-    # 2026-09-20: BOTH of PR #53's runs were CUT at the old 45-minute cap without ever
-    # concluding — push 35534822592 and pull_request 35534903945, 45m17s each, ending in "The
-    # operation was canceled." A timeout is not a test verdict, and a cap that cuts a passing
-    # run blocks the production deploy (the `e2e` job below says the same thing one job over;
-    # keep the two comments consistent). The last runs that CONCLUDED were on 2026-09-17, all
-    # three green: 22m55s (35184404284), 34m53s (35168257017) and 35m40s (35230176250). About
-    # five hundred commits and several thousand tests have landed since, and the same ratchet
-    # takes 17m41s locally today over 33,770 tests. 90 is twice the longest concluded run plus
-    # that growth — deliberately loose, and to be TIGHTENED to measured-plus-headroom as soon as
-    # a run concludes on this branch and offers a real figure. The runner size a PRIVATE
-    # repository is given has not been measured here, so no core count is assumed.
-    timeout-minutes: 90
+    # The ratchet executes the real full suite, and this cap follows that suite. The previous
+    # cap, 90, was set on 2026-09-20 when NO run had concluded in this era — both of PR #53's
+    # first runs were cut at 45 (push 35534822592 and pull_request 35534903945, 45m17s each,
+    # "The operation was canceled"), so 90 was twice the longest run that had concluded back on
+    # 2026-09-17 plus five hundred commits of growth, and its own comment promised to TIGHTEN it
+    # to measured-plus-headroom the moment a real figure arrived.
+    # THE REAL FIGURES ARRIVED. Both runs at f76ddf0ab CONCLUDED GREEN and are measured here:
+    #   push         35541172706  22:16:42Z → 23:19:19Z  62m37s  success
+    #   pull_request 35541276693  22:18:49Z → 23:40:57Z  82m08s  success
+    # The SAME commit, a TWENTY-MINUTE spread between two runners, and 82m08s is 91% of the
+    # 90-minute cap — so 90 was not loose at all, it was one slow runner away from cutting a
+    # passing run. THE RULE THIS CAP NOW FOLLOWS: the longest CONCLUDED run × 1.5, rounded UP
+    # to the next 15. 82m08s × 1.5 = 123m12s → 135. A cut run is never the input — a timeout
+    # measures the cap, not the suite.
+    # A timeout is not a test verdict, and a cap that cuts a passing run blocks the production
+    # deploy (the `e2e` job below says the same thing one job over; keep the two comments
+    # consistent). For reference the same ratchet takes 17m41s locally over 33,770 tests, which
+    # puts this runner at 3.5× to 4.6× the local box. The runner size a PRIVATE repository is
+    # given has not been measured here, so no core count is assumed.
+    # ⛔ THE NEXT MOVE IS NOT ANOTHER CAP: an 82-minute serial job is close to the point where
+    # headroom stops being the answer and sharding is, and the spread says runner variance
+    # alone can swing this job by 20 minutes. Sharding must keep the ratchet's known-failures
+    # baseline and its scope sentinel exact, so it is a deliberate change of the gate's shape,
+    # not a cap repair.
+    timeout-minutes: 135
     env:
       CUSTOM_CONTENT_CONCURRENCY_DATABASE_URL: >-
         postgresql://postgres:postgres@127.0.0.1:5432/postgres

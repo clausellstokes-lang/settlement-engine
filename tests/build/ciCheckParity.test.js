@@ -382,18 +382,20 @@ describe('npm run check ↔ parallel ci.yml gate parity', () => {
   });
 
   it('gives the measured full-suite ratchet enough CI timeout headroom', () => {
-    // 90, raised from 45 on 2026-09-20 in the same commit as the cap it pins. BOTH of PR #53's
-    // runs were CUT at 45 without concluding (push 35534822592 and pull_request 35534903945,
-    // 45m17s each) — a timeout is not a test verdict. The last runs that CONCLUDED were on
-    // 2026-09-17, all green: 22m55s, 34m53s and 35m40s; about five hundred commits and several
-    // thousand tests have landed since, and the suite is 17m41s locally today over 33,770 tests.
-    // 90 is twice the longest concluded run plus that growth (the job's own comment carries the
-    // run ids). THE DIRECTION OF THIS PIN: it exists so the cap cannot drift back BELOW the
-    // measured suite, so it is raised with a fresh measurement and never lowered to match a run
-    // that was cut.
+    // 135, raised from 90 on 2026-09-20 in the same commit as the cap it pins. 90 was itself
+    // set that morning with NO concluded run to measure — both of PR #53's first runs were cut
+    // at 45 — and its comment promised to tighten to measured-plus-headroom once a real figure
+    // arrived. It arrived, and it was not slack: both runs at f76ddf0ab CONCLUDED GREEN at
+    // 62m37s (35541172706, push) and 82m08s (35541276693, pull_request) — the SAME commit, a
+    // twenty-minute spread between two runners, and 82m08s is 91% of the 90-minute cap. The
+    // rule this cap now follows is the longest CONCLUDED run × 1.5, rounded up to the next 15:
+    // 82m08s × 1.5 = 123m12s → 135 (the job's own comment carries the run ids).
+    // THE DIRECTION OF THIS PIN: it exists so the cap cannot drift back BELOW the measured
+    // suite, so it is raised with a fresh measurement and never lowered to match a run that was
+    // cut. A cut run is not evidence that a smaller cap suffices.
     const ci = readFileSync(join(ROOT, '.github/workflows/ci.yml'), 'utf8');
     const testsJob = jobBody(ci, 'check-tests');
-    expect(testsJob).toMatch(/^\s*timeout-minutes:\s*90\s*$/m);
+    expect(testsJob).toMatch(/^\s*timeout-minutes:\s*135\s*$/m);
   });
 
   it('every setup-node use reads the repository runtime pin', () => {
