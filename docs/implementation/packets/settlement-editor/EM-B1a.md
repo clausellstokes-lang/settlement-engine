@@ -1,8 +1,9 @@
 # Settlement editor / EM-B1a — the op vocabulary and the FOURTEEN HOME ops: one constructor, one validator, and the stage partition asserted set-equal
 
-- **Status:** `READY`
+- **Status:** `LANDED`
   ⚠ The status value above stands ALONE on its line because `parsePacketHeader`
   (`scripts/implementation-packets.mjs`) anchors the status row at end-of-line (J-TEWF1B-1).
+- **Landed at:** `a247fa84dd7ae0be7d0be45748bd470e9df81613` — the twenty-seventh landing — train EM-T11 (version 11, after the version-8 build's four red classes were cured in versions 9–11, judgments 110/117): the edit OPERATIONS leaf and the world-conditions leaf (three CREATE rows: operations.js, worldConditions.js, editOperations.test.js; two TEST widenings) — types 0·0·0·0, 231/165 effective lines as predicted, the dormancy roster ONE entry, +0 B first paint (the train's byte-arm holder of record). Two lagging sentences are left as history: §13 R10's "the leaf calls neither" (the built leaf calls activeDeployments) and the built test's B1C_FIVE, which names an op no packet will mint (EM-B1c1 v4's is set-npc-name); its add-institution and remove-institution names coincide with EDIT_KINDS verbs, banked shrink-only by EM-B1c1 v4's B6 pending a ruling at EM-T13's compile
 - **Packet version:** 11
   ⭐ **VERSION 11 (the chair at placement, 2026-09-21; judgment 102 Q2): re-stamped to the fifth amendment's preamble hash; the interim-rules row struck. No other byte moves. The prior version is 10.**
   ⭐⭐ **VERSION 10 (the independent pre-proof of version 9, 2026-09-21; the chair's dispatch of session 50b1776f). FOUR EDITS, EVERY ONE MEASURED, AND NOT ONE COUNT, CASE, OP TYPE, PAYLOAD KEY OR LIGHTING FIGURE MOVES.** The prior version is **9**.

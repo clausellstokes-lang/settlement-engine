@@ -1,9 +1,10 @@
 # Settlement editor / EM-A2a — the pool machinery and the eleven TABLE pools: one seeded roller on its own stream, and every closed vocabulary read at its lawful source
 
-- **Status:** `READY`
+- **Status:** `LANDED`
   ⚠ The status value above stands ALONE on its line because `parsePacketHeader`
   (`scripts/implementation-packets.mjs`) anchors the status row at end-of-line (J-TEWF1B-1;
   interim rule 5).
+- **Landed at:** `e65dd78dc17f3dfd04a1bc5e6775c3fbbe63e635` — the twenty-eighth landing — train EM-T11 (version 8, re-stamped to the fifth amendment): the POOLS leaf (src/domain/edit/pools.js, 56 effective; editPools.test.js, eight arms over eleven pools), tuning inventory unmoved with its positive control live, +0 B; the lane re-sealed itself at 80e855f26 through the --reseal door (the second facet of judgment 125)
 - **Packet version:** 8
   ⭐ **VERSION 8 (the chair at placement, 2026-09-21; judgment 102 Q2): re-stamped to the fifth amendment's preamble hash; the interim-rules row struck. No other byte moves. The prior version is 7.**
   - ⭐⭐ **Version 7 (2026-09-21, independent PRE-PROOF lane, read tip

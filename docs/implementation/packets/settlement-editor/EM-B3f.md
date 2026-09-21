@@ -1,10 +1,11 @@
 # Settlement editor / train EM-T11 — EM-B3f: the veil reaches the PARKED SNAPSHOT — a paused campaign's pre-interval undo cursor carries a whole settlement per member, and the account export carries it out unstripped
 
-- **Status:** `READY`
+- **Status:** `LANDED`
   - Compiled 2026-09-21 by an Opus COMPILE lane (lane COMPILE-EM-B3f) at the read tip `429141e2d1c21cb5ee9dd5005ed1a77bbc9b3cd8`, on the chair's ruling of judgment 97, and on the INTAKE RULE: TOOL-30's census found the shape and it is slotted the turn it arrived.
   - ⭐ **THIS PACKET IS THE NARROWED SURVIVOR OF A REFUTED BRIEF.** The launch brief said the parked snapshot is stripped *"on the way IN and on the way OUT."* This lane's first measurement, run before a line of packet text, proved **THERE IS NO WAY IN** (§1). The chair accepted the refutation (judgment 97) and re-scoped the packet to the way OUT. **EXPORT ONLY, ONE FILE.**
   - READY-able. The §3 budget is inside every cap, so no override is requested.
   - ⛔ **THIS PACKET MUST LAND AFTER `EM-B3e` AND BEFORE `EM-C4a`.** It CALLS EM-B3e's `withoutEditKeys`, and EM-C4a is the charter's first writer of `dmLayer`. Until EM-C4a lands nothing writes either key, so the hole is dormant; from its landing onward every paused campaign's backup export carries the DM's private layer out of the veil.
+- **Landed at:** `5a6ce34988c77a3741fe8dbbfc580df9f5dae6b6` — the twenty-sixth landing — train EM-T11 (version 3, re-stamped to the fifth amendment): the export-only strip of a saved record's edit keys at the account-data seam, one changed line at the campaigns binding (+46 effective), five arms C1–C5 with two mutants convicting C2 and C3 alone; the census walker's one string re-spelled
 - **Packet version:** `3`
   ⭐ **VERSION 3 (the chair at placement, 2026-09-21; judgment 102 Q2): re-stamped to the fifth amendment's preamble hash; the interim-rules row struck. No other byte moves. The prior version is 2.**
   - **What version 2 changed and why (version 1 was the compile's):** an independent Opus PRE-PROOF re-measured every fact
