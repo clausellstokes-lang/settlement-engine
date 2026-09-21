@@ -33395,6 +33395,817 @@
         ]
       ],
       "_checksNote": "ESTATE-REPAIR-2 appended the validate:packets row under the chair's slot (item E), in the spelling 37 of the 38 landed rows that name the script use (node scripts/implementation-packets.mjs validate) and in the position the majority take (LAST). Section 10 gains the same command. ESTATE-REPAIR-3 then discharged the row ESTATE-REPAIR-2 reported and did not touch: the sealed tests/lint DIRECTORY run (excluded form) is REPLACED by the GOVERNING TEST FILES, under interim rule 8 and the chair's AMENDMENT-5 ruling 6 (which says this repair does NOT wait for TOOL-26, because EM-B3d is the probe train's only member). THE COMPUTATION, executed at the read tip bdbf7c89c2569679bcccdb188d5d831ccfaa0e6d, scripts/governing-tests.mjs being ABSENT there (TOOL-26 has not landed): git grep -l -F '<basename without extension>' -- tests for each of the six change paths' basenames (importScrub, galleryImportSettlement, galleryImportMap, accountImport, importScrub.test, editTravel) and for the one new exported symbol (scrubImportedEditState, 0 hits -- it does not exist yet). No exported symbol's CALL SHAPE changes: the packet APPENDS a new export and wraps existing calls, so no existing signature moves. THIS PACKET CREATES OR RENAMES NO TEST FILE (both test rows are TEST on files that exist at the base), so no directory-governing walker is owed on that arm. THE UNION IS 24 FILES; minus tests/lint/sovereigntyLightingContract.walker.test.js, which interim rule 8 forbids in a sealed array because it reds by design under a train, 23 are sealed here: 7 were already named in the rows above (importScrub, editTravel, accountImport, importReconciliation, treasuryDormancy.byteIdentity, livingContentLawWiring, dossierProseManifest) and 16 were added -- 2 to the lib row, 2 to the domain row, 3 to the store row, 1 to the security row, 4 as the new lint-FILES row, and 3 new rows for tests/build, tests/components and tests/ui (one test directory per gated run, this packet's own §10 idiom). importReconciliationRecovery, decreeRegistryPersistence, lifecycleRoundTrip, the four tests/security denylist files and generatorGoldenMaster are NOT in the computed union; they are the compile lane's own blast-radius choices and are KEPT. The excluded directory run and the lighting walker ALONE are now §10 INSTRUMENTS for the build lane, never sealed checks."
+    },
+    {
+      "id": "EM-A1",
+      "status": "READY",
+      "packetPath": "docs/implementation/packets/settlement-editor/EM-A1.md",
+      "verifiedBase": "7f0621fdb72f769a285502ff5481247c1f07b04b",
+      "changeManifest": [
+        {
+          "action": "CREATE",
+          "path": "src/domain/edit/types.js",
+          "symbol": "the FieldKind, FieldProvenance, FieldDeclaration, EntityRef and Op JSDoc typedefs at EM-A1 §6.2, verbatim; EntityRef's seven-member kind set and Op's ten required fields are the compiled EM-B1a §6's, and EM-B1a imports both from here because its own change manifest touches this path nowhere; nothing executable is exported and nothing is imported"
+        },
+        {
+          "action": "CREATE",
+          "path": "src/domain/edit/fieldDeclarations.js",
+          "symbol": "FIELD_DECLARATIONS, declarationsFor, isEditableCard at EM-A1 §6.1's exact signatures over §1c.2's seventeen rows across five cards; imports only ./types.js"
+        },
+        {
+          "action": "CREATE",
+          "path": "tests/domain/editDeclarations.test.js",
+          "symbol": "acceptance cases A1, A2, A3, A4 and A7 plus the dormancy case of §8 step 1 — six literal test titles under one literal describe, no .each, no loop-generated registration, no nested describe, and no binding named it, test or describe; this file is the ONE home of the frozen WAVE1_PACKET_IDS list"
+        },
+        {
+          "action": "CREATE",
+          "path": "tests/lint/editDeclarations.walker.test.js",
+          "symbol": "acceptance cases A5, A5b and A6 — the pencil-and-pool arm, the root arm (ARM I-4, all three branches) and the writer arm (ARM I-3) of EM-A1 §6.3, each with its planted reds"
+        },
+        {
+          "action": "REGISTER",
+          "path": "scripts/mutation-coverage-manifest.json",
+          "rowKey": "invariants['tests/lint/editDeclarations.walker.test.js']",
+          "symbol": "invariants['tests/lint/editDeclarations.walker.test.js'] — ONE row, added surgically beside its tests/lint/ siblings; the manifest is never re-serialised whole and uncoveredBaseline is not touched"
+        }
+      ],
+      "requiredSymbols": [
+        {
+          "path": "src/domain/generation/generationForkRegistry.js",
+          "symbol": "export const GENERATION_TIER2"
+        },
+        {
+          "path": "src/domain/generation/generationForkRegistry.js",
+          "symbol": "export function tier2For"
+        },
+        {
+          "path": "src/domain/generation/generationForkRegistry.js",
+          "symbol": "export const GENERATION_TIER1"
+        },
+        {
+          "path": "src/domain/generation/generationForkRegistry.js",
+          "symbol": "export function tier1For"
+        },
+        {
+          "path": "tests/helpers/generationForkCensus.js",
+          "symbol": "export function declaredSymbols"
+        },
+        {
+          "path": "src/generators/steps/assembleInstitutions.js",
+          "symbol": "registerStep('assembleInstitutions'"
+        },
+        {
+          "path": "src/generators/steps/generatePopulation.js",
+          "symbol": "registerStep('generatePopulation'"
+        },
+        {
+          "path": "src/generators/steps/generatePower.js",
+          "symbol": "registerStep('generatePower'"
+        },
+        {
+          "path": "src/domain/factionRename.js",
+          "symbol": "export const NPC_RENAME_SURFACES"
+        },
+        {
+          "path": "src/domain/factionRename.js",
+          "symbol": "export const FACTION_RENAME_SURFACES"
+        },
+        {
+          "path": "src/generators/generateSettlementPipeline.js",
+          "symbol": "export function generateSettlementPipeline"
+        },
+        {
+          "path": "tests/lint/mutationCoverage.shared.mjs",
+          "symbol": "export const ENFORCER_DIRS"
+        },
+        {
+          "path": "src/domain/worldFactOptions.js",
+          "symbol": "export const WORLD_FACT_SOURCES"
+        },
+        {
+          "path": "src/generators/power/rulingStructure.js",
+          "symbol": "export const renormalizeFactionPower"
+        }
+      ],
+      "retiredSymbols": [],
+      "acceptanceCases": [
+        {
+          "id": "A1",
+          "case": "MAIN BEHAVIOUR — for each of the five declared cardTypes (institution, npc, faction, powerSeat, worldFact), declarationsFor returns the authored rows in authored order, frozen, and isEditableCard is true"
+        },
+        {
+          "id": "A2",
+          "case": "ABSENT AND UNKNOWN — undefined, the empty string, 'nope', 42, 'constructor', 'toString' and the banned spacey spelling 'world fact' each return the SAME frozen empty array by identity; isEditableCard is false; nothing throws"
+        },
+        {
+          "id": "A3",
+          "case": "ARM I-1 EXISTENCE + GUARD-THE-GUARD — over settlements generated at village, town and city, every root row is a live key on its card's record at at least one tier OR names a createdBy that is a member of the frozen WAVE1_PACKET_IDS list spelled once in this file; every world-fact row's outputKey is a live record path; every annotation row is out of the population; the corpus is asserted non-empty in the same test; a planted createdBy 'EM-ZZ9' REDS, naming the field and the card"
+        },
+        {
+          "id": "A4",
+          "case": "BOUNDARY, THE §6.2 SHAPE LAW BY PROVENANCE + GUARD-THE-GUARD — exactly one of writer / createdBy on a root row and neither on a world-fact or annotation row; tier1 present iff world-fact and its step and key non-blank; outputKey non-blank on root and world-fact and ABSENT on annotation; pool iff kind is pool, non-blank and unique; maxLength iff free-cascade or free; readersProof iff free; card in the closed five; kind in the closed four; provenance in the closed three; no duplicate (card, field); every free-cascade row's outputKey is a declared key surface of NPC_RENAME_SURFACES or FACTION_RENAME_SURFACES, or is the one named exception institutions[].name whose cascade EM-R6 mints; two planted rows RED — a share row carrying a pool, and an annotation row carrying an outputKey"
+        },
+        {
+          "id": "A5",
+          "case": "THE PENCIL ARM AND THE POOL ARM — arm P's found set is exactly empty over a corpus asserted non-empty in the same test; the pool arm asserts every kind 'pool' row carries a non-empty, unique pool id, that no row of any other kind carries one, and PRINTS the eleven ids, with membership of POOLS declared as EM-A2a's arm per §11 BLOCK-4"
+        },
+        {
+          "id": "A5b",
+          "case": "ARM I-4 THE ROOT ARM, ALL THREE BRANCHES + GUARD-THE-GUARD — GENERATION_TIER2, GENERATION_TIER1 and WORLD_FACT_SOURCES each asserted non-empty FIRST; every root row joins GENERATION_TIER2 on (card, outputKey) or carries a createdBy; every world-fact row's field is a key of WORLD_FACT_SOURCES, its tier1 (step, key) resolves through tier1For, and that row's recordPath equals or prefixes 'record.' + outputKey; four planted rows RED naming the card, the field and the branch: a real derived reading (powerSeat + powerStructure.stability), a real outputKey on the wrong card (faction + factions[].isGoverning), a world-fact field that is not a WORLD_FACT_SOURCES key (worldFact.tradeAccess), and a world-fact row whose tier1 pair resolves to nothing"
+        },
+        {
+          "id": "A6",
+          "case": "ARM I-3 THE WRITER ARM + GUARD-THE-GUARD — the population is asserted non-empty, every writer resolves through the LANDED declaredSymbols resolver to exactly one declaration, a registerStep-only symbol PASSES (the regression control for the superseded form set, which finds zero for it), and three planted rows RED: a symbol declared zero times, a path that does not exist, and the packet-id-as-path spelling EM-B1a#set-npc-status"
+        },
+        {
+          "id": "A7",
+          "case": "IDEMPOTENCY AND PURITY — declarationsFor(t) === declarationsFor(t) by identity across repeated calls, and the table is deep-frozen so a write throws in strict mode"
+        }
+      ],
+      "checks": [
+        [
+          "npx",
+          "vitest",
+          "run",
+          "--pool=threads",
+          "--maxWorkers=2",
+          "tests/domain/editDeclarations.test.js"
+        ],
+        [
+          "npx",
+          "vitest",
+          "run",
+          "--pool=threads",
+          "--maxWorkers=2",
+          "tests/lint/editDeclarations.walker.test.js",
+          "tests/lint/mutationCoverageManifest.test.js",
+          "tests/lint/newsHeadlineContract.walker.test.js",
+          "tests/lint/proseFamilyContract.walker.test.js",
+          "tests/lint/contractTestAntiVacuity.walker.test.js",
+          "tests/lint/goldenFreeze.walker.test.js",
+          "tests/lint/negativeAssertionAnchor.walker.test.js",
+          "tests/lint/netCurrentExtractorAnchor.walker.test.js",
+          "tests/lint/proseDrawnAnchors.walker.test.js",
+          "tests/lint/pulseKernelLineAddress.walker.test.js",
+          "tests/lint/seedLoopTotality.walker.test.js",
+          "tests/lint/sourceCitationIntegrity.walker.test.js",
+          "tests/lint/worldGenerationClockSeam.walker.test.js"
+        ],
+        [
+          "npx",
+          "vitest",
+          "run",
+          "--pool=threads",
+          "--maxWorkers=2",
+          "tests/architecture/layerBoundaries.test.js"
+        ],
+        [
+          "npx",
+          "eslint",
+          "src/domain/edit/types.js",
+          "src/domain/edit/fieldDeclarations.js",
+          "tests/domain/editDeclarations.test.js",
+          "tests/lint/editDeclarations.walker.test.js"
+        ],
+        [
+          "npm",
+          "run",
+          "typecheck:domain:strict"
+        ],
+        [
+          "npm",
+          "run",
+          "typecheck:ratchet"
+        ],
+        [
+          "node",
+          "scripts/implementation-packets.mjs",
+          "validate"
+        ]
+      ],
+      "_checksNote": "Interim rule 8, recomputed at bdbf7c89c for version 5's symbol set because scripts/governing-tests.mjs (TOOL-26) has not landed. Every CREATE basename and every new symbol (edit/types, fieldDeclarations, editDeclarations, FieldDeclaration, FieldKind, FieldProvenance, FIELD_DECLARATIONS, declarationsFor, isEditableCard) returns NOTHING from `git grep -l -F ... -- tests`, which is the expected answer for four files that do not exist (evidence W-11). checks[1] names the three test files that actually READ scripts/mutation-coverage-manifest.json (V-13) plus the NINE walkers that scan the tests/ tree whole and are therefore governing for a CREATE under tests/domain and tests/lint. checks[2] is NEW in version 5: tests/architecture/layerBoundaries.test.js walks src/ WHOLE twice (:89, :183), so a CREATE under src/domain/** opts into it; version 4 named it nowhere. tests/lint/sovereigntyLightingContract.walker.test.js is EXCLUDED by rule 8 (it reds by design under a train) and is §10's instrument instead. Eleven further files match `git grep -l -F mutation-coverage-manifest -- tests` on a COMMENT only, and three further files match `git grep -l -F EntityRef -- tests` but read the PDF primitive and the prose tokenizer by path and never walk src/domain; all fourteen are named in §10's prose rather than sealed.",
+      "_pendingRequiredSymbols": [
+        {
+          "path": "src/domain/edit/pools.js",
+          "symbol": "export const POOLS",
+          "why": "EM-A2a CREATEs it; ARM I-2's MEMBERSHIP half is EM-A2a's arm, not this packet's (§11 BLOCK-4). Not an element of requiredSymbols because the path does not exist at this base."
+        },
+        {
+          "path": "src/domain/edit/operations.js",
+          "symbol": "export const OP_TYPES",
+          "why": "EM-B1a CREATEs it and imports Op and EntityRef from this packet's types.js; the dependency runs B1a -> A1, so nothing is required here. Recorded so the direction is not re-derived."
+        }
+      ]
+    },
+    {
+      "id": "EM-B1h",
+      "status": "READY",
+      "packetPath": "docs/implementation/packets/settlement-editor/EM-B1h.md",
+      "verifiedBase": "7f0621fdb72f769a285502ff5481247c1f07b04b",
+      "changeManifest": [
+        {
+          "_note": "THE CLOSED, KINDED FATE VOCABULARY, IN ITS OWN ZERO-IMPORT LEAF (the chair's Q2 ruling, ODQ §934.47 addendum 28). ⭐ THE SHAPE IS THE KIND MAP AS THE SINGLE AUTHORED SOURCE, THE FLAT LIST DERIVED FROM IT — measured against the chair's alternative of two literals side by side: 910 B minified versus 1,248 B (the eighteen strings spelled ONCE), and 'a member with no kind' becomes UNREPRESENTABLE rather than merely detected, which leaves the walker three LIVE arms (every kind ∈ WORLD_PULSE_FATE_KINDS; the keys in codepoint order; the populations exactly 15/1/2) instead of one set-equality between two literals three lines apart that can only catch a typo made in the same edit. Exports WORLD_PULSE_FATE_KINDS, WORLD_PULSE_FATE_KIND, WORLD_PULSE_FATES (= Object.freeze(Object.keys(KIND))), isWorldPulseFate and assertWorldPulseFate. ⭐⭐ THREE KINDS, NOT TWO, AND THE THIRD IS NOT WHERE IT WAS EXPECTED — each write site was classified by the SIBLING KEYS OF ITS OWN RECORD LITERAL, not by the fate's English: `closure` (the writer sets _worldPulseInactive:true AND a non-active status) holds FIFTEEN; `rise` holds TWO (upswingKernel :516 renames in place with no status change, :763 pushes a NEW status:'active' record); `standing` holds ONE — `demoted_by_disaster`, whose writer (calamityKernel :304-311) changes NO status and sets NO flag and whose own comment reads 'rename in place, keeping the slot standing'. ⛔ The six names flagged for a second look (downsized, privatized, captured_by_local_powers, reduced_to_watch_post, hollowed_out, survives_as_remnant) are ALL plain `closure`: their single writer deactivateForDemotion (tierOutcomeApply :158) sets _worldPulseInactive:true and status remnant/removed for all seven, however gentle the word. ⛔ null IS THE CLEAR SENTINEL AND NOT A MEMBER (the chair's Q3) and the gloss must say so in TWO sentences: four sites write worldPulseFate: null to CLEAR a fate when an institution stands again (institutionLifecycle :959 and :1103, magicRegimeLifecycle :374, tierOutcomeApply :265), each BESIDE status:'active' with the flags set FALSE, and causeLifecycle.institutionDestroyed reads exactly that absence through truthiness — adding null would make 'no fate' a fate. ⛔ ruined_by_decree is DECLARED AND UNPRODUCIBLE until EM-B1a. ⛔⛔ NOBODY READS THE KIND IN THIS PACKET — it is frozen DATA and acceptance A6 asserts by source scan that no src/ file imports WORLD_PULSE_FATE_KIND, which is what keeps the packet golden-neutral; EM-B1i is the packet that makes causeLifecycle.institutionDestroyed test the `closure` kind, and it owns the golden/preset-witness measurement and the owner's signed door. ⛔ ZERO IMPORTS — which is also what makes the ARGUED_UNLAYERED row's `reads: Object.freeze([])` exact. ⛔ THE FILE MUST CONTAIN NO `status:` TOKEN IN CODE AND NO `status: 'ruined'` ANYWHERE: the LANDED tests/domain/ruinInstitution.test.js A7 asserts the comment-only-stripped hit list over every non-test src/ file is EXACTLY ['src/domain/worldPulse/calamityKernel.js'], and this leaf is inside that scan — acceptance A7 of THIS packet asserts it in both directions so a later editor of the leaf is told why. Priced 910 B minified (esbuild, an UPPER BOUND — rollup scope-hoists and mangles the export names inside the worker chunk), landing only in src/workers/advanceInterval.worker.js, which has NO ceiling today (TOOL-3's declared 4 KB per-train headroom; R2).",
+          "action": "CREATE",
+          "path": "src/domain/worldPulse/worldPulseFates.js"
+        },
+        {
+          "_note": "THE ONE GUARDED WRITER REFUSES A FOREIGN WORD — AND THE GUARD LIVES IN THE LEAF, ON MEASUREMENT (R3's second question). ruinInstitution (:242, created by EM-B1e) gains ONE CALL, assertWorldPulseFate(fate, 'ruinInstitution'), plus the import edge to ./worldPulseFates.js. ⭐ MEASURED AGAINST THE INLINE ALTERNATIVE: the leaf's exported assert costs 98 B minified and +2 effective lines in the kernel; an inline `import { WORLD_PULSE_FATES }` + a local Set + the throw costs 204 B and +4 — so the kernel is touched half as much, and the error message is spelled ONCE, in the leaf, where EM-B1a and EM-B1i will reuse it instead of re-spelling a third and fourth copy (which is the very defect this packet exists to end). ⛔ THE CALL'S POSITION IS CONTRACT: it goes AFTER the existing `typeof fate !== 'string' || fate === ''` check (:243) and BEFORE the `reason` check (:244), so every verdict the LANDED ruinInstitution.test.js A3 asserts is UNCHANGED — fate: '', a non-string fate and a missing fate each still throw on the SAME check they throw on today — and acceptance A2 asserts that ORDER BY MESSAGE so a later reordering cannot pass silently. ⛔ NOTHING ELSE IN THE FILE IS TOUCHED: not the signature line, not the five added keys or THEIR ORDER (the preset witness hashes 52 interior ticks of serialized world pulse, so key order is history), not :309's demote branch (worldPulseFate:'demoted_by_disaster', already a member and now classified `standing`), and not the two call sites at :317/:321, which both pass 'destroyed_by_disaster' and are therefore INERT under the new guard — A1 proves the accepted record is byte-identical to EM-B1e's frozen oracle shape. ⭐ MEASURED: the file is 457 effective lines against the src/domain/** ceiling of 800 (eslint.config.js:687) — 343 lines of headroom against a ≤2-line edit, with a control that reproduces roadsKernel.js's frozen .size-baseline value of 838 EXACTLY; it is NOT on PACKET_STANDARD.md's standing hot list and carries no .size-baseline entry. ⛔ IT IS THE ONLY PRODUCTION FILE THIS PACKET EDITS, and that economy is the point: the other five writer kernels already spell members, so they need no edit — which matters most for institutionLifecycle.js, MEASURED AT 798 OF 800 (R3, which the chair has accepted onto the standing hot list).",
+          "action": "MODIFY",
+          "path": "src/domain/worldPulse/calamityKernel.js"
+        },
+        {
+          "_note": "THE TOTALITY WALKER — ONE literal describe, FOUR straight-line `it` (T1–T4), no .each / runIf / nested describe (§P3.4), copying the SET-EQUAL-IN-BOTH-DIRECTIONS shape of tests/lint/chooserTotality.walker.test.js (SCAN_ROOTS :64) and the straight-line proof shape of tests/domain/institutionFounding.test.js (:113). ⛔ THE MATCHER IS FIXED AND NON-DISCRETIONARY: a COMMENT-ONLY strip that KEEPS string contents, copied from tests/domain/ruinInstitution.test.js:187's commentsOnly — NEVER tests/helpers/codeOnlySource.js, which blanks string CONTENTS and would return a vacuous zero (EM-B1e measured exactly that trap). Scope: src/**/*.{js,jsx} excluding *.test.*, 2,246 files at the compile tip. T1 asserts the scan non-empty FIRST, then that WORLD_PULSE_FATES parses to exactly 18 distinct members IN CODEPOINT ORDER, that null is NOT among them, that every member's kind is one of the declared three, and that the populations are exactly closure 15 / standing 1 / rise 2. T2 is DECLARED EQUALS DISCOVERED in both directions: the six-row writer roster resolves live at path+symbol; the set of files that WRITE worldPulseFate is SET-EQUAL to it both ways; and the lane's `spelling` field is CHECKED against the tree rather than trusted — a `literal` row must be flagged and spell only members; a `derived` row must name a deriver that resolves live and WHOSE OWN RETURNS ARE ALL MEMBERS (the arm that catches 'disbanded', which NO write site spells — its only producer is moralInstitutionPressure.js:348, a file that writes no worldPulseFate at all); an `argument` row must import assertWorldPulseFate and call it; a `clear` row must write worldPulseFate: null at its site and spell no fate. T3 DERIVES the trigger from the live vocabulary minus the measured homonyms and asserts it is exactly the FOURTEEN discriminating members, with a floor arm that reds if it empties or halves; each of the THREE homonyms (abandoned → FOSSIL_KINDS × undercity/colonization.js, DEAD_ENDPOINT_STATUS × worldPulse/corruptionWeb.js, PLAN_STATES × worldPulse/demographicsPlans.js; abolished and disbanded → NONSTANDING_STATUS × worldPulse/causeLifecycle.js, the READER'S OWN FILE) must name ≥1 foreign declared vocabulary BY NAME AND FILE; FLAGGED is set-equal both directions to the literal roster rows ∪ the EMPTY inline exemption register, whose checker is proved on a planted row; both readers are asserted UNFLAGGED and NON-ENUMERATING; and the LEAF is asserted `status:`-free in both directions (A7). T4 drives the REAL ruinInstitution: all eighteen members accepted (positive control FIRST), a well-formed non-member refused, EM-B1e's four absence verdicts re-asserted with their check ORDER pinned by message, and the accepted record proved byte-identical to EM-B1e's frozen oracle shape. ⛔ THE DECLARED CANNOT-CATCH HEADER, IN TWO PARAGRAPHS: (1) a writer that builds a fate from a runtime value no deriver returns is invisible to a source scan — MEASURED: no such site exists today, every patch.fate producer in src/ is enumerated (institutionLifecycle:851 calls the same deriver; moralInstitutionPressure:379 passes the :348 ternary) — and the guarded writer is the one site where the check runs at RUNTIME, which is why EM-B1a's op routes through it; (2) ⭐ THE KIND IS DATA WITH NO READER, SO NO ARM CAN PROVE A KIND *CORRECT* — only present, single and drawn from the declared three. The kinds were derived at compile from the writers' record literals; a writer that later changes what it does to the record without changing its fate word would leave the kind stale with nothing red. EM-B1i, the first reader, is where that becomes catchable (R11). Both matcher controls are REQUIRED: it fires on a planted literal and ignores a commented one, and the shared codeOnly helper is shown to return zero. Negatives carry `// anchored:` on the line immediately above (tests/lint/negativeAssertionAnchor.walker.test.js scans SCAN_ROOTS=['tests']). Rule 2 of tests/lint/contractTestAntiVacuity.walker.test.js is satisfied by construction: the denominator is DERIVED from source (the vocabulary is imported, the flagged set is scanned), never a local pure literal.",
+          "action": "CREATE",
+          "path": "tests/lint/worldPulseFateTotality.walker.test.js"
+        },
+        {
+          "_note": "THE MUTATION-COVERAGE ROW — OWED because tests/lint is the FIRST entry of ENFORCER_DIRS (tests/lint/mutationCoverage.shared.mjs:36). A DELTA OF +1, never an absolute (interim rule 9): this packet adds exactly one `invariants` row, keyed rowKey = invariants['tests/lint/worldPulseFateTotality.walker.test.js'], which is also TOOL-27's row-level reservation key. As history with an as-of mark the manifest held 705 rows at this packet's compile tip and 716 at bdbf7c89c -- it moved eleven rows while the packet waited. ⛔ SURGICALLY, NEVER RE-SERIALISED WHOLE: insert the complete block immediately BEFORE the \"tests/components/dossierRawKeys.census.test.jsx\" key and immediately AFTER the close of \"tests/copy/landingProseGrounding.test.js\" — a pure +N / −0 diff at the file's TAIL, chosen deliberately because EM-B1d's row inserts at the HEAD (between \"tests/lint/dossierMountRegistry.walker.test.js\" and \"tests/lint/stepPresentationEngineFence.walker.test.js\"), so even a same-day landing cannot textually conflict. Anchor on the key NAMES, never line numbers. Row shape { kind, rationale, kindNote }; kind is `rationale` or `mutation` — ⛔ `uncovered` is UNAVAILABLE to an enforcer-directory file — inline, ≥40 chars, carrying the EXECUTED account of the six §P6 mutants. ⛔⛔ THE COLLISION IS LIVE: at the compile tip EM-B1d reserves this exact path at status READY (measured over the 189-entry registered manifest). The charter's train order (EM-T3 before EM-T6) resolves it, but a reservation by ANY non-terminal packet at dispatch is a STOP — do not take the path, do not re-serialise.",
+          "action": "REGISTER",
+          "path": "scripts/mutation-coverage-manifest.json",
+          "rowKey": "invariants['tests/lint/worldPulseFateTotality.walker.test.js']"
+        },
+        {
+          "_note": "⭐⭐ THE REGISTER VERSION 1 MISSED, FOUND BY SWEEPING WHAT A NEW src/domain/worldPulse/ FILE OWES. This walker is a census TOTAL over src/domain/{worldPulse,spatial} (CENSUS_SCOPE_RE, :1054) and its own arm is titled 'a NEW unlayered module REDS — it must get a family, an argument, or the baseline'. The leaf matches no LAYER_PATTERNS family, and the baseline door is explicitly closed to it ('only for pre-program debt'; the frozen set 'only shrinks'), so it takes the ARGUMENT. ⛔ TWO EDITS, ONE DIFF: (a) add one ARGUED_UNLAYERED row for 'src/domain/worldPulse/worldPulseFates.js' in the exact shape of the bandFamilies.js row (:473) — kind: 'substrate', a `reason` of MORE THAN 20 CHARACTERS (the walker asserts the length) naming it the pulse's closed fate vocabulary spoken by every layer, and `reads: Object.freeze([])`, WHICH IS EXACT BECAUSE THE LEAF HAS ZERO IMPORTS (the walker asserts the declared `reads` equals the live scan of layered imports; a true leaf declares [] and any port it later reaches REDS); (b) ARGUED_ROSTER_CEILING 28 → 29. ⛔ THE CEILING IS ASSERTED BY EXACT EQUALITY, BY DESIGN — its own comment: 'a number that only has to be not exceeded is not a ratchet, it is a budget' — so the row without the bump, or the bump without the row, REDS. Measured at the compile tip: ARGUED_UNLAYERED holds exactly 28 keys, 20 of them `substrate` with reads: Object.freeze([]), and ARGUED_ROSTER_CEILING reads 28. ⭐ AND NO CROSS-LAYER PAIR IS MINTED, SO NEITHER COUPLING BASELINE JSON MOVES: scanCrossLayerPairs (:1164) iterates LAYER_OF — layered modules only — and skips a dep with no layer ('if (!depLayer || depLayer === layer) continue'), and calamityKernel.js, the leaf's one importer, is ITSELF unlayered (it matches no family and sits at line 36 of the 179-entry tests/lint/.coupling-unlayered-baseline.json). ⛔ ADD NO `describe` AND NO `it` — the lighting census must not move on this file (the delta stays +4 titles, from the walker alone). ⛔ DO NOT TOUCH tests/lint/.coupling-inclusion-baseline.json OR tests/lint/.coupling-unlayered-baseline.json. ⓘ FREE OF CONTENTION: ten packets name this path and ALL TEN ARE LANDED. ⭐ `const ARGUED_ROSTER_CEILING = 28` is deliberately NOT a requiredSymbols row — this packet RE-SPELLS that line, and requiredSymbols is asserted verbatim at every status (the EM-P3 lesson; the row the chair cut from EM-B1d version 5). The stable prefix `const ARGUED_ROSTER_CEILING` is named instead.",
+          "action": "REGISTER",
+          "path": "tests/lint/couplingInclusion.walker.test.js"
+        },
+        {
+          "_note": "⭐ THE LINE-ADDRESSED RE-ADDRESS THE DETECTOR QUESTION HID (the FIX-F class; added by the EM-T9 pre-proof, 2026-09-21, at e80a6a3f4). tests/lint/proseNumerics.test.js freezes live prose-numeric debt by EXACT path + line + snippet identity in this baseline and the set may only shrink. MEASURED at the tip: the file carries EXACTLY ONE row on the file this packet MODIFIES — {\"path\":\"src/domain/worldPulse/calamityKernel.js\",\"line\":745,\"category\":\"floatInterpolation\",\"snippet\":\"Math.round(exposure.factor * 10000)\"} — and this packet inserts 2 effective lines at :243-244, five hundred lines ABOVE it. ⛔ SO THE ROW RE-ADDRESSES 745 → 747 AND NOTHING ELSE MOVES: path, category and snippet stay byte-identical, no row is added or removed, the census count does not move, and the whole diff is TWO LINES, ONE −/+ PAIR — the walker's own idiom (its header records \"88 pure line moves\" and \"re-addresses 603 → 615\" as the routine shape). Verify by grepping the diff for any changed line that is not a \"line\" value; a changed path, category or snippet is a STOP, and a row LEAVING the baseline is a CURE that is not this packet's. ⛔ RE-MEASURE THE DESTINATION AT DISPATCH (745 + the lines actually inserted above it); never copy 747 from this packet. ⭐ MEASURED PATH-DISJOINT, NOT ASSUMED: of the 29 waiting capsules ZERO declare this path, and of train EM-T9's other three members (EM-A1, EM-D0a, EM-D0b) NONE modifies a file carrying a baselined row (EM-A1 only CREATEs; theme.js, ArrowControl.jsx, authSlice.js and tierFacts.js carry no row) — so this row needs no terminal and collides with no sibling. ⚠ TWO ESTATE-WIDE CONTENDERS OUTSIDE THIS TRAIN, NAMED SO THE ORDER IS VISIBLE: EM-B1j also MODIFIEs calamityKernel.js and would shift this same row, and EM-B2a3 shifts six rows in src/generators/steps/assembleInstitutions.js; neither declares the path today, and whichever lands second re-addresses from whatever the first leaves. Keyed for TOOL-27's row-level reservation.",
+          "action": "REGISTER",
+          "path": "tests/lint/.prose-numerics-baseline.json",
+          "rowKey": "rows[src/domain/worldPulse/calamityKernel.js:745]"
+        }
+      ],
+      "requiredSymbols": [
+        {
+          "_note": "⭐ THE WRITER THE GUARD JOINS, created by EM-B1e (LANDED 8f714cf3c). POST-EDIT SIMULATION: the packet inserts ONE CALL inside the body and extends the import clause; the signature text is never re-spelled, moved or renamed — PRESENT after the build. grep -cF → 1.",
+          "path": "src/domain/worldPulse/calamityKernel.js",
+          "symbol": "export function ruinInstitution"
+        },
+        {
+          "_note": "⭐ A LANDED PIN ON THE FILE THIS PACKET MODIFIES, DISCHARGED HERE TOO. MF-T2R (LANDED) and EM-B1e (LANDED) both hold this exact (path, symbol) pair on this file. POST-EDIT: :527, a different function from the edited region — PRESENT. grep -cF → 1.",
+          "path": "src/domain/worldPulse/calamityKernel.js",
+          "symbol": "export function forceCalamityStrike"
+        },
+        {
+          "_note": "⭐ EM-B1e's (LANDED) anchor export on this same file, discharged here too: the nearest preceding export to the ruin writer, pinning the file's identity so a rename or a file move is detectable from the manifest. POST-EDIT: :196 — PRESENT. grep -cF → 1.",
+          "path": "src/domain/worldPulse/calamityKernel.js",
+          "symbol": "export function strikeCapForTier"
+        },
+        {
+          "_note": "⭐ THE `standing` MEMBER'S WRITE SITE, and the packet's sharpest measured fact. The calamity DEMOTE branch (:304-311) writes this literal and — measured by the sibling keys of its own record literal — NO status, NO _worldPulseInactive, NO _worldPulseEconomyClosed; its selection at :291 requires status 'active' and its comment reads 'rename in place, keeping the slot standing'. Hence kind `standing`, and hence EM-B1i's defect population is THREE, not two (R10). Already a member, so this packet does not touch it; named so an edit is visible at the manifest level. POST-EDIT: PRESENT. grep -cF → 1.",
+          "path": "src/domain/worldPulse/calamityKernel.js",
+          "symbol": "worldPulseFate: 'demoted_by_disaster'"
+        },
+        {
+          "_note": "DERIVER 1, behind institutionLifecycle.js's two `derived` write sites (:1019, :1061). Returns EXACTLY 'shuttered' | 'bankrupt' | 'closed_for_want_of_custom' — and exactly those three across ALL 30 revisions of the file, which is what makes the no-retired-spelling claim historical rather than a snapshot. All three are `closure` members. ⛔ THIS FILE IS NOT IN THE CHANGE MANIFEST AND MUST NOT BE: 798 effective lines of an 800 ceiling (R3). POST-EDIT: PRESENT. grep -cF → 1.",
+          "path": "src/domain/worldPulse/institutionLifecycle.js",
+          "symbol": "function closureFateForInstitution"
+        },
+        {
+          "_note": "⭐ THE SECOND VOCABULARY'S CLOSE SET, §13's subject. new Set(['shuttered','bankrupt','closed_for_want_of_custom']) at :635, read by priorLifecycleCounts (:643-649) as a damping counter on a settlement's rebuild odds. MEASURED: a STRICT SUBSET of the `closure` kind, 3 of 15, and all 3 of 3 are members. ⛔ NOT EDITED AND NOT DERIVED HERE — deriving it would make institutionLifecycle.js a READER of the kind (this packet has none, which is what keeps it golden-neutral) AND would change behaviour, since the counter would go from counting 3 words to counting 15 (R6). Named so the relationship is provable from the manifest. POST-EDIT: PRESENT. grep -cF → 1.",
+          "path": "src/domain/worldPulse/institutionLifecycle.js",
+          "symbol": "const LIFECYCLE_CLOSE_FATES"
+        },
+        {
+          "_note": "DERIVER 3, behind tierOutcomeApply.js:162. Returns SEVEN {fate, status} pairs at :142-148 whose status is 'remnant' ×6 and 'removed' ×1 — NEVER 'active' — and whose caller deactivateForDemotion (:158) sets _worldPulseInactive: true for all seven. ⇒ ALL SEVEN ARE `closure`, including the six names flagged for a second look; the gentle words are PROSE, the record is a deactivation. ⚠ This file is ALSO in the eager first-paint closure, a second reason it is not edited. NOT in the change manifest; POST-EDIT: PRESENT. grep -cF → 1.",
+          "path": "src/domain/worldPulse/tierOutcomeApply.js",
+          "symbol": "function demotionFateForInstitution"
+        },
+        {
+          "_note": "DERIVER 2, behind magicRegimeLifecycle.js:357. Returns 'bankrupt' | 'closed_for_want_of_custom', and its own docblock records that the estate already made this packet's argument once: 'DRAWN FROM institutionLifecycle's EXISTING three-word fate vocabulary … rather than adding a fourth. Law 7 is a rule about not growing vocabularies casually, and this is a case where the existing one already said it.' NOT in the change manifest; POST-EDIT: PRESENT. grep -cF → 1.",
+          "path": "src/domain/worldPulse/magicRegimeLifecycle.js",
+          "symbol": "export function magicClosureFate"
+        },
+        {
+          "_note": "⭐ THE ONLY PRODUCER OF TWO MEMBERS, IN A FILE THAT WRITES NO worldPulseFate AT ALL. :348 sets the value that reaches institutionPatch.fate (:379), which institutionLifecycle.js:1055's `patch.fate || 'abolished'` consumes and :1061 stamps. A write-site scan cannot see 'disbanded' from here — which is why the charter's original figures understated the vocabulary by twelve values, and why the walker's T2 checks DERIVERS rather than only literals. NOT in the change manifest; POST-EDIT: PRESENT. grep -cF → 1.",
+          "path": "src/domain/worldPulse/moralInstitutionPressure.js",
+          "symbol": "const fate = best.martial ? 'disbanded' : 'abolished';"
+        },
+        {
+          "_note": "A `literal` roster row of kind `closure`, inside export function applySettlementLifecycleOutcomeToSettlement (:578): the settlement-death stamp at :601, written beside status:'removed' and _worldPulseInactive:true. Already a member, so this file is not edited. NOT in the change manifest; POST-EDIT: PRESENT. grep -cF → 1.",
+          "path": "src/domain/worldPulse/settlementLifecycleFirstClass.js",
+          "symbol": "worldPulseFate: 'abandoned_with_the_settlement'"
+        },
+        {
+          "_note": "A `literal` roster row of kind `rise`: the institution UPGRADE at :516, inside export function advanceUpswing (:366). Measured: the record literal carries NO status and NO inactive flag, and the selection at :515 requires status 'active' — a promotion in place. One of the THREE members EM-B1i's reader mis-reads as destroyed today (R10). NOT in the change manifest; POST-EDIT: PRESENT. grep -cF → 1.",
+          "path": "src/domain/worldPulse/upswingKernel.js",
+          "symbol": "worldPulseFate: 'upgraded_by_reconstruction'"
+        },
+        {
+          "_note": "A `literal` roster row of kind `rise`: the flourishing-founding at :763, which pushes a NEW record carrying status:'active'. The second of the three members EM-B1i's reader mis-reads as destroyed today (R10). NOT in the change manifest; POST-EDIT: PRESENT. grep -cF → 1.",
+          "path": "src/domain/worldPulse/upswingKernel.js",
+          "symbol": "worldPulseFate: 'founded_by_flourishing'"
+        },
+        {
+          "_note": "⭐ THE HOMONYM HOME, AND IT IS THE READER'S OWN FILE. NONSTANDING_STATUS (:134) = new Set(['removed','destroyed','remnant','ruined','defunct','closed','disbanded','abolished']) — a STATUS vocabulary holding two words that are also FATES. It is why the walker's trigger is the FOURTEEN discriminating members and not all eighteen: triggering on 'abolished' or 'disbanded' would convict causeLifecycle.js, the very file that READS worldPulseFate at :139. NOT in the change manifest; POST-EDIT: PRESENT. grep -cF → 1.",
+          "path": "src/domain/worldPulse/causeLifecycle.js",
+          "symbol": "const NONSTANDING_STATUS"
+        },
+        {
+          "_note": "READER 1, declared NON-ENUMERATING: :258's `const fate = textOrNull(inst.worldPulseFate)` forwards the value as free text into ProvenanceLifecycle.fate and branches on no value. ⭐ MEASURED AND ASSERTED BY A6: `lastLifecycle` is read NOWHERE in src/ outside this producer — OverviewTab.jsx:57, the only consumer of institutionProvenanceOf, destructures `created` ONLY — so no fate word reaches a surface and the voice law does not apply. NOT in the change manifest; POST-EDIT: PRESENT. grep -cF → 1.",
+          "path": "src/domain/provenance/rosterProvenance.js",
+          "symbol": "function institutionLastLifecycle"
+        },
+        {
+          "_note": "⭐⭐ THE ROSTER THIS PACKET APPENDS TO, and the register version 1 missed. POST-EDIT SIMULATION: row 5 inserts a new entry INSIDE this object; the declaration line itself is untouched — PRESENT after the build. Its 28 keys and the bandFamilies.js row's shape (kind: 'substrate', reads: Object.freeze([])) are the contract the new row copies. grep -cF → 1.",
+          "path": "tests/lint/couplingInclusion.walker.test.js",
+          "symbol": "const ARGUED_UNLAYERED = Object.freeze({"
+        },
+        {
+          "_note": "⭐ THE CEILING, NAMED BY ITS STABLE PREFIX ONLY. POST-EDIT SIMULATION, AND IT CUT A ROW BEFORE IT WAS WRITTEN: `const ARGUED_ROSTER_CEILING = 28` is NOT named here, because row 5 RE-SPELLS that line (28 → 29) and requiredSymbols is asserted VERBATIM at every status, so check:packet's first step would red the moment the edit was made — the EM-P3 lesson, and exactly the row the chair cut from EM-B1d version 5. No retiredSymbols row is owed either: the SYMBOL survives, only its value changes. The prefix named here is present once and survives the edit. grep -cF → 1.",
+          "path": "tests/lint/couplingInclusion.walker.test.js",
+          "symbol": "const ARGUED_ROSTER_CEILING"
+        },
+        {
+          "_note": "tests/lint is the FIRST entry — the reason the walker owes a mutation-coverage row, and the reason `uncovered` is unavailable to it. NOT in the change manifest; POST-EDIT: PRESENT. grep -cF → 1.",
+          "path": "tests/lint/mutationCoverage.shared.mjs",
+          "symbol": "export const ENFORCER_DIRS"
+        },
+        {
+          "_note": "The register-walker shape this packet copies: a declared table asserted SET-EQUAL to a live source scan in BOTH directions. NOT in the change manifest; POST-EDIT: PRESENT. grep -cF → 1.",
+          "path": "tests/lint/chooserTotality.walker.test.js",
+          "symbol": "const SCAN_ROOTS"
+        }
+      ],
+      "acceptanceCases": [
+        {
+          "id": "A1",
+          "case": "⭐ THE GUARD IS LIVE AND THE HISTORY DOES NOT MOVE (walker arm T4). Through the REAL exported ruinInstitution: ALL EIGHTEEN MEMBERS ARE ACCEPTED, asserted as a positive control BEFORE the refusal so the arm cannot pass on a broken import; and a well-formed non-member ('razed_by_the_gods') THROWS. ⭐ THE BYTE ARM: JSON.stringify of the record produced for fate:'destroyed_by_disaster' is identical to EM-B1e's frozen oracle shape — the same five keys, the same values, IN THE SAME ORDER — so a VALIDATING guard is proved BYTE-TRANSPARENT on every call it admits. THE PROMISE makes this the packet's central safety claim."
+        },
+        {
+          "id": "A2",
+          "case": "EM-B1e's ABSENCE VERDICTS ARE UNCHANGED, AND THE CHECK ORDER IS PINNED (T4). A missing fate, fate:'', a non-string fate and a missing reason each still throw. ⛔ THE ORDER IS ASSERTED BY MESSAGE, not merely the fact of a throw: fate:'' must fail the TYPE check and never the membership check, because §6 places the assertWorldPulseFate call AFTER the type check and BEFORE the reason check — a later reordering would leave the LANDED tests/domain/ruinInstitution.test.js A3 green while silently changing which contract refused the call. Every negative carries `// anchored:` on the line immediately above."
+        },
+        {
+          "id": "A3",
+          "case": "⭐ DECLARED EQUALS DISCOVERED, BOTH DIRECTIONS (T2). Every roster row resolves live at path+symbol, so a moved or deleted deriver reds. The set of src/ files that WRITE worldPulseFate is SET-EQUAL to the six declared roster rows IN BOTH DIRECTIONS — an unlisted writer reds by name AND a stale row reds. The lane's `spelling` field is CHECKED against the tree, never trusted: every `literal` row is flagged and spells only members; ⭐ every `derived` row names a deriver that resolves live and WHOSE OWN STRING RETURNS ARE ALL MEMBERS — the arm that catches 'disbanded', which no write site spells and which only moralInstitutionPressure.js:348 produces; every `clear` row writes worldPulseFate: null at its declared site and spells no fate; the `argument` row imports assertWorldPulseFate and calls it. Full offender lists, never a first failure."
+        },
+        {
+          "id": "A4",
+          "case": "⭐ THE TRIGGER, THE HOMONYMS AND THE SET-EQUALITY (T3). The trigger is DERIVED from the live vocabulary minus the measured homonyms — never transcribed — and asserted to be exactly the FOURTEEN discriminating members, with a floor arm that reds if it comes out empty or halves. Each of the THREE homonyms must name at least one foreign declared vocabulary BY NAME AND FILE (abandoned → FOSSIL_KINDS, DEAD_ENDPOINT_STATUS, PLAN_STATES; abolished and disbanded → NONSTANDING_STATUS in causeLifecycle.js, the reader's own file). FLAGGED is SET-EQUAL, BOTH DIRECTIONS, to the literal roster rows ∪ the register; the register is EMPTY and its checker is proved on a planted row. ⛔ BOTH MATCHER CONTROLS ARE REQUIRED, NOT OPTIONAL: the matcher is proved to FIRE on a planted literal before any negative is asserted, proved to IGNORE a commented one, and the estate's shared codeOnly helper is shown to return ZERO here — so the arm cannot be vacuously green (EM-B1e measured exactly that trap on this same technique)."
+        },
+        {
+          "id": "A5",
+          "case": "⛔ NOTHING MOVES; THE VOCABULARY IS DERIVED; THE KINDS ARE TOTAL (T1). generatorGoldenMaster, dossierProseManifest and THE PRESET WITNESS are bytewise unchanged, asserted as fixture digests. The scan is asserted non-empty FIRST (guard-the-guard). WORLD_PULSE_FATES parses to exactly EIGHTEEN distinct members IN CODEPOINT ORDER, frozen, and null is asserted NOT to be among them. ⭐ THE KIND TOTALITY: every member's kind is one of WORLD_PULSE_FATE_KINDS, WORLD_PULSE_FATE_KINDS is exactly {closure, rise, standing}, and the three populations are exactly closure 15 / standing 1 / rise 2 — so a re-kinding cannot ride in unnoticed. ⭐ THE HONESTY ARM: seventeen of the eighteen are proved to be produced by a live writer or a named deriver in src/, with ruined_by_decree asserted BY NAME as the single declared-dormant member — so a nineteenth word that no writer produces cannot be added quietly, and the one word chartered to be dormant is visible as such."
+        },
+        {
+          "id": "A6",
+          "case": "⭐ NO READER ENUMERATES, NO READER IS A SURFACE, AND NOTHING READS THE KIND (T3). Both readers are asserted UNFLAGGED and non-enumerating, driven through the REAL functions with a standing-institution negative control first: rosterProvenance's institutionLastLifecycle forwards the value as free text, and causeLifecycle.institutionDestroyed answers on truthiness. ⭐ The surface claim is ASSERTED, not assumed: `lastLifecycle` is read nowhere in src/ outside its own producer, and OverviewTab.jsx's institutionBadge — the only consumer of institutionProvenanceOf in the tree — destructures `created` ONLY. ⭐⭐ AND THE GOLDEN-NEUTRALITY CLAIM IS MACHINERY RATHER THAN A PROMISE: a source scan proves NO file under src/ imports WORLD_PULSE_FATE_KIND. The kind is data with no reader, which is exactly what makes this packet a FREEZE and not a CURE; the failure message names EM-B1i as the packet that is allowed to read it."
+        },
+        {
+          "id": "A7",
+          "case": "⭐ THE LEAF IS CLEAN, AND A LATER EDITOR IS TOLD WHY (T3). The leaf's COMMENT-STRIPPED source contains NO `status:` token at all, and its RAW source contains no `status: 'ruined'`. Both directions are asserted with the reason in the failure message: tests/domain/ruinInstitution.test.js's LANDED A7 asserts that the comment-only-stripped `status: 'ruined'` hit list over every non-test src/ file is EXACTLY ['src/domain/worldPulse/calamityKernel.js'], and this new leaf is inside that scan — so a doc STRING or a template literal mentioning the token in the leaf would red a LANDED packet's acceptance arm, while a // or /* */ gloss is blanked by the strip and is safe."
+        }
+      ],
+      "checks": [
+        [
+          "npx",
+          "vitest",
+          "run",
+          "--pool=threads",
+          "--maxWorkers=2",
+          "tests/lint/worldPulseFateTotality.walker.test.js",
+          "tests/lint/couplingInclusion.walker.test.js",
+          "tests/lint/couplingDesk.walker.test.js",
+          "tests/lint/mutationCoverageManifest.test.js",
+          "tests/lint/negativeAssertionAnchor.walker.test.js",
+          "tests/lint/contractTestAntiVacuity.walker.test.js",
+          "tests/lint/ruinFilterRoster.walker.test.js",
+          "tests/lint/domainStrictBaseline.test.js",
+          "tests/lint/domainAnyCastBaseline.test.js",
+          "tests/lint/proseNumerics.test.js"
+        ],
+        [
+          "npx",
+          "vitest",
+          "run",
+          "--pool=threads",
+          "--maxWorkers=2",
+          "tests/domain/ruinInstitution.test.js",
+          "tests/domain/calamity.test.js",
+          "tests/domain/calamity.kernel.integration.test.js",
+          "tests/domain/ruinFilter.probe.test.js",
+          "tests/domain/institutionLifecycle.test.js",
+          "tests/domain/evaluateInstitutionLifecycle.test.js",
+          "tests/domain/magicRegimeLifecycle.test.js",
+          "tests/domain/settlementLifecycleFirstClass.test.js",
+          "tests/domain/upswingKernel.test.js",
+          "tests/domain/shiftTier.test.js",
+          "tests/domain/causeResolutionLifecycle.test.js",
+          "tests/domain/institutionStatusModel.test.js",
+          "tests/domain/martialMoralWF8.test.js",
+          "tests/domain/moralInstitutionFounding.test.js",
+          "tests/domain/institutionFounding.test.js",
+          "tests/domain/worldPulseExpansion.test.js"
+        ],
+        [
+          "npx",
+          "vitest",
+          "run",
+          "--pool=threads",
+          "--maxWorkers=2",
+          "tests/domain/provenance/rosterProvenance.test.js"
+        ],
+        [
+          "npx",
+          "vitest",
+          "run",
+          "--pool=threads",
+          "--maxWorkers=2",
+          "tests/property/generatorGoldenMaster.test.js",
+          "tests/property/dossierProseManifest.test.js"
+        ],
+        [
+          "npx",
+          "vitest",
+          "run",
+          "--pool=threads",
+          "--maxWorkers=2",
+          "tests/simulation/presetLightingWitness.test.js"
+        ],
+        [
+          "npx",
+          "eslint",
+          "src/domain/worldPulse/worldPulseFates.js",
+          "src/domain/worldPulse/calamityKernel.js",
+          "tests/lint/worldPulseFateTotality.walker.test.js",
+          "tests/lint/couplingInclusion.walker.test.js"
+        ],
+        [
+          "node",
+          "scripts/check-observed-shape-readers.mjs"
+        ],
+        [
+          "node",
+          "scripts/check-writer-reach.mjs"
+        ],
+        [
+          "node",
+          "scripts/implementation-packets.mjs",
+          "validate"
+        ],
+        [
+          "npm",
+          "run",
+          "typecheck:ratchet"
+        ],
+        [
+          "npm",
+          "run",
+          "typecheck:domain:strict"
+        ]
+      ]
+    },
+    {
+      "id": "EM-D0a",
+      "status": "READY",
+      "packetPath": "docs/implementation/packets/settlement-editor/EM-D0a.md",
+      "verifiedBase": "7f0621fdb72f769a285502ff5481247c1f07b04b",
+      "changeManifest": [
+        {
+          "action": "MODIFY",
+          "path": "src/components/theme.js",
+          "symbol": "houseBloom — ONE recipe home for the house bloom, minted beside PARCH_100 and the rail's GOLD, at EM-D0a section 6.1's exact signature. Design section 20.1: 'ARROW_GLOW is lifted to a shared token beside the rail's gold, and both the arrow and the editor read it.' ⛔ THIS FILE IS EAGER (member of EAGER_FIRST_PAINT_MODULES at the base) and so is ArrowControl.jsx, and the import edge between them ALREADY EXISTS — which is the whole reason this is the home: +0 eager modules and +0 new eager import edges. It imports nothing new; it adds one exported pure function and no other line moves. ⛔ The editor's halo constants are NOT minted here: they arrive with EM-D0c, which is the member that has a consumer for them, so this packet mints no unconsumed export."
+        },
+        {
+          "action": "MODIFY",
+          "path": "src/components/nav/ArrowControl.jsx",
+          "symbol": "ARROW_GLOW — the definition's right-hand side becomes houseBloom(PARCH_100) and the import specifier list grows by one name. ⭐ THE EXPORTED STRING'S VALUE IS BYTE-IDENTICAL; the symbol text 'export const ARROW_GLOW' survives VERBATIM, so this path stays a requiredSymbols row and NO retirement is owed (pre-proof step 10). ⛔ Nothing else in the file moves: not the JSDoc block, not hovers(), not keyboardFocused(), not the component, not the ring, not the glow span at line 111."
+        },
+        {
+          "action": "CREATE",
+          "path": "tests/design/houseBloom.test.js",
+          "symbol": "the recipe's SIX arms at EM-D0a section 6.3 — (1) byte identity against the arrow's pinned spelling, (2) the single-home source scan, (3) the no-new-hex source scan, (4) the argument-is-read NEGATIVE CONTROL, (5) light-never-elevation, and (6) the anti-vacuity denominator. ⭐ SIX, and the number is the same in every authority: six acceptanceCases, six arms here, six literal `it`s in section 6.3, `titles +6` in the deferred lighting row (version 1's text named only five of the six arms while every other authority said six — corrected in version 2 before it could cost a build). Straight-line literal `it`s under ONE literal `describe`, every opener bound by this file's own `vitest` import and bound exactly once; no variable, parameter or alias named `it`, `test` or `describe`; no bare seed loop. ⛔ ARMS 3 AND 5 ARE BARE NEGATIVES and each carries `// anchored: <why this cannot go vacuous>` ON ONE LINE: tests/lint/negativeAssertionAnchor.walker.test.js governs tests/design (its frozen map carries four tests/design rows) and convicts not.toContain( / not.toMatch( / not.toHaveProperty( without the marker, and a WRAPPED marker anchors nothing."
+        },
+        {
+          "_note": "⛔ OWED, AND VERSION 1 SAID IT WAS NOT. `tests/design` is ENFORCER_DIRS[1] in tests/lint/mutationCoverage.shared.mjs (the list is byte-UNMOVED between version 1's compile base and e80a6a3f4, so nothing drifted — the compile read the register wrongly). Measured with the CREATE simulated present: enumerateInvariants yields missing = [\"tests/design/houseBloom.test.js\"], which the TOTALITY arm of tests/lint/mutationCoverageManifest.test.js refuses. A DELTA OF +1 row, never an absolute (interim rule 9); as history with an as-of mark, the manifest held 716 keys at e80a6a3f4 and enumerateInvariants returned 716 there, matching exactly. ⛔ kind MUST be `rationale` (inline, >40 characters, the meta-test's own threshold) or `mutation`: `uncovered` is UNLAWFUL here because the live uncovered count is 186 and uncoveredBaseline is 186, and the SHRINK-ONLY arm fails in BOTH directions, so a 187th reds on the spot. ⛔ SURGICALLY, NEVER RE-SERIALISED WHOLE: insert the complete block immediately AFTER the close of \"tests/design/archMeshBudget.test.js\" (the LAST key of the tests/design block) and immediately BEFORE \"tests/docs/abuse-model-paths.test.js\" — a pure +N / −0 diff at that seam, anchored on key NAMES and never on line numbers. ⛔ DO NOT TOUCH uncoveredBaseline. ⭐ THE ROW-KEYED REGISTER IS THE ONE LAWFUL SHARED PATH IN A PARALLEL TRAIN: inside EM-T9, EM-A1 holds invariants['tests/lint/editDeclarations.walker.test.js'] and EM-B1h holds invariants['tests/lint/worldPulseFateTotality.walker.test.js']; this member is the THIRD, under a tests/design/ key, so all three insertion seams are textually distinct and no two members can conflict.",
+          "action": "REGISTER",
+          "path": "scripts/mutation-coverage-manifest.json",
+          "rowKey": "invariants['tests/design/houseBloom.test.js']",
+          "symbol": "invariants['tests/design/houseBloom.test.js'] — ONE row, kind `rationale`, added surgically beside its tests/design/ siblings; the manifest is never re-serialised whole and uncoveredBaseline is not touched"
+        }
+      ],
+      "requiredSymbols": [
+        {
+          "path": "src/components/theme.js",
+          "symbol": "export const PARCH_100 = L.PARCH_100;"
+        },
+        {
+          "path": "src/components/nav/ArrowControl.jsx",
+          "symbol": "export const ARROW_GLOW"
+        },
+        {
+          "path": "tests/components/arrowHeader.test.jsx",
+          "symbol": "expect(ARROW_GLOW).toBe(`radial-gradient(closest-side, color-mix(in srgb, ${PARCH_100} 34%, transparent), transparent)`);"
+        },
+        {
+          "path": "tests/components/arrowHeader.test.jsx",
+          "symbol": "import { ARROW_GLOW } from '../../src/components/nav/ArrowControl.jsx';"
+        },
+        {
+          "path": "vite.config.js",
+          "symbol": "export const EAGER_FIRST_PAINT_MODULES"
+        }
+      ],
+      "_requiredSymbolsNote": "Five rows, each proved at bdbf7c89c by `git grep -c -F` = 1 (EM-D0a.evidence.md E1-E5). ⛔ THE THIRD AND FOURTH ROWS ARE THE PACKET'S NEGATIVE CONTROL AND ITS WHOLE ARGUMENT: the pixels-unmoved pin the charter asks for ALREADY EXISTS at tests/components/arrowHeader.test.jsx:389-390, and this packet does NOT modify that file. A pin the packet cannot edit, asserting a value the packet must not move, is stronger evidence than any pin the packet could write. ⛔ `import { INK, PARCH_100 } from '../theme.js';` (ArrowControl.jsx:39) is DELIBERATELY NOT a required symbol: the packet changes that line (the specifier list grows by one name), and naming it would refuse at the packet's own post-edit validation.",
+      "_retiredSymbols": [],
+      "_retiredSymbolsNote": "EMPTY, and proved by the post-edit simulation (pre-proof step 10) row by row. (1) src/components/theme.js: additive only, no existing symbol moves; PARCH_100's declaration line is untouched. (2) src/components/nav/ArrowControl.jsx: the packet writes this path, and the required text 'export const ARROW_GLOW' is a PREFIX of the declaration, so it survives the right-hand side's replacement verbatim. (3)+(4) tests/components/arrowHeader.test.jsx: not written by this packet at all. (5) vite.config.js: not written. No other LANDED or waiting packet carries a row for any of these five (path, symbol) pairs, so nothing is owed a discharge.",
+      "acceptanceCases": [
+        {
+          "id": "A1",
+          "case": "MAIN, AND IT IS A BYTE IDENTITY, NOT A LIKENESS. `houseBloom(PARCH_100)` is character-for-character equal to the string `ARROW_GLOW` held at the verified base — the literal `radial-gradient(closest-side, color-mix(in srgb, ${PARCH_100} 34%, transparent), transparent)`. Asserted in tests/design/houseBloom.test.js against the same interpolation the arrow's own pin spells, and asserted a second time, from the other side, by tests/components/arrowHeader.test.jsx:389 running UNMODIFIED."
+        },
+        {
+          "id": "A2",
+          "case": "THE ARROW IS UNMOVED IN PIXELS. tests/components/arrowHeader.test.jsx passes with ZERO edits to it: `ARROW_GLOW` still resolves verbatim from src/components/nav/ArrowControl.jsx (its line 51 import), still equals the pinned spelling (line 389), and the rendered `<span style={{ background: ARROW_GLOW }} />` still contains 'radial-gradient(closest-side' (line 390). ⛔ A DEVIATION IF THAT FILE IS EDITED AT ALL: the packet's claim is that the arrow does not change, and editing its pin would be the packet proving itself."
+        },
+        {
+          "id": "A3",
+          "case": "ONE HOME, PROVED FROM SOURCE AND IN BOTH DIRECTIONS. A source scan over every .js/.jsx under src/ finds the literal 'radial-gradient(closest-side' in EXACTLY ONE file, and that file is src/components/theme.js. At the base the same scan finds exactly one file and it is src/components/nav/ArrowControl.jsx (measured: 1 of 1), so the arm is a DELTA of home, not of count — the recipe moved and did not multiply. The denominator is derived by reading the tree, never transcribed, and arm 6 asserts it non-empty so a scan that found nothing cannot read as a pass. ⛔ VERSION 2 DROPPED the citation of contractTestAntiVacuity Rule 2 that version 1 carried: that walker's SCOPE (its header, at the read tip) is tests/security/**, tests/**/*.contract.test.* and tests/lint/*.test.js, none of which contains tests/design/houseBloom.test.js — the practice is right, the authority was not."
+        },
+        {
+          "id": "A4",
+          "case": "NO NEW HEX, AND THE FUNCTION REALLY READS ITS ARGUMENT. (a) `houseBloom`'s source text contains no '#' colour literal and no 'rgba(' — read from source, not asserted about a value. (b) NEGATIVE CONTROL: `houseBloom('red') !== houseBloom('blue')`, and each output contains its own argument — so a body that ignored its parameter and returned a constant is convicted. Without (b) every other arm in this file would pass over a hardcoded string."
+        },
+        {
+          "id": "A5",
+          "case": "FIRST PAINT: +0 EAGER MODULES, AS A DELTA. The membership probe imports vite.config.js's own exported EAGER_FIRST_PAINT_MODULES, reads no dist and therefore can never skip; the set's size is N at the base and N after this packet, with src/components/theme.js and src/components/nav/ArrowControl.jsx both members BEFORE and AFTER and no third module entering. ⛔ The BYTE delta is NOT asserted here: it is one exported template function moving between two modules that are both already eager, priced in section 7 as a delta and summed by the chair from ONE real build (interim rule 2). A rise in the eager closure is the OWNER's stop."
+        },
+        {
+          "id": "A6",
+          "case": "THE DOOR AND THE KILL LIST ARE UNDISTURBED. `houseBloom` returns a BACKGROUND value and never a `boxShadow`, asserted by name: its output contains 'radial-gradient' and contains neither 'px ' offsets nor the token 'shadow'. This is the structural form of design section 3's 'LIGHT, NOT ELEVATION' (the organic law: print has no z-axis) placed on the recipe itself, so the halo EM-D0c builds on it cannot become an elevation by accident."
+        }
+      ],
+      "checks": [
+        [
+          "npx",
+          "vitest",
+          "run",
+          "--pool=threads",
+          "--maxWorkers=2",
+          "tests/design/houseBloom.test.js",
+          "tests/design/contrast.test.js"
+        ],
+        [
+          "npx",
+          "vitest",
+          "run",
+          "--pool=threads",
+          "--maxWorkers=2",
+          "tests/components/arrowHeader.test.jsx",
+          "tests/components/accountMenuRows.test.jsx"
+        ],
+        [
+          "npx",
+          "vitest",
+          "run",
+          "--pool=threads",
+          "--maxWorkers=2",
+          "tests/lint/mutationCoverageManifest.test.js"
+        ],
+        [
+          "node",
+          "-e",
+          "const{pathToFileURL}=require('node:url');import(pathToFileURL('vite.config.js').href).then(m=>{const S=[...m.EAGER_FIRST_PAINT_MODULES];const want=['src/components/theme.js','src/components/nav/ArrowControl.jsx'];const have=want.filter(p=>S.some(x=>String(x).endsWith(p)));console.log('EAGER_FIRST_PAINT_MODULES:',S.length,'| both homes already eager:',have.length,'of',want.length);if(have.length!==want.length)process.exit(1);})"
+        ],
+        [
+          "node",
+          "scripts/implementation-packets.mjs",
+          "validate"
+        ]
+      ],
+      "_checksNote": "Interim rule 8: sealed checks name FILES, never the tests/lint directory, never the lighting walker, and end with the validator. src/components/theme.js is a HUB FILE (50 test files name it by `git grep -l -F theme -- tests`, measured at e80a6a3f4; version 1 read 49 at its own compile base), so by the chair's ruling 3 on EM-B2a4 the sealed set takes the grep of the CHANGED SYMBOLS only — `ARROW_GLOW` (1 hit: tests/components/arrowHeader.test.jsx) and `ArrowControl` (3 hits: + tests/components/accountMenuRows.test.jsx, tests/design/contrast.test.js) — plus the CREATE's own file and its directory companion — AND, version 2, interim rule 8's other clause: every walker that governs a directory in which this packet CREATEs a test file. tests/design is ENFORCER_DIRS[1], so tests/lint/mutationCoverageManifest.test.js is named AS A FILE (never the tests/lint directory, never the lighting walker) and joins the sealed set, exactly as EM-A1 and EM-B1h both already seal it. `houseBloom` is a NEW symbol and names no existing test, stated rather than silently omitted. The importing directories go to section 10 as the build lane's instruments, never here. The membership probe always executes: it imports the exported set and reads no dist.",
+      "_deferredRows": "ONE, not two — and the change is version 2's whole reason. (1) docs/content/wiring-census.json — interim rule 1, UNCHANGED: this packet CREATEs no .js under src/generators/** or src/domain/**, so stamp.producerIndexFiles is +0; the roots measured against are those two and this packet's only src/ writes are under src/components/; measured at e80a6a3f4, stamp.files (7 entries) names NEITHER src/ file, so no stale-bytes re-take is owed either. (2) tests/lint/.lighting-census-baseline.json — the named INTERIOR RED, delta only: files +1, credited +1, titles +6, suiteTitles +1, parked +0, in the register's own order, from the ONE new straight-line test file with its SIX literal `it`s under one literal `describe`. ⛔ Regenerated at the train's terminal BY THE CHAIR; this member never sets LIGHTING_CENSUS_REFREEZE and never edits the baseline. ⚠ The credited/parked split is a PREDICTION until the build lane prints parkReasonsFor over the new file; if it parks, the delta is parked +1 and titles +0. ⛔⛔ REMOVED IN VERSION 2: scripts/mutation-coverage-manifest.json was listed here as NOT OWED on a false premise (tests/design is ENFORCER_DIRS[1], byte-unmoved since the compile base). It is now a REGISTER row of the changeManifest, with its own rowKey and its own surgical insertion seam.",
+      "_byteArm": "THE TRAIN'S BYTE ARM — the chair's judgment 74, a TRAIN-LEVEL rule joining the fifth amendment: within ONE train the budget's TEST row is carried by exactly ONE member, the train's BYTE-ARM HOLDER; every other member that moves the same budget carries NO row on that path, states its own predicted delta with its bound, and names the holder. FIRST-PAINT BYTES: predicted <= 120 B (estimated +55 B x2) against an arm with 8,733 B of room; this packet carries NO row on tests/build/vendorPdfLazy.test.js: train EM-T9's byte-arm holder is EM-D0b, whose TEST row and the terminal's ONE real build prove the summed price of the whole train (the chair's judgments 72 and 74). ⛔ WHY THE ROW WENT: version 2 carried it under interim rule 2, and the pre-proof's four-member validation run quoted `duplicate change path across packets: tests/build/vendorPdfLazy.test.js (EM-D0a, EM-D0b)` — a path that is NOT a row-keyed register, so TOOL-27 does not cover it and the refusal would have bitten at placement. ⭐ The membership probe stays in `checks` UNCHANGED: it imports EAGER_FIRST_PAINT_MODULES, reads no dist, can never skip, and proves MEMBERSHIP (+0 eager modules) — this packet's own claim. The BYTES are the holder's and the terminal's. ⛔ The generation worker (1,401,208 EXACT, zero slack) is NOT REACHED: no import statement under src/workers, src/generators or src/domain names components/theme — the single grep hit is prose in a JSDoc comment at src/domain/display/labelCase.js:7."
+    },
+    {
+      "id": "EM-D0b",
+      "status": "READY",
+      "packetPath": "docs/implementation/packets/settlement-editor/EM-D0b.md",
+      "verifiedBase": "7f0621fdb72f769a285502ff5481247c1f07b04b",
+      "changeManifest": [
+        {
+          "_note": "THE TIER FIELD AND THE PREDICATE. (1) TIER_GATE gains `settlementEditor` on all three rows — anon:false, free:false, premium:true — beside `customContent` (authSlice.js:83-85). (2) ONE new predicate `canEditSettlement()` beside canUseCustomContent (:840). ⛔⛔ IT INVERTS THE HOUSE IDIOM AND THAT IS THE WHOLE POINT. Every shipped predicate opens for staff FIRST — `if (staffUnlocksPaidFeatures(get().auth.role)) return true;` — and then reads the gate. This one CLOSES for everyone who is not staff: `const { tier, role } = get().auth; return TIER_GATE[tier]?.settlementEditor === true && isStaffRole(role);`. BOTH CONJUNCTS ARE LOAD-BEARING: resolveTier (:118-120) writes staff in as tier 'premium', so the tier gate ALONE would open the door to every paying Cartographer on the day it lands, which is the paid-surface decision the delegation does not reach (design §20.4: '⛔ VISIBILITY IS THE OWNER'S'). ⛔ THE SECOND CONJUNCT IS `isStaffRole`, NEVER `staffUnlocksPaidFeatures`: the second is governed by the STAFF_UNLOCK_ALL_PAID kill switch (staffEntitlements.js:132-134), so revoking the unlock would take the editor away from staff too — and the DEV-ONLY PREVIEW PERSONA supplies a role that `isStaffRole` is the accepting predicate for (previewPersonaRole returns `isStaffRole(asked) ? asked : null`, authSlice.js:159-168). ⭐ THE SECOND CONJUNCT IS THE ONE LINE THE OWNER DELETES WHEN HE OPENS THE DOOR, and the packet says so in those words beside it. ⛔ THIS FILE IS EAGER (a member of EAGER_FIRST_PAINT_MODULES at the base): the edit is data plus one short predicate, it imports nothing new, and its byte price is PRICED in section 7 and never asserted. ⭐ VERSION 2: the predicate's declaration line `export const createAuthSlice = (set, get) => ({` (:208) is now a requiredSymbol, because the CREATE'd test file calls it.",
+          "action": "MODIFY",
+          "path": "src/store/authSlice.js"
+        },
+        {
+          "_note": "THE TIER-FACTS PARITY SIDE. TIER_FACTS gains `settlementEditor` on all three rows, taking its value from a new module constant in the house's own shape — `const SETTLEMENT_EDITOR = Object.freeze({ anon: false, free: false, premium: true });` beside CUSTOM_CONTENT (:173) and PRE_GEN_OPTIONS (:182) — and the TierFacts typedef (:190) gains the key. ⛔ THE VALUE IS A CONSTANT, NEVER A COPY OF THE GATE: the two halves agree because the contract test asserts it, which is exactly how customContent and preGenOptions already work. ⭐ THIS FILE IS NOT EAGER (measured at e80a6a3f4: src/config/tierFacts.js is not one of the 269), so its bytes are free and the edit costs first paint nothing.",
+          "action": "MODIFY",
+          "path": "src/config/tierFacts.js"
+        },
+        {
+          "_note": "⭐⭐ VERSION 2 — CURE A, THE CHAIR'S JUDGMENT 75(1). THE AUTHORIZED HOME OF THE NEWLY WRITTEN ACCEPTANCE CASES. Version 1 sealed six acceptance cases and authorized no file to write five of them in: `canEditSettlement` and `settlementEditor` appear ZERO times in the whole repository at e80a6a3f4, so every case must be newly written, yet the capsule held no CREATE row and its one editable test row said '+1 line, add no `it`'. This row is that home. ⛔⛔ THE FILENAME IS LOAD-BEARING AND MAY NOT BE CHANGED. `tests/store` is NOT one of the EIGHT ENFORCER_DIRS of the mutation register (measured by importing tests/lint/mutationCoverage.shared.mjs at the tip: ENFORCER_DIRS = tests/lint, tests/design, tests/docs, tests/data, tests/copy, tests/security, tests/edgeFunctions, tests/generators), and the basename `settlementEditorGate` matches NONE of the sixteen tokens in NAME_PATTERN (/(census|scan|baseline|ratchet|walker|killlist|parity|coverage|governance|freshness|integrity|exhaustiveness|roundtrip|golden|contract|pin)/i). ⇒ the file is NOT enumerated, so NO `scripts/mutation-coverage-manifest.json` REGISTER row is owed — AND A VOLUNTARY ROW WOULD BE UNLAWFUL, because mutationCoverageManifest.test.js's arm 'no stale entries: every manifest invariant key is an enumerated, existing file' refuses a key for a file the enumerator does not pick. ⛔ RENAMING THIS FILE TO ANYTHING CONTAINING ONE OF THOSE SIXTEEN TOKENS (…contract.test.js, …Parity…, …Scan…, …Census…) SILENTLY CREATES A REGISTER OBLIGATION AND REDS THE TOTALITY ARM. The uncovered baseline is 186 and equals the live uncovered count, so `uncovered` is unlawful in any case. ⭐ THE LIGHTING DELTA THIS ROW CAUSES, COUNTED FROM THE ARMS BELOW: files +1 · parked +0 · credited +1 · titles +8 · suiteTitles +1. ⛔⛔ THE CREDITED +1 IS CONDITIONAL AND THESE ARE THE CONDITIONS — write the file so the census cannot park it: ONE literal-titled `describe` at module top level; EIGHT straight-line literal-titled `it`s written directly inside it; NO nesting, NO loop, NO `.each`, NO conditional registration, NO `test.extend`, NO hook context parameter, NO computed or template-literal title; import `describe`, `it`, `expect` from 'vitest' and bind each of those three words EXACTLY ONCE in the module — ⛔ never name a variable, parameter or destructured field `it`, `test` or `describe` (26 of the estate's 384 parked files park on OPENER_UNRESOLVED for that alone, and an arrow parameter named `it` is how EM-B1e parked); and never mention a suite opener outside a classified call (SUITE_REF parks the file whole). A file that fails to parse parks whole. If the build lane measures anything other than titles +8 · suiteTitles +1 · files +1 · credited +1 · parked +0, that is a STOP, not a refreeze. ⛔ The negative-anchor walker governs tests/store: assert with `expect(...).toBe(false)`, NEVER with a bare `not.toContain` / `not.toMatch` / `not.toHaveProperty`, so the file needs no `// anchored:` marker and no baseline row.",
+          "action": "CREATE",
+          "path": "tests/store/settlementEditorGate.test.js"
+        },
+        {
+          "_note": "THE PARITY PIN — ONE LINE inside the EXISTING per-tier arm (lines 33-49), `expect(facts.settlementEditor).toBe(gate.settlementEditor);`, beside the customContent and preGenOptions pins it copies. ⛔ ACTION `TEST`, and the path EXISTS at the verified base, so interim rule 4's named-sibling clause is not needed. ⭐ THIS ROW'S OWN LIGHTING CONTRIBUTION IS STILL ZERO IN ALL FIVE FIGURES: the arm is generated by an EXISTING `for (const tier of ['anon','free','premium'])` loop around one `it` (measured at e80a6a3f4: the loop opens at :33, its single `it` at :34, the customContent pin at :43), so THIS FILE gains no `it`, `describe` or file — files +0, parked +0, credited +0, titles +0, suiteTitles +0. The packet's TOTAL delta is the CREATE row's, and only the CREATE row's. ⛔ No arm is widened and no existing expectation moves. ⛔ UNCHANGED FROM VERSION 1 BY THE CHAIR'S RULING: still +1 line, still add no `it`, no `describe`, no loop.",
+          "action": "TEST",
+          "path": "tests/config/tierFacts.contract.test.js"
+        },
+        {
+          "_note": "⛔⛔ THE BYTE BUDGET'S OWN TEST — AND BY JUDGMENT 74 THIS MEMBER IS TRAIN EM-T9's SOLE BYTE-ARM HOLDER. Within one train the budget's TEST row is carried by exactly ONE member, and it is this one; the other three name no such row. Interim rule 2 requires the form ('keep the budget's own test as a TEST row with a stated byte bound; keep every skipIf(!requireDistRead) dist arm OUT of checks'), and judgment 75(3) ratifies it: a row for an INSTRUMENT the member's price is measured by is lawful; a row for a register the CHAIR regenerates is not. THE STATED BOUND, read at source: `const CLOSURE_BUDGET_BYTES = 1_048_000;` (tests/build/vendorPdfLazy.test.js:565), pinned by its own arm at :1769 under the describe 'ARCH car 2 — the three first-paint budgets stay where the owner signed them'. The measuring arm is :1020, gated on VERIFY_DIST=1 and reading dist with statSync — it measures the BUILT entry closure, so comments and JSDoc cost nothing. ⭐ THE BOUND NOW COVERS THE WHOLE TRAIN'S SUM, and the arithmetic is measured at e80a6a3f4 by importing vite.config.js's exported set: EM-A1 +0 B (neither src/domain/edit/types.js nor fieldDeclarations.js is eager) · EM-B1h +0 B (neither src/domain/worldPulse/worldPulseFates.js nor calamityKernel.js is eager — this MEASURES the figure the chair left to B1h's pre-proof) · EM-D0a <=120 B (both src/components/theme.js and src/components/nav/ArrowControl.jsx ARE eager) · EM-D0b <200 B (src/store/authSlice.js is eager; src/config/tierFacts.js is not). SUM < 320 B against a ceiling of 1,048,000 B. The terminal's ONE real build proves the SUMMED price of all four members against this row's bound, once. ⛔ NO EDIT IS MADE HERE. The ceiling moves only if the OWNER moves it, and a summed closure over it is a STOP FOR THE OWNER, never a re-mint; the cure is the PLACEMENT before it is the ceiling. ⚠ EM-B2a4 declares the same row in a different train.",
+          "action": "TEST",
+          "path": "tests/build/vendorPdfLazy.test.js"
+        }
+      ],
+      "requiredSymbols": [
+        {
+          "_note": "THE GATE'S HOME, verbatim, so a re-shape of the three rows is visible to the sealed dispatch. ⚠ MEASURED AND NOT FIXED: TIER_GATE is a PLAIN object literal — it is NOT Object.freeze'd, unlike TIER_FACTS which is. DOCKETED by judgment 75(2) to the fifth amendment's agenda, not repaired here. Proven present at e80a6a3f4: git grep -c -F -> 1.",
+          "path": "src/store/authSlice.js",
+          "symbol": "export const TIER_GATE = {"
+        },
+        {
+          "_note": "THE IDIOM THE NEW PREDICATE IS WRITTEN BESIDE AND DELIBERATELY INVERTS. canUseCustomContent opens for staff first and then reads the gate; canEditSettlement reads the gate AND requires staff. Carried so the difference is visible at the seal rather than discovered in review. Proven present at e80a6a3f4: git grep -c -F -> 1.",
+          "path": "src/store/authSlice.js",
+          "symbol": "  canUseCustomContent: () => {"
+        },
+        {
+          "_note": "⭐ VERSION 2 — NEW ROW. THE SLICE FACTORY THE CREATE'd TEST FILE CALLS. tests/store/settlementEditorGate.test.js constructs the slice exactly as tests/store/staffUnlockEntitlements.test.js:46 does (`state = createAuthSlice(set, get)`) in order to exercise canEditSettlement through the store rather than by importing a bare function. By the standard a symbol the deliverable CALLS and must find unchanged is a requiredSymbol, so it is carried. ⛔ It SURVIVES this packet's own edits verbatim: the new predicate is appended INSIDE the returned object literal, and the declaration line itself is never touched. Proven present at e80a6a3f4 (authSlice.js:208): git grep -c -F -> 1.",
+          "path": "src/store/authSlice.js",
+          "symbol": "export const createAuthSlice = (set, get) => ({"
+        },
+        {
+          "_note": "⛔ THE DARK MECHANISM THE ESTATE ALREADY OWNS — the DEV-ONLY preview persona. It supplies a ROLE (never an identity, never a server claim); it is refused unless isStaffRole accepts it; it is live only under `import.meta.env.DEV && MODE !== 'test' && VITE_PREVIEW_ROLE`; Vite replaces DEV with the literal false in a production build so Rollup eliminates the body, and tests/build/previewPersonaAbsent.test.js proves it absent from the real dist. ⇒ ONE predicate covers BOTH audiences the charter names, because the preview persona IS a staff role. Proven present at e80a6a3f4: git grep -c -F -> 1.",
+          "path": "src/store/authSlice.js",
+          "symbol": "function previewPersonaRole() {"
+        },
+        {
+          "_note": "THE SECOND CONJUNCT. IDENTITY, fail-closed: 'anything that is not one of the two exact role strings reads false, so a null/undefined/object/truthy-non-string can never widen it.' ⛔ NOT governed by the kill switch — which is exactly why it, and not staffUnlocksPaidFeatures, is the conjunct. Proven present at e80a6a3f4: git grep -c -F -> 1.",
+          "path": "src/lib/staffEntitlements.js",
+          "symbol": "export function isStaffRole(role) {"
+        },
+        {
+          "_note": "⛔ THE REASON THE SECOND CONJUNCT EXISTS AT ALL. ENTITLEMENT, governed by STAFF_UNLOCK_ALL_PAID: `return STAFF_UNLOCK_ALL_PAID === true && isStaffRole(role);`. resolveTier (authSlice.js:118-120) uses it to write staff in as tier 'premium', so TIER_GATE.premium.settlementEditor alone opens the editor to EVERY paying Cartographer. Carried so that claim is checkable at the seal. Proven present at e80a6a3f4: git grep -c -F -> 1.",
+          "path": "src/lib/staffEntitlements.js",
+          "symbol": "export function staffUnlocksPaidFeatures(role) {"
+        },
+        {
+          "_note": "⭐ VERSION 2 — NEW ROW. THE KILL SWITCH ACCEPTANCE CASE D2(e) STUBS. The arm asserts that with STAFF_UNLOCK_ALL_PAID false a staff role STILL reads true, which is the whole difference between IDENTITY and ENTITLEMENT. The test re-imports the module with the constant stubbed, exactly as tests/store/staffUnlockEntitlements.test.js:270 does. Carried because the deliverable depends on its exact spelling and value. This packet does not write src/lib/staffEntitlements.js at all. Proven present at e80a6a3f4: git grep -c -F -> 1.",
+          "path": "src/lib/staffEntitlements.js",
+          "symbol": "export const STAFF_UNLOCK_ALL_PAID = true;"
+        },
+        {
+          "_note": "⭐ VERSION 2 — NEW ROW. THE TWO ROLE STRINGS D2 AND D3 ASSERT BY NAME. The truth table the pre-proof measured depends on these two exact strings being the whole of staff identity: 'owner', 'staff', 'ADMIN', 42, {} and ['admin'] all read false through isStaffRole, and the preview persona can supply nothing else. Carried so a widening of this frozen list is visible at the seal. This packet does not write the file. Proven present at e80a6a3f4: git grep -c -F -> 1.",
+          "path": "src/lib/staffEntitlements.js",
+          "symbol": "export const STAFF_ROLES = Object.freeze(['developer', 'admin']);"
+        },
+        {
+          "_note": "THE PARITY PIN'S OTHER SIDE — the frozen facts table the new key joins. Proven present at e80a6a3f4: git grep -c -F -> 1.",
+          "path": "src/config/tierFacts.js",
+          "symbol": "export const TIER_FACTS = Object.freeze({"
+        },
+        {
+          "_note": "THE EXACT SHAPE THE NEW CONSTANT COPIES: a frozen per-tier boolean map, declared beside the facts table and pinned to the gate by the contract test. SETTLEMENT_EDITOR is written to this shape and no other. Proven present at e80a6a3f4: git grep -c -F -> 1.",
+          "path": "src/config/tierFacts.js",
+          "symbol": "const CUSTOM_CONTENT = Object.freeze({ anon: false, free: false, premium: true });"
+        },
+        {
+          "_note": "THE LINE THE PARITY PIN IS WRITTEN BESIDE, inside the existing per-tier loop arm. The new line copies it exactly, one key over. Proven present at e80a6a3f4: git grep -c -F -> 1.",
+          "path": "tests/config/tierFacts.contract.test.js",
+          "symbol": "      expect(facts.customContent).toBe(gate.customContent);"
+        },
+        {
+          "_note": "⛔ THE OWNER-SIGNED CEILING, PINNED BY ITS OWN ARM, under the describe 'ARCH car 2 — the three first-paint budgets stay where the owner signed them'. This is the bound section 7's price is stated against, and by judgment 74 it now covers the SUM of all four EM-T9 members. ⛔ THE PACKET NEVER MOVES IT: a summed closure over 1,048,000 is a STOP FOR THE OWNER, and the cure is the PLACEMENT before it is the ceiling. Proven present at e80a6a3f4: git grep -c -F -> 1.",
+          "path": "tests/build/vendorPdfLazy.test.js",
+          "symbol": "expect(CLOSURE_BUDGET_BYTES, 'the raw first-paint budget moved').toBe(1_048_000);"
+        },
+        {
+          "_note": "The membership probe imports THIS exported set and reads no dist, so it can never skip. Measured at e80a6a3f4: 269 members, with src/store/authSlice.js ALREADY a member and src/config/tierFacts.js NOT one — and, for the byte-arm holder's sum, EM-A1's and EM-B1h's four src paths NOT members while EM-D0a's two ARE. Proven present: git grep -c -F -> 1.",
+          "path": "vite.config.js",
+          "symbol": "export const EAGER_FIRST_PAINT_MODULES"
+        }
+      ],
+      "_requiredSymbolsNote": "THIRTEEN rows (version 1 had ten; version 2 adds createAuthSlice, STAFF_UNLOCK_ALL_PAID and STAFF_ROLES, all called or stubbed by the CREATE'd test file, and removes none). Each proved at e80a6a3f4 by `git grep -c -F` = 1. FIVE sit at paths this packet WRITES (authSlice.js x4, tierFacts.js x2 — counting by path: authSlice 4, tierFacts 2, the contract test 1, vendorPdfLazy 1) and every one of them survives the packet's own edits verbatim, because every edit to an existing file is ADDITIVE: a key appended to three object literals, a constant and a typedef key appended beside their siblings, one predicate appended INSIDE the object createAuthSlice returns, and one expect() appended inside an existing arm. The three staffEntitlements rows and the vite.config.js row sit at files this packet does not write at all. The post-edit simulation is in the packet's section 5.",
+      "_retiredSymbols": [],
+      "_retiredSymbolsNote": "EMPTY. This packet moves no symbol, deletes none and renames none: every change is an addition beside an existing sibling, plus one new file. No other LANDED or waiting packet carries a row for any of these thirteen pairs.",
+      "acceptanceCases": [
+        {
+          "id": "D1",
+          "case": "HOME: tests/store/settlementEditorGate.test.js, arm 1. PARITY HOLDS FOR ALL THREE TIERS, and the gate's values are the ruled ones. The existing per-tier arm in tests/config/tierFacts.contract.test.js asserts TIER_FACTS[t].settlementEditor === TIER_GATE[t].settlementEditor for anon, free and premium (that is the +1 line, and it adds no title); arm 1 of the CREATE'd file asserts the VALUES by name — anon FALSE, free FALSE, premium TRUE — on both tables. ⛔ The vocabulary is asserted to be `settlementEditor` and NOT `editMode`: the same arm reads both module sources and asserts `TIER_GATE.premium.editMode` and `TIER_FACTS.premium.editMode` ABSENT BY NAME, so a later author cannot re-introduce the collision judgment 39 removed. Absence is asserted with `expect(Object.hasOwn(TIER_GATE.premium, 'editMode')).toBe(false)`, never with a bare not.toHaveProperty, so the negative-anchor walker needs no marker."
+        },
+        {
+          "id": "D2",
+          "case": "HOME: tests/store/settlementEditorGate.test.js, arms 2, 3, 4 and 5; the MUTANT (d) is a build-lane act recorded in section 12's receipt, not a committed title. ⛔⛔ THE DARK RULE — THE ARM THAT MATTERS MOST, WITH BOTH CONJUNCTS PROVED LOAD-BEARING. (a) arm 2 — PREMIUM WITHOUT A STAFF ROLE => canEditSettlement() is FALSE. This is the paid-surface line and it is asserted by name, because resolveTier writes staff in as 'premium' and the tier gate alone would open the door to every paying Cartographer on the day it lands. (b) arm 3 — A STAFF ROLE => TRUE at every billing tier (the positive control; an arm that only ever asserts false passes over a predicate broken to always-false). (c) arm 4 — anon => FALSE and free => FALSE, and every non-staff role string, plus undefined, null, a number, a plain object and an array, read FALSE (fail-closed through isStaffRole). (d) ⛔ THE MUTANT, PLANTED AND RESTORED BY THE BUILD LANE: with the second conjunct deleted, arm 2 must RED — which is what makes 'the owner deletes one line' a measured claim rather than a comment. The pre-proof measured the mutant's blast radius at this tip: it opens the door to every premium account including role 'user'. (e) arm 5 — the conjunct is `isStaffRole`, NOT `staffUnlocksPaidFeatures`: with STAFF_UNLOCK_ALL_PAID stubbed false and the module re-imported, a staff role still reads TRUE, so revoking the paid-feature unlock does not take the editor from the staff who are building it."
+        },
+        {
+          "id": "D3",
+          "case": "HOME: tests/store/settlementEditorGate.test.js, arm 6. THE PREVIEW PERSONA SEES THE DOOR, AND PRODUCTION CANNOT. The persona supplies a role through resolveRole -> previewPersonaRole, and that role is one isStaffRole accepts, so canEditSettlement() is TRUE under a preview persona and FALSE with the persona absent — asserted through the store's own auth writers, never by calling previewPersonaRole directly. ⛔ The production absence is NOT re-proved here: tests/build/previewPersonaAbsent.test.js already proves the mechanism eliminated from the real dist, and tests/store/previewPersona.test.js proves the predicate inert with DEV false. This packet adds no second proof of an existing one and says so."
+        },
+        {
+          "id": "D4",
+          "case": "HOME: the walker run is checks invocation 3 (tests/lint/premiumGateSingleSource.test.js); the source scan is arm 7 of tests/store/settlementEditorGate.test.js. ⛔ THE PREMIUM-GATE CENSUS STAYS GREEN AND THIS GATE JOINS NO ROW. The walker convicts a raw premium comparison — its matcher is PREMIUM_COMPARISON = /(?:===|!==)\\s*['\"](?:premium|founder)['\"]/ at premiumGateSingleSource.test.js:80 — and the new predicate spells NO raw comparison: it reads TIER_GATE[tier]?.settlementEditor and calls isStaffRole. Arm 7 reads the predicate's own source text and asserts the matcher does not fire on it. ⛔ AND NO ENTITLEMENT-LADDER ROW IS ADDED: measured at the tip, tests/config/entitlementLadder.enforcement.test.js keys RESOLVERS by `enforcement` marker string and iterates the ladder's OWN rows (:108-112, :151) — it does NOT enumerate TIER_GATE's keys, so a new gate key demands no ladder row. A row for a surface nobody may see would advertise an unopened capability AND would fail its own resolver on the staff conjunct. The row is OWED AT THE MOMENT THE OWNER OPENS THE DOOR and is recorded with that trigger."
+        },
+        {
+          "id": "D5",
+          "case": "HOME: checks invocation 8 — the membership probe itself, which is an EXECUTED SEALED CHECK and not a test title. It needs no arm in the CREATE'd file and is given none; stated rather than left ambiguous (the chair's judgment 75(1) asked). ⛔ FIRST PAINT: +0 MODULES AS A DELTA, AND THE BYTES PRICED NEVER ASSERTED. The probe IMPORTS vite.config.js's own exported EAGER_FIRST_PAINT_MODULES, reads no dist and therefore can never skip: the set's size is N before and N after; src/store/authSlice.js is a member BEFORE and AFTER; src/config/tierFacts.js is a member in NEITHER, so its edit is free; and NO new module enters (this packet's only new file is a test). Anti-vacuity: the set is non-empty and contains src/main.jsx. ⛔ THE BYTE DELTA IS NOT ASSERTED HERE — it is priced in section 7 against tests/build/vendorPdfLazy.test.js's own CLOSURE_BUDGET_BYTES (1,048,000), and by judgment 74 this member's row carries the SUMMED price of the whole train, taken by the chair from ONE real build at the terminal. A rise past that ceiling is a STOP FOR THE OWNER, never a re-mint."
+        },
+        {
+          "id": "D6",
+          "case": "HOME: tests/store/settlementEditorGate.test.js, arm 8. THE PURCHASES LOCK IS UNTOUCHED (the owner's 2026-09-16 order: purchases stay LOCKED until launch). Measured at the tip: the lock's mechanism is src/lib/launchGate.js#purchasesOpen() (:31), consumed by src/components/primitives/LockedDestination.jsx:27 and worn as AvailableAtLaunchPill. ⛔ THIS PACKET NAMES NONE OF THEM, adds no purchase surface, no price, no CTA and no upgrade path, and the new gate grants nothing that can be bought — it is FALSE for every real account including premium. Arm 8 reads the two modified src sources and asserts neither names purchasesOpen, AvailableAtLaunchPill or LockedDestination; the pre-proof measured all three at ZERO hits in all three changed files at e80a6a3f4, and measured that src/store/authSlice.js does not import launchGate.js at all."
+        }
+      ],
+      "checks": [
+        [
+          "npx",
+          "vitest",
+          "run",
+          "--pool=threads",
+          "--maxWorkers=2",
+          "tests/config/tierFacts.contract.test.js",
+          "tests/config/entitlementLadder.enforcement.test.js"
+        ],
+        [
+          "npx",
+          "vitest",
+          "run",
+          "--pool=threads",
+          "--maxWorkers=2",
+          "tests/store/settlementEditorGate.test.js",
+          "tests/store/staffUnlockEntitlements.test.js",
+          "tests/store/isTierAllowedFailClosed.test.js",
+          "tests/store/previewPersona.test.js",
+          "tests/store/lifecycleRoundTrip.test.js"
+        ],
+        [
+          "npx",
+          "vitest",
+          "run",
+          "--pool=threads",
+          "--maxWorkers=2",
+          "tests/lint/premiumGateSingleSource.test.js"
+        ],
+        [
+          "npx",
+          "vitest",
+          "run",
+          "--pool=threads",
+          "--maxWorkers=2",
+          "tests/lint/negativeAssertionAnchor.walker.test.js",
+          "tests/lint/mutationCoverageManifest.test.js"
+        ],
+        [
+          "npx",
+          "vitest",
+          "run",
+          "--pool=threads",
+          "--maxWorkers=2",
+          "tests/components/mapChainsTierGate.test.jsx",
+          "tests/components/foundingWorldsForkRefusal.test.jsx",
+          "tests/domain/customContentTierGates.test.js"
+        ],
+        [
+          "npx",
+          "vitest",
+          "run",
+          "--pool=threads",
+          "--maxWorkers=2",
+          "tests/ui/anonPreGenLocked.test.jsx",
+          "tests/ui/homeHeroAnonGauge.test.jsx",
+          "tests/ui/libraryLivingSurface.test.jsx"
+        ],
+        [
+          "npx",
+          "vitest",
+          "run",
+          "--pool=threads",
+          "--maxWorkers=2",
+          "tests/copy/landingClaimsParity.test.js",
+          "tests/docs/docCounts.test.js"
+        ],
+        [
+          "npx",
+          "eslint",
+          "src/store/authSlice.js",
+          "src/config/tierFacts.js",
+          "tests/config/tierFacts.contract.test.js",
+          "tests/store/settlementEditorGate.test.js"
+        ],
+        [
+          "node",
+          "-e",
+          "const{relative}=require('node:path');const{pathToFileURL}=require('node:url');import(pathToFileURL('vite.config.js').href).then(m=>{const S=new Set([...m.EAGER_FIRST_PAINT_MODULES].map(a=>relative(process.cwd(),String(a))));const want='src/store/authSlice.js';const free='src/config/tierFacts.js';console.log('EAGER_FIRST_PAINT_MODULES:',S.size,'| anti-vacuity src/main.jsx present:',S.has('src/main.jsx'),'| authSlice.js already eager:',S.has(want),'| tierFacts.js eager:',S.has(free));if(!S.has(want)||S.has(free)||!S.has('src/main.jsx')||S.size<200)process.exit(1);})"
+        ],
+        [
+          "npm",
+          "run",
+          "typecheck:ratchet"
+        ],
+        [
+          "npm",
+          "run",
+          "typecheck:domain:strict"
+        ],
+        [
+          "node",
+          "scripts/implementation-packets.mjs",
+          "validate"
+        ]
+      ],
+      "_checksNote": "TWELVE invocations (version 1 had eleven). Interim rule 8: sealed checks name FILES, never the tests/lint directory, never the lighting walker, and END WITH THE VALIDATOR. HOW THE SET WAS COMPUTED at e80a6a3f4 (TOOL-26's governing-tests.mjs has not landed): the CHANGED SYMBOL grep gives `TIER_GATE` -> 14 files and `TIER_FACTS` -> 1; the CHANGED FILE grep gives `authSlice` -> 23 and `tierFacts` -> 13. The changed-symbol form is taken, and judgment 41 question 5 RULED it lawful for a near-hub file (authSlice, 23 test importers) on a purely ADDITIVE edit, so section 13 R2 records a ruling rather than a question. ⭐ VERSION 2 ADDS, by the chair's judgment 75(1): the CREATE'd file itself, to invocation 2 beside the store suites whose shape it copies; invocation 4, the TWO WALKERS THAT GOVERN A NEW FILE IN tests/store, named BY FILE — tests/lint/negativeAssertionAnchor.walker.test.js (it baselines tests/store files by bare-negative count) and tests/lint/mutationCoverageManifest.test.js (its TOTALITY and NO-STALE-ENTRIES arms are what prove the no-REGISTER-row call correct in both directions); and the CREATE'd file to the eslint invocation. ⛔ The lighting walker is NOT here and may never be: it reds by design under a train. ⛔ The dist-reading byte arm is NOT here (interim rule 2): it is a TEST row with its stated bound. The membership probe always executes: it imports the exported set and reads no dist.",
+      "_deferredRows": "THREE, none in section 7's table, none in this capsule, none in checks. (1) docs/content/wiring-census.json — interim rule 1: this member CREATEs NO .js under src/generators/** or src/domain/** (its one CREATE is a test file under tests/store/), so stamp.producerIndexFiles is +0; stamp.files, stamp.candidateLeaves and totals.* are all UNMOVED. Those two roots are the ones measured against. (2) tests/lint/.lighting-census-baseline.json — ⭐⭐ VERSION 2 RE-STATES THIS ROW, AND IT IS NO LONGER ZERO. The delta, in the register's own order, COUNTED from the CREATE row's eight authorized arms: files +1 · parked +0 · credited +1 · titles +8 · suiteTitles +1. The +8 and the +1 are the CREATE'd file's eight literal-titled `it`s under its one literal `describe`; the contract-test row contributes zero to all five. ⛔ credited +1 (rather than parked +1) is CONDITIONAL on the shape the CREATE row's note pins — one top-level literal `describe`, eight straight-line literal `it`s, no loop, no `.each`, no conditional registration, no nesting, and `it`/`test`/`describe` each bound exactly once in the module. If the build lane measures any other tuple, that is a STOP, not a refreeze. The row names the BASELINE JSON, never the walker; the refreeze is the chair's at the terminal, and this member never sets LIGHTING_CENSUS_REFREEZE. (3) scripts/mutation-coverage-manifest.json — ⛔ NOT OWED, AND A VOLUNTARY ROW WOULD BE UNLAWFUL. Measured by importing tests/lint/mutationCoverage.shared.mjs at the tip: tests/store is not one of the eight ENFORCER_DIRS, and `settlementEditorGate` matches none of NAME_PATTERN's sixteen tokens, so enumerateInvariants does not pick the file (716 picked at e80a6a3f4, 15 of them under tests/store, all by token). Adding a key anyway would red mutationCoverageManifest.test.js's arm 'no stale entries: every manifest invariant key is an enumerated, existing file'. uncoveredBaseline is 186 and equals the live uncovered count, so `uncovered` would be unlawful regardless. This keeps EM-D0b off the one path EM-A1 and EM-B1h both hold row keys on, and so keeps train EM-T9 path-disjoint."
     }
   ]
 }
