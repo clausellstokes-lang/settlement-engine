@@ -37,6 +37,7 @@ import { popToTier, TIER_ORDER } from '../../data/constants.js';
 import { resolveSettlementTerrain } from '../resolveTerrain.js';
 import { withActiveCondition } from '../activeConditions.js';
 import { stablePart } from './stablePart.js';
+import { assertWorldPulseFate } from './worldPulseFates.js';
 import { seasonForTick } from './worldState.js';
 import { collectRealizedEmigrationEvents, dispatchMigrations } from './migrationKernel.js';
 import { migrationActive } from '../spatial/migration.js';
@@ -241,6 +242,7 @@ function lastStampYear(s) {
  */
 export function ruinInstitution(inst, { reason, fate }) {
   if (typeof fate !== 'string' || fate === '') throw new TypeError('ruinInstitution: fate is required and must be a non-empty string. A pulse ruin record never defaults its fate.');
+  assertWorldPulseFate(fate, 'ruinInstitution');
   if (typeof reason !== 'string' || reason === '') throw new TypeError('ruinInstitution: reason is required and must be a non-empty string. A pulse ruin record never defaults its cause.');
   return {
     ...inst, status: 'ruined', _worldPulseInactive: true, _worldPulseEconomyClosed: true,

@@ -931,7 +931,7 @@
           },
           {
                     "path": "src/domain/worldPulse/calamityKernel.js",
-                    "line": 745,
+                    "line": 747,
                     "category": "floatInterpolation",
                     "snippet": "Math.round(exposure.factor * 10000)"
           },

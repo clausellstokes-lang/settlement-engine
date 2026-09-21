@@ -908,6 +908,17 @@ const ARGUED_UNLAYERED = Object.freeze({
     reason: 'W-OPS substrate — the ACCEPTANCE verdict of the ONE typed operation record: the vetting/willingness/risk seam order, the closed refusal vocabulary, and the register-rooted pricing a principal answers an offer with, spelled by every port that wills an operation (INTERIOR wills goals, INFORMATION and the corruption web will missions, GRAMMAR wills errands); it owns no subject, decides no port\'s state, holds no clock, rolls nothing and walks no WORLD roster, taking every world fact as an argument, so what it owns is the VERDICT SHAPE rather than any port\'s subject',
     reads: Object.freeze([]),
   }),
+  // EM-B1h: the pulse's fate words become a CLOSED, KINDED vocabulary. The leaf is the
+  // FINITE-SEMANTICS answer to an open one — eighteen words, each with a declared kind,
+  // derived from what the six pulse writers already stamp — and it owns no subject: the
+  // writers keep every decision, the leaf only holds the spelling and refuses a foreign
+  // word on their behalf. Like bandFamilies.js above, a LAYER_PATTERNS home would claim
+  // a family for a vocabulary that belongs to all of them at once.
+  'src/domain/worldPulse/worldPulseFates.js': Object.freeze({
+    kind: 'substrate',
+    reason: 'FP substrate — the pulse\'s CLOSED fate vocabulary: the one spelling of every word the world pulse may stamp on worldPulseFate, with the kind each writer\'s own record literal earns it, spoken by every layer that closes, raises or renames an institution; it imports nothing at all, which is what makes its empty reads structural rather than argued',
+    reads: Object.freeze([]),
+  }),
 });
 
 /** The CLOSED host set. A fifth infrastructure host is a chair conversation. */
@@ -1048,7 +1059,12 @@ const ARGUED_HOSTS = Object.freeze([
 // L5's rule table, extracted verbatim from the pre-program-baselined npcAgency.js; owns no
 // subject, one delegate consumer, zero cross-layer pairs proven at the coupling (the full
 // argument sits on its roster entry above). Deliberate, in this diff, per this anchor's law.
-const ARGUED_ROSTER_CEILING = 28;
+// 28 -> 29 at EM-B1h: worldPulseFates.js admitted as substrate — the pulse's CLOSED, kinded
+// fate vocabulary, a ZERO-IMPORT leaf, so its `reads: []` is structural rather than argued
+// and it mints no cross-layer pair in either direction (scanCrossLayerPairs iterates LAYERED
+// importers and skips unlayered deps, and its one consumer, calamityKernel.js, is itself
+// unlayered). Deliberate, in this diff, per this anchor's law.
+const ARGUED_ROSTER_CEILING = 29;
 
 /** The FP scope the unlayered census is TOTAL over. */
 const CENSUS_SCOPE_RE = /^src\/domain\/(?:worldPulse|spatial)\//;
