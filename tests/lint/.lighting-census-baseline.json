@@ -24,13 +24,13 @@
     "The derivation history — every prior row, its cause, and the census laws — stays in the walker",
     "beside the assertions, deliberately. Only the live tuple moved."
   ],
-  "measuredAtSha": "e53e2e1d987971fe323da283ad26ca78078cc54d",
+  "measuredAtSha": "429141e2d1c21cb5ee9dd5005ed1a77bbc9b3cd8",
   "measuredBy": "chair-fable-4a1823e2",
   "date": "2026-09-21",
-  "note": "the refreeze for PR #53 second push: CURE-Q adds one title and one suite title in tests/build/ciGateHardening.test.js (the three-list drift guard); CURE-P touches e2e only (outside the census); the applied-head bump and the CLAUDE.md pointer add no title",
+  "note": "the fourteenth refreeze: train EM-T8 (TOOL-22 +2 titles, TOOL-27 +1 title, EM-B3d +6 titles and +1 suite title) over e80a6a3f4",
   "files": 2665,
   "parked": 359,
   "credited": 2306,
-  "titles": 25552,
-  "suiteTitles": 6817
+  "titles": 25561,
+  "suiteTitles": 6818
 }
