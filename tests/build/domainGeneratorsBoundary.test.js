@@ -31,9 +31,17 @@
 
 import { describe, it, expect } from 'vitest';
 import { readdirSync, readFileSync, statSync } from 'node:fs';
-import { resolve, join, relative } from 'node:path';
+import { resolve, join, relative, dirname } from 'node:path';
+import { fileURLToPath } from 'node:url';
 
-const repoRoot = process.cwd();
+/**
+ * THE ROOT IS THIS MODULE'S OWN TREE, NEVER THE HARNESS'S WORKING DIRECTORY (judgment 111,
+ * 2026-09-21). It used to be read from the working directory at module load, which made this
+ * ratchet measure whichever tree the RUNNER happened to sit in rather than the one this file
+ * belongs to. Every path below hangs off it, so the read is the whole instrument. The last
+ * arm of the suite pins both the value and this line's spelling.
+ */
+const repoRoot = join(dirname(fileURLToPath(import.meta.url)), '../..');
 const domainDir = resolve(repoRoot, 'src/domain');
 
 /**
@@ -164,5 +172,32 @@ describe('architecture boundary — domain → generators ratchet', () => {
     // shrank); higher means an edge crept in.
     const liveCount = Object.values(edges).reduce((n, specs) => n + specs.length, 0);
     expect(liveCount).toBeLessThanOrEqual(6);
+  });
+
+  it('derives its repository root from this module URL, never the working directory', () => {
+    // WHY THIS ARM EXISTS (judgment 111, 2026-09-21). The root above was read from the
+    // harness's working directory at module load, so a harness that imported this file from
+    // ANOTHER directory walked THAT tree's src/domain and reported a serene zero over a lane
+    // worktree it had never opened. Two pre-proof lanes were told their trees were clean by a
+    // ratchet that had measured the main checkout instead. A guard that prints a false zero is
+    // worse than no guard, so the derivation is pinned rather than trusted.
+    const selfPath = fileURLToPath(import.meta.url);
+
+    // 1. THE VALUE — the root is the tree THIS FILE lives in, and this file sits exactly two
+    //    levels down in it. A foreign root reds here: the relative path would climb out.
+    expect(repoRoot).toBe(join(dirname(selfPath), '../..'));
+    expect(relative(repoRoot, selfPath).split('\\').join('/'))
+      .toBe('tests/build/domainGeneratorsBoundary.test.js');
+
+    // 2. THE DERIVATION ITSELF, pinned as text. The assertions above can be satisfied by
+    //    accident whenever the runner happens to sit in the repository root — which is
+    //    precisely the case that hid the defect for as long as it existed. This line cannot.
+    const rootLine = readFileSync(selfPath, 'utf-8')
+      .split('\n')
+      .find(line => line.startsWith('const repoRoot ='));
+    expect(rootLine).toBe("const repoRoot = join(dirname(fileURLToPath(import.meta.url)), '../..');");
+
+    // 3. AND EVERY PATH THIS RATCHET WALKS HANGS OFF THAT ROOT.
+    expect(domainDir).toBe(resolve(repoRoot, 'src/domain'));
   });
 });
