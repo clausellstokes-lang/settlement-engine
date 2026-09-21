@@ -34229,7 +34229,7 @@
           "path": "tests/domain/institutionDestroyedByKind.test.js"
         },
         {
-          "_note": "EM-B1h'S ARM, NARROWED - NEVER DELETED. EM-B1h's A6/T3 asserts that NO file under src/ imports WORLD_PULSE_FATE_KIND and names EM-B1i in the message a violation prints; EM-B1h section 11 makes such a reader its own STOP, 'that is EM-B1i's'. This packet is that reader, so the arm becomes a DECLARED READER ROSTER: the scan's hit list must be SET-EQUAL, BOTH WAYS, to ['src/domain/worldPulse/causeLifecycle.js']. Both failure directions stay live - an emptied hit list reds (the cure went missing) and a second importer reds (an unmeasured reader appeared). Add NO describe and NO it: the edit re-spells an existing arm's assertion and message, so the lighting census must not move on this file. Restate EM-B1h's own CANNOT-CATCH sentence about a stale kind, now that a reader exists.",
+          "_note": "EM-B1h'S ARM, NARROWED - NEVER DELETED. EM-B1h's A6/T4 asserts that NO file under src/ imports WORLD_PULSE_FATE_KIND and names EM-B1i in the message a violation prints; EM-B1h section 11 makes such a reader its own STOP, 'that is EM-B1i's'. This packet is that reader, so the arm becomes a DECLARED READER ROSTER: the scan's hit list must be SET-EQUAL, BOTH WAYS, to ['src/domain/worldPulse/causeLifecycle.js']. Both failure directions stay live - an emptied hit list reds (the cure went missing) and a second importer reds (an unmeasured reader appeared). Add NO describe and NO it: the edit re-spells an existing arm's assertion and message, so the lighting census must not move on this file. Restate EM-B1h's own CANNOT-CATCH sentence about a stale kind, now that a reader exists.",
           "action": "TEST",
           "path": "tests/lint/worldPulseFateTotality.walker.test.js"
         },
@@ -34320,7 +34320,7 @@
         },
         {
           "id": "A7",
-          "case": "THE KIND IS RE-DERIVED FROM THE RECORD, NOT TRUSTED (EM-B1h R11). Over a comment-only strip that KEEPS string contents, the three non-closure write-site record literals are re-read and asserted to carry no status: key, no _worldPulseInactive and no _worldPulseMorallyAbolished - so the standing/rise kinds this reader now branches on are still true of the writers. BOTH CONTROLS: the matcher fires on a planted _worldPulseInactive beside one of the three, and ignores a commented one."
+          "case": "THE KIND IS RE-DERIVED FROM THE RECORD, NOT TRUSTED (EM-B1h R11). Over a comment-only strip that KEEPS string contents, the three non-closure write-site record literals are re-read and asserted to carry no NON-ACTIVE status (an absent key or status: 'active' both pass: the two rise records are raised or founded ACTIVE and the standing record changes standing alone - version 4, judgment 101), no _worldPulseInactive and no _worldPulseMorallyAbolished - so the standing/rise kinds this reader now branches on are still true of the writers. BOTH CONTROLS: the matcher fires on a planted _worldPulseInactive beside one of the three, and ignores a commented one."
         }
       ],
       "checks": [
