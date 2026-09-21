@@ -462,7 +462,7 @@ Its mechanism-coverage baseline row, appended with the standard rationale idiom.
 estate-wide rows, and both belong to the minting wave rather than to whichever family happens to
 own the file.
 
-**A CREATE under ANY enforcer directory carries one obligation: its mutation-coverage row.**
+**A new `tests/lint/` file carries one obligation — and so does a CREATE under ANY enforcer directory: its mutation-coverage row.**
 `ENFORCER_DIRS` is exported by `tests/lint/mutationCoverage.shared.mjs`, and
 `tests/lint/mutationCoverageManifest.test.js` asserts that every enumerated file owns an
 `invariants` entry in `scripts/mutation-coverage-manifest.json`. So a wave that adds a file
