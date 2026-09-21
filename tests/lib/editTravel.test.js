@@ -84,6 +84,15 @@ function expectByteEqual(actual, expected) {
   expect(JSON.stringify(actual)).toBe(JSON.stringify(expected));
 }
 
+/** Freeze a value and everything it nests, children first, so a write into the live store
+ *  THROWS in this module's strict mode instead of being inherited by an expectation taken
+ *  after the call. The fixtures below are acyclic by construction. */
+function deepFreeze(value) {
+  if (!value || typeof value !== 'object') return value;
+  for (const inner of Object.values(value)) deepFreeze(inner);
+  return Object.freeze(value);
+}
+
 describe('EM-B3a — neither editor key reaches a public projection, in either mode', () => {
   test('A3 — the DEFAULT fail-closed projection drops both keys and still projects the allowlisted content', () => {
     // The top-level allowlist is the mechanism, so it is asserted against the LIVE
@@ -437,5 +446,40 @@ describe('EM-B3a — HZ-TRAVEL: a fork, a backup export and a realm snapshot car
     expect(JSON.stringify(importedOut[8]).includes('"decrees"')).toBe(false);
     expect(JSON.stringify(exportedOut[8]).includes('"dmLayer"')).toBe(false);
     expect(JSON.stringify(exportedOut[8]).includes('"decrees"')).toBe(false);
+  });
+
+  test('B6 — the strip is a READ of the live store: a deep-frozen edited save exports stripped and comes back unmoved', () => {
+    // B2 above captures its expectation AFTER the export call, so a strip that wrote into
+    // the live rows in place would be inherited by that expectation and pass. Here the
+    // expectation is captured BEFORE the call and the store is DEEP-FROZEN: a read
+    // projection is never a write base, and an export is a read.
+    const live = {
+      ...saveRow('save-edited', editedSettlement()),
+      versionHistory: [snapshot('v1', editedSettlement())],
+    };
+    deepFreeze(live);
+    const beforeSerialized = JSON.stringify(live);
+
+    const payload = buildAccountExport({
+      auth: { user: { email: 'keeper@example.com' }, displayName: 'Keeper', tier: 'free' },
+      savedSettlements: [live],
+      campaigns: [],
+    });
+
+    // Anchored: the export demonstrably ran, carried the save and its timeline, and DID
+    // strip both keys, so the identity below measures a non-mutation and not a no-op.
+    expect(payload.settlements).toHaveLength(1);
+    expect(payload.settlements[0].name).toBe('Ashford');
+    expect(payload.settlements[0].versionHistory).toHaveLength(1);
+    expect(JSON.stringify(payload).includes('"dmLayer"')).toBe(false);
+
+    // The live store is BYTE-UNMOVED, and both keys are still on both of its levels.
+    expect(JSON.stringify(live)).toBe(beforeSerialized);
+    expect([
+      Object.hasOwn(live.settlement, 'dmLayer'),
+      Object.hasOwn(live.settlement, 'decrees'),
+      Object.hasOwn(live.versionHistory[0].settlement, 'dmLayer'),
+      Object.hasOwn(live.versionHistory[0].settlement, 'decrees'),
+    ]).toEqual([true, true, true, true]);
   });
 });

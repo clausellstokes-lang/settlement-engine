@@ -344,4 +344,73 @@ describe('EM-D0d: the editor two pure input controls', () => {
     expect([populated.length > 0, empty.length > 0]).toEqual([true, true]);
     expect(populated === empty).toBe(false);
   });
+
+  it('A9: with NO roller injected the affordance is refused at BOTH guards, the gate by behaviour and the belt by spelling', () => {
+    const changes = [];
+    const { container } = render(
+      <PoolField
+        declaration={ROLE_DECL}
+        options={OPTIONS}
+        value=""
+        onChange={(next) => changes.push(next)}
+        seed="seed-a"
+        entryId="npc-1"
+      />,
+    );
+    const select = selectOf(container);
+    const button = buttonOf(container);
+
+    // Anchored: this mount is LIVE — the pool is populated, the select is enabled and it
+    // carries every member — so the button's refusal below measures the roller's absence
+    // and not a field that failed to render.
+    expect(select.disabled).toBe(false);
+    expect(optionValues(container)).toEqual(['', ...OPTIONS]);
+
+    // GUARD 1, THE GATE, by behaviour: the affordance is dead while `roll` is absent, and
+    // a click commits nothing and shows no refusal notice.
+    expect(button.disabled).toBe(true);
+    fireEvent.click(button);
+    expect(changes).toEqual([]);
+    expect(container.textContent.includes(t('edit.field.rollUnavailable'))).toBe(false);
+
+    // GUARD 2, THE BELT, by spelling — and the spelling is the ONLY honest instrument here,
+    // measured rather than assumed. React decides `onClick` dispatch from the element's own
+    // React PROPS, not from the DOM attribute, so re-enabling the node
+    // (`button.disabled = false`) does not reach the handler while the gate holds: the belt
+    // has no reachable habitat through this surface until a caller re-enables the control
+    // for itself, which is exactly the case the leaf's docblock keeps it for. Pinned the way
+    // the sheet's focus-trap call is pinned in editorHalo.test.jsx.
+    const poolSource = LEAF_SOURCES[LEAF_PATHS.indexOf('src/components/edit/PoolField.jsx')];
+    expect(poolSource.length > 0).toBe(true);
+    expect(poolSource).toContain("if (typeof roll !== 'function') return;");
+  });
+
+  it('A10: the select is CONTROLLED for all three empty spellings: a change the parent does not accept returns to empty', () => {
+    const rows = [];
+    for (const spelling of EMPTY_SPELLINGS) {
+      const changes = [];
+      const { container } = render(
+        <PoolField
+          declaration={ROLE_DECL}
+          options={OPTIONS}
+          value={spelling}
+          onChange={(next) => changes.push(next)}
+          seed="seed-a"
+          entryId="npc-1"
+          roll={rollOf}
+        />,
+      );
+      const select = selectOf(container);
+      const before = select.value;
+      fireEvent.change(select, { target: { value: 'Miller' } });
+      rows.push({ before, reported: changes, after: select.value });
+      cleanup();
+    }
+    // A3 above reads `select.value` alone, which is the empty member for an UNCONTROLLED
+    // select too. This reads the CONTROL: the parent kept its empty value, so the element
+    // must come back to it. The '' row is the liveness control — it is controlled under
+    // either spelling of the normalization — and the null and undefined rows are the pin.
+    const controlled = { before: '', reported: ['Miller'], after: '' };
+    expect(rows).toEqual([controlled, controlled, controlled]);
+  });
 });

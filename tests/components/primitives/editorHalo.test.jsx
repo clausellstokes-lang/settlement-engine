@@ -223,4 +223,19 @@ describe('the editor halo is an optional prop on two shared primitives', () => {
     expect(libraryLit).toContain(EDITOR_GROUND);
     expect(libraryLit === CAPTURE.sheetLibrary.opened).toBe(false);
   });
+
+  it('A7 the editor ground is the ratified value, spelled character for character rather than read from its own producer', () => {
+    // A3 and A4 assert the scrim background EQUALS EDITOR_GROUND, read from the same
+    // producer, so a re-mixed ground moves BOTH sides of those equalities and lands green.
+    // This is the literal, in the shape tests/design/houseBloom.test.js already uses for
+    // the bloom's own 34 %: design section 3 halo (2) ratified a near-opaque warm umber,
+    // darker than the two scrims it is laid beside, and that is a VALUE.
+    expect(EDITOR_GROUND).toBe('color-mix(in srgb, var(--oc-ink-deepest) 76%, transparent)');
+
+    // Anchored: the painted surface really carries that exact literal, so the equality
+    // above pins what a DM sees and not merely a module constant nothing reads.
+    const { container } = render(popupOf({ editorHalo: true }));
+    const scrim = container.querySelector('[data-testid="causality-popup-scrim"]');
+    expect(scrim.style.background).toBe('color-mix(in srgb, var(--oc-ink-deepest) 76%, transparent)');
+  });
 });
