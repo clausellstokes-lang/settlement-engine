@@ -92,6 +92,15 @@ export function houseBloom(tone) {
   return `radial-gradient(closest-side, color-mix(in srgb, ${tone} 34%, transparent), transparent)`;
 }
 
+/**
+ * THE EDITOR'S GROUND — the warm umber the forge's pop-up is laid over. Design §3 halo (2):
+ * "THE GROUND is warm umber and near-opaque, never pure black … darker than today's dialog
+ * scrims (0.58 on PortablePopup, 0.46 on BottomSheet), which is also what makes the editor
+ * known at a glance". It mixes the SAME ink token organic.css's `.oc-m-warmdim` mixes at 58%,
+ * through the house color-mix idiom — never a new hex, never a second recipe.
+ */
+export const EDITOR_GROUND = 'color-mix(in srgb, var(--oc-ink-deepest) 76%, transparent)';
+
 // GOLD_TXT / GOLD_SOFT / BORDER_STRONG are re-exported from their standalone
 // (tree-shakeable) token definitions — NOT the first-paint `legacy` object — so
 // the Realm/map chrome that consumes them keeps them in the lazy map chunk and
