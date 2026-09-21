@@ -1,6 +1,6 @@
 # Settlement editor / EM-D0a — THE SHARED GLOW TOKEN: one recipe home in the eager `src/components/theme.js`, the arrow reading it, and the arrow's pixels proved unmoved by a pin this packet may not touch
 
-- **Status:** `READY`
+- **Status:** `LANDED`
   ⚠ The status value above stands ALONE on its line because `parsePacketHeader` anchors the status
   row at end-of-line and takes `status` only when exactly one row matches. Every stamp, caveat and
   date goes on these continuation lines, never on the row.
@@ -11,6 +11,7 @@
   logic files against a cap of THREE; the partition puts each member at two.
   ⭐ **IT DEPENDS ON NOTHING AND CAN LAND TODAY.** It is the only member of the five that is
   independent of every waiting packet in the editor estate.
+- **Landed at:** `71324cd5687a5271354272a262ad100f99eae0a4` — the fifteenth landing — 4 files (+110/−2): the exported `houseBloom(tone)` recipe in the eager `src/components/theme.js`, `ArrowControl.jsx` reading it through a forwarding `ARROW_GLOW`, the arrow's glow string proved byte-identical, `tests/design/houseBloom.test.js` with its mutation-coverage row. TRAIN EM-T9: sealed and built on `em-t9-d0a-2026-09-21` (`ed8e2cec0`); sealed proofs green (window 15); first paint +0 modules and about +79 B minified, under the holder's bound
 - **Packet version:** 2.1
   ⚠ **WHAT VERSION 2.1 CHANGED (one sentence).** The pre-proof's four-member validation run quoted
   `duplicate change path across packets: tests/build/vendorPdfLazy.test.js (EM-D0a, EM-D0b)`, which

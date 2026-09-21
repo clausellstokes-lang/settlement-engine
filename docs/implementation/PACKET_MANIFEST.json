@@ -33398,9 +33398,10 @@
     },
     {
       "id": "EM-A1",
-      "status": "READY",
+      "status": "LANDED",
       "packetPath": "docs/implementation/packets/settlement-editor/EM-A1.md",
       "verifiedBase": "7f0621fdb72f769a285502ff5481247c1f07b04b",
+      "landedAt": "e7bdb944b88bfedaf0aa196b14e0fa633b6590eb",
       "changeManifest": [
         {
           "action": "CREATE",
@@ -33599,9 +33600,10 @@
     },
     {
       "id": "EM-B1h",
-      "status": "READY",
+      "status": "LANDED",
       "packetPath": "docs/implementation/packets/settlement-editor/EM-B1h.md",
       "verifiedBase": "7f0621fdb72f769a285502ff5481247c1f07b04b",
+      "landedAt": "45f57c6cf635ea513f45a529f5c45781e0565ced",
       "changeManifest": [
         {
           "_note": "THE CLOSED, KINDED FATE VOCABULARY, IN ITS OWN ZERO-IMPORT LEAF (the chair's Q2 ruling, ODQ §934.47 addendum 28). ⭐ THE SHAPE IS THE KIND MAP AS THE SINGLE AUTHORED SOURCE, THE FLAT LIST DERIVED FROM IT — measured against the chair's alternative of two literals side by side: 910 B minified versus 1,248 B (the eighteen strings spelled ONCE), and 'a member with no kind' becomes UNREPRESENTABLE rather than merely detected, which leaves the walker three LIVE arms (every kind ∈ WORLD_PULSE_FATE_KINDS; the keys in codepoint order; the populations exactly 15/1/2) instead of one set-equality between two literals three lines apart that can only catch a typo made in the same edit. Exports WORLD_PULSE_FATE_KINDS, WORLD_PULSE_FATE_KIND, WORLD_PULSE_FATES (= Object.freeze(Object.keys(KIND))), isWorldPulseFate and assertWorldPulseFate. ⭐⭐ THREE KINDS, NOT TWO, AND THE THIRD IS NOT WHERE IT WAS EXPECTED — each write site was classified by the SIBLING KEYS OF ITS OWN RECORD LITERAL, not by the fate's English: `closure` (the writer sets _worldPulseInactive:true AND a non-active status) holds FIFTEEN; `rise` holds TWO (upswingKernel :516 renames in place with no status change, :763 pushes a NEW status:'active' record); `standing` holds ONE — `demoted_by_disaster`, whose writer (calamityKernel :304-311) changes NO status and sets NO flag and whose own comment reads 'rename in place, keeping the slot standing'. ⛔ The six names flagged for a second look (downsized, privatized, captured_by_local_powers, reduced_to_watch_post, hollowed_out, survives_as_remnant) are ALL plain `closure`: their single writer deactivateForDemotion (tierOutcomeApply :158) sets _worldPulseInactive:true and status remnant/removed for all seven, however gentle the word. ⛔ null IS THE CLEAR SENTINEL AND NOT A MEMBER (the chair's Q3) and the gloss must say so in TWO sentences: four sites write worldPulseFate: null to CLEAR a fate when an institution stands again (institutionLifecycle :959 and :1103, magicRegimeLifecycle :374, tierOutcomeApply :265), each BESIDE status:'active' with the flags set FALSE, and causeLifecycle.institutionDestroyed reads exactly that absence through truthiness — adding null would make 'no fate' a fate. ⛔ ruined_by_decree is DECLARED AND UNPRODUCIBLE until EM-B1a. ⛔⛔ NOBODY READS THE KIND IN THIS PACKET — it is frozen DATA and acceptance A6 asserts by source scan that no src/ file imports WORLD_PULSE_FATE_KIND, which is what keeps the packet golden-neutral; EM-B1i is the packet that makes causeLifecycle.institutionDestroyed test the `closure` kind, and it owns the golden/preset-witness measurement and the owner's signed door. ⛔ ZERO IMPORTS — which is also what makes the ARGUED_UNLAYERED row's `reads: Object.freeze([])` exact. ⛔ THE FILE MUST CONTAIN NO `status:` TOKEN IN CODE AND NO `status: 'ruined'` ANYWHERE: the LANDED tests/domain/ruinInstitution.test.js A7 asserts the comment-only-stripped hit list over every non-test src/ file is EXACTLY ['src/domain/worldPulse/calamityKernel.js'], and this leaf is inside that scan — acceptance A7 of THIS packet asserts it in both directions so a later editor of the leaf is told why. Priced 910 B minified (esbuild, an UPPER BOUND — rollup scope-hoists and mangles the export names inside the worker chunk), landing only in src/workers/advanceInterval.worker.js, which has NO ceiling today (TOOL-3's declared 4 KB per-train headroom; R2).",
@@ -33859,9 +33861,10 @@
     },
     {
       "id": "EM-D0a",
-      "status": "READY",
+      "status": "LANDED",
       "packetPath": "docs/implementation/packets/settlement-editor/EM-D0a.md",
       "verifiedBase": "7f0621fdb72f769a285502ff5481247c1f07b04b",
+      "landedAt": "71324cd5687a5271354272a262ad100f99eae0a4",
       "changeManifest": [
         {
           "action": "MODIFY",
@@ -33981,9 +33984,10 @@
     },
     {
       "id": "EM-D0b",
-      "status": "READY",
+      "status": "LANDED",
       "packetPath": "docs/implementation/packets/settlement-editor/EM-D0b.md",
       "verifiedBase": "7f0621fdb72f769a285502ff5481247c1f07b04b",
+      "landedAt": "58b3090a49e1af6d4d4379943f031d1c4f9c0038",
       "changeManifest": [
         {
           "_note": "THE TIER FIELD AND THE PREDICATE. (1) TIER_GATE gains `settlementEditor` on all three rows — anon:false, free:false, premium:true — beside `customContent` (authSlice.js:83-85). (2) ONE new predicate `canEditSettlement()` beside canUseCustomContent (:840). ⛔⛔ IT INVERTS THE HOUSE IDIOM AND THAT IS THE WHOLE POINT. Every shipped predicate opens for staff FIRST — `if (staffUnlocksPaidFeatures(get().auth.role)) return true;` — and then reads the gate. This one CLOSES for everyone who is not staff: `const { tier, role } = get().auth; return TIER_GATE[tier]?.settlementEditor === true && isStaffRole(role);`. BOTH CONJUNCTS ARE LOAD-BEARING: resolveTier (:118-120) writes staff in as tier 'premium', so the tier gate ALONE would open the door to every paying Cartographer on the day it lands, which is the paid-surface decision the delegation does not reach (design §20.4: '⛔ VISIBILITY IS THE OWNER'S'). ⛔ THE SECOND CONJUNCT IS `isStaffRole`, NEVER `staffUnlocksPaidFeatures`: the second is governed by the STAFF_UNLOCK_ALL_PAID kill switch (staffEntitlements.js:132-134), so revoking the unlock would take the editor away from staff too — and the DEV-ONLY PREVIEW PERSONA supplies a role that `isStaffRole` is the accepting predicate for (previewPersonaRole returns `isStaffRole(asked) ? asked : null`, authSlice.js:159-168). ⭐ THE SECOND CONJUNCT IS THE ONE LINE THE OWNER DELETES WHEN HE OPENS THE DOOR, and the packet says so in those words beside it. ⛔ THIS FILE IS EAGER (a member of EAGER_FIRST_PAINT_MODULES at the base): the edit is data plus one short predicate, it imports nothing new, and its byte price is PRICED in section 7 and never asserted. ⭐ VERSION 2: the predicate's declaration line `export const createAuthSlice = (set, get) => ({` (:208) is now a requiredSymbol, because the CREATE'd test file calls it.",

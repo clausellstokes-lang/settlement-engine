@@ -1,6 +1,6 @@
 # Settlement editor / EM-D0b — THE TIER GATE AND THE DARK RULE: `TIER_GATE.premium.settlementEditor`, its tier-facts parity pin, and the one conjunct the owner deletes when he opens the door
 
-- **Status:** `READY`
+- **Status:** `LANDED`
   ⚠ The status value above stands ALONE on its line because `parsePacketHeader` anchors the status
   row at end-of-line and takes `status` only when exactly one row matches. Every stamp, caveat and
   date goes on these continuation lines, never on the row.
@@ -18,6 +18,7 @@
   ⭐ **TRAIN EM-T9's BYTE-ARM HOLDER** (judgment 74): within one train the first-paint budget's
   `TEST` row is carried by exactly ONE member, and it is this one. §7 and §10 carry the train's
   summed arithmetic.
+- **Landed at:** `58b3090a49e1af6d4d4379943f031d1c4f9c0038` — the fourteenth landing — 4 files (+310/−4): `TIER_GATE.premium.settlementEditor`, its tier-facts parity pin and the DARK predicate (the tier AND a staff role: the one conjunct the owner deletes when he opens the door; no ladder row; nothing a user can see or do changed), with an eight-arm gate battery. TRAIN EM-T9, the first four-member parallel train: sealed and built on its own lane branch `em-t9-d0b-2026-09-21` (`087340223`); its sealed proofs ran green in the chair's queue (window 15); the train's BYTE-ARM HOLDER: the summed first-paint price is proven by the terminal's one real build
 - **Packet version:** 2
   **What version 2 changed and why:** a pre-proof at `e80a6a3f4` found that version 1 sealed six
   acceptance cases while authorizing no file to write five of them in — `canEditSettlement` and

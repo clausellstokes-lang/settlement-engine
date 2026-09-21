@@ -1,8 +1,9 @@
 # Settlement editor / EM-B1h — `worldPulseFate` becomes a CLOSED vocabulary with a declared KIND per member, the one guarded writer refuses a foreign word, and a totality walker holds the six kernels to it
 
-- **Status:** `READY`
+- **Status:** `LANDED`
   ⚠ The status value above stands ALONE on its line because `parsePacketHeader`
   (`scripts/implementation-packets.mjs`) anchors the status row at end-of-line (J-TEWF1B-1).
+- **Landed at:** `45f57c6cf635ea513f45a529f5c45781e0565ced` — the seventeenth landing — 6 files: `src/domain/worldPulse/worldPulseFates.js` (the closed, kinded fate vocabulary), the one guarded writer in `src/domain/worldPulse/calamityKernel.js`, the totality walker over the six kernels, its own prose-numerics re-address (745 → 747), its coupling-inclusion row and a mutation-coverage row. TRAIN EM-T9: sealed and built on `em-t9-b1h-2026-09-21` (`aad3499af`), surviving a usage-limit cut mid-build with its worktree intact; six mutants each convicted by its named arm; sealed proofs green (window 16); the wiring census moved by its declared +1
 - **Packet version:** 6
   - ⭐ **What version 6 changed, and why (the EM-T9 PRE-PROOF, 2026-09-21, read tip
     `e80a6a3f443e2f6a36e28fbebb72e98e46869fac`):** the J-T1 window over all fifteen

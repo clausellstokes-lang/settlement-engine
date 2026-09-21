@@ -4,7 +4,7 @@
 
 > **Interim compile rules:** `COMPILE-RULES.interim.md` (the chair, 2026-09-20) — the fifth amendment's eleven rules, obeyed before they land. Where this packet and `EM-PREAMBLE.md` (SHA-256 `c9f33c8d2940372bde8a6d931e3d389b79516a90ed45405cbbbf3e698cc46675`, MEASURED at this packet's read tip with `shasum -a 256`) disagree, the interim rules govern and this row is the record of it.
 
-- **Status:** `READY`
+- **Status:** `LANDED`
   ⚠ The status value stands ALONE on its line because `parsePacketHeader`
   (`scripts/implementation-packets.mjs`, cited BY SYMBOL — a line number moves with the next
   edit) anchors the status row at END-OF-LINE and takes `status` only when exactly one row
@@ -12,6 +12,7 @@
   ⭐ **§11 BLOCK-0 IS CLOSED** (V-2, V-10, V-11) and **BLOCK-6 IS CLOSED** by the chair's
   ruling 3 (W-6: EM-A3's `free` denominator is exactly TWO). **CHAIR-1 and CHAIR-2 are
   DECIDED** — the world-fact card and `FieldKind`'s `'share'` are built here.
+- **Landed at:** `e7bdb944b88bfedaf0aa196b14e0fa633b6590eb` — the sixteenth landing — 5 files (+846): `src/domain/edit/types.js` and `src/domain/edit/fieldDeclarations.js` (the declaration set for the five card types, `declarationsFor`, `isEditableCard`), their unit battery, the declaration walker and a mutation-coverage row. TRAIN EM-T9: sealed and built on `em-t9-a1-2026-09-21` (`a37b618e2`); its FIRST queue run was red on one real finding (two input limits spelled as top-level numeric constants met the tuning inventory's new-files-at-zero rule; re-spelled as members of one frozen object with no packet change: judgment 87, interim rule 17) and its second run was green (window 16); the wiring census moved by its declared +2
 - **Packet version:** 5.2
   - ⭐ **What version 5.2 changed, and why (ESTATE-REPAIR-6, 2026-09-21, read tip
     `bdbf7c89c2569679bcccdb188d5d831ccfaa0e6d`; judgments 33 and 54): the four sentences version
