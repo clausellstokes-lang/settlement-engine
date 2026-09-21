@@ -14,6 +14,7 @@ import { afterEach, beforeEach, describe, expect, it } from 'vitest';
 
 import {
   PACKET_AUTHORITY_NOTICE,
+  ROW_KEYED_REGISTERS,
   SEAL_ENVELOPE_SCHEMA_VERSION,
   buildCodingCapsule,
   canonicalSerialize,
@@ -379,6 +380,75 @@ describe('IA-1 implementation packet manifest and capsule', () => {
     expect(errorText(result)).toContain('status disagrees with packet Markdown');
     expect(errorText(result)).toContain('verifiedBase disagrees with packet Markdown');
     expect(errorText(result)).toContain('status disagrees with index');
+  });
+
+  // ── THE ROW-KEYED REGISTER EXEMPTION (TOOL-27; chair ruling PACKET-PARALLEL 4) ────────
+  // The reservation above is a whole-FILE claim, which is right for code and wrong for a
+  // register keyed by ROW. This arm holds all four fences at once, and the fourth is the
+  // negative control that keeps the other three honest: every path OUTSIDE the frozen
+  // roster must still produce the byte-for-byte sentence pinned at the head of this file.
+  //
+  // MEASURED at the cure, on the real waiting estate rather than on these fixtures: EM-A1
+  // and EM-B1h refused together with `duplicate change path across packets:
+  // scripts/mutation-coverage-manifest.json (EM-A1, EM-B1h)`, and pass together once each
+  // declares the one `invariants[…]` row its own enforcer-directory CREATE earns.
+  it('reserves a ROW-KEYED REGISTER by its row key, and refuses a row that declares none', () => {
+    const REGISTER = 'scripts/mutation-coverage-manifest.json';
+    const KEY_A = "invariants['tests/lint/alpha.walker.test.js']";
+    const KEY_B = "invariants['tests/lint/beta.walker.test.js']";
+    // The roster is DRIVEN from the module, never re-spelled, so a future member added
+    // there is exercised here instead of silently escaping this arm.
+    expect(ROW_KEYED_REGISTERS).toContain(REGISTER);
+    // ⛔ AND THE FREEZE IS A REAL FREEZE. `Object.freeze(new Set(…))` leaves `.add()`
+    // working, because a Set's members are not own properties; a frozen ARRAY is the only
+    // spelling of this roster that a later edit cannot widen at runtime.
+    // ⚠ The ARRAY arm is not decoration: `Object.isFrozen(undefined)` is `true` and
+    // `undefined.push()` throws TypeError, so both assertions below pass VACUOUSLY against a
+    // module that exports no roster at all. This is what makes them mean something.
+    expect(Array.isArray(ROW_KEYED_REGISTERS)).toBe(true);
+    expect(Object.isFrozen(ROW_KEYED_REGISTERS)).toBe(true);
+    expect(() => ROW_KEYED_REGISTERS.push('scripts/invented.json')).toThrow(TypeError);
+
+    // A REGISTER row is not a CREATE, so the register must exist to be named at all.
+    write(root, REGISTER, '{\n  "invariants": {}\n}\n');
+
+    // Both fixture packets are NON-TERMINAL — P-1 READY, P-2 BLOCKED — so both reserve.
+    /** @param {string|null} first @param {string|null} second */
+    const bothNaming = (first, second) => {
+      const next = clone(manifest);
+      const row = (key) => (key === null
+        ? { action: 'REGISTER', path: REGISTER }
+        : { action: 'REGISTER', path: REGISTER, rowKey: key });
+      next.packets[0].changeManifest = [row(first)];
+      next.packets[1].changeManifest = [row(second)];
+      return validatePacketManifest(next, { rootDir: root });
+    };
+
+    // (1) TWO packets, ONE register, DIFFERENT rows — the whole point of the exemption.
+    expect(bothNaming(KEY_A, KEY_B)).toEqual({ ok: true, errors: [] });
+
+    // (2) THE SAME ROW claimed twice is still a genuine collision, and the refusal names
+    //     the ROW, because the path alone no longer identifies what is contended.
+    expect(errorText(bothNaming(KEY_A, KEY_A))).toContain(
+      `duplicate register row key across packets: ${REGISTER} :: ${KEY_A} (P-1, P-2)`,
+    );
+
+    // (3) THE EXEMPTION IS NEVER A BLANK CHEQUE. A register row with no key — or a blank
+    //     one — reserves nothing, so it is refused rather than waved through.
+    for (const missing of [null, '   ']) {
+      expect(errorText(bothNaming(missing, KEY_B))).toContain(
+        `P-1.changeManifest[0].rowKey must name the ONE row this packet adds to the`
+        + ` row-keyed register ${REGISTER}`,
+      );
+    }
+
+    // (4) ⛔ THE NEGATIVE CONTROL: a path outside the roster keeps the exact sentence it
+    //     has always had. Without this arm the exemption could widen to every path and
+    //     three of the four assertions above would still pass.
+    const ordinary = clone(manifest);
+    ordinary.packets[1].changeManifest = [{ action: 'MODIFY', path: 'src/alpha.js' }];
+    expect(errorText(validatePacketManifest(ordinary, { rootDir: root })))
+      .toContain('duplicate change path across packets: src/alpha.js (P-1, P-2)');
   });
 
   it('requires a non-blank verified branch in every READY packet header', () => {

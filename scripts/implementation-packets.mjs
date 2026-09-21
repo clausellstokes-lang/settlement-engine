@@ -42,6 +42,33 @@ export const PACKET_AUTHORITY_NOTICE = 'Only this READY implementation packet de
 const STATUS_SET = new Set(PACKET_STATUSES);
 const ACTION_SET = new Set(PACKET_ACTIONS);
 const TERMINAL_PACKET_STATUSES = new Set(['LANDED', 'SUPERSEDED']);
+
+// ── THE ROW-KEYED REGISTER EXEMPTION (chair ruling, PACKET-PARALLEL ruling 4; TOOL-27) ──
+// The cross-packet reservation below treats a change PATH as a whole-file claim, which is
+// right for code and wrong for a REGISTER KEYED BY ROW. `mutation-coverage-manifest.json`
+// is keyed by test-file path: a packet that creates one enforcer-directory test file adds
+// exactly ONE row, beside its own test, and two such packets contend for nothing. MEASURED
+// 2026-09-20: that one path is 10 of the 22 colliding pairs in the waiting estate, and it
+// refused EM-A1 and EM-B1h together — `duplicate change path across packets:
+// scripts/mutation-coverage-manifest.json (EM-A1, EM-B1h)` — with no other error in the run.
+//
+// ⛔ THE EXEMPTION IS NEVER A BLANK CHEQUE, and it relaxes the RESERVATION only. Addendum
+// 70's reason is untouched: no row for a test file that does not yet exist is written by
+// anyone but the member that creates the file, so each member still lands its own row in
+// its own commit. What changes is that the reservation is taken BY ROW KEY rather than by
+// path, and both fences are asserted — the SAME row key claimed twice still refuses, and a
+// register row that declares NO row key refuses rather than reserving silently.
+//
+// ⚠ A FROZEN ARRAY, NOT A FROZEN SET, ON AN EXECUTED READING: `Object.freeze(new Set(…))`
+// does NOT freeze a Set — its members are not own properties, so `.add()` still succeeds
+// (measured: size 1 -> 2, no throw), while `Object.freeze([…]).push()` throws TypeError.
+// The exported roster is therefore the same shape `PACKET_STATUSES` and `PACKET_ACTIONS`
+// three lines above already use: a frozen array, with a private Set derived for lookup.
+export const ROW_KEYED_REGISTERS = Object.freeze([
+  'scripts/mutation-coverage-manifest.json',
+]);
+const ROW_KEYED_REGISTER_SET = new Set(ROW_KEYED_REGISTERS);
+
 const DEFAULT_ROOT = resolve(dirname(fileURLToPath(import.meta.url)), '..');
 const DEFAULT_MANIFEST_PATH = 'docs/implementation/PACKET_MANIFEST.json';
 /**
@@ -817,13 +844,28 @@ export function validatePacketManifest(manifest, options = {}) {
       if (localChangePaths.has(row.path)) addError(errors, `${idLabel} contains duplicate change path: ${row.path}`);
       localChangePaths.add(row.path);
       if (reservesChangePaths) {
-        const priorOwner = changePathOwners.get(row.path);
-        if (priorOwner && priorOwner !== changeOwnerKey) {
+        // TOOL-27: a ROW-KEYED REGISTER reserves by ROW, everything else by PATH. See THE
+        // ROW-KEYED REGISTER EXEMPTION above. Every non-register path keeps the sentence it
+        // has always had, byte for byte.
+        const rowKeyed = ROW_KEYED_REGISTER_SET.has(row.path);
+        const rowKey = rowKeyed && typeof row.rowKey === 'string' ? row.rowKey.trim() : '';
+        if (rowKeyed && !rowKey) {
           addError(
             errors,
-            `duplicate change path across packets: ${row.path} (${priorOwner.replace(/^\d+:/, '')}, ${idLabel})`,
+            `${at}.rowKey must name the ONE row this packet adds to the row-keyed register`
+            + ` ${row.path}: several non-terminal packets may each hold this path, so a row`
+            + ' that declares no key reserves nothing and cannot be told apart from a sibling.',
           );
-        } else changePathOwners.set(row.path, changeOwnerKey);
+        } else {
+          const reservation = rowKeyed ? `${row.path}\0${rowKey}` : row.path;
+          const priorOwner = changePathOwners.get(reservation);
+          if (priorOwner && priorOwner !== changeOwnerKey) {
+            const held = `${priorOwner.replace(/^\d+:/, '')}, ${idLabel}`;
+            addError(errors, rowKeyed
+              ? `duplicate register row key across packets: ${row.path} :: ${rowKey} (${held})`
+              : `duplicate change path across packets: ${row.path} (${held})`);
+          } else changePathOwners.set(reservation, changeOwnerKey);
+        }
       }
       // §731.3: an authorized retirement answers the two EXISTENCE arms below. Everything
       // above — action vocabulary, path shape, duplicate keying, cross-packet reservation —
