@@ -17,7 +17,7 @@ import { fileURLToPath } from 'node:url';
 import {
   scrubImportedConfig,
   scrubImportedTreasury,
-  scrubGalleryImportLivingContent,
+  scrubGalleryImportLivingContent, scrubImportedEditState,
 } from '../../src/lib/importScrub.js';
 import { LIVING_CONTENT_LAW_CONFIG_KEY } from '../../src/domain/content/livingContentLawVersion.js';
 import { expectAbsentWithAnchor } from '../helpers/anchoredNegatives.js';
@@ -243,5 +243,155 @@ describe('DEF-1 — scrubGalleryImportLivingContent', () => {
     });
     expect(res.ok).toBe(true);
     expect(res.entry.settlement.config[LIVING_CONTENT_LAW_CONFIG_KEY]).toBe(2);
+  });
+});
+
+/**
+ * EM-B3d — THE IMPORT EDIT-STATE STRIP: an import carries no editor state.
+ *
+ * `dmLayer` records which fields on a record are the DM's own and `decrees` is the
+ * ordered registry of what they have staged. Both are the AUTHOR'S working session,
+ * not a property of the town, and design §11 says edits do not travel. EM-B3a veiled
+ * them on every way OUT; this is the same claim on the way IN, at the one boundary a
+ * record can arrive from outside the owner's own account.
+ *
+ * ⛔ BOTH VALUES ARE OPAQUE HERE (EM-B3a's ruling B3a-2, carried by EM-B3d §6). Every
+ * assertion below is name-based or whole-value, so not one names a field inside either
+ * value, and nothing here imports from `src/domain/edit/**`.
+ */
+describe('EM-B3d — scrubImportedEditState: an import carries no editor state', () => {
+  /** An OPAQUE dmLayer: one nested object, one order-observable array. */
+  const dmLayerFixture = () => ({
+    'root:alpha': { kept: 'one', inner: { ordered: ['gamma', 'alpha', 'beta'] } },
+    'root:omega': [{ ref: 'first' }, { ref: 'second' }],
+  });
+
+  /** An OPAQUE decree registry: an ORDERED array of two distinguishable entries. */
+  const decreesFixture = () => ([
+    { ref: 'entry-one', payload: { rank: 1, tags: ['aa', 'bb'] } },
+    { ref: 'entry-two', payload: { rank: 2, tags: ['bb', 'aa'] } },
+  ]);
+
+  /** An imported settlement: real siblings, with the two editor keys planted opaque. */
+  const editedImport = () => ({
+    name: 'Ashford',
+    tier: 'town',
+    economicState: { foodSecurity: { storageMonths: 2 } },
+    institutions: [{ id: 'inst.market', name: 'Market' }],
+    dmLayer: dmLayerFixture(),
+    decrees: decreesFixture(),
+  });
+
+  it('A1 — drops BOTH editor keys at the settlement level and keeps every sibling, in order', () => {
+    const src = editedImport();
+    // Liveness first: the fixture really carries what the strip is asked to remove.
+    expect(Object.keys(src)).toContain('dmLayer');
+    expect(Object.keys(src)).toContain('decrees');
+
+    const out = /** @type {any} */ (scrubImportedEditState(src));
+    expectAbsentWithAnchor(Object.keys(out), 'dmLayer', 'name', 'the import edit-state strip');
+    expectAbsentWithAnchor(Object.keys(out), 'decrees', 'institutions', 'the import edit-state strip');
+
+    // Every surviving key is deep-equal AND holds its insertion order: a strip, not a rebuild.
+    const expected = editedImport();
+    delete expected.dmLayer;
+    delete expected.decrees;
+    expect(out).toEqual(expected);
+    expect(Object.keys(out)).toEqual(Object.keys(expected));
+
+    // …and the SOURCE object is not mutated — the importers spread it elsewhere.
+    expect(Object.keys(src)).toContain('dmLayer');
+    expect(Object.keys(src)).toContain('decrees');
+  });
+
+  it('A2 — is REFERENCE-IDENTICAL when there is nothing to strip', () => {
+    // Nothing in src/ writes either key at this commit (recordRegister.js's
+    // NOT_YET_WRITTEN_KEYS), so this branch is 100% of real imports today. A
+    // shallow-copy-always strip would silently move the bytes of every one of them.
+    const dark = { name: 'Dark', tier: 'village', economicState: { foodSecurity: { storageMonths: 2 } } };
+    expect(scrubImportedEditState(dark)).toBe(dark);
+    const bare = { name: 'NoEconomy' };
+    expect(scrubImportedEditState(bare)).toBe(bare);
+    // The nullish and array inputs come back by reference, and nothing throws on them.
+    expect(scrubImportedEditState(null)).toBe(null);
+    expect(scrubImportedEditState(undefined)).toBe(undefined);
+    const arr = /** @type {any} */ ([]);
+    expect(scrubImportedEditState(arr)).toBe(arr);
+  });
+
+  it('A3 — an EMPTY, a NULL and a MALFORMED value are all PRESENT keys, and all are dropped', () => {
+    // The contrast, stated where a reader meets it: on the SAVE path EM-B3a preserves
+    // `[]` as `[]`, because there the container is the owner's OWN fact. On an IMPORT it
+    // is another keeper's editing session, and absence is the only state an imported
+    // world may be in. The strip never inspects the value, so none of these can throw.
+    const cases = [
+      { label: 'empty containers', src: { name: 'Empty', tier: 'town', dmLayer: {}, decrees: [] } },
+      { label: 'null values', src: { name: 'Nulls', tier: 'town', dmLayer: null, decrees: null } },
+      { label: 'malformed legacy values', src: { name: 'Junk', tier: 'town', dmLayer: 'nonsense', decrees: 7 } },
+    ];
+    // Collected, then asserted ONCE: a loop of expects reports a lower bound, never a count.
+    const before = cases.map(({ label, src }) => `${label}: ${Object.keys(src).join(',')}`);
+    const after = cases.map(({ label, src }) => (
+      `${label}: ${Object.keys(/** @type {any} */ (scrubImportedEditState(src))).join(',')}`
+    ));
+    // The liveness half: every fixture really carries both keys before the strip runs.
+    expect(before).toEqual([
+      'empty containers: name,tier,dmLayer,decrees',
+      'null values: name,tier,dmLayer,decrees',
+      'malformed legacy values: name,tier,dmLayer,decrees',
+    ]);
+    expect(after).toEqual([
+      'empty containers: name,tier',
+      'null values: name,tier',
+      'malformed legacy values: name,tier',
+    ]);
+  });
+
+  it('A4 — ALL THREE import paths call the edit-state strip, the one-path-only shape store-4 was', () => {
+    // The same instrument, and the same reason, as the coin strip's arm above: a
+    // behavioural test reaches the account path, but the two gallery paths are store
+    // modules behind a network fetch, so their wiring is pinned by ADDRESS. Named
+    // individually because a second door silently covering a deleted first is this
+    // program's most-repeated verification failure.
+    const read = (rel) => readFileSync(join(ROOT, rel), 'utf8');
+    for (const rel of [
+      'src/lib/accountImport.js',
+      'src/store/galleryImportSettlement.js',
+      'src/store/galleryImportMap.js',
+    ]) {
+      const src = read(rel);
+      expect(src, `${rel} no longer imports the edit-state strip`)
+        .toMatch(/import\s*\{[^}]*\bscrubImportedEditState\b[^}]*\}\s*from\s*['"][^'"]*importScrub\.js['"]/);
+      expect(src.includes('scrubImportedEditState('), `${rel} imports the edit-state strip but never calls it`).toBe(true);
+    }
+  });
+
+  it('A5 — the account door end to end: the edit-state and coin strips COMPOSE, neither shadows', async () => {
+    await ensureNormalizeLoaded();
+    const res = prepareSettlementEntry({
+      settlement: {
+        name: 'Foreign Estate', tier: 'town',
+        institutions: [{ id: 'inst.market', name: 'Market' }],
+        dmLayer: dmLayerFixture(),
+        decrees: decreesFixture(),
+        economicState: {
+          foodSecurity: { storageMonths: 2 },
+          treasury: { coin: 4200, openedTick: 3, lastTick: 40, coinFlows: { taxed: 5, upkeep: 0, transferredIn: 0, transferredOut: 0, shortfall: 0 } },
+        },
+      },
+    });
+    expect(res.ok).toBe(true);
+    const out = res.entry.settlement;
+    // The world's own content survives the door, so an emptied entry cannot pass for a
+    // stripped one — these are the anchors the two exclusions below are measured against.
+    expect(res.entry.name).toBe('Foreign Estate');
+    expect(out.institutions).toEqual([{ id: 'inst.market', name: 'Market' }]);
+    expect(out.economicState.foodSecurity).toEqual({ storageMonths: 2 });
+
+    expectAbsentWithAnchor(Object.keys(out), 'dmLayer', 'institutions', 'the account import door');
+    expectAbsentWithAnchor(Object.keys(out), 'decrees', 'name', 'the account import door');
+    // …AND the coin ledger is still gone. The new strip WRAPS the coin strip rather than
+    // replacing it, so one seam cannot shadow the other on the way through.
+    expect(Object.hasOwn(out.economicState, 'treasury')).toBe(false);
   });
 });

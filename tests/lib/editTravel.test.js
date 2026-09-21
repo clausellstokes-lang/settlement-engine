@@ -1,5 +1,5 @@
 /**
- * editTravel.test.js — EM-B3a acceptance cases A3, A7, A8. ARCH §8 instrument 8.
+ * editTravel.test.js — EM-B3a cases A3, A7, A8; EM-B3d case A6. ARCH §8 instrument 8.
  *
  * HZ-TRAVEL, PROVED AT RUNTIME: the settlement editor's two persisted keys —
  * `dmLayer` and `decrees` — travel NOWHERE. Not into a fork, not into an import,
@@ -36,6 +36,7 @@ import { buildAccountExport } from '../../src/lib/accountData.js';
 import { SAMPLE_SETTLEMENTS, forkConfigFor, forkSeedFor } from '../../src/data/sampleSettlements.js';
 import { generateSettlementPipeline } from '../../src/generators/generateSettlementPipeline.js';
 import { expectAbsentWithAnchor } from '../helpers/anchoredNegatives.js';
+import { prepareSettlementEntry, ensureNormalizeLoaded } from '../../src/lib/accountImport.js';
 
 /** An OPAQUE dmLayer: one nested object, one order-observable array. */
 const dmLayerFixture = () => ({
@@ -214,5 +215,48 @@ describe('EM-B3a — HZ-TRAVEL: a fork, a backup export and a realm snapshot car
     expect(snapshot.chronicle[0].headlines[0].headline).toBe('The market reopens');
     expect(serializedSnapshot.includes('"dmLayer"')).toBe(false);
     expect(serializedSnapshot.includes('"decrees"')).toBe(false);
+  });
+
+  test('A6 — the IMPORT, the fourth surface this suite has always claimed, executed end to end', async () => {
+    // ⭐ THE ARM THE DOCBLOCK ALREADY PROMISED. Design §12 item 4 names a fork, an
+    // IMPORT and the gallery projection; A7 above executes fork, backup export and
+    // realm snapshot. EM-B3a discharged the import row by REASONING ("the source is
+    // already veiled"), which was correct and is not a runtime proof of the surface.
+    // EM-B3d's strip makes it drivable, and this drives it. `prepareSettlementEntry`
+    // is the one import door reachable headlessly, and it is the door the account
+    // file, the reconciliation session and accountImportBody all route through.
+    await ensureNormalizeLoaded();
+    // `importedAt` is PINNED. Unpinned, the door stamps `new Date().toISOString()`, so
+    // two runs differ by a millisecond and the byte-exact half below would be a flake.
+    const META = { importedAt: '2026-01-01T00:00:00.000Z', sourceName: 'keeper-export' };
+    const edited = prepareSettlementEntry(
+      { name: 'Ashford', tier: 'town', settlement: editedSettlement() }, META,
+    );
+    expect(edited.ok).toBe(true);
+
+    // Anchored: the door demonstrably RAN and demonstrably READ the record — the name,
+    // the tier, an institution and the import stamp all survive — so the two absences
+    // below measure an omission rather than an entry that was never built.
+    expect(edited.entry.name).toBe('Ashford');
+    expect(edited.entry.tier).toBe('town');
+    expect(edited.entry.settlement.institutions).toEqual([{ id: 'inst.market', name: 'Market' }]);
+    expect(edited.entry.settlement.importedFrom.source).toBe('account-export');
+
+    // Neither key survives at ANY depth of the prepared entry.
+    const serializedEntry = JSON.stringify(edited.entry);
+    expect(serializedEntry.includes('"dmLayer"')).toBe(false);
+    expect(serializedEntry.includes('"decrees"')).toBe(false);
+
+    // Every sibling survives BYTE-EXACT beside the two omissions: the SAME settlement
+    // imported WITHOUT the editor keys lands on the identical entry, so the strip took
+    // exactly those two and moved nothing else anywhere through the door.
+    const plain = { ...editedSettlement() };
+    delete plain.dmLayer;
+    delete plain.decrees;
+    const unedited = prepareSettlementEntry(
+      { name: 'Ashford', tier: 'town', settlement: plain }, META,
+    );
+    expect(unedited.ok).toBe(true);
+    expectByteEqual(edited.entry, unedited.entry);
   });
 });

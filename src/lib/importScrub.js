@@ -15,7 +15,7 @@ import { LIVING_CONTENT_LAW_CONFIG_KEY } from '../domain/content/livingContentLa
  * deity/faith embed key can never re-open the resurrection gap in one path only
  * (store-4: cultDeitySnapshots was missed by both hand-maintained strips).
  *
- * THREE STRIPS, at two levels, because the hazards live at two levels:
+ * FOUR STRIPS, at two levels, because the hazards live at two levels:
  *   • `scrubImportedConfig`   — over `settlement.config` (seed + faith embeds);
  *   • `scrubImportedTreasury` — over the SETTLEMENT (the W-COIN state coin ledger,
  *     which lives at `economicState.treasury` and is therefore unreachable from the
@@ -24,6 +24,7 @@ import { LIVING_CONTENT_LAW_CONFIG_KEY } from '../domain/content/livingContentLa
  *     ONLY (the two custom-content exactness records + the living-content law
  *     marker). Its own note says why it is gallery-scoped and why the account path
  *     must NOT share it.
+ *   • `scrubImportedEditState` — over the SETTLEMENT (the editor's two private keys).
  *
  * The keys dropped, and why each is a dormancy hazard:
  *   • primaryDeitySnapshot / cultDeitySnapshots — the religion subsystem gate flips
@@ -164,4 +165,50 @@ export function scrubGalleryImportLivingContent(settlement) {
     ...restConfig
   } = /** @type {Record<string, any>} */ (config);
   return { ...rest, config: restConfig };
+}
+
+/**
+ * THE IMPORT EDIT-STATE STRIP (EM-B3d, design §11 and §12 item 4) — an imported
+ * settlement arrives with NO editor state.
+ *
+ * `dmLayer` records which fields on a record are the DM's own and `decrees` is the
+ * ordered registry of what they have staged. Both are the AUTHOR'S working session,
+ * not a property of the town, and design §11 says edits do not travel. EM-B3a veiled
+ * them on every way OUT (the two public projections, the realm snapshot, the backup
+ * export and the server scanner); this is the same claim on the way IN, at the one
+ * boundary a record can arrive from outside the owner's own account.
+ *
+ * WHY IT IS A DORMANCY HAZARD, in the voice of the strips above: an imported layer
+ * would assert that fields of a world this keeper never edited are nonetheless the
+ * DM's, and an imported registry would seat another table's half-finished orders in
+ * this campaign's editor — both keyed to entities and ticks that mean nothing here.
+ *
+ * ⛔ WHY IT IS A FOURTH FUNCTION RATHER THAN TWO MORE NAMES IN `scrubImportedConfig`:
+ * both keys sit on the SETTLEMENT, not on `settlement.config`, so adding them to that
+ * destructure would be a NO-OP that read like a guarantee — the same reasoning
+ * `scrubImportedTreasury`'s own note records, and the reason store-4 shipped.
+ *
+ * ⛔ AND WHY THE KEYS ARE NEVER READ AS PROPERTIES HERE. A destructure-drop and an
+ * `Object.hasOwn` probe are invisible to the observed-shape detector, which counts a
+ * read only at a property access; `settlement.dmLayer` would mint a register row for
+ * a key no generated record carries. Measured, not assumed (EM-B3d §6).
+ *
+ * Pure, and REFERENCE-IDENTICAL when there is nothing to strip: a settlement carrying
+ * neither key — which is EVERY settlement at this commit, because nothing writes
+ * either one (`src/domain/edit/recordRegister.js`'s NOT_YET_WRITTEN_KEYS) — comes
+ * back as the very object that went in, so this can never move a byte on the dormant
+ * path.
+ *
+ * @param {Record<string, any>|null|undefined} settlement
+ * @returns {Record<string, any>|null|undefined}
+ */
+export function scrubImportedEditState(settlement) {
+  if (!settlement || typeof settlement !== 'object' || Array.isArray(settlement)) return settlement;
+  if (!Object.hasOwn(settlement, 'dmLayer') && !Object.hasOwn(settlement, 'decrees')) return settlement;
+  const {
+    // eslint-disable-next-line no-unused-vars -- intentional drop of the editor's two private keys
+    dmLayer, decrees,
+    ...rest
+  } = /** @type {Record<string, any>} */ (settlement);
+  return rest;
 }

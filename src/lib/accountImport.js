@@ -55,7 +55,7 @@
  * already in the importer's library.
  */
 
-import { scrubImportedConfig, scrubImportedTreasury } from './importScrub.js';
+import { scrubImportedConfig, scrubImportedTreasury, scrubImportedEditState } from './importScrub.js';
 import { admitSavedSettlementEntries } from './saveAdmission.js';
 import {
   validateCustomContentArchive,
@@ -614,7 +614,7 @@ export function prepareSettlementEntry(rawEntry, meta = {}) {
   // tick of this campaign ever minted and the pulse writer that enforces the
   // no-backfill law never sees an import. Reference-identical when there is nothing
   // to strip, which is every settlement in every dark campaign.
-  const settlement = scrubImportedTreasury({
+  const settlement = scrubImportedEditState(scrubImportedTreasury({
     ...normalized,
     neighbourNetwork: [],
     neighborRelationship: null,
@@ -628,7 +628,7 @@ export function prepareSettlementEntry(rawEntry, meta = {}) {
       ...(meta.sourceChecksum ? { sourceChecksum: meta.sourceChecksum } : {}),
       ...(meta.sourceId ? { sourceId: String(meta.sourceId) } : {}),
     },
-  });
+  }));
 
   // On the ACCOUNT surface the file is the user's OWN exporter-produced estate,
   // so their lived history is restored through the per-field admission wall

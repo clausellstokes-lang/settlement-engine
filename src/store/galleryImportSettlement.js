@@ -23,7 +23,7 @@ import { track, EVENTS } from '../lib/analytics.js';
 import {
   scrubImportedConfig,
   scrubImportedTreasury,
-  scrubGalleryImportLivingContent,
+  scrubGalleryImportLivingContent, scrubImportedEditState,
 } from '../lib/importScrub.js';
 import { staffUnlocksPaidFeatures } from '../lib/staffEntitlements.js';
 
@@ -68,7 +68,7 @@ export async function importGallerySettlementImpl(get, set, slug) {
     // claiming a scope record the public projection already dropped (DEF-1).
     // This boundary has no archive-backed identity map, so a drop is the honest
     // act; the account-file path, which does have one, remaps instead.
-    settlement: scrubGalleryImportLivingContent(scrubImportedTreasury(normalizeSettlement({
+    settlement: scrubImportedEditState(scrubGalleryImportLivingContent(scrubImportedTreasury(normalizeSettlement({
       ...src,
       neighbourNetwork: [],
       neighborRelationship: null,
@@ -81,7 +81,7 @@ export async function importGallerySettlementImpl(get, set, slug) {
       // here, so DM-imposed cults imported live and activated the religion subsystem).
       config: scrubImportedConfig(src.config),
       importedFrom: { slug, sourceName: dossier.name || src.name || null, importedAt },
-    }))),
+    })))),
     config: null,
     seed: null,
     aiData: {},

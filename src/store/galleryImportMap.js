@@ -13,7 +13,7 @@ import { saves as savesService } from '../lib/saves.js';
 import {
   scrubImportedConfig,
   scrubImportedTreasury,
-  scrubGalleryImportLivingContent,
+  scrubGalleryImportLivingContent, scrubImportedEditState,
 } from '../lib/importScrub.js';
 import { track, EVENTS } from '../lib/analytics.js';
 import { remapSettlementParentRefForImport } from '../domain/settlementParentRef.js';
@@ -287,12 +287,12 @@ export async function importGalleryMapWithCampaignImpl(get, set, slug) {
         // leaving it out here would have made "a gallery clone carries no foreign
         // scope record" true on one gallery path of two — the exact
         // one-path-only shape store-4 was, in the module whose header says so.
-        settlement: scrubGalleryImportLivingContent(scrubImportedTreasury(normalizeSettlement({
+        settlement: scrubImportedEditState(scrubGalleryImportLivingContent(scrubImportedTreasury(normalizeSettlement({
           ...sourceSettlement,
           neighbourNetwork: [],
           neighborRelationship: null,
           interSettlementRelationships: [],
-        }))),
+        })))),
         // Imported faith/deity embeds stay dormant; this is the same single
         // scrub seam used by standalone gallery and account imports.
         config: scrubImportedConfig(sourceSettlement.config) || null,
