@@ -199,11 +199,13 @@ function withoutEditKeys(settlement) {
  * A saved-settlement entry as an EXPORT carries it: the DM's layer and the decree
  * registry are the owner's own working save state and never leave it (EM-B3a;
  * design §11 "edits do not travel"; ARCH §3 "a personal backup export omits them
- * under the same rule"). This is the one seam through which either key could leave
- * the account at all — every public projection already drops them by name — so the
- * omission is spelled here and nowhere else, and it reaches EVERY settlement the
- * entry carries: the live one, and every settlement its `versionHistory` nests,
- * which `revertToSnapshotAction` can promote back onto the live record (EM-B3e).
+ * under the same rule"). This is the SAVED-SETTLEMENT seam through which either key
+ * could leave the account — every public projection already drops them by name — and
+ * it reaches EVERY settlement the entry carries: the live one, and every settlement
+ * its `versionHistory` nests, which `revertToSnapshotAction` can promote back onto
+ * the live record (EM-B3e). ⛔ IT IS NO LONGER THE ONLY SEAM: a paused campaign parks
+ * a whole settlement per member in its pre-interval undo cursor, and the campaigns
+ * half is veiled below by `withoutParkedSnapshotEditState` (EM-B3f).
  *
  * ⭐ REFERENCE-IDENTICAL WHEN THERE IS NOTHING TO DROP, and that is the contract
  * rather than an optimisation. No writer of either key exists yet (the veil lands
@@ -244,6 +246,85 @@ function withoutEditState(entry) {
   };
 }
 
+/** @param {unknown} value @returns {boolean} true when value is a non-array object */
+function isPlainRecord(value) {
+  return value != null && typeof value === 'object' && !Array.isArray(value);
+}
+
+/**
+ * THE VEIL REACHES THE PARKED SNAPSHOT (EM-B3f, design §11 and §12 item 4).
+ *
+ * `capturePulseSnapshot` embeds a WHOLE settlement per campaign member
+ * (`campaignPulseHelpers.js:272-276`), and a PAUSED advance parks that snapshot on
+ * the campaign record itself, inside the same atomic persist as the campaign
+ * (`campaignAdvanceSession.js:578`). `preflightAccountExport` then puts `campaigns`
+ * into the payload unprojected — so a strip that reaches only `savedSettlements`
+ * leaves a paused realm's export carrying the DM's private layer for every member,
+ * while the live settlement beside it is clean.
+ *
+ * ⛔ WHY THE STRIP IS A DOOR ACT AND NEVER A PROMOTER ACT: `runUndoLastPulse`
+ * restores the account's OWN settlement and must keep restoring the DM's own layer
+ * with it. Only the value LEAVING the account is veiled.
+ *
+ * ⛔ COPY-ON-WRITE IS THE CONTRACT, NOT AN OPTIMISATION. `state.campaigns` is the
+ * LIVE store array by reference; an in-place drop would erase a DM's running parked
+ * snapshot from the session and, at the next cacheCampaignState, from their save.
+ *
+ * Pure. REFERENCE-IDENTICAL when nothing is dropped: the campaign that went in comes
+ * back, and so does every snapshot member that did not move. Reads every field by
+ * DESTRUCTURE, never by a property access, so the observed-shape register cannot move.
+ *
+ * @param {unknown} snapshot a capturePulseSnapshot payload
+ * @returns {unknown} the same snapshot when nothing was dropped, else a new one
+ */
+function withoutSnapshotEditState(snapshot) {
+  const { saves, active } = /** @type {Record<string, any>} */ (snapshot);
+  let nextSaves = saves;
+  if (Array.isArray(saves)) {
+    let moved = false;
+    const mapped = saves.map((member) => {
+      if (!isPlainRecord(member)) return member;
+      const { settlement } = /** @type {Record<string, any>} */ (member);
+      const scrubbed = withoutEditKeys(settlement);
+      if (scrubbed === settlement) return member;
+      moved = true;
+      return { ...member, settlement: scrubbed };
+    });
+    if (moved) nextSaves = mapped;
+  }
+  let nextActive = active;
+  if (isPlainRecord(active)) {
+    const { settlement } = /** @type {Record<string, any>} */ (active);
+    const scrubbed = withoutEditKeys(settlement);
+    if (scrubbed !== settlement) nextActive = { ...active, settlement: scrubbed };
+  }
+  if (nextSaves === saves && nextActive === active) return snapshot;
+  return {
+    .../** @type {Record<string, unknown>} */ (snapshot),
+    ...(nextSaves === saves ? {} : { saves: nextSaves }),
+    ...(nextActive === active ? {} : { active: nextActive }),
+  };
+}
+
+/**
+ * One campaign's parked pre-interval undo cursor, veiled. See above.
+ * @param {unknown} campaign @returns {unknown} the same campaign, or a copy
+ */
+function withoutParkedSnapshotEditState(campaign) {
+  const { worldState } = /** @type {Record<string, any>} */ (campaign || {});
+  if (!isPlainRecord(worldState)) return campaign;
+  const { pausedAdvance } = /** @type {Record<string, any>} */ (worldState);
+  if (!isPlainRecord(pausedAdvance)) return campaign;
+  const { preIntervalUndo } = /** @type {Record<string, any>} */ (pausedAdvance);
+  if (!isPlainRecord(preIntervalUndo)) return campaign;
+  const next = withoutSnapshotEditState(preIntervalUndo);
+  if (next === preIntervalUndo) return campaign;
+  return {
+    .../** @type {Record<string, unknown>} */ (campaign),
+    worldState: { ...worldState, pausedAdvance: { ...pausedAdvance, preIntervalUndo: next } },
+  };
+}
+
 /**
  * Construct and prove an account-transfer artifact without downloading it.
  *
@@ -269,7 +350,8 @@ export function preflightAccountExport(state = {}) {
   const settlements = (Array.isArray(state.savedSettlements)
     ? state.savedSettlements
     : []).map(withoutEditState);
-  const campaigns = Array.isArray(state.campaigns) ? state.campaigns : [];
+  const campaigns = (Array.isArray(state.campaigns) ? state.campaigns : [])
+    .map(withoutParkedSnapshotEditState);
   const contentCount = customContentCount(state.customContent);
   const parsedServiceRecords = state.serviceRecords
     && typeof state.serviceRecords === 'object'
