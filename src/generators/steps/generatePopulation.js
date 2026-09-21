@@ -15,7 +15,7 @@
  * registration, the same stream, the same draws in the same order.
  */
 
-import { registerStep } from '../pipeline.js';
+import { chooseOrPin, registerStep } from '../pipeline.js';
 import { generateNPCs, generateRelationships } from '../npcGenerator.js';
 import { generateFactions, generateConflicts } from '../powerGenerator.js';
 import { rollNamedMass } from '../density/applyDensityLaw.js';
@@ -31,17 +31,6 @@ const FACTION_ATTRACTION = {
   crafts:     ['crafts', 'economy', 'other'],
   noble:      ['government', 'military', 'other'],
 };
-
-/**
- * Consult the pins for one chooser. ⛔ It does NOT advance the stream when a pin is present:
- * in pinned mode nothing draws where the record holds the output, which is what makes a
- * pinned re-derive reproduce the record. Keyed by the RECORD PATH the chooser writes.
- * @param {?Record<string, unknown>} pins @param {string} key @param {Function} draw
- */
-function chooseOrPin(pins, key, draw) {
-  if (pins && Object.prototype.hasOwnProperty.call(pins, key)) return pins[key];
-  return draw();
-}
 
 /** The power-faction lookups the linkage and its trace need. Pure — it takes no draw. */
 function powerLinkage(powerStructure) {

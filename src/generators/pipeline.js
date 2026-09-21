@@ -144,6 +144,17 @@ export function getStepOrder() {
  */
 
 /**
+ * Consult the pins for one chooser. ⛔ It does NOT advance the stream when a pin is present:
+ * in pinned mode nothing draws where the record holds the output, which is what makes a
+ * pinned re-derive reproduce the record. Keyed by the RECORD PATH the chooser writes.
+ * @param {?Record<string, unknown>} pins @param {string} key @param {Function} draw
+ */
+export function chooseOrPin(pins, key, draw) {
+  if (pins && Object.prototype.hasOwnProperty.call(pins, key)) return pins[key];
+  return draw();
+}
+
+/**
  * Run the full pipeline. Edits re-run the WHOLE pipeline with the same seed
  * (see `settlementGenerateAction.generateSettlementAction`, whose `seedOverride`
  * argument replays the saved seed) — deterministic and correct. A step-level

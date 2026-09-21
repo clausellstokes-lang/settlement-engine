@@ -1,5 +1,6 @@
 /**
- * pipelinePinnedMode.test.js — EM-P0's acceptance battery (A1–A7).
+ * pipelinePinnedMode.test.js — TWO BATTERIES IN TWO TOP-LEVEL SUITES: EM-P0's acceptance
+ * battery (A1–A7) and EM-B2a2's (A1–A4). EM-P0's seven arms are byte-unmoved.
  *
  * THE PIPELINE SEAM. `runPipeline(initialContext, rng, { pins })` hands the pins to every
  * step through the context under the reserved key `__pins`; inside a step every registered
@@ -22,6 +23,15 @@
  * ⛔ NO `clearSteps()` ANYWHERE IN THIS FILE. It drives the REAL registry, so clearing it would
  * unregister the step under test. (Contrast `pipelineStrictMode.test.js`, which owns a private
  * registry of fake steps and deliberately never imports the real entry point.)
+ *
+ * ⭐ THE SECOND BATTERY (EM-B2a2). `chooseOrPin` — the four effective lines that return an
+ * own-present pin WITHOUT calling the draw thunk — was lifted VERBATIM out of
+ * `generatePopulation.js` into `pipeline.js`, the runner that owns `_PINS_KEY`, so that every
+ * writer the re-entry family will teach consults a pin through ONE spelling in ONE exported
+ * home. That battery drives the primitive at its new home, re-measures the null change, and
+ * proves the pin is still LIVE with an overridden value (§9a: a same-seed re-derive
+ * reproduces the record whether or not the pin is consulted, so only a draw count and an
+ * override discriminate).
  */
 import { createHash } from 'node:crypto';
 import { readFileSync } from 'node:fs';
@@ -30,7 +40,7 @@ import { resolve } from 'node:path';
 import { describe, expect, it } from 'vitest';
 
 import { generateSettlementPipeline } from '../../src/generators/generateSettlementPipeline.js';
-import { getStepOrder, runPipeline } from '../../src/generators/pipeline.js';
+import { chooseOrPin, getStepOrder, runPipeline } from '../../src/generators/pipeline.js';
 import { generateRelationships } from '../../src/generators/npcGenerator.js';
 import { generateConflicts, generateFactions } from '../../src/generators/powerGenerator.js';
 import { resolveConfigWithUserContentTunables } from '../../src/domain/content/userContentTunables.js';
@@ -298,4 +308,162 @@ describe('EM-P0 — the pipeline seam: pins are consulted per chooser, on one st
     );
     expect(prngSource).toContain('fork: (label) => createPRNG(`${seed}::${label}`),');
   });
+});
+
+/** The step's own unpinned draw count at SEED and CONFIG. AS-OF `bdbf7c89c`, re-measured at
+ *  EM-B2a2's base; A2 and A3 both re-measure it rather than trusting the numeral. */
+const UNPINNED_STEP_DRAWS = 315;
+/** The overridden VALUE A3 carries through the pin channel into the assembled record. It is
+ *  planted by the arm and appears nowhere in the generator's vocabulary. */
+const OVERRIDE_SENTINEL = 'EM-B2a2 SENTINEL BURGRAVE';
+
+describe('EM-B2a2 — the pin primitive has ONE exported home: chooseOrPin lives on the runner', () => {
+  it('A1 — own-presence decides at the exported home, and the step keeps no second definition', () => {
+    const calls = { count: 0 };
+    const draw = () => { calls.count += 1; return 'DREW'; };
+
+    // OWN-PRESENT: the pin comes back and the thunk is NEVER called. OWN-PRESENCE, not
+    // truthiness, decides — an own `undefined` pins exactly as hard as an object does.
+    expect(chooseOrPin({ npcs: 'PINNED' }, 'npcs', draw)).toBe('PINNED');
+    expect(chooseOrPin({ npcs: undefined }, 'npcs', draw)).toBeUndefined();
+    expect(chooseOrPin({ npcs: null }, 'npcs', draw)).toBeNull();
+    expect(chooseOrPin({ npcs: 0 }, 'npcs', draw)).toBe(0);
+    expect(calls.count, 'an own-present pin must not advance the stream').toBe(0);
+
+    // The pin is the caller's own object BY REFERENCE: the primitive clones nothing.
+    // Cloning is EM-R1's rule, at the runner, and it is not this member's.
+    const bag = { npcs: [{ name: 'Ilse' }] };
+    expect(chooseOrPin(bag, 'npcs', draw)).toBe(bag.npcs);
+    expect(calls.count).toBe(0);
+
+    // ABSENT, INHERITED, null and undefined each call the draw EXACTLY ONCE. The
+    // prototype-chain row is the one that convicts a rewrite into `key in pins`.
+    const inherited = Object.create({ npcs: 'FROM THE PROTOTYPE' });
+    expect(inherited.npcs, 'the fixture really does inherit the key').toBe('FROM THE PROTOTYPE');
+    expect(Object.prototype.hasOwnProperty.call(inherited, 'npcs')).toBe(false);
+    expect([
+      chooseOrPin({ other: 'PINNED' }, 'npcs', draw),
+      chooseOrPin(inherited, 'npcs', draw),
+      chooseOrPin(null, 'npcs', draw),
+      chooseOrPin(undefined, 'npcs', draw),
+    ]).toEqual(['DREW', 'DREW', 'DREW', 'DREW']);
+    expect(calls.count, 'each unpinned consult calls its draw exactly once').toBe(4);
+
+    // NO SECOND DEFINITION survives in the step, anchored on the widened import so the arm
+    // cannot pass by the file having vanished, emptied or been renamed out from under it.
+    const stepSource = readFileSync(
+      resolve(process.cwd(), 'src', 'generators', 'steps', 'generatePopulation.js'), 'utf-8',
+    );
+    expect(stepSource, 'the step consults the primitive through its exported home')
+      .toContain("import { chooseOrPin, registerStep } from '../pipeline.js';");
+    expect(stepSource.match(/function chooseOrPin\(/g), 'the step kept a second DEFINITION')
+      .toBeNull();
+    // The SPELLING survives five times over — the widened import plus the four call sites —
+    // so an arm phrased as "no occurrence" would be false rather than strict.
+    expect(stepSource.match(/chooseOrPin/g)).toHaveLength(5);
+  });
+
+  it('A2 — the lift moves nothing: the golden corpus, the draw count and the one-stream shape', () => {
+    // (1) THE COMMITTED BASE. The manifest was recorded before the lift, so any byte the
+    // pure move moved reds here. The same fixed stride EM-P0's A1 samples.
+    const rows = goldenCorpus();
+    const manifest = JSON.parse(readFileSync(GOLDEN_MANIFEST, 'utf-8'));
+    const stride = Math.max(1, Math.floor(rows.length / 40));
+    const moved = [];
+    let checked = 0;
+    for (let index = 0; index < rows.length; index += stride) {
+      const row = rows[index];
+      checked += 1;
+      if (manifest[keyOf(row)] !== hashFor(row)) moved.push(keyOf(row));
+    }
+    expect(checked).toBeGreaterThanOrEqual(40);
+    expect(moved, 'the lift moved a byte of generated output').toEqual([]);
+
+    // (2) ALL FOUR POPULATION KEYS still reach the assembled record through the lifted
+    // primitive, at the same count the context carries.
+    const instrumented = instrumentedRoot(SEED);
+    const ctx = runHeadless(instrumented.root);
+    for (const key of CHOOSER_KEYS) {
+      expect(ctx[key], `${key} is produced unpinned`).toBeDefined();
+      expect(ctx.settlement[key].length, `${key} reaches the settlement`).toBe(ctx[key].length);
+    }
+    expect(ctx.npcs.length).toBeGreaterThan(0);
+
+    // (3) THE STEP'S OWN STREAM takes the SAME count unpinned. A draw added or removed in
+    // transit reds here (STOP-2).
+    expect(instrumented.record.draws, 'the unpinned draw count moved: a draw was added or removed')
+      .toBe(UNPINNED_STEP_DRAWS);
+
+    // (4) ONE registration, ONE stream object, ZERO inner forks: the lift did not split the
+    // step on its way out of the file.
+    const order = getStepOrder();
+    expect(order.filter((name) => name === POPULATION_STEP)).toEqual([POPULATION_STEP]);
+    expectAbsentWithAnchor(order, 'drawPopulation', POPULATION_STEP, 'A2: one registration');
+    expectAbsentWithAnchor(order, 'derivePopulation', POPULATION_STEP, 'A2: one registration');
+    expect(instrumented.record.streams, 'exactly one stream object serves the step').toHaveLength(1);
+    expect(instrumented.record.innerForks, 'nothing inside the step mints a second stream').toBe(0);
+  }, 180_000);
+
+  it('A3 — the pin is live: an overridden pin value reaches the settlement, and a pinned step draws zero', () => {
+    const unpinned = instrumentedRoot(SEED);
+    const base = runHeadless(unpinned.root);
+    expect(unpinned.record.draws, 'the unpinned baseline this arm discriminates against')
+      .toBe(UNPINNED_STEP_DRAWS);
+
+    // FROZEN BEFORE ANY PINNED RUN. Design §21.5 measured a coherence pass writing through
+    // a caller's own bag on three of nine sampled rows, so the base's text is captured
+    // first and every later assertion reads THIS string.
+    const baseJson = JSON.stringify(base.settlement);
+    const anchorName = base.npcs[0].name;
+
+    const pins = pinsFromContext(base);
+    const overridden = {
+      ...pins,
+      npcs: pins.npcs.map((npc, index) => (
+        index === 0 ? { ...npc, name: OVERRIDE_SENTINEL } : npc
+      )),
+    };
+    const pinned = instrumentedRoot(SEED);
+    const rederived = runHeadless(pinned.root, { pins: overridden });
+
+    expect(pinned.record.draws, 'a fully pinned step must not advance its own stream').toBe(0);
+
+    // THE DISCRIMINATOR (§9a). Generation is same-seed deterministic, so a DEAD pin
+    // reproduces the record anyway; only a draw count and an OVERRIDDEN VALUE convict one.
+    // The base is anchored on the roster name the override replaced, so the absence cannot
+    // pass by the settlement having drifted away.
+    expectAbsentWithAnchor(baseJson, OVERRIDE_SENTINEL, anchorName, 'A3: the sentinel is planted by this arm');
+    expect(JSON.stringify(rederived.settlement), 'the overridden pin never reached the record')
+      .toContain(OVERRIDE_SENTINEL);
+  }, 180_000);
+
+  it('A4 — the partial-pin refusal survives the lift: the whole sentence, and the strict report', () => {
+    const complete = runHeadless(createPRNG(SEED));
+    const partial = { relationships: complete.relationships };
+
+    // THE WHOLE SENTENCE, NEVER A SUBSTRING: the message is asserted by equality, so a
+    // loosened or re-worded refusal reds here even if it still contains these words.
+    let thrown = null;
+    try {
+      runHeadless(createPRNG(SEED), { pins: partial });
+    } catch (error) {
+      thrown = error;
+    }
+    expect(thrown, 'a partial pin set must refuse').toBeInstanceOf(Error);
+    expect(thrown.message).toBe(
+      `Pipeline pins: step "${POPULATION_STEP}" has choosers [${CHOOSER_KEYS.join(', ')}] `
+      + 'but pins supply only [relationships]. Pin every chooser of a step or none of them.',
+    );
+
+    const violations = [];
+    runHeadless(createPRNG(SEED), {
+      pins: partial,
+      onStrictViolation: (violation) => violations.push(violation),
+    });
+    expect(violations).toContainEqual({
+      step: POPULATION_STEP,
+      kind: 'pin',
+      keys: ['npcs', 'factions', 'conflicts'],
+    });
+  }, 120_000);
 });
