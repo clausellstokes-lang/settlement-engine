@@ -1,0 +1,501 @@
+# Settlement editor / EM-B2a2 — THE PIN PRIMITIVE GETS ONE EXPORTED HOME: `chooseOrPin` is lifted verbatim out of `generatePopulation.js` into the runner that owns `_PINS_KEY`, so that every writer the re-entry family will teach can consult a pin through one spelling
+
+- **Status:** `READY`
+  ⚠ The status value above stands ALONE on its line because `parsePacketHeader`
+  (`scripts/implementation-packets.mjs`) anchors the status row at end-of-line and takes `status`
+  only when exactly one row matches. Every stamp, caveat and date goes on these continuation
+  lines, never on the row.
+  ⭐ MEMBER 2 OF 4 of the superseded **EM-B2a**, per the chair's ESTATE-REPAIR ruling of
+  2026-09-20 and its ruling on the partition (~20:45, judgment 30): **EM-B2a1** (the leaf) →
+  **EM-B2a2** (this) → **EM-B2a3** (the remaining choosers) → **EM-B2a4** (the store consumer and
+  the orchestration). The partition is `EM-B2a.partition.md`; the chair's ruling on it GOVERNS
+  wherever the partition's text predates it.
+  ⛔ **THIS MEMBER IS PLUMBING.** It moves one four-line primitive to one exported home. It makes
+  no claim about re-deriving a record — see §5.7 and §11's STOP-4.
+- **Packet version:** 3
+  ⭐ **VERSION 3 (the chair, judgment 124, 2026-09-21; the build lane's gate at queue window 25 and the cure lane's probe `lane-em-b2a2-t11-scratch/cure/arm2-after-readdress.log`).** This member's OWN three `requiredSymbols` rows cited the lines their symbols held at the verified base (line 171 of `pipeline.js`; lines 237 and 235 of `generatePopulation.js`). The lift this packet orders moves those very lines — the ten-line block and its blank line leave `generatePopulation.js` ABOVE both rows, and eleven lines enter `pipeline.js` ABOVE `runPipeline` — and `tests/lint/sourceCitationIntegrity.walker.test.js` reads every manifest `_note` against the LIVE tree, so the built tree redded that walker on the packet's own rows. The pre-proof's `_citationsByLine` step grepped `src/`, `docs/content/` and `tests/` for citations into the two files and never read the manifest itself. Version 3 re-addresses the three rows to the post-lift lines (182 in `pipeline.js`; 226 and 224 in `generatePopulation.js` — measured on the built tree: each cited line names its symbol, ARM 2 novel findings 0) and corrects §5.4's two as-of byte marks to the measured pair at `e348d59b6` (13,769 and 10,051 bytes; the built tree measures 14,281 and 9,559; net +20 reproduces). No §7 path, no acceptance case and no check moves; the build made under seal `96a4ff38…` at `2240e3454` is re-applied BYTE-IDENTICAL under the version-3 seal. LAW for the sixth amendment (rule 16 aimed at the packet itself): a lift that moves lines re-addresses its OWN rows in the same version, and a pre-proof's citation grep reads the manifest too.
+  ⭐ **WHAT VERSION 2 CHANGED AND WHY (the EM-T10 pre-proof, 2026-09-21).** Re-measured whole
+  at `429141e2d`; nothing in the contract moved. Eleven repairs, all of them the interim rules
+  that were written AFTER version 1 was compiled (rules 12–17, the chair 2026-09-21) plus three
+  figures: the rules row now says SEVENTEEN; the revalidation sentence is re-pointed at this tip
+  and states the base stamp's BRANCH-at-SHA form; §5.4's raw-line figures are corrected to the
+  executed lift (+11 / −11, net +20 SOURCE bytes); rule 14's byte-arm holder is named (EM-D0c)
+  with this member's own two budget deltas; a STOP-7 carries the zero-slack worker ceiling and
+  the measured fallback shape; rule 12's count law is discharged (§7's TEST row declares its
+  four `it`s, §9 gains a `home` column, the capsule's four cases gain `home` + `authorizedBy`,
+  and a count prover ships beside the packet as KIT FURNITURE); rules 13, 16 and 17 are answered
+  with their commands in §7; `tests/copy/voiceMechanics.test.js` joins `checks` as the Tier-5
+  `src/generators` ratchet no earlier version named; and A1's “no second spelling” is re-worded
+  to the thing that is true after the lift — no second DEFINITION.
+- **Preamble:** `docs/implementation/preambles/EM-PREAMBLE.md`
+  > **Interim compile rules:** `COMPILE-RULES.interim.md` (the chair, 2026-09-20) — the fifth
+  > amendment's rules (1–17 as of 2026-09-21), obeyed before they land. Where this packet and `EM-PREAMBLE.md`
+  > (SHA-256 `c9f33c8d2940372bde8a6d931e3d389b79516a90ed45405cbbbf3e698cc46675`, MEASURED at the
+  > read tip with `shasum -a 256`, not copied from any brief) disagree, the interim rules govern
+  > and this row is the record of it.
+- **Verified base:** `em-t11-b2a2-2026-09-21` at `e348d59b609e2c62c957a4cd78653849792043b7`
+  ⚠ Left for the chair's promotion stamp. ⛔ **THE STAMP TAKES THE BRANCH-at-SHA FORM**
+  (`` `<branch>` at `<40-char sha>` ``): `parsePacketHeader` reads `verifiedBranch` only from that
+  form, and a READY packet whose header names no branch refuses with
+  "READY header must name a non-blank verified branch" (`scripts/implementation-packets.mjs`, the
+  READY arm of `validatePacketManifest`) — MEASURED at this pre-proof, which reproduced that exact
+  refusal from a bare-sha stamp and cleared it with the branch form.
+  **The revalidation sentence the chair will use:**
+  *"Re-measured at `429141e2d1c21cb5ee9dd5005ed1a77bbc9b3cd8` (read tip `read-tip-em-t8-tip`,
+  detached, `git status --short` EMPTY): the J-T1 window from version 1's compile base
+  `bdbf7c89c` is EMPTY over ALL of `src/generators` and `tests/generators`, so every §5 figure
+  measured there holds here by construction; all three change-manifest paths PRESENT (no CREATE
+  row); all eight `requiredSymbols` present VERBATIM, one hit each, at the paths and lines in §5;
+  the one `retiredSymbols` row present VERBATIM at `generatePopulation.js:41`, as a non-terminal
+  retirement requires; the preamble measured `c9f33c8d…c46675` at this tip."* ⛔ A `__BASE__`
+  packet can NEVER pass `validate:packets`; validation is downstream of this stamp, never a
+  precondition of it.
+- **Last revalidated:** left for the chair, with the sentence above.
+- **Depends on:** **EM-P0 (LANDED)** — this member extends EM-P0's seam and may not exist without
+  it. ⛔ **NOT EM-B2a1.** Measured: this member imports none of a1's five exports, and under the
+  chair's Q1 ruling the layer never enters `src/generators/**`. It is placed after a1 by the
+  chair's serial chain, not by a dependency, and it could lawfully land first.
+- **Collision group:** **EMPTY today at the file level, with two ORDERS named.** No waiting packet
+  and no charter row names `chooseOrPin` or creates a shared home for it (measured: `grep -l -F`
+  over all of `packets-waiting/*.md` and over the ledger's `EDIT-MODE-TRAIN.md`, both exit 1).
+  (a) **EM-B2a3** consumes this member by import and writes none of its files — path-disjoint, so
+  a2 ∥ a3 holds. (b) ⚠ **EM-R1** owes `pins cloned on entry`, a `structuredClone` inside
+  `runPipeline` — the same source file this member modifies. Two packets writing one source file
+  are refused side by side, so **EM-B2a2 and EM-R1 are SERIAL at the placement gate**; they may
+  compile in parallel and may not ride one train.
+  (c) ⭐ **PATH-DISJOINT FROM EVERY TRAIN EM-T10 AND EM-T11 CANDIDATE, MEASURED at `429141e2d`:**
+  CHANGE ∩ CHANGE is **NONE** against EM-B1i · EM-B2a1 · EM-B3e · EM-B1a · EM-D0c · EM-D0d ·
+  EM-P4 (whose only `src/generators` path is `lookups.js`) · EM-C4a · EM-B1c1 · EM-A2a v6, and
+  against all four EM-T9 members and both siblings. **This member is a TRAIN EM-T10 CANDIDATE.**
+  (d) ⛔ **THE RETIREE'S BLAST RADIUS, ACCOUNTED (interim rule 16).** `EM-B2a4`'s capsule holds a
+  `requiredSymbols` row naming the EXACT pair this member retires
+  (`src/generators/steps/generatePopulation.js :: function chooseOrPin(pins, key, draw)`). That is
+  not a collision and needs no surgery: §379.2's cross-packet discharge makes a **LANDED**
+  retirement discharge every `requiredSymbols` row naming the same pair, at any status, and a4
+  lands after a2. What a4, a3 and EM-B2b still owe is PROSE: each names the primitive at its old
+  home (4, 3 and 2 hits) and is re-pointed at ITS OWN pre-proof. ⭐ Zero hits in `tests/` and zero
+  in `scripts/`: no test and no script pins the old spelling.
+- **Commit authority:** edits only; the chair commits.
+- **Baseline posture:** measured. The cycle question, `npcGenerator.js`'s debt, the lighting
+  credit status of the battery file, the mutation-coverage row, the census stamp, the
+  prose-numerics baseline, the size baseline and the record-vs-context reproduction count were
+  each MEASURED at the read tip; every figure in this packet is a delta or carries an as-of mark.
+
+---
+
+## §1 · Reconciled authority
+
+1. **The mechanism is the LANDED PIN CONSULT** (the chair's Q1 ruling; design §14 "one engine:
+   re-derive with pins"). `drawRoot` is never written, and "the draw is always consumed" retires
+   with the parent's §0A. The layer never enters `src/generators/**`: the caller builds a pin for
+   every chooser and overrides a VALUE, which is `pipeline.js`'s own comment.
+2. **Design §21.5 item 5 and §22 item 1 bound what a pin can claim.** Pinning from a RECORD does
+   not reproduce the record; the ruled model is the EVERY-WRITER seam (§22 ruling 1, the re-entry
+   family EM-R1–EM-R5) plus the THREE-WAY MERGE (§22.1, EM-R0c), and the no-edit identity is the
+   merge, not `rederive`. **This packet asserts neither** — it is the plumbing both need. Re-
+   measured at the read tip in §5.7.
+3. **Design §22 ruling 6 and §22.1's partial-pin sentence:** "The partial-pin refusal stays
+   exactly as EM-P0 landed it." This member preserves it verbatim and proves it (A4).
+4. **The golden posture is UNCHANGED**, as it is for every member of this family: `no pins ⇒
+   byte-identical`, on the full 525-row master. This member's whole risk is that a pure move
+   moves a byte, so A2 is aimed exactly there.
+5. **Interim rule 1** keeps `docs/content/wiring-census.json` out of every row and every check;
+   **rule 2** keeps every dist arm out of `checks`; **rule 8** names FILES and ends with the
+   validator; **rule 9** makes every register figure a delta; **rule 10** does not bind (no
+   surface is touched, so no `e2e/` spec is named).
+
+## §2 · Outcome
+
+`chooseOrPin(pins, key, draw)` — four effective lines that return an own-present pin without
+calling the draw thunk — today lives module-local inside `src/generators/steps/generatePopulation.js`
+and is reachable by nothing. It is the only pin-consulting primitive in the estate, and the
+re-entry family (EM-R1–EM-R5) will teach dozens of writers across `src/generators/**` to consult a
+pin. **After this member there is ONE spelling, in ONE exported home** — `src/generators/pipeline.js`,
+the runner that owns `_PINS_KEY` and hands `options.pins` to every step — and `generatePopulation.js`
+imports it like any other step will.
+
+Nothing else changes. No behaviour moves, no byte of generated output moves, no draw is added or
+removed, no new module edge appears in the import graph.
+
+## §3 · Hard scope budget
+
+| bound | budget | this member | receipt |
+|---|---:|---:|---|
+| handwritten files | ≤12 | **3** | §7 |
+| new/changed effective production lines | ≤400 | **net 0** (+4 / −4) | §5.4 |
+| each new leaf | ≤250 | n/a — no new leaf | no CREATE row |
+| new logic leaves | ≤2 | **0** | no CREATE row |
+| existing logic files modified | ≤3 | **2** | §7 |
+| acceptance cases | ≤8 | **4** | §9 |
+
+## §4 · Sealed dispatch and preflight
+
+Branch, base ancestry, substrate unchanged since the verified base, and git-clean targets are the
+dispatch's own checks; **there is no CREATE target to prove absent** (this member creates nothing).
+⭐ The one preflight subtlety, stated because it is easy to get wrong: the packet's `checks` end
+with `node scripts/implementation-packets.mjs validate`, and by then the lane will have BURNED the
+`retiredSymbols` row's text out of `generatePopulation.js`. That is lawful and it is the only
+lawful way: the validator's **§7.4 SEALED-BURN EXEMPTION** licenses a retiree's absence under the
+packet's own live dispatch seal, which exists only because the validator already ran green with
+the retiree present. A build without a seal, with another packet's seal, with another worktree's
+seal, or with a seal bound to a non-ancestor HEAD licenses nothing and the refusal stands.
+
+## §5 · Verified tree contract
+
+Every row re-executed at `bdbf7c89c`; the commands are in `EM-B2a2.evidence.md`.
+
+### §5.1 · ⭐ NO IMPORT CYCLE — the measurement this member was told to take first
+`src/generators/pipeline.js` imports **exactly one** module — `../kernel/rngContext.js` (`:20`) —
+and imports **no step**. The step registry is filled by SIDE EFFECT from a third module:
+`generateSettlementPipeline.js:47` carries `import './steps/index.js';` under the comment
+"Side-effect: registers all pipeline steps". **All 22 step files ALREADY import `registerStep` from
+`'../pipeline.js'`**, `generatePopulation.js` among them at `:18`. ⇒ The edge
+`generatePopulation.js → pipeline.js` exists at the base, the reverse edge does not exist, and
+this member creates no new edge. The partition's §2 home is **BUILDABLE AS WRITTEN**, and the same
+holds for EM-B2a3's two step files (`assembleInstitutions.js:11`, `generatePower.js:15`).
+
+### §5.2 · ⭐ `src/generators/npcGenerator.js` OWES NOTHING — and is not a change path
+`git grep -n -E 'chooseOrPin|__pins|\bpins\b' -- src/generators/npcGenerator.js` returns **zero
+matches, exit 1**. The mechanical reason is in the landed seam: `drawPopulation` wraps the whole
+`generateNPCs(...)` call inside `chooseOrPin(pins, 'npcs', () => {...})`, so when `pins.npcs` is
+own-present the thunk is never invoked and `generateNPCs` is never entered. A pin cannot reach
+inside that file and there is nothing there to teach. ⇒ The partition's M-3 row is retired by the
+chair's Q1 ruling, the member SHRINKS, and **ruling 4's NET-ZERO line rule has nothing to bite**:
+`npcGenerator.js` stays at its frozen **1345/1345** because this member does not touch it.
+
+### §5.3 · The pin seam at the tip — one definition, four call sites, one channel
+`chooseOrPin` is defined at `generatePopulation.js:41` and called at `:128` (`npcs`), `:168`
+(`relationships`), `:172` (`factions`), `:175` (`conflicts`); `_PINS_KEY = '__pins'` at
+`pipeline.js:59`; the step reads `ctx.__pins` at `:235`. Nothing else in `src/` mentions either.
+
+### §5.4 · Line budget — NET ZERO across the two source files
+The lift is **+11 raw** / **+4 effective** in `pipeline.js` (the ten-line block — six lines of
+JSDoc and the four-line body — plus the blank separator; the JSDoc is skipped by
+`max-lines(skipComments)`) and **−11 raw** / **−4 effective** in `generatePopulation.js`, plus one
+MODIFIED import line. ⭐ EXECUTED on a probe copy at `429141e2d`: 280 → 291 and 240 → 229 raw
+lines; 13,769 → 14,281 and 10,051 → 9,559 bytes (version 3: measured at `e348d59b6` and on the built tree; version 2's marks 13,296 → 13,806 and 10,016 → 9,526 were mis-transcribed as-of figures, the net was right); **net +20 SOURCE bytes** — the `export ` keyword
+(7 B), the widened import's `chooseOrPin, ` (13 B) and one blank line, and nothing else.
+⚠ Version 1 said "+9 raw"; the executed lift is +11 and the earlier figure is retired here. Neither path carries a frozen `scripts/.size-baseline.json` row
+(measured, exit 1), and both sit far under the 800 layer ceiling: `pipeline.js` 134 effective,
+`generatePopulation.js` 160 effective.
+
+### §5.5 · The A7 arm that reads the step's source — measured to survive
+EM-P0's A7 (`pipelinePinnedMode.test.js:292`) reads `generatePopulation.js` as TEXT and asserts
+`stepSource.match(/registerStep\(/g)` has length **1** and `stepSource.match(/fork\(/g)` is
+**null**. Measured on the post-lift probe copy: **1 and null**. The widened import contains
+`registerStep,` with no open paren, so the count cannot move.
+
+### §5.6 · The chooser-totality walker cannot move
+`tests/lint/chooserTotality.walker.test.js`'s `SCAN_ROOTS` is exactly
+`['src/domain/worldPulse','src/domain/spatial','src/domain/traditions','src/domain/region']` —
+four `src/domain/*` directories, **none under `src/generators/**`**. Its root-set self-assertion
+binds `src/domain/*` only, and its `DECLARES_IDIOM` regex names `hash01`, `softmaxWeights` and
+`stableSampleByWeight`, none of which is `chooseOrPin`. This member's edits are outside its scan.
+
+### §5.7 · ⛔⛔ RECORD-BUILT PINS DO NOT REPRODUCE A RECORD — re-measured here, with its as-of mark
+Measured at `bdbf7c89c` over a 9-row stride of the 525-row golden corpus, three figures, each
+reproducing design §21.5 item 5's 2026-09-19 execution exactly:
+
+| pins built from | reproduces the settlement | caller's bag mutated in place |
+|---|---:|---:|
+| the **post-step CONTEXT** (EM-P0's landed mode) | **9 / 9** | 0 / 9 |
+| the **RECORD** (the only thing the editor ever has) | **2 / 9** | **3 / 9** |
+
+The two that reproduce are the two **thorps**, where the coherence enrichment is a no-op — exactly
+as §21.5 predicts; the three that mutate the caller's own bag are the two city rows and the
+metropolis row, the `corruptionPass` write-through §21.5 names. (§22 item 1's corpus-wide figure
+is **6/63** and is the authority for the corpus number; 2/9 is this lane's own stride.) ⇒ **This
+member's acceptance is written to the CONTEXT-built mode and claims nothing about record-built
+re-derivation.** The cure is the EVERY-WRITER seam (§22 ruling 1 — EM-R1–EM-R5) plus the
+three-way merge (§22.1 — EM-R0c), and this member is the plumbing both of them consume.
+
+### §5.8 · Test precedent
+`tests/generators/pipelinePinnedMode.test.js` › `describe('EM-P0 — the pipeline seam: pins are
+consulted per chooser, on one stream')` — its `A3` draw-counting proxy and its `A7` source scan are
+the two shapes this member's arms copy; `expectAbsentWithAnchor` from `tests/helpers/anchoredNegatives.js`
+is the anchored-negative idiom A2 reuses.
+
+### §5.9 · ⭐ THE TWO BUDGETS, PRICED AT THIS TIP (interim rules 2 and 14)
+**FIRST PAINT — +0 MODULES, +0 BYTES, MEASURED.** `vite.config.js`'s own
+`EAGER_FIRST_PAINT_MODULES` is **269 modules before and after the lift, an identical set**
+(the sorted list hashes the same both ways); neither `pipeline.js` nor `generatePopulation.js` is
+eager. ⛔ Per interim rule 14 this member carries **NO row on `tests/build/vendorPdfLazy.test.js`**
+and names **EM-D0c as train EM-T10's BYTE-ARM HOLDER** (the chair, judgment 89); the holder's bound
+covers the train's sum and this member's contribution to it is zero.
+
+**THE GENERATION WORKER — BOTH FILES ARE INSIDE IT, AND THE CEILING IS EXACT AT ZERO SLACK.**
+Membership is not argued: `tests/build/generationWorkerLazy.test.js` records, in its own mint
+history, that at the 1,399,946 → 1,401,128 re-mint "exactly TWO modules moved, and they are
+EM-P0's two: `src/generators/pipeline.js`, 9,843 → 12,548 rendered bytes, and
+`src/generators/steps/generatePopulation.js`, 6,864 → 9,702 rendered bytes."
+`WORKER_BUNDLE_CEILING_BYTES` is minted AT the measurement and the file says so: "this arm is
+again at 0 B slack by construction". Interim rule 2: the worker ceiling has **NO PLACEMENT CURE**.
+
+**PREDICTED: 0 B minified — and a BYTE-LEVEL PREDICTION IS NOT POSSIBLE WITHOUT A BUILD.** What
+holds without one: both modules are in the SAME chunk; the edge `generatePopulation.js →
+pipeline.js` already exists, so no module joins or leaves that chunk; the moved text is
+byte-identical; its JSDoc is a comment; and an `import`/`export` between two modules of one chunk
+is erased by the bundler. What CANNOT be computed from source is the bundler's deconflicting and
+identifier mangling — `chooseOrPin` moves from one module scope to another and its emitted token
+is chosen over the whole chunk, so a rename of different length is possible in either direction.
+⇒ the byte arm is left to **the terminal's ONE real build**, and STOP-7 below is what it decides.
+
+## §6 · Exact contracts
+
+### The lifted primitive — its text does not change
+```js
+/**
+ * Consult the pins for one chooser. ⛔ It does NOT advance the stream when a pin is present:
+ * in pinned mode nothing draws where the record holds the output, which is what makes a
+ * pinned re-derive reproduce the record. Keyed by the RECORD PATH the chooser writes.
+ * @param {?Record<string, unknown>} pins @param {string} key @param {Function} draw
+ */
+export function chooseOrPin(pins, key, draw) {
+  if (pins && Object.prototype.hasOwnProperty.call(pins, key)) return pins[key];
+  return draw();
+}
+```
+**Home:** `src/generators/pipeline.js`, directly beneath the `Pins` typedef whose channel it
+serves. **Body: byte-identical to the current text**; the only edit is `export` prepended.
+⛔ No second spelling is minted anywhere.
+
+**The contract, exactly, with the two edges a rewrite gets wrong** (both EXECUTED — §12):
+- `pins` own-present at `key` ⇒ returns `pins[key]`, **`draw` is NOT called**, the stream does not
+  advance. This holds **even when the own value is `undefined`**: own-presence, not truthiness,
+  decides.
+- `key` absent, or present only on the PROTOTYPE CHAIN, or `pins` `null`/`undefined` ⇒ `draw()` is
+  called **exactly once** and its value returned. The prototype-chain arm is what convicts a
+  rewrite of `Object.prototype.hasOwnProperty.call(pins, key)` into `key in pins`.
+- The returned pin is the caller's own object **by reference** — the primitive clones nothing.
+  Cloning is EM-R1's rule (`pins cloned on entry`, design §22 ruling 6), at the runner, not here.
+
+### The consumer side
+`src/generators/steps/generatePopulation.js` widens ONE existing statement:
+`import { registerStep } from '../pipeline.js';` → `import { chooseOrPin, registerStep } from '../pipeline.js';`
+and deletes the ten-line block at `:35-:44`. Its four call sites, its `ctx.__pins` read and the
+landed root/derive split are untouched.
+
+### What this member does NOT change
+`runPipeline`'s signature, its pins validation, the partial-pin refusal and its message, `_PINS_KEY`,
+the step registry, `getStepOrder`, `getStepMeta`, `clearSteps`, every step's `provides`, and every
+generated byte.
+
+## §7 · Exact change manifest
+
+⭐ Generated FROM the capsule (interim rule 6); the two path sets are **SET-EQUAL by construction**
+and the diff was executed — see §12.
+
+| # | action | path | note |
+|---|---|---|---|
+| 1 | `MODIFY` | `src/generators/pipeline.js` | the primitive's new home, exported; +4 effective |
+| 2 | `MODIFY` | `src/generators/steps/generatePopulation.js` | the local definition deleted, the existing import widened; −4 effective |
+| 3 | `TEST` | `tests/generators/pipelinePinnedMode.test.js` | EM-P0's landed battery; EXISTS at the base, so `TEST` and not `CREATE` (interim rule 4). **Adds exactly 4 literal `it`s** in ONE new top-level literal `describe`, and homes acceptance cases A1–A4 — the same four numbers §9's matrix, the lighting `titles +4 · suiteTitles +1` delta and the shipped count prover all state. |
+
+**Generated artifacts: NONE.**
+
+**DEFERRED — the lighting census.** `tests/lint/.lighting-census-baseline.json` moves by
+`files +0 · parked +0 · credited +0 · titles +4 · suiteTitles +1`. ⚠ **This corrects the
+partition's flat `+0` for this member.** The census sums `it` titles over CREDITED files, and
+`tests/generators/pipelinePinnedMode.test.js` is CREDITED: it imports `describe, expect, it` from
+`'vitest'` at `:30`, re-binds none of the three anywhere (measured, exit 1 — the cause of 26 of the
+estate's parked files), and registers straight-line (ONE literal top-level `describe` at `:155`
+with SEVEN literal `it(` calls directly in its block; the file's four `for` loops are inside test
+BODIES, not around registration). So four new `it` arms are `titles +4` and one new top-level
+`describe` is `suiteTitles +1`. The executed precedent is in the baseline's own note at the read
+tip: the tenth refreeze records CURE-M adding "20 titles and 1 suite title in
+tests/build/brandDerivatives.test.js". The predicted red spells its SHAPE, never a numeral:
+`expected <titles+4> to be <titles>`. ⛔ The refreeze is the CHAIR's act at the train's terminal;
+this member never edits the baseline and never sets `LIGHTING_CENSUS_REFREEZE`.
+
+**DEFERRED — the wiring census.** `stamp.producerIndexFiles` **+0**: this member CREATEs no `.js`
+leaf under `src/generators/**` or `src/domain/**` (measured against both roots; its two source rows
+are MODIFY). `stamp.files` UNMOVED and no re-take is owed — measured, neither changed path is among
+the census's seven `stamp.files` entries, all of which key on `src/domain/display/stateProse/`.
+⛔ Per interim rule 1 the path `docs/content/wiring-census.json` appears in NO row and in no check.
+
+**DEFERRED — THE TUNING INVENTORY: NOTHING IS OWED, MEASURED (interim rule 17).** Both change
+paths are under `src/generators`, so the inventory was run through ITS OWN library
+(`scripts/lib/tuning-inventory.mjs` — `discoverTables`, `countUnregisteredNamed`,
+`countBareDecimals`) over the tip as it stands AND over the post-lift text: **P1 237 tables (no
+table in either file), P2 0 and 0, P3 0 and 0, with the estate sums 535 and 6,985 identical both
+ways.** The lifted block holds no `const UPPER_SNAKE = <number>;` and no decimal literal, so **no
+counted line moves out of `generatePopulation.js` and no refreeze row is owed.**
+
+**LINE-ADDRESSED REGISTERS (interim rule 13): NONE FOUND.**
+`git grep -n -F '<path>' -- tests/lint scripts` for all three paths returns no `path:line` row
+under any of them: `tests/lint/.prose-numerics-baseline.json` carries zero rows for the three
+(`grep -c` = 0, exit 1); no dark-guard registry file exists at this tip; the
+`scripts/.observed-shape-readers-baseline.json` hits are its frozen subject-commit tree manifests
+(content-addressed provenance, not a live line address); and
+`tests/lint/worldGenerationClockSeam.walker.test.js:80` names `src/generators/pipeline.js` as a
+member of `ENTRY_POINTS` — a path, not an address.
+
+**Registers that do NOT move, each measured:** `tests/copy/.voice-mechanics-generators-baseline.json`
+(the Tier-5 `src/generators` string-literal ratchet, SHRINK-ONLY, which freezes
+`src/generators/pipeline.js` at `{em:2, bang:0}` — re-measured with the repository's own espree
+extractor over both texts: **2/0 and 0/0 unmoved, estate totals em 51 / bang 0 over 114 files,
+identical**, because the lifted JSDoc is a COMMENT and this tier scans string literals only; its
+test joins `checks`); `scripts/mutation-coverage-manifest.json`
+(`tests/generators` IS an enforcer dir, but this member CREATEs nothing and the register is keyed
+PER FILE — `tests/generators/pipelinePinnedMode.test.js` already holds a `{kind:'rationale'}` row,
+and the walker's arm is presence, not title coverage ⇒ `invariants +0`, `uncoveredBaseline`
+unmoved); `scripts/.size-baseline.json` (no frozen row for either path; net zero effective lines;
+`npcGenerator.js` untouched at 1345); `tests/lint/proseNumerics.test.js` (this member renders no
+figure, and its baseline carries no row for either path); `scripts/check-writer-reach.mjs` (EXECUTED on a pristine and a post-lift copy of the tree: exit 0
+both, logs BYTE-IDENTICAL — `judged 6537 · LIT 572 · LIT-NAME 4671 · DARK 1294 (reviewable 495)`)
+and `scripts/check-observed-shape-readers.mjs` (no new domain reader of a settlement field — this
+member adds no `src/domain/**` reader at all; and NEITHER change path holds an inventory,
+identity, rowTag, digest or minRows row in `scripts/.observed-shape-readers-baseline.json`, whose
+`total` is 1,964 over 387 files — 26 other `src/generators/**` files are in it and these two are
+not, so the count is unmovable by construction. ⚠ The detector cannot run outside a git worktree:
+`validateBaselineHistory` refuses with "migration genesis is not a committed ancestor of current
+HEAD", which is why this row is measured from the baseline rather than from a run); `tests/property/generatorGoldenMaster.test.js` and
+`tests/property/dossierProseManifest.test.js` (the golden posture is UNCHANGED, and A2 is the
+proof). **No `REGISTER` row and no `DOC` row.**
+
+## §8 · Ordered coding sequence
+
+0. Preflight: branch, ancestry, substrate, clean targets, and all eight `requiredSymbols` present.
+1. Capture the pre-wiring evidence: run the sealed `checks`' first array GREEN at the base, and
+   record the unpinned draw count on `generatePopulation`'s own stream (315 at the battery's seed
+   and config) so the post-edit figure has something to be equal to.
+2. **Add** `export function chooseOrPin(pins, key, draw)` to `src/generators/pipeline.js`, body and
+   JSDoc copied VERBATIM from `generatePopulation.js:35-44`, placed directly beneath the `Pins`
+   typedef. Do not edit it while moving it.
+3. **Widen** `generatePopulation.js:18` to `import { chooseOrPin, registerStep } from '../pipeline.js';`
+   and **delete** the block at `:35-:44` together with the blank line that followed it.
+4. Add this member's four arms in a SECOND top-level literal `describe` in
+   `tests/generators/pipelinePinnedMode.test.js`, leaving EM-P0's seven arms byte-unmoved, and
+   update that file's header comment to say the file now carries two batteries.
+5. Run the focused verification of §10, then the sealed `checks` in order.
+
+⛔ **No other edit is in scope.** Not a tidy of the import list, not a rename, not a second
+primitive, not a clone-on-entry (that is EM-R1's, and it lands serially — see the collision group).
+
+## §9 · Acceptance matrix
+
+| id | case | convicted by | home |
+|---|---|---|---|
+| **A1** | **The primitive's contract at its exported home.** Imported FROM `src/generators/pipeline.js` (the import is itself the assertion that the home is real) and driven over its whole matrix with a counting draw thunk: an OWN-PRESENT key returns `pins[key]` and the thunk is NEVER called — **including when the own value is `undefined`**; an absent key, an **INHERITED (prototype-chain)** key, `null` pins and `undefined` pins each call the thunk EXACTLY ONCE. `generatePopulation.js` is read as TEXT and asserted to hold **no second DEFINITION** — `/function chooseOrPin\(/` matches **zero** times (MEASURED on the post-lift probe: the file still holds the spelling FIVE times, as the widened import plus its four call sites, so an arm phrased as "no occurrence" would be FALSE) — anchored against its `import { chooseOrPin, registerStep }` line so the arm cannot pass by the file having vanished. | a `key in pins` rewrite; a truthiness test; a second spelling left behind | `tests/generators/pipelinePinnedMode.test.js` |
+| **A2** | **The lift moves nothing — the null change.** Unpinned generation through the REAL `generateSettlementPipeline` is byte-identical to the committed golden manifest over a fixed stride of the 525-row corpus; the four population keys and the assembled settlement hash identically to the base; the step's own stream takes the SAME draw count unpinned (**315** at seed `em-p0-pinned-mode` and the battery's five-key config — an AS-OF figure measured at `bdbf7c89c`); and the registry still holds ONE `generatePopulation` registration, ONE stream object and ZERO inner forks, with `drawPopulation` and `derivePopulation` absent from the step order by `expectAbsentWithAnchor`. | any byte the "pure move" moved | `tests/generators/pipelinePinnedMode.test.js` |
+| **A3** | ⭐ **The pin is live — the discriminating arm.** ⛔ Scope: **CONTEXT-built** pins, EM-P0's landed mode. A whole pin set carrying ONE OVERRIDDEN VALUE (a sentinel name on `npcs[0]`) re-derives a settlement that CARRIES that sentinel into the assembled output, with the base settlement asserted NOT to contain it (anchored negative); and a fully pinned step draws **ZERO** against 315 unpinned. ⛔ **The plain same-seed pinned re-derive is NOT this arm and may not be substituted for it** — see §9a. ⛔ Asserts nothing about record-built pins (§11 STOP-4). | a dead pin that the plain re-derive cannot see | `tests/generators/pipelinePinnedMode.test.js` |
+| **A4** | **The partial-pin refusal survives the edit** (preserved, not introduced — design §22 ruling 6: "the partial-pin refusal stays exactly as EM-P0 landed it"). A pin set supplying some but not all of a step's `provides` THROWS the exact sentence `Pipeline pins: step "generatePopulation" has choosers [npcs, relationships, factions, conflicts] but pins supply only [relationships]. Pin every chooser of a step or none of them.`, and with `onStrictViolation` supplied reports `{ step: 'generatePopulation', kind: 'pin', keys: ['npcs','factions','conflicts'] }` instead of throwing. Asserted as the WHOLE sentence, not a substring. | a loosened refusal; a re-worded message | `tests/generators/pipelinePinnedMode.test.js` |
+
+## §9a · ⭐ WHY THE OBVIOUS ACCEPTANCE IS VACUOUS, AND WHAT REPLACES IT
+
+The natural sentence for this family is *"a pinned re-derive reproduces the record byte for byte."*
+**Measured, that sentence cannot fail.** This lane planted a mutant whose `chooseOrPin` ignores its
+pin entirely (`if (false && pins && …)`) and re-ran the whole probe:
+
+| arm | real primitive | mutant (pin ignored) | discriminates? |
+|---|---|---|---|
+| plain same-seed pinned re-derive reproduces the record | ✅ | ✅ | ❌ **NO** |
+| 7/7 sampled golden rows match | ✅ | ✅ | ❌ **NO** |
+| partial pin set reds by name | ✅ | ✅ | ❌ no (it lives in `runPipeline`) |
+| **fully pinned step draws 0 (vs 315)** | **0** | **315** | ✅ **YES** |
+| **an overridden pin value reaches the settlement** | **carried** | **not carried** | ✅ **YES** |
+
+The cause is that generation is same-seed deterministic: re-running with the same seed reproduces
+the record **whether or not the pin is consulted**. Only the DRAW COUNT and an OVERRIDDEN VALUE
+convict a dead pin. ⇒ **A2 carries the null change; A3 carries the liveness, and A3 is written with
+an override because without one it would be an assertion that already holds at the base.** This is
+also why EM-B2a4's A7 needs an anti-vacuity arm, and why EM-B2a3's "pinned re-derive reproduces the
+provided keys" must be paired with a draw count or an override — offered to the chair as a rule for
+the family, not decided here.
+
+## §10 · Verification commands
+
+```sh
+# Focused static checks
+npx eslint src/generators/pipeline.js src/generators/steps/generatePopulation.js \
+           tests/generators/pipelinePinnedMode.test.js
+
+# The battery and its neighbours — one test directory per gated run
+npx vitest run --pool=threads --maxWorkers=2 \
+  tests/generators/pipelinePinnedMode.test.js tests/generators/pipelineContract.test.js \
+  tests/generators/pipelineStrictMode.test.js tests/generators/pipelineRngRestore.test.js \
+  tests/generators/stepMetadataSync.test.js tests/generators/dataFlowContract.test.js \
+  tests/generators/generationForkCensus.test.js
+
+# The standing golden authority — this member's central claim
+npx vitest run --pool=threads --maxWorkers=2 tests/property/generatorGoldenMaster.test.js
+
+# The governing walkers, by FILE (these are sealed checks)
+npx vitest run --pool=threads --maxWorkers=2 \
+  tests/lint/generationForkRegistry.contract.test.js \
+  tests/lint/worldGenerationClockSeam.walker.test.js tests/lint/sizeBaseline.test.js
+
+# The Tier-5 src/generators voice ratchet — SHRINK-ONLY, and it governs EVERY change under
+# src/generators/**. A sealed check (added at the EM-T10 pre-proof; no earlier version named it).
+# Measured unmoved across the lift: src/generators/pipeline.js stays {em:2, bang:0}, the step file
+# stays 0/0, estate totals em 51 / bang 0 — the lifted JSDoc is a COMMENT and this tier scans
+# string literals only. ⛔ NEVER set UPDATE_VOICE_BASELINE.
+npx vitest run --pool=threads --maxWorkers=2 tests/copy/voiceMechanics.test.js
+
+# ⛔ THE COUNT PROVER — KIT FURNITURE (interim rule 12, judgment 81), run BEFORE THE SEAL from the
+# chair's kit path. It is NEVER a sealed check, NEVER a §7 row and is never placed in the tree.
+node <kit>/packets-waiting/EM-B2a2.count-prover.mjs \
+     <kit>/packets-waiting/EM-B2a2.md <kit>/packets-waiting/EM-B2a2.manifest.json
+
+# ⛔ THE BUILD LANE'S INSTRUMENTS — NEVER SEALED CHECKS
+#   (a) the excluded directory, which MUST EXIT 0:
+npx vitest run tests/lint --exclude=tests/lint/sovereigntyLightingContract.walker.test.js
+#   (b) the lighting walker ALONE, as the measured, named INTERIOR RED:
+npx vitest run tests/lint/sovereigntyLightingContract.walker.test.js
+#   ⛔ DO NOT set LIGHTING_CENSUS_REFREEZE. The refreeze is the chair's, at the terminal.
+#   (c) the two dist-reading budget tests, kept OUT of `checks` by interim rule 2 — the train's
+#       terminal takes ONE summed price from ONE real build:
+npx vitest run tests/build/generationWorkerLazy.test.js tests/build/vendorPdfLazy.test.js
+
+# ⛔ THE BROWSER SUITE: NOT GOVERNING. This member touches no src/components path, no route, no
+# data-testid and no accessible name, so NO e2e/ spec is named (interim rule 10, stated as it
+# requires).
+```
+
+## §11 · Mandatory STOP conditions
+
+- **STOP-1 — a golden row moves.** If any row of `generatorGoldenMaster` or the prose manifest
+  moves, the "pure move" was not pure. STOP; do not re-record a golden. The lift is textual and a
+  moved byte means the body was edited in transit.
+- **STOP-2 — the unpinned draw count changes.** If `generatePopulation`'s own stream takes any
+  count other than the pre-edit figure, a draw was added or removed. STOP.
+- **STOP-3 — `npcGenerator.js` is touched at all.** It is not a change path of this member. One
+  edit to it re-opens ruling 4's frozen 1345 and the member is out of scope. STOP.
+- **STOP-4 — ⛔ any arm asserts that a RECORD-built pin set reproduces a record.** Measured at the
+  read tip: **2/9** on this lane's stride, **6/63** in design §22 item 1, with the caller's bag
+  mutated in place in 3/9. Such an arm is false and would go green only by accident of tier. The
+  cure belongs to EM-R1–EM-R5 and EM-R0c. STOP and hand the arm back.
+- **STOP-5 — `pipeline.js` gains a second writer.** If EM-R1 (or any packet) is placed to MODIFY
+  `src/generators/pipeline.js` in the same train, the validator refuses both. STOP and take the
+  serial order.
+- **STOP-7 — ⛔ the generation worker moves ANY bytes.** The ceiling is EXACT at zero slack and
+  interim rule 2 gives it NO PLACEMENT CURE. This member predicts **0 B** and that prediction is
+  not computable from source (§5.9). If the train's ONE real build reads any rise attributable to
+  these two modules: STOP. Do NOT re-mint — the ceiling's own docblock rules that "a rise is a
+  chair ruling with a reason, never a lane's edit". The MEASURED fallback the chair may take
+  instead is **EXPORT-IN-PLACE**: leave `chooseOrPin` in `generatePopulation.js` and prepend
+  `export`, so the siblings import it from `../steps/generatePopulation.js`. That is +7 source
+  bytes with no relocation and no cross-module deconflict, and it still yields ONE exported home
+  and ONE spelling; its only cost is that a STEP rather than the runner owns the primitive, which
+  is the chair's call and not a lane's.
+- **STOP-6 — the lift needs an edit to be buildable.** If the body must change to be exported, it
+  is not a lift and the member's premise is refuted. STOP with the smallest contradiction.
+
+## §12 · Completion receipt
+
+The receipt quotes, as executed output: the eslint exit line; the two vitest arrays; the golden
+suite's row count; the pre-edit and post-edit unpinned draw counts side by side; A3's override
+sentinel carried into the settlement beside the anchored negative on the base; the five-figure
+lighting delta AS THE WALKER PRINTS IT, with the red's shape (`expected <titles+4> to be <titles>`)
+and NOT a numeral; the excluded `tests/lint` directory run's exit 0; and the counterforce for A3 —
+the planted mutant (`if (false && pins && …)`) with the draw count it produced (315 against 0) and
+the sentinel it failed to carry, then restored.
+
+⭐ **Already executed by the compile lane, on a post-lift PROBE COPY in scratch** (the read tip was
+never written to; `git status --short` stayed EMPTY throughout): the diff is exactly +9/−11 lines
+and one modified import; the post-lift tree exports `chooseOrPin` while the read tip does not
+(the negative control that proves the probe copy was live); all four population keys and the
+settlement hash byte-identical across the lift; 315 unpinned and 0 fully pinned, unchanged; 7/7
+sampled golden rows matching; the partial-pin sentence unchanged; and EM-P0's A7 arms still
+reading `1` and `null`. Those receipts are in `EM-B2a2.evidence.md` and are the lane's evidence,
+not a substitute for the build lane's own run.
