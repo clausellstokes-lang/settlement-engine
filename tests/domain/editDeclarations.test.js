@@ -22,6 +22,7 @@ import { readFileSync, readdirSync, statSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
 import { dirname, join, relative, resolve } from 'node:path';
 import { beforeAll, describe, expect, test } from 'vitest';
+import { commentsOnly } from '../helpers/codeOnlySource.js';
 import {
   FIELD_DECLARATIONS,
   declarationsFor,
@@ -206,6 +207,44 @@ function walkSources(dir, out = []) {
   return out;
 }
 
+/**
+ * THE DORMANCY MATCHER — the predicate, as a function the live arm and its in-body control
+ * both run, over source text the caller supplies.
+ *
+ * ⭐ IT READS CODE, NEVER PROSE. Every source goes through the estate's ONE shared comment
+ * strip (`commentsOnly`, `tests/helpers/codeOnlySource.js`), which blanks `//`, block and
+ * JSX comments and keeps every literal byte-for-byte. A JSDoc
+ * `@typedef {import('…/edit/types.js').FieldDeclaration}` is a TYPE-ONLY reference that no
+ * bundler ever emits an edge for, so it puts nothing into any closure and cannot move the
+ * +0 B price; a RUNTIME `import … from '…'` still convicts by name, because its specifier
+ * lives in a string literal the strip preserves.
+ *
+ * TOOL-32 (2026-09-21): the matcher used to read RAW bytes, and the composed train reds on
+ * EM-D0d's `src/components/edit/FreeField.jsx` and `PoolField.jsx`, which carry exactly that
+ * JSDoc line. MEASURED at that base rather than argued: the build's OWN derivation strips
+ * comments before it reads a specifier (`computeEagerModuleGraph` in `vite.config.js`), and
+ * with it neither leaf is in `EAGER_FIRST_PAINT_MODULES` (269 modules, `src/main.jsx` in it
+ * as the control, nothing under `src/domain/edit/`), while a plain import-graph walk over
+ * all 2,256 `src/` modules on stripped source resolves 9,553 real edges and reaches neither
+ * leaf from either file (closures of 10 and 12 modules). The arm's PURPOSE held; its matcher
+ * was over-broad. Nothing here weakens what the arm catches — see the control in the arm.
+ *
+ * @param {ReadonlyArray<readonly [string, string]>} entries repo-relative path and its source
+ * @returns {string[]} one message per importer, `<file> imports <leaf>`
+ */
+function dormancyImporters(entries) {
+  const importers = [];
+  for (const [rel, source] of entries) {
+    for (const match of commentsOnly(source).matchAll(/(?:from|import)\s*\(?\s*['"]([^'"]+)['"]/g)) {
+      const specifier = match[1];
+      if (!specifier.startsWith('.')) continue;
+      const resolved = relative(ROOT, resolve(dirname(join(ROOT, rel)), specifier)).replace(/\\/g, '/');
+      if (NEW_LEAVES.includes(resolved)) importers.push(`${rel} imports ${resolved}`);
+    }
+  }
+  return importers;
+}
+
 /** @type {object[]} */
 let corpus = [];
 
@@ -230,21 +269,29 @@ describe('EM-A1 — the field declarations, their shape law and their existence 
     // predicted +0 B on all four budgeted closures true by construction rather than by hope.
     const scanned = walkSources(join(ROOT, 'src')).filter((rel) => !NEW_LEAVES.includes(rel));
     expect(scanned.length, 'the src/ walk found nothing, so the absence below would be vacuous').toBeGreaterThan(400);
-    const importers = [];
-    for (const rel of scanned) {
-      const source = readFileSync(join(ROOT, rel), 'utf8');
-      for (const match of source.matchAll(/(?:from|import)\s*\(?\s*['"]([^'"]+)['"]/g)) {
-        const specifier = match[1];
-        if (!specifier.startsWith('.')) continue;
-        const resolved = relative(ROOT, resolve(dirname(join(ROOT, rel)), specifier)).replace(/\\/g, '/');
-        if (NEW_LEAVES.includes(resolved)) importers.push(`${rel} imports ${resolved}`);
-      }
-    }
+    const importers = dormancyImporters(scanned.map((rel) => [rel, readFileSync(join(ROOT, rel), 'utf8')]));
     expect(
       importers,
       'a module under src/ imports one of EM-A1\'s new leaves. Wave 1 is HEADLESS by construction:'
       + ' an importer puts the declaration table into a bundle closure and invalidates the +0 B price'
       + ' this packet declared on the worker, the lazy engine, the eager first paint and the edge metas.',
+    ).toEqual([]);
+
+    // GUARD-THE-GUARD, through the SAME predicate (this file's house rule, ⭐ third header
+    // paragraph): the comment strip blinds the matcher to a JSDoc type reference and to
+    // NOTHING ELSE. Both probes are SYNTHETIC source strings — no file is written under src/,
+    // and the path is resolved by arithmetic — so the pair travels with the arm it defends
+    // and costs the scan above nothing. Without it, a strip that one day blanked too much
+    // would leave the absence above green forever with nothing left to catch, which is the
+    // exact failure the estate's shared strip exists to make visible rather than silent.
+    const plantedAt = 'src/components/edit/PlantedField.jsx';
+    expect(
+      dormancyImporters([[plantedAt, "import { declarationsFor } from '../../domain/edit/fieldDeclarations.js';\n"]]),
+      'a RUNTIME import of a leaf must still convict, naming the file and the leaf',
+    ).toEqual([`${plantedAt} imports src/domain/edit/fieldDeclarations.js`]);
+    expect(
+      dormancyImporters([[plantedAt, "/** @typedef {import('../../domain/edit/types.js').FieldDeclaration} FieldDeclaration */\n"]]),
+      'a JSDoc typedef names a TYPE, enters no bundle closure and is not an importer',
     ).toEqual([]);
   });
 
