@@ -35444,9 +35444,10 @@
     },
     {
       "id": "EM-P4",
-      "status": "READY",
+      "status": "LANDED",
       "packetPath": "docs/implementation/packets/settlement-editor/EM-P4.md",
       "verifiedBase": "e348d59b609e2c62c957a4cd78653849792043b7",
+      "landedAt": "82831e50507ddda72e0e6d14436f5149e945b51e",
       "changeManifest": [
         {
           "_note": "THE ONE HOME. The four institution-facing readers and their three private helpers move VERBATIM out of src/generators/lookups.js into this new pure-data leaf: institutionAvailableAtTier, getInstitutionalCatalog, getFullCatalogWithTierMeta, getInstitutionsForTier, plus effectiveTierOf, filterCatalogByTierGate and mergeTierCatalogs. Its ONLY imports are ./constants.js (TIER_ORDER, tierAtLeast) and ./institutionalCatalog.js -- the same two src/data modules lookups.js imports today, so the module graph gains a node and no edge to a new subtree. MEASURED MINIMAL SET: EM-A2a needs three exports (getInstitutionsForTier for institution.class, getInstitutionalCatalog for the category grouping, institutionAvailableAtTier as the one gate), whose closure is those three plus filterCatalogByTierGate and mergeTierCatalogs. getFullCatalogWithTierMeta and effectiveTierOf are moved WITH them although EM-A2a does not read them, because effectiveTierOf and filterCatalogByTierGate are two spellings of the same minTier gate and lookups.js's own docblock says the two filters must not disagree: splitting the CH-3 tier-gate law across two files is the drift the law exists to prevent. getTierOrder and getPopulationRanges STAY in lookups.js -- they are not institution lookups and moving them buys nothing. ⛔ NO SECOND CATALOGUE AND NO SECOND GATE (design §12.7): this is the generator's own reader relocated, not a copy. ⛔ THE BASENAME MAY NOT BE lookups.js -- MEASURED, see the CREATE row below.",

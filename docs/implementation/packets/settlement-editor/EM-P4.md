@@ -1,6 +1,6 @@
 # Settlement editor / EM-P4 — THE POOLS' SOURCES GET LAWFUL ADDRESSES: the institutional catalogue's tier lookups move DOWN a layer behind a stable domain address, and the two status unions gain a value-level home in their own roster files
 
-- **Status:** `READY`
+- **Status:** `LANDED`
   ⚠ The status value above stands ALONE on its line because `parsePacketHeader` anchors the status
   row at end-of-line and takes `status` only when exactly one row matches. Every stamp, caveat and
   date goes on these continuation lines, never on the row.
@@ -13,6 +13,7 @@
   Change-manifest intersection with all four, and with EM-B3d, is **EMPTY** — executed.
   ⛔ **EM-D0b IS THE TRAIN'S BYTE-ARM HOLDER** (interim rule 14). This packet carries **no** row on
   `tests/build/vendorPdfLazy.test.js` and states its own predicted price in §2.3 and §7.
+- **Landed at:** `82831e50507ddda72e0e6d14436f5149e945b51e` — the twenty-third landing — train EM-T10 (six of seven: EM-B1a returned to compile as version 9); the retiree-carrying member composed last, its flip the very next commit; six declarations MF-CH3 requires moved to lawful addresses; the eager set 269 → 270 modules at about +468 B, priced under EM-D0c's bound
 - **Packet version:** 1
 - **Verified base:** `em-t10-p4-2026-09-21` at `e348d59b609e2c62c957a4cd78653849792043b7`
   ⚠ Left for the chair's promotion stamp (interim rule 5). **The revalidation sentence the chair
