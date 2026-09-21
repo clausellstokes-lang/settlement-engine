@@ -8,7 +8,7 @@
  * Institution assembly step for the settlement generation pipeline.
  */
 
-import { registerStep } from '../pipeline.js';
+import { chooseOrPin, registerStep } from '../pipeline.js';
 import { TIER_ORDER } from '../../data/constants.js';
 import { institutionalCatalog, catalogIdForName } from '../../data/institutionalCatalog.js';
 import { INSTITUTION_DESC_VARIANTS } from '../../data/institutionDescVariants.js';
@@ -210,12 +210,41 @@ export function collapseUpgradeChains(institutions) {
   return removed;
 }
 
+/**
+ * THE UNPINNED SENTINEL. `chooseOrPin` returns the thunk's value only when the key is ABSENT
+ * from the bag, so returning this symbol is how the step asks the SHARED primitive whether a
+ * chooser is held without re-spelling its own-property rule. It is module-private, so no pin
+ * value can ever equal it.
+ */
+const UNPINNED = Symbol('assembleInstitutions:unpinned');
+
 registerStep('assembleInstitutions', {
   deps: ['buildGenerationContext', 'resolveResources', 'resolveStress', 'resolveNeighbour'],
   reads: ['categoryToggles', 'effectiveConfig', 'generationContext', 'goodsToggles', 'institutionToggles', 'nearbyResources', 'neighbourProfile', 'threat', 'tier', 'tradeRoute'], // ctx keys this step consumes that another step produces (A+ generators.3 data-flow contract)
   provides: ['institutions', 'catalogForTier', 'generationRepairs'],
   phase: 'institutions',
 }, (ctx, rng) => {
+  // THE PIN CONSULT (EM-B2a3). All three of this step's choosers are gated through the runner's
+  // shared primitive, and `runPipeline` refuses a set that supplies some of them and not others,
+  // so they are held together or not at all: a held roster short-circuits the whole production
+  // below and none of its draws is taken. A held value is CLONED on the way out (design §22
+  // ruling 6) because a record-built bag handed back by reference is written through in place by
+  // the later roster passes. The clone is LOCAL to this member's consults and retires the day
+  // EM-R1 clones the bag on entry at the runner.
+  const pins = ctx.__pins || null;
+  const held = {
+    institutions: chooseOrPin(pins, 'institutions', () => UNPINNED),
+    catalogForTier: chooseOrPin(pins, 'catalogForTier', () => UNPINNED),
+    generationRepairs: chooseOrPin(pins, 'generationRepairs', () => UNPINNED),
+  };
+  if (held.institutions !== UNPINNED) {
+    return {
+      institutions: structuredClone(held.institutions),
+      catalogForTier: structuredClone(held.catalogForTier),
+      generationRepairs: structuredClone(held.generationRepairs),
+    };
+  }
+
   const {
     tier, tradeRoute, effectiveConfig, nearbyResources,
     institutionToggles, categoryToggles, goodsToggles,

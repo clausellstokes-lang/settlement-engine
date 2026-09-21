@@ -159,7 +159,7 @@ const OFF_CORPUS_STEP = 'resolveConfig';
  * this packet asserts nothing about their cure.
  */
 const DISPLAY_NAME_KEYED_SITES = [
-  { site: 'src/generators/steps/assembleInstitutions.js:745', channel: 'hash', marker: 'inst.name' },
+  { site: 'src/generators/steps/assembleInstitutions.js:774', channel: 'hash', marker: 'inst.name' },
   { site: 'src/data/npcData.js:1334', channel: 'hash', marker: '?.name' },
   { site: 'src/domain/townMap/glyphAssign.js:125', channel: 'mint', marker: 'createPRNG(`glyph:${seedId}`)' },
 ];
