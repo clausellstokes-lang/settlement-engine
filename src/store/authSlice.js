@@ -80,9 +80,9 @@ import { normalizeSavedSettlementsOwnerId } from './savedSettlementsHydration.js
 //                    a Cartographer capability; the two are deliberately separate fields
 //                    because the owner ruled them on opposite sides.
 export const TIER_GATE = {
-  anon:    { minTier: 'hamlet', maxTier: 'town',    maxSaves: 0,        neighbour: false, export: false, mapChains: false, customContent: false, preGenOptions: false },
-  free:    { minTier: 'thorp',  maxTier: 'capital', maxSaves: 3,        neighbour: false, export: false, mapChains: false, customContent: false, preGenOptions: true  },
-  premium: { minTier: 'thorp',  maxTier: 'capital', maxSaves: Infinity, neighbour: true,  export: true,  mapChains: true,  customContent: true,  preGenOptions: true  },
+  anon:    { minTier: 'hamlet', maxTier: 'town',    maxSaves: 0,        neighbour: false, export: false, mapChains: false, customContent: false, settlementEditor: false, preGenOptions: false },
+  free:    { minTier: 'thorp',  maxTier: 'capital', maxSaves: 3,        neighbour: false, export: false, mapChains: false, customContent: false, settlementEditor: false, preGenOptions: true  },
+  premium: { minTier: 'thorp',  maxTier: 'capital', maxSaves: Infinity, neighbour: true,  export: true,  mapChains: true,  customContent: true,  settlementEditor: true,  preGenOptions: true  },
 };
 
 // `capital` is the legacy tier name that lines up with pricing.js's maxSize
@@ -841,6 +841,31 @@ export const createAuthSlice = (set, get) => ({
     if (staffUnlocksPaidFeatures(get().auth.role)) return true;
     const { tier } = get().auth;
     return TIER_GATE[tier]?.customContent === true;
+  },
+
+  /**
+   * ⛔⛔ DARK BY DESIGN. Whether this account may open the settlement editor (design §20.4).
+   *
+   * THIS PREDICATE INVERTS THE SHAPE OF EVERY OTHER GATE IN THIS SLICE ON PURPOSE. The others
+   * open for staff first and then read the tier; this one reads the tier AND requires staff,
+   * because `resolveTier` writes a staff account in as tier 'premium', so the tier gate alone
+   * would open the editor to every paying Cartographer the day it lands — and design §20.4 says
+   * "⛔ VISIBILITY IS THE OWNER'S".
+   *
+   * ⭐ `&& isStaffRole(role)` IS THE ONE LINE TO DELETE WHEN THE OWNER OPENS THE DOOR — and that
+   * deletion is ONE OWNER-SIGNED ACT with two inseparable companions: the entitlementLadder row
+   * and the flow-b-auth-credits-ai browser spec. Deleting it makes this predicate the house shape
+   * and nothing else in this file has to change. Until then the audience is staff and the DEV-only
+   * preview persona, which supplies a role `isStaffRole` accepts and which cannot exist in a
+   * production build.
+   *
+   * ⛔ `isStaffRole`, NOT `staffUnlocksPaidFeatures`: the second is governed by the
+   * STAFF_UNLOCK_ALL_PAID kill switch, and revoking the paid-feature unlock must not take the
+   * unbuilt editor away from the people building it.
+   */
+  canEditSettlement: () => {
+    const { tier, role } = get().auth;
+    return TIER_GATE[tier]?.settlementEditor === true && isStaffRole(role);
   },
 
   maxAllowedTier: () => {

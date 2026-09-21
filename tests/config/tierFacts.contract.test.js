@@ -41,6 +41,10 @@ describe('tierFacts ↔ TIER_GATE enforcement parity', () => {
       expect(facts.exportMode).toBe(gate.export ? 'unlimited' : 'per_dossier');
       // Custom content is premium-only; mirror the gate exactly.
       expect(facts.customContent).toBe(gate.customContent);
+      // The settlement editor is premium-only on the tier axis; mirror the gate exactly.
+      // (The DARK rule's staff conjunct lives in authSlice#canEditSettlement, not here: this
+      // arm pins the TIER's entitlement, which is what the ladder and the copy will read.)
+      expect(facts.settlementEditor).toBe(gate.settlementEditor);
       // §934.34 — the PRE-GENERATION options, a different gate from customContent above:
       // the owner ruled the wizard's own dials free with an account and the Compendium's
       // authored content premium, so the two facts are pinned separately.
