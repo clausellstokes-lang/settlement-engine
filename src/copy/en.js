@@ -1819,4 +1819,16 @@ export const en = Object.freeze({
       a: 'The structural layer (population, factions, supply chains, hooks) is a deterministic simulator, not an LLM. Optional Narrative Refinement spends a credit to turn the simulation into prose. You can keep the raw output and skip the LLM entirely.',
     },
   },
+
+  // The settlement editor's field controls (EM-D0d). `limit` takes the estate's
+  // own used-of-limit pair, {actual} and {max}, so one count reads one way.
+  edit: {
+    field: {
+      emptyOption:     'Not set',
+      noOptions:       'No choices available',
+      rollAnother:     'Roll another',
+      rollUnavailable: 'Rolling is unavailable here',
+      limit:           '{actual} of {max} characters',
+    },
+  },
 });
