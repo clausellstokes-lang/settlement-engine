@@ -356,3 +356,84 @@ describe('ci.yml redeploy job retriggers Vercel after CI goes green', () => {
     expect(ci).toMatch(/^ {2}redeploy:.*#\s*deploy-gate:\s*optional/m);
   });
 });
+
+// ── The floored-file list is ONE SET in three places ───────────────────────────
+/**
+ * ⛔ THE DRIFT THIS REFUSES, and it was a recorded finding before it was a test:
+ * `test-gate-honesty-7` (docs/COMPREHENSIVE_REVIEW_2026-07-15.md) observed that the
+ * coverage floors are keyed to exact file paths in TWO places — vite.config.js
+ * `test.coverage.thresholds` and the npm script's `--coverage.include` rows — with
+ * nothing asserting they agree, so renaming a floored money module drops its floor
+ * SILENTLY instead of redding the gate. Re-scoping the CI job on 2026-09-20 added a
+ * THIRD place (the workflow step's own list), which makes the guard owed now rather
+ * than later.
+ *
+ * The three readings are deliberately different in kind, so no single mistake can
+ * satisfy all three: (a) the thresholds are IMPORTED as live config — the same idiom
+ * tests/build/engineChunkLazy.test.js already uses for vite.config.js — never a
+ * hand-copied list; (b) the npm script is parsed out of package.json; (c) the
+ * workflow's list is parsed out of the `run:` block's bash array.
+ *
+ * ⭐ WHY (c) IS ONE LIST AND NOT TWO. The workflow spells the seven paths ONCE, in
+ * `FLOORED`, and both uses expand that array — the `related` positionals and the
+ * `--coverage.include` rows. Asserting the array's CONTENT is therefore not enough:
+ * the assertions below also pin that both uses really read it, because a step that
+ * kept the array but hard-coded either use could drift while this list stayed right.
+ */
+function flooredFromWorkflowStep(runText) {
+  const block = /(?:^|\n)\s*FLOORED=\(([^)]*)\)/.exec(runText || '');
+  return {
+    files: block ? block[1].split('\n').map((line) => line.trim()).filter(Boolean) : [],
+    // `related` takes the array itself, quoted (so a path with a space stays one argument).
+    positionalsReadTheArray: /npx vitest related "\$\{FLOORED\[@\]\}"/.test(runText || ''),
+    // …and the include rows are BUILT from the same array, then passed quoted.
+    includesReadTheArray: /for\s+\w+\s+in\s+"\$\{FLOORED\[@\]\}"/.test(runText || '')
+      && /include\+=\("--coverage\.include=\$\w+"\)/.test(runText || '')
+      && /"\$\{include\[@\]\}"/.test(runText || ''),
+  };
+}
+
+/** The `--coverage.include=<path>` rows of a package.json script command. */
+function includesFromScript(script) {
+  return [...String(script || '').matchAll(/--coverage\.include=(\S+)/g)].map((m) => m[1]);
+}
+
+describe('the floored money/security file list is ONE set in all three places', () => {
+  it('vite.config thresholds, the npm script and the ci.yml step name the same seven files', async () => {
+    const viteConfig = (await import('../../vite.config.js')).default;
+    const pkg = JSON.parse(readFileSync(join(ROOT, 'package.json'), 'utf8'));
+    const ci = readFileSync(join(ROOT, '.github/workflows/ci.yml'), 'utf8');
+    const stepRun = /- name: Coverage floors[^\n]*\n\s*shell: bash\n\s*run: \|\n([\s\S]*?)(?=\n {2}\w[\w-]*:|\n {6}- |$)/
+      .exec(ciJobBody(ci, 'coverage-floors'))?.[1];
+
+    const fromThresholds = Object.keys(viteConfig.test.coverage.thresholds).sort();
+    const fromScript = includesFromScript(pkg.scripts['test:coverage:floors']).sort();
+    const workflow = flooredFromWorkflowStep(stepRun);
+    const fromWorkflow = [...workflow.files].sort();
+
+    // LIVENESS FIRST. Every assertion below is an equality, and equalities between
+    // three EMPTY lists hold perfectly — so prove all three readings really found
+    // something before comparing them. Without this the whole arm survives the
+    // thresholds block being deleted, the script being renamed and the step being
+    // rewritten, which is precisely the drift it exists to catch.
+    expect(fromThresholds.length, 'no per-file coverage thresholds were read from vite.config.js').toBe(7);
+    expect(fromScript.length, 'no --coverage.include rows were read from the npm script').toBe(7);
+    expect(fromWorkflow.length, 'no FLOORED array was read from the ci.yml coverage-floors step').toBe(7);
+
+    // anchored: the three readings are proven non-empty and of equal size above
+    expect(fromScript, 'the npm script and vite.config.js floors have drifted apart').toEqual(fromThresholds);
+    expect(fromWorkflow, 'the ci.yml step and vite.config.js floors have drifted apart').toEqual(fromThresholds);
+
+    // …and the workflow's ONE array really feeds BOTH of its uses.
+    expect(workflow.positionalsReadTheArray,
+      'the `related` positionals no longer expand "${FLOORED[@]}" — the list has been forked').toBe(true);
+    expect(workflow.includesReadTheArray,
+      'the --coverage.include rows are no longer built from "${FLOORED[@]}" — the list has been forked').toBe(true);
+
+    // THE ARM IS NOT VACUOUS: the same parser, against a planted step, reports the
+    // drift. A green above therefore means "the three agree", never "nothing was read".
+    const planted = flooredFromWorkflowStep(stepRun.replace(/\n\s*src\/lib\/saves\.js/, ''));
+    expect(planted.files, 'the plant did not actually drop a row — this control is broken').toHaveLength(6);
+    expect(planted.files.sort()).not.toEqual(fromThresholds);
+  });
+});

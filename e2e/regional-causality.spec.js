@@ -12,6 +12,48 @@ import { test, expect } from '@playwright/test';
  */
 const LAYERS_BUTTON = (page) => page.getByRole('button', { name: 'Layers', exact: true });
 
+/**
+ * ⛔ THE FIRST WAIT OF A SIGNED-IN JOURNEY IS NOT AN ASSERTION'S JOB (CURE-P, 2026-09-20).
+ *
+ * At PR #53's tip this file's first test was the one red in a browser job that passed
+ * whole on the other CI run of the SAME commit: `getByText('Trade Belt', { exact: true })`
+ * not visible within the default 5,000 ms, on both attempts, immediately after
+ * `goto('/settlements')`. Reproduced in this lane at CDP CPU throttling rate 5 and
+ * above, every run, with CI's error text to the character.
+ *
+ * It is not a product defect and the bound is not too small. The bound is being spent on
+ * the wrong thing: playwright.config.js records that a signed-in route costs about 780
+ * on-demand module transforms on a cold dev server, so the heaviest first paint in the
+ * suite was being asked to finish inside the budget meant for an assertion. The fix is
+ * to spend the wait on the conditions the page ALREADY DECLARES, and only then to assert
+ * at the unchanged default bound:
+ *
+ *   1. `[data-sf-route-loading]` gone — AppViews.jsx's `Loading` fallback, whose own
+ *      comment names this use, and the same hook `arrow-header`, `pinned-footer`,
+ *      `visual-polish` and `realm-herald-gate` already wait on.
+ *   2. the panel's own `<h1>Library</h1>` visible (SettlementsPanel.jsx's PageHeader) —
+ *      a POSITIVE anchor, because between `load` and React's first commit neither of the
+ *      negative conditions is on the page and a bare absence check would pass on a blank
+ *      document.
+ *   3. `role="status" aria-label="Loading saves"` gone — the skeleton SettlementsPanel.jsx
+ *      draws while `savesLoading` is true. useOwnerScopedSaves.js initialises that to
+ *      `true`, so it IS on the page at the panel's first paint: waiting for it to leave is
+ *      waiting for the saves and the campaign folders, which is what 'Trade Belt' is.
+ *
+ * ⛔ NO BOUND IS RAISED ANYWHERE IN THIS FILE, and no retry is added. Every assertion below
+ * keeps the suite's default 5,000 ms; this helper simply starts them from the moment the
+ * page says it is ready instead of from the moment the navigation returned.
+ */
+async function settleRoute(page) {
+  await page.waitForFunction(() => !document.querySelector('[data-sf-route-loading]'));
+}
+
+async function settleLibrary(page) {
+  await settleRoute(page);
+  await expect(page.getByRole('heading', { name: 'Library', exact: true })).toBeVisible();
+  await expect(page.getByRole('status', { name: 'Loading saves' })).toHaveCount(0);
+}
+
 function settlementSave(id, name) {
   return {
     id,
@@ -229,6 +271,7 @@ test.describe('regional causality campaign UI', () => {
 
   test('applies and resolves a queued regional impact from the campaign folder', async ({ page }) => {
     await page.goto('/settlements');
+    await settleLibrary(page);
 
     // `exact` because the campaign name now also appears INSIDE longer strings on
     // this page (a table <caption> "Settlements in Trade Belt" and two "· Trade
@@ -261,6 +304,7 @@ test.describe('regional causality campaign UI', () => {
 
   test('discovers and confirms suggested regional channels', async ({ page }) => {
     await page.goto('/settlements');
+    await settleLibrary(page);
 
     await page.getByTitle('Discover regional channels').click();
     await expect(page.getByText(/suggested/).first()).toBeVisible();
@@ -272,6 +316,11 @@ test.describe('regional causality campaign UI', () => {
 
   test('world map campaign workspace can switch to Wizard News', async ({ page }) => {
     await page.goto('/map');
+    // The map is the other signed-in route this file loads cold; its own first wait is the
+    // campaign `select`, and it is the same shape as the library's. Only the chunk condition
+    // applies here: the map reads its campaigns from localStorage, so it has no loading
+    // skeleton of its own to wait out.
+    await settleRoute(page);
 
     const campaignSelect = page.locator('select').filter({
       has: page.locator('option', { hasText: 'Trade Belt' }),
@@ -328,6 +377,7 @@ test.describe('regional causality campaign UI', () => {
 
   test('map Layers panel exposes regional overlay toggles and filters', async ({ page }) => {
     await page.goto('/map');
+    await settleRoute(page);
 
     await LAYERS_BUTTON(page).click();
     await expect(page.getByText('Regional channels', { exact: true })).toBeVisible();

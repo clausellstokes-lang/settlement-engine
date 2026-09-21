@@ -504,27 +504,68 @@ describe('bounded migration rehearsal plan', () => {
   });
 
   it('plans from a wave boundary the ledger has reached, and refuses a head inside a wave', () => {
-    // Production sits at 200 (wave 200's `to`) since the owner's 2026-09-16 push: the live
-    // plan starts THERE and carries only the waves past it, without rebasing the train's
-    // historical record. A head inside a wave has no checked-in wave describing the
-    // remainder, so it is still refused with the boundaries named.
-    const live = buildMigrationRehearsalPlan({
+    // A WORKED EXAMPLE, NOT THE LIVE HEAD. Production sat at 200 (wave 200's `to`) from the
+    // owner's 2026-09-16 push until the 2026-09-20 push that applied 201, 202 and 203. The
+    // planner is a pure function of the head it is handed, so planning from a boundary the
+    // train has since passed is still exactly true, and it is kept here as the worked
+    // example: the plan starts THERE and carries only the waves past it, without rebasing
+    // the train's historical record. A head inside a wave has no checked-in wave describing
+    // the remainder, so it is still refused with the boundaries named.
+    const fromWave200 = buildMigrationRehearsalPlan({
       migrationDirectory: MIGRATIONS,
       rollbackDirectory: ROLLBACK,
       appliedHead: 200,
     });
-    expect(live).toMatchObject({ appliedHead: 200, repoHead: 203, pendingCount: 3 });
-    expect(live.waves.map(({ id, from, to }) => [id, from, to])).toEqual([
+    expect(fromWave200).toMatchObject({ appliedHead: 200, repoHead: 203, pendingCount: 3 });
+    expect(fromWave200.waves.map(({ id, from, to }) => [id, from, to])).toEqual([
       ['staff-unlock-surveyor-entitlement', 201, 201],
       ['edit-registry-public-denylist', 202, 202],
       ['gallery-scanner-client-mirror-totality', 203, 203],
     ]);
-    // The ledger itself does NOT move for 202 or 203: the owner bumps appliedHead in the same
-    // act as `supabase db push`, so the repo sits three migrations ahead until that hand falls.
+    // ⭐⭐ THE LEDGER'S OWN HEAD IS ASSERTED RELATIONALLY AND MUST NEVER BE A LITERAL AGAIN.
+    // `supabase/applied-head.json` is bumped in the same act as the owner's `supabase db
+    // push`, so it moves at EVERY production deploy — and a literal here reds the gate on
+    // exactly the day the owner deploys. It has now done so twice: the pin at 121 outlived
+    // the 2026-09-16 push, and the pin at 200 outlived the 2026-09-20 push that carried the
+    // ledger to 203. What is true of the ledger at ANY head is the shape below — it names a
+    // real boundary of the checked-in train, it never runs ahead of the repository, and the
+    // plan built from it covers exactly the migrations lying past it. Today that plan has
+    // nothing pending because production has caught up; these assertions do not care, and
+    // they will not care the next time the owner deploys either.
     const ledgerHead = JSON.parse(
       readFileSync(join(ROOT, 'supabase', 'applied-head.json'), 'utf8'),
     ).appliedHead;
-    expect(ledgerHead).toBe(200);
+    const boundaries = [
+      MIGRATION_TRAIN_BASE_HEAD,
+      ...MIGRATION_WAVES.map((wave) => wave.to),
+    ];
+    expect(Number.isInteger(ledgerHead)).toBe(true);
+    expect(ledgerHead).toBeLessThanOrEqual(fromWave200.repoHead);
+    expect(boundaries).toContain(ledgerHead);
+
+    const fromLedger = buildMigrationRehearsalPlan({
+      migrationDirectory: MIGRATIONS,
+      rollbackDirectory: ROLLBACK,
+      appliedHead: ledgerHead,
+    });
+    expect(fromLedger.appliedHead).toBe(ledgerHead);
+    expect(fromLedger.repoHead).toBe(fromWave200.repoHead);
+    expect(fromLedger.pendingCount).toBe(fromLedger.repoHead - ledgerHead);
+    expect(fromLedger.waves.map(({ id, from, to }) => [id, from, to])).toEqual(
+      MIGRATION_WAVES
+        .filter((wave) => wave.from > ledgerHead)
+        .map(({ id, from, to }) => [id, from, to]),
+    );
+    // ANTI-VACUITY. With the ledger at the repository head both sides of the comparison
+    // above are empty, so the SAME derivation is run once more at the worked example's head,
+    // where it must reproduce the three waves pinned at the top of this arm. An empty match
+    // at the ledger's head is therefore a measured emptiness rather than an expression that
+    // can only ever compare [] with [].
+    expect(
+      MIGRATION_WAVES
+        .filter((wave) => wave.from > 200)
+        .map(({ id, from, to }) => [id, from, to]),
+    ).toEqual(fromWave200.waves.map(({ id, from, to }) => [id, from, to]));
     expect(() => buildMigrationRehearsalPlan({
       migrationDirectory: MIGRATIONS,
       rollbackDirectory: ROLLBACK,

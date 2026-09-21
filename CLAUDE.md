@@ -1,5 +1,7 @@
 # Claude continuation note
 
+> **THE OPERATING STANDARD (the owner, 2026-09-20: "the standard no matter which claude account i use") binds every session on every account and model: seats, batching, the intake rule, measure-first, the report diet, what stays the owner's. It lives on the ledger branch — read it FIRST:** `git fetch origin review-fixes-2026-07-08 && git show origin/review-fixes-2026-07-08:docs/OPERATING_STANDARD.md`, then `…:docs/HANDOFF_CURRENT.md`.
+
 This checkout is a live, heavily modified integration worktree. Before changing
 code, read [`CONTRIBUTING.md`](CONTRIBUTING.md),
 [`docs/implementation/INDEX.md`](docs/implementation/INDEX.md), and the one
