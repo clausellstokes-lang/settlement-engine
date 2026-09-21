@@ -36424,6 +36424,1065 @@
         ]
       ],
       "_checksNote": "Interim rule 8, computed at the read tip f00d44040: the governing set of each changed file is the file ITSELF and nothing else. `git grep -l -F 'editFields' 2524e94df -- tests`, `git grep -l -F 'editorHalo' 3bfa9825b -- tests` and `git grep -l -F 'editTravel' f00d44040 -- tests` each return exactly one path, that file. No exported symbol's call shape changes, and this packet CREATEs or RENAMEs no test file, so no directory walker is opted into. tests/lib/importScrub.test.js rides the tests/lib array as the second battery over the same src/lib seam V3 constrains -- it is not a change-manifest row and no arm of it is touched (19 arms, unmoved). The lighting walker is NEVER a sealed check (it reds by design under a train); it and the EXCLUDED tests/lint directory run are the build lane's INSTRUMENTS in the packet's section 10, together with judgment 108's tests/components and tests/lib whole-directory runs. eslint runs BARE over the three test files, never through the mutex, and no src/ file is in its argument list because this packet changes none."
+    },
+    {
+      "id": "EM-B1c1",
+      "status": "READY",
+      "packetPath": "docs/implementation/packets/settlement-editor/EM-B1c1.md",
+      "verifiedBase": "efd0eb4481669fce0fa00c356fef9399ab374d17",
+      "changeManifest": [
+        {
+          "_note": "THE ONE-ROW SLICE: `set-npc-name` ALONE, in its own leaf. ⭐ VERSION 4 (the chair, judgment 126): the row is EM-B1c section 6's `rename-npc` row, carried verbatim IN EVERY FIELD and RE-KEYED `set-npc-name`, because `rename-npc` is already a live member of the SHIPPED pending-edit vocabulary EDIT_KINDS (src/domain/pendingEdits.js:33; sixteen occurrences over seven src/ files with a canon lock) and one string may not mean two typed things. The op's SEMANTICS, its payload and its delegation are unchanged; the LEAF PATH and the exported binding NPC_RENAME_OP_TYPES do NOT move, because they name the module rather than the op key. The row is — target `npc`, payload { newName: { kind: 'free', required: true } }, stage `home`, consequence `home`, requires.world []. ⛔ `newName` is kind:'free' and that is correct, not a lapse (EM-B1c's own words): a name is the estate's one free-cascade FIELD, so the freedom is in the value and the safety is in the delegation. ⭐ THE LEAF IS ITS OWN so EM-B1c's remaining four rows cannot collide with it: EM-B1c1 owns `src/domain/edit/operationsNpcRename.js`, EM-B1c version 4 owns `src/domain/edit/operationsHomeDelegating.js`, EM-B1b owns `src/domain/edit/operationsOffStage.js`, EM-B1a owns `src/domain/edit/operations.js`. ⛔ EM-B1c LOSES THIS ROW at its next repair (ESTATE-REPAIR-4): never two homes for one op. ⛔ THIS LEAF IMPORTS NOTHING FROM operations.js — operations.js imports THIS module's rows, so an import back would be a module cycle whose const bindings sit in the TDZ at initialisation. The row's `stage` and `consequence` are string literals and the TEST asserts their membership in OP_STAGES / OP_CONSEQUENCE_POLICIES, where there is no cycle. RAISED R2. ⛔ No rename logic of any kind is authored here: the cascade is named as DATA in `guardsStated` and imported nowhere (HZ-JOINKEY).",
+          "action": "CREATE",
+          "path": "src/domain/edit/operationsNpcRename.js"
+        },
+        {
+          "_note": "THE COMPOSITION, EXACTLY TWO EFFECTIVE LINES — one import of NPC_RENAME_OP_TYPES and one SPREAD LINE SPLICED INTO the frozen OP_TYPES at the CODEPOINT POSITION: ⭐ VERSION 4 — after the `set-institution-state` row and BEFORE the `set-npc-status` row (the position moved WITH the key). ⛔⛔ IT IS A SPLICE, NOT A TRAILING SPREAD, AND THE POSITION IS MEASURED: RE-EXECUTED AT VERSION 4 (a247fa84d, EM-B1a LANDED) by importing the estate's own compareCodepoint and sorting EM-B1a section 6's fourteen plus this row, `set-npc-name` lands at INDEX 11 OF 15, between `set-institution-state` and `set-npc-status` (version 3's `rename-npc` at index 9, between remove-npc and set-field, is retired WITH the name: the index is a function of the key). A spread appended at the end (version 1's shape, and EM-B1b's O1 line) puts `set-npc-name` LAST and REDS EM-B1a's own A1 order arm ('Object.keys(OP_TYPES) is authored and asserted in compareCodepoint order, so a new row cannot be appended wherever'). ⛔ AND THE COMPOSITION IS NAMED BY SHAPE, NEVER BY AN ASSUMED BINDING (RAISED R6): EM-B1a's contract exports exactly OP_STAGES, OP_CONSEQUENCE_POLICIES, OP_TYPES, makeOp and validateOp and says only 'leave the structure open for B1b to append' — HOME_OP_TYPES is EM-B1b's spelling of a binding EM-B1a mints nowhere, so the coding instruction is the POSITION and the build lane reads the real file. ⛔ NOTHING ELSE IN THE FILE MOVES and an edit exceeding +2 effective is a STOP. ⚠ Object.freeze on a spread freezes the OUTER map only, so B1 asserts NPC_RENAME_OP_TYPES and ALL FIFTEEN COMPOSED ROWS frozen — EM-B1a's home map is exported by nothing and no arm can hold it (RAISED R7). ⭐ ARITHMETIC: EM-B1a measures ≈213-227 of 250 after its own split; +2 leaves it at ≈215-229, and EM-B1b's +2 and EM-B1c version 4's +2 leave it at ≈219-233 — every leaf and the hub inside the cap.",
+          "action": "MODIFY",
+          "path": "src/domain/edit/operations.js"
+        },
+        {
+          "_note": "SIX ARMS (B1-B6) APPENDED to EM-B1a's single literal describe — straight-line `it`, no .each / runIf / nested describe (section P3.4). ⛔ ACTION `TEST`, NOT `CREATE`: interim rule 4's named-sibling form — the path does not exist at this member's verified base and the NAMED SIBLING that creates it is EM-B1a, exactly as EM-B1j's tests/lint/ruinShapeReplica.walker.test.js names FIX-T1. ⛔⛔ THE LOAD-BEARING EDIT, AND VERSION 4's ROSTER IS THREE WIDENED ARMS, NOT FIVE (measured against EM-B1a's arms AS LANDED at a247fa84d, not against a staged blob): a fifteenth OP_TYPES row and the one import line of section 6.2 put THREE of EM-B1a's eight landed arms red — A1, A3 and A6 — and each is WIDENED BY ADDITION INSIDE the arm it strengthens, so ZERO `it` and ZERO `describe` are added by the widening and the lighting delta does not move. ⭐ A4 AND A5 ARE MEASURED GREEN AND NO WIDENING IS OWED ON EITHER — that is judgment 126's dividend — and a red on either is a STOP, never a widening. A1 — THREE clauses red: the length toBe(14) at :110, the set-equality against THE_FOURTEEN both ways at :114-118, and toEqual(THE_FOURTEEN) at :122. The count becomes 15 and the roster becomes THE_FOURTEEN PLUS this row, DERIVED from the landed constant and re-sorted with compareCodepoint — never a hand-spelled fifteen (the file's own header: 'section 6's ONE LIST. Every other roster claim in this file names THIS constant'). ⛔ TWO CLAUSES ARE UNTOUCHED AND MUST STAY GREEN BY THEMSELVES: the codepoint-order clause at :120-121 is the arm that CONVICTS a trailing spread, and the absent-by-name clause at :152-155 needs no widening at all now — ALL FIVE of EM-B1c's names stay absent under set-npc-name. A3 — ONLY if its home-selection clause reads the fourteen-name roster rather than Object.keys(OP_TYPES): this member adds a home/home row, so that clause gains one member while the off-stage selection stays empty. The off-stage toEqual([]) clause is UNTOUCHED (EM-B1b's, one train later). If the widening is more than that one addition, STOP. A4 — NO EDIT. MEASURED GREEN AT THE LANDED ARM: its roster is already Object.keys(OP_TYPES) (it RUNS over the composition) and its `foreign` filter at :415-421 only reds when a row NAMES a foreign type; this row's five arrays are all empty and no landed row names set-npc-name, so `foreign` and `unknown` both stay []. Version 3 carried a hedged widening here because the arm was not yet landed; version 4 read it whole and the hedge is spent. A red here is a STOP. A5 — NO EDIT, AND THAT IS JUDGMENT 126's DIVIDEND. EM-B1a version 8 (judgment 99) re-aimed A5 at its satisfiable half, which asserts rename-faction, rename-npc and rename-settlement ABSENT FROM OP_TYPES BY NAME; the arm's subject is B1C_FIVE.filter(t => t.startsWith('rename-')) at :426, so it reds ONLY for a live rename-* key and set-npc-name is not one. All three stay absent by name, and A5's delegation source scan over operations.js is untouched and still green (this member writes no rename logic there; its +2 lines are an import and a spread). A red here is a STOP: it would mean the key was spelled rename-* after all. A6 — the EXACT import list of operations.js, FIVE specifiers in source order at EM-B1a version 10 (judgment 115 Q6: '../deterministicSort.js', '../entities/npcs.js', '../entities/status.js', '../worldPulse/relationshipCompatibility.js', './fieldDeclarations.js'), gains './operationsNpcRename.js' in source order. The import fence and the zero-importers arm are left UNTOUCHED: this member's leaf is imported BY operations.js, so nothing new imports EM-A1's leaves. ⛔ THIS IS JUDGMENT 110's CLASS, CAUGHT AT THE PRE-PROOF: a landed arm is widened only by the packet whose landing needs it, under its own seal, and a cure lane cannot add a section 7 row. ⛔ If ANY landed arm outside that roster reds at the build, STOP. Delete no assertion, weaken none, add no `it` beyond B1-B6. B1 re-asserts the totality at FIFTEEN (EM-B1a's fourteen + this one) and keeps ALL FIVE of EM-B1c's names — rename-faction, rename-npc, rename-settlement, set-world-fact, schedule-event — asserted ABSENT BY NAME (version 4: five, not four, because this member no longer spells one of them), so EM-B1c version 4's later landing still reds until IT widens the arm deliberately. ⭐ B6 IS VERSION 4's NEW ARM (judgment 126), the shrink-only OP_TYPES x EDIT_KINDS disjointness guard: see acceptanceCases B6 and section 6.3a. MEASURED, AND IT IS WHY THE ARM IS SHRINK-ONLY AND NOT A BARE EMPTINESS: the whole intersection is NOT empty at the tip — add-institution and remove-institution ALREADY collide and they are EM-B1a's LANDED rows — so B6 guards every row MINTED AFTER THE FOURTEEN and asserts the two inherited collisions exactly, which banks them and serves as the arm's own positive control. ⚠ NO NEW tests/lint FILE APPEARS, so no mutation-coverage row is owed; and because this member CREATEs and RENAMEs no test file, the CREATE-directory-whole rule does not fire for it.",
+          "action": "TEST",
+          "path": "tests/domain/editOperations.test.js"
+        }
+      ],
+      "requiredSymbols": [
+        {
+          "_note": "`set-npc-name`'s DECLARED WRITER, the pure-domain patch form: (settlement, oldName, newName) -> { changed, touched, changes }. This member NAMES it in guardsStated and IMPORTS IT NOWHERE. Proven present at bdbf7c89c: git grep -c -F -> 1.",
+          "path": "src/domain/factionRename.js",
+          "symbol": "export function npcRenameChanges"
+        },
+        {
+          "_note": "The in-place sibling of the above, and the entry point the SHIPPED store writer actually calls (settlementRenameHelpers.js:438). Named here so the two halves of the one cascade are both visible to the sealed dispatch. Proven present: git grep -c -F -> 1.",
+          "path": "src/domain/factionRename.js",
+          "symbol": "export function applyNpcRenameToSettlement"
+        },
+        {
+          "_note": "THE FIVE JOIN SURFACES B2 SCANS: npcs[].name, factions[].members[].name, relationships[].npc1Name, relationships[].npc2Name, interSettlementRelationships[].npcName — frozen { path, kind, why } rows spread across NPC_HOMES 'so the two homes cannot drift'. B2 proves this module re-implements none of them. Proven present: git grep -c -F -> 1.",
+          "path": "src/domain/factionRename.js",
+          "symbol": "export const NPC_RENAME_SURFACES"
+        },
+        {
+          "_note": "The estate's ONE sanctioned, locale-free string order. B1 asserts Object.keys(OP_TYPES) stays in this order over the COMPOSITION of EM-B1a's map and this member's, which is the assertion a spread can silently break. Proven present: git grep -c -F -> 1 (src/domain/deterministicSort.js:25). ⚠ Three other modules declare a same-named local compareCodepoint (townMap/arch/project.js, worldPulse/envoyErrandVocabulary.js, worldPulse/npcLadderState.js); this row pins the estate's one by PATH, which is why the row carries the path and not the bare name.",
+          "path": "src/domain/deterministicSort.js",
+          "symbol": "export const compareCodepoint = (a, b) => {"
+        },
+        {
+          "_note": "The membership probe imports THIS exported set and reads no dist, so it can never skip; a hand-seeded replica would drift silently (EM-PREAMBLE section P2 row 11). Measured at bdbf7c89c: 269 members, src/domain/edit/ contributing ZERO. Proven present: git grep -c -F -> 1.",
+          "path": "vite.config.js",
+          "symbol": "export const EAGER_FIRST_PAINT_MODULES"
+        },
+        {
+          "_note": "⭐ NEW AT VERSION 4 (the chair, judgment 126). THE SHIPPED PENDING-EDIT VOCABULARY. B6 asserts that the composed OP_TYPES and this list are DISJOINT over every row MINTED AFTER EM-B1a's fourteen, and it reads the list BY IMPORT and never re-types it: a hand-spelled copy of the nineteen kinds would drift the day one is added, and a drifted copy makes the disjointness claim about nothing. If this declaration moved or were re-shaped the arm would compare against undefined and go vacuous. ⛔ This member writes NO byte of src/domain/pendingEdits.js — the row is read-only, retiredSymbols stays empty, and the shipped verb `rename-npc` keeps all sixteen of its occurrences. Proven present at a247fa84d: git grep -c -F -> 1; the frozen list is NINETEEN members. ⚠ EDIT_KINDS is a HUB symbol this member does not change (nine governing test files), so by the chair's ruling 3 on EM-B2a4 it contributes NO sealed `checks` row and its importers go to section 10 as instruments.",
+          "path": "src/domain/pendingEdits.js",
+          "symbol": "export const EDIT_KINDS = Object.freeze(["
+        }
+      ],
+      "_requiredSymbolsNote": "SIX rows at version 4. The first FIVE were proved at bdbf7c89c by `git grep -c -F` = 1 (EM-B1c1.evidence.md E1-E5) and RE-PROVED at version 4's read tip a247fa84d, each still at 1. THE SIXTH — EDIT_KINDS, which B6 reads — is version 4's and is proved at that same tip by the same command, its executed line in EM-B1c1.V4-NOTES.md section M4. Every row sits at a path this member does NOT write, so `retiredSymbols` is empty by construction and the post-edit simulation is trivial.",
+      "_pendingRequiredSymbols": [
+        {
+          "_note": "interim rule 3: the array form refuses twice — once on the row's path, once on its symbol — so a symbol a SIBLING creates rides this sibling key and never `requiredSymbols`. EM-B1a CREATEs src/domain/edit/operations.js; it does not exist at this member's verified base (git ls-files src/domain/edit -> recordRegister.js alone).",
+          "path": "src/domain/edit/operations.js",
+          "symbol": "export const OP_TYPES",
+          "provider": "EM-B1a"
+        },
+        {
+          "path": "src/domain/edit/operations.js",
+          "symbol": "export const OP_STAGES",
+          "provider": "EM-B1a"
+        },
+        {
+          "path": "src/domain/edit/operations.js",
+          "symbol": "export const OP_CONSEQUENCE_POLICIES",
+          "provider": "EM-B1a"
+        },
+        {
+          "path": "src/domain/edit/operations.js",
+          "symbol": "export function makeOp",
+          "provider": "EM-B1a"
+        },
+        {
+          "path": "src/domain/edit/operations.js",
+          "symbol": "export function validateOp",
+          "provider": "EM-B1a"
+        },
+        {
+          "_note": "EM-A1 CREATEs src/domain/edit/types.js and owes BOTH typedefs (EM-A1 section 6.2's measurement W-7: EM-B1a's change manifest holds three rows and types.js is in none of them — EM-B1a only IMPORTS). This leaf's JSDoc references Op and EntityRef the same way.",
+          "path": "src/domain/edit/types.js",
+          "symbol": "@typedef",
+          "provider": "EM-A1"
+        }
+      ],
+      "_retiredSymbols": [],
+      "_retiredSymbolsNote": "EMPTY, and proved by the post-edit simulation (pre-proof step 10) row by row. All five requiredSymbols rows sit at paths this member does not write (src/domain/factionRename.js, src/domain/deterministicSort.js, vite.config.js). The three paths this member DOES write carry no requiredSymbols row of its own, and no other LANDED or waiting packet carries a row for any of the five pairs, so nothing is owed a discharge. ⛔ This member MOVES no symbol and DELETES none: it appends one key to a composition and appends arms to a sibling's suite.",
+      "acceptanceCases": [
+        {
+          "id": "B1",
+          "case": "MAIN, AND THE TOTALITY RE-ASSERTED AT FIFTEEN. OP_TYPES holds exactly EM-B1a's FOURTEEN home rows plus `set-npc-name` — set-equal both directions with a full offender list, so a row dropped by either packet reds here. ⛔ ALL FIVE OF EM-B1c's NAMES ARE ASSERTED ABSENT BY NAME — rename-faction, rename-npc, rename-settlement, set-world-fact, schedule-event (VERSION 4: five, not four, because this member no longer spells one of them) — so EM-B1c version 4's later landing still reds until its own arm widens this deliberately, exactly as EM-B1a's A1 reds today. Object.keys(OP_TYPES) stays in compareCodepoint order over the COMPOSITION with `set-npc-name` AT INDEX 11 OF 15, BETWEEN `set-institution-state` AND `set-npc-status` — the SPLICE of section 6.2, measured at the tip against the estate's own compareCodepoint (version 1's 'between promote-phantom and rebalance-power' was measurably false). NPC_RENAME_OP_TYPES and EVERY ONE OF THE FIFTEEN COMPOSED ROWS are asserted frozen, because Object.freeze on a spread freezes only the outer object — ⛔ and NOT 'both source maps', because EM-B1a's home map is exported by nothing and no arm can hold a reference to it (RAISED R7). makeOp('set-npc-name', {kind:'npc', id:'n1'}, { newName: 'X' }) — ARITY THREE, EM-B1a section 6 — returns an Op carrying stage 'home', consequence 'home' and FOUR EMPTY ARRAYS: requires FLATTENED to [], enables, relatedTo, conflictsWith. ⛔ The flatten is EM-B1a section 6's own ('FLATTENING requires from the declaration's { world, registry } pair into EM-A1's readonly string[]') and EM-A1 is BUILT with Op.requires: readonly string[], so an arm asserting the PAIR on the Op would red typecheck:domain:strict, a SEALED check.",
+          "home": {
+            "file": "tests/domain/editOperations.test.js",
+            "authorisedBy": "section 7's TEST row on tests/domain/editOperations.test.js (interim rule 4's named-sibling form; EM-B1a CREATEs the file)"
+          }
+        },
+        {
+          "id": "B2",
+          "case": "⛔ THE RENAME DELEGATES AND WRITES NO NAME — the prevention guard. The row declares target 'npc', a single required `newName`, stage:'home', consequence:'home', requires { world: [], registry: [] }, and names its writer in `guardsStated` as DATA. A source scan proves this module writes no name field and re-implements NO path listed in NPC_RENAME_SURFACES (all five read from the frozen list, never re-typed), with the matcher proved live on a PLANTED assignment to `npcs[].name` so an always-clean scan is convicted. ⛔ A second arm proves the module's import list contains src/domain/factionRename.js NOWHERE: the cascade is named and never imported, which is also what keeps it out of the eager closure.",
+          "home": {
+            "file": "tests/domain/editOperations.test.js",
+            "authorisedBy": "section 7's TEST row on tests/domain/editOperations.test.js (interim rule 4's named-sibling form; EM-B1a CREATEs the file)"
+          }
+        },
+        {
+          "id": "B3",
+          "case": "RELATIONAL INTEGRITY, TOTAL AND CLOSED OVER THE COMPOSITION. Every string in the row's FIVE arrays — requires.world, requires.registry, enables, relatedTo, conflictsWith — is a key of the composed OP_TYPES (all five are empty here, and the arm asserts EMPTINESS rather than trusting it); ⛔ THE DECLARATION'S `requires` IS THE TWO-KIND PAIR, so an arm that iterated it as one flat array would throw: the flat form is the Op's, never the row's; conflictsWith stays symmetric, requires/enables stay exact inverses, relatedTo stays symmetric across all FIFTEEN rows — the arm EM-B1a's A4 runs over fourteen, re-run over the composition. ⭐ `set-npc-name` names NONE of EM-B1c's remaining four, asserted by name, so the split cannot be re-absorbed by a relation.",
+          "home": {
+            "file": "tests/domain/editOperations.test.js",
+            "authorisedBy": "section 7's TEST row on tests/domain/editOperations.test.js (interim rule 4's named-sibling form; EM-B1a CREATEs the file)"
+          }
+        },
+        {
+          "id": "B4",
+          "case": "THE TWO-KIND `requires`, AND THE VOCABULARY MEMBERSHIP PROVED WITHOUT A CYCLE. The row's `requires` is the { world, registry } shape EM-B1a section 16.3 forces on every row, both arrays empty (design §18: a rename requires nothing of the world). ⭐ `stage` and `consequence` are asserted MEMBERS of OP_STAGES and OP_CONSEQUENCE_POLICIES — imported IN THE TEST, because operations.js imports this leaf and an import back would be a module cycle whose const bindings sit in the TDZ. The arm is the reason the leaf may carry literals safely, and it reds the day either vocabulary loses a member.",
+          "home": {
+            "file": "tests/domain/editOperations.test.js",
+            "authorisedBy": "section 7's TEST row on tests/domain/editOperations.test.js (interim rule 4's named-sibling form; EM-B1a CREATEs the file)"
+          }
+        },
+        {
+          "id": "B5",
+          "case": "PURITY, DORMANCY AND THE IMPORT FENCE. makeOp/validateOp stay pure over the new row (the input payload proved unmutated against a pre-call clone; identical inputs give toEqual results). The module's import list is asserted EXACTLY and contains NONE of: a PRNG, rngContext, any src/store/**, any src/components/**, src/domain/factionRename.js, or src/domain/edit/operations.js. A scan over src/** finds exactly ONE importer of the new leaf — src/domain/edit/operations.js, this member's own spread — with guard-the-guard arms on both the walk and the matcher, so the member lands DARK with no consumer.",
+          "home": {
+            "file": "tests/domain/editOperations.test.js",
+            "authorisedBy": "section 7's TEST row on tests/domain/editOperations.test.js (interim rule 4's named-sibling form; EM-B1a CREATEs the file)"
+          }
+        },
+        {
+          "id": "B6",
+          "case": "⭐ VERSION 4 (the chair, JUDGMENT 126). THE ARM'S LITERAL TITLE IS EXACTLY `B6: the op catalogue and the shipped EDIT_KINDS vocabulary are disjoint over every row minted after the fourteen` — ONE STRING, ONE MEANING: THE OP CATALOGUE AND THE SHIPPED PENDING-EDIT VOCABULARY ARE DISJOINT OVER EVERY ROW MINTED AFTER EM-B1a's FOURTEEN. EDIT_KINDS is imported from src/domain/pendingEdits.js and never re-typed. `minted` = the composed catalogue MINUS THE_FOURTEEN, asserted exactly ['set-npc-name'] so the guard below can never run over an empty list; then minted x EDIT_KINDS is asserted [] WITH A FULL OFFENDER LIST — a future op that takes a shipped kind's name reds HERE, and the cure is to RENAME THE OP, never to add an exemption. ⛔ MEASURED, AND IT IS WHY THE ARM IS SHRINK-ONLY AND NOT A BARE EMPTINESS: the WHOLE intersection is NOT empty at the tip — add-institution and remove-institution are members of both, and they are EM-B1a's LANDED rows, not this member's. Those TWO INHERITED COLLISIONS are asserted EXACTLY in both directions, which banks them shrink-only (a cure must be banked by shrinking the list; a NEW inherited collision reds) and is ALSO the arm's positive control: a non-empty result proves both rosters and the membership matcher are live, so the [] above is never a vacuous green. The matcher is proved live a second time on a PLANTED collision — [...minted, 'rename-npc'] x EDIT_KINDS asserted ['rename-npc'], the exact collision judgment 126 cured — and the one negative (.not.toContain('rename-npc')) carries its single-line `// anchored:` marker on the line immediately above it (section P6's marker rule). ⛔ B6 asserts NO COUNT of EDIT_KINDS: a count would red on every lawful addition to the queue's vocabulary. ⭐ PROVED BY ITS COUNTERFORCE, NEVER RED-FIRST (section P6's EM amendment): perturb B6's OWN SUBJECT in the test file with the colliding key, require a nonzero exit with B6 RED BY TITLE and no other title moved, restore the exact pre-mutant SHA-256 and rerun green. ⛔ NEVER plant the collision in the LEAF — that mutant also reds A1, A3, A5 and B1 and is the ambiguous mutant section P6 refuses.",
+          "home": {
+            "file": "tests/domain/editOperations.test.js",
+            "authorisedBy": "section 7's TEST row on tests/domain/editOperations.test.js (interim rule 4's named-sibling form; EM-B1a CREATEs the file)"
+          }
+        }
+      ],
+      "checks": [
+        [
+          "npx",
+          "vitest",
+          "run",
+          "--pool=threads",
+          "--maxWorkers=2",
+          "tests/domain/editOperations.test.js"
+        ],
+        [
+          "npx",
+          "vitest",
+          "run",
+          "--pool=threads",
+          "--maxWorkers=2",
+          "tests/domain/npcRename.test.js"
+        ],
+        [
+          "npx",
+          "vitest",
+          "run",
+          "--pool=threads",
+          "--maxWorkers=2",
+          "tests/domain/editDeclarations.test.js"
+        ],
+        [
+          "npx",
+          "eslint",
+          "src/domain/edit/operationsNpcRename.js",
+          "src/domain/edit/operations.js",
+          "tests/domain/editOperations.test.js"
+        ],
+        [
+          "npx",
+          "vitest",
+          "run",
+          "--pool=threads",
+          "--maxWorkers=2",
+          "tests/property/generatorGoldenMaster.test.js",
+          "tests/property/dossierProseManifest.test.js"
+        ],
+        [
+          "node",
+          "scripts/check-observed-shape-readers.mjs"
+        ],
+        [
+          "node",
+          "-e",
+          "const{relative}=require('node:path');const{pathToFileURL}=require('node:url');import(pathToFileURL('vite.config.js').href).then(m=>{const S=new Set([...m.EAGER_FIRST_PAINT_MODULES].map(a=>relative(process.cwd(),String(a))));const mine=[...S].filter(p=>p.startsWith('src/domain/edit/'));console.log('EAGER_FIRST_PAINT_MODULES:',S.size,'| anti-vacuity src/main.jsx present:',S.has('src/main.jsx'),'| src/domain/edit/ members in the eager closure:',mine.length?mine.join(', '):'NONE');if(mine.length||!S.has('src/main.jsx')||S.size<200)process.exit(1);})"
+        ],
+        [
+          "npm",
+          "run",
+          "typecheck:ratchet"
+        ],
+        [
+          "npm",
+          "run",
+          "typecheck:domain:strict"
+        ],
+        [
+          "node",
+          "scripts/implementation-packets.mjs",
+          "validate"
+        ]
+      ],
+      "_checksNote": "Interim rule 8: sealed checks name FILES, never the tests/lint directory, never the lighting walker, and END WITH THE VALIDATOR. HOW THE SET WAS COMPUTED at bdbf7c89c (TOOL-26's governing-tests.mjs has not landed at the integration tip, so the interim form is `git grep -l -F <basename or changed symbol> -- tests`): tests/domain/editOperations.test.js is the file this member writes; npcRenameChanges -> 1 hit (tests/domain/npcRename.test.js) and NPC_RENAME_SURFACES -> 1 hit (the same file), which is the cascade's own suite and the pin on the five surfaces B2 scans; OP_TYPES -> 0 and validateOp -> 0 (EM-B1a creates both symbols and their suite in the same landing); compareCodepoint -> 7 hits, a HUB symbol this member does not change — it only re-asserts an order — so by the chair's ruling 3 on EM-B2a4 it contributes no sealed row and its importers go to section 10 as instruments. ⚠ `makeOp` -> 1 hit, tests/store/operations.test.js, which is the STORE's operation registry and not this vocabulary: a substring false positive, stated rather than silently dropped. The membership probe always executes: it imports the exported set and reads no dist. ⭐ VERSION 3: tests/domain/editDeclarations.test.js JOINS the sealed set. The rule-8 governing grep re-computed at 5926f454e returns TWO files for NPC_RENAME_SURFACES where version 2 measured one — EM-A1 landed its suite in train EM-T9 — and that suite is also the arm that scans every module under src/ for an importer of EM-A1's leaves, a population this member's CREATE joins (section P10.11; judgment 110's lesson). MEASURED SAFE: run through the arm's own commentsOnly strip, the planned leaf text yields NO surviving specifier, so the roster is unmoved; a planted runtime import still convicts. ⭐⭐ VERSION 4 (judgment 126): EDIT_KINDS joins requiredSymbols because B6 reads it, and it contributes NO sealed row — the rule-8 grep re-executed at a247fa84d returns NINE governing test files (tests/domain/pendingEdits.test.js, tests/lib/editFingerprint.test.js, tests/lib/simMetricEmitter.test.js, tests/store/npcOpsCovenant.test.js, tests/store/editActionPersist.test.js, tests/store/editProseQueueSpine.test.js, tests/store/commitPendingEditsTotality.walker.test.js, tests/build/pendingEditProseLazy.test.js, tests/edgeFunctions/analyticsEventsBundle.freshness.test.js), and it is a HUB symbol this member READS and does not change, exactly like compareCodepoint, so by the chair's ruling 3 on EM-B2a4 the nine go to section 10 as INSTRUMENTS. The one arm that would break if the list moved is B6, and B6 lives in this member's own sealed file. ⛔ NO `checks` ENTRY MOVED AT VERSION 4: the array is byte-identical to version 3's.",
+      "_deferredRows": "TWO, neither in section 7's table, neither in this capsule, neither in checks. (1) docs/content/wiring-census.json — interim rule 1: this member CREATEs ONE .js under src/domain/** (src/domain/edit/operationsNpcRename.js), so `stamp.producerIndexFiles` is +1 as a DELTA. producerIndexFiles NAMES NOTHING — IT IS A NUMBER (1172 at bdbf7c89c, read from the stamp), so 'the register does not name mine' would be a category error. stamp.files (7 entries) and stamp.candidateLeaves (6) UNMOVED — both key on src/domain/display/stateProse/ paths this member does not touch. totals.* UNMOVED — this member produces no pool, variant or relation. ⛔ Regenerated WHOLE at the train's terminal BY THE CHAIR; the path appears in neither section 7, nor this capsule, nor checks. (2) tests/lint/.lighting-census-baseline.json — a named INTERIOR RED, DELTA ONLY, in the register's own order: files +0 · parked +0 · credited +0 · titles +6 · suiteTitles +0 (VERSION 4: six, because judgment 126 adds B6). This member CREATEs NO test file; it appends six straight-line literal `it`s to EM-B1a's one literal describe. The predicted red's SHAPE is `expected <N+5> to be <N>` on the first moved figure (the walker stops there), never a numeral. ⛔ The row names the BASELINE JSON, never the walker. ⛔ Regenerated at the train's terminal BY THE CHAIR; this member never sets LIGHTING_CENSUS_REFREEZE and never edits the baseline. ⚠ The titles delta is a PREDICTION until the build lane prints parkReasonsFor over the edited file (pre-proof step 14b); if EM-B1a's file parks, the delta is titles +0 and the receipt says so. (3) INTERIM RULE 15, MEASURED: ENFORCER_DIRS is read at the tip in tests/lint/mutationCoverage.shared.mjs and is EIGHT directories (tests/lint, tests/design, tests/docs, tests/data, tests/copy, tests/security, tests/edgeFunctions, tests/generators); this member CREATEs no file under any of them, so scripts/mutation-coverage-manifest.json is NOT OWED and no rowKey is taken. (4) INTERIM RULE 14: this member is NOT the train's byte-arm holder, carries no tests/build/* row, and its predicted delta on every budgeted closure is ZERO — the membership probe prints 'EAGER_FIRST_PAINT_MODULES: 269 | ... src/domain/edit/ members in the eager closure: NONE' at exit 0 at 429141e2d; train EM-T9's holder is EM-D0b (tests/build/vendorPdfLazy.test.js). (5) INTERIM RULE 17: the tuning inventory's OWN counters, imported in plain node and run over the planned section 6.1 text, return P2 {} and P3 {} while a positive control in the same directory returns 2 and 1 — so NO tuning-register row is owed; and because this member CREATEs a .js leaf under src/domain, tests/lint/proseWiringCensus.walker.test.js is red on EXACTLY TWO ARMS until the chair regenerates the census at the terminal ('the committed census is byte-identical to a fresh build, and the stamp is live' and 'THE DRY READ: both modes, and the one that writes is not among them'), which is why section 10's excluded directory run excludes TWO walkers and runs the census walker ALONE, expected NONZERO.",
+      "_preproofNote": "VERSION 4 (the chair, JUDGMENT 126, 2026-09-21), a KIT VERSIONING PASS, not a re-pre-proof: the op is re-spelled set-npc-name and ONE shrink-only arm (B6) is added; nothing else is discharged and nothing else is re-ruled. MEASURED AT THE VERSION-4 READ TIP a247fa84dd7ae0be7d0be45748bd470e9df81613 (em-train-11-2026-09-21; git status --short EMPTY before and after; the lane wrote only in its own scratch dir): (1) EM-B1a HAS LANDED at that commit — src/domain/edit/operations.js (403 lines) and tests/domain/editOperations.test.js (604 lines) are on disk and BYTE-IDENTICAL to the staged blobs version 3 was pre-proved against (SHA-256 c7f7f01a... and 0b78c9cd...), so every arm figure below is read from LANDED bytes; ⛔ version 4 discharges nothing on that account (judgment 126) and the five _pendingRequiredSymbols rows and the Depends-on row are left exactly as version 3 wrote them, for the chair to discharge at placement. (2) THE SPLICE, re-executed against the tree's own compareCodepoint over the LANDED fourteen plus this row: set-npc-name at INDEX 11 OF 15, between set-institution-state and set-npc-status, with a trailing spread proved NOT to equal that order. (3) set-npc-name occurs NOWHERE in src, tests, e2e, scripts or docs at the tip (git grep -F, exit 1), and the e2e union grep is zero. (4) THE DISJOINTNESS, measured: the WHOLE OP_TYPES x EDIT_KINDS intersection is NOT empty — add-institution and remove-institution already collide and are EM-B1a's landed rows — so B6 is spelled over the rows MINTED AFTER THE FOURTEEN (minted x EDIT_KINDS = [], the planted control = ['rename-npc'], the inherited pair asserted exactly). (5) THE LANDED-ARM ROSTER, re-derived against the landed arms: A1, A3 and A6 red; A4 and A5 are GREEN under a non-rename-* key, which removes two of version 3's five exposures. (6) requiredSymbols is SIX rows, each git grep -c -F = 1 at a247fa84d. (7) COUNT PROVER exit 0 on the version-4 pair, the prover itself BYTE-IDENTICAL to version 3's. ⛔ WHAT IS PLAUSIBLE UNTIL THE BUILD: the +2 effective lines, the exact shape of each widened arm, the lighting titles +6 (the walker's park verdict), and B6's counterforce red — the arm's logic was dry-run in plain node over the landed catalogue and the tip's EDIT_KINDS, which is not vitest. Version 3's own pre-proof facts at 5926f454e are unchanged and are kept above with their as-of marks.",
+      "_v4Note": "VERSION 4 = version 3 + judgment 126 ONLY. What moved: the op KEY everywhere (rename-npc -> set-npc-name); the splice index (9 -> 11, between set-institution-state and set-npc-status); ONE new acceptance case B6 with its section 6.3a contract, so section 3's budget, section 9's matrix and footer, section 7's arm range and the lighting titles delta all read SIX; ONE new requiredSymbols row (EDIT_KINDS); the widened-landed-arm roster from FIVE to THREE (A1, A3, A6) with A4 and A5 measured green and STOP-on-red; R8 CURED, R4 given its version-4 consequence, R11 raised. ⛔ UNMOVED: every path, the leaf's name and its exported binding NPC_RENAME_OP_TYPES, the row's fields and semantics, the budgets, the checks array, the deferred rows' identity, verifiedBase (__BASE__) and status (DRAFT)."
+    },
+    {
+      "id": "EM-A2b",
+      "status": "READY",
+      "packetPath": "docs/implementation/packets/settlement-editor/EM-A2b.md",
+      "verifiedBase": "efd0eb4481669fce0fa00c356fef9399ab374d17",
+      "_interimRules": "Compiled under `COMPILE-RULES.interim.md` (the chair, 2026-09-20; rules 1-17 as of 2026-09-21), which GOVERNS where it and `EM-PREAMBLE.md` (SHA-256 c9f33c8d2940372bde8a6d931e3d389b79516a90ed45405cbbbf3e698cc46675, RE-MEASURED with `shasum -a 256` at the read tip 583f8f644 on 2026-09-21 and UNCHANGED) disagree. Visible here: this packet CREATEs nothing - both rows are MODIFY of the two files its NAMED SIBLING EM-A2a creates, so rule 4 does not bite and rule 15 is NOT owed (`tests/domain` is in none of ENFORCER_DIRS, read at the tip); `docs/content/wiring-census.json` appears in NO row and in no check, and this member's wiring delta is +0 because it creates no `.js` leaf under `src/generators/**` or `src/domain/**` - both roots measured (rule 1); NO byte arm and no dist read anywhere in `checks`, and this member is NOT its train's byte-arm holder - its delta is +0 B and +0 modules in all four closures, executed by importing EAGER_FIRST_PAINT_MODULES (rules 2 and 14); `_pendingRequiredSymbols` is the sibling key for the three symbols EM-A2a creates and this deliverable calls (rule 3); the Status row carries its value ALONE and backticked (rule 5); section 7 and this capsule are SET-EQUAL (rule 6); the packet version names its TRUE prior number, 4 (rule 7); `checks` END with `node scripts/implementation-packets.mjs validate` (rule 8); every register figure is a DELTA and the one executed absolute carries an AS-OF mark (rule 9); rule 10 does NOT bind - this member touches no `src/components/**` path, no route, no `data-testid` and no accessible name, so NO e2e spec is named; rule 12's count prover ships beside the packet as KIT FURNITURE and accepts `<packet.md> <capsule.json>`; rule 13 finds NO line-addressed register row for either path; rule 16 is not engaged - this member renames no binding and re-shapes no call; rule 17 is measured with the library's own discoverTables -> countUnregisteredNamed / countBareDecimals at P2 +0 and P3 +0, with a POSITIVE control (src/domain/activeConditions.js P2 = 3) and two planted controls that convict.",
+      "changeManifest": [
+        {
+          "_note": "THE SIX WORLD-DERIVED POOLS, appended to EM-A2a's POOLS. ⭐ RULING 1 (the chair's ESTATE-REPAIR-4 ruling, 2026-09-20, judgment 54): worldFact.goods and worldFact.services, their two source rows (GOODS_CATEGORIES, INSTITUTION_SERVICES -- removed from requiredSymbols in the same act), acceptance B4's two set-equalities and risk R4 LEFT THIS PACKET AND RIDE EM-P3c's SITTING. They were pools for fields NOTHING DECLARES: EM-A1 version 5's BLOCK-7 (judgment 33) took both dials off the fifth card for the first wave, because resolveConfig lifts _goodsToggles / _servicesToggles into context keys, record.config carries neither over 36 settlements and they live on the save's toggles column -- so both rows were premature by the standard's rule 3 and orphans for EM-A3's census. Nothing about them is re-decided here and no arm is written for either. THE SIX THAT REMAIN: name.settlement and name.npc read world.namingData PASSED IN -- src/data/namingData.js (4,038 lines / ~68.6 kB) is imported NOWHERE, exactly as src/domain/npc/npcOps.js:218 instantNpc({ seed, namingData }) does and exactly as src/domain/townCartography/cartographyWards.js:19-21 records the estate refusing that import into a bounded leaf. npc.role reads the world's institutions. power.holder (ESTATE-REPAIR-4, EM-A1 version 5's BLOCK-4b) reads the distinct non-empty `faction` of world.powerStructure?.factions[] -- the ROSTER off the record, never a catalogue, and never governingName itself, which would make it a readback rather than a pool. deity reads pantheonStandings(world) and holds no premade list (the deity doctrine is constitutional: faith is culture, never theology). worldFact.resources reads getCompatibleResources(route, terrain) at its canonical home and maps to .key NEVER .label -- a label is a display string and a pool is a fact set, which is the display-seam mistake §12.7 forbids arriving by a different door. ⛔ THE BLOCK IS RE-AIMED, NOT RESOLVED -- MEASURED AT 583f8f644. The lane compiled this row BLOCKED on the measured contradiction (§2): the wizard's six options live only as JSX <option> literals in ConfigurationPanel.jsx, the generator's TERRAIN_ROUTE_POOLS is a module-PRIVATE const, and the two sets DISAGREE (the wizard offers mountain_pass; the generator rolls it never). EM-P3 IS LANDED and reaches the SAME finding independently -- its P-4: 'TRADE ACCESS HAS NO CANONICAL LIST ANYWHERE … This is a MINT, not a move' -- but it does NOT mint the list: version 4 said it did and that is REFUTED at the tip. src/domain/worldFactOptions.js exists, its WORLD_FACT_SOURCES holds SEVEN keys, and its own comment reserves the eighth ('Trade access is EM-P3b's row … EM-P3b mints TRADE_ACCESS … and adds the eighth key here'); TRADE_ACCESS is exported nowhere under src. So R1 stands, re-aimed at EM-P3b (UNWRITTEN), and NO worldFact.tradeAccess row, source row, arm or budget line is written here -- which is why this packet is READY-able without R1 being ruled. ≈90 effective, RE-DERIVED from §3's own decomposition (26+14+6+11+12+21) and never quoted; the COMBINED pools.js after A2a + A2b estimates ≈230 of 250 (A2a ≈140 from ITS VERSION 7 decomposition; version 4 read EM-A2a at its version-4 ≈148 and spelled ≈238) and therefore FITS, with about twenty lines of margin -- an ESTIMATE over code that does not exist, re-measured with eslint's own Linter at implementation, where crossing 250 is a STOP and never a squeeze. EM-A2c stays PRE-DECLARED and is RE-AIMED by the same ruling at worldFact.resources and, once R1 is ruled, worldFact.tradeAccess. ⛔ After ruling 1 this leaf imports NEITHER tradeGoodsData.js NOR institutionServices.js, so the first-paint question R2 raised leaves this packet with them. Changes no A2a row, no signature and no stream key.",
+          "action": "MODIFY",
+          "path": "src/domain/edit/pools.js"
+        },
+        {
+          "_note": "EIGHT ARMS (B1-B8) APPENDED to EM-A2a's single literal describe -- straight-line `it`, no .each / runIf / nested describe (§P3.4). ⭐⭐ TWO ACTS, AND THE SECOND IS NOT OPTIONAL. (1) B1 asserts POOLS holds exactly SEVENTEEN ids (A2a's eleven plus these six), set-equal both directions, so a row dropped by either packet reds here. (2) B1 also RE-SPELLS -- does not duplicate -- the three exact assertions inside EM-A2a version 7's OWN A1 arm, which this packet's landing moves: eleven -> SEVENTEEN; DECLARED-BUT-UNPOOLED ['npc.role','power.holder','worldFact.resources'] -> []; POOLED-BUT-UNDECLARED ['cause.remove','commodity','tier'] -> ['cause.remove','commodity','deity','name.npc','name.settlement','tier']. Leaving A2a's A1 as written reds it on all three at this packet's landing (judgment 106 item 2). Change no other A2a arm. B3 is the load-bearing one: a namingData bag carrying ONE INVENTED PREFIX must produce a name containing it, proving the pool draws from the SUPPLIED bag and never reaches for the real table behind the caller's back -- and a source scan proves namingData.js, npcGenerator.js and every .jsx are absent from the import list. B4 pins worldFact.resources to getCompatibleResources(...).map(r => r.key) -- exactly 33 at ('port','coastal') -- and asserts the pool holds NO .label value; ⛔ its two other set-equalities (worldFact.goods against GOODS_CATEGORIES, worldFact.services against INSTITUTION_SERVICES) LEFT THE ARM with their pools under ruling 1 and ride EM-P3c, and no arm is written for either, because an arm would be an instruction. B5 proves the resource gate is LIVE, not inherited, by a non-empty symmetric difference between two route/terrain pairs. B6 re-asserts the no-draw law across all SEVENTEEN pools. B8 (ESTATE-REPAIR-4) is the power.holder arm: the seat is the ROSTER and nothing else, with an invented faction name planted in the supplied roster APPEARING in the pool, no premade faction array anywhere in the module, no read of governingName, and npc-kind holders asserted ABSENT by name so ARCH §9's '/npcs' clause is a recorded verdict (R5). B7 is the deity doctrine: the world's own ids, [] for a world with none, and no premade deity array anywhere in the module. ⛔ NO ARM IS WRITTEN FOR worldFact.tradeAccess: its block is re-aimed at EM-P3b (unwritten) and an arm would be an instruction. Every negative carries its `// anchored:` marker on the line immediately above it.",
+          "action": "MODIFY",
+          "path": "tests/domain/editPools.test.js"
+        }
+      ],
+      "requiredSymbols": [
+        {
+          "_note": "THE GENERATOR'S OWN NAME TABLE — the DATA behind the name generator, since no seedable name-generator EXPORT exists: generateSettlementName draws on the ambient fail-closed rngContext and pickFirst is module-private, so the charter's 'names from the culture's generator' was refuted and the chair ruled (4) the instantNpc shape instead. MEASURED: 11 culture keys, all 11 carrying maleNames + femaleNames + surnames, plus settlementPrefixes / settlementSuffixes. Named here because the pool's values must remain derivable from it even though pools.js never imports it — the caller passes the culture's entry. Proven present: grep -c -> 1.",
+          "path": "src/data/namingData.js",
+          "symbol": "export const NAMING_DATA"
+        },
+        {
+          "_note": "THE PRECEDENT THE CHAIR RULED (4), and the reason the refuted name-generator premise is a substitution rather than an invention: a src/domain leaf that seeds its own stream with a ROOT composition and takes the culture bag as a PARAMETER (pickFromNaming(rng, cultureData, gender)), touching neither the ambient context nor the 68.6 kB table. If this disappears, the packet's shape has lost its ground. Proven present: grep -c -> 2 (the export plus one JSDoc reference).",
+          "path": "src/domain/npc/npcOps.js",
+          "symbol": "export function instantNpc"
+        },
+        {
+          "_note": "⛔ THE REFUTED EXPORT, named so the refutation is findable from the manifest rather than re-discovered. MEASURED: (r = 'germanic') => string, whose body reads _rng() = `random` imported from src/kernel/rngContext.js at line 16 — the ambient module-level context, which THROWS with no active seeded RNG (rngContext.js:70-80) and CONSUMES A WORLD DRAW with one. Called nowhere by this packet. Proven present: grep -c 'export const generateSettlementName' -> 1.",
+          "path": "src/generators/npcGenerator.js",
+          "symbol": "export const generateSettlementName"
+        },
+        {
+          "_note": "THE PANTHEON READER, and the deity doctrine's structural guarantee: it returns the WORLD's own deity ids (sorted descending seats then codepoint id) and [] when the pantheon is dormant or absent, so the deity pool can hold no premade list — the constitutional line that faith is culture and never theology. Signature (worldState) -> Array<{ id, seats, wins, losses, tier, fromMajor }>. Proven present: grep -c -> 1.",
+          "path": "src/domain/display/pantheonDepth.js",
+          "symbol": "export function pantheonStandings"
+        },
+        {
+          "_note": "THE WIZARD'S RESOURCE SET, gated by route and terrain — the canonical home, which src/generators/terrainHelpers.js:12 re-exports and which is what the wizard's own panel imports. MEASURED BY LIVE IMPORT: getCompatibleResources('port','coastal') returns an ARRAY OF 33 OBJECTS, each carrying { key, label, desc, commodities, ... }. The pool maps to .key, never .label. Proven present: grep -c 'export const getCompatibleResources' -> 1.",
+          "path": "src/domain/resourceTerrainCompatibility.js",
+          "symbol": "export const getCompatibleResources"
+        },
+        {
+          "_note": "THE SEAT'S DERIVATION, added by ESTATE-REPAIR-4 with EM-A1 version 5's BLOCK-4b row for power.holder. MEASURED BY SYMBOL AT THE READ TIP bdbf7c89c (this file exports exactly three symbols; generatePowerStructure at :79 is the one that builds the seat): its return at :787 reads `governingName: (factions.find((f) => f.isGoverning) || {}).faction || null`, with the file's own comment \"it must always name the faction entry that carries isGoverning\". ⇒ the seat's value is a `faction` FIELD of an entry in powerStructure.factions[], so the pool's candidate set is that roster and nothing else — there is no module anywhere that holds THIS world's faction names, which is why power.holder is a `world` row and not a `catalogue` one. ⛔ The pool never reads governingName itself: offering only the seated faction would make it a readback, not a pool. Proven present: grep -c -> 1.",
+          "path": "src/generators/power/rulingStructure.js",
+          "symbol": "export const generatePowerStructure"
+        },
+        {
+          "_note": "THE PROOF THAT THE HOLDER IS A FACTION NAME. Executed at the read tip: FACTION_RENAME_SURFACES holds 32 rows and EXACTLY ONE names the seat — { path: 'powerStructure.governingName', kind: 'key', why: 'the exact name of the faction holding the governing seat' }. This is EM-A1 version 5's V-9, the measurement that makes the pool the faction roster. ⚠ ARCH §9 says the pool is 'over factions/npcs'; no NPC surface claims this key and no NPC path writes it, so the '/npcs' clause is RAISED (R5) as the same lagging ARCH §9 paragraph EM-A2a's R1 reports, and no npc arm is written.",
+          "path": "src/domain/factionRename.js",
+          "symbol": "export const FACTION_RENAME_SURFACES"
+        },
+        {
+          "_note": "THE ESTATE'S ONE SANCTIONED STRING ORDER, locale-free by construction. All six appended pools sort through it (ruling 1 took worldFact.goods and worldFact.services to EM-P3c). Proven present: grep -c -> 1.",
+          "path": "src/domain/deterministicSort.js",
+          "symbol": "export const compareCodepoint"
+        },
+        {
+          "path": "src/domain/edit/fieldDeclarations.js",
+          "symbol": "export const FIELD_DECLARATIONS"
+        }
+      ],
+      "_pendingRequiredSymbols": [
+        {
+          "path": "src/domain/edit/pools.js",
+          "symbol": "export const POOLS"
+        },
+        {
+          "path": "src/domain/edit/pools.js",
+          "symbol": "export function poolValues"
+        },
+        {
+          "path": "src/domain/edit/pools.js",
+          "symbol": "export function rollFrom"
+        }
+      ],
+      "_pendingRequiredSymbolsNote": "INTERIM RULE 3: `_pendingRequiredSymbols` is a SIBLING KEY, never an element of `requiredSymbols` (the array form refuses twice, once on the row's path and once on its symbol). These three are EM-A2a's CREATE, at the same path this packet MODIFIES: the deliverable APPENDS to POOLS and calls poolValues and rollFrom, so by the standard they are symbols it must find unchanged. MEASURED at 583f8f644 with the tip's own validatePacketManifest over a copy-only estate: with EM-A2a's two CREATE targets absent this packet has EXACTLY TWO errors, both naming those paths; with them present and EM-P4 ABSENT the validator is CLEAN. The three rows PROMOTE to requiredSymbols at this packet's own placement, which is the train after EM-A2a's landing. Their exact text is EM-A2a version 7's declared export spelling and is re-checked at placement against the built file.",
+      "acceptanceCases": [
+        {
+          "id": "B1",
+          "case": "MAIN AND GUARD-THE-GUARD, WITH EM-A2a's TOTALITY ARM RE-SPELLED IN PLACE: POOLS now holds exactly SEVENTEEN ids -- A2a's ELEVEN plus these SIX -- set-equal both directions with a full offender list, so a row dropped by either packet reds here. AND EM-A2a version 7's OWN A1 arm is RE-SPELLED, not duplicated beside: POOLS' ids are held against FIELD_DECLARATIONS' eleven `kind: 'pool'` ids in BOTH directions with a full offender list each way, and the two lawful residues are asserted EXACTLY -- DECLARED-BUT-UNPOOLED is exactly [] (this packet's landing discharges the PENDING three ['npc.role','power.holder','worldFact.resources'] that A2a's arm names, which is judgment 106 item 2's owed shrink, and a TWELFTH declaration reds here) and POOLED-BUT-UNDECLARED is exactly ['cause.remove','commodity','deity','name.npc','name.settlement','tier'] (A2a's own three plus this packet's three that EM-A1 declares nowhere), in compareCodepoint order. Every new pool returns a frozen, duplicate-free string[] on a real world, asserted BEFORE any negative below. MEASURED at 583f8f644: EM-A1's landed fieldDeclarations.js carries 17 declarations of which exactly ELEVEN are kind 'pool'. LEAVING A2a's A1 AS WRITTEN REDS IT ON ALL THREE ASSERTIONS.",
+          "home": "tests/domain/editPools.test.js",
+          "authorizedBy": "§7 MODIFY row 2 — tests/domain/editPools.test.js (EM-A2a's CREATE, named sibling)"
+        },
+        {
+          "id": "B2",
+          "case": "ABSENCE IS THE TYPED VALUE. A world with no namingData yields [] for both name pools; a world with no pantheon yields [] for deity; a world with no institutions yields [] for npc.role; null, undefined and {} never throw for any of the six; a world with no powerStructure yields [] for power.holder. Each absence is anchored against a populated control in the same arm.",
+          "home": "tests/domain/editPools.test.js",
+          "authorizedBy": "§7 MODIFY row 2 — tests/domain/editPools.test.js (EM-A2a's CREATE, named sibling)"
+        },
+        {
+          "id": "B3",
+          "case": "THE PASSED-IN BAG, AND THE IMPORT FENCE (the counterforce). A namingData bag carrying ONE INVENTED PREFIX produces a name.settlement value containing it — proving the pool draws from the SUPPLIED bag and never reaches for the real table behind the caller's back. A source scan proves pools.js imports neither src/data/namingData.js nor src/generators/npcGenerator.js nor any .jsx, with the matcher proved live on a planted string.",
+          "home": "tests/domain/editPools.test.js",
+          "authorizedBy": "§7 MODIFY row 2 — tests/domain/editPools.test.js (EM-A2a's CREATE, named sibling)"
+        },
+        {
+          "id": "B4",
+          "case": "THE SOURCE IS READ AT ITS CANONICAL HOME. worldFact.resources at ('port','coastal') set-equals getCompatibleResources('port','coastal').map(r => r.key) — exactly 33 — and is asserted to hold NO .label value, which is what keeps a display string out of a fact pool. ⛔ The two set-equalities this case carried for worldFact.goods (GOODS_CATEGORIES, 7) and worldFact.services (INSTITUTION_SERVICES, 285) LEFT the arm with their pools under the chair's ruling 1 and ride EM-P3c's sitting; no arm is written for either, because an arm would be an instruction.",
+          "home": "tests/domain/editPools.test.js",
+          "authorizedBy": "§7 MODIFY row 2 — tests/domain/editPools.test.js (EM-A2a's CREATE, named sibling)"
+        },
+        {
+          "id": "B5",
+          "case": "BOUNDARY — THE RESOURCE GATE IS LIVE, NOT INHERITED. worldFact.resources differs between ('port','coastal') and ('isolated','desert'), asserted as a non-empty symmetric difference so the gate is proved to fire rather than returning one fixed list. An absent route/terrain falls back to ('road', null) and still returns a non-empty frozen array.",
+          "home": "tests/domain/editPools.test.js",
+          "authorizedBy": "§7 MODIFY row 2 — tests/domain/editPools.test.js (EM-A2a's CREATE, named sibling)"
+        },
+        {
+          "id": "B6",
+          "case": "DETERMINISM ACROSS THE COMBINED SET. rollFrom on each of the six returns the same value on repeat calls (toBe); roll 3 taken alone equals roll 3 taken in sequence (the reopen guarantee); different entryIds differ for at least one pool. And the no-draw law re-asserted across ALL SEVENTEEN pools: with an ambient RNG active, fifty rollFrom calls leave the next ambient draw equal to the pre-recorded value.",
+          "home": "tests/domain/editPools.test.js",
+          "authorizedBy": "§7 MODIFY row 2 — tests/domain/editPools.test.js (EM-A2a's CREATE, named sibling)"
+        },
+        {
+          "id": "B8",
+          "case": "THE SEAT IS THE ROSTER, AND NOTHING ELSE. For a world whose powerStructure.factions[] carries three named entries, power.holder set-equals exactly those three `faction` values, sorted — asserted FIRST and populated, so no later arm passes on nothing. A world with no powerStructure, one with factions: [], and one whose entries carry a blank faction each yield the frozen [] and never throw. A source scan finds NO premade faction-name array anywhere in the module and NO read of governingName — the pool offers every seat-eligible faction, never a readback of the one already seated. An invented faction name planted in the supplied roster APPEARS in the pool, proving the read is off the passed-in world. npc-kind holders are asserted ABSENT by name, so ARCH §9's '/npcs' clause is a recorded verdict (R5), not an oversight.",
+          "home": "tests/domain/editPools.test.js",
+          "authorizedBy": "§7 MODIFY row 2 — tests/domain/editPools.test.js (EM-A2a's CREATE, named sibling)"
+        },
+        {
+          "id": "B7",
+          "case": "THE DEITY DOCTRINE. deity returns exactly the world's own pantheon ids for a three-deity world and [] for a world with none; a source scan finds NO premade deity-name array anywhere in the module — faith is culture, never theology. Anchored by the populated case asserted first.",
+          "home": "tests/domain/editPools.test.js",
+          "authorizedBy": "§7 MODIFY row 2 — tests/domain/editPools.test.js (EM-A2a's CREATE, named sibling)"
+        }
+      ],
+      "checks": [
+        [
+          "npx",
+          "vitest",
+          "run",
+          "--pool=threads",
+          "--maxWorkers=2",
+          "tests/domain/editPools.test.js"
+        ],
+        [
+          "npx",
+          "vitest",
+          "run",
+          "--pool=threads",
+          "--maxWorkers=2",
+          "tests/property/generatorGoldenMaster.test.js",
+          "tests/property/dossierProseManifest.test.js"
+        ],
+        [
+          "npx",
+          "vitest",
+          "run",
+          "--pool=threads",
+          "--maxWorkers=2",
+          "tests/lint/negativeAssertionAnchor.walker.test.js"
+        ],
+        [
+          "npx",
+          "eslint",
+          "src/domain/edit/pools.js",
+          "tests/domain/editPools.test.js"
+        ],
+        [
+          "node",
+          "scripts/check-observed-shape-readers.mjs"
+        ],
+        [
+          "npm",
+          "run",
+          "typecheck:ratchet"
+        ],
+        [
+          "npm",
+          "run",
+          "typecheck:domain:strict"
+        ],
+        [
+          "node",
+          "scripts/implementation-packets.mjs",
+          "validate"
+        ]
+      ],
+      "_checksNote": "INTERIM RULE 8: the array ENDS with `node scripts/implementation-packets.mjs validate` (version 4 left the two `npm run typecheck:*` entries after it). It names FILES, never the `tests/lint` directory, and NEVER the lighting walker, which reds by design under a train. The build lane's INSTRUMENTS -- `tests/lint` run WHOLE with --exclude=tests/lint/sovereigntyLightingContract.walker.test.js (must EXIT 0), then the lighting walker ALONE (expected NONZERO on the titles figure only, until the terminal's refreeze) -- live in section 10 and are not sealed checks. The count prover is KIT FURNITURE (rule 12, judgment 81) and is not here.",
+      "_countLaw": "EIGHT acceptance cases (B1-B8), EIGHT new `it` arms, +8 titles -- one number, spelled the same in section 7's MODIFY row 2, section 9's opening line, section 7's P2.1 lighting row, section 3's acceptance-case budget and every case of this capsule. Every case is HOMED at tests/domain/editPools.test.js and AUTHORIZED by section 7's MODIFY row 2, so no case is homeless. The prover `EM-A2b.count-prover.mjs` ships beside this capsule in the kit, takes `<packet.md> <capsule.json>` positionally, and was run against SIX deliberately wrong copies as well as version 4 itself, which it FAILS.",
+      "_byteArm": "NOT THE HOLDER. Executed at 583f8f644 by importing EAGER_FIRST_PAINT_MODULES from the tree's own vite.config.js (no dist is read, so the probe cannot skip): 269 -> 269 modules, no src/domain/edit member, +0 B. POSITIVE CONTROL: a src/generators module importing the leaf takes the set to 273. The leaf has ZERO importers anywhere in src, tests, scripts or e2e, so the generation worker's bundle (exact, zero slack), the lazy engine and the five edge-shared metas all move +0 B. This member carries NO row on tests/build/vendorPdfLazy.test.js; the chair names its train's byte-arm holder at the pre-proof (rule 14).",
+      "_browserSuite": "RULE 10 DOES NOT BIND AND NO SPEC IS NAMED. This member touches no src/components/** path, no route, no data-testid, no accessible name, no nav, header, footer, bottom bar or page chrome: its two paths are src/domain/edit/pools.js and tests/domain/editPools.test.js.",
+      "_deferredRows": "ONE, and it is the chair's at the train's terminal: tests/lint/.lighting-census-baseline.json -- NEVER the walker -- for the titles figure alone. EXECUTED DELTA, all five figures in the register's own order: +0 files / +0 parked / +0 credited / +8 titles / +0 suiteTitles, measured with the walker's own measureCensus over a copy-only estate (2670/359/2311/25589/6823 at the tip; 2671/359/2312/25597/6824 with EM-A2a's eight-arm file; 2671/359/2312/25605/6824 with this packet's eight appended). parkReasonsFor printed [] at both eight and sixteen arms. docs/content/wiring-census.json is named NOWHERE (rule 1) and this member's producerIndexFiles delta is +0.",
+      "_requiredSymbolsNote": "NINE rows, every one asserted VERBATIM at every status and every one present at 583f8f644 (counts 1,2,1,1,1,1,1,1,1). The NINTH is new at version 5: `export const FIELD_DECLARATIONS` at src/domain/edit/fieldDeclarations.js, EM-A1's LANDED table. It is a required symbol by the standard's own definition -- the deliverable's B1 arm RE-SPELLS EM-A2a's A1 totality arm, which reads that table's eleven `kind: 'pool'` ids in both directions, so it is a symbol this packet must find unchanged. This packet RETIRES nothing and RENAMES nothing, so no `retiredSymbols` row is owed and no landed packet's row needs discharging (shared-brief step 10, executed against the tip's validator over a copy-only estate: zero EM-A2b errors once EM-A2a's two CREATE targets exist, with EM-P4 ABSENT)."
+    },
+    {
+      "id": "EM-B2a3",
+      "status": "READY",
+      "packetPath": "docs/implementation/packets/settlement-editor/EM-B2a3.md",
+      "verifiedBase": "efd0eb4481669fce0fa00c356fef9399ab374d17",
+      "_baseNote": "⛔ `__BASE__` can never pass `validate:packets` (`verifiedBase must be a lowercase 40-character SHA`). Validation is DOWNSTREAM of the chair's promotion stamp: the chair stamps the base, adds the INDEX.md row, THEN gates on `valid:`. This lane validated on a scratch COPY of the estate with the base stamped to bdbf7c89c2569679bcccdb188d5d831ccfaa0e6d, an INDEX row added exactly as the chair would, and EM-B2a1's two CREATE targets present on disk as if member 1 had LANDED. Nothing else was changed and nothing was written into the read tip.",
+      "_member": "MEMBER 3 OF 4 of the SUPERSEDED EM-B2a (the chair's ESTATE-REPAIR ruling and the COMPILE-EM-B2a1 ruling, 2026-09-20): EM-B2a1 (the leaf, INSTALLED) → EM-B2a2 (the seam + the heavy chooser) → EM-B2a3 (this: assembleInstitutions and generatePower consult pins, `provides` WHOLE) → EM-B2a4 (the store consumer + the orchestration). The four-member partition is `EM-B2a.partition.md`.",
+      "_interimRules": "Compiled under `COMPILE-RULES.interim.md` (the chair, 2026-09-20), which GOVERNS where it and `EM-PREAMBLE.md` (SHA-256 c9f33c8d2940372bde8a6d931e3d389b79516a90ed45405cbbbf3e698cc46675, MEASURED at the read tip with `shasum -a 256`) disagree. Visible here: a NEW test file is CREATE, never TEST (rule 4); `docs/content/wiring-census.json` appears in NO row and no check (rule 1); NO byte arm and no dist read (rule 2); every register figure is a DELTA (rule 9); sealed `checks` name FILES, never the `tests/lint` DIRECTORY, never the lighting walker, and END with the validator (rule 8); §7 and this capsule are SET-EQUAL, compiled CAPSULE-FIRST (rule 6). `_pendingRequiredSymbols` is not needed: every row below resolves TODAY.",
+      "_scopeNote": "⭐ COMPILED TO WHAT IS PROVABLE AT THIS MEMBER'S LANDING, per the chair's correction of its own launch brief (2026-09-20, from the EM-B2a4 seat): the brief's blanket acceptance sentence ('pinned re-derive reproduces the record's provided keys byte for byte over a stride of the golden corpus') is WITHDRAWN, and this packet asserts only the survivals it MEASURED AS TOTAL over the declared 63-row census corpus. This member builds THE SEAM — the pin consult at two of the twenty-two steps, which is the gap design §22 item 3 names ('the pin seam exists in ONE step of twenty-two'). It does not build `rederive`, it is not the no-edit identity (that is EM-R0c's three-way merge), and it makes no claim about what the whole pipeline reproduces beyond the two measured facts in `_measuredSurvival`.",
+      "_measuredSurvival": "MEASURED at bdbf7c89c over the DECLARED 63-ROW CENSUS CORPUS (`tests/helpers/generationForkCensus.js#censusCorpus`), pins built FROM THE RECORD and honoured at the step boundary, each figure with its as-of mark. THE CONTROL FIRST: each step's OWN PRODUCED values injected reproduce the whole settlement 63/63 and 63/63, so anything below is the pin's content and not the instrument. ⭐ `generatePower`: the WHOLE SETTLEMENT reproduces **63/63**, and every one of the nineteen watched record keys reproduces 63/63 — its two choosers survive TOTALLY (`powerStructure` from `record.powerStructure`; `powerIntent` is OFF-RECORD and was supplied as the produced value, which is question Q2). ⛔ `assembleInstitutions`: the whole settlement reproduces **7/63**. Per key: `institutions` 11/63 · `economicState` 10/63 · `availableServices` 10/63 · `simulationTrace` 7/63 · `economicViability` 25/63 · `resourceAnalysis` 32/63 · `npcs` 38/63 · `factions` 38/63 · `powerStructure` 40/63 · `generationCoherenceReceipt` 46/63 · `defenseProfile` 46/63 · `relationships` 49/63 · `conflicts` 49/63 · `history` 54/63 · `spatialLayout` 57/63 · `isolationSupport` 61/63; TOTAL only on `stress`, `name` and `population` (63/63 each). THE LATER WRITERS THAT RE-MAKE `institutions`, named from the live registry: `subsumptionPass`, `cascadePass` and `factionCorrelationPass` each declare **`provides: []`** and are therefore UNPINNABLE by a mechanism keyed on `provides`, plus `isolationPass` and `coherenceRepairPass` which mutate it while providing other keys — `cascadePass` DRAWS (register: `stepDraws 56`, `keyMoves 56`) and added 9 entries on the probe row, which is why the roster does not survive. Those five writers are EM-R1's writer census, not this member's. The later writers of `powerStructure` — `neighbourFactions`, `powerEconomyReconcilePass` (both `provides: []`) and `assembleSettlement` — are EM-R3's, and this member's 63/63 shows its producer half does not need them.",
+      "_cloneRule": "⛔ THE PIN BAG MUST BE CLONED BEFORE IT REACHES EITHER STEP, AND THIS MEMBER DOES NOT CLONE IT — EM-R1 DOES ('pins cloned on entry', charter row EM-R1; design §22 ruling 6, `structuredClone`, always). MEASURED at bdbf7c89c over the 63-row corpus with the pin handed back BY REFERENCE, which is exactly what `return chooseOrPin(pins, key, draw)` does: an UNCLONED record-built pin let a later pass mutate the CALLER'S OWN RECORD in **52 of 63** rows for `assembleInstitutions` (`record.institutions`) and **30 of 63** for `generatePower` (`record.powerStructure`); with `structuredClone` both read **0 of 63**. Worse, 2 of 63 rows THREW — `TypeError: Cannot add property 1, object is not extensible` at `coherenceRepairPass.js:134`, because `record.generationCoherenceReceipt.repairs` is FROZEN at `src/generators/generationCoherence.js:515` and the uncloned pin hands that frozen array straight into a `push`. This is the design's own measured `corruptionPass` defect ('a record-built pin bag is MUTATED IN PLACE'), reproduced at THIS member's two steps. ⇒ the clone is a PRECONDITION, not an optimisation; this member declares EM-R1 as a hard dependency and mints no second spelling of the rule. If the chair wants this member to land before EM-R1, it clones in its own two consults instead and EM-R1's later clone-on-entry then makes that local clone dead — question Q4.",
+      "changeManifest": [
+        {
+          "_note": "⭐ THE INSTITUTION STEP. `provides: ['institutions', 'catalogForTier', 'generationRepairs']` at :216, read from the LIVE registry through `getStepMeta()` and not from the comment. Under the chair's ruling this member owes the chooser list WHOLE. MEASURED, per key: `institutions` is CHOSEN — `drawRng.chance(baseChance * resourceMult)` at :378 on the step stream or on a `rng.fork('exclusiveCoexist::…')` side stream minted at :347, plus `rng.chance(0.3)` at :584 for custom institutions; 66 own-stream draws on the probe row. `catalogForTier` is COMPUTED with zero draws at :243-246, a pure function of `tier` over a frozen catalog. `generationRepairs` is COMPUTED with zero draws, born `[]` at :248 and appended only at :700-707 from `threatDefensePlan`. ⛔ A whole-`provides` pin here is BLOCKED on two measured facts (see `_status_BLOCKED_why` 2 and 3); the file is reserved because it is this member's under the partition whichever cure the chair rules. Effective lines 571 against the layer's 800 max-lines ceiling (skipBlankLines + skipComments) and NO `scripts/.size-baseline.json` row exists for it (grep, exit 1), so the headroom is 229.",
+          "action": "MODIFY",
+          "path": "src/generators/steps/assembleInstitutions.js"
+        },
+        {
+          "_note": "⭐ THE POWER STEP — the sixth path the superseded parent's capsule missed, joined to this member by the chair's ruling. `provides: ['powerIntent', 'powerStructure']` at :34. MEASURED: the step takes ZERO draws on its own stream and exactly ONE inner fork; all of the power structure's entropy is a SEPARATELY MINTED stream — `createPowerGenerationIntent` stores `rngSeed: stepRng.fork(POWER_STREAM).seed` (economyReconciliation.js:132) and `projectPowerGenerationIntent` does `setActiveRng(createPRNG(intent.rngSeed))` (:160). So a `powerStructure` pin must short-circuit `projectPowerGenerationIntent` and a `powerIntent` pin must short-circuit `createPowerGenerationIntent`; the 'zero draws on the step stream' arm is VACUOUS here and the honest instrument is the fork count and the mint. `powerStructure` IS reproducible from the record (executed: the record's object is the step's plus one extra `conflicts` key, and pinning it back reproduces the settlement byte for byte). `powerIntent` is ABSENT from the record in 13/13 rows. Effective lines 100 against 800; no size-baseline row.",
+          "action": "MODIFY",
+          "path": "src/generators/steps/generatePower.js"
+        },
+        {
+          "_note": "THE BATTERY. ⛔ CREATE, never TEST: the path is ABSENT at the read tip and NO named sibling creates it first, so interim rule 4's discriminator does not apply. Its proof shape is `tests/generators/pipelinePinnedMode.test.js` — EM-P0's landed acceptance battery — whose A2 (`pinsFromContext`), A3 (raw draws counted on the step's own stream), A4 (the partial-pin refusal asserted by its exact message) and A7 (a source scan for a second registration) this file copies arm for arm at the two new steps. ⛔ Flat literal `it(...)` under ONE literal `describe`; `it`/`test`/`describe` each bound EXACTLY ONCE and never as a variable or arrow parameter; no bare `for (const seed of …) { expect(…) }` (seedLoopTotality); every negative assertion carries `// anchored:` on the line immediately above or is a both-directions set equality; every asserted set IMPORTED from its producer, never re-typed (contractTestAntiVacuity Rule 2) — the chooser lists come from `getStepMeta()` and the record verdicts from `GENERATION_TIER1`, never from a literal copy. ⛔ `tests/generators` is an ENFORCER_DIR, so this file enters the mutation-coverage denominator BY CONSTRUCTION (`enumerateInvariants` picks every `.test.js` under it) and owes the REGISTER row below; `subjectCouplingOf` is satisfied by construction (it imports `../../src/generators/**` and calls `expect(`). ⛔ A CREATE under `tests/<dir>` opts into EVERY walker that governs that directory: `tests/generators` is run WHOLE in §10.",
+          "action": "CREATE",
+          "path": "tests/generators/pipelinePinnedChoosers.test.js"
+        },
+        {
+          "_note": "⛔ OWED AND MEASURED, NOT ASSUMED. `tests/generators` is in `ENFORCER_DIRS` (mutationCoverage.shared.mjs:36) and `enumerateInvariants` picks EVERY `.test.js` under an enforcer dir regardless of `NAME_PATTERN`, so the CREATE above enters the invariants denominator and `tests/lint/mutationCoverageManifest.test.js` reds by name until a row exists. STATED AS A DELTA (interim rule 9): `invariants` **+1 row**, `\"rowKey\": \"invariants['tests/generators/pipelinePinnedChoosers.test.js']\"`, `kind: 'rationale'` with `ref: ADMITTED_TREE_REF` ('generators-tree-admitted-subject-coupled-2026-08-30') — the class this file belongs to, re-derived from disk per member by `subjectCouplingOf` rather than promised in prose; `uncoveredBaseline` **UNMOVED** (a rationale row is not an `uncovered` row). The live absolutes are the chair's to stamp and are quoted in no prediction. ⚠ EM-B2a4 also carries a row on this file (partition M-12), so under today's validator this member and EM-B2a4 cannot be non-terminal together — which the chair's chain a3 → a4 already imposes; TOOL-27, which keys ROWS of a row-keyed register, is the cure if they ever need to ride one train. QUESTION Q5.",
+          "action": "REGISTER",
+          "path": "scripts/mutation-coverage-manifest.json",
+          "rowKey": "invariants['tests/generators/pipelinePinnedChoosers.test.js']"
+        },
+        {
+          "_note": "⛔ A LINE-ADDRESSED CITATION THIS MEMBER SHIFTS, found by LANE-EM-PREPROOF step 16's sweep and NOT by the basename grep. `DISPLAY_NAME_KEYED_SITES` at :161-165 declares `{ site: 'src/generators/steps/assembleInstitutions.js:745', channel: 'hash', marker: 'inst.name' }`, and the census arm READS THAT LINE LIVE (`readFileSync(...).split('\\n')[Number(lineNumber) - 1]`) and asserts it still contains the marker, with the message '<site> no longer carries inst.name: re-measure the observed site'. This member inserts at least one import line above :745, so the address MUST be re-taken in the same commit or the arm reds by name. The row carries ADDRESSES ONLY — no channel, no marker and no count is touched, and EM-P1b's cure for the site itself is not this member's.",
+          "action": "TEST",
+          "path": "tests/generators/generationForkCensus.test.js"
+        }
+      ],
+      "requiredSymbols": [
+        {
+          "_note": "⭐ THE CHOOSER LIST THIS MEMBER OWES WHOLE, pinned as a symbol so the obligation is executable rather than remembered. `runPipeline` throws unless a step's pins cover every key in its `provides`, so this three-key list IS the member's contract. POST-EDIT VALIDATION (LANE-EM-PREPROOF step 10): the member changes the step's BODY, never its registration meta, so the row is asserted VERBATIM after the edit as before it. Verbatim at :216, count 1.",
+          "path": "src/generators/steps/assembleInstitutions.js",
+          "symbol": "provides: ['institutions', 'catalogForTier', 'generationRepairs'],"
+        },
+        {
+          "_note": "⭐ THE SECOND CHOOSER LIST, same law. The chair's ruling joined `generatePower` to this member because the superseded parent's capsule missed it. POST-EDIT: the registration meta is untouched; the row survives the member's own edit. Verbatim at :34, count 1.",
+          "path": "src/generators/steps/generatePower.js",
+          "symbol": "provides: ['powerIntent', 'powerStructure'],"
+        },
+        {
+          "_note": "THE PARTITION'S ROW 17, re-executed: count **2** (first at :426, again at :492), against the parent's claim of the same text. The toggle-resolution blocks that resolve a forced institution BY DISPLAY NAME — the estate's live institution identity (design §22.4: institutions carry no id; `anchorForInstitution` falls back to `name:` for the 12 % the later passes add). PRESERVE: this member wraps the step's production in a pin consult and rewrites no name-resolution rule. POST-EDIT: the assertion is a plain substring match, so re-indentation inside a closure does not break it.",
+          "path": "src/generators/steps/assembleInstitutions.js",
+          "symbol": "institutions.find(i => i.name === instName)"
+        },
+        {
+          "_note": "THE PARTITION'S ROW 18, re-executed at the REFRESHED address: count 1 at **:149** (the parent's `:142` is stale). The faction id minted from a display-name slug — the join every `powerStructure` pin must keep honest. PRESERVE, untouched: this member edits no file under `src/generators/density/`.",
+          "path": "src/generators/density/densityAscension.js",
+          "symbol": "id: `faction.${slug(name)}`"
+        },
+        {
+          "_note": "⛔ THE RUNNER WHOSE RULE IS THIS MEMBER'S WHOLE CONSTRAINT. `runPipeline`'s partial-pin refusal is applied to EVERY registered step over ONE flat key namespace, which is why pinning this member's three institution keys refuses at `coherenceRepairPass` — a step this member does not touch — in 13 of 13 corpus rows. Design §22 ruling 6 keeps the refusal exactly as EM-P0 landed it and WITHDRAWS EM-P0b, the charter that would have narrowed it. PRESERVE: this member never edits `pipeline.js` (that file is EM-B2a2's, partition M-2) and never mints a second runner. Verbatim at :171, count 1.",
+          "path": "src/generators/pipeline.js",
+          "symbol": "export function runPipeline"
+        },
+        {
+          "_note": "THE MINT A `powerIntent` PIN MUST SHORT-CIRCUIT. It stores `rngSeed: stepRng.fork(POWER_STREAM).seed` — the fork's SEED STRING, not a live stream — which is why the landed census classes `generatePower|powerIntent` as `label` (it moves under a perturbed stream while the step draws zero). Measured at the probe row: `powerIntent.rngSeed === 'golden-master-v3::generatePower::power-structure'`, JSON-serializable, 3,400 bytes, round-trip identical. PRESERVE: the member consults a pin in the STEP, never inside this helper, and mints no second intent constructor. Verbatim at :118, count 1.",
+          "path": "src/generators/power/economyReconciliation.js",
+          "symbol": "export function createPowerGenerationIntent"
+        },
+        {
+          "_note": "THE MINT A `powerStructure` PIN MUST SHORT-CIRCUIT — `setActiveRng(createPRNG(intent.rngSeed))` at :160, the door every power draw goes through, and the reason `generatePower` reads `stepDraws: 0`. It is also the ONLY path by which `power/rulingStructure.js`, `power/relationshipArchetypes.js` and `power/stressFactions.js` are reached from this step, which is the measurement that keeps all three OUT of this member's file list. PRESERVE, untouched. Verbatim at :154, count 1.",
+          "path": "src/generators/power/economyReconciliation.js",
+          "symbol": "export function projectPowerGenerationIntent"
+        },
+        {
+          "_note": "⭐ THE LANDED CENSUS THAT IS THIS MEMBER'S AUTHORITY ON WHAT REACHES THE RECORD, and the reason its own battery may not re-type a set (contractTestAntiVacuity Rule 2). Its rows carry the five keys' verdicts, each held equal to a fresh execution by `tests/generators/generationForkCensus.test.js`: `assembleInstitutions|catalogForTier` `recordPath: null`, `assembleInstitutions|generationRepairs` `recordPath: 'record.generationCoherenceReceipt.repairs'` with `onRecordClass: 'varies'`, `generatePower|powerIntent` `class: 'label'` and `recordPath: null`, `generatePower|powerStructure` `onRecordClass: 'transformed'`, `assembleInstitutions|institutions` `onRecordClass: 'same'` but `producedOnRecordClass: 'varies'` (same 7 / transformed 56 of 63). PRESERVE: this member moves no census row; a row that moved would mean the member changed generation, which is the STOP. Verbatim at :72, count 1.",
+          "path": "src/domain/generation/generationForkRegistry.js",
+          "symbol": "export const GENERATION_TIER1"
+        },
+        {
+          "path": "src/generators/pipeline.js",
+          "symbol": "export function chooseOrPin(pins, key, draw)",
+          "_note": "⭐ EM-B2a2 VERSION 2's DELIVERABLE, added at this pre-proof (LANE-EM-PREPROOF step 2: a symbol the deliverable CALLS and must find unchanged is a requiredSymbols row). ⛔ ABSENT at 583f8f644 and present only once EM-B2a2 has LANDED (train EM-T11, judgment 100). MEASURED on a copy-only estate with the tip's own validator: EXACTLY ONE error without it (EM-B2a3.requiredSymbols[8].symbol is missing from src/generators/pipeline.js) and ZERO with EM-B2a2 simulated as landed. This row is what makes the packet refuse placement on any train before EM-T12 BY THE VALIDATOR rather than by prose."
+        }
+      ],
+      "_retiredSymbols": "NONE. This member moves, renames and deletes no symbol: it wraps two step bodies in a pin consult and creates one test file, so it discharges no other LANDED packet's `requiredSymbols` row. ⚠ REPORTED FOR THE CHAIR, NOT REPAIRED HERE: the partition's row 21b gives EM-B2a2 a `requiredSymbols` row for `src/generators/steps/generatePopulation.js :: function chooseOrPin(pins, key, draw)` while a2's own charter is to LIFT that function out of that file into `src/generators/pipeline.js`. Under LANE-EM-PREPROOF step 10 that is a `retiredSymbols` row, not a `requiredSymbols` one, unless a2's contract keeps the verbatim text behind a forwarding declaration. It is a2's row and this lane changes nothing about it.",
+      "_pinPrimitiveConsumed": "⭐ RE-POINTED AT THE PRE-PROOF (version 3, read tip 583f8f644): the home THIS MEMBER IMPORTS FROM IS `src/generators/pipeline.js`, EM-B2a2 VERSION 2's exported home (INSTALLED; train EM-T11, judgment 100), and it is carried as requiredSymbols row [8] (`export function chooseOrPin(pins, key, draw)`), ABSENT at 583f8f644 by design. AS OF 583f8f644 the body still sits at its OLD home, src/generators/steps/generatePopulation.js:41 (count 1; `git grep -l -F 'chooseOrPin' -- src tests` returns that ONE source file, so nothing else consumes it yet) — that is executed history with its as-of mark, not this packet's base. THE PARTITION §2.2 ROW, COMPILED TO AS THE TABLE DECLARES IT AND NOT SILENTLY CHANGED: name `chooseOrPin`, home `src/generators/pipeline.js` (a2 lifts it verbatim out of `generatePopulation.js:41` and exports it from the runner that owns `_PINS_KEY`), signature `function chooseOrPin(pins, key, draw)` — returns `pins[key]` when own-present, else `draw()`, and ⛔ does NOT advance the stream on a pin. This member IMPORTS it and mints no second spelling. Measured at the read tip: the definition is at `generatePopulation.js:41` (count 1) and `git grep -l -F 'chooseOrPin' -- tests src` returns that ONE file, so nothing else consumes it yet. ⚠ THE ONE DISAGREEMENT WITH THE TABLE, REPORTED NOT CHANGED: the primitive's no-advance behaviour is exactly what makes this member's draw-skip move `simulationTrace`, and design §22.2 ruling 11 rules the family's FIRST CUT must CONSUME AND DISCARD instead. If the chair rules the consume-and-discard shape, the primitive a3 imports is NOT `chooseOrPin` but a second one beside it, and that is a2's export to declare — one ruling for all three seats.",
+      "acceptanceCases": [
+        {
+          "id": "A1",
+          "case": "THE NULL CHANGE — THE GOLDENS CANNOT MOVE. With no pins and with `pins: {}`, a stride of at least 40 rows of the golden master's own 525-row corpus hashes byte-identical to the COMMITTED fixture, and the runner's `pins: {}` path yields a settlement JSON-identical to the plain path with the same ctx key set. This is EM-P0's A1 arm re-aimed at the two new steps, and it is the arm that convicted EM-P0 version 1 at 41 of 41 rows. The primitive calls `draw()` when no pin is supplied, so fresh generation is byte-identical BY CONSTRUCTION and this arm is the proof rather than the promise.",
+          "home": "tests/generators/pipelinePinnedChoosers.test.js",
+          "authorizedBy": "§7's `CREATE` row for `tests/generators/pipelinePinnedChoosers.test.js` (adds exactly 7 literal `it`s, one per sealed case)"
+        },
+        {
+          "id": "A2",
+          "case": "⭐ THE PIN IS TAKEN — THE ANTI-VACUITY ARM, AND THE ONE THAT CONVICTS A MEMBER THAT DID NOTHING. At the read tip both steps IGNORE `ctx.__pins`: the runner seeds the context with the pins, the step overwrites them with its own patch, and the settlement comes back byte-identical to the baseline — EXECUTED, for `generatePower`'s two keys and for the eight-key closure alike. A naive 'the pinned run reproduces the record' assertion is therefore GREEN BEFORE THIS MEMBER EXISTS. So every arm below pins a DELIBERATELY ALTERED value, one key at a time over all five, and asserts the step's own output IS that value and the record carries it: against today's tree the arm reds on all five (the pin is dropped); against a member that wires four of five it reds on the fifth by name.",
+          "home": "tests/generators/pipelinePinnedChoosers.test.js",
+          "authorizedBy": "§7's `CREATE` row for `tests/generators/pipelinePinnedChoosers.test.js` (adds exactly 7 literal `it`s, one per sealed case)"
+        },
+        {
+          "id": "A3",
+          "case": "A PINNED KEY'S DRAW IS NOT CONSUMED FOR IT, ON THE RIGHT INSTRUMENT PER STEP. `assembleInstitutions` takes **66** draws on its own forked stream unpinned (measured, probe row) and **0** with its three keys pinned, counted by a counting proxy over the step's stream exactly as `pipelinePinnedMode.test.js` A3 counts. ⛔ `generatePower` takes **ZERO** own-stream draws unpinned and exactly **ONE inner fork**, because all of its entropy is a SEPARATELY MINTED `createPRNG(intent.rngSeed)` stream — so the step-stream arm is VACUOUS there and would pass over a member that wired nothing. Its honest instrument is the fork count (1 → 0) and a mint census that shows `createPRNG` is never called with `<seed>::generatePower::power-structure` under a pin. Both instruments are declared, and the vacuity of the wrong one is stated so no build lane reaches for it.",
+          "home": "tests/generators/pipelinePinnedChoosers.test.js",
+          "authorizedBy": "§7's `CREATE` row for `tests/generators/pipelinePinnedChoosers.test.js` (adds exactly 7 literal `it`s, one per sealed case)"
+        },
+        {
+          "id": "A4",
+          "case": "THE PARTIAL PIN REFUSES BY NAME, AND THE NAME IS NOT ALWAYS THIS MEMBER'S STEP. Pinning `generatePower`'s two keys alone does NOT refuse (executed, 13/13 rows). Pinning `assembleInstitutions`'s three keys alone refuses at a DIFFERENT step, 13 of 13 rows, with the exact message `Pipeline pins: step \"coherenceRepairPass\" has choosers [generationRepairs, isolationSupport] but pins supply only [generationRepairs]. Pin every chooser of a step or none of them.` and, under `onStrictViolation`, `{ step: 'coherenceRepairPass', kind: 'pin', keys: ['isolationSupport'] }`. The arm asserts BOTH the throw and the strict report, and asserts the CLOSURE itself — computed from `getStepMeta()` and never re-typed: this member's institution keys drag in SIX keys across FIVE steps (`catalogForTier, generationRepairs, institutions, isolationSupport, stress, stressTypes` over `assembleInstitutions, coherenceRepairPass, isolationPass, resolveStress, stressConfirmPass`) while its power keys drag in none. ⇒ a caller that wants this member's institution seam owes FIVE steps' choosers, not one step's, and that is EM-B2a4's `pinsFrom` obligation, stated here so it is not discovered at a build.",
+          "home": "tests/generators/pipelinePinnedChoosers.test.js",
+          "authorizedBy": "§7's `CREATE` row for `tests/generators/pipelinePinnedChoosers.test.js` (adds exactly 7 literal `it`s, one per sealed case)"
+        },
+        {
+          "id": "A5",
+          "case": "⭐ THE SURVIVAL, SEALED ONLY WHERE IT WAS MEASURED TOTAL (the chair's correction). SEALED: (a) a record-built whole-`provides` pin of `generatePower`, honoured at the step boundary and CLONED, reproduces the WHOLE SETTLEMENT **63/63** over the declared census corpus, and all nineteen watched record keys 63/63 — as of `bdbf7c89c`; (b) the same pin of `assembleInstitutions` reproduces `stress`, `name` and `population` 63/63 and NOTHING ELSE totally; (c) THE CONTROL: each step's OWN PRODUCED values injected reproduce 63/63 and 63/63, so a figure below total is the pin's content and not the instrument. ⛔ NOT SEALED, RECORDED AS MEASUREMENT WITH ITS AS-OF MARK: `assembleInstitutions`'s whole settlement **7/63**, `institutions` 11/63, `economicState` 10/63, `availableServices` 10/63, `simulationTrace` 7/63 and the rest of `_measuredSurvival`. A build lane that asserts any of those as an acceptance is a named STOP (§11): they are the later writers' to fix — `subsumptionPass`, `cascadePass` and `factionCorrelationPass` declare `provides: []` and are UNPINNABLE here, which is EM-R1's writer census, not this member's.",
+          "home": "tests/generators/pipelinePinnedChoosers.test.js",
+          "authorizedBy": "§7's `CREATE` row for `tests/generators/pipelinePinnedChoosers.test.js` (adds exactly 7 literal `it`s, one per sealed case)"
+        },
+        {
+          "id": "A6",
+          "case": "⛔ THE PIN BAG IS NEVER WRITTEN THROUGH — AND THIS MEMBER DOES NOT GUARANTEE IT ALONE. MEASURED over the 63-row corpus with the pin handed back BY REFERENCE (what `return chooseOrPin(pins, key, draw)` does): an UNCLONED record-built pin let a later pass mutate THE CALLER'S OWN RECORD in **52/63** rows for `assembleInstitutions` and **30/63** for `generatePower`, and 2/63 rows THREW `TypeError: Cannot add property 1, object is not extensible` at `coherenceRepairPass.js:134` because `record.generationCoherenceReceipt.repairs` is frozen at `generationCoherence.js:515`; with `structuredClone` all four figures read **0/63**. The arm asserts the cloned figures (0/63 mutation, 0/63 throw) and RE-ASSERTS the uncloned ones as the negative control, so the clone can never go silently missing. The clone itself is EM-R1's ('pins cloned on entry', charter row EM-R1; design §22 ruling 6), which is why EM-R1 is a hard dependency and this member mints no second spelling.",
+          "home": "tests/generators/pipelinePinnedChoosers.test.js",
+          "authorizedBy": "§7's `CREATE` row for `tests/generators/pipelinePinnedChoosers.test.js` (adds exactly 7 literal `it`s, one per sealed case)"
+        },
+        {
+          "id": "A7",
+          "case": "THE FILE LIST IS TWO, AND THE THREE POWER HELPERS ARE UNTOUCHED. `src/generators/power/relationshipArchetypes.js` (exports exactly `computeRelTension`), `src/generators/power/stressFactions.js` (exactly `applyStressEventFactions`) and `src/generators/power/rulingStructure.js` (`generatePowerStructure`, `normalizeAndAnnotateFactions`, `renormalizeFactionPower`) declare no `provides:` and are registered steps in no census — the `provides:` roster over `src/generators` returns 22 rows and names none of them. All three are reached from this member's steps ONLY through `projectPowerGenerationIntent` → `generatePowerStructure`, so a pin that short-circuits that call makes all three unreachable on the pinned path. ⇒ the chair's 3 → 4 file override (ruling 2) is NOT needed and is NOT used, and no fourth file is named.",
+          "home": "tests/generators/pipelinePinnedChoosers.test.js",
+          "authorizedBy": "§7's `CREATE` row for `tests/generators/pipelinePinnedChoosers.test.js` (adds exactly 7 literal `it`s, one per sealed case)"
+        }
+      ],
+      "checks": [
+        [
+          "npx",
+          "vitest",
+          "run",
+          "--pool=threads",
+          "--maxWorkers=2",
+          "tests/generators/pipelinePinnedChoosers.test.js",
+          "tests/generators/pipelinePinnedMode.test.js",
+          "tests/generators/generationForkCensus.test.js",
+          "tests/generators/dataFlowContract.test.js",
+          "tests/generators/coherenceRepairPass.test.js",
+          "tests/generators/powerStructure.test.js",
+          "tests/generators/powerEconomyFreshness.test.js",
+          "tests/generators/legitimacyDefenseReconcile.test.js",
+          "tests/generators/neighbourFactionRenorm.test.js",
+          "tests/generators/adversarialNeighbourGovernance.test.js",
+          "tests/generators/powerAdversarialRemediation.test.js",
+          "tests/generators/customContentDeterminism.test.js",
+          "tests/generators/economicViabilitySuggestions.test.js",
+          "tests/generators/effectReachability.coverage.test.js",
+          "tests/generators/informationBrokerageGeneration.test.js",
+          "tests/generators/institutionToggleReader.test.js",
+          "tests/generators/metropolisCatalogReachable.test.js",
+          "tests/generators/roleCategory.test.js",
+          "tests/generators/terrainOverrideResolution.test.js"
+        ],
+        [
+          "npx",
+          "vitest",
+          "run",
+          "--pool=threads",
+          "--maxWorkers=2",
+          "tests/lint/contractTestAntiVacuity.walker.test.js",
+          "tests/lint/goldenFreeze.walker.test.js",
+          "tests/lint/negativeAssertionAnchor.walker.test.js",
+          "tests/lint/seedLoopTotality.walker.test.js",
+          "tests/lint/mutationCoverageManifest.test.js",
+          "tests/lint/generationForkRegistry.contract.test.js",
+          "tests/lint/catalogTierGateParity.walker.test.js",
+          "tests/lint/institutionLabelSeam.census.test.js",
+          "tests/lint/magicLicenceCensus.walker.test.js",
+          "tests/lint/settlementMapSurfaceAllowlist.walker.test.js",
+          "tests/lint/proseNumerics.test.js"
+        ],
+        [
+          "npx",
+          "vitest",
+          "run",
+          "--pool=threads",
+          "--maxWorkers=2",
+          "tests/domain/causalChains.test.js",
+          "tests/domain/contentEffectProjection.test.js",
+          "tests/domain/customContentConsumerEvidence.walker.test.js",
+          "tests/domain/customContentMechanicalClaims.test.js",
+          "tests/domain/distribution.test.js",
+          "tests/domain/explanation.test.js",
+          "tests/domain/institutionDisplayName.test.js",
+          "tests/domain/npcLadderFactionKey.test.js",
+          "tests/domain/religionLegitimacyFactionKey.test.js",
+          "tests/domain/saveCompatibility.test.js",
+          "tests/domain/trace.test.js",
+          "tests/domain/trace.coverage.test.js",
+          "tests/domain/undercityStrataExistence.test.js"
+        ],
+        [
+          "npx",
+          "vitest",
+          "run",
+          "--pool=threads",
+          "--maxWorkers=2",
+          "tests/joins/cascade.test.js",
+          "tests/joins/chains.test.js",
+          "tests/joins/mutationOrder.test.js",
+          "tests/joins/ports.test.js",
+          "tests/joins/powerConfig.test.js"
+        ],
+        [
+          "npx",
+          "vitest",
+          "run",
+          "--pool=threads",
+          "--maxWorkers=2",
+          "tests/property/generatorGoldenMaster.test.js"
+        ],
+        [
+          "npx",
+          "vitest",
+          "run",
+          "--pool=threads",
+          "--maxWorkers=2",
+          "tests/data/informationBrokerageCatalog.test.js",
+          "tests/data/terrainInstitutionModifiersReachable.test.js"
+        ],
+        [
+          "npx",
+          "vitest",
+          "run",
+          "--pool=threads",
+          "--maxWorkers=2",
+          "tests/store/pinnedNpcRegenRemap.test.js",
+          "tests/store/settlementSlice.test.js"
+        ],
+        [
+          "npx",
+          "vitest",
+          "run",
+          "--pool=threads",
+          "--maxWorkers=2",
+          "tests/components/createWorkflowRail.test.jsx",
+          "tests/components/powerStrata.test.jsx"
+        ],
+        [
+          "npx",
+          "vitest",
+          "run",
+          "--pool=threads",
+          "--maxWorkers=2",
+          "tests/pdf/parityContractExemptions.test.js",
+          "tests/pdf/sections.smoke.test.js"
+        ],
+        [
+          "npx",
+          "vitest",
+          "run",
+          "--pool=threads",
+          "--maxWorkers=2",
+          "tests/kernel/prngForkLabelDelimiter.test.js"
+        ],
+        [
+          "npx",
+          "eslint",
+          "src/generators/steps/assembleInstitutions.js",
+          "src/generators/steps/generatePower.js",
+          "tests/generators/pipelinePinnedChoosers.test.js"
+        ],
+        [
+          "node",
+          "scripts/check-observed-shape-readers.mjs"
+        ],
+        [
+          "npm",
+          "run",
+          "typecheck:ratchet"
+        ],
+        [
+          "npm",
+          "run",
+          "typecheck:domain:strict"
+        ],
+        [
+          "node",
+          "scripts/implementation-packets.mjs",
+          "validate"
+        ]
+      ],
+      "_checksDerivation": "Computed under interim rule 8's stated fallback (`scripts/governing-tests.mjs` has NOT landed at the integration tip). (1) `git grep -l -F 'assembleInstitutions' -- tests` filtered to `*.test.js|jsx` returns **40** files; `git grep -l -F 'generatePower' -- tests` returns **19**; their UNION is **51**, and all 51 are named above, grouped ONE DIRECTORY PER ARRAY. (2) This member changes NO exported symbol's call shape — `assembleInstitutions.js` exports `collapseUpgradeChains` and re-exports `UPGRADE_CHAINS`, neither touched, and `generatePower.js` exports nothing — so that arm of the rule adds nothing. (3) The walkers that GOVERN `tests/generators`, the directory of the CREATE: `contractTestAntiVacuity.walker.test.js`, `goldenFreeze.walker.test.js`, `negativeAssertionAnchor.walker.test.js` and `seedLoopTotality.walker.test.js` (each walks `tests/` whole), plus `mutationCoverageManifest.test.js`, which is the register the CREATE moves. (4) `tests/generators/pipelinePinnedMode.test.js` is added although the basename grep MISSES it: it is EM-P0's landed battery for the very primitive this member consumes, and its A1 arm hashes the golden stride, so it is a governing file by symbol. ⛔ `tests/lint/sovereigntyLightingContract.walker.test.js` is DELIBERATELY ABSENT — it reds by design under a train, so a sealed array naming it can never pass; it is a §10 instrument instead. ⛔ The `tests/lint` DIRECTORY is named nowhere in this array, only FILES. ⛔ `docs/content/wiring-census.json` appears in no check (interim rule 1). ⛔ No dist arm and no byte arm (interim rule 2). ⭐ The array ENDS with the validator.",
+      "_preproofV3": "VERSION 3 — the Opus pre-proof for train EM-T12, read tip 583f8f644. Nine edits, no contract change: the ninth requiredSymbols row (EM-B2a2's export) makes the dependency machine-checkable; the import is WIDENED not ADDED, so the six prose-numerics rows at assembleInstitutions.js:62/:69 are UNMOVED and no re-address is owed by this packet or the terminal; interim rule 17's tuning inventory, the Tier-5 voice ratchet, the writer-reach census and the observed-shape manifests are MEASURED both ways and stated as unmoved; the CREATE row and the lighting delta are BOUND to seven `it`s with a shipped count prover; every acceptance case gains `home` and `authorizedBy`; §6's two cross-references to A2 are re-pointed at A4; and the pin primitive's OLD-HOME spellings are re-pointed at EM-B2a2 version 2's exported home (3 hits before, 0 after).",
+      "_dependencyNote": "⛔⛔ EM-R1 IS CHARTERED BUT UNWRITTEN, measured at 583f8f644: three charter rows in docs/implementation/charters/EDIT-MODE-TRAIN.md (:132, :137, :178) and NO packet in the tree's 25-packet docs/implementation/packets/settlement-editor/ nor in the chair's packets-waiting/. §4a Q4's hard dependency therefore cannot be satisfied by any placeable train; either the chair rules a LOCAL clone in this member's two consults (retired when EM-R1 lands) or the packet waits on a packet nobody has compiled. EM-B2a2 version 2 is INSTALLED and rides train EM-T11 (judgment 100)."
+    },
+    {
+      "id": "EM-C4a",
+      "status": "READY",
+      "packetPath": "docs/implementation/packets/settlement-editor/EM-C4a.md",
+      "verifiedBase": "efd0eb4481669fce0fa00c356fef9399ab374d17",
+      "_version2Note": "VERSION 2 (the chair's ruling 1 on EM-D0, 2026-09-20 ~22:15, judgment 39): ONE added branch — a `free-cascade` field routes to its DECLARED WRITER (the estate's shipped renameNPC), is AWAITED, and is verified by READ-BACK; the key is never written here, because writing it re-opens the divergence settlementRenameHelpers.js:391-406 records as fixed. ⛔ NO PATH MOVED: the nine changeManifest rows are version 1's nine and section 7 is still SET-EQUAL to them. The closed refusal set grows by EXACTLY ONE reason, 'rename_not_applied', taken VERBATIM from the estate's own dispatcher (settlementPendingEdits.js:321) rather than minted. The acceptance stays at 8 of <=8 with four arms FOLDED into A1, A2, A3 and A5 (EM-B1a's own precedent: 'VERSION 2 ADDS THREE ARMS INSIDE A2 — still 8 of <=8, no case minted'). SHAPE A is unchanged and re-proved: the branch adds ZERO import edges, because the writer is resolved off get() by name. ⛔ EM-B1c1 is NOT a dependency: the branch keys on the DECLARATION's kind, never on an op type, so with no rename-npc row validateOp refuses at step 3 and the branch is never reached — the two members may land in either order.",
+      "changeManifest": [
+        {
+          "action": "CREATE",
+          "path": "src/store/editSlice.js",
+          "symbol": "EDITOR_MODES, EDITOR_MODE_PREF_KEY, rootKeyFor (v3), readRootKey (v3), PLAIN_EDIT_REFUSALS (⭐ v2: SEVEN members), ⭐ v2 CASCADE_WRITERS, REDERIVE_SEAM, selectEditorMode, selectCanonState, applyPlainEditToDraft — the store's plain-edit half at EM-C4a section 6.1's exact signatures, WITH VERSION 2's section 6.1a branch. ⛔ LAZY BY CONSTRUCTION: nothing in the eager first-paint graph may import this file, and it is composed by NO slice spread in src/store/index.js (SHAPE A; see section 2's measurement). It imports ../domain/edit/operations.js, ../domain/edit/dmLayer.js, ../domain/edit/fieldDeclarations.js and ../domain/campaign/canon.js, none of which it may re-export to an eager caller. ⭐⭐ VERSION 2 ADDS NO IMPORT AT ALL: the declared writer is resolved off get() BY NAME (CASCADE_WRITERS is data, one row: 'npc:name' -> 'renameNPC'), exactly as settlementPendingEdits.js resolves it, so the import list is IDENTICAL to version 1's and A5 asserts that. ⛔ A static import of src/domain/factionRename.js or of any rename helper in this file is A5's red and section 11's STOP. ⭐⭐ VERSION 3 (the chair's judgment 77, 2026-09-21): applyEdit is called at ARITY THREE - applyEdit(layer, op, declarations) - at BOTH of this file's call sites; the op gains cardType and field as TRANSIENT coordinates beside the opaque root key, and both are read off the ONE frozen record readRootKey(request.rootKey) returns, never re-spelled. The injected consult { isEditableCard, declarationsFor } is supplied BY THIS MODULE from EM-A1's src/domain/edit/fieldDeclarations.js, which this file already imports, so the consult adds ZERO import edges and SHAPE A's +0 eager modules / +0 eager bytes is untouched. rootKeyFor/readRootKey are the estate's ONLY spelling of the key and are exact inverses: that is what makes A1's arm (c) - the ROOT KEY <-> COORDINATES PIN, which judgment 77 assigns to the minter - assertable at all. ⭐⭐ VERSION 4 (judgment 82 item 2 and two measured repairs, NO export added or removed): section 6.1 step 1 is the ONE site that returns 'no_save' and it resolves the ACTIVE save by id, so section 6.1a's pre-condition is an INVARIANT rather than a second arm; validateOp is called at its declared arity with an explicit null second argument, because version 3 wrote an identifier this module never binds and EM-B1a version 7's algorithm reads that parameter at no step; and selectCanonState's subject is NAMED - the LIVE store state for the active save, which is what the declared writer's own canon lock reads."
+        },
+        {
+          "action": "CREATE",
+          "path": "src/application/commands/adapters/plainEditApply.js",
+          "symbol": "PLAIN_EDIT_APPLY, plainEditApplySpec, plainEditCommand, plainEditFacadeResult — the ONE generic adapter, at pendingEditCommit.js's exact shape: a frozen CommandSpec with surveyor:false, targetScope:'save', delivery:'local', atomicity:'single-target', a validate(), a preflight() that proves context.actions.applyPlainEditToDraft is a function, and an apply() that calls it. ⛔ It imports NOTHING from src/store/** — the writer arrives as context.actions."
+        },
+        {
+          "action": "CREATE",
+          "path": "src/application/commands/plainEditRuntime.js",
+          "symbol": "runPlainEditCommand — the LAZY dispatch seam at pendingEditCommitRuntime.js's exact shape. ⛔ It is the SEVENTH member of commandRegistry.walker.test.js's frozen DISPATCH_SURFACE and its row is declared there in the same landing. It exists as its own file because standardCommandRegistry.js imports the adapter spec and sessionCommandRuntime.js imports standardCommandRegistry.js: folding the runtime into the adapter would close that cycle."
+        },
+        {
+          "action": "MODIFY",
+          "path": "src/application/commands/standardCommandRegistry.js",
+          "symbol": "REGISTRATION-ONLY: one import line for plainEditApplySpec and one element in the createCommandRegistry([…]) array. ⛔ The line `export const standardCommandRegistry = createCommandRegistry([` is a requiredSymbols row and survives this edit verbatim. This file is NOT in the eager first-paint graph (measured: 0 of 269), so the edit costs first paint nothing."
+        },
+        {
+          "action": "CREATE",
+          "path": "tests/store/editSlice.test.js",
+          "symbol": "acceptance cases A1, A2, A3 and A8 — literal test titles under ONE literal describe; no .each, no loop-generated registration, no nested describe, and no binding named it, test or describe anywhere in the file. ⭐ VERSION 2 FOLDS FOUR ARMS IN AND MINTS NO CASE: A1 gains the CASCADE arm (all five NPC_RENAME_SURFACES moved, the list READ FROM THE FROZEN EXPORT and never re-typed) and ⛔ THE AWAIT NEGATIVE CONTROL (a stub writer resolving on a LATER microtask; the same arm over an un-awaited call must RED, which is the estate's own recorded failure); A2 gains the canon arm for a free-cascade field, with the declared writer asserted NOT CALLED by a spy; A3 gains the seven-member ordered set, the source scan proving 'rename_not_applied' byte-identical to settlementPendingEdits.js's spelling, and three hostile rows (an id resolving to none and to two NPCs -> 'unknown_target'; a non-active saveId -> 'no_save' with the writer not called; a writer that ran and left the record unmoved -> 'rename_not_applied')."
+        },
+        {
+          "action": "CREATE",
+          "path": "tests/lint/editMutationPath.walker.test.js",
+          "symbol": "acceptance cases A4 AND A5 — the ONE-MUTATION-PATH walker of section 6.3 with its five planted reds (P1, P2 positive; P3, P4 negative controls; P5 anti-vacuity). Its declared sets are IMPORTED from their producer, never re-typed. ⭐ VERSION 3: this row also declares A5, because section 9 homes A5 in this file (its MUTANT arm and version 2's identical-import-list assertion); checks #10 carries A5's membership probe. A case homed in a file whose row does not authorize it is the contradiction that stopped EM-B3d's sealed build before its first byte."
+        },
+        {
+          "action": "TEST",
+          "path": "tests/application/commands/commandRegistry.walker.test.js",
+          "symbol": "acceptance case A6 — DISPATCH_SURFACE gains 'src/application/commands/plainEditRuntime.js' as its SEVENTH row with its own paragraph, and the positive-control arm gains `expect(staticKinds).toContain('settlement.plain-edit.apply')`. ⛔ No arm is widened: `expect(unregistered).toEqual([])` and `expect(ghosts).toEqual([])` both stay exact."
+        },
+        {
+          "action": "TEST",
+          "path": "tests/lib/editTravel.test.js",
+          "symbol": "acceptance case A5b — the charter's EM-T7 stop: a REAL written dmLayer, produced by this packet's own writer, run through EM-B3a's five travel paths (fork, import, gallery, export, the anonymous envelope). A red here is THIS packet's stop and is never cured by weakening the travel test."
+        },
+        {
+          "action": "REGISTER",
+          "path": "scripts/mutation-coverage-manifest.json",
+          "symbol": "invariants['tests/lint/editMutationPath.walker.test.js'] — ONE row, added surgically beside its tests/lint/ siblings; the manifest is never re-serialised whole and uncoveredBaseline is not touched",
+          "rowKey": "invariants['tests/lint/editMutationPath.walker.test.js']"
+        }
+      ],
+      "_pendingRequiredSymbols": [
+        {
+          "path": "src/domain/edit/operations.js",
+          "symbol": "export function makeOp",
+          "provider": "EM-B1a"
+        },
+        {
+          "path": "src/domain/edit/operations.js",
+          "symbol": "export function validateOp",
+          "provider": "EM-B1a"
+        },
+        {
+          "path": "src/domain/edit/operations.js",
+          "symbol": "export const OP_TYPES",
+          "provider": "EM-B1a"
+        }
+      ],
+      "requiredSymbols": [
+        {
+          "_note": "⭐ VERSION 4.1 · DISCHARGED FROM _pendingRequiredSymbols: EM-B2a1 has LANDED (f9b68387a, train EM-T10) and src/domain/edit/dmLayer.js is REAL at 80e855f26. CONFIRMED against the LANDED code, read WHOLE (239 lines): applyEdit(layer, op, declarations) is ARITY THREE at dmLayer.js:164; the op shape is exactly { kind: 'set-root', key, cardType, field, value } with cardType and field declared TRANSIENT COMMAND COORDINATES that persist nothing (:153-156); an unusable consult FAILS CLOSED to unknown_target (:185-186); on ok:true the returned layer is a NEW deeply-frozen object whose keys holds exactly the keys the call wrote (:208-214); on ok:false the argument layer is returned by identity and nothing is allocated. A move in its arity, its op shape or its reason set is section 11 STOP 5. git grep -c -F -> 1.",
+          "path": "src/domain/edit/dmLayer.js",
+          "symbol": "export function applyEdit"
+        },
+        {
+          "_note": "⭐ VERSION 4.1 · DISCHARGED: section 6.5's read path. CONFIRMED at dmLayer.js:125-129 — own-property only (Object.hasOwn), a non-string key reads undefined, and it never throws; a stored undefined is impossible because applyEdit refuses it, so 'absent' and 'overridden to undefined' can never be confused. git grep -c -F -> 1.",
+          "path": "src/domain/edit/dmLayer.js",
+          "symbol": "export function layerRead"
+        },
+        {
+          "_note": "⭐ VERSION 4.1 · DISCHARGED: section 6.5's absence rule — an absent layer reads as this. CONFIRMED at dmLayer.js:55-60 as deeply frozen (the object and all four sub-objects roots/worldFacts/minted/phantoms). git grep -c -F -> 1.",
+          "path": "src/domain/edit/dmLayer.js",
+          "symbol": "export const EMPTY_DM_LAYER"
+        },
+        {
+          "_note": "⭐ VERSION 4.1 · DISCHARGED: A3 asserts APPLY_EDIT_REASONS is a SUBSET of PLAIN_EDIT_REFUSALS, so the two sets can never drift. CONFIRMED at dmLayer.js:71 as exactly ['invalid_op', 'undeclared_field', 'unknown_target']; and the leaf's own header (:67-68) FIXES the refusal ORDER as invalid_op (shape) then unknown_target (card type) then undeclared_field (field) — which is exactly what section 6.1 step 6 states and does not re-order. A fourth member is section 11 STOP 5. git grep -c -F -> 1.",
+          "path": "src/domain/edit/dmLayer.js",
+          "symbol": "export const APPLY_EDIT_REASONS"
+        },
+        {
+          "_note": "⭐ VERSION 4.1 · DISCHARGED FROM _pendingRequiredSymbols: EM-A1 has LANDED (e7bdb944b, train EM-T9). CONFIRMED against the LANDED code, read WHOLE (144 lines): declarationsFor returns the ONE shared frozen NO_DECLARATIONS array BY IDENTITY for an unknown, empty or non-string cardType and NEVER throws (:130-136, Object.hasOwn and never a prototype walk); the table declares SEVENTEEN rows over FIVE card types, with three free-cascade fields (institution.name :94, npc.name :100, faction.faction :106) and ONE share field (faction.power :108); npc declares exactly FOUR rows — name, role, status, note (:100-103) — which is section 12's witness for undeclared_field; and FieldDeclaration.writer holds a GENERATOR address, never a store action, which is what keeps CASCADE_WRITERS the one home for that name. git grep -c -F -> 1.",
+          "path": "src/domain/edit/fieldDeclarations.js",
+          "symbol": "export function declarationsFor"
+        },
+        {
+          "_note": "⭐ VERSION 4.1 · DISCHARGED: the other half of the injected consult. CONFIRMED at fieldDeclarations.js:142-144 as exactly declarationsFor(cardType).length > 0. git grep -c -F -> 1.",
+          "path": "src/domain/edit/fieldDeclarations.js",
+          "symbol": "export function isEditableCard"
+        },
+        {
+          "path": "src/application/commands/sessionCommandRuntime.js",
+          "symbol": "export function executeSessionCommand(command, context)"
+        },
+        {
+          "path": "src/application/commands/standardCommandRegistry.js",
+          "symbol": "export const standardCommandRegistry = createCommandRegistry(["
+        },
+        {
+          "path": "src/application/commands/commandRegistry.js",
+          "symbol": "export function createCommandRegistry(initialSpecs = [])"
+        },
+        {
+          "path": "src/application/commands/commandEnvelope.js",
+          "symbol": "export function makeCommandEnvelope"
+        },
+        {
+          "path": "src/application/commands/commandEnvelope.js",
+          "symbol": "export function commandIdForValue"
+        },
+        {
+          "path": "src/application/commands/commandReceipts.js",
+          "symbol": "export const COMMAND_STATUS"
+        },
+        {
+          "path": "src/application/commands/commandReceipts.js",
+          "symbol": "export const PERSISTENCE_STATE"
+        },
+        {
+          "path": "src/domain/campaign/canon.js",
+          "symbol": "export function isCanonSave(save)"
+        },
+        {
+          "path": "src/store/uiSlice.js",
+          "symbol": "setUserPref: (key, value)"
+        },
+        {
+          "path": "src/store/uiSlice.js",
+          "symbol": "getUserPref: (key)"
+        },
+        {
+          "path": "src/store/settlementSlice.js",
+          "symbol": "editMode: false,"
+        },
+        {
+          "path": "src/domain/edit/recordRegister.js",
+          "symbol": "export const NOT_YET_WRITTEN_KEYS = Object.freeze(['dmLayer', 'decrees', 'crossSettlementConflicts']);"
+        },
+        {
+          "path": "tests/lint/mutationCoverage.shared.mjs",
+          "symbol": "export const ENFORCER_DIRS"
+        },
+        {
+          "path": "vite.config.js",
+          "symbol": "export const EAGER_FIRST_PAINT_MODULES"
+        },
+        {
+          "_note": "⭐ VERSION 2 · THE DECLARED WRITER, as CASCADE_WRITERS names it. The ONE store action section 6.1a resolves off get() BY NAME, never by import. Its arity is (npcIndex, newName), which is WHY the branch must resolve an entity id to an INDEX rather than passing the id. Proven present at bdbf7c89c: git grep -c -F -> 1.",
+          "path": "src/store/settlementSlice.js",
+          "symbol": "  renameNPC: (npcIndex, newName) =>"
+        },
+        {
+          "_note": "⭐ VERSION 2 · THE WRITER'S BODY, and the three facts the branch is built on. (1) ASYNC BY CONSTRUCTION — it fetches the ~8.6 kB cascade at its call seam to keep it off first paint, and its own JSDoc says 'this returns a PROMISE and every caller must await it before reading the result'. (2) CANON-LOCKED — 'Campaign-clock identity lock: NPC names freeze at canonization' (:425-427), which is what refutes design section 20.2's free-cascade-on-canon clause by measurement. (3) ACTIVE-SAVE SCOPED — it reads get().settlement and indexes it (:428), so it reaches exactly ONE save. Proven present: git grep -c -F -> 1.",
+          "path": "src/store/settlementRenameHelpers.js",
+          "symbol": "export async function renameNpcImpl"
+        },
+        {
+          "_note": "⭐ VERSION 2 · THE ONE CASCADE the writer runs, moving all five NPC_RENAME_SURFACES. The branch calls it ONLY through renameNPC and imports it NOWHERE — which is also what keeps src/domain/factionRename.js out of the eager closure (measured: it is NOT one of the 269, while settlementRenameHelpers.js IS). Proven present: git grep -c -F -> 1.",
+          "path": "src/domain/factionRename.js",
+          "symbol": "export function applyNpcRenameToSettlement"
+        },
+        {
+          "_note": "⭐ VERSION 2 · THE FIVE SURFACES A1's cascade arm reads rather than re-types (contractTestAntiVacuity Rule 2): npcs[].name, factions[].members[].name, relationships[].npc1Name, relationships[].npc2Name, interSettlementRelationships[].npcName. The second of those is the surface the quoted divergence lost, and it is the one a set-root writer would still be losing. Proven present: git grep -c -F -> 1.",
+          "path": "src/domain/factionRename.js",
+          "symbol": "export const NPC_RENAME_SURFACES"
+        },
+        {
+          "_note": "⛔ VERSION 2 · THE ONE SPELLING OF THE ONE ADDED REASON. The estate ALREADY derived this reason from THIS writer, by read-back, in its own dispatcher; version 2 reuses the spelling instead of minting a second word for one fact, and A3 scans this file so the two can never drift. Proven present: git grep -c -F -> 1.",
+          "path": "src/store/settlementPendingEdits.js",
+          "symbol": "      : { ok: false, status: 'failed', reason: 'rename_not_applied' };"
+        },
+        {
+          "_note": "⭐ VERSION 2 · THE WHOLE IDIOM section 6.1a COPIES — resolve id to index, refuse, AWAIT, read back. Its own comment names the hazard the await removes: 'Reading the roster off the un-awaited call would score every real rename as rename_not_applied while the write still landed' — i.e. un-awaited, the command returns a FALSE REFUSAL over a REAL WRITE. Proven present: git grep -c -F -> 1.",
+          "path": "src/store/settlementPendingEdits.js",
+          "symbol": "    await get().renameNPC?.(index, payload.newName);"
+        }
+      ],
+      "_requiredSymbolsV2Note": "SIX rows added at version 2, each proved at bdbf7c89c by `git grep -c -F` = 1 (EM-C4a.v2.evidence.md V1-V6). ⛔ ALL SIX SIT AT PATHS THIS PACKET DOES NOT WRITE, so retiredSymbols stays empty and the post-edit simulation is unchanged. They are required because the branch's whole claim is that the SHIPPED writer's behaviour is unchanged by gaining a second caller: if its signature, its canon lock, its active-save scope or the reason's spelling moves, the branch is wrong and the seal must say so rather than the packet adapting silently (section 11 STOP 12).",
+      "acceptanceCases": [
+        {
+          "id": "A1",
+          "case": "MAIN: a plain set-field edit on a DRAFT save applies through the ONE adapter. The record carries the edited value; the returned dmLayer records the override at exactly one root key; the receipt is COMMAND_STATUS.APPLIED; no other save is touched; the input op and layer are proved unmutated against pre-call clones. ⭐ VERSION 2 FOLDS IN TWO ARMS, NO CASE MINTED. (a) THE CASCADE ARM: a free-cascade edit on a draft moves ALL FIVE NPC_RENAME_SURFACES on the record — the list READ FROM THE FROZEN EXPORT and never re-typed (contractTestAntiVacuity Rule 2) — including factions[].members[].name, the surface the divergence at settlementRenameHelpers.js:391-406 lost and the one a set-root writer would still be losing; the layer still records the override at exactly one root key; and a source scan proves applyPlainEditToDraft writes npcs[].name NOWHERE itself. (b) ⛔ THE AWAIT NEGATIVE CONTROL: the declared writer is stubbed to resolve on a LATER microtask and only then write. With the await the arm passes; the SAME arm over an un-awaited call must RED. Without (b) an un-awaited branch passes every other arm on a synchronous stub, and in production it would return a FALSE REFUSAL over a REAL WRITE — the estate's own recorded failure. ⭐⭐ VERSION 3 FOLDS IN A THIRD ARM AND MINTS NO CASE: (c) THE ROOT KEY <-> COORDINATES PIN (judgment 77). Both directions: (i) readRootKey(rootKeyFor(cardType, entityId, field).key) is DEEP-EQUAL to the mint over the whole declared card/field population, and the op handed to applyEdit carries exactly that cardType and field; (ii) a SOURCE SCAN of src/store/editSlice.js proves every cardType:/field: it writes into an op reads off the ONE coords record, and a planted mutant that re-spells either from request REDS. Without (ii) the pin is a tautology.",
+          "home": "tests/store/editSlice.test.js",
+          "authorizedBy": "changeManifest row for tests/store/editSlice.test.js"
+        },
+        {
+          "id": "A2",
+          "case": "⛔ THE CANON RULE (design section 2.6), BOTH SPELLINGS: on a save whose campaignState.phase is 'canon' AND on a save carrying canonizedAt with NO phase string, the adapter REFUSES with the closed reason 'canon_locked' and changes nothing — the settlement, the layer and the store are === their inputs. Proved by delegating to isCanonSave, with a negative control on a plain draft that DOES apply. ⭐ VERSION 2 FOLDS IN ONE ARM: a FREE-CASCADE edit on a canon save ALSO refuses 'canon_locked', and the declared writer is asserted NOT CALLED (a spy with call count zero). ⛔ This is a MEASURED REFUTATION of design section 20.2's 'the two free kinds apply on Save even on canon' for free-cascade only: the estate's declared writer freezes an NPC's name at canonization by construction (settlementRenameHelpers.js:425-427), so routing the edit would produce a silent no-op wearing the wrong reason. Section 20.2 stays TRUE for `free` — an annotation writes no record and freezes nothing. The one design clause owed is the OWNER's (section 12, Q1).",
+          "home": "tests/store/editSlice.test.js",
+          "authorizedBy": "changeManifest row for tests/store/editSlice.test.js"
+        },
+        {
+          "id": "A3",
+          "case": "THE CLOSED REFUSAL SET, both directions against the module's own exported PLAIN_EDIT_REFUSALS, so an EIGHTH reason reds here. Every refusal returns a typed result; nothing throws, on any of the hostile matrix (absent op, malformed op, unknown card type, undeclared field, missing save, missing owner context, canon). ⭐ VERSION 2 FOLDS IN: the set is SEVEN and compareCodepoint-ordered — canon_locked, invalid_op, no_save, not_a_draft_field, rename_not_applied, undeclared_field, unknown_target; APPLY_EDIT_REASONS is still asserted a SUBSET; and 'rename_not_applied' is asserted BYTE-IDENTICAL to the estate's own spelling by a source scan over src/store/settlementPendingEdits.js, so two dispatchers can never drift into two words for one fact. THREE HOSTILE ROWS ARE ADDED: an entity id resolving to NO npc and to TWO npcs (both 'unknown_target', the exactly-one-match guard npcFor already applies at settlementPendingEdits.js:116-120); a saveId that is NOT the active save ('no_save', with the declared writer asserted NOT CALLED — ⭐ VERSION 4: the data-safety gate's ONE home is section 6.1 step 1, the single no_save site, so this row can never be ambiguous about which arm fired); and a writer that ran and left the record unmoved ('rename_not_applied', the read-back's verdict). ⭐ The first of those is also what closes EM-B1a's measured gap: validateOp admits any of the closed seven EntityRef kinds, so a faction id on a rename-npc op reaches this branch and is refused because it resolves to no NPC — not because a second validator was written.",
+          "home": "tests/store/editSlice.test.js",
+          "authorizedBy": "changeManifest row for tests/store/editSlice.test.js"
+        },
+        {
+          "id": "A4",
+          "case": "ONE MUTATION PATH: the walker convicts every planted src/ writer that reaches an op or the layer outside the adapter (P1 a store file importing applyEdit; P2 a component importing makeOp), clears the two negative controls (P3 the real adapter; P4 a dynamic import from the declared runtime), and proves its denominator non-empty and containing the real adapter (P5).",
+          "home": "tests/lint/editMutationPath.walker.test.js",
+          "authorizedBy": "changeManifest row for tests/lint/editMutationPath.walker.test.js"
+        },
+        {
+          "id": "A5",
+          "case": "⛔ FIRST PAINT, +0 MODULES: a probe that IMPORTS vite.config.js's EAGER_FIRST_PAINT_MODULES (reading no dist, therefore unskippable) proves src/store/editSlice.js, src/application/commands/plainEditRuntime.js, src/application/commands/adapters/plainEditApply.js, src/domain/edit/operations.js, src/domain/edit/dmLayer.js, src/domain/edit/fieldDeclarations.js and src/domain/edit/types.js are ALL ABSENT from the eager set; the set is non-empty and contains src/main.jsx (anti-vacuity); a MUTANT arm proves a fabricated eager static importer WOULD be caught and a dynamic one would not. ⭐ VERSION 2 FOLDS IN: src/store/editSlice.js's import list is asserted IDENTICAL to version 1's, because the free-cascade branch resolves its writer off get() BY NAME and adds ZERO import edges — so +0 eager modules and +0 eager bytes holds BY CONSTRUCTION rather than by measurement luck. ⛔ A static import of src/domain/factionRename.js, of src/store/settlementRenameHelpers.js, or of any rename helper appearing in this file is the arm's RED and section 11's STOP: factionRename.js is measured OUT of the 269 only because the shipped writer fetches it at its call seam, and a static edge from a lazy slice does not move first paint but does declare the wrong boundary. ⭐ VERSION 3 HOMES IT: the unskippable membership probe is checks #10 (the node -e form, which reads no dist); A5's MUTANT arm and version 2's identical-import-list assertion live in tests/lint/editMutationPath.walker.test.js, whose CREATE row declares A4 AND A5 (interim rule 12).",
+          "home": "tests/lint/editMutationPath.walker.test.js",
+          "authorizedBy": "changeManifest row for tests/lint/editMutationPath.walker.test.js"
+        },
+        {
+          "id": "A5b",
+          "case": "⛔ THE TRAVEL STOP (the charter's EM-T7 note): a REAL layer, written by this packet's own writer, survives EM-B3a's five travel paths — fork, import, gallery, export and the anonymous envelope — carrying NO dmLayer across any of them. A red is this packet's STOP; the travel test is never weakened.",
+          "home": "tests/lib/editTravel.test.js",
+          "authorizedBy": "changeManifest row for tests/lib/editTravel.test.js"
+        },
+        {
+          "id": "A6",
+          "case": "THE COMMAND BOUNDARY: the new kind is registered in standardCommandRegistry (the walker's unregistered arm stays []); the registry carries no ghost (the ghost arm stays []); plainEditRuntime.js is the seventh DISPATCH_SURFACE row and the arm's exact equality holds; and a command whose provenance is 'surveyor' is refused with 'surveyor_capability_refused' because the spec's surveyor flag is false.",
+          "home": "tests/application/commands/commandRegistry.walker.test.js",
+          "authorizedBy": "changeManifest row for tests/application/commands/commandRegistry.walker.test.js"
+        },
+        {
+          "id": "A8",
+          "case": "PURITY, IDEMPOTENCY AND ⛔ THE rederive SEAM AS A TYPED NO-OP: two identical applications yield a JSON-identical settlement and layer; three distinct keys in all six orders yield a byte-identical layer; and REDERIVE_SEAM is asserted to be a declared no-op whose call changes nothing observable — the assertion that FAILS the day scoped re-derivation is plugged in, which is how EM-B2a4's landing finds this seam.",
+          "home": "tests/store/editSlice.test.js",
+          "authorizedBy": "changeManifest row for tests/store/editSlice.test.js"
+        }
+      ],
+      "checks": [
+        [
+          "npx",
+          "vitest",
+          "run",
+          "--pool=threads",
+          "--maxWorkers=2",
+          "tests/store/editSlice.test.js"
+        ],
+        [
+          "npx",
+          "vitest",
+          "run",
+          "--pool=threads",
+          "--maxWorkers=2",
+          "tests/lint/editMutationPath.walker.test.js",
+          "tests/lint/mutationCoverageManifest.test.js",
+          "tests/lint/recordRegisterTotality.walker.test.js",
+          "tests/lint/contractTestAntiVacuity.walker.test.js",
+          "tests/lint/negativeAssertionAnchor.walker.test.js",
+          "tests/lint/seedLoopTotality.walker.test.js",
+          "tests/lint/goldenFreeze.walker.test.js"
+        ],
+        [
+          "npx",
+          "vitest",
+          "run",
+          "--pool=threads",
+          "--maxWorkers=2",
+          "tests/application/commands/commandRegistry.walker.test.js",
+          "tests/application/commands/commandRegistry.test.js",
+          "tests/application/commands/commandAdapters.test.js",
+          "tests/application/commands/executeCommand.test.js",
+          "tests/application/commands/commandEnvelope.test.js"
+        ],
+        [
+          "npx",
+          "vitest",
+          "run",
+          "--pool=threads",
+          "--maxWorkers=2",
+          "tests/architecture/surveyorCommandBoundary.test.js",
+          "tests/architecture/layerBoundaries.test.js"
+        ],
+        [
+          "npx",
+          "vitest",
+          "run",
+          "--pool=threads",
+          "--maxWorkers=2",
+          "tests/store/canonEventCommandTransaction.test.js",
+          "tests/store/userRouteCommandTransaction.test.js",
+          "tests/store/operationRegistry.walker.test.js"
+        ],
+        [
+          "npx",
+          "vitest",
+          "run",
+          "--pool=threads",
+          "--maxWorkers=2",
+          "tests/lib/editTravel.test.js",
+          "tests/lib/interpretApply.test.js"
+        ],
+        [
+          "npx",
+          "vitest",
+          "run",
+          "--pool=threads",
+          "--maxWorkers=2",
+          "tests/domain/canonSave.test.js"
+        ],
+        [
+          "npx",
+          "vitest",
+          "run",
+          "--pool=threads",
+          "--maxWorkers=2",
+          "tests/store/settlementSlice.test.js",
+          "tests/store/editActionPersist.test.js"
+        ],
+        [
+          "npx",
+          "vitest",
+          "run",
+          "--pool=threads",
+          "--maxWorkers=2",
+          "tests/domain/npcRename.test.js"
+        ],
+        [
+          "node",
+          "-e",
+          "const{relative}=require('node:path');const{pathToFileURL}=require('node:url');import(pathToFileURL('vite.config.js').href).then(m=>{const S=new Set([...m.EAGER_FIRST_PAINT_MODULES].map(a=>relative(process.cwd(),String(a))));const mine=['src/store/editSlice.js','src/application/commands/plainEditRuntime.js','src/application/commands/adapters/plainEditApply.js','src/domain/edit/operations.js','src/domain/edit/dmLayer.js','src/domain/edit/fieldDeclarations.js','src/domain/edit/types.js'];const leaked=mine.filter(p=>S.has(p));console.log('EAGER_FIRST_PAINT_MODULES:',S.size,'| anti-vacuity main.jsx present:',S.has('src/main.jsx'),'| EM-C4a modules in the eager closure:',leaked.length?leaked.join(', '):'NONE');if(leaked.length||!S.has('src/main.jsx')||S.size<200)process.exit(1);})"
+        ],
+        [
+          "npx",
+          "eslint",
+          "src/store/editSlice.js",
+          "src/application/commands/adapters/plainEditApply.js",
+          "src/application/commands/plainEditRuntime.js",
+          "src/application/commands/standardCommandRegistry.js",
+          "tests/store/editSlice.test.js",
+          "tests/lint/editMutationPath.walker.test.js"
+        ],
+        [
+          "npm",
+          "run",
+          "typecheck:domain:strict"
+        ],
+        [
+          "npm",
+          "run",
+          "typecheck:ratchet"
+        ],
+        [
+          "node",
+          "scripts/implementation-packets.mjs",
+          "validate"
+        ]
+      ],
+      "_checksV2Note": "VERSION 2 adds THREE sealed FILES and changes nothing else in checks. Computed at bdbf7c89c by `git grep -l -F <symbol> -- tests` (TOOL-26's governing-tests.mjs has not landed at the integration tip): renameNPC -> 2 (tests/store/settlementSlice.test.js, tests/store/editActionPersist.test.js); applyNpcRenameToSettlement -> 1 and NPC_RENAME_SURFACES -> 1 (both tests/domain/npcRename.test.js); renameNpcImpl -> 0 (the Impl is reached only through the action). ⛔ This packet CHANGES none of those symbols — it CALLS one — so under interim rule 8 they are sealed not because their call shape moved but because the branch's whole claim is that the shipped writer's behaviour is unchanged by gaining a second caller, and that claim is theirs to keep. ⛔ Still never the tests/lint directory, never the lighting walker, and the validator LAST.",
+      "_retiredSymbols": [],
+      "_retiredSymbolsNote": "EMPTY, at version 2 as at version 1. Post-edit simulation (pre-proof step 10): the only requiredSymbols path this packet writes is standardCommandRegistry.js, and the required line survives the edit verbatim (the import goes above it, the array element below it). ⭐ All six of version 2's added rows sit at paths this packet does not write at all, so version 2 moves the simulation not at all.",
+      "_version4Note": "VERSION 4 (Opus pre-proof for train EM-T11, 2026-09-21, read tip 429141e2d = the integration tip's code): THREE EDITS, no path moved, no acceptance case minted or retired, no refusal added or removed — the nine changeManifest rows, the eight cases, the seven refusals and SHAPE A are version 3's. (1) THE CHAIR'S OWED EDIT, judgment 82 item 2 — ONE REFUSAL SITE PER REASON: section 6.1 step 1 is now the ONLY site that returns 'no_save'; it resolves the save by id over the store's save population AND succeeds only for the ACTIVE save, and section 6.1a step 2's pre-condition is an INVARIANT held by having reached the branch rather than a second arm returning the same reason. The data-safety gate is HOISTED (it now guards the set-root path too) and section 11 STOP 9 re-points to its one home. ⚠ MEASURED AND PUT TO THE CHAIR: setActiveSaveId stamps activeSaveId WITHOUT upserting a savedSettlements cache row (settlementSlice.js:665-672), so a savedSettlements-MEMBERSHIP gate would falsely refuse a freshly-saved settlement; the resolution is therefore activeSaveId-keyed and the cached row is the envelope it reads when present. (2) validateOp's SECOND ARGUMENT IS BOUND: version 3 wrote validateOp(request.op, world) and this module binds no `world` — an unbound identifier the packet's own eslint check reds; EM-B1a version 7's algorithm reads that parameter at NO step, so the call passes null explicitly and STOP 5 gains the arm that convicts a landed validateOp which reads it. (3) selectCanonState's SUBJECT IS NAMED inside its declared contract — the LIVE store state for the ACTIVE save (savePhase reads save.phase first; the store carries phase at top level), which is exactly what the declared writer's own canon lock reads, so a cached envelope can no longer produce a refusal wearing the wrong reason. ALSO: the rule 17 statement (TREES_P2P3 measured; every src/ row outside both counted trees; the library's own counters run with a planted control), the four closure module counts converted from absolutes to a membership claim with an as-of mark, the revalidation sentence rewritten at 429141e2d with its requiredSymbols count corrected from fourteen to TWENTY, Depends on re-pointed at EM-A1 version 5.2 (now BUILT — every fact taken from it is CONFIRMED against code), EM-B1a version 7 and EM-B2a1 version 2.1, and the placement order re-stated as the ruled trains (EM-C4a rides EM-T11 with EM-B1c1 and EM-A2a version 6; path intersections with both are EMPTY; EM-C4a ∩ EM-B3e version 2 is tests/lib/editTravel.test.js, which is why EM-B3e lands FIRST and the two may not ride one train).",
+      "_version3Note": "VERSION 3 (Opus pre-proof for train EM-T10, 2026-09-21, read tip e80a6a3f4): the interim rules' rule-12 COUNT LAW repair plus the rule 13/14/16 statements. NO PATH MOVED and NO CONTRACT MOVED - the nine changeManifest rows, the eight acceptance ids, the seven refusals and SHAPE A are version 2's. Repaired: (1) the deferred lighting row said three CREATEd test files / files +3 / expected <N+3> to be <N> where the capsule declares TWO; (2) the walker row declared A4 alone while section 9 homed A4 and A5 there; (3) every acceptance case now carries home + authorizedBy; (4) section 7 gained the measured rule 13 (none found), rule 14 (not the byte-arm holder; +0 on every budget that exists) and rule 16 (no renamed binding) statements. EM-C4a.count-prover.mjs ships beside the packet and exits non-zero on any of these inequalities. ⭐ MID-FLIGHT, the chair's judgment 77 (02:34/02:52 wall clock) added two more, both made here: (5) applyEdit moves to ARITY THREE at both of EM-C4a's call sites (the only two in the waiting estate besides EM-B2a4's), the op gains transient cardType/field coordinates, and the injected consult comes from EM-A1's fieldDeclarations.js - already imported, so ZERO new import edges; (6) EM-C4a is the ROOT-KEY MINTER, so it now NAMES its helper pair (rootKeyFor / readRootKey - version 1 said 'ONE exported helper' and named none) and carries the key<->coordinates pin as A1 arm (c), folded in with NO case minted, so the acceptance count stays EIGHT and the count law is untouched. A dependency row on EM-B3e (ordering only) was added: this packet is the first writer of dmLayer and every way out must be sealed first.",
+      "_pendingRequiredSymbolsV41Note": "⭐ VERSION 4.1: SIX of version 4's nine pending rows are DISCHARGED into requiredSymbols because their providers have LANDED at 80e855f26 — EM-B2a1 (src/domain/edit/dmLayer.js, +239 in the J-T1 window) and EM-A1 (src/domain/edit/fieldDeclarations.js, +144). ⛔ THE THREE BELOW STAY PENDING: src/domain/edit/operations.js is ABSENT at the tip (git ls-tree src/domain/edit lists only dmLayer.js, fieldDeclarations.js, recordRegister.js and types.js), EM-B1a version 11 is READY and building on em-t11-b1a-2026-09-21, and a requiredSymbols row on an absent file refuses at validation. EM-B1a is therefore this packet's ONE remaining provider gate. Precedent: EM-B1c1 version 3, 'EM-A1 is LANDED (train EM-T9) so its pending typedef row is discharged and the one remaining gate is EM-B1a'.",
+      "_version41Note": "VERSION 4.1 (independent Opus pre-proof for train EM-T12, 2026-09-21, read tip 80e855f26 on em-train-11-2026-09-21, READ-ONLY, git status --short EMPTY before and after). ⛔ NO PATH, NO ACCEPTANCE CASE, NO REFUSAL AND NO CONTRACT MOVED: the nine changeManifest rows, the eight cases, the seven refusals, the 2->3 leaf override and SHAPE A are version 4's, still SET-EQUAL, and the count prover is green unchanged. WHAT MOVED, each MEASURED: (1) SIX PENDING ROWS DISCHARGED — EM-B2a1 and EM-A1 have LANDED, so dmLayer.js's four and fieldDeclarations.js's two are requiredSymbols rows at git grep -c -F = 1, and every fact section 6 quotes from either is CONFIRMED against LANDED code rather than a packet; requiredSymbols is now TWENTY-SIX rows. EM-B1a's three stay pending (operations.js is ABSENT at the tip). (2) Depends on GAINS EM-B3e (LANDED 49a5f1e01) and EM-B3f (BUILT, staged on em-t11-b3f-2026-09-21), both ORDERING dependencies and neither an import: this packet is the FIRST WRITER of dmLayer and the two close the last two seams by which a written layer could LEAVE the account — EM-B3e the restored versionHistory[].settlement snapshot (withoutEditState at accountData.js:223 maps withoutEditKeys over every nested settlement; preflightAccountExport at :267 applies it across the save population at :271), EM-B3f the PARKED campaign snapshot preflightAccountExport was shipping unprojected (its two new module-private helpers withoutSnapshotEditState and withoutParkedSnapshotEditState). ⭐ EVERY EM-B3f FACT IS CONFIRMED AGAINST ITS STAGED BYTES (git show :src/lib/accountData.js), and its staged edit moves NO symbol this packet names — withoutEditKeys, withoutEditState, preflightAccountExport and buildAccountExport all survive verbatim. (3) ⛔ THE PLACEMENT BLOCKER MOVED FROM EM-B3e TO EM-V10, EXECUTED: EM-B3e is LANDED; EM-V10 is READY and holds tests/lib/editTravel.test.js, so on a scratch estate built from the tip by git archive the validator prints 'duplicate change path across packets: tests/lib/editTravel.test.js (EM-V10, EM-C4a)' and exits 1 (control without this entry: 'valid: 210 packets (4 READY)', exit 0; with EM-V10 flipped LANDED the error is GONE). ⇒ THIS PACKET RIDES TRAIN EM-T12 (the chair's judgment 110 re-roster), never EM-T11, and its entry may not be added to PACKET_MANIFEST.json until EM-V10 is LANDED. (4) A5b IS RE-ADDRESSED against the file EM-V10 leaves: EM-V10's build eb8402184 inserts @@ -86,0 +87,9 @@ (a deepFreeze helper) and @@ -440,0 +450,35 @@ (its B6 test, appended INSIDE the second describe), so A5b appends AFTER B6 in that same describe and touches no existing arm; and the file's own docblock sentence 'nothing here imports from src/domain/edit/**' is amended IN PLACE in this member's landing, because A5b's whole point is a REAL layer from this packet's writer. (5) JUDGMENT 123 ANSWERED WITH A RECOMMENDATION, section 12 Qe: the shipped EDIT_KINDS verb rename-npc collides in NAME with EM-B1c1's op — 16 occurrences over 7 src files (15 code sites, 1 comment), both vocabularies routing to the SAME writer renameNPC and both refusing post-canon. NOTHING REDS TODAY (OP_TYPES and validateOp appear at ZERO src/tests sites; no test asserts cross-registry disjointness; the consumer sets are disjoint). Measured against EM-B1a version 11's BUILT test, adding any row to OP_TYPES exposes FIVE landed arms and the SPELLING decides two of them (:152 reabsorbed and :426 A5 red only for a rename-* name). RECOMMENDED: rename EM-B1c1's op to set-npc-name (compareCodepoint index 11 of 15, between set-institution-state and set-npc-status; free only while EM-B1c1 is unplaced) plus ONE shrink-only OP_TYPES-vs-EDIT_KINDS disjointness arm in tests/domain/editOperations.test.js. ⛔ EITHER RULING MOVES NO BYTE OF EM-C4a: section 6.1a keys on the DECLARATION's kind, never on an op type. (6) FOUR STALE ABSOLUTES BECOME DATED PAIRS (the eager set 269 -> 270; the editMode population 43 -> 47; the four closure module counts, now three instruments and three answers with MEMBERSHIP as the only asserted claim; 'eleven siblings' -> savedSettlements.find in FIFTEEN src files, with the String() coercion named as this packet's hardening and not the estate's spelling) and TWO LINE CITATIONS ARE RE-ADDRESSED under judgment 124 (implementation-packets.mjs:828 -> :921 for reservesChangePaths; settlementSlice.js:1111 -> :337, the declaration rather than a read site). All 29 path:line citations in the packet AND this capsule were re-resolved against the tip and every one is IN RANGE; this member SHRINKS no file, so sourceCitationIntegrity's one HARD arm (ARM 2, only-shrinks past-EOF) cannot fire. (7) THE PREAMBLE IS THE FIFTH AMENDMENT'S, re-measured at the tip as fdecd426828665cad2dfaf872871f29f46fa4816e1bd4c43c20ccd84dacc9e7c, and the interim-rules row is STRUCK because the amendment has LANDED and supersedes the sheet. (8) RULES 13, 15, 15b and 17 RE-EXECUTED AT THE TIP: prose-numerics baseline 0 rows for all four src/ paths; ENFORCER_DIRS still lists tests/lint first (mutationCoverage.shared.mjs:36-42) so the one register row stands; wiring-census stamp.files names seven producer files and none is this member's; and the tuning library's own counters over a scratch root holding this packet's PLANNED text at its REAL paths print P2 {control: 2} / P3 {control: 1} with 'EM-C4a planned paths COUNTED: NONE' — the instrument proved LIVE and the exclusion proved by the same run."
     }
   ]
 }
