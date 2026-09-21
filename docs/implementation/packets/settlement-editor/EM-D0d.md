@@ -1,6 +1,6 @@
 # Settlement editor / EM-D0d — `PoolField` + `FreeField`: the editor's two PURE input controls, taking a resolved options array and one `FieldDeclaration` as props, drawing no random number of their own, and costing first paint nothing
 
-- **Status:** `READY`
+- **Status:** `LANDED`
   ⚠ The status value above stands ALONE on its line (interim rule 5): `parsePacketHeader` anchors
   the row at end-of-line and takes `status` only when exactly one row matches. Every stamp, caveat
   and date is on these continuation lines.
@@ -17,6 +17,7 @@
   disabled** — the precise opposite of design §2.1. ⇒ **A2 and A3 are two acceptance cases, not
   one**: an empty OPTIONS ARRAY renders empty AND disabled; an empty VALUE renders shown-empty and
   **ENABLED**. Everything else in the brief's six clauses is confirmed at the read tip.
+- **Landed at:** `b44ab38e17571ab680646d3b12889ebc07aaa89b` — the eighteenth landing — train EM-T10: PoolField and FreeField, the editor's two pure input controls (the first door, member 4)
 - **Packet version:** 2
   **What version 2 changed and why (version 1 was the compile's).** The independent pre-proof
   confirmed every fact version 1 asserted and closed ONE measured contract gap, in `PoolField`

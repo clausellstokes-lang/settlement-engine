@@ -1,6 +1,6 @@
 # Settlement editor / EM-D0c — THE HALO-CAPABLE SURFACE: one optional `editorHalo` prop on `PortablePopup` and on `BottomSheet`, defaulted off, so the editor's pop-up wears the forge's ground, gold rim and parchment bloom while three shipped consumers stay byte-identical
 
-- **Status:** `READY`
+- **Status:** `LANDED`
   ⚠ The status value above stands ALONE on its line (interim rule 5): `parsePacketHeader` anchors
   the row at end-of-line and takes `status` only when exactly one row matches. Every stamp, caveat
   and date is on these continuation lines.
@@ -14,6 +14,7 @@
   unconsumed export."* This packet is therefore the member that mints the editor's one ground
   constant, and the halo's pin is re-founded on names that will exist (§6.4). **Q1 and Q2 to the
   chair, §12.**
+- **Landed at:** `7277520c215f827637d4961e9344406c6336f3e3` — the twentieth landing — train EM-T10: PortablePopup and BottomSheet can wear the editor's halo through one optional prop (the first door, member 3; the train's byte-arm holder)
 - **Packet version:** 2
   ⭐ **WHAT VERSION 2 CHANGED AND WHY.** An INDEPENDENT pre-proof re-measured this packet against
   the chair's train worktree `em-train-9-2026-09-21`, where train EM-T9's four members exist as

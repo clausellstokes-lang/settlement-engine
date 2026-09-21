@@ -34213,9 +34213,10 @@
     },
     {
       "id": "EM-B1i",
-      "status": "READY",
+      "status": "LANDED",
       "packetPath": "docs/implementation/packets/settlement-editor/EM-B1i.md",
       "verifiedBase": "e348d59b609e2c62c957a4cd78653849792043b7",
+      "landedAt": "e82bf2a2df4983a7c790c27afe3d037dd339c2e0",
       "_verifiedBaseNote": "STAMPED BY THE CHAIR AT PROMOTION. Compiled and measured whole at 32602dc607b7423838249cf57d73baf08feb047d (git status --short EMPTY before and after), by the Opus COMPILE lane, session a9df403c, 2026-09-20. The base the chair stamps MUST be a tip at which EM-B1h has LANDED: src/domain/worldPulse/worldPulseFates.js does not exist at the compile tip, and this packet's cure imports two of its symbols. At promotion the chair ALSO adds three requiredSymbols rows for that leaf — {WORLD_PULSE_FATE_KIND, WORLD_PULSE_FATE_KINDS, isWorldPulseFate} — each proved by the grep -cF printed in EM-B1i.evidence.md section 16. They are omitted here because PACKET_STANDARD.md admits only symbols present at the verified base, and a lane never names a symbol it could not prove.",
       "changeManifest": [
         {
@@ -34399,9 +34400,10 @@
     },
     {
       "id": "EM-B2a1",
-      "status": "READY",
+      "status": "LANDED",
       "packetPath": "docs/implementation/packets/settlement-editor/EM-B2a1.md",
       "verifiedBase": "e348d59b609e2c62c957a4cd78653849792043b7",
+      "landedAt": "f9b68387a9185b6f791510b061232380c76ed3fb",
       "_baseNote": "⛔ `__BASE__` can never pass `validate:packets` (`verifiedBase must be a lowercase 40-character SHA`). Validation is DOWNSTREAM of the chair's promotion stamp: the chair stamps the base, adds the INDEX.md row, THEN gates on `valid:`. This lane validated on a scratch COPY of the estate with the base stamped to bdbf7c89c2569679bcccdb188d5d831ccfaa0e6d and an INDEX row added exactly as the chair would, and changed nothing else.",
       "_member": "MEMBER 1 OF 4 of the SUPERSEDED EM-B2a (the chair's ESTATE-REPAIR ruling, 2026-09-20): EM-B2a1 (this) → EM-B2a2 (the seam + the heavy chooser) → EM-B2a3 (the four remaining choosers) → EM-B2a4 (the store consumer + the orchestration). EM-B2b lands after EM-B2a1 and EM-B2a4. The four-member partition, with every parent item assigned, is `EM-B2a.partition.md`.",
       "_interimRules": "Compiled under `COMPILE-RULES.interim.md` (the chair, 2026-09-20), which GOVERNS where it and `EM-PREAMBLE.md` (SHA-256 c9f33c8d2940372bde8a6d931e3d389b79516a90ed45405cbbbf3e698cc46675, MEASURED at the read tip with shasum -a 256) disagree. Consequences visible here: a NEW test file is CREATE, never TEST (rule 4); `docs/content/wiring-census.json` appears in NO row and in no check (rule 1); no byte arm and no dist read (rule 2); `_pending` would be the sibling key `_pendingRequiredSymbols` (rule 3 — this packet needs none); every register figure is a DELTA (rule 9); sealed `checks` name FILES and never the `tests/lint` DIRECTORY, and never the lighting walker, and END with the validator (rule 8); §7 and this capsule are SET-EQUAL and the packet was compiled CAPSULE-FIRST (rule 6 / chair ruling 8).",
@@ -34573,9 +34575,10 @@
     },
     {
       "id": "EM-B3e",
-      "status": "READY",
+      "status": "LANDED",
       "packetPath": "docs/implementation/packets/settlement-editor/EM-B3e.md",
       "verifiedBase": "e348d59b609e2c62c957a4cd78653849792043b7",
+      "landedAt": "49a5f1e01a42e780b65410d0c053423ccef6691e",
       "changeManifest": [
         {
           "action": "MODIFY",
@@ -35061,9 +35064,10 @@
     },
     {
       "id": "EM-D0c",
-      "status": "READY",
+      "status": "LANDED",
       "packetPath": "docs/implementation/packets/settlement-editor/EM-D0c.md",
       "verifiedBase": "e348d59b609e2c62c957a4cd78653849792043b7",
+      "landedAt": "7277520c215f827637d4961e9344406c6336f3e3",
       "changeManifest": [
         {
           "action": "MODIFY",
@@ -35248,9 +35252,10 @@
     },
     {
       "id": "EM-D0d",
-      "status": "READY",
+      "status": "LANDED",
       "packetPath": "docs/implementation/packets/settlement-editor/EM-D0d.md",
       "verifiedBase": "e348d59b609e2c62c957a4cd78653849792043b7",
+      "landedAt": "b44ab38e17571ab680646d3b12889ebc07aaa89b",
       "_interimRules": "Compiled under `COMPILE-RULES.interim.md` (the chair, 2026-09-20; rules 1-17 as of 2026-09-21 05:26), which GOVERNS where it and `EM-PREAMBLE.md` (SHA-256 c9f33c8d2940372bde8a6d931e3d389b79516a90ed45405cbbbf3e698cc46675, MEASURED at the read tip with `shasum -a 256`) disagree. Visible here: a NEW test file is CREATE, never TEST (rule 4); `docs/content/wiring-census.json` appears in NO row and in no check, and this member's wiring delta is +0 because it CREATEs no `.js` leaf under `src/generators/**` or `src/domain/**` - both roots measured (rule 1); NO byte arm and no dist read anywhere in `checks` (rule 2), and this member is NOT train EM-T10's byte-arm holder (rule 14); `_pendingRequiredSymbols` is the sibling key (rule 3); the Status row carries its value ALONE (rule 5); section 7 and this capsule are SET-EQUAL and the packet was compiled CAPSULE-FIRST (rule 6); every register figure is a DELTA (rule 9); rule 10 BINDS (this member writes `src/components/**`) and is discharged by grep with the answer NONE (see _browserSuite); rule 12's count prover ships beside the packet as KIT FURNITURE and accepts `<packet.md> <capsule.json>`; rule 13 finds NO line-addressed register row for any path in play; rule 15 is NOT owed (`tests/components` is in none of ENFORCER_DIRS, read at the tip); rule 16 is discharged (every word this member writes is NEW, measured absent from `src`, `tests`, `scripts`, `e2e`); rule 17 does NOT reach `src/components` (`TREES_P2P3` read at the tip is exactly ['src/domain','src/generators']).",
       "changeManifest": [
         {

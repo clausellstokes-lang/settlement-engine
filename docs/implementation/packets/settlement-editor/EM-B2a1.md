@@ -1,6 +1,6 @@
 # Settlement editor / EM-B2a1 — THE DM LAYER'S LEAF: a pure `src/domain/edit/dmLayer.js` that reads an override, applies an op to a layer and mints a deterministic DM id, with a unit battery that convicts a wrong leaf before anything imports it
 
-- **Status:** `READY`
+- **Status:** `LANDED`
   ⚠ The status value above stands ALONE on its line because `parsePacketHeader`
   (`scripts/implementation-packets.mjs:295-314`) anchors the status row at end-of-line and takes
   `status` only when exactly one row matches. Every stamp, caveat and date goes on these
@@ -10,6 +10,7 @@
   four remaining choosers) → **EM-B2a4** (the store consumer + the orchestration). **EM-B2b** lands
   after EM-B2a1 and EM-B2a4. The four-member partition, with every parent item assigned to exactly
   one member, is `EM-B2a.partition.md` beside this file.
+- **Landed at:** `f9b68387a9185b6f791510b061232380c76ed3fb` — the twenty-first landing — train EM-T10: the DM's-layer leaf (arity-three applyEdit with an injected consult, fail-closed; two TS7006 parameters JSDoc-typed at its cure)
 - **Packet version:** 2.1
   ⭐ **VERSION 2.1 (the chair, at install, 2026-09-21; judgment 81) — THE COUNT PROVER IS KIT FURNITURE.** It lives beside
   this packet in the chair's kit (`packets-waiting/EM-B2a1.count-prover.mjs`); it is run by the pre-proof, by the
