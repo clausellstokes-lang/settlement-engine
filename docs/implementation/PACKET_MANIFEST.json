@@ -33170,9 +33170,10 @@
     },
     {
       "id": "EM-B3d",
-      "status": "READY",
+      "status": "LANDED",
       "packetPath": "docs/implementation/packets/settlement-editor/EM-B3d.md",
       "verifiedBase": "e80a6a3f443e2f6a36e28fbebb72e98e46869fac",
+      "landedAt": "429141e2d1c21cb5ee9dd5005ed1a77bbc9b3cd8",
       "changeManifest": [
         {
           "action": "MODIFY",
