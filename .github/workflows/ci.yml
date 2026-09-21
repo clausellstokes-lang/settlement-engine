@@ -405,27 +405,70 @@ jobs:
     # Coverage floors for the money / security modules — a regression RATCHET
     # on the highest-consequence files (spend/refund via aiSlice+creditsSlice,
     # saves, checkout reconcile, credit ledger, stripe, pending dossier). Runs
-    # the suite under v8 coverage and fails if any floored file drops more than
-    # ~5pts below its measured baseline (floors in vite.config.js
-    # coverage.thresholds; a deleted money-path test is exactly the regression
+    # THE TESTS THAT CAN REACH those seven files under v8 coverage and fails if
+    # any floored file drops more than ~5pts below its measured baseline (floors
+    # in vite.config.js coverage.thresholds, and the re-scope below did not move
+    # one of those figures; a deleted money-path test is exactly the regression
     # this catches). Parallel to `check` so the ratchet never doubles the
     # critical path's wall-clock.
+    #
+    # WHY RUNNING FEWER TESTS IS A SUFFICIENT PROOF AND NOT A WEAKENING (2026-09-20).
+    # The step below ran the WHOLE suite (33,771 tests) under coverage and was killed
+    # at four successive caps without ever reporting a floor. It now runs
+    # `vitest related <the seven> --run --coverage` with the SAME seven
+    # --coverage.include rows, so vitest's own import graph selects every test file
+    # that loads one of the seven. A file's coverage can only come from a test
+    # process that LOADS it, and running fewer tests can only LOWER a percentage,
+    # never raise it — the denominators are the file's own statement/branch/
+    # function/line counts and do not depend on which tests run. So
+    # scoped >= floor IMPLIES whole-suite >= floor: a green scoped run proves
+    # everything the whole-suite run proved, and the error direction is the safe
+    # one — a test the import graph cannot see (a runtime-computed import) costs
+    # that file coverage and can only produce a FALSE RED, never a false green.
+    # The `related` subcommand also turns passWithNoTests on, so "nothing was
+    # selected" cannot red by itself; --coverage.include naming the seven is what
+    # closes that hole, because an unreached floored file is still REPORTED, at
+    # ~0, and still reds its own floor by name. Both halves were measured on this
+    # branch before the change landed.
+    # MEASURED at f76ddf0ab: the scoped run selects 488 test files / 4,284 tests
+    # and is green, with three of the seven reporting byte-identical numbers to the
+    # 2026-07-09 whole-suite baseline recorded in vite.config.js and the other four
+    # reporting HIGHER (coverage grew since July). No floor is near.
+    # ⭐ THE EXHAUSTIVE FORM IS NOT RETIRED: the package.json script
+    # `test:coverage:floors` still runs the WHOLE suite under coverage and is
+    # unchanged, byte for byte. It is the local form to reach for when the question
+    # is "does anything anywhere touch these files", and it is what this scoped job
+    # is a sufficient proof OF.
+    # ⛔ THE SEVEN PATHS NOW LIVE IN THREE PLACES — vite.config.js thresholds, the
+    # npm script's include rows, and the array below. tests/build/ciGateHardening.js
+    # asserts all three are the SAME SET, both directions, so a rename cannot drop a
+    # floor silently.
     name: Coverage floors (money / security)
     runs-on: ubuntu-latest
-    # This cap follows its suite, exactly as the test ratchet's does. Measured 2026-09-20: BOTH
-    # of PR #53's runs were CUT at the old 60-minute cap without concluding — push 35534822592
-    # (20:13:06Z → 21:13:21Z, 60m15s) and pull_request 35534903945 (20:14:36Z → 21:14:52Z,
-    # 60m16s), both "cancelled". That is the third cap this job has outgrown: 10 cut it on every
-    # run since 08-15, and 45 cut it on master's merge commit b9c494afe on 09-16. The last runs
-    # that CONCLUDED were on 2026-09-17, all three green: 51m52s (35184404284), 52m46s
-    # (35168257017) and 53m41s (35230176250) — already up from the 41–43 minutes measured on
-    # 09-16, and the suite has grown by about five hundred commits since. 100 is twice the
-    # longest concluded run, the same rule the test ratchet's cap uses above, and it is likewise
-    # to be TIGHTENED to measured-plus-headroom once a run concludes on this branch. A timeout
-    # is not a coverage verdict, and the Vercel build gate (scripts/vercel-ignore-build.mjs)
-    # requires this job green, so a cap that cuts a passing run blocks the production deploy —
-    # which is why production has not deployed since 09-16.
-    timeout-minutes: 100
+    # THE CAP FOLLOWS THE MEASURED RUN, and this is the first cap set against a run
+    # whose size is bounded by the seven files' import graph rather than by the whole
+    # suite's growth. Measured 2026-09-20 on the chair's box: the scoped command takes
+    # 5m35s (335s) wall. That box runs about four times a GitHub runner on the same
+    # work — the ratchet is 17m41s there against 62m37s and 82m08s here, a ratio of
+    # 3.54x and 4.64x — so 335s x 4 = 22m20s expected on a runner, x 1.5 headroom =
+    # 33m30s, rounded UP to the next 15 = 45. At the WORST observed ratio (4.64x) the
+    # job is 25m54s, which 45 still clears by 74%; the runner's fixed overhead
+    # (checkout, the ~200 MB ledger fetch, npm ci) is already inside that multiplier,
+    # because it was measured from job totals and not from step times.
+    # THE FOUR CAPS THIS JOB OUTGREW, kept as history because every one of them was
+    # set the old way — against the whole suite: 10 cut it on every run since 08-15;
+    # 45 cut it on master's merge commit b9c494afe on 09-16 (raised to 60 in
+    # 743779742); 60 cut both of PR #53's first runs (35534822592, 60m15s and
+    # 35534903945, 60m16s); and 100 cut both of its second runs at f76ddf0ab
+    # (35541172706, 22:16:43Z → 23:56:59Z and 35541276693, 22:18:48Z → 23:59:04Z,
+    # 100m16s each, "cancelled", with no floor ever reported failing). The last runs
+    # that CONCLUDED were on 2026-09-17, all three green and all on the whole suite:
+    # 51m52s (35184404284), 52m46s (35168257017) and 53m41s (35230176250).
+    # A timeout is not a coverage verdict, and the Vercel build gate
+    # (scripts/vercel-ignore-build.mjs) requires this job green, so a cap that cuts a
+    # passing run blocks the production deploy — which is why production has not
+    # deployed since 09-16.
+    timeout-minutes: 45
     steps:
       - uses: actions/checkout@v4
       # Two suites read the LEDGER BRANCH by its local ref (scripts/audit/ledger-citations.mjs and
@@ -447,8 +490,31 @@ jobs:
           node-version-file: '.nvmrc'
           cache: npm
       - run: npm ci
-      - name: Coverage floors
-        run: npm run test:coverage:floors
+      # THE SEVEN PATHS ARE SPELLED ONCE, in FLOORED, and BOTH uses read that one
+      # array: the `related` positionals and the --coverage.include rows. They cannot
+      # drift from each other because there is only one list. Every expansion is
+      # quoted (`"${FLOORED[@]}"`), so a path containing a space could never be split
+      # into two arguments. The mutex is spelled here rather than reached through the
+      # npm script because that script is the exhaustive whole-suite form and stays
+      # that way; this job is the scoped proof of it.
+      - name: Coverage floors (scoped to the tests that can reach the seven floored files)
+        shell: bash
+        run: |
+          FLOORED=(
+            src/lib/stripe.js
+            src/lib/creditLedger.js
+            src/lib/checkoutReconcile.js
+            src/lib/pendingDossier.js
+            src/lib/saves.js
+            src/store/aiSlice.js
+            src/store/creditsSlice.js
+          )
+          include=()
+          for floored_file in "${FLOORED[@]}"; do
+            include+=("--coverage.include=$floored_file")
+          done
+          sh scripts/gate-mutex.sh --run -- npx vitest related "${FLOORED[@]}" \
+            --run --coverage --coverage.reporter=text "${include[@]}"
 
   deno-tests:
     name: Edge function execution tests (Deno)
