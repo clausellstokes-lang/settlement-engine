@@ -109,6 +109,13 @@ The operator order for a READY packet is fixed:
    matches; otherwise it reports stale, incomplete, or invalid work and requires
    the affected command to run again.
 
+A non-terminal packet's `retiredSymbols` symbol must still be present, except where that
+packet's own seal in this worktree licenses the absence — the seal is the receipt that the
+symbol was there at dispatch, so `validate:packets` reports such a burn as a printed note
+instead of an error, while a seal naming another packet, another worktree, a payload its
+integrity digest no longer matches, or a HEAD that is not an ancestor of this tree licenses
+nothing and the refusal stands.
+
 Dispatch and resume do not create/delete worktrees, stage, commit, merge, restore,
 clean files, infer affected tests, or interpret or waive semantic line budgets.
 Those remain operator decisions; only the complete `npm run check` chain is landing authority.
@@ -310,7 +317,15 @@ proven — which is why it is written down here rather than left to the next aut
 ⛔ The row is added surgically beside its siblings. That manifest is never re-serialised whole:
 a formatter's diff would bury the one row that matters.
 
-Authority: `OWNER_DECISION_QUEUE.md` §49, §50.2, §53.6, §85.4, §102.3.
+**A new `.js` leaf under `src/generators/**` or `src/domain/**` carries one obligation: its
+wiring-census row.** `scripts/wiring-census.mjs` stamps a producer-file COUNT
+(`producerIndexFiles`) over those two roots into `docs/content/wiring-census.json`, so a
+new leaf moves the census even when no pool or variant moved — discovered at a sealed build
+(EM-P2 v4, 2026-09-20) whose checks did not name the register. The wave declares the file
+as a GENERATED row, its build runs `node scripts/wiring-census.mjs` in its last gated batch,
+and the regenerated file lands with the packet.
+
+Authority: `OWNER_DECISION_QUEUE.md` §49, §50.2, §53.6, §85.4, §102.3, §934.47 addendum 78.
 
 ## Burning a census row
 
@@ -457,6 +472,13 @@ Generated artifacts do not count as handwritten files, but the packet must name
 their generator and expected artifact set. Documentation receipts do not count
 as production lines.
 
+An ADDRESSES-ONLY citation row — a production file whose only edit is the
+`path:line` addresses inside its comments or string literals, no logic byte —
+does not count against the three-modified-logic-files cap. It stays a
+change-manifest row with its stated comment-line delta and it runs the
+source-citation walker; it is never a logic home and never splits a packet.
+Authority: `OWNER_DECISION_QUEUE.md` §934.47 addendum 72 (2026-09-20).
+
 If the work cannot fit, the agent stops and proposes the smallest split. The
 agent may not quietly renegotiate the budget or convert a registration file
 into a second logic home.
@@ -469,7 +491,10 @@ A hot file sits within a handful of effective lines of a ceiling that will not b
 |---|---:|---:|---:|
 | `src/components/new/tabs/EconomicsTab.jsx` | 600 | 600 | 0 |
 | `src/components/OutputContainer.jsx` | 599 | 600 | 1 |
-| `src/domain/worldPulse/convergence.js` | 798 | 800 | 2 |
+| `src/domain/worldPulse/convergence.js` | 764 | 800 | 36 |
+| `src/domain/worldPulse/institutionLifecycle.js` | 798 | 800 | 2 |
+| `src/App.jsx` | 575 | 600 | 25 |
+| `src/components/SettlementsPanel.jsx` | 577 | 600 | 23 |
 | `src/domain/worldPulse/peaceTerms.js` | 797 | 800 | 3 |
 | `src/domain/worldPulse/informationStatecraft.js` | 780 | 800 | 20 |
 
@@ -488,6 +513,10 @@ the executed measurement `GAP-1` §2.4 carries — it is tighter than two of the
 rows that were already here, and it had no entry, no `scripts/.size-baseline.json`
 row and no door. All four figures above were re-executed at `5d6a0e7c` with eslint's
 own `Linter` under `max-lines` `{ skipBlankLines: true, skipComments: true }`.
+⭐ `App.jsx` and `SettlementsPanel.jsx` joined on 2026-09-20 (FIX-P3's lane measured both within a handful of lines of the 600 component ceiling with no `.size-baseline.json` row; the chair re-measured at EM-B3c's landing with eslint's own `Linter`): FIX-P3 mounted its `NotFoundNotice` in `AppViews.jsx` for exactly this reason.
+
+⭐ Re-measured 2026-09-20 by the chair at `32602dc60` with eslint's own `Linter` (`max-lines`, `skipBlankLines` and `skipComments`): `convergence.js` reads **764** (the 798 above stood from 2026-08-14; EM-R6's compile lane noticed the drift), and `src/domain/worldPulse/institutionLifecycle.js` JOINS the list at **798** of 800 — EM-B1h's compile found it within a handful of lines of its ceiling with no `scripts/.size-baseline.json` row and no door (ODQ §934.47 addendum 28); EM-B1a's pre-proof, the next packet likely to reach into it, prices the extraction. ⚠ `src/domain/worldPulse/pulseKernel.js` sits at EXACTLY its ceiling (1581 of 1581) but carries a `scripts/.size-baseline.json` row, so that register governs it, not this list — EM-B1k is contracted net-zero against it.
+
 ⚠ The measurement is what earned the row: `convergence.js` rebinds a short local six
 times and is a natural target for exactly the kind of multi-line probe that would red
 `max-lines` for a reason having nothing to do with the change under test.
@@ -609,6 +638,11 @@ order:
 7. Run focused verification.
 8. Run the packet's wave-end gate and produce the completion receipt.
 
+A written-contract arm — an assertion that already holds at the base — cannot fail
+first; it is proved by its counterforce measured (a planted mutant or a perturbed
+input that reds the named title, then restored) and the counterforce is quoted in
+the receipt (ODQ §934.47 addendum 61).
+
 The agent must not start by changing a golden, baseline, budget, or persisted
 shape.
 
@@ -629,6 +663,10 @@ shape.
 - If a full gate is red, compare failure identities with a committed-base run
   or an integrity-counted archive. Do not repair unrelated rows.
 - Never raise a baseline, budget, timeout, or ceiling to finish a packet.
+- A `tests/lint` step that excludes the lighting walker
+  (`npx vitest run --pool=threads --maxWorkers=2 tests/lint --exclude=tests/lint/sovereigntyLightingContract.walker.test.js`)
+  may be a sealed check while that walker reds by design under a train;
+  `tests/lint` whole remains the lane's instrument step (ODQ §934.47 addendum 61).
 
 Focused commands and expected exit codes belong in each packet. `Run relevant
 tests` is not an instruction.

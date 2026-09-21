@@ -32,6 +32,8 @@ import WorldSectionToggles, { WORLD_SECTIONS } from './WorldSectionToggles.jsx';
 import Button from '../primitives/Button.jsx';
 import {
   BORDER, BORDER2, CARD, CARD_ALT, sans, SP, FS, GREEN, GREEN_BG, RED, INK, BODY, MUTED } from '../theme.js';
+import useIsMobile from '../../hooks/useIsMobile.js';
+import { chromeFontSize, proseFontSize } from '../../design/proseScale.js';
 
 const UUID_RE = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
 
@@ -42,10 +44,11 @@ function publicUrlFor(slug) {
 }
 
 function Field({ label, htmlFor, children }) {
+  const mobile = useIsMobile();
   return (
     // eslint-disable-next-line jsx-a11y/label-has-for -- generic wrapper; association is via the htmlFor prop wired at each call site, which the static rule can't verify.
     <label htmlFor={htmlFor} style={{ display: 'grid', gap: 4, minWidth: 0 }}>
-      <span style={{ color: INK, fontFamily: sans, fontSize: FS.xxs, fontWeight: 900, textTransform: 'uppercase', letterSpacing: '0.06em' }}>
+      <span style={{ color: INK, fontFamily: sans, fontSize: chromeFontSize(FS.xxs, mobile), fontWeight: 900, textTransform: 'uppercase', letterSpacing: '0.06em' }}>
         {label}
       </span>
       {children}
@@ -60,6 +63,7 @@ function Field({ label, htmlFor, children }) {
  * understands why it is unavailable.
  */
 function KindPicker({ value, onChange, canShareCampaign }) {
+  const mobile = useIsMobile();
   return (
     <div role="radiogroup" aria-label="What to share" style={{ display: 'grid', gap: SP.xs }}>
       <div style={{ display: 'flex', gap: SP.xs, flexWrap: 'wrap' }}>
@@ -83,12 +87,12 @@ function KindPicker({ value, onChange, canShareCampaign }) {
         })}
       </div>
       {KIND_OPTIONS.map(([id, , helper]) => (value === id ? (
-        <span key={id} style={{ color: BODY, fontFamily: sans, fontSize: FS.xxs, lineHeight: 1.45 }}>
+        <span key={id} style={{ color: BODY, fontFamily: sans, fontSize: proseFontSize(FS.xxs, mobile), lineHeight: 1.45 }}>
           {helper}
         </span>
       ) : null))}
       {!canShareCampaign && (
-        <span style={{ color: MUTED, fontFamily: sans, fontSize: FS.xxs, fontStyle: 'italic' }}>
+        <span style={{ color: MUTED, fontFamily: sans, fontSize: chromeFontSize(FS.xxs, mobile), fontStyle: 'italic' }}>
           Add a settlement to the campaign to share the living world alongside the map.
         </span>
       )}
@@ -127,6 +131,7 @@ export default function MapShareEditor({
   galleryWorldSections = null,
   onSaved = null,
 }) {
+  const mobile = useIsMobile();
   const auth = useStore(s => s.auth);
   const updateSavedCampaign = useStore(s => s.updateSavedCampaign);
 
@@ -258,7 +263,7 @@ export default function MapShareEditor({
         display: 'inline-flex', alignItems: 'center', gap: 6,
         padding: '6px 10px',
         background: 'transparent', color: MUTED,
-        fontSize: FS.xs, fontFamily: sans, fontStyle: 'italic',
+        fontSize: chromeFontSize(FS.xs, mobile), fontFamily: sans, fontStyle: 'italic',
       }}>
         Save the campaign first to share its map publicly.
       </div>
@@ -415,7 +420,7 @@ export default function MapShareEditor({
           onChange={event => setImportable(event.target.checked)}
           style={{ marginTop: 2, flexShrink: 0 }}
         />
-        <span style={{ color: BODY, fontFamily: sans, fontSize: FS.xxs, lineHeight: 1.45 }}>
+        <span style={{ color: BODY, fontFamily: sans, fontSize: proseFontSize(FS.xxs, mobile), lineHeight: 1.45 }}>
           <strong style={{ color: INK }}>Allow others to import this map</strong>. Let other DMs clone the public version into their own library. Private world detail is never included in an import. Disabled by default.
         </span>
       </label>
@@ -430,7 +435,7 @@ export default function MapShareEditor({
           <div style={{
             display: 'flex', alignItems: 'center', justifyContent: 'center',
             minHeight: 96, border: `1px dashed ${BORDER}`,
-            background: CARD, color: MUTED, fontFamily: sans, fontSize: FS.xxs,
+            background: CARD, color: MUTED, fontFamily: sans, fontSize: chromeFontSize(FS.xxs, mobile),
           }}>
             Capturing the map for the cover…
           </div>
@@ -453,7 +458,7 @@ export default function MapShareEditor({
           placeholder={campaign?.name ? `Map of ${campaign.name}` : 'Image description'}
           style={{
             minHeight: 32, border: `1px solid ${BORDER}`,
-            background: CARD, color: INK, fontFamily: sans, fontSize: FS.xs, padding: '6px 8px',
+            background: CARD, color: INK, fontFamily: sans, fontSize: chromeFontSize(FS.xs, mobile), padding: '6px 8px',
           }}
         />
       </Field>
@@ -466,7 +471,7 @@ export default function MapShareEditor({
           placeholder="coastal, small realm, at war"
           style={{
             minHeight: 32, border: `1px solid ${BORDER}`,
-            background: CARD, color: INK, fontFamily: sans, fontSize: FS.xs, padding: '6px 8px',
+            background: CARD, color: INK, fontFamily: sans, fontSize: chromeFontSize(FS.xs, mobile), padding: '6px 8px',
           }}
         />
       </Field>
@@ -492,7 +497,7 @@ export default function MapShareEditor({
           display: 'inline-flex', alignItems: 'center', gap: 5,
           padding: '4px 9px',
           background: GREEN_BG, color: GREEN, border: `1px solid ${GREEN}`,
-          fontSize: FS.xs, fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.05em',
+          fontSize: chromeFontSize(FS.xs, mobile), fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.05em',
         }}>
           Public
         </span>
@@ -506,7 +511,7 @@ export default function MapShareEditor({
           {busy ? 'Working…' : 'Unshare'}
         </Button>
         {error && (
-          <span style={{ display: 'inline-flex', alignItems: 'center', gap: 4, fontSize: FS.xs, color: RED }}>
+          <span style={{ display: 'inline-flex', alignItems: 'center', gap: 4, fontSize: chromeFontSize(FS.xs, mobile), color: RED }}>
             {error}
           </span>
         )}
@@ -531,11 +536,11 @@ export default function MapShareEditor({
         Details
       </Button>
       {error && (
-        <span style={{ display: 'inline-flex', alignItems: 'center', gap: 4, fontSize: FS.xs, color: RED }}>
+        <span style={{ display: 'inline-flex', alignItems: 'center', gap: 4, fontSize: chromeFontSize(FS.xs, mobile), color: RED }}>
           {error}
         </span>
       )}
-      <span style={{ fontSize: FS.xs, color: MUTED, fontStyle: 'italic' }}>
+      <span style={{ fontSize: chromeFontSize(FS.xs, mobile), color: MUTED, fontStyle: 'italic' }}>
         Public maps appear in the gallery. Your name and email stay private. A campaign share also shows the living world sections you leave enabled below.
       </span>
       {detailsForm}

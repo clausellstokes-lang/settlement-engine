@@ -16,6 +16,8 @@ import { decodeWorldCode } from '../lib/worldCode.js';
 import { viewToPath } from '../lib/routes.js';
 import { FS, PARCH, INK, BODY, MUTED, BORDER, GOLD, CARD, sans, serif_ } from './theme.js';
 import Button from './primitives/Button.jsx';
+import useIsMobile from '../hooks/useIsMobile.js';
+import { chromeFontSize } from '../design/proseScale.js';
 
 const REALM_LABEL = { small: 'Small realm', medium: 'Medium realm', large: 'Large realm' };
 const TONE_LABEL = { quiet_local: 'Quiet', realistic_regional: 'Realistic', dramatic_campaign: 'Dramatic' };
@@ -24,6 +26,7 @@ const TONE_LABEL = { quiet_local: 'Quiet', realistic_regional: 'Realistic', dram
  * @param {{ code?: string, onNavigate?: (view: string) => void }} props
  */
 export default function WorldPage({ code, onNavigate }) {
+  const mobile = useIsMobile();
   const [state, setState] = useState({ status: 'decoding', world: null, decoded: null, error: null });
   const [copied, setCopied] = useState(false);
 
@@ -74,7 +77,7 @@ export default function WorldPage({ code, onNavigate }) {
   return (
     <div style={{ minHeight: '60vh', background: PARCH, padding: `${32}px 20px`, fontFamily: sans }}>
       <div style={{ maxWidth: 760, margin: '0 auto' }}>
-        <div style={{ fontSize: FS.xxs, fontWeight: 800, letterSpacing: '0.14em', textTransform: 'uppercase', color: GOLD, marginBottom: 10 }}>
+        <div style={{ fontSize: chromeFontSize(FS.xxs, mobile), fontWeight: 800, letterSpacing: '0.14em', textTransform: 'uppercase', color: GOLD, marginBottom: 10 }}>
           A shared world
         </div>
 
@@ -118,6 +121,7 @@ export default function WorldPage({ code, onNavigate }) {
 }
 
 function ReadyView({ world, decoded, shareUrl, copied, onCopy, onNavigate }) {
+  const mobile = useIsMobile();
   const plan = world.plan || {};
   const settlements = Array.isArray(world.settlements) ? world.settlements : [];
   const largest = settlements.slice().sort((a, b) => (b?.settlement?.population || 0) - (a?.settlement?.population || 0));
@@ -138,18 +142,18 @@ function ReadyView({ world, decoded, shareUrl, copied, onCopy, onNavigate }) {
           <Button variant="primary" size="sm" onClick={onCopy}>{copied ? 'Link copied' : 'Copy share link'}</Button>
           <Button variant="secondary" size="sm" onClick={() => onNavigate && onNavigate('generate')}>Create your own</Button>
         </div>
-        {shareUrl ? <div style={{ marginTop: 10, fontSize: FS.xxs, color: MUTED, wordBreak: 'break-all' }}>{shareUrl}</div> : null}
+        {shareUrl ? <div style={{ marginTop: 10, fontSize: chromeFontSize(FS.xxs, mobile), color: MUTED, wordBreak: 'break-all' }}>{shareUrl}</div> : null}
       </Panel>
 
       <Panel>
-        <div style={{ fontSize: FS.xxs, fontWeight: 800, letterSpacing: '0.1em', textTransform: 'uppercase', color: MUTED, marginBottom: 10 }}>
+        <div style={{ fontSize: chromeFontSize(FS.xxs, mobile), fontWeight: 800, letterSpacing: '0.1em', textTransform: 'uppercase', color: MUTED, marginBottom: 10 }}>
           Its settlements
         </div>
         <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
           {largest.map((s, i) => (
             <div key={i} style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'baseline', gap: 8, padding: '6px 0', borderBottom: i < largest.length - 1 ? `1px solid ${BORDER}` : 'none' }}>
               <span style={{ fontFamily: serif_, fontWeight: 700, fontSize: FS.md, color: INK }}>{s?.settlement?.name || s?.name || 'Settlement'}</span>
-              <span style={{ fontSize: FS.xxs, color: MUTED, textTransform: 'uppercase', letterSpacing: '0.06em' }}>{s?.tier || s?.settlement?.tier}</span>
+              <span style={{ fontSize: chromeFontSize(FS.xxs, mobile), color: MUTED, textTransform: 'uppercase', letterSpacing: '0.06em' }}>{s?.tier || s?.settlement?.tier}</span>
             </div>
           ))}
         </div>
@@ -167,8 +171,9 @@ function Panel({ children }) {
 }
 
 function Chip({ children }) {
+  const mobile = useIsMobile();
   return (
-    <span style={{ fontSize: FS.xxs, fontWeight: 700, color: BODY, background: PARCH, border: `1px solid ${BORDER}`, padding: '3px 9px' }}>
+    <span style={{ fontSize: chromeFontSize(FS.xxs, mobile), fontWeight: 700, color: BODY, background: PARCH, border: `1px solid ${BORDER}`, padding: '3px 9px' }}>
       {children}
     </span>
   );

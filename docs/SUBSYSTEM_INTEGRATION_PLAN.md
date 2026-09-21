@@ -118,12 +118,12 @@ phases consume it.
 | **F3** | Foundation | The ONE `contestOverThirdParty` primitive + shared contest math + the net-new softmax sampler (rng injected). | NEW `region/contestOverThirdParty.js`, `region/contestMath.js` | Order-independent (reversed + tied contenders); single-incumbent no-op; anti-oscillation soak; pure (no Date.now/Math.random). |
 | **F4** | Foundation | The ONE disposition ledger + ratchet helper + signed `candidateBase` multiplier (default exactly 1.0). | NEW `worldPulse/dispositionLedger.js`, `relationshipEvolution.js:369`, `candidateEvents.js:201`, `advanceCampaignWorld.js` | Legacy ⇒ exactly 1.0 (byte-identical); read-last/write-next pinned by MULTI-settlement fixture; signed direction test. |
 | **F5** | Foundation | Declarative archetype catalog: `war_drain`/`army_deployed`/`occupation_lifted`/`relief_burden` + directed-channel mint helper + religious_authority mint (deity-gated). | `activeConditions.js:49`, `conditionPromotion.js`, NEW `worldPulse/archetypeCatalog.js`, `region/graph.js` (mintDirectedChannel) | Registry invariant green; `deriveEconomicCapacity` moves when `war_drain` present; dormancy green (religious mint inert with no deity). |
-| **A1** | War (A) | Feature A core: one-army deployment record, coalition directed war_front mint, war_drain re-upsert (homeostasis), contextual troop-return, conquest emitter. Gated behind `warLayerEnabled` (default false). | NEW `worldPulse/warDeployment.js`, `worldPulse/deploymentReturn.js`, `advanceCampaignWorld.js:221/349`, `applyWorldPulse.js:221/421`, `graph.js`, `simulationRules.js` | OFF ⇒ byte-identical; ON ⇒ coalition-siege order-independence + mutual-siege convergence (numeric) + conquest fires; generator golden-master UNTOUCHED. |
+| **A1** | War (A) | Feature A core: one-army deployment record, coalition directed war_front mint, war_drain re-upsert (homeostasis), contextual troop-return, conquest emitter. Gated behind `warLayerEnabled` (default false). | NEW `worldPulse/warDeployment.js`, `worldPulse/deploymentReturn.js`, `pulseKernel.js:454/1047`, `applyWorldPulse.js:221/421`, `graph.js`, `simulationRules.js` | OFF ⇒ byte-identical; ON ⇒ coalition-siege order-independence + mutual-siege convergence (numeric) + conquest fires; generator golden-master UNTOUCHED. |
 | **A2** | War (B) | Feature B per-commodity trade war: `supplyCompleteness` derivation, logistic contest, incumbent + vassal hard-bias, wind-down vs conquest escalation. Shares `warLayerEnabled`. | NEW `worldPulse/supplyCompleteness.js`, `worldPulse/tradeWar.js`, `stressorDynamics.js` (windDown), `candidateEvents.js`, `advanceCampaignWorld.js` | OFF byte-identical; per-commodity order-independence; anti-oscillation soak (cooldown); vassal bias hard; escalation reachable. |
 | **C1** | Disposition (C) | Feature C war/trade scoreFor + ratchet wiring on top of F4 (authored personality + government baseline + dispositionStats). | NEW `worldPulse/disposition.js` (scoreFor only; ledger is F4), `advanceCampaignWorld.js`, `applyWorldPulse.js:421` | Aggressive ⇒ >1.0 / pacifist ⇒ <1.0 / no data ⇒ 1.0; ratchet order-independent; attribution via relationshipRoles (H16). |
 | **C2** | Disposition (C) | Strategy chooser (softmax generalization of `evaluateNpcRules`) with HARD-OVERRIDE return-home + exclusive-tag de-conflict. Gated behind `settlementStrategyEnabled`. | NEW `worldPulse/settlementStrategy.js`, `candidateEvents.js:109/201`, `simulationRules.js` | OFF byte-identical; softmax order-independent; hard-override always recalls + suppresses reactive candidate (no double-fire); no budget-starve. |
 | **R1** | Religion (D) | Deity authoring bucket end-to-end + SET_PRIMARY_DEITY embed bridge + deriveReligiousAuthority deepening. NO pulse behavior yet. | `customContentSchema.js`, `customContentSlice.js`, `customContent.js`, `customRegistry.js`, NEW `supabase/migrations/049_custom_content_deities.sql`, `CustomContent.jsx`, `mutate.js:58/1249`, `events/registry.js`, `settlementSlice.js:1448`, `campaignSlice.js:449`, `causalState.js:539`, `activeConditions.js:276`, `SettlementDetail.jsx` | build:edge-shared committed; deity authoring round-trips local+cloud; deriveReligiousAuthority moves with a deity; dormancy byte-identity green; import lands DORMANT (ref stripped). |
-| **R2** | Religion (D) | Deity-vs-deity contest (consumes F3) + conversion spread on the newly-minted religious_authority channel (consumes F5 mint) + re-embed on win. Gated `religionDynamicsEnabled` + activation. | NEW `worldPulse/religiousContest.js`, `candidateEvents.js:183`, `graph.js` (religious mint wiring), `stressorGates.js:428`, `applyWorldPulse.js`, `stressors.js:969` (spread sort) | Dormancy green WITH religion code present; deity-contest order-independence; channel mints only under deity-presence; conversion re-embeds winner. |
+| **R2** | Religion (D) | Deity-vs-deity contest (consumes F3) + conversion spread on the newly-minted religious_authority channel (consumes F5 mint) + re-embed on win. Gated `religionDynamicsEnabled` + activation. | NEW `worldPulse/religiousContest.js`, `candidateEvents.js:183`, `graph.js` (religious mint wiring), `stressorGates.js:428`, `applyWorldPulse.js`, `stressors.js:635` (spread sort) | Dormancy green WITH religion code present; deity-contest order-independence; channel mints only under deity-presence; conversion re-embeds winner. |
 | **R3** | Religion (D) | good/evil ⇒ corruption knobs (relax onset gate, OQ18); warlike ⇒ the SINGLE Feature-C aggressiveness term (OQ22). | NEW `domain/npcData.js` (TRAIT_ALIGNMENT), `corruption.js:105/119/252`, `npcAgency.js:521`, `relationshipEvolution.js` (deityTemper term in F4 scalar) | OQ18 onset fires in crime-free town with evil deity; no-death-spiral soak; OQ22 no double-count; dormancy green. |
 | **R4** | Religion (D) | Pantheon ledger (conditional materialization) + lazy major/minor/cult tier with hysteresis + containment; realm arcs. LAST, behind convergence tests. | `worldState.js` (conditional pantheon), NEW `worldPulse/pantheon.js`, `applyWorldPulse.js:421`, `realmEvents.js`, `wizardNews.js` | Pantheon absent when dormant; lazy-tier hysteresis (no 1-seat flip); cascade-containment soak; full-stack dormancy byte-identity. |
 | **S1** | Surfacing | Dual-stressor-vocab parity fix (PDF + screen war banner) via ONE shared alias helper. | NEW `domain/display/warStatusVocab.js`, `pdf/lib/viewModel.js:644`, `new/tabs/DefenseTab.jsx:79`, `stressorPicker.js` | Pulse-born siege lights BOTH banners; generation-born sieges unchanged (no fixture churn). |
@@ -175,7 +175,7 @@ phases consume it.
 - **Files:** NEW `subsystemActivation.js` exporting `isSubsystemActive(snapshot, predicate)`
   + a `SUBSYSTEM_GATES` registry (`religionActive: snapshot => snapshot.settlements.some(s => s.settlement?.config?.primaryDeitySnapshot)`).
 - **Determinism guards:** gate reads **postTimeSnapshot** (#3, built at
-  `advanceCampaignWorld.js:349`, post embed-on-assign), is read-only, consumes no rng.
+  `pulseKernel.js:1047`, post embed-on-assign), is read-only, consumes no rng.
 - **Gate:** test proves zero-write / zero-rng when inactive; dormancy green.
 - **Closes:** scattered-inline-dormancy-check anti-pattern; futureproofs premium gating.
 
@@ -257,7 +257,7 @@ phases consume it.
   emitted (first ever).
 - **Determinism guards:** deployment ids deterministic (home+target+tick+channel);
   timers ride `queuedImpacts` delayTicks (queue-this-tick / mature-next via
-  `advanceRegionalImpacts` at `applyWorldPulse.js:504`); **war_drain severity is derived
+  `advanceRegionalImpacts` at `applyWorldPulse.js:341-343`); **war_drain severity is derived
   from the PRE-TICK postTimeSnapshot channel count, NOT this-tick's freshly-minted
   channels** (the deploy mint affects war_drain only next tick — avoids intra-tick
   read-after-write); army-as-record (no echo); one-army existence guard.
@@ -281,7 +281,7 @@ phases consume it.
   (no rng when forced); supplyCompleteness reads pre-tick snapshot; probability-1 bypasses
   the roll; **vassal forced commitment routes through the vassal's trade/economy pressure**
   so `vassalStrain` rises and `vassal_rebellion` stays reachable (escape valve verified at
-  `relationshipEvolution.js:1404` — vassal is NOT a one-way ruin trap).
+  `relationshipRulesCore.js:769` — vassal is NOT a one-way ruin trap).
 - **Test gates:** OFF byte-identical; per-commodity order-independence; **anti-oscillation
   soak with a flip cooldown** (raised upset floor + hysteresis); vassal escape test
   (sustained forced commitment eventually trips rebellion); escalation/wind-down reachable.
@@ -368,7 +368,7 @@ phases consume it.
   occupation edges. `candidateEvents.js:183` (`if (rules.religionDynamicsEnabled && activated)`).
   `stressorGates.js:428` (deity-contest term on `religiousConversionGate`; the 1.6×-on-
   occupation BIRTH gate already at :436). `applyWorldPulse.js` (re-embed winning snapshot;
-  seed `religious_conversion_fracture`). `stressors.js:969` (**codepoint-sort spread
+  seed `religious_conversion_fracture`). `stressors.js:635` (**codepoint-sort spread
   targets by a meaningful key — lowest religious_authority / highest plurality, codepoint
   id as tiebreak — before `.slice(0,3)`** so conversions flow to the weakest orthodoxies,
   deterministic AND legible).
@@ -562,7 +562,7 @@ phases consume it.
 The campaign world pulse is deterministic by contract. Every new mechanic honors:
 
 1. **Single seed, string-keyed forks.** Master rng seeded once
-   (`advanceCampaignWorld.js:163`). New subsystems fork with stable string keys
+   (`pulseKernel.js:454`). New subsystems fork with stable string keys
    (`contest:<channelType>:<prizeId>:<tick>`, `strategy:<id>:<tick>`,
    `deployment-return`, `corr:<id>:<tick>`). Never `createPRNG` anew, never reuse another
    subsystem's key. Forks are lazy/string-keyed — an un-entered (dormant) path advances

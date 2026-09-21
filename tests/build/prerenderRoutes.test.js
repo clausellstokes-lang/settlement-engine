@@ -182,10 +182,13 @@ describe('prerender — pure render (build head == runtime head, the single sour
 
   // SB4 — no indexable route may ship the generic site description: a
   // description-less route previously passed every gate (baked == runtime ==
-  // both generic). Home is the one deliberate DEFAULT_DESCRIPTION user.
+  // both generic). HOME'S EXEMPTION IS GONE (2026-09-18): it was the one
+  // deliberate DEFAULT_DESCRIPTION user, which left the site's front door
+  // describing the product in the abstract, so it now carries its own line and
+  // the loop no longer skips it. Every indexable route, no exceptions.
   it('every indexable route ships a hand-written description, never the site fallback', () => {
     for (const r of ROUTES) {
-      if (!isIndexable(r) || r.view === 'home') continue;
+      if (!isIndexable(r)) continue;
       const d = VIEW_DESCRIPTIONS[r.view];
       expect(d, `route ${r.view} (${r.path}) has no VIEW_DESCRIPTIONS entry`).toBeTruthy();
       expect(d, `route ${r.view} (${r.path}) reuses the generic site description`).not.toBe(DEFAULT_DESCRIPTION);
@@ -250,6 +253,18 @@ describe('prerender — dist walk (the emitted files carry their own truth)', ()
       existsSync(distFileForPath('/gallery')),
       'dist/gallery/index.html must NOT exist — it would shadow the unlisted meta-shell rewrite',
     ).toBe(false);
+  });
+
+  // Owner order 2026-09-16: the five Map Lenses entry pages left the Compendium, so no
+  // static document is baked for them. An old /compendium/lens-* link now reaches the
+  // SPA shell, whose compendium route opens the Overview dashboard and replaces the dead
+  // address with /compendium, so the head canonicalizes there (pinned in
+  // tests/ui/compendiumHubs.test.jsx). A live entry is the anchor: the walk is not vacuous.
+  it.skipIf(!requireDistRead)('the removed /compendium/lens-* entry documents are not baked into dist', () => {
+    expect(existsSync(distFileForPath('/compendium/tier-thorp')), 'a live entry document').toBe(true);
+    for (const id of ['lens-parchment', 'lens-watercolor', 'lens-darkfantasy', 'lens-vtt', 'lens-accessible']) {
+      expect(existsSync(distFileForPath(`/compendium/${id}`)), `dist still carries /compendium/${id}`).toBe(false);
+    }
   });
 
   // SB4 — the noindex world family must NOT be prerendered or sitemap-listed:

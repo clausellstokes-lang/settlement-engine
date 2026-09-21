@@ -532,7 +532,7 @@ export function significantEvent(events) {
 /**
  * One row of `history.historicalEvents[]`, as the producer writes it.
  * @typedef {{type?: unknown, name?: unknown, yearsAgo?: unknown, anchored?: unknown,
- *   lastingEffects?: unknown}} HistoricalEventRow
+ *   severity?: unknown, lastingEffects?: unknown}} HistoricalEventRow
  */
 
 /**
@@ -628,6 +628,9 @@ export function foundedPoolKey(history) {
   return CORPUS['DS-GEN-14'].pools[key] ? key : null;
 }
 
+/** The two severities DS-GEN-16's STATE-KEY calls a "severe event" (historyData's ladder: minor · major · catastrophic). */
+const SEVERE_EVENT_SEVERITIES = Object.freeze(['major', 'catastrophic']);
+
 /**
  * DS-GEN-16's pool — what the years left standing, read over the WHOLE record rather than
  * one row. The order is most-constrained first and the order is the argument: LAYERED is a
@@ -635,8 +638,15 @@ export function foundedPoolKey(history) {
  * row; UNMARKED is the pure absence and must be tested before anything that assumes a blow.
  *
  * ⚠ `anchored` IS READ STRICTLY. An absent flag is not a `false`: it counts toward neither
- * the anchored nor the unanchored arm, so a record of unanswered rows reads UNMARKED, which
- * is the honest statement about a record that has not been asked the question.
+ * the anchored nor the unanchored arm.
+ *
+ * ⛔ AND UNMARKED MEANS WHAT THE CORPUS SAYS IT MEANS: "no severe event on the record" (the
+ * block's own STATE-KEY). It used to be the fall-through for EVERY record neither arm claimed,
+ * so a town whose History tab lists The Flood as `catastrophic` (with `anchored` unasked) read
+ * "No great blow stands on {settlement}'s record" an inch below that row: 15 of the 525 golden
+ * towns (owner order 2026-09-17, "fix the remaining contradictions"). A record carrying a
+ * `major` or `catastrophic` row that neither arm claims now draws NOTHING: UNMARKED would deny
+ * the row, and RECORDED-UNANCHORED asserts a `false` the record never wrote.
  * @param {unknown} events @returns {string|null}
  */
 export function eventRecordPoolKey(events) {
@@ -645,13 +655,16 @@ export function eventRecordPoolKey(events) {
     && Array.isArray(e.lastingEffects) && e.lastingEffects.length > 0);
   const recorded = rows.filter((e) => e.anchored === false
     && Array.isArray(e.lastingEffects) && e.lastingEffects.length > 0);
+  const severeOnRecord = rows.some((e) => typeof e.severity === 'string' && SEVERE_EVENT_SEVERITIES.includes(e.severity));
   const key = anchored.length > 1 ? 'LAYERED-ANCHORED'
     : anchored.length === 1
       ? (yearBand(Number(anchored[0].yearsAgo) || 0).id === 'older_than_bearers'
         ? 'ANCHORED-OLD' : 'ANCHORED-RECENT')
-      : recorded.length > 0 ? 'RECORDED-UNANCHORED' : 'UNMARKED';
-  return CORPUS['DS-GEN-16'].pools[key] ? key : null;
+      : recorded.length > 0 ? 'RECORDED-UNANCHORED'
+        : severeOnRecord ? null : 'UNMARKED';
+  return key && CORPUS['DS-GEN-16'].pools[key] ? key : null;
 }
+
 
 /**
  * The event DS-GEN-16's `{calamity}` names — the one the pool key was decided by, so the
@@ -768,7 +781,7 @@ export function notableConnectionPoolKey(prominentRelationship) {
  * because the mistake is the instructive part. A one-line grep for `flagDriven\s*[:=]`
  * found exactly ONE site — a READ in RelationshipsTab.jsx — so the lens looked like the
  * `economicBase: mixed` shape: a count that is always zero because nothing ever sets the
- * flag. It is not. `npcGenerator.js:1694` writes `flagDriven` on EVERY relationship row; the
+ * flag. It is not. `npcGenerator.js:1700` writes `flagDriven` on EVERY relationship row; the
  * grep missed it only because the value is a multi-line boolean expression and the key sits
  * alone on its line. What is true is narrower and is a FINDING rather than a defect: the
  * flag is `stressFlags.anyActive && archetype ∈ {six stress-economic effects}`, and across
@@ -1701,7 +1714,7 @@ export const GENERAL_STATE_PROSE_SILENT = Object.freeze({
  *   caller had no typed statement of what the desk needs handed to it. Each row names only
  *   the fields this desk actually reads off it — `intensity` for the pool cut, `parties` /
  *   `issue` / `stakes` for the slots — so a producer change to any of them lands here
- * @param {{seed?: string, audience?: string}} [options]
+ * @param {{seed?: string, audience?: string, tierNoun?: string|null}} [options]
  * @returns {typeof GENERAL_STATE_PROSE_SILENT}
  */
 export function generalStateProse(settlement, readings = {}, options = {}) {

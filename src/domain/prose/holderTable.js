@@ -174,13 +174,13 @@ export const HOLDER_SOURCES = Object.freeze({
   localProduction: Object.freeze({ kind: 'market', cite: 'src/generators/economy/economicState.js:822', read: true }),
   isEntrepot: Object.freeze({ kind: 'market', cite: 'src/generators/economy/economicState.js:878', read: true }),
   activeChains: Object.freeze({ kind: 'market', cite: 'src/generators/economy/economicState.js:821', read: true }),
-  exportPosture: Object.freeze({ kind: 'market', cite: 'src/domain/display/dossierViewModel.js:544', read: true }),
+  exportPosture: Object.freeze({ kind: 'market', cite: 'src/domain/display/dossierViewModel.js:565', read: true }),
   economicStrengths: Object.freeze({ kind: 'market', cite: 'src/generators/resourceGenerator.js:499', read: true }),
   strategicValue: Object.freeze({ kind: 'market', cite: 'src/generators/resourceGenerator.js:500', read: true }),
   exploitation: Object.freeze({ kind: 'market', cite: 'src/generators/resourceGenerator.js:417', read: true }),
 
   // ── the toll bar: the route, and what may and may not pass along it ──
-  tradeRouteAccess: Object.freeze({ kind: 'toll-bar', cite: 'src/generators/steps/resolveConfig.js:195', read: true }),
+  tradeRouteAccess: Object.freeze({ kind: 'toll-bar', cite: 'src/generators/steps/resolveConfig.js:198', read: true }),
   blockaded: Object.freeze({ kind: 'toll-bar', cite: 'src/domain/worldPulse/foodStockpile.js:417', read: true }),
   blockadeBypass: Object.freeze({ kind: 'toll-bar', cite: 'src/domain/worldPulse/foodStockpile.js:418', read: true }),
 
@@ -207,7 +207,7 @@ export const HOLDER_SOURCES = Object.freeze({
       + ' the token is mapped to the WATCH rather than to the muster on the ruling\'s own'
       + ' grain: the muster roll counts men under arms, and the watch keeps its own count.',
   }),
-  blackMarketCapture: Object.freeze({ kind: 'watch', cite: 'src/generators/safetyProfile.js:684', read: true }),
+  blackMarketCapture: Object.freeze({ kind: 'watch', cite: 'src/generators/safetyProfile.js:691', read: true }),
   criminalCaptureState: Object.freeze({ kind: 'watch', cite: 'src/generators/power/rulingStructure.js:797', read: true }),
   safetyProfile: Object.freeze({ kind: 'watch', cite: 'src/generators/economy/economicState.js:884', read: true }),
 
@@ -230,8 +230,8 @@ export const HOLDER_SOURCES = Object.freeze({
   yearsAgo: Object.freeze({ kind: 'elders', cite: 'src/generators/historyGenerator.js:289', read: true }),
 
   // ── the road: the look of the country, which anyone travelling it can see ──
-  terrainType: Object.freeze({ kind: 'road', cite: 'src/generators/steps/resolveConfig.js:203', read: true }),
-  monsterThreat: Object.freeze({ kind: 'road', cite: 'src/generators/steps/resolveConfig.js:198', read: true }),
+  terrainType: Object.freeze({ kind: 'road', cite: 'src/generators/steps/resolveConfig.js:206', read: true }),
+  monsterThreat: Object.freeze({ kind: 'road', cite: 'src/generators/steps/resolveConfig.js:201', read: true }),
 
   // ── the office itself: the record's own audit of the record ──
   structuralViolations: Object.freeze({ kind: 'office', cite: 'src/generators/steps/assembleSettlement.js:119', read: true }),
@@ -776,7 +776,7 @@ export function sourceOfForTown(row, settlement, world = {}) {
 
 /**
  * THE CENSUS OF THE TABLE ITSELF — what each kind holds, for a receipt to print beside
- * SITTING §Q.1's own enumeration. The shape follows `columnCensus` (`institutionTable.js:582`)
+ * SITTING §Q.1's own enumeration. The shape follows `columnCensus` (`institutionTable.js:596`)
  * so the two registers read the same way.
  * @returns {Array<{kind: string, fields: number, services: number, dutyNamed: number,
  *   rosterBacked: boolean, tokens: string}>}

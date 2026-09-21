@@ -19,9 +19,12 @@ import { navigate } from '../hooks/useRoute.js';
 import { saves as savesService } from '../lib/saves.js';
 import { t } from '../copy/index.js';
 import Button from './primitives/Button.jsx';
+import DialogClose from './primitives/DialogClose.jsx';
 import { useDialogFocusTrap } from './primitives/useDialogFocusTrap.js';
 import { GOLD, INK, BODY, MUTED, BORDER, CARD, PARCH, sans, FS, SP } from './theme.js';
 import { captureSavedSettlementsHydration } from '../store/savedSettlementsHydration.js';
+import useIsMobile from '../hooks/useIsMobile.js';
+import { chromeFontSize } from '../design/proseScale.js';
 
 // Routes surfaced as jump targets: the primary nav plus a few deep pages a DM
 // reaches often. Elevated-only (admin) is withheld; navigation's own guards still
@@ -75,6 +78,7 @@ function buildItems(savedSettlements) {
 }
 
 export default function CommandPalette({ onClose }) {
+  const mobile = useIsMobile();
   const dialogRef = useDialogFocusTrap(true, onClose);
   const savedSettlements = useStore((s) => s.savedSettlements);
   const savedSettlementsLoaded = useStore((s) => s.savedSettlementsLoaded);
@@ -165,7 +169,11 @@ export default function CommandPalette({ onClose }) {
           display: 'flex', flexDirection: 'column', maxHeight: '70vh',
         }}
       >
-        <div style={{ padding: SP.sm, background: PARCH, borderBottom: `1px solid ${BORDER}` }}>
+        {/* THE HOUSE EXIT (owner order, ODQ §934.31). The palette had no visible way
+            out at all: Escape, a backdrop click, or nothing. Both of those are
+            invisible affordances, and on a phone the backdrop is most of what a reader
+            can see but not what they reach for. The × now sits beside the field. */}
+        <div style={{ padding: SP.sm, background: PARCH, borderBottom: `1px solid ${BORDER}`, display: 'flex', alignItems: 'center', gap: SP.sm }}>
           <input
             value={query}
             /* eslint-disable-next-line jsx-a11y/no-autofocus -- a command palette exists to receive typing the instant it opens. */
@@ -185,6 +193,14 @@ export default function CommandPalette({ onClose }) {
               fontFamily: sans, fontSize: FS.md, color: INK, outline: 'none',
             }}
           />
+          {/* ⛔ THE DOOR IS OUT OF THE TAB ORDER, AND BOTH HALVES OF THAT ARE REQUIRED.
+              §934.31 gives every dialog a labelled close control and the dialog-exit walker
+              admits no exemption, so the × stays. SB5 gives this combobox exactly ONE tab
+              stop — the input — and a second sequential stop inside the overlay breaks the
+              roving model the options depend on. `tabIndex={-1}` keeps both: the × is a real
+              labelled button for a pointer and for a screen reader, and the keyboard's door
+              out of a combobox is Escape, which `useDialogFocusTrap` already answers. */}
+          <DialogClose onClose={onClose} subject="the command palette" tabIndex={-1} />
         </div>
 
         {results.length > 0 ? (
@@ -213,7 +229,7 @@ export default function CommandPalette({ onClose }) {
                 <span style={{ flex: 1, minWidth: 0, color: INK, fontSize: FS.sm, fontWeight: 700, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
                   {it.label}
                 </span>
-                <span style={{ color: it.page ? GOLD : MUTED, fontSize: FS.xxs, fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.04em', whiteSpace: 'nowrap' }}>
+                <span style={{ color: it.page ? GOLD : MUTED, fontSize: chromeFontSize(FS.xxs, mobile), fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.04em', whiteSpace: 'nowrap' }}>
                   {it.page ? t('palette.pageHint') : it.hint}
                 </span>
               </Button>

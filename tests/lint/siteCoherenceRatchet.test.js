@@ -66,7 +66,7 @@ const SITE_GENESIS_REL = 'src/domain/townMap/siteGenesis.js';
 
 /** The estate's heavy-suite local budget (determinismBanCoverage.test.js:169), which is
  *  also CR-SCW0-5's ruled corpus budget. A LOCAL timeout, never a raise of the global
- *  `testTimeout` at vite.config.js:801, and never an assertion on wall clock. */
+ *  `testTimeout` at vite.config.js:1138, and never an assertion on wall clock. */
 const CORPUS_BUDGET_MS = 120_000;
 
 // ── THE CORPUS, FROZEN (SITE_COHERENCE_PLAN.md:56). 210 + 252 = 462. ────────────────────
@@ -453,7 +453,7 @@ describe('site-coherence contradiction ratchet (Wave 0 — inventory freezing, n
       const out = generateSite({ ...base, exports: exportsValue });
       expect(typeof out.kind, `generateSite threw or returned a non-string kind for ${JSON.stringify(exportsValue)}`).toBe('string');
     }
-    // `terrainOverride: 'auto'` is a UI sentinel, not a terrain (resolveConfig.js:107), and the
+    // `terrainOverride: 'auto'` is a UI sentinel, not a terrain (resolveConfig.js:207), and the
     // corpus excludes it BY CONSTRUCTION. Asserted, because a silent 'auto' row would make the
     // terrain leg of every key meaningless.
     const overrides = corpusConfigs().map(({ cfg }) => cfg.terrainOverride);

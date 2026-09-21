@@ -1094,6 +1094,15 @@ function advanceLitRoads(args) {
     // Emit when the roads full roster differs from the update roster — either a whereabouts
     // changed OR the update dropped an off-stage NPC roads must keep (this full-roster update
     // is the last word, so a hostage is never lost even under a naive save merge).
+    // ⭐ RE-POINTED BY EM-B1k (2026-09-20). That last clause was, for a time, the estate's ONLY
+    // defence against a filtered WRITE base: the pulse built the settlement it wrote from the
+    // OFF-STAGE participation view, so a hostage survived a committed tick only where this
+    // lane happened to be lit and re-emit the full roster. EM-B1k cured the write base itself
+    // (pulseKernel.js's buildSettlementMap and its localSettlements seed) and EM-B1k2 cured the
+    // irreversible READS, so the by-id merge below is now REDUNDANT-BUT-SELF-CONSISTENT rather
+    // than load-bearing. It is deliberately KEPT — it costs nothing, it is correct, and roads
+    // is doubly gated (roadsActive AND a spatial digest) so it was never a general defence.
+    // ⛔ Do not read this comment as evidence that participation filtering is handled here.
     const curNpcs = Array.isArray(asObject(freshSettlement(sid)).npcs) ? /** @type {Array<Record<string, unknown>>} */ (asObject(freshSettlement(sid)).npcs) : [];
     let diff = nextNpcs.length !== curNpcs.length;
     if (!diff) for (let i = 0; i < nextNpcs.length; i += 1) { if (nextNpcs[i] !== curNpcs[i]) { diff = true; break; } }

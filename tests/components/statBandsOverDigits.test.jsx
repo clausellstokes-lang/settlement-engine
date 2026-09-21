@@ -25,17 +25,29 @@
  * structural half carrying the manifest entry).
  */
 import React from 'react';
+import { readFileSync } from 'node:fs';
+import { resolve } from 'node:path';
 import { afterEach, beforeAll, describe, expect, test } from 'vitest';
-import { cleanup, fireEvent, render, screen, within } from '@testing-library/react';
+import { cleanup, fireEvent, render, screen } from '@testing-library/react';
 
 import { generateSettlementPipeline } from '../../src/generators/generateSettlementPipeline.js';
 import { scoreBand, scoreColor } from '../../src/domain/display/defenseScoreBands.js';
+import { deriveSupportingCapabilities } from '../../src/domain/display/defenseDisplay.js';
+import { statusCase } from '../../src/components/new/labelLadder.js';
 import { OverviewTab } from '../../src/components/new/tabs/OverviewTab.jsx';
-import { DefenseTab } from '../../src/components/new/tabs/DefenseTab.jsx';
+import { DefenseTab, STATUS_IS_THE_GRADE } from '../../src/components/new/tabs/DefenseTab.jsx';
 import SummaryTab from '../../src/components/new/SummaryTab.jsx';
+import { PowerTab } from '../../src/components/new/tabs/PowerTab.jsx';
+import { PowerSuccessionSection } from '../../src/components/dossier/EngineSections.jsx';
+import { expectAbsentWithAnchor } from '../helpers/anchoredNegatives.js';
 
+// TWO SPELLINGS OF ONE LADDER, and the difference is the point. BANDS is the vocabulary
+// `defenseScoreBands.js` FREEZES ("the frozen four; never extend") and the PDF prints;
+// BAND_RE is what the dossier RENDERS, which since the label ladder landed is rung 3's
+// sentence case (components/new/labelLadder.js `statusCase`). The domain arm below reads
+// the first, every render arm reads the second.
 const BANDS = ['STRONG', 'ADEQUATE', 'WEAK', 'CRITICAL'];
-const BAND_RE = /^(STRONG|ADEQUATE|WEAK|CRITICAL)$/;
+const BAND_RE = /^(Strong|Adequate|Weak|Critical)$/;
 
 /** The five Systems Health rows and the score key each one reads. */
 const SCORE_ROWS = [
@@ -53,6 +65,25 @@ const CASES = [
   ['city', { settType: 'city', culture: 'mediterranean', terrain: 'coastal', tradeRouteAccess: 'port' }, 'bands-city'],
   ['metropolis', { settType: 'metropolis', culture: 'mediterranean', terrain: 'coastal', tradeRouteAccess: 'port' }, 'bands-metro'],
 ];
+
+/**
+ * THE CORPUS the "None beside a bar" arm walks: 102 settlements, SEVENTEEN PER TIER, each
+ * with its own seed. The tier is what moves the defect — `defenseGenerator` zeroes
+ * `scores.magical` for a thorp or hamlet with no magic presence and lets the world slider
+ * alone drive it from village up — so the split is per tier rather than a flat slice, which
+ * would have run out before it reached a metropolis. The culture and terrain cycle underneath
+ * so the institution rosters (and with them `hasMagicInst`) differ across the seventeen.
+ * @type {Array<[object, string]>}
+ */
+const CORPUS = ['thorp', 'hamlet', 'village', 'town', 'city', 'metropolis'].flatMap(
+  (settType, t) => ['germanic', 'latin', 'celtic', 'arabic', 'norse', 'slavic', 'east_asian',
+    'mesoamerican', 'south_asian', 'steppe', 'greek']
+    .flatMap((culture, c) => ['forest', 'grassland', 'coastal'].map((terrain, x) => [
+      { settType, culture, terrain, tradeRouteAccess: ['road', 'port', 'isolated'][x] },
+      `corpus-${t}-${c}-${x}`,
+    ]))
+    .slice(0, 17),
+);
 
 /** @type {Array<[string, any]>} */
 const settlements = [];
@@ -109,11 +140,19 @@ describe('OverviewTab Systems Health — bands, not digits', () => {
       const row = labelEl.parentElement;
       const value = row.lastElementChild.textContent;
 
+      // ONE NAME, ONE FACT, AND NO EXCEPTION (review 10). Magical Capability used to be
+      // skipped here, because it printed the Defense tab's PRESENCE word instead of its own
+      // grade. The two rows now carry two names for their two facts, so every row in this
+      // list bands its own score and this loop judges all five.
+
       // The band renders...
       expect(value).toMatch(BAND_RE);
       // ...and it is the band of THIS row's score, not a neighbour's.
       const n = Math.min(100, Math.max(0, scores[key] || 0));
-      expect(value).toBe(scoreBand(n));
+      // DERIVED, not retyped: rung 3 re-cases the frozen vocabulary at the render site
+      // (components/new/labelLadder.js), and the pin reads the same two functions the
+      // component does, so the band still cannot drift to a neighbour's score.
+      expect(value).toBe(statusCase(scoreBand(n)));
       // ...and the retired digit is gone from the whole row.
       expect(row.textContent).toBe(`${label}${value}`);
       expect(row.textContent).not.toMatch(/\d/);
@@ -141,7 +180,7 @@ describe('DefenseTab — the raw safetyRatio display is retired', () => {
     expect(text).not.toMatch(/ratio\s*[\d.]+/i);
     expect(text).not.toContain('×');
     // The typed reads that carry the same fact are still there.
-    expect(text).toMatch(/Internal Security · First Survey/);
+    expect(text).toMatch(/Internal security · first survey/);
     expect(text).toMatch(/(Strong|Adequate|Weak) Public Order|Critical: Order Failing/);
   });
 
@@ -153,23 +192,391 @@ describe('DefenseTab — the raw safetyRatio display is retired', () => {
 });
 
 describe('DefenseTab Supporting Capabilities — bands, not digits', () => {
-  test.each(CASES.map(([n]) => n))('%s: every scored capability row reads as a band word', (name) => {
+  /** Economic Backing's own status ladder, as `deriveSupportingCapabilities` spells it. */
+  const ECON_STATUS_LADDER = ['Well-funded', 'Adequate', 'Underfunded', 'Critical'];
+
+  /** A fixture town with some of its defence scores moved and nothing else touched. */
+  const withScores = (s, moved) => ({
+    ...s, defenseProfile: { ...s.defenseProfile, scores: { ...s.defenseProfile.scores, ...moved } },
+  });
+
+  test.each(CASES.map(([n]) => n))('%s: every scored capability row says its grade exactly once', (name) => {
     const settlement = settlements.find(([n]) => n === name)[1];
     render(<DefenseTab settlement={settlement} />);
     fireEvent.click(screen.getByRole('button', { name: /Supporting Capabilities/ }));
 
-    // Both scored rows (Economic Backing, Magical Capability) are present and
-    // banded; the unscored ones (no bar) carry no band and are untouched.
-    for (const label of ['Economic Backing', 'Magical Capability']) {
+    // Both scored rows (Economic Backing, Arcane Support) are present; the unscored
+    // ones (no bar) carry no band and are untouched.
+    const caps = deriveSupportingCapabilities(settlement);
+    for (const label of ['Economic Backing', 'Arcane Support']) {
       const labelEl = screen.getByText(label);
       const row = labelEl.closest('div').parentElement;
-      const bandEls = within(row).queryAllByText(BAND_RE);
-      expect(bandEls.length, `${label} must show exactly one band word`).toBe(1);
+      const cap = caps.find((c) => c.label === label);
+      expect(cap, `${label} must be derived`).toBeTruthy();
+
+      // ADDRESSED, NOT DISAMBIGUATED BY CASE. The band used to be the row's only word in
+      // capitals, so matching the vocabulary found it and nothing else. Since rung 3 reads
+      // in sentence case (components/new/labelLadder.js) the band and the row's own STATUS
+      // word can be the SAME string — Economic Backing's status ladder is
+      // Well-funded/Adequate/Underfunded/Critical and it overlaps the band's Adequate and
+      // Critical — so both elements are named and the rule is checked between them.
+      const bands = row.querySelectorAll('[data-sf-cap-band]');
+      const statusEl = row.querySelector('[data-sf-cap-status]');
+      expect(bands.length, `${label} must never render a second band`).toBeLessThanOrEqual(1);
+
+      // THE GRADE HAS THREE PLACES IT CAN LAND — the status pill, the band beside the bar,
+      // and the opening word of the note — and the rule is that it lands in exactly one of
+      // them. The pill stands down when the PROSE opens on the grade, because a sentence
+      // that says the word and then says what it means is the better carrier.
+      const opensOnStatus = new RegExp(`^${cap.status.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}\\b`, 'i')
+        .test(String(cap.note || '').trim());
+      expect(Boolean(statusEl), `${label}: the pill must stand down exactly when the prose opens on the grade`)
+        .toBe(!opensOnStatus);
+
+      const said = [statusEl?.textContent, bands[0]?.textContent, opensOnStatus ? cap.status : null].filter(Boolean);
+      expect(said.length, `${label} says its grade more than once: ${said.join(' / ')}`).toBe(new Set(said).size);
+
+      // A PRESENCE READ HAS NO MAGNITUDE, so it has no bar and no band: `score: null` is
+      // how this list spells "there is nothing here to grade" (Legal Infrastructure,
+      // Medical Readiness, Logistics & Supply — and, since the magic row stopped borrowing
+      // the engine's magical score, Arcane Support when the town has no arcane
+      // institution). Such a row must still say what IS there.
+      if (cap.score === null) {
+        expect(bands.length, `${label} is a presence read and must carry no band`).toBe(0);
+        expect(said.length, `${label} must still say what is there`).toBeGreaterThan(0);
+        continue;
+      }
+
+      // ONE NUMBER, ONE VERDICT. A row whose status IS the grade of its score takes no band,
+      // because the band would grade the same number a second time in a second vocabulary,
+      // and it says its own status exactly once. A presence read beside a bar keeps the band,
+      // because there the band is the only word that grades the bar.
+      if (STATUS_IS_THE_GRADE.includes(label)) {
+        expect(bands.length, `${label}'s status already grades this bar, so a band grades it twice`).toBe(0);
+        expect(said, `${label} must say its own grade exactly once`).toEqual([cap.status]);
+      } else {
+        const implied = statusCase(scoreBand(Math.min(100, Math.max(0, cap.score || 0))));
+        expect(bands.length, `${label} is graded by its band alone, so the band must render`).toBe(1);
+        expect(bands[0].textContent, `${label}'s band must read a band word`).toMatch(BAND_RE);
+        expect(bands[0].textContent, `${label}'s band must be THIS row's score`).toBe(implied);
+      }
     }
     // The retired digits: no bare 1-3 digit run survives in the capability rows.
     const bars = screen.getByText('Economic Backing').closest('div').parentElement;
     expect(bars.textContent).not.toMatch(/\b\d{1,3}\b/);
   });
+
+  /**
+   * ONE NUMBER, ONE VERDICT, AT EVERY THRESHOLD OF BOTH LADDERS — deterministically, rather
+   * than through whatever the four fixtures happen to roll (their econScores never land on
+   * the cut points at all).
+   *
+   * Economic Backing's status and the shared band grade the SAME econScore in two
+   * vocabularies. The first cure folded the band only where the two WORDS were equal, and
+   * this arm is what that missed: the row went on printing "Underfunded" beside "Weak" and
+   * "Well-funded" beside "Strong" — and, while the two ladders still cut at different scores
+   * (status 65/40/25, band 65/40/20), "Critical" beside "Weak" at 20-24. ODQ §934.14 closed
+   * that last gap at the source by giving both ladders one set of cut points; this arm
+   * remains the one that proves the ROW says its grade once, whatever the cut points are.
+   * Each score below is a threshold of the ladder or sits between two of them.
+   *
+   * CASE-BLIND ON PURPOSE: case is what hid the first form of this defect (a capitalised band
+   * beside a sentence-case status read as two different marks), so a grade word counts however
+   * it is cased.
+   */
+  test('Economic Backing says ONE grade at every score, in its own vocabulary', () => {
+    const base = settlements.find(([n]) => n === 'city')[1];
+    const ladderWords = [...ECON_STATUS_LADDER, ...BANDS.map((w) => statusCase(w))];
+    const GRADE_RE = new RegExp(`\\b(?:${ladderWords.join('|')})\\b`, 'gi');
+    const reached = new Set();
+    for (const economic of [0, 19, 20, 22, 24, 25, 30, 39, 40, 50, 64, 65, 80, 100]) {
+      const settlement = withScores(base, { economic });
+      const cap = deriveSupportingCapabilities(settlement).find((c) => c.label === 'Economic Backing');
+      render(<DefenseTab settlement={settlement} />);
+      fireEvent.click(screen.getByRole('button', { name: /Supporting Capabilities/ }));
+      const row = screen.getByText('Economic Backing').closest('div').parentElement;
+      const leaves = [...row.querySelectorAll('*')]
+        .filter((el) => el.children.length === 0 && el.textContent.trim());
+      const graded = leaves.flatMap((el) => el.textContent.match(GRADE_RE) || []).map((w) => w.toLowerCase());
+      expect(graded, `econScore ${economic}: the row reads "${leaves.map((el) => el.textContent.trim()).join(' | ')}"`)
+        .toEqual([cap.status.toLowerCase()]);
+      reached.add(cap.status);
+      cleanup();
+    }
+    // NON-VACUITY: the sweep really crossed every rung of the status ladder.
+    expect([...reached].sort()).toEqual([...ECON_STATUS_LADDER].sort());
+  });
+
+  /**
+   * ⛔⛔ THE TWO LADDERS ARE ONE LADDER (ODQ §934.14) — PINNED OVER THE WHOLE RANGE, not at
+   * the cut points, because a cut point is exactly where a sampled arm agrees by luck.
+   *
+   * `deriveSupportingCapabilities` grades `scores.economic` into this row's four words and
+   * `scoreBand` grades the SAME number into the four readiness words. They are one ladder in
+   * two vocabularies, so their intervals must COINCIDE — and they did not: the status ladder
+   * cut at 65/40/25 against the band's 65/40/20, which put 20-24 into "Critical" on this row
+   * and "Weak" on the Threat Assessment and the Overview, one score carrying two verdicts.
+   * The cure was structural (both ladders now read `SCORE_BAND_CUTS`), so this arm's job is
+   * to hold the CORRESPONDENCE rather than to re-match digits: if a future move splits them
+   * again — by restoring a literal, by re-cutting one ladder, by adding a rung — the integer
+   * where they part is named here.
+   *
+   * ⚠ IT IS A DOMAIN ARM, NOT A RENDER ARM, deliberately. DefenseTab drops this row's band
+   * (`STATUS_IS_THE_GRADE`), so the contradiction is INVISIBLE on this tab and a rendered
+   * assertion could never see it. The reader who meets it is on the Overview or in the PDF,
+   * reading the band word for the same score — which is the producer, and is what this reads.
+   */
+  test('the status ladder and the band ladder cut at the same scores, at every integer 0-100', () => {
+    const base = settlements.find(([n]) => n === 'city')[1];
+    /** The one correspondence: this row's word ⇄ the shared ladder's word. */
+    const TWIN = Object.freeze({
+      'Well-funded': 'STRONG', Adequate: 'ADEQUATE', Underfunded: 'WEAK', Critical: 'CRITICAL',
+    });
+    const reached = new Set();
+    /** @type {Map<string, Set<string>>} band word → every note the row printed inside it. */
+    const notesPerBand = new Map();
+
+    for (let economic = 0; economic <= 100; economic += 1) {
+      const cap = deriveSupportingCapabilities(withScores(base, { economic }))
+        .find((c) => c.label === 'Economic Backing');
+      const band = scoreBand(economic);
+      expect(TWIN[cap.status], `econScore ${economic}: status "${cap.status}" is not a rung of this row's ladder`)
+        .toBeTruthy();
+      expect(TWIN[cap.status], `econScore ${economic}: the row says "${cap.status}" where the shared ladder says "${band}"`)
+        .toBe(band);
+      reached.add(cap.status);
+      if (!notesPerBand.has(band)) notesPerBand.set(band, new Set());
+      notesPerBand.get(band).add(cap.note);
+    }
+
+    // THE NOTE FOLLOWS THE SAME CUT. It is a fourth place the grade lands (the status pill
+    // stands down when the note opens on the grade), so a note that moved at a different
+    // score would re-open the defect one line below the one this arm just closed.
+    for (const [band, notes] of notesPerBand) {
+      expect([...notes], `the note changes inside the ${band} interval, so it cuts elsewhere than the ladder`)
+        .toHaveLength(1);
+    }
+
+    // NON-VACUITY, both halves: every rung was really crossed, and every band really met.
+    expect([...reached].sort()).toEqual([...ECON_STATUS_LADDER].sort());
+    expect([...notesPerBand.keys()].sort()).toEqual([...BANDS].sort());
+  });
+
+  /**
+   * THE CLASSIFICATION IS TOTAL. `STATUS_IS_THE_GRADE` is a label list in DefenseTab.jsx, and
+   * a label list goes stale silently: a renamed row, a new scored row, or a presence read that
+   * becomes a grade. So it is judged here by behaviour. Every numeric score of each fixture town
+   * is moved across the ladder, and a scored row whose STATUS moves with it is a grade. Those
+   * rows, and only those, may drop the band.
+   */
+  test('the rows that take no band are exactly the rows whose status moves with their score', () => {
+    const moving = new Set();
+    const still = new Set();
+    for (const [, base] of settlements) {
+      /** @type {Map<string, Set<string>>} */
+      const statuses = new Map();
+      for (const v of [0, 22, 30, 50, 70, 100]) {
+        const every = Object.fromEntries(Object.entries(base.defenseProfile.scores)
+          .filter(([, n]) => typeof n === 'number').map(([k]) => [k, v]));
+        for (const cap of deriveSupportingCapabilities(withScores(base, every))) {
+          if (cap.score === null) continue;
+          if (!statuses.has(cap.label)) statuses.set(cap.label, new Set());
+          statuses.get(cap.label).add(cap.status);
+        }
+      }
+      for (const [label, seen] of statuses) (seen.size > 1 ? moving : still).add(label);
+    }
+    // NON-VACUITY, both sides: a presence read and a grade were both judged.
+    expect(still.size, 'no scored presence read in the fixtures, so only one side was judged').toBeGreaterThan(0);
+    expect([...moving].sort(), 'a row that grades its own score still takes a band, or a presence read lost one')
+      .toEqual([...STATUS_IS_THE_GRADE].sort());
+    // …and no label lands on both sides, one town grading what another only detects.
+    expect([...still].filter((label) => moving.has(label))).toEqual([]);
+  });
+});
+
+/**
+ * ── TWO NAMES, TWO FACTS (review 10, 2026-09-18) ────────────────────────────────────
+ *
+ * The arm this replaces asserted that the Overview row and the Defense capability row "say
+ * the same word", which they did — because the Overview row had been made to PRINT the
+ * Defense row's word. The claim was therefore vacuous by construction: it compared a value
+ * against the derivation it was copied from, and it stayed green while the page printed
+ * "None" in amber beside a half-full bar on 27 of 144 large settlements.
+ *
+ * The two rows read two different facts. `scores.magical` is the WORLD MAGIC SLIDER over a
+ * wide presence (healer, monastery, cathedral, druid, divine, healing all count), so a town
+ * with no arcane institution can score 49; `compound.inst.hasMagicInst` is the narrow arcane
+ * roster. So they carry two names now, and the two arms below are what that costs:
+ * a UNIQUENESS pin, so neither name can drift back onto the other tab, and a CORPUS pin on
+ * the defect itself, which no naming rule can guarantee on its own.
+ */
+describe('Two names, two facts — the Overview score and the Defense presence read', () => {
+  /** Every label-ish leaf word rendered in a container, for a membership question. */
+  const labelsIn = (container) => [...container.querySelectorAll('span')]
+    .filter((el) => el.children.length === 0)
+    .map((el) => el.textContent.trim());
+
+  test('the two label vocabularies are DISJOINT, so no name can answer two questions', () => {
+    // Derived from the shipped producers, not retyped: the Systems Health row list this
+    // file already drives, and the Defense tab's own capability list for a real town.
+    const systemsHealth = [...SCORE_ROWS.map(([label]) => label), 'Food Security'];
+    const capabilities = deriveSupportingCapabilities(settlements.find(([n]) => n === 'city')[1])
+      .map((c) => c.label);
+    expect(capabilities.length, 'the capability list is empty, so the overlap check is vacuous')
+      .toBeGreaterThan(3);
+    expect(
+      systemsHealth.filter((label) => capabilities.includes(label)),
+      'a label appears in BOTH lists — one name now answers two different questions',
+    ).toEqual([]);
+    // …and both names really are in play, so the disjointness is not the absence of one side.
+    expect(systemsHealth).toContain('Magical Capability');
+    expect(capabilities).toContain('Arcane Support');
+  });
+
+  test.each(CASES.map(([n]) => n))('%s: each magic name renders on exactly ONE tab', (name) => {
+    const settlement = settlements.find(([n]) => n === name)[1];
+
+    const { container: overview } = render(<OverviewTab settlement={settlement} />);
+    const overviewLabels = labelsIn(overview);
+    // 'Military Might' is the sibling ScoreRow: it proves the Systems Health block rendered,
+    // so the exclusion below is a name that is not here rather than a section that is not.
+    expectAbsentWithAnchor(overviewLabels, 'Arcane Support', 'Military Might',
+      `${name}: the Defense tab's presence-read name on the Overview`);
+    expect(overviewLabels, `${name}: the Overview's own magic row must render`)
+      .toContain('Magical Capability');
+    cleanup();
+
+    const { container: defense } = render(<DefenseTab settlement={settlement} />);
+    fireEvent.click(screen.getByRole('button', { name: /Supporting Capabilities/ }));
+    const defenseLabels = labelsIn(defense);
+    // 'Economic Backing' is the sibling capability row: it proves the fold is open and the
+    // list rendered, which is exactly the drift that would make a bare exclusion vacuous.
+    expectAbsentWithAnchor(defenseLabels, 'Magical Capability', 'Economic Backing',
+      `${name}: the Overview's score-row name on the Defense tab`);
+    expect(defenseLabels, `${name}: the Defense tab's presence row must render`)
+      .toContain('Arcane Support');
+  });
+});
+
+/**
+ * ── THE DEFECT ITSELF, OVER A CORPUS ────────────────────────────────────────────────
+ *
+ * A naming rule cannot promise this. What review 10 actually measured is a RENDERED
+ * CONTRADICTION: the word "None" — an absence — printed beside a bar with width, which is a
+ * magnitude. Whatever names the rows carry, that pairing is always a lie, so it is pinned
+ * as itself, over a corpus wide enough that the tiers and the magic slider both move.
+ *
+ * ⛔ THE WALK IS BOUNDED AT TWO ANCESTORS, and the bound is the whole reason the probe is
+ * honest. The two shapes put the bar at different distances — the Overview's ScoreRow holds
+ * its word in the header `div` and its bar in the NEXT sibling (two levels up from the
+ * word), while the Defense capability row holds the word and the bar in the SAME header
+ * (one level). Three levels would reach the Overview's score GRID and the Defense tab's caps
+ * COLUMN, where every OTHER row's bar lives — and the probe would then convict a bar-less
+ * "None" row of a neighbour's magnitude. Two levels is the largest reach that cannot leave
+ * the row, and it covers both shapes.
+ */
+describe('No rendered row says "None" beside a bar that has width', () => {
+  /** A bar, as BOTH renderers spell one: a filled inner div sized by inline percent. */
+  const barsIn = (el) => [...el.querySelectorAll('div')].filter(
+    (d) => d.style?.height === '100%' && /^\d+(\.\d+)?%$/.test(d.style?.width || ''),
+  );
+
+  /**
+   * Every "None" in this container that sits beside a bar with width, as
+   * `<row text> :: <bar width>`. Empty is the passing answer.
+   */
+  function nonesBesideABar(container) {
+    const offenders = [];
+    for (const el of container.querySelectorAll('span, div')) {
+      if (el.children.length !== 0) continue;
+      if (el.textContent.trim() !== 'None') continue;
+      let scope = el.parentElement;
+      for (let up = 0; up < 2 && scope; up += 1, scope = scope.parentElement) {
+        const wide = barsIn(scope).filter((b) => parseFloat(b.style.width) > 0);
+        if (barsIn(scope).length === 0) continue; // no bar at this reach — widen once
+        if (wide.length > 0) offenders.push(`${scope.textContent.trim()} :: ${wide[0].style.width}`);
+        break; // the NEAREST reach that holds a bar is this word's row; never leave it
+      }
+    }
+    return offenders;
+  }
+
+  test('THE PROBE IS LIVE: it convicts the defect as review 10 found it on the page', () => {
+    // The positive control, in the exact markup ScoreRow produced when it took a status
+    // word: an absence beside a two-thirds bar. A probe that cannot see this proves nothing
+    // about the corpus below, however green that corpus runs.
+    const { container } = render(
+      <div style={{ marginBottom: 8 }}>
+        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'baseline' }}>
+          <span>Magical Capability</span><span>None</span>
+        </div>
+        <div style={{ height: 6, overflow: 'hidden' }}>
+          <div style={{ height: '100%', width: '66%' }} />
+        </div>
+      </div>,
+    );
+    expect(nonesBesideABar(container)).toEqual(['Magical CapabilityNone :: 66%']);
+    cleanup();
+    // …and a bar-less "None" row beside a SIBLING that has one is NOT convicted, which is
+    // the false positive the two-level bound exists to refuse.
+    const { container: sibling } = render(
+      <div>
+        <div style={{ marginBottom: 8 }}>
+          <div style={{ display: 'flex' }}><span>Legal Infrastructure</span><span>None</span></div>
+        </div>
+        <div style={{ marginBottom: 8 }}>
+          <div style={{ display: 'flex' }}><span>Economic Backing</span><span>Adequate</span></div>
+          <div style={{ height: 6 }}><div style={{ height: '100%', width: '71%' }} /></div>
+        </div>
+      </div>,
+    );
+    expect(nonesBesideABar(sibling)).toEqual([]);
+  });
+
+  test('over a generated corpus, neither tab ever pairs the word with a width', () => {
+    const offenders = [];
+    let nones = 0;
+    let barred = 0;
+    for (const [config, seed] of CORPUS) {
+      const settlement = generateSettlementPipeline(config, null, { seed, customContent: {} });
+      const { container: overview } = render(<OverviewTab settlement={settlement} />);
+      nones += [...overview.querySelectorAll('span')].filter((el) => el.textContent.trim() === 'None').length;
+      barred += barsIn(overview).filter((b) => parseFloat(b.style.width) > 0).length;
+      for (const hit of nonesBesideABar(overview)) offenders.push(`${seed} overview :: ${hit}`);
+      cleanup();
+
+      const { container: defense } = render(<DefenseTab settlement={settlement} />);
+      fireEvent.click(screen.getByRole('button', { name: /Supporting Capabilities/ }));
+      nones += [...defense.querySelectorAll('span')].filter((el) => el.textContent.trim() === 'None').length;
+      barred += barsIn(defense).filter((b) => parseFloat(b.style.width) > 0).length;
+      for (const hit of nonesBesideABar(defense)) offenders.push(`${seed} defense :: ${hit}`);
+      cleanup();
+    }
+    // NON-VACUITY, both halves: the corpus really printed the word, and really drew bars
+    // with width. Without these the arm passes on a page-set that rendered nothing at all.
+    expect(nones, 'no settlement printed "None" anywhere — the corpus cannot show the defect')
+      .toBeGreaterThan(0);
+    expect(barred, 'no settlement drew a bar with width — the pairing is unreachable')
+      .toBeGreaterThan(0);
+    expect(offenders, `an absence is printed beside a magnitude on ${offenders.length} row(s)`)
+      .toEqual([]);
+    // ⛔⛔ AN EXPLICIT PER-TEST BUDGET, CARRYING ITS OWN MEASUREMENT (the ratchet's law: a
+    // budget expiry is a COST FAILURE, never debt). This arm generates 102 settlements and
+    // renders TWO tabs for each, opening the Defense fold every time. MEASURED: 15.2 s for
+    // the whole file on a quiet box, and 46.9 s for this arm alone on the consist's full
+    // check at load 123 on 8 cores — over the 20 s default, which is what reddened.
+    //
+    // THE CORPUS IS NOT CUT TO FIT, and that is the trade being made rather than a default
+    // left alone. The chair's ruling is ≥ 100 settlements ACROSS TIERS, because the defect
+    // needs both the tier gate (`defenseGenerator` zeroes `scores.magical` for a thorp or
+    // hamlet with no presence) and the world slider to move before it can appear; 17 per
+    // tier is the smallest split that meets it with every tier represented. Shrinking the
+    // corpus would buy seconds by weakening the only arm that measures the defect on real
+    // generated worlds, so the cost is declared here instead. The budget is ~2x the worst
+    // figure measured, which is the estate's own margin (worldGenerationClockSeam carries
+    // 120000 and 180000 on the same reasoning).
+  }, 90000);
 });
 
 describe('DefenseTab Threat Assessment — one score, one word, both tabs', () => {
@@ -204,6 +611,67 @@ describe('SummaryTab defence tile — the averaged raw score is retired', () => 
 
     const s = settlement.defenseProfile.scores;
     const avg = Math.round((s.military + s.monster + s.internal + s.economic + s.magical) / 5);
-    expect(text).toContain(`Systems average: ${scoreBand(avg)}`);
+    // THROUGH THE LADDER, NOT A LITERAL. `scoreBand` still returns the frozen capitals —
+    // that is the vocabulary, and re-casing it at the SOURCE would move the public
+    // projection with it. The tile re-cases at the RENDER rung, so the pin reads the same
+    // two functions the tile does and cannot drift from either one.
+    expect(text).toContain(`Systems average: ${statusCase(scoreBand(avg))}`);
+  });
+});
+
+// ── The coup weight, retired from both of its mounts (browser pass 3, 2026-09-19) ─────────
+/**
+ * A FOURTH RETIREMENT, in the same shape as the three this file opened with. The Power tab's
+ * "The Powers" rows and the Succession section's contender list both printed the raw coup
+ * weight — "w 41.25", "w 26.4", "w 19" — an engine scalar beside `powerLabel`, which says the
+ * same thing in the typed band vocabulary the rest of the dossier speaks.
+ *
+ * ⛔ THE PROSE-NUMERICS RATCHET COULD NOT SEE EITHER OF THEM, and that is the reason this arm
+ * is worth its lines: `proseNumericsWalk.js`'s FLOAT_TOKENS names `power`, `score`, `standing`
+ * and thirty more, and does NOT name `weight` — so the ratchet's ceilings did not fall when
+ * these two came out, and would not have risen when they went in. Adding the token is not this
+ * lane's call (four `${x.weight}` sites in `warReceiptPools.js` would red on arrival and a
+ * ceiling may never be raised to absorb them); the gap is reported to the chair. Until it is
+ * closed, THIS is the instrument that holds the class.
+ */
+describe('The Powers — the seat is contested in words, never in coup weights', () => {
+  const WEIGHT_RE = /\bw\s\d/;
+
+  test('neither the Power tab nor the Succession section prints a raw coup weight', () => {
+    let sawContender = false;
+    for (const [name, settlement] of settlements) {
+      for (const [surface, el] of [
+        ['Power', <PowerTab powerStructure={settlement.powerStructure} settlement={settlement} />],
+        ['Succession', <PowerSuccessionSection settlement={settlement} />],
+      ]) {
+        const { container } = render(el);
+        for (let pass = 0; pass < 4; pass += 1) {
+          const shut = [...container.querySelectorAll('[aria-expanded="false"]')];
+          if (shut.length === 0) break;
+          for (const b of shut) fireEvent.click(b);
+        }
+        const text = container.textContent || '';
+        if (/Contender|Contenders/.test(text)) sawContender = true;
+        expect(WEIGHT_RE.test(text), `${name} / ${surface} still prints a coup weight`).toBe(false);
+        // The accessible name carried the same digits, and a screen reader is a reader.
+        const labels = [...container.querySelectorAll('[aria-label]')]
+          .map((n) => n.getAttribute('aria-label') || '');
+        expect(labels.filter((l) => /^Coup weight/.test(l)),
+          `${name} / ${surface} still labels a coup weight`).toEqual([]);
+        cleanup();
+      }
+    }
+    // ⛔ ANTI-VACUITY: a town with no challenger renders no contender row at all, and an arm
+    // that only ever saw uncontested seats would pass on nothing. One of the four must have
+    // a contest.
+    expect(sawContender, 'no town in this fixture set rendered a contender row').toBe(true);
+  }, 120000);
+
+  test('the weight is retired from DISPLAY only — the derivation still ranks by it', () => {
+    // The same split the safetyRatio arm above pins: the engine keeps its scalar, the reader
+    // gets its consequence. `byWeightDescThenName` is the order the reader actually sees.
+    const src = readFileSync(resolve(process.cwd(), 'src/domain/rulingPowerCoup.js'), 'utf8');
+    expect(src).toContain('byWeightDescThenName');
+    expect(src).toContain('b.weight - a.weight');
   });
 });

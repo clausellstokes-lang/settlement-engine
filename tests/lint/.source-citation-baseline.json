@@ -1,0 +1,71 @@
+{
+  "_law": "ONLY SHRINKS. Every row is a <path>:<line> citation in a LIVE document whose line is PAST THE END of the file it addresses — an address that cannot be right, whatever it meant to name. A citation not listed here FAILS tests/lint/sourceCitationIntegrity.walker.test.js; a listed row that has gone also fails, with 'delete its entry', so the set can only fall. It holds the SET, never counts: a count assertion would red every time a doc legitimately re-states an address it already carries, and a gate that reds on correct behaviour gets turned off. THE DOOR: re-address the citation to the symbol it names and DELETE its row. A row is NEVER silenced by editing a document's path into the archival rule — that rule is measured and listed in the walker's header.",
+  "_door": "To clear a row: open the citing document, find the symbol the sentence names, locate it in the target, write the true line, delete the row here. To add one: you cannot — a new past-EOF citation in a live document is a RED, not a baseline entry. src/, tests/ and scripts/ have NO baseline at all: past-EOF there is always red.",
+  "_burnedToZero": "FIX-C2b, 2026-09-20, branch fix-citations-2b-2026-09-20 at ee2406191 (ODQ §934.47 addenda 44/63/70/72/79). All 47 rows across 25 documents were re-addressed to the symbols their sentences name, or — where the symbol no longer exists at this tip — STRUCK with a dated one-line note naming what replaced it. The set is now EMPTY and the arm is a pure ratchet at zero: the next past-EOF citation written into a live document is a RED, with no baseline to absorb it. ⛔ DO NOT RE-POPULATE. Nine of the 47 were not line drift at all but MODULE MOVES behind a barrel (advanceCampaignWorld.js, economicGenerator.js, powerGenerator.js and mutate.js are re-export shims of 13-40 lines; relationshipEvolution.js shed its rules into relationshipRules*.js), which is why the cure is a symbol read and never an arithmetic shift.",
+  "frozenAt": {
+    "date": "2026-09-20",
+    "branch": "fix-citations-2026-09-20",
+    "base": "63e40fe57",
+    "ruling": "ODQ §934.47 addendum 44 (FIX-C2)",
+    "docsLiveFiles": 481,
+    "docsArchivalFiles": 29,
+    "rowsAtFreeze": 47,
+    "citingFilesAtFreeze": 25,
+    "rowsAtBurnDown": 0,
+    "burnedDownBy": "FIX-C2b at ee2406191 (docsLiveFiles re-measured 483, docsArchivalFiles 29 — the archival byRule split is unmoved)"
+  },
+  "archivalExclusionAtFreeze": {
+    "_why": "Frozen records of their day. Re-addressing these to today's tree would FALSIFY a record rather than repair it — docs/review-r2/VERIFY_SUBSYSTEMS_RESULTS.json pins a sha and states that all cited lines matched AT THAT SHA. Measured 2026-09-20: these files carry 377 past-EOF citations that this gate deliberately does not see.",
+    "_rosterMove2026-09-20": "ONE document changed class, deliberately, and it hid NOTHING: docs/GAME_GRADE_AUDIT.md joined `banner` (7 -> 8; live 483 -> 482, archival 29 -> 30) when FIX-C2b gave it the estate's own HISTORICAL marker. WHY: it is a point-in-time audit whose own blockquote pins `composite-r4 @ 69b7a8d3` / `8033ddbe` plus uncommitted work, it has not been touched since 2026-07-24, and its citations address a town-map surface DELETED at 43c3ac3805 (TE-STRIP-1, 2026-08-29) — the atlas test exactly. THE PROOF THAT IT SILENCES NOTHING: pastEofCitationsExcluded is UNCHANGED at 377 and ARM 2 was already 0 before and after, so the move buys no green. A class move that changed that number would be a silencing and is forbidden by _law.",
+    "_rosterGrowth2026-09-20": "ONE document JOINED the roster by being BORN into it, and it hid NOTHING: docs/shift-records/2026-09-20-cure-j-provenance.json joined `tree` (16 -> 17) when CURE-J's provenance-only re-record of the prose manifest golden landed at 0d0598a75. It is a GROWTH, not a class move — no live document left the gated corpus, because the file entered the tree already inside docs/shift-records/ and the ARCHIVAL_TREES rule classified it on its first commit. WHY IT IS ARCHIVAL: a shift record states what moved in ONE named golden at ONE named sha and is never re-addressed to today's tree, which is the frozen-record contract docs/review-r2/ carries — it is the same class as the nine shift records already on this roster. THE PROOF THAT IT SILENCES NOTHING: pastEofCitationsExcluded is UNCHANGED at 377 (the record carries ZERO past-EOF citations of its own, measured file-by-file) and ARM 2 over live docs is 0 on both sides, so the growth buys no green. Re-measured with the shipped detector at the composition: all 515, live 484, archival 31. Recorded by FIX-P1's lane.",
+    "pastEofCitationsExcluded": 377,
+    "byRule": {
+      "banner": 8,
+      "dated": 5,
+      "sha-pin": 1,
+      "tree": 17
+    },
+    "files": {
+      "banner": [
+        "docs/A_PLUS_ROADMAP.md",
+        "docs/CAPABILITY_REMEDIATION_PLAN.md",
+        "docs/GAME_GRADE_AUDIT.md",
+        "docs/GENERATION_COHERENCE_AUDIT.md",
+        "docs/LANDING_HANDOFF_AMENDMENTS.md",
+        "docs/SIMULATION_LOGIC_AUDIT.md",
+        "docs/SOL_QUEUE.md",
+        "docs/UIUX_AUDIT_AND_PLAN.md"
+      ],
+      "dated": [
+        "docs/COMPREHENSIVE_REVIEW_2026-07-13.md",
+        "docs/COMPREHENSIVE_REVIEW_2026-07-15.md",
+        "docs/COMPREHENSIVE_REVIEW_2026-08-01.md",
+        "docs/HANDOFF_2026-08-01_PAUSE.md",
+        "docs/implementation/surveys/SIM-SEALS-SURVEY-2026-09-19.md"
+      ],
+      "sha-pin": [
+        "docs/SETTLEMENT_CAPABILITY_ATLAS.md"
+      ],
+      "tree": [
+        "docs/review-r2/G2_SHIFT_MAP.md",
+        "docs/review-r2/LIGHT_SHIFT_MAP.md",
+        "docs/review-r2/RAW_SURVEY_RESULTS.json",
+        "docs/review-r2/VERIFY_DIMS_RESULTS.json",
+        "docs/review-r2/VERIFY_SUBSYSTEMS_RESULTS.json",
+        "docs/shift-records/2026-09-16-genesis-freeze-generator-golden-master.json",
+        "docs/shift-records/2026-09-17-dossier-contradictions.json",
+        "docs/shift-records/2026-09-18-content-coherence.json",
+        "docs/shift-records/2026-09-18-pressure-sentence-agreement.json",
+        "docs/shift-records/2026-09-19-food-balance-arithmetic.json",
+        "docs/shift-records/2026-09-19-layout-sacred-house.json",
+        "docs/shift-records/2026-09-19-parish-church-text.json",
+        "docs/shift-records/2026-09-19-preset-lighting-witness.json",
+        "docs/shift-records/2026-09-19-religious-quarter-text.json",
+        "docs/shift-records/2026-09-20-cure-j-provenance.json",
+        "docs/shift-records/README.md",
+        "docs/shift-records/_TEMPLATE.json"
+      ]
+    }
+  },
+  "rows": []
+}

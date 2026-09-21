@@ -6,6 +6,8 @@ import { EVENTS } from '../../lib/analytics.js';
 import EditableInline from '../primitives/EditableInline.jsx';
 import { threatDisplay, isCalmThreat } from '../map/settlementThreat.js';
 import { emblem } from '../../design/organic/ornament/compose.js';
+import useIsMobile from '../../hooks/useIsMobile.js';
+import { chromeFontSize } from '../../design/proseScale.js';
 
 // Persistent at-the-table header facts (tier / population / trade route) read
 // mid-session on the dark identity bar. '#D8C8A8' is a light warm parchment ink
@@ -39,6 +41,7 @@ export default function DossierHeaderRow({
 }) {
   // Editable when the live editor is active (write store via queueEdit), or when
   // the saved-dossier editor opted in via allowRename + a rename callback.
+  const mobile = useIsMobile();
   const nameEditable = (!readOnly && queueEdit) || (allowRename && typeof onRenameSettlement === 'function');
   const commitRename = (newName) => {
     if (allowRename && typeof onRenameSettlement === 'function') {
@@ -78,8 +81,8 @@ export default function DossierHeaderRow({
                     parchment-toned for the dark header bar; only the label is
                     unified. The text label carries the threat alongside the
                     tone, so the state is never color-only. */}
-                {settlement.config?.monsterThreat && !isCalmThreat(settlement.config.monsterThreat) && <span style={{ display: 'inline-flex', alignItems: 'center', gap: 4, fontSize: FS.xs, fontWeight: 700, color: settlement.config.monsterThreat === 'plagued' ? swatch.stressAmber : swatch['#C49A3C'], background: 'rgba(196,154,60,0.12)', padding: '2px 7px', textTransform: 'uppercase', letterSpacing: '0.06em' }}>{threatDisplay(settlement.config.monsterThreat)?.label || settlement.config.monsterThreat}</span>}
-                {stressObj && <span style={{ fontSize: FS.xxs, fontWeight: 800, color: swatch.stressAmber, background: 'rgba(0,0,0,0.45)', border: '1px solid rgba(255,255,255,0.15)', padding: '2px 8px', textTransform: 'uppercase', letterSpacing: '0.06em' }}>{stressObj.label}</span>}
+                {settlement.config?.monsterThreat && !isCalmThreat(settlement.config.monsterThreat) && <span style={{ display: 'inline-flex', alignItems: 'center', gap: 4, fontSize: chromeFontSize(FS.xs, mobile), fontWeight: 700, color: settlement.config.monsterThreat === 'plagued' ? swatch.stressAmber : swatch['#C49A3C'], background: 'rgba(196,154,60,0.12)', padding: '2px 7px' }}>{threatDisplay(settlement.config.monsterThreat)?.label || settlement.config.monsterThreat}</span>}
+                {stressObj && <span style={{ fontSize: chromeFontSize(FS.xxs, mobile), fontWeight: 800, color: swatch.stressAmber, background: 'rgba(0,0,0,0.45)', border: '1px solid rgba(255,255,255,0.15)', padding: '2px 8px' }}>{stressObj.label}</span>}
               </div>
             </div>
             {/* ── AI Narrative Layer button group ──────────────────────────────────

@@ -22,6 +22,8 @@ import Button from '../primitives/Button.jsx';
 import IconButton from '../primitives/IconButton.jsx';
 import { BODY, CARD, FS, GOLD_BG, INK, SECOND, SP, sans, swatch } from '../theme.js';
 import RegionalCausalChainViewer from './RegionalCausalChainViewer.jsx';
+import useIsMobile from '../../hooks/useIsMobile.js';
+import { chromeFontSize } from '../../design/proseScale.js';
 
 function labelForType(type) {
   return String(type || 'channel').replace(/_/g, ' ');
@@ -56,6 +58,7 @@ export default function RegionalGraphSummary({
   // The lazy initializer reads the graph once and tolerates a null campaign —
   // the guard below has not run yet, so this hook stays unconditional (Rules of
   // Hooks): it must sit ABOVE the early return.
+  const mobile = useIsMobile();
   const [suggestionsOpen, setSuggestionsOpen] = useState(
     // The lazy initializer must not read a clock — it would stamp a throwaway graph at
     // mount time. The campaign's own stamp is the deterministic in-band answer.
@@ -98,17 +101,17 @@ export default function RegionalGraphSummary({
           impact counts below (legibility wave, 2026-07-22). "Regional graph" was a
           builder term with no user definition; the door is now "Between Your
           Towns" and the raw five-count stat is demoted to the secondary line. */}
-      <div style={{ fontSize: FS.xs, color: INK, fontWeight: 700, fontFamily: sans, marginBottom: 4 }}>
+      <div style={{ fontSize: chromeFontSize(FS.xs, mobile), color: INK, fontWeight: 700, fontFamily: sans, marginBottom: 4 }}>
         {confirmed.length === 0
           ? 'No trade routes link your towns yet.'
           : `${confirmed.length} trade route${confirmed.length === 1 ? '' : 's'} link your towns.`}
         {availableImpacts.length > 0 && ` ${availableImpacts.length} change${availableImpacts.length === 1 ? '' : 's'} ready to apply.`}
       </div>
       <div style={{ display: 'flex', alignItems: 'center', gap: 8, flexWrap: 'wrap' }}>
-        <span style={{ fontSize: FS.xs, color: INK, fontWeight: 800, fontFamily: sans }}>
+        <span style={{ fontSize: chromeFontSize(FS.xs, mobile), color: INK, fontWeight: 800, fontFamily: sans }}>
           Between Your Towns
         </span>
-        <span style={{ fontSize: FS.xxs, color: BODY, fontFamily: sans }}>
+        <span style={{ fontSize: chromeFontSize(FS.xxs, mobile), color: BODY, fontFamily: sans }}>
           {confirmed.length} confirmed · {suggested.length} suggested · {availableImpacts.length}/{queuedImpacts.length} ready · {appliedImpacts.length} applied · {resolvedImpacts.length} resolved
         </span>
         {availableImpacts.length > 1 && (
@@ -190,10 +193,10 @@ export default function RegionalGraphSummary({
               }}
             >
               <div style={{ minWidth: 0, flex: 1 }}>
-                <div style={{ fontSize: FS.xxs, color: BODY, fontWeight: 700, fontFamily: sans }}>
+                <div style={{ fontSize: chromeFontSize(FS.xxs, mobile), color: BODY, fontWeight: 700, fontFamily: sans }}>
                   {labelForType(channel.type)} · {goodsLabel(channel)}
                 </div>
-                <div style={{ fontSize: FS.micro, color: BODY, fontFamily: sans }}>
+                <div style={{ fontSize: chromeFontSize(FS.micro, mobile), color: BODY, fontFamily: sans }}>
                   {Math.round((channel.confidence || 0) * 100)}% confidence · strength {Math.round((channel.strength || 0) * 100)}%
                 </div>
               </div>
@@ -229,10 +232,10 @@ export default function RegionalGraphSummary({
               }}
             >
               <div style={{ minWidth: 0, flex: 1 }}>
-                <div style={{ fontSize: FS.xxs, color: BODY, fontWeight: 700, fontFamily: sans }}>
+                <div style={{ fontSize: chromeFontSize(FS.xxs, mobile), color: BODY, fontWeight: 700, fontFamily: sans }}>
                   {nodeNames.get(String(impact.targetSettlementId)) || impact.targetSettlementId} · {labelForType(impact.kind)}
                 </div>
-                <div style={{ fontSize: FS.micro, color: BODY, fontFamily: sans }}>
+                <div style={{ fontSize: chromeFontSize(FS.micro, mobile), color: BODY, fontFamily: sans }}>
                   {impactGoodsLabel(impact)} · severity {Math.round((impact.severity || 0) * 100)}%
                   {!available && delayTicks > 0 && (
                     <span style={{ color: SECOND, fontWeight: 700 }}> · matures in {delayTicks} tick{delayTicks === 1 ? '' : 's'} (advance above to apply)</span>
@@ -281,7 +284,7 @@ export default function RegionalGraphSummary({
                 display: 'flex',
                 alignItems: 'center',
                 gap: 6,
-                fontSize: FS.micro,
+                fontSize: chromeFontSize(FS.micro, mobile),
                 color: SECOND,
                 fontFamily: sans,
               }}

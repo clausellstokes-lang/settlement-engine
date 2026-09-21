@@ -25,8 +25,13 @@ import {
   BODY, BORDER, CARD, CARD_ALT, ELEV, FS, INK, SP, sans } from '../theme.js';
 import { useDialogFocusTrap } from '../primitives/useDialogFocusTrap.js';
 import Button from '../primitives/Button.jsx';
+import DialogClose from '../primitives/DialogClose.jsx';
+import AvailableAtLaunchPill from '../primitives/AvailableAtLaunchPill.jsx';
 import { t } from '../../copy/index.js';
 import { SINGLE_DOSSIER, TIERS } from '../../config/pricing.js';
+import { purchasesOpen } from '../../lib/launchGate.js';
+import useIsMobile from '../../hooks/useIsMobile.js';
+import { proseFontSize } from '../../design/proseScale.js';
 
 const CARTOGRAPHER_PRICE = `$${(TIERS.cartographer.priceCents / 100).toFixed(2)}`;
 
@@ -39,7 +44,12 @@ const CARTOGRAPHER_PRICE = `$${(TIERS.cartographer.priceCents / 100).toFixed(2)}
  * @param {boolean} [props.busy]              — one-time checkout redirect in flight.
  */
 export default function DossierLadderModal({ onClose, onCreateAccount, onCartographer, onOneTime, busy = false }) {
+  const mobile = useIsMobile();
   const dialogRef = useDialogFocusTrap(true, onClose);
+  // Pre-launch lockout (lib/launchGate.js): the two purchase rungs (Cartographer and
+  // the one-time download) render disabled and wear the Available at launch pill
+  // until purchases open. Creating a free account is not a purchase and stays live.
+  const purchasesAreOpen = purchasesOpen();
 
   const rungs = [
     {
@@ -55,6 +65,7 @@ export default function DossierLadderModal({ onClose, onCreateAccount, onCartogr
       description: t('dossierExport.ladder.cartographer.description', { price: CARTOGRAPHER_PRICE }),
       onClick: onCartographer,
       variant: 'secondary',
+      purchase: true,
     },
     {
       id: 'oneTime',
@@ -63,6 +74,7 @@ export default function DossierLadderModal({ onClose, onCreateAccount, onCartogr
       onClick: onOneTime,
       variant: 'secondary',
       busy,
+      purchase: true,
     },
   ];
 
@@ -88,45 +100,56 @@ export default function DossierLadderModal({ onClose, onCreateAccount, onCartogr
           background: CARD, boxShadow: ELEV[3], fontFamily: sans,
         }}
       >
-        <header style={{ padding: `${SP.lg}px ${SP.lg}px ${SP.md}px`, borderBottom: `1px solid ${BORDER}`, background: CARD_ALT }}>
+        <header style={{ padding: `${SP.lg}px ${SP.lg}px ${SP.md}px`, borderBottom: `1px solid ${BORDER}`, background: CARD_ALT, display: 'flex', alignItems: 'flex-start', gap: SP.md }}>
+          <div style={{ flex: 1, minWidth: 0 }}>
           <h2 id="dossier-ladder-title" style={{ margin: 0, color: INK, fontSize: FS.lg, lineHeight: 1.25, fontWeight: 900 }}>
             {t('dossierExport.ladder.title')}
           </h2>
           <p style={{ margin: `${SP.xs}px 0 0`, color: BODY, fontSize: FS.sm, lineHeight: 1.45 }}>
             {t('dossierExport.ladder.intro')}
           </p>
+          </div>
+          {/* THE HOUSE EXIT (owner order, ODQ §934.31). This dialog's only way out was a
+              ghost button at the FOOT of a scrolling list of purchase rungs — below the
+              fold on a phone, and reading as a fifth choice rather than a door. */}
+          <DialogClose onClose={onClose} />
         </header>
 
         <div style={{ padding: SP.lg, display: 'flex', flexDirection: 'column', gap: SP.sm }}>
-          {rungs.map(rung => (
-            <Button
-              key={rung.id}
-              type="button"
-              variant={rung.variant}
-              size="md"
-              busy={rung.busy}
-              onClick={rung.onClick}
-              fullWidth
-              data-rung={rung.id}
-              // A rung is a rich two-line choice, so override the primitive's
-              // centered single-line layout: top-aligned icon, left-aligned
-              // label + description, wrapping text, 44px minimum.
-              style={{
-                justifyContent: 'flex-start', alignItems: 'flex-start',
-                minHeight: 44, padding: SP.md, whiteSpace: 'normal', textAlign: 'left',
-                fontWeight: 700,
-              }}
-            >
-              <span style={{ flex: 1, minWidth: 0 }}>
-                <span style={{ display: 'block', fontSize: FS.sm, fontWeight: 900, color: INK }}>
-                  {rung.busy ? t('dossierExport.buySaved.busy') : rung.label}
+          {rungs.map(rung => {
+            const locked = !!rung.purchase && !purchasesAreOpen;
+            return (
+              <Button
+                key={rung.id}
+                type="button"
+                variant={rung.variant}
+                size="md"
+                busy={rung.busy}
+                disabled={locked}
+                onClick={rung.onClick}
+                fullWidth
+                data-rung={rung.id}
+                // A rung is a rich two-line choice, so override the primitive's
+                // centered single-line layout: top-aligned icon, left-aligned
+                // label + description, wrapping text, 44px minimum.
+                style={{
+                  justifyContent: 'flex-start', alignItems: 'flex-start',
+                  minHeight: 44, padding: SP.md, whiteSpace: 'normal', textAlign: 'left',
+                  fontWeight: 700,
+                }}
+              >
+                <span style={{ flex: 1, minWidth: 0 }}>
+                  <span style={{ display: 'block', fontSize: FS.sm, fontWeight: 900, color: INK }}>
+                    {rung.busy ? t('dossierExport.buySaved.busy') : rung.label}
+                    {locked && <AvailableAtLaunchPill style={{ marginLeft: 6 }} />}
+                  </span>
+                  <span style={{ display: 'block', marginTop: SP.xs, fontSize: proseFontSize(FS.xs, mobile), color: BODY, lineHeight: 1.45, fontWeight: 500 }}>
+                    {rung.description}
+                  </span>
                 </span>
-                <span style={{ display: 'block', marginTop: SP.xs, fontSize: FS.xs, color: BODY, lineHeight: 1.45, fontWeight: 500 }}>
-                  {rung.description}
-                </span>
-              </span>
-            </Button>
-          ))}
+              </Button>
+            );
+          })}
         </div>
 
         <footer style={{ display: 'flex', justifyContent: 'flex-end', padding: `0 ${SP.lg}px ${SP.lg}px` }}>

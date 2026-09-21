@@ -21,6 +21,10 @@
  *      interval — the FAQ's data-longevity number can never drift from the SQL.
  *   8. COPY-SOURCE GUARD: no hand-typed money and no hand-typed fact-counts in
  *      the pricingPage copy module's strings (money/facts must interpolate).
+ *   9. NO DEAD GAP MID-CARD (owner orders 2026-09-17): in every tier-row card the
+ *      CTA is the last child and the card's spare height sits directly above it,
+ *      either in the one growing child just before it or in the CTA's own auto
+ *      top margin, so the card reads straight down and CTAs stay level.
  */
 
 import { describe, it, expect, beforeEach, afterEach, vi } from 'vitest';
@@ -103,10 +107,33 @@ describe('PricingPage — the five-band drift contract', () => {
     const months = getFounderBreakEvenMonths();
     expect(months).toBe(Math.ceil(TIERS.founder.priceCents / TIERS.cartographer.priceCents));
     expect(text).toContain(tp('band2.charter.sustainability', { seats: 30 }));
+    // ⛔ EACH FACT ONCE, INSIDE THE BAND. It stated the cap three times and the
+    // invitation twice within five rendered lines, the counter's unavailable-count
+    // fallback being a verbatim repeat of the lead's second clause. Scoped to the
+    // charter SECTION: the band-5 FAQ answers "Can I buy a Founder chair?" and
+    // names the cap there legitimately, far down the page.
+    const charter = container.querySelector('#founder-charter-name').closest('section');
+    expect(charter, 'the charter band did not render').toBeTruthy();
+    expect(charter.textContent.match(/30 chairs/g) || [], 'the chair cap is stated more than once in the band').toHaveLength(1);
+    expect(charter.textContent.match(/all by invitation/g) || [], 'the invitation is stated more than once in the band').toHaveLength(1);
     // anchored: the line above asserts this same rendered text CONTAINS the charter sustainability sentence, so the page is proven rendered
     expect(text).not.toContain(`$${TIERS.founder.priceCents / 100}`);
     // The failure policy renders verbatim (the verified-refund promise).
     expect(text).toContain(tp('band3.taskMenu.failurePolicy'));
+  });
+
+  // ⛔ SURVEYOR SITS IN THE TIER ROW AND HAS NO COLUMN IN THE PLAN TABLE, so a
+  // reader comparing plans was left to guess what happened to the third band. The
+  // table takes a note rather than a column: the ladder's surveyor-stages row
+  // already reads 'per task' under both plan columns, and a third column would
+  // repeat one value down an empty table and imply a subscription that does not
+  // exist.
+  it('the comparison table says where Surveyor went', () => {
+    const { container } = renderPage();
+    const table = container.querySelector('#comparison-heading').closest('section');
+    expect(table, 'the comparison band did not render').toBeTruthy();
+    expect(table.textContent).toContain(tp('band4.heading'));
+    expect(table.textContent, 'Surveyor is unexplained in the plan table').toContain(tp('band4.surveyorNote'));
   });
 
   it('the bundle lead carries the single-dossier price label', () => {
@@ -161,6 +188,31 @@ describe('PricingPage — the five-band drift contract', () => {
       sql,
       `the ACTIVE handle_premium_downgrade (${activeFile}) must derive its retention window from RETENTION_MONTHS`,
     ).toContain(`interval '${RETENTION_MONTHS} months'`);
+  });
+
+  it('tier-row cards: the CTA is last and the spare height sits directly above it, never mid-card', () => {
+    const { container } = renderPage();
+    const row = container.querySelector('section[aria-labelledby="pricing-tiers-heading"]');
+    const cards = [...row.querySelectorAll(':scope > article')];
+    expect(cards.map((card) => card.getAttribute('aria-labelledby'))).toContain('tier-surveyor-name');
+    expect(cards.length).toBe(3);
+    const grows = (el) => {
+      const grow = el.style.flexGrow || String(el.style.flex || '').trim().split(/\s+/)[0];
+      return Number.parseFloat(grow) > 0;
+    };
+    for (const card of cards) {
+      const name = card.getAttribute('aria-labelledby');
+      const children = [...card.children];
+      const cta = children[children.length - 1];
+      expect(cta.tagName, `${name}: the CTA is the card's last child`).toBe('BUTTON');
+      const growers = children.filter(grows);
+      if (growers.length === 0) {
+        expect(cta.style.marginTop, `${name}: with no growing child, the CTA carries the spare height`).toBe('auto');
+      } else {
+        expect(growers.length, `${name}: one growing child at most`).toBe(1);
+        expect(growers[0], `${name}: the growing child sits directly above the CTA`).toBe(children[children.length - 2]);
+      }
+    }
   });
 
   it('copy-source guard: no hand-typed money or fact-counts in pricingPage strings', () => {

@@ -43,9 +43,10 @@
 
 import { describe, it, expect } from 'vitest';
 import { existsSync, readdirSync, readFileSync, statSync } from 'node:fs';
-import { resolve, join, dirname } from 'node:path';
+import { resolve, join } from 'node:path';
 
 import { expectAbsentWithAnchor } from '../helpers/anchoredNegatives.js';
+import { FOLLOW_STATIC, importClosure, moduleSpecifiers } from '../helpers/routeClosure.js';
 
 const ROOT = process.cwd();
 const SRC = resolve(ROOT, 'src');
@@ -66,42 +67,16 @@ const HANDLER = resolve(SRC, 'domain/events/mutateUserRoute.js');
 const DERIVATION_FINGERPRINT = 'mode_not_supported';
 const HANDLER_FINGERPRINT = 'A road chartered by hand runs between here and';
 
-/** Static (never dynamic) module specifiers of one source file. */
-function staticSourceSpecifiers(code) {
-  const stripped = code.replace(/\/\*[\s\S]*?\*\//g, '').replace(/^\s*\/\/.*$/gm, '');
-  const specs = new Set();
-  for (const m of stripped.matchAll(/(?:^|[^.\w])import\s+(?:[^'"()]*?\sfrom\s+)?['"]([^'"]+)['"]/g)) specs.add(m[1]);
-  for (const m of stripped.matchAll(/(?:^|[^.\w])export\s+[^'"]*?\sfrom\s+['"]([^'"]+)['"]/g)) specs.add(m[1]);
-  return [...specs];
-}
-
-function resolveRelative(from, spec) {
-  if (!spec.startsWith('.')) return null;
-  const base = resolve(dirname(from), spec);
-  for (const candidate of [base, `${base}.js`, `${base}.jsx`, join(base, 'index.js'), join(base, 'index.jsx')]) {
-    if (existsSync(candidate) && statSync(candidate).isFile()) return candidate;
-  }
-  return null;
-}
-
-/** Everything `src/main.jsx` reaches over STATIC import edges. */
-function firstPaintSourceGraph() {
-  const entry = resolve(SRC, 'main.jsx');
-  const seen = new Set([entry]);
-  const parent = new Map();
-  const queue = [entry];
-  while (queue.length) {
-    const file = queue.shift();
-    for (const spec of staticSourceSpecifiers(readFileSync(file, 'utf-8'))) {
-      const dep = resolveRelative(file, spec);
-      if (!dep || seen.has(dep)) continue;
-      seen.add(dep);
-      parent.set(dep, file);
-      queue.push(dep);
-    }
-  }
-  return { seen, parent };
-}
+/**
+ * Everything `src/main.jsx` reaches over STATIC import edges.
+ *
+ * The walk lives in tests/helpers/routeClosure.js — one source-import walker for
+ * the estate, after three copies of it had accumulated. FOLLOW_STATIC is
+ * load-bearing here: a dynamic edge is exactly what keeps a module OUT of the
+ * first-paint closure, so following one would make this test claim the opposite
+ * of what it means.
+ */
+const firstPaintSourceGraph = () => importClosure([resolve(SRC, 'main.jsx')], FOLLOW_STATIC);
 
 function chainTo(parent, file) {
   const chain = [];
@@ -138,10 +113,10 @@ const chunksContaining = (literal) => readdirSync(assetsDir)
 
 describe('wave D — the user-route identity leaf (source contracts)', () => {
   it('the identity leaf has ZERO static imports', () => {
-    const leafSpecs = staticSourceSpecifiers(readFileSync(LEAF, 'utf-8'));
+    const leafSpecs = moduleSpecifiers(readFileSync(LEAF, 'utf-8'), FOLLOW_STATIC);
     // Non-vacuity: the SAME scanner must find the derivation's real imports, or a
     // scanner that silently stopped matching would report every file import-free.
-    const derivationSpecs = staticSourceSpecifiers(readFileSync(DERIVATION, 'utf-8'));
+    const derivationSpecs = moduleSpecifiers(readFileSync(DERIVATION, 'utf-8'), FOLLOW_STATIC);
     expect(
       derivationSpecs.length,
       'the import scanner found nothing in roads/userRoutes.js — it is broken, so the zero-imports claim below measures nothing',
@@ -154,7 +129,7 @@ describe('wave D — the user-route identity leaf (source contracts)', () => {
   });
 
   it('the eager CREATE_ROUTE handler takes the edge id from the LEAF, not the derivation', () => {
-    const specs = staticSourceSpecifiers(readFileSync(HANDLER, 'utf-8'));
+    const specs = moduleSpecifiers(readFileSync(HANDLER, 'utf-8'), FOLLOW_STATIC);
     expect(specs).toContain('../roads/userRouteIdentity.js');
     // Anchored negative: './mutateHelpers.js' travels the same import list and
     // would vanish under the same drift, so the absence below cannot go vacuous.

@@ -56,7 +56,7 @@ function run(fx, seedOverride) {
   const ws = seedOverride ? { ...fx.worldState, rngSeed: seedOverride } : fx.worldState;
   return advanceRoads({
     snapshot: { settlements: fx.settlements }, worldState: ws,
-    settlementUpdates: fx.settlements.map((it) => ({ saveId: it.id, settlement: it.settlement })),
+    settlementUpdates: fx.settlements.map((update) => ({ saveId: update.id, settlement: update.settlement })),
     saves: fx.saves, graph: fx.graph, tick: WEEK, now: null,
   });
 }

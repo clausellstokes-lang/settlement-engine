@@ -220,7 +220,11 @@ describe('SettlementPDF full-document render lane', () => {
         expect(pages, `${label}/${variant} page count ${pages} below floor ${PAGE_FLOOR[variant]}`)
           .toBeGreaterThanOrEqual(PAGE_FLOOR[variant]);
         buffers[variant] = pages;
-      });
+        // AN EXPLICIT BUDGET CARRYING THE MEASURED FIGURE, never the suite-wide timeout: the
+        // whole file renders its 26 documents in ~31 s alone at load 9 (2026-09-18), but the
+        // stressed town's canon_dossier expired the 20 s default inside the full ratchet at
+        // load 123 on 8 cores. A budget expiry is a cost failure, so the cost is stated here.
+      }, 60000);
 
       test('variant gating: full variants dwarf the lean timeline_packet', () => {
         // Runs after the test.each above (declaration order). If gating broke —

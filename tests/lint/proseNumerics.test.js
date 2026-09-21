@@ -25,6 +25,13 @@ const BASELINE_PATH = join(ROOT, 'tests/lint/.prose-numerics-baseline.json');
 // three in relationshipMemory.js's postureReasons, which the scanner had never
 // seen at all.
 //
+// 2026-09-19 — THE DEBT FELL BY ONE AND THE CEILINGS FOLLOW IT DOWN. 225 -> 224, floatInterpolation
+// 148 -> 147: DefenseSecurity.jsx's `{Math.round(sc.score)}` — the raw capability digit beside the
+// PDF's capability rows — was replaced by the band word the screen prints (R-5b item #20, the
+// 2026-09-18 fixes consist), so its row leaves the baseline as a CURE, never a bank. Every other
+// row kept its path, category and snippet at a new address (the build's line moves), regenerated
+// by the test's own scanner; the +1 arm below states the new figures.
+//
 // CR-FP-2 — THE ONE RULED RE-RECORD (FP cycle 1 close). 404 -> 413.
 //
 // This is a DELIBERATE upward move of three ceilings, recorded here because the
@@ -199,6 +206,42 @@ const BASELINE_PATH = join(ROOT, 'tests/lint/.prose-numerics-baseline.json');
 // PLAINLY, because the lane's brief predicted the opposite: this lane authored NO new prose
 // numeric. Its own new leaves carry none, and the row that moved is pre-existing banked debt
 // — a cap computation, not reader prose — so there was nothing here to humanize.
+// THE PADLOCK REMOVAL (owner order 2026-09-17: "remove the other padlocks") — TWO PURE LINE
+// MOVES, NO CEILING CHANGE, NO DEBT MOTION. Deleting the roster row's padlock (the copy block,
+// the tone constants, the row state and the control) removes twenty-two lines ABOVE the two
+// relationship rows npcComponents.jsx owns, so `{rel.strength}` re-addresses 154 -> 132 and
+// `{rel.tension}` 161 -> 139. Path, category and snippet are byte-identical, the census stays at
+// 225 against a 225 ceiling, and no category count moves. The whole baseline diff is four lines,
+// two -/+ pairs, `"line"` values and nothing else.
+// COMPENDIUM TRIM (owner order 2026-09-16: the map lenses and interior pages removed from the
+// Compendium) — ONE PURE LINE MOVE, NO CEILING CHANGE, NO DEBT MOTION. Deleting the Lenses
+// and Facets hubs from CatalogHubs.jsx removes fifty-two lines ABOVE the Calamity hub's
+// severity row, so the one row that file owns (`multiplier`, `{b.scale}`) re-addresses
+// 95 -> 43. Path, category and snippet are byte-identical, the census stays at 225 against a
+// 225 ceiling, and the removed hubs carried no banked row. The whole baseline diff is two
+// lines, one -/+ pair, a `"line"` value and nothing else.
+// THE DOSSIER-UI FIXES (owner order 2026-09-18, "impliment every fix") — PURE LINE MOVES IN
+// FOUR FILES, NO CEILING CHANGE, NO DEBT MOTION. The NPC card's goal repair and its phone
+// prose floor add four lines ABOVE the two relationship rows npcComponents.jsx owns, so
+// `{rel.strength}` re-addresses 132 -> 136 and `{rel.tension}` 139 -> 143; the Power tab's
+// basis-caption grouping adds thirty-three lines ABOVE every row PowerStrata.jsx owns, so its
+// distribution-bar pair re-addresses 189 -> 222, `{pct}` 191 -> 224 and `{r.power}`
+// 232 -> 265; the phone prose floor adds nine lines above TableView's `{pressure}`
+// (236 -> 245) and nine above SessionMode's `{n?.power || 0}` (436 -> 445), and one more above
+// npcComponents' pair (so 132 -> 137 and 139 -> 144) when the floor helper moved out of
+// `hooks/useIsMobile.js` into its own `design/proseScale.js` leaf and each consumer's single
+// import line became two. Path, category and snippet are byte-identical in all eight, the
+// census stays at 225 against a 225 ceiling, and no category count moves. The whole baseline
+// diff is sixteen lines, eight -/+ pairs, `"line"` values and nothing else.
+// THE SAME ORDER'S REMAINDER (2026-09-18, second sitting) — ONE MORE PURE LINE MOVE IN
+// PowerStrata.jsx, NO CEILING CHANGE, NO DEBT MOTION. Carrying the prose floor into the
+// faction and web strata adds two import lines and a five-line hook block ABOVE every row
+// that file owns, so all four re-address by seven: the distribution-bar pair 222 -> 229,
+// `{pct}` 224 -> 231 and `{r.power}` 265 -> 272. The five other files this car touches
+// (serviceComponents, NarrativeNote, Primitives' PlotHook, neighbourComponents,
+// DossierNarrativeBanner) carry NO banked row, and npcComponents' pair is untouched because
+// its edits all sit below line 144. Path, category and snippet are byte-identical, the
+// census stays at 225 against a 225 ceiling, and no category count moves.
 // ══ LOWERED BY TE-HERALD-1, THE HUMANIZATION WAVE (owner directive, ODQ §754.3;
 //    boundary ruled §763.2) ═══════════════════════════════════════════════════════
 // This is the wave the four sentences frozen above were "owed". The debt named in the
@@ -316,20 +359,140 @@ const BASELINE_PATH = join(ROOT, 'tests/lint/.prose-numerics-baseline.json');
 //       have shipped it blind. The measured golden movement is recorded in the SHIFT RECORD
 //       in `tests/property/rumorLedgerGolden.test.js`, re-measured at T8's own base rather
 //       than inherited from HER-7's figures.
-const REVIEWED_TOTAL_CEILING = 225;
+// ODQ §934.20 + §934.23 (the chart-proportion and no-clamp consist, 2026-09-19) — FORTY-SEVEN
+// PURE LINE MOVES ACROSS FOUR FILES, NO CEILING CHANGE, NO DEBT MOTION. The Economics tab's food balance bar now draws the
+// magical food offset the record credits, so the tab gains a nine-line rationale block
+// above its prose and loses three decorative JSX comment lines inside the bar; the
+// eighteen rows EconomicsTab.jsx owns re-address 393 -> 402, 395 -> 404, 534 -> 542,
+// 535 -> 543, 536 -> 544, 541 -> 549, 543 -> 551, 544 -> 552, 545 -> 553, 724 -> 732 and
+// 730 -> 738. Same shape as CR-FP-2's eighty-eight, HK-1's six and TE-CH-4's one: path,
+// category and snippet are byte-identical on every one, the census stays at 224 against a
+// 224 ceiling, no category count moves, and the whole baseline diff is thirty-six lines,
+// eighteen -/+ pairs.
+// ⛔ THE NEW CLAUSES CARRY FIGURES AND STILL BANK NOTHING, which is the half worth reading.
+// bc32a5a97 could only add a NUMBER-FREE magic clause; this car needed the reader to add the
+// figures up, so the clause now names the offset in lb/day. It costs no row because of WHERE
+// each one lands: on :551 the clause sits past `snippetOf`'s 237-character truncation (which
+// ends at "...Residual sho"), so the frozen prefix is unchanged; on :552 it stays CONCATENATED
+// outside the literal, leaving that node's 101 bytes untouched; and `formatCount(...)` is not
+// a numeric-formatting call to this detector, which is why the sibling "+ N imported" chip has
+// never been a row either. The PDF chapters take the same clause through `smart(...)` with no
+// per-cent token, so Overview.jsx:566 and EconomicsTrade.jsx:534/:539 do not move at all.
+// THE OTHER EIGHT MOVES are the faction share bars, and they are the same shape. SummaryTab
+// and PowerStrata each re-normalised `factions[].power` — a DECLARED unit
+// (domain/factionPowerShare.js: an integer percent share, renormalised by
+// rulingStructure.normalizeAndAnnotateFactions) — and then printed the re-derivation INSIDE
+// the run while the legend beside it printed the field. Reading the declared share once
+// costs each file a rationale comment and refunds it the roster-sum line, so SummaryTab.jsx
+// re-addresses 65 -> 74 and 80 -> 89, and PowerStrata.jsx 239 -> 243, 241 -> 245 and
+// 282 -> 286. Not one of the five snippets changed: the aria-label on :243 still reads
+// `${pct} percent (power ${r.power})`, which is now two spellings of ONE number rather than
+// two numbers, and re-wording it would have been the only way to bank a row where there is
+// no debt to bank.
+// AND TWENTY-ONE MORE WITH THE CLAMP CAR (ODQ §934.23, the same day). "Authored text is
+// never clamped on the dossier" collapses the Economics revenue row's desktop/phone branch
+// into one gazetteer line — the share bar full-width, the source in bold and its description
+// running on beneath it — which is FOUR effective lines shorter than the two-column row it
+// replaces, and adds one rationale comment to SummaryTab and one to PowerTab. So
+// EconomicsTab.jsx re-addresses BACKWARD (402->401, 404->403, 542->538, 543->539, 544->540,
+// 549->545, 551->547, 552->548, 553->549, 732->728, 738->734), SummaryTab.jsx 89->90 and
+// PowerTab.jsx 518->519. The direction is new; the shape is not. Not one snippet changed:
+// the income row's two `{src.percentage}` reads are carried into the new markup byte for
+// byte, because the clamp was never on the figure — it was on the sentence beside it.
+// MEASURED, not assumed: live 224 rows, exact-equal to this baseline, 0 added and 0 removed
+// on path + category + snippet.
+// ODQ §934.22 (the label-seam car, 2026-09-19) — THIRTY-NINE PURE LINE MOVES ACROSS SEVEN
+// FILES, NO CEILING CHANGE, NO DEBT MOTION, AND ELEVEN OF THEM WERE ALREADY OWED.
+// ⛔ THE CONSIST TIP WAS RED ON THIS RATCHET BEFORE THIS LANE REBASED ONTO IT, and that is
+// measured rather than alleged: scanning 2ac3c9c5f's own `src/` against 2ac3c9c5f's own
+// committed baseline yields 224 live rows against 224 banked and ELEVEN STALE ADDRESSES —
+// DefenseTab.jsx:510, PowerStrata.jsx:239/:241/:282, SessionMode.jsx:442,
+// DefenseSecurity.jsx:235 and Overview.jsx:566 (three rows). The label-seam cars moved lines
+// above them and did not re-address. Nothing was added and nothing fell; it is the address
+// rot this file's CR-FP-2 note already names, inherited rather than authored. It is cured
+// here because a lane cannot leave its own branch red on a ratchet it can close mechanically,
+// and it is NAMED here because a debt that is silently absorbed is a debt nobody reviewed.
+// THIS CAR'S OWN SHARE is the other twenty-eight: threading `resourceDisplayName` and
+// `institutionDisplayName` costs EconomicsTab.jsx one import line and a seven-line rationale
+// above the Imports pills (204 -> 205, 212 -> 213, 401 -> 402, 403 -> 404, 538 -> 545,
+// 539 -> 546, 540 -> 547, 545 -> 552, 547 -> 554, 548 -> 555, 549 -> 556, 728 -> 735,
+// 734 -> 741) and EconomicsTrade.jsx two imports and a six-line rationale inside
+// `renderedTradeLabel` (304 -> 312, 427 -> 435, 534 -> 542, 539 -> 547).
+// MEASURED: path, category and snippet byte-identical on all thirty-nine, 0 added and 0
+// removed, the census at 224 against a 224 ceiling and no category count moved.
+// 2026-09-19 (the chair, at the 2026-09-18 fixes consist's final tip) — THE DEBT FELL BY SIX AND
+// THE CEILINGS FOLLOW IT DOWN: 224 -> 218, percentToken 56 -> 54, multiplier 10 -> 8,
+// twoDecimalScore 11 -> 9; floatInterpolation holds at 147. The six rows were the landing
+// fixture's — engine receipts in a GENERATED file, now scoped out of the authored-prose walk
+// (GENERATED_SOURCES above; its freshness is pinned by landingFixtureFreshness). The one NEW
+// leak of the wave — GalleryImage's stock-painting alt, a template in JSX — was humanized
+// through the copy dictionary (gallery.stockImageAlt), never banked. Ceilings only fall.
+// BROWSER PASS 3's INSTITUTION SEAM (2026-09-19, lane 36 car 2) — ONE PURE LINE MOVE, NO
+// CEILING CHANGE, NO DEBT MOTION. Routing a supply chain's processing institutions through
+// `institutionDisplayName` puts a five-line rationale above `ChainCard`'s flow string in
+// Services.jsx, entirely ABOVE the one row that file owns, so `{flow}` re-addresses
+// 246 -> 251. Path, category and snippet are byte-identical, the census holds at 218 against
+// a 218 ceiling, and no category count moves. The whole baseline diff is two lines, one -/+
+// pair, a `"line"` value and nothing else. ⚠ THE LANE'S OWN CAR FOUND THIS, NOT THE CONSIST:
+// the §934.22 note above says the same thing about its eleven inherited stale addresses, and
+// the lesson repeats — a cure five lines away in the same file re-addresses banked debt, and
+// only this register's own run can see it.
+// BROWSER PASS 3's STATUS MOUNTS (2026-09-19, lane 36 car 3) — TWO MORE PURE LINE MOVES, NO
+// CEILING CHANGE, NO DEBT MOTION. Casing the readiness band at the Daily Life anchor strip
+// costs that file one import line and a five-line rationale, so `{storeAiProgress || …}`
+// re-addresses 262 -> 268; the criminal-structure rationale on DefenseTab adds four lines
+// above `{crimFaction.power||0}`, which re-addresses 514 -> 518. OverviewTab and the PDF's
+// DefenseSecurity carry no row that moved — DefenseSecurity's pair sits at 238, ABOVE the
+// edited line. Path, category and snippet byte-identical on both; the census holds at 218
+// against a 218 ceiling and no category count moves.
+// BROWSER PASS 3's RAW-KEY MOUNTS (2026-09-19, lane 36 car 4) — TWO PURE LINE MOVES, NO
+// CEILING CHANGE, NO DEBT MOTION. Threading `resourceDisplayName` through the Resource
+// Exploitation pills puts five lines of rationale above the Shadow Economy section, so
+// EconomicsTab's two `bmc` rows re-address 736 -> 741 and 742 -> 747. The car's seven other
+// files carry no banked row at all. Path, category and snippet byte-identical; the census
+// holds at 218 against a 218 ceiling. ⚠ THE RATIONALE IS A `//` BLOCK INSIDE THE RENDER AND
+// NOT A `{/* … */}` IN THE JSX, which is a lint fact worth writing down: max-lines skips
+// comments, and a JSX comment container is CODE — the first draft took that file to 601
+// against its 600 ceiling and the pre-commit hook refused it.
+// BROWSER PASS 3's COUP WEIGHTS (2026-09-19, lane 36 car 6) — THREE PURE LINE MOVES, NO
+// CEILING CHANGE, NO DEBT MOTION, AND A REPORTED GAP IN THIS WALKER. Retiring the raw coup
+// weight from the two rows that printed it ("w 41.25") leaves a rationale where the span was,
+// so PowerStrata's four rows re-address 255 -> 269 (both categories), 257 -> 271 and
+// 298 -> 312; EngineSections' three rows sit above its edited line and do not move.
+// ⛔ THE CEILINGS DID NOT FALL, AND THAT IS THE FINDING. Neither retired site was ever in this
+// census: `proseNumericsWalk.js`'s FLOAT_TOKENS names `power`, `score` and `standing` but NOT
+// `weight`, while the walker's own `namesAScalar` regex two hundred lines below DOES name it —
+// the file's two instruments disagree about one token. Adding it is not a lane's call: four
+// `${x.weight}` interpolations in `worldPulse/warReceiptPools.js` would red on arrival, and a
+// ceiling may never be raised to absorb them. The class is held meanwhile by a behaviour arm
+// (tests/components/statBandsOverDigits.test.jsx), which convicts a planted weight.
+const REVIEWED_TOTAL_CEILING = 218;
 const REVIEWED_CATEGORY_CEILINGS = Object.freeze({
-  floatInterpolation: 148,
-  percentToken: 56,
-  multiplier: 10,
-  twoDecimalScore: 11,
+  floatInterpolation: 147,
+  percentToken: 54,
+  multiplier: 8,
+  twoDecimalScore: 9,
   pushIndirection: 0,
 });
+
+/**
+ * GENERATED SOURCES ARE NOT AUTHORED PROSE. The landing fixture is written by
+ * scripts/generate-landing-fixture.mjs from a real generation and a real twelve-week pulse;
+ * its sentences are the ENGINE'S receipts ("Base chance 59% lifted by ×1.01 …") and its
+ * freshness is pinned by tests/build/landingFixtureFreshness.test.js. Humanizing them would
+ * falsify the receipt, and banking them would make a regeneration a prose-numerics event.
+ * So the walk skips them here and in the chair's re-address tool alike (2026-09-19, §934.30).
+ */
+const GENERATED_SOURCES = new Set(['src/components/home/landingFixture.js']);
 
 function walkSourceFiles(dir, out = []) {
   for (const entry of readdirSync(dir)) {
     const abs = join(dir, entry);
     if (statSync(abs).isDirectory()) walkSourceFiles(abs, out);
-    else if (/\.(?:js|jsx)$/.test(entry)) out.push(abs);
+    else if (/\.(?:js|jsx)$/.test(entry)) {
+      const rel = relative(ROOT, abs).replace(/\\/g, '/');
+      if (!GENERATED_SOURCES.has(rel)) out.push(abs);
+    }
   }
   return out;
 }
@@ -632,7 +795,7 @@ describe('prose numerics live-tree ratchet (exact legacy identity, shrink-only)'
     ).toEqual([]);
     expect(
       ceilingViolations(LIVE.hits),
-      'The live tree exceeds the reviewed 225-row census. Humanize the new leak; never raise a ceiling.',
+      'The live tree exceeds the reviewed 218-row census. Humanize the new leak; never raise a ceiling.',
     ).toEqual([]);
   });
 
@@ -647,8 +810,8 @@ describe('prose numerics live-tree ratchet (exact legacy identity, shrink-only)'
     const temporaryRegeneratedBaseline = JSON.parse(JSON.stringify(mutatedLive));
     expect(mutatedLive).toEqual(temporaryRegeneratedBaseline);
     expect(ceilingViolations(temporaryRegeneratedBaseline)).toEqual([
-      'total 226 exceeds reviewed ceiling 225',
-      'floatInterpolation 149 exceeds reviewed ceiling 148',
+      'total 219 exceeds reviewed ceiling 218',
+      'floatInterpolation 148 exceeds reviewed ceiling 147',
     ]);
   });
 

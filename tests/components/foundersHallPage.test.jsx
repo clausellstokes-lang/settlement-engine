@@ -93,6 +93,26 @@ describe('the pre-launch Hall (fail-closed, and still complete)', () => {
   });
 });
 
+describe('the cross-link to the First Hundred (2026-09-18)', () => {
+  test('the Hall names the other roll and routes to it', async () => {
+    const onNavigate = vi.fn();
+    chairsRef.current = [];
+    vi.spyOn(hall, 'fetchFounderChairs').mockResolvedValue([]);
+    render(<FoundersHallPage onNavigate={onNavigate} />);
+    await act(async () => { await Promise.resolve(); });
+
+    // Control: the Hall rendered (a dead render would green the link assertion).
+    expect(screen.getByRole('heading', { name: /The Founders’ Hall/ })).toBeTruthy();
+
+    // /first-hundred already linked HERE and the Hall said nothing back, so the
+    // honor roll had no inbound link anywhere outside lib/routes.js.
+    const link = screen.getByRole('link', { name: /Read the roll/ });
+    expect(link.getAttribute('href')).toBe('/first-hundred');
+    fireEvent.click(link);
+    expect(onNavigate).toHaveBeenCalledWith('first-hundred');
+  });
+});
+
 describe('THE DISPLAY LAW, in the DOM', () => {
   const ledger = [
     chair(12, 'delphine'),

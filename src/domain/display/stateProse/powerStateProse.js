@@ -623,7 +623,7 @@ export function ladderPoolKey(rungs, instability) {
  * @param {PowerDeskSettlement|null|undefined} settlement
  * @param {{factionName?: unknown, rungs?: ReadonlyArray<{name?: unknown, standing?: unknown}>|null,
  *   instability?: unknown}} [reading] the caller's own `ladderRungsOf`/`ladderInstabilityOf`
- * @param {{seed?: string, audience?: string}} [options]
+ * @param {{seed?: string, audience?: string, tierNoun?: string|null}} [options]
  * @returns {object|null}
  */
 export function powerLadderRung(settlement, reading = {}, options = {}) {
@@ -839,7 +839,7 @@ export function politicsEndPoolKey(projection) {
  *   structuralLens?: {rulingPower?: unknown, economicBase?: unknown}|null,
  *   politics?: {blocs?: ReadonlyArray<Record<string, unknown>>}|null}} [readings]
  *   the caller's own derivations — see DS-POW-4, DS-POW-5 and DS-POW-7 above
- * @param {{seed?: string, audience?: string}} [options]
+ * @param {{seed?: string, audience?: string, tierNoun?: string|null}} [options]
  * @returns {Readonly<{legitimacyBanner: object|null, legitimacyLens: object|null,
  *   stabilityHeader: object|null, stabilityLens: object|null, legitimacyReading: object|null,
  *   captureReading: object|null, operationReading: object|null, successionRisk: object|null,

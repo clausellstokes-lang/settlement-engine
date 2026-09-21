@@ -74,7 +74,9 @@ describe('frozen-tense display honesty — DefenseTab (FROZEN_VS_LIVE snapshot f
   });
 
   test('the Internal Security banner (frozen scores.internal) carries the survey vintage', () => {
-    expect(read(DEFENSE_TAB)).toMatch(/Internal Security · First Survey/);
+    // Sentence case since the label ladder (components/new/labelLadder.js): the vintage
+    // suffix is a rung-2 label, not a section eyebrow.
+    expect(read(DEFENSE_TAB)).toMatch(/Internal security · first survey/);
   });
 
   test('the Vulnerabilities section (frozen structuralViolations, G5) reads as first-survey verdicts', () => {

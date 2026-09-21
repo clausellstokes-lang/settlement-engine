@@ -2,13 +2,13 @@
   "schema": "wiring-census/1",
   "stamp": {
     "files": {
-      "src/domain/display/stateProse/generalStateProse.js": "ab4ed0fce45d2d0b3a81cbfca929b1dda17c2b26038e68643616c5590f54c9ce",
-      "src/domain/display/stateProse/powerStateProse.js": "25683c4233065281f1e879c284249d5b2165fcf0c3e39235e093717dccb0c95a",
-      "src/domain/display/stateProse/economyStateProse.js": "19782d3f280828fdd9b6ad1270aa647edcf3ea2e5696fc61e6c8918f9feff9f4",
-      "src/domain/display/stateProse/defenseStateProse.js": "753a06d862a7d7762e9bcf14f4d17cf153c66d7ea5b8606f0bbe489443d2fec9",
-      "src/domain/display/stateProse/stressorsStateProse.js": "e51c4df98e6941f6ea8d2f94665aabf143813189c0b787bd289dc9a55765d8ad",
-      "src/domain/display/stateProse/warFaithStateProse.js": "cf003edcea618016dbd640dbe5ca3c68e5dae52fe08ac3af4dd23ac80995f9d8",
-      "src/domain/display/stateProse/dossierMounts.js": "b9314c6d9cb005166297370d350ad2d7294b7c7a87ae5ceecdfdf17526140603"
+      "src/domain/display/stateProse/generalStateProse.js": "5ca2ee51b1a2367df4efc5d0f6cfd7a62c688be8efec684eafb502ab14991d88",
+      "src/domain/display/stateProse/powerStateProse.js": "78d22210d6d2ca5d44a4af32cf3a13b7c123d0577850458e9ce36ec893e3d2c8",
+      "src/domain/display/stateProse/economyStateProse.js": "3ff22cc33ba04eed4af871d17fdd858669c90b4acadd264801767e6ac7e498a0",
+      "src/domain/display/stateProse/defenseStateProse.js": "45bf8b0547218a65a8d7cf53cb10bd9b6a1badc08957c0f2bf447acb98d1a202",
+      "src/domain/display/stateProse/stressorsStateProse.js": "e128aa4ece932c8eae009c22eb9ad9f77f47b3967b5652687f80c76933027fd1",
+      "src/domain/display/stateProse/warFaithStateProse.js": "95882ecdf30f617f44ed3f460c4a67109107f5e645fc7e9820a60de0e67b1fb0",
+      "src/domain/display/stateProse/dossierMounts.js": "392b5d89c2a5694f33c76c535e6592670e8a8fde89739e0deb1538d5381e01b1"
     },
     "candidateLeaves": {
       "src/domain/display/stateProse/defenseStateProseCandidates.js": "b4833f55274b040dc5627b0eedafe7f98f508cec73ac829ce213adabe8c3e96c",
@@ -18,7 +18,7 @@
       "src/domain/display/stateProse/stressorsStateProseCandidates.js": "ee0548fc8b662da76e4bf85a1fae30433e9f738277c774e16c6a7abd7fb93552",
       "src/domain/display/stateProse/warFaithStateProseCandidates.js": "b5b193dd2a2c83d077da5f82fd4a5fc5f5ad15a3b6a214725daf41ede442324b"
     },
-    "producerIndexFiles": 1157
+    "producerIndexFiles": 1172
   },
   "totals": {
     "pools": 708,
@@ -49,9 +49,9 @@
     "objectClassed": 99,
     "mountedRows": 566,
     "absent": {
-      "measured": 370,
+      "measured": 372,
       "default": 3,
-      "not-produced": 60,
+      "not-produced": 58,
       "method-call": 18
     },
     "zeroK": 49,
@@ -3830,7 +3830,7 @@
     },
     {
       "block": "DS-DEF-6",
-      "pool": "Magical Capability: Arcane support",
+      "pool": "Arcane Support: Present",
       "slotsFilled": [
         "settlement"
       ],
@@ -3874,7 +3874,7 @@
     },
     {
       "block": "DS-DEF-6",
-      "pool": "Magical Capability: None",
+      "pool": "Arcane Support: None",
       "slotsFilled": [
         "settlement"
       ],
@@ -12864,7 +12864,7 @@
       "readsGrain": "function",
       "narrowed": false,
       "absent": {
-        "readings.impairedInstitution": "not-produced"
+        "readings.impairedInstitution": "measured"
       },
       "covert": false,
       "objectClasses": [],
@@ -37205,7 +37205,7 @@
       "readsGrain": "function",
       "narrowed": false,
       "absent": {
-        "hasPatron": "not-produced"
+        "hasPatron": "measured"
       },
       "covert": false,
       "objectClasses": [],
@@ -48178,7 +48178,7 @@
     {
       "tier": "THIN",
       "block": "DS-DEF-6",
-      "subject": "Magical Capability: Arcane support",
+      "subject": "Arcane Support: Present",
       "fields": [],
       "readingFunction": "(unresolved)",
       "count": "3 variant(s) · 2 grammar(s) · slots {settlement}"
@@ -48186,7 +48186,7 @@
     {
       "tier": "THIN",
       "block": "DS-DEF-6",
-      "subject": "Magical Capability: None",
+      "subject": "Arcane Support: None",
       "fields": [],
       "readingFunction": "(unresolved)",
       "count": "3 variant(s) · 2 grammar(s) · slots {settlement}"

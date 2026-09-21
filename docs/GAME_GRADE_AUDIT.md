@@ -1,6 +1,6 @@
 # THE GAME-GRADE AUDIT — evidence ledger
 
-> **Audit state, 2026-07-24**
+> **⚠️ HISTORICAL — audit state, 2026-07-24. A point-in-time evidence ledger, not maintained.** (Banner added 2026-09-20 by FIX-C2b: its citations address the tree it pinned, including a town-map surface deleted at `43c3ac3805`; re-addressing them to today's tree would falsify the record rather than repair it, which is the estate's own archival test.)
 > - The original six-surface audit was performed 2026-07-22 against `composite-r4 @ 69b7a8d3`.
 > - The live code-of-record worktree is now `claude/composite-r4 @ 8033ddbe` with substantial uncommitted
 >   work from concurrent efforts. A line visible in the working tree is current evidence, but it is not

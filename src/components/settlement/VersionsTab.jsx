@@ -43,6 +43,8 @@ import { EVENTS } from '../../lib/analytics.js';
 import LockedDestination from '../primitives/LockedDestination.jsx';
 import { GOLD, INK, BODY, MUTED, BORDER, CARD, sans, serif_, FS, SP, swatch, EMPTY_VALUE } from '../theme.js';
 import Button from '../primitives/Button.jsx';
+import useIsMobile from '../../hooks/useIsMobile.js';
+import { chromeFontSize } from '../../design/proseScale.js';
 
 const SLATE = swatch['#5A6E82'];
 const GREEN = swatch['#4A7A3A'];
@@ -159,15 +161,18 @@ const KIND_ACCENT = {
   save:     BODY,
 };
 
+// Rung-3 tags on a timeline ENTRY, not the timeline's axis words: sentence case, with
+// the accent colour carrying the kind. The engine keys are untouched.
 const KIND_LABEL = {
-  snapshot: 'SNAPSHOT',
-  canonize: 'CANON',
-  export:   'EXPORT',
-  edit:     'EDIT',
-  save:     'SAVE',
+  snapshot: 'Snapshot',
+  canonize: 'Canon',
+  export:   'Export',
+  edit:     'Edit',
+  save:     'Save',
 };
 
 export default function VersionsTab({ save }) {
+  const mobile = useIsMobile();
   const enabled = flag('versionHistory');
   const tier = useStore(s => s.auth.tier);
   const revertToSnapshot = useStore(s => s.revertToSnapshot);
@@ -290,17 +295,17 @@ export default function VersionsTab({ save }) {
         }}>
           Timeline
         </h3>
-        <span style={{ fontSize: FS.xs, color: MUTED }}>
+        <span style={{ fontSize: chromeFontSize(FS.xs, mobile), color: MUTED }}>
           {entries.length} {entries.length === 1 ? 'entry' : 'entries'}
         </span>
       </div>
       {revertError && (
-        <div style={{ color: AMBER, fontSize: FS.xs, fontWeight: 700, marginBottom: SP.sm }}>
+        <div style={{ color: AMBER, fontSize: chromeFontSize(FS.xs, mobile), fontWeight: 700, marginBottom: SP.sm }}>
           {revertError}
         </div>
       )}
       {snapshotError && (
-        <div style={{ color: AMBER, fontSize: FS.xs, fontWeight: 700, marginBottom: SP.sm }}>
+        <div style={{ color: AMBER, fontSize: chromeFontSize(FS.xs, mobile), fontWeight: 700, marginBottom: SP.sm }}>
           {snapshotError}
         </div>
       )}
@@ -318,7 +323,7 @@ export default function VersionsTab({ save }) {
             htmlFor="version-snapshot-label"
             style={{
               display: 'flex', alignItems: 'center', gap: SP.xs,
-              flex: '1 1 280px', fontSize: FS.xs, color: MUTED,
+              flex: '1 1 280px', fontSize: chromeFontSize(FS.xs, mobile), color: MUTED,
             }}
           >
             Name this moment (optional)
@@ -347,7 +352,7 @@ export default function VersionsTab({ save }) {
         </div>
       ) : (
         <div style={{
-          marginBottom: SP.md, fontSize: FS.xs, color: MUTED, fontStyle: 'italic',
+          marginBottom: SP.md, fontSize: chromeFontSize(FS.xs, mobile), color: MUTED, fontStyle: 'italic',
         }}>
           Save this settlement to start taking snapshots of it.
         </div>
@@ -356,13 +361,13 @@ export default function VersionsTab({ save }) {
       {/* The comparison. Rendered above the timeline so the answer sits where
           the reader is looking after picking the second snapshot. */}
       {compareIds.length === 1 && (
-        <div style={{ marginBottom: SP.sm, fontSize: FS.xs, color: MUTED }}>
+        <div style={{ marginBottom: SP.sm, fontSize: chromeFontSize(FS.xs, mobile), color: MUTED }}>
           Pick a second snapshot to compare.
         </div>
       )}
       {comparePair && (
         <Suspense fallback={
-          <div style={{ marginBottom: SP.md, fontSize: FS.xs, color: MUTED, fontStyle: 'italic' }}>
+          <div style={{ marginBottom: SP.md, fontSize: chromeFontSize(FS.xs, mobile), color: MUTED, fontStyle: 'italic' }}>
             Working out what changed.
           </div>
         }>
@@ -398,10 +403,10 @@ export default function VersionsTab({ save }) {
                   background: accent, border: `2px solid ${CARD}`,
                 }} />
                 <div style={{
-                  fontSize: FS.xxs, fontWeight: 800, letterSpacing: '0.06em',
+                  fontSize: chromeFontSize(FS.xxs, mobile), fontWeight: 800, letterSpacing: '0.06em',
                   color: accent,
                 }}>
-                  {KIND_LABEL[e.kind] || 'EVENT'} · {formatTs(e.ts)}
+                  {KIND_LABEL[e.kind] || 'Event'} · {formatTs(e.ts)}
                 </div>
                 <div style={{
                   fontFamily: serif_, fontSize: FS.md, fontWeight: 600,
@@ -413,7 +418,7 @@ export default function VersionsTab({ save }) {
                   <div style={{ marginTop: 4 }}>
                     {confirmRevert === e.id ? (
                       <div style={{ display: 'flex', gap: SP.xs, alignItems: 'center' }}>
-                        <span style={{ fontSize: FS.xs, color: AMBER, fontWeight: 700 }}>
+                        <span style={{ fontSize: chromeFontSize(FS.xs, mobile), color: AMBER, fontWeight: 700 }}>
                           Confirm? Reverting creates a new snapshot first.
                         </span>
                         <Button

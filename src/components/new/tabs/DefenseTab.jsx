@@ -8,10 +8,19 @@ import {NarrativeNote} from '../NarrativeNote';
 import { criminalOpNote, deriveCriminalStructure, deriveDefenseReadiness, deriveSupportingCapabilities, deriveGuardAssessment, deriveDefenseVulnerabilities, DEFENSE_STRESS_STATUS } from '../../../domain/display/defenseDisplay.js';
 import { safetySeverityOf } from '../../../domain/display/safetySeverity.js';
 import { scoreBand, scoreColor } from '../../../domain/display/defenseScoreBands.js';
+import { statusCase } from '../labelLadder.js';
 import { defenseCriminalProse, defenseForcesProse, defenseMilitaryStatusProse, defensePostureProse, defenseStateProse, defenseSupportingProse, defenseThreatProse, defenseWallRationaleProse } from '../../../domain/display/stateProse/defenseStateProse.js';
 import { drawnAtMount } from '../../../domain/display/stateProse/dossierMounts.js';
+import { tierNounFor } from '../../../domain/display/stateProse/weaveBlock.js';
 import { truncateAtWord } from '../../../lib/text.js';
 import useIsMobile from '../../../hooks/useIsMobile.js';
+import { chromeFontSize, proseFontSize } from '../../../design/proseScale.js';
+import { edged } from '../../../design/edgedBox.js';
+// THE ONE PARAGRAPH RENDERER (owner finding 2026-09-18). Every position on this tab used to
+// map its drawn sentences to one `<p>` EACH, so a five-lens position printed five paragraphs
+// that each opened on the town's name. The DRAW is unchanged: the lines handed over are the
+// same strings `drawnAtMount` ruled on.
+import ProseBlock from '../ProseBlock.jsx';
 
 /**
  * The public-order position. ⚠ Its rungs arrive already PROJECTED BESIDE the DM's field —
@@ -71,11 +80,77 @@ const CRIMINAL_MOUNT = 'defense.criminalStructure';
  */
 const SUPPORTING_MOUNT = 'defense.supportingCapabilities';
 
+/**
+ * ⭐ THE THREAT ROW → DS-DEF-2 POOL JOIN (owner finding 3, 2026-09-18).
+ *
+ * The five readiness sentences used to be flattened into one list and printed as a STACK
+ * ABOVE the bars, so a reader had to pair a sentence with a bar by counting. Each sentence
+ * now renders under the bar it is about, and this is the pairing.
+ *
+ * ⚠ IT IS A LABEL JOIN, AND IT IS TOTAL ON PURPOSE. `buildThreatAssessment` returns rows
+ * carrying `{label, color, assess}` and no machine key, so the alternative was pairing by
+ * INDEX — which would put a famine sentence under a monster bar the day that leaf grows a
+ * conditional row, silently, because both lists would still be five long. The key set is
+ * asserted EQUAL to the builder's own labels in tests/ui/defenseTabFlow.test.js, so neither
+ * side can grow a member the other does not have; a label this map does not know draws
+ * NOTHING rather than the wrong row's sentence. The sibling `threatScores` object in the
+ * body below already keys on the same labels, so this is the file's own idiom.
+ */
+export const THREAT_ROW_KEY = Object.freeze({
+  'Beasts & Monsters': 'beasts',
+  'Invasion & War': 'invasion',
+  'Internal Security': 'internal',
+  'Economic Survival': 'economic',
+  'Disasters & Famine': 'disaster',
+});
+
+/**
+ * ⭐ THE CAPABILITY ROWS WHOSE STATUS IS ALREADY THE GRADE (owner finding, 2026-09-18: the
+ * duplicate band word on the Supporting Capabilities rows).
+ *
+ * A scored capability row has two words it could put beside its bar: its own `status`, and
+ * the shared ladder's band word for its score (R-5b item #20). Whether both belong depends on
+ * WHAT the status is. Arcane Support's status says whether arcane practitioners are on the
+ * rolls at all — a presence read — so its band is the only word that grades the bar, and it
+ * keeps it. Economic Backing's status IS a grade: `deriveSupportingCapabilities` grades the
+ * SAME econScore into Well-funded / Adequate / Underfunded / Critical that the band grades
+ * into Strong / Adequate / Weak / Critical, and since ODQ §934.14 both read ONE set of cut
+ * points (`SCORE_BAND_CUTS` in defenseScoreBands.js — the band ladder's, which is canonical).
+ * Printed together they are therefore one number's verdict said twice in two vocabularies —
+ * the same word where the ladders share one ("Adequate … Adequate") and a synonym pair
+ * everywhere else ("Well-funded … Strong", "Underfunded … Weak").
+ *
+ * ⭐ THE DISAGREEMENT THIS COMMENT USED TO RECORD IS GONE AT THE SOURCE. The status ladder
+ * cut at 65/40/25 while the band cut at 65/40/20, so at econScore 20-24 the two printed
+ * verdicts that CONTRADICTED each other ("Critical … Weak"). Dropping the band hid that pair
+ * on this row but left the Threat Assessment and the Overview reading the other verdict off
+ * the same score; §934.14 re-cut the status ladder onto the band's thresholds instead. The
+ * fold below still stands, because two vocabularies grading one bar is a duplication whether
+ * or not they agree — it is now only a duplication, never a contradiction.
+ *
+ * So a row named here renders NO band: its status gives the grade in the row's own vocabulary
+ * and the bar carries the magnitude. No digit comes back, so R-5b item #20's law — the word,
+ * never the digit — still holds on every row.
+ *
+ * ⚠ A LABEL LIST, KEPT TOTAL BY BEHAVIOUR. tests/components/statBandsOverDigits.test.jsx moves
+ * every score of real generated towns and asserts that the scored rows whose status MOVES with
+ * the score are exactly this list, so a renamed row, a new scored row, or a presence read that
+ * turns into a grade reds there instead of quietly printing two verdicts again.
+ */
+export const STATUS_IS_THE_GRADE = Object.freeze(['Economic Backing']);
+
 export function DefenseTab({ settlement:r, narrativeNote, publicDossier = false, playerView = false}) {
   const [expandedThreat, setExpandedThreat] = useState(null);
   const [showForces, setShowForces] = useState(true);
   // Mobile: let the threat row wrap and the label flex, so a long threat name
   // ("Siege & Assault") no longer clips against the fixed 130px slot at 375px.
+  // ⭐ IT IS ALSO THIS TAB'S PHONE PROSE FLOOR (src/design/proseScale.js). Defense
+  // is the densest small-step surface in the dossier — the guard assessment, the
+  // threat caption, the criminal-operation notes and every force card's line sat
+  // between 10 and 12.5px — so every one of them reads through `proseFontSize`
+  // here. The threat labels, the band pills, the capability status words and the
+  // institution names are the tab's furniture and keep their own steps. Bound
+  // once, above the `!r` early return, so the hook order is stable.
   const isMobile = useIsMobile();
   if (!r) return null;
 
@@ -86,15 +161,22 @@ export function DefenseTab({ settlement:r, narrativeNote, publicDossier = false,
   const f = r.economicState?.compound?.inst || {};
   const sp = r.economicState?.safetyProfile || {};
   const ra = r.resourceAnalysis || {};
+  // ⭐ THE DESK'S OPTION BAG, SPELLED ONCE (ODQ §934.22 addendum). This tab reads eight
+  // defense blocks and every one of them was spelling the same three-line literal, so a
+  // field added to the bag had eight places to be forgotten — which is how the screen and
+  // the desk came to disagree about what to call a metropolis. `tierNoun` is the settlement's
+  // own noun: the desk speaks it, and the tab renders the sentence the desk returned.
+  const deskOpts = {
+    seed: String(r?._seed ?? r?.id ?? ''),
+    audience: playerView ? 'player' : 'dm',
+    tierNoun: tierNounFor(r.tier),
+  };
   // THE DEFENSE DESK. THE PUBLIC GATE (§885.3): a public gallery dossier is a PAID surface
   // and the `defense` tab is not filtered off one, so the desk is NOT DRAWN there. The
   // audience follows kernel law 2's fail-closed default, stated rather than defaulted.
   const deskProse = publicDossier
     ? Object.freeze({ publicOrder: null, firstSurvey: null })
-    : defenseStateProse(r, {
-      seed: String(r?._seed ?? r?.id ?? ''),
-      audience: playerView ? 'player' : 'dm',
-    });
+    : defenseStateProse(r, deskOpts);
   // `drawnAtMount` routes the RUNG the projection carries; the `beside` line is only
   // rendered when the registry lets that rung speak, so flipping the row to `glance`
   // silences the machine line and leaves the DM's field untouched.
@@ -106,20 +188,19 @@ export function DefenseTab({ settlement:r, narrativeNote, publicDossier = false,
   // frames no DM-editable field, so these are plain rungs rather than projections.
   const threatProse = publicDossier
     ? Object.freeze({ beasts: null, invasion: null, internal: null, economic: null, disaster: null })
-    : defenseThreatProse(r, {
-      seed: String(r?._seed ?? r?.id ?? ''),
-      audience: playerView ? 'player' : 'dm',
-    });
-  const threatLines = ['beasts', 'invasion', 'internal', 'economic', 'disaster']
-    .map((k) => drawnAtMount(THREAT_MOUNT, threatProse[k])?.sentence).filter(Boolean);
+    : defenseThreatProse(r, deskOpts);
+  // The sentence that belongs to ONE readiness row, or null. The registry still rules on
+  // every rung exactly as it did when these were a flat list — flipping `defense.threatAssessment`
+  // to `glance` silences all five together, under every bar at once.
+  const threatSentenceFor = (label) => {
+    const key = THREAT_ROW_KEY[label];
+    return (key ? drawnAtMount(THREAT_MOUNT, threatProse[key])?.sentence : null) || null;
+  };
   // DS-DEF-5, the armed-forces lenses. Same public gate as above, stated rather than
   // defaulted; DS-DEF-5 frames no DM-editable field, so these are plain rungs too.
   const forcesProse = publicDossier
     ? Object.freeze({ fortification: null, force: null, contracted: null, charter: null, arcane: null })
-    : defenseForcesProse(r, {
-      seed: String(r?._seed ?? r?.id ?? ''),
-      audience: playerView ? 'player' : 'dm',
-    });
+    : defenseForcesProse(r, deskOpts);
   const forceLines = ['fortification', 'force', 'contracted', 'charter', 'arcane']
     .map((k) => drawnAtMount(FORCES_MOUNT, forcesProse[k])?.sentence).filter(Boolean);
   // DS-DEF-1, the posture header. Same public gate; it frames no DM-editable field either
@@ -127,10 +208,7 @@ export function DefenseTab({ settlement:r, narrativeNote, publicDossier = false,
   // the Guard Assessment paragraph rather than over it.
   const postureProse = publicDossier
     ? Object.freeze({ posture: null, terrain: null, prize: null })
-    : defensePostureProse(r, {
-      seed: String(r?._seed ?? r?.id ?? ''),
-      audience: playerView ? 'player' : 'dm',
-    });
+    : defensePostureProse(r, deskOpts);
   // ⚠ Like the public-order banner, these arrive already PROJECTED BESIDE the DM's field —
   // `guardEffectivenessDesc`, which `deriveGuardAssessment` returns verbatim just above. The
   // `beside` line is only taken when the registry lets that rung SPEAK, so flipping the row
@@ -142,29 +220,20 @@ export function DefenseTab({ settlement:r, narrativeNote, publicDossier = false,
   // (the banner renders generator-authored `summary` / `viabilityNote`), so plain rungs.
   const statusProse = publicDossier
     ? Object.freeze({ override: null, viability: null })
-    : defenseMilitaryStatusProse(r, {
-      seed: String(r?._seed ?? r?.id ?? ''),
-      audience: playerView ? 'player' : 'dm',
-    });
+    : defenseMilitaryStatusProse(r, deskOpts);
   const statusLines = ['override', 'viability']
     .map((k) => drawnAtMount(MILITARY_STATUS_MOUNT, statusProse[k])?.sentence).filter(Boolean);
   // DS-DEF-11, why the wall and why not. Same public gate; no DM-editable field, plain rung.
   const wallProse = publicDossier
     ? Object.freeze({ rationale: null })
-    : defenseWallRationaleProse(r, {
-      seed: String(r?._seed ?? r?.id ?? ''),
-      audience: playerView ? 'player' : 'dm',
-    });
+    : defenseWallRationaleProse(r, deskOpts);
   const wallLine = drawnAtMount(WALL_RATIONALE_MOUNT, wallProse.rationale)?.sentence || null;
   // DS-DEF-6, the supporting capabilities. Same public gate as every other mount on this
   // tab; no DM-editable field, so plain rungs. Only the logistics and naval lenses are
   // read — the desk states, and the suite pins, why the other four must stay silent.
   const supportingProse = publicDossier
     ? Object.freeze({ logistics: null, naval: null })
-    : defenseSupportingProse(r, {
-      seed: String(r?._seed ?? r?.id ?? ''),
-      audience: playerView ? 'player' : 'dm',
-    });
+    : defenseSupportingProse(r, deskOpts);
   const supportingLines = ['logistics', 'naval']
     .map((k) => drawnAtMount(SUPPORTING_MOUNT, supportingProse[k])?.sentence).filter(Boolean);
   const stresses = (Array.isArray(r.stress)?r.stress:r.stress?[r.stress]:[]).filter(Boolean);
@@ -221,10 +290,7 @@ export function DefenseTab({ settlement:r, narrativeNote, publicDossier = false,
   // and the classification beneath it cannot be about two different readings.
   const criminalProse = publicDossier
     ? Object.freeze({ structure: null, capture: null })
-    : defenseCriminalProse(r, crimStructure, {
-      seed: String(r?._seed ?? r?.id ?? ''),
-      audience: playerView ? 'player' : 'dm',
-    });
+    : defenseCriminalProse(r, crimStructure, deskOpts);
   const criminalLines = ['structure', 'capture']
     .map((k) => drawnAtMount(CRIMINAL_MOUNT, criminalProse[k])?.sentence).filter(Boolean);
 
@@ -255,9 +321,9 @@ export function DefenseTab({ settlement:r, narrativeNote, publicDossier = false,
       <div style={{display:'flex',alignItems:'flex-start',gap:8}}>
         <div style={{flex:1}}>
           <div style={{fontSize:FS.md,fontWeight:700,color:swatch.inkMag,marginBottom:i.desc?2:0}}>{i.name}</div>
-          {i.desc&&<div style={{fontSize: FS['11.5'],color:swatch.inkMag3,lineHeight:1.4}}>{i.desc}</div>}
+          {i.desc&&<div style={{fontSize: proseFontSize(FS['11.5'], isMobile),color:swatch.inkMag3,lineHeight:1.4}}>{i.desc}</div>}
         </div>
-        {i.source&&i.source!=='generated'&&<span style={{fontSize:FS.micro,fontWeight:700,color:swatch['#A0762A'],background:swatch['#F0E4C0'],padding:'1px 5px',letterSpacing:'0.04em',flexShrink:0}}>{i.source==='required'?'REQ':'FORCED'}</span>}
+        {i.source&&i.source!=='generated'&&<span style={{fontSize:chromeFontSize(FS.micro, isMobile),fontWeight:700,color:swatch['#A0762A'],background:swatch['#F0E4C0'],padding:'1px 5px',letterSpacing:'0.04em',flexShrink:0}}>{i.source==='required'?'REQ':'FORCED'}</span>}
       </div>
     </div>
   );
@@ -270,77 +336,86 @@ export function DefenseTab({ settlement:r, narrativeNote, publicDossier = false,
       <div style={{background:readiness.background,border:`1px solid ${readiness.border}`,borderLeft:`4px solid ${readiness.color}`,padding:'14px 18px',marginBottom:14}}>
         <div style={{display:'flex',alignItems:'flex-start',gap:16,flexWrap:'wrap'}}>
           <div style={{flexShrink:0}}>
-            <div style={{fontSize:FS.xxs,fontWeight:700,color:swatch.inkMag3,textTransform:'uppercase',letterSpacing:'0.08em',marginBottom:4}}>Defensive Posture</div>
-            <div style={{fontSize:FS.h1,fontWeight:700,color:readiness.color,lineHeight:1.1,marginBottom:6}}>{readiness.label}</div>
+            <div style={{fontSize:chromeFontSize(FS.xxs, isMobile),fontWeight:700,color:swatch.inkMag3,marginBottom:4}}>Defensive posture</div>
+            <div style={{fontSize:FS.h1,fontWeight:700,color:readiness.color,lineHeight:1.1,marginBottom:6}}>{statusCase(readiness.label)}</div>
             <div style={{display:'flex',gap:6,flexWrap:'wrap'}}>
-              {ra.terrain&&<span style={{fontSize:FS.xs,color:swatch['#1A4A2A'],background:swatch['#E8F0E8'],border:'1px solid #a8d0a8',padding:'2px 8px',fontWeight:600}}>{ra.terrain}</span>}
-              {ra.strategicValue&&<span style={{fontSize:FS.xs,color:swatch.inkMag2,background:swatch['#F0EAD8'],border:'1px solid #d0c090',padding:'2px 8px'}}>{ra.strategicValue.split(' - ')[0]}</span>}
+              {ra.terrain&&<span style={{fontSize:chromeFontSize(FS.xs, isMobile),color:swatch['#1A4A2A'],background:swatch['#E8F0E8'],border:'1px solid #a8d0a8',padding:'2px 8px',fontWeight:600}}>{ra.terrain}</span>}
+              {ra.strategicValue&&<span style={{fontSize:chromeFontSize(FS.xs, isMobile),color:swatch.inkMag2,background:swatch['#F0EAD8'],border:'1px solid #d0c090',padding:'2px 8px'}}>{ra.strategicValue.split(' - ')[0]}</span>}
             </div>
           </div>
           {guardAssessment&&<div style={{flex:1,minWidth:200}}>
-            <div style={{fontSize:FS.xxs,fontWeight:700,color:swatch.inkMag3,textTransform:'uppercase',letterSpacing:'0.06em',marginBottom:4}}>Guard Assessment</div>
-            <p style={{fontSize: FS['12.5'],color:swatch.inkMag2,lineHeight:1.6,margin:0}}>{guardAssessment}</p>
+            <div style={{fontSize:chromeFontSize(FS.xxs, isMobile),fontWeight:700,color:swatch.inkMag3,marginBottom:4}}>Guard assessment</div>
+            <p style={{fontSize: proseFontSize(FS['12.5'], isMobile),color:swatch.inkMag2,lineHeight:1.6,margin:0}}>{guardAssessment}</p>
           </div>}
         </div>
         {/* DS-DEF-1: the posture, the ground and the prize, in the town's own voice. Three
             lenses of one block at one position, BESIDE the badge and the DM's assessment. */}
         {postureLines.length>0&&<div style={{marginTop:10,paddingTop:10,borderTop:`1px solid ${readiness.border}`}}>
-          {postureLines.map((line,i)=>(
-            <p key={i} style={{fontSize:i===0?FS.sm:FS.xs,color:i===0?swatch.inkMag2:swatch.inkMag3,lineHeight:1.55,margin:i===0?0:'5px 0 0',fontStyle:'italic'}}>{line}</p>
-          ))}
+          <ProseBlock lines={postureLines} settlementName={r.name} tier={r.tier}
+            style={{fontSize:FS.sm,color:swatch.inkMag2,lineHeight:1.55,margin:0,fontStyle:'italic'}}/>
         </div>}
       </div>
 
       {/* ── ACTIVE MILITARY STATUS (stress override) ─────────────────────── */}
       {stressStatus&&<div style={{background:`${stressStatus.colour}0e`,border:`2px solid ${stressStatus.colour}`,padding:'12px 16px',marginBottom:14,display:'flex',gap:12,alignItems:'flex-start'}}>
         <div style={{flexShrink:0,textAlign:'center',minWidth:80}}>
-          <div style={{fontSize:FS.xxs,fontWeight:800,color:stressStatus.colour,textTransform:'uppercase',letterSpacing:'0.08em',marginBottom:2}}>Military Status</div>
-          <div style={{fontSize:FS.md,fontWeight:800,color:stressStatus.colour,lineHeight:1.2}}>{stressStatus.posture}</div>
+          <div style={{fontSize:chromeFontSize(FS.xxs, isMobile),fontWeight:800,color:stressStatus.colour,marginBottom:2}}>Military status</div>
+          <div style={{fontSize:FS.md,fontWeight:800,color:stressStatus.colour,lineHeight:1.2}}>{statusCase(stressStatus.posture)}</div>
         </div>
         <div style={{flex:1,borderLeft:`1px solid ${stressStatus.colour}40`,paddingLeft:12}}>
-          {stressObj?.summary&&<p style={{fontSize: FS['12.5'],color:swatch['#3A2A10'],lineHeight:1.5,margin:'0 0 4px'}}>{stressObj.summary}</p>}
-          {stressObj?.viabilityNote&&<p style={{fontSize: FS['11.5'],color:swatch['#5A3A10'],fontStyle:'italic',margin:0,lineHeight:1.4}}>{stressObj.viabilityNote}</p>}
+          {stressObj?.summary&&<p style={{fontSize: proseFontSize(FS['12.5'], isMobile),color:swatch['#3A2A10'],lineHeight:1.5,margin:'0 0 4px'}}>{stressObj.summary}</p>}
+          {stressObj?.viabilityNote&&<p style={{fontSize: proseFontSize(FS['11.5'], isMobile),color:swatch['#5A3A10'],fontStyle:'italic',margin:0,lineHeight:1.4}}>{stressObj.viabilityNote}</p>}
           {/* DS-DEF-8: what the override means for this town, in its own voice. */}
-          {statusLines.map((line,i)=>(
-            <p key={i} style={{fontSize:FS.xs,color:swatch['#3A2A10'],lineHeight:1.5,margin:'6px 0 0',fontStyle:'italic'}}>{line}</p>
-          ))}
+          <ProseBlock lines={statusLines} settlementName={r.name} tier={r.tier}
+            style={{fontSize:proseFontSize(FS.xs, isMobile),color:swatch['#3A2A10'],lineHeight:1.5,margin:'6px 0 0',fontStyle:'italic'}}/>
         </div>
       </div>}
 
       {/* ── THREAT ASSESSMENT ────────────────────────────────────────────── */}
       <div style={{marginBottom:14}}>
-        <div style={{fontSize:FS.xxs,fontWeight:700,color:swatch.inkMag3,textTransform:'uppercase',letterSpacing:'0.06em',marginBottom:2}}>Threat Assessment</div>
-        <div style={{fontSize:FS.xxs,color:MUTED,marginBottom:8,fontStyle:'italic'}}>Bars show the settlement&apos;s defense readiness against each threat, as judged at the first survey; Disasters & Famine is re-judged as the campaign advances. Higher is better.</div>
-        {/* DS-DEF-2: what each row MEANS, in the town's own voice. Five pools of one block
-            at one position; the bars and their scores above are untouched. */}
-        {threatLines.length>0&&<div style={{background:swatch['#FAF8F4'],border:'1px solid #d8c090',borderLeft:'4px solid #8b1a1a',padding:'9px 13px',marginBottom:10}}>
-          {threatLines.map((line,i)=>(
-            <p key={i} style={{fontSize:i===0?FS.sm:FS.xs,color:i===0?swatch.inkMag2:swatch.inkMag3,lineHeight:1.55,margin:i===0?0:'5px 0 0',fontStyle:'italic'}}>{line}</p>
-          ))}
-        </div>}
+        <div style={{fontSize:chromeFontSize(FS.xxs, isMobile),fontWeight:700,color:swatch.inkMag3,textTransform:'uppercase',letterSpacing:'0.06em',marginBottom:2}}>Threat Assessment</div>
+        <div style={{fontSize:proseFontSize(FS.xxs, isMobile),color:MUTED,marginBottom:8,fontStyle:'italic'}}>Bars show the settlement&apos;s defense readiness against each threat, as judged at the first survey; Disasters & Famine is re-judged as the campaign advances. Higher is better.</div>
+        {/* ⛔ NO SENTENCE STACK ABOVE THE BARS (owner finding 3, 2026-09-18). DS-DEF-2's five
+            readiness sentences used to print here as five paragraphs, one per row, ABOVE the
+            rows they describe — so a reader had to pair sentence to bar by counting, and all
+            five opened on the town's name. Each one now renders UNDER ITS OWN BAR. The caption
+            above stays: it frames the bars, not the sentences. */}
         <div style={{display:'flex',flexDirection:'column',gap:6}}>
           {threats.map(({label,color,assess},i)=>{
             const sc = threatScores[label]||0;
-            const badge = scoreBand(sc);
+            const badge = statusCase(scoreBand(sc));
             const badgeColor = scoreColor(sc);
             const isExp = expandedThreat===i;
+            const rowLine = threatSentenceFor(label);
             return (
-              <div key={i} role="button" tabIndex={0} style={{border:`1px solid ${isExp?color+'60':'#e0d0b0'}`,borderLeft:`3px solid ${color}`,overflow:'hidden',background:isExp?`${color}06`:'#faf8f4',cursor:'pointer'}}
-                onClick={()=>setExpandedThreat(isExp?null:i)}
-                onKeyDown={e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();setExpandedThreat(isExp?null:i);}}}>
-                <div style={{display:'flex',alignItems:'center',gap:8,padding:'8px 12px',flexWrap:isMobile?'wrap':undefined}}>
+              // ⚠ THE CARD IS NO LONGER THE BUTTON — the HEADER ROW inside it is. The corpus
+              // sentence sits in the card, under the bar, and folding it inside the control
+              // would have made the button's accessible name a whole paragraph. The row keeps
+              // every handler, its `tabIndex`, its padding and its mobile reflow, so
+              // tests/components/dossierMobileGate.test.jsx still finds exactly what it pins.
+              <div key={i} style={{...edged(`1px solid ${isExp?color+'60':'#e0d0b0'}`,`3px solid ${color}`),overflow:'hidden',background:isExp?`${color}06`:'#faf8f4'}}>
+                <div role="button" tabIndex={0} style={{display:'flex',alignItems:'center',gap:8,padding:'8px 12px',flexWrap:isMobile?'wrap':undefined,cursor:'pointer'}}
+                  onClick={()=>setExpandedThreat(isExp?null:i)}
+                  onKeyDown={e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();setExpandedThreat(isExp?null:i);}}}>
                   <span style={isMobile
                     ? {fontSize:FS.sm,fontWeight:700,color:swatch.inkMag,flex:'1 1 auto',minWidth:0,lineHeight:1.3}
                     : {fontSize:FS.sm,fontWeight:700,color:swatch.inkMag,width:130,flexShrink:0,lineHeight:1.3}}>{label}</span>
                   <div style={{width:72,height:6,background:swatch['#E8DCC8'],overflow:'hidden',flexShrink:0}}>
                     <div style={{height:'100%',width:`${sc}%`,background:color}}/>
                   </div>
-                  <span style={{fontSize:FS.micro,fontWeight:800,color:badgeColor,background:`${badgeColor}15`,padding:'1px 4px',letterSpacing:'0.03em',flexShrink:0,width:54,textAlign:'center',display:'inline-block'}}>{badge}</span>
-                  <span style={{fontSize:FS.xxs,color:MUTED,flexShrink:0}}>{isExp?'▲':'▼'}</span>
+                  <span style={{fontSize:chromeFontSize(FS.micro, isMobile),fontWeight:800,color:badgeColor,background:`${badgeColor}15`,padding:'1px 4px',letterSpacing:'0.03em',flexShrink:0,width:54,textAlign:'center',display:'inline-block'}}>{badge}</span>
+                  <span style={{fontSize:chromeFontSize(FS.xxs, isMobile),color:MUTED,flexShrink:0}}>{isExp?'▲':'▼'}</span>
                 </div>
+                {/* DS-DEF-2 for THIS row, in the town's own voice, under the bar it is about.
+                    A row whose pool the corpus is silent about shows nothing here (R-DST-K);
+                    the bar, its band word and its assessment are untouched either way. */}
+                {rowLine&&<div style={{padding:'0 12px 8px'}}>
+                  <ProseBlock lines={[rowLine]} settlementName={r.name} tier={r.tier}
+                    style={{fontSize:FS.sm,color:swatch.inkMag2,lineHeight:1.55,margin:0,fontStyle:'italic'}}/>
+                </div>}
                 {isExp&&<div style={{padding:'0 12px 10px 12px',borderTop:`1px solid ${color}25`}}>
-                  <p style={{fontSize: FS['12.5'],color:swatch.inkMag2,lineHeight:1.6,margin:'8px 0 0'}}>{assess}</p>
-                  {fundingNotes[label]&&<p style={{fontSize:FS.xxs,color:MUTED,fontStyle:'italic',margin:'5px 0 0',lineHeight:1.4}}>{fundingNotes[label]}</p>}
+                  <p style={{fontSize: proseFontSize(FS['12.5'], isMobile),color:swatch.inkMag2,lineHeight:1.6,margin:'8px 0 0'}}>{assess}</p>
+                  {fundingNotes[label]&&<p style={{fontSize:proseFontSize(FS.xxs, isMobile),color:MUTED,fontStyle:'italic',margin:'5px 0 0',lineHeight:1.4}}>{fundingNotes[label]}</p>}
                 </div>}
               </div>
             );
@@ -360,24 +435,27 @@ export function DefenseTab({ settlement:r, narrativeNote, publicDossier = false,
                               : intScore>=40 ? 'Adequate Public Order'
                               : intScore>=20 ? 'Weak Public Order'
                               : 'Critical: Order Failing';
-            const orderBadge  = intScore>=65?'STRONG':intScore>=40?'ADEQUATE':intScore>=20?'WEAK':'CRITICAL';
+            const orderBadge  = statusCase(intScore>=65?'STRONG':intScore>=40?'ADEQUATE':intScore>=20?'WEAK':'CRITICAL');
             return (
               <div style={{background:orderBg,border:`1px solid ${orderColor}30`,borderLeft:`4px solid ${orderColor}`,padding:'10px 14px'}}>
                 <div style={{display:'flex',alignItems:'flex-start',gap:14,flexWrap:'wrap'}}>
                   <div style={{flexShrink:0,minWidth:130}}>
-                    <div style={{fontSize:FS.micro,fontWeight:700,color:orderColor,textTransform:'uppercase',letterSpacing:'0.08em',marginBottom:2}}>Internal Security · First Survey</div>
+                    <div style={{fontSize:chromeFontSize(FS.micro, isMobile),fontWeight:700,color:orderColor,marginBottom:2}}>Internal security · first survey</div>
                     <div style={{fontSize:FS.lg,fontWeight:800,color:orderColor,lineHeight:1.15,marginBottom:4}}>{orderStatus}</div>
                     <div style={{display:'flex',alignItems:'center',gap:7}}>
-                      <span style={{fontSize:FS.micro,fontWeight:800,color:orderColor,background:`${orderColor}15`,border:`1px solid ${orderColor}40`,padding:'1px 5px',letterSpacing:'0.04em'}}>{orderBadge}</span>
+                      <span style={{fontSize:chromeFontSize(FS.micro, isMobile),fontWeight:800,color:orderColor,background:`${orderColor}15`,border:`1px solid ${orderColor}40`,padding:'1px 5px'}}>{orderBadge}</span>
                     </div>
-                    {safetyLabel&&!safetyLabel.includes('Moderate')&&<div style={{fontSize:FS.xxs,color:MUTED,marginTop:5,fontStyle:'italic'}}>{safetyLabel}</div>}
+                    {/* The MATCH reads the raw label, the PRINT is cased — the same split the institution
+                        seam draws. `safetyProfile.js` declares 'Very Safe' and composes
+                        '<strain> — <Condition>'; rung 3 is sentence case on both halves. */}
+                    {safetyLabel&&!safetyLabel.includes('Moderate')&&<div style={{fontSize:chromeFontSize(FS.xxs, isMobile),color:MUTED,marginTop:5,fontStyle:'italic'}}>{statusCase(safetyLabel)}</div>}
                   </div>
                   {(sp.safetyDesc||orderBeside||surveyBeside)&&<div style={{flex:1,minWidth:160}}>
                     {/* THE DM'S FIELD, rendered exactly as before and BY IDENTITY. The
                         corpus lines sit BESIDE it and never in its place. */}
-                    {sp.safetyDesc&&<p style={{fontSize:FS.sm,color:swatch.inkMag2,lineHeight:1.55,margin:0}}>{sp.safetyDesc}</p>}
-                    {orderBeside&&<p style={{fontSize:FS.sm,color:swatch.inkMag3,lineHeight:1.55,margin:sp.safetyDesc?'6px 0 0':0,fontStyle:'italic'}}>{orderBeside}</p>}
-                    {surveyBeside&&<p style={{fontSize:FS.xs,color:swatch.inkMag3,lineHeight:1.5,margin:'6px 0 0',fontStyle:'italic'}}>{surveyBeside}</p>}
+                    {sp.safetyDesc&&<p style={{fontSize:proseFontSize(FS.sm, isMobile),color:swatch.inkMag2,lineHeight:1.55,margin:0}}>{sp.safetyDesc}</p>}
+                    {orderBeside&&<p style={{fontSize:proseFontSize(FS.sm, isMobile),color:swatch.inkMag3,lineHeight:1.55,margin:sp.safetyDesc?'6px 0 0':0,fontStyle:'italic'}}>{orderBeside}</p>}
+                    {surveyBeside&&<p style={{fontSize:proseFontSize(FS.xs, isMobile),color:swatch.inkMag3,lineHeight:1.5,margin:'6px 0 0',fontStyle:'italic'}}>{surveyBeside}</p>}
                   </div>}
                 </div>
               </div>
@@ -386,32 +464,35 @@ export function DefenseTab({ settlement:r, narrativeNote, publicDossier = false,
 
           {/* Criminal structure classification */}
           {csd&&<div style={{background:csd.bg,border:`1px solid ${csd.color}30`,borderLeft:`3px solid ${csd.color}`,padding:'9px 13px'}}>
-            <div style={{fontSize:FS.xxs,fontWeight:700,color:csd.color,textTransform:'uppercase',letterSpacing:'0.07em',marginBottom:3}}>Criminal Structure: {csd.label}</div>
-            <p style={{fontSize:FS.sm,color:swatch.inkMag2,lineHeight:1.5,margin:0}}>{csd.note}</p>
+            {/* The classifier's own vocabulary is Title-Cased at its source
+                (`defenseDisplay.js`: 'Semi-Organized Networks'), which is correct there and
+                shouting here — rung 3 cases it at the mount, as the readiness badge above
+                already does. The PDF's line says the same word the same way. */}
+            <div style={{fontSize:chromeFontSize(FS.xxs, isMobile),fontWeight:700,color:csd.color,marginBottom:3}}>Criminal structure: {statusCase(csd.label)}</div>
+            <p style={{fontSize:proseFontSize(FS.sm, isMobile),color:swatch.inkMag2,lineHeight:1.5,margin:0}}>{csd.note}</p>
           </div>}
 
-          {!crimStructure&&<div style={{background:swatch['#F0FAF4'],border:'1px solid #a8d8b0',borderLeft:'3px solid #2d7a44',padding:'8px 13px',fontSize:FS.sm,color:swatch.success}}>
+          {!crimStructure&&<div style={{background:swatch['#F0FAF4'],border:'1px solid #a8d8b0',borderLeft:'3px solid #2d7a44',padding:'8px 13px',fontSize:proseFontSize(FS.sm, isMobile),color:swatch.success}}>
             No organized criminal infrastructure detected. Crime exists at a petty, individual level.
           </div>}
 
           {/* DS-DEF-4: the shape of the crime and how far it has reached, in the town's own
               voice. Two lenses of one block at one position. */}
           {criminalLines.length>0&&<div style={{background:swatch['#FAF8F4'],border:'1px solid #d8c090',borderLeft:'4px solid #8b1a1a',padding:'9px 13px'}}>
-            {criminalLines.map((line,i)=>(
-              <p key={i} style={{fontSize:i===0?FS.sm:FS.xs,color:i===0?swatch.inkMag2:swatch.inkMag3,lineHeight:1.55,margin:i===0?0:'5px 0 0',fontStyle:'italic'}}>{line}</p>
-            ))}
+            <ProseBlock lines={criminalLines} settlementName={r.name} tier={r.tier}
+              style={{fontSize:FS.sm,color:swatch.inkMag2,lineHeight:1.55,margin:0,fontStyle:'italic'}}/>
           </div>}
 
           {/* Criminal institutions as power structures */}
           {crimInsts.length>0&&<div>
-            <div style={{fontSize:FS.xxs,fontWeight:700,color:swatch.inkMag3,textTransform:'uppercase',letterSpacing:'0.06em',marginBottom:6}}>Active Criminal Operations</div>
+            <div style={{fontSize:chromeFontSize(FS.xxs, isMobile),fontWeight:700,color:swatch.inkMag3,marginBottom:6}}>Active criminal operations</div>
             <div style={{display:'flex',flexDirection:'column',gap:5}}>
               {crimInsts.map((name,i)=>{
                 const note = criminalOpNote(name);
                 return (
                   <div key={i} style={{background:swatch['#FAF8F4'],border:'1px solid #e0d0b0',borderLeft:'3px solid #8b1a1a',padding:'8px 12px'}}>
                     <div style={{fontSize:FS.sm,fontWeight:700,color:swatch.danger,marginBottom:3}}>{name}</div>
-                    <div style={{fontSize: FS['11.5'],color:swatch['#5A3A2A'],lineHeight:1.4}}>{note}</div>
+                    <div style={{fontSize: proseFontSize(FS['11.5'], isMobile),color:swatch['#5A3A2A'],lineHeight:1.4}}>{note}</div>
                   </div>
                 );
               })}
@@ -420,12 +501,12 @@ export function DefenseTab({ settlement:r, narrativeNote, publicDossier = false,
 
           {/* Criminal faction power dynamics + capture state note */}
           {crimFaction&&<div style={{background:swatch['#FAF8F4'],border:'1px solid #e8b0b0',borderLeft:'3px solid #8b1a1a',padding:'9px 13px'}}>
-            <div style={{fontSize:FS.xxs,fontWeight:700,color:swatch.danger,textTransform:'uppercase',letterSpacing:'0.07em',marginBottom:3}}>
-              Criminal Faction: Power {crimFaction.power||0}
+            <div style={{fontSize:chromeFontSize(FS.xxs, isMobile),fontWeight:700,color:swatch.danger,marginBottom:3}}>
+              Criminal faction: power {crimFaction.power||0}
             </div>
-            <div style={{fontSize:FS.sm,color:swatch.inkMag2,lineHeight:1.5}}>{crimFaction.desc}</div>
+            <div style={{fontSize:proseFontSize(FS.sm, isMobile),color:swatch.inkMag2,lineHeight:1.5}}>{crimFaction.desc}</div>
             {(crimCapture === 'corrupted' || crimCapture === 'capture') && (
-              <div style={{fontSize: FS['11.5'],color:swatch['#4A1A4A'],fontStyle:'italic',marginTop:6,paddingTop:6,borderTop:'1px solid #e8b0b0',lineHeight:1.4}}>
+              <div style={{fontSize: proseFontSize(FS['11.5'], isMobile),color:swatch['#4A1A4A'],fontStyle:'italic',marginTop:6,paddingTop:6,borderTop:'1px solid #e8b0b0',lineHeight:1.4}}>
                 {crimCapture === 'capture'
                   ? 'Criminal organisation effectively governs through compromised institutions. The distinction between official authority and criminal network has collapsed.'
                   : 'Key enforcement officials have arrangements with criminal networks. Selective enforcement. Profitable crimes go unpunished, rivals are selectively prosecuted.'}
@@ -435,12 +516,12 @@ export function DefenseTab({ settlement:r, narrativeNote, publicDossier = false,
 
           {/* Crime types — as enforcement challenges, not economic statistics */}
           {crimeTypes.length>0&&<div>
-            <div style={{fontSize:FS.xxs,fontWeight:700,color:swatch.inkMag3,textTransform:'uppercase',letterSpacing:'0.06em',marginBottom:6}}>Active Crime Patterns</div>
+            <div style={{fontSize:chromeFontSize(FS.xxs, isMobile),fontWeight:700,color:swatch.inkMag3,marginBottom:6}}>Active crime patterns</div>
             <div style={{display:'flex',flexDirection:'column',gap:5}}>
               {crimeTypes.map((ct,i)=>(
                 <div key={i} style={{background:swatch['#FAF8F4'],border:'1px solid #e0d0b0',padding:'7px 10px'}}>
-                  <div style={{fontSize:FS.xs,fontWeight:700,color:swatch.inkMag2,marginBottom:2}}>{ct.type}</div>
-                  <div style={{fontSize: FS['11.5'],color:swatch.inkMag3,lineHeight:1.4}}>{truncateAtWord(ct.desc, 200)}</div>
+                  <div style={{fontSize:chromeFontSize(FS.xs, isMobile),fontWeight:700,color:swatch.inkMag2,marginBottom:2}}>{ct.type}</div>
+                  <div style={{fontSize: proseFontSize(FS['11.5'], isMobile),color:swatch.inkMag3,lineHeight:1.4}}>{truncateAtWord(ct.desc, 200)}</div>
                 </div>
               ))}
             </div>
@@ -448,10 +529,10 @@ export function DefenseTab({ settlement:r, narrativeNote, publicDossier = false,
 
           {/* Safety-derived plot hooks */}
           {sp.plotHooks?.length>0&&<div>
-            <div style={{fontSize:FS.xxs,fontWeight:700,color:swatch.magic,textTransform:'uppercase',letterSpacing:'0.06em',marginBottom:6}}>Order & Crime Plot Hooks</div>
+            <div style={{fontSize:chromeFontSize(FS.xxs, isMobile),fontWeight:700,color:swatch.magic,marginBottom:6}}>Order & crime plot hooks</div>
             <div style={{display:'flex',flexDirection:'column',gap:5}}>
               {sp.plotHooks.map((h,i)=>(
-                <div key={i} style={{background:swatch['#F8F0FC'],border:'1px solid #d0a8e0',borderLeft:'3px solid #7a3a9a',padding:'8px 12px',fontSize:FS.sm,color:swatch['#3A1A5A'],lineHeight:1.5}}>{h}</div>
+                <div key={i} style={{background:swatch['#F8F0FC'],border:'1px solid #d0a8e0',borderLeft:'3px solid #7a3a9a',padding:'8px 12px',fontSize:proseFontSize(FS.sm, isMobile),color:swatch['#3A1A5A'],lineHeight:1.5}}>{h}</div>
               ))}
             </div>
           </div>}
@@ -472,43 +553,42 @@ export function DefenseTab({ settlement:r, narrativeNote, publicDossier = false,
               {magicDef.length>0&&`${magicDef.length} arcane`}
             </span>
           </span>
-          <span style={{fontSize:FS.xs,color:MUTED}}>{showForces?'▲':'▼'}</span>
+          <span style={{fontSize:chromeFontSize(FS.xs, isMobile),color:MUTED}}>{showForces?'▲':'▼'}</span>
         </Button>
 
         {showForces&&<div>
           {/* DS-DEF-5: what the town can actually field, in its own voice. Five lenses of
               one block at one position; the force cards below are untouched. */}
           {forceLines.length>0&&<div style={{background:swatch['#FAF8F4'],border:'1px solid #d8c090',borderLeft:'4px solid #4a3a1a',padding:'9px 13px',marginBottom:10}}>
-            {forceLines.map((line,i)=>(
-              <p key={i} style={{fontSize:i===0?FS.sm:FS.xs,color:i===0?swatch.inkMag2:swatch.inkMag3,lineHeight:1.55,margin:i===0?0:'5px 0 0',fontStyle:'italic'}}>{line}</p>
-            ))}
+            <ProseBlock lines={forceLines} settlementName={r.name} tier={r.tier}
+              style={{fontSize:FS.sm,color:swatch.inkMag2,lineHeight:1.55,margin:0,fontStyle:'italic'}}/>
           </div>}
           {walls.length>0&&<div style={{marginBottom:10}}>
-            <div style={{fontSize:FS.xxs,fontWeight:700,color:swatch['#4A3A1A'],textTransform:'uppercase',letterSpacing:'0.06em',marginBottom:6}}>Fortifications</div>
+            <div style={{fontSize:chromeFontSize(FS.xxs, isMobile),fontWeight:700,color:swatch['#4A3A1A'],marginBottom:6}}>Fortifications</div>
             {walls.map((w,i)=><ForceCard key={i} inst={w} accent="#4a3a1a"/>)}
           </div>}
-          {!hasAnyFort&&<div style={{background:swatch['#FDF8F0'],border:'1px solid #e8d0b0',borderLeft:'3px solid #8a5010',padding:'10px 13px',marginBottom:10,fontSize:FS.md,color:swatch.inkMag3}}>
+          {!hasAnyFort&&<div style={{background:swatch['#FDF8F0'],border:'1px solid #e8d0b0',borderLeft:'3px solid #8a5010',padding:'10px 13px',marginBottom:10,fontSize:proseFontSize(FS.md, isMobile),color:swatch.inkMag3}}>
             <strong style={{color:swatch['#8A5010']}}>Unfortified.</strong> No perimeter walls. Defenders cannot control entry points or create chokepoints.
           </div>}
           {/* DS-DEF-11: why the wall, or why not — beside the works themselves. */}
-          {wallLine&&<p style={{fontSize:FS.sm,color:swatch.inkMag3,lineHeight:1.55,margin:'0 0 10px',fontStyle:'italic'}}>{wallLine}</p>}
+          {wallLine&&<p style={{fontSize:proseFontSize(FS.sm, isMobile),color:swatch.inkMag3,lineHeight:1.55,margin:'0 0 10px',fontStyle:'italic'}}>{wallLine}</p>}
           {mainForces.length>0&&<div style={{marginBottom:10}}>
-            <div style={{fontSize:FS.xxs,fontWeight:700,color:swatch.danger,textTransform:'uppercase',letterSpacing:'0.06em',marginBottom:6}}>Standing Forces</div>
+            <div style={{fontSize:chromeFontSize(FS.xxs, isMobile),fontWeight:700,color:swatch.danger,marginBottom:6}}>Standing forces</div>
             {[...new Map(mainForces.map(m=>[m.name,m])).values()].map((w,i)=><ForceCard key={i} inst={w} accent="#8b1a1a"/>)}
           </div>}
           {mercForces.length>0&&<div style={{marginBottom:10}}>
-            <div style={{fontSize:FS.xxs,fontWeight:700,color:swatch['#5A3A1A'],textTransform:'uppercase',letterSpacing:'0.06em',marginBottom:6}}>Contracted Forces</div>
+            <div style={{fontSize:chromeFontSize(FS.xxs, isMobile),fontWeight:700,color:swatch['#5A3A1A'],marginBottom:6}}>Contracted forces</div>
             {mercForces.map((w,i)=><ForceCard key={i} inst={w} accent="#5a3a1a"/>)}
           </div>}
           {charterForces.length>0&&<div style={{marginBottom:10}}>
-            <div style={{fontSize:FS.xxs,fontWeight:700,color:swatch['#3A1A7A'],textTransform:'uppercase',letterSpacing:'0.06em',marginBottom:6}}>Monster Response (Charter)</div>
+            <div style={{fontSize:chromeFontSize(FS.xxs, isMobile),fontWeight:700,color:swatch['#3A1A7A'],marginBottom:6}}>Monster response (charter)</div>
             {charterForces.map((w,i)=><ForceCard key={i} inst={w} accent="#3a1a7a"/>)}
           </div>}
           {magicDef.length>0&&<div style={{marginBottom:6}}>
-            <div style={{fontSize:FS.xxs,fontWeight:700,color:swatch.magic,textTransform:'uppercase',letterSpacing:'0.06em',marginBottom:6}}>Arcane Defense</div>
+            <div style={{fontSize:chromeFontSize(FS.xxs, isMobile),fontWeight:700,color:swatch.magic,marginBottom:6}}>Arcane defense</div>
             {magicDef.map((w,i)=><ForceCard key={i} inst={w} accent="#5a2a8a"/>)}
           </div>}
-          {!hasAnyForce&&<div style={{background:swatch['#FDF8F0'],border:'1px solid #e8d0b0',borderLeft:'3px solid #8a5010',padding:'10px 13px',fontSize:FS.md,color:swatch.inkMag3}}>
+          {!hasAnyForce&&<div style={{background:swatch['#FDF8F0'],border:'1px solid #e8d0b0',borderLeft:'3px solid #8a5010',padding:'10px 13px',fontSize:proseFontSize(FS.md, isMobile),color:swatch.inkMag3}}>
             <strong style={{color:swatch['#8A5010']}}>No organized force.</strong> Defense relies on individual armed citizens. No command structure, no training, no coordinated response.
           </div>}
         </div>}
@@ -519,7 +599,7 @@ export function DefenseTab({ settlement:r, narrativeNote, publicDossier = false,
           holds its water, in its own voice. Two lenses of one block at one position; the
           capability rows below are untouched.
           ⛔ IT SITS ABOVE THE FOLD, AND THAT PLACEMENT IS THE POINT. The section beneath is
-          `collapsible defaultOpen={false}` and `Primitives.jsx:114` renders `{open &&
+          `collapsible defaultOpen={false}` and `Primitives.jsx:120` renders `{open &&
           children}`, so a child of it produces NO BYTES for a reader until the header is
           clicked. Drawn inside, this position was a sentence the registry called lit and no
           reader ever saw — the walker's reachability arm, the public-dossier guard and the
@@ -528,34 +608,63 @@ export function DefenseTab({ settlement:r, narrativeNote, publicDossier = false,
           arrangement), and the visibility arm in dossierMountRegistry.walker.test.js is what
           keeps it there. */}
       {supportingLines.length>0&&<div data-testid="defense-supporting-lines" style={{background:swatch['#FAF8F4'],border:'1px solid #d8c090',borderLeft:'4px solid #1a3a6a',padding:'9px 13px',marginBottom:10}}>
-        {supportingLines.map((line,i)=>(
-          <p key={i} style={{fontSize:i===0?FS.sm:FS.xs,color:i===0?swatch.inkMag2:swatch.inkMag3,lineHeight:1.55,margin:i===0?0:'5px 0 0',fontStyle:'italic'}}>{line}</p>
-        ))}
+        <ProseBlock lines={supportingLines} settlementName={r.name} tier={r.tier}
+          style={{fontSize:FS.sm,color:swatch.inkMag2,lineHeight:1.55,margin:0,fontStyle:'italic'}}/>
       </div>}
       <Section title="Supporting Capabilities" collapsible defaultOpen={false}>
         <div style={{display:'flex',flexDirection:'column',gap:6}}>
-          {caps.map((cap,i)=>(
+          {caps.map((cap,i)=>{
+            /* R-5b item #20: the bare 0-100 digit beside this bar is the score's band word
+               from the shared ladder. Arcane Support's status ("Present" / "None")
+               is a presence read, not a grade, so there the band is the only word that says
+               how good the bar actually is. (That row was called `Magical Capability` until
+               review 10; the Overview's Systems Health row owns that name, and the two ask
+               different questions — see `deriveSupportingCapabilities`.)
+               ⛔ A ROW WHOSE STATUS IS ALREADY THE GRADE TAKES NO BAND (`STATUS_IS_THE_GRADE`
+               above says which rows, and why). The first cure here folded the band only where
+               its word EQUALLED the status, which stopped "Adequate … Adequate" but kept
+               printing "Well-funded … Strong" and "Underfunded … Weak" — and "Critical …
+               Weak" at econScore 20-24, two verdicts on one bar that disagree. The rule now
+               keys on what the status IS, not on how it happens to be spelled.
+               ⭐ AND THE DEFERRAL THIS COMMENT CARRIED IS CLOSED (ODQ §934.14). It recorded
+               that the status ladder turned Critical below 25 while the shared ladder turned
+               below 20, so this row's "Critical" could sit on the same tab as the Threat
+               Assessment's "Economic Survival · Weak" — a disagreement the band fold above
+               could not reach, because it lived in `deriveSupportingCapabilities` and was read
+               by two OTHER surfaces. The owner ruled the band ladder canonical; the status
+               ladder now reads `SCORE_BAND_CUTS` rather than restating digits, so the two
+               cannot part again. The words, and the PDF's printed status, are unchanged
+               except on 20-24, which now reads Underfunded on every surface at once. */
+            const band = cap.score !== null && !STATUS_IS_THE_GRADE.includes(cap.label)
+              ? statusCase(scoreBand(cap.score)) : null;
+            /* ⛔ AND THE NOTE IS THE OTHER PLACE THE GRADE CAN LAND. Economic Backing's
+               middle band reads status "Adequate" over the note "Adequate upkeep, some
+               shortfalls." — the same word twice, one line apart, which the band rule above
+               does not touch because it only decides the band. When the PROSE opens on the
+               grade, the prose is the better place for it: it says the word once and then
+               says what the word means. So the pill stands down and the note carries the
+               grade. */
+            const noteOpensOnStatus = typeof cap.note === 'string' && typeof cap.status === 'string'
+              && cap.status.length > 0
+              && new RegExp(`^${cap.status.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}\\b`, 'i').test(cap.note.trim());
+            return (
             <div key={i} style={{display:'flex',gap:12,alignItems:'flex-start',background:swatch['#FAF8F4'],border:'1px solid #e0d0b0',borderLeft:`3px solid ${cap.color}`,padding:'8px 12px'}}>
               <div style={{flex:1,minWidth:0}}>
                 <div style={{display:'flex',alignItems:'baseline',gap:8,marginBottom:2}}>
-                  <span style={{fontSize:FS.xs,fontWeight:700,color:swatch.inkMag2}}>{cap.label}</span>
-                  <span style={{fontSize:FS.xs,fontWeight:700,color:cap.color}}>{cap.status}</span>
-                  {/* R-5b item #20: the bare 0-100 digit beside this bar is now
-                      the score's band word from the shared ladder. Magical
-                      Capability's status ("Arcane support" / "None") is a
-                      presence read, not a grade, so the band is the only word
-                      that told the reader how good the bar actually is. */}
+                  <span style={{fontSize:chromeFontSize(FS.xs, isMobile),fontWeight:700,color:swatch.inkMag2}}>{cap.label}</span>
+                  {!noteOpensOnStatus&&<span data-sf-cap-status="" style={{fontSize:chromeFontSize(FS.xs, isMobile),fontWeight:700,color:cap.color}}>{cap.status}</span>}
                   {cap.score!==null&&<div style={{marginLeft:'auto',display:'flex',alignItems:'center',gap:6}}>
                     <div style={{width:50,height:5,background:swatch['#E8DCC8'],overflow:'hidden'}}>
                       <div style={{height:'100%',width:`${Math.min(100,cap.score)}%`,background:cap.color}}/>
                     </div>
-                    <span style={{fontSize:FS.xxs,color:cap.color,fontWeight:700}}>{scoreBand(cap.score)}</span>
+                    {band!==null&&<span data-sf-cap-band="" style={{fontSize:chromeFontSize(FS.xxs, isMobile),color:cap.color,fontWeight:700}}>{band}</span>}
                   </div>}
                 </div>
-                <div style={{fontSize: FS['11.5'],color:swatch.inkMag3,lineHeight:1.4}}>{cap.note}</div>
+                <div style={{fontSize: proseFontSize(FS['11.5'], isMobile),color:swatch.inkMag3,lineHeight:1.4}}>{cap.note}</div>
               </div>
             </div>
-          ))}
+            );
+          })}
         </div>
       </Section>
 
@@ -564,13 +673,13 @@ export function DefenseTab({ settlement:r, narrativeNote, publicDossier = false,
         ?<Section title={`Vulnerabilities · First Survey (${defViolations.length})`} collapsible defaultOpen accent="#8b1a1a">
           {defViolations.map((v,i)=>{
             const crit=v.severity==='error'||v.severity==='critical';
-            return <div key={i} style={{background:crit?'#fdf4f4':'#faf6ec',border:`1px solid ${crit?'#e8c0c0':'#e0c860'}`,borderLeft:`3px solid ${crit?'#8b1a1a':'#b8860b'}`,padding:'9px 13px',marginBottom:6}}>
-              <div style={{fontSize:FS.xs,fontWeight:700,color:crit?'#8b1a1a':'#7a5010',textTransform:'uppercase',letterSpacing:'0.05em',marginBottom:3}}>{crit?'Structural':'Warning'}</div>
-              <div style={{fontSize:FS.md,color:crit?'#5a1a1a':'#4a3010',lineHeight:1.45}}>{v.reason}</div>
+            return <div key={i} style={{background:crit?'#fdf4f4':'#faf6ec',...edged(`1px solid ${crit?'#e8c0c0':'#e0c860'}`,`3px solid ${crit?'#8b1a1a':'#b8860b'}`),padding:'9px 13px',marginBottom:6}}>
+              <div style={{fontSize:chromeFontSize(FS.xs, isMobile),fontWeight:700,color:crit?'#8b1a1a':'#7a5010',marginBottom:3}}>{crit?'Structural':'Warning'}</div>
+              <div style={{fontSize:proseFontSize(FS.md, isMobile),color:crit?'#5a1a1a':'#4a3010',lineHeight:1.45}}>{v.reason}</div>
             </div>;
           })}
         </Section>
-        :<div style={{background:swatch['#FAF8F4'],border:'1px solid #a8d8b0',borderLeft:'3px solid #2d7a44',padding:'9px 13px',fontSize:FS.md,color:swatch.success}}>
+        :<div style={{background:swatch['#FAF8F4'],border:'1px solid #a8d8b0',borderLeft:'3px solid #2d7a44',padding:'9px 13px',fontSize:proseFontSize(FS.md, isMobile),color:swatch.success}}>
           ✓ No critical defense vulnerabilities identified at the first survey.
         </div>
       }

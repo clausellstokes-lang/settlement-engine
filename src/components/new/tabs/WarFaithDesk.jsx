@@ -55,7 +55,11 @@
  */
 import { warFaithStateProse } from '../../../domain/display/stateProse/warFaithStateProse.js';
 import { drawnAtMount } from '../../../domain/display/stateProse/dossierMounts.js';
+import { tierNounFor } from '../../../domain/display/stateProse/weaveBlock.js';
 import { BODY, BORDER, CARD, FS, MUTED, sans } from '../../theme.js';
+import { chromeFontSize, proseFontSize } from '../../../design/proseScale.js';
+import useIsMobile from '../../../hooks/useIsMobile.js';
+import ProseBlock from '../ProseBlock.jsx'; // the shared one-paragraph renderer (see DeskLines)
 
 /** The war tab's three positions. Bound once so the reachability arm counts one literal. */
 const STANDING_MOUNT = 'war.standing';
@@ -106,6 +110,7 @@ export function warFaithDeskRungs({
     ? SILENT
     : warFaithStateProse(settlement, readings, {
       seed: String(settlement?._seed ?? settlement?.id ?? ''), audience,
+      tierNoun: tierNounFor(settlement?.tier),
     });
 }
 
@@ -117,40 +122,102 @@ export function warFaithDeskRungs({
  *
  * The shape is `EconomicsGlance.DeskLines` deliberately: one idiom for "a position that is
  * a paragraph", so a reader who has met one has met both.
- * @param {{mount: string, rungs: ReadonlyArray<object|null>, testId?: string}} props
+ * @param {{mount: string, rungs: ReadonlyArray<object|null>, testId?: string,
+ *   settlementName?: unknown, tier?: unknown}} props `settlementName` and `tier` are the
+ *   town's own `name` and `tier`; without them the sentences still join and no opening name
+ *   is stood down, so a call site that has not caught up cannot break.
  */
-export function DeskLines({ mount, rungs, testId }) {
+export function DeskLines({ mount, rungs, testId, settlementName, tier }) {
+  const mobile = useIsMobile();
   const lines = (rungs || []).map((rung) => drawnAtMount(mount, rung)?.sentence).filter(Boolean);
   if (lines.length === 0) return null;
-  // ⭐ KEYED ON MOUNT + POSITION, never on the sentence (ARCH §4.1, SEAM car 3d) — the same
-  // cure as `EconomicsGlance.DeskLines`, in the same shape, because the two renderers are
-  // deliberately one idiom. Two lenses of one position may legitimately draw the SAME line,
-  // and `key={line}` then collides: React drops a paragraph and a lens goes missing.
+  // ⭐ ONE PARAGRAPH, THROUGH THE SHARED RENDERER (owner finding 2026-09-18) — the same move
+  // as `EconomicsGlance.DeskLines`, in the same shape, because the two renderers are
+  // deliberately one idiom. It matters most HERE: `faith.patronSeat` reads EIGHT lenses of
+  // DS-FTH-1 at one position, so this file's worst case was an eight-paragraph column about
+  // one patron. The mount+position keying is gone with the list — one paragraph needs no
+  // keys, and two lenses drawing the same line now simply both appear in it rather than
+  // colliding.
+  //
+  // ⭐ THE NAME NOW REACHES HERE, through one `settlement` prop on each wrapper below. It was
+  // deferred at the weave's first landing because the wrappers are called from WarTab.jsx and
+  // FaithTab.jsx, which belonged to other lanes.
+  //
+  // ⚠ THE TWO PROPS ARE OPTIONAL ON *THIS* COMPONENT AND REQUIRED ON THE WRAPPERS, and the
+  // asymmetry is deliberate (review 12). Here they stay optional because a position that
+  // genuinely has no settlement — a fixture driving the renderer directly — should get the
+  // join and no stand-down rather than an error. The WRAPPERS have no such caller: every one
+  // of them is mounted by a host tab that is holding the settlement, so there a missing prop
+  // is always a mistake, and `requireSettlement` below says so out loud in a dev build.
   return (
     <div data-testid={testId} style={{ margin: '0 0 12px' }}>
-      {lines.map((line, position) => (
-        <p key={`${mount}::${position}`} style={{
-          color: BODY, fontFamily: sans, fontSize: FS.xs, lineHeight: 1.6,
-          margin: '0 0 6px', fontStyle: 'italic',
-        }}>{line}</p>
-      ))}
+      <ProseBlock lines={lines} settlementName={settlementName} tier={tier} style={{
+        color: BODY, fontFamily: sans, fontSize: proseFontSize(FS.xs, mobile), lineHeight: 1.6,
+        margin: '0 0 6px', fontStyle: 'italic',
+      }}/>
     </div>
   );
 }
 
-/** The war tab's standing paragraph — DS-WAR-1's five lenses at one position. */
-export function WarStandingLines({ desk }) {
-  return <DeskLines mount={STANDING_MOUNT} testId="war-desk-standing" rungs={[
-    desk.warStatus, desk.warExhaustion, desk.warMobilization, desk.warOccupation,
-    desk.warHoldings,
-  ]} />;
+/**
+ * ⛔⛔ `settlement` IS REQUIRED, AND A DEFAULT IS EXACTLY WHAT MADE IT OPTIONAL (review 12).
+ *
+ * The five wrappers below took `settlement = null`, so a host tab that dropped
+ * `settlement={settlement}` at its call site kept rendering: the paragraph still appeared,
+ * every sentence was still in it, and only the opening word of the second sentence was
+ * wrong. That is the whole defect class this thread exists to close, reintroduced one level
+ * ABOVE the place the suites were watching — the arms render the WRAPPERS, so they stayed
+ * green while the page lost the stand-down. A default that silently disables the feature is
+ * not a courtesy to callers; it is the hole.
+ *
+ * So the prop is required by contract, and the contract is ENFORCED rather than declared:
+ * in a dev or test build a wrapper called without one THROWS, by name, with the reason. The
+ * gate is `import.meta.env.DEV`, which Vite replaces with the literal `false` in a
+ * production build, so the branch is dead code for a reader — a shipped page can never be
+ * taken down by this, and it degrades to exactly the behaviour the default used to give.
+ * Vitest runs in DEV, so every render in the suite is checked.
+ *
+ * @param {unknown} settlement the settlement the host tab holds
+ * @param {string} wrapper the wrapper's own name, for the message
+ * @returns {void}
+ */
+function requireSettlement(settlement, wrapper) {
+  const isDev = !!(typeof import.meta !== 'undefined' && import.meta.env && import.meta.env.DEV);
+  if (isDev && (settlement === null || settlement === undefined)) {
+    throw new Error(
+      `${wrapper}: the \`settlement\` prop is required. Without it \`DeskLines\` has no name`
+      + ` and no tier, so a position that draws more than one lens prints the settlement's name`
+      + ` at the head of every sentence instead of standing the repeats down to the tier noun.`
+      + ` That is a page which is subtly wrong rather than one that fails. Pass the host tab's own`
+      + ` settlement (WarTab.jsx / FaithTab.jsx already hold it).`,
+    );
+  }
 }
 
-/** The war tab's treaty paragraph — DS-WAR-2's clause, fraying and document lenses. */
-export function WarTreatyLines({ desk }) {
-  return <DeskLines mount={TREATIES_MOUNT} testId="war-desk-treaties" rungs={[
-    desk.treatyTerm, desk.treatyFraying, desk.treatyDocument,
-  ]} />;
+/**
+ * The war tab's standing paragraph — DS-WAR-1's five lenses at one position.
+ * @param {{desk: Record<string, any>, settlement: object}} props `settlement` is REQUIRED —
+ *   see `requireSettlement`; without it the stand-down silently stops firing on the page.
+ */
+export function WarStandingLines({ desk, settlement }) {
+  requireSettlement(settlement, 'WarStandingLines');
+  return <DeskLines mount={STANDING_MOUNT} testId="war-desk-standing"
+    settlementName={settlement?.name} tier={settlement?.tier} rungs={[
+      desk.warStatus, desk.warExhaustion, desk.warMobilization, desk.warOccupation,
+      desk.warHoldings,
+    ]} />;
+}
+
+/**
+ * The war tab's treaty paragraph — DS-WAR-2's clause, fraying and document lenses.
+ * @param {{desk: Record<string, any>, settlement: object}} props `settlement` is REQUIRED.
+ */
+export function WarTreatyLines({ desk, settlement }) {
+  requireSettlement(settlement, 'WarTreatyLines');
+  return <DeskLines mount={TREATIES_MOUNT} testId="war-desk-treaties"
+    settlementName={settlement?.name} tier={settlement?.tier} rungs={[
+      desk.treatyTerm, desk.treatyFraying, desk.treatyDocument,
+    ]} />;
 }
 
 /**
@@ -175,23 +242,31 @@ export function WarDormantNote({ desk, fallback }) {
   );
 }
 
-/** The faith tab's patron-seat paragraph — DS-FTH-1's seven lenses at one position. */
-export function FaithSeatLines({ desk }) {
-  return <DeskLines mount={PATRON_SEAT_MOUNT} testId="faith-desk-seat" rungs={[
-    desk.patronRank, desk.patronCults, desk.devotion, desk.pietyArc, desk.standings,
-    desk.sink, desk.mandate, desk.faithDark,
-  ]} />;
+/**
+ * The faith tab's patron-seat paragraph — DS-FTH-1's seven lenses at one position.
+ * @param {{desk: Record<string, any>, settlement: object}} props `settlement` is REQUIRED.
+ */
+export function FaithSeatLines({ desk, settlement }) {
+  requireSettlement(settlement, 'FaithSeatLines');
+  return <DeskLines mount={PATRON_SEAT_MOUNT} testId="faith-desk-seat"
+    settlementName={settlement?.name} tier={settlement?.tier} rungs={[
+      desk.patronRank, desk.patronCults, desk.devotion, desk.pietyArc, desk.standings,
+      desk.sink, desk.mandate, desk.faithDark,
+    ]} />;
 }
 
 /**
  * The faith tab's creed-standing paragraph — DS-FTH-3's four lenses at one position.
  * Rendered beside the niche rows, which is where the standing and legitimacy words the
  * corpus is talking about already appear.
+ * @param {{desk: Record<string, any>, settlement: object}} props `settlement` is REQUIRED.
  */
-export function FaithCreedLines({ desk }) {
-  return <DeskLines mount={CREED_STANDING_MOUNT} testId="faith-desk-creed" rungs={[
-    desk.creedStanding, desk.creedLegitimacy, desk.creedNiche, desk.creedFall,
-  ]} />;
+export function FaithCreedLines({ desk, settlement }) {
+  requireSettlement(settlement, 'FaithCreedLines');
+  return <DeskLines mount={CREED_STANDING_MOUNT} testId="faith-desk-creed"
+    settlementName={settlement?.name} tier={settlement?.tier} rungs={[
+      desk.creedStanding, desk.creedLegitimacy, desk.creedNiche, desk.creedFall,
+    ]} />;
 }
 
 /**
@@ -208,9 +283,12 @@ export function FaithCreedLines({ desk }) {
  * TO ACTION ("Assign a patron deity to awaken its pantheon") which is product furniture and
  * not a fact about the town, so the two are not twins the way the war dormant note and its
  * fallback are.
+ * @param {{desk: Record<string, any>, settlement: object}} props `settlement` is REQUIRED.
  */
-export function FaithTeaserLines({ desk }) {
-  return <DeskLines mount={TEASER_MOUNT} testId="faith-desk-teaser" rungs={[desk.faithTeaser]} />;
+export function FaithTeaserLines({ desk, settlement }) {
+  requireSettlement(settlement, 'FaithTeaserLines');
+  return <DeskLines mount={TEASER_MOUNT} testId="faith-desk-teaser"
+    settlementName={settlement?.name} tier={settlement?.tier} rungs={[desk.faithTeaser]} />;
 }
 
 /**
@@ -225,13 +303,13 @@ export function FaithTeaserLines({ desk }) {
  * @param {{desk: Record<string, any>}} props
  */
 export function FaithNicheGlance({ desk }) {
+  const mobile = useIsMobile();
   const drawn = drawnAtMount(NICHE_ROW_MOUNT, desk.nicheRow);
   if (!drawn?.glance) return null;
   return (
     <div data-testid="faith-desk-niche-glance" style={{
       border: `1px solid ${BORDER}`, background: CARD, padding: '6px 10px', marginBottom: 6,
-      color: MUTED, fontFamily: sans, fontSize: FS.pico, fontWeight: 700,
-      textTransform: 'uppercase', letterSpacing: '0.06em',
+      color: MUTED, fontFamily: sans, fontSize: chromeFontSize(FS.pico, mobile), fontWeight: 700,
     }}>
       {`The patron's standing · ${drawn.glance}`}
       {drawn.sentence && <span style={{ color: BODY, fontWeight: 400, textTransform: 'none' }}>{`: ${drawn.sentence}`}</span>}

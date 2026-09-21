@@ -15,8 +15,11 @@ import { labelOfTarget } from './helpers.js';
 import { DeltaRow } from './PreviewPanel.jsx';
 import Button from '../../primitives/Button.jsx';
 import IconButton from '../../primitives/IconButton.jsx';
+import useIsMobile from '../../../hooks/useIsMobile.js';
+import { chromeFontSize } from '../../../design/proseScale.js';
 
 export function BatchCart({ staged, settlement, phase, pendingBatchPreview, refusalNotice = null, onRemove, onClear, onPreview, onApply }) {
+  const mobile = useIsMobile();
   const validation = validateBatch(settlement, staged);
   const blocks = (validation.warnings || []).filter(w => w.severity === 'block');
   return (
@@ -25,14 +28,14 @@ export function BatchCart({ staged, settlement, phase, pendingBatchPreview, refu
       background: swatch['#FAF8F4'], border: `1px solid ${GOLD}`,
     }}>
       <div style={{
-        fontSize: FS.xs, fontWeight: 800, color: MUTED, fontFamily: sans,
+        fontSize: chromeFontSize(FS.xs, mobile), fontWeight: 800, color: MUTED, fontFamily: sans,
         textTransform: 'uppercase', letterSpacing: '0.06em', marginBottom: SP.xs,
       }}>
         Staged changes ({staged.length})
       </div>
       <div style={{ display: 'flex', flexDirection: 'column', gap: 4 }}>
         {staged.map((e, i) => (
-          <div key={e.id || i} style={{ display: 'flex', alignItems: 'center', gap: 6, fontSize: FS.xs, fontFamily: sans, color: INK }}>
+          <div key={e.id || i} style={{ display: 'flex', alignItems: 'center', gap: 6, fontSize: chromeFontSize(FS.xs, mobile), fontFamily: sans, color: INK }}>
             <span style={{ fontWeight: 700, minWidth: 16, color: GOLD }}>{i + 1}.</span>
             <span style={{ flex: 1 }}>
               {EVENT_REGISTRY[e.type]?.label || e.type}{e.targetId ? `: ${labelOfTarget(e.targetId)}` : ''}
@@ -42,7 +45,7 @@ export function BatchCart({ staged, settlement, phase, pendingBatchPreview, refu
         ))}
       </div>
       {blocks.length > 0 && (
-        <ul style={{ margin: '6px 0 0', paddingLeft: 16, color: swatch.danger, fontSize: FS.xxs, fontFamily: sans }}>
+        <ul style={{ margin: '6px 0 0', paddingLeft: 16, color: swatch.danger, fontSize: chromeFontSize(FS.xxs, mobile), fontFamily: sans }}>
           {blocks.map((w, i) => <li key={i}>{w.message}</li>)}
         </ul>
       )}
@@ -50,7 +53,7 @@ export function BatchCart({ staged, settlement, phase, pendingBatchPreview, refu
         <div style={{
           marginTop: 6, padding: '6px 8px', border: `1px solid ${swatch.danger}`,
           background: swatch.dangerBg,
-          fontSize: FS.xxs, fontFamily: sans, color: swatch.danger, fontWeight: 700, lineHeight: 1.4,
+          fontSize: chromeFontSize(FS.xxs, mobile), fontFamily: sans, color: swatch.danger, fontWeight: 700, lineHeight: 1.4,
         }}>
           ✕ {refusalNotice}
         </div>

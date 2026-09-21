@@ -24,9 +24,13 @@ import { t } from '../../copy/index.js';
 import { triggerPricingMoment } from '../../lib/pricingMoments.js';
 import { REALM_SIZES, TONES, MAP_KINDS, MAGIC_CHOICES, DEFAULT_REALM_SIZE, DEFAULT_TONE, DEFAULT_MAP_KIND, DEFAULT_MAGIC, isMagicChoice } from '../../domain/instantWorld/worldPlan.js';
 import Button from '../primitives/Button.jsx';
+import AvailableAtLaunchPill from '../primitives/AvailableAtLaunchPill.jsx';
+import { purchasesOpen } from '../../lib/launchGate.js';
 import Segmented from '../primitives/Segmented.jsx';
 import { ChoiceDialog } from '../primitives/Dialog.jsx';
 import { INK, BODY, MUTED, BORDER, BORDER2, CARD, CARD_HDR, GOLD, GOLD_TXT, sans, serif_, FS, SP, swatch } from '../theme.js';
+import useIsMobile from '../../hooks/useIsMobile.js';
+import { chromeFontSize, proseFontSize } from '../../design/proseScale.js';
 
 const REALM_OPTIONS = Object.values(REALM_SIZES).map(s => ({ id: s.id, label: s.label }));
 const TONE_OPTIONS = TONES.map(t => ({ id: t.id, label: t.label }));
@@ -40,6 +44,7 @@ function freshSeed() {
 }
 
 export default function InstantWorldEntry({ isMobile, onNavigate }) {
+  const mobile = useIsMobile();
   const tier = useStore(s => s.auth?.tier);
   const isElevated = useStore(s => (typeof s.isElevated === 'function' ? s.isElevated() : false));
   const instantWorld = useStore(s => s.instantWorld);
@@ -59,6 +64,11 @@ export default function InstantWorldEntry({ isMobile, onNavigate }) {
   const setInstantKnobPin = useStore(s => s.setInstantKnobPin);
 
   const canGenerate = tier === 'premium' || isElevated;
+  // Purchases stay closed until launch (lib/launchGate.js). Only the non-premium
+  // "See Premium" reach is a purchase control: it is disabled and wears the
+  // Available at launch pill. The premium open/hide toggle is untouched.
+  const purchasesAreOpen = purchasesOpen();
+  const premiumReachClosed = !canGenerate && !purchasesAreOpen;
 
   const [open, setOpen] = useState(false);
   const [realmSize, setRealmSize] = useState(DEFAULT_REALM_SIZE);
@@ -131,10 +141,10 @@ export default function InstantWorldEntry({ isMobile, onNavigate }) {
           <div style={{ display: 'flex', alignItems: 'center', gap: SP.xs }}>
             <span style={{ fontFamily: serif_, fontSize: FS.lg, fontWeight: 700, color: INK }}>Instant World</span>
             <span style={{
-              fontFamily: sans, fontSize: FS.xxs, fontWeight: 900, letterSpacing: 0.4, textTransform: 'uppercase',
+              fontFamily: sans, fontSize: chromeFontSize(FS.xxs, mobile), fontWeight: 900, letterSpacing: 0.4, textTransform: 'uppercase',
               color: swatch.white, background: GOLD, padding: '2px 6px',
             }}>
-              Premium
+              Cartographer
             </span>
           </div>
           <p style={{ margin: `${SP.xs}px 0 0`, fontFamily: sans, fontSize: FS.sm, color: BODY, lineHeight: 1.45 }}>
@@ -146,9 +156,17 @@ export default function InstantWorldEntry({ isMobile, onNavigate }) {
           size="md"
           onClick={handleEntry}
           aria-expanded={open}
+          disabled={premiumReachClosed}
           data-testid="instant-world-open"
+          // The pill may wrap below the locked reach while purchases are closed: this card
+          // sits in the Realm's 240px sidebar, where label and pill are wider than the
+          // button, and without the wrap both spilled out and the card clipped them
+          // (the label read "ee Premium" then, before the tier rename; owner orders
+          // 2026-09-17). The subscriber toggle is untouched.
+          style={premiumReachClosed ? { flexWrap: 'wrap' } : undefined}
         >
-          {canGenerate ? (open ? 'Hide options' : 'Build a realm') : 'See Premium'}
+          {canGenerate ? (open ? 'Hide options' : 'Build a realm') : 'See Cartographer'}
+          {premiumReachClosed && <AvailableAtLaunchPill style={{ marginLeft: 6 }} />}
         </Button>
       </div>
 
@@ -201,7 +219,7 @@ export default function InstantWorldEntry({ isMobile, onNavigate }) {
             <span
               data-testid="instant-world-magic-echo"
               style={{
-                justifySelf: 'start', fontFamily: sans, fontSize: FS.xs, fontWeight: 700,
+                justifySelf: 'start', fontFamily: sans, fontSize: chromeFontSize(FS.xs, mobile), fontWeight: 700,
                 color: BODY, background: CARD_HDR, border: `1px solid ${BORDER2}`,
                 padding: `${SP.xs}px ${SP.sm}px`,
               }}
@@ -229,7 +247,7 @@ export default function InstantWorldEntry({ isMobile, onNavigate }) {
           >
             {busy ? 'Building your realm…' : 'Generate Instant World'}
           </Button>
-          <p style={{ margin: 0, textAlign: 'center', fontFamily: sans, fontSize: FS.xxs, color: MUTED }}>
+          <p style={{ margin: 0, textAlign: 'center', fontFamily: sans, fontSize: proseFontSize(FS.xxs, mobile), color: MUTED }}>
             It places everything and canonizes nothing. You can move, edit, or regenerate before mapping the geography.
           </p>
         </div>
@@ -252,14 +270,15 @@ export default function InstantWorldEntry({ isMobile, onNavigate }) {
 }
 
 function Knob({ label, hint, children, action = null }) {
+  const mobile = useIsMobile();
   return (
     <div style={{ display: 'grid', gap: SP.xs }}>
-      <span style={{ display: 'flex', alignItems: 'center', gap: 8, fontFamily: sans, fontSize: FS.xs, fontWeight: 900, letterSpacing: 0.4, textTransform: 'uppercase', color: MUTED }}>
+      <span style={{ display: 'flex', alignItems: 'center', gap: 8, fontFamily: sans, fontSize: chromeFontSize(FS.xs, mobile), fontWeight: 900, letterSpacing: 0.4, textTransform: 'uppercase', color: MUTED }}>
         {label}
         {action}
       </span>
       {children}
-      {hint && <span style={{ fontFamily: sans, fontSize: FS.xxs, color: BODY, lineHeight: 1.4 }}>{hint}</span>}
+      {hint && <span style={{ fontFamily: sans, fontSize: proseFontSize(FS.xxs, mobile), color: BODY, lineHeight: 1.4 }}>{hint}</span>}
     </div>
   );
 }
@@ -268,6 +287,7 @@ function Knob({ label, hint, children, action = null }) {
  *  rerolls the rest ("keep my tone, surprise me otherwise"). Device-scoped
  *  (displayPrefs), never generator input on its own. */
 function KnobPin({ knob, pins, setPin }) {
+  const mobile = useIsMobile();
   const pinned = !!pins?.[knob];
   return (
     <Button
@@ -276,7 +296,7 @@ function KnobPin({ knob, pins, setPin }) {
       aria-pressed={pinned}
       data-testid={`knob-pin-${knob}`}
       onClick={() => setPin?.(knob, !pinned)}
-      style={{ marginLeft: 'auto', padding: '0 6px', minHeight: 22, fontSize: FS.xxs, fontWeight: 800, color: pinned ? GOLD_TXT : MUTED, letterSpacing: 0 }}
+      style={{ marginLeft: 'auto', padding: '0 6px', minHeight: 22, fontSize: chromeFontSize(FS.xxs, mobile), fontWeight: 800, color: pinned ? GOLD_TXT : MUTED, letterSpacing: 0 }}
     >
       {pinned ? '✦ kept' : 'keep this'}
     </Button>

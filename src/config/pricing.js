@@ -281,6 +281,12 @@ export const TIERS = Object.freeze({
   founder: Object.freeze({
     key:          'founder',
     legacyKey:    'founder',
+    // ⛔ INVITATION ONLY — THE TIER IS NOT AN OFFER (the owner, 2026-09-19: "an
+    // invitation-only tier does not appear on the public path"). This is the FLAG the
+    // public tier lists filter on (`isInvitationOnly` / `getPublicTiers` below), so a
+    // surface that lists tiers excludes it by a property of the tier rather than by
+    // naming 'founder' — which is what makes the rule survive a fourth tier.
+    invitationOnly: true,
     // ⛔ NO SKU (DESIGN_FOUNDERS_HALL §1/§5, ODQ §118). A chair is given, never
     // sold: there is no Stripe price, no PRICE_MAP row, and create-checkout
     // refuses `founder_lifetime` outright via ABOLISHED_PRODUCTS. `null` is the
@@ -482,6 +488,45 @@ export function getAiCostForModel(feature, modelPreference) {
 /** Which tiers should appear in pricing UI. */
 export function getVisibleTiers() {
   return [TIERS.wanderer, TIERS.cartographer, TIERS.founder];
+}
+
+/**
+ * Is this tier come by INVITATION ONLY — never chosen by the reader, never sold?
+ *
+ * ⛔ THE PREDICATE IS A PROPERTY OF THE TIER, NOT A NAME (the owner, 2026-09-19). The
+ * Create page's at-cap teaser walked `getVisibleTiers()` whole and drew a Founder card
+ * at an anonymous visitor — a tier they cannot buy, cannot choose, and can only be given.
+ * The pricing page had always dropped it from its row, but it did so with
+ * `tier.key !== 'founder'`, which is a fact about one spelling: a fourth tier of the same
+ * kind would have to be remembered at every call site. This is the fact itself.
+ *
+ * ⚠ THE PARAMETER IS `unknown` ON PURPOSE, AND IT IS NOT LAZINESS. `{ invitationOnly?:
+ * boolean }` is a WEAK TYPE — every property optional — so TypeScript requires a
+ * candidate to share at least one property with it, and the two tiers that DO NOT carry
+ * the flag (which is exactly the answer "no") shared none: the predicate could not be
+ * asked about the tiers it exists to answer no for. It is also asked about shapes from
+ * outside the catalogue — a stale record, a hand-rolled `{ key: 'founder' }` — and must
+ * answer no rather than throw, which is what the census drives it with.
+ *
+ * @param {unknown} tier
+ * @returns {boolean}
+ */
+export function isInvitationOnly(tier) {
+  return Boolean(tier && /** @type {{ invitationOnly?: boolean }} */ (tier).invitationOnly);
+}
+
+/**
+ * THE TIERS A PUBLIC SURFACE MAY LIST: every visible tier that is not invitation-only.
+ *
+ * Every surface that draws the tier catalogue as a CHOICE reads this — the Create page's
+ * at-cap teaser and the pricing page's card row. The Founders' Hall, the pricing page's
+ * charter band and a founder's own account state are not listings of an offer and are
+ * unaffected; they are where the owner invites.
+ *
+ * @returns {ReadonlyArray<typeof TIERS[keyof typeof TIERS]>}
+ */
+export function getPublicTiers() {
+  return getVisibleTiers().filter((tier) => !isInvitationOnly(tier));
 }
 
 /** Whether the single-dossier microtransaction is offered. */

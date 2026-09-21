@@ -19,6 +19,8 @@ import { Pill } from '../primitives/Pill.jsx';
 import { type, palette, space, factionColors, pt } from '../theme.js';
 import { cap, label, humanize, hookText, plural } from '../lib/format.js';
 import { anchorTarget } from '../primitives/EntityRef.jsx';
+import { institutionDisplayName } from '../../domain/display/institutionDisplayName.js';
+import { edged } from '../../design/edgedBox.js';
 
 const CATEGORY_ORDER = [
   'government', 'military', 'religious', 'economy', 'magic',
@@ -55,20 +57,20 @@ export function Institutions({ settlement, narrativeMode, vm }) {
       {/* ── Health header ────────────────────────────────────── */}
       <StatStrip
         stats={[
-          { label: 'TOTAL', value: detailed.length },
-          { label: 'CATEGORIES', value: categories.length },
+          { label: 'Total', value: detailed.length },
+          { label: 'Categories', value: categories.length },
           {
-            label: 'IMPAIRED',
+            label: 'Impaired',
             value: s.totals?.impaired ?? 0,
             tone: (s.totals?.impaired ?? 0) > 0 ? 'bad' : 'muted',
           },
           {
-            label: 'DEGRADED',
+            label: 'Degraded',
             value: s.totals?.degraded ?? 0,
             tone: (s.totals?.degraded ?? 0) > 0 ? 'warn' : 'muted',
           },
           {
-            label: 'VULNERABLE',
+            label: 'Vulnerable',
             value: s.totals?.vulnerable ?? 0,
             tone: (s.totals?.vulnerable ?? 0) > 0 ? 'warn' : 'muted',
           },
@@ -167,22 +169,22 @@ function InstitutionCard({ inst, idx, entityIndex }) {
   // shimmering gold row: a gold tint (goldBg) + gold outline + a ✦ marker.
   const isCustom = String(inst.source || '').toLowerCase() === 'custom';
   const meta = [
-    inst.subCategory ? { label: 'TYPE', value: humanize(inst.subCategory) } : null,
+    inst.subCategory ? { label: 'Type', value: humanize(inst.subCategory) } : null,
     inst.leader ? {
-      label: 'HEAD',
+      label: 'Head',
       value: typeof inst.leader === 'string' ? inst.leader : (inst.leader.name || label(inst.leader)),
     } : null,
     inst.building ? {
-      label: 'BLDG',
+      label: 'Building',
       value: typeof inst.building === 'string' ? inst.building : (inst.building.name || label(inst.building)),
     } : null,
-    inst.staffing ? { label: 'STAFF', value: inst.staffing } : null,
-    inst.capacity ? { label: 'CAP', value: inst.capacity } : null,
-    inst.prominence ? { label: 'SCALE', value: humanize(inst.prominence) } : null,
-    inst.chainDepth != null ? { label: 'CHAIN', value: `depth ${inst.chainDepth}` } : null,
-    inst.source ? { label: 'SOURCE', value: humanize(inst.source) } : null,
+    inst.staffing ? { label: 'Staff', value: inst.staffing } : null,
+    inst.capacity ? { label: 'Capacity', value: inst.capacity } : null,
+    inst.prominence ? { label: 'Scale', value: humanize(inst.prominence) } : null,
+    inst.chainDepth != null ? { label: 'Chain', value: `depth ${inst.chainDepth}` } : null,
+    inst.source ? { label: 'Source', value: humanize(inst.source) } : null,
     inst.founded ? {
-      label: 'EST',
+      label: 'Established',
       value: typeof inst.founded === 'number' ? `${inst.founded}` : inst.founded,
     } : null,
   ].filter(Boolean);
@@ -192,8 +194,7 @@ function InstitutionCard({ inst, idx, entityIndex }) {
       id={anchor}
       style={{
         padding: 5,
-        border: `0.4pt solid ${isCustom ? palette.gold : palette.border}`,
-        borderLeft: `2pt solid ${palette[tone] || palette.muted}`,
+        ...edged(`0.4pt solid ${isCustom ? palette.gold : palette.border}`, `2pt solid ${palette[tone] || palette.muted}`),
         borderRadius: 2,
         backgroundColor: isCustom ? palette.goldBg : palette.card,
         minHeight: 60,
@@ -204,7 +205,7 @@ function InstitutionCard({ inst, idx, entityIndex }) {
       <View style={{ flexDirection: 'row', alignItems: 'center', marginBottom: 2 }}>
         <View style={{ flexDirection: 'row', alignItems: 'center', flex: 1 }}>
           <Text style={{ ...type.body_em, color: palette.ink, fontSize: pt['10'] }}>
-            {inst.name}
+            {institutionDisplayName(inst)}
           </Text>
           {isCustom && (
             <Text style={{ color: palette.gold, fontSize: pt['9'], marginLeft: 3 }}>*</Text>
@@ -244,7 +245,7 @@ function InstitutionCard({ inst, idx, entityIndex }) {
 
       {inst.products?.length > 0 && (
         <View style={{ marginTop: 2 }}>
-          <Text style={{ ...type.label, fontSize: pt['7'], color: palette.muted }}>PRODUCES</Text>
+          <Text style={{ ...type.label_plain, fontSize: pt['7'], color: palette.muted }}>Produces</Text>
           <Text style={{ ...type.caption, fontSize: pt['7.5'], color: palette.second }}>
             {inst.products.slice(0, 6).map(p => label(p) || humanize(String(p))).filter(Boolean).join(', ')}
           </Text>
@@ -253,7 +254,7 @@ function InstitutionCard({ inst, idx, entityIndex }) {
 
       {inst.requirements?.length > 0 && (
         <View style={{ marginTop: 2 }}>
-          <Text style={{ ...type.label, fontSize: pt['7'], color: palette.warn }}>NEEDS</Text>
+          <Text style={{ ...type.label_plain, fontSize: pt['7'], color: palette.warn }}>Needs</Text>
           <Text style={{ ...type.caption, fontSize: pt['7.5'], color: palette.second }}>
             {inst.requirements.slice(0, 6).map(r => label(r) || humanize(String(r))).filter(Boolean).join(', ')}
           </Text>
@@ -273,7 +274,7 @@ function InstitutionCard({ inst, idx, entityIndex }) {
 
       {inst.pressures?.length > 0 && (
         <View style={{ marginTop: 1 }}>
-          <Text style={{ ...type.label, fontSize: pt['7'], color: palette.bad }}>PRESSURES</Text>
+          <Text style={{ ...type.label_plain, fontSize: pt['7'], color: palette.bad }}>Pressures</Text>
           <View style={{ flexDirection: 'row', flexWrap: 'wrap' }}>
             {inst.pressures.slice(0, 4).map((p, i) => (
               <Tag key={`pr-${idx}-${i}`} tone="warn">{label(p) || humanize(String(p))}</Tag>
@@ -284,7 +285,7 @@ function InstitutionCard({ inst, idx, entityIndex }) {
 
       {inst.plotHooks?.length > 0 && (
         <View style={{ marginTop: 2 }}>
-          <Text style={{ ...type.label, fontSize: pt['7'], color: palette.gold }}>HOOKS</Text>
+          <Text style={{ ...type.label_plain, fontSize: pt['7'], color: palette.gold }}>Hooks</Text>
           {inst.plotHooks.slice(0, 2).map((h, i) => {
             const t = hookText(h);
             if (!t) return null;

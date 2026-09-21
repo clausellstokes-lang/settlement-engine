@@ -29,6 +29,8 @@ import { headlineSlotsOf } from './heraldGrammar.js';
 import { severityBand } from './heraldFilter.js';
 import { buildCauseWalk } from '../../domain/display/causeWalk.js';
 import { heraldCausalVoiceActive, heraldHeadlineRegister, heraldSubheaderRegister } from '../../domain/display/heraldCausalVoice.js';
+import useIsMobile from '../../hooks/useIsMobile.js';
+import { chromeFontSize, proseFontSize } from '../../design/proseScale.js';
 
 /** The non-canonical provenance chip; canon/derived stay silent (the spec's rule). */
 function ProvenanceChip({ provenance }) {
@@ -44,6 +46,7 @@ function ProvenanceChip({ provenance }) {
  * @param {boolean} [props.nested]   omit the settlement level (a group header hoists it)
  */
 export default function HeraldHeadline({ item, worldState, nameById, nested = false, seesSecrets = true }) {
+  const mobile = useIsMobile();
   const [open, setOpen] = useState(false);
   const [popupOpen, setPopupOpen] = useState(false);
   const slots = headlineSlotsOf(item);
@@ -98,13 +101,13 @@ export default function HeraldHeadline({ item, worldState, nameById, nested = fa
             title="Why this happened"
             style={{
               padding: 0, minHeight: 0, textAlign: 'left', justifyContent: 'flex-start',
-              color: INK, fontSize: FS.xs, fontWeight: 900, lineHeight: 1.3, overflowWrap: 'anywhere', whiteSpace: 'normal',
+              color: INK, fontSize: chromeFontSize(FS.xs, mobile), fontWeight: 900, lineHeight: 1.3, overflowWrap: 'anywhere', whiteSpace: 'normal',
             }}
           >
             {voiced.text}
           </Button>
         ) : (
-          <span style={{ color: INK, fontFamily: sans, fontSize: FS.xs, fontWeight: 900, lineHeight: 1.3, overflowWrap: 'anywhere' }}>
+          <span style={{ color: INK, fontFamily: sans, fontSize: chromeFontSize(FS.xs, mobile), fontWeight: 900, lineHeight: 1.3, overflowWrap: 'anywhere' }}>
             {slots.glance}
           </span>
         )}
@@ -118,7 +121,7 @@ export default function HeraldHeadline({ item, worldState, nameById, nested = fa
           visible honesty anchor: the headline may sing because the subheader
           states. Absent when the record holds no summary; never authored. */}
       {subheader?.text && (
-        <div data-testid="herald-subheader" style={{ color: SECOND, fontFamily: sans, fontSize: FS.xxs, fontWeight: 650, lineHeight: 1.5, overflowWrap: 'anywhere' }}>
+        <div data-testid="herald-subheader" style={{ color: SECOND, fontFamily: sans, fontSize: proseFontSize(FS.xxs, mobile), fontWeight: 650, lineHeight: 1.5, overflowWrap: 'anywhere' }}>
           {subheader.text}
         </div>
       )}
@@ -131,8 +134,8 @@ export default function HeraldHeadline({ item, worldState, nameById, nested = fa
           {slots.reason && (
             <span style={{ display: 'inline-flex', alignItems: 'center', gap: 6 }}>
               <span aria-hidden="true" style={{ width: 1, alignSelf: 'stretch', minHeight: 12, background: swatch['#A0762A'] }} />
-              <span style={{ color: MUTED, fontFamily: sans, fontSize: FS.xxs, fontWeight: 900, textTransform: 'uppercase', letterSpacing: '0.04em' }}>{slots.reasonLabel}</span>
-              <span style={{ color: SECOND, fontFamily: sans, fontSize: FS.xxs, fontWeight: 700, overflowWrap: 'anywhere' }}>{slots.reason}</span>
+              <span style={{ color: MUTED, fontFamily: sans, fontSize: chromeFontSize(FS.xxs, mobile), fontWeight: 900, textTransform: 'uppercase', letterSpacing: '0.04em' }}>{slots.reasonLabel}</span>
+              <span style={{ color: SECOND, fontFamily: sans, fontSize: chromeFontSize(FS.xxs, mobile), fontWeight: 700, overflowWrap: 'anywhere' }}>{slots.reason}</span>
             </span>
           )}
         </div>
@@ -178,6 +181,7 @@ export function HeraldGroupHeader({ group }) {
   // group header lights its marker on the map, the same store field the map's
   // own pointer hover writes. Touch is excluded (the PlacementsLayer rule: a
   // tap fires pointerenter with no paired leave and would stick the glow).
+  const mobile = useIsMobile();
   const setHovered = useStore(s => s.setHoveredSettlementId);
   const clearHovered = useStore(s => s.clearHoveredSettlementId);
   const hoverable = group.settlementId != null;
@@ -190,12 +194,12 @@ export function HeraldGroupHeader({ group }) {
       onFocus={() => { if (hoverable) setHovered?.(group.settlementId); }}
       onBlur={() => { if (hoverable) clearHovered?.(); }}
     >
-      <span style={{ color: INK, fontFamily: sans, fontSize: FS.xs, fontWeight: 900 }}>
+      <span style={{ color: INK, fontFamily: sans, fontSize: chromeFontSize(FS.xs, mobile), fontWeight: 900 }}>
         {group.settlementId != null
           ? <RealmEntityLink settlementSaveId={group.settlementId} label={group.name} />
           : group.name}
       </span>
-      <span style={{ marginLeft: 'auto', color: MUTED, fontFamily: sans, fontSize: FS.micro, fontWeight: 800, background: CARD, padding: '1px 5px', border: `1px solid ${BORDER2}` }}>
+      <span style={{ marginLeft: 'auto', color: MUTED, fontFamily: sans, fontSize: chromeFontSize(FS.micro, mobile), fontWeight: 800, background: CARD, padding: '1px 5px', border: `1px solid ${BORDER2}` }}>
         {group.items.length}
       </span>
     </div>

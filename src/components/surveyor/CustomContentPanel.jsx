@@ -47,6 +47,8 @@ import {
 import ContentDraftEntry from '../contentStudio/ContentDraftEntry.jsx';
 import ContentInterpretation from '../contentStudio/ContentInterpretation.jsx';
 import ContentSampleReceipt from '../contentStudio/ContentSampleReceipt.jsx';
+import useIsMobile from '../../hooks/useIsMobile.js';
+import { chromeFontSize, proseFontSize } from '../../design/proseScale.js';
 
 function progressLabel(session) {
   const progress = contentDraftProgress(session);
@@ -57,6 +59,7 @@ export default function CustomContentPanel({ initialPrompt = '' }) {
   // Resolved per render, not once at import: the price becomes per-user the moment
   // the owner activates the capability-tier multiplier (config/pricing.js). A plain
   // number, so re-resolving costs nothing and cannot churn a memo.
+  const mobile = useIsMobile();
   const cost = getSurveyorAiCost('customContent');
   const { creditBalance, ctx } = useSurveyorContext();
   // Preview the content actually active in the current environment. The author
@@ -272,7 +275,7 @@ export default function CustomContentPanel({ initialPrompt = '' }) {
       <div
         role="status"
         aria-live="polite"
-        style={{ fontSize: FS.micro, color: MUTED, fontFamily: sans }}
+        style={{ fontSize: chromeFontSize(FS.micro, mobile), color: MUTED, fontFamily: sans }}
       >
         {progressLabel(session)}
       </div>
@@ -304,7 +307,7 @@ export default function CustomContentPanel({ initialPrompt = '' }) {
         />
       )}
       {responseMeta?.usageWarning && (
-        <div role="status" style={{ fontSize: FS.xs, color: MUTED, fontFamily: sans }}>
+        <div role="status" style={{ fontSize: chromeFontSize(FS.xs, mobile), color: MUTED, fontFamily: sans }}>
           {String(responseMeta.usageWarning)}
         </div>
       )}
@@ -347,7 +350,7 @@ export default function CustomContentPanel({ initialPrompt = '' }) {
             <div
               role="alert"
               data-testid="content-invalid-reviewed"
-              style={{ fontSize: FS.xs, color: MUTED, fontFamily: sans, lineHeight: 1.45 }}
+              style={{ fontSize: proseFontSize(FS.xs, mobile), color: MUTED, fontFamily: sans, lineHeight: 1.45 }}
             >
               {invalidReviewed.length === 1 ? 'One reviewed entry no longer' : `${invalidReviewed.length} reviewed entries no longer`}{' '}
               pass the registered content schema. Correct or reject
@@ -365,7 +368,7 @@ export default function CustomContentPanel({ initialPrompt = '' }) {
               {unsupported.map((entry, index) => (
                 <div key={index} style={{ display: 'flex', alignItems: 'center', gap: SP.xs, flexWrap: 'wrap' }}>
                   <FieldLabelBadge kind="unsupported" />
-                  <span style={{ fontSize: FS.xs, color: MUTED, fontFamily: sans }}>
+                  <span style={{ fontSize: chromeFontSize(FS.xs, mobile), color: MUTED, fontFamily: sans }}>
                     {String(entry.requested ?? entry.field ?? entry.key ?? 'unknown')}
                     {entry.reason ? `: ${entry.reason}` : ''}
                   </span>
@@ -409,7 +412,7 @@ export default function CustomContentPanel({ initialPrompt = '' }) {
           </div>
 
           {session.error && session.stage === CONTENT_STUDIO_STAGE.SAMPLE && (
-            <div role="alert" style={{ fontSize: FS.xs, color: MUTED, fontFamily: sans }}>
+            <div role="alert" style={{ fontSize: chromeFontSize(FS.xs, mobile), color: MUTED, fontFamily: sans }}>
               {session.error}
             </div>
           )}
@@ -432,7 +435,7 @@ export default function CustomContentPanel({ initialPrompt = '' }) {
           )}
           {session.stage === CONTENT_STUDIO_STAGE.APPROVE && (
             <div style={{ display: 'flex', flexDirection: 'column', gap: SP.xs }}>
-              <div style={{ fontSize: FS.xs, color: MUTED, fontFamily: sans, lineHeight: 1.45 }}>
+              <div style={{ fontSize: proseFontSize(FS.xs, mobile), color: MUTED, fontFamily: sans, lineHeight: 1.45 }}>
                 Approval creates immutable definition revisions. Future edits create
                 new revisions; pinned campaigns keep the version they reviewed.
               </div>
@@ -455,7 +458,7 @@ export default function CustomContentPanel({ initialPrompt = '' }) {
               role={appliedConfirmed ? 'status' : 'alert'}
               aria-live="polite"
               data-testid="content-applied"
-              style={{ fontSize: FS.xs, color: MUTED, fontFamily: sans, lineHeight: 1.5, outline: 'none' }}
+              style={{ fontSize: proseFontSize(FS.xs, mobile), color: MUTED, fontFamily: sans, lineHeight: 1.5, outline: 'none' }}
             >
               <span style={{ color: appliedConfirmed ? GREEN : MUTED }}>◆</span>{' '}
               {!appliedConfirmed

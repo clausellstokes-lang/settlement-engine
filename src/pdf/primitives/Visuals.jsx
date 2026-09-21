@@ -191,8 +191,12 @@ export function ScoreWithBreakdown({ label, score, scoreLabel, tone = 'gold', br
           <Text style={{ ...type.numeric, color: fg, fontSize: pt['16'], marginRight: 4 }}>
             {score ?? '–'}
           </Text>
+          {/* RUNG 3, THE STATUS VALUE — `label` above keeps the section's capitals, this
+              does not. Its one caller is PowerStructure's legitimacy band, whose vocabulary
+              ('Contested', 'Secure') is Title case at source and is printed RAW by the
+              screen's PowerTab, so dropping the transform is what makes the two agree. */}
           {scoreLabel && (
-            <Text style={{ ...type.label, color: palette.second, fontSize: pt['8'] }}>{scoreLabel}</Text>
+            <Text style={{ ...type.label_plain, color: palette.second, fontSize: pt['8'] }}>{scoreLabel}</Text>
           )}
         </View>
       </View>

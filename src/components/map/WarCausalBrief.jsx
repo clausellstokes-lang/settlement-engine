@@ -20,14 +20,17 @@ import { Scale, Swords, HeartHandshake } from 'lucide-react';
 import { warCausalBrief } from '../../domain/worldPulse/peaceReasons.js';
 import { human } from './WorldPulseData.js';
 import { INK, BODY, MUTED, SECOND, CARD, BORDER, BORDER2, RED, GREEN, sans, FS, SP } from '../theme.js';
+import useIsMobile from '../../hooks/useIsMobile.js';
+import { chromeFontSize, proseFontSize } from '../../design/proseScale.js';
 
 /** One reason row: its human-named type + the ledger receipt. */
 function ReasonRow({ type, receipt, tone }) {
+  const mobile = useIsMobile();
   const accent = tone === 'war' ? RED : GREEN;
   return (
     <li style={{ display: 'flex', gap: 6, alignItems: 'flex-start', lineHeight: 1.4 }}>
-      <span aria-hidden style={{ color: accent, flexShrink: 0, marginTop: 2, fontSize: FS.pico }}>●</span>
-      <span style={{ color: BODY, fontFamily: sans, fontSize: FS.xxs }}>
+      <span aria-hidden style={{ color: accent, flexShrink: 0, marginTop: 2, fontSize: chromeFontSize(FS.pico, mobile) }}>●</span>
+      <span style={{ color: BODY, fontFamily: sans, fontSize: chromeFontSize(FS.xxs, mobile) }}>
         <span style={{ color: INK, fontWeight: 800 }}>{human(type)}</span>
         {receipt ? <span style={{ color: SECOND }}>: {receipt}</span> : null}
       </span>
@@ -44,6 +47,7 @@ function ReasonRow({ type, receipt, tone }) {
  * @returns {import('react').ReactElement|null}
  */
 export default function WarCausalBrief({ worldState, partyId, foeId, compact = false }) {
+  const mobile = useIsMobile();
   const brief = useMemo(
     () => (worldState && partyId != null && foeId != null ? warCausalBrief(worldState, partyId, foeId) : null),
     [worldState, partyId, foeId],
@@ -60,7 +64,7 @@ export default function WarCausalBrief({ worldState, partyId, foeId, compact = f
   if (compact) {
     if (!ironyLine) return null;
     return (
-      <div data-testid="war-causal-brief-line" style={{ display: 'flex', gap: 5, alignItems: 'center', color: SECOND, fontFamily: sans, fontSize: FS.pico, fontStyle: 'italic', lineHeight: 1.4 }}>
+      <div data-testid="war-causal-brief-line" style={{ display: 'flex', gap: 5, alignItems: 'center', color: SECOND, fontFamily: sans, fontSize: proseFontSize(FS.pico, mobile), fontStyle: 'italic', lineHeight: 1.4 }}>
         <Scale size={11} color={MUTED} aria-hidden style={{ flexShrink: 0 }} />
         <span>{ironyLine}.</span>
       </div>
@@ -71,13 +75,13 @@ export default function WarCausalBrief({ worldState, partyId, foeId, compact = f
     <div data-testid="war-causal-brief" style={{ display: 'flex', flexDirection: 'column', gap: 6, padding: SP.xs, border: `1px solid ${BORDER2}`, background: CARD }}>
       <div style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
         <Scale size={12} color={MUTED} aria-hidden />
-        <span style={{ color: MUTED, fontFamily: sans, fontSize: FS.pico, fontWeight: 900, textTransform: 'uppercase', letterSpacing: '0.06em' }}>
+        <span style={{ color: MUTED, fontFamily: sans, fontSize: chromeFontSize(FS.pico, mobile), fontWeight: 900, textTransform: 'uppercase', letterSpacing: '0.06em' }}>
           Reasons
         </span>
       </div>
       {warReasons.length > 0 && (
         <div>
-          <div style={{ display: 'flex', alignItems: 'center', gap: 5, color: RED, fontFamily: sans, fontSize: FS.pico, fontWeight: 800, borderBottom: `1px solid ${BORDER}`, paddingBottom: 3, marginBottom: 4 }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: 5, color: RED, fontFamily: sans, fontSize: chromeFontSize(FS.pico, mobile), fontWeight: 800, borderBottom: `1px solid ${BORDER}`, paddingBottom: 3, marginBottom: 4 }}>
             <Swords size={11} color={RED} aria-hidden /> Toward war
           </div>
           <ul style={{ listStyle: 'none', margin: 0, padding: 0, display: 'flex', flexDirection: 'column', gap: 3 }}>
@@ -87,7 +91,7 @@ export default function WarCausalBrief({ worldState, partyId, foeId, compact = f
       )}
       {peaceReasons.length > 0 && (
         <div>
-          <div style={{ display: 'flex', alignItems: 'center', gap: 5, color: GREEN, fontFamily: sans, fontSize: FS.pico, fontWeight: 800, borderBottom: `1px solid ${BORDER}`, paddingBottom: 3, marginBottom: 4 }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: 5, color: GREEN, fontFamily: sans, fontSize: chromeFontSize(FS.pico, mobile), fontWeight: 800, borderBottom: `1px solid ${BORDER}`, paddingBottom: 3, marginBottom: 4 }}>
             <HeartHandshake size={11} color={GREEN} aria-hidden /> Toward peace
           </div>
           <ul style={{ listStyle: 'none', margin: 0, padding: 0, display: 'flex', flexDirection: 'column', gap: 3 }}>
@@ -96,7 +100,7 @@ export default function WarCausalBrief({ worldState, partyId, foeId, compact = f
         </div>
       )}
       {ironyLine && (
-        <div style={{ color: SECOND, fontFamily: sans, fontSize: FS.pico, fontStyle: 'italic', lineHeight: 1.4 }}>
+        <div style={{ color: SECOND, fontFamily: sans, fontSize: proseFontSize(FS.pico, mobile), fontStyle: 'italic', lineHeight: 1.4 }}>
           {ironyLine}.
         </div>
       )}

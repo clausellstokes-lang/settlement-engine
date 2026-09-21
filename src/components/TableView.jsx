@@ -21,17 +21,20 @@
  * unconditionally when present.
  */
 
+import { literaryTitle, tokenCase } from './new/labelLadder.js';
 import { useEffect, useMemo } from 'react';
 import { X } from 'lucide-react';
 import { FS, swatch } from './theme.js';
 import { formatCount } from '../domain/formatNumber.js';
-import { tonightAtTheTable, prosperityLabel } from '../domain/summary/tonightAtTheTable.js';
+import { tonightAtTheTable, prosperityLabel, TABLE_KIND_LABEL } from '../domain/summary/tonightAtTheTable.js';
 import { composeSettlementQuickGuide } from '../domain/summary/settlementQuickGuide.js';
 import EconomyFreshnessNote from './new/EconomyFreshnessNote.jsx';
 import { FIELD_INK } from '../design/organic/ink.js';
 import { LAMP_ACCENTS } from '../design/organic/lampTones.js';
 import IconButton from './primitives/IconButton.jsx';
 import { useDialogFocusTrap } from './primitives/useDialogFocusTrap.js';
+import useIsMobile from '../hooks/useIsMobile.js';
+import { chromeFontSize, proseFontSize } from '../design/proseScale.js';;
 
 // THE LANTERN TABLE (C14) — the desk by night (reference plate 04): a warm umber
 // ground, cream ink, the four cheat-sheet kinds lit as lamp tones. The header
@@ -55,7 +58,10 @@ const sans = '"Nunito", system-ui, sans-serif';
 
 // The four lamp-tone kind accents (moss/gold/slate/ember), legible on UMBER_CARD.
 const KIND_ACCENT = LAMP_ACCENTS;
-const KIND_LABEL = { NPC: 'NPC', HOOK: 'HOOK', TWIST: 'TWIST', RED: 'RED' };
+// DISPLAY words only — the model tokens are untouched. The map moved to the domain module
+// that owns the kind union (ODQ §934.22 item 4) because SessionMode rendered the raw token
+// beside this one's word; its docblock carries the reasons the words are what they are.
+const KIND_LABEL = TABLE_KIND_LABEL;
 
 export default function TableView({ settlement, onClose }) {
   // Shared modal focus management (M12): focus-in on open, Tab/Shift+Tab cycling
@@ -63,6 +69,13 @@ export default function TableView({ settlement, onClose }) {
   // Replaces the hand-rolled Escape-only listener — a full-screen aria-modal
   // dialog with no trap leaked keyboard focus to the obscured app behind it.
   const dialogRef = useDialogFocusTrap(true, onClose);
+  // THE PHONE PROSE FLOOR — this is the glance-at-your-phone surface, so its
+  // READING text takes the floor below the breakpoint: the identity sentence,
+  // the defining truths, the empty state and the card bodies. The name, the
+  // identity strip, the truth labels, the stressor chips and the kind tags keep
+  // their own steps — they are glanced at, and they are what makes the prose
+  // findable. On a desktop the 380px column is unchanged.
+  const mobile = useIsMobile();
 
   // FIELD MODE wake lock (Organic Craft law §7 — the cook-mode pattern): while
   // the at-table view is open the screen stays awake, where supported. The lock
@@ -148,7 +161,7 @@ export default function TableView({ settlement, onClose }) {
               {settlement?.name || 'Untitled settlement'}
             </h1>
             <div style={{
-              marginTop: 3, fontSize: FS.xxs, color: MUTED, letterSpacing: '0.04em',
+              marginTop: 3, fontSize: chromeFontSize(FS.xxs, mobile), color: MUTED, letterSpacing: '0.04em',
             }}>
               {String(settlement?.tier || 'SETTLEMENT').toUpperCase()}
               {settlement?.population != null && (
@@ -178,7 +191,7 @@ export default function TableView({ settlement, onClose }) {
           {/* Canonical first glance — the same facts lead every compact surface. */}
           <div>
             <div style={{
-              fontFamily: serif, fontSize: FS.md,
+              fontFamily: serif, fontSize: proseFontSize(FS.md, mobile),
               color: CREAM, lineHeight: 1.5,
             }}>
               {guide.identitySentence}
@@ -193,14 +206,13 @@ export default function TableView({ settlement, onClose }) {
                   borderLeft: `2px solid ${FIELD_RULE}`,
                 }}>
                   <span style={{
-                    fontSize: FS.nano, fontWeight: 800,
-                    letterSpacing: '0.07em', textTransform: 'uppercase',
+                    ...literaryTitle(FS.xs),
                     color: CREAM_FAINT, marginRight: 5,
                   }}>
-                    {truth.label}
+                    {tokenCase(truth.label)}
                   </span>
                   <span style={{
-                    fontSize: FS.xs, color: CREAM_BODY, lineHeight: 1.45,
+                    fontSize: proseFontSize(FS.xs, mobile), color: CREAM_BODY, lineHeight: 1.45,
                   }}>
                     {truth.text}
                   </span>
@@ -242,8 +254,7 @@ export default function TableView({ settlement, onClose }) {
             <div style={{ display: 'flex', flexWrap: 'wrap', gap: 6 }}>
               {stressors.map((s, i) => (
                 <span key={i} style={{
-                  fontSize: FS.micro, fontWeight: 800,
-                  letterSpacing: '0.04em', textTransform: 'uppercase',
+                  fontSize: chromeFontSize(FS.micro, mobile), fontWeight: 800,
                   color: LAMP_ACCENTS.RED, background: 'transparent',
                   border: `1px solid ${LAMP_ACCENTS.RED}`,
                   padding: '3px 8px',
@@ -257,7 +268,7 @@ export default function TableView({ settlement, onClose }) {
           {/* Tonight at the table */}
           <div>
             <div style={{
-              fontSize: FS.micro, fontWeight: 800,
+              fontSize: chromeFontSize(FS.micro, mobile), fontWeight: 800,
               letterSpacing: '0.14em', textTransform: 'uppercase',
               color: LAMP_ACCENTS.HOOK, marginBottom: 8,
             }}>
@@ -266,7 +277,7 @@ export default function TableView({ settlement, onClose }) {
 
             {entries.length === 0 ? (
               <div style={{
-                fontSize: FS.sm, color: CREAM_FAINT, fontStyle: 'italic', lineHeight: 1.5,
+                fontSize: proseFontSize(FS.sm, mobile), color: CREAM_FAINT, fontStyle: 'italic', lineHeight: 1.5,
               }}>
                 No table-night entries derived yet. Generate a richer settlement
                 or run the narrative layer.
@@ -293,13 +304,13 @@ export default function TableView({ settlement, onClose }) {
                           {row.title}
                         </span>
                         <span style={{
-                          fontSize: FS.nano, fontWeight: 800,
+                          fontSize: chromeFontSize(FS.nano, mobile), fontWeight: 800,
                           color: accent, letterSpacing: '0.08em', flexShrink: 0,
                         }}>
                           {KIND_LABEL[row.kind] || row.kind}
                         </span>
                       </div>
-                      <div style={{ fontSize: FS.sm, color: CREAM_BODY, lineHeight: 1.5 }}>
+                      <div style={{ fontSize: proseFontSize(FS.sm, mobile), color: CREAM_BODY, lineHeight: 1.5 }}>
                         {row.body}
                       </div>
                     </div>
@@ -311,7 +322,7 @@ export default function TableView({ settlement, onClose }) {
 
           <div style={{
             marginTop: 'auto', paddingTop: 6,
-            fontSize: FS.xxs, color: CREAM_FAINT, textAlign: 'center', fontStyle: 'italic',
+            fontSize: chromeFontSize(FS.xxs, mobile), color: CREAM_FAINT, textAlign: 'center', fontStyle: 'italic',
           }}>
             Tap outside or press Esc to close
           </div>

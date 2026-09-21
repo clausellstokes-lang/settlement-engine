@@ -5,7 +5,7 @@
  */
 import { describe, it, expect } from 'vitest';
 import {
-  roadsActive, isOffStage, ROADS_TUNING,
+  roadsActive, isOffStage, OFF_STAGE_STATUSES, ROADS_TUNING,
   riskToleranceOf, militaryQuality01, protectionOf, exposureOf, captureProbability,
   termWeeksFor, conversionFlawFactor, conversionProbability,
   applyLegitimacySteps, applyProsperityBandSteps, roadsImportanceWeight,
@@ -44,6 +44,27 @@ describe('roads state — isOffStage (the ONE participation chokepoint, §8)', (
     expect(isOffStage({ name: 'A' })).toBe(false);
     expect(isOffStage(null)).toBe(false);
     expect(isOffStage(undefined)).toBe(false);
+  });
+  it('EM-B1f — status-based absence: the arm is DERIVED and exact, and a REVERSIBLE absence keeps the place', () => {
+    expect(OFF_STAGE_STATUSES).toEqual(['exiled', 'jailed', 'removed']);
+    expect(
+      Object.isFrozen(OFF_STAGE_STATUSES),
+      'a later widening of NPC_UNAVAILABLE_STATUSES must RED HERE rather than change participation silently',
+    ).toBe(true);
+    expect(isOffStage({ name: 'A', status: 'exiled' })).toBe(true);
+    expect(isOffStage({ name: 'A', status: 'jailed' })).toBe(true);
+    expect(isOffStage({ name: 'A', status: 'removed' })).toBe(true);
+    expect(isOffStage({ name: 'A', status: 'JAILED' }), 'the estate lowercases status at every seat read').toBe(true);
+    // ⛔ R18 — an irreversible consequence may only follow an irreversible cause, so a
+    // REVERSIBLE absence keeps the place: `missing` and `retired` never join the arm.
+    expect(isOffStage({ name: 'A', status: 'missing' })).toBe(false);
+    expect(isOffStage({ name: 'A', status: 'retired' })).toBe(false);
+    expect(isOffStage({ name: 'A', status: 'active' })).toBe(false);
+    expect(isOffStage({ name: 'A', status: 'dead' }), 'dead is SUBTRACTED: the seat and ladder consumers pair it themselves').toBe(false);
+    expect(isOffStage({ name: 'A', status: 'sabbatical' }), 'the predicate never guesses at an unknown token').toBe(false);
+    expect(isOffStage({ name: 'A', status: '' })).toBe(false);
+    expect(isOffStage({ name: 'A', status: 0 }), 'a non-string status coerces to the empty string, never to a member').toBe(false);
+    expect(isOffStage({ name: 'A' }), '4,884 of 5,171 generated NPCs carry no status key at all').toBe(false);
   });
 });
 

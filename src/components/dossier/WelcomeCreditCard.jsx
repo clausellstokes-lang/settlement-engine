@@ -25,6 +25,8 @@ import { useStore } from '../../store/index.js';
 import { Funnel, EVENTS } from '../../lib/analytics.js';
 import { INK, sans, serif_, FS, SP, swatch, BODY } from '../theme.js';
 import Button from '../primitives/Button.jsx';
+import useIsMobile from '../../hooks/useIsMobile.js';
+import { chromeFontSize } from '../../design/proseScale.js';
 
 const SLATE = swatch['#5A6E82'];
 const SLATE_BG = swatch['#E4E9EE'];
@@ -51,6 +53,7 @@ function markDismissed() {
 }
 
 export default function WelcomeCreditCard({ saveId = null, onVisibilityChange }) {
+  const mobile = useIsMobile();
   const tier = useStore(s => s.auth.tier);
   const userId = useStore(s => s.auth.user?.id);
   const savedCount = useStore(s => s.savedSettlements?.length || 0);
@@ -150,7 +153,7 @@ export default function WelcomeCreditCard({ saveId = null, onVisibilityChange })
         }}>✦</div>
         <div style={{ flex: 1 }}>
           <div style={{
-            fontSize: FS.xxs, fontWeight: 800, letterSpacing: '0.14em',
+            fontSize: chromeFontSize(FS.xxs, mobile), fontWeight: 800, letterSpacing: '0.14em',
             textTransform: 'uppercase', color: SLATE,
           }}>
             Welcome credit · on us
@@ -174,7 +177,7 @@ export default function WelcomeCreditCard({ saveId = null, onVisibilityChange })
         marginTop: SP.lg, display: 'flex',
         alignItems: 'center', gap: SP.sm,
       }}>
-        <div style={{ flex: 1, fontSize: FS.xs, color: BODY }}>
+        <div style={{ flex: 1, fontSize: chromeFontSize(FS.xs, mobile), color: BODY }}>
           <div>Cost: <s>5 credits</s></div>
           <div style={{ fontWeight: 700, color: SLATE }}>This one: free</div>
         </div>

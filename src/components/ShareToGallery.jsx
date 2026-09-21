@@ -33,6 +33,8 @@ import CoverImageField from './gallery/CoverImageField.jsx';
 import GalleryMemberVisibility from './GalleryMemberVisibility.jsx';
 import Button from './primitives/Button.jsx';
 import { BORDER, BORDER2, CARD, CARD_ALT, sans, SP, FS, GREEN, RED, INK, BODY, swatch } from './theme.js';
+import useIsMobile from '../hooks/useIsMobile.js';
+import { chromeFontSize, proseFontSize } from '../design/proseScale.js';
 
 const MUTED = swatch['#6B5340'];
 const _BODY  = swatch['#4A3B22'];
@@ -68,10 +70,11 @@ export function suggestedTagsFor(settlement = {}) {
 }
 
 function Field({ label, htmlFor, children }) {
+  const mobile = useIsMobile();
   return (
     // eslint-disable-next-line jsx-a11y/label-has-for -- generic wrapper; association is via the htmlFor prop wired at each call site, which the static rule can't verify.
     <label htmlFor={htmlFor} style={{ display: 'grid', gap: 4, minWidth: 0 }}>
-      <span style={{ color: INK, fontFamily: sans, fontSize: FS.xxs, fontWeight: 900, textTransform: 'uppercase', letterSpacing: '0.06em' }}>
+      <span style={{ color: INK, fontFamily: sans, fontSize: chromeFontSize(FS.xxs, mobile), fontWeight: 900, textTransform: 'uppercase', letterSpacing: '0.06em' }}>
         {label}
       </span>
       {children}
@@ -101,6 +104,14 @@ export default function ShareToGallery({
   galleryMemberOverrides = null,
   onSaved = null,
 }) {
+  const mobile = useIsMobile();
+  // The three free-text gallery fields render as one control: title, image alt and
+  // tags are the same input at the same step, so they read from one style rather
+  // than three copies that can drift apart.
+  const textFieldStyle = {
+    minHeight: 32, border: `1px solid ${BORDER}`, background: CARD, color: INK,
+    fontFamily: sans, fontSize: chromeFontSize(FS.xs, mobile), padding: '6px 8px',
+  };
   const auth = useStore(s => s.auth);
   const updateSavedSettlement = useStore(s => s.updateSavedSettlement);
   // The public gallery strips every AI overlay (sanitizePublicSettlement in
@@ -213,7 +224,7 @@ export default function ShareToGallery({
       padding: '7px 9px', marginTop: SP.xs,
       border: `1px solid ${BORDER2}`,
       background: CARD_ALT, color: BODY,
-      fontFamily: sans, fontSize: FS.xxs, lineHeight: 1.45,
+      fontFamily: sans, fontSize: proseFontSize(FS.xxs, mobile), lineHeight: 1.45,
     }}>
       {shareNarrated && hasNarrative
         ? <Globe size={12} style={{ marginTop: 1, flexShrink: 0, color: GREEN }} />
@@ -233,7 +244,7 @@ export default function ShareToGallery({
         display: 'inline-flex', alignItems: 'center', gap: 6,
         padding: '6px 10px',
         background: 'transparent', color: MUTED,
-        fontSize: FS.xs, fontFamily: sans, fontStyle: 'italic',
+        fontSize: chromeFontSize(FS.xs, mobile), fontFamily: sans, fontStyle: 'italic',
       }}>
         <Lock size={12} /> Save first to share publicly
       </div>
@@ -428,7 +439,7 @@ export default function ShareToGallery({
             onChange={event => setShareNarrated(event.target.checked)}
             style={{ marginTop: 2, flexShrink: 0 }}
           />
-          <span style={{ color: BODY, fontFamily: sans, fontSize: FS.xxs, lineHeight: 1.45 }}>
+          <span style={{ color: BODY, fontFamily: sans, fontSize: proseFontSize(FS.xxs, mobile), lineHeight: 1.45 }}>
             <strong style={{ color: INK }}>Publish the AI-narrated version</strong> instead of the raw simulation. Viewers see your refined prose; DM-private content is stripped unless you enable the option below. Save details (or re-share) to apply.
           </span>
         </label>
@@ -446,7 +457,7 @@ export default function ShareToGallery({
           onChange={event => setShareDm(event.target.checked)}
           style={{ marginTop: 2, flexShrink: 0 }}
         />
-        <span style={{ color: BODY, fontFamily: sans, fontSize: FS.xxs, lineHeight: 1.45, display: 'flex', alignItems: 'flex-start', gap: 5 }}>
+        <span style={{ color: BODY, fontFamily: sans, fontSize: proseFontSize(FS.xxs, mobile), lineHeight: 1.45, display: 'flex', alignItems: 'flex-start', gap: 5 }}>
           <AlertCircle size={12} style={{ marginTop: 1, flexShrink: 0, color: shareDm ? RED : MUTED }} />
           <span>
             <strong style={{ color: shareDm ? RED : INK }}>Reveal DM-private content</strong>. Secrets, plot hooks, NPC goals and relationships, your DM notes, and the DM Compass become <strong>publicly visible</strong> to anyone who opens this gallery page. Off by default; save details (or re-share) to apply.
@@ -466,7 +477,7 @@ export default function ShareToGallery({
           onChange={event => setImportable(event.target.checked)}
           style={{ marginTop: 2, flexShrink: 0 }}
         />
-        <span style={{ color: BODY, fontFamily: sans, fontSize: FS.xxs, lineHeight: 1.45 }}>
+        <span style={{ color: BODY, fontFamily: sans, fontSize: proseFontSize(FS.xxs, mobile), lineHeight: 1.45 }}>
           <strong style={{ color: INK }}>Allow others to import this settlement</strong>. Let other DMs clone the public version into their own library. Private DM content (secrets, notes) is never included in an import. Off by default; save details (or re-share) to apply.
         </span>
       </label>
@@ -488,15 +499,7 @@ export default function ShareToGallery({
           maxLength={120}
           onChange={event => setTitle(event.target.value)}
           placeholder={settlement?.name || 'Settlement name'}
-          style={{
-            minHeight: 32,
-            border: `1px solid ${BORDER}`,
-            background: CARD,
-            color: INK,
-            fontFamily: sans,
-            fontSize: FS.xs,
-            padding: '6px 8px',
-          }}
+          style={textFieldStyle}
         />
       </Field>
       <Field label="Public description">
@@ -518,15 +521,7 @@ export default function ShareToGallery({
           value={imageAlt}
           onChange={event => setImageAlt(event.target.value)}
           placeholder={settlement?.name ? `Image for ${settlement.name}` : 'Image description'}
-          style={{
-            minHeight: 32,
-            border: `1px solid ${BORDER}`,
-            background: CARD,
-            color: INK,
-            fontFamily: sans,
-            fontSize: FS.xs,
-            padding: '6px 8px',
-          }}
+          style={textFieldStyle}
         />
       </Field>
       <Field label="Gallery tags" htmlFor="share-to-gallery-tags">
@@ -536,15 +531,7 @@ export default function ShareToGallery({
           value={tagsInput}
           onChange={event => setTagsInput(event.target.value)}
           placeholder="frontier, high magic, unstable"
-          style={{
-            minHeight: 32,
-            border: `1px solid ${BORDER}`,
-            background: CARD,
-            color: INK,
-            fontFamily: sans,
-            fontSize: FS.xs,
-            padding: '6px 8px',
-          }}
+          style={textFieldStyle}
         />
       </Field>
       {isPublic && (
@@ -588,7 +575,7 @@ export default function ShareToGallery({
           padding: '4px 9px',
           background: 'transparent', color: GREEN,
           border: `1px solid ${GREEN}`,
-          fontSize: FS.xs, fontWeight: 700,
+          fontSize: chromeFontSize(FS.xs, mobile), fontWeight: 700,
           textTransform: 'uppercase', letterSpacing: '0.05em',
         }}>
           <Globe size={11} /> Public
@@ -621,7 +608,7 @@ export default function ShareToGallery({
         {error && (
           <span style={{
             display: 'inline-flex', alignItems: 'center', gap: 4,
-            fontSize: FS.xs, color: RED,
+            fontSize: chromeFontSize(FS.xs, mobile), color: RED,
           }}>
             <AlertCircle size={11} /> {error}
           </span>
@@ -630,7 +617,7 @@ export default function ShareToGallery({
         {/* Chronicle disclosure must also reach owners who published BEFORE
             the public chronicle existed — the gallery projects it at read
             time, so their event log is visible retroactively. */}
-        <span style={{ flexBasis: '100%', fontSize: FS.xs, color: INK, opacity: 0.75 }}>
+        <span style={{ flexBasis: '100%', fontSize: chromeFontSize(FS.xs, mobile), color: INK, opacity: 0.75 }}>
           Your settlement's event chronicle (event titles and summaries) is publicly
           visible on the gallery page. Unshare to remove it.
         </span>
@@ -676,13 +663,13 @@ export default function ShareToGallery({
       {error && (
         <span style={{
           display: 'inline-flex', alignItems: 'center', gap: 4,
-          fontSize: FS.xs, color: RED,
+          fontSize: chromeFontSize(FS.xs, mobile), color: RED,
         }}>
           <AlertCircle size={11} /> {error}
         </span>
       )}
       <span style={{
-        fontSize: FS.xs, color: MUTED, fontStyle: 'italic',
+        fontSize: chromeFontSize(FS.xs, mobile), color: MUTED, fontStyle: 'italic',
       }}>
         {canonReady
           ? "Public dossiers appear in the gallery. Your name and email stay private. Your settlement's event chronicle (event titles and summaries) is publicly visible on the gallery page."

@@ -15,6 +15,8 @@ import { BORDER2, CARD_ALT, FS, INK, MUTED, SECOND, sans, swatch } from '../them
 import { AddressChain, AffectedSettlements } from './AddressChain.jsx';
 import { Pill } from './WorldPulsePrimitives.jsx';
 import { headlineSlotsOf } from './heraldGrammar.js';
+import useIsMobile from '../../hooks/useIsMobile.js';
+import { chromeFontSize } from '../../design/proseScale.js';
 
 /** The frozen present-progressive lead — a forecast reads as BUILDING, never past. */
 const FORECAST_LEAD = 'Pressure builds toward';
@@ -25,6 +27,7 @@ const FORECAST_LEAD = 'Pressure builds toward';
  * @param {Map<string,string>} [props.nameById]
  */
 export default function HeraldForecast({ item }) {
+  const mobile = useIsMobile();
   const slots = headlineSlotsOf(item);
   return (
     <article
@@ -39,7 +42,7 @@ export default function HeraldForecast({ item }) {
     >
       <div style={{ display: 'flex', alignItems: 'center', gap: 6, flexWrap: 'wrap' }}>
         <CloudDrizzle size={13} color={SECOND} aria-hidden="true" />
-        <span style={{ color: SECOND, fontFamily: sans, fontSize: FS.micro, fontWeight: 900, textTransform: 'uppercase', letterSpacing: '0.05em' }}>
+        <span style={{ color: SECOND, fontFamily: sans, fontSize: chromeFontSize(FS.micro, mobile), fontWeight: 900, textTransform: 'uppercase', letterSpacing: '0.05em' }}>
           {FORECAST_LEAD}
         </span>
         {/* THE AMENDABLE CHIP — forced on every forecast entry (a prediction). */}
@@ -50,7 +53,7 @@ export default function HeraldForecast({ item }) {
       <AddressChain descriptor={slots.subject} />
 
       {/* The outcome it builds toward — the recorded label, byte-verbatim. */}
-      <div style={{ color: INK, fontFamily: sans, fontSize: FS.xs, fontWeight: 850, lineHeight: 1.3, overflowWrap: 'anywhere' }}>
+      <div style={{ color: INK, fontFamily: sans, fontSize: chromeFontSize(FS.xs, mobile), fontWeight: 850, lineHeight: 1.3, overflowWrap: 'anywhere' }}>
         {slots.glance}
       </div>
 
@@ -60,8 +63,8 @@ export default function HeraldForecast({ item }) {
         {slots.reason && (
           <span style={{ display: 'inline-flex', alignItems: 'center', gap: 6 }}>
             <span aria-hidden="true" style={{ width: 1, alignSelf: 'stretch', minHeight: 12, background: BORDER2 }} />
-            <span style={{ color: MUTED, fontFamily: sans, fontSize: FS.xxs, fontWeight: 900, textTransform: 'uppercase', letterSpacing: '0.04em' }}>Drivers</span>
-            <span style={{ color: SECOND, fontFamily: sans, fontSize: FS.xxs, fontWeight: 700, overflowWrap: 'anywhere' }}>{slots.reason}</span>
+            <span style={{ color: MUTED, fontFamily: sans, fontSize: chromeFontSize(FS.xxs, mobile), fontWeight: 900, textTransform: 'uppercase', letterSpacing: '0.04em' }}>Drivers</span>
+            <span style={{ color: SECOND, fontFamily: sans, fontSize: chromeFontSize(FS.xxs, mobile), fontWeight: 700, overflowWrap: 'anywhere' }}>{slots.reason}</span>
           </span>
         )}
       </div>

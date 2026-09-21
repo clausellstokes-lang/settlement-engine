@@ -19,9 +19,15 @@ import { Crown } from 'lucide-react';
 import { FS, INK } from '../theme.js';
 import { useStore } from '../../store/index.js';
 import { useIconsOn } from './IconsContext.js';
+import useIsMobile from '../../hooks/useIsMobile.js';
+import { chromeFontSize } from '../../design/proseScale.js';
 
+// The DESKTOP ladder. The phone floor is applied where the ladder is READ, at the
+// `fontSize:` in the style below — the only place the viewport flag is bound.
 const SIZES = {
+  // phone-floor: floored at the read below.
   sm: { fontSize: FS.micro,  iconSize: 9,  pad: '1px 5px',  gap: 3, radius: 3 },
+  // phone-floor: floored at the read below.
   md: { fontSize: FS.xxs, iconSize: 10, pad: '2px 7px',  gap: 4, radius: 4 },
   lg: { fontSize: FS.sm, iconSize: 12, pad: '3px 9px',  gap: 5, radius: 5 },
 };
@@ -29,6 +35,7 @@ const SIZES = {
 export default function FounderBadge({ size = 'md', force = false, style }) {
   const isFounder = useStore(s => s.isFounder?.() ?? false);
   const iconsOn = useIconsOn();
+  const mobile = useIsMobile();
   if (!force && !isFounder) return null;
 
   const s = SIZES[size] || SIZES.md;
@@ -48,7 +55,7 @@ export default function FounderBadge({ size = 'md', force = false, style }) {
         background: 'linear-gradient(135deg, #FBF5E6 0%, #F4EAD0 100%)',
         border: '1px solid #C9A24C',
         color: INK,
-        fontSize: s.fontSize,
+        fontSize: chromeFontSize(s.fontSize, mobile),
         fontWeight: 700,
         letterSpacing: '0.05em',
         textTransform: 'uppercase',

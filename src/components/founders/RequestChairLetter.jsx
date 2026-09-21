@@ -31,6 +31,7 @@ import {
   validateChairLetterAnswer, HALL_CIVILITY_GUARD,
 } from '../../lib/foundersHall.js';
 import { SP, FS, sans, serif_ } from '../theme.js';
+import useIsMobile from '../../hooks/useIsMobile.js';
 
 const SIGN_IN_HREF = `/signin?next=${encodeURIComponent('/founders')}`;
 
@@ -51,6 +52,7 @@ function refusal(reason) {
  * @param {((text: string) => { blocked: boolean })|null} [props.civilityGuard]
  */
 export default function RequestChairLetter({ auth, onSubmit, onLoadStanding, civilityGuard = HALL_CIVILITY_GUARD }) {
+  const mobile = useIsMobile();
   const userId = auth?.user?.id || null;
   const [standing, setStanding] = useState(null);
   const [writing, setWriting] = useState(false);
@@ -116,11 +118,11 @@ export default function RequestChairLetter({ auth, onSubmit, onLoadStanding, civ
           Sign in to write a letter
         </a>
       ) : standing && standing.state === 'open' ? (
-        <p style={{ ...quietLineStyle, color: HALL.faint }}>
+        <p style={{ ...quietLineStyle(mobile), color: HALL.faint }}>
           Your letter is already in hand.
         </p>
       ) : standing && standing.state === 'cooling' ? (
-        <p style={{ ...quietLineStyle, color: HALL.faint }}>
+        <p style={{ ...quietLineStyle(mobile), color: HALL.faint }}>
           You may write again in {standing.daysLeft} days.
         </p>
       ) : !writing ? (
@@ -136,7 +138,7 @@ export default function RequestChairLetter({ auth, onSubmit, onLoadStanding, civ
               style={{ display: 'flex', flexDirection: 'column', gap: SP.xs }}
             >
               <span style={{ fontFamily: serif_, fontSize: FS.md, color: HALL.ink }}>{p.label}</span>
-              <span style={{ ...quietLineStyle, color: HALL.faint }}>{p.help}</span>
+              <span style={{ ...quietLineStyle(mobile), color: HALL.faint }}>{p.help}</span>
               <textarea
                 id={`sf-hall-letter-${p.key}`}
                 // The <label htmlFor> above already binds this control; the
@@ -156,11 +158,11 @@ export default function RequestChairLetter({ auth, onSubmit, onLoadStanding, civ
                 }}
               />
               {errors[p.key] && (
-                <span role="alert" style={{ ...quietLineStyle, color: HALL.goldSoft }}>{errors[p.key]}</span>
+                <span role="alert" style={{ ...quietLineStyle(mobile), color: HALL.goldSoft }}>{errors[p.key]}</span>
               )}
             </label>
           ))}
-          {sendError && <p role="alert" style={{ ...quietLineStyle, color: HALL.goldSoft }}>{sendError}</p>}
+          {sendError && <p role="alert" style={{ ...quietLineStyle(mobile), color: HALL.goldSoft }}>{sendError}</p>}
           <div style={{ display: 'flex', gap: SP.md, alignItems: 'center' }}>
             <Button variant="primary" size="lg" onClick={handleSubmit} busy={sending}>
               Send the letter

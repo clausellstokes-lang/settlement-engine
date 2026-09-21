@@ -21,6 +21,8 @@ import { deityNameFromSnapshots } from '../../domain/display/deityNames.js';
 import { describeDeityEffects } from '../../domain/display/deityEffects.js';
 import Button from '../primitives/Button.jsx';
 import { BODY, BORDER, BORDER2, CARD, CARD_ALT, FS, GOLD, INK, SECOND, SLATE, SLATE_DEEP, sans, swatch } from '../theme.js';
+import useIsMobile from '../../hooks/useIsMobile.js';
+import { chromeFontSize, proseFontSize } from '../../design/proseScale.js';
 
 const TIER_ORDER = ['major', 'minor', 'cult'];
 const TIER_LABEL = { major: 'Major Powers', minor: 'Minor Faiths', cult: 'Cults & Remnants' };
@@ -72,6 +74,7 @@ function carrierDeityMap(settlements) {
 // routes here when a campaign exists — so this panel is reached only by Cartographer
 // and needs no local tier prop or `pantheon_preview` upsell hook.
 export default function PantheonPanel({ campaign }) {
+  const mobile = useIsMobile();
   const saves = useStore(s => s.savedSettlements);
   const settlementItems = useMemo(() => {
     const ids = new Set((campaign?.settlementIds || []).map(String));
@@ -130,7 +133,7 @@ export default function PantheonPanel({ campaign }) {
         </div>
         <div style={{ minWidth: 0 }}>
           <h2 style={{ margin: 0, color: INK, fontFamily: sans, fontSize: FS.lg, lineHeight: 1.2, fontWeight: 900 }}>Pantheon</h2>
-          <div style={{ display: 'flex', gap: 7, flexWrap: 'wrap', marginTop: 4, color: SECOND, fontFamily: sans, fontSize: FS.xs, fontWeight: 700 }}>
+          <div style={{ display: 'flex', gap: 7, flexWrap: 'wrap', marginTop: 4, color: SECOND, fontFamily: sans, fontSize: chromeFontSize(FS.xs, mobile), fontWeight: 700 }}>
             <span>{campaign.name}</span>
             <span>{deities.length} deit{deities.length === 1 ? 'y' : 'ies'}</span>
           </div>
@@ -148,7 +151,7 @@ export default function PantheonPanel({ campaign }) {
               <div style={{ display: 'flex', flexDirection: 'column', gap: 7 }}>
                 <div style={{ color: INK, fontFamily: sans, fontSize: FS.sm, fontWeight: 900 }}>Realm Arcs</div>
                 {arcs.map((line, i) => (
-                  <div key={i} style={{ padding: '8px 10px', border: `1px solid ${BORDER2}`, borderLeft: `3px solid ${GOLD}`, background: CARD_ALT, color: INK, fontFamily: sans, fontSize: FS.xs, lineHeight: 1.4 }}>
+                  <div key={i} style={{ padding: '8px 10px', border: `1px solid ${BORDER2}`, borderLeft: `3px solid ${GOLD}`, background: CARD_ALT, color: INK, fontFamily: sans, fontSize: proseFontSize(FS.xs, mobile), lineHeight: 1.4 }}>
                     {line}
                   </div>
                 ))}
@@ -157,7 +160,7 @@ export default function PantheonPanel({ campaign }) {
 
             {TIER_ORDER.map(tier => byTier[tier].length > 0 && (
               <div key={tier} style={{ display: 'flex', flexDirection: 'column', gap: 7 }}>
-                <div style={{ color: TIER_COLOR[tier], fontFamily: sans, fontSize: FS.xs, fontWeight: 900, textTransform: 'uppercase', letterSpacing: '0.06em', borderBottom: `1px solid ${BORDER}`, paddingBottom: 4 }}>
+                <div style={{ color: TIER_COLOR[tier], fontFamily: sans, fontSize: chromeFontSize(FS.xs, mobile), fontWeight: 900, textTransform: 'uppercase', letterSpacing: '0.06em', borderBottom: `1px solid ${BORDER}`, paddingBottom: 4 }}>
                   {TIER_LABEL[tier]} ({byTier[tier].length})
                 </div>
                 {byTier[tier].map(d => (
@@ -182,7 +185,7 @@ export default function PantheonPanel({ campaign }) {
                   const aStrength = Math.round(deityTierStrength(tierById.get(String(c.aId))) * 100);
                   const bStrength = Math.round(deityTierStrength(tierById.get(String(c.bId))) * 100);
                   return (
-                    <div key={`${c.contestedId}-${c.aId}-${c.bId}`} style={{ padding: '8px 10px', border: `1px solid ${BORDER2}`, borderLeft: `3px solid ${TIER_COLOR.minor}`, background: CARD, color: INK, fontFamily: sans, fontSize: FS.xs, lineHeight: 1.4 }}>
+                    <div key={`${c.contestedId}-${c.aId}-${c.bId}`} style={{ padding: '8px 10px', border: `1px solid ${BORDER2}`, borderLeft: `3px solid ${TIER_COLOR.minor}`, background: CARD, color: INK, fontFamily: sans, fontSize: proseFontSize(FS.xs, mobile), lineHeight: 1.4 }}>
                       <strong>{deityName(settlementItems, c.aId)}</strong> ({c.aSeats} seat{c.aSeats === 1 ? '' : 's'}, {aStrength}% strength)
                       {' vs '}
                       <strong>{deityName(settlementItems, c.bId)}</strong> ({c.bSeats} seat{c.bSeats === 1 ? '' : 's'}, {bStrength}% strength)
@@ -202,6 +205,7 @@ export default function PantheonPanel({ campaign }) {
 /** A single deity row with seats, W/L, a seats-from-major progress note, and a
  *  collapsible deity-coupling explainer (reuses describeDeityEffects from P0). */
 function DeityRow({ deity, tierColor, name, snapshot }) {
+  const mobile = useIsMobile();
   const [open, setOpen] = useState(false);
   const seats = Number(deity.seats) || 0;
   const fromMajor = seatsFromMajor(deity);
@@ -216,7 +220,7 @@ function DeityRow({ deity, tierColor, name, snapshot }) {
       <div style={{ display: 'flex', alignItems: 'center', gap: 8, padding: '8px 10px' }}>
         <div style={{ flex: 1, minWidth: 0 }}>
           <div style={{ color: INK, fontFamily: sans, fontSize: FS.sm, fontWeight: 800 }}>{name}</div>
-          <div style={{ color: BODY, fontFamily: sans, fontSize: FS.xxs }}>
+          <div style={{ color: BODY, fontFamily: sans, fontSize: chromeFontSize(FS.xxs, mobile) }}>
             {seats} seat{seats === 1 ? '' : 's'} · {Number(deity.wins) || 0}W / {Number(deity.losses) || 0}L
             {deity.tier !== 'major' && (
               <> · <span style={{ color: GOLD, fontWeight: 800 }}>{fromMajor} from Major</span></>
@@ -235,8 +239,8 @@ function DeityRow({ deity, tierColor, name, snapshot }) {
           </div>
         </div>
         <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-end', gap: 2, flexShrink: 0 }}>
-          <span style={{ color: tierColor, fontFamily: sans, fontSize: FS.xs, fontWeight: 900, textTransform: 'capitalize' }}>{statusWord}</span>
-          <span style={{ color: BODY, fontFamily: sans, fontSize: FS.xxs, fontWeight: 800, textTransform: 'capitalize' }}>{deity.tier}</span>
+          <span style={{ color: tierColor, fontFamily: sans, fontSize: chromeFontSize(FS.xs, mobile), fontWeight: 900, textTransform: 'capitalize' }}>{statusWord}</span>
+          <span style={{ color: BODY, fontFamily: sans, fontSize: chromeFontSize(FS.xxs, mobile), fontWeight: 800, textTransform: 'capitalize' }}>{deity.tier}</span>
         </div>
       </div>
       {effects.length > 0 && (
@@ -246,14 +250,14 @@ function DeityRow({ deity, tierColor, name, snapshot }) {
             size="sm"
             onClick={() => setOpen(o => !o)}
             aria-expanded={open}
-            style={{ background: 'none', border: 'none', padding: '4px 0', minHeight: 32, color: tierColor, fontFamily: sans, fontSize: FS.xxs, fontWeight: 800, justifyContent: 'flex-start' }}
+            style={{ background: 'none', border: 'none', padding: '4px 0', minHeight: 32, color: tierColor, fontFamily: sans, fontSize: chromeFontSize(FS.xxs, mobile), fontWeight: 800, justifyContent: 'flex-start' }}
           >
             {open ? '▾' : '▸'} How this faith couples ({effects.length})
           </Button>
           {open && (
             <ul style={{ margin: '4px 0 0', padding: '0 0 0 12px', listStyle: 'none' }}>
               {effects.map((eff, i) => (
-                <li key={i} style={{ color: BODY, fontFamily: sans, fontSize: FS.xxs, marginBottom: 3, lineHeight: 1.4 }}>
+                <li key={i} style={{ color: BODY, fontFamily: sans, fontSize: proseFontSize(FS.xxs, mobile), marginBottom: 3, lineHeight: 1.4 }}>
                   <span style={{ color: GOLD, fontWeight: 900 }}>•</span> {eff}
                 </li>
               ))}

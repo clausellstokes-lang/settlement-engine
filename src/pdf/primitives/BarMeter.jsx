@@ -29,7 +29,9 @@ export function BarMeter({
           marginBottom: 2,
         }}
       >
-        <Text style={{ ...type.label, fontSize: pt['8.5'], color: palette.ink }}>{label}</Text>
+        {/* RUNG 2. Every caller already passes a cap()-cased word; `type.label` shouted it
+            back over the top. */}
+        <Text style={{ ...type.label_plain, fontSize: pt['8.5'], color: palette.ink }}>{label}</Text>
         {sublabel && (
           <Text style={{ ...type.caption, color: palette.muted }}>{sublabel}</Text>
         )}

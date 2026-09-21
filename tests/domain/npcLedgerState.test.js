@@ -271,9 +271,14 @@ describe('NON-DISTURBANCE of the positional-id and preservation machinery', () =
   test('the real reroll preservation + lock remap are BYTE-UNCHANGED by graduation', () => {
     // Drives the ACTUAL machinery (mergePreservedNpcs + remapNpcLocks), not a model of
     // it, so this measures the contract the design demands rather than restating it.
+    // ⚠ THE SURVIVAL GROUND IS THE AUTHORED FLAG, NOT A LOCK (owner order 2026-09-17,
+    // "remove the other padlocks"): `locks` no longer carries anybody through a reroll
+    // (domain/locksPreservation.js normalizeLocks reads no key), so the `canonStatus: 'user'`
+    // rows carry `_authored` — which is what the entity policy this mode honours reads — and
+    // the stored lock map below still exercises the id remap it always did.
     const previous = [
-      { id: 'npc_1', name: 'Halden Roke', role: 'Warden', canonStatus: 'user' },
-      { id: 'npc_3', name: 'Mira Vane', role: 'Magistrate', canonStatus: 'user' },
+      { id: 'npc_1', name: 'Halden Roke', role: 'Warden', canonStatus: 'user', _authored: true },
+      { id: 'npc_3', name: 'Mira Vane', role: 'Magistrate', canonStatus: 'user', _authored: true },
     ];
     const fresh = [
       { id: 'npc_1', name: 'Ester Fyne', role: 'Warden' },

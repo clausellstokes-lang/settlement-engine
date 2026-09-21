@@ -21,13 +21,15 @@ import { Pill } from '../primitives/Pill.jsx';
 import { Callout } from '../primitives/Callout.jsx';
 import { EditableText, EditableProse } from '../primitives/Editable.jsx';
 import { type, palette, space, pt, swatch, factionColors } from '../theme.js';
+import { resourceDisplayName } from '../../domain/display/resourceDisplayName.js';
 import { cap, label, humanize } from '../lib/format.js';
+import { StateProse } from '../primitives/StateProse.jsx';
 
 const _STATUS_TONE = { full: 'good', partial: 'warn', unexploited: 'bad' };
 const VALUE_TONE  = { 'very high': 'good', high: 'good', medium: 'warn', low: 'muted' };
 const SEVERITY_TONE = { high: 'bad', medium: 'warn', low: 'muted' };
 
-export function ResourcesProduction({ settlement, narrativeMode, vm }) {
+export function ResourcesProduction({ settlement, narrativeMode, vm, stateProse }) {
   const r = vm.resources;
 
   // Group chain rows by status for sectioning
@@ -54,6 +56,9 @@ export function ResourcesProduction({ settlement, narrativeMode, vm }) {
         {resourcesHeadline({ exportPotential: r.exportPotential, nearbyDepleted: r.nearbyDepleted })}
       </ChapterHeadline>
 
+      {/* ── The mounted state prose (the screen's ProseBlock positions) ── */}
+      <StateProse stateProse={stateProse} tab="resources" />
+
       {/* ── Strategic value ────────────────────────────────────── */}
       {r.strategicValue && (
         <Callout tone="gold" kicker="STRATEGIC VALUE">
@@ -76,7 +81,11 @@ export function ResourcesProduction({ settlement, narrativeMode, vm }) {
             {r.terrainAdvantages?.length > 0 ? (
               <View style={{ flexDirection: 'row', flexWrap: 'wrap', gap: 3 }}>
                 {r.terrainAdvantages.map((t, i) => (
-                  <Tag key={`adv-${i}`} tone="good">{label(t)}</Tag>
+                  // THE RESOURCE LABEL SEAM (ODQ §934.22 item 2): these lists hold a MIX of
+                  // authored phrases, bare commodity words and raw RESOURCE_DATA keys, and
+                  // `humanize` could only GUESS a spelling from the key ('Hot Springs
+                  // Mineral') that disagreed with the catalogue ('Mineral Hot Springs').
+                  <Tag key={`adv-${i}`} tone="good">{resourceDisplayName(t)}</Tag>
                 ))}
               </View>
             ) : (
@@ -92,7 +101,7 @@ export function ResourcesProduction({ settlement, narrativeMode, vm }) {
             {r.terrainCriticals?.length > 0 ? (
               <View style={{ flexDirection: 'row', flexWrap: 'wrap', gap: 3 }}>
                 {r.terrainCriticals.map((t, i) => (
-                  <Tag key={`crit-${i}`} tone="bad">{label(t)}</Tag>
+                  <Tag key={`crit-${i}`} tone="bad">{resourceDisplayName(t)}</Tag>
                 ))}
               </View>
             ) : (
@@ -146,7 +155,7 @@ export function ResourcesProduction({ settlement, narrativeMode, vm }) {
           </Text>
           {r.nearbyDepleted?.length > 0 && (
             <ResourceRow
-              kicker="DEPLETED"
+              kicker="Depleted"
               hint="consumed locally · export potential reduced"
               tone="bad"
               items={r.nearbyDepleted}
@@ -155,7 +164,7 @@ export function ResourcesProduction({ settlement, narrativeMode, vm }) {
           )}
           {r.nearbyAbundant?.length > 0 && (
             <ResourceRow
-              kicker="ABUNDANT"
+              kicker="Abundant"
               hint="full export potential"
               tone="good"
               items={r.nearbyAbundant}
@@ -164,7 +173,7 @@ export function ResourcesProduction({ settlement, narrativeMode, vm }) {
           )}
           {r.availableCommodities?.length > 0 && (
             <ResourceRow
-              kicker="COMMODITIES AVAILABLE"
+              kicker="Commodities available"
               hint="processed/refined in this settlement"
               tone="muted"
               items={r.availableCommodities}
@@ -401,7 +410,10 @@ function ResourceRow({ kicker, hint, tone, items, customNames = [] }) {
   return (
     <View style={{ marginBottom: 4 }}>
       <View style={{ flexDirection: 'row', alignItems: 'baseline', marginBottom: 1 }}>
-        <Text style={{ ...type.label, fontSize: pt['7.5'], color: palette[tone] || palette.muted }}>
+        {/* RUNG 3 — 'Depleted' / 'Abundant' are the resource's STATE, not a section name.
+            This is why the ladder judges the SLOT by what its callers pass: Callout's kicker
+            is a block eyebrow and keeps its capitals, and this one does not. */}
+        <Text style={{ ...type.label_plain, fontSize: pt['7.5'], color: palette[tone] || palette.muted }}>
           {kicker}
         </Text>
         {hint && (

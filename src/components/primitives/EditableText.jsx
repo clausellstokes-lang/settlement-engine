@@ -28,6 +28,8 @@
 
 import { useState, useRef, useEffect, useCallback } from 'react';
 import { FS } from '../theme.js';
+import useIsMobile from '../../hooks/useIsMobile.js';
+import { chromeFontSize } from '../../design/proseScale.js';
 
 const COLORS = Object.freeze({
   inkDeep:    '#1c1409',
@@ -54,6 +56,7 @@ export function EditableText({
   // a11y label for screen readers — pass the field name (e.g. "NPC secret")
   ariaLabel,
 }) {
+  const mobile = useIsMobile();
   const [editing, setEditing] = useState(false);
   const [draft, setDraft] = useState(value ?? '');
   const inputRef = useRef(null);
@@ -184,7 +187,7 @@ export function EditableText({
         placeholder={placeholder}
         style={inputStyle}
       />
-      <span style={{ fontSize: FS.xxs, color: COLORS.muted, marginTop: 3, display: 'block' }}>
+      <span style={{ fontSize: chromeFontSize(FS.xxs, mobile), color: COLORS.muted, marginTop: 3, display: 'block' }}>
         Enter to save · Esc to cancel{multiline ? ' · Shift+Enter for newline' : ''}
         {isEdited && (
           <>
@@ -195,7 +198,7 @@ export function EditableText({
               onClick={onRevert}
               style={{
                 background: 'none', border: 'none', padding: 0,
-                color: COLORS.edited, cursor: 'pointer', fontSize: FS.xxs,
+                color: COLORS.edited, cursor: 'pointer', fontSize: chromeFontSize(FS.xxs, mobile),
                 textDecoration: 'underline', fontWeight: 600,
               }}
               title={originalValue ? `Revert to: "${truncate(originalValue, 60)}"` : 'Revert to generated value'}
@@ -215,12 +218,13 @@ export function EditableText({
  * Pill-shaped indicator that a field is user-edited. Renders inline.
  */
 export function EditedBadge({ count = null, style = {} }) {
+  const mobile = useIsMobile();
   return (
     <span
       title="This dossier contains user-edited prose. An edited NPC survives an NPC reroll; the AI overlay passes edits through verbatim."
       style={{
         display: 'inline-flex', alignItems: 'center', gap: 4,
-        fontSize: FS.xxs, fontWeight: 700, color: COLORS.edited,
+        fontSize: chromeFontSize(FS.xxs, mobile), fontWeight: 700, color: COLORS.edited,
         background: COLORS.editedBg, border: `1px solid ${COLORS.editedBdr}`,
         padding: '2px 6px',
         textTransform: 'uppercase', letterSpacing: '0.05em',
@@ -233,6 +237,7 @@ export function EditedBadge({ count = null, style = {} }) {
 }
 
 function RevertChip({ originalValue, onClick }) {
+  const mobile = useIsMobile();
   return (
     <button
       type="button"
@@ -244,7 +249,7 @@ function RevertChip({ originalValue, onClick }) {
         border: `1px solid ${COLORS.editedBdr}`,
         padding: '0 5px',
         color: COLORS.edited,
-        fontSize: FS.micro,
+        fontSize: chromeFontSize(FS.micro, mobile),
         fontWeight: 700,
         cursor: 'pointer',
         lineHeight: 1.6,

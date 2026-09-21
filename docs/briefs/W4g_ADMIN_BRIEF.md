@@ -42,7 +42,7 @@ REMOVED (do not leave both paths — the raw read is the vulnerability).
 2. **SupportQueuePanel (ledger §8, PARTIAL — file EXISTS, not mounted).**
    `src/components/admin/SupportQueuePanel.jsx` already exists in OUR tree (W4d ported it) but is
    NOT mounted in AdminPanel.jsx. Mount it (the flagged one-line edit), replacing / beside OUR
-   read-only messages list (AdminPanel.jsx:374). Wire its operator workflow (claim / assign /
+   read-only messages list (ADDRESS STRUCK 2026-09-20 — the list is gone; SupportQueuePanel is mounted at AdminPanel.jsx:188). Wire its operator workflow (claim / assign /
    transition / reply / notes) to the EXISTING `account-actions` ticket handlers. Verify each
    operator action has a backend handler; wire what exists, STOP-AND-REPORT the rest (do not ship
    a claim/assign button that no-ops). NOTE: support email destination is unconfirmed

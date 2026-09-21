@@ -1,3 +1,5 @@
+import { tokenCase } from '../labelLadder.js';
+import { viabilityVerdict } from '../../../domain/display/viabilityVerdict.js';
 import React, { useMemo } from 'react';
 import { FS, GREEN_DEEP, RED, swatch, MUTED } from '../../theme.js';
 import { Ti, sans, Section, Empty } from '../Primitives';
@@ -8,11 +10,18 @@ import { isViabilityItem } from '../../../domain/display/viabilityFilter.js';
 
 import { defenseMagicDependencyProse } from '../../../domain/display/stateProse/defenseStateProse.js';
 import { drawnAtMount } from '../../../domain/display/stateProse/dossierMounts.js';
+import { tierNounFor } from '../../../domain/display/stateProse/weaveBlock.js';
 
 import {NarrativeNote} from '../NarrativeNote';
 // THE GENERAL DESK THROUGH ITS ONE CALLER (the registry's ARM 2), which also owns the
 // §885.3 paid-surface gate — corpus prose never draws for a free gallery viewer.
 import { generalDeskLines } from '../generalDeskRead.js';
+// THE ONE PARAGRAPH RENDERER (owner finding 2026-09-18): the verdict's three lenses are one
+// paragraph rather than three, each of which opened on the town's name. The DRAW is unchanged.
+import ProseBlock from '../ProseBlock.jsx';
+import useIsMobile from '../../../hooks/useIsMobile.js';
+import { chromeFontSize, proseFontSize } from '../../../design/proseScale.js';
+import { edged } from '../../../design/edgedBox.js';
 
 /**
  * The magic-dependency position — the registry's first CROSS-TAB row. DS-DEF-9 is authored
@@ -23,7 +32,20 @@ import { generalDeskLines } from '../generalDeskRead.js';
  */
 const MAGIC_DEPENDENCY_MOUNT = 'viability.magicDependency';
 
+// The verdict palette, keyed on the SHARED tone token so the colour and the word can no
+// longer disagree. The words live in domain/display/viabilityVerdict.js; these do not,
+// because the page has its own palette for the same three tones.
+const VERDICT_BG     = { good: '#f0faf4', warn: '#fdf8e8', bad: '#fdf4f4' };
+const VERDICT_BORDER = { good: '#a8d8b0', warn: '#e0c860', bad: '#e8c0c0' };
+const VERDICT_INK    = { good: '#1a5a28', warn: '#b8860b', bad: '#8b1a1a' };
+
 export function ViabilityTab({settlement:s, narrativeNote, publicDossier = false, playerView = false}) {
+  // THE PHONE PROSE FLOOR — the verdict summary, the what-this-checks caption,
+  // the receipt's reading lines and every issue description, reason, impact and
+  // suggested fix below. Bound above the early return so the hook order is
+  // stable; the verdict headline, the category eyebrows and the metric pills
+  // keep their own steps.
+  const mobile = useIsMobile();
   // DS-GEN-11: the verdict, the contradiction count and the first-survey caveat, banded in
   // the town's own voice beside the three data the panel already prints.
   // ⭐ MEMOISED, AND ABOVE THE EARLY RETURN (rules-of-hooks; ARCH §4.1, X-F9, SEAM car 3g):
@@ -46,6 +68,7 @@ export function ViabilityTab({settlement:s, narrativeNote, publicDossier = false
     : defenseMagicDependencyProse(s, {
       seed: String(s?._seed ?? s?.id ?? ''),
       audience: playerView ? 'player' : 'dm',
+      tierNoun: tierNounFor(s.tier),
     });
   const magicLine = drawnAtMount(MAGIC_DEPENDENCY_MOUNT, magicProse.arcaneReliance)?.sentence || null;
 
@@ -117,7 +140,15 @@ export function ViabilityTab({settlement:s, narrativeNote, publicDossier = false
   // display chokepoint (src/lib/proseSeams.js) so no surface can drift.
   const _cleanHook = h => normalizePlotHook(typeof h==='object' ? h.hook||Ti(h) : String(h));
 
-  const viable = v.viable;
+  // ONE VERDICT, BOTH SURFACES. This tab used to fork inline on `viable` and print its own
+  // words ('NOT COHERENT' / 'COHERENT' / 'MARGINAL COHERENCE') while the paid PDF printed
+  // them through its own private `verdictOf`. Two vocabularies for one derived fact. The
+  // shared leaf owns the word, the tone and the glyph; the palette below stays local.
+  // ⚠ THE LEAF'S FOURTH AND FIFTH WORDS ARE GONE (2026-09-19): `verdictOf` also carried
+  // 'Fragile' / 'Collapsing' branches keyed on a `verdict` field NOTHING WRITES, which the
+  // observed-shape ratchet convicted the moment the lift moved them into the scanned tree.
+  // The leaf reads `viable` and nothing else now — see its own note for the measurement.
+  const verdict = viabilityVerdict(v);
 
   return (
     <div style={{...sans}}>
@@ -125,20 +156,19 @@ export function ViabilityTab({settlement:s, narrativeNote, publicDossier = false
 
       {/* ── VIABILITY VERDICT ────────────────────────────────────────────── */}
       <div style={{
-        background: viable===false ? '#fdf4f4' : viable===true ? '#f0faf4' : '#fdf8e8',
-        border: `2px solid ${viable===false?'#e8c0c0':viable===true?'#a8d8b0':'#e0c860'}`,
-        borderLeft: `6px solid ${viable===false?'#8b1a1a':viable===true?'#1a5a28':'#b8860b'}`,
+        background: VERDICT_BG[verdict.tone] || VERDICT_BG.warn,
+        ...edged(`2px solid ${VERDICT_BORDER[verdict.tone] || VERDICT_BORDER.warn}`, `6px solid ${VERDICT_INK[verdict.tone] || VERDICT_INK.warn}`),
         padding: '14px 18px', marginBottom: 14,
       }}>
         <div style={{display:'flex',alignItems:'flex-start',gap:12,flexWrap:'wrap'}}>
           <div style={{flex:1}}>
             <div style={{display:'flex',alignItems:'center',gap:10,marginBottom:6}}>
-              <span style={{fontSize: FS['22'],fontWeight:800,color:viable===false?'#8b1a1a':viable===true?'#1a5a28':'#b8860b',lineHeight:1}}>
-                {viable===false ? '✗ NOT COHERENT' : viable===true ? '✓ COHERENT' : 'MARGINAL COHERENCE'}
+              <span style={{fontSize: FS['22'],fontWeight:800,color:VERDICT_INK[verdict.tone] || VERDICT_INK.warn,lineHeight:1}}>
+                {verdict.glyph ? `${verdict.glyph} ` : ''}{verdict.label}
               </span>
             </div>
-            {summaryClean&&<p style={{fontSize:FS.md,color:swatch.inkMag2,lineHeight:1.55,margin:0}}>{summaryClean}</p>}
-            <p style={{fontSize:FS.xs,color:swatch.inkMag3,margin:'6px 0 0',lineHeight:1.4}}>
+            {summaryClean&&<p style={{fontSize:proseFontSize(FS.md, mobile),color:swatch.inkMag2,lineHeight:1.55,margin:0}}>{summaryClean}</p>}
+            <p style={{fontSize:proseFontSize(FS.xs, mobile),color:swatch.inkMag3,margin:'6px 0 0',lineHeight:1.4}}>
               This tab checks whether your settlement makes logical sense, as judged at the first survey; later
               events and edits do not re-run this check. Not whether it&apos;s economically optimised.
               A viable settlement can have unexploited resources and unsatisfied demand; what matters is whether the
@@ -150,14 +180,13 @@ export function ViabilityTab({settlement:s, narrativeNote, publicDossier = false
                 and when the reading was taken. The DATUM is untouched — the
                 headline, the summary and the pills all keep their own words. */}
             {verdictLines.length>0&&<div style={{borderTop:'1px solid #d8c090',marginTop:10,paddingTop:8}}>
-              {verdictLines.map((line,i)=>(
-                <p key={i} style={{fontSize:i===0?FS.md:FS.sm,color:i===0?swatch.inkMag2:swatch.inkMag3,lineHeight:1.6,margin:i===0?0:'6px 0 0',fontStyle:'italic'}}>{line}</p>
-              ))}
+              <ProseBlock lines={verdictLines} settlementName={s?.name} tier={s?.tier}
+                style={{fontSize:FS.md,color:swatch.inkMag2,lineHeight:1.6,margin:0,fontStyle:'italic'}}/>
             </div>}
           </div>
           {/* Quick metric pills */}
           <div style={{display:'flex',gap:6,flexWrap:'wrap',flexShrink:0}}>
-            {metrics.criticalIssueCount>0&&<span style={{fontSize:FS.xs,fontWeight:700,color:swatch.danger,background:swatch['#FDE8E8'],border:'1px solid #f0a0a0',padding:'3px 9px'}}>{metrics.criticalIssueCount} critical</span>}
+            {metrics.criticalIssueCount>0&&<span style={{fontSize:chromeFontSize(FS.xs, mobile),fontWeight:700,color:swatch.danger,background:swatch['#FDE8E8'],border:'1px solid #f0a0a0',padding:'3px 9px'}}>{metrics.criticalIssueCount} critical</span>}
             
             
           </div>
@@ -173,8 +202,7 @@ export function ViabilityTab({settlement:s, narrativeNote, publicDossier = false
       {generationReceipt&&(
         <div style={{
           background:generationReceipt.status==='needs_review'?'#fdf4f4':'#f4faf5',
-          border:`1px solid ${generationReceipt.status==='needs_review'?'#e8c0c0':'#b8d8bd'}`,
-          borderLeft:`4px solid ${generationReceipt.status==='needs_review'?RED:GREEN_DEEP}`,
+          ...edged(`1px solid ${generationReceipt.status==='needs_review'?'#e8c0c0':'#b8d8bd'}`,`4px solid ${generationReceipt.status==='needs_review'?RED:GREEN_DEEP}`),
           padding:'10px 14px',
           marginBottom:12,
         }}>
@@ -186,28 +214,35 @@ export function ViabilityTab({settlement:s, narrativeNote, publicDossier = false
                   ? 'Generation receipt: coherent, with authored tensions'
                   : 'Generation receipt: coherent'}
             </span>
-            <span style={{fontSize:FS.xxs,color:MUTED}}>
-              culture {generationReceipt.cultureProfile} · themes {generationReceipt.contentProfile}
+            {/* A sentence now, not a token pair — 'culture South-Asian-inspired · themes Grounded'
+                reads as prose, so it takes the prose floor (14px on a phone), not chrome's. */}
+            <span style={{fontSize:proseFontSize(FS.xs, mobile),color:MUTED}}>
+              {/* ⛔ THE RECEIPT STORES THE PROFILE'S KEY, AND IT SHOULD: the coherence record
+                  is an audit trail, and `south_asian` is what the generator was asked for.
+                  The settlement's own materialized identity carries that key's authored
+                  LABEL ('South-Asian-inspired'), so the reader gets the word and the record
+                  keeps the key. `tokenCase` covers a legacy save with no identity. */}
+              culture {s.culturalIdentity?.label || tokenCase(generationReceipt.cultureProfile)} · themes {tokenCase(generationReceipt.contentProfile)}
             </span>
           </div>
-          <div style={{fontSize:FS.xs,color:swatch.inkMag3,lineHeight:1.45,marginTop:4}}>
+          <div style={{fontSize:proseFontSize(FS.xs, mobile),color:swatch.inkMag3,lineHeight:1.45,marginTop:4}}>
             {(generationReceipt.checks||[]).filter(item=>item.status==='pass').length}/{(generationReceipt.checks||[]).length} checks passed
             {(generationReceipt.repairs||[]).length>0&&` · ${(generationReceipt.repairs||[]).length} deterministic repair${generationReceipt.repairs.length===1?'':'s'} recorded`}
             {(generationReceipt.authoredTensions||[]).length>0&&` · ${(generationReceipt.authoredTensions||[]).length} explicit tension${generationReceipt.authoredTensions.length===1?'':'s'} preserved`}
           </div>
           {generationJudgments.length>0&&(
-            <div style={{fontSize:FS.xs,color:swatch.inkMag3,lineHeight:1.45,marginTop:2}}>
+            <div style={{fontSize:proseFontSize(FS.xs, mobile),color:swatch.inkMag3,lineHeight:1.45,marginTop:2}}>
               Formal judgments: {supportedGenerationJudgments.length}/{generationJudgments.length} supported
               {reviewGenerationJudgments.length>0&&` · ${reviewGenerationJudgments.length} need${reviewGenerationJudgments.length===1?'s':''} review`}
             </div>
           )}
           {(generationReceipt.checks||[]).filter(item=>item.status==='fail').map(item=>(
-            <div key={item.id} style={{fontSize:FS.xxs,color:RED,marginTop:3}}>
+            <div key={item.id} style={{fontSize:chromeFontSize(FS.xxs, mobile),color:RED,marginTop:3}}>
               {item.label}: {item.findings.length} finding{item.findings.length===1?'':'s'}
             </div>
           ))}
           {reviewGenerationJudgments.map(judgment=>(
-            <div key={judgment.id} style={{fontSize:FS.xxs,color:RED,marginTop:3}}>
+            <div key={judgment.id} style={{fontSize:proseFontSize(FS.xxs, mobile),color:RED,marginTop:3}}>
               {judgment.label}: {judgment.summary||'Formal judgment needs review.'}
             </div>
           ))}
@@ -221,14 +256,14 @@ export function ViabilityTab({settlement:s, narrativeNote, publicDossier = false
           <div style={{fontSize:FS.sm,fontWeight:700,color:swatch.magic,marginBottom:4}}>
             Magic Dependency · First Survey
           </div>
-          <div style={{fontSize:FS.xs,color:swatch.inkMag3,lineHeight:1.5}}>
+          <div style={{fontSize:proseFontSize(FS.xs, mobile),color:swatch.inkMag3,lineHeight:1.5}}>
             This settlement's resilience relies on active magical infrastructure. One or more supply
             chains are magically sustained, or stress conditions are being offset by arcane, divine,
             or druidic intervention. Losing those practitioners through conflict, plague, or
             political disruption would immediately expose critical vulnerabilities.
           </div>
           {(s.economicState?.activeChains||[]).filter(c=>c.magicNote).map((c,i)=>(
-            <div key={i} style={{fontSize:FS.xxs,color:swatch['#7A4AAA'],marginTop:6,paddingLeft:8,
+            <div key={i} style={{fontSize:proseFontSize(FS.xxs, mobile),color:swatch['#7A4AAA'],marginTop:6,paddingLeft:8,
               borderLeft:'2px solid #c0a0e0',fontStyle:'italic'}}>
               {c.label}: {c.magicNote}
             </div>
@@ -245,21 +280,21 @@ export function ViabilityTab({settlement:s, narrativeNote, publicDossier = false
       {magicLine&&(
         <div style={{background:swatch['#FAF8F4'],border:'1px solid #d8c090',borderLeft:'4px solid #7a3a9a',
           padding:'9px 13px',marginBottom:12}}>
-          <p style={{fontSize:FS.sm,color:swatch.inkMag2,lineHeight:1.55,margin:0,fontStyle:'italic'}}>{magicLine}</p>
+          <p style={{fontSize:proseFontSize(FS.sm, mobile),color:swatch.inkMag2,lineHeight:1.55,margin:0,fontStyle:'italic'}}>{magicLine}</p>
         </div>
       )}
 
       {/* ── BY-DESIGN CONTRADICTIONS ────────────────────────────────────── */}
       {byDesignIssues.length>0&&<Section title={`By-Design Contradictions (${byDesignIssues.length})`} collapsible defaultOpen={false} accent='#8a3010'>
-        <div style={{fontSize: FS['11.5'],color:swatch.inkMag3,marginBottom:8,lineHeight:1.5,fontStyle:'italic'}}>
+        <div style={{fontSize: proseFontSize(FS['11.5'], mobile),color:swatch.inkMag3,marginBottom:8,lineHeight:1.5,fontStyle:'italic'}}>
           These contradictions are intentional overrides. The settlement has institutions or combinations outside its normal tier. Use these as plot seeds, not problems to fix.
         </div>
         {byDesignIssues.map((v2,i)=>(
           <div key={i} style={{padding:'8px 12px',background:swatch['#FDF8F0'],border:'1px solid #d8b880',borderLeft:'3px solid #c05010',marginBottom:6}}>
             <div style={{fontSize:FS.sm,fontWeight:700,color:swatch['#8A3010'],marginBottom:3}}>{v2.institution}</div>
-            <div style={{fontSize: FS['11.5'],color:swatch.inkMag2,lineHeight:1.6}}>{v2.reason}</div>
+            <div style={{fontSize: proseFontSize(FS['11.5'], mobile),color:swatch.inkMag2,lineHeight:1.6}}>{v2.reason}</div>
             {v2.suggestedFixes?.[0] && (
-              <div style={{fontSize: FS['10.5'],color:MUTED,marginTop:4,fontStyle:'italic'}}>{v2.suggestedFixes[0]}</div>
+              <div style={{fontSize: proseFontSize(FS['10.5'], mobile),color:MUTED,marginTop:4,fontStyle:'italic'}}>{v2.suggestedFixes[0]}</div>
             )}
           </div>
         ))}
@@ -269,10 +304,10 @@ export function ViabilityTab({settlement:s, narrativeNote, publicDossier = false
       {structViolations.length>0&&<Section title={`Structural Crises · First Survey (${structViolations.length})`} collapsible defaultOpen accent='#8b1a1a'>
         {structViolations.map((v2,i)=>(
           <div key={i} style={{background:swatch['#FDF0F0'],border:'1px solid #e0a0a0',borderLeft:'4px solid #8b1a1a',padding:'10px 14px',marginBottom:8}}>
-            <div style={{fontSize:FS.xs,fontWeight:700,color:swatch.danger,marginBottom:3}}>
+            <div style={{fontSize:chromeFontSize(FS.xs, mobile),fontWeight:700,color:swatch.danger,marginBottom:3}}>
               {v2.institution||v2.group}
             </div>
-            <p style={{fontSize:FS.md,color:swatch['#5A1A1A'],lineHeight:1.5,margin:0}}>{v2.reason}</p>
+            <p style={{fontSize:proseFontSize(FS.md, mobile),color:swatch['#5A1A1A'],lineHeight:1.5,margin:0}}>{v2.reason}</p>
           </div>
         ))}
       </Section>}
@@ -282,17 +317,17 @@ export function ViabilityTab({settlement:s, narrativeNote, publicDossier = false
         {criticalIssues.map((issue,i)=>(
           <div key={i} style={{background:swatch['#FAF8F4'],border:'1px solid #e8c0c0',borderLeft:'3px solid #8b1a1a',padding:'12px 14px',marginBottom:10}}>
             <div style={{display:'flex',alignItems:'baseline',gap:8,marginBottom:4,flexWrap:'wrap'}}>
-              {issue.category&&<span style={{fontSize:FS.xxs,fontWeight:700,color:swatch.danger,textTransform:'uppercase',letterSpacing:'0.05em'}}>{issue.category}</span>}
+              {issue.category&&<span style={{fontSize:chromeFontSize(FS.xxs, mobile),fontWeight:700,color:swatch.danger}}>{tokenCase(issue.category)}</span>}
               {issue.title&&<span style={{fontSize:FS.md,fontWeight:700,color:swatch.inkMag}}>{issue.title}</span>}
             </div>
-            <p style={{fontSize: FS['12.5'],color:swatch.inkMag2,lineHeight:1.55,margin:'0 0 6px'}}>{typeof issue.description==='object'?issue.description.short||issue.description.text||'':issue.description||issue.message}</p>
-            {issue.priorityNote&&<p style={{fontSize: FS['11.5'],color:swatch['#8B3A1A'],fontStyle:'italic',margin:'0 0 8px',lineHeight:1.4}}>{issue.priorityNote}</p>}
+            <p style={{fontSize: proseFontSize(FS['12.5'], mobile),color:swatch.inkMag2,lineHeight:1.55,margin:'0 0 6px'}}>{typeof issue.description==='object'?issue.description.short||issue.description.text||'':issue.description||issue.message}</p>
+            {issue.priorityNote&&<p style={{fontSize: proseFontSize(FS['11.5'], mobile),color:swatch['#8B3A1A'],fontStyle:'italic',margin:'0 0 8px',lineHeight:1.4}}>{issue.priorityNote}</p>}
             {issue.suggestedFixes?.length>0&&<div style={{borderTop:'1px solid #e8c0c0',paddingTop:8}}>
-              <div style={{fontSize:FS.xxs,fontWeight:700,color:swatch.inkMag3,textTransform:'uppercase',letterSpacing:'0.05em',marginBottom:4}}>Suggested Fixes</div>
+              <div style={{fontSize:chromeFontSize(FS.xxs, mobile),fontWeight:700,color:swatch.inkMag3,marginBottom:4}}>Suggested fixes</div>
               {issue.suggestedFixes.map((fix,j)=>(
                 <div key={j} style={{display:'flex',gap:6,marginBottom:3}}>
-                  <span style={{color:swatch.success,flexShrink:0,fontSize:FS.xs}}>→</span>
-                  <span style={{fontSize: FS['11.5'],color:swatch.inkMag2}}>{fix}</span>
+                  <span style={{color:swatch.success,flexShrink:0,fontSize:chromeFontSize(FS.xs, mobile)}}>→</span>
+                  <span style={{fontSize: proseFontSize(FS['11.5'], mobile),color:swatch.inkMag2}}>{fix}</span>
                 </div>
               ))}
             </div>}
@@ -307,15 +342,15 @@ export function ViabilityTab({settlement:s, narrativeNote, publicDossier = false
           const sb = sevBg(issue.severity);
           return <div key={i} style={{background:sb,border:`1px solid ${sc}40`,borderLeft:`3px solid ${sc}`,padding:'10px 14px',marginBottom:8}}>
             <div style={{display:'flex',alignItems:'baseline',gap:8,marginBottom:3,flexWrap:'wrap'}}>
-              {issue.category&&<span style={{fontSize:FS.xxs,fontWeight:700,color:sc,textTransform:'uppercase',letterSpacing:'0.05em'}}>{issue.category}</span>}
+              {issue.category&&<span style={{fontSize:chromeFontSize(FS.xxs, mobile),fontWeight:700,color:sc}}>{tokenCase(issue.category)}</span>}
               {issue.title&&<span style={{fontSize: FS['12.5'],fontWeight:700,color:swatch.inkMag}}>{issue.title}</span>}
             </div>
-            <p style={{fontSize:FS.sm,color:swatch.inkMag2,lineHeight:1.5,margin:0}}>{typeof issue.description==='object'?issue.description.short||issue.description.text||'':issue.description||issue.message}</p>
+            <p style={{fontSize:proseFontSize(FS.sm, mobile),color:swatch.inkMag2,lineHeight:1.5,margin:0}}>{typeof issue.description==='object'?issue.description.short||issue.description.text||'':issue.description||issue.message}</p>
             {issue.suggestedFixes?.length>0&&<div style={{marginTop:6}}>
               {issue.suggestedFixes.map((fix,j)=>(
                 <div key={j} style={{display:'flex',gap:6,marginBottom:2}}>
-                  <span style={{color:swatch.success,flexShrink:0,fontSize:FS.xs}}>→</span>
-                  <span style={{fontSize:FS.xs,color:swatch.inkMag2}}>{fix}</span>
+                  <span style={{color:swatch.success,flexShrink:0,fontSize:chromeFontSize(FS.xs, mobile)}}>→</span>
+                  <span style={{fontSize:proseFontSize(FS.xs, mobile),color:swatch.inkMag2}}>{fix}</span>
                 </div>
               ))}
             </div>}
@@ -325,13 +360,13 @@ export function ViabilityTab({settlement:s, narrativeNote, publicDossier = false
 
       {/* ── WARNINGS ─────────────────────────────────────────────────────── */}
       {stressConsequences.length>0&&<Section title={`Active Stress Effects (${stressConsequences.length})`} collapsible defaultOpen={true} accent='#6b4c2a'>
-        <p style={{fontSize:FS.sm,color:swatch['#5A3E28'],lineHeight:1.5,margin:'0 0 10px',fontStyle:'italic'}}>
+        <p style={{fontSize:proseFontSize(FS.sm, mobile),color:swatch['#5A3E28'],lineHeight:1.5,margin:'0 0 10px',fontStyle:'italic'}}>
           These are expected consequences of active stress conditions. Not structural flaws. A settlement under siege losing supply chain access is working as intended.
         </p>
         {stressConsequences.map((item,i)=>(
           <div key={i} style={{background:swatch['#F9F3E8'],border:'1px solid #d4a96a',padding:'8px 10px',marginBottom:6}}>
             {item.title&&<span style={{fontSize: FS['12.5'],fontWeight:700,color:swatch['#6B4C2A'],display:'block',marginBottom:2}}>{item.title}</span>}
-            <p style={{fontSize:FS.sm,color:swatch['#5A3E28'],lineHeight:1.5,margin:0}}>{typeof item.description==='object'?item.description.short||item.description.text||'':item.description||item.message||''}</p>
+            <p style={{fontSize:proseFontSize(FS.sm, mobile),color:swatch['#5A3E28'],lineHeight:1.5,margin:0}}>{typeof item.description==='object'?item.description.short||item.description.text||'':item.description||item.message||''}</p>
           </div>
         ))}
       </Section>}
@@ -342,16 +377,16 @@ export function ViabilityTab({settlement:s, narrativeNote, publicDossier = false
           const sc = sevColor(wobj.severity||'warning');
           return <div key={i} style={{background:sevBg(wobj.severity||'warning'),border:`1px solid ${sc}35`,borderLeft:`3px solid ${sc}`,padding:'10px 14px',marginBottom:8}}>
             <div style={{display:'flex',alignItems:'baseline',gap:8,marginBottom:3,flexWrap:'wrap'}}>
-              {wobj.category&&<span style={{fontSize:FS.xxs,fontWeight:700,color:sc,textTransform:'uppercase',letterSpacing:'0.05em'}}>{wobj.category}</span>}
+              {wobj.category&&<span style={{fontSize:chromeFontSize(FS.xxs, mobile),fontWeight:700,color:sc}}>{tokenCase(wobj.category)}</span>}
               {wobj.title&&<span style={{fontSize: FS['12.5'],fontWeight:700,color:swatch.inkMag}}>{wobj.title}</span>}
             </div>
-            {wobj.description&&<p style={{fontSize:FS.sm,color:swatch.inkMag2,lineHeight:1.5,margin:'0 0 4px'}}>{wobj.description}</p>}
-            {wobj.impact&&<p style={{fontSize: FS['11.5'],color:swatch['#5A3A10'],fontStyle:'italic',margin:'0 0 6px',lineHeight:1.4}}>Impact: {wobj.impact}</p>}
+            {wobj.description&&<p style={{fontSize:proseFontSize(FS.sm, mobile),color:swatch.inkMag2,lineHeight:1.5,margin:'0 0 4px'}}>{wobj.description}</p>}
+            {wobj.impact&&<p style={{fontSize: proseFontSize(FS['11.5'], mobile),color:swatch['#5A3A10'],fontStyle:'italic',margin:'0 0 6px',lineHeight:1.4}}>Impact: {wobj.impact}</p>}
             {wobj.suggestedFixes?.length>0&&<div>
               {wobj.suggestedFixes.map((fix,j)=>(
                 <div key={j} style={{display:'flex',gap:6,marginBottom:2}}>
-                  <span style={{color:swatch.success,flexShrink:0,fontSize:FS.xs}}>→</span>
-                  <span style={{fontSize:FS.xs,color:swatch.inkMag2}}>{fix}</span>
+                  <span style={{color:swatch.success,flexShrink:0,fontSize:chromeFontSize(FS.xs, mobile)}}>→</span>
+                  <span style={{fontSize:proseFontSize(FS.xs, mobile),color:swatch.inkMag2}}>{fix}</span>
                 </div>
               ))}
             </div>}

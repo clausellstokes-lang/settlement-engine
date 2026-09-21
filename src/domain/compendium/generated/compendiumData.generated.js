@@ -1,7 +1,7 @@
 // GENERATED FILE — DO NOT EDIT BY HAND.
 // Source of truth: the engine registries (causalState, signalRegistry,
-// constants, operationRegistry, townMapStyles, interiorTemplates,
-// calamity, simulationRules) + the authored catalogData taxonomy.
+// constants, operationRegistry, calamity, simulationRules) + the authored
+// catalogData taxonomy.
 // Regenerate: npm run gen:compendium-data
 // Pinned by tests/docs/compendiumDataFreshness.test.js (byte-identity + parity).
 //
@@ -86,12 +86,12 @@ export const COMPENDIUM_DATA = Object.freeze({
     {"id":"magic-legality","concept":"Magic Legality","blurb":"Where magic exists, its standing in law runs from forbidden to celebrated. Only a major god can shift a realm's legality (see the deity axes above). A world with no magic reads as absent.","tab":"arcane","anchor":"magic","levels":[{"name":"Forbidden","reading":"Magic is outlawed; practicing it is a crime."},{"name":"Restricted","reading":"Magic is tightly controlled, permitted only in narrow licensed forms."},{"name":"Regulated","reading":"Magic is legal but overseen, with rules on who may practice and how."},{"name":"Tolerated","reading":"Magic is accepted as an ordinary part of life."},{"name":"Celebrated","reading":"Magic is embraced and openly honored."}]}
   ],
   "operations": {
-    "count": 162,
-    "exemptCount": 69,
+    "count": 160,
+    "exemptCount": 70,
     "byKlass": {
       "canon": 6,
       "macro": 48,
-      "mechanical": 108
+      "mechanical": 106
     },
     "scopes": ["campaign","global","save"],
     "entries": [
@@ -168,8 +168,6 @@ export const COMPENDIUM_DATA = Object.freeze({
       {"opType":"revertUserEditAction","label":"Revert a manual edit","description":"Reverses a previously applied manual user edit.","klass":"mechanical","slice":"settlementSlice","targetScope":"save","receiptRef":null,"undoToken":"applyUserEditAction"},
       {"opType":"persistActiveSaveEdit","label":"Persist an edit to the active save","description":"Writes an edit to the active save so the change survives a reload.","klass":"mechanical","slice":"settlementSlice","targetScope":"save","receiptRef":null,"undoToken":null},
       {"opType":"markExported","label":"Mark as exported","description":"Flags the settlement as having been exported, for example to a PDF dossier.","klass":"mechanical","slice":"settlementSlice","targetScope":"save","receiptRef":null,"undoToken":null},
-      {"opType":"setLock","label":"Set a section lock","description":"Locks a part of the settlement. A locked section refuses to reroll. Locked characters survive any reroll, including a full regenerate, where they take a place in the new town. A full regenerate also keeps the locked name, terrain and history.","klass":"mechanical","slice":"settlementSlice","targetScope":"save","receiptRef":null,"undoToken":null},
-      {"opType":"clearLocks","label":"Clear section locks","description":"Removes every lock from the settlement, so nothing is held back from a reroll. To recover a lock, set it again.","klass":"mechanical","slice":"settlementSlice","targetScope":"save","receiptRef":null,"undoToken":null},
       {"opType":"hydrateFromSave","label":"Load state from a save","description":"Rebuilds the working settlement state from a saved settlement.","klass":"mechanical","slice":"settlementSlice","targetScope":"save","receiptRef":null,"undoToken":null},
       {"opType":"renameSettlement","label":"Rename the settlement","description":"Changes the settlement's name.","klass":"mechanical","slice":"settlementSlice","targetScope":"save","receiptRef":null,"undoToken":null},
       {"opType":"retryOutbox","label":"Retry the sync outbox","description":"Retries any campaign changes that failed to sync to the cloud.","klass":"mechanical","slice":"campaignSlice","targetScope":"campaign","receiptRef":null,"undoToken":null},
@@ -323,42 +321,6 @@ export const COMPENDIUM_DATA = Object.freeze({
     ],
     "note": "An active stress overrides the base label with a compound form (for example Critical under an active siege, Suppressed under occupation, or Fractured, Shaken, and Desperate under others)."
   },
-  "lenses": {
-    "count": 5,
-    "entries": [
-      {"id":"parchment","label":"Parchment","reading":"The default hand-drawn plate."},
-      {"id":"watercolor","label":"Watercolor","reading":"Soft washes and muted colour."},
-      {"id":"darkFantasy","label":"Dark Fantasy","reading":"Grim, high-contrast linework."},
-      {"id":"vtt","label":"VTT","reading":"A bare grid and scale bar for virtual tabletops."},
-      {"id":"accessible","label":"Accessible","reading":"Colourblind-safe, high-contrast linework (Okabe-Ito)."}
-    ],
-    "illustratedNote": "A sixth lens, Illustrated, re-shapes the map geometry rather than re-skinning it, so it sits outside the five-lens re-skin family above.",
-    "schema": {
-      "furniture": ["wash","cartouche","compass","grid","scaleBar"],
-      "hazardGlyphs": ["triangle","diamond","pin"],
-      "anchorGlyphs": ["disc","ring","star"],
-      "contrastLevels": ["soft","normal","high"]
-    }
-  },
-  "districts": {
-    "wealth": [
-      {"label":"Destitute","reading":"The poorest quarter; want is the rule."},
-      {"label":"Poor","reading":"Getting by, with little to spare."},
-      {"label":"Modest","reading":"Ordinary means."},
-      {"label":"Comfortable","reading":"Reliable means and some surplus."},
-      {"label":"Wealthy","reading":"Visibly well off."},
-      {"label":"Opulent","reading":"The richest quarter; conspicuous wealth."}
-    ],
-    "safety": [
-      {"label":"Lawless","reading":"No effective law; the quarter is left to itself."},
-      {"label":"Unsafe","reading":"Crime outpaces what watch there is."},
-      {"label":"Watched","reading":"A watch is present but stretched."},
-      {"label":"Orderly","reading":"Law holds day to day."},
-      {"label":"Fortified","reading":"Heavily secured and closely held."}
-    ],
-    "categories": ["religious","merchant","military","craft","noble","civic","arcane","criminal","foreign","industrial","residential"],
-    "note": "District wealth grades one quarter of a town; the settlement-wide economy is graded by Prosperity, which happens to share the words Poor, Comfortable, and Wealthy."
-  },
   "lifecycle": {
     "remnants": [
       {"label":"Relic ruin","reading":"A settlement that peaked at city or larger; a privileged resettlement site."},
@@ -399,12 +361,6 @@ export const COMPENDIUM_DATA = Object.freeze({
       {"label":"Forbidden patron","reading":"Bound to a forbidden backer."}
     ],
     "note": "An institution reads compromised in two ways: covertly, as a hidden stooge homed inside it, or revealed, as a scandal-bearing impairment. It needs a corruptible flaw and a criminal institution present; organic exposure is the counter-force that can clean it up over time."
-  },
-  "facets": {
-    "natures": ["faith","security","trade","craft","learning","vice","civic"],
-    "interiorKinds": ["faith","security","trade","craft","learning","vice","civic","generic"],
-    "roomKinds": ["nave","sanctuary","vestry","muster","armory","cells","quarters","hall","counting","strongroom","stall","workfloor","store","kiln","reading","stacks","study","common","kitchen","cellar","lodging","chamber","records","dais","main","back","evidence","concealed"],
-    "furnishingKinds": ["table","bench","pew","altar","brazier","shelf","lectern","desk","counter","strongbox","ledger","workbench","hearth","rack","crate","barrel","bar","bed","bunk","dais","cell","cauldron"]
   },
   "calamity": {
     "flavors": [

@@ -13,8 +13,6 @@ import { navigate, navigatePath } from '../../hooks/useRoute.js';
 import { viewToPath } from '../../lib/routes.js';
 import AuthPanel, { AUTH_MODE_VIEW } from './AuthPanel.jsx';
 import { AuthPageShell, FooterLink } from './authUI.jsx';
-import { getTierDisplayName } from '../../config/pricing.js';
-import { t } from '../../copy/index.js';
 
 function readNext() {
   if (typeof window === 'undefined') return '/create';
@@ -37,11 +35,11 @@ export default function RegisterPage() {
   return (
     <AuthPageShell
       title="Create your account"
-      // Route through the shared signup subtitle token (P11): the page formerly
-      // hand-wrote a second, weaker register subtitle, drifting from the one the
-      // modal/panel already use. Wording itself stays owned by the copy/voice
-      // workstream — this is the structural cross-surface-consistency fix.
-      subtitle={t('auth.signupSubtitle', { tier: getTierDisplayName('free') })}
+      // ⛔ NO `subtitle` HERE, for the reason SignInPage records: AuthPanel renders
+      // auth.signupSubtitle itself, one line below this card header, so passing the
+      // same token to the shell printed it twice on every visit to /register. P11's
+      // point was that both surfaces read from ONE token rather than a hand-written
+      // twin, and they still do — through the panel, once.
       footer={
         <span>
           Already have an account?{' '}

@@ -20,10 +20,13 @@ import {
 } from '../../lib/contentPacks.js';
 import { SECOND as SEC, BORDER as BOR, CARD, FS, swatch } from '../theme.js';
 import Button from '../primitives/Button.jsx';
+import useIsMobile from '../../hooks/useIsMobile.js';
+import { chromeFontSize } from '../../design/proseScale.js';
 
 const ACCENT = swatch['#7C3AED'];
 
 export default function ContentPackBar() {
+  const mobile = useIsMobile();
   const customContent = useStore((s) => s.customContent);
   const activeEnvironment = useStore((s) => s.activeContentEnvironment);
   const applyCustomContentCommand = useStore((s) => s.applyCustomContentCommand);
@@ -322,7 +325,7 @@ export default function ContentPackBar() {
         display: 'flex', alignItems: 'center', gap: 8, flexWrap: 'wrap',
       }}
     >
-      <span style={{ fontSize: FS.xxs, fontWeight: 800, color: ACCENT, textTransform: 'uppercase', letterSpacing: '0.05em' }}>
+      <span style={{ fontSize: chromeFontSize(FS.xxs, mobile), fontWeight: 800, color: ACCENT, textTransform: 'uppercase', letterSpacing: '0.05em' }}>
         Content packs
       </span>
       <Button
@@ -343,7 +346,7 @@ export default function ContentPackBar() {
         aria-label="Import content pack file"
       />
       {status && (
-        <span style={{ fontSize: FS.xs, color: status.ok ? SEC : swatch.danger, marginLeft: 'auto' }}>
+        <span style={{ fontSize: chromeFontSize(FS.xs, mobile), color: status.ok ? SEC : swatch.danger, marginLeft: 'auto' }}>
           {status.msg}
         </span>
       )}
@@ -361,7 +364,7 @@ export default function ContentPackBar() {
             flexWrap: 'wrap',
           }}
         >
-          <span style={{ flex: 1, minWidth: 220, fontSize: FS.xs, color: SEC }}>
+          <span style={{ flex: 1, minWidth: 220, fontSize: chromeFontSize(FS.xs, mobile), color: SEC }}>
             <strong>{pendingImport.pack.name}</strong>{' '}
             {pendingImport.pack.packVersion} · {pendingImport.prepared.items.length}{' '}
             validated {pendingImport.prepared.items.length === 1 ? 'entry' : 'entries'}
@@ -399,7 +402,7 @@ export default function ContentPackBar() {
             paddingTop: 8,
           }}
         >
-          <div style={{ fontSize: FS.xs, color: SEC, marginBottom: 6 }}>
+          <div style={{ fontSize: chromeFontSize(FS.xs, mobile), color: SEC, marginBottom: 6 }}>
             Definitions are imported. Applying this setting revision would change{' '}
             {pendingEnvironment.changes.length} reviewed environment{' '}
             {pendingEnvironment.changes.length === 1 ? 'field' : 'fields'}.

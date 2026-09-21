@@ -79,7 +79,7 @@ export const factionColors = {
 // Meanwhile the jsPDF exporter beside it (utils/generateCampaignPDF.js) painted
 // the canonical set, so ONE PRODUCT SHIPPED TWO PDF SYSTEMS THAT DISAGREED WITH
 // EACH OTHER about what an alliance looks like. Every surface now reads
-// components/settlements/relationshipColors.js, which is a bijection with the
+// domain/display/relationshipColors.js, which is a bijection with the
 // engine's own relationship vocabulary.
 
 // ── Font registration ────────────────────────────────────────────────────────
@@ -139,6 +139,18 @@ export const type = {
 
   label:       { fontFamily: 'Nunito', fontSize: 8.5, color: palette.muted, fontWeight: 700, textTransform: 'uppercase', letterSpacing: 0.2 },
   label_em:    { fontFamily: 'Nunito', fontSize: 9.5, color: palette.ink, fontWeight: 800 },
+
+  // THE LABEL RUNG WITHOUT THE CAPITALS — `label`'s non-shouting sibling, for the two rungs
+  // of the ladder that stopped shouting on screen (components/new/labelLadder.js): the FIELD
+  // NAME and the STATUS VALUE. `label` itself is unchanged and stays correct for rung 1, the
+  // section eyebrow, which keeps its capitals.
+  //
+  // ⚠ THE TRACKING GOES WITH THE TRANSFORM, and that is the whole reason this is a style and
+  // not a `textTransform: 'none'` written nine times. `letterSpacing: 0.2` exists to open up
+  // CAPITALS; positive tracking on sentence case is a typographic error, so a site that
+  // merely turned the transform off would print a correctly-cased word badly spaced. Both
+  // declarations are dropped together, once, where the next author cannot forget the second.
+  label_plain: { fontFamily: 'Nunito', fontSize: 8.5, color: palette.muted, fontWeight: 700, textTransform: 'none', letterSpacing: 0 },
 
   caption:     { fontFamily: 'Nunito', fontSize: 8, color: palette.muted, lineHeight: 1.35 },
   pill:        { fontFamily: 'Nunito', fontSize: 8.5, fontWeight: 700, letterSpacing: 0.2 },

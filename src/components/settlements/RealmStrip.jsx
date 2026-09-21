@@ -24,6 +24,8 @@
 import { liveSieges } from '../../domain/display/warStatus.js';
 import { deriveTraditionAlmanac } from '../../domain/traditions/almanac.js';
 import { GOLD_TXT, BODY, SLATE_DEEP, FS, sans, swatch } from '../theme.js';
+import useIsMobile from '../../hooks/useIsMobile.js';
+import { chromeFontSize } from '../../design/proseScale.js';
 
 const SIEGE_RED = swatch['#8B1A1A'];
 
@@ -110,6 +112,7 @@ function clockLabel(worldState) {
  * @param {{ campaign: any, settlements?: Array<any> }} props
  */
 export default function RealmStrip({ campaign, settlements = [] }) {
+  const mobile = useIsMobile();
   const worldState = campaign?.worldState || null;
   // Self-hide when the world is not canonized (dormant) — byte-identical today.
   if (!worldState?.canonizedAt) return null;
@@ -143,7 +146,7 @@ export default function RealmStrip({ campaign, settlements = [] }) {
       style={{
         display: 'flex', alignItems: 'center', gap: 8, flexWrap: 'wrap',
         padding: '6px 12px',
-        fontFamily: sans, fontSize: FS.xs, color: BODY,
+        fontFamily: sans, fontSize: chromeFontSize(FS.xs, mobile), color: BODY,
       }}
     >
       <Seg title="In-world clock. One tick is one week; a year is 52 weeks.">

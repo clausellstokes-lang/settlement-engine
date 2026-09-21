@@ -3,7 +3,7 @@
  *
  * mountFirstPaint.test.jsx — DESK-VISIBILITY: THE FOUR POSITIONS THAT WERE LIT AND UNSEEN.
  *
- * ⛔ THE FINDING. `Primitives.jsx:114` renders a collapsed `Section` as
+ * ⛔ THE FINDING. `Primitives.jsx:120` renders a collapsed `Section` as
  * `{open && <div>{children}</div>}` — a shut fold emits NO BYTES AT ALL, not hidden ones.
  * So a corpus sentence mounted inside one is lit in `DOSSIER_MOUNTS` and dark on the page,
  * and every instrument the subsystem owns stays green: the reachability arm sees the

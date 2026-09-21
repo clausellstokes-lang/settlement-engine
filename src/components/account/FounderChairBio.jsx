@@ -31,6 +31,8 @@ import { useStore } from '../../store/index.js';
 import Button from '../primitives/Button.jsx';
 import { HALL_BIO_MIN, HALL_BIO_MAX, validateChairBio, HALL_CIVILITY_GUARD } from '../../lib/foundersHall.js';
 import { MUTED, SECOND, INK, BORDER, CARD, SP, FS, sans, serif_ } from '../theme.js';
+import useIsMobile from '../../hooks/useIsMobile.js';
+import { chromeFontSize } from '../../design/proseScale.js';
 
 /** Why a band-failed bio was refused — plainly, without moralizing or echoing. */
 function refusal(reason) {
@@ -44,6 +46,7 @@ function refusal(reason) {
  * @param {{ civilityGuard?: ((text: string) => { blocked: boolean })|null }} props
  */
 export default function FounderChairBio({ civilityGuard = HALL_CIVILITY_GUARD }) {
+  const mobile = useIsMobile();
   const isFounder = useStore((s) => s.isFounder?.() ?? false);
   const [bio, setBio] = useState(null);        // null = unknown
   const [available, setAvailable] = useState(true); // false ⇒ column/RPC undeployed
@@ -100,10 +103,10 @@ export default function FounderChairBio({ civilityGuard = HALL_CIVILITY_GUARD })
           provably labelled. */}
       <label
         htmlFor={fieldId}
-        style={{ display: 'flex', flexDirection: 'column', gap: SP.xs, fontSize: FS.xs, fontWeight: 700, color: SECOND, fontFamily: sans }}
+        style={{ display: 'flex', flexDirection: 'column', gap: SP.xs, fontSize: chromeFontSize(FS.xs, mobile), fontWeight: 700, color: SECOND, fontFamily: sans }}
       >
         Your line in the Founders&rsquo; Hall
-        <span style={{ fontSize: FS.xs, fontWeight: 400, color: MUTED, fontFamily: sans }}>
+        <span style={{ fontSize: chromeFontSize(FS.xs, mobile), fontWeight: 400, color: MUTED, fontFamily: sans }}>
           Optional. It appears on your chair&rsquo;s plate, under the same display consent
           as your name. Leave it empty and the chair speaks for itself.
         </span>
@@ -121,7 +124,7 @@ export default function FounderChairBio({ civilityGuard = HALL_CIVILITY_GUARD })
           }}
         />
       </label>
-      {error && <span role="alert" style={{ fontSize: FS.xs, color: SECOND, fontFamily: sans }}>{error}</span>}
+      {error && <span role="alert" style={{ fontSize: chromeFontSize(FS.xs, mobile), color: SECOND, fontFamily: sans }}>{error}</span>}
       <Button
         variant="secondary"
         size="sm"

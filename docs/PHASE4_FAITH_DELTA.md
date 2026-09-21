@@ -98,9 +98,9 @@ alliance/betrayal behavior between settlements. Phase 4 builds the stance layer 
 ### 1.5 "Premium standalone deities/cults/patrons" — **DONE (arrives with wave 4)**
 
 Custom deity authoring is a premium custom-content bucket: category `deities` with the
-four axes + domain (T:src/components/compendium/customCategories.js:75-82 — note its
-comment still says "three frozen tag axes"; the field list includes `lawAxis`; fix the
-comment on adoption), behind the premium upsell gate
+four axes + domain (T:src/domain/content/customContentManifest.js — the hand-written
+field list moved there and `customCategories.js:41` now derives every category from it; the
+old "three frozen tag axes" comment is gone with it), behind the premium upsell gate
 (T:src/components/compendium/CustomContentGate.jsx:2). Schema validation with
 lawAxis-absence tolerance (legacy 3-axis ⇒ neutral) at
 T:src/domain/customContentSchema.js:202-228, mirrored by their DB CHECK (migration 056 —
@@ -309,7 +309,7 @@ cannot re-enter this tick's piety.
 ### 2.2 Schema shape (derived read-model, never a stored ledger)
 
 Extend the existing projection (projectReligionStateOntoSettlement,
-religionState.js:491-513) — `config.faithProfile.piety`:
+religionState.js:614) — `config.faithProfile.piety`:
 
 ```js
 faithProfile.piety = {

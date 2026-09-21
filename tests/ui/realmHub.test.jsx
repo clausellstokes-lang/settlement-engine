@@ -5,14 +5,14 @@
  * Pins the four Realm-hub deliverables this phase asserts:
  *   1. Realm Dashboard renders the LIVE summary for a simulated campaign.
  *   2. Realm Dashboard shows the LOCKED teaser for anon/free (Realm reachable,
- *      not hidden) and fires the `map_realm_teaser` pricing moment.
+ *      not hidden) and opens NO second upsell over it — the gate is the ask.
  *   3. The Realm Inspector OVERLAYS — it renders its rail without unmounting
  *      anything; the map body is a sibling, not a body-swap.
  *   4. The Inspector self-hides the Pantheon section while religion is dormant.
  */
 
 import { describe, test, expect, afterEach, vi, beforeEach } from 'vitest';
-import { render, screen, cleanup, fireEvent, waitFor } from '@testing-library/react';
+import { act, render, screen, cleanup, fireEvent, waitFor } from '@testing-library/react';
 
 afterEach(cleanup);
 
@@ -37,6 +37,14 @@ vi.mock('../../src/store/index.js', () => {
 // Stub pricingMoments so the locked teaser's moment fire is observable.
 vi.mock('../../src/lib/pricingMoments.js', () => ({
   triggerPricingMoment: (...args) => triggerSpy(...args),
+}));
+
+// These pins describe the gate as it behaves once purchases open
+// (lib/launchGate.js). The pre-launch CLOSED state of the same two controls —
+// the tier door disabled with the pill, the anonymous Sign in live without one —
+// is pinned in tests/components/launchLock.upsells.test.jsx.
+vi.mock('../../src/lib/launchGate.js', async (importOriginal) => ({
+  ...(await importOriginal()), purchasesOpen: () => true,
 }));
 
 import RealmDashboard from '../../src/components/map/RealmDashboard.jsx';
@@ -93,28 +101,44 @@ describe('RealmDashboard — live summary (premium)', () => {
 });
 
 describe('RealmDashboard — locked teaser (anon/free)', () => {
-  test('shows the locked teaser and fires map_realm_teaser', async () => {
+  test('shows the locked teaser and opens no second upsell over it', async () => {
     const onUpgrade = vi.fn();
-    render(<RealmDashboard campaign={null} canManageCampaigns={false} tier="anon" onUpgrade={onUpgrade} />);
+    const onSignIn = vi.fn();
+    render(<RealmDashboard campaign={null} canManageCampaigns={false} tier="anon" onUpgrade={onUpgrade} onSignIn={onSignIn} />);
 
     expect(screen.getByTestId('realm-dashboard-locked')).toBeTruthy();
     expect(screen.queryByTestId('realm-dashboard')).toBeNull();
 
-    // The teaser fires the simulation-intent pricing moment on mount (the
-    // pricingMoments module is dynamically imported, so wait for the microtask).
-    await waitFor(() => {
-      expect(triggerSpy).toHaveBeenCalledWith('map_realm_teaser', setActivePricingMoment, { tier: 'anon' });
-    });
+    // ⛔ AND NO SECOND UPSELL OVER IT. The gate used to fire map_realm_teaser on
+    // mount, which opened a modal on top of the very card making the ask — and
+    // the modal's own CTA still read "Sign in to unlock", the claim this gate
+    // exists to stop making. One surface, one ask.
+    await act(async () => { await Promise.resolve(); });
+    // anchored: the gate above is on screen, so the silent moment is a suppressed second upsell
+    expect(triggerSpy).not.toHaveBeenCalled();
 
-    // P9 — clicking the CTA ("run the Realm") IS the advance attempt: it fires
-    // the first_advance_attempt simulation-intent moment AND routes to the one
-    // canonical premium-value surface via onUpgrade.
+    // P9 — pressing a gate control IS the advance attempt: it fires the
+    // first_advance_attempt simulation-intent moment AND routes. For an
+    // anonymous viewer the LIVE control is "Sign in" (the tier door closes with
+    // the launch lock), and it must never again claim to unlock the Realm — the
+    // Realm is Cartographer's, and signing in is a free, separate, true thing.
     triggerSpy.mockClear();
-    fireEvent.click(screen.getByRole('button', { name: /Sign in to unlock the Realm/ }));
-    expect(onUpgrade).toHaveBeenCalled();
+    expect(screen.queryByRole('button', { name: /unlock the Realm/i })).toBeNull();
+    fireEvent.click(screen.getByRole('button', { name: /^Sign in$/ }));
+    expect(onSignIn).toHaveBeenCalled();
     await waitFor(() => {
       expect(triggerSpy).toHaveBeenCalledWith('first_advance_attempt', setActivePricingMoment, { tier: 'anon' });
     });
+  });
+
+  // The tier door is the honest one, and it is the SAME control on both
+  // surfaces: the gate card lifted out of this dashboard is what the desktop
+  // settlement palette renders too (RealmLockedGate).
+  test('the tier door reads "See Cartographer" and routes to the premium-value surface', async () => {
+    const onUpgrade = vi.fn();
+    render(<RealmDashboard campaign={null} canManageCampaigns={false} tier="free" onUpgrade={onUpgrade} />);
+    fireEvent.click(screen.getByRole('button', { name: /^See Cartographer$/ }));
+    expect(onUpgrade).toHaveBeenCalled();
   });
 });
 

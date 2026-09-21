@@ -731,6 +731,10 @@ export function scopedWalkOf(units, walkOne) {
   /** @type {Map<string, {label: string, arm: string, klass: string, channel: string,
    *   spineKey: string, clause: string, description: string, count: number}>} */
   const inherited = new Map();
+  // The composite-key separator, BUILT and never typed. A raw NUL byte in source makes
+  // git classify the whole file as binary, which hides every future diff of it from
+  // review; tests/lint/controlBytes.test.js pins the rule for the whole tracked tree.
+  const KEY_SEP = String.fromCharCode(0);
   /** @type {Map<string, number>} */
   const ownedByLabel = new Map();
   for (const unit of units || []) {
@@ -750,7 +754,7 @@ export function scopedWalkOf(units, walkOne) {
       const at = siteOfFinding(f, unit);
       const label = labelOfFinding(f);
       if (at.site === 'spine') {
-        const key = `${label} ${at.key} ${at.evidence}`;
+        const key = `${label}${KEY_SEP}${at.key}${KEY_SEP}${at.evidence}`;
         const seen = inherited.get(key);
         if (seen) {
           seen.count += 1;

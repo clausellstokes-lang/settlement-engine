@@ -15,8 +15,11 @@
  * into a single quiet line — a column of identical "its usual price" rows would
  * bury the movements the section exists to surface.
  */
+import { tokenCase } from '../labelLadder.js';
 import { FS, swatch, MUTED, GOLD_DEEP } from '../../theme.js';
 import { Section } from '../Primitives';
+import useIsMobile from '../../../hooks/useIsMobile.js';
+import { chromeFontSize, proseFontSize } from '../../../design/proseScale.js';
 
 // The crier's band → colour: dear = shortage, cheap = surplus, steady =
 // adequate. Sourced from the token swatch (exact-value keys) so the section
@@ -28,7 +31,9 @@ const PRICE_TAG_COLOR = {
 };
 
 /** @param {{ id:string,label:string,phrase:string,tag:'dear'|'steady'|'cheap' }} q */
-function Movement(q) {
+// NOT a component — `TradeColumn` calls it through `.map`, so it may hold no
+// hook of its own and takes the width its caller already bound.
+function Movement(q, mobile) {
   const color = PRICE_TAG_COLOR[q.tag] || GOLD_DEEP;
   return (
     <div key={q.id} style={{display:'flex',alignItems:'baseline',gap:8,flexWrap:'wrap',padding:'3px 0'}}>
@@ -38,7 +43,7 @@ function Movement(q) {
           through its phrase alone — a STEADY chip beside "a shade above" would
           contradict itself. */}
       {q.tag !== 'steady' && (
-        <span style={{fontSize:FS.micro,fontWeight:800,color,background:`${color}15`,padding:'0 5px',textTransform:'uppercase',letterSpacing:'0.05em'}}>{q.tag}</span>
+        <span style={{fontSize:chromeFontSize(FS.micro, mobile),fontWeight:800,color,background:`${color}15`,padding:'0 5px'}}>{tokenCase(q.tag)}</span>
       )}
     </div>
   );
@@ -48,14 +53,17 @@ function Movement(q) {
  *  into a single quiet line so the movements keep the stage.
  *  @param {{ heading:string, color:string, quotes:Array<{id:string,label:string,phrase:string,movement:string,tag:'dear'|'steady'|'cheap'}> }} props */
 function TradeColumn({ heading, color, quotes }) {
+  // THE PHONE PROSE FLOOR — the steady fold, which is the column's one running
+  // line. The heading and each movement's label keep their own steps.
+  const mobile = useIsMobile();
   const moved = quotes.filter(q => q.movement !== 'usual');
   const steady = quotes.filter(q => q.movement === 'usual');
   return (
     <div>
-      <div style={{fontSize:FS.xxs,fontWeight:700,color,textTransform:'uppercase',letterSpacing:'0.06em',marginBottom:4}}>{heading}</div>
-      {moved.map(Movement)}
+      <div style={{fontSize:chromeFontSize(FS.xxs, mobile),fontWeight:700,color,marginBottom:4}}>{heading}</div>
+      {moved.map(q => Movement(q, mobile))}
       {steady.length > 0 && (
-        <div style={{fontSize:FS.sm,color:swatch.inkMag2,padding:'3px 0'}}>
+        <div style={{fontSize:proseFontSize(FS.sm, mobile),color:swatch.inkMag2,padding:'3px 0'}}>
           <span style={{color:MUTED}}>At their usual prices: </span>
           {steady.map(q => q.label).join(', ')}
         </div>
@@ -71,10 +79,13 @@ function TradeColumn({ heading, color, quotes }) {
  *   highlight: { id:string, label:string, tag:'dear'|'cheap', crierLine:string } | null } }} props
  */
 export default function MarketPricesSection({ prices }) {
+  // THE PHONE PROSE FLOOR — the crier's line and the reckoning note beneath the
+  // columns. The band chips keep their own step.
+  const mobile = useIsMobile();
   return (
     <Section title="Market Prices" collapsible defaultOpen accent={GOLD_DEEP}>
       {prices.highlight && (
-        <p style={{fontSize:FS.md,color:swatch.inkMag,lineHeight:1.55,margin:'0 0 10px',fontStyle:'italic',
+        <p style={{fontSize:proseFontSize(FS.md, mobile),color:swatch.inkMag,lineHeight:1.55,margin:'0 0 10px',fontStyle:'italic',
           borderLeft:`3px solid ${PRICE_TAG_COLOR[prices.highlight.tag] || GOLD_DEEP}`,paddingLeft:10}}>
           &ldquo;{prices.highlight.crierLine}&rdquo;
         </p>
@@ -87,7 +98,7 @@ export default function MarketPricesSection({ prices }) {
           <TradeColumn heading="Buys (imports)" color={swatch.danger} quotes={prices.imports} />
         )}
       </div>
-      <p style={{fontSize:FS.xxs,color:MUTED,fontStyle:'italic',margin:'8px 0 0',lineHeight:1.4}}>
+      <p style={{fontSize:proseFontSize(FS.xxs, mobile),color:MUTED,fontStyle:'italic',margin:'8px 0 0',lineHeight:1.4}}>
         Reckoned against this settlement&rsquo;s own usual prices, off the founding trade profile and the live scarcity of the roads. The coin itself is yours to set at the table.
       </p>
     </Section>

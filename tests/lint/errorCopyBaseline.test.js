@@ -31,6 +31,8 @@ import { fileURLToPath } from 'node:url';
 import { dirname, join, relative } from 'node:path';
 import { describe, expect, test } from 'vitest';
 
+import { commentsOnly } from '../helpers/codeOnlySource.js';
+
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), '../..');
 
 // Committed max hardcoded user-facing error-literal occurrences under
@@ -78,14 +80,25 @@ function occurrences(code) {
   }, 0);
 }
 
+/**
+ * Comments blanked, string and template CONTENTS intact — FIX-T2, 2026-09-20.
+ *
+ * ⛔ WHY THIS MATTERS AT A BUDGET OF ZERO. Every idiom above ends in an opening quote, so a
+ * comment that merely QUOTES the banned shape — `// use t('errors.*'), never
+ * setError('...')` — scores against a budget with no room in it. Measured at the cure: 0
+ * comment-resident matches today, so this is habitat removal and not a repair, and the
+ * budget does not move. The arm that would have caught it is the one that cannot fire,
+ * because this ratchet closed at zero and a zero-budget gate reds on the first sentence
+ * anyone writes explaining why it closed.
+ * ⛔ `commentsOnly`, never `codeOnly`: the idioms match a quote that OPENS a literal.
+ */
+const readCode = (rel) => commentsOnly(readFileSync(join(ROOT, rel), 'utf8'));
+
 const currentOffenderFiles = srcFiles
-  .filter((rel) => occurrences(readFileSync(join(ROOT, rel), 'utf8')) > 0)
+  .filter((rel) => occurrences(readCode(rel)) > 0)
   .sort();
 
-const currentCount = srcFiles.reduce(
-  (n, rel) => n + occurrences(readFileSync(join(ROOT, rel), 'utf8')),
-  0,
-);
+const currentCount = srcFiles.reduce((n, rel) => n + occurrences(readCode(rel)), 0);
 
 const baseline = JSON.parse(
   readFileSync(join(ROOT, 'scripts/.error-copy-baseline.json'), 'utf8'),

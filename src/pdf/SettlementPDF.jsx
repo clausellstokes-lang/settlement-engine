@@ -92,6 +92,19 @@ export function SettlementPDF({
   // `new Date()`, so leaving it unset made every export of one unchanged
   // settlement differ in bytes. Null keeps that default: legacy callers unchanged.
   creationDate = null,
+  // ⭐ THE MOUNTED STATE PROSE (owner order "impliment every fix", 2026-09-18) — the
+  // fifty-one sentence-rung dossier positions the SCREEN draws and this document carried
+  // none of, as `{ tab: { mount: paragraph } }`. Built by the CALLER
+  // (`utils/generateSettlementPDF.js` → `domain/display/stateProse/printProse.js`) on the
+  // main thread and posted to the render worker as plain strings, so the corpus leaves stay
+  // out of this bundle entirely — see `primitives/StateProse.jsx`.
+  //
+  // ⛔ A PROP AND NOT A VIEW-MODEL FIELD, deliberately: `pdf/lib/viewModel.js` is pinned
+  // byte-for-byte by tests/pdf/__snapshots__/goldenViewModel.test.js.snap, and these
+  // paragraphs have nothing to do with the view model's shape. Null keeps every legacy
+  // caller — the campaign book, the foundry module, every hand-built test document —
+  // byte-identical, because each chapter renders nothing for an absent map.
+  stateProse = null,
 }) {
   const safe = settlement || {};
   const vm = buildViewModel({
@@ -165,25 +178,29 @@ export function SettlementPDF({
     >
       {inc('cover')               && <Cover                settlement={safe} narrativeMode={useAi} vm={vm} isFounder={isFounder} isAnonymous={isAnonymous} now={now} />}
       {inc('toc')                 && <TableOfContents      settlement={safe} narrativeMode={useAi} entries={tocEntries} />}
-      {inc('overview')            && <Overview             settlement={safe} narrativeMode={useAi} vm={vm} />}
+      {inc('overview')            && <Overview             settlement={safe} narrativeMode={useAi} vm={vm} stateProse={stateProse} />}
       {inc('tonightAtTheTable')   && <TonightAtTheTable    settlement={safe} narrativeMode={useAi} vm={vm} />}
       {inc('npcQuickRef')         && <NPCQuickRef          settlement={safe} narrativeMode={useAi} vm={vm} />}
       {showState                  && <SystemStateSnapshot  settlement={safe} narrativeMode={useAi} vm={vm} causalDetail={stateCausalDetail} />}
       {showTimeline               && <TimelineChapter      settlement={safe} narrativeMode={useAi} vm={vm} />}
-      {showFaithWar               && <FaithWar             settlement={safe} narrativeMode={useAi} vm={vm} />}
+      {/* ⛔ THE FAITH PROSE HAS ONE HOME PER VARIANT, and this is where that is decided,
+          because `inc` lives here and no chapter can see the variant. Chapter 07 carries it
+          wherever the variant includes chapter 07; `campaign_state` drops chapter 07 and keeps
+          this one, so there it is fed here instead. Never both. */}
+      {showFaithWar               && <FaithWar             settlement={safe} narrativeMode={useAi} vm={vm} stateProse={inc('identityDailyLife') ? null : stateProse} />}
       {inc('notableNpcs')         && <NotableNPCs          settlement={safe} narrativeMode={useAi} vm={vm} />}
-      {inc('plotHooks')           && <PlotHooks            settlement={safe} narrativeMode={useAi} vm={vm} />}
-      {inc('powerStructure')      && <PowerStructure       settlement={safe} narrativeMode={useAi} vm={vm} />}
-      {inc('identityDailyLife')   && <IdentityDailyLife    settlement={safe} narrativeMode={useAi} vm={vm} />}
+      {inc('plotHooks')           && <PlotHooks            settlement={safe} narrativeMode={useAi} vm={vm} stateProse={stateProse} />}
+      {inc('powerStructure')      && <PowerStructure       settlement={safe} narrativeMode={useAi} vm={vm} stateProse={stateProse} />}
+      {inc('identityDailyLife')   && <IdentityDailyLife    settlement={safe} narrativeMode={useAi} vm={vm} stateProse={stateProse} />}
       {showTraditions             && <Traditions           settlement={safe} narrativeMode={useAi} vm={vm} />}
-      {inc('services')            && <Services             settlement={safe} narrativeMode={useAi} vm={vm} />}
+      {inc('services')            && <Services             settlement={safe} narrativeMode={useAi} vm={vm} stateProse={stateProse} />}
       {inc('institutions')        && <Institutions         settlement={safe} narrativeMode={useAi} vm={vm} />}
-      {inc('economicsTrade')      && <EconomicsTrade       settlement={safe} narrativeMode={useAi} vm={vm} />}
-      {inc('resourcesProduction') && <ResourcesProduction  settlement={safe} narrativeMode={useAi} vm={vm} />}
-      {inc('defenseSecurity')     && <DefenseSecurity      settlement={safe} narrativeMode={useAi} vm={vm} />}
-      {inc('historyFounding')     && <HistoryFounding      settlement={safe} narrativeMode={useAi} vm={vm} />}
-      {inc('viabilityAssessment') && <ViabilityAssessment  settlement={safe} narrativeMode={useAi} vm={vm} />}
-      {inc('relationships')       && <Relationships        settlement={safe} narrativeMode={useAi} vm={vm} />}
+      {inc('economicsTrade')      && <EconomicsTrade       settlement={safe} narrativeMode={useAi} vm={vm} stateProse={stateProse} />}
+      {inc('resourcesProduction') && <ResourcesProduction  settlement={safe} narrativeMode={useAi} vm={vm} stateProse={stateProse} />}
+      {inc('defenseSecurity')     && <DefenseSecurity      settlement={safe} narrativeMode={useAi} vm={vm} stateProse={stateProse} />}
+      {inc('historyFounding')     && <HistoryFounding      settlement={safe} narrativeMode={useAi} vm={vm} stateProse={stateProse} />}
+      {inc('viabilityAssessment') && <ViabilityAssessment  settlement={safe} narrativeMode={useAi} vm={vm} stateProse={stateProse} />}
+      {inc('relationships')       && <Relationships        settlement={safe} narrativeMode={useAi} vm={vm} stateProse={stateProse} />}
       {inc('aiAppendix')          && <AIAppendix           settlement={safe} narrativeMode={useAi} vm={vm} />}
     </Document>
   );

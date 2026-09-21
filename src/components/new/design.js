@@ -16,8 +16,15 @@ export const C = {
   religious:  '#1a5a28', magic: '#5a2a8a', criminal: '#4a1a4a', other: '#5a4a2a',
 };
 
+// ⚠ `thorp` READS AS "Thorpe" ON EVERY READER-FACING SURFACE (ODQ §934.63 F14). The
+// TOKEN is untouched; the WORD is the wizard's and the tier facts' — config/tierFacts.js
+// SIZE_LABEL, copy/en.js `generate.sizes.thorp` — and this table said "Thorp", so a
+// visitor met two spellings of one rung between the refusal sentence and the dossier.
+// Pinned equal to SIZE_LABEL by tests/copy/tierWord.census.test.js; the table stays a
+// literal here because src/components/new may not pull config into the dossier's closure
+// for one word.
 export const TIER_LABELS = {
-  thorp:'Thorp', hamlet:'Hamlet', village:'Village',
+  thorp:'Thorpe', hamlet:'Hamlet', village:'Village',
   town:'Town', city:'City', metropolis:'Metropolis',
 };
 

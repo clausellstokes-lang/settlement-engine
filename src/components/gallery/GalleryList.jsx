@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 
 import { t } from '../../copy/index.js';
 import { isGuidanceDismissed, markGuidanceDismissed } from '../../lib/guidance.js';
@@ -19,20 +19,24 @@ import {
   serif_,
 } from '../theme.js';
 import Button from '../primitives/Button.jsx';
+import IconButton from '../primitives/IconButton.jsx';
 import { activeFilterCount, GALLERY_RESPONSIVE_CSS } from './galleryUtils.js';
 import GalleryCard from './GalleryCard.jsx';
 import GallerySidebar from './GallerySidebar.jsx';
 import GalleryTopbar from './GalleryTopbar.jsx';
+import useIsMobile from '../../hooks/useIsMobile.js';
+import { chromeFontSize } from '../../design/proseScale.js';
 
 function StatusMessage({ tone = 'info', children }) {
   // The tinted status callout becomes a rubric-ruled note: a single drawn left
   // rule in the tone's ink (no wash, no radius). Alert/status semantics kept.
+  const mobile = useIsMobile();
   const color = tone === 'success' ? GREEN : tone === 'danger' ? RED : BLUE;
   return (
     <div
       role={tone === 'danger' ? 'alert' : 'status'}
       aria-live={tone === 'danger' ? 'assertive' : 'polite'}
-      style={{ borderLeft: `2px solid ${color}`, paddingLeft: SP.md, color, marginBottom: SP.md, fontFamily: sans, fontSize: FS.xs, fontWeight: 850, lineHeight: 1.5 }}
+      style={{ borderLeft: `2px solid ${color}`, paddingLeft: SP.md, color, marginBottom: SP.md, fontFamily: sans, fontSize: chromeFontSize(FS.xs, mobile), fontWeight: 850, lineHeight: 1.5 }}
     >
       {children}
     </div>
@@ -54,6 +58,7 @@ export default function GalleryList({
   filters,
   voteBusyId,
   loadMore,
+  onRetryList,
   openDossier,
   toggleArrayFilter,
   toggleBoolFilter,
@@ -69,6 +74,8 @@ export default function GalleryList({
   // the empty-gallery community-voice sentence is dismissible through the unified
   // sf:guidance store (the forge CTA below always stays).
   const [invited, setInvited] = useState(() => !isGuidanceDismissed('gallery_empty_invitation'));
+  // Where focus goes when "Try again" unmounts itself (see the control below).
+  const countRef = useRef(null);
   return (
     <div style={{ maxWidth: PAGE_MAX, margin: '0 auto', padding: `${SP.lg}px ${SP.lg}px`, fontFamily: sans, color: INK }}>
       <style>{GALLERY_RESPONSIVE_CSS}</style>
@@ -96,10 +103,44 @@ export default function GalleryList({
             total={total}
             loading={listLoading}
             disabled={!!filters.mine}
+            error={!!listError}
+            countRef={countRef}
           />
+          {/* The house line, not the backend's. `listError` carries the raw
+              PostgREST/network message; the hook consoles it for diagnosis and
+              the reader gets the register's own sentence (P10/P11 — a reader is
+              never shown a transport string they cannot act on).
+              THE RETRY SITS BESIDE THE ALERT, NOT INSIDE IT: the alert element's
+              whole text must stay the house sentence, or a screen reader
+              announces "…Try again" as part of the message and the P10/P11
+              guarantee — that the alert IS the house line and nothing else —
+              stops being checkable. */}
           {listError && (
-            <div style={{ borderLeft: `2px solid ${RED}`, paddingLeft: SP.md, color: RED, marginBottom: SP.md, fontFamily: sans, fontSize: FS.sm, fontWeight: 850, lineHeight: 1.5 }}>
-              Could not load the gallery: {listError}
+            <div style={{ display: 'flex', alignItems: 'center', flexWrap: 'wrap', gap: SP.md, marginBottom: SP.md }}>
+              <div role="alert" style={{ borderLeft: `2px solid ${RED}`, paddingLeft: SP.md, color: RED, fontFamily: sans, fontSize: FS.sm, fontWeight: 850, lineHeight: 1.5 }}>
+                {t('gallery.loadError')}
+              </div>
+              {/* ⛔ aria-disabled, NEVER the native `disabled` (which Button also
+                  sets from `busy`): the browser blurs a control the instant it
+                  becomes disabled, dropping focus to <body>. And this control
+                  unmounts as soon as the retry clears `listError`, so there is
+                  nothing left to restore focus to afterwards — the handler hands
+                  it to the count strip on the way out instead of letting a
+                  keyboard reader fall back to the top of the document. */}
+              {onRetryList && (
+                <Button
+                  variant="secondary"
+                  size="sm"
+                  aria-disabled={listLoading}
+                  onClick={() => {
+                    if (listLoading) return;
+                    onRetryList();
+                    countRef.current?.focus();
+                  }}
+                >
+                  {t('gallery.retry')}
+                </Button>
+              )}
             </div>
           )}
           {/* First-paint loading: the empty state is gated behind !listLoading and
@@ -128,9 +169,15 @@ export default function GalleryList({
                 <p style={{ margin: 0, fontFamily: serif_, fontSize: FS.lg, fontStyle: 'italic', display: 'flex', alignItems: 'flex-start', gap: 6, justifyContent: 'center' }}>
                   <span>{isFiltered ? t('gallery.emptyFilteredBody') : t('gallery.emptyBody')}</span>
                   {!isFiltered && (
-                    <Button
-                      variant="ghost" size="sm"
-                      aria-label="Dismiss the gallery invitation"
+                    // The dismiss control had NEITHER children nor an icon, so it
+                    // rendered as an empty labelled box. It is now the house's
+                    // icons-off-safe affordance: IconButton's unicode TEXT TWIN
+                    // (IconsContext — a lucide `icon` would be suppressed here,
+                    // since only the Realm map subtree turns glyphs on, which is
+                    // exactly how the control came to be empty).
+                    <IconButton
+                      glyph="×" size="sm" tone="ghost"
+                      label="Dismiss the gallery invitation"
                       onClick={() => { markGuidanceDismissed('gallery_empty_invitation'); setInvited(false); }}
                     />
                   )}

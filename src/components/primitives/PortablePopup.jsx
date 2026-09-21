@@ -26,6 +26,8 @@
 import { BORDER, BORDER2, CARD, CARD_ALT, FS, INK, SECOND, SP, sans } from '../theme.js';
 import IconButton from './IconButton.jsx';
 import { useDialogFocusTrap } from './useDialogFocusTrap.js';
+import useIsMobile from '../../hooks/useIsMobile.js';
+import { chromeFontSize } from '../../design/proseScale.js';
 
 /**
  * @param {object} props
@@ -38,6 +40,7 @@ import { useDialogFocusTrap } from './useDialogFocusTrap.js';
  */
 export default function PortablePopup({ open, title, onClose, children, testId = 'portable-popup', width = 560 }) {
   // Shared trap: focus-in on open, Tab cycling, Escape-to-close, focus restore.
+  const mobile = useIsMobile();
   const popupRef = useDialogFocusTrap(open, onClose);
   if (!open) return null;
 
@@ -92,7 +95,7 @@ export default function PortablePopup({ open, title, onClose, children, testId =
             background: CARD_ALT,
           }}
         >
-          <span style={{ flex: 1, color: SECOND, fontFamily: sans, fontSize: FS.micro, fontWeight: 850, textTransform: 'uppercase', letterSpacing: '0.06em' }}>
+          <span style={{ flex: 1, color: SECOND, fontFamily: sans, fontSize: chromeFontSize(FS.micro, mobile), fontWeight: 850, textTransform: 'uppercase', letterSpacing: '0.06em' }}>
             {title}
           </span>
           {/* A CLOSE affordance, never an ACKNOWLEDGE one: it dismisses the popup
@@ -100,7 +103,7 @@ export default function PortablePopup({ open, title, onClose, children, testId =
               already lets an outside click do the same. */}
           <IconButton glyph="×" label={`Close ${title}`} onClick={onClose} size="sm" />
         </header>
-        <div style={{ padding: SP.md, color: INK, fontFamily: sans, fontSize: FS.xxs }}>
+        <div style={{ padding: SP.md, color: INK, fontFamily: sans, fontSize: chromeFontSize(FS.xxs, mobile) }}>
           {children}
         </div>
       </section>

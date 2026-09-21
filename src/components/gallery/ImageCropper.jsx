@@ -30,6 +30,8 @@ import { BORDER2, CARD_ALT, GOLD, MUTED, RED, SP, FS, sans } from '../theme.js';
 import { t } from '../../copy/index.js';
 import Button from '../primitives/Button.jsx';
 import IconButton from '../primitives/IconButton.jsx';
+import useIsMobile from '../../hooks/useIsMobile.js';
+import { chromeFontSize } from '../../design/proseScale.js';
 
 const MAX_ZOOM = 4;
 const ZOOM_STEPS = 0.01;
@@ -43,6 +45,7 @@ export default function ImageCropper({
   outputMaxWidth = 1280, outputType = 'image/jpeg', outputQuality = 0.85,
   circular = false, applyLabel = 'Apply crop',
 }) {
+  const mobile = useIsMobile();
   const viewportRef = useRef(null);
   const imgRef = useRef(null);
   const dragRef = useRef(null);     // { startX, startY, ox, oy }
@@ -222,7 +225,7 @@ export default function ImageCropper({
       </div>
 
       <div style={{ display: 'flex', alignItems: 'center', gap: SP.sm }}>
-        <span style={{ color: MUTED, flexShrink: 0, fontSize: FS.xxs, fontWeight: 800 }}>Zoom</span>
+        <span style={{ color: MUTED, flexShrink: 0, fontSize: chromeFontSize(FS.xxs, mobile), fontWeight: 800 }}>Zoom</span>
         <input
           type="range"
           min={1}
@@ -263,7 +266,7 @@ export default function ImageCropper({
       </div>
 
       {error && (
-        <div role="alert" data-testid="cropper-error" style={{ color: RED, fontFamily: sans, fontSize: FS.xs }}>
+        <div role="alert" data-testid="cropper-error" style={{ color: RED, fontFamily: sans, fontSize: chromeFontSize(FS.xs, mobile) }}>
           {error}
         </div>
       )}

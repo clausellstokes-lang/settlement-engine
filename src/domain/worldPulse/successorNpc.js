@@ -57,6 +57,25 @@ export function successorNpc(ousted = {}, rng) {
 /**
  * Replace any NPC named in `oustedNames` with a fresh successor (same seat).
  * Pure; returns the same settlement reference when there's nothing to replace.
+ *
+ * ⛔ THE BASE THIS PERMANENT WRITE LANDS ON IS ITS CALLER'S, AND IT MUST BE THE RAW SAVE
+ * ROSTER (EM-B1k2's written contract; §810.4 law 6 conservation).
+ *
+ * The map below RETURNS A WHOLE ROSTER, so whatever it was not handed is gone from the
+ * settlement its caller goes on to write. This function receives no save and cannot read raw
+ * itself: the roster it is handed is `npcVerdictPulse.js`'s `replacementSource`, which is the
+ * settlement `applyOrganicNpcVerdicts` was given, which is `pulseKernel.js`'s `localSettlements`
+ * entry, made RAW by EM-B1k. Handed the OFF-STAGE participation view instead
+ * (worldSnapshot.js:124-133), the roster it returns is SHORT by every shelved person and every
+ * roads hostage — MEASURED: roster out 2, the ousted person replaced, the shelved soul absent,
+ * against 3 / replaced / present on the raw base.
+ *
+ * ⛔ NEVER RE-BASE THIS ON A PROJECTION. It is deliberately NOT covered by the via-snapshot
+ * blanket in tests/domain/roadsParticipation.test.js, which now carries this disposition in
+ * terms. The name join is a second, separate question: it matches on
+ * `String(name).toLowerCase()`, which is safe today because no settlement in the 525-row
+ * golden corpus carries a duplicate display name across its 5,171 NPCs.
+ *
  * @param {import('../settlement.schema.js').SimSettlement} settlement
  * @param {any} oustedNames
  * @param {any} rng

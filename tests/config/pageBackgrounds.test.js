@@ -8,7 +8,7 @@
  * index.css defines, and no raw color may leak through this module (all
  * scrim color lives in CSS; JS carries only URLs + profile strings).
  */
-import { readFileSync } from 'node:fs';
+import { readFileSync, readdirSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
 import { dirname, join } from 'node:path';
 import { describe, it, expect } from 'vitest';
@@ -17,6 +17,7 @@ import {
   PAGE_BACKGROUNDS,
   SCRIM_PROFILES,
   resolveViewBackground,
+  paintsPageBackground,
 } from '../../src/config/pageBackgrounds.js';
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), '../..');
@@ -88,5 +89,60 @@ describe('painted clean-view backgrounds', () => {
     // Comments may mention concepts, but no pure-hex color string literal.
     const codeOnly = js.replace(/\/\*[\s\S]*?\*\//g, '').replace(/\/\/.*$/gm, '');
     expect(codeOnly).not.toMatch(/['"]#[0-9a-fA-F]{3,8}['"]/);
+  });
+});
+
+// ── WHICH VIEWS PAINT AT PAGE LEVEL ──────────────────────────────────────────
+// App.jsx preloads the active view's painting. A view that resolves a painting
+// but lands NEITHER painting class shows nothing and must not fetch it — `home`
+// was doing exactly that on the landing page. paintsPageBackground is the single
+// predicate both the paint and the preload read; these pin it in both directions,
+// so a view can never paint without preloading or preload without painting.
+describe('paintsPageBackground — the preload/paint predicate', () => {
+  const ALL_VIEWS = [...new Set([...CLEAN_VIEWS, ...Object.keys(PAGE_BACKGROUNDS)])];
+
+  it('agrees with the two painting classes for every known view', () => {
+    for (const view of ALL_VIEWS) {
+      const bg = resolveViewBackground({ view });
+      // `.page-bg` when not clean; `.page-painted` when painted below the header.
+      const paintsSomething = !bg.clean || bg.paintedBelowHeader;
+      expect(paintsPageBackground(bg), `${view}`).toBe(paintsSomething);
+    }
+  });
+
+  it('home is the ONE view that paints nothing at page level', () => {
+    const notPainting = ALL_VIEWS.filter((view) => !paintsPageBackground(resolveViewBackground({ view })));
+    // If this list grows, App.jsx already withholds the preload for the new view —
+    // but check the view really shows nothing before accepting the change.
+    expect(notPainting).toEqual(['home']);
+  });
+
+  it('the generation flow and a plain non-clean view both paint (and so preload)', () => {
+    expect(paintsPageBackground(resolveViewBackground({ view: 'generate', wizardMode: 'basic' }))).toBe(true);
+    expect(paintsPageBackground(resolveViewBackground({ view: 'realm' }))).toBe(true);
+    expect(paintsPageBackground(resolveViewBackground({ view: 'settlements' }))).toBe(true);
+  });
+
+  it('a malformed/absent result never claims to paint nothing by accident', () => {
+    // Defensive: an undefined arg must not throw inside a render/effect path.
+    expect(() => paintsPageBackground(undefined)).not.toThrow();
+  });
+
+  // THE REASON home is excluded: `.hero-dark` is the only rule that would consume
+  // --page-bg there, and NO component applies it (HomeLanding paints its own
+  // --sf-scene from /media/journey-legs). If someone wires .hero-dark up, home
+  // starts painting --page-bg and its preload must come back — this catches that.
+  it('no component applies .hero-dark (if one does, home paints and must preload again)', () => {
+    const appliers = [];
+    (function walk(dir) {
+      for (const entry of readdirSync(dir, { withFileTypes: true })) {
+        const p = join(dir, entry.name);
+        if (entry.isDirectory()) walk(p);
+        else if (/\.(jsx?|css)$/.test(entry.name) && p !== join(ROOT, 'src/index.css')
+          && readFileSync(p, 'utf8').includes('hero-dark')) appliers.push(p);
+      }
+    }(join(ROOT, 'src')));
+    // pageBackgrounds.js only NAMES the class in prose; anything else is a wiring.
+    expect(appliers.filter((p) => p !== join(ROOT, 'src/config/pageBackgrounds.js'))).toEqual([]);
   });
 });

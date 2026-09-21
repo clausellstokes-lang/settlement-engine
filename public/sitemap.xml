@@ -68,16 +68,6 @@
     <priority>0.5</priority>
   </url>
   <url>
-    <loc>https://settlementforge.com/compendium?tab=lenses</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  <url>
-    <loc>https://settlementforge.com/compendium?tab=facets</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  <url>
     <loc>https://settlementforge.com/compendium?tab=stress</loc>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
@@ -1153,16 +1143,6 @@
     <priority>0.4</priority>
   </url>
   <url>
-    <loc>https://settlementforge.com/compendium/op-setlock</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.4</priority>
-  </url>
-  <url>
-    <loc>https://settlementforge.com/compendium/op-clearlocks</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.4</priority>
-  </url>
-  <url>
     <loc>https://settlementforge.com/compendium/op-hydratefromsave</loc>
     <changefreq>monthly</changefreq>
     <priority>0.4</priority>
@@ -1594,31 +1574,6 @@
   </url>
   <url>
     <loc>https://settlementforge.com/compendium/op-bulksetgoods</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.4</priority>
-  </url>
-  <url>
-    <loc>https://settlementforge.com/compendium/lens-parchment</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.4</priority>
-  </url>
-  <url>
-    <loc>https://settlementforge.com/compendium/lens-watercolor</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.4</priority>
-  </url>
-  <url>
-    <loc>https://settlementforge.com/compendium/lens-darkfantasy</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.4</priority>
-  </url>
-  <url>
-    <loc>https://settlementforge.com/compendium/lens-vtt</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.4</priority>
-  </url>
-  <url>
-    <loc>https://settlementforge.com/compendium/lens-accessible</loc>
     <changefreq>monthly</changefreq>
     <priority>0.4</priority>
   </url>

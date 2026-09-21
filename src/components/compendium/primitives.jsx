@@ -1,4 +1,6 @@
 import { GOLD, INK, SECOND as SEC, serif_, FS } from '../theme.js';
+import useIsMobile from '../../hooks/useIsMobile.js';
+import { chromeFontSize } from '../../design/proseScale.js';
 
 // ── Shared primitives ───────────────────────────────────────────────────────
 
@@ -12,7 +14,8 @@ export function Tag({ label, color=GOLD, title }) {
   // — it is a two-channel state carrier (P7), not decorative chrome.
   // `title` is an optional native tooltip for jargon labels (Core, Local) a
   // first-time reader cannot decode from the word alone.
-  return <span title={title} style={{ fontSize:FS.xs, fontWeight:800, color, background:`${color}18`, padding:'1px 6px', letterSpacing:'0.05em', textTransform:'uppercase', marginRight:4 }}>{label}</span>;
+  const mobile = useIsMobile();
+  return <span title={title} style={{ fontSize:chromeFontSize(FS.xs, mobile), fontWeight:800, color, background:`${color}18`, padding:'1px 6px', letterSpacing:'0.05em', textTransform:'uppercase', marginRight:4 }}>{label}</span>;
 }
 
 // Rows group on the same whitespace rhythm the prose tabs use — no per-row
@@ -35,6 +38,7 @@ export function Row({ label, children, lw=130 }) {
 // title + a faint accent wash) so each tab has exactly one dominant entry point
 // (P4) instead of a wall of co-equal cards. Use it for at most one card per tab.
 export function Card({ title, sub, children, accent=GOLD, lead=false }) {
+  const mobile = useIsMobile();
   return (
     <div style={{ borderLeft:`3px solid ${accent}`,
       padding: lead ? '12px 14px' : '10px 12px',
@@ -42,7 +46,7 @@ export function Card({ title, sub, children, accent=GOLD, lead=false }) {
       marginBottom: lead ? 12 : 8 }}>
       <div style={{ display:'flex', alignItems:'center', gap:8, marginBottom:sub?2:6 }}>
         <span style={{ fontFamily:serif_, fontSize: lead ? FS.xl : FS['14'], fontWeight:700, color:INK, flex:1 }}>{title}</span>
-        {sub && <span style={{ fontSize:FS.xxs, fontWeight:700, color:accent, background:`${accent}14`,
+        {sub && <span style={{ fontSize:chromeFontSize(FS.xxs, mobile), fontWeight:700, color:accent, background:`${accent}14`,
           padding:'1px 8px', textTransform:'uppercase', letterSpacing:'0.05em' }}>{sub}</span>}
       </div>
       <div style={{ fontSize: lead ? FS.md : FS.sm, color:SEC, lineHeight:1.55, maxWidth:PROSE_MEASURE }}>{children}</div>
@@ -56,13 +60,14 @@ export function Card({ title, sub, children, accent=GOLD, lead=false }) {
 // component authors nothing — it lays the rungs out in the same accent-rule idiom
 // Card uses, with each rung a name + reading row (the Tiers/Threat table rhythm).
 export function BandLadder({ concept, blurb, levels = [], accent=GOLD }) {
+  const mobile = useIsMobile();
   return (
     <div style={{ borderLeft:`3px solid ${accent}`, padding:'10px 12px', marginBottom:8 }}>
       <div style={{ fontFamily:serif_, fontSize: FS['14'], fontWeight:700, color:INK, marginBottom:blurb?2:6 }}>{concept}</div>
       {blurb && <div style={{ fontSize:FS.sm, color:SEC, lineHeight:1.55, maxWidth:PROSE_MEASURE, marginBottom:8 }}>{blurb}</div>}
       {levels.map((l) => (
         <div key={l.name} style={{ display:'flex', gap:10, padding:'4px 0' }}>
-          <span style={{ fontSize:FS.xs, fontWeight:700, color:accent, minWidth:104, flexShrink:0 }}>{l.name}</span>
+          <span style={{ fontSize:chromeFontSize(FS.xs, mobile), fontWeight:700, color:accent, minWidth:104, flexShrink:0 }}>{l.name}</span>
           <span style={{ fontSize:FS.sm, color:SEC, lineHeight:1.5, maxWidth:PROSE_MEASURE }}>{l.reading}</span>
         </div>))}
     </div>

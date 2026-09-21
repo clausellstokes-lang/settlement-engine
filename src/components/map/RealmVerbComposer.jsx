@@ -19,6 +19,8 @@ import { realmVerbs, realmVetoProse } from '../../domain/events/realmManifest.js
 import { humanizeToken } from '../../domain/display/humanizeEngineTokens.js';
 import { t } from '../../copy/index.js';
 import { isGuidanceDismissed, markGuidanceDismissed } from '../../lib/guidance.js';
+import useIsMobile from '../../hooks/useIsMobile.js';
+import { chromeFontSize, proseFontSize } from '../../design/proseScale.js';
 
 // content-immersion-r2-3: the registered realm_orders_teaching whisper — its body
 // (guidance.realmOrders) was dead copy that rendered NOWHERE. It now mounts here,
@@ -50,6 +52,7 @@ function optionDisplayLabel(option) {
 }
 
 export default function RealmVerbComposer({ campaign }) {
+  const mobile = useIsMobile();
   const saves = useStore(s => s.savedSettlements);
   const stageRealmVerb = useStore(s => s.stageRealmVerb);
   const [verbKey, setVerbKey] = useState('');
@@ -112,7 +115,7 @@ export default function RealmVerbComposer({ campaign }) {
     <div style={{ background: CARD, border: `1px solid ${BORDER}`, padding: SP.sm, marginTop: SP.sm }}>
       <div style={{
         display: 'flex', alignItems: 'center', gap: 6, marginBottom: SP.sm,
-        fontSize: FS.xs, fontWeight: 800, fontFamily: sans, color: MUTED,
+        fontSize: chromeFontSize(FS.xs, mobile), fontWeight: 800, fontFamily: sans, color: MUTED,
         letterSpacing: '0.06em', textTransform: 'uppercase',
       }}>
         <Crown size={12} /> Realm Orders
@@ -121,7 +124,7 @@ export default function RealmVerbComposer({ campaign }) {
         <div style={{
           display: 'flex', alignItems: 'flex-start', gap: 6, marginBottom: SP.sm,
           padding: SP.sm, border: `1px dashed ${BORDER}`,
-          fontSize: FS.xxs, fontFamily: sans, color: MUTED, lineHeight: 1.5,
+          fontSize: proseFontSize(FS.xxs, mobile), fontFamily: sans, color: MUTED, lineHeight: 1.5,
         }}>
           <span style={{ flex: 1 }}>{t('guidance.realmOrders')}</span>
           <Button
@@ -147,7 +150,7 @@ export default function RealmVerbComposer({ campaign }) {
       </div>
 
       {active && !active.verdict.available && (
-        <div style={{ padding: SP.sm, border: `1px dashed ${BORDER}`, fontSize: FS.xxs, fontFamily: sans, color: MUTED, lineHeight: 1.5 }}>
+        <div style={{ padding: SP.sm, border: `1px dashed ${BORDER}`, fontSize: proseFontSize(FS.xxs, mobile), fontFamily: sans, color: MUTED, lineHeight: 1.5 }}>
           {/* Grayed-WITH-REASON (design LAW): unavailability teaches. */}
           {active.verdict.reasons.join(' ')} {active.verdict.unlocks.join(' ')}
         </div>
@@ -156,7 +159,7 @@ export default function RealmVerbComposer({ campaign }) {
       {active && active.verdict.available && (
         <div style={{ display: 'flex', flexDirection: 'column', gap: SP.xs }}>
           {(active.entry.dials || []).map(d => (
-            <div key={d.key} style={{ display: 'flex', alignItems: 'center', gap: 8, fontSize: FS.xs, fontFamily: sans, color: INK }}>
+            <div key={d.key} style={{ display: 'flex', alignItems: 'center', gap: 8, fontSize: chromeFontSize(FS.xs, mobile), fontFamily: sans, color: INK }}>
               <span style={{ minWidth: 160, color: MUTED }}>{dialDisplayLabel(d)}</span>
               {d.kind === 'target' && (
                 <select
@@ -231,13 +234,13 @@ export default function RealmVerbComposer({ campaign }) {
       {notice && (
         <div style={{
           marginTop: SP.xs, padding: SP.sm, border: `1px ${notice.ok ? 'solid' : 'dashed'} ${BORDER}`,
-          fontSize: FS.xxs, fontFamily: sans, color: notice.ok ? INK : MUTED,
+          fontSize: chromeFontSize(FS.xxs, mobile), fontFamily: sans, color: notice.ok ? INK : MUTED,
         }}>
           {notice.text}
         </div>
       )}
 
-      <p style={{ fontSize: FS.xxs, color: MUTED, margin: '8px 0 0', fontStyle: 'italic', lineHeight: 1.5 }}>
+      <p style={{ fontSize: proseFontSize(FS.xxs, mobile), color: MUTED, margin: '8px 0 0', fontStyle: 'italic', lineHeight: 1.5 }}>
         Every order stages as a pending proposal and applies through the world&apos;s own machinery on approval:
         the walls hold even under force, and a refused order says why.
       </p>

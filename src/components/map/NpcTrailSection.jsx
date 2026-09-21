@@ -33,6 +33,8 @@ import { useStore } from '../../store/index.js';
 import { npcInteriority } from '../../domain/display/npcInteriorityRead.js';
 import { tickCalendarDetailLabel } from '../../domain/display/humanizeEngineTokens.js';
 import { BODY, BORDER, BORDER2, CARD, CARD_ALT, FS, GOLD, INK, MUTED, SECOND, SP, sans } from '../theme.js';
+import useIsMobile from '../../hooks/useIsMobile.js';
+import { chromeFontSize, proseFontSize } from '../../design/proseScale.js';
 
 /** Every (npcId, name) pair the saved rosters' ladder mirrors carry, deduped. */
 function nameByNidOf(saves) {
@@ -52,12 +54,13 @@ function nameByNidOf(saves) {
 
 /** One person's dated trail. */
 function TrailCard({ name, rows }) {
+  const mobile = useIsMobile();
   return (
     <div
       data-testid="npc-trail-row"
       style={{ border: `1px solid ${BORDER2}`, borderLeft: `3px solid ${GOLD}`, background: CARD, padding: '8px 10px', display: 'grid', gap: 4 }}
     >
-      <div style={{ color: INK, fontFamily: sans, fontSize: FS.xs, fontWeight: 850 }}>
+      <div style={{ color: INK, fontFamily: sans, fontSize: chromeFontSize(FS.xs, mobile), fontWeight: 850 }}>
         {`${name}: ${rows.length} recorded ${rows.length === 1 ? 'turning' : 'turnings'}`}
       </div>
       {rows.map(row => (
@@ -65,7 +68,7 @@ function TrailCard({ name, rows }) {
           key={row.id}
           data-testid="npc-trail-line"
           data-kind={row.kind}
-          style={{ display: 'flex', gap: 6, color: BODY, fontFamily: sans, fontSize: FS.xs, lineHeight: 1.5 }}
+          style={{ display: 'flex', gap: 6, color: BODY, fontFamily: sans, fontSize: proseFontSize(FS.xs, mobile), lineHeight: 1.5 }}
         >
           <span aria-hidden="true" style={{ color: SECOND, fontWeight: 900, flexShrink: 0 }}>•</span>
           <span>
@@ -85,6 +88,7 @@ function TrailCard({ name, rows }) {
  * @param {{ campaign: any }} props
  */
 export default function NpcTrailSection({ campaign }) {
+  const mobile = useIsMobile();
   const tier = useStore(s => s.auth?.tier);
   const elevated = useStore(s => (typeof s.isElevated === 'function' ? s.isElevated() : false));
   const saves = useStore(s => s.savedSettlements);
@@ -119,12 +123,12 @@ export default function NpcTrailSection({ campaign }) {
     >
       <div style={{ display: 'flex', alignItems: 'center', gap: 6, flexWrap: 'wrap' }}>
         {/* Text twin, not a lucide glyph (the LU-2 icons-off doctrine). */}
-        <span aria-hidden="true" style={{ color: GOLD, fontWeight: 900, fontSize: FS.xs }}>⚔</span>
-        <span style={{ color: INK, fontFamily: sans, fontSize: FS.xs, fontWeight: 900 }}>
+        <span aria-hidden="true" style={{ color: GOLD, fontWeight: 900, fontSize: chromeFontSize(FS.xs, mobile) }}>⚔</span>
+        <span style={{ color: INK, fontFamily: sans, fontSize: chromeFontSize(FS.xs, mobile), fontWeight: 900 }}>
           Who contested whom
         </span>
         <span
-          style={{ marginLeft: 'auto', color: GOLD, fontFamily: sans, fontSize: FS.micro, fontWeight: 850 }}
+          style={{ marginLeft: 'auto', color: GOLD, fontFamily: sans, fontSize: chromeFontSize(FS.micro, mobile), fontWeight: 850 }}
           aria-label="The court's dated record: yours to know, and not shown in a player-facing view."
         >
           DM only
@@ -133,7 +137,7 @@ export default function NpcTrailSection({ campaign }) {
       <div style={{ display: 'grid', gap: 5 }}>
         {people.map(person => <TrailCard key={person.nid} name={person.name} rows={person.rows} />)}
       </div>
-      <div style={{ color: MUTED, fontFamily: sans, fontSize: FS.micro, lineHeight: 1.5 }}>
+      <div style={{ color: MUTED, fontFamily: sans, fontSize: proseFontSize(FS.micro, mobile), lineHeight: 1.5 }}>
         Every line is a contest the ladder opened or a seat that actually changed hands. A figure
         who has left every rung is no longer listed here, and where one appears in someone else&rsquo;s
         line it goes unnamed rather than shown as a record key.

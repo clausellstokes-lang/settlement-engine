@@ -43,6 +43,8 @@ import {
   CUSTOM_CONTENT_FIELD_HINTS as FIELD_HINTS,
   CUSTOM_CONTENT_FIELD_LABELS as FIELD_LABELS,
 } from './customContentEditorCopy.js';
+import useIsMobile from '../../hooks/useIsMobile.js';
+import { chromeFontSize, proseFontSize } from '../../design/proseScale.js';
 
 const ESSENTIAL_FIELDS = Object.freeze(['name', 'category', 'description']);
 
@@ -98,6 +100,7 @@ function hasAuthoredValue(value) {
 }
 
 function ChoicePills({ field, options, draft, setDraft, accent }) {
+  const mobile = useIsMobile();
   const selected = new Set(listValue(draft[field]));
   return (
     <div style={{ display: 'flex', flexWrap: 'wrap', gap: 4, padding: '4px 0' }}>
@@ -117,7 +120,7 @@ function ChoicePills({ field, options, draft, setDraft, accent }) {
             }}
             style={{
               padding: '2px 8px',
-              fontSize: FS.xxs,
+              fontSize: chromeFontSize(FS.xxs, mobile),
               minHeight: 0,
               letterSpacing: '0.03em',
               border: `1px solid ${active ? accent : BOR}`,
@@ -194,6 +197,7 @@ function CustomContentFieldControl({
   labelledBy,
   setDraft,
 }) {
+  const mobile = useIsMobile();
   const id = `ccm-field-${field}`;
   const value = draft[field] ?? '';
   const spec = getCustomContentField(activeCat, field);
@@ -268,7 +272,7 @@ function CustomContentFieldControl({
         />
         <div style={{
           textAlign: 'right',
-          fontSize: FS.micro,
+          fontSize: chromeFontSize(FS.micro, mobile),
           color: MUT,
           marginTop: 2,
         }}>
@@ -334,6 +338,7 @@ function CustomContentFieldControl({
  * string would clear its findings, and it rewrites the DRAFT alone.
  */
 function CharsetFieldRejections({ field, rejections, draft, setDraft }) {
+  const mobile = useIsMobile();
   const mine = rejections.filter(entry => entry.field === field);
   if (mine.length === 0) return null;
   const normalisable = mine.some(entry => entry.nfcWouldPass === true);
@@ -343,7 +348,7 @@ function CharsetFieldRejections({ field, rejections, draft, setDraft }) {
       {mine.map((entry, index) => (
         <div
           key={`${entry.code}-${entry.index === undefined ? index : entry.index}`}
-          style={{ fontSize: FS.micro, color: SEC, lineHeight: 1.4 }}
+          style={{ fontSize: proseFontSize(FS.micro, mobile), color: SEC, lineHeight: 1.4 }}
         >
           {t(CHARSET_HINTS[entry.code] || CHARSET_HINTS.uncovered_codepoint, {
             char: entry.char,
@@ -377,6 +382,7 @@ function EditorField({
   field,
   setDraft,
 }) {
+  const mobile = useIsMobile();
   const headingId = `ccm-field-label-${field}`;
   const spec = getCustomContentField(activeCat, field);
   const fieldValue = draft[field];
@@ -403,7 +409,7 @@ function EditorField({
     </span>
   );
   const labelStyle = {
-    fontSize: FS.xxs,
+    fontSize: chromeFontSize(FS.xxs, mobile),
     fontWeight: 700,
     color: MUT,
     textTransform: 'uppercase',
@@ -435,7 +441,7 @@ function EditorField({
       )}
       {FIELD_HINTS[field] && (
         <div style={{
-          fontSize: FS.micro,
+          fontSize: proseFontSize(FS.micro, mobile),
           color: MUT,
           fontStyle: 'italic',
           marginTop: 2,
@@ -475,6 +481,7 @@ export default function CustomContentEditor({
   setShowAdvanced,
   showAdvanced,
 }) {
+  const mobile = useIsMobile();
   const usesDisclosure = activeCat !== 'deities' && activeCat !== 'traditions';
   const essentials = usesDisclosure
     ? catDef.fields.filter(field => ESSENTIAL_FIELDS.includes(field))
@@ -503,7 +510,7 @@ export default function CustomContentEditor({
       marginBottom: 10,
     }}>
       <div style={{
-        fontSize: FS.xs,
+        fontSize: chromeFontSize(FS.xs, mobile),
         fontWeight: 700,
         color: swatch.magic,
         textTransform: 'uppercase',
@@ -514,7 +521,7 @@ export default function CustomContentEditor({
       </div>
       {activeCat === 'deities' && (
         <div style={{
-          fontSize: FS.xs,
+          fontSize: proseFontSize(FS.xs, mobile),
           color: SEC,
           lineHeight: 1.5,
           marginBottom: 8,
@@ -552,7 +559,7 @@ export default function CustomContentEditor({
       {activeCat === 'deities' && (
         <>
           <div style={{
-            fontSize: FS.micro,
+            fontSize: proseFontSize(FS.micro, mobile),
             color: MUT,
             fontStyle: 'italic',
             marginTop: 6,
@@ -592,7 +599,7 @@ export default function CustomContentEditor({
           {manualSampleError && (
             <div
               role="alert"
-              style={{ fontSize: FS.xs, color: MUT, fontFamily: sans }}
+              style={{ fontSize: chromeFontSize(FS.xs, mobile), color: MUT, fontFamily: sans }}
             >
               {manualSampleError}
             </div>

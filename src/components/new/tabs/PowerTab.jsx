@@ -1,6 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { FS, MUTED, swatch } from '../../theme.js';
 import { serif, Section, TabIntro } from '../Primitives';
+import { LITERARY_TITLE, literaryTitle, tokenCase } from '../labelLadder.js';
 import { NarrativeNote } from '../NarrativeNote';
 import { FACTION_COLORS } from '../tabConstants';
 import { useStore } from '../../../store/index.js';
@@ -13,6 +14,14 @@ import { structuralLensOf } from '../../../domain/spatial/cohesionWeave.js';
 import { settlementBlocs as politicsBlocsOf } from '../../../domain/display/politicsRead.js';
 import { powerStateProse, powerLadderRung } from '../../../domain/display/stateProse/powerStateProse.js';
 import { drawnAtMount } from '../../../domain/display/stateProse/dossierMounts.js';
+import { tierNounFor } from '../../../domain/display/stateProse/weaveBlock.js';
+// THE ONE PARAGRAPH RENDERER (owner finding 2026-09-18). The four positions below mapped
+// their drawn sentences to one `<p>` EACH; ProseBlock weaves each position into one
+// paragraph. The DRAW is unchanged — these are the same strings `drawnAtMount` ruled on.
+import ProseBlock from '../ProseBlock.jsx';
+import useIsMobile from '../../../hooks/useIsMobile.js';
+import { chromeFontSize, proseFontSize } from '../../../design/proseScale.js';
+import { edged } from '../../../design/edgedBox.js';
 
 /**
  * The legitimacy banner's mount id, bound once. It is used at TWO draws below and the
@@ -63,10 +72,13 @@ function saveIdOfSettlement(settlement) {
 
 /** §815 — one row of the ruling chain: a small uppercase link label + the answer. */
 function ChainRow({ label, children }) {
+  // THE PHONE PROSE FLOOR — the answer half of the row, which is a sentence. The
+  // link label beside it is an eyebrow and keeps its own step.
+  const mobile = useIsMobile();
   return (
     <div style={{display:'flex',alignItems:'baseline',gap:10}}>
-      <span style={{fontSize:FS.micro,fontWeight:800,color:swatch.inkMag3,textTransform:'uppercase',letterSpacing:'0.07em',flex:'0 0 72px'}}>{label}</span>
-      <span style={{fontSize:FS.sm,color:swatch.inkMag,lineHeight:1.5,minWidth:0}}>{children}</span>
+      <span style={{fontSize:chromeFontSize(FS.micro, mobile),fontWeight:800,color:swatch.inkMag3,flex:'0 0 72px'}}>{label}</span>
+      <span style={{fontSize:proseFontSize(FS.sm, mobile),color:swatch.inkMag,lineHeight:1.5,minWidth:0}}>{children}</span>
     </div>
   );
 }
@@ -90,7 +102,7 @@ function RulingChainBlock({ settlement }) {
       borderLeft: `4px solid ${missingSeat ? swatch['#8B1A1A'] : swatch['#A0762A']}`,
       padding: '12px 16px', marginBottom: 14, display: 'flex', flexDirection: 'column', gap: 6,
     }}>
-      <div style={{fontSize:FS.xxs,fontWeight:800,color:swatch.inkMag3,textTransform:'uppercase',letterSpacing:'0.07em'}}>
+      <div style={{...literaryTitle(FS.sm),color:swatch.inkMag}}>
         Who runs this place?
       </div>
       {chain.power && (
@@ -127,6 +139,12 @@ function RulingChainBlock({ settlement }) {
 
 export function PowerTab({ powerStructure:r, settlement:s, narrativeNote, publicDossier = false, playerView = false, worldState = null }) {
   const [expandedFaction, setExpandedFaction] = useState(null);
+  // THE PHONE PROSE FLOOR — the fracture note, the recent-conflict line, the
+  // ladder caption and its per-faction sentence, and every tension, issue, stake
+  // and hook below. Bound above the `!r` early return so the hook order is
+  // stable; the score, the labels, the badges and the faction names keep their
+  // own steps.
+  const mobile = useIsMobile();
 
   // Dossier hyperlink focus. When a link navigates to a faction (e.g. from an
   // NPC's affiliation), expand that faction's roster row and scroll it into view.
@@ -220,7 +238,9 @@ export function PowerTab({ powerStructure:r, settlement:s, narrativeNote, public
       rulingStructure: null, governingTitle: null,
       blocPresence: null, blocGlue: null, blocEnd: null,
     })
-    : powerStateProse(s, deskReadings, { seed: String(s?._seed ?? s?.id ?? ''), audience });
+    : powerStateProse(s, deskReadings, {
+      seed: String(s?._seed ?? s?.id ?? ''), audience, tierNoun: tierNounFor(s?.tier),
+    });
   const drawnBanner = drawnAtMount(LEGITIMACY_MOUNT, deskProse.legitimacyBanner);
   const drawnLens   = drawnAtMount(LEGITIMACY_MOUNT, deskProse.legitimacyLens);
   const drawnStab   = drawnAtMount(STABILITY_MOUNT, deskProse.stabilityHeader);
@@ -263,8 +283,8 @@ export function PowerTab({ powerStructure:r, settlement:s, narrativeNote, public
           <div style={{display:'flex', alignItems:'flex-start', gap:16, flexWrap:'wrap'}}>
             {/* Score + label */}
             <div style={{flexShrink:0}}>
-              <div style={{fontSize:FS.micro,fontWeight:700,color:leg.color,textTransform:'uppercase',letterSpacing:'0.08em',marginBottom:2}}>
-                Public Legitimacy
+              <div style={{fontSize:chromeFontSize(FS.micro, mobile),fontWeight:700,color:leg.color,marginBottom:2}}>
+                Public legitimacy
               </div>
               <div style={{display:'flex',alignItems:'baseline',gap:8}}>
                 <span style={{fontSize: FS['28'],fontWeight:800,color:leg.color,lineHeight:1}}>{leg.score}</span>
@@ -273,23 +293,23 @@ export function PowerTab({ powerStructure:r, settlement:s, narrativeNote, public
             </div>
             {/* Breakdown chips */}
             <div style={{flex:1,minWidth:180}}>
-              <div style={{fontSize:FS.micro,fontWeight:700,color:swatch.inkMag3,textTransform:'uppercase',letterSpacing:'0.06em',marginBottom:5}}>
+              <div style={{fontSize:chromeFontSize(FS.micro, mobile),fontWeight:700,color:swatch.inkMag3,marginBottom:5}}>
                 Score breakdown (base 50)
               </div>
               <div style={{display:'flex',gap:5,flexWrap:'wrap'}}>
                 {Object.entries(leg.breakdown || {}).map(([k,v]) => (
                   <div key={k} style={{
-                    fontSize:FS.xxs, fontWeight:700, padding:'2px 8px',
+                    fontSize:chromeFontSize(FS.xxs, mobile), fontWeight:700, padding:'2px 8px',
                     background: v > 0 ? '#f0faf4' : v < 0 ? '#fdf4f4' : '#f5f0e8',
                     color:      v > 0 ? '#1a5a28' : v < 0 ? '#8b1a1a' : '#9c8068',
                     border: `1px solid ${v > 0 ? '#a8d8b0' : v < 0 ? '#e8c0c0' : '#e0d0b0'}`,
                   }}>
-                    {k} {v > 0 ? `+${v}` : v}
+                    {tokenCase(k)} {v > 0 ? `+${v}` : v}
                   </div>
                 ))}
               </div>
               {leg.governanceFractured && (
-                <div style={{marginTop:8,background:swatch['#FAF8F4'],border:'1px solid #e8c0c0',borderLeft:'3px solid #8b1a1a',padding:'6px 10px',fontSize: FS['11.5'],color:swatch['#5A1A1A'],lineHeight:1.4}}>
+                <div style={{marginTop:8,background:swatch['#FAF8F4'],border:'1px solid #e8c0c0',borderLeft:'3px solid #8b1a1a',padding:'6px 10px',fontSize: proseFontSize(FS['11.5'], mobile),color:swatch['#5A1A1A'],lineHeight:1.4}}>
                   <strong>Governance fractured.</strong> Real decisions are being made informally. The faction that appears to govern is not the faction that governs.
                 </div>
               )}
@@ -303,12 +323,14 @@ export function PowerTab({ powerStructure:r, settlement:s, narrativeNote, public
               of leaving half a reading on the page. Neither displaces a datum above. */}
           {(drawnBanner?.sentence || drawnLens?.sentence) && (
             <div style={{marginTop:10,borderTop:`1px solid ${leg.color}30`,paddingTop:8}}>
-              {drawnBanner?.sentence && (
-                <p style={{fontSize:FS.md,color:swatch.inkMag2,lineHeight:1.65,margin:0,fontStyle:'italic'}}>{drawnBanner.sentence}</p>
-              )}
-              {drawnLens?.sentence && (
-                <p style={{fontSize:FS.sm,color:swatch.inkMag3,lineHeight:1.6,margin:'6px 0 0',fontStyle:'italic'}}>{drawnLens.sentence}</p>
-              )}
+              {/* ⭐ ONE PARAGRAPH, not a ladder line and a lens line stacked (owner finding
+                  2026-09-18). This pair was written out by hand rather than mapped, so it
+                  reads differently in the source and identically on the page: two `<p>`, two
+                  openings on the town's name. It is the same position and the same two rungs;
+                  only the arrangement changed. */}
+              <ProseBlock lines={[drawnBanner?.sentence, drawnLens?.sentence]}
+                settlementName={s?.name} tier={s?.tier}
+                style={{fontSize:FS.md,color:swatch.inkMag2,lineHeight:1.65,margin:0,fontStyle:'italic'}}/>
             </div>
           )}
         </div>
@@ -317,24 +339,23 @@ export function PowerTab({ powerStructure:r, settlement:s, narrativeNote, public
       {/* ── STABILITY + GOVERNING AUTHORITY HEADER ───────────────────────── */}
       <div style={{
         background: isCritical?'#fdf4f4': isStable?'#f0faf4':'#fdf8e8',
-        border: `1px solid ${isCritical?'#e8c0c0':isStable?'#a8d8b0':'#e0c860'}`,
-        borderLeft: `4px solid ${stabilityColor}`,
+        ...edged(`1px solid ${isCritical?'#e8c0c0':isStable?'#a8d8b0':'#e0c860'}`, `4px solid ${stabilityColor}`),
         padding:'12px 16px', marginBottom:14,
       }}>
         <div style={{display:'flex',alignItems:'flex-start',gap:12,flexWrap:'wrap'}}>
           <div style={{flex:1,minWidth:0}}>
-            <div style={{fontSize:FS.xxs,fontWeight:700,color:swatch.inkMag3,textTransform:'uppercase',letterSpacing:'0.06em',marginBottom:3}}>Stability</div>
+            <div style={{fontSize:chromeFontSize(FS.xxs, mobile),fontWeight:700,color:swatch.inkMag3,marginBottom:3}}>Stability</div>
             <div style={{fontSize:FS.lg,fontWeight:700,color:stabilityColor,lineHeight:1.3}}>{m}</div>
           </div>
           {governing && <div style={{flex:1,minWidth:0}}>
-            <div style={{fontSize:FS.xxs,fontWeight:700,color:swatch.inkMag3,textTransform:'uppercase',letterSpacing:'0.06em',marginBottom:3}}>Governing Authority</div>
+            <div style={{fontSize:chromeFontSize(FS.xxs, mobile),fontWeight:700,color:swatch.inkMag3,marginBottom:3}}>Governing authority</div>
             <div style={{display:'flex',alignItems:'center',gap:6,flexWrap:'wrap'}}>
               <span style={{fontSize: FS['14'],fontWeight:700,color:swatch.inkMag}}>{governing.faction}</span>
-              <span style={{fontSize:FS.xs,fontWeight:700,color:stabilityColor}}>
+              <span style={{fontSize:chromeFontSize(FS.xs, mobile),fontWeight:700,color:stabilityColor}}>
                 {governing.powerLabel || ''} ({governing.power})
               </span>
               {governing.modifier && (
-                <span style={{fontSize:FS.micro,fontWeight:600,color:swatch['#5A6A1A'],background:swatch['#F0F4E0'],border:'1px solid #c8d890',padding:'0 5px',textTransform:'uppercase',letterSpacing:'0.03em'}}>
+                <span style={{fontSize:chromeFontSize(FS.micro, mobile),fontWeight:600,color:swatch['#5A6A1A'],background:swatch['#F0F4E0'],border:'1px solid #c8d890',padding:'0 5px'}}>
                   {governing.modifier}
                 </span>
               )}
@@ -343,24 +364,22 @@ export function PowerTab({ powerStructure:r, settlement:s, narrativeNote, public
           {/* Criminal capture state badge */}
           {crimCapture && crimCapture !== 'none' && (
             <div style={{flexShrink:0}}>
-              <div style={{fontSize:FS.micro,fontWeight:700,color:swatch.inkMag3,textTransform:'uppercase',letterSpacing:'0.05em',marginBottom:3}}>Criminal Capture</div>
-              <span style={{fontSize:FS.xxs,fontWeight:700,color:captureStyle.color,background:captureStyle.bg,border:`1px solid ${captureStyle.color}40`,padding:'2px 8px'}}>
+              <div style={{fontSize:chromeFontSize(FS.micro, mobile),fontWeight:700,color:swatch.inkMag3,marginBottom:3}}>Criminal capture</div>
+              <span style={{fontSize:chromeFontSize(FS.xxs, mobile),fontWeight:700,color:captureStyle.color,background:captureStyle.bg,border:`1px solid ${captureStyle.color}40`,padding:'2px 8px'}}>
                 {captureStyle.label}
               </span>
             </div>
           )}
         </div>
-        {h && <p style={{fontSize:FS.sm,color:swatch['#5A3A10'],lineHeight:1.5,margin:'8px 0 0',borderTop:`1px solid ${isCritical?'#e8c0c0':isStable?'#c8e8c8':'#e0c860'}`,paddingTop:8,fontStyle:'italic'}}>{h}</p>}
+        {h && <p style={{fontSize:proseFontSize(FS.sm, mobile),color:swatch['#5A3A10'],lineHeight:1.5,margin:'8px 0 0',borderTop:`1px solid ${isCritical?'#e8c0c0':isStable?'#c8e8c8':'#e0c860'}`,paddingTop:8,fontStyle:'italic'}}>{h}</p>}
         {/* DS-POW-2: the stability ladder line, then its lens — two pools of one block at
             ONE position, routed through one mount, exactly as the legitimacy banner above. */}
         {(drawnStab?.sentence || drawnStabLens?.sentence) && (
           <div style={{marginTop:10,borderTop:`1px solid ${stabilityColor}30`,paddingTop:8}}>
-            {drawnStab?.sentence && (
-              <p style={{fontSize:FS.md,color:swatch.inkMag2,lineHeight:1.65,margin:0,fontStyle:'italic'}}>{drawnStab.sentence}</p>
-            )}
-            {drawnStabLens?.sentence && (
-              <p style={{fontSize:FS.sm,color:swatch.inkMag3,lineHeight:1.6,margin:'6px 0 0',fontStyle:'italic'}}>{drawnStabLens.sentence}</p>
-            )}
+            {/* The ladder line and its lens, as one paragraph — the banner above's twin. */}
+            <ProseBlock lines={[drawnStab?.sentence, drawnStabLens?.sentence]}
+              settlementName={s?.name} tier={s?.tier}
+              style={{fontSize:FS.md,color:swatch.inkMag2,lineHeight:1.65,margin:0,fontStyle:'italic'}}/>
           </div>
         )}
       </div>
@@ -372,10 +391,9 @@ export function PowerTab({ powerStructure:r, settlement:s, narrativeNote, public
           ONE position, so the registry silences them together. */}
       {undersideLines.length > 0 && (
         <div style={{background:swatch['#FAF8F4'],border:'1px solid #e0c890',borderLeft:'4px solid #4a1a4a',padding:'10px 14px',marginBottom:14}}>
-          <div style={{fontSize:FS.micro,fontWeight:700,color:swatch.inkMag3,textTransform:'uppercase',letterSpacing:'0.06em',marginBottom:5}}>The quieter arithmetic</div>
-          {undersideLines.map((line, i) => (
-            <p key={i} style={{fontSize:i===0?FS.md:FS.sm,color:i===0?swatch.inkMag2:swatch.inkMag3,lineHeight:1.6,margin:i===0?0:'6px 0 0',fontStyle:'italic'}}>{line}</p>
-          ))}
+          <div style={{...LITERARY_TITLE,color:swatch.inkMag,marginBottom:5}}>The quieter arithmetic</div>
+          <ProseBlock lines={undersideLines} settlementName={s?.name} tier={s?.tier}
+            style={{fontSize:FS.md,color:swatch.inkMag2,lineHeight:1.6,margin:0,fontStyle:'italic'}}/>
         </div>
       )}
 
@@ -386,10 +404,9 @@ export function PowerTab({ powerStructure:r, settlement:s, narrativeNote, public
           played reads the DORMANT line — which is true, not a fallback. */}
       {blocLines.length > 0 && (
         <div style={{background:swatch['#FAF8F4'],border:'1px solid #d8c090',borderLeft:'4px solid #4a4a7a',padding:'10px 14px',marginBottom:14}}>
-          <div style={{fontSize:FS.micro,fontWeight:700,color:swatch.inkMag3,textTransform:'uppercase',letterSpacing:'0.06em',marginBottom:5}}>Sides and combinations</div>
-          {blocLines.map((line, i) => (
-            <p key={i} style={{fontSize:i===0?FS.md:FS.sm,color:i===0?swatch.inkMag2:swatch.inkMag3,lineHeight:1.6,margin:i===0?0:'6px 0 0',fontStyle:'italic'}}>{line}</p>
-          ))}
+          <div style={{...LITERARY_TITLE,color:swatch.inkMag,marginBottom:5}}>Sides and combinations</div>
+          <ProseBlock lines={blocLines} settlementName={s?.name} tier={s?.tier}
+            style={{fontSize:FS.md,color:swatch.inkMag2,lineHeight:1.6,margin:0,fontStyle:'italic'}}/>
         </div>
       )}
 
@@ -398,10 +415,9 @@ export function PowerTab({ powerStructure:r, settlement:s, narrativeNote, public
           calls itself. Three pools of ONE block at ONE position. */}
       {structureLines.length > 0 && (
         <div style={{background:swatch['#FAF8F4'],border:'1px solid #d8c090',borderLeft:'4px solid #5A6A1A',padding:'10px 14px',marginBottom:14}}>
-          <div style={{fontSize:FS.micro,fontWeight:700,color:swatch.inkMag3,textTransform:'uppercase',letterSpacing:'0.06em',marginBottom:5}}>The shape of authority</div>
-          {structureLines.map((line, i) => (
-            <p key={i} style={{fontSize:i===0?FS.md:FS.sm,color:i===0?swatch.inkMag2:swatch.inkMag3,lineHeight:1.6,margin:i===0?0:'6px 0 0',fontStyle:'italic'}}>{line}</p>
-          ))}
+          <div style={{...LITERARY_TITLE,color:swatch.inkMag,marginBottom:5}}>The shape of authority</div>
+          <ProseBlock lines={structureLines} settlementName={s?.name} tier={s?.tier}
+            style={{fontSize:FS.md,color:swatch.inkMag2,lineHeight:1.6,margin:0,fontStyle:'italic'}}/>
         </div>
       )}
 
@@ -411,10 +427,9 @@ export function PowerTab({ powerStructure:r, settlement:s, narrativeNote, public
           position; the registry silences them together. */}
       {successionLines.length > 0 && (
         <div style={{background:swatch['#FAF8F4'],border:'1px solid #d8c090',borderLeft:'4px solid #a0762a',padding:'10px 14px',marginBottom:14}}>
-          <div style={{fontSize:FS.micro,fontWeight:700,color:swatch.inkMag3,textTransform:'uppercase',letterSpacing:'0.06em',marginBottom:5}}>Rule and succession</div>
-          {successionLines.map((line, i) => (
-            <p key={i} style={{fontSize:i===0?FS.md:FS.sm,color:i===0?swatch.inkMag2:swatch.inkMag3,lineHeight:1.6,margin:i===0?0:'6px 0 0',fontStyle:'italic'}}>{line}</p>
-          ))}
+          <div style={{...LITERARY_TITLE,color:swatch.inkMag,marginBottom:5}}>Rule and succession</div>
+          <ProseBlock lines={successionLines} settlementName={s?.name} tier={s?.tier}
+            style={{fontSize:FS.md,color:swatch.inkMag2,lineHeight:1.6,margin:0,fontStyle:'italic'}}/>
         </div>
       )}
 
@@ -450,7 +465,7 @@ export function PowerTab({ powerStructure:r, settlement:s, narrativeNote, public
         if (!rows.length) return null;
         return (
           <Section title="The Ladder" collapsible defaultOpen>
-            <div style={{fontSize:FS.xxs,color:MUTED,marginBottom:8,lineHeight:1.4}}>
+            <div style={{fontSize:proseFontSize(FS.xxs, mobile),color:MUTED,marginBottom:8,lineHeight:1.4}}>
               Who is rising within each faction: standing on the internal ladder, top rung first.
             </div>
             <div style={{display:'flex',flexDirection:'column',gap:10}}>
@@ -465,7 +480,7 @@ export function PowerTab({ powerStructure:r, settlement:s, narrativeNote, public
                         // Churn badge: the explainer rides aria-label (screen-reader-complete,
                         // touch-safe) — never a native title (the shrink-only title= census).
                         <span aria-label="Leadership churn: recent turnover at the top erodes effective power"
-                          style={{fontSize:FS.micro,fontWeight:700,color:swatch.danger,background:`${swatch.danger}12`,border:`1px solid ${swatch.danger}40`,padding:'0 5px'}}>
+                          style={{fontSize:chromeFontSize(FS.micro, mobile),fontWeight:700,color:swatch.danger,background:`${swatch.danger}12`,border:`1px solid ${swatch.danger}40`,padding:'0 5px'}}>
                           unstable {Math.round(instab*100)}%
                         </span>
                       )}
@@ -492,18 +507,19 @@ export function PowerTab({ powerStructure:r, settlement:s, narrativeNote, public
                         { seed: deskSeed ? `${deskSeed}::${f.faction}` : '', audience },
                       ));
                       return drawn?.sentence ? (
-                        <p style={{fontSize:FS.xs,color:swatch.inkMag3,lineHeight:1.55,margin:'0 0 5px 15px',fontStyle:'italic'}}>{drawn.sentence}</p>
+                        <p style={{fontSize:proseFontSize(FS.xs, mobile),color:swatch.inkMag3,lineHeight:1.55,margin:'0 0 5px 15px',fontStyle:'italic'}}>{drawn.sentence}</p>
                       ) : null;
                     })()}
                     <div style={{display:'flex',flexDirection:'column',gap:2}}>
                       {rungs.map((rung, j) => (
                         <div key={rung.npcId} style={{display:'flex',alignItems:'center',gap:8,padding:'1px 0 1px 15px'}}>
-                          <span style={{fontSize:FS.micro,color:MUTED,width:14,flexShrink:0,textAlign:'right'}}>{j+1}</span>
-                          <span style={{fontSize:FS.xs,fontWeight:j===0?700:600,color:swatch.inkMag2,flex:'0 0 42%',minWidth:0,overflow:'hidden',textOverflow:'ellipsis',whiteSpace:'nowrap'}}>{rung.name}</span>
+                          <span style={{fontSize:chromeFontSize(FS.micro, mobile),color:MUTED,width:14,flexShrink:0,textAlign:'right'}}>{j+1}</span>
+                          {/* ODQ §934.23 — no clamp on dossier text: an NPC name is generated and has no provable width, so the 42% column wraps it rather than cutting a person's name mid-word. */}
+                          <span style={{fontSize:chromeFontSize(FS.xs, mobile),fontWeight:j===0?700:600,color:swatch.inkMag2,flex:'0 0 42%',minWidth:0}}>{rung.name}</span>
                           <div style={{flex:1,height:6,background:`${c}20`,overflow:'hidden'}}>
                             <div style={{width:`${Math.round(rung.standing*100)}%`,height:'100%',background:c}}/>
                           </div>
-                          <span style={{fontSize:FS.micro,color:MUTED,width:28,flexShrink:0,textAlign:'right'}}>{Math.round(rung.standing*100)}</span>
+                          <span style={{fontSize:chromeFontSize(FS.micro, mobile),color:MUTED,width:28,flexShrink:0,textAlign:'right'}}>{Math.round(rung.standing*100)}</span>
                         </div>
                       ))}
                     </div>
@@ -521,11 +537,11 @@ export function PowerTab({ powerStructure:r, settlement:s, narrativeNote, public
           <div style={{display:'flex',flexDirection:'column',gap:6}}>
             {tensions.map((t,i) => (
               <div key={i} style={{background:swatch['#FDF8E8'],border:'1px solid #e0c860',borderLeft:'3px solid #b8860b',padding:'9px 13px'}}>
-                <p style={{fontSize:FS.md,color:swatch.inkMag2,lineHeight:1.5,margin:'0 0 4px'}}>{typeof t==='object'?t.description:t}</p>
+                <p style={{fontSize:proseFontSize(FS.md, mobile),color:swatch.inkMag2,lineHeight:1.5,margin:'0 0 4px'}}>{typeof t==='object'?t.description:t}</p>
                 {t.factions?.length > 0 && (
                   <div style={{display:'flex',gap:4,flexWrap:'wrap'}}>
                     {t.factions.map((f,j) => (
-                      <span key={j} style={{fontSize:FS.xxs,fontWeight:600,color:swatch['#7A5010'],background:swatch['#F5E8C0'],padding:'0 6px'}}>{f}</span>
+                      <span key={j} style={{fontSize:chromeFontSize(FS.xxs, mobile),fontWeight:600,color:swatch['#7A5010'],background:swatch['#F5E8C0'],padding:'0 6px'}}>{f}</span>
                     ))}
                   </div>
                 )}
@@ -541,22 +557,22 @@ export function PowerTab({ powerStructure:r, settlement:s, narrativeNote, public
           {conflicts.map((c,i) => {
             const iHigh = c.intensity==='high', iLow = c.intensity==='low';
             const intColor = iHigh?'#8b1a1a':iLow?'#1a5a28':'#a0762a';
-            const intLabel = iHigh?'HIGH TENSION':iLow?'LOW TENSION':'MODERATE';
+            const intLabel = iHigh?'High tension':iLow?'Low tension':'Moderate';
             return (
               <div key={i} style={{background:swatch['#FAF8F4'],border:`1px solid ${intColor}40`,borderLeft:`3px solid ${intColor}`,padding:'12px 14px',marginBottom:10}}>
                 <div style={{display:'flex',alignItems:'flex-start',gap:8,marginBottom:6,flexWrap:'wrap'}}>
                   <span style={{...serif,fontSize: FS['14'],fontWeight:700,color:swatch.inkMag,flex:1}}>{c.parties?.[0]} vs {c.parties?.[1]}</span>
-                  <span style={{fontSize:FS.micro,fontWeight:800,color:intColor,background:`${intColor}15`,padding:'2px 6px',letterSpacing:'0.05em',flexShrink:0}}>{intLabel}</span>
+                  <span style={{fontSize:chromeFontSize(FS.micro, mobile),fontWeight:800,color:intColor,background:`${intColor}15`,padding:'2px 6px',letterSpacing:'0.05em',flexShrink:0}}>{intLabel}</span>
                 </div>
-                {c.issue  && <p style={{fontSize:FS.sm,color:swatch.inkMag3,margin:'0 0 4px'}}><strong>At issue:</strong> {c.issue}</p>}
-                {c.stakes && <p style={{fontSize:FS.sm,color:swatch.inkMag3,margin:'0 0 8px'}}><strong>Stakes:</strong> {c.stakes}</p>}
+                {c.issue  && <p style={{fontSize:proseFontSize(FS.sm, mobile),color:swatch.inkMag3,margin:'0 0 4px'}}><strong>At issue:</strong> {c.issue}</p>}
+                {c.stakes && <p style={{fontSize:proseFontSize(FS.sm, mobile),color:swatch.inkMag3,margin:'0 0 8px'}}><strong>Stakes:</strong> {c.stakes}</p>}
                 {c.plotHooks?.length > 0 && (
                   <div style={{borderTop:`1px solid ${intColor}30`,paddingTop:8}}>
-                    <div style={{fontSize:FS.xxs,fontWeight:700,color:swatch.magic,textTransform:'uppercase',letterSpacing:'0.05em',marginBottom:4}}>Plot Hooks</div>
+                    <div style={{fontSize:chromeFontSize(FS.xxs, mobile),fontWeight:700,color:swatch.magic,marginBottom:4}}>Plot hooks</div>
                     {c.plotHooks.map((hook,j) => (
                       <div key={j} style={{display:'flex',gap:6,marginBottom:4}}>
                         <span style={{color:swatch.magic,flexShrink:0,fontSize:FS.sm}}>✦</span>
-                        <p style={{fontSize:FS.sm,color:swatch.inkMag,lineHeight:1.45,margin:0}}>{typeof hook==='string'?hook:hook.hook||''}</p>
+                        <p style={{fontSize:proseFontSize(FS.sm, mobile),color:swatch.inkMag,lineHeight:1.45,margin:0}}>{typeof hook==='string'?hook:hook.hook||''}</p>
                       </div>
                     ))}
                   </div>

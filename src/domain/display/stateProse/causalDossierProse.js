@@ -94,7 +94,7 @@ export function causalFamiliesForSection(section) {
  * surviving variant, or when no variant's slots are all filled.
  *
  * @param {DossierJoin} join
- * @param {{seed?: string, audience?: string}} [options]
+ * @param {{seed?: string, audience?: string, tierNoun?: string|null}} [options]
  * @returns {{familyId: string, arm: string, angle: string, section: string, text: string}|null}
  */
 export function readCausalDossierLine(join, options = {}) {

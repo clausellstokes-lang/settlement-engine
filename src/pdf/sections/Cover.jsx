@@ -8,12 +8,13 @@
  *
  * Editable: cover.name, cover.subtitle, cover.tagline, cover.campaign.
  */
-import { Page, View, Text } from '@react-pdf/renderer';
+import { Page, View, Text, Image } from '@react-pdf/renderer';
 import { sheet, palette, type, page as pageGeo, toneBg, pt, swatch } from '../theme.js';
 import { EditableText } from '../primitives/Editable.jsx';
 import { HouseDeviceSeal } from '../primitives/HouseDeviceSeal.jsx';
 import { HouseCountersealSeal } from '../primitives/HouseCountersealSeal.jsx';
 import { HOUSE_MOTTO } from '../../design/organic/logo.js';
+import { BRAND_SEAL_PNG } from '../assets/brandSeal.js';
 import { humanize, num, stripZwnj, cap, label as toLabel } from '../lib/format.js';
 import { formatCount } from '../../domain/formatNumber.js';
 
@@ -212,15 +213,27 @@ export function Cover({ settlement, narrativeMode = false, vm, isFounder = false
 
         {/* ── Title block ───────────────────────────────────────── */}
         {/* Settlement name is plain Text, not a form field. The cover title
-            must always render visibly and be extractable by text tools. */}
-        <View style={{ marginTop: 38 }}>
-          <Text style={{ ...type.cover_title, fontSize: pt['50'] }}>
-            {stripZwnj(name).toUpperCase()}
-          </Text>
-          <View style={{ height: 2, width: 80, backgroundColor: palette.gold, marginTop: 14, marginBottom: 12 }} />
-          <Text style={{ fontFamily: 'Lora', fontSize: pt['13'], color: palette.second, fontStyle: 'italic' }}>
-            {subtitle}
-          </Text>
+            must always render visibly and be extractable by text tools.
+
+            THE HOUSE SEAL stands beside it (ODQ §934.17): the same painted wax the
+            tab icon and the share card carry, struck small at the head of the
+            dossier the way a seal is struck on a charter. It is an inline data URI
+            and not a /public URL — @react-pdf reads an <Image src> string off the
+            filesystem under node and over fetch in the worker, warns on failure and
+            draws NOTHING, so a URL would let the mark vanish from the paid surface
+            without one test going red. The title column takes flex so a long
+            settlement name wraps beside the seal rather than under it. */}
+        <View style={{ marginTop: 38, flexDirection: 'row', alignItems: 'flex-start' }}>
+          <View style={{ flex: 1 }}>
+            <Text style={{ ...type.cover_title, fontSize: pt['50'] }}>
+              {stripZwnj(name).toUpperCase()}
+            </Text>
+            <View style={{ height: 2, width: 80, backgroundColor: palette.gold, marginTop: 14, marginBottom: 12 }} />
+            <Text style={{ fontFamily: 'Lora', fontSize: pt['13'], color: palette.second, fontStyle: 'italic' }}>
+              {subtitle}
+            </Text>
+          </View>
+          <Image src={BRAND_SEAL_PNG} style={{ width: 44, height: 44, marginLeft: 20, marginTop: 6 }} />
         </View>
 
         {/* ── Headline stat strip ──────────────────────────────── */}

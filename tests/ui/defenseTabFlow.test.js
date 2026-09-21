@@ -26,21 +26,30 @@ import { render, cleanup, fireEvent } from '@testing-library/react';
 import { readFileSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
 import { dirname, join } from 'node:path';
-import { DefenseTab } from '../../src/components/new/tabs/DefenseTab.jsx';
+import { DefenseTab, THREAT_ROW_KEY } from '../../src/components/new/tabs/DefenseTab.jsx';
 import { ViabilityTab } from '../../src/components/new/tabs/ViabilityTab.jsx';
 import { generateSettlementPipeline } from '../../src/generators/generateSettlementPipeline.js';
 import {
-  defenseMagicDependencyProse, defenseSupportingProse,
+  defenseMagicDependencyProse, defenseSupportingProse, defenseThreatProse,
 } from '../../src/domain/display/stateProse/defenseStateProse.js';
 import { deriveSupportingCapabilities } from '../../src/domain/display/defenseDisplay.js';
+import { buildThreatAssessment } from '../../src/domain/display/threatAssessment.js';
+import { tierNounFor } from '../../src/domain/display/stateProse/weaveBlock.js';
 import { expectPresentThenAbsent } from '../helpers/anchoredNegatives.js';
 
 const e = React.createElement;
 const HERE = dirname(fileURLToPath(import.meta.url));
 const ROUTER_SRC = join(HERE, '../../src/components/OutputContainer.jsx');
 
-/** The desk's own option bag, spelled exactly as both tabs spell it. */
-const opts = (s) => ({ seed: String(s?._seed ?? s?.id ?? ''), audience: 'dm' });
+/**
+ * The desk's own option bag, spelled exactly as both tabs spell it — `tierNoun` included
+ * since §934.22's addendum, because that is the field that decides whether the sentence the
+ * desk returns is the sentence the tab renders. A bag here that had fallen behind the tabs'
+ * would make every arm below assert against a sentence no surface produces.
+ */
+const opts = (s) => ({
+  seed: String(s?._seed ?? s?.id ?? ''), audience: 'dm', tierNoun: tierNounFor(s?.tier),
+});
 
 /** Open a collapsed `Section` by its title, so its children reach the DOM. */
 function openSection(container, title) {
@@ -177,5 +186,92 @@ describe('DS-DEF-9 at viability.magicDependency — the registry\'s first cross-
     expect(substrateCase, 'the anchor route left the router').toBeTruthy();
     // anchored: the viability assertions above prove the same reader finds the flag
     expect(substrateCase).not.toContain('publicDossier={publicDossier}');
+  });
+});
+
+describe('DS-DEF-2 at defense.threatAssessment — each sentence under ITS OWN bar (owner finding 3, 2026-09-18)', () => {
+  /**
+   * ⛔ THE LABEL JOIN IS PROVED TOTAL IN BOTH DIRECTIONS, and this arm is the reason
+   * `THREAT_ROW_KEY` may be a label map at all. `buildThreatAssessment` returns rows carrying
+   * no machine key, so the tab pairs sentence to bar by label; a label the map does not know
+   * draws nothing, and a map key no row emits is a dead pairing. Either drift would leave a
+   * bar silent while every walker in the estate stayed green, so neither side may grow a
+   * member the other does not have.
+   */
+  test('THE JOIN IS TOTAL: the map\'s keys are exactly the labels the builder emits', () => {
+    const labels = buildThreatAssessment(port).map((row) => row.label);
+    expect(labels.length, 'the builder stopped emitting five rows').toBe(5);
+    expect([...labels].sort()).toEqual(Object.keys(THREAT_ROW_KEY).sort());
+    // …and every value is a key the desk really answers on, so no row maps to a pool that
+    // does not exist. `defenseThreatProse` returns exactly these five keys.
+    expect([...Object.values(THREAT_ROW_KEY)].sort())
+      .toEqual(Object.keys(defenseThreatProse(port, opts(port))).sort());
+  });
+
+  test('each drawn sentence renders INSIDE the card of the bar it is about', () => {
+    const drawn = defenseThreatProse(port, opts(port));
+    const { container } = render(e(DefenseTab, { settlement: port, narrativeNote: null }));
+    let judged = 0;
+    for (const { label } of buildThreatAssessment(port)) {
+      const sentence = drawn[THREAT_ROW_KEY[label]]?.sentence;
+      if (!sentence) continue; // R-DST-K: a row the corpus is silent about shows nothing.
+      judged += 1;
+      // The card is the element that carries this row's LABEL; the sentence must be inside it.
+      const labelSpan = [...container.querySelectorAll('span')]
+        .find((el) => el.textContent === label);
+      expect(labelSpan, `no bar rendered for ${label}`).toBeTruthy();
+      const card = labelSpan.closest('div[style*="border-left"], div[style*="borderLeft"]')
+        || labelSpan.parentElement.parentElement;
+      expect(card.textContent, `${label}: its sentence is not under its own bar`).toContain(sentence);
+    }
+    expect(judged, 'no threat row drew a sentence, so this arm judged nothing').toBeGreaterThan(0);
+  });
+
+  test('…and NO sentence stack survives above the bars', () => {
+    const drawn = defenseThreatProse(port, opts(port));
+    const { container } = render(e(DefenseTab, { settlement: port, narrativeNote: null }));
+    const caption = [...container.querySelectorAll('div')]
+      .find((el) => el.textContent.startsWith('Bars show the settlement'));
+    expect(caption, 'the Threat Assessment caption is gone').toBeTruthy();
+    // STRUCTURAL: the caption is followed IMMEDIATELY by the bar list. The retired stack was
+    // the element in between, so its return moves this sibling and reds here.
+    const next = caption.nextElementSibling;
+    expect(next, 'nothing follows the Threat Assessment caption').toBeTruthy();
+    for (const { label } of buildThreatAssessment(port)) {
+      expect(next.textContent, `the caption's next sibling is not the bar list (${label} missing)`)
+        .toContain(label);
+    }
+    // AND BY TEXT ORDER, which is what a reader experiences: every drawn sentence appears
+    // AFTER the label of the bar it belongs to, never before the first bar.
+    const text = container.textContent;
+    let judged = 0;
+    for (const { label } of buildThreatAssessment(port)) {
+      const sentence = drawn[THREAT_ROW_KEY[label]]?.sentence;
+      if (!sentence) continue;
+      judged += 1;
+      expect(text.indexOf(sentence), `${label}: its sentence does not follow its own bar`)
+        .toBeGreaterThan(text.indexOf(label));
+    }
+    expect(judged, 'no threat row drew a sentence, so the ordering arm judged nothing').toBeGreaterThan(0);
+  });
+
+  test('THE PUBLIC GATE still silences all five rows together', () => {
+    const drawn = defenseThreatProse(port, opts(port));
+    const priv = render(e(DefenseTab, { settlement: port, narrativeNote: null, publicDossier: false }));
+    const privText = priv.container.textContent;
+    cleanup();
+    const pub = render(e(DefenseTab, { settlement: port, narrativeNote: null, publicDossier: true }));
+    const pubText = pub.container.textContent;
+    let judged = 0;
+    for (const key of Object.values(THREAT_ROW_KEY)) {
+      const sentence = drawn[key]?.sentence;
+      if (!sentence) continue;
+      judged += 1;
+      expectPresentThenAbsent(privText, pubText, sentence, `public gate: the DS-DEF-2 ${key} row`);
+    }
+    expect(judged, 'no threat row drew a sentence, so the gate arm judged nothing').toBeGreaterThan(0);
+    // The DATUM survives: every bar, its band word and its label still render for the
+    // anonymous viewer — this is a gate on the prose, not a blank.
+    for (const { label } of buildThreatAssessment(port)) expect(pubText).toContain(label);
   });
 });

@@ -25,6 +25,8 @@ import {
   SP,
   sans,
 } from '../theme.js';
+import useIsMobile from '../../hooks/useIsMobile.js';
+import { chromeFontSize } from '../../design/proseScale.js';
 
 const SOURCE_LABEL = Object.freeze({
   account_deletion: 'Account deletion',
@@ -65,6 +67,7 @@ function ageLabel(seconds) {
 }
 
 function QueueSummary({ label, facts }) {
+  const mobile = useIsMobile();
   const visibleFacts = Object.entries(facts || {})
     .filter(([, value]) => typeof value === 'number' && value > 0);
   return (
@@ -82,11 +85,11 @@ function QueueSummary({ label, facts }) {
       </div>
       <div style={{ display: 'flex', flexWrap: 'wrap', gap: SP.sm, marginTop: 4 }}>
         {visibleFacts.length === 0 ? (
-          <span style={{ fontFamily: sans, fontSize: FS.xs, color: MUTED }}>
+          <span style={{ fontFamily: sans, fontSize: chromeFontSize(FS.xs, mobile), color: MUTED }}>
             No active obligations.
           </span>
         ) : visibleFacts.map(([key, value]) => (
-          <span key={key} style={{ fontFamily: sans, fontSize: FS.xs, color: BODY }}>
+          <span key={key} style={{ fontFamily: sans, fontSize: chromeFontSize(FS.xs, mobile), color: BODY }}>
             {key.replace(/([A-Z])/g, ' $1').toLowerCase()} {finiteCount(value)}
           </span>
         ))}
@@ -96,6 +99,7 @@ function QueueSummary({ label, facts }) {
 }
 
 export default function AdminOperationalHealthPanel() {
+  const mobile = useIsMobile();
   const [health, setHealth] = useState(null);
   const [attention, setAttention] = useState([]);
   const [notes, setNotes] = useState({});
@@ -187,14 +191,14 @@ export default function AdminOperationalHealthPanel() {
             marginLeft: SP.sm,
             color: MUTED,
             fontFamily: sans,
-            fontSize: FS.xs,
+            fontSize: chromeFontSize(FS.xs, mobile),
           }}>
             Acknowledged work remains active until its worker completes it.
           </span>
         </div>
         <div style={{ display: 'flex', alignItems: 'center', gap: SP.sm }}>
           {refreshedAt && (
-            <span style={{ color: MUTED, fontFamily: sans, fontSize: FS.xs }}>
+            <span style={{ color: MUTED, fontFamily: sans, fontSize: chromeFontSize(FS.xs, mobile) }}>
               refreshed {new Date(refreshedAt).toLocaleString('en-US')}
             </span>
           )}
@@ -252,7 +256,7 @@ export default function AdminOperationalHealthPanel() {
             width: '100%',
             borderCollapse: 'collapse',
             fontFamily: sans,
-            fontSize: FS.xs,
+            fontSize: chromeFontSize(FS.xs, mobile),
           }}>
             <caption style={{
               position: 'absolute',
@@ -342,7 +346,7 @@ export default function AdminOperationalHealthPanel() {
                               padding: `${SP.xs}px`,
                               color: INK,
                               fontFamily: sans,
-                              fontSize: FS.xs,
+                              fontSize: chromeFontSize(FS.xs, mobile),
                             }}
                           />
                           <Button

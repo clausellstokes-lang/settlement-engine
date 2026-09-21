@@ -14,6 +14,8 @@ import { useStore } from '../../store/index.js';
 import {
   INK, SECOND, BODY, BORDER, sans, SP, FS, swatch } from '../theme.js';
 import Section from './AccountSection.jsx';
+import useIsMobile from '../../hooks/useIsMobile.js';
+import { chromeFontSize, proseFontSize } from '../../design/proseScale.js';
 
 const PDF_STYLES = [
   { key: 'classic', label: 'Classic' },
@@ -34,6 +36,7 @@ function selectStyle() {
 // so the click/tap target reaches ~44px and the text is programmatically tied
 // to its control (mirrors VisibilityToggle in AccountDataPrivacySection).
 function PrefRow({ label, desc, htmlFor, children }) {
+  const mobile = useIsMobile();
   const Wrapper = htmlFor ? 'label' : 'div';
   const wrapperProps = htmlFor
     ? { htmlFor, style: { display: 'flex', gap: SP.md, alignItems: 'flex-start', padding: `${SP.md}px 0`, cursor: 'pointer' } }
@@ -44,7 +47,7 @@ function PrefRow({ label, desc, htmlFor, children }) {
         <div style={{ fontSize: FS.sm, fontWeight: 700, color: INK }}>
           {label}
         </div>
-        {desc && <div style={{ fontSize: FS.xs, color: BODY, marginTop: 2, lineHeight: 1.45 }}>{desc}</div>}
+        {desc && <div style={{ fontSize: proseFontSize(FS.xs, mobile), color: BODY, marginTop: 2, lineHeight: 1.45 }}>{desc}</div>}
       </div>
       <div style={{ flexShrink: 0 }}>{children}</div>
     </Wrapper>
@@ -52,12 +55,13 @@ function PrefRow({ label, desc, htmlFor, children }) {
 }
 
 export default function AccountPreferencesSection() {
+  const mobile = useIsMobile();
   const prefs = useStore(s => s.productPrefs) || {};
   const setProductPref = useStore(s => s.setProductPref);
 
   return (
     <Section title="Product Preferences">
-      <p style={{ fontSize: FS.xs, color: BODY, margin: `0 0 ${SP.sm}px`, lineHeight: 1.5, fontFamily: sans }}>
+      <p style={{ fontSize: proseFontSize(FS.xs, mobile), color: BODY, margin: `0 0 ${SP.sm}px`, lineHeight: 1.5, fontFamily: sans }}>
         Defaults for new settlements, campaigns, and exports. These do not change anything you have already made.
       </p>
 
@@ -110,7 +114,7 @@ export default function AccountPreferencesSection() {
         />
       </PrefRow>
 
-      <div style={{ fontSize: FS.xs, color: SECOND, marginTop: SP.md }}>
+      <div style={{ fontSize: chromeFontSize(FS.xs, mobile), color: SECOND, marginTop: SP.md }}>
         Preferences save automatically.
       </div>
     </Section>

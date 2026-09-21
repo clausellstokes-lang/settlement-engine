@@ -97,21 +97,42 @@ export default function MobileTabStrip({
     }
   };
 
+  // THE CUE HAS TO READ (2026-09-18). The edge overlay was 24px of the strip's
+  // OWN background laid over that same background, reaching full opacity only at
+  // 10%: against parchment it changed no colour at all and barely veiled the last
+  // tab's final letters, so a clipped strip looked like a complete row that
+  // happened to end where the screen did. Measured on a 375px phone, the Systems
+  // group is 554px of tabs in a 349px strip — five of its eight tabs sit
+  // off-screen — and nothing on the surface said so.
+  //
+  // The fade is now wide enough to genuinely take the text out, and it carries the
+  // SAME ‹ › chevron the desktop strip uses on its scroll buttons, so the two
+  // strips say "there is more this way" in one vocabulary. The overlay stays
+  // DECORATIVE — aria-hidden, pointer-events none — because the gesture here is a
+  // swipe and the keyboard path is the tablist's own arrow keys; a tappable
+  // control at this position would sit on top of a real tab.
   const fade = (side) => ({
     position: 'absolute',
     top: 0,
     bottom: 0,
     [side]: 0,
-    width: 24,
+    width: 34,
     zIndex: 2,
     pointerEvents: 'none',
-    background: `linear-gradient(to ${side === 'left' ? 'right' : 'left'}, ${CARD_HDR} 10%, transparent)`,
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: side === 'left' ? 'flex-start' : 'flex-end',
+    padding: `0 ${SP.xs}px`,
+    color: MUTED,
+    fontSize: FS.lg,
+    fontWeight: 700,
+    background: `linear-gradient(to ${side === 'left' ? 'right' : 'left'}, ${CARD_HDR} 45%, transparent)`,
   });
 
   return (
     <div style={{ position: 'relative', borderBottom: `1px solid ${BORDER}`, background: CARD_HDR }}>
-      {edges.left && <span aria-hidden="true" style={fade('left')} />}
-      {edges.right && <span aria-hidden="true" style={fade('right')} />}
+      {edges.left && <span aria-hidden="true" style={fade('left')}>{'‹'}</span>}
+      {edges.right && <span aria-hidden="true" style={fade('right')}>{'›'}</span>}
       {/* eslint-disable-next-line jsx-a11y/interactive-supports-focus -- roving tabIndex lives on the child tabs (WAI-ARIA tabs pattern); the tablist forwards arrow keys but is not itself a focus stop */}
       <div
         ref={scrollRef}

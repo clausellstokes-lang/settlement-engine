@@ -1,6 +1,7 @@
 import { Loader2 } from 'lucide-react';
 import { useIconsOn } from './IconsContext.js';
 import useIsMobile from '../../hooks/useIsMobile.js';
+import { chromeFontSize } from '../../design/proseScale.js';
 import {
   AMBER, AMBER_BG, AMBER_DEEP, BLUE, BLUE_BG, FS,
   GOLD, GOLD_SOFT, GOLD_TXT, GREEN, GREEN_BG, INK, RED, RED_BG, R, SECOND, SP,
@@ -99,7 +100,10 @@ const VARIANTS = {
 // in small increments (sm 28→32, md 34→40, lg 40→44) so every caller inherits a
 // more reachable target without a rhythm-breaking jump in dense rows. Padding is
 // unchanged; minHeight does the lifting.
+// The DESKTOP ladder. The phone floor is applied where the ladder is READ, at the
+// `fontSize:` in the style below — the only place the viewport flag is bound.
 const SIZES = {
+  // phone-floor: floored at the read below.
   sm: { fontSize: FS.xs, padding: `${SP.xs}px ${SP.sm}px`, icon: 12, minHeight: 32 },
   md: { fontSize: FS.sm, padding: `${SP.sm}px ${SP.md}px`, icon: 14, minHeight: 40 },
   lg: { fontSize: FS.md, padding: `${SP.md}px ${SP.lg}px`, icon: 16, minHeight: 44 },
@@ -160,7 +164,7 @@ export default function Button({
         '--sf-btn-bg': v.bg,
         color: v.fg,
         fontFamily: sans,
-        fontSize: s.fontSize,
+        fontSize: chromeFontSize(s.fontSize, isMobile),
         fontWeight: 800,
         cursor: inert ? 'not-allowed' : 'pointer',
         opacity: inert ? 0.62 : 1,

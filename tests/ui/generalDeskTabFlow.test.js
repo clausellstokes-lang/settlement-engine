@@ -38,13 +38,51 @@ import { RelationshipsTab } from '../../src/components/new/tabs/RelationshipsTab
 import { useStore } from '../../src/store/index.js';
 import { generalDeskLines } from '../../src/components/new/generalDeskRead.js';
 import { generateSettlementPipeline } from '../../src/generators/generateSettlementPipeline.js';
-import { expectPresentThenAbsent } from '../helpers/anchoredNegatives.js';
+import { expectAbsentWithAnchor, expectPresentThenAbsent } from '../helpers/anchoredNegatives.js';
 import { drawnMember, drawnMembers, poolMemberTexts } from '../helpers/drawnProse.js';
 import { collectSeedFailures, expectNoSeedFailures } from '../helpers/seedFailures.js';
 import { calamityFill } from '../../src/domain/display/stateProse/generalStateProse.js';
+import { tierNounFor, weaveBlock } from '../../src/domain/display/stateProse/weaveBlock.js';
+// The two token lists PlotHooksTab derives and hands to the desk — the cap arm below drives
+// the same derivation so the framing it counts is the framing the page is given.
+import { collectPlotHooks } from '../../src/domain/dossier/plotHooks.js';
+import { deriveEscalationClocks } from '../../src/domain/hookEscalation.js';
 
 const e = React.createElement;
 afterEach(cleanup);
+
+/**
+ * ⭐ THE ANCHOR AS THE PAGE ACTUALLY PRINTS IT (owner finding, 2026-09-18) — and why this is
+ * still an EXACT assertion rather than a loosened one.
+ *
+ * Every stacked position now renders ONE paragraph through `ProseBlock`, which stands a
+ * REPEATED opening settlement name down to the tier noun: the third sentence of the site
+ * block moved from "Steinmark is administered, visibly…" to "The town is administered,
+ * visibly…". That is a REAL, INTENDED change to reader-facing output, and the arms below went
+ * red on it exactly as they should have — they pin the rendered DOM, and the DOM moved.
+ *
+ * ⛔ THE REPAIR IS NOT A SUBSTRING. Anchoring on a sentence's tail would have made every arm
+ * in this file survive a desk that had stopped drawing the pool. Instead the anchor is put
+ * through THE SHIPPED WEAVE, at the position and index the DESK itself hands the renderer, so
+ * what is asserted is the whole claim it always was plus one more: this block, at this pool,
+ * over this state, reaches the DOM in the form the page really prints. A desk that drew a
+ * different member, lost a fill or went silent still reds on the liveness half — an anchor
+ * that is not in the position's own list comes back UNCHANGED from here and fails loudly.
+ *
+ * @param {string} sentence the member the corpus drew, from `drawnMembers`
+ * @param {ReadonlyArray<string|null|undefined>} lines the position's lines, as the DESK built
+ *   them — the same array, in the same order, the component hands `ProseBlock`
+ * @param {{name?: unknown, tier?: unknown}} settlement the fixture being rendered
+ * @returns {string}
+ */
+function onPage(sentence, lines, settlement) {
+  const kept = (lines || []).filter(Boolean);
+  const index = kept.indexOf(sentence);
+  if (index < 0) return sentence;
+  return weaveBlock(kept, {
+    settlementName: settlement.name, tierNoun: tierNounFor(settlement.tier),
+  }).sentences[index];
+}
 
 /**
  * ⭐ EVERY ANCHOR IN THIS FILE IS A FUNCTION OF THE SEED (REWRITE car 8a-13), and the rule for
@@ -181,21 +219,97 @@ describe('THE GENERAL DESK DRAWS ON THE OVERVIEW TAB — and is silent for a fre
     const priv = renderTab(false);
     cleanup();
     const pub = renderTab(true);
+    // The DESK's own lines for each woven position, so every anchor below is put through the
+    // weave at the index the renderer sees (`onPage`). DS-GEN-2's conflict lines are NOT
+    // woven — they are index-paired with the caller's own conflict rows and render one per
+    // row — so that anchor travels as the corpus drew it.
+    const desk = generalDeskLines(SPEAKING, { publicDossier: false, stresses: [] }).overview;
     // ⛔ COLLECT-THEN-ASSERT (car 8a-13). A bare `for` over pins throws on the FIRST one, so
     // the §919 whole-suite proof printed nine failing sentences over SIXTEEN moved pins and
     // the seven behind them were invisible. Every position now runs and the roster travels
     // with the true count (tests/helpers/seedFailures.js).
     expectNoSeedFailures(collectSeedFailures([
-      [GROUND, 'DS-GEN-12 the ground (overview.ground)'],
-      [MARKET, 'DS-GEN-13 the market (overview.market)'],
-      [INSTITUTIONS, 'DS-GEN-17 the roster (overview.institutions)'],
-      [HEALTH, 'DS-GEN-3 systems health (overview.systemsHealth)'],
+      [onPage(GROUND, desk.siteLines, SPEAKING), 'DS-GEN-12 the ground (overview.ground)'],
+      [onPage(MARKET, desk.siteLines, SPEAKING), 'DS-GEN-13 the market (overview.market)'],
+      [onPage(INSTITUTIONS, desk.siteLines, SPEAKING), 'DS-GEN-17 the roster (overview.institutions)'],
+      // DS-GEN-3 (overview.systemsHealth) is NOT in this list since owner order 2026-09-17:
+      // that position glances, and the arm below pins its silence in the DOM.
       [CONFLICT, 'DS-GEN-2 the conflict line (overview.conflicts)'],
-      [WARNING, 'DS-GEN-7 the coherence warning (overview.warnings)'],
-      [CONNECTION, 'DS-REL-2 the notable connection (overview.notableConnection)'],
+      [onPage(WARNING, desk.warningLines, SPEAKING), 'DS-GEN-7 the coherence warning (overview.warnings)'],
+      [onPage(CONNECTION, desk.connectionLines, SPEAKING), 'DS-REL-2 the notable connection (overview.notableConnection)'],
     ], ([sentence, label]) => expectPresentThenAbsent(
       priv, pub, sentence, `the general desk at ${label}`,
     )), 'every Overview position draws privately and is silent on a public dossier');
+  });
+
+  test('SYSTEMS HEALTH keeps its bars and prints NO sentence list under them (owner order 2026-09-17)', () => {
+    // The owner: "Regarding the 10 different sentences, either simply pick just one or remove
+    // that entire section." The chair ruled REMOVE. The section is found by its own header, so
+    // the absence below is judged inside the section that used to print the stack.
+    const BAR_LABELS = ['Military Might', 'Monster Defense', 'Internal Security', 'Economic Resilience', 'Magical Capability', 'Food Security'];
+    const towns = [
+      SPEAKING,
+      ...[['town', 'germanic'], ['city', 'norse'], ['village', 'celtic']].map(([settType, culture], i) => (
+        generateSettlementPipeline({ settType, culture }, null, { seed: `health-stack-${i}`, customContent: {} }))),
+    ];
+    for (const town of towns) {
+      const { container } = render(e(OverviewTab, {
+        settlement: town, narrativeNote: null, onNavigateTab: () => {},
+        publicDossier: false, playerView: false, worldState: null,
+      }));
+      const header = [...container.querySelectorAll('button')].find((b) => (b.textContent || '').includes('Systems Health'));
+      expect(header, `${town.name}: the Systems Health section is gone`).toBeTruthy();
+      const host = header.closest('div');
+      const text = host.textContent || '';
+      // THE BARS AND THEIR LABELS STILL RENDER — the datum was never the stack.
+      for (const label of BAR_LABELS.slice(0, 5)) expect(text, `${town.name}: the ${label} bar is gone`).toContain(label);
+      if (town.economicState?.foodSecurity?.label) expect(text).toContain('Food Security');
+      // …AND NO SENTENCE LIST. Every DS-GEN-3 line was a <p> in this section; nothing else in
+      // it is (the caption is a div, the badge is spans), so a returning stack reds here.
+      expect(host.querySelectorAll('p').length, `${town.name}: a sentence list is back under the Systems Health bars`).toBe(0);
+      cleanup();
+    }
+    // The drawn DS-GEN-3 member SPEAKING used to print here is absent from the whole page,
+    // anchored on the bar label that sits in the same section.
+    const priv = renderTab(false);
+    expectAbsentWithAnchor(priv, HEALTH, 'Internal Security', 'DS-GEN-3 still prints under the Systems Health bars');
+  });
+
+  test('⛔ THE OVERVIEW NEVER PRINTS "NO CRISIS" BESIDE ITS OWN CRISIS BANNER (owner order 2026-09-17)', () => {
+    // The Kamalavalli contradiction: a Politically Fractured card with its Active crisis badge,
+    // then "There is no crisis on the books…". Driven over generated crisis towns in the DOM,
+    // with the no-crisis pool's every member filled for the town, so no wording escapes.
+    const crisisConfigs = [
+      { settType: 'village', culture: 'celtic', stressTypes: ['politically_fractured'] },
+      { settType: 'town', culture: 'germanic', stressTypes: ['famine'] },
+      { settType: 'city', culture: 'norse', stressTypes: ['famine', 'wartime'] },
+    ];
+    let judged = 0;
+    for (const [i, config] of crisisConfigs.entries()) {
+      const town = generateSettlementPipeline(config, null, { seed: `one-crisis-truth-${i}`, customContent: {} });
+      const noCrisis = poolMemberTexts({
+        leaf: 'stressors', blockId: 'DS-STR-1', poolKey: "Overview's own section framing", slots: { settlement: town.name },
+      });
+      for (const playerView of [false, true]) {
+        const text = render(e(OverviewTab, {
+          settlement: town, narrativeNote: null, onNavigateTab: () => {},
+          publicDossier: false, playerView, worldState: null,
+        })).container.textContent;
+        cleanup();
+        if (!text.includes('Active crisis')) continue;
+        judged += 1;
+        for (const sentence of noCrisis) {
+          expectAbsentWithAnchor(text, sentence, 'Active crisis', `${town.name} prints a no-crisis line beside its own crisis banner`);
+        }
+      }
+    }
+    expect(judged, 'no generated town rendered a crisis banner, so this arm judged nothing').toBeGreaterThan(0);
+    // STRUCTURAL: the Overview's crisis block does not draw the no-banner rung at all, because
+    // that block exists only when there IS a banner (R-DST-K keeps the calm town silent too).
+    const source = readFileSync(join(HERE, '../../src/components/new/tabs/OverviewTab.jsx'), 'utf8');
+    const code = source.replace(/\/\*[\s\S]*?\*\//g, '').replace(/\/\/[^\n]*/g, '');
+    expectAbsentWithAnchor(code, 'stressorProse.crisisFraming', 'stressorProse.crisisArity',
+      'OverviewTab draws the no-crisis rung inside its crisis block again');
   });
 
   test('the gate takes the CORPUS SENTENCES ONLY — every datum on the page survives it', () => {
@@ -205,19 +319,21 @@ describe('THE GENERAL DESK DRAWS ON THE OVERVIEW TAB — and is silent for a fre
     expect(pub).toContain('The Guild');
     expect(pub).toContain('The Council');
     expect(pub).toContain('Labor control');
-    expect(pub).toContain('HIGH');
+    expect(pub).toContain('High');
     // The Notable Connection DATUM survives too — only the banded sentence above it goes.
     expect(pub).toContain('Mugain and Felix are connected by something neither discusses openly.');
   });
 });
 
 describe('THE ONE CALLER — the reader, not the tabs, holds the desk and the gate', () => {
-  test('all eight Overview positions draw through the reader, and go silent as one', () => {
+  test('the Overview positions draw through the reader, and go silent as one', () => {
     const drawn = generalDeskLines(SPEAKING, { publicDossier: false, stresses: [] }).overview;
-    // Every position the desk owns speaks on this town, so the silence below is a gate
-    // rather than a town with nothing to say.
+    // Every SPEAKING position the desk owns speaks on this town, so the silence below is a
+    // gate rather than a town with nothing to say.
     expect(drawn.siteLines.length, 'ground + market + institutions').toBe(3);
-    expect(drawn.healthLines.length, 'DS-GEN-3 lenses').toBeGreaterThan(0);
+    // DS-GEN-3 GLANCES since owner order 2026-09-17: the reader draws no sentence there even
+    // privately, and the six positions around it prove the reader is live.
+    expect(drawn.healthLines, 'overview.systemsHealth glances, so no DS-GEN-3 line is drawn').toEqual([]);
     expect(drawn.originLines.length, 'DS-GEN-6 route + tier overlay').toBe(2);
     expect(drawn.warningLines.length, 'DS-GEN-7').toBeGreaterThan(0);
     expect(drawn.conflictLines.filter(Boolean).length, 'DS-GEN-2').toBe(1);
@@ -378,11 +494,15 @@ describe('THE HISTORY CHAPTER DRAWS ON THE HISTORY TAB — and is silent for a f
     const priv = renderHistory(false);
     cleanup();
     const pub = renderHistory(true);
+    // DS-GEN-14 and DS-GEN-16 render as ONE paragraph under the identity header, in that
+    // order; DS-GEN-9's four lenses are their own woven position below it.
+    const hist = generalDeskLines(CHRONICLED, { publicDossier: false }).history;
+    const foundedRecord = [hist.foundedLine, hist.recordLine];
     expectNoSeedFailures(collectSeedFailures([
-      [IDENTITY, 'DS-GEN-9 the founding line (history.identity)'],
-      [MARKER, 'DS-GEN-9 the marker event (history.identity)'],
-      [FOUNDED, 'DS-GEN-14 founded once, grown since (history.founded)'],
-      [RECORD, 'DS-GEN-16 what the record carries (history.record)'],
+      [onPage(IDENTITY, hist.identityLines, CHRONICLED), 'DS-GEN-9 the founding line (history.identity)'],
+      [onPage(MARKER, hist.identityLines, CHRONICLED), 'DS-GEN-9 the marker event (history.identity)'],
+      [onPage(FOUNDED, foundedRecord, CHRONICLED), 'DS-GEN-14 founded once, grown since (history.founded)'],
+      [onPage(RECORD, foundedRecord, CHRONICLED), 'DS-GEN-16 what the record carries (history.record)'],
     ], ([sentence, label]) => expectPresentThenAbsent(
       priv, pub, sentence, `the general desk at ${label}`,
     )), 'every history position draws privately and is silent on a public dossier');
@@ -403,8 +523,10 @@ describe('THE HISTORY CHAPTER DRAWS ON THE HISTORY TAB — and is silent for a f
     const priv = renderHistory(false);
     expect(priv, 'a doubled article reached the page').not.toMatch(/\bThe The\b/); // anchored: the toContain(RECORD) below proves this same render drew a corpus sentence from the calamity pool
     // ANCHORED: the same render really did draw the record line, so the absence above is the
-    // fix holding rather than the block having fallen silent.
-    expect(priv).toContain(RECORD);
+    // fix holding rather than the block having fallen silent. The record line is the SECOND
+    // sentence of its woven paragraph, so the page prints it with its opening name stood down.
+    const hist = generalDeskLines(CHRONICLED, { publicDossier: false }).history;
+    expect(priv).toContain(onPage(RECORD, [hist.foundedLine, hist.recordLine], CHRONICLED));
     // And no unfilled seam survived into the page.
     expect(priv, 'an unfilled slot reached the reader').not.toMatch(/\{[a-z_]+\}/i); // anchored: the toContain(RECORD) two lines up proves the page carries corpus prose at all
     // ⛔ AND THE DEFECT'S REAL SUBJECT IS NOT LEFT TO SEED LUCK (car 8a-13). Only TWO of
@@ -468,14 +590,20 @@ describe('THE VIABILITY VERDICT DRAWS — and is silent for a free viewer', () =
     const pub = render(e(ViabilityTab, {
       settlement: UNVIABLE, narrativeNote: null, publicDossier: true,
     })).container.textContent;
+    // The verdict's three lenses render as ONE woven paragraph, so each anchor is taken in
+    // the form the page prints it (see `onPage`).
+    const verdict = generalDeskLines(UNVIABLE, { publicDossier: false }).viability.verdictLines;
     expectNoSeedFailures(collectSeedFailures([
-      [VERDICT, 'the verdict'], [CONTRADICTIONS, 'the contradiction count'],
-      [FIRST_SURVEY, 'the first-survey caveat'],
+      [onPage(VERDICT, verdict, UNVIABLE), 'the verdict'],
+      [onPage(CONTRADICTIONS, verdict, UNVIABLE), 'the contradiction count'],
+      [onPage(FIRST_SURVEY, verdict, UNVIABLE), 'the first-survey caveat'],
     ], ([sentence, label]) => expectPresentThenAbsent(
       priv, pub, sentence, `DS-GEN-11 ${label} (viability.verdict)`,
     )), 'all three DS-GEN-11 lenses draw privately and none reaches a public dossier');
     // The DATUM survives the gate: the headline and the pill keep their own words.
-    expect(pub).toContain('NOT COHERENT');
+    // The word moved with the lift: both surfaces now read domain/display/viabilityVerdict.js,
+    // which speaks the verdict at rung 3 ('Not viable') instead of the tab's old private shout.
+    expect(pub).toContain('Not viable');
     expect(pub).toContain('2 critical');
   });
 
@@ -521,6 +649,41 @@ describe('THE HOOK FRAMING DRAWS — and is silent for a free viewer', () => {
     expect(priv.length, 'the public render was not shorter — the gate drew nothing')
       .toBeGreaterThan(pub.length);
     expect(pub, 'an unfilled seam reached a free viewer').not.toMatch(/\{[a-z_]+\}/i); // anchored: the toContain hook-prose assertion above proves the public render is non-empty
+  });
+
+  /**
+   * ⭐ THE FRAMING IS CAPPED AT THREE SENTENCES (owner finding 4, 2026-09-18), and the cap is
+   * proved on a REAL town rather than the hand fixture above: DS-HK-1 draws one line per hook
+   * category the page carries plus one per live escalation clock, so a generated town reaches
+   * SIX OR SEVEN — a page of preamble above the hooks it is meant to frame, every sentence
+   * opening on the town's name. The hand fixture could never show that; a town with 31 hooks
+   * across six categories does.
+   */
+  test('THE CAP: a real town draws six framing lines and the page prints the first three, woven', () => {
+    const town = generateSettlementPipeline(
+      { settType: 'town', culture: 'germanic' }, null, { seed: 'hooks-a', customContent: {} },
+    );
+    const hooks = collectPlotHooks(town);
+    const { framingLines } = generalDeskLines(town, {
+      publicDossier: false,
+      hookCategories: hooks.map((h) => h && h.category),
+      clockIds: deriveEscalationClocks(town).map((c) => c && c.id),
+    }).hooks;
+    // NON-VACUITY: the cap means nothing unless the desk really draws past it.
+    expect(framingLines.length, 'this town no longer overflows the cap, so the arm is free')
+      .toBeGreaterThan(3);
+    const text = render(e(PlotHooksTab, { settlement: town, publicDossier: false }))
+      .container.textContent;
+    // The first three render AS ONE WOVEN PARAGRAPH — the exact string, not a substring of it.
+    const woven = weaveBlock(framingLines.slice(0, 3), {
+      settlementName: town.name, tierNoun: tierNounFor(town.tier),
+    }).paragraph;
+    expect(text, 'the capped framing paragraph is not on the page').toContain(woven);
+    // …and every line past the cap is DROPPED. ANCHORED on the woven paragraph itself, so a
+    // page that had stopped drawing the framing entirely cannot pass this half.
+    for (const dropped of framingLines.slice(3)) {
+      expectAbsentWithAnchor(text, dropped, woven, 'a framing line past the cap reached the page');
+    }
   });
 
   test('the ROUTER threads publicDossier to the plot-hooks tab', () => {

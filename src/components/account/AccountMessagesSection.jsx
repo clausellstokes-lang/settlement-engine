@@ -9,6 +9,8 @@ import Button from '../primitives/Button.jsx';
 import Pill from '../primitives/Pill.jsx';
 import Section from './AccountSection.jsx';
 import { useOperatorMessages } from './OperatorMessagesProvider.jsx';
+import useIsMobile from '../../hooks/useIsMobile.js';
+import { chromeFontSize } from '../../design/proseScale.js';
 
 function formatMessageDate(value) {
   if (!value) return 'Date unavailable';
@@ -28,6 +30,7 @@ function senderRoleLabel(senderRole) {
 }
 
 export default function AccountMessagesSection({ onReply }) {
+  const mobile = useIsMobile();
   const { messages, loading, loadingMore, hasMore, error, refresh, loadMore, markRead } = useOperatorMessages();
   const [selectedId, setSelectedId] = useState(null);
   const selected = useMemo(
@@ -64,9 +67,9 @@ export default function AccountMessagesSection({ onReply }) {
                 <Pill bg={selected.messageClass === 'announcement' ? GOLD_SOFT : CARD_HDR} color={selected.messageClass === 'announcement' ? GOLD_TXT : BODY}>
                   {classLabel(selected.messageClass)}
                 </Pill>
-                <span style={{ color: BODY, fontSize: FS.xs }}>{formatMessageDate(selected.createdAt || selected.deliveredAt)}</span>
+                <span style={{ color: BODY, fontSize: chromeFontSize(FS.xs, mobile) }}>{formatMessageDate(selected.createdAt || selected.deliveredAt)}</span>
               </div>
-              <div style={{ color: SECOND, fontSize: FS.xs, marginBottom: SP.xs }}>
+              <div style={{ color: SECOND, fontSize: chromeFontSize(FS.xs, mobile), marginBottom: SP.xs }}>
                 SettlementForge · {senderRoleLabel(selected.senderRole)}
               </div>
               <h3 id={`operator-message-${selected.id}`} style={{ color: INK, fontSize: FS.xl, margin: `0 0 ${SP.md}px` }}>
@@ -112,8 +115,8 @@ export default function AccountMessagesSection({ onReply }) {
                       <Pill bg={message.messageClass === 'announcement' ? GOLD_SOFT : CARD_HDR} color={message.messageClass === 'announcement' ? GOLD_TXT : BODY}>
                         {classLabel(message.messageClass)}
                       </Pill>
-                      <span style={{ color: BODY, fontSize: FS.xs }}>{formatMessageDate(message.createdAt || message.deliveredAt)}</span>
-                      {unread && <span style={{ color: SECOND, fontSize: FS.xs, fontWeight: 800 }}>Unread</span>}
+                      <span style={{ color: BODY, fontSize: chromeFontSize(FS.xs, mobile) }}>{formatMessageDate(message.createdAt || message.deliveredAt)}</span>
+                      {unread && <span style={{ color: SECOND, fontSize: chromeFontSize(FS.xs, mobile), fontWeight: 800 }}>Unread</span>}
                     </span>
                     <span style={{ color: INK, fontSize: FS.md, fontWeight: unread ? 800 : 600, overflowWrap: 'anywhere' }}>
                       {message.subject}

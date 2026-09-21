@@ -76,6 +76,37 @@ export function dimensionPolarity(key) {
 }
 
 /**
+ * ⭐ THE NOTE A DIMENSION ROW CARRIES BESIDE ITS BAR — the ODQ §934.20 chart-census cure,
+ * landed 2026-09-19.
+ *
+ * WHAT WAS WRONG. Both surfaces that draw a dimension bar — the PDF's DimensionCard and
+ * the screen's DimensionRow, which are print/screen twins — filled the run from
+ * `dimensionPolarity(key) === 'lower_is_better' ? 100 - value : value` while printing the
+ * RAW `value` in the same row. Three of the four dimensions are lower-is-better, so a card
+ * reading "Volatility · Critical · 88" drew a bar 12 % full: two honest numbers, one
+ * settlement, running opposite ways, with nothing saying so. The inversion was deliberate
+ * (the run meant HEALTH, matching the polarity-oriented band word), but a bar that is not
+ * the number beside it is a bar the reader has to be told about, and nobody was.
+ *
+ * THE RULING. The bar draws the number it prints. Where that number runs the other way,
+ * the row SAYS SO, in the caption idiom each surface already uses — the label explains the
+ * scale rather than the bar lying about it. The band word is untouched: it is still
+ * oriented by `bandForDimension`, so "Critical" still means failing at either polarity.
+ *
+ * ⛔ THE NOTE LIVES HERE, BESIDE THE POLARITY IT READS, for the reason DIM_POLARITY does:
+ * the polarity fact was once declared in three places and read at band time by none. A
+ * surface that drew the raw score and forgot to say which way it runs would reopen exactly
+ * that habitat, one renderer at a time.
+ *
+ * @param {string} key one of the four SystemState dimension keys
+ * @returns {string|null} the note, or null for a higher-is-better dimension (the default
+ *   reading, which needs no caption — a row only speaks when it has something to correct)
+ */
+export function dimensionScaleNote(key) {
+  return dimensionPolarity(key) === 'lower_is_better' ? 'lower is better' : null;
+}
+
+/**
  * Band label for a dimension's raw 0-100 score, ORIENTED by that dimension's
  * polarity. For a lower-is-better dimension the ladder is walked from the other
  * end (100 - value), so "Stable" always means healthy and "Critical" always

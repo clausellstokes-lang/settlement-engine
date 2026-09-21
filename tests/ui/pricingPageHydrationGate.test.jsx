@@ -48,6 +48,10 @@ vi.mock('../../src/lib/supabase.js', () => ({
   },
 }));
 vi.mock('../../src/lib/founderSeats.js', () => ({ FOUNDER_SEAT_CAP: 30, fetchFounderSeatsRemaining: vi.fn(async () => 17) }));
+// THE LAUNCH GATE is OPEN for this file: it pins the purchase controls' live
+// behaviour, which is what launch restores. The closed state is pinned in
+// tests/components/launchLock.pricing.test.jsx.
+vi.mock('../../src/lib/launchGate.js', async (importOriginal) => ({ ...(await importOriginal()), purchasesOpen: () => true }));
 
 const HYDRATED_FREE = { tier: 'free', isFounder: false, displayName: '', loading: false };
 const storeState = {

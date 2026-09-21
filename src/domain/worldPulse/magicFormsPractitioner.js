@@ -72,11 +72,16 @@ export const PRACTITIONER_PROVENANCE = 'magic_practitioner';
 
 /**
  * NPC statuses that mean the person is no longer available to hold the rung. Mirrors
- * entities/npcs.js's own successor-inference reading (dead / removed / exiled are
- * ineligible) and adds 'missing' and 'retired', because a practitioner who has
- * vanished or hung up their staff is equally not casting.
+ * entities/npcs.js's own successor-inference reading (NPC_UNAVAILABLE_STATUSES: dead /
+ * removed / exiled / jailed are ineligible) and adds 'missing' and 'retired', because a
+ * practitioner who has vanished or hung up their staff is equally not casting.
+ *
+ * ⛔ SPELLED, NOT READ, AND DELIBERATELY SO: this set is WIDER than the availability
+ * vocabulary it mirrors, so it cannot import it. It is therefore TOTAL over every
+ * non-'active' NpcStatus member, and the union-totality walker holds it to that — a member
+ * joining the typedef reds here until this lane's successor has judged it.
  */
-const LOST_NPC_STATUS = new Set(['dead', 'removed', 'exiled', 'missing', 'retired']);
+const LOST_NPC_STATUS = new Set(['dead', 'removed', 'exiled', 'jailed', 'missing', 'retired']);
 
 /** @param {unknown} value @returns {string} */
 const text = (value) => String(value == null ? '' : value).trim().toLowerCase();

@@ -59,6 +59,10 @@ function seededCampaign() {
     settlementIds: ['supplier', 'buyer'],
     collapsed: false,
     mapState: null,
+    // THE HERALD WAITS FOR THE FIRST ADVANCE (owner order 2026-09-17): the Wizard News
+    // arm below opens the Herald, so this realm's clock has moved (tick 2, the news
+    // feed's own tick). Without it the toolbar offers no Herald toggle at all.
+    worldState: { tick: 2, calendar: { elapsedWeeks: 2 } },
     wizardNews: {
       schemaVersion: 1,
       currentTick: 2,

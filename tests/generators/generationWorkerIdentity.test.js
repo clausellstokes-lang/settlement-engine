@@ -15,8 +15,11 @@
  *     core's settlement must equal the direct `generateSettlementPipeline` call,
  *     so the headless runners (soak, the golden master, the OSR corpus) and the
  *     worker are the SAME path rather than two agreeing ones.
- *  3. THE CARRY. The locked-roster carry crosses INSIDE the core, so its report
- *     and its output must equal the carry applied outside it.
+ *  3. THE CARRY. The locked-roster carry crosses INSIDE the core, so its output
+ *     must equal the carry applied outside it. ⛔ Since owner orders 2026-09-17
+ *     ("remove the other padlocks") no stored lock is read, so the carry is dormant
+ *     on both sides: a request naming a real previous character must come back
+ *     byte-equal to the fresh town, with no report, inside and outside the core.
  *
  * ⚠ HONEST LABEL ON THE "WORKER" LEG. There is no browser Worker here. The
  * end-to-end arm drives the REAL worker shell module (`generation.worker.js`,
@@ -227,19 +230,21 @@ describe('the locked-roster carry crosses the boundary intact', () => {
     previous = generateSettlementPipeline(CFG, null, { seed: 'lockb-A-1', customContent: {} });
   }, 60_000);
 
-  it('with one locked NPC, the core\'s preservation report names it and the carried settlement equals the carry applied outside the core', () => {
-    const locks = { npcs: [String(previous.npcs[0].id)] };
+  it('a stored lock naming a real previous NPC carries nobody, inside the core or outside it (owner orders 2026-09-17)', () => {
+    const locks = { npcs: [String(previous.npcs[0].id), String(previous.npcs[2].id)], history: true };
     const request = requestFor(CFG, { previousSettlement: previous, locks, seed: 'lockb-B-1' });
 
     const viaCore = runGenerationRequest(request);
     const fresh = generateSettlementPipeline({ ...CFG }, null, { seed: 'lockb-B-1', customContent: {} });
     const outside = carryLockedRosterThroughGenerate(previous, fresh, locks);
 
-    // Non-vacuous: the carry actually ran and actually preserved somebody.
-    expect(viaCore.preservation).toBeTruthy();
-    expect(viaCore.preservation.preserved.length).toBeGreaterThanOrEqual(1);
-    expect(JSON.stringify(viaCore.settlement)).toBe(JSON.stringify(outside.settlement));
-    expect(JSON.stringify(viaCore.preservation)).toBe(JSON.stringify(outside._preservation));
+    // THE ANCHOR: the previous town is a real, different town, so a live carry would
+    // have had two people to bring.
+    expect(previous.npcs.length).toBeGreaterThan(2);
+    expect(JSON.stringify(previous.npcs)).not.toBe(JSON.stringify(fresh.npcs));
+    expect(viaCore.preservation, 'a stored lock minted a preservation report inside the core').toBe(null);
+    expect(outside.settlement, 'a stored lock rebuilt the fresh town outside the core').toBe(fresh);
+    expect(JSON.stringify(viaCore.settlement)).toBe(JSON.stringify(fresh));
   }, 120_000);
 
   it('with no locks the carried settlement is byte-equal to the fresh one', () => {

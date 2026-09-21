@@ -18,8 +18,21 @@
  * though the linear step wizard is gone. The `config` step id corresponds to the
  * Foundations/Fine-tune block (always mounted) and is reported on mount.
  *
- * Size is NOT gated — free accounts already generate up to metropolis; this panel
- * reintroduces no size gate. The anon HomeHero instant path never reaches here.
+ * Size is NOT gated for an ACCOUNT — free accounts already generate up to metropolis.
+ *
+ * ⛔ THE PRE-GENERATION OPTIONS ARE LOCKED FOR AN ANONYMOUS VISITOR (the owner, §934.34:
+ * "only hamlet, village, and town can be accessed without signing in and only with
+ * everything on random"). NOTHING IS HIDDEN — the owner's law. Every control is drawn
+ * exactly as an account sees it and DISABLED, with the reason written above them through
+ * the estate's one refusal notice, so a visitor can see what an account is for instead of
+ * meeting a shorter page and never learning there was more.
+ *
+ * ⚠ A DISABLED CONTROL IS A COURTESY, NEVER THE GATE. `config` is persisted, so a stored
+ * or hand-edited config can still reach a forge; the RULE is enforced at the one point
+ * every generation funnels through (store/settlementGenerateAction.js), which forces the
+ * random configuration. This panel is the half a reader can see.
+ *
+ * @enforced-by tests/ui/anonPreGenLocked.test.jsx
  */
 
 import { useEffect, useState } from 'react';
@@ -34,6 +47,9 @@ import ResetConstraintsButton from './ResetConstraintsButton.jsx';
 import PlaceInRegionCard from './PlaceInRegionCard.jsx';
 import Disclosure from '../primitives/Disclosure.jsx';
 import DesktopOnlyGate from '../primitives/DesktopOnlyGate.jsx';
+import RefusalNotice from '../primitives/RefusalNotice.jsx';
+import { raisedHere, REFUSAL_REASONS, REFUSAL_SURFACES, refusalOf } from '../../lib/refusalReasons.js';
+import { FORK_SEED_MAX } from '../../lib/anonForkSalt.js';
 import Button from '../primitives/Button.jsx';
 import useIsMobile from '../../hooks/useIsMobile.js';
 import { INK, MUTED, SECOND, BORDER, CARD, sans, serif_, FS, SP } from '../theme.js';
@@ -83,11 +99,22 @@ function DeepSection({ id, label, hint, collapsedHint, Panel }) {
  * so the configSeamContract stays intact. GenerateWizard swaps to the output view on
  * the new settlement (its settlement-change effect). The current draft's seed
  * (store lastSeed) is shown for copying so a rolled world can be reproduced or shared.
+ *
+ * ⛔ IT REFUSED IN SILENCE (adversarial review of the second wave). `await generate(seed)`
+ * took no null, caught no throw, and cleared the spinner either way: an anonymous visitor
+ * typing a seed with the day's allowance spent watched the button think and then stop,
+ * with nothing said — the exact class lib/refusalReasons.js was built against, on a
+ * surface the cure had not reached. Wired here EXACTLY as generate/FoundingWorlds.jsx
+ * wires it: clear the previous reason at the click, render the gate's recorded one where
+ * the reader clicked, and never answer a refusal by doing nothing.
  */
 function SeedField() {
   const generate = useStore((s) => s.generateSettlement);
   const setRandomSliderMode = useStore((s) => s.setRandomSliderMode);
   const lastSeed = useStore((s) => s.lastSeed);
+  // The lane records WHY it refused; this surface only renders it.
+  const lastRefusal = useStore((s) => s.lastRefusal);
+  const clearRefusal = useStore((s) => s.clearRefusal);
   const [value, setValue] = useState('');
   const [busy, setBusy] = useState(false);
   const [copied, setCopied] = useState(false);
@@ -95,10 +122,22 @@ function SeedField() {
   const forge = async () => {
     const seed = value.trim();
     if (!seed || busy) return;
+    // A refusal from a previous attempt must not outlive this click. (The lane clears it
+    // too; doing it here as well is what keeps the notice from showing the old reason
+    // while the engine chunk is still in flight.)
+    clearRefusal?.();
     setBusy(true);
     try {
       setRandomSliderMode(true);
-      await generate(seed);
+      // A null is a GATE: the reason is already recorded and the notice below renders it.
+      // Nothing else is owed — and in particular not a navigation, which is how three of
+      // the four original offenders answered a refusal.
+      // `at` names WHERE the reader clicked (REVIEW-P F12): one store record was
+      // painted by every mount on the page, so one refusal was announced twice. The
+      // gate stamps this key; only this surface says what it raised.
+      await generate(seed, { at: REFUSAL_SURFACES.SEED_FIELD });
+    } catch {
+      // The lane records the reason before it re-throws; the notice below renders it.
     } finally {
       setBusy(false);
     }
@@ -127,12 +166,21 @@ function SeedField() {
           onChange={(e) => setValue(e.target.value)}
           onKeyDown={(e) => { if (e.key === 'Enter') forge(); }}
           placeholder="Enter a seed"
+          // ⭐ THE ADDRESS HAS A DECLARED LENGTH (owner-signed, ODQ §934.72). This
+          // field carried NO limit, which is how a fork seed came to be ~48
+          // characters without anything noticing: the address pin had no limit to
+          // read and had to anchor on the suffix width instead. The number is
+          // DERIVED from the card seeds and the fork suffix (lib/anonForkSalt.js),
+          // never typed here, so the field and the pin cannot drift apart.
+          maxLength={FORK_SEED_MAX}
           style={{ flex: '1 1 200px', minWidth: 160, padding: '6px 10px', border: `1px solid ${BORDER}`, fontSize: FS.sm, fontFamily: sans, boxSizing: 'border-box', background: CARD, color: INK }}
         />
         <Button variant="secondary" size="sm" busy={busy} disabled={!value.trim()} onClick={forge}>
           Forge seed
         </Button>
       </div>
+      {/* The reason, under the control the reader used, announced as well as shown. */}
+      <RefusalNotice refusal={raisedHere(lastRefusal, REFUSAL_SURFACES.SEED_FIELD) ? lastRefusal : null} style={{ margin: `${SP.sm}px ${SP.xs}px 0` }} />
       {lastSeed != null && (
         <div style={{ display: 'flex', alignItems: 'center', gap: SP.sm, marginTop: SP.xs, padding: `0 ${SP.xs}px`, flexWrap: 'wrap' }}>
           <span style={{ fontSize: FS.xs, color: MUTED }}>Current draft seed</span>
@@ -166,6 +214,10 @@ export default function LayeredConfigurationPanel({ mode = 'advanced', showPlace
   // (advancedOnDesktop === advanced when not mobile), so its render is unchanged.
   const mobile = useIsMobile();
   const advancedOnDesktop = advanced && !mobile;
+  // §934.34 — the pre-generation options belong to an account. Read through the store's
+  // own selector so this panel carries no second copy of the rule.
+  const canCustomize = useStore((s) => (typeof s.canCustomizePreGeneration === 'function'
+    ? s.canCustomizePreGeneration() : true));
   // The Foundations/Fine-tune block is always mounted — report its step id once
   // on mount so the funnel's `config` step still registers without the linear wizard.
   useEffect(() => {
@@ -176,6 +228,26 @@ export default function LayeredConfigurationPanel({ mode = 'advanced', showPlace
 
   return (
     <div data-testid="layered-configuration-panel" style={{ display: 'flex', flexDirection: 'column' }}>
+      {/* ⛔ THE REASON, ABOVE THE CONTROLS IT EXPLAINS (§934.34). Rendered through the
+          estate's ONE refusal notice so an anonymous visitor meets the same voice here as
+          at every other gate, and the sentence names the sizes an account reaches from
+          the same derivation the hero's does. */}
+      {!canCustomize && (
+        <div data-testid="pre-gen-locked-notice" style={{ marginBottom: SP.md }}>
+          <RefusalNotice refusal={refusalOf(REFUSAL_REASONS.PRE_GEN_LOCKED)} />
+        </div>
+      )}
+      {/* ⛔ ONE FIELDSET, NOT A DISABLED PROP ON EVERY CONTROL. `disabled` on a fieldset
+          disables every form control inside it — including ones added tomorrow — which is
+          the difference between a rule and a sweep somebody has to remember to extend.
+          The border/padding/margin resets keep the rendered box identical to the <div> it
+          replaces, so an account's panel is byte-identical to what it was. */}
+      <fieldset
+        disabled={!canCustomize}
+        data-testid="pre-gen-options"
+        data-pre-gen-locked={!canCustomize ? '' : undefined}
+        style={{ border: 0, padding: 0, margin: 0, minWidth: 0, display: 'flex', flexDirection: 'column' }}
+      >
       {/* Exact-seed input (Advanced only, top of the panel): forge a world from a
           seed, and copy the current draft's seed. THE PROMISE made a surface. */}
       {advanced && <SeedField />}
@@ -251,6 +323,7 @@ export default function LayeredConfigurationPanel({ mode = 'advanced', showPlace
           <PlaceInRegionCard />
         </div>
       )}
+      </fieldset>
     </div>
   );
 }

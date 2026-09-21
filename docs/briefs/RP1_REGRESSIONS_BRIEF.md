@@ -32,7 +32,7 @@ shared error-boundary component if THEIRS has one). NO git add/commit/stash.
 
 3. **Confirm-password field on register + mismatch guard (ledger §57).** OURS only checks
    `length<6` (AuthPanel.jsx:114). Add the confirm-password field + a mismatch guard (THEIRS
-   AuthPanel.jsx:373-375,194) so a typo'd password can't silently lock a user out.
+   AuthPanel.jsx:67,143) so a typo'd password can't silently lock a user out.
 
 4. **Password show/hide toggle + persistent field labels (ledger §58).** OURS `Input` is
    placeholder-only (authUI.jsx:99-117) — no reveal toggle, no persistent label = an a11y

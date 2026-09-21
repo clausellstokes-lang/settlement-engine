@@ -12,7 +12,7 @@
   ruled ODQ §441, ratified §445.2) except where a row says so and names the re-derivation. ⚠ The
   charter states no census tuple on purpose (§441.5(e)); it is re-derived here. ⚠ The status value
   above stands ALONE on its line because `parsePacketHeader`
-  (`scripts/implementation-packets.mjs:165`) anchors the status row at end-of-line (J-TEWF1B-1).
+  (`scripts/implementation-packets.mjs:297`) anchors the status row at end-of-line (J-TEWF1B-1).
 - **Provenance:** built by lane **TE-UC2** under **[OPUS-RUN · FABLE-VALIDATION OWED]** (owner
   directive ODQ §484). The Fable validation pass is OWED on this member and is not discharged by
   this packet.

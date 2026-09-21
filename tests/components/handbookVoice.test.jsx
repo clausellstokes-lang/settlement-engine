@@ -142,7 +142,7 @@ describe('§906 — the voiced Handbook is READ on first paint of /about/guide',
 
   it('the voiced header and essay are in the accessible DOM with NO interaction, exactly as AppViews mounts it', () => {
     // No override: the SHIPPED default (handbookVoice: true, flagRegistry.js:117).
-    // No prop: AppViews.jsx:133 renders `<HowToUse />`, and so does this.
+    // No prop: AppViews.jsx:46 renders `<HowToUse />`, and so does this.
     const { container } = render(<HowToUse />);
 
     // (b) THE PROSE. The title is the page's <h1> through PageHeader's `as`, so this

@@ -27,6 +27,7 @@ import { SettlementCard } from './SettlementCard.jsx';
 import RealmStrip from './RealmStrip.jsx';
 import { regionalCountsForSave } from './helpers.js';
 import { track, EVENTS } from '../../lib/analytics.js';
+import { chromeFontSize } from '../../design/proseScale.js';
 
 // Screen-reader-only clip (the hidden caption + column heads) and a zero-box
 // <th> style so the folder table carries accessible column semantics without
@@ -38,6 +39,7 @@ const HIDDEN_TH = { padding:0, border:0, height:0, lineHeight:0 };
  *  description, so each export door's purpose reads on the surface instead of in
  *  a code comment. A ghost menuitem Button (native focus + keyboard). */
 function ExportItem({ Icon, label, desc, disabled, onClick }) {
+  const mobile = useIsMobile();
   return (
     <Button
       variant="ghost"
@@ -50,7 +52,7 @@ function ExportItem({ Icon, label, desc, disabled, onClick }) {
     >
       <span style={{ display:'flex', flexDirection:'column', minWidth:0 }}>
         <span style={{ fontSize:FS.sm, color:INK, fontWeight:600 }}>{label}</span>
-        <span style={{ fontSize:FS.xxs, color:MUTED, fontWeight:400 }}>{desc}</span>
+        <span style={{ fontSize:chromeFontSize(FS.xxs, mobile), color:MUTED, fontWeight:400 }}>{desc}</span>
       </span>
     </Button>
   );
@@ -92,6 +94,7 @@ export function CampaignFolder({
   selectedIds,
   onToggleSelect,
 }) {
+  const mobile = useIsMobile();
   const worldState = campaign?.worldState || null;
   const regionalGraph = campaign?.regionalGraph || campaign?.worldState?.regionalGraph || null;
   const nameFor = (id) => {
@@ -225,10 +228,10 @@ export function CampaignFolder({
       }}>
         <FolderOpen size={14}/>
         <span style={{ flex:1, fontFamily:serif_, fontWeight:700, color:SECOND }}>{campaign.name}</span>
-        <span style={{ fontSize:FS.xxs, fontWeight:700 }}>
+        <span style={{ fontSize:chromeFontSize(FS.xxs, mobile), fontWeight:700 }}>
           {retainedInactive
             ? `Frozen${retainedUntil ? ` until ${retainedUntil}` : ''}`
-            : 'Available again with Premium'}
+            : 'Available again with Cartographer'}
         </span>
       </div>
     );
@@ -259,7 +262,7 @@ export function CampaignFolder({
         ) : (
           <span style={{ flex:1, minWidth: isMobile ? '60%' : undefined, fontSize:FS.md, fontWeight:700, color:INK, fontFamily:serif_ }}>{campaign.name}</span>
         )}
-        <span style={{ fontSize:FS.xxs, color:MUTED, fontFamily:sans }}>{settlements.length} settlement{settlements.length !== 1 ? 's' : ''}</span>
+        <span style={{ fontSize:chromeFontSize(FS.xxs, mobile), color:MUTED, fontFamily:sans }}>{settlements.length} settlement{settlements.length !== 1 ? 's' : ''}</span>
         {campaign.mapState && <MapIcon size={11} color={GOLD} title="Map saved"/>}
         {!editing && (
           <div style={{ display:'flex', gap:2, alignItems:'center' }}>
@@ -273,7 +276,7 @@ export function CampaignFolder({
             {multiTickOn && (
               <label
                 htmlFor={`${autoResolveId}-ar`}
-                style={{ display:'inline-flex', alignItems:'center', gap:3, fontSize:FS.xs, fontFamily:sans, color:INK, padding:'0 4px', userSelect:'none', cursor:'pointer' }}>
+                style={{ display:'inline-flex', alignItems:'center', gap:3, fontSize:chromeFontSize(FS.xs, mobile), fontFamily:sans, color:INK, padding:'0 4px', userSelect:'none', cursor:'pointer' }}>
                 <input
                   id={`${autoResolveId}-ar`}
                   type="checkbox"
@@ -295,7 +298,7 @@ export function CampaignFolder({
                 aria-label so its accessible name is unchanged. Disabled in lockstep
                 with the button; stops propagation so the dropdown never toggles the
                 folder. */}
-            <span aria-hidden="true" style={{ fontSize:FS.xxs, color:MUTED, fontFamily:sans }}>Advance by</span>
+            <span aria-hidden="true" style={{ fontSize:chromeFontSize(FS.xxs, mobile), color:MUTED, fontFamily:sans }}>Advance by</span>
             <select
               aria-label="Advance interval"
               value={advanceInterval}
@@ -304,7 +307,7 @@ export function CampaignFolder({
               disabled={settlements.length === 0 || !worldCanonized || advanceBlocked}
               title="How far one Advance Time step carries the campaign world"
               style={{
-                fontSize: FS.xs,
+                fontSize: chromeFontSize(FS.xs, mobile),
                 fontFamily: sans,
                 color: INK,
                 background: CARD,
@@ -389,7 +392,7 @@ export function CampaignFolder({
       {(pdfError || wbError) && (
         <div
           role="alert"
-          style={{ padding:'6px 12px', fontSize:FS.xs, color:RED, background:RED_BG, fontFamily:sans }}
+          style={{ padding:'6px 12px', fontSize:chromeFontSize(FS.xs, mobile), color:RED, background:RED_BG, fontFamily:sans }}
         >
           {pdfError || wbError}
         </div>
@@ -436,7 +439,7 @@ export function CampaignFolder({
       {!collapsed && (
         <div style={{ padding:'6px 8px 8px' }}>
           {settlements.length === 0 ? (
-            <div style={{ padding:'10px 8px', fontSize:FS.xs, color:MUTED, textAlign:'center', fontStyle:'italic' }}>
+            <div style={{ padding:'10px 8px', fontSize:chromeFontSize(FS.xs, mobile), color:MUTED, textAlign:'center', fontStyle:'italic' }}>
               No settlements in this campaign yet. Use the arrow button to move settlements here.
             </div>
           ) : (
@@ -452,8 +455,9 @@ export function CampaignFolder({
                 <tr>
                   {selectMode && <th scope="col" style={HIDDEN_TH}><span style={SR_ONLY}>Select</span></th>}
                   <th scope="col" style={HIDDEN_TH}><span style={SR_ONLY}>Settlement</span></th>
-                  <th scope="col" style={HIDDEN_TH}><span style={SR_ONLY}>Size</span></th>
-                  <th scope="col" style={HIDDEN_TH}><span style={SR_ONLY}>Status</span></th>
+                  {/* Folded at phone width, exactly as the visible ledger's heads are. */}
+                  {!mobile && <th scope="col" style={HIDDEN_TH}><span style={SR_ONLY}>Size</span></th>}
+                  {!mobile && <th scope="col" style={HIDDEN_TH}><span style={SR_ONLY}>Status</span></th>}
                   <th scope="col" style={HIDDEN_TH}><span style={SR_ONLY}>Health</span></th>
                   <th scope="col" style={HIDDEN_TH}><span style={SR_ONLY}>Actions</span></th>
                 </tr>

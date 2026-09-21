@@ -204,6 +204,9 @@ describe('BulkActionBar — free tier hides the campaign actions', () => {
 // ── 3. SaveQuotaMeter reads the real cap ───────────────────────────────────
 describe('SaveQuotaMeter — reads the cap passed in, never hardcodes 3', async () => {
   const { default: SaveQuotaMeter, PREMIUM_PITCH } = await import('../../src/components/settlements/SaveQuotaMeter.jsx');
+  // The anon line's number is the FREE tier's derived cap (this viewer's own
+  // `max` is 0), so the pin reads the same module the component does.
+  const { FREE_SAVE_LIMIT } = await import('../../src/config/tierFacts.js');
 
   test('free at cap → "0 of 3", "at cap", progressbar max mirrors the prop', () => {
     const { container } = render(<SaveQuotaMeter tier="free" used={3} max={3} />);
@@ -226,14 +229,35 @@ describe('SaveQuotaMeter — reads the cap passed in, never hardcodes 3', async 
     expect(container.querySelector('[role="progressbar"]')).toBeNull();
   });
 
-  test('anon → "Sign in to save"', () => {
+  test('anon → "Sign in free", with the derived free save cap named', () => {
     render(<SaveQuotaMeter tier="anon" used={0} max={0} />);
-    expect(screen.getByText(/Sign in to save/i)).toBeTruthy();
+    expect(screen.getByText(/Sign in free/i)).toBeTruthy();
+    expect(screen.getByTestId('quota-label').textContent)
+      .toContain(`save up to ${FREE_SAVE_LIMIT} settlements`);
   });
 
   test('the premium pitch names the SIMULATION, never a size cap', () => {
     expect(PREMIUM_PITCH).toMatch(/advance time|campaign|simulation|pantheon/i);
     expect(PREMIUM_PITCH).not.toMatch(/metropolis|larger|bigger size/i);
+  });
+});
+
+// ── 3b. The empty-library sample card promises the right destination ───────
+// An ANONYMOUS visitor has maxSaves 0 (store/authSlice TIER_GATE), so "fork into
+// your own saves" named a place that does not exist for them. The destination is
+// tier-dependent; the rest of the card is not.
+describe('SampleDashboard — the fork destination matches the tier', async () => {
+  const { SampleDashboard } = await import('../../src/components/settlements/SampleDashboard.jsx');
+
+  test('anon → forks into a draft, never "your own saves"', () => {
+    render(<SampleDashboard onFork={() => {}} tier="anon" />);
+    expect(screen.getByText(/fork into a draft/i)).toBeTruthy();
+    expect(screen.queryByText(/your own saves/i)).toBeNull();
+  });
+
+  test('a signed-in keeper still forks into their own saves', () => {
+    render(<SampleDashboard onFork={() => {}} tier="free" />);
+    expect(screen.getByText(/fork into your own saves/i)).toBeTruthy();
   });
 });
 

@@ -32,7 +32,7 @@ import { compareCodepoint } from '../deterministicSort.js';
 // never route to it) reds this until it is added (domain-region-dossier-guidance-5).
 export const COMPENDIUM_TABS = Object.freeze([
   'overview', 'tiers', 'economy', 'power', 'institutions', 'operations', 'arcane',
-  'living', 'lenses', 'facets', 'stress', 'calamity', 'neighbour', 'az',
+  'living', 'stress', 'calamity', 'neighbour', 'az',
 ]);
 
 /**
@@ -196,15 +196,6 @@ const SYSTEM_ENTRIES = CD.systems.map((s) => ({
   keywords: `${s.flag} ${s.dormant ? 'dormant' : s.presets.join(' ')} simulation`,
 }));
 
-const LENS_ENTRIES = CD.lenses.entries.map((l) => ({
-  id: `lens-${slug(l.id)}`,
-  term: l.label,
-  category: 'Map Lens',
-  tab: 'lenses',
-  anchor: `lens-${slug(l.id)}`,
-  keywords: `${l.id} map style render`,
-}));
-
 const CALAMITY_ENTRIES = CD.calamity.flavors.map((f) => ({
   id: `calamity-${slug(f.key)}`,
   term: f.title,
@@ -247,7 +238,6 @@ export const COMPENDIUM_INDEX = Object.freeze(/** @type {CompendiumEntry[]} */ (
   ...CROSS_SETTLEMENT_ENTRIES,
   ...LADDER_ENTRIES,
   ...OPERATION_ENTRIES,
-  ...LENS_ENTRIES,
   ...CALAMITY_ENTRIES,
 ].map(Object.freeze)));
 

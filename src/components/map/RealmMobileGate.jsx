@@ -8,13 +8,14 @@
  * "open on desktop" wall plus a phone-safe companion. The default path remains
  * the read-only Realm Dashboard (its stat grids already stack at phone width).
  * While the internal Herald proof flag is on, that same slot becomes the
- * decision-capable Herald companion; map authoring stays unavailable. Each child
+ * decision-capable Herald companion once the realm has advanced at least once
+ * (owner order 2026-09-17); map authoring stays unavailable. Each child
  * owns its anon/free locked state, so the reachable-on-mobile pricing moment
  * behaves exactly as it does on desktop.
  *
- * Height is tokenized off the mobile chrome (slim top header + fixed bottom nav +
- * safe-area) rather than the desktop mapShellOffset, so the gate and dashboard
- * never render under the bottom nav.
+ * Height is tokenized off the phone chrome (the painted arrow's header and hang,
+ * ARROW_CLEAR, plus the fixed bottom nav and the safe area), so the gate and
+ * dashboard never render under the bottom nav.
  *
  * Pure presentational shell — every value is passed in by WorldMap, which holds
  * the campaign/auth/handler state. No store reads, no effects of its own.
@@ -24,6 +25,7 @@
  * @param {boolean} props.canManageCampaigns   premium/elevated → live dashboard
  * @param {string} props.tier                  auth tier (drives the locked teaser)
  * @param {() => void} [props.onUpgrade]       route to the premium-value surface
+ * @param {() => void} [props.onSignIn]        route to the sign-in surface (the anon door)
  * @param {Map<string,string>} props.nameById  settlement-id → name for the dashboard
  * @param {Array<any>} [props.saves]            active campaign member saves for the flagged Herald
  * @param {() => void} [props.onCreateCampaign] empty-state: mint a campaign
@@ -32,9 +34,10 @@
  */
 import { Suspense, lazy, useState } from 'react';
 import {
-  BODY, CHROME, FS, SP, bottomClearance, sans,
+  ARROW_CLEAR, BODY, CHROME, FS, SP, bottomClearance, sans,
 } from '../theme.js';
 import { flag } from '../../lib/flags.js';
+import { realmHasAdvanced } from '../../lib/realmHeraldGate.js';
 import DesktopOnlyGate from '../primitives/DesktopOnlyGate.jsx';
 import Button from '../primitives/Button.jsx';
 
@@ -89,19 +92,21 @@ function CopyRealmLink() {
 }
 
 export default function RealmMobileGate({
-  campaign, canManageCampaigns, tier, onUpgrade, nameById,
+  campaign, canManageCampaigns, tier, onUpgrade, onSignIn, nameById,
   saves = [],
   onCreateCampaign, onSelectCampaign, hasCampaigns = false,
 }) {
   const commandBriefOn = flag('heraldCommandBrief');
   // A locked viewer keeps the exact established Dashboard path. Besides
   // preserving its teaser and pricing moment, this prevents the desktop gate
-  // from promising touch Decisions that the account cannot execute.
-  const commandCompanionAvailable = commandBriefOn && canManageCampaigns;
+  // from promising touch Decisions that the account cannot execute. And, like the
+  // desktop Herald, the companion waits for the realm's first advance (owner order
+  // 2026-09-17): a never-advanced realm keeps the read-only Dashboard slot.
+  const commandCompanionAvailable = commandBriefOn && canManageCampaigns && realmHasAdvanced(campaign);
   const desktopLead = 'The Realm table is built for a bigger canvas. Placing settlements, advancing years, and charting routes want a desk and a pointer. Your world is saved and will be waiting, exactly here, when you next sit down at one.';
   const companionMessage = commandCompanionAvailable
     ? `${desktopLead} Below, the field companion lets you read the briefing and answer decisions without exposing map authoring.`
-    : commandBriefOn
+    : commandBriefOn && !canManageCampaigns
       ? `${desktopLead} Below, the field companion keeps the Realm's locked preview and its existing unlock path. Live decisions are not available on this account, and map authoring still waits for desktop.`
       : `${desktopLead} Below, the field companion: a read-only look at the living state of your realm.`;
   return (
@@ -110,7 +115,7 @@ export default function RealmMobileGate({
       style={{
         display: 'flex', flexDirection: 'column', gap: SP.md,
         padding: SP.sm,
-        minHeight: `calc(100vh - ${CHROME.headerMobile + CHROME.bottomNav}px)`,
+        minHeight: `calc(100vh - ${ARROW_CLEAR} - ${CHROME.bottomNav}px)`,
         paddingBottom: bottomClearance(CHROME.bottomNav + SP.lg),
       }}
     >
@@ -152,6 +157,7 @@ export default function RealmMobileGate({
             canManageCampaigns={canManageCampaigns}
             tier={tier}
             onUpgrade={onUpgrade}
+            onSignIn={onSignIn}
             nameById={nameById}
             onCreateCampaign={onCreateCampaign}
             onSelectCampaign={onSelectCampaign}

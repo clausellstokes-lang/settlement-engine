@@ -5,13 +5,20 @@
  * manager file stays under the component-size ratchet. Re-exported through
  * CustomContent.jsx so existing import sites keep working.
  */
-import { GOLD, INK, MUTED as MUT, SECOND as SEC, serif_, FS } from '../theme.js';
+import { GOLD, INK, SECOND as SEC, serif_, FS } from '../theme.js';
 import { useStore } from '../../store/index.js';
+import { navigate } from '../../hooks/useRoute.js';
+import { getTierDisplayName } from '../../config/pricing.js';
 import Button from '../primitives/Button.jsx';
+import AvailableAtLaunchPill from '../primitives/AvailableAtLaunchPill.jsx';
+import { purchasesOpen } from '../../lib/launchGate.js';
 
 // ── Premium upsell card (shown to free / anon users in the Custom tab) ─────
 export function CustomContentUpsell({ existingCount, isAnon }) {
   const setPurchaseModalOpen = useStore(s => s.setPurchaseModalOpen);
+  // Purchases stay closed until launch (lib/launchGate.js): the upgrade CTA is
+  // disabled and wears the Available at launch pill.
+  const purchasesAreOpen = purchasesOpen();
   return (
     <div style={{
       padding: '24px 20px', textAlign: 'center',
@@ -27,7 +34,7 @@ export function CustomContentUpsell({ existingCount, isAnon }) {
       <div style={{
         fontSize: FS['18'], fontWeight: 700, fontFamily: serif_, color: INK, marginBottom: 4,
       }}>
-        Custom Compendium (Premium)
+        Custom Compendium (Cartographer)
       </div>
       <div style={{
         fontSize: FS.md, color: SEC, lineHeight: 1.55, marginBottom: 16,
@@ -50,10 +57,31 @@ export function CustomContentUpsell({ existingCount, isAnon }) {
       )}
 
       {isAnon ? (
-        <div style={{ fontSize: FS.sm, color: MUT }}>Sign in and upgrade to Premium to unlock.</div>
+        // An anonymous reader used to get a bare SENTENCE naming two actions with
+        // no control for either, while the free tier one line below got a real
+        // button. Both doors are now real: an account is free and live (making an
+        // account is not a purchase), and the tier door is the same conversion CTA
+        // its thirteen siblings render — launch-locked with the pill until
+        // purchases open (lib/launchGate.js). The tier word comes from the pricing
+        // catalog, never hand-typed.
+        <div style={{ display: 'flex', gap: 8, justifyContent: 'center', flexWrap: 'wrap' }}>
+          <Button variant="ai" size="lg" onClick={() => navigate('signin')}>
+            Sign in
+          </Button>
+          <Button
+            variant="secondary" size="lg"
+            disabled={!purchasesAreOpen}
+            style={purchasesAreOpen ? undefined : { flexWrap: 'wrap' }}
+            onClick={() => navigate('pricing')}
+          >
+            See {getTierDisplayName('premium')}
+            {!purchasesAreOpen && <AvailableAtLaunchPill style={{ marginLeft: 6 }} />}
+          </Button>
+        </div>
       ) : (
-        <Button variant="ai" size="lg" onClick={() => setPurchaseModalOpen(true)}>
+        <Button variant="ai" size="lg" disabled={!purchasesAreOpen} style={purchasesAreOpen ? undefined : { flexWrap: 'wrap' }} onClick={() => setPurchaseModalOpen(true)}>
           Upgrade to Premium
+          {!purchasesAreOpen && <AvailableAtLaunchPill style={{ marginLeft: 6 }} />}
         </Button>
       )}
     </div>

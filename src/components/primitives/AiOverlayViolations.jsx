@@ -28,6 +28,8 @@
 
 import { useState } from 'react';
 import { FS, CARD, swatch } from '../theme.js';
+import useIsMobile from '../../hooks/useIsMobile.js';
+import { chromeFontSize, proseFontSize } from '../../design/proseScale.js';
 
 const HARD_KINDS = new Set([
   'invented_entity',
@@ -62,6 +64,7 @@ const COLORS = Object.freeze({
 });
 
 export function AiOverlayViolations({ violations, onDismiss }) {
+  const mobile = useIsMobile();
   const [collapsed, setCollapsed] = useState(false);
 
   if (!violations || violations.ok || !Array.isArray(violations.violations) || violations.violations.length === 0) {
@@ -95,12 +98,12 @@ export function AiOverlayViolations({ violations, onDismiss }) {
         }}
       >
         <span style={{
-          fontSize: FS.xs, fontWeight: 800, color: COLORS.hardText,
+          fontSize: chromeFontSize(FS.xs, mobile), fontWeight: 800, color: COLORS.hardText,
           textTransform: 'uppercase', letterSpacing: '0.06em',
         }}>
           AI overlay drift detected
         </span>
-        <span style={{ fontSize: FS.xs, color: COLORS.muted, flex: 1 }}>
+        <span style={{ fontSize: chromeFontSize(FS.xs, mobile), color: COLORS.muted, flex: 1 }}>
           {totalCount} issue{totalCount === 1 ? '' : 's'}
           {hardCount > 0 && (
             <> · <strong style={{ color: COLORS.hardText }}>{hardCount} hard</strong></>
@@ -116,7 +119,7 @@ export function AiOverlayViolations({ violations, onDismiss }) {
           aria-controls="ai-violations-body"
           style={{
             background: 'none', border: 'none', cursor: 'pointer',
-            fontSize: FS.xxs, fontWeight: 700, color: COLORS.muted,
+            fontSize: chromeFontSize(FS.xxs, mobile), fontWeight: 700, color: COLORS.muted,
             padding: '2px 6px',
           }}
         >
@@ -131,7 +134,7 @@ export function AiOverlayViolations({ violations, onDismiss }) {
             style={{
               background: 'none', border: `1px solid ${COLORS.hardBdr}`,
               cursor: 'pointer',
-              fontSize: FS.xxs, fontWeight: 700, color: COLORS.hardText,
+              fontSize: chromeFontSize(FS.xxs, mobile), fontWeight: 700, color: COLORS.hardText,
               padding: '2px 7px',
             }}
           >
@@ -165,11 +168,12 @@ export function AiOverlayViolations({ violations, onDismiss }) {
 }
 
 function Group({ violations, tone, caption }) {
+  const mobile = useIsMobile();
   const isHard = tone === 'hard';
   return (
     <section style={{ marginBottom: 6 }}>
       <p style={{
-        fontSize: FS.xs, color: isHard ? COLORS.hardText : COLORS.softText,
+        fontSize: proseFontSize(FS.xs, mobile), color: isHard ? COLORS.hardText : COLORS.softText,
         margin: '0 0 6px', lineHeight: 1.4,
       }}>
         {caption}
@@ -190,7 +194,7 @@ function Group({ violations, tone, caption }) {
           >
             <span style={{
               flexShrink: 0,
-              fontSize: FS.micro, fontWeight: 800, letterSpacing: '0.05em',
+              fontSize: chromeFontSize(FS.micro, mobile), fontWeight: 800, letterSpacing: '0.05em',
               textTransform: 'uppercase',
               color: isHard ? COLORS.hardText : COLORS.softText,
               background: swatch.white,
@@ -201,10 +205,10 @@ function Group({ violations, tone, caption }) {
               {KIND_LABELS[v.kind] || v.kind}
             </span>
             <div style={{ flex: 1, minWidth: 0 }}>
-              <div style={{ fontSize: FS['11.5'], color: COLORS.ink, fontWeight: 600 }}>
+              <div style={{ fontSize: chromeFontSize(FS['11.5'], mobile), color: COLORS.ink, fontWeight: 600 }}>
                 {v.label || v.field || v.key}
               </div>
-              <div style={{ fontSize: FS['10.5'], color: COLORS.muted, lineHeight: 1.4 }}>
+              <div style={{ fontSize: proseFontSize(FS['10.5'], mobile), color: COLORS.muted, lineHeight: 1.4 }}>
                 {v.detail}
               </div>
             </div>

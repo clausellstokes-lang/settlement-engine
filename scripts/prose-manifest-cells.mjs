@@ -22,7 +22,9 @@
  *   node scripts/prose-manifest-cells.mjs --out <file> --limit 20    a cheap slice for a plant
  *   node scripts/prose-manifest-cells.mjs --out <file> --limit 8 --seeds 60
  *                                                           the RE-INDEXED plant's corpus
- *   node scripts/prose-manifest-cells.mjs --record           re-record the committed fixture
+ *   GOLDEN_SHIFT_SIGNED=docs/shift-records/<record>.json \
+ *     node scripts/prose-manifest-cells.mjs --record         re-record the committed fixture,
+ *                                                           THROUGH THE SIGNED DOOR (see below)
  *
  * ⛔ WHY `--seeds` EXISTS (the MEASURE fold's U4, cure 7). Car 1's second classifier plant —
  * a third variant appended to a two-variant pool, RE-INDEXED on ≈ 2/3 of that pool's cells —
@@ -36,6 +38,8 @@
 import { writeFileSync } from 'node:fs';
 import { join } from 'node:path';
 
+import { recordGolden } from '../tests/helpers/goldenRecordDoor.js';
+
 import {
   AUDIENCES, driftRun, goldenCorpus, manifestBytes, recorderShas,
 } from '../tests/helpers/dossierManifest.js';
@@ -45,26 +49,40 @@ import { ROOT } from '../tests/helpers/dossierCorpus.js';
 export const MANIFEST_REL = 'tests/fixtures/dossier-prose-manifest-golden.json';
 
 /**
- * THE DECLARED SHIFT THE RE-RECORD CARRIES (SITTING §P.2-29). It is an INSTRUMENT shift and
- * never a prose shift: no composer, no pool leaf and no seed input moved in the car that
- * re-recorded it. What moved is the RECIPE the recorder composes through.
- * @type {Readonly<Record<string, string>>}
+ * THE DECLARED SHIFT THE RE-RECORD CARRIES. It is written INTO the fixture's bytes, so the
+ * drift arm compares it and a fixture cannot carry one declaration while its rows carry another.
+ *
+ * ⭐ A PROSE SHIFT, SIGNED (owner orders 2026-09-17). The declaration before this one was an
+ * INSTRUMENT shift (SITTING §P.2-29, MEASURE car 3: the economy desk called by its shipped
+ * recipe; recorded over `fcd98a3dbb3178adccb37b6f3f103bb5dc03af63`). This one moves composed
+ * PROSE, under the owner's own words, so it names the orders and the signed record rather than
+ * a sitting row.
  */
 export const MANIFEST_PROVENANCE = Object.freeze({
-  shift: 'INSTRUMENT',
-  ruling: 'SITTING §P.2-29 — cure 1 changes the recorder\'s own coordinate on the player face;'
-    + ' a declared INSTRUMENT shift, re-recorded by the recorder before SEAM car 3a pins'
-    + ' `pieces` against it.',
-  car: 'MEASURE car 3 (the fold\'s cures)',
-  recordedOverSha: 'fcd98a3dbb3178adccb37b6f3f103bb5dc03af63',
-  note: 'The economy desk is now called by its shipped recipe with every caller reading and'
-    + ' `playerView` from the audience (scripts/prose-rate-corpus.mjs `economyDeskOptions`).'
-    + ' Before it, 309 player cells carried `index: -1` and DM-only prose, the two faces were'
-    + ' identical by construction on 16.3 % of cells, and two registered economy mounts'
-    + ' recorded nothing. `recordedOverSha` is DECLARATIVE — a recorder cannot know the sha of'
-    + ' the commit it is about to land in — and `recorder` is the executable half: the bytes'
-    + ' of the three files that decide what this fixture says.',
+  shift: 'PROSE',
+  ruling: 'OWNER ORDERS 2026-09-17: "Fix the contradiction." and "fix the remaining contradictions";'
+    + ' the owner signed the re-record ("I approve"); docs/shift-records/2026-09-17-dossier-contradictions.json.',
+  car: 'DOSSIER AND REALM POLISH, parts 1 and 3 (docs/FIRST_CONTACT_BACKLOG.md)',
+  recordedOverSha: '4416e8f9d68fd06a380bd84715681b6e69829ff9',
+  note: 'Three predicates now read the same truth as the surface beside them. DS-STR-1\'s no-banner'
+    + ' rung composes on a town with NO crisis banner instead of on every town with one (all 1,050'
+    + ' rows: 516 golden-master-v3 towns lose the cell, the three calm gm-seed towns gain it);'
+    + ' DS-GEN-16\'s UNMARKED ("No great blow stands on the record") no longer composes over a record'
+    + ' carrying a major or catastrophic row (15 towns, 30 rows lose that cell); and DS-POW-2\'s'
+    + ' stability header follows the label beneath it now that an infiltrated town no longer reads'
+    + ' `Stable` beside its own ACTIVE CRISIS card (958 cells = 479 towns x 2 audiences, all in'
+    + ' `power.stabilityHeader`, leaving the `stable matched` pool for the plain-description floor;'
+    + ' the CELL COUNT does not move for this one, only the content). 73,284 cells become 72,240.'
+    + ' `recordedOverSha` is DECLARATIVE (the base the change was built on); `recorder` is the'
+    + ' executable half.'
+    + ' 2026-09-20 (CURE-J, docs/shift-records/2026-09-20-cure-j-provenance.json): re-recorded with'
+    + ' ZERO rows moved (rowsSha unchanged) after the recorder identity became comment-insensitive'
+    + ' — FIX-C2\'s citation re-address in scripts/prose-rate-corpus.mjs had moved the raw sha of a'
+    + ' recorder file.',
 });
+
+/** This surface's identity in tests/fixtures/.golden-freeze-register.json. */
+export const MANIFEST_SURFACE = 'dossier-prose-manifest';
 
 /** The entry point. */
 async function main() {
@@ -90,16 +108,17 @@ async function main() {
   console.log('  cells where a recomputation over the AUDIBLE pool would have drawn a different'
     + ` variant (the slot-anchoring filter's own footprint, not a defect): ${run.drawDisagrees}`);
   if (record) {
-    // ⛔ THE ONE WRITE PATH, AND IT IS NOT THE GOLDEN DOOR. `recordGolden` is refused for this
-    // surface while the register is UNFROZEN (car 1 §1.5, ratified SITTING §O.8): a door write
-    // fills `sha256`/`rows`/`ownerRow`, which the register's own arms forbid until the freeze
-    // act. Until then the honest cure for "the fixture is updated by hand and nothing refuses
-    // it" (the fold's P12) is a RECORDER plus a provenance the suite recomputes from the tree.
+    // ⛔ THE ONE WRITE PATH IS THE SIGNED GOLDEN DOOR. This surface was written here directly
+    // while the register was UNFROZEN (the door's own arms forbade a recorded value then). The
+    // genesis freeze (2026-09-16) armed the register, and from it a plain write is an unsigned
+    // move of a frozen golden, so `--record` now goes through `recordGolden`: it REFUSES without
+    // `GOLDEN_SHIFT_SIGNED` naming a signed record for this surface, refuses a dirty tree beyond
+    // the fixture, the register and the record, writes the fixture and its register row in one
+    // act, and THROWS on success by design. Re-run the manifest suite and
+    // tests/lint/goldenFreeze.walker.test.js plainly afterwards; that green is the receipt.
     if (seeds > 0 || limit > 0) throw new Error('--record writes the DRIFT corpus whole: drop --limit and --seeds');
-    writeFileSync(join(ROOT, MANIFEST_REL), manifestBytes(run.rows, {
-      ...MANIFEST_PROVENANCE, recorder: recorderShas(),
-    }));
-    console.log(`  RE-RECORDED ${MANIFEST_REL} — ${run.rows.size} rows, shift ${MANIFEST_PROVENANCE.shift}`);
+    const bytes = manifestBytes(run.rows, { ...MANIFEST_PROVENANCE, recorder: recorderShas() });
+    recordGolden({ surface: MANIFEST_SURFACE, path: join(ROOT, MANIFEST_REL), produce: () => bytes, root: ROOT });
   }
   if (outAt >= 0 && argv[outAt + 1]) {
     writeFileSync(argv[outAt + 1], `${JSON.stringify({

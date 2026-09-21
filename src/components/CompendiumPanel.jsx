@@ -14,17 +14,30 @@ import { useStore } from '../store/index.js';
 import CompendiumGlobalSearch from './compendium/CompendiumGlobalSearch.jsx';
 import { TiersTab, EconomyTab, PowerTab_, ArcaneTab, StressTab, NeighbourTab, InstitutionsTab } from './compendium/CatalogTabs.jsx';
 import { OperationsHub, SystemsHub } from './compendium/RegistryHubs.jsx';
-import { LensesHub, FacetsHub, CalamityHub } from './compendium/CatalogHubs.jsx';
+import { CalamityHub } from './compendium/CatalogHubs.jsx';
 import { CompendiumOverview, AtoZIndex } from './compendium/CompendiumDashboard.jsx';
 import { CustomContentManager, ReadOnlyCustomContentList, CUSTOM_CATEGORIES } from './compendium/CustomContent.jsx';
 // The flat per-entry index (already in the compendium chunk via the global
 // search) + the lazy per-entry head helpers — V-19 long-tail routing.
 import { COMPENDIUM_INDEX } from '../domain/compendium/searchIndex.js';
 import { setCompendiumEntryMeta, clearCompendiumEntryMeta } from '../lib/seoCompendium.js';
+import { chromeFontSize } from '../design/proseScale.js';
 
 // The custom-content bucket keys a ?cat= deep-link may open (validated so an
 // arbitrary query value can never select a non-existent bucket).
 const CUSTOM_CAT_KEYS = new Set(CUSTOM_CATEGORIES.map((c) => c.key));
+
+// Entry pages the Compendium no longer has (owner order 2026-09-16: the Map Lenses page
+// left the Compendium). Each id was prerendered and listed in the production sitemap, so
+// an old link must not keep its dead address: the panel replaces it with /compendium, and
+// the route head (title, description, canonical, og and twitter tags) then describes the
+// Overview on screen. This lives here, in the lazy Compendium chunk, rather than as an
+// alias in lib/routes.js because the router is first-paint code: a compact `legacy: true`
+// alias built there measured 1,048,020 B against the 1,048,000 B entry budget.
+// Pinned in tests/ui/compendiumHubs.test.jsx.
+const REMOVED_ENTRY_IDS = new Set([
+  'lens-parchment', 'lens-watercolor', 'lens-darkfantasy', 'lens-vtt', 'lens-accessible',
+]);
 
 // ── Built-in Catalog Tabs ───────────────────────────────────────────────────
 
@@ -37,8 +50,6 @@ const TABS = [
   { id:'operations',  label:'Operations',         Icon: Shield },
   { id:'arcane',      label:'Magic & Religion',   Icon: Sparkles },
   { id:'living',      label:'Living World',       Icon: Globe },
-  { id:'lenses',      label:'Map Lenses',         Icon: Globe },
-  { id:'facets',      label:'Facets',             Icon: Building2 },
   { id:'stress',      label:'Stress',             Icon: AlertTriangle },
   { id:'calamity',    label:'Calamity',           Icon: AlertTriangle },
   { id:'neighbour',   label:'Neighbour System',   Icon: Link2 },
@@ -67,8 +78,6 @@ const ANCHOR_TO_TAB = Object.freeze({
   'pressures':    'living',
   'presets':      'living',
   'operations':   'operations',
-  'lenses':       'lenses',
-  'facets':       'facets',
   'calamity':     'calamity',
   'stress':       'stress',
   'threat':       'stress',
@@ -101,13 +110,9 @@ const TAB_META = Object.freeze({
   institutions: { title: 'Institutional catalog: SettlementForge Compendium',
                   desc: 'Every institution the simulator can generate, the conditions that select it, what it implies for the settlement, and how it interacts with others.' },
   overview:     { title: 'The SettlementForge Compendium',
-                  desc: 'Every catalog the deterministic engine renders from its own registries: tiers, institutions, archetypes, the operation registry, map lenses, facets, calamity, and the Living World systems.' },
+                  desc: 'Every catalog the deterministic engine renders from its own registries: tiers, institutions, archetypes, the operation registry, calamity, and the Living World systems.' },
   operations:   { title: 'The operation registry: SettlementForge Compendium',
                   desc: 'Every operation the engine can perform, with its class (canon / macro / mechanical), scope, the receipt it leaves, and whether it can be undone. The AI never appears as an author.' },
-  lenses:       { title: 'Map lenses & style schema: SettlementForge Compendium',
-                  desc: 'The map rendering lenses (parchment, watercolor, dark fantasy, VTT, accessible) and the style-schema vocabulary a bespoke lens must stay inside.' },
-  facets:       { title: 'Facets & interior grammar: SettlementForge Compendium',
-                  desc: 'The institution-nature facets and the interior grammar: the interior kinds, room kinds, and furnishing kinds every building draws from.' },
   calamity:     { title: 'Calamity reference: SettlementForge Compendium',
                   desc: 'The one unified calamity mechanic, its cosmetic terrain flavours, and its severity bands. Honest by design: a flood and a fire differ in the telling, not the maths.' },
   az:           { title: 'A–Z index: SettlementForge Compendium',
@@ -117,10 +122,17 @@ const TAB_META = Object.freeze({
 export default function CompendiumPanel({ config, standalone=false, routeEntry }) {
   // V-19 long tail: /compendium/<entry-id> lands here with routeEntry set. Resolve
   // it to the flat index entry (id -> tab + anchor) so the panel opens on that
-  // entry's section and its head matches the prerendered page.
+  // entry's section and its head matches the prerendered page. An id that is not
+  // in the index resolves to null and the panel opens on the Overview; a REMOVED id
+  // (REMOVED_ENTRY_IDS above) also has its dead address replaced, in the effect below.
+  const mobile = useIsMobile();
   const entryFromRoute = routeEntry
     ? COMPENDIUM_INDEX.find((e) => e.id === routeEntry) || null
     : null;
+  useEffect(() => {
+    if (!standalone || !routeEntry || !REMOVED_ENTRY_IDS.has(routeEntry)) return;
+    navigate('compendium', { replace: true, scroll: false });
+  }, [standalone, routeEntry]);
   // Honor a ?cat=<bucket> deep-link on mount — a direct link into the custom-
   // content workspace focused on one authoring bucket (e.g. ?cat=deities from an
   // "Author a deity" CTA). Only a valid CUSTOM_CATEGORIES key is honored.
@@ -250,8 +262,6 @@ export default function CompendiumPanel({ config, standalone=false, routeEntry }
       case 'operations':   return <OperationsHub/>;
       case 'arcane':       return <ArcaneTab/>;
       case 'living':       return <SystemsHub/>;
-      case 'lenses':       return <LensesHub/>;
-      case 'facets':       return <FacetsHub/>;
       case 'stress':       return <StressTab search={q}/>;
       case 'calamity':     return <CalamityHub/>;
       case 'neighbour':    return <NeighbourTab search={q}/>;
@@ -285,7 +295,7 @@ export default function CompendiumPanel({ config, standalone=false, routeEntry }
   // tabs keep a comfortable reading measure so lines don't sprawl.
   // The grid/wide hubs fill the frame (flow into more columns); the prose tabs keep
   // a comfortable reading measure so lines don't sprawl.
-  const WIDE_TABS = new Set(['overview', 'power', 'institutions', 'operations', 'living', 'lenses', 'facets', 'calamity', 'az']);
+  const WIDE_TABS = new Set(['overview', 'power', 'institutions', 'operations', 'living', 'calamity', 'az']);
   const gridTab = WIDE_TABS.has(activeTab);
   const contentColumn = standalone
     ? { maxWidth: gridTab ? '100%' : PROSE_MAX, marginLeft: 'auto', marginRight: 'auto' }
@@ -303,7 +313,7 @@ export default function CompendiumPanel({ config, standalone=false, routeEntry }
         </Button>
         <Button onClick={()=>setMode('custom')} variant={mode==='custom'?'ai':'ghost'} size="sm" icon={<Sparkles size={13}/>} aria-pressed={mode==='custom'} style={{ flex:1 }}>
           My Custom Content
-          {customContentCount > 0 && <span style={{ fontSize:FS.micro, fontWeight:700, background: swatch['#FAF8F4'], color:swatch['#7C3AED'], padding:'1px 6px' }}>{customContentCount}</span>}
+          {customContentCount > 0 && <span style={{ fontSize:chromeFontSize(FS.micro, mobile), fontWeight:700, background: swatch['#FAF8F4'], color:swatch['#7C3AED'], padding:'1px 6px' }}>{customContentCount}</span>}
         </Button>
       </div>
 
@@ -329,7 +339,7 @@ export default function CompendiumPanel({ config, standalone=false, routeEntry }
             ) : (
             <div role="tablist" aria-label="Compendium sections" style={{ display:'flex', overflowX:'auto', gap:0 }}>
               {TABS.map(({ id, label, Icon }) => (
-                <button key={id} type="button" role="tab" id={`compendium-tab-${id}`} aria-selected={activeTab===id} aria-controls={`compendium-panel-${id}`} onClick={()=>setActiveTab(id)} style={{ display:'flex', alignItems:'center', gap:5, padding:'11px 13px', minHeight:44, background:activeTab===id?CARD:'transparent', border:'none', borderBottom:activeTab===id?`2px solid ${GOLD}`:'2px solid transparent', cursor:'pointer', color:activeTab===id?INK:MUT, fontFamily:sans, fontSize:FS.xs, fontWeight:activeTab===id?700:500, whiteSpace:'nowrap', flexShrink:0 }}>
+                <button key={id} type="button" role="tab" id={`compendium-tab-${id}`} aria-selected={activeTab===id} aria-controls={`compendium-panel-${id}`} onClick={()=>setActiveTab(id)} style={{ display:'flex', alignItems:'center', gap:5, padding:'11px 13px', minHeight:44, background:activeTab===id?CARD:'transparent', border:'none', borderBottom:activeTab===id?`2px solid ${GOLD}`:'2px solid transparent', cursor:'pointer', color:activeTab===id?INK:MUT, fontFamily:sans, fontSize:chromeFontSize(FS.xs, mobile), fontWeight:activeTab===id?700:500, whiteSpace:'nowrap', flexShrink:0 }}>
                   <Icon size={12}/> {label}
                 </button>))}
             </div>

@@ -3,6 +3,7 @@ import { afterEach, describe, expect, test, vi } from 'vitest';
 import { cleanup, fireEvent, render, screen, waitFor } from '@testing-library/react';
 
 import GalleryPage from '../../src/components/GalleryPage.jsx';
+import { en } from '../../src/copy/en.js';
 
 const mocks = vi.hoisted(() => ({
   galleryApi: {
@@ -131,6 +132,42 @@ describe('GalleryPage', () => {
     for (const label of ['Settlements', 'Maps', 'Campaigns']) {
       expect(screen.getByRole('button', { name: label })).toBeTruthy();
     }
+  });
+
+  // A failed list read used to render the BACKEND's own words at the reader:
+  // "Could not load the gallery: <PostgREST/network message>", while the copy
+  // register's own `gallery.loadError` sat unused. The raw text is a diagnostic
+  // and belongs in the console; the reader gets the house line.
+  test('a failed list read shows the house error line, never the raw backend message', async () => {
+    const consoleError = vi.spyOn(console, 'error').mockImplementation(() => {});
+    mocks.galleryApi.fetchPublicGallery.mockRejectedValue(
+      new Error('FetchError: request to https://db.example/rest/v1/gallery failed, reason: ECONNREFUSED'),
+    );
+
+    render(<GalleryPage onNavigate={vi.fn()} />);
+
+    const alert = await screen.findByRole('alert');
+    expect(alert.textContent).toBe(en.gallery.loadError);
+    // Anchored negative: the alert IS on screen (above), and neither the raw
+    // message nor the old hand-written prefix appears anywhere on the page.
+    expect(screen.queryByText(/ECONNREFUSED/)).toBeNull();
+    expect(screen.queryByText(/Could not load the gallery/)).toBeNull();
+    // The diagnostic still reaches the console for whoever has to fix it.
+    expect(consoleError).toHaveBeenCalledWith('[gallery] list fetch failed', expect.any(Error));
+    consoleError.mockRestore();
+  });
+
+  // The empty-gallery whisper's dismiss control was a <Button> with neither
+  // children nor an icon. Icons are suppressed everywhere but the Realm map
+  // (IconsContext), so even an `icon` prop would have left an empty labelled
+  // box: the affordance has to be the unicode TEXT twin.
+  test('the empty-gallery whisper carries a visible dismiss mark, not an empty box', async () => {
+    mocks.galleryApi.fetchPublicGallery.mockResolvedValue({ items: [], total: 0, hasMore: false });
+
+    render(<GalleryPage onNavigate={vi.fn()} />);
+
+    const dismiss = await screen.findByRole('button', { name: 'Dismiss the gallery invitation' });
+    expect(dismiss.textContent.trim()).toBe('×');
   });
 
   test('upvotes through the gallery API when signed in', async () => {

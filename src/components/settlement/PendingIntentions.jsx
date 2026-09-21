@@ -17,6 +17,8 @@ import { MUTED, INK, BORDER, CARD, sans, FS, SP } from '../theme.js';
 import Button from '../primitives/Button.jsx';
 import { lapseOf, campaignPeerCountFor } from '../../domain/display/docketLapse.js';
 import { eventToComposerIntent } from './eventComposer/editSeed.js';
+import useIsMobile from '../../hooks/useIsMobile.js';
+import { chromeFontSize, proseFontSize } from '../../design/proseScale.js';
 
 const TYPE_LABELS = {
   APPLY_STRESSOR: 'Apply stressor',
@@ -42,6 +44,7 @@ function labelFor(event) {
 }
 
 export default function PendingIntentions() {
+  const mobile = useIsMobile();
   const activeSaveId = useStore(s => s.activeSaveId);
   const campaigns = useStore(s => s.campaigns);
   const cancelQueuedEvent = useStore(s => s.cancelQueuedEvent);
@@ -80,7 +83,7 @@ export default function PendingIntentions() {
     }}>
       <div style={{
         display: 'flex', alignItems: 'center', gap: 6,
-        fontSize: FS.xs, fontWeight: 800, fontFamily: sans,
+        fontSize: chromeFontSize(FS.xs, mobile), fontWeight: 800, fontFamily: sans,
         color: MUTED, letterSpacing: '0.06em', textTransform: 'uppercase',
         marginBottom: SP.sm,
       }}>
@@ -100,18 +103,18 @@ export default function PendingIntentions() {
               padding: SP.sm, background: CARD,
               border: `1px solid ${BORDER}`,
             }}>
-              <span style={{ flex: 1, fontSize: FS.xs, color: INK, fontFamily: sans }}>
+              <span style={{ flex: 1, fontSize: chromeFontSize(FS.xs, mobile), color: INK, fontFamily: sans }}>
                 {labelFor(item.event)}
                 {lapsed && (
                   <>
                     <span style={{
                       marginLeft: 8, padding: '1px 6px',
                       border: `1px solid ${BORDER}`, color: MUTED,
-                      fontSize: FS.xxs, fontWeight: 700, letterSpacing: '0.04em',
+                      fontSize: chromeFontSize(FS.xxs, mobile), fontWeight: 700, letterSpacing: '0.04em',
                     }}>
                       LAPSED: needs your attention
                     </span>
-                    <span style={{ display: 'block', fontSize: FS.xxs, color: MUTED, marginTop: 2 }}>
+                    <span style={{ display: 'block', fontSize: chromeFontSize(FS.xxs, mobile), color: MUTED, marginTop: 2 }}>
                       {lapsed} Left as-is, the tick will refuse it visibly.
                     </span>
                   </>
@@ -144,7 +147,7 @@ export default function PendingIntentions() {
         })}
       </div>
 
-      <p style={{ fontSize: FS.xxs, color: MUTED, margin: '8px 0 0', fontStyle: 'italic', lineHeight: 1.5 }}>
+      <p style={{ fontSize: proseFontSize(FS.xxs, mobile), color: MUTED, margin: '8px 0 0', fontStyle: 'italic', lineHeight: 1.5 }}>
         These resolve simultaneously with every settlement when the world map advances time.
       </p>
     </div>

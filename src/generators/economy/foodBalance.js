@@ -285,18 +285,53 @@ export const deriveFoodBalanceAnalysis = (population, terrain, institutions, con
     dailyProductionFinal = foodSecurity.dailyProduction;
     dailyNeedFinal       = foodSecurity.dailyNeed;
     surplusFinal         = dailyProductionFinal - dailyNeedFinal;
-    rawDeficitFinal      = Math.max(0, -surplusFinal);
+    // The writer's own gap where it publishes one. Re-deriving it from the
+    // ROUNDED production/need pair costs up to a pound, which is nothing on a
+    // city and a percentage point and a half on a thorp whose whole daily need
+    // is sixty pounds — and that pound then bit through the clamp below and
+    // split the residual percentage between the Economics tab and the Daily
+    // Life tab on 12 of the golden master's 525 configurations.
+    rawDeficitFinal      = Number.isFinite(foodSecurity.rawDeficit)
+      ? Math.max(0, foodSecurity.rawDeficit)
+      : Math.max(0, -surplusFinal);
     // foodSecurity returns deficitPct (rounded) + dailyNeed, not a deficit-lbs
     // field; reconstruct the lbs from them. deficitPct === 0 ⇔ deficit === 0, so
     // the SIGN is preserved exactly. Clamp into [0, rawDeficit].
     const cDeficitPct = Number.isFinite(foodSecurity.deficitPct) ? foodSecurity.deficitPct : 0;
     deficit = Math.max(0, Math.min(rawDeficitFinal, Math.round((cDeficitPct / 100) * dailyNeedFinal)));
     deficitPercent = cDeficitPct;
-    // Rebuild attribution so importCoverage + magicFoodOffset === rawDeficit − deficit.
+    // WHO CARRIES THE COVERED PORTION. The writer publishes its own split
+    // (foodSecurity.importCoverage / .magicOffset, lb/day), so read it: a view
+    // that re-derives a number its writer already holds is a second source of
+    // truth, and this one was wrong twice over. Its `canImportFood` gate tested
+    // the LOCAL rawDeficit — the figure the canonical block three lines above has
+    // just SUPERSEDED — so a settlement whose local model saw a surplus while the
+    // canonical model saw a real gap was credited with zero imports and a magical
+    // offset covering the whole gap: measured at 52 of the golden master's 525
+    // configurations, each one dropping its "+ N imported" chip, its import-bar
+    // segment, its "Trade covers X% of gap" caption and its importChannel from
+    // both the Economics tab and the PDF chapter. Its rate ladder also lacked the
+    // writer's low-agri terrain boost, so even where the gate opened the split
+    // between channel and magic was off.
+    //
+    // The covered TOTAL stays anchored to deficitPct (the band's own number), so
+    // the sign law above is untouched; only its attribution is read rather than
+    // guessed. Proportions are applied to the covered total so the two channels
+    // still sum EXACTLY to rawDeficit − deficit.
     const totalCoverage = Math.max(0, rawDeficitFinal - deficit);
-    const importPortion = canImportFood
-      ? Math.min(totalCoverage, Math.round(rawDeficitFinal * importCoverageRate))
-      : 0;
+    const cImport = Math.max(0, Number(foodSecurity.importCoverage) || 0);
+    const cMagic  = Math.max(0, Number(foodSecurity.magicOffset) || 0);
+    const canonicalSplit = Number.isFinite(foodSecurity.importCoverage)
+      && Number.isFinite(foodSecurity.magicOffset)
+      && (cImport + cMagic) > 0;
+    // Settlements persisted before the writer published its split carry only
+    // deficitPct, so the original reconstruction stays as the arm that reads
+    // them — with the import gate now asking about the CANONICAL gap.
+    const importPortion = canonicalSplit
+      ? Math.min(totalCoverage, Math.round(totalCoverage * (cImport / (cImport + cMagic))))
+      : (importCoverageRate > 0 && rawDeficitFinal > 0
+        ? Math.min(totalCoverage, Math.round(rawDeficitFinal * importCoverageRate))
+        : 0);
     const magicResidual = Math.max(0, totalCoverage - importPortion);
     if (magicResidual > 0 && magicOn && magicFoodRate > 0) {
       importCoverageFinal  = importPortion;
@@ -358,7 +393,7 @@ export const deriveFoodBalanceAnalysis = (population, terrain, institutions, con
         });
         plotHooks.push({
           category: 'Trade Disruption',
-          hook: `The ${effectiveRoute} trade route is cut off (bandits/war/natural disaster). Settlement has only ${Math.round((dailyProductionFinal / dailyNeedFinal) * 30)} days of food remaining. Famine threatens within weeks.`,
+          hook: `The ${effectiveRoute} trade route is cut off by bandits, war, or weather. The settlement has ${Math.round((dailyProductionFinal / dailyNeedFinal) * 30)} days of food left. Famine follows within weeks.`,
           severity: 'high',
         });
       }
@@ -387,7 +422,7 @@ export const deriveFoodBalanceAnalysis = (population, terrain, institutions, con
       }
       plotHooks.push({
         category: 'Trade Politics',
-        hook: 'Price of grain spikes due to poor harvest elsewhere. Can settlement afford imports? Do merchants exploit the situation?',
+        hook: 'A poor harvest somewhere else has spiked the price of grain. The settlement must decide what it can still afford to import, and the merchants are watching it decide.',
         severity: 'medium',
       });
     }
@@ -460,7 +495,21 @@ export const deriveFoodBalanceAnalysis = (population, terrain, institutions, con
       deficit: Math.round(deficit),
       deficitPercent: Math.round(deficitPercent),
       surplus: Math.round(Math.max(surplusFinal, 0)),
-      agricultureModifier: agriCap,
+      // THE MULTIPLIER THE PRODUCTION FIGURE BESIDE IT WAS COMPUTED WITH, which
+      // is the only reading under which the Economics tab's "Agriculture
+      // modifier: X%" and the PDF's "Ag mod X" explain anything. This field
+      // carried geographyData's terrain agricultureCapacity, and once the
+      // canonical writer took over production that table stopped being the one
+      // in play: foodGenerator's TERRAIN_AGRI reads plains 1.0 where
+      // geographyData reads 1.5, riverside 0.9 where it reads 1.3, hills 0.6
+      // where it reads 0.9. 376 of the golden master's 525 configurations
+      // printed a modifier their own production contradicts. The canonical
+      // effective multiplier (terrain + resource/institution bonus + registered
+      // custom producers) replaces it; the fallback path, which has no canonical
+      // writer, keeps reporting the capacity its own local model used.
+      agricultureModifier: Number.isFinite(foodSecurity?.effectiveAgriculture)
+        ? foodSecurity.effectiveAgriculture
+        : agriCap,
       stressModifier: productionMult < 1 ? productionMult : undefined,
       importCoverage: importCoverageFinal > 0 ? Math.round(importCoverageFinal) : undefined,
       rawDeficit: rawDeficitFinal > deficit ? Math.round(rawDeficitFinal) : undefined,
@@ -595,13 +644,13 @@ export const deriveSupplyRiskAnalysis = (population, terrain, institutions, conf
     if (route === 'isolated' || route === 'none' || route === 'road') {
       hooks.push({
         category: 'Survival Crisis',
-        hook: 'Settlement is starving. Desperate villagers might turn to banditry, or a merchant offers to supply food... at a terrible price (debt servitude? dark pact?).',
+        hook: 'The settlement is starving. Villagers are turning to banditry, and a merchant has offered to supply food at a price the settlement cannot pay in coin.',
         severity: 'critical',
       });
     } else if (route !== 'isolated') {
       hooks.push({
         category: 'Trade Monopoly',
-        hook: 'A single merchant guild controls grain imports. They raise prices 300%. Do locals rebel? Seek alternative suppliers? What price are they willing to pay?',
+        hook: 'A single merchant guild controls grain imports and has raised prices 300%. The locals are weighing whether to pay it, find another supplier, or take the grain.',
         severity: 'high',
       });
       if (route === 'river')
@@ -613,13 +662,13 @@ export const deriveSupplyRiskAnalysis = (population, terrain, institutions, conf
       if (route === 'port' && resolveTerrain(config) === 'coastal')
         hooks.push({
           category: 'Naval Blockade',
-          hook: `Enemy fleet or pirates blockade the port. Settlement has ${Math.round((foodBalance.dailyProduction / foodBalance.dailyNeed) * 30)} days of reserves. Hire ships to break blockade? Negotiate? Starve?`,
+          hook: `An enemy fleet or a pirate squadron blockades the port. The settlement has ${Math.round((foodBalance.dailyProduction / foodBalance.dailyNeed) * 30)} days of reserves, and nothing enters or leaves until that changes.`,
           severity: 'high',
         });
       if (route === 'road' && hasDeficit)
         hooks.push({
           category: 'Bandit Raids',
-          hook: 'Bandits target food caravans. Settlement offers bounty for clearing the trade road. But are the "bandits" actually desperate refugees from elsewhere?',
+          hook: 'Bandits are taking the food caravans, and the settlement has posted a bounty for clearing the trade road. But are the "bandits" refugees driven here from somewhere worse?',
           severity: 'medium',
         });
     }
@@ -652,7 +701,7 @@ export const deriveSupplyRiskAnalysis = (population, terrain, institutions, conf
         if (resource.toLowerCase().includes('timber'))
           hooks.push({
             category: 'Resource Conflict',
-            hook: "Timber supplier forest is threatened by blight/fire/monsters. Settlement's construction and shipbuilding industries face collapse. Secure new supplier or solve crisis?",
+            hook: "Something is killing the forest the timber comes from, and the settlement's building and shipbuilding trades stall without it. Find another supplier, or find out what is in those woods?",
             severity: 'medium',
           });
         if (resource.toLowerCase().includes('metal') || resource.toLowerCase().includes('iron'))

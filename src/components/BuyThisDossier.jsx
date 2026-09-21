@@ -33,13 +33,17 @@ import { createDossierCheckoutToken, stashPendingDossier } from '../lib/pendingD
 import { stashDossierClaim } from '../lib/dossierClaimStash.js';
 import { SINGLE_DOSSIER } from '../config/pricing.js';
 import { isConfigured } from '../lib/supabase.js';
+import { purchasesOpen } from '../lib/launchGate.js';
 import { viewToPath } from '../lib/routes.js';
 import { t } from '../copy/index.js';
+import useIsMobile from '../hooks/useIsMobile.js';
 import { sans, FS, RED, BODY, INK, PARCH } from './theme.js';
 import Button from './primitives/Button.jsx';
+import AvailableAtLaunchPill from './primitives/AvailableAtLaunchPill.jsx';
 import DossierLadderModal from './dossier/DossierLadderModal.jsx';
 import ExportUnlockDialog from './dossier/ExportUnlockDialog.jsx';
 import CaptchaGate from './perimeter/CaptchaGate.jsx';
+import { chromeFontSize, proseFontSize } from '../design/proseScale.js';
 
 /**
  * Pure export-access decision — exported for direct unit testing without a React
@@ -67,6 +71,7 @@ export function resolveExportAccess({ tier, canExportFreely, saveId, entitled })
  * @param {string} [props.size]                        — Button size token.
  */
 export default function BuyThisDossier({ settlement, saveId = null, onSignIn, onSaveFirst, onNavigate, size = 'sm' }) {
+  const mobile = useIsMobile();
   const tier = useStore(s => s.auth?.tier);
   const canExportFreely = useStore(s => (typeof s.isElevated === 'function' && s.isElevated())
     || (typeof s.canExport === 'function' && s.canExport()));
@@ -97,6 +102,14 @@ export default function BuyThisDossier({ settlement, saveId = null, onSignIn, on
   // the button's aria-describedby to the (always-in-DOM) pill text.
   const [captionHover, setCaptionHover] = useState(false);
   const noteId = useId();
+  // Pre-launch lockout (lib/launchGate.js): both buy buttons render disabled and
+  // wear the Available at launch pill until purchases open. The save-first rung is
+  // a save, not a purchase, and stays live. On a phone the pill wraps below the
+  // label: this control sits in a min-content grid, so an inline pill would push
+  // the button past the screen edge.
+  const purchasesAreOpen = purchasesOpen();
+  const isMobile = useIsMobile();
+  const lockedButtonStyle = !purchasesAreOpen && isMobile ? { flexWrap: 'wrap' } : null;
 
   const access = resolveExportAccess({ tier, canExportFreely, saveId: effectiveSaveId, entitled: cached === true });
 
@@ -204,28 +217,29 @@ export default function BuyThisDossier({ settlement, saveId = null, onSignIn, on
             variant="primary"
             size={size}
             icon={<Download size={12} />}
-            disabled={!isConfigured}
+            disabled={!purchasesAreOpen || !isConfigured}
             aria-describedby={noteId}
             onClick={() => { setError(null); setLadderOpen(true); }}
             onMouseEnter={() => setCaptionHover(true)}
             onMouseLeave={() => setCaptionHover(false)}
             onFocus={() => setCaptionHover(true)}
             onBlur={() => setCaptionHover(false)}
-            style={{ minHeight: 44 }}
+            style={{ minHeight: 44, ...lockedButtonStyle }}
             title={isConfigured
               ? `Buy this dossier as a PDF for ${SINGLE_DOSSIER.priceLabel}. No account required.`
               : 'Payments are not configured in this environment.'}
           >
             {`Buy this dossier for ${SINGLE_DOSSIER.priceLabel}`}
+            {!purchasesAreOpen && <AvailableAtLaunchPill style={{ marginLeft: 6 }} />}
           </Button>
-          <span id={noteId} role="tooltip" style={{ ...pillStyle, opacity: captionHover ? 1 : 0 }}>
+          <span id={noteId} role="tooltip" style={{ ...pillStyle(mobile), opacity: captionHover ? 1 : 0 }}>
             One-time, no account needed.
           </span>
         </div>
         {/* Wave-D human verification (INERT until activated). Managed/invisible;
             the token is captured before the ladder's one-time checkout fires. */}
         <CaptchaGate action="dossier" onToken={setCaptchaToken} />
-        {error && <span style={errStyle}>{error}</span>}
+        {error && <span style={errStyle(mobile)}>{error}</span>}
         {ladderOpen && (
           <DossierLadderModal
             busy={busy}
@@ -262,8 +276,8 @@ export default function BuyThisDossier({ settlement, saveId = null, onSignIn, on
         >
           {t('dossierExport.saveFirst.cta')}
         </Button>
-        {!canSave && <span style={captionStyle}>{t('dossierExport.saveFirst.atCap')}</span>}
-        {error && <span style={errStyle}>{error}</span>}
+        {!canSave && <span style={captionStyle(mobile)}>{t('dossierExport.saveFirst.atCap')}</span>}
+        {error && <span style={errStyle(mobile)}>{error}</span>}
       </div>
     );
   }
@@ -281,14 +295,15 @@ export default function BuyThisDossier({ settlement, saveId = null, onSignIn, on
         variant="secondary"
         size={size}
         icon={<Download size={12} />}
-        disabled={!isConfigured}
+        disabled={!purchasesAreOpen || !isConfigured}
         onClick={() => { setError(null); setUnlockOpen(true); }}
-        style={{ minHeight: 44 }}
+        style={{ minHeight: 44, ...lockedButtonStyle }}
         title={t('dossierExport.buySaved.cta', { price: SINGLE_DOSSIER.priceLabel })}
       >
         {t('dossierExport.buySaved.cta', { price: SINGLE_DOSSIER.priceLabel })}
+        {!purchasesAreOpen && <AvailableAtLaunchPill style={{ marginLeft: 6 }} />}
       </Button>
-      {error && <span style={errStyle}>{error}</span>}
+      {error && <span style={errStyle(mobile)}>{error}</span>}
       <ExportUnlockDialog open={unlockOpen} saveId={effectiveSaveId} onClose={() => setUnlockOpen(false)} />
     </div>
   );
@@ -301,18 +316,21 @@ const wrapStyle = {
   display: 'inline-grid', gridTemplateColumns: 'min-content', justifyItems: 'center',
   gap: 6, fontFamily: sans,
 };
-const errStyle = { fontSize: FS.xs, color: RED, textAlign: 'center' };
+const errStyle = (mobile) => ({ fontSize: chromeFontSize(FS.xs, mobile), color: RED, textAlign: 'center' });
 // BODY (ink-600) is the WCAG-passing helper-text color; MUTED fails 4.5:1 and
 // must not carry the price/rationale a purchaser needs.
-const captionStyle = { fontSize: FS.xs, color: BODY, textAlign: 'center', lineHeight: 1.4 };
+const captionStyle = (mobile) => ({ fontSize: proseFontSize(FS.xs, mobile), color: BODY, textAlign: 'center', lineHeight: 1.4 });
 // Order W2-b — the anon reassurance as a hover/focus tooltip. Absolutely positioned
 // above the button so it never shifts layout; toggled by OPACITY only (stays in the
 // DOM + a11y tree so aria-describedby keeps announcing it). A flat dark ink plate /
 // parchment text (the deep-craft rule-framed idiom — no rounded corner, no z-axis
 // shadow); pointer-events off so it never eats a click.
-const pillStyle = {
+const pillStyle = (mobile) => ({
   position: 'absolute', bottom: 'calc(100% + 6px)', left: '50%', transform: 'translateX(-50%)',
   whiteSpace: 'nowrap', padding: '4px 10px',
-  background: INK, color: PARCH, fontSize: FS.xs, fontFamily: sans, lineHeight: 1.4,
+  // Its one consumer is an inline <span> carrying role="tooltip" — which a source
+  // scanner cannot see from a detached factory, so it reads the box as a block card.
+  // phone-floor: an inline tooltip chip, not a card; it keeps the chrome floor.
+  background: INK, color: PARCH, fontSize: chromeFontSize(FS.xs, mobile), fontFamily: sans, lineHeight: 1.4,
   pointerEvents: 'none', transition: 'opacity 0.15s ease', zIndex: 5,
-};
+});

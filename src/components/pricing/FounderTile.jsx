@@ -37,6 +37,8 @@ import { FOUNDER_SEAT_CAP } from '../../lib/founderSeats.js';
 import { viewToPath } from '../../lib/routes.js';
 import { Funnel, EVENTS } from '../../lib/analytics.js';
 import { sans, serif_, FS, SP, swatch } from '../theme.js';
+import useIsMobile from '../../hooks/useIsMobile.js';
+import { chromeFontSize } from '../../design/proseScale.js';
 
 const GOLD_500 = swatch['#C9A24C'];
 const GOLD_400 = swatch['#D9B566'];
@@ -48,6 +50,7 @@ const INK_800 = swatch['#2C2210'];
 const GOLD_WASH = 'rgba(201,162,76,0.18)';
 
 export default function FounderTile() {
+  const mobile = useIsMobile();
   const recognition = useFounderRecognition();
   const { audience, earnedBy } = recognition;
   const [seatsRemaining, setSeatsRemaining] = useState(null);
@@ -122,7 +125,7 @@ export default function FounderTile() {
           display: 'inline-block',
           padding: '3px 10px',
           background: GOLD_WASH,
-          color: GOLD_500, fontSize: FS.xxs, fontWeight: 800,
+          color: GOLD_500, fontSize: chromeFontSize(FS.xxs, mobile), fontWeight: 800,
           letterSpacing: '0.12em', textTransform: 'uppercase',
         }}>
           The Hall should know your name
@@ -135,7 +138,7 @@ export default function FounderTile() {
         </h2>
         {typeof seatsRemaining === 'number' && (
           <div style={{ marginTop: 6, display: 'flex', flexDirection: 'column', gap: 4 }}>
-            <div style={{ fontSize: FS.xs, color: swatch['#C8B098'], fontStyle: 'italic' }}>
+            <div style={{ fontSize: chromeFontSize(FS.xs, mobile), color: swatch['#C8B098'], fontStyle: 'italic' }}>
               {chairsHeld} of {FOUNDER_SEAT_CAP} chairs held
             </div>
             {/* P7 — the accessible live count PLUS a thin filled meter

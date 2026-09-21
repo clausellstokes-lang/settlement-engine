@@ -14,7 +14,7 @@
 /** @typedef {import('./subsystemCertification.js').SubsystemRow} SubsystemRow */
 
 // The twelve action families npcAgency composes candidate types from
-// (`candidateType: `npc_${actionFamily}`` at npcAgency.js:896, over the
+// (`candidateType: `npc_${actionFamily}`` at npcAgency.js:909, over the
 // NPC_ACTION_FAMILIES catalog), plus the two goal-lane literals at 1014 and 1063.
 // Enumerated from source, not from a receipt: a family that never fired in any
 // soak must still be able to prove the subsystem alive when it does.
@@ -78,7 +78,7 @@ const FAITH_SPREAD_OTHER = 'TWO GATES, AND THE OUTER ONE IS DATA, NOT CONFIG. re
 // classified field set is authored literally in source and was verified end to end.
 
 // The TEN settlement-strategy moves that can reach a receipt. The chooser composes
-// `candidateType: `strategy_${move}`` (settlementStrategy.js:498) over twelve moves,
+// `candidateType: `strategy_${move}`` (settlementStrategy.js:454) over twelve moves,
 // but `defend` and `hold` ALWAYS carry recordMode 'suppression_only'
 // (settlementStrategy.js:512) and isPublicOutcome rejects a suppression-only record
 // (pulseHelpers.js:55), so those two are structurally absent from eventTypeCounts;

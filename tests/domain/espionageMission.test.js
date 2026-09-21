@@ -556,7 +556,7 @@ describe('ES-1 casting — two opposite laws over one roster, and one availabili
   test('THE DISPATCH-REFUSAL SEAM is ONE predicate, and it refuses BOTH laws together', () => {
     const world = litWorld();
     const busy = [
-      { ...ROSTER[2], status: 'imprisoned' },
+      { ...ROSTER[2], status: 'jailed' },
       { ...ROSTER[1], whereabouts: { state: 'travelling' } },
       { ...ROSTER[0], status: 'dead' },
     ];

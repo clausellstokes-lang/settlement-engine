@@ -23,6 +23,8 @@ import { useStore } from '../../store/index.js';
 import { buildRegistry } from '../../lib/customRegistry.js';
 import { INK, SECOND, BODY, BORDER, BORDER2, CARD, GOLD, sans, serif_, FS, SP, PROSE_MAX } from '../theme.js';
 import Button from '../primitives/Button.jsx';
+import AvailableAtLaunchPill from '../primitives/AvailableAtLaunchPill.jsx';
+import { purchasesOpen } from '../../lib/launchGate.js';
 
 export default function PlaceInRegionCard() {
   const config = useStore(s => s.config);
@@ -31,6 +33,9 @@ export default function PlaceInRegionCard() {
   const customContent = useStore(s => s.customContent);
   const canManage = useStore(s => (typeof s.canUseCustomContent === 'function' ? s.canUseCustomContent() : false));
   const setPurchaseModalOpen = useStore(s => s.setPurchaseModalOpen);
+  // Purchases stay closed until launch (lib/launchGate.js): the Upgrade CTA is
+  // disabled and wears the Available at launch pill.
+  const purchasesAreOpen = purchasesOpen();
 
   const deities = useMemo(() => {
     try {
@@ -62,8 +67,9 @@ export default function PlaceInRegionCard() {
           <span style={{ flex: 1 }}>
             Assign this settlement to a campaign and a patron deity at birth, then advance the region for years.
           </span>
-          <Button variant="gold" size="sm" onClick={() => setPurchaseModalOpen?.(true)}>
+          <Button variant="gold" size="sm" disabled={!purchasesAreOpen} onClick={() => setPurchaseModalOpen?.(true)} style={purchasesAreOpen ? undefined : { flexWrap: 'wrap' }}>
             Upgrade
+            {!purchasesAreOpen && <AvailableAtLaunchPill style={{ marginLeft: 6 }} />}
           </Button>
         </div>
       </div>

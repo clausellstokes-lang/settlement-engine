@@ -1,6 +1,8 @@
 import { BORDER_STRONG, INK, MUTED, BODY, CARD, sans, serif_, FS } from '../theme';
 import Button from '../primitives/Button.jsx';
 import { nameOf } from '../../domain/rulingPower.js';
+import useIsMobile from '../../hooks/useIsMobile.js';
+import { chromeFontSize, proseFontSize } from '../../design/proseScale.js';
 
 // ── Edit Names ───────────────────────────────────────────────────────────────
 // Inline rename affordance for NPC & faction names. Presentational: all state
@@ -19,6 +21,7 @@ export default function SettlementDetailEditNames({
   // the Factions rows rendered blank and the door did not exist. Prefer the
   // CANONICAL powerStructure roster, reading its label through nameOf so the
   // `.faction` / `.name` precedence can never be hand-rolled here.
+  const mobile = useIsMobile();
   const powerFactions = settlement?.powerStructure?.factions || [];
   const factionRows = (powerFactions.length
     ? powerFactions.map((fac, fi) => ({
@@ -47,12 +50,12 @@ export default function SettlementDetailEditNames({
           <span style={{fontFamily:serif_,fontSize:FS.md,fontWeight:600,color:INK,flex:1}}>
             Edit Names
           </span>
-          <span style={{fontSize:FS.xxs,color:MUTED}}>NPC &amp; faction names only</span>
-          <span style={{fontSize:FS.xs,color:MUTED,marginLeft:4}}>{editNamesOpen?'▲':'▼'}</span>
+          <span style={{fontSize:chromeFontSize(FS.xxs, mobile),color:MUTED}}>NPC &amp; faction names only</span>
+          <span style={{fontSize:chromeFontSize(FS.xs, mobile),color:MUTED,marginLeft:4}}>{editNamesOpen?'▲':'▼'}</span>
         </Button>
         {editNamesOpen&&<div style={{padding:'10px 14px',background:CARD}}>
         {isCanonLocked ? (
-          <div style={{fontSize:FS.xs,color:BODY,fontStyle:'italic',lineHeight:1.6}}>
+          <div style={{fontSize:proseFontSize(FS.xs, mobile),color:BODY,fontStyle:'italic',lineHeight:1.6}}>
             NPC and faction names are locked once this settlement is canonized.
             Reset it to draft (Phase badge above) if you need to rename them.
           </div>
@@ -60,7 +63,7 @@ export default function SettlementDetailEditNames({
 
           {/* NPCs */}
           {(settlement.npcs||[]).length>0&&<>
-            <div style={{fontSize:FS.xxs,fontWeight:800,color:MUTED,textTransform:'uppercase',
+            <div style={{fontSize:chromeFontSize(FS.xxs, mobile),fontWeight:800,color:MUTED,textTransform:'uppercase',
               letterSpacing:'0.06em',marginBottom:6}}>NPCs</div>
             <div style={{display:'flex',flexDirection:'column',gap:4,marginBottom:12}}>
               {(settlement.npcs||[]).map(npc=>{
@@ -69,7 +72,7 @@ export default function SettlementDetailEditNames({
                   {/* The role is load-bearing DATA — it tells the GM WHICH NPC
                       they're renaming — so it reads at BODY (AA), not chrome
                       MUTED (P7). */}
-                  <span style={{fontSize:FS.xs,color:BODY,minWidth:130,flexShrink:0}}>
+                  <span style={{fontSize:chromeFontSize(FS.xs, mobile),color:BODY,minWidth:130,flexShrink:0}}>
                     {npc.role}
                   </span>
                   {isEditing
@@ -103,7 +106,7 @@ export default function SettlementDetailEditNames({
 
           {/* Factions */}
           {factionRows.length>0&&<>
-            <div style={{fontSize:FS.xxs,fontWeight:800,color:MUTED,textTransform:'uppercase',
+            <div style={{fontSize:chromeFontSize(FS.xxs, mobile),fontWeight:800,color:MUTED,textTransform:'uppercase',
               letterSpacing:'0.06em',marginBottom:6}}>Factions</div>
             <div style={{display:'flex',flexDirection:'column',gap:4}}>
               {factionRows.map(row=>{
@@ -111,7 +114,7 @@ export default function SettlementDetailEditNames({
                 return <div key={row.key} style={{display:'flex',alignItems:'center',gap:8}}>
                   {/* The faction category is load-bearing DATA (which faction is
                       being renamed), so it reads at BODY (AA), not MUTED (P7). */}
-                  <span style={{fontSize:FS.xs,color:BODY,minWidth:130,flexShrink:0}}>
+                  <span style={{fontSize:chromeFontSize(FS.xs, mobile),color:BODY,minWidth:130,flexShrink:0}}>
                     {row.label}
                   </span>
                   {isEditing
@@ -147,12 +150,12 @@ export default function SettlementDetailEditNames({
               the opened panel would otherwise show only the disclaimer below and
               read as broken. Explain why it's empty. */}
           {(settlement.npcs||[]).length===0 && factionRows.length===0 && (
-            <div style={{fontSize:FS.xs,color:BODY,lineHeight:1.5}}>
+            <div style={{fontSize:proseFontSize(FS.xs, mobile),color:BODY,lineHeight:1.5}}>
               This settlement has no named NPCs or factions to rename yet.
             </div>
           )}
 
-          <p style={{fontSize:FS.xs,color:BODY,margin:'10px 0 0',fontStyle:'italic',lineHeight:1.5}}>
+          <p style={{fontSize:proseFontSize(FS.xs, mobile),color:BODY,margin:'10px 0 0',fontStyle:'italic',lineHeight:1.5}}>
             Renaming updates this settlement's JSON export and any linked neighbour references.
             Press Enter or click Save to confirm. Escape to cancel.
           </p>

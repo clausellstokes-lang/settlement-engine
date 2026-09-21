@@ -1,6 +1,8 @@
 /** Shared visual unread numeral. Accessible names live on its parent control. */
 import { semantic, swatch } from '../../design/tokens.js';
 import { FS } from '../theme.js';
+import useIsMobile from '../../hooks/useIsMobile.js';
+import { chromeFontSize } from '../../design/proseScale.js';
 
 export function normalizeUnreadCount(count) {
   const numeric = Number(count);
@@ -14,6 +16,7 @@ export function unreadMessagesLabel(base, count) {
 }
 
 export default function UnreadMessageBadge({ count, style }) {
+  const mobile = useIsMobile();
   const unread = normalizeUnreadCount(count);
   if (!unread) return null;
   return (
@@ -24,7 +27,7 @@ export default function UnreadMessageBadge({ count, style }) {
         display: 'inline-flex', alignItems: 'center', justifyContent: 'center',
         width: 18, height: 18, clipPath: 'circle(50%)', boxSizing: 'border-box',
         background: semantic.operatorAlert, color: swatch.white,
-        fontSize: FS.xxs, fontWeight: 800, lineHeight: 1,
+        fontSize: chromeFontSize(FS.xxs, mobile), fontWeight: 800, lineHeight: 1,
         ...style,
       }}
     >

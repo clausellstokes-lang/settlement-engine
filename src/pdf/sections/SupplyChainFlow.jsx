@@ -19,6 +19,9 @@ import { SUPPLY_CHAIN_NEEDS } from '../../data/supplyChainData.js';
 import { exactGoodId, goodText } from '../../domain/region/goodsCatalog.js';
 import { compareCodepoint } from '../../domain/deterministicSort.js';
 import { safe } from '../lib/format.js';
+import { tokenCase } from '../../domain/display/labelCase.js';
+import { institutionDisplayName } from '../../domain/display/institutionDisplayName.js';
+import { supplyChainNoteInWords } from '../../domain/display/engineKeysInText.js';
 
 // chainId -> definition (for upstream import labels + fallback outputs).
 const CHAIN_DEFS = {};
@@ -139,7 +142,7 @@ function ChainRow({ chain, instNames, primaryExports }) {
               dashed={!inst.present}
               italic={!inst.present}
             >
-              {safe(inst.name)}{inst.present ? '' : ' (missing)'}
+              {safe(institutionDisplayName(inst.name))}{inst.present ? '' : ' (missing)'}
             </Node>
             {i < insts.length - 1 ? <Connector /> : null}
           </View>
@@ -159,7 +162,7 @@ function ChainRow({ chain, instNames, primaryExports }) {
 
       {chain.upstreamNote ? (
         <Text style={{ ...type.caption, fontSize: pt['7'], color: palette.muted, fontStyle: 'italic', marginTop: 2 }}>
-          · {safe(chain.upstreamNote)}
+          · {safe(supplyChainNoteInWords(chain.upstreamNote, CHAIN_DEFS))}
         </Text>
       ) : null}
     </View>
@@ -205,8 +208,11 @@ function CategoryGroup({ needLabel, needKey, chains, instNames, primaryExports }
           marginBottom: 3,
         }}
       >
-        <Text style={{ ...type.label, fontSize: pt['7.5'], color: palette.ink, flex: 1, textTransform: 'uppercase' }}>
-          {safe(needLabel || needKey)}
+        {/* The need GROUP header. It carried `type.label`'s transform AND a second,
+            redundant `textTransform:'uppercase'` on top of it — belt and braces around a
+            word the Economics tab had already learned to speak. */}
+        <Text style={{ ...type.label_plain, fontSize: pt['7.5'], color: palette.ink, flex: 1 }}>
+          {tokenCase(safe(needLabel || needKey))}
         </Text>
         <Text style={{ ...type.caption, fontSize: pt['7'], color: palette.muted }}>
           {chains.length} chain{chains.length === 1 ? '' : 's'}

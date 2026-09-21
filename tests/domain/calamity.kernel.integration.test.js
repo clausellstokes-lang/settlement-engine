@@ -93,7 +93,13 @@ function fixture({ spatial, struck = struckSettlement() }) {
       channels: [],
     }),
   };
-  const settlementUpdates = settlements.map((it) => ({ saveId: it.id, settlement: it.settlement }));
+  // ⛔ THE PARAMETER MAY NOT BE NAMED `it`, AND THIS FILE IS WHERE THE COPIES CAME FROM. The
+  // lighting walker resolves an opener only where the module binds that name EXACTLY ONCE and
+  // that one binding is the vitest import; a second binding anywhere in the file — even a
+  // nested arrow's parameter — makes the word unresolvable, and every `it` arm in the file
+  // parks on `OPENER_UNRESOLVED:it`, contributing NOTHING to the census. This driver was
+  // copied into twenty-four other suites and took the defect with it each time (FIX-L1).
+  const settlementUpdates = settlements.map((update) => ({ saveId: update.id, settlement: update.settlement }));
   const worldState = {
     tick: 52,
     simulationRules: { disastersEnabled: true },
@@ -344,7 +350,7 @@ describe('stage 0 — TYPE-BLIND STAYS TYPE-BLIND (no mechanical branch on the f
       { id: 'faredge', name: 'Faredge', settlement: plainSettlement('Faredge') },
     ];
     const res = advanceCalamity({
-      settlementUpdates: settlements.map((it) => ({ saveId: it.id, settlement: it.settlement })),
+      settlementUpdates: settlements.map((update) => ({ saveId: update.id, settlement: update.settlement })),
       worldState: { tick: 52, simulationRules: { disastersEnabled: true } },
       snapshot: { settlements, regionalGraph: ensureRegionalGraph({ edges: [], channels: [] }) },
       digest: null, pIndex: { get: () => ({ score: 0.4 }) },

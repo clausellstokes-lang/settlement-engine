@@ -11,8 +11,11 @@ import { AlertTriangle, Info } from 'lucide-react';
 import { useStore } from '../../store/index.js';
 import { checkDraftEdit } from '../../domain/coherence/checkDraftEdit.js';
 import { GOLD, INK, MUTED, BORDER, sans, FS, SP, swatch } from '../theme.js';
+import useIsMobile from '../../hooks/useIsMobile.js';
+import { chromeFontSize, proseFontSize } from '../../design/proseScale.js';
 
 export default function CoherencePanel() {
+  const mobile = useIsMobile();
   const phase      = useStore(s => s.phase);
   const settlement = useStore(s => s.settlement);
 
@@ -33,7 +36,7 @@ export default function CoherencePanel() {
     }}>
       <div style={{
         display: 'flex', alignItems: 'center', gap: 6,
-        fontSize: FS.xs, fontWeight: 800, fontFamily: sans,
+        fontSize: chromeFontSize(FS.xs, mobile), fontWeight: 800, fontFamily: sans,
         color: swatch['#7A4F0F'], letterSpacing: '0.06em', textTransform: 'uppercase',
         marginBottom: SP.xs,
       }}>
@@ -48,6 +51,7 @@ export default function CoherencePanel() {
 }
 
 function Warning({ w }) {
+  const mobile = useIsMobile();
   const Icon = w.severity === 'mismatch' ? AlertTriangle : Info;
   const color = w.severity === 'mismatch' ? '#8b1a1a' : w.severity === 'suggestion' ? MUTED : '#7a4f0f';
   return (
@@ -57,14 +61,14 @@ function Warning({ w }) {
     }}>
       <div style={{ display: 'flex', alignItems: 'flex-start', gap: 6 }}>
         <Icon size={12} color={color} style={{ marginTop: 2, flexShrink: 0 }} />
-        <div style={{ fontSize: FS.xs, fontFamily: sans, color: INK, lineHeight: 1.5 }}>
+        <div style={{ fontSize: proseFontSize(FS.xs, mobile), fontFamily: sans, color: INK, lineHeight: 1.5 }}>
           {w.message}
         </div>
       </div>
       {w.suggestedFixes?.length > 0 && (
         <div style={{
           marginTop: 4, paddingLeft: 18,
-          fontSize: FS.xxs, color: MUTED, fontFamily: sans, fontStyle: 'italic',
+          fontSize: chromeFontSize(FS.xxs, mobile), color: MUTED, fontFamily: sans, fontStyle: 'italic',
         }}>
           Suggestions: {w.suggestedFixes.join(' · ')}
         </div>

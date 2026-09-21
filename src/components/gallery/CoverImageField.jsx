@@ -24,10 +24,13 @@ import ImageCropper from './ImageCropper.jsx';
 import Button from '../primitives/Button.jsx';
 import { validateImageFile, uploadGalleryCover } from '../../lib/imageUpload.js';
 import { BORDER, BORDER2, CARD, CARD_ALT, INK, BODY, GOLD, MUTED, RED, sans, FS, SP } from '../theme.js';
+import useIsMobile from '../../hooks/useIsMobile.js';
+import { chromeFontSize } from '../../design/proseScale.js';
 
 const COVER_ASPECT = 16 / 9;
 
 export default function CoverImageField({ value = '', onChange, ownerId, settlementId, alt = '' }) {
+  const mobile = useIsMobile();
   const inputRef = useRef(null);
   const objectUrlRef = useRef(null);
   const [editUrl, setEditUrl] = useState(null); // object URL while cropping
@@ -142,7 +145,7 @@ export default function CoverImageField({ value = '', onChange, ownerId, settlem
           padding: `${SP.md}px ${SP.sm}px`, minHeight: 96, textAlign: 'center',
           border: `1.5px dashed ${dragOver ? GOLD : BORDER}`,
           background: dragOver ? CARD_ALT : CARD, color: BODY, cursor: 'pointer',
-          fontFamily: sans, fontSize: FS.xxs, transition: 'border-color 120ms, background 120ms',
+          fontFamily: sans, fontSize: chromeFontSize(FS.xxs, mobile), transition: 'border-color 120ms, background 120ms',
         }}
       >
         <span style={{ color: INK, fontWeight: 800 }}>Drag an image here, or click to choose a file</span>
@@ -155,8 +158,9 @@ export default function CoverImageField({ value = '', onChange, ownerId, settlem
 }
 
 function ErrorLine({ text }) {
+  const mobile = useIsMobile();
   return (
-    <span style={{ display: 'inline-flex', alignItems: 'center', gap: 4, color: RED, fontFamily: sans, fontSize: FS.xxs }}>
+    <span style={{ display: 'inline-flex', alignItems: 'center', gap: 4, color: RED, fontFamily: sans, fontSize: chromeFontSize(FS.xxs, mobile) }}>
       {text}
     </span>
   );

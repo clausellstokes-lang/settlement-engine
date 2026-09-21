@@ -19,6 +19,7 @@ import { NotesField } from '../primitives/Editable.jsx';
 import { type, palette, space, pt } from '../theme.js';
 import { humanize } from '../lib/format.js';
 import { composeSettlementQuickGuide } from '../../domain/summary/settlementQuickGuide.js';
+import { tokenCase } from '../../domain/display/labelCase.js';
 
 export function TonightAtTheTable({ settlement, narrativeMode, vm }) {
   const guide = composeSettlementQuickGuide(settlement);
@@ -62,14 +63,14 @@ export function TonightAtTheTable({ settlement, narrativeMode, vm }) {
             wrap={false}
           >
             <Text style={{
-              ...type.label,
+              ...type.label_plain,
               color: palette.muted,
               fontSize: pt['7.5'],
               width: 76,
               marginRight: 5,
               paddingTop: 1,
             }}>
-              {truth.label.toUpperCase()}
+              {tokenCase(truth.label)}
             </Text>
             <Text style={{
               ...type.body,

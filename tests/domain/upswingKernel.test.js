@@ -43,7 +43,7 @@ function fixture({ settlement, lit = true, year = 5, obligations = null, stresso
     stressors,
     ...(obligations ? { spatialLedgers: { obligations } } : {}),
   };
-  const settlementUpdates = items.map((it) => ({ saveId: it.id, settlement: it.settlement }));
+  const settlementUpdates = items.map((update) => ({ saveId: update.id, settlement: update.settlement }));
   return { snapshot, worldState, settlementUpdates, graph: ensureRegionalGraph({ edges: [] }) };
 }
 

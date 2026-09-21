@@ -26,6 +26,8 @@ import { useStore } from '../../../store/index.js';
 import {
   BODY, BORDER, CARD, CARD_ALT, FS, GOLD, INK, MUTED, SECOND, sans,
 } from '../../theme.js';
+import useIsMobile from '../../../hooks/useIsMobile.js';
+import { chromeFontSize, proseFontSize } from '../../../design/proseScale.js';
 
 const OUTCOME_LABEL = {
   triumph: 'a triumph', good: 'well kept', modest: 'modestly kept',
@@ -42,6 +44,9 @@ function humanizeMotif(id) {
 
 /** A tradition row: motif glyph, name, motif chip, window phrase, owner, last outcome, provenance. */
 function TraditionRow({ rec, preview }) {
+  // THE PHONE PROSE FLOOR — the window phrase and the provenance line. The name,
+  // the motif chip and the owner/outcome pair keep their own steps.
+  const mobile = useIsMobile();
   const owner = preview ? '–' : (rec.ownerLabel || rec.ownerKey || '–');
   const outcome = preview ? '–' : (OUTCOME_LABEL[rec.lastOutcome] || rec.lastOutcome || '–');
   const glyph = motifGlyph(rec.coreMotif?.element);
@@ -72,21 +77,21 @@ function TraditionRow({ rec, preview }) {
           {rec.name}
         </h4>
         <span style={{
-          marginLeft: 'auto', color: SECOND, fontFamily: sans, fontSize: FS.xxs, fontWeight: 800,
-          letterSpacing: '0.04em', textTransform: 'uppercase', whiteSpace: 'nowrap',
+          marginLeft: 'auto', color: SECOND, fontFamily: sans, fontSize: chromeFontSize(FS.xxs, mobile), fontWeight: 800,
+ whiteSpace: 'nowrap',
         }}>
           {humanizeMotif(rec.coreMotif?.element)} · {humanizeMotif(rec.coreMotif?.act)}
         </span>
       </div>
-      <div style={{ marginTop: 5, color: BODY, fontFamily: sans, fontSize: FS.xs, lineHeight: 1.5 }}>
+      <div style={{ marginTop: 5, color: BODY, fontFamily: sans, fontSize: proseFontSize(FS.xs, mobile), lineHeight: 1.5 }}>
         Kept in {describeTraditionWindow(rec.window)}.
       </div>
-      <div style={{ marginTop: 6, display: 'flex', gap: 14, flexWrap: 'wrap', color: MUTED, fontFamily: sans, fontSize: FS.xxs, fontWeight: 750 }}>
+      <div style={{ marginTop: 6, display: 'flex', gap: 14, flexWrap: 'wrap', color: MUTED, fontFamily: sans, fontSize: chromeFontSize(FS.xxs, mobile), fontWeight: 750 }}>
         <span>Owner: {owner}</span>
         <span>Last held: {outcome}</span>
       </div>
       {provenance && (
-        <div style={{ marginTop: 6, color: SECOND, fontFamily: sans, fontSize: FS.xxs, fontStyle: 'italic', lineHeight: 1.5 }}>
+        <div style={{ marginTop: 6, color: SECOND, fontFamily: sans, fontSize: proseFontSize(FS.xxs, mobile), fontStyle: 'italic', lineHeight: 1.5 }}>
           {provenance}
         </div>
       )}
@@ -98,6 +103,9 @@ function TraditionRow({ rec, preview }) {
  * @param {{ settlement: any, saveId?: string|null }} props
  */
 export default function TraditionsTab({ settlement }) {
+  // THE PHONE PROSE FLOOR — the framing paragraph, the founding note and the
+  // no-traditions line. Bound above the early return so the hook order is stable.
+  const mobile = useIsMobile();
   // ENGINE mirror when present (T-2 writes it); otherwise the pure founding preview.
   const mirror = Array.isArray(settlement?.traditions) ? settlement.traditions : null;
   const preview = !mirror || mirror.length === 0;
@@ -117,7 +125,7 @@ export default function TraditionsTab({ settlement }) {
 
   if (!traditions || traditions.length === 0) {
     return (
-      <div data-testid="traditions-tab" style={{ padding: '12px 14px', fontFamily: sans, color: MUTED, fontSize: FS.sm }}>
+      <div data-testid="traditions-tab" style={{ padding: '12px 14px', fontFamily: sans, color: MUTED, fontSize: proseFontSize(FS.sm, mobile) }}>
         No traditions are recorded for {name} yet.
       </div>
     );
@@ -125,7 +133,7 @@ export default function TraditionsTab({ settlement }) {
 
   return (
     <div data-testid="traditions-tab" style={{ padding: '12px 14px', fontFamily: sans }}>
-      <p style={{ margin: '0 0 12px', color: BODY, fontFamily: sans, fontSize: FS.xs, lineHeight: 1.5 }}>
+      <p style={{ margin: '0 0 12px', color: BODY, fontFamily: sans, fontSize: proseFontSize(FS.xs, mobile), lineHeight: 1.5 }}>
         {preview ? (
           <>The <strong style={{ color: INK }}>founding traditions</strong> of {name}: the observances its
           people have kept since the beginning, reconstructed from what the town is. Ownership and outcomes
@@ -140,7 +148,7 @@ export default function TraditionsTab({ settlement }) {
         ))}
       </div>
       {preview && (
-        <p style={{ marginTop: 12, color: MUTED, fontFamily: sans, fontSize: FS.xxs, background: CARD_ALT, border: `1px dashed ${BORDER}`, padding: '8px 10px' }}>
+        <p style={{ marginTop: 12, color: MUTED, fontFamily: sans, fontSize: proseFontSize(FS.xxs, mobile), background: CARD_ALT, border: `1px dashed ${BORDER}`, padding: '8px 10px' }}>
           These are <span style={{ color: GOLD, fontWeight: 800 }}>founding traditions</span>: the core each
           settlement carries from its origin. In a living campaign they gain owners, hold or fail by the year,
           and slowly change.

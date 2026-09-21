@@ -15,7 +15,7 @@
  * back — an in-memory-only assertion cannot tell a real durable write from an
  * object the store happens to still be holding by reference.
  */
-import { beforeEach, describe, expect, test, vi } from 'vitest';
+import { afterEach, beforeEach, describe, expect, test, vi } from 'vitest';
 import { create } from 'zustand';
 import { immer } from 'zustand/middleware/immer';
 
@@ -37,6 +37,25 @@ vi.mock('../../src/lib/saves.js', () => ({
     }),
   },
 }));
+
+// ⛔ THE DISCARDED-PROMISE SEAM. `vi.hoisted` because a `vi.mock` factory is
+// hoisted above every import, so a plain top-level const would be in its TDZ.
+// Both overrides default to OFF: every other arm in this file runs the real
+// persist path and the real reporter.
+const seam = vi.hoisted(() => ({ persistRejectsWith: null, reported: [] }));
+vi.mock('../../src/store/campaignSliceShared.js', async (importOriginal) => {
+  const actual = await importOriginal();
+  return {
+    ...actual,
+    persistSaveUpdate: (...args) => (seam.persistRejectsWith
+      ? Promise.reject(seam.persistRejectsWith)
+      : actual.persistSaveUpdate(...args)),
+  };
+});
+vi.mock('../../src/lib/errorReporter.js', async (importOriginal) => {
+  const actual = await importOriginal();
+  return { ...actual, reportError: (error, context) => { seam.reported.push({ error, context }); } };
+});
 
 import { saves } from '../../src/lib/saves.js';
 import { createSettlementSlice } from '../../src/store/settlementSlice.js';
@@ -71,6 +90,8 @@ let store;
 beforeEach(() => {
   rows.length = 0;
   nextId = 1;
+  seam.persistRejectsWith = null;
+  seam.reported.length = 0;
   vi.clearAllMocks();
   store = makeStore();
   store.setState({
@@ -142,5 +163,55 @@ describe('draft timelines transfer at the save-to-library transition', () => {
     // And the stray draft entry is still sitting in the draft sibling — refused,
     // not silently relocated.
     expect(store.getState().draftVersionHistory).toHaveLength(1);
+  });
+
+  // ── ⛔ THE DISCARDED PROMISE, CURED AT THE DOOR (2026-09-18) ────────────────
+  // Every caller of setActiveSaveId discards its return value: the three
+  // components call it for its STORE effect, and the post-signup SAVE_SETTLEMENT
+  // handler wraps it in a try/catch that — like every try/catch around a call
+  // that returns a promise — catches synchronous throws only. `persistSaveUpdate`
+  // really can reject: in an unconfigured build it returns `outboxRunner(...)`
+  // raw, without the `.catch` its cloud branch carries. Four call sites shared
+  // that shape, so the cure belongs to the door, and these arms pin the door.
+  test('a rejected timeline transfer reaches the reporter and never escapes as an unhandled rejection', async () => {
+    const unhandled = [];
+    const onUnhandled = (reason) => { unhandled.push(reason); };
+    process.on('unhandledRejection', onUnhandled);
+    try {
+      seam.persistRejectsWith = new Error('the outbox runner threw');
+      store.getState().recordSnapshot({ kind: 'manual', label: 'Before the fire' });
+      // anchored: the transfer really is armed — without a draft timeline the door
+      // returns undefined and there would be no promise to reject in the first place.
+      expect(store.getState().draftVersionHistory).toHaveLength(1);
+
+      const saveId = await saveToLibrary(store);
+      // Let a genuinely unhandled rejection reach the process listener: node
+      // reports one on a later turn of the loop, not on the tick that made it.
+      await new Promise((resolve) => setImmediate(resolve));
+      await new Promise((resolve) => setImmediate(resolve));
+
+      expect(unhandled).toEqual([]);
+      expect(seam.reported).toHaveLength(1);
+      expect(seam.reported[0].error.message).toBe('the outbox runner threw');
+      expect(seam.reported[0].context.kind).toBe('bindActiveSaveId.draftTimelineTransfer');
+      // THE STORE EFFECT STILL LANDED. A durable write that failed must not undo
+      // the binding the user can see: the id is stamped and the draft sibling was
+      // cleared in the same commit, exactly as on the happy path.
+      expect(store.getState().activeSaveId).toBe(saveId);
+      expect(store.getState().draftVersionHistory).toEqual([]);
+    } finally {
+      process.off('unhandledRejection', onUnhandled);
+    }
+  });
+
+  test('the door resolves false rather than rejecting, so a caller that DOES await it is safe', async () => {
+    seam.persistRejectsWith = new Error('the outbox runner threw');
+    store.getState().recordSnapshot({ kind: 'manual', label: 'Before the fire' });
+    // The action returns the door's promise; awaiting it must not throw.
+    await expect(store.getState().setActiveSaveId('s-await')).resolves.toBe(false);
+    // anchored: the same call with NO draft timeline returns undefined, which is
+    // the other half of the door's contract and proves this one really transferred.
+    seam.persistRejectsWith = null;
+    expect(store.getState().setActiveSaveId('s-await-2')).toBeUndefined();
   });
 });

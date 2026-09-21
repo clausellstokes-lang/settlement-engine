@@ -23,6 +23,7 @@ import { IconsContext } from './components/primitives/IconsContext.js';
 import { MUTED, sans } from './components/theme.js';
 import HouseDevice from './components/brand/HouseDevice.jsx';
 import { useStore } from './store/index.js';
+import useMissedPath from './hooks/useMissedPath.js';
 import {
   createRetryableCampaignLazy,
   createRetryableLazy,
@@ -48,8 +49,20 @@ const HowToUse        = lazy(() => import('./components/HowToUse'));
 // operational half is HowToUse above, now /about/guide.
 const AboutWhatThisIs = lazy(() => import('./components/about/AboutWhatThisIs.jsx'));
 const WorldMap         = campaignLazy(() => import('./components/WorldMap.jsx'));
+// THE REALM LEAVES THE PHONE (owner, ODQ §934.26). Lazy like every other view body, and
+// a leaf: on the width where it renders, WorldMap's whole graph is never reached.
+const RealmPhoneNotice = lazy(() => import('./components/map/RealmPhoneNotice.jsx'));
 const AccountPage      = campaignLazy(() => import('./components/AccountPage.jsx'));
 const AdminPanel       = campaignLazy(() => import('./components/AdminPanel.jsx'));
+// What a NON-staff visitor meets at a staff-only route. Lazy so the refusal
+// machinery (RefusalNotice → ClerkNote → the copy registry) stays off the
+// first-paint closure.
+const StaffOnlyPage    = lazy(() => import('./components/StaffOnlyPage.jsx'));
+// What a visitor meets when the address they asked for is not a page (REVIEW-P F11).
+// Lazy for the same reason StaffOnlyPage is, and it is the same reason twice: the
+// refusal machinery must not ride the eager entry closure to say something almost
+// nobody will be told.
+const NotFoundNotice   = lazy(() => import('./components/NotFoundNotice.jsx'));
 const PricingPage      = lazy(() => import('./components/PricingPage.jsx'));
 const GalleryPage      = campaignLazy(() => import('./components/GalleryPage.jsx'));
 const SingleDossierSuccessPage = lazy(() => import('./components/SingleDossierSuccessPage.jsx'));
@@ -92,12 +105,16 @@ const RoadmapPage       = lazy(() => import('./components/howto/RoadmapPage.jsx'
 const WorldPage         = lazy(() => import('./components/WorldPage.jsx'));
 
 export function Loading() {
-  // The diegetic loading emblem — the still house device over the plain word
-  // (owner placement addendum #2: no spinner-replacement theatrics; a still ink
-  // mark, reduced-motion safe by construction since nothing animates).
+  // The diegetic loading emblem — the still house mark over the plain word (owner
+  // placement addendum #2: no spinner-replacement theatrics; a still mark,
+  // reduced-motion safe by construction since nothing animates). Decorative here:
+  // the word beside it already says what is happening, so the seal takes alt=''.
+  // data-sf-route-loading is the e2e hook for "the view's chunk has not arrived": the shell and
+  // its footer render before the lazy view, so a test that measures the page end must wait for
+  // this fallback to leave first (e2e/pinned-footer.spec.js, e2e/arrow-header.spec.js settleRoute).
   return (
-    <div style={{ padding: 40, textAlign: 'center', color: MUTED, fontFamily: sans }}>
-      <HouseDevice size={40} mode="light" weight="standard" style={{ display: 'block', margin: '0 auto 10px', opacity: 0.85 }} />
+    <div data-sf-route-loading="" style={{ padding: 40, textAlign: 'center', color: MUTED, fontFamily: sans }}>
+      <HouseDevice size={40} alt="" style={{ display: 'block', margin: '0 auto 10px', opacity: 0.85 }} />
       Loading...
     </div>
   );
@@ -108,8 +125,32 @@ export function Loading() {
  * Suspense + FeatureErrorBoundary, so this returns bare view content.
  */
 export function AppViews({ view, isMobile, setView, setAuthModalOpen, authTier, isElevated, authLoading, params }) {
+  const { missedPath, dismiss } = useMissedPath();
   return (
     <>
+      {/* ⛔ THE FRONT DOOR SAYS WHEN IT HAD NO SUCH PAGE (REVIEW-P F11, ODQ §934.24(c)).
+          An unknown address was rewritten to /create and the router's own `notFound`
+          was discarded, so a dead link was indistinguishable from a link that worked.
+          The line renders ABOVE whatever view absorbed the visitor — never a redirect
+          and never a blank page, the same shape the Realm and the staff route take.
+          Mounted here rather than in App.jsx on a MEASURED budget: App.jsx stands at
+          575 of its 600 effective-line ceiling with no size-baseline row, and this file
+          at 113. The latch itself lives in hooks/useMissedPath.js, which records why
+          the flag cannot simply be rendered.
+          ⛔ LAZY, AND FOR THE REASON RECORDED ON StaffOnlyPage ABOVE: the refusal
+          machinery (RefusalNotice → ClerkNote → the copy registry) must stay off the
+          first-paint closure, and this file is EAGER. The hook is two effects over the
+          route store App already subscribes to, so it costs the closure nothing; the
+          notice itself is fetched only by the visitor who actually mistyped an address.
+          ⚠ NO SUSPENSE OF ITS OWN, and that is the estate's own precedent rather than an
+          omission: RealmPhoneNotice below is the same shape — a lazy refusal leaf in this
+          table — and it leans on the shell's boundary too. A local null fallback would be a
+          NEW SILENT boundary, which tests/lint/loadingNarrationRatchet.test.js pins at
+          exactly 38 across src/ (measured: it reds at 39 — and it counts the literal
+          wherever it appears, including in a sentence like this one, so the spelling here
+          is deliberately prose). The destination view is lazy as
+          well, so the shell is already showing its Loading mark while both chunks land. */}
+      {missedPath && <NotFoundNotice path={missedPath} onDismiss={dismiss} />}
       {view === 'generate'    && <GenerateWizard isMobile={isMobile} onSignIn={() => setAuthModalOpen(true)} onNavigate={setView} />}
       {/* Home is the Welcome landing. A bare root visit ('/') canonicalizes here
           for logged-out visitors (the front-door effect in App); members are sent
@@ -120,9 +161,17 @@ export function AppViews({ view, isMobile, setView, setAuthModalOpen, authTier, 
           one frame before the redirect effect upgrades the URL to /realm, so
           there's no blank flash. The Realm map is the ONE icons-on surface — the
           IconsContext.Provider opts this subtree in; everything else renders
-          icons-off via the default (false) IconsContext. */}
-      {(view === 'realm' || view === 'map') && (
-        <IconsContext.Provider value={true}><WorldMap onNavigate={setView} /></IconsContext.Provider>
+          icons-off via the default (false) IconsContext.
+
+          ⛔ ON A PHONE THE ROUTE ANSWERS INSTEAD OF RENDERING (owner, ODQ §934.26:
+          "No realm view for phone but it can be viewed on a tablet"). The branch is
+          HERE rather than inside WorldMap because the order is about the DESTINATION,
+          not about the workspace's layout: at phone width the realm is not a place
+          this product goes, and the map's whole chunk is never fetched to say so.
+          The address is kept — never a redirect — and the notice is never blank. */}
+      {(view === 'realm' || view === 'map') && (isMobile
+        ? <RealmPhoneNotice />
+        : <IconsContext.Provider value={true}><WorldMap onNavigate={setView} /></IconsContext.Provider>
       )}
       {view === 'compendium'  && <CompendiumPanel standalone routeEntry={params.entry} />}
       {/* THE ABOUT FAMILY. `howto`, `about` and the compare* views are retired
@@ -141,7 +190,14 @@ export function AppViews({ view, isMobile, setView, setAuthModalOpen, authTier, 
           routeMessageId={params.message}
         />
       ) : null)}
-      {view === 'admin'       && (authLoading ? <Loading /> : isElevated ? <AdminPanel onBack={() => setView('account')} /> : null)}
+      {/* ⛔ THE STAFF ROUTE SAYS NO OUT LOUD (ODQ §934.24(c) + §934.28). This used to
+          render `null` for a non-staff visitor while App's guard effect replaced them
+          onto /create — a refusal answered by navigating, with nothing said, which is
+          the class lib/refusalReasons.js exists against. The guard no longer moves
+          anyone at an 'elevated' route; the refusal is rendered here instead, where
+          the reader is. `isElevated` is IDENTITY (staff), not the §934.28 paid unlock,
+          so revoking that unlock can never close the admin panel. */}
+      {view === 'admin'       && (authLoading ? <Loading /> : isElevated ? <AdminPanel onBack={() => setView('account')} /> : <StaffOnlyPage />)}
       {view === 'pricing'     && <PricingPage onNavigate={setView} />}
       {view === 'gallery'     && <GalleryPage onNavigate={setView} routeSlug={params.slug} routeHub={params.hub} />}
       {view === 'founders'    && <FoundersHallPage onNavigate={setView} />}

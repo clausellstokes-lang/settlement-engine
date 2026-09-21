@@ -25,8 +25,11 @@ import { TERRAIN_TOOLS } from '../../store/mapSlice.js';
 import { BODY, BORDER, ELEV, FS, SP } from '../theme.js';
 import Button from '../primitives/Button.jsx';
 import IconButton from '../primitives/IconButton.jsx';
+import useIsMobile from '../../hooks/useIsMobile.js';
+import { chromeFontSize } from '../../design/proseScale.js';
 
 export default function TerrainToolbar({ bridgeRef, bridgeReady = false }) {
+  const mobile = useIsMobile();
   const terrainTool    = useStore(s => s.terrainTool);
   const setTerrainTool = useStore(s => s.setTerrainTool);
   const nativeBiomes   = useStore(s => s.mapState.layers.nativeBiomes);
@@ -126,7 +129,7 @@ export default function TerrainToolbar({ bridgeRef, bridgeReady = false }) {
           disabled, so the hint says WHY rather than leaving silent dead clicks. */}
       <div style={{
         display: 'flex', alignItems: 'center', gap: 6,
-        fontSize: FS.xs, color: BODY,
+        fontSize: chromeFontSize(FS.xs, mobile), color: BODY,
         maxWidth: 360, lineHeight: 1.35,
       }}>
         <Info size={12} style={{ flexShrink: 0 }} />

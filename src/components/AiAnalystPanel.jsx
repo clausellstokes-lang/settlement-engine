@@ -21,10 +21,12 @@ import { getSurveyorAiCost } from '../config/pricing.js';
 import { deriveAnchor, anchorSettlement } from '../domain/ai/contextAnchor.js';
 import { suggestedQuestions } from '../domain/ai/suggestedQuestions.js';
 import { t } from '../copy/index.js';
-import { INK, BODY, MUTED, BORDER, CARD, CARD_ALT, GOLD, RED, SLATE, SLATE_DEEP, sans, serif_, SP, FS } from './theme.js';
+import { INK, BODY, MUTED, BORDER, CARD, CARD_ALT, GOLD, RED, SLATE, SLATE_DEEP, sans, serif_, SP, FS, aboveFooter, aboveBottomNav } from './theme.js';
+import useIsMobile from '../hooks/useIsMobile.js';
 import Button from './primitives/Button.jsx';
 import IconButton from './primitives/IconButton.jsx';
 import Segmented from './primitives/Segmented.jsx';
+import { chromeFontSize } from '../design/proseScale.js';
 
 const AUDIENCE_OPTIONS = [
   { id: 'dm', label: 'DM (full truth)' },
@@ -32,6 +34,8 @@ const AUDIENCE_OPTIONS = [
 ];
 
 export default function AiAnalystPanel({ open = false, onClose, initialQuestion = '' }) {
+  const mobile = useIsMobile();
+  const isMobile = useIsMobile();
   const [question, setQuestion] = useState(initialQuestion);
   const [audience, setAudience] = useState('dm'); // 'dm' | 'player'
   const [loading, setLoading] = useState(false);
@@ -106,7 +110,9 @@ export default function AiAnalystPanel({ open = false, onClose, initialQuestion 
 
   if (!open) return null;
 
-  const dockPos = { position: 'fixed', left: SP.lg, bottom: SP.lg, zIndex: 60, fontFamily: sans };
+  // Docked above the pinned desktop footer (owner order 2026-09-16), and from 640 to
+  // 1023 px above the bottom bar (the painted arrow's compact band; phones unchanged).
+  const dockPos = { position: 'fixed', left: SP.lg, bottom: aboveFooter(isMobile ? SP.lg : aboveBottomNav(SP.lg)), zIndex: 60, fontFamily: sans };
 
   return (
     <div
@@ -128,7 +134,7 @@ export default function AiAnalystPanel({ open = false, onClose, initialQuestion 
         data-testid="surveyor-anchor"
         aria-label={anchor.label}
         style={{
-          fontSize: FS.xs, color: MUTED, fontFamily: sans, background: CARD_ALT,
+          fontSize: chromeFontSize(FS.xs, mobile), color: MUTED, fontFamily: sans, background: CARD_ALT,
           border: `1px solid ${BORDER}`, padding: `2px ${SP.sm}px`,
           overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap',
         }}
@@ -154,7 +160,7 @@ export default function AiAnalystPanel({ open = false, onClose, initialQuestion 
 
       {/* Per-question estimated cost (task-priced ⇒ flat per answer) + the live balance. */}
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-        <span style={{ fontSize: FS.xs, color: MUTED, fontFamily: sans }}>
+        <span style={{ fontSize: chromeFontSize(FS.xs, mobile), color: MUTED, fontFamily: sans }}>
           {cost} credit{cost === 1 ? '' : 's'} per answer
           {Number.isFinite(creditBalance) && <span> · {creditBalance} left</span>}
         </span>
@@ -167,7 +173,7 @@ export default function AiAnalystPanel({ open = false, onClose, initialQuestion 
           cost until asked). One tap stages the question; the DM still presses Ask. */}
       {!result && !loading && !question.trim() && suggestions.length > 0 && (
         <div data-testid="surveyor-suggestions" style={{ display: 'flex', flexDirection: 'column', gap: 4 }}>
-          <span style={{ fontSize: FS.xs, color: MUTED, fontFamily: sans, textTransform: 'uppercase', letterSpacing: '0.06em' }}>
+          <span style={{ fontSize: chromeFontSize(FS.xs, mobile), color: MUTED, fontFamily: sans, textTransform: 'uppercase', letterSpacing: '0.06em' }}>
             Try asking
           </span>
           {suggestions.map((q, i) => (
@@ -187,13 +193,13 @@ export default function AiAnalystPanel({ open = false, onClose, initialQuestion 
               {/* THE CORRESPONDENCE REGISTER (C13): the DM's question in ink, the
                   analyst's reply in the slate register — the two hands never blur. */}
               <div data-testid="analyst-correspondence" style={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
-                <span className="sf-smallcap" style={{ fontSize: FS.xs, color: MUTED, fontFamily: sans }}>{t('surveyorDoor.youAsked')}</span>
+                <span className="sf-smallcap" style={{ fontSize: chromeFontSize(FS.xs, mobile), color: MUTED, fontFamily: sans }}>{t('surveyorDoor.youAsked')}</span>
                 <p style={{ margin: 0, fontSize: FS.sm, color: INK, fontFamily: serif_, fontStyle: 'italic', lineHeight: 1.45 }}>{question}</p>
               </div>
-              <span className="sf-smallcap" style={{ fontSize: FS.xs, color: SLATE_DEEP, fontFamily: sans }}>{t('surveyorDoor.analystFrom')}</span>
+              <span className="sf-smallcap" style={{ fontSize: chromeFontSize(FS.xs, mobile), color: SLATE_DEEP, fontFamily: sans }}>{t('surveyorDoor.analystFrom')}</span>
               <div style={{ fontSize: FS.sm, color: BODY, whiteSpace: 'pre-wrap', lineHeight: 1.45, borderLeft: `2px solid ${SLATE}`, paddingLeft: SP.sm }}>{result.answer}</div>
               {Array.isArray(result.claims) && result.claims.length > 0 && (
-                <ul style={{ listStyle: 'none', padding: 0, margin: 0, fontSize: FS.xs, color: MUTED }}>
+                <ul style={{ listStyle: 'none', padding: 0, margin: 0, fontSize: chromeFontSize(FS.xs, mobile), color: MUTED }}>
                   {result.claims.map((c, i) => (
                     <li key={i} style={{ marginBottom: 2 }}>
                       {/* Naming hygiene (§3c): the PUBLIC receipt name, never the internal id. */}
@@ -215,7 +221,7 @@ export default function AiAnalystPanel({ open = false, onClose, initialQuestion 
                     display: 'flex', flexDirection: 'column', gap: 4,
                   }}
                 >
-                  <span style={{ fontSize: FS.xs, color: GOLD, fontFamily: sans, textTransform: 'uppercase', letterSpacing: '0.06em' }}>
+                  <span style={{ fontSize: chromeFontSize(FS.xs, mobile), color: GOLD, fontFamily: sans, textTransform: 'uppercase', letterSpacing: '0.06em' }}>
                     The Surveyor muses · suggestions, not the record
                   </span>
                   {result.musings.map((m, i) => (
@@ -225,7 +231,7 @@ export default function AiAnalystPanel({ open = false, onClose, initialQuestion 
                   ))}
                 </div>
               )}
-              <div style={{ display: 'flex', gap: SP.sm, alignItems: 'center', fontSize: FS.xs, color: MUTED, fontFamily: sans }}>
+              <div style={{ display: 'flex', gap: SP.sm, alignItems: 'center', fontSize: chromeFontSize(FS.xs, mobile), color: MUTED, fontFamily: sans }}>
                 <span>Cited {result.claims?.filter((c) => c.sourced).length ?? 0}/{result.claims?.length ?? 0}</span>
                 {result.byok && <span aria-label="Answered on your own provider key">· BYOK</span>}
                 <span style={{ flex: 1 }} />

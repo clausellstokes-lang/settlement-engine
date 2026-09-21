@@ -66,15 +66,25 @@ const metaEntries = Object.entries(manifest.meta ?? {});
 describe('mutation-coverage manifest — the totality contract (E-A)', () => {
   test('guard-the-guard: enumeration and label parsing are not vacuous', () => {
     // If the enumerator or the label regex silently broke, everything below
-    // would pass on empty sets. Today: 644 invariant files, 61 sweep labels —
-    // the floors below had rotted to the 2026-05 figures (300/22), which is two
-    // thirds of the corpus a broken enumerator could have dropped unnoticed.
+    // would pass on empty sets. The floors below had once rotted to the 2026-05
+    // figures (300/22), which is two thirds of the corpus a broken enumerator
+    // could have dropped unnoticed.
     // Floors TIGHTEN toward reality; they are never raised to admit a budget.
     // 2026-08-30: 547 -> 644 as tests/generators joined ENFORCER_DIRS (ODQ 764.2),
     // so the floor tightens with it — left at 440 it would have gone on passing
     // with the entire admitted tree dropped back out of the walk.
-    expect(enumerated.length).toBeGreaterThanOrEqual(630);
-    expect(sweepLabels.length).toBeGreaterThanOrEqual(61);
+    // 2026-09-19: 630 -> 686. The floor had not moved since the 2026-08-30 note
+    // while the corpus grew to 686 files, so FIFTY-SIX of them could have been
+    // dropped and this guard-the-guard would have gone on passing — the same rot
+    // the sweep-label floor was re-measured for one day earlier. Re-measured
+    // against this tree by executing enumerateInvariants(ROOT): 686.
+    expect(enumerated.length).toBeGreaterThanOrEqual(686);
+    // 2026-09-18: 61 -> 121. The floor had not moved since the 2026-08-30 note
+    // above while the sweep grew to 121 plants, so SIXTY of them could have been
+    // deleted and this guard-the-guard would have gone on passing — the exact
+    // rot it exists to catch, one level up. Re-measured against this tree and
+    // tightened to it, as the paragraph above prescribes.
+    expect(sweepLabels.length).toBeGreaterThanOrEqual(121);
     expect(new Set(sweepLabels).size, 'duplicate labels in mutation-sweep.sh — labels are the join key and must be unique').toBe(sweepLabels.length);
   });
 

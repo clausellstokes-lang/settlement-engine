@@ -34,6 +34,7 @@ import IconButton from '../primitives/IconButton.jsx';
 import { AnchorChip } from './surveyorPanelKit.jsx';
 import useIsMobile from '../../hooks/useIsMobile.js';
 import '../../styles/surveyorChat.css';
+import { chromeFontSize } from '../../design/proseScale.js';
 
 /** The composer's growth cap in px (≈6 lines). Above it the box scrolls instead. */
 const MAX_COMPOSER_PX = 144;
@@ -48,6 +49,7 @@ export default function SurveyorTextIntentShell({
   onOpenInterview,
   onOpenWorkshop,
 }) {
+  const mobile = useIsMobile();
   const [draft, setDraft] = useState('');
   const [turns, setTurns] = useState([]);
   const [keyboardInset, setKeyboardInset] = useState(0);
@@ -146,7 +148,7 @@ export default function SurveyorTextIntentShell({
       <div className="sf-door-chat-log" role="log" aria-label={t('surveyorDoor.youAsked')}>
         {turns.map((turn) => (
           <div key={turn.id} className="sf-door-chat-turn">
-            <span className="sf-smallcap" style={{ fontSize: FS.xs, color: MUTED }}>
+            <span className="sf-smallcap" style={{ fontSize: chromeFontSize(FS.xs, mobile), color: MUTED }}>
               {t('surveyorDoor.youAsked')}
             </span>
             <p
@@ -182,7 +184,7 @@ export default function SurveyorTextIntentShell({
           style={{ background: CARD, border: `1px solid ${BORDER}`, color: INK, fontSize: FS.sm, fontFamily: sans }}
         />
         <div className="sf-door-chat-actions">
-          <span style={{ fontSize: FS.xs, color: MUTED }}>{t('surveyorDoor.routeHint')}</span>
+          <span style={{ fontSize: chromeFontSize(FS.xs, mobile), color: MUTED }}>{t('surveyorDoor.routeHint')}</span>
           <Button variant="aiSolid" size="sm" disabled={!draft.trim()} onClick={submit}>
             {t('surveyorDoor.route')}
           </Button>

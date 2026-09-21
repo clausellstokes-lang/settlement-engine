@@ -56,11 +56,23 @@ export const FACTION_LIFECYCLE_STATES = Object.freeze([
  *
  * ⭐ CHOSEN BY IRREVERSIBILITY, AND THE CHOICE IS THE POINT. R18 names three
  * roads — "death, exile, departure". The full NPC vocabulary is
- * `active|dead|missing|exiled|retired|removed`, so three of those six had to be
- * judged:
+ * `active|dead|exiled|jailed|missing|removed|retired`, so four of those seven
+ * had to be judged:
  *
  *   `dead`, `removed`  — irreversible. ABSENT.
  *   `exiled`           — named by R18 in its own words. ABSENT.
+ *   `jailed`           — REVERSIBLE (a verdict ends). PRESENT. ⛔ AND THE NEAR
+ *                        MISS IS WORTH THE WORDS: design §15 says "a jailed or
+ *                        exiled holder cannot keep a seat", which is a fact about
+ *                        AVAILABILITY, not about house membership. A jailed
+ *                        figure cannot act, hold a place or succeed — that is
+ *                        `NPC_UNAVAILABLE_STATUSES` in entities/npcs.js — but
+ *                        they are still OF the house, so an all-jailed house
+ *                        reads `crewed` and is never dissolved. Putting the word
+ *                        on THIS line would trigger a permanent consequence from
+ *                        a temporary cause, which is exactly what the rule below
+ *                        forbids. Participation is a third question, cured once
+ *                        at `isOffStage` by EM-B1f.
  *   `missing`          — REVERSIBLE; a missing factor may walk back through the
  *                        gate. Dissolution is permanent, so a temporary absence
  *                        must not trigger it — that would be R14's "hole" in a

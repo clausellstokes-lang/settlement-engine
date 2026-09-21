@@ -18,6 +18,8 @@ import { discourseProseActive, realizeCauseWalk } from '../../domain/display/dis
 import { tickCalendarLabel } from '../../domain/display/humanizeEngineTokens.js';
 import { BODY, BORDER, BORDER2, CARD, CARD_ALT, FS, GOLD, INK, MUTED, SECOND, SP, sans } from '../theme.js';
 import { IconButton } from './IconButton.jsx';
+import useIsMobile from '../../hooks/useIsMobile.js';
+import { chromeFontSize, proseFontSize } from '../../design/proseScale.js';
 
 /**
  * @param {Object} props
@@ -29,6 +31,7 @@ import { IconButton } from './IconButton.jsx';
  * @param {() => void} [props.onClose]
  */
 export default function CauseWalkPanel({ worldState, rootId, resolveName, seesSecrets = true, onClose }) {
+  const mobile = useIsMobile();
   const nameOf = useMemo(() => resolveName || ((id) => String(id)), [resolveName]);
   const walk = useMemo(
     () => buildCauseWalk({ worldState, rootId, seesSecrets }),
@@ -58,7 +61,7 @@ export default function CauseWalkPanel({ worldState, rootId, resolveName, seesSe
       style={{ border: `1px solid ${GOLD}`, background: CARD_ALT, padding: SP.sm, display: 'grid', gap: 6 }}
     >
       <div style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
-        <div style={{ flex: 1, color: SECOND, fontFamily: sans, fontSize: FS.micro, fontWeight: 850, textTransform: 'uppercase', letterSpacing: '0.06em' }}>
+        <div style={{ flex: 1, color: SECOND, fontFamily: sans, fontSize: chromeFontSize(FS.micro, mobile), fontWeight: 850, textTransform: 'uppercase', letterSpacing: '0.06em' }}>
           Tracing the causes
         </div>
         {onClose && (
@@ -69,12 +72,12 @@ export default function CauseWalkPanel({ worldState, rootId, resolveName, seesSe
       </div>
 
       {discourse ? (
-        <p data-testid="cause-walk-prose" style={{ margin: 0, color: BODY, fontFamily: sans, fontSize: FS.xxs, fontWeight: 650, lineHeight: 1.55 }}>
+        <p data-testid="cause-walk-prose" style={{ margin: 0, color: BODY, fontFamily: sans, fontSize: proseFontSize(FS.xxs, mobile), fontWeight: 650, lineHeight: 1.55 }}>
           {discourse.text}
         </p>
       ) : (
         <>
-          <div style={{ color: INK, fontFamily: sans, fontSize: FS.xxs, fontWeight: 850, lineHeight: 1.3 }}>
+          <div style={{ color: INK, fontFamily: sans, fontSize: chromeFontSize(FS.xxs, mobile), fontWeight: 850, lineHeight: 1.3 }}>
             {rootHeadline}
           </div>
 
@@ -94,20 +97,20 @@ export default function CauseWalkPanel({ worldState, rootId, resolveName, seesSe
                     }}
                   >
                     <div style={{ display: 'flex', alignItems: 'baseline', gap: 6 }}>
-                      <span style={{ color: MUTED, fontFamily: sans, fontSize: FS.micro, fontWeight: 800 }}>
+                      <span style={{ color: MUTED, fontFamily: sans, fontSize: chromeFontSize(FS.micro, mobile), fontWeight: 800 }}>
                         ← because
                       </span>
-                      <span style={{ color: hop.redacted ? MUTED : BODY, fontFamily: sans, fontSize: FS.micro, fontWeight: 750, fontStyle: hop.redacted ? 'italic' : undefined }}>
+                      <span style={{ color: hop.redacted ? MUTED : BODY, fontFamily: sans, fontSize: chromeFontSize(FS.micro, mobile), fontWeight: 750, fontStyle: hop.redacted ? 'italic' : undefined }}>
                         {hop.headline}
                       </span>
                       {hop.tick != null && (
-                        <span style={{ color: MUTED, fontFamily: sans, fontSize: FS.micro }}>
+                        <span style={{ color: MUTED, fontFamily: sans, fontSize: chromeFontSize(FS.micro, mobile) }}>
                           · {tickCalendarLabel(hop.tick)}
                         </span>
                       )}
                     </div>
                     {names.length > 0 && (
-                      <div style={{ marginTop: 2, color: SECOND, fontFamily: sans, fontSize: FS.micro, fontWeight: 800 }}>
+                      <div style={{ marginTop: 2, color: SECOND, fontFamily: sans, fontSize: chromeFontSize(FS.micro, mobile), fontWeight: 800 }}>
                         {names.slice(0, 3).join(', ')}{names.length > 3 ? ` +${names.length - 3}` : ''}
                       </div>
                     )}
@@ -120,7 +123,7 @@ export default function CauseWalkPanel({ worldState, rootId, resolveName, seesSe
       )}
 
       {walk.graceLine && (
-        <div style={{ color: MUTED, fontFamily: sans, fontSize: FS.micro, fontStyle: 'italic', borderTop: `1px solid ${BORDER2}`, paddingTop: 6, background: CARD }}>
+        <div style={{ color: MUTED, fontFamily: sans, fontSize: chromeFontSize(FS.micro, mobile), fontStyle: 'italic', borderTop: `1px solid ${BORDER2}`, paddingTop: 6, background: CARD }}>
           {walk.graceLine}
         </div>
       )}

@@ -184,7 +184,7 @@ export function buildThreatAssessment(r) {
     + (f.hasHospital
       ? ' Hospital infrastructure enables disease containment and systematic quarantine.'
       : f.hasChurch
-        ? ' Parish clergy provide basic wound care: better than nothing, worse than a hospital.'
+        ? ' Clergy provide basic wound care: better than nothing, worse than a hospital.'
         : ' No medical infrastructure. Plague spreads until it burns out.');
   result.push({
     label: 'Disasters & Famine',

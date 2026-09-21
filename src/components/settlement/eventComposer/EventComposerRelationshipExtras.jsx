@@ -24,6 +24,7 @@ import { Field } from './Field.jsx';
 import { selectStyle, RELATIONSHIP_LABELS } from './EventComposerConstants.js';
 import { buildTargetOptions } from './helpers.js';
 import { INFILTRATION_TARGET_RELATIONSHIPS } from '../../../domain/worldPulse/warStressorTypes.js';
+import useIsMobile from '../../../hooks/useIsMobile.js';
 
 export function EventComposerRelationshipExtras({
   type, settlement, isWarStressor, isInfiltrationStressor,
@@ -31,6 +32,7 @@ export function EventComposerRelationshipExtras({
   instigatorRelationship, setInstigatorRelationship,
   tradeTarget, setTradeTarget, campaignSettlementOptions,
 }) {
+  const mobile = useIsMobile();
   if (isWarStressor || isInfiltrationStressor) {
     const neighbourOpts = buildTargetOptions(settlement, 'neighbours');
     if (neighbourOpts.length === 0) return null;
@@ -45,7 +47,7 @@ export function EventComposerRelationshipExtras({
           <select
             value={instigatorNeighbour}
             onChange={e => setInstigatorNeighbour(e.target.value)}
-            style={selectStyle}
+            style={selectStyle(mobile)}
           >
             <option value="">None</option>
             {neighbourOpts.map(o => <option key={o.id} value={o.id}>{o.name}</option>)}
@@ -59,7 +61,7 @@ export function EventComposerRelationshipExtras({
             <select
               value={instigatorRelationship}
               onChange={e => setInstigatorRelationship(e.target.value)}
-              style={selectStyle}
+              style={selectStyle(mobile)}
             >
               {INFILTRATION_TARGET_RELATIONSHIPS.map(r => (
                 <option key={r} value={r}>{RELATIONSHIP_LABELS[r] || r}</option>
@@ -76,7 +78,7 @@ export function EventComposerRelationshipExtras({
         label="Target settlement"
         hint="Optional. Open the route with another campaign settlement; a link is added if none exists"
       >
-        <select value={tradeTarget} onChange={e => setTradeTarget(e.target.value)} style={selectStyle}>
+        <select value={tradeTarget} onChange={e => setTradeTarget(e.target.value)} style={selectStyle(mobile)}>
           <option value="">None (use neighbour above)</option>
           {campaignSettlementOptions.map(o => <option key={o.id} value={o.name}>{o.name}</option>)}
         </select>

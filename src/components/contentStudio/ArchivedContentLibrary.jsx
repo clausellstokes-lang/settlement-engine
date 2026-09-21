@@ -21,6 +21,8 @@ import {
   receiptIsConfirmed,
   StatusNotice,
 } from './customContentLifecycleSupport.jsx';
+import useIsMobile from '../../hooks/useIsMobile.js';
+import { chromeFontSize, proseFontSize } from '../../design/proseScale.js';
 
 /*
  * ArchivedContentLibrary — read-only archive inspection plus confirmed restore.
@@ -59,6 +61,7 @@ function ArchivedDefinitionRow({
   onCancel,
   onRestore,
 }) {
+  const mobile = useIsMobile();
   return (
     <li style={{
       padding: '8px 9px',
@@ -76,7 +79,7 @@ function ArchivedDefinitionRow({
         </strong>
         <span style={{
           color: MUTED,
-          fontSize: FS.micro,
+          fontSize: chromeFontSize(FS.micro, mobile),
           fontWeight: 700,
           textTransform: 'uppercase',
         }}>
@@ -87,7 +90,7 @@ function ArchivedDefinitionRow({
         <div style={{
           marginTop: 3,
           color: SECOND,
-          fontSize: FS.xs,
+          fontSize: proseFontSize(FS.xs, mobile),
           lineHeight: 1.4,
         }}>
           {item.description}
@@ -117,7 +120,7 @@ function ArchivedDefinitionRow({
             background: CARD,
           }}
         >
-          <div style={{ color: BODY, fontSize: FS.xs, lineHeight: 1.45 }}>
+          <div style={{ color: BODY, fontSize: proseFontSize(FS.xs, mobile), lineHeight: 1.45 }}>
             Restore this definition to the active library? It can enter future
             generations again.
           </div>
@@ -151,6 +154,7 @@ function ArchivedDefinitionRow({
 }
 
 export default function ArchivedContentLibrary() {
+  const mobile = useIsMobile();
   const archived = useStore(state => state.customContentArchived);
   const storeLoading = useStore(state => state.customContentArchivedLoading);
   const loadArchived = useStore(state => state.loadArchivedCustomContent);
@@ -290,7 +294,7 @@ export default function ArchivedContentLibrary() {
           <div style={{
             marginTop: 8,
             color: SECOND,
-            fontSize: FS.xs,
+            fontSize: proseFontSize(FS.xs, mobile),
             lineHeight: 1.45,
           }}>
             Archived definitions are excluded from future generations. Their
@@ -301,14 +305,14 @@ export default function ArchivedContentLibrary() {
             <div role="status" aria-live="polite" style={{
               marginTop: 8,
               color: MUTED,
-              fontSize: FS.xs,
+              fontSize: chromeFontSize(FS.xs, mobile),
               fontStyle: 'italic',
             }}>
               Loading archived definitions…
             </div>
           )}
           {!isLoading && loaded && entries.length === 0 && (
-            <div style={{ marginTop: 8, color: MUTED, fontSize: FS.xs }}>
+            <div style={{ marginTop: 8, color: MUTED, fontSize: chromeFontSize(FS.xs, mobile) }}>
               No archived definitions.
             </div>
           )}

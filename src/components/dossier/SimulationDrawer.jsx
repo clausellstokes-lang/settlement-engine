@@ -26,6 +26,8 @@ import { Funnel, EVENTS } from '../../lib/analytics.js';
 import Button from '../primitives/Button.jsx';
 import IconButton from '../primitives/IconButton.jsx';
 import { useDialogFocusTrap } from '../primitives/useDialogFocusTrap.js';
+import useIsMobile from '../../hooks/useIsMobile.js';
+import { chromeFontSize, proseFontSize } from '../../design/proseScale.js';
 
 const PipelineRail = lazy(() => import('../PipelineRail.jsx'));
 
@@ -50,6 +52,7 @@ export default function SimulationDrawer({ variant = 'inline', settlement = null
   // default, byte-identical to the pre-variant render for existing mounts.
   // 'toolbar' = the dark sticky wizard toolbar, where the trigger joins Back /
   // Regenerate / New as a matching secondary button.
+  const mobile = useIsMobile();
   const toolbar = variant === 'toolbar';
   const [open, setOpen] = useState(false);
   const firedRef = useRef(false);
@@ -125,7 +128,7 @@ export default function SimulationDrawer({ variant = 'inline', settlement = null
             }}>
               <div style={{ flex: 1, minWidth: 0 }}>
                 <div style={{
-                  fontSize: FS.xxs, fontWeight: 800, color: GOLD,
+                  fontSize: chromeFontSize(FS.xxs, mobile), fontWeight: 800, color: GOLD,
                   letterSpacing: '0.14em', textTransform: 'uppercase',
                   fontFamily: sans,
                 }}>
@@ -139,7 +142,7 @@ export default function SimulationDrawer({ variant = 'inline', settlement = null
                   How this was simulated
                 </div>
                 <div style={{
-                  marginTop: 4, fontSize: FS['11.5'], color: BODY,
+                  marginTop: 4, fontSize: proseFontSize(FS['11.5'], mobile), color: BODY,
                   lineHeight: 1.5, fontFamily: sans,
                 }}>
                   The same choices and seed rebuild the same settlement.

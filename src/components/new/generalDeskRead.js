@@ -143,7 +143,7 @@ function line(mount, rung) {
  * THE READ. One desk call per render, gated, with every position's lines drawn.
  *
  * @param {object|null|undefined} settlement the record the tab already holds
- * @param {{publicDossier?: boolean, playerView?: boolean,
+ * @param {{tierNoun?: string|null, publicDossier?: boolean, playerView?: boolean,
  *   stresses?: ReadonlyArray<{type?: unknown}|null>,
  *   hookCategories?: ReadonlyArray<unknown>|null,
  *   clockIds?: ReadonlyArray<unknown>|null,
@@ -254,7 +254,12 @@ export function generalDeskLines(settlement, options = {}) {
       // caller to supply a band without the window the gate depends on.
       populationTrend: options.populationTrend,
     },
-    { seed: String(r?._seed ?? r?.id ?? ''), audience: options.playerView ? 'player' : 'dm' },
+    {
+      seed: String(r?._seed ?? r?.id ?? ''),
+      audience: options.playerView ? 'player' : 'dm',
+      // FORWARDED, NEVER DERIVED — the sibling economy reader's note carries the reason.
+      tierNoun: options.tierNoun ?? null,
+    },
   );
 
   // ⚠ THE HISTORY GROUP IS DESTRUCTURED RATHER THAN CHAINED, and the reason is a measured
@@ -269,6 +274,10 @@ export function generalDeskLines(settlement, options = {}) {
   const { identity, founded, record } = prose.history;
   return Object.freeze({
     overview: Object.freeze({
+      // ⛔ ALWAYS EMPTY SINCE OWNER ORDER 2026-09-17: `overview.systemsHealth` is a GLANCE row,
+      // so `line()` draws no sentence here and no tab renders this field. It stays routed
+      // through the registry (the position still exists and still shows its rows); re-homing
+      // the sentences is a later registry act, and this reader stays their one call site.
       healthLines: Object.freeze(prose.overview.systemsHealth
         .map((rung) => line(HEALTH_MOUNT, rung)).filter(Boolean)),
       // ONE LINE PER CONFLICT, index-paired with the caller's own rows: the desk keeps a null

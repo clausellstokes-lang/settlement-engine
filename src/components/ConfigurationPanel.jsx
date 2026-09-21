@@ -8,6 +8,7 @@ import {
 import {getCompatibleResources} from '../generators/terrainHelpers';
 import { GOLD, INK, MUTED, SECOND, BODY, BORDER, BORDER2, CARD, sans, FS, swatch } from './theme.js';
 import { useStore } from '../store/index.js';
+import { SIZE_LABEL, SIZE_LADDER } from '../config/tierFacts.js';
 import HelpPopover from './compendium/HelpPopover.jsx';
 import Button from './primitives/Button.jsx';
 import Disclosure from './primitives/Disclosure.jsx';
@@ -262,6 +263,10 @@ export default function ConfigurationPanel({ showFineTune = true } = {}){
   // §14b — "Use custom content" toggle: only meaningful for users who can author
   // custom content and actually have some. Default ON (undefined === on).
   const canUseCustom = useStore(s => (typeof s.canUseCustomContent === 'function' ? s.canUseCustomContent() : false));
+  // The SIZE gate, read from the store rather than restated: the picker draws every rung
+  // and disables the ones this account may not forge (§934.34 put a thorpe behind sign-in
+  // the same way a city and a metropolis already were).
+  const isTierAllowed = useStore(s => (typeof s.isTierAllowed === 'function' ? s.isTierAllowed : () => true));
   const customCount = useStore(s => (typeof s.getCustomContentCount === 'function' ? s.getCustomContentCount() : 0));
   // ── Isolation + magic constraint flags ──────────────────────────────────
   const magic       = config.priorityMagic || 0;
@@ -291,14 +296,25 @@ export default function ConfigurationPanel({ showFineTune = true } = {}){
       })()}
       <div style={{display:'grid',gridTemplateColumns:'repeat(3, 1fr)',gap:'10px 16px',marginBottom:12}}>
         <div><Lbl topic="tier">Population</Lbl>
+          {/* ⛔ EVERY SIZE IS SHOWN; THE ONES THIS ACCOUNT CANNOT FORGE ARE LOCKED.
+              Nothing is hidden (the owner's law), so a reader learns what an account is
+              for by reading the list rather than by not seeing it. The lock is asked of
+              the STORE — `isTierAllowed`, the same predicate the generation action's
+              guard uses — so the picker and the gate can never disagree, and the rule
+              that puts a thorpe behind sign-in (§934.34) needed no edit here: it is a
+              property of the tier, answered by the one gate. The two sentinels stay
+              open for every account; the post-resolution re-gate catches a roll that
+              lands out of range. */}
           <Sel value={config.settType} onChange={e=>updateConfig({settType:e.target.value})}>
             <option value="random">Random</option>
-            <option value="thorp">{`Thorp (${popRange('thorp')})`}</option>
-            <option value="hamlet">{`Hamlet (${popRange('hamlet')})`}</option>
-            <option value="village">{`Village (${popRange('village')})`}</option>
-            <option value="town">{`Town (${popRange('town')})`}</option>
-            <option value="city">{`City (${popRange('city')})`}</option>
-            <option value="metropolis">{`Metropolis (${popRange('metropolis')})`}</option>
+            {SIZE_LADDER.map((key) => {
+              const allowed = isTierAllowed(key);
+              return (
+                <option key={key} value={key} disabled={!allowed}>
+                  {`${SIZE_LABEL[key]} (${popRange(key)})${allowed ? '' : ' · sign in'}`}
+                </option>
+              );
+            })}
             <option value="custom">Custom…</option>
           </Sel>
         </div>

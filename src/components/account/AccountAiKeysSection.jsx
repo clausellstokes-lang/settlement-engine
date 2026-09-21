@@ -20,6 +20,8 @@ import {
   keyPrefixHint, getByokStatus, setByokKey, clearByokKey, verifyByokKey, probeByokKey,
   probeTierLabel, probeTierSentence, getSurveyorSettings, setSurveyorSettings,
 } from '../../lib/surveyorByok.js';
+import useIsMobile from '../../hooks/useIsMobile.js';
+import { chromeFontSize, proseFontSize } from '../../design/proseScale.js';
 
 const AiUsageDashboard = lazy(() => import('./AiUsageDashboard.jsx'));
 
@@ -42,7 +44,7 @@ function healthMeta(health) {
 }
 
 const inputStyle = { padding: `${SP.sm}px ${SP.md}px`, border: `1px solid ${BORDER}`, fontSize: FS.sm, fontFamily: sans, color: INK, background: '#fff', width: '100%', boxSizing: 'border-box' };
-const labelStyle = { fontSize: FS.xs, color: MUTED, fontFamily: sans, marginBottom: 2 };
+const labelStyle = (mobile) => ({ fontSize: chromeFontSize(FS.xs, mobile), color: MUTED, fontFamily: sans, marginBottom: 2 });
 // §69.4: the bare form reads the HOST locale, so the same key showed a different
 // date to a de-DE reader than to an en-US one. Explicit, per the Wave-4h pin.
 const fmtDate = (iso) => (iso ? new Date(iso).toLocaleString('en-US') : '–');
@@ -52,6 +54,7 @@ export default function AccountAiKeysSection() {
   // 2026-07-19). AccountPage already hides the nav tab + section render for
   // non-entitled accounts; this guard makes the component itself refuse to
   // render if it is ever mounted directly, so the discriminator can't leak.
+  const mobile = useIsMobile();
   const surveyorEntitled = useAccountSurveyorGate();
   const [statusRow, setStatusRow] = useState(null); // the anthropic byok status row, or null
   const [settings, setSettings] = useState(null);
@@ -187,14 +190,14 @@ export default function AccountAiKeysSection() {
         {/* ── Provider + key + verify ─────────────────────────────────────────── */}
         <div style={{ display: 'flex', flexDirection: 'column', gap: SP.sm }}>
           <div>
-            <div style={labelStyle}>Provider</div>
+            <div style={labelStyle(mobile)}>Provider</div>
             <select aria-label="AI provider" value={PROVIDER} disabled style={{ ...inputStyle, maxWidth: 240 }}>
               <option value="anthropic">Anthropic (Claude)</option>
             </select>
           </div>
 
           <div>
-            <div style={labelStyle}>{statusRow?.has_key ? 'Replace key' : 'Paste your key'}</div>
+            <div style={labelStyle(mobile)}>{statusRow?.has_key ? 'Replace key' : 'Paste your key'}</div>
             <div style={{ display: 'flex', gap: SP.sm, flexWrap: 'wrap' }}>
               <input
                 type="password" autoComplete="off" spellCheck={false}
@@ -207,21 +210,21 @@ export default function AccountAiKeysSection() {
                 {busy === 'save' ? 'Saving…' : 'Save & verify'}
               </Button>
             </div>
-            {hint && <div style={{ fontSize: FS.xs, color: AMBER, marginTop: 4 }}>{hint}</div>}
+            {hint && <div style={{ fontSize: chromeFontSize(FS.xs, mobile), color: AMBER, marginTop: 4 }}>{hint}</div>}
           </div>
         </div>
 
         {/* ── Key-health status ───────────────────────────────────────────────── */}
         {statusRow?.has_key && (
           <div style={{ display: 'flex', alignItems: 'center', gap: SP.md, flexWrap: 'wrap', padding: `${SP.sm}px ${SP.md}px`, border: `1px solid ${BORDER}`, background: CARD_ALT }}>
-            <span style={{ padding: `2px ${SP.sm}px`, borderRadius: R.pill || R.md, fontSize: FS.xs, fontWeight: 700, color: hm.color, background: hm.bg, border: `1px solid ${hm.color}` }}>{hm.label}</span>
-            <span style={{ fontSize: FS.xs, color: MUTED }}>Last verified: {fmtDate(statusRow?.last_verified_at)}</span>
+            <span style={{ padding: `2px ${SP.sm}px`, borderRadius: R.pill || R.md, fontSize: chromeFontSize(FS.xs, mobile), fontWeight: 700, color: hm.color, background: hm.bg, border: `1px solid ${hm.color}` }}>{hm.label}</span>
+            <span style={{ fontSize: chromeFontSize(FS.xs, mobile), color: MUTED }}>Last verified: {fmtDate(statusRow?.last_verified_at)}</span>
             <div style={{ marginLeft: 'auto', display: 'flex', gap: SP.sm }}>
               <Button variant="ghost" size="sm" disabled={busy === 'verify'} onClick={handleVerify}>{busy === 'verify' ? 'Verifying…' : 'Verify'}</Button>
               <Button variant="ghost" size="sm" disabled={busy === 'remove'} onClick={handleRemove} style={{ color: RED }}>Remove</Button>
             </div>
             {verify && !verify.ok && verify.message && (
-              <div style={{ flexBasis: '100%', fontSize: FS.xs, color: BODY }}>{verify.message}</div>
+              <div style={{ flexBasis: '100%', fontSize: chromeFontSize(FS.xs, mobile), color: BODY }}>{verify.message}</div>
             )}
           </div>
         )}
@@ -232,7 +235,7 @@ export default function AccountAiKeysSection() {
             <div style={{ display: 'flex', alignItems: 'center', gap: SP.md, flexWrap: 'wrap' }}>
               <div style={{ fontSize: FS.sm, fontWeight: 700, color: INK }}>Model capability</div>
               {tierLabel && (
-                <span style={{ padding: `2px ${SP.sm}px`, fontSize: FS.xs, fontWeight: 700, color: GOLD, border: `1px solid ${GOLD}` }}>{tierLabel}</span>
+                <span style={{ padding: `2px ${SP.sm}px`, fontSize: chromeFontSize(FS.xs, mobile), fontWeight: 700, color: GOLD, border: `1px solid ${GOLD}` }}>{tierLabel}</span>
               )}
               <div style={{ marginLeft: 'auto' }}>
                 <Button variant="ghost" size="sm" disabled={busy === 'probe' || health !== 'healthy'} onClick={handleProbe}>
@@ -240,12 +243,12 @@ export default function AccountAiKeysSection() {
                 </Button>
               </div>
             </div>
-            <div style={{ fontSize: FS.xs, color: BODY, lineHeight: 1.5 }}>{probeSentence}</div>
-            {probeMeta && <div style={{ fontSize: FS.xs, color: MUTED }}>{probeMeta}</div>}
+            <div style={{ fontSize: proseFontSize(FS.xs, mobile), color: BODY, lineHeight: 1.5 }}>{probeSentence}</div>
+            {probeMeta && <div style={{ fontSize: chromeFontSize(FS.xs, mobile), color: MUTED }}>{probeMeta}</div>}
             {probe && !probe.ok && probe.message && (
-              <div style={{ fontSize: FS.xs, color: BODY }}>{probe.message}</div>
+              <div style={{ fontSize: chromeFontSize(FS.xs, mobile), color: BODY }}>{probe.message}</div>
             )}
-            <div style={{ fontSize: FS.xs, color: MUTED, lineHeight: 1.5 }}>
+            <div style={{ fontSize: proseFontSize(FS.xs, mobile), color: MUTED, lineHeight: 1.5 }}>
               The check files three sample requests through your key and reads the result against
               the same rules the app itself enforces, so what it reports is what your model did,
               not what it says about itself. It costs no credits, though your provider does charge
@@ -274,10 +277,10 @@ export default function AccountAiKeysSection() {
                 </select>
               </div>
             ))}
-            <div style={{ fontSize: FS.xs, color: MUTED }}>Retention is your provider’s data-retention posture for that model, shown honestly.</div>
+            <div style={{ fontSize: chromeFontSize(FS.xs, mobile), color: MUTED }}>Retention is your provider’s data-retention posture for that model, shown honestly.</div>
           </div>
         ) : hasKey && (
-          <div style={{ fontSize: FS.xs, color: MUTED }}>Verify your key to choose a model per task from the models it can access.</div>
+          <div style={{ fontSize: chromeFontSize(FS.xs, mobile), color: MUTED }}>Verify your key to choose a model per task from the models it can access.</div>
         )}
 
         {/* ── Usage governors: caps + warn + pause ────────────────────────────── */}
@@ -292,7 +295,7 @@ export default function AccountAiKeysSection() {
               ['warn_pct', 'Warn at %'],
             ].map(([field, label]) => (
               <div key={field}>
-                <div style={labelStyle}>{label}</div>
+                <div style={labelStyle(mobile)}>{label}</div>
                 <input
                   type="number" min="0" inputMode="numeric"
                   aria-label={label}
@@ -314,7 +317,7 @@ export default function AccountAiKeysSection() {
               </span>
             </label>
           </div>
-          <div style={{ fontSize: FS.xs, color: MUTED, lineHeight: 1.5 }}>
+          <div style={{ fontSize: proseFontSize(FS.xs, mobile), color: MUTED, lineHeight: 1.5 }}>
             Caps are enforced at the edge before anything runs. Over a cap or paused, a request is
             refused before it costs you (and nothing is charged). Blank fields mean uncapped.
           </div>

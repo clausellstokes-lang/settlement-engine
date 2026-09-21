@@ -301,15 +301,12 @@ export const OPERATIONS = Object.freeze({
   revertUserEditAction: { opType:'revertUserEditAction', label:"Revert a manual edit", description:"Reverses a previously applied manual user edit.", klass:'mechanical', slice:'settlementSlice', targetScope:'save', receiptRef:null, undoToken:'applyUserEditAction', undoState:'action' },
   persistActiveSaveEdit: { opType:'persistActiveSaveEdit', label:"Persist an edit to the active save", description:"Writes an edit to the active save so the change survives a reload.", klass:'mechanical', slice:'settlementSlice', targetScope:'save', receiptRef:null, undoToken:null, undoState:'not-applicable' },
   markExported: { opType:'markExported', label:"Mark as exported", description:"Flags the settlement as having been exported, for example to a PDF dossier.", klass:'mechanical', slice:'settlementSlice', targetScope:'save', receiptRef:null, undoToken:null, undoState:'irreversible' },
-  // Phase-A honesty (owner queue #21) carried forward to Phase B: these two rows
-  // described a locks engine that did not exist for a year. They describe exactly
-  // what the engine performs and nothing more. Phase B added the one promise the
-  // Phase-A copy had to withhold — locked characters now survive a FULL regenerate,
-  // not only a roster reroll. Still deliberately unsaid, because still unbuilt:
-  // locking a whole roster does not stop a full regenerate, and a locked faction
-  // survives as a name rather than as the faction object itself.
-  setLock: { opType:'setLock', label:"Set a section lock", description:"Locks a part of the settlement. A locked section refuses to reroll. Locked characters survive any reroll, including a full regenerate, where they take a place in the new town. A full regenerate also keeps the locked name, terrain and history.", klass:'mechanical', slice:'settlementSlice', targetScope:'save', receiptRef:null, undoToken:null, undoState:'external:inverse-call' },
-  clearLocks: { opType:'clearLocks', label:"Clear section locks", description:"Removes every lock from the settlement, so nothing is held back from a reroll. To recover a lock, set it again.", klass:'mechanical', slice:'settlementSlice', targetScope:'save', receiptRef:null, undoToken:null, undoState:'none' },
+  // ⚰ RETIRED HERE (owner orders 2026-09-17): `setLock` and `clearLocks`, the locks
+  // engine's two writers. `clearLocks` went with the "What a new roll keeps" section
+  // (its only caller was that section's "Clear all locks" button); `setLock` went when
+  // the owner ordered "remove the other padlocks" and its last callers, the NPCs and
+  // History section locks and the roster-row padlock, were deleted. A save's stored
+  // lock map is kept verbatim but no longer read (domain/locksPreservation.js).
   hydrateFromSave: { opType:'hydrateFromSave', label:"Load state from a save", description:"Rebuilds the working settlement state from a saved settlement.", klass:'mechanical', slice:'settlementSlice', targetScope:'save', receiptRef:null, undoToken:null, undoState:'not-applicable' },
   renameSettlement: { opType:'renameSettlement', label:"Rename the settlement", description:"Changes the settlement's name.", klass:'mechanical', slice:'settlementSlice', targetScope:'save', receiptRef:null, undoToken:null, undoState:'external:inverse-call' },
   // ⚰ RETIRED HERE (TE-QSTYLE, fresh owner grant ODQ §763.1, ruled §763.2 Q-STYLE arm 2):
@@ -567,6 +564,13 @@ export const EXEMPT_OPERATIONS = Object.freeze({
   // is the wall) and sessionEvicted is excluded from the persist partialize — the same
   // K-D EXEMPT class (transient session flag) as the standing setAuthModalOpen.
   evictSession: { slice: 'authSlice', reason: 'transient single-session eviction banner flag + local sign-out; excluded from persist partialize' },
+  // NO GATE REFUSES SILENTLY (ODQ §934.24(c)). `lastRefusal` is the reason a gate gave,
+  // recorded so the surface the reader clicked can say it; this clears it. Session-only
+  // BY CONSTRUCTION — store/persistProjection.js names its keys one by one and this is
+  // not among them — so a reload lands with no refusal on screen. The same K-D EXEMPT
+  // class as focusEntity / clearFocusedEntity above: ephemeral view state, no durable or
+  // saved record anywhere behind it.
+  clearRefusal: { slice: 'settlementSlice', reason: 'clears the transient gate-refusal record a surface renders; excluded from the persist partialize' },
 });
 
 /** The committed exempt ceiling (shrink-only; lower it as actions are adopted). */
@@ -615,7 +619,15 @@ export const EXEMPT_OPERATIONS = Object.freeze({
 // and then DELETED before landing — it had no product caller (the two paths that lower
 // the flag are already inside an immer draft and clear the field directly), so it would
 // have bought a second exempt row for dead API.
-export const EXEMPT_CEILING = 69;
+// 69 -> 70 (ODQ §934.24(c), banked late): `clearRefusal`, the clearer of the transient
+// gate-refusal record. ⚠ THE ROW IS OWED BY THE REFUSAL LANDING AND WAS NOT PAID THERE —
+// this walker was not in that car's receipt list, so the action shipped unclassified and
+// the completeness gate has been red on every run since. Recorded here rather than
+// quietly: the raise is not this lane's work, it is this lane paying an inherited debt in
+// the act of finding it. Measured on this tree: 70 exempt entries. Same transient
+// view-state class as focusEntity / setAuthModalOpen; shrink-only from here, and adopting
+// it into the operation surface lowers the ceiling again.
+export const EXEMPT_CEILING = 70;
 
 /** Action names carrying an opType (the registered operation surface). */
 export function registeredActionNames() { return Object.keys(OPERATIONS); }

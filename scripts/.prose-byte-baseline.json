@@ -1,56 +1,176 @@
 {
   "_doc": "THE PROSE BYTE BASELINE — the composed-prose corpus's own size ratchet (ARCH-COMPOSED-PROSE §10, §12 row 2; lane MEASURE car 2). It freezes the RAW and GZIP bytes of every SOURCE leaf the dossier's state and causal prose is projected into, and it bounds their growth at the model's declared CEILING. It is a SOURCE read, so it is lawful in the plain pre-build `npm run test` phase: unlike the dist-reading contracts in tests/build/, nothing here can measure a stale artefact, because the artefact is the committed file. Consumed by tests/lint/proseCorpusBytes.test.js and by NOTHING else. ⛔ THIS IS NOT scripts/.size-baseline.json AND MUST NEVER BECOME A ROW IN IT: that file is a max-LINES instrument whose ceilingFor() returns null for src/data/**, so a byte row planted there would be read by eslint.config.js as a max-lines ceiling of 641410 and would red both of its consumers. Two instruments, two rulers, no overlap. ARCH §11 states the refusal in its own words: 'no .size-baseline.json byte row; no second first-paint ruler.'",
-
   "_instrument": "RAW is the exact instrument: a leaf's `raw` must EQUAL the bytes on disk. Above fails, below fails (lower the row and bank the shrink) — the sizeBaseline honesty idiom, applied to bytes instead of effective lines. GZIP is level 9 over the same bytes and is asserted as a BAND (±1 %) rather than an equality, and that is deliberate: gzip output is a function of the zlib build as well as the payload, and this estate has already ruled once that a ratchet which reds on a toolchain upgrade has stopped measuring the payload (tests/build/vendorPdfLazy.test.js, the compressed-ceilings block). The ±1 % band is TIGHTER than the ~5 % platform margin that file's own transfer budgets carry for the same hazard, and it costs nothing in coverage because the RAW arm above it is exact: no byte can move through this file unseen.",
-
   "_ceilingArithmetic": "The CEILING is ARCH §10's, not this file's invention. §10 sizes the corpus on measured unit costs: today's six state leaves faced and render-meta'd ≈ 1.78 MB; the modifier pools' render fields ≈ 30 KB; new pieces at the CEILING (≈ 1200 semantic pieces ≈ 960 KB) ⇒ ≈ 2.8 MB raw for the SIX STATE LEAVES TOGETHER. `ceilingTotalRawStateLeaves` is that 2,800,000, and each state leaf's `ceilingRaw` is that total APPORTIONED BY ITS SHARE OF TODAY'S CORPUS: round(2800000 × genesis.raw ÷ 641410). The six rounded shares sum to exactly 2,800,000 with no remainder to allocate (asserted). Every leaf therefore carries the same 4.3654× headroom, which is the point: the ratchet is set from the CEILING so car 8's rewrite-and-faces wave cannot breach it, and a leaf that grows out of proportion to the rest still reds. `ceilingGzip` is round(ceilingRaw ÷ 4.5), §10's over-the-wire ratio at the ceiling (distinct faces raise entropy below today's measured 5.27 : 1); the six sum to 622,222, inside §10's stated 0.5–0.65 MB band (asserted).",
-
   "_causalLeafGround": "THE CAUSAL LEAF TAKES NO HEADROOM, AND THAT IS A RULING, NOT AN OVERSIGHT. Its ceilingRaw and ceilingGzip equal its genesis bytes. Three grounds: ARCH §11 refuses 'no wording sets on the causal register in wave one'; §12 car 13 (the causal register R2) is OWNER-GATED, 'wire or retire'; and the leaf reaches NO EMITTED CHUNK at all at this tip (measured by lane MEASURE car 2 at a fresh build: src/domain/display/stateProse/causalDossierProse.js has no product importer, only tests and doc references, so DOSSIER_CAUSAL_PROSE ships zero bytes to any reader today — a measured correction to §10, which states the causal leaf 'rides the data-lazy-* chunk'). A car that wires it is the owner's, and it must move this row through a declared row like any other growth.",
-
   "_declaredRowIdiom": "MONOTONE, SHRINK-ONLY, EXCEPT THROUGH A DECLARED ROW THAT NAMES THE CAR AND THE DELTA — and the idiom is MACHINE-CHECKED, not a promise in prose. A shrink needs no declaration: lower the leaf's `raw`/`gzip` and the win is banked. A GROWTH needs an entry appended to `declared`: { car, leaf, fromRaw, toRaw, gzipAfter, reason }. The test then reconstructs each leaf's whole history: the declared rows for a leaf, in file order, must CHAIN — the first row's fromRaw equals that leaf's `genesis.raw`, each later row's fromRaw equals the previous row's toRaw, and the LAST row's toRaw equals the leaf's CURRENT `raw` and its gzipAfter equals the leaf's current `gzip`. A leaf with no declared row must sit EXACTLY at its genesis value. So a number cannot be raised without a declared row landing on it: raise the row alone and the chain no longer reaches today's bytes, and the suite reds naming the leaf. Every declared toRaw must also stay at or under the leaf's `ceilingRaw`; a car that needs more than the ceiling is asking to amend ARCH §10 and §13 row 17, which is the owner's row, not a lane's. `reason` is prose for a reader; the machine does not read it, and a car that leaves it empty has declared nothing.",
-
-  "_newLeafCeilingArithmetic": "THE THREE LEAVES SEAM CAR 4 ADDS (src/data/dossierConnectives.generated.js, proseNorms.generated.js, dossierRelations.generated.js) are NOT state desk leaves and take their own total: ARCH §10 prices them at 'the three leaves \u2248 77 KB either way', so `ceilingTotalRawNewLeaves` is 77,000 and each leaf's ceilingRaw is that total APPORTIONED BY ITS SHARE OF THEIR GENESIS BYTES: round(77000 \u00d7 genesis.raw \u00f7 49539). The three rounded shares sum to exactly 77,000 with no remainder (asserted), and ceilingGzip is round(ceilingRaw \u00f7 4.5) at the same over-the-wire ratio the state leaves use. \u26a0 A MEASURED FINDING FOR THE SITTING, RECORDED HERE RATHER THAN SOLVED BY A LARGER NUMBER: the NORM leaf's growth law is ONE ROW PER FIRING POOL at about 73.6 B per row, so its 30,990 B ceiling is reached at about 421 rows. It holds 271 today, and ARCH §6.6 sizes up to 174 new modifier pools before the corpus ceiling, which lands near 445. \u00a710's three-leaf estimate is therefore likely to need re-pricing during car 9, and that is an ARCH \u00a710 amendment and an owner row (\u00a713 row 17), not a lane's edit. SEAM car 4 sets the ceiling AT \u00a710's own number rather than above it, on purpose: a lane that quietly gave itself headroom would have amended the architecture by arithmetic. \u26a0 AND THE GZIP CEILING TAKES THE LARGER OF TWO RATIOS, WHICH THE INSTRUMENT ITSELF FORCED. \u00a710's 4.5 : 1 is a CORPUS ratio and it does not hold on a small payload: gzip's fixed header and Huffman tables cost the same on 1,365 bytes as on 250,000, so the connectives leaf compresses at 1.72 : 1 and round(2122 \u00f7 4.5) = 472 would have been a ceiling ALREADY BREACHED at the leaf's birth (measured 795 B). The first run of this ratchet said so by name, which is what a ratchet is for. So ceilingGzip is max(round(ceilingRaw \u00d7 10 \u00f7 ceilingGzipRatioTenths), round(genesis.gzip \u00d7 ceilingRaw \u00f7 genesis.raw)): \u00a710's ratio where the payload is large enough for it to hold, and the leaf's OWN measured ratio where it is not. The six state leaves are unaffected \u2014 every one of them is large and \u00a710's ratio is the larger term there.",
-
+  "_newLeafCeilingArithmetic": "THE THREE LEAVES SEAM CAR 4 ADDS (src/data/dossierConnectives.generated.js, proseNorms.generated.js, dossierRelations.generated.js) are NOT state desk leaves and take their own total: ARCH §10 prices them at 'the three leaves ≈ 77 KB either way', so `ceilingTotalRawNewLeaves` is 77,000 and each leaf's ceilingRaw is that total APPORTIONED BY ITS SHARE OF THEIR GENESIS BYTES: round(77000 × genesis.raw ÷ 49539). The three rounded shares sum to exactly 77,000 with no remainder (asserted), and ceilingGzip is round(ceilingRaw ÷ 4.5) at the same over-the-wire ratio the state leaves use. ⚠ A MEASURED FINDING FOR THE SITTING, RECORDED HERE RATHER THAN SOLVED BY A LARGER NUMBER: the NORM leaf's growth law is ONE ROW PER FIRING POOL at about 73.6 B per row, so its 30,990 B ceiling is reached at about 421 rows. It holds 271 today, and ARCH §6.6 sizes up to 174 new modifier pools before the corpus ceiling, which lands near 445. §10's three-leaf estimate is therefore likely to need re-pricing during car 9, and that is an ARCH §10 amendment and an owner row (§13 row 17), not a lane's edit. SEAM car 4 sets the ceiling AT §10's own number rather than above it, on purpose: a lane that quietly gave itself headroom would have amended the architecture by arithmetic. ⚠ AND THE GZIP CEILING TAKES THE LARGER OF TWO RATIOS, WHICH THE INSTRUMENT ITSELF FORCED. §10's 4.5 : 1 is a CORPUS ratio and it does not hold on a small payload: gzip's fixed header and Huffman tables cost the same on 1,365 bytes as on 250,000, so the connectives leaf compresses at 1.72 : 1 and round(2122 ÷ 4.5) = 472 would have been a ceiling ALREADY BREACHED at the leaf's birth (measured 795 B). The first run of this ratchet said so by name, which is what a ratchet is for. So ceilingGzip is max(round(ceilingRaw × 10 ÷ ceilingGzipRatioTenths), round(genesis.gzip × ceilingRaw ÷ genesis.raw)): §10's ratio where the payload is large enough for it to hold, and the leaf's OWN measured ratio where it is not. The six state leaves are unaffected — every one of them is large and §10's ratio is the larger term there.",
   "ceilingTotalRawStateLeaves": 2800000,
   "ceilingGzipRatioTenths": 45,
   "genesisBasisRawStateLeaves": 641410,
   "ceilingTotalRawNewLeaves": 77000,
   "genesisBasisRawNewLeaves": 49539,
   "genesisCar": "MEASURE car 2 (ARCH §12 row 2), 2026-09-08, at dock tip 710ef8e08",
-
   "genesis": {
-    "src/data/dossierStateProse/defense.generated.js": { "raw": 111827, "gzip": 21248 },
-    "src/data/dossierStateProse/economy.generated.js": { "raw": 90212, "gzip": 18293 },
-    "src/data/dossierStateProse/general.generated.js": { "raw": 182518, "gzip": 31752 },
-    "src/data/dossierStateProse/power.generated.js": { "raw": 81802, "gzip": 15328 },
-    "src/data/dossierStateProse/stressors.generated.js": { "raw": 59298, "gzip": 12961 },
-    "src/data/dossierStateProse/warFaith.generated.js": { "raw": 115753, "gzip": 22048 },
-    "src/data/dossierCausalProse.generated.js": { "raw": 210260, "gzip": 36700 },
-    "src/data/dossierConnectives.generated.js": { "raw": 1365, "gzip": 795 },
-    "src/data/proseNorms.generated.js": { "raw": 19938, "gzip": 4315 },
-    "src/data/dossierRelations.generated.js": { "raw": 28236, "gzip": 2661 }
+    "src/data/dossierStateProse/defense.generated.js": {
+      "raw": 111827,
+      "gzip": 21248
+    },
+    "src/data/dossierStateProse/economy.generated.js": {
+      "raw": 90212,
+      "gzip": 18293
+    },
+    "src/data/dossierStateProse/general.generated.js": {
+      "raw": 182518,
+      "gzip": 31752
+    },
+    "src/data/dossierStateProse/power.generated.js": {
+      "raw": 81802,
+      "gzip": 15328
+    },
+    "src/data/dossierStateProse/stressors.generated.js": {
+      "raw": 59298,
+      "gzip": 12961
+    },
+    "src/data/dossierStateProse/warFaith.generated.js": {
+      "raw": 115753,
+      "gzip": 22048
+    },
+    "src/data/dossierCausalProse.generated.js": {
+      "raw": 210260,
+      "gzip": 36700
+    },
+    "src/data/dossierConnectives.generated.js": {
+      "raw": 1365,
+      "gzip": 795
+    },
+    "src/data/proseNorms.generated.js": {
+      "raw": 19938,
+      "gzip": 4315
+    },
+    "src/data/dossierRelations.generated.js": {
+      "raw": 28236,
+      "gzip": 2661
+    }
   },
-
   "leaves": {
-    "src/data/dossierStateProse/defense.generated.js": { "raw": 154593, "gzip": 23039, "ceilingRaw": 488168, "ceilingGzip": 108482 },
-    "src/data/dossierStateProse/economy.generated.js": { "raw": 126213, "gzip": 19870, "ceilingRaw": 393810, "ceilingGzip": 87513 },
-    "src/data/dossierStateProse/general.generated.js": { "raw": 249940, "gzip": 34607, "ceilingRaw": 796761, "ceilingGzip": 177058 },
-    "src/data/dossierStateProse/power.generated.js": { "raw": 109224, "gzip": 16464, "ceilingRaw": 357097, "ceilingGzip": 79355 },
-    "src/data/dossierStateProse/stressors.generated.js": { "raw": 83961, "gzip": 14038, "ceilingRaw": 258858, "ceilingGzip": 57524 },
-    "src/data/dossierStateProse/warFaith.generated.js": { "raw": 160797, "gzip": 24038, "ceilingRaw": 505306, "ceilingGzip": 112290 },
-    "src/data/dossierCausalProse.generated.js": { "raw": 210260, "gzip": 36700, "ceilingRaw": 210260, "ceilingGzip": 36700 },
-    "src/data/dossierConnectives.generated.js": { "raw": 2046, "gzip": 1138, "ceilingRaw": 2122, "ceilingGzip": 1236 },
-    "src/data/proseNorms.generated.js": { "raw": 19938, "gzip": 4315, "ceilingRaw": 30990, "ceilingGzip": 6887 },
-    "src/data/dossierRelations.generated.js": { "raw": 28236, "gzip": 2661, "ceilingRaw": 43888, "ceilingGzip": 9753 }
+    "src/data/dossierStateProse/defense.generated.js": {
+      "raw": 154563,
+      "gzip": 23039,
+      "ceilingRaw": 488168,
+      "ceilingGzip": 108482
+    },
+    "src/data/dossierStateProse/economy.generated.js": {
+      "raw": 126213,
+      "gzip": 19870,
+      "ceilingRaw": 393810,
+      "ceilingGzip": 87513
+    },
+    "src/data/dossierStateProse/general.generated.js": {
+      "raw": 249940,
+      "gzip": 34607,
+      "ceilingRaw": 796761,
+      "ceilingGzip": 177058
+    },
+    "src/data/dossierStateProse/power.generated.js": {
+      "raw": 109224,
+      "gzip": 16464,
+      "ceilingRaw": 357097,
+      "ceilingGzip": 79355
+    },
+    "src/data/dossierStateProse/stressors.generated.js": {
+      "raw": 83961,
+      "gzip": 14038,
+      "ceilingRaw": 258858,
+      "ceilingGzip": 57524
+    },
+    "src/data/dossierStateProse/warFaith.generated.js": {
+      "raw": 160797,
+      "gzip": 24038,
+      "ceilingRaw": 505306,
+      "ceilingGzip": 112290
+    },
+    "src/data/dossierCausalProse.generated.js": {
+      "raw": 210260,
+      "gzip": 36700,
+      "ceilingRaw": 210260,
+      "ceilingGzip": 36700
+    },
+    "src/data/dossierConnectives.generated.js": {
+      "raw": 2046,
+      "gzip": 1138,
+      "ceilingRaw": 2122,
+      "ceilingGzip": 1236
+    },
+    "src/data/proseNorms.generated.js": {
+      "raw": 19938,
+      "gzip": 4315,
+      "ceilingRaw": 30990,
+      "ceilingGzip": 6887
+    },
+    "src/data/dossierRelations.generated.js": {
+      "raw": 28236,
+      "gzip": 2661,
+      "ceilingRaw": 43888,
+      "ceilingGzip": 9753
+    }
   },
-
   "declared": [
-    { "car": "SEAM car 4 (ARCH §12 row 4) — M2, the schema, added keys only", "leaf": "src/data/dossierStateProse/defense.generated.js", "fromRaw": 111827, "toRaw": 154593, "gzipAfter": 23039, "reason": "the RENDER half of the schema: a `poolMeta` row per pool (role, variantCount, faceCounts, vids, readsCount where the census records a reading, attach) and a `vid` on every variant. Key-by-key against c45a46a78 the corpus is 0 ADDED / 0 REMOVED / 0 CHANGED pools and the only keys added anywhere are `poolMeta` on a block and `vid` on a variant; the manifest is byte-identical on 525 towns x 2 audiences and the classifier reports UNCHANGED on all 73,284 cells. ARCH §10 priced a render-only `poolMeta {role}` at +51,994 B over the six; the full RENDER half measures +243,318 B, which is 34.6 per cent of the corpus and 8.7 per cent of the §10 ceiling the six leaves are apportioned against." },
-    { "car": "SEAM car 4 (ARCH §12 row 4) — M2, the schema, added keys only", "leaf": "src/data/dossierStateProse/economy.generated.js", "fromRaw": 90212, "toRaw": 126213, "gzipAfter": 19870, "reason": "the RENDER half of the schema: a `poolMeta` row per pool (role, variantCount, faceCounts, vids, readsCount where the census records a reading, attach) and a `vid` on every variant. Key-by-key against c45a46a78 the corpus is 0 ADDED / 0 REMOVED / 0 CHANGED pools and the only keys added anywhere are `poolMeta` on a block and `vid` on a variant; the manifest is byte-identical on 525 towns x 2 audiences and the classifier reports UNCHANGED on all 73,284 cells. ARCH §10 priced a render-only `poolMeta {role}` at +51,994 B over the six; the full RENDER half measures +243,318 B, which is 34.6 per cent of the corpus and 8.7 per cent of the §10 ceiling the six leaves are apportioned against." },
-    { "car": "SEAM car 4 (ARCH §12 row 4) — M2, the schema, added keys only", "leaf": "src/data/dossierStateProse/general.generated.js", "fromRaw": 182518, "toRaw": 249940, "gzipAfter": 34607, "reason": "the RENDER half of the schema: a `poolMeta` row per pool (role, variantCount, faceCounts, vids, readsCount where the census records a reading, attach) and a `vid` on every variant. Key-by-key against c45a46a78 the corpus is 0 ADDED / 0 REMOVED / 0 CHANGED pools and the only keys added anywhere are `poolMeta` on a block and `vid` on a variant; the manifest is byte-identical on 525 towns x 2 audiences and the classifier reports UNCHANGED on all 73,284 cells. ARCH §10 priced a render-only `poolMeta {role}` at +51,994 B over the six; the full RENDER half measures +243,318 B, which is 34.6 per cent of the corpus and 8.7 per cent of the §10 ceiling the six leaves are apportioned against." },
-    { "car": "SEAM car 4 (ARCH §12 row 4) — M2, the schema, added keys only", "leaf": "src/data/dossierStateProse/power.generated.js", "fromRaw": 81802, "toRaw": 109224, "gzipAfter": 16464, "reason": "the RENDER half of the schema: a `poolMeta` row per pool (role, variantCount, faceCounts, vids, readsCount where the census records a reading, attach) and a `vid` on every variant. Key-by-key against c45a46a78 the corpus is 0 ADDED / 0 REMOVED / 0 CHANGED pools and the only keys added anywhere are `poolMeta` on a block and `vid` on a variant; the manifest is byte-identical on 525 towns x 2 audiences and the classifier reports UNCHANGED on all 73,284 cells. ARCH §10 priced a render-only `poolMeta {role}` at +51,994 B over the six; the full RENDER half measures +243,318 B, which is 34.6 per cent of the corpus and 8.7 per cent of the §10 ceiling the six leaves are apportioned against." },
-    { "car": "SEAM car 4 (ARCH §12 row 4) — M2, the schema, added keys only", "leaf": "src/data/dossierStateProse/stressors.generated.js", "fromRaw": 59298, "toRaw": 83961, "gzipAfter": 14038, "reason": "the RENDER half of the schema: a `poolMeta` row per pool (role, variantCount, faceCounts, vids, readsCount where the census records a reading, attach) and a `vid` on every variant. Key-by-key against c45a46a78 the corpus is 0 ADDED / 0 REMOVED / 0 CHANGED pools and the only keys added anywhere are `poolMeta` on a block and `vid` on a variant; the manifest is byte-identical on 525 towns x 2 audiences and the classifier reports UNCHANGED on all 73,284 cells. ARCH §10 priced a render-only `poolMeta {role}` at +51,994 B over the six; the full RENDER half measures +243,318 B, which is 34.6 per cent of the corpus and 8.7 per cent of the §10 ceiling the six leaves are apportioned against." },
-    { "car": "SEAM car 4 (ARCH §12 row 4) — M2, the schema, added keys only", "leaf": "src/data/dossierStateProse/warFaith.generated.js", "fromRaw": 115753, "toRaw": 160797, "gzipAfter": 24038, "reason": "the RENDER half of the schema: a `poolMeta` row per pool (role, variantCount, faceCounts, vids, readsCount where the census records a reading, attach) and a `vid` on every variant. Key-by-key against c45a46a78 the corpus is 0 ADDED / 0 REMOVED / 0 CHANGED pools and the only keys added anywhere are `poolMeta` on a block and `vid` on a variant; the manifest is byte-identical on 525 towns x 2 audiences and the classifier reports UNCHANGED on all 73,284 cells. ARCH §10 priced a render-only `poolMeta {role}` at +51,994 B over the six; the full RENDER half measures +243,318 B, which is 34.6 per cent of the corpus and 8.7 per cent of the §10 ceiling the six leaves are apportioned against." },
-    { "car": "REWRITE car 8a-9 (the brief's item 9; S12, SITTING §T.2) — the four connective lists to their floors as PUBLIC-COPY DRAFTS", "leaf": "src/data/dossierConnectives.generated.js", "fromRaw": 1365, "toRaw": 2046, "gzipAfter": 1138, "reason": "EIGHT NEW JOINTS AND A RE-WRITTEN HEADER, and not one rendered byte with them. `consequence.clause` and `tension.sentence` went 0 -> 3 and `contrast.sentence` and `addition.sentence` 1 -> 3, the EMPTY OPENER keeping its place at the head of the two lists that assert adjacency itself. A list length is the modulus of the joint draw, so this growth is ALSO a declared row on the SHIFT REGISTER's `connective-list-length` mechanism -- and it re-rolled NOTHING, measured rather than argued: no shipped pool declares `role: modifier`, so the composer draws no joint on any town, and the classifier printed every one of the 73,284 cells UNCHANGED. The six PROSE leaves are byte-identical; this is the only leaf that moved, it moved by 681 raw bytes, and it sits under its own ceiling of 2,122. The lists are PUBLIC-COPY DRAFTS signed at the walk (S12; SITTING §T.2; §13 row 27)." }
+    {
+      "car": "SEAM car 4 (ARCH §12 row 4) — M2, the schema, added keys only",
+      "leaf": "src/data/dossierStateProse/defense.generated.js",
+      "fromRaw": 111827,
+      "toRaw": 154563,
+      "gzipAfter": 23039,
+      "reason": "the RENDER half of the schema: a `poolMeta` row per pool (role, variantCount, faceCounts, vids, readsCount where the census records a reading, attach) and a `vid` on every variant. Key-by-key against c45a46a78 the corpus is 0 ADDED / 0 REMOVED / 0 CHANGED pools and the only keys added anywhere are `poolMeta` on a block and `vid` on a variant; the manifest is byte-identical on 525 towns x 2 audiences and the classifier reports UNCHANGED on all 73,284 cells. ARCH §10 priced a render-only `poolMeta {role}` at +51,994 B over the six; the full RENDER half measures +243,318 B, which is 34.6 per cent of the corpus and 8.7 per cent of the §10 ceiling the six leaves are apportioned against. ⚠ AMENDED 2026-09-18 (owner §934.9): `toRaw` reads 154563 rather than the 154593 this car measured, because a LATER car took 16 bytes back off the same leaf and the ratchet refuses a declared row for a shrink (\"a shrink needs no declaration, only a lowered row\") while the chain must still terminate at the committed number. The 16 bytes are two pool KEYS spelled differently — `Magical Capability: Arcane support|None` became `Arcane Support: Arcane support|None`, so the corpus key matches the display label the review-10 car moved; the Overview's Systems Health row owns the name `Magical Capability` for a different fact. Not one variant, vid, face or attach set was edited, the four occurrences are 4 bytes shorter each, and both pools are DS-DEF-6 BLOCKED pools that `defenseSupportingProse` cannot emit over its whole input space, so no cell moves for any town and generatorGoldenMaster passes plain. A SECOND 14 bytes came off in the same landing when the owner ruled the presence row's status vocabulary `Present` / `None`, which re-keys the pool `Arcane Support: Arcane support` → `Arcane Support: Present`; the same reasoning applies unchanged."
+    },
+    {
+      "car": "SEAM car 4 (ARCH §12 row 4) — M2, the schema, added keys only",
+      "leaf": "src/data/dossierStateProse/economy.generated.js",
+      "fromRaw": 90212,
+      "toRaw": 126213,
+      "gzipAfter": 19870,
+      "reason": "the RENDER half of the schema: a `poolMeta` row per pool (role, variantCount, faceCounts, vids, readsCount where the census records a reading, attach) and a `vid` on every variant. Key-by-key against c45a46a78 the corpus is 0 ADDED / 0 REMOVED / 0 CHANGED pools and the only keys added anywhere are `poolMeta` on a block and `vid` on a variant; the manifest is byte-identical on 525 towns x 2 audiences and the classifier reports UNCHANGED on all 73,284 cells. ARCH §10 priced a render-only `poolMeta {role}` at +51,994 B over the six; the full RENDER half measures +243,318 B, which is 34.6 per cent of the corpus and 8.7 per cent of the §10 ceiling the six leaves are apportioned against."
+    },
+    {
+      "car": "SEAM car 4 (ARCH §12 row 4) — M2, the schema, added keys only",
+      "leaf": "src/data/dossierStateProse/general.generated.js",
+      "fromRaw": 182518,
+      "toRaw": 249940,
+      "gzipAfter": 34607,
+      "reason": "the RENDER half of the schema: a `poolMeta` row per pool (role, variantCount, faceCounts, vids, readsCount where the census records a reading, attach) and a `vid` on every variant. Key-by-key against c45a46a78 the corpus is 0 ADDED / 0 REMOVED / 0 CHANGED pools and the only keys added anywhere are `poolMeta` on a block and `vid` on a variant; the manifest is byte-identical on 525 towns x 2 audiences and the classifier reports UNCHANGED on all 73,284 cells. ARCH §10 priced a render-only `poolMeta {role}` at +51,994 B over the six; the full RENDER half measures +243,318 B, which is 34.6 per cent of the corpus and 8.7 per cent of the §10 ceiling the six leaves are apportioned against."
+    },
+    {
+      "car": "SEAM car 4 (ARCH §12 row 4) — M2, the schema, added keys only",
+      "leaf": "src/data/dossierStateProse/power.generated.js",
+      "fromRaw": 81802,
+      "toRaw": 109224,
+      "gzipAfter": 16464,
+      "reason": "the RENDER half of the schema: a `poolMeta` row per pool (role, variantCount, faceCounts, vids, readsCount where the census records a reading, attach) and a `vid` on every variant. Key-by-key against c45a46a78 the corpus is 0 ADDED / 0 REMOVED / 0 CHANGED pools and the only keys added anywhere are `poolMeta` on a block and `vid` on a variant; the manifest is byte-identical on 525 towns x 2 audiences and the classifier reports UNCHANGED on all 73,284 cells. ARCH §10 priced a render-only `poolMeta {role}` at +51,994 B over the six; the full RENDER half measures +243,318 B, which is 34.6 per cent of the corpus and 8.7 per cent of the §10 ceiling the six leaves are apportioned against."
+    },
+    {
+      "car": "SEAM car 4 (ARCH §12 row 4) — M2, the schema, added keys only",
+      "leaf": "src/data/dossierStateProse/stressors.generated.js",
+      "fromRaw": 59298,
+      "toRaw": 83961,
+      "gzipAfter": 14038,
+      "reason": "the RENDER half of the schema: a `poolMeta` row per pool (role, variantCount, faceCounts, vids, readsCount where the census records a reading, attach) and a `vid` on every variant. Key-by-key against c45a46a78 the corpus is 0 ADDED / 0 REMOVED / 0 CHANGED pools and the only keys added anywhere are `poolMeta` on a block and `vid` on a variant; the manifest is byte-identical on 525 towns x 2 audiences and the classifier reports UNCHANGED on all 73,284 cells. ARCH §10 priced a render-only `poolMeta {role}` at +51,994 B over the six; the full RENDER half measures +243,318 B, which is 34.6 per cent of the corpus and 8.7 per cent of the §10 ceiling the six leaves are apportioned against."
+    },
+    {
+      "car": "SEAM car 4 (ARCH §12 row 4) — M2, the schema, added keys only",
+      "leaf": "src/data/dossierStateProse/warFaith.generated.js",
+      "fromRaw": 115753,
+      "toRaw": 160797,
+      "gzipAfter": 24038,
+      "reason": "the RENDER half of the schema: a `poolMeta` row per pool (role, variantCount, faceCounts, vids, readsCount where the census records a reading, attach) and a `vid` on every variant. Key-by-key against c45a46a78 the corpus is 0 ADDED / 0 REMOVED / 0 CHANGED pools and the only keys added anywhere are `poolMeta` on a block and `vid` on a variant; the manifest is byte-identical on 525 towns x 2 audiences and the classifier reports UNCHANGED on all 73,284 cells. ARCH §10 priced a render-only `poolMeta {role}` at +51,994 B over the six; the full RENDER half measures +243,318 B, which is 34.6 per cent of the corpus and 8.7 per cent of the §10 ceiling the six leaves are apportioned against."
+    },
+    {
+      "car": "REWRITE car 8a-9 (the brief's item 9; S12, SITTING §T.2) — the four connective lists to their floors as PUBLIC-COPY DRAFTS",
+      "leaf": "src/data/dossierConnectives.generated.js",
+      "fromRaw": 1365,
+      "toRaw": 2046,
+      "gzipAfter": 1138,
+      "reason": "EIGHT NEW JOINTS AND A RE-WRITTEN HEADER, and not one rendered byte with them. `consequence.clause` and `tension.sentence` went 0 -> 3 and `contrast.sentence` and `addition.sentence` 1 -> 3, the EMPTY OPENER keeping its place at the head of the two lists that assert adjacency itself. A list length is the modulus of the joint draw, so this growth is ALSO a declared row on the SHIFT REGISTER's `connective-list-length` mechanism -- and it re-rolled NOTHING, measured rather than argued: no shipped pool declares `role: modifier`, so the composer draws no joint on any town, and the classifier printed every one of the 73,284 cells UNCHANGED. The six PROSE leaves are byte-identical; this is the only leaf that moved, it moved by 681 raw bytes, and it sits under its own ceiling of 2,122. The lists are PUBLIC-COPY DRAFTS signed at the walk (S12; SITTING §T.2; §13 row 27)."
+    }
   ]
 }

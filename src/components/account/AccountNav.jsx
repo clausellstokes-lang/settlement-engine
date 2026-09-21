@@ -33,6 +33,7 @@ import { space } from '../../design/tokens.js';
 import Button from '../primitives/Button.jsx';
 import MobileTabStrip from '../primitives/MobileTabStrip.jsx';
 import UnreadMessageBadge, { normalizeUnreadCount } from './UnreadMessageBadge.jsx';
+import { chromeFontSize } from '../../design/proseScale.js';
 
 /**
  * The canonical section order. Profile leads (the default landing section);
@@ -61,6 +62,7 @@ export default function AccountNav({
   unreadCount = 0,
   onNavigateAdmin,
 }) {
+  const mobile = useIsMobile();
   const isMobile = useIsMobile();
   const showAdmin = Boolean(isElevated && onNavigateAdmin);
   // The "AI & keys" row is Surveyor-gated (owner ruling 2026-07-19): hidden
@@ -133,7 +135,7 @@ export default function AccountNav({
           >
             <span style={{ flex: 1, textAlign: 'left' }}>
               <span style={{ display: 'block', fontSize: FS.sm, fontWeight: 700, color: INK }}>Developer Admin Panel</span>
-              <span style={{ display: 'block', fontSize: FS.xs, fontWeight: 400, color: SECOND }}>Manage users, credits, roles, and system configuration</span>
+              <span style={{ display: 'block', fontSize: chromeFontSize(FS.xs, mobile), fontWeight: 400, color: SECOND }}>Manage users, credits, roles, and system configuration</span>
             </span>
           </Button>
         </>

@@ -13,8 +13,11 @@ import { ANNOTATE_TOOLS, FOREST_STYLES } from '../../store/mapSlice.js';
 import { GOLD, INK, SECOND, BORDER, BORDER2, CARD, sans, FS, SP } from '../theme.js';
 import Button from '../primitives/Button.jsx';
 import IconButton from '../primitives/IconButton.jsx';
+import useIsMobile from '../../hooks/useIsMobile.js';
+import { chromeFontSize } from '../../design/proseScale.js';
 
 export default function AnnotateToolbar() {
+  const mobile = useIsMobile();
   const annotateTool    = useStore(s => s.annotateTool);
   const setAnnotateTool = useStore(s => s.setAnnotateTool);
   const opts            = useStore(s => s.annotateOptions);
@@ -96,12 +99,12 @@ export default function AnnotateToolbar() {
             aria-label="Size"
             style={{ width: 90, accentColor: GOLD }}
           />
-          <span style={{ fontSize: FS.xxs, color: SECOND, minWidth: 18 }}>{opts.labelSize}</span>
+          <span style={{ fontSize: chromeFontSize(FS.xxs, mobile), color: SECOND, minWidth: 18 }}>{opts.labelSize}</span>
           <OptionLabel>Font</OptionLabel>
           <select
             value={opts.labelFont}
             onChange={e => setOpt('labelFont', e.target.value)}
-            style={selectStyle}
+            style={selectStyle(mobile)}
           >
             <option value="serif">Serif</option>
             <option value="Georgia, serif">Georgia</option>
@@ -127,7 +130,7 @@ export default function AnnotateToolbar() {
           <select
             value={opts.markerIcon}
             onChange={e => setOpt('markerIcon', e.target.value)}
-            style={selectStyle}
+            style={selectStyle(mobile)}
           >
             <option value="pin">Pin</option>
             <option value="star">Star</option>
@@ -152,7 +155,7 @@ export default function AnnotateToolbar() {
             value={opts.forestStyle}
             onChange={e => setOpt('forestStyle', e.target.value)}
             aria-label="Forest style"
-            style={selectStyle}
+            style={selectStyle(mobile)}
           >
             {FOREST_STYLES.map(style => (
               <option key={style} value={style}>
@@ -168,7 +171,7 @@ export default function AnnotateToolbar() {
             aria-label="Radius"
             style={{ width: 90, accentColor: GOLD }}
           />
-          <span style={{ fontSize: FS.xxs, color: SECOND, minWidth: 24 }}>{opts.forestRadius}</span>
+          <span style={{ fontSize: chromeFontSize(FS.xxs, mobile), color: SECOND, minWidth: 24 }}>{opts.forestRadius}</span>
           <OptionLabel>Density</OptionLabel>
           <input
             type="range" min={0.1} max={1} step={0.05}
@@ -177,7 +180,7 @@ export default function AnnotateToolbar() {
             aria-label="Density"
             style={{ width: 90, accentColor: GOLD }}
           />
-          <span style={{ fontSize: FS.xxs, color: SECOND, minWidth: 24 }}>{opts.forestDensity.toFixed(2)}</span>
+          <span style={{ fontSize: chromeFontSize(FS.xxs, mobile), color: SECOND, minWidth: 24 }}>{opts.forestDensity.toFixed(2)}</span>
         </>
       )}
 
@@ -220,9 +223,10 @@ function ToolButton({ active, onClick, Icon, label }) {
 }
 
 function OptionLabel({ children }) {
+  const mobile = useIsMobile();
   return (
     <span style={{
-      fontSize: FS.xxs, fontWeight: 700, color: SECOND,
+      fontSize: chromeFontSize(FS.xxs, mobile), fontWeight: 700, color: SECOND,
       textTransform: 'uppercase', letterSpacing: '0.04em',
     }}>
       {children}
@@ -230,10 +234,10 @@ function OptionLabel({ children }) {
   );
 }
 
-const selectStyle = {
+const selectStyle = (mobile) => ({
   padding: '4px 8px',
   border: `1px solid ${BORDER}`,
   background: CARD,
-  fontSize: FS.xxs, fontFamily: sans, color: INK,
+  fontSize: chromeFontSize(FS.xxs, mobile), fontFamily: sans, color: INK,
   cursor: 'pointer',
-};
+});

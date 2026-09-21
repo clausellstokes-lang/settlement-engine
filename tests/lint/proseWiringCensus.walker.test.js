@@ -1011,9 +1011,16 @@ describe('car 0 — `absent`: a measurement, or a default wearing a reading\'s c
     // ⚠ THE THREE MOVED WITH THE GRAIN (car 0e). `absent` is keyed on `reads`, so the branch
     // grain shrinks the read paths from 757 to 529 and the distribution with them; nothing
     // about a path's absence semantics changed, only how many paths a pool is entitled to.
-    expect(totals.measured, 'read paths whose absence a predicate can see').toBe(370);
+    // ⭐ RE-BASED 2026-09-18 (owner §934.9). The COMMITTED census was stale against its own
+    // tree: re-taking it by its own writer (`node scripts/wiring-census.mjs`) moved two read
+    // paths from `not-produced` to `measured` — `readings.impairedInstitution` and
+    // `hasPatron`, both of which a producer in the tree already writes — and the producer
+    // index with them (1158 → 1159 files). Neither is this car's doing; the re-take BANKED
+    // a truth the register had not caught up with, and it also cured two of the three
+    // standing proseWiringCensus reds (the stale-bytes verdict and the holder register).
+    expect(totals.measured, 'read paths whose absence a predicate can see').toBe(372);
     expect(totals.default, 'read paths where a fallback hides it').toBe(3);
-    expect(totals['not-produced'], 'read paths no writer in the estate produces').toBe(60);
+    expect(totals['not-produced'], 'read paths no writer in the estate produces').toBe(58);
     // ⭐ THE FOURTH LABEL, ADDED AT MEASURE CAR 3 (the fold's cure 8, and the shape its P5
     // found in the pair table). A chain whose TAIL is a JS method — `eco.incomeSources.reduce`,
     // `readings.notableAbsences.map` — records a CALL the key function made on a reading, not a

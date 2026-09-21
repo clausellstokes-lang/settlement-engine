@@ -1,4 +1,6 @@
 import { FS, ELEV } from '../theme.js';
+import useIsMobile from '../../hooks/useIsMobile.js';
+import { chromeFontSize } from '../../design/proseScale.js';
 /**
  * primitives/Card — Shared card chrome.
  *
@@ -35,6 +37,7 @@ export default function Card({
   actions, compact, children,
   ...rest
 }) {
+  const mobile = useIsMobile();
   const v = VARIANTS[variant] || VARIANTS.default;
   const pad = compact ? 8 : 12;
   return (
@@ -58,7 +61,7 @@ export default function Card({
           <div style={{ flex: 1, minWidth: 0 }}>
             {kicker && (
               <div style={{
-                fontSize: FS.xxs, fontWeight: 800,
+                fontSize: chromeFontSize(FS.xxs, mobile), fontWeight: 800,
                 fontFamily: 'system-ui, -apple-system, sans-serif',
                 color: v.titleColor, opacity: 0.7,
                 letterSpacing: '0.06em', textTransform: 'uppercase',

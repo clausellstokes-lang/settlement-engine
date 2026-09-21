@@ -68,6 +68,7 @@ import {
 } from './campaignEntryReporting.js';
 import { runCampaignLoad } from './campaignLoadSession.js';
 import { track, EVENTS } from '../lib/analytics.js';
+import { staffUnlocksPaidFeatures } from '../lib/staffEntitlements.js';
 
 export const CAMPAIGN_CORE_RUNTIME_SENTINEL = 'settlementforge_campaign_core_body_v1';
 
@@ -582,8 +583,7 @@ export const createCampaignSlice = (set, get) => {
 
   createCampaign: (name) => {
     const current = get();
-    const role = current.auth?.role;
-    const canCreate = current.auth?.tier === 'premium' || role === 'developer' || role === 'admin';
+    const canCreate = current.auth?.tier === 'premium' || staffUnlocksPaidFeatures(current.auth?.role);
     if (!canCreate) return null;
     const campaign = buildNewCampaign(current, name);
     set(state => {

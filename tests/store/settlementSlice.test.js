@@ -508,8 +508,17 @@ describe('settlementSlice — resetSettlementIdentity is the single writer (stru
       (n, t) => n + ((t.match(/function resetSettlementIdentity/g) || []).length), 0,
     );
     expect(defCount, 'exactly one module in the set may define the chokepoint').toBe(1);
+    // ⭐ THE OPTION BAG IS MATCHED GENERICALLY, AND THAT IS THE THIRD RE-ANCHOR OF
+    // THE SAME PIN. The regex used to spell the ONE bag that existed
+    // (`preservePendingEdits: true`); when the chokepoint gained a second option —
+    // `retiring`, the identity of the world a swap is taking out of the editor
+    // (2026-09-19) — every call stopped matching and the count fell to ZERO, i.e.
+    // "no swap routes through the chokepoint", which is the vacuous reading this
+    // pin's own header warns about twice. The subject was never the bag's spelling:
+    // it is that every identity swap routes through the one chokepoint. So the bag
+    // is `\{[^{}]*\}` and the COUNT is what holds.
     const calls = src.match(
-      /resetSettlementIdentity\(state(?:,\s*\{\s*preservePendingEdits:\s*true\s*\})?\);/g,
+      /resetSettlementIdentity\(state(?:,\s*\{[^{}]*\})?\);/g,
     ) || [];
     expect(calls).toHaveLength(4);
   });

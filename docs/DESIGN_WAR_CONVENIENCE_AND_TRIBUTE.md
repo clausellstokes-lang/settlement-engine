@@ -413,7 +413,7 @@ than building on it.
 | ⚠️ `non_intervention` was NOT removed from the tree: peaceTerms.js:207 carries it with `executor:'seam'` — "recorded-not-enforced this wave". The real precedent is LAND-AS-SEAM, not CUT; GRAMMAR §1d owns the tombstone's reading | tree | ⚠️ CORPUS FACT (GRAMMAR adjudicates) |
 | TERM_CATALOG's BUILT economic family — EXACTLY FOUR conserved sink-only grain-month streams {tribute, reparations, restitution, resource_share} (peaceTerms.js:185-194, all `family:'economic', stream:true, executor:'transfer'`); CLASS_TERM maps export_flows→resource_share, treasury→tribute (:226-227) with the :376 fallback | tree / TRADE §2 | **BUILT** |
 | **THE TREATY RESERVE FLOOR** — "A treaty may impoverish a court; it may not starve it out of" (treatyTransfer.js:35); RESERVE_MONTHS 1.5 (:56); at the floor "the term defaults, nothing moves" (:107-108) | tree | **BUILT — LANDED LAW (TB-LAW-4)** |
-| Streams/stores + tribute physics; **tribute_strain minted in `accrueStrainResentment` at peaceTerms.js:1337-1353** (the old :1023-1044 cite is STALE — that range is `advanceTreaties`' return path); installments on the 52-week treaty clock; the margin→duration derivation `0.5 + margin + margin², capped` (LANDED) | war volume + tree | BUILT/LANDED |
+| Streams/stores + tribute physics; **tribute_strain minted in `accrueStrainResentment` at peaceTermsOverlay.js:62**, called from `peaceTerms.js:790` (the older peaceTerms.js ranges, lines 1023-1044 and 1337-1353, are both STALE — the accrual moved out of this module; spelled without the colon form on purpose, so a struck address is not re-created as a citation); installments on the 52-week treaty clock; the margin→duration derivation `0.5 + margin + margin², capped` (LANDED) | war volume + tree | BUILT/LANDED |
 | Treaty clock provenance (52 current / legacy 12, never backfilled) — **WR-0c item (4)**; the margin→duration derivation is a SEPARATE landed fact and does NOT live at that citation | GRAMMAR §2 / WR-0c(4) | LANDED |
 | The extremity read; **the overwhelming gate**; razing rarity discipline; R2's evil-exclusive initiation boundary (the one place alignment is a boundary, not a weight) | WR-8 / N / R / R2 | SPECCED |
 | labor_compact (banded flow read `laborCompactFor(pair)`); migration_right; settlement_provision | GR-3 population family | SPECCED |
@@ -1775,7 +1775,7 @@ economic_capacity and the pressure lanes, and a parallel write
 double-counts the same drain." So:
 1. **THE PAIR GRIEVANCE (revanchism)** — outward, at the victor:
    `tribute_strain`, minted in `accrueStrainResentment`
-   (`peaceTerms.js:1337-1353`; the old :1023-1044 citation was stale).
+   (`peaceTermsOverlay.js:62`, called from `peaceTerms.js:790`; the older peaceTerms.js addresses were stale).
 2. **THE WATCHERS** — extraction is a loud public fact (C-LAW-5, once news
    latency is paid), read into every observer's threat scoring and
    alignment-lens judgment.

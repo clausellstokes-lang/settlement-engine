@@ -14,6 +14,8 @@ import { useState } from 'react';
 import { t } from '../../copy/index.js';
 import Button from '../primitives/Button.jsx';
 import { INK, BODY, SECOND, BORDER, sans, SP, FS } from '../theme.js';
+import useIsMobile from '../../hooks/useIsMobile.js';
+import { chromeFontSize, proseFontSize } from '../../design/proseScale.js';
 
 /**
  * @param {object} props
@@ -24,6 +26,7 @@ import { INK, BODY, SECOND, BORDER, sans, SP, FS } from '../theme.js';
 export default function RedeemCodeField({ code, onChange, idPrefix = 'purchase' }) {
   // Opens pre-expanded when a code arrived via the Account-page handoff, so
   // the rider is visible rather than silently attached.
+  const mobile = useIsMobile();
   const [open, setOpen] = useState(Boolean(code));
   const inputId = `${idPrefix}-redeem-code`;
 
@@ -50,7 +53,7 @@ export default function RedeemCodeField({ code, onChange, idPrefix = 'purchase' 
         htmlFor={inputId}
         style={{
           display: 'flex', flexDirection: 'column', gap: SP.xs,
-          fontSize: FS.xs, fontWeight: 700, color: SECOND,
+          fontSize: chromeFontSize(FS.xs, mobile), fontWeight: 700, color: SECOND,
         }}
       >
         {t('purchase.codeLabel')}
@@ -71,7 +74,7 @@ export default function RedeemCodeField({ code, onChange, idPrefix = 'purchase' 
         />
       </label>
       {Boolean(code.trim()) && (
-        <div role="status" style={{ fontSize: FS.xs, color: BODY, lineHeight: 1.5, fontFamily: sans }}>
+        <div role="status" style={{ fontSize: proseFontSize(FS.xs, mobile), color: BODY, lineHeight: 1.5, fontFamily: sans }}>
           {t('purchase.codeAttached')}
         </div>
       )}

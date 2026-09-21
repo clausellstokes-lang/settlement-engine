@@ -33,15 +33,17 @@ import {
 import { useDossierEntities } from './DossierEntityContext.jsx';
 import PendingChangesBar from './PendingChangesBar.jsx';
 import Button from '../primitives/Button.jsx';
+import { useDialogDismiss } from '../primitives/useDialogFocusTrap.js';
 import EntityLink from '../primitives/EntityLink.jsx';
 import {
-  BORDER,
+  BORDER, FOOTER_INSET, ARROW_BARB_CLEAR, BOTTOM_NAV_H,
   FS,
   SP,
   swatch,
   sans,
   serif_,
 } from '../theme.js';
+import { chromeFontSize, proseFontSize } from '../../design/proseScale.js';
 
 const PAPER = swatch['#FFFBF5'];
 const MUTED = swatch.inkMag3;
@@ -222,26 +224,19 @@ function EntityInspector({ readOnly = false }) {
   const entry = focusedEntity?.id ? index?.resolve?.(focusedEntity.id) : null;
   const why = useMemo(() => recordedWhy(entry), [entry]);
   const connections = useMemo(() => connectionsFor(entry, index), [entry, index]);
-  const panelRef = useRef(null);
-  const returnFocusRef = useRef(null);
+  // ⭐ ONE DIALOG LIFECYCLE, NOT A PRIVATE ONE (owner order, ODQ §934.31). This panel
+  // hand-rolled its own Escape listener and focus restore — correct behaviour, written
+  // a second time, in a file no walker could join to the primitive. It now rides the
+  // shared non-modal hook, which owns the Escape (through the SAME open-dialog stack
+  // every modal uses, so an Escape meant for a modal stacked above it is no longer
+  // answered twice) and the focus restore. The focus-IN stays local and explicit: this
+  // inspector is a takeover on a phone, and moving focus into it is the point.
+  const panelRef = useDialogDismiss(!!entry, () => clearFocusedEntity?.());
 
   useEffect(() => {
-    if (!entry) return undefined;
-    const active = globalThis.document?.activeElement;
-    if (globalThis.HTMLElement && active instanceof globalThis.HTMLElement) {
-      returnFocusRef.current = active;
-    }
+    if (!entry) return;
     panelRef.current?.focus?.({ preventScroll: true });
-
-    const onKeyDown = (event) => {
-      if (event.key !== 'Escape') return;
-      event.preventDefault();
-      clearFocusedEntity?.();
-      globalThis.queueMicrotask?.(() => returnFocusRef.current?.focus?.());
-    };
-    globalThis.window?.addEventListener?.('keydown', onKeyDown);
-    return () => globalThis.window?.removeEventListener?.('keydown', onKeyDown);
-  }, [entry, clearFocusedEntity]);
+  }, [entry, panelRef]);
 
   if (!entry) return null;
 
@@ -251,10 +246,9 @@ function EntityInspector({ readOnly = false }) {
     setEditMode?.(true);
     navigateToEntity?.(entry.id);
   };
-  const closeInspector = () => {
-    clearFocusedEntity?.();
-    globalThis.queueMicrotask?.(() => returnFocusRef.current?.focus?.());
-  };
+  // The × and Escape now take the same road: clear the focused entity, and let the
+  // shared hook hand focus back to whatever opened the inspector.
+  const closeInspector = () => { clearFocusedEntity?.(); };
 
   return (
     <aside
@@ -276,12 +270,16 @@ function EntityInspector({ readOnly = false }) {
         fontFamily: sans,
       } : {
         position: 'fixed',
-        top: 88,
+        // Below the painted arrow's right-hand reach (the header band plus the
+        // arrowhead's barb) with 24 px of air.
+        top: `calc(${ARROW_BARB_CLEAR} + 24px)`,
         right: SP.lg,
-        // Desktop inspection is a floating tool, below drawers and dialogs.
+        // Desktop inspection is a floating tool, below drawers and dialogs. Its
+        // height ends 24 px above the pinned footer's links band (owner orders
+        // 2026-09-16) and the bottom bar where it shows (640 to 1023 px).
         zIndex: 60,
         width: 340,
-        maxHeight: 'calc(100dvh - 112px)',
+        maxHeight: `calc(100dvh - ${ARROW_BARB_CLEAR} - 48px - ${BOTTOM_NAV_H} - ${FOOTER_INSET})`,
         overflowY: 'auto',
         background: PAPER,
         border: `1px solid ${BORDER}`,
@@ -297,7 +295,7 @@ function EntityInspector({ readOnly = false }) {
       }}>
         <div style={{ flex: 1, minWidth: 0 }}>
           <div style={{
-            fontSize: FS.xxs,
+            fontSize: chromeFontSize(FS.xxs, mobile),
             color: MUTED,
             fontWeight: 800,
             textTransform: 'uppercase',
@@ -317,7 +315,7 @@ function EntityInspector({ readOnly = false }) {
               display: 'block',
               marginTop: 2,
               color: MUTED,
-              fontSize: FS.xxs,
+              fontSize: chromeFontSize(FS.xxs, mobile),
             }}
           >
             Inspect recorded state, provenance, connections, and available actions.
@@ -398,7 +396,7 @@ function EntityInspector({ readOnly = false }) {
           ) : (
             <p
               role="note"
-              style={{ margin: 0, color: MUTED, fontSize: FS.xxs, lineHeight: 1.45 }}
+              style={{ margin: 0, color: MUTED, fontSize: proseFontSize(FS.xxs, mobile), lineHeight: 1.45 }}
             >
               More than one legacy record shares this identity. It remains readable,
               but navigation and editing are disabled so SettlementForge does not guess.
@@ -407,7 +405,7 @@ function EntityInspector({ readOnly = false }) {
           {interactive && !readOnly && mobile && entry.type === 'npc' && (
             <p
               role="note"
-              style={{ margin: `${SP.sm}px 0 0`, color: MUTED, fontSize: FS.xxs, lineHeight: 1.45 }}
+              style={{ margin: `${SP.sm}px 0 0`, color: MUTED, fontSize: proseFontSize(FS.xxs, mobile), lineHeight: 1.45 }}
             >
               NPC authoring remains available from this dossier on desktop.
             </p>
@@ -420,7 +418,7 @@ function EntityInspector({ readOnly = false }) {
             // hand-written text without warning. See QUEUE_WIRED_PROSE_PATHS.
             <p
               role="note"
-              style={{ margin: `${SP.sm}px 0 0`, color: MUTED, fontSize: FS.xxs, lineHeight: 1.45 }}
+              style={{ margin: `${SP.sm}px 0 0`, color: MUTED, fontSize: proseFontSize(FS.xxs, mobile), lineHeight: 1.45 }}
             >
               A character&rsquo;s secret can be hand-written on their card. Goal,
               personality, and role stay engine-managed for now. The NPC
@@ -455,6 +453,7 @@ function EntityInspector({ readOnly = false }) {
  * write-capability preflight, and a snapshot taken before any write.
  */
 function ChangeDock({ readOnly = false }) {
+  const mobile = useIsMobile();
   const queue = useStore(state => state.pendingEditsQueue || []);
   const receipts = useStore(state => state.pendingEditReceipts || []);
   const ownerKey = useStore(state => pendingEditOwnerScope(state).ownerKey);
@@ -520,7 +519,7 @@ function ChangeDock({ readOnly = false }) {
           >
             Change Dock
           </h2>
-          <span style={{ color: MUTED, fontSize: FS.xxs }}>
+          <span style={{ color: MUTED, fontSize: chromeFontSize(FS.xxs, mobile) }}>
             This settlement only · each visible scope applies separately
           </span>
         </div>
@@ -533,7 +532,7 @@ function ChangeDock({ readOnly = false }) {
             margin: 0,
             padding: `${SP.sm}px ${SP.md}px 0`,
             color: MUTED,
-            fontSize: FS.xxs,
+            fontSize: proseFontSize(FS.xxs, mobile),
             lineHeight: 1.45,
           }}
         >
@@ -549,10 +548,8 @@ function ChangeDock({ readOnly = false }) {
           <div style={{
             marginBottom: 5,
             color: MUTED,
-            fontSize: FS.xxs,
+            fontSize: chromeFontSize(FS.xxs, mobile),
             fontWeight: 800,
-            textTransform: 'uppercase',
-            letterSpacing: '0.06em',
           }}>
             Recent results
           </div>
@@ -573,7 +570,7 @@ function ChangeDock({ readOnly = false }) {
                     {outcomeDetail ? `: ${outcomeDetail}` : ''}
                   </div>
                   {explanation && (
-                    <div style={{ color: MUTED, fontSize: FS.xxs, lineHeight: 1.45 }}>
+                    <div style={{ color: MUTED, fontSize: proseFontSize(FS.xxs, mobile), lineHeight: 1.45 }}>
                       <strong>Explanation</strong>{' '}
                       {words(explanation)}
                     </div>
@@ -593,12 +590,12 @@ function ChangeDock({ readOnly = false }) {
                 {undoButtonLabel(undoStatus)}
               </Button>
               {undoStatus === 'succeeded' && (
-                <span role="status" style={{ color: swatch.success, fontSize: FS.xxs }}>
+                <span role="status" style={{ color: swatch.success, fontSize: chromeFontSize(FS.xxs, mobile) }}>
                   The last applied batch was undone. The settlement now reflects its earlier snapshot.
                 </span>
               )}
               {undoStatus === 'failed' && (
-                <span role="alert" style={{ color: swatch.danger, fontSize: FS.xxs }}>
+                <span role="alert" style={{ color: swatch.danger, fontSize: chromeFontSize(FS.xxs, mobile) }}>
                   Undo was not completed. The applied result remains on record; you can try again.
                 </span>
               )}

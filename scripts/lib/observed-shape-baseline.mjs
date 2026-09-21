@@ -282,7 +282,51 @@ export const RETIRED_COMPANION_GATE_BASELINE_SCHEMA = 16;
  *  BASELINE_SCHEMA, and this constant exists so a schema-17 PREDECESSOR is still validated
  *  as schema 17 after the live number moves past it. */
 export const RETIRED_STRESS_TOPOLOGY_BASELINE_SCHEMA = 17;
-export const BASELINE_SCHEMA = 18;
+/** The RETIRED lineage-reanchor definition — schema 19's predecessor. Same tagged
+ *  topology envelope; schema 19 re-governs it to a declared M8/M9 bank that has lost an
+ *  entry, because the owner's 2026-09-17 order deleted that entry's WRITER. Unlike 18 it
+ *  DOES move rows — six of them, five GONE and one DECREASED, every one an estate shrink
+ *  the lock-control deletion caused rather than anything the instrument decided. Never
+ *  redefined, never deleted — a live baseline is validated against BASELINE_SCHEMA, and
+ *  this constant exists so a schema-18 PREDECESSOR is still validated as schema 18 after
+ *  the live number moves past it. */
+export const RETIRED_LINEAGE_REANCHOR_BASELINE_SCHEMA = 18;
+/** The RETIRED exemption-retirement definition — schema 20's predecessor. Same tagged
+ *  topology envelope and the same eight-identity declared bank; schema 20 re-governs it to
+ *  a `--write` that REFUSES to freeze a bank its hand-owned twins do not already state —
+ *  the walker's literal module on every write and, at a rung, the rung's own declared
+ *  post-bank. Like 13, 14, 15, 16 and 18 — and unlike 17 and 19 — it moves no row at all:
+ *  the fence is a law on the WRITE, not on the detector, and the register it re-freezes is
+ *  byte-identical in inventory and rowTags. Never redefined, never deleted — a live
+ *  baseline is validated against BASELINE_SCHEMA, and this constant exists so a schema-19
+ *  PREDECESSOR is still validated as schema 19 after the live number moves past it. */
+export const RETIRED_EXEMPTION_RETIREMENT_BASELINE_SCHEMA = 19;
+/** The RETIRED bank-fence definition — schema 21's predecessor. Same tagged topology
+ *  envelope, the same eight-identity declared roster and the same fence on the write;
+ *  schema 21 re-governs it to a register that ADMITS THREE ROWS, the reads DS-REL-1's list
+ *  assembler makes of three save-time keys the generation corpus can never observe a writer
+ *  for. Unlike 20 — and like 17 and 19 — it MOVES ROWS: three NEW, all in one new file, and
+ *  one of them is a declared identity, so it is also the first rung to GROW the bank
+ *  (60/39 -> 61/40) and therefore the fence's first real exercise. Never redefined, never
+ *  deleted — a live baseline is validated against BASELINE_SCHEMA, and this constant exists
+ *  so a schema-20 PREDECESSOR is still validated as schema 20 after the live number moves
+ *  past it. */
+export const RETIRED_BANK_FENCE_BASELINE_SCHEMA = 20;
+/** The RETIRED relationships-mount definition — schema 22's predecessor. Same tagged
+ *  topology envelope, the same eight-identity declared roster and the same fence on the
+ *  write; schema 22 re-governs it to a register that FOLLOWS DS-REL-1's list assembler DOWN
+ *  A LAYER. The owner's ODQ §934.16 ruled that a domain-side reader of the relationship keys
+ *  is bought with a governed register migration rather than refused, so the assembler moved
+ *  from `src/components/new/` to `src/domain/display/stateProse/` and its rows move with it;
+ *  ODQ §934.18 then retired the printed Relationships block's read of a key nothing writes.
+ *  Unlike 21 it adds NO identity to any file it did not already convict — it MOVES two rows
+ *  and DELETES two — and the bank does not move at all (61/40 both sides), because
+ *  `neighbourNetwork on settlement` changes address and not count. Never redefined, never
+ *  deleted — a live baseline is validated against BASELINE_SCHEMA, and this constant exists
+ *  so a schema-21 PREDECESSOR is still validated as schema 21 after the live number moves
+ *  past it. */
+export const RETIRED_RELATIONSHIPS_MOUNT_BASELINE_SCHEMA = 21;
+export const BASELINE_SCHEMA = 22;
 /** The RETIRED exact per-site definition. Never redefined, never deleted. */
 export const RETIRED_EXACT_BASELINE_SCHEMA = 3;
 /** The RETIRED UNFILTERED heuristic-leaf definition — schema 5's predecessor.
@@ -831,10 +875,57 @@ export function validateSchema17Baseline(baseline) {
   );
 }
 
+/** RETIRED — schema 18's tagged envelope re-governed to a declared M8/M9 bank of EIGHT
+ *  rather than nine. Bound to its own LITERAL, exactly as every retired validator above is:
+ *  a retired validator that reads `BASELINE_SCHEMA` stops validating the rung it is named
+ *  after the moment the number moves. */
+export function validateSchema18Baseline(baseline) {
+  return validateLeafBaseline(
+    baseline,
+    RETIRED_LINEAGE_REANCHOR_BASELINE_SCHEMA,
+    { tagged: true },
+  );
+}
+
+/** The RETIRED authority — schema 19's tagged envelope, re-governed by schema 20 to a write
+ *  that refuses to strand the bank's hand-owned twins. Re-bound to its own LITERAL now that
+ *  the authority has moved to 20, for the same reason as every retired validator above. */
+export function validateSchema19Baseline(baseline) {
+  return validateLeafBaseline(
+    baseline,
+    RETIRED_EXEMPTION_RETIREMENT_BASELINE_SCHEMA,
+    { tagged: true },
+  );
+}
+
+/** The RETIRED authority — schema 20's tagged envelope, re-governed by schema 21 to a
+ *  register that admits the relationships assembler's three rows. Re-bound to its own
+ *  LITERAL now that the authority has moved to 21, for the same reason as every retired
+ *  validator above. */
+export function validateSchema20Baseline(baseline) {
+  return validateLeafBaseline(
+    baseline,
+    RETIRED_BANK_FENCE_BASELINE_SCHEMA,
+    { tagged: true },
+  );
+}
+
+/** The RETIRED authority — schema 21's tagged envelope, re-governed by schema 22 to a
+ *  register that follows the relationships assembler down into `src/domain`. Re-bound to
+ *  its own LITERAL now that the authority has moved to 22, for the same reason as every
+ *  retired validator above. */
+export function validateSchema21Baseline(baseline) {
+  return validateLeafBaseline(
+    baseline,
+    RETIRED_RELATIONSHIPS_MOUNT_BASELINE_SCHEMA,
+    { tagged: true },
+  );
+}
+
 /** The LIVE envelope validator. Bound to `BASELINE_SCHEMA` rather than a literal,
  *  so the retired rungs above keep validating their own numbers while this one
  *  always names the authority. */
-export function validateSchema18Baseline(baseline) {
+export function validateSchema22Baseline(baseline) {
   return validateLeafBaseline(baseline, BASELINE_SCHEMA, { tagged: true });
 }
 

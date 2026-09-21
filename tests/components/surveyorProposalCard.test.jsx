@@ -239,6 +239,10 @@ const SHELL_IMPORTS = Object.freeze([
   '../primitives/IconButton.jsx',
   './surveyorPanelKit.jsx',
   '../../hooks/useIsMobile.js',
+  // The phone floors (ODQ §934.24). A zero-import pure leaf that turns a desktop
+  // FS step into the size to render at THIS width — presentation, and the sibling
+  // of the viewport hook already admitted above.
+  '../../design/proseScale.js',
   '../../styles/surveyorChat.css',
 ]);
 

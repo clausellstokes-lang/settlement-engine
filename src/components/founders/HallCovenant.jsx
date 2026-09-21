@@ -15,8 +15,10 @@
 import { HALL, covenantProseStyle, quietLineStyle } from './hallRegister.js';
 import { HALL_CHAIR_COUNT } from '../../lib/foundersHall.js';
 import { SP, FS, serif_ } from '../theme.js';
+import useIsMobile from '../../hooks/useIsMobile.js';
 
 export default function HallCovenant() {
+  const mobile = useIsMobile();
   return (
     <section
       aria-label="The founders' covenant"
@@ -43,7 +45,7 @@ export default function HallCovenant() {
         A founder holds everything Cartographer runs, for as long as SettlementForge
         runs. No renewal, no tier to climb back up, nothing to keep paying for.
       </p>
-      <p style={{ ...quietLineStyle, color: HALL.faint }}>
+      <p style={{ ...quietLineStyle(mobile), color: HALL.faint }}>
         Chairs are offered by invitation. They cannot be bought, traded, inherited,
         or transferred, and a founder is shown by the name they chose to be shown by,
         never by their account.

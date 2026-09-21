@@ -21,11 +21,23 @@
  *
  * The detector regex `/<button[\s/>]/` is verified to match exactly the same file
  * set the AST rule flags (multi-line opening tags included).
+ *
+ * ⛔ THE DETECTOR READS CODE, NOT PROSE — SINCE 2026-09-20 (FIX-T2). The habitat cure this
+ * file's own history asked for THREE TIMES ("TWICE NOW the detector has counted prose",
+ * below) is taken here: both arms read `commentsOnly(source)`. The AST rule this detector
+ * exists to mirror has never seen a comment, so every prose match was a divergence between
+ * the two — and the ratchet convicted the author who explained a raw button rather than the
+ * one who wrote one.
+ * ⛔ `commentsOnly`, NEVER the sibling `codeOnly`: `<button` is JSX, and `codeOnly` blanks
+ * string and template contents. It would leave this detector reading 0 and the BELOW arm
+ * would invite you to bank that as a total migration.
  */
 import { readFileSync, readdirSync, statSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
 import { dirname, join, relative } from 'node:path';
 import { describe, expect, test } from 'vitest';
+
+import { commentsOnly } from '../helpers/codeOnlySource.js';
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), '../..');
 // Committed max raw-button occurrence count — lower it as buttons migrate onto
@@ -70,7 +82,21 @@ const ROOT = join(dirname(fileURLToPath(import.meta.url)), '../..');
 // what the AST rule it claims to mirror already does — is chair-gated and
 // reported, not taken here: it would move the measurement basis for 3 further
 // files that carry prose mentions ALONGSIDE real raw buttons.
-const BUTTON_BUDGET = 42;
+// THE PAINTED ARROW HEADER (owner orders 2026-09-16): tightened 42 → 39, the count
+// MEASURED on this tree. The header became the owner's arrow painting with its controls
+// on the Button primitive, so three raw buttons left with the retired chrome: NavRibbon's
+// cell (its file and its baseline row are gone), App.jsx's desktop brand button and
+// App.jsx's credits badge (the balance is a row of the plate's menu now). App.jsx stays in
+// the set for the bottom bar's seats. The three units are locked here, not left as headroom.
+// FIX-T2 (2026-09-20): tightened 39 → 36, and the habitat is gone rather than worked
+// around. The detector now reads comment-stripped source, so the THREE prose matches it was
+// still counting left the census on their own: HomeHero.jsx:57, AuthPanel.jsx:80 and
+// PricingTierCards.jsx:244, each a sentence ABOUT a raw button. The budget stood at 39 with
+// the measured count at exactly 39 — no headroom at all, three units of it sentences — so a
+// genuine new raw button and a single explanatory comment were indistinguishable to the
+// gate. The third prose sighting is what finally bought the cure the two earlier ones asked
+// for and were refused.
+const BUTTON_BUDGET = 36;
 
 const BUTTON_FILE_RE = /<button[\s/>]/;
 const BUTTON_OCC_RE = /<button[\s/>]/g;
@@ -89,12 +115,15 @@ const srcFiles = walk(join(ROOT, 'src'))
   .map(p => relative(ROOT, p).replace(/\\/g, '/'))
   .filter(rel => !isPrimitive(rel));
 
+/** Comments blanked, JSX and every literal intact — see this file's header. */
+const readCode = (rel) => commentsOnly(readFileSync(join(ROOT, rel), 'utf8'));
+
 const currentRawButtonFiles = srcFiles
-  .filter(rel => BUTTON_FILE_RE.test(readFileSync(join(ROOT, rel), 'utf8')))
+  .filter(rel => BUTTON_FILE_RE.test(readCode(rel)))
   .sort();
 
 const currentButtonCount = srcFiles.reduce((n, rel) => {
-  const m = readFileSync(join(ROOT, rel), 'utf8').match(BUTTON_OCC_RE);
+  const m = readCode(rel).match(BUTTON_OCC_RE);
   return n + (m ? m.length : 0);
 }, 0);
 

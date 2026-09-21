@@ -8,6 +8,8 @@
 import { SP, CARD, GOLD, FS, sans, INK, MUTED, SECOND, swatch } from '../../theme.js';
 import { vetoProse } from '../../../domain/events/affordanceManifest.js';
 import { PARTY, PARTY_BG } from './helpers.js';
+import useIsMobile from '../../../hooks/useIsMobile.js';
+import { chromeFontSize, proseFontSize } from '../../../design/proseScale.js';
 
 export const CLOCK_BOUND_SCOPE_NOTICE = [
   'Clock-bound campaign: applying this change stages it for the next World Pulse.',
@@ -15,6 +17,7 @@ export const CLOCK_BOUND_SCOPE_NOTICE = [
 ].join(' ');
 
 export function PreviewPanel({ preview, stale = false, queued = false }) {
+  const mobile = useIsMobile();
   if (!preview) return null;
   const { deltas, factionResponses, narrativeSummary, warnings } = preview;
   const partyCaused = !!(preview.event?.partyCaused || preview.event?.cause === 'party_action');
@@ -28,12 +31,12 @@ export function PreviewPanel({ preview, stale = false, queued = false }) {
       opacity: stale ? 0.55 : 1,
     }}>
       {stale && (
-        <div style={{ fontSize: FS.xxs, fontFamily: sans, color: MUTED, fontStyle: 'italic', marginBottom: 4 }}>
+        <div style={{ fontSize: chromeFontSize(FS.xxs, mobile), fontFamily: sans, color: MUTED, fontStyle: 'italic', marginBottom: 4 }}>
           Preview is stale. Updating to the edited change…
         </div>
       )}
       {vetoed && (
-        <div style={{ fontSize: FS.xs, fontFamily: sans, color: swatch.danger, fontWeight: 800, marginBottom: 4 }}>
+        <div style={{ fontSize: chromeFontSize(FS.xs, mobile), fontFamily: sans, color: swatch.danger, fontWeight: 800, marginBottom: 4 }}>
           ✕ The world refuses this change. Nothing will be committed.
         </div>
       )}
@@ -42,7 +45,7 @@ export function PreviewPanel({ preview, stale = false, queued = false }) {
           display: 'inline-flex', alignItems: 'center', gap: 4, marginBottom: 6,
           padding: '2px 8px', borderRadius: 999,
           background: PARTY_BG, color: PARTY, border: `1px solid ${PARTY}`,
-          fontSize: FS.xxs, fontFamily: sans, fontWeight: 800, letterSpacing: '0.04em',
+          fontSize: chromeFontSize(FS.xxs, mobile), fontFamily: sans, fontWeight: 800, letterSpacing: '0.04em',
         }}>
           Party-caused
         </div>
@@ -51,7 +54,7 @@ export function PreviewPanel({ preview, stale = false, queued = false }) {
         {narrativeSummary || 'Preview'}
       </div>
       {warnings?.length > 0 && (
-        <ul style={{ margin: '4px 0', paddingLeft: 18, color: swatch.danger, fontSize: FS.xs, fontFamily: sans }}>
+        <ul style={{ margin: '4px 0', paddingLeft: 18, color: swatch.danger, fontSize: chromeFontSize(FS.xs, mobile), fontFamily: sans }}>
           {/* Veto warnings carry terse eager codes; the manifest's prose
               (lazy side) renders the teaching refusal sentence. */}
           {warnings.map((w, i) => (
@@ -68,21 +71,21 @@ export function PreviewPanel({ preview, stale = false, queued = false }) {
           current settlement. It does not simulate the queue entries or realm
           evolution that will precede a clock-bound application. */}
       {queued && !vetoed && (
-        <div style={{ marginTop: 6, fontSize: FS.xxs, fontFamily: sans, color: MUTED, fontStyle: 'italic' }}>
+        <div style={{ marginTop: 6, fontSize: chromeFontSize(FS.xxs, mobile), fontFamily: sans, color: MUTED, fontStyle: 'italic' }}>
           Isolated-scope review. {CLOCK_BOUND_SCOPE_NOTICE}
         </div>
       )}
       {factionResponses?.length > 0 && (
         <div style={{ marginTop: 8 }}>
           <div style={{
-            fontSize: FS.xxs, color: MUTED, fontWeight: 800, fontFamily: sans,
+            fontSize: chromeFontSize(FS.xxs, mobile), color: MUTED, fontWeight: 800, fontFamily: sans,
             letterSpacing: '0.06em', textTransform: 'uppercase', marginBottom: 4,
           }}>
             Faction responses
           </div>
           {factionResponses.map((r, i) => (
             <div key={i} style={{
-              fontSize: FS.xs, fontFamily: sans, color: INK, lineHeight: 1.5, marginBottom: 4,
+              fontSize: proseFontSize(FS.xs, mobile), fontFamily: sans, color: INK, lineHeight: 1.5, marginBottom: 4,
             }}>
               <strong style={{ color: GOLD }}>{r.factionName}:</strong> {r.response}
               {r.hookSeed && (
@@ -99,12 +102,13 @@ export function PreviewPanel({ preview, stale = false, queued = false }) {
 }
 
 export function DeltaRow({ d }) {
+  const mobile = useIsMobile();
   const arrow = d.change > 0 ? '↑' : '↓';
   const sevColor = d.severity === 'major' ? '#8b1a1a' : d.severity === 'moderate' ? '#a0762a' : MUTED;
   return (
     <div style={{
       display: 'flex', alignItems: 'center', gap: 6,
-      fontSize: FS.xs, fontFamily: sans, color: INK, lineHeight: 1.5,
+      fontSize: proseFontSize(FS.xs, mobile), fontFamily: sans, color: INK, lineHeight: 1.5,
     }}>
       <span style={{ color: sevColor, fontWeight: 800, minWidth: 12 }}>{arrow}</span>
       <span>{d.explanation}</span>

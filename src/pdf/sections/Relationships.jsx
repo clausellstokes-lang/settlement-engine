@@ -22,24 +22,28 @@ import { relationshipsHeadline } from '../lib/headlines.js';
 import { Callout } from '../primitives/Callout.jsx';
 import { EditableText, EditableProse } from '../primitives/Editable.jsx';
 import { type, palette, space, pt, swatch } from '../theme.js';
-import { relColor } from '../../components/settlements/relationshipColors.js';
+import { relColor } from '../../domain/display/relationshipColors.js';
 import {
-  cap, label, hookText, humanize, prominentPair, prominentType, prominentProse,
+  label, hookText, humanize, prominentPair, prominentType, prominentProse,
 } from '../lib/format.js';
+import { tokenCase } from '../../domain/display/labelCase.js';
+import { StateProse } from '../primitives/StateProse.jsx';
 
+// RUNG 3 — the relationship's STATUS VALUE, rendered in a tinted pill where colour and
+// weight already carry the meaning. Title case descends to sentence case with the ladder.
 const REL_LABELS = {
   rival:            'Rival',
-  cold_war:         'Cold War',
+  cold_war:         'Cold war',
   hostile:          'Hostile',
   allied:           'Allied',
-  secret_alliance:  'Secret Alliance',
-  trade_partner:    'Trade Partner',
+  secret_alliance:  'Secret alliance',
+  trade_partner:    'Trade partner',
   patron:           'Patron',
   client:           'Client',
-  criminal_network: 'Criminal Network',
+  criminal_network: 'Criminal network',
 };
 
-export function Relationships({ settlement, narrativeMode, vm }) {
+export function Relationships({ settlement, narrativeMode, vm, stateProse }) {
   const r = vm.relationships;
   const hasAny =
     r.neighbours?.length > 0 ||
@@ -62,6 +66,9 @@ export function Relationships({ settlement, narrativeMode, vm }) {
       <ChapterHeadline tone="gold">
         {relationshipsHeadline({ all: r.neighbours || [] })}
       </ChapterHeadline>
+
+      {/* ── The mounted state prose (the screen's ProseBlock positions) ── */}
+      <StateProse stateProse={stateProse} tab="relationships" />
 
       {!hasAny && (
         <Text style={{ ...type.body, color: palette.muted, fontStyle: 'italic' }}>
@@ -89,8 +96,8 @@ export function Relationships({ settlement, narrativeMode, vm }) {
       {/* ── Neighbour network ───────────────────────────────── */}
       {r.neighbours?.length > 0 && (
         <View style={{ marginBottom: space.sm }}>
-          <Text style={{ ...type.label, color: palette.gold, fontSize: pt['8'], marginBottom: 3 }}>
-            NEIGHBOUR NETWORK
+          <Text style={{ ...type.label_plain, color: palette.gold, fontSize: pt['8'], marginBottom: 3 }}>
+            Neighbour network
           </Text>
           {r.neighbours.map((n, i) => (
             <NeighbourCard key={`n-${i}`} n={n} idx={i} />
@@ -101,8 +108,8 @@ export function Relationships({ settlement, narrativeMode, vm }) {
       {/* ── Single live neighbour fallback ──────────────────── */}
       {!r.neighbours?.length && r.neighborSingle && (
         <View style={{ marginBottom: space.sm }}>
-          <Text style={{ ...type.label, color: palette.gold, fontSize: pt['8'], marginBottom: 3 }}>
-            GENERATED NEIGHBOUR
+          <Text style={{ ...type.label_plain, color: palette.gold, fontSize: pt['8'], marginBottom: 3 }}>
+            Generated neighbour
           </Text>
           <NeighbourCard
             n={{
@@ -122,8 +129,8 @@ export function Relationships({ settlement, narrativeMode, vm }) {
       {r.emergentConditions?.length > 0 && (
         <View style={{ marginBottom: space.sm }}>
           <HairRule />
-          <Text style={{ ...type.label, color: palette.ai, fontSize: pt['8'], marginBottom: 3 }}>
-            EMERGENT CONDITIONS
+          <Text style={{ ...type.label_plain, color: palette.ai, fontSize: pt['8'], marginBottom: 3 }}>
+            Emergent conditions
           </Text>
           {r.emergentConditions.map((c, i) => (
             <View
@@ -156,8 +163,8 @@ export function Relationships({ settlement, narrativeMode, vm }) {
       {r.interSettlement?.length > 0 && (
         <View style={{ marginBottom: space.sm }}>
           <HairRule />
-          <Text style={{ ...type.label, color: palette.cool, fontSize: pt['8'], marginBottom: 3 }}>
-            SHARED FIGURES & STORIES
+          <Text style={{ ...type.label_plain, color: palette.cool, fontSize: pt['8'], marginBottom: 3 }}>
+            Shared figures & stories
           </Text>
           {r.interSettlement.map((rel, i) => (
             <View
@@ -176,7 +183,7 @@ export function Relationships({ settlement, narrativeMode, vm }) {
               </View>
               {rel.otherSettlement && (
                 <Text style={{ ...type.caption, color: palette.muted, fontSize: pt['8'] }}>
-                  WITH: {humanize(rel.otherSettlement)}
+                  With: {humanize(rel.otherSettlement)}
                 </Text>
               )}
               <EditableText
@@ -193,8 +200,8 @@ export function Relationships({ settlement, narrativeMode, vm }) {
       {r.crossConflicts?.length > 0 && (
         <View style={{ marginBottom: space.sm }}>
           <HairRule />
-          <Text style={{ ...type.label, color: palette.bad, fontSize: pt['8'], marginBottom: 3 }}>
-            CROSS-SETTLEMENT CONFLICTS
+          <Text style={{ ...type.label_plain, color: palette.bad, fontSize: pt['8'], marginBottom: 3 }}>
+            Cross-settlement conflicts
           </Text>
           {r.crossConflicts.map((c, i) => (
             <View
@@ -214,7 +221,7 @@ export function Relationships({ settlement, narrativeMode, vm }) {
               </Text>
               {Array.isArray(c.parties) && (
                 <Text style={{ ...type.caption, color: palette.muted, fontSize: pt['8'], marginTop: 1 }}>
-                  PARTIES: {c.parties.map(p => label(p) || humanize(String(p))).join('  vs  ')}
+                  Parties: {c.parties.map(p => label(p) || humanize(String(p))).join('  vs  ')}
                 </Text>
               )}
               <EditableText
@@ -231,8 +238,8 @@ export function Relationships({ settlement, narrativeMode, vm }) {
       {r.internal?.length > 0 && (
         <View>
           <HairRule />
-          <Text style={{ ...type.label, color: palette.muted, fontSize: pt['8'], marginBottom: 3 }}>
-            INTERNAL RELATIONSHIPS
+          <Text style={{ ...type.label_plain, color: palette.muted, fontSize: pt['8'], marginBottom: 3 }}>
+            Internal relationships
           </Text>
           {r.internal.slice(0, 12).map((rel, i) => (
             <View key={`i-${i}`} style={{ flexDirection: 'row', marginBottom: 2 }} wrap={false}>
@@ -254,7 +261,6 @@ export function Relationships({ settlement, narrativeMode, vm }) {
 // ── Sub-components ─────────────────────────────────────────────
 
 function NeighbourCard({ n, idx }) {
-  const _relLabel = REL_LABELS[n.type] || (n.type ? cap(n.type) : 'Linked');
   const color = relColor(n.type);
   return (
     <View
@@ -283,8 +289,8 @@ function NeighbourCard({ n, idx }) {
       )}
       {n.lastEvent && (
         <View style={{ marginTop: 2 }}>
-          <Text style={{ ...type.label, fontSize: pt['7'], color: palette.muted, marginBottom: 1 }}>
-            LAST EVENT
+          <Text style={{ ...type.label_plain, fontSize: pt['7'], color: palette.muted, marginBottom: 1 }}>
+            Last event
           </Text>
           <EditableText
             name={`relationships.neighbour.${idx}.lastEvent`}
@@ -295,8 +301,8 @@ function NeighbourCard({ n, idx }) {
       )}
       {n.flavour && (
         <View style={{ marginTop: 2 }}>
-          <Text style={{ ...type.label, fontSize: pt['7'], color: palette.muted, marginBottom: 1 }}>
-            FLAVOUR
+          <Text style={{ ...type.label_plain, fontSize: pt['7'], color: palette.muted, marginBottom: 1 }}>
+            Flavour
           </Text>
           <EditableText
             name={`relationships.neighbour.${idx}.flavour`}
@@ -307,8 +313,8 @@ function NeighbourCard({ n, idx }) {
       )}
       {n.hooks?.length > 0 && (
         <View style={{ marginTop: 3 }}>
-          <Text style={{ ...type.label, fontSize: pt['7'], color: palette.muted, marginBottom: 1 }}>
-            PLOT HOOKS
+          <Text style={{ ...type.label_plain, fontSize: pt['7'], color: palette.muted, marginBottom: 1 }}>
+            Plot hooks
           </Text>
           {n.hooks.map((h, j) => (
             <View key={`nh-${idx}-${j}`} style={{ flexDirection: 'row', marginBottom: 1 }}>
@@ -330,7 +336,9 @@ function NeighbourCard({ n, idx }) {
 
 function RelPill({ type: relType }) {
   if (!relType) return null;
-  const labelStr = REL_LABELS[relType] || cap(relType);
+  // tokenCase, not cap(): cap() keeps the underscore, so an unlisted engine type printed
+  // 'Vassal_extraction' on the page. The dead `_relLabel` twin of this line is deleted.
+  const labelStr = REL_LABELS[relType] || tokenCase(relType);
   const color = relColor(relType);
   return (
     <View

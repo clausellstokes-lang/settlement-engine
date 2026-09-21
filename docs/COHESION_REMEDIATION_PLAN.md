@@ -117,7 +117,7 @@ Built incrementally: Wave 0 lands the skeleton + assertions for currently-health
 4. **DEFENSE_CONTRIB hole.** Add `'Lightly Defended': -2` (`factionDynamics.js:43`).
 5. **Arcane-instability gate.** `threatProfile.js:302` — skip when `magicExists === false` or `scores.magical === 0` (low magical *defense* is not wild-magic *threat*).
 6. **NPC archetype vocabulary.** `CATEGORY_TO_ARCHETYPE` (`npcProfile.js:32`) gains `crafts→craft`, `noble→government` (or `other` per template fit), `magic→arcane`; derive keys from the actually-emitted vocabulary.
-7. **Dead threat literals.** Normalize legacy `embattled/high/low/safe` branches (`safetyProfile.js:234`, `powerGenerator.js:1855`, defaults in capacity/system-state) to canonical `heartland/frontier/plagued` via one shared helper.
+7. **Dead threat literals.** Normalize legacy `embattled/high/low/safe` branches (`safetyProfile.js:234` — ADDRESS STRUCK 2026-09-20 (FIX-C2c): no legacy threat branch survives in that file, and `safetyProfile.js:275` records that `embattled` was never emitted; `powerGenerator.js` — ADDRESS STRUCK 2026-09-20: the module is a 13-line barrel over `./power/*` and carries no threat branch; the last `embattled` arm is recorded dead at `settlementThreat.js:26`, defaults in capacity/system-state) to canonical `heartland/frontier/plagued` via one shared helper.
 8. **merchant_wealth orphan.** Retire the tag from the ~8 archetypes + emitters; their economic bite routes through `trade_connectivity` (already co-listed). Receipts become honest. (Alternative — adding a 15th variable — rejected: hard-sim noise for this audience.)
 9. **cold_war_sanctions template.** Add catalog entry with `defaultExpiresAtTicks: 8`; `cold_war_thaw` clears it. Kills the lone immortal condition.
 10. **Corruption soak case.** The documented runaway guard runs zero corruption iterations (fixture has `institutions: []`). Add a soak case with a criminal institution + corruptible NPCs; assert corrupt fraction + capture state stabilize below total capture.
@@ -126,17 +126,17 @@ Built incrementally: Wave 0 lands the skeleton + assertions for currently-health
 
 ## Wave 2 — Producers and events: the dead consequence trees
 
-1. **EXPOSE_CORRUPTION promotes `corruption_exposed`** (`mutate.js:489-543` + `withActiveCondition`, mirroring `cutTradeRoute`). The scandal survives re-derivation; ruling_authority's only condition reaction comes alive.
+1. **EXPOSE_CORRUPTION promotes `corruption_exposed`** (`mutateEntities.js:684` + `withActiveCondition`, mirroring `cutTradeRoute`). The scandal survives re-derivation; ruling_authority's only condition reaction comes alive.
 2. **`food_anchor_lost` producer.** DAMAGE/REMOVE/IMPAIR of a food-anchor institution (granary/mill/harbor) promotes the condition (severity from institution weight). The richest dead consumer tree (capacity, causal, dailyLife, districts, threats) lights up.
 3. **`siege_lifted` producer + STARTED_RIOT / REMOVED_THREAT / RECOVERED_RESOURCE mutate handlers.** All three registry entries currently hit the default no-op. REMOVED_THREAT of a siege promotes `siege_lifted` (recovery arc); RECOVERED_RESOURCE clears the depleted set that `deriveResourcePressure` reads.
-4. **DEPLETE_RESOURCE writes real keys.** It currently writes a format nothing reads (`mutate.js:314-325`) — write underscore keys + `nearbyResourcesDepleted` so chains/exports/food actually respond; food math respects depletion (`foodGenerator.js:110-115`).
+4. **DEPLETE_RESOURCE writes real keys.** It currently writes a format nothing reads (`mutateWorld.js:171`) — write underscore keys + `nearbyResourcesDepleted` so chains/exports/food actually respond; food math respects depletion (`foodGenerator.js:110-115`).
 
 *Verify:* gate + event-pipeline tests per producer; condition-promotion suite extended.
 
 ## Wave 3 — Generation string-join hygiene (data-table repairs)
 
 1. **Resurrect the cascade pass.** `cascadeGenerator.js:110` reads `data.p` — a field that exists nowhere; the entire chain-adjacent-institution mechanic has never fired, and the airship/docks override is trapped inside the dead guard. Fix to `baseChance`, hoist the override. (Same-seed rosters change — intended.)
-2. **Services lookup precedence.** Exact per-institution key first; legacy `LOCALE_SERVICE_OVERRIDES` becomes fallback-only; delete shadowed rows + fix/delete the ~56 dangling targets (`servicesGenerator.js:806-898`, `servicesData.js`). Kills the most DM-visible absurdities (teleportation circle selling airship moorings; aqueduct as inn; apothecary selling poisons).
+2. **Services lookup precedence.** Exact per-institution key first; legacy `LOCALE_SERVICE_OVERRIDES` becomes fallback-only; delete shadowed rows + fix/delete the ~56 dangling targets (`services/institutionServices.js:111`, `servicesData.js`). Kills the most DM-visible absurdities (teleportation circle selling airship moorings; aqueduct as inn; apothecary selling poisons).
 3. **'Defence services' bucket.** Stop classifying patrols under Criminal Services + exempt non-criminal providers from the crime-gate (a peaceful garrisoned town currently *drops* its defence service ~55% of the time **because** crime is low).
 4. **TRADE_DEPENDENCY_NEEDS + goods casing.** Fix the 10 phantom dependency keys + 7 Title-Case-suppressed export goods (`economicData.js`, `tradeGoodsData.js`).
 5. **RESOURCE_TO_CHAINS namespaces + orphaned terrain chains.** Fix 9 dangling need-group refs; register the ~28 orphaned desert/mountain/river specialty chains (oasis agriculture, alpine wool, camel caravans…) so terrain actually feeds chains.

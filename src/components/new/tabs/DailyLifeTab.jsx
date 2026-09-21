@@ -4,13 +4,17 @@ import { FS, swatch, CARD, EMPTY_VALUE } from '../../theme.js';
 import { sans } from '../Primitives';
 import {PROSPERITY_COLORS} from '../tabConstants';
 import useIsMobile from '../../../hooks/useIsMobile.js';
+import { chromeFontSize, proseFontSize } from '../../../design/proseScale.js';
 import {extractSettlementContext} from '../dailyLifeLogic';
 import { useStore } from '../../../store/index.js';
 import { isConfigured } from '../../../lib/supabase.js';
 import Button from '../../primitives/Button.jsx';
 import { useLiveAiCostResolver } from '../../../hooks/useLivePricing.js';
 import { economyDeskRead } from '../economyDeskRead.js';
+import { institutionDisplayName } from '../../../domain/display/institutionDisplayName.js';
 import { DeskLines } from './EconomicsGlance.jsx'; // the shared position renderer (see its docblock)
+import { edged } from '../../../design/edgedBox.js';
+import { statusCase } from '../labelLadder.js';
 
 const INK = swatch['#1C1409'], MUTED = swatch['#9C8068'], SECOND = swatch['#6B5340'],
       BORDER = swatch['#E0D0B0'], GOLD = swatch['#A0762A'], PARCH = swatch['#FDF8F0'], _CARD = swatch['#FFFBF5'];
@@ -18,16 +22,16 @@ const INK = swatch['#1C1409'], MUTED = swatch['#9C8068'], SECOND = swatch['#6B53
 // ── Data extraction ── (moved to dailyLifeLogic.js)
 
 function AnchorFact({ label, value, accent }) {
+  const mobile = useIsMobile();
   return (
     <div style={{
       flex: '1 1 100px', minWidth: 0,
       background: accent ? `${accent}0d` : '#faf8f4',
-      border: `1px solid ${accent ? `${accent}30` : BORDER}`,
-      borderLeft: `3px solid ${accent || '#c8b89a'}`,
+      ...edged(`1px solid ${accent ? `${accent}30` : BORDER}`, `3px solid ${accent || '#c8b89a'}`),
       padding: '5px 9px',
     }}>
-      <div style={{ fontSize: FS['8.5'], fontWeight: 700, color: accent || MUTED, textTransform: 'uppercase', letterSpacing: '0.07em', marginBottom: 1 }}>{label}</div>
-      <div style={{ fontSize: FS['11.5'], fontWeight: 700, color: INK, lineHeight: 1.2 }}>{value || EMPTY_VALUE}</div>
+      <div style={{ fontSize: chromeFontSize(FS['8.5'], mobile), fontWeight: 700, color: accent || MUTED, marginBottom: 1 }}>{label}</div>
+      <div style={{ fontSize: chromeFontSize(FS['11.5'], mobile), fontWeight: 700, color: INK, lineHeight: 1.2 }}>{value || EMPTY_VALUE}</div>
     </div>
   );
 }
@@ -173,8 +177,13 @@ export function DailyLifeTab({ settlement: r, _aiSettlement, saveId = null, onRe
         {ctx.tradeRoute && (
           <AnchorFact label="Access" value={ctx.tradeRoute.replace(/_/g,' ').split(' ').map(w=>w.charAt(0).toUpperCase()+w.slice(1)).join(' ')} accent='#5a3a1a' />
         )}
+        {/* ⛔ RUNG 3 IS CASED AT THIS CALL SITE, NEVER INSIDE `AnchorFact` (browser pass 3).
+            The sibling `StatusTag` on Overview cases its own value because every value it
+            takes is a frozen band word; this strip is not that — "Governed by" holds a
+            generated FACTION NAME, and `statusCase` inside the component would print "The
+            ashford guild". Only the readiness band is a band. */}
         {ctx.defenseReadinessLabel && (
-          <AnchorFact label="Defense" value={ctx.defenseReadinessLabel} accent='#1a3a6a' />
+          <AnchorFact label="Defense" value={statusCase(ctx.defenseReadinessLabel)} accent='#1a3a6a' />
         )}
         <AnchorFact label="Magic" value={ctx.magicLabel} accent={ctx.magicBand==='none'?'#6b5340':ctx.magicBand==='high'?'#5a2a8a':ctx.magicBand==='moderate'?'#6a2a6a':'#4a3a6a'} />
         {ctx.stressTypes.length > 0 && (
@@ -194,7 +203,7 @@ export function DailyLifeTab({ settlement: r, _aiSettlement, saveId = null, onRe
           there, R-DST-A) and it does NOT speak on overview (DS-GEN-3's five `prosperity:`
           pools already speak about the rung at overview.systemsHealth — measured, not
           assumed). Additive: every anchor fact and the AI narrative below are untouched. */}
-      <DeskLines mount="daily_life.standingOfLiving" rungs={[deskProse.prosperityRung]} />
+      <DeskLines mount="daily_life.standingOfLiving" settlementName={r?.name} tier={r?.tier} rungs={[deskProse.prosperityRung]} />
 
       {/* ── GENERATE / REGENERATE BUTTON ──────────────────────────────────── */}
       {/* Unsaved settlements (Create page) get a slim inline hint instead of
@@ -237,7 +246,7 @@ export function DailyLifeTab({ settlement: r, _aiSettlement, saveId = null, onRe
         <div style={{
           background: swatch['#FAF8F4'], border: '1px solid #e8c0c0',
           padding: '12px 14px', marginBottom: 14,
-          fontSize: FS['11.5'], color: swatch.danger,
+          fontSize: chromeFontSize(FS['11.5'], mobile), color: swatch.danger,
         }}>
           <strong>Error:</strong> {error}
         </div>
@@ -252,7 +261,7 @@ export function DailyLifeTab({ settlement: r, _aiSettlement, saveId = null, onRe
               position: 'absolute', top: 8, left: '50%', transform: 'translateX(-50%)',
               zIndex: 20, background: INK, color: CARD,
               padding: '8px 16px', border: '1px solid #c4803c',
-              fontSize: FS['11.5'], fontWeight: 700, fontFamily: sans,
+              fontSize: chromeFontSize(FS['11.5'], mobile), fontWeight: 700, fontFamily: sans,
               display: 'flex', alignItems: 'center', gap: 8,
             }}>
               <span style={{ display: 'inline-block', animation: 'spin 1.2s linear infinite' }}>⟳</span>
@@ -291,7 +300,7 @@ export function DailyLifeTab({ settlement: r, _aiSettlement, saveId = null, onRe
           <div style={{ fontSize: FS.md, fontWeight: 600, color: SECOND, marginBottom: 6 }}>
             What is daily life like here?
           </div>
-          <div style={{ fontSize: FS['11.5'], color: MUTED, lineHeight: 1.6, maxWidth: 380, margin: '0 auto' }}>
+          <div style={{ fontSize: proseFontSize(FS['11.5'], mobile), color: MUTED, lineHeight: 1.6, maxWidth: 380, margin: '0 auto' }}>
             Generate a prose description of ordinary life in this settlement. Dawn, the market, the tavern,
             the watch. Opus-grade writing, five paragraphs, grounded in this settlement's specific stressors and trade.
           </div>
@@ -342,7 +351,10 @@ function buildLocalDailyLifeNarrative(ctx) {
       ? 'doors are barred early and strangers are studied before they are welcomed'
       : 'ordinary errands carry a careful awareness of who controls the street';
 
-  const institutions = Object.values(ctx.keyInsts || {}).flat().slice(0, 5);
+  // §934.13 — these names land inside a SENTENCE the reader reads, so they take the seam
+  // like any other print. `keyInsts` holds raw catalogue keys (dailyLifeLogic pushes
+  // `i.name`), and nothing downstream matches on them.
+  const institutions = Object.values(ctx.keyInsts || {}).flat().map(institutionDisplayName).filter(Boolean).slice(0, 5);
   const anchors = listText(institutions, 'the market, shrine, workshop, and watch post');
   const stress = ctx.stressTypes.length
     ? `The talk of the day keeps returning to ${listText(ctx.stressTypes.map(humanize), 'the current strain')}.`

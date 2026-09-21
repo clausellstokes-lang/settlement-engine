@@ -29,6 +29,8 @@ import { useEffect, useMemo, useState } from 'react';
 import { FS, swatch } from '../theme.js';
 import { useStore } from '../../store';
 import { mapDirtyFingerprint } from './mapDirtyFingerprint.js';
+import useIsMobile from '../../hooks/useIsMobile.js';
+import { chromeFontSize } from '../../design/proseScale.js';
 
 const GOLD = swatch['#C9A24C'];
 const AMBER = swatch['#D08020'];
@@ -56,6 +58,7 @@ function formatRelative(savedAt) {
 const fingerprint = mapDirtyFingerprint;
 
 export default function AutoSaveChip({ saving = false }) {
+  const mobile = useIsMobile();
   const activeCampaignId = useStore(s => s.activeCampaignId);
   const campaign = useStore(s =>
     activeCampaignId != null
@@ -107,7 +110,7 @@ export default function AutoSaveChip({ saving = false }) {
         padding: '3px 9px',
         background: `${dotColor}10`,
         border: `1px solid ${dotColor}45`,
-        fontSize: FS.xs, color: dirty || saving ? '#3A2F18' : MUTED,
+        fontSize: chromeFontSize(FS.xs, mobile), color: dirty || saving ? '#3A2F18' : MUTED,
         fontFamily: sans, fontWeight: 600,
         userSelect: 'none',
       }}

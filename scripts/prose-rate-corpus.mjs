@@ -192,7 +192,7 @@ export function impairedInstitutionOf(settlement) {
  * on BOTH audiences: three FOOD pools could never fire on the RATE corpus, and the
  * composed-prose manifest was two-audience on five desks and DM-face-twice on the sixth.
  *
- * ⚠ `flowDrift` IS NULL BY MEASUREMENT AND NOT BY OMISSION. `EconomicsTab.jsx:251-257` derives
+ * ⚠ `flowDrift` IS NULL BY MEASUREMENT AND NOT BY OMISSION. `EconomicsTab.jsx:272` derives
  * it from the OWNING CAMPAIGN's `worldState`; a headless corpus town belongs to no campaign,
  * so the tab's own derivation answers null here too. It is passed explicitly so the absence is
  * a stated reading rather than a forgotten one.

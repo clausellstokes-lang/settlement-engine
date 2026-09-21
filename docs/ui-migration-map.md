@@ -18,7 +18,7 @@ ownership, and wave status.
 | `RegenerationDeltaCard`            | P64      | `domain/regenerationDelta.js`   | Wave 1 done   |
 | `RegenerationModeSelector`         | P65      | `domain/regenerationMode.js`    | Pending wire  |
 | `CanonBadge`                       | P66      | `domain/canonStatus.js`         | Pending wire  |
-| `BandPill`                         | P67      | `domain/qualitativeBands.js`    | Pending wire  |
+| `BandPill`                         | P67      | `domain/qualitativeBands.js`    | ⚰ Retired     |
 | `CausalViewTabs`                   | P68      | `domain/causalViews.js`         | Pending wire  |
 | `StateBadge` (lifecycle states)    | earlier  | `copy/strings.js` (state.*)     | Wave 1 done   |
 | `FounderBadge`                     | P70      | `lib/founderSeats.js`           | Done          |
@@ -36,10 +36,23 @@ first.
   Replace every inline draft/canon/narrated/raw chip with `StateBadge`.
   Low-risk: the primitive existed before; we're collapsing duplication.
 
-- **Wave 2 — Qualitative bands** *(next)*
-  Find ad-hoc `colorByScore()` ternaries and replace with `BandPill`
-  driven by `domain/qualitativeBands.js`. Highest-impact targets are
-  band-style readouts in Overview, Viability, Economics, Defense.
+- **Wave 2 — Qualitative bands** *(the primitive is retired; the ladder took over)*
+  `primitives/BandPill.jsx` was DELETED on 2026-09-18 with zero production
+  importers, and its stated domain backing `domain/qualitativeBands.js` has no
+  `src/` consumer either — only its own unit test and
+  `tests/lint/bandPolaritySingleSourceScan.test.js` read it. So this wave is no
+  longer "wire a primitive in". What exists instead is the **label ladder**
+  (`src/components/new/labelLadder.js`, re-exporting `tokenCase` / `statusCase`
+  from `src/domain/display/labelCase.js`; the rule is docs/UIUX_PRINCIPLES.md P7
+  as rewritten when the primitive went — and the uppercase label the old P7
+  mandated was itself the defect the ladder removed), plus the two surviving
+  **local** band pills, each owned by the surface that renders it:
+  `dossier/EngineSections.jsx` `BandPill({ band })` over `BAND_COLOR`, and
+  `new/tabs/SubstrateTab.jsx` `BandPill({ variable, band })` over `BAND_TONE`,
+  with `causalBandWord` for the one lower-is-better variable. The remaining work
+  is to put the leftover per-band hex picks behind one shared band source and to
+  run every band WORD through the ladder — not to import a component that no
+  longer exists.
 
 - **Wave 3 — Entity provenance** *(after qualitative bands)*
   Add `CanonBadge` next to entity names in NPCs, Power (factions), and
@@ -54,9 +67,11 @@ first.
   causal views (faction-led, stressor-led, terrain-led) coexist.
 
 - **Wave 5 — Cleanup**
-  Sweep remaining inline pills/badges and replace with primitives.
-  Mark legacy ad-hoc styles as `// deprecated — use StateBadge / BandPill`
-  comments so the next sweep is grep-able.
+  Sweep remaining inline pills/badges onto a primitive where one exists, and
+  onto the label ladder where one does not. Mark legacy ad-hoc styles as
+  `// deprecated — use StateBadge / the label ladder` comments so the next sweep
+  is grep-able. (`BandPill` is deliberately absent from that breadcrumb: naming a
+  deleted primitive in a grep-able marker is how these rows went stale.)
 
 ## Wave 1 — Lifecycle indicators
 
@@ -68,13 +83,16 @@ first.
 
 ## Wave 2 — Qualitative bands
 
-| Target                                  | Current pattern                                   | Replacement                                          |
+The `Replacement` column named `BandPill` on every row. That primitive is gone,
+so each row is restated against what this tip actually renders.
+
+| Target                                  | Pattern on this tip                               | Where it goes                                        |
 |-----------------------------------------|---------------------------------------------------|------------------------------------------------------|
-| OverviewTab `ScoreRow` colors           | ternary on numeric score → color hex              | `BandPill domain="capacity" ref={…}`                 |
-| OverviewTab Food Deficit bar            | `foodBal.deficitPercent`-driven color             | `BandPill band="strained\|critical\|collapsed" labelBefore="Food"` |
-| ViabilityTab posture readout            | ad-hoc `colorByPosture()`                         | `BandPill domain="defense" ref={…}`                  |
-| DailyLifeTab `AnchorFact` accent colors | per-band hex picks in component body              | wrap `AnchorFact` to consume `BandPill` internally   |
-| EconomicsTab prosperity chip            | inline chip near prosperity label                 | `BandPill domain="substrate" ref={…}`                |
+| OverviewTab `ScoreRow` colors           | `scoreBand` + `scoreColor` off `SCORE_BAND_CUTS`  | ✅ Done — one shared domain band source (`domain/display/defenseScoreBands.js`), word through `statusCase` |
+| OverviewTab Food Deficit bar            | *(no such element)*                               | ⚰ Struck — the owner removed the standalone callout on 2026-07-22; Food Security carries the signal off `economicState.foodSecurity.label` / `.color` |
+| ViabilityTab posture readout            | no `colorByPosture()` exists; `VERDICT_INK[verdict.tone]` plus an inline `sevColor` ternary | Put `sevColor`'s severity ladder behind a shared source; the words already run through `tokenCase` |
+| DailyLifeTab `AnchorFact` accent colors | per-band hex picks in the component body (`safetyColor`, `foodColor`, `PROSPERITY_COLORS`) | **The live gap.** Give the three accents one band source, then the ladder for their words |
+| EconomicsTab prosperity chip            | `PROSPERITY_COLORS[eco.prosperity]` module map    | Fold that map into the same shared band source; the chip's words are already on `tokenCase` |
 
 ## Wave 3 — Entity provenance
 

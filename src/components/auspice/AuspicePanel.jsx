@@ -35,6 +35,8 @@ import { MUTED, INK, BODY, BORDER, GOLD_DEEP, AMBER_DEEP, sans, FS, SP, R } from
 import Card from '../primitives/Card.jsx';
 import Button from '../primitives/Button.jsx';
 import Badge from '../primitives/Badge.jsx';
+import useIsMobile from '../../hooks/useIsMobile.js';
+import { chromeFontSize, proseFontSize } from '../../design/proseScale.js';
 
 const SPANS = [
   ['one_month', 'A month'], ['one_season', 'A season'], ['one_year', 'A year'],
@@ -42,15 +44,17 @@ const SPANS = [
 
 /** @param {{ tick: any, headline: string }} b */
 function Beat({ b, tone }) {
+  const mobile = useIsMobile();
   return (
     <li style={{ display: 'flex', gap: SP.sm, alignItems: 'baseline', fontFamily: sans, fontSize: FS.sm, color: tone || BODY, margin: `${SP.xs}px 0` }}>
-      <span style={{ color: MUTED, fontSize: FS.xs, minWidth: 44 }}>{b.tick != null ? `Tick ${b.tick}` : '–'}</span>
+      <span style={{ color: MUTED, fontSize: chromeFontSize(FS.xs, mobile), minWidth: 44 }}>{b.tick != null ? `Tick ${b.tick}` : '–'}</span>
       <span>{b.headline}</span>
     </li>
   );
 }
 
 export default function AuspicePanel({ campaign }) {
+  const mobile = useIsMobile();
   const saves = useStore((s) => s.savedSettlements);
   const [span, setSpan] = useState('one_season');
   const [running, setRunning] = useState(false);
@@ -119,7 +123,7 @@ export default function AuspicePanel({ campaign }) {
           )}
           {omen.major.length > 0 && (
             <section style={{ marginBottom: SP.md }}>
-              <span style={{ display: 'flex', gap: SP.xs, alignItems: 'center', fontSize: FS.xs, letterSpacing: '0.05em', textTransform: 'uppercase', color: GOLD_DEEP, fontFamily: sans, fontWeight: 700 }}>
+              <span style={{ display: 'flex', gap: SP.xs, alignItems: 'center', fontSize: chromeFontSize(FS.xs, mobile), letterSpacing: '0.05em', textTransform: 'uppercase', color: GOLD_DEEP, fontFamily: sans, fontWeight: 700 }}>
                 <Badge tone="gold" size="sm">Great signs</Badge>
               </span>
               <ul style={{ listStyle: 'none', margin: `${SP.xs}px 0 0`, padding: 0 }}>
@@ -129,7 +133,7 @@ export default function AuspicePanel({ campaign }) {
           )}
           {omen.notable.length > 0 && (
             <section style={{ marginBottom: SP.md }}>
-              <span style={{ fontSize: FS.xs, letterSpacing: '0.05em', textTransform: 'uppercase', color: MUTED, fontFamily: sans, fontWeight: 700 }}>Lesser signs</span>
+              <span style={{ fontSize: chromeFontSize(FS.xs, mobile), letterSpacing: '0.05em', textTransform: 'uppercase', color: MUTED, fontFamily: sans, fontWeight: 700 }}>Lesser signs</span>
               <ul style={{ listStyle: 'none', margin: `${SP.xs}px 0 0`, padding: 0 }}>
                 {omen.notable.map((b, i) => <Beat key={i} b={b} tone={BODY} />)}
               </ul>
@@ -137,13 +141,13 @@ export default function AuspicePanel({ campaign }) {
           )}
           {omen.crossroads.length > 0 && (
             <section style={{ marginBottom: SP.md }}>
-              <span style={{ fontSize: FS.xs, letterSpacing: '0.05em', textTransform: 'uppercase', color: AMBER_DEEP, fontFamily: sans, fontWeight: 700 }}>Where the world would await your word</span>
+              <span style={{ fontSize: chromeFontSize(FS.xs, mobile), letterSpacing: '0.05em', textTransform: 'uppercase', color: AMBER_DEEP, fontFamily: sans, fontWeight: 700 }}>Where the world would await your word</span>
               <ul style={{ listStyle: 'none', margin: `${SP.xs}px 0 0`, padding: 0 }}>
                 {omen.crossroads.map((b, i) => <Beat key={i} b={b} tone={AMBER_DEEP} />)}
               </ul>
             </section>
           )}
-          <p style={{ fontFamily: sans, fontStyle: 'italic', fontSize: FS.xs, color: MUTED, margin: 0, borderTop: `1px solid ${BORDER}`, paddingTop: SP.sm, borderRadius: R.sm }}>
+          <p style={{ fontFamily: sans, fontStyle: 'italic', fontSize: proseFontSize(FS.xs, mobile), color: MUTED, margin: 0, borderTop: `1px solid ${BORDER}`, paddingTop: SP.sm, borderRadius: R.sm }}>
             An omen, not a promise. This is the season as it stands today; tuning and the turns of
             other hands can still bend the world&rsquo;s course.
           </p>

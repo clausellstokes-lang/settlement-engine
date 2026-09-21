@@ -2,22 +2,37 @@
  * AnonTierTeaser.jsx — Inline subscription telegraphing for the anon cap.
  *
  * Shown beneath the "Sign in to unlock" card on the Create page once an
- * anonymous visitor exhausts their daily generations. It surfaces the three
+ * anonymous visitor exhausts their daily generations. It surfaces the PUBLIC
  * subscription tiers (NOT the AI-credit packs) so a capped visitor sees what
  * an account unlocks before they leave. Anonymous visitors can't check out
  * directly, so every card routes to sign-in.
  *
- * Reuses the pricing tier data + copy (getVisibleTiers / pricing.tiers.*),
+ * ⛔ THE FOUNDER IS NOT AMONG THEM (the owner, 2026-09-19: "an invitation-only tier does
+ * not appear on the public path"). This teaser used to walk `getVisibleTiers()` WHOLE,
+ * so an anonymous visitor at their daily cap was shown a Founder Lifetime card — a tier
+ * with no price, no checkout and no path from this page, offered at the one reader who
+ * has least standing to ask for it. It now reads `getPublicTiers()`, which filters on
+ * the TIER'S OWN `invitationOnly` flag rather than on the spelling 'founder', so the rule
+ * holds for a fourth tier of the same kind. The Founders' Hall, the pricing page's
+ * charter band and a founder's own account state are untouched — those are where the
+ * owner invites, not listings of an offer.
+ *
+ * Reuses the pricing tier data + copy (getPublicTiers / pricing.tiers.*),
  * presented compactly for the hero rather than the full pricing-page layout.
  * Colors come from theme tokens (no raw hex) so visual-budget lint stays clean.
+ *
+ * @enforced-by tests/components/invitationOnlyTiers.census.test.jsx
  */
-import { getVisibleTiers, getTierDisplayName } from '../config/pricing.js';
-import { t, tx } from '../copy/index.js';
+import { getPublicTiers, getTierDisplayName } from '../config/pricing.js';
+import { t, tierPriceSlot, tx } from '../copy/index.js';
 import { GOLD_TXT, INK, BODY, BORDER, sans, serif_, FS, SP, PROSE_MAX } from './theme.js';
 import Button from './primitives/Button.jsx';
+import useIsMobile from '../hooks/useIsMobile.js';
+import { chromeFontSize, proseFontSize } from '../design/proseScale.js';
 
 export default function AnonTierTeaser({ onSignIn }) {
-  const tiers = getVisibleTiers();
+  const mobile = useIsMobile();
+  const tiers = getPublicTiers();
 
   // One quiet comparison strip subordinate to the unlock card's headline, not
   // three bordered cards inside the hero's own bordered card. A single top
@@ -32,7 +47,7 @@ export default function AnonTierTeaser({ onSignIn }) {
       textAlign: 'center',
     }}>
       <div style={{
-        fontSize: FS.xs, fontWeight: 700, letterSpacing: '0.10em',
+        fontSize: chromeFontSize(FS.xs, mobile), fontWeight: 700, letterSpacing: '0.10em',
         textTransform: 'uppercase', color: GOLD_TXT, marginBottom: SP.lg,
       }}>
         What a free account unlocks
@@ -45,8 +60,17 @@ export default function AnonTierTeaser({ onSignIn }) {
       }}>
         {tiers.map(tier => {
           const name = getTierDisplayName(tier.legacyKey) || t(`pricing.tiers.${tier.key}.name`);
-          const priceLabel = t(`pricing.tiers.${tier.key}.priceLabel`);
-          const priceSub = t(`pricing.tiers.${tier.key}.priceSub`);
+          // ⛔ NOT `t()` ON THE TWO PRICE KEYS. This teaser used to walk getVisibleTiers()
+          // WHOLE — the Founder included — and the Founder's price keys were deleted by
+          // ruling. `t()` renders the key it cannot resolve, so this card printed
+          // `pricing.tiers.founder.priceLabel` and `.priceSub` as literal text at every
+          // width (ODQ §934.22 item 1). The tier has since left this surface altogether
+          // (the docblock's invitation-only rule), but the RESOLVER stays: a price-less
+          // tier is answered by its STANDING and the standing's own sub-line, and the two
+          // ladders never mix — a tier reads as a price or as a standing, label and
+          // sub-line together. Keeping it here is what stops the raw keys returning the
+          // day any other tier loses a price.
+          const { label: priceLabel, sub: priceSub } = tierPriceSlot(tier.key);
           const tagline = t(`pricing.tiers.${tier.key}.tagline`);
           const features = (tx(`pricing.tiers.${tier.key}.features`) || []).slice(0, 3);
           const emphasised = tier.key === 'cartographer';
@@ -72,16 +96,18 @@ export default function AnonTierTeaser({ onSignIn }) {
                 <span style={{ fontFamily: serif_, fontSize: FS.xl, fontWeight: 600, color: INK, lineHeight: 1 }}>
                   {priceLabel}
                 </span>
-                {priceSub && <span style={{ fontSize: FS.xs, color: BODY, fontFamily: sans }}>{priceSub}</span>}
+                {/* "forever" / "per month" — the unit beside the price, read on a phone and
+                    drawn at 11px until the floor reached this page. */}
+                {priceSub && <span style={{ fontSize: chromeFontSize(FS.xs, mobile), color: BODY, fontFamily: sans }}>{priceSub}</span>}
               </div>
               {tagline && (
-                <p style={{ margin: 0, fontSize: FS.xs, color: BODY, fontStyle: 'italic', fontFamily: serif_, lineHeight: 1.5 }}>
+                <p style={{ margin: 0, fontSize: proseFontSize(FS.xs, mobile), color: BODY, fontStyle: 'italic', fontFamily: serif_, lineHeight: 1.5 }}>
                   {tagline}
                 </p>
               )}
               <ul style={{ listStyle: 'none', padding: 0, margin: `${SP.xs}px 0 0`, display: 'flex', flexDirection: 'column', gap: 4, flex: 1 }}>
                 {features.map((f, i) => (
-                  <li key={i} style={{ fontSize: FS.xs, color: BODY, lineHeight: 1.4 }}>
+                  <li key={i} style={{ fontSize: proseFontSize(FS.xs, mobile), color: BODY, lineHeight: 1.4 }}>
                     {'·'} {f}
                   </li>
                 ))}

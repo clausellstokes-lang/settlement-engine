@@ -25,9 +25,47 @@ import {
   normalizeUserContentTunableIntent,
 } from '../domain/content/userContentTunableIntent.js';
 
+/**
+ * The persisted anonymous draft, or null when the blob does not carry a genuine
+ * one. FAIL CLOSED: only a plain object with a truthy `settlement` counts. An
+ * absent key (a blob written before the draft existed), a bare `true` or a
+ * string (a hand-edited or half-migrated blob), an empty `{}` (a stale envelope
+ * whose payload was dropped) and an array all read as NOT ANONYMOUS, so the
+ * draft is not adopted rather than adopted on a guess.
+ *
+ * THE PAYLOAD IS LIFTED VERBATIM. The draft's ORIGIN is not inside it and never
+ * was: it is derived below from the fact that an envelope was adopted at all,
+ * which is the only thing this envelope has ever meant. Copying the payload to
+ * stamp it would also cost the byte-identity the whole design rests on — a save
+ * taken after a reload must write exactly what a save taken before it would.
+ *
+ * @param {unknown} envelope the blob's `anonDraft` value
+ * @returns {{ settlement: any, lastSeed: any }|null}
+ */
+export function readAnonDraft(envelope) {
+  if (!envelope || typeof envelope !== 'object' || Array.isArray(envelope)) return null;
+  const draft = /** @type {Record<string, any>} */ (envelope);
+  if (!draft.settlement) return null;
+  return { settlement: draft.settlement, lastSeed: draft.lastSeed ?? null };
+}
+
 export function mergePersistedState(persistedState, currentState) {
   const persisted = /** @type {Record<string, any>} */ (persistedState || {});
   const current = /** @type {Record<string, any>} */ (currentState || {});
+  // THE ANONYMOUS DRAFT, LIFTED OUT OF ITS ENVELOPE (2026-09-18). The envelope is
+  // a TRANSPORT and is consumed here: the draft simply becomes live state.
+  //
+  // ⭐ EVERY BOOT ADOPTS IT, WHATEVER THE SESSION TURNS OUT TO BE, and nothing
+  // later takes it away. Rehydrate is synchronous and Supabase resolves the
+  // session a moment afterwards, so this code cannot know who is booting — and it
+  // no longer needs to. A device's anonymous draft belongs to the device; a
+  // signed-in person who finds it on screen keeps it or clears it themselves, and
+  // the projection simply stops writing the envelope while they are signed in
+  // (persistProjection.js). No claim is raised here, because there is nothing left
+  // to settle: the predecessor raised `restoredAnonDraft` for a boot resolution to
+  // spend, and that machinery — the spend, the sign-in retractions, the
+  // sessionStorage stash across an OAuth redirect — is what this rule replaced.
+  const anonDraft = readAnonDraft(persisted.anonDraft);
   const configExplicitFields = Object.hasOwn(persisted, 'configExplicitFields')
     ? normalizeUserContentTunableIntent(persisted.configExplicitFields)
     : inferLegacyUserContentTunableIntent(persisted.config);
@@ -53,5 +91,17 @@ export function mergePersistedState(persistedState, currentState) {
     // before the bag itself existed — backfills to the shipped default instead of
     // reading undefined at the consumer.
     displayPrefs:       { ...DEFAULT_DISPLAY_PREFS, ...(persisted.displayPrefs || {}) },
+    // Lifted out of the envelope, or the slice defaults when the blob carries no
+    // genuine anonymous draft. Written AFTER the spread so a hand-edited blob
+    // cannot smuggle a top-level `settlement` past the envelope check.
+    settlement:        anonDraft ? anonDraft.settlement : (current.settlement ?? null),
+    lastSeed:          anonDraft ? anonDraft.lastSeed : (current.lastSeed ?? null),
+    // THE ORIGIN, DERIVED — never read out of the blob, so a hand-edited one cannot
+    // assert it. Adopting the envelope IS the claim that an anonymous session wrote
+    // this world; anything else in the editor after a rehydrate came from a source
+    // an account owns, so 'account' is the fail-closed answer. Written AFTER the
+    // spread for the same reason as its neighbours: it is session state, absent from
+    // the projection, and a blob carrying it must not smuggle one past.
+    draftOrigin:       anonDraft ? 'anon' : 'account',
   };
 }

@@ -335,7 +335,7 @@ describe('§11b THE EMBASSY WALKTHROUGH — the four named cells', () => {
   const eargs = (worldState, g, homeNpcs) => {
     const s = { home: etown('Ashford', homeNpcs), foe: etown('Blackmoor'), way: etown('Wayfar'), third: etown('Corvin') };
     const settlements = EIDS.map((id) => ({ id, name: s[id].name, settlement: s[id] }));
-    return { snapshot: { settlements }, worldState, settlementUpdates: settlements.map((it) => ({ saveId: it.id, settlement: it.settlement })), saves: settlements.map((it) => ({ id: it.id, settlement: it.settlement })), graph: g, tick: TK, now: null };
+    return { snapshot: { settlements }, worldState, settlementUpdates: settlements.map((update) => ({ saveId: update.id, settlement: update.settlement })), saves: settlements.map((save) => ({ id: save.id, settlement: save.settlement })), graph: g, tick: TK, now: null };
   };
   const roll1 = (seed) => createPRNG(`${seed}::roads-hazard:${EMID}:${TK}`).random();
   const metrics = (npcOver = {}) => { const n = envoy(npcOver); const w = roadsImportanceWeight(n); const ew = embassyEnvoyWeight01({ importanceWeight01: w, factionPower01: factionPowerStanding01(etown('H', [n]), n) }); return { w, ew, amp: embassyAmplifier(ew) }; };
@@ -378,7 +378,7 @@ describe('§11b THE EMBASSY WALKTHROUGH — the four named cells', () => {
     let seed = null;
     for (let i = 0; i < 40000 && seed == null; i++) { const rr = roll1(`ins-${i}`); if (rr >= detainCut + 0.01 && rr < 0.999) seed = `ins-${i}`; }
     const settlements = EIDS.map((id) => ({ id, name: id, settlement: id === 'home' ? home : etown(id) }));
-    const r = advanceRoads({ snapshot: { settlements }, worldState: eworld({ seed, mission: embassy() }), settlementUpdates: settlements.map((it) => ({ saveId: it.id, settlement: it.settlement })), saves: settlements.map((it) => ({ id: it.id, settlement: it.settlement })), graph: egraph(), tick: TK, now: null });
+    const r = advanceRoads({ snapshot: { settlements }, worldState: eworld({ seed, mission: embassy() }), settlementUpdates: settlements.map((update) => ({ saveId: update.id, settlement: update.settlement })), saves: settlements.map((save) => ({ id: save.id, settlement: save.settlement })), graph: egraph(), tick: TK, now: null });
     const rebuff = headlinesFor(r, 'embassy_rebuffed')[0];
     expect(rebuff, 'the insulting suit was turned home').toBeTruthy();
     expect(r.worldState?.spatialLedgers?.[EMBASSY_LEDGER_KEY], 'a rebuffed insult deposits no suit').toBeUndefined();

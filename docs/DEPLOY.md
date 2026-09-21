@@ -101,6 +101,51 @@ to set; `SITEMAP_INCLUDE_GALLERY=0` suppresses it). The COMMITTED
 facet hubs — and stays byte-pinned by tests/build/sitemap.test.js; the
 deployed `dist/sitemap.xml` is the superset with slugs.
 
+## Local preview — the DEV-only admin persona (ODQ §934.35)
+
+**THE ORDER (the owner):** *"give me a dummy admin account for our preview
+purposes only."* No account exists and no password is involved — the chair
+creates neither. What exists is a **view**: one dev-server environment variable
+seats the ROLE the client's own gates read, so the preview renders the admin
+surface while the session stays exactly what it really is.
+
+Put it in the preview worktree's `.env.local` (gitignored — `.gitignore:5` — and
+loaded by Vite's default env handling, since `vite.config.js` sets no `envDir` or
+`envPrefix`), then restart the dev server:
+
+```
+VITE_PREVIEW_ROLE=admin      # or: developer. Any other value is ignored.
+```
+
+What it does: `src/store/authSlice.js` resolves every auth writer's role through
+it, so `isStaffRole` / `staffUnlocksPaidFeatures` answer true — the **Developer
+Admin Panel** row appears in the account menu, `/admin` renders instead of
+refusing, and every tier gate opens. The account menu wears a
+`PREVIEW PERSONA · admin` marker the whole time, so a screenshot can never be
+mistaken for a real session.
+
+**What it deliberately does NOT do, and why that makes it safe:**
+
+- **It sends nothing.** No header, no body field, no JWT claim, no profiles
+  write. The Supabase client is built from the anon key alone. Every server gate
+  — RLS, `current_user_is_privileged()`, the audited `admin-actions` function,
+  `has_surveyor_entitlement()` — judges the REAL caller and refuses a persona
+  exactly as it refuses a stranger. A preview admin SEES the admin chrome; it
+  cannot read or write one row it was not already entitled to. Admin panels that
+  fetch will therefore come back empty or 403 — that is correct, not a bug.
+- **It cannot reach production.** The guard is
+  `import.meta.env.DEV && import.meta.env.VITE_PREVIEW_ROLE`; Vite folds `DEV` to
+  the literal `false` in a production build and Rollup drops the body, so the
+  shipped bundle contains neither the mechanism nor the variable's name. Never
+  set `VITE_PREVIEW_ROLE` in Vercel — it would do nothing, and
+  `tests/build/previewPersonaAbsent.test.js` (VERIFY_DIST-gated) reds if the fold
+  ever stops holding.
+- **It is fail-closed.** Only `admin` and `developer` are honoured;
+  `owner`, `staff`, `ADMIN` and anything else read as no persona at all.
+
+Proofs: `tests/store/previewPersona.test.js` (active / inert / never-claimed) and
+`tests/build/previewPersonaAbsent.test.js` (the dist scan).
+
 ## Database migrations (Supabase) — manual
 
 Migrations live in `supabase/migrations/*.sql`. Each new migration is
@@ -150,7 +195,7 @@ remembered number.** Migration numbers grow every release, so this guide
 deliberately does NOT pin a "latest" number that would rot and cause an operator
 to under-apply.
 
-**Current migration head: `200_deity_authored_character.sql`** (this
+**Current migration head: `203_gallery_scanner_client_mirror_totality.sql`** (this
 filename is kept current by a freshness pin — `tests/docs/deployRunbookFreshness.test.js`
 derives the head from `supabase/migrations/` and fails the gate if this line drifts).
 <!-- @enforced-by tests/docs/deployRunbookFreshness.test.js -->

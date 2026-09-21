@@ -37,8 +37,10 @@ import { buildTimelineTrack, frameAtTick, trackSettlementIds, settlementTimeline
 import { BODY, BORDER, BORDER2, CARD, CARD_ALT, FS, GOLD, INK, MUTED, SECOND, SP, sans, swatch } from '../theme.js';
 import Button from '../primitives/Button.jsx';
 import { slugify } from '../../kernel/slugify.js';
+import useIsMobile from '../../hooks/useIsMobile.js';
+import { chromeFontSize, proseFontSize } from '../../design/proseScale.js';
 
-const SELECT_STYLE = { fontSize: FS.micro, color: swatch.inkMag2, background: swatch['#FAF8F4'], border: `1px solid ${swatch['#EDE3CC']}`, padding: '3px 5px', maxWidth: '100%' };
+const selectStyle = (mobile) => ({ fontSize: chromeFontSize(FS.micro, mobile), color: swatch.inkMag2, background: swatch['#FAF8F4'], border: `1px solid ${swatch['#EDE3CC']}`, padding: '3px 5px', maxWidth: '100%' });
 /** A filesystem-safe slug from a campaign name (the export-filename idiom, kernel primitive). */
 const clipSlug = (name) => slugify(name || 'realm', { fallback: 'realm' });
 
@@ -48,6 +50,7 @@ const clipSlug = (name) => slugify(name || 'realm', { fallback: 'realm' });
  * @param {(id: string) => string} [props.nameFor]
  */
 export default function TimelapsePanel({ campaign, nameFor }) {
+  const mobile = useIsMobile();
   const timelapseTick = useStore((s) => s.timelapseTick);
   const setTimelapseTick = useStore((s) => s.setTimelapseTick);
   const resolveName = nameFor || ((id) => String(id));
@@ -84,7 +87,7 @@ export default function TimelapsePanel({ campaign, nameFor }) {
 
   if (frames.length === 0) {
     return (
-      <div data-testid="timelapse-empty" style={{ padding: SP.md, border: `1px dashed ${BORDER2}`, color: BODY, fontFamily: sans, fontSize: FS.xs, fontWeight: 750, lineHeight: 1.5 }}>
+      <div data-testid="timelapse-empty" style={{ padding: SP.md, border: `1px dashed ${BORDER2}`, color: BODY, fontFamily: sans, fontSize: chromeFontSize(FS.xs, mobile), fontWeight: 750, lineHeight: 1.5 }}>
         No history to replay yet. Advance the realm and the timelapse will let you scrub
         back through every pulse: who grew, who declined, and where the trouble struck.
       </div>
@@ -106,7 +109,7 @@ export default function TimelapsePanel({ campaign, nameFor }) {
 
   return (
     <div data-testid="timelapse-panel" style={{ display: 'grid', gap: SP.sm }}>
-      <div style={{ display: 'flex', alignItems: 'center', gap: 6, color: GOLD, fontFamily: sans, fontSize: FS.xs, fontWeight: 900 }}>
+      <div style={{ display: 'flex', alignItems: 'center', gap: 6, color: GOLD, fontFamily: sans, fontSize: chromeFontSize(FS.xs, mobile), fontWeight: 900 }}>
         <History size={13} /> Timelapse
       </div>
 
@@ -116,7 +119,7 @@ export default function TimelapsePanel({ campaign, nameFor }) {
         </Button>
         <div style={{ flex: 1, textAlign: 'center', minWidth: 0 }}>
           <div style={{ color: INK, fontFamily: sans, fontSize: FS.sm, fontWeight: 900 }}>tick {activeFrame ? activeFrame.tick : '–'}</div>
-          <div style={{ color: MUTED, fontFamily: sans, fontSize: FS.micro }}>{idx + 1} of {frames.length}</div>
+          <div style={{ color: MUTED, fontFamily: sans, fontSize: chromeFontSize(FS.micro, mobile) }}>{idx + 1} of {frames.length}</div>
         </div>
         <Button variant="ghost" size="sm" aria-label="Later tick" disabled={idx >= frames.length - 1} onClick={() => goto(idx + 1)} style={{ minHeight: undefined, padding: 2 }}>
           <ChevronRight size={15} />
@@ -133,7 +136,7 @@ export default function TimelapsePanel({ campaign, nameFor }) {
         style={{ width: '100%', accentColor: GOLD }}
       />
 
-      <div data-testid="timelapse-frame-summary" style={{ color: BODY, fontFamily: sans, fontSize: FS.micro, lineHeight: 1.5, padding: SP.xs, background: CARD, border: `1px solid ${BORDER2}` }}>
+      <div data-testid="timelapse-frame-summary" style={{ color: BODY, fontFamily: sans, fontSize: proseFontSize(FS.micro, mobile), lineHeight: 1.5, padding: SP.xs, background: CARD, border: `1px solid ${BORDER2}` }}>
         {activeFrame && activeFrame.pulses.length > 0
           ? <>Struck: {struckNames.join(', ')}{activeFrame.pulses.length > 3 ? ` +${activeFrame.pulses.length - 3}` : ''}. </>
           : 'A quiet advance. '}
@@ -143,15 +146,15 @@ export default function TimelapsePanel({ campaign, nameFor }) {
       {/* V-25d — PER-SETTLEMENT DRILL: one settlement's slice of the same history. */}
       {drillIds.length > 0 && (
         <div style={{ display: 'grid', gap: 4, padding: SP.xs, border: `1px solid ${BORDER2}`, background: CARD }}>
-          <label htmlFor="timelapse-drill" style={{ display: 'flex', alignItems: 'center', gap: 6, fontSize: FS.micro, color: MUTED, fontWeight: 800 }}>
+          <label htmlFor="timelapse-drill" style={{ display: 'flex', alignItems: 'center', gap: 6, fontSize: chromeFontSize(FS.micro, mobile), color: MUTED, fontWeight: 800 }}>
             Drill into
-            <select id="timelapse-drill" aria-label="Drill into a settlement's history" value={drillId} onChange={(e) => setDrillId(e.target.value)} style={SELECT_STYLE}>
+            <select id="timelapse-drill" aria-label="Drill into a settlement's history" value={drillId} onChange={(e) => setDrillId(e.target.value)} style={selectStyle(mobile)}>
               <option value="">the whole realm</option>
               {drillIds.map((id) => <option key={id} value={id}>{resolveName(id) || id}</option>)}
             </select>
           </label>
           {drill && (
-            <div data-testid="timelapse-drill-summary" style={{ color: BODY, fontFamily: sans, fontSize: FS.micro, lineHeight: 1.5 }}>
+            <div data-testid="timelapse-drill-summary" style={{ color: BODY, fontFamily: sans, fontSize: proseFontSize(FS.micro, mobile), lineHeight: 1.5 }}>
               {drill.points.length === 0
                 ? <>Never struck, never moved. Quiet through every advance.</>
                 : <>Struck <b>{drill.struck}</b>{drill.peakSeverity > 0 ? ` (peak ${Math.round(drill.peakSeverity * 100) / 100})` : ''} · <span style={{ color: SECOND, fontWeight: 800 }}>grew {drill.grew} · declined {drill.declined}</span> across {drill.points.length} advance{drill.points.length === 1 ? '' : 's'}.</>}
@@ -164,10 +167,10 @@ export default function TimelapsePanel({ campaign, nameFor }) {
         <Button variant="ghost" size="sm" onClick={onExportClip} aria-label="Export the timelapse as a deterministic clip (JSON frame sequence)">
           <Download size={12} /> Export clip
         </Button>
-        <span style={{ fontSize: FS.micro, color: MUTED }}>A replayable frame sequence: no video, just the history itself.</span>
+        <span style={{ fontSize: chromeFontSize(FS.micro, mobile), color: MUTED }}>A replayable frame sequence: no video, just the history itself.</span>
       </div>
 
-      <div style={{ display: 'flex', alignItems: 'center', gap: 5, color: MUTED, fontFamily: sans, fontSize: FS.micro }}>
+      <div style={{ display: 'flex', alignItems: 'center', gap: 5, color: MUTED, fontFamily: sans, fontSize: chromeFontSize(FS.micro, mobile) }}>
         <Radio size={9} /> Scrubbing history. Close this to return to the live realm.
       </div>
     </div>

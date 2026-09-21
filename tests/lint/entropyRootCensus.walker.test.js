@@ -809,7 +809,11 @@ describe('EP-0 · the closure record, re-run rather than transcribed', () => {
     // delete took ONE more seeded stream with it, 36 → 35 / 46 → 45. Re-read from its own red
     // run, never carried forward from the car-1 note above.
     expect(count((f) => f.startsWith('src/domain/'), /createPRNG\(/)).toBe(35);
-    expect(count(() => true, /createPRNG\(/)).toBe(45);
+    // 45 → 46 on 2026-09-19: the store's size-gate draw (src/store/settlementGenerateAction.js,
+    // lane 35 car 11) aims a capped account's 'random' size on its OWN stream —
+    // createPRNG(`${seed}:size-gate`) — before the pipeline runs, so not one draw of the
+    // world's sequence is consumed; a whole-src site outside src/domain, hence 35 there still.
+    expect(count(() => true, /createPRNG\(/)).toBe(46);
     // ⚠ THE INSTRUCTIVE ONE: a bare hit count over a symbol that also appears in prose and in
     // its own definition over-reports by 60%. HITS and CALL SITES are recorded separately.
     const hits = ALL_FILES.reduce((n, f) => n + read(f).split('\n').filter((l) => l.includes('generateSeed()')).length, 0);

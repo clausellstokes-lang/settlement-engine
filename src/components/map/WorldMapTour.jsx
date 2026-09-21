@@ -14,6 +14,8 @@
 import { useEffect, useState } from 'react';
 import { GOLD, INK, BODY, CARD, BORDER, sans, FS, SP } from '../theme.js';
 import Button from '../primitives/Button.jsx';
+import useIsMobile from '../../hooks/useIsMobile.js';
+import { chromeFontSize } from '../../design/proseScale.js';
 
 const DONE_KEY = 'sf_worldmap_tour_done';
 const PAD = 6;
@@ -23,6 +25,7 @@ export function markWorldMapTourSeen() { try { localStorage.setItem(DONE_KEY, '1
 export function hasSeenWorldMapTour() { try { return localStorage.getItem(DONE_KEY) === '1'; } catch { return false; } }
 
 export default function WorldMapTour({ open, steps = [], onClose }) {
+  const mobile = useIsMobile();
   const [i, setI] = useState(0);
   const [rect, setRect] = useState(null);
 
@@ -95,7 +98,7 @@ export default function WorldMapTour({ open, steps = [], onClose }) {
         background: CARD, border: `1px solid ${BORDER}`,
         boxShadow: '0 8px 28px rgba(0,0,0,0.45)', padding: SP.lg, fontFamily: sans,
       }}>
-        <div style={{ fontSize: FS.xxs, fontWeight: 700, color: GOLD, textTransform: 'uppercase', letterSpacing: '0.08em', marginBottom: 4 }}>
+        <div style={{ fontSize: chromeFontSize(FS.xxs, mobile), fontWeight: 700, color: GOLD, textTransform: 'uppercase', letterSpacing: '0.08em', marginBottom: 4 }}>
           Step {i + 1} of {steps.length}
         </div>
         <div style={{ fontSize: FS.lg, fontWeight: 700, color: INK, marginBottom: 6 }}>{step.title}</div>

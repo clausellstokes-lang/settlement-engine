@@ -16,15 +16,18 @@
 import { View, Text } from '@react-pdf/renderer';
 import { PageChrome } from '../primitives/PageChrome.jsx';
 import { formatCount } from '../../domain/formatNumber.js';
+import { tokenCase } from '../../domain/display/labelCase.js';
 import {
   ChapterBand, KeyValRow, HairRule, Tag,
 } from '../primitives/Dense.jsx';
 import { Callout } from '../primitives/Callout.jsx';
 import { EditableText, EditableProse } from '../primitives/Editable.jsx';
 import { type, palette, space, pt } from '../theme.js';
+import { institutionDisplayName } from '../../domain/display/institutionDisplayName.js';
 import { smart, humanize, num } from '../lib/format.js';
+import { StateProse } from '../primitives/StateProse.jsx';
 
-export function IdentityDailyLife({ settlement, narrativeMode, vm }) {
+export function IdentityDailyLife({ settlement, narrativeMode, vm, stateProse }) {
   const id = vm.identity;
   const d = vm.daily;
   const a = id.anchor || {};
@@ -55,6 +58,18 @@ export function IdentityDailyLife({ settlement, narrativeMode, vm }) {
         sub={id.tier || null}
       />
 
+      {/* ── The mounted state prose (the screen's ProseBlock positions) ──
+          ⭐ THE FAITH POSITIONS RENDER HERE, AND THE REASON IS REACHABILITY (review 4).
+          They were drawn from FaithWar.jsx, which returns null on a dormant `vm.liveWorld`
+          and is gated by `faithChapterVisible` on `included && hasLiveWorld && faithUnlocked`
+          — so on a measured 12 of 12 generated settlements the builder composed a faith
+          position and NOT ONE of them could reach a page. The PDF has no faith chapter
+          outside that premium live-world one, and DS-FTH-1/2/3 are facts about what the town
+          IS, so chapter 07 is where they belong. The premium seam is untouched: the builder
+          withholds the two deity-naming positions unless `faithUnlocked`. ── */}
+      <StateProse stateProse={stateProse} tab="daily_life" />
+      <StateProse stateProse={stateProse} tab="faith" />
+
       {/* ── Anchor facts ─────────────────────────────────────── */}
       {(a.governingName || a.prosperity || a.safety || a.culturalNotes ||
         a.foodDeficit != null ||
@@ -73,10 +88,10 @@ export function IdentityDailyLife({ settlement, narrativeMode, vm }) {
           </Text>
           <KeyValRow
             pairs={[
-              a.governingName    ? { label: 'GOVERNING',  value: humanize(a.governingName) } : null,
-              a.prosperity       ? { label: 'PROSPERITY', value: humanize(a.prosperity) } : null,
-              a.complexity       ? { label: 'COMPLEXITY', value: humanize(a.complexity) } : null,
-              a.safety           ? { label: 'SAFETY',     value: humanize(a.safety) } : null,
+              a.governingName    ? { label: 'Governing',  value: humanize(a.governingName) } : null,
+              a.prosperity       ? { label: 'Prosperity', value: humanize(a.prosperity) } : null,
+              a.complexity       ? { label: 'Complexity', value: humanize(a.complexity) } : null,
+              a.safety           ? { label: 'Safety',     value: humanize(a.safety) } : null,
             ].filter(Boolean)}
           />
           <KeyValRow
@@ -89,15 +104,27 @@ export function IdentityDailyLife({ settlement, narrativeMode, vm }) {
               // settlement in balance. The no-data case is nulled upstream in
               // viewModel.js, so a missing row here means "not calculated".
               a.foodDeficit > 0
-                ? { label: 'FOOD',  value: `−${num(a.foodDeficit)} units` }
+                ? { label: 'Food',  value: `−${num(a.foodDeficit)} units` }
                 : a.foodSurplus > 0
-                  ? { label: 'FOOD',  value: `+${num(a.foodSurplus)} units` }
+                  ? { label: 'Food',  value: `+${num(a.foodSurplus)} units` }
                   : (a.foodDeficit != null || a.foodSurplus != null)
-                    ? { label: 'FOOD',  value: 'Balanced' }
+                    ? { label: 'Food',  value: 'Balanced' }
                     : null,
-              a.defenseLabel     ? { label: 'DEFENSE',   value: humanize(a.defenseLabel) } : null,
-              a.defenseScoreAvg != null ? { label: 'SCORE AVG', value: smart(a.defenseScoreAvg) } : null,
-              a.magicalCapability ? { label: 'MAGIC', value: humanize(a.magicalCapability) } : null,
+              a.defenseLabel     ? { label: 'Defense',   value: humanize(a.defenseLabel) } : null,
+              a.defenseScoreAvg != null ? { label: 'Score avg', value: smart(a.defenseScoreAvg) } : null,
+              /* ⛔ THE `MAGIC` CHIP IS GONE, AND IT IS A DELETION RATHER THAN A REPAIR.
+                 It printed `humanize(a.magicalCapability)`, and `defenseProfile.magicalCapability`
+                 HAS NO WRITER: `generateDefenseProfile` returns scores/readiness/institutions/
+                 magicDependency/traditions/chainModifiers/economicGates and nothing else, the
+                 world pulse only ever re-spreads `scores`, and no save shape carries the key —
+                 the observed-shape ratchet has it frozen as a reader-with-no-writer finding in
+                 both view-model files. So the chip was dead on every settlement ever exported.
+                 The reader-without-writer dock's ruling is REMOVE, not keep warm: a guarded read
+                 of a key nothing produces is an arm that can never run, and leaving it invites a
+                 later car to "fix" it by inventing a writer for a fact the Defense tab already
+                 owns. The magic facts the dossier really has are elsewhere on the page-set —
+                 `magicDependency` is the tag six lines below, and the Defense tab's Arcane
+                 Support row is the presence read. ── */
             ].filter(Boolean)}
           />
           {a.magicDependency && (
@@ -145,14 +172,13 @@ export function IdentityDailyLife({ settlement, narrativeMode, vm }) {
           >
             <Text
               style={{
-                ...type.label,
+                ...type.label_plain,
                 color: palette.muted,
                 width: 100,
                 fontSize: pt['7.5'],
-                letterSpacing: 0.2,
               }}
             >
-              {r.label.toUpperCase()}
+              {tokenCase(r.label)}
             </Text>
             <Text style={{ ...type.body, color: palette.ink, flex: 1, fontSize: pt['9.5'] }}>
               {r.value}
@@ -226,14 +252,13 @@ export function IdentityDailyLife({ settlement, narrativeMode, vm }) {
               <View key={`p-${i}`} style={{ marginBottom: space.sm }} wrap={false}>
                 <Text
                   style={{
-                    ...type.label,
+                    ...type.label_plain,
                     color: accent,
                     fontSize: pt['9'],
-                    letterSpacing: 0.2,
                     marginBottom: 2,
                   }}
                 >
-                  {p.time.toUpperCase()}
+                  {tokenCase(p.time)}
                 </Text>
                 <EditableProse
                   name={`daily.${p.time.toLowerCase()}`}
@@ -301,14 +326,14 @@ function CultureRows({ culture }) {
         >
           <Text
             style={{
-              ...type.label,
+              ...type.label_plain,
               color: palette.muted,
               width: 78,
               fontSize: pt['7'],
               marginRight: 5,
             }}
           >
-            {label.toUpperCase()}
+            {tokenCase(label)}
           </Text>
           <Text style={{ ...type.body, color: palette.ink, flex: 1, fontSize: pt['8.5'] }}>
             {value}
@@ -364,8 +389,8 @@ function GenerationCoherence({ receipt }) {
       </Text>
       {failed.map(check => (
         <View key={check.id || check.label} style={{ marginTop: 2 }}>
-          <Text style={{ ...type.label, color: palette.bad, fontSize: pt['7'] }}>
-            {check.label.toUpperCase()}
+          <Text style={{ ...type.label_plain, color: palette.bad, fontSize: pt['7'] }}>
+            {tokenCase(check.label)}
           </Text>
           {check.findings.map((finding, index) => (
             <Text
@@ -379,8 +404,8 @@ function GenerationCoherence({ receipt }) {
       ))}
       {reviewJudgments.map(judgment => (
         <View key={judgment.id || judgment.label} style={{ marginTop: 2 }}>
-          <Text style={{ ...type.label, color: palette.bad, fontSize: pt['7'] }}>
-            {`${judgment.label.toUpperCase()}: NEEDS REVIEW`}
+          <Text style={{ ...type.label_plain, color: palette.bad, fontSize: pt['7'] }}>
+            {`${tokenCase(judgment.label)}: Needs review`}
           </Text>
           <Text style={{ ...type.body, color: palette.second, fontSize: pt['8'] }}>
             {judgment.summary || 'Formal judgment needs review.'}
@@ -427,7 +452,9 @@ function QuarterCard({ q, idx }) {
               <View style={{ flex: 1 }}>
                 <EditableText
                   name={`identity.quarter.${idx}.landmark.${j}`}
-                  defaultValue={typeof lm === 'string' ? lm : (lm?.name || lm?.label || '')}
+                  // The seam, not the raw key: a landmark is an institution name and this is
+                  // the value the DM reads AND writes over in the fillable field.
+                  defaultValue={institutionDisplayName(typeof lm === 'string' ? lm : lm)}
                   style={{ ...type.body, fontSize: pt['8.5'] }}
                 />
               </View>

@@ -20,6 +20,8 @@ import { renderAllTreaties, treatyTrueStateChip } from '../../domain/display/tre
 import { Section } from './WorldPulsePrimitives.jsx';
 import WarCausalBrief from './WarCausalBrief.jsx';
 import { INK, BODY, MUTED, SECOND, CARD, CARD_ALT, BORDER, BORDER2, RED, RED_BG, GREEN, GREEN_BG, AMBER, AMBER_BG, sans, FS, SP } from '../theme.js';
+import useIsMobile from '../../hooks/useIsMobile.js';
+import { chromeFontSize, proseFontSize } from '../../design/proseScale.js';
 
 /** Compliance → semantic tone (routed through design tokens — no raw color). */
 const STATE_TONE = { honored: 'good', strained: 'warn', defaulted: 'danger', expired: 'neutral' };
@@ -31,12 +33,13 @@ const TONE_COLOR = {
 };
 
 function StateChip({ state }) {
+  const mobile = useIsMobile();
   const c = TONE_COLOR[STATE_TONE[state] || 'neutral'] || TONE_COLOR.neutral;
   return (
     <span style={{
       display: 'inline-flex', alignItems: 'center', minHeight: 20, padding: '1px 7px',
       border: `1px solid ${c.border}`, background: c.bg, fontFamily: sans,
-      color: c.fg, fontSize: FS.pico, fontWeight: 800, textTransform: 'uppercase', letterSpacing: '0.04em',
+      color: c.fg, fontSize: chromeFontSize(FS.pico, mobile), fontWeight: 800, textTransform: 'uppercase', letterSpacing: '0.04em',
     }}>{state}</span>
   );
 }
@@ -47,6 +50,7 @@ function nameOf(nameById, id, fallback) {
 }
 
 function TermRow({ term }) {
+  const mobile = useIsMobile();
   return (
     <li style={{
       display: 'flex', flexDirection: 'column', gap: 3, padding: '7px 9px',
@@ -54,18 +58,18 @@ function TermRow({ term }) {
       background: term.fraying ? TONE_COLOR.danger.bg : CARD,
     }}>
       <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
-        <span style={{ color: INK, fontFamily: sans, fontSize: FS.xs, fontWeight: 800, textTransform: 'capitalize' }}>
+        <span style={{ color: INK, fontFamily: sans, fontSize: chromeFontSize(FS.xs, mobile), fontWeight: 800, textTransform: 'capitalize' }}>
           {term.label}{term.good ? ` · ${term.good}` : ''}
         </span>
         {term.fraying && <AlertTriangle size={12} color={RED} aria-label="fraying" />}
         <span style={{ marginLeft: 'auto', display: 'inline-flex', gap: 6, alignItems: 'center' }}>
-          <span style={{ color: MUTED, fontFamily: sans, fontSize: FS.pico, fontWeight: 700 }}>
+          <span style={{ color: MUTED, fontFamily: sans, fontSize: chromeFontSize(FS.pico, mobile), fontWeight: 700 }}>
             {term.yearsRemaining > 0 ? `${term.yearsRemaining}y left` : 'lapsing'}
           </span>
           <StateChip state={term.complianceState} />
         </span>
       </div>
-      <span style={{ color: SECOND, fontFamily: sans, fontSize: FS.xxs, fontStyle: 'italic', lineHeight: 1.4 }}>
+      <span style={{ color: SECOND, fontFamily: sans, fontSize: proseFontSize(FS.xxs, mobile), fontStyle: 'italic', lineHeight: 1.4 }}>
         {term.strainLine}
       </span>
     </li>
@@ -76,6 +80,7 @@ function TreatyCard({ doc, nameById, worldState, includeGroundTruth }) {
   // GR-0 THE DM TRUE-STATE CHIP. The read itself is fail-closed on the flag, so this
   // is null for every viewer who is not holding ground-truth authority, and null again
   // whenever nothing actually diverges — an honest term earns no chip.
+  const mobile = useIsMobile();
   const trueStateChip = treatyTrueStateChip(worldState, doc.pairKey, { includeGroundTruth });
   const victor = nameOf(nameById, doc.victorId, doc.victorName);
   const loser = nameOf(nameById, doc.loserId, doc.loserName);
@@ -91,20 +96,20 @@ function TreatyCard({ doc, nameById, worldState, includeGroundTruth }) {
         <span style={{ color: INK, fontFamily: sans, fontSize: FS.sm, fontWeight: 900 }}>
           {doc.orientationKind === 'sale' ? doc.title : `The Peace of ${loser}`}
         </span>
-        <span style={{ color: MUTED, fontFamily: sans, fontSize: FS.pico, fontWeight: 700 }}>
+        <span style={{ color: MUTED, fontFamily: sans, fontSize: chromeFontSize(FS.pico, mobile), fontWeight: 700 }}>
           {doc.orientationKind === 'sale' ? `${victor} holds it now` : `under ${victor}'s terms`}
         </span>
         <span style={{ marginLeft: 'auto' }}><StateChip state={doc.complianceState} /></span>
       </div>
 
       {doc.mediatorLine && (
-        <div style={{ display: 'flex', gap: 6, alignItems: 'flex-start', color: SECOND, fontFamily: sans, fontSize: FS.xxs, lineHeight: 1.4 }}>
+        <div style={{ display: 'flex', gap: 6, alignItems: 'flex-start', color: SECOND, fontFamily: sans, fontSize: proseFontSize(FS.xxs, mobile), lineHeight: 1.4 }}>
           <HeartHandshake size={12} color={GREEN} style={{ flexShrink: 0, marginTop: 1 }} />
           <span>{doc.mediatorLine}</span>
         </div>
       )}
       {doc.coalitionLine && (
-        <div style={{ color: doc.separateExit ? RED : SECOND, fontFamily: sans, fontSize: FS.xxs, lineHeight: 1.4 }}>
+        <div style={{ color: doc.separateExit ? RED : SECOND, fontFamily: sans, fontSize: proseFontSize(FS.xxs, mobile), lineHeight: 1.4 }}>
           {doc.coalitionLine}
         </div>
       )}
@@ -114,21 +119,21 @@ function TreatyCard({ doc, nameById, worldState, includeGroundTruth }) {
       </ul>
 
       {doc.frayingLine && (
-        <div style={{ color: RED, fontFamily: sans, fontSize: FS.xxs, fontWeight: 700 }}>{doc.frayingLine}</div>
+        <div style={{ color: RED, fontFamily: sans, fontSize: chromeFontSize(FS.xxs, mobile), fontWeight: 700 }}>{doc.frayingLine}</div>
       )}
       {doc.summary && (
-        <div style={{ color: MUTED, fontFamily: sans, fontSize: FS.pico, fontStyle: 'italic' }}>{doc.summary.line}</div>
+        <div style={{ color: MUTED, fontFamily: sans, fontSize: chromeFontSize(FS.pico, mobile), fontStyle: 'italic' }}>{doc.summary.line}</div>
       )}
       {/* GR-0 the longevity voice — null while the lifecycle-voice flag is dark. */}
       {doc.ageLine && (
-        <div data-testid="treaty-age-line" style={{ color: SECOND, fontFamily: sans, fontSize: FS.pico, fontStyle: 'italic' }}>{doc.ageLine}</div>
+        <div data-testid="treaty-age-line" style={{ color: SECOND, fontFamily: sans, fontSize: chromeFontSize(FS.pico, mobile), fontStyle: 'italic' }}>{doc.ageLine}</div>
       )}
       {/* GR-4b-iii-b the open-question dossier line — one per pending succession question
           standing against this instrument, in the read-model's canonical order. Empty until
           a question is actually open. NO WASH and NO native tooltip: the muted italic
           register is the age line's, verbatim. */}
       {doc.successionLines.map((line, index) => (
-        <div key={`${index}:${line}`} data-testid="treaty-succession-question-line" style={{ color: SECOND, fontFamily: sans, fontSize: FS.pico, fontStyle: 'italic' }}>{line}</div>
+        <div key={`${index}:${line}`} data-testid="treaty-succession-question-line" style={{ color: SECOND, fontFamily: sans, fontSize: chromeFontSize(FS.pico, mobile), fontStyle: 'italic' }}>{line}</div>
       ))}
       {/* GR-0 the DM true-state chip: what the ledger knows and the owed court does not.
           Rendered ONLY for a ground-truth viewer, and only where the truth diverges.
@@ -137,7 +142,7 @@ function TreatyCard({ doc, nameById, worldState, includeGroundTruth }) {
           ratchet hunts. The amber RULE and the amber INK carry the DM-only signal on their
           own — the WorldMapToolbar ResumeChip cure (C5-a·iii), applied to a prose plate. */}
       {trueStateChip && (
-        <div data-testid="treaty-true-state-chip" style={{ color: AMBER, border: `1px solid ${AMBER}`, fontFamily: sans, fontSize: FS.pico, fontWeight: 700, padding: '3px 7px' }}>{trueStateChip}</div>
+        <div data-testid="treaty-true-state-chip" style={{ color: AMBER, border: `1px solid ${AMBER}`, fontFamily: sans, fontSize: chromeFontSize(FS.pico, mobile), fontWeight: 700, padding: '3px 7px' }}>{trueStateChip}</div>
       )}
       {/* ambition-fit-1: the dramatic-irony Reasons lane — the war reasons pressing
           this pair apart and the peace reasons pulling them back, receipt by receipt.

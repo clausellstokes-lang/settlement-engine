@@ -102,7 +102,7 @@ import {
   _resolveEntity, pickleCampaignState,
   stripImpairmentsForEvent, computePendingSuccession,
   uncanonizeTombstoneKey, destroySettlementConfirmRefusal, unknownSavedSettlementPatchKeys,
-  sectionLocked, foldRegeneratedRoster, persistLocksToActiveSave, planTimelineUndo, bindActiveSaveId } from './settlementSliceHelpers.js';
+  sectionLocked, foldRegeneratedRoster, planTimelineUndo, bindActiveSaveId, claimSettlementForAccount } from './settlementSliceHelpers.js';
 // Track K §C1 — the ActionResult envelope. The five canon-path actions below
 // (applyEvent / undoLastEvent / recordSnapshot / revertToSnapshot /
 // destroySavedSettlement) return this SUPERSET shape. See src/store/actionResult.js
@@ -135,7 +135,7 @@ import {
 // version-history action bodies moved to two companions. Every action KEY still
 // lives on the slice literal below — only the bodies relocated.
 import {
-  _dimsSummary, rippleEventThroughWorld, activateFaithIfEntitled, resetSettlementIdentity,
+  _dimsSummary, rippleEventThroughWorld, activateFaithIfEntitled, resetSettlementIdentity, retiringDraftOf,
 } from './settlementLifecycleHelpers.js';
 import {
   recordSnapshotAction, revertToSnapshotAction,
@@ -157,7 +157,34 @@ export {
 
 export const createSettlementSlice = (set, get) => ({
   // ── State ──────────────────────────────────────────────────────────────────
-  settlement:    null,   // current generated settlement object
+  // `settlement` is the current generated settlement object.
+  //
+  // `draftOrigin` beside it is WHOSE SESSION PUT IT THERE — 'anon' or 'account' —
+  // and it is the whole anonymous-draft persistence rule
+  // (store/persistProjection.js): the device remembers a world born anonymous
+  // while nobody is signed in, and nothing else. Set at the birth
+  // (settlementGenerateAction), DERIVED on every rehydrate (persistMerge: 'anon'
+  // iff that boot adopted the envelope), re-stamped by claimSettlementForAccount
+  // when a signed-in person saves, opens or canonizes the world, and nulled by
+  // resetSettlementIdentity on every swap — so a door that installs a world and
+  // answers nothing leaves `null`, which is not 'anon', and fails CLOSED.
+  //
+  // ⛔ NOT A KEY ON THE SETTLEMENT (ODQ §934.8): the world is persisted into saves
+  // and read by the observed-shape corpus, so a session fact stamped on it would
+  // ride into every row and every shape register — and the generated object would
+  // no longer be byte-identical to the pipeline's. ⛔ AND NOT PERSISTED: it is
+  // derived on rehydrate, and a derived session fact that persisted itself would
+  // outlive the session it describes. It REPLACED two claims that sat on this line
+  // (`restoredAnonDraft`, `signedInWorld`), each of which had to be raised,
+  // retracted, stashed across an OAuth redirect and spent at the boot resolution.
+  //
+  // `retiringDraftIdentity` is the third member of this line and the shortest-lived:
+  // the identity of the world the LAST swap took out of the editor, stamped by
+  // resetSettlementIdentity and read by the same persistence rule. A clear ends with
+  // an empty editor, so without it the projection has nothing to compare and the
+  // device keeps a draft the visitor just threw away. Session-only, re-stamped on
+  // every swap, and spent by clearSettlement immediately after its own write.
+  settlement:    null, draftOrigin: null, retiringDraftIdentity: null,
   savedSettlements: [],  // persisted to Supabase (or localStorage for anon)
   savedSettlementsLoaded: false, // true once hydrated from savesService
   savedSettlementsOwnerId: null,
@@ -191,8 +218,8 @@ export const createSettlementSlice = (set, get) => ({
   // overlay reads `pipelineHistory` to animate; the wizard hides the
   // dossier until this flag drops. Cleared on a fresh generate so the
   // reveal fires once per generation.
-  pipelineRevealActive: false,
-  dismissPipelineReveal: () => set(state => { state.pipelineRevealActive = false; }),
+  pipelineRevealActive: false, lastRefusal: null,
+  dismissPipelineReveal: () => set(state => { state.pipelineRevealActive = false; }), clearRefusal: () => set(state => { state.lastRefusal = null; }),
 
   // P103 / X-2 — Active pricing moment. usePricingMoment opens these via
   // setActivePricingMoment({ headline, body, reason }); the
@@ -349,13 +376,21 @@ export const createSettlementSlice = (set, get) => ({
   // the activated settlement, or null when a tier or cap gate refused. It was
   // already async and every caller already awaits it; the one observable
   // difference is that resolution takes a macrotask rather than a microtask.
-  generateSettlement: (seedOverride) =>
-    loadGenerateLane().then(lane => lane.generateSettlementAction(set, get, seedOverride)),
+  // ⛔ NO GATE REFUSES SILENTLY (ODQ §934.24(c)) — `lastRefusal` / `clearRefusal` are
+  // declared beside pipelineRevealActive above, FOLDED ONTO ITS LINES because this file
+  // sits exactly at its shrink-only size baseline (816 effective lines, eslint.config.js)
+  // and a baseline may never be raised to admit a new member. The lane records a
+  // registered reason id (lib/refusalReasons.js) plus its sentence's facts; a surface
+  // renders it through components/primitives/RefusalNotice.jsx where the reader clicked.
+  // SESSION-ONLY by construction — persistProjection.js names its persisted keys one by
+  // one and this is not among them — and cleared at the start of every attempt.
+  // `options` is additive; the documented contract is unchanged. `options.intent` names
+  // WHO is asking (lib/generationIntent.js).
+  generateSettlement: (seedOverride, options) =>
+    loadGenerateLane().then(lane => lane.generateSettlementAction(set, get, seedOverride, options)),
 
   setSettlement: (settlement) =>
     set(state => {
-      state.settlement = settlement;
-      state.activeSaveId = null;
       // store-5 identity hygiene: setSettlement is a NON-save load path (the
       // "Apply Saved Configuration & Regenerate" flow + a couple of reload paths).
       // Route the session residue through the single chokepoint, and reset the
@@ -363,7 +398,15 @@ export const createSettlementSlice = (set, get) => ({
       // previous view's canon phase / event log / locks / stamps — after viewing a
       // canon town, loading another here used to leave phase 'canon' (renames no-op,
       // a stale eventLog/successor ride an unrelated town).
-      resetSettlementIdentity(state);
+      //
+      // ⚠ IT RUNS FIRST, AND THAT IS LOAD-BEARING NOW: `retiringDraftOf` reads the
+      // world this door is about to replace, and one line down there is no outgoing
+      // world left to read. The chokepoint touches none of the fields this recipe
+      // assigns, so the move is behaviour-identical. A door that installs a world
+      // and passes nothing stamps null, which claims nothing (persistProjection.js).
+      resetSettlementIdentity(state, { retiring: retiringDraftOf(state) });
+      state.settlement = settlement;
+      state.activeSaveId = null;
       state.phase        = 'draft';
       state.eventLog     = [];
       state.locks        = {};
@@ -381,13 +424,21 @@ export const createSettlementSlice = (set, get) => ({
 
   clearSettlement: () =>
     set(state => {
+      // Same identity chokepoint + lifecycle reset as setSettlement (store-5): clear
+      // the view entirely, leaving no residue of the prior settlement's identity.
+      //
+      // ⭐ AND IT RUNS FIRST, BEFORE THE NULLING, BECAUSE THIS IS THE DOOR THE STAMP
+      // EXISTS FOR. A clear is the one path that ends with an EMPTY editor, so the
+      // identity `retiringDraftOf` reads here is the only thing left that can name
+      // the world being thrown away — and naming it is what lets the device let go
+      // of it too (store/persistProjection.js). Four lines down there is nothing to
+      // read. Without it a visitor who cleared their own draft got it back on the
+      // next reload.
+      resetSettlementIdentity(state, { retiring: retiringDraftOf(state) });
       state.settlement = null;
       state.activeSaveId = null;
       state.lastSeed = null;
       state.lastCtx = null;
-      // Same identity chokepoint + lifecycle reset as setSettlement (store-5): clear
-      // the view entirely, leaving no residue of the prior settlement's identity.
-      resetSettlementIdentity(state);
       state.phase        = 'draft';
       state.eventLog     = [];
       state.locks        = {};
@@ -406,11 +457,13 @@ export const createSettlementSlice = (set, get) => ({
     const state = get();
     const { settlement, config, locks } = state;
     if (!settlement) return;
-    // LOCKS ENGINE Phase A — a whole-section lock is the user's standing "do not
-    // reroll this". The UI disables the button and says why; this is the typed
-    // refusal behind it, so a caller that bypassed the button gets a reason
-    // instead of a silent reroll. Refusal-only envelope, the updateSavedSettlement
-    // shape (this action's success path is unconverted and stays so).
+    // LOCKS ENGINE Phase A — a whole-section lock was the user's standing "do not
+    // reroll this", and this was the typed refusal behind the disabled button.
+    // ⛔ DORMANT since owner order 2026-09-17 ("remove the other padlocks"): the
+    // controls and the store's `setLock` writer are retired, and `sectionLocked`
+    // reads the honoured view (domain/locksPreservation.js normalizeLocks), which
+    // reads no lock, so a `section_locked` refusal cannot fire. The call stays as the
+    // one seat a veto re-arms. Refusal-only envelope, the updateSavedSettlement shape.
     if (sectionLocked(locks, section)) return makeActionResult('regenSection', { ok: false, before: { reason: 'section_locked', section } });
     // state-lifecycle-4: CANON identity lock — canon freezes the roster's identity
     // (renameNPC/renameFaction already guard on this). A reroll of the whole NPC set
@@ -844,6 +897,9 @@ export const createSettlementSlice = (set, get) => ({
         state.eventLog = [];
       }
       state.canonizedAt = new Date().toISOString();
+      // Making a world canon while signed in is a deliberate act of ownership, so
+      // it stops being this device's anonymous draft (settlementSliceHelpers.js).
+      claimSettlementForAccount(state);
     });
     // Persist so canon sticks across reload and the library reflects it.
     get().persistActiveSaveLifecycle?.();
@@ -973,29 +1029,6 @@ export const createSettlementSlice = (set, get) => ({
       }).catch(() => { /* never block an export */ });
     }
   },
-
-  /**
-   * Set (or, with a falsy/empty value, remove) one lock — the user's standing
-   * "do not reroll this". `key` is a section name ('npcs', 'history') or an
-   * identity/geography flag; the value is `true`, or an array of entity ids.
-   *
-   * THE PERSIST (atlas store-ops-a gap 10): the lock map rides inside
-   * campaignState, so before this it reached the cloud only by PIGGYBACK — when
-   * some OTHER canon-path write happened to pickle the slice. Set a lock, reload
-   * without touching anything else, and it was gone. Both verbs now write through
-   * the same path regenSection uses; see persistLocksToActiveSave.
-   */
-  setLock: (key, value) => {
-    // Flat rather than braced: this file sits exactly at its frozen max-lines
-    // ceiling, so the persist below is funded from the branch's own bytes.
-    set(state => {
-      if (value === false || value === undefined || (Array.isArray(value) && value.length === 0)) delete state.locks[key];
-      else state.locks[key] = value;
-    });
-    return persistLocksToActiveSave(get, set);
-  },
-
-  clearLocks: () => { set(state => { state.locks = {}; }); return persistLocksToActiveSave(get, set); },
 
   /**
    * Run the event preview without committing. UI shows the result as a
@@ -1550,9 +1583,7 @@ export const createSettlementSlice = (set, get) => ({
     // "the gods were always there, latent in the seed". Idempotent (a save that
     // already carries live embeds is unchanged) + tier-gated (free/anon load the
     // save verbatim, faith latent + private).
-    const loadedSettlement = save.settlement
-      ? activateFaithIfEntitled(save.settlement, get)
-      : null;
+    const loadedSettlement = save.settlement ? activateFaithIfEntitled(save.settlement, get) : null;
     state.settlement     = loadedSettlement || state.settlement;
     state.activeSaveId   = save.id || null;
     // Recover the seed from the save (row column first, then the blob's stamped
@@ -1575,7 +1606,18 @@ export const createSettlementSlice = (set, get) => ({
     // draftVersionHistory is a sibling to the DRAFT settlement only — a loaded save
     // uses its own entry.versionHistory. Milestones on a reloaded save re-derive a
     // stable generation id from the save's seed + generatedAt.
+    // No `retiring` claim: this door always leaves a world IN the editor, and the
+    // projection reads the claim only when the editor is empty, so one raised here
+    // could never be spent. The default null is the fail-closed answer and it also
+    // clears whatever the previous swap stamped.
     resetSettlementIdentity(state, { preservePendingEdits: true });
+    // A world opened OUT OF THE LIBRARY is the account's. ⚠ IT MUST RUN AFTER the
+    // chokepoint above, which nulls the origin on every swap; claiming before it
+    // would be wiped a line later. Without the claim a signed-in keeper who opens a
+    // save and then signs out would have their own saved world stashed as this
+    // device's anonymous draft — the leak the retired `signedInWorld` bar existed
+    // to stop (settlementSliceHelpers.js).
+    claimSettlementForAccount(state);
     // The refined narrative lives at save.aiData.aiSettlement, not a flat
     // save.aiSettlement. Reading the wrong path nulled the narrative on every
     // reload (it ran right after hydrateAiFromSave had loaded it correctly),

@@ -19,16 +19,24 @@ import {
   sans,
   serif_,
 } from '../theme.js';
+import useIsMobile from '../../hooks/useIsMobile.js';
+import { chromeFontSize, proseFontSize } from '../../design/proseScale.js';
 
-export const reconciliationFieldStyle = {
+/**
+ * The reconciliation form's one control style, as a function of the viewport: the
+ * field is chrome, so it takes the phone chrome floor below the breakpoint and its
+ * own step above it.
+ * @param {boolean} mobile the viewport flag, from `useIsMobile()`
+ */
+export const reconciliationFieldStyle = (mobile) => ({
   minHeight: 34,
   padding: `${SP.xs}px ${SP.sm}px`,
   border: `1px solid ${BORDER}`,
   background: CARD,
   color: INK,
   fontFamily: sans,
-  fontSize: FS.xs,
-};
+  fontSize: chromeFontSize(FS.xs, mobile),
+});
 
 function choiceValue(proposal) {
   if (!proposal.decision) return '';
@@ -53,6 +61,7 @@ export function ImportProposalRow({
   unsupported,
   onChoose,
 }) {
+  const mobile = useIsMobile();
   const decisionId = `reconciliation-decision-${proposal.proposalId}`;
   return (
     <li style={{
@@ -74,7 +83,7 @@ export function ImportProposalRow({
           {proposal.sourceName}
         </strong>
         {proposal.sourceTier && (
-          <span style={{ color: MUTED, fontFamily: sans, fontSize: FS.xxs }}>
+          <span style={{ color: MUTED, fontFamily: sans, fontSize: chromeFontSize(FS.xxs, mobile) }}>
             {proposal.sourceTier}
           </span>
         )}
@@ -82,7 +91,7 @@ export function ImportProposalRow({
           marginLeft: 'auto',
           color: MUTED,
           fontFamily: sans,
-          fontSize: FS.xxs,
+          fontSize: chromeFontSize(FS.xxs, mobile),
         }}>
           Source ID: {proposal.sourceSaveId || 'none'}
         </span>
@@ -95,7 +104,7 @@ export function ImportProposalRow({
         <span style={{
           color: BODY,
           fontFamily: sans,
-          fontSize: FS.xs,
+          fontSize: chromeFontSize(FS.xs, mobile),
           fontWeight: 700,
         }}>
           What should happen?
@@ -105,7 +114,7 @@ export function ImportProposalRow({
           aria-label={`Decision for ${proposal.sourceName}`}
           value={choiceValue(proposal)}
           onChange={event => onChoose(event.target.value)}
-          style={reconciliationFieldStyle}
+          style={reconciliationFieldStyle(mobile)}
         >
           <option value="">Choose an action…</option>
           <option value="create">Create a new settlement and add it</option>
@@ -124,7 +133,7 @@ export function ImportProposalRow({
           margin: 0,
           color: BODY,
           fontFamily: sans,
-          fontSize: FS.xxs,
+          fontSize: proseFontSize(FS.xxs, mobile),
           lineHeight: 1.45,
         }}>
           Review evidence: {conflict.message}
@@ -135,7 +144,7 @@ export function ImportProposalRow({
           margin: 0,
           color: MUTED,
           fontFamily: sans,
-          fontSize: FS.xxs,
+          fontSize: proseFontSize(FS.xxs, mobile),
           lineHeight: 1.45,
         }}>
           Not applied in this pass: {issue.message}
@@ -146,6 +155,7 @@ export function ImportProposalRow({
 }
 
 export function ImportPreviewFacts({ preview }) {
+  const mobile = useIsMobile();
   const facts = [
     ['New settlements', preview.effects.settlementsToCreate],
     ['Existing settlements reused', preview.effects.existingSettlementsToReuse],
@@ -172,7 +182,7 @@ export function ImportPreviewFacts({ preview }) {
             borderBottom: `1px solid ${BORDER}`,
             color: BODY,
             fontFamily: sans,
-            fontSize: FS.xs,
+            fontSize: chromeFontSize(FS.xs, mobile),
           }}>
             {label}
           </dt>
@@ -182,7 +192,7 @@ export function ImportPreviewFacts({ preview }) {
             borderBottom: `1px solid ${BORDER}`,
             color: INK,
             fontFamily: sans,
-            fontSize: FS.xs,
+            fontSize: chromeFontSize(FS.xs, mobile),
             fontWeight: 800,
             textAlign: 'right',
           }}>
@@ -195,6 +205,7 @@ export function ImportPreviewFacts({ preview }) {
 }
 
 export function ImportMembershipTransfers({ session }) {
+  const mobile = useIsMobile();
   const transfers = session.preview?.membershipTransfers || [];
   if (transfers.length === 0) return null;
   const proposals = new Map(
@@ -207,7 +218,7 @@ export function ImportMembershipTransfers({ session }) {
       padding: SP.sm,
       color: BODY,
       fontFamily: sans,
-      fontSize: FS.xs,
+      fontSize: proseFontSize(FS.xs, mobile),
       lineHeight: 1.45,
     }}>
       <strong style={{ color: INK }}>Exclusive membership changes</strong>

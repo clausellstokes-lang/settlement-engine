@@ -7,7 +7,9 @@
  * count and pitches the SIMULATION (advance time / campaigns / custom content) as
  * the premium product — never settlement size, never "more saves" alone.
  *
- *   - anon    → "Sign in to save" (anon has 0 slots).
+ *   - anon    → "Sign in free to save up to N settlements" (anon has 0 slots; N is
+ *               the FREE tier's derived cap, since the line is a promise about the
+ *               account this visitor does not have yet, not about their own quota).
  *   - free    → "N of 3 saves" meter + the upgrade card naming the real product.
  *   - premium → "Unlimited saves" + a quiet "living world unlocked" line; no meter.
  *
@@ -18,8 +20,13 @@
  */
 
 import Button from '../primitives/Button.jsx';
+import AvailableAtLaunchPill from '../primitives/AvailableAtLaunchPill.jsx';
 import { GOLD, GOLD_BG, INK, BODY, GOLD_TXT, FS, sans, swatch } from '../theme.js';
 import { getTierDisplayName } from '../../config/pricing.js';
+import { FREE_SAVE_LIMIT } from '../../config/tierFacts.js';
+import { purchasesOpen } from '../../lib/launchGate.js';
+import useIsMobile from '../../hooks/useIsMobile.js';
+import { chromeFontSize } from '../../design/proseScale.js';
 
 // The premium pitch — names the SIMULATION, not size or saves. Single source so
 // the test can assert the copy references the simulation and never a size cap.
@@ -35,8 +42,12 @@ export const PREMIUM_PITCH = 'Unlock the simulation: advance time, run campaigns
  * }} props
  */
 export default function SaveQuotaMeter({ tier, used, max, onUpgrade, onSignIn }) {
+  const mobile = useIsMobile();
   const isPremium = tier === 'premium' || max === Infinity;
   const isAnon = tier === 'anon';
+  // Pre-launch lockout (lib/launchGate.js): Upgrade is a purchase control, so it
+  // renders disabled and wears the pill until purchases open. Sign in stays live.
+  const purchasesAreOpen = purchasesOpen();
 
   return (
     <div
@@ -47,13 +58,21 @@ export default function SaveQuotaMeter({ tier, used, max, onUpgrade, onSignIn })
         // add to the list's box-soup or out-rank the page header above it.
         display: 'flex', alignItems: 'center', gap: 12, flexWrap: 'wrap',
         padding: '7px 12px', background: swatch['#FBF5E6'],
-        fontFamily: sans, fontSize: FS.xs, color: INK,
+        fontFamily: sans, fontSize: chromeFontSize(FS.xs, mobile), color: INK,
       }}
     >
       <div style={{ display: 'flex', alignItems: 'center', gap: 8, flex: 1, minWidth: 200 }}>
         {isAnon ? (
+          // The anon line used to say only "Sign in to save … keep your
+          // settlements across sessions": true, but silent about the two facts
+          // that decide whether a visitor bothers — that the account is FREE and
+          // that it holds a bounded number of settlements. Both are named here,
+          // and the number is the DERIVED free-tier cap (config/tierFacts.js,
+          // pinned to TIER_GATE.free.maxSaves by the contract test), never a
+          // hand-typed 3. `max` is this viewer's own cap and is 0 for anon, so it
+          // cannot be the source of the promise being made about an account.
           <span data-testid="quota-label" style={{ color: BODY }}>
-            <strong style={{ color: INK }}>Sign in to save</strong>. Keep your settlements across sessions.
+            <strong style={{ color: INK }}>Sign in free</strong> to save up to {FREE_SAVE_LIMIT} settlements and keep them across sessions.
           </span>
         ) : isPremium ? (
           <span data-testid="quota-label" style={{ color: BODY }}>
@@ -110,13 +129,14 @@ export default function SaveQuotaMeter({ tier, used, max, onUpgrade, onSignIn })
             // borderless meter strip re-introduced a box-on-tint and undercut the
             // strip's demotion (P5). GOLD_BG fill + bold GOLD_TXT carry it,
             // matching the card pips' tint-only pattern.
-            display: 'inline-flex', alignItems: 'center', gap: 4, fontSize: FS.xs, color: GOLD_TXT,
+            display: 'inline-flex', alignItems: 'center', gap: 4, fontSize: chromeFontSize(FS.xs, mobile), color: GOLD_TXT,
             fontWeight: 700, background: GOLD_BG, padding: '2px 8px',
           }}>
             {PREMIUM_PITCH}
           </span>
-          <Button variant="gold" size="sm" onClick={() => onUpgrade?.()}>
+          <Button variant="gold" size="sm" disabled={!purchasesAreOpen} onClick={() => onUpgrade?.()} style={purchasesAreOpen ? undefined : { flexWrap: 'wrap' }}>
             Upgrade
+            {!purchasesAreOpen && <AvailableAtLaunchPill style={{ marginLeft: 6 }} />}
           </Button>
         </div>
       ) : null}

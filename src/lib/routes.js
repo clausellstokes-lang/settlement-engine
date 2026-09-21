@@ -46,16 +46,17 @@ export const ROUTES = Object.freeze([
   // marketing CTAs); signed-in members are sent to /create — via App's front-door
   // effect (it rewrites only '/', not deep links).
   //
-  // NO `nav` BLOCK — OWNER DIRECTIVE, 2026-08-03 (THE FLETCHED RIBBON, lane FL).
-  // Welcome was the ribbon's leftmost tab until the ribbon became the back half of
-  // an arrow: the WORDMARK is the home button on both surfaces now (App.jsx's brand
-  // block, accessible name "SettlementForge home"), so a Welcome tab would be a
-  // second door to the same room standing where the fletching goes. The ROUTE is
+  // NO `nav` BLOCK: OWNER DIRECTIVE, 2026-08-03 (lane FL), and still true of the
+  // painted arrow header that replaced the ribbon (owner orders 2026-09-16). The
+  // arrow's nock and logo plate are the home control at every width
+  // (components/nav/ArrowHeader.jsx, accessible name "SettlementForge home"), and the
+  // painting has six words, none of them Welcome, so a Welcome tab would be a second
+  // door to the same room with no painted word to stand on. The ROUTE is
   // untouched — /home still resolves, still titles, still canonicalizes from '/' —
   // only its top-nav metadata is retired, which is what removes it from NAV and so
   // from every surface that derives from NAV. The mobile bottom nav never carried it
-  // (App.jsx MOBILE_NAV_PRIORITY names five ids, none of them 'home'), so this is a
-  // desktop-only change by construction rather than by a second exclusion list. One
+  // (it derives from NAV too — `barNav` below), so this is a desktop-only change by
+  // construction rather than by a second exclusion list. One
   // consequence is deliberate: on the landing page NO nav cell is active, because no
   // cell claims that view.
   { view: 'home',                  path: '/home',                  title: 'Welcome' },
@@ -78,6 +79,10 @@ export const ROUTES = Object.freeze([
   // already in the world 404s or lands on the wrong half.
   { view: 'about',                 path: '/about',                 title: 'About' },
   { view: 'about-what-this-is',    path: '/about/what-this-is',    title: 'What this Is',                  nav: { label: 'About',      order: 70 } },
+  // The Practical Guide. FOOTER-LINKED as of 2026-09-18 (components/footer/
+  // LegalRibbonRow.jsx, key footer.guide): before that it had no inbound link
+  // anywhere outside this table, so the only ways in were the sitemap and typing
+  // the URL. No top-nav block (About holds the family's one cell), no guard.
   { view: 'about-guide',           path: '/about/guide',           title: 'Practical Guide' },
   // Retired: the pre-split About page. Kept so old links resolve; the redirect
   // effect forwards it (with its ?tab= deep link translated to an anchor).
@@ -88,19 +93,26 @@ export const ROUTES = Object.freeze([
   { view: 'pricing',               path: '/pricing',               title: 'Pricing' },
   { view: 'gallery',               path: '/gallery',               title: 'Gallery',                       nav: { label: 'Gallery',    order: 60 } },
   // THE FOUNDERS' HALL — thirty numbered chairs, all by invitation, none ever
-  // sold (docs/DESIGN_FOUNDERS_HALL.md). Public + indexable, footer-linked (no
-  // top-nav block), no guard. Lazy route; its chair read is fail-closed
+  // sold (docs/DESIGN_FOUNDERS_HALL.md). Public + indexable, no top-nav block, no
+  // guard. IT IS NOT FOOTER-LINKED, and this line said it was until 2026-09-18:
+  // its real inbound links are the About page's covenant band and the First
+  // Hundred roll, both of which name it in prose. Lazy route; the chair read is
+  // fail-closed
   // (components/founders/FoundersHallPage.jsx). The PATH stays /founders on
   // purpose — the page's design changed, its address did not, so every link and
   // index entry already in the world still lands.
   { view: 'founders',              path: '/founders',              title: "The Founders' Hall" },
   // The First Hundred: the founding-cohort honor roll (an unpriced acknowledgment of
-  // early members, distinct from the paid Founder seats). Public + indexable, no
-  // top-nav block, no guard. Reached by direct link + the sitemap (it links out to
-  // the Founders page). Lazy route; renders only the committed opted-in roll.
+  // early members, distinct from the Founder chairs, which are given and never sold).
+  // Public + indexable, no top-nav block, no guard. LINKED FROM THE FOUNDERS' HALL
+  // since 2026-09-18 — the cross-link ran one way (this page named the Hall, the Hall
+  // said nothing back), so the roll had no inbound link outside this table. Lazy
+  // route; renders only the committed opted-in roll.
   { view: 'first-hundred',         path: '/first-hundred',         title: 'The First Hundred' },
   // The public roadmap: rendered only from the committed vNext ledger. Public +
-  // indexable, no top-nav block, no guard. Lazy route.
+  // indexable, no top-nav block, no guard. FOOTER-LINKED as of 2026-09-18
+  // (LegalRibbonRow, key footer.roadmap); before that it had no inbound link
+  // outside this table. Lazy route.
   { view: 'roadmap',               path: '/roadmap',               title: 'Roadmap' },
   // THE SEED POST (V-13): a shareable world lives at /world/<code>. Public + no
   // guard — the code regenerates the identical world client-side (no server
@@ -114,14 +126,21 @@ export const ROUTES = Object.freeze([
   { view: 'privacy',               path: '/privacy',               title: 'Privacy Policy' },
   { view: 'refunds',               path: '/refunds',               title: 'Refunds' },
   // R-7/R-9 — the portability covenant + the contradiction bounty. Public +
-  // indexable trust pages (footer-linked, no top-nav, no guard); content is
-  // claims-parity-bound to real product capabilities (components/legal/*).
+  // indexable trust pages (no top-nav, no guard); content is claims-parity-bound
+  // to real product capabilities (components/legal/*). NEITHER IS FOOTER-LINKED,
+  // and this line said both were until 2026-09-18, when they got the real doors it
+  // was describing: /covenant from the Terms "Your content" section and the About
+  // page's lock-in promise, /bounty from the covenant's no-lock-in section and the
+  // About page's closing invitation.
   { view: 'covenant',              path: '/covenant',              title: 'Portability Covenant' },
   { view: 'bounty',                path: '/bounty',                title: 'Contradiction Bounty' },
   // V-18 — the DM Screen: an at-the-table DM tool (letter + dossier +
   // ledger + auspice) with a player-safe face. Reads the active settlement/
   // campaign; degrades to a placeholder when nothing is open. Noindex app tool
-  // (in NOINDEX_VIEWS: seo.js + generate-sitemap.mjs), no guard.
+  // (in NOINDEX_VIEWS: seo.js + generate-sitemap.mjs), no guard — noindex because
+  // it has no stable content of its own to index, NOT because it is internal. It
+  // is a real DM-facing surface, and the Practical Guide's navigation reference
+  // has linked it since 2026-09-18 (it had no inbound link before that).
   { view: 'screen',                path: '/screen',                title: 'The DM Screen' },
   // The dedicated competitor pages were deleted; App's redirect effect bounces
   // every `compare*` view to the "How We Compare" section of What this Is
@@ -214,21 +233,64 @@ export const NAV = Object.freeze(
  *
  * THE ADJACENCY GUARD (why this is a relation, not an ordering): the chrome
  * draws its flow mark ONLY when the successor named here is the tab actually
- * rendered next ON THAT SURFACE. The desktop ribbon runs Create · Library ·
- * Realm, so both marks draw; the mobile bottom nav omits Realm (Gallery follows
- * Library there), so Library draws none. An arrow pointing at the wrong
- * neighbour teaches a false lesson about where the work goes.
- *
- * THE FLETCHING READS THIS TOO (owner directive 2026-08-03). The desktop ribbon's
- * leather-brown band is the maximal NAV run whose consecutive pairs are declared
- * here — so the band's membership is DERIVED from the flow, never listed in the
- * chrome. See components/nav/NavRibbon.jsx and components/nav/NavFlowArrow.jsx.
+ * rendered next ON THAT SURFACE. On the TABLET bar (640 to 1023 px) that is
+ * Create · Library · Realm, so both marks draw. On the PHONE the Realm is not a
+ * destination at all (§934.26, `barNav` below), so Library's successor there is
+ * Compendium and the second mark correctly does not draw — the guard handles the
+ * owner's order with no edit, which is why it is written as a relation. An arrow
+ * pointing at the wrong neighbour teaches a false lesson about where the work
+ * goes, and a hairline after the working pair takes its place. The painted arrow
+ * header (1024 px and up) draws no flow mark: its words are the owner's painting,
+ * and NAV's order is pinned to the painted order instead
+ * (tests/components/arrowGeometry.test.js). See components/nav/NavFlowArrow.jsx.
  * @type {Readonly<Record<string, string>>}
  */
 export const NAV_FLOW = Object.freeze({
   generate: 'settlements',
   settlements: 'realm',
 });
+
+/**
+ * ⛔ WHAT THE PHONE'S BAR LEAVES OUT (the owner, ODQ §934.26: "I would remove the realm
+ * from the phone. No realm view for phone but it can be viewed on a tablet").
+ *
+ * The Realm is a desktop map-editing canvas. Below the estate's mobile breakpoint it is
+ * not a destination at all — no seat in the bar, no plate in the header — and /realm
+ * answers with an honest notice instead (components/map/RealmPhoneNotice.jsx). From the
+ * breakpoint up (tablet, then desktop) it is a first-class destination again.
+ *
+ * SIGN IN IS NOT LISTED HERE AND CANNOT BE: the owner's order says the bar filters "Realm
+ * and Sign In", and Sign In is filtered BY CONSTRUCTION — it is an auth route with no
+ * `nav` block, so it never enters NAV in the first place. The walker asserts that rather
+ * than trusting this comment (tests/lint/phoneBarOrder.walker.test.js).
+ * @type {ReadonlyArray<string>}
+ */
+export const PHONE_NAV_EXCLUDED = Object.freeze(['realm']);
+
+/**
+ * ⭐ THE BOTTOM BAR'S DESTINATIONS, FROM THE ONE ORDER THERE IS.
+ *
+ * The owner's §934.26 ADDENDUM: "i swap compendium before gallery because that is also
+ * how it is on the desktop arrow" — one order everywhere, built from ONE constant so the
+ * painted header and the phone bar cannot drift. That constant is NAV (above), which is
+ * itself derived from the ROUTES table's `nav.order` and is what the painting's hit
+ * regions are pinned to (tests/components/arrowGeometry.test.js).
+ *
+ * ⛔ THIS REPLACED AN EXPLICIT PRIORITY ARRAY IN App.jsx. `MOBILE_NAV_PRIORITY` named
+ * five or six ids in a hand-kept order and sliced them; it existed so that About, and
+ * only About, was the seat evicted at the five-seat cap. With the Realm off the phone
+ * there is nothing to evict — five destinations for five seats — so the eviction device
+ * and the second order it carried both go, and the drift they made possible goes with
+ * them. Its one visible consequence is declared: the TABLET's bar now reads Compendium
+ * before Gallery, as the painting does, where the retired priority array had them the
+ * other way round.
+ *
+ * @param {boolean} phone true below the estate's mobile breakpoint (useIsMobile()).
+ * @returns {ReadonlyArray<{ id: string, label: string, order: number }>}
+ */
+export function barNav(phone) {
+  return phone ? NAV.filter((item) => !PHONE_NAV_EXCLUDED.includes(item.id)) : NAV;
+}
 
 /** True if `view` is a declared view id. */
 export function isKnownView(view) {
@@ -333,6 +395,25 @@ export function titleForView(view) {
   const r = VIEW_TO_ROUTE[view];
   if (!r || view === DEFAULT_VIEW) return SITE_NAME;
   return `${r.title} · ${SITE_NAME}`;
+}
+
+/**
+ * The route's own SHORT label — the table's `title` without the site suffix that
+ * `titleForView` composes for the document head.
+ *
+ * ⛔ IT EXISTS SO A SENTENCE CAN NAME A PAGE WITHOUT TYPING ITS NAME (REVIEW-P F10).
+ * The sign-in surface tells a bounced visitor which page is waiting for them, and the
+ * only honest source for that word is the routing table the guard itself reads: a
+ * hand-typed "your account" would go stale the day a route is renamed, and
+ * `titleForView` is the wrong shape there ("Account · SettlementForge" mid-sentence).
+ * `undefined` for an unknown view, so a caller must decide what to do about it rather
+ * than printing a raw view id at a reader.
+ *
+ * @param {string} view
+ * @returns {string|undefined}
+ */
+export function routeLabelForView(view) {
+  return VIEW_TO_ROUTE[view] ? VIEW_TO_ROUTE[view].title : undefined;
 }
 
 /** Guard requirement for a view ('auth' | 'elevated' | undefined). */

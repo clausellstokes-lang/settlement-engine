@@ -13,7 +13,8 @@ import {NarrativeNote} from '../NarrativeNote';
 import UnaffiliatesSection from './UnaffiliatesSection.jsx';
 import Button from '../../primitives/Button.jsx';
 import IconButton from '../../primitives/IconButton.jsx';
-import LockControls from '../../dossier/LockControls.jsx';
+import { chromeFontSize, proseFontSize } from '../../../design/proseScale.js';
+import useIsMobile from '../../../hooks/useIsMobile.js';
 
 export function NPCsTab({
   npcs,
@@ -27,6 +28,7 @@ export function NPCsTab({
   playerView = false,
   publicDossier = false,
 }) {
+  const mobile = useIsMobile();
   const [search, setSearch] = useState('');
   const [impFilter, setImpFilter] = useState('all');
   const pinnedCount = pinnedIds instanceof Set ? pinnedIds.size : 0;
@@ -89,28 +91,27 @@ export function NPCsTab({
       <div style={{display:'flex',alignItems:'center',gap:10,marginBottom:14,flexWrap:'wrap'}}>
         <div style={{flex:1}}>
           <span style={{...serif,fontSize:FS.xl,fontWeight:600,color:swatch.inkMag}}>{npcs.length} Key Figures</span>
-          <span style={{fontSize:FS.xs,color:MUTED,marginLeft:8}}>
+          <span style={{fontSize:chromeFontSize(FS.xs, mobile),color:MUTED,marginLeft:8}}>
             {highCount>0&&`${highCount} high influence · `}{modCount>0&&`${modCount} moderate`}
           </span>
         </div>
         {pinnedCount > 0 && (
           <span
             title="Pinned NPCs are protected from AI rewrites. Their goal and secret won't be rewritten."
-            style={{fontSize:FS.xxs,fontWeight:800,color:swatch.ai,background:swatch['#F0EBFF'],border:'1px solid #c8a8e8',padding:'2px 10px',letterSpacing:'0.04em',flexShrink:0,cursor:'help'}}>
-            {pinnedCount} PINNED
+            style={{fontSize:chromeFontSize(FS.xxs, mobile),fontWeight:800,color:swatch.ai,background:swatch['#F0EBFF'],border:'1px solid #c8a8e8',padding:'2px 10px',letterSpacing:'0.04em',flexShrink:0,cursor:'help',textTransform:'uppercase'}}>
+            {pinnedCount} pinned
           </span>
         )}
-        {/* The Reroll button lives INSIDE LockControls: a locked roster must never
-            render an armed Reroll, and the only way to guarantee that is to let the
-            lock own the button. This control is the WHOLE-SECTION lock (the boolean
-            form of locks.npcs). Per-CHARACTER locks (the id-array form of the same
-            key, read by domain/locksPreservation.js) are now on the roster rows
-            themselves — see NPC_LOCK_COPY in ../npcComponents.jsx. The question that
-            held that back was whether a second row toggle would blur into Pin, which
-            makes a DIFFERENT promise; the answer was to separate them by glyph,
-            colour and sentence (a bronze padlock keeping the PERSON through a
-            reroll, beside a purple pin keeping the PROSE from the AI). */}
-        <LockControls scope="npcs" onReroll={onRerollNPCs} style={{flexShrink:0}} />
+        {/* THE PADLOCKS ARE GONE (owner order 2026-09-17, "remove the other padlocks").
+            This Reroll used to live inside LockControls beside "Keep these people", and
+            each roster row carried a padlock; both are removed, and a lock a save still
+            stores is not read (domain/locksPreservation.js normalizeLocks). The Reroll
+            itself stays, offered only to a viewer who may roll the roster. */}
+        {onRerollNPCs && (
+          <Button variant="gold" size="sm" onClick={onRerollNPCs} style={{flexShrink:0}}>
+            ↺ Reroll
+          </Button>
+        )}
       </div>
 
       {/* ── SEARCH + FILTER ─────────────────────────────────────────────── */}
@@ -153,7 +154,7 @@ export function NPCsTab({
         />
       ))}
 
-      <p style={{fontSize:FS.xs,color:MUTED,marginTop:8,fontStyle:'italic',textAlign:'right'}}>
+      <p style={{fontSize:proseFontSize(FS.xs, mobile),color:MUTED,marginTop:8,fontStyle:'italic',textAlign:'right'}}>
         {npcs.length} figures · tap any card to expand
       </p>
     

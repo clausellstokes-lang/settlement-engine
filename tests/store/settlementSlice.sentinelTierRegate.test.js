@@ -56,6 +56,12 @@ const stubSlice = () => ({
   aiSourceFingerprint: null,
   showNarrative: false,
   isTierAllowed: anonTierAllowed,
+  // ⛔ THE STUB IS A FREE ACCOUNT, SO IT MUST BE ABLE TO ANSWER THE CAPABILITY QUESTION
+  // (§934.34). The generation lane's read of `canCustomizePreGeneration` FAILS CLOSED
+  // (review wave 2 car 8): a store that cannot be asked is treated as unable, and the
+  // lane then forges from DEFAULT_CONFIG — which would quietly replace this stub's own
+  // `config` and make every arm below measure the defaults instead of the fixture.
+  canCustomizePreGeneration: () => true,
   canSave: () => true,
   maxSaves: () => 50,
   setPurchaseModalOpen: () => {},

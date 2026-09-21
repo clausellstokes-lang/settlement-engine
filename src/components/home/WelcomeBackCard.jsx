@@ -15,6 +15,8 @@
  */
 
 import { useState } from 'react';
+import useIsMobile from '../../hooks/useIsMobile.js';
+import { chromeFontSize } from '../../design/proseScale.js';
 import { useStore } from '../../store/index.js';
 import { flag } from '../../lib/flags.js';
 import { useReturnVisit } from '../../hooks/useReturnVisit.js';
@@ -29,6 +31,9 @@ import Button from '../primitives/Button.jsx';
 const WHISPER_ID = 'home_welcome_back';
 
 export default function WelcomeBackCard({ onOpen, onForge }) {
+  // ABOVE the five early returns below — a hook after one of them is a hook-order bug
+  // the first dismissal would trip.
+  const mobile = useIsMobile();
   const tier = useStore(s => s.auth.tier);
   const displayName = useStore(s => s.auth.displayName);
   const { isReturn, daysSinceLastVisit, lastSettlement } = useReturnVisit();
@@ -73,7 +78,7 @@ export default function WelcomeBackCard({ onOpen, onForge }) {
           style={{ position: 'absolute', top: SP.sm, right: SP.sm }}
         />
         <div style={{
-          fontSize: FS.xs, fontWeight: 700, letterSpacing: '0.12em',
+          fontSize: chromeFontSize(FS.xs, mobile), fontWeight: 700, letterSpacing: '0.12em',
           textTransform: 'uppercase', color: GOLD_DEEP,
         }}>
           {t('hero.welcomeBack.eyebrow') || 'Welcome back'}

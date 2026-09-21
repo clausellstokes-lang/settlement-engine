@@ -47,7 +47,7 @@
  * @enforced-by tests/domain/envoyDiplomacy.test.js + tests/domain/espionageMission.test.js
  */
 import { compareCodepoint } from '../deterministicSort.js';
-import { importanceWeight } from '../entities/npcs.js';
+import { NPC_UNAVAILABLE_STATUSES, importanceWeight } from '../entities/npcs.js';
 import { isOffStage } from '../roads/state.js';
 import { envoyErrandsOf } from './envoyErrandRecords.js';
 import { durableIdForRoster, npcLedgerOf } from './npcLedger.js';
@@ -61,6 +61,19 @@ import { durableIdForRoster, npcLedgerOf } from './npcLedger.js';
  * produces the identical separator and cannot be mistranscribed.
  */
 const IDENTITY_SEPARATOR = String.fromCharCode(0);
+
+/**
+ * THE STATUSES THAT REFUSE A DISPATCH — the availability union plus 'missing', which is
+ * absence from the settlement rather than inability to act.
+ *
+ * ⛔ READ, NEVER SPELLED (ODQ §934.47 addendum 5). This list used to spell 'killed' and
+ * 'imprisoned', which are NOT NpcStatus members at all: they belong to the errand loss-cause
+ * and stasis-reason vocabularies, and no writer has ever assigned either to a `.status`.
+ * Reading the union means the day a member joins it, the dispatch refusal follows without an
+ * edit here — the drift J-WR-10 forbids, closed. ⚠ 'removed' joins the refusal by that read;
+ * measured inert, because no writer in src/ assigns 'removed' to an NPC's `.status`.
+ */
+const UNAVAILABLE_STATUSES = new Set([...NPC_UNAVAILABLE_STATUSES, 'missing']);
 
 /** @param {unknown} value @returns {Record<string, unknown>} */
 function asObject(value) {
@@ -87,15 +100,15 @@ export function rosterIdentity(npc) {
  * A person already walking another lane cannot stand in two places.
  *
  * ⚠ THE ONE SPELLING OF THE DISPATCH REFUSAL, and every casting law reads it. Adding a
- * status here refuses that person to the diplomatic draw AND the covert one in the same
- * edit, which is the whole reason it is exported rather than re-derived.
+ * status to the union above refuses that person to the diplomatic draw AND the covert one in
+ * the same edit, which is the whole reason it is exported rather than re-derived.
  *
  * @param {Record<string, unknown>} npc @returns {boolean}
  */
 export function rosterPersonAvailable(npc) {
   if (isOffStage(npc)) return false;
   const status = text(npc.status).toLowerCase();
-  if (['dead', 'killed', 'missing', 'exiled', 'imprisoned'].includes(status)) return false;
+  if (UNAVAILABLE_STATUSES.has(status)) return false;
   const whereabouts = asObject(npc.whereabouts);
   const travelState = text(whereabouts.state || whereabouts.phase).toLowerCase();
   return !['outbound', 'travelling', 'traveling', 'returning', 'visiting', 'hostage'].includes(travelState);

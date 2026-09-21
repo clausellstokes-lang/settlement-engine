@@ -24,7 +24,7 @@ import { useInstantWorldMaterialize } from '../hooks/useInstantWorldMaterialize.
 import { MAP_MODES } from '../store/mapSlice.js';
 import { computeRoadEdges } from '../lib/roadNetwork.js';
 import { isCanonSave } from '../domain/campaign/canon.js';
-import { SP, CARD, BORDER, CHROME } from './theme.js';
+import { SP, CARD, BORDER, CHROME, FOOTER_INSET, ARROW_CLEAR, BOTTOM_NAV_H } from './theme.js';
 import useIsMobile from '../hooks/useIsMobile.js';
 import { useEnsureSavedSettlementsLoaded } from '../hooks/useOwnerScopedSaves.js';
 import { useCampaignAutoResume } from '../hooks/useCampaignAutoResume.js';
@@ -203,8 +203,8 @@ export default function WorldMap({ onNavigate } = {}) {
   // this component stays under the size ratchet. The Inspector OVERLAYS the map.
   const {
     inspectorOpen, setInspectorOpen, inspectorSection, setInspectorSection,
-    inspectorSize, setInspectorSize,
-    openInspectorAt, handleApplyPreset, handleUpgrade, showSimulationRules, setShowSimulationRules,
+    inspectorSize, setInspectorSize, heraldAvailable,
+    openInspectorAt, handleApplyPreset, handleUpgrade, handleSignIn, showSimulationRules, setShowSimulationRules,
   } = useRealmInspector({
     canManageCampaigns,
     pendingMapWorkspace,
@@ -487,7 +487,7 @@ export default function WorldMap({ onNavigate } = {}) {
 
   // Empty-state activation (P1/P8): the no-campaign states get a real first click
   // (create-and-select / select-first). Hooked out to hold the size ratchet.
-  const campaignActivation = useCampaignActivation({ activeCampaigns, handleSelectCampaign, showToast });
+  const campaignActivation = useCampaignActivation({ activeCampaigns, handleSelectCampaign, showToast, onNavigate });
 
   // Premium / elevated auto-resume: on a cold Realm entry, reopen the campaign
   // the user last used so its map loads first (sets the active id; the mount-sync
@@ -770,7 +770,7 @@ export default function WorldMap({ onNavigate } = {}) {
           campaign={activeCampaign}
           canManageCampaigns={canManageCampaigns}
           tier={authTier}
-          onUpgrade={handleUpgrade}
+          onUpgrade={handleUpgrade} onSignIn={handleSignIn}
           nameById={nameById} saves={activeSaves}
           {...campaignActivation}
         />
@@ -779,12 +779,16 @@ export default function WorldMap({ onNavigate } = {}) {
   }
 
   // ── Render ─────────────────────────────────────────────────────────────
-  // Use viewport height minus header/padding so the map fills the screen.
-  // The parent <main> has padding and the header is ~52px on desktop.
+  // Use viewport height minus the chrome so the map fills the screen between the
+  // painted arrow (ARROW_CLEAR: the header band plus the feather's hang, which main
+  // reserves above every view), main's padding plus breathing room (66 px), the bottom
+  // bar where it shows (BOTTOM_NAV_H, 640 to 1023 px) and the PINNED FOOTER's floating
+  // links band (owner orders 2026-09-16), whose measured height is FOOTER_INSET; the
+  // rest of the footer shows only at the end of the page.
   return (
     <div style={{
       display: 'flex', flexDirection: 'column', gap: SP.sm,
-      height: `calc(100vh - ${CHROME.mapShellOffset}px)`,   // header (~52px) + main padding (~48px) + breathing room
+      height: `calc(100vh - ${ARROW_CLEAR} - 66px - ${BOTTOM_NAV_H} - ${FOOTER_INSET})`,
       minHeight: CHROME.mapShellMin,
       // P12 EXCEPTION: the realm is a full-screen MAP tool, not a framed reading
       // document — the geographic canvas is the hero (P1) and must fill its width.
@@ -818,7 +822,9 @@ export default function WorldMap({ onNavigate } = {}) {
         handleClearImage={handleClearImage} handleImportImage={handleImportImage} handleShareMap={handleShareMap} sharingMap={sharingMap}
         handleExportMap={authTier !== 'anon' ? handleExportMapImage : undefined} exportingMap={exportingMap}
         mapTemplates={mapTemplates} currentTemplate={currentTemplate} handleTemplateChange={handleTemplateChange} handleFit={handleFit} handleRegenerate={handleRegenerate}
-        inspectorOpen={inspectorOpen} onToggleInspector={handleToggleInspector} unreviewedCount={unreviewedPulseCount}
+        // The Herald waits for the realm's first advance (owner order 2026-09-17): no
+        // toggle (and so no badge) until then; the toolbar drops a non-function toggle.
+        inspectorOpen={inspectorOpen} onToggleInspector={heraldAvailable ? handleToggleInspector : undefined} unreviewedCount={unreviewedPulseCount}
         activePresetId={activeCampaign?.worldState?.simulationRules?.presetId} handleApplyPreset={handleApplyPreset}
       />
 
@@ -856,12 +862,15 @@ export default function WorldMap({ onNavigate } = {}) {
             mapFrameUrl={mapFrameUrl}
             bridgeReady={bridgeReady} bridgeRef={bridgeRef} overlayTransformRef={overlayTransformRef}
             onNavigate={onNavigate} showLayersPanel={showLayersPanel} setShowLayersPanel={setShowLayersPanel}
-            mapReloadKey={mapReloadKey} onReloadMap={handleReloadMap}
+            // canManageCampaigns + tier drive the palette's locked-Realm gate: an
+            // anon/free viewer gets the SAME honest card the phone shows instead
+            // of a campaign invitation they cannot accept.
+            mapReloadKey={mapReloadKey} onReloadMap={handleReloadMap} canManageCampaigns={canManageCampaigns} tier={authTier}
             {...campaignActivation}
           />
         </FeatureErrorBoundary>
 
-        {inspectorOpen && (
+        {inspectorOpen && heraldAvailable && ( // the Herald waits for the first advance (owner order 2026-09-17)
           <Suspense fallback={null}>
             <RealmInspector
               open={inspectorOpen} section={inspectorSection}

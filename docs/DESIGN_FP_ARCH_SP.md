@@ -30,7 +30,7 @@ SP-specific bindings, each proven by execution in the WR/H/P lanes:
 
 1. **L1 DETERMINISM:** zero new PRNG streams anywhere in SP. Every stochastic
    choice is keyed `hash01` (`src/domain/region/contestMath.js:45`, re-exported
-   at `settlementStrategy.js:1356`), key = `'sp.<facet>.<realmId>.<id>...'`,
+   at `settlementStrategy.js:1290`), key = `'sp.<facet>.<realmId>.<id>...'`,
    codepoint-ordered enumeration. Weighted races are `w * hash01` products with
    BOTH sides of every weight proven live — the dead-band law binds every band
    this program authors (three shapes have bitten: unreachable ratios,

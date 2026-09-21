@@ -25,6 +25,8 @@ import { INSTITUTION_SERVICES } from '../../data/institutionServices.js';
 import { LOCALE_SERVICE_OVERRIDES } from '../../data/servicesData.js';
 import { GOODS_MODIFIERS_BY_TIER } from '../../data/goods/chains.js';
 import { identityForInstitution } from './institutionVocabulary.js';
+import { institutionDisplayName } from './institutionDisplayName.js';
+import { resourceDisplayName } from './resourceDisplayName.js';
 
 /**
  * @typedef {Object} InstitutionContribution
@@ -165,7 +167,11 @@ function chainsProcessedBy(inst) {
       (Array.isArray(chain.processingInstitutions) && chain.processingInstitutions.includes(inst.name));
     if (!supports) continue;
     const product = chain.finalProducts?.[0] || chain.intermediateGoods?.[0] || null;
-    out.push(product ? `${chain.rawResource} → ${product}` : String(chain.rawResource || ''));
+    // The chain's `rawResource` is a catalogue KEY, and this string is built for a reader
+    // rather than stored — the Services tab's institution card printed "oasis_water → dried
+    // dates" off it (browser pass 3). Composed through the seam, so the key never leaves.
+    const resource = resourceDisplayName(chain.rawResource);
+    out.push(product ? `${resource} → ${product}` : String(resource || ''));
   }
   return out;
 }
@@ -290,5 +296,14 @@ export function deriveInstitutionProfile(institution, settlement = {}) {
     });
   }
 
-  return { name, oneLiner: identityForInstitution(inst), contributions };
+  // ⛔ THE RETURNED `name` IS THE DISPLAY LABEL; the local `name` above stays the RAW
+  // catalogue key on purpose, because the two reads that use it (GATED_GOODS_BY_INSTITUTION,
+  // serviceCountFor) are MATCHERS against catalogue data that still spells the key the old
+  // way. §934.13's seam is a read-time label, never a rename. The `|| name` keeps the
+  // 'Institution' fallback for an institution with no name at all.
+  return {
+    name: institutionDisplayName(inst) || name,
+    oneLiner: identityForInstitution(inst),
+    contributions,
+  };
 }

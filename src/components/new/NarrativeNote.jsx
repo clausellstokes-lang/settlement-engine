@@ -1,6 +1,8 @@
 import { useState } from 'react';
 import { FS, swatch } from '../theme.js';
 import { sans } from './Primitives';
+import useIsMobile from '../../hooks/useIsMobile.js';
+import { chromeFontSize, proseFontSize } from '../../design/proseScale.js';
 
 /**
  * NarrativeNote — per-tab addendum from the Narrative Refinement layer.
@@ -15,6 +17,8 @@ import { sans } from './Primitives';
  */
 export function NarrativeNote({ note }) {
   const [open, setOpen] = useState(true);
+  // THE PHONE PROSE FLOOR — the note IS the prose this card exists to carry.
+  const mobile = useIsMobile();
   if (!note) return null;
 
   return (
@@ -37,15 +41,15 @@ export function NarrativeNote({ note }) {
           cursor: 'pointer', textAlign: 'left',
         }}
       >
-        <span style={{ fontSize: FS.xs, fontWeight: 800, color: swatch['#5A6E82'], textTransform: 'uppercase', letterSpacing: '0.07em', flex: 1 }}>
+        <span style={{ fontSize: chromeFontSize(FS.xs, mobile), fontWeight: 800, color: swatch['#5A6E82'], textTransform: 'uppercase', letterSpacing: '0.07em', flex: 1 }}>
           Narrative Layer
         </span>
-        <span style={{ fontSize: FS.xs, color: swatch['#5A6E82'] }}>{open ? '▲' : '▼'}</span>
+        <span style={{ fontSize: chromeFontSize(FS.xs, mobile), color: swatch['#5A6E82'] }}>{open ? '▲' : '▼'}</span>
       </button>
 
       {/* Body */}
       {open && (
-        <div style={{ padding: '0 12px 10px', fontSize: FS['12.5'], color: swatch['#2D1F0E'], lineHeight: 1.65, fontFamily: 'Georgia, serif' }}>
+        <div style={{ padding: '0 12px 10px', fontSize: proseFontSize(FS['12.5'], mobile), color: swatch['#2D1F0E'], lineHeight: 1.65, fontFamily: 'Georgia, serif' }}>
           {note}
         </div>
       )}

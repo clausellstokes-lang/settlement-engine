@@ -24,22 +24,31 @@ import { Sparkles, ArrowRight } from 'lucide-react';
 import { useStore } from '../store/index.js';
 import { t } from '../copy/index.js';
 import {
-  anonAtCap, anonGensRemaining, DEFAULT_DAILY_CAP,
+  anonAtCap, anonFullRemaining, anonRerollRemaining,
 } from '../lib/anonGenCounter.js';
 import { Funnel } from '../lib/analytics.js';
 import WelcomeBackCard from './home/WelcomeBackCard.jsx';
 import AnonTierTeaser from './AnonTierTeaser.jsx';
 import Button from './primitives/Button.jsx';
 import { ClerkNote } from './generate/ClerkNote.jsx';
+import RefusalNotice from './primitives/RefusalNotice.jsx';
+import { raisedHere, REFUSAL_SURFACES } from '../lib/refusalReasons.js';
+import { recoverFromChunkError } from '../lib/staleDeploy.js';
+import useIsMobile from '../hooks/useIsMobile.js';
+import { chromeFontSize, proseFontSize } from '../design/proseScale.js';
 import { GOLD, INK, BODY, BORDER, sans, serif_, SP, FS, GOLD_DEEP, GOLD_TXT, LANDING_MAX } from './theme.js';
-import { TIER_FACTS, SINGLE_DOSSIER_PRICE } from '../config/tierFacts.js';
+import {
+  ANON_SIZES, SIZE_LADDER, SINGLE_DOSSIER_PRICE, signInUnlocksClause,
+} from '../config/tierFacts.js';
 import { TIER_ORDER, POPULATION_RANGES } from '../data/constants.js';
 
-// Sizes per audience. Anonymous gets the Wanderer-tier ceiling
-// (TIER_GATE.anon.maxTier === 'town'); signed-in users get the full
-// six-tier ladder. Order matters — the picker renders left-to-right.
-const ANON_SIZES = ['hamlet', 'village', 'town'];
-const ALL_SIZES  = ['thorp', 'hamlet', 'village', 'town', 'city', 'metropolis'];
+// Sizes per audience, READ FROM THE FACTS rather than restated here (ODQ, the owner
+// 2026-09-19). The anonymous set — hamlet, village, town — used to be a literal in this
+// file while the at-cap sentence below named its own list, which is how that sentence
+// came to omit the thorpe a sign-in really unlocks. Both now derive from
+// config/tierFacts.js, so the gauge a visitor sees and the sentence that tells them what
+// they are missing cannot disagree. Order matters — the picker renders left-to-right.
+const ALL_SIZES = SIZE_LADDER;
 
 // ── THE GAUGE (Deep Craft cluster 1) ─────────────────────────────────────────
 // One scale-rule strip replaces the size cards: the viewer's entitled stations
@@ -65,6 +74,10 @@ function popFigure(size) {
 }
 
 function GaugeStation({ value, label, active, onClick, onHover }) {
+  // Bound HERE rather than threaded from HomeHero: the station is a real component
+  // and the hook fans into the one shared matchMedia store, so a sixth station costs
+  // no listener.
+  const mobile = useIsMobile();
   return (
     <button
       type="button"
@@ -96,7 +109,11 @@ function GaugeStation({ value, label, active, onClick, onHover }) {
         {label}
       </div>
       <div style={{
-        fontSize: FS.xxs, color: BODY, marginTop: 1,
+        // The station's population band ("61–400") is the figure the reader compares
+        // the sizes BY, and it drew at 10px on a phone. Chrome, not prose: it is a
+        // figure under a label, and raising it to the prose step would flatten it into
+        // the station name above it.
+        fontSize: chromeFontSize(FS.xxs, mobile), color: BODY, marginTop: 1,
         fontVariantNumeric: 'oldstyle-nums', letterSpacing: '0.01em',
         opacity: active ? 1 : 0.8,
       }}>
@@ -107,6 +124,9 @@ function GaugeStation({ value, label, active, onClick, onHover }) {
 }
 
 export default function HomeHero({ onSignIn, onNavigate, bare = false }) {
+  // ABOVE EVERY EARLY RETURN, once for the component (the phone-floor census asserts
+  // the flag is really bound at each site that reads it).
+  const mobile = useIsMobile();
   const generate = useStore(s => s.generateSettlement);
   const updateConfig = useStore(s => s.updateConfig);
   const setWizardMode = useStore(s => s.setWizardMode);
@@ -116,6 +136,14 @@ export default function HomeHero({ onSignIn, onNavigate, bare = false }) {
   // settlement; SettlementsPanel reads selectedSettlementId on mount and
   // opens the matching save in detail view.
   const setSelectedSettlementId = useStore(s => s.setSelectedSettlementId);
+  // ⛔ A GATE'S REASON IS NOT A FAILURE, AND THIS SURFACE USED TO OVERWRITE IT
+  // (adversarial review of the second wave). `generate()` returns null when a gate
+  // refuses, having ALREADY recorded which one; the hero turned that null into a
+  // hand-made throw and rendered `errors.forgeStart` — "The forge stalled… Try once
+  // more" — over the day's-allowance or the size sentence the reader actually needed.
+  // "Try once more" is false advice at a cap: the retry cannot succeed.
+  const lastRefusal = useStore(s => s.lastRefusal);
+  const clearRefusal = useStore(s => s.clearRefusal);
 
   // Variant: signed-in users see instant generation across all sizes;
   // anonymous users see the marketing hero with the funnel framing.
@@ -154,7 +182,23 @@ export default function HomeHero({ onSignIn, onNavigate, bare = false }) {
     setStageLive(true);
   };
   const atCap = anonAtCap();
-  const remaining = anonGensRemaining();
+  // THE FREE-TODAY LINE READS THE TWO BUCKETS SEPARATELY (lib/anonGenCounter.js:
+  // 1 full generation + 2 rerolls, never 3 interchangeable runs). The line used
+  // to render the SUM against the sum cap — '3 of 3 free today' to a visitor who
+  // had one settlement coming — which the first generation then contradicted.
+  // Both readers already existed on the counter; nothing about its semantics or
+  // its increments moves here, and the analytics events are untouched.
+  const fullLeft = anonFullRemaining();
+  const rerollsLeft = anonRerollRemaining();
+  // Both nouns inflect off their own live count, from the registry's two forms
+  // (copy/index.js t() has no plural helper). Neither number is spelled into a
+  // sentence, so raising either cap can never render "2 free settlement today".
+  const settlements = t(fullLeft === 1 ? 'hero.v2.settlementOne' : 'hero.v2.settlementMany');
+  const rerollWord = t(rerollsLeft === 1 ? 'hero.v2.rerollOne' : 'hero.v2.rerollMany');
+  const freeTodayLine = fullLeft > 0
+    ? t(rerollsLeft === 0 ? 'hero.v2.sublineNoRerolls' : 'hero.v2.subline',
+      { full: fullLeft, rerolls: rerollsLeft, settlements, rerollWord })
+    : t('hero.v2.sublineRerolls', { rerolls: rerollsLeft });
 
   // Tier 8.8 — fire HOMEPAGE_VIEW once per session when the hero
   // mounts. Funnel.homepageView() handles the once-per-session guard
@@ -170,6 +214,7 @@ export default function HomeHero({ onSignIn, onNavigate, bare = false }) {
     if (generatingRef.current) return;
     generatingRef.current = true;
     setBeginError(null);
+    clearRefusal?.();
     setGenerating(true);
     try {
       // Instant generation has NO config-mode origin: the roll begins from the
@@ -181,8 +226,15 @@ export default function HomeHero({ onSignIn, onNavigate, bare = false }) {
       // set their own mode, so Back from THOSE correctly returns to that config.
       setWizardMode(null);
       updateConfig({ settType: pickedSize });
-      const generated = await generate();
-      if (!generated) throw new Error('Generation completed without a settlement.');
+      // `at` names WHERE the reader clicked (REVIEW-P F12): the hero shares /create
+      // with the Founding Worlds strip and /home with that strip and §02's forge, and
+      // all of them painted the same store record. Only this surface says its own.
+      const generated = await generate(undefined, { at: REFUSAL_SURFACES.HOME_HERO });
+      // ⛔ A NULL IS A GATE, NOT A STALL. The lane recorded WHICH gate before it returned,
+      // and the notice below renders that. Manufacturing a throw here put the generic
+      // failure sentence on top of the real reason, so the one surface that knew the most
+      // about the refusal said the least.
+      if (!generated) return;
       if (isAnon) {
         // Counting the generation against the daily cap is owned by
         // generateSettlement now (so wizard "Regenerate Draft" and the
@@ -194,7 +246,11 @@ export default function HomeHero({ onSignIn, onNavigate, bare = false }) {
       }
     } catch (e) {
       console.error('[HomeHero] generate failed:', e);
-      setBeginError(t('errors.forgeStart'));
+      // A chunk of the previous build (this tab outlived a deploy): the recovery
+      // confirms a new build is live and reloads or raises the notice; the message
+      // says why a retry alone would not help. Anything else keeps forgeStart.
+      const recovery = await recoverFromChunkError(e);
+      setBeginError(t(recovery === 'none' ? 'errors.forgeStart' : 'errors.forgeUpdated'));
     } finally {
       generatingRef.current = false;
       setGenerating(false);
@@ -380,16 +436,29 @@ export default function HomeHero({ onSignIn, onNavigate, bare = false }) {
           // (TIER_FACTS/SINGLE_DOSSIER_PRICE) so they can never drift from the cap.
           <>
             <div style={{ maxWidth: 460, margin: '0 auto', textAlign: 'center' }}>
-              <div style={{ fontSize: FS.xs, color: BODY, marginBottom: SP.sm }}>
+              <div style={{ fontSize: proseFontSize(FS.xs, mobile), color: BODY, marginBottom: SP.sm }}>
                 {t('hero.anonCap.spent')}
               </div>
               <div style={{
                 fontFamily: serif_, fontSize: FS['18'], fontWeight: 600,
                 color: INK, lineHeight: 1.4,
               }}>
-                <b>Sign in (free)</b> to unlock thorp through metropolis and
-                save up to {TIER_FACTS.free.saveLimit} drafts. Keep any dossier&apos;s
-                PDF for {SINGLE_DOSSIER_PRICE}, or export freely with Cartographer.
+                {/* ⛔ THE SIZES SIGNING IN ADDS, DERIVED AND NEVER TYPED.
+                    The list was hand-written here and read "city and metropolis",
+                    which sold a reader two of the three they were owed: the
+                    anonymous sizes are hamlet, village and town (the spent line
+                    directly above says exactly that), so a THORPE is also something
+                    signing in unlocks — the owner's correction of 2026-09-19.
+                    `signInUnlocksClause()` composes THREE facts from
+                    config/tierFacts.js — the ladder minus the anonymous set, the
+                    pre-generation options, and the free save cap — with the estate's
+                    Oxford joiner. Each part drops out on its own if the facts stop
+                    carrying it, so the sentence can never promise what the gate
+                    refuses. "to customize" is the wizard's own options (§934.34), NOT
+                    the Compendium's custom content, which stays premium. */}
+                <b>Sign in (free)</b> to unlock {signInUnlocksClause()}. Keep any
+                dossier&apos;s PDF for {SINGLE_DOSSIER_PRICE}, or export freely with
+                Cartographer.
               </div>
               <Button
                 type="button"
@@ -424,22 +493,30 @@ export default function HomeHero({ onSignIn, onNavigate, bare = false }) {
             {/* Plain-language failure surface (P10). The Deep Craft clerk's-note
                 idiom (no tinted wash, role=alert passed through); the CTA above IS
                 the retry. First-click failures are the most fragile funnel point. */}
-            {beginError && (
+            {/* ONE NOTICE, AND WHICH ONE IS A DECISION RATHER THAN A RACE. A real throw
+                leaves BOTH a `beginError` and a lane-recorded reason; `beginError` wins
+                because this surface's own handler knows more — recoverFromChunkError has
+                already asked whether a new build is live and may have reloaded. A refusal
+                throws nothing, so the recorded reason is the only thing to say, and it is
+                said here rather than swallowed. */}
+            {beginError ? (
               <div style={{ marginTop: SP.sm, textAlign: 'left' }}>
                 <ClerkNote role="alert" rubric={t('generate.notes.errorRubric')}>
                   {beginError}
                 </ClerkNote>
               </div>
+            ) : (
+              <RefusalNotice refusal={raisedHere(lastRefusal, REFUSAL_SURFACES.HOME_HERO) ? lastRefusal : null} style={{ marginTop: SP.sm, textAlign: 'left' }} />
             )}
             {isAnon && (
               <p style={{
-                margin: `${SP.sm}px auto 0`, fontSize: FS.xs, color: BODY,
+                margin: `${SP.sm}px auto 0`, fontSize: proseFontSize(FS.xs, mobile), color: BODY,
                 fontStyle: 'italic',
               }}>
                 {t('hero.ctaSubline')}
                 {' '}
                 <span style={{ opacity: 0.7 }}>
-                  ({remaining} of {DEFAULT_DAILY_CAP} free today)
+                  ({freeTodayLine})
                 </span>
               </p>
             )}
@@ -451,7 +528,7 @@ export default function HomeHero({ onSignIn, onNavigate, bare = false }) {
       {isAnon && (
         <p style={{
           margin: `${SP.lg}px auto 0`, maxWidth: 480,
-          fontSize: FS.xs, color: BODY, lineHeight: 1.5,
+          fontSize: proseFontSize(FS.xs, mobile), color: BODY, lineHeight: 1.5,
         }}>
           {t('hero.note')}
           {onSignIn && (

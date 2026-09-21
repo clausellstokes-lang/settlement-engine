@@ -460,6 +460,21 @@ export const SERVICE_CATEGORY_MAP = {
   'Poor relief': 'healing',
   Quarantine: 'healing',
   'Religious services': 'healing',
+  // The two rites the setting-agnostic rename produced ("Sunday mass" -> "Weekly
+  // rite", "Baptism" -> "Rite of entry", src/data/institutionServices.js). They are
+  // REGISTERED rather than quarantined so the rename banks a win instead of moving
+  // debt from one spelling to another, and 'healing' is the category both names
+  // already carried — INSTITUTION_DEFAULT_CATEGORY files the whole religious block
+  // there, so the registration pins today's behaviour rather than shifting it.
+  'Rite of entry': 'healing',
+  'Weekly rite': 'healing',
+  // The two names the village+ tranche renamed off the ecclesiastical spelling
+  // ("Ecclesiastical courts" -> "Religious courts", "Ecclesiastical hierarchy" ->
+  // "Religious hierarchy"). Registered, not re-quarantined, and at 'healing' because
+  // that is the category the heuristic already returned for both spellings at their
+  // hosts — measured, so the registration pins today's behaviour instead of moving it.
+  'Religious courts': 'healing',
+  'Religious hierarchy': 'healing',
   // E6 (F-S1-E6, chair-ruled 2026-08-09) — THE ONE DISCLOSED SHIFT of the M5
   // classifier-coverage micro-wave. Sanctuary was registered 'healing'; its
   // authored desc at Church/Temple is "Legal protection on holy ground" and at

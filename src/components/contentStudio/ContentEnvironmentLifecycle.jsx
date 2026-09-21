@@ -26,6 +26,8 @@ import {
   swatch,
 } from '../theme.js';
 import Button from '../primitives/Button.jsx';
+import useIsMobile from '../../hooks/useIsMobile.js';
+import { chromeFontSize, proseFontSize } from '../../design/proseScale.js';
 
 const EMPTY_CUSTOM_CONTENT = Object.freeze({});
 
@@ -56,13 +58,14 @@ function environmentName(environment) {
 }
 
 function EnvironmentSummary({ environment }) {
+  const mobile = useIsMobile();
   const active = environment || VANILLA_CONTENT_ENVIRONMENT;
   const tunableCount = Object.keys(active.tunables || {}).length;
   const visualCount = Object.keys(active.visualSelection || {}).length;
   const packCount = active.packVersions?.length || 0;
   const definitionCount = active.directDefinitions?.length || 0;
   return (
-    <span style={{ fontSize: FS.xs, color: SEC }}>
+    <span style={{ fontSize: chromeFontSize(FS.xs, mobile), color: SEC }}>
       <strong>{environmentName(active)}</strong>
       {' · '}{definitionCount} {definitionCount === 1 ? 'definition' : 'definitions'}
       {' · '}{packCount} {packCount === 1 ? 'pack' : 'packs'}
@@ -73,6 +76,7 @@ function EnvironmentSummary({ environment }) {
 }
 
 function EnvironmentHistoryRow({ activeRevisionId, environment, onReview }) {
+  const mobile = useIsMobile();
   const isActive = environment.environmentRevisionId === activeRevisionId;
   return (
     <div style={{
@@ -86,7 +90,7 @@ function EnvironmentHistoryRow({ activeRevisionId, environment, onReview }) {
       <EnvironmentSummary environment={environment} />
       <span style={{
         color: MUT,
-        fontSize: FS.micro,
+        fontSize: chromeFontSize(FS.micro, mobile),
         overflowWrap: 'anywhere',
       }}>
         {environment.environmentRevisionId}
@@ -95,7 +99,7 @@ function EnvironmentHistoryRow({ activeRevisionId, environment, onReview }) {
         <span style={{
           marginLeft: 'auto',
           color: swatch.magic,
-          fontSize: FS.micro,
+          fontSize: chromeFontSize(FS.micro, mobile),
           fontWeight: 800,
           textTransform: 'uppercase',
         }}>
@@ -116,6 +120,7 @@ function EnvironmentHistoryRow({ activeRevisionId, environment, onReview }) {
 }
 
 function EnvironmentChangeReview({ review, busy, onCancel, onConfirm }) {
+  const mobile = useIsMobile();
   if (!review) return null;
   const visibleChanges = review.changes.slice(0, 12);
   const hiddenCount = Math.max(0, review.changes.length - visibleChanges.length);
@@ -132,7 +137,7 @@ function EnvironmentChangeReview({ review, busy, onCancel, onConfirm }) {
     >
       <div style={{
         color: SEC,
-        fontSize: FS.xs,
+        fontSize: proseFontSize(FS.xs, mobile),
         lineHeight: 1.45,
         marginBottom: 7,
       }}>
@@ -152,7 +157,7 @@ function EnvironmentChangeReview({ review, busy, onCancel, onConfirm }) {
               display: 'grid',
               gridTemplateColumns: 'minmax(120px, 0.8fr) minmax(0, 1fr)',
               gap: 8,
-              fontSize: FS.micro,
+              fontSize: chromeFontSize(FS.micro, mobile),
             }}>
               <strong style={{ color: SEC, overflowWrap: 'anywhere' }}>
                 {change.path}
@@ -163,7 +168,7 @@ function EnvironmentChangeReview({ review, busy, onCancel, onConfirm }) {
             </div>
           ))}
           {hiddenCount > 0 && (
-            <span style={{ color: MUT, fontSize: FS.micro }}>
+            <span style={{ color: MUT, fontSize: chromeFontSize(FS.micro, mobile) }}>
               {hiddenCount} additional {hiddenCount === 1 ? 'change' : 'changes'}
             </span>
           )}
@@ -193,6 +198,7 @@ function EnvironmentChangeReview({ review, busy, onCancel, onConfirm }) {
 }
 
 export default function ContentEnvironmentLifecycle() {
+  const mobile = useIsMobile();
   const activeEnvironment = useStore(
     state => state.activeContentEnvironment,
   ) || VANILLA_CONTENT_ENVIRONMENT;
@@ -380,7 +386,7 @@ export default function ContentEnvironmentLifecycle() {
       }}>
         <span style={{
           color: swatch.magic,
-          fontSize: FS.xxs,
+          fontSize: chromeFontSize(FS.xxs, mobile),
           fontWeight: 800,
           textTransform: 'uppercase',
           letterSpacing: '0.05em',
@@ -402,7 +408,7 @@ export default function ContentEnvironmentLifecycle() {
       {runtimeResolution.ok === false && (
         <div role="alert" style={{
           color: swatch.danger,
-          fontSize: FS.xs,
+          fontSize: proseFontSize(FS.xs, mobile),
           lineHeight: 1.45,
           marginTop: 7,
         }}>
@@ -416,7 +422,7 @@ export default function ContentEnvironmentLifecycle() {
         <div id="content-environment-history" style={{ marginTop: 8 }}>
           <div style={{
             color: MUT,
-            fontSize: FS.micro,
+            fontSize: proseFontSize(FS.micro, mobile),
             lineHeight: 1.45,
             marginBottom: 7,
           }}>
@@ -425,7 +431,7 @@ export default function ContentEnvironmentLifecycle() {
             revision is active. Every existing campaign keeps its pinned cutoff.
           </div>
           {loading ? (
-            <div role="status" style={{ color: MUT, fontSize: FS.xs }}>
+            <div role="status" style={{ color: MUT, fontSize: chromeFontSize(FS.xs, mobile) }}>
               Loading immutable setting revisions…
             </div>
           ) : (
@@ -474,7 +480,7 @@ export default function ContentEnvironmentLifecycle() {
           {message && (
             <div role="status" style={{
               color: SEC,
-              fontSize: FS.xs,
+              fontSize: chromeFontSize(FS.xs, mobile),
               marginTop: 8,
             }}>
               {message}
@@ -483,7 +489,7 @@ export default function ContentEnvironmentLifecycle() {
           {error && (
             <div role="alert" style={{
               color: swatch.danger,
-              fontSize: FS.xs,
+              fontSize: chromeFontSize(FS.xs, mobile),
               marginTop: 8,
             }}>
               {error}

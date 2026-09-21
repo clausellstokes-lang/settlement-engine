@@ -32,6 +32,9 @@ vi.mock('../../src/components/dossier/DossierLadderModal.jsx', () => ({
   ),
 }));
 vi.mock('../../src/lib/supabase.js', () => ({ isConfigured: true }));
+// Purchases OPEN for this file: it pins the anonymous Buy click as it behaves after launch.
+// The pre-launch closed state is pinned in tests/components/launchLock.dossier.test.jsx.
+vi.mock('../../src/lib/launchGate.js', async (importOriginal) => ({ ...(await importOriginal()), purchasesOpen: () => true }));
 
 import BuyThisDossier, { resolveExportAccess } from '../../src/components/BuyThisDossier.jsx';
 

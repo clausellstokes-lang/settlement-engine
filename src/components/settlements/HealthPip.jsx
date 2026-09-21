@@ -12,11 +12,14 @@
 
 import { FS, sans } from '../theme.js';
 import SurveyorGlossary from '../guidance/SurveyorGlossary.jsx';
+import useIsMobile from '../../hooks/useIsMobile.js';
+import { chromeFontSize } from '../../design/proseScale.js';
 
 /**
  * @param {{ pip: ReturnType<typeof import('./livingWorldSignals.js').healthPip> }} props
  */
 export default function HealthPip({ pip }) {
+  const mobile = useIsMobile();
   if (!pip) return null;
   // W-GUIDE-2 §6: the band word is a "what am I reading?" glossary affordance
   // (stability-band term). This replaces the native title= teaching tooltip —
@@ -29,7 +32,7 @@ export default function HealthPip({ pip }) {
       data-band={pip.band}
       style={{
         display: 'inline-flex', alignItems: 'center', gap: 4,
-        fontSize: FS.xs, fontWeight: 700, fontFamily: sans, color: pip.color,
+        fontSize: chromeFontSize(FS.xs, mobile), fontWeight: 700, fontFamily: sans, color: pip.color,
       }}
     >
       <span

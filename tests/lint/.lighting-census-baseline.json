@@ -24,13 +24,13 @@
     "The derivation history — every prior row, its cause, and the census laws — stays in the walker",
     "beside the assertions, deliberately. Only the live tuple moved."
   ],
-  "measuredAtSha": "da18fccb05881666e32ed90c5e3788f5ba518135",
-  "measuredBy": "§931 long-tail landing at the composed consist, third measurement after LT41b car 6 and LT17 car 2 were held out (Fable 5.1 — validated)",
-  "date": "2026-09-15",
-  "note": "car 6 held for the chartered window; car 2 held for the worker-bundle headroom car; the chair register cars add no title",
-  "files": 2572,
-  "parked": 377,
-  "credited": 2195,
-  "titles": 24308,
-  "suiteTitles": 6483
+  "measuredAtSha": "8d1337e58d8e656775d7ee502505a8d1e108cef7",
+  "measuredBy": "chair-fable-4a1823e2",
+  "date": "2026-09-20",
+  "note": "the eleventh refreeze: CURE-N family C adds one title in tests/lint/phoneBarOrder.walker.test.js (the bar DECLARES itself); CURE-O and the other five CURE-N commits add no vitest title",
+  "files": 2665,
+  "parked": 359,
+  "credited": 2306,
+  "titles": 25551,
+  "suiteTitles": 6816
 }

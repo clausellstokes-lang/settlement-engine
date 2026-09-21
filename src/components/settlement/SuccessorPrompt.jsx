@@ -21,14 +21,17 @@
  * the dossier but doesn't prevent the user from doing other work.
  */
 
-import { Crown, UserPlus, X, ArrowRight } from 'lucide-react';
+import { Crown, UserPlus, ArrowRight } from 'lucide-react';
 import { useStore } from '../../store/index.js';
 import { GOLD, INK, MUTED, SECOND, BORDER, CARD, sans, FS, SP, swatch } from '../theme.js';
-import IconButton from '../primitives/IconButton.jsx';
+import DialogClose from '../primitives/DialogClose.jsx';
 import Button from '../primitives/Button.jsx';
 import { useDialogFocusTrap } from '../primitives/useDialogFocusTrap.js';
+import useIsMobile from '../../hooks/useIsMobile.js';
+import { chromeFontSize, proseFontSize } from '../../design/proseScale.js';
 
 export default function SuccessorPrompt() {
+  const mobile = useIsMobile();
   const pending  = useStore(s => s.pendingSuccession);
   const settlement = useStore(s => s.settlement);
   const stageComposerIntent = useStore(s => s.stageComposerIntent);
@@ -127,7 +130,9 @@ export default function SuccessorPrompt() {
           <h2 id="succession-title" style={titleStyle}>
             <Crown size={16} aria-hidden="true" color={GOLD} /> A leader is gone.
           </h2>
-          <IconButton Icon={X} label="Dismiss" tone="ghost" size="sm" onClick={dismiss} />
+          {/* THE HOUSE EXIT (owner order, ODQ §934.31). "Dismiss" at 24px was this
+              dialog's only door and named a different verb from every sibling. */}
+          <DialogClose onClose={dismiss} />
         </header>
 
         <div style={{ padding: SP.md }}>
@@ -145,7 +150,7 @@ export default function SuccessorPrompt() {
 
           {suggested.length > 0 && (
             <>
-              <div style={kickerStyle}>Suggested successors</div>
+              <div style={kickerStyle(mobile)}>Suggested successors</div>
               <div style={{ display: 'flex', flexDirection: 'column', gap: 6, marginBottom: 12 }}>
                 {suggested.map(npc => (
                   <button
@@ -158,7 +163,7 @@ export default function SuccessorPrompt() {
                       <div style={{ fontSize: FS.sm, fontWeight: 700, color: INK, fontFamily: sans }}>
                         {npc.name}
                       </div>
-                      <div style={{ fontSize: FS.xs, color: SECOND, fontFamily: sans, marginTop: 2 }}>
+                      <div style={{ fontSize: chromeFontSize(FS.xs, mobile), color: SECOND, fontFamily: sans, marginTop: 2 }}>
                         {npc.role || 'Notable figure'}
                         {npc.importance ? ` · ${npc.importance}` : ''}
                       </div>
@@ -175,7 +180,7 @@ export default function SuccessorPrompt() {
               padding: SP.sm,
               background: swatch['#FFF7EC'],
               border: `1px solid #e0b070`,
-              fontSize: FS.xs, fontFamily: sans, color: swatch['#7A4F0F'],
+              fontSize: proseFontSize(FS.xs, mobile), fontFamily: sans, color: swatch['#7A4F0F'],
               marginBottom: 12, lineHeight: 1.5,
             }}>
               No obvious successor among the existing NPCs. Appoint someone new,
@@ -200,7 +205,7 @@ export default function SuccessorPrompt() {
             variant="ghost"
             size="sm"
             onClick={dismiss}
-            style={{ textDecoration: 'underline', color: MUTED, fontSize: FS.xxs }}
+            style={{ textDecoration: 'underline', color: MUTED, fontSize: chromeFontSize(FS.xxs, mobile) }}
           >
             Leave the role vacant
           </Button>
@@ -232,11 +237,11 @@ const titleStyle = {
   margin: 0, display: 'flex', alignItems: 'center', gap: 6,
   fontSize: FS.md, fontWeight: 700, color: INK, fontFamily: sans,
 };
-const kickerStyle = {
-  fontSize: FS.xxs, fontWeight: 800,
+const kickerStyle = (mobile) => ({
+  fontSize: chromeFontSize(FS.xxs, mobile), fontWeight: 800,
   color: MUTED, letterSpacing: '0.06em', textTransform: 'uppercase',
   fontFamily: sans, marginBottom: 6,
-};
+});
 const successorBtnStyle = {
   display: 'flex', alignItems: 'center', gap: 8,
   padding: '8px 10px',

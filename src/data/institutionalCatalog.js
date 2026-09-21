@@ -50,7 +50,7 @@ export const institutionalCatalog = {
       'Access to parish church': {
         required: false,
         baseChance: 0.78,
-        desc: 'Walk 2-5km to village church for services.',
+        desc: 'Walk 2-5km to the village house of worship for services.',
         tags: ['essential', 'religious', 'church'],
         priorityCategory: 'religion',
       },
@@ -301,7 +301,7 @@ export const institutionalCatalog = {
         required: true,
         baseChance: 1,
         exclusiveGroup: 'religiousCenter',
-        desc: 'Travel to village church. 2-5km distance typical.',
+        desc: 'Travel to the village house of worship. 2-5km distance typical.',
         tags: ['essential', 'religious', 'church'],
         priorityCategory: 'religion',
       },
@@ -785,7 +785,7 @@ export const institutionalCatalog = {
       Graveyard: {
         required: true,
         baseChance: 1,
-        desc: "Consecrated ground beside the church, on the parish's own plot, with a resident priest to close it. The rite keeps to the day of the death rather than waiting on a clergyman who comes through, and the parish has begun keeping the names in the same book as the baptisms. The ground nearest the church wall is spoken for generations ahead, and everyone here can say who holds it.",
+        desc: "Consecrated ground beside the house of worship, on its own plot, with a resident priest to close it. The rite keeps to the day of the death rather than waiting on a clergyman who comes through, and the congregation has begun keeping the names in the same book as the births. The ground nearest the wall is spoken for generations ahead, and everyone here can say who holds it.",
         tags: ['essential', 'religious'],
         priorityCategory: 'religion',
       },
@@ -1260,7 +1260,7 @@ export const institutionalCatalog = {
       'Parish churches (2-5)': {
         required: true,
         baseChance: 1,
-        desc: 'Multiple parishes within town.',
+        desc: 'Several houses of worship within town.',
         tags: ['essential', 'religious', 'church'],
         priorityCategory: 'religion',
       },
@@ -1289,7 +1289,7 @@ export const institutionalCatalog = {
       'Parish burial grounds': {
         required: true,
         baseChance: 1,
-        desc: "Each parish keeps its own ground beside its church, and a parish that has filled its ground buries beyond the gate instead. The sexton holds the register of who lies where, which is the town's longest unbroken record and the one it reaches for in an inheritance dispute. Guilds buy plots together so their members lie among their trade.",
+        desc: "Each congregation keeps its own ground beside its house of worship, and one that has filled its ground buries beyond the gate instead. The sexton holds the register of who lies where, which is the town's longest unbroken record and the one it reaches for in an inheritance dispute. Guilds buy plots together so their members lie among their trade.",
         tags: ['essential', 'religious'],
         priorityCategory: 'religion',
       },
@@ -1835,7 +1835,7 @@ export const institutionalCatalog = {
       'Burial grounds and charnel house': {
         required: true,
         baseChance: 1,
-        desc: "The parish grounds inside the walls filled generations ago, so the dead are lifted once their term is up and their bones stacked in the charnel house to make room for the next. New ground has been bought outside the gates, and the carts that go out at dusk are a fixed part of the city's evening. Who is lifted and who is left where they lie is settled by what a family endowed.",
+        desc: "The old grounds inside the walls filled generations ago, so the dead are lifted once their term is up and their bones stacked in the charnel house to make room for the next. New ground has been bought outside the gates, and the carts that go out at dusk are a fixed part of the city's evening. Who is lifted and who is left where they lie is settled by what a family endowed.",
         tags: ['essential', 'religious'],
         priorityCategory: 'religion',
       },
@@ -2364,7 +2364,7 @@ export const institutionalCatalog = {
       'Parish churches (50-100+)': {
         required: false,
         baseChance: 0.8,
-        desc: 'Hundreds of parish churches across all districts. The faith is woven into every neighbourhood.',
+        desc: 'Hundreds of houses of worship across all districts. The faith is woven into every neighbourhood.',
         tags: ['religious', 'church'],
         priorityCategory: 'infrastructure',
       },
@@ -2392,7 +2392,7 @@ export const institutionalCatalog = {
       'Cemetery network': {
         required: true,
         baseChance: 1,
-        desc: 'Burial has left the walls entirely: grounds beyond every gate, each with its own road, its own gatekeepers, and a trade in plots that the revenue office watches. The parish registers are copied into a central roll because no parish can any longer say where its own dead are. Wards are assigned to grounds, so a family that moves across the city can find itself divided by the assignment.',
+        desc: 'Burial has left the walls entirely: grounds beyond every gate, each with its own road, its own gatekeepers, and a trade in plots that the revenue office watches. The local registers are copied into a central roll because no single ground can any longer say where its own dead are. Wards are assigned to grounds, so a family that moves across the city can find itself divided by the assignment.',
         tags: ['essential', 'religious'],
         priorityCategory: 'infrastructure',
       },

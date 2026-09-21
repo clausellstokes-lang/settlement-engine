@@ -1284,7 +1284,7 @@ describe('THE PUBLIC-DOSSIER GUARD — a mounted desk never draws for a free vie
 /**
  * ⛔⛔ THE FIRST-PAINT LAW — a lit sentence a reader cannot see is dark.
  *
- * `Primitives.jsx:114` (and `Collapsible` at :83) render a shut section as
+ * `Primitives.jsx:120` (and `Collapsible` at :89) render a shut section as
  * `{open && <div>{children}</div>}`: a collapsed host emits NO BYTES AT ALL, not hidden
  * ones. So a SENTENCE row whose draw sits inside a host that is not open on first paint is
  * lit in the registry and dark on the page — and every instrument this file already owns
@@ -2089,7 +2089,7 @@ describe('THE FIRST-PAINT LAW — a sentence behind a shut fold reaches no reade
       'no sentence row is mounted, so this arm judged nothing').toBeGreaterThan(0);
     expect(
       foldedSentenceMounts(DOSSIER_MOUNTS, files),
-      'A SENTENCE IS MOUNTED WHERE NO READER CAN SEE IT. `Primitives.jsx:114` renders a shut'
+      'A SENTENCE IS MOUNTED WHERE NO READER CAN SEE IT. `Primitives.jsx:120` renders a shut'
       + ' section as `{open && children}`, so a collapsed host emits NO BYTES and the position'
       + ' is lit in the registry and dark on the page — with the reachability arm, the'
       + ' public-dossier guard and the desk itself all green over it. Hoist the line ABOVE the'

@@ -2941,7 +2941,7 @@ may not say the contract is failing unless the economic arm supplies that.
 
 **RECEIPT:** `src/domain/display/defenseDisplay.js:183-250` (`deriveSupportingCapabilities`) · rendered `src/components/new/tabs/DefenseTab.jsx:330-357`
 **STATE-KEY:** six rows — `Economic Backing` (`Well-funded` / `Adequate` /
-`Underfunded` / `Critical`) · `Magical Capability` (`Arcane support` / `None`) ·
+`Underfunded` / `Critical`) · `Arcane Support` (`Present` / `None`) ·
 `Legal Infrastructure` (`Court + Prison` / `Court only` / `Prison only` /
 `None`) · `Medical Readiness` (`Hospital present` / `Clergy care` / `None`) ·
 `Logistics & Supply` (`Granary present` / `No reserves`, modulated by port and
@@ -2978,12 +2978,12 @@ magical bypass channels (`teleport` / `airship`) are live-world state.
 2. `[unfolding]` The town has stopped being able to pay for its own defense and has not yet stopped having one, and the gap between those two facts is closing.
 3. `[street]` Nobody at {settlement} is being paid to defend it, and the people still doing it are doing it for reasons the town cannot rely on.
 
-**`Magical Capability: Arcane support`**
+**`Arcane Support: Present`**
 1. `[ledger]` {settlement} has arcane provision behind its defenses: detection, warding and the ability to answer a spell with something other than a shield.
 2. `[street]` The town has people it calls on for the things soldiers cannot do, and calls on them rarely enough that it still counts as remarkable.
 3. `[counterforce]` What the walls at {settlement} cannot see is somebody's charge rather than nobody's, and the town would learn of such a thing from an account rendered rather than from an alarm raised.
 
-**`Magical Capability: None`**
+**`Arcane Support: None`**
 1. `[ledger]` {settlement}'s defense is entirely conventional. Anything that arrives invisible arrives unopposed, because there is nothing here that would know.
 2. `[counterforce]` Nothing has exploited the gap at {settlement}, and the gap is complete. Whatever has spared the town, it was not a ward.
 3. `[street]` The town's answer to anything it cannot see at {settlement} is to find out afterwards, and nothing in its arrangements offers it any other answer.
@@ -4118,7 +4118,7 @@ draws at most one of each.
 **INFILTRATED** · `infiltrated`
 1. `[visitor]` Nothing here looks wrong. Decisions land slightly askew, and information reaches the wrong hands slightly too often.
 2. `[ledger]` The economy is untouched and the intelligence is not. Someone else's interest is being served inside the town's own rooms.
-3. `[threshold]` There is no visible crisis. The pattern is legible only to whoever is counting the coincidences.
+3. `[threshold]` The crisis is out of sight. The pattern is legible only to whoever is counting the coincidences.
 4. `[street]` Somebody in {settlement} answers elsewhere, and the town knows it without knowing who.
 5. `[ledger · dm-only]` What {settlement}'s hall discusses and what {settlement}'s hall records have come apart.
 6. `[visitor]` Conversation in {settlement} stops when it should not and resumes carefully.
@@ -5292,7 +5292,7 @@ shared letter would collide.*
 
 ### DS-GEN-3: Overview › Systems Health dashboard . `defenseProfile.scores{military,monster,internal,economic,magical} · economicState.prosperity · safetyProfile.safetyLabel · economicViability.viable · defenseProfile.readiness.label · economicState.foodSecurity{label,resilienceScore}`
 
-**RECEIPT:** `src/components/new/tabs/OverviewTab.jsx:169-224` (the framing sentence at `:177`; the food band at `:210-218`) · bands `src/domain/display/defenseScoreBands.js` (`STRONG` ≥65 / `ADEQUATE` ≥40 / `WEAK` ≥20 / `CRITICAL`) · readiness `src/generators/defenseGenerator.js:525-531` · prosperity `src/components/new/tabConstants.js:17` · food labels `src/generators/foodGenerator.js:339-357`
+**RECEIPT:** `src/components/new/tabs/OverviewTab.jsx:406-466` — the Systems Health section (the first-survey framing sentence at `:408-413`; the food band at `:455-466`) · bands `src/domain/display/defenseScoreBands.js` (`STRONG` ≥65 / `ADEQUATE` ≥40 / `WEAK` ≥20 / `CRITICAL`) · readiness `src/generators/defenseGenerator.js:525-531` · prosperity `src/components/new/tabConstants.js:17` · food labels `src/generators/foodGenerator.js:339-357`
 **STATE-KEY:** five score axes × four bands (**frozen**) · `prosperity` (ten spellings, five tiers — **frozen**) · `safetyLabel` head word (**frozen**) · `viable` true/false (**frozen**) · `readiness.label` (six, **frozen**) · `foodSecurity.label` (six — **the declared LIVE exception**)
 **SLOTS:** `{settlement}`
 **SECTION-TARGET:** `defense` (the three defence axes) · `economy` (economic resilience, prosperity, food) · `power` (internal security) · `overview` (viability, readiness)
@@ -5703,6 +5703,8 @@ unchanged.
 | 10 Prominent / emergent | overview | **PARITY** for the prominent tie, **PRINT-DEFERRED** for the emergent banner | the banner is a UI affordance about the generator's behaviour and has no print equivalent worth minting |
 | 11 History | — | **PRINT-DEFERRED** | as above: no history chapter; the events already reach print only through hooks |
 | 13 Hooks framing | every chapter with hooks | **PARITY** | `hookPriorityBand` is print-side vocabulary and the framing sentence is what gives it a subject |
+
+**⭐ CHAIR RULING 2026-09-18 UNDER THE OWNER'S ORDER (`impliment every fix`) — THE TABLE ABOVE IS NOW WIRED, AND TWO OF ITS ROWS ARE STALE.** The paid PDF carried NONE of the 51 sentence-rung mounts the screen draws; `domain/display/stateProse/printProse.js` now builds every one of them caller-side and the twelve chapters print them. The ruling, position by position: **every sentence-rung mount prints**, except the cells this document marks PRINT-DEFERRED or dm-only-versus-player — `DS-POW-3` the ladder, `DS-POW-6`'s seat-rank cells (`capture reached an AGENT of a faction`, `capture reached a LEADER`), `DS-POW-7`'s dm-only cells and the blocs position entire, `DS-DEF-4`'s capture rungs at `corrupted` and above, `DS-DEF-6`'s blockade-bypass cells (the `[unfolding]` and `[counterforce · dm-only]` variants of `Naval Defense: Under blockade`), row 5's overview *standing approach*, row 8's *steadings*, and row 10's *emergent banner*. Rows **9 (Neighbour network)** and **11 (History)** are **STALE and are re-ruled PARITY**: both chapters exist (`pdf/sections/Relationships.jsx`, `pdf/sections/HistoryFounding.jsx`), so the reason each row gave — "no relations chapter exists", "no history chapter" — has not been true for some time. The **thirty unruled mounts** (WRITER-1's ECO/SUP shapes, WRITER-3's FTH/STR/CND/POP shapes, and CT-1a/2/3 including `DS-GEN-12`, `DS-GEN-13` and `DS-GEN-17`) are ruled **PARITY** under this table's own default. ⚠ ONE FURTHER DEFERRAL IS THE IMPLEMENTING LANE'S JUDGMENT AND NOT THE CHAIR'S, recorded so it can be vetoed rather than re-found: the three `war.*` positions do not print, because their reading is assembled inside `WarTab.jsx` from the campaigns store through eight canonical readers and a `nameFor` closure, and a second derivation of a live reading is the fork this table exists to prevent; the faith half ships, its whole reading being `faithPanelModel(settlement)`. Every row here stays vetoable.
 
 **PRINT-NATIVE CHAPTER OPENERS** *(the one place print legitimately says something the screen does not: a chapter has to begin, and a tab does not)*
 - overview — 1. `[ledger]` What follows is {settlement} as it was surveyed, and where a thing has been re-judged since, the page says so. · 2. `[visitor]` {settlement}, described from the outside in. · 3. `[street]` This is the town as {settlement} would describe itself to somebody staying.

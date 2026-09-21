@@ -19,8 +19,11 @@ import { resolveSettlementTerrain } from '../../domain/resolveTerrain.js';
 import { INK, MUTED, SECOND, BORDER, BORDER2, CARD, CARD_HDR, FS, SP, EMPTY_VALUE } from '../theme.js';
 import Button from '../primitives/Button.jsx';
 import IconButton from '../primitives/IconButton.jsx';
+import useIsMobile from '../../hooks/useIsMobile.js';
+import { chromeFontSize, proseFontSize } from '../../design/proseScale.js';
 
 export default function PlacementDetailCard({ onOpenDetail }) {
+  const mobile = useIsMobile();
   const selectedSettlementId = useStore(s => s.selectedSettlementId);
   const _selectedBurgId       = useStore(s => s.selectedBurgId);
   const placements           = useStore(s => s.mapState.placements);
@@ -95,7 +98,7 @@ export default function PlacementDetailCard({ onOpenDetail }) {
         background: CARD_HDR, borderBottom: `1px solid ${BORDER2}`,
       }}>
         <div style={{
-          fontSize: FS.xs, fontWeight: 800, color: SECOND,
+          fontSize: chromeFontSize(FS.xs, mobile), fontWeight: 800, color: SECOND,
           textTransform: 'uppercase', letterSpacing: '0.06em',
         }}>
           Settlement
@@ -114,12 +117,12 @@ export default function PlacementDetailCard({ onOpenDetail }) {
         <div style={{ fontSize: FS.md, fontWeight: 800, color: INK, marginBottom: 2 }}>
           {name}
         </div>
-        <div style={{ fontSize: FS.xxs, color: MUTED, textTransform: 'uppercase', letterSpacing: '0.04em', marginBottom: SP.sm }}>
+        <div style={{ fontSize: chromeFontSize(FS.xxs, mobile), color: MUTED, textTransform: 'uppercase', letterSpacing: '0.04em', marginBottom: SP.sm }}>
           {size}{pop ? ` · ${formatCount(pop)} pop` : ''}
         </div>
 
         {(culture || terrain) && (
-          <div style={{ fontSize: FS.xs, color: INK, marginBottom: SP.sm, lineHeight: 1.4 }}>
+          <div style={{ fontSize: proseFontSize(FS.xs, mobile), color: INK, marginBottom: SP.sm, lineHeight: 1.4 }}>
             {culture && <div><span style={{ color: MUTED }}>Culture:</span> {culture}</div>}
             {terrain && <div><span style={{ color: MUTED }}>Terrain:</span> {terrain}</div>}
           </div>

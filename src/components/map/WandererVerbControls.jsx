@@ -39,13 +39,15 @@ import { useState } from 'react';
 import { useStore } from '../../store/index.js';
 import Button from '../primitives/Button.jsx';
 import { BODY, BORDER2, CARD_ALT, FS, MUTED, SECOND, sans } from '../theme.js';
+import useIsMobile from '../../hooks/useIsMobile.js';
+import { chromeFontSize } from '../../design/proseScale.js';
 
 const CONTROL_ROW = {
   display: 'flex', alignItems: 'center', gap: 6, flexWrap: 'wrap',
   paddingTop: 6, borderTop: `1px dashed ${BORDER2}`,
 };
 
-const NOTE = { color: MUTED, fontFamily: sans, fontSize: FS.xxs, fontStyle: 'italic' };
+const note_ = (mobile) => ({ color: MUTED, fontFamily: sans, fontSize: chromeFontSize(FS.xxs, mobile), fontStyle: 'italic' });
 
 /**
  * @param {Object} props
@@ -64,6 +66,7 @@ export default function WandererVerbControls({
   places = [],
   defaultPlaceId = '',
 }) {
+  const mobile = useIsMobile();
   const assignNpc = useStore(s => s.assignNpc);
   const killNpc = useStore(s => s.killNpc);
   const pardonNpc = useStore(s => s.pardonNpc);
@@ -84,14 +87,14 @@ export default function WandererVerbControls({
   return (
     <div data-testid="wanderer-verbs" style={{ display: 'grid', gap: 5 }}>
       <div style={CONTROL_ROW}>
-        <label htmlFor={placeFieldId} style={{ color: SECOND, fontFamily: sans, fontSize: FS.xxs, fontWeight: 900 }}>
+        <label htmlFor={placeFieldId} style={{ color: SECOND, fontFamily: sans, fontSize: chromeFontSize(FS.xxs, mobile), fontWeight: 900 }}>
           Settle them at
           <select
             id={placeFieldId}
             aria-label={`Settle ${name} at`}
             value={placeId}
             onChange={(e) => setPlaceId(e.target.value)}
-            style={{ marginLeft: 5, fontFamily: sans, fontSize: FS.xxs, background: CARD_ALT, color: BODY, border: `1px solid ${BORDER2}` }}
+            style={{ marginLeft: 5, fontFamily: sans, fontSize: chromeFontSize(FS.xxs, mobile), background: CARD_ALT, color: BODY, border: `1px solid ${BORDER2}` }}
           >
             {places.map(place => (
               <option key={place.id} value={place.id}>{place.name}</option>
@@ -108,7 +111,7 @@ export default function WandererVerbControls({
           Settle them
         </Button>
         {doorsShut && (
-          <label htmlFor={overrideFieldId} style={{ color: BODY, fontFamily: sans, fontSize: FS.xxs, display: 'flex', alignItems: 'center', gap: 4 }}>
+          <label htmlFor={overrideFieldId} style={{ color: BODY, fontFamily: sans, fontSize: chromeFontSize(FS.xxs, mobile), display: 'flex', alignItems: 'center', gap: 4 }}>
             <input
               id={overrideFieldId}
               type="checkbox"
@@ -131,7 +134,7 @@ export default function WandererVerbControls({
         )}
         {confirmingDeath && (
           <>
-            <span style={NOTE}>Strike {name} from the register of the living?</span>
+            <span style={note_(mobile)}>Strike {name} from the register of the living?</span>
             <Button
               size="sm"
               onClick={() => { setConfirmingDeath(false); return run(() => killNpc(campaignId, { wnpcId })); }}
@@ -142,7 +145,7 @@ export default function WandererVerbControls({
           </>
         )}
       </div>
-      {note && <div data-testid="wanderer-verb-note" style={NOTE}>{note}</div>}
+      {note && <div data-testid="wanderer-verb-note" style={note_(mobile)}>{note}</div>}
     </div>
   );
 }
@@ -160,6 +163,7 @@ export default function WandererVerbControls({
  * @param {string} props.campaignId
  */
 export function WandererUndoControl({ campaignId }) {
+  const mobile = useIsMobile();
   const undoLastNpcVerb = useStore(s => s.undoLastNpcVerb);
   // A COUNT, not the ring: a selector that returned the array would hand this control a
   // reference it must not read (the ring carries the DM-truth snapshots), and a number is
@@ -180,13 +184,13 @@ export function WandererUndoControl({ campaignId }) {
         </Button>
       )}
       {pending > 0 && (
-        <span style={NOTE}>
+        <span style={note_(mobile)}>
           {pending === 1
             ? 'One ruling of yours can still be walked back.'
             : `${pending} rulings of yours can still be walked back, newest first.`}
         </span>
       )}
-      {note && <span data-testid="wanderer-undo-note" style={NOTE}>{note}</span>}
+      {note && <span data-testid="wanderer-undo-note" style={note_(mobile)}>{note}</span>}
     </div>
   );
 }

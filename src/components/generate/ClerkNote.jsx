@@ -13,6 +13,8 @@
  * Behavior-neutral by construction: children (including Buttons and links)
  * render unchanged; `role` passes through so alert semantics survive.
  */
+import useIsMobile from '../../hooks/useIsMobile.js';
+import { chromeFontSize } from '../../design/proseScale.js';
 import { INK, SECOND, sans, serif_, SP, FS } from '../theme.js';
 
 /**
@@ -24,6 +26,7 @@ import { INK, SECOND, sans, serif_, SP, FS } from '../theme.js';
  * @param {object} [props.style]     container style overrides (layout only)
  */
 export function ClerkNote({ rubric, children, role, actions, style }) {
+  const mobile = useIsMobile();
   return (
     <div
       role={role}
@@ -37,7 +40,9 @@ export function ClerkNote({ rubric, children, role, actions, style }) {
     >
       <div style={{ flex: '1 1 260px' }}>
         <div style={{
-          fontFamily: sans, fontSize: FS.xs, fontWeight: 700,
+          // The rubric is the apparatus's voice and the first thing read when something
+          // has gone wrong; it took the chrome floor when the law reached /create.
+          fontFamily: sans, fontSize: chromeFontSize(FS.xs, mobile), fontWeight: 700,
           letterSpacing: '0.1em', textTransform: 'uppercase',
           color: 'var(--oc-rubric)', marginBottom: 2,
         }}>

@@ -66,6 +66,18 @@
  * Pure. No RNG — not one draw. No writes. Dormant (v1) returns an empty reading.
  */
 
+// dark-until: Register VII's wiring car — chartered the day the owner signs `REGISTER_VII_SIGNATURE`; until then DELIBERATE-DARK by the owner's unsigned register
+// Having no importer is BY DESIGN here, not orphanhood: this is R22's reading half, landed
+// ahead of its wiring, and the census in tests/domain/roadsParticipation.test.js already
+// carries its EXPECTED row (the packet that wires it owes the raw-base disposition).
+// ⚠ THIS FILE IS THE SOLE GENERATOR IMPORTER of domain/density/factionLifecycle.js and
+// domain/spatial/cohesionWeave.js, so it alone holds both in ENGINE_SHARED_DOMAIN and in the
+// eager first-paint set (measured 268 -> 266 without this file's family). A wiring or a
+// retirement moves those two; neither is free. docs/DEAD_CODE_DISPOSITION.md, "Round-3
+// additions" (FIX-D9, 2026-09-20).
+// ⛔ Line 29 above is cited twice by scripts/lib/writer-dark-register.mjs; this block sits
+// BELOW it deliberately so that address stays true.
+// @enforced-by tests/lint/deadCodeDisposition.walker.test.js
 import { compareCodepoint } from '../../domain/deterministicSort.js';
 import { factionArchetype } from '../../domain/factionArchetypes.js';
 import { rulingPowerFromArchetype } from '../../domain/spatial/cohesionWeave.js';

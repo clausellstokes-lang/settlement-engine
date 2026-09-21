@@ -18,6 +18,10 @@
  * asserts the two properties the cure has to buy: THE PERSON'S STATE FOLLOWS THE
  * PERSON, AND THE STRANGER INHERITS NOTHING.
  *
+ * ⛔ THE KEEPER IS AN AUTHORED CHARACTER, NOT A LOCKED ONE (owner orders 2026-09-17,
+ * "remove the other padlocks"): no stored lock is read any more, and the reroll's entity
+ * policy carries a user-authored character into the same moved slot the lock did.
+ *
  * The seeds are the pinned pair from tests/store/pinnedNpcRegenRemap.test.js, for
  * the same reason that file pins them: the reroll mints its seed through
  * generateSeed(), and under an unpinned mint the keeper's slot move — the whole
@@ -111,9 +115,10 @@ describe('REGEN — a person\'s world state follows the person, and the stranger
   test('npcStates re-key the keeper, drop everyone replaced, and never cross settlements', async () => {
     const { generateSettlementPipeline } = await import('../../src/generators/generateSettlementPipeline.js');
     const town = reloaded(generateSettlementPipeline(CFG, null, { seed: 'pins-store-regen-1', customContent: {} }));
+    town.npcs[2]._authored = true;
     const target = town.npcs[2];
     const bystander = town.npcs[0];
-    expect(String(bystander.id), 'the fixture needs a second, unlocked roster member')
+    expect(String(bystander.id), 'the fixture needs a second, unauthored roster member')
       .not.toBe(String(target.id));
 
     // Seed a simulation row for EVERY roster member, each carrying a marker that
@@ -138,7 +143,6 @@ describe('REGEN — a person\'s world state follows the person, and the stranger
     store.setState({
       settlement: town,
       config: town.config,
-      locks: { npcs: [String(target.id)] },
       activeSaveId: SAVE_ID,
       savedSettlements: [{ id: SAVE_ID, name: town.name, settlement: town }],
       campaigns: [{
@@ -158,7 +162,7 @@ describe('REGEN — a person\'s world state follows the person, and the stranger
 
     const after = store.getState();
     const survivor = after.settlement.npcs.find((n) => String(n.name) === String(target.name));
-    expect(survivor, 'the locked character survived the reroll').toBeTruthy();
+    expect(survivor, 'the authored character survived the reroll').toBeTruthy();
     // NON-VACUITY GUARD, and it is the defect's whole precondition: the keeper has
     // to INHERIT A DIFFERENT SLOT ID, or every assertion below would also hold with
     // the fold deleted.
@@ -199,6 +203,7 @@ describe('REGEN — a person\'s world state follows the person, and the stranger
   test('a graduated keeper keeps ONE durable identity across the slot move', async () => {
     const { generateSettlementPipeline } = await import('../../src/generators/generateSettlementPipeline.js');
     const town = reloaded(generateSettlementPipeline(CFG, null, { seed: 'pins-store-regen-1', customContent: {} }));
+    town.npcs[2]._authored = true;
     const target = town.npcs[2];
 
     // A LIT world — the ledger's whole surface is an early return when the
@@ -229,7 +234,6 @@ describe('REGEN — a person\'s world state follows the person, and the stranger
     store.setState({
       settlement: town,
       config: town.config,
-      locks: { npcs: [String(target.id)] },
       activeSaveId: SAVE_ID,
       savedSettlements: [{ id: SAVE_ID, name: town.name, settlement: town }],
       campaigns: [{
@@ -299,12 +303,12 @@ describe('REGEN — a person\'s world state follows the person, and the stranger
     const { generateSettlementPipeline } = await import('../../src/generators/generateSettlementPipeline.js');
     const { campaigns } = await import('../../src/lib/campaigns.js');
     const town = reloaded(generateSettlementPipeline(CFG, null, { seed: 'pins-store-draft', customContent: {} }));
+    town.npcs[2]._authored = true;
     const worldState = { tick: 1, npcStates: { [`${SAVE_ID}:npc_1`]: { marker: 'not-mine' } } };
 
     store.setState({
       settlement: town,
       config: town.config,
-      locks: { npcs: [String(town.npcs[2].id)] },
       activeSaveId: null,
       campaigns: [{ id: CAMPAIGN_ID, accessState: 'active', settlementIds: [SAVE_ID], worldState }],
     });

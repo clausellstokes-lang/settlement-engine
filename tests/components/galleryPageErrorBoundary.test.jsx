@@ -51,7 +51,7 @@ function baseState(overrides = {}) {
     dossier: null, dossierLoading: false, dossierError: null,
     voteBusyId: null, reportBusyId: null, importBusyId: null,
     importedSlugs: new Set(), actionError: null, actionNotice: null,
-    loadMore: () => {}, openDossier: () => {}, backToList: () => {},
+    loadMore: () => {}, retryList: () => {}, openDossier: () => {}, backToList: () => {},
     toggleArrayFilter: () => {}, toggleBoolFilter: () => {}, clearFilters: () => {},
     voteOn: () => {}, reportOn: () => {}, importDossier: () => {},
     setDossierCommentCount: () => {},

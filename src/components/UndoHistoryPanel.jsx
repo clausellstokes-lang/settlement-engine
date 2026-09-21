@@ -58,6 +58,8 @@ import IconButton from './primitives/IconButton.jsx';
 import Button from './primitives/Button.jsx';
 import EmptyState from './primitives/EmptyState.jsx';
 import { GOLD, INK, INK_DEEP, BODY, MUTED, BORDER, CARD, sans, serif_, FS, SP } from './theme.js';
+import useIsMobile from '../hooks/useIsMobile.js';
+import { proseFontSize } from '../design/proseScale.js';
 
 // The human name of what a single undo reverts. Mirrors the toolbar's chip copy
 // so the two affordances agree; an absent/single-tick interval reads generically.
@@ -145,6 +147,7 @@ function mergedRows(advStack, propStack, campaignId, parkedAdvance, currentTick)
 }
 
 export default function UndoHistoryPanel({ campaignId, onClose }) {
+  const mobile = useIsMobile();
   const dialogRef = useDialogFocusTrap(true, onClose);
   const advStack = useStore((s) => s.pulseUndoStack);
   const propStack = useStore((s) => s.proposalUndoStack);
@@ -237,7 +240,7 @@ export default function UndoHistoryPanel({ campaignId, onClose }) {
             />
           ) : (
             <>
-              <p style={{ margin: `0 0 ${SP.sm}px`, color: MUTED, fontFamily: sans, fontSize: FS.xs, lineHeight: 1.5 }}>
+              <p style={{ margin: `0 0 ${SP.sm}px`, color: MUTED, fontFamily: sans, fontSize: proseFontSize(FS.xs, mobile), lineHeight: 1.5 }}>
                 Return the realm to any point below. Later steps are undone with it.
                 {' '}
                 {parkedRowShown
@@ -261,7 +264,7 @@ export default function UndoHistoryPanel({ campaignId, onClose }) {
                             read as a new calendar step. */}
                         {kind === 'proposal' ? 'Proposal applied' : pointLabel(entry)}
                       </div>
-                      <div style={{ color: BODY, fontFamily: sans, fontSize: FS.xs, lineHeight: 1.5 }}>
+                      <div style={{ color: BODY, fontFamily: sans, fontSize: proseFontSize(FS.xs, mobile), lineHeight: 1.5 }}>
                         {kind === 'proposal' ? (
                           <>
                             {entry.headline ? `${entry.headline} · ` : ''}

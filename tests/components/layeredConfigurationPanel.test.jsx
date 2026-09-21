@@ -37,6 +37,9 @@ let __mobileFlag = false;
 vi.mock('../../src/hooks/useIsMobile.js', () => ({ default: () => __mobileFlag }));
 
 import LayeredConfigurationPanel from '../../src/components/generate/LayeredConfigurationPanel.jsx';
+import { FORK_SEED_MAX, forkIdentity } from '../../src/lib/anonForkSalt.js';
+import { SAMPLE_SETTLEMENTS, forkSeedFor } from '../../src/data/sampleSettlements.js';
+import { generateSeed } from '../../src/kernel/prng.js';
 
 describe('LayeredConfigurationPanel — Create reorg', () => {
   beforeEach(() => { trackMock.mockClear(); __mobileFlag = false; });
@@ -71,6 +74,35 @@ describe('LayeredConfigurationPanel — Create reorg', () => {
 
     fireEvent.click(screen.getByText('Trade Dynamics'));
     expect(stepViews().some(([, p]) => p.step_id === 'trade')).toBe(true);
+  });
+
+  // ⭐ THE ADDRESS HAS A DECLARED LENGTH (owner-signed, ODQ §934.72).
+  // SeedField carried NO `maxLength` at all, which is how a signed-in fork seed
+  // reached ~48 characters with nothing noticing: §7a row 1 calls a fork seed "the
+  // address … typeable in the `SeedField`", and the pin that was supposed to hold
+  // that had no field limit to read. The limit is DERIVED in lib/anonForkSalt.js
+  // from the card seeds plus the fork suffix, so this arm asserts the two agree by
+  // construction — a literal here would just be the second spelling that drifts.
+  it('the exact-seed field declares the fork address ceiling as its maxLength', () => {
+    render(<LayeredConfigurationPanel mode="advanced" />);
+    const field = screen.getByLabelText('Exact seed');
+    // Guard-the-guard: an absent attribute reads -1 in jsdom, so assert the field
+    // really carries one before comparing it to anything.
+    expect(field.maxLength, 'the exact-seed field declares no maxLength').toBeGreaterThan(0);
+    expect(field.maxLength).toBe(FORK_SEED_MAX);
+  });
+
+  it('that ceiling admits every seed the product can hand the reader back', () => {
+    // The field may never clip a seed the engine itself minted or forked, which is
+    // the failure a bare number in the JSX would have shipped unnoticed.
+    for (const sample of SAMPLE_SETTLEMENTS) {
+      for (const who of [null, '7c9e6679-7425-40de-944b-e07fc1f90ae7']) {
+        const seed = forkSeedFor(sample, forkIdentity(who));
+        expect(seed.length, `${sample.id} would be clipped by the field`)
+          .toBeLessThanOrEqual(FORK_SEED_MAX);
+      }
+    }
+    expect(generateSeed().length).toBeLessThanOrEqual(FORK_SEED_MAX);
   });
 
   it('can suppress the Place in Region card', () => {

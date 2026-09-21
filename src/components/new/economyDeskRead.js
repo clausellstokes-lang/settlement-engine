@@ -83,7 +83,7 @@ export const SILENT_ECONOMY_DESK = Object.freeze({
  * could never draw it. Two tabs disagreeing about who is reading would be the real defect.
  *
  * @param {object|null|undefined} settlement
- * @param {{publicDossier?: boolean, playerView?: boolean,
+ * @param {{tierNoun?: string|null, publicDossier?: boolean, playerView?: boolean,
  *   foodBalance?: object|null, granaryOutlook?: object|null, flowDrift?: object|null,
  *   impairedInstitution?: string|null}} [options]
  *   `impairedInstitution` is ONE house out of the impairment sets ServicesTab already builds
@@ -111,6 +111,14 @@ export function economyDeskRead(settlement, options = {}) {
     {
       seed: String(settlement._seed ?? settlement.id ?? ''),
       audience: options.playerView ? 'player' : 'dm',
+      // ⛔ FORWARDED, NEVER DERIVED (§934.22 addendum). The settlement's own tier noun is a
+      // READER-FACING choice, and this reader has a second kind of caller: the composed-prose
+      // manifest's recorder drives it through `deskReturns` to identify each cell's variant by
+      // its rendered template. Deriving the noun here spoke it for the recorder too and moved
+      // 4,214 of the manifest's 72,240 cells to `vid: null`. So a surface that wants the
+      // settlement's voice says so in its bag, and a recorder that wants the corpus's own
+      // words simply does not — which is the same rule `composeStateProse` states.
+      tierNoun: options.tierNoun ?? null,
     },
   );
 }

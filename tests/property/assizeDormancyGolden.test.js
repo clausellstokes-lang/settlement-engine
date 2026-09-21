@@ -45,7 +45,7 @@ function build({ sham = false, legit = 50, unrest = 0.5, commons = undefined } =
       ...(commons ? { commonsVoice: commons } : {}),
     },
   };
-  return { snapshot: { settlements }, worldState, settlementUpdates: settlements.map((it) => ({ saveId: it.id, settlement: it.settlement })) };
+  return { snapshot: { settlements }, worldState, settlementUpdates: settlements.map((update) => ({ saveId: update.id, settlement: update.settlement })) };
 }
 function run(rules, opts) {
   const fx = build(opts);

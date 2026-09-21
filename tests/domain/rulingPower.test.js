@@ -350,44 +350,27 @@ describe('coupVerdictOutcomes', () => {
     expect(out.reasons.join(' ')).not.toMatch(/\b\d+(?:\.\d+)?\b|×|\b(?:weight|multiplier|score|roll|chance)\b/i);
   });
 
-  test('a locked governing faction downgrades the transfer to a proposal', () => {
-    const outcomes = coupVerdictOutcomes({
-      resolved: [resolvedCoup()],
-      snapshot: snapshotFor(settlementFixture(), { campaignState: { locks: { factions: ['faction.town_council'] } } }),
-      rng: rngOf(0.5, 0.0),
-      tick: 9,
-    });
-    expect(outcomes[0].applyMode).toBe('proposal');
-  });
-
-  test('the factions lock is NAME-KEYED: a boolean arms nothing, an array arms the shield', () => {
-    // ⚠⚠ THIS IS THE TRAP THE UI WIRING HAD TO AVOID, PINNED AT THE READER.
-    // Every OTHER world lock (identity, geography) is a boolean written by
-    // `setLock(key, true)`. `factions` cannot be: `lockedGoverningFaction` opens with
-    // `Array.isArray(locked)`, so `factions: true` sails through the type-tolerant
-    // lock map, persists, renders as "Locked" anywhere that tests truthiness — and
-    // leaves the coup on `auto`. A control that wrote a boolean here would claim to
-    // protect the seat while protecting nobody.
-    const run = (locks) => coupVerdictOutcomes({
+  test('a STORED seat lock no longer shields the seat: the fall applies exactly as without it (owner order 2026-09-17)', () => {
+    // The "Keep them in power" button was the only writer of this key, and the owner
+    // ordered the whole "What a new roll keeps" section removed. A lock nobody can see or
+    // clear must not keep acting, so coup.js stopped reading it; the key stays in the save.
+    const run = (locks, rules) => coupVerdictOutcomes({
       resolved: [resolvedCoup()],
       snapshot: snapshotFor(settlementFixture(), { campaignState: { locks } }),
       rng: rngOf(0.5, 0.0),
       tick: 9,
-    })[0].applyMode;
-
-    // THE LIVE ANCHOR: the array form really does arm this exact fixture, so the
-    // refusal below measures the SHAPE being rejected and not a shield that is
-    // simply dead, a fixture that stopped falling, or a renamed incumbent.
-    expect(run({ factions: ['Town Council'] })).toBe('proposal');
-    // …and the bare NAME works, not merely the `faction.`-prefixed slug the test
-    // above uses — both spellings collapse through stablePart().
-    expect(run({ factions: ['faction.town_council'] })).toBe('proposal');
-
-    // THE REFUSALS: neither boolean nor an empty array is a lock.
-    expect(run({ factions: true })).toBe('auto');
-    expect(run({ factions: [] })).toBe('auto');
-    // …and a name that is not the incumbent's does not shield the incumbent.
-    expect(run({ factions: ['Some Other Guild'] })).toBe('auto');
+      ...(rules ? { rules } : {}),
+    })[0];
+    const bare = run({});
+    const stored = run({ factions: ['Town Council'] });
+    // THE LIVE ANCHOR: the fixture falls, with a transfer, on both runs.
+    expect(bare.type).toBe('power_transfer');
+    expect(stored.type).toBe('power_transfer');
+    expect(stored.applyMode, 'a stored seat lock still turned the fall into a proposal').toBe('auto');
+    expect(run({ factions: ['faction.town_council'] }).applyMode).toBe('auto');
+    expect(stored.reasons).toEqual(bare.reasons);
+    // The seat still CAN wait for approval, through the table's own rules rather than a lock.
+    expect(run({ factions: ['Town Council'] }, { politicalAutonomy: 'dm_only' }).applyMode).toBe('proposal');
   });
 
   test('a held seat emits coup_suppressed; party resolutions skip the verdict', () => {

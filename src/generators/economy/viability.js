@@ -371,7 +371,7 @@ const generatePowerDynamics = (population, institutions, economicState, config =
         title: 'High Religious Priority Without Clergy',
         description: 'Religion slider is high but no religious institution is present.',
         impact: 'Religious fervour without institutional anchoring produces instability.',
-        suggestedFixes: ['Add Parish Church, Temple, or Monastery'],
+        suggestedFixes: ['Add a house of worship, a temple or a monastery'],
         priorityNote: `Religion priority is ${pri.religion}. A religious centre is expected.`,
       });
     }

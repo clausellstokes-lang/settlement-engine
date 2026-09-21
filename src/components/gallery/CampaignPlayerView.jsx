@@ -14,12 +14,15 @@
 import CampaignStatePanel from './CampaignStatePanel.jsx';
 import Button from '../primitives/Button.jsx';
 import { BORDER, CARD, CARD_ALT, INK, INK_DEEP, MUTED, SECOND, PARCH, sans, serif_, SP, FS } from '../theme.js';
+import useIsMobile from '../../hooks/useIsMobile.js';
+import { chromeFontSize } from '../../design/proseScale.js';
 
 /**
  * @param {{ campaign: { name: string, description: string|null, realmArcSummary: string|null,
  *   imageUrl: string|null, world: { snapshot: any, sections: any } }, onBack?: () => void }} props
  */
 export default function CampaignPlayerView({ campaign, onBack }) {
+  const mobile = useIsMobile();
   if (!campaign || typeof campaign !== 'object') return null;
   const { name, description, realmArcSummary, imageUrl, world } = campaign;
   return (
@@ -36,7 +39,7 @@ export default function CampaignPlayerView({ campaign, onBack }) {
         <div style={{ padding: SP.lg, display: 'flex', flexDirection: 'column', gap: SP.sm }}>
           <div style={{ fontFamily: serif_, fontSize: FS.lg, fontWeight: 700, color: INK_DEEP }}>{name || 'A shared world'}</div>
           {/* The party's frame: this is the world as its people know it, not the DM's notes. */}
-          <div style={{ display: 'inline-flex', alignSelf: 'start', fontSize: FS.pico, fontWeight: 700, color: SECOND, background: PARCH, border: `1px solid ${BORDER}`, padding: '1px 6px' }}>
+          <div style={{ display: 'inline-flex', alignSelf: 'start', fontSize: chromeFontSize(FS.pico, mobile), fontWeight: 700, color: SECOND, background: PARCH, border: `1px solid ${BORDER}`, padding: '1px 6px' }}>
             A shared world, read as its people know it
           </div>
           {realmArcSummary && <div style={{ fontSize: FS.sm, color: INK, fontStyle: 'italic', lineHeight: 1.5 }}>{realmArcSummary}</div>}

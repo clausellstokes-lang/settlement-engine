@@ -23,6 +23,7 @@ import EntityLink from '../primitives/EntityLink.jsx';
 import { entityIdFor, localNpcId } from '../../domain/dossier/entityLinks.js';
 import { factionIdFromName } from '../../lib/entities.js';
 import { useDossierEntities } from './DossierEntityContext.jsx';
+import { literaryTitle, tokenCase } from '../new/labelLadder.js';
 import {
   FS, INK, MUTED, BODY, BORDER, CARD, CARD_HDR, GOLD, GREEN, RED, AMBER, sans, SP, swatch } from '../theme.js';
 
@@ -40,20 +41,30 @@ function BandPill({ band }) {
   return (
     <span data-band={band} style={{
       display: 'inline-block', padding: '1px 7px', fontSize: FS.xxs,
-      fontWeight: 800, letterSpacing: 0.3, textTransform: 'uppercase', color: swatch.white,
+      fontWeight: 800, color: swatch.white,
       background: BAND_COLOR[band] || MUTED,
-    }}>{band}</span>
+    }}>{tokenCase(band)}</span>
   );
 }
 
-function SectionShell({ title, accent = GOLD, testid, children }) {
+/**
+ * @param {{ title: string, accent?: string, testid?: string, literary?: boolean,
+ *   children?: import('react').ReactNode }} props
+ *   literary: the header opens a READING rather than titling a section — the label
+ *   ladder's fourth register (components/new/labelLadder.js). Three of the four cards
+ *   below name themselves in chrome and one opens a paragraph, so the register is a
+ *   prop and not a second shell.
+ */
+function SectionShell({ title, accent = GOLD, testid, literary = false, children }) {
   return (
     <div data-testid={testid} style={{
       background: CARD, border: `1px solid ${BORDER}`, borderLeft: `3px solid ${accent}`,
       overflow: 'hidden', margin: '12px 0', fontFamily: sans,
     }}>
       <div style={{
-        fontSize: FS.xs, fontWeight: 800, color: MUTED, textTransform: 'uppercase', letterSpacing: '0.06em',
+        ...(literary
+          ? { ...literaryTitle(FS.sm), color: INK }
+          : { fontSize: FS.xs, fontWeight: 800, color: MUTED, textTransform: 'uppercase', letterSpacing: '0.06em' }),
         background: CARD_HDR, padding: `${SP.sm}px ${SP.md}px`, borderBottom: `1px solid ${BORDER}`,
       }}>{title}</div>
       <div style={{ padding: SP.md }}>{children}</div>
@@ -123,8 +134,7 @@ export function EconomicsGranarySection({ settlement }) {
             <span key={f} style={{
               fontSize: FS.xxs, fontWeight: 700, color: f === 'blockade' ? RED : GOLD,
               background: CARD_HDR, border: `1px solid ${BORDER}`, padding: '1px 6px',
-              textTransform: 'uppercase', letterSpacing: '0.04em',
-            }}>{f}</span>
+            }}>{tokenCase(f)}</span>
           ))}
         </div>
       )}
@@ -243,7 +253,7 @@ export function PowerSuccessionSection({ settlement }) {
         : GREEN;
 
   return (
-    <SectionShell title="Rule and succession" accent={GOLD} testid="power-succession-section">
+    <SectionShell title="Rule and succession" accent={GOLD} literary testid="power-succession-section">
       {incumbentName && (
         <div style={{ fontSize: FS.sm, color: BODY, marginBottom: SP.xs }}>
           {/* The incumbent here is a governing FACTION (coupContenders reads
@@ -262,20 +272,25 @@ export function PowerSuccessionSection({ settlement }) {
       </div>
       {level !== 'guided' && contenders.challengers.length > 0 && (
         <div style={{ marginBottom: SP.xs }}>
-          <div style={{ fontSize: FS.xxs, fontWeight: 700, color: MUTED, textTransform: 'uppercase', letterSpacing: '0.05em', marginBottom: 3 }}>Contenders</div>
+          <div style={{ fontSize: FS.xxs, fontWeight: 700, color: MUTED, marginBottom: 3 }}>Contenders</div>
           {contenders.challengers.map((c, i) => (
             <div key={i} style={{ fontSize: FS.xs, color: BODY, display: 'flex', gap: SP.sm }}>
               {/* Each contender is a rival FACTION → its Power row (rename-safe). */}
               <span style={{ flex: 1 }}><EntityLink id={factionIdFromName(c.name)} type="faction" fallback={c.name} style={{ color: BODY }} /></span>
+              {/* THE SECOND MOUNT OF THE SAME RAW SCALAR, and it is here because the census
+                  went looking rather than because a browser pass met it: this section printed
+                  the same "w 41.25" the Power tab's own row did. The list is ORDERED by that
+                  weight (`byWeightDescThenName`), which is the reader's share of it; the
+                  coefficient above says the same thing about the seat and keeps to the same
+                  law — "the legibility law wants the consequence, not the arithmetic". */}
               <span style={{ color: MUTED }}>{c.archetype}</span>
-              <span style={{ fontWeight: 700, color: INK }}>w {c.weight}</span>
             </div>
           ))}
         </div>
       )}
       {previous.length > 0 && (
         <div data-testid="government-lineage">
-          <div style={{ fontSize: FS.xxs, fontWeight: 700, color: MUTED, textTransform: 'uppercase', letterSpacing: '0.05em', marginBottom: 3 }}>Lineage</div>
+          <div style={{ fontSize: FS.xxs, fontWeight: 700, color: MUTED, marginBottom: 3 }}>Lineage</div>
           {previous.slice(-4).map((g, i) => (
             <div key={i} style={{ fontSize: FS.xs, color: BODY }}>
               {g.label || g.government || 'Prior government'}

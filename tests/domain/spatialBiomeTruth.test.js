@@ -82,13 +82,13 @@ describe('V-6 BIOME TRUTH â€” the road scene reads biome/season texture (dark â‡
       // activeSpatialDigest requires a positive integer canon version alongside the digest.
       worldState: { spatialCanonVersion: 1, spatialDigest: digest, tick: 100, calendar: { elapsedWeeks: 100 } },
     });
-    const litHops = (mk(litDigest).sections.find((s) => s.id === 'road')?.items || []).filter((it) => it.at);
+    const litHops = (mk(litDigest).sections.find((s) => s.id === 'road')?.items || []).filter((hop) => hop.at);
     expect(litHops.length, 'the road has hops').toBeGreaterThan(0);
-    expect(litHops.every((it) => typeof it.terrain === 'string' && it.terrain.length > 0),
+    expect(litHops.every((hop) => typeof hop.terrain === 'string' && hop.terrain.length > 0),
       'each hop carries a biome/season texture line when lit').toBe(true);
-    const darkHops = (mk(darkDigest).sections.find((s) => s.id === 'road')?.items || []).filter((it) => it.at);
+    const darkHops = (mk(darkDigest).sections.find((s) => s.id === 'road')?.items || []).filter((hop) => hop.at);
     expect(darkHops.length, 'the dark road still has hops').toBeGreaterThan(0);
-    expect(darkHops.every((it) => it.terrain === undefined),
+    expect(darkHops.every((hop) => hop.terrain === undefined),
       'no texture field when the digest carries no biomes (byte-identical)').toBe(true);
   });
 });

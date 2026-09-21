@@ -75,7 +75,7 @@ const HINTS = {
 // /compendium is the Overview, so it is not repeated as ?tab=overview here.
 const COMPENDIUM_TABS = [
   'tiers', 'economy', 'power', 'institutions', 'operations', 'arcane', 'deities',
-  'living', 'lenses', 'facets', 'stress', 'calamity', 'neighbour', 'az',
+  'living', 'stress', 'calamity', 'neighbour', 'az',
 ];
 
 /** Is this ROUTES entry an indexable public content route? */

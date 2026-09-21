@@ -26,6 +26,8 @@ import Button from '../primitives/Button.jsx';
 import { GOLD, INK, BODY, MUTED, BORDER, SP, FS, swatch } from '../theme.js';
 import Section from './AccountSection.jsx';
 import SecurityQuestionsFields from '../auth/SecurityQuestionsFields.jsx';
+import useIsMobile from '../../hooks/useIsMobile.js';
+import { chromeFontSize } from '../../design/proseScale.js';
 
 function ErrorBanner({ children }) {
   return (
@@ -44,6 +46,7 @@ function OkBanner({ children }) {
 }
 
 export default function AccountRecoveryQuestionsSection() {
+  const mobile = useIsMobile();
   const authSetSecurityAnswers = useStore(s => s.authSetSecurityAnswers);
   const authGetSecurityQuestionIds = useStore(s => s.authGetSecurityQuestionIds);
 
@@ -154,7 +157,7 @@ export default function AccountRecoveryQuestionsSection() {
 
         {hasQuestions && !editing && (
           <div>
-            <div style={{ fontSize: FS.xs, fontWeight: 700, color: MUTED, marginBottom: SP.xs }}>
+            <div style={{ fontSize: chromeFontSize(FS.xs, mobile), fontWeight: 700, color: MUTED, marginBottom: SP.xs }}>
               {t('auth.security.account.currentLabel')}
             </div>
             <ul style={{ margin: 0, paddingLeft: SP.lg, display: 'flex', flexDirection: 'column', gap: SP.xs }}>

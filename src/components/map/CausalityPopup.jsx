@@ -37,6 +37,8 @@ import { classifyLinkIntegrity, disclosureFor } from '../../domain/display/heral
 import { BODY, BORDER2, CARD_ALT, FS, GOLD, INK, MUTED, SECOND, SP, sans } from '../theme.js';
 import PortablePopup from '../primitives/PortablePopup.jsx';
 import CauseWalkPanel from './CauseWalkPanel.jsx';
+import useIsMobile from '../../hooks/useIsMobile.js';
+import { chromeFontSize, proseFontSize } from '../../design/proseScale.js';
 
 /** The register's word for each integrity state — the DM's label, never a token. */
 const INTEGRITY_LABEL = Object.freeze({
@@ -65,6 +67,7 @@ function integrityTone(state) {
 export default function CausalityPopup({
   open, onClose, item, worldState, nameById, seesSecrets = false, settlementName = '',
 }) {
+  const mobile = useIsMobile();
   const nameOf = useMemo(
     () => (id) => nameById?.get(String(id)) || String(id),
     [nameById],
@@ -121,14 +124,14 @@ export default function CausalityPopup({
       <div style={{ display: 'grid', gap: SP.sm }}>
         {/* TIER 1 — THE HEADLINE. The composed gesture when the voice is lit, the
             recorded headline byte-verbatim otherwise. */}
-        <div data-testid="causality-headline" style={{ color: INK, fontFamily: sans, fontSize: FS.xs, fontWeight: 900, lineHeight: 1.35 }}>
+        <div data-testid="causality-headline" style={{ color: INK, fontFamily: sans, fontSize: chromeFontSize(FS.xs, mobile), fontWeight: 900, lineHeight: 1.35 }}>
           {prose?.headline?.text || item.headline}
         </div>
 
         {/* TIER 2 — THE SUBHEADER. Plain, unembellished, the recorded statement.
             Absent when the record holds no summary; never authored to fill space. */}
         {(prose?.subheader?.text || item.summary) && (
-          <div data-testid="causality-subheader" style={{ color: SECOND, fontFamily: sans, fontSize: FS.xxs, fontWeight: 650, lineHeight: 1.5 }}>
+          <div data-testid="causality-subheader" style={{ color: SECOND, fontFamily: sans, fontSize: proseFontSize(FS.xxs, mobile), fontWeight: 650, lineHeight: 1.5 }}>
             {prose?.subheader?.text || item.summary}
           </div>
         )}
@@ -138,7 +141,7 @@ export default function CausalityPopup({
         {prose?.telling?.text && (
           <p
             data-testid="causality-telling"
-            style={{ margin: 0, borderLeft: `2px solid ${GOLD}`, paddingLeft: SP.sm, color: BODY, fontFamily: sans, fontSize: FS.xxs, fontWeight: 650, lineHeight: 1.6 }}
+            style={{ margin: 0, borderLeft: `2px solid ${GOLD}`, paddingLeft: SP.sm, color: BODY, fontFamily: sans, fontSize: proseFontSize(FS.xxs, mobile), fontWeight: 650, lineHeight: 1.6 }}
           >
             {prose.telling.text}
           </p>
@@ -148,7 +151,7 @@ export default function CausalityPopup({
             reaches an empty list and this block does not render at all. */}
         {disclosures.length > 0 && (
           <div data-testid="causality-disclosure" style={{ display: 'grid', gap: 6 }}>
-            <div style={{ color: SECOND, fontFamily: sans, fontSize: FS.micro, fontWeight: 900, textTransform: 'uppercase', letterSpacing: '0.06em' }}>
+            <div style={{ color: SECOND, fontFamily: sans, fontSize: chromeFontSize(FS.micro, mobile), fontWeight: 900, textTransform: 'uppercase', letterSpacing: '0.06em' }}>
               How each link reached the page
             </div>
             {disclosures.map((row) => (
@@ -160,20 +163,20 @@ export default function CausalityPopup({
                   style={{ border: `1px solid ${BORDER2}`, background: CARD_ALT, padding: SP.xs, display: 'grid', gap: 3 }}
                 >
                   <div style={{ display: 'flex', alignItems: 'baseline', gap: 6, flexWrap: 'wrap' }}>
-                    <span style={{ color: integrityTone(row.rendered.state), fontFamily: sans, fontSize: FS.micro, fontWeight: 900, textTransform: 'uppercase', letterSpacing: '0.05em' }}>
+                    <span style={{ color: integrityTone(row.rendered.state), fontFamily: sans, fontSize: chromeFontSize(FS.micro, mobile), fontWeight: 900, textTransform: 'uppercase', letterSpacing: '0.05em' }}>
                       {INTEGRITY_LABEL[row.rendered.state] || INTEGRITY_LABEL.unknown}
                     </span>
-                    <span style={{ color: MUTED, fontFamily: sans, fontSize: FS.micro, fontWeight: 700 }}>
+                    <span style={{ color: MUTED, fontFamily: sans, fontSize: chromeFontSize(FS.micro, mobile), fontWeight: 700 }}>
                       {row.clause}
                     </span>
                   </div>
-                  <div style={{ color: BODY, fontFamily: sans, fontSize: FS.micro, fontWeight: 650, lineHeight: 1.5 }}>
+                  <div style={{ color: BODY, fontFamily: sans, fontSize: proseFontSize(FS.micro, mobile), fontWeight: 650, lineHeight: 1.5 }}>
                     {row.rendered.line}
                   </div>
                   {/* THE SEED, ALWAYS — the planted assertion as it was sown, shown
                       beside the wear so the mutation never erases the intent. */}
                   {row.rendered.seededAssertion && (
-                    <div data-testid="causality-seeded-assertion" style={{ color: SECOND, fontFamily: sans, fontSize: FS.micro, fontWeight: 700, fontStyle: 'italic' }}>
+                    <div data-testid="causality-seeded-assertion" style={{ color: SECOND, fontFamily: sans, fontSize: chromeFontSize(FS.micro, mobile), fontWeight: 700, fontStyle: 'italic' }}>
                       Sown as: {row.rendered.seededAssertion}
                     </div>
                   )}

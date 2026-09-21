@@ -23,6 +23,10 @@ vi.mock('../../src/lib/analytics.js', () => ({
 // A per-test store snapshot; the component reads each opener via a selector.
 let state;
 vi.mock('../../src/store/index.js', () => ({ useStore: (sel) => sel(state) }));
+// THE LAUNCH GATE is OPEN for this file: it pins the purchase controls' live
+// behaviour, which is what launch restores. The closed state is pinned in
+// tests/components/launchLock.pricing.test.jsx.
+vi.mock('../../src/lib/launchGate.js', async (importOriginal) => ({ ...(await importOriginal()), purchasesOpen: () => true }));
 
 import PricingMomentCard from '../../src/components/pricing/PricingMomentCard.jsx';
 

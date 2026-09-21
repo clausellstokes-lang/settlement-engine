@@ -25,6 +25,7 @@ import {
   scrubImportedTreasury,
   scrubGalleryImportLivingContent,
 } from '../lib/importScrub.js';
+import { staffUnlocksPaidFeatures } from '../lib/staffEntitlements.js';
 
 export async function importGallerySettlementImpl(get, set, slug) {
   const st = get();
@@ -33,8 +34,7 @@ export async function importGallerySettlementImpl(get, set, slug) {
   // Cartographer and Founder; developer/admin roles pass for testing. Sharing to
   // the gallery is free — this gate is on IMPORT only. The import RPC is the
   // server-authoritative gate; this is a clean message + no wasted round-trip.
-  const role = st.auth?.role;
-  const canImport = st.auth?.tier === 'premium' || role === 'developer' || role === 'admin';
+  const canImport = st.auth?.tier === 'premium' || staffUnlocksPaidFeatures(st.auth?.role);
   if (!canImport) throw new Error('Importing settlements is a premium feature.');
   // Slot pre-flight for a friendly message; the 014 trigger is the real gate.
   const max = (typeof st.maxSaves === 'function') ? st.maxSaves() : Infinity;

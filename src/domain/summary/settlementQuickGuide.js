@@ -80,7 +80,7 @@ const INFLUENCE_RANK = Object.freeze({
  * @property {unknown} [name]
  * @property {unknown} [tier]
  * @property {unknown} [population]
- * @property {{ label?: unknown, scope?: unknown }} [culturalIdentity]
+ * @property {{ key?: unknown, label?: unknown }} [culturalIdentity]
  * @property {{ label?: unknown }} [culture]
  * @property {unknown} [settlementReason]
  * @property {{
@@ -156,7 +156,7 @@ function composeIdentity(settlement) {
     settlement.culturalIdentity?.label
       || settlement.culture?.label,
   );
-  const scope = cleanText(settlement.culturalIdentity?.scope);
+  const cultureKey = cleanText(settlement.culturalIdentity?.key);
 
   const descriptors = [
     cultureLabel,
@@ -166,20 +166,301 @@ function composeIdentity(settlement) {
     ? ''
     : ` of ${formatCount(population)} ${population === 1 ? 'person' : 'people'}`;
 
-  if (scope) {
-    return sentence(
-      `${name} is a ${descriptors}${populationPhrase}, expressed through ${lowerLead(stripArticle(scope))}`,
-    );
+  const article = articleFor(descriptors);
+
+  const phrase = scopePhrase(cultureKey);
+  if (phrase) {
+    return sentence(`${name} is ${article} ${descriptors}${populationPhrase}, ${phrase}`);
   }
 
   const historicalCharacter = cleanText(settlement.history?.historicalCharacter);
   if (historicalCharacter) {
     return sentence(
-      `${name} is a ${descriptors}${populationPhrase}, ${lowerLead(firstSentence(historicalCharacter))}`,
+      `${name} is ${article} ${descriptors}${populationPhrase}, ${lowerLead(firstSentence(historicalCharacter))}`,
     );
   }
 
-  return sentence(`${name} is a ${descriptors}${populationPhrase}`);
+  return sentence(`${name} is ${article} ${descriptors}${populationPhrase}`);
+}
+
+/**
+ * THE ARTICLE THE IDENTITY SENTENCE TAKES, per LEAD WORD.
+ *
+ * ⚠ IT WAS HARDCODED 'a', so every Arabic-inspired and East-Asian-inspired settlement
+ * read "is a Arabic-inspired village" on the DM's first screen. ⚠ AND THE OBVIOUS
+ * REPAIR IS ALSO WRONG: `/^[aeiou]/` gives "an European" and "an one-street hamlet",
+ * because English takes the article from the SOUND and not from the letter.
+ *
+ * So the words the product actually mints are listed, and nothing is inferred for
+ * them: the eleven authored culture labels and the six tiers. The rule below is a
+ * fallback for a label this file did not write - a legacy save, a custom identity -
+ * where being right most of the time is the best available and being wrong is no
+ * worse than the hardcoded article it replaces.
+ *
+ * @type {Readonly<Record<string, 'a' | 'an'>>}
+ */
+const ARTICLE_BY_LEAD = Object.freeze({
+  'Germanic-inspired': 'a',
+  'Latin-inspired': 'a',
+  'Celtic-inspired': 'a',
+  'Arabic-inspired': 'an',
+  'Norse-inspired': 'a',
+  'Slavic-inspired': 'a',
+  'East-Asian-inspired': 'an',
+  'Mesoamerican-inspired': 'a',
+  'South-Asian-inspired': 'a',
+  'Steppe-inspired': 'a',
+  'Greek-inspired': 'a',
+  thorp: 'a',
+  hamlet: 'a',
+  village: 'a',
+  town: 'a',
+  city: 'a',
+  metropolis: 'a',
+  settlement: 'a',
+});
+
+/**
+ * ⛔ WHOLE WORDS, NOT PREFIXES. The first spelling of this rule matched `/^(?:eu|one|uni|…)/`
+ * and over-fired on every word that merely STARTS that way: "a uninhabited hamlet",
+ * "a unimportant village", "a Oneiric-inspired town". A prefix cannot tell `unified`
+ * (/juː/, takes 'a') from `uninhabited` (/ʌ/, takes 'an'), because the distinction is
+ * the vowel that follows, not the letters that open. Both lists are therefore keyed on
+ * the lead's first WORD and are kept as short as the defect allows.
+ */
+/**
+ * ⭐⭐ THE RULE IS INVERTED FROM HERE ON (review 10, 2026-09-18), and the measurement is the
+ * whole argument. The previous cut asked "does this look like a consonant-sound word?" with a
+ * `uni-` PREFIX behind an eighteen-word exception set — a NEGATIVE list against an open class.
+ * Measured against a dictionary: 538 of 542 `un` + vowel words came out wrong ("a uninspired",
+ * "a unintended", "a unimaginable"), because the exception set can only ever name the handful
+ * somebody thought of, and `un-` is the most productive negating prefix in English.
+ *
+ * So the polarity is reversed. `an` is now the DEFAULT for a written vowel, which is right for
+ * the whole open `un-` class at once, and the words that break it are POSITIVE lists that can
+ * only shrink the answer where somebody has actually looked. A missing entry now costs one
+ * wrong article on one unusual word instead of an entire word class.
+ */
+
+/**
+ * Whole words that open with a written vowel and a CONSONANT sound — exact spellings the
+ * stems below cannot safely reach, because their own prefix is shared with a word that takes
+ * the other article ("one" against "oneiric", "ewe" against "ewer" is fine but "ew" is not).
+ */
+const CONSONANT_SOUND_WORDS = new Set([
+  'one', 'ones', 'oneself', 'once', 'ewe', 'ewer', 'ouija',
+]);
+
+/**
+ * ⭐ THE POSITIVE LIST, AS STEMS — every written-vowel opening that is really said with a
+ * consonant, enumerated rather than guessed. Each stem is chosen so that NO word starting
+ * with it takes 'an': `unit` reaches unit/unite/unity/united/unitary, `univ` reaches
+ * universe/universal/university/univalent/univocal, `use` reaches use/used/useful/user, and
+ * none of them can be reached by `un` + a vowel-initial word.
+ *
+ * ⛔ WHY THERE IS NO BARE `uni` STEM, WHICH IS THE WHOLE LESSON. `uni` cannot tell `uniform`
+ * (/juː/) from `uninspired` (/ʌn/ + `inspired`), because the sound is decided by what FOLLOWS
+ * and both are followed by a consonant letter. The old spelling kept the bare prefix and tried
+ * to subtract the exceptions; this one never admits the ambiguous prefix in the first place.
+ * A `uni-` word the list misses falls to 'an', which is wrong for that ONE word rather than
+ * for the five hundred the prefix was swallowing.
+ *
+ * `ur[aeio]` is the /jʊər/ family — urine, uranium, urea, ureter, urology — and it requires the
+ * vowel, so `urn`, `urban` and `urge` are untouched and still take 'an'/'a' by the rules below.
+ */
+const CONSONANT_SOUND_STEMS =
+  /^(?:eu|ewe|ouija|ubiq|ufo|uku|unanim|unicam|unicel|unico(?:de|rn)|unicycl|unifi|unifor|unify|unilater|unilingu|unio|uniqu|unisex|unison|unit|univ|ur[aeio]|usa|use|usu|ute|util|utop)/;
+
+/**
+ * The other positive list: written CONSONANTS that open with a vowel sound, so they take 'an'.
+ * The silent h, plus the American `herb`. Exact words, never a stem — `her`, `herd`, `Herbert`
+ * and `honeycomb` all open with the ordinary consonant and must not be caught.
+ */
+const VOWEL_SOUND_WORDS = new Set([
+  'heir', 'heiress', 'heirloom', 'honest', 'honesty', 'honestly',
+  'honour', 'honor', 'honourable', 'honorable', 'honorary', 'honorific',
+  'hour', 'hourglass', 'hourly', 'herb', 'herbs', 'herbal', 'herbalist', 'herbaceous',
+]);
+
+/**
+ * ⭐ AN INITIALISM IS READ LETTER BY LETTER, so its article answers to the NAME of its first
+ * letter and not to the letter itself. Nine of the twenty-six were wrong before this existed:
+ * "a FMG" (ef), "an URL" (you), "a SOS" (es). These twelve letter names open with a vowel
+ * sound — ay, ee, ef, aitch, eye, el, em, en, oh, ar, es, ex — and every other letter, `U`
+ * included, opens with a consonant one.
+ */
+const LETTER_NAME_TAKES_AN = new Set(['A', 'E', 'F', 'H', 'I', 'L', 'M', 'N', 'O', 'R', 'S', 'X']);
+
+/**
+ * ⭐ THE VOWEL LEADS, BY LETTER RATHER THAN BY ASCII RANGE (review 12).
+ *
+ * The default below used to ask `/^[aeiou]/`, which is a question about five ASCII bytes and
+ * not about vowels. A settlement label is the most likely string in the product to carry a
+ * letter outside that range — Île-de-France, Ürümqi, Ægir, Ærie, Ørsted, Óbuda, Åland — and
+ * every one of them came out "a". The set is the ASCII five plus the accented and ligature
+ * forms a Latin-script label actually reaches, so the rule answers about the letter the
+ * reader says. `ñ`, `š`, `ç` and `ý` are deliberately absent: they are consonants, and `y`
+ * is a consonant lead in English whatever diacritic it carries.
+ */
+const VOWEL_LEADS = new Set([
+  'a', 'e', 'i', 'o', 'u',
+  'à', 'á', 'â', 'ã', 'ä', 'å', 'æ', 'ā', 'ă', 'ą',
+  'è', 'é', 'ê', 'ë', 'ē', 'ĕ', 'ė', 'ę', 'ě',
+  'ì', 'í', 'î', 'ï', 'ĩ', 'ī', 'ĭ', 'į', 'ı',
+  'ò', 'ó', 'ô', 'õ', 'ö', 'ø', 'ō', 'ŏ', 'ő', 'œ',
+  'ù', 'ú', 'û', 'ü', 'ũ', 'ū', 'ŭ', 'ů', 'ű', 'ų',
+]);
+
+/**
+ * The authored map, read again without regard to case.
+ *
+ * ⚠ IT IS A SECOND LOOKUP AND NOT A REPLACEMENT. The exact read above stays first so authored
+ * copy is decided byte-for-byte as it always was; this one catches the same authored words in
+ * a custom label's own casing — `METROPOLIS`, `Village`, `ARABIC-INSPIRED` — which would
+ * otherwise fall through to the initialism rule and be spelled out letter by letter.
+ * @type {Readonly<Record<string, 'a' | 'an'>>}
+ */
+const ARTICLE_BY_LEAD_LOWER = Object.freeze(Object.fromEntries(
+  Object.entries(ARTICLE_BY_LEAD).map(([lead, article]) => [lead.toLowerCase(), article]),
+));
+
+/**
+ * The article the identity sentence takes, decided in six steps: the words the product mints
+ * (exactly, then in any casing), the two sound lists, the letter name of an initialism, and
+ * finally the written vowel — which now means 'an'.
+ *
+ * ⚠ THE ONE CLASS IT STILL GETS WRONG, said plainly rather than left to be discovered: an
+ * ORDINARY WORD written in full capitals and absent from both sound lists is read as an
+ * initialism, so a custom label of "MARKET TOWN" is decided on the name of `M` and comes out
+ * "an MARKET TOWN". The two sound lists and the authored map are consulted FIRST precisely to
+ * keep the common cases out of that branch (`HONEST`, `HOUR`, `EUROPEAN`, `USA`, `VILLAGE` and
+ * every authored culture label are all decided before the letter name is ever asked for), and
+ * the alternative — dropping the letter-name rule — is nine wrong articles across the
+ * twenty-six single letters and every acronym the product will ever be handed.
+ *
+ * @param {string} descriptors
+ * @returns {'a' | 'an'}
+ */
+function articleFor(descriptors) {
+  const lead = descriptors.split(' ')[0] || '';
+  // ⛔ `Object.hasOwn`, NEVER A BARE LOOKUP. `descriptors` carries a user-derived
+  // `culturalIdentity.label`, and a plain-object read of it returns Object.prototype's
+  // members for a label leading with `constructor`, `toString`, `valueOf` or
+  // `hasOwnProperty` - each of them TRUTHY, so the function itself was returned and
+  // printed: "X is function Object() { [native code] } constructor village of 9 people."
+  if (Object.hasOwn(ARTICLE_BY_LEAD, lead)) return ARTICLE_BY_LEAD[lead];
+  const leadLower = lead.toLowerCase();
+  if (Object.hasOwn(ARTICLE_BY_LEAD_LOWER, leadLower)) return ARTICLE_BY_LEAD_LOWER[leadLower];
+  // ⚠ ANCHORED, AND UNICODE-AWARE. An unanchored run takes the first letters ANYWHERE in
+  // the lead, so "8-Isle" was decided on `Isle` and came out "an 8-Isle" - the article has
+  // to answer to the character the reader actually says first. ⛔ AND THE CLASS IS `\p{L}`,
+  // NOT `[a-z]`: the ASCII spelling treated every accented letter as a SEPARATOR, so
+  // "Île-de-France" skipped past `Î` and was decided on `le`, and "Ægir" on `gir` - both
+  // consonants, both wrong, and wrong in a way no ASCII test could ever show.
+  const raw = lead.match(/^[^\p{L}]*(\p{L}+)/u)?.[1] || '';
+  const word = raw.toLowerCase();
+  if (VOWEL_SOUND_WORDS.has(word)) return 'an';
+  if (CONSONANT_SOUND_WORDS.has(word) || CONSONANT_SOUND_STEMS.test(word)) return 'a';
+  // THE INITIALISM, decided on the first letter's NAME. A run written entirely in capitals
+  // that neither sound list claims is spelled out by a reader, so `FMG` is "ef-em-gee".
+  // ⚠ THE TEST STAYS ASCII ON PURPOSE. `LETTER_NAME_TAKES_AN` holds the names of the
+  // twenty-six English letters and can answer for nothing else, so an all-capital run
+  // carrying a letter it has no name for - "ÜRÜMQI" - is better read as a WORD and sent to
+  // the vowel rule below, which gets it right, than spelled out against a name that does
+  // not exist.
+  if (/^[A-Z]+$/.test(raw)) return LETTER_NAME_TAKES_AN.has(raw[0]) ? 'an' : 'a';
+  // THE DEFAULT, AND THE INVERSION: a vowel LETTER takes 'an' unless something above knew
+  // better. This is the line that gets the whole open `un-` class right, and since review 12
+  // it asks `VOWEL_LEADS` rather than an ASCII range, so an accented or ligature vowel is a
+  // vowel here too.
+  return VOWEL_LEADS.has(word[0]) ? 'an' : 'a';
+}
+
+/**
+ * THE ELEVEN AUTHORED CULTURE PROFILES, each with the phrase the identity sentence
+ * carries — KEYED ON THE PROFILE'S IDENTITY (`culturalIdentity.key`), never on its
+ * authored prose.
+ *
+ * A culture profile's `scope` (src/data/cultureProfiles.js) is authored as
+ * `<article> <terms> design grammar.`, and the guide used to read the whole string
+ * out - "expressed through civic-ritual plaza, tribute, market-and-waterworks design
+ * grammar" - which puts the engine's own filing word in front of a reader.
+ *
+ * ⚠ LIFTING THE TERMS MECHANICALLY IS WHAT THIS REPLACES, AND WHY. Four of the
+ * eleven profiles carry ADJECTIVE STACKS in their scope, not noun lists: germanic,
+ * norse, east_asian and steppe all modify the head noun the parse was throwing away,
+ * so "built around a timber-and-stone and guild-and-estate" came out a dangling
+ * modifier. A derived rule cannot tell the two shapes apart, and the shapes are a
+ * property of authored copy rather than of the grammar. So the phrase is AUTHORED
+ * per profile, once, here - display only.
+ *
+ * ⛔ AND IT IS KEYED ON THE PROFILE KEY BECAUSE A CORPUS SENTENCE MAY BE MINTED IN
+ * EXACTLY ONE SOURCE MODULE (FP-G16, tests/build/cultureProfilesLazy.test.js). This
+ * map used to be keyed on the authored scope STRING, which made this file a SECOND
+ * mint of the corpus's fingerprint and read the law red. The key is the same identity
+ * `domain/resolveCulture.js` reads, `generators/steps/assembleSettlement.js` stamps on
+ * the settlement root and `pdf/lib/generationContracts.js` projects; `materializeOne`
+ * writes it on EVERY materialized identity beside the scope it replaces, so the read
+ * is output-identical to the scope read and no persisted shape changed.
+ *
+ * ⚠ THE PROPERTY THE STRING KEY BOUGHT IS NOT LOST, IT MOVED. A reworded scope no
+ * longer falls out of this map by itself, so tests/domain/settlementQuickGuide.test.js
+ * holds the key set BOTH WAYS against the corpus and a digest of each authored scope:
+ * reword one and the pin reds, naming the profile whose paraphrase below must be
+ * re-read before the digest is re-recorded.
+ *
+ * ⚠ AND A RECORD WITH NO `key` AT ALL TAKES THE SAME DOOR, WHICH IS THE POINT OF PUTTING
+ * THE FALL-THROUGH BELOW A MISSING LOOKUP RATHER THAN BESIDE IT. No writer produces one -
+ * `materializeOne` stamps `key` on every identity it makes - but an imported or
+ * hand-edited save is not this leaf's to trust, and the answer for it must be a WHOLE
+ * SENTENCE. Measured, on a record carrying `label` and `scope` and no `key`: with a
+ * historical character it reads "… of 400 people, founded at a ford and never moved.",
+ * and without one it stops at the population, which is the same terminal form a
+ * settlement carrying no culture at all has always taken. Both are pinned in
+ * tests/domain/settlementQuickGuide.test.js.
+ *
+ * ⛔ THE MIXED PROFILE IS DELIBERATELY ABSENT. `materializeCulturalIdentity`
+ * synthesises it at generation time under `key: 'mixed'` - it is not in the corpus -
+ * and its scope is a sentence about blending rather than a term list, while its
+ * `label` already says "Germanic-inspired + Latin-inspired", so the blend is on the
+ * page either way. An unmapped key yields '' and the identity sentence falls through
+ * to the historical-character form it already uses for a settlement carrying no
+ * culture at all.
+ *
+ * The map is NOT derived from CULTURE_PROFILES here on purpose: this module is a
+ * headless leaf and src/data/cultureProfiles.js is lazily chunked away from the
+ * first paint (tests/build/cultureProfilesLazy.test.js). The coverage pin lives in
+ * tests/domain/settlementQuickGuide.test.js, which imports the corpus and asserts
+ * every authored profile but the blend has a phrase here.
+ *
+ * @type {Readonly<Record<string, string>>}
+ */
+const SCOPE_PHRASE = Object.freeze({
+  germanic: 'built in timber and stone, and run by guild and estate',
+  latin: 'built in masonry around a civic square, and run by patronage and law',
+  celtic: 'built around kin districts and an assembly ground, on pasture and earthwork',
+  arabic: 'built around courtyards and waterworks, on endowed institutions and the caravan road',
+  norse: 'built around the hall and the water, on assembly and what the season allows',
+  slavic: 'built in timber compounds on common land, between river and forest',
+  east_asian: 'built in wards and courtyards, ordered by bureau and lineage',
+  mesoamerican: 'built around a civic-ritual plaza, tribute, and market-and-waterworks',
+  south_asian: 'built around the tank and the bazaar, in quarters by trade, under temple and guild',
+  steppe: 'built for a pastoral life half-settled and half-moving, held by clan and caravan',
+  greek: 'built around the agora and the harbour, on hillside ground and civic association',
+});
+
+/**
+ * ⛔ `Object.hasOwn`, NEVER A BARE LOOKUP - the hazard `articleFor` above carries,
+ * on the same kind of string. The key comes off a PERSISTED record, so a save
+ * carrying `key: 'constructor'` (or `toString`, `valueOf`, `hasOwnProperty`) reads
+ * Object.prototype's member through a bare index, and every one of them is TRUTHY:
+ * the function itself would be printed into the reader's first sentence.
+ *
+ * @param {string} cultureKey
+ * @returns {string}
+ */
+function scopePhrase(cultureKey) {
+  return Object.hasOwn(SCOPE_PHRASE, cultureKey) ? SCOPE_PHRASE[cultureKey] : '';
 }
 
 /**
@@ -250,23 +531,54 @@ function composeMaterialTruth(settlement) {
   const topExport = cleanText(firstText(economy.primaryExports));
   const situation = cleanText(economy.situationDesc);
 
+  // The three fields were spliced in as bare labels and joined with "and", which
+  // printed the generator's own vocabulary at the reader: "Struggling economy and
+  // deficit — active famine food security." Each field becomes a clause of an
+  // actual sentence instead. The fields, their precedence and the source path are
+  // unchanged — only the rendering.
   const clauses = [];
-  if (prosperity) clauses.push(`${prosperity} economy`);
-  if (food) clauses.push(`${food.toLowerCase()} food security`);
-  if (topExport) clauses.push(`${lowerLead(topExport)} as a leading export`);
+  if (prosperity) clauses.push(`the economy is ${prosperity.toLowerCase()}`);
+  if (food) clauses.push(foodSecurityClause(food));
 
-  const text = clauses.length
-    ? sentence(joinClauses(clauses))
-    : (situation ? sentence(situation) : 'Its material condition is not yet recorded.');
+  let text = clauses.length ? upperLead(clauses.join('; ')) : '';
+  if (topExport) {
+    const exportClause = `Its leading export is ${lowerLead(topExport)}`;
+    text = text ? `${sentence(text)} ${exportClause}` : exportClause;
+  }
 
   return fact(
     'material_life',
     'How it lives',
-    text,
-    clauses.length
+    text
+      ? sentence(text)
+      : (situation ? sentence(situation) : 'Its material condition is not yet recorded.'),
+    text
       ? 'economicState.prosperity|foodSecurity|primaryExports'
       : 'economicState.situationDesc',
   );
+}
+
+/**
+ * THE SIX LABELS `generateFoodSecurity` CAN EMIT (src/generators/foodGenerator.js),
+ * each as the clause a sentence can carry. Keyed by the label lowercased with its
+ * dash normalized, so a legacy save's hyphen cannot miss the famine row. A label
+ * outside the ladder names itself rather than vanishing.
+ *
+ * @type {Readonly<Record<string, string>>}
+ */
+const FOOD_SECURITY_CLAUSE = Object.freeze({
+  'deficit - active famine': 'food is in deficit and famine is active',
+  deficit: 'food is in deficit',
+  'import-dependent': 'the food supply depends on imports',
+  pressured: 'the food supply is under pressure',
+  surplus: 'there is food to spare',
+  secure: 'the food supply is secure',
+});
+
+/** @param {string} label @returns {string} */
+function foodSecurityClause(label) {
+  const key = label.toLowerCase().replace(/[\u2013\u2014]/g, '-');
+  return FOOD_SECURITY_CLAUSE[key] || `the food supply is ${label.toLowerCase()}`;
 }
 
 /**
@@ -465,8 +777,8 @@ function lowerLead(value) {
 }
 
 /** @param {string} value @returns {string} */
-function stripArticle(value) {
-  return value.replace(/^(?:a|an|the)\s+/i, '');
+function upperLead(value) {
+  return value ? value[0].toUpperCase() + value.slice(1) : '';
 }
 
 /** @param {string} value @returns {string} */
@@ -485,11 +797,4 @@ function sentence(value) {
   const text = cleanText(value);
   if (!text) return '';
   return /[.!?]$/.test(text) ? text : `${text}.`;
-}
-
-/** @param {string[]} clauses @returns {string} */
-function joinClauses(clauses) {
-  if (clauses.length <= 1) return clauses[0] || '';
-  if (clauses.length === 2) return `${clauses[0]} and ${clauses[1]}`;
-  return `${clauses[0]}, ${clauses[1]}, and ${clauses[2]}`;
 }

@@ -12,7 +12,7 @@
  */
 
 import { buildThreatAssessment } from './threatAssessment.js';
-import { scoreBand, scoreColor } from './defenseScoreBands.js';
+import { scoreBand, scoreColor, SCORE_BAND_CUTS } from './defenseScoreBands.js';
 import { STRESS_TYPE_MAP } from '../../data/stressTypes.js';
 
 // The active-military-status POSTURE per stress type. This DISPLAY text lives in
@@ -195,7 +195,7 @@ export function deriveCriminalStructure(settlement) {
 }
 
 /**
- * Supporting-capabilities cards (economic backing, magical, legal, medical,
+ * Supporting-capabilities cards (economic backing, arcane support, legal, medical,
  * logistics, and naval when coastal). Computed from defense scores + institution
  * presence flags (economicState.compound.inst). Returns an array of
  * { label, status, color, score|null, note }.
@@ -215,16 +215,75 @@ export function deriveSupportingCapabilities(settlement) {
 
   const caps = [
     {
+      // ⛔⛔ ONE NUMBER, ONE SET OF CUT POINTS (ODQ §934.14, the owner's ruling on the two
+      // ladders). This row grades `scores.economic` in its own four words, and the shared
+      // band ladder grades the SAME number in the four readiness words — so the two are one
+      // ladder wearing two vocabularies, and they must cut in the same places or the tab
+      // contradicts itself. They did not: this row turned Critical below 25 and the band
+      // ladder turns Critical below 20, so at econScore 20-24 the capability row printed
+      // "Critical" while the Threat Assessment and the Overview printed "Weak" off the same
+      // score. DefenseTab's `STATUS_IS_THE_GRADE` fold hid the pair on THIS row by dropping
+      // its band, but the disagreement was never local to the row — the other two surfaces
+      // went on reading the other verdict.
+      //
+      // THE BAND LADDER IS CANONICAL, so the cut points come from it and the WORDS stay
+      // this row's own: Well-funded ⇔ Strong, Adequate ⇔ Adequate, Underfunded ⇔ Weak,
+      // Critical ⇔ Critical, at every integer 0-100. `SCORE_BAND_CUTS` is READ rather than
+      // restated, which is the whole point of the fix: a future move of the band ladder
+      // carries this row with it instead of leaving it behind a second time.
+      //
+      // ⚠ THE NOTE FOLLOWS THE SAME CUT, deliberately. It is a fourth place the grade
+      // lands (DefenseTab stands the status pill down when the note opens on the grade), so
+      // a note that changed at a different score would re-open the defect one line lower.
       label: 'Economic Backing',
-      status: econScore >= 65 ? 'Well-funded' : econScore >= 40 ? 'Adequate' : econScore >= 25 ? 'Underfunded' : 'Critical',
+      status: econScore >= SCORE_BAND_CUTS.strong ? 'Well-funded'
+        : econScore >= SCORE_BAND_CUTS.adequate ? 'Adequate'
+          : econScore >= SCORE_BAND_CUTS.weak ? 'Underfunded' : 'Critical',
       color: scoreColor(econScore), score: econScore,
-      note: econScore >= 65 ? 'Full pay, maintained equipment, reserve capacity.' : econScore >= 40 ? 'Adequate upkeep, some shortfalls.' : econScore >= 25 ? 'Irregular pay, worn equipment, morale risk.' : 'Cannot sustain forces. Systemic breakdown.',
+      note: econScore >= SCORE_BAND_CUTS.strong ? 'Full pay, maintained equipment, reserve capacity.'
+        : econScore >= SCORE_BAND_CUTS.adequate ? 'Adequate upkeep, some shortfalls.'
+          : econScore >= SCORE_BAND_CUTS.weak ? 'Irregular pay, worn equipment, morale risk.'
+            : 'Cannot sustain forces. Systemic breakdown.',
     },
     {
-      label: 'Magical Capability',
-      status: f.hasMagicInst ? 'Arcane support' : 'None',
-      color: f.hasMagicInst ? '#5a2a8a' : '#9c8068', score: scores.magical || 0,
-      note: f.hasMagicInst ? `${magicDef.slice(0, 2).map((m) => m.name).join(', ')}. Detection, wards, counterspell.` : 'Conventional defense only. Invisible threats go undetected and unanswered.',
+      // ⛔⛔ THE LABEL IS THE QUESTION THIS ROW ASKS, AND IT IS NOT THE OVERVIEW'S QUESTION
+      // (review 10, 2026-09-18). It was called `Magical Capability`, which is also the name
+      // of the Overview's Systems Health row — and the two read different facts. THIS row
+      // is a NARROW presence read: `compound.inst.hasMagicInst` is
+      // `wizard|mage|alchemist|enchant|arcane|academy of magic|scroll scribe|spellcasting|
+      // hedge wizard` and nothing else. The Overview's row bands `scores.magical`, which
+      // `defenseGenerator` drives from the WORLD MAGIC SLIDER over a much wider presence
+      // (healer, monastery, cathedral, druid, divine, healing all count), so a town with no
+      // arcane institution at all can score 49 there. One name over two facts produced the
+      // defect the review measured: "None" printed in amber beside a half-full bar on 27 of
+      // 144 large settlements. Two facts, two names — this one is ARCANE SUPPORT, which is
+      // the only thing `hasMagicInst` can answer, and the Overview keeps the other name.
+      //
+      // ⛔ AND THE STATUS SAYS SOMETHING THE LABEL DOES NOT (the owner's fold of lane 6's
+      // capability row). After the rename the row printed "Arcane Support · Arcane support ·
+      // <band>" — the status word had become the LABEL, differing only in a capital, which is
+      // the same row saying one thing twice that the Economic Backing fold exists to stop. The
+      // presence vocabulary is therefore `Present` / `None`: the label names the FACT the row
+      // reads and the status answers WHETHER it is here, so the two words carry two readings
+      // and the band beside them carries the third. The note text is untouched.
+      label: 'Arcane Support',
+      status: f.hasMagicInst ? 'Present' : 'None',
+      // A PRESENCE READ HAS NO MAGNITUDE, which is the shape THIS LIST ALREADY USES for
+      // every other one. Legal Infrastructure, Medical Readiness and Logistics & Supply all
+      // carry `score: null` and render no bar, because "is there a court" has no size. So
+      // does this row when the answer is no, and `scores.magical` is untouched either way —
+      // the Overview's Systems Health row still bands it, because THAT row is labelled by
+      // the score and not by the institution.
+      color: f.hasMagicInst ? '#5a2a8a' : '#9c8068', score: f.hasMagicInst ? (scores.magical || 0) : null,
+      // ⚠ THE NOTE ANSWERS THE SAME NARROW QUESTION THE LABEL DOES. It used to say
+      // "Conventional defense only. Invisible threats go undetected and unanswered." — a
+      // claim about the settlement's WHOLE magical posture, which this flag cannot make: a
+      // cathedral is not arcane, and a town with a cathedral, a healer and no wizard reads
+      // `hasMagicInst === false` while being anything but conventional. The note now says
+      // what is missing (arcane practitioners) and what follows from that specifically.
+      note: f.hasMagicInst
+        ? `${magicDef.slice(0, 2).map((m) => m.name).join(', ')}. Detection, wards, counterspell.`
+        : 'No arcane practitioners on the rolls. Wards, detection and counterspell are beyond this settlement.',
     },
     {
       label: 'Legal Infrastructure',
@@ -236,7 +295,7 @@ export function deriveSupportingCapabilities(settlement) {
       label: 'Medical Readiness',
       status: f.hasHospital ? 'Hospital present' : f.hasChurch ? 'Clergy care' : 'None',
       color: f.hasHospital ? '#1a5a28' : f.hasChurch ? '#7a5010' : '#8b1a1a', score: null,
-      note: f.hasHospital ? 'Casualty treatment, outbreak containment, recovery capacity.' : f.hasChurch ? 'Parish care. Basic wound and disease management.' : 'No dedicated healers. Plague burns unchecked.',
+      note: f.hasHospital ? 'Casualty treatment, outbreak containment, recovery capacity.' : f.hasChurch ? 'Clerical care. Basic wound and disease management.' : 'No dedicated healers. Plague burns unchecked.',
     },
     {
       label: 'Logistics & Supply',

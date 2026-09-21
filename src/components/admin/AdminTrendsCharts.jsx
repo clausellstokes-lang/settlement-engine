@@ -9,22 +9,26 @@ import { useId, useMemo } from 'react';
 import {
   INK, INK_DEEP, MUTED, SECOND, BORDER, CARD, CARD_ALT, CARD_HDR, PARCH, RED, GREEN, sans, serif_, SP, FS, swatch } from '../theme.js';
 import { PALETTE, fmtInt, fmtVal, fmtBucket } from './AdminTrendsShared.js';
+import useIsMobile from '../../hooks/useIsMobile.js';
+import { chromeFontSize, proseFontSize } from '../../design/proseScale.js';
 
 // ── tiny UI atoms ────────────────────────────────────────────────────────────
-export const Empty = ({ msg = 'No data in range.' }) => (
-  <p style={{ fontSize: FS.xs, color: MUTED, fontFamily: sans, margin: `${SP.sm}px 0`, fontStyle: 'italic' }}>{msg}</p>
-);
+export const Empty = ({ msg = 'No data in range.' }) => {
+  const mobile = useIsMobile();
+  return <p style={{ fontSize: proseFontSize(FS.xs, mobile), color: MUTED, fontFamily: sans, margin: `${SP.sm}px 0`, fontStyle: 'italic' }}>{msg}</p>;
+};
 
 export function Select({ value, onChange, options, label }) {
+  const mobile = useIsMobile();
   const selectId = useId();
   return (
-    <label htmlFor={selectId} style={{ display: 'inline-flex', alignItems: 'center', gap: SP.xs, fontFamily: sans, fontSize: FS.xs, color: SECOND }}>
+    <label htmlFor={selectId} style={{ display: 'inline-flex', alignItems: 'center', gap: SP.xs, fontFamily: sans, fontSize: chromeFontSize(FS.xs, mobile), color: SECOND }}>
       {label && <span style={{ color: MUTED }}>{label}</span>}
       <select
         id={selectId}
         value={value} onChange={(e) => onChange(e.target.value)}
         style={{
-          fontFamily: sans, fontSize: FS.xs, color: INK, background: CARD, cursor: 'pointer',
+          fontFamily: sans, fontSize: chromeFontSize(FS.xs, mobile), color: INK, background: CARD, cursor: 'pointer',
           border: `1px solid ${BORDER}`, padding: `${SP.xs}px ${SP.sm}px`,
         }}
       >
@@ -48,19 +52,21 @@ export function Card({ title, control, children }) {
 
 // ── KPI card ─────────────────────────────────────────────────────────────────
 export function Kpi({ label, value, avg, delta }) {
+  const mobile = useIsMobile();
   const color = delta.dir === 'up' ? swatch.success || GREEN : delta.dir === 'down' ? swatch.danger || RED : MUTED;
   const arrow = delta.dir === 'up' ? '▲' : delta.dir === 'down' ? '▼' : '·';
   return (
     <div style={{ border: `1px solid ${BORDER}`, background: CARD_ALT, padding: `${SP.sm}px ${SP.md}px`, minWidth: 116 }}>
-      <div style={{ fontFamily: sans, fontSize: FS.xxs, color: MUTED, textTransform: 'uppercase', letterSpacing: 0.4 }}>{label}</div>
+      <div style={{ fontFamily: sans, fontSize: chromeFontSize(FS.xxs, mobile), color: MUTED, textTransform: 'uppercase', letterSpacing: 0.4 }}>{label}</div>
       <div style={{ fontFamily: serif_, fontSize: FS.xl, fontWeight: 700, color: INK, lineHeight: 1.1, marginTop: 2 }}>{fmtVal(value, avg)}</div>
-      <div style={{ fontFamily: sans, fontSize: FS.xxs, color, marginTop: 2 }}>{arrow} {delta.label} <span style={{ color: MUTED }}>vs prior</span></div>
+      <div style={{ fontFamily: sans, fontSize: chromeFontSize(FS.xxs, mobile), color, marginTop: 2 }}>{arrow} {delta.label} <span style={{ color: MUTED }}>vs prior</span></div>
     </div>
   );
 }
 
 // ── multi-line chart (activity over time) ────────────────────────────────────
 export function MultiLineChart({ series, granularity }) {
+  const mobile = useIsMobile();
   const W = 720, H = 240, padL = 46, padR = 14, padT = 14, padB = 30;
   const buckets = useMemo(
     () => [...new Set(series.flatMap((s) => s.points.map((p) => p.x)))].sort(),
@@ -80,7 +86,7 @@ export function MultiLineChart({ series, granularity }) {
     <div>
       <div style={{ display: 'flex', flexWrap: 'wrap', gap: SP.sm, marginBottom: SP.xs }}>
         {series.map((s) => (
-          <span key={s.key} style={{ display: 'inline-flex', alignItems: 'center', gap: 4, fontFamily: sans, fontSize: FS.xxs, color: SECOND }}>
+          <span key={s.key} style={{ display: 'inline-flex', alignItems: 'center', gap: 4, fontFamily: sans, fontSize: chromeFontSize(FS.xxs, mobile), color: SECOND }}>
             <span style={{ width: 10, height: 3, background: s.color }} /> {s.label}
           </span>
         ))}
@@ -120,6 +126,7 @@ export function MultiLineChart({ series, granularity }) {
 
 // ── stacked bars (distribution over time) ────────────────────────────────────
 export function StackedBarChart({ rows, granularity }) {
+  const mobile = useIsMobile();
   const W = 720, H = 250, padL = 40, padR = 14, padT = 14, padB = 30;
   const { buckets, cats, at, totalMax } = useMemo(() => {
     const byBucket = {}; const totals = {};
@@ -153,7 +160,7 @@ export function StackedBarChart({ rows, granularity }) {
     <div>
       <div style={{ display: 'flex', flexWrap: 'wrap', gap: SP.sm, marginBottom: SP.xs }}>
         {cats.map((c, i) => (
-          <span key={c} style={{ display: 'inline-flex', alignItems: 'center', gap: 4, fontFamily: sans, fontSize: FS.xxs, color: SECOND }}>
+          <span key={c} style={{ display: 'inline-flex', alignItems: 'center', gap: 4, fontFamily: sans, fontSize: chromeFontSize(FS.xxs, mobile), color: SECOND }}>
             <span style={{ width: 10, height: 10, background: colorOf(c, i) }} /> {c}
           </span>
         ))}
@@ -193,6 +200,7 @@ export function StackedBarChart({ rows, granularity }) {
 
 // ── horizontal bar list (overall distribution / top-N) ───────────────────────
 export function BarList({ rows, max = 12 }) {
+  const mobile = useIsMobile();
   const items = useMemo(() => {
     const agg = {};
     for (const r of rows) agg[r.dim ?? 'unknown'] = (agg[r.dim ?? 'unknown'] || 0) + (Number(r.value) || 0);
@@ -204,7 +212,7 @@ export function BarList({ rows, max = 12 }) {
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: SP.xs }}>
       {items.map(([k, v], i) => (
-        <div key={k} style={{ display: 'grid', gridTemplateColumns: '120px 1fr 64px', alignItems: 'center', gap: SP.sm, fontFamily: sans, fontSize: FS.xs }}>
+        <div key={k} style={{ display: 'grid', gridTemplateColumns: '120px 1fr 64px', alignItems: 'center', gap: SP.sm, fontFamily: sans, fontSize: chromeFontSize(FS.xs, mobile) }}>
           <span title={k} style={{ color: SECOND, whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>{k}</span>
           <span style={{ background: PARCH, height: 14, position: 'relative' }}>
             <span style={{ display: 'block', height: '100%', width: `${(v / peak) * 100}%`, background: PALETTE[i % PALETTE.length] }} />
@@ -218,6 +226,7 @@ export function BarList({ rows, max = 12 }) {
 
 // ── heatmap (crosstab) ───────────────────────────────────────────────────────
 export function Heatmap({ rows }) {
+  const mobile = useIsMobile();
   const { rowKeys, colKeys, cell, max } = useMemo(() => {
     const rT = {}, cT = {}, m = {};
     for (const r of rows) {
@@ -232,7 +241,7 @@ export function Heatmap({ rows }) {
   if (!rowKeys.length) return <Empty />;
   return (
     <div style={{ overflowX: 'auto' }}>
-      <table style={{ borderCollapse: 'collapse', fontFamily: sans, fontSize: FS.xxs }}>
+      <table style={{ borderCollapse: 'collapse', fontFamily: sans, fontSize: chromeFontSize(FS.xxs, mobile) }}>
         <thead>
           <tr>
             <th aria-label="row versus column" style={{ padding: SP.xs }} />
@@ -266,11 +275,12 @@ export function Heatmap({ rows }) {
 
 // ── compact grouped table (system-behaviour reports) ─────────────────────────
 export function MiniTable({ rows, columns, max = 60, numeric = [] }) {
+  const mobile = useIsMobile();
   if (!rows || !rows.length) return <Empty />;
   const cols = columns || Object.keys(rows[0]);
   return (
     <div style={{ overflowX: 'auto', maxHeight: 320, overflowY: 'auto' }}>
-      <table style={{ borderCollapse: 'collapse', width: '100%', fontFamily: sans, fontSize: FS.xs }}>
+      <table style={{ borderCollapse: 'collapse', width: '100%', fontFamily: sans, fontSize: chromeFontSize(FS.xs, mobile) }}>
         <thead>
           <tr style={{ background: CARD_HDR }}>
             {cols.map((c) => (

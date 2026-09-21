@@ -25,7 +25,7 @@ import { useNextActionRailHandlers } from './useNextActionRailHandlers.js';
 import ExportUnlockDialog from '../dossier/ExportUnlockDialog.jsx';
 import useIsMobile from '../../hooks/useIsMobile.js';
 import { useStore } from '../../store/index.js';
-import { MUTED, PAGE_MAX, CHROME } from '../theme';
+import { MUTED, PAGE_MAX, CHROME, ARROW_CLEAR, ARROW_BARB_CLEAR } from '../theme';
 
 // Lazy exactly as in SettlementDetail: the PDF-dragging OutputContainer loads only
 // when its surface renders, never on first paint (tests/build/vendorPdfLazy.test.js).
@@ -101,7 +101,7 @@ export default function SettlementDossierHero({
             {body}
           </div>
           {saveId && (
-            <aside style={{ flex: '0 1 248px', minWidth: 0, position: 'sticky', top: isMobile ? CHROME.headerMobile + CHROME.stickyTop : CHROME.stickyTop, alignSelf: 'flex-start', zIndex: 1 }}>
+            <aside style={{ flex: '0 1 248px', minWidth: 0, position: 'sticky', top: `calc(${isMobile ? ARROW_CLEAR : ARROW_BARB_CLEAR} + ${CHROME.stickyTop}px)`, alignSelf: 'flex-start', zIndex: 1 }}>
               <NextActionRail
                 settlement={settlement}
                 save={detail.saveData || detail}

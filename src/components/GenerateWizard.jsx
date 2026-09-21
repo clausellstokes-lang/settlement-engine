@@ -21,9 +21,10 @@ import { track, EVENTS } from '../lib/analytics.js';
 // collapsibles, each keeping its wizard step id so funnel analytics still fire.
 import LayeredConfigurationPanel from './generate/LayeredConfigurationPanel.jsx';
 import WizardCloseout from './generate/WizardCloseout.jsx';
-import { INK, MUTED, SECOND, BORDER, CARD, sans, serif_, SP, FS, PAGE_MAX, CHROME } from './theme.js';
+import { INK, MUTED, SECOND, BORDER, CARD, sans, serif_, SP, FS, PAGE_MAX, CHROME, HEADER_H } from './theme.js';
 import { t } from '../copy/index.js';
-import { anonAtCap } from '../lib/anonGenCounter.js';
+import RefusalNotice from './primitives/RefusalNotice.jsx';
+import { raisedHere, REFUSAL_SURFACES } from '../lib/refusalReasons.js';
 import { ConfirmDialog } from './primitives/Dialog.jsx';
 import Button from './primitives/Button.jsx';
 import PageHeader from './primitives/PageHeader.jsx';
@@ -48,11 +49,9 @@ const PipelineReveal = lazy(() => import('./generate/PipelineReveal.jsx'));
 // ruling — ODQ §767.2 as amended by §777: post-forge lands on the dossier, head
 // at the top, and the simulation record stays one tap away behind the toolbar's
 // drawer trigger, which already carries the duty.)
-// LAZY on purpose: this wizard is a first-paint surface, and the lock controls are
-// only meaningful once a settlement exists. The dossier tabs import the same leaf
-// statically from inside their own lazy chunks, so this costs a shared chunk, not
-// first-paint bytes.
-const LockControls = lazy(() => import('./dossier/LockControls.jsx'));
+// (The "What a new roll keeps" world-lock section that sat below the draft dossier was
+// removed by owner order 2026-09-17: "Remove the entire section that says what a new roll
+// keeps and any button associated with that." Its lazy LockControls import went with it.)
 
 // ── Step definitions ─────────────────────────────────────────────────────────
 // The linear step wizard collapsed into LayeredConfigurationPanel (UX overhaul
@@ -106,6 +105,8 @@ export default function GenerateWizard({ isMobile, onSignIn, onNavigate }) {
   // Local state for back navigation
   const [showOutput, setShowOutput] = useState(true);
   const [generateError, setGenerateError] = useState(null);
+  // The lane's recorded reason for the last refusal (store/settlementGenerateAction.js).
+  const lastRefusal = useStore(s => s.lastRefusal);
   const [generating, setGenerating] = useState(false);
   // State disables the visible controls; the ref closes the same-tick window
   // before React can render that disabled state.
@@ -186,14 +187,11 @@ export default function GenerateWizard({ isMobile, onSignIn, onNavigate }) {
   }, []);
 
   const handleGenerate = useCallback(async () => {
-    // Tier 7.2 — anonymous daily cap. Regeneration counts against the same
-    // 3/day allowance as the first generation (enforced in the store), so
-    // when an anon is already at cap, route to the sign-in/unlock flow
-    // rather than dead-clicking — generateSettlement would no-op anyway.
-    if (authTier === 'anon' && anonAtCap()) {
-      if (typeof onSignIn === 'function') onSignIn();
-      return;
-    }
+    // ⛔ THE CAP PRE-FLIGHT IS GONE FROM HERE (ODQ §934.24(c)). It was one of FOUR
+    // hand-rolled copies of the same check across four surfaces, and it opened the
+    // auth modal without ever saying WHY the reader was being asked to sign in. The
+    // gate has always been enforced in the generation lane; the lane now records the
+    // reason too, and the notice below renders it with 'Sign in' as its door.
     if (generatingRef.current) return;
     generatingRef.current = true;
     setGenerating(true);
@@ -223,8 +221,16 @@ export default function GenerateWizard({ isMobile, onSignIn, onNavigate }) {
       });
     } catch { /* analytics must never affect generation */ }
     try {
-      const generated = await generate();
-      if (!generated) throw new Error('Generation completed without a settlement.');
+      // `at` names WHERE the reader clicked (REVIEW-P F12): one store record was
+      // painted by every mount on the page, so one refusal was announced twice. The
+      // gate stamps this key; only this surface says what it raised.
+      const generated = await generate(undefined, { at: REFUSAL_SURFACES.GENERATE_WIZARD });
+      // ⛔ A REFUSAL IS NOT AN ERROR, AND TURNING ONE INTO AN ERROR IS HOW THE REASON
+      // WAS LOST. This used to throw on a null, which landed the reader on the generic
+      // "we couldn't generate" line for what was actually a known, explainable gate —
+      // the daily cap, or a size above the account's ceiling. The lane has recorded
+      // which; RefusalNotice below says it.
+      if (!generated) return;
       generatedThisSession.current = true;
       clearLoadedFromSave();
       setShowOutput(true); // show output after generation
@@ -235,7 +241,9 @@ export default function GenerateWizard({ isMobile, onSignIn, onNavigate }) {
       generatingRef.current = false;
       setGenerating(false);
     }
-  }, [generate, clearLoadedFromSave, authTier, onSignIn]);
+    // `authTier`/`onSignIn` left the dependency list with the cap pre-flight: the
+    // gate is the lane's now, and onSignIn is read in the render as the notice's door.
+  }, [generate, clearLoadedFromSave]);
 
   /**
    * Exit the generated dossier. `back` returns to the config you generated
@@ -285,8 +293,10 @@ export default function GenerateWizard({ isMobile, onSignIn, onNavigate }) {
     if (!dossierVisible || typeof document === 'undefined') return undefined;
     const root = document.documentElement;
     const prev = root.style.scrollPaddingTop;
-    const mobilePad = CHROME.headerMobile + CHROME.toolbarHeight;
-    root.style.scrollPaddingTop = isMobile ? `${mobilePad}px` : `${CHROME.scrollPadDesktop}px`;
+    // The header's painted band (HEADER_H) plus the pinned toolbar, and on desktop 22 px of
+    // air below it (the old 124 px pad less its 38 px bar and 64 px toolbar).
+    const pad = isMobile ? CHROME.toolbarHeight : CHROME.toolbarHeight + 22;
+    root.style.scrollPaddingTop = `calc(${HEADER_H} + ${pad}px)`;
     return () => { root.style.scrollPaddingTop = prev; };
   }, [dossierVisible, isMobile]);
 
@@ -438,7 +448,19 @@ export default function GenerateWizard({ isMobile, onSignIn, onNavigate }) {
             pre-generate branch re-renders — without this block the click was a
             silent dead-end. Carried by the Deep Craft clerk's-note idiom (no
             tinted wash); the Generate button below is the retry affordance. */}
-        {generateError && (
+        {/* A recorded REFUSAL wins over the generic error line: it knows which gate
+            refused and can name the door. The two are exclusive so a reader never
+            gets a reason and a shrug at the same time. */}
+        {raisedHere(lastRefusal, REFUSAL_SURFACES.GENERATE_WIZARD) ? (
+          <RefusalNotice
+            refusal={lastRefusal}
+            actions={typeof onSignIn === 'function' ? (
+              <Button type="button" variant="primary" size="sm" onClick={onSignIn} style={{ minHeight: 44 }}>
+                {t('auth.button.signIn')}
+              </Button>
+            ) : null}
+          />
+        ) : generateError && (
           <ClerkNote role="alert" rubric={t('generate.notes.errorRubric')}>
             {generateError}
           </ClerkNote>
@@ -479,14 +501,18 @@ export default function GenerateWizard({ isMobile, onSignIn, onNavigate }) {
       {/* THE POST-FORGE ORDER (owner ruling, ODQ §767.2 as amended by §777): the
           dossier lands HEAD-FIRST. The above-dossier receipts panel is deleted
           outright (the toolbar's drawer trigger already carries that duty), and
-          the world locks moved out of the head — to the settlement editor for a
-          saved settlement, and to the quiet controls region below the dossier on
-          this draft surface. Nothing stands between the forge and the dossier. */}
+          the world locks that later sat below the dossier were removed outright
+          (owner order 2026-09-17). Nothing stands between the forge and the dossier. */}
 
       {/* Regenerate lives in the sticky toolbar (beside New). The re-roll
           error alert stays here so a failed regenerate surfaces above the
-          dossier. */}
-      {settlement && generateError && (
+          dossier.
+          ⛔ AND A RECORDED REFUSAL SUPPRESSES IT, exactly as on the pre-generate
+          branch: a throw leaves BOTH a generateError and a lane-recorded reason,
+          and the reason knows which failure it was (a spent allowance, a stale
+          build) where the generic line only knows that something went wrong. Two
+          alerts for one click is the doubling F12 found on /create. */}
+      {settlement && generateError && !lastRefusal && (
         <ClerkNote
           role="alert"
           rubric={t('generate.notes.errorRubric')}
@@ -521,6 +547,17 @@ export default function GenerateWizard({ isMobile, onSignIn, onNavigate }) {
             handleNewSettlement={handleNewSettlement}
             maxWidth={PAGE_MAX}
           />
+
+          {/* ⛔ THE FOURTH REGENERATE WAS A DEAD CLICK (REVIEW-P F3, ODQ §934.24(c)).
+              After one generation and two rerolls the toolbar's "↻ Regenerate draft"
+              left the town unchanged, recorded `dailyCap` on the store, and rendered
+              NOTHING — no role=alert anywhere on the page, the button still enabled.
+              The dossier branch was the one generation surface with no notice at all.
+              It is mounted HERE, under the sticky bar that carries the button and
+              above the dossier it would have replaced, on the same parchment ground
+              the re-roll error line uses; the toolbar's own box is the dark arrow
+              band, where a clerk's note (ink on no wash) would not be readable. */}
+          <RefusalNotice refusal={raisedHere(lastRefusal, REFUSAL_SURFACES.GENERATE_WIZARD) ? lastRefusal : null} style={{ maxWidth: PAGE_MAX, margin: '0 auto', width: '100%' }} />
 
           <Suspense fallback={<div style={{ padding: 40, textAlign: 'center', color: MUTED, fontFamily: sans }}>Laying out the settlement dossier…</div>}>
             {/* P139 — cap the dossier body to the shared page width so it
@@ -562,20 +599,6 @@ export default function GenerateWizard({ isMobile, onSignIn, onNavigate }) {
                 Save/Export primaries when they apply. */}
             <BuyThisDossier settlement={settlement} saveId={activeSaveId} onSignIn={onSignIn} onNavigate={onNavigate} size="lg" />
             <ExportDraftButton />
-          </div>
-
-          {/* LOCKS ENGINE, world scope — what a new roll keeps (name / ground /
-              seat). Relocated out of the page head by the §767.2/§777 reorder:
-              on this draft surface the locks live in the controls region below
-              the dossier, beside the other what-do-I-do-with-this-draft verbs
-              (a saved settlement gets them in the settlement editor). The
-              per-section locks stay beside their own Reroll buttons. */}
-          <div style={{ maxWidth: PAGE_MAX, margin: '0 auto', width: '100%' }}>
-            <Suspense fallback={<div style={{ padding: SP.sm, color: MUTED, fontFamily: sans, fontSize: FS.xxs }}>Setting out what a new roll keeps…</div>}>
-              <ClerkNote rubric="What a new roll keeps">
-                <LockControls scope="world" />
-              </ClerkNote>
-            </Suspense>
           </div>
 
           {/* Post-generate "what's next" guidance now lives in the app-level

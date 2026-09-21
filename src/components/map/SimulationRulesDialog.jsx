@@ -15,6 +15,8 @@ import IconButton from '../primitives/IconButton.jsx';
 import PageHeader from '../primitives/PageHeader.jsx';
 import { useDialogFocusTrap } from '../primitives/useDialogFocusTrap.js';
 import DisclosureHeader from './SimulationRulesDisclosure.jsx';
+import useIsMobile from '../../hooks/useIsMobile.js';
+import { chromeFontSize } from '../../design/proseScale.js';
 
 /*
  * Dialog v2 (Phase 5.5 CL-0, design §11): preset-picker-prominent, then the
@@ -87,13 +89,14 @@ function rulesKeyFor(campaign) {
 }
 
 function Field({ label, children }) {
+  const mobile = useIsMobile();
   const controlId = useId();
   return (
     // htmlFor associates the label with the cloned control's injected id; the
     // rule's static nesting check can't see through the custom child component.
     // eslint-disable-next-line jsx-a11y/label-has-for
     <label htmlFor={controlId} style={{ display: 'grid', gap: 6, minWidth: 0 }}>
-      <span style={{ color: INK, fontFamily: sans, fontSize: FS.xs, fontWeight: 900 }}>
+      <span style={{ color: INK, fontFamily: sans, fontSize: chromeFontSize(FS.xs, mobile), fontWeight: 900 }}>
         {label}
       </span>
       {isValidElement(children) ? cloneElement(children, { id: controlId }) : children}
@@ -128,6 +131,7 @@ function Select({ id, value, options, onChange, disabled = false }) {
 }
 
 function Toggle({ checked, label, onChange, disabled = false }) {
+  const mobile = useIsMobile();
   const controlId = useId();
   return (
     <label htmlFor={controlId} style={{
@@ -140,7 +144,7 @@ function Toggle({ checked, label, onChange, disabled = false }) {
       background: checked ? GOLD_BG : CARD,
       color: INK,
       fontFamily: sans,
-      fontSize: FS.xs,
+      fontSize: chromeFontSize(FS.xs, mobile),
       fontWeight: 850,
       cursor: disabled ? 'default' : 'pointer',
       opacity: disabled ? 0.85 : 1,
@@ -159,6 +163,7 @@ function Toggle({ checked, label, onChange, disabled = false }) {
 }
 
 function Metric({ label, value }) {
+  const mobile = useIsMobile();
   return (
     <div style={{
       display: 'grid',
@@ -168,7 +173,7 @@ function Metric({ label, value }) {
       border: `1px solid ${BORDER2}`,
       background: CARD,
     }}>
-      <span style={{ color: MUTED, fontFamily: sans, fontSize: FS.xxs, fontWeight: 850, textTransform: 'uppercase' }}>
+      <span style={{ color: MUTED, fontFamily: sans, fontSize: chromeFontSize(FS.xxs, mobile), fontWeight: 850, textTransform: 'uppercase' }}>
         {label}
       </span>
       <span style={{ color: INK, fontFamily: sans, fontSize: FS.sm, fontWeight: 950 }}>
@@ -190,6 +195,7 @@ export default function SimulationRulesDialog({ open, campaign, onClose }) {
 }
 
 function SimulationRulesDialogContent({ campaign, onClose }) {
+  const mobile = useIsMobile();
   const updateRules = useStore(s => s.updateCampaignSimulationRules);
   const previewWorldPulse = useStore(s => s.previewCampaignWorldPulse);
   // While this campaign's advance is in flight the store no-ops the rules write
@@ -398,7 +404,7 @@ function SimulationRulesDialogContent({ campaign, onClose }) {
           {advanceBlocked && (
             <div
               data-testid="rules-advance-blocked" role="status" aria-live="polite"
-              style={{ border: `1px solid ${GOLD}`, padding: SP.sm, background: GOLD_BG, color: INK, fontFamily: sans, fontSize: FS.xs, fontWeight: 850 }}
+              style={{ border: `1px solid ${GOLD}`, padding: SP.sm, background: GOLD_BG, color: INK, fontFamily: sans, fontSize: chromeFontSize(FS.xs, mobile), fontWeight: 850 }}
             >
               The realm is advancing. Give it a moment, then save your rules.
             </div>
@@ -410,7 +416,7 @@ function SimulationRulesDialogContent({ campaign, onClose }) {
               background: 'rgba(197,74,74,0.08)',
               color: RED,
               fontFamily: sans,
-              fontSize: FS.xs,
+              fontSize: chromeFontSize(FS.xs, mobile),
               fontWeight: 850,
             }}>
               {error}
@@ -418,7 +424,7 @@ function SimulationRulesDialogContent({ campaign, onClose }) {
           )}
 
           <div style={{ display: 'grid', gap: SP.sm }}>
-            <div style={{ color: INK, fontFamily: sans, fontSize: FS.xs, fontWeight: 900 }}>
+            <div style={{ color: INK, fontFamily: sans, fontSize: chromeFontSize(FS.xs, mobile), fontWeight: 900 }}>
               What kind of world is this?
             </div>
             <div style={{
@@ -448,10 +454,10 @@ function SimulationRulesDialogContent({ campaign, onClose }) {
                       opacity: advanceBlocked ? 0.85 : 1,
                     }}
                   >
-                    <span style={{ fontFamily: sans, fontSize: FS.xs, fontWeight: 950 }}>
+                    <span style={{ fontFamily: sans, fontSize: chromeFontSize(FS.xs, mobile), fontWeight: 950 }}>
                       {preset.label}
                     </span>
-                    <span style={{ color: BODY, fontFamily: sans, fontSize: FS.xxs, fontWeight: 750, lineHeight: 1.35 }}>
+                    <span style={{ color: BODY, fontFamily: sans, fontSize: chromeFontSize(FS.xxs, mobile), fontWeight: 750, lineHeight: 1.35 }}>
                       {cardCopy}
                     </span>
                   </button>
@@ -459,7 +465,7 @@ function SimulationRulesDialogContent({ campaign, onClose }) {
               })}
             </div>
             {!GRID_PRESETS.some(([presetId]) => presetId === draft.presetId) && (
-              <div style={{ color: MUTED, fontFamily: sans, fontSize: FS.xs, fontWeight: 800 }}>
+              <div style={{ color: MUTED, fontFamily: sans, fontSize: chromeFontSize(FS.xs, mobile), fontWeight: 800 }}>
                 {activePreset ? `${activePreset.label} (a classic preset)` : 'Custom: this world follows its own laws.'}
               </div>
             )}
@@ -549,7 +555,7 @@ function SimulationRulesDialogContent({ campaign, onClose }) {
                 <div style={{ color: INK, fontFamily: sans, fontSize: FS.sm, fontWeight: 950 }}>
                   One Month Preview
                 </div>
-                <div style={{ marginTop: 2, color: BODY, fontFamily: sans, fontSize: FS.xxs, fontWeight: 750 }}>
+                <div style={{ marginTop: 2, color: BODY, fontFamily: sans, fontSize: chromeFontSize(FS.xxs, mobile), fontWeight: 750 }}>
                   {human(draft.propagationMode)} / {human(draft.intensity)} / {human(draft.migrationMode)}
                 </div>
               </div>
@@ -566,7 +572,7 @@ function SimulationRulesDialogContent({ campaign, onClose }) {
               </Button>
             </div>
             {frozen ? (
-              <div data-testid="rules-frozen-note" style={{ border: `1px dashed ${BORDER2}`, padding: SP.sm, color: MUTED, fontFamily: sans, fontSize: FS.xs, fontWeight: 800 }}>
+              <div data-testid="rules-frozen-note" style={{ border: `1px dashed ${BORDER2}`, padding: SP.sm, color: MUTED, fontFamily: sans, fontSize: chromeFontSize(FS.xs, mobile), fontWeight: 800 }}>
                 Time is frozen: the world will not advance (the Advance action is disabled) until you set Time back to “On your mark”. Everything is preserved exactly as it stands.
               </div>
             ) : previewResult ? (
@@ -593,7 +599,7 @@ function SimulationRulesDialogContent({ campaign, onClose }) {
                           minWidth: 0,
                           color: BODY,
                           fontFamily: sans,
-                          fontSize: FS.xs,
+                          fontSize: chromeFontSize(FS.xs, mobile),
                           fontWeight: 800,
                         }}
                       >
@@ -605,7 +611,7 @@ function SimulationRulesDialogContent({ campaign, onClose }) {
                 )}
               </>
             ) : (
-              <div style={{ border: `1px dashed ${BORDER2}`, padding: SP.sm, color: MUTED, fontFamily: sans, fontSize: FS.xs, fontWeight: 800 }}>
+              <div style={{ border: `1px dashed ${BORDER2}`, padding: SP.sm, color: MUTED, fontFamily: sans, fontSize: chromeFontSize(FS.xs, mobile), fontWeight: 800 }}>
                 No preview yet.
               </div>
             )}

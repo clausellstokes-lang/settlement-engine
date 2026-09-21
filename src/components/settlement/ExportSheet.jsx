@@ -25,6 +25,8 @@ import { t } from '../../copy/index.js';
 import IconButton from '../primitives/IconButton.jsx';
 import Button from '../primitives/Button.jsx';
 import { useDialogFocusTrap } from '../primitives/useDialogFocusTrap.js';
+import useIsMobile from '../../hooks/useIsMobile.js';
+import { chromeFontSize, proseFontSize } from '../../design/proseScale.js';
 
 const VARIANT_ICON = {
   draft_brief:     Edit3,
@@ -49,6 +51,7 @@ const CANON_ONLY_VARIANTS = new Set(['timeline_packet', 'campaign_state']);
  * @param {boolean} [props.exporting]
  */
 export default function ExportSheet({ open, onClose, onExport, onExportFoundry, exporting }) {
+  const mobile = useIsMobile();
   const phase    = useStore(s => s.phase);
   const eventCount = useStore(s => s.eventLog?.length ?? 0);
   const suggested = suggestVariant(phase, eventCount);
@@ -134,7 +137,7 @@ export default function ExportSheet({ open, onClose, onExport, onExportFoundry, 
 
         {hasFoundry && (
           <div style={{ padding: '0 12px 8px' }}>
-            <div style={{ fontSize: FS.xxs, fontWeight: 700, color: swatch.inkMag3, textTransform: 'uppercase', letterSpacing: '0.05em', marginBottom: 6 }}>Format</div>
+            <div style={{ fontSize: chromeFontSize(FS.xxs, mobile), fontWeight: 700, color: swatch.inkMag3, textTransform: 'uppercase', letterSpacing: '0.05em', marginBottom: 6 }}>Format</div>
             <div style={{ display: 'flex', gap: 6 }}>
               {[{ id: 'pdf', label: 'PDF Dossier' }, { id: 'foundry', label: 'Foundry VTT Module' }].map(opt => (
                 <Button
@@ -150,7 +153,7 @@ export default function ExportSheet({ open, onClose, onExport, onExportFoundry, 
               ))}
             </div>
             {format === 'foundry' && (
-              <div style={{ fontSize: FS.xxs, color: swatch.inkMag3, fontStyle: 'italic', lineHeight: 1.4, marginTop: 6 }}>
+              <div style={{ fontSize: proseFontSize(FS.xxs, mobile), color: swatch.inkMag3, fontStyle: 'italic', lineHeight: 1.4, marginTop: 6 }}>
                 A module zip: the dossier as journal pages. Extract into Foundry&apos;s Data/modules and enable. The journals import on first load.
               </div>
             )}
@@ -159,7 +162,7 @@ export default function ExportSheet({ open, onClose, onExport, onExportFoundry, 
 
         {hasAi && (
           <div style={{ padding: '0 12px 4px' }}>
-            <div style={{ fontSize: FS.xxs, fontWeight: 700, color: swatch.inkMag3, textTransform: 'uppercase', letterSpacing: '0.05em', marginBottom: 6 }}>Source</div>
+            <div style={{ fontSize: chromeFontSize(FS.xxs, mobile), fontWeight: 700, color: swatch.inkMag3, textTransform: 'uppercase', letterSpacing: '0.05em', marginBottom: 6 }}>Source</div>
             <div style={{ display: 'flex', gap: 6 }}>
               {[{ ai: false, label: 'Raw Simulation' }, { ai: true, label: 'AI-Enhanced' }].map(opt => (
                 <Button
@@ -174,7 +177,7 @@ export default function ExportSheet({ open, onClose, onExport, onExportFoundry, 
                 </Button>
               ))}
             </div>
-            <div style={{ fontSize: FS.xxs, color: swatch.inkMag3, fontStyle: 'italic', lineHeight: 1.4, marginTop: 6 }}>
+            <div style={{ fontSize: proseFontSize(FS.xxs, mobile), color: swatch.inkMag3, fontStyle: 'italic', lineHeight: 1.4, marginTop: 6 }}>
               {useAi
                 ? 'Exports the narrated dossier. Canonical facts are preserved.'
                 : 'Exports the raw simulation. Your AI narrative stays out of this file.'}
@@ -204,6 +207,7 @@ export default function ExportSheet({ open, onClose, onExport, onExportFoundry, 
 }
 
 function VariantCard({ v, picked, onPick }) {
+  const mobile = useIsMobile();
   const Icon = v.Icon;
   return (
     <button
@@ -231,11 +235,11 @@ function VariantCard({ v, picked, onPick }) {
         <div style={{ fontSize: FS.md, fontWeight: 700, color: swatch.inkMag }}>
           {v.label}
         </div>
-        <div style={{ fontSize: FS.xs, color: swatch.inkMag3, marginTop: 2, lineHeight: 1.4 }}>
+        <div style={{ fontSize: proseFontSize(FS.xs, mobile), color: swatch.inkMag3, marginTop: 2, lineHeight: 1.4 }}>
           {v.description}
         </div>
         {v.disabled && v.disabledReason && (
-          <div style={{ fontSize: FS.xxs, color: swatch.danger, marginTop: 4, fontStyle: 'italic' }}>
+          <div style={{ fontSize: chromeFontSize(FS.xxs, mobile), color: swatch.danger, marginTop: 4, fontStyle: 'italic' }}>
             {v.disabledReason}
           </div>
         )}

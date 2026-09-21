@@ -22,6 +22,7 @@ import { isViabilityItem } from '../../domain/display/viabilityFilter.js';
 import { entityIdFor } from '../../domain/dossier/entityLinks.js';
 import { customSupplyChainViewModel } from './customSupplyChains.js';
 import { stressArray, foodCore, avgScore } from './viewModelPrimitives.js';
+import { institutionDisplayName } from '../../domain/display/institutionDisplayName.js';
 
 // Pull the human resource name off an exploitation chain entry (engine stores
 // it as `rawResource`; tolerate a few legacy shapes + bare strings).
@@ -187,8 +188,11 @@ export function defenseSlice(active) {
       .map((violation) => typeof violation.reason === 'string' ? violation.reason.trim() : '')
       .filter(Boolean),
     // Surfaced for defenseHeadline (it reads def.magicDependency).
+    // ⛔ ITS TWIN `magicalCapability` IS GONE: no writer produces the key (see the note
+    // in viewModel.js's anchor slice), and nothing read THIS copy of it at all — the one
+    // reader in the estate took the anchor's. A slice field with no writer and no reader
+    // is not a seam waiting to be used; it is a claim the record does not support.
     magicDependency: !!dp?.magicDependency,
-    magicalCapability: dp?.magicalCapability || null,
   };
 }
 
@@ -198,7 +202,10 @@ export function servicesSlice(active) {
   const detailed = institutions.map(inst => ({
     // Phase-D anchor identity — matches the index entry built off this raw inst.
     id: inst?.id || entityIdFor('institution', inst),
-    name: inst?.name || inst?.label || 'Institution',
+    // §934.13 — the slice carries the DISPLAY label, so the paid document and the screen
+    // print one word. The anchor `id` just above is built from the RAW inst and is
+    // untouched: it is an identity, not a word.
+    name: institutionDisplayName(inst) || 'Institution',
     category: inst?.category || 'other',
     subCategory: inst?.subCategory || inst?.type || null,
     status: inst?.status || 'healthy',
@@ -283,8 +290,13 @@ export function resourcesSlice(active) {
         chainRows.push({
           resource,
           status: which,
-          processing: item?.processing || item?.institution ||
-                      (item?.processingInstitutions || []).join(', ') || null,
+          // The PROCESSING names are institution keys and the chapter PRINTS them
+          // (ResourcesProduction's ChainRow), so they leave through the display seam here —
+          // the join happens in this line and the renderer can no longer tell one name from
+          // the next. Same rule as `servicesSlice` above: a print goes through the seam, and
+          // an unmapped name passes through as itself.
+          processing: institutionDisplayName(item?.processing) || institutionDisplayName(item?.institution) ||
+                      (item?.processingInstitutions || []).map((n) => institutionDisplayName(n) || n).join(', ') || null,
           output: item?.output || item?.product ||
                   (item?.finalProducts || item?.outputs || []).join(', ') || null,
           chainStatus: item?.chainStatus || null,

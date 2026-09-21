@@ -19,6 +19,8 @@ import { useStore } from '../../store/index.js';
 import { t } from '../../copy/index.js';
 import Button from '../primitives/Button.jsx';
 import Section from './AccountSection.jsx';
+import useIsMobile from '../../hooks/useIsMobile.js';
+import { proseFontSize } from '../../design/proseScale.js';
 
 function Toggle({ checked, onChange, label }) {
   const id = `email-pref-${String(label).replace(/\s+/g, '-').toLowerCase()}`;
@@ -37,6 +39,7 @@ function Toggle({ checked, onChange, label }) {
 }
 
 export default function AccountEmailPreferencesSection() {
+  const mobile = useIsMobile();
   const auth = useStore(state => state.auth);
   const ownerId = auth?.user?.id || null;
   const sessionIdentity = authSessionIdentity(auth);
@@ -185,7 +188,7 @@ export default function AccountEmailPreferencesSection() {
           </div>
         ) : null}
 
-        <p style={{ fontSize: FS.xs, color: MUTED, margin: 0, lineHeight: 1.5 }}>
+        <p style={{ fontSize: proseFontSize(FS.xs, mobile), color: MUTED, margin: 0, lineHeight: 1.5 }}>
           Account and payment emails (receipts, password resets, and email confirmations)
           are always sent and are not affected by these settings.
         </p>

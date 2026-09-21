@@ -4,6 +4,8 @@ import { useStore } from '../../store/index.js';
 import EntityPicker, { missingReferenceLabel } from '../EntityPicker.jsx';
 import { buildRegistry, customRefIdFromItem } from '../../lib/customRegistry.js';
 import { CUSTOM_CATEGORIES } from './customCategories.js';
+import useIsMobile from '../../hooks/useIsMobile.js';
+import { chromeFontSize } from '../../design/proseScale.js';
 
 // Maps a dependency field (as stored on ANOTHER custom item) to the relationship
 // verb from THIS item's perspective. Powers the derived reverse-links below:
@@ -38,6 +40,7 @@ const CUSTOM_BORDER = swatch['#7C3AED40'];
  * relationship reads bidirectionally without storing back-references.
  */
 export function DependencySummary({ deps, item }) {
+  const mobile = useIsMobile();
   const customContent = useStore(s => s.customContent);
   const registry = useMemo(() => buildRegistry(customContent), [customContent]);
 
@@ -100,7 +103,7 @@ export function DependencySummary({ deps, item }) {
       {fields.map(({ dep, entries }) => (
         <div key={dep.key} style={{ display:'flex', gap:6, alignItems:'flex-start', marginTop:3 }}>
           <span style={{
-            fontSize:FS.micro, fontWeight:700, color:MUT, minWidth:84, flexShrink:0,
+            fontSize:chromeFontSize(FS.micro, mobile), fontWeight:700, color:MUT, minWidth:84, flexShrink:0,
             textTransform:'uppercase', letterSpacing:'0.04em', paddingTop:2,
           }}>{dep.label.replace(/\s*\(.*\)$/, '')}</span>
           <div style={{ display:'flex', flexWrap:'wrap', gap:3, flex:1 }}>
@@ -109,7 +112,7 @@ export function DependencySummary({ deps, item }) {
                 key={`${e.refId}-${i}`}
                 title={e.missing ? 'This linked item no longer exists.' : ''}
                 style={{
-                  fontSize:FS.micro, fontWeight:700,
+                  fontSize:chromeFontSize(FS.micro, mobile), fontWeight:700,
                   color: e.missing ? '#8b1a1a' : (e.source==='custom' ? '#7c3aed' : SEC),
                   background: e.missing ? '#fdebec' : (e.source==='custom' ? '#7c3aed14' : '#0001'),
                   border:`1px solid ${e.missing ? '#f0c8cc' : (e.source==='custom' ? '#7c3aed44' : BOR)}`,
@@ -124,7 +127,7 @@ export function DependencySummary({ deps, item }) {
       ))}
       {totalMissing > 0 && (
         <div style={{
-          marginTop:4, fontSize:FS.xxs, color:swatch.danger,
+          marginTop:4, fontSize:chromeFontSize(FS.xxs, mobile), color:swatch.danger,
           fontStyle:'italic',
         }}>
           {totalMissing} linked item{totalMissing===1?' could':'s could'} not be found. Edit this item to repair the link{totalMissing===1?'':'s'}.
@@ -133,7 +136,7 @@ export function DependencySummary({ deps, item }) {
       {reverseLinks.length > 0 && (
         <div style={{ marginTop:5, paddingTop:4, borderTop:`1px dotted ${BOR}` }}>
           <div style={{
-            fontSize:FS.nano, fontWeight:700, color:MUT, marginBottom:2,
+            fontSize:chromeFontSize(FS.nano, mobile), fontWeight:700, color:MUT, marginBottom:2,
             textTransform:'uppercase', letterSpacing:'0.05em',
           }}>
             Auto-linked from your other custom content
@@ -141,13 +144,13 @@ export function DependencySummary({ deps, item }) {
           {reverseLinks.map(({ verb, names }) => (
             <div key={verb} style={{ display:'flex', gap:6, alignItems:'flex-start', marginTop:3 }}>
               <span style={{
-                fontSize:FS.micro, fontWeight:700, color:CUSTOM_INK, minWidth:84, flexShrink:0,
+                fontSize:chromeFontSize(FS.micro, mobile), fontWeight:700, color:CUSTOM_INK, minWidth:84, flexShrink:0,
                 textTransform:'uppercase', letterSpacing:'0.04em', paddingTop:2,
               }}>{verb}</span>
               <div style={{ display:'flex', flexWrap:'wrap', gap:3, flex:1 }}>
                 {names.map((n, i) => (
                   <span key={`${verb}-${i}`} style={{
-                    fontSize:FS.micro, fontWeight:700, color:CUSTOM_INK,
+                    fontSize:chromeFontSize(FS.micro, mobile), fontWeight:700, color:CUSTOM_INK,
                     background:CUSTOM_BG, border:`1px solid ${CUSTOM_BORDER}`,
                     padding:'1px 5px',
                   }}>{n}</span>
@@ -178,6 +181,7 @@ const CAT_LABEL = {
 export function DependenciesSection({ deps, draft, setDraft }) {
   // Always-visible (not collapsible): dependencies are what wire custom content
   // into generation + supply-chain discovery, so they shouldn't be hidden.
+  const mobile = useIsMobile();
   const total = deps.reduce((sum, d) => {
     const v = draft[d.key];
     if (d.single) return sum + (v ? 1 : 0);
@@ -187,17 +191,17 @@ export function DependenciesSection({ deps, draft, setDraft }) {
     <div style={{ marginTop:10, borderTop:`1px dashed ${BOR}`, paddingTop:8 }}>
       <div style={{ display:'flex', alignItems:'center', gap:6, padding:'2px 0', marginBottom:4 }}>
         <span style={{
-          fontSize:FS.xs, fontWeight:700, color:swatch.magic,
+          fontSize:chromeFontSize(FS.xs, mobile), fontWeight:700, color:swatch.magic,
           textTransform:'uppercase', letterSpacing:'0.05em',
         }}>
           Dependencies {total > 0 && (
             <span style={{
               marginLeft:6, background:'rgba(124,58,237,0.15)', color:swatch.magic,
-              padding:'1px 6px', fontSize:FS.micro, fontWeight:800,
+              padding:'1px 6px', fontSize:chromeFontSize(FS.micro, mobile), fontWeight:800,
             }}>{total}</span>
           )}
         </span>
-        <span style={{ marginLeft:'auto', fontSize:FS.micro, color:MUT, fontStyle:'italic' }}>
+        <span style={{ marginLeft:'auto', fontSize:chromeFontSize(FS.micro, mobile), color:MUT, fontStyle:'italic' }}>
           wire this into generation &amp; supply chains
         </span>
       </div>
@@ -206,7 +210,7 @@ export function DependenciesSection({ deps, draft, setDraft }) {
           <div key={dep.key}>
             {/* eslint-disable-next-line jsx-a11y/label-has-for -- deprecated rule; label nests the EntityPicker control + has htmlFor, but the static nesting check can't see through the component. label-has-associated-control passes. */}
             <label htmlFor={`ccm-dep-${dep.key}`} style={{
-              fontSize:FS.xxs, fontWeight:700, color:MUT,
+              fontSize:chromeFontSize(FS.xxs, mobile), fontWeight:700, color:MUT,
               textTransform:'uppercase', letterSpacing:'0.04em',
               display:'block', marginBottom:3,
             }}>
@@ -222,7 +226,7 @@ export function DependenciesSection({ deps, draft, setDraft }) {
             </label>
             {dep.hint && (
               <div style={{
-                fontSize:FS.xxs, color:MUT, fontStyle:'italic', marginTop:2,
+                fontSize:chromeFontSize(FS.xxs, mobile), color:MUT, fontStyle:'italic', marginTop:2,
               }}>{dep.hint}</div>
             )}
           </div>

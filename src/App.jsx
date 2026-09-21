@@ -20,26 +20,29 @@
  *   admin       — Developer admin panel (elevated roles only)
  */
 import { useState, useEffect, useRef, lazy, Suspense } from 'react';
-import { Zap, Shield, X } from 'lucide-react';
-import Lockup from './components/brand/Lockup.jsx';
+import { X } from 'lucide-react';
 import useIsMobile from './hooks/useIsMobile';
+import { chromeFontSize } from './design/proseScale.js';
 import useCustomContentCloudSync from './hooks/useCustomContentCloudSync.js';
+import useChromeInsets from './hooks/useChromeInsets.js';
 import { useStore } from './store/index.js';
 import { initOutbox } from './store/campaignSliceShared.js';
 import { useRoute, navigate, replacePath } from './hooks/useRoute.js';
 import { useFocusOnViewChange } from './hooks/useFocusOnViewChange.js';
-import { allowsFloatingFeedback, guardForView, redirectForView, viewToPath, NAV } from './lib/routes.js';
+import { allowsFloatingFeedback, barNav, guardForView, redirectForView, viewToPath, NAV_FLOW } from './lib/routes.js';
 import { applyDocumentHead } from './lib/seo.js';
 import {
-  GOLD, GOLD_BG, INK, INK_DEEP, PARCH_100, BORDER, BODY, ELEV, SHAFT, SHAFT_GRAIN_LAYERS, SLATE, SLATE_BG, sans, SP, R, FS, swatch, CHROME, bottomClearance,
+  GOLD, GOLD_BG, INK, INK_DEEP, PARCH_100, BORDER, BODY, sans, SP, R, FS, swatch, CHROME, bottomClearance, aboveFooter, FOOTER_TUCKED_BOTTOM,
+  ARROW_HANG, BOTTOM_NAV_H, BOTTOM_NAV_ATTR, HEADER_H, aboveBottomNav,
 } from './components/theme.js';
-import { resolveViewBackground } from './config/pageBackgrounds.js';
-import AccountMenu from './components/AccountMenu.jsx';
+import { resolveViewBackground, paintsPageBackground } from './config/pageBackgrounds.js';
 import NavFlowArrow from './components/nav/NavFlowArrow.jsx';
-import NavRibbon from './components/nav/NavRibbon.jsx';
+import ArrowHeader from './components/nav/ArrowHeader.jsx';
+import { FULL_MIN_VIEWPORT } from './components/nav/arrowGeometry.js';
 import LegalRibbonRow from './components/footer/LegalRibbonRow.jsx';
 import FeatureErrorBoundary from './components/FeatureErrorBoundary.jsx';
 import Button from './components/primitives/Button.jsx';
+import { purchasesOpen } from './lib/launchGate.js';
 import IconButton from './components/primitives/IconButton.jsx';
 // The route→component registry + shared Loading live in AppViews (extracted so
 // the shell stays legible; the view table has one home).
@@ -56,8 +59,12 @@ const CampaignSyncBanner = lazy(() => import('./components/CampaignSyncBanner.js
 const SessionEvictedBanner = lazy(() => import('./components/SessionEvictedBanner.jsx'));
 
 // The post-generate coach hosts the guidance registry's single wizard-postgen
-// whisper (the "what's next" moves). Self-gates on a settlement + the unified
-// sf:guidance dismissal; lazy keeps it off first paint (byte budget).
+// whisper (the "what's next" moves). It is mounted INSIDE <main>, keyed by the route
+// (ODQ §934.29: a pop-up belongs to its page of origin — leaving unmounts it, returning
+// mounts it fresh, and only the explicit close retires it). Lazy keeps it off first
+// paint (byte budget) and, just as importantly, keeps the guidance registry — a
+// zero-import lazy leaf — out of the entry closure, which is why the shell cannot hold
+// the origin table itself and the host asks the registry instead.
 const PostGenCoach = lazy(() => import('./components/PostGenCoach.jsx'));
 
 // The two DEV panels are always-mounted but NOT first-paint critical (they
@@ -75,17 +82,18 @@ const PricingMomentCard = lazy(() => import('./components/pricing/PricingMomentC
 // lazy so both stay off first paint; each self-gates on `visible`.
 const FloatingAffordances = lazy(() => import('./components/FloatingAffordances.jsx'));
 
-// Mobile bottom nav: an EXPLICIT priority order rather than slicing the desktop
-// NAV order, otherwise inserting/reordering a NAV item silently evicts whatever
-// falls past the slice. REALM is restored to the bar (owner walk ruling, ODQ
-// §767.3(f)): a phone user must reach the realm from the product's core flow,
-// and the Realm has carried an honest phone surface since RealmMobileGate (the
-// read-only dashboard + companion) — the old "too constrained for small
-// screens" omission described a workspace that no longer answers for the whole
-// route. About yields its bar seat by priority (lowest, evicted by the 5-seat
-// cap below) and keeps its mobile door in the footer's LegalRibbonRow.
-// Welcome/home is reached via the mobile brand button.
-const MOBILE_NAV_PRIORITY = ['generate', 'settlements', 'realm', 'gallery', 'compendium', 'about-what-this-is'];
+// ⭐ THE BAR'S ITEMS COME FROM lib/routes.js `barNav`, WHICH IS THE PAINTING'S OWN ORDER
+// (owner, ODQ §934.26 + its addendum). The explicit MOBILE_NAV_PRIORITY array that used
+// to live here is retired with the Realm's phone seat: it existed only to choose which
+// tab the five-seat cap evicted, and with five destinations for five seats there is
+// nothing to evict. Its retirement is also what makes "one order everywhere" true —
+// the array had Gallery before Compendium while the painting has them the other way.
+// Welcome/home is reached via the painted arrow's home control.
+//
+// THE HAIRLINE (§934.26: "with a hairline after the working pair (Create, Library)
+// before the reference pages"). The bar's own top rule, written once and read twice, so
+// the divider is the same ink as the edge above it and the raw-colour budget is unmoved.
+const BAR_RULE = '1px solid rgba(160,118,42,0.25)';
 
 // Is there a persisted Supabase session token on this device? A member returning
 // to the bare root should wait for their session to restore (so they aren't
@@ -105,6 +113,9 @@ function hasStoredSession() {
 
 export default function App() {
   const isMobile = useIsMobile();
+  // THE PAINTED ARROW'S SWITCH (owner orders 2026-09-16): from 1024 px the header is the
+  // full arrow with its six painted words; below, the compact arrow and the bottom bar.
+  const narrow = useIsMobile(FULL_MIN_VIEWPORT);
   // Path-based routing. `useRoute` resolves window.location → { view, … } and
   // re-renders on Back/Forward + programmatic navigation. `setView` aliases the
   // imperative navigator so existing setView(viewId) call sites keep working —
@@ -117,6 +128,9 @@ export default function App() {
   // The skip-to-content link + main[tabIndex=-1] below are the target.
   const mainRef = useRef(null);
   useFocusOnViewChange(view, mainRef);
+  // The pinned footer (owner orders 2026-09-16) publishes its measured band and tuck as CSS
+  // variables; it pins only where the full arrow shows (the bottom bar holds the edge below).
+  const { footerRef } = useChromeInsets(!narrow);
   const [showScrollTop, setShowScrollTop] = useState(false);
   const [showScrollBottom, setShowScrollBottom] = useState(false);
   // Auth-modal visibility lives on the store's uiSlice (restoration #16) so the
@@ -140,6 +154,8 @@ export default function App() {
   const initAuth = useStore(s => s.initAuth);
   const onboardingNudge = useStore(s => s.onboardingNudge);
   const clearOnboardingNudge = useStore(s => s.clearOnboardingNudge);
+  // ⛔ A REFUSAL BELONGS TO THE CLICK THAT RAISED IT (see the route effect below).
+  const clearRefusal = useStore(s => s.clearRefusal);
   const purchaseModalOpen = useStore(s => s.purchaseModalOpen);
   const setPurchaseModalOpen = useStore(s => s.setPurchaseModalOpen);
   const setCreditBalance = useStore(s => s.setCreditBalance);
@@ -350,19 +366,47 @@ export default function App() {
   }, [authLoading, authTier, setCreditBalance, initAuth]);
 
   // ── Auth guards ────────────────────────────────────────────────────────────
-  // Gated routes redirect once the session has resolved. 'auth' views bounce
-  // anonymous visitors to /signin carrying ?next= (so they return post-login);
-  // 'elevated' views bounce non-developers home. Waits on authLoading so we don't
-  // act during the initial session check.
+  // 'auth' views bounce anonymous visitors to /signin carrying ?next= (so they
+  // return post-login). That redirect STAYS: it is a door, not a refusal — the
+  // reader is sent somewhere that can actually resolve their problem, and they
+  // land back where they were aiming.
+  //
+  // ⛔ 'elevated' VIEWS NO LONGER BOUNCE ANYONE (ODQ §934.24(c) + §934.28). This
+  // branch used to `navigate('generate', { replace: true })`, so a member — or
+  // anyone — who opened /admin was silently replaced onto /create: a refusal
+  // answered by navigating, with nothing said, which is the exact class
+  // lib/refusalReasons.js and primitives/RefusalNotice.jsx were built against.
+  // A staff role cannot be bought or signed up for, so there is nowhere useful
+  // to send them; the route says why instead, where the reader is (AppViews'
+  // admin branch renders <StaffOnlyPage/>). Nothing is loosened: AdminPanel
+  // still mounts only for `isElevated`, its own body re-checks the role, and
+  // every read and write it makes is role-gated and audited server-side.
+  //
+  // Waits on authLoading so we don't act during the initial session check.
   useEffect(() => {
     if (authLoading) return;
-    const guard = guardForView(view);
-    if (guard === 'auth' && authTier === 'anon') {
+    if (guardForView(view) === 'auth' && authTier === 'anon') {
       navigate('signin', { replace: true, search: `?next=${encodeURIComponent(viewToPath(view))}` });
-    } else if (guard === 'elevated' && !isElevated) {
-      navigate('generate', { replace: true });
     }
-  }, [view, authTier, isElevated, authLoading]);
+  }, [view, authTier, authLoading]);
+
+  // ── A refusal does not travel ────────────────────────────────────────
+  // ⛔ IT LEAKED ACROSS PAGES (adversarial review of the second wave). `lastRefusal` is
+  // ONE record on the store and every surface renders it on MOUNT, but only the three
+  // surfaces that raise it clear it at click time. So refusing a city fork in the Library
+  // and then opening /create showed the reader a standing accusation about a click they
+  // made on another page — a sentence with no cause in front of them.
+  //
+  // Cleared HERE rather than scoped to the raising surface, because a refusal is a fact
+  // about a CLICK and a route change ends the click: scoping would mean stamping a route
+  // onto the record and teaching every renderer to compare it, which is four more places
+  // to keep in step for the same answer. `view` is the router's own signal (the auth
+  // guard, the head and the canonical-URL upgrade all key on it), so this runs exactly
+  // when the reader arrives somewhere new — including the first render, where there is
+  // nothing to clear and clearing is free.
+  useEffect(() => {
+    clearRefusal?.();
+  }, [view, clearRefusal]);
 
   // ── Demoted destinations → redirect to their new homes ─────────────────────
   // The Workshop, the standalone World Map, and (since THE ABOUT SPLIT) the
@@ -401,6 +445,18 @@ export default function App() {
     applyDocumentHead(view, params);
   }, [view, params]);
 
+  // HAS THE ROUTE SETTLED? The bare root resolves to DEFAULT_VIEW ('generate')
+  // and the front-door effect above rewrites it to /home or /create, so for one
+  // commit `view` is a placeholder the visitor is already leaving. Both the paint
+  // (`--page-bg` below) and the preload (next effect) read THIS ONE value, so the
+  // landing page can never fetch /create's painting through either door — it was
+  // fetching it through BOTH: the wrapper briefly carried `.page-bg`, whose
+  // `var(--page-bg)` pulled the image down before the class was dropped again.
+  // `viewToPath` is the router's own mapping, so no second notion of routing is
+  // invented here; a directly-loaded route agrees from its very first render and
+  // is never delayed.
+  const routeSettled = typeof location === 'undefined' || location.pathname.startsWith(viewToPath(view));
+
   // ── Active-view background preload ─────────────────────────────────────────
   // The .page-bg painting is a fixed CSS background, so the browser only
   // discovers its URL after CSS applies — late enough to delay the first painted
@@ -409,21 +465,51 @@ export default function App() {
   // repointed on every view/flow change, typed to the format the CSS will fetch
   // (WebP where the engine decodes it, else JPEG — see config/pageBackgrounds.js),
   // so preload and paint always agree and no image is fetched twice.
+  //
+  // THE LINK IS FULLY ATTRIBUTED BEFORE IT ENTERS THE HEAD. It used to be
+  // appended bare and then given its `type` and `href`, which cost every page in
+  // the app TWO console warnings at boot — "<link rel=preload> has an invalid
+  // `href` value" — even though all three preloads resolve 200. The engine
+  // validates a preload the moment it joins the document and again on each
+  // attribute write, so an href-less insertion warned once, and the `type = type`
+  // write that followed re-validated the still-href-less link and warned again.
+  // The `href` write that finally made it valid was never the complaint.
+  // Measured in a headless run: append→type→href warns twice, type→href→append
+  // warns zero times, and repointing an ALREADY-VALID link (the view-change path)
+  // has always been silent. So the fix is the ORDER, not the values — `pending`
+  // holds the new link out of the head until it is fully attributed, and the two
+  // attribute writes stay in the ONE place that serves both paths.
+  //
+  // AND ONLY FOR A VIEW THAT ACTUALLY PAINTS IT. resolveViewBackground answers
+  // every view with a real painting (it falls back to DEFAULT_BG), but the two
+  // painting classes below are what decide whether anything shows it —
+  // paintsPageBackground is that same decision, so the preload cannot drift from
+  // the paint. `home` fails it: its dark-hero rule is applied by no component, so
+  // the landing page was fetching a full-size image it never displays. A view that
+  // does not paint also DROPS a stale link rather than leaving the previous view's
+  // image in flight behind it.
+  //
+  // AND NOT UNTIL THE ROUTE HAS SETTLED (routeSettled, just above): the bare root
+  // resolves to DEFAULT_VIEW ('generate') for one commit before the front-door
+  // effect rewrites it, and preloading there fetched /create's painting for a
+  // visitor on their way to the landing page.
   useEffect(() => {
     if (typeof document === 'undefined') return;
-    const { href, type } = resolveViewBackground({ view, wizardMode, settlement: hasSettlement });
+    const bg = resolveViewBackground({ view, wizardMode, settlement: hasSettlement });
     const ID = 'page-bg-preload';
     let link = document.getElementById(ID);
-    if (!link) {
+    if (!routeSettled || !paintsPageBackground(bg) || !bg.href) { link?.remove(); return; }
+    const pending = !link;
+    if (pending) {
       link = document.createElement('link');
       link.id = ID;
       link.rel = 'preload';
       link.as = 'image';
-      document.head.appendChild(link);
     }
-    link.type = type;
-    link.href = href;
-  }, [view, wizardMode, hasSettlement]);
+    link.type = bg.type;
+    link.href = bg.href;
+    if (pending) document.head.appendChild(link);
+  }, [view, wizardMode, hasSettlement, routeSettled]);
 
   useCustomContentCloudSync({
     authTier,
@@ -475,34 +561,15 @@ export default function App() {
   };
 
   // Nav is derived wholesale from routes.js (each ROUTES entry with a `nav` block).
-  // Adding / relabelling / reordering a tab is a one-place edit in routes.js.
-  const mobileNav = MOBILE_NAV_PRIORITY
-    .map(id => NAV.find(item => item.id === id))
-    .filter(Boolean)
-    .slice(0, 5);
-
-  // THE SHAFT (ribbon v3, owner directive 2026-08-03 evening). Both headers are the
-  // VISIBLE HALF OF ONE ARROW SHAFT — a honey-tan barrel running full width, and
-  // deliberately unbroken under the wordmark, which is what makes the bar read as an
-  // arrow lying along the top edge rather than as a bar with feathers stuck on it.
-  // SHAFT_GRAIN_LAYERS carries both halves of the material: the CYLINDER shading
-  // (lit along the centreline at the top, falling off to a dark silhouette at the
-  // bottom) and, painted over it, the deterministic feTurbulence LONGITUDINAL grain.
-  // Asset-free, and applied as background-IMAGE over the background-COLOR, never as
-  // a shorthand — the grain is transparent in its gaps and the page would otherwise
-  // show through the barrel.
-  //
-  // ⚠️ THE BOTTOM HAIRLINE WENT WITH THE CREAM. V2 closed the plank's lower edge
-  // with a BORDER rule because a flat cream bar needed one. The barrel does not: its
-  // own SHAFT_RIM silhouette IS the bottom edge, and drawing a second line under it
-  // reads as a bar with a border rather than as a round shaft — it also cuts the
-  // fletch overhang off visually at exactly the place the overhang exists to cross.
-  // ELEV[2] still drops the house's soft sticky-chrome shadow, which is what
-  // separates the header from the page now that the wood no longer needs a rule.
-  const headerStyle = {
-    backgroundColor: SHAFT, backgroundImage: SHAFT_GRAIN_LAYERS,
-    boxShadow: ELEV[2],
-  };
+  // Adding / relabelling / reordering a tab is a one-place edit in routes.js. On the
+  // phone the Realm leaves the bar (§934.26); the tablet keeps all six seats.
+  const mobileNav = barNav(isMobile);
+  // THE HAIRLINE'S SEAT, DERIVED AND NEVER COUNTED (§934.26: "a hairline after the
+  // working pair (Create, Library) before the reference pages"). The working run is the
+  // create flow, and NAV_FLOW already says what it is; the rule goes on the FIRST cell
+  // whose predecessor does not feed it. Writing `i === 2` would put the hairline in the
+  // wrong place the day a destination is added, which is the drift this bar just left.
+  const referenceFrom = mobileNav.findIndex((item, i) => i > 0 && NAV_FLOW[mobileNav[i - 1].id] !== item.id);
 
   // Per-view painted background. On the Create page a generation flow blows up the
   // chosen settlement scene; see src/config/pageBackgrounds.js + index.css.
@@ -514,7 +581,7 @@ export default function App() {
           until focused (.skip-link in index.css), it lets keyboard/SR users jump
           past the header/nav straight to <main id="main-content">. */}
       <a href="#main-content" className="skip-link">Skip to content</a>
-      <Suspense fallback={null}><CampaignSyncBanner /><SessionEvictedBanner /><PostGenCoach /></Suspense>
+      <Suspense fallback={null}><CampaignSyncBanner /><SessionEvictedBanner /></Suspense>
       <div
         // Painted clean views (home/settlements/gallery/compendium/pricing/account/
         // admin/howto/legal) get `.page-painted scrim-<profile>`: a flat-cream
@@ -526,138 +593,117 @@ export default function App() {
           pageBg.isFlow ? 'is-flow' : '',
           pageBg.paintedBelowHeader ? `page-painted scrim-${pageBg.scrimProfile}` : '',
         ].filter(Boolean).join(' ')}
-        style={{ '--page-bg': pageBg.url, position: 'relative', minHeight: '100vh', display: 'flex', flexDirection: 'column' }}
+        // From 640 to 1023 px the fixed bottom bar holds the viewport's bottom edge above an
+        // in-flow footer, so the page ends BOTTOM_NAV_H lower (0px from 1024 up; phones keep
+        // their own main and footer clearances).
+        // `none` until the route settles (routeSettled above): `.page-bg` already
+        // falls back to none, so the gradient still paints and only the IMAGE waits.
+        style={{ '--page-bg': routeSettled ? pageBg.url : 'none', position: 'relative', minHeight: '100vh', display: 'flex', flexDirection: 'column', paddingBottom: isMobile ? undefined : BOTTOM_NAV_H }}
       >
 
-        {/* ── Mobile header ───────────────────────────────────── */}
-        {isMobile && (
-          <header style={{
-            ...headerStyle,
-            padding: `${SP.sm}px ${SP.md}px`,
-            position: 'sticky', top: 0, zIndex: 50,
-            display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: SP.sm,
-            paddingTop: 'calc(env(safe-area-inset-top) + 8px)',
+        {/* ── The header: the owner's arrow painting (components/nav/ArrowHeader.jsx),
+            one mount for every width. It returns the sticky shaft band and, as its next
+            sibling, the zero-height layer the feather hangs from. */}
+        <ArrowHeader
+          view={view}
+          onNavClick={handleNavClick}
+          onHome={() => setView('home')}
+          account={{
+            isAnon: authTier === 'anon', displayName, isElevated, creditBalance,
+            showUpgrade: authTier === 'free', upgradeLocked: !purchasesOpen(),
+            onSignIn: () => setAuthModalOpen(true),
+            onAccount: () => setView('account'), onMessages: () => navigate('account', { search: '?section=messages' }),
+            onManageSubscription: () => setView('pricing'), onUpgrade: () => setView('pricing'), onAdmin: () => setView('admin'),
+          }}
+        />
+
+        {/* ── Bottom nav (below 1024 px, where the painted words leave the header) ──
+            The primary nav landmark there (the header's own nav shows only with the full
+            arrow, so there is one "Primary" nav at every width), placed right after the
+            header so the destinations come before the page in the Tab order, as the
+            header's nav did from 640 px before the painted arrow. Fixed, so its place in
+            the DOM does not move it on screen. */}
+        {/* BOTTOM_NAV_ATTR is the bar's stable hook (lib/chromeInsets.js), the sibling of
+            the footer links row's. It changes nothing about how the bar renders; it lets a
+            measurement tell the bar's own seats from the page's controls without guessing
+            at its markup, which is how the phone reachability walk came to convict the bar
+            of sitting under itself on every route. */}
+        {narrow && (
+          <nav aria-label="Primary" {...{ [BOTTOM_NAV_ATTR]: '' }} style={{
+            position: 'fixed', bottom: 0, left: 0, right: 0, zIndex: 100,
+            background: `linear-gradient(to right, ${INK}, ${INK_DEEP})`,
+            borderTop: BAR_RULE,
+            display: 'flex',
+            boxShadow: '0 -4px 20px rgba(0,0,0,0.4)',
+            paddingBottom: 'env(safe-area-inset-bottom)',
           }}>
-            <Button
-              variant="ghost"
-              onClick={() => setView('home')}
-              aria-label="SettlementForge home"
-              style={{ gap: SP.xs, minHeight: 44, padding: `0 ${SP.xs}px` }}
-            >
-              <Lockup compact />
-            </Button>
-
-            <AccountMenu
-              compact
-              isAnon={authTier === 'anon'}
-              displayName={displayName}
-              isElevated={isElevated}
-              onSignIn={() => setAuthModalOpen(true)}
-              onAccount={() => setView('account')} onMessages={() => navigate('account', { search: '?section=messages' })}
-              onManageSubscription={() => setView('pricing')}
-            />
-          </header>
-        )}
-
-        {/* ── Desktop header ──────────────────────────────────── */}
-        {!isMobile && (
-          <header style={{ ...headerStyle, minHeight: CHROME.headerDesktop, boxSizing: 'border-box', padding: `0 ${SP.xxl}px`, position: 'sticky', top: 0, zIndex: 50, display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: SP.md }}>
-            {/* Brand block. The lockup itself — the maker's plate, the wordmark and
-                its wax-seal `o` — lives in components/brand/Lockup.jsx, which both
-                bars share; what stays here is only the home CONTROL it rides in. The
-                button carries the accessible name ("SettlementForge home") and the
-                lockup is aria-hidden throughout, so the mark can be as pictorial as it
-                likes without ever becoming the way the name is spelled. */}
-            <div style={{ display: 'flex', alignItems: 'center', gap: SP.sm }}>
-              <button
-                type="button"
-                onClick={() => setView('home')}
-                aria-label="SettlementForge home"
-                style={{ background: 'none', border: 'none', padding: 0, margin: 0, cursor: 'pointer', display: 'flex', alignItems: 'center' }}
-              >
-                <Lockup />
-              </button>
-            </div>
-
-            {/* alignSelf:stretch — the cluster spans the header row so the ribbon,
-                and through it LD-2's dividers, can reach the bar's full height. */}
-            <div style={{ display: 'flex', alignItems: 'center', alignSelf: 'stretch', gap: SP.md }}>
-              <NavRibbon view={view} onNavClick={handleNavClick} />
-
-              {/* Admin button (developer/admin only) */}
-              {isElevated && (
-                <IconButton
-                  Icon={Shield}
-                  label="Admin panel"
-                  title="Developer Admin Panel"
-                  onClick={() => setView('admin')}
-                  size="md"
-                />
-              )}
-
-              {/* Persistent credit badge. The balance fetched at mount (and refreshed
-                  on auth transitions) reads at a glance from the right cluster. Two
-                  channels: the violet count plus the "credits" word carry the
-                  meaning, so it never relies on the violet colour alone, and there is
-                  no glyph since icons stay off outside the Realm map. Signed-in only.
-                  Routes to the subscription-and-credits surface. */}
-              {authTier !== 'anon' && (
+            {mobileNav.map(({ id, label }, i) => {
+              const active = view === id;
+              // Phone only: on the tablet the Realm is still part of the working run and
+              // the flow chevrons carry the same reading without a rule.
+              const opensReference = isMobile && i === referenceFrom;
+              return (
                 <button
+                  key={id}
                   type="button"
-                  onClick={() => setView('pricing')}
-                  title="Credits remaining"
-                  aria-label={`${creditBalance} credits remaining`}
+                  onClick={() => handleNavClick(id)}
+                  aria-current={active ? 'page' : undefined}
                   style={{
-                    display: 'flex', alignItems: 'center', gap: SP.xs,
-                    height: 32, padding: `0 ${SP.md}px`,
-                    borderRadius: 999,
-                    background: SLATE_BG,
-                    border: `1px solid ${SLATE}`,
-                    color: SLATE,
-                    fontSize: FS.sm, fontFamily: sans,
-                    letterSpacing: '0.02em', cursor: 'pointer',
-                    transition: 'all 0.2s', whiteSpace: 'nowrap',
+                    // ⭐ THE SEATS ARE SIZED BY THEIR WORDS, NOT BY EQUAL SHARE (ODQ §934.63
+                    // F8). This read `flex: 1`, which is `1 1 0%` — five identical columns.
+                    // At 375 px that is 75 px a seat, 71 px of content after the 2 px side
+                    // padding, and the review measured COMPENDIUM needing 82: it was the one
+                    // label of the owner's five that ellipsised, rendering "COMPEND…" on
+                    // every page of the phone (the other four fit exactly: 45, 49, 53, 42).
+                    // Equal share cannot hold a ten-character word in a fifth of a phone at
+                    // the 12 px floor, and the floor is not negotiable, so the share is what
+                    // gives. `1 1 auto` makes each seat's basis its own label and splits the
+                    // slack evenly: the bar still fills the width, the short seats stay well
+                    // over the 44 px target, and nothing is clipped.
+                    // ⚠ minWidth:0 and the ellipsis below STAY, as the last resort for a
+                    // label longer than a phone rather than as the everyday behaviour.
+                    // `relative` is the positioning context for the flow chevron.
+                    flex: '1 1 auto', minWidth: 0, position: 'relative',
+                    display: 'flex', flexDirection: 'column',
+                    alignItems: 'center', justifyContent: 'center', gap: SP.xs,
+                    minHeight: 44,
+                    padding: `${SP.sm + 2}px 2px`,
+                    background: active ? GOLD_BG : 'transparent',
+                    // LONGHANDS ONLY (design/edgedBox.js's law, ODQ §934.22 item 4a): the
+                    // retired `border: 'none'` sat beside a varying `borderTop`, and the
+                    // left edge now varies too. Four sides, each written once.
+                    borderTop: active ? `2px solid ${GOLD}` : '2px solid transparent',
+                    borderRight: 'none',
+                    borderBottom: 'none',
+                    borderLeft: opensReference ? BAR_RULE : 'none',
+                    cursor: 'pointer',
+                    color: active ? GOLD : PARCH_100,
+                    // ⭐ THE CHROME FLOOR REACHES THE PRIMARY NAV (ODQ §934.22 item 2).
+                    // Below 1024px the painted words leave the header and THIS bar is the
+                    // whole of the primary nav — and it drew its destinations at 10px, the
+                    // smallest chrome on the phone, on the one control every page depends on.
+                    // The floor law (design/proseScale.js) had only ever been applied inside
+                    // the dossier. Desktop is untouched: chromeFontSize is the identity above
+                    // the breakpoint.
+                    fontSize: chromeFontSize(FS.xxs, isMobile), fontWeight: active ? 700 : 500,
+                    fontFamily: sans,
+                    // The 0.02em tracking exists to open up 10px capitals. At the 12px floor
+                    // it is no longer earning its width, and the widest label (COMPENDIUM, ten
+                    // characters in a fifth of a 391px page) needs every pixel of the cell
+                    // before the ellipsis below takes it. Dropped on the phone only.
+                    letterSpacing: isMobile ? 'normal' : '0.02em', textTransform: 'uppercase',
                   }}
                 >
-                  <span style={{ fontWeight: 700 }}>{creditBalance}</span>
-                  <span style={{ fontWeight: 500, opacity: 0.85 }}>credits</span>
+                  <span style={{ lineHeight: 1, maxWidth: '100%', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{label}</span>
+                  {/* Flow chevrons, by NAV_FLOW's adjacency guard: on the tablet Create
+                      feeds Library and Library feeds Realm, so both draw; on the phone the
+                      Realm is not a seat, so only the first draws and the hairline above
+                      says where the working pair ends. */}
+                  <NavFlowArrow from={id} to={mobileNav[i + 1]?.id} active={active} />
                 </button>
-              )}
-
-              {/* Persistent upgrade path, demoted to ghost: the richer upsell already
-                  lives on Pricing, the footer, the Realm locked-state, and the
-                  PricingMomentCard, so this stays discoverable without out-shouting
-                  the AccountMenu chip. Free tier only. */}
-              {authTier === 'free' && (
-                <Button
-                  variant="ghost"
-                  size="md"
-                  icon={<Zap size={13} />}
-                  onClick={() => setView('pricing')}
-                  // ⚠️ THE OVERRIDE IS BACK, AND THE ROUND TRIP IS THE POINT. On the
-                  // V2 ink bar this was PARCH_100; on the V3 honey barrel the pale
-                  // register was unreadable and ghost's own fg (SECOND) measured
-                  // 12.04:1, so the override came off. On V4's cedar shaft SECOND is
-                  // 1.97:1 — a ghost button has no ground of its own, so it reads
-                  // against the wood — and the whole bar is in the parchment register
-                  // again (theme.js's dead-band note). PARCH_100 is 5.28:1 here.
-                  style={{ color: PARCH_100, letterSpacing: '0.04em', textTransform: 'uppercase' }}
-                >
-                  Upgrade
-                </Button>
-              )}
-
-              {/* Account identity + menu (Account / Manage subscription & credits) */}
-              <AccountMenu
-                isAnon={authTier === 'anon'}
-                displayName={displayName}
-                isElevated={isElevated}
-                onSignIn={() => setAuthModalOpen(true)}
-                onAccount={() => setView('account')} onMessages={() => navigate('account', { search: '?section=messages' })}
-                onManageSubscription={() => setView('pricing')}
-              />
-            </div>
-          </header>
+              );
+            })}
+          </nav>
         )}
 
         {/* ── Main content ────────────────────────────────────── */}
@@ -666,7 +712,24 @@ export default function App() {
             `position: sticky` for descendants (e.g. the wizard toolbar). Default
             `visible` keeps the window as the sole scroller and lets descendant
             sticky bars pin. */}
-        <main id="main-content" ref={mainRef} tabIndex={-1} className={isMobile ? 'app-route-main app-route-main--mobile' : 'app-route-main'} style={{ flex: 1, outline: 'none', padding: isMobile ? `${SP.md}px ${SP.md}px 100px` : `${SP.lg}px ${SP.xxl}px` }}>
+        {/* THE CONTENT RESERVE: the painted feather hangs ARROW_HANG below the header on a
+            sticky layer, so every view but the landing starts below it at scroll top. The
+            landing pulls its dark hero up under the transparent header instead. */}
+        <main id="main-content" ref={mainRef} tabIndex={-1} className="app-route-main" style={{
+          flex: 1, outline: 'none',
+          paddingTop: view === 'home' ? `${isMobile ? SP.md : SP.lg}px` : `calc(${ARROW_HANG} + ${isMobile ? SP.md : SP.lg}px)`,
+          paddingRight: `${isMobile ? SP.md : SP.xxl}px`,
+          // ⭐ THE PHONE'S LAST ELEMENT IS REACHABLE (the owner, 2026-09-19: "note how the
+          // See Cartographer and the button for instant generate settlements are cut off
+          // and can't be scrolled down to"). The reserve was the bare number
+          // CHROME.mainPadMobile (100) — enough today, but a constant that knows nothing
+          // about the bar it is clearing, so a taller bar or a device with a deeper home
+          // indicator would silently eat the page's last control. It is now the MAXIMUM of
+          // that reserve and the bar's own measured height plus its safe-area inset, so it
+          // can never be smaller than the chrome it clears and never shrinks from today.
+          paddingBottom: isMobile ? `max(${CHROME.mainPadMobile}px, ${BOTTOM_NAV_H})` : `${SP.lg}px`,
+          paddingLeft: `${isMobile ? SP.md : SP.xxl}px`,
+        }}>
           {/* A lazy chunk-load failure (stale deploy, dropped connection) throws
               from inside Suspense. Without a boundary here that throw escapes to the
               root and white-screens the whole app. The boundary sits OUTSIDE
@@ -707,73 +770,45 @@ export default function App() {
                 authLoading={authLoading}
                 params={params}
               />
+              {/* ⭐ THE PAGE'S OWN HINT (ODQ §934.29). The post-generate coach lives in
+                  the page's content flow, not in the shell's fixed chrome, so on a phone
+                  it sits inside what the reader is scrolling rather than over the bottom
+                  bar. `key={view}` makes the scoping STRUCTURAL: navigating away really
+                  unmounts it (its step position goes with it) and returning mounts it
+                  fresh, re-reading the dismissal. Which pages it may appear on is the
+                  registry's to say, not the shell's — the host asks. */}
+              <PostGenCoach key={view} />
             </Suspense>
           </FeatureErrorBoundary>
         </main>
 
         {/* ── Footer ──────────────────────────────────────────────
-            THE LANDING ROUTE IS EXEMPT (LD-3, owner-ordered): the welcome page
-            ends on its own artwork band, so the global strip would be a second
-            footer stacked under the painting. This is a ROUTE-SCOPED suppression,
-            never a deletion — every other view keeps the strip — and the row's
-            content is not lost: LandingBelowFold mounts the very same
-            LegalRibbonRow inside its band, so Pricing, Terms, Privacy and
-            Feedback stay reachable from the landing document. */}
-        {view !== 'home' && (
-          <footer style={{
-            background: `linear-gradient(to right, ${INK}, ${INK_DEEP})`,
-            borderTop: '1px solid rgba(160,118,42,0.25)',
-            padding: isMobile ? `${SP.lg}px ${SP.xl}px 88px` : `${SP.lg}px ${SP.xxl}px`,
-          }}>
-            <LegalRibbonRow isMobile={isMobile} onNavigate={setView} showHome />
-          </footer>
-        )}
-
-        {/* ── Mobile bottom nav ───────────────────────────────── */}
-        {isMobile && (
-          <div style={{
-            position: 'fixed', bottom: 0, left: 0, right: 0, zIndex: 100,
-            background: `linear-gradient(to right, ${INK}, ${INK_DEEP})`,
-            borderTop: '1px solid rgba(160,118,42,0.25)',
-            display: 'flex',
-            boxShadow: '0 -4px 20px rgba(0,0,0,0.4)',
-            paddingBottom: 'env(safe-area-inset-bottom)',
-          }}>
-            {mobileNav.map(({ id, label }, i) => {
-              const active = view === id;
-              return (
-                <button
-                  key={id}
-                  type="button"
-                  onClick={() => handleNavClick(id)}
-                  aria-current={active ? 'page' : undefined}
-                  style={{
-                    // minWidth:0 lets a flex child shrink below its content width so
-                    // the longest label ellipsis-fits at 375px. Five equal columns.
-                    // `relative` is the positioning context for the flow chevron.
-                    flex: 1, minWidth: 0, position: 'relative',
-                    display: 'flex', flexDirection: 'column',
-                    alignItems: 'center', justifyContent: 'center', gap: SP.xs,
-                    minHeight: 44,
-                    padding: `${SP.sm + 2}px 2px`,
-                    background: active ? GOLD_BG : 'transparent',
-                    border: 'none',
-                    borderTop: active ? `2px solid ${GOLD}` : '2px solid transparent',
-                    cursor: 'pointer',
-                    color: active ? GOLD : PARCH_100,
-                    fontSize: FS.xxs, fontWeight: active ? 700 : 500,
-                    fontFamily: sans,
-                    letterSpacing: '0.02em', textTransform: 'uppercase',
-                  }}
-                >
-                  <span style={{ lineHeight: 1, maxWidth: '100%', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{label}</span>
-                  {/* Flow chevron — the mobile bar omits Realm, so Library draws none. */}
-                  <NavFlowArrow from={id} to={mobileNav[i + 1]?.id} active={active} />
-                </button>
-              );
-            })}
-          </div>
-        )}
+            ONE FOOTER ON EVERY ROUTE, THE LANDING INCLUDED (owner order
+            2026-09-16, superseding LD-3's landing exemption): "the footer should
+            be the same way on every page", the way the header is. Its look and
+            content do not change. Where the full painted arrow shows (1024 px and up;
+            the chair's ruling on the arrow plan) it is sticky at the header's layer
+            (50, below the drawer scrim), and the owner's follow-up order floats
+            ONLY ITS LINKS ROW: the bottom offset is minus the tuck (the measured
+            height below the links row), so the rest hangs below the viewport edge
+            and shows when the page is scrolled all the way down, where the footer
+            reaches its natural spot. A tucked control with keyboard focus reveals
+            the whole footer (lib/chromeInsets.js). Below 1024 px it stays in normal
+            flow above the fixed bottom nav, which holds the bottom edge there
+            (a vetoable call, recorded in docs/FIRST_CONTACT_BACKLOG.md); it
+            is `relative` on z 2 there only to clear the landing's fixed film (z 0)
+            and its z-1 roots, which would otherwise paint over an unpositioned
+            footer. Z 2, not the header's 50, keeps the in-flow phone footer where
+            it was against every other layer: under the generation reveal (z 45)
+            and under the sticky header (z 50). Its tuck is 0px. The band reaches
+            the bottom-anchored layers through aboveFooter (useChromeInsets). */}
+        <footer ref={footerRef} style={{
+          background: `linear-gradient(to right, ${INK}, ${INK_DEEP})`,
+          borderTop: '1px solid rgba(160,118,42,0.25)',
+          padding: isMobile ? `${SP.lg}px ${SP.xl}px 88px` : `${SP.lg}px ${SP.xxl}px`, position: narrow ? 'relative' : 'sticky', bottom: FOOTER_TUCKED_BOTTOM, zIndex: narrow ? 2 : 50,
+        }}>
+          <LegalRibbonRow isMobile={isMobile} onNavigate={setView} showHome />
+        </footer>
       </div>
 
       {/* ── Scroll-to-top / scroll-to-bottom stack ────────────── */}
@@ -790,7 +825,7 @@ export default function App() {
         };
         return (
           <div style={{
-            position: 'fixed', bottom: isMobile ? bottomClearance(CHROME.fabLift + 56) : SP.lg + 56, right: SP.lg, zIndex: 200,
+            position: 'fixed', bottom: aboveFooter(isMobile ? bottomClearance(CHROME.fabLift + 56) : aboveBottomNav(SP.lg + 56)), right: SP.lg, zIndex: 200,
             display: 'flex', flexDirection: 'column', gap: 8,
           }}>
             {showScrollTop && (
@@ -842,7 +877,7 @@ export default function App() {
           success) so a lagging/failed webhook can't leave the user misinformed. */}
       {checkoutToast && (
         <div style={{
-          position: 'fixed', top: SP.xl, left: '50%', transform: 'translateX(-50%)',
+          position: 'fixed', top: `calc(${HEADER_H} + ${SP.sm}px)`, left: '50%', transform: 'translateX(-50%)',
           zIndex: 2000, padding: `${SP.md}px ${SP.xl}px`,
           maxWidth: 'min(92vw, 520px)',
           background: checkoutToast.persistent
@@ -878,7 +913,7 @@ export default function App() {
         <div
           role="status"
           style={{
-            position: 'fixed', bottom: SP.xxl, left: '50%', transform: 'translateX(-50%)',
+            position: 'fixed', bottom: aboveFooter(isMobile ? SP.xxl : aboveBottomNav(SP.xxl)), left: '50%', transform: 'translateX(-50%)',
             zIndex: 2000, maxWidth: 'min(92vw, 420px)',
             padding: `${SP.md}px ${SP.lg}px`,
             background: PARCH_100, color: BODY,
@@ -902,7 +937,7 @@ export default function App() {
           onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); clearOnboardingNudge(); } }}
           style={{
             position: 'fixed',
-            bottom: isMobile ? 92 : SP.xxl,
+            bottom: aboveFooter(isMobile ? 92 : aboveBottomNav(SP.xxl)),
             left: '50%',
             transform: 'translateX(-50%)',
             zIndex: 2000,

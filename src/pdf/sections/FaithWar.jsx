@@ -23,6 +23,7 @@ import { type, palette, space, pt, swatch } from '../theme.js';
 import { cap, humanize } from '../lib/format.js';
 import { REALM_CONTEST_RECORD_HELP, REALM_CONTEST_RECORD_LABEL } from '../../domain/display/warStatus.js';
 import { tickCalendarLabel, tickDurationLabel } from '../../domain/display/humanizeEngineTokens.js';
+import { StateProse } from '../primitives/StateProse.jsx';
 
 const POSTURE_TONE = {
   Belligerent: 'bad',
@@ -85,11 +86,26 @@ function legitimacyBand(v) {
   return { label: 'contested', tone: 'bad' };
 }
 
-export function FaithWar({ settlement, narrativeMode, vm }) {
+export function FaithWar({ settlement, narrativeMode, vm, stateProse }) {
   const lw = vm?.liveWorld;
   if (!lw) return null; // dormant ⇒ byte-identical off-state.
 
-  const { posture, exhaustion, standing, tradeWars, deity, pantheon, realmArcs } = lw;
+  const { exhaustion, standing, deity } = lw;
+  // ⚠ SIX FIELDS THIS CHAPTER USED TO READ UNGUARDED, now guarded the way every sibling on
+  // this slice already was (review 5's incidental finding). `posture.label` (the strip),
+  // `besiegingTargets` / `besiegedBy` (the war front) and `tradeWars` (the prizes) were read
+  // straight off `lw`, while `rumors`, `beliefs`, `treaties`, `tradePressure`, `livePantheon`,
+  // `cults` and `contestOdds` a few lines down all take an `Array.isArray` or `|| null`. A
+  // PARTIAL slice therefore threw instead of rendering the parts it did carry — measured:
+  // three separate attempts to render this chapter against a minimal live world each died on
+  // a different one of these. No behaviour change on a full slice, where every one of them is
+  // already the shape the producer emits.
+  const posture = lw.posture || {};
+  const tradeWars = Array.isArray(lw.tradeWars) ? lw.tradeWars : [];
+  const besiegingTargets = Array.isArray(lw.besiegingTargets) ? lw.besiegingTargets : [];
+  const besiegedBy = Array.isArray(lw.besiegedBy) ? lw.besiegedBy : [];
+  const pantheon = Array.isArray(lw.pantheon) ? lw.pantheon : [];
+  const realmArcs = Array.isArray(lw.realmArcs) ? lw.realmArcs : [];
   // Per-settlement living pantheon (cults + standings + legitimacy + contest + mandate).
   const livePantheon = Array.isArray(lw.livePantheon) ? lw.livePantheon : [];
   const contestOdds = Array.isArray(lw.contestOdds) ? lw.contestOdds : null;
@@ -128,6 +144,17 @@ export function FaithWar({ settlement, narrativeMode, vm }) {
       />
       <ChapterHeadline tone={lw.atWar ? 'bad' : 'gold'}>{headline}</ChapterHeadline>
 
+      {/* ── The faith prose, THE SECOND HALF OF ITS HOME (review 5).
+          It normally renders from chapter 07 (IdentityDailyLife), because this chapter is
+          null on a dormant `vm.liveWorld` — every export without a live campaign. But the
+          `campaign_state` variant EXCLUDES chapter 07 while keeping this one `if-canon`, so
+          on premium + canon + a live world the faith positions had no page at all. The
+          caller feeds `stateProse` here ONLY when chapter 07 is out of the variant, so the
+          two homes can never both print it.
+          ⛔ NO `war` TAB: the three war positions are print-deferred (printProse.js's ruling
+          block), so the builder emits none. ── */}
+      <StateProse stateProse={stateProse} tab="faith" />
+
       {/* ── Posture / exhaustion / standing strip ─────────────────────── */}
       <View style={{ flexDirection: 'row', gap: 6, marginBottom: space.sm }}>
         <Stat
@@ -155,18 +182,18 @@ export function FaithWar({ settlement, narrativeMode, vm }) {
       </View>
 
       {/* ── Live war front ────────────────────────────────────────────── */}
-      {(lw.besiegingTargets.length > 0 || lw.besiegedBy.length > 0 || lw.occupied) && (
+      {(besiegingTargets.length > 0 || besiegedBy.length > 0 || lw.occupied) && (
         <View style={{ marginBottom: space.sm }}>
-          {lw.besiegingTargets.length > 0 && (
+          {besiegingTargets.length > 0 && (
             <Line label="At war." tone="bad">
-              Its army besieges {lw.besiegingTargets.join(', ')}.
+              Its army besieges {besiegingTargets.join(', ')}.
             </Line>
           )}
-          {lw.besiegedBy.length > 0 && (
+          {besiegedBy.length > 0 && (
             <Line label="Under siege." tone="bad">
-              {lw.besiegedBy.length >= 2
-                ? `A coalition of ${lw.besiegedBy.join(', ')} holds the walls.`
-                : `${lw.besiegedBy[0]} lays siege.`}
+              {besiegedBy.length >= 2
+                ? `A coalition of ${besiegedBy.join(', ')} holds the walls.`
+                : `${besiegedBy[0]} lays siege.`}
             </Line>
           )}
           {lw.occupied && (

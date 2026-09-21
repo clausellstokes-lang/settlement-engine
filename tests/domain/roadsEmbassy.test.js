@@ -80,8 +80,8 @@ function argsFor(worldState, graph, homeNpcs) {
   const settlements = SIDS.map((id) => ({ id, name: s[id].name, settlement: s[id] }));
   return {
     snapshot: { settlements }, worldState,
-    settlementUpdates: settlements.map((it) => ({ saveId: it.id, settlement: it.settlement })),
-    saves: settlements.map((it) => ({ id: it.id, settlement: it.settlement })),
+    settlementUpdates: settlements.map((update) => ({ saveId: update.id, settlement: update.settlement })),
+    saves: settlements.map((save) => ({ id: save.id, settlement: save.settlement })),
     graph, tick: TICK, now: null,
   };
 }

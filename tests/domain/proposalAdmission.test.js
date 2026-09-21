@@ -91,10 +91,11 @@ function deployCandidate(id, targetSaveId) {
 }
 
 /**
- * A REAL coup fall verdict, built by coupVerdictOutcomes itself with a
- * player-locked governing faction (the legacy axis that routes a fall to a
- * proposal). Hand-rolling the outcome would let a ruleId rename in coup.js
- * silently un-arm the bypass while this pin stayed green.
+ * A REAL coup fall verdict, built by coupVerdictOutcomes itself under the table's
+ * `dm_only` political autonomy, which routes a fall to a proposal. (It was routed
+ * through a stored seat lock until owner order 2026-09-17 retired that lock.)
+ * Hand-rolling the outcome would let a ruleId rename in coup.js silently un-arm the
+ * bypass while this pin stayed green.
  */
 function coupFallOutcome(saveId = 'coup-home') {
   const settlement = {
@@ -125,12 +126,13 @@ function coupFallOutcome(saveId = 'coup-home') {
       byId: new Map([[saveId, {
         name: settlement.name,
         settlement,
-        save: { campaignState: { locks: { factions: ['faction.town_council'] } } },
+        save: {},
         causal: { scores: { ruling_authority: 20 } },
       }]]),
     },
     rng: { random: () => rolls.shift() ?? 0 },
     tick: 9,
+    rules: { politicalAutonomy: 'dm_only' },
   });
   return outcome;
 }

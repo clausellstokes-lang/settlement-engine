@@ -38,7 +38,8 @@
 
 import { describe, it, expect } from 'vitest';
 import { existsSync, readdirSync, readFileSync, statSync } from 'node:fs';
-import { resolve, join, dirname } from 'node:path';
+import { resolve, join } from 'node:path';
+import { FOLLOW_STATIC, importClosure } from '../helpers/routeClosure.js';
 
 const ROOT = process.cwd();
 const SRC = resolve(ROOT, 'src');
@@ -56,40 +57,16 @@ const EAGER_ANCHOR = resolve(SRC, 'store/index.js');
 // and tree-shaking cannot strip it.
 const CORPUS_FINGERPRINT = 'A timber-and-stone, guild-and-estate design grammar.';
 
-function staticSourceSpecifiers(code) {
-  const stripped = code.replace(/\/\*[\s\S]*?\*\//g, '').replace(/^\s*\/\/.*$/gm, '');
-  const specs = new Set();
-  for (const m of stripped.matchAll(/(?:^|[^.\w])import\s+(?:[^'"()]*?\sfrom\s+)?['"]([^'"]+)['"]/g)) specs.add(m[1]);
-  for (const m of stripped.matchAll(/(?:^|[^.\w])export\s+[^'"]*?\sfrom\s+['"]([^'"]+)['"]/g)) specs.add(m[1]);
-  return [...specs];
-}
-
-function resolveRelative(from, spec) {
-  if (!spec.startsWith('.')) return null;
-  const base = resolve(dirname(from), spec);
-  for (const candidate of [base, `${base}.js`, `${base}.jsx`, join(base, 'index.js'), join(base, 'index.jsx')]) {
-    if (existsSync(candidate) && statSync(candidate).isFile()) return candidate;
-  }
-  return null;
-}
-
-function firstPaintSourceGraph() {
-  const entry = resolve(SRC, 'main.jsx');
-  const seen = new Set([entry]);
-  const parent = new Map();
-  const queue = [entry];
-  while (queue.length) {
-    const file = queue.shift();
-    for (const spec of staticSourceSpecifiers(readFileSync(file, 'utf-8'))) {
-      const dep = resolveRelative(file, spec);
-      if (!dep || seen.has(dep)) continue;
-      seen.add(dep);
-      parent.set(dep, file);
-      queue.push(dep);
-    }
-  }
-  return { seen, parent };
-}
+/**
+ * Everything `src/main.jsx` reaches over STATIC import edges.
+ *
+ * The walk lives in tests/helpers/routeClosure.js — one source-import walker for
+ * the estate, after three copies of it had accumulated. FOLLOW_STATIC is
+ * load-bearing here: a dynamic edge is exactly what keeps a module OUT of the
+ * first-paint closure, so following one would make this test claim the opposite
+ * of what it means.
+ */
+const firstPaintSourceGraph = () => importClosure([resolve(SRC, 'main.jsx')], FOLLOW_STATIC);
 
 function staticChunkSpecifiers(code) {
   const specs = new Set();

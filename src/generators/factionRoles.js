@@ -131,7 +131,32 @@ const ROLE_KEY_SYNONYMS = Object.freeze({
   knightdame: 'watch', warden: 'watch', sergeantatarms: 'watch',
   // temple (religious leadership)
   highpriest: 'temple', highpriestess: 'temple', archpriest: 'temple',
-  deaconcurate: 'temple', parishpriest: 'temple', chaplain: 'temple',
+  // ⛔ A RENAMED ROLE ADDS ITS NEW SPELLING AND KEEPS THE OLD ONE. These keys are
+  // matched against `npc.role` as it stands on the record, and a settlement SAVED
+  // before a rename still carries the old string forever. `deaconcurate` and
+  // `parishpriest` therefore stay beside the spellings that replaced them: a
+  // persisted world must not quietly lose an office-holder because the catalog
+  // was reworded after it was written.
+  //
+  // ⚠ `juniorcleric` IS THE ONE EXCEPTION, AND IT IS RECORDED RATHER THAN LEFT TO
+  // LOOK LIKE A SLIP AGAINST THE RULE ABOVE. That spelling never left this lane: it
+  // was written and replaced within the same unmerged branch, is on no master commit,
+  // and was never generated into a save - so there is no record anywhere that can
+  // carry it, and keeping it would bank a key for a world that cannot exist. The rule
+  // protects SHIPPED spellings; this one never was one.
+  deaconcurate: 'temple', underchaplain: 'temple',
+  // ⛔ `priest` WAS MISSING AND THAT WAS A LIVE REGRESSION, not a tidy-up. The hamlet's
+  // role was renamed 'Parish Priest' -> 'Priest' for the setting-agnostic law, and this
+  // table kept only the old spelling - so on the fallback path a realized Priest stopped
+  // covering the temple office and ensureFactionStructuralNpcs appended a second seat
+  // beside him. Probed at the rename: 'Parish Priest' -> npcs 1, 'Priest' -> npcs 2.
+  // It moved NO golden row, and that is the instructive part rather than a reprieve:
+  // the generated pipeline reaches this office through ROLE_FACTION_MAP and the power
+  // seat, so the corpus never takes the fallback, and the defect was reachable only by
+  // the custom, imported and partial records the fallback exists for. A dead synonym is
+  // invisible to every instrument that only ever walks the happy path.
+  priest: 'temple',
+  parishpriest: 'temple', chaplain: 'temple',
   bishop: 'temple', abbot: 'temple', abbess: 'temple', prelate: 'temple',
   patriarch: 'temple', matriarch: 'temple',
   // merchant (trade / craft leadership)
@@ -320,7 +345,14 @@ export function ensureFactionStructuralNpcs(
       ? matchFactionArchetype(seat)
       : (affil ? matchFactionArchetype({ name: affil }) : null);
     if (byAffiliation) coveredRoleKeys.add(byAffiliation);
-    const byRole = ROLE_KEY_SYNONYMS[normalizeRoleKey(npc.role)];
+    // ⛔ `Object.hasOwn`, NEVER A BARE LOOKUP. `npc.role` is user-derived (custom and
+    // imported records carry whatever their author wrote), and a plain-object read of it
+    // returns Object.prototype's members for a role named `constructor`, `toString` or
+    // `valueOf` - each TRUTHY, so a FUNCTION entered the covered-office set as if it were
+    // a role key. Nothing downstream compares it successfully, which is exactly why this
+    // would have sat here unnoticed.
+    const roleKeyOf = normalizeRoleKey(npc.role);
+    const byRole = Object.hasOwn(ROLE_KEY_SYNONYMS, roleKeyOf) ? ROLE_KEY_SYNONYMS[roleKeyOf] : undefined;
     if (byRole) coveredRoleKeys.add(byRole);
   }
 

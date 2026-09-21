@@ -13,6 +13,8 @@
  */
 
 import { sans, SP, FS, CARD, CARD_ALT, BORDER2, INK, BODY, MUTED } from '../theme.js';
+import useIsMobile from '../../hooks/useIsMobile.js';
+import { chromeFontSize, proseFontSize } from '../../design/proseScale.js';
 
 /**
  * The five revealable world sections: [key, label, helper]. The keys MUST stay in
@@ -34,6 +36,7 @@ export const WORLD_SECTIONS = Object.freeze([
  * @param {(next: Set<string>) => void} props.onToggle  called with the next Set when a box flips.
  */
 export default function WorldSectionToggles({ enabled, onToggle }) {
+  const mobile = useIsMobile();
   const flip = (key) => {
     const next = new Set(enabled);
     if (next.has(key)) next.delete(key);
@@ -47,10 +50,10 @@ export default function WorldSectionToggles({ enabled, onToggle }) {
       border: `1px solid ${BORDER2}`, background: CARD,
     }}>
       <div style={{ display: 'grid', gap: 2 }}>
-        <span style={{ color: INK, fontFamily: sans, fontSize: FS.xxs, fontWeight: 900, textTransform: 'uppercase', letterSpacing: '0.06em' }}>
+        <span style={{ color: INK, fontFamily: sans, fontSize: chromeFontSize(FS.xxs, mobile), fontWeight: 900, textTransform: 'uppercase', letterSpacing: '0.06em' }}>
           Share the living world
         </span>
-        <span style={{ color: MUTED, fontFamily: sans, fontSize: FS.xxs, lineHeight: 1.4 }}>
+        <span style={{ color: MUTED, fontFamily: sans, fontSize: proseFontSize(FS.xxs, mobile), lineHeight: 1.4 }}>
           All sections start on. Switch off anything you would rather keep to yourself. Private DM detail is never included.
         </span>
       </div>
@@ -73,7 +76,7 @@ export default function WorldSectionToggles({ enabled, onToggle }) {
               onChange={() => flip(key)}
               style={{ marginTop: 2, flexShrink: 0 }}
             />
-            <span style={{ color: BODY, fontFamily: sans, fontSize: FS.xxs, lineHeight: 1.45 }}>
+            <span style={{ color: BODY, fontFamily: sans, fontSize: proseFontSize(FS.xxs, mobile), lineHeight: 1.45 }}>
               <strong style={{ color: INK }}>{label}</strong>. {helper}
             </span>
           </label>

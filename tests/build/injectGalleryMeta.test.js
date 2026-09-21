@@ -18,6 +18,8 @@ import {
   ORIGIN,
   SITE_NAME,
 } from '../../api/_galleryMeta.js';
+import { TIER_ORDER } from '../../src/data/constants.js';
+import { TIER_STOCK_IMAGES, tierStockImage } from '../../src/domain/display/tierStockImage.js';
 
 const SUPA = 'https://proj.supabase.co';
 
@@ -72,6 +74,38 @@ describe('buildGalleryMeta', () => {
   test('card image falls back to the static default without a supabase origin', () => {
     expect(galleryCardImage('slug', '')).toBe(`${ORIGIN}/og-craft.png`);
     expect(galleryCardImage('', SUPA)).toBe(`${ORIGIN}/og-craft.png`);
+  });
+
+  // ── ODQ §934.32 — A SHARED TOWN DOES NOT UNFURL AS THE HOUSE LOGO ──────────
+  // The owner: the stock tier images are "the default image when they are
+  // shared". Where the dynamic per-settlement card is unavailable, the fallback
+  // was og-craft.png — the same plaque for a thorp and a metropolis — so a link
+  // to a real generated place previewed as an advertisement for the site.
+  test('without the dynamic card, a known tier unfurls as its stock painting', () => {
+    const image = galleryCardImage('slug', '', { tier: 'town' }, ORIGIN);
+    expect(image).toBe(`${ORIGIN}${TIER_STOCK_IMAGES.village}`);
+    // ⛔ ABSOLUTE, NOT ROOT-RELATIVE. An OG consumer is a crawler on another
+    // host; a `/backgrounds/...` og:image is simply dropped, and nothing in a
+    // unit test of the string would notice unless this is asserted.
+    expect(image.startsWith('https://'), `og:image is not absolute: ${image}`).toBe(true);
+    // The whole ladder, through the real builder, not just one rung.
+    for (const tier of TIER_ORDER) {
+      const meta = buildGalleryMeta('slug', { name: 'Oakmere', tier }, { origin: ORIGIN, supabaseUrl: '' });
+      expect(meta.image, `${tier} shares as the generic card`).toBe(`${ORIGIN}${tierStockImage(tier)}`);
+    }
+  });
+
+  test("the owner's own image outranks the stock painting in the share head", () => {
+    const own = 'https://cdn.example/oakmere.jpg';
+    expect(galleryCardImage('slug', '', { tier: 'town', imageUrl: own }, ORIGIN)).toBe(own);
+    expect(galleryCardImage('slug', '', { tier: 'town', image_url: own }, ORIGIN)).toBe(own);
+  });
+
+  test('an unknown tier still degrades to the house card, never to a guess', () => {
+    // anchored: the arm above proves a KNOWN tier resolves through this same
+    // call, so this is a refusal to guess and not a dead fallback.
+    expect(galleryCardImage('slug', '', { tier: 'atlantis' }, ORIGIN)).toBe(`${ORIGIN}/og-craft.png`);
+    expect(galleryCardImage('slug', '', {}, ORIGIN)).toBe(`${ORIGIN}/og-craft.png`);
   });
 });
 

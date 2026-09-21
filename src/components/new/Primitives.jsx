@@ -2,6 +2,8 @@ import { useState } from 'react';
 import { FS, BODY, swatch, MUTED } from '../theme.js';
 import { t } from '../../copy/index.js';
 import Button from '../primitives/Button.jsx';
+import useIsMobile from '../../hooks/useIsMobile.js';
+import { chromeFontSize, proseFontSize } from '../../design/proseScale.js';
 
 export const serif = { fontFamily: 'Crimson Text, Georgia, serif' };
 export const sans  = { fontFamily: 'Nunito, sans-serif' };
@@ -18,6 +20,9 @@ export const sans  = { fontFamily: 'Nunito, sans-serif' };
  * dailyLife, services, resources, viability, npcs, dmCompass).
  */
 export function TabIntro({ tabKey }) {
+  // THE PHONE PROSE FLOOR — the tone line IS the caption this primitive carries.
+  // Bound above the missing-key early return so the hook order is stable.
+  const mobile = useIsMobile();
   const line = t(`tabs.${tabKey}`);
   // If the key is missing the t() helper returns the key string itself
   // ("tabs.overview"). Render nothing in that case rather than a broken
@@ -31,7 +36,7 @@ export function TabIntro({ tabKey }) {
     <p style={{
       margin: '0 0 12px 0',
       fontFamily: 'Crimson Text, Georgia, serif',
-      fontSize: FS.sm,
+      fontSize: proseFontSize(FS.sm, mobile),
       fontStyle: 'italic',
       color: BODY,       // ink-600 — keeps AA on the readable caption
       lineHeight: 1.5,
@@ -61,6 +66,7 @@ export const Ti = (v) => {
 // Collapsible section with Crimson header + ▲/▼ (Sn in original)
 export function Collapsible({ title, defaultOpen = true, children }) {
   const [open, setOpen] = useState(defaultOpen);
+  const mobile = useIsMobile();
   return (
     // marginBottom 0 (owner order 2026-07-22, flush sweep): dossier cards sit
     // flush, no inter-card parchment gap.
@@ -78,7 +84,7 @@ export function Collapsible({ title, defaultOpen = true, children }) {
         }}
       >
         <span style={{ fontFamily: 'Crimson Text, Georgia, serif', fontSize: FS.lg, fontWeight: 600, color: swatch.inkMag }}>{title}</span>
-        <span style={{ fontSize: FS.xs, color: MUTED, fontWeight: 600 }}>{open ? '\u25b2' : '\u25bc'}</span>
+        <span style={{ fontSize: chromeFontSize(FS.xs, mobile), color: MUTED, fontWeight: 600 }}>{open ? '\u25b2' : '\u25bc'}</span>
       </Button>
       {open && <div style={{ padding: '12px 13px', background: swatch['#FAF8F4'] }}>{children}</div>}
     </div>
@@ -158,9 +164,10 @@ export function Card({ children, style }) {
 
 // Small pill tag
 export function Tag({ color, bg, border, children }) {
+  const mobile = useIsMobile();
   const c = color || '#6b5340';
   return (
-    <span style={{ fontSize: FS.xs, fontWeight: 600, color: c, background: bg || (c + '18'), border: '1px solid ' + (border || (c + '40')), padding: '2px 9px', display: 'inline-block', margin: '2px 3px 2px 0' }}>
+    <span style={{ fontSize: chromeFontSize(FS.xs, mobile), fontWeight: 600, color: c, background: bg || (c + '18'), border: '1px solid ' + (border || (c + '40')), padding: '2px 9px', display: 'inline-block', margin: '2px 3px 2px 0' }}>
       {children}
     </span>
   );
@@ -172,14 +179,18 @@ export function Tag({ color, bg, border, children }) {
 
 // Plot hook row
 export function PlotHook({ text, source, color }) {
+  // THE PHONE PROSE FLOOR — the hook sentence. The ✦ glyph and the source label
+  // are the row's furniture and keep their own steps. (ProseBlock is NOT touched
+  // here: the chair unifies it onto proseScale on the consist.)
+  const mobile = useIsMobile();
   const c = color || '#5a2a8a';
   const txt = Ti(text);
   return (
     <div style={{ display: 'flex', gap: 8, padding: '6px 0', borderBottom: '1px solid #f0e8d8' }}>
       <span style={{ color: c, flexShrink: 0, fontSize: FS.sm }}>\u2746</span>
       <div style={{ flex: 1 }}>
-        {source && <div style={{ fontSize: FS.xxs, fontWeight: 700, color: c, marginBottom: 2 }}>{source}</div>}
-        <p style={{ margin: 0, fontSize: FS.sm, color: swatch.inkMag, lineHeight: 1.45, fontStyle: 'italic' }}>{txt}</p>
+        {source && <div style={{ fontSize: chromeFontSize(FS.xxs, mobile), fontWeight: 700, color: c, marginBottom: 2 }}>{source}</div>}
+        <p style={{ margin: 0, fontSize: proseFontSize(FS.sm, mobile), color: swatch.inkMag, lineHeight: 1.45, fontStyle: 'italic' }}>{txt}</p>
       </div>
     </div>
   );
@@ -191,7 +202,10 @@ export function PlotHook({ text, source, color }) {
 
 // Empty state
 export function Empty({ message }) {
-  return <div style={{ padding: '24px 0', textAlign: 'center', color: MUTED, fontSize: FS.md, fontStyle: 'italic' }}>{message}</div>;
+  // THE PHONE PROSE FLOOR — every tab's empty state is a sentence the reader
+  // reads, and this is the one place all of them render.
+  const mobile = useIsMobile();
+  return <div style={{ padding: '24px 0', textAlign: 'center', color: MUTED, fontSize: proseFontSize(FS.md, mobile), fontStyle: 'italic' }}>{message}</div>;
 }
 
 // Summary accordion card — js in original (mobile=accordion, desktop=always open)

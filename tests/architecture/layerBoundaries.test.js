@@ -267,3 +267,115 @@ describe('layer boundaries (F29)', () => {
     ).toEqual(allowedSets);
   }, 60_000);
 });
+
+// ── 3. THE PRINT SURFACE'S BOUNDARY ────────────────────────────────────────────
+/**
+ * THE RULE, AND THE TWO DEFECTS THAT PROVED IT WAS UNGATED (2026-09-19).
+ *
+ * `src/pdf` is the PAID DOCUMENT. It renders in its own worker, off its own theme, in
+ * @react-pdf primitives that are not DOM elements — so it may NEVER import `src/components`
+ * (a screen tree of React DOM + the screen type scale) or `src/store` (Zustand state the
+ * document must not depend on). The estate had stated that rule in prose for months —
+ * `domain/display/labelCase.js` is a whole module cut to honour it — and this file, the
+ * layer-map enforcer, DID NOT MENTION `src/pdf` AT ALL. Two crossings landed in the gap:
+ *
+ *   1. `sections/DefenseSecurity.jsx` imported `statusCase` from
+ *      `components/new/labelLadder.js` ON TOP OF the same symbol from
+ *      `domain/display/labelCase.js`. esbuild refused the module — "the symbol statusCase
+ *      has already been declared" — so two PDF suites reported "(0 test)" and the
+ *      prose-numerics scanner SKIPPED the file entirely, walking 222 rows against a
+ *      225-row baseline while reading green on its count.
+ *   2. `sections/Relationships.jsx` imported the relationship palette from
+ *      `components/settlements/relationshipColors.js` — a module whose own header names
+ *      the PDF as one of its readers, which is exactly why it belonged one layer down.
+ *      It has been moved to `domain/display/relationshipColors.js` and all seven
+ *      importers repointed.
+ *
+ * Both are cured, so this arm is written at EXACT ZERO with no allowlist: there is no debt
+ * to burn down, and a row here would be a place for the third one to hide.
+ */
+const PDF_FORBIDDEN_TREES = Object.freeze(['components', 'store']);
+
+/**
+ * The src/ trees `src/pdf` may reach, each with the reason it is lawful. This is a CENSUS,
+ * not a permission slip: a NEW tree appearing here reds and must be ruled, rather than being
+ * absorbed because it happened to compile.
+ */
+const PDF_ALLOWED_TREES = Object.freeze({
+  pdf:    'its own tree',
+  domain: 'the headless read-models and display leaves both surfaces share',
+  lib:    'headless helpers (flags, proseSeams, entities, entityRefTokenizer)',
+  // ⛔ `copy` IS DELIBERATELY ABSENT, and the arm below is why. The rule as handed down
+  // named src/copy among the permitted trees; the MEASUREMENT says src/pdf never reaches
+  // it — the document's strings are authored in its own sections. Banking a permission the
+  // tree does not use would be a door left open onto an empty room, so it is not banked.
+  // If the PDF ever does read src/copy, that is a one-line addition with a reason.
+  data:   'engine data tables — supplyChainData\'s chain definitions',
+  design: 'the shared token + ornament tree the PDF theme derives from (logo, emblemPaths, tokens)',
+});
+
+describe('the print surface may not reach into the screen (src/pdf boundary)', () => {
+  /** Every relative import in src/pdf, resolved to the src/ tree it lands in. */
+  function pdfCrossings() {
+    const out = [];
+    for (const file of walk(join(SRC, 'pdf'))) {
+      const src = readFileSync(file, 'utf8');
+      const specs = [
+        ...src.matchAll(/from\s+['"]([^'"]+)['"]/g),
+        ...src.matchAll(/import\(\s*['"]([^'"]+)['"]\s*\)/g),
+      ].map((m) => m[1]).filter((s) => s.startsWith('.'));
+      for (const spec of specs) {
+        const target = resolve(dirname(file), spec);
+        if (!target.startsWith(SRC)) { out.push({ file: relative(ROOT, file), spec, tree: '(outside src)' }); continue; }
+        out.push({ file: relative(ROOT, file), spec, tree: relative(SRC, target).split(/[\\/]/)[0] });
+      }
+    }
+    return out;
+  }
+
+  test('src/pdf imports NOTHING from src/components or src/store', () => {
+    const offenders = pdfCrossings()
+      .filter((c) => PDF_FORBIDDEN_TREES.includes(c.tree))
+      .map((c) => `${c.file} -> ${c.spec}`);
+    expect(
+      offenders,
+      'the paid document renders in its own worker off its own theme, and may not reach into the '
+      + 'screen tree or the store. Bring the PURE part DOWN to domain/display (the labelCase.js and '
+      + 'relationshipColors.js precedent) and import it from there — never widen this arm.',
+    ).toEqual([]);
+  });
+
+  test('src/pdf reaches only the censused trees — a new one must be ruled, not absorbed', () => {
+    const seen = [...new Set(pdfCrossings().map((c) => c.tree))].sort();
+    const unruled = seen.filter((t) => !Object.prototype.hasOwnProperty.call(PDF_ALLOWED_TREES, t));
+    expect(unruled, `src/pdf reached an unruled tree: ${unruled.join(', ')}`).toEqual([]);
+  });
+
+  test('every censused tree is REALLY reached — no stale permission', () => {
+    const seen = new Set(pdfCrossings().map((c) => c.tree));
+    const stale = Object.keys(PDF_ALLOWED_TREES).filter((t) => !seen.has(t));
+    // A permission whose import has gone is a door left open onto an empty room.
+    expect(stale, `censused but unreached: ${stale.join(', ')}`).toEqual([]);
+  });
+
+  test('THE POSITIVE ANCHOR: the scan can see a real import, so zero means zero', () => {
+    // ⛔ WITHOUT THIS the two arms above pass just as happily against a resolver that
+    // returned nothing at all — the vacuous green this estate has been bitten by.
+    const crossings = pdfCrossings();
+    expect(crossings.length).toBeGreaterThan(200);
+    const anchored = crossings.filter(
+      (c) => c.file === 'src/pdf/sections/Relationships.jsx' && c.spec.endsWith('relationshipColors.js'),
+    );
+    expect(anchored, 'the moved palette must still be imported, and from domain/').toHaveLength(1);
+    expect(anchored[0].tree).toBe('domain');
+    // And the sibling that started this: the shared case ladder, read from domain/display.
+    expect(crossings.some((c) => c.spec.endsWith('domain/display/labelCase.js'))).toBe(true);
+  });
+
+  test('the forbidden trees are REAL trees, so the prohibition is not a typo', () => {
+    // A misspelled tree name would make the first arm unfalsifiable forever.
+    for (const tree of PDF_FORBIDDEN_TREES) {
+      expect(statSync(join(SRC, tree)).isDirectory(), tree).toBe(true);
+    }
+  });
+});

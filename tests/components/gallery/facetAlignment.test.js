@@ -1,4 +1,7 @@
 import { describe, it, expect } from 'vitest';
+import { existsSync, readFileSync } from 'node:fs';
+import { dirname, join } from 'node:path';
+import { fileURLToPath } from 'node:url';
 
 import {
   TIER_OPTIONS,
@@ -11,6 +14,20 @@ import {
 import { TIER_ORDER, PROSPERITY_TIERS, getMagicLevel } from '../../../src/data/constants.js';
 import { TERRAIN_WEIGHTS, CULTURES } from '../../../src/generators/steps/resolveConfig.js';
 import { NAMING_DATA } from '../../../src/data/namingData.js';
+// ⭐ EM-P3 — THE ONE HOME, read from BOTH of its addresses. The option VALUES live
+// in src/data (the generation worker reaches them there); the stable domain address
+// re-exports them and owns the citation index, and it is what the gallery imports.
+import {
+  TERRAIN_WEIGHTS as DATA_TERRAIN_WEIGHTS,
+  TERRAINS as DATA_TERRAINS,
+  CULTURES as DATA_CULTURES,
+} from '../../../src/data/worldFactOptions.js';
+import {
+  TERRAINS as DOMAIN_TERRAINS,
+  CULTURES as DOMAIN_CULTURES,
+  WORLD_FACT_SOURCES,
+} from '../../../src/domain/worldFactOptions.js';
+import { CULTURE_PROFILE_KEYS } from '../../../src/data/cultureProfiles.js';
 
 // ─────────────────────────────────────────────────────────────────────────────
 // Gallery facet ↔ engine vocabulary alignment.
@@ -47,6 +64,46 @@ function expectNoExtras(options, canonical, label) {
   expect(extra, `${label}: sidebar has option(s) the engine never emits ${JSON.stringify(extra)}`).toEqual([]);
 }
 
+// ─────────────────────────────────────────────────────────────────────────────
+// ⭐ EM-P3 — THE SINGLE-SOURCE ARM, AND WHY IT IS AN EQUALITY RATHER THAN A
+// SUPERSET. The superset/no-extras pair above is the right shape for a FACET
+// (an extra chip is harmless; a missing one is the bug). It is the wrong shape
+// for the question EM-P3 asks, which is whether two modules still spell the SAME
+// LIST. Order is part of that: TERRAIN_WEIGHTS is read BY POSITION by
+// rng.weightedPick, so a list with the right members in the wrong order is a
+// generation shift wearing a move's clothes. Never a superset test where an
+// equality is available.
+// ─────────────────────────────────────────────────────────────────────────────
+
+/** Name the divergence between two spellings, so a red says WHICH member moved. */
+function arrayDivergence(actual, canonical) {
+  const missing = canonical.filter((v) => !actual.includes(v));
+  const extra = actual.filter((v) => !canonical.includes(v));
+  const reordered = missing.length === 0 && extra.length === 0
+    && canonical.some((v, i) => actual[i] !== v);
+  return { missing, extra, reordered };
+}
+
+/** Assert `spelling` is the canonical list EXACTLY — same members, same order. */
+function expectSameArray(spelling, canonical, label) {
+  const actual = [...spelling];
+  const { missing, extra, reordered } = arrayDivergence(actual, [...canonical]);
+  expect(
+    actual,
+    `${label}: this spelling has drifted from the one home in `
+    + `src/data/worldFactOptions.js — missing ${JSON.stringify(missing)}, `
+    + `extra ${JSON.stringify(extra)}${reordered ? ', same members in a DIFFERENT ORDER' : ''}. `
+    + 'Re-point the spelling at the canonical list; never re-word the list to match a spelling.',
+  ).toEqual([...canonical]);
+}
+
+/** The SEVEN world facts WORLD_FACT_SOURCES cites. Trade access is EM-P3b's row. */
+const WORLD_FACTS = [
+  'terrain', 'culture', 'monsterThreat', 'stressors', 'resources', 'goods', 'services',
+];
+
+const REPO_ROOT = join(dirname(fileURLToPath(import.meta.url)), '../../..');
+
 describe('gallery facet vocabularies stay aligned to engine output', () => {
   it('TIER_OPTIONS matches the canonical tier ladder (TIER_ORDER)', () => {
     expectSuperset(TIER_OPTIONS, TIER_ORDER, 'tier');
@@ -57,6 +114,47 @@ describe('gallery facet vocabularies stay aligned to engine output', () => {
     const canonicalTerrains = TERRAIN_WEIGHTS.map(([terrain]) => terrain);
     expectSuperset(TERRAIN_OPTIONS, canonicalTerrains, 'terrain');
     expectNoExtras(TERRAIN_OPTIONS, canonicalTerrains, 'terrain');
+
+    // A1 — ONE SOURCE. Every live production spelling of terrain, equal AS ARRAYS
+    // to the canonical list, in both directions (toEqual is symmetric).
+    expectSameArray(DATA_TERRAINS, canonicalTerrains, 'terrain (src/data/worldFactOptions.js)');
+    expectSameArray(DOMAIN_TERRAINS, canonicalTerrains, 'terrain (the src/domain address)');
+    expectSameArray(TERRAIN_OPTIONS, canonicalTerrains, 'terrain (the gallery facet)');
+    expectSameArray(
+      DATA_TERRAIN_WEIGHTS.map(([terrain]) => terrain),
+      canonicalTerrains,
+      'terrain (resolveConfig’s re-export vs the data leaf it re-exports)',
+    );
+
+    // A5 — ORDER IS LOAD-BEARING, pinned against the pre-move literal. This is the
+    // arm that makes EM-P3 a move rather than a re-vocabulary: the weights ride
+    // rng.weightedPick BY POSITION (resolveConfig.js), so a reorder or a re-weight
+    // moves every random-terrain world ever generated from a stored seed.
+    expect(
+      TERRAIN_WEIGHTS.map(([terrain, weight]) => [terrain, weight]),
+      'terrain: TERRAIN_WEIGHTS is consumed positionally by rng.weightedPick, so this array '
+      + 'is a generation input and not a list. EM-P3 moved it and changed no value: restore '
+      + 'the members, the order AND the weights. Never re-record a golden to match a reorder.',
+    ).toEqual([
+      ['plains', 22], ['hills', 18], ['forest', 13],
+      ['riverside', 16], ['coastal', 16], ['mountain', 9], ['desert', 6],
+    ]);
+
+    // A3 — GUARD THE GUARD. An equality arm that cannot see a planted divergence is
+    // a green that means nothing, so plant one and require the arm to red BY NAME.
+    let plantedRed = null;
+    try {
+      expectSameArray([...TERRAIN_OPTIONS, 'tundra'], canonicalTerrains, 'terrain (planted)');
+    } catch (error) {
+      plantedRed = String((error && error.message) || '');
+    }
+    expect(
+      plantedRed,
+      'the single-source arm ACCEPTED a planted extra terrain: it cannot see a divergence, '
+      + 'so every green above is vacuous',
+    ).toBeTruthy();
+    expect(plantedRed, 'the planted red must name the world fact it is about').toContain('terrain');
+    expect(plantedRed, 'the planted red must name the divergent member').toContain('tundra');
   });
 
   it('MAGIC_OPTIONS matches every band getMagicLevel can emit', () => {
@@ -75,6 +173,15 @@ describe('gallery facet vocabularies stay aligned to engine output', () => {
     expectSuperset(CULTURE_OPTIONS, CULTURES, 'culture');
     expectNoExtras(CULTURE_OPTIONS, CULTURES, 'culture');
     expect(CULTURE_OPTIONS.length, 'culture: expected the canonical 11-culture catalog').toBe(11);
+
+    // A1 — ONE SOURCE, for culture's four live production spellings. The profile
+    // corpus is measured to carry the catalogue in the SAME ORDER, so it takes the
+    // equality too rather than the weaker sorted comparison the NAMING_DATA arm
+    // below must use (an object's key order is not the catalogue's order).
+    expectSameArray(DATA_CULTURES, CULTURES, 'culture (src/data/worldFactOptions.js)');
+    expectSameArray(DOMAIN_CULTURES, CULTURES, 'culture (the src/domain address)');
+    expectSameArray(CULTURE_OPTIONS, CULTURES, 'culture (the gallery facet)');
+    expectSameArray(CULTURE_PROFILE_KEYS, CULTURES, 'culture (CULTURE_PROFILE_KEYS)');
   });
 
   it('NAMING_DATA supplies a name set for every canonical culture (no silent germanic fallback)', () => {
@@ -99,5 +206,52 @@ describe('gallery facet vocabularies stay aligned to engine output', () => {
       PROSPERITY_OPTIONS.includes('Subsistence'),
       'prosperity: ‘Subsistence’ is an internal-only label and must not be a facet (it is remapped before persistence)',
     ).toBe(false);
+  });
+
+  it('WORLD_FACT_SOURCES cites the seven world facts exactly, and trade access is not among them', () => {
+    // The NAMED set, not merely the count: a dropped key hiding behind a key
+    // someone else added is exactly the drift a count-only arm cannot see.
+    expect(
+      Object.keys(WORLD_FACT_SOURCES).sort(),
+      'WORLD_FACT_SOURCES must name every world fact that HAS a canonical home, and only those',
+    ).toEqual([...WORLD_FACTS].sort());
+    expect(
+      Object.prototype.hasOwnProperty.call(WORLD_FACT_SOURCES, 'tradeAccess'),
+      'trade access is EM-P3b’s row (the charter, 2026-09-19); EM-P3b adds the eighth key and '
+      + 'moves this arm. Its absence here is a ruling, not an omission: no list exists to cite '
+      + 'yet, and an empty or placeholder key would answer [] to a real caller.',
+    ).toBe(false);
+  });
+
+  it('every WORLD_FACT_SOURCES citation resolves: the file exists and spells the symbol verbatim', () => {
+    const entries = Object.entries(WORLD_FACT_SOURCES);
+    // Non-vacuity first: a walk over an empty index convicts nothing.
+    expect(entries.length, 'the citation index is empty, so the walk below proves nothing').toBe(7);
+
+    const unresolved = [];
+    let resolved = 0;
+    for (const [fact, citation] of entries) {
+      const [relPath, symbol] = String(citation).split('#');
+      if (!relPath || !symbol) {
+        unresolved.push(`${fact}: “${citation}” is not a path#SYMBOL citation`);
+        continue;
+      }
+      if (!existsSync(join(REPO_ROOT, relPath))) {
+        unresolved.push(`${fact}: ${relPath} does not exist`);
+        continue;
+      }
+      if (!readFileSync(join(REPO_ROOT, relPath), 'utf8').includes(`export const ${symbol}`)) {
+        unresolved.push(`${fact}: ${relPath} carries no “export const ${symbol}”`);
+        continue;
+      }
+      resolved += 1;
+    }
+    expect(
+      unresolved,
+      `WORLD_FACT_SOURCES cites a vocabulary that is not there: ${unresolved.join('; ')}. `
+      + 'A citation index whose addresses have rotted is worse than no index: it tells the next '
+      + 'reader a fact is single-sourced when it is not.',
+    ).toEqual([]);
+    expect(resolved, 'every citation must have been resolved by reading a real file').toBe(entries.length);
   });
 });

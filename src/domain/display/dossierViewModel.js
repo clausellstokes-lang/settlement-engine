@@ -45,6 +45,13 @@ import { hasOpenTreasury, treasuryBandOf } from '../worldPulse/treasury.js';
 import { swatch } from '../../design/tokens.js';
 
 export { deriveExportPosture } from './exportPosture.js';
+// ODQ §934.20 — THE FOOD BALANCE BAR'S GEOMETRY, beside the food FIGURES this file
+// already derives. The bar and the sentence under it are one fact drawn twice, so
+// the run widths are cut from the same published fields `deriveFoodBalance` reads
+// and the tail IS its `deficitPct`. Re-exported here (the exportPosture idiom
+// above) so the Economics tab and the PDF economics chapters reach one arithmetic
+// through the one display import they already carry.
+export { foodBarSegments, magicFoodChannelWord } from './foodBalanceBar.js';
 
 const VIABILITY_LABEL = Object.freeze({
   not_viable:      'Not viable',
@@ -134,7 +141,21 @@ export function deriveFoodBalance(settlement) {
   // looks alarming out of context, but as a share of demand it reads as the
   // minor shortfall it usually is — most settlements run a little hungry, and
   // that's the baseline, not a broken settlement. Shown as a % of need.
-  const deficitPct = (needed != null && needed > 0) ? Math.round((deficit / needed) * 100) : null;
+  //
+  // ⚠ THE RECORD'S OWN PERCENTAGE FIRST. `deficitPercent` is the residual share
+  // the food model computed from its UNROUNDED pounds, and it is the number the
+  // band word was cut on and the number the Daily Life tab, the AI brief and
+  // foodNarrative already print. Re-deriving it here from the published integer
+  // pounds throws away the fraction: a thorp needing 60 lb/day with a 2.4 lb
+  // residual is 4% on the record and 3% once the pounds have been rounded, and
+  // the two surfaces then printed different percentages for one fact (12 of the
+  // golden master's 525 configurations). Recomputing stays as the arm for a
+  // record that carries no percentage of its own — an older save, or a caller
+  // that hands us only pounds and need.
+  const recordedPct = cleanNum(fb.deficitPercent);
+  const deficitPct = deficit > 0 && recordedPct != null && recordedPct > 0
+    ? Math.round(recordedPct)
+    : (needed != null && needed > 0) ? Math.round((deficit / needed) * 100) : null;
 
   let display;
   if (deficit > 0)      display = deficitPct != null ? `Deficit −${fmtInt(deficit)} (${deficitPct}% of need)` : `Deficit −${fmtInt(deficit)}`;

@@ -44,6 +44,8 @@ results=()
 # tests/lint/mutationCoverageManifest.test.js. check_caught_planted targets are
 # deliberately absent: that variant refuses to overwrite an existing path.
 MUTATED_FILES=(
+  src/workers/generationRequest.js
+  src/generators/steps/index.js
   src/domain/prose/composedWalker.js
   src/domain/prose/passageShapes.js
   src/domain/display/stateProse/composeStateProse.js
@@ -89,6 +91,7 @@ MUTATED_FILES=(
   src/store/campaignImportedCreation.js
   src/domain/display/economyFreshness.js
   src/components/new/tabs/EconomicsTab.jsx
+  src/components/new/tabs/SubstrateTab.jsx
   src/store/operationRegistry.js
   src/store/aiChronicleAppend.js
   src/store/neighbourSlice.js
@@ -96,7 +99,11 @@ MUTATED_FILES=(
   tests/fixtures/distribution-envelopes.manifest.json
   src/domain/display/discourseKernel.js
   src/domain/townMap/arch/params.js
-  src/components/nav/FletchBand.jsx
+  src/components/nav/arrowGeometry.js
+  src/components/nav/ArrowHeader.jsx
+  src/components/nav/ArrowControl.jsx
+  src/components/generate/WizardOutputToolbar.jsx
+  src/domain/explanation.js
   src/domain/townMap/arch/kit.js
   src/domain/townMap/arch/conditionParams.js
   src/domain/dossier/realmEntityWeb.js
@@ -120,6 +127,8 @@ MUTATED_FILES=(
   src/domain/content/customContentCharset.generated.js
   tests/fixtures/.golden-freeze-register.json
   src/domain/display/publicSafe.js
+  src/components/instant/InstantWorldEntry.jsx
+  src/domain/worldPulse/factionDensityKernel.js
 )
 if [ "${MUTATION_SWEEP_ALLOW_DIRTY:-}" != "1" ]; then
   dirty="$(git status --porcelain -- "${MUTATED_FILES[@]}" 2>/dev/null)"
@@ -363,10 +372,12 @@ check_caught "security/verify_jwt platform gate loosened" supabase/config.toml "
 # ── first 13 left unproven; see scripts/mutation-coverage-manifest.json ───────
 
 # 14. Size ratchet — a baselined file grows ONE effective line past its frozen
-#     tolerance-0 ceiling (App.jsx is frozen at its exact current count; the
-#     baseline-honesty test must red on any drift, either direction).
-printf '\nconst _mutSizeSweep = 1;\n' >> src/App.jsx
-check_caught "size-ratchet/App.jsx grows past frozen ceiling" src/App.jsx "npx vitest run tests/lint/sizeBaseline.test.js"
+#     tolerance-0 ceiling (explanation.js is frozen at its exact current count; the
+#     baseline-honesty test must red on any drift, either direction). Retargeted from
+#     src/App.jsx, which fell under its 600 layer ceiling when the painted arrow header
+#     moved out of the shell (2026-09-16) and left the baseline.
+printf '\nconst _mutSizeSweep = 1;\n' >> src/domain/explanation.js
+check_caught "size-ratchet/explanation.js grows past frozen ceiling" src/domain/explanation.js "npx vitest run tests/lint/sizeBaseline.test.js"
 
 # 15. Domain strict ratchet — a new implicit-any strict error lands in the
 #     strict-clean domain kernel (ceiling 0). Gate = the enforcing script
@@ -476,15 +487,6 @@ perl -0pi -e "s/  'house-a': cottage\(\),\n/  'house-a': cottage(),\n  zzz_mutsw
 check_caught "massing/silhouette totality unmapped kind" src/design/townGlyphs/medieval.js "npx vitest run tests/lint/townMapMassingSilhouette.walker.test.js"
 
 
-# 28b. RIBBON RETINA-TEXTURE BUDGET (V4.1, counsel R6 — the texture-complete law).
-#      The comb's opacities are lifted from a whisper back toward the weights that
-#      produced the "corrugated metal" verdict on the V3 band. Every retina cue on
-#      this bar owes UNDER 2% EFFECTIVE INK (tone x area, which is what the eye
-#      integrates); the coverage ratchet must red on the comb specifically, because
-#      a budget expressed in opacity alone is exactly the budget that could not see
-#      its own failure the first time.
-perl -0pi -e "s/  opacities: Object\.freeze\(\[0\.13, 0\.2, 0\.27\]\),/  opacities: Object.freeze([0.5, 0.6, 0.7]),/" src/components/nav/FletchBand.jsx
-check_caught "ribbon/retina texture budget blown" src/components/nav/FletchBand.jsx "npx vitest run tests/design/textureBudget.test.js"
 
 # 29. K-1 kernel LOD-ladder totality — a NEW arch grammar ruleset lands under
 #     arch/rulesets/ with no LOD-ladder + mesh-budget walker coverage. Every
@@ -1118,7 +1120,7 @@ check_caught "prose-presence/a sense leaves the published lexicon and the spread
 #     grammar walker's arm D. C-sibling stayed green a second time, on a file with five more
 #     assertions than the first run. Restored cmp-exact => 26 passed.
 #     ⛔ RE-ANCHORED AT MEASURE CAR 3 (the fold's R2, cure 3). Car 0e inserted `branchReads: [],`
-#     between `predicate: []` and `fieldsRead: []` (wiringCensus.js:699-702) and this anchor
+#     between `predicate: []` and `fieldsRead: []` (wiringCensus.js:719) and this anchor
 #     stopped matching: executed standalone against the committed bytes, md5
 #     0a28c398a1b6cff56183212bed8fa7fd BEFORE and AFTER — the plant mutated nothing and the
 #     sweep reported it as a BROKEN GAP nobody read. Car 11's lesson, which this sweep quotes
@@ -1399,6 +1401,224 @@ check_caught "prose-composed-walker/an unestablished relation join is reported a
 #     restored cmp-identical => 11 passed.
 perl -0pi -e "s/carries: shared\.length > 0/carries: shared.length >= 0/" src/domain/prose/passageShapes.js
 check_caught "prose-passage-shapes/a passage shape is rescued by the composition instead of licensed by it" src/domain/prose/passageShapes.js "npx vitest run tests/lint/prosePassageShapes.walker.test.js --no-file-parallelism"
+
+# ── THE PINNED FOOTER (owner orders 2026-09-16) ───────────────────────────────────────
+# 98. A BOTTOM-ANCHORED LAYER MAY NOT FORGET THE PINNED FOOTER. On desktop the global footer
+#     is sticky and its links row (THE BAND) floats at the viewport bottom, so every fixed
+#     layer anchored to that edge composes the band's measured height through aboveFooter()
+#     or FOOTER_INSET; at a bare `bottom: 72` the scroll-button stack (the owner's own square
+#     arrow) lands on the footer's links. The walker freezes LIFTED and EXEMPT per file,
+#     exact in both directions. The plant strips the lift from that very stack, which moves
+#     one App.jsx site from LIFTED to EXEMPT's unnamed remainder.
+#     Measured before landing (2026-09-16; cp backup, cp restore, never the checkout family;
+#     md5 7e9f63ff538589deb2c31dd876b472fd before and after): clean tree => 11 passed;
+#     planted => 2 red, the LIFTED and EXEMPT exact arms, the EXEMPT arm naming the stack by
+#     line, 9 passed; restored cmp-identical => 11 passed.
+#     RE-ANCHORED by the painted arrow header (2026-09-16): the stack's desktop branch also
+#     clears the 640-1023 bottom bar now (aboveBottomNav), so the plant strips both lifts.
+#     Re-measured (cp backup, cp restore; md5 c3a9b3978d70e9e2f423123d127205b3 before and
+#     after): clean tree => 13 passed; planted => 2 red, the LIFTED and EXEMPT exact arms,
+#     11 passed; restored cmp-identical => 13 passed.
+perl -0pi -e "s/bottom: aboveFooter\(isMobile \? bottomClearance\(CHROME\.fabLift \+ 56\) : aboveBottomNav\(SP\.lg \+ 56\)\), right: SP\.lg, zIndex: 200,/bottom: isMobile ? bottomClearance(CHROME.fabLift + 56) : SP.lg + 56, right: SP.lg, zIndex: 200,/" src/App.jsx
+check_caught "bottom-anchored-chrome/the scroll-button stack drops its footer lift and lands on the pinned band" src/App.jsx "npx vitest run tests/lint/bottomAnchoredChrome.walker.test.js --no-file-parallelism" "EXEMPT is exact: an un-lifted layer not named here is the collision the order forbids"
+
+# 99. THE FOOTER FLOATS ONLY ITS LINKS ROW. The owner's follow-up order keeps only the links
+#     row in view and shows the home button and the copyright line when the page is scrolled
+#     all the way down. The mechanism is one declaration: the sticky footer's bottom offset is
+#     minus THE TUCK (FOOTER_TUCKED_BOTTOM), never a literal 0. The plant writes `bottom: 0`,
+#     which is exactly the first order's whole-footer-pinned shape: nothing fails to render
+#     and every rect-free assertion elsewhere stays green, so only the style contract sees it.
+#     Measured before landing (2026-09-16; cp backup, cp restore, never the checkout family;
+#     md5 7e9f63ff538589deb2c31dd876b472fd before and after): clean tree => 23 passed;
+#     planted => 2 red, (a)'s sticky-offset arm and (c)'s mobile /terms arm, 21 passed;
+#     restored cmp-identical => 23 passed.
+#     Re-measured with the painted arrow header (2026-09-16; the footer now pins only from
+#     1024 px and the file gained a 640-1023 arm; md5 c3a9b3978d70e9e2f423123d127205b3 before
+#     and after): clean => 25 passed; planted => 3 red, (a), (c)'s mobile arm and (c)'s 640-1023
+#     arm, 22 passed; restored cmp-identical => 25 passed.
+perl -0pi -e "s/bottom: FOOTER_TUCKED_BOTTOM, zIndex:/bottom: 0, zIndex:/" src/App.jsx
+check_caught "pinned-footer/the footer pins whole again instead of floating only its links row" src/App.jsx "npx vitest run tests/components/pinnedFooter.test.jsx --no-file-parallelism" "sticky with a bottom of minus the tuck, on the header layer, outside any header, nav still labelled"
+
+# ── THE PAINTED ARROW HEADER (owner orders 2026-09-16) ────────────────────────────────
+# "Replace the arrow ribbon entirely with the following image ... I do not want you to
+# emulate it." The header is the owner's painting, laid out by components/nav/arrowGeometry.js
+# from tables measured on the shipped pixels, with controls laid over the painted regions.
+# Every plant below was measured before landing with a cp backup and a cp restore (never the
+# checkout family); each restored file was cmp-identical to its backup, with the md5 named.
+
+# 100. A PAINTED WORD'S HIT REGION MAY NOT SLIDE ONTO A CORD BINDING. NAV_HIT is measured
+#      binding edge to binding edge; nudging Create's right edge 22 columns onto binding 2
+#      would make a click on the cord route to Create. The asset test re-reads the strip's
+#      pixels and finds cord columns inside the region.
+#      Measured (md5 2486f6430b2dfbe47bbd5d8584b1fdab): clean => 23 passed; planted => 2 red
+#      ((c) the binding/region cord arm, (d) the word-extent arm), 21 passed; restored => 23.
+perl -0pi -e "s/generate: Object\.freeze\(\{ x0: 547, x1: 668 \}\)/generate: Object.freeze({ x0: 547, x1: 690 })/" src/components/nav/arrowGeometry.js
+check_caught "arrow-header/a painted word's hit region slides onto a cord binding" src/components/nav/arrowGeometry.js "npx vitest run tests/build/arrowHeaderAssets.test.js --no-file-parallelism" "every binding is mostly cord columns with dark edges, and no painted-word region or the plate carries cord"
+
+# 101. A SLOT CUT MAY NOT LAND ON A PAINTED WORD. Wood is inserted only at columns with FE
+#      columns of plain wood on both sides; moving the 1234 cut to 1260 puts a crossfade on
+#      Gallery's G. The asset test re-reads the columns around every cut.
+#      Measured (md5 2486f6430b2dfbe47bbd5d8584b1fdab): clean => 23 passed; planted => 1 red,
+#      22 passed; restored => 23 passed.
+perl -0pi -e "s/Object\.freeze\(\{ x: 1234, shares: 1 \}\)/Object.freeze({ x: 1260, shares: 1 })/" src/components/nav/arrowGeometry.js
+check_caught "arrow-header/a slot cut lands on a painted word" src/components/nav/arrowGeometry.js "npx vitest run tests/build/arrowHeaderAssets.test.js --no-file-parallelism" "every cut, and the compact join, has FE columns of plain wood on both sides"
+
+# 102. THE FEATHER'S HANG LAYER TAKES NO POINTER EVENTS. It is a sticky layer over the top
+#      of every page (the Realm mode switch, Library's Back to list, the wizard's Back sit
+#      under it when scrolled); with pointer events it would swallow those clicks while
+#      every control still rendered. The declaration is one of two (ArrowPaint's clip wrapper
+#      carries the other): e2e/arrow-header.spec.js's hit test reds only when both go
+#      (executed), so this plant proves the contract arm that keeps the layer's own.
+#      Measured (md5 21e4f81435a37213cc536ea246382e94): clean => 20 passed; planted => 1 red,
+#      19 passed; restored => 20 passed.
+perl -0pi -e "s/zIndex: 35, height: 0, flexShrink: 0, pointerEvents: 'none' \}\}/zIndex: 35, height: 0, flexShrink: 0 }}/" src/components/nav/ArrowHeader.jsx
+check_caught "arrow-header/the feather's hang layer takes pointer events" src/components/nav/ArrowHeader.jsx "npx vitest run tests/components/arrowHeader.test.jsx --no-file-parallelism" "the header's next sibling: sticky at the header length, aria-hidden, no pointer events, height 0, z 35"
+
+# 103. A PAINTED REGION'S FOCUS RING MAY NOT FALL BACK TO THE HOUSE BRONZE. The bronze is
+#      1.26:1 on the median wood; the regions set --sf-focus to INK (with the PARCH_100 inner
+#      band on keyboard focus). Deleting the override leaves a ring nobody can see and every
+#      control still focusable.
+#      Measured (md5 64bf959779db8be1da2e5163b9cb44c0): clean => 20 passed; planted => 1 red,
+#      19 passed; restored => 20 passed.
+perl -0pi -e "s/        '--sf-focus': INK,\n//" src/components/nav/ArrowControl.jsx
+check_caught "arrow-header/a painted region's focus ring falls back to the house bronze" src/components/nav/ArrowControl.jsx "npx vitest run tests/components/arrowHeader.test.jsx --no-file-parallelism" "every control sets --sf-focus to INK and the hover wash, and never switches the ring off"
+
+# 104. A RETIRED HEADER HEIGHT MAY NOT REGAIN A CONSUMER. CHROME.headerDesktop left with the
+#      ribbon; a consumer does not throw, it computes `undefinedpx` and the sticky bar lands
+#      under the painting. The plant puts the dossier toolbar back on the retired token.
+#      Measured (md5 4783499804b9ce068040da2d250c4b92): clean => 9 passed; planted => 1 red,
+#      8 passed; restored => 9 passed.
+perl -0pi -e "s/position: 'sticky', top: HEADER_H, zIndex: 40,/position: 'sticky', top: CHROME.headerDesktop, zIndex: 40,/" src/components/generate/WizardOutputToolbar.jsx
+check_caught "arrow-header/a retired header height regains a consumer" src/components/generate/WizardOutputToolbar.jsx "npx vitest run tests/lint/arrowHeaderRetirement.test.js --no-file-parallelism" "(a) no src file consumes a retired module, token or CHROME height"
+
+# ── THE LAUNCH-LOCKED PILL HOSTS (owner orders 2026-09-17, "Fix the small visual defects") ──
+# 105. A LAUNCH-LOCKED BUTTON MUST BE ABLE TO WRAP ITS PILL. The Button primitive is nowrap
+#      and the a11y floor `button { min-width: 24px }` replaces a flex item's min-content
+#      minimum, so a locked Button in a box narrower than label plus pill spills out of both
+#      sides and a clipping ancestor cuts both ends: the Realm sidebar's Instant World card
+#      read "ee Premium". The plant deletes that card's closed-only wrap, which is exactly the
+#      shipped defect; everything still renders and the button is still disabled with its pill.
+#      Measured before landing with a cp backup and a cp restore (never the checkout family;
+#      md5 986b6146145563020491b68f77bd77ac before and after): clean => 8 passed; planted =>
+#      2 red, the WRAPS and EXEMPT exact arms, 6 passed; restored cmp-identical => 8 passed.
+perl -0pi -e "s/          style=\{premiumReachClosed \? \{ flexWrap: 'wrap' \} : undefined\}\n//" src/components/instant/InstantWorldEntry.jsx
+check_caught "launch-pill-host/the Instant World reach loses its wrap and clips in the Realm sidebar" src/components/instant/InstantWorldEntry.jsx "npx vitest run tests/lint/launchPillHostWrap.walker.test.js --no-file-parallelism" "EXEMPT is exact: an un-wrapped Button host not named here clips when its box is narrow"
+
+# 106. THE RAIL'S WORDS MAY NOT CROSS INTO THE GENERATION WORKER. The worker-headroom car
+#      split stepMetadata.js in two: STEP_METADATA's summary(ctx) closures run in the worker,
+#      STEP_PRESENTATION's 22 labels + 22 descriptions are the Pipeline Rail's and belong to
+#      the main thread. The worker reads meta.summary alone and emits { id, index, summary },
+#      so the words were 2.9 kB of copy riding into dist/assets/generation.worker-*.js for a
+#      thread that renders nothing. The regression is ONE IMPORT and it is silent: the tables
+#      stay split, the rail still works, the bytes come back. The byte ceiling in
+#      tests/build/generationWorkerLazy.test.js is DIST-GATED, so it is mute on every run that
+#      does not build, and it reports "over by N bytes" rather than naming the module.
+#      Plant the import the worker's own entry would most plausibly grow.
+#      ⭐ THE FENCE TAKES BOTH NAMES, and the plant is why that matters: the rail reaches the
+#      table through presentationForStep() and never names STEP_PRESENTATION, so a fence on the
+#      table alone would have watched a name nothing uses while the accessor stood open.
+#      Measured before landing with a cp backup and a cp restore (never the checkout family;
+#      md5 d95215a51793f8a3fdd6639ef9d2bc54 before and after): clean => 4 passed; planted =>
+#      2 red (the engine-tree ban and the exact-readers arm), 2 passed; restored => 4 passed.
+perl -0pi -e "s/import \{ metaForStep \} from '\.\.\/generators\/steps\/stepMetadata\.js';/import { metaForStep, STEP_PRESENTATION } from '..\/generators\/steps\/stepMetadata.js';/" src/workers/generationRequest.js
+check_caught "step-presentation/an engine module reaches the rail's words and 2.9 kB returns to the worker bundle" src/workers/generationRequest.js "npx vitest run tests/lint/stepPresentationEngineFence.walker.test.js --no-file-parallelism" "no module in the engine trees names the table or its accessor"
+
+# 107. THE SAME FENCE, THE WHOLESALE DOOR (review 12). A name-grep is not a fence: an engine
+#      module can take BOTH tables without writing either name. `export * from
+#      './stepMetadata.js'` in the steps barrel is the most plausible shape of it - the barrel
+#      already exists to re-export the pipeline's steps - and a star re-export is a reference to
+#      every export, so rollup keeps STEP_PRESENTATION while plant #106's symbol arms stay GREEN
+#      and the 2.9 kB comes back unannounced. None existed in the tree when this was planted.
+#      Measured before landing with a cp backup and a cp restore (never the checkout family;
+#      md5 0882db64d89137ab5a916d3a35945055 before and after): clean => 6 passed; planted =>
+#      2 red (the wholesale re-export arm by name and the exact-readers arm), 4 passed;
+#      restored byte-identical => 6 passed.
+perl -0pi -e "s/import '\.\/resolveConfig\.js';/export * from '.\/stepMetadata.js';\nimport '.\/resolveConfig.js';/" src/generators/steps/index.js
+check_caught "step-presentation/a barrel re-exports stepMetadata.js wholesale and the rail's words ride in unnamed" src/generators/steps/index.js "npx vitest run tests/lint/stepPresentationEngineFence.walker.test.js --no-file-parallelism" "no module in the engine trees RE-EXPORTS stepMetadata.js wholesale"
+
+# 108. THE OTHER HALF OF THE SAME DOOR (review 12). A NAMESPACE IMPORT is the import-side twin
+#      of #107 and it lands in the worker's own entry, which already imports this module for
+#      `metaForStep` - so the regression is one extra line beside a line that belongs there.
+#      The dynamic form `await import('./stepMetadata.js')` is refused by the same arm and is
+#      the QUIETEST of the three: it splits rather than inlines, so it would not move the byte
+#      ceiling at all, and a new worker lazy edge is its own byte decision (WORKER_LAZY_EDGES is
+#      frozen at one row). Measured with a cp backup and a cp restore (md5
+#      d95215a51793f8a3fdd6639ef9d2bc54 before and after): clean => 6 passed; planted => 2 red
+#      (the namespace arm by name and the exact-readers arm), 4 passed; restored => 6 passed.
+perl -0pi -e "s/import \{ metaForStep \} from '\.\.\/generators\/steps\/stepMetadata\.js';/import { metaForStep } from '..\/generators\/steps\/stepMetadata.js';\nimport * as stepMetaNamespace from '..\/generators\/steps\/stepMetadata.js';/" src/workers/generationRequest.js
+check_caught "step-presentation/the worker entry takes stepMetadata.js as a namespace and every export is kept" src/workers/generationRequest.js "npx vitest run tests/lint/stepPresentationEngineFence.walker.test.js --no-file-parallelism" "no module in the engine trees takes stepMetadata.js as a NAMESPACE"
+
+# 109. THE SPECIFIER IS NOT ALWAYS A QUOTED STRING (review 13). Plants #106-#108 are anchored on
+#      a specifier in single or double quotes; a BACKTICK specifier with no substitution is the
+#      same import and walks past all three matchers. Nothing else changes: the module is loaded
+#      whole, the namespace holds every export, STEP_PRESENTATION survives. The perl program is
+#      single-quoted so the backticks stay literal to the shell (\x27 is the apostrophe).
+#      Measured with a cp backup and a cp restore (never the checkout family; md5
+#      d95215a51793f8a3fdd6639ef9d2bc54 before and after): clean => 7 passed; planted => 2 red
+#      (the namespace arm by name and the exact-readers arm), 5 passed; restored => 7 passed.
+perl -0pi -e 's/import \{ metaForStep \} from \x27\.\.\/generators\/steps\/stepMetadata\.js\x27;/import { metaForStep } from \x27..\/generators\/steps\/stepMetadata.js\x27;\nconst stepMetaTpl = await import(`..\/generators\/steps\/stepMetadata.js`);/' src/workers/generationRequest.js
+check_caught "step-presentation/a BACKTICK specifier walks past every quote-anchored matcher" src/workers/generationRequest.js "npx vitest run tests/lint/stepPresentationEngineFence.walker.test.js --no-file-parallelism" "no module in the engine trees takes stepMetadata.js as a NAMESPACE"
+
+# 110. AND THE SHAPE NO GREP CAN READ (review 13). A COMPUTED specifier - here the path assembled
+#      from two fragments and joined, so the module name never appears in the file at all - is the
+#      one form that defeats every matcher in the fence by construction. ⭐ THE PROOF IS THAT THIS
+#      PLANT REDS EXACTLY ONE ARM: the symbol, re-export and namespace arms all stay GREEN, which
+#      is precisely the hole, and only the computed-specifier register sees it. That register is a
+#      MEASUREMENT rather than a ban (the engine dirs carry 24 dynamic imports and zero computed
+#      specifiers today), because no walker in src/ governs the shape and a fence may not invent
+#      an estate-wide prohibition on its own.
+#      Measured with a cp backup and a cp restore (md5 d95215a51793f8a3fdd6639ef9d2bc54 before and
+#      after): clean => 7 passed; planted => 1 red, 6 passed; restored => 7 passed.
+perl -0pi -e 's/import \{ metaForStep \} from \x27\.\.\/generators\/steps\/stepMetadata\.js\x27;/import { metaForStep } from \x27..\/generators\/steps\/stepMetadata.js\x27;\nconst stepMetaSpec = [\x27..\/generators\/steps\/step\x27, \x27Metadata.js\x27].join(\x27\x27);\nconst stepMetaAny = await import(stepMetaSpec);/' src/workers/generationRequest.js
+check_caught "step-presentation/a COMPUTED specifier pulls the module in and no grep can say so" src/workers/generationRequest.js "npx vitest run tests/lint/stepPresentationEngineFence.walker.test.js --no-file-parallelism" "no dynamic import in the engine trees has a COMPUTED specifier"
+
+# 111. THE PHONE CHROME FLOOR, AS A FACT ABOUT THE SOURCE. `dossierPhoneFloorAllViews` can only
+#      measure a line once its own text reaches 45 characters, so whether a sub-12px size is a
+#      violation is decided by the fixture seed's string lengths rather than by the source. The
+#      census (tests/components/phoneChromeFloor.census.test.js) reads source instead and demands
+#      every sub-floor `fontSize` literal pass through chromeFontSize/proseFontSize or carry a
+#      written `// phone-floor:` ruling. SubstrateTab's BandPill is the plant target because its
+#      7px pico step is the smallest in the dossier and the file holds exactly one wrapped pico
+#      site, so the anchor is unambiguous. Measured before landing with a cp backup and a cp
+#      restore (never the checkout family): clean => bare 0; planted => bare 1 naming
+#      SubstrateTab.jsx:82; restored byte-identical by md5 => bare 0.
+perl -0pi -e "s/fontSize: chromeFontSize\(FS\.pico, mobile\)/fontSize: FS.pico/" src/components/new/tabs/SubstrateTab.jsx
+check_caught "phone-floor/a sub-floor size loses its helper and renders at its desktop step on a phone" src/components/new/tabs/SubstrateTab.jsx "npx vitest run tests/components/phoneChromeFloor.census.test.js --no-file-parallelism" "every sub-floor size passes through a helper or carries a written ruling"
+
+# 112. THE IRREVERSIBLE READ TAKES THE RAW ROSTER (EM-B1k2). `advanceFactionDensity`'s tick-start
+#      base is the roster `readFactionLifecycle` decides a PERMANENT dissolution from, and §810.4
+#      R18 admits only irreversible causes. Reverting the one token to `asObject(item.settlement)`
+#      hands the law the OFF-STAGE participation view again, so a house whose SOLE member is
+#      merely SHELVED has its dissolution PROPOSED.
+#      ⭐ WHY THE CONVICTION IS AT THE PRODUCTION AND NOT AT THE BEAT. EM-B1k's raw write base
+#      still REFUSES that beat downstream (`stillEmpty` over `fresh`), so a plant judged on the
+#      tick's output would read as MISSED while the defect was fully present — the habitat this
+#      packet removed is precisely a proposal that survives because something else catches it.
+#      A1 therefore wraps `readFactionLifecycle` itself and reads back the roster the mover chose
+#      to hand it. A4 reds beside it through the same defect's second door (the `fresh` fallback,
+#      where the confirmation re-reads the projection too), which is why the expected title pins
+#      A1 by name rather than counting reds.
+#      Measured with a cp backup and a cp restore (never the checkout family, because this tree is
+#      shared and `git checkout --` would discard a lane's uncommitted work; md5
+#      9e05e7e19eb149f46d39eaf307b68a22 before and after): clean => 5 passed; planted => 2 red (A1
+#      by name and A4), 3 passed, title_matches=1; restored => 5 passed.
+perl -0pi -e 's/asObject\(asObject\(item\.save\)\.settlement \|\| item\.settlement\)/asObject(item.settlement)/' src/domain/worldPulse/factionDensityKernel.js
+check_caught "irreversible-raw-roster/the R18 law reads the participation view and proposes a dissolution" src/domain/worldPulse/factionDensityKernel.js "npx vitest run tests/domain/irreversibleRawRoster.contract.test.js --no-file-parallelism" "A1 — the dissolution is never PROPOSED: the law reads the raw roster, so a shelved sole member mints no reaction"
+
+# 113. CITATION INTEGRITY. Land an UNTRACKED module under scripts/ carrying a
+#      `<path>:<line>` address past the end of the file it names. The EOF arm must
+#      convict it. The plant is untracked on purpose: the walker reads FROM DISK
+#      rather than from the git index precisely so its own mutant is visible, and
+#      an index-based walk would pass this sweep while seeing nothing. No existing
+#      file is touched, so this variant needs no MUTATED_FILES row.
+#      THE LINE NUMBER IS AN ARITHMETIC EXPANSION, not a literal, so that the
+#      address is NOT written contiguously in THIS file: spelled out, it would be
+#      a genuine past-EOF citation here and the gate would convict its own plant
+#      text. The shell writes the resolved number into the planted module.
+check_caught_planted "citations/past-EOF address planted in live code" \
+  scripts/_mutsweepStaleCitation.mjs \
+  "// The census roster is assembled in scripts/wiring-census.mjs:$((999999))." \
+  "npx vitest run tests/lint/sourceCitationIntegrity.walker.test.js --no-file-parallelism"
 
 echo ""
 echo "── Mutation sweep results ──────────────────────────────"

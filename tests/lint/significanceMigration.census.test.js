@@ -40,12 +40,28 @@
  * so a wave that migrates a surface lowers a number here and the debt is banked; a wave that
  * adds a new ad-hoc comparison reds and has to argue for it.
  *
+ * ⛔ THE CENSUS READS CODE, NOT PROSE — hygiene, FIX-T2 2026-09-20. Every class below counts a
+ * BEHAVIOURAL literal (`significance === 'major'`, `significance >= 0.72`), and those are
+ * exactly the words a header writes when it explains the debt. Measured at the cure: raw text
+ * and comment-stripped text give the SAME figures in all three classes (40/20, 5/3, 2/2), so
+ * this moved no number and no frozen list — it removes the habitat, it repairs nothing.
+ * ⚠ THE ONE PROSE MENTION IN THE TREE IS ALREADY EXEMPT AND THAT IS WHY THIS WAS FREE:
+ * `bandFamilies.js:34-35` quotes `significance === 'major'` while describing the debt, and
+ * `bandFamilies.js` is `FAMILY_HOME`, filtered out below. Without that exemption this census
+ * would have been reading a sentence as a debtor since 2026-08-04 (`59df13a97d`). The next
+ * such header in any of the other 2,246 files would have reddened an EXACT-EQUALITY pin.
+ * ⛔ `commentsOnly`, never the sibling `codeOnly`: the class-A and class-C patterns match a
+ * QUOTED word, and `codeOnly` blanks string contents — it would drive class A to near zero
+ * and the anti-vacuity arm above is the only thing that would notice.
+ *
  * @enforced-by this file
  */
 import { readdirSync, readFileSync, statSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
 import { dirname, join, relative } from 'node:path';
 import { describe, expect, test } from 'vitest';
+
+import { commentsOnly } from '../helpers/codeOnlySource.js';
 
 import { SIGNIFICANCE_CLASSES } from '../../src/domain/worldPulse/bandFamilies.js';
 
@@ -84,7 +100,7 @@ const byCodepoint = (x, y) => (x < y ? -1 : x > y ? 1 : 0);
 
 const SRC_FILES = walk(join(ROOT, 'src'))
   .filter((p) => /\.(js|jsx)$/.test(p))
-  .map((p) => ({ rel: relative(ROOT, p).replace(/\\/g, '/'), src: readFileSync(p, 'utf8') }))
+  .map((p) => ({ rel: relative(ROOT, p).replace(/\\/g, '/'), src: commentsOnly(readFileSync(p, 'utf8')) }))
   .filter((f) => f.rel !== FAMILY_HOME)
   .sort((x, y) => byCodepoint(x.rel, y.rel));
 

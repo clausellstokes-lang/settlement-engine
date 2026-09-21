@@ -66,7 +66,14 @@ export const en = Object.freeze({
     subtitle:   'Every street, every faction, every reason the place hasn’t collapsed yet. Simulated in seconds, exported in a click.',
     antiAi:     'Simulated, not AI-generated. The town is derived from constraints, coherent because it has to be.',
     cta:        'Begin a settlement',
-    ctaSubline: 'No account needed. Your first dossier is yours to keep.',
+    // ⚠ THE PROMISE IS SCOPED TO WHAT THE CODE ACTUALLY DOES (2026-09-18). It read
+    // "Your first dossier is yours to keep", which claims durable ownership, and
+    // an anonymous account has no library to keep anything in (authSlice
+    // TIER_GATE maxSaves 0). What is true is narrower and still worth saying: the
+    // draft is persisted device-locally while nobody is signed in, so a refresh or
+    // a later visit in the same browser finds it (store/persistProjection.js). The
+    // sibling `note` below carries the sign-in step, so this line does not have to.
+    ctaSubline: 'No account needed. Your first dossier stays in this browser.',
     note:       'Free anonymous generations are capped at town size. Sign in to push further.',
     // ── Two-voice rewrite ───────────────────────────────────────────────
     v2: {
@@ -74,12 +81,45 @@ export const en = Object.freeze({
       headlineAccent: 'This one simulates.',
       deck:         'First settlement or hundredth: the pieces explain each other.',
       ctaTemplate:  'Forge a {tier} →',
-      subline:      '{remaining} of {cap} free today · no account',
+      // ⛔ THE ANON ALLOWANCE IS TWO BUCKETS, NOT THREE INTERCHANGEABLE RUNS.
+      // lib/anonGenCounter.js splits it into DEFAULT_DAILY_FULL_CAP (1 full
+      // generation) + DEFAULT_DAILY_REROLL_CAP (2 rerolls of it), and
+      // DEFAULT_DAILY_CAP is only their SUM, kept for legacy call sites. The one
+      // line that rendered it said '{remaining} of {cap} free today', so a
+      // first-time visitor was told '3 of 3 free today' and then hit the wall
+      // after one settlement. Three states, three sentences, each counting down
+      // from the live counter; the at-cap copy (hero.anonCap.*) takes over when
+      // both buckets are spent.
+      //
+      // ⛔ BOTH NOUNS INFLECT, AND NEITHER COUNT IS SPELLED IN THE STRING. The
+      // first cut hardcoded the singular ('{full} free settlement today') and the
+      // reroll count ('plus 1 reroll'), so raising DEFAULT_DAILY_FULL_CAP to 2
+      // would have rendered "2 free settlement today" — a cap change silently
+      // producing broken copy on the funnel's hottest line. The registry has no
+      // plural helper (copy/index.js t() does {token} interpolation and nothing
+      // else), so the two nouns are two forms each, chosen by the caller and
+      // interpolated: the words stay in the registry where a translator can reach
+      // them, and no number is written into a sentence.
+      subline:          '{full} free {settlements} today, plus {rerolls} {rerollWord}',
+      sublineNoRerolls: '{full} free {settlements} today',
+      sublineRerolls:   'Rerolls left today: {rerolls}',
+      settlementOne:    'settlement',
+      settlementMany:   'settlements',
+      rerollOne:        'reroll',
+      rerollMany:       'rerolls',
     },
     // ── Anonymous cap framed as an unlock ───────────────────────────────
+    // ⛔ THE UNLOCK NAMED SIZES THE READER ALREADY HAD, AND THEN TOO FEW. The first
+    // cut said "reach thorp through metropolis" and sold back three sizes the reader
+    // had spent; the correction said "city and metropolis" and was short a THORPE,
+    // because the anonymous sizes are the three the headline names and a thorpe is not
+    // among them (the owner, 2026-09-19). ⚠ THIS STRING IS NOT INTERPOLATED — nothing
+    // supplies it vars — so the list is written out, and tests/copy/signInUnlocks.test.js
+    // binds it to config/tierFacts.js signInUnlocksSizes(): the words cannot drift from
+    // the derivation without redding.
     capUnlock: {
       headline:   'You’ve explored hamlet, village, town.',
-      body:       'Sign in (free) to reach thorp through metropolis and save your drafts. Keep any dossier’s PDF for $2.99.',
+      body:       'Sign in (free) to reach thorpe, city, and metropolis and save your drafts. Keep any dossier’s PDF for $2.99.',
       primaryCta: 'Create free account →',
       sideDoor:   'or keep this one: buy the dossier for $2.99 ↓',
     },
@@ -90,7 +130,12 @@ export const en = Object.freeze({
     anonCap: {
       signin:    'Sign in (free)',
       spent:     'You’ve explored hamlet, village, town.',
-      unlockTpl: '{signin} to reach thorp through metropolis and save your drafts. Keep any dossier’s PDF for $2.99.',
+      // ⛔ THE SIZES ARE INTERPOLATED, NEVER TYPED (the owner, 2026-09-19). This twin
+      // said "city and metropolis" and so did the sentence that renders (HomeHero) —
+      // both owed the reader a THORPE as well, since the anonymous sizes are the three
+      // `spent` names. `{sizes}` comes from config/tierFacts.js signInUnlocksSizes(),
+      // the ladder minus the anonymous set, so a ceiling that moves rewrites this line.
+      unlockTpl: '{signin} to reach {sizes} and save your drafts. Keep any dossier’s PDF for $2.99.',
     },
     // ── Return-visit ────────────────────────────────────────────────────
     welcomeBack: {
@@ -167,9 +212,14 @@ export const en = Object.freeze({
   auth: {
     modalTitle: 'Welcome back',
     title:    'Sign in to keep your work',
-    subtitle: 'Saves, larger settlements, and the Neighbourhood System.',
-    signinSubtitle: 'Sign in to keep your work: saves, larger settlements, and the Neighbourhood System.',
-    signupSubtitle: 'Create a free {tier} account to save your work, reach larger sizes, and link settlements in the Neighbourhood System.',
+    // THE SYSTEM IS CALLED THE NEIGHBOUR SYSTEM everywhere it is documented: the
+    // Compendium tab (CompendiumPanel.jsx), its search category, and the Practical
+    // Guide's reference row. Only these auth strings and the checklist said
+    // "Neighbourhood System", which is a different phrase for the same feature on
+    // the two surfaces a new account meets first.
+    subtitle: 'Saves, larger settlements, and the Neighbour System.',
+    signinSubtitle: 'Sign in to keep your work: saves, larger settlements, and the Neighbour System.',
+    signupSubtitle: 'Create a free {tier} account to save your work, reach larger sizes, and link settlements in the Neighbour System.',
     resetPageSubtitle: 'We will email you a secure link to set a new password.',
     discord: {
       label:       'Continue with Discord',
@@ -353,6 +403,134 @@ export const en = Object.freeze({
     legal: 'By continuing you agree to the Terms and Privacy Policy.',
   },
 
+  // ── Refusals ──────────────────────────────────────────────────────────────
+  // ⛔ NO GATE REFUSES SILENTLY (owner ruling, ODQ §934.24(c)). Every reason a gate
+  // may refuse is registered in lib/refusalReasons.js and says its piece HERE, in one
+  // block, rendered by components/primitives/RefusalNotice.jsx wherever the reader
+  // clicked. Before this, four surfaces each hand-rolled the same anonymous-cap
+  // pre-flight and three of them answered it by navigating with nothing said.
+  //
+  // EACH LINE NAMES THE REASON AND THE DOOR, and every tier fact in one is
+  // INTERPOLATED (config/tierFacts.js) so it can never drift from the gate that is
+  // actually enforcing it (store/authSlice.js TIER_GATE).
+  //
+  // ⚠ `bodyRef` RATHER THAN A SECOND COPY OF A SENTENCE. Two of these failures already
+  // have their words in `errors.*`, written for exactly them and pinned by the
+  // error-copy register. Those reasons point at the existing key instead of restating
+  // it; the walker follows the pointer and proves it resolves.
+  // ⛔ `{sizes}` IS SUPPLIED BY THE NOTICE, NOT BY THE GATE (the owner, 2026-09-19).
+  // Two of these sentences typed the sizes a sign-in unlocks and so carried the same
+  // stale list the hero did. primitives/RefusalNotice.jsx's `refusalCopy` injects
+  // config/tierFacts.js signInUnlocksSizes() as a DEFAULT var for every reason, so a
+  // refusal can name them without its raiser having to know the ladder — and a raiser
+  // that passes its own `sizes` still wins, because the gate's facts beat a default.
+  refusals: {
+    dailyCap: {
+      rubric: 'Free settlements',
+      body:   'Today’s free settlements are spent. Sign in, free, to keep forging and to reach {sizes}.',
+    },
+    // ⛔ "THIS ACCOUNT" WAS SAID TO A VISITOR WITH NO ACCOUNT (REVIEW-P F13). The
+    // 2026-09-20 anonymous walk forked the Black Crag sample and was told "A City is
+    // past what THIS ACCOUNT forges" — a sentence that names a thing the reader does
+    // not have, on the one surface whose next clause is an invitation to make one.
+    // `{holder}` is the same class of fact as `{size}` and `{max}`: measured at the
+    // gate, which is the only place the tier is known, and derived in ONE home
+    // (config/tierFacts.js accountHolderPhrase) so the two phrasings cannot drift.
+    tier: {
+      rubric: 'A bigger settlement',
+      body:   'A {size} is past what {holder} forges; it reaches up to a {max}. Sign in (free) to reach {sizes}.',
+    },
+    // ⛔ THE FLOOR IS NOT THE CEILING, AND THE CEILING'S SENTENCE WAS FALSE ON IT
+    // (§934.34). `isTierAllowed` refuses a RANGE; for a thorpe at an anonymous visitor
+    // the refusal came from the FLOOR and the copy raised was `tier`, which reads "A
+    // Thorpe is past what this account forges; it reaches up to a Town". Its own reason,
+    // its own sentence: what this size costs is an account, not an upgrade, and the
+    // floor is named so the reader knows where the forge starts without one.
+    tierTooSmall: {
+      rubric: 'A smaller settlement',
+      body:   'A {size} takes an account. Without one the forge starts at a {min}. Sign in (free) to reach {sizes}.',
+    },
+    // The SAME "this account" defect as `tier` above, reached by the other door: this
+    // is the sentence an anonymous visitor meets when a 'random' roll lands over the
+    // ceiling, so it is cured in the same edit rather than left as the next lane's find.
+    resolvedTier: {
+      rubric: 'A bigger settlement',
+      body:   'That roll came out a {size}, past what {holder} forges, so it was not kept. Pick a size yourself, or sign in (free) to reach every one.',
+    },
+    generationFailed: {
+      rubric:  'Generation failed',
+      bodyRef: 'errors.forgeStart',
+    },
+    staleBuild: {
+      rubric:  'Generation failed',
+      bodyRef: 'errors.forgeUpdated',
+    },
+    // No door and no price: the admin panel is not sold, so this sentence must
+    // not read as an upgrade prompt. It says whose page it is and stops.
+    staffOnly: {
+      rubric: 'Not this account',
+      body:   'The developer admin panel is open to the team only. Nothing is missing from your account; this page simply is not part of it.',
+    },
+    // ⛔ THE PRE-GENERATION OPTIONS ARE AN ACCOUNT'S (the owner, §934.34: "only hamlet,
+    // village, and town can be accessed without signing in and only with everything on
+    // random"). Nothing is hidden — the options are drawn and disabled, and this is the
+    // sentence beside them. `{sizes}` comes from the same derivation every other unlock
+    // sentence reads, so the two halves of the offer cannot drift.
+    preGenLocked: {
+      rubric: 'Everything on random',
+      body:   'Without an account a settlement forges with every dial rolled: you choose the size and the simulator does the rest. Sign in (free) to set the name, the ground, the culture and the priorities yourself, and to reach {sizes}.',
+    },
+    // ⛔ THE REALM LEAVES THE PHONE (the owner, ODQ §934.26). The first sentence is the
+    // owner's own words. The second is the DOOR — the gate law's "every gate ends in an
+    // action" — and it is deliberately written to be true whether or not a settlement is
+    // open: the notice's control renders only when one is, and this sentence names where
+    // the same relational facts live on a phone rather than promising a map.
+    realmNeedsTablet: {
+      rubric: 'The Realm',
+      body:   'The realm map opens on a tablet or larger screen. Your world is saved and waiting, exactly here, when you next sit down at one.',
+    },
+    // ⛔ THE NARRATIVE LAYER READS A TOWN, IT NEVER INVENTS ONE (REVIEW-P F4). The
+    // landing's "Narrate" navigated to /create with nothing said and nothing forged.
+    // The sentence states the ORDER of the two acts rather than a price, because the
+    // credits plate beside the button already carries the price and the reader's
+    // problem here is that there is no dossier to read.
+    narrateNeedsTown: {
+      rubric: 'Nothing to narrate yet',
+      body:   'The Narrative Layer reads a town that already exists; it never invents one. Forge a settlement first, and the voice is waiting on its dossier.',
+    },
+    // ⛔ THE DESTINATION WAS KEPT AND THE REASON DROPPED (REVIEW-P F10). `{page}` is the
+    // guarded route's own label from lib/routes.js, so this sentence can never name a
+    // page the router does not have. The door is the form directly below it, which is
+    // why this reason offers no second control of its own.
+    authRequired: {
+      rubric: 'Sign in to continue',
+      body:   '{page} belongs to an account. Sign in below and you land there.',
+    },
+    // ⛔ A DEAD LINK LOOKED LIKE IT WORKED (REVIEW-P F11). The address is quoted back
+    // because it is the only fact the reader can act on: it tells them whether they
+    // mistyped it or whether the link they followed has rotted.
+    pageNotFound: {
+      rubric: 'No such page',
+      body:   'There is no page at {path}, so this is the Create page instead. The address may be mistyped, or the link that sent you here may have gone stale.',
+    },
+  },
+
+  // ⛔ THE LOCKED-REALM GATE'S VALUE LINES — THE OWNER'S OWN WORDS, AND THIS IS THE ONE
+  // PLACE THEY LIVE (ODQ §934.26). He replaced two bullets with one sentence, in his own
+  // punctuation, and it ends on an exclamation point — which VOICE_AND_TONE §6 bans
+  // everywhere. So the line is declared HERE, where `tests/copy/voiceMechanics.test.js`
+  // holds a NAMED, COUNT-PINNED allowlist row for it citing this section and quoting the
+  // sentence. Spelled as a component literal instead — which is where it landed first — the
+  // same bang falls under the Tier-3 JSX ratchet, whose budget is ZERO and which has no
+  // allowlist at all: one home, one declaration, one exception, readable beside the words.
+  // `RealmLockedGate.jsx` reads this list and exports it for the palette's a11y pin.
+  realmGate: {
+    valueLines: [
+      'Advance the realm month by month and watch the chronicle fill',
+      'Access wars, religion, trade, the world!',
+    ],
+  },
+
   // ── Pricing ───────────────────────────────────────────────────────────────
   pricing: {
     eyebrow:      'Plans',
@@ -406,6 +584,26 @@ export const en = Object.freeze({
       // voice forbids; the Hall counts chairs HELD, and so does this.
       founder: {
         name:        'Founder',
+        // ⛔ THE CARD'S FOCAL SLOT STILL HAS TO SAY SOMETHING, AND WHAT IT SAYS IS
+        // HOW A CHAIR IS COME BY — NOT WHAT ONE COSTS. Deleting priceLabel/priceSub
+        // (above) left the two tier-card readers calling t() on absent keys, and t()
+        // returns the KEY when it cannot resolve: the anon teaser on /create printed
+        // `pricing.tiers.founder.priceLabel` and `pricing.tiers.founder.priceSub` as
+        // literal text (ODQ §934.22 item 1). `standing` is the cure at the source and
+        // is DELIBERATELY NOT SPELLED LIKE A PRICE — a key named price* is a key
+        // something can render as one, which is exactly why the two above stay gone.
+        // ⭐ THE OWNER'S APPROVED WORDS (ODQ §934.24(3), verbatim): "the Founder card
+        // under the purchase lock says what it means — 'A founding place, held until
+        // launch' — not a price that does not resolve." Lane 28's interim 'By invitation'
+        // (the landing closer strip's Founder badge) said HOW a chair is come by; these
+        // say that and WHEN, which is the half a reader under the lock actually needs.
+        // The badge's own words are untouched — this is the card's focal slot, not the
+        // badge — and neither quotes money, which the purchases-locked law requires.
+        standing:    'A founding place, held until launch',
+        // The sub-line beneath the slot. `standingSub` is deliberately NOT spelled
+        // priceSub: a key named price* is a key something can render as one, which is
+        // exactly why the Founder's two price keys stay deleted (above).
+        standingSub: 'Opens with the launch',
         tagline:     'Thirty chairs in the credits, for as long as SettlementForge runs.',
         cta:         'Request a chair',
         chairsHeld:  '{held} of 30 chairs held.',
@@ -636,7 +834,7 @@ export const en = Object.freeze({
       itemRead:        'Read three different tabs',
       itemRail:        'Tap a step in the simulation rail',
       itemSave:        'Save the dossier',
-      itemNeighbour:   'Link a second settlement (Neighbourhood System)',
+      itemNeighbour:   'Link a second settlement (Neighbour System)',
       completeBadge:   'Complete',
     },
   },
@@ -819,6 +1017,9 @@ export const en = Object.freeze({
 
   // ── Gallery (public dossier listing) ────────────────────────────────────
   gallery: {
+    // The tier's stock painting stands in for a settlement that has no picture of its own
+    // (§934.32): the alt says so, so a reader is never told the painting IS the place.
+    stockImageAlt: 'A {tier} of the kind {name} is: the tier’s painting, not a picture of this settlement.',
     eyebrow:      'From the community',
     pageTitle:    'Gallery',
     pageSubtitle: 'Settlements other DMs have shared. Browse for inspiration; click a tile to read the full dossier.',
@@ -830,6 +1031,8 @@ export const en = Object.freeze({
     emptyFilteredBody: 'No settlements match your filters.',
     clearFilters: 'Clear filters',
     loadError:    'The gallery could not be loaded. Try again in a moment.',
+    // The recovery beside that line: re-runs the reader's current query.
+    retry:        'Try again',
     backToList:   'Back to gallery',
   },
 
@@ -924,6 +1127,10 @@ export const en = Object.freeze({
     // Vision V-H (R-23): user-facing failure copy routed off component literals
     // into the register, so failures speak in one voice and the i18n door stays open.
     forgeStart:        'The forge stalled before your settlement took shape. Try once more.',
+    // lib/staleDeploy.js: a tab left open across a deploy. forgeUpdated replaces
+    // forgeStart when the failure was a chunk of the previous build (HomeHero is lazy,
+    // so the register is loaded there; the EAGER notice keeps its own literals).
+    forgeUpdated:      'SettlementForge was updated while this page was open. Reload the page to forge with the new version.',
     realmSlots:        'There aren’t enough free save slots for a realm this size. Clear a few, then try again.',
     realmBuild:        'The realm didn’t come together this time. Try once more.',
     mapExport:         'The map didn’t finish exporting. Try once more.',
@@ -1098,7 +1305,10 @@ export const en = Object.freeze({
   save: {
     button:        'Save',
     primary:       'Save Draft',
-    signupButton:  'Save this town (free account) →',
+    // THE NOUN FOLLOWS THE TIER (ODQ §934.22 item 3). This key had NO consumer and said
+    // something different from the live button beside it, which is how a village came to be
+    // asked to save a 'town'. One string now, filled from the settlement's own tier.
+    signupButton:  'Save this {tierNoun}. Free account →',
     afterAuthHint: 'We’ll save your dossier as soon as you’re in.',
     successTpl:    'Saved as {settlementName}. Find it in Settlements.',
     limitReached:  'You’ve hit the {limit}-save cap on the free tier.',
@@ -1153,14 +1363,12 @@ export const en = Object.freeze({
       event_pending: 'Pending',
       narrated:      'Narrated',
       raw:           'Raw',
-      locked:        'Locked',
     },
     tooltips: {
       draft:    'Editable, not yet part of your campaign world.',
       canon:    'Live campaign truth. Changes are logged as events.',
       narrated: 'Narrative refinement layer is present.',
       raw:      'Raw simulation output. No narrative layer.',
-      locked:   'Locked. Survives an NPC reroll.',
     },
   },
 
@@ -1258,7 +1466,10 @@ export const en = Object.freeze({
     },
     anon_cap_hit: {
       headline: 'You’ve explored hamlet, village, town.',
-      body:     'Sign in (free) to reach thorp through metropolis and save your drafts. Keep any dossier’s PDF for $2.99.',
+      // The sizes signing in ADDS (see hero.capUnlock). Written out because this
+      // moment's card renders the string with no vars; bound to the derivation by
+      // tests/copy/signInUnlocks.test.js so it cannot drift from it.
+      body:     'Sign in (free) to reach thorpe, city, and metropolis and save your drafts. Keep any dossier’s PDF for $2.99.',
     },
     first_pdf_export: {
       headline: 'You just downloaded your first dossier.',
@@ -1270,7 +1481,8 @@ export const en = Object.freeze({
     },
     regen_burst: {
       headline: 'You’re pushing the engine.',
-      body:     'Locks, drift, chronicle: Cartographer hands you the worldbuilder controls.',
+      // "Locks" left this line when the owner ordered the padlocks removed (2026-09-17).
+      body:     'Drift and the chronicle: Cartographer hands you the worldbuilder controls.',
     },
     map_clicked: {
       headline: 'World Map unlocks with Cartographer.',
@@ -1373,6 +1585,10 @@ export const en = Object.freeze({
     },
     howThisWasBuilt: 'How this was simulated',
     backToList:      'Back to settlements',
+    // THE PHONE'S DOOR OUT OF THE REALM (ODQ §934.26). The realm map does not open on a
+    // phone, but the relational web it draws is also a dossier tab that does, so the
+    // refusal ends in this action rather than in an apology.
+    relationshipsDoor: 'Open the relationship web',
     editModeOn:      'Edit mode',
     editModeOff:     'View mode',
     pendingTpl:      '{count} unsaved {noun}',
@@ -1439,18 +1655,12 @@ export const en = Object.freeze({
     claimed:  'This settlement’s PDF is yours. You bought it before you signed up.',
   },
 
-  // ── Workshop (P107 / CP-2) ───────────────────────────────────────────────
-  // OUR-side surface copy retained (the /workshop route + ModeSelector wiring
-  // still resolve these). Their tree deleted its Workshop block; we keep ours
-  // so no surviving OUR consumer sees a missing key. Surface waves drop this
-  // together with the Workshop feature if it is fully retired.
-  workshop: {
-    navLabel:       'Workshop',
-    locked:         'Workshop unlocks with Cartographer.',
-    lockedBody:     'Drag and drop institutions, resources, and stressors. Cascade-preview before you commit. Bring your own custom content.',
-    upgradeCta:     'Upgrade to Cartographer',
-    samplePreview:  'See a sample →',
-  },
+  // ⚰ Workshop (P107 / CP-2) — REMOVED 2026-09-18. The block was kept "so no
+  // surviving OUR consumer sees a missing key", but the Workshop feature is
+  // fully retired: /workshop is a DEMOTED DESTINATION that redirects to Create
+  // (lib/routes.js redirectForView), the ModeSelector wiring it named is gone,
+  // and a census of src/ found no reader of any `workshop.*` key. Dead copy is
+  // a maintenance tax and a translation cost, so the keys go with the feature.
 
   // ── Sample dossier proof card (P128 / H-2) ───────────────────────────────
   // Renders below HomeHero for anonymous visitors. Three callouts, each

@@ -55,38 +55,36 @@
  * every one is dormant on an empty map, which is why a lock-free settlement
  * regenerates byte-identically to one generated before locks were read at all.
  *
- * WHAT PHASE A HONORS:
- *   • a SECTION reroll (regenSection) refuses outright when that section is
- *     locked whole, and carries the named NPC ids through an `npcs` reroll —
- *     the lock following the id its subject inherits from the slot it took over;
- *   • a FULL regenerate honors `identity` (the name), `geography` (the terrain
- *     config is rolled again as-is) and `history` (the section is carried whole).
+ * ⛔ NOTHING IS HONOURED ANY MORE (owner orders 2026-09-17). The world keys left
+ * with the "What a new roll keeps" section, and `npcs` and `history` left when the
+ * owner ordered "remove the other padlocks". No control sets, shows or clears a lock,
+ * the store's `setLock` writer is retired, and the read side reads no key. A save's
+ * map is still carried verbatim (hydrate, pickle, persist), so a veto restores the
+ * controls with a user's old locks intact.
  *
- * PHASE B — deliberately deferred, documented, not a bug to re-find: the
- * npcs/factions/institutions ID ARRAYS across a FULL regenerate. Carrying a
- * character into an entirely new roster needs the displacement / prose-repair /
- * faction-relink tail that the npcs reroll runs, extracted to run over pipeline
- * output; that is its own lane. Until it lands a full generate DROPS the id
- * arrays (they would name a roster that no longer exists) and keeps the booleans.
+ * WHAT PHASE A AND PHASE B HONORED, before the orders: a section reroll refused when
+ * its section was locked whole and carried the named NPC ids through an `npcs`
+ * reroll; a full regenerate carried `history` whole and the named characters bodily
+ * into the new town (Phase B). All of it is kept in code, dormant.
  *
  * Entity-level protection is a SEPARATE, working mechanism that composes with
  * this one: the `_authored` / `locked` / `pinned` fields carried ON an entity,
  * which domain/regenerationPreservation.js honors when NPCs are rerolled. The
- * lock map is unioned with that policy — locks can only ever ADD survivors.
+ * lock map was unioned with that policy (locks could only ever ADD survivors); the
+ * entity-level policy is unaffected by the retirement and still runs.
  *
- *  @property {boolean=} identity      name, founding lore
- *  @property {boolean=} geography     terrain, trade access, regional placement
- *  @property {boolean=} history       the history section — rerolling it refuses
- *  @property {string[]=} factions     faction NAMES to preserve (Phase B on a full
- *                                     generate). Also the coup shield: a locked
- *                                     governing faction downgrades a successful
- *                                     coup from auto-applied to a proposal.
- *                                     ⚠ ARRAY-VALUED, never `true` — the reader
- *                                     in worldPulse/coup.js is an Array.isArray
- *                                     guard, so a boolean here arms nothing.
- *  @property {(boolean|string[])=} npcs  `true` freezes the whole roster section
- *                                     (its reroll refuses); an array names the
- *                                     individuals a roster reroll must carry
+ *  @property {boolean=} identity      RETIRED 2026-09-17 (owner order): was "keep the
+ *                                     name". Old saves may still carry it; nothing
+ *                                     reads it, and it is not pruned.
+ *  @property {boolean=} geography     RETIRED 2026-09-17, likewise: was "keep this ground".
+ *  @property {boolean=} history       RETIRED 2026-09-17 ("remove the other padlocks"):
+ *                                     was "Keep this history"; stored, not read.
+ *  @property {string[]=} factions     RETIRED 2026-09-17, likewise: was the seat lock
+ *                                     that turned a successful coup into a proposal
+ *                                     (worldPulse/coup.js no longer reads it).
+ *  @property {(boolean|string[])=} npcs  RETIRED 2026-09-17, likewise: `true` was
+ *                                     "Keep these people", an array was the
+ *                                     roster-row padlock; stored, not read
  */
 
 /** @typedef {'ADD_INSTITUTION' | 'REMOVE_INSTITUTION' | 'DAMAGE_INSTITUTION'

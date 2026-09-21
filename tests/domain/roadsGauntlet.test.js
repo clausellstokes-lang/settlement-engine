@@ -51,7 +51,7 @@ function worldFor({ seed, mission, extraLedgers = {}, relationshipStates = {}, o
 function argsFor(worldState, importance, graph) {
   const s = settlementsFor(importance);
   const settlements = SIDS.map((id) => ({ id, name: s[id].name, settlement: s[id] }));
-  return { snapshot: { settlements }, worldState, settlementUpdates: settlements.map((it) => ({ saveId: it.id, settlement: it.settlement })), graph, tick: TICK, now: null };
+  return { snapshot: { settlements }, worldState, settlementUpdates: settlements.map((update) => ({ saveId: update.id, settlement: update.settlement })), graph, tick: TICK, now: null };
 }
 function graphWith(extra = {}) {
   return ensureRegionalGraph({

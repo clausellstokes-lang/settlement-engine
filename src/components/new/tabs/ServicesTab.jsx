@@ -4,7 +4,9 @@ import { FS, MUTED, swatch } from '../../theme.js';
 import IconButton from '../../primitives/IconButton.jsx';
 import { sans } from '../Primitives';
 import {Ts, J0} from '../tabConstants';
+import { tokenCase } from '../labelLadder.js';
 import useIsMobile from '../../../hooks/useIsMobile.js';
+import { chromeFontSize, proseFontSize } from '../../../design/proseScale.js';
 import {computeChainSets, computeChainDepthMap} from '../tabHelpers';
 import EconomyFreshnessNote from '../EconomyFreshnessNote.jsx';
 import {ServiceItem} from '../serviceComponents';
@@ -12,6 +14,48 @@ import {NarrativeNote} from '../NarrativeNote';
 import { economyDeskRead } from '../economyDeskRead.js';
 import { DeskLines } from './EconomicsGlance.jsx'; // the shared position renderer (see its docblock)
 import { compareCodepoint } from '../../../domain/deterministicSort.js';
+import { edged } from '../../../design/edgedBox.js';
+
+/**
+ * ⛔ DS-SUP-3'S POSITION, BOUND ONCE AND SPELLED ONCE.
+ *
+ * The mount registry's reachability arm counts this id as a WHOLE STRING LITERAL under
+ * `src/components` and refuses a position named twice — a second spelling reads as a
+ * second position for one block. This tab now draws the position at TWO PLACES (the
+ * catalog paragraph, and the impaired house's own row), which is one position rendered
+ * where each of its two lenses belongs, so the id is a const and the sites reference it.
+ */
+const CATALOG_MOUNT = 'services.catalogStanding';
+
+/**
+ * ⭐ THE CATEGORY'S RENDER ORDER, HOISTED, because two readers need the same answer.
+ *
+ * The list below is sorted impaired-first then by name, and the DS-SUP-3 join has to know
+ * which row comes FIRST for the named house — so the comparator cannot stay inline in the
+ * render. A second, quietly different copy is the fork this estate names by hand every
+ * time it finds one.
+ *
+ * @param {Set<string>} impaired @param {Set<string>} degraded
+ * @returns {(a: unknown, b: unknown) => number}
+ */
+function serviceOrder(impaired, degraded) {
+  const rank = (svc) => {
+    const name = typeof svc === 'string' ? svc : svc?.name || '';
+    const inst = typeof svc === 'object' ? svc?.institution || '' : '';
+    return (impaired.has(name) || impaired.has(inst)) ? 2
+      : (degraded.has(name) || degraded.has(inst)) ? 1 : 0;
+  };
+  return (a, b) => {
+    const diff = rank(b) - rank(a);
+    if (diff !== 0) return diff;
+    const na = typeof a === 'string' ? a : a?.name || '';
+    const nb = typeof b === 'string' ? b : b?.name || '';
+    return na.localeCompare(nb);
+  };
+}
+
+/** The institution a service entry names, or '' — the one spelling of that read. */
+const institutionOf = (svc) => (typeof svc === 'object' ? svc?.institution || '' : '');
 
 /**
  * @param {object} props
@@ -26,6 +70,10 @@ export function ServicesTab({ services, settlement, narrativeNote, publicDossier
   const [search, setSearch] = useState('');
   const [openCats, setOpenCats] = useState({});
   const tier = settlement?.tier || 'town';
+  // `mobile` drives the phone layout AND the phone prose floor: the tab's three
+  // reading sentences (the search miss, the absence note, the criminal-category
+  // caution) take the floor below the breakpoint. Counts, chips and category
+  // headers are glanced at and keep their own steps.
   const mobile = useIsMobile();
   const hasServices = services && Object.values(services).some(v => v?.length > 0);
 
@@ -98,6 +146,29 @@ export function ServicesTab({ services, settlement, narrativeNote, publicDossier
     .filter(inst => inst && impaired.has(inst))
     .sort(compareCodepoint)[0] || null;
   const deskProse = economyDeskRead(settlement, { publicDossier, playerView, impairedInstitution });
+  // ⭐ THE ROW DS-SUP-3'S SECOND LENS IS ABOUT (owner order 2026-09-19, the Defense idiom
+  // applied here). That lens names `{institution}` — ONE house, by name — and it printed in
+  // the catalog paragraph at the top of the tab, a screen and a half above the row that
+  // house's service sits on. A reader had to pair a sentence to a row by searching for a
+  // name. It now renders UNDER that row, in the town's own voice, exactly as
+  // `defense.threatAssessment` renders under the bar it is about.
+  //
+  // ⚠ THE JOIN IS BY INSTITUTION AND IT RESOLVES TO EXACTLY ONE ROW. A house may supply
+  // several services in several categories, and the sentence is about the HOUSE, so it is
+  // said once: at the first row, in the tab's OWN render order (catOrder, then
+  // `serviceOrder`), whose institution is the named one. A house with no rendered row at all
+  // draws nothing here rather than the wrong row's sentence — `impairedInstitution` is built
+  // from these same lists, so that case is the empty one.
+  const impairedRow = (() => {
+    if (!impairedInstitution) return null;
+    const cmp = serviceOrder(impaired, degraded);
+    for (const cat of catOrder) {
+      const hit = [...(services[cat] || [])].sort(cmp)
+        .find((svc) => institutionOf(svc) === impairedInstitution);
+      if (hit) return { cat, svc: hit };
+    }
+    return null;
+  })();
 
   const toggleCat = (cat) => setOpenCats(prev => ({...prev, [cat]: prev[cat] !== false ? false : true}));
   const isOpen = (cat) => openCats[cat] !== false; // default open
@@ -114,24 +185,31 @@ export function ServicesTab({ services, settlement, narrativeNote, publicDossier
       <EconomyFreshnessNote settlement={settlement} variant="catalog" />
 
       {/* ── THE CATALOG AND ITS ABSENCES (DS-SUP-3 at services.catalogStanding) ──
-          TWO LENSES AT ONE POSITION: where the town stands against what a place its rung is
-          expected to keep, and the one house that is open and short of what it works with.
-          Additive — the counts strip, the category grid and the absence chips below are the
-          DATUM and are untouched. Silent on a settlement with no catalog at all, because the
-          tab itself returns early there (R-DST-K). */}
-      <DeskLines mount="services.catalogStanding" rungs={[deskProse.catalogStanding, deskProse.impairedService]} />
+          ONE LENS HERE: where the town stands against what a place its rung is expected to
+          keep. That is a fact about the CATALOG, so it frames the catalog.
+          ⛔ THE SECOND LENS LEFT THIS PARAGRAPH (owner order 2026-09-19). It names one house
+          by name, and a sentence about a named house printed at the top of a tab is a
+          sentence the reader has to go and find a row for. It renders under that house's own
+          row below — same position, same registry ruling, flipping this row to `glance`
+          still silences both together. The counts strip, the category grid and the absence
+          chips are the DATUM and are untouched. Silent on a settlement with no catalog at
+          all, because the tab itself returns early there (R-DST-K). */}
+      <DeskLines mount={CATALOG_MOUNT} settlementName={settlement?.name} tier={settlement?.tier} rungs={[deskProse.catalogStanding]} />
 
       {/* ── HEADER STRIP ────────────────────────────────────────────────── */}
       <div style={{background:'linear-gradient(to right,#f5ede0,#ede3cc)',border:'1px solid #c8b89a',padding:'10px 14px',marginBottom:14,display:'flex',alignItems:'center',gap:10,flexWrap:'wrap'}}>
         <div style={{flex:1,minWidth:0}}>
-          <span style={{fontSize:FS.md,fontWeight:700,color:swatch.inkMag}}>{totalCount} services</span>
+          {/* The two spans were separated by margin ALONE, so the strip's accessible
+              name and any copy/paste of it read "15 servicesacross 8 categories".
+              The space is a real text node; the margin keeps the optical gap. */}
+          <span style={{fontSize:FS.md,fontWeight:700,color:swatch.inkMag}}>{totalCount} services</span>{' '}
           <span style={{fontSize:FS.sm,color:MUTED,marginLeft:6}}>across {catOrder.length} categories</span>
         </div>
         <div style={{display:'flex',gap:6,flexWrap:'wrap'}}>
-          {totalImpaired>0&&<span style={{fontSize:FS.xs,fontWeight:700,color:swatch['#7A1A1A'],background:swatch['#F4DEDE'],border:'1px solid #d8c8a8',padding:'2px 8px'}}>{totalImpaired} impaired</span>}
-          {totalDegraded>0&&<span style={{fontSize:FS.xs,fontWeight:700,color:swatch['#7A3A00'],background:swatch['#FBEAD0'],border:'1px solid #e0c080',padding:'2px 8px'}}>{totalDegraded} reduced</span>}
-          {missing.length>0&&<span style={{fontSize:FS.xs,fontWeight:700,color:swatch['#7A5010'],background:swatch['#F0E4C0'],border:'1px solid #e0c080',padding:'2px 8px'}}>{missing.length} missing</span>}
-          {totalImpaired===0&&totalDegraded===0&&missing.length===0&&<span style={{fontSize:FS.xs,fontWeight:700,color:swatch.inkMag3,background:swatch['#F0EAD8'],border:'1px solid #d0c0a0',padding:'2px 8px'}}>✓ No impairments</span>}
+          {totalImpaired>0&&<span style={{fontSize:chromeFontSize(FS.xs, mobile),fontWeight:700,color:swatch['#7A1A1A'],background:swatch['#F4DEDE'],border:'1px solid #d8c8a8',padding:'2px 8px'}}>{totalImpaired} impaired</span>}
+          {totalDegraded>0&&<span style={{fontSize:chromeFontSize(FS.xs, mobile),fontWeight:700,color:swatch['#7A3A00'],background:swatch['#FBEAD0'],border:'1px solid #e0c080',padding:'2px 8px'}}>{totalDegraded} reduced</span>}
+          {missing.length>0&&<span style={{fontSize:chromeFontSize(FS.xs, mobile),fontWeight:700,color:swatch['#7A5010'],background:swatch['#F0E4C0'],border:'1px solid #e0c080',padding:'2px 8px'}}>{missing.length} missing</span>}
+          {totalImpaired===0&&totalDegraded===0&&missing.length===0&&<span style={{fontSize:chromeFontSize(FS.xs, mobile),fontWeight:700,color:swatch.inkMag3,background:swatch['#F0EAD8'],border:'1px solid #d0c0a0',padding:'2px 8px'}}>✓ No impairments</span>}
         </div>
       </div>
 
@@ -141,7 +219,13 @@ export function ServicesTab({ services, settlement, narrativeNote, publicDossier
           <span style={{position:'absolute',left:10,top:'50%',transform:'translateY(-50%)',display:'inline-flex',color:MUTED,pointerEvents:'none'}}><Search size={15}/></span>
           <input value={search} onChange={e=>setSearch(e.target.value)}
             aria-label="Search services"
-            placeholder='Search services, "healing", "horse", "fence", "wizard"…'
+            // The four-example placeholder is cut off mid-word on a phone
+            // ('…"horse", "fenc'), which reads as a rendering fault rather than a
+            // hint. Two examples fit a 375px field; the accessible name above is
+            // the same on both, so nothing is lost to a screen reader.
+            placeholder={mobile
+              ? 'Search services, "healing", "horse"…'
+              : 'Search services, "healing", "horse", "fence", "wizard"…'}
             style={{width:'100%',padding:'9px 32px',border:'1px solid #c8b89a',fontSize:FS.md,fontFamily:'Nunito,sans-serif',color:swatch.inkMag,background:swatch['#FAF8F4'],boxSizing:'border-box'}}/>
           {search&&<span style={{position:'absolute',right:10,top:'50%',transform:'translateY(-50%)',display:'inline-flex'}}><IconButton Icon={X} label="Clear search" onClick={()=>setSearch('')} tone="ghost" size="sm" /></span>}
         </div>
@@ -149,16 +233,16 @@ export function ServicesTab({ services, settlement, narrativeNote, publicDossier
         {searchResults !== null && (
           <div style={{marginTop:8}}>
             {searchResults.length === 0
-              ? <div style={{background:swatch['#FAF8F4'],border:'1px solid #e8c0c0',borderLeft:'3px solid #8b1a1a',padding:'10px 14px',fontSize:FS.md,color:swatch['#5A1A1A']}}>
+              ? <div style={{background:swatch['#FAF8F4'],border:'1px solid #e8c0c0',borderLeft:'3px solid #8b1a1a',padding:'10px 14px',fontSize:proseFontSize(FS.md,mobile),color:swatch['#5A1A1A']}}>
                   <strong>Not available</strong>. Nothing matching "{search}" in this settlement.
                   {missing.length>0&&<span style={{color:swatch.inkMag3}}> Missing categories: {missing.map(k=>Ts[k]?.label).filter(Boolean).join(', ')}.</span>}
                 </div>
               : <div style={{background:swatch['#FAF8F4'],border:'1px solid #e0d0b0',borderLeft:'3px solid #c8b89a',padding:'10px 14px'}}>
-                  <div style={{fontSize:FS.xs,fontWeight:700,color:swatch.inkMag3,marginBottom:8}}>✓ {searchResults.length} result{searchResults.length!==1?'s':''} found</div>
+                  <div style={{fontSize:chromeFontSize(FS.xs, mobile),fontWeight:700,color:swatch.inkMag3,marginBottom:8}}>✓ {searchResults.length} result{searchResults.length!==1?'s':''} found</div>
                   {searchResults.map((r,i)=>(
                     <div key={i} style={{marginBottom:6}}>
                       <ServiceItem svc={r.svc} accent={Ts[r.cat]?.accent||'#1a5a28'} isCriminal={r.cat==='criminal'} tradeDeps={tradeDeps} impaired={impaired} degraded={degraded} vulnerable={vulnerable} depReasons={depReasons} settlement={settlement} chainDepth={serviceChainDepth.get((typeof r.svc==='string'?r.svc:r.svc?.institution||'').toLowerCase())}/>
-                      <span style={{fontSize:FS.xxs,color:MUTED,marginLeft:20,display:'block',marginTop:1}}>{Ts[r.cat]?.label}</span>
+                      <span style={{fontSize:chromeFontSize(FS.xxs, mobile),color:MUTED,marginLeft:20,display:'block',marginTop:1}}>{Ts[r.cat]?.label}</span>
                     </div>
                   ))}
                 </div>
@@ -172,7 +256,7 @@ export function ServicesTab({ services, settlement, narrativeNote, publicDossier
         {/* ── CATEGORY HEALTH GRID ────────────────────────────────────────── */}
         {(totalImpaired>0||totalDegraded>0||missing.length>0) && (
           <div style={{marginBottom:14}}>
-            <div style={{fontSize:FS.xxs,fontWeight:700,color:swatch.inkMag3,textTransform:'uppercase',letterSpacing:'0.06em',marginBottom:8}}>Category Status</div>
+            <div style={{fontSize:chromeFontSize(FS.xxs, mobile),fontWeight:700,color:swatch.inkMag3,textTransform:'uppercase',letterSpacing:'0.06em',marginBottom:8}}>Category Status</div>
             <div style={{display:'grid',gridTemplateColumns:mobile?'repeat(2,1fr)':'repeat(3,1fr)',gap:6}}>
               {catOrder.map(cat => {
                 const meta = Ts[cat] || {label:cat,accent:'#6b5340'};
@@ -194,11 +278,12 @@ export function ServicesTab({ services, settlement, narrativeNote, publicDossier
                         setTimeout(()=>{const el=document.getElementById('svc-cat-'+cat);el&&el.scrollIntoView({behavior:'smooth',block:'start'});},50);
                       }
                     }}>
+                    {/* ODQ §934.23 — no clamp on dossier text: this label may be the raw category token on a catalogue the taxonomy has not named (`Ts[cat] || {label:cat}`), so it is not provably short and it wraps instead of truncating. */}
                     <div style={{display:'flex',alignItems:'center',gap:5}}>
-                      <span style={{fontSize:FS.xs,fontWeight:700,color:swatch.inkMag,flex:1,minWidth:0,overflow:'hidden',textOverflow:'ellipsis',whiteSpace:'nowrap'}}>{meta.label}</span>
-                      <span style={{fontSize:FS.xxs,color:MUTED,flexShrink:0}}>{cs.total}</span>
+                      <span style={{fontSize:chromeFontSize(FS.xs, mobile),fontWeight:700,color:swatch.inkMag,flex:1,minWidth:0}}>{meta.label}</span>
+                      <span style={{fontSize:chromeFontSize(FS.xxs, mobile),color:MUTED,flexShrink:0}}>{cs.total}</span>
                     </div>
-                    {(hasImp||hasDeg)&&<div style={{marginTop:3,fontSize:FS.xxs,fontWeight:700,color:hasImp?'#7a1a1a':'#7a3a00'}}>
+                    {(hasImp||hasDeg)&&<div style={{marginTop:3,fontSize:chromeFontSize(FS.xxs, mobile),fontWeight:700,color:hasImp?'#7a1a1a':'#7a3a00'}}>
                       {hasImp&&`${cs.imp} impaired`}{hasDeg&&`${cs.deg} reduced`}
                     </div>}
                   </div>
@@ -209,9 +294,9 @@ export function ServicesTab({ services, settlement, narrativeNote, publicDossier
                 return (
                   <div key={'missing-'+cat} style={{background:swatch['#F0E4C0'],border:'1px solid #e0c080',borderLeft:'3px solid #b8860b',padding:'6px 10px',opacity:0.8}}>
                     <div style={{display:'flex',alignItems:'center',gap:5}}>
-                      <span style={{fontSize:FS.xs,fontWeight:700,color:swatch['#5A3A10'],flex:1,minWidth:0,overflow:'hidden',textOverflow:'ellipsis',whiteSpace:'nowrap'}}>{meta.label}</span>
+                      <span style={{fontSize:chromeFontSize(FS.xs, mobile),fontWeight:700,color:swatch['#5A3A10'],flex:1,minWidth:0}}>{meta.label}</span>
                     </div>
-                    <div style={{marginTop:3,fontSize:FS.xxs,fontWeight:700,color:swatch['#7A5010']}}>not available</div>
+                    <div style={{marginTop:3,fontSize:chromeFontSize(FS.xxs, mobile),fontWeight:700,color:swatch['#7A5010']}}>not available</div>
                   </div>
                 );
               })}
@@ -221,7 +306,7 @@ export function ServicesTab({ services, settlement, narrativeNote, publicDossier
 
         {/* ── NOTABLE ABSENCES ─────────────────────────────────────────────── */}
         {missing.length > 0 && (
-          <div style={{background:swatch['#F0E4C0'],border:'1px solid #e0c080',borderLeft:'3px solid #b8860b',padding:'9px 14px',marginBottom:14,fontSize:FS.sm,color:swatch['#5A3A10']}}>
+          <div style={{background:swatch['#F0E4C0'],border:'1px solid #e0c080',borderLeft:'3px solid #b8860b',padding:'9px 14px',marginBottom:14,fontSize:proseFontSize(FS.sm,mobile),color:swatch['#5A3A10']}}>
             <strong>Not available for a {tier}:</strong> {missing.map(k=>Ts[k]?.label).filter(Boolean).join(', ')}. The party will need to look elsewhere.
           </div>
         )}
@@ -242,8 +327,7 @@ export function ServicesTab({ services, settlement, narrativeNote, publicDossier
             return (
               <div key={cat} id={'svc-cat-'+cat} style={{
                 background: isCriminal?'#1a0a0a':`${meta.accent}08`,
-                border:`1px solid ${isCriminal?'#4a1a1a':`${meta.accent}28`}`,
-                borderLeft:`3px solid ${accentColor}`,
+                ...edged(`1px solid ${isCriminal?'#4a1a1a':`${meta.accent}28`}`,`3px solid ${accentColor}`),
                 overflow:'hidden'
               }}>
                 {/* Category toggle — bespoke: full-width header row with left-aligned
@@ -257,29 +341,42 @@ export function ServicesTab({ services, settlement, narrativeNote, publicDossier
                   borderBottom:open?`1px solid ${isCriminal?'#3a1a1a':`${meta.accent}20`}`:'none',
                   cursor:'pointer',textAlign:'left',WebkitTapHighlightColor:'transparent'
                 }}>
-                  <span style={{fontSize:FS.sm,fontWeight:800,color:isCriminal?'#c06060':accentColor,textTransform:'uppercase',letterSpacing:'0.06em'}}>{meta.label}</span>
-                  <span style={{fontSize:FS.xs,color:isCriminal?'#8a5050':'#9c8068'}}>({cs.total})</span>
-                  {hasImp&&<span style={{fontSize:FS.xxs,fontWeight:700,color:swatch['#7A1A1A'],background:swatch['#F4DEDE'],border:'1px solid #d8c8a8',padding:'1px 5px',marginLeft:2}}>{cs.imp} impaired</span>}
-                  {!hasImp&&hasDeg&&<span style={{fontSize:FS.xxs,fontWeight:700,color:swatch['#7A3A00'],background:swatch['#FBEAD0'],border:'1px solid #e0c080',padding:'1px 5px',marginLeft:2}}>{cs.deg} reduced</span>}
-                  <span style={{fontSize:FS.xxs,color:isCriminal?'#8a5050':'#9c8068',marginLeft:'auto'}}>{open?'▲':'▼'}</span>
+                  {/* A GROUP HEADER NESTED INSIDE THE CARD, not the card's eyebrow — the rule
+                      DefenseSecurity's pair already set: "ARMED FORCES & FORTIFICATIONS" keeps
+                      its capitals and "Standing forces" beneath it does not. "Category Status"
+                      above is this surface's one eyebrow and is untouched. */}
+                  <span style={{fontSize:FS.sm,fontWeight:800,color:isCriminal?'#c06060':accentColor}}>{tokenCase(meta.label)}</span>
+                  <span style={{fontSize:chromeFontSize(FS.xs, mobile),color:isCriminal?'#8a5050':'#9c8068'}}>({cs.total})</span>
+                  {hasImp&&<span style={{fontSize:chromeFontSize(FS.xxs, mobile),fontWeight:700,color:swatch['#7A1A1A'],background:swatch['#F4DEDE'],border:'1px solid #d8c8a8',padding:'1px 5px',marginLeft:2}}>{cs.imp} impaired</span>}
+                  {!hasImp&&hasDeg&&<span style={{fontSize:chromeFontSize(FS.xxs, mobile),fontWeight:700,color:swatch['#7A3A00'],background:swatch['#FBEAD0'],border:'1px solid #e0c080',padding:'1px 5px',marginLeft:2}}>{cs.deg} reduced</span>}
+                  <span style={{fontSize:chromeFontSize(FS.xxs, mobile),color:isCriminal?'#8a5050':'#9c8068',marginLeft:'auto'}}>{open?'▲':'▼'}</span>
                 </button>
 
                 {open && <div style={{padding:'10px 14px'}}>
-                  {isCriminal&&meta.note&&<p style={{fontSize:FS.xs,color:swatch['#8A5050'],fontStyle:'italic',margin:'0 0 10px',lineHeight:1.5,borderLeft:'2px solid #4a1a1a',paddingLeft:8}}>{meta.note}</p>}
+                  {isCriminal&&meta.note&&<p style={{fontSize:proseFontSize(FS.xs,mobile),color:swatch['#8A5050'],fontStyle:'italic',margin:'0 0 10px',lineHeight:1.5,borderLeft:'2px solid #4a1a1a',paddingLeft:8}}>{meta.note}</p>}
                   <div style={{display:'flex',flexDirection:'column',gap:6}}>
-                    {[...list].sort((a,b) => {
-                      // Impaired items float to top within category
-                      const na = typeof a==='string'?a:a.name||'';
-                      const ia = typeof a==='object'?a.institution||'':'';
-                      const nb = typeof b==='string'?b:b.name||'';
-                      const ib = typeof b==='object'?b.institution||'':'';
-                      const aImp = (impaired.has(na)||impaired.has(ia))?2:(degraded.has(na)||degraded.has(ia))?1:0;
-                      const bImp = (impaired.has(nb)||impaired.has(ib))?2:(degraded.has(nb)||degraded.has(ib))?1:0;
-                      if (bImp!==aImp) return bImp-aImp;
-                      return na.localeCompare(nb);
-                    }).map((svc,i)=>(
-                      <ServiceItem key={i} svc={svc} accent={meta.accent} isCriminal={isCriminal}
-                        tradeDeps={tradeDeps} impaired={impaired} degraded={degraded} vulnerable={vulnerable} depReasons={depReasons} settlement={settlement} chainDepth={serviceChainDepth.get((typeof svc==='string'?svc:svc?.institution||'').toLowerCase())}/>
+                    {/* The comparator is `serviceOrder` at module scope — the DS-SUP-3 join
+                        above resolves the first impaired-house row through the SAME function,
+                        so the sentence cannot land under a row the list did not put first. */}
+                    {[...list].sort(serviceOrder(impaired, degraded)).map((svc,i)=>(
+                      <React.Fragment key={i}>
+                        <ServiceItem svc={svc} accent={meta.accent} isCriminal={isCriminal}
+                          tradeDeps={tradeDeps} impaired={impaired} degraded={degraded} vulnerable={vulnerable} depReasons={depReasons} settlement={settlement} chainDepth={serviceChainDepth.get((typeof svc==='string'?svc:svc?.institution||'').toLowerCase())}/>
+                        {/* ── DS-SUP-3's SECOND LENS, UNDER THE ROW IT NAMES ──────────────
+                            The Defense idiom exactly (DefenseTab's `threatSentenceFor`): the
+                            sentence sits in the list, under the row, OUTSIDE any control — the
+                            row above is a plain card and the category's own toggle is its
+                            header, so nothing here lengthens a button's accessible name and
+                            nothing is folded away. A silent corpus renders nothing (R-DST-K);
+                            the row, its status pill and its chain chip are untouched either
+                            way. */}
+                        {deskProse.impairedService && impairedRow && impairedRow.cat === cat && impairedRow.svc === svc && (
+                          <div data-testid="services-impaired-house-line">
+                            <DeskLines mount={CATALOG_MOUNT} settlementName={settlement?.name}
+                              tier={settlement?.tier} rungs={[deskProse.impairedService]} />
+                          </div>
+                        )}
+                      </React.Fragment>
                     ))}
                   </div>
                 </div>}
@@ -288,7 +385,7 @@ export function ServicesTab({ services, settlement, narrativeNote, publicDossier
           })}
         </div>
 
-        <p style={{fontSize:FS.xs,color:MUTED,marginTop:12,fontStyle:'italic',textAlign:'right'}}>
+        <p style={{fontSize:proseFontSize(FS.xs, mobile),color:MUTED,marginTop:12,fontStyle:'italic',textAlign:'right'}}>
           {totalCount} services · {catOrder.length} categories{totalImpaired>0?` · ${totalImpaired} impaired`:''}{hasCustom?' · custom':''}
         </p>
       </>}

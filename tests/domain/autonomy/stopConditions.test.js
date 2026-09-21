@@ -14,8 +14,8 @@ import {
 import { prepareSignalFrame } from '../../../src/domain/autonomy/signalRegistry.js';
 import { autonomyFixture, deepFreeze } from './fixture.js';
 
-const T = (signalId, test, target = { settlementId: 'ashford' }) =>
-  ({ kind: 'test', signalId, ...target, test });
+const T = (signalId, predicate, target = { settlementId: 'ashford' }) =>
+  ({ kind: 'test', signalId, ...target, test: predicate });
 const cond = (root, label) => ({ version: 1, label, root });
 
 describe('the schema wall (validation)', () => {

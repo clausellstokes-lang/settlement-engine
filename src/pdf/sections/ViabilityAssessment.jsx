@@ -20,7 +20,10 @@ import { Pill } from '../primitives/Pill.jsx';
 import { Callout } from '../primitives/Callout.jsx';
 import { EditableText, EditableProse } from '../primitives/Editable.jsx';
 import { type, palette, space, pt, swatch } from '../theme.js';
-import { cap, label, noteText, smart, humanize, upper, safe } from '../lib/format.js';
+import { cap, label, noteText, smart, humanize, stripZwnj, safe } from '../lib/format.js';
+import { tokenCase } from '../../domain/display/labelCase.js';
+import { viabilityVerdict } from '../../domain/display/viabilityVerdict.js';
+import { StateProse } from '../primitives/StateProse.jsx';
 
 const SEVERITY_TONE = {
   critical: 'bad', severe: 'bad', high: 'bad',
@@ -28,9 +31,9 @@ const SEVERITY_TONE = {
   note: 'muted', info: 'muted', low: 'muted',
 };
 
-export function ViabilityAssessment({ settlement, narrativeMode, vm }) {
+export function ViabilityAssessment({ settlement, narrativeMode, vm, stateProse }) {
   const v = vm.viability;
-  const verdict = verdictOf(v);
+  const verdict = viabilityVerdict(v);
   const issues = v.issues || [];
   const warnings = (v.warnings || []).filter(Boolean);
   const violations = v.structuralViolations || [];
@@ -50,6 +53,9 @@ export function ViabilityAssessment({ settlement, narrativeMode, vm }) {
       <ChapterHeadline tone={viabilityTone(v)}>
         {viabilityHeadline(v)}
       </ChapterHeadline>
+
+      {/* ── The mounted state prose (the screen's ProseBlock positions) ── */}
+      <StateProse stateProse={stateProse} tab="viability" />
 
       {/* ── Verdict callout ────────────────────────────────── */}
       <Callout tone={verdict.tone} kicker="VERDICT" title={verdict.label}>
@@ -215,8 +221,8 @@ export function ViabilityAssessment({ settlement, narrativeMode, vm }) {
             <View key={`vsh-${i}`} style={{ flexDirection: 'row', marginBottom: 2 }} wrap={false}>
               <Text style={{ color: palette.bad, marginRight: 4, fontSize: pt['9'] }}>•</Text>
               <View style={{ flex: 1 }}>
-                <Text style={{ ...type.label, fontSize: pt['7'], color: palette.muted }}>
-                  {upper(humanize(s.label || ''))}
+                <Text style={{ ...type.label_plain, fontSize: pt['7'], color: palette.muted }}>
+                  {tokenCase(stripZwnj(humanize(s.label || '')))}
                 </Text>
                 <EditableText
                   name={`viability.stress.${i}.hook`}
@@ -262,14 +268,13 @@ export function ViabilityAssessment({ settlement, narrativeMode, vm }) {
             >
               <Text
                 style={{
-                  ...type.label,
+                  ...type.label_plain,
                   color: palette.muted,
                   fontSize: pt['7.5'],
                   width: 130,
-                  letterSpacing: 0.2,
                 }}
               >
-                {upper(humanize(k))}
+                {tokenCase(stripZwnj(humanize(k)))}
               </Text>
               <Text style={{ ...type.body, flex: 1, fontSize: pt['9'], color: palette.ink }}>
                 {formatVal(val)}
@@ -337,15 +342,6 @@ function IssueRow({ iss, idx }) {
       </View>
     </View>
   );
-}
-
-function verdictOf(v) {
-  const verdict = (v.verdict || '').toLowerCase();
-  if (v.viable === true || verdict === 'viable') return { tone: 'good', label: 'Viable' };
-  if (v.viable === false || verdict === 'notviable') return { tone: 'bad', label: 'Not Viable' };
-  if (verdict === 'fragile') return { tone: 'warn', label: 'Fragile' };
-  if (verdict === 'collapsing') return { tone: 'bad', label: 'Collapsing' };
-  return { tone: v.verdictTone || 'warn', label: cap(v.verdict || 'Uncertain') };
 }
 
 function formatVal(val) {

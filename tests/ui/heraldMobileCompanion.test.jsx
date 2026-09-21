@@ -5,6 +5,11 @@ import { cleanup, fireEvent, render, screen, waitFor } from '@testing-library/re
 
 const readModelSpy = vi.hoisted(() => vi.fn());
 
+// Purchases OPEN for this file: these pins hold the post-launch behavior of the
+// upgrade CTA (enabled, clickable, exact name). The closed pre-launch state is
+// pinned in tests/components/launchLock.upsells.test.jsx.
+vi.mock('../../src/lib/launchGate.js', async (importOriginal) => ({ ...(await importOriginal()), purchasesOpen: () => true }));
+
 vi.mock('../../src/lib/flags.js', () => ({
   flag: name => name === 'heraldCommandBrief',
 }));
@@ -76,9 +81,12 @@ afterEach(() => {
 });
 
 describe('flagged mobile Herald companion', () => {
+  // Both tiers reach the tier door; only its lock state differs by build (pinned
+  // in launchLock.upsells). The anonymous viewer ALSO gets a live "Sign in",
+  // which is why the pressed control here is named per tier rather than assumed.
   test.each([
-    ['free', /Upgrade to run the Realm/i],
-    ['anon', /Sign in to unlock the Realm/i],
+    ['free', /^See Cartographer$/],
+    ['anon', /^See Cartographer$/],
   ])('keeps the established locked Dashboard and makes no Decisions promise to a %s viewer', async (tier, ctaName) => {
     const onUpgrade = vi.fn();
     readModelSpy.mockReturnValue({
@@ -117,6 +125,30 @@ describe('flagged mobile Herald companion', () => {
     expect(onUpgrade).toHaveBeenCalledTimes(1);
   });
 
+  test('waits for the first advance: a never-advanced premium realm keeps the read-only Dashboard slot', async () => {
+    readModelSpy.mockReturnValue({
+      items: [pendingDecision],
+      ranked: [pendingDecision],
+    });
+
+    render(
+      <RealmMobileGate
+        campaign={{ id: 'campaign-1', worldState: { tick: 0, calendar: { elapsedWeeks: 0 } } }}
+        saves={[]}
+        canManageCampaigns
+        tier="premium"
+        nameById={new Map()}
+      />,
+    );
+
+    expect(await screen.findByTestId('realm-dashboard', {}, { timeout: 3000 })).toBeTruthy();
+    expect(screen.getByText(/a read-only look at the living state of your realm/i)).toBeTruthy();
+    expect(screen.queryByText(/answer decisions/i)).toBeNull();
+    expect(screen.queryByText(/Live decisions are not available on this account/i)).toBeNull();
+    expect(screen.queryByTestId('herald-mobile-companion')).toBeNull();
+    expect(readModelSpy).not.toHaveBeenCalled();
+  });
+
   test('reads the Briefing, opens the existing Decisions body, and returns to its origin', async () => {
     const memberSaves = [{ id: 'save-1', settlement: { name: 'Marchwall' } }];
     readModelSpy.mockReturnValue({
@@ -126,7 +158,9 @@ describe('flagged mobile Herald companion', () => {
 
     render(
       <RealmMobileGate
-        campaign={{ id: 'campaign-1', worldState: {} }}
+        // THE COMPANION WAITS FOR THE FIRST ADVANCE (owner order 2026-09-17): this
+        // realm's clock has moved (tick 7, the decision item's tick), so it is offered.
+        campaign={{ id: 'campaign-1', worldState: { tick: 7 } }}
         saves={memberSaves}
         canManageCampaigns
         tier="premium"
@@ -164,7 +198,7 @@ describe('flagged mobile Herald companion', () => {
     readModelSpy.mockReturnValue({ items: [], ranked: [] });
     render(
       <RealmMobileGate
-        campaign={{ id: 'campaign-1', worldState: {} }}
+        campaign={{ id: 'campaign-1', worldState: { tick: 7 } }}
         saves={[]}
         canManageCampaigns
         tier="premium"

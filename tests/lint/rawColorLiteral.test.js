@@ -64,7 +64,27 @@ const ROOT = join(dirname(fileURLToPath(import.meta.url)), '../..');
 // they carried exactly ONE raw colour between them. That is the renderers having been disciplined
 // about the styles registry, not the ratchet under-counting; measured out of its own red run
 // ("expected 1329 to be 1330"), never inferred from the file count.
-const BUDGET = 1329; // committed raw-color-literal occurrences — EXACT. Lower on a shrink; never raise.
+// LOWERED 1329 → 1326 on 2026-09-16 by THE PAINTED ARROW HEADER (owner orders: "Replace the arrow
+// ribbon entirely with the following image"): three occurrences left with
+// src/components/nav/FletchBand.jsx, the procedural fletching's SVG band, deleted with the rest of
+// the ribbon. Nothing was re-tokenised; the new header adds none (its art is the owner's painting).
+// Measured out of its own red run ("raw color literals: 1326 (committed 1329)") and attributed by
+// re-executing this file's counter on the deleted module (3) and on every other retired or new
+// header module (0 each).
+// LOWERED 1329 → 1320 on 2026-09-16 by the COMPENDIUM TRIM (owner order: the map lenses and
+// interior pages removed from the Compendium): nine `accent="#…"` Card literals left with the
+// Lenses hub (five: furniture, hazard glyphs, anchor glyphs, contrast levels, district
+// categories) and the Facets hub (four: natures, interior, room and furnishing kinds) in
+// src/components/compendium/CatalogHubs.jsx. Nothing was re-tokenised; the hubs are gone.
+// Measured out of its own red run ("expected 1320 to be 1329").
+// COMBINED on the arrow-header branch (both landings stacked): 1329 - 3 - 9 = 1317, measured below.
+// LOWERED 1317 → 1313 on 2026-09-17 by THE PADLOCK REMOVAL (owner order: "remove the other
+// padlocks"): the never-rendered LOCKED kind left src/components/primitives/StateBadge.jsx with
+// its three literals (bg, fg, border), and the roster-row padlock left
+// src/components/new/npcComponents.jsx with its one unlocked-glyph colour (`'#b8a898'`; the
+// pin beside it keeps its own). Nothing was re-tokenised; the controls are gone. Measured out of
+// its own red run ("raw color literals: 1313 (committed 1317)").
+const BUDGET = 1303; // committed raw-color-literal occurrences. EXACT. Lower on a shrink; never raise. 1313 -> 1303 on 2026-09-19: the fixes consist's label ladder and the band-primitive deletion removed ten raw literals.
 // Pure-hex TEMPLATE elements are their OWN population with their OWN number. They are NOT
 // folded into BUDGET: one number per population, so a future movement stays attributable to
 // the population that moved. Today's single occurrence is real debt, not a placeholder —

@@ -42,6 +42,9 @@ import {
   storyItems,
 } from './heraldCommandSelectors.js';
 import { specialistSectionForStoryTopic } from './heraldCommandSourceParity.js';
+import { edged } from '../../design/edgedBox.js';
+import useIsMobile from '../../hooks/useIsMobile.js';
+import { chromeFontSize } from '../../design/proseScale.js';
 
 /**
  * Bound the initial archive DOM independently of campaign history depth. The
@@ -79,10 +82,10 @@ const SECTION_HEADER_STYLE = Object.freeze({
   paddingBottom: SP.xs,
 });
 
-const SECTION_LABEL_STYLE = Object.freeze({
+const sectionLabelStyle = (mobile) => ({
   color: SECOND,
   fontFamily: sans,
-  fontSize: FS.xs,
+  fontSize: chromeFontSize(FS.xs, mobile),
   fontWeight: 900,
   textTransform: 'uppercase',
   letterSpacing: '0.06em',
@@ -100,12 +103,12 @@ const SPECIALIST_DISCLOSURE_STYLE = Object.freeze({
   background: CARD_ALT,
 });
 
-const SPECIALIST_SUMMARY_STYLE = Object.freeze({
+const specialistSummaryStyle = (mobile) => ({
   cursor: 'pointer',
   padding: SP.sm,
   color: SECOND,
   fontFamily: sans,
-  fontSize: FS.xs,
+  fontSize: chromeFontSize(FS.xs, mobile),
   fontWeight: 900,
 });
 
@@ -241,6 +244,7 @@ function CommandDestination({ origin, onReturn, children }) {
 }
 
 function BriefingCard({ item, onSection, lead = false }) {
+  const mobile = useIsMobile();
   const attention = item?.attention || {};
   const attentionClass = text(attention.class) || 'routine_record';
   const blocking = attention.blocking === true;
@@ -272,8 +276,8 @@ function BriefingCard({ item, onSection, lead = false }) {
         display: 'grid',
         gap: SP.xs,
         padding: SP.sm,
-        border: `1px solid ${blocking ? GOLD : BORDER}`,
-        borderLeft: `3px solid ${blocking ? RED : BORDER2}`,
+        // LONGHANDS ONLY — the shorthand varies with `blocking` (see the walker).
+        ...edged(`1px solid ${blocking ? GOLD : BORDER}`, `3px solid ${blocking ? RED : BORDER2}`),
         background: CARD_ALT,
       }}
     >
@@ -285,7 +289,7 @@ function BriefingCard({ item, onSection, lead = false }) {
             style={{
               color: INK,
               fontFamily: sans,
-              fontSize: FS.micro,
+              fontSize: chromeFontSize(FS.micro, mobile),
               fontWeight: 900,
               textTransform: 'uppercase',
               letterSpacing: '0.05em',
@@ -297,7 +301,7 @@ function BriefingCard({ item, onSection, lead = false }) {
         <span style={{
           color: blocking ? RED : SECOND,
           fontFamily: sans,
-          fontSize: FS.micro,
+          fontSize: chromeFontSize(FS.micro, mobile),
           fontWeight: 900,
           textTransform: 'uppercase',
           letterSpacing: '0.05em',
@@ -321,7 +325,7 @@ function BriefingCard({ item, onSection, lead = false }) {
       <div style={{
         color: BODY,
         fontFamily: sans,
-        fontSize: FS.xxs,
+        fontSize: chromeFontSize(FS.xxs, mobile),
         fontWeight: 700,
         lineHeight: 1.45,
       }}>
@@ -355,12 +359,13 @@ function BriefingCard({ item, onSection, lead = false }) {
 }
 
 function BriefingView({ items, onSection }) {
+  const mobile = useIsMobile();
   const promoted = briefingItems(items);
   const decisions = decisionItems(items);
   return (
     <div data-testid="herald-command-briefing" style={{ display: 'grid', gap: SP.md }}>
       <div style={{ ...SECTION_HEADER_STYLE, alignItems: 'baseline' }}>
-        <span style={SECTION_LABEL_STYLE}>The morning brief</span>
+        <span style={sectionLabelStyle(mobile)}>The morning brief</span>
         {decisions.length > 0 && (
           <Pill tone="major">{decisions.length} awaiting your word</Pill>
         )}
@@ -386,6 +391,7 @@ function BriefingView({ items, onSection }) {
 }
 
 function StoryCard({ item, campaign, nameById }) {
+  const mobile = useIsMobile();
   const topic = item?.topic?.primary;
   const tags = [
     TOPIC_LABELS[topic] || 'Realm',
@@ -410,7 +416,7 @@ function StoryCard({ item, campaign, nameById }) {
           style={{
             color: MUTED,
             fontFamily: sans,
-            fontSize: FS.micro,
+            fontSize: chromeFontSize(FS.micro, mobile),
             fontWeight: 750,
           }}
         >
@@ -423,7 +429,7 @@ function StoryCard({ item, campaign, nameById }) {
           style={{
             color: MUTED,
             fontFamily: sans,
-            fontSize: FS.micro,
+            fontSize: chromeFontSize(FS.micro, mobile),
             fontWeight: 750,
           }}
         >
@@ -441,6 +447,7 @@ function StoriesView({
   nameById,
   legacyBodyProps,
 }) {
+  const mobile = useIsMobile();
   const stories = storyItems(items, topic);
   const specialistSection = specialistSectionForStoryTopic(topic);
   const [visibleCount, setVisibleCount] = useState(HERALD_ARCHIVE_PAGE_SIZE);
@@ -457,7 +464,7 @@ function StoriesView({
           style={{ display: 'grid', gap: SP.sm }}
         >
           <div style={SECTION_HEADER_STYLE}>
-            <span style={SECTION_LABEL_STYLE}>
+            <span style={sectionLabelStyle(mobile)}>
               {TOPIC_LABELS[specialistSection]} desk
             </span>
           </div>
@@ -466,14 +473,14 @@ function StoriesView({
       )}
       <div style={SECTION_HEADER_STYLE}>
         <BookOpen size={14} color={SECOND} aria-hidden="true" />
-        <span style={SECTION_LABEL_STYLE}>
+        <span style={sectionLabelStyle(mobile)}>
           {topicLabel ? `${topicLabel} stories` : 'The complete archive'}
         </span>
         <span style={{
           marginLeft: 'auto',
           color: MUTED,
           fontFamily: sans,
-          fontSize: FS.micro,
+          fontSize: chromeFontSize(FS.micro, mobile),
           fontWeight: 850,
         }}>
           {stories.length}
@@ -509,7 +516,7 @@ function StoriesView({
                 style={{
                   color: MUTED,
                   fontFamily: sans,
-                  fontSize: FS.micro,
+                  fontSize: chromeFontSize(FS.micro, mobile),
                   fontWeight: 750,
                 }}
               >
@@ -560,6 +567,7 @@ export default function HeraldCommandBody({
   returnToOrigin = null,
   onReturnToOrigin,
 }) {
+  const mobile = useIsMobile();
   const baseItems = view === 'briefing' ? realmModel?.ranked : realmModel?.items;
   const visibleItems = filterRealmItems(baseItems || [], {
     focusId,
@@ -608,7 +616,7 @@ export default function HeraldCommandBody({
           data-herald-source-owner="dashboard"
           style={SPECIALIST_DISCLOSURE_STYLE}
         >
-          <summary style={SPECIALIST_SUMMARY_STYLE}>
+          <summary style={specialistSummaryStyle(mobile)}>
             Realm overview and session prep
           </summary>
           <div style={{ padding: SP.sm, borderTop: `1px solid ${BORDER}` }}>
@@ -641,7 +649,7 @@ export default function HeraldCommandBody({
             gap: 7,
             alignItems: 'center',
             flexWrap: 'wrap',
-            ...SECTION_LABEL_STYLE,
+            ...sectionLabelStyle(mobile),
           }}>
             <Clock3 size={14} aria-hidden="true" /> Plans and outlook
           </div>

@@ -17,6 +17,8 @@ import { GOLD, GOLD_BG, INK, sans, FS } from '../theme.js';
 import { ConfirmDialog } from '../primitives/Dialog.jsx';
 import Button from '../primitives/Button.jsx';
 import { t } from '../../copy/index.js';
+import useIsMobile from '../../hooks/useIsMobile.js';
+import { chromeFontSize } from '../../design/proseScale.js';
 
 const COLORS = {
   draft: { bg: '#f3ead8', fg: '#6a4a1c', border: '#c8a96a', label: 'Draft' },
@@ -33,6 +35,7 @@ const COLORS = {
  *   inline Mark Canon / Reset affordance where the Actions rail is not shown.
  */
 export default function PhaseBadge({ chipOnly = false }) {
+  const mobile = useIsMobile();
   const phase     = useStore(s => s.phase);
   const canonize  = useStore(s => s.canonize);
   const uncanonize = useStore(s => s.uncanonize);
@@ -84,10 +87,11 @@ export default function PhaseBadge({ chipOnly = false }) {
             padding: '3px 8px',
             background: c.bg, color: c.fg,
             border: `1px solid ${c.border}`,
-            fontSize: FS.xs, fontWeight: 800, fontFamily: sans, letterSpacing: '0.04em',
+            fontSize: chromeFontSize(FS.xs, mobile), fontWeight: 800, fontFamily: sans, letterSpacing: '0.04em',
           }}
         >
-          {c.label.toUpperCase()}
+          {/* Rung 3: COLORS already writes 'Draft'/'Canon'; the transform was the shout. */}
+          {c.label}
           {phase === 'canon' && eventCount > 0 && (
             <span style={{ opacity: 0.7, marginLeft: 4 }}>· {eventCount}</span>
           )}
@@ -120,7 +124,7 @@ export default function PhaseBadge({ chipOnly = false }) {
               padding: '3px 8px',
               background: GOLD_BG, color: INK,
               border: `1px solid ${GOLD}`,
-              fontSize: FS.xs, fontWeight: 700, fontFamily: sans,
+              fontSize: chromeFontSize(FS.xs, mobile), fontWeight: 700, fontFamily: sans,
             }}
           >
             Clock-bound

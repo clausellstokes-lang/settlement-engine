@@ -23,6 +23,7 @@ import Pill from '../primitives/Pill.jsx';
 import useIsMobile from '../../hooks/useIsMobile.js';
 import {
   GOLD_TXT, INK, SECOND, BODY, BORDER, BORDER2, CARD_HDR, RED, sans, FS, SP, swatch } from '../theme.js';
+import { chromeFontSize } from '../../design/proseScale.js';
 
 const CATEGORIES = ['general', 'billing', 'bug', 'account', 'gallery', 'feature', 'other'];
 const PRIORITIES = ['low', 'normal', 'high', 'urgent'];
@@ -67,6 +68,7 @@ export default function AccountTickets({ operatorMessage = null }) {
   // Mobile reflow: stack the two-up category/priority row, let the ticket reply
   // box pin its Send button below the textarea, and wrap long ticket subjects
   // instead of truncating them. All guarded so desktop renders byte-identical.
+  const mobile = useIsMobile();
   const isMobile = useIsMobile();
   const [view, setView] = useState('list');   // 'list' | 'create' | 'thread'
   const [tickets, setTickets] = useState([]);
@@ -238,7 +240,7 @@ export default function AccountTickets({ operatorMessage = null }) {
                   background: swatch.white, whiteSpace: 'normal',
                 }}>
                 <span style={{ flex: 1, minWidth: 0 }}>
-                  <span style={{ fontSize: FS.xxs, color: BODY, fontFamily: sans }}>{t.ticket_number}</span>
+                  <span style={{ fontSize: chromeFontSize(FS.xxs, mobile), color: BODY, fontFamily: sans }}>{t.ticket_number}</span>
                   <span style={{ display: 'block', fontSize: FS.sm, fontWeight: 600, color: INK, overflow: 'hidden', textOverflow: isMobile ? 'clip' : 'ellipsis', whiteSpace: isMobile ? 'normal' : 'nowrap' }}>
                     {t.subject}
                   </span>
@@ -259,14 +261,14 @@ export default function AccountTickets({ operatorMessage = null }) {
             </div>
           )}
           <div style={{ display: 'flex', flexDirection: isMobile ? 'column' : 'row', gap: SP.sm }}>
-            <label htmlFor="ticket-category" style={{ flex: 1, fontSize: FS.xs, color: BODY, fontFamily: sans }}>
+            <label htmlFor="ticket-category" style={{ flex: 1, fontSize: chromeFontSize(FS.xs, mobile), color: BODY, fontFamily: sans }}>
               Category
               <select id="ticket-category" value={category} onChange={(e) => setCategory(e.target.value)}
                 style={{ ...inputStyle, marginTop: 2 }}>
                 {CATEGORIES.map((c) => <option key={c} value={c}>{c}</option>)}
               </select>
             </label>
-            <label htmlFor="ticket-priority" style={{ flex: 1, fontSize: FS.xs, color: BODY, fontFamily: sans }}>
+            <label htmlFor="ticket-priority" style={{ flex: 1, fontSize: chromeFontSize(FS.xs, mobile), color: BODY, fontFamily: sans }}>
               Priority
               <select id="ticket-priority" value={priority} onChange={(e) => setPriority(e.target.value)}
                 style={{ ...inputStyle, marginTop: 2 }}>
@@ -294,7 +296,7 @@ export default function AccountTickets({ operatorMessage = null }) {
       {view === 'thread' && active && (
         <div style={{ display: 'flex', flexDirection: 'column', gap: SP.sm }}>
           <div style={{ display: 'flex', alignItems: 'baseline', gap: SP.sm, flexWrap: 'wrap' }}>
-            <span style={{ fontSize: FS.xs, color: BODY, fontFamily: sans }}>{active.ticket_number}</span>
+            <span style={{ fontSize: chromeFontSize(FS.xs, mobile), color: BODY, fontFamily: sans }}>{active.ticket_number}</span>
             <span style={{ fontSize: FS.md, fontWeight: 700, color: INK, fontFamily: sans, flex: 1 }}>
               {active.subject}
             </span>
@@ -322,7 +324,7 @@ export default function AccountTickets({ operatorMessage = null }) {
                   alignSelf: fromAgent ? 'flex-start' : 'flex-end',
                   maxWidth: '85%',
                 }}>
-                  <div style={{ fontSize: FS.xxs, color: BODY, fontFamily: sans, marginBottom: 2 }}>
+                  <div style={{ fontSize: chromeFontSize(FS.xxs, mobile), color: BODY, fontFamily: sans, marginBottom: 2 }}>
                     {fromAgent ? 'Support' : 'You'}
                     {ev.kind === 'status_change' ? ' · update' : ''}
                   </div>

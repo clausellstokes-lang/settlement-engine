@@ -46,6 +46,14 @@
  */
 import React from 'react';
 import { normalizeSettlement } from '../domain/normalizeSettlement.js';
+// ⭐ THE MOUNTED STATE PROSE, BUILT HERE AND NOT IN THE DOCUMENT (owner order "impliment
+// every fix", 2026-09-18). `src/pdf/**` renders INSIDE the worker, whose bundle is fetched
+// during the export the user is already waiting on; the corpus leaves behind this builder are
+// ~300 kB and have no business in it. Building on the caller's thread and posting STRINGS
+// keeps the worker bundle exactly the size it was, keeps the props structured-cloneable, and
+// keeps the first-paint closure that tests/build/vendorPdfLazy.test.js prices untouched —
+// this module is only ever reached by dynamic import().
+import { buildPrintProse } from '../domain/display/stateProse/printProse.js';
 import { slugify } from '../kernel/slugify.js';
 import { track, EVENTS } from '../lib/analytics.js';
 import { captureFingerprint } from '../lib/researchCapture.js';
@@ -209,6 +217,13 @@ async function renderPdfBlobOnMainThread(props) {
       setTimeout(resolve, 0);
     }
   });
+  // ⛔ THE VENDOR GLOBALS, ON THIS PATH TOO. The worker imports pdfWorkerShim first
+  // for `window`; the `Buffer` half of that shim is NOT worker-specific — the missing
+  // global is read by @react-pdf/layout's image path wherever it runs, so the main
+  // thread needs it exactly as much (see the shim's docblock). Dynamic, and awaited
+  // BEFORE the renderer resolves, so the eager first-paint closure is untouched and
+  // the global is in place before any render reads it.
+  await import('./pdfWorkerShim.js');
   const [{ pdf }, { SettlementPDF }] = await Promise.all([
     import('@react-pdf/renderer'),
     import('../pdf/SettlementPDF.jsx'),
@@ -290,6 +305,18 @@ export async function generateSettlementPDF(settlement, options = {}) {
     // carries them exactly as the main-thread fallback does.
     now,
     creationDate,
+    // The screen's fifty-one sentence-rung positions, woven, as `{ tab: { mount: paragraph } }`.
+    // Built from the NORMALIZED record so the export and the screen read one shape, and fed
+    // the campaign's world state when the export carries one — absent, the two world-fed
+    // lenses (DS-STR-2's lifecycle and origin) fall silent, which is what an unplayed world
+    // honestly is. Plain strings only, so the worker's structured clone is untouched and the
+    // main-thread fallback receives the identical props object.
+    stateProse: buildPrintProse(normalizedSettlement, {
+      worldState: campaign?.worldState || null,
+      // The premium faith seam, so the builder withholds the two deity-naming positions on a
+      // free / lapsed / anonymous export exactly as the Faith & War chapter withholds itself.
+      faithUnlocked,
+    }),
   };
 
   let blob;

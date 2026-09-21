@@ -12,6 +12,11 @@
 import { describe, it, expect, afterEach, vi } from 'vitest';
 import { render, screen, cleanup, fireEvent } from '@testing-library/react';
 import SaveQuotaMeter, { PREMIUM_PITCH } from '../../src/components/settlements/SaveQuotaMeter.jsx';
+import { FREE_SAVE_LIMIT } from '../../src/config/tierFacts.js';
+
+// These pins describe the funnel as it behaves once purchases open (lib/launchGate.js).
+// The pre-launch closed state is pinned in launchLock.libraryHeaderLanding.test.jsx.
+vi.mock('../../src/lib/launchGate.js', async (importOriginal) => ({ ...(await importOriginal()), purchasesOpen: () => true }));
 
 afterEach(cleanup);
 
@@ -37,10 +42,19 @@ describe('SaveQuotaMeter — no size gate', () => {
 });
 
 describe('SaveQuotaMeter — tier states', () => {
-  it('anon → "Sign in to save", no meter, Sign in CTA', () => {
+  // The anon line names the two facts that decide whether a visitor signs up:
+  // the account is FREE, and it holds a bounded number of settlements. The
+  // number is the DERIVED free-tier cap, never a hand-typed digit — `max` is 0
+  // for anon, so the promise cannot be read off this viewer's own quota.
+  it('anon → a free account and the derived save cap, no meter, Sign in CTA', () => {
     const onSignIn = vi.fn();
     render(<SaveQuotaMeter tier="anon" used={0} max={0} onSignIn={onSignIn} />);
-    expect((screen.getByTestId('quota-label').textContent || '')).toMatch(/Sign in to save/i);
+    const label = screen.getByTestId('quota-label').textContent || '';
+    expect(label).toMatch(/Sign in free/i);
+    expect(label).toContain(`save up to ${FREE_SAVE_LIMIT} settlements`);
+    expect(label).toMatch(/keep them across sessions/i);
+    // anchored: the two assertions above prove the label is the live anon line AND already carries the free cap, so a missing 0 cannot mean a vanished label
+    expect(label).not.toMatch(/\b0\b/);
     expect(screen.queryByTestId('quota-bar')).toBeNull();
     fireEvent.click(screen.getByText('Sign in'));
     expect(onSignIn).toHaveBeenCalled();

@@ -181,7 +181,7 @@ function buildSettlementMap(snapshot, localSettlements) {
     map.set(String(item.id), {
       saveId: String(item.id),
       save: item.save,
-      settlement: localSettlements.get(String(item.id)) || item.settlement,
+      settlement: localSettlements.get(String(item.id)) || item.save?.settlement || item.settlement,
     });
   }
   return map;
@@ -576,7 +576,7 @@ export function simulateCampaignWorldPulse({ campaign, saves = [], interval = 'o
     // and this line is byte-identical to the one it replaced. `;`-joined at +0 effective
     // lines against the frozen ceiling.
     const sieged = applyBlockadeTransportImpairment(stocked.settlement, blockade, { now }); const vaulted = advanceTreasury(sieged, { interval: tickInterval, tick: worldState.tick, deployment, blockade, rules: simulationRules }); if (vaulted.summary?.legitimacyDelta) treasuryLegitimacyDeltas.set(String(item.id), vaulted.summary.legitimacyDelta); if (vaulted.summary?.shortfall || vaulted.summary?.bandCrossed) treasuryNewsStates.push({ id: String(item.id), name: item.name || String(item.id), powerStructure: vaulted.settlement?.powerStructure, band: vaulted.summary.band, previousBand: vaulted.summary.previousBand, bandCrossed: vaulted.summary.bandCrossed, shortfall: vaulted.summary.shortfall > 0, suspension: vaulted.summary.suspension });
-    localSettlements.set(String(item.id), vaulted.settlement);
+    localSettlements.set(String(item.id), item.save?.settlement?.npcs && item.save.settlement.npcs !== item.settlement?.npcs ? { ...vaulted.settlement, npcs: item.save.settlement.npcs } : vaulted.settlement);
     // Merge rather than replace: advanceTime only returns { clockStages }, but
     // this entry also carries cross-tick drift streaks (tierDrift,
     // economyDrift) written by later evaluators — a wholesale assignment wiped

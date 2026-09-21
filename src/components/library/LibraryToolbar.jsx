@@ -29,6 +29,7 @@ import IconButton from '../primitives/IconButton.jsx';
 import Segmented from '../primitives/Segmented.jsx';
 import BottomSheet from '../primitives/BottomSheet.jsx';
 import useIsMobile from '../../hooks/useIsMobile.js';
+import { chromeFontSize } from '../../design/proseScale.js';
 
 /** Sort options. Stable keys; renames break callers. */
 export const SORT_OPTIONS = Object.freeze({
@@ -174,6 +175,7 @@ export default function LibraryToolbar({
   onToggleSelectMode,
   minimal = false,
 }) {
+  const mobile = useIsMobile();
   const [filtersOpen, setFiltersOpen] = useState(false);
   const isMobile = useIsMobile();
   const toggleFilter = (key) => setFilters({ ...filters, [key]: !filters[key] });
@@ -244,7 +246,7 @@ export default function LibraryToolbar({
       <div style={{
         padding: SP.sm, background: PARCH,
         display: 'flex', alignItems: 'center', gap: SP.xs,
-        fontFamily: sans, fontSize: FS.xs, color: INK,
+        fontFamily: sans, fontSize: chromeFontSize(FS.xs, mobile), color: INK,
       }}>
         <div style={{
           flex: 1, minWidth: 0, minHeight: 44, boxSizing: 'border-box',
@@ -282,7 +284,7 @@ export default function LibraryToolbar({
         background: PARCH,
         borderRadius: R.sm,
         display: 'flex', flexDirection: 'column', gap: SP.sm,
-        fontFamily: sans, fontSize: FS.xs, color: INK,
+        fontFamily: sans, fontSize: chromeFontSize(FS.xs, mobile), color: INK,
       }}>
         {/* Search — full width on its own line so the input isn't squeezed. */}
         <div style={{
@@ -343,7 +345,7 @@ export default function LibraryToolbar({
           >
             <div style={{ display: 'flex', flexDirection: 'column', gap: SP.md, fontFamily: sans, fontSize: FS.sm, color: INK }}>
               <div>
-                <div style={{ fontSize: FS.xs, fontWeight: 700, color: MUTED, textTransform: 'uppercase', letterSpacing: '0.06em', marginBottom: SP.xs }}>Phase</div>
+                <div style={{ fontSize: chromeFontSize(FS.xs, mobile), fontWeight: 700, color: MUTED, textTransform: 'uppercase', letterSpacing: '0.06em', marginBottom: SP.xs }}>Phase</div>
                 {phaseSegment}
               </div>
               <div
@@ -369,7 +371,7 @@ export default function LibraryToolbar({
               Select
             </Button>
           )}
-          <span style={{ marginLeft: 'auto', fontSize: FS.xs, color: BODY }}>
+          <span style={{ marginLeft: 'auto', fontSize: chromeFontSize(FS.xs, mobile), color: BODY }}>
             {visibleCount === totalCount
               ? `${totalCount} settlement${totalCount === 1 ? '' : 's'}`
               : `${visibleCount} of ${totalCount}`}
@@ -389,7 +391,7 @@ export default function LibraryToolbar({
       background: PARCH,
       borderRadius: R.sm,
       display: 'flex', alignItems: 'center', gap: SP.sm, flexWrap: 'wrap',
-      fontFamily: sans, fontSize: FS.xs, color: INK,
+      fontFamily: sans, fontSize: chromeFontSize(FS.xs, mobile), color: INK,
     }}>
       {/* Search */}
       <div style={{
@@ -409,7 +411,7 @@ export default function LibraryToolbar({
           style={{
             flex: 1, border: 'none', outline: 'none',
             background: 'transparent', fontFamily: sans,
-            fontSize: FS.xs, color: INK,
+            fontSize: chromeFontSize(FS.xs, mobile), color: INK,
           }}
         />
         {query && (
@@ -440,7 +442,7 @@ export default function LibraryToolbar({
           onChange={(e) => setSort(e.target.value)}
           style={{
             background: 'transparent', border: 'none', outline: 'none',
-            fontFamily: sans, fontSize: FS.xs, color: INK, fontWeight: 600,
+            fontFamily: sans, fontSize: chromeFontSize(FS.xs, mobile), color: INK, fontWeight: 600,
             cursor: 'pointer',
           }}
         >
@@ -496,7 +498,7 @@ export default function LibraryToolbar({
           the visible/total count is a scan fact the GM reads, not chrome (P7). */}
       <span style={{
         marginLeft: 'auto',
-        fontSize: FS.xs, color: BODY,
+        fontSize: chromeFontSize(FS.xs, mobile), color: BODY,
       }}>
         {visibleCount === totalCount
           ? `${totalCount} settlement${totalCount === 1 ? '' : 's'}`

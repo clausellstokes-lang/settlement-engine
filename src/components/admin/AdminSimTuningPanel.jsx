@@ -41,6 +41,8 @@ import { normalizeSimulationRules } from '../../domain/worldPulse/simulationRule
 import { Card, BarList, MiniTable, Empty, Select } from './AdminTrendsCharts.jsx';
 import Button from '../primitives/Button.jsx';
 import { MUTED, GREEN, RED, sans, FS, SP } from '../theme.js';
+import useIsMobile from '../../hooks/useIsMobile.js';
+import { proseFontSize } from '../../design/proseScale.js';
 
 /** Member settlement items ({ id, settlement }) for a campaign, from the store roster. */
 function membersOf(campaign, savedSettlements) {
@@ -100,6 +102,7 @@ function dormancyReport(campaign) {
 }
 
 export default function AdminSimTuningPanel() {
+  const mobile = useIsMobile();
   const campaigns = useStore(s => s.campaigns);
   const savedSettlements = useStore(s => s.savedSettlements);
   const [campaignId, setCampaignId] = useState('');
@@ -156,7 +159,7 @@ export default function AdminSimTuningPanel() {
           <div style={{ fontFamily: sans, fontSize: FS.sm, fontWeight: 800, color: auditResult.ok ? GREEN : RED, marginBottom: SP.sm }}>
             {auditResult.ok ? '✓ Pass. No covert or GM state leaks to a player view.' : '✗ Fail. A covert leak was detected.'}
           </div>
-          <ul style={{ margin: 0, paddingLeft: 18, fontFamily: sans, fontSize: FS.xs, color: MUTED, lineHeight: 1.7 }}>
+          <ul style={{ margin: 0, paddingLeft: 18, fontFamily: sans, fontSize: proseFontSize(FS.xs, mobile), color: MUTED, lineHeight: 1.7 }}>
             {auditResult.checks.map((c, i) => (
               <li key={i} style={{ color: c.pass ? MUTED : RED }}>{c.pass ? '✓' : '✗'} {c.label}</li>
             ))}

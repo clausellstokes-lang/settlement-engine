@@ -18,12 +18,16 @@ import { settlementSignals, healthPip } from './livingWorldSignals.js';
 import LivingWorldSignalRow from './LivingWorldSignalRow.jsx';
 import HealthPip from './HealthPip.jsx';
 import Button from '../primitives/Button.jsx';
+import AvailableAtLaunchPill from '../primitives/AvailableAtLaunchPill.jsx';
 import IconButton from '../primitives/IconButton.jsx';
 import DeleteConfirmation from '../DeleteConfirmation';
 import { emblem } from '../../design/organic/ornament/compose.js';
 import { useStore } from '../../store/index.js';
-import { relColor } from './relationshipColors.js';
+import { relColor } from '../../domain/display/relationshipColors.js';
 import { track, EVENTS } from '../../lib/analytics.js';
+import { purchasesOpen } from '../../lib/launchGate.js';
+import useIsMobile from '../../hooks/useIsMobile.js';
+import { chromeFontSize } from '../../design/proseScale.js';
 
 // Relationship-type swatch for the neighbour chips. §67.2: the inline copy that
 // stood here was NOT a cosmetic duplicate — it rendered `allied` in the canonical
@@ -37,7 +41,7 @@ import { track, EVENTS } from '../../lib/analytics.js';
 // cramped). No rounded fills, no elevation: depth is a rule of ink, not a shadow.
 const LEDGER_CELL = { padding: `${SP.sm}px ${SP.md}px`, borderTop: `1px solid ${BORDER}`, verticalAlign: 'top' };
 // The small-caps rubric — the ledger's head/marker voice (Organic Craft law §2).
-const RUBRIC = { fontFamily: sans, fontSize: FS.xs, fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.06em' };
+const rubric = (mobile) => ({ fontFamily: sans, fontSize: chromeFontSize(FS.xs, mobile), fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.06em' });
 // Visually-hidden but focusable/clickable — the real checkbox behind the inked
 // margin tally. The label wraps both input + glyph, so a click on the glyph (or
 // keyboard focus + space) toggles the input; the tally is a pure visual re-vehicle.
@@ -48,9 +52,13 @@ const TALLY_INPUT_HIDDEN = { position: 'absolute', width: 1, height: 1, margin: 
 // it in a <table class ledger>, so a bare-mounted card is a <tr> under the test's
 // container (jsdom-tolerant; every query is by text/label/testid, not tag).
 export function SettlementCard({ s, allModifiers, onView, deleteId, setDeleteId, deleteConfirmed, campaigns, addToCampaign, removeFromCampaign, currentCampaignId, regionalCounts, onReactivate, canReactivate, reactivatingId, onCanonize, worldState = null, regionalGraph = null, nameFor, onAdvanceTime, onCreateCampaign, onNavigate, canManageCampaigns = false, selectMode = false, selected = false, onToggleSelect }) {
+  const mobile = useIsMobile();
   const [menuOpen, setMenuOpen] = useState(false);
   const [destroyOpen, setDestroyOpen] = useState(false);
   const menuRef = useRef(null);
+  // Pre-launch lockout (lib/launchGate.js): the two upgrade routes on this row
+  // render disabled and wear the pill until purchases open.
+  const purchasesAreOpen = purchasesOpen();
   const ts = (t) => {
     // An absent or unparseable timestamp must NEVER render the literal "Invalid
     // Date": new Date(undefined).toLocaleDateString() returns that string WITHOUT
@@ -200,7 +208,7 @@ export function SettlementCard({ s, allModifiers, onView, deleteId, setDeleteId,
   const rowBg = active ? undefined : swatch['#EEE9DF'];
   // Column count for the full-width confirmation / recovery rows. The tally column
   // exists only in select mode: [tally?] settlement · tier · phase · standing · actions.
-  const colCount = (selectMode ? 1 : 0) + 4 + 1;
+  const colCount = (selectMode ? 1 : 0) + (mobile ? 2 : 4) + 1;
 
   return (
     <>
@@ -235,7 +243,7 @@ export function SettlementCard({ s, allModifiers, onView, deleteId, setDeleteId,
                 aria-label={`Select ${s.name}`}
                 style={TALLY_INPUT_HIDDEN}
               />
-              <span aria-hidden="true" style={{ width:14, height:14, flexShrink:0, display:'inline-flex', alignItems:'center', justifyContent:'center', border:`1px solid ${selected ? GOLD : BORDER}`, color:GOLD, fontSize:FS.xs, fontWeight:800, lineHeight:1, opacity: active ? 1 : 0.5 }}>{selected ? '✓' : ''}</span>
+              <span aria-hidden="true" style={{ width:14, height:14, flexShrink:0, display:'inline-flex', alignItems:'center', justifyContent:'center', border:`1px solid ${selected ? GOLD : BORDER}`, color:GOLD, fontSize:chromeFontSize(FS.xs, mobile), fontWeight:800, lineHeight:1, opacity: active ? 1 : 0.5 }}>{selected ? '✓' : ''}</span>
             </label>
           </td>
         )}
@@ -250,6 +258,27 @@ export function SettlementCard({ s, allModifiers, onView, deleteId, setDeleteId,
             {/* "name · world" — the owning campaign after the interpunct. */}
             {campaignName && <span style={{ fontSize:FS.sm, color:SECOND, whiteSpace:'nowrap', flexShrink:0 }}><span aria-hidden="true">· </span>{campaignName}</span>}
           </div>
+          {/* ⛔ THE FOLDED COLUMNS (browser pass 3, 2026-09-19). At phone width the Size and
+              Status cells below do not render — six columns of ledger measured 547 px inside a
+              375 px viewport, which put the page into horizontal scroll and pushed Health and
+              the Open button off the right edge (§934.26: every control reachable on the
+              phone, no horizontal page scroll). The two facts are NOT dropped, they move here,
+              which is the difference between collapsing a ledger and losing a column. */}
+          {mobile && (
+            <div style={{ marginTop:2, display:'flex', alignItems:'baseline', gap:SP.xs, flexWrap:'wrap', fontSize:FS.sm, color:BODY }}>
+              <span style={{ textTransform:'capitalize' }}>{s.tier}</span>
+              <span aria-hidden="true" style={{ color:MUTED }}>·</span>
+              {isCanon
+                ? <span style={{ ...rubric(mobile), color:GOLD_TXT }}>Canon</span>
+                : <span style={{ color:SECOND }}>Draft</span>}
+              {alreadyDestroyed && (
+                <>
+                  <span aria-hidden="true" style={{ color:MUTED }}>·</span>
+                  <span style={{ ...rubric(mobile), color:swatch.danger }}>Destroyed</span>
+                </>
+              )}
+            </div>
+          )}
           {/* Memo-line — the settlement's live situation, in the surveyor's italic. */}
           {memoLine && <div style={{ marginTop:2, fontStyle:'italic', fontSize:FS.sm, color:SECOND }}>{memoLine}</div>}
 
@@ -261,23 +290,26 @@ export function SettlementCard({ s, allModifiers, onView, deleteId, setDeleteId,
             {/* Living-world signal row (self-gating — nothing for a peaceful card). */}
             <LivingWorldSignalRow model={signals} />
             {!active && (
-              <div style={{ fontSize:FS.xs, color:GOLD_TXT, background:GOLD_BG, padding:'2px 6px', display:'inline-flex', alignItems:'center', gap:4, fontWeight:700, alignSelf:'flex-start' }}>
+              <div style={{ fontSize:chromeFontSize(FS.xs, mobile), color:GOLD_TXT, background:GOLD_BG, padding:'2px 6px', display:'inline-flex', alignItems:'center', gap:4, fontWeight:700, alignSelf:'flex-start' }}>
                 Frozen{retentionUntil ? ` until ${retentionUntil}` : ''}. Reactivate or export.
               </div>
             )}
             {/* AUDIT-2.2 — a failed read-only export is surfaced here (not silent). */}
             {exportError && (
-              <div role="alert" style={{ fontSize:FS.xs, color:swatch.danger, fontFamily:sans }}>{exportError}</div>
+              <div role="alert" style={{ fontSize:chromeFontSize(FS.xs, mobile), color:swatch.danger, fontFamily:sans }}>{exportError}</div>
             )}
             {/* Blocked-reactivation recovery — when the slots are full, the reason +
                 the path forward render as a VISIBLE line (not the hover-only title),
                 scoped to the blocked state so reactivatable/active rows stay clean. */}
             {!active && planInactive && !canReactivate && (
-              <div style={{ display:'flex', alignItems:'center', gap:6, flexWrap:'wrap', fontSize:FS.xs, color:BODY }}>
+              <div style={{ display:'flex', alignItems:'center', gap:6, flexWrap:'wrap', fontSize:chromeFontSize(FS.xs, mobile), color:BODY }}>
                 <span>Active-save slots are full.</span>
-                <Button variant="ghost" size="sm" onClick={() => onNavigate?.('pricing')}
-                  style={{ padding:'6px 10px', fontSize:FS.xs, color:GOLD_TXT, fontWeight:700 }}>
+                {/* The pill wraps below the label (closed only) so the Settlement
+                    column keeps its width. */}
+                <Button variant="ghost" size="sm" disabled={!purchasesAreOpen} onClick={() => onNavigate?.('pricing')}
+                  style={{ padding:'6px 10px', fontSize:chromeFontSize(FS.xs, mobile), color:GOLD_TXT, fontWeight:700, flexWrap: purchasesAreOpen ? undefined : 'wrap' }}>
                   Free a slot or Upgrade
+                  {!purchasesAreOpen && <AvailableAtLaunchPill style={{ marginLeft: 6 }} />}
                 </Button>
               </div>
             )}
@@ -292,11 +324,11 @@ export function SettlementCard({ s, allModifiers, onView, deleteId, setDeleteId,
                   <div style={{ display:'flex', gap:SP.xs, flexWrap:'wrap' }}>
                     {(s.settlement.neighbourNetwork||[]).slice(0,3).map((n,ni) => {
                       const nc = relColor(n.relationshipType);
-                      return <span key={ni} style={{ fontSize:FS.xs, fontWeight:500, color:SECOND, background:`${nc}12`, padding:'1px 6px', whiteSpace:'nowrap' }}>
+                      return <span key={ni} style={{ fontSize:chromeFontSize(FS.xs, mobile), fontWeight:500, color:SECOND, background:`${nc}12`, padding:'1px 6px', whiteSpace:'nowrap' }}>
                         {n.neighbourName||n.name} · {(n.displayRelationshipType||n.localRelationshipRole||n.relationshipType||'linked').replace(/_/g,' ')}
                       </span>;
                     })}
-                    {(s.settlement.neighbourNetwork||[]).length > 3 && <span style={{fontSize:FS.xs,color:BODY}}>+{s.settlement.neighbourNetwork.length - 3} more</span>}
+                    {(s.settlement.neighbourNetwork||[]).length > 3 && <span style={{fontSize:chromeFontSize(FS.xs, mobile),color:BODY}}>+{s.settlement.neighbourNetwork.length - 3} more</span>}
                   </div>
                 )}
                 {/* Network effect badges — kept their semantic green/red at weight 500. */}
@@ -308,7 +340,7 @@ export function SettlementCard({ s, allModifiers, onView, deleteId, setDeleteId,
                   return <div style={{display:'flex',gap:SP.xs,flexWrap:'wrap'}}>
                     {badges.map(c => {
                       const v = m.totals[c.key]; const pos = v >= 0;
-                      return <span key={c.key} title={`${c.label} ${fmtMod(v)}`} style={{ fontSize:FS.xs, fontWeight:500, color:pos?swatch.success:swatch.danger, background:pos?swatch.successBg:swatch.dangerBg, padding:'1px 5px', whiteSpace:'nowrap' }}>
+                      return <span key={c.key} title={`${c.label} ${fmtMod(v)}`} style={{ fontSize:chromeFontSize(FS.xs, mobile), fontWeight:500, color:pos?swatch.success:swatch.danger, background:pos?swatch.successBg:swatch.dangerBg, padding:'1px 5px', whiteSpace:'nowrap' }}>
                         {c.label}: {pos ? 'helped' : 'hurt'}
                       </span>;
                     })}
@@ -317,17 +349,17 @@ export function SettlementCard({ s, allModifiers, onView, deleteId, setDeleteId,
                 {regionalCounts && (regionalCounts.queued || regionalCounts.applied || regionalCounts.resolved) > 0 && (
                   <div style={{ display:'flex', gap:SP.xs, flexWrap:'wrap' }}>
                     {regionalCounts.queued > 0 && (
-                      <span style={{ fontSize:FS.xs, fontWeight:500, color:SECOND, background:GOLD_BG, padding:'1px 6px', whiteSpace:'nowrap', display:'inline-flex', alignItems:'center', gap:2 }}>
+                      <span style={{ fontSize:chromeFontSize(FS.xs, mobile), fontWeight:500, color:SECOND, background:GOLD_BG, padding:'1px 6px', whiteSpace:'nowrap', display:'inline-flex', alignItems:'center', gap:2 }}>
                         {regionalCounts.queued} changes queued
                       </span>
                     )}
                     {regionalCounts.applied > 0 && (
-                      <span style={{ fontSize:FS.xs, fontWeight:500, color:SECOND, background:swatch.successBg, padding:'1px 6px', whiteSpace:'nowrap', display:'inline-flex', alignItems:'center', gap:2 }}>
+                      <span style={{ fontSize:chromeFontSize(FS.xs, mobile), fontWeight:500, color:SECOND, background:swatch.successBg, padding:'1px 6px', whiteSpace:'nowrap', display:'inline-flex', alignItems:'center', gap:2 }}>
                         {regionalCounts.applied} applied
                       </span>
                     )}
                     {regionalCounts.resolved > 0 && (
-                      <span style={{ fontSize:FS.xs, fontWeight:500, color:SECOND, background:swatch.infoBg, padding:'1px 6px', whiteSpace:'nowrap', display:'inline-flex', alignItems:'center', gap:2 }}>
+                      <span style={{ fontSize:chromeFontSize(FS.xs, mobile), fontWeight:500, color:SECOND, background:swatch.infoBg, padding:'1px 6px', whiteSpace:'nowrap', display:'inline-flex', alignItems:'center', gap:2 }}>
                         {regionalCounts.resolved} resolved
                       </span>
                     )}
@@ -346,17 +378,19 @@ export function SettlementCard({ s, allModifiers, onView, deleteId, setDeleteId,
                 Dropped entirely when no parseable timestamp exists, so an absent
                 or malformed date never renders as "Invalid Date" (defect 7b). */}
             {savedWhen && (
-              <div style={{ fontSize:FS.xs, color:BODY, display:'flex', alignItems:'center', gap:6 }}>
+              <div style={{ fontSize:chromeFontSize(FS.xs, mobile), color:BODY, display:'flex', alignItems:'center', gap:6 }}>
                 <Clock size={10}/> {savedWhen}
               </div>
             )}
           </div>
         </td>
 
-        {/* ── Tier */}
+        {/* ── Tier (desktop; folded into the name cell on a phone) */}
+        {!mobile && (
         <td style={LEDGER_CELL}>
           <span style={{ fontSize:FS.sm, color:BODY, textTransform:'capitalize', whiteSpace:'nowrap' }}>{s.tier}</span>
         </td>
+        )}
 
         {/* ── Phase — CANON as a small-caps rubric; drafts read quiet. A destroyed
             settlement stacks a danger rubric UNDER its phase word: destruction is a
@@ -370,14 +404,16 @@ export function SettlementCard({ s, allModifiers, onView, deleteId, setDeleteId,
             derivation that hides the destroy affordance, so the mark appears in the
             same repaint the affordance disappears in. A standing row renders exactly
             as before — the guard yields nothing. */}
+        {!mobile && (
         <td style={LEDGER_CELL}>
           {isCanon
-            ? <span style={{ ...RUBRIC, color:GOLD_TXT }}>Canon</span>
+            ? <span style={{ ...rubric(mobile), color:GOLD_TXT }}>Canon</span>
             : <span style={{ fontSize:FS.sm, color:SECOND }}>Draft</span>}
           {alreadyDestroyed && (
-            <div style={{ ...RUBRIC, color:swatch.danger, marginTop:2 }}>Destroyed</div>
+            <div style={{ ...rubric(mobile), color:swatch.danger, marginTop:2 }}>Destroyed</div>
           )}
         </td>
+        )}
 
         {/* ── Health — the worst health-band word (Stable / Strained / Vulnerable
             / Critical), each a click-to-learn glossary term via HealthPip. The
@@ -394,8 +430,11 @@ export function SettlementCard({ s, allModifiers, onView, deleteId, setDeleteId,
         {/* ── Action cluster — ONE primary (Open), rare actions behind a kebab
             overflow, destructive Delete demoted to a separated small ghost icon.
             Reactivation replaces Open for plan-inactive saves. */}
-        <td data-card-actions style={{ ...LEDGER_CELL, textAlign:'right', whiteSpace:'nowrap' }}>
-          <div style={{ display:'inline-flex', gap:SP.xs, alignItems:'center' }}>
+        {/* `nowrap` is what made this cell un-shrinkable, so the ledger could only answer a
+            narrow viewport by scrolling the page. On a phone the cluster wraps instead: the
+            row gets taller, which is free, and every control stays on screen. */}
+        <td data-card-actions style={{ ...LEDGER_CELL, textAlign:'right', whiteSpace: mobile ? 'normal' : 'nowrap' }}>
+          <div style={{ display:'inline-flex', gap:SP.xs, alignItems:'center', flexWrap: mobile ? 'wrap' : 'nowrap', justifyContent:'flex-end' }}>
           {!active && planInactive ? (
             <>
               <Button
@@ -455,7 +494,7 @@ export function SettlementCard({ s, allModifiers, onView, deleteId, setDeleteId,
                           Canonize
                         </Button>
                       ) : (
-                        <div style={{ display:'inline-flex', alignItems:'center', gap:6, padding:'6px 8px', fontSize:FS.xs, fontWeight:700, color:GOLD_TXT }}>
+                        <div style={{ display:'inline-flex', alignItems:'center', gap:6, padding:'6px 8px', fontSize:chromeFontSize(FS.xs, mobile), fontWeight:700, color:GOLD_TXT }}>
                           <BookMarked size={12}/> Canon. Names locked
                         </div>
                       )}
@@ -465,10 +504,12 @@ export function SettlementCard({ s, allModifiers, onView, deleteId, setDeleteId,
                           moment of intent (limits → previews, no dead-end). */}
                       {!currentCampaignId && !canManageCampaigns && campaigns.length === 0 ? (
                         <Button variant="ghost" fullWidth
+                          disabled={!purchasesAreOpen}
                           onClick={() => { setMenuOpen(false); onNavigate?.('pricing'); }}
                           icon={<Clock size={13} color={GOLD}/>}
-                          style={{ justifyContent:'flex-start', textAlign:'left', padding:'6px 8px', gap:6, fontSize:FS.sm, color:GOLD_TXT, fontWeight:500 }}>
+                          style={{ justifyContent:'flex-start', textAlign:'left', padding:'6px 8px', gap:6, fontSize:FS.sm, color:GOLD_TXT, fontWeight:500, flexWrap: purchasesAreOpen ? undefined : 'wrap' }}>
                           Advance time and run campaigns. Upgrade
+                          {!purchasesAreOpen && <AvailableAtLaunchPill style={{ marginLeft: 6 }} />}
                         </Button>
                       ) : (
                         <>

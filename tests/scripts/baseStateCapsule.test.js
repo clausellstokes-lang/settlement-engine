@@ -365,8 +365,13 @@ describe('base-state capsule generator', () => {
 
   it('stays outside the mutation-coverage enumeration, so no manifest row is owed', () => {
     const picked = enumerateInvariants(ROOT);
+    // RAISE-ONLY FLOOR, re-measured at CURE-G (2026-09-20). The stale `> 440` stood against a
+    // live enumeration of 706, so it had stopped being a vacuity guard and become a number
+    // nothing could fail. 706 is the count BEFORE CURE-G's own rename; that rename opts
+    // tests/store/participationWriteBase.contract.test.js in through NAME_PATTERN's `contract`
+    // token, taking the live count to 707. Raise this when it drifts — never lower it.
     expect(picked.length, 'the enumeration walk collapsed — this arm would pass vacuously')
-      .toBeGreaterThan(440);
+      .toBeGreaterThanOrEqual(707);
     // The anchor travels the SAME walk as the subject: ciCheckParity is the one tests/build file
     // the NAME_PATTERN regex picks up, so it vanishes under exactly the drift that would make a
     // bare absence assertion here go vacuous.

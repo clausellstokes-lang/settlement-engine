@@ -14,6 +14,7 @@
 import { TIER_ORDER, popToTier } from '../../../data/constants.js';
 import { selectStyle } from './EventComposerConstants.js';
 import { Field } from './Field.jsx';
+import useIsMobile from '../../../hooks/useIsMobile.js';
 
 const cap = (/** @type {string} */ s) => (s ? s.charAt(0).toUpperCase() + s.slice(1) : s);
 
@@ -35,6 +36,7 @@ export function clampTierDirection(settlement, tierDirection) {
 }
 
 export function EventComposerTierField({ settlement, tierDirection, setTierDirection }) {
+  const mobile = useIsMobile();
   const { nextTier, prevTier } = tierBounds(settlement);
   const tierDir = clampTierDirection(settlement, tierDirection);
   return (
@@ -44,7 +46,7 @@ export function EventComposerTierField({ settlement, tierDirection, setTierDirec
         ? 'Resettles population down a band; institutions it can no longer support are left as ruined remnants.'
         : 'Resettles population up a band and raises the institutions the larger tier sustains.'}
     >
-      <select value={tierDir} onChange={e => setTierDirection(e.target.value)} style={selectStyle}>
+      <select value={tierDir} onChange={e => setTierDirection(e.target.value)} style={selectStyle(mobile)}>
         {nextTier && <option value="promotion">Promote to {cap(nextTier)}</option>}
         {prevTier && <option value="demotion">Demote to {cap(prevTier)}</option>}
       </select>

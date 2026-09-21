@@ -32,10 +32,63 @@
  * differently, which is the fork this design exists to prevent.
  */
 
-import { generateSeed } from '../kernel/prng.js';
+import { createPRNG, generateSeed } from '../kernel/prng.js';
 import { deriveSystemState } from '../domain/state/deriveSystemState.js';
 import { reconcileSettlementChange } from '../domain/settlementReconciliation.js';
 import { anonAtCap, incrementAnonFull, incrementAnonReroll } from '../lib/anonGenCounter.js';
+import { REFUSAL_REASONS, refusalOf } from '../lib/refusalReasons.js';
+import { GENERATION_INTENT_SAMPLE_FORK, intentOf } from '../lib/generationIntent.js';
+import { isChunkLoadError } from '../lib/staleDeploy.js';
+import { DEFAULT_CONFIG } from './configSlice.js';
+
+/**
+ * The DISPLAY label for a size token, and the ceiling label for an account tier.
+ * Both frozen maps are keyed by literal unions, so a plain `string` index is a type
+ * error at the call site; narrowing once here keeps the refusal sites readable and
+ * keeps a raw tier token off the page when a map has no row.
+ * @param {string|undefined} token
+ */
+const sizeLabelOf = (token) => (token
+  ? (/** @type {Record<string, string>} */ (SIZE_LABEL)[token] || token) : '');
+/** @param {string|undefined} tier */
+const ceilingLabelOf = (tier) => (tier
+  ? (/** @type {Record<string, { maxSizeLabel: string }>} */ (TIER_FACTS)[tier]?.maxSizeLabel || '') : '');
+/**
+ * Was the refusal the FLOOR rather than the ceiling? Asked only of a size the gate has
+ * already refused. The slice owns the rank table and answers; a store that predates the
+ * selector (or a hand-built one in a test) answers `false`, which is exactly the
+ * behaviour this gate had before the floor had its own sentence.
+ * @param {any} st the store state the gate is reading
+ * @param {string|undefined} token
+ */
+const belowFloor = (st, token) => typeof st?.isTierBelowFloor === 'function'
+  && st.isTierBelowFloor(token) === true;
+/**
+ * ⛔ THE RUNGS A 'random' FORGE MAY ACTUALLY HAND THIS ACCOUNT.
+ *
+ * The generator's ladder starts at `thorp`; an anonymous visitor's gate starts at
+ * `hamlet`. So one roll in six was resolved, populated, staffed, narrated — and then
+ * DISCARDED by the post-resolution re-gate below, which answered a reader who had asked
+ * for nothing in particular with a refusal about a size they never picked.
+ *
+ * `null` when the account reaches the whole ladder, and `null` when the range admits
+ * NOTHING (a gate that refuses every size is a gate misconfiguration, not a pool): in
+ * both cases the sentinel reaches the pipeline untouched and the generator's own roll
+ * runs exactly as it always has.
+ *
+ * @param {any} st the store state the gate is reading
+ * @returns {string[]|null}
+ */
+const allowedTierPoolOf = (st) => {
+  if (typeof st?.isTierAllowed !== 'function') return null;
+  const pool = TIER_ORDER.filter((rung) => st.isTierAllowed(rung) === true);
+  return pool.length > 0 && pool.length < TIER_ORDER.length ? pool : null;
+};
+import { accountHolderPhrase, SIZE_LABEL, TIER_FACTS } from '../config/tierFacts.js';
+// THE LADDER the generator's 'random' rolls over, read here so the pool this lane sends
+// is cut from the same array `resolveConfig` picks from rather than from a parallel list.
+// No new first-paint cost: components/HomeHero.jsx already holds this leaf eagerly.
+import { TIER_ORDER } from '../data/constants.js';
 import { flag } from '../lib/flags.js';
 import { runGeneration } from '../lib/generationClient.js';
 import {
@@ -44,7 +97,7 @@ import {
 } from '../lib/generationProtocol.js';
 import { loadSettlementContentRuntimeOptions } from './settlementContentRuntime.js';
 import {
-  carryLockedSections, geographyLockedConfig, remapLocksAfterGenerate,
+  carryLockedSections, remapLocksAfterGenerate,
 } from './settlementSliceHelpers.js';
 // ⛔ THE CREATE BOUNDARY IS IMPORTED DIRECTLY, NOT THROUGH THE HELPERS LEAF, AND
 // THAT EDGE IS A FIRST-PAINT MEASUREMENT. `settlementSliceHelpers.js` is EAGER;
@@ -54,10 +107,11 @@ import {
 // settlementSlice.js's dynamic import, so importing the boundary here keeps it
 // on the lazy side with its callers (MEASURED, lane L-MAT: closure 239 -> 238).
 import { birthConfig, loadGenerationLawPayloads } from '../domain/density/densityCreateBoundary.js';
-import { activateFaithIfEntitled, resetSettlementIdentity } from './settlementLifecycleHelpers.js';
+import { activateFaithIfEntitled, resetSettlementIdentity, retiringDraftOf } from './settlementLifecycleHelpers.js';
 
 /** Request correlation. A counter, never a clock and never a random draw. */
 let _requestSeq = 0;
+
 
 /**
  * The in-thread half of the ONE code path. Imported lazily so the happy worker
@@ -76,11 +130,94 @@ async function inThreadGeneration(request, onStep) {
  * @param {(fn: (draft: any) => void) => void} set
  * @param {() => any} get
  * @param {string} [seedOverride]
+ * @param {{ intent?: string, at?: string }} [options] `intent` names WHO is asking
+ *   (lib/generationIntent.js); only the anonymous daily cap reads it, and only to
+ *   exempt a curated sample fork. `at` names WHERE they clicked (REFUSAL_SURFACES in
+ *   lib/refusalReasons.js): it changes nothing about the generation and is stamped on
+ *   any refusal this call records, so one page's two controls stop announcing one
+ *   refusal twice. Omitting it leaves the record unkeyed and said by every surface,
+ *   which is the behaviour every caller had before the field existed.
  * @returns {Promise<any>} the activated settlement, or null when a gate refused
  */
-export async function generateSettlementAction(set, get, seedOverride) {
+export async function generateSettlementAction(set, get, seedOverride, options) {
+  // A refusal from a PREVIOUS attempt must not outlive this one: the reader clicked
+  // again, and whatever they read before is now either cured or about to be re-raised.
+  set(state => { state.lastRefusal = null; });
+  // ⛔ SAMPLE FORKS ARE EXEMPT FROM THE ANONYMOUS DAILY CAP (owner ruling, ODQ
+  // §934.24(b)) — and from nothing else. `intentOf` fails CLOSED: anything it does not
+  // recognise reads as an ordinary generation, so the exemption must be asked for by
+  // its exact name and an older or mistyped caller is still capped.
+  const isSampleFork = intentOf(options) === GENERATION_INTENT_SAMPLE_FORK;
+  // ⛔ WHERE THE READER CLICKED TRAVELS WITH THE REASON (REVIEW-P F12). `lastRefusal`
+  // is ONE record and every surface renders it, so a page with two forging controls
+  // announced one refusal twice — measured on /create, forking the Black Crag card.
+  // A surface names itself here and renders only its own; an unkeyed call is left
+  // exactly as it was, said by everyone, so nothing outside the keyed surfaces moves.
+  // Compared, never rendered: it cannot reach a sentence, so no id can reach a reader.
+  const at = typeof options?.at === 'string' ? options.at : null;
+  /** Every reason this lane records carries the click that earned it. */
+  const refusedAt = (reason, vars = null) => refusalOf(reason, vars, at);
   const state = get();
-  const { config, institutionToggles, categoryToggles, goodsToggles, servicesToggles } = state;
+  const {
+    config: storedConfig,
+    institutionToggles: storedInstitutionToggles,
+    categoryToggles: storedCategoryToggles,
+    goodsToggles: storedGoodsToggles,
+    servicesToggles: storedServicesToggles,
+  } = state;
+  // ⛔ AN ANONYMOUS GENERATION IS EVERYTHING ON RANDOM (the owner, §934.34: "only hamlet,
+  // village, and town can be accessed without signing in and only with everything on
+  // random"). The SIZE is theirs; every other dial rolls.
+  //
+  // ⭐ THE FORCING IS HERE, NOT IN THE WIZARD, AND THAT IS THE WHOLE POINT. `config` is
+  // PERSISTED (store/persistProjection.js), so a disabled control is a courtesy and never
+  // a gate: a stored config from a session that once had an account, a hand-edited
+  // localStorage blob, or the Library's "Apply Saved Configuration" can all put a
+  // customized config in front of an anonymous forge. That is the 2026-09-16 production
+  // bug's exact shape — a value that survived one lifecycle path and ghosted another — so
+  // the rule is enforced at the ONE point every full generation funnels through, and the
+  // stored config is left untouched (a reader who signs in gets their dials back).
+  //
+  // "Everything on random" is not invented here: DEFAULT_CONFIG already IS that shape —
+  // settType random, random_trade, random_culture, random_threat, every priority at 50,
+  // resources and stresses rolling, no custom name and no constraint bags. So the
+  // anonymous config is the defaults with the reader's own size on top, which also means
+  // this can never drift from what the wizard calls "random".
+  //
+  // ⛔ A CURATED SAMPLE FORK IS NOT THE READER'S CONFIGURATION, AND FORCING RANDOM ON IT
+  // WOULD HAVE DESTROYED IT. `forkConfigFor(sample)` replays the PRODUCT'S own config for
+  // one of the three curated worlds — the owner ruled the fork a curated seed, not a free
+  // generation (§934.24(b)) — so rolling its dials would have handed an anonymous reader
+  // a random town under a curated town's name. The exemption is asked for by the same
+  // fail-closed intent the cap uses, so an ordinary generation cannot borrow it. (None of
+  // the three samples is a thorpe — town, city, village — so §934.34's floor changes
+  // nothing about them; the TIER gate still applies to a fork, which is why the city
+  // sample already refuses for an anonymous reader.)
+  // ⛔ AND IT FAILS CLOSED. The `typeof` guard exists because a hand-built store (a test's,
+  // an older persisted shape) may not carry the selector — but its fallback was `true`,
+  // which is a CAPABILITY GATE answering "yes" to a store that could not be asked. Every
+  // real store carries it (store/authSlice.js), so the fallback is never taken in
+  // production and closing it costs nothing there; what it buys is that the ONE point
+  // §934.34 is enforced at cannot be opened by an absence. The exemption above still
+  // wins, because a curated sample fork is not the reader's configuration at all.
+  const canCustomize = isSampleFork || (typeof state.canCustomizePreGeneration === 'function'
+    ? state.canCustomizePreGeneration() === true
+    : false);
+  const config = canCustomize
+    ? storedConfig
+    : { ...DEFAULT_CONFIG, settType: storedConfig?.settType ?? DEFAULT_CONFIG.settType };
+  // The four constraint bags are the Deep-constraints grids — the same class of
+  // pre-generation input as `config`, persisted beside it (store/toggleSlice.js's own
+  // scope contract says so), and each one EMPTY means "force nothing, forbid nothing",
+  // which is what random means for them. An anonymous forge therefore takes four empty
+  // bags, not the reader's stored ones.
+  const institutionToggles = canCustomize ? storedInstitutionToggles : {};
+  const categoryToggles = canCustomize ? storedCategoryToggles : {};
+  const goodsToggles = canCustomize ? storedGoodsToggles : {};
+  const servicesToggles = canCustomize ? storedServicesToggles : {};
+  // An IMPORTED NEIGHBOUR is a pre-generation input too — and it is already premium-only
+  // (TIER_GATE.{tier}.neighbour is false for anon and free), so it is left exactly as it
+  // was: a second gate here would be a second source for a rule that already has one.
   const neighbor = state.importedNeighbour;
 
   // Tier gate check
@@ -88,9 +225,43 @@ export async function generateSettlementAction(set, get, seedOverride) {
   if (settType && settType !== 'random' && settType !== 'custom') {
     if (!state.isTierAllowed(settType)) {
       console.warn(`Tier "${settType}" not allowed for current user tier.`);
+      // …and SAY so where the reader clicked. The sentence names the size asked for
+      // and the ceiling this account reaches, both as display labels off the config
+      // (never a raw tier token, never a hand-typed ceiling).
+      //
+      // ⛔ WHICH BOUND REFUSED DECIDES WHICH SENTENCE (§934.34). `isTierAllowed` is one
+      // boolean over a RANGE, and raising the ceiling's reason for every refusal made the
+      // product tell an anonymous visitor "A Thorpe is past what this account forges; it
+      // reaches up to a Town" — the opposite of the truth, on the one rung the floor
+      // exists for. The slice answers which bound it was; a floor refusal gets its own
+      // reason and names the floor instead of a ceiling the reader never approached.
+      //
+      // ⛔ AND IT NAMES WHOSE FORGE IT IS TALKING ABOUT (REVIEW-P F13). The ceiling
+      // sentence read "past what THIS ACCOUNT forges" for everybody, so an anonymous
+      // visitor forking the Black Crag sample was told about an account they do not
+      // have, one clause before being invited to make one. The tier is known HERE and
+      // nowhere else the sentence passes through, so the phrase is measured here and
+      // derived from the one home that holds both spellings.
+      set(s => {
+        s.lastRefusal = belowFloor(state, settType)
+          ? refusedAt(REFUSAL_REASONS.TIER_TOO_SMALL, {
+            size: sizeLabelOf(settType),
+            min: sizeLabelOf(state.minAllowedTier?.()),
+          })
+          : refusedAt(REFUSAL_REASONS.TIER, {
+            size: sizeLabelOf(settType),
+            max: ceilingLabelOf(state.auth?.tier) || sizeLabelOf(state.maxAllowedTier?.()),
+            holder: accountHolderPhrase(state.auth?.tier),
+          });
+      });
       return null;
     }
   }
+
+  // ⛔ ONE ROLL IN SIX WAS BEING THROWN AWAY. Measured BEFORE the engine runs, because
+  // that is the point: the post-resolution re-gate below discards a FINISHED settlement,
+  // so the only cure that saves the work is one that decides the size before it.
+  const allowedTiers = allowedTierPoolOf(state);
 
   // Anonymous daily generation cap (Tier 7.2). Every full-settlement
   // generation funnels through this action, so this is the single point
@@ -101,8 +272,13 @@ export async function generateSettlementAction(set, get, seedOverride) {
   // the right bucket (reroll vs. full) after a successful run.
   const isAnon = state.auth?.tier === 'anon';
   const hadSettlement = !!state.settlement;
-  if (isAnon && anonAtCap()) {
+  // ⛔ THE SAMPLE FORK DOES NOT PASS THROUGH THIS GATE (ODQ §934.24(b)). It also never
+  // reaches the two increments at the bottom, so the counter is not merely bypassed on
+  // the way in — a fork leaves the day's allowance BYTE-IDENTICAL, which is the half
+  // an exemption written only here would have got wrong.
+  if (!isSampleFork && isAnon && anonAtCap()) {
     console.warn('[settlementSlice] anonymous daily generation cap reached.');
+    set(s => { s.lastRefusal = refusedAt(REFUSAL_REASONS.DAILY_CAP); });
     return null;
   }
 
@@ -132,8 +308,53 @@ export async function generateSettlementAction(set, get, seedOverride) {
   // from such a config safe is not an absence: it is the CLAMP inside
   // `birthConfig`, which destructures the living-content marker off before
   // spreading the mint, so a birth's law is the DIAL's law on every path.
-  const fullConfig = geographyLockedConfig(state.locks, state.settlement, birthConfig({
-    ...config,
+  //
+  // ⛔ A CONFIG-LEVEL `seed` IS DROPPED HERE (reported 2026-09-16 as "Generation
+  // failed / The forge stalled before your settlement took shape"). A birth's seed
+  // is this action's ARGUMENT (seedOverride, else generateSeed), never a config key:
+  // the pipeline reads options.seed or a replayed config._seed, and since Lane PT2-1
+  // (4dbef1d16, 2026-08-03) it THROWS on a config carrying `seed`, because a seed
+  // there would be silently ignored. The two sample-fork surfaces (FoundingWorlds,
+  // SettlementsPanel.forkSample) had stamped `seed` into the stored config since
+  // 2026-07-21, and `config` is persisted (store/persistProjection.js), so a single
+  // fork failed and then broke every later generation in that browser until its
+  // storage was cleared. Dropping the key here, where the STORE config reaches the
+  // pipeline, cures every stored state.config and any writer at once; the other
+  // reader of saved configs, the campaign content-binding preview, drops it in
+  // domain/content/contentSamplePreview.js; the fork writers no longer stamp it
+  // (data/sampleSettlements.js forkConfigFor). `seed`
+  // stays an ADMITTED key: pruning it would change saved-config loads, which
+  // tests/generators/configPatchAllowlistWalker.test.js records as a product call.
+  const seed = seedOverride || generateSeed();
+
+  const birthInputs = { ...config };
+  delete birthInputs.seed;
+  // ⛔ A CAPPED ACCOUNT'S 'random' IS AIMED HERE, NOT IN THE GENERATOR (§934.34).
+  //
+  // The obvious cure was to thread the range into `resolveConfig` and let its own roll
+  // draw from it. MEASURED, and REJECTED on the evidence: the generator would then read
+  // a config key the GENERATION corpus never writes (the store writes it), which
+  // tests/lint/observedShapeReaders.walker.test.js convicts as a reader with no writer
+  // — `_allowedTiers on config — 3 read(s)`, a NEW identity, and clearing it needs an
+  // explained-writer mint rather than a lane's edit. The roll is the generator's; the
+  // RANGE is this gate's; so the size a capped account gets is decided on this side of
+  // the boundary and the generator is left exactly as it was.
+  //
+  // DETERMINISTIC, and on its OWN stream. The draw is seeded from the generation's seed
+  // under a distinct namespace, so the same seed always aims at the same rung and not
+  // one draw of the world's own sequence is consumed. THE PROMISE holds: same seed,
+  // same config, same world.
+  //
+  // The SENTINEL ITSELF IS NOT REWRITTEN in `settType` above — the post-resolution
+  // re-gate still reads 'random' and stays armed as the backstop. Only what the pipeline
+  // is handed changes, and only for an account whose range is narrower than the ladder.
+  if (settType === 'random' && allowedTiers) {
+    birthInputs.settType = createPRNG(`${seed}:size-gate`).pick(allowedTiers);
+  }
+  // (No geography-lock overlay since owner order 2026-09-17 retired the world locks: a
+  // stored `geography: true` no longer re-rolls the previous town's ground.)
+  const fullConfig = birthConfig({
+    ...birthInputs,
     _institutionToggles: institutionToggles,
     _categoryToggles:    categoryToggles,
     _goodsToggles:       goodsToggles,
@@ -143,7 +364,7 @@ export async function generateSettlementAction(set, get, seedOverride) {
     // flat 50s — and never writes the rolls back into the stored config.
     ...(state.randomSliderMode === true ? { _randomizePriorities: true } : {}),
     ...(neighbor ? { _importedNeighbor: neighbor } : {}),
-  }));
+  });
 
   const contentRuntimeOptions = await loadSettlementContentRuntimeOptions(state);
   // THE CREATE BOUNDARY'S OTHER HALF (see `loadGenerationLawPayloads`). The
@@ -156,7 +377,6 @@ export async function generateSettlementAction(set, get, seedOverride) {
   // `generation.worker.js`. Idempotent and memoized on the seam's slot, so the
   // second generation onward pays nothing.
   await loadGenerationLawPayloads();
-  const seed = seedOverride || generateSeed();
 
   const request = {
     kind: GENERATION_REQUEST_KIND,
@@ -205,6 +425,19 @@ export async function generateSettlementAction(set, get, seedOverride) {
         step_name: lastStepId ?? /** @type {any} */ (genErr)?.stepId ?? undefined,
       });
     }).catch(() => {});
+    // The throw still PROPAGATES — that behaviour is unchanged, and callers that
+    // already catch it keep catching it. What is added is the record, so a surface
+    // that does NOT catch (three of them did not) still has something to render.
+    //
+    // ⚠ AND IT NAMES WHICH FAILURE. A tab that outlived a deploy fails on a chunk it
+    // can no longer fetch, and "try once more" is FALSE advice there — only a reload
+    // helps. `isChunkLoadError` is the same pure predicate lib/staleDeploy.js gives
+    // HomeHero, so the two surfaces cannot disagree about what happened.
+    set(s => {
+      s.lastRefusal = refusedAt(isChunkLoadError(genErr)
+        ? REFUSAL_REASONS.STALE_BUILD
+        : REFUSAL_REASONS.GENERATION_FAILED);
+    });
     throw genErr;
   }
   const generationMs = Math.round((typeof performance !== 'undefined' ? performance.now() : Date.now()) - genStart);
@@ -222,8 +455,38 @@ export async function generateSettlementAction(set, get, seedOverride) {
   // could never select directly. Generators/goldens untouched: this only
   // blocks the COMMIT of an over-cap result. The carry never rewrites `tier`,
   // so reading it off the carried settlement is the same read as before.
+  //
+  // ⛐ IT IS NO LONGER THE ROUTINE OUTCOME OF A 'random' FORGE, and that is the point of
+  // the aim above: this branch used to fire on one anonymous roll in six, spending a whole
+  // generation to produce a refusal. It stays as the fail-closed BACKSTOP for 'custom' (a
+  // population the reader typed), for a range the gate could not supply, and for any
+  // future path that reaches the pipeline around the aim.
   if ((settType === 'random' || settType === 'custom') && !get().isTierAllowed(withRoster?.tier)) {
     console.warn(`Resolved tier "${withRoster?.tier}" exceeds this account's cap — generation discarded.`);
+    // A DIFFERENT sentence from the pre-flight refusal on purpose: the reader picked
+    // nothing wrong here, the roll came out too big and the finished town was thrown
+    // away. Telling them "you asked for too much" would be false.
+    //
+    // ⛔ AND THE ROLL CAN LAND UNDER THE FLOOR TOO, where "past what this account
+    // forges" is false the other way round. Since a capped 'random' is aimed inside the
+    // range before the engine runs, this branch should now be unreachable there — but it
+    // is the LAST gate before a commit and it fails closed, so it states the right fact
+    // rather than the convenient one: the pre-flight's fact, reached by another door.
+    const rolled = get();
+    set(s => {
+      s.lastRefusal = belowFloor(rolled, withRoster?.tier)
+        ? refusedAt(REFUSAL_REASONS.TIER_TOO_SMALL, {
+          size: sizeLabelOf(withRoster?.tier),
+          min: sizeLabelOf(rolled.minAllowedTier?.()),
+        })
+        : refusedAt(REFUSAL_REASONS.RESOLVED_TIER, {
+          size: sizeLabelOf(withRoster?.tier),
+          // The same measured phrase as the pre-flight above (F13): this is the other
+          // door onto the same false sentence, and an anonymous 'random' roll is
+          // exactly who arrives through it.
+          holder: accountHolderPhrase(rolled.auth?.tier),
+        });
+    });
     return null;
   }
   // Regeneration policy (domain/worldPulse/reconcile.js): world/party-
@@ -244,10 +507,15 @@ export async function generateSettlementAction(set, get, seedOverride) {
   // module and leaving it on main would make every first generate fetch the
   // engine chunk here. `_preservation` is the out-of-band report that lets the
   // lock map follow them; it crosses the boundary as plain data and never
-  // enters the settlement blob. Phase A — identity (the name) and history (the
-  // whole section the user froze) are carried across, below.
+  // enters the settlement blob. Phase A — history (the whole section the user froze)
+  // is carried across, below. (The name carry was retired with the world locks by
+  // owner order 2026-09-17.)
+  // ⛔ Both halves are DORMANT since owner orders 2026-09-17 retired every lock
+  // control: the honoured lock view reads nothing (domain/locksPreservation.js
+  // normalizeLocks), so no character and no history is carried, and the map tail
+  // only drops the stale `npcs` ids the new town cannot hold.
   // The carry ignores activeSaveId on purpose: a lock is the user's standing
-  // instruction about what to keep, and Phase A's name/history carry has
+  // instruction about what to keep, and Phase A's history carry has
   // always crossed that boundary. Only the campaign-layer condition carry
   // below is guarded, because those belong to a save, not to an intent.
   const locked = carryLockedSections(state.locks, state.settlement, withRoster);
@@ -279,17 +547,39 @@ export async function generateSettlementAction(set, get, seedOverride) {
       // pendingSuccession, draftVersionHistory, generationId, …), then set this
       // run's own lifecycle fields below. Without this, the prior settlement's
       // queued edits / successor prompt / draft timeline survived onto the new town.
-      resetSettlementIdentity(state);
+      // The retiring identity is read HERE, before the swap below installs the new
+      // world, so the device can retire a slot still holding the world this
+      // generation replaces (store/persistProjection.js).
+      resetSettlementIdentity(state, { retiring: retiringDraftOf(state) });
       // LOCKS ENGINE Phase B — rewrite the map to the world that now exists:
       // each locked NPC id becomes the id its subject inherited in the carry
-      // above, an id nothing preserved is pruned, and the name-keyed faction /
-      // institution arrays and the booleans are kept. Run inside the same set()
+      // above, an id nothing preserved is pruned, and every other key is kept
+      // verbatim. Run inside the same set()
       // that folds the settlement in, so the map and the roster can never
       // disagree. See domain/locksPreservation.js for the identity split.
       remapLocksAfterGenerate(state, _preservation);
       state.settlement = withFaith;
       state.activeSaveId = null;
       state.lastSeed = seed;
+      // ⭐ THE ORIGIN OF THE WORLD IN THE EDITOR (2026-09-18, ODQ §934.8). A birth is
+      // the only moment the answer to "whose session made this?" is known for certain,
+      // and the whole anonymous-draft persistence rule reads it
+      // (store/persistProjection.js): the device keeps a world born anonymous while
+      // nobody is signed in, and nothing else.
+      //
+      // ⛔ IT IS STORE-ROOT STATE AND IT IS NOT ON THE SETTLEMENT. An earlier cut
+      // stamped it onto the world itself, which reads well and is wrong twice over: the
+      // settlement is PERSISTED into saves and read by the observed-shape corpus, so a
+      // session fact would ride into every row and every shape register — and the world
+      // this action commits would no longer be byte-identical to the one the pipeline
+      // produced. A root field says the same thing about the same instant and travels
+      // nowhere it does not belong. `resetSettlementIdentity` nulls it on every swap,
+      // so a door that installs a world without answering this question fails CLOSED.
+      //
+      // READ OFF THE DRAFT, not the snapshot at the top of this action: generation
+      // awaits the engine, and a visitor who signs in while it runs has an account by
+      // the time it commits — the world is theirs, and 'account' is the honest answer.
+      state.draftOrigin = state.auth?.user ? 'account' : 'anon';
       // RETIRED-DARK (owner row WK-2): the full pipeline context is
       // function-bearing and cannot cross a worker boundary, so it is nulled on
       // BOTH transports rather than captured on one. Nulling it only off-thread
@@ -331,7 +621,11 @@ export async function generateSettlementAction(set, get, seedOverride) {
   // Count this anonymous generation against the daily cap. A regeneration
   // (a settlement was already on screen) spends a reroll; the first
   // generation of the day spends the full allowance. Only on success.
-  if (isAnon && withRoster) {
+  // ⛔ AND A SAMPLE FORK SPENDS NOTHING (ODQ §934.24(b)) — the write half of the
+  // exemption. A fork that was let past the gate above but still incremented here
+  // would burn the reader's real allowance for a curated seed, which is the exemption
+  // failing on its second lifecycle path while passing on its first.
+  if (!isSampleFork && isAnon && withRoster) {
     if (hadSettlement) incrementAnonReroll();
     else incrementAnonFull();
   }
@@ -413,6 +707,8 @@ export async function generateSettlementAction(set, get, seedOverride) {
   // Return the activated settlement so a caller that saves the return value
   // persists the SAME faith-active shape the store holds (state.settlement =
   // withFaith). Generation telemetry above intentionally reads `reconciled`
-  // (generator truth — activation is a post-pipeline store overlay).
+  // (generator truth — activation is a post-pipeline store overlay). The draft's
+  // ORIGIN is deliberately not here: it describes the session, not the world, so
+  // it lives at the store root and never reaches a caller that saves this object.
   return withFaith;
 }

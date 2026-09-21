@@ -19,6 +19,42 @@ import { deriveEscalationClocks } from '../../../domain/hookEscalation.js';
 // supply-chain and faction-profile leaves, and the reader is imported by every tab that
 // draws this desk — this page is the one that already pays for them.
 import { generalDeskLines } from '../generalDeskRead.js';
+// THE ONE PARAGRAPH RENDERER (owner finding 2026-09-18) — see the framing block below for
+// why this position is also CAPPED, which no other position is.
+import ProseBlock from '../ProseBlock.jsx';
+import useIsMobile from '../../../hooks/useIsMobile.js';
+import { chromeFontSize, proseFontSize } from '../../../design/proseScale.js';
+import { tokenCase, nameOrTokenCase } from '../labelLadder.js';
+import { HOOK_FRAMING } from '../../../domain/display/hookFraming.js';
+
+/**
+ * ⭐ THE FRAMING CAP, AND THE RULING BEHIND IT (owner finding 4, 2026-09-18).
+ *
+ * DS-HK-1 draws ONE line per hook category the page carries plus one per live escalation
+ * clock, so a busy town reaches TEN framing sentences above its hook list — a page of
+ * preamble before the hooks it is meant to frame, each sentence opening on the town's name.
+ *
+ * ⛔ THE FIRST CURE WAS CONSIDERED AND REFUSED ON EVIDENCE: rendering each framing sentence
+ * under the hook group it belongs to. The composer DOES key these lines — `hookCategoryPoolKey`
+ * makes a 7-for-7 identity with `PLOT_HOOK_CATEGORIES`, and the key rides on
+ * `rung.provenance.poolKey`. It cannot be done at this render site today, for three reasons
+ * that are facts about the tree rather than preferences:
+ *
+ *   1. THE KEY DOES NOT REACH HERE. `generalDeskRead.js` — the desk's ONE caller, which ARM 2
+ *      of the mount registry requires to stay one — returns `framingLines` as `string[]`; the
+ *      rung and its provenance are consumed inside it. Carrying the key out is a change to
+ *      that reader's return contract (`GENERAL_DESK_SILENT`), which is a different car.
+ *   2. THERE ARE NO GROUPS TO RENDER UNDER. The hooks below are ONE FLAT LIST of cards in
+ *      `collectPlotHooks` order, each with a category badge. There is no per-category header
+ *      to hang a sentence on; grouping the list is a layout change nobody has asked for.
+ *   3. HALF THE LINES HAVE NO CATEGORY AT ALL. The clock lines (`escalationClockPoolKey`,
+ *      `clock bread_riot`) are keyed to an ESCALATION CLOCK, not a hook category, so even a
+ *      keyed reader would leave them homeless.
+ *
+ * So the second rule applies: ONE woven paragraph, the first three sentences in COMPOSER
+ * ORDER, the rest dropped. Composer order puts the category lines first and the clock lines
+ * after, so the cap keeps the framing of the hooks the page actually carries.
+ */
 
 const INK = swatch['#1B1408'];
 const BODY = swatch['#3A2F18'];
@@ -26,6 +62,11 @@ const BORDER = swatch['#E8D9B0'];
 const SERIF = 'Crimson Text, Georgia, serif';
 
 export default function PlotHooksTab({ settlement, publicDossier = false, playerView = false }) {
+  // THE PHONE PROSE FLOOR — the framing lines and every hook body. Bound above
+  // the empty-state early return so the hook order is stable on a town that
+  // surfaces no hooks. The hook's source name and its category tag are the card's
+  // furniture and keep their own steps.
+  const mobile = useIsMobile();
   const hooks = useMemo(() => collectPlotHooks(settlement || {}), [settlement]);
   // DS-HK-1: the state a hook is framed FROM, never the hook prose itself. One line per
   // category the page actually carries, then one per live escalation clock.
@@ -54,12 +95,9 @@ export default function PlotHooksTab({ settlement, publicDossier = false, player
             background: swatch['#FAF8F4'], border: `1px solid ${BORDER}`,
             borderLeft: '3px solid #6b5340', padding: '9px 12px', marginBottom: 10,
           }}>
-            {framingLines.map((line, i) => (
-              <p key={i} style={{
-                fontSize: FS.xxs, color: BODY, lineHeight: 1.55,
-                margin: i === 0 ? 0 : '5px 0 0', fontStyle: 'italic',
-              }}>{line}</p>
-            ))}
+            <ProseBlock lines={framingLines.slice(0, HOOK_FRAMING.cap)}
+              settlementName={settlement?.name} tier={settlement?.tier}
+              style={{ fontSize: proseFontSize(FS.xxs, mobile), color: BODY, lineHeight: 1.55, margin: 0, fontStyle: 'italic' }}/>
           </div>
         )}
         <div style={{ display: 'flex', flexDirection: 'column', gap: 6 }}>
@@ -77,20 +115,53 @@ export default function PlotHooksTab({ settlement, publicDossier = false, player
               >
                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'baseline', gap: 8 }}>
                   <span style={{
-                    fontFamily: SERIF, fontWeight: 700, fontSize: FS['11.5'],
-                    color: INK, minWidth: 0, overflow: 'hidden',
-                    textOverflow: 'ellipsis', whiteSpace: 'nowrap',
+                    // The source NAME — furniture, and long enough to be read
+                    // (a conflict source reads "X vs Y"), so it takes the chrome floor.
+                    fontFamily: SERIF, fontWeight: 700, fontSize: chromeFontSize(FS['11.5'], mobile),
+                    color: INK, minWidth: 0,
+                    // ⛔ A FLOOR INSIDE A CLAMP SHOWS LESS, NOT MORE — the same finding the
+                    // Economics income row took (2026-09-18), in the same shape. The floor
+                    // raises this name from 11.5px to 12px on the phone, and a `nowrap`
+                    // ellipsis inside a shared flex row is a function of the size: bigger
+                    // text in the same sliver means FEWER characters before the cut. The
+                    // one change made to help a phone reader would have handed them less of
+                    // the source than they had at 11.5px.
+                    //
+                    // ODQ §934.23 COLLAPSED THE BRANCH: the phone's answer was the right
+                    // answer at both widths. "Desktop keeps the clamp — above the breakpoint
+                    // the card is wide, the name fits, and the ellipsis never fires" was a
+                    // prediction about a generated string, not a proof about one; a conflict
+                    // source reads "X vs Y" and both halves are generated names, so no width
+                    // makes this provably short. The row is `space-between` with a
+                    // `flexShrink: 0` kicker beside it, so the name owns the rest of the
+                    // column and a two-line source costs one line of card at either width.
+                    overflow: 'visible', textOverflow: 'clip', whiteSpace: 'normal',
                   }}>
-                    {hook.source}
+                    {/* THE ONLY SITE IN THIS LADDER THAT WAS SHOUTING NOTHING AND STILL
+                        WRONG: it printed the RAW ENGINE TOKEN, so a source read "npc" in
+                        lower case where SessionMode:471 and the PDF's PlotHooks both print
+                        "NPC".
+
+                        ⛔ AND IT IS THE ONE SITE WHERE A PLAIN `tokenCase` IS ALSO WRONG
+                        (browser pass 3): this field is `npc.name` for an NPC hook and
+                        `parties.join(' vs ')` for a faction one, so sentence-casing it
+                        printed "Sita goswami" on the card while the Power tab printed
+                        "Sita Goswami". `nameOrTokenCase` cases the token and leaves the
+                        name exactly as its generator spelled it. */}
+                    {nameOrTokenCase(hook.source)}
                   </span>
                   <span style={{
-                    fontSize: FS['7.5'], fontWeight: 800,
+                    fontSize: chromeFontSize(FS['7.5'], mobile), fontWeight: 800,
                     color: cat.color, letterSpacing: '0.08em', flexShrink: 0,
                   }}>
-                    {String(cat.label).toUpperCase()}
+                    {/* ⛔ THIS LINE DESTROYED THE ONE WORD THE LADDER PROTECTS. The category
+                        vocabulary carries 'NPCs' (`domain/dossier/plotHooks.js`), and
+                        `.toUpperCase()` printed it 'NPCS' — an initialism broken by the very
+                        transform the ladder removes. tokenCase returns 'NPCs' intact. */}
+                    {tokenCase(cat.label)}
                   </span>
                 </div>
-                <div style={{ fontSize: FS.xxs, color: BODY, marginTop: 2, lineHeight: 1.45 }}>
+                <div style={{ fontSize: proseFontSize(FS.xxs, mobile), color: BODY, marginTop: 2, lineHeight: 1.45 }}>
                   {hook.text}
                 </div>
               </div>

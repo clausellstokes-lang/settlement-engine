@@ -3,9 +3,31 @@ name: CI
 on:
   # Run on every branch push (not just master/main) so feature branches — where
   # the work actually happens — get the same gate before they ever reach a PR
-  # (finding F35: CI was advisory to feature branches).
+  # (finding F35: CI was advisory to feature branches). F35's purpose is UNCHANGED
+  # by the one exclusion below: every CODE branch still gets the whole gate on every
+  # push, before it reaches a PR.
+  #
+  # THE ONE EXCLUSION is `review-fixes-2026-07-08`, the LEDGER branch — the charter,
+  # the decision queue and the docs. Its `src/` is a FOSSIL by design (no code commit
+  # on it since 08-11), so a CI run there can only fail, and it only spends runner
+  # minutes: measured 2026-09-20, that branch's push (run 35534817791) reddened
+  # build-and-dist, the Deno edge tests and the browser suite, and had its two long
+  # jobs killed at their caps. Syntax, from GitHub's filter-pattern rules: a matching
+  # NEGATIVE pattern placed AFTER a positive one excludes the ref, so the order here
+  # is load-bearing, and at least one positive pattern must remain or the event would
+  # stop triggering altogether.
+  #
+  # CAUTION, and it bounds what this line can do: a push run uses the workflow file
+  # AT THE PUSHED REF. So this exclusion suppresses ledger runs only once the LEDGER
+  # branch's own copy of this file carries it. That same run is the proof — its two
+  # long jobs were cut at 30 and 10 minutes, which are the FOSSIL's caps on that
+  # branch, not this file's.
+  #
+  # CAUTION, second: this is the TRIGGER only. The "Fetch the ledger branch" step in
+  # check-tests and coverage-floors still fetches that ref from origin, because two
+  # suites read the ledger by ref, and it is deliberately untouched here.
   push:
-    branches: ['**']
+    branches: ['**', '!review-fixes-2026-07-08']
   pull_request:
     branches: [master, main]
   # Manual trigger + weekly cron drive the opt-in mutation-sweep job below (it is
@@ -74,11 +96,19 @@ jobs:
   check-tests:  # deploy-gate: optional — required transitively by the `check` aggregate
     name: Gate / test ratchet
     runs-on: ubuntu-latest
-    # The ratchet executes the real full suite. Measured on ubuntu-latest 2026-09-16: 26–28 min
-    # when the run concludes, and five of the nine runs since 08-15 were cut at the old 30-minute
-    # cap (the "~710s" this comment once quoted is two eras stale). Keep measured headroom for
-    # runner variance; a timeout is not a test verdict.
-    timeout-minutes: 45
+    # The ratchet executes the real full suite, and this cap follows that suite. Measured
+    # 2026-09-20: BOTH of PR #53's runs were CUT at the old 45-minute cap without ever
+    # concluding — push 35534822592 and pull_request 35534903945, 45m17s each, ending in "The
+    # operation was canceled." A timeout is not a test verdict, and a cap that cuts a passing
+    # run blocks the production deploy (the `e2e` job below says the same thing one job over;
+    # keep the two comments consistent). The last runs that CONCLUDED were on 2026-09-17, all
+    # three green: 22m55s (35184404284), 34m53s (35168257017) and 35m40s (35230176250). About
+    # five hundred commits and several thousand tests have landed since, and the same ratchet
+    # takes 17m41s locally today over 33,770 tests. 90 is twice the longest concluded run plus
+    # that growth — deliberately loose, and to be TIGHTENED to measured-plus-headroom as soon as
+    # a run concludes on this branch and offers a real figure. The runner size a PRIVATE
+    # repository is given has not been measured here, so no core count is assumed.
+    timeout-minutes: 90
     env:
       CUSTOM_CONTENT_CONCURRENCY_DATABASE_URL: >-
         postgresql://postgres:postgres@127.0.0.1:5432/postgres
@@ -223,7 +253,19 @@ jobs:
   e2e:
     name: Chromium end-to-end
     runs-on: ubuntu-latest
-    timeout-minutes: 15
+    # This job's suite MORE THAN DOUBLED on this branch and its cap was never revisited:
+    # 8 -> 14 chromium spec files and 39 -> 81 `test(` declarations (measured at this tip
+    # against master b9c494afe, excluding e2e/performance/** which playwright.config.js
+    # testIgnores and the performance job owns). It took 5.2 minutes on master's last run
+    # (35127725833) with the OLD suite. The branch also adds a 120s and a 60s per-test
+    # budget, taking the explicitly-budgeted total from 1155s to 1335s — and `retries: 1`
+    # in CI means a single flaky retry of the 420s auth/checkout test can spend 14 minutes
+    # by itself. 25 is the measured figure with headroom for runner variance; a timeout is
+    # not a test verdict. The same master run's coverage-floors job was CUT at its
+    # 45-minute cap, which skipped both deploy jobs and has left production un-deployed
+    # since 2026-09-16 (raised to 60 in 743779742); a cap that cuts a passing run blocks
+    # the production deploy, and this is that failure mode one job over.
+    timeout-minutes: 25
     steps:
       - uses: actions/checkout@v4
 
@@ -358,10 +400,20 @@ jobs:
     # critical path's wall-clock.
     name: Coverage floors (money / security)
     runs-on: ubuntu-latest
-    # The plain suite takes 22.5 min on ubuntu-latest (measured 2026-09-16); under v8 coverage it
-    # cannot fit the old 10-minute cap, which cut this job on every run since 08-15. 45 is the
-    # ratchet job's figure; a timeout is not a coverage verdict.
-    timeout-minutes: 45
+    # This cap follows its suite, exactly as the test ratchet's does. Measured 2026-09-20: BOTH
+    # of PR #53's runs were CUT at the old 60-minute cap without concluding — push 35534822592
+    # (20:13:06Z → 21:13:21Z, 60m15s) and pull_request 35534903945 (20:14:36Z → 21:14:52Z,
+    # 60m16s), both "cancelled". That is the third cap this job has outgrown: 10 cut it on every
+    # run since 08-15, and 45 cut it on master's merge commit b9c494afe on 09-16. The last runs
+    # that CONCLUDED were on 2026-09-17, all three green: 51m52s (35184404284), 52m46s
+    # (35168257017) and 53m41s (35230176250) — already up from the 41–43 minutes measured on
+    # 09-16, and the suite has grown by about five hundred commits since. 100 is twice the
+    # longest concluded run, the same rule the test ratchet's cap uses above, and it is likewise
+    # to be TIGHTENED to measured-plus-headroom once a run concludes on this branch. A timeout
+    # is not a coverage verdict, and the Vercel build gate (scripts/vercel-ignore-build.mjs)
+    # requires this job green, so a cap that cuts a passing run blocks the production deploy —
+    # which is why production has not deployed since 09-16.
+    timeout-minutes: 100
     steps:
       - uses: actions/checkout@v4
       # Two suites read the LEDGER BRANCH by its local ref (scripts/audit/ledger-citations.mjs and

@@ -9,7 +9,11 @@
  * renders the blob, and posts it back. The page stays interactive throughout.
  *
  * Protocol (matched by src/utils/generateSettlementPDF.js):
- *   in  : { id, props }            — props = SettlementPDF component props
+ *   in  : { id, props }            — props = SettlementPDF component props, forwarded WHOLE
+ *                                    to createElement, so a new prop needs no edit here.
+ *                                    `stateProse` (the woven dossier positions) is a plain
+ *                                    string map built on the caller's thread for exactly
+ *                                    that reason: the corpus desks never enter this bundle.
  *   out : { id, ok: true,  blob }  — rendered PDF Blob
  *         { id, ok: false, error } — render threw; error is the message string
  *

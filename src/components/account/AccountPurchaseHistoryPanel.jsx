@@ -15,12 +15,15 @@ import { useCallback, useEffect, useState } from 'react';
 import Section from './AccountSection.jsx';
 import Button from '../primitives/Button.jsx';
 import { INK, BODY, MUTED, SECOND, BORDER, SP, FS, swatch } from '../theme.js';
+import useIsMobile from '../../hooks/useIsMobile.js';
+import { chromeFontSize } from '../../design/proseScale.js';
 
 const COL_DATE = '0 0 92px';
 const COL_AMOUNT = '0 0 84px';
 const COL_RECEIPT = '0 0 68px';
 
 export default function AccountPurchaseHistoryPanel({ auth }) {
+  const mobile = useIsMobile();
   const signedIn = Boolean(auth?.user?.id);
   const [rows, setRows] = useState(null);      // null = loading; [] = loaded/empty
   const [hasMore, setHasMore] = useState(false);
@@ -84,7 +87,7 @@ export default function AccountPurchaseHistoryPanel({ auth }) {
             style={{
               display: 'flex', gap: SP.md, padding: `${SP.xs}px 0`,
               borderBottom: `1px solid ${BORDER}`,
-              fontSize: FS.xxs, fontWeight: 700, color: MUTED,
+              fontSize: chromeFontSize(FS.xxs, mobile), fontWeight: 700, color: MUTED,
               textTransform: 'uppercase', letterSpacing: '0.06em',
             }}
           >
@@ -105,12 +108,12 @@ export default function AccountPurchaseHistoryPanel({ auth }) {
                   fontSize: FS.sm, color: INK,
                 }}
               >
-                <span role="cell" style={{ flex: COL_DATE, color: BODY, fontSize: FS.xs }}>{r.dateLabel}</span>
+                <span role="cell" style={{ flex: COL_DATE, color: BODY, fontSize: chromeFontSize(FS.xs, mobile) }}>{r.dateLabel}</span>
                 <span role="cell" style={{ flex: 1, minWidth: 0 }}>
                   {r.label}
                   {r.status !== 'paid' && (
                     <span style={{
-                      marginLeft: SP.xs, fontSize: FS.xxs, fontWeight: 700,
+                      marginLeft: SP.xs, fontSize: chromeFontSize(FS.xxs, mobile), fontWeight: 700,
                       textTransform: 'uppercase', letterSpacing: '0.04em', color: swatch.danger,
                     }}>
                       {r.status}
@@ -133,12 +136,12 @@ export default function AccountPurchaseHistoryPanel({ auth }) {
                       href={r.receiptUrl}
                       target="_blank"
                       rel="noopener noreferrer"
-                      style={{ fontSize: FS.xs, color: SECOND, textDecoration: 'underline' }}
+                      style={{ fontSize: chromeFontSize(FS.xs, mobile), color: SECOND, textDecoration: 'underline' }}
                     >
                       Receipt
                     </a>
                   ) : (
-                    <span style={{ fontSize: FS.xs, color: MUTED }} aria-hidden="true">–</span>
+                    <span style={{ fontSize: chromeFontSize(FS.xs, mobile), color: MUTED }} aria-hidden="true">–</span>
                   )}
                 </span>
               </div>

@@ -45,9 +45,12 @@ import { resolveTerrain } from '../../domain/resolveTerrain.js';
 import { isCanonSave } from '../../domain/campaign/canon.js';
 import { useDialogFocusTrap } from '../primitives/useDialogFocusTrap.js';
 import Button from '../primitives/Button.jsx';
+import DialogClose from '../primitives/DialogClose.jsx';
 import {
   GOLD, INK, BODY, MUTED, SECOND, BORDER, CARD, CARD_ALT, RED, sans, FS, SP,
 } from '../theme.js';
+import useIsMobile from '../../hooks/useIsMobile.js';
+import { chromeFontSize, proseFontSize } from '../../design/proseScale.js';
 
 const TITLE_ID = 'autoplace-consent-title';
 
@@ -80,6 +83,7 @@ export function rosterForPlanning(saves, placements) {
 }
 
 export default function AutoplacementConsent({ saves = [], onClose, announce }) {
+  const mobile = useIsMobile();
   const placements = useStore((s) => s.mapState.placements);
   const mapSeed = useStore((s) => s.mapState.seed);
   const applyAutoplacement = useStore((s) => s.applyAutoplacement);
@@ -219,6 +223,12 @@ export default function AutoplacementConsent({ saves = [], onClose, announce }) 
               Every change is listed below before anything happens. Nothing is written until you confirm.
             </p>
           </div>
+          {/* THE HOUSE EXIT (owner order, ODQ §934.31). This dialog's only way out was a
+              secondary button below a scrolling list of proposed placements — on a phone,
+              past the fold, and reading as one more choice rather than a door. The
+              header now carries the constant one. Nothing is written by closing: the
+              consent is the confirm button, and this is the way back out of the question. */}
+          <DialogClose onClose={onClose} />
         </header>
 
         <div style={{ flex: 1, overflowY: 'auto', minHeight: 0 }}>
@@ -265,7 +275,7 @@ export default function AutoplacementConsent({ saves = [], onClose, announce }) 
                     <strong style={{ fontWeight: 700 }}>{p.name}</strong>
                     <span style={{ color: BODY }}> {p.reason}</span>
                     {p.kind === 'place' && (
-                      <span style={{ color: SECOND, fontSize: FS.xxs, display: 'block' }}>
+                      <span style={{ color: SECOND, fontSize: chromeFontSize(FS.xxs, mobile), display: 'block' }}>
                         Not yet on the map. This puts it there for the first time.
                       </span>
                     )}
@@ -313,7 +323,7 @@ export default function AutoplacementConsent({ saves = [], onClose, announce }) 
                           <strong style={{ fontWeight: 700 }}>{m.name}</strong>
                           <span style={{ color: BODY }}> {m.reason}</span>
                           {m.bestAvailable && (
-                            <span style={{ color: SECOND, fontSize: FS.xxs, display: 'block' }}>
+                            <span style={{ color: SECOND, fontSize: chromeFontSize(FS.xxs, mobile), display: 'block' }}>
                               {m.bestAvailable.reason}
                             </span>
                           )}
@@ -323,7 +333,7 @@ export default function AutoplacementConsent({ saves = [], onClose, announce }) 
                         data-testid={`reterrain-${m.settlementId}`}
                         style={{
                           marginLeft: 24, padding: SP.xs, border: `1px solid ${BORDER}`,
-                          background: CARD_ALT, color: SECOND, fontSize: FS.xxs, lineHeight: 1.5,
+                          background: CARD_ALT, color: SECOND, fontSize: proseFontSize(FS.xxs, mobile), lineHeight: 1.5,
                         }}
                       >
                         <strong style={{ color: INK, fontWeight: 700 }}>{m.options.reterrain.label}.</strong>{' '}
@@ -363,15 +373,16 @@ export default function AutoplacementConsent({ saves = [], onClose, announce }) 
 
 /** @param {{ title: string, note: string }} props */
 function SectionHead({ heading, note }) {
+  const mobile = useIsMobile();
   return (
     <div style={{
       padding: `${SP.sm}px ${SP.sm}px ${SP.xs}px`, background: CARD_ALT,
       borderBottom: `1px solid ${BORDER}`, fontFamily: sans,
     }}>
-      <div style={{ fontSize: FS.xs, fontWeight: 800, color: INK, textTransform: 'uppercase', letterSpacing: '0.06em' }}>
+      <div style={{ fontSize: chromeFontSize(FS.xs, mobile), fontWeight: 800, color: INK, textTransform: 'uppercase', letterSpacing: '0.06em' }}>
         {heading}
       </div>
-      <div style={{ fontSize: FS.xxs, color: SECOND, marginTop: 2, lineHeight: 1.45 }}>{note}</div>
+      <div style={{ fontSize: proseFontSize(FS.xxs, mobile), color: SECOND, marginTop: 2, lineHeight: 1.45 }}>{note}</div>
     </div>
   );
 }

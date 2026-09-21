@@ -130,6 +130,37 @@ describe('WR-5 war seat books', () => {
     expect(read.authoritySignature).toContain('a:ruler');
   });
 
+  it('EM-B1f — never lets a JAILED roster holder keep the seat (design §15: a jailed or exiled holder cannot keep a seat)', () => {
+    // ⛔ ANCHORED AGAINST VACUITY, and the anchor is the defect this packet cures: before the
+    // chokepoint's status arm, EVERY one of these statuses read `holding` through this call.
+    const anchor = readWarSeatBooks({
+      worldState: world(),
+      snapshot: snap([item({ npcs: [ruler('ruler', { status: 'active' })] })]),
+      actorId: 'a',
+      opponentId: 'b',
+    });
+    expect(anchor).toMatchObject({
+      interestKind: 'seat',
+      securityBand: 'holding',
+      seatWeight01: 0.3744,
+      rulerId: 'a:ruler',
+    });
+
+    const read = readWarSeatBooks({
+      worldState: world(),
+      snapshot: snap([item({ npcs: [ruler('ruler', { status: 'jailed' })] })]),
+      actorId: 'a',
+      opponentId: 'b',
+    });
+    expect(read).toMatchObject({
+      interestKind: 'realm',
+      settlementWeight01: 1,
+      seatWeight01: 0,
+      securityBand: 'unseated',
+    });
+    expect(read.rulerId).toBeUndefined();
+  });
+
   it('lets a secure ruler govern for the realm while an insecure ruler weights private books more heavily', () => {
     const secureItem = item({ legitimacy: 100, crownPower: 90, rivalPower: 10 });
     const secureBlocs = [{

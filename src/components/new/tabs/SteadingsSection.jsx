@@ -13,6 +13,8 @@ import { useMemo } from 'react';
 import { useStore } from '../../../store/index.js';
 import { FS, swatch, MUTED } from '../../theme.js';
 import { formatCount } from '../../../domain/formatNumber.js';
+import { chromeFontSize, proseFontSize } from '../../../design/proseScale.js';
+import useIsMobile from '../../../hooks/useIsMobile.js';
 import { generalDeskLines } from '../generalDeskRead.js'; // DS-GEN-8 · the general desk's ONE caller
 
 const GRADE_LABEL = {
@@ -21,6 +23,7 @@ const GRADE_LABEL = {
 };
 
 export default function SteadingsSection({ settlement, publicDossier = false, playerView = false }) {
+  const mobile = useIsMobile();
   const sid = settlement?.id != null ? String(settlement.id) : null;
   const campaigns = useStore(s => s.campaigns);
 
@@ -57,7 +60,7 @@ export default function SteadingsSection({ settlement, publicDossier = false, pl
     <div style={{ marginTop: 14 }}>
       {grade ? (
         <div style={{ background: swatch['#FAF8F4'], border: `1px solid ${swatch['#E0D0B0']}`, borderLeft: `3px solid ${swatch.danger}`, padding: '8px 12px', marginBottom: 10 }}>
-          <div style={{ fontSize: FS.micro, fontWeight: 700, color: swatch.danger, textTransform: 'uppercase', letterSpacing: '0.06em' }}>
+          <div style={{ fontSize: chromeFontSize(FS.micro, mobile), fontWeight: 700, color: swatch.danger }}>
             {GRADE_LABEL[grade] || 'Remnant'}
           </div>
           {desk.remnantLine && <div style={{ fontSize: FS.sm, color: swatch.inkMag2, lineHeight: 1.45, fontStyle: 'italic', marginBottom: 4 }}>{desk.remnantLine}</div>}
@@ -71,7 +74,7 @@ export default function SteadingsSection({ settlement, publicDossier = false, pl
 
       {ancient ? (
         <div style={{ background: swatch['#FAF8F4'], border: `1px solid ${swatch['#E0D0B0']}`, borderLeft: `3px solid ${swatch.inkMag3}`, padding: '8px 12px', marginBottom: 10 }}>
-          <div style={{ fontSize: FS.micro, fontWeight: 700, color: swatch.inkMag3, textTransform: 'uppercase', letterSpacing: '0.06em' }}>
+          <div style={{ fontSize: chromeFontSize(FS.micro, mobile), fontWeight: 700, color: swatch.inkMag3, textTransform: 'uppercase', letterSpacing: '0.06em' }}>
             Ancient ruin nearby
           </div>
           <div style={{ fontSize: FS.sm, color: swatch.inkMag, lineHeight: 1.4 }}>
@@ -83,7 +86,7 @@ export default function SteadingsSection({ settlement, publicDossier = false, pl
 
       {steadings.length ? (
         <div>
-          <div style={{ fontSize: FS.micro, fontWeight: 700, color: swatch.inkMag3, textTransform: 'uppercase', letterSpacing: '0.06em', marginBottom: 6 }}>
+          <div style={{ fontSize: chromeFontSize(FS.micro, mobile), fontWeight: 700, color: swatch.inkMag3, textTransform: 'uppercase', letterSpacing: '0.06em', marginBottom: 6 }}>
             Steadings ({steadings.length})
           </div>
           <div style={{ display: 'flex', flexWrap: 'wrap', gap: 8 }}>
@@ -91,16 +94,16 @@ export default function SteadingsSection({ settlement, publicDossier = false, pl
               <div key={rec.id} style={{ flex: '1 1 180px', minWidth: 0, background: swatch['#FAF8F4'], border: `1px solid ${swatch['#E0D0B0']}`, padding: '7px 10px' }}>
                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'baseline', gap: 6 }}>
                   <span style={{ fontSize: FS.sm, fontWeight: 700, color: swatch.inkMag }}>{rec.name}</span>
-                  <span style={{ fontSize: FS.xxs, color: MUTED }}>{rec.tier}</span>
+                  <span style={{ fontSize: chromeFontSize(FS.xxs, mobile), color: MUTED }}>{rec.tier}</span>
                 </div>
-                <div style={{ fontSize: FS.xxs, color: MUTED, lineHeight: 1.5 }}>
+                <div style={{ fontSize: proseFontSize(FS.xxs, mobile), color: MUTED, lineHeight: 1.5 }}>
                   {formatCount(rec.population)} folk
                   {rec.resourceKey ? ` · ${String(rec.resourceKey).replace(/_/g, ' ')}` : ''}
                   {rec.provenance === 'forced' ? ' · founded by decree' : ''}
                   {rec.charterPending ? ' · a charter awaits' : ''}
                 </div>
                 {/* INDEX-PAIRED with the desk's own list, which keeps a null in place. */}
-                {desk.steadingLines[i] && <div style={{ fontSize: FS.xs, color: swatch.inkMag2, lineHeight: 1.45, fontStyle: 'italic', marginTop: 4 }}>{desk.steadingLines[i]}</div>}
+                {desk.steadingLines[i] && <div style={{ fontSize: proseFontSize(FS.xs, mobile), color: swatch.inkMag2, lineHeight: 1.45, fontStyle: 'italic', marginTop: 4 }}>{desk.steadingLines[i]}</div>}
               </div>
             ))}
           </div>

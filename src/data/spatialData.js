@@ -163,22 +163,22 @@ export const GATE_FEATURES = {
   },
   "Parish church": {
     minTier: "village",
-    reason: "Villages are legally defined by a parish. Hamlets rely on circuit priests."
+    reason: "Villages are legally defined by a congregation. Hamlets rely on circuit priests."
   },
   "Parish churches (2-5)": {
     minTier: "town",
     requires: ["Parish church", "Priest (resident)"],
-    reason: "Multiple parishes require town-scale population."
+    reason: "Multiple congregations require town-scale population."
   },
   "Parish churches (10-30)": {
     minTier: "city",
     requires: ["Parish churches (2-5)"],
-    reason: "Extensive parish network requires city-scale population."
+    reason: "An extensive network of them requires city-scale population."
   },
   "Parish churches (50-100+)": {
     minTier: "metropolis",
     requires: ["Parish churches (10-30)"],
-    reason: "Metropolitan parish network requires tens of thousands of residents."
+    reason: "A metropolitan network of them requires tens of thousands of residents."
   },
   "Monastery or friary": {
     minTier: "village",
@@ -211,12 +211,12 @@ export const GATE_FEATURES = {
   "Cathedral (10,000+ only)": {
     minTier: "city",
     requires: ["Parish churches (2-5)", "Parish churches (10-30)"],
-    reason: "A bishop's seat requires 10,000+ population and an established parish structure."
+    reason: "A bishop's seat requires 10,000+ population and an established congregational structure."
   },
   "Great cathedral": {
     minTier: "metropolis",
     requires: ["Cathedral (10,000+ only)", "Parish churches (10-30)", "Parish churches (50-100+)"],
-    reason: "Architectural marvel requires massive wealth, metropolitan population, and deep parish roots."
+    reason: "Architectural marvel requires massive wealth, metropolitan population, and deep congregational roots."
   },
   "Great library": {
     minTier: "city",

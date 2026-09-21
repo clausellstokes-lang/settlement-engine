@@ -12,9 +12,24 @@
  */
 import { describe, it, expect } from 'vitest';
 import { execFileSync } from 'node:child_process';
+import { readFileSync } from 'node:fs';
 import { buildWorldSnapshot } from '../../src/domain/worldPulse/worldSnapshot.js';
 import { eligibleMembersOf, ladderFactionKey } from '../../src/domain/worldPulse/npcLadderState.js';
 import { npcId } from '../../src/domain/worldPulse/npcAgency.js';
+// EM-B1k (A3, A5): the write-base cure is proved AT THIS CHOKEPOINT, because the thing it must
+// not disturb is exactly what this file pins — the participation view. A3 drives the SHIPPED
+// pulse entry so the seam under test is the real one; A5 is the regression belt around it.
+import { simulateCampaignWorldPulse } from '../../src/domain/worldPulse/pulseKernel.js';
+import { applyWorldPulseResultToState } from '../../src/store/campaignPulseHelpers.js';
+import { ensureRegionalGraph } from '../../src/domain/region/graph.js';
+import { generateSettlementPipeline } from '../../src/generators/generateSettlementPipeline.js';
+import { applyNpcOp } from '../../src/store/settlementPendingEditWriters.js';
+import { factionLifecycleStateOf } from '../../src/domain/density/factionLifecycle.js';
+import { DENSITY_LAW_CONFIG_KEY, REGISTER_VII_DENSITY_LAW_VERSION } from '../../src/domain/density/densityLaw.js';
+import { rosterPersonAvailable } from '../../src/domain/worldPulse/envoyCasting.js';
+import { readWarSeatBooks } from '../../src/domain/worldPulse/warSeatBooks.js';
+import { isOffStage } from '../../src/domain/roads/state.js';
+import { expectAbsentWithAnchor } from '../helpers/anchoredNegatives.js';
 
 describe('participation chokepoint — the master gate (buildWorldSnapshot, §8)', () => {
   const npcs = [
@@ -47,6 +62,152 @@ describe('participation chokepoint — the master gate (buildWorldSnapshot, §8)
     const snap = buildWorldSnapshot({ campaign: { ...campaign, settlementIds: ['p'] }, saves: [plain], worldState: campaign.worldState });
     expect(snap.byId.get('p').settlement, 'no allocation when nobody is off-stage').toBe(plain.settlement);
   });
+
+  it('EM-B1f A4 — a JAILED NPC is off-stage for participation while the SAVE still holds them by id', () => {
+    const roster = [
+      { id: 'free', name: 'Alia', importance: 'notable', status: 'active' },
+      { id: 'held', name: 'Bram', importance: 'notable', status: 'jailed' },
+    ];
+    const jailedSave = { id: 'j', name: 'J', phase: 'canon', settlement: { name: 'J', npcs: roster }, campaignState: { phase: 'canon', eventLog: [], locks: {} } };
+    const snap = buildWorldSnapshot({ campaign: { ...campaign, settlementIds: ['j'] }, saves: [jailedSave], worldState: campaign.worldState });
+    expect(
+      (snap.byId.get('j').settlement.npcs || []).map((n) => String(n.id)),
+      'the participation view keeps the active member and drops the jailed one — a jailed holder cannot keep a seat (design §15)',
+    ).toEqual(['free']);
+    expect(
+      jailedSave.settlement.npcs.map((n) => String(n.id)).sort(),
+      'ABSENCE FROM PARTICIPATION IS NOT ABSENCE FROM THE RECORD: the save still holds the jailed person, so the dossier still shows them as jailed',
+    ).toEqual(['free', 'held']);
+  });
+
+  it('EM-B1f A7 — the union walker carries the chokepoint as its ninth row, spelled `derived`, with the machinery that makes the kind real', () => {
+    const here = (rel) => readFileSync(new URL(rel, import.meta.url), 'utf8');
+    const chokepoint = here('../../src/domain/roads/state.js');
+    const walker = here('../lint/statusUnionTotality.walker.test.js');
+    // LIVENESS FIRST: the arm is what puts state.js in the walker's FLAGGED set (it spells a
+    // trigger word to SUBTRACT it), which is what makes the ninth row load-bearing instead of
+    // decorative. Deleting the row reds A3's set-equality BY NAME — executed at the build.
+    expect(
+      chokepoint,
+      'the chokepoint must DERIVE its arm from the availability vocabulary (FORM B), never spell the union a third time',
+    ).toContain("NPC_UNAVAILABLE_STATUSES.filter((s) => s !== 'dead')");
+    expect(
+      walker,
+      'without `derived` among the flaggable spellings the ninth row drops out of DECLARED_FLAGGABLE and A3 convicts the honest consumer',
+    ).toContain("FLAGGABLE_SPELLINGS = Object.freeze(['literals', 'derived'])");
+    expect(
+      walker,
+      'the ninth roster row IS the participation chokepoint, appended at the end so A3\'s probes keep their aim',
+    ).toContain("{ file: 'src/domain/roads/state.js', symbol: 'isOffStage', spelling: 'derived', enumerator: false, omits: ALL_BUT_DEAD,");
+    expect(
+      walker,
+      'the `derived` kind must be REAL WORK: a row that stops reading the vocabulary it claims to derive from is convicted by name',
+    ).toContain('declared DERIVED but does not read ${AVAILABILITY_VOCABULARY}');
+  });
+
+  it('EM-B1k A3 — a house whose SOLE member is shelved survives the tick: crewed, seated, no dissolution beat', () => {
+    // THE IRREVERSIBLE CONSEQUENCE, AND THE GUARD THAT WAS RIGHT ALL ALONG. §810.4 R18: an
+    // irreversible consequence may only be triggered by irreversible causes, and
+    // factionDensityKernel's own `stillEmpty` confirmation re-reads the roster at the moment it
+    // applies. It failed only because the base it re-read was the PARTICIPATION VIEW. Shelving
+    // is a reversible stage mark; dissolving a house is permanent. THE POPULATION AT RISK,
+    // measured over the 525-row golden corpus: 1,608 of 3,378 factions (47.6%) hold exactly ONE
+    // rostered member, 147 of them governing, and 100% of settlements hold at least one.
+    const crown = { id: 'fac.crown', name: 'The Crown', faction: 'The Crown', isGoverning: true, power: 40 };
+    const weavers = { id: 'fac.weavers', name: 'The Weavers', faction: 'The Weavers', power: 12 };
+    const member = (house, extra) => ({ id: `npc.${house.replace(/\W/g, '')}`, name: `Factor of ${house}`, factionAffiliation: house, status: 'active', importance: 'notable', ...extra });
+    const ashfordWith = (weaverExtra) => ({
+      id: 'ashford', name: 'Ashford', tier: 'town',
+      config: { [DENSITY_LAW_CONFIG_KEY]: REGISTER_VII_DENSITY_LAW_VERSION },
+      npcs: [member('The Crown', {}), member('The Weavers', weaverExtra)],
+      powerStructure: { governingName: 'The Crown', factions: [crown, weavers], seatOfPower: 'The Crown', publicLegitimacy: { score: 55 }, factionRelationships: [] },
+    });
+    const tickOnce = (settlement) => {
+      const save = { id: 'ashford', name: 'Ashford', phase: 'canon', settlement, campaignState: { phase: 'canon', eventLog: [], locks: {} } };
+      const world = { rngSeed: 'em-b1k-a3', tick: 4, simulationRules: {} };
+      const result = simulateCampaignWorldPulse({
+        campaign: { id: 'c-em-b1k-a3', name: 'C', settlementIds: ['ashford'], worldState: world, regionalGraph: ensureRegionalGraph({ edges: [], channels: [] }), wizardNews: { currentTick: 4, entries: [] } },
+        saves: [save], interval: 'one_month', commit: true, now: '2026-01-01T00:00:00.000Z',
+      });
+      const out = result.settlementUpdates[0].settlement;
+      return { out, houses: (out.powerStructure?.factions || []).map((f) => String(f.name)), beats: (result.wizardNews?.entries || []).map((e) => String(e.impactKind || e.kind)) };
+    };
+
+    const control = tickOnce(ashfordWith({}));
+    expect(control.houses, 'THE CONTROL: with its member on stage the house is untouched').toEqual(['The Crown', 'The Weavers']);
+
+    const shelved = tickOnce(ashfordWith({ stasis: { reason: 'sequestered' } }));
+    expect(
+      shelved.houses,
+      `A HOUSE WAS DISSOLVED BECAUSE ITS ONE MEMBER WAS SHELVED (houses ${JSON.stringify(shelved.houses)},`
+      + ` lifecycle '${factionLifecycleStateOf(shelved.out, weavers)}', beats ${JSON.stringify(shelved.beats)}).`
+      + ' Shelving is reversible; dissolution is not — the confirmation re-read a roster the'
+      + ' participation filter had already shortened.',
+    ).toEqual(['The Crown', 'The Weavers']);
+    expect(factionLifecycleStateOf(shelved.out, weavers), 'the house still reads crewed by the estate\'s own lifecycle reader').toBe('crewed');
+    expectAbsentWithAnchor(shelved.beats, 'faction_dissolved', 'faction_service_bolster', 'the tick must not narrate a dissolution that did not happen');
+  });
+
+  it('EM-B1k A5 — the participation reads are UNCHANGED, the post-time view is re-derived from the raw save, and a shelved person is frozen', () => {
+    // ⛔ THE CURE'S CHIEF BURDEN. Three movers `.map` the update roster with an index, so under a
+    // RAW write base they iterate more people than they used to. This arm is the proof that not
+    // one participation guarantee moved with them. Measured denominators behind it: 24 corpus
+    // towns swapped base-for-base moved worldState in 0 and a settlement key in only 6, every one
+    // of those six a SPURIOUS faction_interregnum the cure REMOVES.
+    const guild = { id: 'f1', name: 'Guild', faction: 'Guild', isGoverning: true, power: 40 };
+    const fkey = ladderFactionKey(guild);
+    const free = { id: 'free', name: 'Alia', importance: 'key', factionAffiliation: 'Guild', structuralRank: 'dominant', status: 'active' };
+    const shelvedNpc = { ...free, id: 'shelved', name: 'Bram', stasis: { reason: 'imprisoned' } };
+    const court = { id: 's', name: 'S', npcs: [free, shelvedNpc], powerStructure: { governingName: 'Guild', factions: [guild], seatOfPower: 'Guild', publicLegitimacy: { score: 55 } } };
+    const world = { tick: 4, simulationRules: {} };
+    const snap = buildWorldSnapshot({ campaign: { id: 'c', settlementIds: ['s'], worldState: world }, saves: [{ id: 's', name: 'S', phase: 'canon', settlement: court, campaignState: { phase: 'canon', eventLog: [], locks: {} } }], worldState: world });
+
+    // 1. never cast · 2. never on stage for the roads lane · 3. never ladder-eligible
+    expect(rosterPersonAvailable(free), 'LIVENESS: the free sibling IS castable').toBe(true);
+    expect(rosterPersonAvailable(shelvedNpc), 'a shelved person is still never cast').toBe(false);
+    expect(isOffStage(free), 'LIVENESS: the free sibling is on stage').toBe(false);
+    expect(isOffStage(shelvedNpc), 'a shelved person is still off-stage for the roads lane').toBe(true);
+    const ladder = eligibleMembersOf('s', court, guild, fkey).map((r) => r.npcId);
+    expect(ladder, 'the ladder belt still admits the free member and only them').toEqual([npcId('s', free, 0)]);
+    // 4. never holds the war seat — with the SHELVED person as the only seated candidate
+    const booksFor = (npc) => {
+      const sole = { ...court, npcs: [npc] };
+      const seatWorld = { ...world, spatialLedgers: { npcLadder: { s: { factions: { [fkey]: { rungs: [npcId('s', npc, 0)] } } } } } };
+      const seatSnap = buildWorldSnapshot({ campaign: { id: 'c', settlementIds: ['s'], worldState: seatWorld }, saves: [{ id: 's', name: 'S', phase: 'canon', settlement: sole, campaignState: { phase: 'canon', eventLog: [], locks: {} } }], worldState: seatWorld });
+      return readWarSeatBooks({ worldState: seatWorld, snapshot: seatSnap, actorId: 's', opponentId: 'o' });
+    };
+    expect(booksFor(free).securityBand, 'LIVENESS: an on-stage ruler really does seat').toBe('secure');
+    expect(booksFor(shelvedNpc).securityBand, 'a shelved ruler still holds no war seat').toBe('unseated');
+    // 5. the dormancy reference — nobody off-stage ⇒ the SAME settlement object
+    const plainSettlement = { id: 'p', name: 'P', npcs: [free] };
+    const plainSnap = buildWorldSnapshot({ campaign: { id: 'c', settlementIds: ['p'], worldState: world }, saves: [{ id: 'p', name: 'P', phase: 'canon', settlement: plainSettlement, campaignState: { phase: 'canon', eventLog: [], locks: {} } }], worldState: world });
+    expect(plainSnap.byId.get('p').settlement, 'a world with nobody off-stage still passes the settlement through by reference').toBe(plainSettlement);
+    expect(snap.byId.get('s').settlement.npcs.map((n) => String(n.id)), 'and the filtered view is still exactly the on-stage roster').toEqual(['free']);
+
+    // 6+7. THE POST-TIME CONFIRMATION and THE FROZEN CLAUSE, through a real committed tick.
+    const town = generateSettlementPipeline({ settType: 'town', culture: 'anglo_saxon', terrainOverride: 'plains', tradeRouteAccess: 'road', monsterThreat: 'civilized' }, null, { seed: 'em-b1k-a5', customContent: {} });
+    town.id = 'ashford';
+    const shelfStore = { settlement: town };
+    applyNpcOp(() => shelfStore, (fn) => fn(shelfStore), { kind: 'stasis-npc', payload: { npcId: String(town.npcs[0].id), reason: 'sequestered' } });
+    const preRecord = JSON.parse(JSON.stringify(town.npcs[0]));
+    const townSave = { id: 'ashford', name: town.name, phase: 'canon', settlement: town, campaignState: { phase: 'canon', eventLog: [], locks: {} } };
+    const townWorld = { rngSeed: 'ws-em-b1k-a5', tick: 4, simulationRules: {} };
+    const townCampaign = { id: 'c-em-b1k-a5', name: 'C', settlementIds: ['ashford'], worldState: townWorld, regionalGraph: ensureRegionalGraph({ edges: [], channels: [] }), wizardNews: { currentTick: 4, entries: [] } };
+    const townResult = simulateCampaignWorldPulse({ campaign: townCampaign, saves: [townSave], interval: 'one_month', commit: true, now: '2026-01-01T00:00:00.000Z' });
+    const townState = { savedSettlements: [JSON.parse(JSON.stringify(townSave))], activeSaveId: 'ashford', settlement: null, systemState: null, editedAt: null };
+    const persisted = applyWorldPulseResultToState(townState, townCampaign, townResult, '2026-01-01T00:00:00.000Z')[0].settlement;
+    // The projection is recomputed FROM TRUTH rather than from a previous projection: the save
+    // the tick wrote holds the shelved person, and the view derived from it still hides them.
+    const postSnap = buildWorldSnapshot({ campaign: { id: 'c-em-b1k-a5', settlementIds: ['ashford'], worldState: townWorld }, saves: [{ ...townSave, settlement: persisted }], worldState: townWorld });
+    const postItem = postSnap.byId.get('ashford');
+    expect((postItem.save.settlement.npcs || []).some((n) => String(n.id) === String(preRecord.id)), 'THE POST-TIME SAVE must INCLUDE the shelved person — the raw roster survived the tick').toBe(true);
+    expect((postItem.settlement.npcs || []).some((n) => String(n.id) === String(preRecord.id)), 'and the post-time VIEW must still EXCLUDE them — participation is unchanged').toBe(false);
+    const postRecord = (persisted.npcs || []).find((n) => String(n.id) === String(preRecord.id));
+    expect(postRecord, 'THE FROZEN CLAUSE needs the person to still exist to be frozen').toBeTruthy();
+    const movedKeys = [...new Set([...Object.keys(preRecord), ...Object.keys(postRecord || {})])]
+      .filter((k) => JSON.stringify(preRecord[k]) !== JSON.stringify((postRecord || {})[k]));
+    expect(movedKeys, 'A TICK WROTE ONTO A SHELVED PERSON. Stasis means frozen: a mover that now iterates the raw roster must not mark somebody who was not on stage').toEqual([]);
+  });
 });
 
 describe('participation chokepoint — the ladder belt (eligibleMembersOf, §8)', () => {
@@ -72,7 +233,27 @@ describe('participation chokepoint — the .npcs-reader inventory ratchet (§8 c
   // the FULL roster to manage hostages); partyImpact = the RAW READER (deliberately ungated —
   // DM sovereignty); everything else is via-snapshot (protected by the gate, no edit). A NEW
   // reader added here must be dispositioned before this pin is updated.
+  //
+  // ⛔ EM-B1k2 NARROWED THAT BLANKET, because it was FALSE of four rows and nobody had asked.
+  // "everything else is via-snapshot" covers a reader that receives the SNAPSHOT. It does not
+  // cover a reader whose base is its CALLER'S CHOICE, and `settlementLifecycleFirstClass.js`
+  // and `successorNpc.js` are exactly that: permanent roster writers with no save in their
+  // signatures, sitting here with no disposition at all and inheriting a sentence that was
+  // never about them. Nor does it cover the two density roots the scan now reaches. Those four
+  // rows carry their own dispositions below; the blanket binds only the rows that carry none.
+  // ⛔ A row with no written disposition of its own is a row nobody has judged — the next
+  // reader to notice that should write one, not widen this paragraph.
   const EXPECTED = [
+    // ⭐ EM-B1k2 — THE R18 LAW ITSELF, and the row the widened roots exist for.
+    // `factionRosterOf` (:113) is the estate's roster filter and `readFactionLifecycle` (:155)
+    // is the §810.4 R18 law that reads it. PARTICIPATION-INDEPENDENT BY CONSTRUCTION AND
+    // REQUIRED TO BE: it decides an IRREVERSIBLE consequence — a house swept out of
+    // `powerStructure.factions` — and R18 admits only irreversible causes. Both of its
+    // production callers in factionDensityKernel.js now hand it a RAW roster: the law at
+    // `tickStart` (EM-B1k2) and the confirmation at `fresh` (EM-B1k). ⛔ A caller that hands
+    // it the participation view dissolves a house because somebody is shelved — which is the
+    // defect EM-B1k2 removed the habitat for, measured 7 of 7 towns before the cure.
+    'src/domain/density/factionLifecycle.js',
     // THE DECOMPOSITION WAVE (war tranche, file 4) moved seedBetrayalTraitor — the one
     // `.npcs` read the apply pass owned — verbatim out of applyWorldPulse.js into this
     // leaf. Same reader, same disposition (via-snapshot, protected by the gate, no edit);
@@ -136,6 +317,19 @@ describe('participation chokepoint — the .npcs-reader inventory ratchet (§8 c
     // the cadence runs only under the density law's version gate (`_densityLawVersion: 2`),
     // which no shipped world carries — proven by the landing's three bit-identical
     // dormancy probes.
+    //
+    // ⭐ EM-B1k2 ADDS THE SECOND CLAUSE, because TE-DENSITY-1 above is about `applyCadence`
+    // ALONE and the file's OTHER roster reader inherited the via-snapshot blanket it had no
+    // right to. THE LIFECYCLE READ IS IRREVERSIBLE, SO IT IS RAW: `tickStart` (the base
+    // `readFactionLifecycle` decides a dissolution from) reads `asObject(item.save).settlement`
+    // and its confirmation (`stillEmpty` over `fresh`) reads the roster EM-B1k made raw at the write
+    // base. IRREVERSIBLE ⇒ RAW is the whole rule: a permanent consequence may not be computed
+    // from a projection and then rescued by a second guard, because the rescue is one edit
+    // away from being skipped (the `fresh` fallback is that edit already written). Every
+    // REVERSIBLE reading in this file keeps the participation view — the emergence founder's
+    // append at `applyCadence`, the interregnum marks — so the roads chokepoint is untouched.
+    // ⚠ And TE-DENSITY-1's own claim was ASPIRATIONAL until EM-B1k landed: `fresh` really is
+    // the raw saved roster now, so the append it describes lands where it says it does.
     'src/domain/worldPulse/factionDensityKernel.js',
     // D-7e clause (i) (round-3 F3): seatGratitudeSevToward reads the persisted LADDER
     // record's `.npcs` STANDINGS map (priorLedger[sid].npcs — ladder state, never the
@@ -242,13 +436,73 @@ describe('participation chokepoint — the .npcs-reader inventory ratchet (§8 c
     // stay atomic. Dormant by default (npcConsequencesEnabled is declared false in the
     // full_simulation spread and lit in no preset), and nothing calls it from the pulse yet.
     'src/domain/worldPulse/npcVerdictApply.js',
+    // ⭐ EM-B1f — PERMANENT ROSTER WRITER 2's DIRECT CALLER, and the row that closes the gap
+    // EM-B1k2 left. `successorNpc.js`'s row below is ABOUT `replaceOustedNpcs` and names this
+    // file as the binder of its base — yet this file itself sat in the quarantine with no
+    // disposition at all. ⛔ NOT via-snapshot, and RAW BY ITS CALLER.
+    // `applyOrganicNpcVerdicts` reads `.npcs` once (:109) off `verdictSettlement`, bound at
+    // :100 from the `settlement` parameter, and pulseKernel.js `const verdicts = applyOrganicNpcVerdicts({`
+    // hands it `s` — the tick's settlement, made RAW by EM-B1k at :184/:579. (The seam is cited
+    // by CONTENT, never by line: tests/lint/pulseKernelLineAddress.walker.test.js freezes
+    // hand-keyed kernel addresses at zero and proves this backticked token still exists.) Its
+    // second roster use is `replacementSource` (:99), handed to `replaceOustedNpcs` (:133): the
+    // same raw object, which is why writer 2's contract holds.
+    // PARTICIPATION-INDEPENDENT AND REQUIRED TO BE, for the npcVerdictApply / stripNpcInfluence
+    // reason: an ouster verdict is a MUTATION read, and it lands on a person whether or not they
+    // were on stage this tick — read through the participation view a shelved or jailed figure
+    // could not be sentenced at all, and `replaceOustedNpcs`, which RETURNS A WHOLE ROSTER,
+    // would drop everyone the filter removed.
+    // ⚠ And one honest residual, recorded rather than hidden: `npcId` (npcAgency.js:194) falls
+    // back to a positional `npc_<index>` for a record carrying no id, name or label, so on a
+    // FILTERED base such a record could be misaddressed. EM-B1k2's A6 measured 0 of 5,171 corpus
+    // NPCs without a display name, so the fallback is unreachable today and the raw base keeps
+    // it that way.
+    'src/domain/worldPulse/npcVerdictPulse.js',
     'src/domain/worldPulse/partyImpact.js',
     'src/domain/worldPulse/pulseKernel.js',
     'src/domain/worldPulse/religionLegitimacy.js',
     'src/domain/worldPulse/roadsKernel.js',
+    // ⭐ EM-B1k2 — A PERMANENT ROSTER WRITER WHOSE BASE IS ITS CALLER'S. ⛔ NOT via-snapshot,
+    // and saying so is the point of this row: it sat here under the blanket above with no
+    // disposition at all, and the blanket is FALSE of it.
+    // `applySettlementLifecycleOutcomeToSettlement` (:578) stamps `dispersed: true` on every
+    // soul when a settlement dies — permanent, once. It takes NO save in its signature, so it
+    // cannot read raw itself; its base is `applyWorldPulse.js:717`'s `entry.settlement`,
+    // reaching it through `applyOutcomeToSettlement` (:733 → the writer call at :155), and
+    // that entry comes from `buildSettlementMap`'s map, made RAW by EM-B1k. MEASURED on the
+    // filtered base: roster out 2, dispersed stamps 2, the shelved soul absent, against
+    // 3 / 3 / present on the raw base — law 6 conservation broken in silence. The file now
+    // carries this contract in its own docblock, where the next editor will read it.
     'src/domain/worldPulse/settlementLifecycleFirstClass.js',
+    // ⭐ EM-B1k2 — THE SECOND PERMANENT ROSTER WRITER, same shape, same correction. ⛔ NOT
+    // via-snapshot. `replaceOustedNpcs` (:64) RETURNS A WHOLE ROSTER, so whatever it was not
+    // handed is gone from the settlement its caller writes. No save in the signature; its base
+    // is `npcVerdictPulse.js:133`'s `replacementSource` (bound at :99), which is
+    // pulseKernel.js `for (const sid of [...localSettlements.keys()])`'s entry, made RAW by
+    // EM-B1k (the seam is cited by CONTENT, never by line: tests/lint/
+    // pulseKernelLineAddress.walker.test.js freezes hand-keyed kernel addresses at zero and
+    // proves this backticked token still exists). MEASURED on the
+    // filtered base: roster out 2, the ousted person replaced, the shelved soul absent;
+    // against 3 / replaced / present on the raw base. ⚠ Its name join
+    // (`String(name).toLowerCase()`) is a SEPARATE question, closed by measurement rather than
+    // by cure: 0 duplicate display names across the 525-row golden corpus' 5,171 NPCs.
     'src/domain/worldPulse/successorNpc.js',
     'src/domain/worldPulse/worldSnapshot.js',
+    // ⭐ EM-B1k2 — THE FOURTH ROOT'S REAL CONVICTION. `disperseNamedRoster` (:317) reads
+    // `input.npcs` (:319) at GENERATION time: its one importer is narrativeGenerator.js:33,
+    // called at :995 in the coherence seam, where no `buildWorldSnapshot` has run and
+    // therefore no participation view exists at all. PARTICIPATION-INDEPENDENT BY
+    // CONSTRUCTION, not by choice — the roster it reads is the one being generated. ⛔ A
+    // future caller that hands it a TICK-TIME settlement owes the raw base and owes it here.
+    'src/generators/density/applyDensityLaw.js',
+    // ⭐ EM-B1k2 — DARK, and in this census only because the predicate now reaches past the
+    // `.npcs` literal. It reads the roster solely through `factionRosterOf` (:74, :177, :231)
+    // and the literal `.npcs` never appears in the file, so a `.npcs`-only scan could not see
+    // it. It has NO `src/` importer: nothing in production reaches it, so whatever settlement
+    // its future caller passes is what it will read, and it is policed by nothing else.
+    // ⛔ THE PACKET THAT WIRES IT OWES THE RAW-BASE DISPOSITION — R22 binds a succession to a
+    // title, which is exactly the kind of permanent seat consequence R18 governs.
+    'src/generators/density/titularSuccession.js',
   ];
 
   /**
@@ -257,10 +511,10 @@ describe('participation chokepoint — the .npcs-reader inventory ratchet (§8 c
    * These are NOT dispositions and they must never be moved into EXPECTED without a
    * written §8 disposition: every entry in EXPECTED above carries (or inherits) a
    * judgement about whether the reader is via-snapshot, a deliberate raw read, or a
-   * belt that had to be widened. Nobody has made that judgement about these seven.
+   * belt that had to be widened. Nobody has made that judgement about these six.
    * They are `.npcs` readers that landed in worldPulse WITHOUT being dispositioned at
    * all, and they are named here so this ratchet can tell the debt it already knows
-   * about from an EIGHTH new reader.
+   * about from a SEVENTH new reader.
    *
    * WHY THEY ARE HERE RATHER THAN IN THE TEST CENSUS. Until 2026-08-07 the row
    * `tests/domain/roadsParticipation.test.js :: … the set of participation .npcs readers
@@ -290,7 +544,6 @@ describe('participation chokepoint — the .npcs-reader inventory ratchet (§8 c
    */
   const UNDISPOSITIONED_NPCS_READERS = Object.freeze([
     'src/domain/worldPulse/envoyCasting.js',
-    'src/domain/worldPulse/npcVerdictPulse.js',
     'src/domain/worldPulse/oathHolder.js',
     'src/domain/worldPulse/sovereigntyNews.js',
     'src/domain/worldPulse/warDeployment.js',
@@ -301,11 +554,28 @@ describe('participation chokepoint — the .npcs-reader inventory ratchet (§8 c
   // A LITERAL, not a figure read out of the list it is supposed to cap — a ceiling
   // derived from its own array proves list == list and rises silently with every entry.
   // MONOTONE DOWN from here. You may burn it; you may never pad it.
-  const UNDISPOSITIONED_CEILING = 7;
+  // ⭐ BURNED 7 → 6 by EM-B1f, which banked `npcVerdictPulse.js` into EXPECTED above with a
+  // written disposition (ODQ §934.47 addendum 61 item 5). Six rows remain, all still unjudged.
+  const UNDISPOSITIONED_CEILING = 6;
 
-  /** The live scan this whole block is about. */
+  /**
+   * The live scan this whole block is about.
+   *
+   * ⭐ EM-B1k2 WIDENED IT ON BOTH AXES (2026-09-20), because the census asserted a protection
+   * that did not reach the files where the IRREVERSIBLE decisions actually live. The ROOTS gain
+   * `src/domain/density` (the R18 law itself and its roster filter) and `src/generators/density`
+   * (the generation-time dispersal). The PREDICATE gains `factionRosterOf`, because the roster
+   * can be read through the estate's own filter without the literal `.npcs` ever appearing —
+   * `titularSuccession.js` is exactly that shape and was invisible to a `.npcs`-only scan.
+   * Measured: 41 → 44 readers, the three new members each dispositioned below.
+   *
+   * ⛔ TWO `-e` FLAGS, NEVER A BRE `\|` ALTERNATION. `execFileSync('grep', …)` resolves through
+   * PATH, which is BSD grep 2.6.0-FreeBSD on a macOS dev machine and GNU grep in CI. `-e` means
+   * the same thing to both; `\|` does not, and a scan whose result depends on the host's grep
+   * dialect is a ratchet that reports a different census depending on who runs it.
+   */
   function foundReaders() {
-    const out = execFileSync('grep', ['-rl', '\\.npcs', 'src/domain/worldPulse', 'src/domain/spatial'], { cwd: process.cwd(), encoding: 'utf-8' });
+    const out = execFileSync('grep', ['-rl', '-e', '\\.npcs', '-e', 'factionRosterOf', 'src/domain/worldPulse', 'src/domain/spatial', 'src/domain/density', 'src/generators/density'], { cwd: process.cwd(), encoding: 'utf-8' });
     return out.split('\n').filter((l) => l && !l.includes('.test.')).sort();
   }
 

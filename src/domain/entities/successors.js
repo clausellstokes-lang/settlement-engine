@@ -13,6 +13,7 @@
  * a pillar-tier death; the SuccessorPrompt UI consumes the ranked list.
  */
 
+import { NPC_UNAVAILABLE_STATUSES } from './npcs.js';
 import { factionRefOf, resolveFactionRef } from '../factionRefs.js';
 
 /** @typedef {import('./npcs.js').NpcStructural} NpcStructural */
@@ -60,7 +61,9 @@ export function inferSuccessors({ outgoing, settlement, limit = 3 }) {
   // Score each NPC for successor fitness. Higher score = better fit.
   const scored = npcs
     .filter(n => (n.id || n.name) !== outId)               // not the same NPC
-    .filter(n => n.status !== 'dead' && n.status !== 'removed' && n.status !== 'exiled')
+    // READS the availability union rather than spelling it: the day a status joins
+    // NPC_UNAVAILABLE_STATUSES, successor ineligibility follows without an edit here.
+    .filter(n => !NPC_UNAVAILABLE_STATUSES.includes(n.status))
     .map(n => ({ npc: n, score: scoreCandidate(n, outInst, outFac, factions) }))
     .filter(s => s.score > 0)                              // anyone with zero overlap is irrelevant
     .sort((a, b) => b.score - a.score);

@@ -127,7 +127,7 @@ function makeFixture({ weaveLit }) {
     { id: 'a', name: 'Ashford', settlement: giver },
     { id: 'b', name: 'Briarwatch', settlement: receiver },
   ];
-  const snapshot = { settlements: items, byId: new Map(items.map((it) => [it.id, it])) };
+  const snapshot = { settlements: items, byId: new Map(items.map((entry) => [entry.id, entry])) };
   const settlementUpdates = [{ saveId: 'a', settlement: giver }, { saveId: 'b', settlement: receiver }];
   const worldState = {
     simulationRules: {

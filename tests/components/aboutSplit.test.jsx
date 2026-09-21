@@ -33,7 +33,7 @@ import {
   anchorFor, destinationForLegacyTab, destinationForLegacySearch, unitsForView,
 } from '../../src/lib/aboutMapping.js';
 import { ROUTES, NAV, isKnownView, viewToPath, redirectForView } from '../../src/lib/routes.js';
-import { ANCHOR_OFFSET, CHROME, SP } from '../../src/components/theme.js';
+import { ANCHOR_OFFSET, ARROW_CLEAR, SP } from '../../src/components/theme.js';
 // The guide's hand-keyed nav blurb table. Imported (rather than DOM-sniffed) because
 // the pin below has to see its KEY SET, which no rendered subtitle can show: a missing
 // key renders an empty string, not a hole a DOM assertion can name.
@@ -469,11 +469,13 @@ describe('About split — §3 the in-page section nav (the MAY, ruled BUILD)', (
   });
 
   it('the nav lands its target CLEAR of the sticky header, the way the Compendium does', async () => {
-    // App's ribbon is `position:'sticky', top:0` (App.jsx), so a bare fragment jump
-    // parks the section heading UNDERNEATH it. The Compendium answers this with
-    // scroll-margin-top, and as of ribbon v2 its ANCHOR_SCROLL_MARGIN is a
-    // re-export of this very token rather than a matching literal — so the About
-    // pages, the Compendium and the dossier now share ONE measurement.
+    // App's header (the owner's arrow painting, 2026-09-16) is `position:'sticky',
+    // top:0` with the feather hanging below it, so a bare fragment jump parks the
+    // section heading UNDERNEATH it. The Compendium answers this with scroll-margin-top,
+    // and its ANCHOR_SCROLL_MARGIN is a re-export of this very token rather than a
+    // matching literal, so the About pages, the Compendium and the dossier share ONE
+    // offset: the painted header and hang (ARROW_CLEAR, which scales with the page) plus
+    // one gutter.
     //
     // ⚠️ ASSERT THE DERIVATION, NEVER THE SUM (v2 directive §1). This pin used to
     // read `.toBe('84px')`, which is a pin on the arithmetic of the day: when the
@@ -483,10 +485,10 @@ describe('About split — §3 the in-page section nav (the MAY, ruled BUILD)', (
     // behaviour that makes this a guard rather than a tripwire.
     const { container } = await renderGuide();
     expect(ANCHOR_OFFSET, 'the token must stay DERIVED, not respelled')
-      .toBe(CHROME.headerDesktop + SP.xxl);
+      .toBe(`calc(${ARROW_CLEAR} + ${SP.xxl}px)`);
     for (const u of unitsForView(ABOUT_GUIDE_VIEW)) {
       const el = container.querySelector(`#${u.anchor}`);
-      expect(el.style.scrollMarginTop, `#${u.anchor} scroll margin`).toBe(`${ANCHOR_OFFSET}px`);
+      expect(el.style.scrollMarginTop, `#${u.anchor} scroll margin`).toBe(ANCHOR_OFFSET);
     }
   });
 });
@@ -529,8 +531,8 @@ describe('About split — the anchor landing, on the OTHER page', () => {
       expect(
         el.style.scrollMarginTop,
         `#${u.anchor} (rendered by ${OWNER[u.anchor]}) has no anchor scroll margin —`
-        + ` a deep link to it parks the heading under the sticky ribbon`,
-      ).toBe(`${ANCHOR_OFFSET}px`);
+        + ` a deep link to it parks the heading under the sticky header`,
+      ).toBe(ANCHOR_OFFSET);
     }
   });
 
@@ -547,7 +549,38 @@ describe('About split — the anchor landing, on the OTHER page', () => {
     const whatMargins = unitsForView(ABOUT_WHAT_VIEW)
       .map((u) => what.querySelector(`#${u.anchor}`).style.scrollMarginTop);
     expect(new Set([...guideMargins, ...whatMargins]), 'one measurement across both pages')
-      .toEqual(new Set([`${ANCHOR_OFFSET}px`]));
+      .toEqual(new Set([ANCHOR_OFFSET]));
+  });
+});
+
+// ⛔ THE ORPHAN-ROUTE SWEEP (2026-09-18). /covenant, /bounty and /screen were
+// declared public routes that NOTHING linked to outside lib/routes.js, and two of
+// the three had a routes.js comment calling them "footer-linked" while no footer
+// carried them. The About family is where the trust pages belong, and the Guide is
+// where a keeper looks a surface up, so these are the doors that were cut. Each arm
+// carries its own non-vacuity control: the page must have rendered real prose.
+describe('About split — the trust pages the About family opens', () => {
+  it('the What this Is page links the covenant and the contradiction bounty', async () => {
+    const { container } = await renderWhatThisIs();
+    expect(container.textContent.length, 'the page rendered almost nothing').toBeGreaterThan(400);
+    const hrefs = [...container.querySelectorAll('a[href]')].map((a) => a.getAttribute('href'));
+    expect(hrefs, 'the portability covenant has no door from the About page').toContain('/covenant');
+    expect(hrefs, 'the contradiction bounty has no door from the About page').toContain('/bounty');
+  });
+
+  it('the Practical Guide links the DM Screen and names canon in the living-world section', async () => {
+    const { container } = await renderGuide();
+    expect(container.textContent.length, 'the guide rendered almost nothing').toBeGreaterThan(400);
+    const hrefs = [...container.querySelectorAll('a[href]')].map((a) => a.getAttribute('href'));
+    expect(hrefs, 'the DM Screen has no door from the guide').toContain('/screen');
+
+    // The guide described the Realm, the chronicle and advancing time without ever
+    // naming the act that puts a settlement there. The sentence lives in the
+    // section the act unlocks, so it is asserted inside THAT section, not the page.
+    const living = container.querySelector(`#${anchorFor('living')}`);
+    expect(living, 'the living-world section is gone').toBeTruthy();
+    expect(living.textContent).toMatch(/canon/);
+    expect(living.textContent).toMatch(/Library/);
   });
 });
 

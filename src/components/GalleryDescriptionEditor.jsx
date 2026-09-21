@@ -15,6 +15,8 @@ import { Bold, Italic, Underline, Heading, List, ListOrdered, Link2, Eraser, Che
 import { sanitizeGalleryHtml } from '../lib/sanitizeGalleryHtml.js';
 import { AMBER_DEEP, BORDER2, CARD, CARD_ALT, INK, MUTED, FS, sans } from './theme.js';
 import IconButton from './primitives/IconButton.jsx';
+import useIsMobile from '../hooks/useIsMobile.js';
+import { chromeFontSize, proseFontSize } from '../design/proseScale.js';
 
 const exec = (cmd, value = null) => {
   try { document.execCommand(cmd, false, value); } catch { /* command unsupported */ }
@@ -72,6 +74,7 @@ function ToolbarButton({ icon: Icon, title, onMouseDown, onClick }) {
 }
 
 export default function GalleryDescriptionEditor({ value = '', onChange, maxLength = 4000 }) {
+  const mobile = useIsMobile();
   const ref = useRef(null);
   const savedRange = useRef(null);
   const [linkUrl, setLinkUrl] = useState('');
@@ -181,7 +184,7 @@ export default function GalleryDescriptionEditor({ value = '', onChange, maxLeng
               aria-label="Link URL"
               // eslint-disable-next-line jsx-a11y/no-autofocus -- focus the URL field when the link popover opens so the user can type immediately
               autoFocus
-              style={{ width: 150, border: `1px solid ${BORDER2}`, padding: '2px 6px', fontFamily: sans, fontSize: FS.xxs, color: INK }}
+              style={{ width: 150, border: `1px solid ${BORDER2}`, padding: '2px 6px', fontFamily: sans, fontSize: chromeFontSize(FS.xxs, mobile), color: INK }}
             />
             <ToolbarButton icon={Check} title="Apply link" onMouseDown={(e) => { e.preventDefault(); applyLink(); }} onClick={(e) => { if (e.detail === 0) applyLink(); }} />
             <ToolbarButton icon={X} title="Cancel" onMouseDown={(e) => { e.preventDefault(); setLinkOpen(false); }} onClick={(e) => { if (e.detail === 0) setLinkOpen(false); }} />
@@ -200,13 +203,13 @@ export default function GalleryDescriptionEditor({ value = '', onChange, maxLeng
         onBlur={emit}
         onKeyUp={saveSelection}
         onMouseUp={saveSelection}
-        style={{ minHeight: 80, maxHeight: 220, overflowY: 'auto', padding: 9, fontFamily: sans, fontSize: FS.xs, color: INK, lineHeight: 1.5, outline: 'none' }}
+        style={{ minHeight: 80, maxHeight: 220, overflowY: 'auto', padding: 9, fontFamily: sans, fontSize: proseFontSize(FS.xs, mobile), color: INK, lineHeight: 1.5, outline: 'none' }}
       />
       {/* Live visible-character readout + soft warning at the cap. Counts what
           the reader sees (not markup), so the number matches what's trimmed. */}
       <div
         aria-live="polite"
-        style={{ display: 'flex', justifyContent: 'flex-end', gap: 6, padding: '4px 9px', borderTop: `1px solid ${BORDER2}`, background: CARD_ALT, fontFamily: sans, fontSize: FS.xxs }}
+        style={{ display: 'flex', justifyContent: 'flex-end', gap: 6, padding: '4px 9px', borderTop: `1px solid ${BORDER2}`, background: CARD_ALT, fontFamily: sans, fontSize: chromeFontSize(FS.xxs, mobile) }}
       >
         {used >= maxLength && (
           <span style={{ color: AMBER_DEEP, fontWeight: 700 }}>

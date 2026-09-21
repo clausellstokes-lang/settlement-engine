@@ -16,6 +16,8 @@ import { track, EVENTS } from './lib/analytics.js';
 import { returnVisitBand, stampVisit } from './lib/session.js';
 import { reportError, installGlobalErrorHandlers } from './lib/errorReporter.js';
 import OperatorMessagesProvider from './components/account/OperatorMessagesProvider.jsx';
+import StaleDeployNotice from './components/StaleDeployNotice.jsx';
+import { installStaleDeployRecovery } from './lib/staleDeploy.js';
 
 // Emit design tokens as CSS custom properties on :root so stylesheets and
 // inline styles can read them as `var(--color-gold-500)`, `var(--space-4)`,
@@ -120,6 +122,28 @@ setAnalyticsElevated(() => {
 // No-op network unless VITE_ERROR_REPORT_URL is set; always logs locally.
 installGlobalErrorHandlers();
 
+// A tab left open across a deploy fails its next lazy load (the previous build's
+// chunks are gone). Confirm a new build is live, then reload, but only when no
+// settlement or campaign is on screen; with work on screen the notice asks for the
+// reload instead, and the reader decides (lib/staleDeploy.js decideRecovery).
+// ⚠ THE REASON THIS COMMENT USED TO GIVE WAS FALSE, and the arm is right anyway.
+// It said generated worlds are not persisted locally. ONE is: an anonymous visitor's
+// draft rides the `anonDraft` envelope in the persisted store projection
+// (store/persistProjection.js, ODQ §934.8), so a reload would in fact find it again.
+// Nothing here reasons FROM that premise, though — work on screen returns true and
+// decideRecovery answers true with 'notice', which is the arm that asks rather than
+// reloads under a reader. A campaign, and any signed-in world, genuinely are not held
+// locally, so the honest rule is the one the code already follows: never reload a tab
+// that has something on screen, whatever holds it.
+installStaleDeployRecovery({
+  hasWorkOnScreen: () => {
+    try {
+      const s = useStore.getState();
+      return s.settlement != null || s.activeCampaignId != null;
+    } catch { return true; }
+  },
+});
+
 // Expose store globally in dev so we can validate map features via automation.
 if (import.meta.env.DEV) {
   window.__store = useStore;
@@ -152,6 +176,7 @@ ReactDOM.createRoot(document.getElementById('root')).render(
   <ErrorBoundary>
     <OperatorMessagesProvider>
       <App />
+      <StaleDeployNotice />
     </OperatorMessagesProvider>
   </ErrorBoundary>,
 );

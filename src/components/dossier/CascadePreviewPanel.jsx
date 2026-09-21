@@ -29,6 +29,8 @@ import { RUBRIC } from '../../design/organic/rubrication.js';
 import Button from '../primitives/Button.jsx';
 import IconButton from '../primitives/IconButton.jsx';
 import useDialogFocusTrap from '../primitives/useDialogFocusTrap.js';
+import useIsMobile from '../../hooks/useIsMobile.js';
+import { chromeFontSize, proseFontSize } from '../../design/proseScale.js';
 
 // THE PREVIEW INSTRUMENT PLATE (Deep Craft — the dossier's instrument register):
 // the cascade preview reads as a rule-framed plate of labeled impact lines, not
@@ -44,16 +46,17 @@ const INK = swatch['#1B1408'];
 const BORDER = swatch['#E8D9B0'];
 
 function ImpactRow({ accent, title, body }) {
+  const mobile = useIsMobile();
   return (
     <div style={{
       padding: SP.sm,
       borderLeft: `3px solid ${accent}`,
       borderBottom: `1px solid ${RULE}`,
-      fontSize: FS.xs,
+      fontSize: proseFontSize(FS.xs, mobile),
       color: OINK.body,
       lineHeight: 1.5,
     }}>
-      <b style={{ color: accent, textTransform: 'uppercase', letterSpacing: '0.04em' }}>{title}</b>{' '}
+      <b style={{ color: accent }}>{title}</b>{' '}
       {body}
     </div>
   );
@@ -69,6 +72,7 @@ function structuralDeltaText(delta) {
 }
 
 export default function CascadePreviewPanel({ onClose, onCommit }) {
+  const mobile = useIsMobile();
   const settlement = useStore(s => s.settlement);
   const queue = useStore(s => s.pendingEditsQueue || []);
   const ownerKey = useStore(s => pendingEditOwnerScope(s).ownerKey);
@@ -192,7 +196,7 @@ export default function CascadePreviewPanel({ onClose, onCommit }) {
 
         <div style={{ flex: 1, overflow: 'auto', padding: SP.lg }}>
           <div style={{
-            fontSize: FS.xxs, fontWeight: 800, letterSpacing: '0.14em',
+            fontSize: chromeFontSize(FS.xxs, mobile), fontWeight: 800, letterSpacing: '0.14em',
             textTransform: 'uppercase', color: GOLD_DEEP,
             marginBottom: SP.xs,
           }}>

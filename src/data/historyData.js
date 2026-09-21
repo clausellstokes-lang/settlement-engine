@@ -280,7 +280,7 @@ export const POWER_ROLES_BY_CATEGORY = {
       requiresInstKeyword: ['cathedral', 'great cathedral', 'parish churches'],
     },
     {
-      role: "Templar Commander",
+      role: "Temple Guard Commander",
       title: "templar",
       priority: 7,
       minTier: "city",
@@ -288,7 +288,7 @@ export const POWER_ROLES_BY_CATEGORY = {
       requiresInstKeyword: ['barracks', 'garrison', 'monastery', 'cathedral'],
     },
     {
-      role: "Parish Priest",
+      role: "Priest",
       title: "priest",
       priority: 6,
       minTier: "hamlet",
@@ -311,7 +311,7 @@ export const POWER_ROLES_BY_CATEGORY = {
       requiresInstKeyword: ['shrine', 'wayside', 'temple', 'church'],
     },
     {
-      role: 'Wandering Friar',
+      role: 'Wandering Monk',
       title: 'priest',
       priority: 5,
       minTier: 'hamlet',
@@ -326,7 +326,7 @@ export const POWER_ROLES_BY_CATEGORY = {
       requiresInstKeyword: ['hospital', 'church', 'monastery', 'shrine'],
     },
     {
-      role: 'Deacon/Curate',
+      role: 'Under-Chaplain',
       title: 'priest',
       priority: 4,
       minTier: 'hamlet',

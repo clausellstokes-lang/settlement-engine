@@ -21,7 +21,10 @@ import { Pill } from '../primitives/Pill.jsx';
 import { Callout } from '../primitives/Callout.jsx';
 import { StatusCard } from '../primitives/Visuals.jsx';
 import { type, palette, space, pt } from '../theme.js';
-import { humanize, label, plural, upper } from '../lib/format.js';
+import { humanize, label, plural, stripZwnj } from '../lib/format.js';
+import { tokenCase } from '../../domain/display/labelCase.js';
+import { StateProse } from '../primitives/StateProse.jsx';
+import { institutionDisplayName } from '../../domain/display/institutionDisplayName.js';
 
 const SERVICE_CATEGORY_ORDER = [
   'lodging', 'food', 'equipment', 'magic', 'healing',
@@ -55,7 +58,7 @@ const SERVICE_CAT_TONE = {
   criminal: 'bad',
 };
 
-export function Services({ settlement, narrativeMode, vm }) {
+export function Services({ settlement, narrativeMode, vm, stateProse }) {
   const s = vm.services || {};
   const cats = SERVICE_CATEGORY_ORDER
     .map(k => ({ key: k, items: normalizeServiceList(s.available?.[k]) }))
@@ -74,6 +77,9 @@ export function Services({ settlement, narrativeMode, vm }) {
       <ChapterHeadline tone="gold">
         What players can actually purchase here. Match a need to the right counter.
       </ChapterHeadline>
+
+      {/* ── The mounted state prose (the screen's ProseBlock positions) ── */}
+      <StateProse stateProse={stateProse} tab="services" />
 
       {cats.length === 0 && (
         <Text style={{ ...type.body, color: palette.muted, fontStyle: 'italic' }}>
@@ -154,7 +160,7 @@ function CategoryCard({ cat }) {
     >
       <View style={{ flexDirection: 'row', alignItems: 'baseline', marginBottom: 3 }}>
         <Text style={{ ...type.label_em, color: palette.ink, fontSize: pt['9'] }}>
-          {upper(SERVICE_CAT_LABEL[cat.key] || humanize(cat.key))}
+          {tokenCase(stripZwnj(SERVICE_CAT_LABEL[cat.key] || humanize(cat.key)))}
         </Text>
         <Text style={{ ...type.caption, color: palette.muted, marginLeft: 5, fontSize: pt['7.5'] }}>
           {cat.items.length} option{cat.items.length === 1 ? '' : 's'}
@@ -215,9 +221,14 @@ function ChainCard({ chain }) {
           : chain.entrepot
             ? 'Entrepôt'
             : 'Active';
+  // ⛔ THE PROCESSING NAMES ARE CATALOGUE KEYS AND THIS IS A PRINT (§934.13, browser pass 3).
+  // `humanize` returns any string carrying whitespace unchanged, so this row printed the
+  // catalogue's own 'Parish church' into the paid document while the screen's Economics tab
+  // — which already routes the same field through the seam — said 'House of worship'. The
+  // seam goes BEFORE humanize so an unmapped institution still gets its casing.
   const flow = [
     chain.resource ? humanize(label(chain.resource)) : null,
-    (chain.processingInstitutions || []).map(humanize).join(' + ') || null,
+    (chain.processingInstitutions || []).map((n) => humanize(institutionDisplayName(n) || n)).join(' + ') || null,
     (chain.outputs || []).map(humanize).slice(0, 4).join(', ') || null,
   ].filter(Boolean).join(' \u00bb ');
 
@@ -264,9 +275,12 @@ function normalizeServiceList(raw) {
 
 function svcLabel(svc) {
   if (!svc) return '';
-  if (typeof svc === 'string') return humanize(svc);
-  return humanize(svc.name || svc.label || '') ||
-         (svc.institution ? humanize(svc.institution) : '');
+  // §934.13 — every arm goes through the label seam. `humanize` returns any string
+  // containing whitespace unchanged, so it composes with the seam's authored case
+  // rather than title-casing 'Access to a house of worship'.
+  if (typeof svc === 'string') return humanize(institutionDisplayName(svc));
+  return humanize(institutionDisplayName(svc)) ||
+         (svc.institution ? humanize(institutionDisplayName(svc.institution)) : '');
 }
 
 export default Services;

@@ -55,11 +55,22 @@ the exact town in the screenshot.
 
 ## 4. Brand marks
 
-- **What.** The house device (the station seal), the wordmark, the favicons, the OG
+- **What.** The wax seal, the plaque (seal + wordmark together), the favicons, the OG
   images.
-- **Where from.** Committed brand assets: `public/favicon.svg`, `public/apple-touch-icon.png`,
-  `public/og-default.svg` / `public/og-craft.png`, and the `HouseDevice` component
-  (`src/components/brand/HouseDevice.jsx`). The seal never carries text (a fixed rule).
+- **Where from.** All of them are CUTS OF THE OWNER'S ARROW PAINTING as of 2026-09-19
+  (ODQ §934.17), made by one script, `scripts/derive-brand-marks.mjs`, from
+  `public/brand/arrow/arrow-strip.webp`. Committed brand assets: `public/brand/seal.png`
+  (the seal alone, transparent ground), `public/brand/plaque.png` (the lockup),
+  `public/favicon.ico` / `favicon-32.png` / `favicon-192.png` / `favicon-512.png`,
+  `public/apple-touch-icon.png`, `public/og-default.png` / `public/og-craft.png`, and the
+  `HouseDevice` component (`src/components/brand/HouseDevice.jsx`), which now draws
+  `seal.png`. The SEAL never carries text (a fixed rule); the plaque is the lockup, where
+  the wordmark sits BESIDE the seal in the painting's own brass.
+- **Retired 2026-09-19** with the drawn device they rendered: `public/favicon.svg`,
+  `public/favicon-dark.png`, `public/og-default.svg`. The geometric house device itself is
+  not retired — it is the dossier's vector charter mark
+  (`src/pdf/primitives/HouseDeviceSeal.jsx`) and keeps its goldens under
+  `docs/samples/organic-craft/logo`.
 
 ## 5. Words
 

@@ -35,6 +35,7 @@ import { supabase } from '../../src/lib/supabase.js';
 import {
   publishSettlement, unpublishSettlement,
   fetchPublicGallery, fetchPublicDossier,
+  fetchMyGallery, fetchFeaturedGallery, fetchMyUnlistedDossiers,
   fetchCuratedGallery, setCurated,
   updateGalleryMetadata, toggleGalleryVote, fetchGalleryComments,
   addGalleryComment, deleteGalleryComment, reportGalleryDossier,
@@ -238,11 +239,54 @@ describe('gallery.js — fetchPublicGallery (community listing)', () => {
     vi.doUnmock('../../src/lib/supabase.js');
   });
 
-  it('does not fall back to direct table reads when the listing RPC is unavailable', async () => {
+  it('rejects — and still never falls back to direct table reads — when the listing RPC is unavailable', async () => {
     supabase.rpc.mockResolvedValueOnce({ data: null, error: { message: 'missing function' } });
-    const res = await fetchPublicGallery({ page: 0 });
-    expect(res).toEqual({ items: [], hasMore: false, total: 0 });
+    // DECLARED BEHAVIOUR SHIFT: this used to resolve `{ items: [], hasMore: false,
+    // total: 0 }`, which the gallery page rendered as an EMPTY GALLERY. The
+    // privacy boundary the test was written for — no direct `settlements` read as
+    // a fallback — is unchanged and re-asserted below.
+    await expect(fetchPublicGallery({ page: 0 })).rejects.toThrow('missing function');
     expect(supabase.from).not.toHaveBeenCalled();
+  });
+});
+
+describe('gallery.js — the list-fetch failure contract', () => {
+  // "No rows" and "the read failed" are DIFFERENT FACTS. Each of these fetchers
+  // swallowed its RPC error and returned an empty shape, so an unreachable
+  // database was indistinguishable from an empty gallery and the house error line
+  // (gallery.loadError) could never render. They now reject, which is the contract
+  // useGalleryPageState's `.catch` already expected.
+  const LIST_FETCHERS = [
+    ['fetchPublicGallery',      () => fetchPublicGallery({ page: 0 })],
+    ['fetchMyGallery',          () => fetchMyGallery()],
+    ['fetchFeaturedGallery',    () => fetchFeaturedGallery()],
+    ['fetchMyUnlistedDossiers', () => fetchMyUnlistedDossiers()],
+  ];
+
+  for (const [name, call] of LIST_FETCHERS) {
+    it(`${name} rejects when its RPC returns an error`, async () => {
+      supabase.rpc.mockResolvedValueOnce({ data: null, error: { message: 'PGRST301 permission denied' } });
+      await expect(call()).rejects.toThrow('PGRST301 permission denied');
+    });
+
+    it(`${name} resolves EMPTY on a successful empty listing`, async () => {
+      supabase.rpc.mockResolvedValueOnce({ data: [], error: null });
+      const res = await call();
+      expect(Array.isArray(res) ? res : res.items).toEqual([]);
+    });
+  }
+
+  it('an UNCONFIGURED client is the empty state, never a failure (local mode has no gallery)', async () => {
+    // The raw 'Supabase not configured' string is a diagnostic that must never
+    // reach a reader, and local mode legitimately has nothing to list.
+    vi.doMock('../../src/lib/supabase.js', () => ({ supabase: {}, isConfigured: false }));
+    vi.resetModules();
+    const lib = await import('../../src/lib/gallery.js');
+    await expect(lib.fetchPublicGallery({ page: 0 })).resolves.toEqual({ items: [], hasMore: false, total: 0 });
+    await expect(lib.fetchMyGallery()).resolves.toEqual({ items: [], hasMore: false, total: 0 });
+    await expect(lib.fetchFeaturedGallery()).resolves.toEqual([]);
+    await expect(lib.fetchMyUnlistedDossiers()).resolves.toEqual([]);
+    vi.doUnmock('../../src/lib/supabase.js');
   });
 });
 

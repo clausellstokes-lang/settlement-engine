@@ -15,10 +15,15 @@
  * short note rather than a fabricated grid.
  */
 
+import { tokenCase } from '../labelLadder.js';
 import { useMemo } from 'react';
 import { causalBandWord, deriveCausalState, variablePolarity } from '../../../domain/causalState.js';
 import { humanizeToken } from '../../../domain/display/humanizeEngineTokens.js';
 import { FS, INK, MUTED, BODY, BORDER, BORDER2, CARD, CARD_ALT, CARD_HDR, GREEN, AMBER, RED, sans, SP, swatch } from '../../theme.js';
+import useIsMobile from '../../../hooks/useIsMobile.js';
+import NameColumns from '../../primitives/NameColumns.jsx';
+import { chromeFontSize, proseFontSize } from '../../../design/proseScale.js';
+import { edged } from '../../../design/edgedBox.js';
 
 // Humanized labels for the 16 SYSTEM_VARIABLES (mirrors causalState.js's internal
 // VARIABLE_LABEL, kept here so the display layer owns its own copy).
@@ -70,14 +75,15 @@ function healthOrientedScore(row) {
  * is the function that already existed to fix precisely this, and had no caller.
  */
 function BandPill({ variable, band }) {
+  const mobile = useIsMobile();
   const tone = BAND_TONE[band] || MUTED;
   const word = causalBandWord(variable, band);
   return (
     <span data-band={band} style={{
       display: 'inline-block', minWidth: 66, textAlign: 'center', padding: '1px 7px',
-      fontSize: FS.pico, fontWeight: 800, letterSpacing: '0.04em', textTransform: 'uppercase',
+      fontSize: chromeFontSize(FS.pico, mobile), fontWeight: 800,
       color: swatch.white, background: tone,
-    }}>{word}</span>
+    }}>{tokenCase(word)}</span>
   );
 }
 
@@ -85,6 +91,10 @@ function BandPill({ variable, band }) {
  * @param {{ settlement: any }} props
  */
 export default function SubstrateTab({ settlement }) {
+  // THE PHONE PROSE FLOOR — the framing paragraph, the pressures callout and the
+  // unassessed note. Bound above the early return so the hook order is stable;
+  // the variable labels and their band pills keep their own steps.
+  const mobile = useIsMobile();
   const model = useMemo(() => (settlement ? deriveCausalState(settlement) : null), [settlement]);
 
   const rows = useMemo(() => {
@@ -106,7 +116,7 @@ export default function SubstrateTab({ settlement }) {
 
   if (!model || rows.length === 0) {
     return (
-      <div data-testid="substrate-tab" style={{ padding: 24, color: MUTED, fontFamily: sans, fontSize: FS.sm }}>
+      <div data-testid="substrate-tab" style={{ padding: 24, color: MUTED, fontFamily: sans, fontSize: proseFontSize(FS.sm, mobile) }}>
         The settlement&apos;s underlying conditions have not been assessed.
       </div>
     );
@@ -124,7 +134,7 @@ export default function SubstrateTab({ settlement }) {
       <div style={{ fontSize: FS.lg, fontWeight: 800, color: INK, marginBottom: 4 }}>
         What is holding, what is strained
       </div>
-      <p style={{ fontSize: FS.sm, color: BODY, lineHeight: 1.5, margin: '0 0 12px' }}>
+      <p style={{ fontSize: proseFontSize(FS.sm, mobile), color: BODY, lineHeight: 1.5, margin: '0 0 12px' }}>
         Food, authority, defense, trade, and the other foundations that keep this settlement standing.
         Each reading already includes its recorded siege, drawdown, outbreak, and other current conditions.
       </p>
@@ -132,16 +142,15 @@ export default function SubstrateTab({ settlement }) {
       {/* Pressures callout — the systems the model flags strained-or-worse. */}
       <div data-testid="substrate-pressures" style={{
         background: CARD_ALT,
-        border: `1px solid ${pressures.length ? BORDER : BORDER2}`,
-        borderLeft: `3px solid ${pressures.length ? RED : GREEN}`,
+        ...edged(`1px solid ${pressures.length ? BORDER : BORDER2}`, `3px solid ${pressures.length ? RED : GREEN}`),
         padding: `${SP.sm}px ${SP.md}px`, marginBottom: 12,
       }}>
         {pressures.length ? (
-          <div style={{ fontSize: FS.sm, color: BODY, lineHeight: 1.5 }}>
+          <div style={{ fontSize: proseFontSize(FS.sm, mobile), color: BODY, lineHeight: 1.5 }}>
             <strong style={{ color: RED }}>Under pressure:</strong> {pressures.join(', ')}.
           </div>
         ) : (
-          <div style={{ fontSize: FS.sm, color: GREEN, lineHeight: 1.5 }}>
+          <div style={{ fontSize: proseFontSize(FS.sm, mobile), color: GREEN, lineHeight: 1.5 }}>
             <strong>All foundations holding.</strong> No condition reads strained or worse.
           </div>
         )}
@@ -150,10 +159,17 @@ export default function SubstrateTab({ settlement }) {
       {/* The 16-variable grid. */}
       <div style={{ background: CARD, border: `1px solid ${BORDER}`, overflow: 'hidden' }}>
         <div style={{
-          fontSize: FS.xs, fontWeight: 800, color: MUTED, textTransform: 'uppercase', letterSpacing: '0.05em',
+          fontSize: chromeFontSize(FS.xs, mobile), fontWeight: 800, color: MUTED, textTransform: 'uppercase', letterSpacing: '0.05em',
           background: CARD_HDR, padding: `${SP.sm}px ${SP.md}px`, borderBottom: `1px solid ${BORDER}`,
         }}>Settlement foundations</div>
-        <div style={{ padding: `0 ${SP.md}px` }}>
+        {/* ⭐ THE FOUNDATIONS RUN IN COLUMNS (owner order 2026-09-19 — "sections like
+            these … in two or three columns to conserve space"). Sixteen rows of a
+            label and a band word is sixteen lines of page for sixteen readings, and
+            the reading is a glance rather than a passage. NameColumns keeps DOM order
+            as reading order DOWN each column, so the model's own row order survives.
+            Each row keeps its flex box, so the band word still sits at the right edge
+            of its column exactly as it sat at the right edge of the page. */}
+        <NameColumns count={rows.length} style={{ padding: `0 ${SP.md}px` }}>
           {rows.map(row => (
             <div key={row.key} data-substrate-row style={{
               display: 'flex', alignItems: 'center', gap: SP.sm,
@@ -163,7 +179,7 @@ export default function SubstrateTab({ settlement }) {
               <BandPill variable={row.key} band={row.band} />
             </div>
           ))}
-        </div>
+        </NameColumns>
       </div>
     </div>
   );

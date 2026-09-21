@@ -3,6 +3,8 @@ import { ChevronRight } from 'lucide-react';
 import { FS, MUTED, sans } from '../theme.js';
 import { useRealmEntities } from './RealmEntityContext.jsx';
 import RealmEntityLink from '../primitives/RealmEntityLink.jsx';
+import useIsMobile from '../../hooks/useIsMobile.js';
+import { chromeFontSize } from '../../design/proseScale.js';
 
 /**
  * AddressChain — THE NEWS ADDRESS LAW's linked subject chain (owner doctrine
@@ -29,6 +31,7 @@ import RealmEntityLink from '../primitives/RealmEntityLink.jsx';
  * @param {object} [props.style]            Extra inline style merged onto the row.
  */
 export function AddressChain({ descriptor, omitSettlement = false, style }) {
+  const mobile = useIsMobile();
   const { web } = useRealmEntities();
   const chain = web && descriptor ? web.resolveSubject(descriptor) : null;
   if (!chain || chain.length === 0) return null;
@@ -43,7 +46,7 @@ export function AddressChain({ descriptor, omitSettlement = false, style }) {
       alignItems: 'center',
       gap: 3,
       fontFamily: sans,
-      fontSize: FS.xxs,
+      fontSize: chromeFontSize(FS.xxs, mobile),
       fontWeight: 700,
       lineHeight: 1.4,
       ...style,
@@ -77,6 +80,7 @@ export function AddressChain({ descriptor, omitSettlement = false, style }) {
  * @param {object} [props.style]             Extra inline style merged onto the row.
  */
 export function AffectedSettlements({ ids, label = 'Affects', max = 4, style }) {
+  const mobile = useIsMobile();
   const { web } = useRealmEntities();
   const list = Array.isArray(ids) ? ids : [];
   if (!web || list.length === 0) return null;
@@ -103,7 +107,7 @@ export function AffectedSettlements({ ids, label = 'Affects', max = 4, style }) 
       alignItems: 'center',
       gap: 4,
       fontFamily: sans,
-      fontSize: FS.xxs,
+      fontSize: chromeFontSize(FS.xxs, mobile),
       fontWeight: 700,
       lineHeight: 1.4,
       ...style,

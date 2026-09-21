@@ -26,6 +26,8 @@ import { Sun, Swords, ArrowRight } from 'lucide-react';
 import { useStore } from '../../store/index.js';
 import DeityAssignmentPanel from '../settlement/DeityAssignmentPanel.jsx';
 import { BODY, BORDER, BORDER2, CARD, CARD_ALT, FS, GOLD, INK, SP, SECOND, sans } from '../theme.js';
+import useIsMobile from '../../hooks/useIsMobile.js';
+import { chromeFontSize, proseFontSize } from '../../design/proseScale.js';
 
 // components-map-4: the war/diplomacy steering verbs SHIPPED with W-COMPOSER-2 —
 // they now live in Realm Orders (the World Pulse composer). This surface points
@@ -37,6 +39,7 @@ const NOW_IN_ORDERS = ['Declare War', 'Force Siege', 'Trigger Trade War', 'Sue f
  * @param {any} props.campaign  the active campaign (settlementIds)
  */
 export default function AssignDeityFromMap({ campaign }) {
+  const mobile = useIsMobile();
   const saves = useStore(s => s.savedSettlements);
   const activeSaveId = useStore(s => s.activeSaveId);
   const hydrateFromSave = useStore(s => s.hydrateFromSave);
@@ -57,19 +60,19 @@ export default function AssignDeityFromMap({ campaign }) {
     <div data-testid="assign-deity-from-map" style={{ display: 'grid', gap: SP.sm }}>
       <div style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
         <Sun size={14} color={GOLD} />
-        <h4 style={{ margin: 0, color: INK, fontFamily: sans, fontSize: FS.xs, fontWeight: 900, textTransform: 'uppercase', letterSpacing: '0.05em' }}>
+        <h4 style={{ margin: 0, color: INK, fontFamily: sans, fontSize: chromeFontSize(FS.xs, mobile), fontWeight: 900, textTransform: 'uppercase', letterSpacing: '0.05em' }}>
           Steer the Realm
         </h4>
       </div>
 
       {members.length === 0 ? (
-        <div style={{ color: BODY, fontFamily: sans, fontSize: FS.xs, fontWeight: 700, lineHeight: 1.5 }}>
+        <div style={{ color: BODY, fontFamily: sans, fontSize: chromeFontSize(FS.xs, mobile), fontWeight: 700, lineHeight: 1.5 }}>
           Add canon settlements to this campaign to assign a patron deity.
         </div>
       ) : (
         <>
           <div style={{ display: 'grid', gap: 4 }}>
-            <span style={{ color: SECOND, fontFamily: sans, fontSize: FS.xxs, fontWeight: 800 }}>
+            <span style={{ color: SECOND, fontFamily: sans, fontSize: chromeFontSize(FS.xxs, mobile), fontWeight: 800 }}>
               Settlement
             </span>
             <select
@@ -96,7 +99,7 @@ export default function AssignDeityFromMap({ campaign }) {
             // SET_PRIMARY_DEITY / IMPOSE_CULT (undo-clean) with its own tier gate.
             <DeityAssignmentPanel />
           ) : (
-            <div style={{ color: BODY, fontFamily: sans, fontSize: FS.xs, fontWeight: 700, lineHeight: 1.5 }}>
+            <div style={{ color: BODY, fontFamily: sans, fontSize: chromeFontSize(FS.xs, mobile), fontWeight: 700, lineHeight: 1.5 }}>
               Pick a settlement above to assign or change its patron deity.
             </div>
           )}
@@ -107,7 +110,7 @@ export default function AssignDeityFromMap({ campaign }) {
       <div style={{
         border: `1px solid ${BORDER2}`, background: CARD_ALT, padding: SP.sm,
       }}>
-        <div style={{ display: 'flex', alignItems: 'center', gap: 6, marginBottom: 6, color: SECOND, fontFamily: sans, fontSize: FS.xxs, fontWeight: 850 }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: 6, marginBottom: 6, color: SECOND, fontFamily: sans, fontSize: chromeFontSize(FS.xxs, mobile), fontWeight: 850 }}>
           <Swords size={12} /> War &amp; diplomacy steering
           <span style={{ marginLeft: 'auto', display: 'inline-flex', alignItems: 'center', gap: 3, color: GOLD }}>
             Now in Realm Orders <ArrowRight size={11} />
@@ -120,14 +123,14 @@ export default function AssignDeityFromMap({ campaign }) {
               title="Available in Realm Orders (the World Pulse composer). Staged, previewed, and undoable."
               style={{
                 padding: '3px 8px', border: `1px solid ${BORDER2}`,
-                background: CARD, color: INK, fontFamily: sans, fontSize: FS.micro, fontWeight: 800,
+                background: CARD, color: INK, fontFamily: sans, fontSize: chromeFontSize(FS.micro, mobile), fontWeight: 800,
               }}
             >
               {label}
             </span>
           ))}
         </div>
-        <p style={{ margin: '6px 0 0', color: BODY, fontFamily: sans, fontSize: FS.micro, lineHeight: 1.4 }}>
+        <p style={{ margin: '6px 0 0', color: BODY, fontFamily: sans, fontSize: proseFontSize(FS.micro, mobile), lineHeight: 1.4 }}>
           These orders now live in <strong>Realm Orders</strong>, in the World Pulse panel.
           Each one staged, previewed against the forecast, and fully undoable before it lands.
         </p>

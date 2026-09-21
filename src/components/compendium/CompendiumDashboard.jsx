@@ -12,6 +12,8 @@ import { GOLD, GOLD_TXT, INK, MUTED as MUT, SECOND as SEC, BORDER as BOR, serif_
 import { COMPENDIUM_DATA as CD } from '../../domain/compendium/generated/compendiumData.generated.js';
 import { slug } from './registrySlug.js';
 import { compareCodepoint } from '../../domain/deterministicSort.js';
+import useIsMobile from '../../hooks/useIsMobile.js';
+import { chromeFontSize, proseFontSize } from '../../design/proseScale.js';
 
 // Real, crawlable URL for a hub/entry — the A–Z is an HTML sitemap, so its links
 // are true hrefs (SEO + open-in-new-tab); onClick does the smooth in-page nav.
@@ -26,14 +28,13 @@ const CATALOGS = [
   { tab:'power',        anchor:'archetypes',   label:'Archetypes',   count:CD.archetypes.count,    blurb:'Emergent settlement archetypes keyed to slider + threat conditions.' },
   { tab:'operations',   anchor:'operations',   label:'Operations',   count:CD.operations.count,    blurb:'Every operation the engine can perform, with its class and receipt.' },
   { tab:'living',       anchor:'systems',      label:'Living World',  count:CD.systems.length,     blurb:'The endgame systems, the causal substrate, and the presets that light them.' },
-  { tab:'lenses',       anchor:'lenses',       label:'Map Lenses',   count:CD.lenses.count,        blurb:'The map rendering lenses and the bespoke-style schema.' },
-  { tab:'facets',       anchor:'facets',       label:'Facets',       count:CD.facets.natures.length, blurb:'The institution natures and the interior grammar built on them.' },
   { tab:'tiers',        anchor:'tiers',        label:'Tiers',        count:CD.tiers.length,        blurb:'Settlement size tiers and their population bands.' },
   { tab:'neighbour',    anchor:'neighbours',   label:'Relationships', count:CD.relationships.count, blurb:'Neighbour relationship types and their mechanical effects.' },
   { tab:'calamity',     anchor:'calamity',     label:'Calamity',     count:CD.calamity.flavors.length, blurb:'The one unified calamity mechanic and its terrain flavours.' },
 ];
 
 export function CompendiumOverview({ onNavigate }) {
+  const mobile = useIsMobile();
   return (
     <div id="overview">
       <p style={{ fontSize:FS.md, color:SEC, lineHeight:1.7, margin:'0 0 6px', fontFamily:sans, maxWidth:'42em' }}>
@@ -55,14 +56,21 @@ export function CompendiumOverview({ onNavigate }) {
                   running serif line — the lexicon register, not a chrome badge. */}
               <span style={{ fontFamily:serif_, fontSize:FS.lg, fontWeight:700, color:GOLD_TXT, fontVariantNumeric:'oldstyle-nums' }}>{c.count}</span>
             </div>
-            <div style={{ fontSize:FS.xs, color:SEC, lineHeight:1.5 }}>{c.blurb}</div>
+            <div style={{ fontSize:proseFontSize(FS.xs, mobile), color:SEC, lineHeight:1.5 }}>{c.blurb}</div>
           </a>
         ))}
       </div>
       <p style={{ fontSize:FS.sm, color:SEC, margin:'16px 0 0', fontFamily:sans }}>
         Looking for a specific name?{' '}
+        {/* The A–Z is the compendium's one orphan-proof door, and its hit area
+            was the bare 16px text line — under every target-size floor on a
+            phone. Vertical padding lifts it to 40px and an equal NEGATIVE margin
+            gives the padding back to the paragraph, so the hit area grows while
+            the rendered line box does not move. (The link is inline in running
+            prose, so the Button/IconButton minHeight idiom does not apply here.) */}
         <a href={hubHref('az', 'az')} onClick={(e) => onLink(e, onNavigate, 'az', 'az')}
-          style={{ color:GOLD_TXT, textDecoration:'underline', textUnderlineOffset:3, fontWeight:600, fontFamily:sans, fontSize:FS.sm }}>
+          style={{ color:GOLD_TXT, textDecoration:'underline', textUnderlineOffset:3, fontWeight:600, fontFamily:sans, fontSize:FS.sm,
+            display:'inline-block', padding:'12px 4px', margin:'-12px -4px' }}>
           Browse the A–Z index.
         </a>
       </p>
@@ -78,7 +86,6 @@ function buildIndexEntries() {
   // opType); the anchor stays op-<slug(opType)> so existing deep-links survive.
   for (const o of CD.operations.entries) out.push({ term:o.label, tab:'operations', anchor:`op-${slug(o.opType)}`, kind:'Operation' });
   for (const s of CD.systems) out.push({ term:s.label, tab:'living', anchor:`system-${slug(s.id)}`, kind:'System' });
-  for (const l of CD.lenses.entries) out.push({ term:l.label, tab:'lenses', anchor:`lens-${slug(l.id)}`, kind:'Lens' });
   for (const r of CD.relationships.entries) out.push({ term:r.label, tab:'neighbour', anchor:'neighbours', kind:'Relationship' });
   for (const t of CD.tiers) out.push({ term:t.label, tab:'tiers', anchor:'tiers', kind:'Tier' });
   for (const f of CD.calamity.flavors) out.push({ term:f.title, tab:'calamity', anchor:`calamity-${slug(f.key)}`, kind:'Calamity' });
@@ -86,6 +93,7 @@ function buildIndexEntries() {
 }
 
 export function AtoZIndex({ onNavigate }) {
+  const mobile = useIsMobile();
   const groups = useMemo(() => {
     const entries = buildIndexEntries().sort((a, b) => compareCodepoint(a.term.toLowerCase(), b.term.toLowerCase()));
     const byLetter = new Map();
@@ -112,7 +120,7 @@ export function AtoZIndex({ onNavigate }) {
               <a key={`${e.kind}-${e.term}`} href={hubHref(e.tab, e.anchor)} onClick={(ev) => onLink(ev, onNavigate, e.tab, e.anchor)}
                 style={{ textDecoration:'none', padding:'3px 0', cursor:'pointer', display:'flex', gap:6, alignItems:'baseline' }}>
                 <span style={{ fontSize:FS.sm, color:GOLD_TXT, textDecoration:'underline', textUnderlineOffset:2 }}>{e.term}</span>
-                <span style={{ fontSize:FS.xxs, color:MUT }}>{e.kind}</span>
+                <span style={{ fontSize:chromeFontSize(FS.xxs, mobile), color:MUT }}>{e.kind}</span>
               </a>
             ))}
           </div>

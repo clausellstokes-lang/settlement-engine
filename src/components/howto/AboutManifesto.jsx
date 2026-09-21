@@ -40,25 +40,28 @@ import ForgeExactDemo from './ForgeExactDemo.jsx';
 import FoundersRoll from './FoundersRoll.jsx';
 import HouseColophon from '../organic/HouseColophon.jsx';
 import { anchorFor } from '../../lib/aboutMapping.js';
+import useIsMobile from '../../hooks/useIsMobile.js';
+import { chromeFontSize } from '../../design/proseScale.js';
 
 // ── Presentational helpers ───────────────────────────────────────────────────
 const PROSE = { fontSize: FS.md, color: SEC, lineHeight: 1.75, fontFamily: sans };
 
-// THE ANCHOR LANDING OFFSET (theme.js ANCHOR_OFFSET = CHROME.headerDesktop +
-// SP.xxl — the sticky bar plus one gutter; the derivation, never the sum it
-// currently reaches, because the bar has been re-measured once already). Every band carries a
+// THE ANCHOR LANDING OFFSET (theme.js ANCHOR_OFFSET: the painted arrow's header and
+// hang plus one gutter; the derivation, never a sum, because the arrow scales with
+// the page). Every band carries a
 // PUBLISHED `#anchor`: the six manifesto fragments are live URLs, and /how-to?tab=
-// and /compare* deep links are translated onto them. The desktop ribbon is sticky at
+// and /compare* deep links are translated onto them. The painted header is sticky at
 // top:0, so without a scroll margin each of those landings parks its <h2> UNDERNEATH
 // the chrome — the reader arrives at a URL that names the section and a viewport that
 // hides its heading. The guide page answered this at the split; this page did not,
 // and all seven of its anchors were landing blind until the repair tail.
 function Band({ id, eyebrow, title, children, first = false }) {
+  const mobile = useIsMobile();
   return (
     <section id={id} style={{ maxWidth: PROSE_MAX, margin: '0 auto', scrollMarginTop: ANCHOR_OFFSET,
       padding: first ? '4px 0 0' : '40px 0 0' }}>
       {eyebrow && (
-        <div style={{ fontFamily: sans, fontSize: FS.xs, fontWeight: 800, letterSpacing: '0.14em',
+        <div style={{ fontFamily: sans, fontSize: chromeFontSize(FS.xs, mobile), fontWeight: 800, letterSpacing: '0.14em',
           textTransform: 'uppercase', color: GOLD_TXT, marginBottom: 6 }}>{eyebrow}</div>
       )}
       {title && (
@@ -80,12 +83,13 @@ function Caption({ children }) {
 // A covenant promise: what CANNOT happen, the mechanism that forbids it, and the
 // receipt a skeptic can open. The receipt is the load-bearing element.
 function Covenant({ claim, mechanism, receipt }) {
+  const mobile = useIsMobile();
   return (
     <div style={{ border: `1px solid ${BOR}`, borderLeft: `3px solid ${GOLD}`,
       padding: '14px 16px', background: CARD, marginBottom: 12, breakInside: 'avoid' }}>
       <div style={{ fontFamily: serif_, fontSize: FS.md, fontWeight: 700, color: INK, marginBottom: 6 }}>{claim}</div>
       <p style={{ fontSize: FS.sm, color: SEC, lineHeight: 1.6, margin: '0 0 8px', fontFamily: sans }}>{mechanism}</p>
-      <div style={{ fontSize: FS.xs, color: GOLD_TXT, fontWeight: 700, textTransform: 'uppercase',
+      <div style={{ fontSize: chromeFontSize(FS.xs, mobile), color: GOLD_TXT, fontWeight: 700, textTransform: 'uppercase',
         letterSpacing: '0.06em', marginBottom: 3 }}>The receipt</div>
       <p style={{ fontSize: FS.sm, color: SEC, lineHeight: 1.55, margin: 0, fontFamily: sans }}>{receipt}</p>
     </div>
@@ -214,7 +218,7 @@ export default function AboutManifesto() {
         <Covenant
           claim="Your world can never be locked inside this tool."
           mechanism="Worlds export as print-ready PDFs, virtual-tabletop maps, and structured data. Exports you download are yours permanently. If you cancel, your saved settlements are not deleted out from under you."
-          receipt={<>Downgrade retention is pinned to the database itself: saved settlements stay retrievable for {RETENTION_MONTHS} months after a downgrade (source: migration 023), and downloaded exports survive anything that happens to the service.</>}
+          receipt={<>Downgrade retention is pinned to the database itself: saved settlements stay retrievable for {RETENTION_MONTHS} months after a downgrade (source: migration 023), and downloaded exports survive anything that happens to the service. The whole promise is published as the <A href="/covenant">Portability Covenant</A>, and every line of it is bound to the capability that keeps it.</>}
         />
         <Covenant
           claim="The engine can never resolve a named character&rsquo;s fate."
@@ -350,9 +354,11 @@ export default function AboutManifesto() {
           built to be inspected. Open the <A href="/compendium">Compendium</A> and read the catalogs
           the engine renders from its own registries. Read the{' '}
           <A href="/compendium?tab=operations">operation registry</A> and see exactly what the engine
-          can and cannot do. When you are ready, <A href="/pricing">pricing</A> is plain-spoken and
-          the ownership terms are on the page: you never need a subscription to keep what you made,
-          and you are never charged for a task that produced nothing.
+          can and cannot do. If you find a fact this world states that does not trace back to a
+          cause, that is the one bug we want most: the <A href="/bounty">contradiction bounty</A> is
+          a standing invitation to send it. When you are ready, <A href="/pricing">pricing</A> is
+          plain-spoken and the ownership terms are on the page: you never need a subscription to
+          keep what you made, and you are never charged for a task that produced nothing.
         </p>
         <ForgeExactDemo />
         {/* The promised credits roll — dormant until a founder opts in (170). */}

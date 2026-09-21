@@ -21,6 +21,8 @@ import Button from '../primitives/Button.jsx';
 import { TextInputDialog } from '../primitives/Dialog.jsx';
 import {
   INK, MUTED, BODY, BORDER, BORDER2, CARD_HDR, RED, GREEN, GOLD, GOLD_BG, sans, serif_, SP, FS, swatch } from '../theme.js';
+import useIsMobile from '../../hooks/useIsMobile.js';
+import { chromeFontSize } from '../../design/proseScale.js';
 
 const STATUSES = [
   'new', 'triage', 'assigned', 'in_progress', 'waiting_on_user',
@@ -63,6 +65,7 @@ async function callAdmin(body) {
 }
 
 export default function SupportQueuePanel() {
+  const mobile = useIsMobile();
   const [filter, setFilter] = useState('');           // '' = all
   const [tickets, setTickets] = useState([]);
   const [loading, setLoading] = useState(false);
@@ -170,7 +173,7 @@ export default function SupportQueuePanel() {
 
       {/* Filter + load */}
       <div style={{ display: 'flex', alignItems: 'center', gap: SP.sm, marginBottom: SP.md }}>
-        <label htmlFor="queue-status-filter" style={{ fontSize: FS.xs, color: MUTED, fontFamily: sans }}>
+        <label htmlFor="queue-status-filter" style={{ fontSize: chromeFontSize(FS.xs, mobile), color: MUTED, fontFamily: sans }}>
           Status
           <select id="queue-status-filter" value={filter} onChange={(e) => setFilter(e.target.value)}
             style={{ marginLeft: SP.xs, fontSize: FS.sm, padding: '4px 6px', border: `1px solid ${BORDER}` }}>
@@ -193,7 +196,7 @@ export default function SupportQueuePanel() {
           <div role="row" style={{
             display: 'flex', gap: SP.sm, padding: `${SP.xs}px ${SP.md}px`,
             background: CARD_HDR, borderBottom: `1px solid ${BORDER2}`,
-            fontSize: FS.xxs, color: MUTED, textTransform: 'uppercase', letterSpacing: '0.06em', fontFamily: sans,
+            fontSize: chromeFontSize(FS.xxs, mobile), color: MUTED, textTransform: 'uppercase', letterSpacing: '0.06em', fontFamily: sans,
           }}>
             <span role="columnheader" style={{ minWidth: 72, textAlign: 'left' }}>Number</span>
             <span role="columnheader" style={{ minWidth: 84, textAlign: 'left' }}>Account ID</span>
@@ -210,14 +213,14 @@ export default function SupportQueuePanel() {
                 borderRadius: 0, borderBottom: `1px solid ${BORDER2}`, fontSize: FS.sm,
                 fontWeight: 400, color: INK,
               }}>
-              <span role="cell" style={{ fontSize: FS.xxs, color: MUTED, minWidth: 72, textAlign: 'left' }}>{t.ticket_number}</span>
-              <span role="cell" style={{ fontSize: FS.xxs, color: MUTED, minWidth: 84, textAlign: 'left', fontFamily: 'ui-monospace, SFMono-Regular, Menlo, monospace' }}>{t.account_number || '–'}</span>
+              <span role="cell" style={{ fontSize: chromeFontSize(FS.xxs, mobile), color: MUTED, minWidth: 72, textAlign: 'left' }}>{t.ticket_number}</span>
+              <span role="cell" style={{ fontSize: chromeFontSize(FS.xxs, mobile), color: MUTED, minWidth: 84, textAlign: 'left', fontFamily: 'ui-monospace, SFMono-Regular, Menlo, monospace' }}>{t.account_number || '–'}</span>
               <span role="cell" style={{ flex: 2, fontWeight: 600, textAlign: 'left', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
                 {t.subject}
               </span>
-              <span role="cell" style={{ flex: 1, color: MUTED, textAlign: 'left', fontSize: FS.xxs }}>{t.email_masked || '–'}</span>
-              <span role="cell" style={{ color: MUTED, textTransform: 'uppercase', fontSize: FS.xxs }}>{t.priority}</span>
-              <span role="cell" style={{ color: t.status === 'new' ? swatch['#8C6F32'] : MUTED, textTransform: 'uppercase', fontSize: FS.xxs, fontWeight: 700 }}>{t.status}</span>
+              <span role="cell" style={{ flex: 1, color: MUTED, textAlign: 'left', fontSize: chromeFontSize(FS.xxs, mobile) }}>{t.email_masked || '–'}</span>
+              <span role="cell" style={{ color: MUTED, textTransform: 'uppercase', fontSize: chromeFontSize(FS.xxs, mobile) }}>{t.priority}</span>
+              <span role="cell" style={{ color: t.status === 'new' ? swatch['#8C6F32'] : MUTED, textTransform: 'uppercase', fontSize: chromeFontSize(FS.xxs, mobile), fontWeight: 700 }}>{t.status}</span>
             </Button>
           ))}
         </div>
@@ -227,13 +230,13 @@ export default function SupportQueuePanel() {
       {active && (
         <div style={{ border: `1px solid ${BORDER}`, padding: SP.lg, background: swatch.white }}>
           <div style={{ display: 'flex', alignItems: 'baseline', gap: SP.sm, flexWrap: 'wrap', marginBottom: SP.md }}>
-            <span style={{ fontSize: FS.xs, color: MUTED, fontFamily: sans }}>{active.ticket_number}</span>
+            <span style={{ fontSize: chromeFontSize(FS.xs, mobile), color: MUTED, fontFamily: sans }}>{active.ticket_number}</span>
             {active.account_number && (
-              <span style={{ fontSize: FS.xs, color: MUTED, fontFamily: 'ui-monospace, SFMono-Regular, Menlo, monospace' }}>{active.account_number}</span>
+              <span style={{ fontSize: chromeFontSize(FS.xs, mobile), color: MUTED, fontFamily: 'ui-monospace, SFMono-Regular, Menlo, monospace' }}>{active.account_number}</span>
             )}
             <h4 style={{ margin: 0, fontFamily: serif_, fontSize: FS.lg, color: INK, flex: 1 }}>{active.subject}</h4>
-            <span style={{ fontSize: FS.xs, color: MUTED }}>{active.email_masked}</span>
-            <span style={{ fontSize: FS.xxs, fontWeight: 700, color: swatch['#8C6F32'], textTransform: 'uppercase' }}>{active.status}</span>
+            <span style={{ fontSize: chromeFontSize(FS.xs, mobile), color: MUTED }}>{active.email_masked}</span>
+            <span style={{ fontSize: chromeFontSize(FS.xxs, mobile), fontWeight: 700, color: swatch['#8C6F32'], textTransform: 'uppercase' }}>{active.status}</span>
           </div>
 
           {/* Action set */}
@@ -243,7 +246,7 @@ export default function SupportQueuePanel() {
               Claim
             </Button>
 
-            <label htmlFor="queue-set-status" style={{ fontSize: FS.xs, color: MUTED, fontFamily: sans, display: 'flex', alignItems: 'center', gap: 4 }}>
+            <label htmlFor="queue-set-status" style={{ fontSize: chromeFontSize(FS.xs, mobile), color: MUTED, fontFamily: sans, display: 'flex', alignItems: 'center', gap: 4 }}>
               Set status
               <select id="queue-set-status" value={active.status} disabled={busy}
                 onChange={(e) => runAction(
@@ -273,7 +276,7 @@ export default function SupportQueuePanel() {
                 ),
               )}>Internal note</Button>
 
-            <label htmlFor="queue-link-faq" style={{ fontSize: FS.xs, color: MUTED, fontFamily: sans, display: 'flex', alignItems: 'center', gap: 4 }}>
+            <label htmlFor="queue-link-faq" style={{ fontSize: chromeFontSize(FS.xs, mobile), color: MUTED, fontFamily: sans, display: 'flex', alignItems: 'center', gap: 4 }}>
               Link FAQ
               <select id="queue-link-faq" value={active.linked_faq || ''} disabled={busy}
                 onChange={(e) => { if (e.target.value) runAction(
@@ -301,7 +304,7 @@ export default function SupportQueuePanel() {
                   background: internal ? GOLD_BG : CARD_HDR,
                   border: `1px solid ${internal ? GOLD : BORDER2}`,
                 }}>
-                  <div style={{ fontSize: FS.xxs, color: MUTED, fontFamily: sans, marginBottom: 2 }}>
+                  <div style={{ fontSize: chromeFontSize(FS.xxs, mobile), color: MUTED, fontFamily: sans, marginBottom: 2 }}>
                     {ev.author_role || 'user'}
                     {internal ? ' · Internal note. The ticket owner can never read this.' : ''}
                     {ev.kind === 'status_change' ? ' · update' : ''}

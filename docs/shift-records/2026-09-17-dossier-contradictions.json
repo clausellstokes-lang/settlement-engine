@@ -1,0 +1,28 @@
+{
+  "_doc": "THE SIGNED RECORD FOR THE DOSSIER CONTRADICTIONS (owner orders 2026-09-17), PREPARED BY THE PART-3 LANE FOR THE CHAIR'S DOOR WRITES AND AMENDED BEFORE ANY DOOR ACT by the part-4 review lane (the amendment is lawful because NO byte has moved yet: `odqRow` is still blank, so tests/helpers/goldenRecordDoor.js refuses this record with BLANK_PROVENANCE and all three surfaces are still at their frozen bytes. A record is never edited AFTER its act, only superseded). ⛔ `odqRow` IS BLANK ON PURPOSE: the owner's approval was given in the chair's chat, and the ledger row that records it is the chair's to write. The procedure, per surface, is in docs/FIRST_CONTACT_BACKLOG.md under 'DOSSIER AND REALM POLISH', part 3 (A) and part 4. One cause, three surfaces: every movement below is the owner's contradiction orders of the same day, and each door write names its surface.",
+  "ownerWords": "I approve and remove the other padlocks and fix the remaining contradictions as well",
+  "ownerDate": "2026-09-17",
+  "odqRow": "§933",
+  "cause": "THE DOSSIER CONTRADICTIONS, fixed at the owner's orders of 2026-09-17 (\"Fix the contradiction.\" over the Kamalavalli dossier; then, answering the chair's request to re-record the frozen dossier-prose golden, \"I approve and remove the other padlocks and fix the remaining contradictions as well\"). Every movement below is a surface that stated the opposite of the crisis or record beside it. (1) dossier-prose-manifest: DS-STR-1's no-banner rung (\"There is no crisis on the books\") composed on every town WITH a crisis banner and now composes only on a town with none (all 1,050 rows: 516 golden-master-v3 towns lose the cell, the three calm gm-seed towns gain it); DS-GEN-16's UNMARKED (\"No great blow stands on the record\") no longer composes over a record carrying a major or catastrophic row (15 towns, 30 rows lose that cell); and DS-POW-2's stability header follows the label under it, so 958 cells (479 towns x 2 audiences, one block, `power.stabilityHeader`) leave the `stable matched` pool for the plain-description floor with NO change of cell count. THE FROZEN BYTES HOLD 73,284 CELLS AND BECOME 72,240: 73,284 -> 72,270 at DS-STR-1's rung, 72,270 -> 72,240 at DS-GEN-16's, and DS-POW-2 moves content at a fixed count. Measured fixture sha256 921c51cf6799ffdfdbffa3715fb496f7d15ce44fff508864653d8ebf3bb4db41 (the door writes it; this figure is the prediction held). (2) espionage-dormancy-fence: the stability label of a town under an insurgency, a mass migration, a war, a religious conversion or an infiltration read `Stable` beside its ACTIVE CRISIS banner; on the fence's 360-settlement corpus exactly 29 rows move, every one in the single field powerStructure.stability (11 wartime, 6 insurgency, 6 mass migration, 3 religious conversion, 3 infiltration), attributed by single-variable revert to src/generators/power/governanceNarrative.js alone (sha cda5ec87... -> f13df68e...). (3) generator-golden-master: the same one function, and the same one field. 480 of its 525 rows move, all in powerStructure.stability, 479 of them `Stable` -> `Vulnerable (decisions shaped from outside)` and one `Tense — regional monster threat` -> `Vulnerable (decisions shaped from outside); monster threat active`; the 525-key set is IDENTICAL; a whole-object deep diff over the corpus at a single-variable revert finds exactly one field path and nothing else (no name, no roster, no history, no rng draw). The five public-unrest arms alone moved ZERO rows of this corpus (its configurations carry none of the five); every one of the 480 is the infiltration arm, which is why this surface enters the record only now.",
+  "seat": "the chair, executing the door writes from a committed tree; prepared by the part-3 lane and amended by the part-4 review lane (Opus 5, DOSSIER AND REALM POLISH)",
+  "surfaces": [
+    {
+      "surface": "dossier-prose-manifest",
+      "action": "re-record",
+      "predictedRows": 2,
+      "proofForm": "derived-artefact"
+    },
+    {
+      "surface": "espionage-dormancy-fence",
+      "action": "re-record",
+      "predictedRows": 1,
+      "proofForm": "in-file corpus constant"
+    },
+    {
+      "surface": "generator-golden-master",
+      "action": "re-record",
+      "predictedRows": 525,
+      "proofForm": "settlement-hash"
+    }
+  ]
+}

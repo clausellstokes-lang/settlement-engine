@@ -518,3 +518,46 @@ export function hasStateProsePool(corpus, blockId, poolKey) {
   const pool = corpus?.[blockId]?.pools?.[poolKey];
   return Array.isArray(pool) && pool.length > 0;
 }
+
+/**
+ * The corpus's generic settlement noun, definite or demonstrative, with an optional
+ * possessive captured so it can ride across the substitution.
+ *
+ * ⚠ EVERY LOOKAROUND IS POSITIVE — `(?=…)`, never `(?!…)` — and the reason is a register
+ * rather than taste, exactly as `weaveBlock.js` records at its own matcher:
+ * `tests/copy/voiceMechanics.test.js` is a shrink-only ratchet on exclamation points in
+ * `src/domain` string literals, and a negative lookahead puts a bare `!` inside this pattern.
+ * The boundary forms are equivalent, end of string included: the `|$` alternative carries the
+ * case a negative lookahead would.
+ *
+ * ⚠ THE BOUNDARIES ARE SPELLED IN UNICODE LETTER CLASSES rather than `\b`, for the same
+ * reason `weaveBlock` gives: `\b` is ASCII-only, so a diacritic reads as a word boundary that
+ * is not one. The leading char is CAPTURED and re-emitted rather than asserted, so two
+ * references in one line both match.
+ */
+const GENERIC_NOUN = /(^|[^\p{L}\p{N}_])(The|the|This|this) town(['’]s)?(?=[^\p{L}\p{N}_]|$)/gu;
+
+/**
+ * Speak one drawn line in the settlement's own tier noun.
+ *
+ * @param {unknown} line one sentence (or one composed unit) as the corpus wrote it
+ * @param {unknown} tierNoun the settlement's tier noun, already resolved by
+ *   `tierNounFor` at the call site — `null` for a tier this build does not know, in which
+ *   case NOTHING is substituted rather than something being guessed.
+ * @returns {string} the line, in the settlement's noun
+ */
+export function speakTierNoun(line, tierNoun) {
+  if (typeof line !== 'string' || line === '') return typeof line === 'string' ? line : '';
+  const noun = typeof tierNoun === 'string' ? tierNoun.trim() : '';
+  // NO NOUN, OR THE CORPUS'S OWN NOUN ⇒ the line by identity. A town is the corpus's voice
+  // already, so it is not merely equal to what it was: it is the same string.
+  if (!noun || noun === 'town') return line;
+  return line.replace(
+    GENERIC_NOUN,
+    /**
+     * @param {string} _match @param {string} before @param {string} determiner
+     * @param {string|undefined} possessive
+     */
+    (_match, before, determiner, possessive) => `${before}${determiner} ${noun}${possessive || ''}`,
+  );
+}

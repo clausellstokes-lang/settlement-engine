@@ -50,3 +50,6 @@ docs/.review_findings.json
 /tmp_*.mjs
 /audit_matrix.mjs
 /reformat.cjs
+
+# dev-only overrides (the preview persona lives in .env.development.local; a production build never loads a mode-scoped local file)
+.env.*.local

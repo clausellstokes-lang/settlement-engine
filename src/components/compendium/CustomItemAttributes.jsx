@@ -15,6 +15,8 @@ import {
 } from '../../domain/customContentSchema.js';
 import { getCustomContentField } from '../../domain/content/customContentManifest.js';
 import { Tag } from './primitives.jsx';
+import useIsMobile from '../../hooks/useIsMobile.js';
+import { chromeFontSize, proseFontSize } from '../../design/proseScale.js';
 
 // These older arrays decorate admitted values with established copy. They do
 // not decide which values are valid; that remains the manifest's job.
@@ -56,6 +58,7 @@ function tradeCategoryLabel(value) {
  * tests/domain/customContentConsumerEvidence.walker.test.js.
  */
 export function CustomItemAttributes({ item, bucket }) {
+  const mobile = useIsMobile();
   const chips = [];
   if (item.essential === true) {
     chips.push({ label: 'Essential', color: '#1a4a20' });
@@ -168,9 +171,9 @@ export function CustomItemAttributes({ item, bucket }) {
         </div>
       )}
       {prose.map(([label, text]) => (
-        <div key={label} style={{ fontSize: FS.xs, color: SEC, lineHeight: 1.4, marginTop: 6 }}>
+        <div key={label} style={{ fontSize: proseFontSize(FS.xs, mobile), color: SEC, lineHeight: 1.4, marginTop: 6 }}>
           <span style={{
-            fontSize: FS.micro, fontWeight: 700, color: MUT, marginRight: 5,
+            fontSize: chromeFontSize(FS.micro, mobile), fontWeight: 700, color: MUT, marginRight: 5,
             textTransform: 'uppercase', letterSpacing: '0.04em',
           }}>{label}</span>
           {text.trim()}

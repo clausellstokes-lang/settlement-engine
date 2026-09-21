@@ -38,7 +38,7 @@
 | S20 | Commons beat ids are `wizard_news.*`-shaped | `commonsVoiceKernel.js:168` `` id: `wizard_news.${tick}.${RUNG_KIND[rung]}.${sid}` `` ; the observation classifier files every `wizard_news.*` id under moverFamily `knowledge` (`subsystemRowsWaves.js:55`, recorded in prose) | VERIFIED — §1c skew prohibition stands |
 | S21 | Commons runs BEFORE the assize, same tick | `assizeKernel.js:428-441` — the combined mover runs `advanceCommonsVoice` at :435 with the comment "first, so the petition it deposits is answerable THIS tick"; mounted `pulseKernel.js:2553-2563` | VERIFIED |
 | S22 | The built answer reaches only named-accused / corruption-kind grievances | `assizeKernel.js:344-347` (`coupled = … namedAccused===accusedNid || (kind==='corruption' && charge==='corruption')`) | VERIFIED — POP-2's misrule-answer gap is real |
-| S23 | The crowd's corruption input is REVEALED-only (POP-2's VERIFY-AT-BUILD, answered now) | `commonsVoiceKernel.js:105-121` `corruptionSignalOf` requires `corrupt===true && ousted!==true && timesExposed>0`, OR a live `exposedCorruption` ledger entry | VERIFIED — pin it as the volume orders |
+| S23 | The crowd's corruption input is REVEALED-only (POP-2's VERIFY-AT-BUILD, answered now) | `commonsVoiceKernel.js:134-150` `corruptionSignalOf` requires `corrupt===true && ousted!==true && timesExposed>0`, OR a live `exposedCorruption` ledger entry | VERIFIED — pin it as the volume orders |
 | S24 | Commons three kinds registered in ALL THREE walkers (the shape POP-2 copies) | `display/settlementRumors.js:353-355` (WHAT_PHRASES); `tests/domain/impactKindWalkers.test.js:134-136` (EXPECTED_VOICE, `null` = deliberately crier-unvoiced); `realm/heraldRouting.js:228` | VERIFIED |
 | S25 | Traditions adoption: ≥12% influx over 3y, fed from the live column ledger | `traditions/relations.js:48-49` (`ADOPTION_THRESHOLD: 0.12`, `INFLUX_WINDOW_YEARS: 3`); `traditionsKernel.js:624-644` influx captured from in-transit columns | VERIFIED |
 | S26 | Arrival folds to a count + one history line; origins survive only in the transient receipt | `demographicsMigration.js:~483-497` (`demographic_arrival` receipt carries `origins[]`; settlement gets population + populationHistory row only) | VERIFIED |
@@ -111,7 +111,7 @@ there TODAY at :111 with no certification row). A manifest member OWES its
 AUTHORED certification row — ⛔ the "declared-pending entry" and
 "backlog" doors are STRUCK (C-POPF-1): both pending surfaces are
 frozen-and-pinned EMPTY at two homes (walker `:234`/`:836`;
-`subsystemRowsVirtual.js:1101`/test `:403`) and the backlog is capped
+`subsystemRowsVirtual.js:595`/test `:403`) and the backlog is capped
 17/17 shrink-only — lighting a POP flag means authoring the real row.
 CONSEQUENCE for every POP wave: the flag
 joins the MANIFEST + its AUTHORED certification row in the SAME

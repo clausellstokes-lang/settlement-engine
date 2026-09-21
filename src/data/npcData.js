@@ -574,15 +574,15 @@ export const NPC_FACTION_GOALS = {
       driven_by: 'reform',
     },
   ],
-  'Parish Priest': [
+  Priest: [
     {
       short: 'Mediate a land dispute between two families before it turns violent',
       long: 'Simply keep the community together: feed them, marry them, bury them with dignity',
       driven_by: 'protection',
     },
     {
-      short: 'Convince their bishop to fund repairs to the church roof',
-      long: 'Leave a detailed parish record so future priests know who this community was',
+      short: 'Convince their superior in the faith to fund repairs to the temple roof',
+      long: 'Leave a detailed record of the congregation so future priests know who this community was',
       driven_by: 'knowledge',
     },
   ],

@@ -59,6 +59,46 @@
  * on"); the rise is declared here, in the ledger row, and is vetoable. The ceiling stays
  * MONOTONE-DOWN from this value.
  *
+ * ⭐ RE-MINTED DOWNWARD BY THE WORKER-HEADROOM CAR (Opus lane, 2026-09-18, branch
+ * `fix-worker-headroom-2026-09-18`): 1,404,493 -> 1,398,705 bytes, measured on
+ * `dist/assets/generation.worker-CXHCiqmL.js` from a worktree verified lockfile-clean
+ * (588 of 588 installed packages at their locked versions — the box-drift hazard makes
+ * a locally built figure worthless otherwise). This is a SHRINK and needs no ruling:
+ * the ceiling may always follow a lower measurement down.
+ *
+ * What bought the 6,439 B, both PROVEN INVISIBLE to generated output (the golden master
+ * and the espionage fence ran plain and green across the change):
+ *   • `src/domain/customContentSchema.js` — sixteen derived `_KEYS` constants took a
+ *     rollup PURE annotation. Five engine modules import that file for `passesTierGate`
+ *     and `tradeCategoryLabelOf` and nothing else; its authoring vocabulary (content
+ *     groups, criticality, economic weight, defense roles, power authorities, food
+ *     impact, satisfies, and the whole deity chart) has ZERO readers under
+ *     src/generators, src/workers, src/lib, src/kernel or src/data. It rode in anyway
+ *     because `Object.freeze(Y.map(f))` lets rollup drop the binding and KEEP the call.
+ *   • `src/generators/steps/stepMetadata.js` — the rail's 22 labels and 22 descriptions
+ *     moved to a sibling table on the same file, `STEP_PRESENTATION`, read only by
+ *     src/components/PipelineRail.jsx. The worker's `metaForStep` reads `summary` alone
+ *     and the packet on the wire is `{ id, index, summary }`, so the words were paying
+ *     rent in this bundle to be read by nobody.
+ *
+ * ⚠ THE HEADROOM IS IN THE BUNDLE, NOT IN THE CEILING. Re-minting at the exact
+ * measurement is what monotone-down means, so this arm is again at 0 B slack by
+ * construction; the 6,439 B of room bought here is room in the WORKER, spent by the next
+ * car that adds authored content, and it is measured before it is spent.
+ *
+ * ⭐ RE-MINTED UPWARD BY THE CHAIR AT THE 2026-09-18 FIXES CONSIST (Fable chair, ODQ §934.19; the
+ * consist's final tip 2b0322992, lockfile-clean; a control build at the worker-headroom car's own
+ * consist position 96cfd7e17 reproduced its mint to the byte — 1,398,705, generation.worker-CXHCiqmL.js):
+ * 1,398,705 -> 1,399,318 bytes. The 613 B are the cars composed after that car, and they are the
+ * owner's content cures, counted in the bundle: the parish-church text cure (§934.13) puts twelve
+ * "house of worship" strings here where there were none; the food writer publishes the split it
+ * carries (§934.15; `importCoverage` 1 -> 4); the article decided by sound; the label ladder in its
+ * shared home; the verdict reading `viable` alone; the hook-framing table. Nothing eager re-merged
+ * and no authoring vocabulary rode along (the two finds above are still out); lanes 22–24 added 0 B.
+ * The capability is the owner's order ("impliment every fix"); the rise is declared here, in the
+ * ledger row, in the report and the pull request, and is vetoable — a veto returns the constant and
+ * takes a headroom hunt (a shrink) in its place. The ceiling stays MONOTONE-DOWN from this value.
+ *
  * @enforced-by this test
  */
 
@@ -74,8 +114,49 @@ const ASSETS = join(DIST, 'assets');
 const DIST_EXISTS = existsSync(DIST) && existsSync(ASSETS);
 const REQUIRE_DIST = process.env.VERIFY_DIST === '1';
 const SENTINEL = 'settlementforge:generation:worker-v1';
-/** Measured 1,404,242 B at f6545dcd9 (build-900-chair.log); monotone-down — see the docblock. */
-export const WORKER_BUNDLE_CEILING_BYTES = 1404493;
+/** Measured 1,399,318 B by the chair at the 2026-09-18 fixes consist's final tip (2b0322992,
+ *  generation.worker-DNFpfUQI.js, lockfile-clean; ODQ §934.19); monotone-down — see the docblock
+ *  for what the bytes are. */
+// 1,399,318 → 1,399,946 (2026-09-19, the chair, ODQ §934.19 addendum): +628 B minified,
+// ATTRIBUTED PER MODULE by a control build at the previous mint (d17f171b0) against the tip —
+// exactly ONE module moved: src/generators/spatialGenerator.js, 14,050 → 17,359 rendered bytes,
+// the §934.22 sacred-house derivation (every layout line derives the house the settlement
+// holds instead of saying 'church'). A buy-back inside that file is the named alternative;
+// the rise is offered for the owner's ratification like the mint it follows.
+// 1,399,946 → 1,401,128 (2026-09-19, the chair, ODQ §934.19 addendum 2): +1,182 B minified,
+// ATTRIBUTED PER MODULE by a control build at train EM-T1's green terminal (ed9d99295)
+// against the EM-T2 cure tip (023eda2ec) — exactly TWO modules moved, and they are EM-P0's
+// two: src/generators/pipeline.js, 9,843 → 12,548 rendered bytes, and
+// src/generators/steps/generatePopulation.js, 6,864 → 9,702 rendered bytes. Nothing else in
+// the whole build moved a rendered byte. The bytes are EM-P0's pipeline seam (ODQ §934.47,
+// the owner's editor program): the runner hands `pins` to every step and refuses a partial
+// pin, and generatePopulation consults a pin at each of its four choosers (npcs,
+// relationships, factions, conflicts) on its ONE stream. That is generation code in the
+// generation worker, where it belongs; nothing eager re-merged. A buy-back inside those two
+// files is the named alternative; the rise is offered for the owner's ratification like the
+// mints it follows. The ceiling stays MONOTONE-DOWN from this value.
+// 1,401,128 → 1,401,208 (2026-09-19, EM-P3's build lane, under the standing conditional ruling of
+// ODQ §934.19 addendum 2 and the EDIT-MODE-TRAIN charter's amendment of 2026-09-19): +80 B minified,
+// ATTRIBUTED PER MODULE by a control build on this packet's own base tree (af36a626d, whose src/ and
+// tests/ are byte-identical to the verified base 4928be0ab — the one commit between them is the
+// docs-only promotion) against this tip, both built with `npm run build`. A whole-build sweep over
+// all 545 emitted chunks finds exactly THREE modules whose rendered length moved ANYWHERE, and all
+// three are EM-P3's own manifest paths: src/generators/steps/resolveConfig.js 14,417 → 14,304 (the
+// two literals left it), src/data/worldFactOptions.js new → 2,500 (they arrived), and
+// src/components/gallery/galleryUtils.js 4,987 → 4,990 in the gallery's own lazy chunk, which is not
+// in this bundle at all. This worker: 230 → 231 modules, nothing left it. The bytes are EM-P3's two
+// world-fact option lists (TERRAIN_WEIGHTS and CULTURES) moving to their one home, which the
+// generator still reads — generation data in the generation worker, where it belongs.
+// ⭐ THE CURE WAS THE PLACEMENT BEFORE IT WAS THE CEILING. The citation index WORLD_FACT_SOURCES is
+// an index of OTHER modules' addresses that this worker never reads, so it was placed in the
+// domain-reachable leaf src/domain/worldFactOptions.js instead: measured, that leaf and
+// galleryUtils.js appear nowhere in this bundle, and the alternative (the map beside the lists)
+// priced 428 B more into a zero-slack ceiling for bytes the worker would never execute. Nothing
+// eager re-merged: the eager first-paint set is byte-identical at 268 modules and engine-core's
+// chunk hash did not move; the lazy engine SHRANK 678,131 → 677,935 B. A buy-back inside
+// resolveConfig.js is the named alternative; the rise is offered for the owner's ratification like
+// the mints it follows. The ceiling stays MONOTONE-DOWN from this value.
+export const WORKER_BUNDLE_CEILING_BYTES = 1401208;
 
 const source = (path) => readFileSync(join(ROOT, path), 'utf8');
 
@@ -390,7 +471,12 @@ describe.runIf(DIST_EXISTS)('generation worker — production boundary', () => {
     expect(workers, 'exactly one generation worker bundle in dist/assets').toHaveLength(1);
     const bytes = readFileSync(join(ROOT, 'dist', 'assets', workers[0])).length;
     // Read the measured figure from the failure, never compute the ceiling from the tree.
-    expect(bytes, `generation worker bundle ${workers[0]} is ${bytes} B; the ceiling is ${WORKER_BUNDLE_CEILING_BYTES} B (build-900-chair.log)`).toBeLessThanOrEqual(WORKER_BUNDLE_CEILING_BYTES);
+    expect(
+      bytes,
+      `generation worker bundle ${workers[0]} is ${bytes} B; the ceiling is `
+      + `${WORKER_BUNDLE_CEILING_BYTES} B (re-minted by the worker-headroom car, 2026-09-18). `
+      + 'A RISE IS NEVER A LANE\'S EDIT: buy the bytes back, or take the ruling.',
+    ).toBeLessThanOrEqual(WORKER_BUNDLE_CEILING_BYTES);
   });
 
 });

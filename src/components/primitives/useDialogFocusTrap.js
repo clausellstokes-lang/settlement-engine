@@ -89,4 +89,90 @@ export function useDialogFocusTrap(open, onCancel) {
   return dialogRef;
 }
 
+/**
+ * useDialogDismiss — the NON-MODAL half of the dialog lifecycle (owner order, ODQ
+ * §934.31).
+ *
+ * ⭐ WHY A SECOND HOOK RATHER THAN ONE MORE CALLER OF THE TRAP. The order requires every
+ * pop-up to close on Escape and hand focus back to whatever opened it. It does NOT
+ * require every pop-up to be MODAL, and a few are deliberately not: the Feedback &
+ * support panel is an anchored corner panel with no scrim, and the post-generate coach
+ * sits in the page's own content flow. Trapping Tab inside either of those would be a
+ * real regression — the reader could no longer reach the page they are still looking at,
+ * and `aria-modal` would be a promise the surface does not keep.
+ *
+ * So the lifecycle splits by what the surface IS, not by who remembered to wire it:
+ *   • `useDialogFocusTrap` — a MODAL dialog: focus-in, Tab trapped, Escape, restore.
+ *   • `useDialogDismiss`   — a NON-MODAL popover: Escape and restore, no trap, and no
+ *                            focus-in either (a hint that steals focus is a hint that
+ *                            interrupts).
+ * ⛔ THIS IS A TYPED RULE, NOT AN EXEMPTION LIST. Both arms give Escape and focus
+ * restoration; neither lets a surface opt out of having an exit.
+ *
+ * Escape is read through the SAME trap stack the modal hook uses, so a non-modal popover
+ * open underneath a modal does not swallow the modal's Escape.
+ *
+ * @param {boolean} open
+ * @param {(() => void) | undefined} onDismiss
+ * @returns {import('react').RefObject<HTMLElement>} ref to attach to the popover node
+ */
+export function useDialogDismiss(open, onDismiss) {
+  const nodeRef = useRef(null);
+  const restoreRef = useRef(null);
+  const onDismissRef = useRef(onDismiss);
+
+  useEffect(() => { onDismissRef.current = onDismiss; }, [onDismiss]);
+
+  useEffect(() => {
+    if (!open) return undefined;
+    restoreRef.current = typeof document !== 'undefined' ? document.activeElement : null;
+    // Captured at effect time, deliberately: by cleanup the ref has usually been nulled
+    // (the popover unmounting is WHY the cleanup is running), and the cleanup's question
+    // is about the node that WAS open, not about whatever the ref points at afterwards.
+    const node = nodeRef.current;
+
+    // Claim the top of the SHARED stack: while this popover is the topmost open
+    // surface, Escape is its to answer — and while a modal opens above it, it is not.
+    const token = {};
+    trapStack.push(token);
+
+    const onKey = (event) => {
+      if (trapStack[trapStack.length - 1] !== token) return;
+      if (event.key !== 'Escape') return;
+      onDismissRef.current?.();
+      // ⭐ AND FOCUS GOES HOME ON THE KEY ITSELF, not only when the popover finally comes
+      // down. The order is "close on Escape and hand focus back to whatever opened it", and
+      // the teardown below can only answer the second half once the CALLER's state has
+      // settled — which is a different moment, and on a caller whose dismiss is deferred,
+      // re-rendered or externally owned it may be much later or never. The Entity Inspector
+      // is exactly that shape (`SettlementWorkbench` clears a store field and waits to be
+      // re-rendered without an entry), and its reader was left holding a focus ring inside a
+      // panel that had already answered them.
+      // ⛔ ONLY IF FOCUS IS STILL INSIDE, which is the same question the teardown asks and
+      // for the same reason: a non-modal never took focus, so a reader who had moved on must
+      // not be yanked back. And the two cannot fight — after this hands focus to the opener,
+      // focus is neither inside the popover nor on <body>, so the teardown declines.
+      const live = typeof document !== 'undefined' ? document.activeElement : null;
+      if (node && live && node.contains?.(live)) restoreRef.current?.focus?.();
+    };
+    window.addEventListener('keydown', onKey);
+    return () => {
+      window.removeEventListener('keydown', onKey);
+      const idx = trapStack.lastIndexOf(token);
+      if (idx !== -1) trapStack.splice(idx, 1);
+      // Restore only if focus is still INSIDE the popover. A non-modal never took
+      // focus, so yanking it back would move the reader's cursor out of whatever they
+      // had gone on to do.
+      const live = typeof document !== 'undefined' ? document.activeElement : null;
+      // Either focus is still in the popover, or the popover has already been removed
+      // and the browser has parked focus on <body> — both mean the reader's place went
+      // with it, and both are answered by handing focus back to the opener.
+      const inside = node && live && node.contains?.(live);
+      if (inside || live === document?.body) restoreRef.current?.focus?.();
+    };
+  }, [open]);
+
+  return nodeRef;
+}
+
 export default useDialogFocusTrap;

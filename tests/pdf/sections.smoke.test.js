@@ -29,6 +29,16 @@ import { Cover } from '../../src/pdf/sections/Cover.jsx';
 import { IdentityDailyLife } from '../../src/pdf/sections/IdentityDailyLife.jsx';
 import { PowerStructure } from '../../src/pdf/sections/PowerStructure.jsx';
 import { EconomicsTrade } from '../../src/pdf/sections/EconomicsTrade.jsx';
+import { defenseSlice, servicesSlice } from '../../src/pdf/lib/viewModelBodySlices.js';
+import { DefenseSecurity } from '../../src/pdf/sections/DefenseSecurity.jsx';
+import { deriveSupportingCapabilities } from '../../src/domain/display/defenseDisplay.js';
+import { scoreBand } from '../../src/domain/display/defenseScoreBands.js';
+import { statusCase } from '../../src/components/new/labelLadder.js';
+import { expectAbsentWithAnchor } from '../helpers/anchoredNegatives.js';
+import { Institutions } from '../../src/pdf/sections/Institutions.jsx';
+import { Services } from '../../src/pdf/sections/Services.jsx';
+import { resourcesSlice } from '../../src/pdf/lib/viewModelBodySlices.js';
+import { institutionDisplayName } from '../../src/domain/display/institutionDisplayName.js';
 
 const SEED = 'pdf-smoke-2026-05';
 
@@ -195,5 +205,285 @@ describe('IdentityDailyLife — the food balance reads as a tri-state, not a bin
     expect(text).not.toContain('+0 units'); // anchored: 'Balanceford' asserted present above — the chapter rendered, so this absence is a suppression
     expect(text).not.toContain('Surplus of 0 units'); // anchored: same anchor ('Balanceford' above)
     expect(text).not.toContain('Balanced'); // anchored: same anchor ('Balanceford' above) — no food data means NO third word either
+  });
+});
+
+/**
+ * ── THE DEAD MAGIC READER (review 10, 2026-09-18) ────────────────────────────────────
+ *
+ * Chapter 02's anchor panel carried a `MAGIC` chip fed by `identity.anchor.magicalCapability`,
+ * which was read from `defenseProfile.magicalCapability` — A KEY NO WRITER PRODUCES.
+ * `generateDefenseProfile` returns scores, readiness, institutions, magicDependency,
+ * traditions, chainModifiers and economicGates; the world pulse re-spreads `scores` alone;
+ * no save shape carries the key. The read was guarded (`|| null`) so it never threw — it
+ * simply resolved to null on every settlement ever exported, and the chip never printed.
+ *
+ * ⛔ THE PIN IS ON THE CHIP LABELS, NOT ON THE PAGE TEXT, and the difference matters: the
+ * same chapter renders a `Magic-dependent` TAG a few lines below from the live
+ * `magicDependency` flag, so a text-level search for the word would either collide with a
+ * fact that IS written or pass only by the accident of letter case. The anchor row's labels
+ * are the exact surface the chip lived on, so that is what is read.
+ */
+describe('IdentityDailyLife — the magic word-grade with no writer is gone', () => {
+  /** Every KeyValRow label in a chapter's element tree, in render order. */
+  function chipLabels(node, out = []) {
+    if (node == null || typeof node !== 'object') return out;
+    if (Array.isArray(node)) { for (const c of node) chipLabels(c, out); return out; }
+    if (Array.isArray(node?.props?.pairs)) {
+      for (const pair of node.props.pairs) if (pair?.label) out.push(String(pair.label).toUpperCase());
+    }
+    if (typeof node?.type === 'function') { chipLabels(node.type({ ...node.props }), out); return out; }
+    if (node?.props?.children != null) chipLabels(node.props.children, out);
+    return out;
+  }
+
+  test('the view model offers no magicalCapability, on either slice that used to carry it', () => {
+    // The ANCHOR slice (the chip's own feed) and the DEFENSE body slice both declared it.
+    // `magicDependency` is the sibling that travels the same `dp?.` read on the same object,
+    // so it proves the slice is built and correctly keyed rather than merely absent.
+    expectAbsentWithAnchor(
+      Object.keys(villageVm.identity.anchor), 'magicalCapability', 'magicDependency',
+      'the chapter-02 anchor slice',
+    );
+    expectAbsentWithAnchor(
+      Object.keys(defenseSlice(villageSettlement)), 'magicalCapability', 'magicDependency',
+      'the PDF defense body slice',
+    );
+    // …and the threadbare save, which is the shape a resurrected field would first show on.
+    expectAbsentWithAnchor(
+      Object.keys(sparseVm.identity.anchor), 'magicalCapability', 'magicDependency',
+      'the chapter-02 anchor slice on a threadbare save',
+    );
+  });
+
+  test('the rendered chapter prints no MAGIC chip, for a full settlement or a sparse one', () => {
+    // A REAL generated village: the sibling chips are the liveness anchor — the anchor row
+    // rendered and chose its labels, so the exclusion is a removal and not an empty page.
+    expectAbsentWithAnchor(chipLabels(IdentityDailyLife({
+      settlement: villageSettlement, vm: villageVm,
+    })), 'MAGIC', 'DEFENSE', 'chapter 02 on a generated village');
+    expectAbsentWithAnchor(chipLabels(IdentityDailyLife({
+      settlement: metropolisSettlement, vm: metropolisVm,
+    })), 'MAGIC', 'DEFENSE', 'chapter 02 on a generated metropolis');
+    // ⚠ THE THREADBARE SAVE IS NOT ASSERTED HERE, and the reason is the anchor rather than
+    // the claim. Its whole anchor-facts panel is gated on having any anchor fact at all, so
+    // it renders NO KeyValRow — the collection is legitimately empty, no sibling label
+    // travels this path, and an exclusion over an empty list is the vacuity this helper
+    // exists to refuse. The sparse shape is covered on the VIEW MODEL instead, one arm up,
+    // where `magicDependency` is a real sibling.
+  });
+
+  test('THE WRITER REALLY IS ABSENT — the generated profile has no such key', () => {
+    // The claim the deletion rests on, executed rather than reasoned. `scores` is the
+    // sibling key that proves the profile was generated and is correctly shaped.
+    expectAbsentWithAnchor(
+      Object.keys(villageSettlement.defenseProfile), 'magicalCapability', 'scores',
+      'generateDefenseProfile output',
+    );
+    expectAbsentWithAnchor(
+      Object.keys(metropolisSettlement.defenseProfile), 'magicalCapability', 'scores',
+      'generateDefenseProfile output (metropolis)',
+    );
+  });
+});
+
+/**
+ * ── THE PDF'S CAPABILITY ROWS SPEAK IN BAND WORDS, NOT DIGITS (owner fold, 2026-09-18) ──
+ *
+ * `DefenseSecurity.jsx` printed `Math.round(sc.score)` beside each Supporting Capabilities
+ * row while its screen twin printed the band word from the shared ladder — R-5b item #20's
+ * law held on one surface and not the other, so one number read as two verdicts depending on
+ * where a DM met it. The PDF now prints exactly what the screen prints, through the same two
+ * functions.
+ *
+ * ⚠ THE PIN LIVES HERE RATHER THAN IN statBandsOverDigits.test.jsx, deliberately: that file
+ * is being re-cut by the peer capability-row car on the consist, and a pin that can sit
+ * clear of a contended file should.
+ */
+describe('DefenseSecurity — the capability score is a band word on the page', () => {
+  function texts(node, out = []) {
+    if (node == null || node === false || node === true) return out;
+    if (typeof node === 'string' || typeof node === 'number') { out.push(String(node)); return out; }
+    if (Array.isArray(node)) { for (const c of node) texts(c, out); return out; }
+    if (typeof node?.type === 'function') { texts(node.type({ ...node.props }), out); return out; }
+    if (node?.props?.children != null) texts(node.props.children, out);
+    return out;
+  }
+
+  test('every scored capability row prints its band word, and no bare digit survives', () => {
+    for (const [name, settlement, vm] of [
+      ['village', villageSettlement, villageVm], ['metropolis', metropolisSettlement, metropolisVm],
+    ]) {
+      const caps = deriveSupportingCapabilities(settlement).filter((c) => c.score !== null);
+      expect(caps.length, `${name}: no scored capability row, so this arm judges nothing`)
+        .toBeGreaterThan(0);
+      const printed = texts(DefenseSecurity({ settlement, vm })).map((t) => t.trim());
+      for (const capRow of caps) {
+        const band = statusCase(scoreBand(Math.min(100, Math.max(0, capRow.score))));
+        expect(printed, `${name}: ${capRow.label} does not print its band word`).toContain(band);
+        // …and the digit it replaced is not on the page as a standalone value. The anchor is
+        // the band assertion just above: the row demonstrably rendered.
+        expectAbsentWithAnchor(printed, String(Math.round(capRow.score)), band,
+          `${name}: ${capRow.label}'s retired digit`);
+      }
+    }
+  });
+});
+
+
+// ── THE INSTITUTION LABEL: SCREEN AND PRINT SAY ONE WORD (ODQ §934.13) ───────────────
+/**
+ * The parish-church ruling was a DISPLAY SEAM, which means its whole correctness claim is
+ * a RELATION between two surfaces rather than a string: the paid document and the screen
+ * must print the same label for the same institution, and the persisted settlement under
+ * both must be untouched.
+ *
+ * ⛔ WHY THIS IS NOT A GOLDEN OVER THE WORD. Pinning 'House of worship' here would pass
+ * just as happily if the PDF printed it and the screen printed the raw key. The arm that
+ * is worth having asserts PRINT === SCREEN, plus the separate fact that neither of them
+ * still says the setting-specific word.
+ */
+describe('institution label — screen↔print parity', () => {
+  /** The screen's own read: every roster pill, card heading and service row calls this. */
+  const screenLabel = (inst) => institutionDisplayName(inst);
+
+  test('a village carrying the parish church prints one label on both surfaces', () => {
+    // A FIXTURE, not a generated draw: the arm must light the institution rather than hope
+    // the seed rolls it. The shape is what assembleInstitutions persists.
+    const fixture = {
+      ...villageSettlement,
+      institutions: [
+        { id: 'inst-pc', name: 'Parish church', category: 'Religious', source: 'generated', status: 'healthy' },
+        { id: 'inst-bs', name: 'Blacksmith', category: 'Crafts', source: 'generated', status: 'healthy' },
+      ],
+    };
+
+    const printed = servicesSlice(fixture).detailed;
+    expect(printed).toHaveLength(2);
+
+    for (const [i, inst] of fixture.institutions.entries()) {
+      // THE PARITY CLAIM, stated as the relation and not as a word.
+      expect(printed[i].name).toBe(screenLabel(inst));
+    }
+    expect(printed[0].name).toBe('House of worship');
+    // The unmapped institution proves the seam is not rewriting everything it touches.
+    expect(printed[1].name).toBe('Blacksmith');
+
+    // ⭐ AND THE MODEL UNDER BOTH IS UNMOVED — the seam reads, it never migrates.
+    expect(fixture.institutions[0].name).toBe('Parish church');
+  });
+
+  test('neither surface prints the setting-specific word', () => {
+    const fixture = {
+      ...villageSettlement,
+      institutions: [
+        { id: 'inst-pc', name: 'Parish church', category: 'Religious', source: 'generated', status: 'healthy' },
+      ],
+    };
+    const printedName = servicesSlice(fixture).detailed[0].name;
+    expect(printedName).not.toMatch(/parish|church/i); // anchored: printedName is read off detailed[0] above (an emptied slice throws there) and the exact label is pinned on the next line
+    expect(printedName).toBe('House of worship');
+    expect(screenLabel(fixture.institutions[0])).toBe(printedName);
+  });
+
+  test('the Institutions chapter renders the labelled roster without throwing', () => {
+    const fixture = {
+      ...villageSettlement,
+      institutions: [
+        { id: 'inst-pc', name: 'Parish church', category: 'Religious', source: 'generated', status: 'healthy' },
+      ],
+    };
+    const vm = { ...villageVm, services: servicesSlice(fixture) };
+    expect(Institutions({ settlement: fixture, narrativeMode: false, vm })).toBeTruthy();
+  });
+
+  test('every scale variant and the access service agree across surfaces', () => {
+    const family = [
+      'Parish church', 'Parish churches (2-5)',
+      'Parish churches (10-30)', 'Parish churches (50-100+)',
+    ];
+    const fixture = {
+      ...villageSettlement,
+      institutions: family.map((name, i) => ({
+        id: `inst-${i}`, name, category: 'Religious', source: 'generated', status: 'healthy',
+      })),
+    };
+    const printed = servicesSlice(fixture).detailed.map((d) => d.name);
+    expect(printed).toEqual(family.map((n) => screenLabel({ name: n })));
+    expect(printed).toEqual([
+      'House of worship', 'Houses of worship (2-5)',
+      'Houses of worship (10-30)', 'Houses of worship (50-100+)',
+    ]);
+  });
+
+  // ── THE CHAIN FLOW, WHICH THE FIRST INSTALL OF THE SEAM MISSED (browser pass 3) ────
+  /**
+   * The roster went through the seam; the SUPPLY-CHAIN rows did not, at two sites. Both
+   * print the very same `processingInstitutions` the screen's Economics tab already routes
+   * through `institutionDisplayName`, so the Canon Dossier read "BY local resource Parish
+   * church + Monastery" beside a screen that said "House of worship". The arms below walk
+   * the two shapes separately because the defects are at different layers: one is a PRINT
+   * in the chapter, the other is a JOIN in the slice that reaches the chapter as one string.
+   */
+  /** Text leaves of a @react-pdf element tree, calling each function component as it goes. */
+  function collectText(node, out = []) {
+    if (node == null || typeof node === 'boolean') return out;
+    if (typeof node === 'string' || typeof node === 'number') { out.push(String(node)); return out; }
+    if (Array.isArray(node)) { for (const n of node) collectText(n, out); return out; }
+    if (typeof node === 'object') {
+      if (typeof node.type === 'function') return collectText(node.type(node.props), out);
+      return collectText(node.props?.children, out);
+    }
+    return out;
+  }
+
+  test("the Services chapter's chain flow prints the labelled institution, never the catalogue key", () => {
+    // A BARE services slice, so the only institution in the chapter's text is the one this
+    // arm put there — otherwise a stray 'parish' from the village's own roster would decide
+    // the result instead of the chain row.
+    const vm = {
+      ...villageVm,
+      services: {
+        available: {},
+        notableAbsences: [],
+        activeChains: [{
+          label: 'Cloth finishing',
+          resource: 'wool',
+          processingInstitutions: ['Parish church', 'Blacksmith'],
+          outputs: ['broadcloth'],
+          status: 'productive',
+        }],
+      },
+    };
+    const text = collectText(Services({ settlement: villageSettlement, narrativeMode: false, vm })).join(' ');
+    expect(text, 'the chapter rendered no chain flow at all').toContain('House of worship');
+    // anchored: the line above proves the flow rendered, so this absence is about the label.
+    expect(text).not.toMatch(/parish/i);
+    // The unmapped institution proves the seam is not rewriting every name it touches.
+    expect(text, 'the second processing institution must survive the seam').toContain('Blacksmith');
+  });
+
+  test('the resources slice joins DISPLAY names, because the chapter can no longer unjoin them', () => {
+    const fixture = {
+      ...villageSettlement,
+      resourceAnalysis: {
+        ...(villageSettlement.resourceAnalysis || {}),
+        exploitation: {
+          fullyExploited: [{
+            rawResource: 'wool',
+            processingInstitutions: ['Parish church', 'Blacksmith'],
+            finalProducts: ['broadcloth'],
+          }],
+          partiallyExploited: [],
+          unexploited: [],
+        },
+      },
+    };
+    const rows = resourcesSlice(fixture).chainRows;
+    expect(rows, 'the slice built no chain row to judge').toHaveLength(1);
+    expect(rows[0].processing).toBe('House of worship, Blacksmith');
+    // ⭐ AND THE MODEL UNDER IT IS UNMOVED — the seam reads, it never migrates.
+    expect(fixture.resourceAnalysis.exploitation.fullyExploited[0].processingInstitutions[0])
+      .toBe('Parish church');
   });
 });

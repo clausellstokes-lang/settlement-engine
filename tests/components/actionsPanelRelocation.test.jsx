@@ -29,11 +29,15 @@ vi.mock('../../src/store/index.js', () => {
 vi.mock('../../src/lib/supabase.js', () => ({ isConfigured: true }));
 // Keep the checkout inert — the popup's confirm must not touch the network.
 vi.mock('../../src/lib/stripe.js', () => ({ startCheckout: vi.fn(() => Promise.resolve()) }));
+// Purchases OPEN for this file: it pins the unlock button and its popup as it behaves after launch.
+// The pre-launch closed state is pinned in tests/components/launchLock.dossier.test.jsx.
+vi.mock('../../src/lib/launchGate.js', async (importOriginal) => ({ ...(await importOriginal()), purchasesOpen: () => true }));
 
 import { useNextActionRailHandlers } from '../../src/components/settlementDetail/useNextActionRailHandlers.js';
 import NextActionRail from '../../src/components/settlement/NextActionRail.jsx';
 import ExportUnlockDialog from '../../src/components/dossier/ExportUnlockDialog.jsx';
 import BuyThisDossier from '../../src/components/BuyThisDossier.jsx';
+import { startCheckout } from '../../src/lib/stripe.js';
 
 const baseDeps = {
   saveId: 'save-1', phase: 'draft', editMode: false, narrated: false, canNarrate: true,
@@ -78,12 +82,32 @@ describe('NextActionRail — the "Actions" panel census', () => {
     expect(screen.getByText('Actions')).toBeTruthy();
     // Session Mode + the premium-gated Edit rung are present (Edit shows the lock label).
     expect(screen.getByRole('button', { name: 'Session Mode' })).toBeTruthy();
-    expect(screen.getByRole('button', { name: 'Edit (Premium)' })).toBeTruthy();
-    // Export Image + Share may sit under "Show more" (5-item cap) — reveal them.
+    expect(screen.getByRole('button', { name: 'Edit (Cartographer)' })).toBeTruthy();
+    // Share may sit under "Show more" (5-item cap) — reveal it.
     const more = screen.queryByRole('button', { name: /show \d+ more/i });
     if (more) fireEvent.click(more);
-    expect(screen.getByRole('button', { name: 'Export Image' })).toBeTruthy();
     expect(screen.getByRole('button', { name: 'Share to Gallery' })).toBeTruthy();
+    // Export Image is WITHHELD (the owner, 2026-09-19): its map is still being made.
+    // anchored: Share to Gallery is proven present on the line above, so this rail rendered.
+    expect(screen.queryByRole('button', { name: 'Export Image' })).toBeNull();
+  });
+
+  test('with purchases open, a free owner\'s Edit (Cartographer) and Export rungs are live, unpilled, and fire their handlers', () => {
+    storeRef.current = { phase: 'draft', eventLog: [], aiSettlement: null, aiDailyLife: null, auth: { tier: 'wanderer' } };
+    const rail = { onEdit: vi.fn(), onExport: vi.fn() };
+    render(<NextActionRail settlement={{ name: 'X' }} save={{ id: 'save-1' }} handlers={rail} canEdit={false} />);
+    const edit = screen.getByRole('button', { name: 'Edit (Cartographer)' });
+    const exportRung = screen.getByRole('button', { name: 'Export Dossier' });
+    for (const rung of [edit, exportRung]) {
+      expect(rung.disabled).toBe(false);
+      expect(rung.querySelector('[data-launch-pill]')).toBeNull();
+    }
+    // The Export rung carries no hint of its own, exactly as before the lockout.
+    expect(exportRung.getAttribute('aria-describedby')).toBeNull();
+    fireEvent.click(edit);
+    fireEvent.click(exportRung);
+    expect(rail.onEdit).toHaveBeenCalledTimes(1);
+    expect(rail.onExport).toHaveBeenCalledTimes(1);
   });
 });
 
@@ -95,6 +119,17 @@ describe('ExportUnlockDialog — the export-unlock popup', () => {
     expect(screen.getByText(/Unlock all exports for this settlement · \$2\.99/i)).toBeTruthy();
     expect(screen.getByText(/A one-time purchase unlocks every export/i)).toBeTruthy();
     expect(screen.getByRole('button', { name: /continue to checkout/i })).toBeTruthy();
+  });
+
+  test('with purchases open, Continue to checkout is live, unpilled, and starts the durable checkout', () => {
+    render(<ExportUnlockDialog open saveId="s-1" onClose={() => {}} />);
+    const checkout = screen.getByRole('button', { name: 'Continue to checkout' });
+    expect(checkout.disabled).toBe(false);
+    expect(checkout.querySelector('[data-launch-pill]')).toBeNull();
+    fireEvent.click(checkout);
+    expect(startCheckout).toHaveBeenCalledTimes(1);
+    expect(startCheckout.mock.calls[0][0]).toBe('single_dossier');
+    expect(startCheckout.mock.calls[0][1].saveId).toBe('s-1');
   });
 });
 

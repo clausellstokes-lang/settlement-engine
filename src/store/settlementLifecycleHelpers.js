@@ -23,6 +23,7 @@ import { mapEventToPartyImpact } from '../domain/events/partyEventLinkage.js';
 import { canonRelationshipTargetFor } from '../domain/events/canonRelationshipLinkage.js';
 import { twinDirectiveForEvent } from '../domain/crisisLifecycle.js';
 import { saveEnvelopeFor, visibleSettlementIdsForCampaign } from './settlementSliceHelpers.js';
+import { draftIdentity } from './persistProjection.js';
 
 /**
  * Coarse SystemState summary for an ActionResult before/after slice — the four
@@ -205,6 +206,19 @@ export function activateFaithIfEntitled(settlement, get) {
 }
 
 /**
+ * The identity of the world in the editor RIGHT NOW, for a door to capture BEFORE
+ * it replaces or removes it. Resolved to a string here rather than passed as an
+ * object so the caller never hands the chokepoint an immer draft whose parent
+ * property it is about to reassign.
+ *
+ * @param {*} state the Immer store draft
+ * @returns {string|null} the identity, or null when the editor holds nothing nameable
+ */
+export function retiringDraftOf(state) {
+  return draftIdentity(state?.settlement, state?.lastSeed);
+}
+
+/**
  * resetSettlementIdentity — THE single chokepoint for clearing a settlement's
  * session-only identity residue on ANY active-settlement swap: generateSettlement,
  * hydrateFromSave (open a save), setSettlement, clearSettlement. Every field reset
@@ -231,9 +245,13 @@ export function activateFaithIfEntitled(settlement, get) {
  * set / clear to their own DRAFT defaults.
  *
  * @param {*} state the Immer store draft
- * @param {{ preservePendingEdits?:boolean }} [options]
+ * @param {{ preservePendingEdits?:boolean, retiring?:string|null }} [options]
+ *   retiring: the identity of the world this swap is TAKING OUT of the editor, as
+ *   `retiringDraftOf(state)` read it BEFORE the door replaced it. Defaults to null,
+ *   which claims nothing — a door that forgets to pass it leaves the device's slot
+ *   alone rather than retiring a draft on a guess.
  */
-export function resetSettlementIdentity(state, { preservePendingEdits = false } = {}) {
+export function resetSettlementIdentity(state, { preservePendingEdits = false, retiring = null } = {}) {
   if (!preservePendingEdits) {
     state.pendingEditsQueue   = [];
     state.pendingEditsClock   = 0;
@@ -251,6 +269,30 @@ export function resetSettlementIdentity(state, { preservePendingEdits = false } 
   state.pendingSuccession     = null;
   state.canonEventCommandFence = null;
   state.draftVersionHistory   = [];
+  // WHOSE SESSION PUT THE WORLD IN THE EDITOR (store/persistProjection.js reads it
+  // to decide whether this device keeps the draft). A swap installs a DIFFERENT
+  // world, so the previous answer is stale by definition — and nulling it here
+  // rather than re-answering it is what makes the rule fail CLOSED: `null` is not
+  // 'anon', so a door that installs a world and answers nothing persists nothing.
+  // The three doors that DO answer (generate, the rehydrate merge, and
+  // claimSettlementForAccount at save/bind/hydrate/canon) each write it after this
+  // chokepoint has run. Two session CLAIMS used to be retracted here instead
+  // (`restoredAnonDraft`, `signedInWorld`); this is the one fact that replaced them.
+  state.draftOrigin           = null;
+  // ⭐ THE WORLD THIS SWAP IS RETIRING (2026-09-19), as an identity string, so the
+  // persist projection can retire the device's slot when the slot held THAT world.
+  // A clear ends with an EMPTY editor, so at the moment of the write there is no
+  // live world to compare and the slot would otherwise stand: a visitor who cleared
+  // their own draft got it back on the next reload. This is the one fact that makes
+  // a clear able to speak for the world it just removed.
+  //
+  // ⛔ IT IS SESSION STATE AND IT IS NOT PERSISTED (registered SESSION-ONLY in
+  // tests/store/lifecycleRoundTrip). It is RE-STAMPED HERE ON EVERY SWAP — to an
+  // identity, or to the `retiring = null` default a door that claims nothing gets —
+  // and the projection READS it only while the editor is empty. Between them the
+  // claim cannot outlive the window it was raised for, which is why there is no
+  // separate consumption step to forget to run.
+  state.retiringDraftIdentity = retiring;
   // The generation-id spine is per-generation identity: a loaded/new settlement
   // must never inherit the prior generation's id (a save re-derives its own from
   // seed + generatedAt; a fresh generate mints one after the pipeline).

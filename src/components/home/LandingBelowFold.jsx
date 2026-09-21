@@ -1,44 +1,64 @@
 /**
  * home/LandingBelowFold.jsx — everything below the hero fold of the scrollable
  * Welcome page: the salt-road journey 01·Forge → 02·Visual → 03·Voice →
- * 04·Realm → 05·Commons → 06·Set out + footer. Lazy-loaded as ONE
- * chunk by HomeLanding.jsx so the hero paints first (LCP).
+ * 04·Realm → 05·Commons → 06·Set out. Lazy-loaded as ONE chunk by
+ * HomeLanding.jsx so the hero paints first (LCP). The page's footer is the
+ * app's one global footer, pinned by App.jsx (owner order 2026-09-16).
  *
  * The §02/§03/§04 artifacts render FROZEN REAL ENGINE OUTPUT (owner amendment
  * W-L2/1) and live in ./LandingArtifacts.jsx with their fixture; §05 renders up
- * to four REAL published gallery settlements (W-L2/3, fetched on mount, ranked
- * by top_voted — the strongest signal gallery.js tracks), with the decorative
- * cards as slot-fill and full fallback. Spec constraints held: tokens only
+ * to six REAL published gallery settlements (W-L2/3, fetched on mount, ranked
+ * by top_voted — the strongest signal gallery.js tracks), falling back to the
+ * Create page's three curated Founding Worlds — which arrive on their OWN chunk
+ * (React.lazy behind a height-reserving Suspense boundary), so single-sourcing the
+ * strip costs this chunk nothing. Spec constraints held: tokens only
  * (§3.1); gold the only brand accent, violet ONLY in §03 + the faith chip in
  * the §04 chronicle (§3.2); Lucide icons, no emoji (§3.5); every control routes
  * and decorative chips are plain spans (§3.8); <section aria-labelledby> + h2.
  */
 
-import { useEffect, useRef, useState } from 'react';
+import { lazy, Suspense, useEffect, useRef, useState } from 'react';
 import Button from '../primitives/Button.jsx';
+import AvailableAtLaunchPill from '../primitives/AvailableAtLaunchPill.jsx';
+import { purchasesOpen } from '../../lib/launchGate.js';
 import WelcomeJourneyBackdrop from './WelcomeJourneyBackdrop.jsx';
 import { fontFamily, radius } from '../../design/tokens.js';
 import {
   INK, SECOND, BODY, MUTED, GOLD, GOLD_TXT, GOLD_BG,
-  PARCH, PARCH_100, BORDER, CARD,
+  PARCH, PARCH_100, BORDER,
   FS, SP, R, ELEV, sans, serif_,
 } from '../theme.js';
 import { tl } from '../../copy/landing.js';
-// THE MIGRATED LEGAL/COMMERCIAL ROW (LD-3). App.jsx suppresses the global
-// footer on this route, so the band carries the one shared row instead — an
-// EAGER module imported DOWNWARD from the lazy landing chunk (importing it the
-// other way would re-parent this closure into the entry chunk).
-import LegalRibbonRow from '../footer/LegalRibbonRow.jsx';
 // Config-sourced tier facts (brief §4 / ruling #6): the closer tier strip
 // interpolates these instead of hand-typing the numbers, so a catalog change
 // (anon size ceiling, free save cap) can never drift from what the strip shows.
 // tierFacts imports only config/pricing.js and rides this lazy below-fold chunk,
 // so it adds nothing to the first-paint closure.
 import { ANON_MAX_SIZE_LABEL, FREE_SAVE_LIMIT, FOUNDER_SEATS } from '../../config/tierFacts.js';
+import { isInvitationOnly } from '../../config/pricing.js';
 import { fetchPublicGallery } from '../../lib/gallery.js';
+// The one client-side truth about what the gallery can return. gallery.js already
+// pulls this module, so reading it here costs the chunk nothing.
+import { isConfigured as galleryBackendConfigured } from '../../lib/supabase.js';
+// The commons fallback IS the Create page's Founding Worlds strip — the same
+// component, so the heading, the lead-in, the three curated samples and the
+// 'Fork this sample' wiring are single-sourced rather than restated here.
+//
+// ⛔ LAZY, NOT STATIC, AND THE MODULE'S OWN HEADER IS THE REASON. FoundingWorlds
+// documents itself as a create-surface component on the LAZY CREATE CHUNK, and it
+// records a byte hazard it already paid for once (MG-3f leak L8: importing the
+// saves-panel helpers dragged a helper set toward the first-paint closure, cured by
+// moving the one rule it needed into a dependency-free leaf). A static edge from
+// here would have charged the LANDING chunk for that whole closure — useStore, the
+// anon counter, SAMPLE_SETTLEMENTS and the config-migration leaf — on every visit,
+// to render a strip most visitors never reach and, once the gallery has three
+// published towns, nobody reaches. The dynamic import keeps the two surfaces
+// single-sourced without making the landing pay for the create page's closure.
+const FoundingWorlds = lazy(() => import('../generate/FoundingWorlds.jsx'));
 import {
-  MiniDossierCard, VoiceCards, WhyTraceCard, RealmMapCard, SCENE, cardStyle,
+  MiniDossierCard, VoiceCards, VoiceNarrateButton, AdvanceTimeCard, RealmMapCard, SCENE, cardStyle,
 } from './LandingArtifacts.jsx';
+import { settlementCardImage, tierStockImage } from '../../domain/display/tierStockImage.js';
 
 const MONO = fontFamily.mono;
 const CONTENT_MAX = 1080; // spec §4 content column
@@ -56,7 +76,41 @@ const capsLink = {
   textTransform: 'uppercase', color: GOLD_TXT,
 };
 
-const twoColGrid = (gap = 28) => ({ maxWidth: CONTENT_MAX, margin: `${SP.xl}px auto 0`, display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(380px, 1fr))', gap, alignItems: 'center' });
+/**
+ * ⛔ ONE ASK AT THE TOP, ONE AT THE END (owner, 2026-09-19, taking the copy
+ * draft's recommendation). The page used to close every section with its own
+ * primary button — five asks in five stops, which is what made it read as five
+ * pitches instead of one account. The three MIDDLE asks are gone; what stands in
+ * their place carries the reader to the NEXT STOP of the same account.
+ *
+ * ⚠ NOTHING BECAME UNREACHABLE, and that was the condition for doing it:
+ *   • forging  — the hero CTA, the closer CTA, and the brief card's own
+ *                "Forge this exact town" all still forge;
+ *   • pricing  — `voice.pricingLink` and `closer.fullPricing` both still route;
+ *   • gallery  — every real published row in the commons strip carries its own
+ *                'Open' button (commons.open).
+ * If any of those three doors is ever removed, the ask it replaced has to come
+ * back with it.
+ *
+ * It scrolls rather than navigates because that is what "read on" means, and it
+ * is a real control (a button, not a decorative span — §3.8).
+ */
+function ReadOn({ to, children }) {
+  return (
+    <Button
+      variant="ghost"
+      size="sm"
+      onClick={() => document.getElementById(to)?.scrollIntoView({ behavior: 'smooth', block: 'start' })}
+      style={{ ...capsLink }}
+    >
+      {children}
+    </Button>
+  );
+}
+
+// The track minimum is capped at the column's own width: on a 390px phone the stop's
+// content box is 366px, and a bare 380px minimum pushed the page 2px sideways.
+const twoColGrid = (gap = 28) => ({ maxWidth: CONTENT_MAX, margin: `${SP.xl}px auto 0`, display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(380px, 100%), 1fr))', gap, alignItems: 'center' });
 
 // ── The salt-road waypoint spine (spec §4) ───────────────────────────────────
 function Waypoint({ pill, goldPill, dark = false }) {
@@ -99,7 +153,22 @@ function Waypoint({ pill, goldPill, dark = false }) {
 }
 
 // Section wrappers ------------------------------------------------------------
-const sectionPad = (isMobile) => ({ padding: isMobile ? `0 ${SP.md}px ${SP.xxl * 2}px` : `0 ${SP.xxl}px 84px` });
+/** The empty band below a stop's content, before the next travel leg. */
+const sectionTail = (isMobile) => (isMobile ? SP.xxl * 2 : 84);
+const sectionPad = (isMobile) => ({ padding: isMobile ? `0 ${SP.md}px ${sectionTail(true)}px` : `0 ${SP.xxl}px ${sectionTail(false)}px` });
+// THE FADED TAIL (owner orders 2026-09-17, "Fix the small visual defects"). The header
+// is transparent over the page, so every translucent-cream stop scrolls under it, and
+// while a stop's empty bottom band passes beneath the arrow it read as a plain cream
+// strip between the shaft and the painted film. The strip was that band, not a space
+// kept for the feather (measured: at 1440x900 and scroll 2400 the layer under the
+// shaft is #forge's bottom padding, and the film begins where #forge ends). So the
+// band fades out: the cream dissolves into the film over the tail's own height, which
+// holds no content, and the painting meets the shaft at every scroll position. Masks
+// read only alpha, so the gradient's colour is a token (the ArrowPaint idiom).
+const creamTailFade = (isMobile) => {
+  const fade = `linear-gradient(${INK} calc(100% - ${sectionTail(isMobile)}px), transparent)`;
+  return { WebkitMaskImage: fade, maskImage: fade };
+};
 
 // ── 01 · Forge — the Instant Draft artifact (InstantDraftCard) was removed per
 // owner order (2026-07-22): the Cnocby sample-draft card (MiniDossierCard) now
@@ -118,80 +187,192 @@ const sectionPad = (isMobile) => ({ padding: isMobile ? `0 ${SP.md}px ${SP.xxl *
 // now carries a RENDERED arm, so un-referencing this key again reds the gate
 // instead of passing quietly.
 
-// ── 06 · Commons — SIX slots, fed dynamically from the community gallery (W1) ─
+// ── 05 · Commons — REAL published towns, or the curated Founding Worlds (W1) ─
 // Fetched once on below-fold mount (anon-permitted public read), ranked by
 // top_voted — the strongest ranking signal src/lib/gallery.js actually tracks
-// (it has net_votes + view counts; there is NO fork counter). Real published
-// towns fill the slots first; any slot without a real town falls back to a
-// decorative card LABELED ' (placeholder)'. When six real towns exist, all six
-// slots are real and no placeholder shows. A failed or empty fetch renders six
-// placeholders (the empty-gallery dev state). Slot dimensions are identical in
-// every state (150px thumb + one footer row), so the swap-in causes zero layout shift.
-const COMMONS_SLOTS = 6; // owner order 2026-07-21, ledger 4f71743a
+// (it has net_votes + view counts; there is NO fork counter).
+//
+// ⛔ THE PLACEHOLDER BACKFILL IS GONE (2026-09-18). Every slot without a real
+// town used to render a DECORATIVE card — an invented name, an invented author,
+// an invented population, labelled ' (placeholder)' beside the name — so an
+// empty gallery showed six fabricated towns to every visitor of a page that
+// sells "Simulated, not AI-generated". There was no flag: the state was purely
+// data-driven, and the gallery is empty before launch. The rule now:
+//   • THREE OR MORE real published rows → render the real rows, up to six;
+//   • fewer than three → render the Create page's three curated Founding Worlds
+//     (Mossgate / Black Crag / Cnocby), with its heading, its copy and its
+//     real 'Fork this sample' action. They are real generations from real seeds,
+//     so the fallback offers the visitor something true to do instead of
+//     something false to look at.
+// The threshold is three because a one- or two-card grid reads as a broken strip;
+// below it the Founding Worlds trio fills the row honestly.
+const COMMONS_SLOTS = 6;      // owner order 2026-07-21, ledger 4f71743a
+const COMMONS_MIN_REAL = 3;   // below this the curated trio shows instead
+// One real-row card: the 150px scene box, the 52px footer row, two hairline rules.
+// This is the REAL-ROW grid's geometry and is used ONLY for the pre-fetch reserve,
+// because the real rows are what the section is designed around and what it shows
+// once the gallery fills.
+const COMMONS_ROW_H = 150 + 52 + 2;
+
+// ⛔ THE FALLBACK'S RESERVE IS THE FALLBACK'S OWN SHAPE, NOT THE ROW GRID'S, AND IT
+// IS NOT A PINNED NUMBER. FoundingWorlds is a <section> at maxWidth 960 with
+// SP.lg/SP.md padding, an h2, a lead-in paragraph and a 3-up grid whose track is
+// `minmax(min(100%, 280px), 1fr)` — so under about 768px it collapses to ONE column
+// and the strip's height roughly triples. Reserving the row grid's 204px was wrong at
+// both widths (a jump on desktop, a far bigger one on a phone), and TWO pinned
+// per-breakpoint numbers would rot the first time the lead-in wraps differently.
+// So the reserve MIRRORS THE STRIP: the same wrapper metrics and, critically, the
+// same grid track, three plate-shaped boxes inside it. The breakpoint behaviour then
+// falls out of the same CSS the real strip uses, at every width, and the only
+// estimate left is one plate's height.
+//
+// MEASURED IN CHROMIUM on the strip's own page (/create), both widths pinned by the
+// review: at 1440 the section is 296 tall, head block 19, lead-in 18 (one line),
+// grid 211 in THREE columns with every plate at 211; at 375 the section is 796,
+// head 19, lead-in 54 (three lines), grid 675 in ONE column with plates 223/206/223.
+// The column count is the dominant term and the mirrored track reproduces it exactly
+// at every width. The plate figure below is the measured pair's midpoint, which
+// costs about 5px at 1440 and about 3px at 375.
+// ⚠ ONE RESIDUAL, STATED RATHER THAN HIDDEN: the lead-in is the one element that
+// REFLOWS with width (one line at 1440, three at 375) and the reserve cannot follow
+// it without carrying a second copy of that sentence into this chunk — the very
+// duplication the lazy seam exists to avoid. So the reserve is exact at desktop and
+// about 39px short on a 375 phone, against a 796px section. The defect this replaces
+// reserved 204px at both: about 92px out at 1440 and about 592px out at 375.
+// ⚠ RAISED BY CONSTRUCTION ON 2026-09-19, NOT RE-MEASURED (ODQ §934.32). The
+// curated card gained a FIXED 120px tier plate above its heading, inside a flex
+// column whose gap is SP.sm (8) — so the plate is exactly 128px taller than the
+// measured 216, and the arithmetic is exact rather than estimated precisely
+// because the image height is pinned in FoundingWorlds.jsx
+// (SAMPLE_PLATE_IMAGE_H) instead of riding an aspect ratio. The residual named
+// below (the lead-in reflowing on a phone) is unchanged by this.
+const SAMPLE_PLATE_H = 216 + 120 + 8;  // measured 211 at 1440, 206-223 at 375; + the tier plate + its gap
+const SAMPLE_LEAD_H = 18;    // the lead-in at FS.sm / 1.5, one line at desktop
+const SAMPLE_HEAD_H = 19;    // the h2 block at FS.lg
+
+// ⛔ WHICH SHAPE TO HOLD BEFORE THE ANSWER ARRIVES. The section's height genuinely
+// depends on what the fetch returns, so SOME reserve is a guess — but the guess has
+// one checkable input, and holding the wrong box merely MOVES the jump from the
+// Suspense swap to the settle moment, which is what the first cut did. With no
+// configured backend (local development, and any build without gallery credentials)
+// fetchPublicGallery cannot return a row at all: it returns `{ items: [] }` without a
+// request, so the curated strip is CERTAIN and its footprint is the right box to
+// hold. With a backend configured, real rows are the designed state and the row grid
+// is the right box.
+// ⚠ THE RESIDUAL, NAMED: a configured backend whose gallery is still EMPTY (the
+// launch morning) takes the row reserve and shifts once when the fetch settles thin.
+// Nothing on the client can know that before asking, and the alternative — holding
+// the curated box for everyone — just moves the same shift onto the real-rows path,
+// which is the state the section is designed around and the one it ends in.
+const EXPECT_THIN_GALLERY = !galleryBackendConfigured;
+
+/** The curated strip's own footprint, held while its chunk is in flight. */
+function FoundingWorldsReserve({ testId }) {
+  return (
+    <div data-testid={testId} data-reserve="curated" aria-hidden="true" style={{
+      maxWidth: 960, margin: '0 auto', width: '100%', padding: `${SP.lg}px ${SP.md}px`,
+    }}>
+      <div style={{ height: SAMPLE_HEAD_H, marginBottom: SP.xs }} />
+      <div style={{ height: SAMPLE_LEAD_H, marginBottom: SP.md }} />
+      <div style={{
+        display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 280px), 1fr))', gap: SP.md,
+      }}>
+        {[0, 1, 2].map((i) => <div key={i} style={{ minHeight: SAMPLE_PLATE_H }} />)}
+      </div>
+    </div>
+  );
+}
+
+// A real row without its own gallery image keeps the strip's painted-scene box
+// (same height, zero layout shift). The scene is DERIVED from the row's own
+// tier, never invented: it is the card's backdrop, not a claim about the town.
+//
+// ⛔ THE SIX-TO-THREE MAP THAT LIVED HERE IS NOW THE ESTATE'S ONE COPY (owner
+// order ODQ §934.32). It was written for this card alone, and the gallery grid,
+// the sample cards and the share meta were each about to grow their own — four
+// maps that would drift, so a village would be painted one way on the landing
+// and another on its own gallery page. It moved verbatim (including the
+// `capital` alias the ladder does not carry) into
+// src/domain/display/tierStockImage.js, which the other three now read too.
+
 function GalleryCards({ onNavigate }) {
-  const decoratives = tl('commons.cards') || [];
-  const [tiles, setTiles] = useState(null); // null = not landed yet → decorative
+  const [tiles, setTiles] = useState(null); // null = the fetch has not settled yet
   useEffect(() => {
     let live = true;
+    // PREFETCH, ON THE PATH THAT WILL RENDER IT ONLY. Deciding after the fetch fixed
+    // the "requested on every visit" defect and created a serial one: the chunk was
+    // then requested strictly AFTER the gallery round-trip, so on the very path that
+    // shows the strip it arrived a round-trip late. Warming it at mount overlaps the
+    // two, and by the time the fetch settles `lazy` resolves without suspending, so
+    // the reserve never flashes. It is NOT warmed when real rows are expected, which
+    // is what keeps the chunk off the common path in the first place.
+    if (EXPECT_THIN_GALLERY) import('../generate/FoundingWorlds.jsx').catch(() => {});
     fetchPublicGallery({ pageSize: COMMONS_SLOTS, sort: 'top_voted' })
       .then((r) => { if (live) setTiles((r?.items || []).slice(0, COMMONS_SLOTS)); })
       .catch(() => { if (live) setTiles([]); });
     return () => { live = false; };
   }, []);
 
-  const real = tiles || [];
-  const slots = decoratives.slice(0, COMMONS_SLOTS).map((deco, i) => (real[i] ? { real: real[i], deco } : { deco }));
+  // ⛔ NOTHING IS DECIDED UNTIL THE FETCH SETTLES, AND THAT IS THE WHOLE POINT OF
+  // THE LAZY SEAM. `tiles` starts null, so treating null as "no rows yet" made
+  // `real.length < COMMONS_MIN_REAL` true on the FIRST render: the lazy element
+  // mounted immediately, React requested the chunk, and every landing visit paid a
+  // second serial round-trip for a strip that was about to be replaced by real rows.
+  // The lazy import then bought nothing at all. While the fetch is in flight the
+  // section mounts NOTHING and holds the footprint of whatever that path will end in
+  // (EXPECT_THIN_GALLERY, above), so the settle is one layout change and not two.
+  if (tiles === null) {
+    return EXPECT_THIN_GALLERY
+      ? <FoundingWorldsReserve testId="commons-awaiting-gallery" />
+      : <div data-testid="commons-awaiting-gallery" data-reserve="rows" aria-hidden="true" style={{ maxWidth: CONTENT_MAX, margin: `${SP.xl}px auto 0`, minHeight: COMMONS_ROW_H }} />;
+  }
+
+  const real = tiles.slice(0, COMMONS_SLOTS);
+  // Unreachable, empty, or a gallery too thin to fill a row: the curated trio. It
+  // carries its own heading and lead-in (the Create page's), and it arrives on its
+  // own chunk behind a boundary that reserves the strip's own footprint.
+  if (real.length < COMMONS_MIN_REAL) {
+    return (
+      <Suspense fallback={<FoundingWorldsReserve />}>
+        <FoundingWorlds onNavigate={onNavigate} />
+      </Suspense>
+    );
+  }
 
   return (
     <div style={{
       maxWidth: CONTENT_MAX, margin: `${SP.xl}px auto 0`, display: 'grid',
       gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: 18,
     }}>
-      {slots.map(({ real: tile, deco }) => (
-        <div key={tile?.slug || deco.name} style={{ ...cardStyle, boxShadow: ELEV[1], overflow: 'hidden' }}>
+      {real.map((tile) => (
+        <div key={tile.slug} style={{ ...cardStyle, boxShadow: ELEV[1], overflow: 'hidden' }}>
           <div style={{
             position: 'relative', height: 150,
-            // A real tile's own gallery image wins; otherwise the slot keeps its
-            // painted scene (same box, zero shift).
-            backgroundImage: tile?.imageUrl ? `url('${tile.imageUrl}')` : SCENE(deco.scene),
-            backgroundSize: 'cover', backgroundPosition: tile?.imageUrl ? 'center' : deco.pos,
+            backgroundImage: `url('${settlementCardImage(tile.imageUrl, tile.tier) || tierStockImage('village')}')`,
+            backgroundSize: 'cover', backgroundPosition: 'center',
           }}>
             <span style={{
               position: 'absolute', top: 10, right: 10, fontFamily: sans, fontSize: FS.xs, fontWeight: 800,
               letterSpacing: '0.05em', textTransform: 'uppercase', color: PARCH_100,
               background: 'rgba(27,20,8,0.6)', borderRadius: R.sm, padding: '2px 8px',
-            }}>{tile ? tile.tier : deco.size}</span>
+            }}>{tile.tier}</span>
             <span style={{
               position: 'absolute', left: 0, right: 0, bottom: 0, padding: '26px 14px 10px',
               backgroundImage: 'linear-gradient(rgba(20,14,5,0), rgba(20,14,5,0.72))',
               fontFamily: serif_, fontSize: FS['18'], fontWeight: 600, color: PARCH,
-            }}>{tile ? tile.name : `${deco.name} (placeholder)`}</span>
+            }}>{tile.name}</span>
           </div>
-          <div style={{ display: 'flex', alignItems: 'center', gap: SP.sm, padding: tile ? '7px 14px' : '11px 14px', minHeight: 52 }}>
-            {tile ? (
-              <>
-                <span style={{ fontFamily: sans, fontSize: FS.sm, fontWeight: 700, color: MUTED }}>
-                  {tl('commons.votes', { n: tile.netVotes ?? 0 })}
-                </span>
-                <span style={{ marginLeft: 'auto', fontFamily: sans, fontSize: FS.sm, fontWeight: 800, color: SECOND }}>
-                  {tile.population ?? ''}
-                </span>
-                {/* Real tile → a real route (§3.8): the gallery detail view. */}
-                <Button variant="secondary" size="sm" onClick={() => onNavigate('gallery', { params: { slug: tile.slug } })}>
-                  {tl('commons.open')}
-                </Button>
-              </>
-            ) : (
-              <>
-                <span style={{ fontFamily: sans, fontSize: FS.sm, fontWeight: 700, color: MUTED }}>{deco.author}</span>
-                <span style={{ marginLeft: 'auto', fontFamily: sans, fontSize: FS.sm, fontWeight: 800, color: SECOND }}>{deco.pop}</span>
-                {/* Decorative — non-interactive span (§3.8). */}
-                <span style={{
-                  fontFamily: sans, fontSize: FS.xs, fontWeight: 800, color: SECOND,
-                  background: CARD, border: `1px solid ${BORDER}`, borderRadius: R.lg, padding: '5px 12px',
-                }}>{tl('commons.fork')}</span>
-              </>
-            )}
+          <div style={{ display: 'flex', alignItems: 'center', gap: SP.sm, padding: '7px 14px', minHeight: 52 }}>
+            <span style={{ fontFamily: sans, fontSize: FS.sm, fontWeight: 700, color: MUTED }}>
+              {tl('commons.votes', { n: tile.netVotes ?? 0 })}
+            </span>
+            <span style={{ marginLeft: 'auto', fontFamily: sans, fontSize: FS.sm, fontWeight: 800, color: SECOND }}>
+              {tile.population ?? ''}
+            </span>
+            {/* Real tile → a real route (§3.8): the gallery detail view. */}
+            <Button variant="secondary" size="sm" onClick={() => onNavigate('gallery', { params: { slug: tile.slug } })}>
+              {tl('commons.open')}
+            </Button>
           </div>
         </div>
       ))}
@@ -199,7 +380,7 @@ function GalleryCards({ onNavigate }) {
   );
 }
 
-// ── 06 · Set out — tier strip + footer ───────────────────────────────────────
+// ── 06 · Set out — tier strip ────────────────────────────────────────────────
 // Live founder-chair counter. Lazy-imports the seat module so supabase never
 // rides the eager chunk; the RPC read is anon-safe and 5-minute cached. Falls
 // back to the static cap line when the count is unavailable (null), so a backend
@@ -246,7 +427,13 @@ function fillTierBody(body) {
 }
 
 function TierStrip() {
-  const tiers = tl('closer.tiers') || [];
+  // ⛔ PUBLIC TIERS ONLY (owner, ODQ §934.24 addendum). The filter asks the TIER'S OWN
+  // property, never the spelling 'Founder', so the rule is about what a tier IS and a
+  // second invitation-only tier is covered the day it is added. It asks through
+  // config/pricing.js's `isInvitationOnly` (car 06d04c7c4), which composed in with the
+  // consist — so the strip and the pricing page now read ONE predicate rather than two
+  // spellings of the same question, which is what the inline copy was a placeholder for.
+  const tiers = (tl('closer.tiers') || []).filter((tier) => !isInvitationOnly(tier));
   return (
     <div style={{
       // Owner order (2026-07-22): a TWO-BY-TWO grid (Wanderer + Cartographer on
@@ -297,48 +484,17 @@ function TierStrip() {
   );
 }
 
-function LandingFooter({ onNavigate, isMobile }) {
-  const links = tl('footer.links') || [];
-  const route = { Compendium: 'compendium', Pricing: 'pricing', Account: 'account' };
-  return (
-    <div style={{
-      maxWidth: CONTENT_MAX, margin: `${SP.xxl * 2}px auto 0`, borderTop: '1px solid rgba(244,234,208,0.2)',
-      paddingTop: SP.xl, display: 'flex', alignItems: 'center', gap: SP.sm, flexWrap: 'wrap',
-    }}>
-      <span style={{ fontFamily: serif_, fontSize: FS.lg, fontWeight: 700, color: GOLD }}>{tl('footer.brand')}</span>
-      <span style={{ marginLeft: 'auto', display: 'flex', gap: SP.lg, flexWrap: 'wrap' }}>
-        {links.map((label) => (
-          <Button
-            key={label}
-            variant="ghost"
-            size="sm"
-            onClick={() => onNavigate(route[label])}
-            style={{ fontFamily: sans, fontSize: FS.xs, fontWeight: 700, color: 'rgba(244,234,208,0.72)', padding: 0, minHeight: 24 }}
-          >
-            {label}
-          </Button>
-        ))}
-      </span>
-      {/* The page ends on the painting (LD-3): Pricing · Feedback & support ·
-          Terms · Privacy · © · "Simulated, not AI-generated." MIGRATE, never
-          delete — the global strip is suppressed on this route, and /pricing has
-          no `nav:` block, so this row is the landing's only path to it. */}
-      <LegalRibbonRow
-        isMobile={isMobile}
-        onNavigate={onNavigate}
-        clearMobileNav
-        style={{ width: '100%', marginTop: SP.xl, color: 'rgba(244,234,208,0.72)' }}
-      />
-    </div>
-  );
-}
-
 // ── The below-fold page ──────────────────────────────────────────────────────
 // The below-fold CTAs all route to real product surfaces (Forge → generate,
 // See Cartographer / pricing links → pricing, Browse the gallery → gallery), so
 // no onSignIn is needed here — the auth CTA lives only in the hero.
 export default function LandingBelowFold({ isMobile, onNavigate }) {
   const pad = sectionPad(isMobile);
+  const tail = creamTailFade(isMobile);
+  // Pre-launch lockout (lib/launchGate.js): See Cartographer is the landing's one
+  // purchase CTA, so it renders disabled with the pill until purchases open. The
+  // pricing links are information and stay live.
+  const purchasesAreOpen = purchasesOpen();
   // The scroll-journey root: the film backdrop measures the `.leg` travel spacers
   // inside this container to drive its playhead (home/useScrollJourney).
   const rootRef = useRef(null);
@@ -358,7 +514,7 @@ export default function LandingBelowFold({ isMobile, onNavigate }) {
         id="forge"
         aria-labelledby="sf-forge-title"
         className="sf-landing-scene-cream"
-        style={{ ...pad }}
+        style={{ ...pad, ...tail }}
       >
         <Waypoint pill={tl('forge.waypoint')} />
         <div style={twoColGrid(28)}>
@@ -368,19 +524,24 @@ export default function LandingBelowFold({ isMobile, onNavigate }) {
             <p style={{ ...proseStyle, fontStyle: 'italic', fontSize: FS['16'], color: SECOND, marginBottom: SP.xl }}>
               {tl('forge.axiom')}
             </p>
-            <div style={{ display: 'flex', alignItems: 'center', gap: SP.md, flexWrap: 'wrap' }}>
-              <Button variant="primary" onClick={() => onNavigate('generate')}>{tl('forge.cta')}</Button>
-              <span style={{ fontFamily: sans, fontSize: FS.sm, fontWeight: 700, color: SECOND }}>{tl('forge.micro')}</span>
-            </div>
-            {/* THE ANON SIZE CEILING (§363.1). It sits DIRECTLY under the CTA row
-                because that row is where the promise is made: "No account needed"
-                is true, and this is the one sentence that says what the free door
-                actually opens onto. Always visible — no cap, no state, no hover.
-                Same understated disclosure idiom as §03's aiNote (§3.1 tokens
-                only, no new design-system motion). */}
+            {/* THE ANON SIZE CEILING (§363.1). It sits with "No account needed",
+                which is the promise it qualifies: that line is true, and this is
+                the one sentence that says what the free door actually opens onto.
+                ⚠ THE TWO USED TO BRACKET A PRIMARY CTA and the ceiling's whole
+                placement rationale was "directly under the CTA row, because that
+                row is where the promise is made". The row is gone (ONE ask at the
+                top, one at the end), so the promise and its disclosure now stand
+                as one block — which is what they always were. Always visible: no
+                cap, no state, no hover, same understated idiom as §03's aiNote. */}
+            <p style={{ margin: 0, fontFamily: sans, fontSize: FS.sm, fontWeight: 800, color: SECOND }}>
+              {tl('forge.micro')}
+            </p>
             <p style={{ margin: `${SP.sm}px 0 0`, fontFamily: sans, fontSize: FS.sm, fontWeight: 700, color: SECOND }}>
               {tl('forge.ceiling')}
             </p>
+            <div style={{ marginTop: SP.lg }}>
+              <ReadOn to="voice">{tl('forge.readOn')}</ReadOn>
+            </div>
           </div>
           {/* Owner order (2026-07-22): the Instant Draft widget slot now hosts the
               Cnocby sample-draft card (MiniDossierCard), relocated from §02. The
@@ -412,7 +573,8 @@ export default function LandingBelowFold({ isMobile, onNavigate }) {
         id="voice"
         aria-labelledby="sf-voice-title"
         className="sf-landing-scene-cream"
-        style={{ ...pad, borderTop: `1px solid ${BORDER}`, borderBottom: `1px solid ${BORDER}` }}
+        // The bottom hairline fades out with the tail (THE FADED TAIL, above).
+        style={{ ...pad, ...tail, borderTop: `1px solid ${BORDER}`, borderBottom: `1px solid ${BORDER}` }}
       >
         <Waypoint pill={tl('voice.waypoint')} />
         <div style={{ maxWidth: CONTENT_MAX, margin: `${SP.xl}px auto 0` }}>
@@ -426,7 +588,14 @@ export default function LandingBelowFold({ isMobile, onNavigate }) {
           </div>
           <VoiceCards />
           <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: SP.md, marginTop: SP.xl, flexWrap: 'wrap' }}>
-            <Button variant="ai" onClick={() => onNavigate('generate')}>{tl('voice.cta')}</Button>
+            {/* ⛔ THE ASK IS A CONTROL WITH A REASON NOW (REVIEW-P F4). It used to be a
+                bare `onNavigate('generate')` that moved the reader off the landing with
+                nothing forged and nothing said; VoiceNarrateButton keeps the navigation
+                for a reader who HAS a town and raises the registered reason where the
+                click happened for a reader who does not. It lives in LandingArtifacts
+                beside its sibling ForgeExactButton, which already carries this chunk's
+                store and notice imports, so this section gains no module of its own. */}
+            <VoiceNarrateButton onNavigate={onNavigate} />
             <Button
               variant="ghost"
               size="sm"
@@ -446,7 +615,7 @@ export default function LandingBelowFold({ isMobile, onNavigate }) {
         id="realm"
         aria-labelledby="sf-realm-title"
         className="sf-landing-scene-cream"
-        style={{ ...pad }}
+        style={{ ...pad, ...tail }}
       >
         <Waypoint pill={tl('realm.waypoint')} goldPill={tl('realm.waypointPill')} />
         <div style={twoColGrid(28)}>
@@ -454,12 +623,27 @@ export default function LandingBelowFold({ isMobile, onNavigate }) {
             <h2 id="sf-realm-title" style={h2Style(isMobile)}>{tl('realm.h2')}</h2>
             <p style={proseStyle}>{tl('realm.body1')}</p>
             <p style={{ ...proseStyle, marginBottom: SP.xl }}>{tl('realm.body2')}</p>
+            {/* ⛔ THIS ASK IS DELIBERATELY STILL HERE, AND THE LANE REFUSED TO
+                REMOVE IT. The approved draft cut the three MIDDLE section asks to
+                read-on links (one ask at the top, one at the end), and the other
+                two are cut. This one is not, because "See Cartographer" is not
+                only a section ask: it is CONTROL #5 OF THE OWNER'S PURCHASE
+                LOCKOUT (2026-09-16, "disable all purchase buttons on the website
+                until we are ready to launch … a pill that says available at
+                launch"), pinned in both states by
+                tests/components/launchLock.libraryHeaderLanding.test.jsx. Deleting
+                it deletes a lock instrument, and rewriting that census to match a
+                copy change is how a lock quietly stops being enforced. The chair
+                and the owner rule on it; a lane does not. See .lane-resume.md. */}
             <div style={{ display: 'flex', alignItems: 'center', gap: SP.md, flexWrap: 'wrap' }}>
-              <Button variant="primary" onClick={() => onNavigate('pricing')}>{tl('realm.cta')}</Button>
+              <Button variant="primary" disabled={!purchasesAreOpen} onClick={() => onNavigate('pricing')} style={purchasesAreOpen ? undefined : { flexWrap: 'wrap' }}>
+                {tl('realm.cta')}
+                {!purchasesAreOpen && <AvailableAtLaunchPill style={{ marginLeft: 6 }} />}
+              </Button>
               <span style={{ fontFamily: sans, fontSize: FS.sm, fontWeight: 700, color: SECOND }}>{tl('realm.micro')}</span>
             </div>
           </div>
-          <WhyTraceCard />
+          <AdvanceTimeCard />
         </div>
         <RealmMapCard />
       </section>
@@ -470,7 +654,7 @@ export default function LandingBelowFold({ isMobile, onNavigate }) {
         <div className="sf-welcome-leg" data-welcome-leg="4" aria-hidden="true" />
 
       {/* ══ 05 · The commons — translucent cream (item 10) ══ */}
-      <section id="commons" aria-labelledby="sf-commons-title" className="sf-landing-scene-cream" style={{ ...pad }}>
+      <section id="commons" aria-labelledby="sf-commons-title" className="sf-landing-scene-cream" style={{ ...pad, ...tail }}>
         <Waypoint pill={tl('commons.waypoint')} />
         <div style={{ maxWidth: CONTENT_MAX, margin: `${SP.xl}px auto 0` }}>
           <div style={{ maxWidth: 640, margin: '0 auto', textAlign: 'center' }}>
@@ -479,22 +663,24 @@ export default function LandingBelowFold({ isMobile, onNavigate }) {
           </div>
           <GalleryCards onNavigate={onNavigate} />
           <div style={{ display: 'flex', justifyContent: 'center', marginTop: SP.xxl }}>
-            <Button variant="primary" onClick={() => onNavigate('gallery')}>{tl('commons.cta')}</Button>
+            <ReadOn to="closer">{tl('commons.readOn')}</ReadOn>
           </div>
         </div>
       </section>
 
         {/* leg 6 · city → metropolis */}
         <div className="sf-welcome-leg" data-welcome-leg="5" aria-hidden="true" />
-        {/* ══ 06 · Set out — dark painted create scene + footer (stop 6 · metropolis) ══ */}
+        {/* ══ 06 · Set out — dark painted create scene (stop 6 · metropolis) ══ */}
       <section
         id="closer"
         aria-labelledby="sf-closer-title"
         className="sf-landing-scene-dark"
-        // Item 11 (owner 2026-07-21): FLUSH BOTTOM. Zero bottom padding so the set-out
-        // card's footer sits flush against the page end / the global app footer, with no
-        // dead trailing scroll region. Set-out keeps its dark scene (item-10 exempt).
-        style={{ padding: isMobile ? `0 ${SP.md}px 0` : `0 ${SP.xxl}px 0`, '--sf-scene': SCENE('create') }}
+        // The band's own footer strip is gone (owner order 2026-09-16: the app's one
+        // global footer now follows this band on every route, pinned on desktop), so
+        // item 11's FLUSH BOTTOM (owner 2026-07-21) no longer has a strip to sit flush.
+        // A bottom pad keeps "Full pricing" off the footer's edge. Set-out keeps its
+        // dark scene (item-10 exempt).
+        style={{ padding: isMobile ? `0 ${SP.md}px ${SP.xxl * 2}px` : `0 ${SP.xxl}px ${SP.xxl * 2}px`, '--sf-scene': SCENE('create') }}
       >
         <Waypoint pill={tl('closer.waypoint')} dark />
         <div style={{ maxWidth: 880, margin: `${SP.xxl * 2}px auto 0`, textAlign: 'center' }}>
@@ -520,7 +706,6 @@ export default function LandingBelowFold({ isMobile, onNavigate }) {
             {tl('closer.fullPricing')}
           </Button>
         </div>
-        <LandingFooter onNavigate={onNavigate} isMobile={isMobile} />
       </section>
       </div>
     </>

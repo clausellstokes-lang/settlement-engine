@@ -11,8 +11,12 @@
 import { useCallback, useEffect, useState } from 'react';
 import Section from './AccountSection.jsx';
 import Button from '../primitives/Button.jsx';
+import AvailableAtLaunchPill from '../primitives/AvailableAtLaunchPill.jsx';
+import { purchasesOpen } from '../../lib/launchGate.js';
 import { INK, BODY, MUTED, SECOND, BORDER, sans, SP, FS, swatch } from '../theme.js';
 import { AUTO_RELOAD_DEFAULTS, AUTO_RELOAD_LIMITS } from '../../lib/autoReloadClient.js';
+import useIsMobile from '../../hooks/useIsMobile.js';
+import { chromeFontSize, proseFontSize } from '../../design/proseScale.js';
 
 const clampInt = (v, min, max, dflt) => {
   const n = parseInt(v, 10);
@@ -39,7 +43,14 @@ function Row({ label, htmlFor, children }) {
 const numInputStyle = { width: 84, padding: `${SP.xs}px ${SP.sm}px`, border: `1px solid ${BORDER}`, background: 'transparent', color: INK, fontFamily: sans, fontSize: FS.sm, textAlign: 'right' };
 
 export default function AccountAutoReloadPanel({ auth }) {
+  const mobile = useIsMobile();
   const signedIn = Boolean(auth?.user?.id);
+  // THE LAUNCH GATE (lib/launchGate.js), ONE-WAY: enabling auto-reload authorises future
+  // card charges, so it stays locked with the pill until launch; but turning an existing
+  // auto-reload OFF is never a purchase, so an account whose stored setting is on can
+  // still untick it and save that (and only that) while purchases are closed.
+  const purchasesAreOpen = purchasesOpen();
+  const [storedEnabled, setStoredEnabled] = useState(false);
   const [form, setForm] = useState(null);        // null = loading
   const [status, setStatus] = useState({ thisMonthSpentCents: 0, openAttempt: null });
   const [saving, setSaving] = useState(false);
@@ -60,6 +71,7 @@ export default function AccountAutoReloadPanel({ auth }) {
         const { s, st } = await load();
         if (!alive) return;
         setForm({ enabled: s.enabled, thresholdCredits: s.thresholdCredits, targetCredits: s.targetCredits, capDollars: Math.round(s.monthlyCapCents / 100) });
+        setStoredEnabled(Boolean(s.enabled));
         setStatus(st);
       } catch {
         if (alive) setForm({ ...AUTO_RELOAD_DEFAULTS, capDollars: Math.round(AUTO_RELOAD_DEFAULTS.monthlyCapCents / 100) });
@@ -70,8 +82,13 @@ export default function AccountAutoReloadPanel({ auth }) {
 
   const patch = (k, v) => { setForm((f) => ({ ...f, [k]: v })); setSaved(false); };
 
+  // While closed, the only save allowed is the one that turns a stored auto-reload OFF.
+  const turningOff = Boolean(form) && storedEnabled && !form.enabled;
+  const saveLocked = !purchasesAreOpen && !turningOff;
+
   const handleSave = useCallback(async () => {
     if (!form || saving) return;
+    if (!purchasesOpen() && !(storedEnabled && !form.enabled)) return;
     setSaving(true); setError(null); setSaved(false);
     const thresholdCredits = clampInt(form.thresholdCredits, AUTO_RELOAD_LIMITS.threshold.min, AUTO_RELOAD_LIMITS.threshold.max, AUTO_RELOAD_DEFAULTS.thresholdCredits);
     let targetCredits = clampInt(form.targetCredits, AUTO_RELOAD_LIMITS.target.min, AUTO_RELOAD_LIMITS.target.max, AUTO_RELOAD_DEFAULTS.targetCredits);
@@ -80,6 +97,7 @@ export default function AccountAutoReloadPanel({ auth }) {
     try {
       const { saveAutoReloadSettings } = await import('../../lib/autoReloadClient.js');
       await saveAutoReloadSettings({ enabled: form.enabled, thresholdCredits, targetCredits, monthlyCapCents: capCents });
+      setStoredEnabled(Boolean(form.enabled));
       setForm((f) => ({ ...f, thresholdCredits, targetCredits, capDollars: Math.round(capCents / 100) }));
       setSaved(true);
       const st = await (await import('../../lib/autoReloadClient.js')).fetchAutoReloadStatus();
@@ -89,7 +107,7 @@ export default function AccountAutoReloadPanel({ auth }) {
     } finally {
       setSaving(false);
     }
-  }, [form, saving]);
+  }, [form, saving, storedEnabled]);
 
   if (!signedIn) return null;
 
@@ -99,18 +117,22 @@ export default function AccountAutoReloadPanel({ auth }) {
         <div style={{ fontSize: FS.sm, color: MUTED, padding: `${SP.sm}px 0` }}>Loading…</div>
       ) : (
         <div>
-          <p style={{ fontSize: FS.xs, color: BODY, lineHeight: 1.5, margin: `0 0 ${SP.sm}px` }}>
+          <p style={{ fontSize: proseFontSize(FS.xs, mobile), color: BODY, lineHeight: 1.5, margin: `0 0 ${SP.sm}px` }}>
             When your balance falls below the threshold we top it back up to your target and charge
             your saved card. Off by default. To save or change a card, buy a credit pack with the
             &ldquo;save my card&rdquo; box checked, or use the billing portal above.
           </p>
 
-          <Row label="Enable auto-reload" htmlFor="ar-enabled">
+          <Row
+            label={<>Enable auto-reload{!purchasesAreOpen && <AvailableAtLaunchPill style={{ marginLeft: 6 }} />}</>}
+            htmlFor="ar-enabled"
+          >
             <input
               id="ar-enabled"
               type="checkbox"
               aria-label="Enable auto-reload"
               checked={form.enabled}
+              disabled={!purchasesAreOpen && !form.enabled && !storedEnabled}
               onChange={(e) => patch('enabled', e.target.checked)}
               style={{ width: 18, height: 18 }}
             />
@@ -134,7 +156,7 @@ export default function AccountAutoReloadPanel({ auth }) {
               style={numInputStyle} />
           </Row>
 
-          <div style={{ fontSize: FS.xs, color: MUTED, marginTop: SP.sm, lineHeight: 1.6 }}>
+          <div style={{ fontSize: proseFontSize(FS.xs, mobile), color: MUTED, marginTop: SP.sm, lineHeight: 1.6 }}>
             <div>This month so far: ${(status.thisMonthSpentCents / 100).toFixed(2)} of ${form.capDollars}.00</div>
             {status.openAttempt && (
               <div style={{ paddingLeft: SP.md, borderLeft: `3px solid ${status.openAttempt.state === 'requires_action' ? swatch.danger : SECOND}`, marginTop: SP.xs }}>
@@ -152,10 +174,12 @@ export default function AccountAutoReloadPanel({ auth }) {
           )}
 
           <div style={{ display: 'flex', alignItems: 'center', gap: SP.md, marginTop: SP.md }}>
-            <Button variant="primary" size="sm" onClick={handleSave} disabled={saving}>
+            <Button variant="primary" size="sm" onClick={handleSave} disabled={saveLocked || saving}
+              style={saveLocked ? { flexWrap: 'wrap' } : undefined}>
               {saving ? 'Saving…' : 'Save auto-reload'}
+              {saveLocked && <AvailableAtLaunchPill style={{ marginLeft: 6 }} />}
             </Button>
-            {saved && <span role="status" style={{ fontSize: FS.xs, color: swatch.success }}>Saved.</span>}
+            {saved && <span role="status" style={{ fontSize: chromeFontSize(FS.xs, mobile), color: swatch.success }}>Saved.</span>}
           </div>
         </div>
       )}

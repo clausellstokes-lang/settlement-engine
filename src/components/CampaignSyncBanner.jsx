@@ -15,9 +15,10 @@
  */
 import { X, RefreshCw } from 'lucide-react';
 import { useStore } from '../store/index.js';
-import { RED, AMBER, PARCH, FS, SP, sans } from './theme.js';
+import { RED, AMBER, PARCH, FS, SP, sans, HEADER_H } from './theme.js';
 import IconButton from './primitives/IconButton.jsx';
 import Button from './primitives/Button.jsx';
+import { edged } from '../design/edgedBox.js';
 
 export default function CampaignSyncBanner() {
   const error = useStore(s => s.campaignSyncError);
@@ -66,12 +67,16 @@ export default function CampaignSyncBanner() {
       role={danger ? 'alert' : 'status'}
       aria-live={danger ? 'assertive' : 'polite'}
       style={{
-        position: 'fixed', top: 20, left: '50%', transform: 'translateX(-50%)',
+        // Below the painted header band, so the banner never covers (or blocks) the painted
+        // nav words.
+        position: 'fixed', top: `calc(${HEADER_H} + ${SP.sm}px)`, left: '50%', transform: 'translateX(-50%)',
         zIndex: 260, maxWidth: 'min(92vw, 560px)',
         display: 'flex', alignItems: 'center', gap: SP.sm,
         padding: `${SP.sm}px ${SP.md}px`,
-        border: `1px solid ${danger ? RED : AMBER}`,
-        borderLeft: `3px solid ${danger ? RED : AMBER}`,
+        // LONGHANDS ONLY: `border` here changes with `danger`, and React both warns
+        // and RESETS the 3px accent beside it on the render where it changes
+        // (tests/lint/styleShorthandLonghand.walker.test.js).
+        ...edged(`1px solid ${danger ? RED : AMBER}`, `3px solid ${danger ? RED : AMBER}`),
         background: PARCH, color: danger ? RED : AMBER,
         fontFamily: sans, fontSize: FS.sm, fontWeight: 700,
       }}

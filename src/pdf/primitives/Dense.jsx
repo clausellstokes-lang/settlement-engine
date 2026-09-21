@@ -136,7 +136,10 @@ export function StatStrip({ stats, marginBottom = space.sm }) {
             borderLeft: i > 0 ? `0.4pt solid ${palette.border}` : undefined,
           }}
         >
-          <Text style={{ ...type.label, color: palette.muted, fontSize: pt['7'] }}>{up(s.label)}</Text>
+          {/* RUNG 2: the NAME of the figure beneath it. `label_plain` drops the capitals
+              and the tracking that served them; the 19 labels its four callers pass are
+              written as words at the call sites. */}
+          <Text style={{ ...type.label_plain, color: palette.muted, fontSize: pt['7'] }}>{up(s.label)}</Text>
           <Text
             style={{
               fontFamily: 'Lora',

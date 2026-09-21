@@ -5,18 +5,22 @@
  * The Realm Inspector is a right-dock OVERLAY over the world map (it never body-
  * swaps the map away). This hook owns:
  *   - inspectorOpen / inspectorSection state
- *   - the locked-preview auto-open for anon/free (the Realm is reachable, not
- *     hidden; the locked Dashboard teaser is the funnel surface)
+ *   - heraldAvailable: the Herald is withheld until the realm's first advance
+ *     (owner order 2026-09-17), derived from the persisted world clock
+ *   - the anon/free Realm-entry pricing moment (the locked teaser no longer opens
+ *     on entry, because the Herald waits for an advance these viewers cannot run)
  *   - the pendingMapWorkspace → Inspector-section translation (the Library
  *     Advance-Time CTA requests a workspace; we open the matching section)
  *   - handleApplyPreset (toolbar preset chips) + handleUpgrade (locked-state CTA)
  *
- * Behaviour-preserving extraction — no logic change, purely a god-component trim.
+ * Extracted behaviour-preserving from WorldMap; the Herald gate and the entry
+ * moment (owner order 2026-09-17) are the only logic added since.
  */
 
 import { useCallback, useEffect, useRef, useState } from 'react';
 
 import { useStore } from '../store/index.js';
+import { realmHasAdvanced } from '../lib/realmHeraldGate.js';
 import {
   readHeraldCommandSession,
   writeHeraldCommandSession,
@@ -185,16 +189,19 @@ export function useRealmInspector({
     });
   }, [activeCampaignId, inspectorOpen, inspectorSection]);
 
-  // Open the locked Dashboard teaser for anon/free on entry (reachable, not hidden).
-  const lockedPreviewShownRef = useRef(false);
-  useEffect(() => {
-    if (canManageCampaigns || lockedPreviewShownRef.current) return;
-    lockedPreviewShownRef.current = true;
-    // One-shot sync of an external signal (the auth tier) into local UI state —
-    // the ref guard makes it fire exactly once.
-    setInspectorSection('dashboard');
-    setInspectorOpen(true);
-  }, [canManageCampaigns]);
+  // THE HERALD WAITS FOR THE FIRST ADVANCE (owner order 2026-09-17). Derived from
+  // the persisted world clock (src/lib/realmHeraldGate.js). It is a SEPARATE flag,
+  // never folded into inspectorOpen: the open/section record stays as the GM left
+  // it, so the Herald comes back where it was after the first advance and after a
+  // reload of a realm that has advanced before.
+  const heraldAvailable = realmHasAdvanced(activeCampaign);
+
+  // ⛔ NO ENTRY PRICING MOMENT HERE ANY MORE. This hook fired map_realm_teaser
+  // for anon/free viewers because the locked teaser had become unreachable on a
+  // desktop Realm — the Herald that hosts it waits for a first advance these
+  // viewers can never run. The palette now renders that gate itself, so firing
+  // here stacked a modal on top of it: two upsells on one screen, the modal
+  // still saying signing in unlocks the Realm. The gate is the ask.
 
   // Honor a one-shot workspace request from another view (e.g. the Library
   // Advance-Time CTA → 'news'). Consume only once a campaign is active so the
@@ -252,6 +259,15 @@ export function useRealmInspector({
     if (typeof onNavigate === 'function') onNavigate('pricing');
   }, [onNavigate]);
 
+  // The ANON door on the same locked state. It is deliberately NOT handleUpgrade
+  // under another name: the gate's old single CTA told an anonymous viewer that
+  // signing in would unlock the Realm, and it does not — the Realm is
+  // Cartographer's. Signing in is a true, free, separate thing, so it gets its
+  // own control and its own destination.
+  const handleSignIn = useCallback(() => {
+    if (typeof onNavigate === 'function') onNavigate('signin');
+  }, [onNavigate]);
+
   // Open the Inspector at a given section (used by the advance flow).
   const openInspectorAt = useCallback((section) => {
     setInspectorSection(section);
@@ -260,6 +276,7 @@ export function useRealmInspector({
 
   return {
     inspectorOpen,
+    heraldAvailable,
     setInspectorOpen,
     inspectorSection,
     setInspectorSection,
@@ -269,6 +286,7 @@ export function useRealmInspector({
     handleApplyPreset,
     rulesEditBlocked,
     handleUpgrade,
+    handleSignIn,
     showSimulationRules,
     setShowSimulationRules,
   };

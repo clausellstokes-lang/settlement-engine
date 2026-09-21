@@ -1,29 +1,28 @@
 /**
- * tests/design/organicLogo.test.js — THE HOUSE DEVICE contract (owner-approved
- * final mark, 2026-07-18).
+ * tests/design/organicLogo.test.js — THE HOUSE DEVICE contract (the 2026-07-18 mark,
+ * still the dossier's vector charter mark after the 2026-09-19 brand re-cut).
  *
  * Pins: the canonical geometry (ring broken at the roofline chord, the station
  * triangle, the seal-point at the triangle's centroid); the mark NEVER carries
- * text; the heavy favicon weight is a REDRAW (heavier strokes), never a scale;
- * the one-ink variant still reads; the seal-point is the rubric oxblood, never
- * the destructive red; the golden SVG set is byte-stable; and the shipped public
- * assets exist in their correct formats (the ogImageRaster idiom for rasters).
- * The eager header component (components/brand/HouseDevice.jsx) is pinned
- * byte-equal to the canonical paths so the two sources can never drift.
+ * text; the heavy weight is a REDRAW (heavier strokes), never a scale; the one-ink
+ * variant still reads; the seal-point is the rubric oxblood, never the destructive
+ * red; and the golden SVG set is byte-stable. Every eager module that inlines the
+ * silhouette is pinned byte-equal to the canonical paths so the sources cannot drift.
+ *
+ * NOT here any more: the shipped icons and share cards. They are cuts of the owner's
+ * arrow painting as of ODQ §934.17 and are pinned by
+ * tests/build/brandDerivatives.test.js — see the note above the inliner block.
  */
 import { describe, expect, it } from 'vitest';
 import { existsSync, readFileSync, readdirSync } from 'node:fs';
 import { resolve } from 'node:path';
 
 import {
-  DEVICE_PATHS, DEVICE_DOT, DEVICE_WEIGHTS, houseDevice, faviconSvg,
-  appleTouchIconSvg, ogImageSvg, devicePalette, HOUSE_MOTTO,
+  DEVICE_PATHS, DEVICE_DOT, DEVICE_WEIGHTS, houseDevice, devicePalette, HOUSE_MOTTO,
 } from '../../src/design/organic/logo.js';
 import { RUBRIC } from '../../src/design/organic/rubrication.js';
 import { color } from '../../src/design/tokens.js';
 import { logoSamples, LOGO_DIR } from '../../scripts/gen-organic-logo.mjs';
-
-const PUB = resolve(process.cwd(), 'public');
 
 describe('the device — canonical geometry', () => {
   it('ring + skyline + triangle follow the approved geometry (hand-inked within tolerance)', () => {
@@ -46,11 +45,11 @@ describe('the device — canonical geometry', () => {
   });
 
   it('the mark NEVER carries text (no text/tspan in any device variant)', () => {
-    for (const svg of Object.values(logoSamples())) {
+    const variants = Object.values(logoSamples());
+    expect(variants.length, 'no variants rendered, so the scan proves nothing').toBeGreaterThan(0);
+    for (const svg of variants) {
       expect(/<text|<tspan/i.test(svg)).toBe(false);
     }
-    expect(/<text/i.test(faviconSvg())).toBe(false);
-    expect(/<text/i.test(appleTouchIconSvg())).toBe(false);
   });
 
   it('the seal-point is the rubric oxblood — never the destructive red', () => {
@@ -78,112 +77,79 @@ describe('the golden SVG set (byte-stable drift guard)', () => {
   });
 });
 
-describe('the shipped public assets (format contracts, not byte-goldens)', () => {
-  const isPng = (buf) => buf.subarray(0, 8).equals(Buffer.from([0x89, 0x50, 0x4e, 0x47, 0x0d, 0x0a, 0x1a, 0x0a]));
-  const pngDims = (buf) => ({ w: buf.readUInt32BE(16), h: buf.readUInt32BE(20) });
+/*
+ * ⚠ THE SHIPPED-ASSET ARMS MOVED, THEY DID NOT LAPSE. This file used to pin
+ * public/favicon.svg, favicon.ico, favicon-dark.png, apple-touch-icon.png and
+ * og-craft.png as renders of this device. The owner's 2026-09-19 order (ODQ §934.17)
+ * cut every one of them out of the arrow painting instead, so they are no longer this
+ * device's output and pinning them here would be reading the wrong source. Their
+ * contracts — existence, format, declared size, determinism from the master — live in
+ * tests/build/brandDerivatives.test.js. favicon.svg, favicon-dark.png and
+ * og-default.svg are gone from the tree entirely; the ICO's 16 px layer is the painted
+ * seal too, so the device draws no shipped icon at any size.
+ *
+ * What this file still owns is the DRAWN DEVICE: its geometry, its golden SVG set, and
+ * the eager modules that inline it.
+ */
 
-  it('favicon.svg is the heavy redraw with the embedded color-scheme swap', () => {
-    const svg = readFileSync(resolve(PUB, 'favicon.svg'), 'utf-8');
-    expect(svg).toContain('prefers-color-scheme: dark');
-    expect(svg).toContain(`stroke-width="${DEVICE_WEIGHTS.heavy.ring}"`);
-    expect(svg).toContain(devicePalette('light').ink);
-    expect(svg).toContain(devicePalette('dark').ink);
-  });
-
-  it('favicon.ico is a 2-image ICO container', () => {
-    const ico = readFileSync(resolve(PUB, 'favicon.ico'));
-    expect(ico.readUInt16LE(0)).toBe(0);
-    expect(ico.readUInt16LE(2)).toBe(1);   // type icon
-    expect(ico.readUInt16LE(4)).toBe(2);   // 16 + 32
-  });
-
-  it('favicon-dark.png (the Safari fallback) is a 32px PNG', () => {
-    const buf = readFileSync(resolve(PUB, 'favicon-dark.png'));
-    expect(isPng(buf)).toBe(true);
-    expect(pngDims(buf)).toEqual({ w: 32, h: 32 });
-  });
-
-  it('apple-touch-icon.png is 180px full-bleed', () => {
-    const buf = readFileSync(resolve(PUB, 'apple-touch-icon.png'));
-    expect(isPng(buf)).toBe(true);
-    expect(pngDims(buf)).toEqual({ w: 180, h: 180 });
-    // The SVG source keeps the device inside the central-80% maskable safe zone.
-    expect(appleTouchIconSvg()).toContain('translate(18,18) scale(2.25)');
-  });
-
-  it('og-craft.png is the declared 1200×630 social raster', () => {
-    const buf = readFileSync(resolve(PUB, 'og-craft.png'));
-    expect(isPng(buf)).toBe(true);
-    expect(pngDims(buf)).toEqual({ w: 1200, h: 630 });
-    // The og SOURCE carries the wordmark as adjacent TYPE (allowed — it is beside
-    // the mark, not inside the device group).
-    expect(ogImageSvg()).toContain('SettlementForge');
-  });
-});
-
-describe('every eager module that INLINES the device pins to the canonical paths', () => {
-  // ⚠️ A SET, NOT A FILE. This pin used to name HouseDevice.jsx alone, and the moment
-  // a second eager module inlined the same silhouette (MakerPlate, which struck it
-  // into the bronze plate and therefore needed the raw geometry three times over) the
-  // pin was guarding one of two copies while reading perfectly correct. A one-file
-  // containment pin also goes VACUOUS on a pure relocation: the file moves, the read
-  // throws or the constant stops appearing, and nobody notices which. So: a declared
-  // set, a non-empty assertion over it, and a negative control.
+describe('NO eager module inlines the device any more — and the census can still fire', () => {
+  // ⚠️ THIS BLOCK CHANGED SHAPE, AND THE CHANGE IS THE POINT.
   //
-  // ⚠️⚠️ THE SET IS BACK TO ONE MEMBER IN RIBBON V4, AND THAT IS A RETIREMENT RATHER
-  // THAN A REGRESSION. The maker's plate left the header entirely (the wordmark itself
-  // is the gilded artifact now — components/brand/GildedWordmark.jsx), so its module is
-  // deleted and with it the second inlined copy. The SET SHAPE IS KEPT DELIBERATELY:
-  // the lesson was that a one-FILE pin cannot see a second copy arriving, and that is
-  // true whether the set currently holds one member or two. The membership assertion is
-  // therefore ">= 1" plus a live census that no OTHER brand module has quietly grown a
-  // copy — which is the guard the old ">1" could never be.
-  // ⚠️⚠️ AND IT IS BACK TO TWO IN V4.1, WHICH IS THE SET SHAPE EARNING ITS KEEP. The
-  // owner's seal clarification (2026-08-04) puts the house device INSIDE the wax as an
-  // impression above 28px, so a second eager module carries the silhouette again —
-  // SealImpression.jsx. The census below CAUGHT its arrival on the first run rather
-  // than being told about it, which is precisely the guard a one-file pin could not be.
+  // It began as a one-FILE pin on HouseDevice.jsx, went blind the moment a second
+  // eager module (MakerPlate) inlined the same silhouette, and was rebuilt as a
+  // declared SET plus a directory census that could see a third copy arrive. The set
+  // held two members, then one, then two again (SealImpression), then one.
   //
-  // ⚠️ IT IS ALSO WHY THE IMPRESSION IS ITS OWN MODULE RATHER THAN LIVING IN WaxSeal.
-  // WaxSeal is this block's NEGATIVE CONTROL — the sibling proving the containment
-  // check can fail — so inlining the device there would have destroyed the only
-  // assertion that keeps the rest of the block honest, silently.
-  const INLINERS = ['HouseDevice.jsx', 'SealImpression.jsx'];
+  // ⚠️⚠️ IT IS NOW EMPTY, AND THAT IS A RETIREMENT, NOT A LAPSE. The owner's
+  // 2026-09-19 order (ODQ §934.17) took the drawn device off every shipped surface:
+  // HouseDevice.jsx renders the PAINTED seal (an <img> of public/brand/seal.png) and
+  // no eager module carries the geometry at all. So the invariant FLIPS — the census
+  // must find NOTHING, and the old ">= 1 member" assertion would now be asserting the
+  // opposite of the truth.
+  //
+  // An empty census is exactly the shape that goes vacuous by accident, so the guard
+  // is inverted rather than deleted: the matcher is proved to FIRE on a planted copy
+  // of the canonical geometry, and the directory is proved to have been read, before
+  // the emptiness is believed. The one live drawer of the device, the dossier's
+  // pdf/primitives/HouseDeviceSeal.jsx, IMPORTS the paths and inlines none of them —
+  // which is what the estate wants of any future drawer too.
+  const BRAND_DIR = resolve(process.cwd(), 'src', 'components', 'brand');
+  const inlines = (source) => source.includes(DEVICE_PATHS.ring);
 
-  it('the inliner set is non-empty and every member really exists', () => {
-    expect(INLINERS.length).toBeGreaterThanOrEqual(1);
-    for (const f of INLINERS) {
-      expect(existsSync(resolve(process.cwd(), 'src', 'components', 'brand', f)), `${f} is listed but missing`).toBe(true);
+  it('the brand directory was really read (modules exist and carry code)', () => {
+    const modules = readdirSync(BRAND_DIR).filter((f) => f.endsWith('.jsx'));
+    expect(modules.length, 'the brand directory is empty — the census reads nothing').toBeGreaterThan(0);
+    for (const file of modules) {
+      expect(readFileSync(resolve(BRAND_DIR, file), 'utf-8').length, `${file} is empty`).toBeGreaterThan(200);
     }
   });
 
-  it.each(INLINERS)('%s carries byte-equal path data', (file) => {
-    const src = readFileSync(resolve(process.cwd(), 'src', 'components', 'brand', file), 'utf-8');
-    for (const d of Object.values(DEVICE_PATHS)) {
-      expect(src, `${file} has drifted from the canonical geometry`).toContain(d);
-    }
-    expect(src).toContain(String(DEVICE_DOT.rHeavy));
+  it('CONTROL: the matcher convicts a planted inline copy, and clears an importer', () => {
+    // Without this, "no module inlines the device" would pass on a broken matcher.
+    const planted = `const d = "${DEVICE_PATHS.ring}";`;
+    expect(inlines(planted), 'the matcher cannot see an inlined copy, so its silence proves nothing').toBe(true);
+    // The dossier's drawer takes the paths by import and carries none of them.
+    const drawer = readFileSync(resolve(process.cwd(), 'src', 'pdf', 'primitives', 'HouseDeviceSeal.jsx'), 'utf-8');
+    expect(drawer.includes('DEVICE_PATHS'), 'presence control: the drawer still draws the device').toBe(true);
+    expect(inlines(drawer), 'the dossier drawer forked the geometry instead of importing it').toBe(false);
   });
 
-  it('NEGATIVE CONTROL — a module that does NOT inline the device is not in the set', () => {
-    // Non-vacuity for the whole block: the containment check must be capable of
-    // failing. WaxSeal is a sibling brand module with its own geometry and none of
-    // the device's, so it is the proof that `toContain` is doing real work.
-    const seal = readFileSync(resolve(process.cwd(), 'src', 'components', 'brand', 'WaxSeal.jsx'), 'utf-8');
-    expect(seal).not.toContain(DEVICE_PATHS.ring);
-    expect(INLINERS).not.toContain('WaxSeal.jsx');
-  });
-
-  it('⚠️ THE SET IS TOTAL — no brand module inlines the device without being listed', () => {
-    // THE GUARD THE MEMBERSHIP COUNT WAS STANDING IN FOR. Listing two files proved
-    // nothing about a third; this censuses the whole directory and requires every
-    // module carrying the canonical ring path to be a declared member. It is what makes
-    // the set shrinking to one member safe.
-    const dir = resolve(process.cwd(), 'src', 'components', 'brand');
-    const found = readdirSync(dir)
+  it('no eager brand module carries the canonical geometry', () => {
+    const found = readdirSync(BRAND_DIR)
       .filter((f) => f.endsWith('.jsx'))
-      .filter((f) => readFileSync(resolve(dir, f), 'utf-8').includes(DEVICE_PATHS.ring));
-    expect(found.length, 'the census found nothing — it is vacuous').toBeGreaterThan(0);
-    expect([...found].sort()).toEqual([...INLINERS].sort());
+      .filter((f) => inlines(readFileSync(resolve(BRAND_DIR, f), 'utf-8')));
+    expect(
+      found,
+      'a brand module inlined the retired device geometry. The shipped mark is the painted'
+      + ' seal (public/brand/seal.png, cut by scripts/derive-brand-marks.mjs); if the drawn'
+      + ' device is genuinely needed again, import it from design/organic/logo.js rather than'
+      + ` forking its paths:\n  ${found.join('\n  ')}`,
+    ).toEqual([]);
+  });
+
+  it('the eager mark is the painted seal, and it names the file that ships it', () => {
+    const src = readFileSync(resolve(BRAND_DIR, 'HouseDevice.jsx'), 'utf-8');
+    expect(src.includes("'/brand/seal.png'"), 'the eager mark stopped pointing at the painted seal').toBe(true);
+    expect(existsSync(resolve(process.cwd(), 'public', 'brand', 'seal.png')), 'the seal it points at is not on disk').toBe(true);
   });
 });

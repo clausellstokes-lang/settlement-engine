@@ -652,7 +652,14 @@ export const generateSafetyProfile = (config = {}, tier = 'town', institutions =
     plotHooks.push(`A local family wants evidence of tax extortion gathered quietly, but the extorter wears an official badge.`);
   }
   if (stress.crimeIsGovt) {
-    const crimeRef = inst.hasThievesGuild ? 'the guild' : 'whoever controls this block';
+    // ⚠ 'whoever controls this block' READ WRONG BELOW A TOWN. The hook fires at
+    // every tier, and a thorp of forty people has no blocks: the reference has to
+    // name something the settlement actually has. A quarter exists from a town up;
+    // below that the unit of local power is the road through the place.
+    const crimeTurf = ['town', 'city', 'metropolis'].includes(tier)
+      ? 'whoever holds this quarter'
+      : 'whoever holds this stretch of road';
+    const crimeRef = inst.hasThievesGuild ? 'the guild' : crimeTurf;
     plotHooks.push(`Someone approached the party seeking legitimate authority to settle a dispute. The only "authority" here is ${crimeRef}.`);
   }
   if (stress.arcaneBlackMarket) {

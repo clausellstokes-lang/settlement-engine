@@ -14,8 +14,10 @@ import {
 } from '../primitives/Dense.jsx';
 import { hooksHeadline } from '../lib/headlines.js';
 import { Pill } from '../primitives/Pill.jsx';
+import { tokenCase } from '../../domain/display/labelCase.js';
 import { type, palette, space, pt } from '../theme.js';
 import { cap, hookText, humanize } from '../lib/format.js';
+import { StateProse } from '../primitives/StateProse.jsx';
 
 const SOURCE_LABELS = {
   npc:          { label: 'NPC',          tone: 'cool' },
@@ -35,7 +37,7 @@ const PRIORITY_TONE = {
   low: 'muted', minor: 'muted',
 };
 
-export function PlotHooks({ settlement, narrativeMode, vm }) {
+export function PlotHooks({ settlement, narrativeMode, vm, stateProse }) {
   const hooks = vm.hooks?.all || [];
   const tensions = vm.hooks?.tensions || [];
 
@@ -64,6 +66,9 @@ export function PlotHooks({ settlement, narrativeMode, vm }) {
         {hooksHeadline(vm.hooks)}
       </ChapterHeadline>
 
+      {/* ── The mounted state prose (the screen's ProseBlock positions) ── */}
+      <StateProse stateProse={stateProse} tab="plot_hooks" />
+
       {hooks.length === 0 && (
         <Text style={{ ...type.body, color: palette.muted, fontStyle: 'italic' }}>
           No plot hooks surfaced for this settlement yet.
@@ -72,7 +77,7 @@ export function PlotHooks({ settlement, narrativeMode, vm }) {
 
       {/* ── Source groups ────────────────────────────────────── */}
       {order.map(source => {
-        const cfg = SOURCE_LABELS[source] || { label: source.toUpperCase(), tone: 'gold' };
+        const cfg = SOURCE_LABELS[source] || { label: source, tone: 'gold' };
         const list = (grouped[source] || []).filter(h => hookText(h?.hook).trim().length > 0);
         if (!list.length) return null;
         return (
@@ -87,7 +92,7 @@ export function PlotHooks({ settlement, narrativeMode, vm }) {
               }}
               wrap={false}
             >
-              <Pill tone={cfg.tone}>{cfg.label}</Pill>
+              <Pill tone={cfg.tone}>{tokenCase(cfg.label)}</Pill>
               <Text style={{ ...type.caption, color: palette.muted, marginLeft: 5, fontSize: pt['8'] }}>
                 {list.length} hook{list.length === 1 ? '' : 's'}
               </Text>

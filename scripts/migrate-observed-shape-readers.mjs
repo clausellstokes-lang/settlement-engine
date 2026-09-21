@@ -161,6 +161,43 @@
  *     ELEVEN detector inputs were byte-identical before this rung was written. See
  *     `LINEAGE_REANCHOR_SCANNER_DELTA_PATHS`.
  *
+ *   schema 18 -> 19 (RETIRED) the same tagged numeric reconciliation, re-governing the
+ *     register to a declared M8/M9 bank of EIGHT after the owner's 2026-09-17 order
+ *     deleted the writer of `factions on locks`. It moves six rows, every one an estate
+ *     shrink. Its full rationale lives beside `EXEMPTION_RETIREMENT_TARGET_SCHEMA`.
+ *
+ *   schema 19 -> 20 (RETIRED) the same tagged numeric reconciliation, and THE FIRST RUNG
+ *     WHOSE SUBJECT IS THE WRITE: a register whose bank the walker's hand-owned literal
+ *     module does not already state is REFUSED before a byte moves, and a migration write
+ *     is refused unless the rung's own declared post-bank (`DECLARED_BANK_BY_TARGET`)
+ *     agrees with the measurement. It moves NO row. Its full rationale — the third stale
+ *     twin, and why nothing short of the write can fence it — lives beside
+ *     `BANK_FENCE_TARGET_SCHEMA`.
+ *
+ *   schema 20 -> 21 (RETIRED) the same tagged numeric reconciliation, and THE FIRST RUNG
+ *     WHOSE SUBJECT IS A PRODUCT SURFACE rather than the instrument: the paid PDF's
+ *     `relationships.network` position was mounted and starved, and lighting it put a list
+ *     assembler under `src/components/new/` that reads three SAVE-TIME keys the generation
+ *     corpus can never observe a writer for. It ADMITS THREE ROWS, all in that one new
+ *     file, and it is the first rung to GROW the bank (60/39 -> 61/40) — the bank fence's
+ *     first real exercise, since 20's own re-freeze moved nothing. Its full rationale lives
+ *     beside `RELATIONSHIPS_MOUNT_TARGET_SCHEMA`.
+ *
+ *   schema 21 -> 22 (LIVE)   the same tagged numeric reconciliation, and THE FIRST RUNG THAT
+ *     EXISTS TO UNDO AN ARRANGEMENT ITS PREDECESSOR BANKED. 21 admitted the assembler's rows
+ *     where they happened to land — under `src/components/` — and the file's own header then
+ *     wrote that location down as a law, on the true measurement that a domain reader would
+ *     mint new identities. The owner ruled the other way (ODQ §934.16): a domain-side reader
+ *     of the relationship keys is bought with a governed register migration, not refused by
+ *     one. So the assembler moved to `src/domain/display/stateProse/`, ODQ §934.18 made the
+ *     printed Relationships block derive its engagements instead of reading a key nothing
+ *     writes, and this rung is what pays for both. It is a PURE SHRINK plus two address
+ *     moves: no row is added to any file that did not already carry it, the identity
+ *     `crossSettlementConflicts on settlement` leaves the register at zero addresses, and
+ *     the BANK DOES NOT MOVE — which is the fence's second exercise and the first proving
+ *     that a MOVE is not a growth. Its full rationale lives beside
+ *     `DOMAIN_READER_TARGET_SCHEMA`.
+ *
  * In every family, the predecessor baseline and scan artifacts are
  * canonical, content-addressed inputs sharing one committed source, execution
  * tree, executed corpus and scan configuration. The legacy detector is the
@@ -203,6 +240,10 @@ import {
   validateSchema15Baseline,
   validateSchema16Baseline,
   validateSchema17Baseline,
+  validateSchema18Baseline,
+  validateSchema19Baseline,
+  validateSchema20Baseline,
+  validateSchema21Baseline,
 } from './lib/observed-shape-baseline.mjs';
 
 export const MIGRATION_REPORT_SCHEMA = 2;
@@ -462,6 +503,278 @@ export const STRESS_TOPOLOGY_TARGET_SCHEMA = 17;
  *  figure is also the whole of the writer-reach walker's declared debt against this
  *  register: two banked ratchet rows read `expected 81 to be 80` until this write. */
 export const LINEAGE_REANCHOR_TARGET_SCHEMA = 18;
+
+/* ⭐⭐ THE SCHEMA 18 → 19 RUNG — THE EXEMPTION RETIREMENT (owner order, 2026-09-17).
+ *
+ *  WHAT MOVED, AND IT IS THE DECLARED BANK'S MEMBERSHIP — the first rung since 11 to
+ *  change the roster of `EXPLAINED_WRITER_EXEMPTIONS`, and the FIRST EVER to SHRINK it.
+ *  11 grew the bank by one; this one retires one, and the direction matters because a
+ *  retirement RESTORES enforcement rather than reducing it.
+ *
+ *  ⭐ WHY THE INSTRUMENT NEEDED IT, AND WHY NOTHING SMALLER WOULD DO. The owner ordered
+ *  every lock control out of the dossier ("I approve and remove the other padlocks and
+ *  fix the remaining contradictions as well") and `src/components/dossier/LockControls.jsx`
+ *  was deleted with them. That file was the entire basis of the `factions on locks`
+ *  exemption: it held the only `WORLD_LOCKS` declaration and the only `setLock` writer of
+ *  the key. Gate 0 reads each entry's named writer from the scanned tree on EVERY scan, so
+ *  the deletion did not leave a stale row — it raised "names a writer that cannot be read"
+ *  and refused the whole instrument. Gate 0's own message names the remedy: *"the key
+ *  genuinely lost its writer, in which case the reads are real findings again and the
+ *  exemption must be DELETED, not repaired."*
+ *  ⛔ AND DELETING IT IS EXACTLY WHAT THE SHRINK-ONLY `--write` CANNOT ABSORB. The entry's
+ *  two committed row tags outlive the declaration by one act, and `assertExplainedWriterRowTags`
+ *  — run against the PREDECESSOR baseline before any scan — classes a tagged inventory
+ *  address with no declaration as a FORGED tag and throws. The register cannot drop the
+ *  tags without a write, and no ordinary write can start while they are there. Only a rung
+ *  breaks that circle, and `check-observed-shape-readers.mjs` says so in its own words:
+ *  "A declaration membership or ruling change alters tag authenticity and requires a
+ *  governed instrument migration; it is not ordinary maintenance."
+ *
+ *  ⛔ THIS RUNG MOVES ROWS AND MUST — like 17, and unlike 13 through 16 and 18. But the
+ *  cause is the opposite of 17's and that distinction is the fence. 17 moved rows because
+ *  the INSTRUMENT's reach grew; this one moves them because the ESTATE shrank, and the
+ *  instrument's reach is byte-for-byte what schema 18 governed. Measured before the rung
+ *  was cut, via `--scan-only --scan-mode=legacy-leaf` at the committed retirement:
+ *
+ *      identities 1397 → 1392 · findings 1972 → 1966 · files 386 → 386
+ *      GONE 5 · DECREASED 1 · NEW 0 · RAISED 0
+ *
+ *  The six are all on the `locks` shape and all in two files: `factions`, `geography`,
+ *  `history` and `identity on locks` GONE from `src/domain/locksPreservation.js`,
+ *  `npcs on locks` LOWERED there 3 → 2, and `factions on locks` GONE from
+ *  `src/domain/worldPulse/coup.js`. Every one is a read that left the estate with the lock
+ *  controls.
+ *  ⛔ THE FENCE IS THE ZERO ON NEW AND INCREASED. A deletion cannot mint a reader, so a
+ *  single added row would mean this rung's own bookkeeping changed a verdict — and a
+ *  retirement that convicts something new is not a retirement. `files` holding at 386 is
+ *  the other half: neither file lost all of its rows, so no file may leave the register.
+ *
+ *  ⚠ THE BANK'S FIGURES MOVE WITH THE ROSTER, AND BOTH HALVES ARE RECORDED: the declared
+ *  roster goes 9 → 8, and the banked reads go 62 → 60 across 41 → 39 tagged addresses.
+ *  The two banked rows are the same two `factions on locks` addresses that this rung's
+ *  reconciliation reports GONE — they stopped being banked and stopped existing in the
+ *  same act, which is why no tagged row survives undeclared.
+ *
+ *  Its delta is THREE instrument paths, the bookkeeping set every rung moves. MEASURED,
+ *  NEVER LISTED: each of the ELEVEN governed detector inputs was hashed against the
+ *  PREDECESSOR'S OWN RECORDED MANIFEST before a byte of this rung was written, and exactly
+ *  ONE came back moved — `check-observed-shape-readers.mjs`, carrying the committed
+ *  retirement itself — with `package.json` and `package-lock.json` measured byte-SAME
+ *  rather than assumed, because any `package.json` byte is itself a mint trigger. The set
+ *  was re-measured after it was written, because writing it changes
+ *  `migrate-observed-shape-readers.mjs`, which is itself a member. See
+ *  `EXEMPTION_RETIREMENT_SCANNER_DELTA_PATHS`. */
+export const EXEMPTION_RETIREMENT_TARGET_SCHEMA = 19;
+
+/* ⭐⭐ THE SCHEMA 19 → 20 RUNG — THE BANK FENCE (2026-09-18).
+ *
+ *  WHAT MOVED, AND IT IS THE WRITE — the first rung whose subject is neither the detector
+ *  (11, 13–16), the corpus (17), the receipt (18) nor the declared roster (9, 11, 19) but
+ *  the act that lands a register: `check-observed-shape-readers.mjs --write`, in every
+ *  mode, now REFUSES to freeze a bank the walker's hand-owned literal does not already
+ *  state, and a `--migrate-schema` write additionally refuses unless the rung's own
+ *  declared post-bank agrees. See `assertBankTwins` there and `DECLARED_BANK_BY_TARGET`
+ *  below.
+ *
+ *  ⭐ WHY THE INSTRUMENT NEEDED IT. The walker keeps the register's bank as a LITERAL by
+ *  ruling — a derived re-freeze may never RAISE the bank, so a hand-written figure is the
+ *  right instrument and a red on it is the governed event announcing itself. That literal
+ *  went stale at the very rung before this one: `fe021a487` re-froze the register at
+ *  schema 19 and took the bank 62/41 → 60/39, touching exactly ONE file, and the walker's
+ *  twin stayed at 62/41 — RED AT THE TIP ITSELF, before any later lane's first car, until
+ *  three lanes had independently reproduced it against a pristine archive (`1637f85d1`).
+ *  It was the THIRD stale twin in that file's history (TE-INSTR-1; the WAR landing
+ *  `18df1bb3d`), and the first two were cured by reading the triple from the register — a
+ *  cure the bank cannot take without becoming a self-comparison. The structural cause is
+ *  that the figure's three homes — the rung's docblock (prose), the walker's literal (a
+ *  test file) and the register (a tool's output) — had no edge between them. This rung
+ *  draws the edges: the docblock's figure becomes DATA the write checks, and the literal
+ *  becomes a MODULE the write reads. Both are still hand-written; neither is derived.
+ *
+ *  ⛔ NOTHING SHORT OF THE WRITE FIRES AT THE MOMENT OF THE ACT. A pre-commit hook was
+ *  weighed and refused with evidence: husky's shim resolves `.husky/pre-commit` from the
+ *  MAIN checkout for every worktree (`$(dirname "$(dirname "$0")")/$n`), so a hook fence
+ *  would be governed by whichever branch the main checkout happens to be on. A test-time
+ *  assertion fires at the next tip, which is the failure this rung exists to prevent. And
+ *  the write is a detector source, so the fence costs exactly this rung — a no-row rung of
+ *  rung 18's shape.
+ *
+ *  ⛔ THIS RUNG MOVES NO ROW, AND THAT IS ITS FENCE. Like 13–16 and 18, and unlike 17 and
+ *  19, its reconciliation must be EMPTY — `predecessorGone`, `predecessorNew`,
+ *  `predecessorIncreased` and `predecessorDecreased` all 0 — and the bank it declares below
+ *  is the bank schema 19 froze, so `inventory` and `rowTags` come out byte-identical. The
+ *  write proves that itself: this rung's re-freeze is the fence's first live exercise.
+ *
+ *  Its delta is THREE instrument paths, the bookkeeping set every verdict-only rung moves:
+ *  the checker (the fence, its live-validator binding, its `_doc` and schema index), the
+ *  baseline library (the 19 → 20 bump, the retired-19 constant and its re-bound validator)
+ *  and this rung. MEASURED against the predecessor's own recorded manifest and re-measured
+ *  after the set was written, because writing it changes this file, which is itself a
+ *  member. See `BANK_FENCE_SCANNER_DELTA_PATHS`. */
+export const BANK_FENCE_TARGET_SCHEMA = 20;
+
+/**
+ * ⭐⭐ THE DECLARED POST-BANK — what a rung's docblock used to say in a sentence, as data
+ * the write can refuse against. From 19 onward every rung states the bank its re-freeze
+ * must land: banked reads across tagged addresses. `check-observed-shape-readers.mjs`
+ * refuses a `--migrate-schema` write whose freshly derived bank disagrees with the live
+ * target's entry, so a figure PREDICTED FROM THE DELTA rather than measured stops the mint
+ * instead of landing as a stale sentence.
+ *
+ * ⚠ ONLY MEASURED FIGURES ENTER. 19's pair is read off the register `fe021a487` froze
+ * (60 banked reads across 39 tagged addresses, over seven of eight declared identities);
+ * 20 moves no row and declares the same. Rungs before 19 recorded no data figure and none
+ * is transcribed from their prose here — a backfilled number nobody measured would be the
+ * stale-numeral class this table exists to refuse. A rung that moves the bank adds its own
+ * entry; a rung that does not carries its predecessor's figure forward BY HAND, so the
+ * declaration is always a statement and never a default.
+ */
+/* ⭐⭐ THE SCHEMA 20 → 21 RUNG — THE RELATIONSHIPS MOUNT (ODQ §934.9, 2026-09-18).
+ *
+ *  WHAT MOVED, AND IT IS THE ESTATE RATHER THAN THE INSTRUMENT. The owner's "do these as
+ *  well" ordered the paid PDF's `relationships.network` position lit. It had been MOUNTED
+ *  AND STARVED: `printProse.js` put the position, the chapter rendered it, and the two
+ *  lists the DS-REL-1 desk draws from were assembled inside `RelationshipsTab.jsx`, where
+ *  a headless builder cannot reach them. The cure is the one the builder's own seam note
+ *  prescribed — `src/components/new/relationshipsDeskRead.js`, holding that merge, called
+ *  by the tab AND by the builder. That assembler reads `neighbourNetwork`,
+ *  `interSettlementRelationships` and `crossSettlementConflicts`.
+ *
+ *  ⛔ AND THE SCAN IS RIGHT ABOUT ALL THREE. Every one is written when a world is SAVED,
+ *  LINKED or IMPORTED — `src/lib/saves.js`, the neighbour back-link, the link / undo /
+ *  import paths — and never by the generation pipeline this instrument executes, so no
+ *  corpus world carries one and every reader of them is convicted. The reads are real and
+ *  the position they light is real; what the register owes them is ADMISSION, not a
+ *  silenced detector. THREE NEW ROWS, one read each, all in that one file; nothing moves
+ *  anywhere else, and no filter, door, mechanism or declaration is touched.
+ *
+ *  ⭐ THE BANK GROWS, AND THAT IS THE FENCE'S FIRST REAL EXERCISE. `neighbourNetwork on
+ *  settlement` is a DECLARED identity, so `rowTagsOf` tags its new address exactly as it
+ *  tags all 25 of its siblings — there is no choice in it, and `assertExplainedWriterRowTags`
+ *  throws on a declared address that lacks its tag. The bank therefore goes 60 -> 61 banked
+ *  reads across 39 -> 40 tagged addresses, the first growth since `assertBankTwins` existed,
+ *  and the write refuses unless BOTH hand-owned twins already say so: the literal module and
+ *  `DECLARED_BANK_BY_TARGET[21]` below. Rung 20 declared the same pair as 19 and proved
+ *  nothing about a MOVE; this one does.
+ *
+ *  ⛔ THE OTHER TWO STAY ORDINARY ROWS, AND THE ALTERNATIVE IS REFUSED ON EVIDENCE rather
+ *  than on taste. Declaring them would make them M8/M9 bank entries — and:
+ *    • `crossSettlementConflicts on settlement` CANNOT BE DECLARED AT ALL. Gate 0 re-proves
+ *      on every scan that a declaration's named writer still writes the key in one of the
+ *      four measured write shapes, and NOTHING in `src/` writes this key: the deterministic
+ *      generator that mints those rows writes them into `interSettlementRelationships`
+ *      (`domain/relationships/neighbourBackLink.js:144,149`), and
+ *      `tests/lint/writerReach.walker.test.js` already lists the key in its own `unwritten`
+ *      roster. An entry naming any writer would be a false one, and gate 0 would refuse it.
+ *    • `interSettlementRelationships on settlement` COULD be declared — it has real
+ *      save-time writers — but the roster is keyed by IDENTITY, not by address, so adding
+ *      it would auto-tag the SEVEN ordinary rows the estate has carried for it since schema
+ *      4 and move them into the enforced bank. That is a change of enforcement posture over
+ *      rows this rung did not cause, and it is not a lane's to make on the way to mounting a
+ *      paragraph. An ordinary row here matches what those seven siblings already are.
+ *
+ *  Its delta is THREE instrument paths, the bookkeeping set every rung moves: the checker
+ *  (the live-validator binding, its `_doc` and its schema index), the baseline library (the
+ *  20 -> 21 bump, the retired-20 constant and its re-bound validator) and this rung.
+ *  MEASURED against the predecessor's own recorded manifest and re-measured after the set
+ *  was written, because writing it changes this file, which is itself a member. See
+ *  `RELATIONSHIPS_MOUNT_SCANNER_DELTA_PATHS`.
+ *
+ *  ⚠ THE SUBJECT COMMIT IS RATCHET-RED BY CONSTRUCTION, for one commit, and that is the
+ *  recorded CR-OSR-FREEZE-4 pair: the register may only move from a CLEAN COMMITTED tree, so
+ *  the reader lands first and this rung's re-freeze lands after it. */
+export const RELATIONSHIPS_MOUNT_TARGET_SCHEMA = 21;
+
+/* ⭐⭐ THE SCHEMA 21 → 22 RUNG — THE DOMAIN READER (ODQ §934.16 + §934.18, 2026-09-19).
+ *
+ *  WHAT MOVED, AND IT IS AN ARRANGEMENT RATHER THAN A READING. Rung 21 admitted three rows
+ *  for DS-REL-1's list assembler at `src/components/new/relationshipsDeskRead.js`. Nothing
+ *  about those reads was wrong. What was wrong was WHERE THEY LIVED: `printProse.js` is a
+ *  `src/domain` module and it imported that assembler, so the paid export path carried a
+ *  domain → components layer inversion, and the assembler's own header wrote the
+ *  arrangement down as a law ("⛔ WHY IT LIVES UNDER src/components AND MAY NOT MOVE TO
+ *  src/domain") on the true measurement that a domain reader mints new identities. THE
+ *  REGISTER WAS HOLDING THE INVERSION IN PLACE. The owner ruled the other way:
+ *
+ *      "If a future car wants a domain-side reader of the relationship keys, it is a
+ *       governed register migration."
+ *
+ *  This is that migration. The assembler is now
+ *  `src/domain/display/stateProse/relationshipsDeskRead.js`; the component file is deleted
+ *  and all three importers re-pointed.
+ *
+ *  ⭐ AND THE SECOND HALF IS A DEFECT THE FIRST HALF UNCOVERED (ODQ §934.18).
+ *  `pdf/lib/viewModel.js` fed the printed "Cross-settlement conflicts" block from the
+ *  PERSISTED `settlement.crossSettlementConflicts`. NO WRITER IN `src/` PRODUCES THAT KEY —
+ *  the deterministic generator that mints those rows writes them into
+ *  `interSettlementRelationships` (`domain/relationships/neighbourBackLink.js:144,149`), and
+ *  `tests/lint/writerReach.walker.test.js` carries it in its own `unwritten` roster. So on
+ *  every LINKED world the screen drew the derived engagements and the paid document drew
+ *  nothing, while a record carrying the pre-merge fossil printed rows the screen had stopped
+ *  drawing. Both surfaces now derive from the one assembler, and that read is gone.
+ *
+ *  ⛔ THE RECONCILIATION IS A SHRINK AND TWO ADDRESS MOVES, AND NOT ONE ADDED ROW.
+ *    • `neighbourNetwork on settlement` and `interSettlementRelationships on settlement`
+ *      leave `src/components/new/relationshipsDeskRead.js` and appear at the domain path,
+ *      one read each, same spelling, same identities.
+ *    • `crossSettlementConflicts on settlement` is DELETED TWICE — at the component
+ *      assembler, which no longer merges the key, and at `src/pdf/lib/viewModel.js`. It
+ *      therefore reaches ZERO addresses and LEAVES THE REGISTER ENTIRELY. That is the
+ *      strongest outcome this ratchet has: the reader-with-no-writer class it named is now
+ *      unreachable rather than banked.
+ *  `predecessorNew` and `predecessorIncreased` must be 0 at the domain path's own identities
+ *  only in the sense that no identity is new to the ESTATE; the two moved rows are new to
+ *  their FILE, which is exactly what a governed rung exists to admit and what the ordinary
+ *  shrink-only write refuses.
+ *
+ *  ⛔ THE ROSTER DOES NOT MOVE, AND THE ALTERNATIVE IS REFUSED ON THE PRECEDENT rather than
+ *  on taste. `interSettlementRelationships on settlement` COULD be declared — unlike its
+ *  sibling it has a real in-src property writer — but the roster is keyed by IDENTITY, not
+ *  by address, so declaring it would auto-tag the SEVEN ordinary rows the estate has carried
+ *  since schema 4 and move them into the enforced bank. Rung 21 refused exactly that as "a
+ *  change of enforcement posture over rows this rung did not cause", and the refusal STANDS:
+ *  the moved row is ORDINARY, like its siblings. `crossSettlementConflicts on settlement`
+ *  could never have been declared at all, and now needs no answer — gate 0 refuses an entry
+ *  whose named writer does not write, and the identity no longer exists.
+ *
+ *  ⭐ THE BANK DOES NOT MOVE, AND THAT IS THE FENCE'S SECOND EXERCISE. 21 proved the fence
+ *  catches a GROWTH; this proves it does not mistake a MOVE for one. `neighbourNetwork on
+ *  settlement` changes address and not count, so the pair stays 61 banked reads across 40
+ *  tagged addresses and `tests/lint/observedShapeBank.literal.js` stands still. A rung that
+ *  had guessed at "one address left, one arrived, therefore +0" without measuring would have
+ *  been right by luck; `declaredBankOf(22)` below is MEASURED off the live scan.
+ *
+ *  Its delta is THREE instrument paths, the bookkeeping set every rung moves: the checker
+ *  (the live-validator binding, its `_doc` and its schema index), the baseline library (the
+ *  21 -> 22 bump, the retired-21 constant and its re-bound validator) and this rung. The
+ *  moved reader and the view model are SUBJECT files — scanned, not scanning — so they are
+ *  deliberately NOT in it; they move `sourceTreeDigest` and `scanTreeDigest`, which the
+ *  transition records on its own.
+ *
+ *  ⚠ THE SUBJECT COMMIT IS RATCHET-RED BY CONSTRUCTION, for one commit, and that is the
+ *  recorded CR-OSR-FREEZE-4 pair: the register may only move from a CLEAN COMMITTED tree, so
+ *  the reader lands first and this rung's re-freeze lands after it. */
+export const DOMAIN_READER_TARGET_SCHEMA = 22;
+
+export const DECLARED_BANK_BY_TARGET = Object.freeze({
+  [EXEMPTION_RETIREMENT_TARGET_SCHEMA]: Object.freeze({ bankedReads: 60, taggedRows: 39 }),
+  [BANK_FENCE_TARGET_SCHEMA]: Object.freeze({ bankedReads: 60, taggedRows: 39 }),
+  // MEASURED, never predicted from the delta: `bankOf` over the committed schema-20
+  // register derives 60/39, and the one new address this rung admits is a DECLARED
+  // identity, so the post-move pair is 61/40 with `neighbourNetwork on settlement` at
+  // 39 reads across 26 addresses. The write refuses if the measurement disagrees.
+  [RELATIONSHIPS_MOUNT_TARGET_SCHEMA]: Object.freeze({ bankedReads: 61, taggedRows: 40 }),
+  // MEASURED off the live scan at the subject commit, never inferred from the delta: the one
+  // declared-identity row this rung touches CHANGES ADDRESS and not count, so the pair does
+  // not move. `bankOf` over the committed schema-21 register derives 61/40, the live scan at
+  // the subject derives 61/40, and the literal module already states it.
+  [DOMAIN_READER_TARGET_SCHEMA]: Object.freeze({ bankedReads: 61, taggedRows: 40 }),
+});
+
+/** The declared post-bank of a target, or `null` for a rung that predates the law. */
+export function declaredBankOf(targetSchema) {
+  return DECLARED_BANK_BY_TARGET[targetSchema] ?? null;
+}
 
 /**
  * The complete, reviewed detector transition admitted by the retired 6→7 mint.
@@ -756,6 +1069,103 @@ export const LINEAGE_REANCHOR_SCANNER_DELTA_PATHS = Object.freeze([
   'scripts/migrate-observed-shape-readers.mjs',
 ]);
 
+/**
+ * The schema-18 → 19 delta: THREE paths — the bookkeeping set and nothing else.
+ *
+ * ⛔ MEASURED, NEVER LISTED. Each of the ELEVEN governed detector inputs was hashed
+ * against the PREDECESSOR'S OWN RECORDED MANIFEST at the committed retirement BEFORE a
+ * byte of this rung was written. Exactly one came back MOVED —
+ * `check-observed-shape-readers.mjs`, which carries the retirement itself — and the other
+ * ten byte-identical, `package.json` and `package-lock.json` among them, measured rather
+ * than asserted because any `package.json` byte is itself a mint trigger. The other two
+ * paths below are this rung's own bookkeeping, and the set was re-measured after it was
+ * written, because writing it changes `migrate-observed-shape-readers.mjs`, which is
+ * itself a member. The declared set is a FIXED POINT of its own measurement. A
+ * mis-declared delta set is how rung 10 → 11 became permanently unmigratable.
+ *
+ *   - `check-observed-shape-readers.mjs` — THE SUBJECT: the retired entry itself, the
+ *     re-triage docblock that now records both of the row's moves, the register's `_doc`
+ *     header, and the live-validator binding moving from `validateSchema18Baseline` to
+ *     `validateSchema19Baseline`;
+ *   - `observed-shape-baseline.mjs` — the 18 → 19 bump, the retired-18 constant and its
+ *     re-bound validator;
+ *   - `migrate-observed-shape-readers.mjs` — this rung.
+ *
+ * ⛔ THREE RATHER THAN FOUR, for the same reason 15 → 16 and 17 → 18 were three: the
+ * subject is one of the bookkeeping files. An extra path here, or one of these three
+ * remaining byte-identical, is a different migration and fails closed.
+ */
+export const EXEMPTION_RETIREMENT_SCANNER_DELTA_PATHS = Object.freeze([
+  'scripts/check-observed-shape-readers.mjs',
+  'scripts/lib/observed-shape-baseline.mjs',
+  'scripts/migrate-observed-shape-readers.mjs',
+]);
+
+/**
+ * The 19 → 20 delta — the bookkeeping set, THREE paths:
+ *   - `check-observed-shape-readers.mjs` — the bank fence (`bankOf`, `assertBankTwins`,
+ *     the write reading the literal module), the live-validator binding moving from
+ *     `validateSchema19Baseline` to `validateSchema20Baseline`, the register's `_doc`
+ *     header and the schema index;
+ *   - `observed-shape-baseline.mjs` — the 19 → 20 bump, the retired-19 constant and its
+ *     re-bound validator;
+ *   - `migrate-observed-shape-readers.mjs` — this rung and `DECLARED_BANK_BY_TARGET`.
+ *
+ * ⛔ THREE RATHER THAN FOUR, as 15 → 16, 17 → 18 and 18 → 19 were three: the subject is
+ * the write, which lives in a bookkeeping file. The literal module the write reads is a
+ * test-side file and NOT a governed input, by design (a bank shrink must stay a hand
+ * edit, not a rung). An extra path here, or one of these three remaining byte-identical,
+ * is a different migration and fails closed.
+ */
+export const BANK_FENCE_SCANNER_DELTA_PATHS = Object.freeze([
+  'scripts/check-observed-shape-readers.mjs',
+  'scripts/lib/observed-shape-baseline.mjs',
+  'scripts/migrate-observed-shape-readers.mjs',
+]);
+
+/**
+ * The 20 → 21 delta — the same bookkeeping set, THREE paths:
+ *   - `check-observed-shape-readers.mjs` — the live-validator binding moving from
+ *     `validateSchema20Baseline` to `validateSchema21Baseline`, the register's `_doc`
+ *     header (which now states what the rung admits and why the other two rows stay
+ *     ordinary) and the schema index;
+ *   - `observed-shape-baseline.mjs` — the 20 → 21 bump, the retired-20 constant and its
+ *     re-bound validator;
+ *   - `migrate-observed-shape-readers.mjs` — this rung and its declared post-bank.
+ *
+ * ⛔ THE NEW READER IS NOT IN THIS SET, and that is the whole point of it being a SUBJECT
+ * file rather than a detector one: `src/components/new/relationshipsDeskRead.js` is scanned,
+ * not scanning. It moves `sourceTreeDigest` and `scanTreeDigest`, which the transition
+ * records on its own; the DETECTOR delta is these three and no more.
+ */
+export const RELATIONSHIPS_MOUNT_SCANNER_DELTA_PATHS = Object.freeze([
+  'scripts/check-observed-shape-readers.mjs',
+  'scripts/lib/observed-shape-baseline.mjs',
+  'scripts/migrate-observed-shape-readers.mjs',
+]);
+
+/**
+ * The 21 → 22 delta — the same bookkeeping set, THREE paths:
+ *   - `check-observed-shape-readers.mjs` — the live-validator binding moving from
+ *     `validateSchema21Baseline` to `validateSchema22Baseline`, the register's `_doc`
+ *     header (which now states what the rung moves, what it deletes, and why the roster
+ *     does not move with it) and the schema index;
+ *   - `observed-shape-baseline.mjs` — the 21 → 22 bump, the retired-21 constant and its
+ *     re-bound validator;
+ *   - `migrate-observed-shape-readers.mjs` — this rung and its declared post-bank.
+ *
+ * ⛔ THE MOVED READER AND THE VIEW MODEL ARE NOT IN THIS SET, for the reason rung 21 spelled
+ * for the reader's first home: `src/domain/display/stateProse/relationshipsDeskRead.js` and
+ * `src/pdf/lib/viewModel.js` are SUBJECT files, scanned rather than scanning. They move
+ * `sourceTreeDigest` and `scanTreeDigest`, which the transition records on its own; the
+ * DETECTOR delta is these three and no more.
+ */
+export const DOMAIN_READER_SCANNER_DELTA_PATHS = Object.freeze([
+  'scripts/check-observed-shape-readers.mjs',
+  'scripts/lib/observed-shape-baseline.mjs',
+  'scripts/migrate-observed-shape-readers.mjs',
+]);
+
 export const BANKED_EXPLAINED_WRITER_SCANNER_INPUT_PATHS = Object.freeze([
   'package-lock.json',
   'package.json',
@@ -788,6 +1198,14 @@ const STRESS_TOPOLOGY_SCANNER_TRANSITION_POLICY =
   'schema-16-to-17-exact-scanner-transition-v1';
 const LINEAGE_REANCHOR_SCANNER_TRANSITION_POLICY =
   'schema-17-to-18-exact-scanner-transition-v1';
+const EXEMPTION_RETIREMENT_SCANNER_TRANSITION_POLICY =
+  'schema-18-to-19-exact-scanner-transition-v1';
+const BANK_FENCE_SCANNER_TRANSITION_POLICY =
+  'schema-19-to-20-exact-scanner-transition-v1';
+const RELATIONSHIPS_MOUNT_SCANNER_TRANSITION_POLICY =
+  'schema-20-to-21-exact-scanner-transition-v1';
+const DOMAIN_READER_SCANNER_TRANSITION_POLICY =
+  'schema-21-to-22-exact-scanner-transition-v1';
 const CORPUS_COVERAGE_SCANNER_TRANSITION_POLICY =
   'schema-7-to-8-exact-scanner-transition-v1';
 const EPOCH_DARK_CORPUS_SCANNER_TRANSITION_POLICY =
@@ -824,6 +1242,10 @@ export const LEAF_MIGRATION_PREDECESSOR = Object.freeze({
   [COMPANION_GATE_TARGET_SCHEMA]: STABLE_CORE_TARGET_SCHEMA,
   [STRESS_TOPOLOGY_TARGET_SCHEMA]: COMPANION_GATE_TARGET_SCHEMA,
   [LINEAGE_REANCHOR_TARGET_SCHEMA]: STRESS_TOPOLOGY_TARGET_SCHEMA,
+  [EXEMPTION_RETIREMENT_TARGET_SCHEMA]: LINEAGE_REANCHOR_TARGET_SCHEMA,
+  [BANK_FENCE_TARGET_SCHEMA]: EXEMPTION_RETIREMENT_TARGET_SCHEMA,
+  [RELATIONSHIPS_MOUNT_TARGET_SCHEMA]: BANK_FENCE_TARGET_SCHEMA,
+  [DOMAIN_READER_TARGET_SCHEMA]: RELATIONSHIPS_MOUNT_TARGET_SCHEMA,
 });
 
 /**
@@ -866,6 +1288,22 @@ const LEAF_PREDECESSOR_VALIDATOR = Object.freeze({
   // RETIRED literal from this rung onward, so this entry keeps validating schema 17
   // as schema 17 after the live number moves past it.
   [STRESS_TOPOLOGY_TARGET_SCHEMA]: validateSchema17Baseline,
+  // The schema-19 rung's own predecessor. `validateSchema18Baseline` is bound to the
+  // RETIRED literal from this rung onward, so this entry keeps validating schema 18
+  // as schema 18 after the live number moves past it.
+  [LINEAGE_REANCHOR_TARGET_SCHEMA]: validateSchema18Baseline,
+  // The schema-20 rung's own predecessor. `validateSchema19Baseline` is bound to the
+  // RETIRED literal from this rung onward, so this entry keeps validating schema 19
+  // as schema 19 after the live number moves past it.
+  [EXEMPTION_RETIREMENT_TARGET_SCHEMA]: validateSchema19Baseline,
+  // The schema-21 rung's own predecessor. `validateSchema20Baseline` is bound to the
+  // RETIRED literal from this rung onward, so this entry keeps validating schema 20
+  // as schema 20 after the live number moves past it.
+  [BANK_FENCE_TARGET_SCHEMA]: validateSchema20Baseline,
+  // The schema-22 rung's own predecessor. `validateSchema21Baseline` is bound to the
+  // RETIRED literal from this rung onward, so this entry keeps validating schema 21
+  // as schema 21 after the live number moves past it.
+  [RELATIONSHIPS_MOUNT_TARGET_SCHEMA]: validateSchema21Baseline,
 });
 
 const RETIRED_EXACT_MIGRATION_KIND = `observed-shape-schema-2-to-${RETIRED_EXACT_TARGET_SCHEMA}-migration`;
@@ -1332,6 +1770,57 @@ const SCANNER_TRANSITION_BY_TARGET = new Map([
     // which are not subject paths at all, so the digest cannot move and the report's
     // `unscannedMovement` is null. The permission is carried because the class is
     // lawful, not because this rung exercises it.
+    reviewableUnscannedMovement: true,
+  })],
+  [EXEMPTION_RETIREMENT_TARGET_SCHEMA, Object.freeze({
+    deltaPaths: EXEMPTION_RETIREMENT_SCANNER_DELTA_PATHS,
+    inputPaths: BANKED_EXPLAINED_WRITER_SCANNER_INPUT_PATHS,
+    policy: EXEMPTION_RETIREMENT_SCANNER_TRANSITION_POLICY,
+    // TRUE, matching every rung since 8→9 — the flag is PER-TARGET and never
+    // retroactive. `unscannedInputDigestOf` is the SUBJECT tree minus the SCAN tree, and
+    // the subject tree is `src/**`; this rung touches three files under `scripts/`, which
+    // are not subject paths at all, so the digest cannot move BY THIS RUNG. It is carried
+    // because the ESTATE moved under this rung in the very act that caused it — the lock
+    // controls were deleted from `src/components/` — and a generated or data leaf
+    // re-recorded anywhere in that same landing is exactly the movement targets 9 and 10
+    // declared reviewable. Refusing it would refuse the retirement for a movement that
+    // belongs to the owner's change rather than to the instrument.
+    reviewableUnscannedMovement: true,
+  })],
+  [BANK_FENCE_TARGET_SCHEMA, Object.freeze({
+    deltaPaths: BANK_FENCE_SCANNER_DELTA_PATHS,
+    inputPaths: BANKED_EXPLAINED_WRITER_SCANNER_INPUT_PATHS,
+    policy: BANK_FENCE_SCANNER_TRANSITION_POLICY,
+    // TRUE, matching every rung since 8→9 — the flag is PER-TARGET and never
+    // retroactive. `unscannedInputDigestOf` is the SUBJECT tree minus the SCAN tree, and
+    // the subject tree is `src/**`; this rung touches three files under `scripts/` and a
+    // test-side literal module, none of them subject paths, so the digest cannot move BY
+    // THIS RUNG. The permission is carried because the class is lawful, not because this
+    // rung exercises it.
+    reviewableUnscannedMovement: true,
+  })],
+  [DOMAIN_READER_TARGET_SCHEMA, Object.freeze({
+    deltaPaths: DOMAIN_READER_SCANNER_DELTA_PATHS,
+    inputPaths: BANKED_EXPLAINED_WRITER_SCANNER_INPUT_PATHS,
+    policy: DOMAIN_READER_SCANNER_TRANSITION_POLICY,
+    // TRUE, matching every rung since 8→9 — the flag is PER-TARGET and never retroactive.
+    // `unscannedInputDigestOf` is the SUBJECT tree minus the SCAN tree; this rung touches
+    // three files under `scripts/`, none of them subject paths, and the two source files it
+    // was cut for are plain `.js` modules the scan READS, so they enter the scan tree rather
+    // than the unscanned remainder. The permission is carried because the class is lawful,
+    // not because this rung exercises it.
+    reviewableUnscannedMovement: true,
+  })],
+  [RELATIONSHIPS_MOUNT_TARGET_SCHEMA, Object.freeze({
+    deltaPaths: RELATIONSHIPS_MOUNT_SCANNER_DELTA_PATHS,
+    inputPaths: BANKED_EXPLAINED_WRITER_SCANNER_INPUT_PATHS,
+    policy: RELATIONSHIPS_MOUNT_SCANNER_TRANSITION_POLICY,
+    // TRUE, matching every rung since 8→9 — the flag is PER-TARGET and never retroactive.
+    // `unscannedInputDigestOf` is the SUBJECT tree minus the SCAN tree; this rung touches
+    // three files under `scripts/`, none of them subject paths, and the source file it was
+    // cut for is a plain `.js` module that the scan READS, so it enters the scan tree rather
+    // than the unscanned remainder. The permission is carried because the class is lawful,
+    // not because this rung exercises it.
     reviewableUnscannedMovement: true,
   })],
   [STABLE_CORE_TARGET_SCHEMA, Object.freeze({
@@ -2386,7 +2875,7 @@ export function run(argv = process.argv.slice(2)) {
   // any mismatch into a refusal rather than a silent mode switch.
   const targetSchema = command.targetSchema
     ? Number(command.targetSchema)
-    : (currentPath ? RETIRED_EXACT_TARGET_SCHEMA : LINEAGE_REANCHOR_TARGET_SCHEMA);
+    : (currentPath ? RETIRED_EXACT_TARGET_SCHEMA : DOMAIN_READER_TARGET_SCHEMA);
   if (![RETIRED_EXACT_TARGET_SCHEMA, HEURISTIC_TARGET_SCHEMA, FILTERED_TARGET_SCHEMA,
     SURFACE_FILTERED_TARGET_SCHEMA, BANKED_EXPLAINED_WRITER_TARGET_SCHEMA,
     CORPUS_COVERAGE_TARGET_SCHEMA, EPOCH_DARK_CORPUS_TARGET_SCHEMA,
@@ -2394,8 +2883,14 @@ export function run(argv = process.argv.slice(2)) {
     GENESIS_TIES_TARGET_SCHEMA, DEAD_DEPENDENCY_TARGET_SCHEMA,
     PRESET_LIGHT_TARGET_SCHEMA, STABLE_CORE_TARGET_SCHEMA,
     COMPANION_GATE_TARGET_SCHEMA, STRESS_TOPOLOGY_TARGET_SCHEMA,
-    LINEAGE_REANCHOR_TARGET_SCHEMA].includes(targetSchema)) {
-    throw new Error(`observed-shape --target-schema must be ${LINEAGE_REANCHOR_TARGET_SCHEMA} (live lineage-reanchor leaf),`
+    LINEAGE_REANCHOR_TARGET_SCHEMA, EXEMPTION_RETIREMENT_TARGET_SCHEMA,
+    BANK_FENCE_TARGET_SCHEMA, RELATIONSHIPS_MOUNT_TARGET_SCHEMA,
+    DOMAIN_READER_TARGET_SCHEMA].includes(targetSchema)) {
+    throw new Error(`observed-shape --target-schema must be ${DOMAIN_READER_TARGET_SCHEMA} (live domain-reader leaf),`
+      + ` ${RELATIONSHIPS_MOUNT_TARGET_SCHEMA} (retired relationships-mount leaf),`
+      + ` ${BANK_FENCE_TARGET_SCHEMA} (retired bank-fence leaf),`
+      + ` ${EXEMPTION_RETIREMENT_TARGET_SCHEMA} (retired exemption-retirement leaf),`
+      + ` ${LINEAGE_REANCHOR_TARGET_SCHEMA} (retired lineage-reanchor leaf),`
       + ` ${STRESS_TOPOLOGY_TARGET_SCHEMA} (retired stress-topology leaf),`
       + ` ${COMPANION_GATE_TARGET_SCHEMA} (retired companion-gate leaf),`
       + ` ${STABLE_CORE_TARGET_SCHEMA} (retired stable-core leaf),`

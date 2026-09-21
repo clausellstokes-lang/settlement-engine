@@ -7,13 +7,20 @@
  */
 
 import { lazy, Suspense, useEffect, useMemo, useState } from 'react';
-import { MapPin, MapPinned, Search, GripVertical, PlusCircle } from 'lucide-react';
+import { Lock, MapPin, MapPinned, Search, GripVertical, PlusCircle } from 'lucide-react';
 import { useStore } from '../../store';
 import { formatCount } from '../../domain/formatNumber.js';
 import { BODY, GOLD, GOLD_BG, INK, MUTED, SECOND, BORDER, BORDER2, CARD, CARD_HDR, sans, FS, SP, swatch, EMPTY_VALUE } from '../theme.js';
 import Button from '../primitives/Button.jsx';
 import CampaignEmptyState from './CampaignEmptyState.jsx';
+// THE ONE locked-Realm gate — the same card the phone shows, not a second copy
+// of its words. Static: this palette is itself lazy, and the gate is a leaf
+// (theme + Button + the launch pill), so it costs the palette chunk almost
+// nothing and never drags the dashboard's selectors behind it.
+import RealmLockedGate from './RealmLockedGate.jsx';
 import { threatDisplay, isCalmThreat } from './settlementThreat.js';
+import useIsMobile from '../../hooks/useIsMobile.js';
+import { chromeFontSize, proseFontSize } from '../../design/proseScale.js';
 
 // S2r re-home (C5): InstantWorldEntry — the premium one-click realm composer —
 // was orphaned when the owner's create-page walk fix unmounted its only card
@@ -30,7 +37,11 @@ export default function SettlementPalette({
   saves = [], placements = {}, activeCampaign, onNavigate,
   onCreateCampaign, onSelectCampaign, hasCampaigns = false,
   onKeyboardPlace, announcerRef, onAutoplace,
+  // Entitlement, threaded from WorldMap through the stage. Defaults TRUE so an
+  // isolated mount (tests, harnesses) renders exactly the pre-gate palette.
+  canManageCampaigns = true, tier,
 }) {
+  const mobile = useIsMobile();
   const [query, setQuery] = useState('');
   // F28 → E-I — the placement live region. F28 made Enter honest (it selected
   // and announced guidance instead of promising an impossible drag); E-I makes
@@ -73,13 +84,16 @@ export default function SettlementPalette({
 
   return (
     <div style={{ display: 'flex', flexDirection: 'column', height: '100%', minHeight: 0 }}>
-      {/* Header */}
+      {/* Header. `flexShrink: 0` so the search field keeps its own height when the
+          column is short — a header that can be squeezed is the other half of the
+          clipping class cured below. */}
       <div style={{
+        flexShrink: 0,
         padding: `${SP.sm}px ${SP.md}px`,
         background: CARD_HDR, borderBottom: `1px solid ${BORDER2}`,
       }}>
         <div style={{
-          fontSize: FS.xs, fontWeight: 800, color: SECOND,
+          fontSize: chromeFontSize(FS.xs, mobile), fontWeight: 800, color: SECOND,
           textTransform: 'uppercase', letterSpacing: '0.06em', marginBottom: 6,
         }}>
           {activeCampaign ? activeCampaign.name : 'All Settlements'}
@@ -98,7 +112,7 @@ export default function SettlementPalette({
               width: '100%',
               padding: '6px 8px 6px 26px',
               border: `1px solid ${BORDER}`,
-              fontSize: FS.xs, fontFamily: sans,
+              fontSize: chromeFontSize(FS.xs, mobile), fontFamily: sans,
               background: CARD,
               outline: 'none',
               boxSizing: 'border-box',
@@ -126,40 +140,78 @@ export default function SettlementPalette({
         )}
       </div>
 
-      {/* No-campaign prompt — placement needs an active campaign. This is an
-          ACTIONABLE empty state (P1/P8): it carries a real first click here
-          instead of pointing at the toolbar — a primary "Create a campaign"
-          when none exist, "Select a campaign" when some do. It REUSES the ONE
-          shared CampaignEmptyState recipe (RealmInspector / RealmDashboard),
-          so "no campaign" looks the same on every surface. */}
-      {!activeCampaign && (
-        <div style={{ margin: SP.sm, marginBottom: 0 }}>
-          <CampaignEmptyState
-            lead="Start a campaign to place settlements"
-            onCreateCampaign={onCreateCampaign}
-            onSelectCampaign={onSelectCampaign}
-            hasCampaigns={hasCampaigns}
-          />
-          <div style={{
-            marginTop: SP.xs, padding: `0 ${SP.xs}px`,
-            fontSize: FS.xs, color: BODY, fontFamily: sans, lineHeight: 1.5,
-            textAlign: 'center',
-          }}>
-            A campaign holds your map and its living world. Only canon settlements drop onto the map.
-          </div>
-          {/* S2r re-home (C5): the premium one-click realm composer, subordinate
-              to the Create/Select CTA above it. Self-gates on premium (a
-              non-premium reach fires the pricing moment); lazy, so the composer
-              never enters the palette chunk. isMobile is pinned false — the Realm
-              is desktop-gated, so this sidebar never renders on a phone. */}
-          <Suspense fallback={null}>
-            <InstantWorldEntry isMobile={false} onNavigate={onNavigate} />
-          </Suspense>
-        </div>
-      )}
+      {/* ⛔ ONE SCROLLER, AND EVERYTHING THAT CAN OVERFLOW IS INSIDE IT (the owner,
+          2026-09-19: "note how the See Cartographer and the button for instant generate
+          settlements are cut off and can't be scrolled down to").
 
-      {/* List */}
-      <div style={{ flex: 1, overflowY: 'auto', padding: SP.sm }}>
+          THE DEFECT, AS LAYOUT. This column has a FIXED height (it is `height: 100%` of
+          WorldMap's `calc(100vh - …)` shell) inside an ancestor with `overflow: hidden`
+          (WorldMapStage's panel), and the gate card and the empty state used to sit
+          BETWEEN the header and the only scrolling region — as flex items of the column,
+          not children of the scroller. When their content was taller than the space left,
+          the list's `flex: 1` collapsed toward zero and the cards were themselves squeezed
+          and then clipped by that `overflow: hidden`. Nothing could scroll to them,
+          because the one scroller was BELOW them. Their own last controls — "See
+          Cartographer" and the instant-world entry — were exactly what fell off.
+
+          THE CURE IS STRUCTURAL, NOT A PADDING. The header stays pinned (it is the search
+          field, and it is `flexShrink: 0` so it keeps its own height); everything else
+          moved INSIDE the single scrolling region below, so the column has exactly one
+          overflow and every element in it is reachable by scrolling to the end. */}
+      <div style={{ flex: 1, minHeight: 0, overflowY: 'auto', padding: SP.sm }}>
+        {/* THE DESKTOP GATE. An anon or free viewer cannot hold a campaign at all
+            (useWorldMapCampaignModel hands them an empty list), so the empty state
+            below invited them to "Start a campaign" behind a "Create a campaign"
+            button whose only possible outcome was a toast naming an upgrade with no
+            way to reach it. The phone has been honest about this since the mobile
+            gate landed; the desk had not. Same card, same words, one component. */}
+        {!canManageCampaigns && (
+          <div style={{ marginBottom: SP.sm }}>
+            <RealmLockedGate
+              tier={tier}
+              icon={<Lock size={16} color={GOLD} />}
+              testId="realm-palette-locked"
+              onUpgrade={() => onNavigate?.('pricing')}
+              onSignIn={() => onNavigate?.('signin')}
+            />
+          </div>
+        )}
+
+        {/* No-campaign prompt — placement needs an active campaign. This is an
+            ACTIONABLE empty state (P1/P8): it carries a real first click here
+            instead of pointing at the toolbar — a primary "Create a campaign"
+            when none exist, "Select a campaign" when some do. It REUSES the ONE
+            shared CampaignEmptyState recipe (RealmInspector / RealmDashboard),
+            so "no campaign" looks the same on every surface. Withheld from a
+            non-entitled viewer, who gets the gate above instead of an invitation
+            they cannot accept. */}
+        {!activeCampaign && canManageCampaigns && (
+          <div style={{ marginBottom: SP.sm }}>
+            <CampaignEmptyState
+              lead="Start a campaign to place settlements"
+              onCreateCampaign={onCreateCampaign}
+              onSelectCampaign={onSelectCampaign}
+              hasCampaigns={hasCampaigns}
+            />
+            <div style={{
+              marginTop: SP.xs, padding: `0 ${SP.xs}px`,
+              fontSize: proseFontSize(FS.xs, mobile), color: BODY, fontFamily: sans, lineHeight: 1.5,
+              textAlign: 'center',
+            }}>
+              A campaign holds your map and its living world. Only canon settlements drop onto the map.
+            </div>
+            {/* S2r re-home (C5): the premium one-click realm composer, subordinate
+                to the Create/Select CTA above it. Self-gates on premium (a
+                non-premium reach fires the pricing moment); lazy, so the composer
+                never enters the palette chunk. isMobile is pinned false — the Realm
+                is desktop-gated, so this sidebar never renders on a phone. */}
+            <Suspense fallback={null}>
+              <InstantWorldEntry isMobile={false} onNavigate={onNavigate} />
+            </Suspense>
+          </div>
+        )}
+
+        {/* List */}
         {!filtered.length ? (
           saves.length === 0 ? (
             // Actionable no-settlements empty state: the hint keeps naming the
@@ -170,7 +222,7 @@ export default function SettlementPalette({
               padding: SP.md,
             }}>
               <MapPin size={20} color={MUTED} />
-              <div style={{ fontSize: FS.xs, color: SECOND, fontFamily: sans, lineHeight: 1.5 }}>
+              <div style={{ fontSize: proseFontSize(FS.xs, mobile), color: SECOND, fontFamily: sans, lineHeight: 1.5 }}>
                 No settlements yet. Generate one on the Create tab.
               </div>
               {typeof onNavigate === 'function' && (
@@ -187,7 +239,7 @@ export default function SettlementPalette({
           ) : (
             <div style={{
               padding: SP.md, textAlign: 'center',
-              fontSize: FS.xs, color: MUTED, fontStyle: 'italic',
+              fontSize: chromeFontSize(FS.xs, mobile), color: MUTED, fontStyle: 'italic',
             }}>
               No matches.
             </div>
@@ -234,7 +286,7 @@ export default function SettlementPalette({
         style={{
           padding: `${SP.xs}px ${SP.md}px`,
           borderTop: `1px solid ${BORDER2}`,
-          fontSize: FS.xxs, color: MUTED, fontStyle: 'italic',
+          fontSize: chromeFontSize(FS.xxs, mobile), color: MUTED, fontStyle: 'italic',
           textAlign: 'center',
         }}
       >
@@ -253,6 +305,7 @@ export default function SettlementPalette({
 // here and another in its dossier (P2).
 
 function SettlementCard({ save, placed, onSelect, onHover }) {
+  const mobile = useIsMobile();
   const settlement = save.settlement || {};
   const name = save.name || settlement.name || 'Untitled';
   const tier = save.tier || settlement.tier || EMPTY_VALUE;
@@ -345,7 +398,7 @@ function SettlementCard({ save, placed, onSelect, onHover }) {
             <MapPin size={11} color={GOLD} title="Placed on map" />
           )}
         </div>
-        <div style={{ fontSize: FS.xxs, color: SECOND, marginTop: 1 }}>
+        <div style={{ fontSize: chromeFontSize(FS.xxs, mobile), color: SECOND, marginTop: 1 }}>
           {tier} · {formatCount(pop)}
         </div>
         {(threat || stressLabel) && (
@@ -358,7 +411,7 @@ function SettlementCard({ save, placed, onSelect, onHover }) {
                 // Fill/border use the lighter hue; the LABEL uses the audited
                 // -text step so the word clears 4.5:1 on the card (P7) — the
                 // embattled pill previously rendered its text at 3.43:1.
-                fontSize: FS.xxs, fontWeight: 800,
+                fontSize: chromeFontSize(FS.xxs, mobile), fontWeight: 800,
                 color: threatTone.text,
                 background: `${threatTone.fill}1A`,
                 border: `1px solid ${threatTone.fill}55`,
@@ -372,7 +425,7 @@ function SettlementCard({ save, placed, onSelect, onHover }) {
               <span
                 title={`Active stressor: ${stressLabel}`}
                 style={{
-                  fontSize: FS.xxs, fontWeight: 700,
+                  fontSize: chromeFontSize(FS.xxs, mobile), fontWeight: 700,
                   color: swatch['#8A5A20'],
                   background: 'rgba(196,128,60,0.10)',
                   border: '1px solid rgba(196,128,60,0.30)',

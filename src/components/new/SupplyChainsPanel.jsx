@@ -2,8 +2,12 @@ import React, { useState } from 'react';
 import { FS, swatch, MUTED } from '../theme.js';
 import Button from '../primitives/Button.jsx';
 import useIsMobile from '../../hooks/useIsMobile.js';
+import { chromeFontSize } from '../../design/proseScale.js';
 import { SUPPLY_CHAIN_NEEDS } from '../../data/goods/chains.js';
 import { exactGoodId, goodText } from '../../domain/region/goodsCatalog.js';
+import { tokenCase } from './labelLadder.js';
+import { institutionDisplayName } from '../../domain/display/institutionDisplayName.js';
+import { supplyChainNoteInWords } from '../../domain/display/engineKeysInText.js';
 
 // ── Build a lookup: chainId → full chain definition ──────────────────────────
 const CHAIN_DEFS = {};
@@ -39,7 +43,9 @@ const Arrow = ({ color = '#9c8068' }) => (
 );
 
 // ── Node: resource ────────────────────────────────────────────────────────────
-const ResourceNode = ({ icon, label, depleted, st }) => (
+const ResourceNode = ({ icon, label, depleted, st }) => {
+  const mobile = useIsMobile();
+  return (
   <div style={{
     display: 'flex', alignItems: 'center', gap: 4,
     background: depleted ? '#fdf8ec' : st.bg,
@@ -48,55 +54,65 @@ const ResourceNode = ({ icon, label, depleted, st }) => (
     opacity: depleted ? 0.75 : 1,
   }}>
     {icon && <span style={{ fontSize: FS.md }}>{icon}</span>}
-    <span style={{ fontSize: FS.xs, fontWeight: 700, color: depleted ? '#8a5010' : st.color }}>
+    <span style={{ fontSize: chromeFontSize(FS.xs, mobile), fontWeight: 700, color: depleted ? '#8a5010' : st.color }}>
       {label}{depleted ? ' (depleted)' : ''}
     </span>
   </div>
-);
+  );
+};
 
 // ── Node: institution ─────────────────────────────────────────────────────────
-const InstNode = ({ name, present, st }) => (
+const InstNode = ({ name, present, st }) => {
+  const mobile = useIsMobile();
+  return (
   <div style={{
     display: 'flex', alignItems: 'center', gap: 3,
     background: present ? st.bg : '#f8f5f0',
     border: `1px ${present ? 'solid' : 'dashed'} ${present ? st.border : '#c8b898'}`,
     padding: '3px 8px', flexShrink: 0,
   }}>
-    <span style={{ fontSize: FS.xs, fontWeight: present ? 700 : 400,
+    <span style={{ fontSize: chromeFontSize(FS.xs, mobile), fontWeight: present ? 700 : 400,
       color: present ? st.color : '#9c8068',
       fontStyle: present ? 'normal' : 'italic' }}>
       {name}{!present ? ' (missing)' : ''}
     </span>
   </div>
-);
+  );
+};
 
 // ── Node: import ──────────────────────────────────────────────────────────────
-const ImportNode = ({ label }) => (
+const ImportNode = ({ label }) => {
+  const mobile = useIsMobile();
+  return (
   <div style={{
     display: 'flex', alignItems: 'center', gap: 3,
     background: swatch['#FAF8F4'], border: '1px dashed #a0b0d8',
     padding: '3px 8px', flexShrink: 0,
   }}>
-    <span style={{ fontSize: FS.xs, fontWeight: 600, color: swatch.info }}>Import: {label}</span>
+    <span style={{ fontSize: chromeFontSize(FS.xs, mobile), fontWeight: 600, color: swatch.info }}>Import: {label}</span>
   </div>
-);
+  );
+};
 
 // ── Node: output / export ─────────────────────────────────────────────────────
-const OutputNode = ({ label, isExport }) => (
+const OutputNode = ({ label, isExport }) => {
+  const mobile = useIsMobile();
+  return (
   <div style={{
     display: 'flex', alignItems: 'center', gap: 3,
     background: isExport ? '#f0faf2' : '#faf8f4',
     border: `1px solid ${isExport ? '#88c880' : '#d8c8a8'}`,
     padding: '3px 8px', flexShrink: 0,
   }}>
-    {isExport && <span style={{ fontSize: FS.micro, fontWeight: 800, color: swatch.success }}>↗</span>}
-    <span style={{ fontSize: FS.xs, fontWeight: isExport ? 700 : 500,
+    {isExport && <span style={{ fontSize: chromeFontSize(FS.micro, mobile), fontWeight: 800, color: swatch.success }}>↗</span>}
+    <span style={{ fontSize: chromeFontSize(FS.xs, mobile), fontWeight: isExport ? 700 : 500,
       color: isExport ? '#1a5a28' : '#6b5340' }}>
       {label}
     </span>
-    {isExport && <span style={{ fontSize: FS.micro, fontWeight: 800, color: swatch.success, marginLeft: 2 }}>EXPORT</span>}
+    {isExport && <span style={{ fontSize: chromeFontSize(FS.micro, mobile), fontWeight: 800, color: swatch.success, marginLeft: 2, textTransform: 'uppercase' }}>Export</span>}
   </div>
-);
+  );
+};
 
 // ── Single chain row ──────────────────────────────────────────────────────────
 export function ChainRow({ chain, instNames, primaryExports, mobile }) {
@@ -150,9 +166,9 @@ export function ChainRow({ chain, instNames, primaryExports, mobile }) {
             An unguarded span emitted an empty box that still ate the flex gap. */}
         {chain.resourceIcon && <span style={{ fontSize: FS.sm }}>{chain.resourceIcon}</span>}
         <span style={{ fontSize: FS.sm, fontWeight: 700, color: st.color, flex: 1 }}>{chain.label}</span>
-        {hasExport && <span style={{ fontSize: FS.micro, fontWeight: 800, color: swatch.success, background: swatch['#E8F5EC'], border: '1px solid #a8d8b0', padding: '1px 5px' }}>EXPORT</span>}
-        {missing.length > 0 && <span style={{ fontSize: FS.micro, color: swatch.info, background: swatch['#FAF8F4'], border: '1px solid #a0b0d8', padding: '1px 5px' }}>imported</span>}
-        <span style={{ fontSize: FS.micro, fontWeight: 700, color: st.color }}>{st.dot}</span>
+        {hasExport && <span style={{ fontSize: chromeFontSize(FS.micro, mobile), fontWeight: 800, color: swatch.success, background: swatch['#E8F5EC'], border: '1px solid #a8d8b0', padding: '1px 5px', textTransform: 'uppercase' }}>Export</span>}
+        {missing.length > 0 && <span style={{ fontSize: chromeFontSize(FS.micro, mobile), color: swatch.info, background: swatch['#FAF8F4'], border: '1px solid #a0b0d8', padding: '1px 5px' }}>imported</span>}
+        <span style={{ fontSize: chromeFontSize(FS.micro, mobile), fontWeight: 700, color: st.color }}>{st.dot}</span>
       </div>
     );
   }
@@ -188,7 +204,9 @@ export function ChainRow({ chain, instNames, primaryExports, mobile }) {
         {/* Institution nodes */}
         {insts.map((inst, i) => (
           <React.Fragment key={i}>
-            <InstNode name={inst.name} present={inst.present} st={st} />
+            {/* §934.13 — the NODE's word is the display label; `inst.present` above was
+                computed from the raw name against the settlement's raw roster. */}
+            <InstNode name={institutionDisplayName(inst.name)} present={inst.present} st={st} />
             {i < insts.length - 1 && <Arrow color={st.border} />}
           </React.Fragment>
         ))}
@@ -204,10 +222,11 @@ export function ChainRow({ chain, instNames, primaryExports, mobile }) {
         )}
       </div>
 
-      {/* Upstream note */}
+      {/* Upstream note — the generator joins CHAIN IDS into this sentence, so the seam
+          resolves them against the same table the nodes above are drawn from. */}
       {chain.upstreamNote && (
-        <div style={{ marginTop: 4, fontSize: FS.xxs, color: swatch.inkMag3, fontStyle: 'italic' }}>
-          ↑ {chain.upstreamNote}
+        <div style={{ marginTop: 4, fontSize: chromeFontSize(FS.xxs, mobile), color: swatch.inkMag3, fontStyle: 'italic' }}>
+          ↑ {supplyChainNoteInWords(chain.upstreamNote, CHAIN_DEFS)}
         </div>
       )}
     </div>
@@ -235,14 +254,17 @@ function CategoryGroup({ needKey, needLabel, needIcon, needColor, chains, instNa
         }}
       >
         {needIcon && <span style={{ fontSize: FS['14'] }}>{needIcon}</span>}
-        <span style={{ fontSize: FS.sm, fontWeight: 800, color: needColor || '#1c1409', flex: 1,
-          textTransform: 'uppercase', letterSpacing: '0.05em' }}>
-          {needLabel || needKey}
+        {/* THE SAME WORD THE ECONOMICS TAB ALREADY SPEAKS. `EconomicsTab:164` renders this
+            exact `needLabel` through `tokenCase`, so the vocabulary's rung was already
+            settled; this header was the one screen home still shouting it, and the PDF's
+            `SupplyChainFlow` was shouting it too. */}
+        <span style={{ fontSize: FS.sm, fontWeight: 800, color: needColor || '#1c1409', flex: 1 }}>
+          {tokenCase(needLabel || needKey)}
         </span>
-        <span style={{ fontSize: FS.xs, color: MUTED }}>{chains.length} chain{chains.length !== 1 ? 's' : ''}</span>
-        {impaired > 0 && <span style={{ fontSize: FS.micro, fontWeight: 800, color: swatch.danger, background: swatch['#FAF8F4'], border: '1px solid #e8b0b0', padding: '1px 5px' }}>✕ {impaired}</span>}
-        {vulnerable > 0 && <span style={{ fontSize: FS.micro, fontWeight: 800, color: swatch['#8A5010'], background: swatch['#FDF8EC'], border: '1px solid #e0c070', padding: '1px 5px' }}>◐ {vulnerable}</span>}
-        <span style={{ fontSize: FS.micro, color: MUTED }}>{open ? '▲' : '▼'}</span>
+        <span style={{ fontSize: chromeFontSize(FS.xs, mobile), color: MUTED }}>{chains.length} chain{chains.length !== 1 ? 's' : ''}</span>
+        {impaired > 0 && <span style={{ fontSize: chromeFontSize(FS.micro, mobile), fontWeight: 800, color: swatch.danger, background: swatch['#FAF8F4'], border: '1px solid #e8b0b0', padding: '1px 5px' }}>✕ {impaired}</span>}
+        {vulnerable > 0 && <span style={{ fontSize: chromeFontSize(FS.micro, mobile), fontWeight: 800, color: swatch['#8A5010'], background: swatch['#FDF8EC'], border: '1px solid #e0c070', padding: '1px 5px' }}>◐ {vulnerable}</span>}
+        <span style={{ fontSize: chromeFontSize(FS.micro, mobile), color: MUTED }}>{open ? '▲' : '▼'}</span>
       </Button>
 
       {open && (
@@ -326,6 +348,10 @@ export function SupplyChainsPanel({ settlement, eco: ecoProp }) {
 }
 
 function Legend() {
+  // THE PHONE CHROME FLOOR — a legend is decoded at a glance, not read, but the
+  // whole strip runs past forty-five characters, so it is furniture that is long
+  // enough to need the 12px floor rather than the 14px prose one.
+  const mobile = useIsMobile();
   const items = [
     { dot: '●', color: '#1a5a28', label: 'Running' },
     { dot: '◐', color: '#8a5010', label: 'Vulnerable. Upstream imported' },
@@ -334,9 +360,26 @@ function Legend() {
     { text: '↗ EXPORT', color: '#1a5a28', label: 'Exported for income' },
   ];
   return (
-    <div style={{ display: 'flex', gap: 12, flexWrap: 'wrap', fontSize: FS.xxs, color: swatch.inkMag3 }}>
+    // ⛔ THE SIZE BELONGS TO EACH ITEM, NOT TO THE STRIP (review 13). It sat on the
+    // container, so the floor test measured ONE element whose text was all five
+    // labels run together — a 120-character line with two full stops in it, which
+    // is a sentence by every signal an instrument has, and a legend by every
+    // signal a reader has. The `data-sf-chrome` marker was what stopped that
+    // reading, and a marker whose whole job is to contradict the evidence is the
+    // unbounded escape the walker now refuses. Moving the size down to the items
+    // makes the measurement match the thing: five short labels, each glanced at,
+    // none of them long enough to be read. The strip keeps the layout and nothing
+    // else, so it carries no size for anything to measure.
+    //
+    // ⚠ AND NO ITEM CARRIES `data-sf-chrome` EITHER. It would be refused — each one
+    // wraps its own dot glyph, which is an element carrying its own text — and it
+    // was never doing any work: at under forty-five characters a legend item is
+    // below the bound at which the floor test measures anything at all. What keeps
+    // these five at 12px on a phone is `chromeFontSize` and the source census that
+    // demands it, not a declaration to a walker that never looks at them.
+    <div style={{ display: 'flex', gap: 12, flexWrap: 'wrap', color: swatch.inkMag3 }}>
       {items.map((it, i) => (
-        <span key={i} style={{ display: 'flex', alignItems: 'center', gap: 4 }}>
+        <span key={i} style={{ display: 'flex', alignItems: 'center', gap: 4, fontSize: chromeFontSize(FS.xxs, mobile) }}>
           <span style={{ fontWeight: 700, color: it.color }}>{it.dot || it.text}</span>
           {it.label}
         </span>

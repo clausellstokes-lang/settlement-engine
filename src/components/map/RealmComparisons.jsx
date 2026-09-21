@@ -24,6 +24,8 @@ import { useMemo } from 'react';
 import { TIER_ORDER, prosperityRank } from '../../data/constants.js';
 import { warExhaustionStandings } from '../../domain/display/warStatus.js';
 import { BODY, BORDER, BORDER2, CARD, CARD_ALT, FS, GOLD, GREEN, INK, MUTED, RED, SECOND, SP, sans } from '../theme.js';
+import useIsMobile from '../../hooks/useIsMobile.js';
+import { chromeFontSize } from '../../design/proseScale.js';
 
 const WAR_SEGMENTS = Object.freeze([
   { clause: 'at peace', color: GREEN, word: 'at peace' },
@@ -34,11 +36,12 @@ const EXHAUSTION_BANDS = Object.freeze(['near peace', 'war-weary', 'exhausted'])
 
 /** One horizontal stacked bar with its sentence. */
 function BarRow({ label, sentence, segments, total, testid }) {
+  const mobile = useIsMobile();
   return (
     <div data-testid={testid} aria-label={sentence} style={{ display: 'grid', gap: 2 }}>
       <div style={{ display: 'flex', alignItems: 'baseline', gap: 8 }}>
-        <span style={{ color: INK, fontFamily: sans, fontSize: FS.xxs, fontWeight: 800, textTransform: 'capitalize' }}>{label}</span>
-        <span style={{ marginLeft: 'auto', color: MUTED, fontFamily: sans, fontSize: FS.micro, fontWeight: 700 }}>{sentence}</span>
+        <span style={{ color: INK, fontFamily: sans, fontSize: chromeFontSize(FS.xxs, mobile), fontWeight: 800, textTransform: 'capitalize' }}>{label}</span>
+        <span style={{ marginLeft: 'auto', color: MUTED, fontFamily: sans, fontSize: chromeFontSize(FS.micro, mobile), fontWeight: 700 }}>{sentence}</span>
       </div>
       <div style={{ display: 'flex', height: 8, background: BORDER2, overflow: 'hidden' }}>
         {segments.map((seg, i) => seg.count > 0 && (
@@ -50,9 +53,10 @@ function BarRow({ label, sentence, segments, total, testid }) {
 }
 
 function Question({ heading, children }) {
+  const mobile = useIsMobile();
   return (
     <div style={{ border: `1px solid ${BORDER}`, background: CARD, padding: '9px 11px', display: 'grid', gap: 7 }}>
-      <div style={{ color: SECOND, fontFamily: sans, fontSize: FS.xxs, fontWeight: 850, textTransform: 'uppercase', letterSpacing: '0.05em' }}>
+      <div style={{ color: SECOND, fontFamily: sans, fontSize: chromeFontSize(FS.xxs, mobile), fontWeight: 850, textTransform: 'uppercase', letterSpacing: '0.05em' }}>
         {heading}
       </div>
       {children}
@@ -67,6 +71,7 @@ function Question({ heading, children }) {
  * @param {(id: any) => string} [props.nameFor]
  */
 export default function RealmComparisons({ rows = [], worldState = null, nameFor = (id) => String(id) }) {
+  const mobile = useIsMobile();
   const byTier = useMemo(() => {
     const map = new Map();
     for (const row of rows) {
@@ -141,7 +146,7 @@ export default function RealmComparisons({ rows = [], worldState = null, nameFor
           ))}
         </Question>
       )}
-      <div style={{ color: BODY, fontFamily: sans, fontSize: FS.micro, fontStyle: 'italic', background: CARD_ALT, padding: '4px 8px' }}>
+      <div style={{ color: BODY, fontFamily: sans, fontSize: chromeFontSize(FS.micro, mobile), fontStyle: 'italic', background: CARD_ALT, padding: '4px 8px' }}>
         Each picture answers one question, from the register&apos;s own rows. A quiet ledger asks nothing.
       </div>
     </div>

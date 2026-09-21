@@ -24,20 +24,21 @@ import { Callout } from '../primitives/Callout.jsx';
 import { EditableText, EditableProse } from '../primitives/Editable.jsx';
 import { type, palette, space, pt, swatch } from '../theme.js';
 import { cap, label, hookText, humanize } from '../lib/format.js';
+import { StateProse } from '../primitives/StateProse.jsx';
 
 const FOUNDING_FIELDS = [
-  { key: 'origin',           label: 'ORIGIN' },
-  { key: 'foundedBy',        label: 'FOUNDED BY' },
-  { key: 'initialChallenge', label: 'INITIAL CHALLENGE' },
-  { key: 'overcoming',       label: 'OVERCOMING' },
-  { key: 'stressNote',       label: 'STRESS NOTE' },
+  { key: 'origin',           label: 'Origin' },
+  { key: 'foundedBy',        label: 'Founded by' },
+  { key: 'initialChallenge', label: 'Initial challenge' },
+  { key: 'overcoming',       label: 'Overcoming' },
+  { key: 'stressNote',       label: 'Stress note' },
 ];
 
 // Treat empty/whitespace-only strings as missing so the FOUNDING block doesn't
 // render an empty header strip when the engine emits `{ summary: '' }` etc.
 const nonBlank = (v) => typeof v === 'string' ? v.trim().length > 0 : !!v;
 
-export function HistoryFounding({ settlement, narrativeMode, vm }) {
+export function HistoryFounding({ settlement, narrativeMode, vm, stateProse }) {
   const h = vm.history;
   const events = [...(h.events || [])].sort((a, b) => (a?.yearsAgo ?? 0) - (b?.yearsAgo ?? 0));
   const hasFoundingDetail = FOUNDING_FIELDS.some(f => nonBlank(h.founding?.[f.key]));
@@ -56,6 +57,9 @@ export function HistoryFounding({ settlement, narrativeMode, vm }) {
         {historyHeadline(h)}
       </ChapterHeadline>
 
+      {/* ── The mounted state prose (the screen's ProseBlock positions) ── */}
+      <StateProse stateProse={stateProse} tab="history" />
+
       {/* ── Age + character ──────────────────────────────────── */}
       <View style={{ flexDirection: 'row', gap: 8, marginBottom: space.sm }} wrap={false}>
         <View
@@ -68,7 +72,7 @@ export function HistoryFounding({ settlement, narrativeMode, vm }) {
             alignItems: 'center',
           }}
         >
-          <Text style={{ ...type.label, color: palette.muted, fontSize: pt['7'] }}>SETTLEMENT AGE</Text>
+          <Text style={{ ...type.label_plain, color: palette.muted, fontSize: pt['7'] }}>Settlement age</Text>
           <Text style={{ ...type.numeric_xl, color: palette.ink, marginTop: 2, fontSize: pt['22'] }}>
             {h.age ?? '–'}
           </Text>
@@ -77,8 +81,8 @@ export function HistoryFounding({ settlement, narrativeMode, vm }) {
           </Text>
         </View>
         <View style={{ flex: 1 }}>
-          <Text style={{ ...type.label, color: palette.muted, fontSize: pt['7.5'], marginBottom: 2 }}>
-            HISTORICAL CHARACTER
+          <Text style={{ ...type.label_plain, color: palette.muted, fontSize: pt['7.5'], marginBottom: 2 }}>
+            Historical character
           </Text>
           <EditableProse
             name="history.character"
@@ -92,8 +96,8 @@ export function HistoryFounding({ settlement, narrativeMode, vm }) {
       {/* ── Founding ──────────────────────────────────────────── */}
       {(hasFoundingSummary || hasFoundingDetail) && (
         <View style={{ marginBottom: space.sm }}>
-          <Text style={{ ...type.label, color: palette.gold, fontSize: pt['8'], marginBottom: 3 }}>
-            FOUNDING
+          <Text style={{ ...type.label_plain, color: palette.gold, fontSize: pt['8'], marginBottom: 3 }}>
+            Founding
           </Text>
           {hasFoundingSummary && (
             <Callout tone="gold" kicker="SUMMARY">
@@ -122,7 +126,7 @@ export function HistoryFounding({ settlement, narrativeMode, vm }) {
                   >
                     <Text
                       style={{
-                        ...type.label,
+                        ...type.label_plain,
                         color: palette.muted,
                         fontSize: pt['7.5'],
                         width: 110,
@@ -150,8 +154,8 @@ export function HistoryFounding({ settlement, narrativeMode, vm }) {
       {events.length > 0 && (
         <View style={{ marginBottom: space.sm }}>
           <HairRule />
-          <Text style={{ ...type.label, color: palette.gold, fontSize: pt['8'], marginBottom: 3 }}>
-            HISTORICAL EVENTS · {events.length}
+          <Text style={{ ...type.label_plain, color: palette.gold, fontSize: pt['8'], marginBottom: 3 }}>
+            Historical events · {events.length}
           </Text>
           <Timeline events={events} age={h.age} />
           {events.map((ev, i) => (
@@ -164,8 +168,8 @@ export function HistoryFounding({ settlement, narrativeMode, vm }) {
       {h.tensions?.length > 0 && (
         <View>
           <HairRule />
-          <Text style={{ ...type.label, color: palette.warn, fontSize: pt['8'], marginBottom: 3 }}>
-            LIVE TENSIONS · {h.tensions.length}
+          <Text style={{ ...type.label_plain, color: palette.warn, fontSize: pt['8'], marginBottom: 3 }}>
+            Live tensions · {h.tensions.length}
           </Text>
           {h.tensions.map((t, i) => (
             <TensionRow key={`t-${i}`} tension={t} idx={i} />
@@ -192,7 +196,7 @@ function EventRow({ ev, idx }) {
       wrap={false}
     >
       <View style={{ width: 60, alignItems: 'flex-start' }}>
-        <Text style={{ ...type.label, color: palette.gold, fontSize: pt['7.5'] }}>{yearLabel}</Text>
+        <Text style={{ ...type.label_plain, color: palette.gold, fontSize: pt['7.5'] }}>{yearLabel}</Text>
         {ev.severity && (
           <View style={{ marginTop: 3 }}>
             <Tag tone={sevTone}>{cap(ev.severity)}</Tag>
@@ -230,8 +234,8 @@ function EventRow({ ev, idx }) {
         )}
         {ev.lastingEffects?.length > 0 && (
           <View style={{ marginTop: 2 }}>
-            <Text style={{ ...type.label, fontSize: pt['7'], color: palette.muted, marginBottom: 1 }}>
-              LASTING EFFECTS
+            <Text style={{ ...type.label_plain, fontSize: pt['7'], color: palette.muted, marginBottom: 1 }}>
+              Lasting effects
             </Text>
             {ev.lastingEffects.map((le, j) => (
               <View key={`le-${idx}-${j}`} style={{ flexDirection: 'row', marginBottom: 1 }}>
@@ -249,8 +253,8 @@ function EventRow({ ev, idx }) {
         )}
         {ev.hooks?.length > 0 && (
           <View style={{ marginTop: 2 }}>
-            <Text style={{ ...type.label, fontSize: pt['7'], color: palette.muted, marginBottom: 1 }}>
-              PLOT HOOKS
+            <Text style={{ ...type.label_plain, fontSize: pt['7'], color: palette.muted, marginBottom: 1 }}>
+              Plot hooks
             </Text>
             {ev.hooks.map((hk, j) => (
               <View key={`eh-${idx}-${j}`} style={{ flexDirection: 'row', marginBottom: 1 }}>
@@ -293,7 +297,7 @@ function TensionRow({ tension, idx }) {
       </View>
       {tension.parties?.length > 0 && (
         <Text style={{ ...type.caption, color: palette.muted, fontSize: pt['8'], marginBottom: 2 }}>
-          PARTIES: {tension.parties.map(p => label(p) || humanize(String(p))).join('  vs  ')}
+          Parties: {tension.parties.map(p => label(p) || humanize(String(p))).join('  vs  ')}
         </Text>
       )}
       {tension.description && (
@@ -306,8 +310,8 @@ function TensionRow({ tension, idx }) {
       )}
       {tension.hooks?.length > 0 && (
         <View style={{ marginTop: 3 }}>
-          <Text style={{ ...type.label, fontSize: pt['7'], color: palette.muted, marginBottom: 1 }}>
-            PLOT HOOKS
+          <Text style={{ ...type.label_plain, fontSize: pt['7'], color: palette.muted, marginBottom: 1 }}>
+            Plot hooks
           </Text>
           {tension.hooks.map((hk, j) => (
             <View key={`th-${idx}-${j}`} style={{ flexDirection: 'row', marginBottom: 1 }}>
@@ -360,8 +364,8 @@ function Timeline({ events, age }) {
     <View style={{ marginBottom: 8 }} wrap={false}>
       {/* Axis with end labels */}
       <View style={{ flexDirection: 'row', justifyContent: 'space-between', marginBottom: 2 }}>
-        <Text style={{ ...type.caption, fontSize: pt['7'], color: palette.muted }}>FOUNDING (-{age}y)</Text>
-        <Text style={{ ...type.caption, fontSize: pt['7'], color: palette.muted }}>NOW</Text>
+        <Text style={{ ...type.caption, fontSize: pt['7'], color: palette.muted }}>Founding (-{age}y)</Text>
+        <Text style={{ ...type.caption, fontSize: pt['7'], color: palette.muted }}>Now</Text>
       </View>
       <View style={{ position: 'relative', height: 24 }}>
         {/* Base line */}

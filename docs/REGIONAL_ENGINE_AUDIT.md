@@ -66,7 +66,7 @@
   apply stacks duplicate conditions on the target (`propagation.js` rules + apply path).
 - H8. Stressor spread severity decay is cosmetic: the news/roll say "spreads at 0.58" but the persisted
   stressor carries `max(origin, spread)` = full origin severity, which then drives the target's food
-  math and dossier (`stressors.js:861,879-883`).
+  math and dossier (`stressors.js:776,785` — ⚠ CURED since this audit: the spread now carries `max(SPREAD_SEVERITY_FLOOR, origin × SPREAD_ATTENUATION)`, not `max(origin, spread)`).
 - H9. The world pulse ages regional impacts AFTER queueing the same tick's propagation
   (`applyWorldPulse.js:394-398`): every pulse-created 1-tick delay matures instantly, cascade hops
   arrive a tick early, and the feed logs contradictory queued+ready pairs. (The canon-event path is
@@ -96,10 +96,10 @@
   with no proposal and **no Wizard News** (`relationshipHierarchy.js:61-187`) — the only record is a
   field no UI reads.
 - H16. Symmetric relationships simulate permanently one-directional: raids/subjugation/patronage are
-  locked to the authoring-order edge orientation (`relationshipEvolution.js:1501-1565`) — one side of a
+  locked to the authoring-order edge orientation (`relationshipRuleHelpers.js:405-412`) — one side of a
   war can never be raided; a stronger `to` can never subjugate.
 - H17. The realm-arc re-emission throttle reads the wrong end of the newest-first feed
-  (`advanceCampaignWorld.js:439-447`, `slice(-80)` on a newest-first list): once a campaign exceeds 80
+  (`advanceInterval.js:130`, the MAX_HISTORY=80 ring slice on a newest-first list): once a campaign exceeds 80
   news entries, every long arc re-emits a duplicate major headline **every tick**. Fix: `slice(0, 80)`.
 
 **Unbounded state**
@@ -141,7 +141,7 @@
 - A famine/siege drains population through two unbudgeted paths in the same tick (flow_migration ≤12% +
   population_decline ≤18%, no shared conflict tag) — **verified high-confidence** (evolution).
 - Tier/resource/institution candidates bypass `resolveCandidateConflicts` — their conflictTags are dead
-  wiring; per-settlement budgets don't apply (advanceCampaignWorld.js:356-380).
+  wiring; per-settlement budgets don't apply (pulseKernel.js:1474, the realm-global budget law).
 - Tier hysteresis hole: promotion fires at 0.92×min — inside the demotion-eligible zone; one ineligible
   tick wipes the whole streak (vs economyDrift's decay-not-amnesia) (tierResourceDynamics).
 - Tier promotion reactivation launders corruption impairments that the lifecycle reopen path

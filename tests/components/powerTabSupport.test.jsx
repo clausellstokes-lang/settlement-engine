@@ -103,6 +103,67 @@ describe('PowerTab — the institution-support web (on THE POWERS card)', () => 
   });
 });
 
+// ── THE BASIS IS A CAPTION, NOT A ROW (2026-09-18) ──────────────────────────
+// `why` is keyed by the BACKING FACTION'S archetype, so every aligned institution
+// under one power carries the same sentence. Printed per row it read as a stutter:
+// a merchant power with three houses behind it said "A commercial house of this
+// power" three times down the card. The phrase now captions the group.
+describe('PowerTab — the support basis is said once per group', () => {
+  const manyAligned = () => ({
+    id: 'settlement.stutterburg',
+    name: 'Stutterburg',
+    powerStructure: {
+      factions: [
+        { faction: 'Merchant Guild', power: 70, category: 'economy', desc: 'The traders who hold the market.' },
+      ],
+    },
+    institutions: [
+      { name: 'Grand Market', priorityCategory: 'economy' },
+      { name: 'Coin Hall', priorityCategory: 'economy' },
+      { name: 'Wool Exchange', priorityCategory: 'economy' },
+    ],
+  });
+
+  it('says the aligned phrase ONCE for a bucket holding several aligned institutions', () => {
+    const s = manyAligned();
+    render(<PowerTab powerStructure={s.powerStructure} settlement={s} narrativeNote={null} />);
+    const card = screen.getByRole('button', { name: 'Merchant Guild power details' });
+    fireEvent.click(card);
+    const detail = document.getElementById(card.getAttribute('aria-controls'));
+
+    // All three houses are listed…
+    expect(within(detail).getByText('Grand Market')).toBeTruthy();
+    expect(within(detail).getByText('Coin Hall')).toBeTruthy();
+    expect(within(detail).getByText('Wool Exchange')).toBeTruthy();
+    // …under exactly one copy of the basis phrase.
+    expect(within(detail).getAllByText(SUPPORT_BASIS.aligned.merchant)).toHaveLength(1);
+  });
+
+  it('a bucket carrying both bases captions each group separately', () => {
+    // The Watch raised the Barracks (founded) and backs the Armoury (aligned).
+    const s = {
+      id: 'settlement.bothburg',
+      name: 'Bothburg',
+      powerStructure: {
+        factions: [{ faction: 'The Watch', power: 60, category: 'military', desc: 'The guards who hold the walls.' }],
+      },
+      institutions: [
+        { name: 'City Barracks', priorityCategory: 'military', factionSource: 'The Watch' },
+        { name: 'The Armoury', priorityCategory: 'military' },
+      ],
+    };
+    render(<PowerTab powerStructure={s.powerStructure} settlement={s} narrativeNote={null} />);
+    const card = screen.getByRole('button', { name: 'The Watch power details' });
+    fireEvent.click(card);
+    const detail = document.getElementById(card.getAttribute('aria-controls'));
+
+    expect(within(detail).getAllByText(SUPPORT_BASIS.founded)).toHaveLength(1);
+    expect(within(detail).getAllByText(SUPPORT_BASIS.aligned.military)).toHaveLength(1);
+    expect(within(detail).getByText('City Barracks')).toBeTruthy();
+    expect(within(detail).getByText('The Armoury')).toBeTruthy();
+  });
+});
+
 // ── §815 — THE RULING CHAIN: power → faction → named NPC, honest absence ─────
 describe('PowerTab — the §815 ruling chain ("Who runs this place?")', () => {
   const base = () => ({

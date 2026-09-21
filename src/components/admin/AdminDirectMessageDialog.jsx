@@ -2,6 +2,8 @@
 import { useEffect, useId, useState } from 'react';
 import { ConfirmDialog } from '../primitives/Dialog.jsx';
 import { INK, MUTED, BODY, BORDER, CARD_HDR, sans, SP, FS, swatch } from '../theme.js';
+import useIsMobile from '../../hooks/useIsMobile.js';
+import { chromeFontSize } from '../../design/proseScale.js';
 
 export const DIRECT_MESSAGE_TEMPLATES = Object.freeze({
   moderation_notice: {
@@ -52,6 +54,7 @@ const fieldStyle = {
 };
 
 export default function AdminDirectMessageDialog({ open, recipientLabel, onCancel, onSend }) {
+  const mobile = useIsMobile();
   const [template, setTemplate] = useState('moderation_notice');
   const [subject, setSubject] = useState('');
   const [body, setBody] = useState('');
@@ -112,7 +115,7 @@ export default function AdminDirectMessageDialog({ open, recipientLabel, onCance
       extra={(
         <div style={{ display: 'flex', flexDirection: 'column', gap: SP.sm, marginBottom: SP.md }}>
           {/* eslint-disable-next-line jsx-a11y/label-has-for -- associated via htmlFor/id; nesting would break the composer layout */}
-          <label htmlFor={templateId} style={{ color: MUTED, fontFamily: sans, fontSize: FS.xs, fontWeight: 700 }}>
+          <label htmlFor={templateId} style={{ color: MUTED, fontFamily: sans, fontSize: chromeFontSize(FS.xs, mobile), fontWeight: 700 }}>
             Template
           </label>
           <select id={templateId} aria-label="Notice template" value={template} onChange={(event) => selectTemplate(event.target.value)} style={fieldStyle}>
@@ -122,19 +125,19 @@ export default function AdminDirectMessageDialog({ open, recipientLabel, onCance
           </select>
 
           {/* eslint-disable-next-line jsx-a11y/label-has-for -- associated via htmlFor/id; nesting would break the composer layout */}
-          <label htmlFor={subjectId} style={{ color: MUTED, fontFamily: sans, fontSize: FS.xs, fontWeight: 700 }}>
+          <label htmlFor={subjectId} style={{ color: MUTED, fontFamily: sans, fontSize: chromeFontSize(FS.xs, mobile), fontWeight: 700 }}>
             Subject
           </label>
           <input id={subjectId} aria-label="Notice subject" maxLength={160} value={subject} onChange={(event) => setSubject(event.target.value)} style={fieldStyle} />
 
           {/* eslint-disable-next-line jsx-a11y/label-has-for -- associated via htmlFor/id; nesting would break the composer layout */}
-          <label htmlFor={bodyId} style={{ color: MUTED, fontFamily: sans, fontSize: FS.xs, fontWeight: 700 }}>
+          <label htmlFor={bodyId} style={{ color: MUTED, fontFamily: sans, fontSize: chromeFontSize(FS.xs, mobile), fontWeight: 700 }}>
             Message
           </label>
           <textarea id={bodyId} aria-label="Notice message" maxLength={10000} rows={7} value={body} onChange={(event) => setBody(event.target.value)} style={{ ...fieldStyle, resize: 'vertical' }} />
 
           <div aria-label="Account message preview" style={{ padding: SP.md, border: `1px solid ${BORDER}`, background: CARD_HDR }}>
-            <div style={{ color: MUTED, fontFamily: sans, fontSize: FS.xs, fontWeight: 700, textTransform: 'uppercase' }}>Account preview · {messageClass}</div>
+            <div style={{ color: MUTED, fontFamily: sans, fontSize: chromeFontSize(FS.xs, mobile), fontWeight: 700, textTransform: 'uppercase' }}>Account preview · {messageClass}</div>
             <div style={{ marginTop: SP.xs, color: INK, fontFamily: sans, fontSize: FS.sm, fontWeight: 700 }}>{subject || 'Subject'}</div>
             <div style={{ marginTop: SP.xs, color: BODY, fontFamily: sans, fontSize: FS.sm, lineHeight: 1.5, whiteSpace: 'pre-wrap' }}>{body || 'Message'}</div>
           </div>

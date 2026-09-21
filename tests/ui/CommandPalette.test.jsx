@@ -137,8 +137,18 @@ describe('CommandPalette — the jump bar', () => {
       // button element itself, nothing nested.
       expect(o.querySelector('button')).toBeNull();
     }
-    // No element in the palette competes with the input for Tab.
-    expect(screen.queryAllByRole('button')).toHaveLength(0);
+    // ⭐ NO ELEMENT IN THE PALETTE COMPETES WITH THE INPUT FOR TAB — which is the claim,
+    // and it is now measured rather than proxied. A count of buttons stopped standing for it
+    // the day §934.31's close control landed: the dialog-exit walker requires a labelled ×
+    // on EVERY role="dialog" with no exemption list, so "zero buttons" and "one tab stop"
+    // became different statements. Sequential focusability is what the claim was always
+    // about, so that is what this reads.
+    const dialog = screen.getByRole('dialog');
+    const sequential = [...dialog.querySelectorAll('a[href], button, input, select, textarea, [tabindex]')]
+      .filter((el) => Number(el.getAttribute('tabindex') ?? '0') >= 0);
+    expect(sequential).toEqual([screen.getByRole('combobox')]);
+    // …and the door is still there and still named — out of the Tab order is not missing.
+    expect(screen.getByRole('button', { name: /\bClose\b/ }).getAttribute('tabindex')).toBe('-1');
   });
 
   it('aria-activedescendant is clamped when results hydrate after arrowing on an empty list (Enter stays live)', async () => {

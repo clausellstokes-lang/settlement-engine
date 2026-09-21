@@ -21,6 +21,8 @@ import { ensureRegionalGraph, isRegionalImpactAvailable } from '../../domain/reg
 import { useStore } from '../../store/index.js';
 import IconButton from '../primitives/IconButton.jsx';
 import { BORDER, BODY, CARD, FS, GOLD, GOLD_BG, INK, MUTED, SECOND, sans, swatch } from '../theme.js';
+import useIsMobile from '../../hooks/useIsMobile.js';
+import { chromeFontSize } from '../../design/proseScale.js';
 
 function kindLabel(kind) {
   return String(kind || 'regional impact').replace(/_/g, ' ');
@@ -46,6 +48,7 @@ function statusLabel(status) {
 }
 
 export default function RegionalImpactInbox({ saveId, onApplied }) {
+  const mobile = useIsMobile();
   const campaigns = useStore(s => s.campaigns);
   const applyQueuedRegionalImpact = useStore(s => s.applyQueuedRegionalImpact);
   const ignoreQueuedRegionalImpact = useStore(s => s.ignoreQueuedRegionalImpact);
@@ -108,10 +111,10 @@ export default function RegionalImpactInbox({ saveId, onApplied }) {
       marginBottom: 12,
     }}>
       <div style={{ display: 'flex', alignItems: 'center', gap: 7, marginBottom: 9 }}>
-        <div style={{ fontSize: FS.xs, fontWeight: 800, color: INK, fontFamily: sans, textTransform: 'uppercase', letterSpacing: '0.06em' }}>
+        <div style={{ fontSize: chromeFontSize(FS.xs, mobile), fontWeight: 800, color: INK, fontFamily: sans, textTransform: 'uppercase', letterSpacing: '0.06em' }}>
           Regional Causality
         </div>
-        <span style={{ marginLeft: 'auto', fontSize: FS.xxs, color: SECOND, fontFamily: sans }}>
+        <span style={{ marginLeft: 'auto', fontSize: chromeFontSize(FS.xxs, mobile), color: SECOND, fontFamily: sans }}>
           {context.campaign.name}
         </span>
       </div>
@@ -137,15 +140,15 @@ export default function RegionalImpactInbox({ saveId, onApplied }) {
               >
                 <div style={{ display: 'flex', alignItems: 'center', gap: 4, flexShrink: 0 }}>
                   <div style={{ width: 7, height: 7, borderRadius: '50%', background: color }} />
-                  <span style={{ fontSize: FS.xxs, fontWeight: 700, color, fontFamily: sans, textTransform: 'lowercase' }}>
+                  <span style={{ fontSize: chromeFontSize(FS.xxs, mobile), fontWeight: 700, color, fontFamily: sans, textTransform: 'lowercase' }}>
                     {statusLabel(impact.status)}
                   </span>
                 </div>
                 <div style={{ flex: 1, minWidth: 0 }}>
-                  <div style={{ fontSize: FS.xs, color: BODY, fontWeight: 800, fontFamily: sans }}>
+                  <div style={{ fontSize: chromeFontSize(FS.xs, mobile), color: BODY, fontWeight: 800, fontFamily: sans }}>
                     {kindLabel(impact.kind)}
                   </div>
-                  <div style={{ fontSize: FS.xxs, color: BODY, fontFamily: sans, lineHeight: 1.35 }}>
+                  <div style={{ fontSize: chromeFontSize(FS.xxs, mobile), color: BODY, fontFamily: sans, lineHeight: 1.35 }}>
                     {sourceName} · {goodsLabel(impact)} · {Math.round((impact.severity || 0) * 100)}%
                     {impact.status === 'queued' && !available && delayTicks > 0 && (
                       <span style={{ color: SECOND, fontWeight: 700 }}> · matures in {delayTicks} tick{delayTicks === 1 ? '' : 's'} (advance the realm to apply)</span>
@@ -190,7 +193,7 @@ export default function RegionalImpactInbox({ saveId, onApplied }) {
       {context.outgoingEvents.length > 0 && (
         <div style={{ marginTop: context.incoming.length ? 10 : 0, display: 'flex', flexDirection: 'column', gap: 5 }}>
           {context.outgoingEvents.map(event => (
-            <div key={event.id} style={{ display: 'flex', alignItems: 'center', gap: 7, fontSize: FS.xxs, color: SECOND, fontFamily: sans }}>
+            <div key={event.id} style={{ display: 'flex', alignItems: 'center', gap: 7, fontSize: chromeFontSize(FS.xxs, mobile), color: SECOND, fontFamily: sans }}>
               <span style={{ color: INK, fontWeight: 700 }}>{event.sourceEvent?.type || 'Regional event'}</span>
               <span>sent {event.impactIds?.length || 0} impact{(event.impactIds?.length || 0) === 1 ? '' : 's'}</span>
             </div>

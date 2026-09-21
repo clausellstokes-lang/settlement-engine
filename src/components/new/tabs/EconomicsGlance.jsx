@@ -79,6 +79,9 @@
 import { FS, swatch, MUTED } from '../../theme.js';
 import { formatCount } from '../../../domain/formatNumber.js';
 import { drawnAtMount } from '../../../domain/display/stateProse/dossierMounts.js';
+import ProseBlock from '../ProseBlock.jsx'; // the shared one-paragraph renderer (see DeskLines)
+import useIsMobile from '../../../hooks/useIsMobile.js';
+import { chromeFontSize, proseFontSize } from '../../../design/proseScale.js';
 
 /**
  * The prosperity header and the at-a-glance tile row.
@@ -104,6 +107,7 @@ export default function EconomicsGlance({
   granary, granaryColor, treasury,
   headerRung = null, economyRung = null, foodRung = null, seasonRung = null,
 }) {
+  const mobile = useIsMobile();
   const header = drawnAtMount('economics.prosperityHeader', headerRung);
 
   return (
@@ -113,21 +117,21 @@ export default function EconomicsGlance({
         <div style={{display:'flex',alignItems:'flex-start',justifyContent:'space-between',gap:12,flexWrap:'wrap'}}>
           <div>
             <div style={{fontSize: FS['22'],fontWeight:700,color:prosColor,lineHeight:1.1,marginBottom:3}}>{eco.prosperity}</div>
-            <div style={{fontSize:FS.sm,color:swatch.inkMag3}}>{eco.economicComplexity}</div>
+            <div style={{fontSize:proseFontSize(FS.sm,mobile),color:swatch.inkMag3}}>{eco.economicComplexity}</div>
           </div>
           <div style={{display:'flex',gap:8,flexWrap:'wrap',alignItems:'flex-start'}}>
             <div style={{textAlign:'center',background:swatch['#FAF8F4'],border:'1px solid #d8c090',padding:'6px 12px'}}>
-              <div style={{fontSize:FS.micro,fontWeight:700,color:MUTED,textTransform:'uppercase',letterSpacing:'0.06em',marginBottom:2}}>Trade</div>
+              <div style={{fontSize:chromeFontSize(FS.micro, mobile),fontWeight:700,color:MUTED,marginBottom:2}}>Trade</div>
               <div style={{fontSize:FS.sm,fontWeight:600,color:swatch.inkMag,textTransform:'capitalize'}}>{tradeLabel}</div>
             </div>
             {ecoScore>0&&<div style={{textAlign:'center',background:swatch['#FAF8F4'],border:'1px solid #d8c090',padding:'6px 12px'}}>
-              <div style={{fontSize:FS.micro,fontWeight:700,color:MUTED,textTransform:'uppercase',letterSpacing:'0.06em',marginBottom:2}}>Output</div>
+              <div style={{fontSize:chromeFontSize(FS.micro, mobile),fontWeight:700,color:MUTED,marginBottom:2}}>Output</div>
               <div style={{fontSize:FS.md,fontWeight:700,color:ecoScore>=60?'#1a5a28':ecoScore>=35?'#a0762a':'#8b1a1a'}}>{ecoScore}/100</div>
             </div>}
           </div>
         </div>
-        {eco.situationDesc&&<p style={{fontSize:FS.md,color:swatch.inkMag2,lineHeight:1.65,margin:'10px 0 0',borderTop:'1px solid #e0c890',paddingTop:8}}>{eco.situationDesc}</p>}
-        {header?.sentence&&<p style={{fontSize:FS.md,color:swatch.inkMag2,lineHeight:1.65,margin:'8px 0 0',fontStyle:'italic'}}>{header.sentence}</p>}
+        {eco.situationDesc&&<p style={{fontSize:proseFontSize(FS.md,mobile),color:swatch.inkMag2,lineHeight:1.65,margin:'10px 0 0',borderTop:'1px solid #e0c890',paddingTop:8}}>{eco.situationDesc}</p>}
+        {header?.sentence&&<p style={{fontSize:proseFontSize(FS.md,mobile),color:swatch.inkMag2,lineHeight:1.65,margin:'8px 0 0',fontStyle:'italic'}}>{header.sentence}</p>}
       </div>
 
       {/* ── AT-A-GLANCE TILES ───────────────────────────────────────────── */}
@@ -138,10 +142,10 @@ export default function EconomicsGlance({
           ...(granary.available?[{label:'Season',value:granary.seasonTitle,sub:granary.detail,color:granaryColor,drawn:drawnAtMount('economics.seasonTile',seasonRung)}]:[]), ...(treasury.available?[{label:'Treasury',value:treasury.band,color:treasury.color,drawn:null}]:[]),
         ].map(({label,value,sub,color,drawn})=>(
           <div key={label} style={{flex:'1 1 120px',background:swatch['#FAF8F4'],border:`1px solid ${color}30`,borderTop:`3px solid ${color}`,padding:'8px 10px',minWidth:0}}>
-            <div style={{fontSize:FS.xxs,fontWeight:700,color,textTransform:'uppercase',letterSpacing:'0.05em',marginBottom:3}}>{label}</div>
+            <div style={{fontSize:chromeFontSize(FS.xxs, mobile),fontWeight:700,color,marginBottom:3}}>{label}</div>
             <div style={{fontSize:FS.md,fontWeight:700,color:swatch.inkMag,lineHeight:1.2,marginBottom:sub?2:0}}>{value}</div>
-            {sub&&<div style={{fontSize:FS.xxs,color:MUTED,lineHeight:1.3}}>{sub}</div>}
-            {drawn?.sentence&&<div style={{fontSize:FS.xxs,color:swatch.inkMag2,lineHeight:1.4,marginTop:3,fontStyle:'italic'}}>{drawn.sentence}</div>}
+            {sub&&<div style={{fontSize:chromeFontSize(FS.xxs, mobile),color:MUTED,lineHeight:1.3}}>{sub}</div>}
+            {drawn?.sentence&&<div style={{fontSize:proseFontSize(FS.xxs,mobile),color:swatch.inkMag2,lineHeight:1.4,marginTop:3,fontStyle:'italic'}}>{drawn.sentence}</div>}
           </div>
         ))}
       </div>
@@ -158,20 +162,29 @@ export default function EconomicsGlance({
  * @param {object} props
  * @param {string} props.mount the position id, as the registry spells it
  * @param {ReadonlyArray<object|null>} props.rungs the lenses, in reading order
+ * @param {unknown} [props.settlementName] the town's own name — `settlement.name`. Absent, the
+ *   sentences still join into one paragraph and no opening name is stood down.
+ * @param {unknown} [props.tier] the town's tier token — `settlement.tier`.
  */
-export function DeskLines({ mount, rungs }) {
+export function DeskLines({ mount, rungs, settlementName, tier }) {
   const lines = (rungs || []).map((rung) => drawnAtMount(mount, rung)?.sentence).filter(Boolean);
   if (lines.length === 0) return null;
-  // ⭐ KEYED ON MOUNT + POSITION, never on the sentence (ARCH §4.1, SEAM car 3c). Two lenses
-  // of one position may legitimately draw the SAME line — a pool with one variant left after
-  // anchoring says the same thing twice — and `key={line}` then collides, so React drops one
-  // paragraph and the reader silently loses a lens. The position is what a line IS here, so
-  // the position is its identity.
+  // ⭐ ONE PARAGRAPH, THROUGH THE SHARED RENDERER (owner finding 2026-09-18). Every lens of a
+  // position used to be its own `<p>`, keyed on mount + position because two lenses may
+  // legitimately draw the SAME line and `key={line}` then collided (ARCH §4.1, SEAM car 3c).
+  // That whole class is gone with the list: one paragraph needs no keys, and two identical
+  // sentences now simply both appear in it. The `<p>`'s look is unchanged.
+  //
+  // ⭐ THE TWO NAME PROPS ARE OPTIONAL AND ADDITIVE, which is what let this land after the
+  // renderers. They were deferred at the weave's first landing because all four call sites
+  // (EconomicsTab, ServicesTab, ResourcesTab, DailyLifeTab) belonged to other lanes; they are
+  // threaded now. A caller that omits them still gets the JOIN — one paragraph instead of a
+  // column of one-sentence ones — and simply no stand-down, so nothing here can break on a
+  // call site that has not caught up.
   return (
     <div style={{margin:'0 0 12px'}}>
-      {lines.map((line, position) => (
-        <p key={`${mount}::${position}`} style={{fontSize:FS.md,color:swatch.inkMag2,lineHeight:1.65,margin:'0 0 6px',fontStyle:'italic'}}>{line}</p>
-      ))}
+      <ProseBlock lines={lines} settlementName={settlementName} tier={tier}
+        style={{fontSize:FS.md,color:swatch.inkMag2,lineHeight:1.65,margin:'0 0 6px',fontStyle:'italic'}}/>
     </div>
   );
 }

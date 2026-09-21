@@ -127,18 +127,22 @@ describe('SubstrateTab — the Causes tab names the problem, not its opposite', 
     expect(container.textContent).not.toContain('Acute');
   });
 
-  it('higher-is-better variables still print their raw band word (control)', () => {
+  it('higher-is-better variables still print the causal band word, not the polarity remap (control)', () => {
     const { container } = render(<SubstrateTab settlement={CRISIS} />);
     const words = [...container.querySelectorAll('[data-band]')].map(n => n.textContent);
-    // Every pill is either a raw band word or one of the five lower-is-better
-    // words — nothing else may leak into the vocabulary.
+    // Every pill is either a causal band word or one of the five lower-is-better
+    // words — nothing else may leak into the vocabulary. Both halves are SENTENCE CASE
+    // since the label ladder (2026-09-18): the pill reads a word, `data-band` keeps the
+    // token, and the arms above assert that attribute separately.
     const legal = new Set([
-      'surplus', 'adequate', 'strained', 'critical', 'collapsed',
+      // The pill now reads a WORD, not the token (components/new/labelLadder.js tokenCase);
+      // `data-band` below still carries the machine vocabulary and is asserted separately.
+      'Surplus', 'Adequate', 'Strained', 'Critical', 'Collapsed',
       'Rampant', 'Acute', 'Elevated', 'Contained', 'Negligible',
     ]);
     for (const w of words) expect(legal.has(w), `illegal band word rendered: ${w}`).toBe(true);
-    // And at least one pill still carries a raw (higher-is-better) word.
-    expect(words.some(w => ['surplus', 'adequate', 'strained', 'critical', 'collapsed'].includes(w))).toBe(true);
+    // And at least one pill still carries a higher-is-better word rather than a remap.
+    expect(words.some(w => ['Surplus', 'Adequate', 'Strained', 'Critical', 'Collapsed'].includes(w))).toBe(true);
   });
 
   it('sorts within a shared band by polarity-oriented severity', () => {

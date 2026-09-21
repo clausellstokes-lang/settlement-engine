@@ -267,8 +267,18 @@ function dotRankFor(npc = {}) {
   return 1;
 }
 
-/** @param {import('../settlement.schema.js').SimNpc} npc */
-function inferRoleArchetype(npc = {}) {
+/**
+ * The NPC's simulation archetype, read from its own text: name, label, role, title and
+ * description, first match over NPC_ROLE_ARCHETYPES' insertion order, `civic` by default.
+ *
+ * ⚠ EXPORTED SO A PIN CAN DRIVE THE SHIPPED FUNCTION, not a copy of it. A role label is
+ * display copy that FIVE classifiers read as a substring, and this is the one that lives
+ * furthest from the catalog - a rename proved inert on the other four still moved an NPC's
+ * influenceBasis here (tests/generators/roleCategory.test.js). No behaviour change.
+ *
+ * @param {import('../settlement.schema.js').SimNpc} npc
+ */
+export function inferRoleArchetype(npc = {}) {
   const text = `${npc.name || ''} ${npc.label || ''} ${npc.role || ''} ${npc.title || ''} ${npc.description || ''}`.toLowerCase();
   for (const [role, def] of Object.entries(NPC_ROLE_ARCHETYPES)) {
     if ((def.labels || []).some(label => text.includes(label))) return role;

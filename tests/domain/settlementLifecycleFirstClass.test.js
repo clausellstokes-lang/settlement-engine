@@ -70,7 +70,7 @@ function makeSnapshot(settlements) {
   const items = Object.entries(settlements).map(([id, s]) => ({ id, name: s.name, settlement: s }));
   return {
     settlements: items,
-    byId: new Map(items.map((it) => [String(it.id), it])),
+    byId: new Map(items.map((entry) => [String(entry.id), entry])),
     regionalGraph: { edges: items.length > 1 ? [{ from: items[0].id, to: items[1].id, relationshipType: 'trade_partner' }] : [] },
   };
 }

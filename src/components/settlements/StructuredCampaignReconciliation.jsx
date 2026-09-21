@@ -47,6 +47,8 @@ import {
   ImportProposalRow,
   reconciliationFieldStyle,
 } from './StructuredCampaignReconciliationParts.jsx';
+import useIsMobile from '../../hooks/useIsMobile.js';
+import { chromeFontSize, proseFontSize } from '../../design/proseScale.js';
 
 function readFileText(file) {
   return new Promise((resolve, reject) => {
@@ -62,6 +64,7 @@ export default function StructuredCampaignReconciliation({
   existingSettlements = [],
   onBack,
 }) {
+  const mobile = useIsMobile();
   const storeSettlements = useStore(state => state.savedSettlements);
   const storeCampaigns = useStore(state => state.campaigns);
   const ownerId = useStore(state => state.auth?.user?.id || null);
@@ -353,7 +356,7 @@ export default function StructuredCampaignReconciliation({
           color: BODY,
           background: CARD_ALT,
           fontFamily: sans,
-          fontSize: FS.xs,
+          fontSize: proseFontSize(FS.xs, mobile),
           lineHeight: 1.45,
         }}>
           {recoveryNotice}
@@ -370,7 +373,7 @@ export default function StructuredCampaignReconciliation({
               margin: `${SP.xs}px 0 0`,
               color: BODY,
               fontFamily: sans,
-              fontSize: FS.xs,
+              fontSize: proseFontSize(FS.xs, mobile),
               lineHeight: 1.5,
             }}>
               Compare settlements from an earlier export with this campaign. The file is
@@ -394,7 +397,7 @@ export default function StructuredCampaignReconciliation({
             onChange={onFile}
             style={{ position: 'absolute', width: 1, height: 1, opacity: 0 }}
           />
-          <p style={{ margin: 0, color: MUTED, fontFamily: sans, fontSize: FS.xxs }}>
+          <p style={{ margin: 0, color: MUTED, fontFamily: sans, fontSize: proseFontSize(FS.xxs, mobile) }}>
             Structured SettlementForge JSON only, up to 5 MB. Campaign prose is preserved
             as authored content and is never inferred into events or simulation facts.
           </p>
@@ -410,7 +413,7 @@ export default function StructuredCampaignReconciliation({
             aria-label="Source campaign"
             value={sourceCampaignId}
             onChange={event => setSourceCampaignId(event.target.value)}
-            style={reconciliationFieldStyle}
+            style={reconciliationFieldStyle(mobile)}
           >
             <option value="">Choose a campaign…</option>
             {ingest.sourceCampaigns.map(source => (
@@ -434,7 +437,7 @@ export default function StructuredCampaignReconciliation({
 
       {phase === 'review' && session && decisionSummary && (
         <>
-          <div role="status" style={{ color: BODY, fontFamily: sans, fontSize: FS.xs }}>
+          <div role="status" style={{ color: BODY, fontFamily: sans, fontSize: chromeFontSize(FS.xs, mobile) }}>
             {decisionSummary.total - decisionSummary.undecided} of {decisionSummary.total}
             {' '}settlements decided. Every row needs an explicit choice.
           </div>
@@ -454,12 +457,12 @@ export default function StructuredCampaignReconciliation({
             ))}
           </ul>
           {session.proposals.length === 0 && (
-            <p style={{ margin: 0, color: BODY, fontFamily: sans, fontSize: FS.xs }}>
+            <p style={{ margin: 0, color: BODY, fontFamily: sans, fontSize: proseFontSize(FS.xs, mobile) }}>
               No readable settlement records were found in the selected source scope.
             </p>
           )}
           {session.unsupported.length > 0 && (
-            <details style={{ color: BODY, fontFamily: sans, fontSize: FS.xs }}>
+            <details style={{ color: BODY, fontFamily: sans, fontSize: chromeFontSize(FS.xs, mobile) }}>
               <summary>
                 {session.unsupported.length} item
                 {session.unsupported.length === 1 ? '' : 's'} not applied by this pass
@@ -493,7 +496,7 @@ export default function StructuredCampaignReconciliation({
               margin: `${SP.xs}px 0 0`,
               color: BODY,
               fontFamily: sans,
-              fontSize: FS.xs,
+              fontSize: proseFontSize(FS.xs, mobile),
               lineHeight: 1.5,
             }}>
               This is a bounded plan from your structured choices, not a simulation.
@@ -509,7 +512,7 @@ export default function StructuredCampaignReconciliation({
               color: BODY,
               background: CARD_ALT,
               fontFamily: sans,
-              fontSize: FS.xs,
+              fontSize: proseFontSize(FS.xs, mobile),
               lineHeight: 1.45,
             }}>
               {typeof executeDraft !== 'function'
@@ -540,13 +543,13 @@ export default function StructuredCampaignReconciliation({
           <h3 style={{ margin: 0, color: INK, fontFamily: serif_, fontSize: FS.md }}>
             {receipt.ok ? 'Reconciliation applied' : 'Reconciliation needs attention'}
           </h3>
-          <p style={{ margin: 0, color: BODY, fontFamily: sans, fontSize: FS.xs }}>
+          <p style={{ margin: 0, color: BODY, fontFamily: sans, fontSize: proseFontSize(FS.xs, mobile) }}>
             {receipt.commandReceipts.filter(item => item.ok).length} of
             {' '}{receipt.commandReceipts.length} command drafts completed. The receipt
             retains every completed and pending draft for safe recovery.
           </p>
           {session && ownerId && (
-            <p style={{ margin: 0, color: MUTED, fontFamily: sans, fontSize: FS.xxs }}>
+            <p style={{ margin: 0, color: MUTED, fontFamily: sans, fontSize: proseFontSize(FS.xxs, mobile) }}>
               A bounded private recovery record is saved on this device. It contains
               decisions and redacted command receipts, not the uploaded settlement
               content. Reopening still requires the same export file.
@@ -557,7 +560,7 @@ export default function StructuredCampaignReconciliation({
               margin: 0,
               color: BODY,
               fontFamily: sans,
-              fontSize: FS.xs,
+              fontSize: proseFontSize(FS.xs, mobile),
             }}>
               Durable journal: {journalSummary.applied} applied,
               {' '}{journalSummary.unresolved} unresolved,
@@ -569,7 +572,7 @@ export default function StructuredCampaignReconciliation({
               margin: 0,
               color: MUTED,
               fontFamily: sans,
-              fontSize: FS.xs,
+              fontSize: proseFontSize(FS.xs, mobile),
             }}>
               The durable journal could not be checked. No command was retried.
             </p>
@@ -613,7 +616,7 @@ export default function StructuredCampaignReconciliation({
       )}
 
       {error && (
-        <div role="alert" style={{ color: RED, fontFamily: sans, fontSize: FS.xs }}>
+        <div role="alert" style={{ color: RED, fontFamily: sans, fontSize: chromeFontSize(FS.xs, mobile) }}>
           {error}
         </div>
       )}

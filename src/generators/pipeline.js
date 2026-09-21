@@ -52,8 +52,14 @@ function _snapshotCtx(ctx) {
 // flow rather than forcing every traced step to redeclare the ledger.
 const _LEDGER_KEYS = new Set(['_traceClock', 'simulationTrace']);
 
+// The RESERVED context key the runner hands `options.pins` to every step through (EM-P0 §6
+// rule 2), so `step.fn(ctx, rng)`'s signature is unchanged and no step is re-registered. It
+// is a runner channel rather than a step's data, so its exemption from the undeclared-write
+// scan is stated here BY NAME — a rule, not an accident of when it happens to be seeded.
+const _PINS_KEY = '__pins';
+
 function _undeclaredWrites(step, before, ctx) {
-  const declared = new Set([...(step.provides || []), ...(step.mutates || []), ...(step.scratch || []), ..._LEDGER_KEYS]);
+  const declared = new Set([...(step.provides || []), ...(step.mutates || []), ...(step.scratch || []), ..._LEDGER_KEYS, _PINS_KEY]);
   const offenders = [];
   for (const k of Object.keys(ctx)) {
     const had = before.has(k);
@@ -130,8 +136,17 @@ export function getStepOrder() {
 // ── Pipeline runner ──────────────────────────────────────────────────────────
 
 /**
+ * @typedef {Record<string, unknown>} Pins
+ *   Keyed by the RECORD PATH a chooser writes — `npcs`, `relationships`, `factions`,
+ *   `conflicts`, and later `institutions`, `powerStructure`. Never a step NAME (the retired
+ *   engine's defect, below) and never an entity id. A chooser whose key is present takes the
+ *   pin and DOES NOT DRAW; one whose key is absent draws on its step's own stream.
+ */
+
+/**
  * Run the full pipeline. Edits re-run the WHOLE pipeline with the same seed
- * (see settlementSlice.applyChange) — deterministic and correct. A step-level
+ * (see `settlementGenerateAction.generateSettlementAction`, whose `seedOverride`
+ * argument replays the saved seed) — deterministic and correct. A step-level
  * partial-rerun engine used to live here (getAffectedSteps/rerunAffected) but it
  * was dead, untested, and buggy (it keyed on step names while callers think in
  * data keys, and its context merge clobbered the very overrides it was given), so
@@ -147,6 +162,10 @@ export function getStepOrder() {
  * @param {Function} [options.onStep]  - Called after each step: (name, ctx, patch) => void
  * @param {boolean}  [options.strict]  - A+ P1.7: throw if any step writes a ctx key it didn't declare (provides/mutates/scratch)
  * @param {Function} [options.onStrictViolation] - Collect undeclared writes instead of throwing: ({step, keys}) => void
+ * @param {Pins} [options.pins] - ABSENT or `{}` ⇒ today's behaviour EXACTLY. Otherwise the
+ *   pins seed the context and are handed to every step under `_PINS_KEY`, and each step's
+ *   registered choosers consult them. ⛔ EVERY STEP STILL RUNS: there is no skip, because a
+ *   step must advance its own stream for the steps that follow and a skipped step cannot.
  * @returns {Object} Final accumulated context
  */
 export function runPipeline(initialContext, rng, options = {}) {
@@ -154,13 +173,36 @@ export function runPipeline(initialContext, rng, options = {}) {
   const strict = options.strict
     ?? (typeof globalThis !== 'undefined' && globalThis.__PIPELINE_STRICT__)
     ?? false;
+  // `null` reads as absent; anything that is not a plain object is a caller error.
+  const pins = options.pins ?? null;
+  if (pins !== null && (typeof pins !== 'object' || Array.isArray(pins))) {
+    throw new Error('Pipeline pins: options.pins must be a plain object');
+  }
+  const pinned = pins !== null && Object.keys(pins).length > 0;
   const stepOrder = getStepOrder();
 
   // Accumulating context
-  const ctx = { ...initialContext };
+  const ctx = pins === null
+    ? { ...initialContext }
+    : { ...initialContext, ...pins, [_PINS_KEY]: pins };
 
   for (const name of stepOrder) {
     const step = _steps.get(name);
+    // PARTIAL PINNING IS AN ERROR. A step's choosers are the record paths it provides; pin
+    // every one of them or none. (A DM's root edit is not a partial pin — the caller builds a
+    // pin for every chooser from the record and then overrides a VALUE.)
+    if (pinned) {
+      const choosers = step.provides || [];
+      const supplied = choosers.filter(k => Object.prototype.hasOwnProperty.call(pins, k));
+      if (supplied.length && supplied.length < choosers.length) {
+        const missing = choosers.filter(k => !supplied.includes(k));
+        if (onStrictViolation) onStrictViolation({ step: name, kind: 'pin', keys: missing });
+        else throw new Error(
+          `Pipeline pins: step "${name}" has choosers [${choosers.join(', ')}] but pins supply `
+          + `only [${supplied.join(', ')}]. Pin every chooser of a step or none of them.`,
+        );
+      }
+    }
     // Fork a PRNG for this step so it's deterministic regardless of step order changes
     const stepRng = rng.fork(name);
     // Strict mode (A+ P1.7): snapshot before so we can detect undeclared writes.
@@ -206,6 +248,8 @@ export function runPipeline(initialContext, rng, options = {}) {
     }
   }
 
+  // The pins channel is transient: nothing is persisted and the key never leaves the runner.
+  if (pins !== null) delete ctx[_PINS_KEY];
   return ctx;
 }
 

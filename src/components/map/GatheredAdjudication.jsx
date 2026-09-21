@@ -48,6 +48,7 @@ import { useStore } from '../../store/index.js';
 import { t } from '../../copy/index.js';
 import { BODY, BORDER, BORDER2, CARD, CARD_ALT, FS, GOLD, INK, MUTED, SECOND, SP, sans } from '../theme.js';
 import Button from '../primitives/Button.jsx';
+import DialogClose from '../primitives/DialogClose.jsx';
 import { useDialogFocusTrap } from '../primitives/useDialogFocusTrap.js';
 import { ClerkNote } from '../generate/ClerkNote.jsx';
 import { OutcomeCard, SmallButton } from './WorldPulsePrimitives.jsx';
@@ -59,6 +60,8 @@ import {
   proposalDetails,
 } from './WorldPulseData.js';
 import { gatheredDecisionRows, heldDocketPromise, judgmentPointerSentence } from './gatheredDocket.js';
+import useIsMobile from '../../hooks/useIsMobile.js';
+import { chromeFontSize, proseFontSize } from '../../design/proseScale.js';
 
 const TITLE_ID = 'gathered-adjudication-title';
 
@@ -70,6 +73,7 @@ const TITLE_ID = 'gathered-adjudication-title';
  * @param {() => void} props.onClose
  */
 export default function GatheredAdjudication({ open, campaign, sinceTick = null, onClose }) {
+  const mobile = useIsMobile();
   const applyProposal = useStore(s => s.applyWorldPulseProposal);
   const dismissProposal = useStore(s => s.dismissWorldPulseProposal);
   const saves = useStore(s => s.savedSettlements);
@@ -146,6 +150,11 @@ export default function GatheredAdjudication({ open, campaign, sinceTick = null,
               What you leave unruled stays on the docket.
             </p>
           </div>
+          {/* THE HOUSE EXIT (owner order, ODQ §934.31). The foot of this dialog carries a
+              button whose WORD changes with the row count ("Close" when nothing is
+              gathered, "Set the rest aside" when something is) — a door that renames
+              itself is not a door. The header now carries the constant one. */}
+          <DialogClose onClose={onClose} />
         </header>
 
         <div style={{ flex: 1, minHeight: 0, overflow: 'auto', padding: SP.lg, display: 'grid', gap: SP.sm }}>
@@ -167,7 +176,7 @@ export default function GatheredAdjudication({ open, campaign, sinceTick = null,
                 <div style={{
                   display: 'flex', alignItems: 'center', gap: 6, marginBottom: 4,
                   color: held ? SECOND : MUTED, fontFamily: sans,
-                  fontSize: FS.micro, fontWeight: 850,
+                  fontSize: chromeFontSize(FS.micro, mobile), fontWeight: 850,
                 }}>
                   {boundaryKnown && (held ? 'Still waiting from an earlier advance' : 'Raised this advance')}
                   {raisedLabel && <span style={{ color: MUTED, fontWeight: 700 }}>{boundaryKnown ? '· ' : ''}Raised in {raisedLabel}</span>}
@@ -214,7 +223,7 @@ export default function GatheredAdjudication({ open, campaign, sinceTick = null,
         }}>
           <span
             data-testid="gathered-held-promise"
-            style={{ flex: 1, minWidth: 0, color: BODY, fontFamily: sans, fontSize: FS.xs, lineHeight: 1.45 }}
+            style={{ flex: 1, minWidth: 0, color: BODY, fontFamily: sans, fontSize: proseFontSize(FS.xs, mobile), lineHeight: 1.45 }}
           >
             {heldDocketPromise(rows.length)}
           </span>

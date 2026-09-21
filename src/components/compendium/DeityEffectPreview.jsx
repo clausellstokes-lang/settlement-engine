@@ -20,6 +20,8 @@
 import { describeDeityDraft } from './deityDraftPreview.js';
 import { td } from '../../copy/deityAuthoring.js';
 import { BODY, BORDER, FS, GOLD, MUTED, SECOND, sans, swatch } from '../theme.js';
+import useIsMobile from '../../hooks/useIsMobile.js';
+import { chromeFontSize, proseFontSize } from '../../design/proseScale.js';
 
 const DEITY_ACCENT = swatch['#7C3AED'];
 
@@ -28,6 +30,7 @@ const DEITY_ACCENT = swatch['#7C3AED'];
  *   domain?: string, portfolio?: string } }} props
  */
 export default function DeityEffectPreview({ draft }) {
+  const mobile = useIsMobile();
   const { couplings, stance, synergy } = describeDeityDraft(draft || {});
   const hasEffects = couplings.length > 0;
 
@@ -41,19 +44,19 @@ export default function DeityEffectPreview({ draft }) {
       }}
     >
       <div style={{ display: 'flex', alignItems: 'center', gap: 6, marginBottom: 6 }}>
-        <span style={{ fontSize: FS.xxs, fontWeight: 800, color: DEITY_ACCENT, textTransform: 'uppercase', letterSpacing: '0.05em' }}>
+        <span style={{ fontSize: chromeFontSize(FS.xxs, mobile), fontWeight: 800, color: DEITY_ACCENT, textTransform: 'uppercase', letterSpacing: '0.05em' }}>
           {td('preview.heading')}
         </span>
       </div>
 
       {!hasEffects ? (
-        <div style={{ fontSize: FS.xs, color: MUTED, fontStyle: 'italic', lineHeight: 1.5 }}>
+        <div style={{ fontSize: proseFontSize(FS.xs, mobile), color: MUTED, fontStyle: 'italic', lineHeight: 1.5 }}>
           {td('preview.empty')}
         </div>
       ) : (
         <ul style={{ margin: 0, paddingLeft: 16, display: 'flex', flexDirection: 'column', gap: 3 }}>
           {couplings.map((e, i) => (
-            <li key={i} style={{ fontSize: FS.xs, color: SECOND, lineHeight: 1.5 }}>{e}</li>
+            <li key={i} style={{ fontSize: proseFontSize(FS.xs, mobile), color: SECOND, lineHeight: 1.5 }}>{e}</li>
           ))}
         </ul>
       )}
@@ -61,24 +64,24 @@ export default function DeityEffectPreview({ draft }) {
       {/* Stance geometry — how it treats other gods (only when it takes a side). */}
       {stance && (
         <div style={{ marginTop: 8 }}>
-          <div style={{ fontSize: FS.micro, fontWeight: 800, color: MUTED, textTransform: 'uppercase', letterSpacing: '0.05em' }}>
+          <div style={{ fontSize: chromeFontSize(FS.micro, mobile), fontWeight: 800, color: MUTED, textTransform: 'uppercase', letterSpacing: '0.05em' }}>
             {td('preview.stanceHeading')}
           </div>
-          <div style={{ fontSize: FS.xs, color: BODY, lineHeight: 1.5 }}>{stance}</div>
+          <div style={{ fontSize: proseFontSize(FS.xs, mobile), color: BODY, lineHeight: 1.5 }}>{stance}</div>
         </div>
       )}
 
       {/* Government synergy — under a traditional ruler (only when law-axial). */}
       {synergy && (
         <div style={{ marginTop: 6 }}>
-          <div style={{ fontSize: FS.micro, fontWeight: 800, color: MUTED, textTransform: 'uppercase', letterSpacing: '0.05em' }}>
+          <div style={{ fontSize: chromeFontSize(FS.micro, mobile), fontWeight: 800, color: MUTED, textTransform: 'uppercase', letterSpacing: '0.05em' }}>
             {td('preview.synergyHeading')}
           </div>
-          <div style={{ fontSize: FS.xs, color: BODY, lineHeight: 1.5 }}>{synergy}</div>
+          <div style={{ fontSize: proseFontSize(FS.xs, mobile), color: BODY, lineHeight: 1.5 }}>{synergy}</div>
         </div>
       )}
 
-      <div style={{ fontSize: FS.micro, color: MUTED, fontStyle: 'italic', marginTop: 8, lineHeight: 1.4, borderTop: `1px solid ${BORDER}`, paddingTop: 6 }}>
+      <div style={{ fontSize: proseFontSize(FS.micro, mobile), color: MUTED, fontStyle: 'italic', marginTop: 8, lineHeight: 1.4, borderTop: `1px solid ${BORDER}`, paddingTop: 6 }}>
         <span style={{ color: GOLD, fontWeight: 900 }}>·</span>{' '}
         <span style={{ fontFamily: sans }}>{td('preview.dormant')}</span>
       </div>

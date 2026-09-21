@@ -5,11 +5,11 @@
  * list and reverted the edge palette to inline hex (on a false "relationshipColors
  * is absent" premise). These pin the restored state: criminal_network is a reachable
  * canonical edge type, and the whole palette derives from the cross-surface brand
- * source (settlements/relationshipColors.js) so the map, dossier chip, and PDF agree.
+ * source (domain/display/relationshipColors.js) so the map, dossier chip, and PDF agree.
  */
 import { describe, test, expect } from 'vitest';
 import { REL_EDGE_STYLE, REL_TYPES, relEdgeColor, WAR_FAITH_STYLE } from '../../src/components/map/relationshipEdgeStyle.js';
-import { relColor } from '../../src/components/settlements/relationshipColors.js';
+import { relColor } from '../../src/domain/display/relationshipColors.js';
 
 describe('relationshipEdgeStyle — criminal_network reachability (RESTORATION #8)', () => {
   test('criminal_network is a styled edge type, not a grey fallback', () => {
@@ -48,7 +48,7 @@ describe('relationshipEdgeStyle — criminal_network reachability (RESTORATION #
 import { readFileSync } from 'node:fs';
 import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { REL_HEX, REL_RGB, relRgb } from '../../src/components/settlements/relationshipColors.js';
+import { REL_HEX, REL_RGB, relRgb } from '../../src/domain/display/relationshipColors.js';
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), '../..');
 
@@ -163,6 +163,11 @@ describe('§67.2 — the relationship palette converges on ONE source', () => {
     expect(REL_HEX.secret_alliance).toBeUndefined();
     expect(relColor('secret_alliance')).toBe(relColor('neutral'));
     const labels = readFileSync(join(ROOT, 'src/pdf/sections/Relationships.jsx'), 'utf8');
-    expect(labels).toContain("secret_alliance:  'Secret Alliance'");
+    // ⭐ SENTENCE CASE, NOT TITLE CASE, since ad6e89d1a ("Title case descends to sentence
+    // case with the ladder") re-cased the WHOLE REL_LABELS block as a rung-3 status value.
+    // This frozen string was not carried with it and has been red ever since — the claim
+    // worth pinning is that the label EXISTS and the palette row does NOT, which is
+    // unchanged; only the spelling of the word the reader sees moved.
+    expect(labels).toContain("secret_alliance:  'Secret alliance'");
   });
 });

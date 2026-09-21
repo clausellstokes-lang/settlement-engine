@@ -32,6 +32,21 @@ describe('AuthPageShell — the wordmark home link (#7)', () => {
     // Click is intercepted into the SPA navigator (default navigation suppressed).
     expect(navigate).toHaveBeenCalledWith('generate');
   });
+
+  // ⛔ THE WORDMARK SPELLED THE BRAND A SECOND WAY. The markup has always said
+  // SettlementForge and the anchor's accessible name says SettlementForge, but the
+  // span carried `textTransform: 'lowercase'`, so /signin and /register — the two
+  // surfaces where a visitor first reads the product's name — rendered
+  // "settlementforge". jsdom does not apply text-transform, so the defect was
+  // invisible to a text assertion; the style prop is the thing that caused it and
+  // the thing this arm reads.
+  test('the wordmark renders the brand spelling, not a lower-cased one', () => {
+    const { container } = render(<AuthPageShell title="Sign in">form</AuthPageShell>);
+    const mark = container.querySelector('a[aria-label="SettlementForge home"] span');
+    expect(mark, 'the wordmark did not render').toBeTruthy();
+    expect(mark.textContent).toBe('SettlementForge');
+    expect(mark.style.textTransform, 'the wordmark is being lower-cased by CSS').toBe('');
+  });
 });
 
 describe('Input — the password toggle sits at the 44px target (#7)', () => {

@@ -1,4 +1,6 @@
 import { FS, SP, INK, BODY, GOLD_DEEP, sans, serif_ } from '../theme.js';
+import useIsMobile from '../../hooks/useIsMobile.js';
+import { chromeFontSize } from '../../design/proseScale.js';
 
 /**
  * primitives/PageHeader — the canonical top-of-page header.
@@ -26,6 +28,7 @@ export default function PageHeader({
   eyebrow, title, subtitle, actions,
   size = 'lg', as: Title = 'h1', id,
 }) {
+  const mobile = useIsMobile();
   return (
     <div style={{
       display: 'flex', alignItems: 'flex-end', justifyContent: 'space-between',
@@ -34,7 +37,7 @@ export default function PageHeader({
       <div style={{ maxWidth: 660, minWidth: 0 }}>
         {eyebrow && (
           <div style={{
-            fontFamily: sans, fontSize: FS.xs, fontWeight: 800,
+            fontFamily: sans, fontSize: chromeFontSize(FS.xs, mobile), fontWeight: 800,
             letterSpacing: '0.12em', textTransform: 'uppercase',
             color: GOLD_DEEP, marginBottom: SP.xs,
           }}>

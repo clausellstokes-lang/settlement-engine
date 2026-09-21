@@ -32,6 +32,8 @@ import Button from '../primitives/Button.jsx';
 // end-of-advance chronicle summary can gather the whole interval's beats (not just
 // the final tick). Mirrors the domain's weeksPerInterval.
 import { weeksPerInterval as INTERVAL_WEEKS } from '../../domain/worldPulse/advanceInterval.js';
+import useIsMobile from '../../hooks/useIsMobile.js';
+import { chromeFontSize, proseFontSize } from '../../design/proseScale.js';
 
 const INTERVAL_LABEL = { one_week: 'week', one_month: 'month', one_season: 'season', one_year: 'year' };
 
@@ -43,6 +45,7 @@ const INTERVAL_LABEL = { one_week: 'week', one_month: 'month', one_season: 'seas
  * surfaced no major beats, so a quiet advance adds nothing.
  */
 function IntervalChronicleSummary({ campaign, nameFor }) {
+  const mobile = useIsMobile();
   const summary = useMemo(() => {
     const ws = campaign?.worldState;
     const history = Array.isArray(ws?.pulseHistory) ? ws.pulseHistory : [];
@@ -73,10 +76,10 @@ function IntervalChronicleSummary({ campaign, nameFor }) {
         background: GOLD_BG, padding: '10px 12px', display: 'grid', gap: 6,
       }}
     >
-      <div style={{ display: 'flex', alignItems: 'center', gap: 6, color: GOLD, fontFamily: sans, fontSize: FS.xs, fontWeight: 900 }}>
+      <div style={{ display: 'flex', alignItems: 'center', gap: 6, color: GOLD, fontFamily: sans, fontSize: chromeFontSize(FS.xs, mobile), fontWeight: 900 }}>
         <ScrollText size={13} /> What unfolded over the {summary.label}
       </div>
-      <ul style={{ margin: 0, paddingLeft: 16, color: BODY, fontFamily: sans, fontSize: FS.xs, lineHeight: 1.5 }}>
+      <ul style={{ margin: 0, paddingLeft: 16, color: BODY, fontFamily: sans, fontSize: proseFontSize(FS.xs, mobile), lineHeight: 1.5 }}>
         {summary.majors.slice(0, 6).map((headline, i) => (
           <li key={i} style={{ marginBottom: 3 }}>{headline}</li>
         ))}
@@ -94,20 +97,21 @@ function human(v) {
  * Enter / Space highlights the first one on the map); otherwise a plain card.
  */
 function HeadlineCard({ headline: h, resolveName, onHighlight }) {
+  const mobile = useIsMobile();
   const names = h.settlementIds.map(resolveName).filter(Boolean);
   const canHighlight = h.settlementIds.length > 0;
   const body = (
     <>
-      <div style={{ color: INK, fontFamily: sans, fontSize: FS.xs, fontWeight: 850, lineHeight: 1.3 }}>
+      <div style={{ color: INK, fontFamily: sans, fontSize: chromeFontSize(FS.xs, mobile), fontWeight: 850, lineHeight: 1.3 }}>
         {h.headline}
       </div>
       {h.summary && (
-        <p style={{ margin: '4px 0 0', color: BODY, fontFamily: sans, fontSize: FS.xxs, lineHeight: 1.4 }}>
+        <p style={{ margin: '4px 0 0', color: BODY, fontFamily: sans, fontSize: proseFontSize(FS.xxs, mobile), lineHeight: 1.4 }}>
           {h.summary}
         </p>
       )}
       {names.length > 0 && (
-        <div style={{ marginTop: 5, display: 'flex', alignItems: 'center', gap: 4, color: SECOND, fontFamily: sans, fontSize: FS.micro, fontWeight: 800 }}>
+        <div style={{ marginTop: 5, display: 'flex', alignItems: 'center', gap: 4, color: SECOND, fontFamily: sans, fontSize: chromeFontSize(FS.micro, mobile), fontWeight: 800 }}>
           <MapPin size={10} color={GOLD} /> {names.slice(0, 3).join(', ')}{names.length > 3 ? ` +${names.length - 3}` : ''}
         </div>
       )}
@@ -138,12 +142,13 @@ function HeadlineCard({ headline: h, resolveName, onHighlight }) {
 
 /** A single per-variable causal-diff row. */
 function DiffRow({ diff }) {
+  const mobile = useIsMobile();
   const up = diff.change > 0;
   // Polarity: a positive change on a negative-polarity var (e.g. corruption) is bad.
   const good = diff.polarity === 'negative' ? !up : up;
   const color = good ? GREEN : RED;
   return (
-    <li style={{ fontSize: FS.xxs, color: BODY, marginBottom: 3, lineHeight: 1.4, listStyle: 'none' }}>
+    <li style={{ fontSize: proseFontSize(FS.xxs, mobile), color: BODY, marginBottom: 3, lineHeight: 1.4, listStyle: 'none' }}>
       <span style={{ color, fontWeight: 900 }}>{up ? '▲' : '▼'}</span>{' '}
       <strong style={{ color: INK }}>{human(diff.variable)}</strong>{' '}
       {/* Polarity-correct words, not the raw model bands: a lower-is-better
@@ -166,6 +171,7 @@ function DiffRow({ diff }) {
  *   per-tick before/after causal snapshots (drives the compareCausalState diff).
  */
 export default function ChronicleScrollback({ campaign, nameFor, causalByTick }) {
+  const mobile = useIsMobile();
   const setSelectedSettlementId = useStore(s => s.setSelectedSettlementId);
 
   const timeline = useMemo(() => chronicleTimeline({
@@ -211,7 +217,7 @@ export default function ChronicleScrollback({ campaign, nameFor, causalByTick })
     return (
       <div data-testid="chronicle-scrollback-empty" style={{
         padding: SP.md, border: `1px dashed ${BORDER2}`,
-        color: BODY, fontFamily: sans, fontSize: FS.xs, fontWeight: 750, lineHeight: 1.5,
+        color: BODY, fontFamily: sans, fontSize: chromeFontSize(FS.xs, mobile), fontWeight: 750, lineHeight: 1.5,
       }}>
         No chronicle yet. Advance the realm to record its history; the timeline will
         fill entry by entry.
@@ -246,7 +252,7 @@ export default function ChronicleScrollback({ campaign, nameFor, causalByTick })
           <div style={{ color: INK, fontFamily: sans, fontSize: FS.sm, fontWeight: 900 }}>
             {tickCalendarDetailLabel(selected.tick)}
           </div>
-          <div style={{ color: MUTED, fontFamily: sans, fontSize: FS.micro }}>
+          <div style={{ color: MUTED, fontFamily: sans, fontSize: chromeFontSize(FS.micro, mobile) }}>
             {safeIndex + 1} of {timeline.length}
           </div>
         </div>
@@ -277,7 +283,7 @@ export default function ChronicleScrollback({ campaign, nameFor, causalByTick })
                 border: `1px solid ${i === safeIndex ? GOLD : BORDER2}`,
                 background: i === safeIndex ? GOLD : CARD,
                 color: i === safeIndex ? INK : SECOND,
-                fontSize: FS.micro, fontWeight: 850,
+                fontSize: chromeFontSize(FS.micro, mobile), fontWeight: 850,
               }}
             >
               {tickCalendarDetailLabel(t.tick)}
@@ -292,7 +298,7 @@ export default function ChronicleScrollback({ campaign, nameFor, causalByTick })
           border: `1px solid ${BORDER2}`, borderLeft: `3px solid ${GOLD}`,
           background: CARD_ALT, padding: '10px 12px',
         }}>
-          <div style={{ display: 'flex', alignItems: 'center', gap: 6, color: GOLD, fontFamily: sans, fontSize: FS.xs, fontWeight: 900 }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: 6, color: GOLD, fontFamily: sans, fontSize: chromeFontSize(FS.xs, mobile), fontWeight: 900 }}>
             <BookOpen size={13} /> Chronicle, {tickCalendarDetailLabel(c.tick)}
           </div>
           <p style={{ margin: '6px 0 0', color: BODY, fontFamily: sans, fontSize: FS.sm, lineHeight: 1.55 }}>
@@ -304,7 +310,7 @@ export default function ChronicleScrollback({ campaign, nameFor, causalByTick })
       {/* ── What changed & why (pulse headlines) ──────────────────────────── */}
       {selected.headlines.length > 0 && (
         <div style={{ display: 'grid', gap: 6 }}>
-          <div style={{ color: INK, fontFamily: sans, fontSize: FS.xs, fontWeight: 900, display: 'flex', alignItems: 'center', gap: 6 }}>
+          <div style={{ color: INK, fontFamily: sans, fontSize: chromeFontSize(FS.xs, mobile), fontWeight: 900, display: 'flex', alignItems: 'center', gap: 6 }}>
             <Sparkles size={12} color={GOLD} /> What changed &amp; why
           </div>
           {selected.headlines.map((h, i) => (
@@ -323,7 +329,7 @@ export default function ChronicleScrollback({ campaign, nameFor, causalByTick })
         <div data-testid="chronicle-causal-diff" style={{
           border: `1px solid ${BORDER2}`, background: CARD_ALT, padding: '8px 10px',
         }}>
-          <div style={{ color: INK, fontFamily: sans, fontSize: FS.xs, fontWeight: 900, marginBottom: 5 }}>
+          <div style={{ color: INK, fontFamily: sans, fontSize: chromeFontSize(FS.xs, mobile), fontWeight: 900, marginBottom: 5 }}>
             Causal shift in this entry
           </div>
           <ul style={{ margin: 0, padding: 0 }}>
@@ -333,7 +339,7 @@ export default function ChronicleScrollback({ campaign, nameFor, causalByTick })
       )}
 
       {selected.headlines.length === 0 && selected.chronicles.length === 0 && (
-        <div style={{ color: BODY, fontFamily: sans, fontSize: FS.xs, fontWeight: 700, padding: SP.sm }}>
+        <div style={{ color: BODY, fontFamily: sans, fontSize: chromeFontSize(FS.xs, mobile), fontWeight: 700, padding: SP.sm }}>
           A quiet entry. No material changes were recorded.
         </div>
       )}

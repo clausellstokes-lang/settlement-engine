@@ -407,6 +407,13 @@ const REAL_STABILITY = Object.freeze([
   ['Suppressed (under occupation — resistance simmers)', 'no token matched: unclassified (the plain-description floor)'],
   ['Ordered (strong military presence)', 'no token matched: unclassified (the plain-description floor)'],
   ['Vulnerable (prosperous but underdefended)', 'no token matched: unclassified (the plain-description floor)'],
+  // The five public-unrest labels (owner order 2026-09-17, "fix the remaining contradictions"):
+  // before them, a town under one of these crises kept the baseline and read `stable matched`.
+  ['Unstable (insurgency contests authority)', 'unstable matched'],
+  ['Unstable (revolt not contained)', 'unstable matched'],
+  ['Strained (people arriving or leaving)', 'no token matched: unclassified (the plain-description floor)'],
+  ['Tense (requisition and conscription)', 'no token matched: unclassified (the plain-description floor)'],
+  ['Tense (the creed is contested)', 'no token matched: unclassified (the plain-description floor)'],
 ]);
 
 /** A settlement carrying the DS-POW-2 slice. */

@@ -19,8 +19,8 @@ vi.mock('../../src/components/home/WelcomeBackCard.jsx', () => ({ default: () =>
 vi.mock('../../src/components/AnonTierTeaser.jsx', () => ({ default: () => null }));
 vi.mock('../../src/lib/anonGenCounter.js', () => ({
   anonAtCap: () => false,
-  anonGensRemaining: () => 3,
-  DEFAULT_DAILY_CAP: 3,
+  anonFullRemaining: () => 1,
+  anonRerollRemaining: () => 2,
 }));
 vi.mock('../../src/lib/analytics.js', () => ({
   Funnel: { homepageView: vi.fn(), anonGenerationCompleted: vi.fn() },

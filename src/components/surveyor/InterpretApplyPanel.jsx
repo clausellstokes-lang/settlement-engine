@@ -20,6 +20,8 @@ import { t } from '../../copy/index.js';
 import ProposalCard from './ProposalCard.jsx';
 import { useSurveyorContext } from './useSurveyorContext.js';
 import { MoneyLine, RefusalNote, MusingsBlock, Eyebrow, PromptArea, ReceiptLine, ProposalSlipLine } from './surveyorPanelKit.jsx';
+import useIsMobile from '../../hooks/useIsMobile.js';
+import { chromeFontSize, proseFontSize } from '../../design/proseScale.js';
 
 let reviewSequence = 0;
 
@@ -115,6 +117,7 @@ export default function InterpretApplyPanel({ initialPrompt = '' }) {
   // Resolved per render, not once at import: the price becomes per-user the moment
   // the owner activates the capability-tier multiplier (config/pricing.js). A plain
   // number, so re-resolving costs nothing and cannot churn a memo.
+  const mobile = useIsMobile();
   const cost = getSurveyorAiCost('interpret');
   const {
     creditBalance,
@@ -336,7 +339,7 @@ export default function InterpretApplyPanel({ initialPrompt = '' }) {
 
           {applyResult && !applyResult.error && (
             <div data-testid="apply-result" style={{ display: 'flex', flexDirection: 'column', gap: 4 }}>
-              <div style={{ fontSize: FS.xs, color: MUTED, fontFamily: sans, lineHeight: 1.5 }}>
+              <div style={{ fontSize: proseFontSize(FS.xs, mobile), color: MUTED, fontFamily: sans, lineHeight: 1.5 }}>
                 <span style={{ color: GREEN }}>◆</span> Applied {applyResult.applied?.length ?? 0}
                 {applyResult.failed?.length > 0 && <span> · {applyResult.failed.length} failed</span>}
                 {applyResult.commandResults?.some((item) => item.status === 'reconcile-required') && (
@@ -346,12 +349,12 @@ export default function InterpretApplyPanel({ initialPrompt = '' }) {
                 {applyResult.blocked?.length > 0 && <span> · {applyResult.blocked.length} blocked (needs consent)</span>}
               </div>
               {applyResult.unroutable?.length > 0 && (
-                <div data-testid="apply-unroutable" style={{ fontSize: FS.xs, color: MUTED, fontFamily: sans }}>
+                <div data-testid="apply-unroutable" style={{ fontSize: chromeFontSize(FS.xs, mobile), color: MUTED, fontFamily: sans }}>
                   Unroutable (no verb, surfaced not dropped): {applyResult.unroutable.map((u) => operationLabel(u.opType)).join(', ')}
                 </div>
               )}
               {applyResult.failed?.length > 0 && (
-                <div style={{ fontSize: FS.xs, color: RED, fontFamily: sans }}>
+                <div style={{ fontSize: chromeFontSize(FS.xs, mobile), color: RED, fontFamily: sans }}>
                   Failed: {applyResult.failed.map((f) => `${operationLabel(f.opType)} (${f.reason})`).join(', ')}
                 </div>
               )}
@@ -373,7 +376,7 @@ export default function InterpretApplyPanel({ initialPrompt = '' }) {
                       padding: SP.sm,
                       color: BODY,
                       fontFamily: sans,
-                      fontSize: FS.xs,
+                      fontSize: proseFontSize(FS.xs, mobile),
                       lineHeight: 1.45,
                       display: 'flex',
                       flexDirection: 'column',
@@ -382,7 +385,7 @@ export default function InterpretApplyPanel({ initialPrompt = '' }) {
                   >
                     <span>{canonRecoveryMessage(recovery)}</span>
                     {authorityReceipt && (
-                      <span style={{ color: MUTED, fontSize: FS.xxs }}>
+                      <span style={{ color: MUTED, fontSize: chromeFontSize(FS.xxs, mobile) }}>
                         {t('canonRecovery.receiptLabel')}: {authorityReceipt.eventType || t('canonRecovery.eventFallback')}
                         {authorityReceipt.updatedAt
                           ? ` · ${authorityReceipt.updatedAt}`
@@ -404,7 +407,7 @@ export default function InterpretApplyPanel({ initialPrompt = '' }) {
                 );
               })}
               {recoveryError && (
-                <div role="alert" style={{ color: RED, fontFamily: sans, fontSize: FS.xs }}>
+                <div role="alert" style={{ color: RED, fontFamily: sans, fontSize: chromeFontSize(FS.xs, mobile) }}>
                   {recoveryError}
                 </div>
               )}

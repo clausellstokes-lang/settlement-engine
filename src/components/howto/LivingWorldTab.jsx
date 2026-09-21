@@ -18,6 +18,8 @@ import { t, tx } from '../../copy/index.js';
 import { useReaderAudience } from '../../hooks/useReaderAudience.js';
 import Button from '../primitives/Button.jsx';
 import { navigate } from '../../hooks/useRoute.js';
+import useIsMobile from '../../hooks/useIsMobile.js';
+import { chromeFontSize } from '../../design/proseScale.js';
 
 const COLS = (col = 340) => ({ columnWidth: `${col}px`, columnGap: SP.xl });
 const NO_BREAK = { breakInside: 'avoid', WebkitColumnBreakInside: 'avoid' };
@@ -29,6 +31,7 @@ const NO_BREAK = { breakInside: 'avoid', WebkitColumnBreakInside: 'avoid' };
 // 3-rung value ladder. Size is FREE — it lives on the FREE ("saves") rung, never
 // pitched as premium. The lens line tailors the headline to the reader.
 function ValueLadder() {
+  const mobile = useIsMobile();
   const audience = useReaderAudience();
   const lensLine = t(`valueLadder.lens.${audience}`) || t('valueLadder.subhead');
   const rungs = ['tries', 'saves', 'simulates'];
@@ -62,7 +65,7 @@ function ValueLadder() {
             <div key={key} style={{ flex: focal ? '1.4 1 240px' : '1 1 200px', minWidth: 0,
               display: 'flex', flexDirection: 'column',
               borderTop: `3px solid ${accent}`, paddingTop: 10, paddingRight: 4 }}>
-              <div style={{ fontSize: FS.xs, fontWeight: 800, letterSpacing: '0.12em',
+              <div style={{ fontSize: chromeFontSize(FS.xs, mobile), fontWeight: 800, letterSpacing: '0.12em',
                 textTransform: 'uppercase', color: eyebrowColor }}>
                 {t(`valueLadder.rungs.${key}.eyebrow`)}
               </div>
@@ -88,6 +91,7 @@ function ValueLadder() {
 // One premium living-world system: claim + how-it-stays-coherent + premium chip +
 // the opt-in / off-by-default / reversible qualifier.
 function LivingSystemCard({ id }) {
+  const mobile = useIsMobile();
   const title = t(`aboutLiving.systems.${id}.title`);
   const claim = t(`aboutLiving.systems.${id}.claim`);
   const coherence = t(`aboutLiving.systems.${id}.coherence`);
@@ -104,7 +108,7 @@ function LivingSystemCard({ id }) {
             First-contact gloss: the bare tier name means nothing to a new GM, so a
             native title= names it plainly as the paid simulation tier. */}
         <span title="Cartographer is the paid tier that runs the living simulation, $5.99 a month."
-          style={{ fontSize: FS.xs, fontWeight: 800, letterSpacing: '0.06em', textTransform: 'uppercase',
+          style={{ fontSize: chromeFontSize(FS.xs, mobile), fontWeight: 800, letterSpacing: '0.06em', textTransform: 'uppercase',
           color: SLATE, background: `${SLATE}14`, border: `1px solid ${SLATE}40`,
           borderRadius: 999, padding: '2px 8px' }}>
           {t('aboutLiving.premiumChip')}
@@ -116,7 +120,7 @@ function LivingSystemCard({ id }) {
       </p>
       {/* P7: this qualifier carries the reversibility promise — raised to FS.xs
           and BODY (was 9px MUT, failing on both contrast and the small-text floor). */}
-      <div style={{ fontSize: FS.xs, fontWeight: 700, letterSpacing: '0.04em', color: BODY }}>
+      <div style={{ fontSize: chromeFontSize(FS.xs, mobile), fontWeight: 700, letterSpacing: '0.04em', color: BODY }}>
         {t('aboutLiving.qualifier')}
       </div>
     </div>
@@ -152,15 +156,16 @@ function legBand(v) {
 // A read-only showcase of the living pantheon (sample data, all readers). Slots
 // before the value ladder so a free reader SEES the simulation depth, then climbs.
 function PantheonTeaser() {
+  const mobile = useIsMobile();
   const { settlement, deities, contest, mandate } = SAMPLE_PANTHEON;
   return (
     <section style={{ ...NO_BREAK, borderLeft: `3px solid ${SLATE}`, paddingLeft: 14, marginBottom: SP.xl, maxWidth: PROSE_MAX }}>
       <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 4, flexWrap: 'wrap' }}>
-        <span style={{ fontSize: FS.xs, fontWeight: 800, letterSpacing: '0.12em', textTransform: 'uppercase', color: SLATE }}>
+        <span style={{ fontSize: chromeFontSize(FS.xs, mobile), fontWeight: 800, letterSpacing: '0.12em', textTransform: 'uppercase', color: SLATE }}>
           Sample pantheon
         </span>
         <span title="Cartographer is the paid tier that runs the living simulation, $5.99 a month."
-          style={{ fontSize: FS.xs, fontWeight: 800, letterSpacing: '0.06em', textTransform: 'uppercase',
+          style={{ fontSize: chromeFontSize(FS.xs, mobile), fontWeight: 800, letterSpacing: '0.06em', textTransform: 'uppercase',
           color: SLATE, background: `${SLATE}14`, border: `1px solid ${SLATE}40`, borderRadius: 999, padding: '2px 8px' }}>
           {t('aboutLiving.premiumChip')}
         </span>
@@ -179,7 +184,7 @@ function PantheonTeaser() {
             <span style={{ fontSize: FS.sm, fontWeight: d.isPatron ? 700 : 500, color: d.isPatron ? INK : BODY, minWidth: 150 }}>
               {d.name}{d.isPatron ? ' (patron)' : ''}
             </span>
-            <span style={{ fontSize: FS.xs, color: SEC }}>
+            <span style={{ fontSize: chromeFontSize(FS.xs, mobile), color: SEC }}>
               {d.share}% · {d.standing} · {d.tags} · legitimacy{' '}
               <span style={{ color: band.color, fontWeight: 700 }}>{band.label}</span>
             </span>

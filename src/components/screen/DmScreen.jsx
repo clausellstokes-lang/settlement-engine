@@ -30,6 +30,8 @@ import AuspicePanel from '../auspice/AuspicePanel.jsx';
 import TemperamentPicker from '../temperament/TemperamentPicker.jsx';
 import ChroniclersLetterPanel from '../map/ChroniclersLetterPanel.jsx';
 import { formatCount } from '../../domain/formatNumber.js';
+import useIsMobile from '../../hooks/useIsMobile.js';
+import { proseFontSize } from '../../design/proseScale.js';
 
 const AUDIENCE_OPTIONS = [
   { id: 'dm', label: 'DM view' },
@@ -39,6 +41,7 @@ const AUDIENCE_OPTIONS = [
 /** The compact dossier summary — rendered from the AUDIENCE-projected settlement,
  * so the player face can only ever show player-safe fields. */
 function DossierSummary({ view, audience }) {
+  const mobile = useIsMobile();
   const name = view.name || 'This settlement';
   const tier = view.tier || '';
   const population = view.population;
@@ -55,7 +58,7 @@ function DossierSummary({ view, audience }) {
         <span>{npcs} named folk</span>
       </div>
       {audience === 'player' && (
-        <p style={{ fontFamily: sans, fontSize: FS.xs, color: MUTED, margin: `${SP.sm}px 0 0` }}>
+        <p style={{ fontFamily: sans, fontSize: proseFontSize(FS.xs, mobile), color: MUTED, margin: `${SP.sm}px 0 0` }}>
           Secrets, DM notes, and covert marks are hidden on this face. Show it to your table.
         </p>
       )}

@@ -26,9 +26,13 @@ import { reconcileCultImposition, capacityForTier } from '../../../domain/worldP
 import { deitySnapshotFrom } from '../../../domain/deitySnapshot.js';
 import { MUTED, sans, FS } from '../../theme.js';
 import Button from '../../primitives/Button.jsx';
+import AvailableAtLaunchPill from '../../primitives/AvailableAtLaunchPill.jsx';
+import { purchasesOpen } from '../../../lib/launchGate.js';
 import { navigate } from '../../../hooks/useRoute.js';
 import { Field } from './Field.jsx';
 import { selectStyle } from './EventComposerConstants.js';
+import useIsMobile from '../../../hooks/useIsMobile.js';
+import { proseFontSize } from '../../../design/proseScale.js';
 
 function listDeities(customContent) {
   return buildRegistry(customContent || {}).listCustom('deities');
@@ -82,12 +86,19 @@ export function canStageDeityEvent({ type, settlement, deityRef, deityMode, cult
 }
 
 function UpsellOrEmpty({ label, prompt, canUseCustom, hasDeities, setPurchaseModalOpen }) {
+  const mobile = useIsMobile();
   if (!canUseCustom) {
+    // Purchases stay closed until launch (lib/launchGate.js): the upgrade CTA is
+    // disabled and wears the Available at launch pill.
+    const purchasesAreOpen = purchasesOpen();
     return (
       <Field label={label}>
-        <div style={{ fontSize: FS.xs, color: MUTED, lineHeight: 1.5, maxWidth: 320 }}>
+        <div style={{ fontSize: proseFontSize(FS.xs, mobile), color: MUTED, lineHeight: 1.5, maxWidth: 320 }}>
           {prompt}{' '}
-          <Button variant="ghost" size="sm" onClick={() => setPurchaseModalOpen?.(true)}>Upgrade to premium</Button>{' '}
+          <Button variant="ghost" size="sm" disabled={!purchasesAreOpen} onClick={() => setPurchaseModalOpen?.(true)} style={purchasesAreOpen ? undefined : { flexWrap: 'wrap' }}>
+            Upgrade to premium
+            {!purchasesAreOpen && <AvailableAtLaunchPill style={{ marginLeft: 6 }} />}
+          </Button>{' '}
           to author and assign deities.
         </div>
       </Field>
@@ -96,7 +107,7 @@ function UpsellOrEmpty({ label, prompt, canUseCustom, hasDeities, setPurchaseMod
   if (!hasDeities) {
     return (
       <Field label={label}>
-        <div style={{ fontSize: FS.xs, color: MUTED, lineHeight: 1.5, maxWidth: 320 }}>
+        <div style={{ fontSize: proseFontSize(FS.xs, mobile), color: MUTED, lineHeight: 1.5, maxWidth: 320 }}>
           No deities authored yet.{' '}
           <Button variant="ghost" size="sm" onClick={() => navigate('compendium', { search: '?mode=custom&cat=deities' })}>Author a deity</Button>{' '}
           to assign one here.
@@ -111,6 +122,7 @@ export function EventComposerDeityField({
   type, settlement, customContent, canUseCustom, setPurchaseModalOpen,
   deityRef, setDeityRef, deityMode, setDeityMode, cultRemoveRef, setCultRemoveRef,
 }) {
+  const mobile = useIsMobile();
   const deities = useMemo(() => listDeities(customContent), [customContent]);
   const config = settlement?.config || {};
 
@@ -137,7 +149,7 @@ export function EventComposerDeityField({
         <select
           value={value}
           onChange={e => { const v = e.target.value; if (!v) { setDeityMode('remove'); setDeityRef(''); } else { setDeityMode('assign'); setDeityRef(v); } }}
-          style={selectStyle}
+          style={selectStyle(mobile)}
         >
           <option value="">No patron deity (dormant)</option>
           {deities.map(d => { const ref = refOf(d); return <option key={ref} value={ref}>{d.name}</option>; })}
@@ -160,7 +172,7 @@ export function EventComposerDeityField({
         <select
           value={deityMode === 'remove' ? 'remove' : 'add'}
           onChange={e => { setDeityMode(e.target.value === 'remove' ? 'remove' : 'assign'); setDeityRef(''); setCultRemoveRef(''); }}
-          style={selectStyle}
+          style={selectStyle(mobile)}
           disabled={cults.length === 0}
         >
           <option value="add">Impose a cult</option>
@@ -169,20 +181,20 @@ export function EventComposerDeityField({
       </Field>
       {deityMode === 'remove' ? (
         <Field label="Cult to remove">
-          <select value={cultRemoveRef || ''} onChange={e => setCultRemoveRef(e.target.value)} style={selectStyle}>
+          <select value={cultRemoveRef || ''} onChange={e => setCultRemoveRef(e.target.value)} style={selectStyle(mobile)}>
             <option value="">Pick a cult…</option>
             {cults.map(c => { const ref = String(c._deityRef || c.name || ''); return <option key={ref} value={ref}>{c.name}</option>; })}
           </select>
         </Field>
       ) : cultCapacity === 0 ? (
         <Field label="Cult">
-          <div style={{ fontSize: FS.micro, color: MUTED, lineHeight: 1.5, maxWidth: 280, fontFamily: sans, padding: '5px 0' }}>
+          <div style={{ fontSize: proseFontSize(FS.micro, mobile), color: MUTED, lineHeight: 1.5, maxWidth: 280, fontFamily: sans, padding: '5px 0' }}>
             This settlement is too small to sustain a cult beneath its patron. Larger settlements hold more faiths.
           </div>
         </Field>
       ) : (
         <Field label="Cult to impose" hint="One faith per temperament × alignment niche; the patron's niche sparks a contest">
-          <select value={deityRef || ''} onChange={e => setDeityRef(e.target.value)} style={selectStyle} disabled={addOptions.length === 0}>
+          <select value={deityRef || ''} onChange={e => setDeityRef(e.target.value)} style={selectStyle(mobile)} disabled={addOptions.length === 0}>
             <option value="">{addOptions.length ? 'Impose a cult…' : 'No more deities to impose'}</option>
             {addOptions.map(d => { const ref = refOf(d); return <option key={ref} value={ref}>{d.name}</option>; })}
           </select>

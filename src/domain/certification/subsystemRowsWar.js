@@ -17,11 +17,11 @@
  * and the evidence law. Both are binding here.
  *
  * THE NESTING (traced, not assumed, and NOT uniform). The execution-side war-depth
- * switches are AND-gated under warLayerEnabled in the engine: warDeployment.js:1082
- * returns an untouched world before it reads a single sub-flag, and occupation.js:753
+ * switches are AND-gated under warLayerEnabled in the engine: warDeployment.js:243
+ * returns an untouched world before it reads a single sub-flag, and occupation.js:1152
  * does the same. peaceEngineEnabled and warTerminationEnabled each join through
  * their own strict two-flag gate. warDispositionEnabled is nested only IN EFFECT:
- * coup.js:113 reads it on
+ * coup.js:103 reads it on
  * the stressorsEnabled path, but the war-exhaustion scar it consumes is written
  * nowhere except inside the war layer. THE TWO EXCEPTIONS, stated so nobody infers
  * a gate that is not there: navalActive (navalKernel.js:78) is armyTransitActive AND
@@ -48,7 +48,7 @@
  *
  * WHAT THE COMPLETED SOAK ACTUALLY MEASURED (all seven release cases read
  * 2026-07-31 from artifacts/soak/release.cases). The war layer is loud:
- * strategy_deploy is NOT its evidence (settlementStrategy.js:498 emits the same
+ * strategy_deploy is NOT its evidence (settlementStrategy.js:454 emits the same
  * literal from its own chooser, which is why the 30y-12s case shows 126 of them
  * against 7 army_deployed), but army_deployed, war_drain, war_exhaustion,
  * war_mobilization, conquest, occupation_* and war_spoils all fire in every case.
@@ -65,18 +65,18 @@
 
 // The candidate-type vocabulary that is reachable ONLY through the war layer.
 // Traced to the emitting `candidateType` literal, not to a consumer that merely
-// reads the archetype: warDeployment.js:1539 (conquest) and its warConditionOutcome
-// calls at 2000/2014/2033/2054/2101 (war_drain, army_deployed, reinforcement_cost,
+// reads the archetype: warDeployment.js:829 (conquest) and the warConditionOutcome
+// calls at warHomeCosts.js:486/500/519/540/587 (war_drain, army_deployed, reinforcement_cost,
 // war_exhaustion) plus warRecordMode.js:130 (war_exhaustion_cleared);
-// deploymentReturn.js:202/334/360/396 (war_exhaustion, army_homecoming,
-// occupation_lifted, siege_lifted); occupation.js:559/687/998 (occupation_resistance,
+// deploymentReturn.js:284/428/459/496 (war_exhaustion, army_homecoming,
+// occupation_lifted, siege_lifted); occupation.js:1426/1522/1086/1571 (occupation_resistance,
 // occupation_burden, occupation_vassalized, war_spoils); mobilizationEffects.js:175
 // (war_mobilization) and mobilizationReactions.js:166 (the four reaction moves).
 //
 // DELIBERATELY ABSENT, each for a traced reason:
-//   strategy_deploy  settlementStrategy.js:498 emits `strategy_${move}` from the
+//   strategy_deploy  settlementStrategy.js:454 emits `strategy_${move}` from the
 //                    settlementStrategyEnabled chooser, so the literal is shared.
-//   war_pressure     candidateEvents.js:225, tradeWar.js:594 and warDeployment.js:1492
+//   war_pressure     candidateEvents.js:234, tradeWar.js:673 and warDeployment.js:854
 //                    all emit it; a shared archetype cannot carry one row.
 //   war_conscription / war_levy  each belongs to its own sub-flag row below.
 const WAR_LAYER_EVENT_TYPES = Object.freeze([
@@ -128,7 +128,7 @@ export const WAR_SUBSYSTEM_ROWS = Object.freeze([
       // back to absent when its lane empties. censusWorldStateKeys enumerates every
       // top-level key, so a v5 receipt reads all four.
       stateKeys: Object.freeze(['deployments', 'occupations', 'warExhaustion', 'warPosture']),
-      other: 'THE PARENT GATE. warDeployment.js:1082 returns the world untouched before any sub-flag is read, so every row below it grades DORMANT_BY_CONFIG when this key is false. The war stack owns both W1 consumers: the opener reads the chooser\'s resolved target through warIntent.js and the apply pass retires it once the army is committed, while the opener calls armyTransit.siegeArrivalGate so a column still on the road cannot besiege. Neither creates a new dispositive state key for this row: warIntents is the chooser\'s two-tick instruction, while armyTransit is the spatial mover\'s canonical ledger; deployments remains the war layer\'s durable observable. MEASURED across all seven completed release cases: the 30-year 12-settlement seed1 case carries war_mobilization 73, war_exhaustion 26, occupation_burden 10, war_drain 9, war_spoils 8, army_homecoming 8, army_deployed 7, occupation_resistance 3, conquest 2 and occupation_vassalized 2. THE TRAP THIS ROW AVOIDS: strategy_deploy reads 126 in that same case and is NOT war-layer evidence, because settlementStrategy.js:498 mints the identical literal from the settlement-strategy chooser; a row that claimed it would grade ALIVE in a world where the war layer never opened a front. Public counts UNDER-read the tick rate by design: recurringWarConditionRecordMode files an unchanged recurring condition as recordMode state_only, and the behavioral observer counts only public selected outcomes, so army_deployed counts deployment EPISODES rather than deployed ticks.',
+      other: 'THE PARENT GATE. warDeployment.js:243 returns the world untouched before any sub-flag is read, so every row below it grades DORMANT_BY_CONFIG when this key is false. The war stack owns both W1 consumers: the opener reads the chooser\'s resolved target through warIntent.js and the apply pass retires it once the army is committed, while the opener calls armyTransit.siegeArrivalGate so a column still on the road cannot besiege. Neither creates a new dispositive state key for this row: warIntents is the chooser\'s two-tick instruction, while armyTransit is the spatial mover\'s canonical ledger; deployments remains the war layer\'s durable observable. MEASURED across all seven completed release cases: the 30-year 12-settlement seed1 case carries war_mobilization 73, war_exhaustion 26, occupation_burden 10, war_drain 9, war_spoils 8, army_homecoming 8, army_deployed 7, occupation_resistance 3, conquest 2 and occupation_vassalized 2. THE TRAP THIS ROW AVOIDS: strategy_deploy reads 126 in that same case and is NOT war-layer evidence, because settlementStrategy.js:454 mints the identical literal from the settlement-strategy chooser; a row that claimed it would grade ALIVE in a world where the war layer never opened a front. Public counts UNDER-read the tick rate by design: recurringWarConditionRecordMode files an unchanged recurring condition as recordMode state_only, and the behavioral observer counts only public selected outcomes, so army_deployed counts deployment EPISODES rather than deployed ticks.',
     }),
     // A war layer that fires in EVERY observed year is a bug, not a standard. Wars
     // are episodic: a mobilization, a siege, a resolution, then a quiet stretch
@@ -159,7 +159,7 @@ export const WAR_SUBSYSTEM_ROWS = Object.freeze([
     title: 'War economy population drain',
     module: 'src/domain/worldPulse/warHomeCosts.js',
     aliveness: Object.freeze({
-      // warDeployment.js:1877. The only emitter of this literal in the estate.
+      // warHomeCosts.js:365. The only emitter of this literal in the estate.
       eventTypes: Object.freeze(['war_conscription']),
       moverFamilies: Object.freeze([]),
       // DELIBERATELY EMPTY. The conscripted head-count is banked at
@@ -168,7 +168,7 @@ export const WAR_SUBSYSTEM_ROWS = Object.freeze([
       // descends into them, so declaring `deployments` here would grade this row
       // ALIVE off the parent war layer's own ledger.
       stateKeys: Object.freeze([]),
-      other: 'Nested under warLayerEnabled (read at warDeployment.js:1281, inside the gate at 1082). MEASURED alive in every completed release case: war_conscription reads 8 in the 30-year 12-settlement seed1 case and 18 in the one-year 24-settlement case. The public count is a floor, not the tick rate: warDeployment.js:1877 stamps recordMode state_only once deploymentAge exceeds 0, so only the first tick of each deployment episode is a public event. The matching return credit rides deploymentReturn, so the books balance as deployed minus returned equals war dead.',
+      other: 'Nested under warLayerEnabled (read at warDeployment.js:470, inside the gate at 243). MEASURED alive in every completed release case: war_conscription reads 8 in the 30-year 12-settlement seed1 case and 18 in the one-year 24-settlement case. The public count is a floor, not the tick rate: warHomeCosts.js:368 stamps recordMode state_only once deploymentAge exceeds 0, so only the first tick of each deployment episode is a public event. The matching return credit rides deploymentReturn, so the books balance as deployed minus returned equals war dead.',
     }),
     // The drain exists only while an army is in the field. Its cadence is the
     // war's, not the calendar's, so a quiet decade is correct rather than slow.
@@ -192,14 +192,14 @@ export const WAR_SUBSYSTEM_ROWS = Object.freeze([
     title: 'War levy',
     module: 'src/domain/worldPulse/warHomeCosts.js',
     aliveness: Object.freeze({
-      // warDeployment.js:1970. The only emitter of this literal in the estate.
+      // warHomeCosts.js:458. The only emitter of this literal in the estate.
       eventTypes: Object.freeze(['war_levy']),
       moverFamilies: Object.freeze([]),
       // DELIBERATELY EMPTY, for the same reason as war conscription: the per-vassal
       // head-count lands at deployments[id].leviedPopulationBySource, nested one
       // level below anything the census records.
       stateKeys: Object.freeze([]),
-      other: 'Nested under warLayerEnabled (read at warDeployment.js:1290, inside the gate at 1082). MEASURED SILENT, and that is this row\'s whole point. Every one of the seven completed release cases reads war_levy exactly ZERO while its siblings fire in the same cases (war_conscription 8, army_deployed 7, conquest 2 in the 30-year 12-settlement seed1 case), so the gate that fails sits inside the levy rather than upstream of the war. The receipts also prove levy-eligible relationships exist: vassal_rebellion reads 354 and vassal_protection_burden 44 in that same case. THE THINGS TO INSPECT, all traced: computeLevySources (warDeployment.js:273) admits only a LEVY_SUPPORT_TYPES edge (vassal, allied, ally, defensive_pact) and, for a vassal edge, only the SENIOR side may levy its junior; the exclude set drops any source that is itself besieged, is fielding its own army, or was already levied this tick by another overlord; and LEVY_POP_RATE_PER_TICK 0.004 against LEVY_POP_FLOOR 300 means a source under roughly 550 people levies nobody at all.',
+      other: 'Nested under warLayerEnabled (read at warDeployment.js:479, inside the gate at 243). MEASURED SILENT, and that is this row\'s whole point. Every one of the seven completed release cases reads war_levy exactly ZERO while its siblings fire in the same cases (war_conscription 8, army_deployed 7, conquest 2 in the 30-year 12-settlement seed1 case), so the gate that fails sits inside the levy rather than upstream of the war. The receipts also prove levy-eligible relationships exist: vassal_rebellion reads 354 and vassal_protection_burden 44 in that same case. THE THINGS TO INSPECT, all traced: computeLevySources (warHomeCosts.js:109) admits only a LEVY_SUPPORT_TYPES edge (vassal, allied, ally, defensive_pact) and, for a vassal edge, only the SENIOR side may levy its junior; the exclude set drops any source that is itself besieged, is fielding its own army, or was already levied this tick by another overlord; and LEVY_POP_RATE_PER_TICK 0.004 against LEVY_POP_FLOOR 300 means a source under roughly 550 people levies nobody at all.',
     }),
     // The levy rides an active deployment that also holds junior support edges, so
     // it is reactive rather than periodic. reactive carries no share floor, which
@@ -226,13 +226,13 @@ export const WAR_SUBSYSTEM_ROWS = Object.freeze([
     aliveness: Object.freeze({
       // DELIBERATELY EMPTY, all three channels. The sack has no vocabulary: it
       // rides the EXISTING conquest outcome as extra populationDeltas
-      // (computeSackTransfer, warDeployment.js:1518) and foodStockpileDeltas
-      // (computeSackFoodTransfer, 1526), so eventTypeCounts cannot tell a sacking
+      // (computeSackTransfer, warDeployment.js:810) and foodStockpileDeltas
+      // (computeSackFoodTransfer, 816), so eventTypeCounts cannot tell a sacking
       // conquest from a bloodless one, and no container is written.
       eventTypes: Object.freeze([]),
       moverFamilies: Object.freeze([]),
       stateKeys: Object.freeze([]),
-      other: 'Nested under warLayerEnabled (read at warDeployment.js:1289). THE MISREADING THIS ROW EXISTS TO PREVENT: war_spoils looks like sack evidence and is NOT. occupation.js:998 emits war_spoils under warLayerEnabled alone as the capped occupation-benefit relief, so it fires whether or not this flag is lit, and it read 8 in the 30-year 12-settlement seed1 case with nothing proven about forage. TO OBSERVE: the receipt needs either a per-conquest delta census (how many conquest outcomes carried populationDeltas) or a conquest-year settlement population census. The v4 stateVectors series carries year-end population per settlement, so a conquest-year drop in the conquered town is the closest available proxy and it is not clean, because migration, famine and the calamity kernel move the same number.',
+      other: 'Nested under warLayerEnabled (read at warDeployment.js:478). THE MISREADING THIS ROW EXISTS TO PREVENT: war_spoils looks like sack evidence and is NOT. occupation.js:1571 emits war_spoils under warLayerEnabled alone as the capped occupation-benefit relief, so it fires whether or not this flag is lit, and it read 8 in the 30-year 12-settlement seed1 case with nothing proven about forage. TO OBSERVE: the receipt needs either a per-conquest delta census (how many conquest outcomes carried populationDeltas) or a conquest-year settlement population census. The v4 stateVectors series carries year-end population per settlement, so a conquest-year drop in the conquered town is the closest available proxy and it is not clean, because migration, famine and the calamity kernel move the same number.',
     }),
     // A sack rides a conquest, and a conquest is rare. Nothing here should recur
     // on a calendar.
@@ -257,12 +257,12 @@ export const WAR_SUBSYSTEM_ROWS = Object.freeze([
     module: 'src/domain/worldPulse/supplyQuality.js,src/domain/worldPulse/warDeployment.js,src/domain/worldPulse/warArmyRecord.js',
     aliveness: Object.freeze({
       // DELIBERATELY EMPTY, all three channels. deployedQualityMult is a pure
-      // multiplier over deployed strength and attrition kit (warDeployment.js:1286);
+      // multiplier over deployed strength and attrition kit (warDeployment.js:475);
       // it mints no candidate and writes no container.
       eventTypes: Object.freeze([]),
       moverFamilies: Object.freeze([]),
       stateKeys: Object.freeze([]),
-      other: 'Nested under warLayerEnabled (read at warDeployment.js:1285). The flag scales a deploying settlement\'s force by its supplyCompleteness over the WAR_KIT basket (arms, iron, leather, livestock, provisions), floored at SUPPLY_QUALITY_TUNING.FLOOR 0.55 so a chainless settlement still fields a degraded force, and it deliberately does NOT feed readiness (readiness is training, this is kit). Every effect lands as a number inside a siege roll. TO OBSERVE: record the applied quality multiplier on the strategy_deploy or conquest outcome, or census currentEffectiveStrength at mint time from the deployments ledger; either makes the axis readable. Failing that, only a paired lit and dark run at one seed separates it, and the whole-world soak records no such pair for this flag.',
+      other: 'Nested under warLayerEnabled (read at warDeployment.js:474). The flag scales a deploying settlement\'s force by its supplyCompleteness over the WAR_KIT basket (arms, iron, leather, livestock, provisions), floored at SUPPLY_QUALITY_TUNING.FLOOR 0.55 so a chainless settlement still fields a degraded force, and it deliberately does NOT feed readiness (readiness is training, this is kit). Every effect lands as a number inside a siege roll. TO OBSERVE: record the applied quality multiplier on the strategy_deploy or conquest outcome, or census currentEffectiveStrength at mint time from the deployments ledger; either makes the axis readable. Failing that, only a paired lit and dark run at one seed separates it, and the whole-world soak records no such pair for this flag.',
     }),
     // The multiplier is read once per deployment, at the moment an army commits.
     expectedTempo: 'reactive',
@@ -283,13 +283,13 @@ export const WAR_SUBSYSTEM_ROWS = Object.freeze([
       eventTypes: Object.freeze([]),
       moverFamilies: Object.freeze([]),
       // A TOP-LEVEL worldState container that exists ONLY under this flag:
-      // warDeployment.js:1291 allocates it at the flag read and returns null
+      // warDeployment.js:480 allocates it at the flag read and returns null
       // otherwise, and pulseKernel.js
       // `worldState = { ...worldState, defenderSiegeLedger: war.defenderSiegeLedger };`
       // writes it back only when non-null. That
       // makes it a genuinely dispositive channel, readable from a v5 census.
       stateKeys: Object.freeze(['defenderSiegeLedger']),
-      other: 'Nested under warLayerEnabled (read at warDeployment.js:1280). The ledger seeds from the target\'s fresh homeDefense on the first besieged tick, wears down through applyAttritionToRecord with isAttacker false, feeds the siege verdict as defenderStrengthOverride, and is RETIRED the moment the siege ends, with a final prune at warDeployment.js:2133 dropping every target that is no longer besieged. So a census year with no live siege legitimately reads zero: maxEntries over the span is the aliveness signal and finalEntries is not. The completed release receipts are envelope v4 and carry no subsystems census at all, which is why this row reports an INSTRUMENT GAP rather than a silence; a v5 rerun of the same cases reads it for free.',
+      other: 'Nested under warLayerEnabled (read at warDeployment.js:469). The ledger seeds from the target\'s fresh homeDefense on the first besieged tick, wears down through applyAttritionToRecord with isAttacker false, feeds the siege verdict as defenderStrengthOverride, and is RETIRED the moment the siege ends, with a final prune at warDeployment.js:1334 dropping every target that is no longer besieged. So a census year with no live siege legitimately reads zero: maxEntries over the span is the aliveness signal and finalEntries is not. The completed release receipts are envelope v4 and carry no subsystems census at all, which is why this row reports an INSTRUMENT GAP rather than a silence; a v5 rerun of the same cases reads it for free.',
     }),
     // The ledger exists only while somebody is under siege.
     expectedTempo: 'reactive',
@@ -318,7 +318,7 @@ export const WAR_SUBSYSTEM_ROWS = Object.freeze([
       eventTypes: Object.freeze([]),
       moverFamilies: Object.freeze([]),
       stateKeys: Object.freeze([]),
-      other: 'Nested under warLayerEnabled (read at warDeployment.js:1287). composeDefenderWillScore folds the defender\'s will facet, public legitimacy, logistics and the odds it faces into a bias of WILL_BIAS_STRENGTH 2.2, and a score at or below WILL_CAPITULATE_FLOOR -0.72 returns a bloodless capitulation instead of a storm. THE GAP IS EXACT: the verdict object carries capitulation true (warDeployment.js:971) but nothing downstream reads it. The conquest outcome minted afterwards carries the same candidateType either way and only its reasons prose differs, so no receipt field distinguishes a town that surrendered from a town that was stormed. TO OBSERVE: promote the capitulation flag onto the conquest outcome, either as outcome metadata or as its own candidateType such as settlement_capitulated, and eventTypeCounts reads it with no schema change at all.',
+      other: 'Nested under warLayerEnabled (read at warDeployment.js:476). composeDefenderWillScore folds the defender\'s will facet, public legitimacy, logistics and the odds it faces into a bias of WILL_BIAS_STRENGTH 2.2, and a score at or below WILL_CAPITULATE_FLOOR -0.72 returns a bloodless capitulation instead of a storm. THE GAP IS EXACT: the verdict object carries capitulation true (warSiegeVerdict.js:305) but nothing downstream reads it. The conquest outcome minted afterwards carries the same candidateType either way and only its reasons prose differs, so no receipt field distinguishes a town that surrendered from a town that was stormed. TO OBSERVE: promote the capitulation flag onto the conquest outcome, either as outcome metadata or as its own candidateType such as settlement_capitulated, and eventTypeCounts reads it with no schema change at all.',
     }),
     // A will collapse is the rarest of the siege paths and rides a live siege.
     expectedTempo: 'rare',
@@ -346,7 +346,7 @@ export const WAR_SUBSYSTEM_ROWS = Object.freeze([
       eventTypes: Object.freeze([]),
       moverFamilies: Object.freeze([]),
       stateKeys: Object.freeze([]),
-      other: 'Nested under warLayerEnabled (read at warDeployment.js:1288). computeAllyRelief (warDeployment.js:240) sums ALLY_RELIEF_FRACTION 0.4 of each supporting neighbour\'s home defense over the ALLY_SUPPORT_TYPES edges (allied, ally, vassal, patron, defensive_pact), skipping any ally under its own siege, and hands the total to resolveSiegeVerdict. Nothing about the relief is minted, stamped or stored, so a besieged town that was relieved and a besieged town that stood alone produce byte-identical receipts. TO OBSERVE: record defenderReliefBonus on the conquest or siege outcome, which also gives the Chronicle the sentence it is currently missing (that the walls held because help came).',
+      other: 'Nested under warLayerEnabled (read at warDeployment.js:477). computeAllyRelief (warCapacityReads.js:74) sums ALLY_RELIEF_FRACTION 0.4 of each supporting neighbour\'s home defense over the ALLY_SUPPORT_TYPES edges (allied, ally, vassal, patron, defensive_pact), skipping any ally under its own siege, and hands the total to resolveSiegeVerdict. Nothing about the relief is minted, stamped or stored, so a besieged town that was relieved and a besieged town that stood alone produce byte-identical receipts. TO OBSERVE: record defenderReliefBonus on the conquest or siege outcome, which also gives the Chronicle the sentence it is currently missing (that the walls held because help came).',
     }),
     // Relief is computed per besieged target per tick, so it rides sieges.
     expectedTempo: 'reactive',
@@ -365,7 +365,7 @@ export const WAR_SUBSYSTEM_ROWS = Object.freeze([
     module: 'src/domain/worldPulse/coup.js',
     aliveness: Object.freeze({
       // DELIBERATELY EMPTY, all three channels. The flag adds one term to the coup
-      // hold-chance (coup.js:113) and touches nothing else in the estate.
+      // hold-chance (coup.js:103) and touches nothing else in the estate.
       eventTypes: Object.freeze([]),
       moverFamilies: Object.freeze([]),
       stateKeys: Object.freeze([]),
@@ -503,7 +503,7 @@ export const WAR_SUBSYSTEM_ROWS = Object.freeze([
       eventTypes: Object.freeze([]),
       moverFamilies: Object.freeze([]),
       // Three conditionally-materialized sidecars, each written only inside the
-      // peaceCausalActive gate: warReasons.js:867, peaceReasons.js:505 and
+      // peaceCausalActive gate: warReasons.js:996, peaceReasons.js:637 and
       // peaceTerms.js (the treaties ledger). All three are spatialLedgers sub-keys,
       // which the v5 census enumerates.
       stateKeys: Object.freeze([
@@ -511,7 +511,7 @@ export const WAR_SUBSYSTEM_ROWS = Object.freeze([
         'spatialLedgers.treaties',
         'spatialLedgers.warReasons',
       ]),
-      other: 'peaceCausalActive (warReasons.js:408) is warLayerEnabled AND peaceEngineEnabled, both lit in full_simulation, so the two reason movers ran on every tick of every completed case. They emit no candidate on purpose: reasons are READS, not rolls, and the loaded draw that consumes them is the existing settlementStrategy softmax, so the engine\'s output is a REWEIGHTING of candidates that would fire anyway. The treaty lane is now material: treatyEnforcement.js publishes the live war, mobilization and occupation reads, and treatyTransfer.js supplies the conserved grain-transfer executor used by peaceTerms.js. spatialLedgers.treaties remains the ONE canonical observable for those effects; the read helpers and transfer primitive do not invent duplicate state. That makes the three sidecars the only honest channels. The completed release receipts are envelope v4 and carry no subsystems census, which is why this row reports an INSTRUMENT GAP rather than a silence; a v5 rerun of the same cases reads all three for free. treaty_default is now fed from live treaty compliance through peaceTerms.js; corruption_exposed remains the confirmed unfed W-DOCTRINE registration seam, so a thinner-than-expected warReasons ledger is still expected rather than alarming.',
+      other: 'peaceCausalActive (warReasons.js:378) is warLayerEnabled AND peaceEngineEnabled, both lit in full_simulation, so the two reason movers ran on every tick of every completed case. They emit no candidate on purpose: reasons are READS, not rolls, and the loaded draw that consumes them is the existing settlementStrategy softmax, so the engine\'s output is a REWEIGHTING of candidates that would fire anyway. The treaty lane is now material: treatyEnforcement.js publishes the live war, mobilization and occupation reads, and treatyTransfer.js supplies the conserved grain-transfer executor used by peaceTerms.js. spatialLedgers.treaties remains the ONE canonical observable for those effects; the read helpers and transfer primitive do not invent duplicate state. That makes the three sidecars the only honest channels. The completed release receipts are envelope v4 and carry no subsystems census, which is why this row reports an INSTRUMENT GAP rather than a silence; a v5 rerun of the same cases reads all three for free. treaty_default is now fed from live treaty compliance through peaceTerms.js; corruption_exposed remains the confirmed unfed W-DOCTRINE registration seam, so a thinner-than-expected warReasons ledger is still expected rather than alarming.',
     }),
     // The reason ledgers are recomputed from state every tick, so in a realm that
     // carries any hostility at all they should be populated in most observed years.

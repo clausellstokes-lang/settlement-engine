@@ -12,6 +12,8 @@ import { useState, useEffect, useCallback } from 'react';
 import { supabase } from '../../lib/supabase.js';
 import { INK, MUTED, SECOND, BORDER, CARD_HDR, sans, SP, FS, swatch } from '../theme.js';
 import Segmented from '../primitives/Segmented.jsx';
+import useIsMobile from '../../hooks/useIsMobile.js';
+import { chromeFontSize } from '../../design/proseScale.js';
 
 const DASHBOARDS = [
   { id: 'funnel', label: 'First-gen funnel' },
@@ -22,6 +24,7 @@ const DASHBOARDS = [
 ];
 
 export default function AdminAnalyticsPanel() {
+  const mobile = useIsMobile();
   const [dashboard, setDashboard] = useState('funnel');
   const [rows, setRows] = useState([]);
   const [loading, setLoading] = useState(false);
@@ -59,7 +62,7 @@ export default function AdminAnalyticsPanel() {
   return (
     <section aria-label="Analytics dashboards">
       <div style={{ display: 'flex', alignItems: 'baseline', justifyContent: 'flex-end', flexWrap: 'wrap', gap: SP.sm }}>
-        {refreshedAt && <span style={{ fontSize: FS.xs, color: MUTED }}>refreshed {new Date(refreshedAt).toLocaleString('en-US')}</span>}
+        {refreshedAt && <span style={{ fontSize: chromeFontSize(FS.xs, mobile), color: MUTED }}>refreshed {new Date(refreshedAt).toLocaleString('en-US')}</span>}
       </div>
 
       <div style={{ margin: `${SP.sm}px 0` }}>
@@ -80,7 +83,7 @@ export default function AdminAnalyticsPanel() {
 
       {!loading && !error && rows.length > 0 && (
         <div style={{ overflowX: 'auto' }}>
-          <table style={{ borderCollapse: 'collapse', width: '100%', fontFamily: sans, fontSize: FS.xs }}>
+          <table style={{ borderCollapse: 'collapse', width: '100%', fontFamily: sans, fontSize: chromeFontSize(FS.xs, mobile) }}>
             <caption style={{ position: 'absolute', width: 1, height: 1, overflow: 'hidden', clip: 'rect(0 0 0 0)' }}>
               {DASHBOARDS.find(d => d.id === dashboard)?.label} data
             </caption>

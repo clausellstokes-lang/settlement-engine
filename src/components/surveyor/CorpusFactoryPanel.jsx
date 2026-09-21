@@ -18,6 +18,8 @@ import { t } from '../../copy/index.js';
 import { INK, BODY, MUTED, BORDER, CARD_ALT, GOLD, SLATE, sans, FS, SP } from '../theme.js';
 import Button from '../primitives/Button.jsx';
 import IconButton from '../primitives/IconButton.jsx';
+import useIsMobile from '../../hooks/useIsMobile.js';
+import { chromeFontSize, proseFontSize } from '../../design/proseScale.js';
 
 const KIND_LABEL = { institutionDesc: 'Institution description', npcVoice: 'NPC voice', traditionMotif: 'Tradition motif' };
 const inputStyle = {
@@ -45,6 +47,7 @@ function entryTarget(e) {
 }
 
 export default function CorpusFactoryPanel({ initialPrompt = '' }) {
+  const mobile = useIsMobile();
   const candidates = useStore((s) => s.corpusCandidates);
   const stageCorpusCandidates = useStore((s) => s.stageCorpusCandidates);
   const reviewCorpusCandidate = useStore((s) => s.reviewCorpusCandidate);
@@ -118,7 +121,7 @@ export default function CorpusFactoryPanel({ initialPrompt = '' }) {
 
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: SP.sm, fontFamily: sans, color: BODY }}>
-      <p style={{ margin: 0, fontSize: FS.xs, color: MUTED, lineHeight: 1.45 }}>
+      <p style={{ margin: 0, fontSize: proseFontSize(FS.xs, mobile), color: MUTED, lineHeight: 1.45 }}>
         Draft corpus prose with the Surveyor or by hand, stage it with provenance, then approve. Approved
         candidates fold into canon only when you commit the leaf and regenerate. Your taste stays the gate.
       </p>
@@ -134,7 +137,7 @@ export default function CorpusFactoryPanel({ initialPrompt = '' }) {
         aria-label="Describe the corpus prose to draft" placeholder="e.g. three gravelly voice lines for a harbor-master…"
         style={inputStyle} />
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-        <span style={{ fontSize: FS.xs, color: MUTED }}>
+        <span style={{ fontSize: chromeFontSize(FS.xs, mobile), color: MUTED }}>
           {cost} credit{cost === 1 ? '' : 's'} per draft{Number.isFinite(creditBalance) && <span> · {creditBalance} left</span>}
         </span>
         <Button variant="aiSolid" size="sm" busy={loading} disabled={!intent.trim()} onClick={draftWithAi}>
@@ -143,7 +146,7 @@ export default function CorpusFactoryPanel({ initialPrompt = '' }) {
       </div>
 
       {/* Manual authoring path (always available) */}
-      <details style={{ fontSize: FS.xs, color: MUTED }}>
+      <details style={{ fontSize: chromeFontSize(FS.xs, mobile), color: MUTED }}>
         <summary style={{ cursor: 'pointer' }}>…or stage by hand</summary>
         <div style={{ display: 'flex', flexDirection: 'column', gap: 4, marginTop: 4 }}>
           <input value={manualTarget} onChange={(e) => setManualTarget(e.target.value)} aria-label="Candidate target (name)" placeholder="Target (e.g. the institution or NPC)" style={inputStyle} />
@@ -159,13 +162,13 @@ export default function CorpusFactoryPanel({ initialPrompt = '' }) {
       {/* Review the staging catalog */}
       {list.length > 0 && (
         <div style={{ borderTop: `1px solid ${BORDER}`, paddingTop: SP.sm, display: 'flex', flexDirection: 'column', gap: SP.xs }}>
-          <span style={{ fontSize: FS.xs, color: MUTED, textTransform: 'uppercase', letterSpacing: '0.06em' }}>
+          <span style={{ fontSize: chromeFontSize(FS.xs, mobile), color: MUTED, textTransform: 'uppercase', letterSpacing: '0.06em' }}>
             Staging catalog · {approvedCount}/{list.length} approved
           </span>
           {list.map((c) => (
             <div key={c.id} data-testid="corpus-candidate"
               style={{ border: `1px solid ${c.status === 'approved' ? GOLD : c.status === 'rejected' ? BORDER : SLATE}`, padding: SP.sm, opacity: c.status === 'rejected' ? 0.55 : 1, display: 'flex', flexDirection: 'column', gap: 4 }}>
-              <div style={{ display: 'flex', alignItems: 'center', gap: SP.xs, fontSize: FS.xs, color: MUTED }}>
+              <div style={{ display: 'flex', alignItems: 'center', gap: SP.xs, fontSize: chromeFontSize(FS.xs, mobile), color: MUTED }}>
                 <span style={{ color: INK }}>{KIND_LABEL[c.kind] || c.kind}</span>
                 {c.target && <span>· {c.target}</span>}
                 <span style={{ flex: 1 }} />
@@ -174,7 +177,7 @@ export default function CorpusFactoryPanel({ initialPrompt = '' }) {
                 <IconButton glyph="−" label="Remove" size="sm" onClick={() => removeCorpusCandidate(c.id)} />
               </div>
               <p style={{ margin: 0, fontSize: FS.sm, color: BODY, lineHeight: 1.4 }}>{c.text}</p>
-              <span style={{ fontSize: FS.xs, color: MUTED }}>
+              <span style={{ fontSize: chromeFontSize(FS.xs, mobile), color: MUTED }}>
                 {c.provenance?.source} · {c.provenance?.model} · {c.provenance?.promptFamily}
               </span>
             </div>
@@ -182,14 +185,14 @@ export default function CorpusFactoryPanel({ initialPrompt = '' }) {
 
           {/* The build-time fold: copy the canon leaf, commit it, regenerate. */}
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginTop: 4 }}>
-            <span style={{ fontSize: FS.xs, color: MUTED }}>Fold {approvedCount} approved into canon (commit + `npm run gen:compendium-data`)</span>
+            <span style={{ fontSize: chromeFontSize(FS.xs, mobile), color: MUTED }}>Fold {approvedCount} approved into canon (commit + `npm run gen:compendium-data`)</span>
             <Button variant="ai" size="sm" disabled={approvedCount === 0} onClick={copyLeaf}>
               {copied ? 'Copied' : 'Copy the canon leaf'}
             </Button>
           </div>
           {leaf && (
             <textarea readOnly value={leaf} rows={4} aria-label="The APPROVED_CORPUS leaf to commit"
-              style={{ ...inputStyle, fontFamily: 'monospace', fontSize: FS.xs }} />
+              style={{ ...inputStyle, fontFamily: 'monospace', fontSize: chromeFontSize(FS.xs, mobile) }} />
           )}
         </div>
       )}

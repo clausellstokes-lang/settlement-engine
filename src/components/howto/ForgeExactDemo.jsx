@@ -17,7 +17,7 @@ import { useState } from 'react';
 import { fixture } from '../home/landingFixture.js';
 import { useStore } from '../../store/index.js';
 import { navigate } from '../../hooks/useRoute.js';
-import { anonAtCap } from '../../lib/anonGenCounter.js';
+import RefusalNotice from '../primitives/RefusalNotice.jsx';
 import Button from '../primitives/Button.jsx';
 import { GOLD, INK, SECOND as SEC, BORDER as BOR, PARCH, serif_, sans, FS } from '../theme.js';
 
@@ -27,27 +27,31 @@ export default function ForgeExactDemo() {
   const setWizardMode = useStore((s) => s.setWizardMode);
   const setRandomSliderMode = useStore((s) => s.setRandomSliderMode);
   const clearNeighbour = useStore((s) => s.clearNeighbour);
-  const authTier = useStore((s) => s.auth.tier);
+  // The lane owns the gate and records WHY it refused (ODQ §934.24(c)); this surface
+  // renders it. The pre-flight that used to sit here was the third copy of the same
+  // check, and it answered a refusal by navigating with nothing said.
+  const lastRefusal = useStore((s) => s.lastRefusal);
+  const clearRefusal = useStore((s) => s.clearRefusal);
   const [forging, setForging] = useState(false);
 
   const forge = async () => {
     if (forging) return;
-    // Anonymous visitors at their daily generation cap go to the wizard instead of
-    // silently doing nothing — the same gate the landing button honours.
-    if (authTier === 'anon' && anonAtCap()) { navigate('generate'); return; }
+    clearRefusal?.();
     setForging(true);
     try {
       setWizardMode(fixture.forge.mode);
       setRandomSliderMode(fixture.forge.randomSliderMode);
       clearNeighbour();
       updateConfig({ ...fixture.forge.config });
-      await generate(fixture.seed);
-    } catch (e) {
-      // Non-fatal: the demo is optional. Fall through to the wizard.
-      console.error('[ForgeExactDemo] fixture forge failed:', e);
-    } finally {
+      const forged = await generate(fixture.seed);
+      // A refusal STAYS HERE, under the demo, with its reason. Navigating away from a
+      // refusal is what made the class invisible.
+      if (!forged) { setForging(false); return; }
       setForging(false);
       navigate('generate');
+    } catch (e) {
+      console.error('[ForgeExactDemo] fixture forge failed:', e);
+      setForging(false);
     }
   };
 
@@ -68,6 +72,9 @@ export default function ForgeExactDemo() {
       <Button variant="secondary" size="md" busy={forging} onClick={forge}>
         Forge this exact town
       </Button>
+      {/* Full-width in the demo's flex row, so the refusal reads under the control
+          that raised it rather than squeezed beside it. */}
+      {lastRefusal && <div style={{ flexBasis: '100%' }}><RefusalNotice refusal={lastRefusal} /></div>}
     </div>
   );
 }

@@ -26,6 +26,8 @@ import IconButton from '../primitives/IconButton.jsx';
 import { useDialogFocusTrap } from '../primitives/useDialogFocusTrap.js';
 import { BODY, BORDER, CARD, CARD_ALT, ELEV, FS, GOLD, INK, SP, sans, swatch } from '../theme.js';
 import { glossaryEntryFor } from '../../domain/display/glossary.js';
+import useIsMobile from '../../hooks/useIsMobile.js';
+import { chromeFontSize } from '../../design/proseScale.js';
 
 /** The in-place glossary card (InstitutionCard grammar; neutral ✦ glyph header). */
 function GlossaryCard({ open, entry, onClose }) {
@@ -34,6 +36,7 @@ function GlossaryCard({ open, entry, onClose }) {
   // render; keying on that identity — as the old hand-rolled effect did — made a
   // background re-render re-run the trap and yank focus back to the first
   // control mid-read. Routing through the primitive retires that bug class.
+  const mobile = useIsMobile();
   const cardRef = useDialogFocusTrap(open, onClose);
 
   if (!open || !entry) return null;
@@ -67,7 +70,7 @@ function GlossaryCard({ open, entry, onClose }) {
         }}>
           <span aria-hidden="true" style={{ fontSize: FS.lg, color: swatch['#7A4F0F'], flexShrink: 0, marginTop: 2 }}>{'✦'}</span>
           <div style={{ flex: 1, minWidth: 0 }}>
-            <div style={{ fontSize: FS.micro, fontWeight: 800, color: swatch['#7A4F0F'], textTransform: 'uppercase', letterSpacing: '0.08em' }}>
+            <div style={{ fontSize: chromeFontSize(FS.micro, mobile), fontWeight: 800, color: swatch['#7A4F0F'], textTransform: 'uppercase', letterSpacing: '0.08em' }}>
               What am I reading?
             </div>
             <h2 style={{ margin: `${SP.xs}px 0 0`, color: INK, fontFamily: sans, fontSize: FS.lg, lineHeight: 1.25, fontWeight: 900 }}>

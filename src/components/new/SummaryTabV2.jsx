@@ -28,6 +28,10 @@ import { composeSettlementQuickGuide } from '../../domain/summary/settlementQuic
 import EconomyFreshnessNote from './EconomyFreshnessNote.jsx';
 import ReadSystemStateBar from '../settlement/ReadSystemStateBar.jsx';
 import Button from '../primitives/Button.jsx';
+import useIsMobile from '../../hooks/useIsMobile.js';
+import { chromeFontSize, proseFontSize } from '../../design/proseScale.js';
+import { literaryTitle, tokenCase } from './labelLadder.js';
+import { TIER_LABELS } from './design.js';
 
 const GOLD = swatch['#8C6F32'];
 const INK = swatch['#1B1408'];
@@ -49,6 +53,11 @@ export default function SummaryTabV2({ settlement, onOpenTableView }) {
   // called in the same order every render — gating the useMemos behind
   // an early `if (!settlement)` would create a hooks-order violation
   // flagged by react-hooks/rules-of-hooks.
+  // THE PHONE PROSE FLOOR — the quick guide's reading text (the defining truths,
+  // the pressure) and the cheat sheet's bodies (the entry point, each person's
+  // detail). The eyebrows, the kind tags, the names and the role lines are
+  // glanced at and keep their own steps. Desktop is unchanged.
+  const mobile = useIsMobile();
   const guide = useMemo(
     () => composeSettlementQuickGuide(settlement),
     [settlement],
@@ -88,10 +97,19 @@ export default function SummaryTabV2({ settlement, onOpenTableView }) {
         </h1>
         <div style={{
           marginTop: 2,
-          fontSize: FS.xxs, color: MUTED,
+          fontSize: chromeFontSize(FS.xxs, mobile), color: MUTED,
           letterSpacing: '0.04em',
         }}>
-          {String(settlement.tier || 'SETTLEMENT').toUpperCase()}
+          {/* ⭐ THE TIER IS A WORD WEARING A STYLE, AND IT IS THE ESTATE'S WORD (ODQ §934.63
+              F14 + noticed 6). This read `String(settlement.tier).toUpperCase()`, which
+              upper-cases the raw machine TOKEN: the smallest rung printed "THORP" here while
+              the refusal sentence and the wizard both say "Thorpe". Reading TIER_LABELS
+              fixes the word and `textTransform` carries the capitals, so the look is
+              unchanged for every other rung. The transform is on the tier alone rather than
+              the row: "624 pop" and "road" beside it are not kickers. */}
+          <span style={{ textTransform: 'uppercase' }}>
+            {TIER_LABELS[settlement.tier] || settlement.tier || 'Settlement'}
+          </span>
           {settlement.population != null && (
             <> · {formatCount(settlement.population)} pop</>
           )}
@@ -114,16 +132,24 @@ export default function SummaryTabV2({ settlement, onOpenTableView }) {
         <ReadSystemStateBar settlement={settlement} />
       </div>
 
-      {/* Two-column body */}
+      {/* Two-column body — ONE column on a phone.
+          The 1.2 / 0.95 split is a reading layout for a wide screen. At 375px it
+          divided the 339px of content into a 181px guide and a 144px cheat sheet,
+          which is four or five words to a line: the magazine spread had become two
+          gutters. Below the breakpoint the columns stack, so the quick guide and
+          the cheat sheet each get the full measure the 14px prose floor needs. The
+          order is unchanged — the guide leads, the cheat sheet follows — and the
+          desktop spread is byte-identical. */}
       <div style={{
         display: 'flex', gap: 14,
+        flexDirection: mobile ? 'column' : 'row',
         padding: '16px 18px',
-        alignItems: 'flex-start',
+        alignItems: mobile ? 'stretch' : 'flex-start',
       }}>
         {/* LEFT — one identity, three truths, one pressure. */}
-        <div style={{ flex: 1.2, minWidth: 0 }}>
+        <div style={{ flex: mobile ? '0 0 auto' : 1.2, minWidth: 0 }}>
           <div style={{
-            fontSize: FS.micro, fontWeight: 800,
+            fontSize: chromeFontSize(FS.micro, mobile), fontWeight: 800,
             letterSpacing: '0.14em', textTransform: 'uppercase',
             color: GOLD,
           }}>
@@ -150,16 +176,12 @@ export default function SummaryTabV2({ settlement, onOpenTableView }) {
                   borderLeft: `2px solid ${BORDER}`,
                 }}
               >
-                <div style={{
-                  fontSize: FS.nano, fontWeight: 800,
-                  letterSpacing: '0.09em', textTransform: 'uppercase',
-                  color: MUTED,
-                }}>
-                  {truth.label}
+                <div style={{ ...literaryTitle(FS.xs), color: INK_DEEP }}>
+                  {tokenCase(truth.label)}
                 </div>
                 <div style={{
                   marginTop: 1,
-                  fontSize: FS.xs, color: BODY, lineHeight: 1.5,
+                  fontSize: proseFontSize(FS.xs, mobile), color: BODY, lineHeight: 1.5,
                 }}>
                   {truth.text}
                 </div>
@@ -183,16 +205,12 @@ export default function SummaryTabV2({ settlement, onOpenTableView }) {
             border: `1px solid ${BORDER}`,
             borderLeft: `3px solid ${RED}`,
           }}>
-            <div style={{
-              fontSize: FS.nano, fontWeight: 800,
-              letterSpacing: '0.09em', textTransform: 'uppercase',
-              color: RED,
-            }}>
-              {guide.immediatePressure.label}
+            <div style={{ ...literaryTitle(FS.sm), color: RED }}>
+              {tokenCase(guide.immediatePressure.label)}
             </div>
             <div style={{
               marginTop: 2,
-              fontFamily: serif, fontSize: FS.sm, fontStyle: 'italic',
+              fontFamily: serif, fontSize: proseFontSize(FS.sm, mobile), fontStyle: 'italic',
               color: INK_DEEP, lineHeight: 1.5,
             }}>
               {guide.immediatePressure.text}
@@ -202,7 +220,7 @@ export default function SummaryTabV2({ settlement, onOpenTableView }) {
 
         {/* RIGHT — three people and one entry point. */}
         <aside style={{
-          flex: 0.95,
+          flex: mobile ? '0 0 auto' : 0.95,
           padding: 12,
           background: PARCH,
           border: `1px solid ${BORDER}`,
@@ -213,14 +231,14 @@ export default function SummaryTabV2({ settlement, onOpenTableView }) {
             marginBottom: 2,
           }}>
             <span style={{
-              fontSize: FS.micro, fontWeight: 800,
+              fontSize: chromeFontSize(FS.micro, mobile), fontWeight: 800,
               letterSpacing: '0.14em', textTransform: 'uppercase',
               color: AMBER,
             }}>
               Tonight at the table
             </span>
             <span style={{ flex: 1 }} />
-            <span style={{ fontSize: FS.micro, color: MUTED, fontStyle: 'italic' }}>
+            <span style={{ fontSize: chromeFontSize(FS.micro, mobile), color: MUTED, fontStyle: 'italic' }}>
               cheat sheet
             </span>
           </div>
@@ -236,21 +254,21 @@ export default function SummaryTabV2({ settlement, onOpenTableView }) {
               alignItems: 'baseline', gap: 6,
             }}>
               <span style={{
-                fontFamily: serif, fontWeight: 700, fontSize: FS['11.5'],
+                fontFamily: serif, fontWeight: 700, fontSize: chromeFontSize(FS['11.5'], mobile),
                 color: INK,
               }}>
                 {guide.entryPoint.label}
               </span>
               <span style={{
-                fontSize: FS['7.5'], fontWeight: 800,
-                color: AMBER, letterSpacing: '0.08em',
+                fontSize: chromeFontSize(FS['7.5'], mobile), fontWeight: 800,
+                color: AMBER, letterSpacing: '0.08em', textTransform: 'uppercase',
               }}>
-                HOOK
+                Hook
               </span>
             </div>
             <div style={{
               marginTop: 2,
-              fontSize: FS.xxs, color: BODY, lineHeight: 1.4,
+              fontSize: proseFontSize(FS.xxs, mobile), color: BODY, lineHeight: 1.4,
             }}>
               {guide.entryPoint.text}
             </div>
@@ -259,7 +277,7 @@ export default function SummaryTabV2({ settlement, onOpenTableView }) {
           {guide.importantPeople.length === 0 ? (
             <div style={{
               padding: '8px 6px',
-              fontSize: FS.xs, color: MUTED, fontStyle: 'italic',
+              fontSize: proseFontSize(FS.xs, mobile), color: MUTED, fontStyle: 'italic',
             }}>
               No important people have been generated yet.
             </div>
@@ -277,15 +295,16 @@ export default function SummaryTabV2({ settlement, onOpenTableView }) {
                 display: 'flex', justifyContent: 'space-between',
                 alignItems: 'baseline', gap: 6,
               }}>
+                {/* ODQ §934.23 — no clamp on dossier text: an NPC's name is generated and
+                    has no provable width, so it wraps beside the kicker rather than being cut. */}
                 <span style={{
-                  fontFamily: serif, fontWeight: 700, fontSize: FS['11.5'],
-                  color: INK, minWidth: 0, overflow: 'hidden',
-                  textOverflow: 'ellipsis', whiteSpace: 'nowrap',
+                  fontFamily: serif, fontWeight: 700, fontSize: chromeFontSize(FS['11.5'], mobile),
+                  color: INK, minWidth: 0,
                 }}>
                   {person.name}
                 </span>
                 <span style={{
-                  fontSize: FS['7.5'], fontWeight: 800,
+                  fontSize: chromeFontSize(FS['7.5'], mobile), fontWeight: 800,
                   color: GREEN, letterSpacing: '0.08em',
                   flexShrink: 0,
                 }}>
@@ -294,13 +313,13 @@ export default function SummaryTabV2({ settlement, onOpenTableView }) {
               </div>
               <div style={{
                 marginTop: 1,
-                fontSize: FS.nano, color: MUTED, lineHeight: 1.35,
+                fontSize: chromeFontSize(FS.nano, mobile), color: MUTED, lineHeight: 1.35,
               }}>
                 {person.role}
               </div>
               <div style={{
                 marginTop: 2,
-                fontSize: FS.xxs, color: BODY, lineHeight: 1.4,
+                fontSize: proseFontSize(FS.xxs, mobile), color: BODY, lineHeight: 1.4,
               }}>
                 {person.detail}
               </div>

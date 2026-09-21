@@ -1167,7 +1167,7 @@ export const SUPPLY_CHAIN_NEEDS = {
     chains: [
       {
         id: 'parish',
-        label: 'Parish & Faith',
+        label: 'Faith & Worship',
         // No resource gate: faith is institution-borne. (ancient_grove still flags this
         // chain 'running' via RESOURCE_TO_CHAINS where a grove is present.)
         resource: null,

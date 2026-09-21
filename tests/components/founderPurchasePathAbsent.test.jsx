@@ -56,6 +56,7 @@ vi.mock('../../src/store/index.js', () => {
 });
 
 import PricingPage from '../../src/components/PricingPage.jsx';
+import TermsPage from '../../src/components/legal/TermsPage.jsx';
 import { TIERS } from '../../src/config/pricing.js';
 import { tp } from '../../src/copy/pricingPage.js';
 
@@ -163,5 +164,48 @@ describe('the founder purchase path is absent from the source, structurally', ()
     const webhook = read('supabase/functions/stripe-webhook/index.ts');
     expect(webhook).toMatch(/product\s*===\s*['"]founder_lifetime['"]/);
     expect(webhook).toMatch(/clawbackFounderForSession\s*\(/);
+  });
+});
+
+// ⛔ THE TERMS PAGE WAS THE LAST SURFACE STILL SELLING A CHAIR, AND IT WAS THE
+// ONE THAT MATTERED MOST: /terms said Founder Lifetime was a TRANSFERABLE license
+// whose incoming holder pays $99 and whose outgoing holder receives $49.50, one
+// click from a covenant saying chairs cannot be bought, traded, inherited, or
+// transferred, and one config file from `stripeProduct: null`. The pricing page's
+// cure above never reached it. This arm holds the two pages to one story.
+describe('the Terms page states the covenant, not a sale', () => {
+  it('the Founder section is given-never-sold, with no transfer terms and no price', () => {
+    const { container } = render(<TermsPage />);
+
+    // ── NON-VACUITY CONTROLS (mandatory; see the header) ─────────────────
+    const heading = container.querySelector('#terms-founder');
+    expect(heading, 'the Founder section did not render — the negatives below are vacuous').toBeTruthy();
+    expect(heading.textContent).toBe('Founder chairs');
+    const text = container.textContent;
+    expect(text.length, 'the Terms page rendered almost nothing').toBeGreaterThan(200);
+    // The covenant's own four facts, in the terms (HallCovenant.jsx is the twin).
+    expect(text).toContain(`There are ${TIERS.founder.seatLimit} chairs`);
+    expect(text).toContain('given, never sold');
+    expect(text).toMatch(/by invitation/i);
+    expect(text).toContain('cannot be bought, traded, inherited, or transferred');
+    expect(text).toContain('for as long as SettlementForge runs');
+
+    // ── THE NEGATIVE ────────────────────────────────────────
+    const survivors = [
+      '$99', '$49.50', 'transferable', 'transfer price', 'Transferring a seat',
+      'at least 12 months', 'lifetime individual license',
+    ].filter((phrase) => text.includes(phrase));
+    expect(
+      survivors,
+      `\nThe Terms page still describes a Founder chair as a saleable, transferable`
+      + ` license. A chair is given, never sold (DESIGN_FOUNDERS_HALL §1, ODQ §118);`
+      + ` these must not reach a reader:\n  ${survivors.join('\n  ')}\n`,
+    ).toEqual([]);
+
+    // And no price figure anywhere in the Founder section (F22: numbers live on
+    // Pricing) — the chair count is the section's only numeral.
+    const section = heading.closest('section');
+    // anchored: this same section's heading and four covenant sentences are asserted PRESENT above, so an empty section reds there first
+    expect(section.textContent).not.toMatch(/\$\d/);
   });
 });

@@ -149,14 +149,23 @@ function walk(dir, out = []) {
  */
 
 /**
- * Comments, string-literal text and import specifiers blanked, OFFSETS PRESERVED. Without
- * this the scan reads a JSDoc mention, a quoted citation and an import line as uses — the
- * narrower-than-claim defect class in its other direction.
+ * Comments, string-literal text and import specifiers blanked, OFFSETS AND LINES PRESERVED.
+ * Without this the scan reads a JSDoc mention, a quoted citation and an import line as uses —
+ * the narrower-than-claim defect class in its other direction.
+ *
+ * ⛔ HORIZONTAL WHITESPACE ONLY, AND THE CLASS `[ \t]` IS THE WHOLE CURE. The mask replaces its
+ * match with spaces of the same LENGTH, so any newline it swallows comes back as a SPACE.
+ * Anchored `^\s*` under the multiline flag it swallowed the blank line standing above an
+ * import — `\s` matches `\n` — and the blanked blob lost lines while keeping every offset, so
+ * the length pin in the arm above stayed green over it. `[^\n]*?` already holds the body to
+ * one line; the two `\s` classes were the whole leak. MEASURED before the cure, over every
+ * file this walker reads: 26,345 newlines destroyed across 700 of 1,057 files, with the
+ * walker's FINDINGS identical either way. Pinned by the line-structure arm below.
  * @param {string} src @returns {string}
  */
 function codeOnly(src) {
   return blankCommentsAndStrings(src).replace(
-    /^\s*(?:import|export)\b[^\n]*?from\s*['"][^'"]*['"];?[^\n]*$/gm,
+    /^[ \t]*(?:import|export)\b[^\n]*?from[ \t]*['"][^'"]*['"];?[^\n]*$/gm,
     (m) => ' '.repeat(m.length),
   );
 }
@@ -252,6 +261,36 @@ describe('HB-1 — the chooser-totality partition and the named-domain checklist
         `${row.forkId} names a module that does not resolve: ${moduleFile(row)}`,
       ).toBe(true);
     }
+  });
+
+  test('the import mask keeps the source\'s LINE STRUCTURE, not merely its length', () => {
+    // ⛔ THE OTHER HALF OF THE OFFSET PIN ABOVE, AND IT WAS MISSING FOR AS LONG AS THE MASK HAS
+    // EXISTED. The strip is LENGTH-preserving, which is all `enclosingSymbol` needs, so the arm
+    // above passed while the mask quietly destroyed LINES: it was anchored `^\s*` under the
+    // multiline flag, and `\s` MATCHES A NEWLINE, so a blank line standing above an import was
+    // swallowed into the match and came back as a SPACE. Offsets survived; the blob stopped
+    // being line-addressable. MEASURED at this tip over every file this walker reads: 26,345
+    // newlines destroyed across 700 of 1,057 files. `lawBandTable.walker.test.js` docketed the
+    // same defect from the outside and named it HB-1's own one-character fix; this is that fix's
+    // instrument, and it lives here so the mask cannot silently re-acquire a vertical class.
+    const fixture = [
+      'const first = 1;',
+      '',
+      "  import { thing } from './thing.js';",
+      'const roll = hash01(seed);',
+      '',
+    ].join('\n');
+    const blanked = codeOnly(fixture);
+    expect(blanked, 'the mask stopped preserving offsets').toHaveLength(fixture.length);
+    expect(
+      blanked.split('\n'),
+      'the mask ate the newline of the blank line above the import. Every ^-anchored read of the'
+      + ' blanked source below that point is now aimed at the wrong line, and a length-only pin'
+      + ' cannot see it: blank the indentation with HORIZONTAL whitespace only.',
+    ).toHaveLength(fixture.split('\n').length);
+    expect(blanked.split('\n')[2].trim(), 'the import line itself was left unmasked').toBe('');
+    expect(blanked.split('\n')[3], 'a real call under a masked import stopped being readable')
+      .toBe('const roll = hash01(seed);');
   });
 
   test('⭐ THE ROOT SET is asserted against the tree — no domain directory with a live idiom escapes it', () => {

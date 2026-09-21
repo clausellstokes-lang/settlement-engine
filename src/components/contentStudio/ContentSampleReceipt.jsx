@@ -1,10 +1,13 @@
 import { BODY, MUTED, BORDER, GREEN, FS, SP, sans } from '../theme.js';
 import { Eyebrow } from '../surveyor/surveyorPanelKit.jsx';
+import useIsMobile from '../../hooks/useIsMobile.js';
+import { chromeFontSize, proseFontSize } from '../../design/proseScale.js';
 
 function MaterializedList({ label, entries }) {
+  const mobile = useIsMobile();
   if (!Array.isArray(entries) || entries.length === 0) return null;
   return (
-    <div style={{ fontSize: FS.xs, color: BODY, fontFamily: sans }}>
+    <div style={{ fontSize: chromeFontSize(FS.xs, mobile), color: BODY, fontFamily: sans }}>
       <strong>{label}:</strong> {entries.map((entry) => entry.name).join(', ')}
     </div>
   );
@@ -21,6 +24,7 @@ const FIXTURE_LABELS = Object.freeze({
 });
 
 function FieldTruth({ receipt }) {
+  const mobile = useIsMobile();
   const truth = receipt?.fieldTruth;
   const presentation = truth?.presentationOnly || [];
   const unsupported = truth?.unsupported || [];
@@ -28,12 +32,12 @@ function FieldTruth({ receipt }) {
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
       {presentation.length > 0 && (
-        <div style={{ fontSize: FS.xs, color: MUTED, fontFamily: sans }}>
+        <div style={{ fontSize: chromeFontSize(FS.xs, mobile), color: MUTED, fontFamily: sans }}>
           Presentation only: {presentation.join(', ')}
         </div>
       )}
       {unsupported.length > 0 && (
-        <div style={{ fontSize: FS.xs, color: MUTED, fontFamily: sans }}>
+        <div style={{ fontSize: chromeFontSize(FS.xs, mobile), color: MUTED, fontFamily: sans }}>
           Unsupported here: {unsupported.map(item => item.field).join(', ')}
         </div>
       )}
@@ -42,12 +46,13 @@ function FieldTruth({ receipt }) {
 }
 
 function FixtureResult({ fixture }) {
+  const mobile = useIsMobile();
   if (fixture.kind === 'generation-boundary') {
     const definitions = fixture.receipt?.definitions || [];
     const boundary = (fixture.boundaries || []).join(' and ');
     return (
       <>
-        <div style={{ fontSize: FS.xs, color: BODY, fontFamily: sans }}>
+        <div style={{ fontSize: chromeFontSize(FS.xs, mobile), color: BODY, fontFamily: sans }}>
           <strong>{FIXTURE_LABELS[fixture.bucket] || fixture.bucket}</strong>
           {' · '}
           {boundary} tier {fixture.tier}
@@ -57,7 +62,7 @@ function FixtureResult({ fixture }) {
         </div>
         {definitions.map(definition => (
           <div key={definition.localUid || definition.name}>
-            <div style={{ fontSize: FS.xs, color: MUTED, fontFamily: sans }}>
+            <div style={{ fontSize: chromeFontSize(FS.xs, mobile), color: MUTED, fontFamily: sans }}>
               {definition.materializationState === 'ambiguous'
                 ? 'Same-name entity present; exact definition unknown'
                 : definition.materialized
@@ -74,7 +79,7 @@ function FixtureResult({ fixture }) {
 
   if (fixture.kind === 'deity-assignment') {
     return (
-      <div style={{ fontSize: FS.xs, color: BODY, fontFamily: sans }}>
+      <div style={{ fontSize: chromeFontSize(FS.xs, mobile), color: BODY, fontFamily: sans }}>
         <strong>Deity · temporary assignment:</strong>{' '}
         {fixture.result?.assigned ? fixture.name : `${fixture.name} was not assigned`}
       </div>
@@ -82,7 +87,7 @@ function FixtureResult({ fixture }) {
   }
   if (fixture.kind === 'faction-event') {
     return (
-      <div style={{ fontSize: FS.xs, color: BODY, fontFamily: sans }}>
+      <div style={{ fontSize: chromeFontSize(FS.xs, mobile), color: BODY, fontFamily: sans }}>
         <strong>Faction · unsaved ADD_FACTION:</strong>{' '}
         {fixture.result?.present ? fixture.name : `${fixture.name} was not introduced`}
       </div>
@@ -90,7 +95,7 @@ function FixtureResult({ fixture }) {
   }
   if (fixture.kind === 'stressor-event') {
     return (
-      <div style={{ fontSize: FS.xs, color: BODY, fontFamily: sans }}>
+      <div style={{ fontSize: chromeFontSize(FS.xs, mobile), color: BODY, fontFamily: sans }}>
         <strong>Stressor · unsaved APPLY_STRESSOR:</strong>{' '}
         {fixture.result?.active ? fixture.name : `${fixture.name} was not applied`}
         {fixture.result?.fixtureSeverity != null
@@ -101,7 +106,7 @@ function FixtureResult({ fixture }) {
   }
   const observance = fixture.result?.observance;
   return (
-    <div style={{ fontSize: FS.xs, color: BODY, fontFamily: sans }}>
+    <div style={{ fontSize: chromeFontSize(FS.xs, mobile), color: BODY, fontFamily: sans }}>
       <strong>Tradition · dossier observance:</strong>{' '}
       {observance?.name || fixture.name}
       {/* The observance window's opening week is genuinely a week OF THE YEAR,
@@ -114,6 +119,7 @@ function FixtureResult({ fixture }) {
 }
 
 function CategoryFixtures({ fixtures }) {
+  const mobile = useIsMobile();
   if (!Array.isArray(fixtures) || fixtures.length === 0) return null;
   return (
     <div
@@ -126,7 +132,7 @@ function CategoryFixtures({ fixtures }) {
         gap: SP.xs,
       }}
     >
-      <div style={{ fontSize: FS.xs, color: BODY, fontFamily: sans, fontWeight: 600 }}>
+      <div style={{ fontSize: chromeFontSize(FS.xs, mobile), color: BODY, fontFamily: sans, fontWeight: 600 }}>
         Category-aware fixtures
       </div>
       {fixtures.map(fixture => (
@@ -145,17 +151,17 @@ function CategoryFixtures({ fixtures }) {
             <FieldTruth receipt={fixture.receipt} />
           )}
           {fixture.receipt?.note && (
-            <div style={{ fontSize: FS.xs, color: MUTED, fontFamily: sans }}>
+            <div style={{ fontSize: chromeFontSize(FS.xs, mobile), color: MUTED, fontFamily: sans }}>
               {fixture.receipt.note}
             </div>
           )}
           {fixture.receipt?.assumption && (
-            <div style={{ fontSize: FS.xs, color: MUTED, fontFamily: sans }}>
+            <div style={{ fontSize: chromeFontSize(FS.xs, mobile), color: MUTED, fontFamily: sans }}>
               {fixture.receipt.assumption}
             </div>
           )}
           {fixture.event?.veto && (
-            <div role="alert" style={{ fontSize: FS.xs, color: MUTED, fontFamily: sans }}>
+            <div role="alert" style={{ fontSize: chromeFontSize(FS.xs, mobile), color: MUTED, fontFamily: sans }}>
               Event refused: {fixture.event.veto.code}
             </div>
           )}
@@ -172,6 +178,7 @@ function CategoryFixtures({ fixtures }) {
  * were preview-forced, and which candidates remained dormant in this fixture.
  */
 export default function ContentSampleReceipt({ sample }) {
+  const mobile = useIsMobile();
   if (!sample) return null;
   const changes = sample.diff?.scalarChanges || [];
   const materialized = sample.diff?.materialized || {};
@@ -201,7 +208,7 @@ export default function ContentSampleReceipt({ sample }) {
           Unsaved sample settlement · same seed before and after
         </span>
       </Eyebrow>
-      <div style={{ fontSize: FS.xs, color: MUTED, fontFamily: sans }}>
+      <div style={{ fontSize: chromeFontSize(FS.xs, mobile), color: MUTED, fontFamily: sans }}>
         Seed {sample.seed} · this preview did not alter your library, saves, or
         campaigns.
       </div>
@@ -209,7 +216,7 @@ export default function ContentSampleReceipt({ sample }) {
         <table style={{
           borderCollapse: 'collapse',
           width: '100%',
-          fontSize: FS.xs,
+          fontSize: chromeFontSize(FS.xs, mobile),
           color: BODY,
           fontFamily: sans,
         }}>
@@ -236,7 +243,7 @@ export default function ContentSampleReceipt({ sample }) {
           </tbody>
         </table>
       ) : (
-        <div style={{ fontSize: FS.xs, color: MUTED, fontFamily: sans }}>
+        <div style={{ fontSize: chromeFontSize(FS.xs, mobile), color: MUTED, fontFamily: sans }}>
           No registered scalar summary changed in this sample.
         </div>
       )}
@@ -253,13 +260,13 @@ export default function ContentSampleReceipt({ sample }) {
         entries={materialized.services}
       />
       {sample.diff?.addedExports?.length > 0 && (
-        <div style={{ fontSize: FS.xs, color: BODY, fontFamily: sans }}>
+        <div style={{ fontSize: chromeFontSize(FS.xs, mobile), color: BODY, fontFamily: sans }}>
           <strong>New exports:</strong> {sample.diff.addedExports.join(', ')}
         </div>
       )}
       {materializedOverrides.length > 0 && (
         <div style={{
-          fontSize: FS.xs,
+          fontSize: proseFontSize(FS.xs, mobile),
           color: MUTED,
           fontFamily: sans,
           lineHeight: 1.4,
@@ -272,7 +279,7 @@ export default function ContentSampleReceipt({ sample }) {
       )}
       {gatedOverrides.length > 0 && (
         <div style={{
-          fontSize: FS.xs,
+          fontSize: proseFontSize(FS.xs, mobile),
           color: MUTED,
           fontFamily: sans,
           lineHeight: 1.4,
@@ -285,7 +292,7 @@ export default function ContentSampleReceipt({ sample }) {
       )}
       {ambiguousOverrides.length > 0 && (
         <div style={{
-          fontSize: FS.xs,
+          fontSize: proseFontSize(FS.xs, mobile),
           color: MUTED,
           fontFamily: sans,
           lineHeight: 1.4,
@@ -298,7 +305,7 @@ export default function ContentSampleReceipt({ sample }) {
       )}
       {sample.dormant?.length > 0 && (
         <div style={{
-          fontSize: FS.xs,
+          fontSize: proseFontSize(FS.xs, mobile),
           color: MUTED,
           fontFamily: sans,
           lineHeight: 1.4,

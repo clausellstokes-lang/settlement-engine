@@ -34,6 +34,9 @@ import GalleryMapsSidebar from './GalleryMapsSidebar.jsx';
 import GalleryTopbar from './GalleryTopbar.jsx';
 import {
   GOLD_BG, INK, INK_DEEP, MUTED, SECOND, BORDER, CARD, CARD_ALT, CARD_HDR, PARCH, RED, sans, serif_, SP, FS, swatch } from '../theme.js';
+import { staffUnlocksPaidFeatures } from '../../lib/staffEntitlements.js';
+import useIsMobile from '../../hooks/useIsMobile.js';
+import { chromeFontSize, proseFontSize } from '../../design/proseScale.js';
 
 // The age-band vocabulary (domain/ageBands.js), read as a world's age.
 const WORLD_AGE_LABELS = Object.freeze({
@@ -45,12 +48,13 @@ const WORLD_AGE_LABELS = Object.freeze({
 });
 
 function WorldAgeChip({ band }) {
+  const mobile = useIsMobile();
   const label = WORLD_AGE_LABELS[band];
   if (!label) return null;
   return (
     <span aria-label={`World age: ${label}`} style={{
       display: 'inline-flex', alignItems: 'center', gap: 4,
-      fontSize: FS.pico, fontWeight: 700, color: SECOND,
+      fontSize: chromeFontSize(FS.pico, mobile), fontWeight: 700, color: SECOND,
       background: PARCH, border: `1px solid ${BORDER}`, padding: '1px 6px',
     }}>
       World {label}
@@ -59,10 +63,11 @@ function WorldAgeChip({ band }) {
 }
 
 export default function GalleryCampaigns({ onNavigate }) {
+  const mobile = useIsMobile();
   const auth = useStore(s => s.auth);
   const importGalleryMapWithCampaign = useStore(s => s.importGalleryMapWithCampaign);
   const setActiveCampaign = useStore(s => s.setActiveCampaign);
-  const isPremium = auth?.tier === 'premium' || auth?.role === 'developer' || auth?.role === 'admin';
+  const isPremium = auth?.tier === 'premium' || staffUnlocksPaidFeatures(auth?.role);
 
   const [items, setItems] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -239,7 +244,7 @@ export default function GalleryCampaigns({ onNavigate }) {
               <EmptyState
                 align="center"
                 heading="No shared campaigns yet."
-                body="Premium DMs can publish a map together with its living campaign, and it appears here for others to read and adopt."
+                body="Cartographer DMs can publish a map together with its living campaign, and it appears here for others to read and adopt."
               />
             )
           )}
@@ -251,12 +256,12 @@ export default function GalleryCampaigns({ onNavigate }) {
                   <img src={m.thumb_url || m.image_url} alt={m.name || 'Shared campaign'} loading="lazy"
                     style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }} />
                 ) : (
-                  <div style={{ width: '100%', height: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center', color: MUTED, fontSize: FS.xs, background: PARCH }}>
+                  <div style={{ width: '100%', height: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center', color: MUTED, fontSize: chromeFontSize(FS.xs, mobile), background: PARCH }}>
                     Generated terrain
                   </div>
                 )}
                 {m.at_war === true && (
-                  <span aria-label="This realm is at war" style={{ position: 'absolute', top: 6, right: 6, display: 'inline-flex', alignItems: 'center', gap: 3, fontSize: FS.pico, fontWeight: 700, textTransform: 'uppercase', letterSpacing: 0.4, color: RED, background: CARD_HDR, border: `1px solid ${BORDER}`, padding: '1px 5px' }}>
+                  <span aria-label="This realm is at war" style={{ position: 'absolute', top: 6, right: 6, display: 'inline-flex', alignItems: 'center', gap: 3, fontSize: chromeFontSize(FS.pico, mobile), fontWeight: 700, textTransform: 'uppercase', letterSpacing: 0.4, color: RED, background: CARD_HDR, border: `1px solid ${BORDER}`, padding: '1px 5px' }}>
                     At war
                   </span>
                 )}
@@ -264,23 +269,23 @@ export default function GalleryCampaigns({ onNavigate }) {
               <div style={{ padding: SP.md, display: 'flex', flexDirection: 'column', gap: SP.xs, flex: 1 }}>
                 <div style={{ fontFamily: serif_, fontSize: FS.md, fontWeight: 700, color: INK_DEEP, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{m.name || 'Untitled campaign'}</div>
                 {m.author_name && (
-                  <div style={{ fontSize: FS.pico, color: MUTED }}>by {m.author_name}</div>
+                  <div style={{ fontSize: chromeFontSize(FS.pico, mobile), color: MUTED }}>by {m.author_name}</div>
                 )}
                 {/* The campaign anatomy row: world age · settlement count · aliveness. */}
                 <div style={{ display: 'flex', flexWrap: 'wrap', alignItems: 'center', gap: 5 }}>
                   <WorldAgeChip band={m.world_age} />
                   {Number(m.member_count) > 0 && (
-                    <span aria-label={`${m.member_count} settlements`} style={{ display: 'inline-flex', alignItems: 'center', gap: 3, fontSize: FS.pico, fontWeight: 700, color: SECOND, background: PARCH, border: `1px solid ${BORDER}`, padding: '1px 6px' }}>
+                    <span aria-label={`${m.member_count} settlements`} style={{ display: 'inline-flex', alignItems: 'center', gap: 3, fontSize: chromeFontSize(FS.pico, mobile), fontWeight: 700, color: SECOND, background: PARCH, border: `1px solid ${BORDER}`, padding: '1px 6px' }}>
                       {m.member_count} settlement{m.member_count === 1 ? '' : 's'}
                     </span>
                   )}
                   <AlivenessBadge score={m.aliveness} />
                 </div>
-                {m.description && <div style={{ fontSize: FS.xs, color: SECOND, lineHeight: 1.4, maxHeight: 54, overflow: 'hidden' }}>{m.description}</div>}
+                {m.description && <div style={{ fontSize: proseFontSize(FS.xs, mobile), color: SECOND, lineHeight: 1.4, maxHeight: 54, overflow: 'hidden' }}>{m.description}</div>}
                 {Array.isArray(m.tags) && m.tags.length > 0 && (
                   <div style={{ display: 'flex', flexWrap: 'wrap', gap: 4, marginTop: 2 }}>
                     {m.tags.slice(0, 4).map((t) => (
-                      <span key={t} style={{ fontSize: FS.pico, color: MUTED, background: PARCH, padding: '1px 5px' }}>{t}</span>
+                      <span key={t} style={{ fontSize: chromeFontSize(FS.pico, mobile), color: MUTED, background: PARCH, padding: '1px 5px' }}>{t}</span>
                     ))}
                   </div>
                 )}

@@ -5,9 +5,28 @@
 // set debug options
 const PRODUCTION = location.hostname && location.hostname !== "localhost" && location.hostname !== "127.0.0.1";
 const DEBUG = JSON.safeParse(localStorage.getItem("debug")) || {};
-const INFO = true;
-const TIME = true;
-const WARN = true;
+// SettlementForge fork patch — THE EMBEDDED MAP IS A PRODUCT SURFACE, NOT A DEVELOPER
+// TOOL. REVIEW-P F15 (ODQ §934.63) walked the public path and found /realm the ONLY route
+// with anything in its console, while every other route on both viewports was clean. The
+// three lines are FMG diagnostics, and all three are guarded by WARN:
+//     main.js:359                   WARN && console.warn("Generate random map")
+//     main.js:784                   WARN && console.warn(`TOTAL: ${…}s`)
+//     index-*.js (vendor bundle)    f && WARN && console.warn(`Unresolved depressions: ${f}. …`)
+// The four channels were vendored in flat-true at f386f48d96 and PRODUCTION — FMG's OWN dev
+// switch, declared on the line above — was left unread ever since. This reads it.
+//   ⚠ `import.meta.env.DEV` is deliberately NOT used: public/ is served verbatim and Vite
+// never transforms it, so the hostname test is the only DEV signal this file has. It carries
+// the same meaning: the vite dev server on localhost / 127.0.0.1 keeps every diagnostic, a
+// deployed host prints none.
+//   ERROR stays unconditional — an error must still reach the console.
+//   Every `console.time` in the fork is paired with a `console.timeEnd` and BOTH are guarded
+// by TIME (64 and 64, measured), so muting TIME cannot orphan a timer into a new warning.
+//   The `debug` localStorage key re-opens any channel on a deployed host, which is the
+// fork's existing DEBUG.cloud / DEBUG.stateLabels / DEBUG.temperature idiom.
+//   Pinned by tests/lint/embeddedMapConsoleGate.walker.test.js.
+const INFO = Boolean(DEBUG.info) || !PRODUCTION;
+const TIME = Boolean(DEBUG.time) || !PRODUCTION;
+const WARN = Boolean(DEBUG.warn) || !PRODUCTION;
 const ERROR = true;
 
 // detect device

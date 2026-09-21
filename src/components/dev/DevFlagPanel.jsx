@@ -17,11 +17,12 @@
  */
 
 import { useState, useSyncExternalStore } from 'react';
-import { FS, swatch, GOLD, PARCH, SLATE, SLATE_BG, BODY, CHROME, bottomClearance } from '../theme.js';
+import { FS, swatch, GOLD, PARCH, SLATE, SLATE_BG, BODY, CHROME, bottomClearance, aboveBottomNav } from '../theme.js';
 import { FLAGS, flag, setFlagOverride } from '../../lib/flags.js';
 import Button from '../primitives/Button.jsx';
 import IconButton from '../primitives/IconButton.jsx';
 import useIsMobile from '../../hooks/useIsMobile.js';
+import { chromeFontSize, proseFontSize } from '../../design/proseScale.js';
 
 const STORAGE_KEY = 'flag.__devPanelOpen';
 
@@ -52,6 +53,7 @@ function readIsOverridden(name) {
 export default function DevFlagPanel() {
   // Hooks first — bailing on !DEV happens AFTER all hooks are declared
   // so React's invariants hold across the prod / dev render paths.
+  const mobile = useIsMobile();
   const [open, setOpen] = useState(() => {
     try { return window.localStorage.getItem(STORAGE_KEY) === '1'; } catch { return false; }
   });
@@ -78,7 +80,7 @@ export default function DevFlagPanel() {
     // the coordinated bottom-right prod stack (Feedback + scroll controls); mobile
     // lifts it clear of the bottom nav + home indicator via the shared token. Stays
     // DEV-gated (this whole component tree-shakes out of prod above).
-    position: 'fixed', bottom: isMobile ? bottomClearance(CHROME.fabLift) : 12, left: 12, zIndex: 10000,
+    position: 'fixed', bottom: isMobile ? bottomClearance(CHROME.fabLift) : aboveBottomNav(12), left: 12, zIndex: 10000,
     fontFamily: 'system-ui, -apple-system, sans-serif',
     fontSize: FS.sm, color: '#1c1409',
   };
@@ -123,7 +125,7 @@ export default function DevFlagPanel() {
         color: GOLD,
         borderBottom: '1px solid #1c1409',
       }}>
-        <span style={{ fontWeight: 700, letterSpacing: '0.05em', textTransform: 'uppercase', fontSize: FS.xs }}>
+        <span style={{ fontWeight: 700, letterSpacing: '0.05em', textTransform: 'uppercase', fontSize: chromeFontSize(FS.xs, mobile) }}>
           Feature flags (DEV)
         </span>
         <IconButton
@@ -171,7 +173,7 @@ export default function DevFlagPanel() {
                   {name}
                   {overridden && (
                     <span title="Override set (clear to use default)" style={{
-                      fontSize: FS.micro, fontWeight: 700, color: SLATE,
+                      fontSize: chromeFontSize(FS.micro, mobile), fontWeight: 700, color: SLATE,
                       background: SLATE_BG, border: '1px solid #5A6E82',
                       padding: '0 4px', letterSpacing: '0.04em',
                     }}>
@@ -179,10 +181,10 @@ export default function DevFlagPanel() {
                     </span>
                   )}
                 </div>
-                <div style={{ fontSize: FS.xs, color: BODY, lineHeight: 1.45, marginTop: 2 }}>
+                <div style={{ fontSize: proseFontSize(FS.xs, mobile), color: BODY, lineHeight: 1.45, marginTop: 2 }}>
                   {FLAGS[name].description}
                 </div>
-                <div style={{ fontSize: FS.xxs, color: swatch.inkMag3, marginTop: 2 }}>
+                <div style={{ fontSize: chromeFontSize(FS.xxs, mobile), color: swatch.inkMag3, marginTop: 2 }}>
                   default: <strong>{String(FLAGS[name].default)}</strong>
                 </div>
               </div>
@@ -204,7 +206,7 @@ export default function DevFlagPanel() {
 
       <div style={{
         padding: '6px 10px',
-        fontSize: FS.xxs, color: swatch.inkMag3,
+        fontSize: chromeFontSize(FS.xxs, mobile), color: swatch.inkMag3,
         background: 'rgba(28,20,9,0.05)',
         borderTop: '1px solid rgba(28,20,9,0.08)',
       }}>

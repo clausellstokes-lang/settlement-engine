@@ -37,6 +37,8 @@ import { Pill, Section } from './WorldPulsePrimitives.jsx';
 import RealmEntityLink from '../primitives/RealmEntityLink.jsx';
 import Button from '../primitives/Button.jsx';
 import { BODY, BORDER, BORDER2, CARD, CARD_ALT, FS, INK, SP, sans, EMPTY_VALUE } from '../theme.js';
+import useIsMobile from '../../hooks/useIsMobile.js';
+import { chromeFontSize, proseFontSize } from '../../design/proseScale.js';
 
 /** The register's calm nothing-here state. A realm with no places is not broken. */
 function EmptyRegister() {
@@ -54,6 +56,7 @@ function EmptyRegister() {
  *  mode; the camera is mode-specific and an image backdrop has no programmatic
  *  camera). */
 function RegisterRow({ row, onHover, onLeave, showable }) {
+  const mobile = useIsMobile();
   const threat = row.threat && !isCalmThreat(row.threat) ? threatDisplay(row.threat) : null;
   return (
     // eslint-disable-next-line jsx-a11y/no-static-element-interactions -- hover-peek enhancement only: the row's real controls (the entity link, the show-on-map button) stay native; onFocus/onBlur mirror the glow for keyboard users by focus-bubbling from those controls, and the wrapper itself is deliberately not a tab stop.
@@ -78,7 +81,7 @@ function RegisterRow({ row, onHover, onLeave, showable }) {
         />
         <Pill>{row.tier}</Pill>
         {threat && (
-          <span style={{ color: threat.text, fontFamily: sans, fontSize: FS.xxs, fontWeight: 900, textTransform: 'uppercase', letterSpacing: '0.05em' }}>
+          <span style={{ color: threat.text, fontFamily: sans, fontSize: chromeFontSize(FS.xxs, mobile), fontWeight: 900, textTransform: 'uppercase', letterSpacing: '0.05em' }}>
             {threat.label}
           </span>
         )}
@@ -89,13 +92,13 @@ function RegisterRow({ row, onHover, onLeave, showable }) {
             data-testid="gazetteer-show-on-map"
             aria-label={`Show ${row.name} on the map`}
             onClick={() => showSettlementOnMap(row.id)}
-            style={{ marginLeft: 'auto', padding: '0 6px', minHeight: 24, fontSize: FS.xxs, fontWeight: 800 }}
+            style={{ marginLeft: 'auto', padding: '0 6px', minHeight: 24, fontSize: chromeFontSize(FS.xxs, mobile), fontWeight: 800 }}
           >
             Show on map
           </Button>
         )}
       </div>
-      <div style={{ color: BODY, fontFamily: sans, fontSize: FS.xs, lineHeight: 1.45, overflowWrap: 'anywhere' }}>
+      <div style={{ color: BODY, fontFamily: sans, fontSize: proseFontSize(FS.xs, mobile), lineHeight: 1.45, overflowWrap: 'anywhere' }}>
         {row.line}
       </div>
     </div>
@@ -128,6 +131,7 @@ function codepointCompare(a, b) {
 }
 
 function GazetteerTable({ rows, seesSecrets }) {
+  const mobile = useIsMobile();
   const [sortKey, setSortKey] = useState('name');
   const [dir, setDir] = useState(1);
   const sorted = useMemo(() => {
@@ -142,8 +146,8 @@ function GazetteerTable({ rows, seesSecrets }) {
     ['name', 'Name'], ['tier', 'Tier'], ['prosperity', 'Prosperity'], ['war', 'War'],
     ...(seesSecrets ? [['threat', 'Threat'], ['population', 'Population']] : []),
   ];
-  const th = { textAlign: 'left', padding: '6px 8px', borderBottom: `1px solid ${BORDER}`, color: INK, fontFamily: sans, fontSize: FS.xxs, fontWeight: 900, textTransform: 'uppercase', letterSpacing: '0.05em', whiteSpace: 'nowrap' };
-  const td = { padding: '6px 8px', borderBottom: `1px solid ${BORDER2}`, color: BODY, fontFamily: sans, fontSize: FS.xs, verticalAlign: 'baseline' };
+  const th = { textAlign: 'left', padding: '6px 8px', borderBottom: `1px solid ${BORDER}`, color: INK, fontFamily: sans, fontSize: chromeFontSize(FS.xxs, mobile), fontWeight: 900, textTransform: 'uppercase', letterSpacing: '0.05em', whiteSpace: 'nowrap' };
+  const td = { padding: '6px 8px', borderBottom: `1px solid ${BORDER2}`, color: BODY, fontFamily: sans, fontSize: chromeFontSize(FS.xs, mobile), verticalAlign: 'baseline' };
   return (
     <div data-testid="gazetteer-table" style={{ overflowX: 'auto', border: `1px solid ${BORDER2}`, background: CARD }}>
       <table style={{ borderCollapse: 'collapse', width: '100%' }}>
@@ -153,7 +157,7 @@ function GazetteerTable({ rows, seesSecrets }) {
               <th key={key} aria-sort={sortKey === key ? (dir === 1 ? 'ascending' : 'descending') : 'none'} style={th}>
                 <Button variant="ghost" size="sm" onClick={() => onSort(key)}
                   aria-label={`Sort by ${label}`}
-                  style={{ padding: 0, minHeight: 24, fontSize: FS.xxs, fontWeight: 900, textTransform: 'uppercase', letterSpacing: '0.05em' }}>
+                  style={{ padding: 0, minHeight: 24, fontSize: chromeFontSize(FS.xxs, mobile), fontWeight: 900, textTransform: 'uppercase', letterSpacing: '0.05em' }}>
                   {label}{sortKey === key ? (dir === 1 ? ' ▲' : ' ▼') : ''}
                 </Button>
               </th>
@@ -164,7 +168,7 @@ function GazetteerTable({ rows, seesSecrets }) {
           {sorted.map(row => (
             <tr key={row.id} data-testid="gazetteer-table-row">
               <td style={td}>
-                <RealmEntityLink settlementSaveId={row.id} label={row.name} style={{ color: INK, fontWeight: 800, fontSize: FS.xs }} />
+                <RealmEntityLink settlementSaveId={row.id} label={row.name} style={{ color: INK, fontWeight: 800, fontSize: chromeFontSize(FS.xs, mobile) }} />
               </td>
               <td style={td}>{row.tier}</td>
               <td style={td}>{row.prosperity || EMPTY_VALUE}</td>

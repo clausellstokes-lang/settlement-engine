@@ -12,6 +12,7 @@ import { saves as savesService } from '../../lib/saves.js';
 import { t } from '../../copy/index.js';
 import { writeDraft, clearDraft } from '../../lib/pendingSaveDraft.js';
 import { useStore } from '../../store';
+import { tierNounFor } from '../../domain/display/stateProse/weaveBlock.js';
 import { sans, FS, SP, swatch } from '../theme.js';
 import Button from '../primitives/Button.jsx';
 
@@ -127,7 +128,10 @@ export function SaveToLibraryButton({ settlement, canSave, isMobile: _isMobile, 
           busy={saving}
           title="We'll save your dossier as soon as you're in."
         >
-          {saving ? 'Preparing your save…' : 'Save this town. Free account →'}
+          {/* THE NOUN FOLLOWS THE TIER (ODQ §934.22 item 3): this door asked a village of
+            * 633 to save a 'town'. `tierNounFor` refuses a tier this build does not know,
+            * and the fallback is the product's own word rather than a guessed rung. */}
+          {saving ? 'Preparing your save…' : t('save.signupButton', { tierNoun: tierNounFor(settlement?.tier) || 'settlement' })}
         </Button>
         {saveError && (
           <div role="alert" style={{ color: swatch.danger, fontSize: FS.xs, fontFamily: sans, maxWidth: 420, textAlign: 'center' }}>

@@ -23,3 +23,8 @@
 *.mp3   binary
 *.mp4   binary
 *.webm  binary
+# glTF binary exhibits (public/landing-maps/**). Declared 2026-09-20 (TOOL-25): git
+# already detected all 25 as binary, but nothing DECLARED it, so the control-byte
+# pin's binary census carried 25 undeclared rows in its denominator. The declaration
+# is what tests/lint/controlBytes.test.js reads; detection is not a contract.
+*.glb   binary

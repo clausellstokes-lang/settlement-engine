@@ -6,7 +6,9 @@
  * (generators build raw settlements; the domain ages/reacts to them). A handful
  * of domain modules currently reach the OTHER way, into src/generators/**, which
  * forms a domain ↔ generators import cycle. That cycle is part of why the
- * worldPulse simulation (src/domain/worldPulse, ~22.7k LOC) drags generator code
+ * worldPulse simulation (src/domain/worldPulse — 183,678 lines across 443 files,
+ * re-measured 2026-09-20 at ee2406191; the header carried "~22.7k LOC" from an era
+ * eight times smaller) drags generator code
  * with it — and, before the first-paint fix, why it could land eagerly in the
  * entry chunk. The full inversion (pushing the shared leaves DOWN into a layer
  * both can import, or DI-ing the generator fns in) is risky and deferred; with

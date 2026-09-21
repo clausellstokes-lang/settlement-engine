@@ -1,4 +1,6 @@
 import { FS, swatch } from '../theme.js';
+import useIsMobile from '../../hooks/useIsMobile.js';
+import { chromeFontSize } from '../../design/proseScale.js';
 
 // Dossier tab strip — extracted verbatim from OutputContainer's render.
 // Presentational only: scroll, the scroll-container ref, the resolved `tabs`
@@ -11,6 +13,7 @@ export default function DossierTabStrip({
   selectedTab,
   setActiveTab,
 }) {
+  const mobile = useIsMobile();
   return (
         <div style={{ position: 'relative', borderBottom: '1px solid #e0d0b0', background: swatch['#F7F0E4'] }}>
           <button type="button" onClick={() => scroll(-1)} aria-label="Scroll tabs left" style={{ position: 'absolute', left: 0, top: 0, bottom: 0, zIndex: 2, background: 'linear-gradient(to right, #f7f0e4 60%, transparent)', border: 'none', cursor: 'pointer', color: swatch.mutedBrown, padding: '0 8px' }}><span aria-hidden="true">‹</span></button>
@@ -68,7 +71,7 @@ export default function DossierTabStrip({
                   // Roving tabIndex: only the selected tab is tabbable; the rest are
                   // reached via the arrow-key handler on the tablist.
                   tabIndex={active ? 0 : -1}
-                  style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 3, padding: '10px 12px 8px', flexShrink: 0, background: bg, borderBottom: '2px solid ' + (active ? accent : 'transparent'), borderTop: active ? '1px solid #e0d0b0' : '1px solid transparent', borderLeft: active ? '1px solid #e0d0b0' : '1px solid transparent', borderRight: active ? '1px solid #e0d0b0' : '1px solid transparent', cursor: 'pointer', color: active ? accent : idle, fontSize: FS.xxs, fontWeight: active ? 700 : 500, fontFamily: 'Nunito, sans-serif', marginBottom: -1, whiteSpace: 'nowrap', WebkitTapHighlightColor: 'transparent' }}
+                  style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 3, padding: '10px 12px 8px', flexShrink: 0, background: bg, borderBottom: '2px solid ' + (active ? accent : 'transparent'), borderTop: active ? '1px solid #e0d0b0' : '1px solid transparent', borderLeft: active ? '1px solid #e0d0b0' : '1px solid transparent', borderRight: active ? '1px solid #e0d0b0' : '1px solid transparent', cursor: 'pointer', color: active ? accent : idle, fontSize: chromeFontSize(FS.xxs, mobile), fontWeight: active ? 700 : 500, fontFamily: 'Nunito, sans-serif', marginBottom: -1, whiteSpace: 'nowrap', WebkitTapHighlightColor: 'transparent' }}
                 ><Icon size={14} />{label}</button>
               );
             })}

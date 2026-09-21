@@ -10,8 +10,11 @@
  */
 import Button from '../primitives/Button.jsx';
 import { BODY, FS, GOLD, INK, MUTED, SP, sans } from '../theme.js';
+import useIsMobile from '../../hooks/useIsMobile.js';
+import { chromeFontSize } from '../../design/proseScale.js';
 
 export default function DisclosureHeader({ open, onToggle, regionId, title, summary }) {
+  const mobile = useIsMobile();
   return (
     <Button
       variant="secondary"
@@ -29,20 +32,20 @@ export default function DisclosureHeader({ open, onToggle, regionId, title, summ
         whiteSpace: 'normal',
       }}
     >
-      <span aria-hidden style={{ color: GOLD, fontFamily: sans, fontSize: FS.xs, fontWeight: 950 }}>
+      <span aria-hidden style={{ color: GOLD, fontFamily: sans, fontSize: chromeFontSize(FS.xs, mobile), fontWeight: 950 }}>
         {open ? '▾' : '▸'}
       </span>
       <span style={{ minWidth: 0, flex: 1 }}>
-        <span style={{ display: 'block', color: INK, fontFamily: sans, fontSize: FS.xs, fontWeight: 950 }}>
+        <span style={{ display: 'block', color: INK, fontFamily: sans, fontSize: chromeFontSize(FS.xs, mobile), fontWeight: 950 }}>
           {title}
         </span>
         {summary && (
-          <span style={{ display: 'block', marginTop: 2, color: BODY, fontFamily: sans, fontSize: FS.xxs, fontWeight: 750, lineHeight: 1.4 }}>
+          <span style={{ display: 'block', marginTop: 2, color: BODY, fontFamily: sans, fontSize: chromeFontSize(FS.xxs, mobile), fontWeight: 750, lineHeight: 1.4 }}>
             {summary}
           </span>
         )}
       </span>
-      <span style={{ color: MUTED, fontFamily: sans, fontSize: FS.xxs, fontWeight: 950, textTransform: 'uppercase', letterSpacing: '0.06em' }}>
+      <span style={{ color: MUTED, fontFamily: sans, fontSize: chromeFontSize(FS.xxs, mobile), fontWeight: 950, textTransform: 'uppercase', letterSpacing: '0.06em' }}>
         {open ? 'Hide' : 'Show'}
       </span>
     </Button>

@@ -12,8 +12,11 @@ import { newsReasonPhrases } from '../../domain/display/newsBody.js';
 import Button from '../primitives/Button.jsx';
 import { AddressChain, AffectedSettlements } from './AddressChain.jsx';
 import { severityBand } from './heraldFilter.js';
+import useIsMobile from '../../hooks/useIsMobile.js';
+import { chromeFontSize, proseFontSize } from '../../design/proseScale.js';
 
 export function Pill({ children, tone = 'neutral' }) {
+  const mobile = useIsMobile();
   const bg = tone === 'major' ? GOLD_BG : tone === 'good' ? swatch.successBg : CARD_ALT;
   const color = tone === 'major' ? GOLD : tone === 'good' ? GREEN : SECOND;
   return (
@@ -26,7 +29,7 @@ export function Pill({ children, tone = 'neutral' }) {
       background: bg,
       color,
       fontFamily: sans,
-      fontSize: FS.xxs,
+      fontSize: chromeFontSize(FS.xxs, mobile),
       fontWeight: 800,
       whiteSpace: 'nowrap',
       textTransform: 'capitalize',
@@ -37,12 +40,13 @@ export function Pill({ children, tone = 'neutral' }) {
 }
 
 export function EntityPill({ label, value }) {
+  const mobile = useIsMobile();
   return (
     <span style={{
       display: 'inline-flex', alignItems: 'center', minHeight: 22, maxWidth: '100%',
       padding: '2px 8px', border: `1px solid ${BORDER2}`,
       background: swatch.infoBg, color: INK,
-      fontFamily: sans, fontSize: FS.xxs, fontWeight: 700,
+      fontFamily: sans, fontSize: chromeFontSize(FS.xxs, mobile), fontWeight: 700,
     }}>
       <span style={{ color: MUTED, fontWeight: 900, marginRight: 4, textTransform: 'uppercase', letterSpacing: '0.04em' }}>
         {label}
@@ -56,6 +60,7 @@ export function EntityPill({ label, value }) {
 // with no named force gets a one-line input so the DM can attribute it to a
 // settlement-less force ("The Red Fang warband") right from the card.
 export function NameAttackerControl({ stressor, onName, busy }) {
+  const mobile = useIsMobile();
   const [value, setValue] = useState('');
   return (
     <div style={{ display: 'flex', gap: 6, alignItems: 'center', width: '100%' }}>
@@ -67,7 +72,7 @@ export function NameAttackerControl({ stressor, onName, busy }) {
         style={{
           flex: 1, minWidth: 0, minHeight: 30, padding: '5px 9px',
           border: `1px solid ${BORDER2}`,
-          background: CARD, color: INK, fontFamily: sans, fontSize: FS.xs,
+          background: CARD, color: INK, fontFamily: sans, fontSize: chromeFontSize(FS.xs, mobile),
         }}
       />
       <SmallButton
@@ -94,6 +99,7 @@ export function OutcomeCard({
   subject = null,
   affectedIds = [],
 }) {
+  const mobile = useIsMobile();
   const major = tone === 'major' || severity >= 0.7;
   const severityLabel = severityBand({ severity });
   const reasonPhrases = newsReasonPhrases({ reasons });
@@ -125,7 +131,7 @@ export function OutcomeCard({
               margin: '5px 0 0',
               color: BODY,
               fontFamily: sans,
-              fontSize: FS.xs,
+              fontSize: proseFontSize(FS.xs, mobile),
               lineHeight: 1.45,
               overflowWrap: 'anywhere',
             }}>
@@ -183,13 +189,14 @@ export function SmallButton({
 }
 
 export function Section({ heading, count, children }) {
+  const mobile = useIsMobile();
   return (
     <section style={{ minWidth: 0 }}>
       <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 10 }}>
         <h3 style={{ margin: 0, color: INK, fontFamily: sans, fontSize: FS.sm, fontWeight: 900 }}>
           {heading}
         </h3>
-        <span style={{ marginLeft: 'auto', color: MUTED, fontFamily: sans, fontSize: FS.xs, fontWeight: 800 }}>
+        <span style={{ marginLeft: 'auto', color: MUTED, fontFamily: sans, fontSize: chromeFontSize(FS.xs, mobile), fontWeight: 800 }}>
           {count}
         </span>
       </div>

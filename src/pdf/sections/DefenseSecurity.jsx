@@ -20,7 +20,11 @@ import { Pill } from '../primitives/Pill.jsx';
 import { Callout } from '../primitives/Callout.jsx';
 import { EditableText, EditableProse } from '../primitives/Editable.jsx';
 import { type, palette, space, pt } from '../theme.js';
+import { statusCase, tokenCase } from '../../domain/display/labelCase.js';
 import { cap, smart, label, hookText } from '../lib/format.js';
+import { StateProse } from '../primitives/StateProse.jsx';
+import { scoreBand } from '../../domain/display/defenseScoreBands.js';
+// ⛔ A SECOND `statusCase` import (from `components/new/labelLadder.js`) sat on THIS line: a duplicate of line 23, and `src/pdf` may not reach into `src/components`. Removed; the line is kept so the prose-numerics ratchet's frozen path:line identities below do not shift.
 
 // Armed-forces groups in render order, mirroring the web Defense tab.
 const FORCE_GROUPS = [
@@ -31,7 +35,7 @@ const FORCE_GROUPS = [
   { key: 'arcane', label: 'ARCANE DEFENSE', accent: palette.ai },
 ];
 
-export function DefenseSecurity({ settlement, narrativeMode, vm }) {
+export function DefenseSecurity({ settlement, narrativeMode, vm, stateProse }) {
   const d = vm.defense;
 
   // Criminal capture arrives as a ladder string ('none' → 'adversarial' →
@@ -60,6 +64,9 @@ export function DefenseSecurity({ settlement, narrativeMode, vm }) {
         {defenseHeadline(d, vm.identity)}
       </ChapterHeadline>
 
+      {/* ── The mounted state prose (the screen's ProseBlock positions) ── */}
+      <StateProse stateProse={stateProse} tab="defense" />
+
       {/* ── Military status override ──────────────────────────────── */}
       {d.militaryStress && (
         <Callout tone="bad" kicker="ACTIVE MILITARY STATUS">
@@ -80,11 +87,14 @@ export function DefenseSecurity({ settlement, narrativeMode, vm }) {
       {/* ── Readiness strip ──────────────────────────────────────── */}
       <StatStrip
         stats={[
-          { label: 'READINESS', value: d.readiness?.label },
-          { label: 'SCORE AVG', value: smart(d.scoreAvg), tone: scoreTone(d.scoreAvg) },
-          { label: 'SAFETY', value: cap(d.safetyLabel) },
-          { label: 'WATCH:POP', value: smart(d.safetyRatio) },
-          { label: 'FOOD RES.', value: smart(d.foodResilience) },
+          // RUNG 3, BOTH SURFACES (ODQ §934.22 item 4): the screen's own badge is cased, and
+          // a page that prints 'Well-Defended' where the tab prints 'Well-defended' is the
+          // two-spellings defect this file's parity suite exists to refuse.
+          { label: 'Readiness', value: statusCase(d.readiness?.label) },
+          { label: 'Score avg', value: smart(d.scoreAvg), tone: scoreTone(d.scoreAvg) },
+          { label: 'Safety', value: statusCase(d.safetyLabel) },
+          { label: 'Watch to population', value: smart(d.safetyRatio) },
+          { label: 'Food resilience', value: smart(d.foodResilience) },
         ]}
       />
 
@@ -132,8 +142,14 @@ export function DefenseSecurity({ settlement, narrativeMode, vm }) {
             <View style={{ width: 56, height: 4, backgroundColor: palette.border, borderRadius: 2, marginRight: 6, overflow: 'hidden' }}>
               <View style={{ width: `${Math.max(0, Math.min(100, row.score))}%`, height: '100%', backgroundColor: row.barColor }} />
             </View>
+            {/* `row.status` is `scoreBand(score)` — 'STRONG' / 'ADEQUATE' / 'WEAK' /
+                'CRITICAL', the frozen four that `defenseScoreBands.js` forbids extending.
+                Nothing here uppercased it: it arrives shouting from the vocabulary, which
+                is why this site has no `.toUpperCase()` to delete. The screen re-cases it
+                at the render rung (OverviewTab, DefenseTab) and leaves the constant alone;
+                so does this. */}
             <Text style={{ ...type.pill, fontSize: pt['7.5'], color: row.statusColor }}>
-              {row.status}
+              {statusCase(row.status)}
             </Text>
           </View>
           <Text style={{ ...type.body, fontSize: pt['9'], color: palette.second, lineHeight: 1.4 }}>
@@ -153,8 +169,8 @@ export function DefenseSecurity({ settlement, narrativeMode, vm }) {
           if (!forces.length) return null;
           return (
             <View key={group.key} style={{ marginBottom: 4 }}>
-              <Text style={{ ...type.label, fontSize: pt['7.5'], color: group.accent, marginBottom: 2 }}>
-                {group.label}
+              <Text style={{ ...type.label_plain, fontSize: pt['7.5'], color: group.accent, marginBottom: 2 }}>
+                {tokenCase(group.label)}
               </Text>
               {forces.map((force, i) => (
                 <View
@@ -246,8 +262,10 @@ export function DefenseSecurity({ settlement, narrativeMode, vm }) {
                 borderRadius: 2,
               }}
             >
-              <Text style={{ ...type.label, fontSize: pt['7.5'], color: palette.bad, marginBottom: 1 }}>
-                CRIMINAL STRUCTURE · {d.criminalStructure.label}
+              {/* Parity with the screen's Defense tab, which cases the same classifier word
+                  at its own mount: one status, one spelling, both surfaces. */}
+              <Text style={{ ...type.label_plain, fontSize: pt['7.5'], color: palette.bad, marginBottom: 1 }}>
+                Criminal structure · {statusCase(d.criminalStructure.label)}
               </Text>
               <Text style={{ ...type.caption, fontSize: pt['8'], color: palette.muted, lineHeight: 1.35 }}>
                 {d.criminalStructure.note}
@@ -361,9 +379,15 @@ export function DefenseSecurity({ settlement, narrativeMode, vm }) {
                   {sc.note}
                 </Text>
               </View>
+              {/* ⛔ THE BAND WORD, NEVER THE DIGIT (R-5b item #20, applied here at last). This
+                  printed `Math.round(sc.score)` — a bare 0-100 — beside a row whose screen
+                  twin prints the band word from the shared ladder, so one number read as two
+                  verdicts across the two surfaces and the PDF was the one still speaking in
+                  digits. It now prints exactly what `DefenseTab` prints for the same score,
+                  through the same two functions, so the surfaces cannot drift by a word. */}
               {sc.score != null && (
-                <Text style={{ ...type.numeric, fontSize: pt['10'], color: sc.color, marginLeft: 6 }}>
-                  {Math.round(sc.score)}
+                <Text style={{ ...type.caption, fontSize: pt['8'], color: sc.color, fontWeight: 700, marginLeft: 6 }}>
+                  {statusCase(scoreBand(Math.min(100, Math.max(0, sc.score))))}
                 </Text>
               )}
             </View>

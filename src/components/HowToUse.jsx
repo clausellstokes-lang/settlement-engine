@@ -46,6 +46,8 @@ import useAboutHashScroll from './about/useAboutHashScroll.js';
 // V-26b: the house-voice draft of the handbook narrative, rendered only when the
 // (default-off) `handbookVoice` flag is on. Rides this already-lazy chunk (zero eager).
 import { VoicedConceptIntro, VOICED_HEADER } from './howto/HandbookVoiced.jsx';
+import useIsMobile from '../hooks/useIsMobile.js';
+import { chromeFontSize, proseFontSize } from '../design/proseScale.js';
 
 // Responsive multi-column container for card/list-heavy section content. Uses
 // `column-width` (not a fixed count) so it fills a wide desktop page with as
@@ -56,12 +58,11 @@ const COLS = (col = 340) => ({ columnWidth: `${col}px`, columnGap: '22px' });
 const NO_BREAK = { breakInside: 'avoid', WebkitColumnBreakInside: 'avoid' };
 
 // THE ANCHOR LANDING OFFSET is theme.js's ANCHOR_OFFSET (imported above). The
-// desktop ribbon is `position:'sticky', top:0` (its module is moving under the LD
-// nav program, so this names the ribbon rather than a file), so a fragment jump — a
-// SectionNav click, a translated `?tab=` deep link, or useAboutHashScroll's
-// scrollIntoView — parks the section heading UNDERNEATH the chrome unless the target
-// carries a scroll margin. The derivation moved to theme.js (beside CHROME, the
-// measurement it comes from) when the SAME defect was found on /about/what-this-is:
+// painted arrow header is `position:'sticky', top:0` with the feather hanging below
+// it, so a fragment jump (a SectionNav click, a translated `?tab=` deep link, or
+// useAboutHashScroll's scrollIntoView) parks the section heading UNDERNEATH the
+// painting unless the target carries a scroll margin. The derivation moved to
+// theme.js (beside CHROME) when the SAME defect was found on /about/what-this-is:
 // three pages re-deriving one sum is three chances to drift, and the second page's
 // sections carried no margin at all.
 
@@ -123,6 +124,7 @@ export const SECTION_BLURBS = Object.freeze({
  * cannot list a section this page does not render, nor miss one it does.
  */
 function SectionNav() {
+  const mobile = useIsMobile();
   return (
     <nav aria-label="Sections of this guide" style={{ margin: '0 0 34px' }}>
       <div style={{ display:'grid', gridTemplateColumns:'repeat(auto-fill,minmax(220px,1fr))', gap:10 }}>
@@ -133,7 +135,7 @@ function SectionNav() {
             <div style={{ fontFamily:serif_, fontSize:FS.md, fontWeight:700, color:INK, marginBottom:4 }}>
               {u.heading}
             </div>
-            <div style={{ fontSize:FS.xs, color:SEC, lineHeight:1.5 }}>{SECTION_BLURBS[u.id]}</div>
+            <div style={{ fontSize:proseFontSize(FS.xs, mobile), color:SEC, lineHeight:1.5 }}>{SECTION_BLURBS[u.id]}</div>
           </a>
         ))}
       </div>
@@ -151,10 +153,11 @@ function SubHead({ children, size = FS.md }) {
 }
 
 function Step({ n, children }) {
+  const mobile = useIsMobile();
   return (
     <div style={{ display:'flex', gap:10, marginBottom:8, alignItems:'flex-start' }}>
       <div style={{ width:22, height:22, borderRadius:'50%', background:GOLD, color:swatch.white,
-        fontSize:FS.xs, fontWeight:800, display:'flex', alignItems:'center', justifyContent:'center', flexShrink:0, marginTop:1 }}>
+        fontSize:chromeFontSize(FS.xs, mobile), fontWeight:800, display:'flex', alignItems:'center', justifyContent:'center', flexShrink:0, marginTop:1 }}>
         {n}
       </div>
       <p style={{ fontSize: FS['12.5'], color:INK, lineHeight:1.6, margin:0 }}>{children}</p>
@@ -362,6 +365,12 @@ function Reference() {
       ['Settlements','Your saved settlement library. Group into campaigns, link as neighbours, edit, rename, and export.'],
       ['World Map','Embedded fantasy map. Drag saved settlements onto it to place them geographically. Toggle relationship and supply-chain overlays.'],
       ['Compendium','The reference spine: every catalog rendered live from the engine. See the deep-links below.'],
+      // V-18 the DM Screen is a REAL DM-facing surface (letter, dossier, session
+      // ledger, auspice, and a player-safe face you can turn to the table), and it
+      // had no inbound link anywhere outside lib/routes.js. It stays noindex, which
+      // is a crawler posture, not a verdict on who it is for: it reads whatever
+      // settlement is open, so there is nothing stable for an index to point at.
+      ['DM Screen', <>At-the-table view of whatever you have open: the Chronicler&rsquo;s Letter, the dossier at a glance, the session ledger, and the auspice, with a player-safe face you can turn around. <a href="/screen" style={{ color:GOLD, textDecoration:'underline', textUnderlineOffset:3 }}>Open the DM Screen</a>.</>],
       ['About','What this is (the trust page) and this Practical Guide.'],
     ]},
     { heading: 'Settlement Detail Tabs', rows: [
@@ -457,7 +466,19 @@ export default function HowToUse() {
           content, so de-collapsing preserves it exactly (design §3). */}
       <GuideSection unit="quick" heading="Quick Start"><QuickStart /></GuideSection>
       <GuideSection unit="power" heading="Power User"><PowerUser /></GuideSection>
-      <GuideSection unit="living" heading="The Living World"><LivingWorldTab /></GuideSection>
+      <GuideSection unit="living" heading="The Living World">
+        {/* THE WORD THE GUIDE NEVER SAID (2026-09-18). Everything downstream of
+            here — the Realm, the chronicle, advancing time — acts on CANON
+            settlements, and the guide described all of it without once naming the
+            act that puts a settlement there. One sentence, at the top of the
+            section the act unlocks. */}
+        <p style={{ fontSize:FS.sm, color:SEC, lineHeight:1.6, margin:'0 0 12px' }}>
+          A settlement you forge is a draft until you mark it canon from your{' '}
+          <a href="/settlements" style={{ color:GOLD, textDecoration:'underline', textUnderlineOffset:3 }}>Library</a>;
+          canon is what joins the Realm, takes events, and keeps a chronicle.
+        </p>
+        <LivingWorldTab />
+      </GuideSection>
       <GuideSection unit="ref" heading="Reference"><Reference /></GuideSection>
       <GuideSection unit="faq" heading="Frequently asked questions"><Faq /></GuideSection>
     </Page>

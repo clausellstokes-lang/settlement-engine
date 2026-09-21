@@ -6810,7 +6810,7 @@ is unusually line-address-dense, and hand-keyed line addresses rot silently.
 symbol WC names):
 
     settlementStrategy.js:634    function enumerateMoves({ sId, ctx, ... })
-    settlementStrategy.js:1360   export { enumerateMoves };
+    settlementStrategy.js:1294   export { enumerateMoves };
     warHomeCosts.js:443/450      bankedBySource / leviedPopulationBySource
     warCosts.js:367              record.leviedPopulationBySource
     warCoalitionExpenditure:159  record.leviedPopulationBySource

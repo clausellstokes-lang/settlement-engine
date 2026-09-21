@@ -34,7 +34,7 @@
 
 import { create } from 'zustand';
 import { immer } from 'zustand/middleware/immer';
-import { devtools, persist, subscribeWithSelector } from 'zustand/middleware';
+import { createJSONStorage, devtools, persist, subscribeWithSelector } from 'zustand/middleware';
 
 import { createAuthSlice }       from './authSlice.js';
 import { createConfigSlice }     from './configSlice.js';
@@ -62,11 +62,39 @@ import { createAccountImportSlice } from './accountImportSlice.js';
 // eager by construction: the bodies dynamic-import on first use.
 import { createNpcVerbsSlice }      from './npcVerbsSlice.js';
 import { mergePersistedState }     from './persistMerge.js';
-import { partializeStoreState }    from './persistProjection.js';
+import { partializeStoreState, PERSIST_KEY } from './persistProjection.js';
 import { setCustomContentSource }   from '../lib/customContentSource.js';
 import { setCrashForensics }        from '../lib/errorReporter.js';
 import { buildCrashForensics }      from '../lib/crashForensics.js';
 import { saves as savesService }    from '../lib/saves.js';
+
+/**
+ * THE PERSIST DOOR, MADE NON-FATAL (2026-09-18).
+ *
+ * zustand's persist calls setItem inside the store's own `set`, so a throw from
+ * localStorage propagates straight out of whatever action wrote — including the
+ * generation action. That was survivable while the blob was a few kB of config;
+ * it is not now that an ANONYMOUS DRAFT rides it (store/persistProjection.js),
+ * because a quota error is a real outcome for a world-sized value and a
+ * generation that throws on its last line is the worst possible failure.
+ *
+ * So every door is wrapped: a blocked, full, or absent localStorage degrades to
+ * "this device does not remember", never to a broken generate. Behaviourally
+ * identical to the default `createJSONStorage(() => localStorage)` in every case
+ * where localStorage works.
+ */
+export const resilientLocalStorage = {
+  getItem: (name) => {
+    try { return globalThis.localStorage?.getItem(name) ?? null; } catch { return null; }
+  },
+  setItem: (name, value) => {
+    // QuotaExceededError, Safari private mode, a blocked third-party context.
+    try { globalThis.localStorage?.setItem(name, value); } catch { /* the device just does not remember */ }
+  },
+  removeItem: (name) => {
+    try { globalThis.localStorage?.removeItem(name); } catch { /* nothing to undo */ }
+  },
+};
 
 export const useStore = create(
   devtools(
@@ -94,7 +122,12 @@ export const useStore = create(
           ...createNpcVerbsSlice(set, get),
         })),
         {
-          name: 'settlementforge',
+          // Taken from the projection, which must read this key back to tell its own
+          // tab's draft from another tab's (persistProjection.js). One spelling.
+          name: PERSIST_KEY,
+          // The default storage with every access wrapped — see the comment on
+          // resilientLocalStorage above.
+          storage: createJSONStorage(() => resilientLocalStorage),
           // store-6: an explicit persist version + a migrate hook, so a future
           // persisted-shape change has a real upgrade seam instead of silently
           // forking returning users. v2 adds the JSON-safe, field-level config
@@ -140,6 +173,16 @@ export const useStore = create(
   ),
 );
 
+// THE ANONYMOUS-DRAFT GATE HAS NO READ HALF TO WIRE HERE, and that is the point
+// of the 2026-09-18 rule. A subscription on the first `auth.loading` true→false
+// edge used to drop an adopted draft once the session resolved signed-in; that
+// edge is not the boot question (authSignIn and authSignUp drive it too), so the
+// spend moved into initAuth, and then needed a sign-in retraction, a
+// sessionStorage stash across OAuth redirects and a whole-settlement clear to be
+// correct. None of it exists now: the world carries its own `draftOrigin` and the
+// projection reads it (store/persistProjection.js), so every boot simply adopts
+// what the device kept and nothing is ever taken off the screen.
+
 // Wire the dependencyEngine to read customContent from this store.
 // This is the only edge that connects the (store-agnostic) generator's
 // custom-content lookup back to the live app state. Done here, at the
@@ -164,7 +207,7 @@ setCrashForensics(() => buildCrashForensics(useStore.getState()));
 // Register handlers for post-auth pending intents. Keep authIntents itself
 // lazy so GenerateWizard/authSlice do not create a mixed static/dynamic
 // chunk that Vite has to warn about.
-function registerAuthIntentHandlers({ registerHandler, INTENTS }) {
+export function registerAuthIntentHandlers({ registerHandler, INTENTS }) {
   registerHandler(INTENTS.SAVE_SETTLEMENT, async (payload, ctx) => {
     if (!payload || !payload.settlement) return null;
     try {
@@ -174,6 +217,24 @@ function registerAuthIntentHandlers({ registerHandler, INTENTS }) {
         settlement: payload.settlement,
         config: payload.config || null,
       });
+      // ⭐ BIND THE NEW SAVE ID THROUGH THE SAME DOOR EVERY OTHER CREATE
+      // CHOKEPOINT USES (2026-09-18). setActiveSaveId → bindActiveSaveId does two
+      // things this handler needs and did neither: it hands the session's draft
+      // TIMELINE over to the new row, and it CLAIMS the world in the editor for
+      // the account (claimSettlementForAccount). Without the claim the world the
+      // visitor just signed up to keep was still recorded as this device's
+      // ANONYMOUS draft, so the next sign-out stashed an account's library row in
+      // localStorage for the next visitor on a shared machine — the leak the
+      // retired `signedInWorld` bar used to cover. This is the conversion path:
+      // generate anonymously, click "Save this town — free account", sign up.
+      //
+      // Bound BEFORE the fire-and-forget telemetry below, which awaits a dynamic
+      // import that can reject: the claim must not depend on analytics resolving.
+      // setActiveSaveId's own docblock already described this intent as one of
+      // the four chokepoints that "already funnel through" it; that was the one
+      // claim in it which was not true.
+      try { useStore.getState().setActiveSaveId?.(result); }
+      catch (e) { console.warn('[authIntent.save-settlement] binding the save id failed:', e); }
       // F34 — this is the REAL post-signup save chokepoint. Fire the
       // first_save/third_save pricing moment + 'saved' research capture here
       // (the dead store saveSettlement action used to host them). Fire-and-forget.

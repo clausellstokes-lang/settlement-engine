@@ -743,10 +743,54 @@ describe.runIf(distExists)('Tier 9.7 — vendor-pdf lazy load contract', () => {
     ).toHaveLength(0);
   });
 
+  // ── FIX-B2 (2026-09-20): the anchored-leaf pins stay OUT of first paint ───
+  // FIX-B2 pinned twelve engine members whose consumers lived in other chunks into
+  // six small lazy chunks (plus two joins to engine-core-lazy), taking the engine's
+  // static-importer set from 38 to 8. Each pin MOVES BYTES, and the failure mode of
+  // a move is that the bytes land somewhere worse: FP-G17 records exactly that, where
+  // an excised-but-unpinned leaf gained one eager importer and re-parented the whole
+  // engine chunk into first paint. The placement + presence halves of this contract
+  // live in engineChunkLazy.test.js (which executes manualChunks); the CLOSURE half
+  // lives here, because entryStaticClosure() does.
+  // UNGATED by VERIFY_DIST on purpose — this is an ABSENCE claim, and per the
+  // stale-dist policy at the top of this file a stale dist can only UNDER-report
+  // absence (false PASS), never false-fail it.
+  it('the FIX-B2 anchored-leaf chunks are ABSENT from the entry transitive static closure', () => {
+    const FIX_B2_CHUNKS = [
+      'living-content-seam', 'narrative-mutations', 'stress-priority',
+      'resource-chains', 'generator-helpers', 'terrain-helpers',
+    ];
+    const { files } = entryStaticClosure();
+    const leaked = files.filter(
+      f => FIX_B2_CHUNKS.some(name => new RegExp(`^${name}-[A-Za-z0-9_-]+\\.js$`).test(f)),
+    );
+    expect(
+      leaked,
+      `a FIX-B2 lazy chunk reached first paint via the static graph: ${leaked.join(', ')}.\n`
+      + 'An EAGER static importer of a module in one of these chunks drags the chunk into the '
+      + 'entry closure and charges first paint for generation code. Closure:\n  '
+      + `${files.join('\n  ')}`,
+    ).toHaveLength(0);
+    // NON-VACUITY: the closure must be a real, populated walk, or the absence above is
+    // green-on-nothing — the exact way this file's own ratchet once went vacuous.
+    expect(files.length).toBeGreaterThan(5);
+    expect(files.some(f => /^index-[A-Za-z0-9_-]+\.js$/.test(f))).toBe(true);
+  });
+
   it.skipIf(!requireDistRead)('the engine chunk still exists (lazy) and remains large', () => {
     const files = readdirSync(assetsDir);
     const engine = files.find(f => /^engine-[A-Za-z0-9_-]+\.js$/.test(f) && !/^engine-core-/.test(f));
     expect(engine, 'expected a lazy engine-<hash>.js chunk to still be emitted').toBeDefined();
+    // ⚠ statSync().size IS THE RIGHT READ, AND THE DIFFERENCE IS NOT COSMETIC. This chunk
+    // carries non-ASCII in its emitted generator prose, so its BYTE length and its
+    // CHARACTER length differ: measured at ec0a30da2, 677,935 bytes against 677,828
+    // characters — a 107 B gap. Against the margin this ceiling actually runs (the four
+    // raise notes below keep ~700 B of cross-environment room, leaving a few hundred bytes
+    // of true headroom), a `readFileSync(path, 'utf-8').length` here would read 107 B
+    // OPTIMISTIC and could pass a build that ships over the line. Read bytes: statSync().size,
+    // or readFileSync() with no encoding (a Buffer's .length is bytes — that is the spelling
+    // generationWorkerLazy.test.js:472 uses for the worker ceiling, and it is equally correct).
+    // Never a decoded string's .length. (FIX-B2, 2026-09-20; TOOL-12 item 9.)
     const size = statSync(join(assetsDir, engine)).size;
     // It should stay meaningfully large (the generation pipeline lives here).
     // If it collapses, generation code leaked into a hot chunk; if it balloons
@@ -764,8 +808,27 @@ describe.runIf(distExists)('Tier 9.7 — vendor-pdf lazy load contract', () => {
     // lines of genuinely new generation code (densityRoll, applyDensityLaw,
     // densityAscension, successionGrammar, titularSuccession) to the lazy engine,
     // where generation code belongs. T12's tip was green on this row.
+    // CEILING RAISE 676_000 -> 677_000 (CHAIR RULING 2026-09-19, ODQ §934.19, OFFERED FOR
+    // RATIFICATION as the two above were): measured 676,321 at the 2026-09-18 fixes consist's
+    // final tip (2b0322992, lockfile-clean); the control build at the worker-headroom car's
+    // consist position (96cfd7e17) read 675,865, so the +456 B are the owner's content cures
+    // composed after it (the parish-church text, the food writer's published split, the
+    // article-by-sound rule, the label ladder) — generation text, where it belongs. Nothing
+    // eager re-merged: the first-paint closure arm above is green on the same build. The
+    // ~700 B cross-environment margin the two prior raises carried is kept.
+    // CEILING RAISE 677_000 -> 679_000 (CHAIR RULING 2026-09-19, ODQ §934.19 addendum 2,
+    // OFFERED FOR RATIFICATION as the three above were): measured 678,131 at the EM-T2 cure
+    // tip (023eda2ec); the control build at train EM-T1's green terminal (ed9d99295) read
+    // 676,949, so the +1,182 B are EM-P0's pipeline seam (ODQ §934.47) — exactly TWO modules
+    // moved, and they are EM-P0's two: src/generators/pipeline.js, 9,843 -> 12,548 rendered
+    // bytes, and src/generators/steps/generatePopulation.js, 6,864 -> 9,702 rendered bytes
+    // (the runner hands `pins` to every step and refuses a partial pin; generatePopulation
+    // consults a pin at each of its four choosers on its one stream). That is generation
+    // code, where it belongs. Nothing eager re-merged: the first-paint closure arm above is
+    // green on the same build. The ~700 B cross-environment margin the three prior raises
+    // carried is kept — 678,131 + 700 = 678,831, under this ceiling.
     expect(size).toBeGreaterThan(300_000);
-    expect(size).toBeLessThan(676_000);
+    expect(size).toBeLessThan(679_000);
   });
 
   // ── T13 TRANS: the transcendental kernel's CHUNK PLACEMENT ───────────────

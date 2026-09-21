@@ -43,6 +43,8 @@ import WandererVerbControls, { WandererUndoControl } from './WandererVerbControl
 import { Pill, Section } from './WorldPulsePrimitives.jsx';
 import RealmEntityLink from '../primitives/RealmEntityLink.jsx';
 import { BODY, BORDER, BORDER2, CARD, CARD_ALT, FS, INK, MUTED, SECOND, SP, sans } from '../theme.js';
+import useIsMobile from '../../hooks/useIsMobile.js';
+import { chromeFontSize, proseFontSize } from '../../design/proseScale.js';
 
 /** The register's calm nothing-here state. A realm that has exiled nobody is not
  *  broken; it is a realm nobody has been thrown out of yet. */
@@ -65,6 +67,7 @@ function EmptyRegister() {
  * @param {ReadonlyArray<{ id: string, name: string }>} props.places
  */
 export function WandererCard({ row, seesSecrets, campaignId, places }) {
+  const mobile = useIsMobile();
   return (
     <div
       data-testid="wanderer-row"
@@ -80,20 +83,20 @@ export function WandererCard({ row, seesSecrets, campaignId, places }) {
         <span style={{ color: INK, fontFamily: sans, fontWeight: 900, fontSize: FS.sm }}>{row.name}</span>
         <Pill>{row.title}</Pill>
       </div>
-      <div style={{ color: BODY, fontFamily: sans, fontSize: FS.xs, lineHeight: 1.45, overflowWrap: 'anywhere' }}>
+      <div style={{ color: BODY, fontFamily: sans, fontSize: proseFontSize(FS.xs, mobile), lineHeight: 1.45, overflowWrap: 'anywhere' }}>
         {row.whyLine} {row.notorietyLine}
       </div>
       {row.standingLines.map(line => (
-        <div key={line} style={{ color: BODY, fontFamily: sans, fontSize: FS.xxs, lineHeight: 1.45 }}>{line}</div>
+        <div key={line} style={{ color: BODY, fontFamily: sans, fontSize: proseFontSize(FS.xxs, mobile), lineHeight: 1.45 }}>{line}</div>
       ))}
       {row.doorsLine && (
-        <div style={{ color: SECOND, fontFamily: sans, fontSize: FS.xxs, fontWeight: 800 }}>{row.doorsLine}</div>
+        <div style={{ color: SECOND, fontFamily: sans, fontSize: chromeFontSize(FS.xxs, mobile), fontWeight: 800 }}>{row.doorsLine}</div>
       )}
       {row.whereaboutsLine && (
-        <div style={{ color: SECOND, fontFamily: sans, fontSize: FS.xxs, fontWeight: 800 }}>{row.whereaboutsLine}</div>
+        <div style={{ color: SECOND, fontFamily: sans, fontSize: chromeFontSize(FS.xxs, mobile), fontWeight: 800 }}>{row.whereaboutsLine}</div>
       )}
-      <div style={{ color: SECOND, fontFamily: sans, fontSize: FS.xxs, fontWeight: 800 }}>{row.whenLine}</div>
-      <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap', fontFamily: sans, fontSize: FS.xxs, color: MUTED }}>
+      <div style={{ color: SECOND, fontFamily: sans, fontSize: chromeFontSize(FS.xxs, mobile), fontWeight: 800 }}>{row.whenLine}</div>
+      <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap', fontFamily: sans, fontSize: chromeFontSize(FS.xxs, mobile), color: MUTED }}>
         {/* THE ORIGIN STORY POINTER (design §8): the place whose trouble put them here. */}
         {row.originId && (
           <span>
@@ -109,7 +112,7 @@ export function WandererCard({ row, seesSecrets, campaignId, places }) {
         )}
       </div>
       {row.dmLine && (
-        <div data-testid="wanderer-dm-line" style={{ color: MUTED, fontFamily: sans, fontSize: FS.xxs, fontStyle: 'italic' }}>
+        <div data-testid="wanderer-dm-line" style={{ color: MUTED, fontFamily: sans, fontSize: chromeFontSize(FS.xxs, mobile), fontStyle: 'italic' }}>
           {row.dmLine}
         </div>
       )}

@@ -42,10 +42,12 @@ import {
   FS, SP, R, ELEV, sans, serif_,
 } from '../theme.js';
 import { useStore } from '../../store/index.js';
-import { anonAtCap } from '../../lib/anonGenCounter.js';
+import RefusalNotice from '../primitives/RefusalNotice.jsx';
+import { raisedHere, REFUSAL_REASONS, REFUSAL_SURFACES, refusalOf } from '../../lib/refusalReasons.js';
 import { trackLandingFixtureForge } from '../../lib/landingFunnelAnalytics.js';
 import { tl } from '../../copy/landing.js';
 import { fixture } from './landingFixture.js';
+import { preferredImageExt } from '../../config/pageBackgrounds.js';
 
 const MONO = fontFamily.mono;
 export const SCENE = (name) => `url('/backgrounds/landing/${name}-1400.jpg')`;
@@ -57,7 +59,43 @@ export const SCENE = (name) => `url('/backgrounds/landing/${name}-1400.jpg')`;
 // parchment. NOTE: the SVG lives on the composite TIP, not this branch's base — it
 // arrives when W1 folds onto the tip, so this references the path as a string (a
 // worktree-local load 404s until the fold; that is expected).
-const REALM_MAP_PREVIEW = "url('/landing-maps/realm-preview.fallowmere.parchment.svg')";
+// ⛔ IT IS A PHOTOGRAPH OF THE PRODUCT NOW (owner order ODQ §934.30 item 5: "the
+// realm clock map should actually be made and a screenshot of Cnocby in a drawn
+// out map made in the realm with other generated settlements … with the realm
+// clock advance time box over that"). The plate above is real generated output,
+// but it is a DIFFERENT renderer at a DIFFERENT seed: a visitor met Cnocby in
+// four artifacts and then looked at a map of Fallowmere, somewhere else entirely.
+// realm-cnocby.png is the running app's own Realm view of the fixture's five
+// settlements, cut in Chromium by scripts/capture-landing-realm.mjs and recorded
+// in realm-cnocby.provenance.json (seed, tip, what was in frame).
+//
+// TWO LAYERS, AND THE ORDER IS THE FALLBACK. CSS paints the FIRST background
+// image on top and simply skips one that fails to load, so the parchment plate
+// shows through for anyone served the page before the capture lands — a missing
+// photograph degrades to the old map rather than to a grey box. The "Realm clock
+// / Advance time" block is positioned over this box unchanged (RealmMapCard).
+export const REALM_MAP_BASE = '/landing-maps/realm-cnocby';
+export const REALM_MAP_PLATE = '/landing-maps/realm-preview.fallowmere.parchment.svg';
+
+/**
+ * The realm card's backdrop: the photograph in the ONE format this engine can
+ * decode, with the parchment plate beneath it.
+ *
+ * ⚠ THE TWO LAYERS ARE NOT A FORMAT FALLBACK — the twin selection above already
+ * settled the format, and CSS would fetch both if asked. The plate is a
+ * DIFFERENT kind of fallback: it paints if the photograph has not been cut yet
+ * (a worktree before `node scripts/capture-landing-realm.mjs` runs), so a
+ * missing capture degrades to the old map rather than to a grey box.
+ *
+ * Exported and parameterised so it is testable: the WebP probe answers 'png' in
+ * jsdom (no canvas encoder), which would make a rendered assertion about WebP
+ * vacuous. @enforced-by tests/ui/landingRealmTwins.test.js
+ *
+ * @param {string} [ext] the chosen extension; defaults to the engine's own
+ */
+export function realmMapPreview(ext = preferredImageExt('png')) {
+  return `url('${REALM_MAP_BASE}.${ext}'), url('${REALM_MAP_PLATE}')`;
+}
 
 // Status-tint chip palette — all from tokens. `faith` reuses the app's
 // faith-event convention (semantic violet), the one §9-sanctioned violet
@@ -111,16 +149,22 @@ function ForgeExactButton({ onNavigate }) {
   const setWizardMode = useStore(s => s.setWizardMode);
   const setRandomSliderMode = useStore(s => s.setRandomSliderMode);
   const clearNeighbour = useStore(s => s.clearNeighbour);
-  const authTier = useStore(s => s.auth.tier);
+  // ⛔ THE LANE REFUSES AND SAYS WHY (ODQ §934.24(c)). The hand-rolled cap pre-flight
+  // that used to sit in this handler navigated to /create with NOTHING said — one of
+  // four copies of the same silent refusal the 2026-09-19 walk found. The gate lives
+  // in the generation lane, which is where it was always enforced; this surface reads
+  // the reason it recorded and renders it where the reader clicked.
+  const lastRefusal = useStore(s => s.lastRefusal);
+  const clearRefusal = useStore(s => s.clearRefusal);
   const [forging, setForging] = useState(false);
 
   const forgeExact = async () => {
     if (forging) return;
+    clearRefusal?.();
     // W-DOC: the landing funnel LANDED — landing_funnel_used
     // feature:'fixture_forge' via the SM-5-pattern lazy helper (the seed is the
     // fixture's constant — provenance, not user data).
     trackLandingFixtureForge({ seed: fixture.seed });
-    if (authTier === 'anon' && anonAtCap()) { onNavigate('generate'); return; }
     setForging(true);
     try {
       // Replay EVERY recorded generation input (mode, slider mode, neighbour,
@@ -130,19 +174,32 @@ function ForgeExactButton({ onNavigate }) {
       setRandomSliderMode(fixture.forge.randomSliderMode);
       clearNeighbour();
       updateConfig({ ...fixture.forge.config });
-      await generate(fixture.seed);
-    } catch (e) {
-      console.error('[LandingArtifacts] fixture forge failed:', e);
-    } finally {
+      // `at` names WHERE the reader clicked (REVIEW-P F12): one store record was
+      // painted by every mount on the page, so one refusal was announced twice. The
+      // gate stamps this key; only this surface says what it raised.
+      const forged = await generate(fixture.seed, { at: REFUSAL_SURFACES.LANDING_ARTIFACTS });
+      // ⛔ A REFUSAL NEVER NAVIGATES. The old `finally` navigated on EVERY path, so a
+      // refused or failed forge still threw the reader at /create with no settlement
+      // and no reason — which is indistinguishable, from the chair, from nothing
+      // happening at all.
+      if (!forged) { setForging(false); return; }
       setForging(false);
       onNavigate('generate');
+    } catch (e) {
+      console.error('[LandingArtifacts] fixture forge failed:', e);
+      setForging(false);
     }
   };
 
   return (
-    <Button variant="secondary" size="sm" busy={forging} onClick={forgeExact}>
-      {tl('brief.forgeExact')}
-    </Button>
+    // The control and its refusal are ONE block: the notice renders directly beneath
+    // the button the reader pressed, never on another page.
+    <span style={{ display: 'inline-flex', flexDirection: 'column', alignItems: 'flex-start', gap: SP.sm }}>
+      <Button variant="secondary" size="sm" busy={forging} onClick={forgeExact}>
+        {tl('brief.forgeExact')}
+      </Button>
+      <RefusalNotice refusal={raisedHere(lastRefusal, REFUSAL_SURFACES.LANDING_ARTIFACTS) ? lastRefusal : null} />
+    </span>
   );
 }
 
@@ -226,6 +283,54 @@ export function MiniDossierCard({ onNavigate }) {
   );
 }
 
+// ── 03 · Voice — the section's own ask ───────────────────────────────────────
+//
+// ⛔ AN ENABLED "NARRATE" THAT NARRATED NOTHING (REVIEW-P F4, ODQ §934.24(c)). The
+// §03 button sat under a "5 credits" plate and called `onNavigate('generate')` on
+// EVERY click: measured from a clean anonymous context the walk recorded
+// `store.settlement: false`, `dialogs: []`, `alerts: []` and an `href` of /create —
+// the reader asked for narration, got no narration, no notice, and a different page.
+// That is this register's founding shape ("three of the four answered a refusal by
+// navigating") wearing a call-to-action's coat.
+//
+// THE NARRATIVE LAYER READS A TOWN. It is grounded in the dossier and never invents
+// facts (the section's own `voice.aiNote` says so three lines above the button), so
+// with nothing on the store there is nothing for it to read — and that, not the
+// price, is the reader's actual problem. With a settlement in hand the navigation is
+// not a refusal at all and is left exactly as it was: the dossier is where the
+// Narrate control lives.
+//
+// The reason is raised by this SURFACE rather than by a gate in the generation lane,
+// like the Realm's and the wizard's locked options; it is held in local state and
+// never on the store, so it cannot travel to another page and cannot collide with a
+// generation refusal raised beside it.
+export function VoiceNarrateButton({ onNavigate }) {
+  const settlement = useStore((s) => s.settlement);
+  const [refusal, setRefusal] = useState(null);
+
+  const narrate = () => {
+    if (!settlement) { setRefusal(refusalOf(REFUSAL_REASONS.NARRATE_NEEDS_TOWN)); return; }
+    setRefusal(null);
+    onNavigate('generate');
+  };
+
+  return (
+    // The control and its refusal are ONE block — the notice renders directly beneath
+    // the button the reader pressed, never on another page (the ForgeExactButton idiom).
+    <span style={{ display: 'inline-flex', flexDirection: 'column', alignItems: 'flex-start', gap: SP.sm }}>
+      <Button variant="ai" onClick={narrate}>{tl('voice.cta')}</Button>
+      <RefusalNotice
+        refusal={refusal}
+        actions={(
+          <Button variant="secondary" size="sm" onClick={() => onNavigate('generate')}>
+            {tl('voice.narrateDoor')}
+          </Button>
+        )}
+      />
+    </span>
+  );
+}
+
 // ── 03 · Voice — RAW receipts + stock-narrated card ──────────────────────────
 export function VoiceCards() {
   const receipts = fixture.voice.receipts || [];
@@ -262,28 +367,63 @@ export function VoiceCards() {
   );
 }
 
-// ── 04 · Realm — why-trace card (real band deltas, real causes) ──────────────
-export function WhyTraceCard() {
-  const deltas = fixture.realm.whyTrace || [];
+// ── 04 · Realm — the advance-time card (what the weeks DID, not what moved) ──
+//
+// ⛔ EVENTS, NOT DELTAS (owner order ODQ §934.30 item 4: "the advance time
+// shouldn't describe deltas but should describe actual events that have
+// happened as we have designed"). This card used to render fixture.realm.whyTrace
+// — three causal BAND crossings, each headed by an internal axis name and a pair
+// of band chips, with reason lines that read "Pressure increased". That is a
+// readout of a variable, and a visitor who has never seen the engine has no way
+// to want it. It now renders fixture.realm.advance: the town's OWN applied pulse
+// events across the same run, which is what the product's own Chronicle and
+// advance report show a player after every advance.
+//
+// THE HONESTY LINE (the chair's ruling): every entry is a record the shipped
+// pulse produced for this settlement. Nothing here is written, and a thin run
+// renders a thin card — the landing's whole claim is that the facts on it came
+// out of the engine.
+//
+// THE SEASON FRAME is AdvanceReport's own (its "chapters" altitude): the weeks
+// are grouped under the calendar season they fell in, using the SAME
+// tickCalendarLabel helper the report uses, resolved in the emitter so this
+// surface stays a renderer. One season is the common case at twelve weeks
+// (13 weeks to a season), so the label rides the header's mono slot and the
+// per-chapter heading appears only when a run actually crosses a season.
+export function AdvanceTimeCard() {
+  const entries = fixture.realm.advance || [];
+  // Chapters in the order they happened. Built by a fold rather than a group-by
+  // so a run that re-enters a season (a multi-year advance) reads as two
+  // chapters, which is what a reader lived.
+  const chapters = [];
+  for (const entry of entries) {
+    const open = chapters[chapters.length - 1];
+    if (open && open.season === entry.season) open.entries.push(entry);
+    else chapters.push({ season: entry.season, entries: [entry] });
+  }
   return (
     <div style={{ ...cardStyle, padding: '20px 22px' }}>
       <div style={{ display: 'flex', alignItems: 'baseline', justifyContent: 'space-between', gap: SP.sm, marginBottom: SP.md }}>
         <span style={eyebrowGold}>{tl('realm.whyTraceTitle', { week: fixture.weeks })}</span>
-        <span style={monoTag}>{tl('realm.whyTraceTag')}</span>
+        <span style={monoTag}>{chapters[0]?.season}</span>
       </div>
       <div style={{ display: 'flex', flexDirection: 'column', gap: 13 }}>
-        {deltas.map((d) => (
-          <div key={d.axis} style={{ display: 'flex', flexDirection: 'column', gap: 5 }}>
-            <div style={{ display: 'flex', alignItems: 'center', gap: SP.sm, flexWrap: 'wrap' }}>
-              <span style={{ fontFamily: sans, fontSize: FS['12.5'], fontWeight: 800, color: SECOND }}>{d.axis}</span>
-              <span style={{ display: 'inline-flex', alignItems: 'center', gap: 6 }}>
-                <Chip tone="neutral">{d.from}</Chip>
-                <Chip tone={d.tone}>{d.to}</Chip>
-              </span>
-            </div>
-            <span style={{ fontFamily: serif_, fontStyle: 'italic', fontSize: FS['14.5'], lineHeight: 1.5, color: BODY }}>
-              {d.reason}
-            </span>
+        {chapters.map((chapter, ci) => (
+          <div key={chapter.season + ci} style={{ display: 'flex', flexDirection: 'column', gap: 13 }}>
+            {chapters.length > 1 && (
+              <span style={{ ...eyebrowGold, color: MUTED, letterSpacing: '0.08em' }}>{chapter.season}</span>
+            )}
+            {chapter.entries.map((entry) => (
+              <div key={entry.week + entry.headline} style={{ display: 'flex', flexDirection: 'column', gap: 5 }}>
+                <div style={{ display: 'flex', alignItems: 'center', gap: SP.sm, flexWrap: 'wrap' }}>
+                  <Chip tone="neutral">{entry.week}</Chip>
+                  <span style={{ fontFamily: sans, fontSize: FS['12.5'], fontWeight: 800, color: SECOND }}>{entry.headline}</span>
+                </div>
+                <span style={{ fontFamily: serif_, fontSize: FS['14.5'], lineHeight: 1.5, color: BODY }}>
+                  {entry.text}
+                </span>
+              </div>
+            ))}
           </div>
         ))}
       </div>
@@ -310,7 +450,7 @@ export function RealmMapCard() {
       {/* Map half */}
       <div style={{
         position: 'relative', minHeight: 320,
-        backgroundImage: REALM_MAP_PREVIEW, backgroundSize: 'cover', backgroundPosition: 'center',
+        backgroundImage: realmMapPreview(), backgroundSize: 'cover', backgroundPosition: 'center',
       }}>
         <div style={{
           position: 'absolute', top: 14, left: 14, background: 'rgba(255,251,245,0.94)',
@@ -358,6 +498,15 @@ export function RealmMapCard() {
           <span style={{ fontFamily: serif_, fontSize: FS['18'], fontWeight: 600, color: INK }}>{tl('realm.chronicleTitle')}</span>
           <span style={monoTag}>{tl('realm.chronicleTag')}</span>
         </div>
+        {/* ⛔ THE TWO CARDS NOW SAY DIFFERENT THINGS, AND THE READER IS TOLD WHICH.
+            Since ODQ §934.30 item 4 the advance-time card carries the TOWN'S own
+            events; this chronicle is the REGION's band — the neighbours. Without
+            a line naming that, two lists of engine sentences side by side read as
+            one list printed twice, which is the defect shape the 09-18 walk kept
+            finding. Approved in the copy draft (owner, 2026-09-19). */}
+        <p style={{ margin: `0 0 ${SP.md}px`, fontFamily: sans, fontSize: FS.sm, fontWeight: 700, color: MUTED, lineHeight: 1.5 }}>
+          {tl('realm.regionLine')}
+        </p>
         <div style={{ display: 'flex', flexDirection: 'column', gap: SP.sm }}>
           {chronicle.map((entry, i) => (
             <div key={i} style={{ background: CARD_ALT, border: `1px solid ${BORDER}`, borderRadius: R.md, padding: '10px 13px' }}>
@@ -383,5 +532,5 @@ export function RealmMapCard() {
 
 // STRIP-1 (owner ruling, ODQ §725): the MapPlateCard — the landing page's frozen
 // settlement-map lens plates and their flip control — is REMOVED with the rest of
-// the legacy settlement map. The realm-map preview (REALM_MAP_PREVIEW above) is a
+// the legacy settlement map. The realm-map preview (realmMapPreview above) is a
 // DIFFERENT surface and stays.

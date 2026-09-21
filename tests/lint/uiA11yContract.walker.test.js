@@ -143,13 +143,30 @@ describe('Z_LAYERS stacking manifest (M10 class)', () => {
     expect(contract.zLayersUnregisteredAllow).toEqual([]);
   });
 
-  test('M10 is locked: the two bottom-right widgets sit on DISTINCT layers', () => {
-    const zOf = (file) => Number(componentFiles.find((f) => f.rel === file).code.match(/zIndex:\s*(\d+)/)[1]);
-    const coach = zOf('src/components/PostGenCoach.jsx');
-    const feedback = zOf('src/components/FeedbackWidget.jsx');
-    expect(coach).toBe(layers.coach);
-    expect(feedback).toBe(layers.feedback);
-    expect(coach).not.toBe(feedback);
+  // M10 WAS "the two bottom-right widgets sit on DISTINCT layers": PostGenCoach (coach,
+  // 900) and FeedbackWidget (feedback, 910) were both fixed bottom-right panels, and
+  // before M10 they shared 900 and stacked ambiguously. REVIEW-P F5 (ODQ §934.63) dissolved
+  // the pairing from the other side: the coach now docks in the page's own flow and claims
+  // NO viewport layer, so there is one bottom-right widget left. The class the pin protects
+  // is therefore restated, not deleted — the corner has a single owner, and the coach
+  // re-entering it (any zIndex literal at all in that file) reds here.
+  test('M10 is locked: the bottom-right corner has exactly ONE layered owner', () => {
+    const codeOf = (file) => componentFiles.find((f) => f.rel === file).code;
+    const zOf = (file) => {
+      const m = codeOf(file).match(/zIndex:\s*(\d+)/);
+      return m === null ? null : Number(m[1]);
+    };
+    // The coach is in the page flow: it names no stacking layer and no fixed box.
+    const FIXED_RE = /position:\s*'fixed'/;
+    expect(zOf('src/components/PostGenCoach.jsx')).toBe(null);
+    // anchored: the SAME probe is asserted to MATCH FeedbackWidget on the next line, so a mis-read or emptied source cannot pass this vacuously
+    expect(codeOf('src/components/PostGenCoach.jsx')).not.toMatch(FIXED_RE);
+    expect(codeOf('src/components/FeedbackWidget.jsx')).toMatch(FIXED_RE);
+    // The feedback panel still owns the corner, on its registered layer.
+    expect(zOf('src/components/FeedbackWidget.jsx')).toBe(layers.feedback);
+    // `coach` stays a NAMED BAND in the manifest (a reservation, not a usage record) and
+    // must keep a value distinct from the panel that outranked it.
+    expect(layers.coach).not.toBe(layers.feedback);
   });
 });
 

@@ -382,12 +382,18 @@ describe('npm run check ↔ parallel ci.yml gate parity', () => {
   });
 
   it('gives the measured full-suite ratchet enough CI timeout headroom', () => {
-    // Measured on ubuntu-latest 2026-09-16: the full suite concludes in 22–28 minutes, and five of
-    // the nine runs since 08-15 were cut at the old 30-minute cap. 45 is the measured figure with
-    // headroom for runner variance; a timeout is not a test verdict (the job's own comment).
+    // 90, raised from 45 on 2026-09-20 in the same commit as the cap it pins. BOTH of PR #53's
+    // runs were CUT at 45 without concluding (push 35534822592 and pull_request 35534903945,
+    // 45m17s each) — a timeout is not a test verdict. The last runs that CONCLUDED were on
+    // 2026-09-17, all green: 22m55s, 34m53s and 35m40s; about five hundred commits and several
+    // thousand tests have landed since, and the suite is 17m41s locally today over 33,770 tests.
+    // 90 is twice the longest concluded run plus that growth (the job's own comment carries the
+    // run ids). THE DIRECTION OF THIS PIN: it exists so the cap cannot drift back BELOW the
+    // measured suite, so it is raised with a fresh measurement and never lowered to match a run
+    // that was cut.
     const ci = readFileSync(join(ROOT, '.github/workflows/ci.yml'), 'utf8');
     const testsJob = jobBody(ci, 'check-tests');
-    expect(testsJob).toMatch(/^\s*timeout-minutes:\s*45\s*$/m);
+    expect(testsJob).toMatch(/^\s*timeout-minutes:\s*90\s*$/m);
   });
 
   it('every setup-node use reads the repository runtime pin', () => {

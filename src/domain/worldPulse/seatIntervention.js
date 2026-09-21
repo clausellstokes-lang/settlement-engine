@@ -16,7 +16,7 @@
  * ASSUMES, MEASURED. `successPressure` exists at exactly ONE place tree-wide
  * (`relationshipRulesCore.js:801`) and is a vassal-RELATIONSHIP candidate scorer emitting
  * severity+probability, not a rebellion verdict taking a signed adj; `stressorGates.js`
- * carries only a rebellion BIRTH gate. `stabilizationSuitability` (`occupation.js:471`) is
+ * carries only a rebellion BIRTH gate. `stabilizationSuitability` (`occupation.js:645`) is
  * an OCCUPATION state-machine input whose garrison term is already a flat boolean 0.12 —
  * there is nothing there to "reinforce" without changing the term's type — and no
  * insurgency RESOLVER exists in `src/domain/worldPulse` at all. Recorded so a later car

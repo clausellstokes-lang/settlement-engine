@@ -54,6 +54,8 @@ import {
 } from '../../lib/avatarUpload.js';
 import { AVATAR_RUNGS } from '../../lib/publicIdentity.js';
 import { BORDER, BORDER2, CARD, CARD_ALT, GOLD, MUTED, RED, SECOND, SP, FS, sans } from '../theme.js';
+import useIsMobile from '../../hooks/useIsMobile.js';
+import { chromeFontSize } from '../../design/proseScale.js';
 
 /**
  * The crop hands back a LOSSLESS PNG square; the rungs are then encoded to WebP
@@ -63,6 +65,7 @@ import { BORDER, BORDER2, CARD, CARD_ALT, GOLD, MUTED, RED, SECOND, SP, FS, sans
 const CROP_INTERMEDIATE_TYPE = 'image/png';
 
 export default function AccountIdentitySection() {
+  const mobile = useIsMobile();
   const avatarUrl = useStore((s) => s.auth?.avatarUrl || '');
   const displayName = useStore((s) => s.auth?.displayName || '');
   const setAvatarUrl = useStore((s) => s.setAvatarUrl);
@@ -274,7 +277,7 @@ export default function AccountIdentitySection() {
         </div>
       </div>
 
-      <span style={{ fontSize: FS.xs, color: MUTED, fontFamily: sans }}>
+      <span style={{ fontSize: chromeFontSize(FS.xs, mobile), color: MUTED, fontFamily: sans }}>
         {/* "512 pixels square" rather than "512×512": the × form reads as a MULTIPLIER
             in prose, which is the exact shape the prose-numerics ratchet refuses, and
             the humanized sentence carries the same requirement in plainer words. The
@@ -285,7 +288,7 @@ export default function AccountIdentitySection() {
       </span>
 
       {!avatarUrl && (
-        <span style={{ fontSize: FS.xs, color: MUTED, fontFamily: sans }}>
+        <span style={{ fontSize: chromeFontSize(FS.xs, mobile), color: MUTED, fontFamily: sans }}>
           Without an image you keep your initial, which is a perfectly good way to appear.
         </span>
       )}
@@ -315,7 +318,7 @@ export default function AccountIdentitySection() {
             />
             Show my name and image publicly
           </label>
-          <span style={{ fontSize: FS.xs, color: MUTED, fontFamily: sans, paddingLeft: 24 }}>
+          <span style={{ fontSize: chromeFontSize(FS.xs, mobile), color: MUTED, fontFamily: sans, paddingLeft: 24 }}>
             Your name and image appear on your published settlements, maps, and
             campaigns, and (if you hold a chair) the Founders’ Hall. Turn this
             off and both disappear from every public page at once; your image
@@ -328,18 +331,20 @@ export default function AccountIdentitySection() {
 }
 
 function FieldLabel({ children }) {
+  const mobile = useIsMobile();
   return (
-    <span style={{ fontSize: FS.xs, fontWeight: 700, color: SECOND, fontFamily: sans }}>
+    <span style={{ fontSize: chromeFontSize(FS.xs, mobile), fontWeight: 700, color: SECOND, fontFamily: sans }}>
       {children}
     </span>
   );
 }
 
 function ErrorLine({ text }) {
+  const mobile = useIsMobile();
   return (
     <span role="alert" style={{
       display: 'inline-flex', alignItems: 'center', gap: 4,
-      color: RED, fontFamily: sans, fontSize: FS.xxs,
+      color: RED, fontFamily: sans, fontSize: chromeFontSize(FS.xxs, mobile),
       border: `1px solid ${BORDER}`, background: CARD_ALT, padding: `4px ${SP.sm}px`,
     }}>
       {text}

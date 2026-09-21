@@ -172,7 +172,7 @@ describe('the onboarding docs carry no hand-kept machine figure (dom-1)', () => 
     expect(Number(contiguous[1])).toBe(repoHead);
 
     const blocker = currentStateMd.match(
-      /migration head (\d+) is (\d+) migrations ahead\s+of the live-verified production head (\d+)/,
+      /migration head (\d+) is (\d+) migrations? ahead\s+of the live-verified production head (\d+)/,
     );
     expect(blocker, 'CURRENT_STATE.md must state the migration-train blocker figures').toBeTruthy();
     expect(Number(blocker[1])).toBe(repoHead);

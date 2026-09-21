@@ -1,15 +1,19 @@
+// The world-fact option sets have one home (EM-P3); the gallery reads them
+// through their stable DOMAIN address rather than spelling them again here.
+import { TERRAINS, CULTURES as CANONICAL_CULTURES } from '../../domain/worldFactOptions.js';
+
 // Facet vocabularies aligned to what the engine ACTUALLY persists AND what the
 // server list RPC filters on (migration 063/071). 'capital' is dropped — the
 // generator never emits it (TIER_ORDER stops at metropolis).
 export const TIER_OPTIONS = ['thorp', 'hamlet', 'village', 'town', 'city', 'metropolis'];
 // config.terrainType vocabulary (resolveConfig + getTerrainType). The old list
 // used display synonyms (coast/river/mountains) that never matched the stored
-// values, so those chips filtered to nothing; these are the real ones.
-export const TERRAIN_OPTIONS = ['plains', 'hills', 'forest', 'riverside', 'coastal', 'mountain', 'desert'];
+// values, so those chips filtered to nothing; the canonical pool is the source.
+export const TERRAIN_OPTIONS = [...TERRAINS];
 // getMagicLevel emits exactly these four bands — 'wild'/'forbidden' never persist.
 export const MAGIC_OPTIONS = ['none', 'low', 'medium', 'high'];
-// resolveConfig's canonical 11-culture catalog.
-export const CULTURE_OPTIONS = ['germanic', 'latin', 'celtic', 'arabic', 'norse', 'slavic', 'east_asian', 'mesoamerican', 'south_asian', 'steppe', 'greek'];
+// The canonical 11-culture catalog the generator rolls from.
+export const CULTURE_OPTIONS = [...CANONICAL_CULTURES];
 // economicState.prosperity vocabulary (generateEconomicNarrative LABELS).
 export const PROSPERITY_OPTIONS = ['Struggling', 'Poor', 'Moderate', 'Comfortable', 'Prosperous', 'Wealthy'];
 
@@ -28,7 +32,7 @@ export const GALLERY_RESPONSIVE_CSS = `
 
   .gallery-sidebar-panel {
     position: sticky;
-    top: 16px;
+    top: calc(var(--sf-arrow-clear, 0px) + 16px);
   }
 
   .gallery-topbar {

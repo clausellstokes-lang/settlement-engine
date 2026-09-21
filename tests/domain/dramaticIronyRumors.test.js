@@ -94,12 +94,12 @@ describe('H14 — dramatic-irony rumor branch reads the real projection shape', 
     const brief = dramaticIronyBrief({ settlement: { id }, worldState: world, tick: 16 });
     const ironySection = brief.sections.find((s) => s && s.id === 'irony');
     expect(ironySection, 'the irony section must exist').toBeTruthy();
-    const rumorIronies = ironySection.items.filter((it) => it && it.kind === 'rumor');
+    const rumorIronies = ironySection.items.filter((item) => item && item.kind === 'rumor');
     expect(rumorIronies.length, 'at least one rumor irony must be surfaced').toBeGreaterThan(0);
     // Each rumor irony carries the belief (headline) and the divergence reasons.
-    for (const it of rumorIronies) {
-      expect(typeof it.believed).toBe('string');
-      expect(Array.isArray(it.divergence) && it.divergence.length > 0).toBe(true);
+    for (const rumor of rumorIronies) {
+      expect(typeof rumor.believed).toBe('string');
+      expect(Array.isArray(rumor.divergence) && rumor.divergence.length > 0).toBe(true);
     }
   });
 });

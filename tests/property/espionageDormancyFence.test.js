@@ -189,6 +189,85 @@ const THE_CALLER = 'src/domain/worldPulse/operations/missionDispatcher.js';
  * AND NOWHERE ELSE. Most recently at the ENGINE-HYGIENE landing (SHIFT RECORD,
  * 2026-09-01, TE-AGNOSTIC-1 cars `f2c1ad181` / `97d119c9b`); before that at T8.
  *
+ * ── 2026-09-19, THE READER MET 'CHURCHES, MONASTERIES' IN A QUARTER CARD (owner-signed, through the door) ────
+ * THE SIXTH MOVEMENT OF THIS CONSTANT since the genesis freeze, and like the ones before
+ * it a signed re-record under tests/helpers/goldenRecordDoor.js rather than a spend of
+ * the one window this file's STOP still names. The owner's order: "the parish church is
+ * a house of worship on every surface" (2026-09-19); the record is
+ * docs/shift-records/2026-09-19-religious-quarter-text.json (odqRow §934.22). THE MOVER,
+ * IN THE RECORD'S OWN WORDS, because the record is the authority and this paragraph does
+ * not paraphrase it: THE READER MET 'Churches, monasteries' IN A QUARTER CARD WHOSE OWN
+ * BULLET NOW READS 'Houses of worship (2-5)'.
+ * On THIS corpus 346 of 360 rows move; 360/360 hashes stay distinct. `91a60437…` ->
+ * `0d5dac61…`.
+ *
+ * ── 2026-09-19, THE READER STOPPED MEETING 'PARISH CHURCH' IN THE SENTE… (owner-signed, through the door) ────
+ * THE FIFTH MOVEMENT OF THIS CONSTANT since the genesis freeze, and like the ones before
+ * it a signed re-record under tests/helpers/goldenRecordDoor.js rather than a spend of
+ * the one window this file's STOP still names. The owner's order: "do these as well"
+ * (2026-09-19); the record is docs/shift-records/2026-09-19-parish-church-text.json
+ * (odqRow §934.13). THE MOVER, IN THE RECORD'S OWN WORDS, because the record is the
+ * authority and this paragraph does not paraphrase it: THE READER STOPPED MEETING
+ * 'PARISH CHURCH' IN THE SENTENCE UNDER A LABEL THAT SAYS HOUSE OF WORSHIP.
+ * On THIS corpus 348 of 360 rows move; 360/360 hashes stay distinct. `6ffc462c…` ->
+ * `91a60437…`.
+ *
+ * ── 2026-09-19, THE VIEW RE-DERIVED THREE NUMBERS ITS WRITER ALREADY HELD (owner-signed, through the door) ────
+ * THE FOURTH MOVEMENT OF THIS CONSTANT since the genesis freeze, and like the ones
+ * before it a signed re-record under tests/helpers/goldenRecordDoor.js rather than a
+ * spend of the one window this file's STOP still names. The owner's order: "make sure
+ * that the food deficit math and the band visual are correct" (2026-09-19); the record
+ * is docs/shift-records/2026-09-19-food-balance-arithmetic.json (odqRow §934.15). THE
+ * MOVER, IN THE RECORD'S OWN WORDS, because the record is the authority and this
+ * paragraph does not paraphrase it: THE VIEW RE-DERIVED THREE NUMBERS ITS WRITER ALREADY
+ * HELD, AND GOT TWO OF THEM WRONG.
+ * On THIS corpus 360 of 360 rows move; 360/360 hashes stay distinct. `38a26ac1…` ->
+ * `6ffc462c…`.
+ *
+ * ── 2026-09-18, THE PRESSURE-SENTENCE AGREEMENT (owner-signed, through the door) ─────────
+ * THE THIRD MOVEMENT SINCE THE GENESIS FREEZE, and like the two before it a signed re-record
+ * under tests/helpers/goldenRecordDoor.js rather than a spend of the one window this file's STOP
+ * still names. The owner ordered every reported fix implemented ("impliment every fix",
+ * 2026-09-18); the record is docs/shift-records/2026-09-18-pressure-sentence-agreement.json
+ * (odqRow §934). THE MOVER, IN THE RECORD'S OWN WORDS: "THE PRESSURE SENTENCES STOPPED MAKING A
+ * PLURAL COMMODITY THE SUBJECT OF A SINGULAR VERB." A famine hook read "knows where the hoarded
+ * medicinal herbs is" on the Overview, the DM Summary and Table View at once, because all three
+ * read the one generated pressureSentence; src/generators/narrativeText.js carried three
+ * templates that made a bare commodity label the subject of a number-sensitive verb, and all
+ * three became invariant clauses. On THIS corpus 3 of 360 rows move; 360/360 hashes stay
+ * distinct. `a0c145b2…` -> `38a26ac1…` (the record's cause quotes the LANE-TIP chain
+ * `f13df68e…` -> `38a26ac1…`, measured before the consist carried the second movement; the
+ * door re-measured on the consist and wrote this figure, as the record itself instructs).
+ *
+ * ── 2026-09-18, THE CONTENT-COHERENCE FIXES (owner-signed, through the door) ────────────
+ * THE SECOND MOVEMENT SINCE THE GENESIS FREEZE, and like the first it is a signed re-record
+ * under tests/helpers/goldenRecordDoor.js rather than a spend of the one window this file's STOP
+ * still names. The owner ordered every reported fix implemented ("impliment every fix",
+ * 2026-09-18); the record is docs/shift-records/2026-09-18-content-coherence.json (odqRow §934).
+ * THE MOVERS, FOUND AND ATTRIBUTED TO ZERO RESIDUE by single-variable trees measured against the
+ * base, whose union is exactly the tip and leaves no row unexplained: D1 and D1b took one world's
+ * liturgy out of the service catalogue and the role labels (a Mesoamerican-inspired hamlet was
+ * listing Baptism and Sunday mass under HEALING beside its own cultural titles), D2 stopped the
+ * role catalog's generalist bucket filing any role into any faction, and D3 rewrote eight plot
+ * hooks out of the rolled-table register. D4 and D4b moved nothing here: they are a display
+ * read-model. On THIS corpus 360 of 360 rows move; 360/360 hashes stay distinct.
+ * `f13df68e…` -> `a0c145b2…` (the record's cause quotes `4f764737…`, the D1–D4 lane-tip
+ * measurement taken before D1b moved 441 further rows of the same corpus; the door
+ * re-measured on the consist and wrote this figure).
+ *
+ * ── 2026-09-17, THE DOSSIER CONTRADICTIONS (owner-signed, through the door) ────────────
+ * THE FIRST MOVEMENT OF THIS CONSTANT SINCE THE GENESIS FREEZE, AND IT DID NOT WAIT FOR THE
+ * LIGHTING WAVE: it is a signed re-record under tests/helpers/goldenRecordDoor.js, which from the
+ * genesis (2026-09-16) is the lawful path for every frozen surface. The owner ordered the dossier's
+ * contradictions fixed ("Fix the contradiction."; "fix the remaining contradictions as well") and
+ * signed the re-records ("I approve"), record docs/shift-records/2026-09-17-dossier-contradictions.json.
+ * THE MOVER, FOUND AND ATTRIBUTED TO ZERO RESIDUE: src/generators/power/governanceNarrative.js alone
+ * (a single-variable revert returns the old value). A town under an insurgency, a mass migration, a
+ * war or a religious conversion read `Stable` beside its ACTIVE CRISIS banner; it now reads a crisis
+ * band. On this corpus exactly 26 of 360 rows move, every one in the single field
+ * powerStructure.stability (11 wartime, 6 insurgency, 6 mass migration, 3 religious conversion);
+ * 360/360 hashes stay distinct. `cda5ec87…` -> `b9dc82bc…`.
+ *
  * ── 2026-09-02, T13 TRANS — THE WINDOW OPENED AND CLOSED WITH ZERO MOVEMENT ──────────
  * ⛔ THE STOP IS RE-ARMED TO EXACTLY ONE NAMED WINDOW. T13 TRANS (ODQ §879.11 REC, §883
  * landing) retired every transcendental site in the six census trees — thirty declared-shift
@@ -260,7 +339,7 @@ const THE_CALLER = 'src/domain/worldPulse/operations/missionDispatcher.js';
  * superseded by the ENGINE-HYGIENE re-record above, which is the record of the
  * one chartered window that has been spent since.
  */
-const PRE_COUPLING_CORPUS_SHA = 'cda5ec87790ba9fb06e68e9dfe064bb9059d07ede47edbf74855f02f76a3684f';
+const PRE_COUPLING_CORPUS_SHA = '0d5dac61460956399f7a787d8dae6db93a2bddfdb870883ba958125342fbe430';
 
 const CORPUS_TIERS = Object.freeze(['thorp', 'hamlet', 'village', 'town', 'city', 'metropolis']);
 const CORPUS_ROUTES = Object.freeze(['road', 'isolated', 'port', 'crossroads']);

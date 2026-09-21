@@ -14,6 +14,8 @@ import { Search, X, AlertTriangle, SlidersHorizontal } from 'lucide-react';
 
 import { BORDER2, CARD, FS, GOLD, INK, MUTED, SECOND, SP, sans, swatch } from '../theme.js';
 import { IconButton } from './IconButton.jsx';
+import useIsMobile from '../../hooks/useIsMobile.js';
+import { chromeFontSize } from '../../design/proseScale.js';
 
 /** The typed severity facet (frozen — never free text). */
 const SEVERITY_FACETS = Object.freeze([
@@ -37,6 +39,7 @@ const SEVERITY_FACETS = Object.freeze([
  * @param {() => void} props.onToggleFilters
  */
 export default function HeraldStrip({ query, onQuery, focusId, focusName, onClearFocus, attentionOn, onToggleAttention, band, onBand, showFilters, onToggleFilters }) {
+  const mobile = useIsMobile();
   const activeFilterCount = (band ? 1 : 0);
   return (
     <div role="search" aria-label="Search and filter the realm" style={{ display: 'grid', gap: SP.xs }}>
@@ -48,7 +51,7 @@ export default function HeraldStrip({ query, onQuery, focusId, focusName, onClea
             onChange={(e) => onQuery(e.target.value)}
             placeholder="Search the realm…"
             aria-label="Search the realm"
-            style={{ flex: 1, minWidth: 0, border: 'none', background: 'none', outline: 'none', color: INK, fontFamily: sans, fontSize: FS.xs, fontWeight: 700, minHeight: 24 }}
+            style={{ flex: 1, minWidth: 0, border: 'none', background: 'none', outline: 'none', color: INK, fontFamily: sans, fontSize: chromeFontSize(FS.xs, mobile), fontWeight: 700, minHeight: 24 }}
           />
           {query && (
             <IconButton onClick={() => onQuery('')} aria-label="Clear search" size="sm"><X size={12} /></IconButton>
@@ -64,15 +67,15 @@ export default function HeraldStrip({ query, onQuery, focusId, focusName, onClea
 
       {focusId != null && (
         <div data-testid="herald-focus-chip" style={{ display: 'inline-flex', alignItems: 'center', gap: 6, alignSelf: 'flex-start', border: `1px solid ${GOLD}`, background: CARD, padding: '2px 6px' }}>
-          <span style={{ color: MUTED, fontFamily: sans, fontSize: FS.micro, fontWeight: 900, textTransform: 'uppercase', letterSpacing: '0.04em' }}>Focused</span>
-          <span style={{ color: swatch['#A0762A'], fontFamily: sans, fontSize: FS.xs, fontWeight: 800 }}>{focusName || String(focusId)}</span>
+          <span style={{ color: MUTED, fontFamily: sans, fontSize: chromeFontSize(FS.micro, mobile), fontWeight: 900, textTransform: 'uppercase', letterSpacing: '0.04em' }}>Focused</span>
+          <span style={{ color: swatch['#A0762A'], fontFamily: sans, fontSize: chromeFontSize(FS.xs, mobile), fontWeight: 800 }}>{focusName || String(focusId)}</span>
           <IconButton onClick={onClearFocus} aria-label="Clear focus" size="sm"><X size={12} /></IconButton>
         </div>
       )}
 
       {showFilters && (
         <div data-testid="herald-facet-sheet" style={{ display: 'grid', gap: 6, border: `1px solid ${BORDER2}`, background: CARD, padding: SP.sm }}>
-          <div style={{ color: SECOND, fontFamily: sans, fontSize: FS.micro, fontWeight: 900, textTransform: 'uppercase', letterSpacing: '0.05em' }}>Severity</div>
+          <div style={{ color: SECOND, fontFamily: sans, fontSize: chromeFontSize(FS.micro, mobile), fontWeight: 900, textTransform: 'uppercase', letterSpacing: '0.05em' }}>Severity</div>
           <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
             {SEVERITY_FACETS.map(f => (
               <IconButton key={f.id} onClick={() => onBand(band === f.id ? null : f.id)} aria-pressed={band === f.id} active={band === f.id} size="sm">

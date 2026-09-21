@@ -4,8 +4,10 @@
  * Replaces ad-hoc badge styles scattered across PhaseBadge and the
  * Narrated/Raw chip in SettlementDetail. The audit's vocabulary is
  * normative: DRAFT, CANON,
- * PREPLAY, EVENT_PENDING, NARRATED, RAW, LOCKED. Every status visible
- * to the user should reduce to one of these kinds.
+ * PREPLAY, EVENT_PENDING, NARRATED, RAW. Every status visible
+ * to the user should reduce to one of these kinds. (LOCKED, "Survives an NPC
+ * reroll", was never rendered and left with the padlocks on owner order
+ * 2026-09-17.)
  *
  * Accessibility: the badge announces itself with role="status" so
  * screen readers pick up phase changes. The label inside is the
@@ -28,8 +30,13 @@
  * imports, and roster C of IconsContext.js names it for the same reason.
  *
  * Nothing is lost when the icon goes: the two channels IconsContext documents as
- * surviving — the kind's COLOR and the uppercase TEXT label (P7) — are both
- * still here, and the label is what the pins and assistive tech already read.
+ * surviving — the kind's COLOR and the TEXT label (P7) — are both still here, and
+ * the label is what the pins and assistive tech already read.
+ *
+ * ⚠ THE LABEL IS NO LONGER UPPERCASED (the label ladder, 2026-09-18). It is a rung-3
+ * STATUS VALUE in a badge, where colour and weight already carry the meaning, and
+ * `src/copy/en.js` writes these words in sentence case at the source. The badge was
+ * shouting a word the copy table had already set correctly.
  */
 
 import { tx } from '../../copy/index.js';
@@ -41,7 +48,6 @@ const KINDS = {
   event_pending: { bg: '#fff5f5',                 fg: '#8b1a1a', border: '#c89a9a' },
   narrated:      { bg: 'rgba(90,42,138,0.14)',    fg: '#6a2a9a', border: 'rgba(160,100,220,0.35)' },
   raw:           { bg: 'rgba(156,128,104,0.14)',  fg: '#6b5340', border: 'rgba(156,128,104,0.35)' },
-  locked:        { bg: '#fff7e0',                 fg: '#7a4f0f', border: '#c8a96a' },
 };
 
 /**
@@ -76,7 +82,7 @@ export default function StateBadge({ kind, size = 'md', tooltip, suffix }) {
         whiteSpace: 'nowrap',
       }}
     >
-      {label.toUpperCase()}
+      {label}
       {suffix != null && (
         <span style={{ opacity: 0.7, marginLeft: 4 }} aria-hidden="true">· {suffix}</span>
       )}

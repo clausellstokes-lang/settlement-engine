@@ -221,43 +221,45 @@ const OWNER_GATED_DISCHARGE = Object.freeze({
 });
 
 describe('per-test suite ratchet — static pins', () => {
-  test('every entry is keyed by its own `<file> :: <test>` identity (no hand-typed drift)', () => {
-    for (const [id, row] of Object.entries(baseline.entries)) {
-      expect(identityOf(row.file, row.test), `entry key disagrees with its own file/test fields: ${id}`).toBe(id);
-    }
-  });
-
-  test('every entry path is repo-relative POSIX and the file still exists', () => {
-    const rows = Object.entries(baseline.entries);
-    expect(rows.length, 'an empty census would make every pin below vacuous').toBeGreaterThan(0);
-    for (const [id, row] of rows) {
-      expect(row.file.startsWith('/'), `${id} is absolute — paths must be repo-relative`).toBe(false);
-      expect(row.file.includes('\\'), `${id} carries a backslash — paths must be POSIX`).toBe(false);
-    }
-    const missing = rows.filter(([, r]) => !existsSync(join(ROOT, r.file))).map(([id]) => id);
-    expect(missing, `deleted/moved file(s) — run \`npm run test:ratchet:update\`: ${missing.join(', ')}`).toEqual([]);
+  // ── ⭐⭐ THE VICTORY ASSERTION (2026-09-19) ─────────────────────────────────────────
+  //
+  // THE CENSUS IS ZERO. `npm run test:ratchet:update` banked the last win and
+  // scripts/.test-ratchet-baseline.json now carries `entries: {}`.
+  //
+  // ⛔ SO THE PER-ROW PINS CONVERT RATHER THAN ZERO, AND THAT IS THE WHOLE REASON. Seven
+  // arms used to walk `baseline.entries` — the identity keys, the repo-relative POSIX
+  // spelling and the on-disk check, the tests/build exclusion, the four attribution fields,
+  // the mandatory magnitude, its well-formedness, and its anti-vacuity measure. Every one of
+  // them is now a `for` loop over an empty object, which asserts NOTHING while wearing a
+  // guard's clothes — and one of them carried an explicit `rows.length > 0` floor whose own
+  // message said an empty census "would make every pin below vacuous". A floor under an
+  // emptied population is DELETED, not zeroed (PACKET_STANDARD, "Burning a census row"), so
+  // the seven collapse into the single assertion below: the population is EXACTLY ZERO, and
+  // any future member of it reds on arrival instead of being banked.
+  //
+  // ⛔ NOTHING IS LOST, AND THAT IS MEASURED RATHER THAN HOPED. Every rule those loops
+  // declared is convicted BY EXECUTION further down this file, against an INJECTED census
+  // the fixtures control — so each still reds on the day a row comes back, which is the only
+  // day any of them could ever have mattered:
+  //   • attribution            → '⛔ --update REFUSES to bank a failing test it has not seen before'
+  //   • the tests/build split  → '--bootstrap is refused when a census already exists' (SOURCE BASELINE contains tests/build)
+  //   • path spelling          → 'a report path is normalized, so a spelling never zeroes the census'
+  //   • a file off disk        → 'a baselined test whose file was DELETED is a legitimate ratchet-down, not a scope red'
+  //   • a missing magnitude    → '⛔ FAIL CLOSED: a banked row that declares NO magnitude REDS'
+  //   • a malformed measure    → 'a malformed measure REDS rather than being skipped (kind and ceiling are validated)'
+  //   • the empty-message vacuity → '⛔⛔ a capture that can match EMPTINESS is UNMEASURED, never zero'
+  // The static loops were the WEAKER half of every one of those pairs: they could only ever
+  // check the rows that happened to be sitting there.
+  test('⭐⭐ THE BASELINED-RED CENSUS IS ZERO — a failing test is a regression the ratchet refuses, never a row here', () => {
     expect(
-      rows.filter(([, row]) => row.file.startsWith('tests/build/')).map(([id]) => id),
-      'build-test debt belongs to strict post-build verification, never the source census',
-    ).toEqual([]);
-  });
-
-  test('⛔ EVERY ENTRY IS ATTRIBUTED — an unattributed row is a defect laundered into debt', () => {
-    // This is the pin that makes the census a LEDGER rather than a skip-list.
-    // A row nobody can trace to an owning subsystem and an introducing commit is
-    // indistinguishable from a bug someone quietly silenced.
-    for (const [id, row] of Object.entries(baseline.entries)) {
-      expect(row.subsystem, `${id}: no owning subsystem`).toBeTruthy();
-      expect(String(row.subsystem).length, `${id}: subsystem is a stub`).toBeGreaterThan(2);
-      expect(row.cause, `${id}: no cause recorded`).toBeTruthy();
-      expect(String(row.cause).length, `${id}: cause is a stub, not an explanation`).toBeGreaterThan(20);
-      expect(DEBT_CLASSES, `${id}: class must be one of ${DEBT_CLASSES.join('|')}`).toContain(row.class);
-      expect(row.introducedAt, `${id}: no introducing commit`).toBeTruthy();
-      expect(
-        String(row.introducedAt),
-        `${id}: introducedAt must be a 40-hex sha or an explicit \`unbisectable:<reason>\` note`,
-      ).toMatch(/^([0-9a-f]{40}|unbisectable:.{10,})$/);
-    }
+      baseline.entries,
+      'the baselined-red census is ZERO since 2026-09-19: ORDINARY TEST DEBT and the last\n'
+      + 'LEDGERED ENFORCEMENT WALKER are both eradicated, and the gate is structurally unable\n'
+      + 'to put either back — `--update` can only REMOVE, and a failure it has not seen is\n'
+      + 'REFUSED. So a row here was never debt anybody measured; it is a hand edit, and the\n'
+      + 'cure is to FIX THE TEST. A failing test is a REGRESSION the ratchet refuses on\n'
+      + 'arrival, never a row in this file.',
+    ).toEqual({});
   });
 
   test('the census records the committed sha it was measured at', () => {
@@ -298,58 +300,6 @@ describe('per-test suite ratchet — static pins', () => {
       /total test FILE count collapsed/.test(gate),
       'the file-floor refusal message is gone — the comparison was removed',
     ).toBe(true);
-  });
-
-  // ── ⭐ TE-RATCHET-MAG — the banked rows' MAGNITUDE (ODQ §854) ────────────────
-  // Banking a row freezes its EXISTENCE. Every surviving census row is a ledgered
-  // enforcement walker whose verdict is a POPULATION, so without a magnitude the
-  // contents behind a permitted red are unbounded — measured at +109 em dashes across
-  // 29 further files with every gate green. These pins make the declaration mandatory
-  // and well-formed; the executed block convicts the gate that acts on it.
-  test('⛔ EVERY BANKED ROW DECLARES A MAGNITUDE — a permitted red may not be unbounded', () => {
-    for (const [id, row] of Object.entries(baseline.entries)) {
-      expect(
-        Array.isArray(row.magnitude) && row.magnitude.length > 0,
-        `${id}: no \`magnitude\`. Banking this row froze that it fails; nothing freezes HOW BIG it is,`
-        + ' so its population can grow to any size with the gate green. Measure it and freeze the figure.',
-      ).toBe(true);
-    }
-  });
-
-  test('⛔ every declared measure is WELL FORMED (a malformed one cannot refuse anything)', () => {
-    for (const [id, row] of Object.entries(baseline.entries)) {
-      for (const spec of row.magnitude || []) {
-        const where = `${id} [${spec?.name ?? '(unnamed)'}]`;
-        expect(typeof spec.name === 'string' && spec.name.trim().length > 0, `${where}: no name`).toBe(true);
-        expect(MAGNITUDE_KINDS, `${where}: kind must be one of ${MAGNITUDE_KINDS.join('|')}`).toContain(spec.kind);
-        expect(typeof spec.pattern === 'string' && spec.pattern.length > 0, `${where}: no pattern`).toBe(true);
-        expect(() => new RegExp(spec.pattern), `${where}: the pattern does not compile`).not.toThrow();
-        expect(Number.isInteger(spec.ceiling) && spec.ceiling >= 0, `${where}: ceiling must be a non-negative integer`).toBe(true);
-        expect(
-          String(spec.unit || '').length,
-          `${where}: no \`unit\` — a bare number nobody can read is not a measurement`,
-        ).toBeGreaterThan(10);
-      }
-    }
-  });
-
-  test('⛔⛔ NO measure can be satisfied by an EMPTY message (the vacuity that would disarm it silently)', () => {
-    // THE ANTI-VACUITY ARM, and it is the one that matters most here. A pattern whose
-    // capture group can match emptiness — `(\d*)`, an optional group that did not
-    // participate — reads as the number ZERO against ANY text, including a message that
-    // carries no figure at all. That measure would then sit under every ceiling forever
-    // and report a green: a magnitude guard that cannot fail, wearing the clothes of one
-    // that can. Every declared measure must be UNMEASURABLE against nothing.
-    for (const [id, row] of Object.entries(baseline.entries)) {
-      for (const spec of row.magnitude || []) {
-        const verdict = measureMagnitude(spec, '');
-        expect(
-          verdict.ok,
-          `${id} [${spec.name}]: this measure MEASURES ${verdict.measured} against an EMPTY message, so it`
-          + ' can never refuse anything. Require a digit and anchor the pattern on real message text.',
-        ).toBe(false);
-      }
-    }
   });
 
   test('the census _doc states the magnitude discipline (the file explains its own shape)', () => {
@@ -762,220 +712,6 @@ describe('⛔ the walker-census law — an enforcement walker may not be frozen 
 
   const isEnforcementWalker = (file) => Object.values(walkerArmsOf(file)).some(Boolean);
 
-  const walkerRows = Object.entries(baseline.entries)
-    .filter(([, row]) => isEnforcementWalker(row.file))
-    .map(([id]) => id);
-
-  // ── THE TWO LEDGERS. Both are SHRINK-ONLY and audited by EXACT IDENTITY, and they
-  // mean DIFFERENT things. Confusing them is how a quarantine becomes a second census.
-  //
-  // ADMITTED — the row lives in a walker file but is NOT a disabled guard, because its
-  // assertion ranges over a CLOSED, per-member identity rather than an open tree-derived
-  // population. `test.each(REGISTRY)('$kind retains …')` mints ONE TEST PER KIND, so
-  // freezing three kinds leaves the guard fully live for every other kind and for every
-  // kind added later (a new kind mints a new identity, which is absent from the census
-  // and reds as a regression — the law pinned in "A FAILING TEST ABSENT FROM THE CENSUS
-  // IS A REGRESSION"). Measured at af8815e9: 6 of the 9 war-cost kinds PASS while these
-  // 3 fail. That is ordinary banked debt and it is allowed to stay.
-  // ⭐⭐ 2026-09-04 (§893) — ALL FOUR ADMITTED ROWS ARE DISCHARGED, 4 → 0.
-  //
-  // Every one of the four gave the SAME reason for being admitted: the corpus had DEEPENED past
-  // the fixed-five assumption (1e8bf8a8) and the row stayed red under D-W3 Class B, which
-  // "needs a ruling (cap raised vs corpus trimmed), not a parser."
-  //
-  // ⭐ THAT RULING WAS MADE AND EXECUTED. CR-FP-7 countersigned the CAP-RAISE arm, and
-  // CENSUSWIRE (ea0d67102) wired all thirteen authored annex families byte-verbatim into
-  // WAR_RECEIPTS — five kinds landing exactly on their frequency floors. The four walker
-  // identities now PASS on their own merits, so their census rows retired at 4dea2dc20 and
-  // these ledger rows retire with them. Nothing was widened, excluded or trimmed.
-  //
-  // ⛔ THE DISCHARGE IS A RECORD, NOT A DELETION — the same discipline this file applies to the
-  // 2026-08-10 owner-gated retirement above. The object is empty because the debt is GONE, and
-  // ADMITTED_CEILING falls 4 → 0 so the emptiness is RATCHETED rather than merely current: a
-  // future row cannot slip back in under a ceiling nobody lowered.
-  //
-  // ⚠ ONE HONEST CONSEQUENCE, NAMED RATHER THAN HIDDEN: with the object empty, the
-  // "every ledger entry carries a REAL reason" arm below iterates nothing and is VACUOUSLY
-  // true for this ledger. That is inherent to an empty allowlist, not a defect introduced
-  // here — WALKER_ROWS_OWED still populates the same arm — but it is written down because an
-  // assertion that cannot fail is exactly the class §893 swept the corpus for.
-  const WALKER_ROWS_ADMITTED = Object.freeze({
-
-  });
-
-  // OWED — CONFIRMED disabled guards this lane did not free. Each is ONE assertion over
-  // an OPEN, tree-derived population, so its failing verdict is byte-identical however
-  // many more violations land. They are named here so the debt is VISIBLE and CANNOT
-  // GROW: a NEW walker row in neither ledger reds. ⛔ This list is not permission — it is
-  // an outstanding bill, and the honest reading of it is "eleven guards are switched off".
-  //
-  // ⭐ 2026-08-10 — THE TWO OWNER-GATED ROWS ARE RETIRED, 13 → 11. Both walkers PASS (195
-  // ships supabase/rollback/195_civility_guard_and_public_identity.down.sql and an inline
-  // `-- @rollback:` note; docs/DEPLOY.md names 195 as the head), so they were never
-  // disabled guards any more — they were CURED guards held in place by an authority gate.
-  // The owner's full delegation grant discharged that gate, and the retirement landed as
-  // one change: both census rows, both entries here, this ceiling, and the census CEILING.
-  // The discharge itself is recorded in OWNER_GATED_DISCHARGE at the top of this file,
-  // where the pin that used to refuse it now checks the cure is still in the tree.
-  const WALKER_ROWS_OWED = Object.freeze({
-    // ⭐⭐ 2026-09-15, LT28 CAR 6 — THE VOICE ROW AND THE ENFORCEMENT-CLAIMS ROW ARE FREED, NOT FORGIVEN.
-    // The voice row's own named cure (§901) is built: a DECLARED authored-vocabulary exemption in the
-    // scanner, keyed on the EXACT LITERAL rather than a widened budget — bare `—` delimiters anywhere,
-    // plus per-file verbatim producer labels carrying their reason — with four controls, including a
-    // planted-and-executed proof that an undeclared em dash in an EXEMPTED file still reds. It also
-    // freed five more bare delimiters in three already-baselined files, banked through the shrink-only
-    // door: 311 → 306 em over 55 → 52 files. The enforcement-claims row went two ways because its six
-    // naked claims were two different things: THREE were never claims at all (`0 problems` was matching
-    // the tail of "30 problems" on three lines REPORTING a lint run — the detector now carries `\b`,
-    // pinned in both directions), and THREE were real claims that already named their enforcer in prose
-    // and simply carried no tag. FROZEN_NAKED is empty. A remove-only --update retired both census rows
-    // (`baseline updated: 1 failing test(s) remain, 2 removed`); these two ledger entries leave with them
-    // and OWED_CEILING drops by exactly two. The owner-gated golden master is the only row left.
-    // ⭐⭐ 2026-09-06, THE OSR RUNG-18 LANDING (§902) — THE TWO WRITER-REACH ROWS ARE FREED, NOT FORGIVEN. They entered at §900 as
-    // declared debt: the writer-reach register measured corpusMeta.simulationFlagsLit = 81 while the observed-shape register
-    // carried 80, because its schema-17 migration receipt's subjectSha lay outside the product lineage after a cherry-pick replay
-    // and the OSR CLI refused every --write. OSR-SCHEMA18 (cars f20d5dd48 + a05a4646e) re-executed the governed migration with a
-    // SUBJECT COMMIT INSIDE THE LINEAGE; the genesis froze 81 on the OSR side, both arms went green by title in the whole-suite
-    // proof at a05a4646e, and a remove-only --update retired both census rows; these two ledger entries leave with them and
-    // OWED_CEILING drops by exactly two. The voice per-file row, enforcement-claims and the owner-gated golden-master stay.
-    // ⭐ 2026-09-05, THE DESK LANDING (§900) — the Tier-2 voice per-file arm RE-ENTERS as OWED, declared: two src/domain
-    // files spell a producer's authored dashed vocabulary (a total map's keys and two parsed delimiters); the shrink-only door
-    // refuses the 311 → 319 rise and the generator import is forbidden in writing. Structural cure: an authored-vocabulary
-    // exemption class in the voice scanner (§901). Banking keeps the guard visible; OWED_CEILING moves 2 → 3 with it.
-    // ⭐⭐ 2026-09-15, LONG TAIL #41 — THE TIER-2 VOICE PER-FILE ROW IS FREED, NOT FORGIVEN, BY THE CURE ITS OWN CAUSE LINE
-    // NAMED. §901's "declared authored-vocabulary exemption class in the voice scanner" now exists: car 1 built a NAMED
-    // allowlist keyed file -> whole literal -> {count, why} and a FIFTH TIER that scans `src/generators`, the directory the
-    // eight banked dashes are TRANSCRIBED FROM and which no tier had ever read; car 2 declared those eight (five
-    // COMPLEXITY_LABEL values mirroring prosperity.js:296-314, the FOOD_POOL_OF key mirroring foodGenerator.js:342, and the
-    // bare `'—'` split delimiter matched to the separator safetyProfile.js:235 composes), each verified byte-identical with
-    // `grep -F`. The arm is GREEN by execution: `Tests 28 passed (28)`, and the previously-throwing documented refreeze
-    // `UPDATE_VOICE_BASELINE=1` now runs clean and rewrites all three baselines BYTE-IDENTICALLY. The exemption cannot rot:
-    // every entry is count-pinned and a seeded third `'—'` in generalStateProse.js reds it ("declared 2, measured 3"). The
-    // census row is removed in the SAME ACT as this entry, and OWED_CEILING drops by exactly the one row burned.
-    // ⭐⭐ 2026-08-31, VOICE-1b (ODQ §854) — THE FOUR VOICE BLOCKERS WERE STALE IN BOTH
-    // FIGURES AND PRESCRIPTION, AND THE PRESCRIPTION WAS THE FORBIDDEN CURE. Each of the
-    // four lines below used to say the cure was "a re-freeze of the voice ratchet fixture
-    // at a measured sha". The standing STRIP-never-raise ruling (ODQ line 266, where a
-    // 23-em-dash breach in aiCharter.js was STRIPPED 681 → 658 rather than banked) forbids
-    // exactly that, and a blocker line naming the forbidden cure is how the forbidden cure
-    // gets run — measured: re-freezing would NOT have gone green, because both budget arms
-    // compare against HARDCODED constants, so four reds would have become TWO, green ON the
-    // banked growth, with a RATCHET-DOWN notice inviting these very rows' deletion. The
-    // figures were stale too (1369/18 recorded; 1478/21 measured at 6770f878f). The cure is
-    // now enforced rather than merely prescribed: tests/helpers/shrinkOnlyBaseline.js makes
-    // the documented `UPDATE_VOICE_BASELINE=1` refreeze THROW on any total that would rise.
-    // ⭐⭐ 2026-09-05, THE PROSE LANDING (§898) — THE TWO TIER-2 VOICE ROWS ARE FREED, NOT FORGIVEN. The src/ prose
-    // car cured 1,001 reader sentences; the Tier-2 TOTAL fell 770 → 311 under a budget of 670 and the per-file
-    // arm's baseline was re-frozen through the documented shrink-only door (55 rows / em 311 / bang 8 — a FALL,
-    // which is the only refreeze that door accepts). A remove-only --update retired both census rows; these two
-    // ledger entries leave with them and OWED_CEILING drops by exactly two. The two Tier-3 JSX rows stay: the
-    // 34 mainline JSX dashes are VOICE-JSX's, and their refreeze would be a RISE the door refuses.
-    // ⭐⭐ 2026-09-05, THE COMPOSED LANDING (§899) — THREE ROWS FREED, NOT FORGIVEN. VOICE-JSX cured all 34 mainline
-    // JSX em dashes (Tier-3 GREEN with no refreeze: 0 against a budget of 6, 0 against a per-file baseline of zero), and
-    // CLAMP-W3 lifted the clamp census ceiling 62 → 69 to match the tree after CLAMP-W2 migrated three writers (the
-    // absorbed copies are documented in the ceiling car; the census row's cause string had said 78, the tree measured
-    // 72 at DOCKET and 69 at the composed tip). A remove-only --update retired all three census rows; these three ledger
-    // entries leave with them and OWED_CEILING drops by exactly three. enforcement-claims and the golden-master
-    // (owner-gated, waiting for the freeze act) stay.
-    // ⭐⭐ 2026-08-30, TE-RESIDUE-1 — THE metronome ROW LEFT, AND IT LEFT THE RIGHT WAY.
-    // Its blocker read "the right cure is to give it a mechanism, which is a worldPulse
-    // change outside this lane". HK-4 is that change: `razingExecution.js` now carries
-    // `razingReemitCooldownActive`, a once-per-state-change latch at the metronome's OWN
-    // `DRIFT_REEMIT_COOLDOWN_TICKS` window, with no new tuning band and no persisted field.
-    // The walker is GREEN at its own tip, the file measures COMPLIANT rather than merely
-    // word-matching (six mutants convict all eight new behavioural arms), and a remove-only
-    // `--update` banked it: "10 failing test(s) remain, 1 removed". The entry is deleted
-    // because its census row is GONE, and the ceiling drops by exactly the one row burned —
-    // a ledger corpse silently lowers the effective ceiling and lets the next real walker row
-    // slip in under a cap a dead entry was holding up. It was NOT removed to make anything
-    // green: the guard it names is now enforcing, not forgiven.
-    // ⭐⭐ 2026-09-05, THE PROSE LANDING (§898, Fable chair) — A DECLARED SAME-SEED TEXT SHIFT MEETS THE CLOSED DOOR.
-    // The src/ prose car (1,001 cured reader sentences; emitted text moves on 133 engine-side paths;
-    // no rules value, preset or flag moved) changes every settlement's output text, so the committed
-    // generator-golden-master manifest moves on 525 of 525 rows (chair probe chair-tools/golden-count.mjs;
-    // CONTROL 0/525 at the base 272dbd2da). The guard is DISABLED until the freeze act BY CONSTRUCTION:
-    // tests/helpers/goldenRecordDoor.js refuses an env var ([NO_SIGNATURE]), and a signed record writes
-    // register-row values that tests/lint/goldenFreeze.walker.test.js:358 forbids while frozenAt is null.
-    // The chair signed NO record with the owner's standing words and amended NO door (RULING-GOLDEN-PRE-FREEZE.md
-    // in refs/preserve/chair-tools-2026-09-05); the shift is declared in docs/GOLDEN_SHIFT_LEDGER.md and the
-    // §898 row; every golden control until the freeze is tree-vs-tree. FREED by the owner-signed genesis
-    // (ODQ §881.4: the freeze records the LIT world), or sooner by the owner's own sentence in a shift record.
-    'tests/property/generatorGoldenMaster.test.js :: generator golden master (cross-build output stability) every config produces byte-identical output to the golden master':
-      'NOT FREED — the committed manifest moves on 525 of 525 rows under the DECLARED prose text shift, MEASURED at `73a6f0c22` (the PROSE landing tip) by the Fable chair with chair-tools/golden-count.mjs (control 0/525 at 272dbd2da); the fixture CANNOT be re-recorded before the freeze act (goldenRecordDoor [NO_SIGNATURE]; goldenFreeze.walker:358 forbids recorded register values while frozenAt is null). Blocker: the owner-signed GENESIS (§881.4) — or the owner\'s sentence in docs/shift-records/ ("one word charters it sooner"). Class owner-gated; magnitude ceiling 525; the arm is not switched off by a lane, it is waiting for the owner.',
-    // ⭐⭐ 2026-08-15, da-c — THE proseNumerics ROW LEFT, AND IT LEFT THE RIGHT WAY.
-    // It was OWED ("a regeneration must review every removed row, which is a wave, not a
-    // step"), and da-a's DA-A1 I2 plus da-c's I1 between them did exactly that wave: two
-    // regenerations, each with a full executed accounting of rows gained, rows lost,
-    // category ceilings and pure address moves before the write. The arm went green, the
-    // full run reported RATCHET DOWN (11 < 12), and a remove-only re-freeze banked it.
-    // The entry is deleted because its census row is GONE — a ledger corpse silently
-    // lowers the effective ceiling and lets the next real walker row slip in under a cap
-    // that a dead entry was holding up. It was NOT removed to make anything green.
-  });
-
-  const admittedIds = Object.keys(WALKER_ROWS_ADMITTED);
-  const owedIds = Object.keys(WALKER_ROWS_OWED);
-
-  // LITERALS, not figures read out of the objects they are supposed to cap — a ceiling
-  // derived from its own list proves list == list and rises silently with every entry.
-  // MONOTONE DOWN from here. You may burn them; you may never pad them.
-  const ADMITTED_CEILING = 0; // 4 → 0 at §893: the four admitted rows are discharged, not re-homed.
-  // 11 → 9 on 2026-08-10: the two crisisTripleSync rows were FREED, not forgiven. Both were
-  // mis-pointed source-address pins; re-pointing them at the live consumer
-  // (settlementLifecycleHelpers.js / campaignRegionalSliceEntry.js) turned the walker green
-  // with its invariant intact, proven by mutant at the new addresses. See the RATCHETED
-  // 25 → 23 note at the top of this file.
-  // 9 → 8 on 2026-08-15: the proseNumerics exact-match row was FREED, not forgiven — the
-  // owed regeneration wave was actually run, twice, each time with its accounting executed
-  // before the write. The ceiling drops by exactly the one row burned, which is the same
-  // arithmetic the 11 → 9 retirement above used. Burning a census row is never a one-path
-  // act: the census entry, this ledger entry and this ceiling all move together, and the
-  // gate is what says so — this ceiling's own arm is `<=`, so the ledger deletion alone
-  // would have stayed green while leaving a silently roomier cap.
-  // 8 → 7 on 2026-08-30: the metronome-cooldown row was FREED, not forgiven — see the note
-  // in WALKER_ROWS_OWED above. Same arithmetic as the 9 → 8 and 11 → 9 retirements: the
-  // census entry, this ledger entry and this ceiling move together, in one act.
-  // 7 → 5 on 2026-09-05 (§898): the two Tier-2 voice rows FREED by the prose landing's refreeze — the golden-master
-  // row had entered at 7 the same day (owner-gated, waiting for the freeze act), so the two burned leave five.
-  // 5 → 2 on 2026-09-05 (§899): the two Tier-3 JSX voice rows and the clamp-primitive row FREED by the composed
-  // landing (VOICE-JSX + the CLAMP-W3 ceiling car); enforcement-claims and the owner-gated golden-master remain.
-  // 2 → 3 on 2026-09-05 (§900): the Tier-2 voice per-file row re-enters OWED (declared, attributed) — see WALKER_ROWS_OWED.
-  // 5 → 3 on 2026-09-06 (§902): the two writer-reach rows FREED by the rung-18 re-anchoring (OSR-SCHEMA18); the voice
-  // per-file row, enforcement-claims and the owner-gated golden-master stay.
-  // 3 → 1 on 2026-09-15, IN TWO LANES COMPOSED AT §931: LONG TAIL #41 freed the Tier-2 voice per-file row by the named
-  // count-pinned authored-vocabulary allowlist (§901's cure; see WALKER_ROWS_OWED above) and LONG TAIL #28 car 6 freed
-  // enforcement-claims (the detector gains `\b`; three of the six 'naked claims' were the tail of '30 problems'). Both
-  // lanes burned the voice row independently (LT28 by a literal exemption the chair did NOT carry — LT41's design stands);
-  // the census entry, this ledger entry and this ceiling move in ONE act and the ceiling drops by exactly the rows burned.
-  // The owner-gated golden master is the only row left.
-  const OWED_CEILING = 1; // 3 → 1 on 2026-09-15 (LT28 car 6): the voice per-file row and enforcement-claims are FREED (see WALKER_ROWS_OWED); only the owner-gated golden master remains, and it retires at the owner-signed GENESIS.
-
-  test('⛔ NO ENFORCEMENT-WALKER ROW SITS IN THE CENSUS UNLESS IT IS LEDGERED', () => {
-    // THE PIN THIS WHOLE BLOCK EXISTS FOR. Add a walker row to the census — any walker,
-    // by any of the five arms — and this reds until someone writes down which of the
-    // two ledgers it belongs in and why. That is the difference between a law and a
-    // sentence: the cost of violating it is paid at the gate, not at the next audit.
-    const ledgered = new Set([...admittedIds, ...owedIds]);
-    const offenders = walkerRows.filter((id) => !ledgered.has(id));
-    expect(
-      offenders,
-      'these census rows are ENFORCEMENT WALKERS. A failing walker is a DISABLED GUARD:\n'
-      + 'freeze its OWN shrink-only inventory instead, then delete the row. If the row is\n'
-      + 'genuinely ordinary debt (a per-member identity, so new members still red), add it\n'
-      + 'to WALKER_ROWS_ADMITTED with the reason. If it is a disabled guard you cannot fix\n'
-      + 'today, add it to WALKER_ROWS_OWED with the blocker — and raise no ceiling to do it.',
-    ).toEqual([]);
-  });
-
-  test('the classifier is not vacuous — it really does flag rows in this census', () => {
-    // Without this, the pin above passes trivially the moment the classifier breaks.
-    expect(
-      walkerRows.length,
-      'the walker classifier flagged NOTHING. Either every walker row is gone (delete this'
-      + ' block with the ledgers) or the classifier stopped working (far likelier).',
-    ).toBeGreaterThan(0);
-  });
-
   test('⛔ NO SINGLE ARM CLASSIFIES THEM ALL — each arm has a named counterexample', () => {
     // The chair's warning, executable. Every file here is a counterexample that FORCES one
     // arm into the union, and if any of them changes shape this reds and the next author
@@ -1110,20 +846,21 @@ describe('⛔ the walker-census law — an enforcement walker may not be frozen 
   // joining a census. That is the FAILING-TEST-IS-DEBT doctrine with the debt door shut.
   const ORDINARY_TEST_CONTROL = Object.freeze([]);
 
-  test('⭐ ORDINARY TEST DEBT IS ERADICATED — the census holds enforcement walkers ONLY', () => {
-    // THE VICTORY ASSERTION, and it is a guard rather than a trophy: it is the converse of
-    // the enforcing pin above. That one says every WALKER row must be ledgered; this one says
-    // every row, full stop — so a row appearing in neither ledger reds here whether it got
-    // there by a classifier false positive or by a lane banking an ordinary failure.
-    const ledgered = new Set([...admittedIds, ...owedIds]);
-    const ordinary = Object.keys(baseline.entries).filter((id) => !ledgered.has(id)).sort();
+  test('⭐ ALL TEST DEBT IS ERADICATED — the census is EXACTLY EMPTY', () => {
+    // THE VICTORY ASSERTION, and it is a guard rather than a trophy. It used to read
+    // "ORDINARY debt is zero" — every row not held by one of the two walker ledgers — and it
+    // was the converse of the enforcing pin that stood above it. ⭐ 2026-09-19: THE LEDGERED
+    // POPULATION WENT TOO, so the subtraction has nothing left to subtract and the arm can
+    // state the whole fact directly. Every id here is now a regression whatever its shape: a
+    // lane banked an ordinary failure instead of fixing it, or an enforcement walker was
+    // frozen as debt. There is no third case and there is no ledger to put it in.
     expect(
-      ordinary,
-      'ordinary test debt was ERADICATED at est-1c; any new ordinary red is TRIAGED\n'
-      + 'IMMEDIATELY, NEVER BANKED. A row here means exactly one of two things: a lane banked an\n'
-      + 'ordinary failure instead of fixing it (fix it — do NOT widen the census), or an\n'
-      + 'enforcement walker lost its ledger row (put the row back). The eradication is a WON\n'
-      + 'POSITION, not a ceiling, and it may not be spent.',
+      Object.keys(baseline.entries).sort(),
+      'ordinary test debt was ERADICATED at est-1c, and the last LEDGERED ENFORCEMENT WALKER\n'
+      + 'left with the 2026-09-19 win — so the census is EXACTLY EMPTY. Any new red is TRIAGED\n'
+      + 'IMMEDIATELY, NEVER BANKED: `--update` REMOVES only and REFUSES a failure it has not\n'
+      + 'seen, so a row here arrived by HAND. Fix the test — do NOT widen the census. The\n'
+      + 'eradication is a WON POSITION, not a ceiling, and it may not be spent.',
     ).toEqual([]);
     expect(
       ORDINARY_TEST_CONTROL,
@@ -1132,65 +869,61 @@ describe('⛔ the walker-census law — an enforcement walker may not be frozen 
     ).toEqual([]);
   });
 
-  test('⛔ the eradication is a REAL partition, not an empty census', () => {
-    // THE ANTI-VACUITY ARM, and it is the direct descendant of the anti-padding one it grew
-    // out of. Zero ordinary rows is only a WIN if the census is populated and wholly
-    // accounted for: without this, the arm above passes the day the baseline is deleted, the
-    // reader breaks, or the scope sentinel stops collecting. A victory assertion invites
-    // exactly that failure, so the victory is pinned to a real population here.
-    const rows = Object.keys(baseline.entries);
+  test('⭐⭐ BOTH WALKER LEDGERS ARE GONE — the population they classified is ZERO, and the classifier is not', () => {
+    // THE SECOND VICTORY, and it is the deleted arm's own instruction being obeyed. 'the
+    // classifier is not vacuous' stood here and said in as many words what to do on the day
+    // its count reached zero: "Either every walker row is gone (delete this block with the
+    // ledgers) or the classifier stopped working (far likelier)." Every walker row IS gone,
+    // so the block went with them.
+    //
+    // ── THE RECORD, KEPT BECAUSE A DISCHARGE IS NEVER A DELETION ──────────────────────
+    // WALKER_ROWS_ADMITTED held rows that lived in a walker file but ranged over a CLOSED,
+    // per-member identity, so a new member still minted a new red; it emptied at §893 when
+    // CENSUSWIRE made the four war-cost identities pass on their own merits, and its ceiling
+    // had sat at 0 ever since. WALKER_ROWS_OWED held CONFIRMED disabled guards, each one an
+    // outstanding bill rather than permission, and every row that ever left it left FREED
+    // rather than forgiven — the 2026-08-10 migration retirement, the crisisTripleSync
+    // re-pointing, proseNumerics, the metronome cooldown, §898, §899, §901/LT41's
+    // count-pinned authored-vocabulary exemption, §902's OSR rung-18 re-anchoring, and LT28
+    // car 6. It ended holding exactly ONE row: tests/property/generatorGoldenMaster.test.js,
+    // owner-gated, waiting on the GENESIS freeze — and that row left with the census on
+    // 2026-09-19. The per-row discharges stay in git history and in the ODQ, where they are
+    // prose about commits rather than constants pretending to govern an empty set.
+    //
+    // ── WHY SIX ARMS WENT WITH THE TWO OBJECTS ───────────────────────────────────────
+    // With both ledgers empty, the ledgered-walker enforcement arm, the not-vacuous
+    // classifier arm, the real-partition arm, the exact-ledgers arm, the disjointness arm
+    // and the every-entry-carries-a-reason arm each iterate an empty object or compare two
+    // empty sets. ⛔ AND THE TWO CEILINGS WENT RATHER THAN DROPPING TO ZERO: a floor under
+    // an emptied population is DELETED, not zeroed (PACKET_STANDARD, "Burning a census
+    // row"), because a cap of 0 over an object that must be `{}` is exactly the tautology
+    // that law names — a guard's clothes on an assertion that cannot fail.
+    //
+    // ⛔ WHAT REFUSES A COMEBACK, WHICH IS THE ONLY THING THE LEDGERS WERE EVER FOR. A
+    // walker row reappearing needs no ledger to catch it: it reds '⭐ ALL TEST DEBT IS
+    // ERADICATED — the census is EXACTLY EMPTY' directly above, ON ARRIVAL, whether it is a
+    // walker or ordinary debt. That is strictly stronger than the ledgers ever were — they
+    // only asked that a walker row be WRITTEN DOWN; the eradication arm refuses the row.
+    //
+    // ARM 1 — the ledgers' population, measured through the classifier they were built on.
     expect(
-      rows.length,
-      'the census is EMPTY — the eradication arm above would then pass for the wrong reason',
-    ).toBeGreaterThan(0);
+      Object.entries(baseline.entries)
+        .filter(([, row]) => isEnforcementWalker(row.file))
+        .map(([id]) => id),
+      'an ENFORCEMENT WALKER is back in the census with no ledger left to hold it. The'
+      + ' ledgers are not coming back: a failing walker is a DISABLED GUARD, so freeze the'
+      + " walker's OWN shrink-only inventory and delete the row.",
+    ).toEqual([]);
+    // ARM 2 — ⛔ AND THE EMPTINESS IS THE POPULATION'S, NOT THE CLASSIFIER'S. This is the
+    // exact doubt the deleted arm named, and it is answered on the LAST row OWED ever held.
+    // generatorGoldenMaster is reached by A4 DELEGATED and by NOTHING ELSE — measured
+    // 2026-09-19: name false, title false, structure false, marker false — so a classifier
+    // that quietly lost its delegated arm would empty ARM 1 above and look just like a win.
     expect(
-      admittedIds.length + owedIds.length,
-      'both ledgers emptied — nothing is being classified, so "wholly ledgered" says nothing',
-    ).toBeGreaterThan(0);
-    const ledgered = new Set([...admittedIds, ...owedIds]);
-    expect(
-      rows.filter((id) => ledgered.has(id)).length,
-      'every surviving census row must be a LEDGERED enforcement walker — that identity is what\n'
-      + 'makes "zero ordinary debt" a partition claim about a real population rather than a\n'
-      + 'statement about an empty set',
-    ).toBe(rows.length);
-    // ⭐ AND THE CLASSIFIER IS STILL EXERCISED IN BOTH DIRECTIONS, which is what the retired
-    // sampling roster used to buy. The enforcing pin proves every walker row is ledgered; the
-    // `NO SINGLE ARM CLASSIFIES THEM ALL` pin proves each arm still has a live counterexample
-    // it must classify correctly; and this arm proves there is nothing left for a false
-    // positive to land on. A false positive today would have to invent an unledgered row —
-    // and that reds in the arm above.
-  });
-
-
-  test('both ledgers are EXACT — no stale entry survives its census row', () => {
-    // A ledger row whose census row is gone is worse than noise: it silently lowers the
-    // effective ceiling below, so the next real walker row slips in under a cap that was
-    // being held up by a corpse.
-    const present = new Set(Object.keys(baseline.entries));
-    const stale = [...admittedIds, ...owedIds].filter((id) => !present.has(id));
-    expect(stale, 'ledgered ids that are no longer in the census — delete their rows here').toEqual([]);
-  });
-
-  test('the two ledgers are disjoint (a row is admitted OR owed, never both)', () => {
-    const both = admittedIds.filter((id) => id in WALKER_ROWS_OWED);
-    expect(both, 'a row cannot be legitimate debt AND a disabled guard at once').toEqual([]);
-  });
-
-  test('the ledger ceilings never rise (both are monotone-down)', () => {
-    expect(admittedIds.length).toBeLessThanOrEqual(ADMITTED_CEILING);
-    expect(owedIds.length).toBeLessThanOrEqual(OWED_CEILING);
-  });
-
-  test('⛔ every ledger entry carries a REAL reason (a stub launders the same defect)', () => {
-    // The attribution discipline the census itself enforces, applied to its escape
-    // hatches — otherwise the hatches become the cheapest way to bank a disabled guard.
-    for (const [id, reason] of Object.entries(WALKER_ROWS_ADMITTED)) {
-      expect(String(reason).length, `${id}: admitted with a stub, not an argument`).toBeGreaterThan(60);
-    }
-    for (const [id, blocker] of Object.entries(WALKER_ROWS_OWED)) {
-      expect(String(blocker).length, `${id}: owed with a stub — name the blocker`).toBeGreaterThan(60);
-    }
+      isEnforcementWalker('tests/property/generatorGoldenMaster.test.js'),
+      'the last row WALKER_ROWS_OWED ever carried no longer classifies as a walker, so ARM 1'
+      + ' above is vacuous for the far likelier reason: the classifier stopped working.',
+    ).toBe(true);
   });
 });
 

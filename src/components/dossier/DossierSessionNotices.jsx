@@ -1,7 +1,11 @@
 import { FS, SP, swatch } from '../theme.js';
 import Button from '../primitives/Button.jsx';
+import AvailableAtLaunchPill from '../primitives/AvailableAtLaunchPill.jsx';
 import { AiOverlayViolations } from '../primitives/AiOverlayViolations.jsx';
 import { RegenerationDeltaCard } from '../primitives/RegenerationDeltaCard.jsx';
+import { purchasesOpen } from '../../lib/launchGate.js';
+import useIsMobile from '../../hooks/useIsMobile.js';
+import { chromeFontSize } from '../../design/proseScale.js';
 
 // Session-level notices cluster (AI error, partial-refinement, verifier
 // findings, regenerate delta) — all session-scoped, not tab-scoped, so they
@@ -22,11 +26,16 @@ export default function DossierSessionNotices({
   regenDelta,
   onDismissRegenDelta,
 }) {
+  const mobile = useIsMobile();
   const hasAiError = !!aiError;
   const hasPartialFailure = !!(showNarrative && partialFailure && partialFailure.failedFields?.length > 0);
   const hasViolations = !!(showNarrative && violations && (violations.length || violations.summary));
   const hasRegenDelta = !!regenDelta;
   if (!(hasAiError || hasPartialFailure || hasViolations || hasRegenDelta)) return null;
+  // Pre-launch lockout (lib/launchGate.js): "View plans" opens the credits pricing
+  // moment, so it renders disabled and wears the Available at launch pill until
+  // purchases open. The error notice itself still shows.
+  const purchasesAreOpen = purchasesOpen();
 
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: SP.sm, margin: `${SP.sm}px ${SP.lg}px 0` }}>
@@ -43,14 +52,15 @@ export default function DossierSessionNotices({
             padding: '8px 12px',
             background: swatch.dangerBg,
             borderLeft: '3px solid ' + swatch.danger,
-            fontSize: FS.xs, color: swatch['#5A1A1A'],
+            fontSize: chromeFontSize(FS.xs, mobile), color: swatch['#5A1A1A'],
             fontFamily: 'Nunito, sans-serif',
           }}
         >
           <span style={{ flex: 1, minWidth: 0 }}>{aiError}</span>
           {aiErrorIsCredits && (
-            <Button variant="secondary" size="sm" onClick={openCreditsMoment} style={{ flexShrink: 0 }}>
+            <Button variant="secondary" size="sm" disabled={!purchasesAreOpen} onClick={openCreditsMoment} style={{ flexShrink: 0, ...(purchasesAreOpen ? null : { flexWrap: 'wrap' }) }}>
               View plans
+              {!purchasesAreOpen && <AvailableAtLaunchPill style={{ marginLeft: 6 }} />}
             </Button>
           )}
         </div>
@@ -65,7 +75,7 @@ export default function DossierSessionNotices({
             padding: '6px 0 6px 10px',
             background: 'rgba(196,128,60,0.08)',
             borderLeft: '3px solid rgba(196,128,60,0.85)',
-            fontSize: FS.xs, color: swatch['#8A5A20'],
+            fontSize: chromeFontSize(FS.xs, mobile), color: swatch['#8A5A20'],
             fontFamily: 'Nunito, sans-serif',
           }}
         >{`Partial refinement: ${partialFailure.failedFields.join(', ')} kept raw data.`}</div>

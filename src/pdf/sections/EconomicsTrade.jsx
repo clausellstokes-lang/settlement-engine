@@ -27,26 +27,36 @@ import { flag } from '../../lib/flags.js';
 import {
   tradeLabelOwnership,
 } from '../../domain/content/customTradeLabelOwnership.js';
+import { statusCase } from '../../domain/display/labelCase.js';
+import { resourceDisplayName } from '../../domain/display/resourceDisplayName.js'; // §934.22 item 2 — the EXPORTS/IMPORTS lists
+import { institutionDisplayName } from '../../domain/display/institutionDisplayName.js'; // §934.22 item 1(b) — the PROC row
 import { SupplyChainFlow } from './SupplyChainFlow.jsx';
+import { StateProse } from '../primitives/StateProse.jsx';
 
 function renderedTradeLabel(economy, direction, item) {
+  // §934.22 item 2 — A PRINT GOES THROUGH THE SEAM, A MATCH NEVER DOES. The ownership read
+  // below stays on the RAW `item`, because `tradeLabelOwnership` matches custom endpoints
+  // against the persisted string; only the words a reader sees are resolved. Resolving here
+  // rather than at each `itemRender` call site is what keeps that split in ONE place, and it
+  // is the shape tests/lint/resourceLabelSeam.census.test.js's owed row named.
   const ownership = tradeLabelOwnership(economy, direction, item);
+  const shown = label(resourceDisplayName(item));
   if (ownership.customOnly) {
     const members = ownership.members.length
       ? ` (incl. ${ownership.members.join(', ')})`
       : '';
-    return `${label(item)}${members}  *`;
+    return `${shown}${members}  *`;
   }
   if (ownership.mixed) {
     const customPart = ownership.members.length
       ? `incl. ${ownership.members.join(', ')}`
       : 'also an exact custom endpoint';
-    return `${label(item)} (${customPart} *)`;
+    return `${shown} (${customPart} *)`;
   }
-  return label(item);
+  return shown;
 }
 
-export function EconomicsTrade({ settlement, narrativeMode, vm }) {
+export function EconomicsTrade({ settlement, narrativeMode, vm, stateProse }) {
   const e = vm.economics;
 
   return (
@@ -61,12 +71,15 @@ export function EconomicsTrade({ settlement, narrativeMode, vm }) {
         {economicsHeadline(e)}
       </ChapterHeadline>
 
+      {/* ── The mounted state prose (the screen's ProseBlock positions) ── */}
+      <StateProse stateProse={stateProse} tab="economics" />
+
       <StatStrip
         stats={[
-          { label: 'PROSPERITY', value: cap(e.prosperity) || '–' },
-          { label: 'COMPLEXITY', value: cap(e.economicComplexity) || '–' },
-          { label: 'OUTPUT', value: smart(e.economyOutput) },
-          { label: 'TRADE', value: cap(e.tradeAccess) || '–' },
+          { label: 'Prosperity', value: cap(e.prosperity) || '–' },
+          { label: 'Complexity', value: cap(e.economicComplexity) || '–' },
+          { label: 'Output', value: smart(e.economyOutput) },
+          { label: 'Trade', value: cap(e.tradeAccess) || '–' },
         ]}
       />
 
@@ -219,7 +232,7 @@ export function EconomicsTrade({ settlement, narrativeMode, vm }) {
               status={c.status}
               statusLabel={cap(c.status)}
               meta={[
-                c.processingInstitutions?.length ? { label: 'PROC', value: c.processingInstitutions.map(label).filter(Boolean).join(', ') } : null,
+                c.processingInstitutions?.length ? { label: 'PROC', value: c.processingInstitutions.map((n) => label(institutionDisplayName(n))).filter(Boolean).join(', ') } : null,
                 c.outputs?.length ? { label: 'OUT', value: c.outputs.map(label).filter(Boolean).join(', ') } : null,
                 c.dependency ? { label: 'DEP', value: depText(c.dependency) } : null,
                 c.incomeContribution != null ? { label: 'INC', value: smart(c.incomeContribution) } : null,
@@ -256,7 +269,7 @@ export function EconomicsTrade({ settlement, narrativeMode, vm }) {
           {e.customChains.map((c, i) => {
             const flow = [c.resource, ...(c.processingInstitutions || []), ...(c.outputs || [])]
               .filter(Boolean)
-              .map((n) => label(n) || String(n))
+              .map((n) => label(institutionDisplayName(n) || n) || String(n))
               .join(' » ');
             const activationColor = c.activationState === 'active'
               ? palette.good
@@ -282,12 +295,12 @@ export function EconomicsTrade({ settlement, narrativeMode, vm }) {
                   <Text style={{ ...type.body_em, color: palette.ink, fontSize: pt['9'] }}>{c.name}</Text>
                   <Text style={{ color: palette.gold, fontSize: pt['8'], marginLeft: 3 }}>*</Text>
                   <Text style={{
-                    ...type.label,
+                    ...type.label_plain,
                     color: activationColor,
                     fontSize: pt['7.5'],
                     marginLeft: 5,
                   }}>
-                    {String(c.activationLabel || 'Needs reevaluation').toUpperCase()}
+                    {statusCase(String(c.activationLabel || 'Needs reevaluation'))}
                   </Text>
                 </View>
                 {flow ? (
@@ -520,8 +533,18 @@ function FoodBalanceBlock({ fb }) {
           <Text style={{ ...type.caption, fontSize: pt['9'], color: palette.muted, fontStyle: 'italic', marginTop: 2 }}>Not calculated</Text>
         </View>
         )}
-        {fb.deficit > 0 && (
+        {/* ⛔ THE CHANNEL IS CREDITED WHETHER OR NOT A GAP SURVIVES IT (adversarial
+            review of the second wave). This column used to be gated on `deficit > 0`
+            with the magic line INSIDE it — but domain/foodBalance.js subtracts the
+            offset when it computes the deficit, so the better the provision, the more
+            certainly the print hid it: a town whose shortfall magic closes ENTIRELY
+            reaches deficit 0 and printed no word of the channel that fed it, while the
+            screen credited it in the production row all along. The gate is now "there
+            is something to say", and the deficit half keeps its own gate, so a
+            settlement WITH a deficit prints exactly what it printed before. */}
+        {(fb.deficit > 0 || fb.magicOffset != null) && (
           <View style={{ flex: 1 }}>
+            {fb.deficit > 0 && (<>
             <Text style={{ ...type.caption, fontSize: pt['8'], color: palette.bad }}>DEFICIT</Text>
             <Text style={{ ...type.numeric, fontSize: pt['13'], color: palette.bad }}>{smart(fb.deficit)}</Text>
             {fb.deficitPct != null && (
@@ -532,6 +555,19 @@ function FoodBalanceBlock({ fb }) {
             {fb.coveragePct != null && (
               <Text style={{ ...type.caption, fontSize: pt['8'], color: palette.muted }}>
                 imports cover {fb.coveragePct}% of gap
+              </Text>
+            )}
+            </>)}
+            {/* ODQ §934.20 — THE THIRD CHANNEL. The two lines above account for the
+                gap by trade alone, so on a settlement whose shortfall is partly closed
+                by druidic, divine or arcane provision the printed deficit and the
+                printed coverage did not add up and nothing on the page said why. The
+                offset is the writer's own published field (foodBalance.magicFoodOffset)
+                carried through foodCore, in the same lb/day idiom as the DEFICIT figure
+                above it; the screen names the same channel in the same words. */}
+            {fb.magicOffset != null && (
+              <Text style={{ ...type.caption, fontSize: pt['8'], color: palette.muted }}>
+                {fb.magicChannel} provision covers {smart(fb.magicOffset)}
               </Text>
             )}
           </View>

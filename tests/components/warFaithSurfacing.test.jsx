@@ -370,7 +370,7 @@ describe('PerspectiveStandings — one observer, plain words, DM-gated beliefs',
  *   "false"`. This is a live walk of `parentElement`, not a source claim.
  *
  *   THE FOLD HALF — a shut `<Section collapsible>` / `<Collapsible>` emits NO BYTES
- *   (Primitives.jsx:114's `{open && children}`), so a fold cannot be caught by
+ *   (Primitives.jsx:120's `{open && children}`), so a fold cannot be caught by
  *   looking at what rendered: there is nothing to look at. The walker therefore
  *   grades folds by a SOURCE READ of the opening tag, and so does this suite. The
  *   mechanism each primitive on this path offers, measured at 0eb028111:

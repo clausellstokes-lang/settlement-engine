@@ -14,6 +14,8 @@ import {
   BODY, BORDER, BORDER2, CARD, CARD_ALT, FS, GOLD, SECOND, SP, sans,
 } from '../theme.js';
 import { REALM_ITEM_SOURCE_CLASSES } from '../../domain/realm/realmItemReadModel.js';
+import useIsMobile from '../../hooks/useIsMobile.js';
+import { chromeFontSize, proseFontSize } from '../../design/proseScale.js';
 
 /** @param {unknown} value @returns {Record<string, unknown>} */
 function recordOf(value) {
@@ -91,12 +93,13 @@ export function summarizeRealmItemShadow(value) {
 }
 
 function Stat({ label, value }) {
+  const mobile = useIsMobile();
   return (
     <div style={{ minWidth: 0 }}>
       <dt style={{
         color: BODY,
         fontFamily: sans,
-        fontSize: FS.micro,
+        fontSize: chromeFontSize(FS.micro, mobile),
         fontWeight: 750,
         textTransform: 'uppercase',
         letterSpacing: '0.04em',
@@ -119,13 +122,14 @@ function Stat({ label, value }) {
 }
 
 function IssueList({ label, entries }) {
+  const mobile = useIsMobile();
   if (entries.length === 0) return null;
   return (
     <section aria-label={label} style={{ display: 'grid', gap: 4 }}>
       <strong style={{
         color: SECOND,
         fontFamily: sans,
-        fontSize: FS.micro,
+        fontSize: chromeFontSize(FS.micro, mobile),
         textTransform: 'uppercase',
         letterSpacing: '0.05em',
       }}
@@ -141,7 +145,7 @@ function IssueList({ label, entries }) {
           return (
             <li
               key={`${source || code || 'issue'}:${identity || 'unscoped'}:${index}`}
-              style={{ color: BODY, fontFamily: sans, fontSize: FS.micro, lineHeight: 1.35 }}
+              style={{ color: BODY, fontFamily: sans, fontSize: chromeFontSize(FS.micro, mobile), lineHeight: 1.35 }}
             >
               {[source && labelOf(source), code, identity].filter(Boolean).join(' · ')}
               {(source || code || identity) ? ': ' : ''}{reason}
@@ -158,6 +162,7 @@ function IssueList({ label, entries }) {
  * important: the panel must never trigger a second derivation or read the store.
  */
 export default function RealmItemShadowDiagnostics({ model }) {
+  const mobile = useIsMobile();
   const summary = summarizeRealmItemShadow(model);
   const issueCount = summary.exclusions.length + summary.errors.length;
 
@@ -175,7 +180,7 @@ export default function RealmItemShadowDiagnostics({ model }) {
         padding: `${SP.xs}px ${SP.md}px`,
         color: SECOND,
         fontFamily: sans,
-        fontSize: FS.micro,
+        fontSize: chromeFontSize(FS.micro, mobile),
         fontWeight: 850,
         textTransform: 'uppercase',
         letterSpacing: '0.05em',
@@ -191,7 +196,7 @@ export default function RealmItemShadowDiagnostics({ model }) {
         background: CARD,
       }}
       >
-        <p style={{ margin: 0, color: BODY, fontFamily: sans, fontSize: FS.micro, lineHeight: 1.4 }}>
+        <p style={{ margin: 0, color: BODY, fontFamily: sans, fontSize: proseFontSize(FS.micro, mobile), lineHeight: 1.4 }}>
           Internal, read-only accounting. The legacy Herald remains the rendered interface;
           this shadow model performs no writes.
         </p>
@@ -216,7 +221,7 @@ export default function RealmItemShadowDiagnostics({ model }) {
           <strong style={{
             color: SECOND,
             fontFamily: sans,
-            fontSize: FS.micro,
+            fontSize: chromeFontSize(FS.micro, mobile),
             textTransform: 'uppercase',
             letterSpacing: '0.05em',
           }}
@@ -233,7 +238,7 @@ export default function RealmItemShadowDiagnostics({ model }) {
                   color: summary.sourceCounts[sourceClass] > 0 ? GOLD : BODY,
                   opacity: summary.sourceCounts[sourceClass] > 0 ? 1 : 0.6,
                   fontFamily: sans,
-                  fontSize: FS.micro,
+                  fontSize: chromeFontSize(FS.micro, mobile),
                 }}
               >
                 {labelOf(sourceClass)} {summary.sourceCounts[sourceClass]}
@@ -242,7 +247,7 @@ export default function RealmItemShadowDiagnostics({ model }) {
           </div>
         </section>
 
-        <div style={{ color: BODY, fontFamily: sans, fontSize: FS.micro }}>
+        <div style={{ color: BODY, fontFamily: sans, fontSize: chromeFontSize(FS.micro, mobile) }}>
           Collisions {summary.collisions.length} · errors {summary.errors.length} ·
           deduplicated repeats {summary.deduplicated.length}
         </div>

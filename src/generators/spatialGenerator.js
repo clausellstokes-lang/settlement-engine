@@ -19,6 +19,42 @@ export const generateSpatialLayout = (tier, institutions, tradeRoute, terrainTyp
   const worldLaw = createGenerationWorldLaw({}, { tradeRoute, terrainType });
   const instNames = institutions.map(i => i.name);
   const has = (keyword) => instNames.some(n => n.includes(keyword));
+  /**
+   * Roster test for the sacred-house derivation below, in either spelling the catalogue
+   * uses ('church' inside a name, 'Church' at its head). It rides the ONE roster scan
+   * above rather than opening a second: the label-join census freezes this file's scan
+   * sites and a new join must come by catalogue id, not by a fresh pass over the names.
+   */
+  const holds = (...keywords) => keywords.some((k) => has(k) || has(k.charAt(0).toUpperCase() + k.slice(1)));
+
+  // ⛔ THE SACRED HOUSE IS DERIVED FROM THE ROSTER AT EVERY TIER, NEVER NAMED OUTRIGHT.
+  // ── THE FINDING (browser pass 3, 2026-09-19) ───────────────────────────────────────
+  // A MESOAMERICAN village read "Church and green above the tideline". Five village lines,
+  // the village fallback and the city's riverside line each said 'church' or 'cathedral'
+  // outright, so the layout promised a building out of one setting's Christendom on a
+  // product whose scope law is SETTING-AGNOSTIC — and promised it to towns whose roster
+  // holds no such institution at all.
+  //
+  // The desert village row had already been cured this way (§767.3(e), which killed the
+  // shipped "mosque or chapel" alternation) and the cure was left at ONE row. This makes it
+  // the rule for the file: a settlement is described by what it HOLDS. A church, cathedral,
+  // monastery, friary, abbey or minster on the roster reads as its church; a temple reads as
+  // its temple; a shrine and nothing larger reads as a wayside shrine; a settlement with no
+  // sacred institution gets no sacred word, and its line says what is actually there.
+  //
+  // ⚠ THIS MOVES SAME-SEED TEXT. `layout` is spread onto the hashed settlement, so no
+  // read-time seam can reach it — the same position `quarters[].desc` is in, two screens up.
+  const sacredHouse = holds('church', 'cathedral', 'monastery', 'friary', 'abbey', 'minster')
+    ? 'church'
+    : holds('temple') ? 'temple' : null;
+  /** A shrine is the sacred house only when nothing larger stands. */
+  const waysideShrine = !sacredHouse && holds('shrine');
+  /** 'Church' / 'Temple' / 'A wayside shrine' / null — the subject of a layout clause. */
+  const sacredSubject = sacredHouse
+    ? sacredHouse.charAt(0).toUpperCase() + sacredHouse.slice(1)
+    : waysideShrine ? 'A wayside shrine' : null;
+  /** The same thing mid-sentence, where the clause supplies its own article or none. */
+  const sacredBare = sacredHouse || (waysideShrine ? 'a wayside shrine' : null);
 
   const quarters = [];
 
@@ -39,7 +75,13 @@ export const generateSpatialLayout = (tier, institutions, tradeRoute, terrainTyp
     quarters.push({
       name:      'Religious Quarter',
       location:  'Eastern district (traditional)',
-      desc:      'Churches, monasteries, quiet streets with priests and pilgrims',
+      // ⛔ GENERATED TEXT, NOT A LABEL (ODQ §934.22 item 1(d)). This string is SPREAD ONTO
+      // the hashed settlement as `spatialLayout.quarters[].desc`, so no read-time seam can
+      // reach it and moving it MOVES THE GOLDEN — the shift is recorded at
+      // docs/shift-records/2026-09-19-religious-quarter-text.json. The quarter's own NAME
+      // ('Religious Quarter') and its `has('church')` gate are untouched: the gate reads the
+      // raw catalogue key, which §934.13 ruled stays the identifier.
+      desc:      'Houses of worship, cloisters, quiet streets with priests and pilgrims',
       landmarks: instNames
         .filter(n => n.includes('church') || n.includes('Cathedral') ||
                      n.includes('monastery') || n.includes('Hospital'))
@@ -206,7 +248,7 @@ export const generateSpatialLayout = (tier, institutions, tradeRoute, terrainTyp
     city:        (() => {
       const cityLayouts = {
         coastal:   'Walled port city rising from the harbour, suburbs sprawling along the coast road',
-        riverside: 'Great river city: bridge quarter, merchant districts, cathedral hill above the flood line',
+        riverside: `Great river city: bridge quarter, merchant districts, ${sacredHouse ? `${sacredHouse} hill` : 'the high ground'} above the flood line`,
         plains:    'Walled city with sprawling suburbs beyond the gates, outlying wards growing faster than the walls',
         forest:    'Walled city carved from the forest, timber yards and charcoal depots in the outer rings',
         hills:     'Hill city: castle district commanding the heights, market quarter below, poor wards at the base',
@@ -232,26 +274,31 @@ export const generateSpatialLayout = (tier, institutions, tradeRoute, terrainTyp
       return townLayouts[terrainType] || 'Compact within walls, some outlying farms';
     })(),
     village:     (() => {
-      // The desert row's sacred building is DERIVED from the roster, never
-      // hedged: the template shipped "…well and mosque or chapel" verbatim —
-      // an unresolved authoring alternation printed to the user (§767.3(e)),
-      // naming buildings ('mosque') no institution in the catalog ever mints.
-      // The generator decides from what this settlement actually holds: its
-      // church family, its shrine, or nothing — so the layout line can never
-      // promise a building the dossier lacks.
-      const desertSacred = (has('church') || has('Church') || has('Cathedral') || has('monastery') || has('Temple'))
-        ? ' and its church'
-        : (has('shrine') || has('Shrine')) ? ' and a wayside shrine' : '';
+      // Every row here derives its sacred house the way the desert row always has (see the
+      // block above `LAYOUT_BY_TIER`): the town is described by what it holds, and a town
+      // that holds nothing sacred is described by what else is there.
+      const desertSacred = sacredHouse ? ` and its ${sacredHouse}` : waysideShrine ? ' and a wayside shrine' : '';
       const villageLayouts = {
-        coastal:   'Church and green above the tideline, a harbour lane leading down to the water',
+        coastal:   sacredSubject
+          ? `${sacredSubject} and green above the tideline, a harbour lane leading down to the water`
+          : 'A green above the tideline, a harbour lane leading down to the water',
         riverside: 'Village green beside the mill, the river road running through the centre',
-        forest:    'A clearing settlement: church, green, and dwellings ringed by managed woodland',
-        plains:    'Clustered around church and green, fields radiating out in open strips',
+        forest:    sacredBare
+          ? `A clearing settlement: ${sacredBare}, green, and dwellings ringed by managed woodland`
+          : 'A clearing settlement: green and dwellings ringed by managed woodland',
+        plains:    sacredBare
+          ? `Clustered around ${sacredBare} and green, fields radiating out in open strips`
+          : 'Clustered around the green, fields radiating out in open strips',
         hills:     'Stone-walled village on a south-facing slope, paths converging at the market cross',
         desert:    `Compact walled settlement around a central well${desertSacred}`,
-        mountain:  'Close-built stone houses below the church, a single defended gate',
+        mountain:  sacredHouse
+          ? `Close-built stone houses below the ${sacredHouse}, a single defended gate`
+          : waysideShrine
+            ? 'Close-built stone houses below a wayside shrine, a single defended gate'
+            : 'Close-built stone houses below the ridge, a single defended gate',
       };
-      return villageLayouts[terrainType] || 'Clustered around church and green';
+      return villageLayouts[terrainType]
+        || (sacredBare ? `Clustered around ${sacredBare} and green` : 'Clustered around the green');
     })(),
     hamlet:      (() => {
       const hamletLayouts = {

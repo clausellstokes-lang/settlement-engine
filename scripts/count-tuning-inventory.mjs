@@ -100,7 +100,7 @@ const SEEDED_HOMES = [
 const SEEDED_PHANTOMS = {
   WAR_CRISIS_ARCHETYPES_RATE_PRESS: {
     phantom: true,
-    realHome: 'src/domain/worldPulse/populationDynamics.js:306',
+    realHome: 'src/domain/worldPulse/populationDynamics.js:307',
     note: 'a bare literal with no name; the band cites a constant that does not exist.',
   },
   SEVERE_FLIGHT_CAP: {
@@ -110,7 +110,7 @@ const SEEDED_PHANTOMS = {
   },
   economicAdj_divisor_400: {
     phantom: true,
-    realHome: 'src/domain/worldPulse/coup.js:134',
+    realHome: 'src/domain/worldPulse/coup.js:123',
     note: 'a bare literal with no name; the band cites a constant that does not exist.',
   },
 };

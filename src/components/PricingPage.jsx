@@ -28,7 +28,7 @@ import { getPendingRedeemCode, setPendingRedeemCode, clearPendingRedeemCode } fr
 import { useReferralIntent } from '../hooks/useReferralIntent.js';
 import useLivePricing from '../hooks/useLivePricing.js';
 import {
-  getVisibleTiers, getActivePacks, SINGLE_DOSSIER, TIERS,
+  getVisibleTiers, getActivePacks, isInvitationOnly, SINGLE_DOSSIER, TIERS,
 } from '../config/pricing.js';
 import { tp } from '../copy/pricingPage.js';
 import { t } from '../copy/index.js';
@@ -36,6 +36,8 @@ import { useCopy } from '../hooks/useCopy.js';
 import { useFlag } from '../lib/flags.js';
 import { GOLD, INK, PARCH, sans, serif_, SP, FS, BODY, PROSE_MAX, FORM_MAX } from './theme.js';
 import { space } from '../design/tokens.js';
+import useIsMobile from '../hooks/useIsMobile.js';
+import { proseFontSize } from '../design/proseScale.js';
 
 // Between-section rhythm: SP tops out at xxl=24, which also appears as
 // within-block spacing — so "looser between clusters" reads the same as
@@ -65,6 +67,12 @@ import { ClerkNote } from './generate/ClerkNote.jsx';
 
 
 export default function PricingPage({ onNavigate }) {
+  // ⭐ THE ESTATE'S FLOORS REACH THE PAGE THAT ASKS FOR MONEY (ODQ §934.63 F9, under
+  // §934.24 item 4). Bound ABOVE every early return and every hook that could throw,
+  // because a floor helper reading an unbound flag is a ReferenceError on first render
+  // rather than a small line — the shape tests/components/phoneChromeFloor.census.test.js
+  // calls `outOfScope`. Desktop is untouched: both helpers are the identity there.
+  const mobile = useIsMobile();
   const isElevated = useStore(s => s.isElevated());
   const authTier   = useStore(s => s.auth.tier);
   const isFounder  = useStore(s => s.auth.isFounder);
@@ -262,7 +270,7 @@ export default function PricingPage({ onNavigate }) {
         margin: `0 0 ${SP.md}px`, maxWidth: PROSE_MAX,
         padding: `${SP.xs}px ${SP.md}px`,
         borderLeft: `2px solid ${GOLD}`,
-        fontSize: FS.md, color: BODY,
+        fontSize: proseFontSize(FS.md, mobile), color: BODY,
         fontFamily: sans, fontStyle: 'italic', lineHeight: 1.55,
       }}>
         {t('pricing.antiAi')}
@@ -272,7 +280,7 @@ export default function PricingPage({ onNavigate }) {
           one plain declarative line, document register, no box. */}
       <p style={{
         margin: `0 0 ${HEADER_GAP}px`, maxWidth: PROSE_MAX,
-        fontSize: FS.sm, color: BODY, fontFamily: sans, lineHeight: 1.55,
+        fontSize: proseFontSize(FS.sm, mobile), color: BODY, fontFamily: sans, lineHeight: 1.55,
       }}>
         {tp('band1.noHiddenFees')}
       </p>
@@ -313,7 +321,7 @@ export default function PricingPage({ onNavigate }) {
         }}>
           <RedeemCodeField code={redeemCode} onChange={handleRedeemChange} idPrefix="pricing" />
           {redeemNotice && (
-            <div role="status" style={{ fontSize: FS.xs, color: BODY, lineHeight: 1.5, fontFamily: sans }}>
+            <div role="status" style={{ fontSize: proseFontSize(FS.xs, mobile), color: BODY, lineHeight: 1.5, fontFamily: sans }}>
               {redeemNotice}
             </div>
           )}
@@ -342,7 +350,15 @@ export default function PricingPage({ onNavigate }) {
           // Free / Cartographer / Surveyor — the Founder leaves the row and
           // renders below as the charter band (a different KIND of object), so
           // the subscription decision stays a three-way scan (ruling #3).
-          const rowTiers = tiers.filter(tier => tier.key !== 'founder');
+          //
+          // ⛔ BY THE TIER'S OWN FLAG, NOT BY ITS NAME (the owner, 2026-09-19). This read
+          // `tier.key !== 'founder'`, which is a fact about ONE SPELLING — and the Create
+          // page's teaser, which had no such line, drew the card it was excluding. The
+          // predicate now lives in config/pricing.js and both surfaces read it, so the
+          // rule holds for a fourth tier of the same kind. Behaviour here is unchanged:
+          // the Founder is still the only invitation-only tier, and the charter band
+          // below is untouched.
+          const rowTiers = tiers.filter(tier => !isInvitationOnly(tier));
           const ctas = rowTiers.map(tier => ({ tier, cta: ctaFor(tier) }));
           // P8 — the region carries EXACTLY ONE dominant primary, chosen for the
           // most important purchasable action (never a manage/current self-state,
@@ -389,7 +405,7 @@ export default function PricingPage({ onNavigate }) {
       <p style={{
         margin: `0 auto ${SECTION_GAP}px`, maxWidth: PROSE_MAX,
         padding: `${SP.xs}px ${SP.md}px`, borderLeft: `2px solid ${GOLD}`,
-        fontSize: FS.sm, color: BODY, fontFamily: sans, lineHeight: 1.6,
+        fontSize: proseFontSize(FS.sm, mobile), color: BODY, fontFamily: sans, lineHeight: 1.6,
       }}>
         {tp('band2.serviceLine')}
       </p>
@@ -452,10 +468,10 @@ export default function PricingPage({ onNavigate }) {
           <p style={{ margin: `0 0 ${SP.xs}px`, fontSize: FS.lg, fontWeight: 700, color: INK, fontFamily: sans, lineHeight: 1.5 }}>
             {tp('band3.bundle.lead', { price: SINGLE_DOSSIER.priceLabel })}
           </p>
-          <p style={{ margin: `0 0 ${SP.xs}px`, fontSize: FS.sm, color: BODY, lineHeight: 1.55 }}>
+          <p style={{ margin: `0 0 ${SP.xs}px`, fontSize: proseFontSize(FS.sm, mobile), color: BODY, lineHeight: 1.55 }}>
             {tp('band3.bundle.body')}
           </p>
-          <p style={{ margin: `0 0 ${SP.md}px`, fontSize: FS.sm, color: BODY, lineHeight: 1.55 }}>
+          <p style={{ margin: `0 0 ${SP.md}px`, fontSize: proseFontSize(FS.sm, mobile), color: BODY, lineHeight: 1.55 }}>
             {tp('band3.bundle.where')}
           </p>
           <Button variant="secondary" size="lg" style={{ minHeight: 44 }} onClick={() => onNavigate?.('generate')}>
@@ -469,7 +485,7 @@ export default function PricingPage({ onNavigate }) {
           </h3>
           <p style={{
             margin: `${SP.xs}px auto 0`, maxWidth: PROSE_MAX,
-            fontSize: FS.sm, color: BODY, lineHeight: 1.5,
+            fontSize: proseFontSize(FS.sm, mobile), color: BODY, lineHeight: 1.5,
           }}>
             {t('pricing.creditPacks.subhead')}
           </p>
@@ -491,7 +507,7 @@ export default function PricingPage({ onNavigate }) {
         </div>
         {/* Expiry honesty, in the same visual block as the prices (never a
             help-article footnote): no expiry machinery exists — say so. */}
-        <p style={{ margin: `${SP.md}px 0 0`, textAlign: 'center', fontSize: FS.sm, color: BODY, fontWeight: 600 }}>
+        <p style={{ margin: `${SP.md}px 0 0`, textAlign: 'center', fontSize: proseFontSize(FS.sm, mobile), color: BODY, fontWeight: 600 }}>
           {tp('band3.packs.note')}
         </p>
 
@@ -500,7 +516,7 @@ export default function PricingPage({ onNavigate }) {
         {!isConfigured && (
           <p style={{
             margin: `${SP.lg}px 0 0`, textAlign: 'center',
-            fontSize: FS.xs, color: BODY, fontStyle: 'italic',
+            fontSize: proseFontSize(FS.xs, mobile), color: BODY, fontStyle: 'italic',
           }}>
             Payments are not available in local mode. Configure Supabase + Stripe to enable purchases.
           </p>

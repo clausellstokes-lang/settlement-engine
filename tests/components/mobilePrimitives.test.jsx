@@ -135,4 +135,44 @@ describe('mobile foundation primitives', () => {
     fireEvent.keyDown(screen.getByRole('tablist'), { key: 'Home' });
     expect(onChange).toHaveBeenCalledWith('power');
   });
+
+  // The strip is the dossier's mobile sub-tab row. On a 375px phone the Systems
+  // group measures 554px of tabs in a 349px strip — five of its eight tabs are
+  // off-screen — so the clipped edge has to SAY so. jsdom performs no layout, so
+  // the strip measures 0/0 and reports no overflow; the geometry is installed by
+  // hand and a scroll event drives the same reader the ResizeObserver drives.
+  const measureStrip = (list, { scrollWidth, clientWidth, scrollLeft }) => {
+    Object.defineProperty(list, 'scrollWidth', { value: scrollWidth, configurable: true });
+    Object.defineProperty(list, 'clientWidth', { value: clientWidth, configurable: true });
+    Object.defineProperty(list, 'scrollLeft', { value: scrollLeft, writable: true, configurable: true });
+    fireEvent.scroll(list);
+  };
+  const cues = (container) =>
+    [...container.querySelectorAll('[aria-hidden="true"]')].map((el) => el.textContent);
+
+  test('MobileTabStrip marks a clipped edge with the desktop strip\'s own chevron', () => {
+    const { container } = render(<MobileTabStrip tabs={TABS} value="power" onChange={() => {}} />);
+    const list = screen.getByRole('tablist');
+
+    // Unclipped: no cue at all, so a strip that fits stays clean.
+    measureStrip(list, { scrollWidth: 349, clientWidth: 349, scrollLeft: 0 });
+    expect(cues(container)).toEqual([]);
+
+    // Clipped on the right, scrolled home.
+    measureStrip(list, { scrollWidth: 554, clientWidth: 349, scrollLeft: 0 });
+    expect(cues(container)).toEqual(['›']);
+    // Decorative: the swipe and the tap must both reach the tab underneath.
+    const [cue] = container.querySelectorAll('[aria-hidden="true"]');
+    expect(cue.style.pointerEvents).toBe('none');
+
+    // Scrolled to the far end: the cue flips to the side that is now clipped.
+    list.scrollLeft = 205;
+    fireEvent.scroll(list);
+    expect(cues(container)).toEqual(['‹']);
+
+    // Mid-scroll: both ends hold content, so both are marked.
+    list.scrollLeft = 100;
+    fireEvent.scroll(list);
+    expect(cues(container)).toEqual(['‹', '›']);
+  });
 });

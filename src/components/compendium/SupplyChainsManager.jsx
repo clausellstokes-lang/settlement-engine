@@ -22,8 +22,11 @@ import {
 import { ChainRow } from '../new/SupplyChainsPanel.jsx';
 import Button from '../primitives/Button.jsx';
 import { FS, swatch, INK, BODY, MUTED, BORDER, GREEN, AMBER, sans } from '../theme.js';
+import useIsMobile from '../../hooks/useIsMobile.js';
+import { chromeFontSize, proseFontSize } from '../../design/proseScale.js';
 
 export default function SupplyChainsManager() {
+  const mobile = useIsMobile();
   const customContent = useStore((s) => s.customContent);
   const saveReviewedSupplyChain = useStore(
     (s) => s.saveReviewedSupplyChain,
@@ -77,7 +80,7 @@ export default function SupplyChainsManager() {
   const reject = (chainId) => setRejected((prev) => new Set([...prev, chainId]));
 
   const sectionLabel = {
-    fontSize: FS.micro, fontWeight: 800, letterSpacing: '0.08em',
+    fontSize: chromeFontSize(FS.micro, mobile), fontWeight: 800, letterSpacing: '0.08em',
     textTransform: 'uppercase', color: MUTED, margin: '4px 0 8px',
   };
 
@@ -87,7 +90,7 @@ export default function SupplyChainsManager() {
           chain cards' grammar and doesn't out-weight the content it introduces
           — the heaviest container is reserved for the chains, not the explainer (P5). */}
       <div style={{ display: 'flex', alignItems: 'flex-start', gap: 8, padding: '10px 12px', marginBottom: 12, borderLeft: `3px solid ${swatch.magic}`, background: swatch['#F8F4FF'] }}>
-        <div style={{ fontSize: FS.xs, color: BODY, fontFamily: sans, lineHeight: 1.5 }}>
+        <div style={{ fontSize: proseFontSize(FS.xs, mobile), color: BODY, fontFamily: sans, lineHeight: 1.5 }}>
           Supply chains are <strong>discovered automatically</strong> from your custom institutions,
           services, resources, and trade goods. The engine connects what each one produces to what
           another needs. Unmet inputs become <strong>imports</strong>; surplus outputs become
@@ -138,7 +141,7 @@ export default function SupplyChainsManager() {
                   primaryExports={[]}
                 />
                 <div style={{
-                  fontSize: FS.xxs,
+                  fontSize: proseFontSize(FS.xxs, mobile),
                   color: MUTED,
                   lineHeight: 1.45,
                   marginTop: 6,
@@ -173,7 +176,7 @@ export default function SupplyChainsManager() {
                   value={names[chain.chainId] ?? ''}
                   onChange={(e) => setNames((d) => ({ ...d, [chain.chainId]: e.target.value }))}
                   placeholder={`Name this chain (e.g. ${chain.label})`}
-                  style={{ flex: '1 1 220px', minWidth: 180, padding: '5px 8px', border: `1px solid ${BORDER}`, fontSize: FS.xs, fontFamily: sans, color: INK, background: swatch.white, outline: 'none' }}
+                  style={{ flex: '1 1 220px', minWidth: 180, padding: '5px 8px', border: `1px solid ${BORDER}`, fontSize: chromeFontSize(FS.xs, mobile), fontFamily: sans, color: INK, background: swatch.white, outline: 'none' }}
                 />
                 <Button variant="success" size="sm" onClick={() => confirm(chain)}>
                   {confirmed.some(item => item.chainId === chain.chainId)

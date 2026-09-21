@@ -12,16 +12,50 @@
  *     section renders BESIDE the generation baseline (which still renders).
  */
 import React from 'react';
-import { describe, test, expect, afterEach } from 'vitest';
-import { render, cleanup } from '@testing-library/react';
+import { describe, test, expect, afterEach, vi } from 'vitest';
+import { render, cleanup, fireEvent } from '@testing-library/react';
 import { readFileSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
 import { dirname, join } from 'node:path';
 import { EconomicsTab } from '../../src/components/new/tabs/EconomicsTab.jsx';
-import { expectPresentThenAbsent } from '../helpers/anchoredNegatives.js';
+import { expectAbsentWithAnchor, expectPresentThenAbsent } from '../helpers/anchoredNegatives.js';
 import { drawnMembers } from '../helpers/drawnProse.js';
 import { collectSeedFailures, expectNoSeedFailures } from '../helpers/seedFailures.js';
 import { useStore } from '../../src/store/index.js';
+
+/**
+ * ⭐⭐ THE DESK OVERRIDE, AND WHY THE ARMS AT THE END OF THIS FILE NEED ONE.
+ *
+ * The stand-down `DeskLines` performs is INVISIBLE unless a position draws TWO lines whose
+ * second OPENS on the settlement's name, and on this file's fixture only ONE of the five
+ * economy positions does. Review 10 measured the consequence: the arm that drives all five
+ * "renders its WOVEN paragraph" compared the DOM against `weaveBlock`'s own output, and for
+ * four of them `weaveBlock` returns the lone line VERBATIM — so the comparison held with the
+ * props and without them. A structural claim, asserted vacuously.
+ *
+ * ⛔ AND A BETTER FIXTURE CANNOT FIX IT, which is why the desk is overridden rather than the
+ * settlement re-shaped. WHICH variant a pool draws is a function of the seed, so an arm built
+ * from the corpus would prove nothing today and would start proving something on a seed
+ * nobody chose. The rungs are HAND-BUILT instead — the `dossierMountRegistry` idiom
+ * (`warFaithDeskFlow.test.js`) — and pushed through the REAL call sites by intercepting the
+ * one function every one of these tabs reads its desk from.
+ *
+ * ⚠ IT IS A PASSTHROUGH UNTIL A TEST ASKS FOR IT. `current` is null for every other arm in
+ * this file, so they run against the shipped desk exactly as before; and the public-dossier
+ * gate is honoured even while overridden, so the §885.3 arms cannot be softened by it.
+ */
+const deskOverride = vi.hoisted(() => ({ current: null }));
+vi.mock('../../src/components/new/economyDeskRead.js', async (importOriginal) => {
+  const actual = await importOriginal();
+  return {
+    ...actual,
+    economyDeskRead: (settlement, options = {}) => (
+      deskOverride.current && !options.publicDossier
+        ? deskOverride.current
+        : actual.economyDeskRead(settlement, options)
+    ),
+  };
+});
 
 const e = React.createElement;
 
@@ -36,6 +70,7 @@ const SETTLEMENT = { id: 'forge_town', name: 'Forge Town', economicState: ECO };
 const initialCampaigns = useStore.getState().campaigns;
 afterEach(() => {
   cleanup();
+  deskOverride.current = null;
   useStore.setState({ campaigns: initialCampaigns });
 });
 
@@ -178,6 +213,261 @@ describe('THE PUBLIC GATE — the economy desk stays silent on a public dossier'
     expect(container.textContent).toContain('Production deficit of');
   });
 
+  /**
+   * ODQ §934.15, the chair's second ruling — THE NARRATIVE UNDER THE BAR MUST NOT
+   * STATE AN ARITHMETIC THAT DOES NOT CLOSE. Three states, three arms, and each
+   * fixture is chosen so the numbers the tab prints can be recomputed from it.
+   *
+   * ⛔ NO NEW INTERPOLATED FIGURE REACHES THIS PROSE, and no frozen row moved to
+   * build it: the prose-numerics law refuses a new numeral in reader prose, and
+   * `tests/lint/.prose-numerics-baseline.json` pins EconomicsTab.jsx:542/544/545/546
+   * by path + line + category + snippet. The magic clauses are number-free and land
+   * past the 237-character truncation on 542 and 544, and the balanced branch wraps
+   * the surplus template without touching its bytes, so the live census is 224 rows
+   * at base and 224 at tip with 0 added and 0 removed — measured, not assumed.
+   */
+  const withFood = (foodBalance) => ({
+    ...SPEAKING,
+    economicViability: { metrics: { foodBalance } },
+  });
+
+  test('a gap the town does not close itself is never called a surplus', () => {
+    useStore.setState({ campaigns: [] });
+    // Production short of need, the whole gap carried by imports: deficit 0 AND
+    // surplus 0. The tab used to fall through to the surplus template and print
+    // "Agricultural surplus of 0% above daily needs." to a town that does not feed
+    // itself — while the tile beside it already computed the word "Balanced".
+    const { container } = render(e(EconomicsTab, {
+      settlement: withFood({ dailyProduction: 800, dailyNeed: 1000, deficit: 0, surplus: 0, importCoverage: 200, rawDeficit: 200, agricultureModifier: 1 }),
+      saveId: null, publicDossier: true,
+    }));
+    // ⚠ THE FOOD SECTION IS `defaultOpen={!!fb.deficit}` AND Primitives renders
+    // `{open && children}`, so on a town that IS fed the narrative is behind a
+    // closed fold — the same trap the DS-ECO-9 note at EconomicsTab.jsx:505 records
+    // for the sentence above it. That is why this arm opens the fold: the defect
+    // was real for every reader who did, and a test that never opened it would
+    // have reported the false sentence as absent.
+    // anchored: the SAME string is asserted PRESENT three lines below, after the click — a payload that stopped rendering would red there.
+    expect(container.textContent).not.toContain('Daily needs are met');
+    fireEvent.click([...container.querySelectorAll('button')].find((b) => b.textContent.includes('Food Security')));
+    expect(container.textContent).toContain('Daily needs are met, with no surplus');
+    // The sentence above is read out of this very render, so the exclusion below
+    // measures the wording rather than an empty tree. // anchored: positive toContain on this same textContent
+    expect(container.textContent).not.toContain('Agricultural surplus of');
+  });
+
+  test('the three-clause deficit sentence closes, because magic no longer covers the gap in silence', () => {
+    useStore.setState({ campaigns: [] });
+    // 600 produced against 1000 needed is a 400 lb gap; imports carry 200 of it and
+    // magic 80, leaving 120 — twelve per cent of need. Read without the magic
+    // clause, "covers 60%" and "imports cover 50% of the gap" read out to a 20%
+    // residual beside a printed 12%, which is the defect.
+    const fb = { dailyProduction: 600, dailyNeed: 1000, deficit: 120, deficitPercent: 12, surplus: 0, importCoverage: 200, magicFoodOffset: 80, rawDeficit: 400, agricultureModifier: 1 };
+    const { container } = render(e(EconomicsTab, { settlement: withFood(fb), saveId: null, publicDossier: true }));
+    const text = container.textContent;
+    expect(text).toContain(`Production covers ${Math.round((fb.dailyProduction / fb.dailyNeed) * 100)}% of food needs`);
+    expect(text).toContain(`Trade imports cover an estimated ${Math.round((fb.importCoverage / fb.rawDeficit) * 100)}% of the gap`);
+    expect(text).toContain(`Residual shortfall is ${fb.deficitPercent}%`);
+    // ODQ §934.20 — the clause now carries the FIGURE, not just the fact. bc32a5a97 could
+    // only say "closes the remainder": a reader could not add up production, imports and the
+    // residual and land on the printed number without it. The fixture names no channel, so
+    // the neutral word stands rather than a guessed adjective.
+    expect(text).toContain(`A further ${fb.magicFoodOffset} lbs/day comes by magical provision.`);
+    // The arithmetic the three clauses plus the magic clause now describe.
+    expect((fb.dailyNeed - fb.dailyProduction - fb.importCoverage - fb.magicFoodOffset) / fb.dailyNeed * 100)
+      .toBe(fb.deficitPercent);
+  });
+
+  test('the magic clause is silent when no magic closes the gap, and speaks on the import-less branch', () => {
+    useStore.setState({ campaigns: [] });
+    // Same gap, carried by trade alone: the clause must not appear.
+    const mundane = render(e(EconomicsTab, {
+      settlement: withFood({ dailyProduction: 600, dailyNeed: 1000, deficit: 200, deficitPercent: 20, surplus: 0, importCoverage: 200, rawDeficit: 400, agricultureModifier: 1 }),
+      saveId: null, publicDossier: true,
+    })).container.textContent;
+    expect(mundane).toContain('Residual shortfall is 20%');
+    // anchored: the deficit sentence is pinned PRESENT on this same `mundane` payload one line above
+    expect(mundane).not.toContain('comes by');
+    cleanup();
+    // A severed route takes the OTHER branch — "Production deficit of X%" — where the
+    // same silence understated the gap: 40% of need is missing and magic closes half.
+    const severed = render(e(EconomicsTab, {
+      settlement: withFood({ dailyProduction: 600, dailyNeed: 1000, deficit: 200, deficitPercent: 20, surplus: 0, rawDeficit: 400, magicFoodOffset: 200, agricultureModifier: 1 }),
+      saveId: null, publicDossier: true,
+    })).container.textContent;
+    expect(severed).toContain('Production deficit of 20%');
+    expect(severed).toContain('A further 200 lbs/day comes by magical provision.');
+  });
+
+  /**
+   * ODQ §934.15 — "make sure that the food deficit math and the band visual are
+   * correct". The balance bar is the band visual on this tab, and a bar drawn from
+   * a different number than the sentence beside it is the defect class this pins:
+   * the filled run IS production ÷ need, the figure the readout states, and the
+   * blue import run that sits on top of it IS the imported quantity against the
+   * same need — never a share of the gap, which would overrun the track.
+   */
+  test('the food balance bar is drawn from the same arithmetic the readout states', () => {
+    useStore.setState({ campaigns: [] });
+    const { container } = render(e(EconomicsTab, { settlement: SPEAKING, saveId: null, publicDossier: true }));
+    const fb = SPEAKING.economicViability.metrics.foodBalance;
+    // The track is the only 10px-high bar on the tab; its first child is the
+    // production run. Addressing it by geometry keeps the pin off class names the
+    // tab does not carry.
+    const track = [...container.querySelectorAll('div')]
+      .find((node) => node.style.height === '10px' && node.style.position === 'relative');
+    expect(track, 'the food balance track did not render').toBeTruthy();
+    const production = track.firstElementChild;
+    expect(production.style.width).toBe(`${Math.round((fb.dailyProduction / fb.dailyNeed) * 100)}%`);
+    expect(production.style.width).toBe('60%'); // 600 / 1000 — the ratio, spelled out
+    // The readout's own percentage is the residual share of NEED, and it is the
+    // one the dossier model publishes rather than a second derivation.
+    expect(container.textContent).toContain(`Production deficit of ${Math.round((fb.deficit / fb.dailyNeed) * 100)}%`);
+  });
+
+  /**
+   * ODQ §934.20 — THE PICTURE AND THE FIGURE ARE FED FROM ONE FIELD, in the owner's own
+   * numbers. The bar drew production and imports and stopped, so the THIRD channel the
+   * record credits — `foodBalance.magicFoodOffset`, the druidic/divine/arcane provision
+   * the writer applies to what trade leaves uncovered — fell into the undrawn tail: a
+   * world at 773 of 1,014 lb/day with 169 imported drew a 7% tail beside a sentence
+   * stating a 4% residual. Both were honest about their own arithmetic; only one of them
+   * could be true of the settlement.
+   *
+   * ⛔ THE PIN IS THE SUM, not three separate widths. A per-run assertion passes on a bar
+   * whose runs are individually right and collectively wrong, which is exactly the state
+   * this car found. So the runs are read off the rendered track, pinned to the record's
+   * own channels, and their complement is pinned to the number the sentence prints.
+   */
+  const FOOD_TRACK = (container) => [...container.querySelectorAll('div')]
+    .find((node) => node.style.height === '10px' && node.style.position === 'relative');
+  const RUN_WIDTHS = (track) => [...track.children].map((node) => Number(node.style.width.replace('%', '')));
+
+  test("the bar draws every channel the record credits, and its tail is the residual the sentence states", () => {
+    useStore.setState({ campaigns: [] });
+    // 1,014 lb/day needed against 773 grown: a 241 lb gap. Trade lands 169 of it and a
+    // divine provision closes 31 more, leaving 41 lb uncovered — 4% of need, which is
+    // what `deficitPercent` carries and what every surface prints.
+    const fb = {
+      dailyProduction: 773, dailyNeed: 1014, deficit: 41, deficitPercent: 4, surplus: 0,
+      importCoverage: 169, magicFoodOffset: 31, rawDeficit: 241, agricultureModifier: 1,
+      magicFoodNote: 'Divine provision supplements food shortfall',
+    };
+    const { container } = render(e(EconomicsTab, { settlement: withFood(fb), saveId: null, publicDossier: true }));
+    const track = FOOD_TRACK(container);
+    expect(track, 'the food balance track did not render').toBeTruthy();
+    const runs = RUN_WIDTHS(track);
+    // Production, trade, magical provision — each run the share of NEED its own label states.
+    expect(runs).toEqual([76, 17, 3]);
+    expect(runs[0]).toBe(Math.round((fb.dailyProduction / fb.dailyNeed) * 100));
+    expect(runs[1]).toBe(Math.round((fb.importCoverage / fb.dailyNeed) * 100));
+    // THE TAIL IS THE SENTENCE'S OWN NUMBER. This is the owner's finding, as an equation.
+    expect(100 - runs.reduce((sum, run) => sum + run, 0)).toBe(fb.deficitPercent);
+    // The runs TILE: each starts where the last ended, so nothing is drawn twice and no
+    // beige shows between two channels that are both credited.
+    expect([...track.children].slice(1).map((node) => node.style.left)).toEqual(['76%', '93%']);
+
+    const text = container.textContent;
+    // The label under the bar names the channel in the "+ 169 imported" idiom...
+    expect(text).toContain(`+ ${fb.importCoverage} imported`);
+    expect(text).toContain(`+ ${fb.magicFoodOffset} by divine provision`);
+    // ...and the sentence states every figure the reader needs to close the arithmetic:
+    // 76% of 1,014 is the production, 70% of the 241 gap is the import, 31 lb is the
+    // provision, and 241 − 169 − 31 = 41 lb is the 4% residual it prints.
+    expect(text).toContain('Production covers 76% of food needs');
+    expect(text).toContain(`Trade imports cover an estimated ${Math.round((fb.importCoverage / fb.rawDeficit) * 100)}% of the gap`);
+    expect(text).toContain(`Residual shortfall is ${fb.deficitPercent}%`);
+    expect(text).toContain(`A further ${fb.magicFoodOffset} lbs/day comes by divine provision.`);
+    expect(fb.rawDeficit - fb.importCoverage - fb.magicFoodOffset).toBe(fb.deficit);
+  });
+
+  test('a gap carried by trade alone draws no magic run and names no channel', () => {
+    useStore.setState({ campaigns: [] });
+    // The same world without a magical channel: the whole covered gap is trade's, and
+    // the tail is the larger residual that follows. A magic run drawn here would be a
+    // channel the record does not credit.
+    const fb = {
+      dailyProduction: 773, dailyNeed: 1014, deficit: 72, deficitPercent: 7, surplus: 0,
+      importCoverage: 169, rawDeficit: 241, agricultureModifier: 1,
+    };
+    const { container } = render(e(EconomicsTab, { settlement: withFood(fb), saveId: null, publicDossier: true }));
+    const runs = RUN_WIDTHS(FOOD_TRACK(container));
+    expect(runs).toEqual([76, 17]);
+    expect(100 - runs.reduce((sum, run) => sum + run, 0)).toBe(fb.deficitPercent);
+    // The channel is named nowhere — anchored on the import chip, which travels the same
+    // label row and would vanish under the same drift.
+    expectAbsentWithAnchor(container.textContent, 'provision', `+ ${fb.importCoverage} imported`, 'no magic credited');
+  });
+
+  /**
+   * ODQ §934.23 — AUTHORED TEXT IS NEVER CLAMPED ON THE DOSSIER. The revenue rows carried
+   * `overflow:hidden` + `textOverflow:ellipsis` + `whiteSpace:nowrap` on the source AND its
+   * description inside a 210px desktop side column, so every desktop reader got "Payments in
+   * kind or coin from tenant farmers;…" and never the clause that says what it means. The
+   * 2026-09-18 car had already cured the PHONE by stacking the row; this arm pins the cure at
+   * BOTH widths, because the defect was never a width — it was a clamp on a written sentence.
+   *
+   * ⚠ THE VIEWPORT IS ONE CONTROLLED SOURCE. `hooks/useIsMobile.js` caches a MODULE-LEVEL
+   * store per breakpoint, so replacing `window.matchMedia` with a fresh mock cannot reach a
+   * store already built (the finding recorded at dossierPhoneFloorAllViews.test.jsx:145). The
+   * helper below is ONE MediaQueryList-shaped object whose `matches` is a live getter, and it
+   * NOTIFIES the store's own listener on flip — which is what carries the new width in.
+   */
+  const viewport = { matches: false, listeners: new Set() };
+  const atWidth = (matches) => {
+    viewport.matches = matches;
+    if (!window.matchMedia?.SF_ECON_CONTROLLED) {
+      const mock = vi.fn((query) => ({
+        media: query,
+        get matches() { return viewport.matches; },
+        addEventListener: (_t, fn) => viewport.listeners.add(fn),
+        removeEventListener: (_t, fn) => viewport.listeners.delete(fn),
+        addListener: (fn) => viewport.listeners.add(fn),
+        removeListener: (fn) => viewport.listeners.delete(fn),
+      }));
+      mock.SF_ECON_CONTROLLED = true;
+      window.matchMedia = mock;
+    }
+    for (const fn of viewport.listeners) fn({ matches });
+  };
+
+  // Eighty characters exactly — the length the owner's screenshot was cut at.
+  const LONG_DESC = 'Payments in kind or coin from tenant farmers; the primary revenue at this scale.';
+  const WITH_INCOME = {
+    ...SPEAKING,
+    economicState: {
+      ...SPEAKING.economicState,
+      incomeSources: [{ source: 'Agricultural Rents', percentage: 46, desc: LONG_DESC }],
+    },
+  };
+
+  test('the revenue description renders WHOLE, with no clamp, at desktop and at phone width', () => {
+    expect(LONG_DESC.length).toBe(80);
+    for (const mobile of [false, true]) {
+      useStore.setState({ campaigns: [] });
+      atWidth(mobile);
+      const { container } = render(e(EconomicsTab, { settlement: WITH_INCOME, saveId: null, publicDossier: true }));
+      const where = mobile ? 'phone' : 'desktop';
+      // THE WHOLE SENTENCE IS IN THE DOM. An ellipsis is painted by CSS, so the old markup
+      // would have satisfied a textContent check — which is why the clamp is asserted absent
+      // from the style of every element in the same breath.
+      expect(container.textContent, `${where}: the description is not rendered whole`).toContain(LONG_DESC);
+      expect(container.textContent, `${where}: the source name is not rendered whole`).toContain('Agricultural Rents');
+      const clamped = [...container.querySelectorAll('*')]
+        .filter((node) => node.style?.textOverflow === 'ellipsis' || node.style?.webkitLineClamp);
+      // anchored: the two positive assertions above read this very container, so an empty
+      // clamp list measures the markup rather than a tree that failed to render.
+      expect(clamped.map((n) => n.textContent.slice(0, 40)), `${where}: a clamp survives`).toEqual([]);
+      // ONE LINE, NOT TWO COLUMNS: the title and the description share a parent, which is the
+      // gazetteer shape the owner asked for and the thing a re-split would break.
+      const line = [...container.querySelectorAll('div')]
+        .find((node) => node.textContent === `Agricultural Rents ${LONG_DESC}`);
+      expect(line, `${where}: the title and the description are not one running line`).toBeTruthy();
+      cleanup();
+    }
+    atWidth(false);
+  });
+
   test('the ROUTER threads the public condition — OutputContainer hands publicDossier to the tab', () => {
     const router = readFileSync(ROUTER_SRC, 'utf8');
     // The condition is still computed where it always was...
@@ -210,6 +500,12 @@ import { ResourcesTab } from '../../src/components/new/tabs/ResourcesTab.jsx';
 import { ServicesTab } from '../../src/components/new/tabs/ServicesTab.jsx';
 import { DailyLifeTab } from '../../src/components/new/tabs/DailyLifeTab.jsx';
 import { generateSettlementPipeline } from '../../src/generators/generateSettlementPipeline.js';
+import { economyDeskRead } from '../../src/components/new/economyDeskRead.js';
+import { drawnAtMount } from '../../src/domain/display/stateProse/dossierMounts.js';
+import { tierNounFor, weaveBlock } from '../../src/domain/display/stateProse/weaveBlock.js';
+import { speakTierNoun } from '../../src/domain/display/stateProse/tierVoice.js';
+import { legibilityRung } from '../../src/domain/display/stateProse/legibilityRung.js';
+import { SILENT_ECONOMY_DESK } from '../../src/components/new/economyDeskRead.js';
 
 /**
  * THE FIXTURE CARRIES NO `_seed` AND NO `id`, so every draw is CANONICAL-AT-ZERO (kernel law
@@ -280,6 +576,56 @@ const GROUND_LINES = Object.freeze(drawnMembers({
   standing: { blockId: 'DS-ECO-8', poolKey: 'COMFORTABLE' },
 }, { leaf: 'economy', seed: '', slots: GROUND_SLOTS }));
 
+/**
+ * ⭐ THE ANCHOR AS THE PAGE PRINTS IT (the block weave, 2026-09-18). Every `DeskLines` position
+ * renders ONE woven paragraph, and from the second sentence on an opening settlement name is
+ * stood down to the tier noun. The anchor is therefore put through THE SHIPPED WEAVE at the
+ * index the DESK hands the renderer — the claim is unchanged in force and gains one more: the
+ * sentence reaches the DOM in the form the reader actually meets. A line that is not in the
+ * position's own list comes back UNCHANGED and still fails loudly.
+ * @param {string} sentence @param {ReadonlyArray<string|null|undefined>} lines
+ * @param {{name?: unknown, tier?: unknown}} settlement
+ */
+function onPage(sentence, lines, settlement) {
+  const noun = tierNounFor(settlement.tier);
+  // ⭐ AND BOTH SIDES ARE SPOKEN BEFORE THE LOOKUP (§934.22 addendum). `drawnMembers` reads
+  // the CORPUS, which writes "the town" about a settlement of any size; the desk returns that
+  // line in the settlement's OWN noun when its caller's bag asks for it, and in the corpus's
+  // when it does not. Speaking both here is idempotent, so the anchor is found — and rendered
+  // — in the form the page prints it whichever bag the desk was called with.
+  const kept = (lines || []).filter(Boolean).map((line) => speakTierNoun(line, noun));
+  const index = kept.indexOf(speakTierNoun(sentence, noun));
+  if (index < 0) return sentence;
+  return weaveBlock(kept, { settlementName: settlement.name, tierNoun: noun }).sentences[index];
+}
+
+/**
+ * The four economy-desk positions `DeskLines` renders, each with the desk keys its call site
+ * hands over IN ORDER. Named once so the arm below drives exactly what the tabs drive.
+ */
+const DESK_LINE_MOUNTS = Object.freeze({
+  'resources.groundAndWorkings': ['terrainIdentity', 'economicStrengths', 'strategicValue', 'exploitation'],
+  // ⭐ ONE KEY SINCE 2026-09-19, AND THE SECOND ONE DID NOT DIE — it MOVED. DS-SUP-3's
+  // `impairedService` lens names ONE HOUSE by name, and the owner's order ("some other
+  // sections need the same adjustment") put it under that house's own service row, the way
+  // `defense.threatAssessment` renders under the bar it is about. It is the SAME position
+  // (`services.catalogStanding`, one registry row, one reachability literal) drawn where each
+  // of its two lenses belongs, so this table — which is about what ONE `DeskLines` call site
+  // hands over — now lists the catalog lens alone.
+  'services.catalogStanding': ['catalogStanding'],
+  'economics.exportPosture': ['exportPosture'],
+  'daily_life.standingOfLiving': ['prosperityRung'],
+  'economics.commercialProfile': ['incomeMix', 'criminalLine', 'tradeProfile'],
+});
+
+/** The sentences one position draws for a settlement, in the order its call site lists them. */
+function positionLines(mount, settlement) {
+  const desk = economyDeskRead(settlement, { publicDossier: false, playerView: false });
+  return DESK_LINE_MOUNTS[mount]
+    .map((key) => drawnAtMount(mount, desk[key])?.sentence)
+    .filter(Boolean);
+}
+
 describe('DESK-ECON2 — the mounted positions are DRAWS, not citations', () => {
   test('resources.groundAndWorkings: four lenses render, and a public dossier renders none', () => {
     const priv = render(e(ResourcesTab, { settlement: GROUND, publicDossier: false }));
@@ -289,13 +635,17 @@ describe('DESK-ECON2 — the mounted positions are DRAWS, not citations', () => 
     const pubText = pub.container.textContent;
     // COLLECT-THEN-ASSERT (car 8a-13): all four lenses run, so a red names every one that
     // moved rather than the first.
+    // The four lenses render as ONE woven paragraph, so each anchor is taken in the form the
+    // page prints it: `strengths` is the SECOND sentence and opens on the town's name, so what
+    // reaches the DOM is "The village has more than one thing…" (see `onPage`).
+    const lines = positionLines('resources.groundAndWorkings', GROUND);
     expectNoSeedFailures(collectSeedFailures(Object.entries({
       terrain: GROUND_LINES.terrain,
       strengths: GROUND_LINES.strengths,
       worth: GROUND_LINES.worth,
       workings: GROUND_LINES.workings,
     }), ([lens, line]) => expectPresentThenAbsent(
-      privText, pubText, line, `resources.groundAndWorkings :: ${lens}`,
+      privText, pubText, onPage(line, lines, GROUND), `resources.groundAndWorkings :: ${lens}`,
     )), 'all four resources lenses draw privately and none reaches a public dossier');
     // The DATUM is untouched by the gate — the terrain word, the strengths chips and the
     // generator's own strategic-value line are the page's and are not corpus prose.
@@ -356,6 +706,88 @@ describe('DESK-ECON2 — the mounted positions are DRAWS, not citations', () => 
       .toContain('Comfortable');
   });
 
+  /**
+   * ⛔ THIS ARM NO LONGER CLAIMS TO PROVE THE NAME THREAD, and the retitling is the fix
+   * (review 12). It used to compare each mount's DOM against `weaveBlock`'s output and say
+   * that proved `settlementName`/`tier` had reached the call site. It did not: four of these
+   * five positions draw a SINGLE line on this fixture, and a one-line weave is the line —
+   * so the comparison held identically with the props and without them. An arm that cannot
+   * fail for the reason it names is worse than no arm, because it is counted as coverage.
+   *
+   * What it really measures is a DRAW, and that is worth keeping: every mount the tabs list
+   * is reached, its desk speaks, and the page prints what was drawn. So it asserts the FIRST
+   * drawn sentence, which the weave never renames whatever else it does — a claim with no
+   * dependency on the thread at all. The thread is proven at the end of this file, where a
+   * hand-built two-line block makes a dropped prop visible.
+   */
+  test('every DeskLines mount the tabs list draws, and the page prints what was drawn', () => {
+    useStore.setState({ campaigns: [] });
+    /** @type {Array<[string, any, object]>} */
+    const renders = [
+      ['resources.groundAndWorkings', ResourcesTab, { settlement: GROUND, publicDossier: false }],
+      ['services.catalogStanding', ServicesTab, { settlement: GROUND, services: GROUND.availableServices, publicDossier: false }],
+      ['economics.exportPosture', EconomicsTab, { settlement: GROUND, saveId: null, publicDossier: false }],
+      ['daily_life.standingOfLiving', DailyLifeTab, { settlement: GROUND, publicDossier: false }],
+      ['economics.commercialProfile', EconomicsTab, { settlement: GROUND, saveId: null, publicDossier: false }],
+    ];
+    let judged = 0;
+    const failures = collectSeedFailures(renders, ([mount, Tab, props]) => {
+      const lines = positionLines(mount, GROUND);
+      if (lines.length === 0) return; // R-DST-K: a position the corpus is silent about.
+      judged += 1;
+      const text = render(e(Tab, props)).container.textContent;
+      cleanup();
+      // The FIRST line keeps its NAME under every weave, so this is a DRAW claim and cannot
+      // be mistaken for a thread claim by a later reader.
+      //
+      // ⭐ THROUGH `onPage` SINCE ODQ §934.22 item 3, AND THE CLAIM IS UNCHANGED IN FORCE.
+      // The raw drawn sentence used to reach the DOM byte for byte at index 0; `tierVoice`
+      // now speaks the corpus's generic 'the town' in the settlement's own noun, and it does
+      // so on sentence 0 like every other. Thornwall is a VILLAGE, so its terrain line stopped
+      // matching itself. `onPage` is this file's own existing answer to exactly this question
+      // — it puts the anchor through THE SHIPPED WEAVE at the index the desk hands over — and
+      // a sentence that is not in the position's list still comes back unchanged and still
+      // fails loudly.
+      expect(text, `${mount}: the page does not carry the first sentence its desk drew`)
+        .toContain(onPage(lines[0], lines, GROUND));
+    });
+    expectNoSeedFailures(failures, 'every DeskLines mount draws and reaches the page');
+    expect(judged, 'no mount spoke on this fixture, so the arm judged nothing').toBeGreaterThan(0);
+  });
+
+  test('…and the stand-down really fires in a tab, not only in the weave\'s own unit test', () => {
+    // NON-VACUITY WITH A NAMED SUBJECT. `resources.groundAndWorkings` is the one position this
+    // fixture draws more than one lens at, and its SECOND lens opens on the town's name — so
+    // this is the arm that would red if a call site dropped `settlementName`/`tier`.
+    useStore.setState({ campaigns: [] });
+    const lines = positionLines('resources.groundAndWorkings', GROUND);
+    expect(lines.length, 'the position stopped drawing more than one lens').toBeGreaterThan(1);
+    const stoodDown = onPage(GROUND_LINES.strengths, lines, GROUND);
+    expect(stoodDown, 'the strengths lens no longer opens on the name, so this arm is free')
+      .not.toBe(GROUND_LINES.strengths);
+    // ⛔ THE EXPECTED FORM IS COMPUTED FROM THE DRAWN MEMBER, NEVER TYPED (car 8a-13's rule,
+    // and `proseDrawnAnchors.walker.test.js` is what keeps it so). This assertion used to
+    // pin the stood-down sentence as a LITERAL — 105 characters of DS-ECO-11's own wording —
+    // which is the class that habitat removal exists to end: NEVER TRIM lets the pool grow,
+    // an appended variant wins the draw, and the literal reds while the desk, the contract
+    // and the paid-surface gate this arm guards are all perfectly well.
+    //
+    // The claim does not weaken. It gains a premise and states the TRANSFORMATION instead of
+    // the result: the drawn member opens on the name, and the stand-down is that same member
+    // with its opening name replaced by the tier phrase and nothing else touched. A re-index
+    // or a rewording moves the member and the expectation together; a weave that started
+    // dropping words, renaming mid-sentence, or reaching for the pronoun still reds.
+    expect(GROUND_LINES.strengths.startsWith(GROUND.name),
+      'the drawn member stopped opening on the name, so there is no stand-down to expect')
+      .toBe(true);
+    expect(stoodDown, 'the stand-down is not the drawn member with its opening name replaced')
+      .toBe(`The ${GROUND.tier}${GROUND_LINES.strengths.slice(GROUND.name.length)}`);
+    const text = render(e(ResourcesTab, { settlement: GROUND, publicDossier: false })).container.textContent;
+    expect(text, 'the tab renders the raw sentence, so the props did not reach DeskLines')
+      .not.toContain(GROUND_LINES.strengths); // anchored: the toContain below proves this same render carries the position
+    expect(text).toContain(stoodDown);
+  });
+
   test('the ROUTER threads the public condition to all three new tabs', () => {
     const router = readFileSync(ROUTER_SRC, 'utf8');
     for (const tab of ['resources', 'services', 'daily_life']) {
@@ -403,5 +835,119 @@ describe('DESK-ECON2 — the mounted positions are DRAWS, not citations', () => 
     // the label trap, pinned in the UI suite as well as the desk suite.
     expect(real.config.terrainType).toBe('plains');
     expect(real.resourceAnalysis.terrain).toBe('Plains');
+  });
+});
+
+/**
+ * ── ⭐⭐ THE NAME THREAD, PROVEN WHERE IT CAN FAIL (review 10, 2026-09-18) ──────────────
+ *
+ * The arm above ("every DeskLines mount renders its WOVEN paragraph") is STRUCTURAL and it
+ * is vacuous at four of its five sites, because `weaveBlock` returns a lone line verbatim and
+ * this fixture draws exactly one line at four of them. These arms cannot be: each drives its
+ * real call site with a TWO-LINE hand-built block whose second line opens on the town's name,
+ * so dropping `settlementName`/`tier` at that site puts the raw sentence in the DOM and reds
+ * the anchored negative.
+ *
+ * ⛔ THREE OF THE FIVE ECONOMY SITES ARE ABSENT FROM THIS SUITE, AND THAT IS A FINDING RATHER
+ * THAN AN OMISSION. `economics.exportPosture` (`rungs={[deskProse.exportPosture]}`),
+ * `daily_life.standingOfLiving` (`rungs={[deskProse.prosperityRung]}`) and — since
+ * 2026-09-19 — `services.catalogStanding` (`rungs={[deskProse.catalogStanding]}`) pass
+ * exactly ONE rung BY CONSTRUCTION, and `weaveBlock` returns a single line verbatim. The two
+ * props are therefore provably INERT at those sites today — no rung list, hand-built or
+ * drawn, can make them change a character — so no behavioural arm is possible there and the
+ * structural one above is the whole of what can be claimed. The day any of the three call
+ * sites grows a second lens, it belongs in the table below.
+ *
+ * ⚠ THE SERVICES SITE JOINED THAT LIST BY A DELIBERATE MOVE, NOT BY LOSING A LENS. DS-SUP-3
+ * still draws both of its lenses; the second one now renders under the row of the house it
+ * names (the owner's 2026-09-19 order, the DefenseTab idiom), which is a second one-rung
+ * `DeskLines` rather than a second sentence in this paragraph. A consequence worth stating
+ * plainly: that sentence no longer stands its opening name down against the catalog line,
+ * because a one-line weave is the line. The shipped pool opens on `{institution}` rather than
+ * on the settlement, so no shipped wording moves; a future wording that opened on the town's
+ * name would print it, and re-homing it is the act that would owe an arm here.
+ */
+describe('DeskLines — the name props reach the real call sites, non-vacuously', () => {
+  const NAME = GROUND.name;
+  const line = (blockId, text) => legibilityRung('', { blockId, poolKey: 'hand-built', angle: 'plain', text }, []);
+
+  /** The first sentence keeps its name; the SECOND is the one that must stand down. */
+  const OPENER = `${NAME} sits where two cart roads meet.`;
+  const REPEAT = `${NAME} keeps a market on the green and a smith at the ford.`;
+  const STOOD_DOWN = `The ${GROUND.tier} keeps a market on the green and a smith at the ford.`;
+
+  /**
+   * Each row is [mount, blockId, the desk keys the call site hands over, the Tab, its props].
+   * The keys are read off the call site itself, so a site that re-orders or renames its rungs
+   * reds here rather than silently testing a position nobody renders.
+   */
+  const SITES = [
+    ['resources.groundAndWorkings', 'DS-ECO-11', ['terrainIdentity', 'economicStrengths'],
+      ResourcesTab, { settlement: GROUND, publicDossier: false }],
+    ['economics.commercialProfile', 'DS-ECO-12', ['incomeMix', 'criminalLine'],
+      EconomicsTab, { settlement: GROUND, saveId: null, publicDossier: false }],
+  ];
+
+  /**
+   * ⚠ A PLAIN TEST LOOPING OVER THE ROWS, NEVER `test.each` — the sovereignty lighting
+   * walker's own prescription. An `each` call would park this file on the each-family debt,
+   * whose ceiling is frozen and may only shrink. `collectSeedFailures` keeps what `each`
+   * was for: every site is driven, and a red names all of them rather than the first.
+   */
+  test('every multi-rung economy call site stands the repeated opening name down, through its own tab', () => {
+    const failures = collectSeedFailures(SITES, ([mount, blockId, keys, Tab, props]) => {
+    useStore.setState({ campaigns: [] });
+    const rungs = [line(blockId, OPENER), line(blockId, REPEAT)];
+
+    // ⛔ THE LIVENESS ANCHOR IS THE PAGE ITSELF, DRIVEN WITH ONE RUNG (review 12). It used to
+    // be a bare `DeskLines` render, which proves the RENDERER can print the sentence and says
+    // nothing about whether the TAB still mounts the position — so a tab that had stopped
+    // mounting it entirely passed the absence half vacuously. Driving the same tab with a
+    // single rung puts the raw sentence on the page verbatim (a one-line weave is the line),
+    // which is the exact claim the anchor needs: this page, at this mount, can print this.
+    deskOverride.current = Object.freeze({ ...SILENT_ECONOMY_DESK, [keys[0]]: rungs[1] });
+    const oneRung = render(e(Tab, props)).container.textContent;
+    cleanup();
+    expect(oneRung, `${mount}: the tab does not mount this position at all`).toContain(REPEAT);
+
+    deskOverride.current = Object.freeze({
+      ...SILENT_ECONOMY_DESK, [keys[0]]: rungs[0], [keys[1]]: rungs[1],
+    });
+    const text = render(e(Tab, props)).container.textContent;
+    expectPresentThenAbsent(oneRung, text, REPEAT, `${mount}: the raw name-opening sentence`);
+    expect(text, `${mount}: the tier-noun stand-down is not on the page`).toContain(STOOD_DOWN);
+    // …and the FIRST line keeps its name, so the paragraph still says who it is about.
+    expect(text, `${mount}: the opening sentence lost its name`).toContain(OPENER);
+    // …and the whole position reads as the ONE paragraph the weave produces.
+    expect(text, `${mount}: the position did not render the woven paragraph`)
+      .toContain(weaveBlock([OPENER, REPEAT], {
+        settlementName: NAME, tierNoun: tierNounFor(GROUND.tier),
+      }).paragraph);
+    });
+    expect(SITES.length, 'the site table emptied, so the loop judged nothing').toBe(2);
+    expectNoSeedFailures(failures, 'every multi-rung DeskLines call site threads the name');
+  });
+
+  test('THE THREE SINGLE-RUNG SITES ARE INERT BY CONSTRUCTION, and the source says so', () => {
+    // The claim the describe's header makes, executed rather than asserted in prose: each of
+    // these call sites passes a one-element rung list, and a one-line weave is the line.
+    const econ = readFileSync(join(HERE, '../../src/components/new/tabs/EconomicsTab.jsx'), 'utf8');
+    const daily = readFileSync(join(HERE, '../../src/components/new/tabs/DailyLifeTab.jsx'), 'utf8');
+    const services = readFileSync(join(HERE, '../../src/components/new/tabs/ServicesTab.jsx'), 'utf8');
+    expect(econ).toContain('mount="economics.exportPosture" settlementName={s?.name} tier={s?.tier} rungs={[deskProse.exportPosture]}');
+    expect(daily).toContain('mount="daily_life.standingOfLiving" settlementName={r?.name} tier={r?.tier} rungs={[deskProse.prosperityRung]}');
+    // ⚠ THE SERVICES SITE SPELLS ITS MOUNT AS A CONST, and the reason is the mount registry's
+    // own reachability arm: that id may appear ONCE as a whole string literal under
+    // src/components, and this tab now draws the position at two places. So the assertion is
+    // over the rung list, which is what inertness is about.
+    expect(services).toContain('mount={CATALOG_MOUNT} settlementName={settlement?.name} tier={settlement?.tier} rungs={[deskProse.catalogStanding]}');
+    expect(services).toContain('rungs={[deskProse.impairedService]}');
+    // …and the weave really does return a lone line verbatim, which is what makes them inert.
+    expect(weaveBlock([REPEAT], { settlementName: NAME, tierNoun: tierNounFor(GROUND.tier) }).paragraph)
+      .toBe(REPEAT);
+    // ANCHOR: the same weave with TWO lines does stand the second down, so the identity above
+    // is the one-line rule and not the weave having stopped working.
+    expect(weaveBlock([OPENER, REPEAT], { settlementName: NAME, tierNoun: tierNounFor(GROUND.tier) }).paragraph)
+      .toContain(STOOD_DOWN);
   });
 });

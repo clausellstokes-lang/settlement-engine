@@ -14,6 +14,34 @@
  * Accepts either an `institution` object directly, or a `name` string that is
  * resolved against `settlement.institutions` (tolerating count-suffix / casing
  * drift, e.g. a "Merchant Guilds" faction → "Merchant guilds (15-40)").
+ *
+ * ⛔ THE TRIGGER IS INLINE; THIS COMPONENT IS NOT. It returns a FRAGMENT — the
+ * trigger, and BESIDE IT the `InstitutionCard` dialog, rendered in place rather
+ * than portalled. The card is a `position: fixed` overlay holding a `<section
+ * role="dialog">`, a `<header>`, an `<h2>`, its own `<p>`s and a `<ul>`, so a
+ * CALLER THAT WRAPS THIS IN A `<p>` NESTS BLOCK CONTENT INSIDE A PARAGRAPH the
+ * moment a reader opens the card. That shipped on the Services tab's institution
+ * attribution line (serviceComponents.jsx) and printed a React DOM-nesting error
+ * per block element; `</p>` is implied by any block start tag in the HTML parser,
+ * so the markup is not the tree React thinks it built. Give it a block container
+ * — a `<div>` styled the way the line already was.
+ *
+ * ⚠ THE STRUCTURAL CURE WOULD BE TO PORTAL THE CARD to document.body, which would
+ * make every caller safe by construction rather than by convention. It is
+ * DELIBERATELY DEFERRED here, documented rather than forgotten: the card owns a
+ * focus trap and focus restoration, and three suites query it inside their render
+ * container, so moving its mount point is its own car with its own proof. Until
+ * then this docblock and the nesting pin are what keep the class closed.
+ *
+ * ⚠ AND THE CONTAINER IS NOT ONLY A TYPE — IT IS AN EVENT HOST. The trigger below
+ * stops its own click and its own Enter/Space, which is why OPENING a card inside
+ * PowerStrata's clickable faction row does not toggle that row. Nothing stopped
+ * the CARD's events, so every click the reader made on the open profile, Close
+ * included, toggled the row on the way out. `InstitutionCard`'s overlay now stops
+ * click, mousedown and Enter/Space at the dialog root — Escape and Tab are
+ * deliberately let through, because the focus trap listens on window.
+ * @enforced-by tests/components/servicesInstitutionCardNesting.test.jsx
+ * @enforced-by tests/components/institutionLinkBlockContainer.test.jsx
  */
 
 import { useMemo, useState } from 'react';
@@ -23,6 +51,7 @@ import { GOLD } from '../theme.js';
 import {
   deriveInstitutionProfile, resolveInstitutionByName,
 } from '../../domain/display/institutionProfile.js';
+import { institutionDisplayName } from '../../domain/display/institutionDisplayName.js';
 
 /**
  * @param {Object} props
@@ -35,7 +64,9 @@ import {
 export default function InstitutionLink({ name, institution, settlement, children, style }) {
   const [open, setOpen] = useState(false);
 
-  const label = children ?? institution?.name ?? name ?? 'Institution';
+  // §934.13 — the seam renders the label; `resolveInstitutionByName` below keeps the RAW
+  // name, because it looks the institution up in data that still spells the key the old way.
+  const label = children ?? (institutionDisplayName(institution ?? name) || 'Institution');
   const inst = useMemo(
     () => institution || resolveInstitutionByName(name ?? institution?.name, settlement),
     [institution, name, settlement],
@@ -64,7 +95,7 @@ export default function InstitutionLink({ name, institution, settlement, childre
         onKeyDown={onKeyDown}
         aria-haspopup="dialog"
         aria-expanded={open}
-        title={`View ${inst.name || label} profile`}
+        title={`View ${institutionDisplayName(inst) || label} profile`}
         style={{
           display: 'inline',
           minHeight: 0,

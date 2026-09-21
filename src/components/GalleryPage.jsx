@@ -76,6 +76,7 @@ export default function GalleryPage({ onNavigate, routeSlug = null, routeHub = n
     actionError,
     actionNotice,
     loadMore,
+    retryList,
     openDossier,
     backToList,
     toggleArrayFilter,
@@ -205,6 +206,7 @@ export default function GalleryPage({ onNavigate, routeSlug = null, routeHub = n
             filters={filters}
             voteBusyId={voteBusyId}
             loadMore={loadMore}
+            onRetryList={retryList}
             openDossier={openDossier}
             toggleArrayFilter={toggleArrayFilter}
             toggleBoolFilter={toggleBoolFilter}

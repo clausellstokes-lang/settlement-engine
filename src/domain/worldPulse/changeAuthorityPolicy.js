@@ -33,9 +33,10 @@ import { isActorInitiatedMajorType, routineMajorApprovalEnabled } from './actorM
  *    not been migrated onto it; that is recorded, not "fixed," here.
  *  • 'auto' — always emits applyMode 'auto'. The bounded logical consequence of a
  *    premise gated upstream.
- *  • 'auto-with-lock-escalation' — auto by default, but escalates to 'proposal'
- *    on a SEPARATE authority axis (a player-locked governing faction), not on
- *    majorChangesRequireProposal.
+ *  • ('auto-with-lock-escalation' is RETIRED: its one member, coup_succeeded, escalated
+ *    on a player-locked governing faction, and owner order 2026-09-17 removed the
+ *    control that wrote that lock and stopped coup.js reading it. The coup is now
+ *    'auto-with-approval-routing', below.)
  *  • 'always-proposal' — UNCONDITIONALLY emits applyMode 'proposal'. No flag, no
  *    severity, no lock axis can downgrade it. These are moves a DM should always
  *    get to vet (an adversarial NPC defecting, a government being challenged, a
@@ -50,11 +51,11 @@ import { isActorInitiatedMajorType, routineMajorApprovalEnabled } from './actorM
  *  • 'auto-with-approval-routing' — the candidate is auto by default (a bounded
  *    consequence the DM saw coming), but as an ACTOR-INITIATED major it routes its
  *    legacy 'auto' through authorityFor, so the new dm_only/recommendations modes and
- *    routine-with-major-approval force it to 'proposal'. Like auto-with-lock-escalation
- *    but the escalation axis is the autonomy mode, not a player lock (W-CONVERGENCE's
- *    intervention_ordered).
+ *    routine-with-major-approval force it to 'proposal'. The escalation axis is the
+ *    autonomy mode, never a player lock (W-CONVERGENCE's intervention_ordered, and the
+ *    coup since 2026-09-17).
  *
- * @typedef {'proposal-gated'|'severity-gated'|'auto'|'auto-with-lock-escalation'|'auto-with-approval-routing'|'always-proposal'|'structural-proposal'} ChangeAuthority
+ * @typedef {'proposal-gated'|'severity-gated'|'auto'|'auto-with-approval-routing'|'always-proposal'|'structural-proposal'} ChangeAuthority
  *
  * @typedef {object} ChangeAuthorityEntry
  * @property {ChangeAuthority} authority   The authority class (see above).
@@ -298,14 +299,15 @@ export const CHANGE_AUTHORITY_POLICY = Object.freeze({
       'Trade-war conditions are the bounded propagation of an opt-in war-layer premise the DM enabled.',
   }),
 
-  // ── AUTO WITH A SEPARATE LOCK AXIS: auto unless a player-locked seat. ──────
+  // ── AUTO WITH APPROVAL ROUTING: the coup. (It escalated on a player-locked seat until
+  // owner order 2026-09-17 retired the world locks; the approval route is the table's own.)
   coup_succeeded: Object.freeze({
-    authority: 'auto-with-lock-escalation',
+    authority: 'auto-with-approval-routing',
     module: 'coup.js',
     consultsProposalFlag: false,
     campaignAltering: true,
     rationale:
-      'A successful coup is the resolution of a coup stressor the DM already saw building; it auto-applies UNLESS the player has locked the governing faction, on which separate axis it escalates to proposal.',
+      'A successful coup is the resolution of a coup stressor the DM already saw building; it auto-applies, and as an actor-initiated major it routes through the approval queue under dm_only, recommendations and routine-with-major-approval.',
   }),
 
   // ── AUTO WITH APPROVAL ROUTING: an actor-initiated foreign intervention. ──────

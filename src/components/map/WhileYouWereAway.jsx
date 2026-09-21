@@ -22,6 +22,8 @@ import { History, Sparkles, AlertTriangle, X } from 'lucide-react';
 import { useStore } from '../../store/index.js';
 import { IconButton } from './IconButton.jsx';
 import { BODY, BORDER2, FS, GOLD, GOLD_BG, INK, MUTED, RED, SECOND, sans } from '../theme.js';
+import useIsMobile from '../../hooks/useIsMobile.js';
+import { chromeFontSize, proseFontSize } from '../../design/proseScale.js';
 
 /**
  * @param {Object} props
@@ -29,6 +31,7 @@ import { BODY, BORDER2, FS, GOLD, GOLD_BG, INK, MUTED, RED, SECOND, sans } from 
  *   defaults to the active campaign so a stale digest from another campaign never shows.
  */
 export default function WhileYouWereAway({ campaignId = null }) {
+  const mobile = useIsMobile();
   const digest = useStore(s => s.livingCatchUp);
   const activeCampaignId = useStore(s => s.activeCampaignId);
   const dismiss = useStore(s => s.dismissLivingCatchUp);
@@ -68,7 +71,7 @@ export default function WhileYouWereAway({ campaignId = null }) {
           display: 'flex', alignItems: 'center', gap: 8,
           border: `1px solid ${BORDER2}`,
           background: GOLD_BG, padding: '9px 12px',
-          color: BODY, fontFamily: sans, fontSize: FS.xs, fontWeight: 800,
+          color: BODY, fontFamily: sans, fontSize: chromeFontSize(FS.xs, mobile), fontWeight: 800,
         }}
       >
         <History size={14} color={GOLD} />
@@ -92,7 +95,7 @@ export default function WhileYouWereAway({ campaignId = null }) {
           <div style={{ color: INK, fontFamily: sans, fontSize: FS.sm, fontWeight: 950, lineHeight: 1.2 }}>
             While you were away
           </div>
-          <div style={{ color: SECOND, fontFamily: sans, fontSize: FS.xs, fontWeight: 750, marginTop: 2 }}>
+          <div style={{ color: SECOND, fontFamily: sans, fontSize: chromeFontSize(FS.xs, mobile), fontWeight: 750, marginTop: 2 }}>
             The realm advanced {weeks} {weekWord} on its own{paused ? ', then paused for your word' : ''}.
           </div>
         </div>
@@ -110,7 +113,7 @@ export default function WhileYouWereAway({ campaignId = null }) {
           display: 'flex', alignItems: 'flex-start', gap: 6,
           border: '1px solid rgba(197,74,74,0.45)',
           background: 'rgba(197,74,74,0.08)', padding: '7px 9px',
-          color: RED, fontFamily: sans, fontSize: FS.xs, fontWeight: 800, lineHeight: 1.45,
+          color: RED, fontFamily: sans, fontSize: chromeFontSize(FS.xs, mobile), fontWeight: 800, lineHeight: 1.45,
         }}>
           <AlertTriangle size={13} style={{ marginTop: 1, flexShrink: 0 }} />
           {/* C2 (misc): the sentence stays in the register; the raw diagnostic is
@@ -122,23 +125,23 @@ export default function WhileYouWereAway({ campaignId = null }) {
         </div>
       ) : majors.length > 0 ? (
         <div style={{ display: 'grid', gap: 5 }}>
-          <div style={{ display: 'flex', alignItems: 'center', gap: 6, color: GOLD, fontFamily: sans, fontSize: FS.xs, fontWeight: 900 }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: 6, color: GOLD, fontFamily: sans, fontSize: chromeFontSize(FS.xs, mobile), fontWeight: 900 }}>
             <Sparkles size={12} /> What happened
           </div>
-          <ul style={{ margin: 0, paddingLeft: 16, color: BODY, fontFamily: sans, fontSize: FS.xs, lineHeight: 1.5 }}>
+          <ul style={{ margin: 0, paddingLeft: 16, color: BODY, fontFamily: sans, fontSize: proseFontSize(FS.xs, mobile), lineHeight: 1.5 }}>
             {majors.slice(0, 6).map((headline, i) => (
               <li key={i} style={{ marginBottom: 3 }}>{headline}</li>
             ))}
           </ul>
         </div>
       ) : (
-        <div style={{ color: BODY, fontFamily: sans, fontSize: FS.xs, fontWeight: 700, lineHeight: 1.45 }}>
+        <div style={{ color: BODY, fontFamily: sans, fontSize: chromeFontSize(FS.xs, mobile), fontWeight: 700, lineHeight: 1.45 }}>
           The realm advanced quietly. No major turns while you were gone.
         </div>
       )}
 
       {paused && !error && (
-        <div data-testid="catchup-paused-note" style={{ color: INK, fontFamily: sans, fontSize: FS.xxs, fontWeight: 800, lineHeight: 1.4 }}>
+        <div data-testid="catchup-paused-note" style={{ color: INK, fontFamily: sans, fontSize: chromeFontSize(FS.xxs, mobile), fontWeight: 800, lineHeight: 1.4 }}>
           A major turn surfaced and the realm paused for your word. Set your verdicts on it in the World Pulse panel, then resume the interval.
         </div>
       )}
@@ -150,7 +153,7 @@ export default function WhileYouWereAway({ campaignId = null }) {
           claimed the "most recent" weeks were shown and the rest could still be
           run — both halves were false. */}
       {capped && !error && (
-        <div style={{ color: MUTED, fontFamily: sans, fontSize: FS.xxs, fontWeight: 750, lineHeight: 1.4 }}>
+        <div style={{ color: MUTED, fontFamily: sans, fontSize: chromeFontSize(FS.xxs, mobile), fontWeight: 750, lineHeight: 1.4 }}>
           More time had passed than a single catch-up covers. The realm lived the first {weeks} {weekWord} of it, then time leapt to today. The span between passes into history unrecorded.
         </div>
       )}

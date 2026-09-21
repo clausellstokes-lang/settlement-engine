@@ -1,11 +1,14 @@
-import { useState, useMemo } from 'react';
+import { Fragment, useState, useMemo } from 'react';
 import { FS, MUTED, swatch } from '../theme.js';
-import { Lock, Pin, Unlock } from 'lucide-react';
+import { edged } from '../../design/edgedBox.js';
+import { Pin } from 'lucide-react';
 import { catColor } from './design';
 import {Ti, serif, PlotHook} from './Primitives';
 import { EditableText } from '../primitives/EditableText.jsx';
 import Button from '../primitives/Button.jsx';
 import ProseParagraph from '../ProseParagraph.jsx';
+import useIsMobile from '../../hooks/useIsMobile.js';
+import { chromeFontSize, proseFontSize } from '../../design/proseScale.js';
 import { useStore } from '../../store/index.js';
 import { flag } from '../../lib/flags.js';
 import { isEdited, getOriginalValue } from '../../domain/userEdits.js';
@@ -37,36 +40,14 @@ function durableNpcId(npc) {
 }
 
 /**
- * THE ROW LOCK — the per-character half of the locks engine (Phase A).
+ * THE ROW PADLOCK IS GONE (owner order 2026-09-17, "remove the other padlocks").
  *
- * Two promises now sit on one roster row and they must never blur into each
- * other, so each gets its own glyph, its own colour and its own sentence:
- *   • PIN (purple, a pin) guards a character's PROSE from the AI rewriting it.
- *   • LOCK (bronze, a padlock) keeps the PERSON through a roster reroll.
- * Neither sentence uses the other's word — the same rule the section-level twin
- * (components/dossier/LockControls.jsx) states in its header.
- *
- * WHY THE THIRD LINE. `locks.npcs` carries two forms: `true` freezes the whole
- * roster, an array names individuals (domain/locksPreservation.js normalizes
- * both). When the section lock is on, every person is already kept, and writing
- * an array over that boolean would silently UNLOCK the section. The row says so
- * and refuses instead.
+ * Each roster row carried a bronze padlock beside the purple pin ("Lock this person
+ * so they stay through any new roll."), writing the character's id into
+ * `locks.npcs`. It is removed with the NPCs and History section locks, and a lock a
+ * save still stores is not read (domain/locksPreservation.js normalizeLocks). The PIN
+ * is a different promise (the AI leaves this person's prose alone) and stays.
  */
-// Phase B made the individual promise total: a locked character now survives a
-// FULL regenerate too, taking a place in the brand-new town, so these two strings
-// say "any new roll" instead of "rerolls". The whole-roster boolean did NOT gain
-// that reach — freezing an entire cast through a fresh roll would nullify the
-// roll — so its line states the boundary rather than letting the reader
-// generalize from the row beside it.
-const NPC_LOCK_COPY = Object.freeze({
-  locked:  'Locked. This person stays through any new roll.',
-  open:    'Lock this person so they stay through any new roll.',
-  section: 'The whole roster is locked. Rerolls keep everyone; a brand-new settlement starts a new cast.',
-});
-
-/** Bronze, deliberately not the pin's purple: a glance must tell the two apart. */
-const LOCK_TONE = swatch['#8A5A1A'];
-const LOCK_TONE_BG = swatch['#F5ECD8'];
 
 function uniqueNpcIndex(npcs, npcId) {
   if (!Array.isArray(npcs) || !npcId) return -1;
@@ -91,6 +72,7 @@ export function NPCCategoryGroup({
   canAuthorNpc = false,
 }) {
   const [open, setOpen] = useState(true);
+  const mobile = useIsMobile();
   const color = catColor(category);
   const displayLabel = label || (category.charAt(0).toUpperCase() + category.slice(1));
   const filtered = group.filter(npc => {
@@ -116,11 +98,11 @@ export function NPCCategoryGroup({
     <div style={{marginBottom:14}}>
       <button type="button" aria-expanded={open} onClick={()=>setOpen(v=>!v)} style={{width:'100%',display:'flex',alignItems:'center',gap:8,background:'none',border:'none',cursor:'pointer',padding:'4px 0',WebkitTapHighlightColor:'transparent',marginBottom:open?8:0}}>
         <div style={{height:1,flex:1,background:`${color}35`}}/>
-        <span style={{fontSize:FS.xs,fontWeight:700,color,textTransform:'uppercase',letterSpacing:'0.07em',flexShrink:0}}>{displayLabel} ({filtered.length})</span>
+        <span style={{fontSize:chromeFontSize(FS.xs, mobile),fontWeight:700,color,textTransform:'uppercase',letterSpacing:'0.07em',flexShrink:0}}>{displayLabel} ({filtered.length})</span>
         {sorted.filter(n=>n.influence==='high').length > 0 &&
-          <span style={{fontSize:FS.micro,fontWeight:700,color,background:`${color}18`,padding:'0 4px',flexShrink:0}}>●●● ×{sorted.filter(n=>n.influence==='high').length}</span>
+          <span style={{fontSize:chromeFontSize(FS.micro, mobile),fontWeight:700,color,background:`${color}18`,padding:'0 4px',flexShrink:0}}>●●● ×{sorted.filter(n=>n.influence==='high').length}</span>
         }
-        <span style={{fontSize:FS.xxs,color:MUTED,flexShrink:0}}>{open?'▲':'▼'}</span>
+        <span style={{fontSize:chromeFontSize(FS.xxs, mobile),color:MUTED,flexShrink:0}}>{open?'▲':'▼'}</span>
         <div style={{height:1,flex:1,background:`${color}35`}}/>
       </button>
       {open && sorted.map((npc, index) => (
@@ -140,6 +122,20 @@ export function NPCCategoryGroup({
 
 export function NPCRelCard2({rel, style={color:'#6b5340',bg:'#faf8f4',border:'#e0d0b0'}}) {
   const [open,setOpen]=useState(false);
+  // THE TWO PHONE FLOORS — the card's two paragraphs take the PROSE floor; the
+  // role line beneath the names takes the CHROME floor.
+  //
+  // ⚠ THE ROLE LINE HAS NOW BEEN RULED TWICE, AND THE SECOND RULING STANDS. It
+  // was left at 11px when the floor first landed (furniture); the whole-dossier
+  // test then measured it at 45+ characters and it was promoted to 14px prose;
+  // that promotion put it one pixel under the 15px NAMES it sits beneath and
+  // erased the step the card is read by. It is furniture that is long enough to
+  // read, which is exactly the class `chromeFontSize` was cut for: 12px on the
+  // phone, still two clear steps below the name. `data-sf-chrome` DECLARES the
+  // classification to the floor test rather than leaving it to be guessed from
+  // CSS — the line carries no pill, no case and no weight to infer it from.
+  // The names, the kind badge and the emergent tag keep their own steps.
+  const mobile = useIsMobile();
   return (
     <div style={{border:`1px solid ${style.border}`,borderLeft:`3px solid ${style.color}`,overflow:'hidden',marginBottom:10}}>
       <button type="button" aria-expanded={open} aria-label={`Toggle relationship between ${rel.npc1Name} and ${rel.npc2Name}`} onClick={()=>setOpen(v=>!v)} style={{width:'100%',background:open?style.bg:'#faf8f4',border:'none',cursor:'pointer',padding:'10px 14px',textAlign:'left',WebkitTapHighlightColor:'transparent'}}>
@@ -147,18 +143,18 @@ export function NPCRelCard2({rel, style={color:'#6b5340',bg:'#faf8f4',border:'#e
           <div style={{flex:1}}>
             <div style={{display:'flex',alignItems:'center',gap:8,flexWrap:'wrap',marginBottom:3}}>
               <span style={{...serif,fontSize:FS.lg,fontWeight:700,color:swatch.inkMag}}>{rel.npc1Name}</span>
-              <span style={{fontSize:FS.micro,fontWeight:800,color:style.color,background:style.bg,border:`1px solid ${style.border}`,padding:'1px 6px',letterSpacing:'0.05em'}}>{rel.typeName||rel.type}</span>
+              <span style={{fontSize:chromeFontSize(FS.micro, mobile),fontWeight:800,color:style.color,background:style.bg,border:`1px solid ${style.border}`,padding:'1px 6px',letterSpacing:'0.05em'}}>{rel.typeName||rel.type}</span>
               <span style={{...serif,fontSize:FS.lg,fontWeight:700,color:swatch.inkMag}}>{rel.npc2Name}</span>
-              {rel.flagDriven&&<span style={{fontSize:FS.micro,fontWeight:700,color:swatch.magic,background:swatch['#F0EBFF'],padding:'1px 6px'}}>◆ EMERGENT</span>}
+              {rel.flagDriven&&<span style={{fontSize:chromeFontSize(FS.micro, mobile),fontWeight:700,color:swatch.magic,background:swatch['#F0EBFF'],padding:'1px 6px',textTransform:'uppercase'}}>◆ Emergent</span>}
             </div>
-            <div style={{fontSize:FS.xs,color:MUTED}}>{rel.npc1Role} · {rel.strength} · {rel.npc2Role}</div>
+            <div data-sf-chrome="" style={{fontSize:chromeFontSize(FS.xs,mobile),color:MUTED}}>{rel.npc1Role} · {rel.strength} · {rel.npc2Role}</div>
           </div>
-          <span style={{fontSize:FS.xs,color:MUTED,flexShrink:0,paddingTop:2}}>{open?'▲':'▼'}</span>
+          <span style={{fontSize:chromeFontSize(FS.xs, mobile),color:MUTED,flexShrink:0,paddingTop:2}}>{open?'▲':'▼'}</span>
         </div>
       </button>
       {open&&<div style={{padding:'10px 14px',background:swatch['#FAF8F4'],borderTop:`1px solid ${style.border}`}}>
-        <p style={{fontSize:FS.md,color:swatch.inkMag2,lineHeight:1.6,margin:'0 0 10px'}}>{rel.description}</p>
-        {rel.tension&&<div style={{background:swatch['#FDF8E8'],border:'1px solid #e0c860',borderLeft:'3px solid #b8860b',padding:'7px 10px',fontSize:FS.sm,color:swatch['#5A3A10'],lineHeight:1.5}}>{rel.tension}</div>}
+        <p style={{fontSize:proseFontSize(FS.md,mobile),color:swatch.inkMag2,lineHeight:1.6,margin:'0 0 10px'}}>{rel.description}</p>
+        {rel.tension&&<div style={{background:swatch['#FDF8E8'],border:'1px solid #e0c860',borderLeft:'3px solid #b8860b',padding:'7px 10px',fontSize:proseFontSize(FS.sm,mobile),color:swatch['#5A3A10'],lineHeight:1.5}}>{rel.tension}</div>}
       </div>}
     </div>
   );
@@ -166,16 +162,18 @@ export function NPCRelCard2({rel, style={color:'#6b5340',bg:'#faf8f4',border:'#e
 
 export function ConflictCard({conflict:c}) {
   const [_open,_setOpen]=useState(false);
-  const intStyle={high:{color:'#8b1a1a',label:'HIGH TENSION'},moderate:{color:'#a0762a',label:'MODERATE TENSION'},low:{color:'#1a5a28',label:'LOW TENSION'}};
+  // THE PHONE PROSE FLOOR — the description and the stakes sentence.
+  const mobile = useIsMobile();
+  const intStyle={high:{color:'#8b1a1a',label:'High tension'},moderate:{color:'#a0762a',label:'Moderate tension'},low:{color:'#1a5a28',label:'Low tension'}};
   const d=intStyle[c.intensity]||intStyle.moderate;
   return (
     <div style={{background:swatch['#FAF8F4'],border:'1px solid #e8c0c0',borderLeft:'3px solid #8b1a1a',padding:'12px 14px',marginBottom:10}}>
       <div style={{display:'flex',alignItems:'baseline',gap:8,marginBottom:6}}>
-        <span style={{fontSize:FS.micro,fontWeight:800,color:d.color,background:`${d.color}18`,padding:'1px 6px',letterSpacing:'0.05em'}}>{d.label}</span>
+        <span style={{fontSize:chromeFontSize(FS.micro, mobile),fontWeight:800,color:d.color,background:`${d.color}18`,padding:'1px 6px',letterSpacing:'0.05em'}}>{d.label}</span>
         <span style={{...serif,fontSize: FS['14'],fontWeight:600,color:swatch.inkMag}}>{c.parties?.[0]} vs {c.parties?.[1]}</span>
       </div>
-      <p style={{fontSize:FS.md,color:swatch.inkMag2,lineHeight:1.5,margin:'0 0 6px'}}>{c.desc||c.description}</p>
-      {c.stakes&&<div style={{fontSize:FS.xs,color:MUTED,marginBottom:8}}><strong>At stake:</strong> {c.stakes}</div>}
+      <p style={{fontSize:proseFontSize(FS.md,mobile),color:swatch.inkMag2,lineHeight:1.5,margin:'0 0 6px'}}>{c.desc||c.description}</p>
+      {c.stakes&&<div style={{fontSize:proseFontSize(FS.xs,mobile),color:MUTED,marginBottom:8}}><strong>At stake:</strong> {c.stakes}</div>}
       {c.plotHooks?.length>0&&<div style={{borderTop:'1px solid #e8c0c0',paddingTop:8,marginTop:4}}>
         {c.plotHooks.map((h,i)=><PlotHook key={i} text={typeof h==='string'?h:h.hook||Ti(h)}/>)}
       </div>}
@@ -228,11 +226,16 @@ function NPCInlineCard({
     if (idx >= 0) revertUserEditAction('npc', idx, 'secret.what');
   };
   const [open, setOpen] = useState(false);
+  // THE PHONE PROSE FLOOR — every SENTENCE in the expanded card (the
+  // compromise phrase, the replacement note, the whereabouts line, the
+  // structural position, the constraint, the wants, the disposition and the
+  // secret). The trait chips, the influence dots, the name and the labels are
+  // glanced at rather than read, and keep their own scale.
+  const mobile = useIsMobile();
   const color = catColor(npc.category);
   const infDots = npc.influence==='high' ? '●●●' : npc.influence==='moderate' ? '●●' : '●';
   const infColor = npc.influence==='high' ? '#a0762a' : npc.influence==='moderate' ? '#6b5340' : '#9c8068';
   const traits = normalizeNpcTraits(npc);
-  const publicTraits = traits.filter(t => t.visibility !== 'gm');
   // Bank edits declare a role archetype and goal facet. Preserve the NPC's richer
   // authored office/title while making the declared archetype visible, and only
   // humanize values that are known engine vocabulary so free-authored prose is
@@ -255,8 +258,44 @@ function NPCInlineCard({
   // the DM-truth block (bonds/grudges/credibility) is gated in the leaf and left for a
   // worldState-bearing surface; this card reads the mirror-safe view (secrets seam honoured).
   const interiority = npcInteriority({ npc });
-  const interiorityWants = (interiority?.wants || []).map(value => (
+  // THE GOAL IS PRINTED ONCE (2026-09-18). The expanded card used to state it three
+  // times over: a `Goal:` trait chip, an arrow line of its own, and this Wants line —
+  // all three reading the same `npc.goal.short`, so a reader met the same sentence
+  // three times before reaching the secret. Wants is the one that survives, because
+  // it is the line that also carries the ambition.
+  //
+  // The declared goal FACET still reads here, and it has to: the read-model's
+  // `firstText(goal, goals)` can only see authored goal prose, so a bank-edited
+  // person who carries a facet and no prose would otherwise state no want at all.
+  const readWants = (interiority?.wants || []).map(value => (
     NPC_GOALS.includes(value) ? humanizeNpcFacet(value) : value
+  ));
+  const wants = readWants.length > 0 ? readWants : (goalText ? [goalText] : []);
+  const disposition = interiority?.disposition || [];
+  // NO CHIP REPEATS A WANT (2026-09-18). The `Goal:` chip went first, because the
+  // card printed that one sentence three times over. The rule behind it is wider
+  // than the goal, and keying it on a LABEL would have left the same defect a row
+  // away: npcInteriority's wants are goal, ambition and ideal, and
+  // normalizeNpcTraits mints a chip for each of those three from the same fields.
+  // So the filter is on the VALUE — a chip is dropped exactly when the Wants line
+  // above already prints its text, whatever the chip happens to be called.
+  //
+  // Everything the Wants line does NOT carry stays: flaw, bond, loyalty, fear,
+  // temperament, and a second ambition or ideal that differs from the one the
+  // read-model chose. The filter runs here rather than in normalizeNpcTraits
+  // because the dossier entity index reads that same trait list.
+  // ⛔ BOTH SPELLINGS, BECAUSE THE TWO ROWS DO NOT AGREE ON ONE. `readWants`
+  // humanizes a want that is a bank token — `secure_office` becomes `Secure
+  // office` — while the chip's value comes straight out of normalizeNpcTraits and
+  // is still the RAW token. Keyed on the humanized form alone, a person whose
+  // `goal` field holds a bank token printed `Goal: secure_office` beside `Wants
+  // Secure office`: the same goal twice, wearing the other spelling, which is the
+  // exact defect this filter exists to stop. Measured, not supposed.
+  const printedWants = new Set(
+    [...(interiority?.wants || []), ...wants].map(w => String(w).trim().toLowerCase()),
+  );
+  const publicTraits = traits.filter(t => (
+    t.visibility !== 'gm' && !printedWants.has(String(t.value).trim().toLowerCase())
   ));
   // W-C5/W2: the worldPulse-attributed cause + lifecycle stage, rendered through
   // the W2 conjunction ladder (specific -> role -> class -> the W-C5 generic
@@ -273,42 +312,22 @@ function NPCInlineCard({
   const isPinned = pinAvailable && pinnedIds instanceof Set && pinnedIds.has(pinKey);
   const pinColor = swatch['#6A2A9A']; // purple — ties visually to the narrative accent.
 
-  // THE ROW LOCK (see NPC_LOCK_COPY). Gated on the same authoring right as the
-  // Reroll button this lock disarms: a viewer who cannot roll the roster is never
-  // shown a control over that roll. It also needs a DURABLE id — locks name
-  // `npc.id`, never the pin's name fallback, because the preservation engine
-  // matches ids and remaps them when a survivor inherits a fresh slot.
-  const locks = useStore(s => s.locks);
-  const setLock = useStore(s => s.setLock);
-  const rosterLocked = locks?.npcs === true;
-  const lockedIds = Array.isArray(locks?.npcs) ? locks.npcs.map(String) : [];
-  const lockAvailable = canAuthorNpc && npcId != null;
-  const isLocked = rosterLocked || (npcId != null && lockedIds.includes(npcId));
-  const lockNote = rosterLocked ? NPC_LOCK_COPY.section
-    : (isLocked ? NPC_LOCK_COPY.locked : NPC_LOCK_COPY.open);
-  const toggleLock = () => {
-    if (rosterLocked || npcId == null) return;
-    const next = lockedIds.includes(npcId)
-      ? lockedIds.filter(id => id !== npcId)
-      : [...lockedIds, npcId];
-    setLock('npcs', next);
-  };
-
   return (
     <div id={entityAnchor('npc', npc)} style={{
       background:swatch['#FAF8F4'],
-      border:`1px solid ${isPinned ? '#c8a8e8' : `${color}20`}`,
-      borderLeft:`3px solid ${isPinned ? pinColor : color}`,
+      // LONGHANDS ONLY — the shorthand varies with `isPinned`, and pinning a card is
+      // exactly the re-render on which React would reset the 3px accent beside it.
+      ...edged(`1px solid ${isPinned ? '#c8a8e8' : `${color}20`}`, `3px solid ${isPinned ? pinColor : color}`),
       marginBottom:6,overflow:'hidden',
     }}>
       <button type="button" aria-expanded={open} onClick={()=>setOpen(v=>!v)} style={{width:'100%',display:'flex',alignItems:'center',gap:8,padding:'8px 12px',background:'none',border:'none',cursor:'pointer',textAlign:'left',WebkitTapHighlightColor:'transparent'}}>
         <div style={{flex:1,minWidth:0}}>
           <div style={{display:'flex',alignItems:'baseline',gap:6,flexWrap:'wrap'}}>
             <span style={{...serif,fontSize: FS['14'],fontWeight:700,color:swatch.inkMag}}>{npc.name}</span>
-            <span style={{fontSize:FS.xxs,color:MUTED}}>{npc.title}</span>
-            <span style={{fontSize:FS.xs,fontWeight:700,color:infColor,marginLeft:'auto',flexShrink:0}}>{infDots}</span>
+            <span style={{fontSize:chromeFontSize(FS.xxs, mobile),color:MUTED}}>{npc.title}</span>
+            <span style={{fontSize:chromeFontSize(FS.xs, mobile),fontWeight:700,color:infColor,marginLeft:'auto',flexShrink:0}}>{infDots}</span>
           </div>
-          <div style={{fontSize:FS.xs,color:swatch.inkMag3}}>
+          <div style={{fontSize:chromeFontSize(FS.xs, mobile),color:swatch.inkMag3}}>
             {nativeRole}
             {showRoleArchetype ? `${nativeRole ? ' · ' : ''}${roleArchetype} archetype` : ''}
             {npc.factionAffiliation ? ` · ${npc.factionAffiliation}` : ''}
@@ -336,37 +355,7 @@ function NPCInlineCard({
             <Pin size={12} fill={isPinned ? pinColor : 'none'} strokeWidth={isPinned ? 2 : 1.7}/>
           </span>
         )}
-        {lockAvailable && (
-          <span
-            role="button"
-            tabIndex={rosterLocked ? -1 : 0}
-            aria-pressed={isLocked}
-            aria-label={lockNote}
-            aria-disabled={rosterLocked || undefined}
-            onClick={(e)=>{ e.stopPropagation(); toggleLock(); }}
-            onKeyDown={(e)=>{ if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); e.stopPropagation(); toggleLock(); } }}
-            // No native OS tooltip here: the aria-label above ALREADY carries
-            // `lockNote` verbatim, so a hover tooltip would only duplicate the
-            // accessible name — the GUIDE-2 tranche-1 ruling on the two
-            // WorldMapToolbar selects, and the R-3 NarrativeArchivePanel ruling
-            // (drop the tooltip; never let one displace an accessible name).
-            // The glyph pair carries the state visually; the sentence is read.
-            style={{
-              display:'inline-flex',alignItems:'center',justifyContent:'center',
-              width:22,height:22,flexShrink:0,
-              background: isLocked ? LOCK_TONE_BG : 'transparent',
-              border: `1px solid ${isLocked ? LOCK_TONE : 'transparent'}`,
-              color: isLocked ? LOCK_TONE : '#b8a898',
-              cursor: rosterLocked ? 'help' : 'pointer',
-              transition:'all 0.15s',
-            }}
-          >
-            {isLocked
-              ? <Lock size={12} strokeWidth={2}/>
-              : <Unlock size={12} strokeWidth={1.7}/>}
-          </span>
-        )}
-        <span style={{fontSize:FS.xxs,color:MUTED,flexShrink:0}}>{open?'▲':'▼'}</span>
+        <span style={{fontSize:chromeFontSize(FS.xxs, mobile),color:MUTED,flexShrink:0}}>{open?'▲':'▼'}</span>
       </button>
       {open && (
         <div style={{padding:'0 12px 10px',borderTop:`1px solid ${color}15`}}>
@@ -379,17 +368,17 @@ function NPCInlineCard({
           )}
           {publicTraits.length > 0 && (
             <div style={{display:'flex',gap:4,flexWrap:'wrap',marginBottom:6,marginTop:6}}>
-              {publicTraits.map((t,i) => <span key={`${t.key}-${i}`} title={t.value} style={{fontSize:FS.xxs,color:swatch.inkMag3,background:swatch['#EDE3CC'],padding:'0 5px'}}>{t.label}: {t.value}</span>)}
+              {publicTraits.map((t,i) => <span key={`${t.key}-${i}`} title={t.value} style={{fontSize:chromeFontSize(FS.xxs, mobile),color:swatch.inkMag3,background:swatch['#EDE3CC'],padding:'0 5px'}}>{t.label}: {t.value}</span>)}
             </div>
           )}
           {(npc.corrupt || npc.ousted) && (
-            <div style={{display:'flex',alignItems:'center',gap:6,flexWrap:'wrap',margin:'6px 0',fontSize:FS.xs}}>
+            <div style={{display:'flex',alignItems:'center',gap:6,flexWrap:'wrap',margin:'6px 0',fontSize:chromeFontSize(FS.xs, mobile)}}>
               {npc.corrupt ? (
                 // W-C5: the lifecycle stage tunes the badge — a historicized compromise
                 // reads muted ("Longstanding"), an exposed one reads "Exposed", the rest
                 // "Compromised". Falls back to the plain badge when the pulse never touched it.
                 <span style={{
-                  fontWeight:800,letterSpacing:'0.04em',textTransform:'uppercase',
+                  fontWeight:800,
                   ...(compromiseLc?.tone === 'muted'
                     ? { color:swatch.inkMag3, border:`1px solid ${swatch.inkMag3}` }
                     : compromiseLc?.tone === 'exposed'
@@ -399,7 +388,7 @@ function NPCInlineCard({
                 }}>{(compromiseLc?.badge) || 'Compromised'}</span>
               ) : (
                 <span style={{
-                  fontWeight:800,letterSpacing:'0.04em',textTransform:'uppercase',color:swatch.inkMag3,
+                  fontWeight:800,color:swatch.inkMag3,
                   border:`1px solid ${swatch.inkMag3}`,padding:'1px 6px',
                 }}>Exposed</span>
               )}
@@ -409,55 +398,58 @@ function NPCInlineCard({
             </div>
           )}
           {npc.corrupt && compromiseLc?.phrase && (
-            <p style={{fontSize:FS.xs,color:swatch.inkMag3,margin:'2px 0 6px',lineHeight:1.4,fontStyle:'italic'}}>{compromiseLc.phrase}</p>
+            <p style={{fontSize:proseFontSize(FS.xs,mobile),color:swatch.inkMag3,margin:'2px 0 6px',lineHeight:1.4,fontStyle:'italic'}}>{compromiseLc.phrase}</p>
           )}
           {npc.replacedNpc && (
-            <div style={{margin:'6px 0',fontSize:FS.xs,color:swatch.inkMag3,fontStyle:'italic'}}>
+            <div style={{margin:'6px 0',fontSize:proseFontSize(FS.xs,mobile),color:swatch.inkMag3,fontStyle:'italic'}}>
               Newly installed. Replaced {npc.replacedNpc} after a corruption scandal.
             </div>
           )}
           {/* DESIGN_THE_ROADS §12 — the whereabouts line (away/held). Present only when the
               mover wrote the mirror; DM-SECRET by construction (§15). */}
           {wLine && (
-            <div style={{display:'flex',alignItems:'baseline',gap:6,flexWrap:'wrap',margin:'6px 0',fontSize:FS.xs}}>
+            <div style={{display:'flex',alignItems:'baseline',gap:6,flexWrap:'wrap',margin:'6px 0',fontSize:chromeFontSize(FS.xs, mobile)}}>
               {/* Flat material (deep-craft): a colored uppercase label, no box/tint/radius. */}
               <span style={{
-                fontWeight:800,letterSpacing:'0.04em',textTransform:'uppercase',
+                fontWeight:800,
                 color: wBadge === 'Held' ? swatch.danger : swatch.inkMag3,
               }}>{wBadge}</span>
-              <span style={{color:swatch.inkMag3,fontStyle:'italic'}}>{wLine}</span>
+              <span style={{fontSize:proseFontSize(FS.xs,mobile),color:swatch.inkMag3,fontStyle:'italic'}}>{wLine}</span>
             </div>
           )}
-          {goalText && (
-            <p style={{fontSize:FS.sm,color:swatch.inkMag2,margin:'4px 0',lineHeight:1.4}}>
-              <span style={{color:swatch['#A0762A'],fontWeight:700}}>→ </span><ProseParagraph text={goalText} />
-            </p>
-          )}
           {npc.structuralPosition && (
-            <p style={{fontSize:FS.xs,color:swatch.inkMag3,margin:'4px 0',lineHeight:1.4,fontStyle:'italic'}}>{npc.structuralPosition}</p>
+            <p style={{fontSize:proseFontSize(FS.xs,mobile),color:swatch.inkMag3,margin:'4px 0',lineHeight:1.4,fontStyle:'italic'}}>{npc.structuralPosition}</p>
           )}
           {npc.activeConstraint && (
-            <p style={{fontSize:FS.xs,color:swatch.danger,margin:'4px 0',lineHeight:1.4}}>
+            <p style={{fontSize:proseFontSize(FS.xs,mobile),color:swatch.danger,margin:'4px 0',lineHeight:1.4}}>
               <span style={{fontWeight:700}}>Constraint: </span>{npc.activeConstraint}
             </p>
           )}
-          {interiority && (interiorityWants.length > 0 || interiority.disposition.length > 0) && (
+          {(wants.length > 0 || disposition.length > 0) && (
             <div style={{margin:'6px 0',display:'flex',flexDirection:'column',gap:2}}>
-              {interiorityWants.length > 0 && (
-                <div style={{fontSize:FS.xs,color:swatch.inkMag3,lineHeight:1.4}}>
-                  <span style={{fontWeight:700,color:swatch['#A0762A']}}>Wants </span>{interiorityWants.join(' · ')}
+              {wants.length > 0 && (
+                // Each want goes through ProseParagraph: the first one is the goal the
+                // narrative server may have rewritten, and its prose can carry
+                // ⟦entity:…⟧ tokens that would otherwise reach the reader as literals.
+                <div style={{fontSize:proseFontSize(FS.xs,mobile),color:swatch.inkMag3,lineHeight:1.4}}>
+                  <span style={{fontWeight:700,color:swatch['#A0762A']}}>Wants </span>
+                  {wants.map((want, i) => (
+                    <Fragment key={`${want}-${i}`}>
+                      {i > 0 ? ' · ' : ''}<ProseParagraph text={want} />
+                    </Fragment>
+                  ))}
                 </div>
               )}
-              {interiority.disposition.length > 0 && (
-                <div style={{fontSize:FS.xs,color:swatch.inkMag3,lineHeight:1.4}}>
-                  <span style={{fontWeight:700,color:MUTED}}>Disposition </span>{interiority.disposition.join(', ')}
+              {disposition.length > 0 && (
+                <div style={{fontSize:proseFontSize(FS.xs,mobile),color:swatch.inkMag3,lineHeight:1.4}}>
+                  <span style={{fontWeight:700,color:MUTED}}>Disposition </span>{disposition.join(', ')}
                 </div>
               )}
             </div>
           )}
           {(npc.secret || authorEditMode) && (
             <div style={{marginTop:6,background:swatch['#F5F0E8'],padding:'5px 8px'}}>
-              <span style={{fontSize:FS.xxs,fontWeight:700,color:swatch.inkMag3}}>Secret: </span>
+              <span style={{fontSize:chromeFontSize(FS.xxs, mobile),fontWeight:700,color:swatch.inkMag3}}>Secret: </span>
               {canAuthorNpc ? (
                 <EditableText
                   value={secretText}
@@ -468,10 +460,10 @@ function NPCInlineCard({
                   onRevert={canEditSecret ? onRevertSecret : undefined}
                   placeholder="Add a secret…"
                   ariaLabel={`Secret for ${npc.name}`}
-                  textStyle={{fontSize:FS.xs,color:swatch.inkMag2}}
+                  textStyle={{fontSize:proseFontSize(FS.xs,mobile),color:swatch.inkMag2}}
                 />
               ) : (
-                <span style={{fontSize:FS.xs,color:swatch.inkMag2}}>{secretText}</span>
+                <span style={{fontSize:proseFontSize(FS.xs,mobile),color:swatch.inkMag2}}>{secretText}</span>
               )}
             </div>
           )}

@@ -103,6 +103,13 @@
  * Pure. No writes, no store, no React.
  */
 
+// dark-until: Register VII's wiring car — chartered the day the owner signs `REGISTER_VII_SIGNATURE`; until then DELIBERATE-DARK by the owner's unsigned register
+// Having no importer is BY DESIGN here, not orphanhood: this is R23/R24/R25's deciding half,
+// landed ahead of its wiring. It also holds the NAMED promotion path for the R25 mutation
+// plant (scripts/mutation-coverage-manifest.json, the densityLaw.test.js rationale), so it
+// is load-bearing while dark. Disposition and the owner decision point:
+// docs/DEAD_CODE_DISPOSITION.md section "Round-3 additions" (FIX-D9, 2026-09-20).
+// @enforced-by tests/lint/deadCodeDisposition.walker.test.js
 import { compareCodepoint } from '../../domain/deterministicSort.js';
 // ⚠ THE KERNEL'S CLAMP, NOT A LOCAL COPY. `clamp01` had been hand-rolled ~70 times
 // across the engine with THREE divergent non-finite behaviours before `kernel/math.js`

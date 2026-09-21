@@ -14,8 +14,11 @@ import { useState } from 'react';
 import { galleryMemberKey } from '../domain/display/publicSafe.js';
 import { INK, BODY, MUTED, SECOND, BORDER, CARD, sans, FS, swatch } from './theme';
 import Button from './primitives/Button.jsx';
+import useIsMobile from '../hooks/useIsMobile.js';
+import { chromeFontSize, proseFontSize } from '../design/proseScale.js';
 
 export default function GalleryMemberVisibility({ settlement, shareDm, importable, memberOverrides, setMemberOverrides }) {
+  const mobile = useIsMobile();
   const [open, setOpen] = useState(false);
   const npcs = Array.isArray(settlement?.npcs) ? settlement.npcs.filter(n => n && (n.name || n.role)) : [];
   if (npcs.length === 0) return null;
@@ -47,13 +50,13 @@ export default function GalleryMemberVisibility({ settlement, shareDm, importabl
         style={{ justifyContent: 'flex-start', gap: 8, padding: '10px 14px', background: open ? swatch['#FAF6EF'] : CARD, border: 'none', boxShadow: 'none', textAlign: 'left' }}
       >
         <span style={{ fontSize: FS.sm, fontWeight: 700, color: INK, flex: 1 }}>Per-member visibility</span>
-        <span style={{ fontSize: FS.xxs, color: MUTED }}>
+        <span style={{ fontSize: chromeFontSize(FS.xxs, mobile), color: MUTED }}>
           {overriddenCount > 0 ? `${overriddenCount} customized` : 'All follow the settlement'}
         </span>
       </Button>
       {open && (
         <div style={{ padding: '8px 14px 12px', borderTop: `1px solid ${BORDER}`, display: 'flex', flexDirection: 'column', gap: 6 }}>
-          <div style={{ fontSize: FS.xxs, color: BODY, lineHeight: 1.5, marginBottom: 2 }}>
+          <div style={{ fontSize: proseFontSize(FS.xxs, mobile), color: BODY, lineHeight: 1.5, marginBottom: 2 }}>
             Each member follows the settlement settings above. Override one to reveal or hide a single NPC, or to keep them out of imported copies.
           </div>
           {npcs.map(npc => {
@@ -68,9 +71,9 @@ export default function GalleryMemberVisibility({ settlement, shareDm, importabl
               <div key={key} style={{ display: 'flex', alignItems: 'center', gap: 10, flexWrap: 'wrap', padding: '5px 0', borderTop: `1px solid ${BORDER}` }}>
                 <span style={{ flex: 1, minWidth: 120, fontSize: FS.sm, color: INK }}>
                   <span style={{ fontWeight: 600 }}>{npc.name || 'Unnamed'}</span>
-                  {npc.role ? <span style={{ color: SECOND, fontSize: FS.xxs }}> · {npc.role}</span> : null}
+                  {npc.role ? <span style={{ color: SECOND, fontSize: chromeFontSize(FS.xxs, mobile) }}> · {npc.role}</span> : null}
                 </span>
-                <label htmlFor={revealId} style={{ display: 'inline-flex', alignItems: 'center', gap: 5, fontSize: FS.xxs, fontFamily: sans, color: reveal ? swatch.danger : MUTED, cursor: 'pointer' }}>
+                <label htmlFor={revealId} style={{ display: 'inline-flex', alignItems: 'center', gap: 5, fontSize: chromeFontSize(FS.xxs, mobile), fontFamily: sans, color: reveal ? swatch.danger : MUTED, cursor: 'pointer' }}>
                   <input
                     id={revealId}
                     type="checkbox"
@@ -81,7 +84,7 @@ export default function GalleryMemberVisibility({ settlement, shareDm, importabl
                   />
                   Reveal DM
                 </label>
-                <label htmlFor={importId} style={{ display: 'inline-flex', alignItems: 'center', gap: 5, fontSize: FS.xxs, fontFamily: sans, color: allowImport ? INK : MUTED, cursor: 'pointer' }}>
+                <label htmlFor={importId} style={{ display: 'inline-flex', alignItems: 'center', gap: 5, fontSize: chromeFontSize(FS.xxs, mobile), fontFamily: sans, color: allowImport ? INK : MUTED, cursor: 'pointer' }}>
                   <input
                     id={importId}
                     type="checkbox"

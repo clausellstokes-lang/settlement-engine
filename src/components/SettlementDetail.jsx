@@ -37,10 +37,8 @@ import WhatChangedPanel from './settlement/WhatChangedPanel.jsx';
 // Wave R-2 (atlas A20): the event-keyed pre-event narrative archive, read side.
 // Lazy leaf — its chunk loads only when a narrated/stamped save opens edit mode.
 const NarrativeArchivePanel = lazy(() => import('./settlement/NarrativeArchivePanel.jsx'));
-// THE WORLD LOCKS (ODQ §767.2/§777): the "what a new roll keeps" controls live
-// in the settlement editor, beside the regenerate verb they govern. Same lazy
-// leaf the dossier tabs mount for their per-section locks.
-const LockControls = lazy(() => import('./dossier/LockControls.jsx'));
+// (THE WORLD LOCKS — the "What a new roll keeps" box that sat under the regenerate verb
+// in edit mode — were removed by owner order 2026-09-17, with their lazy import.)
 // Campaign-state engine UI — phase, locks, system state, events,
 // timeline, coherence checks. Each is hidden when not relevant
 // (Timeline only shows in canon, CoherencePanel only in draft).
@@ -80,8 +78,10 @@ import NetworkEffectsPanel from './settlementDetail/SettlementDetailNetworkEffec
 import LinkNeighbourCard from './settlementDetail/SettlementDetailLinkNeighbourCard.jsx';
 import SettlementDetailEditNames from './settlementDetail/SettlementDetailEditNames.jsx';
 import { INK, MUTED, SECOND, BORDER, CARD, sans, serif_, FS, swatch } from './theme';
-import { REL_HEX, relColor } from './settlements/relationshipColors.js';
+import { REL_HEX, relColor } from '../domain/display/relationshipColors.js';
 import { track, EVENTS } from '../lib/analytics.js';
+import useIsMobile from '../hooks/useIsMobile.js';
+import { chromeFontSize } from '../design/proseScale.js';
 
 // §67.2: the copy that stood here carried the canonical VALUES but was missing
 // `vassal` and `criminal_network` entirely, so those two live edge types fell to
@@ -182,6 +182,7 @@ export default function SettlementDetail({
   handleLink, removeNeighbour, applyRename,
   onLoad,
 }) {
+  const mobile = useIsMobile();
   const [editingName, setEditingName] = useState(null);  // {type,id,oldName}
   const [editDraft,   setEditDraft]   = useState('');
   const [_saved,       _setSaved]      = useState(false);
@@ -512,7 +513,7 @@ export default function SettlementDetail({
               title="This dossier contains hand-edited prose. An edited NPC survives an NPC reroll; the AI overlay passes edits through verbatim."
               style={{
                 display:'inline-flex',alignItems:'center',gap:4,
-                padding:'3px 9px',fontSize:FS.xxs,fontWeight:800,
+                padding:'3px 9px',fontSize:chromeFontSize(FS.xxs, mobile),fontWeight:800,
                 fontFamily:sans,letterSpacing:'0.07em',textTransform:'uppercase',
                 background:'transparent',
                 color:swatch.ai,
@@ -573,7 +574,7 @@ export default function SettlementDetail({
           ShareToGallery self-gates on auth + canonized state. */}
       {saveId && shareOpen && (
         <div style={{ border:`1px solid ${BORDER}`, padding:'10px 14px', marginBottom:14, background:CARD }}>
-          <div style={{ fontSize:FS.xxs, fontWeight:800, color:MUTED, textTransform:'uppercase', letterSpacing:'0.06em', marginBottom:8, display:'flex', alignItems:'center', gap:6 }}>
+          <div style={{ fontSize:chromeFontSize(FS.xxs, mobile), fontWeight:800, color:MUTED, textTransform:'uppercase', letterSpacing:'0.06em', marginBottom:8, display:'flex', alignItems:'center', gap:6 }}>
             <Share2 size={12}/> {liveSaveEntry?.is_public ? 'Edit Gallery Listing' : 'Share to Gallery'}
           </div>
           <ShareToGallery
@@ -605,20 +606,9 @@ export default function SettlementDetail({
         <Button variant="info" size="sm" onClick={()=>{onLoad({settlement:currentSettlement,config:detail.config,institutionToggles:detail.institutionToggles,categoryToggles:detail.categoryToggles,goodsToggles:detail.goodsToggles||{},servicesToggles:detail.servicesToggles||{},});setDetail(null);}}>
           ↩ Apply Saved Configuration &amp; Regenerate
         </Button>
-        <span style={{fontSize:FS.xxs,color:SECOND,lineHeight:1.4,flex:1,background:CARD,padding:'4px 8px',border:`1px solid ${BORDER}`}}>
+        <span style={{fontSize:chromeFontSize(FS.xxs, mobile),color:SECOND,lineHeight:1.4,flex:1,background:CARD,padding:'4px 8px',border:`1px solid ${BORDER}`}}>
           Restores settings &amp; runs a fresh generation. The new settlement will differ from the saved one.
         </span>
-      </div>
-
-      {/* What a new roll keeps — the world locks (name / ground / seat), seated
-          beside the regenerate verb above per the §767.2/§777 relocation. */}
-      <div style={{marginBottom:12,padding:'8px 12px',background:CARD,border:`1px solid ${BORDER}`}}>
-        <div style={{fontFamily:sans,fontSize:FS.xxs,fontWeight:800,color:MUTED,textTransform:'uppercase',letterSpacing:'0.06em',marginBottom:6}}>
-          What a new roll keeps
-        </div>
-        <Suspense fallback={<div style={{fontFamily:sans,fontSize:FS.xxs,color:MUTED}}>Setting out the name, ground and seat locks…</div>}>
-          <LockControls scope="world" />
-        </Suspense>
       </div>
 
       {/* ── Campaign-state engine ─────────────────────────────────────────
@@ -697,13 +687,13 @@ export default function SettlementDetail({
         <button type="button" aria-pressed={linking} onClick={()=>setLinking(v=>!v)} style={{ width:'100%', display:'flex', alignItems:'center', gap:8, padding:'10px 14px', background:linking?'#f5ede0':CARD, border:'none', cursor:'pointer', textAlign:'left' }}>
           <Link2 size={14} color="#2a3a7a"/>
           <span style={{ fontFamily:serif_, fontSize:FS.md, fontWeight:600, color:INK, flex:1 }}>Link a Neighbouring Settlement</span>
-          <span style={{ fontSize:FS.xxs, color:MUTED }}>{linking?'Cancel':'Connect to another saved settlement'}</span>
+          <span style={{ fontSize:chromeFontSize(FS.xxs, mobile), color:MUTED }}>{linking?'Cancel':'Connect to another saved settlement'}</span>
         </button>
         {linking&&<div style={{ padding:'10px 14px', borderTop:`1px solid ${BORDER}` }}><LinkNeighbourCard currentSave={detail} allSaves={saves} onLink={handleLink}/></div>}
       </div>
 
       {network.length>0&&!linking&&<div style={{background:swatch['#FAF8F4'],border:'1px solid #c0c8e8',borderLeft:'3px solid #2a3a7a',padding:'12px 14px',marginBottom:14}}>
-        <div style={{fontSize:FS.xs,fontWeight:700,color:swatch.info,textTransform:'uppercase',letterSpacing:'0.06em',marginBottom:8,display:'flex',alignItems:'center',gap:6}}>
+        <div style={{fontSize:chromeFontSize(FS.xs, mobile),fontWeight:700,color:swatch.info,textTransform:'uppercase',letterSpacing:'0.06em',marginBottom:8,display:'flex',alignItems:'center',gap:6}}>
           <Link2 size={12}/> Neighbour Network ({network.length})
         </div>
         {network.map((n,i)=>{
@@ -712,7 +702,7 @@ export default function SettlementDetail({
           return<div key={i} style={{display:'flex',alignItems:'center',gap:8,padding:'4px 0',borderBottom:'1px solid #dde4f8'}}>
             <div style={{width:6,height:6,borderRadius:'50%',background:c,flexShrink:0}}/>
             <span style={{fontSize:FS.sm,fontWeight:600,color:INK,flex:1}}>{n.name}</span>
-            <span style={{fontSize:FS.xxs,color:c,fontWeight:600,background:`${c}18`,padding:'1px 6px'}}>{rel}</span>
+            <span style={{fontSize:chromeFontSize(FS.xxs, mobile),color:c,fontWeight:600,background:`${c}18`,padding:'1px 6px'}}>{rel}</span>
             <IconButton Icon={X} label="Remove link" tone="ghost" size="md" onClick={()=>removeNeighbour(i)} />
           </div>;
         })}

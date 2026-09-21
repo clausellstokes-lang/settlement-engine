@@ -14,6 +14,8 @@ import Page from '../primitives/Page.jsx';
 import PageHeader from '../primitives/PageHeader.jsx';
 import { PROSE_MAX, INK, BODY, GOLD_DEEP, BORDER, CARD, serif_, sans, FS, SP } from '../theme.js';
 import { POLICY_STATUS, POLICY_EFFECTIVE } from '../../lib/policyVersion.js';
+import useIsMobile from '../../hooks/useIsMobile.js';
+import { chromeFontSize, proseFontSize } from '../../design/proseScale.js';
 
 /** A titled prose section. */
 export function LegalSection({ heading, id, children }) {
@@ -57,6 +59,7 @@ export function LegalList({ items }) {
 }
 
 export default function LegalPage({ eyebrow, title, subtitle, children }) {
+  const mobile = useIsMobile();
   return (
     <Page max={PROSE_MAX}>
       <PageHeader eyebrow={eyebrow} title={title} subtitle={subtitle} />
@@ -67,7 +70,7 @@ export default function LegalPage({ eyebrow, title, subtitle, children }) {
         marginBottom: SP.lg, padding: `${SP.sm}px ${SP.md}px`,
         background: CARD, border: `1px solid ${BORDER}`,
         borderLeft: `4px solid ${GOLD_DEEP}`,
-        fontFamily: sans, fontSize: FS.xs, color: BODY, lineHeight: 1.5,
+        fontFamily: sans, fontSize: proseFontSize(FS.xs, mobile), color: BODY, lineHeight: 1.5,
       }}>
         <strong style={{ color: INK }}>{POLICY_STATUS}.</strong>{' '}
         This page is a working draft written from how the product actually

@@ -23,6 +23,7 @@ import { type, palette, space, pt } from '../theme.js';
 import { label, hookText, humanize, safe } from '../lib/format.js';
 import { EntityRef, anchorTarget } from '../primitives/EntityRef.jsx';
 import { ProseText } from '../primitives/ProseText.jsx';
+import { tokenCase } from '../../domain/display/labelCase.js';
 
 /**
  * TextRow — Label · prose value pair, but the value is rendered as plain
@@ -37,14 +38,14 @@ function TextRow({ label: l, value, multiline = false, labelWidth = 90, marginBo
     <View style={{ flexDirection: 'row', marginBottom, alignItems: 'flex-start' }}>
       <Text
         style={{
-          ...type.label,
+          ...type.label_plain,
           color: palette.muted,
           fontSize: pt['7.5'],
           width: labelWidth,
           paddingTop: 2,
         }}
       >
-        {String(l || '').toUpperCase()}
+        {tokenCase(String(l || ''))}
       </Text>
       <Text style={{ ...type.body, fontSize: pt['9.5'], flex: 1, lineHeight: multiline ? 1.4 : 1.3 }}>
         {/* When an entity index is supplied, the value may carry ⟦entity:…⟧
@@ -185,10 +186,13 @@ function FullCard({ npc, index }) {
       {/* Identity meta line */}
       <KeyValRow
         pairs={[
-          npc.race ? { label: 'RACE', value: humanize(npc.race) } : null,
-          npc.gender ? { label: 'SEX', value: humanize(npc.gender) } : null,
-          npc.age ? { label: 'AGE', value: npc.age } : null,
-          npc.influenceLabel ? { label: 'INFL', value: npc.influenceLabel } : null,
+          npc.race ? { label: 'Race', value: humanize(npc.race) } : null,
+          npc.gender ? { label: 'Sex', value: humanize(npc.gender) } : null,
+          npc.age ? { label: 'Age', value: npc.age } : null,
+          // 'INFL' is SPELLED OUT rather than re-cased: tokenCase('INFL') is 'Infl',
+          // which is not a word, and an abbreviation that reads as a typo in sentence
+          // case has to become the word it abbreviates or stay an abbreviation.
+          npc.influenceLabel ? { label: 'Influence', value: npc.influenceLabel } : null,
         ].filter(Boolean)}
       />
 

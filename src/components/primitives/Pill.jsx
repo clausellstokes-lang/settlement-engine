@@ -19,6 +19,8 @@
  */
 import { FS, R, sans } from '../theme.js';
 import { useIconsOn } from './IconsContext.js';
+import useIsMobile from '../../hooks/useIsMobile.js';
+import { chromeFontSize } from '../../design/proseScale.js';
 
 export default function Pill({
   children,
@@ -29,6 +31,7 @@ export default function Pill({
   style,
   ...rest
 }) {
+  const mobile = useIsMobile();
   const iconsOn = useIconsOn();
   return (
     <span
@@ -36,8 +39,7 @@ export default function Pill({
         display: 'inline-flex', alignItems: 'center', gap: 3,
         padding: '2px 8px', borderRadius: R.md,
         background: bg, color,
-        fontFamily: sans, fontSize: FS.xs, fontWeight: 700,
-        textTransform: 'uppercase', letterSpacing: '0.04em',
+        fontFamily: sans, fontSize: chromeFontSize(FS.xs, mobile), fontWeight: 700,
         whiteSpace: 'nowrap',
         ...(absolute ? { position: 'absolute' } : null),
         ...style,

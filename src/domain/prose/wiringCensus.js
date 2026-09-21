@@ -577,7 +577,7 @@ export function wiringCensus(input) {
   const prepared = new Map();
   for (const fn of fns) {
     // ⛔ KEYED ON `file::name`, NEVER ON THE BARE NAME (INSTR-912 car 10, cure 8). Two desks
-    // both export `foodSecurityPoolKey` (`economyStateProse.js:393`, `generalStateProse.js:353`),
+    // both export `foodSecurityPoolKey` (`economyStateProse.js:394`, `generalStateProse.js:354`),
     // so a bare-name key silently dropped one of them: 118 functions found, 117 consulted,
     // and the walker asserted 118 — `fns.length`, not what the ladder reads. Harmless at this
     // tip (both are corpus-derived and return no literal), and the next same-named pair would

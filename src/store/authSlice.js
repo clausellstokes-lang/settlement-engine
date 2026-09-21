@@ -16,11 +16,29 @@
  *   'developer' – full bypass of all tier restrictions, admin panel access
  *   'admin'     – admin panel access, user management
  *
- * Developers/admins bypass ALL tier gates automatically.
+ * Developers/admins bypass ALL tier gates automatically — WHILE THE UNLOCK STANDS.
  * AI features are gated by credits (creditsSlice), not tier — except developers get unlimited.
+ *
+ * ⛔ THE STAFF BYPASS IS THE OWNER'S TEMPORARY ORDER, NOT A PROPERTY OF THE ROLE
+ * (ODQ §934.28: "enable all paid for features (for right now) to all developers
+ * and admin for testing purposes"). It is spelled ONCE, in
+ * src/lib/staffEntitlements.js, behind STAFF_UNLOCK_ALL_PAID. Flip that constant
+ * to false and every gate below reverts to TIER_GATE for staff too; nothing in
+ * this file needs editing. Read that module's header for exactly what the switch
+ * reaches and what it deliberately does not.
+ *
+ * ⛔ AND THERE IS A DEV-ONLY PREVIEW PERSONA (ODQ §934.35): `VITE_PREVIEW_ROLE`
+ * in the dev server's `.env.local` seats 'admin' or 'developer' as the ROLE every
+ * writer below resolves through, so a local preview renders the admin surface
+ * with NO account, NO password and NO claim to the server — the session stays
+ * whatever it really is and the server keeps every one of its own gates. It is
+ * `import.meta.env.DEV`-guarded, so a production build eliminates it entirely.
+ * Full rationale at `previewPersonaRole()` below; operator instructions in
+ * docs/DEPLOY.md ("Local preview — the DEV-only admin persona").
  */
 
 import { auth as authService } from '../lib/auth.js';
+import { isStaffRole, staffUnlocksPaidFeatures } from '../lib/staffEntitlements.js';
 import { DEFAULT_MODEL_PREFERENCE } from '../config/pricing.js';
 import { activateOutboxOwner } from './outbox.js';
 import { normalizeSavedSettlementsOwnerId } from './savedSettlementsHydration.js';
@@ -44,10 +62,27 @@ import { normalizeSavedSettlementsOwnerId } from './savedSettlementsHydration.js
 // export surfaces read `canExport()` and route a non-exporting tier to the
 // entitlement/purchase rung (BuyThisDossier). Anon has always been false (the anon
 // one-shot buy path). This flip activates the built-but-dormant $2.99 ladder.
+//
+// ⛔ THE ANONYMOUS ROW IS A RANGE AND A LOCK, NOT ONE CEILING (the owner, §934.34: "only
+// hamlet, village, and town can be accessed without signing in and only with everything
+// on random"). Two fields carry it, and both are ENFORCEMENT — the display layer derives
+// from them (config/tierFacts.js ANON_SIZES / PRE_GEN_OPTIONS, held equal by
+// tests/config/tierFacts.contract.test.js):
+//
+//   `minTier`        THE FLOOR. A ceiling alone could never express this rule: thorp is
+//                    RANK 0, so `maxTier: 'town'` admitted it, and an anonymous visitor
+//                    could forge a thorpe the product does not offer them. A thorpe now
+//                    requires an account, like a city and a metropolis.
+//   `preGenOptions`  THE PRE-GENERATION CONFIGURATION — name, terrain, culture,
+//                    priorities, magic, the constraint grids. False for anon: they pick a
+//                    size and forge with everything else on random. NOT the same gate as
+//                    `customContent`, which is the Compendium's authored content and stays
+//                    a Cartographer capability; the two are deliberately separate fields
+//                    because the owner ruled them on opposite sides.
 export const TIER_GATE = {
-  anon:    { maxTier: 'town',    maxSaves: 0,        neighbour: false, export: false, mapChains: false, customContent: false },
-  free:    { maxTier: 'capital', maxSaves: 3,        neighbour: false, export: false, mapChains: false, customContent: false },
-  premium: { maxTier: 'capital', maxSaves: Infinity, neighbour: true,  export: true,  mapChains: true,  customContent: true  },
+  anon:    { minTier: 'hamlet', maxTier: 'town',    maxSaves: 0,        neighbour: false, export: false, mapChains: false, customContent: false, preGenOptions: false },
+  free:    { minTier: 'thorp',  maxTier: 'capital', maxSaves: 3,        neighbour: false, export: false, mapChains: false, customContent: false, preGenOptions: true  },
+  premium: { minTier: 'thorp',  maxTier: 'capital', maxSaves: Infinity, neighbour: true,  export: true,  mapChains: true,  customContent: true,  preGenOptions: true  },
 };
 
 // `capital` is the legacy tier name that lines up with pricing.js's maxSize
@@ -63,15 +98,87 @@ const TIER_RANK = { thorp: 0, hamlet: 1, village: 2, town: 3, city: 4, capital: 
 // for every account tier (ported master fix).
 const ALLOWED_UNRANKED_TIERS = new Set(['random', 'custom']);
 
-/** Roles that bypass all tier restrictions */
-const ELEVATED_ROLES = ['developer', 'admin'];
+// ⛔ THE ROLE QUESTION HAS ONE HOME: src/lib/staffEntitlements.js. This slice used
+// to keep its own `ELEVATED_ROLES = ['developer','admin']` and ten call sites
+// spelling `ELEVATED_ROLES.includes(...)`, while eight other modules hand-copied
+// the same disjunction — the drift class the premium-gate census exists against,
+// and with no single line anyone could flip to take a temporary unlock back.
+// ODQ §934.28 made the unlock temporary by the owner's own words ("for right
+// now"), so the two questions now come from the one module:
+//   isStaffRole(role)             IDENTITY — is this account staff? Never switched.
+//   staffUnlocksPaidFeatures(role) ENTITLEMENT — does staff get the paid surface?
+//                                  Governed by STAFF_UNLOCK_ALL_PAID.
 
-// Elevated roles (admin / developer) carry a perpetual Cartographer (premium)
-// status: they never pay, and their account reads as Cartographer everywhere
-// `auth.tier` is consulted. Whatever billing tier the profile reports is
-// overridden to 'premium' for these roles.
+// An UNLOCKED staff account (admin / developer) carries a perpetual Cartographer
+// (premium) status: they never pay, and their account reads as Cartographer
+// everywhere `auth.tier` is consulted. Whatever billing tier the profile reports
+// is overridden to 'premium' for those roles. With the unlock revoked this
+// returns the account's real billing tier, so every gate below answers from
+// TIER_GATE exactly as it does for a member.
 function resolveTier(tier, role) {
-  return ELEVATED_ROLES.includes(role) ? 'premium' : (tier || 'free');
+  return staffUnlocksPaidFeatures(role) ? 'premium' : (tier || 'free');
+}
+
+/**
+ * ⛔ THE DEV-ONLY PREVIEW PERSONA (ODQ §934.35). The owner asked for "a dummy
+ * admin account for our preview purposes only". NOBODY CREATES AN ACCOUNT HERE —
+ * this is a VIEW, not an identity. It supplies the ROLE that the client's own
+ * gates read, so a preview session renders the admin surface (the Developer
+ * Admin Panel row, /admin, every tier gate open) while the SESSION stays exactly
+ * what it really is: anonymous, or whoever is genuinely signed in.
+ *
+ * ⛔ NOTHING IS CLAIMED TO THE SERVER, AND THAT IS THE WHOLE SAFETY ARGUMENT.
+ * The persona is read HERE and nowhere else. No request header, no body field,
+ * no JWT claim and no profiles write carries it; the Supabase client is
+ * constructed from the anon key alone and is never handed a persona. So every
+ * server gate — RLS, current_user_is_privileged(), the audited admin-actions
+ * function, has_surveyor_entitlement() — answers for the REAL caller and refuses
+ * a persona exactly as it refuses any stranger. A preview admin can SEE the
+ * admin chrome; it cannot read or write one row it was not already entitled to.
+ * That asymmetry is deliberate: it is what makes a dummy admin safe to have.
+ *
+ * ⛔ IT CANNOT EXIST IN PRODUCTION. The branch is `import.meta.env.DEV && …`,
+ * and Vite replaces `import.meta.env.DEV` with the literal `false` in a
+ * production build, so Rollup eliminates the whole body as dead code — the
+ * shipped bundle contains neither this mechanism nor the variable's name.
+ * tests/build/previewPersonaAbsent.test.js proves that against the real dist,
+ * and tests/store/previewPersona.test.js proves the predicate is inert with DEV
+ * false and that nothing injects it into a request.
+ *
+ * SET IT in the preview worktree's `.env.local` (gitignored, .gitignore:5),
+ * which the dev server loads by Vite's default env handling:
+ *     VITE_PREVIEW_ROLE=admin      # or: developer
+ * Any other value — including a plausible one like 'owner' or 'staff' — is
+ * REFUSED by isStaffRole and reads as no persona at all (fail-closed).
+ *
+ * The account menu shows "PREVIEW PERSONA · admin" while it is active, so no one
+ * can mistake the preview for a real session.
+ *
+ * @returns {string|null} 'admin' | 'developer' while previewing, else null
+ */
+function previewPersonaRole() {
+  // MODE !== 'test': a vitest run also reports DEV, and the preview worktree's .env.local
+  // would otherwise seat every anonymous test visitor as staff (measured 2026-09-19).
+  if (import.meta.env.DEV && import.meta.env.MODE !== 'test' && import.meta.env.VITE_PREVIEW_ROLE) {
+    const asked = String(import.meta.env.VITE_PREVIEW_ROLE).trim();
+    return isStaffRole(asked) ? asked : null;
+  }
+  return null;
+}
+
+/**
+ * THE ONE PLACE A ROLE IS DECIDED for client-side state. Every auth writer below
+ * goes through it, so the persona cannot be honoured on one path and forgotten
+ * on another — the bug shape §934.28 had just cured on the TIER path, where
+ * authSignIn alone skipped resolveTier.
+ *
+ * With no persona this is exactly the `role || 'user'` every writer used before.
+ *
+ * @param {string|null|undefined} role the role from the authenticated profile
+ * @returns {string}
+ */
+function resolveRole(role) {
+  return previewPersonaRole() || role || 'user';
 }
 let authUnsubscribe = null;
 // M-9d — teardown for the single-session validation loop (focus/visibility + interval).
@@ -103,8 +210,11 @@ export const createAuthSlice = (set, get) => ({
   auth: {
     user: null,           // Supabase user object (null = anonymous)
     session: null,        // Supabase session
-    tier: 'anon',         // 'anon' | 'free' | 'premium'
-    role: 'user',         // 'user' | 'developer' | 'admin'
+    // §934.35: a DEV preview persona seats its role (and therefore its tier)
+    // from the first frame, before any auth resolves. With no persona both
+    // resolvers are the identity they always were ('anon' / 'user').
+    tier: resolveTier('anon', resolveRole(null)),   // 'anon' | 'free' | 'premium'
+    role: resolveRole(null),                        // 'user' | 'developer' | 'admin'
     displayName: null,    // custom display name (from profiles table)
     isFounder: false,     // founder lifetime grant (from profiles table)
     avatarUrl: null,      // optional profile avatar URL
@@ -146,8 +256,8 @@ export const createAuthSlice = (set, get) => ({
       state.auth = {
         user,
         session,
-        tier: resolveTier(tier, role),
-        role: role || 'user',
+        tier: resolveTier(tier, resolveRole(role)),
+        role: resolveRole(role),
         displayName: displayName || null,
         isFounder: Boolean(isFounder),
         avatarUrl: avatarUrl || null,
@@ -204,7 +314,21 @@ export const createAuthSlice = (set, get) => ({
       // Other slices may not be present in isolated unit tests.
     }
     set(state => {
-      state.auth = { user: null, session: null, tier: 'anon', role: 'user', displayName: null, isFounder: false, avatarUrl: null, emailNotifications: true, modelPreference: DEFAULT_MODEL_PREFERENCE, loading: false, error: null };
+      // ⛔ SIGN-OUT LEAVES THE EDITOR'S WORLD STANDING, deliberately: eviction
+      // routes through here and must NEVER destroy unsaved work (see
+      // evictSession). It used to need a companion bar — a `signedInWorld` claim
+      // raised here — because the persist projection gated the anonymous-draft
+      // envelope on the TIER, and sign-out sets tier 'anon', so the very next
+      // store write stashed the departing account's loaded world (possibly one of
+      // their SAVES) into this device's localStorage. The projection now reads
+      // `state.draftOrigin` — whose session put the world in the editor, a
+      // transient root field, never a key on the world — and an account's world
+      // answers 'account' whoever is signed in a moment later, so there is no bar
+      // to raise here and nothing to retract anywhere. ⚠ THAT ONLY HOLDS WHILE
+      // EVERY DOOR THAT MAKES A WORLD AN ACCOUNT'S SAYS SO: the post-signup
+      // SAVE_SETTLEMENT intent did not, and left exactly this leak open (cured at
+      // its handler in store/index.js).
+      state.auth = { user: null, session: null, tier: resolveTier('anon', resolveRole(null)), role: resolveRole(null), displayName: null, isFounder: false, avatarUrl: null, emailNotifications: true, modelPreference: DEFAULT_MODEL_PREFERENCE, loading: false, error: null };
       // Durable-rights cache is per-user — drop it on sign-out so a later user on
       // the same device never reads the previous account's entitlements.
       state.dossierEntitlements = {};
@@ -282,10 +406,14 @@ export const createAuthSlice = (set, get) => ({
     return held;
   },
 
-  // ── Role queries ──────────────────────────────────────────────────────────
+  // ── Role queries (IDENTITY — never governed by the paid-unlock switch) ────
+  // These answer "is this account staff", which the admin panel, the account
+  // menu's Developer row and the elevated route guard ask. Revoking a testing
+  // convenience must never lock the owner out of the admin panel, so the kill
+  // switch deliberately does not reach them.
   isDeveloper: () => get().auth.role === 'developer',
-  isAdmin: () => ELEVATED_ROLES.includes(get().auth.role),
-  isElevated: () => ELEVATED_ROLES.includes(get().auth.role),
+  isAdmin: () => isStaffRole(get().auth.role),
+  isElevated: () => isStaffRole(get().auth.role),
   /** Whether the user's account tier grants premium benefits (unlimited
    *  chronicle history, supply chains, custom content, etc.). Orthogonal to
    *  role — an elevated role is checked separately via isElevated(). */
@@ -308,7 +436,7 @@ export const createAuthSlice = (set, get) => ({
         set(state => {
           state.auth = {
             user: result.user, session: result.session,
-            tier: resolveTier(result.tier, result.role), role: result.role || 'user',
+            tier: resolveTier(result.tier, resolveRole(result.role)), role: resolveRole(result.role),
             displayName: result.displayName || null,
             isFounder: Boolean(result.isFounder),
             avatarUrl: result.avatarUrl || null,
@@ -328,6 +456,16 @@ export const createAuthSlice = (set, get) => ({
       console.error('Auth init error:', e);
       set(state => { state.auth.loading = false; state.auth.error = e.message; });
     }
+
+    // ⛔ NOTHING IS SPENT HERE ANY MORE, and the absence is the design. This
+    // resolution used to settle the anonymous-draft claim a rehydrate had raised
+    // — dropping the adopted draft whenever the session turned out to be signed
+    // in — and every edge of that drop was wrong in turn: a sign-in racing a slow
+    // getSession() spent it early, a redirect door could not retract it in state
+    // at all, and the drop had to reach past `settlement` into systemState, the
+    // event log and the draft timeline to be whole. A device's anonymous draft
+    // now simply belongs to the device (store/persistProjection.js), so there is
+    // no gate at the boot answer and no draft is ever taken off the screen.
 
     // Listen for auth state changes (token refresh, sign out from another tab).
     // initAuth can run more than once under HMR/remounts, so keep exactly one
@@ -351,8 +489,8 @@ export const createAuthSlice = (set, get) => ({
         }
         set(state => {
           state.auth = {
-            user, session, tier: resolveTier(tier, role),
-            role: role || 'user',
+            user, session, tier: resolveTier(tier, resolveRole(role)),
+            role: resolveRole(role),
             displayName: displayName || null,
             isFounder: Boolean(isFounder),
             avatarUrl: avatarUrl || null,
@@ -455,7 +593,7 @@ export const createAuthSlice = (set, get) => ({
         set(state => {
           state.auth = {
             user: result.user, session: result.session,
-            tier: resolveTier(result.tier, result.role), role: result.role || 'user',
+            tier: resolveTier(result.tier, resolveRole(result.role)), role: resolveRole(result.role),
             displayName: result.displayName || null,
             isFounder: Boolean(result.isFounder),
             avatarUrl: result.avatarUrl || null,
@@ -466,6 +604,9 @@ export const createAuthSlice = (set, get) => ({
         });
         activateOutboxOwner(result.user?.id);
       } else {
+        // No session yet: the account needs email verification. Nothing is stashed
+        // for the return trip — the draft on screen is persisted as the device's
+        // own and the fresh boot adopts it, so there is no claim to carry.
         set(state => { state.auth.loading = false; });
       }
       return { needsVerification: result.needsVerification, existingAccount: result.existingAccount };
@@ -486,7 +627,16 @@ export const createAuthSlice = (set, get) => ({
       set(state => {
         state.auth = {
           user: result.user, session: result.session,
-          tier: result.tier, role: result.role || 'user',
+          // ⛔ THE ONE PATH THAT DID NOT RESOLVE THE TIER (found in the §934.28
+          // recon). Every other writer — setAuth, initAuth, authSignUp and the
+          // onAuthChange SIGNED_IN/TOKEN_REFRESHED handler — passes the profile
+          // tier through resolveTier, so a staff account reads 'premium'. This
+          // one wrote `result.tier` raw, so a developer/admin signing in with a
+          // password briefly held their REAL billing tier ('free') and every
+          // TIER_GATE read refused them until the auth-state listener happened
+          // to land and repair it. A race decided whether staff saw the paid
+          // surface. It resolves here now, like its four siblings.
+          tier: resolveTier(result.tier, resolveRole(result.role)), role: resolveRole(result.role),
           displayName: result.displayName || null,
           isFounder: Boolean(result.isFounder),
           avatarUrl: result.avatarUrl || null,
@@ -618,6 +768,13 @@ export const createAuthSlice = (set, get) => ({
    * established when the user lands back on our origin and the
    * onAuthStateChange listener fires SIGNED_IN.
    *
+   * ⛔ THE REDIRECT NEEDS NO DEVICE-LOCAL RESCUE ANY MORE. This door used to stash
+   * the anonymous-draft claim in sessionStorage before navigating away, because a
+   * door that leaves the page cannot retract a store flag and the return was a
+   * fresh boot whose resolution would have dropped the very draft the visitor
+   * left to go and claim. The draft is now simply the device's until someone
+   * clears it, so the return boot adopts it like any other boot.
+   *
    * @param {'google' | 'discord' | 'github'} provider
    */
   authOAuth: async (provider) => {
@@ -643,19 +800,24 @@ export const createAuthSlice = (set, get) => ({
 
   // ── Permission queries (elevated roles bypass all gates) ──────────────────
   canSave: () => {
-    if (ELEVATED_ROLES.includes(get().auth.role)) return true;
-    const { tier } = get().auth;
+    // The staff unlock opens every PAID gate, but a save needs a real session as
+    // well: the server refuses an unauthenticated insert, and under the dev-only
+    // preview persona (a role with no user) the client would otherwise offer a
+    // door it knows cannot open, then say nothing loud enough (browser pass 3,
+    // 2026-09-19). With no session the anonymous save door renders — the truth.
+    const { role, user, tier } = get().auth;
+    if (staffUnlocksPaidFeatures(role)) return Boolean(user);
     return TIER_GATE[tier]?.maxSaves > 0;
   },
 
   canUseNeighbour: () => {
-    if (ELEVATED_ROLES.includes(get().auth.role)) return true;
+    if (staffUnlocksPaidFeatures(get().auth.role)) return true;
     const { tier } = get().auth;
     return TIER_GATE[tier]?.neighbour === true;
   },
 
   canExport: () => {
-    if (ELEVATED_ROLES.includes(get().auth.role)) return true;
+    if (staffUnlocksPaidFeatures(get().auth.role)) return true;
     const { tier } = get().auth;
     return TIER_GATE[tier]?.export === true;
   },
@@ -669,32 +831,56 @@ export const createAuthSlice = (set, get) => ({
   // fire the map_realm_teaser pricing moment. The stored layers.chains default
   // is untouched, so an upgrade restores the layer without re-toggling.
   canUseMapChains: () => {
-    if (ELEVATED_ROLES.includes(get().auth.role)) return true;
+    if (staffUnlocksPaidFeatures(get().auth.role)) return true;
     const { tier } = get().auth;
     return TIER_GATE[tier]?.mapChains === true;
   },
 
   /** Whether the user can create/edit custom Compendium content (premium gate). */
   canUseCustomContent: () => {
-    if (ELEVATED_ROLES.includes(get().auth.role)) return true;
+    if (staffUnlocksPaidFeatures(get().auth.role)) return true;
     const { tier } = get().auth;
     return TIER_GATE[tier]?.customContent === true;
   },
 
   maxAllowedTier: () => {
-    if (ELEVATED_ROLES.includes(get().auth.role)) return 'metropolis';
+    if (staffUnlocksPaidFeatures(get().auth.role)) return 'metropolis';
     const { tier } = get().auth;
     return TIER_GATE[tier]?.maxTier || 'village';
   },
 
+  /**
+   * The SMALLEST size this account may forge. Only the anonymous row has a floor above
+   * the ladder's first rung (§934.34: a thorpe requires an account); every other tier
+   * reaches the whole ladder, and staff (behind STAFF_UNLOCK_ALL_PAID, §934.28) bypass both bounds.
+   */
+  minAllowedTier: () => {
+    if (staffUnlocksPaidFeatures(get().auth.role)) return 'thorp';
+    const { tier } = get().auth;
+    return TIER_GATE[tier]?.minTier || 'thorp';
+  },
+
+  /**
+   * Whether this account may CONFIGURE a generation before forging it — the wizard's
+   * pre-generation options (name, terrain, culture, priorities, magic, the constraint
+   * grids). Anonymous visitors pick a size and forge with everything else on random
+   * (the owner, §934.34). Distinct from `canUseCustomContent`, which gates the
+   * Compendium's authored content and stays premium.
+   */
+  canCustomizePreGeneration: () => {
+    if (staffUnlocksPaidFeatures(get().auth.role)) return true;
+    const { tier } = get().auth;
+    return TIER_GATE[tier]?.preGenOptions === true;
+  },
+
   maxSaves: () => {
-    if (ELEVATED_ROLES.includes(get().auth.role)) return Infinity;
+    if (staffUnlocksPaidFeatures(get().auth.role)) return Infinity;
     const { tier } = get().auth;
     return TIER_GATE[tier]?.maxSaves ?? 0;
   },
 
   isTierAllowed: (settlementTier) => {
-    if (ELEVATED_ROLES.includes(get().auth.role)) return true;
+    if (staffUnlocksPaidFeatures(get().auth.role)) return true;
     // Sentinels resolve to a concrete tier at generation; the post-resolution
     // re-gate checks that. Unknown non-sentinel tiers FAIL CLOSED.
     if (ALLOWED_UNRANKED_TIERS.has(settlementTier)) return true;
@@ -702,12 +888,43 @@ export const createAuthSlice = (set, get) => ({
     if (rank === undefined) return false;
     const maxRank = TIER_RANK[get().maxAllowedTier()];
     if (maxRank === undefined) return false;
-    return rank <= maxRank;
+    // ⛔ BOTH BOUNDS. The floor is why this is a RANGE: an anonymous visitor reaches
+    // hamlet through town, and a thorpe — rank 0, which every ceiling admits — requires
+    // an account (§934.34). An unknown floor FAILS CLOSED like an unknown ceiling.
+    const minRank = TIER_RANK[get().minAllowedTier()];
+    if (minRank === undefined) return false;
+    return rank >= minRank && rank <= maxRank;
+  },
+
+  /**
+   * ⛔ WHICH BOUND REFUSED — because the two owe the reader OPPOSITE sentences.
+   * `isTierAllowed` answers one boolean over a RANGE, so the gate that read it could
+   * only raise the CEILING's refusal, and on the one rung with a floor above it that
+   * sentence was false: an anonymous visitor asking for a thorpe was told "A Thorpe is
+   * past what this account forges; it reaches up to a Town". This answers the other
+   * half, and it lives HERE rather than at the gate because TIER_RANK is this slice's
+   * table and nothing outside it should learn to rank a size.
+   *
+   * Asked only about a size already refused, and FAIL-CLOSED in the same direction as
+   * `isTierAllowed`: a sentinel, an unknown token or an unknown floor answers `false`,
+   * which leaves the ceiling's sentence exactly where it stood before this existed.
+   *
+   * @param {string} settlementTier
+   * @returns {boolean} true only when the size is under this account's floor
+   */
+  isTierBelowFloor: (settlementTier) => {
+    if (staffUnlocksPaidFeatures(get().auth.role)) return false;
+    if (ALLOWED_UNRANKED_TIERS.has(settlementTier)) return false;
+    const rank = TIER_RANK[settlementTier];
+    if (rank === undefined) return false;
+    const minRank = TIER_RANK[get().minAllowedTier()];
+    if (minRank === undefined) return false;
+    return rank < minRank;
   },
 
   /** Whether the user can afford AI features (developers get unlimited) */
   canAffordAI: (feature) => {
-    if (ELEVATED_ROLES.includes(get().auth.role)) return true;
+    if (staffUnlocksPaidFeatures(get().auth.role)) return true;
     return get().canAfford(feature);
   },
 });

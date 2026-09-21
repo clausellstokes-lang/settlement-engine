@@ -116,7 +116,18 @@ const CRISIS_POOL_OF = Object.freeze({
   mass_migration: 'MASS MIGRATION',
 });
 
-/** The two DS-STR-1 pools that are about the SECTION rather than about one banner. */
+/**
+ * The two DS-STR-1 pools that are about the SECTION rather than about one banner.
+ *
+ * ⛔ THE SECOND KEY IS A MIS-PARSED NAME, AND READING IT LITERALLY SHIPPED A CONTRADICTION.
+ * The annex authors this pool as **ARITY — no banner** (R-DST-K gated, "NOT DRAWN AT THE
+ * BANNER"): its three variants all say the town has NO crisis. The projection keyed it by a
+ * bold span on a hard-wrapped line of the pool's own note ("…exists for the **Overview's own
+ * section framing**…"), and DESK CAR 10 read that key as "the crisis section's framing" and
+ * fired it whenever a crisis banner showed. Owner order 2026-09-17 ("Fix the contradiction"):
+ * the key string is kept byte-for-byte (the draw hash and the census rows are keyed on it);
+ * the PREDICATE below is what now reads the authored state.
+ */
 const CRISIS_ARITY_POOL = 'ARITY: several banners standing at once';
 const CRISIS_FRAMING_POOL = "Overview's own section framing";
 
@@ -163,12 +174,20 @@ export function crisisArityPoolKey(banners) {
 }
 
 /**
- * DS-STR-1's section framing — the line the Overview's crisis section carries about itself.
- * It speaks whenever the section renders at all, which is whenever there is a crisis.
+ * DS-STR-1's NO-BANNER line — the annex's "ARITY — no banner" pool, keyed under the
+ * mis-parsed name above. Its variants say there is no crisis, so it may speak ONLY when the
+ * caller's banner reading is a real, EMPTY list: the same `stress[]` array the ACTIVE CRISIS
+ * cards render from, so the prose and the banner read one crisis truth and cannot disagree.
+ * A missing reading (null, undefined, a non-array) is silence, never "no crisis": a desk that
+ * was not told must not claim the town is calm.
+ *
+ * ⚠ ON THE OVERVIEW THIS RUNG IS COMPOSED AND NEVER RENDERED, and that is R-DST-K rather than
+ * a shortfall: the crisis section renders only when a banner does, and a "nothing to report"
+ * line under an absent surface is exactly what the annex forbids. Owner order 2026-09-17.
  * @param {unknown} banners @returns {string|null}
  */
 export function crisisFramingPoolKey(banners) {
-  return Array.isArray(banners) && banners.length > 0 ? CRISIS_FRAMING_POOL : null;
+  return Array.isArray(banners) && banners.length === 0 ? CRISIS_FRAMING_POOL : null;
 }
 
 /**
@@ -447,7 +466,7 @@ export function stressorOriginPoolKey(stressor) {
  * @param {{banners?: unknown, conditions?: ReadonlyArray<object>|null,
  *   worldStressor?: WorldStressorView|null}} [readings] the caller selects and normalizes
  *   the world stressor; see DS-STR-2 above for why the desk does not reach for it
- * @param {{seed?: string, audience?: string}} [options]
+ * @param {{seed?: string, audience?: string, tierNoun?: string|null}} [options]
  * @returns {Readonly<{crisisArity: object|null, crisisFraming: object|null,
  *   conditionSeverity: object|null, conditionDirection: object|null,
  *   conditionArchetype: object|null, conditionProvenance: object|null,
@@ -509,7 +528,7 @@ export function stressorsStateProse(settlement, readings = {}, options = {}) {
  *
  * @param {{name?: string}|null|undefined} settlement
  * @param {{type?: unknown, label?: unknown}|null|undefined} banner one `settlement.stress[]` entry
- * @param {{seed?: string, audience?: string}} [options]
+ * @param {{seed?: string, audience?: string, tierNoun?: string|null}} [options]
  * @returns {object|null}
  */
 export function crisisBannerRung(settlement, banner, options = {}) {

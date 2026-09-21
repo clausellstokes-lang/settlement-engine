@@ -25,6 +25,8 @@ import { EVENT_PROSE } from '../../../domain/events/registryProse.js';
 import Button from '../../primitives/Button.jsx';
 import { GOLD, INK, MUTED, BORDER, sans, FS, SP, swatch } from '../../theme.js';
 import { selectStyle } from './EventComposerConstants.js';
+import useIsMobile from '../../../hooks/useIsMobile.js';
+import { chromeFontSize } from '../../../design/proseScale.js';
 
 const KIND_LABELS = Object.freeze({
   settlement: 'The settlement', institutions: 'Institution', npcs: 'NPC',
@@ -34,17 +36,18 @@ const KIND_LABELS = Object.freeze({
 
 // Pill chip look layered over the Button primitive (focus-ring, min target,
 // disabled state come from the primitive; only the silhouette is local).
-const chipStyle = (enabled) => ({
+const chipStyle = (enabled, mobile) => ({
   padding: '3px 9px', borderRadius: 999, minHeight: 22,
   border: `1px solid ${enabled ? GOLD : BORDER}`,
   background: enabled ? swatch['#FAF8F4'] : 'transparent',
   color: enabled ? INK : MUTED,
-  fontSize: FS.xxs, fontFamily: sans, fontWeight: 700,
+  fontSize: chromeFontSize(FS.xxs, mobile), fontFamily: sans, fontWeight: 700,
 });
 
 function VerbChips({ verbs, settlement, ctx, onPick }) {
+  const mobile = useIsMobile();
   if (!verbs.length) {
-    return <span style={{ fontSize: FS.xxs, fontStyle: 'italic', color: MUTED }}>No actions here yet.</span>;
+    return <span style={{ fontSize: chromeFontSize(FS.xxs, mobile), fontStyle: 'italic', color: MUTED }}>No actions here yet.</span>;
   }
   return (
     <div style={{ display: 'flex', flexWrap: 'wrap', gap: 5 }}>
@@ -60,7 +63,7 @@ function VerbChips({ verbs, settlement, ctx, onPick }) {
             title={why || v.label}
             aria-label={p.available ? v.label : `${v.label} (${why})`}
             onClick={() => onPick(v.type)}
-            style={chipStyle(p.available)}
+            style={chipStyle(p.available, mobile)}
           >
             {v.label}{!p.available && ' ✕'}
           </Button>
@@ -71,6 +74,7 @@ function VerbChips({ verbs, settlement, ctx, onPick }) {
 }
 
 export function ComposerNavigator({ settlement, ctx, onPickVerb, onPickTargetVerb }) {
+  const mobile = useIsMobile();
   const [mode, setMode] = useState('target');   // 'target' | 'family' | 'search'
   const [entityKind, setEntityKind] = useState('');
   const [entityId, setEntityId] = useState('');
@@ -100,7 +104,7 @@ export function ComposerNavigator({ settlement, ctx, onPickVerb, onPickTargetVer
       {/* THE PRESSURES RAIL — the situation loads what you see (≤3 by law). */}
       {pressures.length > 0 && (
         <div style={{ display: 'flex', alignItems: 'center', flexWrap: 'wrap', gap: 6, marginBottom: 6 }}>
-          <span style={{ fontSize: FS.xxs, fontWeight: 800, color: swatch.danger, fontFamily: sans, letterSpacing: '0.05em', textTransform: 'uppercase' }}>
+          <span style={{ fontSize: chromeFontSize(FS.xxs, mobile), fontWeight: 800, color: swatch.danger, fontFamily: sans, letterSpacing: '0.05em', textTransform: 'uppercase' }}>
             Pressing now
           </span>
           {pressures.map((sug, i) => (
@@ -110,7 +114,7 @@ export function ComposerNavigator({ settlement, ctx, onPickVerb, onPickTargetVer
               variant="ghost"
               title={sug.reason}
               onClick={() => onPickTargetVerb(sug.type, sug.targetId || '')}
-              style={chipStyle(true)}
+              style={chipStyle(true, mobile)}
             >
               {AFFORDANCE_MANIFEST[sug.type]?.label || sug.type}
             </Button>
@@ -129,7 +133,7 @@ export function ComposerNavigator({ settlement, ctx, onPickVerb, onPickTargetVer
             onClick={() => setMode(m)}
             aria-pressed={mode === m}
             style={{
-              ...chipStyle(true),
+              ...chipStyle(true, mobile),
               border: `1px solid ${mode === m ? GOLD : BORDER}`,
               background: mode === m ? swatch['#FAF8F4'] : 'transparent',
               fontWeight: mode === m ? 800 : 600,
@@ -146,7 +150,7 @@ export function ComposerNavigator({ settlement, ctx, onPickVerb, onPickTargetVer
             value={entityKind}
             onChange={e => { setEntityKind(e.target.value); setEntityId(''); }}
             aria-label="Entity kind"
-            style={selectStyle}
+            style={selectStyle(mobile)}
           >
             <option value="">What are you acting on?</option>
             {ENTITY_KINDS.map(k => <option key={k} value={k}>{KIND_LABELS[k] || k}</option>)}
@@ -156,7 +160,7 @@ export function ComposerNavigator({ settlement, ctx, onPickVerb, onPickTargetVer
               value={entityId}
               onChange={e => setEntityId(e.target.value)}
               aria-label={`${KIND_LABELS[entityKind] || entityKind} to act on`}
-              style={selectStyle}
+              style={selectStyle(mobile)}
             >
               <option value="">Pick one</option>
               {entityOptions.map(o => <option key={o.id} value={o.id}>{o.name}</option>)}
@@ -184,7 +188,7 @@ export function ComposerNavigator({ settlement, ctx, onPickVerb, onPickTargetVer
                 onClick={() => setFamily(f)}
                 aria-pressed={family === f}
                 style={{
-                  ...chipStyle(true),
+                  ...chipStyle(true, mobile),
                   border: `1px solid ${family === f ? GOLD : BORDER}`,
                   fontWeight: family === f ? 800 : 600,
                 }}

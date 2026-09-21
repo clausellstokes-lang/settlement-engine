@@ -40,9 +40,10 @@ import { describe, expect, test } from 'vitest';
 
 import {
   AUDIENCES, driftRun, goldenCorpus, keyOf, manifestBytes, MANIFEST_RECORDER_FILES, poolIndex,
-  recorderShas, sha256, templateMatches,
+  recorderShas, sha256, stripComments, templateMatches,
 } from '../helpers/dossierManifest.js';
 import { classifyCell, classifyCells, VERDICTS } from '../../scripts/prose-manifest-diff.mjs';
+import { MANIFEST_PROVENANCE } from '../../scripts/prose-manifest-cells.mjs';
 import { drawVariant } from '../../src/domain/display/stateProse/stateProseKernel.js';
 import { DOSSIER_MOUNTS } from '../../src/domain/display/stateProse/dossierMounts.js';
 import { ROOT } from '../helpers/dossierCorpus.js';
@@ -124,10 +125,20 @@ describe('the composed-prose manifest — the DRIFT corpus, both audiences', () 
     }
     const tally = Object.fromEntries([...bySeed]
       .map(([seed, seat]) => [seed, { cells: seat.cells, towns: seat.towns.size }]));
+    // ⚠ RESTATED 2026-09-17 WITH A STATED CAUSE (owner order "Fix the contradiction"). The
+    // DS-STR-1 no-banner pool (keyed "Overview's own section framing") used to compose on every
+    // town WITH a crisis banner and now composes only on a town with NONE. Every
+    // golden-master-v3 town carries a crisis, so 516 towns x 2 audiences lose that one cell
+    // (72,108 -> 71,076); the three calm gm-seed towns gain it (394/390/392 -> 400/396/398).
+    // ⚠ RESTATED AGAIN THE SAME DAY WITH ITS CAUSE (owner order "fix the remaining
+    // contradictions"). DS-GEN-16's UNMARKED ("No great blow stands on the record") no longer
+    // composes over a record carrying a major or catastrophic row: twelve golden-master-v3
+    // hamlets and the three gm-seed-c towns lose that one cell (71,076 -> 71,052; 398 -> 392).
+    // The fixture moves only through the signed door (scripts/prose-manifest-cells.mjs --record).
     expect(tally, 'the DRIFT corpus by seed, cells and towns').toEqual({
-      'golden-master-v3': { cells: 72_108, towns: 516 },
-      'gm-seed-a': { cells: 394, towns: 3 },
-      'gm-seed-b': { cells: 390, towns: 3 },
+      'golden-master-v3': { cells: 71_052, towns: 516 },
+      'gm-seed-a': { cells: 400, towns: 3 },
+      'gm-seed-b': { cells: 396, towns: 3 },
       'gm-seed-c': { cells: 392, towns: 3 },
     });
     // The two halves must close against the figures every other arm here reads.
@@ -189,16 +200,99 @@ describe('the composed-prose manifest — the DRIFT corpus, both audiences', () 
     // the code that produced the rows can be, and they are re-read from the tree here.
     const file = JSON.parse(readFileSync(MANIFEST, 'utf8'));
     const provenance = file._provenance || {};
-    expect(provenance.shift, 'the re-record is a DECLARED instrument shift').toBe('INSTRUMENT');
-    expect(String(provenance.ruling), 'and it names the ruling that ordered it').toMatch(/P\.2-29/);
+    // The declaration is the recorder's own constant, written into the bytes. It was an
+    // INSTRUMENT shift under SITTING §P.2-29 until the owner-signed PROSE shift of 2026-09-17.
+    expect(provenance.shift, 'the re-record is a DECLARED prose shift').toBe(MANIFEST_PROVENANCE.shift);
+    expect(provenance.shift).toBe('PROSE');
+    expect(String(provenance.ruling), 'and it names the orders that ordered it').toMatch(/OWNER ORDERS 2026-09-17/);
     expect(Object.keys(provenance.recorder || {}).sort(), 'the recorder is named file by file')
       .toEqual([...MANIFEST_RECORDER_FILES].sort());
-    expect(provenance.recorder, 'a fixture whose recorder has moved since it was written is REFUSED:'
-      + ' re-record with `node scripts/prose-manifest-cells.mjs --record`').toEqual(recorderShas());
+    expect(provenance.recorder, 'a fixture whose recorder has moved since it was written is REFUSED'
+      + ' (comment-insensitive since 2026-09-20): re-record with'
+      + ' `node scripts/prose-manifest-cells.mjs --record`').toEqual(recorderShas());
     expect(provenance.rows, 'the row count it claims').toBe(run.rows.size);
     expect(provenance.rowsSha, 'and the digest of the rows alone, so a hand-edited row reds twice')
       .toBe(sha256(JSON.stringify(file.rows)));
   }, 120_000);
+
+  test('⭐ THE RECORDER IDENTITY IS THE CODE: the stripper keeps every literal and drops every comment', () => {
+    // ⛔ WHY THIS ARM EXISTS (CURE-J, 2026-09-20). The provenance arm above pinned the recorder
+    // by the RAW bytes of three files, which cannot tell a re-worded docblock from a re-written
+    // function. FIX-C2 re-addressed one source citation inside a JSDoc block of
+    // `scripts/prose-rate-corpus.mjs` — `EconomicsTab.jsx:251-257` became `EconomicsTab.jsx:272`,
+    // one line, not a token of code — and the arm refused the fixture with ZERO rows moved. The
+    // identity is now taken over `stripComments(source)`, and this is that stripper's own proof.
+    //
+    // ⛔ IT IS A SCANNER AND NOT A THIRD REGEX, for a measured reason. The estate's two existing
+    // strippers (tests/domain/contributionLedgerShape.test.js `codeOnly`, and
+    // tests/config/pageBackgrounds.test.js) are `String.replace` pairs that cannot see a string
+    // literal, so they BLANK the contents of any string holding a comment marker (FIX-P3's
+    // finding). A recorder file is full of them, and a stripper that ate `'http://…'` would make
+    // the identity blind to a real code edit — the exact failure this pin exists to refuse.
+    const fixture = [
+      'const a = 1; // a line comment with /* inside',
+      '/* a block',
+      '   comment // with a line marker inside */',
+      "const s = 'a string containing // and /* and */ inside';",
+      'const t = `a template containing /* and // and ${a + 1} inside`;',
+      'const r = /a regex containing \\/\\/ and [/] inside/g;',
+      'const d = a / 2; // a DIVISION, not a regex',
+    ].join('\n');
+    const stripped = stripComments(fixture);
+    // THE PROSE IS GONE. Collected and asserted once, never `expect` inside a loop.
+    const survivingComments = ['a line comment', 'a block', 'with a line marker', 'a DIVISION']
+      .filter((phrase) => stripped.includes(phrase));
+    expect(survivingComments, 'a comment the stripper failed to remove').toEqual([]);
+    // AND EVERY LITERAL SURVIVED BYTE-FOR-BYTE, which is the half a regex stripper gets wrong.
+    const lostLiterals = [
+      ["'a string containing // and /* and */ inside'", 'a STRING holding both markers'],
+      ['`a template containing /* and // and ${a + 1} inside`', 'a TEMPLATE holding both'],
+      ['/a regex containing \\/\\/ and [/] inside/g', 'a REGEX holding a slash in a class'],
+      ['const d = a / 2;', 'a DIVISION, which is not a regex opener'],
+    ].filter(([literal]) => !stripped.includes(literal)).map(([, name]) => name);
+    expect(lostLiterals, 'a literal the stripper mangled').toEqual([]);
+    // THE PAIRED CONTROL, so the arm cannot go vacuous if `stripComments` became the identity:
+    // it really does remove something, and it really is a fixed point.
+    expect(stripped.length, 'the stripper removed the comments').toBeLessThan(fixture.length);
+    expect(stripComments(stripped), 'and stripping a stripped source changes nothing').toBe(stripped);
+  });
+
+  test('⭐ THE COUNTERFORCE: a comment never moves the recorder identity and a token of code always does', () => {
+    // Driven on the THREE REAL recorder files rather than on a fixture, because the property
+    // that matters is about them. Every mutation is made IN MEMORY: the arm never writes to the
+    // tree, so there is no restore step that could fail and leave a recorder file edited — and
+    // the on-disk digests are re-measured at the end as the control that says so.
+    const before = recorderShas();
+    /** @type {string[]} */
+    const wrong = [];
+    /** @type {string[]} */
+    const report = [];
+    for (const rel of MANIFEST_RECORDER_FILES) {
+      const raw = readFileSync(join(ROOT, rel), 'utf8');
+      const base = sha256(stripComments(raw));
+      // (a) A comment APPENDED as a new line at end of file.
+      const appended = sha256(stripComments(`${raw}\n// CURE-J counterforce: an appended comment\n`));
+      // (b) A comment's text EDITED IN PLACE — FIX-C2's own shape, one line, line count held.
+      const marker = /^[ \t]*\/\/ ?.+$/m.exec(raw);
+      const edited = marker
+        ? sha256(stripComments(raw.replace(marker[0], `${marker[0]} re-addressed`)))
+        : null;
+      // (c) A ONE-TOKEN CODE edit: the first `const` becomes `let`.
+      const at = raw.indexOf('const ');
+      const recoded = sha256(stripComments(`${raw.slice(0, at)}let${raw.slice(at + 5)}`));
+      if (appended !== base) wrong.push(`${rel}: an APPENDED comment moved the identity`);
+      if (edited === null) wrong.push(`${rel}: no line comment to edit, so (b) drove nothing`);
+      if (edited !== null && edited !== base) wrong.push(`${rel}: an EDITED comment moved it`);
+      if (at < 0) wrong.push(`${rel}: no \`const\` to re-token, so (c) drove nothing`);
+      if (recoded === base) wrong.push(`${rel}: a ONE-TOKEN CODE edit did NOT move it`);
+      report.push(`${rel} raw ${raw.length} b -> code ${stripComments(raw).length} b`);
+    }
+    expect(wrong, 'the recorder identity does not answer "comment out, code in"').toEqual([]);
+    // ⛔ THE CONTROL ON THE ARM ITSELF: it mutated nothing on disk.
+    expect(recorderShas(), 'the counterforce wrote to the tree').toEqual(before);
+    process.stdout.write(`[dossier-prose-manifest] recorder identity is comment-insensitive`
+      + ` over ${MANIFEST_RECORDER_FILES.length} files · ${report.join(' · ')}\n`);
+  });
 
   test('⭐ REFUSAL 1: every recorded cell carries a REAL coordinate (index >= 0)', () => {
     // ⛔ THE FOLD'S P8. `index = audible.indexOf(chosen)` answers −1 when the identified

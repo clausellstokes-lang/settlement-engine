@@ -8,14 +8,23 @@
  *
  * Bands and colors come from domain/state/bands.js — same source as the
  * UI's SystemStateBar — so the PDF and screen never disagree.
+ *
+ * ⚠ AND NEITHER DO THEY DISAGREE ABOUT THE CASE OF THE WORD (the label-ladder PDF lane,
+ * 2026-09-18). Both band words below were printed through `.toUpperCase()` while the screen
+ * had descended rung 3 to sentence case, so a DM read "Adequate" on the tab and "ADEQUATE"
+ * in the document they paid for. Each now routes through the SAME function its own screen
+ * twin routes through — `tokenCase` for the substrate pill (`SubstrateTab`'s `BandPill`),
+ * `statusCase` for the dimension card (`SystemStateBar`'s `DimensionRow`) — so the two
+ * surfaces cannot drift again without the shared leaf moving under both of them.
  */
 import { View, Text } from '@react-pdf/renderer';
 import { PageChrome } from '../primitives/PageChrome.jsx';
 import { ChapterBand, ChapterHeadline, HairRule } from '../primitives/Dense.jsx';
 import { type, palette, space, pt, swatch } from '../theme.js';
-import { BAND_COLOR, BAND_HINT, dimensionPolarity } from '../../domain/state/bands.js';
+import { BAND_COLOR, BAND_HINT, dimensionScaleNote } from '../../domain/state/bands.js';
 import { causalBandWord, deriveCausalState, SYSTEM_VARIABLES } from '../../domain/causalState.js';
 import { humanize } from '../lib/format.js';
+import { statusCase, tokenCase } from '../../domain/display/labelCase.js';
 
 // Substrate band → tone color. Mirrors the screen's causal band coloring
 // (surplus/adequate green-ish, strained/critical/collapsed warm→red) so the
@@ -124,8 +133,8 @@ function CausalSubstrate({ settlement, vm }) {
                 mean the crime collapsed. causalBandWord re-phrases exactly those
                 bands as problem terms (Rampant / Acute / Elevated); the other 15
                 variables are unchanged. The colour was already correct. */}
-            <Text style={{ ...type.label_em, fontSize: pt['7.5'], color, width: 60, letterSpacing: 0.4 }}>
-              {causalBandWord(row.name, row.band).toUpperCase()}
+            <Text style={{ ...type.label_em, fontSize: pt['7.5'], color, width: 60 }}>
+              {tokenCase(causalBandWord(row.name, row.band))}
             </Text>
             <Text style={{ ...type.caption, fontSize: pt['7'], color: palette.faint, width: 22 }}>{row.score}</Text>
             {row.why && (
@@ -144,7 +153,10 @@ function DimensionCard({ dimKey, dim }) {
   const meta = DIM_META[dimKey];
   if (!dim || !meta) return null;
   const color = BAND_COLOR[dim.band] || palette.muted;
-  const fillPct = dimensionPolarity(dimKey) === 'lower_is_better' ? (100 - dim.value) : dim.value;
+  // THE BAR DRAWS THE NUMBER IT PRINTS (see bands.js dimensionScaleNote): the run below is
+  // `dim.value`, the same expression the figure beside the label reads, and the caption
+  // carries the scale note where the dimension runs the other way.
+  const scaleNote = dimensionScaleNote(dimKey);
 
   return (
     <View
@@ -166,8 +178,8 @@ function DimensionCard({ dimKey, dim }) {
             {meta.label}
           </Text>
           <Text style={{ flex: 1 }} />
-          <Text style={{ ...type.label_em, color, fontSize: pt['9'], letterSpacing: 0.6 }}>
-            {dim.band.toUpperCase()}
+          <Text style={{ ...type.label_em, color, fontSize: pt['9'] }}>
+            {statusCase(dim.band)}
           </Text>
           <Text style={{ ...type.caption, color: palette.muted, fontSize: pt['8'], marginLeft: 4 }}>
             {dim.value}
@@ -175,10 +187,10 @@ function DimensionCard({ dimKey, dim }) {
         </View>
         {/* Bar */}
         <View style={{ height: 3, backgroundColor: swatch['#E7D7B8'], marginBottom: 4 }}>
-          <View style={{ width: `${fillPct}%`, height: '100%', backgroundColor: color }} />
+          <View style={{ width: `${dim.value}%`, height: '100%', backgroundColor: color }} />
         </View>
         <Text style={{ ...type.caption, color: palette.muted, fontSize: pt['7.5'], fontStyle: 'italic', marginBottom: 3 }}>
-          {meta.desc} {BAND_HINT[dim.band]}
+          {meta.desc}{scaleNote ? ` (${scaleNote})` : ''} {BAND_HINT[dim.band]}
         </Text>
         {dim.drivers?.length > 0 && (
           <View style={{ marginBottom: 2 }}>

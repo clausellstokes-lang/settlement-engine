@@ -21,9 +21,16 @@
  * redraw (the favicon weight is a REDRAW with heavier strokes, never a scale-down).
  *
  * ONE-INK VARIANT: the dot renders in the ink — the device must still read.
- * Pure string builders; lazy; the eager header uses the tiny standalone
- * components/brand/HouseDevice.jsx instead (which pins to this file's geometry
- * via tests/design/organicLogo.test.js).
+ * Pure string builders; lazy.
+ *
+ * ⚠ THE DEVICE NO LONGER DRESSES THE PRODUCT (owner order 2026-09-19, ODQ §934.17).
+ * Every shipped icon and share card is now a cut of the owner's arrow painting
+ * (scripts/derive-brand-marks.mjs), so the three asset builders this file used to
+ * export — faviconSvg, appleTouchIconSvg, ogImageSvg — are gone with the assets they
+ * made. What remains is the DRAWN DEVICE itself, which is still live in the dossier:
+ * src/pdf/primitives/HouseDeviceSeal.jsx and HouseCountersealSeal.jsx strike it as the
+ * charter's vector mark, and scripts/gen-organic-logo.mjs keeps the documentation
+ * goldens under docs/samples/organic-craft/logo honest.
  */
 
 import { INK, FIELD_INK } from './ink.js';
@@ -87,58 +94,6 @@ export function houseDevice({ mode = 'light', weight = 'standard', oneInk = fals
   const p = devicePalette(mode);
   const bg = ground === 'parchment' ? `<rect width="${DEVICE_VIEWBOX}" height="${DEVICE_VIEWBOX}" fill="#FBF5E6"/>` : '';
   return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${DEVICE_VIEWBOX} ${DEVICE_VIEWBOX}" width="${size}" height="${size}" role="presentation" aria-hidden="true" focusable="false">${bg}${deviceMarkup(p, weight, oneInk)}</svg>`;
-}
-
-/**
- * The SVG favicon: the HEAVY redraw with an embedded prefers-color-scheme style —
- * warm-black ink + oxblood point on light; parchment-pale ink + the dim-field
- * rubric point on dark. (Safari ignores SVG-embedded media queries — the ICO/PNG
- * fallbacks cover it; see scripts/gen-organic-logo.mjs.)
- */
-export function faviconSvg() {
-  const light = devicePalette('light');
-  const dark = devicePalette('dark');
-  const w = DEVICE_WEIGHTS.heavy;
-  const style = `.i{stroke:${light.ink}}.s{fill:${light.rubric}}@media (prefers-color-scheme: dark){.i{stroke:${dark.ink}}.s{fill:${dark.rubric}}}`;
-  const stroke = (d, sw) => `<path d="${d}" class="i" fill="none" stroke-width="${sw}" stroke-linecap="round" stroke-linejoin="round"/>`;
-  return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${DEVICE_VIEWBOX} ${DEVICE_VIEWBOX}"><style>${style}</style>`
-    + stroke(DEVICE_PATHS.ring, w.ring)
-    + stroke(DEVICE_PATHS.skyline, w.skyline)
-    + stroke(DEVICE_PATHS.triangle, w.triangle)
-    + `<circle cx="${DEVICE_DOT.cx}" cy="${DEVICE_DOT.cy}" r="${DEVICE_DOT.rHeavy}" class="s"/></svg>`;
-}
-
-/**
- * The apple-touch icon SVG source (rasterised to 180px by the gen script):
- * full-bleed parchment, the device (heavy redraw) inside the central-80%
- * maskable safe zone.
- */
-export function appleTouchIconSvg() {
-  const p = devicePalette('light');
-  const S = 180;
-  const inner = S * 0.8;                 // the maskable safe zone
-  const off = (S - inner) / 2;
-  const scale = inner / DEVICE_VIEWBOX;
-  return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${S} ${S}" width="${S}" height="${S}">`
-    + `<rect width="${S}" height="${S}" fill="#FBF5E6"/>`
-    + `<g transform="translate(${off},${off}) scale(${scale})">${deviceMarkup(p, 'heavy')}</g></svg>`;
-}
-
-/**
- * The og/social share image SVG source (rasterised to 1200×630 PNG by the gen
- * script): the device on a parchment ground with the wordmark set in TYPE beside
- * it (the mark never carries text — the name is adjacent type).
- */
-export function ogImageSvg() {
-  const p = devicePalette('light');
-  return `<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">`
-    + `<rect width="1200" height="630" fill="#FBF5E6"/>`
-    + `<rect x="6" y="6" width="1188" height="618" fill="none" stroke="#E8D9B0" stroke-width="2"/>`
-    + `<rect x="14" y="14" width="1172" height="602" fill="none" stroke="#C8B89A" stroke-width="1"/>`
-    + `<g transform="translate(170,171) scale(4.5)">${deviceMarkup(p, 'standard')}</g>`
-    + `<text x="486" y="322" font-family="Georgia, 'Times New Roman', serif" font-weight="700" font-size="74" fill="${p.ink}">SettlementForge</text>`
-    + `<text x="490" y="380" font-family="Georgia, 'Times New Roman', serif" font-style="italic" font-size="31" fill="#6B5340">Living settlements for game masters</text>`
-    + `</svg>`;
 }
 
 /** The motto — set ONLY as an adjacent typographic caption in ceremonial

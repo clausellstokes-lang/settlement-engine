@@ -4,6 +4,8 @@ import { campaignMembershipIndex } from '../../domain/relationships/effectiveNei
 import { isCampaignActive } from '../../lib/campaigns.js';
 import { useStore } from '../../store/index.js';
 import { INK, MUTED, BODY, SECOND, sans, FS, swatch } from '../theme';
+import useIsMobile from '../../hooks/useIsMobile.js';
+import { chromeFontSize, proseFontSize } from '../../design/proseScale.js';
 
 // ── Network Effects panel — shows cascading modifiers from the relationship graph ──
 
@@ -32,6 +34,7 @@ export default function NetworkEffectsPanel({ settlementId, saves, relColors }) 
   // Co-campaign settlements are implicit Neutral neighbours by default (owner
   // order 2026-07-22). Derived from ALL active campaigns so the cascade stays
   // ungated exactly as it renders for every tier today.
+  const mobile = useIsMobile();
   const campaigns = useStore(s => s.campaigns);
   const campaignOf = useMemo(() => campaignMembershipIndex((campaigns || []).filter(isCampaignActive)), [campaigns]);
   const mods = useMemo(
@@ -66,7 +69,7 @@ export default function NetworkEffectsPanel({ settlementId, saves, relColors }) 
           Network Effects
         </h3>
         {hasDominant && (
-          <span style={{ fontSize: FS.xs, color: SECOND, fontFamily: sans }}>
+          <span style={{ fontSize: chromeFontSize(FS.xs, mobile), color: SECOND, fontFamily: sans }}>
             {dominantCat.label}{' '}
             <span style={{ fontWeight: 700, fontFamily: 'monospace', color: dominantIsPos ? '#1a5a28' : '#8b1a1a' }}>{fmtMod(dominantVal)}</span>
           </span>
@@ -75,7 +78,7 @@ export default function NetworkEffectsPanel({ settlementId, saves, relColors }) 
 
       {/* The honest advisory: the caveat reads BEFORE the numbers it qualifies,
           and describes the whole group for assistive tech. */}
-      <p id="network-effects-advisory" style={{ fontSize: FS.xs, color: BODY, fontFamily: sans, margin: '0 0 10px' }}>
+      <p id="network-effects-advisory" style={{ fontSize: proseFontSize(FS.xs, mobile), color: BODY, fontFamily: sans, margin: '0 0 10px' }}>
         {NETWORK_EFFECTS_ADVISORY}
       </p>
 
@@ -87,7 +90,7 @@ export default function NetworkEffectsPanel({ settlementId, saves, relColors }) 
           const isPos = val >= 0;
           return (
             <div key={key} style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
-              <span style={{ fontSize: FS.xxs, fontWeight: 600, color: SECOND, minWidth: 80, fontFamily: sans }}>{label}</span>
+              <span style={{ fontSize: chromeFontSize(FS.xxs, mobile), fontWeight: 600, color: SECOND, minWidth: 80, fontFamily: sans }}>{label}</span>
               <div style={{ flex: 1, height: 8, background: swatch['#E8E0D4'], overflow: 'hidden', position: 'relative' }}>
                 <div style={{
                   position: 'absolute',
@@ -99,7 +102,7 @@ export default function NetworkEffectsPanel({ settlementId, saves, relColors }) 
                 }} />
               </div>
               <span style={{
-                fontSize: FS.xxs, fontWeight: 700, fontFamily: 'monospace', minWidth: 42, textAlign: 'right',
+                fontSize: chromeFontSize(FS.xxs, mobile), fontWeight: 700, fontFamily: 'monospace', minWidth: 42, textAlign: 'right',
                 color: Math.abs(val) < 0.005 ? BODY : isPos ? '#1a5a28' : '#8b1a1a',
               }}>
                 {fmtMod(val)}
@@ -112,7 +115,7 @@ export default function NetworkEffectsPanel({ settlementId, saves, relColors }) 
       {/* Source breakdown — a subordinate sub-heading (level-2) below the
           panel's level-1 keyword title, so the panel reads as a clear two-tier
           scent rather than two peer lists. */}
-      <div style={{ fontSize: FS.xxs, fontWeight: 700, color: SECOND, textTransform: 'uppercase', letterSpacing: '0.08em', marginBottom: 6 }}>
+      <div style={{ fontSize: chromeFontSize(FS.xxs, mobile), fontWeight: 700, color: SECOND, textTransform: 'uppercase', letterSpacing: '0.08em', marginBottom: 6 }}>
         Sources
       </div>
       <div style={{ display: 'flex', flexDirection: 'column', gap: 6 }}>
@@ -135,15 +138,15 @@ export default function NetworkEffectsPanel({ settlementId, saves, relColors }) 
           return (
             <div key={i} style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
               <div style={{ width: 5, height: 5, borderRadius: '50%', background: relColor, flexShrink: 0 }} />
-              <span style={{ fontSize: FS.xs, fontWeight: 600, color: INK, flex: 1 }}>
+              <span style={{ fontSize: chromeFontSize(FS.xs, mobile), fontWeight: 600, color: INK, flex: 1 }}>
                 {src.settlementName}
               </span>
-              <span style={{ fontSize: FS.xs, color: relColor, fontWeight: 600, background: `${relColor}18`, padding: '1px 5px' }}>
+              <span style={{ fontSize: chromeFontSize(FS.xs, mobile), color: relColor, fontWeight: 600, background: `${relColor}18`, padding: '1px 5px' }}>
                 {relLabel}
               </span>
-              {causalLabel && <span style={{ fontSize: FS.xs, color: BODY }} title={causalLabel}>{causalLabel}</span>}
+              {causalLabel && <span style={{ fontSize: chromeFontSize(FS.xs, mobile), color: BODY }} title={causalLabel}>{causalLabel}</span>}
               <span style={{
-                fontSize: FS.xxs, fontWeight: 700, fontFamily: 'monospace',
+                fontSize: chromeFontSize(FS.xxs, mobile), fontWeight: 700, fontFamily: 'monospace',
                 color: domVal >= 0 ? '#1a5a28' : '#8b1a1a',
               }}>
                 {fmtMod(domVal)}

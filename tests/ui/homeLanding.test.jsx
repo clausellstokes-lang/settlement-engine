@@ -13,13 +13,18 @@
  *     ("Forge this exact town") renders as a real button;
  *   - the hero primary CTA label equals landing.hero.cta for an anon visitor;
  *   - FIXTURE SHAPE: the frozen module carries non-empty derived artifacts
- *     (brief town + hooks, voice receipts + narration, why-trace deltas,
- *     chronicle, pins), an anon-ceiling settType, and engine version markers
- *     (the regen-policy drift signal);
+ *     (brief town + hooks, voice receipts + narration, why-trace deltas, the
+ *     town's own advance events, chronicle, pins), an anon-ceiling settType, and
+ *     engine version markers (the regen-policy drift signal). The fixture's
+ *     FRESHNESS — that those facts are the ones the engine still derives — is a
+ *     different question, and tests/build/landingFixtureFreshness.test.js asks
+ *     it: a stale fixture has a perfect shape;
  *   - the mono seed provenance tag renders (determinism is the promise);
  *   - COMMONS FALLBACK: with the gallery unreachable (jsdom → supabase
- *     unconfigured), all six slots render as labeled placeholders — six full
- *     slots, no empty grid, zero layout shift.
+ *     unconfigured) the strip renders the Create page's three curated Founding
+ *     Worlds with their real 'Fork this sample' buttons, and NOTHING on the page
+ *     is labelled '(placeholder)' — the six decorative cards (invented names,
+ *     invented authors, a 'City' of 412) were deleted on 2026-09-18.
  *
  * Copy is asserted against the `landing` registry object and the frozen
  * fixture, so a copy/fixture change is a data change here, never a literal edit.
@@ -29,8 +34,10 @@ import { describe, test, expect, afterEach, vi } from 'vitest';
 import { render, cleanup, screen, within } from '@testing-library/react';
 import { expectAbsentWithAnchor } from '../helpers/anchoredNegatives.js';
 import HomeLanding from '../../src/components/HomeLanding.jsx';
-import { landing } from '../../src/copy/landing.js';
+import { landing, tl } from '../../src/copy/landing.js';
 import { fixture } from '../../src/components/home/landingFixture.js';
+import { SAMPLE_SETTLEMENTS } from '../../src/data/sampleSettlements.js';
+import { BOTTOM_NAV_H, FOOTER_INSET } from '../../src/components/theme.js';
 
 // Analytics is fire-and-forget (landing_funnel_used via the SM-5-pattern lazy
 // helper — lib/landingFunnelAnalytics.js imports track + EVENTS from this
@@ -41,7 +48,21 @@ vi.mock('../../src/lib/analytics.js', () => ({
   EVENTS: new Proxy({}, { get: (_t, k) => String(k) }),
 }));
 
-afterEach(cleanup);
+// THE COMMONS STRIP fetches the public gallery on below-fold mount. jsdom has no
+// Supabase config, so the REAL module resolves empty — the fallback state every
+// other test in this file reads. This mock KEEPS that default (items: []) and lets
+// the real-rows arm below hand the strip three published towns, which is the other
+// half of the rule: three or more real rows and the real rows render.
+// `gate`, when set, HOLDS the fetch unsettled so the in-flight state can be read.
+const galleryRows = vi.hoisted(() => ({ items: [], gate: null }));
+vi.mock('../../src/lib/gallery.js', () => ({
+  fetchPublicGallery: async () => {
+    if (galleryRows.gate) await galleryRows.gate;
+    return { items: galleryRows.items, hasMore: false, total: galleryRows.items.length };
+  },
+}));
+
+afterEach(() => { cleanup(); galleryRows.items = []; galleryRows.gate = null; });
 
 function renderLanding(props = {}) {
   return render(
@@ -116,6 +137,46 @@ describe('HomeLanding — scrollable landing', () => {
   // So the assertion flips from 0 to EXACTLY ONE — which is also what this
   // file's own docblock has claimed all along. Exactly one, not ≥1: two copies
   // of a disclosure is a design defect, and the §01 panel is its one home.
+  // THE FADED TAIL + THE CAPPED TRACK (owner orders 2026-09-17, "Fix the small visual
+  // defects"). The header is transparent, so a cream stop's empty bottom band read as a
+  // plain strip under the arrow; each translucent-cream stop now fades that band into
+  // the film over exactly its own height (the dark closer keeps its scene). The two-column
+  // grid's track minimum is capped at the column, so a 390px phone no longer scrolls
+  // sideways. jsdom has no layout and its CSSOM drops mask declarations, so these read
+  // the style props React rendered; e2e/visual-polish.spec.js measures both in Chromium.
+  // ⚠ THIS ARM USED TO RUN AT BOTH WIDTHS, AND NOW RUNS AT ONE. At phone width the
+  // below-fold chunk is NOT MOUNTED (ODQ §934.27, pinned in its own block at the end of
+  // this file), so there are no cream stops there to measure and the mobile pass would
+  // wait out its timeout on a page behaving exactly as ordered. ⛔ THE CONSEQUENCE,
+  // RECORDED RATHER THAN HIDDEN: LandingBelowFold's own `isMobile` branches — this tail
+  // height among them — are now unreachable in production, because its ONE mount is
+  // gated on `!isMobile`. Retiring them is a separate, larger edit in a file other lanes
+  // hold work in; it is deliberately deferred and written down, not a bug to re-find.
+  test('cream stops fade their empty tails into the film, and the two-column track never exceeds its column', async () => {
+    const renderedStyle = (el) => {
+      const key = Object.keys(el).find((k) => k.startsWith('__reactProps$'));
+      return (key && el[key].style) || {};
+    };
+    const { container } = renderLanding({ isMobile: false });
+    await screen.findByText(landing.closer.h2, {}, { timeout: 10_000 });
+    const tailPx = 84;
+    const cream = [...container.querySelectorAll('section.sf-landing-scene-cream')];
+    expect(cream.map((section) => section.id)).toEqual(['forge', 'voice', 'realm', 'commons']);
+    for (const section of cream) {
+      expect(section.style.paddingBottom, `${section.id} tail height`).toBe(`${tailPx}px`);
+      const style = renderedStyle(section);
+      expect(style.WebkitMaskImage, `${section.id} carries the prefixed mask too`).toBe(style.maskImage);
+      expect(style.maskImage, `${section.id} fades its tail`).toMatch(new RegExp(`^linear-gradient\\(.+ calc\\(100% - ${tailPx}px\\), transparent\\)$`));
+    }
+    const closer = container.querySelector('#closer');
+    expect(renderedStyle(closer).maskImage).toBeUndefined();
+    const grids = [...container.querySelectorAll('#forge > div, #realm > div')].filter((el) => /380px/.test(el.style.gridTemplateColumns));
+    expect(grids.length).toBe(2);
+    for (const grid of grids) {
+      expect(grid.style.gridTemplateColumns).toBe('repeat(auto-fit, minmax(min(380px, 100%), 1fr))');
+    }
+  });
+
   test('the anon ceiling string appears exactly once on the landing (§363.1)', async () => {
     renderLanding();
     await screen.findByText(landing.closer.h2, {}, { timeout: 10_000 }); // page settled
@@ -132,13 +193,12 @@ describe('HomeLanding — scrollable landing', () => {
     expect(advance.closest('button')).toBeNull();
     expect(advance.tagName).toBe('SPAN');
 
-    // Decorative Fork chips (the commons fallback set) — never buttons.
-    const forks = screen.getAllByText(landing.commons.fork);
-    expect(forks.length).toBeGreaterThan(0);
-    for (const fork of forks) {
-      expect(fork.closest('button')).toBeNull();
-      expect(fork.tagName).toBe('SPAN');
-    }
+    // The commons fallback's fork controls are the OPPOSITE case and belong in
+    // the same pin: they are REAL buttons, because they really forge (the Create
+    // page's own action). §3.8 forbids decorative chips that look like controls,
+    // not controls that work.
+    const forks = await screen.findAllByRole('button', { name: /Fork this sample/ });
+    expect(forks).toHaveLength(SAMPLE_SETTLEMENTS.length);
 
     // The ONE interactive artifact control (owner addition W-L2/5).
     const forgeExact = screen.getByRole('button', { name: new RegExp(landing.brief.forgeExact) });
@@ -192,6 +252,16 @@ describe('HomeLanding — scrollable landing', () => {
       expect(d.from).not.toBe(d.to);
       expect(d.reason).toBeTruthy();
     }
+    // The advance timeline: the town's OWN applied pulse events (ODQ §934.30
+    // item 4). Week labels are the reader's unit; the season frame is the
+    // advance report's chapter idiom.
+    expect(fixture.realm.advance.length).toBeGreaterThanOrEqual(3);
+    for (const e of fixture.realm.advance) {
+      expect(e.week).toMatch(/^Week \d+$/);
+      expect(e.season).toMatch(/^the \w+ of year \d+$/);
+      expect(e.headline).toBeTruthy();
+      expect(e.text).toBeTruthy();
+    }
     // Chronicle + pins: real applied events, real generated names.
     expect(fixture.realm.chronicle.length).toBeGreaterThanOrEqual(3);
     for (const c of fixture.realm.chronicle) {
@@ -200,6 +270,86 @@ describe('HomeLanding — scrollable landing', () => {
     }
     expect(fixture.realm.pins.length).toBeGreaterThanOrEqual(2);
     expect(fixture.realm.pins[0].name).toBe(fixture.town.name);
+  });
+
+  // ── ODQ §934.30 item 4 — THE ADVANCE-TIME CARD SHOWS EVENTS, NOT DELTAS ────
+  // The owner: "the advance time shouldn't describe deltas but should describe
+  // actual events that have happened as we have designed." The card rendered
+  // fixture.realm.whyTrace — three causal BAND crossings headed by an internal
+  // axis name ("Trade connectivity: adequate → critical") whose reason lines read
+  // "Pressure increased". It now renders fixture.realm.advance: the town's own
+  // APPLIED pulse events, the records the in-app Chronicle and advance report
+  // show. Both halves are pinned here, because "it stopped showing deltas" and
+  // "it shows the events" are different regressions.
+  test("the advance-time card renders the town's real events with their weeks, and no band delta", async () => {
+    renderLanding();
+    await screen.findByText(landing.closer.h2, {}, { timeout: 10_000 });
+
+    const entries = fixture.realm.advance;
+    // ANTI-VACUITY: the fixture must actually carry events, or every assertion
+    // below is a loop over nothing and a negative over an empty card.
+    expect(entries.length, 'the fixture carries no advance events — regenerate it').toBeGreaterThanOrEqual(3);
+
+    // The card is the one headed by the advance-time title; its footer line is
+    // the sibling that proves we grabbed the card and not a stray wrapper.
+    const card = screen.getByText(tl('realm.whyTraceTitle', { week: fixture.weeks })).closest('div').parentElement;
+    expect(card.textContent, 'the advance-time card was not found').toContain(landing.realm.derivedLine);
+
+    // POSITIVE, FIRST: every event the run produced is on the card, with the week
+    // it happened in and the sentence the engine wrote for it.
+    for (const entry of entries) {
+      expect(within(card).getByText(entry.week), `missing week label: ${entry.week}`).toBeTruthy();
+      expect(card.textContent, `missing event headline: ${entry.headline}`).toContain(entry.headline);
+      expect(card.textContent, `missing event text: ${entry.text}`).toContain(entry.text);
+    }
+    // The season frame (AdvanceReport's chapter idiom), from the emitter's use of
+    // tickCalendarLabel — not a literal spelled here.
+    expect(card.textContent, 'the season frame is missing').toContain(entries[0].season);
+
+    // NEGATIVE, ANCHORED on an event headline that travels the same render path:
+    // the delta vocabulary is gone from this card. `whyTrace` is still emitted, so
+    // the axis name below is a member the fixture really can produce — this pins
+    // that it is not rendered HERE, not that it stopped existing.
+    const text = card.textContent;
+    expectAbsentWithAnchor(text, 'increased', entries[0].headline, 'advance-time card copy');
+    expectAbsentWithAnchor(text, 'decreased', entries[0].headline, 'advance-time card copy');
+    expectAbsentWithAnchor(text, fixture.realm.whyTrace[0].axis, entries[0].headline, 'advance-time card copy');
+    expectAbsentWithAnchor(text, fixture.realm.whyTrace[0].reason, entries[0].headline, 'advance-time card copy');
+  });
+
+  // ── ODQ §934.24 addendum — AN INVITATION-ONLY TIER LEAVES THE PUBLIC PATH ──
+  // The Founders' Hall is given and never sold, so a logged-out visitor was being
+  // shown an offer they cannot accept on the page whose job is to get them
+  // forging. The row stays in the registry (the tier exists) and the STRIP stops
+  // listing it, keyed on the tier's own `invitationOnly` flag rather than on the
+  // spelling 'Founder' — the same flag lane 31's `isInvitationOnly` predicate
+  // reads, so a second invitation-only tier is covered the day it is added.
+  test('the closer strip lists public tiers only', async () => {
+    renderLanding();
+    await screen.findByText(landing.closer.h2, {}, { timeout: 10_000 });
+
+    const all = landing.closer.tiers;
+    const publicTiers = all.filter((tier) => !tier.invitationOnly);
+    const invited = all.filter((tier) => tier.invitationOnly);
+    // ANTI-VACUITY, BOTH WAYS: the registry must still carry an invitation-only
+    // tier (or this test proves nothing) and must still carry public ones (or the
+    // strip rendering nothing would pass).
+    expect(invited.length, 'no invitation-only tier remains — this pin has no subject').toBeGreaterThanOrEqual(1);
+    expect(publicTiers.length, 'the closer strip has no public tiers left').toBeGreaterThanOrEqual(3);
+
+    // getAllByText, not getByText: 'Cartographer' is ALSO the realm section's
+    // gold waypoint pill (landing.realm.waypointPill), so the tier name is
+    // legitimately on the page twice and a singular query throws on the page
+    // being correct.
+    const names = screen.getAllByText(/./).map((el) => el.textContent);
+    for (const tier of publicTiers) {
+      expect(screen.getAllByText(tier.name).length, `missing public tier: ${tier.name}`).toBeGreaterThanOrEqual(1);
+    }
+    for (const tier of invited) {
+      // The anchor is a PUBLIC tier name that travels the same registry array and
+      // the same renderer, so this absence cannot pass because the strip vanished.
+      expectAbsentWithAnchor(names, tier.name, publicTiers[0].name, 'the landing closer tier strip');
+    }
   });
 
   test('the mono seed provenance tag renders on the artifacts', async () => {
@@ -219,17 +369,170 @@ describe('HomeLanding — scrollable landing', () => {
   // showed them are removed, so neither arm has a subject. The realm-map preview plates
   // in the same directory are a DIFFERENT surface and still ship.
 
-  test('commons fallback renders six labeled placeholder slots when the gallery is unreachable', async () => {
+  // ⛔ THE LAZY SEAM ONLY PAYS IF NOTHING MOUNTS BEFORE THE FETCH SETTLES. `tiles`
+  // starts null, and treating null as "no rows yet" made the fallback branch true on
+  // the FIRST render: React.lazy mounts, requests its chunk, and every landing visit
+  // paid a second serial round-trip for a strip that real rows were about to replace.
+  // React.lazy imports on MOUNT, so "the strip has not mounted" is "the chunk has not
+  // been requested" — which is what these three absences read, against a positive
+  // control (the reserve) that proves the section rendered at all.
+  test('the fallback chunk is not requested until the gallery fetch settles', async () => {
+    let release;
+    galleryRows.gate = new Promise((resolve) => { release = resolve; });
     renderLanding();
     await screen.findByText(landing.commons.h2);
-    // W1 (owner order 2026-07-21): the commons strip is fed dynamically from the
-    // gallery into SIX slots; real towns fill first, decorative placeholders back-
-    // fill the rest and are LABELED ' (placeholder)'. jsdom has no Supabase config
-    // → fetchPublicGallery resolves empty → all six slots render as placeholders
-    // (zero layout shift, no empty grid).
-    expect(landing.commons.cards).toHaveLength(6);
-    for (const card of landing.commons.cards) {
-      expect(await screen.findByText(`${card.name} (placeholder)`)).toBeTruthy();
+
+    // In flight: the section mounts nothing and holds the footprint of the state
+    // this path ENDS in. jsdom has no gallery backend, so fetchPublicGallery cannot
+    // return a row and the curated strip is certain — holding the row grid's box
+    // here would only move the jump from the Suspense swap to the settle moment,
+    // which is the defect this arm pins shut. The attribute IS the choice.
+    const reserve = screen.getByTestId('commons-awaiting-gallery');
+    expect(reserve.getAttribute('data-reserve')).toBe('curated');
+    expect(screen.queryByRole('heading', { name: 'Founding Worlds' })).toBeNull();
+    expect(screen.queryByText(SAMPLE_SETTLEMENTS[0].name)).toBeNull();
+
+    // Settled (empty) — now, and only now, the curated strip is reached for.
+    release();
+    galleryRows.gate = null;
+    expect(await screen.findByRole('heading', { name: 'Founding Worlds' })).toBeTruthy();
+    expect(screen.queryByTestId('commons-awaiting-gallery')).toBeNull();
+  });
+
+  test('three or more real published rows: the strip renders the real towns', async () => {
+    galleryRows.items = [
+      { slug: 'ashford-9f2',    name: 'Ashford-on-Vell', tier: 'town',    population: 1840, netVotes: 12, imageUrl: '' },
+      { slug: 'harrowgate-3a1', name: 'Harrowgate',      tier: 'city',    population: 9200, netVotes: 7,  imageUrl: '' },
+      { slug: 'pellmoor-77c',   name: 'Pellmoor',        tier: 'village', population: 610,  netVotes: 3,  imageUrl: '' },
+    ];
+    renderLanding();
+    await screen.findByText(landing.commons.h2);
+
+    for (const row of galleryRows.items) {
+      expect(await screen.findByText(row.name), `missing real row: ${row.name}`).toBeTruthy();
     }
+    // Each real row carries its vote count (registry copy) and a REAL route out.
+    expect(screen.getByText(tl('commons.votes', { n: 12 }))).toBeTruthy();
+    expect(screen.getAllByRole('button', { name: landing.commons.open })).toHaveLength(3);
+    // ...and the curated trio yields to them: the samples are the FALLBACK, not a
+    // permanent strip. (queryByRole returns null, so this negative carries its own
+    // liveness — the three row names above are asserted present on the same render.)
+    expect(screen.queryByRole('heading', { name: 'Founding Worlds' })).toBeNull();
+  });
+
+  test('commons fallback renders the curated Founding Worlds, never invented towns', async () => {
+    const { container } = renderLanding();
+    await screen.findByText(landing.commons.h2);
+    // The Create page's own heading + lead-in travel with the strip (one source).
+    expect(await screen.findByRole('heading', { name: 'Founding Worlds' })).toBeTruthy();
+    // jsdom has no Supabase config → fetchPublicGallery resolves empty → fewer
+    // than three real rows → the Create page's curated trio renders instead of
+    // the deleted decorative cards. Names come from the DATA module, so this is a
+    // data assertion, never a literal edit.
+    //
+    // ⚠ SCOPED TO §04 SINCE 2026-09-19, AND THAT MAKES IT STRONGER. This read
+    // `findByText(sample.name)` across the whole page, which threw the moment
+    // Cnocby became a curated sample (ODQ §934.30 item 5): the fixture town's
+    // name is now on the landing several times over — the brief card, the copy,
+    // and the strip. `within` the commons section asserts what the arm always
+    // MEANT, which is that the trio renders HERE, not merely somewhere.
+    const commons = container.querySelector('#commons');
+    expect(commons, 'the commons section did not render').toBeTruthy();
+    for (const sample of SAMPLE_SETTLEMENTS) {
+      expect(within(commons).getAllByText(sample.name).length, `missing curated sample: ${sample.name}`).toBeGreaterThanOrEqual(1);
+    }
+
+    // ⛔ THE REGRESSION THIS PIN EXISTS FOR: the label the decorative cards wore.
+    // anchored: the three curated sample names and the Founding Worlds heading are asserted PRESENT on this same render above, so a landing that rendered nothing reds there first
+    expect(container.textContent).not.toMatch(/\(placeholder\)/);
+    // And the fixtures themselves are gone from the registry, not merely unused.
+    expectAbsentWithAnchor(Object.keys(landing.commons), 'cards', 'votes', 'landing.commons copy block');
+    expectAbsentWithAnchor(Object.keys(landing.commons), 'fork', 'open', 'landing.commons copy block');
+  });
+});
+
+/**
+ * ⛔ THE PHONE LANDING IS THE HERO ALONE (the owner, ODQ §934.27).
+ *
+ * "for the landing page, I only want this part to show, not the other scroll down" — the
+ * headline, the one paragraph, the two actions, the free line — "and its background image
+ * as the only one."
+ *
+ * NOT HIDDEN, NOT MOUNTED. React.lazy requests its chunk on MOUNT, so a `display:none` or
+ * a CSS media query would still make the phone fetch the below-fold chunk, the scroll
+ * film and every painting the five scenes name. That is the difference these arms measure,
+ * and it is measurable in jsdom precisely because it is a MOUNT question and not a layout
+ * one: the below-fold's root is either in the tree or it is not.
+ */
+describe('HomeLanding — §934.27: at phone width the hero is the whole page', () => {
+  /** The four texts the owner named, read from the registry rather than as literals. */
+  const HERO_TEXTS = () => [landing.hero.h1a + landing.hero.h1b, landing.hero.sub, landing.hero.reassure];
+
+  test("the hero's four texts are all there", () => {
+    const { container } = renderLanding({ isMobile: true });
+    const h1 = container.querySelectorAll('h1');
+    expect(h1).toHaveLength(1);
+    expect(h1[0].textContent).toBe(landing.hero.h1a + landing.hero.h1b);
+    expect(screen.getByText(landing.hero.sub)).toBeTruthy();
+    expect(screen.getByText(landing.hero.reassure)).toBeTruthy();
+    // The two actions: the forge CTA and Sign in (the latter only while signed out).
+    expect(screen.getByRole('button', { name: landing.hero.cta })).toBeTruthy();
+    expect(screen.getByRole('button', { name: landing.hero.signin })).toBeTruthy();
+    for (const text of HERO_TEXTS()) {
+      expect(container.textContent, `the hero lost: ${text}`).toContain(text);
+    }
+  });
+
+  test('the below-fold root is ABSENT — the chunk is never reached for', async () => {
+    const { container } = renderLanding({ isMobile: true });
+    // ⛔ ANTI-VACUITY, and it is the whole arm: the negative is anchored on the hero,
+    // which is asserted present on THIS render, so "the closer heading is missing"
+    // cannot pass because the page failed to render.
+    const rendered = [...container.querySelectorAll('h1, h2')].map((h) => h.textContent);
+    expectAbsentWithAnchor(
+      rendered,
+      landing.closer.h2,
+      landing.hero.h1a + landing.hero.h1b,
+      'the phone landing renders the hero and nothing below the fold',
+    );
+    for (const id of ['forge', 'voice', 'realm', 'commons', 'closer']) {
+      expect(container.querySelector(`#${id}`), `the below-fold section #${id} mounted on a phone`).toBeNull();
+    }
+    expect(container.querySelectorAll('section.sf-landing-scene-cream')).toHaveLength(0);
+    // A microtask turn: React.lazy resolves on mount, so if anything had mounted the
+    // chunk its content would arrive by now rather than after this assertion.
+    await Promise.resolve();
+    expect(container.querySelector('#closer'), 'the below-fold arrived a tick later').toBeNull();
+  });
+
+  test('the hero painting is the ONLY image on the page', () => {
+    const { container } = renderLanding({ isMobile: true });
+    // ⚠ READ THE STYLE REACT RENDERED, NOT THE CSSOM. The hero's scene is a CUSTOM
+    // PROPERTY (`--sf-scene`), and jsdom's CSSOM is lossy about those exactly as it is
+    // about the mask declarations the cream-stop arm above reads this way; a CSSOM read
+    // could return nothing and call an unchecked page clean. This is the same
+    // `__reactProps$` idiom, applied to every element rather than to one.
+    const urls = [...container.querySelectorAll('*')].flatMap((el) => {
+      const key = Object.keys(el).find((k) => k.startsWith('__reactProps$'));
+      const style = (key && el[key].style) || {};
+      return Object.values(style)
+        .filter((v) => typeof v === 'string')
+        .flatMap((v) => [...v.matchAll(/url\((['"]?)([^'")]+)\1\)/g)].map((m) => m[2]));
+    });
+    expect(urls.length, 'the phone landing paints no image at all — is the hero scene gone?').toBe(1);
+    expect(urls[0]).toMatch(/still-0-desk/);
+    expect(container.querySelectorAll('img, picture, video')).toHaveLength(0);
+  });
+
+  test('the hero fills the band between the header and the bar', () => {
+    const { container } = renderLanding({ isMobile: true });
+    const hero = container.querySelector('section[aria-labelledby="sf-hero-title"]');
+    expect(hero.style.minHeight).toBe(`calc(100vh - ${FOOTER_INSET} - ${BOTTOM_NAV_H})`);
+  });
+
+  test('TABLET AND DESKTOP ARE UNCHANGED: the below fold still mounts', async () => {
+    const { container } = renderLanding({ isMobile: false });
+    expect(await screen.findByText(landing.closer.h2, {}, { timeout: 10_000 })).toBeTruthy();
+    expect(container.querySelector('#forge'), 'the below fold stopped mounting above the phone').not.toBeNull();
   });
 });

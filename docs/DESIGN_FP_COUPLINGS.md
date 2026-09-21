@@ -507,9 +507,9 @@ compromise rounds).
 
 ### CPL-6 — WAR × INTERIOR (February 1917: the war continued past the country's interest until the interior replaced the seat)
 **EXISTS:** four live channels both directions — war sentiment tilts the coup
-hold-chance at 0.22 weight (coup.js:113-114 ← computeWarSentiment,
+hold-chance at 0.22 weight (coup.js:103-104 ← computeWarSentiment,
 disposition.js:223); reinforcement costs bite public_legitimacy
-(warDeployment ~:2038); climb-downs land legitimacy hits + credibility charges
+(warHomeCosts.js:517-520); climb-downs land legitimacy hits + credibility charges
 (momentum.js:1255-1290); a domestically weak seat seeks foreign war
 (legitimacy_hunger, warReasons.js:489-501, TELLABLE-NOW with its authored
 closing line). DARK: settlementPolitics makes treaty-burdened factions a

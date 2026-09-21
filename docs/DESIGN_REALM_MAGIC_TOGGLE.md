@@ -543,12 +543,12 @@ catching power lives in the unresolved-config pin in tests/domain/arcaneIdentity
 
 No third "low magic" realm option in v1 (the binary maps to the existing
 hard axis; a graded realm preset would need the dead genre/magicBias axis
-revived — schema.js:1569's typedef is disposed dead code, and reviving it is
+revived — settlement.schema.js:1655-1668's typedef is disposed dead code, and reviving it is
 an owner call). No live realm-level magic gate (MG-LAW-1). No deity/faith
 gating (MG-LAW-2). No retroactive mutation of existing campaigns (the toggle
 is create-time; existing realms keep their members' truth). No stripping of
 authored magical premises (MG-LAW-4). No mobile surface (the bulk-gen card is
-desktop-only by existing design, WorldMap.js:758-770).
+desktop-only by existing design — ADDRESS STRUCK 2026-09-20 (FIX-C2c): WorldMap.js never entered this history, so the surveyors read it in the uncommitted tree this header pins, and there is no file to re-address to).
 
 ## §6 CHAIR CHECKPOINTS FOR SOL
 

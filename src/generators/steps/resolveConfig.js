@@ -19,12 +19,22 @@ import {
 import {
   resolveGenerationContentProfile,
 } from '../../domain/generationContentProfile.js';
+// The world-fact option VALUES have one home (EM-P3). ⛔ THE src/data ADDRESS,
+// NEVER the src/domain one: importing the domain leaf from a generator seeds
+// vite's ENGINE_SHARED_DOMAIN and drags both modules into the eager first-paint
+// closure (measured, 268 -> 270 modules).
+import {
+  TERRAIN_WEIGHTS as CANONICAL_TERRAIN_WEIGHTS,
+  CULTURES as CANONICAL_CULTURES,
+} from '../../data/worldFactOptions.js';
 
-// Exported for the gallery facet-alignment contract (terrain facet vocabulary).
-export const TERRAIN_WEIGHTS = [
-  ['plains', 22], ['hills', 18], ['forest', 13],
-  ['riverside', 16], ['coastal', 16], ['mountain', 9], ['desert', 6],
-];
+// Re-exported under their existing names for the gallery facet-alignment
+// contract (terrain facet vocabulary) — the list itself is no longer spelled here.
+export const TERRAIN_WEIGHTS = CANONICAL_TERRAIN_WEIGHTS;
+
+// Re-exported under its existing name for the gallery facet-alignment contract
+// (culture facet vocabulary must match the generator's own list).
+export const CULTURES = CANONICAL_CULTURES;
 
 const TERRAIN_ROUTE_POOLS = {
   plains:    ['crossroads','crossroads','road','road','river'],
@@ -35,13 +45,6 @@ const TERRAIN_ROUTE_POOLS = {
   mountain:  ['road','road','road','isolated','isolated'],
   desert:    ['crossroads','road','road','isolated','road'],
 };
-
-// Exported for the gallery facet-alignment contract (culture facet vocabulary
-// must match the generator's own list).
-export const CULTURES = [
-  'germanic','latin','celtic','arabic','norse','slavic',
-  'east_asian','mesoamerican','south_asian','steppe','greek',
-];
 
 registerStep('resolveConfig', {
   deps: [],

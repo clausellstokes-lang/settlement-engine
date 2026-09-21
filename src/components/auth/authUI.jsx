@@ -17,6 +17,8 @@ import Page from '../primitives/Page.jsx';
 import { t } from '../../copy/index.js';
 import { navigate } from '../../hooks/useRoute.js';
 import { viewToPath } from '../../lib/routes.js';
+import useIsMobile from '../../hooks/useIsMobile.js';
+import { chromeFontSize } from '../../design/proseScale.js';
 
 // ── OAuth brand glyphs ──────────────────────────────────────────────────────
 // Inline SVG (vs. a brand-icon package) to control bundle size — each glyph
@@ -42,6 +44,7 @@ export function DiscordGlyph() {
 }
 
 export function OAuthButton({ glyph, label, onClick, disabled, soonNote }) {
+  const mobile = useIsMobile();
   return (
     <DSButton
       variant="secondary"
@@ -53,7 +56,7 @@ export function OAuthButton({ glyph, label, onClick, disabled, soonNote }) {
       icon={glyph}
       trailingIcon={soonNote && (
         <span style={{
-          fontSize: FS.micro, fontWeight: 800, letterSpacing: '0.06em',
+          fontSize: chromeFontSize(FS.micro, mobile), fontWeight: 800, letterSpacing: '0.06em',
           textTransform: 'uppercase', color: SLATE,
           background: SLATE_BG, padding: '2px 5px',
           marginLeft: 4,
@@ -88,10 +91,11 @@ export function FooterLink({ href, onClick, children }) {
 }
 
 export function OrDivider({ label = 'or with email' }) {
+  const mobile = useIsMobile();
   return (
     <div style={{
       display: 'flex', alignItems: 'center', gap: SP.sm,
-      fontSize: FS.xxs, fontWeight: 700, color: MUTED,
+      fontSize: chromeFontSize(FS.xxs, mobile), fontWeight: 700, color: MUTED,
       textTransform: 'uppercase', letterSpacing: '0.08em',
     }} aria-hidden="true">
       <span style={{ flex: 1, height: 1, background: BORDER }} />
@@ -286,6 +290,7 @@ export function Alert({ type, children }) {
 
 /** Role badge (developer / admin). Returns null for ordinary users. */
 export function RoleBadge({ role }) {
+  const mobile = useIsMobile();
   if (role === 'user') return null;
   const cfg = {
     developer: { color: '#7c3aed', bg: 'rgba(124,58,237,0.12)', label: 'Developer' },
@@ -297,7 +302,7 @@ export function RoleBadge({ role }) {
       display: 'inline-flex', alignItems: 'center', gap: 3,
       padding: '2px 8px',
       background: c.bg, color: c.color,
-      fontSize: FS.xxs, fontWeight: 700,
+      fontSize: chromeFontSize(FS.xxs, mobile), fontWeight: 700,
       textTransform: 'uppercase', letterSpacing: '0.04em',
     }}>
       {c.label}
@@ -342,9 +347,15 @@ export function AuthPageShell({ title, subtitle, children, footer }) {
             textDecoration: 'none',
           }}
         >
+          {/* ⛔ NO `textTransform: 'lowercase'`. The span says SettlementForge and
+              the anchor's accessible name says SettlementForge, and the rule
+              rendered "settlementforge" over the sign-in and register cards — the
+              two surfaces where a visitor first reads the product's name, and the
+              one place the brand was spelled a second way. The transform was the
+              only thing doing it; the markup was always right. */}
           <span style={{
             fontSize: FS.xl, fontWeight: 700, color: GOLD, fontFamily: serif_,
-            letterSpacing: '0.02em', textTransform: 'lowercase',
+            letterSpacing: '0.02em',
           }}>
             SettlementForge
           </span>

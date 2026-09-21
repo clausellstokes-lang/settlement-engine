@@ -13,6 +13,13 @@
  *     families the old `name.includes(...)` triple missed ('Street gang', 'Wayside
  *     shrine', 'Teleportation circle') while excluding non-matches.
  *  3. NPC generation stays deterministic — same seed ⇒ byte-identical NPCs.
+ *  4. THE SETTING-AGNOSTIC RENAMES CARRY NO MECHANICS. A role label is display
+ *     copy, but four separate classifiers read it as a SUBSTRING, so renaming one
+ *     can silently move an NPC's faction, category, power band, importance or
+ *     simulation archetype. This block asserts each rename lands on exactly what
+ *     its predecessor did — the pin that caught 'Deacon/Curate' -> 'Junior Cleric'
+ *     flipping npcAgency from `civic` to `religious` because 'cleric' is one of
+ *     the religious archetype's labels and 'deacon' is none of them.
  */
 import { describe, it, expect } from 'vitest';
 import { setActiveRng, clearActiveRng } from '../../src/kernel/rngContext.js';
@@ -25,6 +32,123 @@ import {
   isCommerceGuild,
 } from '../../src/generators/roleCategory.js';
 import { institutionalCatalog, catalogIdForName } from '../../src/data/institutionalCatalog.js';
+import { inferRoleArchetype, NPC_ROLE_ARCHETYPES } from '../../src/domain/worldPulse/npcAgency.js';
+import { inferImportance } from '../../src/domain/entities/npcs.js';
+
+// ── 0. the setting-agnostic renames are mechanically inert ───────────────────
+//
+// ⛔ EVERY CLASSIFIER THAT READS A ROLE STRING IS LISTED HERE, and the list is the
+// point: a role label is display copy, but five separate readers take it as a
+// SUBSTRING, so a rename can silently move an NPC's faction, category, power band,
+// importance or simulation archetype.
+//
+// ⚠ THREE OF THE FIVE ARE IMPORTED AND ONE IS NOT, AND THE DIFFERENCE IS DECLARED
+// rather than left to be discovered. `roleToCategory`, `inferRoleArchetype` and
+// `inferImportance` are the SHIPPED functions, called here exactly as the product
+// calls them — `inferRoleArchetype` over the whole field set it reads in production
+// (`name`/`label`/`role`/`title`/`description`), and `inferImportance` over the npc
+// shape. `generateNPCPowerLevel` is module-local to npcGenerator.js, which sits AT
+// its frozen size baseline of 1345 effective lines and which this lane may not edit;
+// exporting it is a zero-line change and is the better end state, but it is not this
+// lane's to make. So its two bands are mirrored below AND PINNED TO THE SOURCE: the
+// arrays are read out of npcGenerator.js and compared, so a drift there reds here
+// instead of quietly making this pin measure a function that no longer exists.
+import { readFileSync } from 'node:fs';
+import { fileURLToPath } from 'node:url';
+import { dirname, join } from 'node:path';
+import { expectAbsentWithAnchor } from '../helpers/anchoredNegatives.js';
+
+const NPC_GENERATOR_SRC = readFileSync(
+  join(dirname(fileURLToPath(import.meta.url)), '../../src/generators/npcGenerator.js'),
+  'utf8',
+);
+const HIGH_POWER = ['mayor', 'lord', 'governor', 'bishop', 'archmage', 'guild_master', 'captain', 'commander', 'crime lord'];
+const MID_POWER = ['council_member', 'priest', 'wealthy_merchant', 'wizard', 'knight', 'magister', 'sergeant'];
+
+/** npcGenerator.generateNPCPowerLevel's band, which decides influence and power. */
+function powerBand(role) {
+  const r = String(role).toLowerCase();
+  if (HIGH_POWER.some((k) => r.includes(k))) return 'high';
+  if (MID_POWER.some((k) => r.includes(k))) return 'moderate';
+  return 'low';
+}
+
+/** The four classifiers a rename has to leave alone, over the shape each one ships against. */
+const classifiersFor = (role) => ({
+  category: roleToCategory(String(role).toLowerCase()),
+  archetype: inferRoleArchetype({ role }),
+  power: powerBand(role),
+  importance: inferImportance({ role }),
+});
+
+describe('setting-agnostic role renames are mechanically inert', () => {
+  it('the mirrored power bands are EXACTLY npcGenerator\'s own, both directions', () => {
+    // ⛔ THE FIRST SPELLING OF THIS PIN WAS SATISFIED BY COINCIDENCE. It asserted
+    // `NPC_GENERATOR_SRC.toContain("'captain'")` for each keyword, which the file answers
+    // from ANY occurrence - 'captain' also appears in ROLE_FACTION_MAP, so deleting it
+    // from HIGH_POWER would have left this green. A containment check over a whole file
+    // cannot see a specific array at all. The arrays are extracted and compared.
+    const arrayLiteral = (name) => {
+      const match = NPC_GENERATOR_SRC.match(new RegExp(`const ${name} = \\[([\\s\\S]*?)\\];`));
+      expect(match, `${name} is no longer a literal array in npcGenerator.js`).toBeTruthy();
+      return [...match[1].matchAll(/'([^']*)'/g)].map((m) => m[1]);
+    };
+    // EQUALITY, so the mirror cannot drift in EITHER direction: a keyword added to the
+    // source without being mirrored fails, and one deleted from the source fails too.
+    expect(arrayLiteral('HIGH_POWER')).toEqual(HIGH_POWER);
+    expect(arrayLiteral('MID_POWER')).toEqual(MID_POWER);
+
+    // And the extractor is not vacuous: it really does read those arrays. The exclusion is
+    // ANCHORED on a sibling that must be present, so a drifted or empty extraction cannot
+    // pass it (tests/helpers/anchoredNegatives.js).
+    expectAbsentWithAnchor(arrayLiteral('HIGH_POWER'), 'priest', 'captain', 'HIGH_POWER keeps the priest out');
+    expect(arrayLiteral('MID_POWER')).toContain('priest');
+  });
+
+  it.each([
+    ['Parish Priest', 'Priest'],
+    ['Templar Commander', 'Temple Guard Commander'],
+    ['Wandering Friar', 'Wandering Monk'],
+    ['Deacon/Curate', 'Under-Chaplain'],
+  ])('%s -> %s classifies identically everywhere', (before, after) => {
+    expect(classifiersFor(after)).toEqual(classifiersFor(before));
+  });
+
+  it('⚠ Temple Guard Commander holds only because MILITARY precedes RELIGIOUS', () => {
+    // The one rename whose stability is ORDER-DEPENDENT rather than absent-label. It
+    // carries BOTH 'commander' (military) and 'temple' (religious), and
+    // inferRoleArchetype returns the FIRST archetype that matches over
+    // NPC_ROLE_ARCHETYPES' insertion order. 'Templar Commander' matched only
+    // 'commander' — 'templar' is not 'temple' — so the two agree today because
+    // military is declared before religious, and reordering that object would move
+    // this NPC without touching a single label. Stated here so the coupling is a
+    // written fact rather than a coincidence the next reader has to rediscover.
+    expect(inferRoleArchetype({ role: 'Temple Guard Commander' })).toBe('military');
+    // Drop the military words and the SAME 'temple' lands religious — which is the
+    // proof that the label is live in the string and the order is what suppresses it.
+    expect(inferRoleArchetype({ role: 'Temple Keeper' })).toBe('religious');
+    expect(Object.keys(NPC_ROLE_ARCHETYPES).indexOf('military'))
+      .toBeLessThan(Object.keys(NPC_ROLE_ARCHETYPES).indexOf('religious'));
+  });
+
+  it('the pin can fail: the rejected label DOES move the simulation archetype', () => {
+    // The negative control. Without it this block proves only that two strings agree,
+    // never that disagreement would be seen — and 'Junior Cleric' is the label this
+    // lane actually wrote before the review caught it.
+    expect(inferRoleArchetype({ role: 'Deacon/Curate' })).toBe('civic');
+    expect(inferRoleArchetype({ role: 'Junior Cleric' })).toBe('religious');
+    expect(classifiersFor('Junior Cleric')).not.toEqual(classifiersFor('Deacon/Curate'));
+  });
+
+  it('the archetype reads the whole shipped field set, not the role alone', () => {
+    // inferRoleArchetype joins name/label/role/title/description. A pin that passed only
+    // `{ role }` would miss a cultural TITLE carrying the tell — which is exactly how a
+    // Mesoamerican hamlet's "Tlamacazqui" sits beside its role on the card.
+    expect(inferRoleArchetype({ role: 'Under-Chaplain', title: 'Priest' })).toBe('religious');
+    expect(inferRoleArchetype({ role: 'Under-Chaplain', title: 'Tlamacazqui' })).toBe('civic');
+    expect(inferRoleArchetype({ description: 'keeps the temple roll' })).toBe('religious');
+  });
+});
 
 // ── 1. roleToCategory ─────────────────────────────────────────────────────────
 
@@ -36,7 +160,7 @@ describe('roleToCategory', () => {
     ['Guard Captain', 'military'],
     ['City Watch Chief', 'military'],
     ['Garrison Commander', 'military'],
-    ['Parish Priest', 'religious'],
+    ['Priest', 'religious'],
     ['High Priest', 'religious'],
     ['Bishop', 'religious'],
     ['Guild Archmage', 'magic'],

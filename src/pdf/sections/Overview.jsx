@@ -30,9 +30,13 @@ import {
   cap, smart, label, noteText, hookText, finite, safePct, humanize, safe,
   prominentPair, prominentType, prominentProse,
 } from '../lib/format.js';
+import { statusCase } from '../../domain/display/labelCase.js';
+import { institutionDisplayName } from '../../domain/display/institutionDisplayName.js';
+import { resourceDisplayName } from '../../domain/display/resourceDisplayName.js';
 import { proseToPlainText } from '../primitives/ProseText.jsx';
+import { StateProse } from '../primitives/StateProse.jsx';
 
-export function Overview({ settlement, narrativeMode, vm }) {
+export function Overview({ settlement, narrativeMode, vm, stateProse }) {
   const o = vm.overview;
   const id = vm.identity;
 
@@ -83,13 +87,19 @@ export function Overview({ settlement, narrativeMode, vm }) {
       {/* ── Identity strip ───────────────────────────────────────── */}
       <StatStrip
         stats={[
-          { label: 'POPULATION', value: populationFmt, sublabel: id.tier },
-          { label: 'AGE',        value: ageFmt, sublabel: id.terrain },
-          { label: 'PROSPERITY', value: cap(o.prosperity), tone: o.prosperityTone },
-          { label: 'SAFETY',     value: cap(o.safety), tone: o.safetyTone },
-          { label: 'STABILITY',  value: cap(o.stability) },
+          { label: 'Population', value: populationFmt, sublabel: id.tier },
+          { label: 'Age',        value: ageFmt, sublabel: id.terrain },
+          // RUNG 3 (ODQ §934.22 item 4). `cap` only lifts the FIRST character, so a frozen
+          // Title-Case band ('Very Safe', 'Enforced Order') printed here exactly as its
+          // producer declares it while the screen's own tiles were cased. One rung, one case.
+          { label: 'Prosperity', value: statusCase(o.prosperity), tone: o.prosperityTone },
+          { label: 'Safety',     value: statusCase(o.safety), tone: o.safetyTone },
+          { label: 'Stability',  value: statusCase(o.stability) },
         ]}
       />
+
+      {/* ── The mounted state prose (the screen's ProseBlock positions) ── */}
+      <StateProse stateProse={stateProse} tab="overview" />
 
       {/* ── Active crises ─────────────────────────────────────────── */}
       {o.stress.length > 0 && (
@@ -344,6 +354,12 @@ export function Overview({ settlement, narrativeMode, vm }) {
       )}
 
       {/* ── Geography ─────────────────────────────────────────────── */}
+      {/* THE RESOURCE LABEL SEAM (ODQ §934.22 item 2). These three lists are
+        * `resourceAnalysis`'s own persisted strings and they arrive as a MIX: authored
+        * phrases, bare lower-case commodity words, and raw RESOURCE_DATA keys. `humanize`
+        * could only GUESS a spelling from the key ('Hot Springs Mineral'), which agreed with
+        * neither the catalogue ('Mineral Hot Springs') nor the screen. The seam is the
+        * catalogue, and it cases every value the same way. */}
       {(o.geography?.terrainAdvantages?.length > 0 || o.geography?.terrainCriticals?.length > 0 || o.geography?.nearbyResources?.length > 0) && (
         <View style={{ marginTop: space.sm }} wrap={false}>
           <HairRule />
@@ -358,7 +374,7 @@ export function Overview({ settlement, narrativeMode, vm }) {
                   items={o.geography.terrainAdvantages}
                   tone="good"
                   emptyText="None"
-                  itemRender={(it) => label(it)}
+                  itemRender={(it) => resourceDisplayName(it)}
                 />
               </View>
             }
@@ -369,7 +385,7 @@ export function Overview({ settlement, narrativeMode, vm }) {
                   items={o.geography.terrainCriticals}
                   tone="bad"
                   emptyText="None"
-                  itemRender={(it) => label(it)}
+                  itemRender={(it) => resourceDisplayName(it)}
                 />
               </View>
             }
@@ -380,7 +396,7 @@ export function Overview({ settlement, narrativeMode, vm }) {
                   items={o.geography.nearbyResources?.slice(0, 6) || []}
                   tone="muted"
                   emptyText="None recorded"
-                  itemRender={(it) => label(it)}
+                  itemRender={(it) => resourceDisplayName(it)}
                 />
               </View>
             }
@@ -405,7 +421,12 @@ export function Overview({ settlement, narrativeMode, vm }) {
               )}
               {q.landmarks?.length > 0 && (
                 <Text style={{ ...type.caption, color: palette.muted, fontSize: pt['8'] }}>
-                  Landmarks: {q.landmarks.map(l => label(l)).filter(Boolean).join(', ')}
+                  {/* A LANDMARK IS A RAW CATALOGUE KEY (spatialGenerator fills it from
+                    * `instNames`), so this line printed 'Parish churches (2-5)' in the paid
+                    * document while `Institutions.jsx` printed 'Houses of worship (2-5)' two
+                    * chapters later. `label` composes with the seam rather than replacing it:
+                    * `humanize` returns any string containing whitespace unchanged. */}
+                  Landmarks: {q.landmarks.map(l => label(institutionDisplayName(l))).filter(Boolean).join(', ')}
                 </Text>
               )}
             </View>
@@ -560,6 +581,12 @@ function FoodBalanceBar({ fb }) {
         <Text style={{ ...type.caption, color: palette.bad, fontSize: pt['8'], marginTop: 1 }}>
           Deficit: {smart(fb.deficit)}
           {fb.coveragePct != null ? ` · imports cover ${fb.coveragePct}% of gap` : ''}
+          {/* ODQ §934.20 — the magical channel, on the same line as the trade one, so
+              the chapter's deficit and its coverage add up. Appended as its own node:
+              the coverage clause above is frozen byte-for-byte by the prose-numerics
+              baseline, and this clause carries no numeral of its own — the offset
+              prints through `smart`, the lb/day idiom the Deficit figure already uses. */}
+          {fb.magicOffset != null ? ` · ${fb.magicChannel} provision covers ${smart(fb.magicOffset)}` : ''}
         </Text>
       )}
       {fb?.surplus > 0 && (

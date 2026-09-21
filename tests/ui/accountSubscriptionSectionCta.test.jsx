@@ -17,6 +17,10 @@ import { describe, test, expect, afterEach, vi } from 'vitest';
 import { render, cleanup, screen } from '@testing-library/react';
 import { fireEvent } from '@testing-library/react';
 
+// These pins describe the CTA with purchases OPEN (post-launch behaviour); the
+// closed pre-launch state is pinned in tests/components/launchLock.account.test.jsx.
+vi.mock('../../src/lib/launchGate.js', async (importOriginal) => ({ ...(await importOriginal()), purchasesOpen: () => true }));
+
 // The Founder tile is audience-gated and lazy; stub it to null so this pin only
 // exercises the generic CTA. The eligibility hook (which would demote the CTA to
 // secondary when the tile shows) is stubbed false — a plain free user.

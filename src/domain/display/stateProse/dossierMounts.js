@@ -88,8 +88,8 @@
  * no writer produces is a DEFECT (remove it). They get different treatment.
  *
  * ── ⛔⛔ THE FIRST-PAINT LAW: A LIT SENTENCE A READER CANNOT SEE IS DARK ──────────────
- * A mount is not a position until a reader reaches it. `Primitives.jsx:114` (and
- * `Collapsible` at :83) render a closed section as `{open && <div>{children}</div>}` — a
+ * A mount is not a position until a reader reaches it. `Primitives.jsx:120` (and
+ * `Collapsible` at :89) render a closed section as `{open && <div>{children}</div>}` — a
  * collapsed host emits NO BYTES AT ALL, not hidden ones. So a SENTENCE row drawn inside a
  * `collapsible` host that is not open on first paint is lit in this table and dark on the
  * page, and every instrument this subsystem owns is green over it: the reachability arm
@@ -153,7 +153,7 @@ export const MOUNT_RUNGS = Object.freeze({
  *   the only one. Its one legal value is `'closed-section'`.
  *
  *   A SENTENCE row whose draw sits inside a `collapsible` host that is not open on first
- *   paint reds the visibility arm, because `Primitives.jsx:114` renders `{open &&
+ *   paint reds the visibility arm, because `Primitives.jsx:120` renders `{open &&
  *   children}`: a collapsed host produces NO BYTES and the position is lit in the registry
  *   and dark to every reader. A row may declare instead of moving, and then it OWES a
  *   `visibilityReason`. The arm is TWO-SIDED: a row declaring this whose host is actually
@@ -212,7 +212,9 @@ export const MOUNT_RUNGS = Object.freeze({
  *     position and is PAID at `daily_life.standingOfLiving` (DESK-ECON2). Not `overview`:
  *     DS-GEN-3 already speaks about the prosperity rung there through five `prosperity: *`
  *     pools at `overview.systemsHealth`, so that tab is the one place a second prosperity
- *     sentence WOULD be the page contradicting itself. `daily_life` prints the band word as
+ *     sentence WOULD be the page contradicting itself. (⚠ Since owner order 2026-09-17 that
+ *     row GLANCES and DS-GEN-3 speaks nowhere; the placement argument stands for the day its
+ *     sentences are re-homed.) `daily_life` prints the band word as
  *     its Economy anchor fact and carries no prosperity sentence of any kind.
  *   • FOOD. DS-ECO-9 (the food-security ladder) speaks in the Food Security section.
  *     DS-ECO-2 (the at-a-glance tiles) therefore glances at BOTH of its positions — which
@@ -333,8 +335,17 @@ export const DOSSIER_MOUNTS = Object.freeze([
   Object.freeze({
     mount: 'overview.origin', tab: 'overview', desk: 'general', blockId: 'DS-GEN-6', rung: 'sentence', dimensions: ['deficit'],
   }),
+  // ⛔ GLANCE BY OWNER ORDER 2026-09-17. The Systems Health section printed up to ten DS-GEN-3
+  // sentences stacked under its bars, one per lens. The owner: "either simply pick just one or
+  // remove that entire section. Any of those pieces should live somewhere else instead and
+  // we'll figure that out later, but not altogether like it does right now." The chair ruled
+  // REMOVE (picking one would let an arbitrary lens stand in for the other nine). So this
+  // position keeps its rows (the bars, tags and band words, which were always the datum) and
+  // draws no sentence; the desk, the corpus and the generator are untouched, and DS-GEN-3 has
+  // NO speaking position until the sentences are re-homed, which is a registry act. Pinned
+  // in the DOM by tests/ui/generalDeskTabFlow.test.js.
   Object.freeze({
-    mount: 'overview.systemsHealth', tab: 'overview', desk: 'general', blockId: 'DS-GEN-3', rung: 'sentence',
+    mount: 'overview.systemsHealth', tab: 'overview', desk: 'general', blockId: 'DS-GEN-3', rung: 'glance',
   }),
   Object.freeze({
     mount: 'overview.warnings', tab: 'overview', desk: 'general', blockId: 'DS-GEN-7', rung: 'sentence',

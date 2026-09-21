@@ -19,7 +19,7 @@ const item = (rivals = []) => ({
     { name: 'Dockhands', category: 'labor', power: 0.3 },
   ] } },
 });
-const snap = (it) => ({ settlements: [it] });
+const snap = (entry) => ({ settlements: [entry] });
 const litWS = () => ({ simulationRules: { memoryWeaveEnabled: true } });
 
 describe('D-7c/e coalition cooperation — the alliance-trust deposit', () => {

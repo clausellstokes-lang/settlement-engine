@@ -25,6 +25,8 @@ import { t } from '../copy/index.js';
 import { INK, MUTED, SECOND, BORDER, CARD, CARD_HDR, GOLD, GOLD_DEEP, sans, FS } from './theme.js';
 import IconButton from './primitives/IconButton.jsx';
 import useDialogFocusTrap from './primitives/useDialogFocusTrap.js';
+import useIsMobile from '../hooks/useIsMobile.js';
+import { chromeFontSize } from '../design/proseScale.js';
 
 // THE INSTRUMENT PLATE (Deep Craft — the dossier's modal-as-plate voice): the
 // stale-narrative notice reads as a rule-framed plate over the warm-dim modal
@@ -38,6 +40,7 @@ export default function StaleNarrativeModal({
   changeLabel,  // short human-readable description of the applied change (e.g. "Kill / remove NPC", "3 changes")
   onClose,      // () => dismiss; the applied change is untouched
 }) {
+  const mobile = useIsMobile();
   const activeSaveId     = useStore(s => s.activeSaveId);
   const requestNarrative = useStore(s => s.requestNarrative);
   // Shared modal focus management: focus in on open, trap Tab, Escape dismisses
@@ -87,7 +90,7 @@ export default function StaleNarrativeModal({
             <div style={{ fontSize: FS.md, fontWeight: 800, color: INK, fontFamily: sans, letterSpacing: '0.02em' }}>
               {t('staleNarrative.heading')}
             </div>
-            <div style={{ fontSize: FS.xxs, color: MUTED, marginTop: 2, fontFamily: sans }}>
+            <div style={{ fontSize: chromeFontSize(FS.xxs, mobile), color: MUTED, marginTop: 2, fontFamily: sans }}>
               {changeLabel}
             </div>
           </div>
@@ -127,7 +130,7 @@ export default function StaleNarrativeModal({
           >
             <div style={{ flex: 1 }}>
               <div style={{ fontSize: FS.sm, fontWeight: 800, letterSpacing: '0.02em' }}>{t('staleNarrative.regenerateTitle')}</div>
-              <div style={{ fontSize: FS.xxs, marginTop: 2, opacity: 0.82 }}>
+              <div style={{ fontSize: chromeFontSize(FS.xxs, mobile), marginTop: 2, opacity: 0.82 }}>
                 {t('staleNarrative.regenerateBody', { cost })}
               </div>
             </div>
@@ -150,7 +153,7 @@ export default function StaleNarrativeModal({
           >
             <div style={{ flex: 1 }}>
               <div style={{ fontSize: FS.sm, fontWeight: 700, color: INK, letterSpacing: '0.02em' }}>{t('staleNarrative.continueTitle')}</div>
-              <div style={{ fontSize: FS.xxs, marginTop: 2, color: MUTED }}>
+              <div style={{ fontSize: chromeFontSize(FS.xxs, mobile), marginTop: 2, color: MUTED }}>
                 {t('staleNarrative.continueBody')}
               </div>
             </div>

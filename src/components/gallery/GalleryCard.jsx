@@ -24,8 +24,11 @@ import Button from '../primitives/Button.jsx';
 import GalleryImage from './GalleryImage.jsx';
 import { GalleryReactionSummary } from './GalleryReactionChips.jsx';
 import VoteButton from './VoteButton.jsx';
+import useIsMobile from '../../hooks/useIsMobile.js';
+import { chromeFontSize, proseFontSize } from '../../design/proseScale.js';
 
 export default function GalleryCard({ item, onOpen, onVote, voting }) {
+  const mobile = useIsMobile();
   const [shared, setShared] = useState(false);
   // DOMPurify isn't cheap and a gallery is a long list where each card
   // re-renders on vote/scroll; sanitize only when the description string changes.
@@ -92,7 +95,7 @@ export default function GalleryCard({ item, onOpen, onVote, voting }) {
               // white-on-gold this carried was the retired 2.4:1 failure.
               color: INK,
               fontFamily: sans,
-              fontSize: FS.xxs,
+              fontSize: chromeFontSize(FS.xxs, mobile),
               fontWeight: 950,
             }}>
               {Math.max(0, item.netVotes || 0)} votes
@@ -108,7 +111,7 @@ export default function GalleryCard({ item, onOpen, onVote, voting }) {
                 color: GOLD,
                 border: `1px solid ${GOLD}`,
                 fontFamily: sans,
-                fontSize: FS.xxs,
+                fontSize: chromeFontSize(FS.xxs, mobile),
                 fontWeight: 950,
               }}>
                 Curated
@@ -125,7 +128,7 @@ export default function GalleryCard({ item, onOpen, onVote, voting }) {
                 color: SECOND,
                 border: `1px solid ${BORDER2}`,
                 fontFamily: sans,
-                fontSize: FS.xxs,
+                fontSize: chromeFontSize(FS.xxs, mobile),
                 fontWeight: 950,
               }}>
                 Unlisted
@@ -161,7 +164,7 @@ export default function GalleryCard({ item, onOpen, onVote, voting }) {
             {item.name || t('gallery.untitled')}
           </h3>
         </Button>
-        <div style={{ display: 'flex', alignItems: 'center', gap: 6, flexWrap: 'wrap', color: MUTED, fontFamily: sans, fontSize: FS.xs, fontWeight: 800, textTransform: 'capitalize' }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: 6, flexWrap: 'wrap', color: MUTED, fontFamily: sans, fontSize: chromeFontSize(FS.xs, mobile), fontWeight: 800, textTransform: 'capitalize' }}>
           <span>{meta.join(' / ')}</span>
           {/* Aliveness (GALLERY-2 phase 2) — renders nothing when un-stamped. */}
           <AlivenessBadge score={item.aliveness} />
@@ -173,7 +176,7 @@ export default function GalleryCard({ item, onOpen, onVote, voting }) {
               margin: 0,
               color: BODY,
               fontFamily: sans,
-              fontSize: FS.xs,
+              fontSize: proseFontSize(FS.xs, mobile),
               lineHeight: 1.45,
               display: '-webkit-box',
               WebkitLineClamp: 2,
@@ -192,7 +195,7 @@ export default function GalleryCard({ item, onOpen, onVote, voting }) {
               background: CARD_ALT,
               color: SECOND,
               fontFamily: sans,
-              fontSize: FS.xxs,
+              fontSize: chromeFontSize(FS.xxs, mobile),
               fontWeight: 800,
               textTransform: 'capitalize',
             }}>
@@ -205,10 +208,10 @@ export default function GalleryCard({ item, onOpen, onVote, voting }) {
         <GalleryReactionSummary counts={item.reactions} />
         <div style={{ display: 'flex', alignItems: 'center', gap: 7, flexWrap: 'wrap', marginTop: 2 }}>
           <VoteButton count={item.netVotes} voted={item.voted} disabled={voting} onClick={() => onVote(item)} />
-          <span style={{ display: 'inline-flex', alignItems: 'center', gap: 4, color: MUTED, fontFamily: sans, fontSize: FS.xs, fontWeight: 800 }}>
+          <span style={{ display: 'inline-flex', alignItems: 'center', gap: 4, color: MUTED, fontFamily: sans, fontSize: chromeFontSize(FS.xs, mobile), fontWeight: 800 }}>
             {formatNumber(item.viewCount)} views
           </span>
-          <span style={{ display: 'inline-flex', alignItems: 'center', gap: 4, color: MUTED, fontFamily: sans, fontSize: FS.xs, fontWeight: 800 }}>
+          <span style={{ display: 'inline-flex', alignItems: 'center', gap: 4, color: MUTED, fontFamily: sans, fontSize: chromeFontSize(FS.xs, mobile), fontWeight: 800 }}>
             {formatNumber(item.commentCount)} comments
           </span>
           <Button
@@ -219,7 +222,7 @@ export default function GalleryCard({ item, onOpen, onVote, voting }) {
           >
             {shared ? 'Copied' : 'Share'}
           </Button>
-          <span style={{ marginLeft: 'auto', color: MUTED, fontFamily: sans, fontSize: FS.xxs, fontWeight: 750 }}>
+          <span style={{ marginLeft: 'auto', color: MUTED, fontFamily: sans, fontSize: chromeFontSize(FS.xxs, mobile), fontWeight: 750 }}>
             {formatDate(item.updatedAt || item.publishedAt)}
           </span>
         </div>

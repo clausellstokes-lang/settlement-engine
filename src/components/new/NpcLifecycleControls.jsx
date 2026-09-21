@@ -7,6 +7,7 @@ import {
 } from '../../domain/npc/npcBank.js';
 import { STASIS_REASONS } from '../../domain/npc/npcOps.js';
 import useIsMobile from '../../hooks/useIsMobile.js';
+import { chromeFontSize, proseFontSize } from '../../design/proseScale.js';
 
 /**
  * NpcLifecycleControls — bounded NPC editing and owner-only urgent actions.
@@ -32,14 +33,16 @@ const FACETS = [
   { kind: 'goal', label: 'Goal', vocab: NPC_GOALS },
 ];
 
-const selectStyle = {
-  fontSize: FS.xxs,
+// A function of the width, not a frozen object: the phone chrome floor is a
+// per-viewport value and a module constant cannot read one.
+const selectStyle = (mobile) => ({
+  fontSize: chromeFontSize(FS.xxs, mobile),
   color: swatch.inkMag2,
   background: swatch['#FAF8F4'],
   border: `1px solid ${swatch['#EDE3CC']}`,
   padding: '2px 4px',
   maxWidth: '100%',
-};
+});
 
 const STASIS_LABELS = Object.freeze({
   journey: 'Away on a journey',
@@ -142,7 +145,7 @@ export default function NpcLifecycleControls({
       {showEditor && (
         <>
           <div style={{
-            fontSize: FS.micro,
+            fontSize: chromeFontSize(FS.micro, mobile),
             fontWeight: 700,
             color: MUTED,
             textTransform: 'uppercase',
@@ -156,7 +159,7 @@ export default function NpcLifecycleControls({
               <div
                 key={kind}
                 style={{
-                  fontSize: FS.micro,
+                  fontSize: chromeFontSize(FS.micro, mobile),
                   color: MUTED,
                   display: 'flex',
                   flexDirection: 'column',
@@ -169,7 +172,7 @@ export default function NpcLifecycleControls({
                   value={vocab.includes(npcFacetOf(npc, kind)) ? npcFacetOf(npc, kind) : ''}
                   onChange={onFacet(kind)}
                   disabled={editingUnavailable}
-                  style={selectStyle}
+                  style={selectStyle(mobile)}
                 >
                   <option value="">No change</option>
                   {vocab.map(value => (
@@ -181,7 +184,7 @@ export default function NpcLifecycleControls({
               </div>
             ))}
             <div style={{
-              fontSize: FS.micro,
+              fontSize: chromeFontSize(FS.micro, mobile),
               color: MUTED,
               display: 'flex',
               flexDirection: 'column',
@@ -193,7 +196,7 @@ export default function NpcLifecycleControls({
                 value={stasisReason}
                 onChange={onStasis}
                 disabled={editingUnavailable}
-                style={selectStyle}
+                style={selectStyle(mobile)}
               >
                 <option value="">Active</option>
                 {STASIS_REASONS.map(reason => (
@@ -209,17 +212,15 @@ export default function NpcLifecycleControls({
       {isHostage && (
         <div style={{ marginTop: 8, paddingTop: 6, borderTop: `1px solid ${swatch['#EDE3CC']}` }}>
           <div style={{
-            fontSize: FS.micro,
+            fontSize: chromeFontSize(FS.micro, mobile),
             fontWeight: 700,
             color: swatch.danger,
-            textTransform: 'uppercase',
-            letterSpacing: '0.05em',
             marginBottom: 3,
           }}>
             The party&apos;s hand: {npc?.name || 'this captive'} is held
           </div>
           {/* Keep the consequences beside the decision that queues them. */}
-          <p style={{ fontSize: FS.micro, color: MUTED, margin: '0 0 6px', lineHeight: 1.4 }}>
+          <p style={{ fontSize: proseFontSize(FS.micro, mobile), color: MUTED, margin: '0 0 6px', lineHeight: 1.4 }}>
             Pay the ransom to buy them home. The captor still profits, but the home treasury is
             spared. Or stage a rescue: no coin, and the captive returns clean of any turned
             loyalty, but the captor keeps a grudge. The move settles on the next advance; it
@@ -250,16 +251,14 @@ export default function NpcLifecycleControls({
       {isTraveling && !isHostage && (
         <div style={{ marginTop: 8, paddingTop: 6, borderTop: `1px solid ${swatch['#EDE3CC']}` }}>
           <div style={{
-            fontSize: FS.micro,
+            fontSize: chromeFontSize(FS.micro, mobile),
             fontWeight: 700,
             color: MUTED,
-            textTransform: 'uppercase',
-            letterSpacing: '0.05em',
             marginBottom: 3,
           }}>
             On the road: {npc?.name || 'this traveller'} is away
           </div>
-          <p style={{ fontSize: FS.micro, color: MUTED, margin: '0 0 6px', lineHeight: 1.4 }}>
+          <p style={{ fontSize: proseFontSize(FS.micro, mobile), color: MUTED, margin: '0 0 6px', lineHeight: 1.4 }}>
             Summon them home early. They turn for the road at once: no shortcut, only an
             earlier start; the journey back still takes its weeks. Queues for review like any edit.
           </p>
@@ -277,7 +276,7 @@ export default function NpcLifecycleControls({
       {mobile && (
         <p
           role="note"
-          style={{ fontSize: FS.micro, color: MUTED, margin: '6px 0 0', lineHeight: 1.4 }}
+          style={{ fontSize: proseFontSize(FS.micro, mobile), color: MUTED, margin: '6px 0 0', lineHeight: 1.4 }}
         >
           NPC changes can be reviewed and applied from this dossier on desktop.
         </p>
@@ -285,7 +284,7 @@ export default function NpcLifecycleControls({
       {!mobile && npcId == null && (
         <p
           role="note"
-          style={{ fontSize: FS.micro, color: MUTED, margin: '6px 0 0', lineHeight: 1.4 }}
+          style={{ fontSize: proseFontSize(FS.micro, mobile), color: MUTED, margin: '6px 0 0', lineHeight: 1.4 }}
         >
           This legacy NPC has no stable identity, so changes are unavailable.
         </p>

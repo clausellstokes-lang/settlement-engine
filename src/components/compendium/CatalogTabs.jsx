@@ -10,6 +10,9 @@ import { COMPENDIUM_DATA as CD } from '../../domain/compendium/generated/compend
 import { Tag, Row, Card, BandLadder } from './primitives.jsx';
 import Button from '../primitives/Button.jsx';
 import { formatCount } from '../../domain/formatNumber.js';
+import { institutionDisplayName } from '../../domain/display/institutionDisplayName.js';
+import useIsMobile from '../../hooks/useIsMobile.js';
+import { chromeFontSize, proseFontSize } from '../../design/proseScale.js';
 
 // Gold-as-TEXT clears AA only at the darker token (#7A5A1A, 6.16:1 on card); the
 // lighter #a0762a passes as a fill/border but FAILS as text (3.98:1). The Tag
@@ -51,6 +54,7 @@ const TIER_META = {
 };
 
 export function TiersTab({ _search='' }) {
+  const mobile = useIsMobile();
   return <>
     <p id="tiers" style={{ fontSize:FS.sm, color:SEC, lineHeight:1.6, margin:'0 0 12px' }}>
       Tier determines the maximum institution count, population band, and available institution categories.
@@ -60,39 +64,40 @@ export function TiersTab({ _search='' }) {
       const pop = `${formatCount(t.min)}–${formatCount(t.max)}`;
       return (
       <div key={t.id} style={{ display:'flex', gap:10, padding:'8px 0', borderBottom:`1px solid ${BOR}`, alignItems:'flex-start' }}>
-        <div style={{ minWidth:96, flexShrink:0 }}><div style={{fontSize:FS.md,fontWeight:700,color:meta.color}}>{t.label}</div><div style={{fontSize:FS.xxs,color:MUT}}>{pop} pop.</div></div>
+        <div style={{ minWidth:96, flexShrink:0 }}><div style={{fontSize:FS.md,fontWeight:700,color:meta.color}}>{t.label}</div><div style={{fontSize:chromeFontSize(FS.xxs, mobile),color:MUT}}>{pop} pop.</div></div>
         <div style={{ fontSize:FS.sm, color:SEC, lineHeight:1.5 }}>{meta.desc}</div>
       </div>);
     })}
     <SectionHeading id="trade-routes" accent={swatch['#A0762A']}>Trade Route Access</SectionHeading>
     {[['Road','Standard land access. Moderate trade volume.','#6b5340'],['Crossroads','Multiple road intersections. Higher institution diversity.',ECON_TXT],['Port','Sea or river access. Maritime exports, fishing, naval institutions.','#1a3a7a'],['River','Inland waterway. Cheaper bulk movement. Mill and granary likely.','#1a5a28'],['Mountain Pass','Strategic chokepoint. Toll and garrison institutions likely.','#8b1a1a'],['Isolated','No trade route. Subsistence by necessity.','#4a1a4a']].map(([name,desc,color])=>(
       <div key={name} style={{ display:'flex', gap:10, padding:'6px 0', borderBottom:`1px solid ${BOR}` }}>
-        <span style={{ fontSize:FS.xs, fontWeight:700, color, minWidth:110, flexShrink:0 }}>{name}</span>
+        <span style={{ fontSize:chromeFontSize(FS.xs, mobile), fontWeight:700, color, minWidth:110, flexShrink:0 }}>{name}</span>
         <span style={{ fontSize:FS.sm, color:SEC, lineHeight:1.5 }}>{desc}</span>
       </div>))}
     <SectionHeading id="threat" accent={swatch['#8B1A1A']}>Monster Threat</SectionHeading>
-    <p style={{ fontSize:FS.xs, color:MUT, fontStyle:'italic', margin:'0 0 8px' }}>The regional threat set at generation. The engine has three arms (heartland, frontier, plagued).</p>
+    <p style={{ fontSize:proseFontSize(FS.xs, mobile), color:MUT, fontStyle:'italic', margin:'0 0 8px' }}>The regional threat set at generation. The engine has three arms (heartland, frontier, plagued).</p>
     {[['Safe Heartland','Monsters are rumor. Civilian institutions dominate and the militia is law enforcement.','#1a5a28'],['Active Frontier','A managed, active threat. Walls and garrison are elevated; raids and patrols are routine.',ECON_TXT],['Embattled Region','Active war or monster pressure. The militia is the most important institution, and crisis conditions hold.','#8b1a1a']].map(([name,desc,color])=>(
       <div key={name} style={{ display:'flex', gap:10, padding:'6px 0', borderBottom:`1px solid ${BOR}` }}>
-        <span style={{ fontSize:FS.xs, fontWeight:700, color, minWidth:110, flexShrink:0 }}>{name}</span>
+        <span style={{ fontSize:chromeFontSize(FS.xs, mobile), fontWeight:700, color, minWidth:110, flexShrink:0 }}>{name}</span>
         <span style={{ fontSize:FS.sm, color:SEC, lineHeight:1.5 }}>{desc}</span>
       </div>))}
     <SectionHeading id="terrain" accent={INK}>Terrain</SectionHeading>
-    <p style={{ fontSize:FS.xs, color:MUT, fontStyle:'italic', margin:'0 0 8px' }}>Terrain steers which resources are nearby, how far a settlement leans on imported food, and which calamity flavour it draws.</p>
+    <p style={{ fontSize:proseFontSize(FS.xs, mobile), color:MUT, fontStyle:'italic', margin:'0 0 8px' }}>Terrain steers which resources are nearby, how far a settlement leans on imported food, and which calamity flavour it draws.</p>
     {CD.terrain.map((t)=>(
       <div key={t.id} style={{ display:'flex', gap:10, padding:'6px 0', borderBottom:`1px solid ${BOR}` }}>
-        <span style={{ fontSize:FS.xs, fontWeight:700, color:INK, minWidth:110, flexShrink:0, textTransform:'capitalize' }}>{t.id}</span>
+        <span style={{ fontSize:chromeFontSize(FS.xs, mobile), fontWeight:700, color:INK, minWidth:110, flexShrink:0, textTransform:'capitalize' }}>{t.id}</span>
         <span style={{ fontSize:FS.sm, color:SEC, lineHeight:1.5 }}>{t.reading}</span>
       </div>))}
   </>;
 }
 
 export function EconomyTab() {
+  const mobile = useIsMobile();
   return <>
     <div id="economy" />
     {/* Italic descriptor lead-in — the per-tab one-liner that frames the section
         before its cards. */}
-    <div style={{ fontSize:FS.xs, color:BODY, fontStyle:'italic', margin:'0 0 12px' }}>
+    <div style={{ fontSize:chromeFontSize(FS.xs, mobile), color:BODY, fontStyle:'italic', margin:'0 0 12px' }}>
       How prosperity is produced, traded, and stressed.
     </div>
     {/* The lead concept — prosperity is an OUTPUT, not a dial — renders its full
@@ -108,6 +113,7 @@ export function EconomyTab() {
 }
 
 export function PowerTab_({ search='' }) {
+  const mobile = useIsMobile();
   const cats = ['All', ...CD.archetypes.categories];
   const [cat, setCat] = useState('All');
   // Dead-first-click guard: a routed global-search jump (search prop present)
@@ -136,8 +142,8 @@ export function PowerTab_({ search='' }) {
             <span style={{ fontFamily:serif_, fontSize:FS.md, fontWeight:700, color:INK, flex:1 }}>{a.name}</span>
             <Tag label={a.cat} color={CAT_COLORS[a.cat]||GOLD}/>
           </div>
-          <div style={{ fontSize:FS.xxs, color:MUT, fontStyle:'italic', marginBottom:4 }}>{a.cond}</div>
-          <div style={{ fontSize: FS['11.5'], color:SEC, lineHeight:1.5 }}>{a.desc}</div>
+          <div style={{ fontSize:chromeFontSize(FS.xxs, mobile), color:MUT, fontStyle:'italic', marginBottom:4 }}>{a.cond}</div>
+          <div style={{ fontSize: proseFontSize(FS['11.5'], mobile), color:SEC, lineHeight:1.5 }}>{a.desc}</div>
         </div>))}
     </div>
     )}
@@ -148,21 +154,22 @@ export function PowerTab_({ search='' }) {
         <BandLadder key={l.id} concept={l.concept} blurb={l.blurb} levels={l.levels} accent={CAT_COLORS.Criminal} />))}
     </div>
     <SectionHeading id="factions" accent={INK}>Faction archetypes</SectionHeading>
-    <p style={{ fontSize:FS.xs, color:MUT, fontStyle:'italic', margin:'0 0 8px' }}>A faction's category, not its name, decides its archetype. These drive coup logic, faction profiles, NPC roles, and event responses.</p>
+    <p style={{ fontSize:proseFontSize(FS.xs, mobile), color:MUT, fontStyle:'italic', margin:'0 0 8px' }}>A faction's category, not its name, decides its archetype. These drive coup logic, faction profiles, NPC roles, and event responses.</p>
     {CD.factionArchetypes.map((f)=>(<Row key={f.id} label={f.label} lw={110}>{f.reading}</Row>))}
     <SectionHeading accent={INK}>Governance stability</SectionHeading>
     {CD.governance.labels.map((g)=>(<Row key={g.label} label={g.label} lw={130}>{g.reading}</Row>))}
-    <p style={{ fontSize:FS.xs, color:MUT, fontStyle:'italic', margin:'8px 0 0' }}>{CD.governance.note}</p>
+    <p style={{ fontSize:proseFontSize(FS.xs, mobile), color:MUT, fontStyle:'italic', margin:'8px 0 0' }}>{CD.governance.note}</p>
     <SectionHeading accent={INK}>How power changes hands</SectionHeading>
-    <p style={{ fontSize:FS.xs, color:MUT, fontStyle:'italic', margin:'0 0 8px' }}>{CD.powerStructure.note}</p>
+    <p style={{ fontSize:proseFontSize(FS.xs, mobile), color:MUT, fontStyle:'italic', margin:'0 0 8px' }}>{CD.powerStructure.note}</p>
     {CD.powerStructure.transferCauses.map((c)=>(<Row key={c.id} label={c.label} lw={130}>{c.reading}</Row>))}
     <SectionHeading accent={INK}>How corruption moves</SectionHeading>
-    <p style={{ fontSize:FS.xs, color:SEC, lineHeight:1.55, margin:'0 0 8px' }}>{CD.corruption.note}</p>
+    <p style={{ fontSize:proseFontSize(FS.xs, mobile), color:SEC, lineHeight:1.55, margin:'0 0 8px' }}>{CD.corruption.note}</p>
     {CD.corruption.vectors.map((v)=>(<Row key={v.label} label={v.label} lw={130}>{v.reading}</Row>))}
   </>;
 }
 
 export function ArcaneTab() {
+  const mobile = useIsMobile();
   const faith = CD.faith;
   return <>
     {/* THE DEITY AXES lead the tab (owner doctrine: no premade roster; a custom
@@ -175,7 +182,7 @@ export function ArcaneTab() {
         {a.lines.map((line, i) => (
           <div key={i} style={{ fontSize:FS.sm, color:SEC, lineHeight:1.5 }}>{line}</div>))}
       </div>))}
-    <p style={{ fontSize:FS.xs, color:MUT, fontStyle:'italic', lineHeight:1.5, margin:'8px 0 0' }}>{faith.temperNote}</p>
+    <p style={{ fontSize:proseFontSize(FS.xs, mobile), color:MUT, fontStyle:'italic', lineHeight:1.5, margin:'8px 0 0' }}>{faith.temperNote}</p>
     {laddersFor('arcane').filter((l) => l.anchor === 'faith').map((l) => (
       <BandLadder key={l.id} concept={l.concept} blurb={l.blurb} levels={l.levels} accent={GOLD} />))}
     <SectionHeading id="magic" accent={INK}>Magic</SectionHeading>
@@ -190,12 +197,13 @@ export function ArcaneTab() {
     <p style={{ fontSize:FS.sm, color:SEC, lineHeight:1.6, margin:'0 0 8px' }}>{CD.cultures.note}</p>
     <div style={{ display:'flex', flexWrap:'wrap', gap:6 }}>
       {CD.cultures.values.map((c)=>(
-        <span key={c.id} style={{ fontSize:FS.xs, fontWeight:700, color:INK, background:`${GOLD}14`, padding:'2px 8px' }}>{c.label}</span>))}
+        <span key={c.id} style={{ fontSize:chromeFontSize(FS.xs, mobile), fontWeight:700, color:INK, background:`${GOLD}14`, padding:'2px 8px' }}>{c.label}</span>))}
     </div>
   </>;
 }
 
 export function StressTab({ search='' }) {
+  const mobile = useIsMobile();
   const stresses = Object.values(STRESS_TYPE_MAP || {});
   const list = stresses.length > 0 ? stresses : [
     { label:'Famine', description:'Food supply failure. Grain exports collapse. Safety degrades.' },
@@ -205,7 +213,7 @@ export function StressTab({ search='' }) {
   ];
   return <>
     <div id="stress" style={{ padding:'10px 12px', background:`${GOLD}10`, border:`1px solid ${GOLD}40`, borderLeft:`3px solid ${GOLD}`, marginBottom:12 }}>
-      <div style={{ fontSize:FS.xs, fontWeight:800, color:GOLD_TXT, textTransform:'uppercase', letterSpacing:'0.06em', marginBottom:4 }}>Stresses Compound</div>
+      <div style={{ fontSize:chromeFontSize(FS.xs, mobile), fontWeight:800, color:GOLD_TXT, textTransform:'uppercase', letterSpacing:'0.06em', marginBottom:4 }}>Stresses Compound</div>
       <p style={{ fontSize:FS.sm, color:SEC, lineHeight:1.55, margin:0 }}>Multiple stresses compound. Famine + Political Fracture means food distribution is contested by factions.</p>
     </div>
     {list.filter(s=>!search||(s.label||'').toLowerCase().includes(search)||(s.viabilityNote||s.description||s.desc||'').toLowerCase().includes(search)||(s.crisisHook||'').toLowerCase().includes(search)).map(s => (
@@ -215,7 +223,7 @@ export function StressTab({ search='' }) {
             settlement); the crisisHook is the ready-at-the-table scene. Neither field
             was rendered before, so every row showed a bare EMPTY_VALUE dash. */}
         <div style={{ fontSize:FS.sm, color:SEC, lineHeight:1.55 }}>{s.viabilityNote||s.description||s.desc||EMPTY_VALUE}</div>
-        {s.crisisHook && <div style={{ fontSize:FS.xs, color:MUT, fontStyle:'italic', lineHeight:1.5, marginTop:4 }}>At the table: {s.crisisHook}</div>}
+        {s.crisisHook && <div style={{ fontSize:proseFontSize(FS.xs, mobile), color:MUT, fontStyle:'italic', lineHeight:1.5, marginTop:4 }}>At the table: {s.crisisHook}</div>}
       </div>))}
     {/* How the resulting state reads: the settlement-stability and capacity-strain ladders. */}
     <SectionHeading accent={INK}>Reading a Settlement</SectionHeading>
@@ -225,11 +233,12 @@ export function StressTab({ search='' }) {
 }
 
 export function NeighbourTab({ search='' }) {
+  const mobile = useIsMobile();
   return <>
     <p id="neighbours" style={{ fontSize:FS.sm, color:SEC, lineHeight:1.6, margin:'0 0 12px' }}>Relationship types modify the economic engine, faction weights, and institution probabilities before generation.</p>
     {CD.relationships.entries.filter(r=>!search||r.label.toLowerCase().includes(search)||r.effect.toLowerCase().includes(search)).map(r => (
       <div key={r.id} style={{ display:'flex', gap:10, padding:'8px 0', borderBottom:`1px solid ${BOR}`, alignItems:'flex-start' }}>
-        <span style={{ fontSize:FS.xs, fontWeight:700, color:r.color, minWidth:105, flexShrink:0, background:`${r.color}14`, padding:'2px 7px', textAlign:'center' }}>{r.label}</span>
+        <span style={{ fontSize:chromeFontSize(FS.xs, mobile), fontWeight:700, color:r.color, minWidth:105, flexShrink:0, background:`${r.color}14`, padding:'2px 7px', textAlign:'center' }}>{r.label}</span>
         <span style={{ fontSize:FS.sm, color:SEC, lineHeight:1.5 }}>{r.effect}</span>
       </div>))}
     <SectionHeading accent={INK}>Cross-Settlement Systems</SectionHeading>
@@ -242,6 +251,7 @@ export function InstitutionsTab({ _config, search }) {
   // failure explicitly so a load FAILURE is distinguishable from a zero-result
   // SEARCH below — otherwise both render the same "no matches" copy and the
   // reader is told to clear a search that isn't the problem (P10).
+  const mobile = useIsMobile();
   const { catalog, loadFailed } = useMemo(() => {
     try { return { catalog: getFullCatalogWithTierMeta(), loadFailed: false }; }
     catch {
@@ -261,7 +271,10 @@ export function InstitutionsTab({ _config, search }) {
   const filtered = useMemo(() => {
     if (!search) return all.slice(0, 48);
     const q = search.toLowerCase();
-    return all.filter(i => (i.name||'').toLowerCase().includes(q) || (i.desc||'').toLowerCase().includes(q) || (i.category||'').toLowerCase().includes(q) || (i.tags||[]).some(t=>(t||'').toLowerCase().includes(q))).slice(0,80);
+    // §934.13 — the DISPLAYED label is searchable too, or a reader who types the words
+    // printed on the card in front of them gets no results. The raw key stays searchable
+    // so a DM who knows the engine's spelling still finds the entry.
+    return all.filter(i => (i.name||'').toLowerCase().includes(q) || institutionDisplayName(i).toLowerCase().includes(q) || (i.desc||'').toLowerCase().includes(q) || (i.category||'').toLowerCase().includes(q) || (i.tags||[]).some(t=>(t||'').toLowerCase().includes(q))).slice(0,80);
   }, [all, search]);
   // A catalog-load failure (no data AND nothing was searched) is a real error,
   // not an empty result — surface it as such with a reload affordance (P10).
@@ -277,7 +290,7 @@ export function InstitutionsTab({ _config, search }) {
   }
   return <>
     {/* Italic descriptor lead-in, the one-liner above the entry list. */}
-    <div style={{ fontSize:FS.xs, color:BODY, fontStyle:'italic', margin:'0 0 8px' }}>
+    <div style={{ fontSize:chromeFontSize(FS.xs, mobile), color:BODY, fontStyle:'italic', margin:'0 0 8px' }}>
       Every institution the simulator can generate, and what selects it.
     </div>
     {/* The load-bearing fact (the counts) reads loud in BODY/bold; the label
@@ -287,7 +300,7 @@ export function InstitutionsTab({ _config, search }) {
         ? <><strong>{filtered.length}</strong> results</>
         : <>Showing first <strong>48</strong> of <strong>{all.length}</strong> institutions. Use search to filter.</>}
     </p>
-    <p style={{ fontSize:FS.xs, color:MUT, fontStyle:'italic', margin:'-4px 0 10px' }}>
+    <p style={{ fontSize:proseFontSize(FS.xs, mobile), color:MUT, fontStyle:'italic', margin:'-4px 0 10px' }}>
       Each entry rolls a base chance shifted by the matching priority slider band; a Core entry always generates.
     </p>
     {filtered.length === 0 ? (
@@ -299,11 +312,11 @@ export function InstitutionsTab({ _config, search }) {
       {filtered.map(inst => (
         <div key={inst.name} style={{ border:`1px solid ${BOR}`, padding:'8px 10px' }}>
           <div style={{ display:'flex', alignItems:'flex-start', gap:5, marginBottom:3 }}>
-            <span style={{ fontFamily:serif_, fontSize: FS['12.5'], fontWeight:700, color:INK, flex:1, lineHeight:1.3 }}>{inst.name}</span>
+            <span style={{ fontFamily:serif_, fontSize: FS['12.5'], fontWeight:700, color:INK, flex:1, lineHeight:1.3 }}>{institutionDisplayName(inst)}</span>
             {inst.required && <Tag label="Core" color='#1a3a7a' title="Always present at this tier. Generated every time, never rolled by chance."/>}
           </div>
           {inst.category && <Tag label={inst.category} color={catColors[inst.category]||GOLD}/>}
-          {inst.desc && <div style={{ fontSize:FS.xs, color:SEC, lineHeight:1.4, marginTop:4 }}>{inst.desc}</div>}
+          {inst.desc && <div style={{ fontSize:proseFontSize(FS.xs, mobile), color:SEC, lineHeight:1.4, marginTop:4 }}>{inst.desc}</div>}
         </div>))}
     </div>
     )}

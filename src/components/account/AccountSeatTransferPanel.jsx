@@ -18,8 +18,12 @@
 import { useCallback, useEffect, useState } from 'react';
 import Section from './AccountSection.jsx';
 import Button from '../primitives/Button.jsx';
+import AvailableAtLaunchPill from '../primitives/AvailableAtLaunchPill.jsx';
+import { purchasesOpen } from '../../lib/launchGate.js';
 import { INK, BODY, MUTED, SECOND, BORDER, sans, SP, FS, swatch } from '../theme.js';
 import { t } from '../../copy/index.js';
+import useIsMobile from '../../hooks/useIsMobile.js';
+import { proseFontSize } from '../../design/proseScale.js';
 
 const INCOMING_ACTIONABLE = ['initiated', 'nominee_verified', 'awaiting_payment'];
 const OUTGOING_LIVE = ['initiated', 'nominee_verified', 'awaiting_payment', 'cooling'];
@@ -60,6 +64,7 @@ export function noteAria(tone) {
 }
 
 function Note({ children, tone = 'muted' }) {
+  const mobile = useIsMobile();
   const color = tone === 'danger' ? swatch.danger : tone === 'success' ? swatch.success : MUTED;
   const accent = tone === 'danger' ? swatch.danger : SECOND;
   const aria = noteAria(tone);
@@ -67,7 +72,7 @@ function Note({ children, tone = 'muted' }) {
     <div
       role={aria.role}
       aria-live={aria['aria-live']}
-      style={{ paddingLeft: SP.md, borderLeft: `3px solid ${accent}`, fontSize: FS.xs, color, marginTop: SP.sm, lineHeight: 1.55 }}
+      style={{ paddingLeft: SP.md, borderLeft: `3px solid ${accent}`, fontSize: proseFontSize(FS.xs, mobile), color, marginTop: SP.sm, lineHeight: 1.55 }}
     >
       {children}
     </div>
@@ -201,6 +206,10 @@ function BuybackAffordance({ onDone }) {
 export default function AccountSeatTransferPanel({ auth }) {
   const signedIn = Boolean(auth?.user?.id);
   const isFounder = Boolean(auth?.isFounder);
+  // THE LAUNCH GATE (lib/launchGate.js): the nominee's side is a $99 purchase, so
+  // accept and pay stay disabled with the pill until launch. The founder's own
+  // sale side (initiate, confirm, abort, payouts, buyback) is not a purchase.
+  const purchasesAreOpen = purchasesOpen();
 
   const [loading, setLoading] = useState(true);
   const [available, setAvailable] = useState(false);
@@ -285,12 +294,14 @@ export default function AccountSeatTransferPanel({ auth }) {
                 official transfer process.
               </p>
               {incoming.state === 'initiated' && (
-                <Button variant="primary" size="md" disabled={busy}
+                <Button variant="primary" size="md" disabled={!purchasesAreOpen || busy}
+                  style={purchasesAreOpen ? undefined : { flexWrap: 'wrap' }}
                   onClick={() => run(async () => {
                     const { nomineeAcceptStart } = await import('../../lib/founderTransferClient.js');
                     return nomineeAcceptStart();
                   }, 'We emailed you a verification code.')}>
                   {busy ? 'Working…' : 'Accept: email me a code'}
+                  {!purchasesAreOpen && <AvailableAtLaunchPill style={{ marginLeft: 6 }} />}
                 </Button>
               )}
               {(incoming.state === 'nominee_verified' || incoming.state === 'awaiting_payment') && (
@@ -300,7 +311,8 @@ export default function AccountSeatTransferPanel({ auth }) {
                       inputMode="numeric" onChange={(e) => setNomineeCode(e.target.value)} />
                   </Row>
                   <div style={{ marginTop: SP.md }}>
-                    <Button variant="primary" size="md" disabled={busy || !nomineeCode}
+                    <Button variant="primary" size="md" disabled={!purchasesAreOpen || busy || !nomineeCode}
+                      style={purchasesAreOpen ? undefined : { flexWrap: 'wrap' }}
                       onClick={() => run(async () => {
                         const { nomineeConfirm } = await import('../../lib/founderTransferClient.js');
                         const out = await nomineeConfirm({ caseId: incoming.case_id, code: nomineeCode.trim() });
@@ -308,6 +320,7 @@ export default function AccountSeatTransferPanel({ auth }) {
                         return out;
                       })}>
                       {busy ? 'Working…' : 'Verify & pay $99'}
+                      {!purchasesAreOpen && <AvailableAtLaunchPill style={{ marginLeft: 6 }} />}
                     </Button>
                   </div>
                 </div>

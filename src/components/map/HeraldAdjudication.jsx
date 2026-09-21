@@ -35,6 +35,8 @@ import {
   proposalDetails,
 } from './WorldPulseData.js';
 import { politicalAutonomyOf } from '../../domain/worldPulse/simulationRules.js';
+import useIsMobile from '../../hooks/useIsMobile.js';
+import { chromeFontSize } from '../../design/proseScale.js';
 
 /** @param {unknown} value @returns {string} */
 function text(value) {
@@ -314,6 +316,7 @@ export default function HeraldAdjudication({
   activeDecisionItemId = null,
   onOpenGatheredDocket = null,
 }) {
+  const mobile = useIsMobile();
   const applyProposal = useStore(s => s.applyWorldPulseProposal);
   const dismissProposal = useStore(s => s.dismissWorldPulseProposal);
   const canonizeCampaignWorld = useStore(s => s.canonizeCampaignWorld);
@@ -547,7 +550,7 @@ export default function HeraldAdjudication({
 
       {paused && (
         <div data-testid="paused-verdict-surface" style={{ border: `1px solid ${GOLD}`, borderLeft: `3px solid ${GOLD}`, padding: 12, background: CARD_ALT, display: 'flex', flexDirection: 'column', gap: 10 }}>
-          <div style={{ color: INK, fontFamily: sans, fontSize: FS.xs, fontWeight: 800, lineHeight: 1.5 }}>
+          <div style={{ color: INK, fontFamily: sans, fontSize: chromeFontSize(FS.xs, mobile), fontWeight: 800, lineHeight: 1.5 }}>
             The advance paused for your word. {pendingMajors.length > 0
               ? `${pendingMajors.length} major turn${pendingMajors.length === 1 ? '' : 's'} await your verdict. Keep each (it applies as recommended) or dismiss it, then resume the interval.`
               : 'Resume or undo the advance to continue.'}
@@ -602,7 +605,7 @@ export default function HeraldAdjudication({
           <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
             {pendingGroups.map(group => (
               <details key={group.key} open data-testid="adjudication-group" style={{ border: `1px solid ${BORDER}`, background: CARD_ALT }}>
-                <summary style={{ cursor: 'pointer', padding: '6px 10px', color: INK, fontFamily: sans, fontSize: FS.xs, fontWeight: 900, display: 'flex', alignItems: 'center', gap: 8 }}>
+                <summary style={{ cursor: 'pointer', padding: '6px 10px', color: INK, fontFamily: sans, fontSize: chromeFontSize(FS.xs, mobile), fontWeight: 900, display: 'flex', alignItems: 'center', gap: 8 }}>
                   {group.name}
                   <span style={{ marginLeft: 'auto', color: MUTED, fontWeight: 800 }}>{group.items.length}</span>
                 </summary>
@@ -667,15 +670,15 @@ export default function HeraldAdjudication({
           no action controls, each tagged by who resolved it (you / autoresolve). */}
       {resolvedLog.length > 0 && (
         <details data-testid="adjudication-resolved" style={{ border: `1px solid ${BORDER}`, background: CARD }}>
-          <summary style={{ cursor: 'pointer', padding: '6px 10px', color: SECOND, fontFamily: sans, fontSize: FS.xs, fontWeight: 900, display: 'flex', alignItems: 'center', gap: 8 }}>
+          <summary style={{ cursor: 'pointer', padding: '6px 10px', color: SECOND, fontFamily: sans, fontSize: chromeFontSize(FS.xs, mobile), fontWeight: 900, display: 'flex', alignItems: 'center', gap: 8 }}>
             Resolved log
             <span style={{ marginLeft: 'auto', color: MUTED, fontWeight: 800 }}>{resolvedLog.length}</span>
           </summary>
           <div style={{ display: 'grid', gap: 6, padding: 8 }}>
             {resolvedLog.map(entry => (
               <div key={entry.id} style={{ display: 'flex', alignItems: 'baseline', gap: 8, borderLeft: `2px solid ${BORDER2}`, paddingLeft: 8 }}>
-                <span style={{ flex: 1, color: BODY, fontFamily: sans, fontSize: FS.xxs, fontWeight: 700, overflowWrap: 'anywhere' }}>{entry.headline}</span>
-                <span style={{ color: MUTED, fontFamily: sans, fontSize: FS.micro, fontWeight: 800, whiteSpace: 'nowrap' }}>{entry.by}</span>
+                <span style={{ flex: 1, color: BODY, fontFamily: sans, fontSize: chromeFontSize(FS.xxs, mobile), fontWeight: 700, overflowWrap: 'anywhere' }}>{entry.headline}</span>
+                <span style={{ color: MUTED, fontFamily: sans, fontSize: chromeFontSize(FS.micro, mobile), fontWeight: 800, whiteSpace: 'nowrap' }}>{entry.by}</span>
               </div>
             ))}
           </div>
