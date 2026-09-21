@@ -10,7 +10,8 @@
   ⭐ **THE SEVENTH OF THE FOURTEEN PACKETS ON THE ROAD TO THE FIRST DOOR:** EM-A1 · EM-A2a ·
   EM-A2b · EM-B1h · EM-B1i · EM-B1a · **EM-B1c1** · EM-B2a1 · EM-C4a (v2) · EM-D0a · D0b · D0c ·
   D0d · D0e.
-- **Packet version:** 4
+- **Packet version:** 5
+  ⭐ **VERSION 5 (the chair, judgment 135, 2026-09-21; the build lane's STOP `lane-em-b1c1-t12-scratch/EM-B1c1.STOP-voice-mechanics.md`).** §6.1's `guardsStated` literal carried one U+2014 em dash; `tests/copy/voiceMechanics.test.js` Tier 2 counts every string literal under `src/domain/**` per file (a file with no baseline entry is held at zero) and §10 rightly lists that register among those that must not move — two sentences of one packet disagreed. The standing law wins (no em dash in a `src/` string literal; the baseline is never raised): version 5 changes that ONE character in §6.1 so the leaf installs byte-identical and measures em 0 · bang 0, and corrects §10's reason (Tier 2 counts literals, not rendered copy). No contract, key, count, symbol, arm, path or budget moves; the staged build is re-applied byte-identical under the version-5 seal and the lane makes the one-character change under it.
   ⭐⭐ **VERSION 4 — THE OP IS RE-SPELLED `set-npc-name`, AND ONE DISJOINTNESS ARM IS ADDED (the
   chair, JUDGMENT 126, 2026-09-21, on the EM-C4a pre-proof's §12 Qe recommendation (a)+(c)).**
   ⛔ **THE SEMANTICS, THE ROW, THE LEAF, THE PATHS, THE BUDGETS AND EVERY OTHER BYTE OF THE DESIGN
@@ -430,7 +431,7 @@ export const NPC_RENAME_OP_TYPES = Object.freeze({
     duration: null,
     guards: Object.freeze([]),
     guardsStated:
-      'NO GUARD. The rename DELEGATES: the estate\'s existing NPC cascade is the writer — '
+      'NO GUARD. The rename DELEGATES: the estate\'s existing NPC cascade is the writer: '
       + 'src/domain/factionRename.js#npcRenameChanges (pure patch form) and '
       + '#applyNpcRenameToSettlement (in place), each walking NPC_RENAME_SURFACES. This module '
       + 'names them as DATA and imports neither. The STORE action the adapter calls is EM-C4a\'s '
