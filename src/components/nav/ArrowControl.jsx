@@ -36,10 +36,10 @@
  */
 import { useState } from 'react';
 import Button from '../primitives/Button.jsx';
-import { INK, PARCH_100 } from '../theme.js';
+import { INK, PARCH_100, houseBloom } from '../theme.js';
 
 /** The hover glow: PARCH_100 light at the centre of the glow box, none at its edge. */
-export const ARROW_GLOW = `radial-gradient(closest-side, color-mix(in srgb, ${PARCH_100} 34%, transparent), transparent)`;
+export const ARROW_GLOW = houseBloom(PARCH_100);
 
 /** True where the primary pointer really hovers (so never after a tap on a touch screen). */
 export const hovers = () => typeof window !== 'undefined' && typeof window.matchMedia === 'function'

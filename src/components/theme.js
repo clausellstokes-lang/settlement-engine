@@ -74,6 +74,24 @@ export const BLUE      = L.BLUE;
 export const BLUE_BG   = L.BLUE_BG;
 export const GOLD_DEEP = L.GOLD_DEEP;
 export const PARCH_100 = L.PARCH_100;
+
+/**
+ * THE HOUSE BLOOM — one recipe, read by the arrow's glow (nav/ArrowControl.jsx) and, from
+ * EM-D0c, by the editor's halo. Design §20.1: "ARROW_GLOW is lifted to a shared token beside
+ * the rail's gold, and both the arrow and the editor read it."
+ *
+ * A radial light at the CENTRE of its box and none at its edge, through the house color-mix
+ * idiom — never a translucent literal, never a new hex. It returns a BACKGROUND value and
+ * never a shadow: print has no z-axis (src/design/organic/ink.js), so the halo built on this
+ * recipe is LIGHT and cannot become an elevation by accident.
+ *
+ * @param {string} tone a house colour token (PARCH_100, GOLD, …)
+ * @returns {string} a CSS background value
+ */
+export function houseBloom(tone) {
+  return `radial-gradient(closest-side, color-mix(in srgb, ${tone} 34%, transparent), transparent)`;
+}
+
 // GOLD_TXT / GOLD_SOFT / BORDER_STRONG are re-exported from their standalone
 // (tree-shakeable) token definitions — NOT the first-paint `legacy` object — so
 // the Realm/map chrome that consumes them keeps them in the lazy map chunk and

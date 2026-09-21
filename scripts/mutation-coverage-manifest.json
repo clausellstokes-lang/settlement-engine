@@ -538,6 +538,10 @@
       "kind": "rationale",
       "rationale": "A COUNTS-not-ms self-scoring ceiling (per-tier triangle/vertex/draw) pinned at ~1.5x the measured K-1 grammar cathedral + byte-parity buttress; like its E-F/townMapOpBudget sibling it exists to catch an explosion CLASS, so mutation-testing the generous ceiling is disproportionate, and the geometry it bounds is separately byte-golden-pinned by archMeshDeterminism."
     },
+    "tests/design/houseBloom.test.js": {
+      "kind": "rationale",
+      "rationale": "The shared glow recipe is a PURE one-line template function with no branch, no clock, no random draw and no module state, so its only failure mode is the VALUE moving, and that value is already pinned from BOTH sides by two files that cannot both be edited to agree: this file asserts byte identity against the arrow’s own spelling, and tests/components/arrowHeader.test.jsx pins the same string independently and was not edited by the change that lifted the recipe into src/components/theme.js. A planted mutant of the 34% or of the color-mix idiom reds both files at once, so a dedicated mutation arm would buy a second copy of a conviction the estate already has. The single-home arm is a SOURCE SCAN over every .js/.jsx leaf under src/ with its denominator read from the tree, which no mutation of the recipe body can fool."
+    },
     "tests/docs/abuse-model-paths.test.js": {
       "kind": "uncovered"
     },
