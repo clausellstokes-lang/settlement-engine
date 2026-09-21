@@ -55,6 +55,9 @@ import {
 import { relationshipChronicle } from '../../src/domain/display/relationshipChronicle.js';
 import { MEMORY_WEAVE_INCIDENT_TYPES } from '../../src/domain/worldPulse/relationshipEvolution.js';
 import { RELIEF_INCIDENT_KINDS } from '../../src/domain/spatial/generosityReactions.js';
+// EM-B1i — the pulse's fate KINDS are the producer; causeLifecycle's DESTROYED_BY_FATE_KIND
+// is the consumer, and a FOURTH kind must red here rather than default to "not destroyed".
+import { WORLD_PULSE_FATE_KINDS } from '../../src/domain/worldPulse/worldPulseFates.js';
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), '../..');
 const read = (rel) => readFileSync(join(ROOT, rel), 'utf8');
@@ -153,6 +156,18 @@ describe('vocabularyTotality — bound consumers (exact set, both ways)', () => 
     const capitalize = (t) => t.replace(/\b\w/g, (c) => c.toUpperCase());
     const absent = PRODUCER_SAFETY_TOKENS.filter((t) => !profile.includes(`'${capitalize(t)}`));
     expect(absent, 'curated safety tokens no longer present in safetyProfile.js').toEqual([]);
+  });
+
+  it('DESTROYED_BY_FATE_KIND covers the pulse fate KINDS exactly, both ways, with boolean verdicts (EM-B1i)', () => {
+    const src = read('src/domain/worldPulse/causeLifecycle.js');
+    const keys = objectLiteralKeys(src, 'DESTROYED_BY_FATE_KIND').sort();
+    const values = [...((/DESTROYED_BY_FATE_KIND\s*=\s*Object\.freeze\(\{([^}]*)\}/.exec(src) || ['', ''])[1]).matchAll(/:\s*(\w+)/g)].map((m) => m[1]);
+    expect(values.length, 'the verdict literal went dark: no value was read from it').toBe(keys.length);
+    expect(values.filter((v) => v === 'true' || v === 'false'), 'a verdict stopped being a boolean literal').toEqual(values);
+    // Both ways: no verdict for a kind the leaf does not declare, and no declared kind without
+    // a verdict — a fourth kind must red here rather than fall through to "not destroyed".
+    expect(setDiff(keys, WORLD_PULSE_FATE_KINDS), 'dead verdict arm(s): a kind no producer declares').toEqual([]);
+    expect(setDiff(WORLD_PULSE_FATE_KINDS, keys), 'kind(s) with NO verdict row — the silent default this walker exists for').toEqual([]);
   });
 });
 

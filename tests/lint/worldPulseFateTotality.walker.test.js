@@ -44,12 +44,14 @@
  * moralInstitutionPressure:379 passes the :348 ternary). The guarded writer
  * (`ruinInstitution`) is the ONE site where the check runs at RUNTIME, which is why
  * EM-B1a's `set-institution-state` op routes through it.
- * (2) ⭐ THE KIND IS DATA WITH NO READER, SO NO ARM CAN PROVE A KIND *CORRECT* — only that
- * it is present, single, and drawn from the declared three. The kinds were derived at
- * compile from the sibling keys of each writer's own record literal; a writer that later
- * changes what it does to the record WITHOUT changing its fate word would leave the kind
- * stale and nothing here would red. EM-B1i, the first reader of the kind, is where that
- * becomes catchable.
+ * (2) ⭐ THE KIND NOW HAS EXACTLY ONE READER, AND NO ARM *IN THIS FILE* CAN PROVE A KIND
+ * *CORRECT* — only that it is present, single, and drawn from the declared three. The kinds
+ * were derived at compile from the sibling keys of each writer's own record literal; a writer
+ * that later changes what it does to the record WITHOUT changing its fate word would leave the
+ * kind stale and nothing here would red. EM-B1i landed the reader and, with it, the arm that
+ * closes this half: tests/domain/institutionDestroyedByKind.test.js A7 re-derives every
+ * non-`closure` kind from its writer's own record literal. T4 below keeps the other half —
+ * WHICH files may read the kind at all — as an EXACT roster rather than an absence.
  *
  * @enforced-by itself (a source scan plus execution through the real writer)
  */
@@ -159,6 +161,14 @@ const WRITER_ROSTER = Object.freeze([
   ['src/domain/worldPulse/tierOutcomeApply.js', ['deactivateForDemotion', 'applyTierOutcomeToSettlement'], null, ['demotionFateForInstitution'], ['reduced_to_watch_post', 'abandoned', 'privatized', 'survives_as_remnant', 'downsized', 'captured_by_local_powers', 'hollowed_out'], ['derived', 'clear']],
   ['src/domain/worldPulse/upswingKernel.js', ['advanceUpswing'], null, [], ['upgraded_by_reconstruction', 'founded_by_flourishing'], ['literal', 'literal']],
 ].map(([path, symbols, guardedWriter, derivers, literals, spellings]) => Object.freeze({ path, symbols, guardedWriter, derivers, literals, spellings })));
+
+/**
+ * THE KIND'S READER ROSTER — every `src/` file allowed to read WORLD_PULSE_FATE_KIND, held
+ * EXACT in both directions by T4. EM-B1i is the packet that authorised this one reader and
+ * that carried the golden and preset-witness measurement for it.
+ * @type {readonly string[]}
+ */
+const KIND_READER_ROSTER = Object.freeze(['src/domain/worldPulse/causeLifecycle.js']);
 
 /** The two files that READ the fate. Both are asserted NON-ENUMERATING and UNFLAGGED. */
 const READER_ROSTER = Object.freeze([
@@ -401,11 +411,14 @@ describe('EM-B1h — worldPulseFate is a CLOSED, KINDED vocabulary and every wri
     const record = ruinInstitution(inst, { reason: 'Destroyed outright by the disaster.', fate: 'destroyed_by_disaster' });
     expect(JSON.stringify(record), 'the ruin record moved').toBe('{"name":"Blacksmith","category":"crafts","status":"ruined","_worldPulseInactive":true,"_worldPulseEconomyClosed":true,"worldPulseFate":"destroyed_by_disaster","remnantReason":"Destroyed outright by the disaster."}');
 
-    // ⭐ NOBODY READS THE KIND — the machinery that keeps this packet a freeze, not a cure.
-    // EM-B1i is the packet that makes causeLifecycle.institutionDestroyed test the `closure`
-    // kind, and it owns the golden and preset-witness measurement and the owner's signed door.
+    // ⭐ EXACTLY ONE FILE READS THE KIND, AND IT IS DECLARED. EM-B1i made
+    // causeLifecycle.institutionDestroyed test the `closure` kind and carried the golden and
+    // preset-witness measurement for doing so. ⛔ NARROWED, NEVER DELETED: this is a both-ways
+    // set equality against the roster, so an EMPTY hit list reds too (the cure went missing),
+    // and it is not weakened to "at most one".
     const kindReaders = SRC_FILES.filter((rel) => rel !== LEAF && /WORLD_PULSE_FATE_KIND\b/.test(STRIPPED.get(rel)));
-    expect(kindReaders, 'a src/ file now READS WORLD_PULSE_FATE_KIND — that is EM-B1i\'s, and a reader here forfeits this packet\'s golden-neutrality').toEqual([]);
+    expect(kindReaders, 'the declared reader roster is not what src/ holds: no file reads WORLD_PULSE_FATE_KIND any more, or the one that does has moved').toEqual(KIND_READER_ROSTER);
+    expect(KIND_READER_ROSTER, 'a SECOND src/ file now READS WORLD_PULSE_FATE_KIND — EM-B1i authorised exactly one reader, and another one needs its own packet and its own golden and preset-witness measurement').toEqual(kindReaders);
 
     // BOTH READERS ARE NON-ENUMERATING, and reader 1 is driven through the REAL function with
     // a STANDING-institution negative control FIRST.

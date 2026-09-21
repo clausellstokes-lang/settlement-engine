@@ -62,6 +62,10 @@ import {
   roleCauseAffinity, CAUSE_FAMILY_OF, CAUSE_LABEL_OF,
 } from './causeVocabulary.js';
 import { ageBandForElapsed, HISTORICIZE_BAND } from '../ageBands.js';
+// EM-B1i — the pulse's fate words and their declared KINDS, from EM-B1h's pure zero-import
+// leaf. `pulseKernel.js` already imports this module and `calamityKernel.js`, so every chunk
+// that carries this reader carries the leaf too: the edge adds no module to any bundle.
+import { WORLD_PULSE_FATE_KIND, isWorldPulseFate } from './worldPulseFates.js';
 
 /** @typedef {import('./causeVocabulary.js').CauseContext} CauseContext */
 /** @typedef {import('../settlement.schema.js').SimSettlement} SimSettlement */
@@ -132,11 +136,28 @@ const norm = (s) => String(s || '').trim().toLowerCase();
 // abolition, inactive flag, or a non-standing status. Mirrors the standing checks
 // across the engine (mercenaryMarket.isStanding / institutionLifecycle abolition guard).
 const NONSTANDING_STATUS = new Set(['removed', 'destroyed', 'remnant', 'ruined', 'defunct', 'closed', 'disbanded', 'abolished']);
+/**
+ * What each DECLARED fate kind means for "is this institution gone?". TOTAL over
+ * WORLD_PULSE_FATE_KINDS — a fourth kind declared by the leaf and not spelled here reds
+ * tests/lint/vocabularyTotality.walker.test.js rather than defaulting silently to "standing".
+ */
+/** @type {Readonly<Record<string, boolean>>} */
+const DESTROYED_BY_FATE_KIND = Object.freeze({
+  closure: true,
+  rise: false,
+  standing: false,
+});
 /** @param {InstLike|null|undefined} inst */
 function institutionDestroyed(inst) {
   if (!inst) return false;
   if (inst._worldPulseInactive === true || inst._worldPulseMorallyAbolished === true) return true;
-  if (inst.worldPulseFate) return true;
+  const fate = inst.worldPulseFate;
+  // An UNKNOWN truthy fate — a word an older save may carry that this vocabulary does not
+  // know — keeps TODAY'S reading, so no saved world changes meaning silently. `isWorldPulseFate`
+  // is a Set test, never `in`: `in` walks Object.prototype and would read 'constructor',
+  // 'toString', 'valueOf' and '__proto__' as members.
+  if (fate && !isWorldPulseFate(fate)) return true;
+  if (fate && DESTROYED_BY_FATE_KIND[WORLD_PULSE_FATE_KIND[/** @type {string} */ (fate)]] === true) return true;
   return NONSTANDING_STATUS.has(norm(inst.status));
 }
 
