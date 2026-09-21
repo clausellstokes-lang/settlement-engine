@@ -5,6 +5,7 @@
 
 > ## ⭐⭐⭐⭐⭐ CURRENT POINTER — 2026-09-14 (ODQ §924). READ THIS BLOCK FIRST; EVERYTHING BELOW IT IS HISTORICAL BOOTSTRAP CONTEXT.
 >
+> **0. `docs/OPERATING_STANDARD.md` — THE OWNER'S STANDING ORDER OF 2026-09-20 for every account and model (seats, batching, the intake rule, measure-first, the report diet, what stays the owner's).**
 > **1. `docs/HANDOFF_CURRENT.md` — FIRST, WHOLE.** It is model-agnostic and is refreshed at EVERY
 > collection (ODQ §233); a stale handoff is a failed handoff. **2. THIS FILE** — for what the project
 > IS, the owner's doctrine, and the laws that cost the most to relearn. **3. THE TAIL OF

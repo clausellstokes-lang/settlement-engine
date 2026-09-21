@@ -1,5 +1,7 @@
 # Claude continuation note
 
+> **THE OPERATING STANDARD (the owner, 2026-09-20: "the standard no matter which claude account i use"): read [`docs/OPERATING_STANDARD.md`](docs/OPERATING_STANDARD.md) FIRST** — seats, batching, the intake rule, measure-first, the report diet, what stays the owner's. It binds every session on every account and model. Then `docs/HANDOFF_CURRENT.md`.
+
 This checkout is a live, heavily modified integration worktree. Before changing
 code, read [`CONTRIBUTING.md`](CONTRIBUTING.md),
 [`docs/implementation/INDEX.md`](docs/implementation/INDEX.md), and the one
