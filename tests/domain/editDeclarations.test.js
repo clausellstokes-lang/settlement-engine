@@ -270,11 +270,46 @@ describe('EM-A1 — the field declarations, their shape law and their existence 
     const scanned = walkSources(join(ROOT, 'src')).filter((rel) => !NEW_LEAVES.includes(rel));
     expect(scanned.length, 'the src/ walk found nothing, so the absence below would be vacuous').toBeGreaterThan(400);
     const importers = dormancyImporters(scanned.map((rel) => [rel, readFileSync(join(ROOT, rel), 'utf8')]));
+
+    // ⭐⭐ EM-B1a WIDENS THIS ARM IN PLACE, BY ADDITION AND NEVER BY DELETION. The roster is
+    // now EXACT and asserted SET-EQUAL IN BOTH DIRECTIONS, with both sides sorted, because
+    // `walkSources` order is `readdirSync` order and is not stable across filesystems. The
+    // ONE entry is EM-B1a's op catalogue reaching EM-A1's `fieldDeclarations.js` — this
+    // leaf's SINGLE RUNTIME EDGE into EM-A1's volume. Its `Op` and `EntityRef` typedefs
+    // reach `types.js` by JSDoc alone, which TOOL-32's comment strip correctly does not
+    // count, exactly as it does not count EM-D0d's two `FreeField`/`PoolField` typedefs.
+    const EXPECTED_IMPORTERS = [
+      'src/domain/edit/operations.js imports src/domain/edit/fieldDeclarations.js',
+    ];
     expect(
-      importers,
-      'a module under src/ imports one of EM-A1\'s new leaves. Wave 1 is HEADLESS by construction:'
-      + ' an importer puts the declaration table into a bundle closure and invalidates the +0 B price'
-      + ' this packet declared on the worker, the lazy engine, the eager first paint and the edge metas.',
+      [...importers].sort(),
+      'the importer roster of EM-A1\'s new leaves is EXACT, in both directions. Wave 1 is'
+      + ' HEADLESS by construction: an UNLISTED importer puts the declaration table into a'
+      + ' bundle closure and invalidates the +0 B price this packet declared on the worker, the'
+      + ' lazy engine, the eager first paint and the edge metas. A MISSING listed importer means'
+      + ' the sanctioned edge is gone and the roster has aged instead of convicting. EM-B1a\'s'
+      + ' op catalogue is the one sanctioned runtime edge.',
+    ).toEqual([...EXPECTED_IMPORTERS].sort());
+
+    // ⭐ THE SECOND-ORDER SCAN (EM-B1a): nothing under `src/` imports EITHER of EM-B1a's own
+    // leaves, so EM-A1's declaration table still reaches no bundle closure THROUGH them. That
+    // is what keeps the +0 B price true BY CONSTRUCTION rather than by an absence which, with
+    // the sanctioned edge above now present, is no longer empty.
+    const B1A_LEAVES = ['src/domain/edit/operations.js', 'src/domain/edit/worldConditions.js'];
+    const secondOrder = [];
+    for (const rel of scanned.filter((each) => !B1A_LEAVES.includes(each))) {
+      const code = commentsOnly(readFileSync(join(ROOT, rel), 'utf8'));
+      for (const match of code.matchAll(/(?:from|import)\s*\(?\s*['"]([^'"]+)['"]/g)) {
+        if (!match[1].startsWith('.')) continue;
+        const resolved = relative(ROOT, resolve(dirname(join(ROOT, rel)), match[1])).replace(/\\/g, '/');
+        if (B1A_LEAVES.includes(resolved)) secondOrder.push(`${rel} imports ${resolved}`);
+      }
+    }
+    expect(
+      secondOrder,
+      'EM-B1a lands DARK: no module under src/ imports its op catalogue or its world-condition'
+      + ' leaf, so neither enters any bundle closure and neither can carry EM-A1\'s declaration'
+      + ' table into one behind this arm\'s back.',
     ).toEqual([]);
 
     // GUARD-THE-GUARD, through the SAME predicate (this file's house rule, ⭐ third header

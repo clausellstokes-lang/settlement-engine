@@ -175,6 +175,17 @@ describe('B4 consumers — the overlay is enforced, not parallel', () => {
       "grep -rln --include='*.js' --include='*.jsx' \"relationshipCompatibility\" src tests || true",
       { cwd: process.cwd(), encoding: 'utf8' },
     ).trim().split('\n').filter(Boolean).map(p => p.replace(/\/{2,}/g, '/'));
+    // ⭐ EM-B1a's THREE READERS, added here and asserted in BOTH directions below. Each is a
+    // READ-ONLY vocabulary consumer: none evaluates compatibility and none writes a rule.
+    const EM_B1A_READERS = [
+      // the op catalogue takes PRIMARY_RELATIONSHIP_TYPES as set-relationship's closed enum
+      'src/domain/edit/operations.js',
+      // the world-condition leaf takes the trade_partner member OUT of the closed list, so an
+      // upstream rename empties the lookup and REDS instead of drifting to a silent false
+      'src/domain/edit/worldConditions.js',
+      // and the packet's own acceptance battery reads the vocabulary its A7 arm pins
+      'tests/domain/editOperations.test.js',
+    ];
     const SANCTIONED = [
       'src/domain/worldPulse/relationshipCompatibility.js',
       'tests/domain/relationshipCompatibility.test.js',
@@ -198,8 +209,20 @@ describe('B4 consumers — the overlay is enforced, not parallel', () => {
       // test file's PATH as a string key. Imports nothing from the module —
       // the same string-mention class as the data baselines exempted above.
       'tests/lint/negativeAssertionAnchor.walker.test.js',
+      ...EM_B1A_READERS,
     ];
     const offenders = hits.filter(p => !SANCTIONED.some(s => p.endsWith(s)));
     expect(offenders, `unexpected importers: ${offenders.join(', ')}`).toEqual([]);
+
+    // ⭐⭐ BOTH DIRECTIONS, OVER EM-B1a's OWN THREE ROWS ONLY. A sanctioned row that stops
+    // reading the vocabulary must RED rather than ageing silently into a row that has never
+    // convicted anything. ⛔ The WHOLE roster is deliberately NOT made set-equal and NO row is
+    // removed here: two legacy rows are already stale (measured — `tests/data/stringCouplingRegistry.test.js`
+    // is not in the tree and `tests/domain/tradeSalience.test.js` no longer mentions the
+    // module), so a whole-roster both-ways arm cannot be green, and re-aiming another packet's
+    // row is not this packet's act. EM-B1a §13 R13 hands those two to the chair.
+    const dead = EM_B1A_READERS.filter(p => !hits.some(h => h.endsWith(p)));
+    expect(dead, `sanctioned EM-B1a readers that no longer import the module: ${dead.join(', ')}`)
+      .toEqual([]);
   });
 });
