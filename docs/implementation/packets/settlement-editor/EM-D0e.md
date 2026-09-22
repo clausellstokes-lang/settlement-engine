@@ -22,7 +22,7 @@
   `M src/App.jsx` lazy mount has no lawful subject at this landing (nothing in the landed or placed
   estate can open the dialog, and nothing can bind its writer), and `src/copy/en.js` — not
   `src/App.jsx` — is the one file this member modifies.
-- **Packet version:** 1.1
+- **Packet version:** 1.2
   Version 1 was the compile's, measured at `efd0eb448` against the four EM-T12 members AS PACKETS.
   **WHAT VERSION 1.1 CHANGED AND WHY (the independent Opus pre-proof at train EM-T12's FLIPPED tip
   `16f0bc71c`, 2026-09-22):** train EM-T12 LANDED, so judgment 134's law applies — a sibling's
@@ -41,6 +41,37 @@
   reach this leaf and the delta is `+0` by CONTENT rather than by root; **(4)** four line addresses
   are refreshed to the tip; **(5)** §13's R2, R3, R5 and R6 carry the chair's rulings (judgment 146)
   and R4 carries its measured answer. Every later change to this body bumps it again (§P9(e)).
+  ⭐⭐ **WHAT VERSION 1.2 CHANGED AND WHY (the BUILD lane's pre-seal measurement, 2026-09-22;
+  ruled by the chair as judgment 171).** The lane STOPPED before its seal on difference 0 line
+  (viii). The sixth amendment's §P10.11 (i) requires that *"a pre-proof RE-DERIVES THE GOVERNING SET
+  FOR EVERY MODULE ITS CONTRACT IMPORTS … because dormancy arms and consumer rosters key on
+  IMPORTERS and not on the edited file"*; §10's governing set was computed from the files this
+  member EDITS and from the DIRECTORY of its one test CREATE, and never per import. Two LANDED arms
+  over the two `src/domain/edit/` modules §7's CREATE row orders this leaf to import were therefore
+  unseen, and — neither being in any T13 member's `checks` — both would have reddened for the first
+  time at the train's TERMINAL full check, attributed to no member.
+  **ARM 1** `tests/domain/editDeclarations.test.js :: EXPECTED_IMPORTERS` (EM-A1's DORMANCY arm,
+  asserted set-equal in BOTH directions) measured **2 rows at the lane's base and 3 with this
+  leaf**, the third being
+  `src/components/edit/CardEditorDialog.jsx imports src/domain/edit/fieldDeclarations.js`. The
+  arm's own guard-the-guard plants `src/components/edit/PlantedField.jsx` importing
+  `declarationsFor` and requires it CONVICTED — this member's leaf, one directory over.
+  **ARM 2** `tests/domain/editPools.test.js :: POOL_LEAF_SPECIFIER` (EM-A2a's darkness roster inside
+  `tests/domain/editPools.test.js :: A6 the no-draw law, and the golden structural proof`, asserted
+  `[]`) measured **`[]` at the base and `['src/components/edit/CardEditorDialog.jsx']` with this
+  leaf**: ⛔ **this member is the FIRST importer of `src/domain/edit/pools.js` under `src/`**, which
+  is judgment 148's law verbatim.
+  ⇒ **FIVE CHANGES, none of them to a contract, a case, a budget, a figure or a title:** **(1)** §7
+  gains TWO `TEST` rows at EM-C4a version 4.3's exact shape, spelled in the new §6.3a and §6.3b;
+  **(2)** `checks` gains both files as entry 6, so the widening is proved inside this member's own
+  batch instead of at the terminal, and the validator stays LAST; **(3)** §3's handwritten-files
+  count moves 4 → 6 and the shared-file row carries each measured delta; **(4)** §10's governing-set
+  paragraph is corrected to the per-import derivation the amendment requires, with the executed
+  per-import sweep quoted; **(5)** the header's **Preamble** SHA-256 is corrected to the LANDED
+  SIXTH amendment's. ⛔ **NO acceptance case, no `it`, no `describe` and no title is added or
+  re-worded**, so the count law and the lighting delta are both unchanged, and `requiredSymbols`
+  stays SEVENTEEN — EM-C4a version 4.3 added none for the two files it widened, and a row asserting
+  a line this member's own edit moves would refuse its own build (§7's standing note).
 - **Verified base:** `em-t13-d0e-2026-09-22` at `e1750d7454c1dff7e81342efadd05e47719ca6aa`
   ⚠ Left for the chair's promotion stamp; the value stands alone on its line.
   **The revalidation sentence the chair will use:** *"Re-measured at
@@ -62,8 +93,17 @@
   `dist`; and `src/copy/en.js` measured 1260 effective lines with the planned text at 1275, `+15`
   exactly, under eslint's `Linter`."*
 - **Preamble:** `docs/implementation/preambles/EM-PREAMBLE.md` at SHA-256
-  `fdecd426828665cad2dfaf872871f29f46fa4816e1bd4c43c20ccd84dacc9e7c` — MEASURED at this member's own
-  read tip with `shasum -a 256`, never copied from a brief or a sibling (§P3.5).
+  `125c693214235a81bf4f2b38506b621859a35e0325ff2ea58d335b4e0681a99d` — the LANDED SIXTH
+  amendment, MEASURED with `shasum -a 256` at this member's own lane HEAD, never copied from a
+  brief or a sibling (§P3.5).
+  ⚠ **VERSION 1.1 CARRIED THE FIFTH'S `fdecd4268…` HERE AFTER THE SIXTH HAD LANDED.** The body
+  was written to the sixth (§1 item 3a) and this header says the chair re-stamps the hash at
+  placement; the placement tool re-stamped only **Status**, **Verified base** and **Last
+  revalidated**, so the stale stamp is the TOOL's omission and not the body's, and EM-B1b and
+  EM-B2a4 carry the same one at this placement. Measured at the lane HEAD, the landed
+  `docs/implementation/preambles/EM-PREAMBLE.md` is BYTE-IDENTICAL to the kit's selected draft
+  `drafts/amendment-6/EM-PREAMBLE.amended.md` (both `125c693214235a81…`), so nothing in this
+  packet's body moves under the correction.
 - **Last revalidated:** `e1750d7454c1dff7e81342efadd05e47719ca6aa` (the chair's stamp)
 - **Depends on:**
   **LANDED and read AS REAL CODE at `efd0eb448`** — EM-A1 (`src/domain/edit/fieldDeclarations.js`) ·
@@ -264,10 +304,10 @@ EM-D2's; the NPC card declares none) · ⛔ search beside the drop-down (EM-D0d'
 | New logic-bearing production leaves | ≤2 | **1** |
 | Existing logic-bearing production files modified | ≤3 | **1** (`src/copy/en.js`, a data registry) |
 | Additional registration-only files | ≤3 | **0** |
-| Handwritten files total | ≤12 | **4** |
+| Handwritten files total | ≤12 | **6** (version 1.2: the two landed importer rosters) |
 | New/changed effective production lines | ≤400 | **155** (measured) |
 | Effective lines per new leaf | ≤250 | **140** (measured) |
-| Delta in a shared/hot file | ≤15 | `src/copy/en.js` **+15** (measured, AT the cap) · `editorHalo.test.jsx` **+2** |
+| Delta in a shared/hot file | ≤15 | `src/copy/en.js` **+15** (measured, AT the cap) · `editorHalo.test.jsx` **+2** · version 1.2: `editDeclarations.test.js` **+1** · `editPools.test.js` **+0** (one-site widenings by ADDITION; a comment costs no effective line) |
 | Acceptance cases | ≤8 | **8** |
 
 Overrides approved before dispatch: **NONE**.
@@ -549,6 +589,76 @@ its own (it passes `editorHalo` and imports neither `EDITOR_GROUND`, `GOLD`, `PA
 found **no line-addressed row** for this path (`git grep -c -F 'tests/components/primitives/
 editorHalo.test.jsx' -- tests/lint scripts` → 0), so no re-address is owed (§P2.16: `none found`).
 
+### §6.3a `tests/domain/editDeclarations.test.js` — EM-A1's DORMANCY ROSTER, WIDENED BY ONE ROW (version 1.2; judgment 148, ruled 171)
+
+EM-A1's landed dormancy arm holds the importer roster of `src/domain/edit/fieldDeclarations.js`
+EXACT in both directions. Its corpus is every `.js`/`.jsx` file under `src/`
+(`tests/domain/editDeclarations.test.js :: walkSources`), read through the estate's ONE shared
+comment strip (`tests/helpers/codeOnlySource.js :: commentsOnly`, TOOL-32) by
+`tests/domain/editDeclarations.test.js :: dormancyImporters`, so a JSDoc typedef is NOT an importer
+and a runtime `import … from` is. §7's CREATE row orders this leaf to import `declarationsFor` and
+`isEditableCard` from that module, so this member is a new RUNTIME importer and the set-equality
+reds. Measured with the arm's own matcher at the lane HEAD: **2 rows before, 3 after.**
+
+`tests/domain/editDeclarations.test.js :: EXPECTED_IMPORTERS` gains EXACTLY ONE row (the assertion
+sorts both sides, so codepoint position is readability and not law):
+
+```js
+    const EXPECTED_IMPORTERS = [
+      // ⭐ EM-D0e WIDENS THIS ARM IN PLACE, BY ADDITION AND NEVER BY DELETION. The third entry is
+      // the first editor door, and it is LAZY in the only sense this arm measures: NOTHING MOUNTS
+      // IT — `src/App.jsx` is out of its manifest (§2.2(a), judgment 146a) and no `e2e/` spec can
+      // reach it — so it is composed by no eager slice, contributes 0 members to
+      // EAGER_FIRST_PAINT_MODULES, and the +0 B price this arm defends is unmoved. Measured by
+      // this member's own `checks` entry 5, the first-paint membership probe, which imports the
+      // exported set and reads no `dist`.
+      'src/components/edit/CardEditorDialog.jsx imports src/domain/edit/fieldDeclarations.js',
+      'src/domain/edit/operations.js imports src/domain/edit/fieldDeclarations.js',
+      'src/store/editSlice.js imports src/domain/edit/fieldDeclarations.js',
+    ];
+```
+
+⛔ **THE ARM'S SECOND-ORDER SCAN IS READ WHOLE AND STAYS BYTE-UNMOVED, AND THAT IS MEASURED RATHER
+THAN ASSUMED** (the consequence judgment 150 requires a member to state).
+`tests/domain/editDeclarations.test.js :: B1A_LEAVES` and
+`tests/domain/editDeclarations.test.js :: EXPECTED_SECOND_ORDER` are a SECOND exact roster, over
+EM-B1a's `src/domain/edit/operations.js` and `src/domain/edit/worldConditions.js`. §6.1 item 1
+forbids this leaf from importing either, §7's CREATE row lists neither, and A8's source scan pins
+the absence with a planted control ⇒ the roster stays at its landed ONE row,
+`src/store/editSlice.js imports src/domain/edit/operations.js`, and the world-condition leaf still
+has NO importer under `src/` at all. Re-measured with the same matcher: **1 row before, 1 row
+after.** ⛔ No assertion is weakened, no arm is added, and the arm's TITLE is NOT re-worded: it
+names no count and reads exactly as true after this widening as before it, so the lighting census
+sees no rename.
+
+### §6.3b `tests/domain/editPools.test.js` — EM-A2a's DARKNESS ROSTER, WIDENED TO ONE ROW (version 1.2; judgment 148, ruled 171)
+
+`tests/domain/editPools.test.js :: A6 the no-draw law, and the golden structural proof` closes with
+a darkness roster over `src/domain/edit/pools.js`: every `.js` and `.jsx` file under `src/`
+(`tests/domain/editPools.test.js :: sourceFiles`) whose text matches
+`tests/domain/editPools.test.js :: POOL_LEAF_SPECIFIER`, asserted `[]`. §7's CREATE row orders this
+leaf to import `poolValues` and `rollFrom` from that module ⇒ ⛔ **this member is the FIRST importer
+of `src/domain/edit/pools.js` under `src/`**, the exact case judgment 148 governs. Measured with the
+arm's own matcher at the lane HEAD: **`[]` before, one row after.**
+
+```js
+    expect(sources.filter(({ text }) => POOL_LEAF_SPECIFIER.test(text)).map(({ rel }) => rel),
+      // ⭐ EM-D0e is the pool leaf's FIRST and ONLY runtime importer under src/, and it is LAZY in
+      // the sense this arm measures: nothing mounts the dialog (§2.2(a)), so the leaf still enters
+      // no eager closure and no golden can move behind this arm's back.
+      'the pool leaf has EXACTLY ONE importer under src/, EM-D0e\'s editor door, which nothing'
+      + ' mounts, so no bundle closure gains it and no golden can move')
+      .toEqual(['src/components/edit/CardEditorDialog.jsx']);
+```
+
+⛔ **THE MATCHER'S LIVENESS PROBE AND THE PLANTED NEGATIVE CONTROL BESIDE IT ARE UNTOUCHED.**
+`tests/domain/editPools.test.js :: TYPES_LEAF_SPECIFIER` — the same shape aimed at a sibling edit
+leaf that IS imported — measured **2** hits at the lane HEAD, so the matcher is proved live from the
+other side and the one-row roster above cannot read as agreement; and A7's import fence
+(`tests/domain/editPools.test.js :: FENCE` and `:: FORBIDDEN`) reads the POOL LEAF'S OWN import
+list, which this member does not touch, so it cannot move. ⛔ No assertion is weakened, no arm is
+added, and A6's title is NOT re-worded: it names no roster, so no title moves.
+
 ### §6.4 Determinism, lifecycle, receipts
 
 - **Hash / fork key:** NONE. This leaf draws no random number, mints no id and reads no clock. Its
@@ -669,6 +779,8 @@ actions (§P9(d)); the proof line is in §12.
 | `MODIFY` | `src/copy/en.js` | `edit.dialog.*` | **+15 effective (measured), 13 strings, +0 logic** | §6.2's THIRTEEN strings VERBATIM, FLAT (no `refusal:` sub-object), appended as a `dialog:` sub-block INSIDE the existing `edit:` block (`:1825`), beside `field:` and never renaming it. EM-D0d's five keys stay BYTE-UNMOVED. The delta is measured with eslint's `Linter` (`max-lines`, `skipBlankLines` + `skipComments`) over the file as it stands (1260) and over the planned text (1275) — the one instrument (§P9), never `wc -l`. |
 | `TEST` | `tests/components/primitives/editorHalo.test.jsx` | A6's `filesNaming('editorHalo')` set | **+2** | §6.3's one-token cure: one `const DIALOG_REL` beside `:30-31` and the dialog's path added to A6's expected array. ⛔ No arm weakened, no `it` added, no title minted, the two sibling exact sets byte-unmoved. |
 | `CREATE` | `tests/components/cardEditorDialog.test.jsx` | A1–A8 | — | §9's EIGHT cases as EIGHT literal `it`s under ONE literal `describe`; `/** @vitest-environment jsdom */` first line, at `tests/components/editFields.test.jsx`'s exact shape. ⛔ No `.each`, no loop, no conditional and no nested `describe` (§P3.4); ⛔ no binding named `it`, `test` or `describe` anywhere in the file (26 of the estate's 384 parked files park for that alone). |
+| `TEST` | `tests/domain/editDeclarations.test.js` | the DORMANCY arm's `EXPECTED_IMPORTERS` roster of `src/domain/edit/fieldDeclarations.js` (no case; no arm added; no title added) | **+1** | ⭐ **VERSION 1.2 (judgment 148; ruled 171).** §6.3a exactly: `EXPECTED_IMPORTERS` gains EXACTLY ONE row, `src/components/edit/CardEditorDialog.jsx imports src/domain/edit/fieldDeclarations.js`, with ONE comment naming EM-D0e and the door's laziness (nothing mounts it, §2.2(a); 0 members of `EAGER_FIRST_PAINT_MODULES`, proved by `checks` entry 5). ⛔ The arm's SECOND-ORDER roster (`tests/domain/editDeclarations.test.js :: EXPECTED_SECOND_ORDER`) is read WHOLE and stays BYTE-UNMOVED — this leaf imports neither EM-B1a leaf — and both guard-the-guard plants are untouched. No assertion weakened, both rosters stay exact in both directions, no title added or re-worded. |
+| `TEST` | `tests/domain/editPools.test.js` | A6's darkness roster over `src/domain/edit/pools.js` (no case; no arm added; no title added) | **+0** | ⭐ **VERSION 1.2 (judgment 148; ruled 171).** §6.3b exactly: A6's expected importers become EXACTLY `['src/components/edit/CardEditorDialog.jsx']`, its `expect` MESSAGE re-worded to the truth it now asserts, with ONE comment naming EM-D0e and the door's laziness — this member is the pool leaf's FIRST importer under `src/`. ⛔ The matcher's liveness probe (`tests/domain/editPools.test.js :: TYPES_LEAF_SPECIFIER`, measured 2) and A7's import fence are untouched; no assertion weakened, no title added or re-worded. |
 
 **`requiredSymbols` — SEVENTEEN rows at version 1.1** (fifteen at version 1, plus the TWO
 discharged below), **every one found VERBATIM at `git grep -c -F` = 1 at `16f0bc71c`, and every one
@@ -762,8 +874,9 @@ oversight.
 ### §7a · The three statements §P2.11, §P2.16 and §P2.10 require — each MEASURED at `efd0eb448`
 
 **§P2.16 · LINE-ADDRESSED REGISTERS — `none found`.** For every path this member modifies:
-`git grep -n -F '<path>' -- tests/lint scripts`. `src/copy/en.js` returns seven hits and **not one
-addresses a line**: three are `{mode, path, sha256, size}` entries in
+`git grep -n -F '<path>' -- tests/lint scripts`. `src/copy/en.js` returns **fourteen** hits at the lane HEAD (version 1.1 stated seven,
+measured at `efd0eb448`; the build lane re-measured at its own HEAD and the DISPOSITION is
+unchanged) and **not one addresses a line**: three are `{mode, path, sha256, size}` entries in
 `scripts/.observed-shape-readers-baseline.json` (a CONTENT DIGEST, and `provenanceDriftOf` refuses
 only on a DETECTOR SOURCE — `scripts/check-observed-shape-readers.mjs:2651`,
 `if (scannedNow.has(entry.path)) continue;` — while a scanned entry's sha drift joins `inputs`),
@@ -897,6 +1010,20 @@ that holds it and the §7 row that authorizes that file's edit (§P9(f)).
    paired in the same case with a positive render, so "nothing" is distinguishable from "the test
    rendered nothing at all".
 
+### §9b · THE TWO LANDED ARMS VERSION 1.2 WIDENS — NO CASE, NO ARM, NO TITLE
+
+⛔ **NEITHER `TEST` ROW OF VERSION 1.2 HOMES AN ACCEPTANCE CASE AND NEITHER ADDS AN `it`,** at
+EM-C4a version 4.3's exact shape: the matrix stays at EIGHT cases in ONE file, the count law stays
+`arms declared 8 · cases homed 8`, and the lighting delta is unchanged in all five figures. What the
+two rows buy is that the widening is PROVED INSIDE THIS MEMBER'S OWN BATCH — `checks` entry 6 runs
+both files — instead of reddening for the first time at the train's terminal, attributed to no
+member. Neither widened arm can go vacuous under the addition, and that is the arms' own doing, not
+a claim of this packet: `tests/domain/editDeclarations.test.js :: dormancyImporters` is re-entered
+inside its own arm on a planted runtime import (convicted) and a planted JSDoc typedef (acquitted),
+and `tests/domain/editPools.test.js :: TYPES_LEAF_SPECIFIER` proves the same matcher still finds a
+sibling edit leaf that IS imported. Both arms also carry anti-vacuity floors on the walk itself
+(more than 400 and more than 1,000 sources), which this member does not touch.
+
 ## §10 · Verification commands
 
 ```sh
@@ -913,7 +1040,11 @@ that holds it and the §7 row that authorizes that file's edit (§P9(f)).
 #  5  the FIRST-PAINT MEMBERSHIP PROBE — imports the exported set, reads no `dist`,
 #     therefore CANNOT SKIP; exits non-zero if `src/components/edit/**` or `src/copy/en.js`
 #     has entered the eager closure (the launch brief's clause 5)
-#  6  node scripts/implementation-packets.mjs validate
+#  6  tests/domain      — ⭐ NEW AT VERSION 1.2 (judgment 148; ruled 171): the TWO LANDED
+#     IMPORTER ROSTERS this member widens (§6.3a, §6.3b), so the widening is proved in this
+#     member's own batch and not for the first time at the train's terminal. Placed last but
+#     one so entries 1-5 keep their numbers; the validator stays LAST (§P7).
+#  7  node scripts/implementation-packets.mjs validate
 ```
 
 | # | argv |
@@ -923,7 +1054,8 @@ that holds it and the §7 row that authorizes that file's edit (§P9(f)).
 | 3 | `npx vitest run --pool=threads --maxWorkers=2 tests/lint/copyKeyResolution.walker.test.js tests/lint/editMutationPath.walker.test.js tests/lint/dialogExit.walker.test.js tests/lint/bottomAnchoredChrome.walker.test.js tests/lint/negativeAssertionAnchor.walker.test.js tests/lint/contractTestAntiVacuity.walker.test.js tests/lint/seedLoopTotality.walker.test.js tests/lint/proseNumerics.test.js tests/lint/tuningRegister.walker.test.js tests/lint/mutationCoverageManifest.test.js tests/lint/refusalNoticeCoverage.walker.test.js tests/lint/proseWiringCensus.walker.test.js` |
 | 4 | `npx vitest run --pool=threads --maxWorkers=2 tests/design/houseBloom.test.js tests/design/organicMotion.test.js` |
 | 5 | `node -e "const{pathToFileURL}=require('node:url');import(pathToFileURL('vite.config.js').href).then(m=>{const S=[...m.EAGER_FIRST_PAINT_MODULES].map(String);const mine=S.filter(p=>p.includes('src/components/edit/'));const copy=S.filter(p=>p.endsWith('src/copy/en.js'));const idx=S.filter(p=>p.endsWith('src/copy/index.js'));console.log('EAGER_FIRST_PAINT_MODULES:',S.length,'| src/components/edit members:',mine.length,'| src/copy/en.js members:',copy.length,'| src/copy/index.js members:',idx.length);if(mine.length!==0)process.exit(1);if(copy.length!==0)process.exit(1);if(!S.some(x=>x.endsWith('src/components/theme.js')))process.exit(1);})"` |
-| 6 | `node scripts/implementation-packets.mjs validate` |
+| 6 | `npx vitest run --pool=threads --maxWorkers=2 tests/domain/editDeclarations.test.js tests/domain/editPools.test.js` |
+| 7 | `node scripts/implementation-packets.mjs validate` |
 
 **THE GOVERNING SET, COMPUTED** (TOOL-26's `governing-tests.mjs` has not landed, so the rule's
 fallback is used): `git grep -l -F '<basename without extension>' -- tests` for every file changed
@@ -940,6 +1072,30 @@ into it the moment the file exists. It is now `checks` entry 3's first-listed ad
 ⛔ Nothing else moved: the twelve `tests/lint` files version 1 named all exist at the tip, and
 `tests/lint/ruinFilterRoster.walker.test.js` — the other `tests/lint` file the window touched —
 scans `src/domain` only and stays out of this set.
+
+⛔⛔ **AND AT VERSION 1.2 THE DERIVATION ITSELF IS CORRECTED, BECAUSE THE ONE ABOVE IS THE WRONG
+ONE** (the build lane's pre-seal measurement; judgment 171). The sixth amendment's §P10.11 (i)
+requires the governing set to be re-derived FOR EVERY MODULE THE CONTRACT IMPORTS —
+`git grep -l -F '<the import target's basename>' -- tests`, ONE SEARCH PER IMPORT — *"because
+dormancy arms and consumer rosters key on IMPORTERS and not on the edited file"*. Versions 1 and 1.1
+keyed on the files this member EDITS and on the DIRECTORY of its one test CREATE, and so never saw
+the two landed arms over the two `src/domain/edit/` modules §7's CREATE row orders this leaf to
+import. Executed per import at the lane HEAD:
+- `fieldDeclarations` → **7** files, of which `tests/domain/editDeclarations.test.js` holds an EXACT
+  importer roster in both directions ⇒ §7's first new `TEST` row (§6.3a).
+- `pools.js` → **5** files, of which `tests/domain/editPools.test.js` holds a darkness roster
+  asserted `[]` ⇒ §7's second new `TEST` row (§6.3b), this member being the FIRST importer.
+- `PoolField` and `FreeField` → `tests/components/editFields.test.jsx` and
+  `tests/domain/editDeclarations.test.js`. This member is their first `src/` importer too, and
+  NEITHER file holds an importer roster over them: the first scans their SOURCE
+  (`tests/components/editFields.test.jsx :: LEAF_SOURCES` — draws, clocks and copy keys), the second
+  only names them in a comment. ⇒ **no row owed, measured rather than assumed.**
+- `copy/index.js`, `useIsMobile`, `Button`, `ClerkNote`, `PortablePopup`, `BottomSheet` and
+  `proseScale` each already have `src/` importers at the lane HEAD, so no first-importer arm of any
+  of them can fire on this member's account.
+⇒ `checks` gains entry 6 and §7 gains two `TEST` rows. ⛔ The FALLBACK derivation above stays in
+this packet as written, because it is still owed for every file this member EDITS; the per-import
+sweep is an ADDITION to it and never a replacement.
 
 ```sh
 # THE BUILD LANE'S INSTRUMENTS — ⛔ NEVER SEALED CHECKS (§P7)
@@ -996,9 +1152,12 @@ In addition to `PACKET_STANDARD.md`'s list and §P8's:
    109 assigned the decision to the dialog and required the control to stay pure.
 5. **A refusal word would be invented, or a reason would have no line** — STOP. The set is EM-C4a's
    seven plus one declared fallback, pinned both ways by A5.
-6. **A walker, a spec or a ratchet would be weakened, widened or skipped to pass** — STOP. The ONE
-   widening this member performs is §6.3's set cure, which is the arm's own owner-of-the-landing
-   rule (judgment 110), not a weakening: no assertion is deleted, no tolerance widened.
+6. **A walker, a spec or a ratchet would be weakened, widened or skipped to pass** — STOP. The
+   THREE widenings this member performs are §6.3's halo set cure and version 1.2's two importer
+   rosters (§6.3a, §6.3b), each of them the arm's own owner-of-the-landing rule (judgment 110;
+   judgment 148's first-importer law, ruled 171) and none of them a weakening: no assertion is
+   deleted, no tolerance is widened, no title is added or re-worded, and every roster stays
+   EXACT in both directions. ⛔ A FOURTH widening, of any arm, is a STOP.
 7. **`declarationsFor` or `poolValues` would be re-implemented, mirrored or cached** — STOP.
 8. **A figure would be rendered** — STOP and add the prose-numerics row first (§P2.7); this member
    renders none.
@@ -1013,12 +1172,14 @@ In addition to `PACKET_STANDARD.md`'s list and §P8's:
 ## §12 · Receipt, questions and handoff
 
 **The SET-EQUALITY proof (§P9(d)), to be pasted by the build lane:**
-`§7 table rows parsed : 4 · capsule changeManifest: 4 · IN §7 AND NOT THE CAPSULE: NONE · IN THE
+`§7 table rows parsed : 6 · capsule changeManifest: 6 · IN §7 AND NOT THE CAPSULE: NONE · IN THE
 CAPSULE AND NOT §7: NONE · SET-EQUAL: YES`.
 
 **The count law (§P9(f)), one line per file:**
 `tests/components/cardEditorDialog.test.jsx · arms declared 8 · cases homed 8 · titles delta +8` ·
-`tests/components/primitives/editorHalo.test.jsx · arms declared 0 · cases homed 0 · titles delta +0`.
+`tests/components/primitives/editorHalo.test.jsx · arms declared 0 · cases homed 0 · titles delta +0` ·
+`tests/domain/editDeclarations.test.js · arms declared 0 · cases homed 0 · titles delta +0` ·
+`tests/domain/editPools.test.js · arms declared 0 · cases homed 0 · titles delta +0`.
 Proved by `EM-D0e.count-prover.mjs` from the kit path, and by its deliberately wrong copy exiting
 non-zero.
 
@@ -1050,6 +1211,20 @@ non-zero.
    only, so a neighbour's `interSettlementRelationships[].npcName` keeps the old name after a
    rename. Pre-existing, named by EM-C4a with its own slot; this member neither widens nor hides it,
    and the dialog shows no neighbour surface.
+
+5. ⚠ **VERSION 1.1's HEADER CARRIED THE FIFTH AMENDMENT'S PREAMBLE SHA-256 AFTER THE SIXTH HAD
+   LANDED.** The placement tool re-stamps **Status**, **Verified base** and **Last revalidated**
+   only, so the `Preamble:` hash a compile measured at its own read tip survives a later amendment;
+   EM-B1b and EM-B2a4 carry the same stale stamp at this placement. It blocks nothing —
+   `scripts/implementation-packets.mjs` reads no preamble hash, so no seal and no `validate` can
+   catch it — which is what makes it a STAMP-IS-A-CLAIM finding rather than a refusal. Corrected in
+   this member's own header at version 1.2. **SLOT: the chair's placement checklist for train
+   EM-T13**, for the two siblings and for the tool.
+6. ⚠ **`scripts/mutation-sweep.sh` rewrites a `save:` key inside `src/copy/en.js`** by a literal
+   whose indentation belongs to an earlier, unrelated block, and its `perl` substitution is
+   un-global, so §6.2's `edit.dialog.save` cannot be hit by it at this landing. Measured, and
+   recorded because a re-indent of either block would create the collision silently. **SLOT: the
+   Edit-Mode inbox.**
 
 **QUESTIONS ONLY THE CHAIR CAN ANSWER — FOUR, each with a one-line recommendation:** they are §13's
 R2, R3, R5 and R6.
