@@ -95,6 +95,7 @@ const RUIN_AGNOSTIC_EXEMPT = Object.freeze({
   'src/domain/worldPulse/generosityKernel.js': 'existence-gate (deferred) — .some() charity presence',
   'src/domain/worldPulse/stressorGates.js': 'existence-gate — .some() magic-dependence → narrative strings',
   'src/domain/tableLedger.js': 'name/existence-lookup — exposureTargets offers corruption-marked NPCs/institutions/factions as DM exposure-picker options (selection list, not live-provider aggregation)',
+  'src/domain/edit/pools.js': 'name-lookup/affordance — the `npc.role` pool offers a DM the roles the record\'s OWN institutions roster already carries, as a SELECTION LIST ("what may a human name for this field"), never a live-provider aggregation: it sums nothing and credits no institution with capacity. RULED EXEMPT BY THE CHAIR (judgment 138, EM-A2b version 7) on the same reason src/domain/events/targetRosters.js and src/domain/tableLedger.js already hold. Routing it through liveInstitutions() would DROP a ruined institution from a picker where it is a legitimate answer — the former warden of a burned keep is a role a DM may still name — and would add a THIRTEENTH import to a leaf whose own header forbids one.',
   'src/domain/mapProfile.js': 'existence-gate (deferred) — .some() walls → hasWalls; a ruined citadel still reads walled (owner glance)',
   'src/domain/contradictions.js': 'existence-gate — narrative QA detectors (.some presence)',
   'src/domain/traditions/politics.js': 'existence/candidate — tradition-owner candidate membership (deferred; owner glance)',
@@ -442,7 +443,11 @@ describe('ruin-filter roster ratchet (structural-prevention Pattern 2)', () => {
     // through `liveInstitutions` now — for the roster AND for the service rows, because a
     // calamity-ruined records office keeps no record — so it never names `.institutions` at all
     // and the discovery set is the same 93. The gate found the defect before the census did.
-    expect(readers.length).toBe(93);
+    // ⭐ 93 → 94 WITH EM-A2b v7's `src/domain/edit/pools.js`, exempted above on the
+    // name-lookup/affordance shape (the `npc.role` pool reads the record's own roster as a
+    // DM selection list and credits nothing). Read from this arm's own failure message
+    // ("expected 94 to be 93"), never computed: a re-measurement, not a ceiling raise.
+    expect(readers.length).toBe(94);
   });
 
   test('exempt honesty: every exempt entry still reads .institutions and is not already compliant', () => {

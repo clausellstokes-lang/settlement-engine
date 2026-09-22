@@ -34,6 +34,8 @@ import { FACTION_ARCHETYPES } from '../../src/domain/factionArchetypes.js';
 import { NPC_STATUS_VALUES } from '../../src/domain/entities/npcs.js';
 import { ENTITY_STATUS_VALUES } from '../../src/domain/entities/status.js';
 import { TERRAIN_WEIGHTS, CULTURES } from '../../src/domain/worldFactOptions.js';
+import { getCompatibleResources } from '../../src/domain/resourceTerrainCompatibility.js';
+import { pantheonStandings } from '../../src/domain/display/pantheonDepth.js';
 import { RESOURCE_DATA, SPECIAL_RESOURCES } from '../../src/data/resourceData.js';
 import { TIER_ORDER } from '../../src/data/constants.js';
 import { MONSTER_THREAT_TIERS, MONSTER_THREAT_RANDOM_POOL } from '../../src/data/monsterThreat.js';
@@ -48,6 +50,41 @@ const WIZARD_REL = 'src/components/ConfigurationPanel.jsx';
 
 /** A real generated world: a concrete catalogue tier, which is the only thing a record holds. */
 const TOWN = Object.freeze({ tier: 'town' });
+
+/**
+ * A POPULATED world (EM-A2b). The six appended pools are WORLD-DERIVED: five of them
+ * answer the frozen empty list on a record that carries none of their fields, and that
+ * emptiness is the contract rather than a fault, so the arms that hold every pool
+ * against a real world take this one.
+ *
+ * EVERY VALUE HERE IS INVENTED. No real table is imported: the name bag, the roster,
+ * the faction seats and the pantheon are the ones the CALLER supplies, which is what
+ * proves the pools read the passed-in record and never reach behind it.
+ */
+const RICH_WORLD = Object.freeze({
+  ...TOWN,
+  culture: 'qhemric',
+  namingData: {
+    qhemric: {
+      settlementPrefixes: ['Zorv', 'Quill'],
+      settlementSuffixes: ['march', 'holt'],
+      maleNames: ['Vashken'],
+      femaleNames: ['Ilrune'],
+      surnames: ['Tarrowmere', 'Ysgil'],
+    },
+  },
+  institutions: [{ name: 'The Ninefold Assay', role: 'assayer' }, { name: 'The Quiet Almshouse' }],
+  powerStructure: {
+    factions: [
+      { faction: 'The Ashen Circle' },
+      { faction: 'The Bellwright Guild' },
+      { faction: 'The Copewardens' },
+    ],
+  },
+  pantheon: { Ilvareth: { seats: 3 }, Zhurun: { seats: 1 } },
+  tradeRoute: 'port',
+  terrain: 'coastal',
+});
 
 /** A line feed, BUILT rather than escaped (the raw-byte pin's stated cure 2). */
 const LINE_BREAK = String.fromCharCode(10);
@@ -71,6 +108,7 @@ const FENCE = [
   'src/domain/entities/npcs.js',
   'src/domain/entities/status.js',
   'src/domain/worldFactOptions.js',
+  'src/domain/resourceTerrainCompatibility.js',
   'src/data/resourceData.js',
   'src/data/constants.js',
   'src/data/monsterThreat.js',
@@ -161,7 +199,7 @@ describe('EM-A2a — the pool machinery and the eleven TABLE pools', () => {
     // blank-free, duplicate-free list of strings on a real town world, so no later arm
     // can pass on nothing.
     const faults = ids
-      .map((id) => [id, faultIn(poolValues(id, TOWN))])
+      .map((id) => [id, faultIn(poolValues(id, RICH_WORLD))])
       .filter(([, fault]) => fault !== '');
     expect(faults, 'every pool answers a frozen non-empty duplicate-free string list').toEqual([]);
 
@@ -189,16 +227,17 @@ describe('EM-A2a — the pool machinery and the eleven TABLE pools', () => {
     // seventeen, the pending residue empties, the own residue grows) and that re-spell
     // must be ONE diff hunk and not four.
     const contractIds = [
-      'cause.remove', 'commodity', 'faction.category', 'institution.class',
-      'institution.state', 'npc.status', 'tier', 'worldFact.culture',
-      'worldFact.monsterThreat', 'worldFact.stressors', 'worldFact.terrain',
+      'cause.remove', 'commodity', 'deity', 'faction.category', 'institution.class',
+      'institution.state', 'name.npc', 'name.settlement', 'npc.role', 'npc.status',
+      'power.holder', 'tier', 'worldFact.culture', 'worldFact.monsterThreat',
+      'worldFact.resources', 'worldFact.stressors', 'worldFact.terrain',
     ];
     expect(ids, 'POOLS holds exactly the contract ids, both directions').toEqual(contractIds);
-    expect(pending, 'declared but not pooled: EM-A2b owes exactly these three').toEqual(
-      ['npc.role', 'power.holder', 'worldFact.resources'],
+    expect(pending, 'declared but not pooled: EM-A2b has landed, so the residue is empty').toEqual(
+      [],
     );
-    expect(own, 'pooled but declared by no field today: this packet owns exactly these three').toEqual(
-      ['cause.remove', 'commodity', 'tier'],
+    expect(own, 'pooled but declared by no field today: the two packets own exactly these six').toEqual(
+      ['cause.remove', 'commodity', 'deity', 'name.npc', 'name.settlement', 'tier'],
     );
   });
 
@@ -256,7 +295,7 @@ describe('EM-A2a — the pool machinery and the eleven TABLE pools', () => {
     expect(poolValues('commodity', TOWN).length, 'the flattened commodity vocabulary, de-duplicated').toBe(34);
 
     const specifiers = importSpecifiers(readFileSync(join(ROOT, LEAF_REL), 'utf8'));
-    expect(specifiers.length, 'the import scan really found the leaf imports, so the filters below are live').toBe(11);
+    expect(specifiers.length, 'the import scan really found the leaf imports, so the filters below are live').toBe(12);
     const reached = specifiers.map(addressOf);
     expect(reached.filter((address) => FORBIDDEN.some((pattern) => pattern.test(address))),
       'no generator path, no component, no store, no JSX, no display seam, no ambient RNG').toEqual([]);
@@ -351,7 +390,7 @@ describe('EM-A2a — the pool machinery and the eleven TABLE pools', () => {
     );
     expect(movedByEntry.length, 'the entry segment of the key is live for at least one pool').toBeGreaterThan(0);
     expect(movedBySeed.length, 'and so is the seed segment').toBeGreaterThan(0);
-    const strays = ids.filter((id) => !poolValues(id, TOWN).includes(rollFrom(id, TOWN, 'seed-a', 'entry-1', 0)));
+    const strays = ids.filter((id) => !poolValues(id, RICH_WORLD).includes(rollFrom(id, RICH_WORLD, 'seed-a', 'entry-1', 0)));
     expect(strays, 'and every roll is a member of its own pool').toEqual([]);
   });
 
@@ -373,7 +412,7 @@ describe('EM-A2a — the pool machinery and the eleven TABLE pools', () => {
     const nextAmbient = random();
     clearActiveRng(outer);
 
-    expect(calls, 'fifty-five rolls across the eleven pools').toBe(55);
+    expect(calls, 'eighty-five rolls across the seventeen pools').toBe(85);
     expect(firstAgain, 'the ambient stream really re-seeded, so the arm below is not vacuous').toBe(firstDraw);
     expect(nextAmbient, 'and the NEXT ambient draw is still the second one: the world stream did not advance')
       .toBe(secondDraw);
@@ -391,7 +430,7 @@ describe('EM-A2a — the pool machinery and the eleven TABLE pools', () => {
 
   it('A7 the import fence, in both directions', () => {
     const specifiers = importSpecifiers(readFileSync(join(ROOT, LEAF_REL), 'utf8'));
-    expect(specifiers.length, 'the scan found imports at all, so the exclusions below are not vacuous').toBe(11);
+    expect(specifiers.length, 'the scan found imports at all, so the exclusions below are not vacuous').toBe(12);
     const reached = specifiers.map(addressOf).sort(compareCodepoint);
     expect(reached, 'exactly the eleven fenced modules, and not one more').toEqual([...FENCE].sort(compareCodepoint));
     expect(reached.filter((address) => FORBIDDEN.some((pattern) => pattern.test(address))),
@@ -429,5 +468,253 @@ describe('EM-A2a — the pool machinery and the eleven TABLE pools', () => {
       .toContain('removed');
     expect(new Set(states).size, 'the two are distinct values, not one word spelled twice').toBe(states.length);
     expect(Object.isFrozen(statuses) && Object.isFrozen(states), 'and both answers are frozen').toBe(true);
+  });
+
+  it('B1 seventeen ids across the two packets, both directions, and every appended pool answers live', () => {
+    const ids = Object.keys(POOLS);
+    const A2A_ELEVEN = [
+      'cause.remove', 'commodity', 'faction.category', 'institution.class', 'institution.state',
+      'npc.status', 'tier', 'worldFact.culture', 'worldFact.monsterThreat',
+      'worldFact.stressors', 'worldFact.terrain',
+    ];
+    const A2B_SIX = [
+      'deity', 'name.npc', 'name.settlement', 'npc.role', 'power.holder', 'worldFact.resources',
+    ];
+
+    // GUARD THE GUARD, POPULATED AND FIRST: every appended pool answers a frozen,
+    // non-empty, blank-free, duplicate-free list of strings on a REAL world, so no
+    // negative below can pass on nothing. Five of the six answer the empty list on a
+    // bare record, and that emptiness is the contract rather than a fault (B2).
+    const faults = A2B_SIX
+      .map((id) => [id, faultIn(poolValues(id, RICH_WORLD))])
+      .filter(([, fault]) => fault !== '');
+    expect(faults, 'every appended pool answers a frozen non-empty duplicate-free string list').toEqual([]);
+
+    expect(ids.length, 'seventeen pools once both packets have landed').toBe(17);
+    expect([...A2A_ELEVEN, ...A2B_SIX].sort(compareCodepoint),
+      'and the two halves really are those seventeen, both directions, with no overlap')
+      .toEqual([...ids].sort(compareCodepoint));
+    expect(A2A_ELEVEN.filter((id) => !ids.includes(id)),
+      'not one of A2a eleven was dropped by this landing').toEqual([]);
+    expect(A2B_SIX.filter((id) => !ids.includes(id)),
+      'and every one of these six arrived, so a row dropped by either packet reds here').toEqual([]);
+  });
+
+  it('B2 absence is the typed value: the world-derived pools answer empty and never throw', () => {
+    const A2B_SIX = [
+      'deity', 'name.npc', 'name.settlement', 'npc.role', 'power.holder', 'worldFact.resources',
+    ];
+    // THE POPULATED CONTROL, ASSERTED FIRST.
+    const populated = A2B_SIX.filter((id) => poolValues(id, RICH_WORLD).length === 0);
+    expect(populated, 'all six answer a non-empty list on a populated world').toEqual([]);
+
+    const probes = [
+      null, undefined, {}, TOWN,
+      { namingData: null }, { pantheon: null }, { institutions: null }, { powerStructure: null },
+      { pantheon: 'not an object' }, { institutions: 'not a roster' },
+    ];
+    const faults = [];
+    for (const world of probes) {
+      for (const id of A2B_SIX) {
+        let answer;
+        try {
+          answer = poolValues(id, world);
+        } catch (error) {
+          faults.push([id, `threw: ${String(error)}`]);
+          continue;
+        }
+        if (!Array.isArray(answer)) faults.push([id, 'not an array']);
+        else if (!Object.isFrozen(answer)) faults.push([id, 'not frozen']);
+      }
+    }
+    expect(faults, 'no absent or malformed world throws, and every answer is a frozen array').toEqual([]);
+
+    expect(poolValues('name.settlement', TOWN), 'no namingData: the settlement name pool is empty').toEqual([]);
+    expect(poolValues('name.npc', TOWN), 'and so is the npc name pool').toEqual([]);
+    expect(poolValues('deity', TOWN), 'no pantheon: the deity pool is empty').toEqual([]);
+    expect(poolValues('npc.role', TOWN), 'no institutions: the role pool is empty').toEqual([]);
+    expect(poolValues('power.holder', TOWN), 'no power structure: the holder pool is empty').toEqual([]);
+  });
+
+  it('B3 the name bag is the one the caller passed in, and the real table is imported nowhere', () => {
+    const invented = 'Xolvruq';
+    const planted = {
+      ...RICH_WORLD,
+      namingData: { qhemric: { settlementPrefixes: [invented], settlementSuffixes: ['gate'] } },
+    };
+    expect(poolValues('name.settlement', planted),
+      'the invented prefix reaches the pool, so the read is off the SUPPLIED bag')
+      .toEqual([`${invented}gate`]);
+    expect(poolValues('name.settlement', { ...RICH_WORLD, namingData: undefined }),
+      'and a world carrying no bag answers empty rather than reaching for the real table').toEqual([]);
+
+    const reached = importSpecifiers(readFileSync(join(ROOT, LEAF_REL), 'utf8')).map(addressOf);
+    expect(reached.length, 'the scan really found the leaf imports, so the exclusion below is live').toBe(12);
+    const banned = (address) => address === 'src/data/namingData.js'
+      || address === 'src/generators/npcGenerator.js'
+      || /\.jsx$/.test(address);
+    expect(reached.filter(banned),
+      'the leaf imports neither the name table nor the refuted generator nor any JSX').toEqual([]);
+    const control = [
+      'src/data/namingData.js', 'src/generators/npcGenerator.js', 'src/components/Probe.jsx',
+    ];
+    expect(control.filter(banned), 'THE MATCHER, PROVED LIVE on a planted trio it must catch').toEqual(control);
+  });
+
+  it('B4 the resource pool IS the engine gate read at its own home, and the gate is the flag', () => {
+    const rows = getCompatibleResources('port', 'coastal');
+    const gated = rows.filter((row) => row.compatible).map((row) => row.key);
+    const ungated = rows.map((row) => row.key);
+    const pool = poolValues('worldFact.resources', RICH_WORLD);
+
+    expect(rows.length, 'the catalogue comes back WHOLE and annotated, never pre-filtered').toBe(33);
+    expect(gated.length, 'six of those thirty-three are legal at a coastal port').toBe(6);
+    expect(pool, 'and the pool set-equals the engine own gated read at its own address')
+      .toEqual([...gated].sort(compareCodepoint));
+
+    // THE COUNTERFORCE: an UNFILTERED read of the same call is a different, larger set,
+    // so a pool built from the raw catalogue cannot pass this arm.
+    expect(ungated.length, 'the unfiltered read is thirty-three at this very route and terrain').toBe(33);
+    expect(sameSet(pool, ungated), 'so the ungated catalogue and the gated pool are NOT the same set').toBe(false);
+
+    const labels = rows.map((row) => row.label).filter((label) => typeof label === 'string');
+    expect(labels.length, 'the catalogue rows really carry labels, so the exclusion below is live').toBeGreaterThan(0);
+    expect(pool.filter((value) => labels.includes(value)),
+      'and the pool holds catalogue KEYS, never a display label').toEqual([]);
+  });
+
+  it('B5 boundary: the resource gate fires, and an absent route falls back to the road', () => {
+    const portCoastal = poolValues('worldFact.resources', { ...RICH_WORLD, tradeRoute: 'port', terrain: 'coastal' });
+    const isolatedDesert = poolValues('worldFact.resources', { ...RICH_WORLD, tradeRoute: 'isolated', terrain: 'desert' });
+    expect(portCoastal.length, 'six at a coastal port').toBe(6);
+    expect(isolatedDesert.length, 'nineteen at an isolated desert').toBe(19);
+
+    const symmetric = [
+      ...portCoastal.filter((key) => !isolatedDesert.includes(key)),
+      ...isolatedDesert.filter((key) => !portCoastal.includes(key)),
+    ];
+    expect(symmetric.length,
+      'and the two differ by twenty-one keys, so the gate FIRES rather than returning one fixed list').toBe(21);
+
+    const fallback = poolValues('worldFact.resources', TOWN);
+    expect(fallback.length, 'an absent route and terrain fall back to the road and still answer sixteen').toBe(16);
+    expect(Object.isFrozen(fallback), 'and that answer is frozen like every other').toBe(true);
+  });
+
+  it('B6 determinism across the combined set, and the no-draw law over all seventeen pools', () => {
+    const A2B_SIX = [
+      'deity', 'name.npc', 'name.settlement', 'npc.role', 'power.holder', 'worldFact.resources',
+    ];
+    const unstable = A2B_SIX.filter(
+      (id) => rollFrom(id, RICH_WORLD, 'seed-a', 'entry-1', 3) !== rollFrom(id, RICH_WORLD, 'seed-a', 'entry-1', 3),
+    );
+    expect(unstable, 'the same call answers the same value for every appended pool').toEqual([]);
+
+    const inOrder = [];
+    for (let index = 0; index < 10; index += 1) {
+      inOrder.push(rollFrom('name.npc', RICH_WORLD, 'seed-a', 'entry-1', index));
+    }
+    expect(inOrder.filter((value) => typeof value !== 'string'), 'ten rolls, every one a member').toEqual([]);
+    expect(rollFrom('name.npc', RICH_WORLD, 'seed-a', 'entry-1', 3),
+      'roll three taken ALONE equals roll three taken in sequence: the reopen guarantee').toBe(inOrder[3]);
+    const movedByEntry = A2B_SIX.filter(
+      (id) => rollFrom(id, RICH_WORLD, 'seed-a', 'entry-1', 0) !== rollFrom(id, RICH_WORLD, 'seed-a', 'entry-2', 0),
+    );
+    expect(movedByEntry.length, 'and a different entry id moves at least one of the six').toBeGreaterThan(0);
+
+    const ids = Object.keys(POOLS);
+    const outer = setActiveRng(createPRNG('probe-b6'));
+    const firstDraw = random();
+    const secondDraw = random();
+    clearActiveRng(outer);
+
+    setActiveRng(createPRNG('probe-b6'));
+    const firstAgain = random();
+    const touched = new Set();
+    let calls = 0;
+    for (let index = 0; index < 50; index += 1) {
+      const id = ids[index % ids.length];
+      rollFrom(id, RICH_WORLD, 'seed-a', 'entry-1', index);
+      touched.add(id);
+      calls += 1;
+    }
+    const nextAmbient = random();
+    clearActiveRng(outer);
+
+    expect(calls, 'fifty rolls').toBe(50);
+    expect(touched.size, 'spread across all seventeen pools').toBe(17);
+    expect(firstAgain, 'the ambient stream really re-seeded, so the arm below is not vacuous').toBe(firstDraw);
+    expect(nextAmbient, 'and the NEXT ambient draw is still the second one: no pool took a world draw')
+      .toBe(secondDraw);
+  });
+
+  it('B7 the deity pool is the world own record, read through no display seam', () => {
+    const three = { ...RICH_WORLD, pantheon: { Ilvareth: {}, Qesh: {}, Zhurun: {} } };
+    expect(poolValues('deity', three), 'the pool IS the world own pantheon ids')
+      .toEqual(['Ilvareth', 'Qesh', 'Zhurun']);
+    expect(poolValues('deity', three), 'and it equals the projection own ids after normalization')
+      .toEqual([...pantheonStandings(three).map((entry) => entry.id)].sort(compareCodepoint));
+    expect(poolValues('deity', { ...RICH_WORLD, pantheon: { Yggrathuun: {} } }),
+      'an invented id planted in the SUPPLIED record appears in the pool').toEqual(['Yggrathuun']);
+    expect(poolValues('deity', { ...RICH_WORLD, pantheon: 'not an object' }),
+      'a non-object pantheon answers empty: the typeof guard, pinned').toEqual([]);
+    expect(pantheonStandings({ ...RICH_WORLD, pantheon: 'not an object' }),
+      'and so does the projection, which is what makes the two the SAME answer').toEqual([]);
+    expect(poolValues('deity', TOWN), 'a world with no pantheon at all answers empty').toEqual([]);
+
+    // THE STRUCTURAL HALF OF THE DOCTRINE. Faith is culture, never theology: the module
+    // holds no premade deity vocabulary, and it reaches no seam that could relabel one.
+    const leaf = readFileSync(join(ROOT, LEAF_REL), 'utf8');
+    const vocabularies = [...leaf.matchAll(/\[\s*'[^']*'(?:\s*,\s*'[^']*')*\s*,?\s*\]/g)].map((hit) => hit[0]);
+    expect(vocabularies.length, 'the module really holds a literal vocabulary, so the arm below is live').toBe(1);
+    expect(vocabularies[0], 'and the ONE literal vocabulary is the owner five removal causes, not a deity list')
+      .toContain('dissolved');
+    expect(leaf, 'the deity row reads the record own keys').toContain('Object.keys(world.pantheon)');
+    expectAbsentWithAnchor(leaf, 'pantheonStandings', 'Object.keys(world.pantheon)', 'the pantheon projection');
+
+    const reached = importSpecifiers(leaf).map(addressOf);
+    const isDisplay = (address) => /^src\/domain\/display\//.test(address);
+    expect(reached.filter(isDisplay), 'and the module imports nothing under the display layer').toEqual([]);
+    expect(['src/domain/display/pantheonDepth.js'].filter(isDisplay),
+      'THE MATCHER, PROVED LIVE on the one address in the estate that projects a pantheon')
+      .toEqual(['src/domain/display/pantheonDepth.js']);
+  });
+
+  it('B8 the seat pool is the faction roster off the record, and nothing else', () => {
+    const seated = ['The Ashen Circle', 'The Bellwright Guild', 'The Copewardens'];
+    expect(poolValues('power.holder', RICH_WORLD), 'the pool set-equals the roster own faction names, sorted')
+      .toEqual([...seated].sort(compareCodepoint));
+    expect(poolValues('power.holder', { ...RICH_WORLD, powerStructure: { factions: [{ faction: 'Qelvarren Hold' }] } }),
+      'an invented faction planted in the SUPPLIED roster appears in the pool').toEqual(['Qelvarren Hold']);
+
+    const empties = [
+      ['no power structure', TOWN],
+      ['an empty roster', { ...RICH_WORLD, powerStructure: { factions: [] } }],
+      ['a blank faction field', { ...RICH_WORLD, powerStructure: { factions: [{ faction: '  ' }] } }],
+    ];
+    const faults = [];
+    for (const [label, world] of empties) {
+      let answer;
+      try {
+        answer = poolValues('power.holder', world);
+      } catch (error) {
+        faults.push([label, `threw: ${String(error)}`]);
+        continue;
+      }
+      if (!Object.isFrozen(answer) || answer.length !== 0) faults.push([label, 'not the frozen empty answer']);
+    }
+    expect(faults, 'every empty case answers the frozen empty list and never throws').toEqual([]);
+
+    // ⚠ ARCH §9 reads "holder pool over factions/npcs" and the record has no NPC half:
+    // `governingName` is written only from the faction roster (R5). An npc roster on the
+    // same world contributes nothing, and the verdict is recorded here rather than left
+    // as an oversight.
+    expect(poolValues('power.holder', { ...RICH_WORLD, npcs: [{ name: 'Sorrel Vane', faction: 'Vane House' }] }),
+      'an npc roster on the same world contributes no member: the pool is the FACTION roster')
+      .toEqual([...seated].sort(compareCodepoint));
+
+    const leaf = readFileSync(join(ROOT, LEAF_REL), 'utf8');
+    expect(leaf, 'the holder row walks the faction roster').toContain('powerStructure?.factions');
+    expectAbsentWithAnchor(leaf, 'governingName', 'powerStructure?.factions', 'the seated-faction readback');
   });
 });

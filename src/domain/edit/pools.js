@@ -43,6 +43,7 @@ import { FACTION_ARCHETYPES } from '../factionArchetypes.js';
 import { NPC_STATUS_VALUES } from '../entities/npcs.js';
 import { ENTITY_STATUS_VALUES } from '../entities/status.js';
 import { TERRAIN_WEIGHTS, CULTURES } from '../worldFactOptions.js';
+import { getCompatibleResources } from '../resourceTerrainCompatibility.js';
 import { RESOURCE_DATA, SPECIAL_RESOURCES } from '../../data/resourceData.js';
 import { TIER_ORDER } from '../../data/constants.js';
 import { MONSTER_THREAT_TIERS } from '../../data/monsterThreat.js';
@@ -58,6 +59,7 @@ import { STRESS_TYPE_MAP } from '../../data/stressTypes.js';
  *   concrete catalogue tier: the wizard's `random` and `custom` are resolved away at
  *   generation and never reach a record.
  * @property {Array<{name?: string, role?: string}>} [institutions]
+ * @property {{factions?: Array<{faction?: string}>}} [powerStructure]
  * @property {object} [pantheon]
  * @property {object} [namingData]
  * @property {string} [culture]
@@ -89,6 +91,58 @@ const EMPTY = Object.freeze([]);
  * @type {readonly string[]}
  */
 const CAUSE_REMOVE = Object.freeze(['burned', 'died', 'dissolved', 'left', 'seized']);
+
+/**
+ * One culture's name bag, as the SUPPLIED record carries it.
+ *
+ * @typedef {object} NameBag
+ * @property {string[]} [settlementPrefixes]
+ * @property {string[]} [settlementSuffixes]
+ * @property {string[]} [maleNames]
+ * @property {string[]} [femaleNames]
+ * @property {string[]} [surnames]
+ */
+
+/**
+ * THE CULTURE'S BAG, TAKEN OFF THE WORLD THE CALLER PASSED IN — never off the real
+ * table. The generator's name DATA is 68.6 kB and this leaf imports it nowhere (the
+ * bundle law, and `instantNpc`'s own shape: the bag is a parameter). A record that
+ * carries no bag answers nothing, rather than reaching behind the caller's back for a
+ * vocabulary the caller did not offer.
+ *
+ * @param {PoolWorld} world
+ * @returns {NameBag | null}
+ */
+function namingBagOf(world) {
+  const bags = /** @type {Record<string, NameBag | undefined>} */ (
+    /** @type {unknown} */ (world?.namingData));
+  return bags?.[world?.culture ?? 'germanic'] ?? null;
+}
+
+/**
+ * ONE FIELD OF EVERY ENTRY OF A ROSTER THE RECORD ALREADY HOLDS — the single shape
+ * `npc.role` and `power.holder` share, walked off the passed-in bag and normalized by
+ * `poolValues` like every other row.
+ *
+ * ⛔ A MEMBER COMES BACK A STRING OR NOT AT ALL. `poolValues` coerces with `String`, so
+ *    an absent field returned raw would enter the pool as the literal "undefined"; the
+ *    empty string is what the normalizer drops. The spare field is `npc.role`'s: an
+ *    institution that carries a name and no role of its own offers its name.
+ *
+ * @param {unknown} rows
+ * @param {string} field
+ * @param {string} [spare]
+ * @returns {readonly string[]}
+ */
+function rosterField(rows, field, spare = '') {
+  if (!Array.isArray(rows)) return EMPTY;
+  return rows.map((row) => {
+    const value = row?.[field];
+    if (typeof value === 'string' && value.trim() !== '') return value;
+    const fallback = row?.[spare];
+    return typeof fallback === 'string' ? fallback : '';
+  });
+}
 
 /**
  * THE ELEVEN TABLE POOLS. Each row names its source and nothing else; the normalization,
@@ -126,6 +180,40 @@ export const POOLS = Object.freeze({
   'worldFact.culture': { values: CULTURES },
   'worldFact.monsterThreat': { values: MONSTER_THREAT_TIERS },
   'worldFact.stressors': { read: () => Object.keys(STRESS_TYPE_MAP) },
+  'name.settlement': {
+    read: (world) => {
+      const bag = namingBagOf(world);
+      if (!bag) return EMPTY;
+      const prefixes = bag.settlementPrefixes ?? [];
+      const suffixes = bag.settlementSuffixes ?? [];
+      return suffixes.length === 0
+        ? prefixes
+        : prefixes.flatMap((prefix) => suffixes.map((suffix) => `${prefix}${suffix}`));
+    },
+  },
+  'name.npc': {
+    read: (world) => {
+      const bag = namingBagOf(world);
+      if (!bag) return EMPTY;
+      const given = [...(bag.maleNames ?? []), ...(bag.femaleNames ?? [])];
+      const family = bag.surnames ?? [];
+      return family.length === 0
+        ? given
+        : given.flatMap((first) => family.map((last) => `${first} ${last}`));
+    },
+  },
+  'npc.role': { read: (world) => rosterField(world?.institutions, 'role', 'name') },
+  'power.holder': { read: (world) => rosterField(world?.powerStructure?.factions, 'faction') },
+  deity: {
+    read: (world) => (world?.pantheon && typeof world.pantheon === 'object'
+      ? Object.keys(world.pantheon)
+      : EMPTY),
+  },
+  'worldFact.resources': {
+    read: (world) => getCompatibleResources(world?.tradeRoute ?? 'road', world?.terrain ?? null)
+      .filter((r) => r.compatible)
+      .map((r) => r.key),
+  },
 });
 
 /**
