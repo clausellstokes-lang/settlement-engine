@@ -14,7 +14,47 @@
   2026-09-20: **EM-B2a1** (the leaf) → **EM-B2a2** (the pin primitive) ∥ **EM-B2a3** (the two
   remaining chooser steps) → **EM-B2a4** (this) → **EM-B2b**. The four-member partition, with
   every parent item assigned to exactly one member, is `EM-B2a.partition.md`.
-- **Packet version:** 3
+- **Packet version:** 4
+  > **What version 4 changed and why (judgment 176, the chair, on this lane's THIRD STOP — taken
+  > after the seal and before any byte).** Version 3 cured the pin channel; version 4 cures the
+  > three gaps that channel then exposed. THREE MEASUREMENTS, all executed in plain `node` at the
+  > placement tip.
+  > (1) **THE ROOT KEY HAS NO RECORD PATH AND `rederive` HAD NO SET TO MAP IT WITH.**
+  > `editSlice.js :: rootKeyFor` mints `` `${cardType}:${entityId}:${field}` ``, and version 3's
+  > `rederive(record, config, layer, engine)` carried no declaration set. The one route §7 left
+  > open — importing `fieldDeclarations.js` into `dmLayer.js` — would have made it the THIRD
+  > importer of a roster pinned EXACT and both-directions at
+  > `editDeclarations.test.js :: DORMANCY` (two sanctioned edges), and §7 carries no row on that
+  > file: judgment 148's law, a STOP. ⇒ **THE SET IS INJECTED, NEVER IMPORTED**: arity FIVE,
+  > `rederive(record, config, layer, engine, declarations)`, `pinsFrom(record, layer, declarations,
+  > engine)`, injected by `editSlice.js :: applyPlainEditToDraft`, which ALREADY holds the set as
+  > `DECLARATION_CONSULT` and is ALREADY one of the roster's two sanctioned importers. The rosters
+  > stay EXACT at two, `dmLayer.js` and the new leaf import no leaf, and no TEST row on
+  > `editDeclarations.test.js` is owed — which also keeps this member path-disjoint from EM-D0e
+  > v1.2, the member that holds that path on this train.
+  > (2) **NO WRITE-TIME DOOR CHECKS POOL MEMBERSHIP, MEASURED.** Driving the real writer with an
+  > off-pool value on the `pool` field `npc.role` (`outputKey` `npcs[].role`): `ok=true`, the
+  > value written to the record AND recorded in the layer, against a live control that an in-pool
+  > value is accepted; the door's closed refusal set holds no pool member, and
+  > `editSlice.js :: applyPlainEditToDraft` says of itself that it *"resolves no pool"*.
+  > ⇒ `not_in_pool` LEAVES `rederive` (judgment 176(2)): pool membership is a WRITE-TIME check at
+  > the single writer's door, so a value outside its pool never enters the layer and `rederive`
+  > re-validates nothing. The refusal, its arm and its case are removed and the count line follows
+  > (EIGHT cases to SEVEN). ⛔ The missing refusal is RAISED in §13, not deferred.
+  > (3) **A LEAF OVERRIDE DOES NOT FIT A COLLECTION PIN.** The runner's choosers are COLLECTION
+  > keys (`npcs`, `institutions`, `powerStructure`, …) and every root `outputKey` is a LEAF path
+  > (`npcs[].role`, `powerStructure.governingName`). ⇒ `pinsFrom` resolves each root key's
+  > `outputKey` to `(collectionKey, leafPath)`, deep-clones the record's collection, applies the
+  > DM's value at the leaf INSIDE the clone and pins the collection — §6's transition sentence
+  > *"the DM's value at that key and the record's value everywhere else"* is the law and §8 step
+  > 3(d)'s `pins[recordPath] = value` was the wrong sentence. EXECUTED end to end: one edited leaf,
+  > the WHOLE roster pinned (3 of 3), the record itself untouched, the override taking in the
+  > re-derivation, every other roster entry keeping the record's values, and the no-layer run
+  > byte-identical.
+  > (4) Everything else of version 3 stands: the entry's forwarding, `getStepMeta` from
+  > `src/generators/pipeline.js :: getStepMeta`, the ceiling figure 1396015, the sixth amendment's
+  > stamp, and judgment 175's two ratified lane calls (`tests/generators` in `checks`; the
+  > caller-side partial-pin law, which now applies PER COLLECTION).
   > **What version 3 changed and why (judgment 173, the chair, 2026-09-22, on this lane's STOP
   > before its seal).** Version 2's whole pin path was INERT and its A7(b) unprovable, because the
   > function §6 binds as `engine.run` does not carry the bag. TWO MEASUREMENTS, both executed at
@@ -520,6 +560,8 @@ instruction.
 | ⭐⭐ The re-derivation seam (judgment 145) | `src/store/editSlice.js` | `export const REDERIVE_SEAM = Object.freeze({ kind: 'noop', owner: 'EM-B2a4', calls: 0 });` (`:89`) | EM-C4a's typed no-op, naming THIS member its owner; consulted ONCE, at `:339` inside `applyPlainEditToDraft` step 8 (`const seamIsNoop = REDERIVE_SEAM.kind === 'noop' && REDERIVE_SEAM.calls === 0;`), with its derived use at `:347` (`keys: seamIsNoop ? applied.keys : []`); ⛔ `applyCascadeEdit` (`:221`) does NOT consult it | ⭐ PLUGGED here, and the cascade branch's consult ADDED: **one site today, two after this member** |
 | ⛔ The store leaf's frozen import list | `tests/lint/editMutationPath.walker.test.js` | `const EDIT_SLICE_IMPORTS = Object.freeze([` (`:76`) | an EXACT ARRAY equality at `:212` over `editSlice.js`'s STATIC named-import specifiers; measured live as exactly `['../domain/campaign/canon.js', '../domain/edit/dmLayer.js', '../domain/edit/fieldDeclarations.js', '../domain/edit/operations.js']` | ⛔ PRESERVE EXACTLY. The seam plug is a **DYNAMIC** `await import('./settlementRederiveAction.js')`, which carries no `from` clause and is invisible to `staticNamedEdges` BY CONSTRUCTION — a static import here would red this arm |
 | ⛔ The one-mutation-path watch list | `tests/lint/editMutationPath.walker.test.js` | `'src/domain/edit/dmLayer.js': Object.freeze(['applyEdit']),` (`:51`) | ONLY `applyEdit` is watched on this producer, and only STATIC named imports are edges | EXECUTED over the walker's own predicate with this member's leaf planted: offenders `[]` before and `[]` after — a static `import { rederive } from '../domain/edit/dmLayer.js';` is NOT convicted |
+| ⭐⭐ THE INJECTION SITE (judgment 176(1)) | `src/store/editSlice.js` | `editSlice.js :: applyPlainEditToDraft`, whose `DECLARATION_CONSULT` is `Object.freeze({ isEditableCard, declarationsFor })` | this file ALREADY imports `fieldDeclarations.js` and is ONE OF THE TWO sanctioned edges `tests/domain/editDeclarations.test.js :: DORMANCY` pins EXACT and both-directions (the other is `src/domain/edit/operations.js`); its own message: *"an UNLISTED importer … invalidates the +0 B price this packet declared"* | ⭐ THE SET IS HANDED IN FROM HERE and imported nowhere else. ⛔ A `dmLayer.js` import would be the THIRD edge and a STOP (judgment 148) |
+| ⛔ THE WRITE-TIME POOL DOOR, MEASURED ABSENT (judgment 176(2)) | `src/store/editSlice.js` | `editSlice.js :: applyPlainEditToDraft` — its own header: *"It draws no random number, reads no clock and resolves no pool"* | EXECUTED against a live control: an off-pool value on the `pool` field `npc.role` returns `ok=true`, is written to the record AND recorded in the layer; `PLAIN_EDIT_REFUSALS` holds no pool member | ⛔ NOT THIS MEMBER'S TO CURE. `rederive` trusts the layer; the missing refusal is §13 RAISED |
 | ⭐ The record path a root key maps to | `src/domain/edit/fieldDeclarations.js` | `outputKey` (17 declared rows) | the declaration's `outputKey` is the RECORD PATH (`'npcs[].name'`, `'powerStructure.governingName'`, `'config.terrainType'`); ⛔ it is NOT the field name — FOUR of the seventeen disagree (`powerSeat.holder` → `powerStructure.governingName`; `worldFact.terrain` → `config.terrainType`; `worldFact.stressors` → `config.stressTypes`; `worldFact.resources` → `config.nearbyResources`), which is pass 1D's NOTE the chair slotted to this pre-proof | ⛔ `rederive` maps a root key to its record path through **`outputKey`**, never through the key's own third segment. EM-C4a's landed `set` writes by `coords.field` and is correct for its ONE reachable card (`ROOT_COLLECTIONS = { npc: 'npcs' }`, all four npc fields agreeing); the generalization is EM-C4b's, not this member's |
 
 ⭐⭐ **DISCHARGED — version 1's "DECLARED, not yet present" table is now REAL CODE** (judgment
@@ -598,13 +640,36 @@ the entry (anti-vacuity)')` (`:1270`) — the idiom A8's arm (3) copies.
  *   runner threw `Pipeline pins: step "resolveStress" has choosers [stress, stressTypes] but pins
  *   supply only [stress]`; with it, A7(b) holds on 5 of 5 sampled corpus rows.
  *   A step the record can only half-supply is NOT pinned at all and is named in `missing`
+ *   ⭐⭐ AND A LEAF OVERRIDE PINS ITS WHOLE COLLECTION (judgment 176(3)). The runner's choosers
+ *   are COLLECTION keys (`npcs`, `institutions`, `powerStructure`, …) and every root `outputKey`
+ *   is a LEAF path (`npcs[].role`, `powerStructure.governingName`), so a pin of the leaf's VALUE
+ *   at the collection's key would hand the runner a role string where it expects a roster.
+ *   ⇒ for each own root key of `layer.roots`, ASCII-ascending: resolve `cardType:entityId:field`
+ *   through the INJECTED set to its declaration's `outputKey` (⛔ never the key's own third
+ *   segment, §11), split that into `(collectionKey, leafPath)`, DEEP-CLONE the record's
+ *   collection, apply the DM's value at the leaf INSIDE THE CLONE (an array collection is located
+ *   by `entityId`), and pin the CLONE. §6's transition sentence is the law: the bag carries the
+ *   DM's value at that key and THE RECORD'S VALUE EVERYWHERE ELSE, and the record itself is never
+ *   touched. A declaration with NO `outputKey` is an ANNOTATION by EM-A1's own contract, and a
+ *   `collectionKey` no registered step provides (`config.terrainType` → `config`) is not
+ *   pinnable: both are reported `unknown_key`, never guessed at.
  *   with the keys it lacks. Deterministic: `pins`' keys are ASCII-ascending.
  */
-export function pinsFrom(record, engine);
+export function pinsFrom(record, layer, declarations, engine);
+// ⭐ ARITY FOUR (judgment 176(1)). `declarations` is the INJECTED set — the same shape judgment
+// 77/81 gives `applyEdit`: `{ declarationsFor }`, handed in as DATA by the store. ⛔ THE LEAF
+// IMPORTS IT NEVER: `editDeclarations.test.js :: DORMANCY` pins `fieldDeclarations.js`'s importer
+// roster EXACT and both-directions at two sanctioned edges, and a third would red it.
+// ⛔ FAIL CLOSED, on EM-B2a1's own law: an absent or unusable set resolves NO declaration, so every
+// root key is reported `unknown_key` and nothing is applied. An unusable set can only close the door.
 
 /** The closed refusal set for an override the chooser's candidate set will not take.
  *  EXPORTED so a test asserts it both directions rather than re-typing it. */
-export const REDERIVE_UNAPPLIED_REASONS;  // exactly ['not_in_pool', 'unknown_key', 'step_not_pinnable']
+export const REDERIVE_UNAPPLIED_REASONS;  // exactly ['step_not_pinnable', 'unknown_key']
+// ⛔ TWO, not three (judgment 176(2)): `not_in_pool` is NOT this member's. Pool membership is a
+// WRITE-TIME check at the single writer's door, so a value outside its pool never enters the
+// layer; `rederive` trusts the layer's recorded values and re-validates nothing. ⚠ MEASURED: no
+// door performs that check TODAY (§13 RAISED), and the refusal is the adapter's next member's.
 
 /**
  * ONE RE-DERIVATION. Pure with respect to its arguments.
@@ -633,7 +698,9 @@ export const REDERIVE_UNAPPLIED_REASONS;  // exactly ['not_in_pool', 'unknown_ke
  * ⛔ `unapplied` is ASCII-ascending on `key` and deduplicated. `rederive` THROWS NEVER for a
  *   malformed layer; it throws only what the engine throws.
  */
-export function rederive(record, config, layer, engine);
+export function rederive(record, config, layer, engine, declarations);
+// ⭐ ARITY FIVE (judgment 176(1)), the set injected by `editSlice.js :: applyPlainEditToDraft`
+// through `settlementRederiveAction.js :: regenerateWithLayer`. ⛔ `dmLayer.js` imports no leaf.
 
 // ── src/store/settlementRederiveAction.js — the NEW LAZY LEAF ──
 
@@ -653,7 +720,10 @@ export function rederive(record, config, layer, engine);
  * `pipe.getStepMeta` is `undefined` and the roster must come from its own producer.
  * @returns {Promise<{ record: object, unapplied: Array<object> }>} `rederive`'s envelope, verbatim.
  */
-export async function regenerateWithLayer(seed, config, layer);
+export async function regenerateWithLayer(seed, config, layer, declarations);
+// ⭐ ARITY FOUR (judgment 176(1)): it FORWARDS the injected set and holds none of its own. ⛔ THIS
+// LEAF IMPORTS NO DOMAIN LEAF BUT `dmLayer.js`, so `fieldDeclarations.js`'s importer roster
+// (`editDeclarations.test.js :: DORMANCY`, EXACT at two) is unmoved by this member.
 
 // ── src/store/editSlice.js — MODIFIED by this member (judgment 145) ──
 //
@@ -706,7 +776,6 @@ throw.
 |---|---|---|---|---|
 | a record + an absent/empty layer | `rederive` | — | a re-derivation with `options.pins` supplied from the record ONLY; the layer never reaches the runner | `unapplied: []` |
 | a record + a one-root layer whose value IS in the chooser's candidate set | `rederive` | the key maps to a pinnable record path and its step's whole `provides` can be pinned | the pin bag carries the DM's value at that key and the record's value everywhere else | `unapplied: []` |
-| a record + a one-root layer whose value is NOT in the candidate set | `rederive` | — | the pin bag carries the RECORD's value at that key; the layer is returned unchanged and still holds the override | `unapplied: [{ key, value, reason: 'not_in_pool' }]` |
 | a record + a layer naming a key no registered chooser provides | `rederive` | — | as above | `unapplied: [{ key, value, reason: 'unknown_key' }]` |
 | a record + a layer naming a key whose STEP cannot be wholly pinned from this record | `rederive` | — | that step is not pinned at all (the runner's partial-pin refusal) and is named in `missing` | `unapplied: [{ key, value, reason: 'step_not_pinnable' }]` |
 | a draft settlement in the store | `regenSection` → `regenerateWithLayer` | `get().phase !== 'canon'` | the branch's existing write, then the re-derivation | the envelope, carried to the caller |
@@ -749,7 +818,7 @@ throw.
 
 ### Receipts and privacy
 
-- **Closed kinds:** `REDERIVE_UNAPPLIED_REASONS` = `['not_in_pool', 'unknown_key', 'step_not_pinnable']`,
+- **Closed kinds:** `REDERIVE_UNAPPLIED_REASONS` = `['step_not_pinnable', 'unknown_key']`,
   asserted as a both-directions set equality in A3 against the module's own export.
 - **Address chain:** the opaque root key, echoed verbatim in `unapplied[].key`.
 - **Numeric-to-word bands:** `NONE` — this member renders no figure, so nothing is owed to
@@ -774,9 +843,9 @@ ruling 8). The proof is quoted in §12 and in `EM-B2a4.evidence.md`.
 | `MODIFY` | `src/domain/edit/dmLayer.js` | `pinsFrom`, `REDERIVE_UNAPPLIED_REASONS`, `rederive` | +120 eff | Add the two functions and the reason list at §6's exact signatures. ⛔ **Import NOTHING from `src/generators/**`, `src/store/**` or `src/components/**` — static or dynamic**: the engine and the chooser roster arrive as INJECTED handles (§0.1). ⛔ a1's five exports and their call shapes are untouched. ⛔ `structuredClone` the pin bag on entry. Strict-typecheck clean; no PRNG, no clock, no locale. |
 | `CREATE` | `src/store/settlementRederiveAction.js` | `regenerateWithLayer` | 120 eff | The ONE seat that names the engine. Memoize **TWO** DYNAMIC imports: `../generators/generateSettlementPipeline.js` exactly as `loadEngine()` does, for the run member; and ⭐ `../generators/pipeline.js` for `src/generators/pipeline.js :: getStepMeta` — **judgment 173(c)**, because the entry RE-EXPORTS NOTHING and `pipe.getStepMeta` reads `undefined` (measured: the entry's namespace is exactly `carryLockedRosterThroughGenerate, generateSettlementPipeline, refreshRosterProse, regenHistoryPipeline, regenNPCsPipeline`; `export {` and `export *` both exit 1), so without it `pinsFrom` cannot read the roster from its producer as its own contract demands. Then import `rederive` from `../domain/edit/dmLayer.js` and hand the engine in. ⭐ **THE SECOND EDGE IS MEASURED SAFE, NOT ASSUMED:** `tests/build/domainGeneratorsBoundary.test.js` walks `src/domain/` ALONE (`collectJsFiles(domainDir)`), so a `src/store/**` → `src/generators/**` edge is OUTSIDE its corpus and `BASELINE_EDGES` gains nothing — and the store already holds such an edge at `settlementSlice.js :: loadEngine`; `tests/lint/editMutationPath.walker.test.js`'s `WATCHED` names only `src/domain/edit/operations.js` and `src/domain/edit/dmLayer.js` (and only `applyEdit` on the latter), and its A5 arm reads `src/store/editSlice.js` alone, so neither arm sees this leaf. ⛔ BOTH generator imports are DYNAMIC. ⛔ Nothing already in `EAGER_FIRST_PAINT_MODULES` may import this file STATICALLY. |
 | ⭐ `MODIFY` | `src/generators/generateSettlementPipeline.js` | `generateSettlementPipeline.js :: generateSettlementPipeline` — the ONE production call of `runPipeline` in the estate | **+0 eff** (one option on an existing line) | **JUDGMENT 173(a)'s ROW.** Forward the pin bag beside the step hook: `{ onStep: options.onStep, pins: options.pins }`. ⛔ **NOTHING ELSE IN THIS FILE MOVES** — not a guard, not a return, not the provenance tail, not `regenNPCsPipeline` or `regenHistoryPipeline`. WHY THE ROW EXISTS, MEASURED: at the base the entry forwards `onStep` ALONE, so `sha(no pins) === sha(an OVERRIDDEN record-built bag)` reads **true** through `engine.run` while the SAME bag handed straight to `runPipeline` takes the override — every pin this member builds is dropped before the runner sees it, and A7(b) cannot hold without this line. ⛔ **A WORKER CLOSURE MEMBER**: `src/workers/generationRequest.js` imports this file STATICALLY, so the line is PRICED in worker bytes (the byte note below) and any rise is bought back by the chair at the terminal under rule 33 — ⛔ never a ceiling raise. ⛔ `retiredSymbols` stays EMPTY: this row's `requiredSymbols` quotes the function's OPENING, which the edit does not move. |
-| `CREATE` | `tests/property/dmLayerGoldenIsolation.test.js` | A1–A8 | n/a | ⭐ **ADDS EIGHT `it`s UNDER ONE `describe`** — the same eight §9's matrix homes here and the same eight the deferred lighting row prices as `titles +8` (§P9(f), the count law; `EM-B2a4.count-prover.mjs` proves the equality). Copy the proof shape of `tests/property/beliefMapGolden.test.js` — a byte-identity arm beside an explicit anti-vacuity arm. Flat literal `it(...)` under ONE literal `describe`; `it`/`test`/`describe` each bound EXACTLY ONCE; ⛔ no bare seed loop (collect, then assert once); every negative assertion carries `// anchored:` or is a both-directions set equality; ⛔ every asserted set IMPORTED from its producer — the chooser roster from `getStepMeta()`, the reason set from `dmLayer.js`, `EAGER_FIRST_PAINT_MODULES` from `vite.config.js`. |
+| `CREATE` | `tests/property/dmLayerGoldenIsolation.test.js` | A1, A2, A4–A8 | n/a | ⭐ **ADDS SEVEN `it`s UNDER ONE `describe`** — the same seven §9's matrix homes here and the same seven the deferred lighting row prices as `titles +7` (⭐ judgment 176(2) retired A3 with `not_in_pool`; the surviving ids do not move) (§P9(f), the count law; `EM-B2a4.count-prover.mjs` proves the equality). Copy the proof shape of `tests/property/beliefMapGolden.test.js` — a byte-identity arm beside an explicit anti-vacuity arm. Flat literal `it(...)` under ONE literal `describe`; `it`/`test`/`describe` each bound EXACTLY ONCE; ⛔ no bare seed loop (collect, then assert once); every negative assertion carries `// anchored:` or is a both-directions set equality; ⛔ every asserted set IMPORTED from its producer — the chooser roster from `getStepMeta()`, the reason set from `dmLayer.js`, `EAGER_FIRST_PAINT_MODULES` from `vite.config.js`. |
 | `TEST` | `tests/build/vendorPdfLazy.test.js` | the literal budget pin (`:1769`) and the first-paint closure membership arms | n/a | Re-assert that the eager closure is unmoved. **The stated bounds, all five:** the THREE OWNER-SIGNED first-paint ceilings pinned as literals at `:565` — `CLOSURE_BUDGET_BYTES = 1_048_000` (raw), `CLOSURE_GZIP_BUDGET_BYTES = 337_000`, `CLOSURE_BROTLI_BUDGET_BYTES = 283_000`, under `describe('ARCH car 2 — the three first-paint budgets stay where the owner signed them')` (*"Raises stay owner-signed"*); the lazy engine's `expect(size).toBeLessThan(679_000)` (`:831`); and ⭐ `WORKER_BUNDLE_CEILING_BYTES = 1396015` at `generationWorkerLazy.test.js :: WORKER_BUNDLE_CEILING_BYTES` (EXACT, zero slack, monotone-down). ⭐ **RE-MEASURED: version 2 read 1401208, which the T12 buy-back LOWERED** (judgment 160, seedrandom's ARC4 core alone in `src/kernel/prng.js`; the ceiling followed the measurement DOWN, never up). ⭐ `:1769`'s pin is NOT `skipIf`'d and cannot skip; `:1020`'s real-closure measurement IS, and belongs to the terminal's build. ⛔ Not a sealed check: the file carries `it.skipIf(!requireDistRead)` dist arms (interim rule 2). |
-| ⭐ `MODIFY` | `src/store/editSlice.js` | `REDERIVE_SEAM` (`:89`), the `applyPlainEditToDraft` consult (`:339`) and the `applyCascadeEdit` branch (`:221`-`:255`) | +12 eff | **JUDGMENT 145's ROW.** Plug the seam and ADD THE CASCADE BRANCH'S CONSULT here, in this one row: one consult site today, TWO after this member. ⛔ Re-value the frozen constant but keep `export const REDERIVE_SEAM = Object.freeze({` byte-identical. ⛔ Reach the re-derivation by `await import('./settlementRederiveAction.js')` — a DYNAMIC import ONLY: `tests/lint/editMutationPath.walker.test.js:212` pins the static specifier list EXACT at four, and this file is NOT eager (measured) only while it stays off every eager static edge. ⛔ No computed `get()[name]` dispatch (`deadOperationRatchet.test.js:229`). File measures **116** effective; the 800-line layer ceiling governs. |
+| ⭐ `MODIFY` | `src/store/editSlice.js` | `REDERIVE_SEAM` (`:89`), the `applyPlainEditToDraft` consult (`:339`) and the `applyCascadeEdit` branch (`:221`-`:255`) | +12 eff | **JUDGMENT 145's ROW, AND JUDGMENT 176(1)'s INJECTION SITE.** ⭐ This file is where the declaration set enters the re-derivation: it ALREADY holds it as `DECLARATION_CONSULT` and is ALREADY one of the two sanctioned importers `editDeclarations.test.js :: DORMANCY` pins, so the thunk that reaches the leaf passes that same frozen record on to `regenerateWithLayer` and NO NEW IMPORT EDGE IS CREATED anywhere. ⛔ Neither `dmLayer.js` nor the new leaf imports `fieldDeclarations.js`, and §7 carries NO row on `tests/domain/editDeclarations.test.js` — which is also what keeps this member path-disjoint from EM-D0e v1.2, the member holding that path on train EM-T13. Plug the seam and ADD THE CASCADE BRANCH'S CONSULT here, in this one row: one consult site today, TWO after this member. ⛔ Re-value the frozen constant but keep `export const REDERIVE_SEAM = Object.freeze({` byte-identical. ⛔ Reach the re-derivation by `await import('./settlementRederiveAction.js')` — a DYNAMIC import ONLY: `tests/lint/editMutationPath.walker.test.js:212` pins the static specifier list EXACT at four, and this file is NOT eager (measured) only while it stays off every eager static edge. ⛔ No computed `get()[name]` dispatch (`deadOperationRatchet.test.js:229`). File measures **116** effective; the 800-line layer ceiling governs. |
 | ⭐ `TEST` | `tests/store/editSlice.test.js` | EM-C4a's landed `it('A8 — purity, idempotency, key-order independence, the transient mode and the rederive seam as a typed no-op')` (`:376`) and its three seam assertions | n/a | **THE LANDED ARMS THIS MEMBER MOVES, NAMED:** `:403` `expect(REDERIVE_SEAM).toEqual({ kind: 'noop', owner: 'EM-B2a4', calls: 0 });` → the plugged value; `:407` `expect(REDERIVE_SEAM.kind).toBe('noop');` → `'scoped'`; `:404` `expect(Object.isFrozen(REDERIVE_SEAM)).toBe(true);` STAYS BYTE-UNMOVED. EM-C4a's own comment at `:401-402` says so: *"The day EM-B2a4 plugs scoped re-derivation in, THIS is the arm that fails."* The `it` TITLE's trailing clause is re-worded to the plugged shape. ⛔ **ADDS NO `it` AND NO `describe`** (the file holds 7 `it`s under ONE `describe` at `:134`, before and after) ⇒ census `titles +0 · suiteTitles +0 · files +0` from this row. ⛔ No arm weakened, no assertion deleted. |
 | ⭐ `REGISTER` | `src/domain/density/densityCreateBoundary.js` | the `PIPELINE_REACHERS` row for `src/store/settlementRederiveAction.js` (`:157`) | +10 eff | **§0.1a's ROW.** Add ONE frozen row, `class: 'DERIVED'` (the FIRST of that class; `BOUNDARY_CLASSES` at `:128` declares it and the walker's own message defines it *"re-derives an existing world"*), `payloadAwaitedBy: Object.freeze(['src/store/settlementRederiveAction.js'])` — the leaf awaits its own memoized loader, so no `reachesVia` is owed — and a `why` that says the leaf re-derives an EXISTING world from pins built out of its own record and mints no density law. ⛔ Add the row SURGICALLY; touch no other row and no other export. ⛔ No em dash and no exclamation point in the `why` string (§P2.19, measured: the packet's five planted `src/` literals carry 0 and 0). |
 | `REGISTER` | `scripts/mutation-coverage-manifest.json` | the `invariants` row for `tests/property/dmLayerGoldenIsolation.test.js` | +4 eff | Add the row SURGICALLY beside its 47 `tests/property/*Golden*` siblings, at the shape they carry: `{ "kind": "rationale", "ref": "golden-byte-pin" }` (the value `beliefMapGolden.test.js` and `generatorGoldenMaster.test.js` both carry, read by execution). `kind` is closed to `mutation \| rationale \| uncovered` (`tests/lint/mutationCoverageManifest.test.js:116`), so ⛔ `uncoveredBaseline` is UNMOVED. ⛔ Never re-serialise the manifest whole. ⭐ RE-MEASURED: `invariants` holds **723** rows at `16f0bc71c` (445 rationale + 92 mutation + 186 uncovered) and `enumerateInvariants(tree)` returns **723**, SET-EQUAL both directions — version 1 read 716; the DELTA this member causes is **+1**, unchanged. `rowKey` = `invariants['tests/property/dmLayerGoldenIsolation.test.js']`, distinct from EM-B1b's on the same train. |
@@ -785,10 +854,12 @@ ruling 8). The proof is quoted in §12 and in `EM-B2a4.evidence.md`.
 
 > ⛔ **THE LIGHTING CENSUS IS A DEFERRED ROW, NOT AN ARTIFACT OF THIS PACKET.**
 > `tests/lint/.lighting-census-baseline.json` — **a named INTERIOR RED, delta only.** This member
-> causes **`files +1 · parked +0 · credited +1 · titles +8 · suiteTitles +1`** (all five figures,
-> in the register's own order, because the walker stops at its first moved figure). ⭐ **`+8` IS
-> DERIVED, NOT GUESSED, AND THE COUNT LAW BINDS IT** (§P9(f)): the acceptance matrix homes EIGHT
-> cases (A1–A8) and §7's CREATE row writes them as EIGHT literal `it`s under ONE literal
+> causes **`files +1 · parked +0 · credited +1 · titles +7 · suiteTitles +1`** (all five figures,
+> in the register's own order, because the walker stops at its first moved figure). ⭐ **`+7` IS
+> DERIVED, NOT GUESSED, AND THE COUNT LAW BINDS IT** (§P9(f)): the acceptance matrix homes SEVEN
+> cases (A1, A2, A4–A8 — judgment 176(2) retired A3 with `not_in_pool`, and the ids of the
+> survivors are UNMOVED so every §12 reference still resolves) and §7's CREATE row writes them as
+> SEVEN literal `it`s under ONE literal
 > `describe`, so the CREATE row's own words, the matrix, §10 and this delta state the SAME number
 > and `EM-B2a4.count-prover.mjs` proves the equality. ⛔ The `TEST` row on
 > `tests/store/editSlice.test.js` adds NO title and NO suite (7 `it`s / 1 `describe` before and
@@ -958,14 +1029,15 @@ No other file may be edited.
 
 ```text
 1. Read `layer` through EM-B2a1's absence rules into a base layer (never mutating the argument).
-2. pins, missing <- pinsFrom(record, engine).
-3. For each own key of layer.roots, ASCII-ascending:
-   a. the key maps to no record path any step provides  -> unapplied += { key, value, 'unknown_key' }
-   b. its step is in `missing`                          -> unapplied += { key, value, 'step_not_pinnable' }
-   c. the value is not a member of the chooser's candidate set
-                                                        -> unapplied += { key, value, 'not_in_pool' }
-   d. otherwise                                         -> pins[recordPath] = value
-   ⛔ In (a), (b) and (c) the PIN KEEPS THE RECORD'S OWN VALUE and the layer is left untouched.
+2. pins, missing, unapplied <- pinsFrom(record, layer, declarations, engine), which for each own
+   key of layer.roots, ASCII-ascending:
+   a. no usable set, no declaration, no `outputKey`, or a collectionKey no registered step
+      provides                                          -> unapplied += { key, value, 'unknown_key' }
+   b. its collection is in `missing`                    -> unapplied += { key, value, 'step_not_pinnable' }
+   c. otherwise -> DEEP-CLONE record[collectionKey], write the DM's value at the leaf INSIDE the
+      clone (an array located by entityId), and pin the CLONE   <- ⭐ JUDGMENT 176(3)
+   ⛔ In (a) and (b) the PIN KEEPS THE RECORD'S OWN VALUE, the layer is left untouched, and ⛔ the
+   RECORD is never mutated on any path.
 4. If `pins` has no own key, call engine.run(config, null, { seed })   <- ⛔ THE NEUTRAL MEMBER
    with NO `pins` option at all (this is the golden's own call shape). ⛔ `engine.run`, NEVER
    `engine.generateSettlementPipeline`: §0.1a consequence 2 keeps `dmLayer.js` out of the reacher
@@ -981,14 +1053,13 @@ No other file may be edited.
 |---|---|---|---|---|
 | A1 | Pins from the record, total against their producer | a golden-corpus record + the injected engine | `pinsFrom` returns a pin for EVERY key a registered step provides that the record holds and none for a key it lacks, asserted as a BOTH-DIRECTIONS set equality against the roster IMPORTED from its REAL producer, ⭐ `src/generators/pipeline.js :: getStepMeta` (judgment 173(c) — ⛔ NOT `pipe.getStepMeta`, which is `undefined` on the entry's namespace, executed); ⭐ **the pinnability rule asserted exactly**: a key is pinned only when EVERY step providing it is wholly pinnable, so the shared-key case (`stress` / `stressTypes` on `resolveStress`) yields a bag the runner accepts rather than the partial-pin throw; the steps that cannot be wholly pinned are NAMED in `missing` | `tests/property/dmLayerGoldenIsolation.test.js` |
 | A2 | Dormant/absent, and purity | `rederive(record, config, undefined, engine)` and `(record, config, EMPTY_DM_LAYER, engine)` | byte-identical results; both `unapplied: []`; NEITHER argument mutated — the input record is deep-frozen and its JSON compared before and after (design §22.1 measured an aliased bag writing through in 36/63 and a cloned one in 0/63) | same |
-| A3 | ⭐ Counterforce — the pool-membership rule | three layers: a value outside the candidate set, a key no chooser provides, a key whose step cannot be wholly pinned | each returns `ok`-shaped output with the override in `unapplied` at the exact reason; the returned record carries the ENGINE's value there; the LAYER comes back unchanged and STILL HOLDS the override; nothing throws; and the reason set is a BOTH-DIRECTIONS equality against the module's own `REDERIVE_UNAPPLIED_REASONS`, so a fourth reason reds here | same |
-| A4 | Boundary/sparse | a layer holding an override for a key the record no longer carries, mixed with two it does | the two are applied, the casualty is reported, the entity is NEVER re-created, `unapplied` is ASCII-ascending and deduplicated, and ⛔ **nothing present in the record and untouched by the override is ABSENT from the returned record** (a both-directions top-level key-set equality) | same |
+| A4 | Boundary/sparse | a layer holding an override for a key the record no longer carries, mixed with two it does | the two are applied, the casualty is reported, the entity is NEVER re-created, `unapplied` is ASCII-ascending and deduplicated, and ⛔ **nothing present in the record and untouched by the override is ABSENT from the returned record** (a both-directions top-level key-set equality)  ⭐ **AND THE TWO SURVIVING REFUSALS LIVE HERE** (judgment 176(2) retired A3 with `not_in_pool`): a key whose declaration has no `outputKey` (an ANNOTATION) and a key whose `collectionKey` no registered step provides are each reported `unknown_key`; a key whose collection is in `missing` is `step_not_pinnable`; the returned record carries the ENGINE's value at every refused key, the LAYER comes back unchanged and STILL HOLDS the override, nothing throws, and the reason set is a BOTH-DIRECTIONS equality against the module's own `REDERIVE_UNAPPLIED_REASONS`, so a THIRD reason reds here | same |
 | A5 | Idempotency and determinism | the same `(record, config, layer, engine)` twice; then the first output re-derived with the same layer | byte-identical under `JSON.stringify` both times — same seed + same config + same layer = the same record (THE PROMISE extended). Over a stride of the golden corpus, collected then asserted ONCE | same |
 | A6 | Lifecycle round trip | a real generated settlement → `applyEdit(layer, op, declarations)` ⭐ **AT ARITY THREE with an injected declaration consult** (judgment 77; a two-argument call cannot build the layer at all) → `JSON.parse(JSON.stringify(layer))` → `rederive` against a FRESH same-seed generation | the overrides survive the hop; `mintDmId` reproduces the same id for the same `(seed, kind, n)` across it; the persist hop is byte-exact (the `lifecycleRoundTrip.test.js` fixpoint idiom) | same |
 | A7 | ⛔ THE ISOLATION PROPERTY — see §0.2; the parent's byte-identity clause is REFUTED and is NOT asserted | (a) `generateSettlementPipeline` with an EMPTY layer; (b) the same seed+config with a ONE-ROOT layer | (a) equals `tests/fixtures/generator-golden-master.json` **byte-for-byte** across the corpus and `tests/fixtures/dossier-prose-manifest-golden.json` is unmoved — true by construction, because an empty layer never reaches `runPipeline` and `options.pins` absent ⇒ today's behaviour EXACTLY; (b) differs from (a) at that root. ⭐⭐ **ANTI-VACUITY, AND IT IS REAL IN VERSION 3** (judgment 173(a)): (b) must differ from (a) somewhere, or the layer was never consulted. EM-B2a2 has LANDED, and version 2 would still have been vacuous for a SECOND reason it had not measured — the entry dropped the bag, so (b) was byte-identical to (a) on every row. §7's entry row is what makes this arm bite, and the lane's own control proves it BOTH WAYS: with the row absent the arm holds on **0 of 5** sampled corpus rows, with it on **5 of 5**, while (a) stays byte-identical on 5 of 5 either way | same |
 | A8 | ⭐ The closure probe, the layer boundary and the CREATE boundary | `EAGER_FIRST_PAINT_MODULES` imported from `vite.config.js`; every `.js` under `src/domain/` parsed; `PIPELINE_REACHERS` imported from its producer | (1) neither `src/domain/edit/dmLayer.js` nor `src/store/settlementRederiveAction.js` nor `src/store/editSlice.js` is a member of the eager set; (2) NO file under `src/domain/**` carries a `src/generators/**` specifier `BASELINE_EDGES` does not list, static or dynamic; ⭐ (3) `src/domain/edit/dmLayer.js` spells the bare symbol `generateSettlementPipeline` NOWHERE in comment- and string-stripped code, and `src/store/settlementRederiveAction.js` IS a key of `PIPELINE_REACHERS` with `class: 'DERIVED'` — both read from the producers, never re-typed; (4) ANTI-VACUITY: the eager graph read is non-empty and contains `src/main.jsx`, and `PIPELINE_REACHERS` is non-empty, so (1)–(3) cannot be green-on-nothing. ⛔ Reads no `dist` and therefore cannot skip | same |
 
-This table is the entire edge-case budget — **8 of 8**. Omit nothing; add nothing.
+This table is the entire edge-case budget — **7 of 7**. Omit nothing; add nothing.
 
 ## §10 · Verification commands
 
@@ -1129,8 +1200,10 @@ In addition to `PACKET_STANDARD.md` and `EM-PREAMBLE.md` §P8, stop if:
 - `SAVED_SETTLEMENT_PATCH_KEYS` would need a new key, or a persisted key would be written here;
 - `NOT_YET_WRITTEN_KEYS` would need to lose `dmLayer`, or
   `tests/lint/recordRegisterTotality.walker.test.js` reds;
-- the closed reason set would need a fourth member, or an override outside the candidate set would
-  be silently dropped or deleted from the layer;
+- ⭐ **the closed reason set would need a THIRD member** (it is `['step_not_pinnable', 'unknown_key']` after judgment 176(2)), or a refused override would be silently dropped or deleted from the layer;
+- ⭐ **`dmLayer.js` or `src/store/settlementRederiveAction.js` would need to IMPORT `src/domain/edit/fieldDeclarations.js` or `src/domain/edit/pools.js`** — the declaration set is INJECTED at arity five (judgment 176(1)); an import would make the leaf a THIRD entry in a roster `tests/domain/editDeclarations.test.js :: DORMANCY` pins EXACT at two, and §7 carries no row to widen it (judgment 148's law);
+- ⭐ **`rederive` would need to RE-VALIDATE pool membership** — that is a write-time check at the single writer's door (judgment 176(2)); its absence today is RAISED in §13, never cured here;
+- ⭐ **a leaf override would have to be pinned AS the collection's value** rather than written into a deep clone of the collection (judgment 176(3));
 - a second record of DM field ownership, a second regeneration path or a second identity namespace
   appears necessary;
 - `scripts/check-writer-reach.mjs` would need `--write`, `--genesis` or `--rebank`, or
@@ -1154,7 +1227,9 @@ next member.
 - ⭐ THE ENTRY'S ROW, PROVED BOTH WAYS: the A7(b) control with the forwarding ABSENT (expected: the arm holds on 0 of N rows) and PRESENT (expected: N of N), with A7(a) byte-identical either way; and `git diff -- src/generators/generateSettlementPipeline.js` showing ONE changed line:
 - ⭐ THE WORKER PRICE: the entry's membership in the generation worker's closure by the STATIC CLOSURE WALK (⛔ never a `dist` read), the minified byte delta of the forwarding, the cheaper spellings tried, and the buy-back row named for the chair's terminal:
 - ⭐ `pipe.getStepMeta` measured `undefined` and the roster read instead from `src/generators/pipeline.js :: getStepMeta`, with the second dynamic edge measured against `domainGeneratorsBoundary`'s corpus and `editMutationPath`'s `WATCHED`:
-- Acceptance cases A1–A8, executed and passed:
+- Acceptance cases A1, A2, A4–A8 (SEVEN; judgment 176(2) retired A3), executed and passed:
+- ⭐ THE INJECTED SET: `rederive`/`pinsFrom` at arity five/four with the set handed in by `editSlice.js :: applyPlainEditToDraft`, and the importer rosters of `src/domain/edit/fieldDeclarations.js` and `src/domain/edit/types.js` re-read UNMOVED at their two sanctioned edges:
+- ⭐ THE COLLECTION PIN: one edited leaf, the WHOLE collection pinned from a deep clone, the record itself byte-identical after the call, and every unedited member of that collection carrying the record's own value:
 - ⭐ A8's two red-first controls: the RED message quoted for a deliberately STATIC import of the leaf from an EAGER member (⛔ `settlementSlice.js` is no longer a §7 path — plant the probe in a scratch copy or another eager member and say which), and for a deliberate `src/generators/**` import inside `dmLayer.js`:
 - `EAGER_FIRST_PAINT_MODULES` size and membership before and after (expected UNMOVED at both), read by IMPORTING the set:
 - `BASELINE_EDGES` live edge count before and after (expected UNMOVED):
@@ -1181,3 +1256,31 @@ next member.
 - Deviations: `NONE | STOP`
 - Out-of-scope observations, without investigation:
 - Judgment calls: the THREE of §0, each reported to the chair rather than taken silently
+
+## §13 · RAISED MATTERS (judgment 176; the chair's, not the lane's)
+
+- ⛔⛔ **NO DOOR IN THE ESTATE REFUSES AN OFF-POOL VALUE ON A `pool` FIELD TODAY — MEASURED, WITH A
+  LIVE CONTROL, AND SLOTTED RATHER THAN DEFERRED.** Judgment 176(2) moves pool membership out of
+  `rederive` and onto the single writer's door, on the ground that a value outside its pool never
+  enters the layer. That ground is NOT TRUE AT THIS BASE. Driving
+  `editSlice.js :: applyPlainEditToDraft` in plain `node`, exactly as the adapter calls it, over the
+  declared `pool` field `npc.role` (`pool: 'npc.role'`, `outputKey: 'npcs[].role'`):
+
+  | arm | value | result |
+  |---|---|---|
+  | CONTROL | an in-pool-shaped value | `ok=true`, written — so the probe is live |
+  | SUBJECT | a value no pool holds | `ok=true`, **written to the record AND recorded in the layer** |
+
+  `PLAIN_EDIT_REFUSALS` holds seven reasons and none of them is a pool reason, and the writer's own
+  header says it *"resolves no pool"*. The dialog (EM-D0e) renders pool options only, so the GUI
+  path is closed by construction — but the COMMAND path is not, and the command boundary is the one
+  the estate's own law says is the only path.
+  ⇒ **SLOTTED TO THE ADAPTER'S NEXT MEMBER (EM-C4b or EM-B2a5), NOT DEFERRED** — the chair assigns
+  the slot the turn it reads this. ⛔ It is NOT this member's: curing it here would re-import the
+  pool catalogue `src/domain/edit/pools.js` into a leaf whose importer roster forbids it, which is
+  the STOP this version exists to cure.
+
+- ⚠ **A SECOND-ORDER CONSEQUENCE, STATED SO NOBODY RE-FINDS IT.** Until that refusal lands, a layer
+  may record a value no pool holds, and `rederive` — which by judgment 176(2) re-validates nothing —
+  will pin it and re-derive a world around it. That is the DESIGNED behaviour at this base, not a
+  defect of this member, and the acceptance matrix asserts it nowhere.
