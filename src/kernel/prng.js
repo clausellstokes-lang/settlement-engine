@@ -17,7 +17,13 @@
  *   rng.fork('substep'); // child PRNG with derived seed (for isolation)
  */
 
-import seedrandom from 'seedrandom';
+// THE ARC4 CORE ALONE, NEVER THE PACKAGE'S UMBRELLA INDEX. The umbrella (`seedrandom`, the
+// package main) requires six further generators this estate never names — alea, xor128, xorwow,
+// xorshift7, xor4096, tychei — and hangs them off the core, so they rode into every bundle that
+// reaches this file for a surface nothing calls. The core IS what the umbrella exports (the same
+// function object, identical draws), so no stream moves and THE PROMISE is untouched; the worker
+// ceiling in tests/build/generationWorkerLazy.test.js was re-measured at the 2026-09-22 buy-back.
+import seedrandom from 'seedrandom/seedrandom.js';
 
 export function createPRNG(seed) {
   const _rng = seedrandom(seed);

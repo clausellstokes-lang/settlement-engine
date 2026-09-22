@@ -156,7 +156,26 @@ const SENTINEL = 'settlementforge:generation:worker-v1';
 // chunk hash did not move; the lazy engine SHRANK 678,131 → 677,935 B. A buy-back inside
 // resolveConfig.js is the named alternative; the rise is offered for the owner's ratification like
 // the mints it follows. The ceiling stays MONOTONE-DOWN from this value.
-export const WORKER_BUNDLE_CEILING_BYTES = 1401208;
+// 1,401,208 → 1,396,015 (2026-09-22, the chair, judgment 160): train EM-T12 read +565 B at its
+// terminal, ATTRIBUTED PER MODULE by the chair's control build at efd0eb448 against the cured tip
+// bfca6b7d6 — 231 modules both sides, nothing entered or left, and exactly TWO moved:
+// src/generators/steps/assembleInstitutions.js 31,117 → 32,656 rendered bytes and
+// src/generators/steps/generatePower.js 6,656 → 7,820, which are EM-B2a3's two pin-seam consults. A
+// shave inside those consults was measured INFEASIBLE (the rise is the whole minified size of the
+// addition, so no shave that keeps the mechanism — two gated consults with clones over five keys —
+// reaches zero), so the bytes were BOUGHT BACK where the ceiling's own message says to buy them:
+// src/kernel/prng.js now imports seedrandom's ARC4 core alone instead of the package's umbrella
+// index, and six generators this estate never names (alea, xor128, xorwow, xorshift7, xor4096,
+// tychei) leave every bundle that reaches it. THE DRAWS ARE BYTE-IDENTICAL, measured, not argued:
+// the umbrella IS the core object (index.js hangs the six off it and re-exports it), and 150,000
+// draws — 30,000 over each of five seeds — plus int32(), quick() and double() agree exactly on both
+// sides. The worker 1,401,773 → 1,396,015 (−5,758 B); the other chunks that carried them:
+// advanceInterval.worker 2,657,906 → 2,652,094 (−5,812 B); pdfRender.worker 2,303,451 → 2,297,639
+// (−5,812 B); customContentPreview.worker 1,628,487 → 1,622,729 (−5,758 B); kernel 10,465 → 4,722
+// (−5,743 B). The ceiling follows the measurement DOWN and stays MONOTONE-DOWN from this value; the
+// buy-back is offered for the owner's ratification like the mints it follows (vetoable: the
+// umbrella import returns and the ceiling re-mints upward, which is his).
+export const WORKER_BUNDLE_CEILING_BYTES = 1396015;
 
 const source = (path) => readFileSync(join(ROOT, path), 'utf8');
 
