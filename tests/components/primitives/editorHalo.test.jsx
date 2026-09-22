@@ -29,6 +29,8 @@ import { BORDER, EDITOR_GROUND, ELEV, GOLD, PARCH_100, houseBloom } from '../../
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), '../../..');
 const POPUP_REL = 'src/components/primitives/PortablePopup.jsx';
 const SHEET_REL = 'src/components/primitives/BottomSheet.jsx';
+/** EM-D0e's editor door, the third leaf whose text names the prop (§6.3, judgment 110). */
+const DIALOG_REL = 'src/components/edit/CardEditorDialog.jsx';
 
 /** The one token no packet can hold still, rewritten on BOTH sides and in nothing else. */
 const normalizeId = (markup) => markup.replace(/_r_[0-9a-z]+_/g, '_ID_');
@@ -177,7 +179,7 @@ describe('the editor halo is an optional prop on two shared primitives', () => {
   });
 
   it('A6 the halo pin holds in both directions and the dialog door is unmoved in both branches', () => {
-    expect(filesNaming('editorHalo')).toEqual([SHEET_REL, POPUP_REL].sort());
+    expect(filesNaming('editorHalo')).toEqual([SHEET_REL, POPUP_REL, DIALOG_REL].sort());
     expect(filesNaming('EDITOR_GROUND')).toEqual([SHEET_REL, POPUP_REL, 'src/components/theme.js'].sort());
     expect(filesNaming('houseBloom')).toEqual(
       ['src/components/nav/ArrowControl.jsx', 'src/components/theme.js', SHEET_REL, POPUP_REL].sort(),

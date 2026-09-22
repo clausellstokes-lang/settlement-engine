@@ -424,8 +424,13 @@ describe('EM-A2a — the pool machinery and the eleven TABLE pools', () => {
     expect(sources.filter(({ text }) => TYPES_LEAF_SPECIFIER.test(text)).length,
       'THE MATCHER, PROVED LIVE: the same shape DOES find a sibling edit leaf that is imported')
       .toBeGreaterThan(0);
+    // ⭐ EM-D0e is the pool leaf's FIRST and ONLY runtime importer under src/, and it is LAZY
+    // in the sense this arm measures: nothing mounts the editor door, so the leaf still enters no
+    // eager closure and no golden can move behind this arm's back.
     expect(sources.filter(({ text }) => POOL_LEAF_SPECIFIER.test(text)).map(({ rel }) => rel),
-      'the leaf lands DARK: nothing under src imports it, so no golden can move').toEqual([]);
+      'the pool leaf has EXACTLY ONE importer under src, EM-D0e\'s editor door, which nothing'
+      + ' mounts, so no bundle closure gains it and no golden can move')
+      .toEqual(['src/components/edit/CardEditorDialog.jsx']);
   });
 
   it('A7 the import fence, in both directions', () => {

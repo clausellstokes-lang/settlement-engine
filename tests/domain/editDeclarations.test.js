@@ -288,6 +288,14 @@ describe('EM-A1 — the field declarations, their shape law and their existence 
     // `tests/lint/editMutationPath.walker.test.js`, whose MUTANT arm separates an EAGER
     // static edge from a DYNAMIC one over this very target.
     const EXPECTED_IMPORTERS = [
+      // ⭐ EM-D0e WIDENS THIS ARM IN PLACE, BY ADDITION AND NEVER BY DELETION. The first entry
+      // is the first editor door, and it is LAZY in the only sense this arm measures: NOTHING
+      // MOUNTS IT — the App root is out of its manifest (judgment 146a) and no e2e spec can
+      // reach it — so it is composed by no eager slice, contributes 0 members to
+      // EAGER_FIRST_PAINT_MODULES, and the +0 B price this arm defends is unmoved. Measured by
+      // EM-D0e's own first-paint membership probe, which imports the exported set and reads no
+      // build output.
+      'src/components/edit/CardEditorDialog.jsx imports src/domain/edit/fieldDeclarations.js',
       'src/domain/edit/operations.js imports src/domain/edit/fieldDeclarations.js',
       'src/store/editSlice.js imports src/domain/edit/fieldDeclarations.js',
     ];
