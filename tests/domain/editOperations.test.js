@@ -26,17 +26,20 @@ import { NPC_STATUS_VALUES } from '../../src/domain/entities/npcs.js';
 import {
   STATUS_ACTIVE, STATUS_DESTROYED, STATUS_IMPAIRED, STATUS_REMOVED, STATUS_VACANT,
 } from '../../src/domain/entities/status.js';
-import { FACTION_RENAME_SURFACES } from '../../src/domain/factionRename.js';
+import { FACTION_RENAME_SURFACES, NPC_RENAME_SURFACES } from '../../src/domain/factionRename.js';
+import { EDIT_KINDS } from '../../src/domain/pendingEdits.js';
 import { COUP_STRESSOR_TYPE } from '../../src/domain/worldPulse/coup.js';
 import { PRIMARY_RELATIONSHIP_TYPES } from '../../src/domain/worldPulse/relationshipCompatibility.js';
 import {
   OP_CONSEQUENCE_POLICIES, OP_STAGES, OP_TYPES, makeOp, validateOp,
 } from '../../src/domain/edit/operations.js';
+import { NPC_RENAME_OP_TYPES } from '../../src/domain/edit/operationsNpcRename.js';
 import { WORLD_CONDITIONS } from '../../src/domain/edit/worldConditions.js';
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), '../..');
 const OPERATIONS_REL = 'src/domain/edit/operations.js';
 const CONDITIONS_REL = 'src/domain/edit/worldConditions.js';
+const LEAF_REL = 'src/domain/edit/operationsNpcRename.js';
 const sourceOf = (rel) => readFileSync(join(ROOT, rel), 'utf8');
 /** The module's CODE, with every comment blanked by the estate's one shared strip. */
 const codeOf = (rel) => commentsOnly(sourceOf(rel));
@@ -47,6 +50,15 @@ const THE_FOURTEEN = [
   'rebalance-power', 'remove-faction', 'remove-institution', 'remove-npc', 'set-field',
   'set-institution-state', 'set-npc-status', 'set-power-holder', 'set-relationship',
 ];
+
+/**
+ * ⭐ EM-B1c1's ONE ROW, and the composed FIFTEEN **DERIVED** from §6's own list rather than
+ * hand-spelled: the file's header rule is that every other roster claim names THE_FOURTEEN,
+ * so the fifteenth is that constant plus this key, re-sorted with the tree's own comparator.
+ * A hand-written fifteen would let the two lists drift the day either packet moves a row.
+ */
+const B1C1_ROW = 'set-npc-name';
+const THE_FIFTEEN = [...THE_FOURTEEN, B1C1_ROW].sort(compareCodepoint);
 
 /** The five the chair's ruling R8 moved to EM-B1c, plus the struck one. */
 const B1C_FIVE = [
@@ -108,18 +120,20 @@ describe('EM-B1a — the op vocabulary, the fourteen home ops, and the world hal
     // GUARD-THE-GUARD, FIRST: the positive control. If the catalogue did not load, or loaded
     // empty, every set-equality below would pass vacuously against an empty offender list.
     expect(Object.keys(OP_TYPES).length, 'the catalogue loaded nothing, so every roster claim'
-      + ' below would be vacuous').toBe(14);
+      + ' below would be vacuous').toBe(15);
     expect(THE_FOURTEEN.length, 'the expectation list itself is the fourteen').toBe(14);
 
     const live = Object.keys(OP_TYPES);
-    const undeclared = live.filter((t) => !THE_FOURTEEN.includes(t));
-    const missing = THE_FOURTEEN.filter((t) => !live.includes(t));
-    expect({ undeclared, missing }, 'OP_TYPES and the ruling R8 roster must be SET-EQUAL in both'
-      + ' directions; these are the full offender lists').toEqual({ undeclared: [], missing: [] });
+    const undeclared = live.filter((t) => !THE_FIFTEEN.includes(t));
+    const missing = THE_FIFTEEN.filter((t) => !live.includes(t));
+    expect({ undeclared, missing }, 'OP_TYPES and the ruling R8 roster PLUS EM-B1c1\'s one row'
+      + ' must be SET-EQUAL in both directions; these are the full offender lists')
+      .toEqual({ undeclared: [], missing: [] });
 
     expect(live, 'Object.keys(OP_TYPES) is authored in compareCodepoint order, so a new row'
       + ' cannot be appended wherever').toEqual([...live].sort(compareCodepoint));
-    expect(live, 'and that order is the one §6 spells').toEqual(THE_FOURTEEN);
+    expect(live, 'and that order is the one §6 spells, with EM-B1c1\'s row SPLICED at its'
+      + ' codepoint position rather than appended').toEqual(THE_FIFTEEN);
 
     const rowProblems = [];
     for (const [type, row] of Object.entries(OP_TYPES)) {
@@ -349,8 +363,8 @@ describe('EM-B1a — the op vocabulary, the fourteen home ops, and the world hal
 
     const home = Object.keys(OP_TYPES).filter((t) => OP_TYPES[t].stage === 'home');
     const homeConsequence = Object.keys(OP_TYPES).filter((t) => OP_TYPES[t].consequence === 'home');
-    expect(home, 'every one of the fourteen is stage home').toEqual(THE_FOURTEEN);
-    expect(homeConsequence, 'and every one is consequence home').toEqual(THE_FOURTEEN);
+    expect(home, 'every one of the fifteen is stage home').toEqual(THE_FIFTEEN);
+    expect(homeConsequence, 'and every one is consequence home').toEqual(THE_FIFTEEN);
     expect(home, 'and the two partitions are SET-EQUAL TO EACH OTHER, so the fields can never'
       + ' drift apart').toEqual(homeConsequence);
     const offStage = Object.keys(OP_TYPES).filter((t) => OP_TYPES[t].stage === 'off-stage');
@@ -456,10 +470,12 @@ describe('EM-B1a — the op vocabulary, the fourteen home ops, and the world hal
     const code = codeOf(OPERATIONS_REL);
     const specifiers = [...code.matchAll(/from\s*['"]([^'"]+)['"]/g)].map((m) => m[1]);
     expect(specifiers, 'the EXACT import list, in source order: version 9\'s own NPC_STATUS_VALUES'
-      + ' import is the fifth specifier the version-8 arm did not carry (judgment 115 Q6)')
+      + ' import is the fifth specifier the version-8 arm did not carry (judgment 115 Q6), and the'
+      + ' sixth is EM-B1c1\'s own leaf, which this file composes rather than re-declares')
       .toEqual([
         '../deterministicSort.js', '../entities/npcs.js', '../entities/status.js',
         '../worldPulse/relationshipCompatibility.js', './fieldDeclarations.js',
+        './operationsNpcRename.js',
       ]);
     const fenced = specifiers.filter((s) => /prng|rngContext|\/store\/|\/components\/|force|muster|casualty|upkeep/.test(s));
     expect(fenced, 'the import fence: no PRNG, no rngContext, no store, no components, and no'
@@ -600,5 +616,232 @@ describe('EM-B1a — the op vocabulary, the fourteen home ops, and the world hal
       .map((m) => m[1]).filter((s) => /pool/i.test(s));
     expect(poolImports, 'and this module resolves NO pool: pool resolution is the dialog\'s'
       + ' (EM-D2) and the guard engine\'s').toEqual([]);
+  });
+
+  // ── EM-B1c1 — THE ONE-ROW SLICE: set-npc-name in its own leaf (B1 to B6) ────────────
+  // Six straight-line literal `it`s appended to EM-B1a's ONE literal describe. The three
+  // landed arms this row puts red (A1, A3 and A6) are widened ABOVE, by ADDITION inside
+  // the arm each strengthens, so these six are the only titles the file gains.
+
+  it('B1: the catalogue is the fourteen PLUS set-npc-name, spliced at its codepoint position, and all five of EM-B1c\'s names stay absent', () => {
+    const live = Object.keys(OP_TYPES);
+    expect(live.length, 'the composed catalogue loaded, or every roster claim below is vacuous')
+      .toBe(15);
+    expect(THE_FIFTEEN.length, 'and the DERIVED expectation list is fifteen, so the two lists'
+      + ' cannot drift: it is THE_FOURTEEN plus this key, never a hand-spelled roster').toBe(15);
+
+    const undeclared = live.filter((t) => !THE_FIFTEEN.includes(t));
+    const missing = THE_FIFTEEN.filter((t) => !live.includes(t));
+    expect({ undeclared, missing }, 'SET-EQUAL in both directions, so a row dropped by EITHER'
+      + ' packet reds here; these are the full offender lists')
+      .toEqual({ undeclared: [], missing: [] });
+
+    const reabsorbed = B1C_FIVE.filter((t) => live.includes(t));
+    expect(reabsorbed, 'ALL FIVE of EM-B1c\'s names stay ABSENT BY NAME. This member spells'
+      + ' set-npc-name, not rename-npc, so EM-B1c\'s landing still reds here until its own arms'
+      + ' are widened deliberately').toEqual([]);
+
+    expect(live, 'the composition is authored in compareCodepoint order')
+      .toEqual([...live].sort(compareCodepoint));
+    const at = live.indexOf(B1C1_ROW);
+    expect([at, live[at - 1], live[at + 1]], 'THE SPLICE, BY POSITION: index 11 of 15, between'
+      + ' set-institution-state and set-npc-status. A trailing spread would put the row LAST and'
+      + ' red the order clause of A1').toEqual([11, 'set-institution-state', 'set-npc-status']);
+
+    expect(Object.isFrozen(NPC_RENAME_OP_TYPES), 'the leaf\'s own map is frozen').toBe(true);
+    const thawed = live.filter((t) => !Object.isFrozen(OP_TYPES[t]));
+    expect(thawed, 'and EVERY ONE of the fifteen composed rows is frozen. Object.freeze over a'
+      + ' spread freezes the OUTER map only, and EM-B1a\'s home map is exported by nothing, so'
+      + ' this is the arm that closes the hole from the declared exports').toEqual([]);
+
+    const op = makeOp(B1C1_ROW, { kind: 'npc', id: 'n1' }, { newName: 'X' });
+    expect(op && op.type, 'makeOp is ARITY THREE and builds one op from the new row').toBe(B1C1_ROW);
+    expect([op.stage, op.consequence], 'it copies the declared home stage and home consequence')
+      .toEqual(['home', 'home']);
+    expect([op.requires, op.enables, op.relatedTo, op.conflictsWith], 'and FOUR EMPTY ARRAYS on the'
+      + ' Op: requires is FLATTENED from the declaration\'s { world, registry } pair into EM-A1\'s'
+      + ' readonly string[], which is why an arm asserting the pair on the Op would red'
+      + ' typecheck:domain:strict').toEqual([[], [], [], []]);
+  });
+
+  it('B2: the rename DELEGATES and this leaf writes no name field and re-implements no join surface', () => {
+    const decl = OP_TYPES[B1C1_ROW];
+    expect(decl.target, 'the row targets an npc').toBe('npc');
+    expect(Object.keys(decl.payload), 'and declares exactly one payload field').toEqual(['newName']);
+    expect([decl.payload.newName.kind, decl.payload.newName.required], 'a REQUIRED free field: a'
+      + ' name is the estate\'s one free-cascade fact, so the freedom is in the value and the'
+      + ' safety is in the delegation').toEqual(['free', true]);
+    expect([decl.stage, decl.consequence], 'home and home').toEqual(['home', 'home']);
+    expect(decl.requires, 'the TWO-KIND requires, both halves empty: design §18 gives a rename no'
+      + ' world precondition, and an omitted key would be an A1 red rather than a default')
+      .toEqual({ world: [], registry: [] });
+    expect(decl.guardsStated.includes('npcRenameChanges')
+      && decl.guardsStated.includes('applyNpcRenameToSettlement'),
+    'guardsStated NAMES the existing cascade as prose-data, because OpTypeDeclaration has no'
+    + ' writer key and a twelfth field would be a stored-shape change').toBe(true);
+
+    const leafCode = codeOf(LEAF_REL);
+    expect(leafCode.length, 'the leaf source is live, so the absences below are measured against a'
+      + ' real body rather than an empty string').toBeGreaterThan(200);
+
+    // ⛔ THE NAME-WRITE CLAIM IS THE SURFACE SCAN, NOT A BARE `name:` REGEX. The five
+    // NPC_RENAME_SURFACES paths ARE the name fields a rename writes, and they are read from the
+    // FROZEN LIST rather than re-typed, so an upstream change to the cascade reds here instead
+    // of drifting into a silent pass. (A generic `\bname\s*[:=]` matcher was measured against
+    // this leaf and convicts its guardsStated PROSE, which writes nothing: an instrument that
+    // cannot tell a sentence from an assignment proves neither.)
+    expect(NPC_RENAME_SURFACES.length, 'the five declared join surfaces are live, or the scan'
+      + ' below measures nothing').toBe(5);
+    const surfaceHits = (text) => NPC_RENAME_SURFACES.map((s) => s.path).filter((p) => text.includes(p));
+    const plantedWrite = `${leafCode}\nconst planted = { '${NPC_RENAME_SURFACES[0].path}': 'X' };\n`;
+    expect(surfaceHits(plantedWrite), 'the matcher is proved LIVE on a planted ASSIGNMENT to'
+      + ' npcs[].name, or its silence below means nothing').toEqual(['npcs[].name']);
+    expect(surfaceHits(leafCode), 'HZ-JOINKEY, honoured BY DELEGATION: this module writes no name'
+      + ' field and re-implements NONE of the five NPC_RENAME_SURFACES paths, so it mints no'
+      + ' second cascade').toEqual([]);
+
+    expect(importsOf(LEAF_REL, leafCode), 'and it imports NOTHING AT ALL. operations.js imports'
+      + ' THIS module\'s rows, so an import back for the vocabularies would be a module cycle with'
+      + ' both const bindings in the temporal dead zone at initialisation').toEqual([]);
+  });
+
+  it('B3: relational integrity is total, symmetric and closed over the composed fifteen', () => {
+    const types = Object.keys(OP_TYPES);
+    const row = OP_TYPES[B1C1_ROW];
+    expect([row.requires.world, row.requires.registry, row.enables, row.relatedTo,
+      row.conflictsWith], 'the row\'s FIVE arrays are asserted EMPTY rather than trusted: the'
+    + ' DECLARATION\'s requires is the two-kind PAIR, so an arm that iterated it as one flat'
+    + ' array would throw. The flat form is the Op\'s, not the row\'s')
+      .toEqual([[], [], [], [], []]);
+
+    const conditions = Object.keys(WORLD_CONDITIONS);
+    const unknown = [];
+    for (const type of types) {
+      const r = OP_TYPES[type];
+      for (const named of r.requires.world) {
+        if (!conditions.includes(named)) unknown.push(`${type}.requires.world -> ${named}`);
+      }
+      for (const [relation, members] of [['requires.registry', r.requires.registry],
+        ['enables', r.enables], ['relatedTo', r.relatedTo], ['conflictsWith', r.conflictsWith]]) {
+        for (const named of members) {
+          if (!types.includes(named)) unknown.push(`${type}.${relation} -> ${named}`);
+        }
+      }
+    }
+    expect(unknown, 'every relation string is a key of the COMPOSED OP_TYPES and every world'
+      + ' requirement an id of WORLD_CONDITIONS; this is the full offender list').toEqual([]);
+
+    const asymmetric = [];
+    for (const type of types) {
+      for (const other of OP_TYPES[type].conflictsWith) {
+        if (!OP_TYPES[other].conflictsWith.includes(type)) asymmetric.push(`conflictsWith ${type} -> ${other}`);
+      }
+      for (const other of OP_TYPES[type].relatedTo) {
+        if (!OP_TYPES[other].relatedTo.includes(type)) asymmetric.push(`relatedTo ${type} -> ${other}`);
+      }
+      for (const other of OP_TYPES[type].enables) {
+        if (!OP_TYPES[other].requires.registry.includes(type)) asymmetric.push(`enables ${type} -> ${other}`);
+      }
+      for (const other of OP_TYPES[type].requires.registry) {
+        if (!OP_TYPES[other].enables.includes(type)) asymmetric.push(`requires ${type} -> ${other}`);
+      }
+    }
+    expect(asymmetric, 'A4\'s symmetry law RE-RUN over all fifteen: conflictsWith and relatedTo'
+      + ' SYMMETRIC, requires and enables EXACT INVERSES').toEqual([]);
+    const related = types.filter((t) => OP_TYPES[t].relatedTo.length > 0);
+    expect(related.length, 'some row actually declares a relation, or the sweep above ran over'
+      + ' nothing').toBeGreaterThan(0);
+
+    const namesASibling = [...row.requires.registry, ...row.enables, ...row.relatedTo,
+      ...row.conflictsWith].filter((t) => B1C_FIVE.includes(t));
+    expect(namesASibling, 'and this row names NONE of EM-B1c\'s remaining four, by name, so the'
+      + ' split cannot be re-coupled through a relation').toEqual([]);
+  });
+
+  it('B4: the two-kind requires is the declaration\'s, and the vocabularies are proved from the test where there is no cycle', () => {
+    const row = OP_TYPES[B1C1_ROW];
+    expect(Object.keys(row.requires).sort(compareCodepoint), 'the declaration carries the'
+      + ' { world, registry } SPLIT, both halves present').toEqual(['registry', 'world']);
+    expect(OP_STAGES.includes(row.stage), 'stage is a MEMBER of OP_STAGES, asserted from the TEST'
+      + ' because the leaf imports nothing: operations.js imports the leaf, so an import back'
+      + ' would put both const bindings in the TDZ').toBe(true);
+    expect(OP_CONSEQUENCE_POLICIES.includes(row.consequence), 'and consequence a member of'
+      + ' OP_CONSEQUENCE_POLICIES. This arm reds the day either vocabulary loses a member').toBe(true);
+    expect([OP_STAGES.length, OP_CONSEQUENCE_POLICIES.length], 'both vocabularies are live and'
+      + ' carry both members, or the two memberships above pass vacuously').toEqual([2, 2]);
+    expect(NPC_RENAME_OP_TYPES[B1C1_ROW], 'and the composed row IS the leaf\'s row, by value: the'
+      + ' spread copies it and freezes the outer map only').toEqual(row);
+  });
+
+  it('B5: makeOp and validateOp are pure over the new row, the leaf imports nothing, and exactly one module imports the leaf', () => {
+    const target = { kind: 'npc', id: 'n1' };
+    const payload = { newName: 'Halvard' };
+    const clone = JSON.parse(JSON.stringify(payload));
+    const first = makeOp(B1C1_ROW, target, payload);
+    const second = makeOp(B1C1_ROW, target, payload);
+    expect(first, 'identical inputs give identical results').toEqual(second);
+    expect(payload, 'the input payload is UNMUTATED against a pre-call clone').toEqual(clone);
+    const verdicts = [];
+    for (let n = 0; n < 100; n += 1) verdicts.push(JSON.stringify(validateOp(first, {})));
+    expect([...new Set(verdicts)], '100 calls change nothing observable: no draw, no id, no state')
+      .toEqual([JSON.stringify({ ok: true, errors: [] })]);
+
+    const leafCode = codeOf(LEAF_REL);
+    const specifiers = [...leafCode.matchAll(/from\s*['"]([^'"]+)['"]/g)].map((m) => m[1]);
+    expect(specifiers, 'THE LEAF\'S IMPORT LIST IS EXACTLY EMPTY. Its only references to types.js'
+      + ' are JSDoc @typedef lines, which the estate\'s comment strip blanks, so the leaf enters'
+      + ' no bundle closure').toEqual([]);
+    const fenced = specifiers.filter((s) => /prng|rngContext|\/store\/|\/components\/|factionRename|edit\/operations\.js/.test(s));
+    expect(fenced, 'the import fence, stated even at zero: no PRNG, no rngContext, no store, no'
+      + ' components, not factionRename.js and not operations.js').toEqual([]);
+
+    const scanned = walkSources(join(ROOT, 'src')).filter((rel) => rel !== LEAF_REL);
+    expect(scanned.length, 'the src/ walk found nothing, so the importer claim below would be'
+      + ' vacuous').toBeGreaterThan(400);
+    const importers = [];
+    for (const rel of scanned) {
+      for (const resolved of importsOf(rel, commentsOnly(sourceOf(rel)))) {
+        if (resolved === LEAF_REL) importers.push(rel);
+      }
+    }
+    expect(importers, 'the leaf lands DARK with EXACTLY ONE importer, which is its own spread')
+      .toEqual([OPERATIONS_REL]);
+    expect(importsOf('src/components/edit/Planted.jsx',
+      "import { NPC_RENAME_OP_TYPES } from '../../domain/edit/operationsNpcRename.js';\n"),
+    'the importer matcher is proved LIVE on a planted runtime import, or the roster above is'
+    + ' vacuous').toEqual([LEAF_REL]);
+  });
+
+  it('B6: the op catalogue and the shipped EDIT_KINDS vocabulary are disjoint over every row minted after the fourteen', () => {
+    const live = Object.keys(OP_TYPES);
+    expect(EDIT_KINDS.length, 'the shipped pending-edit vocabulary is read BY IMPORT and never'
+      + ' re-typed: a hand-spelled copy would drift the day a kind is added and make this whole'
+      + ' claim a claim about nothing').toBeGreaterThan(0);
+
+    const minted = live.filter((t) => !THE_FOURTEEN.includes(t));
+    expect(minted, 'THE POPULATION THIS MEMBER CAN ANSWER FOR: every row minted AFTER EM-B1a\'s'
+      + ' fourteen. Today exactly one; tomorrow EM-B1b\'s seven and EM-B1c\'s four').toEqual([B1C1_ROW]);
+
+    const collide = (rows) => rows.filter((t) => EDIT_KINDS.includes(t));
+    expect(collide(minted), 'THE GUARD: no row minted after the fourteen may take a shipped'
+      + ' EDIT_KINDS verb\'s name. One string may not mean two typed things, and the cure when'
+      + ' this reds is to RENAME THE OP, never to add an exemption').toEqual([]);
+
+    expect(collide(THE_FOURTEEN), 'THE BANKED PAIR, asserted EXACTLY in both directions:'
+      + ' add-institution and remove-institution are EM-B1a\'s LANDED rows and shipped EDIT_KINDS'
+      + ' members. A NEW inherited collision reds, and a CURED one must be BANKED by shrinking'
+      + ' this list rather than pocketed silently. It is also this arm\'s POSITIVE CONTROL: a'
+      + ' non-empty result proves the matcher and both rosters are live, so the empty above is'
+      + ' never a vacuous green').toEqual(['add-institution', 'remove-institution']);
+
+    expect(collide([...minted, 'rename-npc']), 'and the matcher is proved live on the exact'
+      + ' collision this member\'s rename cured').toEqual(['rename-npc']);
+    // ⛔ THE MARKER SITS ON THE LINE IMMEDIATELY ABOVE THE `.not.` ITSELF, which is why the
+    // message is hoisted into a const: the walker reads the assertion's own line and the ONE
+    // line above it, so a marker above a WRAPPED `expect(` opener anchors nothing.
+    const avoidWhy = 'the op layer avoids the shipped verb BY DESIGN: rename-npc keeps its name,'
+      + ' its payload, its intent id and its canon lock at the queue seam';
+    // anchored: the planted control one assertion above returns exactly ['rename-npc'] for this key, so the matcher can FIND it, and minted is asserted exactly [B1C1_ROW] above that.
+    expect(minted, avoidWhy).not.toContain('rename-npc');
   });
 });

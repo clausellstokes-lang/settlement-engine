@@ -45,6 +45,7 @@ import {
 } from '../entities/status.js';
 import { PRIMARY_RELATIONSHIP_TYPES } from '../worldPulse/relationshipCompatibility.js';
 import { FIELD_DECLARATIONS } from './fieldDeclarations.js';
+import { NPC_RENAME_OP_TYPES } from './operationsNpcRename.js';
 
 /**
  * @typedef {'pool'|'free'|'ref'|'int'|'enum'} PayloadSpecKind
@@ -272,6 +273,7 @@ export const OP_TYPES = Object.freeze({
     duration: null, guards: [],
     guardsStated: 'No guard is wired here. The five union values write the composer constants STATUS_ACTIVE, STATUS_DESTROYED, STATUS_IMPAIRED, STATUS_REMOVED and STATUS_VACANT; ruined alone writes the PULSE shape, status ruined with _worldPulseInactive true, through EM-B1e ruinInstitution with fate ruined_by_decree, and never a composer constant.',
   }),
+  ...NPC_RENAME_OP_TYPES,
   'set-npc-status': row({
     target: 'npc',
     payload: { status: enumField(NPC_STATUS_POOL, true), cause: CAUSE },
