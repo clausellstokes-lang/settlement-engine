@@ -2,6 +2,60 @@
 // Supply chain taxonomy mapping resources → institutions → goods → services
 // Used by the pre-generation configuration panel "By Need" and "By Category" views
 
+// Shared phrases hoisted once (train EM-T14's worker buy-back, judgment 191): each is spelled here and referenced below; the exported tables are byte-identical.
+const ADVANCED_WEAPONS_AND_ARMOR = 'Advanced weapons and armor';
+const AGRICULTURAL_SURPLUS = 'Agricultural surplus';
+const ALCHEMICAL_REAGENTS = 'Alchemical reagents';
+const ASSAY_CERTIFICATES = 'Assay certificates';
+const BARGE_AND_RIVER_TRANSPORT_COMPANY = 'Barge and river transport company';
+const BARRELS_AND_CONTAINERS = 'Barrels and containers';
+const BLACKSMITHS_3_10 = 'Blacksmiths (3-10)';
+const BOOKS_AND_MANUSCRIPTS = 'Books and manuscripts';
+const BUILDING_MATERIALS = 'Building materials';
+const CARAVAN_MASTERS_EXCHANGE = "Caravan masters' exchange";
+const CARPENTER_PART_TIME = 'Carpenter (part-time)';
+const CARTOGRAPHER_S_GUILD = "Cartographer's guild";
+const COAL_OR_PEAT_DEPOSITS = 'Coal or peat deposits';
+const CRAFT_GUILDS_5_15 = 'Craft guilds (5-15)';
+const DATE_PALMS_AND_ORCHARDS = 'Date Palms and Orchards';
+const ELDER_GROVE_COUNCIL = 'Elder Grove Council';
+const FERTILE_FLOODPLAIN = 'Fertile Floodplain';
+const FINANCIAL_SERVICES = 'Financial services';
+const FINE_METALWORK_AND_JEWELRY = 'Fine metalwork and jewelry';
+const FURRIER_S_DISTRICT = "Furrier's district";
+const GUILD_MANUFACTURED_GOODS = 'Guild-manufactured goods';
+const HEALING_WATERS_BOTTLED = 'Healing waters (bottled)';
+const INFORMATION_BROKERAGE = 'Information brokerage';
+const INTERNATIONAL_BANKING_SERVICES = 'International banking services';
+const LUXURY_GOODS_QUARTER = 'Luxury goods quarter';
+const LUXURY_MANUFACTURED_GOODS = 'Luxury manufactured goods';
+const MAGICAL_LEY_LINE_NODE = 'Magical ley line node';
+const MASTER_CRAFTED_WEAPONS = 'Master-crafted weapons';
+const MEDICAL_CARE_BASIC = 'Medical care (basic)';
+const MERCHANT_GUILDS_15_40 = 'Merchant guilds (15-40)';
+const MERCHANT_GUILDS_3_8 = 'Merchant guilds (3-8)';
+const MULTIPLE_MONASTERIES = 'Multiple monasteries';
+const NEWS_AND_INFORMATION = 'News and information';
+const PACK_ANIMAL_TRADER = 'Pack animal trader';
+const POTIONS_AND_ELIXIRS = 'Potions and elixirs';
+const POTTERY_AND_CERAMICS = 'Pottery and ceramics';
+const PRECIOUS_METALS_MINING = 'precious_metals_mining';
+const PRECIOUS_METAL_VEINS = 'Precious metal veins';
+const PROCESSED_TEXTILES = 'Processed textiles';
+const QUALITY_TOOLS_AND_WEAPONS = 'Quality tools and weapons';
+const RARE_SPICES_AND_DYES = 'Rare spices and dyes';
+const RAW_WOOL_AND_HIDES = 'Raw wool and hides';
+const RELIGIOUS_SERVICES = 'Religious services';
+const SALT_FOR_PRESERVATION = 'Salt for preservation';
+const SPECIALIZED_METALWORKERS = 'Specialized metalworkers';
+const SPELLCASTING_MINOR = 'Spellcasting (minor)';
+const SUBSISTENCE_FARMING = 'Subsistence farming';
+const TANNER_ESTABLISHED = 'Tanner (established)';
+const THIEVES_GUILD_POWERFUL = "Thieves' guild (powerful)";
+const WAREHOUSE_LOGISTICS = 'warehouse_logistics';
+const WEAVERS_TEXTILE_WORKERS = 'Weavers/Textile workers';
+const WILD_FORAGING_AREAS = 'Wild foraging areas';
+
 // ── TOP-LEVEL NEED CATEGORIES ────────────────────────────────────────────────
 // Each need maps to a set of chains: resource → processing institution → output
 // goods/services. The entrepôt flag marks goods that flow through without local
@@ -18,15 +72,15 @@ export const SUPPLY_CHAIN_NEEDS = {
         id: 'grain',
         label: 'Grain & Bread',
         resource: 'Grain fields',
-        rawInputs: ['Grain surplus', 'Agricultural surplus'],
+        rawInputs: ['Grain surplus', AGRICULTURAL_SURPLUS],
         processingInstitutions: ['Maltster', 'Mills (2-5)', 'Mill', 'Access to external mill'],
         intermediateGoods: ['Milled flour'],
-        outputs: ['Baked goods', 'Grain surplus', 'Agricultural surplus', 'Bulk food exports'],
+        outputs: ['Baked goods', 'Grain surplus', AGRICULTURAL_SURPLUS, 'Bulk food exports'],
         services: ['food'],
         exportable: true,
         entrepot: false,
         minTier: 'thorp',
-        resourceSubstitutes: ['Fertile Floodplain'],
+        resourceSubstitutes: [FERTILE_FLOODPLAIN],
       },
       {
         id: 'livestock',
@@ -40,7 +94,7 @@ export const SUPPLY_CHAIN_NEEDS = {
           'Dairy farmer',
           'Shepherd',
           'Stable yard',
-          'Pack animal trader',
+          PACK_ANIMAL_TRADER,
           'Horse market',
         ],
         intermediateGoods: ['Livestock', 'Dairy products'],
@@ -51,7 +105,7 @@ export const SUPPLY_CHAIN_NEEDS = {
         minTier: 'hamlet',
         // These are different husbandry ecologies, not different commodities:
         // river cattle, camel herds, and alpine flocks all provide livestock.
-        resourceSubstitutes: ['Fertile Floodplain', 'Camel Herds', 'Alpine Pastures'],
+        resourceSubstitutes: [FERTILE_FLOODPLAIN, 'Camel Herds', 'Alpine Pastures'],
       },
       // data-tables-5: the thin 'fish' chain was a duplicate authoring pass of the
       // richer 'fishing' chain (both keyed resource 'Fishing grounds'), so a coastal
@@ -62,9 +116,9 @@ export const SUPPLY_CHAIN_NEEDS = {
         id: 'salt',
         label: 'Salt & Preservation',
         resource: 'Salt flats',
-        rawInputs: ['Sea salt', 'Salt for preservation'],
+        rawInputs: ['Sea salt', SALT_FOR_PRESERVATION],
         processingInstitutions: ['Salt works'],
-        intermediateGoods: ['Salt for preservation'],
+        intermediateGoods: [SALT_FOR_PRESERVATION],
         outputs: ['Preserved foods'],
         services: ['food'],
         exportable: true,
@@ -82,7 +136,7 @@ export const SUPPLY_CHAIN_NEEDS = {
         // 'Elder Grove Council' alone (town) gated this thorp chain three tiers
         // high. The smallholding ladder: 'Subsistence farming' (thorp/hamlet) →
         // 'Beekeeper' (village — the honey-and-wax output) → the Council (town).
-        processingInstitutions: ['Subsistence farming', 'Beekeeper', 'Elder Grove Council'],
+        processingInstitutions: [SUBSISTENCE_FARMING, 'Beekeeper', ELDER_GROVE_COUNCIL],
         intermediateGoods: ['Honey and beeswax', 'Foraged goods'],
         outputs: ['Honey and beeswax', 'Foraged goods'],
         services: ['food'],
@@ -105,7 +159,7 @@ export const SUPPLY_CHAIN_NEEDS = {
           'Fishmonger',
           'Cooper',
           'Salt works',
-          'Merchant guilds (3-8)',
+          MERCHANT_GUILDS_3_8,
           'Weekly market',
           'Fish market',
           'Fishmonger',
@@ -123,7 +177,7 @@ export const SUPPLY_CHAIN_NEEDS = {
         label: 'River Fishing',
         resource: 'River fisheries',
         rawInputs: ['River fish', 'Freshwater catch'],
-        processingInstitutions: ["Fisher's landing", 'Fishmonger', 'Cooper', 'Merchant guilds (3-8)', 'Weekly market'],
+        processingInstitutions: ["Fisher's landing", 'Fishmonger', 'Cooper', MERCHANT_GUILDS_3_8, 'Weekly market'],
         intermediateGoods: ['Fresh fish'],
         outputs: ['River fish', 'Freshwater catch', 'Salted fish'],
         services: ['food'],
@@ -138,7 +192,7 @@ export const SUPPLY_CHAIN_NEEDS = {
         label: 'Hunting & Trapping',
         resource: 'Hunting grounds',
         rawInputs: ['Game meat', 'Furs and pelts', 'Hunting trophies'],
-        processingInstitutions: ["Hunter's lodge", 'Tanner (established)', "Warden's Lodge", 'Wildfowler'],
+        processingInstitutions: ["Hunter's lodge", TANNER_ESTABLISHED, "Warden's Lodge", 'Wildfowler'],
         intermediateGoods: ['Prepared hides', 'Dressed game'],
         outputs: ['Game meat', 'Furs and pelts', 'Hunting trophies', 'Leather goods'],
         services: ['food', 'employment'],
@@ -157,7 +211,7 @@ export const SUPPLY_CHAIN_NEEDS = {
         services: ['food'],
         exportable: true,
         minTier: 'hamlet',
-        resourceSubstitutes: ['Fertile Floodplain', 'Date Palms and Orchards'],
+        resourceSubstitutes: [FERTILE_FLOODPLAIN, DATE_PALMS_AND_ORCHARDS],
       },
       {
         id: 'animal_husbandry',
@@ -168,19 +222,19 @@ export const SUPPLY_CHAIN_NEEDS = {
         // chain. The animal-trade ladder below them: 'Pack animal trader'/'Stable
         // yard' (hamlet) → 'Stable master' (village) → 'Beast trainers' (town).
         processingInstitutions: [
-          'Pack animal trader',
+          PACK_ANIMAL_TRADER,
           'Stable yard',
           'Stable master',
           'Beast trainers',
-          'Merchant guilds (3-8)',
-          'Merchant guilds (15-40)',
+          MERCHANT_GUILDS_3_8,
+          MERCHANT_GUILDS_15_40,
         ],
         intermediateGoods: ['Trained horses', 'Draft animals'],
         outputs: ['Cavalry mounts', 'Draft horses', 'Working animals', 'Hunting dogs', 'Trained falcons'],
         services: ['transport', 'employment'],
         exportable: true,
         minTier: 'hamlet',
-        resourceSubstitutes: ['Fertile Floodplain', 'Camel Herds', 'Alpine Pastures'],
+        resourceSubstitutes: [FERTILE_FLOODPLAIN, 'Camel Herds', 'Alpine Pastures'],
       },
     ],
   },
@@ -198,14 +252,14 @@ export const SUPPLY_CHAIN_NEEDS = {
         rawInputs: ['Milled timber', 'Charcoal', 'Hardwood beams', 'Shipbuilding timber'],
         processingInstitutions: [
           'Sawmill',
-          'Carpenter (part-time)',
+          CARPENTER_PART_TIME,
           'Carpenters (5-15)',
           'Thatcher',
-          'Carpenter (part-time)',
+          CARPENTER_PART_TIME,
           'Carpenter',
         ],
         intermediateGoods: ['Milled timber', 'Charcoal'],
-        outputs: ['Barrels and containers', 'Milled lumber'],
+        outputs: [BARRELS_AND_CONTAINERS, 'Milled lumber'],
         services: [],
         exportable: true,
         entrepot: false,
@@ -217,9 +271,9 @@ export const SUPPLY_CHAIN_NEEDS = {
         label: 'Iron & Metalwork',
         resource: 'Iron ore deposits',
         rawInputs: ['Iron ore', 'Basic metalwork'],
-        processingInstitutions: ['Mine (open cast)', 'Resident smith (part-time)', 'Blacksmiths (3-10)'],
+        processingInstitutions: ['Mine (open cast)', 'Resident smith (part-time)', BLACKSMITHS_3_10],
         intermediateGoods: ['Iron ore', 'Basic metalwork'],
-        outputs: ['Quality tools and weapons', 'Advanced weapons and armor', 'Master-crafted weapons'],
+        outputs: [QUALITY_TOOLS_AND_WEAPONS, ADVANCED_WEAPONS_AND_ARMOR, MASTER_CRAFTED_WEAPONS],
         services: ['equipment'],
         exportable: true,
         entrepot: false,
@@ -229,10 +283,10 @@ export const SUPPLY_CHAIN_NEEDS = {
         id: 'stone',
         label: 'Stone & Construction',
         resource: 'Stone quarry',
-        rawInputs: ['Quarried stone', 'Building materials'],
+        rawInputs: ['Quarried stone', BUILDING_MATERIALS],
         processingInstitutions: ['Stone quarry', 'Brickmaker'],
         intermediateGoods: ['Quarried stone'],
-        outputs: ['Quarried stone', 'Building materials'],
+        outputs: ['Quarried stone', BUILDING_MATERIALS],
         services: [],
         exportable: true,
         entrepot: false,
@@ -241,7 +295,7 @@ export const SUPPLY_CHAIN_NEEDS = {
       {
         id: 'fuel',
         label: 'Fuel & Heating',
-        resource: 'Coal or peat deposits',
+        resource: COAL_OR_PEAT_DEPOSITS,
         rawInputs: ['Coal', 'Peat fuel'],
         processingInstitutions: ['Charcoal burner', 'Peat cutter'],
         intermediateGoods: ['Coal', 'Peat fuel', 'Charcoal'],
@@ -255,10 +309,10 @@ export const SUPPLY_CHAIN_NEEDS = {
         id: 'clay',
         label: 'Clay & Ceramics',
         resource: 'Clay deposits',
-        rawInputs: ['Fired brick', 'Pottery and ceramics', 'Roof tiles'],
+        rawInputs: ['Fired brick', POTTERY_AND_CERAMICS, 'Roof tiles'],
         processingInstitutions: ['Potter', 'Brickmaker'],
-        intermediateGoods: ['Fired brick', 'Pottery and ceramics'],
-        outputs: ['Pottery and ceramics', 'Barrels and containers'],
+        intermediateGoods: ['Fired brick', POTTERY_AND_CERAMICS],
+        outputs: [POTTERY_AND_CERAMICS, BARRELS_AND_CONTAINERS],
         services: [],
         exportable: true,
         entrepot: false,
@@ -270,7 +324,7 @@ export const SUPPLY_CHAIN_NEEDS = {
         label: 'Smelting & Refining',
         resource: 'Iron ore deposits',
         rawInputs: ['Iron ore', 'Charcoal', 'Coal'],
-        processingInstitutions: ['Smelter', 'Specialized metalworkers'],
+        processingInstitutions: ['Smelter', SPECIALIZED_METALWORKERS],
         intermediateGoods: ['Pig iron', 'Refined iron', 'Charcoal'],
         outputs: ['Refined iron ingots', 'Pig iron', 'Cast iron goods'],
         services: ['equipment'],
@@ -293,7 +347,7 @@ export const SUPPLY_CHAIN_NEEDS = {
           'Fishmonger',
           'Chandler',
           'Ropemaker',
-          'Merchant guilds (3-8)',
+          MERCHANT_GUILDS_3_8,
         ],
         intermediateGoods: ['Dried reeds', 'Peat blocks'],
         outputs: ['Reeds and thatch', 'Peat fuel', 'Waterfowl', 'Basket goods'],
@@ -306,7 +360,7 @@ export const SUPPLY_CHAIN_NEEDS = {
         label: 'Boatbuilding & River Transport',
         resource: 'Managed woodland',
         rawInputs: ['Boatbuilding timber', 'Milled lumber', 'Rope and cordage'],
-        processingInstitutions: ['Barge and river transport company', 'River boatyard', 'River ferry', 'Boatyard'],
+        processingInstitutions: [BARGE_AND_RIVER_TRANSPORT_COMPANY, 'River boatyard', 'River ferry', 'Boatyard'],
         intermediateGoods: ['Planks and beams', 'Boat components'],
         outputs: ['River craft', 'Cargo barges', 'Fishing boats', 'Ferries'],
         services: ['transport'],
@@ -315,26 +369,26 @@ export const SUPPLY_CHAIN_NEEDS = {
         resourceSubstitutes: ['Coastal timber'],
       },
       {
-        id: 'precious_metals_mining',
+        id: PRECIOUS_METALS_MINING,
         label: 'Mining & Coinage',
-        resource: 'Precious metal veins',
+        resource: PRECIOUS_METAL_VEINS,
         rawInputs: ['Precious metals', 'Raw ore'],
-        processingInstitutions: ['Specialized metalworkers', 'Jeweller'],
-        intermediateGoods: ['Refined ingots', 'Coin blanks', 'Assay certificates'],
-        outputs: ['Precious metals', 'Coin minting', 'Refined ingots', 'Assay certificates'],
+        processingInstitutions: [SPECIALIZED_METALWORKERS, 'Jeweller'],
+        intermediateGoods: ['Refined ingots', 'Coin blanks', ASSAY_CERTIFICATES],
+        outputs: ['Precious metals', 'Coin minting', 'Refined ingots', ASSAY_CERTIFICATES],
         services: ['legal'],
         exportable: true,
         minTier: 'town',
         resourceSubstitutes: ['Gemstone deposits'],
         processingInstitutionsByResource: {
-          precious_metals: ['Specialized metalworkers', 'Jeweller'],
+          precious_metals: [SPECIALIZED_METALWORKERS, 'Jeweller'],
           gemstone_deposits: ['Jeweller'],
         },
         labelsByResource: {
           gemstone_deposits: 'Gem Mining & Lapidary',
         },
         outputsByResource: {
-          precious_metals: ['Precious metals', 'Coin minting', 'Refined ingots', 'Assay certificates'],
+          precious_metals: ['Precious metals', 'Coin minting', 'Refined ingots', ASSAY_CERTIFICATES],
           gemstone_deposits: ['Raw gemstones', 'Cut gemstones', 'Gem appraisal'],
         },
       },
@@ -345,11 +399,11 @@ export const SUPPLY_CHAIN_NEEDS = {
         rawInputs: ['Iron ore', 'Quarried stone', 'Coal'],
         processingInstitutions: ['Mine (open cast)', 'Stone quarry'],
         intermediateGoods: ['Rough ore', 'Dressed stone', 'Quarry rubble'],
-        outputs: ['Quarried stone', 'Iron ore', 'Building materials', 'Coal'],
+        outputs: ['Quarried stone', 'Iron ore', BUILDING_MATERIALS, 'Coal'],
         services: ['equipment'],
         exportable: true,
         minTier: 'hamlet',
-        resourceSubstitutes: ['Stone quarry', 'Coal or peat deposits'],
+        resourceSubstitutes: ['Stone quarry', COAL_OR_PEAT_DEPOSITS],
         processingInstitutionsByResource: {
           iron_deposits: ['Mine (open cast)'],
           stone_quarry: ['Stone quarry'],
@@ -357,7 +411,7 @@ export const SUPPLY_CHAIN_NEEDS = {
         },
         outputsByResource: {
           iron_deposits: ['Iron ore'],
-          stone_quarry: ['Quarried stone', 'Building materials'],
+          stone_quarry: ['Quarried stone', BUILDING_MATERIALS],
           coal_deposits: ['Coal'],
         },
       },
@@ -400,7 +454,7 @@ export const SUPPLY_CHAIN_NEEDS = {
       {
         id: 'floodplain_agriculture',
         label: 'Floodplain Agriculture',
-        resource: 'Fertile Floodplain',
+        resource: FERTILE_FLOODPLAIN,
         rawInputs: ['Alluvial soil crops', 'Flood-fed grain'],
         processingInstitutions: ['Farmland', 'Mills (2-5)', 'Town granary'],
         intermediateGoods: ['Grain surplus', 'Diverse crops'],
@@ -414,7 +468,7 @@ export const SUPPLY_CHAIN_NEEDS = {
         label: 'Mountain Timber',
         resource: 'Mountain Timber',
         rawInputs: ['Mountain timber', 'High-altitude wood'],
-        processingInstitutions: ['Sawmill', 'Charcoal burner', 'Carpenter (part-time)'],
+        processingInstitutions: ['Sawmill', 'Charcoal burner', CARPENTER_PART_TIME],
         intermediateGoods: ['Hewn timber', 'Charcoal', 'Firewood'],
         outputs: ['Structural timber', 'Fuel wood', 'Charcoal'],
         services: ['construction', 'fuel'],
@@ -426,7 +480,7 @@ export const SUPPLY_CHAIN_NEEDS = {
         label: 'Alpine Wool and Dairy',
         resource: 'Alpine Pastures',
         rawInputs: ['Mountain wool', 'Alpine dairy'],
-        processingInstitutions: ['Shepherd', 'Weavers/Textile workers', 'Fuller', 'Dairy farmer'],
+        processingInstitutions: ['Shepherd', WEAVERS_TEXTILE_WORKERS, 'Fuller', 'Dairy farmer'],
         intermediateGoods: ['Raw wool', 'Alpine cheese', 'Mountain butter'],
         outputs: ['Fine wool cloth', 'Aged cheese', 'Luxury dairy products'],
         services: ['food', 'textiles'],
@@ -438,7 +492,7 @@ export const SUPPLY_CHAIN_NEEDS = {
         label: 'Oasis Water and Agriculture',
         resource: 'Oasis and Water Rights',
         rawInputs: ['Fresh water', 'Oasis crops'],
-        processingInstitutions: ['Farmland', 'Pack animal trader'],
+        processingInstitutions: ['Farmland', PACK_ANIMAL_TRADER],
         intermediateGoods: ['Fresh water supply', 'Desert produce'],
         outputs: ['Water trade', 'Dates and fruit', 'Caravan resupply'],
         services: ['food', 'trade'],
@@ -447,14 +501,14 @@ export const SUPPLY_CHAIN_NEEDS = {
       },
       {
         id: 'date_palm_harvest',
-        label: 'Date Palms and Orchards',
-        resource: 'Date Palms and Orchards',
+        label: DATE_PALMS_AND_ORCHARDS,
+        resource: DATE_PALMS_AND_ORCHARDS,
         rawInputs: ['Dates', 'Palm products'],
         // 'Farmland' (village) and the market/caravaneer pair (town) left this
         // hamlet chain dead at its own tier: 'Subsistence farming' (thorp/hamlet)
         // grows the palms, 'Caravanserai' (hamlet/village) moves the dates.
         processingInstitutions: [
-          'Subsistence farming',
+          SUBSISTENCE_FARMING,
           'Farmland',
           'Caravanserai',
           'Market square',
@@ -491,17 +545,17 @@ export const SUPPLY_CHAIN_NEEDS = {
         id: 'textiles',
         label: 'Textiles & Cloth',
         resource: 'Grazing land',
-        rawInputs: ['Raw wool', 'Raw wool and hides'],
+        rawInputs: ['Raw wool', RAW_WOOL_AND_HIDES],
         processingInstitutions: [
           "Tailor's guild",
-          'Weavers/Textile workers',
+          WEAVERS_TEXTILE_WORKERS,
           'Shepherd',
           'Fuller',
           'Dyer',
           "Dyers' workshop",
         ],
-        intermediateGoods: ['Processed textiles', 'Raw wool and hides'],
-        outputs: ['Processed textiles', 'Guild-manufactured goods', 'Dyed cloth', 'Fine textiles'],
+        intermediateGoods: [PROCESSED_TEXTILES, RAW_WOOL_AND_HIDES],
+        outputs: [PROCESSED_TEXTILES, GUILD_MANUFACTURED_GOODS, 'Dyed cloth', 'Fine textiles'],
         services: ['equipment'],
         exportable: true,
         entrepot: false,
@@ -513,13 +567,13 @@ export const SUPPLY_CHAIN_NEEDS = {
         upstreamChains: ['livestock'],
         label: 'Leather & Hides',
         resource: 'Hunting grounds',
-        rawInputs: ['Furs and pelts', 'Raw wool and hides'],
+        rawInputs: ['Furs and pelts', RAW_WOOL_AND_HIDES],
         // Tanner/cobbler guild are town-catalog; 'Tannery' is the village form
         // that opens this village chain at its own tier (leather_goods already
         // lists it).
-        processingInstitutions: ['Tannery', 'Tanner (established)', "Cobbler's guild", "Furrier's district"],
-        intermediateGoods: ['Raw wool and hides'],
-        outputs: ['Leather goods', 'Guild-manufactured goods'],
+        processingInstitutions: ['Tannery', TANNER_ESTABLISHED, "Cobbler's guild", FURRIER_S_DISTRICT],
+        intermediateGoods: [RAW_WOOL_AND_HIDES],
+        outputs: ['Leather goods', GUILD_MANUFACTURED_GOODS],
         services: ['equipment'],
         exportable: true,
         entrepot: false,
@@ -538,7 +592,7 @@ export const SUPPLY_CHAIN_NEEDS = {
         exportable: true,
         entrepot: false,
         minTier: 'village',
-        resourceSubstitutes: ['Fertile Floodplain', 'Date Palms and Orchards'],
+        resourceSubstitutes: [FERTILE_FLOODPLAIN, DATE_PALMS_AND_ORCHARDS],
       },
       {
         id: 'weapons_armor',
@@ -546,9 +600,9 @@ export const SUPPLY_CHAIN_NEEDS = {
         label: 'Weapons & Armor',
         resource: 'Iron ore deposits',
         rawInputs: ['Iron ore', 'Basic metalwork'],
-        processingInstitutions: ['Specialized metalworkers', 'Blacksmiths (3-10)', 'Armourers'],
-        intermediateGoods: ['Quality tools and weapons'],
-        outputs: ['Quality tools and weapons', 'Advanced weapons and armor', 'Master-crafted weapons'],
+        processingInstitutions: [SPECIALIZED_METALWORKERS, BLACKSMITHS_3_10, 'Armourers'],
+        intermediateGoods: [QUALITY_TOOLS_AND_WEAPONS],
+        outputs: [QUALITY_TOOLS_AND_WEAPONS, ADVANCED_WEAPONS_AND_ARMOR, MASTER_CRAFTED_WEAPONS],
         services: ['equipment'],
         exportable: true,
         entrepot: false,
@@ -556,21 +610,21 @@ export const SUPPLY_CHAIN_NEEDS = {
       },
       {
         id: 'luxury_goods',
-        upstreamChains: ['precious_metals_mining'],
+        upstreamChains: [PRECIOUS_METALS_MINING],
         label: 'Luxury Goods',
-        resource: 'Precious metal veins',
+        resource: PRECIOUS_METAL_VEINS,
         rawInputs: ['Precious metals', 'Gemstones', 'Fine textiles'],
         // Was [] — an empty processor list means computeActiveChains can
         // never activate the chain. Luxury manufacture is city-catalog work:
         // 'Specialized metalworkers' (armorers, swordsmiths, jewelers) make
         // the goods, the 'Luxury goods quarter' moves them.
-        processingInstitutions: ['Specialized metalworkers', 'Luxury goods quarter'],
-        intermediateGoods: ['Fine metalwork and jewelry', 'Fine textiles'],
+        processingInstitutions: [SPECIALIZED_METALWORKERS, LUXURY_GOODS_QUARTER],
+        intermediateGoods: [FINE_METALWORK_AND_JEWELRY, 'Fine textiles'],
         outputs: [
-          'Luxury manufactured goods',
-          'Fine metalwork and jewelry',
+          LUXURY_MANUFACTURED_GOODS,
+          FINE_METALWORK_AND_JEWELRY,
           'Extreme luxury goods',
-          'Master-crafted weapons',
+          MASTER_CRAFTED_WEAPONS,
         ],
         services: [],
         exportable: true,
@@ -586,8 +640,8 @@ export const SUPPLY_CHAIN_NEEDS = {
         resource: null,
         rawInputs: [],
         processingInstitutions: ['Glassblower', 'Glassmakers', 'Printing house'],
-        intermediateGoods: ['Glassware', 'Books and manuscripts'],
-        outputs: ['Glassware', 'Books and manuscripts', 'Printing services'],
+        intermediateGoods: ['Glassware', BOOKS_AND_MANUSCRIPTS],
+        outputs: ['Glassware', BOOKS_AND_MANUSCRIPTS, 'Printing services'],
         services: ['information'],
         exportable: true,
         entrepot: false,
@@ -598,7 +652,7 @@ export const SUPPLY_CHAIN_NEEDS = {
         label: 'Bowyer & fletcher',
         resource: 'Managed woodland',
         rawInputs: ['Yew wood', 'Ash wood', 'Feathers', 'Sinew'],
-        processingInstitutions: ['Craft guilds (5-15)', 'Specialist craftsmen', 'Bowyer & fletcher', "Bowyer's shop"],
+        processingInstitutions: [CRAFT_GUILDS_5_15, 'Specialist craftsmen', 'Bowyer & fletcher', "Bowyer's shop"],
         intermediateGoods: ['Bow staves', 'Arrow shafts'],
         outputs: ['Bows and crossbows', 'Arrows (sheaf)', 'Crossbow bolts', 'Hunting equipment'],
         services: ['equipment'],
@@ -610,7 +664,7 @@ export const SUPPLY_CHAIN_NEEDS = {
         upstreamChains: ['textiles'],
         label: 'Cloth Finishing & Clothing',
         resource: 'Grazing land',
-        rawInputs: ['Raw wool', 'Processed textiles', 'Dyes'],
+        rawInputs: ['Raw wool', PROCESSED_TEXTILES, 'Dyes'],
         // "Tailor's guild" is town-catalog and 'Shepherd' (hamlet-only) produces
         // raw wool, not finished cloth. The village finishing trades: 'Tailor',
         // 'Fuller', 'Dyer' ('Tailor' also matches the town guild under the
@@ -628,7 +682,7 @@ export const SUPPLY_CHAIN_NEEDS = {
         label: 'Leatherworking & Cordwaining',
         resource: 'Grazing land',
         rawInputs: ['Raw hides', 'Tanned leather'],
-        processingInstitutions: ['Tanner (established)', "Cobbler's guild", 'Tannery', 'Leatherworkers'],
+        processingInstitutions: [TANNER_ESTABLISHED, "Cobbler's guild", 'Tannery', 'Leatherworkers'],
         intermediateGoods: ['Tanned leather', 'Dressed hides'],
         outputs: ['Boots and shoes', 'Saddles and harness', 'Leather armour', 'Leather goods', 'Belts and straps'],
         services: ['equipment'],
@@ -642,9 +696,9 @@ export const SUPPLY_CHAIN_NEEDS = {
         label: 'Pottery & Brickmaking',
         resource: 'Clay deposits',
         rawInputs: ['Clay', 'Peat fuel', 'Firewood'],
-        processingInstitutions: ['Potter', 'Brickmaker', 'Craft guilds (5-15)'],
+        processingInstitutions: ['Potter', 'Brickmaker', CRAFT_GUILDS_5_15],
         intermediateGoods: ['Fired clay', 'Unfired pottery'],
-        outputs: ['Pottery and ceramics', 'Fired brick', 'Roof tiles', 'Drainage pipes'],
+        outputs: [POTTERY_AND_CERAMICS, 'Fired brick', 'Roof tiles', 'Drainage pipes'],
         services: [],
         exportable: true,
         minTier: 'village',
@@ -652,7 +706,7 @@ export const SUPPLY_CHAIN_NEEDS = {
       {
         id: 'beekeeping_wax',
         label: 'Beekeeping & Wax',
-        resource: 'Wild foraging areas',
+        resource: WILD_FORAGING_AREAS,
         rawInputs: ['Wild honey', 'Beeswax'],
         // 'Apothecary (established)' is town-catalog — this village chain has its
         // own villager: 'Beekeeper'. 'Chandler' (town) takes the candles-and-wax
@@ -678,13 +732,13 @@ export const SUPPLY_CHAIN_NEEDS = {
         id: 'spices_dyes',
         label: 'Spices & Dyes',
         resource: null,
-        rawInputs: ['Rare spices and dyes'],
+        rawInputs: [RARE_SPICES_AND_DYES],
         // Was [] — the chain could never activate. Entrepôt redistribution is
         // merchant work: the guild houses and luxury quarter take the markup
         // on goods produced in distant lands ('Annual fair' also matches the
         // city's 'Major annual fairs' under the fuzzy gate).
-        processingInstitutions: ['Merchant guilds (3-8)', 'Merchant guilds (15-40)', 'Luxury goods quarter', 'Annual fair'],
-        intermediateGoods: ['Rare spices and dyes'],
+        processingInstitutions: [MERCHANT_GUILDS_3_8, MERCHANT_GUILDS_15_40, LUXURY_GOODS_QUARTER, 'Annual fair'],
+        intermediateGoods: [RARE_SPICES_AND_DYES],
         outputs: ['Rare spices and exotic dyes'],
         services: [],
         exportable: true,
@@ -702,9 +756,9 @@ export const SUPPLY_CHAIN_NEEDS = {
         // runs through the luxury-trade institutions: the city's quarter
         // ('Silks, spices, precious goods') and merchant guilds, with the
         // metropolis' international trade center above them.
-        processingInstitutions: ['Luxury goods quarter', 'Merchant guilds (15-40)', 'International trade center'],
+        processingInstitutions: [LUXURY_GOODS_QUARTER, MERCHANT_GUILDS_15_40, 'International trade center'],
         intermediateGoods: ['Fine textiles', 'Luxury textiles'],
-        outputs: ['Fine textiles', 'Luxury manufactured goods'],
+        outputs: ['Fine textiles', LUXURY_MANUFACTURED_GOODS],
         services: [],
         exportable: true,
         entrepot: true,
@@ -714,7 +768,7 @@ export const SUPPLY_CHAIN_NEEDS = {
       },
       {
         id: 'transit_finance',
-        upstreamChains: ['warehouse_logistics'],
+        upstreamChains: [WAREHOUSE_LOGISTICS],
         label: 'Letters of Credit & Finance',
         resource: null,
         rawInputs: [],
@@ -722,8 +776,8 @@ export const SUPPLY_CHAIN_NEEDS = {
         // ladder: 'Money changers' (town) → 'Banking houses' (city) →
         // 'Banking district' (metropolis).
         processingInstitutions: ['Money changers', 'Banking houses', 'Banking district'],
-        intermediateGoods: ['Financial services', 'International banking services'],
-        outputs: ['Financial services', 'International banking services'],
+        intermediateGoods: [FINANCIAL_SERVICES, INTERNATIONAL_BANKING_SERVICES],
+        outputs: [FINANCIAL_SERVICES, INTERNATIONAL_BANKING_SERVICES],
         services: ['legal'],
         exportable: false,
         entrepot: true,
@@ -732,11 +786,11 @@ export const SUPPLY_CHAIN_NEEDS = {
         minTier: 'town',
       },
       {
-        id: 'warehouse_logistics',
+        id: WAREHOUSE_LOGISTICS,
         label: 'Storage & Logistics',
         resource: null,
         rawInputs: ['Transit trade', 'Toll revenue'],
-        processingInstitutions: ["Caravan masters' exchange", "Caravaneer's post", 'Barge and river transport company'],
+        processingInstitutions: [CARAVAN_MASTERS_EXCHANGE, "Caravaneer's post", BARGE_AND_RIVER_TRANSPORT_COMPANY],
         intermediateGoods: [],
         outputs: ['Cargo handling', 'Goods storage'],
         services: ['transport'],
@@ -752,7 +806,7 @@ export const SUPPLY_CHAIN_NEEDS = {
         label: 'Furs & Pelts',
         resource: 'Hunting grounds',
         rawInputs: ['Furs and pelts', 'Game meat'],
-        processingInstitutions: ["Hunter's lodge", "Furrier's district"],
+        processingInstitutions: ["Hunter's lodge", FURRIER_S_DISTRICT],
         intermediateGoods: ['Furs and pelts'],
         outputs: ['Furs and pelts', 'Leather goods'],
         services: [],
@@ -779,7 +833,7 @@ export const SUPPLY_CHAIN_NEEDS = {
       },
       {
         id: 'caravan_trade',
-        upstreamChains: ['warehouse_logistics'],
+        upstreamChains: [WAREHOUSE_LOGISTICS],
         label: 'Caravan & Overland Trade',
         resource: null,
         rawInputs: ['Pack animals', 'Trade goods', 'Provisions'],
@@ -790,9 +844,9 @@ export const SUPPLY_CHAIN_NEEDS = {
         processingInstitutions: [
           'Caravanserai',
           'Waystation',
-          'Pack animal trader',
+          PACK_ANIMAL_TRADER,
           "Caravaneer's post",
-          "Caravan masters' exchange",
+          CARAVAN_MASTERS_EXCHANGE,
           "Carriers' guild",
           "Carriers' hiring hall",
         ],
@@ -820,7 +874,7 @@ export const SUPPLY_CHAIN_NEEDS = {
         label: 'Camel Caravan Trade',
         resource: 'Camel Herds',
         rawInputs: ['Camel transport capacity', 'Desert routes'],
-        processingInstitutions: ['Pack animal trader', "Caravaneer's post", "Caravan masters' exchange"],
+        processingInstitutions: [PACK_ANIMAL_TRADER, "Caravaneer's post", CARAVAN_MASTERS_EXCHANGE],
         intermediateGoods: ['Desert transport', 'Long-distance freight'],
         outputs: ['Caravan trade goods', 'Exotic imports', 'Overland freight revenue'],
         services: ['trade', 'transport'],
@@ -854,7 +908,7 @@ export const SUPPLY_CHAIN_NEEDS = {
         upstreamChains: ['food_processing'],
         label: 'Standing Garrison',
         resource: null,
-        rawInputs: ['Quality tools and weapons', 'Advanced weapons and armor'],
+        rawInputs: [QUALITY_TOOLS_AND_WEAPONS, ADVANCED_WEAPONS_AND_ARMOR],
         // Was ['Garrison', 'Barracks (town)', 'City guard district'] at minTier
         // 'hamlet' — 'Barracks (town)'/'City guard district' match no catalog
         // name at any tier, and nothing standing generates below town (hamlets
@@ -874,7 +928,7 @@ export const SUPPLY_CHAIN_NEEDS = {
         upstreamChains: ['stone'],
         label: 'Fortifications',
         resource: 'Stone quarry',
-        rawInputs: ['Quarried stone', 'Building materials'],
+        rawInputs: ['Quarried stone', BUILDING_MATERIALS],
         // Was ['City wall district', 'Citadel', 'Town fortifications'] — the
         // first and last match no catalog name at any tier, so only a Citadel
         // (city) could ever run this hamlet-gated chain. The defensive-works
@@ -932,8 +986,8 @@ export const SUPPLY_CHAIN_NEEDS = {
       {
         id: 'herbalism',
         label: 'Herbalism & Remedies',
-        resource: 'Wild foraging areas',
-        rawInputs: ['Medicinal herbs', 'Alchemical reagents', 'Wild honey'],
+        resource: WILD_FORAGING_AREAS,
+        rawInputs: ['Medicinal herbs', ALCHEMICAL_REAGENTS, 'Wild honey'],
         // Was the town/city apothecary forms + warden/grove under minTier
         // 'thorp' — the catalog generates no herbalist below village. 'Apothecary'
         // (village; the prefix also matches the town '(established)' and city
@@ -943,10 +997,10 @@ export const SUPPLY_CHAIN_NEEDS = {
           'Apothecary',
           'Midwife',
           "Warden's Lodge",
-          'Elder Grove Council',
+          ELDER_GROVE_COUNCIL,
         ],
-        intermediateGoods: ['Medicinal herbs', 'Alchemical reagents'],
-        outputs: ['Herbal remedies', 'Potions and elixirs'],
+        intermediateGoods: ['Medicinal herbs', ALCHEMICAL_REAGENTS],
+        outputs: ['Herbal remedies', POTIONS_AND_ELIXIRS],
         services: ['healing'],
         exportable: true,
         entrepot: false,
@@ -978,19 +1032,19 @@ export const SUPPLY_CHAIN_NEEDS = {
         id: 'divine_healing',
         label: 'Divine & Magical Healing',
         resource: 'Hot springs',
-        rawInputs: ['Healing waters (bottled)'],
+        rawInputs: [HEALING_WATERS_BOTTLED],
         // Divine healing is clergy work — the religious institutions that exist in the
         // catalog at village+ ('Multiple/Major monasteries' are the city/metropolis forms).
         processingInstitutions: [
           'Parish church',
           'Cathedral',
           'Monastery',
-          'Multiple monasteries',
+          MULTIPLE_MONASTERIES,
           'Major monasteries',
         ],
         intermediateGoods: [],
         // Outputs are goods/services only — institution names live in processingInstitutions.
-        outputs: ['Medical care (basic)', 'Spellcasting (minor)'],
+        outputs: [MEDICAL_CARE_BASIC, SPELLCASTING_MINOR],
         services: ['healing', 'magic'],
         exportable: false,
         entrepot: false,
@@ -1010,9 +1064,9 @@ export const SUPPLY_CHAIN_NEEDS = {
         label: 'Maps & Cartography',
         resource: null,
         rawInputs: [],
-        processingInstitutions: ['Great library', "Cartographer's guild", 'Message Network'],
+        processingInstitutions: ['Great library', CARTOGRAPHER_S_GUILD, 'Message Network'],
         intermediateGoods: [],
-        outputs: ['News and information', 'Maps and charts'],
+        outputs: [NEWS_AND_INFORMATION, 'Maps and charts'],
         services: ['information'],
         exportable: true,
         entrepot: false,
@@ -1024,8 +1078,8 @@ export const SUPPLY_CHAIN_NEEDS = {
         resource: 'Ancient ruins',
         rawInputs: ['Recovered artefacts', 'Rare texts'],
         processingInstitutions: ["Wizard's tower", "Sage's quarter"],
-        intermediateGoods: ['Books and manuscripts'],
-        outputs: ['Books and manuscripts', 'Higher education', 'Research', 'Publishing', 'Printing services'],
+        intermediateGoods: [BOOKS_AND_MANUSCRIPTS],
+        outputs: [BOOKS_AND_MANUSCRIPTS, 'Higher education', 'Research', 'Publishing', 'Printing services'],
         services: ['information'],
         exportable: true,
         entrepot: false,
@@ -1042,7 +1096,7 @@ export const SUPPLY_CHAIN_NEEDS = {
         // this chain's own tier.
         processingInstitutions: ['Post relay station', "Sage's quarter"],
         intermediateGoods: [],
-        outputs: ['Information brokerage', 'Long-distance messages', 'Intelligence services', 'Divination and scrying'],
+        outputs: [INFORMATION_BROKERAGE, 'Long-distance messages', 'Intelligence services', 'Divination and scrying'],
         services: ['information'],
         exportable: false,
         entrepot: false,
@@ -1054,9 +1108,9 @@ export const SUPPLY_CHAIN_NEEDS = {
         label: 'News & Public Information',
         resource: null,
         rawInputs: ['Letters and dispatches', 'Official proclamations'],
-        processingInstitutions: ["Cartographer's guild"],
+        processingInstitutions: [CARTOGRAPHER_S_GUILD],
         intermediateGoods: ['Letters', 'Broadsheets', 'Official notices'],
-        outputs: ['News and information', 'Broadsheets', 'Public proclamations', 'Message relay', 'Printing services'],
+        outputs: [NEWS_AND_INFORMATION, 'Broadsheets', 'Public proclamations', 'Message relay', 'Printing services'],
         services: ['information'],
         exportable: false,
         minTier: 'village',
@@ -1073,13 +1127,13 @@ export const SUPPLY_CHAIN_NEEDS = {
       {
         id: 'alchemy',
         label: 'Alchemy & Reagents',
-        resource: 'Magical ley line node',
+        resource: MAGICAL_LEY_LINE_NODE,
         rawInputs: ['Arcane reagents', 'Medicinal herbs', 'Monster components'],
         // Catalog spelling is "Wizard's tower" — the processor match is a substring
         // over real institution names, so the apostrophe form is required.
         processingInstitutions: ['Alchemist', 'Hedge wizard', "Wizard's tower"],
-        intermediateGoods: ['Alchemical reagents'],
-        outputs: ['Potions and elixirs', 'Alchemical reagents', 'Alchemical products'],
+        intermediateGoods: [ALCHEMICAL_REAGENTS],
+        outputs: [POTIONS_AND_ELIXIRS, ALCHEMICAL_REAGENTS, 'Alchemical products'],
         services: ['magic', 'healing'],
         exportable: true,
         entrepot: false,
@@ -1094,7 +1148,7 @@ export const SUPPLY_CHAIN_NEEDS = {
         intermediateGoods: [],
         // Outputs are goods/services only — institution names live in processingInstitutions.
         outputs: [
-          'Spellcasting (minor)',
+          SPELLCASTING_MINOR,
           'Magical identification',
           'Enchanting services',
           'Spellcasting (greater)',
@@ -1108,7 +1162,7 @@ export const SUPPLY_CHAIN_NEEDS = {
       {
         id: 'magical_goods',
         label: 'Magical Items & Enchanting',
-        resource: 'Magical ley line node',
+        resource: MAGICAL_LEY_LINE_NODE,
         rawInputs: ['Arcane reagents', 'Extraplanar goods'],
         // Was [] — an empty processor list means computeActiveChains can
         // never activate the chain (it returns early with no match). The first
@@ -1179,7 +1233,7 @@ export const SUPPLY_CHAIN_NEEDS = {
           'Parish church',
           'Cathedral',
           'Monastery',
-          'Multiple monasteries',
+          MULTIPLE_MONASTERIES,
           'Major monasteries',
           'Wayside shrine',
           'Almshouse',
@@ -1187,12 +1241,12 @@ export const SUPPLY_CHAIN_NEEDS = {
         ],
         intermediateGoods: [],
         outputs: [
-          'Religious services',
+          RELIGIOUS_SERVICES,
           'Education (basic)',
           'Poor relief',
           'Record keeping',
           'Sanctuary',
-          'Medical care (basic)',
+          MEDICAL_CARE_BASIC,
           'Illuminated manuscripts',
         ],
         services: ['healing'],
@@ -1228,18 +1282,18 @@ export const SUPPLY_CHAIN_NEEDS = {
         id: 'pilgrimage',
         label: 'Pilgrimage & Holy Sites',
         resource: 'Hot springs',
-        rawInputs: ['Healing waters (bottled)', 'Pilgrim donations'],
+        rawInputs: [HEALING_WATERS_BOTTLED, 'Pilgrim donations'],
         // Pilgrims travel to the holy houses; the almshouse is the hostel co-processor.
         processingInstitutions: [
           'Parish church',
           'Cathedral',
           'Monastery',
-          'Multiple monasteries',
+          MULTIPLE_MONASTERIES,
           'Major monasteries',
           'Almshouse',
         ],
         intermediateGoods: [],
-        outputs: ['Religious services', 'Hospitality for travellers', 'Poor relief'],
+        outputs: [RELIGIOUS_SERVICES, 'Hospitality for travellers', 'Poor relief'],
         services: ['healing', 'lodging'],
         exportable: false,
         entrepot: false,
@@ -1357,7 +1411,7 @@ export const SUPPLY_CHAIN_NEEDS = {
           'Fence (word of mouth)',
           'Front businesses',
           'Black market',
-          "Thieves' guild (powerful)",
+          THIEVES_GUILD_POWERFUL,
         ],
         intermediateGoods: [],
         outputs: ['Contraband goods', 'Forged documents', 'Fencing stolen goods', 'Illegal services'],
@@ -1374,10 +1428,10 @@ export const SUPPLY_CHAIN_NEEDS = {
         // The powerful guild first generates at city, one tier above this town
         // chain. 'Street gang' (town) is organised crime's entry rung; the
         // guild's 12-char prefix also matches the city's "Thieves' guild chapter".
-        processingInstitutions: ['Street gang', "Thieves' guild (powerful)"],
+        processingInstitutions: ['Street gang', THIEVES_GUILD_POWERFUL],
         intermediateGoods: [],
         outputs: [
-          'Information brokerage',
+          INFORMATION_BROKERAGE,
           'Guild protection',
           'Contract killing',
           'Intimidation services',

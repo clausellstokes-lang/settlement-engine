@@ -10,44 +10,75 @@
 // supplyChainData.js — byte-identical values.
 // @enforced-by tests/build/vendorPdfLazy.test.js (first-paint byte budget).
 
+// Shared phrases hoisted once (train EM-T14's worker buy-back, judgment 191): each is spelled here and referenced below; the exported tables are byte-identical.
+const ARCANE_MAGICAL_ALCHEMY = 'arcane_magical.alchemy';
+const ARCANE_MAGICAL_MAGICAL_GOODS = 'arcane_magical.magical_goods';
+const ARCANE_MAGICAL_SPELLCASTING = 'arcane_magical.spellcasting';
+const FOOD_SECURITY_ANIMAL_HUSBANDRY = 'food_security.animal_husbandry';
+const FOOD_SECURITY_BREWING = 'food_security.brewing';
+const FOOD_SECURITY_FISHING = 'food_security.fishing';
+const FOOD_SECURITY_FORAGE = 'food_security.forage';
+const FOOD_SECURITY_GRAIN = 'food_security.grain';
+const FOOD_SECURITY_LIVESTOCK = 'food_security.livestock';
+const FOOD_SECURITY_SALT = 'food_security.salt';
+const HEALING_MEDICINE_HERBALISM = 'healing_medicine.herbalism';
+const MANUFACTURING_BEEKEEPING_WAX = 'manufacturing.beekeeping_wax';
+const MANUFACTURING_CERAMICS_BRICK = 'manufacturing.ceramics_brick';
+const MANUFACTURING_FOOD_PROCESSING = 'manufacturing.food_processing';
+const MANUFACTURING_LEATHER = 'manufacturing.leather';
+const MANUFACTURING_LEATHER_GOODS = 'manufacturing.leather_goods';
+const MANUFACTURING_LUXURY_GOODS = 'manufacturing.luxury_goods';
+const MANUFACTURING_TEXTILES = 'manufacturing.textiles';
+const MANUFACTURING_TEXTILE_FINISHING = 'manufacturing.textile_finishing';
+const RAW_EXTRACTION_FUEL = 'raw_extraction.fuel';
+const RAW_EXTRACTION_PETTY_MINING = 'raw_extraction.petty_mining';
+const RAW_EXTRACTION_PRECIOUS_METALS_MINING = 'raw_extraction.precious_metals_mining';
+const RAW_EXTRACTION_SHIPBUILDING = 'raw_extraction.shipbuilding';
+const RAW_EXTRACTION_SMELTING = 'raw_extraction.smelting';
+const RAW_EXTRACTION_TIMBER = 'raw_extraction.timber';
+const TRADE_ENTREPOT_CARAVAN_TRADE = 'trade_entrepot.caravan_trade';
+const TRADE_ENTREPOT_SPICES_DYES = 'trade_entrepot.spices_dyes';
+const TRADE_ENTREPOT_TRANSIT_FINANCE = 'trade_entrepot.transit_finance';
+const TRADE_ENTREPOT_WAREHOUSE_LOGISTICS = 'trade_entrepot.warehouse_logistics';
+
 // ── RESOURCE → CHAIN LOOKUP ───────────────────────────────────────────────────
 // Quick lookup: given a nearby resource key, which chains does it enable?
 
 export const RESOURCE_TO_CHAINS = {
-  grain_fields: ['food_security.grain', 'food_security.brewing', 'manufacturing.food_processing'],
+  grain_fields: [FOOD_SECURITY_GRAIN, FOOD_SECURITY_BREWING, MANUFACTURING_FOOD_PROCESSING],
   fertile_floodplain: [
-    'food_security.grain',
-    'food_security.livestock',
-    'food_security.brewing',
-    'food_security.animal_husbandry',
-    'manufacturing.food_processing',
+    FOOD_SECURITY_GRAIN,
+    FOOD_SECURITY_LIVESTOCK,
+    FOOD_SECURITY_BREWING,
+    FOOD_SECURITY_ANIMAL_HUSBANDRY,
+    MANUFACTURING_FOOD_PROCESSING,
     'raw_extraction.floodplain_agriculture',
   ],
   grazing_land: [
-    'food_security.livestock',
-    'food_security.brewing',
-    'food_security.animal_husbandry',
-    'manufacturing.textiles',
-    'manufacturing.leather',
-    'manufacturing.textile_finishing',
-    'manufacturing.leather_goods',
+    FOOD_SECURITY_LIVESTOCK,
+    FOOD_SECURITY_BREWING,
+    FOOD_SECURITY_ANIMAL_HUSBANDRY,
+    MANUFACTURING_TEXTILES,
+    MANUFACTURING_LEATHER,
+    MANUFACTURING_TEXTILE_FINISHING,
+    MANUFACTURING_LEATHER_GOODS,
   ],
   hunting_grounds: [
-    'food_security.forage',
+    FOOD_SECURITY_FORAGE,
     'food_security.hunting',
     'trade_entrepot.furs_north',
-    'manufacturing.leather',
-    'manufacturing.leather_goods',
+    MANUFACTURING_LEATHER,
+    MANUFACTURING_LEATHER_GOODS,
   ],
   managed_forest: [
-    'raw_extraction.timber',
-    'raw_extraction.fuel',
-    'raw_extraction.shipbuilding',
+    RAW_EXTRACTION_TIMBER,
+    RAW_EXTRACTION_FUEL,
+    RAW_EXTRACTION_SHIPBUILDING,
     'manufacturing.bowyer_fletcher',
   ],
   shipbuilding_timber: [
-    'raw_extraction.timber',
-    'raw_extraction.shipbuilding',
+    RAW_EXTRACTION_TIMBER,
+    RAW_EXTRACTION_SHIPBUILDING,
     'raw_extraction.coastal_shipbuilding',
   ],
   // data-tables-5: fishing_grounds/river_fish each mapped to BOTH the thin 'fish'
@@ -55,109 +86,109 @@ export const RESOURCE_TO_CHAINS = {
   // two near-identical fishing industries. Map each resource to its ONE richer
   // chain; the retired 'fish' chain id survives on pre-fix persisted saves and is
   // resolved by RETIRED_CHAIN_ALIASES (below) — the reconcile drops the orphan.
-  fishing_grounds: ['food_security.fishing'],
+  fishing_grounds: [FOOD_SECURITY_FISHING],
   river_fish: [
     'food_security.river_fishing',
-    'food_security.fishing',
+    FOOD_SECURITY_FISHING,
   ],
   river_mills: [
     'raw_extraction.river_milling',
-    'manufacturing.food_processing',
-    'manufacturing.textiles',
-    'manufacturing.textile_finishing',
-    'manufacturing.ceramics_brick',
+    MANUFACTURING_FOOD_PROCESSING,
+    MANUFACTURING_TEXTILES,
+    MANUFACTURING_TEXTILE_FINISHING,
+    MANUFACTURING_CERAMICS_BRICK,
   ],
   deep_harbour: [
     'raw_extraction.harbour_trade',
-    'trade_entrepot.warehouse_logistics',
-    'trade_entrepot.transit_finance',
+    TRADE_ENTREPOT_WAREHOUSE_LOGISTICS,
+    TRADE_ENTREPOT_TRANSIT_FINANCE,
   ],
-  stone_quarry: ['raw_extraction.stone', 'raw_extraction.petty_mining', 'defense_security.fortification'],
+  stone_quarry: ['raw_extraction.stone', RAW_EXTRACTION_PETTY_MINING, 'defense_security.fortification'],
   iron_deposits: [
     'raw_extraction.iron',
-    'raw_extraction.smelting',
-    'raw_extraction.petty_mining',
+    RAW_EXTRACTION_SMELTING,
+    RAW_EXTRACTION_PETTY_MINING,
     'manufacturing.weapons_armor',
   ],
-  coal_deposits: ['raw_extraction.fuel', 'raw_extraction.smelting', 'raw_extraction.petty_mining'],
-  salt_flats: ['food_security.salt'],
+  coal_deposits: [RAW_EXTRACTION_FUEL, RAW_EXTRACTION_SMELTING, RAW_EXTRACTION_PETTY_MINING],
+  salt_flats: [FOOD_SECURITY_SALT],
   precious_metals: [
-    'manufacturing.luxury_goods',
-    'raw_extraction.precious_metals_mining',
-    'trade_entrepot.transit_finance',
+    MANUFACTURING_LUXURY_GOODS,
+    RAW_EXTRACTION_PRECIOUS_METALS_MINING,
+    TRADE_ENTREPOT_TRANSIT_FINANCE,
   ],
-  gemstone_deposits: ['manufacturing.luxury_goods', 'raw_extraction.precious_metals_mining'],
-  river_clay: ['manufacturing.ceramics_brick', 'raw_extraction.clay'],
+  gemstone_deposits: [MANUFACTURING_LUXURY_GOODS, RAW_EXTRACTION_PRECIOUS_METALS_MINING],
+  river_clay: [MANUFACTURING_CERAMICS_BRICK, 'raw_extraction.clay'],
   foraging_areas: [
-    'food_security.forage',
-    'manufacturing.beekeeping_wax',
-    'healing_medicine.herbalism',
-    'arcane_magical.alchemy',
+    FOOD_SECURITY_FORAGE,
+    MANUFACTURING_BEEKEEPING_WAX,
+    HEALING_MEDICINE_HERBALISM,
+    ARCANE_MAGICAL_ALCHEMY,
   ],
   ancient_grove: [
     'religion_civic.parish',
-    'healing_medicine.herbalism',
-    'food_security.forage',
-    'manufacturing.beekeeping_wax',
+    HEALING_MEDICINE_HERBALISM,
+    FOOD_SECURITY_FORAGE,
+    MANUFACTURING_BEEKEEPING_WAX,
   ],
-  marshlands: ['food_security.forage', 'raw_extraction.reed_marsh', 'raw_extraction.fuel'],
+  marshlands: [FOOD_SECURITY_FORAGE, 'raw_extraction.reed_marsh', RAW_EXTRACTION_FUEL],
   crossroads_position: [
     'trade_entrepot.crossroads_trade',
-    'trade_entrepot.warehouse_logistics',
-    'trade_entrepot.transit_finance',
-    'trade_entrepot.spices_dyes',
-    'trade_entrepot.caravan_trade',
+    TRADE_ENTREPOT_WAREHOUSE_LOGISTICS,
+    TRADE_ENTREPOT_TRANSIT_FINANCE,
+    TRADE_ENTREPOT_SPICES_DYES,
+    TRADE_ENTREPOT_CARAVAN_TRADE,
   ],
   defended_pass: [
     'trade_entrepot.mountain_pass_trade',
-    'trade_entrepot.warehouse_logistics',
-    'trade_entrepot.caravan_trade',
+    TRADE_ENTREPOT_WAREHOUSE_LOGISTICS,
+    TRADE_ENTREPOT_CARAVAN_TRADE,
     'defense_security.garrison',
   ],
   ancient_ruins: [
     'knowledge_information.scholarship',
     'knowledge_information.intelligence',
-    'arcane_magical.spellcasting',
+    ARCANE_MAGICAL_SPELLCASTING,
   ],
   hot_springs: ['healing_medicine.divine_healing', 'religion_civic.pilgrimage'],
-  magical_node: ['arcane_magical.alchemy', 'arcane_magical.spellcasting', 'arcane_magical.magical_goods'],
+  magical_node: [ARCANE_MAGICAL_ALCHEMY, ARCANE_MAGICAL_SPELLCASTING, ARCANE_MAGICAL_MAGICAL_GOODS],
 
   // ── Desert resources ──────────────────────────────────────────────
   // Every id below must be a real `${needKey}.${chainId}` in SUPPLY_CHAIN_NEEDS
   // (there is no 'agricultural' or 'services' need group) — tests/joins/chains.test.js
   // pins this. Each terrain resource lists its dedicated terrain chain first.
-  oasis_water: ['raw_extraction.oasis_agriculture', 'trade_entrepot.caravan_trade'],
+  oasis_water: ['raw_extraction.oasis_agriculture', TRADE_ENTREPOT_CARAVAN_TRADE],
   date_palms: [
     'raw_extraction.date_palm_harvest',
-    'manufacturing.food_processing',
-    'food_security.brewing',
+    MANUFACTURING_FOOD_PROCESSING,
+    FOOD_SECURITY_BREWING,
   ],
   glass_sand: ['raw_extraction.desert_glasswork', 'manufacturing.glass_print'],
   desert_salt: [
-    'food_security.salt',
-    'manufacturing.food_processing',
-    'trade_entrepot.spices_dyes',
+    FOOD_SECURITY_SALT,
+    MANUFACTURING_FOOD_PROCESSING,
+    TRADE_ENTREPOT_SPICES_DYES,
   ],
   camel_herds: [
     'trade_entrepot.camel_caravan',
-    'trade_entrepot.caravan_trade',
-    'food_security.livestock',
-    'food_security.animal_husbandry',
+    TRADE_ENTREPOT_CARAVAN_TRADE,
+    FOOD_SECURITY_LIVESTOCK,
+    FOOD_SECURITY_ANIMAL_HUSBANDRY,
   ],
 
   // ── Mountain resources ─────────────────────────────────────────────
   alpine_pasture: [
     'raw_extraction.alpine_wool',
-    'food_security.livestock',
-    'food_security.animal_husbandry',
-    'manufacturing.textiles',
+    FOOD_SECURITY_LIVESTOCK,
+    FOOD_SECURITY_ANIMAL_HUSBANDRY,
+    MANUFACTURING_TEXTILES,
   ],
   mountain_timber: [
     'raw_extraction.mountain_timber_harvest',
-    'raw_extraction.timber',
-    'raw_extraction.fuel',
+    RAW_EXTRACTION_TIMBER,
+    RAW_EXTRACTION_FUEL,
   ],
-  hot_springs_mineral: ['arcane_magical.alchemy', 'healing_medicine.hospital'],
+  hot_springs_mineral: [ARCANE_MAGICAL_ALCHEMY, 'healing_medicine.hospital'],
 };
 
 // ── RETIRED CHAIN ALIASES ─────────────────────────────────────────────────────
@@ -174,7 +205,7 @@ export const RESOURCE_TO_CHAINS = {
 // Keys/values are full `${needKey}.${chainId}` ids (the reconcile's cidOf form).
 /** @type {Readonly<Record<string, string>>} */
 export const RETIRED_CHAIN_ALIASES = Object.freeze({
-  'food_security.fish': 'food_security.fishing',
+  'food_security.fish': FOOD_SECURITY_FISHING,
 });
 
 // == THE REAGENT CHAIN SPINE (W-K slice K4; binding law docs/DESIGN_MAGIC_ECONOMY.md
@@ -239,17 +270,17 @@ export const RETIRED_CHAIN_ALIASES = Object.freeze({
  * @type {Readonly<Record<string, Readonly<{ consumes: ReadonlyArray<string>, produces: ReadonlyArray<string>, demandWeight: number }>>>}
  */
 export const REAGENT_CHAIN_SPINE = Object.freeze({
-  'arcane_magical.alchemy': Object.freeze({
+  [ARCANE_MAGICAL_ALCHEMY]: Object.freeze({
     consumes: Object.freeze(['Arcane reagents', 'Medicinal herbs']),
     produces: Object.freeze(['Alchemical reagents']),
     demandWeight: 1,
   }),
-  'arcane_magical.spellcasting': Object.freeze({
+  [ARCANE_MAGICAL_SPELLCASTING]: Object.freeze({
     consumes: Object.freeze(['Arcane reagents']),
     produces: Object.freeze([]),
     demandWeight: 2,
   }),
-  'arcane_magical.magical_goods': Object.freeze({
+  [ARCANE_MAGICAL_MAGICAL_GOODS]: Object.freeze({
     consumes: Object.freeze(['Arcane reagents', 'Extraplanar goods']),
     produces: Object.freeze(['Extraplanar goods']),
     demandWeight: 3,
