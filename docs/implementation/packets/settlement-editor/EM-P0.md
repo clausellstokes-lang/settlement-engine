@@ -97,7 +97,7 @@ The pin a chooser consults is keyed by the RECORD PATH it writes (`npcs[].role`,
 1. **ODQ §934.47** — Wave 0; this is its first car.
 2. **`docs/DESIGN_EDIT_MODE_AND_DECREES.md` §14 final** — one engine, re-derive with pins; fresh
    generation with no pins is the golden and cannot move.
-3. **THE PROMISE** — a seed is a starting world forever. ⚠ `prng.js:84`'s own header records that
+3. **THE PROMISE** — a seed is a starting world forever. ⚠ `prng.js :: fork`'s own header records that
    changing the fork derivation *"re-rolls every seeded stream in the product and is owner-gated
    under THE PROMISE"*. **This packet does not touch it**, which is exactly why the seam moved
    inside the step.

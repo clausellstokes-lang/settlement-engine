@@ -887,7 +887,7 @@ five rows, or `npcRenameChanges`'s signature has changed; the eager first-paint 
 **The SET-EQUAL proof (interim rule 6)** — `setEqual.mjs` over this file and the capsule; the
 executed line is in `EM-B1c1.compile.report.md` §A.
 
-**What EM-C4a version 2 may rely on.** ⭐⭐ **THE KEY IT DISPATCHES ON IS `set-npc-name`, NOT
+**What EM-C4a version 2 may rely on.** ⭐⭐ **THE KEY IT DISPATCHES ON IS `set-npc-name`, NOT **MEASURED AT THE LANDING (the pass-1B verifier's FIX-2; judgment 154, train EM-T13's hygiene commit):** EM-C4a as landed (version 4.3) dispatches on NEITHER key — its branch is `declaration.kind === 'free-cascade'`, its writer `CASCADE_WRITERS['npc:name']`, and the op it carries for a rename is `set-field` with `{ field: 'name', value }` — so `set-npc-name` stays dark after BOTH halves of the first door, and R8's residual question (*which vocabulary does the adapter's branch dispatch?*) is CLOSED with this answer. The one act now has two typed payload shapes (this packet's `{ newName }` against the door's `{ field: 'name', value }`); its slot is the packet that first constructs a `set-npc-name` op, which reconciles by choosing one shape at its own seam and never by editing the other vocabulary (§6.1's law one layer up).
 `rename-npc`** (version 4, judgment 126): the op layer and the shipped `EDIT_KINDS` queue are
 DISJOINT by name over every row minted after EM-B1a's fourteen, and B6 keeps them so. Version 3's
 R8 slotted *"which vocabulary does the adapter's branch dispatch?"* to EM-C4a's inbox under the

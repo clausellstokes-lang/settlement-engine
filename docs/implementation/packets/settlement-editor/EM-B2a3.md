@@ -674,11 +674,11 @@ contract's planned text — interim rule 17 did not exist when version 2 was com
   holding); `EAGER_FIRST_PAINT_MODULES` is **269 → 269, the sorted list SHA-identical
   (`75664dce4b2641f2`)**, and neither change path is eager ⇒ **first paint +0 B, no
   owner-signed ceiling is approached.** ⛔ **THE WORKER CEILING IS THE ONE RISK AND IT IS EXACT AT
-  ZERO SLACK** (`WORKER_BUNDLE_CEILING_BYTES = 1401208`, monotone-down, no placement cure): the pin
+  ZERO SLACK** (`WORKER_BUNDLE_CEILING_BYTES = 1401208` at placement — 1396015 since train EM-T12's terminal BUY-BACK, judgment 160; monotone-down, no placement cure): the pin
   consults' minified price is **NOT computable from source**, so — exactly as EM-B2a2 version 2
   carries it — the terminal's ONE real build decides, and if it reads any rise the cure is a
   SOURCE-SIDE shave inside this member's own two consults (fewer emitted identifiers; no
-  relocation), never a lane's re-mint of the ceiling, which is a STOP for the chair. The membership probe is the import-the-set shape; the train's
+  relocation), never a lane's re-mint of the ceiling, which is a STOP for the chair. [At the T12 terminal the rise measured +565 B — this addition's whole minified size — so the shave was infeasible; the chair bought the bytes back elsewhere in the closure (seedrandom's ARC4 core alone, judgment 160) and the ceiling followed the measurement down.] The membership probe is the import-the-set shape; the train's
   terminal takes ONE summed price from ONE real build. ⛔ The worker ceiling is EXACT at zero slack
   and has no placement cure, which is why the price is the chair's and not this packet's.
 
