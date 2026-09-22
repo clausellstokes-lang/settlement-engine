@@ -14,7 +14,37 @@
   2026-09-20: **EM-B2a1** (the leaf) → **EM-B2a2** (the pin primitive) ∥ **EM-B2a3** (the two
   remaining chooser steps) → **EM-B2a4** (this) → **EM-B2b**. The four-member partition, with
   every parent item assigned to exactly one member, is `EM-B2a.partition.md`.
-- **Packet version:** 2
+- **Packet version:** 3
+  > **What version 3 changed and why (judgment 173, the chair, 2026-09-22, on this lane's STOP
+  > before its seal).** Version 2's whole pin path was INERT and its A7(b) unprovable, because the
+  > function §6 binds as `engine.run` does not carry the bag. TWO MEASUREMENTS, both executed at
+  > the placement tip by the build lane in plain `node`, are what this version answers.
+  > (1) **THE ENTRY DROPS THE BAG.** `generateSettlementPipeline.js :: generateSettlementPipeline`
+  > holds the ONE production call of `runPipeline` in the estate and forwards `{ onStep: options.onStep }`
+  > ALONE. With an OVERRIDDEN record-built bag on a real consulting chooser (`npcs`, EM-B2a2's
+  > landed `chooseOrPin`), `sha(no pins) === sha(the overridden bag)` reads **true** through
+  > `engine.run` and the override never lands; the SAME bag handed straight to `runPipeline` takes
+  > it (`ctx.npcs[0].name` moves, the assembled settlement's sha moves). ⇒ §7 gains a MODIFY row on
+  > the entry that forwards `pins` beside `onStep`, and A7(b)'s anti-vacuity arm becomes REAL.
+  > (2) **`pipe.getStepMeta` IS `undefined`.** The entry's namespace exports exactly
+  > `carryLockedRosterThroughGenerate, generateSettlementPipeline, refreshRosterProse,
+  > regenHistoryPipeline, regenNPCsPipeline` and re-exports nothing (`export {` / `export *` both
+  > exit 1), so version 2's one-module import could not give `pinsFrom` the roster its own contract
+  > demands. ⇒ the CREATE row names `src/generators/pipeline.js :: getStepMeta` as a SECOND dynamic
+  > import.
+  > ⭐ **AND §2 IN-SCOPE ITEM 3(b) MOVED OUT** — judgment 155b's own split line, taken because the
+  > entry is a third logic-bearing modified file. The `regenSection` delegation and its
+  > `src/store/settlementSlice.js` MODIFY are **EM-B2a5's**, which the chair charters as a slot;
+  > nothing is dropped and nothing is deferred. §3 therefore still reads **3 of 3** logic-bearing
+  > (`dmLayer.js` · `editSlice.js` · the entry) and **2 of 3** registration-only.
+  > ⚠ **A THIRD MEASUREMENT, found only once the bag reached the runner, and it binds `pinsFrom`:**
+  > the bag is keyed by RECORD PATH and two steps may share a key, so pinning a key on one step's
+  > behalf makes a step that shares it PARTIAL — executed, the runner threw
+  > `Pipeline pins: step "resolveStress" has choosers [stress, stressTypes] but pins supply only [stress]`.
+  > §6 now spells the exact rule: a key is pinnable only if EVERY step that provides it can be
+  > wholly pinned from this record. With it, A7(b) holds 5 of 5 sampled corpus rows.
+  > ⛔ **THE ENTRY IS A WORKER CLOSURE MEMBER AND THE ONE LINE IS PRICED**, not assumed free — see
+  > §7's byte note. Everything version 2 measured that this version does not touch stands.
   > **What version 2 changed and why.** Version 1 was compiled 2026-09-20/21 against three
   > siblings AS PACKETS. All three have since LANDED as real code on train EM-T12
   > (`16f0bc71c`), and judgment 134's law makes a sibling's LANDED fence the only one a
@@ -121,7 +151,12 @@
   `src/store/` path but the slice itself, so this member's new leaf mints none and the 800-line
   layer ceiling governs it. Every register figure this packet predicts is a DELTA; the live
   absolutes are the chair's to stamp.
-- **Preamble:** `docs/implementation/preambles/EM-PREAMBLE.md` (SHA-256: TO BE STAMPED BY THE CHAIR)
+- **Preamble:** `docs/implementation/preambles/EM-PREAMBLE.md` (SHA-256:
+  `125c693214235a81bf4f2b38506b621859a35e0325ff2ea58d335b4e0681a99d`)
+  > ⭐ **THE SIXTH AMENDMENT IS LANDED AND THIS HASH IS MEASURED AT THE PLACEMENT TIP**, not quoted
+  > from a brief (§P10.3): `shasum -a 256 docs/implementation/preambles/EM-PREAMBLE.md` in the lane
+  > worktree at `4a1a6bf79`. The placement tool did not write this row (judgment 172); version 3
+  > carries it.
   > **The law measured at this base is the FIFTH amendment**, SHA-256
   > `fdecd426828665cad2dfaf872871f29f46fa4816e1bd4c43c20ccd84dacc9e7c`, measured at the read tip
   > with `shasum -a 256` (§P10.3's law: the hash is MEASURED, never quoted from a brief).
@@ -357,10 +392,13 @@ master and the dossier prose manifest do not move.
 
 **Definition of done:** `src/domain/edit/dmLayer.js` exports `pinsFrom` and `rederive` at the exact
 contracts of §6 and spells `generateSettlementPipeline` NOWHERE in code (§0.1a);
-`src/store/settlementRederiveAction.js` exports `regenerateWithLayer`, is the ONLY file of this
-member that names the engine, and carries its `DERIVED` row in `PIPELINE_REACHERS`; `editSlice.js`
-consults the seam on BOTH branches and its landed A8 arms are re-pinned to the plugged seam;
-`regenSection` reaches the leaf through the store's lazy seam at NET ZERO effective lines; the
+`src/store/settlementRederiveAction.js` exports `regenerateWithLayer`, is the ONLY file this member
+ADDS that spells the engine's bare symbol, and carries the one new `DERIVED` row in
+`PIPELINE_REACHERS` (⛔ the entry already spelled that symbol at the base, so this member's edit to
+it moves the walker's reacher set by NOTHING); `editSlice.js` consults the seam on BOTH branches and
+its landed A8 arms are re-pinned to the plugged seam; ⭐ the entry FORWARDS the pin bag, so an
+overridden bag through `engine.run` moves the record and A7(b) bites; ⛔ `regenSection` is NOT wired
+here — the leaf lands DORMANT and EM-B2a5 takes the delegation (judgment 173(b)); the
 eight acceptance cases of §9 pass; both goldens are byte-identical; `EAGER_FIRST_PAINT_MODULES`
 gains no member, `BASELINE_EDGES` gains no entry, and `EDIT_SLICE_IMPORTS` gains no specifier.
 
@@ -368,10 +406,14 @@ gains no member, `BASELINE_EDGES` gains no entry, and `EDIT_SLICE_IMPORTS` gains
 
 1. the orchestration added to EM-B2a1's leaf (`pinsFrom`, `rederive`);
 2. one new lazy leaf at the store's application-command seam (`regenerateWithLayer`);
-3. **TWO required integrations, one ruled and one inherited** — (a) ⭐ **EM-C4a's
+3. **TWO required integrations, one ruled and one measured** — (a) ⭐ **EM-C4a's
    `REDERIVE_SEAM` PLUGGED, and the cascade branch's consult ADDED** in the same §7 MODIFY row
-   of `src/store/editSlice.js` (judgment 145: one consult site today, two ruled); (b) the
-   delegation inside `regenSection`, net zero effective lines;
+   of `src/store/editSlice.js` (judgment 145: one consult site today, two ruled); (b) ⭐ **the
+   ENTRY FORWARDS THE PIN BAG** — one option beside `onStep` in
+   `generateSettlementPipeline.js :: generateSettlementPipeline`, without which every pin this
+   member builds is dropped before the runner (judgment 173(a));
+   ⛔ **the `regenSection` delegation IS NOT IN THIS PACKET** — version 2's item 3(b) is
+   **EM-B2a5's** under judgment 155b's split line, chartered as a slot by the chair;
 4. ⭐ **one registration the landed CREATE-boundary walker compels** — the `DERIVED` row for the
    new leaf in `PIPELINE_REACHERS` (§0.1a);
 5. one prevention guard — `tests/property/dmLayerGoldenIsolation.test.js`, ARCH §8 instrument 7,
@@ -404,14 +446,14 @@ gains no member, `BASELINE_EDGES` gains no entry, and `EDIT_SLICE_IMPORTS` gains
 | Named state writers | 1 (`rederive`, and it writes a RECORD it returns to its caller) | ≤1 |
 | Feature flags | 0 | ≤1 |
 | User-facing surfaces | 0 (headless — no component, no route, no test id, no accessible name) | ≤1 |
-| Direct consumers | 1 (`regenSection`, through the lazy leaf) | ≤2 |
+| Direct consumers | **0** (the leaf lands DORMANT; `regenSection` reaches it in **EM-B2a5**, judgment 173(b)) | ≤2 |
 | New logic-bearing production leaves | **1** (`src/store/settlementRederiveAction.js`) | ≤2 |
-| Existing logic-bearing production files modified | **3** (`src/domain/edit/dmLayer.js`, `src/store/settlementSlice.js`, ⭐ `src/store/editSlice.js` — judgment 145) | ≤3 |
+| Existing logic-bearing production files modified | **3** (`src/domain/edit/dmLayer.js`, ⭐ `src/store/editSlice.js` — judgment 145, ⭐ `src/generators/generateSettlementPipeline.js` — judgment 173(a)) | ≤3 |
 | Additional registration-only files | **2** (`scripts/mutation-coverage-manifest.json`; ⭐ `src/domain/density/densityCreateBoundary.js` — ONE frozen `PIPELINE_REACHERS` row and its `why`, data only, §0.1a) | ≤3 |
-| Handwritten files total | **7** (the four above + the two CREATEs + `tests/store/editSlice.test.js`) | ≤12 |
+| Handwritten files total | **7** (the 3 logic-bearing + the 2 registration-only above + the 2 CREATEs; the two `TEST` rows re-pin landed arms and add no file) | ≤12 |
 | New/changed effective production lines | ≤250 | ≤400 |
 | Effective lines per new leaf | ≤120 | ≤250 |
-| Delta in a shared/baselined file | **0** (`settlementSlice.js`, measured zero headroom AND eager) | ≤15 |
+| Delta in a shared/baselined file | **0** — ⛔ `settlementSlice.js` is NO LONGER A §7 PATH (its row is EM-B2a5's); no §7 path carries a `scripts/.size-baseline.json` row (measured) | ≤15 |
 | Acceptance cases | **8** | ≤8 |
 
 Overrides approved before dispatch: **NONE — and none is needed.** ⛔ No budget is raised or
@@ -455,11 +497,13 @@ instruction.
 
 | Role | File | Symbol | Verified fact | Required use |
 |---|---|---|---|---|
-| The regeneration path | `src/store/settlementSlice.js` | `regenSection: async (section) => {` (`:456`) | the ONE store action that re-runs generation on an existing settlement; returns early on `get().phase === 'canon'`; exactly two branches, `'npcs'` → `eng.regenNPCsPipeline` + `foldRegeneratedRoster`, `'history'` → `eng.regenHistoryPipeline` | The delegation seat. No second regeneration path |
+| The regeneration path | `src/store/settlementSlice.js` | `regenSection: async (section) => {` (`:456`) | the ONE store action that re-runs generation on an existing settlement; returns early on `get().phase === 'canon'`; exactly two branches, `'npcs'` → `eng.regenNPCsPipeline` + `foldRegeneratedRoster`, `'history'` → `eng.regenHistoryPipeline` | ⛔ **EM-B2a5's SEAT, NOT THIS MEMBER'S** (judgment 173(b)). Named here so the successor is not re-derived, and PRESERVED untouched: this packet's leaf lands DORMANT. No second regeneration path |
 | ⭐⭐ The lazy engine seam | `src/store/settlementSlice.js` | `_enginePromise = import('../generators/generateSettlementPipeline.js').then((pipe) => {` (`:45`) | `loadEngine()` memoizes a DYNAMIC import, which is exactly why the pipeline is NOT in `EAGER_FIRST_PAINT_MODULES` | This member reaches the engine by the same idiom, through its own lazy leaf. ⛔ NEVER a static edge |
 | Save writer | `src/store/settlementSlice.js` | `updateSavedSettlement: (id, partial) => {` (`:637`) | refuses any key outside the closed patch list, returning a typed `makeActionResult` envelope | PRESERVE, untouched. This member writes no save row |
 | Patch key set | `src/store/settlementSliceHelpers.js` | `export const SAVED_SETTLEMENT_PATCH_KEYS` (`:318`) | a frozen 17-key list whose first member is `'settlement'` | `dmLayer` rides INSIDE the settlement blob; this list is NOT widened |
-| Pipeline (the real entry) | `src/generators/generateSettlementPipeline.js` | `export function generateSettlementPipeline` (`:77`) | the function the golden hashes | Called through an INJECTED handle from the store's lazy seam, never named from `src/domain/**` |
+| Pipeline (the real entry) | `src/generators/generateSettlementPipeline.js` | `export function generateSettlementPipeline` (`:77`) | the function the golden hashes | Called through an INJECTED handle from the store's lazy seam, never named from `src/domain/**`. ⛔ Its OPENING is what `requiredSymbols` quotes, because §7's row re-values a line inside the body |
+| ⭐⭐ THE DROPPED BAG (judgment 173(a)) | `src/generators/generateSettlementPipeline.js` | `generateSettlementPipeline.js :: generateSettlementPipeline` — the ONE production call of `runPipeline` | MEASURED at the base: the call forwards `{ onStep: options.onStep }` ALONE, so `options.pins` is dropped. `sha(no pins) === sha(an OVERRIDDEN record-built bag)` is **true** through this function; the same bag at `runPipeline` takes the override. Every other `runPipeline` caller in the estate is a TEST | ⭐ **THE §7 ROW.** One option added beside `onStep`. Nothing else in the file moves |
+| ⭐ The roster's real home | `src/generators/pipeline.js` | `export function getStepMeta()` (`:270`) | ⛔ **NOT re-exported by the entry**: that namespace is exactly `carryLockedRosterThroughGenerate, generateSettlementPipeline, refreshRosterProse, regenHistoryPipeline, regenNPCsPipeline`, and `pipe.getStepMeta` reads `undefined` (executed) | ⭐ The new leaf imports it from `src/generators/pipeline.js :: getStepMeta` by a SECOND dynamic import (judgment 173(c)) |
 | The runner | `src/generators/pipeline.js` | `export function runPipeline(initialContext, rng, options = {})` (`:182`) | `options.pins` ABSENT or `{}` ⇒ "today's behaviour EXACTLY"; EVERY step still runs; a partial pin set THROWS `Pipeline pins: step "<name>" has choosers [...] but pins supply only [...]` | Unchanged. "Pins absent = the golden" is what makes A7 (a) true by construction |
 | ⭐ The chooser roster's producer | `src/generators/pipeline.js` | `export function getStepMeta()` (`:270`) | returns every registered step with `provides: step.provides \|\| []` | `pinsFrom` IMPORTS its roster from here. ⛔ Never a re-typed list |
 | ⭐⭐ The landed pin primitive, AT ITS NEW HOME | `src/generators/pipeline.js` | `export function chooseOrPin(pins, key, draw)` (`:152`) | returns `pins[key]` when own-present, else `draw()`; ⛔ **does NOT advance the stream on a pin**. ⛔ **VERSION 1'S ROW IS REFUTED**: at `src/generators/steps/generatePopulation.js` the verbatim text `function chooseOrPin(pins, key, draw)` now counts **0** — EM-B2a2 MOVED the primitive to the runner and that step IMPORTS it (`generatePopulation.js:18`), as do `assembleInstitutions.js:11` and `generatePower.js:15` | PRESERVE. No second spelling. This member supplies pins to `runPipeline` and never calls the primitive |
@@ -546,7 +590,14 @@ the entry (anti-vacuity)')` (`:1270`) — the idiom A8's arm (3) copies.
  * @returns {{ pins: Record<string, unknown>, missing: Array<{ step: string, keys: string[] }> }}
  *   `pins` holds a pin for every key a step PROVIDES that the record carries — and, per step,
  *   EITHER every one of its `provides` OR none of them, because `runPipeline` throws on a partial
- *   set. A step the record can only half-supply is NOT pinned at all and is named in `missing`
+ *   set. ⭐⭐ THE EXACT RULE, and a per-step read is NOT it (judgment 173, measured the moment the
+ *   bag first reached the runner): the bag is keyed by RECORD PATH and TWO STEPS MAY SHARE A KEY,
+ *   so a key pinned on one step's behalf makes a step that shares it PARTIAL. ⇒ **a key is
+ *   pinnable only if EVERY step that provides it can be wholly pinned from this record**; every
+ *   other key is omitted and its steps are named in `missing`. Executed without this rule, the
+ *   runner threw `Pipeline pins: step "resolveStress" has choosers [stress, stressTypes] but pins
+ *   supply only [stress]`; with it, A7(b) holds on 5 of 5 sampled corpus rows.
+ *   A step the record can only half-supply is NOT pinned at all and is named in `missing`
  *   with the keys it lacks. Deterministic: `pins`' keys are ASCII-ascending.
  */
 export function pinsFrom(record, engine);
@@ -594,7 +645,12 @@ export function rederive(record, config, layer, engine);
  * ⛔ THE ONE FILE OF THIS MEMBER THAT SPELLS `generateSettlementPipeline` IN CODE, and therefore
  * the ONE that carries a `PIPELINE_REACHERS` row — `class: 'DERIVED'`, the first of that class
  * (§0.1a). It binds the neutral handle the domain leaf takes:
- * `const engine = { run: pipe.generateSettlementPipeline, getStepMeta: pipe.getStepMeta };`
+ * `const [pipe, runner] = await Promise.all([`
+ * `  import('../generators/generateSettlementPipeline.js'), import('../generators/pipeline.js'),`
+ * `]);`
+ * `const engine = { run: pipe.generateSettlementPipeline, getStepMeta: runner.getStepMeta };`
+ * ⛔ TWO modules, both DYNAMIC (judgment 173(c)): the entry re-exports nothing, so
+ * `pipe.getStepMeta` is `undefined` and the roster must come from its own producer.
  * @returns {Promise<{ record: object, unapplied: Array<object> }>} `rederive`'s envelope, verbatim.
  */
 export async function regenerateWithLayer(seed, config, layer);
@@ -716,10 +772,10 @@ ruling 8). The proof is quoted in §12 and in `EM-B2a4.evidence.md`.
 | Action | File | Symbol/region | Maximum delta | Coding instruction |
 |---|---|---|---:|---|
 | `MODIFY` | `src/domain/edit/dmLayer.js` | `pinsFrom`, `REDERIVE_UNAPPLIED_REASONS`, `rederive` | +120 eff | Add the two functions and the reason list at §6's exact signatures. ⛔ **Import NOTHING from `src/generators/**`, `src/store/**` or `src/components/**` — static or dynamic**: the engine and the chooser roster arrive as INJECTED handles (§0.1). ⛔ a1's five exports and their call shapes are untouched. ⛔ `structuredClone` the pin bag on entry. Strict-typecheck clean; no PRNG, no clock, no locale. |
-| `CREATE` | `src/store/settlementRederiveAction.js` | `regenerateWithLayer` | 120 eff | The ONE seat that names the engine. Memoize a DYNAMIC import of `../generators/generateSettlementPipeline.js` exactly as `loadEngine()` does, import `rederive` from `../domain/edit/dmLayer.js`, and hand the engine in. ⛔ Nothing already in `EAGER_FIRST_PAINT_MODULES` may import this file STATICALLY. |
-| `MODIFY` | `src/store/settlementSlice.js` | `regenSection`, after the branch's write and before the delta | **+0 eff (NET ZERO)** | Insert the `await import('./settlementRederiveAction.js')` delegation one line for one line. ⛔ The file measures 816 effective against a frozen `.size-baseline.json` entry of 816 — ZERO headroom — AND it is an EAGER first-paint module, so one added effective line is a STOP. ⛔ Do NOT add a static import of `dmLayer.js` or of the new leaf. ⛔ Do NOT move the seat into `src/store/settlementSliceHelpers.js`: it is eager too (measured), so the parent's stated cure would raise the owner-signed closure. |
+| `CREATE` | `src/store/settlementRederiveAction.js` | `regenerateWithLayer` | 120 eff | The ONE seat that names the engine. Memoize **TWO** DYNAMIC imports: `../generators/generateSettlementPipeline.js` exactly as `loadEngine()` does, for the run member; and ⭐ `../generators/pipeline.js` for `src/generators/pipeline.js :: getStepMeta` — **judgment 173(c)**, because the entry RE-EXPORTS NOTHING and `pipe.getStepMeta` reads `undefined` (measured: the entry's namespace is exactly `carryLockedRosterThroughGenerate, generateSettlementPipeline, refreshRosterProse, regenHistoryPipeline, regenNPCsPipeline`; `export {` and `export *` both exit 1), so without it `pinsFrom` cannot read the roster from its producer as its own contract demands. Then import `rederive` from `../domain/edit/dmLayer.js` and hand the engine in. ⭐ **THE SECOND EDGE IS MEASURED SAFE, NOT ASSUMED:** `tests/build/domainGeneratorsBoundary.test.js` walks `src/domain/` ALONE (`collectJsFiles(domainDir)`), so a `src/store/**` → `src/generators/**` edge is OUTSIDE its corpus and `BASELINE_EDGES` gains nothing — and the store already holds such an edge at `settlementSlice.js :: loadEngine`; `tests/lint/editMutationPath.walker.test.js`'s `WATCHED` names only `src/domain/edit/operations.js` and `src/domain/edit/dmLayer.js` (and only `applyEdit` on the latter), and its A5 arm reads `src/store/editSlice.js` alone, so neither arm sees this leaf. ⛔ BOTH generator imports are DYNAMIC. ⛔ Nothing already in `EAGER_FIRST_PAINT_MODULES` may import this file STATICALLY. |
+| ⭐ `MODIFY` | `src/generators/generateSettlementPipeline.js` | `generateSettlementPipeline.js :: generateSettlementPipeline` — the ONE production call of `runPipeline` in the estate | **+0 eff** (one option on an existing line) | **JUDGMENT 173(a)'s ROW.** Forward the pin bag beside the step hook: `{ onStep: options.onStep, pins: options.pins }`. ⛔ **NOTHING ELSE IN THIS FILE MOVES** — not a guard, not a return, not the provenance tail, not `regenNPCsPipeline` or `regenHistoryPipeline`. WHY THE ROW EXISTS, MEASURED: at the base the entry forwards `onStep` ALONE, so `sha(no pins) === sha(an OVERRIDDEN record-built bag)` reads **true** through `engine.run` while the SAME bag handed straight to `runPipeline` takes the override — every pin this member builds is dropped before the runner sees it, and A7(b) cannot hold without this line. ⛔ **A WORKER CLOSURE MEMBER**: `src/workers/generationRequest.js` imports this file STATICALLY, so the line is PRICED in worker bytes (the byte note below) and any rise is bought back by the chair at the terminal under rule 33 — ⛔ never a ceiling raise. ⛔ `retiredSymbols` stays EMPTY: this row's `requiredSymbols` quotes the function's OPENING, which the edit does not move. |
 | `CREATE` | `tests/property/dmLayerGoldenIsolation.test.js` | A1–A8 | n/a | ⭐ **ADDS EIGHT `it`s UNDER ONE `describe`** — the same eight §9's matrix homes here and the same eight the deferred lighting row prices as `titles +8` (§P9(f), the count law; `EM-B2a4.count-prover.mjs` proves the equality). Copy the proof shape of `tests/property/beliefMapGolden.test.js` — a byte-identity arm beside an explicit anti-vacuity arm. Flat literal `it(...)` under ONE literal `describe`; `it`/`test`/`describe` each bound EXACTLY ONCE; ⛔ no bare seed loop (collect, then assert once); every negative assertion carries `// anchored:` or is a both-directions set equality; ⛔ every asserted set IMPORTED from its producer — the chooser roster from `getStepMeta()`, the reason set from `dmLayer.js`, `EAGER_FIRST_PAINT_MODULES` from `vite.config.js`. |
-| `TEST` | `tests/build/vendorPdfLazy.test.js` | the literal budget pin (`:1769`) and the first-paint closure membership arms | n/a | Re-assert that the eager closure is unmoved. **The stated bounds, all five:** the THREE OWNER-SIGNED first-paint ceilings pinned as literals at `:565` — `CLOSURE_BUDGET_BYTES = 1_048_000` (raw), `CLOSURE_GZIP_BUDGET_BYTES = 337_000`, `CLOSURE_BROTLI_BUDGET_BYTES = 283_000`, under `describe('ARCH car 2 — the three first-paint budgets stay where the owner signed them')` (*"Raises stay owner-signed"*); the lazy engine's `expect(size).toBeLessThan(679_000)` (`:831`); and `WORKER_BUNDLE_CEILING_BYTES = 1401208` in `tests/build/generationWorkerLazy.test.js:159` (EXACT, zero slack, no placement cure). ⭐ `:1769`'s pin is NOT `skipIf`'d and cannot skip; `:1020`'s real-closure measurement IS, and belongs to the terminal's build. ⛔ Not a sealed check: the file carries `it.skipIf(!requireDistRead)` dist arms (interim rule 2). |
+| `TEST` | `tests/build/vendorPdfLazy.test.js` | the literal budget pin (`:1769`) and the first-paint closure membership arms | n/a | Re-assert that the eager closure is unmoved. **The stated bounds, all five:** the THREE OWNER-SIGNED first-paint ceilings pinned as literals at `:565` — `CLOSURE_BUDGET_BYTES = 1_048_000` (raw), `CLOSURE_GZIP_BUDGET_BYTES = 337_000`, `CLOSURE_BROTLI_BUDGET_BYTES = 283_000`, under `describe('ARCH car 2 — the three first-paint budgets stay where the owner signed them')` (*"Raises stay owner-signed"*); the lazy engine's `expect(size).toBeLessThan(679_000)` (`:831`); and ⭐ `WORKER_BUNDLE_CEILING_BYTES = 1396015` at `generationWorkerLazy.test.js :: WORKER_BUNDLE_CEILING_BYTES` (EXACT, zero slack, monotone-down). ⭐ **RE-MEASURED: version 2 read 1401208, which the T12 buy-back LOWERED** (judgment 160, seedrandom's ARC4 core alone in `src/kernel/prng.js`; the ceiling followed the measurement DOWN, never up). ⭐ `:1769`'s pin is NOT `skipIf`'d and cannot skip; `:1020`'s real-closure measurement IS, and belongs to the terminal's build. ⛔ Not a sealed check: the file carries `it.skipIf(!requireDistRead)` dist arms (interim rule 2). |
 | ⭐ `MODIFY` | `src/store/editSlice.js` | `REDERIVE_SEAM` (`:89`), the `applyPlainEditToDraft` consult (`:339`) and the `applyCascadeEdit` branch (`:221`-`:255`) | +12 eff | **JUDGMENT 145's ROW.** Plug the seam and ADD THE CASCADE BRANCH'S CONSULT here, in this one row: one consult site today, TWO after this member. ⛔ Re-value the frozen constant but keep `export const REDERIVE_SEAM = Object.freeze({` byte-identical. ⛔ Reach the re-derivation by `await import('./settlementRederiveAction.js')` — a DYNAMIC import ONLY: `tests/lint/editMutationPath.walker.test.js:212` pins the static specifier list EXACT at four, and this file is NOT eager (measured) only while it stays off every eager static edge. ⛔ No computed `get()[name]` dispatch (`deadOperationRatchet.test.js:229`). File measures **116** effective; the 800-line layer ceiling governs. |
 | ⭐ `TEST` | `tests/store/editSlice.test.js` | EM-C4a's landed `it('A8 — purity, idempotency, key-order independence, the transient mode and the rederive seam as a typed no-op')` (`:376`) and its three seam assertions | n/a | **THE LANDED ARMS THIS MEMBER MOVES, NAMED:** `:403` `expect(REDERIVE_SEAM).toEqual({ kind: 'noop', owner: 'EM-B2a4', calls: 0 });` → the plugged value; `:407` `expect(REDERIVE_SEAM.kind).toBe('noop');` → `'scoped'`; `:404` `expect(Object.isFrozen(REDERIVE_SEAM)).toBe(true);` STAYS BYTE-UNMOVED. EM-C4a's own comment at `:401-402` says so: *"The day EM-B2a4 plugs scoped re-derivation in, THIS is the arm that fails."* The `it` TITLE's trailing clause is re-worded to the plugged shape. ⛔ **ADDS NO `it` AND NO `describe`** (the file holds 7 `it`s under ONE `describe` at `:134`, before and after) ⇒ census `titles +0 · suiteTitles +0 · files +0` from this row. ⛔ No arm weakened, no assertion deleted. |
 | ⭐ `REGISTER` | `src/domain/density/densityCreateBoundary.js` | the `PIPELINE_REACHERS` row for `src/store/settlementRederiveAction.js` (`:157`) | +10 eff | **§0.1a's ROW.** Add ONE frozen row, `class: 'DERIVED'` (the FIRST of that class; `BOUNDARY_CLASSES` at `:128` declares it and the walker's own message defines it *"re-derives an existing world"*), `payloadAwaitedBy: Object.freeze(['src/store/settlementRederiveAction.js'])` — the leaf awaits its own memoized loader, so no `reachesVia` is owed — and a `why` that says the leaf re-derives an EXISTING world from pins built out of its own record and mints no density law. ⛔ Add the row SURGICALLY; touch no other row and no other export. ⛔ No em dash and no exclamation point in the `why` string (§P2.19, measured: the packet's five planted `src/` literals carry 0 and 0). |
@@ -748,7 +804,9 @@ ruling 8). The proof is quoted in §12 and in `EM-B2a4.evidence.md`.
 > (interim rule 1 — not in this table, not in the capsule, not in `checks`).
 > `stamp.producerIndexFiles` **+0**, and the roots it was measured against are named: this member
 > CREATEs exactly one `.js`, `src/store/settlementRederiveAction.js`, which is under NEITHER
-> producer root — `find src/generators src/domain -name '*.js' -type f | wc -l` → **1181** at
+> producer root — and ⭐ version 3's new §7 row under `src/generators` is a MODIFY, which adds no
+> FILE and therefore moves a file COUNT by nothing —
+> `find src/generators src/domain -name '*.js' -type f | wc -l` → **1181** at
 > `16f0bc71c`, equal to the census's own live `stamp.producerIndexFiles` (version 1 read 1172,
 > before EM-B1c1's and EM-C4a's leaves), and
 > `find src/generators src/domain -path '*src/store*'` → **0**. Its only `src/domain/**` row is a
@@ -794,9 +852,11 @@ of VERIFY pass 2's stale-sentence family; it is the chair's to slot, not this me
   record. The script stays in `checks` as a standing GUARD that no NEW finding identity appears.
 - `scripts/check-writer-reach.mjs` — no new written identity and no new customer surface; neither
   `--write` nor a mint.
-- `scripts/.size-baseline.json` — `src/store/settlementSlice.js` is **816 / 816**, NET ZERO; ⛔ no
-  row exists for any other `src/store/` path and none is minted (the 800-line layer ceiling governs
-  the new leaf). One line over on the slice is a STOP, never a raise.
+- `scripts/.size-baseline.json` — ⛔ **NO §7 PATH CARRIES A ROW** (measured): the only `src/store/`
+  row is `src/store/settlementSlice.js` at **816 / 816**, and that file left this packet with
+  version 2's item 3(b) (it is EM-B2a5's); no row exists for the new leaf, for
+  `src/generators/generateSettlementPipeline.js`, for `src/store/editSlice.js` or for
+  `src/domain/edit/dmLayer.js`, and none is minted — the 800-line layer ceiling governs all four.
 - `tests/lint/proseNumerics.test.js` — nothing rendered.
 - `tests/lint/testRatchet.test.js` — measured: its `CEILING` (17) caps `baseline.entries`,
   enforcement-walker rows rather than test files, and is monotone-down.
@@ -819,9 +879,24 @@ of VERIFY pass 2's stale-sentence family; it is the chair's to slot, not this me
 - `BASELINE_EDGES` (`tests/build/domainGeneratorsBoundary.test.js`) — **four files / five
   specifiers, UNMOVED**, by construction: the engine is a parameter, never a specifier, inside
   `src/domain/edit/**`.
-- ⛔ **Byte budgets: ZERO in the worker and the lazy engine as a MEMBERSHIP fact** — nothing under
-  `src/generators/**` imports `dmLayer.js` or the new leaf. Every dist arm stays OUT of `checks`
-  (interim rule 2) and the train's terminal takes ONE summed price from ONE real build.
+- ⭐⭐ **THE BYTE NOTE — VERSION 3 PAYS A PRICE VERSION 2 DID NOT, AND IT IS MEASURED, NOT ASSUMED.**
+  The FIRST-PAINT closure is still **MEMBERSHIP +0**: nothing under `src/generators/**` imports
+  `dmLayer.js` or the new leaf, and `src/generators/generateSettlementPipeline.js` is not in
+  `EAGER_FIRST_PAINT_MODULES` (measured by importing the exported set). ⛔ **THE GENERATION WORKER
+  IS DIFFERENT.** `src/workers/generationRequest.js` imports the entry STATICALLY, so the entry is a
+  member of that worker's closure — executed by a STATIC CLOSURE WALK from the worker entry
+  (152 local modules; membership `true`), never a `dist` read. PRICE OF THE ONE LINE, measured with
+  the tree's own esbuild over the file before and after: source **+20 B**, MINIFIED **+12 B**
+  (`,pins:n.pins`). ⭐ THE SHAVE WAS TAKEN FIRST (buy-back ledger row 2, a source-side shave inside
+  the member's own site): three spellings were minified and compared —
+  `{ onStep: options.onStep, pins: options.pins }` **+12 B**, a nullish-defaulted variant **+18 B**,
+  a hoisted destructure **+20 B** — so the spelling §7 carries IS the cheapest that keeps the
+  mechanism. ⇒ **+12 B is owed against `WORKER_BUNDLE_CEILING_BYTES = 1396015`, which has ZERO
+  slack.** ⛔ THE LANE NEVER RAISES IT: under rule 33 the chair buys the bytes back at the terminal
+  from `BUY-BACK-LEDGER.md` and lowers the ceiling to the real build's measurement. The same +12 B
+  rides every other chunk that carries the entry (`advanceInterval.worker`, `pdfRender.worker`,
+  `customContentPreview.worker`), none of which is a zero-slack ceiling. Every dist arm stays OUT of
+  `checks` (interim rule 2) and the train's terminal takes ONE summed price from ONE real build.
 
 **THE BROWSER SUITE: NOT GOVERNING.** This member touches no `src/components/**` path, no route,
 no `data-testid` and no accessible name, so **no `e2e/` spec is named** (interim rule 10, stated as
@@ -849,8 +924,13 @@ No other file may be edited.
 3. Add `pinsFrom` and `REDERIVE_UNAPPLIED_REASONS` to `src/domain/edit/dmLayer.js`, then `rederive`
    (the only one that clones and allocates).
 4. Write `src/store/settlementRederiveAction.js` with its memoized dynamic import.
-5. Wire the ONE consumer: the delegation inside `regenSection`, net zero, measured with eslint's
-   `Linter` BOTH before and after.
+5. ⭐ **FORWARD THE BAG AT THE ENTRY** (judgment 173(a)): one option beside `onStep` in
+   `generateSettlementPipeline.js :: generateSettlementPipeline`, and nothing else in that file.
+   ⛔ RED-FIRST, and the control is the lane's own: with the row ABSENT, an OVERRIDDEN record-built
+   bag through `engine.run` leaves the output BYTE-IDENTICAL (A7(b) holds on 0 of 5 sampled corpus
+   rows); with the one line, it holds on 5 of 5 while A7(a) stays byte-identical both ways. Quote
+   both counts. ⛔ **NO CONSUMER IS WIRED HERE** — `regenSection` is EM-B2a5's (judgment 173(b)),
+   so `src/store/settlementSlice.js` is not opened and this member's leaf lands DORMANT.
 6. Add the `scripts/mutation-coverage-manifest.json` row surgically.
 6a. ⭐ Plug the seam in `src/store/editSlice.js` and ADD THE CASCADE BRANCH'S CONSULT (judgment
    145), then re-pin EM-C4a's two landed seam assertions in `tests/store/editSlice.test.js`. ⛔
@@ -886,8 +966,10 @@ No other file may be edited.
                                                         -> unapplied += { key, value, 'not_in_pool' }
    d. otherwise                                         -> pins[recordPath] = value
    ⛔ In (a), (b) and (c) the PIN KEEPS THE RECORD'S OWN VALUE and the layer is left untouched.
-4. If `pins` has no own key, call engine.generateSettlementPipeline(config, null, { seed })
-   with NO `pins` option at all (this is the golden's own call shape).
+4. If `pins` has no own key, call engine.run(config, null, { seed })   <- ⛔ THE NEUTRAL MEMBER
+   with NO `pins` option at all (this is the golden's own call shape). ⛔ `engine.run`, NEVER
+   `engine.generateSettlementPipeline`: §0.1a consequence 2 keeps `dmLayer.js` out of the reacher
+   set, and version 2's spelling of this line contradicted its own §6 (corrected in version 3).
    Otherwise call it with `{ seed, pins: structuredClone(pins) }`.
 5. Return { record: <the pipeline's output>, unapplied: <sorted, deduplicated on key> }.
    Mutate neither argument.
@@ -897,13 +979,13 @@ No other file may be edited.
 
 | ID | Case | Fixture/input | Required observation | Test home |
 |---|---|---|---|---|
-| A1 | Pins from the record, total against their producer | a golden-corpus record + the injected engine | `pinsFrom` returns a pin for EVERY key a registered step provides that the record holds and none for a key it lacks, asserted as a BOTH-DIRECTIONS set equality against the roster IMPORTED from `getStepMeta()`; per step, all of `provides` or none; the steps that cannot be wholly pinned are NAMED in `missing` | `tests/property/dmLayerGoldenIsolation.test.js` |
+| A1 | Pins from the record, total against their producer | a golden-corpus record + the injected engine | `pinsFrom` returns a pin for EVERY key a registered step provides that the record holds and none for a key it lacks, asserted as a BOTH-DIRECTIONS set equality against the roster IMPORTED from its REAL producer, ⭐ `src/generators/pipeline.js :: getStepMeta` (judgment 173(c) — ⛔ NOT `pipe.getStepMeta`, which is `undefined` on the entry's namespace, executed); ⭐ **the pinnability rule asserted exactly**: a key is pinned only when EVERY step providing it is wholly pinnable, so the shared-key case (`stress` / `stressTypes` on `resolveStress`) yields a bag the runner accepts rather than the partial-pin throw; the steps that cannot be wholly pinned are NAMED in `missing` | `tests/property/dmLayerGoldenIsolation.test.js` |
 | A2 | Dormant/absent, and purity | `rederive(record, config, undefined, engine)` and `(record, config, EMPTY_DM_LAYER, engine)` | byte-identical results; both `unapplied: []`; NEITHER argument mutated — the input record is deep-frozen and its JSON compared before and after (design §22.1 measured an aliased bag writing through in 36/63 and a cloned one in 0/63) | same |
 | A3 | ⭐ Counterforce — the pool-membership rule | three layers: a value outside the candidate set, a key no chooser provides, a key whose step cannot be wholly pinned | each returns `ok`-shaped output with the override in `unapplied` at the exact reason; the returned record carries the ENGINE's value there; the LAYER comes back unchanged and STILL HOLDS the override; nothing throws; and the reason set is a BOTH-DIRECTIONS equality against the module's own `REDERIVE_UNAPPLIED_REASONS`, so a fourth reason reds here | same |
 | A4 | Boundary/sparse | a layer holding an override for a key the record no longer carries, mixed with two it does | the two are applied, the casualty is reported, the entity is NEVER re-created, `unapplied` is ASCII-ascending and deduplicated, and ⛔ **nothing present in the record and untouched by the override is ABSENT from the returned record** (a both-directions top-level key-set equality) | same |
 | A5 | Idempotency and determinism | the same `(record, config, layer, engine)` twice; then the first output re-derived with the same layer | byte-identical under `JSON.stringify` both times — same seed + same config + same layer = the same record (THE PROMISE extended). Over a stride of the golden corpus, collected then asserted ONCE | same |
 | A6 | Lifecycle round trip | a real generated settlement → `applyEdit(layer, op, declarations)` ⭐ **AT ARITY THREE with an injected declaration consult** (judgment 77; a two-argument call cannot build the layer at all) → `JSON.parse(JSON.stringify(layer))` → `rederive` against a FRESH same-seed generation | the overrides survive the hop; `mintDmId` reproduces the same id for the same `(seed, kind, n)` across it; the persist hop is byte-exact (the `lifecycleRoundTrip.test.js` fixpoint idiom) | same |
-| A7 | ⛔ THE ISOLATION PROPERTY — see §0.2; the parent's byte-identity clause is REFUTED and is NOT asserted | (a) `generateSettlementPipeline` with an EMPTY layer; (b) the same seed+config with a ONE-ROOT layer | (a) equals `tests/fixtures/generator-golden-master.json` **byte-for-byte** across the corpus and `tests/fixtures/dossier-prose-manifest-golden.json` is unmoved — true by construction, because an empty layer never reaches `runPipeline` and `options.pins` absent ⇒ today's behaviour EXACTLY; (b) differs from (a) at that root. **ANTI-VACUITY:** (b) must differ from (a) somewhere, or the layer was never consulted — ⛔ VACUOUS until **EM-B2a2** has landed | same |
+| A7 | ⛔ THE ISOLATION PROPERTY — see §0.2; the parent's byte-identity clause is REFUTED and is NOT asserted | (a) `generateSettlementPipeline` with an EMPTY layer; (b) the same seed+config with a ONE-ROOT layer | (a) equals `tests/fixtures/generator-golden-master.json` **byte-for-byte** across the corpus and `tests/fixtures/dossier-prose-manifest-golden.json` is unmoved — true by construction, because an empty layer never reaches `runPipeline` and `options.pins` absent ⇒ today's behaviour EXACTLY; (b) differs from (a) at that root. ⭐⭐ **ANTI-VACUITY, AND IT IS REAL IN VERSION 3** (judgment 173(a)): (b) must differ from (a) somewhere, or the layer was never consulted. EM-B2a2 has LANDED, and version 2 would still have been vacuous for a SECOND reason it had not measured — the entry dropped the bag, so (b) was byte-identical to (a) on every row. §7's entry row is what makes this arm bite, and the lane's own control proves it BOTH WAYS: with the row absent the arm holds on **0 of 5** sampled corpus rows, with it on **5 of 5**, while (a) stays byte-identical on 5 of 5 either way | same |
 | A8 | ⭐ The closure probe, the layer boundary and the CREATE boundary | `EAGER_FIRST_PAINT_MODULES` imported from `vite.config.js`; every `.js` under `src/domain/` parsed; `PIPELINE_REACHERS` imported from its producer | (1) neither `src/domain/edit/dmLayer.js` nor `src/store/settlementRederiveAction.js` nor `src/store/editSlice.js` is a member of the eager set; (2) NO file under `src/domain/**` carries a `src/generators/**` specifier `BASELINE_EDGES` does not list, static or dynamic; ⭐ (3) `src/domain/edit/dmLayer.js` spells the bare symbol `generateSettlementPipeline` NOWHERE in comment- and string-stripped code, and `src/store/settlementRederiveAction.js` IS a key of `PIPELINE_REACHERS` with `class: 'DERIVED'` — both read from the producers, never re-typed; (4) ANTI-VACUITY: the eager graph read is non-empty and contains `src/main.jsx`, and `PIPELINE_REACHERS` is non-empty, so (1)–(3) cannot be green-on-nothing. ⛔ Reads no `dist` and therefore cannot skip | same |
 
 This table is the entire edge-case budget — **8 of 8**. Omit nothing; add nothing.
@@ -913,7 +995,8 @@ This table is the entire edge-case budget — **8 of 8**. Omit nothing; add noth
 ```sh
 # Focused static checks
 npx eslint src/domain/edit/dmLayer.js src/store/settlementRederiveAction.js \
-  src/store/settlementSlice.js tests/property/dmLayerGoldenIsolation.test.js
+  src/store/editSlice.js src/generators/generateSettlementPipeline.js \
+  src/domain/density/densityCreateBoundary.js tests/property/dmLayerGoldenIsolation.test.js
 npm run typecheck:ratchet
 npm run typecheck:domain:strict
 
@@ -938,6 +1021,11 @@ GATE_MUTEX_TIER=shared GATE_MUTEX_MAX_POLLS=100000 GATE_MUTEX_POLL_SECONDS=20 \
 # tree; it is no `checks` entry and no §7 row (§P9).
 node <kit>/packets-waiting/EM-B2a4.count-prover.mjs <kit>/packets-waiting/EM-B2a4.md \
   <kit>/packets-waiting/EM-B2a4.manifest.json
+
+# ⭐ THE ENTRY'S OWN DIRECTORY (judgment 173(a)): a §7 MODIFY under src/generators opts into the
+# pipeline's own batteries, which are the arms that would see a forwarding mistake first.
+GATE_MUTEX_TIER=shared GATE_MUTEX_MAX_POLLS=100000 GATE_MUTEX_POLL_SECONDS=20 \
+  sh scripts/gate-mutex.sh --run -- npx vitest run --pool=threads --maxWorkers=2 tests/generators
 
 # The layer-boundary probe (pure source-parse; it cannot skip)
 GATE_MUTEX_TIER=shared GATE_MUTEX_MAX_POLLS=100000 GATE_MUTEX_POLL_SECONDS=20 \
@@ -1009,7 +1097,19 @@ In addition to `PACKET_STANDARD.md` and `EM-PREAMBLE.md` §P8, stop if:
   `CLOSURE_BROTLI_BUDGET_BYTES` 283,000) would have to move** — a raise is the OWNER's signature,
   never this lane's, and `tests/build/vendorPdfLazy.test.js:1769` pins all three so a car that
   moves one must move the pin in the same commit;
-- `src/store/settlementSlice.js` grows by one effective line, measured by eslint's `Linter`;
+- ⭐ **the entry's forwarding would need MORE than the one option** — a second statement, a guard,
+  a changed return, or any other line of `src/generators/generateSettlementPipeline.js`: the row is
+  one option beside `onStep` and nothing else (judgment 173(a));
+- ⭐ **the worker-closure price is not measured, or a ceiling would have to RISE** — the entry is a
+  member of the generation worker's closure and `WORKER_BUNDLE_CEILING_BYTES` (1396015) has zero
+  slack: the lane PRICES the line and names a buy-back, ⛔ it never raises the ceiling and never
+  re-records it (rule 33; the raise is the OWNER's);
+- ⭐ **`src/store/settlementSlice.js` would have to be opened at all** — `regenSection` is EM-B2a5's
+  under judgment 173(b), and this member's leaf lands DORMANT;
+- ⭐ **`pipe.getStepMeta` would have to be used** — it is `undefined`; the roster comes from
+  `src/generators/pipeline.js :: getStepMeta` (judgment 173(c));
+- ⭐ **`pinsFrom` would have to hand the runner a bag that trips the partial-pin refusal** — a key
+  is pinnable only if every step providing it is wholly pinnable;
 - either golden fixture's SHA-256 moves by one byte, or `UPDATE_GOLDEN=1` appears necessary;
 - ⛔ **a pinned re-derive would have to be asserted byte-identical to the record** — §0.2; that
   clause is the EM-R family's to make true, and asserting it here would red on the corpus;
@@ -1050,9 +1150,12 @@ next member.
 - Base SHA:
 - Dispatch bundle and seal identity:
 - Final commit or working-tree state:
-- Exact changed files and effective-line deltas (eslint `Linter`, `skipBlankLines` + `skipComments`, before and after) for `src/store/settlementSlice.js` against 816/816 and for `src/domain/edit/dmLayer.js` + `src/store/settlementRederiveAction.js` against the 800 layer ceiling:
+- Exact changed files and effective-line deltas (eslint `Linter`, `skipBlankLines` + `skipComments`, before and after) for `src/domain/edit/dmLayer.js`, `src/store/editSlice.js`, `src/store/settlementRederiveAction.js` and `src/generators/generateSettlementPipeline.js`, each against the 800 layer ceiling (⛔ no §7 path carries a `scripts/.size-baseline.json` row):
+- ⭐ THE ENTRY'S ROW, PROVED BOTH WAYS: the A7(b) control with the forwarding ABSENT (expected: the arm holds on 0 of N rows) and PRESENT (expected: N of N), with A7(a) byte-identical either way; and `git diff -- src/generators/generateSettlementPipeline.js` showing ONE changed line:
+- ⭐ THE WORKER PRICE: the entry's membership in the generation worker's closure by the STATIC CLOSURE WALK (⛔ never a `dist` read), the minified byte delta of the forwarding, the cheaper spellings tried, and the buy-back row named for the chair's terminal:
+- ⭐ `pipe.getStepMeta` measured `undefined` and the roster read instead from `src/generators/pipeline.js :: getStepMeta`, with the second dynamic edge measured against `domainGeneratorsBoundary`'s corpus and `editMutationPath`'s `WATCHED`:
 - Acceptance cases A1–A8, executed and passed:
-- ⭐ A8's two red-first controls: the RED message quoted for a deliberately STATIC import of the leaf from `settlementSlice.js`, and for a deliberate `src/generators/**` import inside `dmLayer.js`:
+- ⭐ A8's two red-first controls: the RED message quoted for a deliberately STATIC import of the leaf from an EAGER member (⛔ `settlementSlice.js` is no longer a §7 path — plant the probe in a scratch copy or another eager member and say which), and for a deliberate `src/generators/**` import inside `dmLayer.js`:
 - `EAGER_FIRST_PAINT_MODULES` size and membership before and after (expected UNMOVED at both), read by IMPORTING the set:
 - `BASELINE_EDGES` live edge count before and after (expected UNMOVED):
 - `parkReasonsFor('tests/property/dmLayerGoldenIsolation.test.js')` output, quoted:
