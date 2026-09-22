@@ -175,7 +175,22 @@ const SENTINEL = 'settlementforge:generation:worker-v1';
 // (−5,743 B). The ceiling follows the measurement DOWN and stays MONOTONE-DOWN from this value; the
 // buy-back is offered for the owner's ratification like the mints it follows (vetoable: the
 // umbrella import returns and the ceiling re-mints upward, which is his).
-export const WORKER_BUNDLE_CEILING_BYTES = 1396015;
+// 1,396,015 → 1,395,972 (2026-09-22, the chair, judgment 187): train EM-T13's terminal read +12 B
+// at the composed tip 335aa3367 — a control build there measured generation.worker-B0dgeHYd.js at
+// 1,396,027 B — and the 12 B are EM-B2a4's entry forwarding of `pins`
+// (generateSettlementPipeline.js :: generateSettlementPipeline hands `{ onStep, pins }` to
+// runPipeline; minified `,pins:o.pins`), exactly BUY-BACK-LEDGER row 5's predicted cost. That
+// forwarding is EM-B2a4's mechanism and stays byte-for-byte, so the bytes were BOUGHT BACK by row
+// 2's shave instead: EM-B2a3's two unpinned-sentinel Symbol descriptions are removed
+// (generatePower.js, assembleInstitutions.js). They are identity-compared, never read — measured,
+// not argued: neither literal occurs anywhere else in the tracked tree, `chooseOrPin` returns its
+// argument untouched, and no test, fixture or walker reads a Symbol description. The worker
+// 1,396,027 → 1,395,972 (−55 B) on a real `npm run build` in the cure lane. Across all 552 emitted
+// chunks exactly TWO OTHERS moved, both by the same −55 B and for the same two literals: engine
+// 643,798 → 643,743 and customContentPreview.worker 1,622,741 → 1,622,686; nothing entered or left
+// a bundle, and the other worker bundles did not move at all. The ceiling follows the measurement
+// DOWN and stays MONOTONE-DOWN from this value.
+export const WORKER_BUNDLE_CEILING_BYTES = 1395972;
 
 const source = (path) => readFileSync(join(ROOT, path), 'utf8');
 

@@ -216,7 +216,7 @@ export function collapseUpgradeChains(institutions) {
  * chooser is held without re-spelling its own-property rule. It is module-private, so no pin
  * value can ever equal it.
  */
-const UNPINNED = Symbol('assembleInstitutions:unpinned');
+const UNPINNED = Symbol(); // The description was removed to buy the generation worker's bytes back at train EM-T13's terminal (judgment 187); the sentinel's IDENTITY is what the code compares, never its description, which nothing in src or tests reads.
 
 registerStep('assembleInstitutions', {
   deps: ['buildGenerationContext', 'resolveResources', 'resolveStress', 'resolveNeighbour'],
