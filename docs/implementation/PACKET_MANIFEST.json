@@ -37527,6 +37527,1001 @@
       "_version41Note": "VERSION 4.1 (independent Opus pre-proof for train EM-T12, 2026-09-21, read tip 80e855f26 on em-train-11-2026-09-21, READ-ONLY, git status --short EMPTY before and after). ⛔ NO PATH, NO ACCEPTANCE CASE, NO REFUSAL AND NO CONTRACT MOVED: the nine changeManifest rows, the eight cases, the seven refusals, the 2->3 leaf override and SHAPE A are version 4's, still SET-EQUAL, and the count prover is green unchanged. WHAT MOVED, each MEASURED: (1) SIX PENDING ROWS DISCHARGED — EM-B2a1 and EM-A1 have LANDED, so dmLayer.js's four and fieldDeclarations.js's two are requiredSymbols rows at git grep -c -F = 1, and every fact section 6 quotes from either is CONFIRMED against LANDED code rather than a packet; requiredSymbols is now TWENTY-SIX rows. EM-B1a's three stay pending (operations.js is ABSENT at the tip). (2) Depends on GAINS EM-B3e (LANDED 49a5f1e01) and EM-B3f (BUILT, staged on em-t11-b3f-2026-09-21), both ORDERING dependencies and neither an import: this packet is the FIRST WRITER of dmLayer and the two close the last two seams by which a written layer could LEAVE the account — EM-B3e the restored versionHistory[].settlement snapshot (withoutEditState at accountData.js:223 maps withoutEditKeys over every nested settlement; preflightAccountExport at :267 applies it across the save population at :271), EM-B3f the PARKED campaign snapshot preflightAccountExport was shipping unprojected (its two new module-private helpers withoutSnapshotEditState and withoutParkedSnapshotEditState). ⭐ EVERY EM-B3f FACT IS CONFIRMED AGAINST ITS STAGED BYTES (git show :src/lib/accountData.js), and its staged edit moves NO symbol this packet names — withoutEditKeys, withoutEditState, preflightAccountExport and buildAccountExport all survive verbatim. (3) ⛔ THE PLACEMENT BLOCKER MOVED FROM EM-B3e TO EM-V10, EXECUTED: EM-B3e is LANDED; EM-V10 is READY and holds tests/lib/editTravel.test.js, so on a scratch estate built from the tip by git archive the validator prints 'duplicate change path across packets: tests/lib/editTravel.test.js (EM-V10, EM-C4a)' and exits 1 (control without this entry: 'valid: 210 packets (4 READY)', exit 0; with EM-V10 flipped LANDED the error is GONE). ⇒ THIS PACKET RIDES TRAIN EM-T12 (the chair's judgment 110 re-roster), never EM-T11, and its entry may not be added to PACKET_MANIFEST.json until EM-V10 is LANDED. (4) A5b IS RE-ADDRESSED against the file EM-V10 leaves: EM-V10's build eb8402184 inserts @@ -86,0 +87,9 @@ (a deepFreeze helper) and @@ -440,0 +450,35 @@ (its B6 test, appended INSIDE the second describe), so A5b appends AFTER B6 in that same describe and touches no existing arm; and the file's own docblock sentence 'nothing here imports from src/domain/edit/**' is amended IN PLACE in this member's landing, because A5b's whole point is a REAL layer from this packet's writer. (5) JUDGMENT 123 ANSWERED WITH A RECOMMENDATION, section 12 Qe: the shipped EDIT_KINDS verb rename-npc collides in NAME with EM-B1c1's op — 16 occurrences over 7 src files (15 code sites, 1 comment), both vocabularies routing to the SAME writer renameNPC and both refusing post-canon. NOTHING REDS TODAY (OP_TYPES and validateOp appear at ZERO src/tests sites; no test asserts cross-registry disjointness; the consumer sets are disjoint). Measured against EM-B1a version 11's BUILT test, adding any row to OP_TYPES exposes FIVE landed arms and the SPELLING decides two of them (:152 reabsorbed and :426 A5 red only for a rename-* name). RECOMMENDED: rename EM-B1c1's op to set-npc-name (compareCodepoint index 11 of 15, between set-institution-state and set-npc-status; free only while EM-B1c1 is unplaced) plus ONE shrink-only OP_TYPES-vs-EDIT_KINDS disjointness arm in tests/domain/editOperations.test.js. ⛔ EITHER RULING MOVES NO BYTE OF EM-C4a: section 6.1a keys on the DECLARATION's kind, never on an op type. (6) FOUR STALE ABSOLUTES BECOME DATED PAIRS (the eager set 269 -> 270; the editMode population 43 -> 47; the four closure module counts, now three instruments and three answers with MEMBERSHIP as the only asserted claim; 'eleven siblings' -> savedSettlements.find in FIFTEEN src files, with the String() coercion named as this packet's hardening and not the estate's spelling) and TWO LINE CITATIONS ARE RE-ADDRESSED under judgment 124 (implementation-packets.mjs:828 -> :921 for reservesChangePaths; settlementSlice.js:1111 -> :337, the declaration rather than a read site). All 29 path:line citations in the packet AND this capsule were re-resolved against the tip and every one is IN RANGE; this member SHRINKS no file, so sourceCitationIntegrity's one HARD arm (ARM 2, only-shrinks past-EOF) cannot fire. (7) THE PREAMBLE IS THE FIFTH AMENDMENT'S, re-measured at the tip as fdecd426828665cad2dfaf872871f29f46fa4816e1bd4c43c20ccd84dacc9e7c, and the interim-rules row is STRUCK because the amendment has LANDED and supersedes the sheet. (8) RULES 13, 15, 15b and 17 RE-EXECUTED AT THE TIP: prose-numerics baseline 0 rows for all four src/ paths; ENFORCER_DIRS still lists tests/lint first (mutationCoverage.shared.mjs:36-42) so the one register row stands; wiring-census stamp.files names seven producer files and none is this member's; and the tuning library's own counters over a scratch root holding this packet's PLANNED text at its REAL paths print P2 {control: 2} / P3 {control: 1} with 'EM-C4a planned paths COUNTED: NONE' — the instrument proved LIVE and the exclusion proved by the same run.",
       "_version42Note": "VERSION 4.2 (the chair, judgment 139, 2026-09-22): the version-4.1 build's two reds at queue window 35 job 3, both instruments the packet had not named. (1) tests/application/commands/commandRegistry.test.js pins the REVIEWED capability set at ten and the registered settlement.plain-edit.apply makes the live registry eleven: the pin is a review act, so it is a TEST row with its review sentence in section 6.2 (the kind joins immediately after settlement.pending-edits.commit; surveyorCapabilities() unchanged at three). (2) tests/store/deadOperationRatchet.test.js's premise arm convicts a computed get()[action] dispatch in src/store/editSlice.js: the cure exports a frozen one-row CASCADE_DISPATCH table that reaches each writer by its LITERAL name (renameNPC: (get, index, value) => get().renameNPC?.(index, value)), keeps CASCADE_WRITERS as the declaration, and folds one assertion into the existing A1 arm pinning the two tables set-equal both ways from the frozen exports. No case, refusal, title, import or lighting figure moves; checks unchanged (the reviewed pin's file was already sealed).",
       "_version43Note": "VERSION 4.3 (the chair, judgment 148, 2026-09-22): window 39's pre-flight of tests/domain at train EM-T12's flipped tip 16f0bc71c redded two LANDED dormancy arms this member's landing widens \u2014 EM-A1's editDeclarations.test.js importer roster of fieldDeclarations.js and EM-B1a's editOperations.test.js A6 (nothing under src/ imports operations.js): src/store/editSlice.js is the LAZY first runtime importer of both. Two TEST rows widen the rosters in place by exactly one editSlice.js row each with a comment; no assertion weakened, no case, no title, no import moves; two sealed checks added before validate. LAW (sixth amendment \u00a7P10.11 (i)): a member that becomes the first importer of a landed leaf carries that leaf's dormancy arm as a TEST row."
+    },
+    {
+      "id": "EM-B1b",
+      "status": "READY",
+      "packetPath": "docs/implementation/packets/settlement-editor/EM-B1b.md",
+      "verifiedBase": "e1750d7454c1dff7e81342efadd05e47719ca6aa",
+      "changeManifest": [
+        {
+          "_note": "THE OFF-STAGE LEAF -- option O1 as the chair shaped it, so EM-B1a's manifest is UNCHANGED. It exports FOUR SPLICE GROUPS (OFF_1..OFF_4, by their insertion anchors) plus OFF_STAGE_OP_TYPES, the seven as one handle for the batteries; four groups rather than one map is forced by the codepoint splice (see the operations.js row). The seven off-stage ops under THE PHANTOM CONSEQUENCE RULE (ODQ SP934.43, design SP13): declare-war, make-peace, open-trade, close-trade, send-force, recall-force, resolve-outcome. Each carries stage:'off-stage', consequence:'by-target-reality', target:'phantom' (RAISED R7) and ALL ELEVEN of EM-B1a's declared fields -- ELEVEN, not ten; ten is EM-A1's Op. requires is the { world, registry } SPLIT and requires.world is EMPTY on all seven, which is where design SP13's clause (d) now lives exactly: make-peace.requires is { world: [], registry: ['declare-war'] }, a prior ENTRY IN THE REGISTRY and never a war state in the world; makeOp FLATTENS the pair onto EM-A1's Op.requires (executed: ['declare-war']). EVERY RELATION IS CLOSED OVER THE SEVEN, because conflictsWith/relatedTo are symmetric and requires/enables exact inverses, so naming a HOME type would force the inverse onto a B1a row -- a STOP. THIS MODULE IMPORTS NOTHING AT RUN TIME (EM-B1c1's ratified shape): the two vocabulary members are spelled as /** @type {const} */ literals, the five payload helpers are authored here with JSDoc @returns {PayloadFieldSpec} so no `kind` widens to string, the row shape is reached by a TYPE-ONLY typedef import of import('./operations.js').OpTypeDeclaration (erased at emit, no runtime edge, no cycle, invisible to A6's importer matcher), and the leaf carries its own row freezer because operations.js's row() is module-private across that rule. TYPING PROVED (EM-B1a version 9 SP6.0 allows ZERO errors and ZERO `any` under both configs): measured with the TypeScript compiler API in plain node over a copy-only scratch estate -- operations.js 0/0, worldConditions.js 0/0, operationsOffStage.js 0/0, with a planted error still seen in each of the three. 101 effective of the 250 leaf cap, MEASURED by ESLint's own max-lines with skipBlankLines + skipComments (version 4's ~83 was an estimate). THE RESOLVER IS NOT HERE: consequenceFor(target) is EM-F1's, and authoring, importing or referencing it is a STOP. Guard coverage is guards: [] plus a non-empty guardsStated naming EM-C3 (ARCH SP5's 'stated when empty'); a rule FUNCTION authored here is a STOP. SP14's eleven-row set is DEMOTED to RAISED R8: sue-for-peace's requires.world contradicts this packet's own B3, and the chair's dispatch fixes this member at SEVEN.",
+          "action": "CREATE",
+          "path": "src/domain/edit/operationsOffStage.js"
+        },
+        {
+          "_note": "VERSION 6, MEASURED AT 16f0bc71c. EXACTLY ONE import line naming the leaf's FOUR groups (OFF_1..OFF_4) and FOUR spread lines inserted INSIDE the frozen OP_TYPES literal at the four anchors: after add-npc / before found-phantom (close-trade, declare-war); after found-phantom / before promote-phantom (make-peace, open-trade); after rebalance-power / before remove-faction (recall-force); after remove-npc / before set-field (resolve-outcome, send-force). THE ANCHORS ARE UNCHANGED BY EM-B1c1: set-npc-name sorts AFTER set-field (index 18 of 22), so version 5's rename-npc warning is REFUTED. THE IMPORT IS ONE LINE AND THAT IS A CONTRACT TERM: eslint's own Linter measured 233 at the tip, 238 with a one-line import (+5) and 241 with a four-line import (+8), which SP11 makes a STOP. There is no max-len rule in eslint.config.js. A trailing spread, or one map spread four times, reds A1's order arm -- proved in plain node (object spread fixes a key's position at FIRST insertion). Change no B1a row, no B1c1 row, no signature, no vocabulary, nothing else in the file.",
+          "action": "MODIFY",
+          "path": "src/domain/edit/operations.js",
+          "symbol": "the OP_TYPES literal -- a FOUR-POSITION SPLICE, plus ONE import line"
+        },
+        {
+          "_note": "VERSION 6, RE-MEASURED AT 16f0bc71c OVER THE REAL LANDED CODE (judgment 134: a sibling's LANDED fence, never its predicted one). FOUR ARMS (C1-C4) APPENDED to the file's single literal describe, AND SIX LANDED ARMS WIDENED IN PLACE ACROSS TEN ASSERTION SITES. ACTION IS `TEST`, NOT `MODIFY` (interim rule 4): the file exists only because NAMED SIBLINGS create it -- EM-B1a (the file, arms A1-A8) and EM-B1c1 (arms B1-B6). THE CASE IDS ARE C, NOT B: EM-B1c1 landed B1-B6 inside this very describe, so a second B1 would put two different claims under one title (RAISED R10). THE SIX ARMS AND THEIR TEN SITES, each measured by executing the arm's own expression over the composed catalogue: A1 (3 sites) -- Object.keys(OP_TYPES).length .toBe(15) measures 22; the set-equality against THE_FIFTEEN reports undeclared = the exact sorted seven; expect(live).toEqual(THE_FIFTEEN) reds. A SECOND roster constant carries the composed catalogue, derived as [...THE_FIFTEEN, ...THE_SEVEN].sort(compareCodepoint); THE_FIFTEEN itself is NOT edited because A3 and B1 read it. The own-sort clause and the eleven-field row loop stay GREEN (measured). A3 (1 site) -- keys.filter(stage === off-stage) asserted toEqual([]) reds UNCONDITIONALLY and becomes the exact sorted seven; A3's home and homeConsequence clauses stay GREEN against THE_FIFTEEN (measured). A4 (1 site) -- foreign, filtered by !THE_FOURTEEN.includes(named) over ALL types, returns the seven's own relation strings; the closure roster becomes the composed catalogue and the ORIGINAL clause is KEPT as a second assertion over the HOME rows alone (measured empty). A6 (1 site) -- specifiers is asserted EXACTLY and gains ./operationsOffStage.js as the SEVENTH entry in source order, after ./operationsNpcRename.js; the fence arm stays GREEN (measured: no prng/rngContext/store/components/force/muster/casualty/upkeep match). A6's DORMANCY arm is ALREADY RED at 16f0bc71c and is NOT this member's: RAISED R9. EM-B1c1's B1 (3 sites) -- live.length .toBe(15); the set-equality against THE_FIFTEEN; and THE HARD LITERAL expect([at, live[at-1], live[at+1]]).toEqual([11, set-institution-state, set-npc-status]), where at MEASURES 18 once these seven land. The two neighbours are UNCHANGED; only the index moves, to 18. EM-B1c1's B6 (1 site) -- minted = live.filter(t => !THE_FOURTEEN.includes(t)) asserted toEqual([B1C1_ROW]) becomes the EIGHT: the sorted seven plus set-npc-name. B6's three collide() clauses stay GREEN (measured: EDIT_KINDS reads 19 and none of the seven is a member; the banked pair is unmoved; the planted rename-npc control still returns [rename-npc]). Straight-line `it`, no .each / runIf / nested describe (SP3.4); every negative carries its `// anchored:` marker on the line IMMEDIATELY above the `.not.` itself. DELETE NO ASSERTION, WEAKEN NONE, ADD NO `it`.",
+          "action": "TEST",
+          "path": "tests/domain/editOperations.test.js",
+          "symbol": "arms C1-C4 appended; A1 (3 sites), A3 (1), A4 (1), A6 (1), EM-B1c1 B1 (3) and EM-B1c1 B6 (1) widened in place"
+        },
+        {
+          "_note": "THE GUARD-COVERAGE WALKER (design §6 instrument 3; ARCH §8.3) — arms B5-B8, the packet's prevention guard, in the tests/lint/chooserTotality.walker.test.js shape (HB-1's A7/A8: declared equals discovered, BOTH directions, full offender list). B5 is guard-the-guard: the walk is asserted non-empty before any membership claim. B6 is the set-equality both ways — an unregistered type reds, a stale row reds. B7 is design §12.8's clause: a declared guards entry that is not a function reds, and a row whose guards is non-empty while guardsStated claims emptiness reds. ⭐ At this wave every row is LEGITIMATELY guards: [] because guardRules.js is EM-C3's — §12.8's 'refuses a declared rule that cannot fire' bites only on a DECLARED rule, of which there are zero — so B7 pins that as the current state WITH ITS REASON and EM-C3's population will move it visibly, which is what keeps the instrument honest rather than vacuous. B8 is the register's own guard: this file owns an invariants entry in scripts/mutation-coverage-manifest.json, asserted from the TEST side so a dropped row reds here rather than at a terminal.",
+          "action": "CREATE",
+          "path": "tests/lint/opGuardCoverage.walker.test.js"
+        },
+        {
+          "_note": "THE MUTATION-COVERAGE ROW, PRICED AT COMPILE — the obligation PACKET_STANDARD.md records as having been discovered at a terminal TWICE. tests/lint is the FIRST of the ENFORCER_DIRS (tests/lint/mutationCoverage.shared.mjs:36-37) and tests/lint/mutationCoverageManifest.test.js asserts that every enumerated file owns an `invariants` entry, so the new walker above owes exactly one row. ⭐ THE SPLIT MOVED THIS OBLIGATION CLEANLY WITH THE FILE THAT INCURS IT — EM-B1a owes nothing. MEASURED AT THE BASE AND STATED AS A DELTA, NEVER AN ABSOLUTE (interim rule 9): this packet adds exactly +1 `invariants` row, keyed `invariants['tests/lint/opGuardCoverage.walker.test.js']`. As history with an as-of mark, the manifest held 704 rows at this packet's compile base and 716 at bdbf7c89c and 719 at the read tip 583f8f644 (tests/lint/ rows 179, uncoveredBaseline 186) -- it moved twelve rows while the packet waited, which is why the figure is a delta. Kinds are rationale | mutation | uncovered, ~472 kB; a `rationale` row is { kind: 'rationale', rationale: '<the executed account>' }. ⛔ ADDED SURGICALLY BESIDE ITS SIBLINGS — the file is NEVER re-serialised whole, because a formatter's diff would bury the one row that matters. ⚠ The rationale must carry the EXECUTED mutant account (planted, run under the gate mutex, restored digest-exact), which is why the ordered sequence writes it AFTER the mutants rather than before. ⛔⛔ RE-MEASURED AT e02bf0f26: this path now has a LIVE NON-TERMINAL HOLDER — EM-A1 (since LANDED on train EM-T9) at DRAFT — and DRAFT reserves exactly as READY does, so validate:packets reds if both hold it. The chair sequences EM-A1 and EM-B1b, or one defers the row to the terminal as the census row is deferred. RAISED R4. ⭐ TOOL-27 (2026-09-20) is the cure and this row now carries its key: rowKey = invariants['tests/lint/opGuardCoverage.walker.test.js'], so the reservation is ROW-LEVEL and EM-A1 (whose row keys a different test file) no longer collides. ESTATE-REPAIR-3 MEASURED that the validator at bdbf7c89c tolerates the unknown field: the changeManifest row check reads only `action`, `path` and the retirement keys (implementation-packets.mjs:802-840) and never enumerates a row's keys -- executed, `valid:` quoted in the lane report. ⓘ PLACEMENT IS JUST-IN-TIME (the chair's ruling 3): this packet is NOT placed in PACKET_MANIFEST.json until EM-A1 frees this path; it waits in the chair kit. The contract is unchanged by that — only the moment of placement is.",
+          "action": "REGISTER",
+          "path": "scripts/mutation-coverage-manifest.json",
+          "rowKey": "invariants['tests/lint/opGuardCoverage.walker.test.js']"
+        }
+      ],
+      "requiredSymbols": [
+        {
+          "_note": "THE OBLIGATION'S SOURCE, and the reason this packet rather than EM-B1a owes the mutation-coverage row: `tests/lint` is the FIRST entry of ENFORCER_DIRS (:36-37), and the meta-test asserts every file enumerated under those dirs owns an `invariants` entry in scripts/mutation-coverage-manifest.json. Named in requiredSymbols so the obligation is provable from the manifest rather than from packet prose. Proven present: grep -c 'export const ENFORCER_DIRS' -> 1.",
+          "path": "tests/lint/mutationCoverage.shared.mjs",
+          "symbol": "export const ENFORCER_DIRS"
+        },
+        {
+          "_note": "THE WALKER SHAPE THIS PACKET COPIES — a register walker that asserts its declared table SET-EQUAL to the live scan in BOTH directions with a full offender list (HB-1's A7/A8: 'classified equals discovered both directions', 'symbolsWithTwoDispositions empty'). Named so the proof shape is bound to a real precedent rather than described. ⚠ Its SCAN_ROOTS are src/domain/{worldPulse,spatial,traditions,region} — src/domain/edit is NOT among them, which is the separate measured finding that the decision-fork register does not reach the editor (EM-A2a's R2). Proven present: grep -c 'const SCAN_ROOTS' -> 1.",
+          "path": "tests/lint/chooserTotality.walker.test.js",
+          "symbol": "const SCAN_ROOTS"
+        },
+        {
+          "_note": "THE ESTATE'S ONE SANCTIONED STRING ORDER, locale-free by construction. The seven appended rows keep OP_TYPES' key order asserted through it over the combined twenty-five. Proven present: grep -c -> 1.",
+          "path": "src/domain/deterministicSort.js",
+          "symbol": "export const compareCodepoint"
+        },
+        {
+          "_note": "DISCHARGED AT VERSION 6: EM-B1a has LANDED, so the catalogue this member splices EXISTS at the read tip and is named here rather than in prose. The splice edits the literal's INTERIOR only, so the symbol text survives the packet's own edits (post-edit simulation: PRESENT). Proven present: grep -c -F -> 1 at 16f0bc71c.",
+          "path": "src/domain/edit/operations.js",
+          "symbol": "export const OP_TYPES"
+        },
+        {
+          "_note": "DISCHARGED AT VERSION 6. The closed stage vocabulary, which already carries BOTH members so this member appends rows without editing a frozen constant; C4 asserts membership from the TEST, where there is no cycle. Untouched by this packet. grep -c -F -> 1.",
+          "path": "src/domain/edit/operations.js",
+          "symbol": "export const OP_STAGES"
+        },
+        {
+          "_note": "DISCHARGED AT VERSION 6. The closed consequence policies, both members present for the same reason. Untouched by this packet. grep -c -F -> 1.",
+          "path": "src/domain/edit/operations.js",
+          "symbol": "export const OP_CONSEQUENCE_POLICIES"
+        },
+        {
+          "_note": "DISCHARGED AT VERSION 6. The ONE constructor; C1 and C4 call it over the new rows and it FLATTENS the declaration's { world, registry } pair onto EM-A1's Op.requires. This packet mints no second constructor and does not touch the signature. grep -c -F -> 1.",
+          "path": "src/domain/edit/operations.js",
+          "symbol": "export function makeOp"
+        },
+        {
+          "_note": "DISCHARGED AT VERSION 6. The ONE validator; C4 asserts the report-never-refuse law through it against a phantom target. Untouched. grep -c -F -> 1.",
+          "path": "src/domain/edit/operations.js",
+          "symbol": "export function validateOp"
+        },
+        {
+          "_note": "DISCHARGED AT VERSION 6: EM-B1c1 has LANDED. Its spread sits INSIDE the same frozen OP_TYPES literal this member splices (between set-institution-state and set-npc-status) and is the RATIFIED PRECEDENT for this member's four spreads. This packet must not disturb it; EM-B1c1's B4 asserts the composed row IS the leaf's row by value. grep -c -F -> 1.",
+          "path": "src/domain/edit/operationsNpcRename.js",
+          "symbol": "export const NPC_RENAME_OP_TYPES"
+        },
+        {
+          "_note": "THE ROSTER THE WIDENINGS DERIVE FROM. EM-B1a's SP6 one list; A4's and B6's filters key on it and this member does NOT edit it -- the composed roster is a SECOND constant derived from it. Named so the derivation is provable from the manifest. grep -c -F -> 1 at 16f0bc71c.",
+          "path": "tests/domain/editOperations.test.js",
+          "symbol": "const THE_FOURTEEN = ["
+        },
+        {
+          "_note": "EM-B1c1's DERIVED fifteen, read by A1, A3 and B1. THIS MEMBER MUST NOT EDIT IT: A3's home/homeConsequence clauses stay GREEN against it precisely because all seven new rows are off-stage, and the composed roster is [...THE_FIFTEEN, ...THE_SEVEN].sort(compareCodepoint). Post-edit simulation: PRESENT verbatim. grep -c -F -> 1.",
+          "path": "tests/domain/editOperations.test.js",
+          "symbol": "const THE_FIFTEEN = [...THE_FOURTEEN, B1C1_ROW].sort(compareCodepoint);"
+        },
+        {
+          "_note": "THE FIRST-PAINT MEMBERSHIP PROBE (SP2.11). The set is IMPORTED, never read from a list or a dist: it measures 270 at 16f0bc71c with src/main.jsx present and NO src/domain/edit/ member, which is this packet's +0 B price and the reason it is not the train's byte-arm holder. grep -c -F -> 1.",
+          "path": "vite.config.js",
+          "symbol": "export const EAGER_FIRST_PAINT_MODULES"
+        },
+        {
+          "_note": "THE SHIPPED PENDING-EDIT VOCABULARY, read BY IMPORT by EM-B1c1's B6, which this member widens. MEASURED at 16f0bc71c: 19 members, and NONE of this member's seven collides (recall-npc and recall-force are different strings). If a future member's row took a shipped verb's name the cure is to RENAME THE OP, never to add an exemption. grep -c -F -> 1.",
+          "path": "src/domain/pendingEdits.js",
+          "symbol": "export const EDIT_KINDS"
+        }
+      ],
+      "acceptanceCases": [
+        {
+          "id": "C1",
+          "case": "MAIN, WITH EM-B1a's TOTALITY RE-ASSERTED AS A DERIVATION AND NEVER AS A NUMERAL: Object.keys(OP_TYPES) is set-equal BOTH DIRECTIONS, with a full offender list, to EM-B1a's home roster PLUS this member's own seven, so a row dropped by either packet reds here and a sibling landing between the two does not make the arm wrong (MEASURED at 16f0bc71c: the LANDED fifteen -- EM-B1a's fourteen plus EM-B1c1's set-npc-name -- plus this member's seven = TWENTY-TWO; the arm reads the rosters, never the numeral). AND THE ORDER, WHICH IS THE ARM THE SPLICE EXISTS FOR: Object.keys(OP_TYPES) equals its own compareCodepoint sort. Every new row carries all ELEVEN declared fields with guardsStated non-empty. OP_TYPES is a composition of FIVE frozen maps, so the arm asserts OP_TYPES frozen, every composed ROW frozen, and each of the leaf's FOUR exported groups frozen -- which closes R2 from the five declared exports, EM-B1a's home map being nameable by nothing (judgment 92 R7)."
+        },
+        {
+          "id": "C2",
+          "case": "THE §13 PARTITION, TOTAL AND SET-EQUAL. The stage:'off-stage' set is EXACTLY the SEVEN { close-trade, declare-war, make-peace, open-trade, recall-force, resolve-outcome, send-force }, codepoint-sorted (version 6 corrects a version-4 leftover: the eleven-row set is RAISED R8 and is NOT compiled here) — an exact sorted list, never a length — and every other type is home. The consequence:'by-target-reality' set SET-EQUALS the off-stage set and consequence:'home' equals the home set. Counterforce: a source scan proves consequenceFor is defined NOWHERE in the module — the resolver is EM-F1's, and this packet declares policy only."
+        },
+        {
+          "id": "C3",
+          "case": "NO PHANTOM-SIDE PREREQUISITE (design SP13 clause d), MADE STRUCTURAL BY THE requires SPLIT: for EVERY off-stage type requires.world is [] and requires.registry holds only OP_TYPES keys, with make-peace pinned to exactly { world: [], registry: ['declare-war'] } -- a prior ENTRY IN THE REGISTRY -- and the same for recall-force (send-force), close-trade (open-trade) and resolve-outcome (send-force). PLUS THE CLOSURE ARM: no off-stage row names a HOME type in any relation, because conflictsWith/relatedTo are symmetric and requires/enables exact inverses, so the counterpart would land on a B1a row and that is a STOP. Relational integrity is re-run over the whole composed catalogue: every relation string is an OP_TYPES key; conflictsWith and relatedTo symmetric; requires.registry/enables exact inverses; the two requires kinds kept apart."
+        },
+        {
+          "id": "C4",
+          "case": "THE REPORT-NEVER-REFUSE LAW, AND NO FORCE-RETURN PATH. A WELL-FORMED off-stage op against a phantom target validates ok:true — validateOp reports malformation only and never refuses an act, because at this table a god sits and magic is real (design §2.7; §P8). Plus the forbidden-home arm: a source scan proves the module imports no force, muster, casualty or upkeep module and writes no such path, with the matcher proved live on a planted string — the home procedures stay EM-F1's."
+        },
+        {
+          "id": "C5",
+          "case": "THE COVERAGE WALKER — GUARD-THE-GUARD, FIRST. The walk is asserted non-empty before any membership claim; every row of the COMPOSED catalogue, never a numeral, declares guards as an ARRAY and guardsStated as a NON-EMPTY string."
+        },
+        {
+          "id": "C6",
+          "case": "DECLARED EQUALS DISCOVERED, BOTH DIRECTIONS. The declared coverage set SET-EQUALS the live scan in BOTH directions with a full offender list (the chooserTotality shape) — an unregistered type reds, a stale row reds."
+        },
+        {
+          "id": "C7",
+          "case": "A DECLARED RULE MUST BE ABLE TO FIRE (design §12.8). A declared guards entry that is not a function reds; a row whose guards is non-empty while guardsStated claims emptiness reds. At this wave every row is legitimately guards: [] because guardRules.js is EM-C3's, and THAT IS ASSERTED AS THE CURRENT STATE WITH ITS REASON, so the instrument is honest rather than vacuous and EM-C3's population will move it visibly."
+        },
+        {
+          "id": "C8",
+          "case": "THE REGISTER'S OWN GUARD. tests/lint/opGuardCoverage.walker.test.js owns an `invariants` entry in scripts/mutation-coverage-manifest.json — the obligation this packet prices at compile — asserted from the TEST side so a dropped row reds here rather than at a terminal, which is the failure mode PACKET_STANDARD.md records as having happened twice."
+        }
+      ],
+      "checks": [
+        [
+          "npx",
+          "vitest",
+          "run",
+          "--pool=threads",
+          "--maxWorkers=2",
+          "tests/domain/editOperations.test.js"
+        ],
+        [
+          "npx",
+          "vitest",
+          "run",
+          "--pool=threads",
+          "--maxWorkers=2",
+          "tests/lint/opGuardCoverage.walker.test.js",
+          "tests/lint/mutationCoverageManifest.test.js",
+          "tests/lint/negativeAssertionAnchor.walker.test.js",
+          "tests/lint/contractTestAntiVacuity.walker.test.js",
+          "tests/lint/seedLoopTotality.walker.test.js",
+          "tests/lint/editMutationPath.walker.test.js",
+          "tests/lint/ruinFilterRoster.walker.test.js",
+          "tests/lint/entropyRootCensus.walker.test.js",
+          "tests/lint/tuningRegister.walker.test.js"
+        ],
+        [
+          "npx",
+          "vitest",
+          "run",
+          "--pool=threads",
+          "--maxWorkers=2",
+          "tests/copy/voiceMechanics.test.js"
+        ],
+        [
+          "npx",
+          "vitest",
+          "run",
+          "--pool=threads",
+          "--maxWorkers=2",
+          "tests/property/generatorGoldenMaster.test.js",
+          "tests/property/dossierProseManifest.test.js"
+        ],
+        [
+          "npx",
+          "eslint",
+          "src/domain/edit/operations.js",
+          "src/domain/edit/operationsOffStage.js",
+          "tests/domain/editOperations.test.js",
+          "tests/lint/opGuardCoverage.walker.test.js"
+        ],
+        [
+          "node",
+          "scripts/check-observed-shape-readers.mjs"
+        ],
+        [
+          "node",
+          "scripts/implementation-packets.mjs",
+          "validate"
+        ],
+        [
+          "npm",
+          "run",
+          "typecheck:ratchet"
+        ],
+        [
+          "npm",
+          "run",
+          "typecheck:domain:strict"
+        ]
+      ],
+      "_preproofNote": "VERSION 6 -- the RE-PROOF at 16f0bc71c (train EM-T12's FLIPPED tip), 2026-09-22, Opus pre-proof lane, session cce01f87. Version 5 measured EM-B1a v9 and EM-B1c1 v2 AS PACKETS; both have LANDED (EM-B1a v11 on EM-T11, EM-B1c1 v5 on EM-T12) and every fact resting on the prediction has been re-measured against the real code. TRAIN: EM-T13. Every dependency is terminal and the registered estate holds 215 packets with ZERO non-terminal ones, so version 5's two duplicate-change-path errors and RAISED R4 are DISSOLVED. WHAT MOVED: the composed catalogue is 22 (not 21); the four splice anchors are UNCHANGED and version 5's rename-npc warning is REFUTED (EM-B1c1 landed set-npc-name, which sorts AFTER set-field, at index 18); operations.js measures 233 at the tip and 238 spliced; the import must be ONE LINE (a four-line import is +8 and a SP11 STOP); SIX landed arms red across TEN sites, not four arms (EM-B1c1's B1 and B6 are new, and B1 carries the hard literal [11, set-institution-state, set-npc-status] that moves to 18); the acceptance ids are re-lettered C1-C8; the leaf's guardsStated may not spell consequenceFor; ten requiredSymbols rows are DISCHARGED now that their providers have landed. RAISED R9 IS NOT THIS MEMBER'S AND IS THE CHAIR'S TO RULE: A6's dormancy arm is ALREADY RED at 16f0bc71c because EM-C4a's landed src/store/editSlice.js:31 imports validateOp from src/domain/edit/operations.js and EM-C4a widened no arm of this file. The preamble SHA-256 at the read tip is fdecd426828665cad2dfaf872871f29f46fa4816e1bd4c43c20ccd84dacc9e7c (the fifth amendment); the packet is written to the SIXTH and the chair re-stamps at placement."
+    },
+    {
+      "id": "EM-D0e",
+      "status": "READY",
+      "packetPath": "docs/implementation/packets/settlement-editor/EM-D0e.md",
+      "verifiedBase": "e1750d7454c1dff7e81342efadd05e47719ca6aa",
+      "_preamble": "docs/implementation/preambles/EM-PREAMBLE.md at SHA-256 fdecd426828665cad2dfaf872871f29f46fa4816e1bd4c43c20ccd84dacc9e7c, MEASURED at this member's read tip (efd0eb448) with `shasum -a 256` and never copied. THE FIFTH AMENDMENT HAS LANDED, so `COMPILE-RULES.interim.md` is SUPERSEDED (the preamble's own header sentence) and this capsule carries NO interim row: the amended preamble's §P2, §P9, §P10 and §P11 carry every rule. ⭐⭐ THE SIXTH AMENDMENT (drafted and selected in the kit, judgment 144) LANDS AS TRAIN EM-T13'S FIRST COMMIT, ahead of this member, so this packet is WRITTEN TO IT rather than re-stamped into it: §P2 rows 19-21, §P6's negative-assertion rule and marker correction, §P7's two additions, §P9's ONE effective-line instrument and §P8's new STOP are obeyed at version 1 (§6.6 and §7a carry each measurement). The hash above is the FIFTH's, RE-MEASURED BY THE PRE-PROOF AT 16f0bc71c AND UNCHANGED (`git show 16f0bc71c:docs/implementation/preambles/EM-PREAMBLE.md | shasum -a 256` = fdecd426...c9e7c); the chair re-stamps it to the landed sixth at placement. ⭐ VERSION 1.1 (the independent pre-proof at train EM-T12's flipped tip 16f0bc71c): the two `_pendingRequiredSymbols` rows are DISCHARGED into requiredSymbols against real code, with one spelling corrected; tests/lint/editMutationPath.walker.test.js - a walker EM-C4a landed in the T12 window that governs every src/ module - joins `checks`; §P2.21(a)'s root claim is corrected (the entropy census walks src/ whole and the disposition is by content); and four line addresses are refreshed. No contract, no case, no figure and no budget moved. Visible here: a NEW test file is CREATE, never TEST (§P9(b)); `docs/content/wiring-census.json` appears in NO row and no check and this member's wiring delta is +0, both roots measured (§P2.13); NO byte arm and no dist read anywhere in `checks`, and this member is NOT train EM-T13's byte-arm holder (§P2.11); `_pendingRequiredSymbols` is the SIBLING KEY (§P9(a)); the Status row carries its value ALONE (§P9(c)); §7 and this capsule are SET-EQUAL (§P9(d)); every register figure is a DELTA (§P3.5); §P2.15 BINDS (this member writes `src/components/**`) and is discharged by grep with the answer NONE; the count prover is KIT FURNITURE accepting `<packet.md> <capsule.json>` and is neither a `checks` entry nor a §7 row (§P9); §P2.16 finds NO line-addressed register row for either modified path; §P2.2 is NOT owed (`tests/components` is in none of ENFORCER_DIRS, read at the tip, and the new basename matches no NAME_PATTERN token); §P2.17 does NOT reach `src/components` or `src/copy` (`TREES_P2P3` read at the tip is exactly ['src/domain','src/generators']).",
+      "changeManifest": [
+        {
+          "action": "CREATE",
+          "path": "src/components/edit/CardEditorDialog.jsx",
+          "symbol": "CardEditorDialog - ONE default-exported function component at EM-D0e §6.1's exact contract, plus TWO frozen named exports, REFUSAL_COPY_KEYS and REFUSAL_FALLBACK_KEY. Props, closed and in this order: { open, cardType, entityId, values, world, seed, phase, apply = null, onClose }. The field list is GENERATED from `declarationsFor(cardType)` in the table's AUTHORED order and is never hand-written, never sorted and never filtered; `kind: 'pool'` maps to PoolField, `kind: 'free'` and `'free-cascade'` to FreeField, and any other kind (the faction card's one `share` row, EM-D2's) renders NO control at all. Options are `poolValues(d.pool, world)` with the STORED value PREPENDED when it is a non-empty string the pool does not offer (judgment 109's cure, decided by the dialog, with `PoolField` left pure); the roller is bound per declaration to `rollFrom(d.pool, world, ...)` and the leaf draws no random number and reads no clock. Save dispatches ONE `apply({ cardType, entityId, field, value })` per CHANGED field, awaited, in the authored order, stopping at the first refusal and naming the refused field's label beside that reason's line. `typeof apply === 'function'` is the ONE predicate that decides whether Save is live, checked at the button's disabled state AND as the handler's first statement (EM-D0d's landed `roll` idiom). 140 EFFECTIVE LINES of 250, MEASURED with eslint's own Linter (max-lines, skipBlankLines + skipComments) over the planned text; the packet total is 155 of 400. ⛔ IMPORTS NOTHING from `src/store/**`, `src/application/commands/**`, `src/domain/edit/operations.js` or `src/domain/edit/dmLayer.js` - a ban now ENFORCED BY A LANDED WALKER, not only by this contract: EM-C4a's `tests/lint/editMutationPath.walker.test.js` (landed in the EM-T12 window) source-scans every `src/` module for a STATIC named import of `makeOp`, `validateOp`, `OP_TYPES` or `applyEdit` and convicts it BY NAME unless it is one of the three declared EDIT_PATH members; this leaf is none of them, so a single such import reds that walker's live-tree arm. It is a `checks` entry at version 1.1 for that reason. mints no op; spells no tier gate; runs no effect, no timer and no portal; reads no window, storage or URL."
+        },
+        {
+          "action": "MODIFY",
+          "path": "src/copy/en.js",
+          "symbol": "edit.dialog.* - THIRTEEN strings VERBATIM as §6.2 spells them, FLAT (no `refusal:` sub-object), appended as a `dialog:` sub-block INSIDE the registry's existing LAST block `edit:` (:1825), beside `field:` and never renaming it. EM-D0d's five `edit.field.*` keys stay BYTE-UNMOVED. +15 EFFECTIVE LINES, MEASURED with eslint's own Linter under max-lines with skipBlankLines and skipComments over the file as it stands (1260) and over the planned text (1275) - the ONE instrument (§P9, sixth amendment), never wc -l. ⭐ THE SHAPE IS THE BUDGET: a nested `refusal: {` sub-object measured +17, two over the standard's shared-file cap of fifteen, so the eight reasons were flattened to `refusal<Reason>` keys and the two brace lines disappeared, with not one word changed. No em dash and no exclamation point, MEASURED by the voice walker's own predicate (voiceMechanics.test.js:144) over all thirteen strings plus the leaf's fourteen non-copy literals: 27 measured, 0 and 0, with a planted control proving the predicate fires. No figure is rendered, so no prose-numerics row is owed."
+        },
+        {
+          "action": "TEST",
+          "path": "tests/components/primitives/editorHalo.test.jsx",
+          "symbol": "A6's `filesNaming('editorHalo')` exact set - the ONE-TOKEN CURE (§6.3): one `const DIALOG_REL = 'src/components/edit/CardEditorDialog.jsx';` beside POPUP_REL/SHEET_REL at :30-31, and the dialog's path added to the expected array at :180, which `.sort()` already normalizes. EM-D0c's landed arm is an EXACT SET in both directions over every `src/` leaf's TEXT, so this member's leaf reds it the moment it names the prop; the arm is widened by the member whose landing needs it, under its own seal (judgment 110). ⛔ No arm weakened, no assertion deleted, no `it` added, no title minted; the two sibling exact sets (`EDITOR_GROUND`, `houseBloom`) stay BYTE-UNMOVED and are the proof from the other side that this leaf composes no glow of its own. +2 lines."
+        },
+        {
+          "action": "CREATE",
+          "path": "tests/components/cardEditorDialog.test.jsx",
+          "symbol": "EIGHT acceptance arms A1-A8 as EIGHT literal `it`s under ONE literal `describe`, `/** @vitest-environment jsdom */` on the first line, at `tests/components/editFields.test.jsx`'s exact shape. ⛔ No `.each`, no loop, no conditional and no nested `describe` (§P3.4); ⛔ no binding named `it`, `test` or `describe` anywhere in the file. Adds eight `it`s, one `describe`."
+        }
+      ],
+      "requiredSymbols": [
+        {
+          "path": "src/domain/edit/fieldDeclarations.js",
+          "symbol": "export function declarationsFor(cardType) {"
+        },
+        {
+          "path": "src/domain/edit/fieldDeclarations.js",
+          "symbol": "export function isEditableCard(cardType) {"
+        },
+        {
+          "path": "src/domain/edit/pools.js",
+          "symbol": "export function poolValues(poolId, world) {"
+        },
+        {
+          "path": "src/domain/edit/pools.js",
+          "symbol": "export function rollFrom(poolId, world, seed, entryId, n) {"
+        },
+        {
+          "path": "src/components/edit/PoolField.jsx",
+          "symbol": "export default function PoolField({"
+        },
+        {
+          "path": "src/components/edit/FreeField.jsx",
+          "symbol": "export default function FreeField({ declaration, value, onChange, disabled = false }) {"
+        },
+        {
+          "path": "src/components/primitives/PortablePopup.jsx",
+          "symbol": "export default function PortablePopup({ open, title, onClose, children, testId = 'portable-popup', width = 560, editorHalo = false }) {"
+        },
+        {
+          "path": "src/components/primitives/BottomSheet.jsx",
+          "symbol": "export default function BottomSheet({"
+        },
+        {
+          "path": "src/components/primitives/Button.jsx",
+          "symbol": "export default function Button({"
+        },
+        {
+          "path": "src/components/generate/ClerkNote.jsx",
+          "symbol": "export function ClerkNote({ rubric, children, role, actions, style }) {"
+        },
+        {
+          "path": "src/copy/index.js",
+          "symbol": "export function t(key, vars) {"
+        },
+        {
+          "path": "src/hooks/useIsMobile.js",
+          "symbol": "export default function useIsMobile(breakpoint = DEFAULT_BREAKPOINT) {"
+        },
+        {
+          "path": "src/copy/en.js",
+          "symbol": "      rollUnavailable: 'Rolling is unavailable here',"
+        },
+        {
+          "path": "tests/components/primitives/editorHalo.test.jsx",
+          "symbol": "const POPUP_REL = 'src/components/primitives/PortablePopup.jsx';"
+        },
+        {
+          "path": "tests/components/primitives/editorHalo.test.jsx",
+          "symbol": "const filesNaming = (needle) => srcFiles()"
+        },
+        {
+          "path": "src/store/editSlice.js",
+          "symbol": "export const PLAIN_EDIT_REFUSALS = Object.freeze([",
+          "_dischargedFrom": "_pendingRequiredSymbols, at train EM-T12's landing. EM-C4a version 4.2 is REAL CODE at 16f0bc71c (src/store/editSlice.js:46) and this row is measured VERBATIM there, count 1. ⛔ THE SPELLING MOVED: the pending row carried the CONTRACT form `export const PLAIN_EDIT_REFUSALS;`, which is ABSENT verbatim at the tip (`git grep -c -F` = 0) and would have refused this member's own dispatch. The landed seven are exactly REFUSAL_COPY_KEYS' seven keys, in the same codepoint order, measured by importing the frozen array."
+        },
+        {
+          "path": "src/domain/edit/pools.js",
+          "symbol": "'npc.role':",
+          "_dischargedFrom": "_pendingRequiredSymbols, at train EM-T12's landing. EM-A2b version 7 is REAL CODE at 16f0bc71c and this row is measured VERBATIM there, count 1. POOLS now carries SEVENTEEN rows (was eleven at efd0eb448); `npc.role` reads rosterField(world?.institutions, 'role', 'name'), so A2's empty case (`world = { institutions: [] }`) still resolves EMPTY and the arm holds unchanged."
+        }
+      ],
+      "_requiredSymbolsNote": "SEVENTEEN rows (fifteen at version 1 plus the TWO discharged from `_pendingRequiredSymbols` when train EM-T12 landed), every one measured VERBATIM at `git grep -c -F <symbol> -- <path>` = 1 at 16f0bc71c by the pre-proof (the commands and their outputs are in EM-D0e.evidence.md §7). Every row is still present AFTER this member's own edits, which is the post-edit simulation §P10 requires: the member renames nothing, moves nothing and deletes nothing. ⛔ THE ONE LINE THIS MEMBER CHANGES IN A LANDED TEST - `expect(filesNaming('editorHalo')).toEqual([SHEET_REL, POPUP_REL].sort());` - is DELIBERATELY NOT a requiredSymbols row: a row asserting it verbatim would refuse this member's own build after its own edit. Its two stable neighbours in the same file are the rows above instead.",
+      "_pendingRequiredSymbols": [],
+      "_pendingRequiredSymbolsNote": "EMPTY AT VERSION 1.1 — BOTH ROWS DISCHARGED. §P9(a)'s sibling key held two rows at version 1 because EM-C4a v4.2 and EM-A2b v7 were packets, not code. Train EM-T12 LANDED at 16f0bc71c (its four members flipped LANDED in that commit), so the pre-proof re-measured both against real code and promoted them into `requiredSymbols` — judgment 134's law, a sibling's LANDED fence and never its predicted one. One spelling MOVED in the promotion and is recorded on its row.",
+      "_retiredSymbols": [],
+      "_retiredSymbolsNote": "EMPTY, and proved by the post-edit simulation: this member creates two files, appends to a copy block and adds two lines to one landed test. No symbol is renamed, moved or deleted, so no other packet's requiredSymbols row needs discharging and §P10.9's last-lands rule does not apply.",
+      "acceptanceCases": [
+        {
+          "id": "A1",
+          "file": "tests/components/cardEditorDialog.test.jsx",
+          "case": "GENERATED FROM THE TABLE, NEVER A HAND-WRITTEN LIST. For cardType='npc' the dialog renders exactly `declarationsFor('npc').length` controls in the table's AUTHORED order - a single-line input for `name`, a select for `role`, a select for `status`, a textarea for `note` - each labelled with the declaration's OWN `label` read from the producer and never re-typed. AND the landed negative control: for cardType='faction' the rendered controls are `faction` and `category` and the `share` row renders NO control and NO label."
+        },
+        {
+          "id": "A2",
+          "file": "tests/components/cardEditorDialog.test.jsx",
+          "case": "THE TWO EMPTIES ARE DIFFERENT AND BOTH ARE SHOWN. With world={institutions: []} the `role` pool resolves EMPTY, so its select is present, EMPTY and DISABLED, carrying t('edit.field.noOptions') - never absent (design §2.1). In the SAME render, `name` with no value is present, EMPTY and ENABLED. The arm reads the pool through `poolValues` itself, so it holds both before and after EM-A2b lands npc.role."
+        },
+        {
+          "id": "A3",
+          "file": "tests/components/cardEditorDialog.test.jsx",
+          "case": "THE OFF-LIST STORED VALUE (judgment 109). With values.status a word `poolValues('npc.status', world)` does NOT contain - asserted absent from that set in the same arm - the status control's value IS that word and its FIRST option IS that word, with the pool's own members following in the producer's order, unsorted and unfiltered. The control stays pure: the same arm asserts the leaf's source names no sort, filter or splice over an options array."
+        },
+        {
+          "id": "A4",
+          "file": "tests/components/cardEditorDialog.test.jsx",
+          "case": "THE SEEDED ROLL IS THE PRODUCER'S AND THE DIALOG DRAWS NOTHING. Clicking roll-another on a populated pool sets the control to exactly rollFrom(declaration.pool, world, seed, entityId, 1), computed in the arm by calling the producer and never by mocking, and clicking again with the same props reaches the same value twice. In the same arm, a POSITIVE set equality: the list of draw-and-clock spellings in the leaf's source equals the empty set, with the scanner driven over a source that DOES contain one."
+        },
+        {
+          "id": "A5",
+          "file": "tests/components/cardEditorDialog.test.jsx",
+          "case": "THE CLOSED REFUSAL SET, BOTH WAYS, AND THE ONE FALLBACK. Object.keys(REFUSAL_COPY_KEYS) is set-equal BOTH DIRECTIONS to PLAIN_EDIT_REFUSALS imported from src/store/editSlice.js and never re-typed; every value resolves through t() to a string that is not the key itself; and a stub answering { ok:false, reason:'no_verb' } - a word outside the seven, the executor's own - renders REFUSAL_FALLBACK_KEY's line and no invented word."
+        },
+        {
+          "id": "A6",
+          "file": "tests/components/cardEditorDialog.test.jsx",
+          "case": "ONE WRITER, THE RIGHT COORDINATES, THE AUTHORED ORDER, AND THE STOP. With a recording stub, changing `role` then `name` and pressing Save calls the stub EXACTLY TWICE, `name` FIRST, each call carrying exactly { cardType:'npc', entityId, field, value } and no other key; an unchanged field is never dispatched. With the stub refusing the first call canon_locked, the second field is NOT dispatched and the notice names the refused field's label beside that reason's line. THE BELT: with `apply` absent the Save control is disabled AND the handler returns before any call, proved by re-enabling the button through the rendered DOM and firing the click."
+        },
+        {
+          "id": "A7",
+          "file": "tests/components/cardEditorDialog.test.jsx",
+          "case": "DARK, AND CANON. open={false} renders NOTHING - container.innerHTML is the empty string, not a wrapper - and an undeclared cardType renders nothing in the same way. With phase='canon' every control is DISABLED, the canon line is present, and a Save click dispatches nothing."
+        },
+        {
+          "id": "A8",
+          "file": "tests/components/cardEditorDialog.test.jsx",
+          "case": "THE TWO DOORS, THE HALO, AND THE SOURCE SCAN WITH ITS PLANTED CONTROL. Desktop (useIsMobile false): the surface carries role=dialog, aria-modal=true, exactly ONE control whose accessible name contains Close, and the GOLD rim of editorHalo. Phone (mobile true): the surface is BottomSheet with editorHalo, its own trigger, and the same door facts once opened. AND THE LEAF'S OWN BYTES: a scan of CardEditorDialog.jsx's source finds none of set-npc-name, rename-npc, makeOp, applyEdit, OP_TYPES, src/store/, src/application/, EDITOR_GROUND, houseBloom, TIER_GATE, settlementEditor - as a POSITIVE set equality against the empty set, with a PLANTED control string proving the scanner fires."
+        }
+      ],
+      "checks": [
+        [
+          "npx",
+          "vitest",
+          "run",
+          "--pool=threads",
+          "--maxWorkers=2",
+          "tests/components/cardEditorDialog.test.jsx",
+          "tests/components/editFields.test.jsx",
+          "tests/components/primitives/editorHalo.test.jsx",
+          "tests/components/copyRawKeyRender.test.jsx"
+        ],
+        [
+          "npx",
+          "vitest",
+          "run",
+          "--pool=threads",
+          "--maxWorkers=2",
+          "tests/copy/voiceMechanics.test.js",
+          "tests/copy/localeParity.test.js",
+          "tests/copy/copy.test.js",
+          "tests/copy/proseLeak.test.js"
+        ],
+        [
+          "npx",
+          "vitest",
+          "run",
+          "--pool=threads",
+          "--maxWorkers=2",
+          "tests/lint/copyKeyResolution.walker.test.js",
+          "tests/lint/editMutationPath.walker.test.js",
+          "tests/lint/dialogExit.walker.test.js",
+          "tests/lint/bottomAnchoredChrome.walker.test.js",
+          "tests/lint/negativeAssertionAnchor.walker.test.js",
+          "tests/lint/contractTestAntiVacuity.walker.test.js",
+          "tests/lint/seedLoopTotality.walker.test.js",
+          "tests/lint/proseNumerics.test.js",
+          "tests/lint/tuningRegister.walker.test.js",
+          "tests/lint/mutationCoverageManifest.test.js",
+          "tests/lint/refusalNoticeCoverage.walker.test.js",
+          "tests/lint/proseWiringCensus.walker.test.js"
+        ],
+        [
+          "npx",
+          "vitest",
+          "run",
+          "--pool=threads",
+          "--maxWorkers=2",
+          "tests/design/houseBloom.test.js",
+          "tests/design/organicMotion.test.js"
+        ],
+        [
+          "node",
+          "-e",
+          "const{pathToFileURL}=require('node:url');import(pathToFileURL('vite.config.js').href).then(m=>{const S=[...m.EAGER_FIRST_PAINT_MODULES].map(String);const mine=S.filter(p=>p.includes('src/components/edit/'));const copy=S.filter(p=>p.endsWith('src/copy/en.js'));const idx=S.filter(p=>p.endsWith('src/copy/index.js'));console.log('EAGER_FIRST_PAINT_MODULES:',S.length,'| src/components/edit members:',mine.length,'| src/copy/en.js members:',copy.length,'| src/copy/index.js members:',idx.length);if(mine.length!==0)process.exit(1);if(copy.length!==0)process.exit(1);if(!S.some(x=>x.endsWith('src/components/theme.js')))process.exit(1);})"
+        ],
+        [
+          "node",
+          "scripts/implementation-packets.mjs",
+          "validate"
+        ]
+      ],
+      "_checksNote": "§P7: a sealed `checks` array NAMES FILES, NEVER the `tests/lint` DIRECTORY, and the lighting walker appears NOWHERE (its presence means `check:packet` can never pass). The governing set was COMPUTED (TOOL-26's governing-tests.mjs has not landed): `git grep -l -F <basename> -- tests` for every changed file - `CardEditorDialog` gives 0 (nothing names it yet), `editorHalo` gives 2 - plus every walker that governs `tests/components`, the directory of the one test CREATE, minus the lighting walker. Entry 5 is the FIRST-PAINT MEMBERSHIP PROBE: it IMPORTS vite.config.js's own exported set, reads no `dist` and therefore CANNOT SKIP, and it exits non-zero if `src/components/edit/**` or `src/copy/en.js` has entered the eager closure. The validator is LAST.",
+      "_deferredRows": "PREDICTIONS, named in no `checks` and in no changeManifest. (1) tests/lint/.lighting-census-baseline.json - the NAMED INTERIOR RED, DELTA ONLY, all five figures in the register's own order: files +1, parked +0, credited +1, titles +8, suiteTitles +1 (ONE new test file, EIGHT literal `it`s, ONE literal `describe`; the TEST row on editorHalo.test.jsx adds no title). The predicted red's SHAPE is `expected <N+1> to be <N>` on the first figure the walker reaches. The terminal refreeze is the CHAIR's; the member never edits the baseline and never sets LIGHTING_CENSUS_REFREEZE; the row names the BASELINE JSON, never the walker. (2) docs/content/wiring-census.json - NOT NAMED (§P2.13): no `.js` CREATE under src/generators/** or src/domain/**, both roots measured, so stamp.producerIndexFiles +0, stamp.files and stamp.candidateLeaves UNMOVED, totals.* UNMOVED, and proseWiringCensus.walker.test.js is predicted GREEN rather than red on two arms. (3) scripts/mutation-coverage-manifest.json - NOT OWED: ENFORCER_DIRS read at the tip is ['tests/lint','tests/design','tests/docs','tests/data','tests/copy','tests/security','tests/edgeFunctions','tests/generators'] and `tests/components` is not among them, and `cardEditorDialog.test.jsx` matches no NAME_PATTERN token. (4) The tuning inventory - NOT OWED: TREES_P2P3 read at the tip is exactly ['src/domain','src/generators']. (5) The edge-shared metas - NONE: 0 of 5 name either path in their `inputs`.",
+      "_byteArm": "THIS MEMBER IS NOT TRAIN EM-T13'S BYTE-ARM HOLDER (§P2.11) and carries NO row on tests/build/vendorPdfLazy.test.js or tests/build/generationWorkerLazy.test.js. PREDICTED DELTAS PER CLOSURE, each by MEMBERSHIP rather than by estimate, each measured by a probe that imports the exported set or walks static imports and reads no dist, so neither can skip: eager first paint N -> N modules and +0 bytes (EAGER_FIRST_PAINT_MODULES measured 270 at efd0eb448 as an AS-OF figure under §P3.5, with src/components/edit/** at 0, src/copy/en.js absent, src/copy/index.js absent, src/domain/edit/** at 0, both primitives absent); the generation worker +0 B (187 modules walked, 0 of either path; customContentPreview 186 and advanceInterval 494 likewise 0), so the EXACT zero-slack WORKER_BUNDLE_CEILING_BYTES cannot move; the lazy PDF engine +0 B (pdfRender.worker.js, 326 modules, 0 of either). ⭐ RE-MEASURED AT 16f0bc71c BY THE PRE-PROOF WITH A SECOND, INDEPENDENT STATIC-IMPORT WALK: 220 / 267 / 546 / 371 modules and the SAME ZERO membership for both paths in all four closures, and the eager set still 270 with src/components/edit/ 0, src/copy/en.js 0, src/copy/index.js 0, src/domain/edit/ 0 and src/store/editSlice.js 0 (EM-C4a's lazy leaf landed OUTSIDE the closure, as it claimed). The two instruments disagree on the COUNTS and agree on the MEMBERSHIP, which is exactly why the counts are declared as instrument-named as-of marks and the membership is the load-bearing claim. The four module counts are kept only as an as-of mark naming the instrument that produced them; the load-bearing claim is MEMBERSHIP.",
+      "_browserSuite": "§P2.15 BINDS (this member writes src/components/**) and its answer is COMPUTED, not assumed: `git grep -n -F <name> -- e2e` for every name, test id and label the member adds - `card-editor-dialog`, `CardEditorDialog`, `Editor` (and `Close Editor`), `Edit this card`, `edit.dialog` - returns ZERO hits for every one. The member adds no route and, with the App.jsx mount out of the manifest (§2.2(a)), no spec can reach the leaf at all. ⇒ NO e2e spec governs this surface and this member names none. SLOT: the first editor spec belongs to EM-D1, the member that mounts the door, together with the measured `/Save\\b/i` locator collision at e2e/flow-b-auth-credits-ai.spec.js:203. No spec is weakened, written or skipped here.",
+      "_countLaw": "§P9(f). EIGHT is the number in EVERY authority and EM-D0e.count-prover.mjs refuses any inequality: the CREATE row's words say eight `it`s; §9's matrix homes EIGHT acceptance cases, ALL of them in tests/components/cardEditorDialog.test.jsx, which this packet's own CREATE row authorizes; §9a names the same eight; §10's battery names that file first; and the deferred lighting row says titles +8 and suiteTitles +1. The TEST row on tests/components/primitives/editorHalo.test.jsx declares ZERO arms and homes ZERO cases, and adds no title. EVERY SEALED CASE HAS A HOME AND EVERY HOME HAS A §7 ROW: no case is homeless.",
+      "_trainAndLane": "Rides train EM-T13 (lane-branch pattern em-t13-d0e-2026-09-22), the train AFTER EM-T12, because EM-C4a v4.2, EM-A2b v7, EM-B1c1 v5 and EM-B2a3 must all have LANDED first. Exactly two trains ahead of what has landed at compile time, which is the operating standard's limit. Path-disjoint from every packet in packets-waiting: no waiting capsule names src/components/edit/CardEditorDialog.jsx, src/copy/en.js, tests/components/primitives/editorHalo.test.jsx or tests/components/cardEditorDialog.test.jsx. ⭐ THE OTHER MEMBER OF EM-T13 IS EM-B1b version 5, MEASURED PATH-DISJOINT AT THE PRE-PROOF: its five rows are src/domain/edit/operationsOffStage.js (CREATE), src/domain/edit/operations.js (MODIFY), tests/domain/editOperations.test.js (TEST), tests/lint/opGuardCoverage.walker.test.js (CREATE) and scripts/mutation-coverage-manifest.json (REGISTER) - ZERO intersections with this member's four. TWO SHARED REGISTER ROWS: (1) tests/lint/.lighting-census-baseline.json, a DEFERRED prediction in both and never a manifest row, whose terminal refreeze is the chair's and sums the two deltas; (2) scripts/mutation-coverage-manifest.json, which the pre-proof brief makes the property of whichever non-terminal member NAMES it - EM-B1b names it and THIS MEMBER DOES NOT (tests/components is in none of ENFORCER_DIRS, re-measured at the tip). This member is not the byte-arm holder of EM-T13 and predicts +0 on every budgeted closure, so the holder is the chair's to name at the placement without regard to it.",
+      "_amendmentSix": "WRITTEN TO THE SIXTH AMENDMENT AS DRAFTED (judgment 144; the chair's dispatch addendum of 2026-09-22 12:05), which lands as train EM-T13's FIRST commit. Row 19 (the voice counter at compile): RUN - the walker's own predicate over 27 planned literals, 0 em dashes and 0 exclamation points, with a planted control; the replacements are spelled in §6.2 by this compile, not left to a build lane. Row 20 (the reviewed-set pin): THIS MEMBER REGISTERS NO APPLICATION COMMAND - it adds no row to standardCommandRegistry.js, so commandRegistry.test.js's pin cannot move and is not a TEST row here; the command its edits travel on is registered by EM-C4a, which carries that pin as its own v4.2 row; and this member performs no store dispatch at all (one injected function prop), so the dead-op ratchet's premise is untouched. Row 21 (the instrument list): (a), (b) and (c) do NOT reach this member - the roots are src/domain and src/generators, measured, and this member creates under src/components/edit/ and tests/components/ and modifies src/copy/en.js; ⛔ CORRECTED AT THE PRE-PROOF: (a) DOES reach this member and the version-1 root claim was wrong. entropyRootCensus.walker.test.js walks `src/` WHOLE (SRC = join(ROOT,'src') at :53; ALL_FILES = sourceFiles() at :131), and it carries TWO createPRNG site counts - one FILTERED to src/domain/ (`count(f => f.startsWith('src/domain/'), /createPRNG\\(/)` = 36, :824) and one over the WHOLE of src/ (`count(() => true, /createPRNG\\(/)` = 47, :831) - plus a whole-src definition count (`/function (fnv1a32|hash01|hashUnit|hash32|fnv1a)/` = 31, :967). The whole-src arms DO scan src/components/edit/. The DELTA is nonetheless +0 on every arm, and by CONTENT rather than by root: the planned leaf spells createPRNG( zero times, defines none of the five hash names, and reads none of WORLD_ROOTS (:57 - worldState, startingWorldState, state, ws, raw, base; the leaf's read bag is a prop named `world`), while the one stream its roll affordance reaches is composed INSIDE rollFrom in src/domain/edit/pools.js and is already inside both counts, its code names .institutions nowhere and it sits outside the ruin-filter walker's src/domain scan root (discovery set UNMOVED), and it imports no goods identity half-table (no ST-2 row). §P6: this member adds NO negative assertion of the anchor walker's shapes - every would-be negative is a positive equality (§6.6) - so no `// anchored:` marker is owed; if the build lane needs one it goes on the line IMMEDIATELY ABOVE THE `expect` ITSELF. §P7: the build lane measures tsconfig.full.json's errors over this member's own two src/ paths before it reports, and §8 step 2's red-first is a COLLECTION failure whose receipt says so rather than claiming an executed red. §P9: every effective-line figure in §3 and §7 comes from eslint's Linter over the file as it stands and over the planned text. §P8: an instrument named in §P2.21 that reds with a figure this member did not predict is a STOP for the chair."
+    },
+    {
+      "id": "EM-B2a4",
+      "status": "READY",
+      "packetPath": "docs/implementation/packets/settlement-editor/EM-B2a4.md",
+      "verifiedBase": "e1750d7454c1dff7e81342efadd05e47719ca6aa",
+      "_baseNote": "⛔ `__BASE__` can never pass `validate:packets` (`verifiedBase must be a lowercase 40-character SHA`). Validation is DOWNSTREAM of the chair's promotion stamp: the chair stamps the base, adds the INDEX.md row, THEN gates on `valid:`. This lane validated on a scratch COPY of the estate with the base stamped to bdbf7c89c2569679bcccdb188d5d831ccfaa0e6d, an INDEX row added exactly as the chair would, and EM-B2a1's two CREATE targets present on disk as if member 1 had LANDED (a MODIFY row is satisfied by fileExists — the chair's correction in findings/COMPILE-EM-A1-v4-2026-09-20/CHAIR-RULING.md). Nothing else changed.",
+      "_member": "MEMBER 4 OF 4 of the SUPERSEDED EM-B2a (the chair's ESTATE-REPAIR ruling, 2026-09-20; the four-member partition is `EM-B2a.partition.md`): EM-B2a1 (the leaf) → EM-B2a2 (the pin primitive) ∥ EM-B2a3 (the two remaining chooser steps) → EM-B2a4 (this — the store consumer and the orchestration) → EM-B2b. ⛔ LANDS AFTER EM-B2a1 (it MODIFIES the leaf a1 CREATEs) and AFTER EM-B2a2 (its A7(b) anti-vacuity arm is VACUOUS until a chooser consults a pin); A7's institution and power arms additionally need EM-B2a3.",
+      "_interimRules": "Compiled under `COMPILE-RULES.interim.md` (the chair, 2026-09-20), which GOVERNS where it and `EM-PREAMBLE.md` (SHA-256 c9f33c8d2940372bde8a6d931e3d389b79516a90ed45405cbbbf3e698cc46675, MEASURED at the read tip with shasum -a 256) disagree. Consequences visible here: a NEW test file is CREATE, never TEST (rule 4); `docs/content/wiring-census.json` appears in NO row and in no check (rule 1) and its prediction is +0 measured against BOTH producer roots; no byte arm and no dist read in `checks`, the budget's own test carried as a TEST row with its stated bound (rule 2); `_pending` would be the sibling key (rule 3 — this packet needs none); the Status value stands alone on its line (rule 5); §7 is GENERATED FROM THIS CAPSULE and proved SET-EQUAL with it (rule 6); every register figure is a DELTA (rule 9); sealed `checks` name FILES, never the `tests/lint` directory, never the lighting walker, and END with the validator (rule 8); the browser suite governs NOTHING here and no e2e spec is named (rule 10, stated as it requires).",
+      "_layerBoundary": "⛔⛔ THE ONE PLACE THIS PACKET DOES NOT COMPILE TO THE PARTITION'S §2 INTERFACE TABLE, and the launch brief's named exception. The table homes `pinsFrom`, `rederive` AND `regenerateWithLayer` in `src/domain/edit/dmLayer.js`, with `regenerateWithLayer` calling the REAL entry `generateSettlementPipeline` under `src/generators/**`. MEASURED: `tests/build/domainGeneratorsBoundary.test.js` is a shrink-only ratchet whose `BASELINE_EDGES` is `Object.freeze` over FOUR files / FIVE specifiers, and whose first arm pushes `NEW importer: <file>` for any `src/domain/**` file carrying a generators specifier that the frozen map does not list. It matches DYNAMIC `import('…/generators/…')` as well as static `from '…/generators/…'`, by its own stated design (\"so a refactor can't dodge the ratchet by switching import style\"), and its second arm forbids widening the map. The live edge set equals the frozen set exactly (5 specifiers, 0 dynamic — executed). ⇒ the table's home for `regenerateWithLayer` is UNBUILDABLE. THE SMALLEST LAWFUL HOME, compiled to instead: `pinsFrom` and `rederive` STAY in `src/domain/edit/dmLayer.js` and NEITHER IMPORTS THE ENGINE — `rederive` takes it as an INJECTED parameter, which is the inversion the walker's own failure message prescribes (\"invert it … or DI the generator fn\") and the shape `src/lib/instantWorld/composeInstantWorld.js:226` already ships (`engine = { generateSettlementPipeline }`); `regenerateWithLayer` LEAVES `dmLayer.js` for the store's lazy application-command seam (design §2.3), which is where the estate's three real importers of the engine already live and which is already this member's own MODIFY path. a1's five exports are untouched.",
+      "changeManifest": [
+        {
+          "_note": "⭐ THE ORCHESTRATION, ADDED TO MEMBER 1'S LEAF. Two new exports at §6's exact signatures, and NOT the three the partition's table named — see `_layerBoundary` above. (1) `pinsFrom(record) -> { pins, missing }`: a pin for EVERY key the registered steps provide that the record holds, the chooser roster IMPORTED FROM ITS PRODUCER `getStepMeta()` (src/generators/pipeline.js:259) and NEVER re-typed — `contractTestAntiVacuity` Rule 2 convicts a hardcoded exhaustive claim, and `runPipeline` throws `Pipeline pins: step \"<name>\" has choosers [...] but pins supply only [...]` on a partial set, so `missing` is the caller's proof it may not pin that step at all. ⛔ `pinsFrom` reads the RECORD and imports NOTHING from `src/generators/**` — the roster reaches it through the injected engine handle, never a specifier string. (2) `rederive(record, config, layer, engine) -> { record, unapplied }`: builds the pin set, merges the layer's `roots` overrides INTO THE PIN BAG (the layer never enters `src/generators/**`), deep-clones the bag on entry (design §22 ruling 6 — an aliased bag mutated the caller's own record in 36/63), and runs `engine.generateSettlementPipeline`. ⛔ THE POOL-MEMBERSHIP RULE, exactly as the chair ruled it: an override outside the chooser's candidate set is NOT APPLIED AND IS REPORTED — it is returned in `unapplied` as a typed row with a CLOSED reason set, the layer KEEPS it, and nothing is silently ignored or deleted (a later world-fact change may make the value a member again). ⛔ NO PRNG, no clock, no locale, no import of src/components, src/store or src/generators.",
+          "action": "MODIFY",
+          "path": "src/domain/edit/dmLayer.js"
+        },
+        {
+          "_note": "⭐ THE NEW LAZY LEAF — `regenerateWithLayer(seed, config, layer)`, the ONE seat that names the engine. It exists because BOTH other candidate homes are refused by measurement: `src/domain/edit/dmLayer.js` may not import `src/generators/**` (the boundary ratchet, `_layerBoundary`), and `src/store/settlementSlice.js` (816/816 frozen) and `src/store/settlementSliceHelpers.js` are BOTH members of `EAGER_FIRST_PAINT_MODULES` (executed: 269 modules, both present) — so lines added to either RAISE the eager first-paint closure, which is a STOP FOR THE OWNER. This leaf is reached ONLY by `await import('./settlementRederiveAction.js')` from `regenSection`, exactly the memoized idiom `loadEngine()` (settlementSlice.js:45) and `loadGenerateLane()` already use, and `computeEagerModuleGraph` in vite.config.js walks STATIC `import … from` / `export … from` ONLY (its regex body is `[^'\"()]*?`, so a dynamic `import(` cannot match) — so this leaf, `dmLayer.js` and the pipeline all stay OUT of the eager graph. MEASURED PRECEDENT: `src/store/settlementGenerateAction.js` is the generation lane's own lazy leaf and is NOT in the eager set (executed). It mints no `scripts/.size-baseline.json` row: no row exists for any path under `src/store/` but `settlementSlice.js` itself, and the 800-line layer ceiling governs a <=120-line leaf. ⛔ It imports `dmLayer.js` and the pipeline; NOTHING eager imports it statically.",
+          "action": "CREATE",
+          "path": "src/store/settlementRederiveAction.js"
+        },
+        {
+          "_note": "THE STORE SEAT, NET ZERO. `regenSection` (:456) is the ONE store action that re-runs generation on an existing settlement; it returns early on `get().phase === 'canon'` (canon does not re-derive — design §14's 'Canon stays events') and has exactly two branches, 'npcs' -> `eng.regenNPCsPipeline` + `foldRegeneratedRoster` and 'history' -> `eng.regenHistoryPipeline`. The seat delegates to the new lazy leaf ONE LINE FOR ONE LINE. ⛔ `src/store/settlementSlice.js` measures 816 effective against a FROZEN `scripts/.size-baseline.json` entry of 816 — ZERO headroom (executed: the row is `\"src/store/settlementSlice.js\": 816`) — AND it is an EAGER first-paint module, so one added effective line is a STOP, never a baseline raise and never an owner-signed ceiling rise. ⛔ NO STATIC IMPORT of `src/domain/edit/dmLayer.js` may be added here: a static edge would pull the leaf into the eager first-paint closure (+1 module on 269) and that rise is the OWNER's signature, not this member's. `updateSavedSettlement` and `SAVED_SETTLEMENT_PATCH_KEYS` are PRESERVED untouched — `dmLayer` rides INSIDE the settlement blob and the 17-key patch list is not widened.",
+          "action": "MODIFY",
+          "path": "src/store/settlementSlice.js"
+        },
+        {
+          "_note": "THE GOLDEN-ISOLATION PROPERTY — ARCH §8 instrument 7, and the whole of this member's generation-side proof. ⛔ CREATE, never TEST: the path is ABSENT at the read tip (measured: `git grep -l -F 'dmLayerGoldenIsolation' -- tests` returns NOTHING, exit 1) and no named sibling creates it first, so interim rule 4's discriminator does not apply. Copies the proof shape of `tests/property/beliefMapGolden.test.js` — a byte-identity arm BESIDE an explicit anti-vacuity arm (`it('anti-vacuity: the belief maps are non-empty and the two modes differ')` at :163). ⛔ Flat literal `it(...)` under ONE literal `describe`; `it`/`test`/`describe` each bound EXACTLY ONCE; no bare seed loop (`seedLoopTotality` convicts it — collect then assert once); every negative assertion carries `// anchored:` or is a both-directions set equality; every asserted set IMPORTED from its producer, never re-typed (`contractTestAntiVacuity` Rule 2) — which for this file means the chooser roster from `getStepMeta()`, the reason set from `dmLayer.js`'s own export, and `EAGER_FIRST_PAINT_MODULES` from `vite.config.js`. ⭐ IT CARRIES THE FIRST-PAINT MEMBERSHIP PROBE (A8): it IMPORTS the exported set, reads NO `dist`, and therefore CANNOT SKIP. OWES a mutation-coverage row — MEASURED by importing the enforcer's own module: `tests/property` is not an ENFORCER_DIR, but the enumeration rule's second clause admits any basename carrying invariant nomenclature, and `NAME_PATTERN.test('dmLayerGoldenIsolation.test.js')` is TRUE (`golden`); `enumerateInvariants(tree)` returns 716 files and is SET-EQUAL with the manifest's `invariants` keys (executed, both directions).",
+          "action": "CREATE",
+          "path": "tests/property/dmLayerGoldenIsolation.test.js"
+        },
+        {
+          "_note": "THE BUDGET'S OWN TEST, AS A `TEST` ROW WITH ITS STATED BOUND (interim rule 2; partition §3 — 'the budget's own dist arm inside `checks` … is a TEST row with a stated byte bound instead'). ⛔ IT IS DELIBERATELY ABSENT FROM `checks`: it carries `it.skipIf(!requireDistRead)` dist arms (`const requireDistRead = process.env.VERIFY_DIST === '1'` at :68), and rule 2 keeps every such arm out of a sealed array. THE STATED BOUNDS, all five measured at the read tip: the THREE OWNER-SIGNED FIRST-PAINT CEILINGS, pinned as literals at `:565` and re-pinned by an arm of their own — `CLOSURE_BUDGET_BYTES = 1_048_000` (raw entry static closure), `CLOSURE_GZIP_BUDGET_BYTES = 337_000`, `CLOSURE_BROTLI_BUDGET_BYTES = 283_000`, under `describe('ARCH car 2 — the three first-paint budgets stay where the owner signed them')`, whose own comment reads \"Raises stay owner-signed\"; the lazy engine chunk `expect(size).toBeLessThan(679_000)` (:831, the ceiling EM-P0's own seam last raised); and, in its sibling `tests/build/generationWorkerLazy.test.js`, `WORKER_BUNDLE_CEILING_BYTES = 1401208` (:159) — EXACT, zero slack, no placement cure. ⭐ THE ARMS THAT MUST STAY GREEN WITHOUT A BUILD are the literal budget pin at `:1769` (`expect(CLOSURE_BUDGET_BYTES, 'the raw first-paint budget moved').toBe(1_048_000)` — NOT `skipIf`'d, reads no dist, cannot skip) and the first-paint closure membership arms, which import `EAGER_FIRST_PAINT_MODULES` and parse source. The arm that measures the real closure against the ceiling (`:1020`) IS `skipIf`'d and belongs to the terminal's real build. THIS MEMBER'S PREDICTED PRICE IS ZERO IN EVERY CLOSURE AS A MEMBERSHIP FACT: worker +0 and lazy engine +0 (nothing under `src/generators/**` imports `dmLayer.js` or this member's leaf), eager first paint +0 modules (the leaf is reached only dynamically and the derivation walks static edges only). ⛔ ANY RISE IN THE EAGER FIRST-PAINT CLOSURE IS A STOP FOR THE OWNER — that ceiling is owner-signed. The train's terminal takes ONE summed price from ONE real build.",
+          "action": "TEST",
+          "path": "tests/build/vendorPdfLazy.test.js"
+        },
+        {
+          "_note": "⭐ JUDGMENT 145's ROW, and the one this member did not carry at version 1. EM-C4a LANDED `export const REDERIVE_SEAM = Object.freeze({ kind: 'noop', owner: 'EM-B2a4', calls: 0 });` at :89, consulted at ONE site (:339, applyPlainEditToDraft step 8) with its derived use at :347; applyCascadeEdit (:221-:255) consults it NOWHERE. The chair's ruling: the packet that plugs re-derivation in adds the cascade branch's consult IN THE SAME §7 MODIFY ROW. SEAM CONSULT SITES: ONE today, TWO after this member (measured). ⛔ The export's OPENING text stays byte-identical. ⛔ THE REACH IS DYNAMIC: `await import('./settlementRederiveAction.js')`, never a static import - tests/lint/editMutationPath.walker.test.js:212 pins this file's static specifier list EXACT at four (measured live), and vite.config.js's eager graph walks static edges only. ⛔ No computed get()[name] dispatch (deadOperationRatchet.test.js:229). The file is NOT an eager first-paint module (measured 0 members) and measures 116 effective lines with eslint's own Linter; +12 eff planned, the 800-line layer ceiling governing and no .size-baseline.json row existing for it.",
+          "action": "MODIFY",
+          "path": "src/store/editSlice.js"
+        },
+        {
+          "_note": "⭐ THE LANDED ARMS THIS MEMBER MOVES, NAMED (the pre-proof brief's step 18 and judgment 110: an arm is widened by the member whose landing needs it, under its own seal). EM-C4a's it('A8 - purity, idempotency, key-order independence, the transient mode and the rederive seam as a typed no-op') at :376 holds THREE seam assertions: :403 expect(REDERIVE_SEAM).toEqual({ kind: 'noop', owner: 'EM-B2a4', calls: 0 }); and :407 expect(REDERIVE_SEAM.kind).toBe('noop'); are re-pinned to the plugged value, and :404 expect(Object.isFrozen(REDERIVE_SEAM)).toBe(true); stays BYTE-UNMOVED. EM-C4a's own comment at :401-402 foresaw it: 'The day EM-B2a4 plugs scoped re-derivation in, THIS is the arm that fails.' The it TITLE's trailing clause is re-worded to the plugged shape. ⛔ ADDS NO `it` AND NO `describe`: the file holds SEVEN `it`s under ONE `describe` (:134) before and after, so this row's lighting delta is files +0 / titles +0 / suiteTitles +0. ⛔ No arm weakened, no assertion deleted, no red-first claimed without its TEST COUNT line (§P7).",
+          "action": "TEST",
+          "path": "tests/store/editSlice.test.js"
+        },
+        {
+          "_note": "⭐ §0.1a's ROW, compelled by a LANDED walker version 1 named nowhere. tests/lint/densityCreateBoundary.walker.test.js's arm it('every module that reaches the pipeline is classified') computes its reacher set as every src/**/*.{js,jsx} whose COMMENT- AND STRING-STRIPPED text matches /\\bgenerateSettlementPipeline\\b/ and asserts each is a key of PIPELINE_REACHERS (src/domain/density/densityCreateBoundary.js:157). MEASURED at 16f0bc71c by importing the producer: SIX rows, class histogram BIRTH 2 / EXECUTOR 1 / PREVIEW 3, DERIVED ZERO. This member's new leaf names the engine by contract, so it joins the set and, unclassified, reds that arm BY CONSTRUCTION. ONE row is added: class 'DERIVED' (the walker's own message defines it, 're-derives an existing world'; BOUNDARY_CLASSES at :128 already declares it, so no set is widened), payloadAwaitedBy ['src/store/settlementRederiveAction.js'] (the leaf awaits its own memoized loader, so no reachesVia is owed), and a `why` carrying no em dash and no exclamation point (§P2.19, measured). DELTA: rows 6 -> 7, DERIVED 0 -> 1. ⛔ The row is added SURGICALLY; no other row, export or export order moves. ⛔ AND THE SECOND CONSEQUENCE IS A CONTRACT CLAUSE, NOT A ROW: src/domain/edit/dmLayer.js must spell the bare symbol NOWHERE in code, so rederive calls its injected handle's NEUTRAL member `engine.run(...)` and the store leaf binds run: pipe.generateSettlementPipeline. A8 arm (3) asserts both halves.",
+          "action": "REGISTER",
+          "path": "src/domain/density/densityCreateBoundary.js"
+        },
+        {
+          "_note": "THE ONE REGISTER ROW THIS MEMBER OWES, STATED AS A DELTA (interim rule 9). `\"rowKey\": \"invariants['tests/property/dmLayerGoldenIsolation.test.js']\"` — **+1 row**, added SURGICALLY beside its 47 `tests/property/*Golden*` siblings; the manifest is NEVER re-serialised whole. THE ROW'S EXACT SHAPE, copied from its siblings by execution: `{ \"kind\": \"rationale\", \"ref\": \"golden-byte-pin\" }` — the same value `tests/property/beliefMapGolden.test.js` and `tests/property/generatorGoldenMaster.test.js` carry. `kind` is closed to `mutation | rationale | uncovered` (`tests/lint/mutationCoverageManifest.test.js:116`) and the row is a `rationale`, so ⛔ **`uncoveredBaseline` is UNMOVED** — it is a NUMBER equal to the count of `uncovered` rows (186 at the read tip, 438 rationale + 92 mutation + 186 uncovered = 716), and a rationale row cannot move it. ⛔ COLLISION, REPORTED NOT RESOLVED: `EM-A1` and `EM-B1h` also name this path, so under the validator's PATH-keyed duplicate rule this member cannot ride a train beside either until TOOL-27's row-keyed exemption lands.",
+          "action": "REGISTER",
+          "path": "scripts/mutation-coverage-manifest.json",
+          "rowKey": "invariants['tests/property/dmLayerGoldenIsolation.test.js']"
+        }
+      ],
+      "requiredSymbols": [
+        {
+          "_note": "THE ONE STORE SEAT. The only action that re-runs generation on an existing settlement; it returns early on `get().phase === 'canon'` (canon does not re-derive) and holds exactly two branches. This member inserts its delegation here and nowhere else — no second regeneration path. Verbatim at src/store/settlementSlice.js:456.",
+          "path": "src/store/settlementSlice.js",
+          "symbol": "regenSection: async (section) => {"
+        },
+        {
+          "_note": "THE ONLY MUTATION PATH FOR A SAVE ROW, preserved untouched: it refuses any key outside the closed patch list and returns a typed `makeActionResult` envelope. This member writes no save row and widens no patch surface. Verbatim at src/store/settlementSlice.js:637.",
+          "path": "src/store/settlementSlice.js",
+          "symbol": "updateSavedSettlement: (id, partial) => {"
+        },
+        {
+          "_note": "⭐⭐ THE LAZY ENGINE SEAM, AND THE REASON THE EAGER FIRST-PAINT CLOSURE DOES NOT MOVE. `loadEngine()` memoizes a DYNAMIC import of the pipeline, which is why `src/generators/generateSettlementPipeline.js` is NOT in `EAGER_FIRST_PAINT_MODULES` (executed). This member reaches the engine by the same idiom through its own lazy leaf and NEVER by a static edge. Named so that an implementer who 'simplifies' the dynamic import into a static one is convicted by a required symbol instead of by an owner-signed byte ceiling at the terminal. Verbatim at src/store/settlementSlice.js:45.",
+          "path": "src/store/settlementSlice.js",
+          "symbol": "_enginePromise = import('../generators/generateSettlementPipeline.js').then((pipe) => {"
+        },
+        {
+          "_note": "The frozen 17-key patch list whose first member is 'settlement'. `dmLayer` rides INSIDE the settlement blob, so this list is NOT widened by this member — persisting the key is EM-B3's. Verbatim at src/store/settlementSliceHelpers.js:318.",
+          "path": "src/store/settlementSliceHelpers.js",
+          "symbol": "export const SAVED_SETTLEMENT_PATCH_KEYS"
+        },
+        {
+          "_note": "THE REAL ENTRY — the function the generator golden hashes and the one `regenerateWithLayer` must call, so the isolation property compares like with like. This member calls it through an INJECTED handle from the store's lazy seam; it never names the specifier from `src/domain/**`. Verbatim at src/generators/generateSettlementPipeline.js:77.",
+          "path": "src/generators/generateSettlementPipeline.js",
+          "symbol": "export function generateSettlementPipeline"
+        },
+        {
+          "_note": "EM-P0's LANDED runner. `options.pins` ABSENT or `{}` reproduces today's behaviour EXACTLY and every step still runs; a partial pin set THROWS by name. This member supplies pins and must not change that contract — 'pins absent = the golden' is the whole mechanism by which A7's golden arm can be true. Verbatim at src/generators/pipeline.js:171.",
+          "path": "src/generators/pipeline.js",
+          "symbol": "export function runPipeline(initialContext, rng, options = {})"
+        },
+        {
+          "_note": "⭐ THE CHOOSER ROSTER'S PRODUCER. `pinsFrom` enumerates the pinnable keys by IMPORTING this, never by re-typing a list: `contractTestAntiVacuity` Rule 2 convicts a hardcoded exhaustive claim, and the pipeline's partial-pin refusal means a re-typed roster that drifts by one key turns into a runtime throw rather than a quiet miss. Verbatim at src/generators/pipeline.js:259.",
+          "path": "src/generators/pipeline.js",
+          "symbol": "export function getStepMeta()"
+        },
+        {
+          "_note": "⛔ VERSION 1'S ROW WAS REFUTED AT 16f0bc71c. EM-B2a2 LANDED the primitive at its ONE exported home on the runner: `export function chooseOrPin(pins, key, draw) {` at src/generators/pipeline.js:152, count=1. At the old path the version-1 text counts ZERO; steps/generatePopulation.js:18, steps/assembleInstitutions.js:11 and steps/generatePower.js:15 now IMPORT it. PRESERVED, never called here: this member supplies pins to runPipeline and never reaches the primitive.",
+          "path": "src/generators/pipeline.js",
+          "symbol": "export function chooseOrPin(pins, key, draw) {"
+        },
+        {
+          "_note": "⛔⛔ THE ARCHITECTURE BOUNDARY THIS MEMBER'S PLACEMENT TURNS ON, pinned as a symbol so the finding cannot be re-discovered at a build. A shrink-only ratchet: FOUR files / FIVE specifiers, frozen; its first arm convicts any NEW `src/domain/**` importer of `src/generators/**`, statically OR dynamically, and its second forbids widening. It is why `regenerateWithLayer` leaves `src/domain/edit/dmLayer.js` and why `rederive` takes the engine as a parameter. Verbatim at tests/build/domainGeneratorsBoundary.test.js:62.",
+          "path": "tests/build/domainGeneratorsBoundary.test.js",
+          "symbol": "const BASELINE_EDGES = Object.freeze({"
+        },
+        {
+          "_note": "THE GOLDEN AUTHORITY: `sha256(JSON.stringify(generateSettlementPipeline(cfg, null, { seed, customContent: {} })))` over the committed 525-row fixture. UNCHANGED by this member, and `UPDATE_GOLDEN=1` is FORBIDDEN to it. Verbatim at tests/property/generatorGoldenMaster.test.js:796.",
+          "path": "tests/property/generatorGoldenMaster.test.js",
+          "symbol": "function hashFor(config)"
+        },
+        {
+          "_note": "THE PROSE GOLDEN — `'tests/fixtures/dossier-prose-manifest-golden.json'`. UNCHANGED. Verbatim at tests/property/dossierProseManifest.test.js:83.",
+          "path": "tests/property/dossierProseManifest.test.js",
+          "symbol": "const MANIFEST_REL"
+        },
+        {
+          "_note": "The mutation-coverage denominator's eight enforcer dirs. With `NAME_PATTERN` and `enumerateInvariants`'s second clause they are the EXECUTABLE reason `tests/property/dmLayerGoldenIsolation.test.js` DOES owe a manifest row (its basename matches `golden`) while its sibling `tests/domain/dmLayer.test.js` does not. Preserved so the claim stays checkable rather than asserted. Verbatim at tests/lint/mutationCoverage.shared.mjs:36.",
+          "path": "tests/lint/mutationCoverage.shared.mjs",
+          "symbol": "export const ENFORCER_DIRS"
+        },
+        {
+          "_note": "⛔ THE BOUNDARY THIS MEMBER MAY NOT CROSS. The record-class register declares `dmLayer` NOT YET WRITTEN and `tests/lint/recordRegisterTotality.walker.test.js` holds it equal IN BOTH DIRECTIONS against records generated through the REAL pipeline. `rederive` returns a record and an unapplied list to its CALLER and writes no `dmLayer` key onto a generated record, so the row stays true; the first member whose landing makes generation write it owes the row's removal, and it is EM-B3, not this one. Verbatim at src/domain/edit/recordRegister.js:59.",
+          "path": "src/domain/edit/recordRegister.js",
+          "symbol": "export const NOT_YET_WRITTEN_KEYS = Object.freeze(['dmLayer', 'decrees', 'crossSettlementConflicts']);"
+        },
+        {
+          "_note": "⭐ THE GROUND OF THIS MEMBER'S LIGHTING DELTA. The walker's `files` figure is `TEST_FILES.length` and `TEST_FILES` walks `tests/` ONLY, so this member's new `src/store/**` leaf and its MODIFY of a `src/domain/**` leaf move the census by NOTHING, and its ONE new TEST file moves it by one. `EM-PREAMBLE.md` §P2.1 states the opposite cause and is refuted here for the fifth time; the correction rides the fifth amendment. Verbatim at tests/lint/sovereigntyLightingContract.walker.test.js:515.",
+          "path": "tests/lint/sovereigntyLightingContract.walker.test.js",
+          "symbol": "const TEST_FILES = walk(join(ROOT, 'tests'))"
+        },
+        {
+          "_note": "⛔ THE RIVAL RE-APPLY (npcs), and it sits at the EXACT seat this member takes. `regenSection`'s 'npcs' branch re-seats `_authored` NPCs into a fresh roster under `regenerationMode`'s rules. This member adds a SECOND thing that happens at that seat, so the rival is named to make an accidental second writer of DM field ownership red instead of silent; §0's fork was DECIDED to EM-B4 (F1/SUBSUME) and this member neither re-opens it nor edits the file. Verbatim at src/domain/regenerationPreservation.js:237.",
+          "path": "src/domain/regenerationPreservation.js",
+          "symbol": "export function mergePreservedNpcs"
+        },
+        {
+          "_note": "⛔ THE RIVAL RE-APPLY (history), the 'history' branch's counterpart of the row above. PRESERVE, untouched. Verbatim at src/domain/historyPreservation.js:186.",
+          "path": "src/domain/historyPreservation.js",
+          "symbol": "export function restoreAuthoredHistory"
+        },
+        {
+          "_note": "⛔ THE OWNER-SIGNED CEILING'S OWN DERIVATION, exported from `vite.config.js` for tests so a first-paint contract is asserted against THIS derivation rather than a replica of it. The membership probe in A8 IMPORTS it (269 members at the read tip, `src/store/settlementSlice.js` and `src/store/settlementSliceHelpers.js` both in it, `src/store/settlementGenerateAction.js` and `src/generators/generateSettlementPipeline.js` both out). ⛔ ANY RISE IN THIS CLOSURE IS A STOP FOR THE OWNER. Verbatim at vite.config.js:338.",
+          "path": "vite.config.js",
+          "symbol": "EAGER_FIRST_PAINT_MODULES"
+        },
+        {
+          "path": "src/domain/edit/dmLayer.js",
+          "symbol": "export const EMPTY_DM_LAYER = Object.freeze({",
+          "_note": "EM-B2a1's four-key frozen layer, :55. the just-in-time gate is discharged: EM-B2a1 LANDED on train EM-T12 and this symbol is REAL CODE at 16f0bc71c, count=1, re-measured VERBATIM (judgment 151) rather than promoted as the version-1 contract spelled it. rederive reads every absence shape through it and PRESERVES it."
+        },
+        {
+          "path": "src/domain/edit/dmLayer.js",
+          "symbol": "export const DM_ID_NS = 'dm:';",
+          "_note": "EM-B2a1's identity namespace, :63. the just-in-time gate is discharged: EM-B2a1 LANDED on train EM-T12 and this symbol is REAL CODE at 16f0bc71c, count=1, re-measured VERBATIM (judgment 151) rather than promoted as the version-1 contract spelled it. A6 asserts an id minted inside it survives the JSON hop."
+        },
+        {
+          "path": "src/domain/edit/dmLayer.js",
+          "symbol": "export const APPLY_EDIT_REASONS = Object.freeze(['invalid_op', 'undeclared_field', 'unknown_target']);",
+          "_note": "EM-B2a1's CLOSED leaf reason set of THREE, :71. the just-in-time gate is discharged: EM-B2a1 LANDED on train EM-T12 and this symbol is REAL CODE at 16f0bc71c, count=1, re-measured VERBATIM (judgment 151) rather than promoted as the version-1 contract spelled it. A3 asserts this member's own REDERIVE_UNAPPLIED_REASONS is DISJOINT from it, both sets read from their producers."
+        },
+        {
+          "path": "src/domain/edit/dmLayer.js",
+          "symbol": "export function layerRead(layer, key) {",
+          "_note": "EM-B2a1's own-property reader, :125. the just-in-time gate is discharged: EM-B2a1 LANDED on train EM-T12 and this symbol is REAL CODE at 16f0bc71c, count=1, re-measured VERBATIM (judgment 151) rather than promoted as the version-1 contract spelled it. rederive reads each override through it and re-implements no absence rule."
+        },
+        {
+          "path": "src/domain/edit/dmLayer.js",
+          "symbol": "export function applyEdit(layer, op, declarations) {",
+          "_note": "⭐ ARITY THREE (judgment 77), :164 — the consult is INJECTED, never imported. the just-in-time gate is discharged: EM-B2a1 LANDED on train EM-T12 and this symbol is REAL CODE at 16f0bc71c, count=1, re-measured VERBATIM (judgment 151) rather than promoted as the version-1 contract spelled it. A6's round trip builds its layer with it and MUST pass a declaration consult; version 1's two-argument spelling is retired and appears nowhere in this packet."
+        },
+        {
+          "path": "src/domain/edit/dmLayer.js",
+          "symbol": "export function mintDmId(seed, kind, n) {",
+          "_note": "EM-B2a1's deterministic id mint, :230. the just-in-time gate is discharged: EM-B2a1 LANDED on train EM-T12 and this symbol is REAL CODE at 16f0bc71c, count=1, re-measured VERBATIM (judgment 151) rather than promoted as the version-1 contract spelled it. A6 asserts the same (seed, kind, n) reproduces the same id across the persist hop."
+        },
+        {
+          "path": "src/store/editSlice.js",
+          "symbol": "export const REDERIVE_SEAM = Object.freeze({",
+          "_note": "⭐ JUDGMENT 145's SEAT. EM-C4a LANDED the seam at :89 naming THIS member its owner. ⛔ THE ROW QUOTES THE OPENING ALONE, never the whole frozen literal: this member RE-VALUES the constant, so a row quoting `{ kind: 'noop', owner: 'EM-B2a4', calls: 0 }` would refute itself at its own post-edit validation (the shared brief's step 10). The opening text is PRESERVED byte-identical. Consulted at :339 alone today (its derived use :347); applyCascadeEdit at :221 does not consult it; this member makes it TWO."
+        },
+        {
+          "path": "src/store/editSlice.js",
+          "symbol": "export const PLAIN_EDIT_REFUSALS = Object.freeze([",
+          "_note": "EM-C4a's CLOSED seven-member refusal set, :46. PRESERVE: this member adds no refusal reason to the store's door — its own unapplied reasons are the DOMAIN leaf's and never surface here. (The same row is EM-D0e's on this train; a shared PRESERVE row is not a collision.)"
+        },
+        {
+          "path": "src/domain/density/densityCreateBoundary.js",
+          "symbol": "export const PIPELINE_REACHERS = Object.freeze({",
+          "_note": "⭐ §0.1a's REGISTER target, :157. SIX rows at 16f0bc71c and ZERO of class DERIVED; tests/lint/densityCreateBoundary.walker.test.js reds every src/ module whose comment- and string-stripped text spells the bare symbol generateSettlementPipeline and is not a key here. This member adds ONE row, the FIRST DERIVED. The opening text is PRESERVED."
+        },
+        {
+          "path": "src/domain/density/densityCreateBoundary.js",
+          "symbol": "export const BOUNDARY_CLASSES = Object.freeze(['BIRTH', 'DERIVED', 'PREVIEW', 'EXECUTOR']);",
+          "_note": "the closed class vocabulary, :128. PRESERVE UNCHANGED: DERIVED already exists and holds zero rows, so this member mints no class and widens no set. The walker's own message defines it: 're-derives an existing world'."
+        },
+        {
+          "path": "tests/lint/editMutationPath.walker.test.js",
+          "symbol": "const EDIT_SLICE_IMPORTS = Object.freeze([",
+          "_note": "⛔ EM-C4a's landed EXACT-ARRAY arm, :76, asserted at :212 over editSlice.js's STATIC named-import specifiers — measured live as exactly four. PRESERVE: this member's seam plug is a DYNAMIC `await import('./settlementRederiveAction.js')`, which carries no `from` clause and is invisible to staticNamedEdges BY CONSTRUCTION. A static import here would red this landed arm."
+        },
+        {
+          "path": "tests/lint/editMutationPath.walker.test.js",
+          "symbol": "'src/domain/edit/dmLayer.js': Object.freeze(['applyEdit']),",
+          "_note": "the WATCHED symbol list for this producer, :51 — ONLY applyEdit. EXECUTED over the walker's own mutationPathOffenders() predicate with this member's leaf planted: offenders [] before and [] after, so a static `import { rederive } from '../domain/edit/dmLayer.js';` in a new src/store leaf is NOT convicted. PRESERVE."
+        },
+        {
+          "path": "tests/store/deadOperationRatchet.test.js",
+          "symbol": "test('no dispatch-by-computed-name exists (the scanner premise holds)', () => {",
+          "_note": "§P2.20's second half, :229. PRESERVE: this member's editSlice edit reaches its target by a LITERAL module specifier, never a computed get()[name] dispatch off the store handle."
+        }
+      ],
+      "_retiredSymbols": "NONE. Post-edit validation simulated row by row (the shared brief's step 10): this member ADDS exports and moves, renames or deletes none. The one symbol whose TEXT it changes is REDERIVE_SEAM's frozen value, and its requiredSymbols row therefore quotes the export's OPENING ALONE, so the row still resolves after the member's own edit.",
+      "_pendingRequiredSymbols": "NONE, AND THE VERSION-1 BLOCK IS DISCHARGED (judgment 151, the pre-proof brief's step 18). Version 1 named `layerRead` and `EMPTY_DM_LAYER` in §5 as DECLARED-not-present because their file did not exist; EM-B2a1 has since LANDED on train EM-T12 and all SIX of its exports are REAL CODE at 16f0bc71c. Each was RE-MEASURED VERBATIM at the tip - `grep -c -F` = 1 against the CODE's own spelling, never against the contract's - and promoted into requiredSymbols above; the arity-three `applyEdit` is the row that proves why the law exists, since version 1's contract spelled it `applyEdit(layer, op)` and that text counts ZERO in the tree.",
+      "acceptanceCases": [
+        {
+          "id": "A1",
+          "case": "PINS FROM THE RECORD, TOTAL AGAINST THEIR PRODUCER: `pinsFrom(record)` returns a pin for EVERY key the registered steps provide that the record holds, and no pin for a key the record lacks. The pinnable roster is IMPORTED from `getStepMeta()` and the assertion is a BOTH-DIRECTIONS set equality against it, never a re-typed list, so a new step or a new `provides` key reds here. For every step, the pins supplied are ALL of its `provides` or NONE of them — asserted per step, because `runPipeline` throws `Pipeline pins: step \"<name>\" has choosers [...] but pins supply only [...]` on a partial set — and the steps that cannot be wholly pinned from a record are returned in `missing`, named, rather than silently half-pinned.",
+          "file": "tests/property/dmLayerGoldenIsolation.test.js"
+        },
+        {
+          "id": "A2",
+          "case": "DORMANT/ABSENT AND PURE: `rederive(record, config, undefined, engine)` and `rederive(record, config, EMPTY_DM_LAYER, engine)` produce byte-identical results and both return `unapplied: []`. NEITHER argument is mutated — asserted by deep-freezing the input record and by comparing its JSON before and after, because design §22.1 measured an ALIASED pin bag writing through into the caller's own record in 36 of 63 rows and a deep-cloned one in 0 of 63. The clone on entry is the contract, not an optimisation.",
+          "file": "tests/property/dmLayerGoldenIsolation.test.js"
+        },
+        {
+          "id": "A3",
+          "case": "⭐ THE POOL-MEMBERSHIP RULE (the chair's ruling on Q1's consequence): an override whose value is outside the chooser's candidate set is NOT APPLIED AND IS REPORTED. `rederive` returns it in `unapplied` as `{ key, value, reason }` with `reason` drawn from a CLOSED set EXPORTED by the module, asserted as a BOTH-DIRECTIONS set equality so a fourth reason reds here and a missing one reds here; the returned record carries the ENGINE's value at that key; and the LAYER PASSED IN IS RETURNED UNCHANGED AND STILL HOLDS THE OVERRIDE — nothing is silently ignored and nothing is deleted, because a later world-fact change may make the value a member again. ⛔ Nothing throws on any arm.",
+          "file": "tests/property/dmLayerGoldenIsolation.test.js"
+        },
+        {
+          "id": "A4",
+          "case": "BOUNDARY/SPARSE: a layer holding overrides for a key the record no longer carries, mixed with two the record does. The two are applied, the casualty is reported in `unapplied` with its own reason, THE ENTITY IS NEVER RE-CREATED, and `unapplied` is ASCII-ascending on `key` and deduplicated. ⛔ Nothing present in the record and untouched by the override may be ABSENT from the returned record — the arm is a both-directions top-level key-set equality, taken verbatim from the contract the pulse's data-loss defect forced onto EM-R0c (a read projection is never the write base).",
+          "file": "tests/property/dmLayerGoldenIsolation.test.js"
+        },
+        {
+          "id": "A5",
+          "case": "IDEMPOTENCY AND DETERMINISM (the parent's A5, second clause): `rederive` twice on the same `(record, config, layer, engine)` is byte-identical under `JSON.stringify`, and a second call on the FIRST call's output with the same layer is byte-identical to the first output. Same seed + same config + same layer = the same record — THE PROMISE extended (design §14) — asserted over a stride of the golden corpus, collected then asserted once (no bare seed loop).",
+          "file": "tests/property/dmLayerGoldenIsolation.test.js"
+        },
+        {
+          "id": "A6",
+          "case": "LIFECYCLE ROUND TRIP: a real generated settlement -> an `applyEdit`ed layer -> `JSON.parse(JSON.stringify(layer))` -> `rederive` against a FRESH same-seed generation. The re-applied overrides survive the hop, `mintDmId` reproduces the same id for the same `(seed, kind, n)` across it, and the persist hop is byte-exact. Copies the estate's fixpoint idiom, `tests/store/lifecycleRoundTrip.test.js` > `test('the persist hop (JSON round-trip) then re-ensure survives byte-exact')` (:763).",
+          "file": "tests/property/dmLayerGoldenIsolation.test.js"
+        },
+        {
+          "id": "A7",
+          "case": "⛔ THE GOLDEN ISOLATION PROPERTY — ARCH §8 instrument 7, RESTATED TO WHAT IS PROVABLE AT THIS BASE (see §0: the parent's clause 'a pinned re-derive equals the record byte-for-byte' is refuted by the chair's own executed measurement and is NOT asserted here). (a) FRESH GENERATION WITH NO PINS equals `tests/fixtures/generator-golden-master.json` BYTE-FOR-BYTE across the corpus and `tests/fixtures/dossier-prose-manifest-golden.json` is unmoved — the empty layer never reaches `runPipeline`, so `options.pins` is absent and the runner's own contract makes this true by construction. (b) A ONE-ROOT layer produces a record that DIFFERS from (a) at that root. ⭐ ANTI-VACUITY: (b) MUST differ from (a) somewhere, or the layer was never consulted — and this arm is VACUOUS until a chooser member has landed, which is why this member follows EM-B2a2 (npcs) and EM-B2a3 (institutions, power).",
+          "file": "tests/property/dmLayerGoldenIsolation.test.js"
+        },
+        {
+          "id": "A8",
+          "case": "⭐ THE CLOSURE PROBE — MEMBERSHIP, NOT BYTES, AND IT CANNOT SKIP. It IMPORTS `EAGER_FIRST_PAINT_MODULES` from `vite.config.js` and `BASELINE_EDGES` from `tests/build/domainGeneratorsBoundary.test.js`'s own subject, reads no `dist`, and asserts: (1) neither `src/domain/edit/dmLayer.js` nor `src/store/settlementRederiveAction.js` is a member of the eager set, and the set's membership is otherwise unchanged; (2) NO file under `src/domain/**` carries a `src/generators/**` specifier that `BASELINE_EDGES` does not already list, statically or dynamically — the layer boundary held by this member's own test rather than only by a build walker; (3) anti-vacuity, in the idiom `vendorPdfLazy.test.js` uses: the eager graph read is non-empty and contains `src/main.jsx`, so the two negatives above cannot be green-on-nothing.",
+          "file": "tests/property/dmLayerGoldenIsolation.test.js"
+        }
+      ],
+      "checks": [
+        [
+          "npx",
+          "vitest",
+          "run",
+          "--pool=threads",
+          "--maxWorkers=2",
+          "tests/property/dmLayerGoldenIsolation.test.js",
+          "tests/property/generatorGoldenMaster.test.js",
+          "tests/property/dossierProseManifest.test.js",
+          "tests/property/beliefMapGolden.test.js"
+        ],
+        [
+          "npx",
+          "vitest",
+          "run",
+          "--pool=threads",
+          "--maxWorkers=2",
+          "tests/build/domainGeneratorsBoundary.test.js"
+        ],
+        [
+          "npx",
+          "vitest",
+          "run",
+          "--pool=threads",
+          "--maxWorkers=2",
+          "tests/store/editSlice.test.js",
+          "tests/store/deadOperationRatchet.test.js",
+          "tests/lint/editMutationPath.walker.test.js",
+          "tests/lint/densityCreateBoundary.walker.test.js"
+        ],
+        [
+          "npx",
+          "vitest",
+          "run",
+          "--pool=threads",
+          "--maxWorkers=2",
+          "tests/lint/contractTestAntiVacuity.walker.test.js",
+          "tests/lint/goldenFreeze.walker.test.js",
+          "tests/lint/negativeAssertionAnchor.walker.test.js",
+          "tests/lint/seedLoopTotality.walker.test.js",
+          "tests/lint/mutationCoverageManifest.test.js",
+          "tests/lint/sizeBaseline.test.js",
+          "tests/lint/recordRegisterTotality.walker.test.js"
+        ],
+        [
+          "npx",
+          "vitest",
+          "run",
+          "--pool=threads",
+          "--maxWorkers=2",
+          "tests/store/lifecycleRoundTrip.test.js",
+          "tests/store/settlementSlice.test.js",
+          "tests/store/regenPreservation.test.js",
+          "tests/store/locksEngine.test.js",
+          "tests/store/npcStateRegenRebind.test.js",
+          "tests/store/pinnedNpcRegenRemap.test.js",
+          "tests/store/editProseQueueSpine.test.js",
+          "tests/store/decreeRegistryPersistence.test.js"
+        ],
+        [
+          "npx",
+          "vitest",
+          "run",
+          "--pool=threads",
+          "--maxWorkers=2",
+          "tests/domain/dmLayer.test.js",
+          "tests/domain/livingContentLawWiring.test.js"
+        ],
+        [
+          "npx",
+          "vitest",
+          "run",
+          "--pool=threads",
+          "--maxWorkers=2",
+          "tests/lib/editTravel.test.js"
+        ],
+        [
+          "npx",
+          "vitest",
+          "run",
+          "--pool=threads",
+          "--maxWorkers=2",
+          "tests/ops/migrationRehearsal.test.js"
+        ],
+        [
+          "npx",
+          "vitest",
+          "run",
+          "--pool=threads",
+          "--maxWorkers=2",
+          "tests/security/galleryScannerMirrorTotality.test.js"
+        ],
+        [
+          "npx",
+          "eslint",
+          "src/domain/edit/dmLayer.js",
+          "src/store/settlementRederiveAction.js",
+          "src/store/settlementSlice.js",
+          "tests/property/dmLayerGoldenIsolation.test.js"
+        ],
+        [
+          "node",
+          "scripts/check-observed-shape-readers.mjs"
+        ],
+        [
+          "npm",
+          "run",
+          "typecheck:ratchet"
+        ],
+        [
+          "npm",
+          "run",
+          "typecheck:domain:strict"
+        ],
+        [
+          "node",
+          "scripts/implementation-packets.mjs",
+          "validate"
+        ]
+      ],
+      "_checksDerivation": "Computed under interim rule 8 (`scripts/governing-tests.mjs` has NOT landed at the integration tip, so the rule's stated fallback was used), one DIRECTORY per array, FILES only, the validator LAST. (1) `git grep -l -F 'dmLayer' -- tests` at bdbf7c89c returns FIVE files — tests/lib/editTravel.test.js, tests/lint/recordRegisterTotality.walker.test.js, tests/ops/migrationRehearsal.test.js, tests/security/galleryScannerMirrorTotality.test.js, tests/store/decreeRegistryPersistence.test.js — all five are here, plus EM-B2a1's own tests/domain/dmLayer.test.js, which this member MODIFIES the subject of and which must stay green. (2) `git grep -l -F 'regenSection' -- tests` returns TWELVE files; the nine that drive the store or the domain are here (tests/store/{settlementSlice,regenPreservation,locksEngine,npcStateRegenRebind,pinnedNpcRegenRemap,editProseQueueSpine}, tests/domain/livingContentLawWiring, plus lifecycleRoundTrip which the partition names). THREE are NOT here and the omission is stated: tests/lint/densityCreateBoundary.walker.test.js (a source-scan walker whose subject is the CREATE boundary, carried in the build lane's §10 with tests/lint whole), and tests/components/{dossierPhoneFloorAllViews,npcAuthoringScope}.test.jsx + tests/ui/{dossier.smoke,dossierNarrativeNavGate}.test.jsx — surface tests this member cannot reach, because it touches no `src/components/**` path, no route, no data-testid and no accessible name. (3) ⛔ THE ONE PLACE THE RULE'S LITERAL FORM WAS NOT FOLLOWED, REPORTED FOR THE CHAIR: `git grep -l -F 'settlementSlice' -- tests` returns NINETY files, sixty of which really import the module. `src/store/settlementSlice.js` is a store HUB and the rule's basename arm was written for leaves; a ninety-entry sealed array is a gate no window can finish, and this member's change inside it is NET ZERO and confined to `regenSection`'s body, whose own grep is the measured governing set. The whole `tests/store` directory is carried in the build lane's §10 instead. ⇒ QUESTION Q3. (4) The walkers that GOVERN tests/property, i.e. that walk the tests tree rather than merely citing a file: contractTestAntiVacuity.walker.test.js, goldenFreeze.walker.test.js, negativeAssertionAnchor.walker.test.js, seedLoopTotality.walker.test.js — all four are here (the same four EM-B2a1 measured for tests/domain; both directories are walked by the same set). (5) The REGISTER row's own enforcer, tests/lint/mutationCoverageManifest.test.js, and the frozen-size enforcer tests/lint/sizeBaseline.test.js (settlementSlice 816/816, NET ZERO) are here. (6) tests/build/domainGeneratorsBoundary.test.js is here as this member's LAYER-BOUNDARY PROBE: pure source-parse, no dist read, cannot skip. ⛔ tests/build/vendorPdfLazy.test.js and tests/build/generationWorkerLazy.test.js are DELIBERATELY ABSENT — they carry `it.skipIf(!requireDistRead)` dist arms (interim rule 2), and the first is instead a TEST row with its stated bound. ⛔ tests/lint/sovereigntyLightingContract.walker.test.js is DELIBERATELY ABSENT: it reds by design under a train, so a sealed array naming it can never pass; it is a §10 instrument. ⛔ The `tests/lint` DIRECTORY is named nowhere in this array. ⭐ The array ENDS with the validator.",
+      "_chairInstallNote": "2026-09-20 ~21:10 EDT, the chair (session 4a1823e2): `rowKey` added to the REGISTER row at install, as the launch brief asked (TOOL-27's shape; the validator at the read tip ignores unknown row keys: measured by ESTATE-REPAIR-3). Nothing else in this capsule was changed by the chair.",
+      "_version": 2,
+      "_preproofNote": "Version 2, re-measured at 16f0bc71c (train EM-T12's FLIPPED tip) by the Opus PRE-PROOF seat for train EM-T13, 2026-09-22. Five facts moved; see the packet's version-2 paragraph and EM-B2a4.SEMANTIC-DIFF.md."
+    },
+    {
+      "id": "EM-A3",
+      "status": "READY",
+      "packetPath": "docs/implementation/packets/settlement-editor/EM-A3.md",
+      "verifiedBase": "e1750d7454c1dff7e81342efadd05e47719ca6aa",
+      "changeManifest": [
+        {
+          "action": "CREATE",
+          "path": "tests/lint/flavorFields.census.test.js",
+          "symbol": "acceptance cases A1 through A7 -- the value-join arm, the receiver-shape arm and the key-level site roster",
+          "_note": "ENFORCER DIRECTORY. SEVEN literal test()s under ONE literal describe(), which is the titles +7 / suiteTitles +1 this member's lighting row states. THE FILE MUST CALL readdirSync ITSELF: contractTestAntiVacuity's Rule 2 is FILE-GATED on DERIV_RE (readFileSync|readdirSync|globSync|matchAll|Object.(keys|entries|values)() and returns [] for a deriving file, so A5's and A7's titles (which carry the word every) are convicted only if that call is absent. Six walkers govern tests/lint and every one admits this file AUTOMATICALLY with no roster to join, each read whole: negativeAssertionAnchor (SCAN_ROOTS=['tests'], ANNOTATION_RE = /\\/\\/\\s*anchored:/ on the assertion's own line or the ONE line above, no comment strip so PROSE counts, a file absent from the record held at 0); contractTestAntiVacuity (in scope via /^tests\\/lint\\/[^/]*\\.test\\.(js|jsx)$/, all five rules, three EMPTY exemption maps); seedLoopTotality (collect then assert once; allowlist CLOSED); moduleScopeCwdRatchet (POPULATION_CEILING['tests/lint']=17, NEVER raised -- no process.cwd() at module scope; use join(dirname(fileURLToPath(import.meta.url)),'../..')); mutationCoverageManifest TOTALITY (ENFORCER_DIRS is EIGHT dirs with tests/lint FIRST, re-read at this tip); sovereigntyLightingContract (five exact equalities). Park-free shape: ONE literal describe, straight-line literal test titles, ZERO-parameter callbacks, openers imported unrenamed from 'vitest', and the words it/test/describe never re-bound. THE DECOY TABLE IS A FROZEN LITERAL KEYED BY FILE + RECEIVER + OCCURRENCE COUNT, NEVER BY LINE (P2.16); the FREE KEYS it scans for are DERIVED from FIELD_DECLARATIONS, never re-typed. THE SPLIT PROBE WRITES ONLY INTO mkdtempSync(join(tmpdir(), ...)) and never into the tree."
+        },
+        {
+          "action": "MODIFY",
+          "path": "src/domain/edit/fieldDeclarations.js",
+          "symbol": "the readersProof string value carried by the shared ANNOTATION_PROOF const",
+          "_note": "RE-MEASURED AT bfca6b7d6; byte-unchanged from 16f0bc71c (the inner window touched six files and not this one). The leaf is 145 raw / 47 effective lines (eslint Linter, max-lines, skipBlankLines+skipComments -- the ONE instrument, sixth amendment P9). BOTH kind:'free' rows (:97 institution.note, :103 npc.note) read readersProof: ANNOTATION_PROOF, and :60 declares that ONE module-level const, so the authorized edit is ONE string literal's CONTENT. THE FREE DENOMINATOR IS TWO, measured from the landed table. THE EXACT NEW VALUE IS SPELLED IN SECTION 7 ROW 2 AND IS NOT THE BUILD LANE'S TO INVENT (P2.19). FOUR BYTE CONSTRAINTS, ALL EXECUTED AGAINST THE PLANNED TEXT with each walker's OWN counter: (1) the voice walker's charScanStringContents, EXTRACTED FROM ITS SOURCE, reads literals 150 / emDash 0 / exclamation 0 over the leaf as it stands AND with the plan (delta +0/+0/+0); (2) ruinFilterRoster's live READER_RE = /\\.institutions\\b/ does not match it; (3) it carries no relative from/import specifier, which editOperations.test.js would read through commentsOnly; (4) the file is 145 lines before and 145 after. No eslint max-len rule is configured, so the single long line is lawful. UNTOUCHABLE: kind, pool, field, group, label, provenance, tier1 -- all seven are EM-A1's. LINE-COUNT NEUTRAL, RE-TAKEN AT THIS TIP: four live path:line citations name this leaf -- PACKET_MANIFEST.json:35579 (-> :37), PACKET_MANIFEST.json:37251 (-> :142-144; version 8 wrote :37241 and EM-C4a's cure moved the manifest by ten lines), EM-C4a.md:134 and EM-D0d.md:56 -- and none moves. THREE LANDED requiredSymbols rows name this path (EM-A2b's FIELD_DECLARATIONS, EM-C4a's declarationsFor and isEditableCard) and the edit touches none of the three declarations. NO ARM PINS THE STRING'S VALUE: editDeclarations.test.js asserts only absent-on-root (:165), absent-on-world-fact (:172), non-blank (:179) and present-iff-kind-free (:190), re-measured after the cure moved 47 lines of that file; and the estate's 2,795 requiredSymbols rows carry ZERO pins on it."
+        },
+        {
+          "action": "REGISTER",
+          "path": "scripts/mutation-coverage-manifest.json",
+          "symbol": "invariants['tests/lint/flavorFields.census.test.js']",
+          "rowKey": "invariants['tests/lint/flavorFields.census.test.js']",
+          "_note": "MEASURED at bfca6b7d6: invariants 723 rows, 182 under tests/lint/, uncoveredBaseline 186, kind histogram rationale 445 / mutation 92 / uncovered 186 (445+92+186=723). THE ROW'S kind IS RULED, NOT CHOSEN: rationale, with an inline rationale of AT LEAST 40 CHARACTERS (judgment 157a) -- for a tests/lint census whose remover-proof IS the build's red-first. kind:'mutation' would additionally owe a label in scripts/mutation-sweep.sh, a LABEL JOIN claimed exactly once, and a MUTATED_FILES row, and this packet ships none of the three. kind:'uncovered' is UNAVAILABLE (shrink-only; a new uncovered row makes 187 != 186, and a member that would move that global scalar refuses at placement under P10.8). Row-keyed (TOOL-27): EM-B1b holds invariants['tests/lint/opGuardCoverage.walker.test.js'] and EM-B2a4 holds invariants['tests/property/dmLayerGoldenIsolation.test.js'] in train EM-T13 -- three distinct row keys, no collision, and judgment 157a rules all three rationale."
+        },
+        {
+          "action": "DOC",
+          "path": "docs/ARCH_EDIT_MODE_AND_DECREES.md",
+          "symbol": "section 8 instrument 2's sentence",
+          "_note": "JUDGMENT 157b ORDERS THIS CORRECTION IN THE SAME VERSION. The live sentence names src/domain/causalState (a FILE, not a directory), src/domain/edit/guards* (a pattern matching ZERO files anywhere under src/) and 'the writer-reach and observed-shape data' (refuted as the property-read source by section 11 BLOCK-A). The corrected sentence names the THREE ruled roots with the third spelled as a file, drops the guard root, and replaces the two registers with the receiver-shape scan over scanSurfaceReads, stating the reach as zero GROUNDED reads. ONE sentence; nothing else in the ARCH moves and no line is added or removed above any cited address. P2.18 DISCHARGED BY MEASUREMENT: the estate's 2,795 requiredSymbols rows carry ZERO quotes of this sentence, and the live PACKET_MANIFEST.json holds ZERO non-terminal change rows on this path, so it is unreserved (EM-D0d names it in prose only and is LANDED). DOC is a valid PACKET_ACTIONS member and its target EXISTS."
+        }
+      ],
+      "requiredSymbols": [
+        {
+          "path": "src/domain/factionRename.js",
+          "symbol": "export const FACTION_RENAME_SURFACES"
+        },
+        {
+          "path": "src/domain/factionRename.js",
+          "symbol": "export const NPC_RENAME_SURFACES"
+        },
+        {
+          "path": "src/domain/factionRename.js",
+          "symbol": "export const NON_CASCADED_SURFACES"
+        },
+        {
+          "path": "src/domain/factionRename.js",
+          "symbol": "export const NPC_NON_CASCADED_SURFACES"
+        },
+        {
+          "path": "scripts/check-writer-reach.mjs",
+          "symbol": "export const BASELINE_PATH"
+        },
+        {
+          "path": "scripts/lib/writer-reach-scan.mjs",
+          "symbol": "export const SURFACE_CLOSURE_STOP"
+        },
+        {
+          "path": "scripts/lib/writer-reach-scan.mjs",
+          "symbol": "export const WEB_DISPLAY_DIRS"
+        },
+        {
+          "path": "scripts/lib/writer-reach-scan.mjs",
+          "symbol": "export function parseReach"
+        },
+        {
+          "path": "scripts/check-observed-shape-readers.mjs",
+          "symbol": "export const EXPLAINED_WRITER_EXEMPTIONS"
+        },
+        {
+          "path": "tests/lint/mutationCoverage.shared.mjs",
+          "symbol": "export const ENFORCER_DIRS"
+        },
+        {
+          "path": "src/generators/npcGenerator.js",
+          "symbol": "export const generateNPCs"
+        },
+        {
+          "path": "scripts/lib/writer-reach-scan.mjs",
+          "symbol": "export function scanSurfaceReads"
+        },
+        {
+          "path": "scripts/lib/writer-reach-scan.mjs",
+          "symbol": "export function keysToShapesOf"
+        },
+        {
+          "path": "scripts/lib/writer-reach-scan.mjs",
+          "symbol": "export function writerIdentity"
+        },
+        {
+          "path": "scripts/lib/writer-reach-scan.mjs",
+          "symbol": "export function isWriteTarget"
+        },
+        {
+          "path": "scripts/lib/writer-reach-scan.mjs",
+          "symbol": "export { buildIndex, MIN_ROWS }"
+        },
+        {
+          "path": "scripts/lib/observed-shape-corpus.mjs",
+          "symbol": "export function foldCorpus"
+        },
+        {
+          "path": "scripts/check-observed-shape-readers.mjs",
+          "symbol": "export function sourceFiles"
+        },
+        {
+          "path": "src/domain/edit/fieldDeclarations.js",
+          "symbol": "export const FIELD_DECLARATIONS"
+        }
+      ],
+      "acceptanceCases": [
+        {
+          "id": "A1",
+          "case": "THE VALUE-JOIN HALF — every declaration row whose stored path is an exact-key path in either cascade denominator is declared free-cascade; no joining row is free or pool; no free-cascade row is join-less"
+        },
+        {
+          "id": "A2",
+          "case": "DORMANT AND ABSENT -- a card type carrying no free row still runs BOTH arms, asserts a non-empty file set under every scan root, and reports zero free rows without passing vacuously. MEASURED at bfca6b7d6: THREE of the five cards carry no free row (faction, powerSeat, worldFact) and TWO carry one (institution.note, npc.note), so neither this case nor A5 is vacuous."
+        },
+        {
+          "id": "A3",
+          "case": "GUARD-THE-GUARD — a planted kind free on a row whose path is a declared cascade key REDS A1, and the message names both the declaration row and the exact cascade path"
+        },
+        {
+          "id": "A4",
+          "case": "THE ANTI-VACUITY FENCE AND THE SPLIT PROBE -- both cascade denominators non-empty, at least one declaration row classified JOINING, a non-empty file set under EVERY one of the three ruled roots, and the PLANTED SPLIT PROBE discriminating: decoys in one temp file and one grounded read in another, stats.rGrades > 0, R holding exactly the grounded file for both identities, N polluted by both. This REPLACES the control version 7 named (role on npcs via getUpgradeOpportunities), refuted at the version-8 pre-proof as a spread of a local binding. EXECUTED by the version-9 compile at bfca6b7d6."
+        },
+        {
+          "id": "A5",
+          "case": "EVERY FREE ROW CARRIES A LIVE PROOF — readersProof is a non-empty string on every kind free row and names an arm this census actually ran, and no pool or free-cascade row carries one"
+        },
+        {
+          "id": "A6",
+          "case": "THE RECEIVER-SHAPE ARM -- reads.get(writerIdentity(K, S)).R is EMPTY for every kind free row, over a corpus built by foldCorpus with an EXPLICIT rootShapes ['settlement'], an index over the FULL sourceFiles(ROOT) (2,250 files) and files limited to the three ruled roots (559 files). MEASURED subject at this tip: note on institutions and note on npcs. The claim is ZERO GROUNDED READS and is stated as such, because the legacy resolver reaches 7.67 % of reads by its own header."
+        },
+        {
+          "id": "A7",
+          "case": "THE KEY-LEVEL SITE ROSTER -- the census's own roster over the three roots, taken with the estate's parse through buildIndex and the estate's own isWriteTarget, equals the frozen decoy table row for row, and its SITE and OCCURRENCE totals are asserted beside it. MEASURED at bfca6b7d6: 5 rows keyed by file + receiver, 6 distinct SITES, 8 read occurrences. A new receiver reds BY NAME; a new site on a declared receiver reds by that row's count. The table is never keyed by line."
+        }
+      ],
+      "checks": [
+        [
+          "npx",
+          "vitest",
+          "run",
+          "--pool=threads",
+          "--maxWorkers=2",
+          "tests/lint/flavorFields.census.test.js",
+          "tests/lint/mutationCoverageManifest.test.js",
+          "tests/lint/negativeAssertionAnchor.walker.test.js",
+          "tests/lint/contractTestAntiVacuity.walker.test.js",
+          "tests/lint/seedLoopTotality.walker.test.js",
+          "tests/lint/moduleScopeCwdRatchet.test.js"
+        ],
+        [
+          "npx",
+          "vitest",
+          "run",
+          "--pool=threads",
+          "--maxWorkers=2",
+          "tests/domain/factionRename.test.js",
+          "tests/domain/editDeclarations.test.js"
+        ],
+        [
+          "npx",
+          "eslint",
+          "tests/lint/flavorFields.census.test.js",
+          "src/domain/edit/fieldDeclarations.js"
+        ],
+        [
+          "npm",
+          "run",
+          "typecheck:domain:strict"
+        ],
+        [
+          "npm",
+          "run",
+          "typecheck:ratchet"
+        ],
+        [
+          "node",
+          "scripts/implementation-packets.mjs",
+          "validate"
+        ]
+      ],
+      "_checksNote": "A SEALED checks array names FILES, never the tests/lint DIRECTORY. checks[0] is the enforcer-directory battery, ONE directory, SIX named files, widened in version 9 by the three walkers version 8 named as section 10a instruments only (contractTestAntiVacuity, seedLoopTotality, moduleScopeCwdRatchet) -- every one of them governs the directory this member CREATEs in. tests/lint/sovereigntyLightingContract.walker.test.js is STILL EXCLUDED: it reds BY DESIGN at this member's tip because the member CREATEs a test file and the census tuple is an exact equality, so sealing it means check:packet can never pass. It is run ALONE in section 10 to MEASURE the delta section 7 states. tests/lint/writerReach.walker.test.js is DELIBERATELY NOT SEALED and that is measured: it is the only other caller of scanSurfaceReads, but this member changes no call shape, its scansRun budget pin is a module-scope binding a second module cannot reach, and its beforeAll runs buildObservedCorpus() at 251,002 ms. It is run ONCE inside the build lane's tests/lint WHOLE (excluded) instrument. checks[1] runs tests/domain/editDeclarations.test.js, which version 8 recorded RED as BLOCK-H; the cure 17bf34dd1 is an ancestor of bfca6b7d6, so it is GREEN at this member's base. THE GENERATOR-LAST / VALIDATE-LAST ORDER holds: node scripts/implementation-packets.mjs validate is the final entry and this member runs no generator at all.",
+      "_verifiedBaseNote": "Stamped by the chair at placement. Re-compiled 2026-09-22 against bfca6b7d6aad3ef1955d3bc33119988d8a5d9989 (train EM-T12's CURED tip). The J-T1 window d31af2cee -> bfca6b7d6 over all seventeen change-manifest and requiredSymbols paths moved exactly two: scripts/mutation-coverage-manifest.json (+88/-1) and src/domain/edit/fieldDeclarations.js (+144, EM-A1's CREATE). The INNER window 16f0bc71c -> bfca6b7d6 (EM-C4a's cure 17bf34dd1) touched SIX files -- docs/implementation/INDEX.md, PACKET_MANIFEST.json, EM-C4a.md, tests/domain/editDeclarations.test.js, tests/domain/editOperations.test.js, tests/lint/entropyRootCensus.walker.test.js -- and NOT ONE of this member's paths, so every version-8 measurement holds unaltered. The CREATE target is ABSENT; all nineteen requiredSymbols resolve verbatim at grep -c -F = 1. The preamble's live SHA-256 at this tip is fdecd426828665cad2dfaf872871f29f46fa4816e1bd4c43c20ccd84dacc9e7c (the FIFTH amendment); the chair re-stamps the header to the SIXTH at placement.",
+      "_requiredSymbolsNote": "NINETEEN rows, all verified VERBATIM at bfca6b7d6 by `git grep -c -F <symbol> HEAD -- <path>`, each returning 1. VERSION 9 ADDS EIGHT, every one a symbol the ruled mechanism CALLS and must find unchanged: scanSurfaceReads, keysToShapesOf, writerIdentity, isWriteTarget and the :621 re-export `export { buildIndex, MIN_ROWS }` (all from scripts/lib/writer-reach-scan.mjs, which is why the census imports ONE module for the whole mechanism), foldCorpus, sourceFiles, and FIELD_DECLARATIONS. VERSION 9 REMOVES ONE, with its reason written rather than dropped silently: src/generators/economy/upgradeOpportunities.js :: export const getUpgradeOpportunities. Version 8 retained it UNDER PROTEST 'until the chair re-chooses the control by measurement'; judgment 157d has done so, replacing the refuted live control with a planted split probe, so the row now names nothing the deliverable uses. Section 11 BLOCK-G keeps the refutation. This is THE CHAIR'S FOUR, question 2. The six baseline-era rows (BASELINE_PATH, SURFACE_CLOSURE_STOP, WEB_DISPLAY_DIRS, parseReach, EXPLAINED_WRITER_EXEMPTIONS, generateNPCs) are KEPT as the BLOCK-A record: this census reads neither baseline, but removing the rows would erase why the live scan was ordered. No _pendingRequiredSymbols rows exist in this capsule, so judgment 151's discharge law has nothing to discharge.",
+      "_postEditSimulation": "Every requiredSymbols row survives this packet's own edits. The packet moves, renames and deletes NO symbol at any of the nineteen paths. The one src/ edit rewrites the CONTENT of the string literal on src/domain/edit/fieldDeclarations.js:60; the row on that path names `export const FIELD_DECLARATIONS` (:92), which is untouched, and the three LANDED rows other packets hold on the same path -- EM-A2b's FIELD_DECLARATIONS and EM-C4a's declarationsFor (:130) and isEditableCard (:142) -- are untouched too. The DOC edit rewrites one prose sentence of docs/ARCH_EDIT_MODE_AND_DECREES.md, which is no packet's requiredSymbols path and which zero rows quote. retiredSymbols: NONE.",
+      "_preproofVerdict": "READY-ABLE at version 9, re-compiled 2026-09-22 against bfca6b7d6. Version 8's four blocks are CLOSED: BLOCK-E ruled (judgment 157d, E-1 -- the receiver-shape predicate, three arms, a planted positive control); BLOCK-F ruled (157b -- three roots, the third a FILE, the guard root dropped in writing and the ARCH sentence corrected as change row 4); BLOCK-G closed by REPLACEMENT (the split probe is A4's control); BLOCK-H CURED in the tree at 17bf34dd1, measured an ancestor of this tip. The register row's kind is rationale (157a). FOUR SPELLINGS stay the chair's, none of them gating: the roster's key (5 rows by file+receiver+count versus 6 by path:line), the requiredSymbols delta and its one removal, whether this member or the terminal carries the ARCH correction, and whether writerReach.walker.test.js is sealed. See section 11 THE CHAIR'S FOUR."
     }
   ]
 }
