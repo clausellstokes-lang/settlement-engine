@@ -24,13 +24,13 @@
     "The derivation history — every prior row, its cause, and the census laws — stays in the walker",
     "beside the assertions, deliberately. Only the live tuple moved."
   ],
-  "measuredAtSha": "b05accf3a0171d5a15f2bc274af4251fdca715bf",
-  "measuredBy": "chair-fable-50b1776f",
-  "date": "2026-09-21",
-  "note": "the seventeenth refreeze: train EM-T11 (EM-B2a2 +4 titles +1 suite · EM-V10 +4 titles · EM-B3f +5 titles · EM-B1a +1 file +8 titles +1 suite · EM-A2a +1 file +8 titles +1 suite · TOOL-30 +1 file +6 titles +1 suite · TOOL-33 +1 file +6 titles +1 suite) over 5a6d7f1fc",
-  "files": 2680,
+  "measuredAtSha": "e7d9fb7c54c8f0991b218590fef206b3d93bdb69",
+  "measuredBy": "chair-fable-cce01f87",
+  "date": "2026-09-22",
+  "note": "the eighteenth refreeze: train EM-T12 (EM-B2a3 +1 file +7 titles +1 suite · EM-B1c1 +6 titles · EM-C4a +2 files +15 titles +2 suites · EM-A2b +8 titles) over efd0eb448",
+  "files": 2683,
   "parked": 359,
-  "credited": 2321,
-  "titles": 25677,
-  "suiteTitles": 6834
+  "credited": 2324,
+  "titles": 25713,
+  "suiteTitles": 6837
 }
