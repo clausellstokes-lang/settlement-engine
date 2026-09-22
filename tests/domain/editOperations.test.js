@@ -132,7 +132,7 @@ const exportsSymbol = (rel, symbol) => new RegExp(
 ).test(sourceOf(rel));
 
 describe('EM-B1a — the op vocabulary, the fourteen home ops, and the world half of requires', () => {
-  it('A1: OP_TYPES is exactly the fourteen home types, every row carries all eleven fields', () => {
+  it('A1: OP_TYPES is exactly the composed twenty-two, the fourteen home types among them, every row carries all eleven fields', () => {
     // GUARD-THE-GUARD, FIRST: the positive control. If the catalogue did not load, or loaded
     // empty, every set-equality below would pass vacuously against an empty offender list.
     expect(Object.keys(OP_TYPES).length, 'the catalogue loaded nothing, so every roster claim'
@@ -179,7 +179,7 @@ describe('EM-B1a — the op vocabulary, the fourteen home ops, and the world hal
 
     const struckWhy = `${STRUCK} is STRUCK (ruling 2; design §14 makes system states derived),`
       + ' so restoring it must red here';
-    // anchored: the fourteen are asserted set-equal two assertions above, so this cannot go vacuous.
+    // anchored: the twenty-two are asserted set-equal two assertions above, so this cannot go vacuous.
     expect(live, struckWhy).not.toContain(STRUCK);
     const reabsorbed = B1C_FIVE.filter((t) => live.includes(t));
     expect(reabsorbed, 'EM-B1c\'s five are absent BY NAME, so the split cannot be quietly'
@@ -400,7 +400,7 @@ describe('EM-B1a — the op vocabulary, the fourteen home ops, and the world hal
     expect(code, engineWhy).not.toMatch(/\brederive\s*\(/);
   });
 
-  it('A4: relational integrity is total, symmetric and closed over the fourteen', () => {
+  it('A4: relational integrity is total, symmetric and closed over the composed twenty-two, with the home fourteen still closed over themselves', () => {
     const types = Object.keys(OP_TYPES);
     const conditions = Object.keys(WORLD_CONDITIONS);
     const unknown = [];
