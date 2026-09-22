@@ -149,6 +149,22 @@ collision) and then runs the ordinary dispatch, sealing afresh at HEAD with `res
 recorded in the new `dispatch.json`; it refuses, before any rename, unless a capsule exists,
 the packet is READY, and the tree is Git-clean.
 
+⛔ **A SEAL BINDS THREE THINGS: THE HEAD IT WAS TAKEN AT, THE BRANCH, AND THE BYTES OF THE WHOLE PACKET MANIFEST**
+(`seal.authority.manifestSha256`). A worktree moved under a live seal refuses at `assertImplementationScope` section
+(e) with `sealed HEAD or branch drifted`, and ANY commit to a live lane branch — even a docs-only one by the
+coordinator — refuses with `implementation authority drifted`. Both were measured on one afternoon: a coordinator
+fast-forward of four live lane worktrees, and a manifest repair on a branch whose lane was mid-build (2026-09-21).
+
+⛔ **A RE-SEAL IS POSSIBLE ONLY WHILE THE BUILD IS UNCOMMITTED.** The cure is to withdraw the staged build to a
+patch, run `--reseal` on the clean tree, and re-apply the patch BYTE-IDENTICAL, proven by the `sha256` of the staged
+diff before and after — never by moving the worktree back, which discards the commit the move was made for. Once the
+staged index has been COMMITTED, the build's own paths are committed substrate — a CREATE target now exists and a
+declared target has moved since the verified base — so `--reseal` refuses with `verified-base descendant changed
+declared substrate`, and a new version needs the branch REWOUND to its last packet commit, the version applied
+there, a fresh seal, and the build re-staged byte-equal. ⭐ A CURE made after that commit is committed ON TOP OF THE
+BUILD COMMIT, as a MODIFY of the file the build created: a cure cut from the rewound seal head is an ADD of the whole
+file and reaches a train as an add/add conflict. Authority: `OWNER_DECISION_QUEUE.md` §934.47 addendum 127.
+
 A sealed build DISPATCHES ON THE PACKET'S OWN LANE BRANCH. The capsule is keyed to the
 WORKTREE's git dir (`.git/worktrees/<lane>/implementation-sessions/<ID>`), never to the
 repository, so parallel lanes cannot collide on it and the "capsule already exists" refusal is
@@ -301,6 +317,23 @@ reds CI — and a landing is ONE pull request: where two trains land on one tip,
 floors and the CI-parity run are run ONCE, at the landed tip, before that one push.
 Authority: `OWNER_DECISION_QUEUE.md` §934.47 addenda 119, 120, 124.
 
+⛔ **THE PROMOTION COMMIT IS PROVEN BEFORE THE LANE BRANCHES ARE CUT.** `git show --stat HEAD` NAMES EVERY MEMBER'S
+PACKET BODY — `git commit -- <dir>` never adds an UNTRACKED file, so each new body is `git add`ed by explicit path
+first, and a placement that committed the entry without the body stopped its build at the seal. A RE-PLACED id is
+UPDATED IN PLACE (status, verified base, the body, both `INDEX.md` rows), never skipped: a placement tool that SKIPs
+an existing id leaves the index rows unwritten and cannot recover. A placed manifest entry is REBUILT FROM THE
+PACKET'S OWN CAPSULE, never patched — a by-hand rebuild that kept an older version's rows put three change rows under
+a five-row capsule. `validate:packets` prints the EXPECTED READY COUNT. And the coordinator NAMES THE TRAIN'S
+BYTE-ARM HOLDER here: the earlier sentence naming the holder "at the pre-proof" is corrected, because the placement
+is the one act every member passes through, and a train placed without a named holder priced its budgets by an extra
+real build after four members had already built.
+
+⛔ **A MEMBER'S PACKET-VERSION COMMITS ARE PICKED WITH ITS BUILD.** A version cut on a lane lives only on that lane,
+so a terminal that picks the build alone lands code at version N+2 under a record still saying version N, and the
+verifier convicts the pair at the composed tip. Where a version commit conflicts on `PACKET_MANIFEST.json` it is
+resolved by keeping the PLACEMENT's rows and proven by PATCH equality of the packet's own paths.
+Authority: `OWNER_DECISION_QUEUE.md` §934.47 addendum 127.
+
 Authority: `DESIGN_BUILD_EFFICIENCY.md` §2.
 
 ## Differential member caps
@@ -380,6 +413,16 @@ lands re-measures every fact that rested on the dependency's unwritten deliverab
 ⭐ A finding the pre-proof or the verifier raises that is not this packet's own is slotted THE
 SAME TURN to the batch, packet or inbox that owns it. It is never recorded as deferred.
 Authority: `OWNER_DECISION_QUEUE.md` §934.47 addendum 124.
+
+⛔ **TWO METHODS, EACH PAID FOR BY A CUT MEMBER.** (i) The pre-proof RE-DERIVES THE GOVERNING SET FOR EVERY MODULE
+THE CONTRACT IMPORTS — `git grep -l -F '<the import target's basename>' -- tests`, one search per import — because
+dormancy arms and consumer rosters key on IMPORTERS and not on the edited file; a packet whose leaves imported two
+modules met the landed arms guarding them at its build and was cut from its train. (ii) The pre-proof MEASURES A
+SIBLING'S LANDED FENCE, NEVER ITS PREDICTED ONE: a member pre-proved against a sibling's predicted shape met that
+sibling's LANDED fence at its pre-seal, where eleven assertions across five landed arms sat outside the three its
+manifest authorized. REAL CODE outranks a sibling's packet the moment it exists, and a pre-proof run before the
+dependency landed is re-run after it lands.
+Authority: `OWNER_DECISION_QUEUE.md` §934.47 addendum 127.
 
 ## Premise maps and scoped truncation
 
@@ -519,6 +562,16 @@ annotated, never rewritten. Three waiting packets asserted `704 → 705` against
 already twelve rows past it, and a wave's chained absolutes were wrong in all five figures the
 moment a sibling outside the wave landed. What composes across a train is the SUM OF DELTAS.
 Authority: `OWNER_DECISION_QUEUE.md` §934.47 addendum 120.
+
+⛔ **A COMPILE RUNS EACH GOVERNING INSTRUMENT'S OWN LOGIC OVER ITS PLANTED TEXT AND DECLARES THE DISPOSITION AS A
+MANIFEST ROW.** An obligation declared NOT OWED by reasoning is the single most expensive error class the trains have
+paid for: three members of two consecutive trains were refuted by a walker AFTER they were sealed, twice after the
+build had landed on the train, because a census, a roster or a discovery count was reasoned about instead of
+executed. The library is imported in plain `node`, its own regular expressions and counters are run over the tip as
+it stands AND over the contract's planned text, and the result — routed, exempt, moved by N, unmoved — is written as
+a row with its figure AS A DELTA. ⚠ The figure the arm will red with is the ARM'S OWN MESSAGE at the packet's tip,
+never a number adopted by hand: a different figure is a STOP for the coordinator.
+Authority: `OWNER_DECISION_QUEUE.md` §934.47 addendum 127.
 
 Authority: `OWNER_DECISION_QUEUE.md` §49, §50.2, §53.6, §85.4, §102.3, §934.47 addendum 78.
 
@@ -667,12 +720,31 @@ Generated artifacts do not count as handwritten files, but the packet must name
 their generator and expected artifact set. Documentation receipts do not count
 as production lines.
 
+⛔ **EVERY EFFECTIVE-LINE FIGURE IN A PACKET IS MEASURED WITH ONE INSTRUMENT:** eslint's own `Linter` under
+`max-lines` with `skipBlankLines` and `skipComments`, run over the file as it stands and over the planned text. Never
+`wc -l`, never a hand convention, never an inherited or delegated figure. "Hot files" already binds this for a hot
+file; it binds every budget row, because a family that used a second convention produced budget rows that were
+comparable neither to each other nor to the caps above.
+
 An ADDRESSES-ONLY citation row — a production file whose only edit is the
 `path:line` addresses inside its comments or string literals, no logic byte —
 does not count against the three-modified-logic-files cap. It stays a
 change-manifest row with its stated comment-line delta and it runs the
 source-citation walker; it is never a logic home and never splits a packet.
 Authority: `OWNER_DECISION_QUEUE.md` §934.47 addendum 72 (2026-09-20).
+
+A NEW citation of code — in a packet body, a capsule `_note`, a brief, a ruling
+or a commit body — names its target as `path :: symbol` (an exported or
+top-level name; a test's title), never as `path:NNN`. Two exceptions: a register
+that KEYS by line (the dark-guard registry, the prose-numerics baseline), and a
+line QUOTED WITH ITS TEXT as a red-first's evidence. An existing `path:NNN`
+address is not swept (a line does not name its symbol); when a landing moves
+one — the re-address a landing owes on its own rows — it is converted to a
+symbol, permanently, and `tools/cite-drift.mjs <path>` (chair kit) reports every
+citation of a touched path whose quoted text no longer sits at its line, since
+the source-citation walker convicts only a past-EOF address.
+Authority: `OWNER_DECISION_QUEUE.md` §934.47 addendum 128 (2026-09-22; the
+kit's OPERATING-STANDARD rule 32; RETIRED-MECHANISMS.md R-3).
 
 If the work cannot fit, the agent stops and proposes the smallest split. The
 agent may not quietly renegotiate the budget or convert a registration file
@@ -868,6 +940,13 @@ and line. A waiting sibling that calls the changed shape owes a version bump to 
 slotted to that sibling's own pre-proof rather than made silently.
 Authority: `OWNER_DECISION_QUEUE.md` §934.47 addendum 124.
 
+⛔ **THE SAME GREP BINDS A REWORDED SENTENCE OF A GOVERNING DOCUMENT.** A `requiredSymbols` row may name a heading or
+a sentence of this standard, of a preamble or of the index, and that quoted text is a PIN resolved verbatim against
+the live tree at every status. An amendment of this file that reworded a sentence one LANDED packet's row quotes
+redded `validate:packets` on the amendment's own commit; the cure was to restore the quoted opening VERBATIM, because
+a landed row is never edited to suit a document. Before rewording any sentence here, grep every row for it.
+Authority: `OWNER_DECISION_QUEUE.md` §934.47 addendum 127.
+
 Authority: `OWNER_DECISION_QUEUE.md` §101.4.
 
 ## Mandatory implementation order
@@ -898,6 +977,18 @@ shape.
 
 - Never read a gate through a shell pipe. Use `npm run check:tail` or
   `sh scripts/gate-tail.sh <command...>`.
+
+- ⛔ A RED-FIRST WHOSE LOG PRINTS NO TEST COUNT, OR `Tests no tests`, DID NOT
+  RUN. A file that fails to LOAD — a `vi.mock` hoisting error, a bad import, a
+  syntax error — exits non-zero with every step red and not one test executed,
+  which reads exactly like the red a red-first wants. The agent reads the COUNT
+  LINE before it claims any red, and a claim it cannot support is withdrawn
+  rather than carried into a commit message.
+- ⛔ A PACKET THAT EDITS A `src/` PATH MEASURES `tsconfig.full.json`'s ERRORS ON
+  THAT PATH BEFORE IT REPORTS. The TypeScript compiler API over the packet's own
+  paths is a plain-node measurement that takes no gate slot; a pre-seal table
+  carrying eslint without it is incomplete, and one that omitted it reported
+  GATE-READY into a `typecheck:ratchet` red of two errors against a floor of zero.
 - Hold the test slot for the complete process with
   `sh scripts/gate-mutex.sh --run -- npx vitest ...`. An observational preflight
   followed by a separate command is not ownership.
