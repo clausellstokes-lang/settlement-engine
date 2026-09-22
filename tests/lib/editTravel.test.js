@@ -16,6 +16,8 @@
  * `EM-B2a` (the layer's writer) and `EM-C1` (the registry's) land AFTER this packet and depend on it,
  * which is why every case below runs on HAND-PLANTED fixtures through code that
  * already exists.
+ * ⭐ AMENDED BY EM-C4a: A5b is the ONE case that does not, by design — it drives a layer
+ * WRITTEN BY `src/store/editSlice.js` (never `src/domain/edit/**`) through all five surfaces.
  *
  * @enforced-by this test
  */
@@ -37,6 +39,9 @@ import { SAMPLE_SETTLEMENTS, forkConfigFor, forkSeedFor } from '../../src/data/s
 import { generateSettlementPipeline } from '../../src/generators/generateSettlementPipeline.js';
 import { expectAbsentWithAnchor } from '../helpers/anchoredNegatives.js';
 import { prepareSettlementEntry, ensureNormalizeLoaded } from '../../src/lib/accountImport.js';
+import { partializeStoreState, PERSIST_KEY } from '../../src/store/persistProjection.js';
+import { applyPlainEditToDraft, rootKeyFor } from '../../src/store/editSlice.js';
+import { makeOp } from '../../src/domain/edit/operations.js';
 
 /** An OPAQUE dmLayer: one nested object, one order-observable array. */
 const dmLayerFixture = () => ({
@@ -481,5 +486,122 @@ describe('EM-B3a — HZ-TRAVEL: a fork, a backup export and a realm snapshot car
       Object.hasOwn(live.versionHistory[0].settlement, 'dmLayer'),
       Object.hasOwn(live.versionHistory[0].settlement, 'decrees'),
     ]).toEqual([true, true, true, true]);
+  });
+
+  test('A5b — a REAL layer, written by EM-C4a\'s own writer, reaches no fork, no import, neither gallery projection, no export and no anonymous envelope', async () => {
+    // ⭐ THE CHARTER'S TRAIN EM-T7 STOP. Every case above plants its layer by hand,
+    // because the veil landed before the writer existed. EM-C4a IS that writer, so this
+    // case asks the only question a fixture cannot: does the layer the PRODUCT writes
+    // travel? The layer below is produced by `applyPlainEditToDraft` through the
+    // declaration table and the real dmLayer leaf; nothing here spells its interior.
+    await ensureNormalizeLoaded();
+    const SAVE_ID = 'save-real-layer';
+    const plain = { ...editedSettlement() };
+    delete plain.dmLayer;
+    delete plain.decrees;
+    const state = {
+      activeSaveId: SAVE_ID,
+      phase: 'draft',
+      savedSettlements: [{ id: SAVE_ID, name: 'Ashford' }],
+      settlement: plain,
+    };
+    const coords = rootKeyFor('npc', 'npc.varn', 'role');
+    const written = await applyPlainEditToDraft(
+      () => state,
+      (recipe) => { recipe(state); },
+      {
+        saveId: SAVE_ID,
+        op: makeOp('set-field', { kind: 'npc', id: 'npc.varn' }, { field: 'role', value: 'Warden' }),
+        rootKey: coords.key,
+        value: 'Warden',
+      },
+    );
+
+    // The writer really wrote, and the layer really is the product's own: its one root
+    // key and its value are the TRACERS every surface below is scanned for, which is a
+    // stronger question than the key NAME alone that the cases above ask.
+    expect(written.ok).toBe(true);
+    expect(written.keys).toEqual([coords.key]);
+    const edited = state.settlement;
+    expect(edited.dmLayer.roots[coords.key]).toBe('Warden');
+    const tracers = (text) => [coords.key, '"dmLayer"'].filter((needle) => text.includes(needle));
+    expect(tracers(JSON.stringify(edited))).toEqual([coords.key, '"dmLayer"']);
+
+    // ── (i) A FORK IS A FRESH GENERATION ────────────────────────────────────────────
+    const sample = SAMPLE_SETTLEMENTS.find((entry) => entry.id === 'sample-cnocby');
+    const forked = generateSettlementPipeline(forkConfigFor(sample), null, {
+      seed: forkSeedFor(sample, 'user-1234'), customContent: {},
+    });
+    expect(typeof forked.name).toBe('string');
+    expect(tracers(JSON.stringify(forked))).toEqual([]);
+
+    // ── (ii) THE IMPORT DOOR, at the configuration the product uses ─────────────────
+    const META = {
+      importedAt: '2026-01-01T00:00:00.000Z', sourceName: 'keeper-export', restoreLifecycle: true,
+    };
+    const imported = prepareSettlementEntry({
+      name: 'Ashford', tier: 'town', settlement: edited, versionHistory: [snapshot('v1', edited)],
+    }, META);
+    expect(imported.ok).toBe(true);
+    expect(imported.entry.name).toBe('Ashford');
+    expect(imported.entry.versionHistory).toHaveLength(1);
+    expect(imported.entry.settlement.institutions).toEqual([{ id: 'inst.market', name: 'Market' }]);
+    expect(tracers(JSON.stringify(imported.entry))).toEqual([]);
+
+    // ── (iii) BOTH GALLERY PROJECTIONS ──────────────────────────────────────────────
+    const shared = toPublicSafe(edited);
+    const full = toPublicSafe(edited, { full: true });
+    expect(shared.name).toBe('Ashford');
+    expect(full.npcs[0].secret).toBe('the reeve weighs the grain twice');
+    expect(full.npcs[0].role).toBe('Warden');
+    expect(tracers(JSON.stringify(shared))).toEqual([]);
+    expect(tracers(JSON.stringify(full))).toEqual([]);
+
+    // ── (iv) THE BACKUP EXPORT ──────────────────────────────────────────────────────
+    const payload = buildAccountExport({
+      auth: { user: { email: 'keeper@example.com' }, displayName: 'Keeper', tier: 'free' },
+      savedSettlements: [{ ...saveRow(SAVE_ID, edited), versionHistory: [snapshot('v1', edited)] }],
+      campaigns: [],
+    });
+    expect(payload.settlements).toHaveLength(1);
+    expect(payload.settlements[0].versionHistory).toHaveLength(1);
+    expect(payload.settlements[0].settlement.npcs[0].role).toBe('Warden');
+    expect(tracers(JSON.stringify(payload))).toEqual([]);
+
+    // ── (v) THE ANONYMOUS ENVELOPE, WHICH IS GATED AND NEVER STRIPPED ───────────────
+    // EM-B3a's own ruling (tests/store/decreeRegistryPersistence.test.js A6): the device
+    // slot is GATED on origin, not scrubbed. A layer can only exist on a SIGNED-IN
+    // account (EM-C4a §2.5: the executor refuses a command with no owner context before
+    // any writer), so the question this arm asks is the real one - does an account's
+    // edited world reach the shared device slot? Another tab's world is planted first,
+    // so the answer is measured against a live slot rather than an empty one.
+    const priorStorage = globalThis.localStorage;
+    const data = new Map();
+    globalThis.localStorage = {
+      getItem: (key) => data.get(String(key)) ?? null,
+      setItem: (key, value) => { data.set(String(key), String(value)); },
+      removeItem: (key) => { data.delete(String(key)); },
+      clear: () => data.clear(),
+    };
+    try {
+      const otherTab = { settlement: uneditedSettlement(), lastSeed: 'seed-other' };
+      globalThis.localStorage.setItem(PERSIST_KEY, JSON.stringify({ state: { anonDraft: otherTab }, version: 2 }));
+      const blob = partializeStoreState({
+        auth: { user: { id: 'keeper' } },
+        draftOrigin: 'account',
+        settlement: edited,
+        lastSeed: 'seed-edited',
+        config: { settType: 'town' },
+        displayPrefs: { theme: 'dark' },
+      });
+      // Anchored: the projection really ran and really re-emitted the OTHER tab's world,
+      // so the absence below is a refusal rather than an empty blob.
+      expect(blob.config).toEqual({ settType: 'town' });
+      expect(blob.anonDraft.settlement.name).toBe('Redhollow');
+      expect(tracers(JSON.stringify(blob))).toEqual([]);
+    } finally {
+      if (priorStorage === undefined) delete globalThis.localStorage;
+      else globalThis.localStorage = priorStorage;
+    }
   });
 });

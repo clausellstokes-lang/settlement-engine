@@ -37,6 +37,7 @@ describe('application command registry', () => {
       'settlement.canon-event.apply',
       'campaign.party-impact.record',
       'settlement.pending-edits.commit',
+      'settlement.plain-edit.apply',
       'import.settlement.create-and-attach',
       'import.campaign.attach-existing',
       'content.definition.create-revision',

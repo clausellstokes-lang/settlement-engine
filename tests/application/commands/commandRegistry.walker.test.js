@@ -114,6 +114,14 @@ const DISPATCH_SURFACE = Object.freeze([
   'src/application/commands/canonEventCommandRecovery.js',
   'src/application/commands/importReconciliationCommandRuntime.js',
   'src/application/commands/pendingEditCommitRuntime.js',
+  // EM-C4a. The plain-edit seam: it builds its envelope with makeCommandEnvelope
+  // through the plainEditApply adapter, so its kind (settlement.plain-edit.apply) is
+  // already visible to the kind census above and is registered. It hand-builds no raw
+  // envelope and pins no kind of its own; the one thing it can smuggle is a request
+  // object, and the adapter's validate() refuses that without an owner, a save and an
+  // op. Frozen here so the settlement editor's SECOND dispatch seam is a deliberate
+  // addition rather than an inherited permission.
+  'src/application/commands/plainEditRuntime.js',
   'src/lib/intent/interpretApply.js',
   'src/store/customContentSliceRuntime.js',
   // W-D directive 3 (CREATE_ROUTE): the charter store verb dispatches a
@@ -465,6 +473,7 @@ describe('THE COMMAND-REGISTRATION WALKER (no unregistered capability)', () => {
     expect(staticKinds).toContain('settlement.canon-event.apply');
     expect(staticKinds).toContain('campaign.party-impact.record');
     expect(staticKinds).toContain('settlement.pending-edits.commit');
+    expect(staticKinds).toContain('settlement.plain-edit.apply');
     // And the dynamic vocabularies really contributed their families.
     expect(denominator).toContain('content.environment.migrate');
     expect(denominator).toContain('import.campaign.attach-existing');
