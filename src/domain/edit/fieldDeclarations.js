@@ -57,7 +57,7 @@ const TEXT_LIMITS = Object.freeze({ name: 60, note: 280 });
  * it points at; this string names the census design asks for and claims no proof that
  * has not been run.
  */
-const ANNOTATION_PROOF = 'tests/lint/flavorFields.census.test.js (EM-A3 mints the proof string)';
+const ANNOTATION_PROOF = 'tests/lint/flavorFields.census.test.js: the value-join arm finds no cascade key for this field, and the receiver-shape arm grounds zero reads of this key on this card shape under src/generators, src/domain/worldPulse and src/domain/causalState.js, its key-level site roster holding only the declared unrelated receivers; the resolver grounds part of the corpus, so the claim is zero GROUNDED reads.';
 
 /**
  * ONE shared frozen empty array, returned BY IDENTITY for every undeclared card type, so
