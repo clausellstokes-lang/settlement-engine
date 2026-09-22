@@ -882,7 +882,7 @@ unchanged) and **not one addresses a line**: three are `{mode, path, sha256, siz
 only on a DETECTOR SOURCE — `scripts/check-observed-shape-readers.mjs:2651`,
 `if (scannedNow.has(entry.path)) continue;` — while a scanned entry's sha drift joins `inputs`),
 and four are PROSE inside a `rationale` string or a header comment
-(`scripts/mutation-coverage-manifest.json:88, 928, 1084, 1094`,
+(`scripts/mutation-coverage-manifest.json :: invariants['tests/lint/dialogExit.walker.test.js'] · ['tests/lint/copyKeyResolution.walker.test.js'] · ['tests/copy/signInUnlocks.test.js'] · ['tests/components/lockedPriceSlots.census.test.js']`,
 `scripts/mutation-sweep.sh`, `tests/lint/sourceCitationIntegrity.walker.test.js:230`,
 `tests/lint/errorCopyBaseline.test.js:4`, `tests/lint/dialogExit.walker.test.js`,
 `tests/lint/settlementMapSurfaceAllowlist.walker.test.js`). `tests/components/primitives/
