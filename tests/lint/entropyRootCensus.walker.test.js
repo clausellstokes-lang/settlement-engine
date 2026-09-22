@@ -816,7 +816,7 @@ describe('EP-0 · the closure record, re-run rather than transcribed', () => {
     // `instantNpc`: a root composed from a seed the caller PASSES IN, never a fork and never
     // a value read off a world root. NOT ONE DRAW OF THE WORLD'S SEQUENCE IS CONSUMED — the
     // leaf imports rngContext nowhere and its acceptance re-seeds the ambient stream, takes
-    // fifty-five rolls across all eleven pools and finds the next ambient draw unmoved — and
+    // eighty-five rolls across all seventeen pools and finds the next ambient draw unmoved — and
     // the same seed and key roll the same value forever, so THE PROMISE is untouched. The
     // read-site census above is UNMOVED at twenty-two and `COMPOSITIONS` is untouched,
     // because this is a seed-keyed ROOT and not a tick- or year-anchored composition.
