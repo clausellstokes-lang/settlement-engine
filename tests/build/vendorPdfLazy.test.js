@@ -1783,9 +1783,12 @@ describe('ARCH car 2 — the three first-paint budgets stay where the owner sign
     expect(eagerRel.size, 'the eager graph is non-empty (anti-vacuity)').toBeGreaterThan(50);
     expect(eagerRel.has('src/main.jsx'), 'and it holds the entry').toBe(true);
     const editorTrain = [
+      'src/components/edit/CardEditorDialog.jsx',
+      'src/copy/en.js',
       'src/domain/edit/dmLayer.js',
       'src/domain/edit/fieldDeclarations.js',
       'src/domain/edit/operations.js',
+      'src/domain/edit/operationsOffStage.js',
       'src/domain/density/densityCreateBoundary.js',
       'src/generators/generateSettlementPipeline.js',
       'src/generators/pipeline.js',
