@@ -28,7 +28,7 @@ import { readFileSync } from 'node:fs';
 import { createHash } from 'node:crypto';
 import { resolve } from 'node:path';
 
-import { describe, expect, it } from 'vitest';
+import { describe, expect, it, vi } from 'vitest';
 
 import { getStepMeta } from '../../src/generators/pipeline.js';
 import { GENERATION_TIER1 } from '../../src/domain/generation/generationForkRegistry.js';
@@ -41,9 +41,47 @@ import {
   renormalizeFactionPower,
 } from '../../src/generators/power/rulingStructure.js';
 import { createPRNG } from '../../src/kernel/prng.js';
-import { expectAbsentWithAnchor } from '../helpers/anchoredNegatives.js';
+import { expectAbsentWithAnchor, expectPresentThenAbsent } from '../helpers/anchoredNegatives.js';
 import { censusCorpus, instrumentedRoot, runHeadless } from '../helpers/generationForkCensus.js';
 import { goldenCorpus, keyOf } from '../helpers/goldenMasterCorpus.js';
+
+/**
+ * THE MINT RECORDER, DECLARED THROUGH `vi.hoisted`. `vi.mock` is hoisted ABOVE this file's STATIC
+ * imports, and those imports reach `src/kernel/prng.js` transitively — the pipeline entry point
+ * imports it on its own first import line — so the FACTORY RUNS WHILE THOSE IMPORTS LOAD, before
+ * any plain module-scope `const` below it has initialized. Declared as a plain const the recorder
+ * killed the whole suite at load with `Cannot access 'mintSeeds' before initialization`, MEASURED
+ * on this file. `vi.hoisted` lifts the recorder's initialization above both the mock and the
+ * imports; it is the estate's own idiom for exactly this shape, and the precedents say so in the
+ * same words: `tests/ui/homeHeroAnonGauge.test.jsx:39-40` ("the factory runs before the module
+ * body's consts"), `tests/ui/anonPreGenLocked.test.jsx:28`, `tests/ui/catalogTabsRestore.test.jsx:21`.
+ * It is OFF by default: only A3 turns it on, and only around the two runs it discriminates.
+ *
+ * ⭐ WHY A3 NEEDS IT, AND WHY THE FORK COUNT DOES NOT SUFFICE. `instrumentedRoot` wraps the ROOT
+ * stream's `fork`, so it sees `createPowerGenerationIntent`'s `stepRng.fork('power-structure')`
+ * and is BLIND to `projectPowerGenerationIntent`'s `setActiveRng(createPRNG(intent.rngSeed))`,
+ * which is a STANDALONE MINT and not a fork. A member that held `powerStructure` but still ran
+ * the projection would lose the fork with the intent and pass the fork arm, and would hand the
+ * pin back either way and pass A2. The mint seed is the only thing that tells the two apart.
+ *
+ * ⛔ THE WRAPPER IS A PURE PASS-THROUGH: it records the seed and returns the REAL stream, so no
+ * draw order moves and no fork is re-implemented. `prng.js`'s own `fork` calls its INTRA-MODULE
+ * `createPRNG`, which this wrapper does not intercept, so what it records is exactly the set of
+ * DIRECT mints the generator graph takes through the module's exported door.
+ */
+const mintSeeds = vi.hoisted(() => ({ seeds: [], on: false, actualKeys: [] }));
+
+vi.mock('../../src/kernel/prng.js', async (importOriginal) => {
+  const actual = await importOriginal();
+  mintSeeds.actualKeys = Object.keys(actual).sort();
+  return {
+    ...actual,
+    createPRNG: (seed) => {
+      if (mintSeeds.on) mintSeeds.seeds.push(String(seed));
+      return actual.createPRNG(seed);
+    },
+  };
+});
 
 const ASSEMBLE = 'assembleInstitutions';
 const POWER = 'generatePower';
@@ -266,14 +304,44 @@ describe('EM-B2a3 — the institution and power choosers consult the pin seam', 
     // the power stream's seed, and a pinned step forks nothing.
     expect(bare.perStep.get(POWER).draws, 'the step-stream instrument is vacuous here').toBe(0);
     expect(bare.perStep.get(POWER).forkLabels).toEqual([POWER_MINT_LABEL]);
-    expect(boundary[POWER].powerIntent.rngSeed).toBe(`${row._seed}::${POWER}::${POWER_MINT_LABEL}`);
-    const pinnedPower = instrumentedRoot(row._seed);
-    runHeadless(row, pinnedPower.root, {
-      pins: recordBuiltPins(POWER, record, boundary[POWER]), onStrictViolation: () => {},
-    });
+    const mintSeed = `${row._seed}::${POWER}::${POWER_MINT_LABEL}`;
+    expect(boundary[POWER].powerIntent.rngSeed).toBe(mintSeed);
+    expect(mintSeeds.actualKeys, 'the wrapper no longer stands over the real module')
+      .toContain('createPRNG');
+
+    // THE MINT CENSUS, SCOPED TO THE STEP'S OWN WINDOW. The recorder is drained at every step
+    // boundary, so what it hands back is the set of mints THIS step took. The scope is
+    // load-bearing and measured: `powerEconomyReconcilePass` re-projects the intent LATER in the
+    // same run and mints the very same seed, so a process-wide census would find it under a pin
+    // too and this arm could never convict the step. That later projection is EM-R3's seam.
+    const mintsDuringPower = (pins) => {
+      const during = [];
+      mintSeeds.on = true;
+      mintSeeds.seeds = [];
+      const options = { onStep: (name) => {
+        const taken = mintSeeds.seeds.splice(0);
+        if (name === POWER) during.push(...taken);
+      } };
+      if (pins) Object.assign(options, { pins, onStrictViolation: () => {} });
+      const instrumented = instrumentedRoot(row._seed);
+      runHeadless(row, instrumented.root, options);
+      mintSeeds.on = false;
+      return { during, instrumented };
+    };
+    const mintedUnpinned = mintsDuringPower(null).during;
+    const pinnedRun = mintsDuringPower(recordBuiltPins(POWER, record, boundary[POWER]));
+    const mintedPinned = pinnedRun.during;
+    const pinnedPower = pinnedRun.instrumented;
     expect(pinnedPower.perStep.get(POWER).forkLabels, 'a pinned step minted the power stream')
       .toEqual([]);
     expect(pinnedPower.perStep.get(POWER).draws).toBe(0);
+    // ⭐ THE ARM §9 A3 NAMES: `createPRNG` is never called with the power stream's seed under a
+    // pin. Anchored on the unpinned run, which must mint it, so a wrapper that stopped seeing
+    // the mint reds on the LIVENESS half instead of passing the removal half vacuously.
+    expectPresentThenAbsent(
+      mintedUnpinned, mintedPinned, mintSeed,
+      'A3: a pinned powerStructure never mints the power stream',
+    );
   }, 180_000);
 
   it('A4 — the partial pin refuses BY NAME, and the name is not always this member\'s step', () => {
