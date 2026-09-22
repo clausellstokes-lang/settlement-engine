@@ -37530,9 +37530,10 @@
     },
     {
       "id": "EM-B1b",
-      "status": "READY",
+      "status": "LANDED",
       "packetPath": "docs/implementation/packets/settlement-editor/EM-B1b.md",
       "verifiedBase": "e1750d7454c1dff7e81342efadd05e47719ca6aa",
+      "landedAt": "3aba638578722ec9d5c062588f2ba4bbf2b5d200",
       "changeManifest": [
         {
           "_note": "THE OFF-STAGE LEAF -- option O1 as the chair shaped it, so EM-B1a's manifest is UNCHANGED. It exports FOUR SPLICE GROUPS (OFF_1..OFF_4, by their insertion anchors) plus OFF_STAGE_OP_TYPES, the seven as one handle for the batteries; four groups rather than one map is forced by the codepoint splice (see the operations.js row). The seven off-stage ops under THE PHANTOM CONSEQUENCE RULE (ODQ SP934.43, design SP13): declare-war, make-peace, open-trade, close-trade, send-force, recall-force, resolve-outcome. Each carries stage:'off-stage', consequence:'by-target-reality', target:'phantom' (RAISED R7) and ALL ELEVEN of EM-B1a's declared fields -- ELEVEN, not ten; ten is EM-A1's Op. requires is the { world, registry } SPLIT and requires.world is EMPTY on all seven, which is where design SP13's clause (d) now lives exactly: make-peace.requires is { world: [], registry: ['declare-war'] }, a prior ENTRY IN THE REGISTRY and never a war state in the world; makeOp FLATTENS the pair onto EM-A1's Op.requires (executed: ['declare-war']). EVERY RELATION IS CLOSED OVER THE SEVEN, because conflictsWith/relatedTo are symmetric and requires/enables exact inverses, so naming a HOME type would force the inverse onto a B1a row -- a STOP. THIS MODULE IMPORTS NOTHING AT RUN TIME (EM-B1c1's ratified shape): the two vocabulary members are spelled as /** @type {const} */ literals, the five payload helpers are authored here with JSDoc @returns {PayloadFieldSpec} so no `kind` widens to string, the row shape is reached by a TYPE-ONLY typedef import of import('./operations.js').OpTypeDeclaration (erased at emit, no runtime edge, no cycle, invisible to A6's importer matcher), and the leaf carries its own row freezer because operations.js's row() is module-private across that rule. TYPING PROVED (EM-B1a version 9 SP6.0 allows ZERO errors and ZERO `any` under both configs): measured with the TypeScript compiler API in plain node over a copy-only scratch estate -- operations.js 0/0, worldConditions.js 0/0, operationsOffStage.js 0/0, with a planted error still seen in each of the three. 101 effective of the 250 leaf cap, MEASURED by ESLint's own max-lines with skipBlankLines + skipComments (version 4's ~83 was an estimate). THE RESOLVER IS NOT HERE: consequenceFor(target) is EM-F1's, and authoring, importing or referencing it is a STOP. Guard coverage is guards: [] plus a non-empty guardsStated naming EM-C3 (ARCH SP5's 'stated when empty'); a rule FUNCTION authored here is a STOP. SP14's eleven-row set is DEMOTED to RAISED R8: sue-for-peace's requires.world contradicts this packet's own B3, and the chair's dispatch fixes this member at SEVEN.",
@@ -37738,9 +37739,10 @@
     },
     {
       "id": "EM-D0e",
-      "status": "READY",
+      "status": "LANDED",
       "packetPath": "docs/implementation/packets/settlement-editor/EM-D0e.md",
       "verifiedBase": "e1750d7454c1dff7e81342efadd05e47719ca6aa",
+      "landedAt": "68977d0c4833e69c858d6617d461690272935720",
       "_preamble": "docs/implementation/preambles/EM-PREAMBLE.md at SHA-256 125c693214235a81bf4f2b38506b621859a35e0325ff2ea58d335b4e0681a99d, the LANDED SIXTH amendment, MEASURED with `shasum -a 256` at the build lane's own HEAD and never copied. VERSION 1.1 CARRIED THE FIFTH'S fdecd426828665cad2dfaf872871f29f46fa4816e1bd4c43c20ccd84dacc9e7c HERE AFTER THE SIXTH HAD LANDED: the placement tool re-stamps Status, Verified base and Last revalidated only, so the omission is the TOOL's and not the body's (EM-B1b and EM-B2a4 carry the same one). The landed preamble is BYTE-IDENTICAL to the kit's selected draft drafts/amendment-6/EM-PREAMBLE.amended.md, so nothing in this packet's body moves under the correction. THE FIFTH AMENDMENT HAS LANDED, so `COMPILE-RULES.interim.md` is SUPERSEDED (the preamble's own header sentence) and this capsule carries NO interim row: the amended preamble's §P2, §P9, §P10 and §P11 carry every rule. ⭐⭐ THE SIXTH AMENDMENT (drafted and selected in the kit, judgment 144) LANDS AS TRAIN EM-T13'S FIRST COMMIT, ahead of this member, so this packet is WRITTEN TO IT rather than re-stamped into it: §P2 rows 19-21, §P6's negative-assertion rule and marker correction, §P7's two additions, §P9's ONE effective-line instrument and §P8's new STOP are obeyed at version 1 (§6.6 and §7a carry each measurement). The hash above is the FIFTH's, RE-MEASURED BY THE PRE-PROOF AT 16f0bc71c AND UNCHANGED (`git show 16f0bc71c:docs/implementation/preambles/EM-PREAMBLE.md | shasum -a 256` = fdecd426...c9e7c); the chair re-stamps it to the landed sixth at placement. ⭐ VERSION 1.1 (the independent pre-proof at train EM-T12's flipped tip 16f0bc71c): the two `_pendingRequiredSymbols` rows are DISCHARGED into requiredSymbols against real code, with one spelling corrected; tests/lint/editMutationPath.walker.test.js - a walker EM-C4a landed in the T12 window that governs every src/ module - joins `checks`; §P2.21(a)'s root claim is corrected (the entropy census walks src/ whole and the disposition is by content); and four line addresses are refreshed. No contract, no case, no figure and no budget moved. Visible here: a NEW test file is CREATE, never TEST (§P9(b)); `docs/content/wiring-census.json` appears in NO row and no check and this member's wiring delta is +0, both roots measured (§P2.13); NO byte arm and no dist read anywhere in `checks`, and this member is NOT train EM-T13's byte-arm holder (§P2.11); `_pendingRequiredSymbols` is the SIBLING KEY (§P9(a)); the Status row carries its value ALONE (§P9(c)); §7 and this capsule are SET-EQUAL (§P9(d)); every register figure is a DELTA (§P3.5); §P2.15 BINDS (this member writes `src/components/**`) and is discharged by grep with the answer NONE; the count prover is KIT FURNITURE accepting `<packet.md> <capsule.json>` and is neither a `checks` entry nor a §7 row (§P9); §P2.16 finds NO line-addressed register row for either modified path; §P2.2 is NOT owed (`tests/components` is in none of ENFORCER_DIRS, read at the tip, and the new basename matches no NAME_PATTERN token); §P2.17 does NOT reach `src/components` or `src/copy` (`TREES_P2P3` read at the tip is exactly ['src/domain','src/generators']).",
       "changeManifest": [
         {
@@ -37974,9 +37976,10 @@
     },
     {
       "id": "EM-B2a4",
-      "status": "READY",
+      "status": "LANDED",
       "packetPath": "docs/implementation/packets/settlement-editor/EM-B2a4.md",
       "verifiedBase": "e1750d7454c1dff7e81342efadd05e47719ca6aa",
+      "landedAt": "6386dcffe74f6512dfc2e6a0dd1c63e8847eb826",
       "_baseNote": "⛔ `__BASE__` can never pass `validate:packets` (`verifiedBase must be a lowercase 40-character SHA`). Validation is DOWNSTREAM of the chair's promotion stamp: the chair stamps the base, adds the INDEX.md row, THEN gates on `valid:`. This lane validated on a scratch COPY of the estate with the base stamped to bdbf7c89c2569679bcccdb188d5d831ccfaa0e6d, an INDEX row added exactly as the chair would, and EM-B2a1's two CREATE targets present on disk as if member 1 had LANDED (a MODIFY row is satisfied by fileExists — the chair's correction in findings/COMPILE-EM-A1-v4-2026-09-20/CHAIR-RULING.md). Nothing else changed.",
       "_member": "MEMBER 4 OF 4 of the SUPERSEDED EM-B2a (the chair's ESTATE-REPAIR ruling, 2026-09-20; the four-member partition is `EM-B2a.partition.md`): EM-B2a1 (the leaf) → EM-B2a2 (the pin primitive) ∥ EM-B2a3 (the two remaining chooser steps) → EM-B2a4 (this — the store consumer and the orchestration) → EM-B2b. ⛔ LANDS AFTER EM-B2a1 (it MODIFIES the leaf a1 CREATEs) and AFTER EM-B2a2 (its A7(b) anti-vacuity arm is VACUOUS until a chooser consults a pin); A7's institution and power arms additionally need EM-B2a3.",
       "_interimRules": "Compiled under `COMPILE-RULES.interim.md` (the chair, 2026-09-20), which GOVERNS where it and `EM-PREAMBLE.md` (SHA-256 c9f33c8d2940372bde8a6d931e3d389b79516a90ed45405cbbbf3e698cc46675, MEASURED at the read tip with shasum -a 256) disagree. Consequences visible here: a NEW test file is CREATE, never TEST (rule 4); `docs/content/wiring-census.json` appears in NO row and in no check (rule 1) and its prediction is +0 measured against BOTH producer roots; no byte arm and no dist read in `checks`, the budget's own test carried as a TEST row with its stated bound (rule 2); `_pending` would be the sibling key (rule 3 — this packet needs none); the Status value stands alone on its line (rule 5); §7 is GENERATED FROM THIS CAPSULE and proved SET-EQUAL with it (rule 6); every register figure is a DELTA (rule 9); sealed `checks` name FILES, never the `tests/lint` directory, never the lighting walker, and END with the validator (rule 8); the browser suite governs NOTHING here and no e2e spec is named (rule 10, stated as it requires).",
@@ -38361,9 +38364,10 @@
     },
     {
       "id": "EM-A3",
-      "status": "READY",
+      "status": "LANDED",
       "packetPath": "docs/implementation/packets/settlement-editor/EM-A3.md",
       "verifiedBase": "e1750d7454c1dff7e81342efadd05e47719ca6aa",
+      "landedAt": "0a88d2b41a05737b35ae0a4d08296a714a26ce93",
       "changeManifest": [
         {
           "action": "CREATE",

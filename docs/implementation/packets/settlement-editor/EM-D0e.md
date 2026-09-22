@@ -1,6 +1,6 @@
 # Settlement editor / EM-D0e — `CardEditorDialog`: THE FIRST EDITOR DOOR, GENERATED FROM THE DECLARATION TABLE, dispatching every edit through ONE injected seam whose only lawful shape is EM-C4a's `settlement.plain-edit.apply`, wearing EM-D0c's `editorHalo` on both surfaces, at +0 eager first-paint modules and +0 eager bytes
 
-- **Status:** `READY`
+- **Status:** `LANDED`
   ⚠ The status value above stands ALONE on its line (§P9(c)): `parsePacketHeader` anchors the row at
   end-of-line and takes `status` only when exactly one row matches. Every stamp, caveat and date is
   on these continuation lines, and the same law binds **Verified base**.
@@ -22,6 +22,7 @@
   `M src/App.jsx` lazy mount has no lawful subject at this landing (nothing in the landed or placed
   estate can open the dialog, and nothing can bind its writer), and `src/copy/en.js` — not
   `src/App.jsx` — is the one file this member modifies.
+- **Landed at:** `68977d0c4833e69c858d6617d461690272935720` — the first door itself (version 1.2): CardEditorDialog on the NPC card generated from EM-A1's declarations, riding PortablePopup and BottomSheet, dispatching EM-C4a's set-field shape for all four fields, dark behind TIER_GATE[tier].settlementEditor with no mount (judgments 146/147/151); version 1.2's two TEST rows widen the importer rosters of fieldDeclarations.js and pools.js by the dialog's row (judgments 148/171); the leaf cured to its own no-filter law after window 47 (a guarded walk, the arm untouched); build 68977d0c4 on the train
 - **Packet version:** 1.2
   Version 1 was the compile's, measured at `efd0eb448` against the four EM-T12 members AS PACKETS.
   **WHAT VERSION 1.1 CHANGED AND WHY (the independent Opus pre-proof at train EM-T12's FLIPPED tip

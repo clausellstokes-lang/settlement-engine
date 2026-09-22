@@ -4,7 +4,7 @@
 
 - **Governing preamble:** `EM-PREAMBLE.md` SHA-256 `fdecd426828665cad2dfaf872871f29f46fa4816e1bd4c43c20ccd84dacc9e7c`, MEASURED with `shasum -a 256` at the read tip `bfca6b7d6aad3ef1955d3bc33119988d8a5d9989` on 2026-09-22 — the FIFTH amendment, the tree's live text, and BYTE-UNCHANGED from the version-8 measurement at `16f0bc71c`. **This packet is written to the SIXTH amendment** (`drafts/amendment-6/EM-PREAMBLE.amended.md`, judgment 144), which lands as the FIRST commit of train EM-T13's branch before this member is placed; the chair RE-STAMPS this line to the sixth's measured hash at that placement. The fifth's `COMPILE-RULES.interim.md` rules are subsumed by the sixth and are no longer cited separately.
 
-- **Status:** `READY`
+- **Status:** `LANDED`
   ⚠ The status value stands ALONE on its line because `parsePacketHeader`
   (`scripts/implementation-packets.mjs`, cited BY SYMBOL — a line number moves with the next edit)
   anchors the status row at END-OF-LINE and takes `status` only when exactly one row matches
@@ -15,6 +15,7 @@
   BLOCK-G's refuted control is REPLACED by the planted split probe (A4); BLOCK-H is CURED in the
   tree at `17bf34dd1`, measured an ancestor of this tip. Nothing in §11 is now a lane's judgment
   to make. The member is READY-able on the chair's four remaining questions (§11 THE CHAIR'S FOUR).
+- **Landed at:** `0a88d2b41a05737b35ae0a4d08296a714a26ce93` — the flavor census (version 9): tests/lint/flavorFields.census.test.js proves every free field has zero grounded derivation readers through scanSurfaceReads with explicit rootShapes and a key-level roster of exactly the declared decoys, readersProof filled, the reach stated (judgments 157 a–d, 163 a–d); build 0a88d2b41 on the train
 - **Packet version:** 9
   - ⭐⭐ **Version 9 is THE RE-COMPILE ON THE CHAIR'S RULING (judgment 157 a–d; 2026-09-22, read
     tip `bfca6b7d6` = train EM-T12's CURED tip).** What moved and why: **§6's property-read arm is

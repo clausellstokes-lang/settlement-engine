@@ -1,8 +1,9 @@
 # Settlement editor / EM-B1b — the seven OFF-STAGE ops under the phantom consequence rule, and the guard-coverage instrument
 
-- **Status:** `READY`
+- **Status:** `LANDED`
   ⚠ The status value above stands ALONE on its line because `parsePacketHeader`
   (`scripts/implementation-packets.mjs`) anchors the status row at end-of-line (J-TEWF1B-1).
+- **Landed at:** `3aba638578722ec9d5c062588f2ba4bbf2b5d200` — the op family's second slice (version 6): operationsOffStage.js spliced into the catalogue by position, C1–C8 arms, EM-B1c1's B1 literal and B6 widened inside this member's own TEST row (judgment 152c), A6's title re-worded to the widened roster (judgment 156); the opGuardCoverage walker; build 3aba63857 on the train
 - **Packet version:** 6
   - ⭐⭐⭐ **Version 6 is the RE-PROOF at train EM-T12's FLIPPED tip `16f0bc71c`**
     (2026-09-22, Opus pre-proof lane, session cce01f87). Version 5 was measured against

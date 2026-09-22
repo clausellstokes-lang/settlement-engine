@@ -1,6 +1,6 @@
 # Settlement editor / EM-B2a4 — THE ORCHESTRATION AND THE STORE SEAT: `pinsFrom(record)` reads the chooser roster from its producer, `rederive(record, config, layer, engine)` merges the DM's overrides into the pin bag and REPORTS every override the candidate set refuses, and the golden-isolation property proves an empty layer never reaches the runner
 
-- **Status:** `READY`
+- **Status:** `LANDED`
   ⚠ The status value above stands ALONE on its line because `parsePacketHeader`
   (`scripts/implementation-packets.mjs`) anchors the status row at end-of-line and takes `status`
   only when exactly one row matches. Every stamp, caveat and date goes on these continuation
@@ -14,6 +14,7 @@
   2026-09-20: **EM-B2a1** (the leaf) → **EM-B2a2** (the pin primitive) ∥ **EM-B2a3** (the two
   remaining chooser steps) → **EM-B2a4** (this) → **EM-B2b**. The four-member partition, with
   every parent item assigned to exactly one member, is `EM-B2a.partition.md`.
+- **Landed at:** `6386dcffe74f6512dfc2e6a0dd1c63e8847eb826` — the re-derivation plug-in (version 4): rederive behind EM-C4a's REDERIVE_SEAM plugged as scoped with the cascade branch's consult, the declaration set injected at arity five from editSlice.js's dispatch, pinsFrom pinning an edited collection's whole closure from a clone, the pipeline entry forwarding pins at last, getStepMeta from pipeline.js, the store seat, the golden-isolation property, the DERIVED row for the PIPELINE_REACHERS walker (judgments 145/155 a–e/173/175/176; §2 item 3(b) to EM-B2a5; not_in_pool to the adapter's slot); the train's byte-arm holder (+12 B owed and bought back at the terminal); the version-4 packet commit 97a44fc16 picked with the build; build 6386dcffe on the train
 - **Packet version:** 4
   > **What version 4 changed and why (judgment 176, the chair, on this lane's THIRD STOP — taken
   > after the seal and before any byte).** Version 3 cured the pin channel; version 4 cures the
