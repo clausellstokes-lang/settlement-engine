@@ -237,3 +237,254 @@ export function mintDmId(seed, kind, n) {
   }
   return `${DM_ID_NS}${kind}:${sha256Hex(`${seed}|${kind}|${n}`).slice(0, DM_ID_SHAPE.hexLength)}`;
 }
+
+/**
+ * @typedef {{ name: string, provides: string[] }} StepRoster
+ * @typedef {{ declarationsFor: (cardType: string) => readonly { field: string,
+ *             outputKey?: string }[] }} DeclarationSet
+ * @typedef {'step_not_pinnable'|'unknown_key'} RederiveUnappliedReason
+ */
+
+/**
+ * (4) THE CLOSED REFUSAL SET for an override the pin bag will not take. TWO members, frozen,
+ * in codepoint order, EXPORTED so a test asserts it in both directions rather than re-typing it.
+ *
+ * ⛔ THERE IS NO POOL REASON, AND THAT IS A RULING RATHER THAN AN OVERSIGHT (judgment 176). Pool
+ * membership is a WRITE-TIME check at the single writer's door, so a value outside its pool is
+ * meant never to enter the layer at all; this function trusts the layer's recorded values and
+ * re-validates nothing. The packet's own raised matter records that no door performs that check
+ * at this landing, and the refusal belongs to the adapter's next member, never to this one.
+ * @type {readonly RederiveUnappliedReason[]}
+ */
+export const REDERIVE_UNAPPLIED_REASONS = Object.freeze(['step_not_pinnable', 'unknown_key']);
+
+/** Codepoint order, the estate's own comparison, spelled locally so this leaf imports nothing. */
+const byCodepoint = (/** @type {string} */ a, /** @type {string} */ b) => (a < b ? -1 : (a > b ? 1 : 0));
+
+/**
+ * Resolve the injected declaration set, FAILING CLOSED on EM-B2a1's own law: a set that is not an
+ * object, or whose member cannot be read, or whose member is not a function, is UNUSABLE, and an
+ * unusable set resolves no declaration at all. It can therefore only close the door.
+ * @param {unknown} declarations
+ * @returns {DeclarationSet|null}
+ */
+function usableDeclarations(declarations) {
+  if (!isPlainObject(declarations)) return null;
+  try {
+    const { declarationsFor } = /** @type {DeclarationSet} */ (declarations);
+    return typeof declarationsFor === 'function' ? { declarationsFor } : null;
+  } catch { return null; }
+}
+
+/**
+ * The step roster, read from its producer through the injected handle and never re-typed here.
+ * A handle that cannot answer resolves an EMPTY roster, which pins nothing and throws nothing.
+ * @param {unknown} engine
+ * @returns {StepRoster[]}
+ */
+function rosterOf(engine) {
+  if (!isPlainObject(engine)) return [];
+  try {
+    const { getStepMeta } = /** @type {{ getStepMeta: () => unknown }} */ (engine);
+    const rows = typeof getStepMeta === 'function' ? getStepMeta() : null;
+    if (!Array.isArray(rows)) return [];
+    return rows.filter(isPlainObject).map((row) => {
+      const step = /** @type {{ name: unknown, provides: unknown }} */ (row);
+      const provides = Array.isArray(step.provides) ? step.provides.filter((k) => typeof k === 'string') : [];
+      return { name: typeof step.name === 'string' ? step.name : '', provides };
+    });
+  } catch { return []; }
+}
+
+/**
+ * Split a declaration's `outputKey` into the COLLECTION the runner pins and the LEAF inside it.
+ * `npcs[].role` gives `['npcs', 'role']` and `powerStructure.governingName` gives
+ * `['powerStructure', 'governingName']`. A key with no leaf segment resolves nothing.
+ * @param {unknown} outputKey
+ * @returns {[string, string]|null}
+ */
+function splitOutputKey(outputKey) {
+  if (typeof outputKey !== 'string') return null;
+  const match = /^([A-Za-z0-9_$]+)(?:\[\])?\.(.+)$/.exec(outputKey);
+  return match ? [match[1], match[2]] : null;
+}
+
+/**
+ * Read the three coordinates out of an opaque root key WITHOUT asking what they mean. The key is
+ * `<cardType>:<entityId>:<field>`; the entity id is whatever lies between the first and last
+ * separators, so an id that carries one cannot be mis-read.
+ * @param {string} key
+ * @returns {{ cardType: string, entityId: string, field: string }|null}
+ */
+function coordsOf(key) {
+  const parts = key.split(':');
+  if (parts.length < 3) return null;
+  const coords = { cardType: parts[0], entityId: parts.slice(1, -1).join(':'), field: parts[parts.length - 1] };
+  return coords.cardType && coords.entityId && coords.field ? coords : null;
+}
+
+/**
+ * (5) THE CHOOSER ROSTER, READ FROM ITS PRODUCER, WITH THE DM'S OVERRIDES MERGED IN.
+ *
+ * ⛔ THE PINNABILITY RULE IS NOT A PER-STEP READ. The bag is keyed by the RECORD PATH a chooser
+ * writes, and two steps may share one of those keys, so a key pinned on one step's behalf makes a
+ * step that shares it PARTIAL and the runner refuses the whole run. A key is therefore pinnable
+ * ONLY IF EVERY step that provides it can be wholly pinned from this record; every other key is
+ * omitted and its steps are named in `missing`.
+ *
+ * ⛔ A LEAF OVERRIDE PINS ITS WHOLE COLLECTION. The choosers are collection keys and every root
+ * declaration writes a LEAF inside one, so the DM's value is written INTO A DEEP CLONE of the
+ * record's collection and the CLONE is pinned. The bag carries the DM's value at that one leaf
+ * and the record's own value everywhere else, and ⛔ the record itself is never touched.
+ *
+ * @param {unknown} record a generated or saved settlement record
+ * @param {unknown} layer read through EM-B2a1's absence rules
+ * @param {unknown} declarations the INJECTED declaration set; ⛔ this leaf imports none
+ * @param {unknown} engine the INJECTED handle; only its `getStepMeta` member is read here
+ * @returns {{ pins: Record<string, unknown>,
+ *            missing: Array<{ step: string, keys: string[] }>,
+ *            unapplied: Array<{ key: string, value: unknown, reason: RederiveUnappliedReason }> }}
+ *   `pins` keys are ASCII-ascending. THROWS NEVER.
+ */
+export function pinsFrom(record, layer, declarations, engine) {
+  const source = isPlainObject(record) ? /** @type {Record<string, unknown>} */ (record) : {};
+  const roster = rosterOf(engine);
+  /** Every step that provides a given record path. */
+  const providersOf = (/** @type {string} */ key) => roster.filter((s) => s.provides.includes(key));
+  const held = (/** @type {string} */ key) => Object.hasOwn(source, key);
+
+  const consult = usableDeclarations(declarations);
+  const { roots } = normalizeLayer(layer);
+
+  // PASS 1 — resolve every override to its collection, refusing what cannot resolve at all.
+  /** @type {Array<{ key: string, value: unknown, entityId: string, collection: string, leaf: string }>} */
+  const resolved = [];
+  /** @type {Array<{ key: string, value: unknown, reason: RederiveUnappliedReason }>} */
+  const unapplied = [];
+  for (const key of Object.keys(roots).sort(byCodepoint)) {
+    const value = roots[key];
+    const coords = consult === null ? null : coordsOf(key);
+    /** @type {unknown} */
+    let declared;
+    try { declared = coords === null ? null : (consult?.declarationsFor(coords.cardType) ?? null); } catch { declared = null; }
+    const row = (Array.isArray(declared) ? declared.filter(isPlainObject) : [])
+      .find((r) => /** @type {{ field: unknown }} */ (r).field === coords?.field);
+    const split = row === undefined
+      ? null
+      : splitOutputKey(/** @type {{ outputKey?: unknown }} */ (row).outputKey);
+    if (split === null || providersOf(split[0]).length === 0) {
+      unapplied.push({ key, value, reason: 'unknown_key' });
+    } else {
+      resolved.push({ key, value, entityId: coords?.entityId ?? '', collection: split[0], leaf: split[1] });
+    }
+  }
+
+  // PASS 2 — THE PIN CLOSURE, and it is the whole reason an edit can be pinned at all. The
+  // runner refuses a step whose choosers are pinned in part, so pinning an EDITED collection
+  // drags in every chooser of every step that provides it, and then every chooser of every step
+  // that provides one of THOSE, to a fixpoint. A closure that reaches a key the record does not
+  // hold cannot be pinned at all, and every override inside it is reported rather than dropped.
+  /** @param {string} seedKey @returns {Set<string>|null} */
+  const closureFor = (seedKey) => {
+    /** @type {Set<string>} */
+    const need = new Set();
+    /** @type {string[]} */
+    const queue = [seedKey];
+    while (queue.length > 0) {
+      const key = /** @type {string} */ (queue.pop());
+      if (need.has(key)) continue;
+      need.add(key);
+      if (!held(key)) return null;
+      for (const step of providersOf(key)) queue.push(...step.provides.filter((k) => !need.has(k)));
+    }
+    return need;
+  };
+
+  /** @type {Map<string, Set<string>|null>} */
+  const closures = new Map();
+  /** @type {Set<string>} */
+  const pinKeys = new Set();
+  /** @type {typeof resolved} */
+  const applicable = [];
+  for (const row of resolved) {
+    if (!closures.has(row.collection)) closures.set(row.collection, closureFor(row.collection));
+    const closure = closures.get(row.collection);
+    if (closure === null || closure === undefined) { unapplied.push({ key: row.key, value: row.value, reason: 'step_not_pinnable' }); continue; }
+    for (const key of closure) pinKeys.add(key);
+    applicable.push(row);
+  }
+
+  // PASS 3 — the bag. ⛔ WITH NO APPLICABLE OVERRIDE THE BAG IS EMPTY, which is what makes a
+  // dormant layer's re-derivation bit-for-bit today's generation: the caller passes no pins at
+  // all and the runner takes its unpinned path. Keys are ASCII-ascending.
+  /** @type {Record<string, unknown>} */
+  const pins = {};
+  for (const key of [...pinKeys].sort(byCodepoint)) pins[key] = structuredClone(source[key]);
+
+  // PASS 4 — the DM's value, written at the leaf INSIDE THE CLONE. ⛔ The record is never touched.
+  for (const row of applicable) {
+    const bag = pins[row.collection];
+    if (Array.isArray(bag)) {
+      const entity = bag.filter(isPlainObject)
+        .find((e) => /** @type {{ id: unknown }} */ (e).id === row.entityId);
+      if (entity === undefined) { unapplied.push({ key: row.key, value: row.value, reason: 'unknown_key' }); continue; }
+      /** @type {Record<string, unknown>} */ (entity)[row.leaf] = row.value;
+    } else if (isPlainObject(bag)) {
+      /** @type {Record<string, unknown>} */ (bag)[row.leaf] = row.value;
+    } else {
+      unapplied.push({ key: row.key, value: row.value, reason: 'unknown_key' });
+    }
+  }
+
+  const missing = roster
+    .map((step) => ({ step: step.name, keys: step.provides.filter((k) => !held(k)) }))
+    .filter((row) => row.keys.length > 0);
+  return { pins, missing, unapplied: dedupeByKey(unapplied) };
+}
+
+/**
+ * (6) ONE RE-DERIVATION. Pure with respect to its arguments.
+ *
+ * ⛔⛔ THE RUN MEMBER IS NAMED `run`. The create-boundary walker computes its reacher set from the
+ * comment- and string-stripped BARE symbol of the real entry, so naming that symbol here would
+ * make this leaf an unclassified pipeline reacher. The store leaf binds the real function onto
+ * `run` and is the one file of this member that spells it.
+ *
+ * ⛔ AN EMPTY OR ABSENT LAYER NEVER REACHES THE RUNNER AS AN EMPTY BAG. The pins option is passed
+ * only when the bag has an own key, so a fresh generation with no pins is bit-for-bit today's
+ * behaviour and the golden cannot move.
+ *
+ * ⛔ THE BAG IS DEEP-CLONED AGAIN IMMEDIATELY BEFORE THE RUN. The runner spreads the bag into its
+ * context AND hands the same object to every step, so a caller that passes an aliased bag can have
+ * its own record written through by the run. Cloning severs both channels.
+ *
+ * @param {unknown} record @param {object} config @param {unknown} layer
+ * @param {{ run: Function, getStepMeta: Function }} engine ⛔ INJECTED
+ * @param {unknown} declarations the INJECTED declaration set
+ * @returns {{ record: unknown,
+ *            unapplied: Array<{ key: string, value: unknown, reason: RederiveUnappliedReason }> }}
+ *   `unapplied` is ASCII-ascending on `key` and deduplicated. THROWS NEVER for a malformed layer;
+ *   it throws only what the engine throws.
+ */
+export function rederive(record, config, layer, engine, declarations) {
+  const { pins, unapplied } = pinsFrom(record, layer, declarations, engine);
+  const seed = isPlainObject(record) ? /** @type {{ _seed?: unknown }} */ (record)._seed : undefined;
+  const run = /** @type {{ run?: unknown }} */ (engine)?.run;
+  const derived = typeof run !== 'function' ? undefined : (Object.keys(pins).length === 0
+    ? run(config, null, { seed })
+    : run(config, null, { seed, pins: structuredClone(pins) }));
+  return { record: derived, unapplied };
+}
+
+/**
+ * ASCII-ascending on `key`, first row per key kept. The list is built in key order already, so
+ * this is the law made explicit rather than a second sort with a second meaning.
+ * @template {{ key: string }} T
+ * @param {T[]} rows
+ * @returns {T[]}
+ */
+function dedupeByKey(rows) {
+  /** @type {Set<string>} */
+  const seen = new Set();
+  return [...rows].sort((a, b) => byCodepoint(a.key, b.key)).filter((row) => !seen.has(row.key) && seen.add(row.key) !== null);
+}

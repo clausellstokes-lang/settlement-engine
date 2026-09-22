@@ -373,7 +373,7 @@ describe('EM-C4a — the store plain-edit half', () => {
     expect(verb).toHaveBeenCalledTimes(0);
   });
 
-  it('A8 — purity, idempotency, key-order independence, the transient mode and the rederive seam as a typed no-op', async () => {
+  it('A8 — purity, idempotency, key-order independence, the transient mode and the rederive seam as a scoped plug', async () => {
     const store = makeStore();
     await write(store, requestFor('npc', NPC_ID, 'role', 'Warden'));
     const onceSettlement = JSON.stringify(store.getState().settlement);
@@ -398,13 +398,15 @@ describe('EM-C4a — the store plain-edit half', () => {
     }));
     expect(new Set(layers).size).toBe(1);
 
-    // THE SEAM: a declared no-op whose consultation changes nothing observable. The day
-    // EM-B2a4 plugs scoped re-derivation in, THIS is the arm that fails.
-    expect(REDERIVE_SEAM).toEqual({ kind: 'noop', owner: 'EM-B2a4', calls: 0 });
+    // THE SEAM, PLUGGED (EM-B2a4). It was a declared no-op until this landing; it is now
+    // SCOPED, and consulting it still changes nothing observable in the store, because the
+    // lane it reaches is dormant until its one caller is wired. The frozen-ness below is
+    // BYTE-UNMOVED from EM-C4a's landing: only the two value pins moved.
+    expect(REDERIVE_SEAM).toEqual({ kind: 'scoped', owner: 'EM-B2a4', calls: 1 });
     expect(Object.isFrozen(REDERIVE_SEAM)).toBe(true);
     const seamStore = makeStore();
     const beforeSeam = JSON.stringify(seamStore.getState().settlement);
-    expect(REDERIVE_SEAM.kind).toBe('noop');
+    expect(REDERIVE_SEAM.kind).toBe('scoped');
     expect(JSON.stringify(seamStore.getState().settlement)).toBe(beforeSeam);
 
     // The transient mode reads through uiSlice's shipped bag and never a boolean.

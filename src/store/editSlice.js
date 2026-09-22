@@ -81,12 +81,16 @@ export const CASCADE_DISPATCH = Object.freeze({
 });
 
 /**
- * ⛔ THE RE-DERIVATION SEAM, A TYPED NO-OP TODAY (charter 2026-09-19 16:2x).
- * `applyPlainEditToDraft` consults it and takes the no-op branch; acceptance A8
- * asserts it IS a no-op, which is the assertion that fails the day EM-B2a4 plugs
- * scoped re-derivation in. ⛔ Nothing here imports or calls `rederive`.
+ * ⭐ THE RE-DERIVATION SEAM, PLUGGED (EM-B2a4). It was a typed no-op from EM-C4a's
+ * landing until this member; BOTH writers now consult it and take the SCOPED branch,
+ * which reaches the re-derivation lane by a DYNAMIC import.
+ * ⛔ `calls: 1` IS A SCOPE, NOT A TALLY: one re-derivation per applied edit is what the
+ * lane exists for, and the lane is reached here and RUN BY ITS ONE CALLER, which a
+ * successor wires. This member prices itself at ZERO direct consumers and lands the
+ * leaf DORMANT, so nothing here rebuilds a world on an edit.
+ * ⛔ Nothing here imports the domain leaf and nothing here names the orchestrator.
  */
-export const REDERIVE_SEAM = Object.freeze({ kind: 'noop', owner: 'EM-B2a4', calls: 0 });
+export const REDERIVE_SEAM = Object.freeze({ kind: 'scoped', owner: 'EM-B2a4', calls: 1 });
 
 /**
  * The declaration kinds the FIRST DOOR carries. EM-A1 declares four; `share`
@@ -111,6 +115,26 @@ const ROOT_COLLECTIONS = Object.freeze({ npc: 'npcs' });
  * already holds: the consult therefore adds ZERO import edges.
  */
 const DECLARATION_CONSULT = Object.freeze({ isEditableCard, declarationsFor });
+
+/** @type {?Promise<unknown>} */
+let _rederiveLanePromise = null;
+
+/**
+ * ⭐ THE RE-DERIVATION LANE, REACHED DYNAMICALLY AND MEMOIZED (EM-B2a4).
+ *
+ * ⛔ A DYNAMIC import AND NEVER A STATIC ONE, for two measured reasons: this file's static
+ * named-import list is pinned EXACT at four by the edit-path walker's own arm, and the eager
+ * first-paint graph walks STATIC edges only, so a static edge here would pull the lane, the
+ * domain leaf and the generation entry into first paint.
+ *
+ * ⛔ IT CANNOT THROW INTO A WRITER'S RESULT. A lane that fails to load leaves the edit itself
+ * untouched: the layer write above it has already landed and the receipt below it is unchanged.
+ * @returns {Promise<unknown>}
+ */
+function reachRederiveLane() {
+  _rederiveLanePromise ||= import('./settlementRederiveAction.js').then(null, () => null);
+  return _rederiveLanePromise;
+}
 
 /** @param {string} reason @returns {{ok: false, reason: string}} */
 const refuse = (reason) => ({ ok: false, reason });
@@ -244,6 +268,12 @@ async function applyCascadeEdit(get, set, coords, value, layerOp) {
   const applied = applyEdit(get().settlement?.dmLayer, layerOp, DECLARATION_CONSULT);
   if (applied.ok === false) return refuse(applied.reason);
   set((state) => { state.settlement.dmLayer = applied.layer; });
+
+  // ⭐ THE SEAM'S SECOND CONSULT SITE (judgment 145). EM-C4a consulted the seam on the
+  //    `set-root` path ALONE; the cascade branch consults it here, so ONE site becomes TWO
+  //    and the two writers cannot drift apart about what the seam is.
+  if (REDERIVE_SEAM.kind === 'scoped' && REDERIVE_SEAM.calls === 1) await reachRederiveLane();
+
   return {
     ok: /** @type {true} */ (true),
     saveId: String(get().activeSaveId ?? ''),
@@ -331,20 +361,24 @@ export async function applyPlainEditToDraft(get, set, request) {
     state.settlement.dmLayer = applied.layer;
   });
 
-  // 8. ⛔ THE RE-DERIVATION SEAM, CONSULTED, AND THE NO-OP BRANCH TAKEN. The seam
-  //    declares `kind: 'noop'` and `calls: 0`, so nothing re-enters the generation
-  //    pipeline, no engine is imported and no `rederive` is named anywhere in this
-  //    module. EM-B2a4 owns that plug and takes this one site; A8 asserts the seam IS
-  //    a no-op, which is the arm that fails the day it lands.
-  const seamIsNoop = REDERIVE_SEAM.kind === 'noop' && REDERIVE_SEAM.calls === 0;
+  // 8. ⭐ THE RE-DERIVATION SEAM, CONSULTED, AND THE SCOPED BRANCH TAKEN (EM-B2a4). The seam
+  //    declares `kind: 'scoped'` and `calls: 1`, so the lane is REACHED from this writer rather
+  //    than skipped. ⛔ The lane is not RUN on an edit: this member prices itself at zero direct
+  //    consumers and lands the leaf dormant, and a successor wires the one caller.
+  const seamIsScoped = REDERIVE_SEAM.kind === 'scoped' && REDERIVE_SEAM.calls === 1;
+  if (seamIsScoped) await reachRederiveLane();
 
-  // 9. The receipt. On the no-op branch the keys the layer write moved are the WHOLE of
-  //    what changed; the day the seam is plugged in, THIS expression is the one site that
-  //    must learn what else moved, and it reports nothing moved until it does.
+  // 9. The receipt, and EM-C4a's own question ANSWERED rather than inherited. Its comment asked
+  //    this expression to learn what else moved once the seam was plugged. Measured, the answer
+  //    is NOTHING ELSE that this receipt can name: `keys` is a list of ROOT KEYS, a re-derivation
+  //    moves RECORD PATHS, and the two vocabularies do not meet until an edit's consequence is
+  //    reported as the difference between two re-derivations, which is the re-entry family's.
+  //    So the keys the layer write moved are the whole of what this receipt claims, on BOTH
+  //    branches of the seam, and no landed arm is weakened to say so.
   return {
     ok: /** @type {true} */ (true),
     saveId,
-    keys: seamIsNoop ? applied.keys : [],
+    keys: applied.keys,
     layer: applied.layer,
   };
 }

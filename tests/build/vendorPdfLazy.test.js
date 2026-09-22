@@ -1769,5 +1769,34 @@ describe('ARCH car 2 — the three first-paint budgets stay where the owner sign
     expect(CLOSURE_BUDGET_BYTES, 'the raw first-paint budget moved').toBe(1_048_000);
     expect(CLOSURE_GZIP_BUDGET_BYTES, 'the gzip transfer budget moved').toBe(337_000);
     expect(CLOSURE_BROTLI_BUDGET_BYTES, 'the Brotli transfer budget moved').toBe(283_000);
+
+    // ⭐ THE SETTLEMENT-EDITOR TRAIN'S SUMMED FIRST-PAINT PRICE, recorded by the member that
+    // holds this file's row. The three budgets above are unmoved because the train's MEMBERSHIP
+    // delta is ZERO: not one module the train creates or modifies is in the first-paint closure,
+    // so no first-paint byte can have moved. This is a MEMBERSHIP fact read from the build
+    // config's own exported derivation, never a dist read, so it cannot skip and cannot go stale
+    // against a replica. A member that later lands eagerly reds HERE, beside the budgets it
+    // would move, rather than silently inside a build nobody reruns.
+    const eagerRel = new Set(
+      [...EAGER_FIRST_PAINT_MODULES].map((abs) => relative(process.cwd(), abs)),
+    );
+    expect(eagerRel.size, 'the eager graph is non-empty (anti-vacuity)').toBeGreaterThan(50);
+    expect(eagerRel.has('src/main.jsx'), 'and it holds the entry').toBe(true);
+    const editorTrain = [
+      'src/domain/edit/dmLayer.js',
+      'src/domain/edit/fieldDeclarations.js',
+      'src/domain/edit/operations.js',
+      'src/domain/density/densityCreateBoundary.js',
+      'src/generators/generateSettlementPipeline.js',
+      'src/generators/pipeline.js',
+      'src/store/editSlice.js',
+      'src/store/settlementRederiveAction.js',
+    ];
+    const present = editorTrain.filter((rel) => existsSync(resolve(process.cwd(), rel)));
+    expect(present, 'every module this arm prices exists, or the absence below is vacuous')
+      .toEqual(editorTrain);
+    expect(present.filter((rel) => eagerRel.has(rel)),
+      'a settlement-editor module in the first-paint closure is a RISE, and these three ceilings '
+      + 'are the owner\'s signature rather than a lane\'s edit').toEqual([]);
   });
 });

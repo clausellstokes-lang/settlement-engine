@@ -218,6 +218,16 @@ export const PIPELINE_REACHERS = Object.freeze({
       + 'is meant to predict.',
     payloadAwaitedBy: Object.freeze(['src/store/campaignContentBindingSession.js']),
   }),
+  'src/store/settlementRederiveAction.js': Object.freeze({
+    class: 'DERIVED',
+    why: 'the re-derivation seat re-runs an EXISTING world from pins built out of that world\'s own '
+      + 'record, so the law it runs under is the law that world was created with and minting a second '
+      + 'one here would silently re-birth a settlement the DM only meant to edit. FIRST ROW OF THIS '
+      + 'CLASS. It arms the generation laws\' lazy payloads itself, on the same async edge as its '
+      + 'engine import and before any run, because a re-derivation of a world born under a lazy law '
+      + 'would otherwise throw out of the pipeline rather than reproduce that world.',
+    payloadAwaitedBy: Object.freeze(['src/store/settlementRederiveAction.js']),
+  }),
 });
 
 /**
