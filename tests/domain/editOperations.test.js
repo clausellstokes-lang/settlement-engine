@@ -485,14 +485,27 @@ describe('EM-B1a — the op vocabulary, the fourteen home ops, and the world hal
     const scanned = walkSources(join(ROOT, 'src')).filter((rel) => !leaves.includes(rel));
     expect(scanned.length, 'the src/ walk found nothing, so the dormancy claim below would be'
       + ' vacuous').toBeGreaterThan(400);
+    // ⭐⭐ EM-C4a WIDENS THIS ROSTER IN PLACE, BY ADDITION AND NEVER BY DELETION. The ONE entry
+    // is `src/store/editSlice.js`, the settlement editor's plain-edit store half and this
+    // catalogue's FIRST RUNTIME IMPORTER. It is LAZY, and that is MEASURED rather than argued:
+    // `src/store/index.js` names it nowhere and it has ZERO importers under `src/`, static or
+    // dynamic, at this tip — so it is composed by no eager slice, enters no first-paint closure,
+    // and the +0 B price is unmoved. The world-condition leaf still has NO importer at all, so
+    // any row naming it here would be a NEW closure edge.
+    const EXPECTED_IMPORTERS = [
+      'src/store/editSlice.js imports src/domain/edit/operations.js',
+    ];
     const importers = [];
     for (const rel of scanned) {
       for (const resolved of importsOf(rel, commentsOnly(sourceOf(rel)))) {
         if (leaves.includes(resolved)) importers.push(`${rel} imports ${resolved}`);
       }
     }
-    expect(importers, 'this packet lands DARK: nothing under src/ imports either leaf, so neither'
-      + ' enters any bundle closure and the +0 B price is true by construction').toEqual([]);
+    expect(importers, 'EM-B1a LANDED dark: the ONLY module under src/ that imports either leaf is'
+      + ' EM-C4a\'s LAZY store slice, which no eager slice composes, so neither leaf enters a'
+      + ' first-paint closure and the +0 B price is true by construction. An UNLISTED importer'
+      + ' invalidates that price; a MISSING listed one means the sanctioned edge is gone and the'
+      + ' roster has aged instead of convicting').toEqual(EXPECTED_IMPORTERS);
     expect(importsOf('src/components/edit/Planted.jsx',
       "import { makeOp } from '../../domain/edit/operations.js';\n"),
     'the importer matcher is proved LIVE on a planted runtime import, or the absence above is'

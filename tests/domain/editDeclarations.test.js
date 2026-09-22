@@ -274,12 +274,22 @@ describe('EM-A1 — the field declarations, their shape law and their existence 
     // ⭐⭐ EM-B1a WIDENS THIS ARM IN PLACE, BY ADDITION AND NEVER BY DELETION. The roster is
     // now EXACT and asserted SET-EQUAL IN BOTH DIRECTIONS, with both sides sorted, because
     // `walkSources` order is `readdirSync` order and is not stable across filesystems. The
-    // ONE entry is EM-B1a's op catalogue reaching EM-A1's `fieldDeclarations.js` — this
+    // FIRST entry is EM-B1a's op catalogue reaching EM-A1's `fieldDeclarations.js` — this
     // leaf's SINGLE RUNTIME EDGE into EM-A1's volume. Its `Op` and `EntityRef` typedefs
     // reach `types.js` by JSDoc alone, which TOOL-32's comment strip correctly does not
     // count, exactly as it does not count EM-D0d's two `FreeField`/`PoolField` typedefs.
+    // ⭐⭐ EM-C4a WIDENS IT AGAIN, BY ADDITION AND NEVER BY DELETION. The SECOND entry is
+    // `src/store/editSlice.js`, the settlement editor's plain-edit store half and the FIRST
+    // RUNTIME IMPORTER of this leaf from outside `src/domain/edit/`. It is LAZY, and that is
+    // MEASURED rather than argued: `src/store/index.js` names it nowhere, and at this tip it
+    // has ZERO importers under `src/`, static or dynamic. So it is composed by no eager slice,
+    // enters no first-paint closure, and the +0 B price this arm defends is unmoved. Its own
+    // import list is pinned at exactly four by arm A5 of EM-C4a's own walker,
+    // `tests/lint/editMutationPath.walker.test.js`, whose MUTANT arm separates an EAGER
+    // static edge from a DYNAMIC one over this very target.
     const EXPECTED_IMPORTERS = [
       'src/domain/edit/operations.js imports src/domain/edit/fieldDeclarations.js',
+      'src/store/editSlice.js imports src/domain/edit/fieldDeclarations.js',
     ];
     expect(
       [...importers].sort(),
@@ -287,15 +297,25 @@ describe('EM-A1 — the field declarations, their shape law and their existence 
       + ' HEADLESS by construction: an UNLISTED importer puts the declaration table into a'
       + ' bundle closure and invalidates the +0 B price this packet declared on the worker, the'
       + ' lazy engine, the eager first paint and the edge metas. A MISSING listed importer means'
-      + ' the sanctioned edge is gone and the roster has aged instead of convicting. EM-B1a\'s'
-      + ' op catalogue is the one sanctioned runtime edge.',
+      + ' a sanctioned edge is gone and the roster has aged instead of convicting. EM-B1a\'s'
+      + ' op catalogue and EM-C4a\'s LAZY store slice are the two sanctioned runtime edges.',
     ).toEqual([...EXPECTED_IMPORTERS].sort());
 
-    // ⭐ THE SECOND-ORDER SCAN (EM-B1a): nothing under `src/` imports EITHER of EM-B1a's own
-    // leaves, so EM-A1's declaration table still reaches no bundle closure THROUGH them. That
-    // is what keeps the +0 B price true BY CONSTRUCTION rather than by an absence which, with
-    // the sanctioned edge above now present, is no longer empty.
+    // ⭐ THE SECOND-ORDER SCAN (EM-B1a, WIDENED IN PLACE BY EM-C4a). This is an EXACT importer
+    // roster over EM-B1a's own two leaves, asserted SET-EQUAL IN BOTH DIRECTIONS with both sides
+    // sorted — the first roster's own idiom, for the same reason: `walkSources` order is
+    // `readdirSync` order and is not stable across filesystems. EM-B1a LANDED dark; its op
+    // catalogue's FIRST RUNTIME IMPORTER is EM-C4a's `src/store/editSlice.js`, the plain-edit
+    // store half, and it is listed here exactly. That slice is LAZY, MEASURED rather than
+    // argued: `src/store/index.js` names it nowhere and it has ZERO importers under `src/`,
+    // static or dynamic, at this tip — so EM-A1's declaration table still reaches no bundle
+    // closure THROUGH EM-B1a's leaves and the +0 B price stays true BY CONSTRUCTION rather than
+    // by an absence. The world-condition leaf still has NO importer under `src/` at all, which
+    // is why any row naming it would be a NEW closure edge and reds here.
     const B1A_LEAVES = ['src/domain/edit/operations.js', 'src/domain/edit/worldConditions.js'];
+    const EXPECTED_SECOND_ORDER = [
+      'src/store/editSlice.js imports src/domain/edit/operations.js',
+    ];
     const secondOrder = [];
     for (const rel of scanned.filter((each) => !B1A_LEAVES.includes(each))) {
       const code = commentsOnly(readFileSync(join(ROOT, rel), 'utf8'));
@@ -306,11 +326,14 @@ describe('EM-A1 — the field declarations, their shape law and their existence 
       }
     }
     expect(
-      secondOrder,
-      'EM-B1a lands DARK: no module under src/ imports its op catalogue or its world-condition'
-      + ' leaf, so neither enters any bundle closure and neither can carry EM-A1\'s declaration'
-      + ' table into one behind this arm\'s back.',
-    ).toEqual([]);
+      [...secondOrder].sort(),
+      'the importer roster of EM-B1a\'s two leaves is EXACT, in both directions. EM-B1a LANDED'
+      + ' dark, and its op catalogue\'s first runtime importer is EM-C4a\'s LAZY store slice,'
+      + ' listed here exactly; its world-condition leaf still has no importer under src/ at all.'
+      + ' An UNLISTED importer can carry EM-A1\'s declaration table into a bundle closure behind'
+      + ' this arm\'s back; a MISSING listed one means a sanctioned edge is gone and the roster'
+      + ' has aged instead of convicting.',
+    ).toEqual([...EXPECTED_SECOND_ORDER].sort());
 
     // GUARD-THE-GUARD, through the SAME predicate (this file's house rule, ⭐ third header
     // paragraph): the comment strip blinds the matcher to a JSDoc type reference and to
