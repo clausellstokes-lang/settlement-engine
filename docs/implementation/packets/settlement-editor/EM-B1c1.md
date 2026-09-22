@@ -1,6 +1,6 @@
 # Settlement editor / EM-B1c1 — THE ONE-ROW SLICE: `set-npc-name` alone, in its own leaf, so the owner's first door carries the rename without waiting for the whole EM-R family
 
-- **Status:** `READY`
+- **Status:** `LANDED`
   ⚠ The status value above stands ALONE on its line because `parsePacketHeader` anchors the status
   row at end-of-line and takes `status` only when exactly one row matches. Every stamp, caveat and
   date goes on these continuation lines, never on the row.
@@ -10,6 +10,7 @@
   ⭐ **THE SEVENTH OF THE FOURTEEN PACKETS ON THE ROAD TO THE FIRST DOOR:** EM-A1 · EM-A2a ·
   EM-A2b · EM-B1h · EM-B1i · EM-B1a · **EM-B1c1** · EM-B2a1 · EM-C4a (v2) · EM-D0a · D0b · D0c ·
   D0d · D0e.
+- **Landed at:** `a89ee75f6d0c4003f67bd40652b5a6ed4ce260f7` — the thirtieth landing — train EM-T12 (version 5, judgments 126 and 135): set-npc-name, one row in its own leaf, spliced into the op catalogue at its codepoint position (index 11 of 15, the one-row slice of EM-B1c; 3 files, +288/−10); B6 keeps the op layer and the shipped EDIT_KINDS verbs disjoint by name. Two things said at this flip: the three red-firsts B2/B3/B4 red on a TypeError with the row absent (not vacuous, read whole — judgment 140), and the restamp note in e5c0906b4's body names the T11 drift's cause where the true cause was the version-5 packet commit fa697b1ff (never amended)
 - **Packet version:** 5
   ⭐ **VERSION 5 (the chair, judgment 135, 2026-09-21; the build lane's STOP `lane-em-b1c1-t12-scratch/EM-B1c1.STOP-voice-mechanics.md`).** §6.1's `guardsStated` literal carried one U+2014 em dash; `tests/copy/voiceMechanics.test.js` Tier 2 counts every string literal under `src/domain/**` per file (a file with no baseline entry is held at zero) and §10 rightly lists that register among those that must not move — two sentences of one packet disagreed. The standing law wins (no em dash in a `src/` string literal; the baseline is never raised): version 5 changes that ONE character in §6.1 so the leaf installs byte-identical and measures em 0 · bang 0, and corrects §10's reason (Tier 2 counts literals, not rendered copy). No contract, key, count, symbol, arm, path or budget moves; the staged build is re-applied byte-identical under the version-5 seal and the lane makes the one-character change under it.
   ⭐⭐ **VERSION 4 — THE OP IS RE-SPELLED `set-npc-name`, AND ONE DISJOINTNESS ARM IS ADDED (the
@@ -892,6 +893,7 @@ DISJOINT by name over every row minted after EM-B1a's fourteen, and B6 keeps the
 R8 slotted *"which vocabulary does the adapter's branch dispatch?"* to EM-C4a's inbox under the
 intake rule; that question is unchanged and still EM-C4a's, but it can no longer be answered by
 accident — a branch keyed on the string now says which layer it means.
+⭐⭐ **MEASURED AT THE FLIP (the train verifier's pass 1B, FIX-2, 2026-09-22): EM-C4a v4.2 dispatches on NEITHER key.** Its cascade branch keys on the DECLARATION's kind `free-cascade` and `CASCADE_WRITERS['npc:name'] → renameNPC`; a rename request through the one adapter carries `makeOp('set-field', …, { field: 'name', value })`, which validates `{ ok: true }` against the composed catalogue, and the layer records `set-root`. So R8's residual question is CLOSED with the answer *neither*: **`set-npc-name` has NO producer at this landing and stays DARK**, and one act carries two payload shapes (`{ newName }` here, `{ field, value }` there). SLOTTED, not deferred: the Edit-Mode inbox row "who mints `set-npc-name`" (EM-C4b's registry actions or EM-B1c's own consumer) — the chair's ruling at EM-T13's placement; EM-D0e's compile dispatches C4a's shape and raises the divergence in its §13.
 `OP_TYPES['set-npc-name']` exists with `target: 'npc'` and a
 single required `newName`; its `guardsStated` names the pure-domain cascade as DATA and **names no
 store action**, because that name is EM-C4a's one home. ⛔ **`validateOp` refuses neither a
@@ -908,6 +910,8 @@ figure** · B1–B6 executed · B6's perturbed-input counterforce quoted with th
 commands, exits and counts · both typecheck configurations · the census tuple before and at the tip
 **with the interior red quoted verbatim and `parkReasonsFor`'s printed output** · generated
 artifacts `NONE` · deviations `NONE | STOP` · judgment calls: `NONE`.
+
+⭐ **EXECUTED (the flip, 2026-09-22):** base `efd0eb448` · placement `04ac6520e` · the version-5 packet commit `fa697b1ff` (judgment 135: one character in §6.1's `guardsStated` literal) · seal `fcf8020b…` at `fa697b1ff` (re-sealed after that commit — ⚠ the restamp note in the build commit `e5c0906b4`'s body names the T11 drift's cause, "the EM-B1a manifest-entry rebuild", where the true cause was the version-5 packet commit; the tool hard-coded it; never amended, said here) · the build `e5c0906b4` → picked `a89ee75f6` (3 files, +288/−10; the leaf 21 effective; `operations.js` 231 → 233; the count prover exit 0 from the kit path; the census walker's two red arms quoted in the lane's receipt) · B1–B6 executed in queue window 35 job 4 (exit 0 after 660 s; the lighting delta `+0/+0/+0/+6/+0`) — ⚠ **B2, B3 and B4's red-firsts red on a `TypeError` with the row absent** (`Cannot read properties of undefined (reading 'target')` / `(reading 'requires')`: the first dereference throws before the claim is tested), NOT on their own assertion; they are not vacuous (a wrong row reds them; read whole by the verifier) — **judgment 140: said rather than guarded**, no assertion added to a proven build · the verifier's pass 1B: 0 STOP · 2 FIX · 6 NOTE (this paragraph and the one above are the two FIX cures).
 
 ---
 

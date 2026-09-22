@@ -1,6 +1,6 @@
 # Settlement editor / EM-B2a3 — `assembleInstitutions` AND `generatePower` CONSULT PINS, `provides` WHOLE: the institution and power choosers taught the landed seam, with the battery that convicts a pin that does not reproduce
 
-- **Status:** `READY`
+- **Status:** `LANDED`
   ⚠ The status value above stands ALONE on its line because `parsePacketHeader`
   (`scripts/implementation-packets.mjs`) anchors the status row at end-of-line and takes `status`
   only when exactly one row matches. Every stamp, caveat and date goes on these continuation
@@ -15,6 +15,7 @@
   COMPILE-EM-B2a1 rulings of 2026-09-20: **EM-B2a1** (the leaf, INSTALLED) → **EM-B2a2** (the
   seam + the heavy chooser) → **EM-B2a3** (this) → **EM-B2a4** (the store consumer + the
   orchestration). The four-member partition is `EM-B2a.partition.md`.
+- **Landed at:** `2117054e816cdbe5ca86300fe044460dfd648687` — the twenty-ninth landing — train EM-T12 (version 3; its build 608b0d63d and its FIX-2 cure 2117054e8, judgment 137, the pass-1A verifier's finding: A3 now sees the nested setActiveRng(createPRNG) mint through a vi.hoisted pass-through recorder drained per step): assembleInstitutions and generatePower consult the pin seam for every key they provide (5 files, +550/−14 at the build; +75/−7 at the cure); §11's EM-R1 STOP discharged at placement (judgment 133b) and §12 written at this flip with the lane's two measured observations (34/63 and 62/63, as of 04ac6520e; both EM-R3's seam)
 - **Packet version:** 3
   - ⭐ **Version 3 (the Opus pre-proof for train EM-T12, read tip `583f8f644`)** re-measures version 2
     against the live tip and makes NINE edits, none of them a contract change: the `chooseOrPin`
@@ -691,7 +692,7 @@ No other file may be edited.
 
 0. Dispatch and seal the packet; stop on any preflight mismatch. ⛔ **Do not start until the chair
    has ruled §4a's Q1 (skip or consume-and-discard) and Q4 (who clones)** — steps 3 and 4 are
-   written to them.
+   written to them. (⭐ Ruled before the build and discharged at placement, judgment 133b — history at this flip.)
 1. Capture the baseline: the five lighting figures, `scripts/mutation-coverage-manifest.json`'s
    `invariants` count and `uncoveredBaseline`, and the six prose-numerics row addresses, each read
    live and recorded as the BEFORE of a delta — never copied from this packet.
@@ -713,7 +714,7 @@ No other file may be edited.
 |---|---|---|---|---|
 | A1 | The null change — the goldens cannot move | a ≥40-row stride of the golden master's 525-row corpus; then the runner with `pins: {}` | every hash equals the COMMITTED fixture; `pins: {}` yields a settlement JSON-identical to the plain path and the same ctx key set | `tests/generators/pipelinePinnedChoosers.test.js` |
 | A2 | ⭐ The pin is TAKEN (anti-vacuity) | a DELIBERATELY ALTERED value pinned, one key at a time over all five | the step's own output IS the pinned value and the record carries it, for each of the five keys by name. ⛔ Against TODAY's tree this arm reds on all five, because both steps ignore `ctx.__pins` and a full pin set comes back byte-identical to the baseline — which is why no reproduction arm in this file stands alone (§9a) | same |
-| A3 | A pinned key's draw is not consumed for it | a counting proxy over the step's own forked stream; and, for the power step, the fork count plus a mint census | `assembleInstitutions` 66 own-stream draws unpinned → 0 pinned. ⛔ `generatePower` is ZERO own-stream draws UNPINNED, so that instrument is VACUOUS there: its arm counts the inner fork (1 → 0) and asserts `createPRNG` is never called with `<seed>::generatePower::power-structure` under a pin | same |
+| A3 | A pinned key's draw is not consumed for it | a counting proxy over the step's own forked stream; and, for the power step, the fork count plus a mint census | `assembleInstitutions` 66 own-stream draws unpinned → 0 pinned. ⛔ `generatePower` is ZERO own-stream draws UNPINNED, so that instrument is VACUOUS there: its arm counts the inner fork (1 → 0) and asserts `createPRNG` is never called with `<seed>::generatePower::power-structure` under a pin — ⭐ **NARROWED AT THE FLIP (judgment 143; the pass-1C verifier's FIX-1, 2026-09-22): WITHIN THE STEP'S OWN DRAINED WINDOW.** Read as a whole-run claim the sentence is false of correct code: `powerEconomyReconcilePass.js:29-34` re-hands the intent to `projectPowerGenerationIntent`, which mints the SAME seed later in a pinned run by a step with `provides: []` (EM-R3's seam). The built arm records the mints through a pass-through recorder drained at every step boundary and asserts the seed absent in `generatePower`'s window alone, through `expectPresentThenAbsent` (the liveness half first) | same |
 | A4 | The partial pin refuses BY NAME, and the name is not always this member's step | pins = `assembleInstitutions`'s three keys alone; then `generatePower`'s two alone | the first throws `Pipeline pins: step "coherenceRepairPass" has choosers [generationRepairs, isolationSupport] but pins supply only [generationRepairs]. Pin every chooser of a step or none of them.` and reports `{ step: 'coherenceRepairPass', kind: 'pin', keys: ['isolationSupport'] }` under `onStrictViolation`; the second does NOT throw. The CLOSURE (6 keys / 5 steps; 2 keys / 1 step) is computed from `getStepMeta()` and asserted both directions, never re-typed | same |
 | A5 | ⭐ The survival, SEALED ONLY WHERE MEASURED TOTAL | the DECLARED 63-row census corpus; pins built from the record, cloned, honoured at the step boundary | **(a)** `generatePower`: the whole settlement reproduces **63/63**, all nineteen watched keys 63/63. **(b)** `assembleInstitutions`: `stress`, `name` and `population` reproduce 63/63 and nothing else totally. **(c)** THE CONTROL: each step's own PRODUCED values reproduce 63/63 and 63/63. ⛔ §0.S's other figures are RECORDED MEASUREMENT with an as-of mark, never sealed — asserting one is a STOP (§11) | same |
 | A6 | ⛔ The pin bag is never written through | the 63-row corpus, pin handed back BY REFERENCE, cloned and uncloned | cloned: the caller's record is MUTATED in **0/63** for both steps and **0/63** rows throw. Uncloned, as the negative control that keeps the clone honest: **52/63** · **30/63** mutated and **2/63** throwing `TypeError: Cannot add property 1, object is not extensible` at `coherenceRepairPass.js:134` (the record's `repairs` is frozen at `generationCoherence.js:515`). The clone itself is EM-R1's | same |
@@ -813,10 +814,10 @@ In addition to `PACKET_STANDARD.md` and `EM-PREAMBLE.md` §P8, stop if:
   MEASUREMENT with an as-of mark, and they are the LATER WRITERS' to fix (EM-R1's census, EM-R3's
   replay). Asserting one here would seal a claim this member cannot keep;
 - **EM-R1 has not landed and the chair has not ruled the local clone** (Q4): without a clone the
-  member's own steps mutate the caller's record 52/63 and 30/63 and throw 2/63;
+  member's own steps mutate the caller's record 52/63 and 30/63 and throw 2/63 — ⭐ **DISCHARGED AT PLACEMENT (judgment 133b, 2026-09-21 17:00; history at this flip):** Q4 was ruled the other way before the build (a LOCAL `structuredClone` in this member's two consults), the built code clones on entry, and A6 proves the pin bag is never written through;
 - ⛔ **`src/generators/pipeline.js` does not export `chooseOrPin` at the verified base** — EM-B2a2
   has not landed, the ninth `requiredSymbols` row refuses, and the seal cannot be taken. This is the
-  machine-checkable form of the `Depends on` row and it is deliberate;
+  machine-checkable form of the `Depends on` row and it is deliberate (⭐ history at this flip: EM-B2a2 landed in train EM-T11 and the export resolved at this member's verified base `efd0eb448`; the seal was taken at `04ac6520e`);
 - ⛔ **the count prover (`EM-B2a3.count-prover.mjs`, kit furniture beside this packet in the chair's
   `packets-waiting/`) exits non-zero** — run it BEFORE the seal, with both paths as arguments:
   `node EM-B2a3.count-prover.mjs EM-B2a3.md EM-B2a3.manifest.json`. It is never a `checks` entry,
@@ -825,7 +826,7 @@ In addition to `PACKET_STANDARD.md` and `EM-PREAMBLE.md` §P8, stop if:
   `import { … } from '../pipeline.js';`** — six prose-numerics rows sit above it at `:62` and `:69`
   and the packet's own §7 says they are UNMOVED;
 - `tests/generators/pipelinePinnedChoosers.test.js` already exists at dispatch;
-- any of the eight `requiredSymbols` of §5 no longer resolves VERBATIM at its stated count;
+- any of the nine `requiredSymbols` of §5 no longer resolves VERBATIM at its stated count (⭐ the flip, 2026-09-22: version 3 said "eight" and was not re-counted when the ninth, `chooseOrPin`, joined at the pre-proof — the pass-1A verifier's NOTE-4; all nine resolved at the landing);
 - **any golden row moves** — `tests/property/generatorGoldenMaster.test.js` or
   `tests/property/dossierProseManifest.test.js` reds, or A1's stride finds a hash off the
   committed fixture. That is EM-P0 version 1's failure class and it is a STOP, never a re-record;
@@ -875,3 +876,13 @@ next member.
 - Out-of-scope observations, without investigation:
 - ⭐ §0's figures RE-TAKEN at the landing sha, with that sha as their new as-of mark (survival N/63 per key, both write-through arms, both trace counts):
 - Judgment calls: `NONE` — §4a's five questions are the chair's and this packet records how each was ruled.
+
+### §12 · EXECUTED — written at the flip (2026-09-22, the successor chair; the pass-1A verifier's FIX-1: the two measured observations were only in the lane's scratch receipt)
+
+- **Base and seal:** verified base `efd0eb448` (train EM-T11's landed tip); placement `04ac6520e`; seal `2559535d…` at `04ac6520e` (the build and the cure both under it). **Commits:** the build `608b0d63d` (5 files, +550/−14: `assembleInstitutions.js`, `generatePower.js`, `pipelinePinnedChoosers.test.js` CREATE, `generationForkCensus.test.js`, `mutation-coverage-manifest.json`) and the FIX-2 cure `254af6b64` on the lane, composed on the train as `2117054e8` (+75/−7 on the test file alone; judgment 137 — A3's instrument now sees the nested `setActiveRng(createPRNG(…))` mint through a `vi.hoisted` pass-through recorder drained per step). The full executed receipt with every count line is the lane's `EM-B2a3.receipt.md` and the two commit bodies' QUEUE'S ANSWER blocks (window 35 job 1, exit 0 after 636 s; window 36 job 1, exit 0 after 697 s: the red-first names A2/A3/A6/A7 by title, the counterforce reds A3 alone).
+- **Lighting delta, by execution:** `+1 file · +0 parked · +1 credited · +7 titles · +1 suiteTitle`; `parkReasonsFor` `[]`. **Mutation manifest:** `invariants` +1, `uncoveredBaseline` unmoved. **Goldens:** unmoved (`7177cd6e…` / `88983938…`). **Tuning inventory:** P1 237 · P2 535 · P3 6,985 identical before and after. **Wiring census:** +0.
+- ⭐ **THE TWO OUT-OF-SCOPE OBSERVATIONS, as of `04ac6520e` (recorded, asserted nowhere — asserting either would be §11's own STOP):**
+  1. **§0.S's merged row splits.** `generationCoherenceReceipt · defenseProfile | 46/63` is two figures at this tip: `defenseProfile` **46/63**, `generationCoherenceReceipt` **34/63**. Every other §0.S figure re-reads equal. SLOT: EM-R1's writer census re-takes §0.S as its own baseline (the row is EM-R1's).
+  2. **Through the member's own consults, `generatePower`'s record-built pin reproduces 62/63, not 63/63** (`village|plains|golden-master-v3`): the step's trace loop (`generatePower.js:96-171`) runs below the consults and reads `powerStructure?.factions` — under a record-built pin that is the RECORD's roster, which `neighbourFactions` and `powerEconomyReconcilePass` move after the step. That is EM-R3's seam (§1a); the verifier CONFIRMED the diagnosis. SLOT: EM-R3's replay / EM-B2a4's `rederive` meets this figure first.
+- **Verifier:** pass 1A 0 STOP · 2 FIX · 5 NOTE (FIX-1 = this block; FIX-2 = the cure above; NOTE-4 = §11's nine); pass 1C over the cure 0 STOP · 1 FIX · 3 NOTE (FIX-1 = §9 A3 narrowed to the step's own window, judgment 143; NOTE-2 = a shared mint-recorder helper, TOOL-4's slot; the files in the kit's `findings/VERIFY-EM-T12-2026-09-21/`).
+- **Judgment calls at the landing:** 133b (the EM-R1 STOP discharged at placement), 137 (the cure under the existing seal), 141 (the cure's add/add composition, the cure's blob taken and proven byte-equal), 143 (the A3 row narrowed).

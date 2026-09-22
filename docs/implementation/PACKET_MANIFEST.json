@@ -36427,9 +36427,10 @@
     },
     {
       "id": "EM-B1c1",
-      "status": "READY",
+      "status": "LANDED",
       "packetPath": "docs/implementation/packets/settlement-editor/EM-B1c1.md",
       "verifiedBase": "efd0eb4481669fce0fa00c356fef9399ab374d17",
+      "landedAt": "a89ee75f6d0c4003f67bd40652b5a6ed4ce260f7",
       "changeManifest": [
         {
           "_note": "THE ONE-ROW SLICE: `set-npc-name` ALONE, in its own leaf. ⭐ VERSION 4 (the chair, judgment 126): the row is EM-B1c section 6's `rename-npc` row, carried verbatim IN EVERY FIELD and RE-KEYED `set-npc-name`, because `rename-npc` is already a live member of the SHIPPED pending-edit vocabulary EDIT_KINDS (src/domain/pendingEdits.js:33; sixteen occurrences over seven src/ files with a canon lock) and one string may not mean two typed things. The op's SEMANTICS, its payload and its delegation are unchanged; the LEAF PATH and the exported binding NPC_RENAME_OP_TYPES do NOT move, because they name the module rather than the op key. The row is — target `npc`, payload { newName: { kind: 'free', required: true } }, stage `home`, consequence `home`, requires.world []. ⛔ `newName` is kind:'free' and that is correct, not a lapse (EM-B1c's own words): a name is the estate's one free-cascade FIELD, so the freedom is in the value and the safety is in the delegation. ⭐ THE LEAF IS ITS OWN so EM-B1c's remaining four rows cannot collide with it: EM-B1c1 owns `src/domain/edit/operationsNpcRename.js`, EM-B1c version 4 owns `src/domain/edit/operationsHomeDelegating.js`, EM-B1b owns `src/domain/edit/operationsOffStage.js`, EM-B1a owns `src/domain/edit/operations.js`. ⛔ EM-B1c LOSES THIS ROW at its next repair (ESTATE-REPAIR-4): never two homes for one op. ⛔ THIS LEAF IMPORTS NOTHING FROM operations.js — operations.js imports THIS module's rows, so an import back would be a module cycle whose const bindings sit in the TDZ at initialisation. The row's `stage` and `consequence` are string literals and the TEST asserts their membership in OP_STAGES / OP_CONSEQUENCE_POLICIES, where there is no cycle. RAISED R2. ⛔ No rename logic of any kind is authored here: the cascade is named as DATA in `guardsStated` and imported nowhere (HZ-JOINKEY).",
@@ -36639,9 +36640,10 @@
     },
     {
       "id": "EM-A2b",
-      "status": "READY",
+      "status": "LANDED",
       "packetPath": "docs/implementation/packets/settlement-editor/EM-A2b.md",
       "verifiedBase": "efd0eb4481669fce0fa00c356fef9399ab374d17",
+      "landedAt": "592336bb679eee73c72bc4957ad326e373e0fa6a",
       "_compileRules": "VERSION 6 (the chair, judgment 134), measured at 04ac6520ee79f749435587b2e61b585cb5381c09 on em-train-12-2026-09-21. THERE IS NO `_interimRules` KEY AND NO INTERIM ROW IN THE BODY: the FIFTH AMENDMENT landed with train EM-T11 and retires COMPILE-RULES.interim.md in its own opening -- \"every one of its seventeen rules is permanent law here, in PACKET_STANDARD.md or in PACKET_TEMPLATE.md, so a packet compiled after this amendment carries no interim row and no clause saying which of the two governs where they disagree.\" Version 5 carried a row naming the FOURTH amendment's hash as \"still the tree's live text\", which is false at this tip; EM-PREAMBLE.md MEASURES fdecd426828665cad2dfaf872871f29f46fa4816e1bd4c43c20ccd84dacc9e7c here, with shasum -a 256, at this packet's own read tip (the preamble's own law: this file's hash is a DELTA a member measures, never a figure copied from a brief or a sibling). Visible here: this packet CREATEs nothing -- both rows are MODIFY of the two files its NAMED SIBLING EM-A2a created and has LANDED, so the mutation-coverage row is NOT owed (`tests/domain` is in none of ENFORCER_DIRS, read at the tip); docs/content/wiring-census.json appears in NO row and in no check, and this member's wiring delta is +0 (1,180 producer leaves at the tip and with the planted text); NO byte arm and no dist read anywhere in `checks`, and this member is NOT its train's byte-arm holder -- EM-C4a is (judgment 133) -- its delta being +0 B and +0 modules, executed by importing EAGER_FIRST_PAINT_MODULES (270 -> 270; control 275); `_pendingRequiredSymbols` is the sibling key for the three symbols EM-A2a created and this deliverable calls; the Status row carries its value ALONE and backticked; section 7 and this capsule are SET-EQUAL; the packet version names its TRUE prior number, 5; `checks` END with `node scripts/implementation-packets.mjs validate`; every register figure is a DELTA and every executed absolute carries an AS-OF mark; the count prover is KIT FURNITURE and is not a check.",
       "changeManifest": [
         {
@@ -36841,9 +36843,10 @@
     },
     {
       "id": "EM-B2a3",
-      "status": "READY",
+      "status": "LANDED",
       "packetPath": "docs/implementation/packets/settlement-editor/EM-B2a3.md",
       "verifiedBase": "efd0eb4481669fce0fa00c356fef9399ab374d17",
+      "landedAt": "2117054e816cdbe5ca86300fe044460dfd648687",
       "_baseNote": "⛔ `__BASE__` can never pass `validate:packets` (`verifiedBase must be a lowercase 40-character SHA`). Validation is DOWNSTREAM of the chair's promotion stamp: the chair stamps the base, adds the INDEX.md row, THEN gates on `valid:`. This lane validated on a scratch COPY of the estate with the base stamped to bdbf7c89c2569679bcccdb188d5d831ccfaa0e6d, an INDEX row added exactly as the chair would, and EM-B2a1's two CREATE targets present on disk as if member 1 had LANDED. Nothing else was changed and nothing was written into the read tip.",
       "_member": "MEMBER 3 OF 4 of the SUPERSEDED EM-B2a (the chair's ESTATE-REPAIR ruling and the COMPILE-EM-B2a1 ruling, 2026-09-20): EM-B2a1 (the leaf, INSTALLED) → EM-B2a2 (the seam + the heavy chooser) → EM-B2a3 (this: assembleInstitutions and generatePower consult pins, `provides` WHOLE) → EM-B2a4 (the store consumer + the orchestration). The four-member partition is `EM-B2a.partition.md`.",
       "_interimRules": "Compiled under `COMPILE-RULES.interim.md` (the chair, 2026-09-20), which GOVERNS where it and `EM-PREAMBLE.md` (SHA-256 c9f33c8d2940372bde8a6d931e3d389b79516a90ed45405cbbbf3e698cc46675, MEASURED at the read tip with `shasum -a 256`) disagree. Visible here: a NEW test file is CREATE, never TEST (rule 4); `docs/content/wiring-census.json` appears in NO row and no check (rule 1); NO byte arm and no dist read (rule 2); every register figure is a DELTA (rule 9); sealed `checks` name FILES, never the `tests/lint` DIRECTORY, never the lighting walker, and END with the validator (rule 8); §7 and this capsule are SET-EQUAL, compiled CAPSULE-FIRST (rule 6). `_pendingRequiredSymbols` is not needed: every row below resolves TODAY.",
@@ -37133,9 +37136,10 @@
     },
     {
       "id": "EM-C4a",
-      "status": "READY",
+      "status": "LANDED",
       "packetPath": "docs/implementation/packets/settlement-editor/EM-C4a.md",
       "verifiedBase": "efd0eb4481669fce0fa00c356fef9399ab374d17",
+      "landedAt": "4801434d98adf211addd4912c5f4e8534d56ac78",
       "_version2Note": "VERSION 2 (the chair's ruling 1 on EM-D0, 2026-09-20 ~22:15, judgment 39): ONE added branch — a `free-cascade` field routes to its DECLARED WRITER (the estate's shipped renameNPC), is AWAITED, and is verified by READ-BACK; the key is never written here, because writing it re-opens the divergence settlementRenameHelpers.js:391-406 records as fixed. ⛔ NO PATH MOVED: the nine changeManifest rows are version 1's nine and section 7 is still SET-EQUAL to them. The closed refusal set grows by EXACTLY ONE reason, 'rename_not_applied', taken VERBATIM from the estate's own dispatcher (settlementPendingEdits.js:321) rather than minted. The acceptance stays at 8 of <=8 with four arms FOLDED into A1, A2, A3 and A5 (EM-B1a's own precedent: 'VERSION 2 ADDS THREE ARMS INSIDE A2 — still 8 of <=8, no case minted'). SHAPE A is unchanged and re-proved: the branch adds ZERO import edges, because the writer is resolved off get() by name. ⛔ EM-B1c1 is NOT a dependency: the branch keys on the DECLARATION's kind, never on an op type, so with no rename-npc row validateOp refuses at step 3 and the branch is never reached — the two members may land in either order.",
       "changeManifest": [
         {
