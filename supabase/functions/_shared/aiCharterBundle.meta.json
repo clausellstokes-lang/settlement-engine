@@ -1,16 +1,9 @@
 {
-  "generatedAt": "2026-09-21T16:51:10.105Z",
+  "generatedAt": "2026-09-22T18:35:04.352Z",
   "entry": "src/domain/aiCharter.js",
-  "sourceHash": "4383ab55d665db3f",
+  "sourceHash": "d2f4aef4bb3f12a2",
   "inputs": [
     "node_modules/immer/dist/immer.mjs",
-    "node_modules/seedrandom/index.js",
-    "node_modules/seedrandom/lib/alea.js",
-    "node_modules/seedrandom/lib/tychei.js",
-    "node_modules/seedrandom/lib/xor128.js",
-    "node_modules/seedrandom/lib/xor4096.js",
-    "node_modules/seedrandom/lib/xorshift7.js",
-    "node_modules/seedrandom/lib/xorwow.js",
     "node_modules/seedrandom/seedrandom.js",
     "src/data/constants.js",
     "src/data/entityTags.js",
