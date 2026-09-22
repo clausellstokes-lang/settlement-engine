@@ -46,6 +46,7 @@ import {
 import { PRIMARY_RELATIONSHIP_TYPES } from '../worldPulse/relationshipCompatibility.js';
 import { FIELD_DECLARATIONS } from './fieldDeclarations.js';
 import { NPC_RENAME_OP_TYPES } from './operationsNpcRename.js';
+import { OFF_1, OFF_2, OFF_3, OFF_4 } from './operationsOffStage.js';
 
 /**
  * @typedef {'pool'|'free'|'ref'|'int'|'enum'} PayloadSpecKind
@@ -201,6 +202,7 @@ export const OP_TYPES = Object.freeze({
     duration: null, guards: [],
     guardsStated: 'No guard is wired here. The declared writer is the ops-layer createNpc, never a second path.',
   }),
+  ...OFF_1, // close-trade, declare-war (EM-B1b, splice run 1 of 4)
   'found-phantom': row({
     target: 'phantom',
     payload: { name: freeField(true) },
@@ -210,6 +212,7 @@ export const OP_TYPES = Object.freeze({
     duration: null, guards: [],
     guardsStated: 'No guard is wired here. A phantom carries no world state of its own, by §P8.',
   }),
+  ...OFF_2, // make-peace, open-trade (EM-B1b, splice run 2 of 4)
   'promote-phantom': row({
     target: 'phantom',
     payload: {},
@@ -228,6 +231,7 @@ export const OP_TYPES = Object.freeze({
     duration: null, guards: [],
     guardsStated: 'No guard is wired here. The fulfil writer is renormalizeFactionPower, which MUTATES ITS ARGUMENT IN PLACE and returns the same reference.',
   }),
+  ...OFF_3, // recall-force (EM-B1b, splice run 3 of 4)
   'remove-faction': row({
     target: 'faction',
     payload: { cause: CAUSE },
@@ -255,6 +259,7 @@ export const OP_TYPES = Object.freeze({
     duration: null, guards: [],
     guardsStated: 'No guard is wired here. The seal is offered only while the record carries a present person, and erasure contradicts a status the record keeps.',
   }),
+  ...OFF_4, // resolve-outcome, send-force (EM-B1b, splice run 4 of 4)
   'set-field': row({
     target: 'settlement',
     payload: { field: enumField(SET_FIELD_FIELDS, true), value: freeField(true) },

@@ -20,7 +20,7 @@ import { dirname, join, relative, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { describe, expect, it } from 'vitest';
 
-import { commentsOnly } from '../helpers/codeOnlySource.js';
+import { codeOnly, commentsOnly } from '../helpers/codeOnlySource.js';
 import { compareCodepoint } from '../../src/domain/deterministicSort.js';
 import { NPC_STATUS_VALUES } from '../../src/domain/entities/npcs.js';
 import {
@@ -34,6 +34,9 @@ import {
   OP_CONSEQUENCE_POLICIES, OP_STAGES, OP_TYPES, makeOp, validateOp,
 } from '../../src/domain/edit/operations.js';
 import { NPC_RENAME_OP_TYPES } from '../../src/domain/edit/operationsNpcRename.js';
+import {
+  OFF_1, OFF_2, OFF_3, OFF_4, OFF_STAGE_OP_TYPES,
+} from '../../src/domain/edit/operationsOffStage.js';
 import { WORLD_CONDITIONS } from '../../src/domain/edit/worldConditions.js';
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), '../..');
@@ -59,6 +62,19 @@ const THE_FOURTEEN = [
  */
 const B1C1_ROW = 'set-npc-name';
 const THE_FIFTEEN = [...THE_FOURTEEN, B1C1_ROW].sort(compareCodepoint);
+
+/**
+ * ⭐ EM-B1b's OWN LIST — the seven OFF-STAGE acts of design §13, and the composed catalogue
+ * DERIVED from the two rosters above rather than hand-spelled, for the same reason the
+ * fifteen is derived: a third hand-written list would let all three drift the day any one
+ * packet moves a row. THE_FIFTEEN is NOT edited — A3 and B1 read it as the HOME roster.
+ */
+const THE_SEVEN = [
+  'close-trade', 'declare-war', 'make-peace', 'open-trade', 'recall-force',
+  'resolve-outcome', 'send-force',
+];
+const THE_TWENTY_TWO = [...THE_FIFTEEN, ...THE_SEVEN].sort(compareCodepoint);
+const OFF_STAGE_REL = 'src/domain/edit/operationsOffStage.js';
 
 /** The five the chair's ruling R8 moved to EM-B1c, plus the struck one. */
 const B1C_FIVE = [
@@ -120,20 +136,22 @@ describe('EM-B1a — the op vocabulary, the fourteen home ops, and the world hal
     // GUARD-THE-GUARD, FIRST: the positive control. If the catalogue did not load, or loaded
     // empty, every set-equality below would pass vacuously against an empty offender list.
     expect(Object.keys(OP_TYPES).length, 'the catalogue loaded nothing, so every roster claim'
-      + ' below would be vacuous').toBe(15);
+      + ' below would be vacuous').toBe(22);
     expect(THE_FOURTEEN.length, 'the expectation list itself is the fourteen').toBe(14);
 
     const live = Object.keys(OP_TYPES);
-    const undeclared = live.filter((t) => !THE_FIFTEEN.includes(t));
-    const missing = THE_FIFTEEN.filter((t) => !live.includes(t));
+    const undeclared = live.filter((t) => !THE_TWENTY_TWO.includes(t));
+    const missing = THE_TWENTY_TWO.filter((t) => !live.includes(t));
     expect({ undeclared, missing }, 'OP_TYPES and the ruling R8 roster PLUS EM-B1c1\'s one row'
-      + ' must be SET-EQUAL in both directions; these are the full offender lists')
+      + ' PLUS EM-B1b\'s seven off-stage rows must be SET-EQUAL in both directions, so a row'
+      + ' dropped by ANY of the three packets reds here; these are the full offender lists')
       .toEqual({ undeclared: [], missing: [] });
 
     expect(live, 'Object.keys(OP_TYPES) is authored in compareCodepoint order, so a new row'
       + ' cannot be appended wherever').toEqual([...live].sort(compareCodepoint));
-    expect(live, 'and that order is the one §6 spells, with EM-B1c1\'s row SPLICED at its'
-      + ' codepoint position rather than appended').toEqual(THE_FIFTEEN);
+    expect(live, 'and that order is the one §6 spells, with EM-B1c1\'s row and each of'
+      + ' EM-B1b\'s FOUR off-stage runs SPLICED at their codepoint positions rather than'
+      + ' appended').toEqual(THE_TWENTY_TWO);
 
     const rowProblems = [];
     for (const [type, row] of Object.entries(OP_TYPES)) {
@@ -368,8 +386,9 @@ describe('EM-B1a — the op vocabulary, the fourteen home ops, and the world hal
     expect(home, 'and the two partitions are SET-EQUAL TO EACH OTHER, so the fields can never'
       + ' drift apart').toEqual(homeConsequence);
     const offStage = Object.keys(OP_TYPES).filter((t) => OP_TYPES[t].stage === 'off-stage');
-    expect(offStage, 'the off-stage member is declared but provably unreached at this tip, which'
-      + ' is what lets EM-B1b append without editing a frozen constant').toEqual([]);
+    expect(offStage, 'the off-stage member is now REACHED, by EM-B1b\'s seven and by nothing'
+      + ' else: the vocabulary carried both members from EM-B1a\'s landing precisely so that'
+      + ' appending these rows never edited a frozen constant').toEqual(THE_SEVEN);
 
     const forkWhy = 'consequenceFor is EM-F1\'s and is defined nowhere in this module';
     const engineWhy = 'and rederive is EM-B2\'s and is called nowhere in it either';
@@ -426,13 +445,25 @@ describe('EM-B1a — the op vocabulary, the fourteen home ops, and the world hal
     expect(related.length, 'some row actually declares a relation, or the symmetry sweep above'
       + ' ran over nothing').toBeGreaterThan(0);
 
-    const foreign = types.flatMap((type) => [
+    const relationsOf = (type) => [
       ...OP_TYPES[type].requires.registry, ...OP_TYPES[type].enables,
       ...OP_TYPES[type].relatedTo, ...OP_TYPES[type].conflictsWith,
-    ]).filter((named) => B1C_FIVE.includes(named) || !THE_FOURTEEN.includes(named));
-    expect([...new Set(foreign)], 'no home row names an off-stage type and none names one of'
-      + ' EM-B1c\'s five: the fourteen are CLOSED OVER THEMSELVES at this tip, and EM-B1b re-runs'
-      + ' this arm over all twenty-five').toEqual([]);
+    ];
+    const foreign = types.flatMap(relationsOf)
+      .filter((named) => B1C_FIVE.includes(named) || !THE_TWENTY_TWO.includes(named));
+    expect([...new Set(foreign)], 'no row names one of EM-B1c\'s five and none names a type'
+      + ' outside the composed catalogue: the twenty-two are CLOSED OVER THEMSELVES, which is'
+      + ' the closure EM-B1b\'s seven re-run this arm over').toEqual([]);
+    // ⭐ THE ORIGINAL CLAUSE IS KEPT, NOT REPLACED, and it is the sharper half: EM-B1b's rows
+    // may name each other freely, but a HOME row naming an off-stage type would force the
+    // inverse or the symmetric counterpart onto one of EM-B1a's landed rows, which this
+    // packet's §11 makes a STOP. Restricting the subject to the home roster keeps that
+    // narrower claim assertable after the widening above.
+    const foreignHome = THE_FIFTEEN.flatMap(relationsOf)
+      .filter((named) => B1C_FIVE.includes(named) || !THE_FOURTEEN.includes(named));
+    expect([...new Set(foreignHome)], 'and no HOME row names an off-stage type or one of'
+      + ' EM-B1c\'s five: the fourteen stay closed over THEMSELVES, so EM-B1b\'s landing added'
+      + ' no relation to a row it does not own').toEqual([]);
   });
 
   it('A5: the rename ops delegate to the existing cascade and this module re-implements none of it', () => {
@@ -454,7 +485,14 @@ describe('EM-B1a — the op vocabulary, the fourteen home ops, and the world hal
       .toEqual([]);
   });
 
-  it('A6: makeOp and validateOp are pure, the import list is exactly five, and nothing imports the leaf', () => {
+  // ⭐⭐ THE TITLE IS RE-WORDED BY EM-B1b, UNDER ITS OWN TEST ROW (the chair's judgment 156).
+  // Both halves of the old wording had gone false while every assertion stayed true: the
+  // import list is no longer five, and EM-C4a's cure widened the dormancy roster to name the
+  // ONE runtime importer, the lazy store slice. The cure lane could not re-word it, because a
+  // cure lane adds no title by law; this member already holds a TEST row on this file, so the
+  // rename lands here. A rename is COUNT-NEUTRAL in the lighting census, which pins counts
+  // rather than title text, and no banked failure names this arm.
+  it('A6: makeOp and validateOp are pure, the import list is exactly seven, and the leaf\'s only runtime importer is the lazy store', () => {
     const target = { kind: 'npc', id: 'n1' };
     const payload = { name: 'Halvard', role: 'reeve' };
     const clone = JSON.parse(JSON.stringify(payload));
@@ -470,12 +508,14 @@ describe('EM-B1a — the op vocabulary, the fourteen home ops, and the world hal
     const code = codeOf(OPERATIONS_REL);
     const specifiers = [...code.matchAll(/from\s*['"]([^'"]+)['"]/g)].map((m) => m[1]);
     expect(specifiers, 'the EXACT import list, in source order: version 9\'s own NPC_STATUS_VALUES'
-      + ' import is the fifth specifier the version-8 arm did not carry (judgment 115 Q6), and the'
-      + ' sixth is EM-B1c1\'s own leaf, which this file composes rather than re-declares')
+      + ' import is the fifth specifier the version-8 arm did not carry (judgment 115 Q6), the'
+      + ' sixth is EM-B1c1\'s own leaf, and the SEVENTH is EM-B1b\'s off-stage leaf, which this'
+      + ' file composes rather than re-declares. It is ONE line by contract: a four-line import'
+      + ' costs three more effective lines than the 250-line family budget leaves')
       .toEqual([
         '../deterministicSort.js', '../entities/npcs.js', '../entities/status.js',
         '../worldPulse/relationshipCompatibility.js', './fieldDeclarations.js',
-        './operationsNpcRename.js',
+        './operationsNpcRename.js', './operationsOffStage.js',
       ]);
     const fenced = specifiers.filter((s) => /prng|rngContext|\/store\/|\/components\/|force|muster|casualty|upkeep/.test(s));
     expect(fenced, 'the import fence: no PRNG, no rngContext, no store, no components, and no'
@@ -639,14 +679,14 @@ describe('EM-B1a — the op vocabulary, the fourteen home ops, and the world hal
   it('B1: the catalogue is the fourteen PLUS set-npc-name, spliced at its codepoint position, and all five of EM-B1c\'s names stay absent', () => {
     const live = Object.keys(OP_TYPES);
     expect(live.length, 'the composed catalogue loaded, or every roster claim below is vacuous')
-      .toBe(15);
+      .toBe(22);
     expect(THE_FIFTEEN.length, 'and the DERIVED expectation list is fifteen, so the two lists'
       + ' cannot drift: it is THE_FOURTEEN plus this key, never a hand-spelled roster').toBe(15);
 
-    const undeclared = live.filter((t) => !THE_FIFTEEN.includes(t));
-    const missing = THE_FIFTEEN.filter((t) => !live.includes(t));
-    expect({ undeclared, missing }, 'SET-EQUAL in both directions, so a row dropped by EITHER'
-      + ' packet reds here; these are the full offender lists')
+    const undeclared = live.filter((t) => !THE_TWENTY_TWO.includes(t));
+    const missing = THE_TWENTY_TWO.filter((t) => !live.includes(t));
+    expect({ undeclared, missing }, 'SET-EQUAL in both directions, so a row dropped by ANY of'
+      + ' the three packets reds here; these are the full offender lists')
       .toEqual({ undeclared: [], missing: [] });
 
     const reabsorbed = B1C_FIVE.filter((t) => live.includes(t));
@@ -657,9 +697,13 @@ describe('EM-B1a — the op vocabulary, the fourteen home ops, and the world hal
     expect(live, 'the composition is authored in compareCodepoint order')
       .toEqual([...live].sort(compareCodepoint));
     const at = live.indexOf(B1C1_ROW);
-    expect([at, live[at - 1], live[at + 1]], 'THE SPLICE, BY POSITION: index 11 of 15, between'
+    expect([at, live[at - 1], live[at + 1]], 'THE SPLICE, BY POSITION: index 18 of 22, between'
       + ' set-institution-state and set-npc-status. A trailing spread would put the row LAST and'
-      + ' red the order clause of A1').toEqual([11, 'set-institution-state', 'set-npc-status']);
+      + ' red the order clause of A1. ⭐ EM-B1b RE-ADDRESSED THE INDEX, under its own TEST row'
+      + ' (the chair\'s judgment 152c): its seven off-stage keys all sort BEFORE set-npc-name,'
+      + ' so the index moves 11 to 18 while the two NEIGHBOURS are unchanged, which is exactly'
+      + ' what a positional claim should report when a sibling splices ahead of it')
+      .toEqual([18, 'set-institution-state', 'set-npc-status']);
 
     expect(Object.isFrozen(NPC_RENAME_OP_TYPES), 'the leaf\'s own map is frozen').toBe(true);
     const thawed = live.filter((t) => !Object.isFrozen(OP_TYPES[t]));
@@ -833,7 +877,11 @@ describe('EM-B1a — the op vocabulary, the fourteen home ops, and the world hal
 
     const minted = live.filter((t) => !THE_FOURTEEN.includes(t));
     expect(minted, 'THE POPULATION THIS MEMBER CAN ANSWER FOR: every row minted AFTER EM-B1a\'s'
-      + ' fourteen. Today exactly one; tomorrow EM-B1b\'s seven and EM-B1c\'s four').toEqual([B1C1_ROW]);
+      + ' fourteen. ⭐ EM-B1b WIDENED THIS ROSTER under its own TEST row (judgment 152c): it is'
+      + ' EIGHT today — this member\'s one plus EM-B1b\'s seven off-stage acts — and the'
+      + ' expectation is DERIVED from the composed catalogue so no third list can drift;'
+      + ' tomorrow EM-B1c\'s remaining four join it')
+      .toEqual(THE_TWENTY_TWO.filter((t) => !THE_FOURTEEN.includes(t)));
 
     const collide = (rows) => rows.filter((t) => EDIT_KINDS.includes(t));
     expect(collide(minted), 'THE GUARD: no row minted after the fourteen may take a shipped'
@@ -854,7 +902,198 @@ describe('EM-B1a — the op vocabulary, the fourteen home ops, and the world hal
     // line above it, so a marker above a WRAPPED `expect(` opener anchors nothing.
     const avoidWhy = 'the op layer avoids the shipped verb BY DESIGN: rename-npc keeps its name,'
       + ' its payload, its intent id and its canon lock at the queue seam';
-    // anchored: the planted control one assertion above returns exactly ['rename-npc'] for this key, so the matcher can FIND it, and minted is asserted exactly [B1C1_ROW] above that.
+    // anchored: the planted control one assertion above returns exactly ['rename-npc'] for this key, so the matcher can FIND it, and minted is asserted exactly equal to the derived EIGHT above that.
     expect(minted, avoidWhy).not.toContain('rename-npc');
+  });
+
+  // ── EM-B1b — THE SEVEN OFF-STAGE ACTS under the phantom consequence rule (C1 to C4) ──
+  // Four straight-line literal `it`s appended to EM-B1a's ONE literal describe. The six
+  // landed arms these rows put red (A1, A3, A4, A6 and EM-B1c1's B1 and B6) are widened
+  // ABOVE, by ADDITION inside the arm each strengthens, so these four are the only titles
+  // this file gains. The ids are C, not B: EM-B1c1 landed B1 to B6 in this very describe.
+
+  it('C1: the catalogue is the fifteen PLUS the seven off-stage acts, spliced at four codepoint positions, every row eleven fields and every row frozen', () => {
+    const live = Object.keys(OP_TYPES);
+    expect(live.length, 'the composed catalogue loaded, or every roster claim below is vacuous')
+      .toBe(22);
+    expect(THE_SEVEN.length, 'and §6\'s own expectation list is SEVEN, so the claims below are'
+      + ' judged against an authored roster rather than a length read off the thing under test')
+      .toBe(7);
+
+    const undeclared = live.filter((t) => !THE_TWENTY_TWO.includes(t));
+    const missing = THE_TWENTY_TWO.filter((t) => !live.includes(t));
+    expect({ undeclared, missing }, 'STATED AS A DERIVATION, NEVER AS AN ABSOLUTE: OP_TYPES is'
+      + ' set-equal, both directions, to EM-B1a\'s home roster PLUS EM-B1c1\'s row PLUS this'
+      + ' member\'s seven. A row dropped by any of the three reds here, and a sibling landing'
+      + ' between them does not make the arm wrong; these are the full offender lists')
+      .toEqual({ undeclared: [], missing: [] });
+
+    expect(live, 'THE ORDER IS THE ARM THE FOUR-POSITION SPLICE EXISTS FOR. Object spread fixes'
+      + ' a key\'s position at its FIRST insertion, so one map spread four times lands all seven'
+      + ' at the first anchor and a trailing spread puts them LAST; either shape reds here')
+      .toEqual([...live].sort(compareCodepoint));
+
+    const rowProblems = [];
+    for (const type of THE_SEVEN) {
+      const row = OP_TYPES[type];
+      const keys = Object.keys(row).sort(compareCodepoint);
+      if (keys.join(',') !== ROW_KEYS.join(',')) rowProblems.push(`${type}: keys ${keys.join('+')}`);
+      if (row.target !== 'phantom') rowProblems.push(`${type}: target is not phantom`);
+      if (row.duration !== null) rowProblems.push(`${type}: duration`);
+      if (!Array.isArray(row.guards) || row.guards.length !== 0) rowProblems.push(`${type}: guards`);
+      if (typeof row.guardsStated !== 'string' || row.guardsStated.length === 0) {
+        rowProblems.push(`${type}: guardsStated is empty, and empty coverage still owes a statement`);
+      }
+    }
+    expect(rowProblems, 'every one of the ELEVEN declaration fields is REQUIRED on every'
+      + ' off-stage row, with target phantom, duration null, guards [] and a non-empty'
+      + ' guardsStated; this is the full offender list').toEqual([]);
+
+    const thawed = live.filter((t) => !Object.isFrozen(OP_TYPES[t]));
+    expect(thawed, 'EVERY ONE of the twenty-two composed rows is frozen. Object.freeze over a'
+      + ' spread freezes the OUTER map only, so the rows are the arm that closes the hole')
+      .toEqual([]);
+    const unfrozen = [['OFF_1', OFF_1], ['OFF_2', OFF_2], ['OFF_3', OFF_3], ['OFF_4', OFF_4],
+      ['OFF_STAGE_OP_TYPES', OFF_STAGE_OP_TYPES]]
+      .filter(([, group]) => !Object.isFrozen(group)).map(([name]) => name);
+    expect(unfrozen, 'and so are all FIVE of the leaf\'s declared exports, which are nameable'
+      + ' from here: otherwise a row could be mutated through a source group while OP_TYPES'
+      + ' still reported frozen').toEqual([]);
+  });
+
+  it('C2: the §13 stage partition is TOTAL and SET-EQUAL to the consequence partition, and the resolver is defined nowhere in the leaf', () => {
+    const live = Object.keys(OP_TYPES);
+    const offStage = live.filter((t) => OP_TYPES[t].stage === 'off-stage');
+    const byTargetReality = live.filter((t) => OP_TYPES[t].consequence === 'by-target-reality');
+    const home = live.filter((t) => OP_TYPES[t].stage === 'home');
+    const homeConsequence = live.filter((t) => OP_TYPES[t].consequence === 'home');
+    expect(offStage, 'the off-stage set is EXACTLY these seven, asserted as a sorted list and'
+      + ' never as a length').toEqual(THE_SEVEN);
+    expect(byTargetReality, 'and the by-target-reality set SET-EQUALS it, so the two fields can'
+      + ' never drift apart: the consequence policy IS the stage partition').toEqual(offStage);
+    expect(home, 'every other type is home, which is EM-B1a\'s roster plus EM-B1c1\'s row')
+      .toEqual(THE_FIFTEEN);
+    expect(homeConsequence, 'and the home consequence set SET-EQUALS the home stage set')
+      .toEqual(home);
+    expect(offStage.length + home.length, 'the partition is TOTAL over the composed catalogue:'
+      + ' no row sits outside both halves').toBe(live.length);
+
+    const leafCode = commentsOnly(sourceOf(OFF_STAGE_REL));
+    expect(leafCode.length, 'the leaf source is live, so the absence below is measured against a'
+      + ' real body rather than an empty string').toBeGreaterThan(1000);
+    expect(commentsOnly('const why = \'resolved by consequenceFor(target)\';'),
+      'THE COUNTERFORCE IS PROVED LIVE ON A PLANTED STRING, and the string form is the whole'
+      + ' point: this strip KEEPS string text, so a guardsStated sentence naming the resolver'
+      + ' convicts prose that writes nothing, which is exactly what must red here')
+      .toMatch(/\bconsequenceFor\b/);
+    const forkWhy = 'consequenceFor is EM-F1\'s. This packet declares the POLICY as data and'
+      + ' nothing more: the resolver is defined, imported and referenced nowhere in the leaf,'
+      + ' in code OR in a sentence';
+    // anchored: the planted control one assertion above proves this matcher fires on a quoted mention, and the length assertion above that proves the subject is a live body.
+    expect(leafCode, forkWhy).not.toMatch(/\bconsequenceFor\b/);
+  });
+
+  it('C3: no off-stage prerequisite names world state, and relational integrity is closed over the composed twenty-two', () => {
+    const worldly = THE_SEVEN.filter((t) => OP_TYPES[t].requires.world.length > 0);
+    expect(worldly, 'design §13 clause (d) made STRUCTURAL by the row shape rather than by a'
+      + ' naming convention: requires.world is EMPTY on every off-stage row, because a phantom'
+      + ' counterparty carries no war state, treaty, route or envoy state to require')
+      .toEqual([]);
+    const prerequisites = ['close-trade', 'make-peace', 'recall-force', 'resolve-outcome']
+      .map((t) => [t, OP_TYPES[t].requires]);
+    expect(prerequisites, 'and each prerequisite names a prior ENTRY IN THE REGISTRY, pinned by'
+      + ' name: an act the record already carries, never a condition of the world').toEqual([
+      ['close-trade', { world: [], registry: ['open-trade'] }],
+      ['make-peace', { world: [], registry: ['declare-war'] }],
+      ['recall-force', { world: [], registry: ['send-force'] }],
+      ['resolve-outcome', { world: [], registry: ['send-force'] }],
+    ]);
+
+    const namesAHomeType = THE_SEVEN.flatMap((type) => [
+      ...OP_TYPES[type].requires.registry, ...OP_TYPES[type].enables,
+      ...OP_TYPES[type].relatedTo, ...OP_TYPES[type].conflictsWith,
+    ]).filter((named) => !THE_SEVEN.includes(named));
+    expect([...new Set(namesAHomeType)], 'THE CLOSURE ARM: every relation on the seven is closed'
+      + ' OVER the seven, because conflictsWith and relatedTo are symmetric and requires and'
+      + ' enables are exact inverses, so naming a HOME type would force the counterpart onto one'
+      + ' of EM-B1a\'s landed rows').toEqual([]);
+
+    const types = Object.keys(OP_TYPES);
+    const conditions = Object.keys(WORLD_CONDITIONS);
+    const unknown = [];
+    const asymmetric = [];
+    for (const type of types) {
+      const row = OP_TYPES[type];
+      for (const named of row.requires.world) {
+        if (!conditions.includes(named)) unknown.push(`${type}.requires.world -> ${named}`);
+      }
+      for (const [relation, members] of [['requires.registry', row.requires.registry],
+        ['enables', row.enables], ['relatedTo', row.relatedTo],
+        ['conflictsWith', row.conflictsWith]]) {
+        for (const named of members) {
+          if (!types.includes(named)) unknown.push(`${type}.${relation} -> ${named}`);
+        }
+      }
+      for (const other of row.conflictsWith) {
+        if (!OP_TYPES[other].conflictsWith.includes(type)) asymmetric.push(`conflictsWith ${type} -> ${other}`);
+      }
+      for (const other of row.relatedTo) {
+        if (!OP_TYPES[other].relatedTo.includes(type)) asymmetric.push(`relatedTo ${type} -> ${other}`);
+      }
+      for (const other of row.enables) {
+        if (!OP_TYPES[other].requires.registry.includes(type)) asymmetric.push(`enables ${type} -> ${other}`);
+      }
+      for (const other of row.requires.registry) {
+        if (!OP_TYPES[other].enables.includes(type)) asymmetric.push(`requires ${type} -> ${other}`);
+      }
+    }
+    expect(unknown, 'A4\'s totality law RE-RUN over all twenty-two: every relation string is a'
+      + ' key of the composed OP_TYPES and every world requirement an id of WORLD_CONDITIONS')
+      .toEqual([]);
+    expect(asymmetric, 'and A4\'s symmetry law with it: conflictsWith and relatedTo SYMMETRIC,'
+      + ' requires.registry and enables EXACT INVERSES').toEqual([]);
+    const declaring = THE_SEVEN.filter((t) => OP_TYPES[t].enables.length > 0
+      || OP_TYPES[t].conflictsWith.length > 0);
+    expect(declaring.length, 'some off-stage row actually declares a relation, or the two sweeps'
+      + ' above ran over nothing').toBeGreaterThan(0);
+    expect(conditions.length, 'the condition roster is live, or the world half above passed'
+      + ' vacuously').toBe(10);
+  });
+
+  it('C4: a well-formed off-stage op against a phantom target VALIDATES, and the leaf grows no second force-return path', () => {
+    const target = { kind: 'phantom', id: 'p1' };
+    const counterparty = { kind: 'phantom', id: 'p2' };
+    const wellFormed = validateOp({
+      type: 'send-force', target, payload: { counterparty, strength: 3 },
+    }, {});
+    expect(wellFormed, 'THE REPORT-NEVER-REFUSE LAW: a well-formed off-stage op against a phantom'
+      + ' target validates ok, because validateOp reports MALFORMATION and never refuses an act')
+      .toEqual({ ok: true, errors: [] });
+    const badOutcome = validateOp({
+      type: 'resolve-outcome', target, payload: { counterparty, outcome: 'nonsense' },
+    }, {});
+    expect(badOutcome.errors, 'and it still names a malformed field exactly, so the law above is'
+      + ' permission rather than silence').toContain('payload.outcome is not one of the declared values');
+    const built = makeOp('declare-war', target, { counterparty });
+    expect([built.stage, built.consequence], 'makeOp copies the declared off-stage stage and the'
+      + ' by-target-reality consequence onto the Op').toEqual(['off-stage', 'by-target-reality']);
+    expect(built.requires, 'and FLATTENS the declaration\'s { world, registry } pair onto EM-A1\'s'
+      + ' readonly string[]: declare-war requires nothing at all').toEqual([]);
+
+    const leafCode = codeOnly(sourceOf(OFF_STAGE_REL));
+    expect(leafCode.length, 'the leaf CODE is live, so the absence below is measured against a'
+      + ' real body rather than a blanked one').toBeGreaterThan(500);
+    const returnPath = /muster|casualty|upkeep/i;
+    expect(returnPath.test(codeOnly('const returned = musterForce(home);')),
+      'the matcher is proved LIVE on a planted CALL, or its silence below means nothing')
+      .toBe(true);
+    expect(returnPath.test(leafCode), 'NO SECOND FORCE-RETURN MECHANISM: a returning force'
+      + ' resolves through the home\'s EXISTING muster, casualty and upkeep mechanics, which are'
+      + ' EM-F1\'s. This module writes none and names none as a write target')
+      .toBe(false);
+    expect(importsOf(OFF_STAGE_REL, commentsOnly(sourceOf(OFF_STAGE_REL))),
+      'and the leaf imports NOTHING AT ALL: operations.js imports THIS module\'s four groups, so'
+      + ' an import back for the vocabularies would be a module cycle with both const bindings in'
+      + ' the temporal dead zone at initialisation').toEqual([]);
   });
 });
