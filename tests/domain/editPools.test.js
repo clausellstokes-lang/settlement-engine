@@ -465,11 +465,42 @@ describe('EM-A2a — the pool machinery and the eleven TABLE pools', () => {
     // mounted only by the edit shell and the mint module is imported only by that same shell,
     // which `src/App.jsx` reaches through one `lazy(() => import(...))` edge — so the leaf still
     // enters no eager closure and no golden can move behind this arm's back.
+    // ⭐ FIX-3 WIDENS IT A THIRD TIME, IN PLACE AND BY ADDITION, AND ITS EDGE IS THE WEAKEST
+    // OF THE THREE. Design 20.3 ruling 3 puts the stale-vocabulary resolver at the head of the
+    // tick, and a pool's values are a function of A SETTLEMENT, so the one layer that can
+    // compose `{ opTypes, pools }` for the hook is the advance, which holds the live member
+    // clones. `decreeCataloguesForSaves` reaches this leaf through a DYNAMIC
+    // `import('../domain/edit/pools.js')` inside the function — never at module scope, which
+    // is EM-A2a's bundle law — and only when some member save actually holds a PENDING entry.
+    // CAUSE MEASURED, NOT ASSUMED: with `src/store/campaignAdvanceSession.js` planted from its
+    // pre-FIX-3 image and restored by sha256, this arm passed on two importers and the whole
+    // file was 17 of 17.
+    //
+    // ⛔ AND IT COSTS THE PROTECTED CLOSURES NOTHING, BUILT TWICE TO SAY SO (`npm run build`,
+    // exit 0 both times, the planted file the only difference):
+    //   EAGER_FIRST_PAINT_MODULES   270 -> 270, and it holds no pool module at all
+    //   index-*.js (first paint)    664,666 -> 664,771 B  (+105 B: the registration of two new
+    //                               async chunks, not one byte of pool table)
+    //   EditModeShell-*.js           27,753 ->  25,774 B  (-1,979 B: the leaf LEFT this chunk)
+    //   pools-*.js                        0 ->   2,433 B  (the leaf's OWN shared async chunk)
+    //   campaignAdvanceSession-*.js  24,246 ->  25,399 B  (+1,153 B: FIX-3's own composer, and
+    //                               the plant also reverts FIX-5's lines in that file — the
+    //                               pool TABLES are not in this chunk at all)
+    // So no eager closure gains the leaf; it is pulled out of the edit shell's chunk into a
+    // shared async one that both sides fetch. And the advance calls `poolValues` ONLY, never
+    // `rollFrom`, so this edge takes no draw and no golden can move — which is the posture
+    // EM-A2a declared and the reason its "motion is a STOP" is not tripped here.
     expect(sources.filter(({ text }) => POOL_LEAF_SPECIFIER.test(text)).map(({ rel }) => rel).sort(),
-      'the pool leaf\'s importers under src are EXACTLY these two, in both directions: EM-D0e\'s'
-      + ' editor door and EM-F3\'s phantom mint, both reached only through the edit shell\'s one'
-      + ' lazy edge, so no bundle closure gains it and no golden can move')
-      .toEqual(['src/components/edit/CardEditorDialog.jsx', 'src/store/phantomMintAction.js']);
+      'the pool leaf\'s importers under src are EXACTLY these three, in both directions: EM-D0e\'s'
+      + ' editor door, EM-F3\'s phantom mint and FIX-3\'s decree-catalogue composer, the first two'
+      + ' reached only through the edit shell\'s one lazy edge and the third only through a dynamic'
+      + ' import the advance takes when a save holds a pending entry, so no eager closure gains it'
+      + ' and no golden can move')
+      .toEqual([
+        'src/components/edit/CardEditorDialog.jsx',
+        'src/store/campaignAdvanceSession.js',
+        'src/store/phantomMintAction.js',
+      ]);
   });
 
   it('A7 the import fence, in both directions', () => {
