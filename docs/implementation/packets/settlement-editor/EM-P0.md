@@ -31,8 +31,8 @@ roster"*. **True of its ARGUMENTS, false of its DRAWS.** The build lane counted:
 
 Two channels, both re-verified statically at this base: **ambiently**, because
 `npcGenerator.js:16` imports `random` and `pick` from `src/kernel/rngContext.js` and
-`pipeline.js:187` binds the step's stream with `setActiveRng(stepRng)` for the whole step body; and
-**directly**, at `generatePopulation.js:123`'s `rng.random()` power-weighted scatter.
+`pipeline.js :: runPipeline` binds the step's stream with `setActiveRng(stepRng)` for the whole step body; and
+**directly**, at `generatePopulation.js :: linkFactions`'s `rng.random()` power-weighted scatter.
 
 ### §0R.2 · ⛔ Why the split could never have worked — `fork` mints at position 0
 

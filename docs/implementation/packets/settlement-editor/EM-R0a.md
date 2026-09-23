@@ -164,7 +164,7 @@
   it from the final record differs from the recorded receipt in exactly two leaf shapes in 63/63:
   `judgments[].evidence[].evidence` and `.detail`, at
   `judgments[id=confidence_and_provenance].evidence[path=simulationTrace]`. The mechanism is exact:
-  the receipt is built at `assembleSettlement.js:283`, **before** the trace is propagated onto the
+  the receipt is built at `assembleSettlement.js :: buildGenerationCoherenceReceipt`, **before** the trace is propagated onto the
   settlement (`:292`'s own comment), so the recorded evidence reads *"No step trace was persisted…"*
   while a rebuild reads *"Deterministic generation trace is present. N trace entries"*. Status, all
   17 checks and all 7 judgment ids are otherwise identical. → **The receipt is MERGED, never
@@ -954,7 +954,7 @@ scripts/mutation-coverage-manifest.json                (REGISTER — one row, su
 | item, as measured here | proposed fate (the chair slots it) |
 |---|---|
 | ⛔ **`crossSettlementConflicts` is allow-listed by the public veil and merged by two readers, and NOTHING IN `src/` WRITES IT** (`RelationshipsTab.jsx:59`, `relationshipsDeskRead.js:156` both say so) | **SLOT: RECON-ID's table** (chartered 2026-09-19 18:49 — "every entity-id namespace in one table, every handle and resolver"). It is the same question in another dress: a cross-save relation with readers and no writer. If the recon shows it is dead, the fate becomes CLOSED and the key leaves the allow-list in the same sitting |
-| ⭐ **A RECOMPUTE of the generation receipt moves `judgments[id=confidence_and_provenance].evidence[path=simulationTrace]` on 63/63 records**, because the receipt is built before the trace reaches the settlement (`assembleSettlement.js:283` vs `:292`) | **SLOT: EM-R0c's compile**, as a pinned forbidden alternative (the receipt is merged, never recomputed) — already written into §5.5 here so R0c inherits it rather than rediscovering it |
+| ⭐ **A RECOMPUTE of the generation receipt moves `judgments[id=confidence_and_provenance].evidence[path=simulationTrace]` on 63/63 records**, because the receipt is built before the trace reaches the settlement (`assembleSettlement.js :: buildGenerationCoherenceReceipt` vs the trace copy below it) | **SLOT: EM-R0c's compile**, as a pinned forbidden alternative (the receipt is merged, never recomputed) — already written into §5.5 here so R0c inherits it rather than rediscovering it |
 | **A MALFORMED `repairs[]` entry is the one seam by which HISTORY reaches a READING** (`generationReceiptJudgments.js:654-660`) | **SLOT: EM-B1a's pre-proof**, which is where an op that could write a repair is designed; and it is CANNOT-CATCH row 10 here |
 | **`history.eventsTimeline` and `history.historicalEvents` are ORDER-BEARING** (monotone in 60/60 multi-entry arrays) | **SLOT: EM-R0c's compile** — they are where §22.2 item 4's "R1's order governs only when the edit moved the order" arm has teeth, and its second arm's counter should be measured on them |
 | **`powerStructure.factions`' total is owned by BOTH §22.3 item 3 (atomic) and §22.2 item 8 (the op renormalises)** | **CLOSED — not work: the two rulings agree.** Recorded in `CROSS_ENTRY_TOTALS` with `mootUnder: 'HELD'` so the agreement is in one place |

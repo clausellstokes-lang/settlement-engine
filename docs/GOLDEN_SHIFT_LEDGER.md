@@ -1877,7 +1877,7 @@ are drawn. Measured both ways:
 | tier × route × terrain × magic, seeds varying | 576 | **9** |
 
 Nine authored variants, and **every arm is reachable** — there is no dead arm to
-repair. `generateSettlementReason` (src/generators/narrativeGenerator.js:750) is
+repair. `src/generators/narrativeGenerator.js :: generateSettlementReason` is
 simply thin, and lopsided:
 
 ```

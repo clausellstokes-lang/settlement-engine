@@ -114,10 +114,10 @@ and a provenance echo. One question, zero new authorities.
 | Member mint | composeInstantWorld.js:180 `{...DEFAULT_CONFIG, settType, _randomizePriorities:true}` — magic hard-ON | THE GAP |
 | The knob→realm-rule precedent | tone → SIMULATION_RULE_PRESETS → ensureWorldState (composeInstantWorld.js:221-226) | BUILT — the pattern MG-1 copies |
 | Pre-generation modal | NONE anywhere (no Dialog in InstantWorldEntry; GenerateWizard's only dialog is a post-gen exit guard :595-603) | NET-NEW |
-| Per-settlement axis | configSlice.js:28,31; resolveConfig.js:79-80,147; constants.js:37-41; magicLedger.js:73-87; priorityHelpers.js:105-108 | BUILT, deep |
+| Per-settlement axis | configSlice.js:28,31; resolveConfig.js:79-80,147; constants.js:37-41; magicLedger.js:73-87; priorityHelpers.js :: computeEffectiveMagicPresence | BUILT, deep |
 | Generation arbiter | generationContext.js:199-356 (worldLaw; 15 consumers; patterns :29-55; NEGATED_MAGIC :41-49) | BUILT |
 | Display honesty | magicProfile.js:377-399; MagicTab.jsx:63; pdf viewModel.js:916-926; bandLadders.js:131-135 ("Magic is disabled…") | BUILT |
-| Regen contract | settlement.`_config` raw + `config` resolved (assembleSettlement.js:157,163); full regen = restore `_config` → fresh generate (SettlementsPanel.jsx:102-103); magicExists/priorityMagic NOT in DERIVED_CONFIG_KEYS strip (settlementSlice.js:187-193) — the projection SURVIVES both regen paths; regenSection reads resolved config (:1091) — benign here | BUILT |
+| Regen contract | settlement.`_config` raw + `config` resolved (assembleSettlement.js :: the `config` and `_config` keys); full regen = restore `_config` → fresh generate (SettlementsPanel.jsx:102-103); magicExists/priorityMagic NOT in DERIVED_CONFIG_KEYS strip (settlementSlice.js:187-193) — the projection SURVIVES both regen paths; regenSection reads resolved config (:1091) — benign here | BUILT |
 | Config-key allowlist | updateConfig filters unknown keys (configSlice.js:98-102) — no new key needed (magicExists exists) | BUILT |
 | Realm settings home | campaign.worldState.simulationRules; unknown keys survive normalize (:689-696) + ensureWorldState spread; persisted wholesale (localStorage sf_campaigns + saved_maps map_data JSONB, campaigns.js:265-338); account export round-trips verbatim (accountData.js:334-342) | BUILT |
 | Existing realm magic rule | magicEconomyEnabled (dark, simulationRules.js:481) gates the W-K sim lane — ORTHOGONAL: the lane reads magicLedger per settlement and magicFormFloor already nulls when !magicExists (magicForms.js:408-423); a mundane realm leaves it naturally inert; no interaction | BUILT |
@@ -178,7 +178,7 @@ member at the ONE mint site:
 
 Both fields together, matching the per-settlement UI's own coupling
 (ConfigurationPanel.jsx:443-450 writes both). Because the member's `_config`
-persists this raw truth (assembleSettlement.js:163) and neither field is in
+persists this raw truth (assembleSettlement.js :: the `_config` key) and neither field is in
 the DERIVED strip list, the projection SURVIVES: full regen (restore-`_config`
 → generate), section reroll (reads resolved config — carries both), save/load,
 share (publicSafe keeps `config`), account export, and every pulse read
