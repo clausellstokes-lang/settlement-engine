@@ -304,7 +304,10 @@ describe('the edit corpus ratchet: the re-entry seam and the merge over the 63-r
       }
     }
     // anchored: the two annotation rows declare NO outputKey, and that absence IS their claim.
-    expect(undeclared).toEqual(['institution.note', 'npc.note']);
+    // RE-MEASURED AT THE TRAIN TIP (2026-09-23, the chair): EM-F3's phantom card declares NO outputKey
+    // by design (a phantom is a SAVE, not a record field — judgment 275), so its two rows join the
+    // two annotation rows as the declared-absent set.
+    expect(undeclared).toEqual(['institution.note', 'npc.note', 'phantom.name', 'phantom.size']);
     expect(Object.values(applied).every((each) => each === 63), 'every driven row REPORTS applied 63/63').toBe(true);
     expect(refusals, 'no declaration the corpus can drive is refused at this tip').toEqual({});
     // anchored: an empty envelope is NEVER accepted as proof of application — this table is the
@@ -316,7 +319,7 @@ describe('the edit corpus ratchet: the re-entry seam and the merge over the 63-r
       'npc.name': 63, 'npc.role': 63, 'npc.status': 63,
       'faction.faction': 63, 'faction.category': 63, 'faction.power': 63, 'powerSeat.holder': 63,
       'worldFact.terrain': 63, 'worldFact.culture': 63, 'worldFact.monsterThreat': 63,
-      'worldFact.stressors': 63, 'worldFact.resources': 1,
+      'worldFact.stressors': 63, 'worldFact.resources': 63, // 1 → 63: EM-B2b2 landed (resolveResources honours the DM's roster)
     });
   }, ARM_TIMEOUT);
 

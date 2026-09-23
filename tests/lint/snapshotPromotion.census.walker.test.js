@@ -421,6 +421,10 @@ const CENSUS = Object.freeze([
     file: 'src/store/settlementGenerateAction.js', fn: 'generateSettlementAction', sites: 1, shapes: 'W1', kind: FORWARD,
     why: 'EM-F2\'s PHANTOM PROMOTION, and the word collides with this census\'s class rather than joining it. A PROMOTER here is "a settlement read from a snapshot / version-history element / undo stack / draft history"; what this site writes is the settlement the PIPELINE HAS JUST FORGED on this call, from the seed the phantom record carries — a world minted a few statements above the write, not one restored from anywhere. No timeline, ring or draft history is read on the path (the trace finds no substrate word, which is A3\'s own re-derivation of this sentence), and the only value taken off the saved record is the LIVE blob beside it: `carriedHistoryOf` folds the keys the row itself already held — the back-link\'s reciprocal edge, the decree rows — over the forge, and never over a key the forge wrote. So this is a FORWARD write in this census\'s sense, computed from the live row and a fresh generation; nothing a snapshot substrate could hold can reach a saved record through it. The row it lands on is the phantom\'s own, replaced in place on the same primary key so every back-link already pointing at it still resolves.',
   },
+  {
+    file: 'src/store/editSlice.js', fn: 'applyRosterDecreesAtTick', sites: 1, shapes: 'W2', kind: FORWARD,
+    why: 'EM-E8\'s tick half (C): the settlement written is the ACTIVE row\'s live settlement with the roster decrees that fell due at this tick applied forward — a newcomer minted, a departure struck — computed from the live record and the decree rows the row itself already held; no timeline, ring, snapshot or draft history is read on the path (A3 re-derives this from source every run). Re-recorded at the train tip by the chair, 2026-09-23 (judgment 271\'s idiom: a register moved by a landed member is re-recorded once, at the tip, with its cause named).',
+  },
 ]);
 
 const DECLARED = CENSUS.map((row) => `${row.file}::${row.fn}\t${row.sites}\t${row.shapes}`).sort();
