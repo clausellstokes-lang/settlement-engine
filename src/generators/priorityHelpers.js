@@ -10,6 +10,10 @@ import {
   nativeSemanticNames,
   nativeSemanticResourceKeys,
 } from '../domain/content/customContentSemanticAuthority.js';
+// Shared phrases hoisted once (train EM-T16's worker buy-back, judgment 214c): each is spelled here and referenced below; every emitted value is byte-identical.
+const PROFESSIONAL_CITY_WATCH = 'professional city watch';
+const RELIGIOUS_CONVERSION = 'religious_conversion';
+
 
 export const getPriorities = (config = {}) => ({
   economy:  config.priorityEconomy  ?? 50,
@@ -43,9 +47,9 @@ const getInstitutionNames = (institutions = []) => {
     .map(name => name.toLowerCase());
   return {
     hasMilitaryInst:  hasAny(names, ['garrison','barracks','guard','watch','citadel','walls','militia','mercenary','navy','charter hall']),
-    hasGarrison:      hasAny(names, ['garrison','barracks','professional guard','professional city watch','multiple garrison']),
+    hasGarrison:      hasAny(names, ['garrison','barracks','professional guard',PROFESSIONAL_CITY_WATCH,'multiple garrison']),
     hasMilitia:       hasAny(names, ['citizen militia','militia']),
-    hasWatch:         hasAny(names, ['town watch','city watch','professional city watch']),
+    hasWatch:         hasAny(names, ['town watch','city watch',PROFESSIONAL_CITY_WATCH]),
     hasMercenary:     hasAny(names, ['mercenary company','mercenary quarter','hired muscle','hireling hall','free company hall','veteran\'s lodge']),
     hasFreeCompany:   hasAny(names, ['free company hall']),
     hasCharterHall:   hasAny(names, ["adventurers' charter hall","adventurers' guild hall","multiple adventurers'","adventurers' guild","hireling hall"]),
@@ -300,7 +304,7 @@ export const getInstFlags = (config = {}, institutions = []) => {
     (s('insurgency')           ? 0.88 : 1) *
     (s('mass_migration')       ? 0.90 : 1) *
     (s('wartime')              ? 0.88 : 1) *
-    (s('religious_conversion') ? 0.92 : 1) *
+    (s(RELIGIOUS_CONVERSION) ? 0.92 : 1) *
     (s('slave_revolt')         ? 0.72 : 1);
 
   // ── Stress → crime amplification multipliers ─────────────────────────────
@@ -315,7 +319,7 @@ export const getInstFlags = (config = {}, institutions = []) => {
     (s('insurgency')           ? 1.25 : 1) *
     (s('mass_migration')       ? 1.18 : 1) *
     (s('wartime')              ? 1.20 : 1) *
-    (s('religious_conversion') ? 1.22 : 1) *
+    (s(RELIGIOUS_CONVERSION) ? 1.22 : 1) *
     (s('slave_revolt')         ? 1.30 : 1);
 
   // ── Stress → military capability multipliers ──────────────────────────────
@@ -328,7 +332,7 @@ export const getInstFlags = (config = {}, institutions = []) => {
     (s('insurgency')           ? 0.82 : 1) *
     (s('mass_migration')       ? 0.95 : 1) *
     (s('wartime')              ? 1.35 : 1) *
-    (s('religious_conversion') ? 0.95 : 1) *
+    (s(RELIGIOUS_CONVERSION) ? 0.95 : 1) *
     (s('slave_revolt')         ? 1.25 : 1);
 
   // ── Stress → religion influence multipliers ───────────────────────────────
@@ -341,7 +345,7 @@ export const getInstFlags = (config = {}, institutions = []) => {
     (s('occupied')             ? 0.65 : 1) *
     (s('indebted')             ? 0.90 : 1) *
     (s('wartime')              ? 1.15 : 1) *
-    (s('religious_conversion') ? 1.35 : 1) *
+    (s(RELIGIOUS_CONVERSION) ? 1.35 : 1) *
     (s('slave_revolt')         ? 1.10 : 1);
 
   // ── Criminal effective score (0–100) ─────────────────────────────────────

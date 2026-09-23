@@ -7,6 +7,14 @@
 /**
  * Trade goods categories for organization
  */
+
+// Shared phrases hoisted once (train EM-T16's worker buy-back, judgment 214c): each is spelled here and referenced below; every emitted value is byte-identical.
+const CRAFT_GUILDS_30_80 = "Craft guilds (30-80)";
+const CRAFT_GUILDS_5_15 = "Craft guilds (5-15)";
+const POTTERY_AND_CERAMICS = "Pottery and ceramics";
+const RAW_WOOL_AND_HIDES = "Raw wool and hides";
+const SPECIALIZED_METALWORKERS = "Specialized metalworkers";
+const TOOLS_NAILS_HORSESHOES = "Tools, nails, horseshoes";
 export const GOODS_CATEGORIES = {
   AGRICULTURAL: "agricultural",
   RAW_MATERIALS: "raw_materials",
@@ -34,7 +42,7 @@ export const IMPORT_GOODS_BY_TIER = {
 
   hamlet: {
     basic: [
-      { name: "Metal goods", category: GOODS_CATEGORIES.MANUFACTURED, on: true, desc: "Tools, nails, horseshoes" },
+      { name: "Metal goods", category: GOODS_CATEGORIES.MANUFACTURED, on: true, desc: TOOLS_NAILS_HORSESHOES },
       { name: "Salt", category: GOODS_CATEGORIES.FOOD_PROCESSED, on: true, desc: "Food preservation" },
       { name: "Quality cloth", category: GOODS_CATEGORIES.MANUFACTURED, on: true, desc: "Better textiles" },
     ],
@@ -42,7 +50,7 @@ export const IMPORT_GOODS_BY_TIER = {
 
   village: {
     basic: [
-      { name: "Metal goods", category: GOODS_CATEGORIES.MANUFACTURED, on: true, desc: "Tools, nails, horseshoes" },
+      { name: "Metal goods", category: GOODS_CATEGORIES.MANUFACTURED, on: true, desc: TOOLS_NAILS_HORSESHOES },
       {
         name: "Quality cloth and clothing",
         category: GOODS_CATEGORIES.MANUFACTURED,
@@ -87,7 +95,7 @@ export const IMPORT_GOODS_BY_TIER = {
     ],
     fromHinterland: [
       { name: "Food surplus", category: GOODS_CATEGORIES.AGRICULTURAL, on: true, desc: "Agricultural hinterland" },
-      { name: "Raw wool and hides", category: GOODS_CATEGORIES.RAW_MATERIALS, on: true, desc: "For processing" },
+      { name: RAW_WOOL_AND_HIDES, category: GOODS_CATEGORIES.RAW_MATERIALS, on: true, desc: "For processing" },
       { name: "Timber", category: GOODS_CATEGORIES.RAW_MATERIALS, on: true, desc: "Construction material" },
     ],
   },
@@ -202,7 +210,7 @@ export const GOODS_MODIFIERS_BY_TIER = {
       on: !0,
       desc: "Grain, wheat, barley in quantity",
     },
-    "Raw wool and hides": {
+    [RAW_WOOL_AND_HIDES]: {
       category: GOODS_CATEGORIES.RAW_MATERIALS,
       p: 0.8,
       on: !0,
@@ -256,7 +264,7 @@ export const GOODS_MODIFIERS_BY_TIER = {
       on: !0,
       desc: "Planks and beams to dimension",
     },
-    "Pottery and ceramics": {
+    [POTTERY_AND_CERAMICS]: {
       category: GOODS_CATEGORIES.MANUFACTURED,
       p: 0.4,
       requiredInstitution: "Potter",
@@ -296,7 +304,7 @@ export const GOODS_MODIFIERS_BY_TIER = {
     "Guild-manufactured goods": {
       category: GOODS_CATEGORIES.MANUFACTURED,
       p: 0.9,
-      requiredInstitution: "Craft guilds (5-15)",
+      requiredInstitution: CRAFT_GUILDS_5_15,
       on: !0,
       desc: "Cloth, leather goods, metalwork",
     },
@@ -330,7 +338,7 @@ export const GOODS_MODIFIERS_BY_TIER = {
     "Barrels and containers": {
       category: GOODS_CATEGORIES.MANUFACTURED,
       p: 0.5,
-      requiredInstitution: "Craft guilds (5-15)",
+      requiredInstitution: CRAFT_GUILDS_5_15,
       on: !0,
       desc: "Wooden casks for storage/transport",
     },
@@ -341,17 +349,17 @@ export const GOODS_MODIFIERS_BY_TIER = {
       on: !0,
       desc: "Tanned hides, leather products",
     },
-    "Pottery and ceramics": {
+    [POTTERY_AND_CERAMICS]: {
       category: GOODS_CATEGORIES.MANUFACTURED,
       p: 0.6,
-      requiredInstitution: "Craft guilds (5-15)",
+      requiredInstitution: CRAFT_GUILDS_5_15,
       on: !0,
       desc: "Household vessels and tiles",
     },
     "Rope and cordage": {
       category: GOODS_CATEGORIES.MANUFACTURED,
       p: 0.5,
-      requiredInstitution: "Craft guilds (5-15)",
+      requiredInstitution: CRAFT_GUILDS_5_15,
       on: !0,
       desc: "Essential for shipping and construction",
     },
@@ -408,7 +416,7 @@ export const GOODS_MODIFIERS_BY_TIER = {
     "Fine metalwork and jewelry": {
       category: GOODS_CATEGORIES.LUXURY,
       p: 0.7,
-      requiredInstitution: "Specialized metalworkers",
+      requiredInstitution: SPECIALIZED_METALWORKERS,
       on: !0,
       desc: "Precious metal goods, gemstone work",
     },
@@ -429,35 +437,35 @@ export const GOODS_MODIFIERS_BY_TIER = {
     "Specialized guild crafts": {
       category: GOODS_CATEGORIES.MANUFACTURED,
       p: 0.9,
-      requiredInstitution: "Craft guilds (30-80)",
+      requiredInstitution: CRAFT_GUILDS_30_80,
       on: !0,
       desc: "50+ specializations available",
     },
     "Books and manuscripts": {
       category: GOODS_CATEGORIES.LUXURY,
       p: 0.6,
-      requiredInstitution: "Craft guilds (30-80)",
+      requiredInstitution: CRAFT_GUILDS_30_80,
       on: !0,
       desc: "Hand-copied texts, illuminated works",
     },
     "Advanced weapons and armor": {
       category: GOODS_CATEGORIES.MANUFACTURED,
       p: 0.6,
-      requiredInstitution: "Specialized metalworkers",
+      requiredInstitution: SPECIALIZED_METALWORKERS,
       on: !0,
       desc: "Professional military equipment",
     },
     "Fine textiles": {
       category: GOODS_CATEGORIES.LUXURY,
       p: 0.7,
-      requiredInstitution: "Craft guilds (30-80)",
+      requiredInstitution: CRAFT_GUILDS_30_80,
       on: !0,
       desc: "Silk, velvet, high-quality woolens",
     },
     "Dyed cloth": {
       category: GOODS_CATEGORIES.MANUFACTURED,
       p: 0.8,
-      requiredInstitution: "Craft guilds (30-80)",
+      requiredInstitution: CRAFT_GUILDS_30_80,
       on: !0,
       desc: "Colored fabrics, specialty dyes",
     },
@@ -506,7 +514,7 @@ export const GOODS_MODIFIERS_BY_TIER = {
     "Master-crafted weapons": {
       category: GOODS_CATEGORIES.LUXURY,
       p: 0.6,
-      requiredInstitution: "Specialized metalworkers",
+      requiredInstitution: SPECIALIZED_METALWORKERS,
       on: !0,
       desc: "Legendary quality arms and armor",
     },
