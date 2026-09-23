@@ -1,7 +1,7 @@
 /**
- * tests/lint/decreeCause.walker.test.js — THE DECREE CAUSE WALKER (EM-E2; ARCH's
- * instrument 4 — *"every applied decree carries a chronicle line with a cause; overrides
- * carry `overrode`"*; design §16 and §19 ruling 2 for the vocabulary).
+ * tests/lint/decreeCause.walker.test.js — THE DECREE CAUSE WALKER (EM-E2, extended by
+ * EM-E6; ARCH's instrument 4 — *"every applied decree carries a chronicle line with a
+ * cause; overrides carry `overrode`"*; design §16 and §19 ruling 2 for the vocabulary).
  *
  * THE LAW, IN TWO HALVES.
  *   (a) EVERY AUTHORED LINE DECLARES ITS CAUSE, from a closed vocabulary of two. A
@@ -28,6 +28,16 @@
  * walker's own counter), and comments are not literals to it, which is the whole of why
  * the scan can be exact instead of allowlisted.
  *
+ * ── EM-E6'S THIRD HALF: THE CATALOGUES ARE BOUND, NEVER COPIED ─────────────────────
+ * Design §19 ruling 2 settles where a decree's EVENT and its PARTY CAUSE come from: the
+ * event catalogue IS `affordanceManifest.js` minus `NON_AUTHORABLE_EVENTS`, and
+ * `cause: 'party'` IS `PARTY_IMPACT_KINDS` through `applyPartyImpact`. The failure this
+ * file now also exists for is a SECOND CATALOGUE, and a second catalogue never arrives
+ * declared: it arrives as a helpful array of type words somebody pasted into the reader
+ * so a picker could render without an import. So the arms below parse the reader's source
+ * and intersect its string literals with both imported vocabularies, and a planted copy is
+ * convicted by the same function that clears the real file.
+ *
  * @enforced-by npx vitest run tests/lint/decreeCause.walker.test.js
  */
 import { readFileSync } from 'node:fs';
@@ -39,15 +49,25 @@ import { describe, expect, it } from 'vitest';
 import { compareCodepoint } from '../../src/domain/deterministicSort.js';
 import { GUARD_KINDS } from '../../src/domain/edit/guards.js';
 import {
+  authorableEventTypes, eventFamilies, partyDeedClause, scheduledEventClause,
+  stageScheduledEvent,
+} from '../../src/domain/edit/eventCatalogue.js';
+import {
+  AFFORDANCE_MANIFEST, NON_AUTHORABLE_EVENTS, VERB_FAMILIES,
+} from '../../src/domain/events/affordanceManifest.js';
+import { PARTY_IMPACT_KINDS } from '../../src/domain/worldPulse/partyImpactKinds.js';
+import {
   DECREE_FORMS, decreeChronicleLine, decreeLineParts,
 } from '../../src/domain/display/stateProse/decreeProse.js';
 import {
-  DECREE_LINE_CAUSES, DECREE_PROSE_BLOCKS,
+  DECREE_EVENT_POOLS, DECREE_LINE_CAUSES, DECREE_PARTY_DEED_POOLS, DECREE_PROSE_BLOCKS,
 } from '../../src/domain/display/stateProse/decreeProsePools.js';
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), '../..');
 const READER_REL = 'src/domain/display/stateProse/decreeProse.js';
 const POOLS_REL = 'src/domain/display/stateProse/decreeProsePools.js';
+/** EM-E6's reader, held to the same free-text and no-second-catalogue laws. */
+const CATALOGUE_REL = 'src/domain/edit/eventCatalogue.js';
 
 /** Design §20.3's statuses and EM-C1 §6's authors, the two vocabularies the pools key on. */
 const STATUSES = ['applied', 'pending', 'withdrawn'];
@@ -93,6 +113,49 @@ const isSentence = (text) => /[A-Za-z]\s+[A-Za-z]/.test(text);
 /** @param {string} rel @returns {string[]} */
 const sentenceLiteralsOf = (rel) => stringLiterals(readFileSync(join(ROOT, rel), 'utf8')).filter(isSentence);
 
+/** @param {string} rel @returns {string} */
+const sourceOf = (rel) => readFileSync(join(ROOT, rel), 'utf8');
+
+/**
+ * EVERY WORD OF EITHER CATALOGUE, from the catalogues themselves: the forty-one typed
+ * settlement events and the twelve party-impact kinds. A reader that spells one of these
+ * as a LITERAL has begun the second catalogue design §19 ruling 2 forbids, whether it
+ * meant to or not, and the day a verb is added upstream the copy is silently wrong.
+ * @type {ReadonlySet<string>}
+ */
+const CATALOGUE_WORDS = new Set([
+  ...Object.keys(AFFORDANCE_MANIFEST), ...Object.keys(PARTY_IMPACT_KINDS),
+]);
+
+/**
+ * THE SECOND-CATALOGUE LAW, as a pure function of a source so the mutant drives the very
+ * code the live arm drives. An unquoted object KEY is an Identifier and not a literal, so
+ * this sees a pasted array and not a pool addressed by its vocabulary's own word: the
+ * corpus's keys are held to the imported rosters by the battery's totality arms instead,
+ * which is the right instrument for a leaf that imports nothing.
+ * @param {string} source @returns {string[]}
+ */
+const copiedCatalogueWords = (source) => [
+  ...new Set(stringLiterals(source).filter((text) => CATALOGUE_WORDS.has(text))),
+].sort(compareCodepoint);
+
+/**
+ * The module specifiers a source really imports, with the names it binds from each.
+ * @param {string} source @returns {Map<string, string[]>}
+ */
+function importsOf(source) {
+  const ast = parse(source, { ecmaVersion: 'latest', sourceType: 'module' });
+  /** @type {Map<string, string[]>} */
+  const out = new Map();
+  for (const node of ast.body) {
+    if (node.type !== 'ImportDeclaration') continue;
+    const names = node.specifiers
+      .map((spec) => (spec.imported ? spec.imported.name : spec.local.name));
+    out.set(String(node.source.value), [...(out.get(String(node.source.value)) || []), ...names]);
+  }
+  return out;
+}
+
 /**
  * THE CAUSE LAW, as a pure function of a corpus so every mutant below drives the very
  * code the live arm drives.
@@ -123,6 +186,22 @@ function causeProblems(blocks) {
 }
 
 /**
+ * THE BLOCKS WHOSE SUBJECT EXISTS UNDER ONE CAUSE ONLY, declared BY NAME with the cause
+ * that is theirs (EM-E6). `DEC-PARTY` names what the PARTY DID, and under the table's
+ * cause there is no impact kind, hence no deed and nothing to name: a sentence there
+ * written for the table would be the chronicle inventing an actor. Everything else
+ * answers "how does a decree read", which both hands have an answer to.
+ *
+ * ⛔ A DECLARATION HERE TIGHTENS THE LAW, IT DOES NOT EXCUSE THE BLOCK. A declared block
+ * owes its one cause AND is forbidden every other, so the arm convicts a missing party
+ * sentence and a smuggled table sentence alike. An undeclared block owes all of them,
+ * exactly as before, which is why every EM-E2 block is unaffected by this register
+ * existing.
+ * @type {Readonly<Record<string, string>>}
+ */
+const SINGLE_CAUSE_BLOCKS = Object.freeze({ 'DEC-PARTY': 'party' });
+
+/**
  * THE TOTALITY LAW: a pool that cannot speak for one of the causes makes a cell of the
  * status-by-provenance-by-form cross fall silent for that cause alone, which is the
  * hardest kind of gap to see from a green suite.
@@ -133,10 +212,18 @@ function silentPools(blocks) {
   /** @type {string[]} */
   const problems = [];
   for (const [blockId, block] of Object.entries(blocks)) {
+    const only = SINGLE_CAUSE_BLOCKS[blockId];
     for (const [poolKey, pool] of Object.entries(block)) {
+      const speaksFor = (/** @type {string} */ cause) => pool
+        .some((variant) => (/** @type {any} */ (variant).causes || []).includes(cause));
       for (const cause of DECREE_LINE_CAUSES) {
-        const speaks = pool.some((variant) => (/** @type {any} */ (variant).causes || []).includes(cause));
-        if (!speaks) problems.push(`${blockId}::${poolKey} is silent for ${cause}`);
+        // An undeclared block owes EVERY cause; a declared one owes its own and is
+        // forbidden the rest, which is the same law read in both directions.
+        if (!only || cause === only) {
+          if (!speaksFor(cause)) problems.push(`${blockId}::${poolKey} is silent for ${cause}`);
+        } else if (speaksFor(cause)) {
+          problems.push(`${blockId}::${poolKey} speaks for ${cause}, which its subject cannot`);
+        }
       }
     }
   }
@@ -185,7 +272,9 @@ describe('the decree cause walker — every authored line declares its cause', (
     // NON-VACUOUS: the corpus really was walked, and it is not two rows deep.
     const counted = Object.values(DECREE_PROSE_BLOCKS)
       .flatMap((block) => Object.values(block)).reduce((n, pool) => n + pool.length, 0);
-    expect(counted, 'the authored variant count this walker stands over').toBe(51);
+    // EM-E2 landed 51; EM-E6 added 21 event sentences over the catalogue's seven families
+    // and 24 deed sentences over the party vocabulary's twelve kinds.
+    expect(counted, 'the authored variant count this walker stands over').toBe(96);
     expect(DECREE_LINE_CAUSES, 'and the vocabulary is design §16\'s two').toEqual(['party', 'table']);
   });
 
@@ -210,14 +299,54 @@ describe('the decree cause walker — every authored line declares its cause', (
     stripped['DEC-HAND'].guard = stripped['DEC-HAND'].guard.map((v) => ({ ...v, causes: ['table'] }));
     expect(silentPools(stripped)).toEqual(['DEC-HAND::guard is silent for party']);
   });
+
+  it('EM-E6 — the two new blocks are keyed BY the catalogues, and the deed block speaks for the party alone', () => {
+    // ⛔ THE KEYS ARE THE IMPORTED ROSTERS, NOT A LIST THAT LOOKS LIKE THEM. The pools
+    // leaf imports nothing by design, so this is where its keys are joined to the
+    // vocabularies they claim to be: a family gained upstream, or a thirteenth impact
+    // kind, reds HERE rather than arriving as a mute cell nobody notices.
+    expect(Object.keys(DECREE_EVENT_POOLS).sort(compareCodepoint),
+      'the event block is keyed by the manifest\'s own families')
+      .toEqual([...VERB_FAMILIES].sort(compareCodepoint));
+    expect(Object.keys(DECREE_PARTY_DEED_POOLS).sort(compareCodepoint),
+      'the deed block is keyed by the one party vocabulary')
+      .toEqual(Object.keys(PARTY_IMPACT_KINDS).sort(compareCodepoint));
+    // The reader agrees with the corpus about the families, which is what makes the
+    // draw's pool key a catalogue fact rather than a coincidence of spelling.
+    expect([...eventFamilies()].sort(compareCodepoint))
+      .toEqual(Object.keys(DECREE_EVENT_POOLS).sort(compareCodepoint));
+    // ⛔ DESIGN §16'S CHAIR RULING, HELD ON THE CORPUS RATHER THAN ON ONE LINE: every
+    // deed pool CAN say the owner's own words, so no kind can be the one that quietly
+    // cannot.
+    const mute = Object.entries(DECREE_PARTY_DEED_POOLS)
+      .filter(([, pool]) => !pool.some((v) => v.text.includes('by the party\'s hand')))
+      .map(([kind]) => kind);
+    expect(mute, 'every impact kind can be spoken in the ruling\'s words').toEqual([]);
+    // ⛔ THE TWO MUTANTS OF THE SINGLE-CAUSE LAW, one per direction.
+    const smuggled = bend('DEC-PARTY', 'remove_npc', 0, { causes: ['party', 'table'] });
+    expect(silentPools(smuggled))
+      .toEqual(['DEC-PARTY::remove_npc speaks for table, which its subject cannot']);
+    const silenced = bend('DEC-PARTY', 'remove_npc', 0, { causes: ['party'] });
+    silenced['DEC-PARTY'].remove_npc = silenced['DEC-PARTY'].remove_npc
+      .map((v) => ({ ...v, causes: [] }));
+    expect(silentPools(silenced)).toEqual(['DEC-PARTY::remove_npc is silent for party']);
+    // And an undeclared block still owes BOTH, so the register tightened one block
+    // without loosening any other.
+    const halved = bend('DEC-EVENT', 'War', 0, { causes: ['party'] });
+    halved['DEC-EVENT'].War = halved['DEC-EVENT'].War.map((v) => ({ ...v, causes: ['party'] }));
+    expect(silentPools(halved)).toEqual(['DEC-EVENT::War is silent for table']);
+  });
 });
 
 describe('the decree cause walker — no line is free text', () => {
   it('the reader spells no sentence of its own: every word a reader sees comes from the pools', () => {
     expect(sentenceLiteralsOf(READER_REL)).toEqual([]);
+    // EM-E6's catalogue reader draws two clauses of its own and is held to the same law:
+    // its refusals are TOKENS and its sentences are the corpus's, or they are nobody's.
+    expect(sentenceLiteralsOf(CATALOGUE_REL)).toEqual([]);
     // ⛔ THE CONTROL, so the scan is not simply blind. The pools file is nothing BUT
     // sentences, and the detector finds them all.
-    expect(sentenceLiteralsOf(POOLS_REL).length, 'the detector sees authored sentences').toBe(51);
+    expect(sentenceLiteralsOf(POOLS_REL).length, 'the detector sees authored sentences').toBe(96);
     // ⛔ THE PLANT, in the only form this arm can take without writing to the tree: the
     // innocent fallback, run through the same parser and the same predicate.
     const planted = [
@@ -265,6 +394,26 @@ describe('the decree cause walker — no line is free text', () => {
             }
           }
         }
+      }
+    }
+    // ⛔ EM-E6'S TWO BLOCKS ARE DRAWN BY THEIR OWN READER, NOT EXEMPTED FROM THE LAW.
+    // `decreeLineParts` belongs to EM-E2's leaf and does not yet splice these clauses in
+    // (that is one line on that leaf's own branch), so the reachability half below would
+    // be satisfiable by adding a slot to every new sentence — which is how a corpus goes
+    // unread with a green suite. Instead the arm drives `eventCatalogue.js`, which is the
+    // module that actually draws them, over the WHOLE of both catalogues.
+    for (const type of authorableEventTypes()) {
+      for (const cause of DECREE_LINE_CAUSES) {
+        for (let seed = 0; seed < 40; seed += 1) {
+          const clause = scheduledEventClause(type, { seed: `s${seed}`, cause, settlement: 'Kolstad' });
+          if (clause) drawn.add(clause.text);
+        }
+      }
+    }
+    for (const kind of Object.keys(PARTY_IMPACT_KINDS)) {
+      for (let seed = 0; seed < 40; seed += 1) {
+        const clause = partyDeedClause(kind, { seed: `s${seed}`, settlement: 'Kolstad' });
+        if (clause) drawn.add(clause.text);
       }
     }
     // EVERY DRAWN SENTENCE IS AUTHORED. A filled slot makes the rendered text differ from
@@ -317,6 +466,24 @@ describe('the decree cause walker — a line carries its cause, and an override 
     expect(GUARD_KINDS.filter((kind) => plain.prose.includes(kind))).toEqual([]);
   });
 
+  it('EM-E6 — the party cause the reader names is the one the chronicle speaks under', () => {
+    // The two halves of design §19 ruling 2 meet here: the vocabulary the reader would
+    // hand `applyPartyImpact` is the vocabulary the corpus has a deed pool for, and the
+    // cause that pool speaks under is the cause the chronicle line carries.
+    for (const kind of Object.keys(PARTY_IMPACT_KINDS)) {
+      const clause = partyDeedClause(kind, { seed: 'a' });
+      expect(clause, `${kind} has a deed clause`).toBeTruthy();
+      expect(clause.blockId, kind).toBe('DEC-PARTY');
+      expect(clause.poolKey, kind).toBe(kind);
+      const line = decreeChronicleLine(entryOf(), null, { seed: 'a', cause: 'party' });
+      expect(line.cause, kind).toBe('party');
+    }
+    // ⛔ THE PAIRED NEGATIVE: a kind outside the one vocabulary draws NOTHING, which is
+    // what makes the clause a catalogue read rather than a string formatter.
+    expect(partyDeedClause('broke_the_siege', { seed: 'a' })).toBe(null);
+    expect(partyDeedClause(null, { seed: 'a' })).toBe(null);
+  });
+
   it('the cause SELECTS the sentence: a party hand and a table hand do not read alike', () => {
     for (const addedBy of AUTHORS) {
       const entry = entryOf({ addedBy });
@@ -328,5 +495,115 @@ describe('the decree cause walker — a line carries its cause, and an override 
       // Design §16's chair ruling, in the corpus rather than in a comment.
       expect(byParty.text.includes('party'), `${addedBy}: the party's hand is named`).toBe(true);
     }
+  });
+});
+
+describe('the decree cause walker — EM-E6 binds the catalogues, and mints no second one', () => {
+  it('the catalogue reader COPIES no event type and no impact kind, and a planted copy is convicted', () => {
+    expect(copiedCatalogueWords(sourceOf(CATALOGUE_REL)),
+      'the reader spells neither catalogue').toEqual([]);
+    // ⛔ THE CONTROL, so the detector is not simply blind: the manifest IS the catalogue,
+    // and the same function finds its words by the dozen.
+    expect(copiedCatalogueWords(sourceOf('src/domain/events/affordanceManifest.js')).length,
+      'the detector sees a catalogue where one really lives').toBeGreaterThan(30);
+    // ⛔ THE PLANT, in the only form this arm can take without writing to the tree: the
+    // helpful array somebody pastes so a picker can render without an import, and the
+    // lone kind somebody switches on. Both run through the same parser and predicate.
+    const planted = [
+      "const TYPES = ['ADD_NPC', 'PLAGUE'];",
+      "export const isCrisis = (k) => k === 'resolve_stressor';",
+    ].join('\n');
+    expect(copiedCatalogueWords(planted)).toEqual(['ADD_NPC', 'PLAGUE', 'resolve_stressor']);
+    // And a word that merely LOOKS like one is not convicted, so the predicate is the
+    // catalogue's membership and not a shape heuristic wearing a regex.
+    expect(copiedCatalogueWords("const a = 'ADD_LIGHTHOUSE'; const b = 'break_the_siege';"))
+      .toEqual([]);
+  });
+
+  it('the reader takes both catalogues BY IMPORT, from the modules that own them', () => {
+    const imports = importsOf(sourceOf(CATALOGUE_REL));
+    const manifest = imports.get('../events/affordanceManifest.js') || [];
+    expect(manifest, 'the event catalogue and its fold set, by name')
+      .toEqual(expect.arrayContaining(['AFFORDANCE_MANIFEST', 'NON_AUTHORABLE_EVENTS']));
+    expect(imports.get('../worldPulse/partyImpactKinds.js') || [],
+      'the party vocabulary from the dependency-free leaf, never from the pipeline')
+      .toEqual(['PARTY_IMPACT_KINDS']);
+    expect(imports.get('../worldPulse/partyImpact.js') || [],
+      'and the ONE write path from the module that owns it')
+      .toEqual(['applyPartyImpact']);
+    // ⛔ ANTI-VACUITY: the parse really read this file's imports, not an empty map.
+    expect([...imports.keys()].length, 'the reader\'s import list is non-empty')
+      .toBeGreaterThan(3);
+    // ⛔ THE MUTANT: a reader that dropped the import and kept a local list is seen as
+    // having no such import at all, which is the arm above failing rather than passing.
+    const severed = importsOf("const NON_AUTHORABLE_EVENTS = new Set(['PLAGUE']);\nexport const a = 1;\n");
+    expect(severed.get('../events/affordanceManifest.js')).toBe(undefined);
+  });
+
+  it('every authorable event type is stageable with a when, and every non-authorable one is refused BY NAME', () => {
+    const authorable = authorableEventTypes();
+    // The catalogue's own arithmetic, measured rather than transcribed: forty-one typed
+    // settlement events, nine of them folded, thirty-two a decree may schedule.
+    expect(Object.keys(AFFORDANCE_MANIFEST).length, 'the catalogue').toBe(41);
+    expect(NON_AUTHORABLE_EVENTS.size, 'the folds').toBe(9);
+    expect(authorable.length, 'the catalogue minus the folds').toBe(32);
+    expect(authorable.filter((type) => NON_AUTHORABLE_EVENTS.has(type)),
+      'and not one fold survives the subtraction').toEqual([]);
+
+    const staged = authorable.map((type) => stageScheduledEvent(type, { tick: 3 }));
+    expect(staged.filter((row) => !row.ok).map((row) => row.type),
+      'every authorable type stages with a when').toEqual([]);
+    expect(staged.map((row) => row.tick), 'each at the turn it was given')
+      .toEqual(authorable.map(() => 3));
+    expect([...new Set(staged.map((row) => row.family))].sort(compareCodepoint),
+      'and every family of the catalogue is reached, so no pool of the block is dead')
+      .toEqual([...VERB_FAMILIES].sort(compareCodepoint));
+
+    // ⛔ REFUSED BY NAME, AND TOLD WHERE THE ACT ACTUALLY LIVES. The nine folds are the
+    // manifest's own, and the carrying verb comes off the manifest's fold note.
+    const refused = [...NON_AUTHORABLE_EVENTS].map((type) => stageScheduledEvent(type, { tick: 3 }));
+    expect(refused.length, 'all nine folds were asked').toBe(9);
+    expect(refused.filter((row) => row.ok), 'and none of them stages').toEqual([]);
+    expect([...new Set(refused.map((row) => row.refusal))]).toEqual(['folded']);
+    expect(refused.filter((row) => !row.type || !row.foldedInto).map((row) => row.type),
+      'each refusal names itself and the verb that carries it').toEqual([]);
+    expect(refused.filter((row) => !Object.keys(AFFORDANCE_MANIFEST).includes(row.foldedInto)),
+      'and the carrier it names is a real verb of the same catalogue').toEqual([]);
+
+    // The other two refusals, each by its own token, and the roster is closed at three.
+    expect(stageScheduledEvent('ADD_LIGHTHOUSE', { tick: 3 }).refusal).toBe('unknown-type');
+    expect(stageScheduledEvent('ADD_LIGHTHOUSE', { tick: 3 }).type).toBe('ADD_LIGHTHOUSE');
+    expect(stageScheduledEvent(authorable[0], undefined).refusal).toBe('when-missing');
+    expect(stageScheduledEvent(authorable[0], { tick: 'soon' }).refusal).toBe('when-missing');
+    expect(stageScheduledEvent(authorable[0], { tick: Number.NaN }).refusal).toBe('when-missing');
+    // ⛔ AND NO CLAMP ON `when`, which the charter's own row says in those words: a turn
+    // already passed stages exactly as one still to come, because whether it is too late
+    // is the registry's and the guards' question (design §2.7) and never this reader's.
+    expect(stageScheduledEvent(authorable[0], { tick: -4 }).ok).toBe(true);
+    expect(stageScheduledEvent(authorable[0], { tick: -4 }).tick).toBe(-4);
+  });
+
+  it('a scheduled event draws its clause on the family the CATALOGUE gives its type', () => {
+    const authored = new Set(Object.values(DECREE_EVENT_POOLS)
+      .flatMap((pool) => pool.map((variant) => variant.text)));
+    for (const type of authorableEventTypes()) {
+      const clause = scheduledEventClause(type, { seed: 'a', cause: 'table' });
+      expect(clause, `${type} renders a clause`).toBeTruthy();
+      expect(clause.blockId, type).toBe('DEC-EVENT');
+      expect(clause.poolKey, `${type} draws on its own family`)
+        .toBe(AFFORDANCE_MANIFEST[type].family);
+      expect(authored.has(clause.text) || clause.text.includes('Kolstad'),
+        `${type} draws an authored sentence`).toBe(true);
+    }
+    // ⛔ THE PAIRED NEGATIVE, both limbs: a folded type and a word outside the catalogue
+    // each draw NOTHING, so the clause is a catalogue read and the silence is the
+    // catalogue's own.
+    // anchored: the loop above renders a clause for all thirty-two authorable types from
+    // these very pools, so a null here is the fold closing and never an emptied block.
+    for (const type of NON_AUTHORABLE_EVENTS) {
+      expect(scheduledEventClause(type, { seed: 'a' }), `${type} is folded and says nothing`).toBe(null);
+    }
+    expect(scheduledEventClause('ADD_LIGHTHOUSE', { seed: 'a' })).toBe(null);
+    expect(scheduledEventClause(undefined, { seed: 'a' })).toBe(null);
   });
 });

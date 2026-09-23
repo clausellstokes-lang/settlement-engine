@@ -1,7 +1,7 @@
 /**
  * domain/display/stateProse/decreeProsePools.js — THE CHRONICLE'S AUTHORED POOLS FOR A
- * DECREE (EM-E2; design §11 "The chronicle's voice", §13, §16, §19 ruling 2; ARCH §1's
- * `decreeProse.js` row).
+ * DECREE (EM-E2, extended by EM-E6's two blocks; design §11 "The chronicle's voice",
+ * §13, §16, §19 ruling 2; ARCH §1's `decreeProse.js` row).
  *
  * WHAT THIS IS. Every sentence the chronicle can say about a decree, written out. Design
  * §11 names the four things the voice owes — "authored pools for the table's hand,
@@ -74,10 +74,14 @@
  * `party` is design §16's second hand, whose chronicle line the owner's own ruling spells
  * as "by the party's hand". There is no third, and a variant may name no other word.
  *
- * ⛔ THE CATALOGUE BEHIND `party` IS EM-E6'S, NOT THIS LEAF'S. Design §19 ruling 2 binds a
- * party cause to `PARTY_IMPACT_KINDS` through `applyPartyImpact`; nothing here reads that
- * catalogue or mints a second one. What lands here is the VOICE the §16 ruling already
- * fixed, so that E6 binds a catalogue rather than re-authoring every sentence in the file.
+ * ⛔ THE CATALOGUE BEHIND `party` IS EM-E6'S, NOT THIS LEAF'S, AND IT STAYS SO NOW THAT
+ * E6 HAS LANDED. Design §19 ruling 2 binds a party cause to `PARTY_IMPACT_KINDS` through
+ * `applyPartyImpact`; nothing here reads that catalogue or mints a second one. E6 added
+ * the two blocks at the foot of this file whose POOL KEYS are that catalogue's words and
+ * the event catalogue's families, and it added them the way this leaf takes everything —
+ * as spelled keys with no import, held to the imported rosters by the battery and the
+ * cause walker. `src/domain/edit/eventCatalogue.js` is where the two catalogues are
+ * actually read, and it is the only module that reads them for a decree.
  * @type {ReadonlyArray<string>}
  */
 export const DECREE_LINE_CAUSES = Object.freeze(['party', 'table']);
@@ -229,6 +233,137 @@ export const DECREE_FOLLOWS_FROM_POOL = Object.freeze([
 ]);
 
 /**
+ * WHAT WAS SET FOR A COMING TURN (EM-E6; design §16 "Events, predetermined or shaped by
+ * the party", §19 ruling 2), keyed by the FAMILY of the event the decree schedules.
+ *
+ * ⛔ THE KEYS ARE THE EVENT CATALOGUE'S OWN FAMILIES AND NOTHING ELSE. Design §19 ruling
+ * 2 is "bind to what is built; never mint a second surface": the catalogue is
+ * `affordanceManifest.js`'s forty-one typed settlement events minus
+ * `NON_AUTHORABLE_EVENTS`, and `VERB_FAMILIES` is its own seven-word grouping of them.
+ * This leaf imports nothing, so the keys are SPELLED here and HELD to the imported
+ * roster by the battery and by the cause walker, exactly as the override block's keys
+ * are held to `GUARD_KINDS`. A family with no pool is a scheduled event the chronicle
+ * would have to fall silent about, and that is the red.
+ *
+ * ⛔ AND WHY THE FAMILY RATHER THAN THE TYPE. Thirty-two authorable types would be
+ * thirty-two pools, most of them saying the same thing about a neighbouring verb, and a
+ * thirty-third verb would arrive mute. The family is the grain at which the herald
+ * actually speaks: the reader learns what part of the town's life is already spoken for,
+ * and the typed event itself stays a fact the registry carries rather than a sentence.
+ * @type {DecreeProseBlock}
+ */
+export const DECREE_EVENT_POOLS = Object.freeze({
+  Economy: Object.freeze([
+    Object.freeze({ vid: 52, angle: 'ledger', causes: EITHER, text: 'What was set down for the coming turn falls on the town\'s trade and its keeping.' }),
+    Object.freeze({ vid: 53, angle: 'street', causes: EITHER, text: 'The order names a change in what the town makes, holds and sells, due when the turn comes round.' }),
+    Object.freeze({ vid: 54, angle: 'visitor', causes: EITHER, text: 'Something in the market\'s arrangement is already spoken for, and waits only on the day.' }),
+  ]),
+  Faith: Object.freeze([
+    Object.freeze({ vid: 55, angle: 'ledger', causes: EITHER, text: 'What was set down for the coming turn falls on what the town keeps faith with.' }),
+    Object.freeze({ vid: 56, angle: 'street', causes: EITHER, text: 'The order names a change in the town\'s observances, due when the turn comes round.' }),
+    Object.freeze({ vid: 57, angle: 'visitor', causes: EITHER, text: 'What is honoured here is already spoken for, and waits only on the day.' }),
+  ]),
+  People: Object.freeze([
+    Object.freeze({ vid: 58, angle: 'ledger', causes: EITHER, text: 'What was set down for the coming turn falls on the people who live here by name.' }),
+    Object.freeze({ vid: 59, angle: 'street', causes: EITHER, text: 'The order names a change among the town\'s own folk, due when the turn comes round.' }),
+    Object.freeze({ vid: 60, angle: 'visitor', causes: EITHER, text: 'A life here is already spoken for, and waits only on the day.' }),
+  ]),
+  Power: Object.freeze([
+    Object.freeze({ vid: 61, angle: 'ledger', causes: EITHER, text: 'What was set down for the coming turn falls on who holds authority here.' }),
+    Object.freeze({ vid: 62, angle: 'street', causes: EITHER, text: 'The order names a change in who answers for the town, due when the turn comes round.' }),
+    Object.freeze({ vid: 63, angle: 'visitor', causes: EITHER, text: 'Who speaks for this place is already spoken for, and waits only on the day.' }),
+  ]),
+  Realm: Object.freeze([
+    Object.freeze({ vid: 64, angle: 'ledger', causes: EITHER, text: 'What was set down for the coming turn falls on the town\'s whole standing in the wider realm.' }),
+    Object.freeze({ vid: 65, angle: 'street', causes: EITHER, slots: SLOT_SETTLEMENT, text: 'The order names a change to what {settlement} itself is, due when the turn comes round.' }),
+    Object.freeze({ vid: 66, angle: 'visitor', causes: EITHER, text: 'The town\'s own place in the world is already spoken for, and waits only on the day.' }),
+  ]),
+  Relations: Object.freeze([
+    Object.freeze({ vid: 67, angle: 'ledger', causes: EITHER, text: 'What was set down for the coming turn falls on the town\'s dealings with its neighbours.' }),
+    Object.freeze({ vid: 68, angle: 'street', causes: EITHER, text: 'The order names a change between the town and those it lives beside, due when the turn comes round.' }),
+    Object.freeze({ vid: 69, angle: 'visitor', causes: EITHER, text: 'How the town stands with its neighbours is already spoken for, and waits only on the day.' }),
+  ]),
+  War: Object.freeze([
+    Object.freeze({ vid: 70, angle: 'ledger', causes: EITHER, text: 'What was set down for the coming turn falls on the town as a trouble it must carry.' }),
+    Object.freeze({ vid: 71, angle: 'street', causes: EITHER, text: 'The order names a hardship the town will meet, due when the turn comes round.' }),
+    Object.freeze({ vid: 72, angle: 'visitor', causes: EITHER, text: 'A trouble is already spoken for, and waits only on the day.' }),
+  ]),
+});
+
+/**
+ * WHAT THE PARTY DID (EM-E6; design §16's second hand, §19 ruling 2), keyed by the
+ * PARTY IMPACT KIND. The twelve keys are `PARTY_IMPACT_KINDS`', the one party vocabulary
+ * the tree has, and they are spelled here and held to the imported catalogue by the
+ * battery: design §19 ruling 2 forbids a second party vocabulary, and a thirteenth kind
+ * arriving without a pool is a deed the chronicle could not name.
+ *
+ * ⛔ THE ONLY SINGLE-CAUSE BLOCK OF THIS CORPUS, AND THAT IS STRUCTURAL RATHER THAN AN
+ * OVERSIGHT. Every other block answers "how does a decree read", which is a question the
+ * table's hand and the party's hand both have an answer to. This block answers "what did
+ * the party do", which under `cause: 'table'` has no referent at all: there is no impact
+ * kind, so there is no deed to name, and a sentence here written for the table would be
+ * the chronicle inventing an actor. The cause walker holds the block to EXACTLY the one
+ * cause rather than merely excusing it from the other, so a table sentence appearing here
+ * is convicted as loudly as a missing party one.
+ *
+ * ⛔ EVERY POOL CAN SAY THE OWNER'S OWN WORDS. Design §16's chair ruling is that a
+ * party-caused line reads "by the party's hand"; the LEDGER variant of every pool carries
+ * that phrase verbatim and the walker holds all twelve to it, so the ruling is enforced as
+ * a property of the corpus rather than as one line that happened to draw.
+ * @type {DecreeProseBlock}
+ */
+export const DECREE_PARTY_DEED_POOLS = Object.freeze({
+  bolster_faction: Object.freeze([
+    Object.freeze({ vid: 73, angle: 'ledger', causes: PARTY, text: 'A faction\'s standing here was raised by the party\'s hand.' }),
+    Object.freeze({ vid: 74, angle: 'street', causes: PARTY, text: 'One of the town\'s factions walks taller since the party took its side.' }),
+  ]),
+  broker_relationship: Object.freeze([
+    Object.freeze({ vid: 75, angle: 'ledger', causes: PARTY, text: 'The quarrel between the two places was cooled by the party\'s hand.' }),
+    Object.freeze({ vid: 76, angle: 'street', causes: PARTY, text: 'The party stood between the two of them until the shouting stopped.' }),
+  ]),
+  clear_condition: Object.freeze([
+    Object.freeze({ vid: 77, angle: 'ledger', causes: PARTY, text: 'What the town had been living under was lifted by the party\'s hand.' }),
+    Object.freeze({ vid: 78, angle: 'street', causes: PARTY, text: 'The thing everyone had learned to live with is simply gone, and the party saw to it.' }),
+  ]),
+  ease_stressor: Object.freeze([
+    Object.freeze({ vid: 79, angle: 'ledger', causes: PARTY, text: 'The trouble was blunted, though not ended, by the party\'s hand.' }),
+    Object.freeze({ vid: 80, angle: 'street', causes: PARTY, text: 'The worst of it was pulled back a little; the thing itself is still here.' }),
+  ]),
+  empower_npc: Object.freeze([
+    Object.freeze({ vid: 81, angle: 'ledger', causes: PARTY, text: 'A person\'s position in the town was advanced by the party\'s hand.' }),
+    Object.freeze({ vid: 82, angle: 'street', causes: PARTY, text: 'Somebody here stands further along than they did, and the party carried them.' }),
+  ]),
+  impose_condition: Object.freeze([
+    Object.freeze({ vid: 83, angle: 'ledger', causes: PARTY, text: 'Something new settled on the town by the party\'s hand.' }),
+    Object.freeze({ vid: 84, angle: 'street', causes: PARTY, text: 'The town is living under something it was not living under before, and it arrived with the party.' }),
+  ]),
+  inflame_relationship: Object.freeze([
+    Object.freeze({ vid: 85, angle: 'ledger', causes: PARTY, text: 'The quarrel between the two places was sharpened by the party\'s hand.' }),
+    Object.freeze({ vid: 86, angle: 'street', causes: PARTY, text: 'Whatever the party did out there, the two of them stand further apart for it.' }),
+  ]),
+  name_attacker: Object.freeze([
+    Object.freeze({ vid: 87, angle: 'ledger', causes: PARTY, text: 'The force behind the trouble was named at last, by the party\'s hand.' }),
+    Object.freeze({ vid: 88, angle: 'street', causes: PARTY, text: 'Somebody finally put a name to whoever is doing this, and the name came from the party.' }),
+  ]),
+  remove_npc: Object.freeze([
+    Object.freeze({ vid: 89, angle: 'ledger', causes: PARTY, text: 'A person was taken out of the town\'s affairs altogether by the party\'s hand.' }),
+    Object.freeze({ vid: 90, angle: 'street', causes: PARTY, text: 'One of the town\'s own is not in the reckoning any more, and the party is the reason.' }),
+  ]),
+  resolve_stressor: Object.freeze([
+    Object.freeze({ vid: 91, angle: 'ledger', causes: PARTY, text: 'The trouble that had its grip on the town was ended by the party\'s hand.' }),
+    Object.freeze({ vid: 92, angle: 'street', causes: PARTY, text: 'Whatever had been gnawing at the place, the party finished it, and the town knows whom to thank.' }),
+  ]),
+  undermine_faction: Object.freeze([
+    Object.freeze({ vid: 93, angle: 'ledger', causes: PARTY, text: 'A faction\'s standing here was cut down by the party\'s hand.' }),
+    Object.freeze({ vid: 94, angle: 'street', causes: PARTY, text: 'One of the town\'s factions lost ground, and the party is why.' }),
+  ]),
+  worsen_stressor: Object.freeze([
+    Object.freeze({ vid: 95, angle: 'ledger', causes: PARTY, text: 'The trouble was deepened by the party\'s hand, whether or not that was the intent.' }),
+    Object.freeze({ vid: 96, angle: 'street', causes: PARTY, text: 'What was bad got worse after the party passed through, and the town noticed.' }),
+  ]),
+});
+
+/**
  * EVERY POOL OF THIS CORPUS, addressed the way the reader draws it: block id to pool key
  * to variants. The reader and the cause walker both enumerate THIS, so a pool added
  * without an address is a pool neither of them can reach, and a pool added with one is
@@ -236,9 +371,11 @@ export const DECREE_FOLLOWS_FROM_POOL = Object.freeze([
  * @type {Readonly<Record<string, DecreeProseBlock>>}
  */
 export const DECREE_PROSE_BLOCKS = Object.freeze({
+  'DEC-EVENT': DECREE_EVENT_POOLS,
   'DEC-FOLLOWS': Object.freeze({ '*': DECREE_FOLLOWS_FROM_POOL }),
   'DEC-FORM': DECREE_FORM_POOLS,
   'DEC-HAND': DECREE_HAND_POOLS,
   'DEC-OVERRIDE': DECREE_OVERRIDE_POOLS,
+  'DEC-PARTY': DECREE_PARTY_DEED_POOLS,
   'DEC-STANDING': DECREE_STANDING_POOLS,
 });
