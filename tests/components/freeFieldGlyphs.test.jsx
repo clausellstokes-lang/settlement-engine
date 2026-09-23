@@ -1,7 +1,12 @@
 /** @vitest-environment jsdom */
 /**
- * freeFieldCoverage.test.jsx — EM-D2's arms over FreeField's SECOND report: the
+ * freeFieldGlyphs.test.jsx — EM-D2's arms over FreeField's SECOND report: the
  * characters the printed dossier's eight embedded faces cannot draw.
+ *
+ * ⛔ THE BASENAME CARRIES NO INVARIANT WORD, for the same reason fontCmap.test.js's
+ * does not: `NAME_PATTERN` in tests/lint/mutationCoverage.shared.mjs would enrol a
+ * `*Coverage.test.jsx` into the mutation-coverage spine and demand a register row
+ * from it. These five arms mount one leaf; they enumerate no invariant.
  *
  * ⭐ A NEW FILE RATHER THAN A WIDENING, and the reason is ownership, not taste.
  * FreeField's governing suite is tests/components/editFields.test.jsx, whose A7 pins the

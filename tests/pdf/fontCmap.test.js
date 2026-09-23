@@ -1,6 +1,14 @@
 /**
- * fontCoverage.test.js — EM-D2's arms over `src/pdf/lib/fontCoverage.js`, the cmap
+ * fontCmap.test.js — EM-D2's arms over `src/pdf/lib/fontCoverage.js`, the cmap
  * reader that tells a DM which characters the printed dossier cannot draw.
+ *
+ * ⛔ THE BASENAME CARRIES NO INVARIANT WORD, AND THAT IS THE NAME'S JOB. `NAME_PATTERN`
+ * in tests/lint/mutationCoverage.shared.mjs enrols any test file whose basename holds
+ * `coverage` (or census/scan/walker/parity/golden/...) into the mutation-coverage
+ * spine, which then owes a register row in scripts/mutation-coverage-manifest.json.
+ * This file is a UNIT BATTERY over one module, not an enumerated-invariant walker, so
+ * the honest cure is the one that module's own header points at -- `prefer fixing the
+ * name over widening the pattern`. The SUBJECT keeps its name; the test drops the word.
  *
  * ⭐ WRITTEN AND RUN BEFORE THE MODULE EXISTED. With the module absent this file cannot
  * collect, so no arm here was ever green before its subject was built; the gate batch
