@@ -560,6 +560,55 @@ describe('HB-1 — the chooser-totality partition and the named-domain checklist
     }
   });
 
+  test('⭐ U18 — a REGISTERED fork\'s declared vocabulary CONTAINS the words its own pin may name', async () => {
+    // ⛔ THE CONTRADICTION THIS CLOSES, AND IT WAS LIVE. A row can declare a vocabulary its
+    // module really exports and still be naming the WRONG words: EM-E0 (b) above resolves a
+    // NAME and is structurally blind to that. HBF-86 declared `SIEGE_FALL_ODDS_WORDS` — the
+    // world's honest READING of `pFall`, printed into the receipt — while the words a
+    // directive may actually pin are `SIEGE_VERDICT_BANDS`' four bands, which is what design
+    // §19 ruling 4 requires a pin to carry. The two lists are DISJOINT, and
+    // `tests/simulation/forkSitesConsult.test.js` case E4b-4 already proved every odds word
+    // is refused at the fold: the registry was advertising a seal nobody could ever stage.
+    // So this arm resolves the FORK rather than the name, for every fork that has one.
+    /** The words a vocabulary constant types, however it types them: a list, or an object
+     * whose KEYS are the words (`SIEGE_VERDICT_BANDS`) or whose VALUES are
+     * (`TRADITION_OUTCOME`). Reading only one side would pass vacuously on the other shape. */
+    const wordsOf = (/** @type {unknown} */ value) => (Array.isArray(value)
+      ? value.map(String)
+      : [...Object.keys(/** @type {object} */ (value)), ...Object.values(/** @type {object} */ (value))]
+        .filter((word) => typeof word === 'string'));
+    expect(wordsOf(['a']).concat(wordsOf({ b: true })).concat(wordsOf({ c: 'd' })),
+      'the reader is proved LIVE on all three shapes, or every membership below is vacuous')
+      .toEqual(['a', 'b', 'c', 'd']);
+
+    /** fork id -> the offence, collected then asserted once as a full list. */
+    const strangers = [];
+    const covered = [];
+    for (const row of VOCABULARY_ROWS) {
+      const own = /** @type {Record<string, unknown>} */ (await import(moduleUrl(moduleFile(row))));
+      for (const [name, value] of Object.entries(own)) {
+        if (!/_FORK$/.test(name)) continue;
+        const declared = /** @type {{ id?: unknown, outcomes?: unknown }} */ (value);
+        if (!declared || typeof declared !== 'object' || declared.id !== row.forkId) continue;
+        covered.push(`${row.forkId}:${name}`);
+        const words = wordsOf(own[String(row.actionVocabulary)]);
+        for (const outcome of /** @type {readonly string[]} */ (declared.outcomes)) {
+          if (!words.includes(outcome)) {
+            strangers.push(`${row.forkId} may be pinned to "${outcome}", which ${row.actionVocabulary} does not type`);
+          }
+        }
+      }
+    }
+    expect(strangers, 'a registered fork\'s pin words must be typed by the vocabulary its own'
+      + ' registry row declares, or the row advertises a seal whose words the fold refuses;'
+      + ' this is the full offender list').toEqual([]);
+    // ⭐ AND THE SWEEP IS NOT EMPTY. The two forks that carry a registered `*_FORK` constant
+    // today are named, so a fork that loses its constant reds here instead of dropping
+    // silently out of the loop above and leaving this arm green over nothing.
+    expect(covered.sort(), 'the registered-fork sweep found nothing to check')
+      .toEqual(['HBF-85:TRADITION_FORK', 'HBF-86:SIEGE_FORK']);
+  });
+
   test('⭐ EM-E0 (c) — the totality figures RE-DERIVED: the registry, the defer list and the registration\'s own split', () => {
     // Every number here is a QUERY, and each one is exact in both directions so that moving it
     // is a reviewable act. The registration's split is pinned SEPARATELY from DEFER_CEILING

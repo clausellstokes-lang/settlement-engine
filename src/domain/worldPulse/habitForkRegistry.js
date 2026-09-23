@@ -682,8 +682,8 @@ export const HABIT_FORK_REGISTRY = Object.freeze([
   fork({
     forkId: 'HBF-86', module: 'src/domain/worldPulse/warSiegeVerdict',
     symbol: 'resolveSiegeVerdict', discovery: 'checklist', disposition: 'DEFER',
-    actionVocabulary: 'SIEGE_FALL_ODDS_WORDS',
-    reason: 'SURVEY U-51 - THE SIEGE VERDICT\'S ONE ROLL, reached only after a DETERMINISTIC feasibility gate rules the matchup plausible; everything else resolves with NO roll, which is why a thorpe can never storm a fortified city on a lucky number. ⭐ THE VOCABULARY IS DECLARED: this module types its own reading of the fall probability and prints that word into the verdict\'s receipt, so the four words are the fork\'s own',
+    actionVocabulary: 'SIEGE_VERDICT_BANDS',
+    reason: 'SURVEY U-51 - THE SIEGE VERDICT\'S ONE ROLL, reached only after a DETERMINISTIC feasibility gate rules the matchup plausible; everything else resolves with NO roll, which is why a thorpe can never storm a fortified city on a lucky number. ⭐ THE VOCABULARY IS DECLARED, AND SINCE U18 IT IS THE ROLL\'S BANDS RATHER THAN ITS READING (the chair\'s judgment 265 (e)): SIEGE_VERDICT_BANDS types the four bands this roll writes and the direction each one implies, which is exactly what design §19 ruling 4 requires a pin to carry. ⚠ SIEGE_FALL_ODDS_WORDS, which this row named until U18, is the world\'s honest READING of the fall probability and is printed into the receipt; a directive naming one of those four words is REFUSED at the fold, so the row was declaring a vocabulary no pin could ever use',
     closeOwed: 'grade a verdict against what the taken or held town then cost the hand that holds it. ⛔ Design §19 rulings 3 and 4 both require a pin here to carry the BAND with the verdict, or the receipt would explain a draw that never happened',
   }),
 ]);
