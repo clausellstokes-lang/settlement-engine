@@ -49,6 +49,47 @@
  * ride the dossier's own cards, which are not this member's files. That is a scope line,
  * recorded, and it is why `subjectOf` returns null rather than guessing when a card's
  * collection is empty: the pencil is then rendered and disabled, never absent.
+ *
+ * ⭐ THE PAGE OF DECREES IS MOUNTED AT THE FOOT (EM-D3c, design §2.5's registry row: "At
+ * the dossier's foot, in the tome's idiom"). EM-D3 built that page as a pure container
+ * whose header says the mount is this member's, behind the tier gate this file reads; so
+ * the page hangs below the register, inside the SAME `admitted !== true` refusal, and this
+ * file is its one importer anywhere under `src/`.
+ *
+ * ⛔ AND THE MOUNT IS THE ONLY PLACE THE PAGE'S FACTS COME FROM. The page imports nothing
+ * from the store (ARCH §28), so everything it cannot honestly know is bound HERE from the
+ * slice's own readers — `selectDecrees`, `selectGuards`, and `DECREE_ACTIONS`' two registry
+ * verbs bound with `useStore`'s get/set exactly as EM-D1 bound `applyPlainEditIntent`. No
+ * request is re-shaped on the way: the page hands `commitRegistry` its own `{saveId,
+ * entryId, ...}` and this file passes the landed action through.
+ *
+ * ⛔ THREE OF THE PAGE'S SEAMS ARE HANDED NOTHING, AND EACH ABSENCE IS A MEASUREMENT.
+ *   · `advanceControl` — the realm owns the Advance control (`WorldMapToolbar.jsx`'s
+ *     `handleAdvanceRealm`, drawn only while a campaign is active) and this leaf is the
+ *     dossier's. Minting a second one here would be a second advance path; reaching the
+ *     realm's would drag the map volume into the editor's chunk. So the slot stays empty
+ *     and the page draws nothing in it, which is its own declared behaviour.
+ *   · `rewindLimit` — the estate's cap is the advance session's own `PULSE_UNDO_CAP`, a
+ *     MODULE-PRIVATE const with no export. Re-typing the number here would be a second
+ *     home for one fact, so the page is told nothing and states the session fact without
+ *     a figure, which is the branch it already carries.
+ *   · `onGuardOffer` — design §2.7's offers are WRITES and neither writer exists at this
+ *     tip (EM-C1 mints no override verb, `DECREE_ACTIONS` carries none), so the offers
+ *     render as words. An offer with no writer is words, not a control.
+ *
+ * ⛔ THE VERDICT IS THE SLICE'S OWN, AT ITS DEFAULT RULE SET. `selectGuards(state)` with no
+ * rule set is the engine's honest empty answer. Composing EM-C3's `makeGuardRuleSet` would
+ * put a SECOND `src/domain/edit/` edge on this file, which its own arm convicts (the edge
+ * set is exactly the declaration table), and would need the two generator writers injected
+ * from a leaf that reaches no generator. The wiring lights the day a rule set arrives.
+ *
+ * ⛔ REOPEN OPENS THE DOOR AND WRITES NOTHING (design §2.5a; EM-D3's own header). The click
+ * reopens the entry's own card with its values, so this file binds the seam to the door on
+ * the record row the entry's op TARGETS. It does not call `DECREE_ACTIONS.reopen`: that verb
+ * takes the op the DM edited, and calling it on the click would write an entry's op back
+ * over itself and claim a change nobody made. The other half of §2.5a — SAVE returning the
+ * entry to exactly its place — needs the door to carry the entry id into `reopenDecree`,
+ * which lives in the slice and in `CardEditorDialog.jsx`, neither of them this file.
  */
 import { useId, useState } from 'react';
 
@@ -56,7 +97,8 @@ import { t } from '../../copy/index.js';
 import { savePhase } from '../../domain/campaign/canon.js';
 import { declarationsFor, isEditableCard } from '../../domain/edit/fieldDeclarations.js';
 import {
-  applyPlainEditIntent, EDITOR_MODE_OFF, EDITOR_MODE_PREF_KEY, selectEditorMode,
+  applyPlainEditIntent, DECREE_ACTIONS, EDITOR_MODE_OFF, EDITOR_MODE_PREF_KEY,
+  selectDecrees, selectEditorMode, selectGuards,
 } from '../../store/editSlice.js';
 import { useStore } from '../../store/index.js';
 import { counterpartiesOf, mintPhantomIntent } from '../../store/phantomMintAction.js';
@@ -66,6 +108,7 @@ import Button from '../primitives/Button.jsx';
 import RefusalNotice from '../primitives/RefusalNotice.jsx';
 import { BORDER, GOLD, GOLD_TXT, INK, MUTED, sans, serif_, FS, SP } from '../theme.js';
 import CardEditorDialog from './CardEditorDialog.jsx';
+import DecreeRegistryPage from './DecreeRegistryPage.jsx';
 
 /** @typedef {import('../../domain/edit/types.js').FieldDeclaration} FieldDeclaration */
 
@@ -257,6 +300,41 @@ function subjectOf(record, cardType) {
 }
 
 /**
+ * ⭐ THE RECORD ROW ONE DECREE POINTS AT, or null when the record holds none.
+ *
+ * A decree's op names its subject as `{ kind, id }` (ARCH §2's `Op.target`), and `kind` is
+ * the CARD TYPE — the same word `declarationsFor` is keyed by — so the row is found in that
+ * card's own collection rather than guessed. A card whose rows carry no `[]` has exactly one
+ * subject, the settlement itself, which is `subjectOf`'s own reading one function up.
+ *
+ * `null` is a real answer: the row may have been renamed away or withdrawn from the
+ * catalogue since the decree was staged, and the reopen seam then opens no door at all
+ * rather than opening one on a subject that is not there.
+ * @param {unknown} record @param {unknown} op
+ * @returns {{cardType: string, subject: CardSubject}|null}
+ */
+function targetSubjectOf(record, op) {
+  if (record === null || typeof record !== 'object' || op === null || typeof op !== 'object') return null;
+  const target = /** @type {{target?: unknown}} */ (op).target;
+  if (target === null || typeof target !== 'object') return null;
+  const { kind, id } = /** @type {{kind?: unknown, id?: unknown}} */ (target);
+  if (typeof kind !== 'string' || !isEditableCard(kind)) return null;
+  const path = collectionOf(declarationsFor(kind));
+  if (path === '') {
+    const whole = /** @type {Record<string, unknown>} */ (record);
+    return { cardType: kind, subject: { id: String(whole.id ?? ''), values: whole } };
+  }
+  const rows = readPath(record, path);
+  if (!Array.isArray(rows)) return null;
+  const wanted = String(id ?? '');
+  const found = rows.filter((row) => row !== null && typeof row === 'object'
+    && String(/** @type {Record<string, unknown>} */ (row).id ?? '') === wanted);
+  if (found.length === 0) return null;
+  const values = /** @type {Record<string, unknown>} */ (found[0]);
+  return { cardType: kind, subject: { id: wanted, values } };
+}
+
+/**
  * The values the door shows for one subject, as the strings EM-D0e's controls take.
  * @param {CardSubject|null} subject @param {readonly FieldDeclaration[]} rows
  * @returns {Record<string, string>}
@@ -266,6 +344,35 @@ function valuesOf(subject, rows) {
   const out = {};
   for (const row of rows) out[row.field] = String(subject?.values?.[row.field] ?? '');
   return out;
+}
+
+/**
+ * ⭐ WHERE ONE DECREE'S CHRONICLE LINE LIVES — EM-E2's OWN REFERENCE, IN THE ESTATE'S OWN
+ * ANCHOR FORM.
+ *
+ * EM-E2 mints a decree line's reference in exactly one place and in exactly one way: the
+ * entry's RECORDED reference when it carries one, and `decree:` plus the decree's own id
+ * when it does not. This leaf re-spells that grammar rather than importing the prose leaf,
+ * which has zero importers under `src/` on purpose and would drag the prose volume into the
+ * editor's chunk; the re-spelling is safe because the two are held EQUAL by an arm that
+ * drives the real producer over the same row, so a change there reds here.
+ *
+ * ⭐ ONE READER, TWO SHAPES, ONE ADDRESS. A registry entry carries its id as `id`; the
+ * tick's receipt carries the same decree's id as `decreeId`. Both reach the same anchor, so
+ * the page of decrees and the advance report link a reader to one place.
+ * @param {unknown} row one registry entry, or one applied decree's cause
+ * @returns {string} the anchor, or the empty string when the row names no decree
+ */
+function chronicleHrefFor(row) {
+  if (row === null || typeof row !== 'object') return '';
+  const bag = /** @type {Record<string, unknown>} */ (row);
+  const recorded = typeof bag.chronicleRef === 'string' && bag.chronicleRef !== ''
+    ? bag.chronicleRef : '';
+  if (recorded !== '') return `#chronicle-${recorded}`;
+  const id = typeof bag.id === 'string' && bag.id !== ''
+    ? bag.id
+    : (typeof bag.decreeId === 'string' ? bag.decreeId : '');
+  return id === '' ? '' : `#chronicle-decree:${id}`;
 }
 
 /**
@@ -291,6 +398,17 @@ export default function EditModeShell() {
   const admitted = useStore(
     (state) => (typeof state.canEditSettlement === 'function' ? state.canEditSettlement() : false),
   );
+  // THE PAGE OF DECREES, read through the slice's own readers. `selectDecrees` returns ONE
+  // shared frozen empty list for a world that was never edited, and `selectGuards` is
+  // memoized on the registry and the record, so neither read makes a new value per render.
+  const saveId = useStore((state) => state.activeSaveId);
+  const decrees = useStore((state) => selectDecrees(state));
+  const verdict = useStore((state) => selectGuards(state));
+  // ⛔ IS THIS SETTLEMENT IN THE REALM? The estate answers that with ONE predicate, and this
+  // is its second reader: `isSettlementClockBound` is what `SettlementDossierHero` asks
+  // before it offers the gold "Send it to the Realm" rung, so the page suppresses the rung
+  // on exactly the settlements the dossier already stops offering it to.
+  const clockBound = useStore((state) => state.isSettlementClockBound);
   /** @type {[{cardType: string, subject: CardSubject, create: boolean}|null, Function]} */
   const [open, setOpen] = useState(null);
 
@@ -306,6 +424,27 @@ export default function EditModeShell() {
   // door hands over the declared values and knows nothing about records, pools or saves.
   /** @param {Record<string, string>} values */
   const mint = (values) => mintPhantomIntent(useStore.getState, useStore.setState, values);
+
+  // ⛔ THE TWO REGISTRY VERBS THE PAGE WRITES WITH, each bound by NAME off EM-C4b's own
+  // declaration and each spelled where a scanner can see it. The page's exported
+  // `REGISTRY_ACTION_NAMES` is exactly this pair, pinned against the slice's declaration by
+  // EM-D3's own arm, so a verb that grew a control and no binding reds there rather than
+  // failing silently here. The request travels VERBATIM: `commitRegistry` reads the same
+  // `{saveId, entryId, ...}` the page built.
+  /** @type {Readonly<Record<string, (request: object) => unknown>>} */
+  const decreeActions = {
+    reorder: (request) => DECREE_ACTIONS.reorder(useStore.getState, useStore.setState, request),
+    withdraw: (request) => DECREE_ACTIONS.withdraw(useStore.getState, useStore.setState, request),
+  };
+
+  // ⛔ REOPEN IS THE DOOR, NOT A WRITE (see the header). The entry's own card and the record
+  // row its op targets, or nothing at all when the record no longer holds that row.
+  /** @param {{op?: unknown}} entry */
+  const reopenEntry = (entry) => {
+    const found = targetSubjectOf(settlement, entry?.op);
+    if (found === null) return;
+    setOpen({ cardType: found.cardType, subject: found.subject, create: false });
+  };
 
   // The forge's gold on the tome's own ground (design §3). The halo and the umber belong
   // to the POP-UP alone (§3 halo item 5), so nothing here carries either.
@@ -463,6 +602,19 @@ export default function EditModeShell() {
 
       <h3 style={head}>{t('edit.shell.derivedHead')}</h3>
       {derived.map((cardType) => provenanceRow(cardType))}
+
+      {/* ⭐ THE PAGE OF DECREES AT THE FOOT (EM-D3c). It carries its own heading, so the
+          register mints no second one, and it is the LAST thing the tome shows before Done
+          — a page after the cards, which is design §2.5's own placement. */}
+      <DecreeRegistryPage
+        saveId={String(saveId ?? '')}
+        decrees={decrees}
+        verdict={verdict}
+        inCampaign={!!(saveId && typeof clockBound === 'function' && clockBound(saveId))}
+        actions={decreeActions}
+        chronicleHref={chronicleHrefFor}
+        onReopen={reopenEntry}
+      />
 
       <Button variant="primary" size="sm" onClick={leaveMode}>{t('edit.shell.done')}</Button>
 
