@@ -41,6 +41,7 @@ import { describe, expect, it } from 'vitest';
 
 import { commentsOnly } from '../helpers/codeOnlySource.js';
 import { compareCodepoint } from '../../src/domain/deterministicSort.js';
+import { GUARD_RULES, rulesFor } from '../../src/domain/edit/guardRules.js';
 import { OP_TYPES } from '../../src/domain/edit/operations.js';
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), '../..');
@@ -152,6 +153,11 @@ describe('EM-B1b — op guard coverage is declared, visible and never silently e
       + ' in the catalogue file').toContain('set-field');
     expect(Object.keys(OP_TYPES).length, 'the composed catalogue loaded, or the declaration'
       + ' claim below is a claim about an empty map').toBeGreaterThan(0);
+    // AND THE DERIVED READER, which C7's table below is a claim about (EM-C3, judgment 251): an
+    // absent rulesFor, an empty rule roster or one guard-free row each make that table vacuous.
+    expect([typeof rulesFor, GUARD_RULES.length > 0, Object.keys(OP_TYPES).filter((type) => rulesFor(type).length === 0)],
+      'the DERIVED coverage reader is live, and EVERY composed row reaches a NON-EMPTY rule set')
+      .toEqual(['function', true, []]);
 
     expect(coverageProblems(OP_TYPES), 'EVERY row of the composed catalogue declares guards as'
       + ' an ARRAY and guardsStated as a NON-EMPTY string. ARCH §5 states coverage even when it'
@@ -205,14 +211,29 @@ describe('EM-B1b — op guard coverage is declared, visible and never silently e
       + ' guard is wired is reporting one thing and doing another')
       .toEqual(['send-force: guards is populated while guardsStated still claims none is wired']);
 
-    // THE CURRENT STATE, PINNED WITH ITS REASON rather than asserted as a bare absence. Guard
-    // coverage is LEGITIMATELY empty at this wave because the rules live in EM-C3, so this is
-    // what keeps the instrument honest instead of vacuous: EM-C3's population moves both
-    // figures visibly, and the arm above is what refuses a rule that cannot fire when it does.
+    // THE CURRENT STATE, PINNED WITH ITS REASON rather than asserted as a bare absence — and
+    // from EM-C3 (the chair's judgment 251) the reason is a RULING rather than a wave's delay.
+    // ⭐ COVERAGE IS DERIVED FROM THE RULES AND IS NEVER AUTHORED ON A ROW, so `guards: []` and
+    // its `guardsStated` sentence are ARCH §5's "stated when empty" PERMANENTLY, not until some
+    // later member populates them. The measurement that closed the population: `OP_TYPES` is a
+    // frozen module-scope literal whose rows reach a rule function only if `operations.js`
+    // imports `guardRules.js` — which the shared rules-interface clause forbids in BOTH members
+    // — `.guards` has ZERO runtime readers under `src/`, and `rulesFor(type)` is already the one
+    // home of the applies-to fact, so a populated array would be a SECOND enumeration of it.
+    // The table below asserts that derivation instead of a copy of it. Do not re-open this.
     const populated = Object.keys(OP_TYPES).filter((type) => OP_TYPES[type].guards.length > 0);
-    expect(populated, 'not one row carries a guard rule at this wave, and that is the declared'
-      + ' state rather than an oversight: the rules are EM-C3\'s and none is authored in the'
-      + ' catalogue').toEqual([]);
+    expect(populated, 'not one row carries a guard rule, and that is the declared state rather'
+      + ' than an oversight: the rules are EM-C3\'s, coverage is derived from them, and none is'
+      + ' authored in the catalogue').toEqual([]);
+    // THE DERIVED COVERAGE TABLE, IN BOTH DIRECTIONS and with every set derived or imported: the
+    // rows reaching FIVE rules are exactly the op types the one NARROWED rule names (read off
+    // GUARD_RULES, not re-typed), the other nineteen reach FOUR, and the two limbs partition the
+    // composed catalogue with nothing left over and nothing counted twice.
+    const atFive = Object.keys(OP_TYPES).filter((type) => rulesFor(type).length === 5).sort(compareCodepoint);
+    const atFour = Object.keys(OP_TYPES).filter((type) => rulesFor(type).length === 4).sort(compareCodepoint);
+    expect([atFive, atFour.length, [...atFive, ...atFour].sort(compareCodepoint)],
+      'the derived coverage table, in both directions, and the partition it rests on')
+      .toEqual([GUARD_RULES.flatMap((rule) => rule.appliesTo ?? []).sort(compareCodepoint), 19, Object.keys(OP_TYPES).sort(compareCodepoint)]);
     const unexplained = Object.keys(OP_TYPES)
       .filter((type) => !EMPTINESS_CLAIM.test(OP_TYPES[type].guardsStated));
     expect(unexplained, 'and every one of them SAYS SO in its own sentence, which is the half of'

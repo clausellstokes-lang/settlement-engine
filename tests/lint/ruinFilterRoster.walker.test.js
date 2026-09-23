@@ -447,7 +447,13 @@ describe('ruin-filter roster ratchet (structural-prevention Pattern 2)', () => {
     // name-lookup/affordance shape (the `npc.role` pool reads the record's own roster as a
     // DM selection list and credits nothing). Read from this arm's own failure message
     // ("expected 94 to be 93"), never computed: a re-measurement, not a ceiling raise.
-    expect(readers.length).toBe(94);
+    // ⭐ 94 → 95 WITH EM-C3's `src/domain/edit/guardRules.js`, and it takes NO exempt row: the
+    // prerequisite rule judges a decree against the STANDING roster, so the leaf reads
+    // `.institutions` through `liveInstitutions()` and enrols here COMPLIANT. A decree must not
+    // rest on a ruin — a calamity-flattened wall cannot satisfy a citadel's gate — which is this
+    // walker's own class arriving as a guard rather than as a defect. Read from this arm's own
+    // failure message ("expected 95 to be 94"), never computed: a re-measurement, not a raise.
+    expect(readers.length).toBe(95);
   });
 
   test('exempt honesty: every exempt entry still reads .institutions and is not already compliant', () => {
