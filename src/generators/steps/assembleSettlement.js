@@ -180,6 +180,12 @@ registerStep('assembleSettlement', {
     _config: { ...config },
   };
 
+  // §22 ruling 1 + §22.1 correction 1: the settlement's NAME is a HELD fact. The mint above
+  // RUNS at its exact draw position and its result is DISCARDED when the name is held - the two
+  // draws it spends are on the assembly step's SHARED ambient stream, which the pressure
+  // sentence and the arrival scene read 1-3 draws later. Skipping them moves both in 63/63.
+  settlement.name = chooseOrPin(pins, 'name', () => settlementName);
+
   // F8: re-render each stress entry's summary with the real settlement name.
   // resolveStress baked a PROVISIONAL empty-name summary (leading-space prose
   // like " is under active siege…") and stashed the sole rng-derived choice
@@ -195,7 +201,7 @@ registerStep('assembleSettlement', {
     for (const e of entries) {
       if (e && typeof e === 'object'
           && Object.prototype.hasOwnProperty.call(e, 'summaryRoll')) {
-        e.summary = renderStressSummary(e.type, settlementName, e.summaryRoll);
+        e.summary = renderStressSummary(e.type, settlement.name, e.summaryRoll);
         delete e.summaryRoll;
       }
     }
