@@ -39184,6 +39184,865 @@
       ],
       "retiredSymbols": [],
       "retiredSymbolsNote": "EMPTY BY MEASUREMENT, NOT OMISSION (pre-proof brief step 10, run at 141a1d775). The only requiredSymbols row on a file this packet EDITS is src/domain/factionRename.js :: 'const NPC_HOMES'; the MODIFY prepends 'export ', so the verbatim text survives as a substring of 'export const NPC_HOMES' and the row still resolves after the build. NPC_HOMES occurs at nine sites, ALL inside factionRename.js itself, plus one comment mention in src/store/settlementRenameHelpers.js:402; NO test anywhere names it (git grep -n NPC_HOMES -- src tests scripts docs). R2's export therefore retires nothing and discharges no other packet's row."
+    },
+    {
+      "id": "EM-R1",
+      "status": "READY",
+      "packetPath": "docs/implementation/packets/settlement-editor/EM-R1.md",
+      "verifiedBase": "ec4cd1c2d5aebbda4df788fd4e600252adb81b5c",
+      "changeManifest": [
+        {
+          "action": "MODIFY",
+          "path": "src/generators/pipeline.js",
+          "symbol": "runPipeline"
+        },
+        {
+          "action": "MODIFY",
+          "path": "src/generators/steps/assembleInstitutions.js",
+          "symbol": "assembleInstitutions"
+        },
+        {
+          "action": "MODIFY",
+          "path": "src/generators/steps/generatePower.js",
+          "symbol": "generatePower"
+        },
+        {
+          "action": "CREATE",
+          "path": "tests/lint/heldKeyWriterCensus.walker.test.js"
+        },
+        {
+          "action": "TEST",
+          "path": "tests/generators/pipelinePinnedMode.test.js"
+        },
+        {
+          "action": "REGISTER",
+          "path": "scripts/mutation-coverage-manifest.json",
+          "rowKey": "invariants['tests/lint/heldKeyWriterCensus.walker.test.js']"
+        }
+      ],
+      "requiredSymbols": [
+        {
+          "path": "src/generators/pipeline.js",
+          "symbol": "export function runPipeline",
+          "_note": "THE RUNNER THIS MEMBER EDITS AND MUST PRESERVE. The signature and the options contract are untouched: the two clones are taken inside the body, after the options.pins type guard and before the step loop. count 1. NO LINE ADDRESS IS CARRIED HERE (judgment 124: a live packet's own _note addresses are a line-addressed register, and this member shifts lines in this file)."
+        },
+        {
+          "path": "src/generators/pipeline.js",
+          "symbol": "const _PINS_KEY = '__pins';",
+          "_note": "THE RESERVED CHANNEL, EM-B2a2's landed row, kept BYTE-IDENTICAL. It sits above every line this member adds, so EM-B2a2's own cited address does not move. count 1."
+        },
+        {
+          "path": "src/generators/pipeline.js",
+          "symbol": "export function chooseOrPin(pins, key, draw)",
+          "_note": "EM-B2a2's primitive. THE PRIMITIVE STILL CLONES NOTHING: the clone is the runner's, which is why pipelinePinnedMode's landed by-reference assertion stays green and true. count 1."
+        },
+        {
+          "path": "src/generators/pipeline.js",
+          "symbol": "const prevRng = setActiveRng(stepRng);",
+          "_note": "EM-P0's ambient binding; the clone is taken outside every setActiveRng window, so no stream moves. count 1."
+        },
+        {
+          "path": "src/generators/pipeline.js",
+          "symbol": "const stepOrder = getStepOrder();",
+          "_note": "The order the clone must precede: this member's insert goes above this line, so the bag is the runner's before any step is named. count 1."
+        },
+        {
+          "path": "src/generators/steps/assembleInstitutions.js",
+          "symbol": "provides: ['institutions', 'catalogForTier', 'generationRepairs'],",
+          "_note": "EM-B2a3's chooser list, owed whole and untouched. count 1."
+        },
+        {
+          "path": "src/generators/steps/generatePower.js",
+          "symbol": "provides: ['powerIntent', 'powerStructure'],",
+          "_note": "The second chooser list, untouched. NOTE: powerIntent is a CHOOSER but is absent from RECORD_CLASSES, so the held-key census cannot reach it and does not name it; the recordPath-less chooser is EM-R1b's subject (judgment 182a). count 1."
+        },
+        {
+          "path": "src/generators/steps/assembleInstitutions.js",
+          "symbol": "registerStep('assembleInstitutions'",
+          "_note": "EM-A1's declaration row; the registration is untouched. count 1."
+        },
+        {
+          "path": "src/generators/steps/generatePower.js",
+          "symbol": "registerStep('generatePower'",
+          "_note": "EM-A1's declaration row; the registration is untouched. count 1."
+        },
+        {
+          "path": "src/domain/edit/recordRegister.js",
+          "symbol": "export const RECORD_CLASSES",
+          "_note": "THE HELD DENOMINATOR, IMPORTED. EM-R0a's landed register is the walker's only source of held keys; the walker re-types no list, which is the shape contractTestAntiVacuity Rule 2 convicts. count 1."
+        },
+        {
+          "path": "src/domain/edit/recordRegister.js",
+          "symbol": "export const SAVED_ONLY_KEYS",
+          "_note": "The SAVED_ONLY keys, subtracted from the denominator so the walker's 7 is derived rather than declared. MEASURED at c69d16a5d: SAVED_ONLY_KEYS holds 4 keys, THREE of which are classed HELD (neighbourNetwork, interSettlementRelationships, crossSettlementConflicts) and are the three the walker subtracts; RECORD_CLASSES holds 47 keys. count 1."
+        }
+      ],
+      "_retiredSymbols": [],
+      "acceptanceCases": [
+        {
+          "id": "A1",
+          "case": "the held denominator is imported, never re-typed (7 keys, both directions, empty-denominator floor)"
+        },
+        {
+          "id": "A2",
+          "case": "the STEP-LEVEL census is total both directions against the live getStepMeta (12 writer steps of 22)"
+        },
+        {
+          "id": "A3",
+          "case": "the FUNCTION-LEVEL roster is live and exact (11 rows) against the assembly step's own call surface, with a declared EXEMPT table"
+        },
+        {
+          "id": "A4",
+          "case": "the six classes are total, and every MIRROR row is proved to consult no pin"
+        },
+        {
+          "id": "A5",
+          "case": "the stream rule: exactly one function-level writer sits in its own named child stream (enrichNpcCoherence in 'npc-enrichment'); every other held writer is SHARED-STREAM"
+        },
+        {
+          "id": "A6",
+          "case": "the clone is at the runner, once, and both step files carry ZERO structuredClone (anchored negative, positive control, counterforce against the pre-member tree)"
+        },
+        {
+          "id": "A7",
+          "case": "THE LEAK AND THE CURE: the caller's record moves 0 of 63 through the runner, where the un-cloned control moves 42 of 63"
+        },
+        {
+          "id": "A8",
+          "case": "the bag is not the context (ctx.__pins[k] !== ctx[k]) and structuredClone preserves chooseOrPin's own-presence semantics"
+        }
+      ],
+      "checks": [
+        [
+          "npx",
+          "vitest",
+          "run",
+          "--pool=threads",
+          "--maxWorkers=2",
+          "tests/generators/pipelinePinnedMode.test.js",
+          "tests/generators/pipelinePinnedChoosers.test.js",
+          "tests/generators/pipelineContract.test.js",
+          "tests/generators/pipelineStrictMode.test.js",
+          "tests/generators/pipelineRngRestore.test.js",
+          "tests/generators/dataFlowContract.test.js",
+          "tests/generators/generationForkCensus.test.js",
+          "tests/generators/stepMetadataSync.test.js",
+          "tests/generators/institutionToggleReader.test.js"
+        ],
+        [
+          "npx",
+          "vitest",
+          "run",
+          "--pool=threads",
+          "--maxWorkers=2",
+          "tests/lint/heldKeyWriterCensus.walker.test.js",
+          "tests/lint/contractTestAntiVacuity.walker.test.js",
+          "tests/lint/recordRegisterTotality.walker.test.js",
+          "tests/lint/mutationCoverageManifest.test.js",
+          "tests/lint/editDeclarations.walker.test.js",
+          "tests/lint/generationForkRegistry.contract.test.js",
+          "tests/lint/worldGenerationClockSeam.walker.test.js",
+          "tests/lint/catalogTierGateParity.walker.test.js",
+          "tests/lint/settlementMapSurfaceAllowlist.walker.test.js",
+          "tests/lint/entropyRootCensus.walker.test.js",
+          "tests/lint/ruinFilterRoster.walker.test.js",
+          "tests/lint/tuningRegister.walker.test.js",
+          "tests/lint/proseNumerics.test.js",
+          "tests/lint/proseWiringCensus.walker.test.js",
+          "tests/lint/sourceCitationIntegrity.walker.test.js"
+        ],
+        [
+          "npx",
+          "vitest",
+          "run",
+          "--pool=threads",
+          "--maxWorkers=2",
+          "tests/domain/trace.coverage.test.js",
+          "tests/domain/customContentConsumerEvidence.walker.test.js"
+        ],
+        [
+          "npx",
+          "vitest",
+          "run",
+          "--pool=threads",
+          "--maxWorkers=2",
+          "tests/joins/mutationOrder.test.js",
+          "tests/joins/cascade.test.js",
+          "tests/joins/ports.test.js"
+        ],
+        [
+          "npx",
+          "vitest",
+          "run",
+          "--pool=threads",
+          "--maxWorkers=2",
+          "tests/kernel/prngForkLabelDelimiter.test.js"
+        ],
+        [
+          "npx",
+          "vitest",
+          "run",
+          "--pool=threads",
+          "--maxWorkers=2",
+          "tests/copy/voiceMechanics.test.js"
+        ],
+        [
+          "npx",
+          "vitest",
+          "run",
+          "--pool=threads",
+          "--maxWorkers=2",
+          "tests/property/generatorGoldenMaster.test.js",
+          "tests/property/dossierProseManifest.test.js"
+        ],
+        [
+          "node",
+          "scripts/implementation-packets.mjs",
+          "validate"
+        ]
+      ],
+      "_checksNote": "COMPUTED, not recalled (EM-PREAMBLE P7): every tests/ file that names one of this member's changed paths, one directory per argv array, MINUS tests/lint/sovereigntyLightingContract.walker.test.js (it reds by design under a train, and its presence in a sealed array means check:packet can never pass) and MINUS tests/build/generationWorkerLazy.test.js and tests/build/vendorPdfLazy.test.js (both carry skipIf(!requireDistRead) dist arms; a skipped arm proves no budget, and this member is not the train's byte-arm holder). Every file named was RE-VERIFIED to exist at c69d16a5d (0 missing; the CREATE itself correctly absent). The array ends with the validator.",
+      "_lightingDelta": {
+        "files": 1,
+        "parked": 0,
+        "credited": 1,
+        "titles": 8,
+        "suiteTitles": 2
+      },
+      "_deferredRows": [
+        "tests/lint/.lighting-census-baseline.json - an INTERIOR RED, delta only, refrozen by the chair at the train's terminal",
+        "docs/content/wiring-census.json - stamp.producerIndexFiles +0 against a live 1182, stamp.files UNMOVED, totals.* UNMOVED; regenerated by the chair at the terminal"
+      ],
+      "_mutationCoverageRowKey": "tests/lint/heldKeyWriterCensus.walker.test.js",
+      "_laneBranch": "em-t15-r1-<date>  (NOT a manifest key in the live estate: parsePacketHeader takes verifiedBranch FROM the packet's Verified base row, `<branch>` at `<sha>` - measured at this compile)",
+      "_collisionGroup": [
+        "src/generators/pipeline.js",
+        "tests/generators/pipelinePinnedMode.test.js",
+        "scripts/mutation-coverage-manifest.json"
+      ],
+      "_preproof": "RE-MEASURED at c69d16a5d (train EM-T14's COMPOSED tip) by an Opus PRE-PROOF seat, session cce01f87, 2026-09-22, under briefs/launch/PREPROOF-EM-T15-cce01f87.md. All 11 requiredSymbols count=1; the CREATE target ABSENT; the 22 LANDED requiredSymbols rows over the three src/ paths (19 at the compile; EM-B2a4 added 3) all resolve and none is a line this member edits, so _retiredSymbols stays empty.",
+      "_measuredAtPreproof": {
+        "readTip": "c69d16a5d",
+        "landedRequiredSymbolRowsOverTheThreeSrcPaths": 22,
+        "registeredEstate": {
+          "entries": 222,
+          "LANDED": 217,
+          "SUPERSEDED": 2,
+          "READY": 3,
+          "readyIds": [
+            "EM-R0d",
+            "EM-R0f",
+            "EM-R6"
+          ],
+          "intersectionWithThisMembersPaths": "none"
+        },
+        "mutationCoverageInvariants": 726,
+        "uncoveredBaseline": 186,
+        "wiringStampProducerIndexFiles": 1182,
+        "eagerFirstPaintModules": 270,
+        "workerStaticClosureFirstPartyModules": 222,
+        "entropyCreatePrngSites": {
+          "src/domain": 36,
+          "src": 47
+        },
+        "voiceBaseline": {
+          "tier": 5,
+          "file": "tests/copy/.voice-mechanics-generators-baseline.json",
+          "src/generators/pipeline.js": {
+            "em": 2,
+            "bang": 0
+          }
+        },
+        "effectiveLines": {
+          "src/generators/pipeline.js": 138,
+          "src/generators/steps/assembleInstitutions.js": 585,
+          "src/generators/steps/generatePower.js": 105
+        },
+        "lineCounts": {
+          "src/generators/steps/assembleInstitutions.js": 783,
+          "src/generators/steps/generatePower.js": 177,
+          "src/generators/pipeline.js": 290
+        },
+        "leakProbe": {
+          "bare": "42/63",
+          "preCloned": "0/63",
+          "bagAliasedToCtx": "63/63 in both modes"
+        },
+        "moduleScopeCwdRatchetPopulationCeiling": {
+          "tests/build": 30,
+          "tests/lint": 17,
+          "note": "EXACT IN BOTH DIRECTIONS; the CREATE spells the import.meta.url root so the population is UNMOVED and no row is owed"
+        }
+      },
+      "_byteArm": "NOT the byte-arm holder. This member names NO ceiling literal: WORKER_BUNDLE_CEILING_BYTES read 1396015 at the compile and 1395972 at c69d16a5d (judgment 187's buy-back), and EM-R0d's own comment states train EM-T14's terminal lowers it again. A SHRINK is predicted; the arm is toBeLessThanOrEqual.",
+      "_siblingPathFacts": "EM-R2 and EM-R4 each carry REGISTER scripts/mutation-coverage-manifest.json (row-keyed, TOOL-27). EM-R4's rowKey is distinct; EM-R2's capsule declares NO rowKey, which the placement must settle before EM-R2 rides one train beside this member. EM-R2/R3/R4/R5 pin symbols in src/generators/pipeline.js (chooseOrPin, _PINS_KEY, getStepOrder() {, _LEDGER_KEYS) - every one a declaration or module-scope const this member leaves byte-identical."
+    },
+    {
+      "id": "EM-R2",
+      "status": "READY",
+      "packetPath": "docs/implementation/packets/settlement-editor/EM-R2.md",
+      "verifiedBase": "ec4cd1c2d5aebbda4df788fd4e600252adb81b5c",
+      "_baseNote": "Left for the chair. Version 2 RE-MEASURED at c69d16a5d6462068cddf140b98129bbb66d80373 (train EM-T14's composed tip; worktree read-tip-em-t14, DETACHED, `git status --short` EMPTY before and after); version 1 was compiled at 91cc9ef5af563fc6c3808108e953594c1e106409. Nothing in the contract moved across that window: 13 of 13 requiredSymbols verbatim at count 1 and at the same lines, the CREATE target absent, the four MODIFY targets present, the four HOLDER_SOURCES rows UNMOVED under EM-R0d's landed edit, and the effective-line figures 762/163/156 unchanged. The preamble measured 125c693214235a81bf4f2b38506b621859a35e0325ff2ea58d335b4e0681a99d -- THE SIXTH AMENDMENT, NOW LANDED (train EM-T13's first commit 7bc14e003). The chair re-stamps the hash at placement.",
+      "_member": "The re-entry family EM-R, member 2. The roster is FINAL inside `enrichNpcCoherence` under a held pin; `ensureFactionStructuralNpcs` is gated as a producer; `relinkFactionMembers` is EXEMPT (the MIRROR, always runs); `powerLinkage`’s four linkage-only outputs are retired under a held roster.",
+      "changeManifest": [
+        {
+          "action": "MODIFY",
+          "path": "src/generators/narrativeGenerator.js",
+          "symbol": "generateCoherence",
+          "_note": "src/generators/narrativeGenerator.js :: generateCoherence — the coherence tail. The `npc-enrichment` child stream is entered through `chooseOrPin` keyed on `npcs`; `relinkFactionMembers` stays UNGATED."
+        },
+        {
+          "action": "MODIFY",
+          "path": "src/generators/steps/assembleSettlement.js",
+          "symbol": "registerStep('assembleSettlement'",
+          "_note": "src/generators/steps/assembleSettlement.js :: registerStep('assembleSettlement', …) — the step reads `ctx.__pins` once, hands it to `generateCoherence`, and gates `ensureFactionStructuralNpcs` on the same key."
+        },
+        {
+          "action": "MODIFY",
+          "path": "src/generators/steps/generatePopulation.js",
+          "symbol": "derivePopulation",
+          "_note": "src/generators/steps/generatePopulation.js :: derivePopulation — `powerLinkage` splits: the category index the TRACE reads stays outside the chooser; the four linkage-only outputs move inside the draw thunk."
+        },
+        {
+          "action": "MODIFY",
+          "path": "src/domain/prose/holderTable.js",
+          "symbol": "HOLDER_SOURCES",
+          "_note": "src/domain/prose/holderTable.js :: HOLDER_SOURCES — ADDRESSES ONLY (EM-PREAMBLE §P2.14 citation row, §P2.16 re-address): four live `cite:` rows, at `:169 :237 :238 :239` in that register's own line-keyed spelling (§P2.22's first exception), address lines this member's edit shifts. Re-measured at c69d16a5d under EM-R0d's LANDED edit of this file: all four UNMOVED. No kind, no `read` flag, no logic byte."
+        },
+        {
+          "action": "CREATE",
+          "path": "tests/generators/rosterFinalUnderHeldRoster.test.js",
+          "_note": "The battery: adds exactly 7 literal `it`s, one per sealed acceptance case, under ONE literal `describe`."
+        },
+        {
+          "action": "REGISTER",
+          "path": "scripts/mutation-coverage-manifest.json",
+          "rowKey": "invariants['tests/generators/rosterFinalUnderHeldRoster.test.js']",
+          "_note": "One row, `kind: \"rationale\"`, `ref: \"generators-tree-admitted-subject-coupled-2026-08-30\"` (`tests/lint/mutationCoverage.shared.mjs :: ADMITTED_TREE_REF`). The file executes the real registered pipeline and asserts on what came back, which is the admitted-tree class exactly. Touch no other row and no other key; `uncoveredBaseline` (186 at c69d16a5d) UNMOVED."
+        }
+      ],
+      "requiredSymbols": [
+        {
+          "path": "src/generators/pipeline.js",
+          "symbol": "export function chooseOrPin(pins, key, draw) {",
+          "_note": "src/generators/pipeline.js :: chooseOrPin — the shared primitive this member gates through; count 1, verbatim at c69d16a5d."
+        },
+        {
+          "path": "src/generators/pipeline.js",
+          "symbol": "const _PINS_KEY = '__pins';",
+          "_note": "src/generators/pipeline.js :: _PINS_KEY — the reserved runner channel `ctx.__pins` reads; count 1, verbatim at c69d16a5d. ⚠ EM-R1, this member's train-mate, MODIFIES this file: both rows are re-run verbatim at the train's base (§P9(e), judgment 134)."
+        },
+        {
+          "path": "src/generators/narrativeGenerator.js",
+          "symbol": "export const enrichNpcCoherence = (settlement) => {",
+          "_note": "src/generators/narrativeGenerator.js :: enrichNpcCoherence — the producer being gated; its body is untouched; count 1, verbatim at c69d16a5d."
+        },
+        {
+          "path": "src/generators/narrativeGenerator.js",
+          "symbol": "export const relinkFactionMembers = (factions, enrichedNpcs) => {",
+          "_note": "src/generators/narrativeGenerator.js :: relinkFactionMembers — the MIRROR: untouched and never gated; count 1, verbatim at c69d16a5d."
+        },
+        {
+          "path": "src/generators/narrativeGenerator.js",
+          "symbol": "function inCoherenceSubstream(rng, label, operation) {",
+          "_note": "src/generators/narrativeGenerator.js :: inCoherenceSubstream — the fork-by-label helper the lawful skip rests on; count 1, verbatim at c69d16a5d."
+        },
+        {
+          "path": "src/generators/narrativeGenerator.js",
+          "symbol": "'npc-enrichment',",
+          "_note": "src/generators/narrativeGenerator.js :: generateCoherence's npc-enrichment label — the child stream's LABEL. The skip is lawful only because this stream is named and forked; count 1, verbatim at c69d16a5d."
+        },
+        {
+          "path": "src/generators/factionRoles.js",
+          "symbol": "export function ensureFactionStructuralNpcs(",
+          "_note": "src/generators/factionRoles.js :: ensureFactionStructuralNpcs — the office appender this member gates AT ITS CALL SITE; its body is untouched; count 1, verbatim at c69d16a5d."
+        },
+        {
+          "path": "src/kernel/prng.js",
+          "symbol": "fork: (label) => createPRNG(`${seed}::${label}`),",
+          "_note": "src/kernel/prng.js :: fork — THE FORK LAW. A fork is a pure function of seed+label, which is why skipping one moves no sibling stream; count 1, verbatim at c69d16a5d. (Judgment 168 converted every line citation of this file to a symbol permanently.)"
+        },
+        {
+          "path": "src/domain/edit/recordRegister.js",
+          "symbol": "export const RECORD_CLASSES = Object.freeze({",
+          "_note": "src/domain/edit/recordRegister.js :: RECORD_CLASSES — EM-R0a's LANDED class register; the battery IMPORTS `npcs: HELD` rather than re-typing it; count 1, verbatim at c69d16a5d."
+        },
+        {
+          "path": "src/domain/edit/recordRegister.js",
+          "symbol": "export const CLASS_EXCEPTIONS = Object.freeze({",
+          "_note": "src/domain/edit/recordRegister.js :: CLASS_EXCEPTIONS — carries `factions[].members[]: MIRROR`, the ungated mirror this member leaves alone; count 1, verbatim at c69d16a5d."
+        },
+        {
+          "path": "src/generators/steps/assembleSettlement.js",
+          "symbol": "const coherenceUpdates = inAssemblySubstream(",
+          "_note": "src/generators/steps/assembleSettlement.js :: the `canonical-coherence` inAssemblySubstream call — the call this member widens by ONE argument; the assembly substream itself is unchanged; count 1, verbatim at c69d16a5d."
+        },
+        {
+          "path": "src/generators/steps/generatePopulation.js",
+          "symbol": "const roll = rng.random() * totalPower;",
+          "_note": "src/generators/steps/generatePopulation.js :: linkFactions — EM-P0's own required row, inside that function, which this member's split does not enter; count 1, verbatim at c69d16a5d."
+        },
+        {
+          "path": "src/domain/prose/holderTable.js",
+          "symbol": "export const HOLDER_SOURCES",
+          "_note": "src/domain/prose/holderTable.js :: HOLDER_SOURCES — the citation table whose four addresses this member re-takes; the declaration is byte-identical after the edit, which is also EM-R0d's own required row; count 1, verbatim at c69d16a5d."
+        }
+      ],
+      "retiredSymbols": [],
+      "_retiredSymbolsNote": "EMPTY, MEASURED. The four texts this member removes — `function powerLinkage(powerStructure) {`, `const power = powerLinkage(powerStructure);`, `export const generateCoherence = (settlement, coherenceRng = null) => {`, and assembleSettlement.js’s pipeline import line — are quoted by NO packet of docs/implementation/PACKET_MANIFEST.json (215 packets scanned) and by NO waiting packet in the chair’s packets-waiting/ (36 manifests scanned). `powerLinkage` appears in 0 files under tests/.",
+      "acceptanceCases": [
+        {
+          "id": "A1",
+          "case": "INERT WITH NO PINS — THE GOLDENS CANNOT MOVE. With no pin bag and with `pins: {}`, a stride of at least 40 rows of the golden master’s own 525-row corpus hashes byte-identical to the COMMITTED fixture, and `generateCoherence(s, rng)` equals `generateCoherence(s, rng, null)` on `npcs` and `factions`. `chooseOrPin` calls `draw()` when no pin is supplied, so fresh generation is byte-identical BY CONSTRUCTION and this arm is the proof rather than the promise. Its written-contract counterforce (§P6): the same arm against a PLANTED pin reds.",
+          "home": "tests/generators/rosterFinalUnderHeldRoster.test.js",
+          "authorizedBy": "§7's `CREATE` row for `tests/generators/rosterFinalUnderHeldRoster.test.js` (adds exactly 7 literal `it`s, one per sealed case)"
+        },
+        {
+          "id": "A2",
+          "case": "THE SKIP AND ITS EXACT SITE. With `{ npcs: <the record’s own roster> }` in the bag, `generateCoherence` returns the HELD ARRAY BY REFERENCE and the `npc-enrichment` child stream is never entered — asserted with a draw counter on the coherence stream, which reads 0 for that label and its pre-edit value for every other. THE ANTI-VACUITY ARM: at the read tip the enrichment runs unconditionally, so a bare \"the pinned run reproduces the record\" assertion is GREEN BEFORE THIS MEMBER EXISTS; this arm pins a DELIBERATELY ALTERED roster and asserts the output IS that roster.",
+          "home": "tests/generators/rosterFinalUnderHeldRoster.test.js",
+          "authorizedBy": "§7's `CREATE` row for `tests/generators/rosterFinalUnderHeldRoster.test.js` (adds exactly 7 literal `it`s, one per sealed case)"
+        },
+        {
+          "id": "A3",
+          "case": "THE FOUR SIBLING CHILD STREAMS ARE UNMOVED BY THE SKIP. `prominentRelationship`, `coherenceNotes`, `history.historicalCharacter` and `history.siegeNarrative` are byte-identical with and without the held roster on every corpus row, and the arm states WHY by executing the fork law: `fork(label)` equals `createPRNG(seed::label)`, so a child is a pure function of (seed, label). Its control is a PARENT draw, which does move the parent’s own next value.",
+          "home": "tests/generators/rosterFinalUnderHeldRoster.test.js",
+          "authorizedBy": "§7's `CREATE` row for `tests/generators/rosterFinalUnderHeldRoster.test.js` (adds exactly 7 literal `it`s, one per sealed case)"
+        },
+        {
+          "id": "A4",
+          "case": "THE MIRROR ALWAYS RUNS (§22.1 correction 2). With a held roster carrying an edited `role` and `title`, every `factions[].members[]` chip for that id carries the edit. THE ANCHORED NEGATIVE, with its positive control beside it: the chip a GATED mirror would leave still reads the pre-edit role, so the arm convicts a member that gated the mirror as readily as one that skipped the producer.",
+          "home": "tests/generators/rosterFinalUnderHeldRoster.test.js",
+          "authorizedBy": "§7's `CREATE` row for `tests/generators/rosterFinalUnderHeldRoster.test.js` (adds exactly 7 literal `it`s, one per sealed case)"
+        },
+        {
+          "id": "A5",
+          "case": "THE APPENDER MUST NOT ADD TO A FINAL ROSTER. With a held roster short an office-holder, the assembled roster is exactly the held length and carries no `generatedAs: \"faction_structural\"` entry this member minted. THE NON-VACUITY CONTROL, BOTH DIRECTIONS: the SAME input with NO pin appends N greater than zero (measured 2 to 8 across the tiers), so the arm cannot pass on an appender that was already dormant.",
+          "home": "tests/generators/rosterFinalUnderHeldRoster.test.js",
+          "authorizedBy": "§7's `CREATE` row for `tests/generators/rosterFinalUnderHeldRoster.test.js` (adds exactly 7 literal `it`s, one per sealed case)"
+        },
+        {
+          "id": "A6",
+          "case": "THE LINKAGE’S DEAD RUN IS RETIRED. With `factions` held, the four linkage-only lookups are not built (the chooser’s draw thunk is not entered), while the faction-linkage trace’s direct / attraction / scatter classification is SET-EQUAL to the unpinned run’s, both directions, over the corpus. This is what makes the retirement a split rather than a deletion: the category index survives because the trace reads it on the held path.",
+          "home": "tests/generators/rosterFinalUnderHeldRoster.test.js",
+          "authorizedBy": "§7's `CREATE` row for `tests/generators/rosterFinalUnderHeldRoster.test.js` (adds exactly 7 literal `it`s, one per sealed case)"
+        },
+        {
+          "id": "A7",
+          "case": "THE CLASS REGISTER IS THE SOURCE, NOT A SECOND LIST. The gated key and the ungated mirror path are read BY IMPORT from `src/domain/edit/recordRegister.js` — `RECORD_CLASSES.npcs === \"HELD\"` and `CLASS_EXCEPTIONS[\"factions[].members[]\"] === \"MIRROR\"` — never re-typed (`contractTestAntiVacuity` Rule 2). A member that gated the mirror, or that failed to gate the roster, reds this arm by name.",
+          "home": "tests/generators/rosterFinalUnderHeldRoster.test.js",
+          "authorizedBy": "§7's `CREATE` row for `tests/generators/rosterFinalUnderHeldRoster.test.js` (adds exactly 7 literal `it`s, one per sealed case)"
+        }
+      ],
+      "checks": [
+        [
+          "npx",
+          "vitest",
+          "run",
+          "--pool=threads",
+          "--maxWorkers=2",
+          "tests/generators/assemblyCoherenceRngIsolation.test.js",
+          "tests/generators/configPatchAllowlistWalker.test.js",
+          "tests/generators/dossierContent.test.js",
+          "tests/generators/factionStructuralOfficeCoverage.test.js",
+          "tests/generators/generationForkCensus.test.js",
+          "tests/generators/ghostFamine.test.js",
+          "tests/generators/legitimacyBgConsistency.test.js",
+          "tests/generators/narrativeArrival.test.js",
+          "tests/generators/narrativeDeadCategory.test.js",
+          "tests/generators/narrativePressureCompound.test.js",
+          "tests/generators/pipelinePinnedChoosers.test.js",
+          "tests/generators/pipelinePinnedMode.test.js",
+          "tests/generators/powerStructure.test.js",
+          "tests/generators/regenNpcEnrichment.test.js",
+          "tests/generators/regenPreservesUserCanon.test.js",
+          "tests/generators/settlementOriginProse.test.js",
+          "tests/generators/settlementReason.test.js",
+          "tests/generators/stressPriority.test.js",
+          "tests/generators/stressSummaryName.test.js",
+          "tests/generators/stressTypeContentWave.test.js",
+          "tests/generators/terrainFoundingHooks.test.js",
+          "tests/generators/tradeCommodity.test.js",
+          "tests/generators/tuningBatchE2.test.js"
+        ],
+        [
+          "npx",
+          "vitest",
+          "run",
+          "--pool=threads",
+          "--maxWorkers=2",
+          "tests/lint/contractTestAntiVacuity.walker.test.js",
+          "tests/lint/distributionEnvelopePower.test.js",
+          "tests/lint/editDeclarations.walker.test.js",
+          "tests/lint/mutationCoverageManifest.test.js",
+          "tests/lint/negativeAssertionAnchor.walker.test.js",
+          "tests/lint/noPremadeDeityPool.walker.test.js",
+          "tests/lint/proseComposed.walker.test.js",
+          "tests/lint/proseTasteInterested.walker.test.js",
+          "tests/lint/proseWiringCensus.walker.test.js",
+          "tests/lint/recordRegisterTotality.walker.test.js",
+          "tests/lint/ruinFilterRoster.walker.test.js",
+          "tests/lint/seedLoopTotality.walker.test.js",
+          "tests/lint/sourceCitationIntegrity.walker.test.js",
+          "tests/lint/statusUnionTotality.walker.test.js"
+        ],
+        [
+          "npx",
+          "vitest",
+          "run",
+          "--pool=threads",
+          "--maxWorkers=2",
+          "tests/domain/causalChains.test.js",
+          "tests/domain/distribution.test.js",
+          "tests/domain/eventBatch.test.js",
+          "tests/domain/generalStateProseDesk.test.js",
+          "tests/domain/roadsParticipation.test.js",
+          "tests/domain/schemaCanonicalShape.test.js",
+          "tests/domain/simulationSpine.test.js",
+          "tests/domain/stressorsStateProseDesk.test.js",
+          "tests/domain/trace.coverage.test.js"
+        ],
+        [
+          "npx",
+          "vitest",
+          "run",
+          "--pool=threads",
+          "--maxWorkers=2",
+          "tests/joins/arrival.test.js",
+          "tests/joins/conflictsSeam.test.js",
+          "tests/joins/crisisTripleSync.test.js",
+          "tests/joins/eventConditions.test.js",
+          "tests/joins/labelJoins.test.js"
+        ],
+        [
+          "npx",
+          "vitest",
+          "run",
+          "--pool=threads",
+          "--maxWorkers=2",
+          "tests/security/factionMemberPublicParity.pglite.test.js"
+        ],
+        [
+          "npx",
+          "vitest",
+          "run",
+          "--pool=threads",
+          "--maxWorkers=2",
+          "tests/data/stressTypeRegistration.test.js"
+        ],
+        [
+          "npx",
+          "vitest",
+          "run",
+          "--pool=threads",
+          "--maxWorkers=2",
+          "tests/lib/proseSeams.test.js"
+        ],
+        [
+          "npx",
+          "vitest",
+          "run",
+          "--pool=threads",
+          "--maxWorkers=2",
+          "tests/pdf/exportDateSeam.test.js"
+        ],
+        [
+          "npx",
+          "vitest",
+          "run",
+          "--pool=threads",
+          "--maxWorkers=2",
+          "tests/components/createWorkflowRail.test.jsx"
+        ],
+        [
+          "npx",
+          "vitest",
+          "run",
+          "--pool=threads",
+          "--maxWorkers=2",
+          "tests/property/generatorGoldenMaster.test.js",
+          "tests/property/dossierProseManifest.test.js"
+        ],
+        [
+          "npx",
+          "eslint",
+          "src/generators/narrativeGenerator.js",
+          "src/generators/steps/assembleSettlement.js",
+          "src/generators/steps/generatePopulation.js",
+          "src/domain/prose/holderTable.js",
+          "tests/generators/rosterFinalUnderHeldRoster.test.js"
+        ],
+        [
+          "npm",
+          "run",
+          "typecheck:ratchet"
+        ],
+        [
+          "npm",
+          "run",
+          "typecheck:domain:strict"
+        ],
+        [
+          "node",
+          "scripts/implementation-packets.mjs",
+          "validate"
+        ]
+      ],
+      "_checksDerivation": "TOOL-26 (`scripts/governing-tests.mjs`) has NOT landed at c69d16a5d either (re-measured at version 2: the path still does not exist), so the sixth amendment’s interim form governs: `git grep -l -F <basename> -- tests` for every file this member changes (narrativeGenerator, assembleSettlement, generatePopulation, holderTable) and for the ONE exported symbol whose CALL SHAPE changes (`generateCoherence`), plus every walker governing `tests/generators`, where this member CREATEs. That union is 51 paths; three of them are not test files (`.tuning-inventory.json`, `.tuning-register.json`, `mutationCoverage.shared.mjs`) and are dropped, and eight direct governors of the gated symbols are added by name (factionStructuralOfficeCoverage, regenNpcEnrichment, regenPreservesUserCanon, pipelinePinnedChoosers, factionMemberPublicParity.pglite, recordRegisterTotality, contractTestAntiVacuity, sourceCitationIntegrity) — 56 files in 9 directory arrays. MINUS `tests/lint/sovereigntyLightingContract.walker.test.js` (reds by design under a train; its presence would make `check:packet` unpassable) and MINUS the two dist-reading byte arms `tests/build/generationWorkerLazy.test.js` and `tests/build/vendorPdfLazy.test.js` (§P2.11: the byte arms leave the sealed checks and belong to the train’s byte-arm holder). ⭐ VERSION 2, re-measured at c69d16a5d: 58 of the 59 test-file arguments in these arrays are PRESENT in the tree and the single absent one is the CREATE target itself, by design.",
+      "_dependencyNote": "Depends on EM-R1 (the runner clones the pin bag on entry, design ruling 6) -- a packet, not yet landed; this member declares NO local clone because EM-R1 owns that rule. EM-R1 is this member's TRAIN-MATE on EM-T15 and it MODIFIES src/generators/pipeline.js, which carries two of this member's requiredSymbols rows: both are re-run verbatim at the train's base (judgment 134). EM-R1 also carries a scripts/mutation-coverage-manifest.json REGISTER row -- lawful beside this one only under distinct rowKeys (TOOL-27), and measured 2026-09-22 its row declares none, which the tree's own validator refuses by name. Depends on the LANDED EM-P0 (the runner's pins channel), EM-B2a2 (the chooseOrPin export) and EM-R0a (the class register). The EM-R0d reservation on src/domain/prose/holderTable.js is DISCHARGED by a placement on EM-T15: EM-R0d rides EM-T14, and the tree's own validatePacketManifest with EM-T14's three members flipped LANDED and this entry placed READY at c69d16a5d returns ZERO duplicate change-path errors and one error only, packetPath does not exist. EM-R3 and EM-R4 each MODIFY src/generators/steps/assembleSettlement.js and are compiled for later trains: neither may be placed non-terminal beside EM-R2."
+    },
+    {
+      "id": "EM-R5",
+      "status": "READY",
+      "packetPath": "docs/implementation/packets/settlement-editor/EM-R5.md",
+      "verifiedBase": "ec4cd1c2d5aebbda4df788fd4e600252adb81b5c",
+      "_baseNote": "Left for the chair. Version 2 RE-MEASURED by an Opus PRE-PROOF seat at c69d16a5dd6462068cddf140b98129bbb66d80373 (train EM-T14's composed tip: EM-R0d, EM-R0f and EM-R6 over train EM-T13's landed tip 35a031ac7 and the worker buy-back; worktree read-tip-em-t14, DETACHED, `git status --porcelain` EMPTY before and after). The preamble measured `125c693214235a81bf4f2b38506b621859a35e0325ff2ea58d335b4e0681a99d` — the SIXTH amendment, LANDED, byte-identical to the chair's draft. THERE IS NO PLACEMENT PRECONDITION LEFT: version 1's MODIFY named the file EM-B2a4 creates, and version 2 names `src/domain/edit/dmLayer.js`, which has existed since EM-B2a1 landed on train EM-T10. Both CREATE targets ABSENT, the MODIFY target PRESENT, all ten requiredSymbols verbatim at count 1, retiredSymbols EMPTY, every figure re-executed.",
+      "_member": "The re-entry family EM-R, member 7. `simulationTrace` is partitioned BY STEP: a step whose entries are ABOUT a held key contributes its RECORDED run, every other step contributes the re-derivation's, an unregistered step's entries are carried in a declared tail, and `ts` is re-stamped to the output position. With nothing held the derived array is returned BY IDENTITY, so no golden can move.",
+      "changeManifest": [
+        {
+          "action": "CREATE",
+          "path": "src/domain/edit/tracePartition.js",
+          "symbol": "partitionTrace",
+          "_note": "src/domain/edit/tracePartition.js :: partitionTrace - the pure leaf: TRACE_STEP_ORDER, TRACE_SUBJECTS (24 rows, total over the 47 recordTrace call sites and the 4,810 corpus entries), MIXED_TRACE_STEPS, traceSubjectKey, carriedTraceSteps, partitionTrace. One import, ./recordRegister.js. 93 effective lines by eslint's Linter under max-lines with skipBlankLines and skipComments; 0 TypeScript errors under tsconfig.full.json AND tsconfig.domain-strict.json; tuning inventory 0 named / 0 decimals; voice Tier 2 0 em / 0 bang over 82 literals; 0 createPRNG( sites; 0 .institutions code reads."
+        },
+        {
+          "action": "CREATE",
+          "path": "tests/domain/tracePartition.test.js",
+          "_note": "tests/domain/tracePartition.test.js - the acceptance battery. Adds exactly 8 literal `it`s under ONE literal `describe`; `it`, `test` and `describe` bound exactly once each; straight-line registration, no .each, no loop, no conditional, no parameter named `it`; every negative anchored on the line immediately above its own `expect`. tests/domain is NOT in tests/lint/mutationCoverage.shared.mjs :: ENFORCER_DIRS, so no mutation-coverage row is owed."
+        },
+        {
+          "action": "MODIFY",
+          "path": "src/domain/edit/dmLayer.js",
+          "symbol": "rederive",
+          "_note": "src/domain/edit/dmLayer.js :: rederive - one sibling import (./tracePartition.js) and one insertion at rederive's SINGLE return point, where `const { pins, unapplied } = pinsFrom(record, layer, declarations, engine)` puts the bag's key set in scope; the write lands on `derived`, the engine's own fresh output, so the caller's record is still never touched, and the key is assigned IN PLACE so the record's key order cannot move. +9 effective lines (195 -> 204, eslint Linter under max-lines with skipBlankLines and skipComments). MEASURED at c69d16a5d with the insertion in place: 0 TypeScript errors under tsconfig.full.json AND tsconfig.domain-strict.json; tuning 0 named / 0 decimals unmoved; voice Tier 2 120 -> 121 literals with 0 em and 0 bang; 0 createPRNG( sites; 0 .institutions code reads; no generators specifier. VERSION 2 MOVED THIS ROW: version 1 named src/store/settlementRederiveAction.js, which the landed tree shows holds NO rederive - it imports it from this file and exports regenerateWithLayer, whose envelope { record, unapplied } carries no pin set."
+        }
+      ],
+      "requiredSymbols": [
+        {
+          "path": "src/domain/edit/recordRegister.js",
+          "symbol": "export const RECORD_CLASSES = Object.freeze({",
+          "_note": "src/domain/edit/recordRegister.js :: RECORD_CLASSES - the HELD class this leaf reads from its producer rather than re-typing; count 1."
+        },
+        {
+          "path": "src/domain/edit/recordRegister.js",
+          "symbol": "export const ATOMIC_COLLECTIONS = Object.freeze([",
+          "_note": "src/domain/edit/recordRegister.js :: ATOMIC_COLLECTIONS - carries `simulationTrace`, which this member deliberately leaves ATOMIC for the merge; count 1."
+        },
+        {
+          "path": "src/generators/pipeline.js",
+          "symbol": "export function getStepOrder() {",
+          "_note": "src/generators/pipeline.js :: getStepOrder - the producer arm A4 holds TRACE_STEP_ORDER equal to; count 1."
+        },
+        {
+          "path": "src/generators/pipeline.js",
+          "symbol": "const _LEDGER_KEYS = new Set(['_traceClock', 'simulationTrace']);",
+          "_note": "src/generators/pipeline.js :: _LEDGER_KEYS - the runner's sanctioned cross-cutting trace write, which is why no step declares the ledger; count 1."
+        },
+        {
+          "path": "src/domain/trace.js",
+          "symbol": "export function recordTrace(ctx, trace) {",
+          "_note": "src/domain/trace.js :: recordTrace - the ONE appender whose 47 call sites the subject register enumerates, and the stamper of `ts` from ctx._traceClock; count 1."
+        },
+        {
+          "path": "src/domain/trace.js",
+          "symbol": "export const ALLOWED_TARGET_TYPES = new Set([",
+          "_note": "src/domain/trace.js :: ALLOWED_TARGET_TYPES - the closed targetType vocabulary the register's keys are drawn from; count 1."
+        },
+        {
+          "path": "src/generators/steps/assembleSettlement.js",
+          "symbol": "    settlement.simulationTrace = ctx.simulationTrace;",
+          "_note": "src/generators/steps/assembleSettlement.js :: registerStep('assembleSettlement' - the copy-through that makes the RECORD's trace the post-refresh one, which is the premise of carrying generatePower's run with no gate in economyReconciliation.js; count 1."
+        },
+        {
+          "path": "src/generators/power/economyReconciliation.js",
+          "symbol": "export function refreshPowerGenerationTraces(",
+          "_note": "src/generators/power/economyReconciliation.js :: refreshPowerGenerationTraces - the ONE non-recordTrace trace writer, mutating generatePower's run at two call sites, both BEFORE the copy-through (16 and 57 entries over 63 rows); count 1."
+        },
+        {
+          "path": "src/generators/generateSettlementPipeline.js",
+          "symbol": "    _traceClock: 0,",
+          "_note": "src/generators/generateSettlementPipeline.js :: generateSettlementPipeline - the deterministic clock seeded at zero, which is why ts equals the entry index in 4,810 of 4,810; count 1."
+        },
+        {
+          "path": "tests/helpers/goldenMasterCorpus.js",
+          "symbol": "export function goldenCorpus",
+          "_note": "tests/helpers/goldenMasterCorpus.js :: goldenCorpus - the corpus the battery derives its 63-row stride from in-test, never a committed fixture; count 1."
+        }
+      ],
+      "retiredSymbols": [],
+      "_retiredSymbolsNote": "EMPTY, MEASURED. This member moves, renames and deletes no symbol anywhere: its two CREATEs introduce new text and its one MODIFY appends an import and a call inside a function EM-B2a4 creates. Step 10's post-edit simulation therefore returns every requiredSymbols row of every packet unchanged.",
+      "acceptanceCases": [
+        {
+          "id": "A1",
+          "case": "THE ENTRY CARRIES ENOUGH TO BE PARTITIONED. Over the whole 63-row stride derived in-test from `tests/helpers/goldenMasterCorpus.js :: goldenCorpus`, every simulationTrace entry carries a non-empty string `step`, `targetType` and `targetId`, and `traceSubjectKey` resolves it to a declared record key. THE DENOMINATOR is asserted in the SAME arm (entry count greater than zero), so an empty corpus can never pass it. MEASURED at the compile: 4,810 of 4,810.",
+          "home": "tests/domain/tracePartition.test.js",
+          "authorizedBy": "§7's `CREATE` row for `tests/domain/tracePartition.test.js` (adds exactly 8 literal `it`s, one per sealed case)"
+        },
+        {
+          "id": "A2",
+          "case": "EVERY STEP'S ENTRIES ARE ONE CONTIGUOUS RUN, 63 of 63 rows. This is the premise that makes a step's run the substitution unit rather than an invented order; a step seen a second time with another step's entry between is the failure. MEASURED at the compile: 0 broken runs.",
+          "home": "tests/domain/tracePartition.test.js",
+          "authorizedBy": "§7's `CREATE` row for `tests/domain/tracePartition.test.js` (adds exactly 8 literal `it`s, one per sealed case)"
+        },
+        {
+          "id": "A3",
+          "case": "THE DETERMINISTIC CLOCK IS THE ENTRY'S POSITION. `ts` equals the entry's index in every record of the stride, which is exactly why `partitionTrace` RE-STAMPS `ts` rather than carrying it: a carried `ts` would be a lie the moment a deriving step's count moved. MEASURED at the compile: 4,810 of 4,810.",
+          "home": "tests/domain/tracePartition.test.js",
+          "authorizedBy": "§7's `CREATE` row for `tests/domain/tracePartition.test.js` (adds exactly 8 literal `it`s, one per sealed case)"
+        },
+        {
+          "id": "A4",
+          "case": "THE TWO REGISTERS ARE TOTAL AGAINST THEIR PRODUCERS, IN BOTH DIRECTIONS. `TRACE_STEP_ORDER` equals `getStepOrder()` IMPORTED from `src/generators/pipeline.js`; every `(step, targetType)` pair the corpus emits is a declared row of `TRACE_SUBJECTS`; every declared subject is a key of `RECORD_CLASSES` IMPORTED from `src/domain/edit/recordRegister.js`. No table is re-typed in the test, which is the shape `tests/lint/contractTestAntiVacuity.walker.test.js` Rule 2 convicts.",
+          "home": "tests/domain/tracePartition.test.js",
+          "authorizedBy": "§7's `CREATE` row for `tests/domain/tracePartition.test.js` (adds exactly 8 literal `it`s, one per sealed case)"
+        },
+        {
+          "id": "A5",
+          "case": "INERT WITH NOTHING HELD, SO THE GOLDENS CANNOT MOVE. `partitionTrace(rec, der, new Set())` and `partitionTrace(rec, der, new Set(['economicState']))` return `der` BY IDENTITY (`toBe`, not `toEqual`), and `carriedTraceSteps(new Set()).size` is 0. WRITTEN-CONTRACT arm: it holds at the base, so it is proved by its counterforce (the same assertion with a HELD bag, where identity must fail and a new array must come back), never red-first.",
+          "home": "tests/domain/tracePartition.test.js",
+          "authorizedBy": "§7's `CREATE` row for `tests/domain/tracePartition.test.js` (adds exactly 8 literal `it`s, one per sealed case)"
+        },
+        {
+          "id": "A6",
+          "case": "THE CARRIED SET IS THE PARTITION, IN BOTH DIRECTIONS. A step is carried iff at least one of its declared subjects is a HELD record key, computed from the two IMPORTED registers and asserted equal to `carriedTraceSteps(HELD)` both ways, size 10; and `MIXED_TRACE_STEPS`'s two steps are SET-EQUAL to the steps carrying at least one held and at least one non-held subject. THE PAIRED NEGATIVE: a bag of `['stress','isolationSupport']` carries ZERO steps, so a key the runner's partial-pin closure drags into the bag can never freeze a reading's account.",
+          "home": "tests/domain/tracePartition.test.js",
+          "authorizedBy": "§7's `CREATE` row for `tests/domain/tracePartition.test.js` (adds exactly 8 literal `it`s, one per sealed case)"
+        },
+        {
+          "id": "A7",
+          "case": "THE CARRY RESTORES AND NEVER ALIASES, AT EVERY DEPTH, OVER EVERY ROW. For each of the 63 records: a derivation (itself deep-cloned first, exactly as a real re-derivation's entries would be) stripped of every carried step's run is partitioned back to the record's trace BYTE-IDENTICALLY with `ts` re-stamped to the index; and NO output entry is the same object as a recorded entry AND no output entry's `causes` or `downstreamEffects` ARRAY is the record's (design §22 ruling 6, the clone). ⛔ THE NESTED HALF IS THE ARM: `partitionTrace` ends in a shallow spread, so a top-level identity check stays GREEN with the `structuredClone` deleted — mutant M5 proved exactly that at this compile, on all 63 rows. MEASURED with the arm as written: restored 63/63, aliased rows 0, ts re-stamped 63/63, 2,207 `assembleInstitutions` entries carried.",
+          "home": "tests/domain/tracePartition.test.js",
+          "authorizedBy": "§7's `CREATE` row for `tests/domain/tracePartition.test.js` (adds exactly 8 literal `it`s, one per sealed case)"
+        },
+        {
+          "id": "A8",
+          "case": "THE UNKNOWN STEP IS CARRIED IN THE DECLARED TAIL. An entry whose `step` `TRACE_STEP_ORDER` does not name is emitted LAST, its `ts` re-stamped to the final index, and it appears nowhere before the tail. ANCHORED NEGATIVE with its positive control: the tail assertion immediately above it is what makes the absence meaningful.",
+          "home": "tests/domain/tracePartition.test.js",
+          "authorizedBy": "§7's `CREATE` row for `tests/domain/tracePartition.test.js` (adds exactly 8 literal `it`s, one per sealed case)"
+        }
+      ],
+      "checks": [
+        [
+          "npx",
+          "vitest",
+          "run",
+          "--pool=threads",
+          "--maxWorkers=2",
+          "tests/domain/tracePartition.test.js",
+          "tests/domain/dmLayer.test.js",
+          "tests/domain/trace.test.js",
+          "tests/domain/trace.coverage.test.js",
+          "tests/domain/tracePresentation.test.js"
+        ],
+        [
+          "npx",
+          "vitest",
+          "run",
+          "--pool=threads",
+          "--maxWorkers=2",
+          "tests/lint/allowlistRebuilderRegistry.walker.test.js",
+          "tests/lint/arcaneClassifierCensus.walker.test.js",
+          "tests/lint/chanceMeetingKindPools.walker.test.js",
+          "tests/lint/clampPrimitiveBaseline.test.js",
+          "tests/lint/commercialKindPools.walker.test.js",
+          "tests/lint/contractTestAntiVacuity.walker.test.js",
+          "tests/lint/couplingInclusion.walker.test.js",
+          "tests/lint/distributionEnvelopePower.test.js",
+          "tests/lint/editDeclarations.walker.test.js",
+          "tests/lint/editMutationPath.walker.test.js",
+          "tests/lint/engineGatedRuleKeys.walker.test.js",
+          "tests/lint/entropyRootCensus.walker.test.js",
+          "tests/lint/facetInferenceHonesty.walker.test.js",
+          "tests/lint/factionNamePrecedenceScan.test.js",
+          "tests/lint/faithKindPools.walker.test.js",
+          "tests/lint/flavorFields.census.test.js",
+          "tests/lint/heraldRouting.walker.test.js",
+          "tests/lint/kindPoolFloors.walker.test.js",
+          "tests/lint/negativeAssertionAnchor.walker.test.js",
+          "tests/lint/newsSubjectVocabulary.walker.test.js",
+          "tests/lint/oathStampTotality.walker.test.js",
+          "tests/lint/proseDrawnAnchors.walker.test.js",
+          "tests/lint/provenanceStampSingleWriter.walker.test.js",
+          "tests/lint/pulseKernelLineAddress.walker.test.js",
+          "tests/lint/recordRegisterTotality.walker.test.js",
+          "tests/lint/ruinFilterRoster.walker.test.js",
+          "tests/lint/seedLoopTotality.walker.test.js",
+          "tests/lint/snapshotPromotion.census.walker.test.js",
+          "tests/lint/sourceCitationIntegrity.walker.test.js",
+          "tests/lint/testRatchet.test.js",
+          "tests/lint/worldGenerationClockSeam.walker.test.js",
+          "tests/lint/worldPulseFateTotality.walker.test.js"
+        ],
+        [
+          "npx",
+          "vitest",
+          "run",
+          "--pool=threads",
+          "--maxWorkers=2",
+          "tests/lib/importScrub.test.js",
+          "tests/lib/accountData.test.js",
+          "tests/lib/editTravel.test.js"
+        ],
+        [
+          "npx",
+          "vitest",
+          "run",
+          "--pool=threads",
+          "--maxWorkers=2",
+          "tests/property/dmLayerGoldenIsolation.test.js",
+          "tests/property/generatorGoldenMaster.test.js",
+          "tests/property/dossierProseManifest.test.js"
+        ],
+        [
+          "npx",
+          "vitest",
+          "run",
+          "--pool=threads",
+          "--maxWorkers=2",
+          "tests/store/editSlice.test.js",
+          "tests/store/decreeRegistryPersistence.test.js"
+        ],
+        [
+          "npx",
+          "vitest",
+          "run",
+          "--pool=threads",
+          "--maxWorkers=2",
+          "tests/ops/migrationRehearsal.test.js"
+        ],
+        [
+          "npx",
+          "vitest",
+          "run",
+          "--pool=threads",
+          "--maxWorkers=2",
+          "tests/security/galleryScannerMirrorTotality.test.js"
+        ],
+        [
+          "npx",
+          "eslint",
+          "src/domain/edit/tracePartition.js",
+          "src/domain/edit/dmLayer.js",
+          "tests/domain/tracePartition.test.js"
+        ],
+        [
+          "npm",
+          "run",
+          "typecheck:ratchet"
+        ],
+        [
+          "npm",
+          "run",
+          "typecheck:domain:strict"
+        ],
+        [
+          "node",
+          "scripts/implementation-packets.mjs",
+          "validate"
+        ]
+      ],
+      "_checksDerivation": "RE-COMPUTED at c69d16a5d by the pre-proof (version 1's derivation was taken at 91cc9ef5a, where the store seat did not yet exist and both MODIFY-side basenames read as new). (1) `git grep -l -F 'dmLayer' -- tests` -> 13 files; twelve are here and tests/build/vendorPdfLazy.test.js is deliberately NOT, because it is a dist-reading byte arm and belongs to the train's byte-arm holder alone (EM-PREAMBLE §P2.11, §P10.8). (2) `git grep -l -F 'tracePartition' -- tests` and `... 'partitionTrace' -- tests` -> nothing; both names are new. (3) `git grep -l -F 'recordRegister' -- tests` -> tests/domain/dmLayer.test.js, tests/lib/importScrub.test.js, tests/lint/recordRegisterTotality.walker.test.js (judgment 110: the governing set is re-derived for every module the contract IMPORTS). (4) every walker that governs tests/domain, in which this member CREATEs a test file: `git grep -l -F 'tests/domain' -- tests/lint` = 30 entries at the tip, MINUS tests/lint/.tuning-register.json (not a test) and MINUS tests/lint/sovereigntyLightingContract.walker.test.js (red by design under a train, so its presence in a sealed array means check:packet can never pass); tests/lint/flavorFields.census.test.js JOINED that set since version 1's tip. (5) tests/domain/trace*.test.js are the rosters over src/domain/trace.js, whose two symbols are requiredSymbols. (6) tests/property/dmLayerGoldenIsolation.test.js is the LANDED arm over rederive itself (judgment 148's first-importer law); the pre-proof executed all six of its rederive arms against the planned edit in plain node and every one is green, so it is a CHECK and not a TEST row and no assertion of it moves. (7) The goldens are named because §P3.1 makes their motion a STOP. The count prover is kit furniture and is never a check. tests/lint/proseWiringCensus.walker.test.js stays OUT for §P2.13's reason (judgment 87): it is RED on exactly two arms from this member's src/domain CREATE until the train's terminal regeneration, so a sealed check naming it means check:packet can never pass; it is the build lane's own instrument, run ALONE and expected NONZERO (§10).",
+      "_dependencyNote": "EM-B2a4 is LANDED (train EM-T13, 35a031ac7) and is NO LONGER an ordering constraint: version 2's MODIFY names src/domain/edit/dmLayer.js, landed by EM-B2a1 on train EM-T10, rather than the store seat EM-B2a4 created. Read as real code at c69d16a5d (judgment 134): dmLayer.js :: rederive is arity five, computes its bag with pinsFrom and has one return point; the seat's regenerateWithLayer is a four-argument async wrapper that forwards to it and holds no pin set. EM-R1 (pins cloned on entry; judgment 170a's held-step skip) and EM-R2 (the roster final) ride train EM-T15 beside this member and their change paths are path-disjoint from these three, measured over the waiting manifests. EM-R3 (EM-T16) is path-disjoint too and owes a re-measurement rather than a path (judgment 184d). EM-R0a is LANDED and is the leaf's one import. EM-R0c (the merge) is NOT a dependency. THE ONE LIVE RESERVATION: EM-B2b, a waiting DRAFT that is not placed, also names src/domain/edit/dmLayer.js - placement order decides it and the second one placed carries the collision row."
     }
   ]
 }
