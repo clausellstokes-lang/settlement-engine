@@ -39517,9 +39517,10 @@
     },
     {
       "id": "EM-R2",
-      "status": "READY",
+      "status": "LANDED",
       "packetPath": "docs/implementation/packets/settlement-editor/EM-R2.md",
       "verifiedBase": "64b75240c98831693e4495efedeb2639cfa691f7",
+      "landedAt": "16c7346c1353effa5265be4b86b862435c24ff35",
       "_baseNote": "Left for the chair. Version 2 RE-MEASURED at c69d16a5d6462068cddf140b98129bbb66d80373 (train EM-T14's composed tip; worktree read-tip-em-t14, DETACHED, `git status --short` EMPTY before and after); version 1 was compiled at 91cc9ef5af563fc6c3808108e953594c1e106409. Nothing in the contract moved across that window: 13 of 13 requiredSymbols verbatim at count 1 and at the same lines, the CREATE target absent, the four MODIFY targets present, the four HOLDER_SOURCES rows UNMOVED under EM-R0d's landed edit, and the effective-line figures 762/163/156 unchanged. The preamble measured 125c693214235a81bf4f2b38506b621859a35e0325ff2ea58d335b4e0681a99d -- THE SIXTH AMENDMENT, NOW LANDED (train EM-T13's first commit 7bc14e003). The chair re-stamps the hash at placement.",
       "_member": "The re-entry family EM-R, member 2. The roster is FINAL inside `enrichNpcCoherence` under a held pin; `ensureFactionStructuralNpcs` is gated as a producer; `relinkFactionMembers` is EXEMPT (the MIRROR, always runs); `powerLinkage`’s four linkage-only outputs are retired under a held roster.",
       "changeManifest": [

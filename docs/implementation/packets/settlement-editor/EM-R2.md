@@ -1,6 +1,6 @@
 # Settlement editor / EM-R2 — THE ROSTER IS FINAL INSIDE `enrichNpcCoherence`: the one lawful skip, the office appender gated as a producer, the member mirror left running, and `powerLinkage`'s dead outputs retired under a held roster
 
-- **Status:** `READY`
+- **Status:** `LANDED`
   ⚠ The status value above stands ALONE on its line because `parsePacketHeader`
   (`scripts/implementation-packets.mjs`) anchors the status row at end-of-line and takes `status`
   only when exactly one row matches. Every stamp, caveat and date goes on these continuation
@@ -11,6 +11,7 @@
   every §P citation below is the sixth's numbering, measured rather than predicted. The
   preamble block below carries the hash executed at that tip; the chair re-stamps the Preamble
   line at placement (§P9(c)).
+- **Landed at:** `16c7346c1353effa5265be4b86b862435c24ff35` — the roster final inside enrichNpcCoherence (version 5): the one lawful skip; ensureFactionStructuralNpcs gated as a producer; relinkFactionMembers exempt; powerLinkage's four linkage-only outputs moved inside the factions thunk (174a); the two earlier reproduction arms re-pinned to a record-built bag through rederive as TEST rows (204b: 63/63 byte-identical settlements); chooseOrPin as a DISCOVERY_EXEMPT row on the held-key writer census (207 a–b); built at 16c7346c1 on train EM-T16 stage 1
 - **Packet version:** 5
   - ⛔ **VERSION 5 IS THE PRE-PROOF RE-MEASUREMENT AT TRAIN EM-T15's FLIPPED TIP
     `64b75240c` (Opus PRE-PROOF seat, session cce01f87, 2026-09-23).** NOT ONE CONTRACT
