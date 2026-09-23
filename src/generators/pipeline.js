@@ -185,9 +185,25 @@ export function runPipeline(initialContext, rng, options = {}) {
     ?? (typeof globalThis !== 'undefined' && globalThis.__PIPELINE_STRICT__)
     ?? false;
   // `null` reads as absent; anything that is not a plain object is a caller error.
-  const pins = options.pins ?? null;
+  let pins = options.pins ?? null;
   if (pins !== null && (typeof pins !== 'object' || Array.isArray(pins))) {
     throw new Error('Pipeline pins: options.pins must be a plain object');
+  }
+  // EM-R1: THE BAG IS CLONED ON ENTRY, AT THE RUNNER, ONCE, AND PER CHANNEL. A caller hands
+  // its own record in; without this, a mutating pass writes straight through the DM's stored
+  // objects (measured: the caller's record moved in 42 of 63 census rows). The clone is taken
+  // here, before `getStepOrder()` and outside every `setActiveRng` window, so no stream moves,
+  // and `pins === null` takes no clone at all, which is the goldens' protection by construction.
+  // TWO clones, one per channel the runner seeds (design section 22 ruling 6, read as a property
+  // of the CHANNEL): this one becomes the pristine bag at `_PINS_KEY` that every consult reads,
+  // and the context spread below takes its own, so `ctx.__pins[k]` never aliases `ctx[k]` and a
+  // consult placed at a mutator cannot read a mutated value as a held fact.
+  if (pins !== null) {
+    try {
+      pins = structuredClone(pins);
+    } catch (cloneError) {
+      throw new Error(`Pipeline pins: options.pins must be structured-cloneable: ${cloneError.message}`, { cause: cloneError });
+    }
   }
   const pinned = pins !== null && Object.keys(pins).length > 0;
   const stepOrder = getStepOrder();
@@ -195,7 +211,7 @@ export function runPipeline(initialContext, rng, options = {}) {
   // Accumulating context
   const ctx = pins === null
     ? { ...initialContext }
-    : { ...initialContext, ...pins, [_PINS_KEY]: pins };
+    : { ...initialContext, ...structuredClone(pins), [_PINS_KEY]: pins };
 
   for (const name of stepOrder) {
     const step = _steps.get(name);
@@ -242,6 +258,18 @@ export function runPipeline(initialContext, rng, options = {}) {
       const patch = step.fn(ctx, stepRng);
       if (patch && typeof patch === 'object') {
         Object.assign(ctx, patch);
+        // EM-R1: A TAKEN PIN IS RE-CLONED AT THE MERGE, AND THAT IS WHAT KEEPS THE TWO CHANNELS
+        // APART. `chooseOrPin` returns the pin BY REFERENCE and stays exactly as landed, so a
+        // producer's patch would otherwise re-point `ctx[key]` at the very object `_PINS_KEY`
+        // holds, and the next in-place mutator would write through the held bag (measured: the
+        // entry clone alone leaves the bag corrupted in 56 of 63 census rows on the institution
+        // channel). Only a value that IS one of the bag's own objects is re-cloned, so the cost
+        // is one clone per held key per run and nothing runs at all in the unpinned path.
+        if (pins !== null) {
+          for (const key of Object.keys(patch)) {
+            if (Object.prototype.hasOwnProperty.call(pins, key) && ctx[key] === pins[key]) ctx[key] = structuredClone(ctx[key]);
+          }
+        }
       }
       if (before) {
         const undeclared = _undeclaredWrites(step, before, ctx);

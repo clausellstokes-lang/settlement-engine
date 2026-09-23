@@ -40,7 +40,7 @@ import { resolve } from 'node:path';
 import { describe, expect, it } from 'vitest';
 
 import { generateSettlementPipeline } from '../../src/generators/generateSettlementPipeline.js';
-import { chooseOrPin, getStepOrder, runPipeline } from '../../src/generators/pipeline.js';
+import { chooseOrPin, getStepMeta, getStepOrder, runPipeline } from '../../src/generators/pipeline.js';
 import { generateRelationships } from '../../src/generators/npcGenerator.js';
 import { generateConflicts, generateFactions } from '../../src/generators/powerGenerator.js';
 import { resolveConfigWithUserContentTunables } from '../../src/domain/content/userContentTunables.js';
@@ -48,6 +48,7 @@ import { withCustomContent } from '../../src/lib/dependencyEngine.js';
 import { createPRNG } from '../../src/kernel/prng.js';
 import { clearActiveRng, setActiveRng } from '../../src/kernel/rngContext.js';
 import { expectAbsentWithAnchor } from '../helpers/anchoredNegatives.js';
+import { censusCorpus, runHeadless as runCorpusRow } from '../helpers/generationForkCensus.js';
 import { goldenCorpus, keyOf } from '../helpers/goldenMasterCorpus.js';
 
 const GOLDEN_MANIFEST = resolve(process.cwd(), 'tests', 'fixtures', 'generator-golden-master.json');
@@ -466,4 +467,150 @@ describe('EM-B2a2 — the pin primitive has ONE exported home: chooseOrPin lives
       keys: ['npcs', 'factions', 'conflicts'],
     });
   }, 120_000);
+});
+
+/** The census corpus's own row count (EM-P2's declared 63). The floor every A7 figure rests on. */
+const CENSUS_ROWS = 63;
+/** The rows §0.1 measured the leak in, and the two keys it moved. RE-MEASURED by A7, never trusted. */
+const LEAKED_ROWS = 42;
+/** The three pin channels A8 walks: every registered step that provides a held record key. */
+const PIN_CHANNELS = ['generatePopulation', 'assembleInstitutions', 'generatePower'];
+
+/** One corpus row's own production for `step`, deep-copied so it stands in for a DM's record. */
+function recordBuiltBag(row, step, keys) {
+  let produced = null;
+  runCorpusRow(row, createPRNG(row._seed), {
+    onStep: (name, ctx) => {
+      if (name !== step) return;
+      produced = structuredClone(Object.fromEntries(keys.map((key) => [key, ctx[key]])));
+    },
+  });
+  return produced;
+}
+
+/**
+ * THE RUNNER'S CLONES, DEFEATED. A7's negative control needs the pre-member aliasing back, and
+ * EM-R1 takes TWO kinds of clone: the ENTRY clones, and judgment 200's clone at the PATCH MERGE.
+ * A bypass that fires once at the first boundary is re-cloned by the merge and reports a FALSE
+ * zero, so this one re-points `ctx[key]` AND `ctx.__pins[key]` at the caller's own objects at
+ * EVERY boundary, which is byte-for-byte what the runner did before this member.
+ */
+function bypassEveryRunnerClone(bag, keys) {
+  return (_name, ctx) => {
+    if (!ctx.__pins) return;
+    for (const key of keys) {
+      ctx[key] = bag[key];
+      ctx.__pins[key] = bag[key];
+    }
+  };
+}
+
+describe('EM-R1 — the pin bag is cloned on entry, at the runner', () => {
+  it('A7 — the leak and the cure: a record-built bag moves 0 of 63, where the uncloned control moves 42', () => {
+    const rows = censusCorpus();
+    const keys = getStepMeta().find((meta) => meta.name === POPULATION_STEP).provides;
+    expect(rows, 'the census corpus is the floor every figure here rests on').toHaveLength(CENSUS_ROWS);
+    expect(keys).toEqual(CHOOSER_KEYS);
+
+    // COLLECT, THEN ASSERT ONCE: a bare per-row expect is the shape seedLoopTotality convicts.
+    const through = { moved: 0, threw: 0, took: 0, perKey: {} };
+    const bypassed = { moved: 0, threw: 0, took: 0, perKey: {} };
+    for (const row of rows) {
+      const bag = recordBuiltBag(row, POPULATION_STEP, keys);
+      for (const [mode, tally] of [['through', through], ['bypassed', bypassed]]) {
+        const caller = structuredClone(bag);
+        const before = JSON.stringify(caller);
+        // ANTI-VACUITY, MEASURED AT THE PRODUCER'S OWN BOUNDARY: the pin was TAKEN on this row,
+        // which is what tells a cured runner apart from a member that dropped the pin entirely.
+        // It is read from the PATCH, never from the finished context: `corruptionPass` mutates
+        // `npcs` and `factions` AFTER the pin lands, so the final context differs on 42 rows by
+        // design and a check placed there would report a false 21 of 63.
+        const bypass = mode === 'bypassed' ? bypassEveryRunnerClone(caller, keys) : null;
+        const options = {
+          pins: caller,
+          onStrictViolation: () => {},
+          onStep: (name, ctx, patch) => {
+            if (bypass) bypass(name, ctx);
+            if (name !== POPULATION_STEP || !patch) return;
+            if (keys.every((key) => JSON.stringify(patch[key]) === JSON.stringify(bag[key]))) {
+              tally.took += 1;
+            }
+          },
+        };
+        try {
+          runCorpusRow(row, createPRNG(row._seed), options);
+        } catch {
+          tally.threw += 1;
+        }
+        if (JSON.stringify(caller) !== before) {
+          tally.moved += 1;
+          for (const key of keys) {
+            if (JSON.stringify(caller[key]) !== JSON.stringify(bag[key])) {
+              tally.perKey[key] = (tally.perKey[key] || 0) + 1;
+            }
+          }
+        }
+      }
+    }
+
+    // THE CURE: through the runner's own clones the caller's record never moves.
+    expect([through.moved, through.threw], 'a held record was written through at the runner').toEqual([0, 0]);
+    expect(through.took, 'the pins were dropped, so the zero above proves nothing').toBe(CENSUS_ROWS);
+    expect(through.perKey).toEqual({});
+
+    // THE NEGATIVE CONTROL: the same bag with every runner clone defeated is written through on
+    // 42 rows, by npcs and factions alone, so the zero above can never go silently vacuous.
+    expect(bypassed.moved, 'the control came back clean: the bypass no longer defeats the clones')
+      .toBe(LEAKED_ROWS);
+    expect(bypassed.perKey).toEqual({ npcs: LEAKED_ROWS, factions: LEAKED_ROWS });
+    expect(bypassed.took, 'the control must take the pin too, or it measures a different world')
+      .toBe(CENSUS_ROWS);
+  }, 300_000);
+
+  it('A8 — the bag is not the context at every step, and own-presence survives the clone', () => {
+    const row = censusCorpus()[0];
+    const meta = getStepMeta();
+    const aliased = [];
+    const walked = [];
+    for (const step of PIN_CHANNELS) {
+      const keys = meta.find((entry) => entry.name === step).provides;
+      const bag = recordBuiltBag(row, step, keys);
+      let boundaries = 0;
+      runCorpusRow(row, createPRNG(row._seed), {
+        pins: structuredClone(bag),
+        onStrictViolation: () => {},
+        onStep: (name, ctx) => {
+          if (!ctx.__pins) return;
+          boundaries += 1;
+          for (const key of keys) {
+            if (ctx.__pins[key] === ctx[key]) aliased.push(`${step}|${key}|after ${name}`);
+          }
+        },
+      });
+      walked.push([step, boundaries]);
+    }
+    // ANTI-VACUITY FIRST: every channel really walked the whole run, so an empty `aliased` is a
+    // measurement and not an empty read.
+    expect(walked.map(([, boundaries]) => boundaries > 0)).toEqual([true, true, true]);
+    expect(walked.map(([step]) => step)).toEqual(PIN_CHANNELS);
+    // anchored: the line above proves all three channels walked a non-empty run, so this empty
+    // set is the two-channel entry clone plus judgment 200's merge clone holding at every step.
+    expect(aliased, 'ctx.__pins aliased ctx: a later pass can write through a held fact').toEqual([]);
+
+    // THE FOUR ROWS EM-B2a2's LANDED A1 DEPENDS ON: structuredClone keeps an own property whose
+    // value is undefined, null, 0 or '', and does NOT promote an inherited key to an own one.
+    const source = { a: undefined, b: null, c: 0, d: '' };
+    const copy = structuredClone(source);
+    expect(['a', 'b', 'c', 'd'].map((key) => Object.prototype.hasOwnProperty.call(copy, key)))
+      .toEqual([true, true, true, true]);
+    expect(['a', 'b', 'c', 'd'].map((key) => copy[key])).toEqual([undefined, null, 0, '']);
+    const inheritedSource = Object.create({ npcs: 'FROM THE PROTOTYPE' });
+    inheritedSource.own = 1;
+    const inheritedCopy = structuredClone(inheritedSource);
+    expect(inheritedSource.npcs, 'the fixture really does inherit the key').toBe('FROM THE PROTOTYPE');
+    // anchored: the line above proves the prototype chain is live and the line below proves the
+    // clone kept the OWN key, so this false is a promotion that did not happen.
+    expect(Object.prototype.hasOwnProperty.call(inheritedCopy, 'npcs')).toBe(false);
+    expect(Object.prototype.hasOwnProperty.call(inheritedCopy, 'own')).toBe(true);
+  }, 180_000);
 });

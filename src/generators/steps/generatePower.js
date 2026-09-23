@@ -68,9 +68,9 @@ registerStep('generatePower', {
   const neighbourRelationshipArg = neighbourRel && isAdversarialRelationship(neighbourRel.relationshipType)
     ? neighbourRel
     : null;
-  // A held value is CLONED before it leaves this step (design §22 ruling 6): a record-built bag
-  // handed back by reference is written through in place by a later pass. The clone is LOCAL to
-  // this member's two consults and retires the day EM-R1 clones the bag on entry at the runner.
+  // A held value leaves this step BY REFERENCE (design §22 ruling 6, re-homed by EM-R1): the
+  // bytes are already the runner's, because `runPipeline` deep-clones the pin bag on entry,
+  // once, per channel, so nothing here can reach an object the caller owns. Local clone retired.
   const heldIntent = chooseOrPin(pins, 'powerIntent', () => UNPINNED);
   const powerIntent = heldIntent === UNPINNED
     ? createPowerGenerationIntent({
@@ -80,11 +80,11 @@ registerStep('generatePower', {
       config: effectiveConfig,
       institutions,
     })
-    : structuredClone(heldIntent);
+    : heldIntent;
   const heldStructure = chooseOrPin(pins, 'powerStructure', () => UNPINNED);
   const powerStructure = heldStructure === UNPINNED
     ? projectPowerGenerationIntent(powerIntent, economicState)
-    : structuredClone(heldStructure);
+    : heldStructure;
 
   // ── Trace recording (Tier 4.1) ───────────────────────────────────────
   // Emit one trace per faction the generator produced. Causes describe

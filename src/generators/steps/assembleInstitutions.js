@@ -224,13 +224,13 @@ registerStep('assembleInstitutions', {
   provides: ['institutions', 'catalogForTier', 'generationRepairs'],
   phase: 'institutions',
 }, (ctx, rng) => {
-  // THE PIN CONSULT (EM-B2a3). All three of this step's choosers are gated through the runner's
-  // shared primitive, and `runPipeline` refuses a set that supplies some of them and not others,
-  // so they are held together or not at all: a held roster short-circuits the whole production
-  // below and none of its draws is taken. A held value is CLONED on the way out (design §22
-  // ruling 6) because a record-built bag handed back by reference is written through in place by
-  // the later roster passes. The clone is LOCAL to this member's consults and retires the day
-  // EM-R1 clones the bag on entry at the runner.
+  // THE PIN CONSULT (EM-B2a3, its clone re-homed by EM-R1). All three of this step's choosers are
+  // gated through the runner's shared primitive, and `runPipeline` refuses a set that supplies
+  // some of them and not others, so they are held together or not at all: a held roster
+  // short-circuits the whole production below and none of its draws is taken. A held value is
+  // handed back BY REFERENCE, because the bytes are already the runner's: `runPipeline` deep-
+  // clones the pin bag on entry, once, per channel (design §22 ruling 6), so nothing returned
+  // here can reach an object the caller owns. The LOCAL clone this consult took is retired.
   const pins = ctx.__pins || null;
   const held = {
     institutions: chooseOrPin(pins, 'institutions', () => UNPINNED),
@@ -239,9 +239,9 @@ registerStep('assembleInstitutions', {
   };
   if (held.institutions !== UNPINNED) {
     return {
-      institutions: structuredClone(held.institutions),
-      catalogForTier: structuredClone(held.catalogForTier),
-      generationRepairs: structuredClone(held.generationRepairs),
+      institutions: held.institutions,
+      catalogForTier: held.catalogForTier,
+      generationRepairs: held.generationRepairs,
     };
   }
 
