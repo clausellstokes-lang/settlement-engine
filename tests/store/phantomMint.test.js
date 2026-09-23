@@ -347,4 +347,40 @@ describe('EM-F3 — the mint writes ONE hidden save, through the real save path'
     expect(asTown.filter((row) => String(row.id) === String(answer.id)).length,
       'on the SAME row id it was minted with').toBe(1);
   });
+
+  test('S8: the shelf\'s COUNT and the mint\'s INDEX are different facts — after a promotion the three halves still read true and the next counterparty joins on a key of its own', async () => {
+    // EM-F3b. S7 proved what a promotion does to the SHELF; this proves what it does NOT do to
+    // the MINT. The promoted row stops being counted as a counterparty while it goes on
+    // claiming the key it was minted with, and the mint's index is a walk past that claim —
+    // so founding the next counterparty after a promotion is an ordinary act with an ordinary
+    // outcome, and none of F3's own three halves moves.
+    const promoted = await mintPhantomIntent(get, set, { name: 'Greymoor' });
+    await saves.update(String(promoted.id), {
+      settlement: { _seed: 'forged', id: 'set-greymoor', name: 'Greymoor', tier: 'village', npcs: [], factions: [] },
+    });
+    storeState.savedSettlements = await saves.list();
+    expect(phantomRows(await saves.list()).length,
+      'the library holds no counterparty: the count the mint used to read has gone to zero').toBe(0);
+
+    const next = await mintPhantomIntent(get, set, { name: 'Harrowfen' });
+    expect(next.ok, 'the next counterparty was founded').toBe(true);
+    expect(String(next.id) === String(promoted.id), 'the two mints share a primary key').toBe(false);
+
+    const rows = await saves.list();
+    expect(new Set(rows.map((row) => String(row.id))).size,
+      'every library row carries a distinct primary key').toBe(rows.length);
+    // THE THREE HALVES OF "OFF-STAGE", RE-READ: hidden, uncounted, and still a partner — now
+    // beside a forged world that was a counterparty an act ago.
+    expect(applyLibraryFilters(rows, {}).map((row) => row.name).sort(),
+      'the shelf shows the town and the world that was forged out of a counterparty')
+      .toEqual(['Ashford', 'Greymoor']);
+    expect(activeSaveCount(rows), 'the quota counts those two and not the new counterparty').toBe(2);
+    expect(String(findSaveByName(rows, 'Harrowfen')?.id), 'and the new counterparty resolves by name')
+      .toBe(String(next.id));
+    expect(counterpartiesOf(TOWN, rows).map((row) => [row.name, row.offStage]),
+      'the roster names the one counterparty that is still off-stage')
+      .toEqual([['Harrowfen', true]]);
+    expect(rows.filter((row) => String(row.id) === String(promoted.id)).map((row) => row.settlement.name),
+      'and the forged world is still reached by its own id, once').toEqual(['Greymoor']);
+  });
 });

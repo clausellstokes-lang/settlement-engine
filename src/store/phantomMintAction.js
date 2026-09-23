@@ -174,10 +174,31 @@ export async function mintPhantomIntent(get, set, intent) {
   if (name === '') return { ok: /** @type {false} */ (false), reason: INVALID_NAME };
 
   const rows = Array.isArray(state?.savedSettlements) ? state.savedSettlements : [];
-  // THE MINT INDEX IS THE PHANTOM COUNT, so the same town mints the same phantom for the same
-  // index forever and two phantoms of one town never share an id, a seed or a forged world.
-  let n = 0;
-  for (const row of rows) if (isPhantomSave(row)) n += 1;
+  /**
+   * ⛔ EVERY ID THE LIBRARY ALREADY CLAIMS — PHANTOM OR NOT, ACTIVE OR NOT (EM-F3b).
+   *
+   * THE MINT INDEX USED TO BE THE PHANTOM COUNT, AND A COUNT IS NOT AN IDENTITY. `mintDmId`
+   * is a pure hash of (seed, kind, n), so index `n` names one id forever — while the phantom
+   * count SHRINKS on two ordinary acts. EM-F2's promotion replaces the phantom's blob IN
+   * PLACE with the forged settlement, which carries no `kind`, so the row stops reading as a
+   * phantom while keeping the id it was minted with; and a delete takes the row off the shelf
+   * outright. Either way the next mint re-derived an id a LIVE row still holds, and
+   * `localSaveEntry` unshifts, so the five-key stub landed FIRST: two rows share one primary
+   * key and every `saves.find(r => r.id === X)` — the detail route, the focus effect, `update`,
+   * `delete` — resolves to the stub while the forged town becomes unreachable. THE PROMISE is
+   * that a seed is a starting world forever and lived history is immutable; a shadowed world
+   * is that promise broken. It is the deterministic sibling of the clock-based collision the
+   * library lanes cured at the local mint and at the batch create.
+   *
+   * So the index is a CLAIM WALK, never a count — the estate's own idiom two files away:
+   * `editSlice.js :: mintNewcomerId` walks past every id the layer and the registry claim, and
+   * this walks past every id a library row claims. A PROMOTED row keeps the phantom's id, so
+   * its claim outlives its phantomhood, which is exactly what closes the hole the count opened.
+   * The set is built with `newLocalSaveId`'s own predicate (`String(row?.id)`), so a row this
+   * store holds malformed still claims whatever key it would be addressed by.
+   * @type {Set<string>}
+   */
+  const claimed = new Set(rows.map((row) => String(row?.id)));
 
   // ⛔ THE DM'S PICKS, VALIDATED BEFORE ANYTHING IS MINTED. A blank is "roll it"; a member of
   // the pool is the DM's word; anything else is refused, because a stray value on a persisted
@@ -193,7 +214,6 @@ export async function mintPhantomIntent(get, set, intent) {
     chosen[trait] = picked;
   }
 
-  const seed = mintDmId(seedRoot, PHANTOM_KIND, n);
   /**
    * THE ROLLER, BOUND. It answers the DM's word for a trait she declared and defers to the pool
    * table's own roll for every other, so the record's shape is the mint's and its values are
@@ -207,8 +227,28 @@ export async function mintPhantomIntent(get, set, intent) {
     return rollFrom(poolId, world, rollSeed, entryId, index);
   };
 
-  const record = /** @type {Record<string, any>|null} */ (
-    mintPhantom(seed, name, n, { mintId: mintDmId, roll }));
+  /**
+   * ONE STEP OF THE WALK: the record EM-F1's leaf WOULD mint at this index, seed and all. The
+   * id's derivation is asked of the leaf rather than re-spelled here — a second spelling of
+   * "the phantom's id" in the store is the divergence these cures exist to close — so the
+   * record the walk stops on is the very record that is written, never a re-mint.
+   * @param {number} index @returns {Record<string, any>|null}
+   */
+  const mintAt = (index) => /** @type {Record<string, any>|null} */ (
+    mintPhantom(mintDmId(seedRoot, PHANTOM_KIND, index), name, index, { mintId: mintDmId, roll }));
+
+  // THE WALK. Bounded by construction: `claimed` is finite and every step tries a fresh index
+  // — the same bound `mintNewcomerId` walks under. On a library that never promoted or deleted
+  // a phantom the walk lands exactly where the count did (indices 0…k-1 are precisely the ids
+  // already claimed), so no minted identity moves; what changes is only the case the count got
+  // wrong. The index is a function of the seed root and the claimed set alone — never of the
+  // DM's free name, which `mintPhantom` does not hash — so it stays deterministic.
+  let n = 0;
+  let record = mintAt(n);
+  while (record !== null && claimed.has(String(record.id))) {
+    n += 1;
+    record = mintAt(n);
+  }
   if (record === null) return { ok: /** @type {false} */ (false), reason: MINT_FAILED };
 
   // THE ENVELOPE IS THE COLUMNS THE TABLE ALREADY HAS, AND NO MORE (judgment 261). The row id

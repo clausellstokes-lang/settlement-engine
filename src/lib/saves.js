@@ -871,6 +871,39 @@ async function localSaveEntry(
   // lose this row and let the mint re-use a key.
   return serializeLocalWrite(async () => {
     const saves = await localLoad();
+    // ⛔ EM-F3b — A CALLER'S ID THE LIBRARY ALREADY HOLDS IS REFUSED, BEFORE ANY WRITE.
+    //
+    // This is a CREATE, and it UNSHIFTS. Every id compare in this module is `String(id)`, so a
+    // repeated key does not overwrite the row it repeats — it SHADOWS it: two rows carry one
+    // identity, the newcomer is FIRST, and `localUpdate` reaches only it, `localDelete` filters
+    // by inequality and takes BOTH, and every `find` by id — the detail route, the focus
+    // effect — resolves to the newcomer while the older world becomes unreachable. That is the
+    // data-loss shape cured at the local mint (a clock that repeated inside one millisecond)
+    // and at the batch create (`batch_create_requires_id`); this is the same refusal at the one
+    // create path that accepts a CALLER'S key, and it is this module's answer to a caller whose
+    // own mint has gone wrong rather than a second mint here.
+    //
+    // ⛔ A CALLER THAT MEANS TO WRITE OVER A ROW ALREADY HAS A DOOR: `localUpsert` takes an
+    // explicit id and updates in place, and `localUpdate` patches. Refusing here NAMES the
+    // broken precondition at the boundary that holds the rows — U53's own words — rather than
+    // minting an identity the caller is not holding.
+    //
+    // MEASURED, which is why this is safe to refuse: of the ten `saves.save()` callers in the
+    // tree, nine pass no `id` at all (the service mints), and the tenth — the phantom door's
+    // `store/phantomMintAction.js` — passes its record's own minted id and now walks that id
+    // past every claim before it writes. So the refusal is unreachable on the shipped paths and
+    // fires only on the mistake it is named for.
+    //
+    // The check reads the rows, so it sits INSIDE the serialized section — U69's reason
+    // exactly: between an unqueued read and the write, an interleaved writer could land the
+    // very key this is testing for. It still runs before any `localWrite`, so a refused create
+    // leaves the device exactly as it found it.
+    if (v2.id && saves.some(save => String(save.id) === String(v2.id))) {
+      throw Object.assign(
+        new Error('Explicit-id save create requires an unclaimed id.'),
+        { code: 'save_requires_unclaimed_id' },
+      );
+    }
     // An explicit id still wins, exactly as before (`||`, so the falsy ids this module has
     // always re-minted keep being re-minted); only the fallback changed. See newLocalSaveId.
     const id = v2.id || newLocalSaveId(saves);
