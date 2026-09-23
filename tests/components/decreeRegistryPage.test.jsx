@@ -220,8 +220,16 @@ describe('EM-D3: the registry page at the dossier foot', () => {
     // predicate is spelled twice in the leaf (the belt only a source read can see).
     cleanup();
     const bare = render(pageOf({})).container;
+    // ⛔ EACH CONTROL IS PROVEN RENDERED BEFORE IT IS PROVEN DISABLED. `[].every(f)` is TRUE,
+    // so a leaf that simply stopped rendering the control when the seam is absent would
+    // satisfy the triad below over an EMPTY NodeList and never disable anything. The count
+    // is what makes "disabled" a claim about a control rather than about nothing at all; it
+    // is the same non-empty anchor this arm already stands on for the seam-bound render.
+    expect(nodes(bare, 'decree-reopen').length, 'presence control: the bare page drew its reopen controls').toBe(2);
     expect(nodes(bare, 'decree-reopen').every((node) => node.disabled)).toBe(true);
+    expect(nodes(bare, 'decree-move-up').length, 'presence control: the bare page drew its move-up controls').toBe(2);
     expect(nodes(bare, 'decree-move-up').every((node) => node.disabled)).toBe(true);
+    expect(nodes(bare, 'decree-withdraw').length, 'presence control: the bare page drew its withdraw controls').toBe(2);
     expect(nodes(bare, 'decree-withdraw').every((node) => node.disabled)).toBe(true);
     expect(beltsIn(LEAF_SOURCE, 'reorder').length).toBe(2);
     expect(beltsIn(LEAF_SOURCE, 'withdraw').length).toBe(2);
