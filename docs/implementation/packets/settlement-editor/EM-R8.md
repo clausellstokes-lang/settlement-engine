@@ -1,6 +1,6 @@
 # `settlement-editor / EM-R8` — THE LADDER'S HELD-KEY LAW: a reading is never repaired by overwriting a held fact
 
-- **Status:** `READY`
+- **Status:** `LANDED`
   ⚠ The status value above stands ALONE on its line, and it must: `parsePacketHeader`
   (`scripts/implementation-packets.mjs`) anchors the status row at END-OF-LINE and takes `status`
   only when EXACTLY ONE row matches. Every stamp lives here, on the CONTINUATION lines.
@@ -17,6 +17,7 @@
   ⛔ **THIS MEMBER CURES A DATA-LOSS DEFECT.** At the tip, adjusting one faction's power share
   DELETES a named person from a saved town and the delta card reports `cured: true`. Edit Mode is
   DARK behind the tier gate and nothing deployed carries it; the defect is on the branch only.
+- **Landed at:** `e85957236d4cf6244d294e87b5e5617c27d2e7b2` — the ladder's held-key law (version 3): no rung of ladderFor carries a HELD key; the receipt's two counted evidence rows a MIRROR recomputed from the merged record; held keys moved 0/498, named people lost or invented 0 (245/250/252/255); built at e85957236 on train EM-T17
 - **Packet version:** `3`
   - **Version 3 (2026-09-23, the chair, judgment 255):** V23's V11 sentence corrected from an argued "unmoved" to the EXECUTED figure (0 → 11 of 1,890 ride-along in the chains, EM-R7 v2's run on the shape-B plant); no other row, path, count or title moved.
   > **WHAT VERSION 2 CHANGED AND WHY (the Opus PRE-PROOF seat, train EM-T17 stage 2, session

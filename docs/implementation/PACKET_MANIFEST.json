@@ -41966,9 +41966,10 @@
     },
     {
       "id": "EM-R8",
-      "status": "READY",
+      "status": "LANDED",
       "packetPath": "docs/implementation/packets/settlement-editor/EM-R8.md",
       "verifiedBase": "0d6143b58206e3e4e1b2550ae0ba4c353ee88a21",
+      "landedAt": "e85957236d4cf6244d294e87b5e5617c27d2e7b2",
       "changeManifest": [
         {
           "action": "MODIFY",
