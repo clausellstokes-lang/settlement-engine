@@ -24,12 +24,18 @@
  * ⛔ PURE, TOTAL, FALSE-ON-ABSENCE. An absent field yields `false`, never a throw, so a
  * card simply does not offer the seal. No writes, no draws, no store, no React.
  *
- * ⭐ TEN IDS, ELEVEN READERS. `openRoute` is ONE id answered by TWO readers (the
+ * ⭐ TEN IDS, NINE OF THEM LIVE. `openRoute` is ONE id answered by TWO readers (the
  * regional graph's confirmed channel, always live; the route-network ledger, gated
  * behind `routeLifecycleEnabled`, which is off by default), and `readers` is the data
- * position the ruling names when it says "the seal names which". TWO rows are honestly
- * absent, declare `source: 'EM-E4'` and `readers: []`, and return `false` until the pins
- * packet lands their state; they are not invented here.
+ * position the ruling names when it says "the seal names which". ONE row is still
+ * honestly absent, declares `source: 'EM-E4'` and `readers: []`, and returns `false`
+ * until the packet that lands its state arrives; it is not invented here.
+ *
+ * ⭐ `pendingPeaceOffer` IS NO LONGER ONE OF THEM (U28). EM-E4 landed the standing offer
+ * as a record on the RECEIVING settlement, keyed by the counterparty that made it
+ * (`peaceTermsDrafting.js`'s `PEACE_OFFER_KEY`, `peaceOffersOf`, `pendingPeaceOfferFrom`),
+ * which is precisely the state this row was waiting on — so the row reads it rather than
+ * answering a stale `false` about a fact the tree now carries.
  */
 
 import { STATUS_ACTIVE } from '../entities/status.js';
@@ -40,6 +46,7 @@ import { PRIMARY_RELATIONSHIP_TYPES } from '../worldPulse/relationshipCompatibil
 import { hasBeliefMaps } from '../display/settlementBeliefs.js';
 import { getSpatialLedger } from '../spatial/spatialLedgerAccess.js';
 import { COUP_STRESSOR_TYPE } from '../worldPulse/coup.js';
+import { peaceOffersOf, pendingPeaceOfferFrom } from '../worldPulse/peaceTermsDrafting.js';
 import { REGIONAL_CHANNEL_TYPES, activeChannelsFrom } from '../region/graph.js';
 import { ROUTE_GRADES, readRouteNetwork, routeLifecycleActive } from '../worldPulse/routeNetworkLedger.js';
 
@@ -188,7 +195,7 @@ const ABSENT_UNTIL_E4 = Object.freeze({
 });
 
 /**
- * THE ROSTER. Ten ids, authored in codepoint order; eight live, two honestly absent.
+ * THE ROSTER. Ten ids, authored in codepoint order; nine live, one honestly absent.
  * @type {Readonly<Record<string, WorldConditionRow>>}
  */
 export const WORLD_CONDITIONS = Object.freeze({
@@ -270,7 +277,22 @@ export const WORLD_CONDITIONS = Object.freeze({
     ],
   }),
 
-  pendingPeaceOffer: ABSENT_UNTIL_E4,
+  // SUBJECT: structural. EM-E4's record stands ON THE RECEIVING SETTLEMENT and is keyed by
+  // the counterparty that made each offer, so another town's offers are on another town's
+  // record and are not reachable from here at all — no filter is needed and none is faked.
+  // STAGE: also structural. A STANDING offer is the pending stage by construction, and both
+  // ways out of it (`withoutPeaceOffer`, which acceptance and refusal each call) take the
+  // key off, so a war already settled offers neither seal.
+  // ⛔ THE CARD-LEVEL QUESTION IS "does any counterparty's offer stand", because a predicate
+  // is handed the record and the campaign and never a counterparty; design §18's per-seal
+  // read from ONE named court is `pendingPeaceOfferFrom` itself, which is why the keys come
+  // from `peaceOffersOf` and each is put back through that exported gate rather than being
+  // trusted as a key. A bag entry that is not a real offer therefore cannot light the seal.
+  pendingPeaceOffer: liveRow({
+    predicate: (record) => Object.keys(peaceOffersOf(record))
+      .some((fromId) => !!pendingPeaceOfferFrom(record, fromId)),
+    readers: [reader('peace-offer-record', 'src/domain/worldPulse/peaceTermsDrafting.js', 'pendingPeaceOfferFrom')],
+  }),
 
   // SUBJECT: the stressor's own `affectedSettlementIds`. STAGE: the live four. Both
   // filters mirror the tree's own idiom at `blockadeFor` and `famineFor`.
