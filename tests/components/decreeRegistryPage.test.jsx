@@ -13,9 +13,10 @@
  * through EM-C4b's OWN store actions over a live get/set pair, so the arms watch the real
  * registry move rather than a spy's argument; the guards come from EM-C4b's OWN
  * `selectGuards` over EM-C2's engine with a rule set supplied at the engine's declared seam;
- * the realm rung is read from the copy registry; and the rewind's number is PARSED from the
- * estate's own `PULSE_UNDO_CAP`. A fixture that mirrored a producer could agree with a
- * broken leaf by construction.
+ * the realm rung is read from the copy registry; and the rewind's number is IMPORTED from
+ * the estate's own `PULSE_UNDO_CAP` (U8 — it was parsed out of the advance session's source
+ * with a regex until that constant was exported). A fixture that mirrored a producer could
+ * agree with a broken leaf by construction.
  *
  * ⛔ EVERY WOULD-BE NEGATIVE IS SPELLED AS A POSITIVE EQUALITY, so no `// anchored:` marker
  * is owed anywhere in this file: each source scan is a set equality against the EMPTY set
@@ -52,6 +53,7 @@ import {
 } from '../../src/domain/edit/registry.js';
 import { GUARD_KINDS, GUARD_OFFERS } from '../../src/domain/edit/guards.js';
 import { DECREE_ACTIONS, reorderDecree, selectGuards, withdrawDecree } from '../../src/store/editSlice.js';
+import { PULSE_UNDO_CAP } from '../../src/store/campaignAdvanceSession.js';
 import { t } from '../../src/copy/index.js';
 import { censusOfSource, proseFloorCensusOfSource } from './phoneFloorCensus.shared.mjs';
 import { extractJsxProseStrings } from '../helpers/jsxLiteralWalk.js';
@@ -59,7 +61,6 @@ import { extractJsxProseStrings } from '../helpers/jsxLiteralWalk.js';
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), '..', '..');
 const LEAF_REL = 'src/components/edit/DecreeRegistryPage.jsx';
 const LEAF_SOURCE = readFileSync(join(ROOT, LEAF_REL), 'utf8');
-const ADVANCE_REL = 'src/store/campaignAdvanceSession.js';
 
 const SAVE = 'save_em_d3';
 const T0 = '2026-09-23T10:00:00.000Z';
@@ -297,10 +298,12 @@ describe('EM-D3: the registry page at the dossier foot', () => {
   });
 
   it('A7 the rewind session limit is stated from the estate own constant', () => {
-    const declared = /const PULSE_UNDO_CAP = (\d+);/.exec(readFileSync(join(ROOT, ADVANCE_REL), 'utf8'));
-    expect(declared).not.toBe(null);
-    const cap = Number(declared[1]);
-    expect(Number.isFinite(cap)).toBe(true);
+    // THE CONSTANT ITSELF, IMPORTED (U8). This arm used to recover the number with a regex
+    // over the advance session's source — a second spelling of the declaration, blind to a
+    // re-format and unable to follow a rename. The estate now exports the cap, so the page
+    // and the advance body read ONE value and this arm pins the export rather than a shape.
+    const cap = PULSE_UNDO_CAP;
+    expect(Number.isInteger(cap) && cap > 0, 'the estate exports a real cap').toBe(true);
 
     const { container } = render(pageOf({ rewindLimit: cap }));
     expect(container.querySelector('[data-testid="decree-registry-rewind"]').textContent)
