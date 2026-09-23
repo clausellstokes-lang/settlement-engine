@@ -37799,7 +37799,8 @@
         },
         {
           "path": "src/components/edit/FreeField.jsx",
-          "symbol": "export default function FreeField({ declaration, value, onChange, disabled = false }) {"
+          "symbol": "export default function FreeField({ declaration, value, onChange, disabled = false }) {",
+          "retiredBy": "§934.47 addendum 133 (EM-D2's remainder — the font-coverage check — widened FreeField's props with `coverage`, rewriting the landed signature line; §731.3's idiom; judgment 269, tests-only mode)"
         },
         {
           "path": "src/components/primitives/PortablePopup.jsx",
