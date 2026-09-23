@@ -279,6 +279,10 @@ describe('EM-D1 — the edit-mode shell', () => {
     expect(disabled).toEqual(sealNames.map(() => true));
     const body = document.body.textContent;
     const reasons = Object.keys(en.edit.shell.reason).map((id) => en.edit.shell.reason[id]);
+    // The reason half counts what it compares, exactly as the seal half three lines above
+    // does: `reasons.map(f)` against `reasons.map(g)` asserts NOTHING over an emptied bag,
+    // so §18's eleven preconditions are pinned before they are looked for on the page.
+    expect(reasons.length).toBe(11);
     expect(reasons.map((line) => body.includes(line))).toEqual(reasons.map(() => true));
     expect(body.includes(t('edit.shell.actsNote'))).toBe(true);
 
