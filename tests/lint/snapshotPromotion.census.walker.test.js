@@ -417,6 +417,10 @@ const CENSUS = Object.freeze([
     persists: 'persistSaveUpdate(targetSaveId, { settlement, versionHistory, campaignState? })',
     why: 'THE VEIL IS EM-B3e\'s, AND IT IS NOT LANDED AT THIS TIP. The entry\'s `versionHistory` rides the account door with `restoreLifecycle: true` and rides the export whole, so until EM-B3e strips `entry.versionHistory[i].settlement` on both halves a promoted snapshot is NOT provably the account\'s own (EM-B3d VERIFY FIX-1). Inert today — nothing in src/ writes either key — and EM-B3e must land before EM-C4a, which is the first writer.',
   },
+  {
+    file: 'src/store/settlementGenerateAction.js', fn: 'generateSettlementAction', sites: 1, shapes: 'W1', kind: FORWARD,
+    why: 'EM-F2\'s PHANTOM PROMOTION, and the word collides with this census\'s class rather than joining it. A PROMOTER here is "a settlement read from a snapshot / version-history element / undo stack / draft history"; what this site writes is the settlement the PIPELINE HAS JUST FORGED on this call, from the seed the phantom record carries — a world minted a few statements above the write, not one restored from anywhere. No timeline, ring or draft history is read on the path (the trace finds no substrate word, which is A3\'s own re-derivation of this sentence), and the only value taken off the saved record is the LIVE blob beside it: `carriedHistoryOf` folds the keys the row itself already held — the back-link\'s reciprocal edge, the decree rows — over the forge, and never over a key the forge wrote. So this is a FORWARD write in this census\'s sense, computed from the live row and a fresh generation; nothing a snapshot substrate could hold can reach a saved record through it. The row it lands on is the phantom\'s own, replaced in place on the same primary key so every back-link already pointing at it still resolves.',
+  },
 ]);
 
 const DECLARED = CENSUS.map((row) => `${row.file}::${row.fn}\t${row.sites}\t${row.shapes}`).sort();
