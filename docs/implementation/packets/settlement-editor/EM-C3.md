@@ -1,6 +1,6 @@
 # `settlement-editor / wave 2` — implementation contract: EM-C3, THE GUARD RULES
 
-- **Status:** `READY`
+- **Status:** `LANDED`
 
   Compiled by an Opus COMPILE seat at read tip `1b073009f` (train EM-T16's landed tip),
   session cce01f87, 2026-09-23. READY-able: every verified-fact row was re-found BY SYMBOL
@@ -65,6 +65,7 @@
   symbols this leaf names (judgment 151 — they do not exist at this packet's own base and are
   re-measured VERBATIM at the placement, never promoted as written), the re-added FOURTH ROOT of the flavour census (EM-C2's finding,
   measured here), and every instrument re-measured over the version-2 planted leaf.
+- **Landed at:** `fbcc4b327ab33cca23f5d098de84cf74e3ad794f` — the guard rules (version 4): design §12.8's five rules over the record with the two generator writers injected on ctx.deps (the domain→generators boundary held; 235/236); built at fbcc4b327 on train EM-T17
 - **Packet version:** `4`
 - **Verified base:** `em-t17-c3-2026-09-23` at `0d6143b58206e3e4e1b2550ae0ba4c353ee88a21`
 - **Preamble:** `docs/implementation/preambles/EM-PREAMBLE.md` at SHA-256 `125c693214235a81bf4f2b38506b621859a35e0325ff2ea58d335b4e0681a99d` — MEASURED at the read tip (`shasum -a 256`), the SIXTH amendment.

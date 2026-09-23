@@ -41676,9 +41676,10 @@
     },
     {
       "id": "EM-C3",
-      "status": "READY",
+      "status": "LANDED",
       "packetPath": "docs/implementation/packets/settlement-editor/EM-C3.md",
       "verifiedBase": "0d6143b58206e3e4e1b2550ae0ba4c353ee88a21",
+      "landedAt": "fbcc4b327ab33cca23f5d098de84cf74e3ad794f",
       "changeManifest": [
         {
           "action": "CREATE",
