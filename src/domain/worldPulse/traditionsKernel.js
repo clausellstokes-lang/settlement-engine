@@ -77,6 +77,10 @@ import { relationshipKeyFromEdge } from './relationshipState.js';
 import { clamp01 } from '../../kernel/math.js';
 import { beliefAxesActive, observanceFromTraditions } from './beliefAxes.js';
 import { pilgrimageDraw } from '../traditions/pilgrimage.js';
+// EM-E4b — THE DIRECTOR'S CONSULT (design §16; the chair's judgments 265 and 270). The verb
+// only: this fork's words are exported below and handed to the fold by the pulse's head, so
+// the directive leaf never imports a catalogue (EM-E4's `directives.js` header; case E4-14).
+import { chooseOrPinFork } from '../edit/directives.js';
 
 /**
  * @typedef {import('../traditions/genesis.js').TraditionRec} TraditionRec
@@ -124,6 +128,28 @@ function cmp(a, b) {
 export const TRADITION_OUTCOME = Object.freeze({
   TRIUMPH: 'triumph', GOOD: 'good', MODEST: 'modest',
   TROUBLED: 'troubled', FAILURE: 'failure', CANCELLED: 'cancelled',
+});
+
+/**
+ * THIS MODULE'S REGISTERED FORK (EM-E4b; `HABIT_FORK_REGISTRY`'s row HBF-85, whose `symbol`
+ * is `advanceLitTraditions` and whose `module` is this file). The id is spelled HERE and
+ * nowhere else — a fork's own name stays in the file that owns its draw.
+ *
+ * ⛔ THE PIN WORDS ARE THE DRAW'S FIVE AND NOT THE FIELD'S SIX, which is a measurement rather
+ * than a trim. `outcomeForDraw` below is the whole of what the draw can answer, and
+ * `cancelled` is written by the DETERMINISTIC skip arm — a town at war holds no festival — so
+ * a pin naming it would pin a draw that never happens, the exact shape design §19 ruling 4
+ * refuses. EM-E4's case E4-3 measured the narrowing; the arm in
+ * tests/simulation/forkSitesConsultPins.test.js holds this list equal to the words the real
+ * `outcomeForDraw` produces, so the two can never drift.
+ * @type {Readonly<{ id: string, outcomes: readonly string[] }>}
+ */
+export const TRADITION_FORK = Object.freeze({
+  id: 'HBF-85',
+  outcomes: /** @type {readonly string[]} */ (Object.freeze([
+    TRADITION_OUTCOME.TRIUMPH, TRADITION_OUTCOME.GOOD, TRADITION_OUTCOME.MODEST,
+    TRADITION_OUTCOME.TROUBLED, TRADITION_OUTCOME.FAILURE,
+  ])),
 });
 
 // ── §4/§5 TUNING (soak-certified dials; every entry vetoable) ──────────────────
@@ -560,15 +586,19 @@ function traditionChangeBeat({ sid, townName, year, tick, now }) {
  * @param {TradUpdate[]} args.settlementUpdates
  * @param {number} args.tick
  * @param {string|null} args.now
+ * @param {unknown} [args.forkPins] EM-E4b — the tick's pin bag, composed at the pulse's head
+ *   from the DUE decrees and handed down the growth chain. Absent (every caller but the
+ *   kernel, and every tick with no directive) ⇒ the draw below runs exactly as it did before
+ *   this member: `chooseOrPinFork` misses and calls the thunk.
  * @returns {TraditionsAdvanceResult}
  */
-export function advanceTraditions({ snapshot, worldState, settlementUpdates, tick, now }) {
+export function advanceTraditions({ snapshot, worldState, settlementUpdates, tick, now, forkPins }) {
   const updates = Array.isArray(settlementUpdates) ? settlementUpdates : [];
   // ── DORMANCY GATE: the flag absent ⇒ an immediate no-op. No key, no mirror, no news. ──
   if (!traditionsActive(worldState)) {
     return { worldState, settlementUpdates: updates, changed: false, newsEntries: [] };
   }
-  return advanceLitTraditions({ snapshot, worldState, settlementUpdates: updates, tick, now });
+  return advanceLitTraditions({ snapshot, worldState, settlementUpdates: updates, tick, now, forkPins });
 }
 
 /**
@@ -579,9 +609,10 @@ export function advanceTraditions({ snapshot, worldState, settlementUpdates, tic
  * @param {TradUpdate[]} args.settlementUpdates
  * @param {number} args.tick
  * @param {string|null} args.now
+ * @param {unknown} [args.forkPins] EM-E4b — the tick's pin bag (see `advanceTraditions`).
  * @returns {TraditionsAdvanceResult}
  */
-function advanceLitTraditions({ snapshot, worldState, settlementUpdates, tick, now }) {
+function advanceLitTraditions({ snapshot, worldState, settlementUpdates, tick, now, forkPins }) {
   /** @type {Array<Record<string, unknown>>} */
   const newsEntries = [];
   // D-1c (deep-couplings) CULTURAL FEEDER gate: emit the tradition-mutation beat ONLY when the
@@ -729,8 +760,18 @@ function advanceLitTraditions({ snapshot, worldState, settlementUpdates, tick, n
         // RS-6 — THE RE-ROOT (advance epoch, EP-3 slice B), row 6. The original coercion is
         // still visible verbatim INSIDE the accessor call, which is how §3b.3's byte-verbatim
         // rule is satisfied structurally rather than by transcription.
-        const r = createPRNG(`${yearStreamSeedOf(worldState, year, { base: String(asObject(worldState).rngSeed || ''), yearBase: 1 })}::tradition:${rec.id}:${year}`).random();
-        outcome = outcomeForDraw(score, r);
+        // ⭐ EM-E4b — THE DIRECTOR'S PIN AT HBF-85. A pin names one of `TRADITION_FORK.outcomes`
+        // and THE YEAR ROOT IS NEVER COMPOSED: the draw is a thunk, so `createPRNG` is not
+        // reached and the composition above is byte-identical to a run in which this festival's
+        // window never opened (EM-P0's A3; the chair's judgment 265 (b)). The root's own
+        // expression is unmoved inside the thunk, which is what keeps RS-6 and the entropy
+        // census reading the same line they always did. NO PIN ⇒ `chooseOrPinFork` calls the
+        // thunk and this is character-for-character the two statements it replaces.
+        // ⛔ THE PIN CANNOT REACH THE ARM ABOVE, and that is the law rather than an accident:
+        // `cancelled` is the deterministic skip's word, it is not in this fork's vocabulary, so
+        // a directive naming it is refused at the fold and never enters the bag.
+        outcome = chooseOrPinFork(forkPins, TRADITION_FORK.id, () => outcomeForDraw(score,
+          createPRNG(`${yearStreamSeedOf(worldState, year, { base: String(asObject(worldState).rngSeed || ''), yearBase: 1 })}::tradition:${rec.id}:${year}`).random()));
       }
       // §5 EFFECTS (write-bounded; accumulated, applied once below).
       const prospStep = /** @type {Record<string, number>} */ (TRAD_TUNING.PROSPERITY_STEP)[outcome];
@@ -876,7 +917,15 @@ function advanceLitTraditions({ snapshot, worldState, settlementUpdates, tick, n
  * import/call — zero new effective lines in the ceiling'd file; the ladder/provenanceKernel
  * idiom). Traditions dark ⇒ an exact no-op inside the composition (the prior result passes
  * through byte-identical). No cycle: this leaf imports the ladder kernel; none import back.
- * @param {Parameters<typeof advanceNpcGrowthWithFabricAndConsequenceAndLadder>[0]} args
+ * ⭐ EM-E4b — THE PIN BAG RIDES THE CHAIN'S OWN ARGUMENT BAG, and the widening is HERE for a
+ * measured reason. pulseKernel calls the DENSITY head, which forwards `args` by reference to
+ * the assize head, which forwards it to the roads head, which forwards it to THIS one — three
+ * leaves this member does not own and does not touch — and each of their `@param` types is
+ * `Parameters<>` of the one below, so widening this signature widens the whole chain up to the
+ * kernel's call site. That is why the bag travels as a field of the existing bag rather than as
+ * a new parameter anywhere: `roadsKernel.js`'s own `& { saves?: unknown }` is the same idiom,
+ * one seam lower.
+ * @param {Parameters<typeof advanceNpcGrowthWithFabricAndConsequenceAndLadder>[0] & { forkPins?: unknown }} args
  * @returns {ReturnType<typeof advanceNpcGrowthWithFabricAndConsequenceAndLadder>}
  */
 export function advanceNpcGrowthWithFabricAndConsequenceAndLadderAndTraditions(args) {
@@ -887,6 +936,7 @@ export function advanceNpcGrowthWithFabricAndConsequenceAndLadderAndTraditions(a
     settlementUpdates: /** @type {TradUpdate[]} */ (/** @type {unknown} */ (prior.settlementUpdates)),
     tick: args.tick,
     now: args.now,
+    forkPins: args.forkPins,
   });
   if (!traditions.changed) return prior;
   return {

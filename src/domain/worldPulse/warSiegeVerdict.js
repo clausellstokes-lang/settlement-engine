@@ -23,6 +23,11 @@ import { classifyFeasibility, verdictPermitsSiege, verdictAllowsHarassment } fro
 // refused wars / quits winnable ones), then the roll below reads the TRUE values.
 // chaosPull 0 (lawful/neutral/no-piety) ⇒ factor 1, no rng forked ⇒ byte-identical.
 import { fidelityFactor } from './fidelityNoise.js';
+// EM-E4b — THE DIRECTOR'S CONSULT (design §16; the chair's judgments 265 and 270). The verb
+// only; the WORDS this fork accepts are exported below and handed to the fold by the caller,
+// never imported by the directive leaf (EM-E4's `directives.js` header states the reason and
+// its own case E4-14 measures it).
+import { chooseOrPinFork } from '../edit/directives.js';
 
 // Siege verdict on the 0..100 capacity scale. K is the log-odds slope per capacity
 // point; HOLD_BIAS is the home-ground defender advantage. Calibrated so a MUTUAL /
@@ -92,6 +97,19 @@ export function siegeFallOddsWordFor(pFall) {
  * @type {Readonly<Record<string, boolean>>}
  */
 export const SIEGE_VERDICT_BANDS = Object.freeze({ costly_success: true, decisive_fail: false, decisive_success: true, narrow_fail: false });
+
+/**
+ * THIS MODULE'S REGISTERED FORK (EM-E4b; `HABIT_FORK_REGISTRY`'s row HBF-86, whose `symbol`
+ * is `resolveSiegeVerdict` and whose `module` is this file). The id is spelled HERE and
+ * nowhere else — a fork's own name stays in the file that owns the draw — and the pin words
+ * are DERIVED from `SIEGE_VERDICT_BANDS` above rather than transcribed, so a band added or
+ * dropped moves the vocabulary in the same edit and cannot rot into a second list.
+ * @type {Readonly<{ id: string, outcomes: readonly string[] }>}
+ */
+export const SIEGE_FORK = Object.freeze({
+  id: 'HBF-86',
+  outcomes: /** @type {readonly string[]} */ (Object.freeze(Object.keys(SIEGE_VERDICT_BANDS))),
+});
 // Defender-resolve (P4, flag-gated) — the WILL track. A resolute defender shifts the
 // siege log-odds toward holding; a broken one toward falling. WILL_BIAS_STRENGTH is the
 // max shift (comparable to the hold bias). At/below the capitulate floor the will has
@@ -178,10 +196,10 @@ export const SIEGE_MAX_AGE = 60;
  * stochastic roll also produces an OUTCOME BAND (narrow/decisive/costly) the caller
  * feeds into attrition.
  *
- * @param {{ targetId: any, besiegers: any[], capacityFor: (id: any) => { offensive: number, homeDefense: number, facets: any }, effectiveStrengthFor: (id:any)=>(number|null), defenderItem: any, rng: any, tick: any, siegeAge?: number, defenderStrengthOverride?: (number|null), defenderResolveEnabled?: boolean, defenderReliefBonus?: number, attackerFidelity?: number, attackerRust?: number, supplyInterdiction?: number, spatialSiege?: boolean }} args
+ * @param {{ targetId: any, besiegers: any[], capacityFor: (id: any) => { offensive: number, homeDefense: number, facets: any }, effectiveStrengthFor: (id:any)=>(number|null), defenderItem: any, rng: any, tick: any, siegeAge?: number, defenderStrengthOverride?: (number|null), defenderResolveEnabled?: boolean, defenderReliefBonus?: number, attackerFidelity?: number, attackerRust?: number, supplyInterdiction?: number, spatialSiege?: boolean, forkPins?: unknown }} args
  * @returns {{ falls: boolean, harass: boolean, forcedLift: boolean, verdict: string, ratio: number, pFall: number, roll: number, coalitionCurrent: number, defenderCurrent: number, band: string, reasons: string[], capitulation?: boolean }}
  */
-export function resolveSiegeVerdict({ targetId, besiegers, capacityFor, effectiveStrengthFor, defenderItem, rng, tick, siegeAge = 0, defenderStrengthOverride = null, defenderResolveEnabled = false, defenderReliefBonus = 0, attackerFidelity = 0, attackerRust = 0, supplyInterdiction = 0, spatialSiege = false }) {
+export function resolveSiegeVerdict({ targetId, besiegers, capacityFor, effectiveStrengthFor, defenderItem, rng, tick, siegeAge = 0, defenderStrengthOverride = null, defenderResolveEnabled = false, defenderReliefBonus = 0, attackerFidelity = 0, attackerRust = 0, supplyInterdiction = 0, spatialSiege = false, forkPins = null }) {
   // Coalition strength sums member EFFECTIVE strengths (codepoint-sorted membership)
   // → order-independent: the army at the walls IS the offensive force, depleted by
   // attrition. Each besieger contributes its STATEFUL currentEffectiveStrength when it
@@ -354,8 +372,21 @@ export function resolveSiegeVerdict({ targetId, besiegers, capacityFor, effectiv
     logOdds = SIEGE_CAPACITY_K * (coalitionCurrent - defenderCurrent) - SIEGE_CAPACITY_HOLD_BIAS - willBias + supplyPush;
   }
   const pFall = clamp01(logistic(logOdds));
-  const roll = rng.fork(`siege:${stablePart(targetId)}:${tick}`).random();
-  const falls = roll < pFall;
+  // ⭐ EM-E4b — THE DIRECTOR'S PIN AT HBF-86, AND IT IS THE ONLY LINE OF THIS FILE THAT THE
+  // DM CAN REACH. A pin names one of `SIEGE_VERDICT_BANDS`' four words and the roll DOES NOT
+  // HAPPEN: the draw is a thunk, so the fork is never taken and this tick's siege stream is
+  // exactly where a tick that never reached the walls left it (EM-P0's A3, the chair's
+  // judgment 265 (b)). NO PIN ⇒ `chooseOrPinFork` calls the thunk and the three lines below
+  // read character-for-character as they did before this member — the deterministic arms
+  // above are untouched, because a pinned band is a claim about the ROLL and those take none.
+  // ⛔ THE PINNED ARM ANSWERS WITH THE BAND'S OWN DIRECTION AND A ZERO ROLL. `falls` is read
+  // off `SIEGE_VERDICT_BANDS`, which is why design §19 ruling 4 requires the pin to carry the
+  // band at all; `roll` is 0, the same word the feasibility, ceiling and capitulation arms
+  // already write when no roll happened, so a receipt never reports a draw that did not.
+  const rolled = chooseOrPinFork(forkPins, SIEGE_FORK.id, () => rng.fork(`siege:${stablePart(targetId)}:${tick}`).random());
+  const pinnedBand = typeof rolled === 'string' ? rolled : '';
+  const roll = pinnedBand ? 0 : Number(rolled);
+  const falls = pinnedBand ? SIEGE_VERDICT_BANDS[pinnedBand] === true : roll < pFall;
   // ── OUTCOME BAND: how the engagement went, scaled by how DECISIVE the roll was
   // relative to its threshold. A fall that cleared the bar by a wide margin is a
   // decisive_success (clean storm); a squeaker is costly_success (pyrrhic). A hold that
@@ -363,7 +394,9 @@ export function resolveSiegeVerdict({ targetId, besiegers, capacityFor, effectiv
   // a comfortable hold is a decisive_fail (thrown back). Deterministic — derived from
   // the same (pFall, roll) pair, so byte-stable + order-independent.
   let band;
-  if (falls) {
+  if (pinnedBand) {
+    band = pinnedBand;
+  } else if (falls) {
     band = (pFall - roll) > 0.18 ? 'decisive_success' : 'costly_success';
   } else {
     band = (roll - pFall) < 0.18 ? 'narrow_fail' : 'decisive_fail';
