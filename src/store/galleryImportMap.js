@@ -10,9 +10,9 @@
  */
 
 import { saves as savesService } from '../lib/saves.js';
+import { activeSaveCount } from '../lib/saveAccess.js';
 import {
-  scrubImportedConfig,
-  scrubImportedTreasury,
+  scrubImportedConfig, scrubImportedTreasury,
   scrubGalleryImportLivingContent, scrubImportedEditState,
 } from '../lib/importScrub.js';
 import { track, EVENTS } from '../lib/analytics.js';
@@ -252,10 +252,10 @@ export async function importGalleryMapWithCampaignImpl(get, set, slug) {
   const maxSaves = typeof initialState.maxSaves === 'function'
     ? initialState.maxSaves()
     : Infinity;
-  const activeSaveCount = (initialState.savedSettlements || []).length;
+  const activeNow = activeSaveCount(initialState.savedSettlements);
   if (
     Number.isFinite(maxSaves)
-    && activeSaveCount + members.length > maxSaves
+    && activeNow + members.length > maxSaves
   ) {
     throw new Error(`Not enough save slots: this campaign needs ${members.length} settlement slot(s).`);
   }
