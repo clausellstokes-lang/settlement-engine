@@ -124,6 +124,22 @@ jobs:
     env:
       CUSTOM_CONTENT_CONCURRENCY_DATABASE_URL: >-
         postgresql://postgres:postgres@127.0.0.1:5432/postgres
+      # ── THE CENSUS SWITCH (STASIS S6, rule 38, 2026-09-23) ────────────────────
+      # tests/lint/sovereigntyLightingContract.walker.test.js asserts a FROZEN
+      # five-figure tuple against the live estate, and EVERY member that adds a
+      # test title moves that tuple. The refreeze is a train's TERMINAL act, so
+      # the register is stale for the whole train by construction and this
+      # BLOCKING job was red on every lane branch — the chair separated the
+      # declared red from a real one by hand each time, which is exactly the
+      # reading a permanently red gate destroys. Under the switch that arm still
+      # RUNS and PASSES (never `.skip`: check-test-ratchet.mjs charges a non-run
+      # row to a shrink-only `skippedCeiling`) and PRINTS the live tuple and its
+      # delta instead of asserting the frozen equality. The equality itself lives
+      # on the `census-stasis` job below, weekly and on demand, without this var.
+      # It is removed by the unfreeze train (STASIS-REGISTER row S6), never by a
+      # lane. The env reaches vitest because the ratchet spawns the runner with
+      # `{ ...process.env }` (scripts/check-test-ratchet.mjs).
+      CENSUS_STASIS: '1'
     services:
       postgres:
         image: postgres:17
@@ -772,6 +788,55 @@ jobs:
           path: artifacts/soak/
           if-no-files-found: warn
           retention-days: 90
+
+  # ── The census walkers, frozen registers asserted (opt-in) ──────────────────
+  # STASIS S6 (rule 38, 2026-09-23). The two census walkers red BY DESIGN on every
+  # member: the lighting walker asserts the frozen five-figure tuple in
+  # tests/lint/.lighting-census-baseline.json against the live estate, and the
+  # wiring walker pins docs/content/wiring-census.json byte-identical to a fresh
+  # build. Both registers are regenerated ONCE, at a train's terminal, so on the
+  # BLOCKING `Gate / test ratchet` job above they reported a declared delta rather
+  # than a defect — and a gate that is red on every branch hides the reds it exists
+  # to show. That job now carries CENSUS_STASIS=1; THIS job is where the real
+  # assertion is observed, on the weekly cron and on demand, with no switch set.
+  # Its red is the observation STASIS-REGISTER row S6 promises, and the unfreeze
+  # train refreezes both registers once and moves the two files back onto the
+  # blocking job.
+  #
+  # NO LEDGER FETCH, and the absence is measured (2026-09-23): the ratchet job
+  # fetches refs/heads/review-fixes-2026-07-08 because two OTHER suites read it by
+  # ref. Neither census walker does — the lighting walker's only `git` call is the
+  # refreeze path's `git status --porcelain`, and the wiring walker shells out to no
+  # git at all. A ~200 MB fetch for a job that never reads the ref would be cargo.
+  census-stasis:  # deploy-gate: optional — weekly/manual, never reports on a push
+    name: Census stasis (weekly / manual)
+    if: github.event_name == 'schedule' || github.event_name == 'workflow_dispatch'
+    runs-on: ubuntu-latest
+    # MEASURED on this lane's box, 2026-09-23, each walker alone through the gate
+    # mutex: the lighting walker 5-7s (34 tests), the wiring walker 10s (78 tests) —
+    # about 17s for the pair. The `check-tests` job's own comment puts this runner at
+    # 3.5x to 4.6x the local box, so the step is well under two minutes and npm ci
+    # dominates the job. 20 is what the three sibling weekly jobs carry, and a cap is
+    # raised with a fresh measurement, never lowered to match a run that was cut.
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version-file: '.nvmrc'
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      # ⛔ CENSUS_STASIS IS DELIBERATELY UNSET HERE. That absence is the whole job.
+      - name: The census walkers with their registers asserted
+        run: >
+          sh scripts/gate-mutex.sh --run --
+          npx vitest run --pool=threads --maxWorkers=2
+          tests/lint/sovereigntyLightingContract.walker.test.js
+          tests/lint/proseWiringCensus.walker.test.js
 
   # ── Production deploy gated on the full green gate (finding F35) ─────────────
   # "The gate is the product": production must advance only through CI. This job

@@ -7456,24 +7456,109 @@ describe('the sovereignty lighting condition — a marker is EVIDENCE only in a 
       + ' another, still closing arithmetically, so nothing below would catch it. Put the keys'
       + ' back on consecutive lines.')
       .toBe(blockKeys.length);
-    expect(TEST_FILES.length, 'the estate\'s file count moved — re-measure, do not re-word')
-      .toBe(CENSUS.files);
-    expect(parked.length, 'the parked-file count moved from SP-C\'s measured 358 —'
-      + ' a rule widened or narrowed, or a lane changed a file\'s shape; re-MEASURE and re-record')
-      .toBe(CENSUS.parked);
-    expect(credited.length, 'the credited-file count moved from SP-C\'s measured 1,960')
-      .toBe(CENSUS.credited);
-    expect(titles, 'the live TEST-title count moved from SP-C\'s measured 18,471 — this'
-      + ' is the evidence layer, the exact figure two cuts in a row stated wrongly in prose, and'
-      + ' the reason it is asserted rather than described')
-      .toBe(CENSUS.titles);
-    // …AND THE SUITE LAYER IS COUNTED TOO, WHICH IS WHAT MAKES THE SPLIT UNABSORBABLE. A cut
-    // that merged the two arrays again would leave `titles` at 23,678 and `suiteTitles` at 0,
-    // and BOTH of these reds. Counting only the evidence layer would let the merge look like an
-    // ordinary re-measure.
-    expect(suiteTitles, 'the live SUITE-title count moved from SP-C\'s measured 5,260 —'
-      + ' if it went to zero the layer split was deleted and suite titles are evidence again')
-      .toBe(CENSUS.suiteTitles);
+    // ── THE CENSUS SWITCH — STASIS S6 (rule 38), 2026-09-23 ──────────────────────────
+    // STASIS S6 (rule 38, 2026-09-23): the frozen tuple is enforced on the weekly census
+    // job and at the unfreeze; the blocking job reads the live tuple only.
+    //
+    // THE COST THIS PAYS, MEASURED RATHER THAN FEARED, and it is the cost this arm's own
+    // header states plainly a few thousand lines above: "Any lane that adds or removes a
+    // test TITLE anywhere in tests/ reds this arm". Every member of every train adds
+    // titles, and the refreeze is the train's TERMINAL act — so the register is stale for
+    // the whole train BY CONSTRUCTION and GitHub's blocking `Gate / test ratchet` job was
+    // red on every lane branch, with the chair separating the declared red from a real one
+    // by hand each time. A permanently red blocking gate hides the reds it exists to show.
+    //
+    // WHAT MOVES, AND ONLY THIS: under `CENSUS_STASIS=1` the five EQUALITIES against the
+    // frozen tuple do not run. The measurement still runs, the live tuple and the delta are
+    // PRINTED, and the shape of the measurement is still asserted. The equalities run —
+    // unchanged, against this same register — on the weekly / manual `census-stasis` job in
+    // .github/workflows/ci.yml, which runs this file WITHOUT the switch. Nothing is loosened
+    // permanently: STASIS-REGISTER row S6's unfreeze train refreezes once, reads every red,
+    // and moves this file back onto the blocking job.
+    //
+    // ⛔ IT IS A BRANCH, NEVER A `.skip`. `scripts/check-test-ratchet.mjs` counts a non-run
+    // row through `NON_RUN_STATUSES` against a SHRINK-ONLY `skippedCeiling`, and says why in
+    // its own words: "A skipped test is not debt, it is a HOLE. Run it, or burn it down — do
+    // not skip it." A skip here would trade a DECLARED red for an invisible hole and would
+    // red that ceiling besides. This arm still runs, and under the switch it PASSES.
+    //
+    // ⛔ THE PRINT IS `process.stdout.write`, NOT `console.log`. vitest 4.1.8's default
+    // reporter DROPS a PASSING test's `console.log` (the chair's REPORT-ONLY ARMS ruling,
+    // 2026-09-20, after FIX-C2), and under the switch this arm passes — a `console.log`
+    // would be silent on precisely the job that exists to read it.
+    const censusStasis = process.env.CENSUS_STASIS === '1';
+    const live = {
+      files: TEST_FILES.length,
+      parked: parked.length,
+      credited: credited.length,
+      titles,
+      suiteTitles,
+    };
+    if (censusStasis) {
+      const tupleOf = (row) => CENSUS_FIGURE_KEYS.map((key) => `${key}=${row[key]}`).join(' ');
+      const delta = CENSUS_FIGURE_KEYS
+        .map((key) => `${live[key] - CENSUS[key] >= 0 ? '+' : ''}${live[key] - CENSUS[key]}`)
+        .join('/');
+      // The provenance line comes out of `registerLines`, already read above for the
+      // merge-hunk guard: `loadCensusBaseline` validates provenance and returns the five
+      // FIGURES only, so `CENSUS.measuredAtSha` does not exist and must not be printed.
+      const frozenAt = (registerLines.find((line) => line.includes('"measuredAtSha"')) ?? '').trim();
+      process.stdout.write(
+        '\n[lighting-census] CENSUS_STASIS=1 — STASIS S6 (rule 38): the frozen tuple is NOT'
+        + ' asserted on this run.\n'
+        + `[lighting-census] live    ${tupleOf(live)}\n`
+        + `[lighting-census] frozen  ${tupleOf(CENSUS)}    ${frozenAt}\n`
+        + `[lighting-census] delta   ${delta}    (${CENSUS_FIGURE_KEYS.join('/')})\n`
+        + '[lighting-census] the equality runs WITHOUT this switch on the weekly / manual'
+        + ' "Census stasis" job, and at the unfreeze train.\n',
+      );
+      // ── AND THE SHAPE IS STILL LOAD-BEARING ───────────────────────────────────────
+      // A census that DIED — a parser that stopped resolving, a walk that read nothing, a
+      // counter that went non-integer — must red HERE rather than slide through the switch
+      // as "the tuple moved". Collected and asserted once rather than thrown per key: the
+      // first throw in a loop reports a lower bound, never the population.
+      const brokenFigures = CENSUS_FIGURE_KEYS
+        .filter((key) => !Number.isInteger(live[key]) || live[key] < 0);
+      expect(brokenFigures, 'live census figure(s) are not non-negative integers —'
+        + ` the measurement is broken, not merely moved: ${JSON.stringify(live)}`)
+        .toEqual([]);
+      expect(live.parked + live.credited, 'the LIVE census does not close: parked + credited'
+        + ' is not the estate file count, so the classifier lost or double-counted files')
+        .toBe(live.files);
+      // LIVENESS FIRST: the well-formedness sweep below is an equality against an EMPTY
+      // array, which an empty `parked` would satisfy perfectly.
+      expect(parked.length, 'no estate file parks at all — the park door stopped firing and'
+        + ' the well-formedness sweep below would be vacuous').toBeGreaterThan(0);
+      const malformedReasons = parked.flatMap(({ rel, src }) => {
+        const reasons = parkReasonsFor(src);
+        if (reasons.length === 0) return [`${rel}: parked with an EMPTY reason list`];
+        return reasons
+          .filter((reason) => typeof reason !== 'string' || !/^[A-Z][A-Z0-9_]*(?::|$)/.test(reason))
+          .map((reason) => `${rel}: ${JSON.stringify(reason)}`);
+      });
+      expect(malformedReasons, 'parkReasonsFor returned row(s) that are neither `KIND` nor'
+        + ` \`KIND:detail\` — the classifier's own output is malformed:\n${malformedReasons.join('\n')}`)
+        .toEqual([]);
+    } else {
+      expect(TEST_FILES.length, 'the estate\'s file count moved — re-measure, do not re-word')
+        .toBe(CENSUS.files);
+      expect(parked.length, 'the parked-file count moved from SP-C\'s measured 358 —'
+        + ' a rule widened or narrowed, or a lane changed a file\'s shape; re-MEASURE and re-record')
+        .toBe(CENSUS.parked);
+      expect(credited.length, 'the credited-file count moved from SP-C\'s measured 1,960')
+        .toBe(CENSUS.credited);
+      expect(titles, 'the live TEST-title count moved from SP-C\'s measured 18,471 — this'
+        + ' is the evidence layer, the exact figure two cuts in a row stated wrongly in prose, and'
+        + ' the reason it is asserted rather than described')
+        .toBe(CENSUS.titles);
+      // …AND THE SUITE LAYER IS COUNTED TOO, WHICH IS WHAT MAKES THE SPLIT UNABSORBABLE. A cut
+      // that merged the two arrays again would leave `titles` at 23,678 and `suiteTitles` at 0,
+      // and BOTH of these reds. Counting only the evidence layer would let the merge look like an
+      // ordinary re-measure.
+      expect(suiteTitles, 'the live SUITE-title count moved from SP-C\'s measured 5,260 —'
+        + ' if it went to zero the layer split was deleted and suite titles are evidence again')
+        .toBe(CENSUS.suiteTitles);
+    }
     expect(suiteTitles, 'no estate suite title is parsed at all — the suite layer is not being'
       + ' read, so the split is not a split').toBeGreaterThan(0);
     // …and the three FILE figures are consistent with each other, so a constant cannot be
