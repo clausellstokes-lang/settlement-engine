@@ -72,6 +72,9 @@ const OFF_STAGE = 'off-stage';
 /** One frozen empty list, so a dormant tick allocates nothing and compares alike. */
 const NO_CAUSES = /** @type {readonly DecreeCause[]} */ (Object.freeze([]));
 
+/** The same, for the due set EM-E4's fork consult reads (design §12.11). */
+const NO_DUE = /** @type {readonly unknown[]} */ (Object.freeze([]));
+
 /** @param {unknown} value @returns {value is Record<string, unknown>} a plain object, never an array and never null */
 function isPlainObject(value) {
   return !!value && typeof value === 'object' && !Array.isArray(value);
@@ -224,6 +227,46 @@ export function applyDecreesAtTick(worldState, registry, tickRef, options) {
   }
   if (causes.length === 0 && current === registry) return { registry, causes: NO_CAUSES };
   return { registry: current, causes: Object.freeze(causes) };
+}
+
+/**
+ * ⭐ THE PULSE'S FORK CONSULT, ITS SCHEDULE HALF (EM-E4, wave 3; design §16's "ONE HOOK:
+ * the pulse consults pins at each registered fork"). The DUE pending entries of one
+ * registry, in EM-C1's own reading order: exactly the set `applyDecreesAtTick` is about to
+ * apply, selected by the same `isDue` over the same three `when` classes, so the pins a
+ * tick honours and the decrees it applies can never be two different sets.
+ *
+ * ⛔ THE CONSULT IS TWO PURE VERBS AND THE SECOND ONE IS NOT HERE, WHICH IS MEASURED
+ * RATHER THAN CHOSEN. EM-E4's `forkPinsFor` folds these entries into the pin bag and
+ * judges each one against its fork's declared vocabulary; it lives under `src/domain/edit`
+ * with the rest of the directive vocabulary, and this leaf does not import it because case
+ * E1-8 pins this file's import list at EXACTLY TWO and the coupling walker measures the
+ * same leaf's declared `reads` against the live import graph. The estate's own answer to
+ * that pair of instruments is the one EM-C1 and EM-C3 already took: the knowledge travels
+ * as an argument, not as an edge. The kernel composes the two in one line at the head, and
+ * the SCHEDULE stays where the schedule lives.
+ *
+ * ⛔ IT READS PENDING ENTRIES, SO IT IS CONSULTED BEFORE THE APPLY. `isDue` is pending-only
+ * by law and `applyDecreesAtTick` marks every entry it applies, so the same read AFTER the
+ * apply is empty. Case E4-10 executes that, and the same case holds this verb's due ids
+ * equal to the causes the apply names, so the two readings of `isDue` cannot drift.
+ *
+ * ⛔ AT ZERO DUE ENTRIES IT RETURNS ONE SHARED FROZEN LIST, so a dormant tick allocates
+ * nothing and compares alike (design §12.11).
+ *
+ * PURE. No clock, no draw, no write: the registry is read and nothing comes back from it
+ * but its own rows, by reference.
+ *
+ * @param {unknown} worldState @param {unknown} registry
+ * @returns {readonly unknown[]} the due rows, or the shared empty list.
+ */
+export function dueEntriesAtTick(worldState, registry) {
+  const rows = rowsOf(registry);
+  if (rows.length === 0) return NO_DUE;
+  const tick = tickOf(worldState);
+  const season = seasonOf(worldState);
+  const due = rows.filter((row) => isDue(row, tick, season));
+  return due.length === 0 ? NO_DUE : Object.freeze(due.sort(compareDecrees));
 }
 
 /**
