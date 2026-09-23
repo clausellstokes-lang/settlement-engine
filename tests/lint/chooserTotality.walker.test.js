@@ -40,7 +40,7 @@
  * @enforced-by itself (a source scan plus a registry query; no runtime coupling)
  */
 import { existsSync, readdirSync, readFileSync, statSync } from 'node:fs';
-import { fileURLToPath } from 'node:url';
+import { fileURLToPath, pathToFileURL } from 'node:url';
 import { dirname, join, relative } from 'node:path';
 import { describe, expect, test } from 'vitest';
 
@@ -102,10 +102,60 @@ const DECLARES_IDIOM = /(?:export\s+)?function\s+(?:hash01|softmaxWeights|stable
 // HBF-33 / HBF-34 prose-pick family: the same cured `hash01` pick, copied verbatim a fourth
 // time, taking its siblings' disposition rather than a fresh reading. Filing it STAY would rule
 // for CHANCE_MEETING alone the question all three leave open, so the four close together.
-const DEFER_CEILING = 36;
+// 36 -> 77 at EM-E0 (HBF-43..HBF-86, design §19 ruling 1 over the SIM-SEALS survey's Table 4
+// "R") — the SAME chair-authorized-mint move as the four above and the largest of them, not a
+// lane absorbing anything: the forty-four were found by a chair-commissioned survey, ruled
+// registration-owed in the design, and land as forty-one deferrals plus three measured STAYs.
+// ⛔ THE CEILING'S MEANING IS UNCHANGED — it is still every DEFER row in both directions — and
+// the registration is pinned SEPARATELY below (SURVEY_REGISTRATION_ROWS and its split), so a
+// row leaking between the two populations reds even though this one total would absorb it.
+const DEFER_CEILING = 77;
 
 /** The named-domain checklist's row count, asserted rather than read off. */
 const NAMED_DOMAIN_ROWS = 14;
+
+/**
+ * ⭐⭐ EM-E0 — THE REGISTRATION'S ROSTER IS THE SURVEY'S, AND IT IS PARSED RATHER THAN RESTATED.
+ * Design §19 ruling 1 rules that the draws Table 4 marks "R" become registry rows. Restating
+ * those forty-four here would make this arm a copy of the thing it checks; the walker reads the
+ * survey markdown and derives them, so the survey and the registry are held equal to each other
+ * rather than each to a third transcription.
+ */
+const SURVEY_SOURCE = 'docs/implementation/surveys/SIM-SEALS-SURVEY-2026-09-19.md';
+
+/** `| U-NN | `symbol` · `path:lines` | draws | R? | lands |` — Table 4's row shape. */
+const SURVEY_TABLE4_ROW = /^\|\s*(U-\d+)\s*\|\s*`([A-Za-z_$][\w$]*)`[^|]*?·\s*`([^`]+)`\s*\|\s*(\d+)\s*\|([^|]*)\|/gm;
+
+/** The survey's own stated totals, so a parser that silently stopped matching cannot pass. */
+const SURVEY_SYMBOLS = 51;
+const SURVEY_REGISTRATION_ROWS = 44;
+
+/** Of the forty-four: three are measured NON-choosers (rng readers and weighted-sample helpers). */
+const SURVEY_DEFERRED = 41;
+const SURVEY_SETTLED = 3;
+
+/** How many rows in the WHOLE registry declare an outcome vocabulary. Exact, both directions. */
+const ROWS_WITH_ACTION_VOCABULARY = 5;
+
+/** Table 4's rows as `module.js#symbol`, split by the "R" (registration owed) column. */
+function surveyTable4() {
+  const raw = readFileSync(join(ROOT, SURVEY_SOURCE), 'utf8');
+  const all = [...raw.matchAll(SURVEY_TABLE4_ROW)];
+  const owed = all
+    .filter((m) => /^\*\*R\*\*/.test(m[5].trim()))
+    .map((m) => `src/domain/${m[3].replace(/:.*$/, '')}#${m[2]}`);
+  return { all, owed: [...owed].sort() };
+}
+
+/**
+ * ⭐ THE PARTITION KEY, DERIVED FROM ONE FACT rather than from a second roster. A checklist row
+ * WITH an owner-named domain is the owner's named-domain instrument; a checklist row WITHOUT one
+ * is EM-E0's registration. Nothing else in the registry has that shape, which is what lets both
+ * populations be counted without either being restated here.
+ */
+const SURVEY_ROWS = HABIT_FORK_REGISTRY
+  .filter((row) => row.discovery === 'checklist' && row.domain === null);
+const VOCABULARY_ROWS = HABIT_FORK_REGISTRY.filter((row) => row.actionVocabulary !== null);
 
 /**
  * ⭐ THE ONE NORMALIZATION POINT between the registry's extensionless ids and the tree's
@@ -114,6 +164,18 @@ const NAMED_DOMAIN_ROWS = 14;
  */
 function moduleFile(row) {
   return `${row.module}.js`;
+}
+
+/**
+ * A repo-relative module path as an ABSOLUTE file URL, for the vocabulary arm's dynamic import.
+ * ⛔ NOT a second normalization point — it appends no suffix and takes a path `moduleFile()`
+ * already made. It exists because a bare `import(\`../../${p}\`)` carries no static extension,
+ * which the bundler's dynamic-import analysis cannot follow and warns on; an absolute file URL
+ * is resolved by the runtime alone and is what the import really means.
+ * @param {string} rel @returns {string}
+ */
+function moduleUrl(rel) {
+  return pathToFileURL(join(ROOT, rel)).href;
 }
 
 function walk(dir, out = []) {
@@ -415,5 +477,111 @@ describe('HB-1 — the chooser-totality partition and the named-domain checklist
     // other.
     expect([...covered].sort()).toEqual([...NAMED_DOMAIN_LABELS].sort());
     expect(Object.values(OWNER_DOMAIN_MAPPING).filter((labels) => labels.length > 1)).toHaveLength(1);
+  });
+
+  test('⭐⭐ EM-E0 (a) — the SURVEY\'S Table 4 "R" roster and the registration are SET-EQUAL, both directions', () => {
+    const { all, owed } = surveyTable4();
+    // GUARD THE GUARD FIRST. A parser that stopped matching would make the equality below
+    // vacuously true against an empty roster, which is the same failure a missed scan root is:
+    // it does not report a gap, it reports SUCCESS. Both of the survey's own stated totals are
+    // asserted before anything is compared, so the regex cannot quietly drift off the table.
+    expect(all, `${SURVEY_SOURCE} — Table 4 stopped parsing`).toHaveLength(SURVEY_SYMBOLS);
+    expect(owed, 'the "R" column stopped parsing').toHaveLength(SURVEY_REGISTRATION_ROWS);
+    const registered = SURVEY_ROWS.map((row) => `${moduleFile(row)}#${row.symbol}`).sort();
+    expect(
+      registered,
+      'the registration and the survey disagree. A key the SURVEY found and the registry lacks'
+      + ' is a draw design §19 ruling 1 rules registration-owed and this file forgot; a key the'
+      + ' REGISTRY carries and the survey never found is a row invented here, which is the same'
+      + ' defect pointing the other way. The roster belongs to the survey, not to this file.',
+    ).toEqual(owed);
+    // The registration is DISJOINT from the two instruments that already existed: it adds no
+    // owner-named domain row, and it adds nothing a signature can see (all forty-four were
+    // found over a WIDER idiom set and WIDER roots than this walker scans, which is exactly
+    // why they are checklist rows rather than idiom ones).
+    expect(DOMAIN_ROWS.length, 'the registration moved the named-domain checklist').toBe(NAMED_DOMAIN_ROWS);
+    expect(registered.filter((key) => DISCOVERED.includes(key)), 'a registered draw IS signature-visible — it belongs on the idiom half').toEqual([]);
+  });
+
+  test('⭐ EM-E0 (b) — every declared actionVocabulary RESOLVES BY IMPORT to a non-empty export, and only ONE row\'s lives off its own module', async () => {
+    // ⛔ RESOLVED, NOT SPELLED. §16 claimed forty-two forks each carried a typed outcome
+    // vocabulary; the survey measured ONE. A name checked against a name would have passed on
+    // that claim too, so this arm IMPORTS and reads the binding. A vocabulary that moved
+    // module, lost its export or emptied out reds here by fork id.
+    expect(
+      VOCABULARY_ROWS.length,
+      'the count of rows declaring an outcome vocabulary MOVED. Growth means a fork learned to'
+      + ' name its own outcomes, which is a win to bank in this same commit; a shrink means a'
+      + ' vocabulary was dropped or invented away. Either way it is a reviewable act.',
+    ).toBe(ROWS_WITH_ACTION_VOCABULARY);
+    /** fork id -> where the words actually live, collected then asserted once. */
+    const offModule = [];
+    for (const row of VOCABULARY_ROWS) {
+      const name = String(row.actionVocabulary);
+      // Exactly ONE module may DEFINE the name — the cross-volume collision contract's own
+      // claim, checked here rather than trusted. A re-export is not a second definition.
+      const definers = DOMAIN_FILES.filter(
+        (rel) => new RegExp(`^export\\s+const\\s+${name}\\s*=`, 'm').test(readFileSync(join(ROOT, rel), 'utf8')),
+      );
+      expect(
+        definers,
+        `${row.forkId} declares ${name}: exactly one src/domain module must define it, or the`
+        + ' registry is naming a word two volumes spell differently.',
+      ).toHaveLength(1);
+      const own = /** @type {Record<string, unknown>} */ (await import(moduleUrl(moduleFile(row))));
+      const onOwnModule = Object.prototype.hasOwnProperty.call(own, name);
+      if (!onOwnModule) offModule.push(`${row.forkId}: ${definers[0]}`);
+      const mod = onOwnModule ? own : /** @type {Record<string, unknown>} */ (await import(moduleUrl(definers[0])));
+      const value = mod[name];
+      const size = Array.isArray(value) ? value.length : Object.keys(/** @type {object} */ (value)).length;
+      expect(size, `${row.forkId} declares ${name} and it is EMPTY`).toBeGreaterThan(0);
+    }
+    // ⭐⭐ THE MEASURED DIFFERENCE, PINNED RATHER THAN FLATTENED — and it was this arm's own
+    // first run that found it. The estate's ONE pre-EM-E0 declaration names a vocabulary its
+    // draw's module does not export and does not even mention: the strategy moves are minted
+    // as a DEPENDENCY-FREE leaf by the cross-volume collision contract while the fork spells
+    // its branches as literals, which is the estate's design rather than a defect. EM-E0's
+    // four are held to the STRICTER form below, so the register is one row long and a second
+    // arrival is a chair conversation rather than a paste.
+    expect(
+      offModule,
+      'a row declares an outcome vocabulary that its own draw module does not export. Outside'
+      + ' the one registered case that is how a seal comes to name words the module drawing'
+      + ' them never types (FINITE-SEMANTICS) — the row owes a measurement, not a declaration.',
+    ).toEqual(['HBF-17: src/domain/worldPulse/strategyMoves.js']);
+    // …and EM-E0's own four resolve from the DRAW'S OWN MODULE, which is the form design §19
+    // ruling 1 asks of a pin: the words a fork is sealed over are typed where it draws them.
+    for (const row of SURVEY_ROWS.filter((r) => r.actionVocabulary !== null)) {
+      const mod = /** @type {Record<string, unknown>} */ (await import(moduleUrl(moduleFile(row))));
+      expect(
+        Object.prototype.hasOwnProperty.call(mod, String(row.actionVocabulary)),
+        `${row.forkId} declares ${row.actionVocabulary}, which ${moduleFile(row)} does not export`,
+      ).toBe(true);
+    }
+  });
+
+  test('⭐ EM-E0 (c) — the totality figures RE-DERIVED: the registry, the defer list and the registration\'s own split', () => {
+    // Every number here is a QUERY, and each one is exact in both directions so that moving it
+    // is a reviewable act. The registration's split is pinned SEPARATELY from DEFER_CEILING
+    // because one total would absorb a row leaking between the two populations: forty-four rows
+    // arriving while forty-four older ones quietly left would leave the total untouched.
+    expect(HABIT_FORK_REGISTRY.length).toBe(DISCOVERED.length + CHECKLIST_ROWS.length);
+    expect(SURVEY_ROWS.length, 'the registration changed size').toBe(SURVEY_REGISTRATION_ROWS);
+    expect(
+      SURVEY_ROWS.filter((row) => row.disposition === 'DEFER').length,
+      'the registration\'s DEFER count moved. It is born deferring: this wave registers the'
+      + ' forks, it does not dispose them.',
+    ).toBe(SURVEY_DEFERRED);
+    expect(
+      SURVEY_ROWS.filter((row) => row.disposition === 'STAY').length,
+      'the registration\'s SETTLED count moved. The three are MEASURED non-choosers — an rng'
+      + ' reader and two weighted-sample helpers — recorded rather than dropped, on the'
+      + ' guard-chain row\'s precedent. A fourth is a chair conversation, not a lane\'s call.',
+    ).toBe(SURVEY_SETTLED);
+    // …and the registration really is the WHOLE of the checklist half that carries no
+    // owner-named domain, derived rather than pinned, so the partition key above cannot
+    // silently acquire a third population that neither instrument would then count.
+    expect(CHECKLIST_ROWS.length)
+      .toBe(CHECKLIST_ROWS.filter((row) => row.domain !== null).length + SURVEY_ROWS.length);
   });
 });
