@@ -63,20 +63,24 @@ import {
 import {
   contentRuntimeFromCampaignBinding,
 } from '../domain/content/contentEnvironment.js';
+import { PULSE_UNDO_CAP } from './pulseUndoCap.js';
 
 /**
- * Per-campaign cap on retained pre-pulse snapshots (multi-step undo depth). THE ONE HOME
- * of the number: the advance body that reads it lives here, the slice that once mirrored
- * it no longer spells it, and nothing else in src/ declares a second one.
+ * Per-campaign cap on retained pre-pulse snapshots (multi-step undo depth). The advance
+ * body that evicts past it lives here and reads it from its own leaf; the slice that once
+ * mirrored the number no longer spells it, and nothing else in src/ declares a second one.
  *
- * ⛔ EXPORTED SO A READER IMPORTS IT INSTEAD OF PARSING THIS FILE (U8, judgment 267). The
- * registry page states the rewind's reach to the DM, and its acceptance arm used to
- * recover the number with a regex over this source — a second spelling of the declaration
- * that goes quietly wrong the day the `const` is re-formatted, and one that cannot follow a
- * rename. A surface that advertises the cap now reads the value; the pin on it is the
- * page's own A7 arm.
+ * ⛔ THE DECLARATION MOVED DOWN TO A LEAF, AND THE RE-EXPORT IS WHY NOTHING ELSE MOVED
+ * (U73, the verifier's FIX-5). U8 exported the cap from this file so the registry page
+ * could stop parsing this source — and the page still could not read it, because the edit
+ * mount is reached from `src/App.jsx` OUTSIDE every campaignLazy boundary and a static edge
+ * into THIS file would put every runtime-gated campaign action in that mount's transitive
+ * graph (`tests/store/campaignRuntimeCallerCoverage.test.js` derives those boundaries and
+ * convicts exactly that). `./pulseUndoCap.js` is the one home now: it imports nothing, both
+ * sides may reach it, and every reader that already imports the cap FROM HERE — the page's
+ * own A7 arm among them — keeps working unchanged through this line.
  */
-export const PULSE_UNDO_CAP = 10;
+export { PULSE_UNDO_CAP } from './pulseUndoCap.js';
 /**
  * ⭐ U72 — §20.3's LIVE CATALOGUES FOR THE HEAD OF THE TICK, COMPOSED AT THE ONE LAYER THAT
  * CAN COMPOSE THEM (design §20.3; ARCH §1 and §6; the verifier's FIX-3).

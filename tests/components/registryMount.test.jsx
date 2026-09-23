@@ -49,6 +49,8 @@ import { decreeChronicleLine } from '../../src/domain/display/stateProse/decreeP
 import { declarationsFor } from '../../src/domain/edit/fieldDeclarations.js';
 import { markApplied, stage, withdraw } from '../../src/domain/edit/registry.js';
 import { createAuthSlice } from '../../src/store/authSlice.js';
+import { PULSE_UNDO_CAP } from '../../src/store/pulseUndoCap.js';
+import { PULSE_UNDO_CAP as PULSE_UNDO_CAP_VIA_SESSION } from '../../src/store/campaignAdvanceSession.js';
 import { STAFF_ROLES } from '../../src/lib/staffEntitlements.js';
 import { t } from '../../src/copy/index.js';
 
@@ -413,5 +415,34 @@ describe('EM-D3c — the page of decrees, mounted at the dossier foot', () => {
     expect(SHELL_SOURCE.includes('onGuardOffer={guardOffer}')).toBe(true);
     expect(SHELL_SOURCE.includes('takeGuardOffer(useStore.getState, useStore.setState,')).toBe(true);
     expect(boundVerbsIn(SHELL_SOURCE)).toEqual([...REGISTRY_ACTION_NAMES].sort());
+  });
+
+  it('M7: the mount tells the page the rewind own reach, from the estate one home, and the page states it', async () => {
+    // ⭐ U73 (the verifier's FIX-5). Design §12: "The registry page states the rewind's own
+    // limit ('available for the last ten advances of this session')." Lane C's U8 exported the
+    // cap for exactly this and the mount never passed it, so the page drew its figure-less
+    // branch at every tip and the number reached no DM. THE ARM READS THE PRODUCT'S BINDING:
+    // the shell is rendered, and the sentence it produces is composed from the ESTATE'S
+    // constant rather than from a prop this suite supplies.
+    const { container } = await mountShell();
+    const rewind = page(container).querySelector('[data-testid="decree-registry-rewind"]');
+    expect(rewind, 'the page stopped drawing its rewind line').not.toBe(null);
+    expect(Number.isInteger(PULSE_UNDO_CAP) && PULSE_UNDO_CAP > 0, 'the estate exports a real cap').toBe(true);
+    expect(rewind.textContent).toBe('A rewind returns the decrees of a tick to the waiting list'
+      + ` in their own order. It reaches the last ${PULSE_UNDO_CAP} advances of this session,`
+      + ' and a reload clears it.');
+    // GUARD-THE-GUARD: the figure-less branch is a real branch the page still carries, so the
+    // assertion above is not vacuously true of both.
+    expect(rewind.textContent.includes('this session only'), 'the page drew its told-nothing branch').toBe(false);
+
+    // ⛔ ONE FACT, ONE HOME, TWO READERS. The advance session — which evicts past the cap —
+    // and this mount must read the SAME declaration, or the sentence and the behaviour drift.
+    // The session re-exports the leaf, so the two bindings are one value by identity.
+    expect(PULSE_UNDO_CAP_VIA_SESSION).toBe(PULSE_UNDO_CAP);
+
+    // THE BINDING IS SPELLED WHERE A SCANNER CAN SEE IT, and it names the constant rather
+    // than a number — a mount that re-typed the figure would pass the render arm above.
+    expect(SHELL_SOURCE.includes('rewindLimit={PULSE_UNDO_CAP}')).toBe(true);
+    expect(/rewindLimit=\{\s*\d/.test(SHELL_SOURCE), 'the mount typed a literal figure').toBe(false);
   });
 });

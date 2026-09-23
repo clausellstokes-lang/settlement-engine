@@ -81,7 +81,7 @@
  * request is re-shaped on the way: the page hands `commitRegistry` its own `{saveId,
  * entryId, ...}` and this file passes the landed action through.
  *
- * ⛔ FOUR OF THE PAGE'S SEAMS ARE HANDED NOTHING, AND EACH ABSENCE IS A MEASUREMENT.
+ * ⛔ TWO OF THE PAGE'S SEAMS ARE HANDED NOTHING, AND EACH ABSENCE IS A MEASUREMENT.
  *   · `inCampaign` — a UI module the unarmed app graph reaches may name NO runtime-gated
  *     campaign action (`tests/store/campaignRuntimeCallerCoverage.test.js`, whose two
  *     census arms derive the campaignLazy boundaries rather than listing them). This leaf
@@ -100,12 +100,21 @@
  *     dossier's. Minting a second one here would be a second advance path; reaching the
  *     realm's would drag the map volume into the editor's chunk. So the slot stays empty
  *     and the page draws nothing in it, which is its own declared behaviour.
- *   · `rewindLimit` — the estate's cap is the advance session's own `PULSE_UNDO_CAP`, a
- *     MODULE-PRIVATE const with no export. Re-typing the number here would be a second
- *     home for one fact, so the page is told nothing and states the session fact without
- *     a figure, which is the branch it already carries.
- * ⭐ AND ONE OF THOSE FOUR IS NOW BOUND (EM-C4c), so the count above is D3c's and reads
- * THREE from this landing on. `onGuardOffer` — design §2.7's offers are WRITES, and at D3c's
+ * ⭐ AND TWO OF THOSE FOUR ARE NOW BOUND, so the count above is D3c's and reads TWO from
+ * this landing on.
+ *   · `rewindLimit` IS BOUND (U73, the verifier's FIX-5). D3c measured the cap as "a
+ *     MODULE-PRIVATE const with no export" and told the page nothing; lane C's U8 exported
+ *     it for exactly this purpose and the measurement went stale the day it landed, so the
+ *     page kept drawing its figure-less branch and design §12's "the registry page states
+ *     the rewind's own limit" stayed unmet at every tip. The number is NOT re-typed here —
+ *     that would be the second home the old note rightly refused — and it is NOT read from
+ *     `campaignAdvanceSession.js` either, because a static edge from this mount into the
+ *     advance session would put every runtime-gated campaign action in this file's
+ *     transitive graph and `campaignRuntimeCallerCoverage` would convict it, exactly as it
+ *     convicted `inCampaign`. It is read from `src/store/pulseUndoCap.js`, a leaf that
+ *     holds the declaration, imports nothing, and is re-exported by the advance session so
+ *     every existing reader is untouched. The page's own arm reads THIS binding.
+ * ⭐ `onGuardOffer` was the other (EM-C4c) — design §2.7's offers are WRITES, and at D3c's
  * landing neither writer existed, so the offers rendered as words. Both
  * exist now: EM-C1's `recordOverride` and the slice's `takeGuardOffer`, which judges an offer
  * by its own name out of `GUARD_OFFERS` and reaches EM-C4b's landed actions. The page hands
@@ -139,6 +148,7 @@ import {
 } from '../../store/editSlice.js';
 import { useStore } from '../../store/index.js';
 import { counterpartiesOf, mintPhantomIntent } from '../../store/phantomMintAction.js';
+import { PULSE_UNDO_CAP } from '../../store/pulseUndoCap.js';
 import { raisedHere, REFUSAL_SURFACES } from '../../lib/refusalReasons.js';
 import { ClerkNote } from '../generate/ClerkNote.jsx';
 import Button from '../primitives/Button.jsx';
@@ -702,6 +712,7 @@ export default function EditModeShell() {
         chronicleHref={chronicleHrefFor}
         onReopen={reopenEntry}
         onGuardOffer={guardOffer}
+        rewindLimit={PULSE_UNDO_CAP}
       />
 
       <Button variant="primary" size="sm" onClick={leaveMode}>{t('edit.shell.done')}</Button>
