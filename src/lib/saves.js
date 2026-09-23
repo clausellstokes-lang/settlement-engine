@@ -125,6 +125,48 @@ function localWrite(saves) {
   localStorage.setItem(LOCAL_KEY, JSON.stringify(saves));
 }
 
+/** The highest key this module instance has minted, so the clock cannot repeat itself. */
+let _lastLocalSaveId = 0;
+
+/**
+ * ⛔ THE LOCAL BACKEND'S PRIMARY KEY — AND WHY THE CLOCK ALONE WAS NOT ONE.
+ *
+ * The local save path used to mint `Date.now()` for a row with no id of its own. That
+ * clock has MILLISECOND resolution, so two saves written inside one millisecond took the
+ * SAME key — and every id compare in this module addresses rows by `String(id)`, so the
+ * pair shared one identity: `localUpdate` reached only the first (a rename could land on
+ * the wrong town), `localDelete` filtered by inequality and removed BOTH, and the
+ * neighbour back-link's self-link guard refused the pair by id equality. EM-F1 met it as
+ * a timing-dependent red and cured its FIXTURES by supplying explicit ids; this is the
+ * cure at the mint.
+ *
+ * The clock stays the HIGH PART, so the id's spelling is what it always was — a number
+ * that rises with time — and every `String(id)` compare, every `savedAt` ordering and
+ * every already-persisted row are untouched. Beside it sit the two things a bare clock
+ * cannot supply:
+ *
+ *   • a monotonic counter, so a same-millisecond pair cannot converge within one module
+ *     instance; and
+ *   • a check against the rows ALREADY ON THE DEVICE, because a fresh module instance (a
+ *     reload, a second tab) starts that counter at zero and would otherwise be free to
+ *     re-mint a key a previous instance already wrote.
+ *
+ * Deliberately NOT a UUID: the local id has been a number in every row this estate has
+ * ever written, the Supabase path mints its own key (`newSaveId`) and is untouched here,
+ * and a second id idiom on one table is the divergence this cure exists to close.
+ *
+ * @param {ReadonlyArray<any>} existing the rows already persisted, as `localLoad` returns them
+ * @returns {number} a key no persisted row holds and no earlier mint of this module used
+ */
+function newLocalSaveId(existing) {
+  const taken = new Set((existing || []).map(row => String(row?.id)));
+  const now = Date.now();
+  let candidate = now > _lastLocalSaveId ? now : _lastLocalSaveId + 1;
+  while (taken.has(String(candidate))) candidate += 1;
+  _lastLocalSaveId = candidate;
+  return candidate;
+}
+
 // ── Toggle helpers ─────────────────────────────────────────────────────────
 
 function bundleToggles(entry) {
@@ -743,7 +785,9 @@ async function localSaveEntry(
   const v2 = migrateSaveToV2(entry);
   const settlement = withNeighbourNetworkFromRelationship(v2.settlement);
   const saves = await localLoad();
-  const id = v2.id || Date.now();
+  // An explicit id still wins, exactly as before (`||`, so the falsy ids this module has
+  // always re-minted keep being re-minted); only the fallback changed. See newLocalSaveId.
+  const id = v2.id || newLocalSaveId(saves);
 
   // Bidirectional neighbour link (see supabaseSave): when the named neighbour
   // already exists as an active save, write the reciprocal back-link onto the
