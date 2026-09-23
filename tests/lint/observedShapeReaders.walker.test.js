@@ -426,6 +426,18 @@ describe('reader-with-no-writer ratchet: the frozen inventory', () => {
     //     not count, so a register that genuinely moved rows left the bank exactly where it
     //     was. A rung that had reasoned "+1 -1 = 0" instead of measuring would have been
     //     right by luck; `declaredBankOf(22)` is read off the live scan at the subject.
+    //   • 61/40 → 69/45 at the schema-23 rung (2026-09-23, EM-C4b / EM-E1 / EM-F1,
+    //     judgment 273, under the SAME ODQ §934.16 ruling) — the edit mode's save-time
+    //     readers. ⭐ THE FIRST ROSTER GROWTH SINCE 11 AND THE FIRST EVER OF TWO, which is
+    //     the entry worth having beside 21's and 22's: 21 grew the tagged row count under a
+    //     FIXED roster and 22 moved an address under one, while this rung DECLARES
+    //     `decrees on settlement` and `kind on settlement` outright. ⚠ A ROSTER GROWTH IS
+    //     NOT AN ADDRESS GROWTH'S ARITHMETIC: declaring is keyed by IDENTITY, so the four
+    //     new addresses (phantoms.js x1, saveAccess.js x1, decreeHook.js x4, pulseKernel.js
+    //     x1 — 7 reads) arrive WITH the one ordinary `decrees on settlement` row the estate
+    //     already carried at personaSlicer.js x1, which the declaration tags whether or not
+    //     this rung caused it. 61 + 8 = 69 across 40 + 5 = 45, and the pair was MEASURED off
+    //     the live scan before the rung was written rather than derived here.
     const registerBank = {
       reads: persistedTags.reduce((sum, row) => sum + row.count, 0),
       addresses: persistedTags.length,
@@ -1307,7 +1319,12 @@ describe('reader-with-no-writer ratchet: the live scan', () => {
     // (`interSettlementRelationships`, `crossSettlementConflicts`) are UNDECLARED and are
     // admitted as ORDINARY rows, so they add nothing here: that is exactly the difference
     // this figure exists to show. MEASURED off this scan.
-    expect(live.explainedWriters.banked).toBe(61);
+    // ⭐ 61 → 69 AT THE SCHEMA-23 RUNG (2026-09-23, EM-C4b / EM-E1 / EM-F1), and it is the
+    // SECOND note's shape rather than the first or third: the ROSTER is what moved, as it
+    // did on 2026-09-17, but upward. `decrees on settlement` and `kind on settlement` are
+    // DECLARED, so their four new addresses (7 reads) and the one ordinary personaSlicer.js
+    // row (1 read) are banked by rule together. MEASURED off this scan.
+    expect(live.explainedWriters.banked).toBe(69);
     expect(Object.entries(corpus.shapes)
       .filter(([, shape]) => shape.keys.includes('source'))
       .map(([name]) => name)).toEqual([
@@ -1348,6 +1365,10 @@ describe('reader-with-no-writer ratchet: the live scan', () => {
     // membership is hand-declared rather than derived from a rule.
     expect([...live.explainedWriters.bankedIdentities].sort()).toEqual([
       'appliedAt on eventLog',
+      // ⭐ DECLARED AT THE SCHEMA-23 RUNG, and it sorts HERE rather than at the end because
+      // this list is alphabetical and not roster-ordered — the register pin above is the
+      // one keyed by the roster.
+      'decrees on settlement',
       'deltas on eventLog',
       'event on eventLog',
       // ⛔ `factions on locks` SORTED HERE UNTIL 2026-09-17 AND LEFT BY THE OTHER DOOR:
@@ -1356,8 +1377,11 @@ describe('reader-with-no-writer ratchet: the live scan', () => {
       // identity can leave this list for either reason and the two must not be
       // conflated, which is why both notes sit here.
       // ⚠ `isCriminal on incomeSources` LEFT THIS LIST AT THE SCHEMA-17 RUNG — it is still
-      // DECLARED (the roster is now eight) but banks nothing, because its reads stopped
-      // being findings once the corpus could observe their writer. Banked ⊆ declared, always.
+      // DECLARED (the roster is TEN since the schema-23 rung) but banks nothing, because its
+      // reads stopped being findings once the corpus could observe their writer. Banked ⊆
+      // declared, always.
+      // ⭐ THE SCHEMA-23 RUNG'S OTHER DECLARATION: the phantom counterparty's discriminant.
+      'kind on settlement',
       'narrativeSummary on eventLog',
       'neighbourNetwork on settlement',
       'stresses on settlement',
@@ -1524,23 +1548,33 @@ describe('reader-with-no-writer ratchet: the live scan', () => {
       // corpus never took. Schema 17's stress-loaded topology pass makes the corpus take it,
       // so the reads are no longer findings and there is nothing left to bank. ⛔ THE ENTRY
       // IS PINNED AT 0/0 RATHER THAN REMOVED FROM THIS MAP: the map is built from
-      // EXPLAINED_WRITER_EXEMPTIONS, whose roster is now EIGHT, and a declaration that
-      // banks nothing is precisely what this arm should be able to say out loud.
+      // EXPLAINED_WRITER_EXEMPTIONS, whose roster is TEN since the schema-23 rung, and a
+      // declaration that banks nothing is precisely what this arm should say out loud.
       // ⚠ "THE NINTH" IS ITS HISTORICAL POSITION, NOT ITS INDEX TODAY — it was declared
       // ninth and is now first, because `factions on locks` was retired ahead of it on
       // 2026-09-17. The two cases are worth telling apart: this one keeps its
       // declaration because its WRITER IS STILL THERE and merely became observable;
       // that one lost its writer outright, which gate 0 refuses rather than tolerates.
       'isCriminal on incomeSources': { reads: 0, addresses: 0 },
+      // ⭐ THE SCHEMA-23 RUNG'S TWO, and this is the LIVE side of the register pin above —
+      // measured from the live scan's tagged addresses while that one reads the frozen
+      // rowTags, so a re-freeze that moved one without the other still reds here.
+      // `decrees on settlement` reads 6 across 3: decreeHook.js x4, pulseKernel.js x1, and
+      // the ORDINARY row the estate already carried at personaSlicer.js x1, which the
+      // declaration tags because the roster is keyed by identity. `kind on settlement`
+      // reads 2 across 2: the phantom mint's own shelf predicate and the quota count that
+      // hides a phantom from the viewer's slots.
+      'decrees on settlement': { reads: 6, addresses: 3 },
+      'kind on settlement': { reads: 2, addresses: 2 },
     });
 
     // A7 guard mutant: the retired clear-outright behavior loses exactly the
     // bank and therefore cannot satisfy the live count asserted above.
     const bankedIdentities = new Set(live.explainedWriters.bankedIdentities);
     const clearOutright = live.findings.filter((finding) => !bankedIdentities.has(identityOf(finding)));
-    // − 61 from the schema-21 rung, moving with the banked figure pinned above rather than
+    // − 69 from the schema-23 rung, moving with the banked figure pinned above rather than
     // being a second hand-held copy of it.
-    expect(clearOutright).toHaveLength(live.findings.length - 61);
+    expect(clearOutright).toHaveLength(live.findings.length - 69);
     expect(inventoryOf(clearOutright)).not.toEqual(liveInventory);
   });
 

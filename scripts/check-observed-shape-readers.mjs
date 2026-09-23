@@ -95,11 +95,12 @@ import {
   RETIRED_EXEMPTION_RETIREMENT_BASELINE_SCHEMA,
   RETIRED_BANK_FENCE_BASELINE_SCHEMA,
   RETIRED_RELATIONSHIPS_MOUNT_BASELINE_SCHEMA,
+  RETIRED_DOMAIN_READER_BASELINE_SCHEMA,
   RETIRED_EXACT_BASELINE_SCHEMA,
   RETIRED_FILTERED_LEAF_BASELINE_SCHEMA,
   RETIRED_SURFACE_FILTERED_LEAF_BASELINE_SCHEMA,
   RETIRED_UNFILTERED_LEAF_BASELINE_SCHEMA,
-  validateSchema22Baseline,
+  validateSchema23Baseline,
 } from './lib/observed-shape-baseline.mjs';
 import {
   parseExactFlags,
@@ -172,7 +173,16 @@ const BASELINE = join(ROOT, 'scripts/.observed-shape-readers-baseline.json');
  *     `crossSettlementConflicts` in the estate. TWO rows move address, TWO are deleted, and
  *     NO row is added anywhere. The identity `crossSettlementConflicts on settlement`
  *     reaches ZERO addresses. The bank does not move (61/40): the declared identity changes
- *     address and not count. THE LIVE AUTHORITY.
+ *     address and not count (RETIRED).
+ * 23 = schema 22's topology and tag law re-governed to a register that ADMITS THE EDIT MODE'S
+ *     SAVE-TIME READERS. Four rows land at two identities the GENERATION corpus can never
+ *     observe a writer for — `kind on settlement` (the phantom counterparty's discriminant,
+ *     minted by `mintPhantom` onto the record that IS the save blob) and `decrees on
+ *     settlement` (the decree registry, assigned by `commitRegistry` in the store) — and BOTH
+ *     are DECLARED, which makes this the first rung since 11 to grow the roster and the first
+ *     ever to grow it by two. Declaring by IDENTITY also tags the ONE ordinary
+ *     `decrees on settlement` row the estate already carried at `src/domain/ai/personaSlicer.js`,
+ *     so the bank goes 61/40 -> 69/45 across a roster of TEN. THE LIVE AUTHORITY.
  * ⚠ THIS LIST WENT STALE FOR EIGHT RUNGS — it marked 10 as "THE LIVE AUTHORITY" while
  *   the number stood at 18 — so it is filled in here rather than extended by one. Each
  *   rung's full rationale lives beside its own target constant in
@@ -190,6 +200,7 @@ export {
   RETIRED_EXEMPTION_RETIREMENT_BASELINE_SCHEMA,
   RETIRED_BANK_FENCE_BASELINE_SCHEMA,
   RETIRED_RELATIONSHIPS_MOUNT_BASELINE_SCHEMA,
+  RETIRED_DOMAIN_READER_BASELINE_SCHEMA,
   RETIRED_EXACT_BASELINE_SCHEMA, RETIRED_FILTERED_LEAF_BASELINE_SCHEMA,
   RETIRED_SURFACE_FILTERED_LEAF_BASELINE_SCHEMA,
   RETIRED_UNFILTERED_LEAF_BASELINE_SCHEMA,
@@ -1254,6 +1265,53 @@ export const EXPLAINED_WRITER_EXEMPTIONS = Object.freeze([
       + ' store or command layer — so the summary exists only on saved campaigns and never on'
       + ' a freshly generated world.',
   }),
+  // ⭐⭐ THE SCHEMA-23 RUNG / M9 — THE EDIT MODE'S TWO SAVE-TIME KEYS, AND THE FIRST
+  // TIME THIS ROSTER GROWS BY TWO (EM-C4b / EM-E1 / EM-F1, judgment 273, ODQ §934.16).
+  //
+  // ⛔ THE OWNER'S RULING IS THE AUTHORITY, AND IT IS THE SAME ONE RUNG 22 SPENT: "a
+  // domain-side reader … is bought with a governed register migration, not refused by
+  // one." The edit mode landed four readers of two keys the GENERATION corpus can never
+  // observe a writer for, and the answer the register owes them is ADMISSION.
+  //
+  // ⚠ DECLARING IS KEYED BY IDENTITY, NOT BY ADDRESS, AND THAT IS PRICED RATHER THAN
+  // DISCOVERED. `decrees on settlement` already had ONE ordinary row in the estate —
+  // `src/domain/ai/personaSlicer.js` ×1, frozen since before the editor existed — and
+  // declaring the identity moves that row into the enforced bank with the four new ones.
+  // Rungs 21 and 22 REFUSED exactly that for `interSettlementRelationships on settlement`
+  // as "a change of enforcement posture over rows this rung did not cause", and the
+  // distinction is real rather than a reversal: there the seven ordinary rows were of a
+  // key whose writers had nothing to do with the rung, while here the single ordinary row
+  // reads the SAME registry `commitRegistry` writes, by the SAME lifecycle argument. The
+  // posture it moves into is the posture the rung is buying.
+  //
+  // ⚠ AND THE ALTERNATIVE WAS MEASURED, NOT ASSUMED: an entry alone does not carry its
+  // rows. `assertExplainedWriterRowTags` throws `explained-writer inventory address lacks
+  // its row tag: src/domain/ai/personaSlicer.js / decrees on settlement` on a declaration
+  // whose estate address is untagged, so "declare the identity and leave that row
+  // ordinary" is not expressible. The bank therefore goes 61/40 -> 69/45.
+  Object.freeze({
+    identity: 'decrees on settlement',
+    mechanism: 'save-time-writer',
+    writer: 'src/store/editSlice.js',
+    ruling: 'EM-C4b / EM-E1 / EM-F1 — judgment 273, ODQ §934.16',
+    why: 'The decree REGISTRY is minted when a DM stages, reorders, withdraws, reopens, marks'
+      + ' or reverts a decree against an ACTIVE SAVE: commitRegistry is the registry\'s one'
+      + ' store write site and it assigns settlement.decrees there. The corpus executes'
+      + ' generation plus the DOMAIN pulse and never runs the store, so no generated world can'
+      + ' carry the key — one lifecycle step out from saves.js and the same class as'
+      + ' worldPulse on campaignState.',
+  }),
+  Object.freeze({
+    identity: 'kind on settlement',
+    mechanism: 'save-time-writer',
+    writer: 'src/domain/edit/phantoms.js',
+    ruling: 'EM-C4b / EM-E1 / EM-F1 — judgment 273, ODQ §934.16',
+    why: 'A phantom counterparty is a MINIMAL SAVE whose BLOB is the record mintPhantom writes,'
+      + ' and `kind: PHANTOM_KIND` is that record\'s discriminant — minted when a DM founds a'
+      + ' counterparty the world does not contain, never during generation, which is all the'
+      + ' corpus executes. The blob rides the data column WHOLE, so the save path stamps no key'
+      + ' of its own and the mint is the only writer gate 0 can name.',
+  }),
 ]);
 
 /** The mechanisms an entry may claim. TOTAL positive predicate: an unlisted
@@ -1369,7 +1427,7 @@ export function assertExplainedWriterRowTags(
   baseline,
   entries = EXPLAINED_WRITER_EXEMPTIONS,
 ) {
-  validateSchema22Baseline(baseline);
+  validateSchema23Baseline(baseline);
   assertExplainedWriterExemptions(entries);
   const declarations = new Map(entries.map((entry) => [entry.identity, entry]));
   const genesis = baseline.frozenAtSha === baseline.migrationReview.subjectSha;
@@ -2753,7 +2811,7 @@ export function baselineOf({
       'world is SAVED, LINKED or IMPORTED and never by the generation pipeline this instrument',
       'executes. One was the DECLARED identity `neighbourNetwork on settlement`, so the bank',
       'grew 60/39 -> 61/40, the fence\'s first real exercise.',
-      'SCHEMA 22 = schema 21\'s topology, tag law and eight-identity declared roster, all',
+      'SCHEMA 22 (RETIRED) held schema 21\'s topology, tag law and eight-identity declared roster, all',
       'UNCHANGED, re-governed to a register that FOLLOWS THAT ASSEMBLER DOWN A LAYER. Rung 21',
       'admitted its rows where they landed; the owner then ruled the arrangement itself (ODQ',
       '§934.16): "if a future car wants a domain-side reader of the relationship keys, it is a',
@@ -2781,7 +2839,29 @@ export function baselineOf({
       'moved row is ORDINARY, exactly like its seven siblings. The bank is therefore unmoved at',
       '61 reads across 40 tagged addresses — `neighbourNetwork on settlement` changes address',
       'and not count — which is the fence proving a MOVE is not a growth.',
-      'Of the eight declared bank entries SEVEN bank reads today; `isCriminal on incomeSources`',
+      'SCHEMA 23 = schema 22\'s topology and tag law re-governed to a register that ADMITS THE',
+      'EDIT MODE\'S SAVE-TIME READERS (EM-C4b / EM-E1 / EM-F1, judgment 273, under the SAME',
+      'owner ruling rung 22 spent, ODQ §934.16: a domain-side reader of a save-time key is',
+      'bought with a governed register migration, not refused by one). FOUR ROWS LAND, at two',
+      'identities the GENERATION corpus can never observe a writer for:',
+      '`kind on settlement` — the phantom counterparty\'s discriminant. A phantom is a MINIMAL',
+      'SAVE whose blob is the record `mintPhantom` writes (src/domain/edit/phantoms.js), and the',
+      'blob rides the data column WHOLE, so the save path stamps no key of its own. Read at the',
+      'mint\'s own shelf predicate and at src/lib/saveAccess.js, which excludes a hidden phantom',
+      'from the quota count — one read each.',
+      '`decrees on settlement` — the decree registry, assigned by `commitRegistry` in',
+      'src/store/editSlice.js when a DM stages, reorders, withdraws, reopens, marks or reverts a',
+      'decree against an active save. Read four times by the pulse\'s decree hook and once by the',
+      'pulse kernel.',
+      '⭐ BOTH ARE DECLARED, AND THE ROSTER GROWS BY TWO — the first growth since schema 11 and',
+      'the first ever of two. ⚠ DECLARING IS KEYED BY IDENTITY, NOT BY ADDRESS, so the ONE',
+      'ordinary `decrees on settlement` row the estate already carried —',
+      'src/domain/ai/personaSlicer.js ×1 — is tagged with them: an entry whose estate address is',
+      'untagged is refused outright ("explained-writer inventory address lacks its row tag"), so',
+      '"declare the identity and leave that row ordinary" is not expressible. The bank therefore',
+      'goes 61 reads across 40 tagged addresses -> 69 across 45, MEASURED off the live scan at',
+      'the subject and declared as data before the write.',
+      'Of the ten declared bank entries NINE bank reads today; `isCriminal on incomeSources`',
       'has banked nothing since schema 17 made its writer observable, and banked is always a',
       `subset of declared. This envelope banks ${bankPhrase(bankOf(inventory, rowTags))}.`,
       'The byte-frozen detector is unchanged; its output is narrowed by THREE clearing filters —',
@@ -2791,7 +2871,7 @@ export function baselineOf({
       'An untagged row means: a guarded read, of a real record rather than browser or language surface,',
       'of a key no writer the corpus runs produces and no declared out-of-corpus writer explains.',
       'A tagged row stays visible as governed explained-writer debt under its numeric ceiling and reason.',
-      'Schemas 4–21 are the RETIRED numeric predecessors.',
+      'Schemas 4–22 are the RETIRED numeric predecessors.',
     ],
     schema: BASELINE_SCHEMA,
     frozen: new Date().toISOString().slice(0, 10),
@@ -2965,7 +3045,7 @@ export async function run(argv = [], overrides = {}) {
     createScanArtifact,
     validateScanArtifact,
     assertFindingSourceEvidence,
-    validateBaseline: validateSchema22Baseline,
+    validateBaseline: validateSchema23Baseline,
     // ⭐ THE BANK FENCE'S TWO HAND-OWNED SIDES, overridable so the sentinel can drive
     // every refusal: the literal module and the migration script's declared post-bank.
     readBankLiteral: readBankLiteralModule,

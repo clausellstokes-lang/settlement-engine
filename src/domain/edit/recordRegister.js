@@ -31,10 +31,10 @@ export const RECORD_CLASSES = Object.freeze({
   structuralSuggestions: 'READING', structuralViolations: 'READING', tier: 'READING',
   // AUTHORED (2 live) — the DM's and the clerk's words, untouched BY CLASS.
   userCanon: 'AUTHORED', aiOverlays: 'AUTHORED',
-  // SAVED-ONLY (4) — generation produces none of these; see SAVED_ONLY_KEYS.
+  // SAVED-ONLY (6) — generation produces none of these; see SAVED_ONLY_KEYS.
   neighbourNetwork: 'HELD', interSettlementRelationships: 'HELD',
   crossSettlementConflicts: 'HELD', populationHistory: 'HISTORY',
-  // THE EDITOR'S (2) — declared ahead; asserted ABSENT until an editor packet writes them.
+  // THE EDITOR'S (2) — SAVED-ONLY since the editor landed its writers; see SAVED_ONLY_KEYS.
   dmLayer: 'AUTHORED', decrees: 'AUTHORED',
 });
 
@@ -49,14 +49,30 @@ export const GENERATED_KEYS = Object.freeze([
   'settlementReason', 'simulationTrace', 'simulationVersion', 'spatialLayout', 'stress',
   'stressors', 'structuralSuggestions', 'structuralViolations', 'tier', 'userCanon',
 ]);
-/** Written only by the save path, the campaign or the pulse — never by generation. */
+/** Written only by the save path, the campaign, the pulse or the EDITOR — never by generation.
+ *  ⭐ THE EDITOR'S TWO JOINED THIS CLASS AT THE OBSERVED-SHAPE REGISTER'S SCHEMA-23 RUNG, which
+ *  is where the claim is PROVED rather than merely asserted: that rung's gate 0 re-reads each
+ *  named writer out of the scanned tree on every scan, so a key listed here whose writer is
+ *  deleted or renamed reds the register instead of leaving a stale row. The writers, by name:
+ *    dmLayer   — src/store/editSlice.js, `state.settlement.dmLayer = applied.layer`
+ *    decrees   — src/store/editSlice.js, `commitRegistry`'s `state.settlement.decrees = decrees`
+ *  The other four keep the writers they always had (the save path's neighbour back-link, the
+ *  link/undo/import paths, and the campaign's population history). */
 export const SAVED_ONLY_KEYS = Object.freeze([
   'neighbourNetwork', 'interSettlementRelationships', 'crossSettlementConflicts', 'populationHistory',
+  'dmLayer', 'decrees',
 ]);
-/** Declared but not yet written anywhere. Arm A1 asserts their ABSENCE, never their shape.
- *  ⚠ `crossSettlementConflicts` is here because NOTHING IN src/ WRITES IT: two readers merge it
- *  and the public allow-list names it (RelationshipsTab.jsx:59; relationshipsDeskRead.js:156). */
-export const NOT_YET_WRITTEN_KEYS = Object.freeze(['dmLayer', 'decrees', 'crossSettlementConflicts']);
+/** Declared, classed SAVED-ONLY, and still written by NOTHING IN src/ — an OVERLAY on the list
+ *  above rather than a class of its own, so arm A1 asserts both the partition and this subset.
+ *  ⚠ `crossSettlementConflicts` is the whole of it because nothing in src/ writes the key: two
+ *  readers merge it and the public allow-list names it (RelationshipsTab.jsx:59;
+ *  relationshipsDeskRead.js:156), and the observed-shape register drove the identity
+ *  `crossSettlementConflicts on settlement` to ZERO addresses at its schema-22 rung.
+ *  ⛔ `dmLayer` and `decrees` LEFT THIS LIST AT THE SCHEMA-23 RUNG, and the distinction is the
+ *  point: they are no longer declared-ahead, they are WRITTEN — by the store, one lifecycle step
+ *  outside generation — which is exactly why their reads had to be admitted to that register
+ *  rather than refused by it. */
+export const NOT_YET_WRITTEN_KEYS = Object.freeze(['crossSettlementConflicts']);
 
 /** Sub-paths whose class differs from their parent's. The WHOLE exception list. */
 export const CLASS_EXCEPTIONS = Object.freeze({

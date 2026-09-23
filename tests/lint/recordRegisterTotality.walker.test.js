@@ -54,14 +54,22 @@
  * 7.  CUSTOM CONTENT is empty (customContent: {}): a compendium-promoted institution or resource can
  *     populate config.nearbyResourcesCustom and new institutions[].source values.
  * 8.  userCanon is {} and aiOverlays is [] in 525/525 — both AUTHORED, so their INTERIOR is unseen.
- * 9.  ⭐ THE WALKER GENERATES; IT DOES NOT SAVE. The four SAVED_ONLY_KEYS are classed from the save
+ * 9.  ⭐ THE WALKER GENERATES; IT DOES NOT SAVE. The six SAVED_ONLY_KEYS are classed from the save
  *     path's source and the public allow-list, and this walker can only assert their ABSENCE. The
  *     arm that observes them over a real save → load is EM-R7's (design §22.3 item 7).
  * 10. A MALFORMED repairs[] entry is the one seam by which HISTORY reaches a READING: the provenance
  *     check fires only on a repair missing `type`, `action` or `reason`
  *     (generationReceiptJudgments.js:654-660). No generated repair is malformed; a future op could
  *     write one.
- * 11. dmLayer and decrees do not exist yet: A1 asserts their ABSENCE, never their shape.
+ * 11. ⭐ dmLayer and decrees ARE WRITTEN NOW — by the STORE (`src/store/editSlice.js`), one
+ *     lifecycle step outside generation — so they joined SAVED_ONLY_KEYS at the observed-shape
+ *     register's schema-23 rung and NOT_YET_WRITTEN_KEYS is down to `crossSettlementConflicts`
+ *     alone. What A1 can say about them is unchanged and is all it could ever say: this walker
+ *     GENERATES and never saves, so it asserts their ABSENCE from a generated record, never
+ *     their shape. The rung is what proves the writers exist — its gate 0 re-reads each named
+ *     writer out of the scanned tree on every scan — and NOT_YET_WRITTEN_KEYS is now an OVERLAY
+ *     on the saved-only list rather than a third partition member, which is what the partition
+ *     arm below asserts.
  * 12. ⭐ THE `history-age` GROUP IS DECLARED HERE AND DETECTED ELSEWHERE. A6 proves the group is LIVE
  *     (its root and both members resolve on every record); it does NOT assert that the two leaves are
  *     EQUAL. The identity `history.age === history.founding.age` is EM-R0b's `V-HISTORY-AGE` check, by
@@ -222,11 +230,23 @@ describe('the record class register — totality over a generated record, in bot
     }
     expect(leaked, `a saved-only or not-yet-written key is present on a GENERATED record:\n${leaked.join('\n')}`).toEqual([]);
 
-    // The editor's own two keys are DERIVED from the register, never re-listed here.
-    const editorKeys = NOT_YET_WRITTEN_KEYS.filter((key) => !SAVED_ONLY_KEYS.includes(key));
-    expect(editorKeys.length, 'the editor keys the register declares ahead').toBeGreaterThan(0);
-    expect(sorted([...GENERATED_KEYS, ...SAVED_ONLY_KEYS, ...editorKeys]),
-      'the three key lists partition RECORD_CLASSES exactly')
+    // ⭐ TWO LISTS PARTITION THE REGISTER, AND THE THIRD IS AN OVERLAY ON ONE OF THEM. It used
+    // to be three: `NOT_YET_WRITTEN_KEYS` minus `SAVED_ONLY_KEYS` derived the EDITOR's two keys,
+    // which were declared ahead of any writer. The observed-shape register's schema-23 rung
+    // retired that state of affairs by measurement — `dmLayer` and `decrees` are written by
+    // `src/store/editSlice.js`, and that rung's gate 0 re-proves both writers out of the scanned
+    // tree on every scan — so they moved into the saved-only class and the not-yet-written list
+    // is down to `crossSettlementConflicts`, which nothing in src/ writes at all.
+    // ⛔ THE SUBSET ARM IS WHAT KEEPS THE OVERLAY HONEST: a key that is not-yet-written but
+    // outside the saved-only class would be classed by no partition member, and the equality
+    // below would stop being total without saying so.
+    expect(NOT_YET_WRITTEN_KEYS.length, 'the keys the register classes but no writer produces')
+      .toBeGreaterThan(0);
+    const unclassedUnwritten = NOT_YET_WRITTEN_KEYS.filter((key) => !SAVED_ONLY_KEYS.includes(key));
+    expect(unclassedUnwritten, `a NOT_YET_WRITTEN key outside the saved-only class:\n${unclassedUnwritten.join('\n')}`)
+      .toEqual([]);
+    expect(sorted([...GENERATED_KEYS, ...SAVED_ONLY_KEYS]),
+      'the two key lists partition RECORD_CLASSES exactly')
       .toEqual(sorted(Object.keys(RECORD_CLASSES)));
   });
 

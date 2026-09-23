@@ -183,7 +183,13 @@
  *     first real exercise, since 20's own re-freeze moved nothing. Its full rationale lives
  *     beside `RELATIONSHIPS_MOUNT_TARGET_SCHEMA`.
  *
- *   schema 21 -> 22 (LIVE)   the same tagged numeric reconciliation, and THE FIRST RUNG THAT
+ *   schema 22 -> 23 (LIVE)   the same tagged numeric reconciliation, and THE FIRST RUNG WHOSE
+ *     SUBJECT IS THE EDIT MODE. It ADMITS FOUR ROWS at two identities — `kind on settlement`
+ *     and `decrees on settlement` — and DECLARES BOTH, which makes it the first rung since 11
+ *     to GROW the roster and the first ever to grow it by two. Its full rationale lives beside
+ *     `EDIT_MODE_READERS_TARGET_SCHEMA`.
+ *
+ *   schema 21 -> 22 (RETIRED) the same tagged numeric reconciliation, and THE FIRST RUNG THAT
  *     EXISTS TO UNDO AN ARRANGEMENT ITS PREDECESSOR BANKED. 21 admitted the assembler's rows
  *     where they happened to land — under `src/components/` — and the file's own header then
  *     wrote that location down as a law, on the true measurement that a domain reader would
@@ -244,6 +250,7 @@ import {
   validateSchema19Baseline,
   validateSchema20Baseline,
   validateSchema21Baseline,
+  validateSchema22Baseline,
 } from './lib/observed-shape-baseline.mjs';
 
 export const MIGRATION_REPORT_SCHEMA = 2;
@@ -756,6 +763,86 @@ export const RELATIONSHIPS_MOUNT_TARGET_SCHEMA = 21;
  *  the reader lands first and this rung's re-freeze lands after it. */
 export const DOMAIN_READER_TARGET_SCHEMA = 22;
 
+/* ⭐⭐ THE SCHEMA 22 → 23 RUNG — THE EDIT MODE'S SAVE-TIME READERS
+ *  (EM-C4b / EM-E1 / EM-F1, judgment 273, under ODQ §934.16; design
+ *  `docs/DESIGN_EDIT_MODE_AND_DECREES.md` §2.8's build notes name this door).
+ *
+ *  WHAT MOVED, AND IT IS THE ESTATE RATHER THAN THE INSTRUMENT — the same shape as 21, and
+ *  the opposite of 22, which moved rows an earlier rung had already admitted. The edit mode
+ *  landed FOUR READERS of TWO persisted keys, and the generation corpus can never observe a
+ *  writer for either one:
+ *    • `kind on settlement` — the phantom counterparty's discriminant. A phantom is a MINIMAL
+ *      SAVE whose blob IS the record `mintPhantom` writes (`src/domain/edit/phantoms.js`), and
+ *      that blob rides the `data` column WHOLE, so the save path stamps no key of its own and
+ *      the mint is the only writer gate 0 can name. Read once at the mint's own shelf
+ *      predicate (EM-F1) and once at `src/lib/saveAccess.js`, which excludes a hidden phantom
+ *      from the quota count (EM-F1b).
+ *    • `decrees on settlement` — the decree registry, assigned by `commitRegistry` in
+ *      `src/store/editSlice.js` (EM-C4b) when a DM stages, reorders, withdraws, reopens, marks
+ *      or reverts a decree against an ACTIVE SAVE. Read four times by
+ *      `src/domain/worldPulse/decreeHook.js` (EM-E1) and once by
+ *      `src/domain/worldPulse/pulseKernel.js` (EM-E4b).
+ *
+ *  ⛔ AND THE SCAN IS RIGHT ABOUT ALL FOUR, which is why the register owes them ADMISSION
+ *  rather than a silenced detector. The owner's ruling is the SAME one rung 22 spent — "a
+ *  domain-side reader … is bought with a governed register migration, not refused by one" —
+ *  and it is the whole authority here: the reads are real, the keys are real, and the corpus
+ *  executes generation plus the domain pulse and no store.
+ *
+ *  ⭐⭐ THE ROSTER GROWS BY TWO, AND THAT IS THIS RUNG'S DISTINGUISHING ACT. 11 grew it by
+ *  one, 19 shrank it by one, and 21 and 22 both refused to touch it. Both new identities are
+ *  DECLARED under the existing `save-time-writer` mechanism, so no mechanism, filter, door or
+ *  threshold moves; what moves is the roster, from EIGHT to TEN.
+ *
+ *  ⚠ DECLARING IS KEYED BY IDENTITY, NOT BY ADDRESS, AND THE PRICE IS PAID EXPLICITLY.
+ *  `decrees on settlement` already had ONE ordinary row in the estate —
+ *  `src/domain/ai/personaSlicer.js` ×1, frozen long before the editor existed — and the
+ *  declaration tags it along with the four new addresses. Rungs 21 and 22 REFUSED exactly that
+ *  for `interSettlementRelationships on settlement`, as "a change of enforcement posture over
+ *  rows this rung did not cause", and the refusal still stands for that key: there the seven
+ *  ordinary rows read a key whose writers had nothing to do with the rung, while here the one
+ *  ordinary row reads the SAME registry `commitRegistry` writes, by the SAME lifecycle
+ *  argument. The posture it moves into is the posture this rung is buying.
+ *  ⛔ AND THE ALTERNATIVE IS NOT EXPRESSIBLE, measured rather than argued: an entry whose
+ *  estate address is untagged throws `explained-writer inventory address lacks its row tag:
+ *  src/domain/ai/personaSlicer.js / decrees on settlement` out of
+ *  `assertExplainedWriterRowTags`, before any scan. "Declare the identity and leave that row
+ *  ordinary" is a thing the instrument refuses to represent.
+ *
+ *  ⛔ THE RECONCILIATION IS FOUR NEW ROWS AND NOTHING ELSE, and that is the fence. MEASURED
+ *  at ⟨BASE⟩ 8e8f70182 through `--scan-only --scan-mode=legacy-leaf`, against the committed
+ *  schema-22 register:
+ *
+ *      reads 1,964 → 1,971 · identities 1,390 → 1,394 · files 387 → 389
+ *      NEW 4 · GONE 0 · INCREASED 0 · DECREASED 0 · SAME 1,390
+ *
+ *  `predecessorNew` must be exactly `phantoms.js`/`kind` ×1, `saveAccess.js`/`kind` ×1,
+ *  `decreeHook.js`/`decrees` ×4 and `pulseKernel.js`/`decrees` ×1. A fifth new row means a
+ *  reader this rung was not cut for rode in with it; a GONE or DECREASED row means the tip
+ *  moved under the measurement. Either way the mint STOPS rather than banking it.
+ *
+ *  ⭐ THE BANK GROWS 61/40 → 69/45, MEASURED OFF THE LIVE SCAN AND NEVER PREDICTED. The four
+ *  new addresses carry 7 reads; the personaSlicer row carries 1 more; 61 + 8 = 69 across
+ *  40 + 5 = 45. The arithmetic is written down here because it is checkable, not because it
+ *  is the source: `declaredBankOf(23)` below is read off the scan, and `assertBankTwins`
+ *  refuses the write if the measurement disagrees with it OR with
+ *  `tests/lint/observedShapeBank.literal.js`. This is the fence's THIRD exercise and its
+ *  first over a ROSTER growth — 21 grew the tagged row count under a fixed roster, 22 moved
+ *  an address under a fixed roster, and this one moves the roster itself.
+ *
+ *  Its delta is THREE instrument paths, the bookkeeping set every rung moves: the checker (the
+ *  two declarations, the live-validator binding, its `_doc` and its schema index), the baseline
+ *  library (the 22 → 23 bump, the retired-22 constant and its re-bound validator) and this
+ *  rung. ⛔ THE FOUR READERS ARE NOT IN IT, for the reason rungs 21 and 22 both spelled: they
+ *  are SUBJECT files, scanned rather than scanning, and they move `sourceTreeDigest` and
+ *  `scanTreeDigest`, which the transition records on its own. See
+ *  `EDIT_MODE_READERS_SCANNER_DELTA_PATHS`.
+ *
+ *  ⚠ THE SUBJECT COMMIT IS RATCHET-RED BY CONSTRUCTION, for one commit, and that is the
+ *  recorded CR-OSR-FREEZE-4 pair: the register may only move from a CLEAN COMMITTED tree, so
+ *  the readers land first, this rung lands second, and its re-freeze lands third. */
+export const EDIT_MODE_READERS_TARGET_SCHEMA = 23;
+
 export const DECLARED_BANK_BY_TARGET = Object.freeze({
   [EXEMPTION_RETIREMENT_TARGET_SCHEMA]: Object.freeze({ bankedReads: 60, taggedRows: 39 }),
   [BANK_FENCE_TARGET_SCHEMA]: Object.freeze({ bankedReads: 60, taggedRows: 39 }),
@@ -769,6 +856,14 @@ export const DECLARED_BANK_BY_TARGET = Object.freeze({
   // not move. `bankOf` over the committed schema-21 register derives 61/40, the live scan at
   // the subject derives 61/40, and the literal module already states it.
   [DOMAIN_READER_TARGET_SCHEMA]: Object.freeze({ bankedReads: 61, taggedRows: 40 }),
+  // MEASURED off the live scan at ⟨BASE⟩ 8e8f70182, never predicted from the delta: the two
+  // identities this rung DECLARES reach five addresses between them in the live inventory —
+  // `kind on settlement` at phantoms.js ×1 and saveAccess.js ×1, `decrees on settlement` at
+  // decreeHook.js ×4, pulseKernel.js ×1 and the ordinary row the estate already carried at
+  // personaSlicer.js ×1 — so `bankOf` derives 69 banked reads across 45 tagged addresses
+  // where the committed schema-22 register derives 61/40. The write refuses if the
+  // measurement disagrees with this pair or with the walker's hand-owned literal.
+  [EDIT_MODE_READERS_TARGET_SCHEMA]: Object.freeze({ bankedReads: 69, taggedRows: 45 }),
 });
 
 /** The declared post-bank of a target, or `null` for a rung that predates the law. */
@@ -1166,6 +1261,37 @@ export const DOMAIN_READER_SCANNER_DELTA_PATHS = Object.freeze([
   'scripts/migrate-observed-shape-readers.mjs',
 ]);
 
+/**
+ * The 22 → 23 delta — the same bookkeeping set, THREE paths:
+ *   - `check-observed-shape-readers.mjs` — THE SUBJECT as well as the bookkeeping: the two new
+ *     `EXPLAINED_WRITER_EXEMPTIONS` declarations, the live-validator binding moving from
+ *     `validateSchema22Baseline` to `validateSchema23Baseline`, the register's `_doc` header
+ *     and the schema index;
+ *   - `observed-shape-baseline.mjs` — the 22 → 23 bump, the retired-22 constant and its
+ *     re-bound validator;
+ *   - `migrate-observed-shape-readers.mjs` — this rung and its declared post-bank.
+ *
+ * ⛔ MEASURED, NEVER LISTED, and this rung's measurement has rung 18's clean shape: each of the
+ * ELEVEN governed detector inputs was hashed against the PREDECESSOR'S OWN RECORDED MANIFEST at
+ * ⟨BASE⟩ before a byte of this rung was written, and ALL ELEVEN came back byte-identical —
+ * `package.json` and `package-lock.json` measured rather than asserted, because any
+ * `package.json` byte is itself a mint trigger. The set was re-measured after it was written,
+ * because writing it changes this file, which is itself a member; the declared set is a FIXED
+ * POINT of its own measurement. A mis-declared delta set is how rung 10 → 11 became permanently
+ * unmigratable.
+ *
+ * ⛔ THE FOUR READERS AND `src/domain/edit/recordRegister.js` ARE NOT IN THIS SET, for the
+ * reason rungs 21 and 22 both spelled for theirs: they are SUBJECT files, scanned rather than
+ * scanning. They move `sourceTreeDigest` and `scanTreeDigest`, which the transition records on
+ * its own; the DETECTOR delta is these three and no more. The walkers and the bank literal are
+ * test-side and are not governed inputs at all, by the design note beside `BANK_LITERAL_MODULE`.
+ */
+export const EDIT_MODE_READERS_SCANNER_DELTA_PATHS = Object.freeze([
+  'scripts/check-observed-shape-readers.mjs',
+  'scripts/lib/observed-shape-baseline.mjs',
+  'scripts/migrate-observed-shape-readers.mjs',
+]);
+
 export const BANKED_EXPLAINED_WRITER_SCANNER_INPUT_PATHS = Object.freeze([
   'package-lock.json',
   'package.json',
@@ -1206,6 +1332,8 @@ const RELATIONSHIPS_MOUNT_SCANNER_TRANSITION_POLICY =
   'schema-20-to-21-exact-scanner-transition-v1';
 const DOMAIN_READER_SCANNER_TRANSITION_POLICY =
   'schema-21-to-22-exact-scanner-transition-v1';
+const EDIT_MODE_READERS_SCANNER_TRANSITION_POLICY =
+  'schema-22-to-23-exact-scanner-transition-v1';
 const CORPUS_COVERAGE_SCANNER_TRANSITION_POLICY =
   'schema-7-to-8-exact-scanner-transition-v1';
 const EPOCH_DARK_CORPUS_SCANNER_TRANSITION_POLICY =
@@ -1246,6 +1374,7 @@ export const LEAF_MIGRATION_PREDECESSOR = Object.freeze({
   [BANK_FENCE_TARGET_SCHEMA]: EXEMPTION_RETIREMENT_TARGET_SCHEMA,
   [RELATIONSHIPS_MOUNT_TARGET_SCHEMA]: BANK_FENCE_TARGET_SCHEMA,
   [DOMAIN_READER_TARGET_SCHEMA]: RELATIONSHIPS_MOUNT_TARGET_SCHEMA,
+  [EDIT_MODE_READERS_TARGET_SCHEMA]: DOMAIN_READER_TARGET_SCHEMA,
 });
 
 /**
@@ -1304,6 +1433,10 @@ const LEAF_PREDECESSOR_VALIDATOR = Object.freeze({
   // RETIRED literal from this rung onward, so this entry keeps validating schema 21
   // as schema 21 after the live number moves past it.
   [RELATIONSHIPS_MOUNT_TARGET_SCHEMA]: validateSchema21Baseline,
+  // The schema-23 rung's own predecessor. `validateSchema22Baseline` is bound to the
+  // RETIRED literal from this rung onward, so this entry keeps validating schema 22
+  // as schema 22 after the live number moves past it.
+  [DOMAIN_READER_TARGET_SCHEMA]: validateSchema22Baseline,
 });
 
 const RETIRED_EXACT_MIGRATION_KIND = `observed-shape-schema-2-to-${RETIRED_EXACT_TARGET_SCHEMA}-migration`;
@@ -1797,6 +1930,21 @@ const SCANNER_TRANSITION_BY_TARGET = new Map([
     // test-side literal module, none of them subject paths, so the digest cannot move BY
     // THIS RUNG. The permission is carried because the class is lawful, not because this
     // rung exercises it.
+    reviewableUnscannedMovement: true,
+  })],
+  [EDIT_MODE_READERS_TARGET_SCHEMA, Object.freeze({
+    deltaPaths: EDIT_MODE_READERS_SCANNER_DELTA_PATHS,
+    inputPaths: BANKED_EXPLAINED_WRITER_SCANNER_INPUT_PATHS,
+    policy: EDIT_MODE_READERS_SCANNER_TRANSITION_POLICY,
+    // TRUE, matching every rung since 8→9 — the flag is PER-TARGET and never retroactive.
+    // `unscannedInputDigestOf` is the SUBJECT tree minus the SCAN tree; this rung touches
+    // three files under `scripts/`, none of them subject paths, and the five source files it
+    // was cut for are plain `.js` modules the scan READS, so they enter the scan tree rather
+    // than the unscanned remainder. ⭐ MEASURED AT ⟨BASE⟩, THOUGH, NOTHING MOVED: the live
+    // unscanned digest reproduces the schema-22 register's recorded one exactly (17 entries
+    // both sides, none added, removed or modified), so the report's `unscannedMovement` is
+    // null. The permission is carried because the class is lawful, not because this rung
+    // exercises it.
     reviewableUnscannedMovement: true,
   })],
   [DOMAIN_READER_TARGET_SCHEMA, Object.freeze({
@@ -2875,7 +3023,7 @@ export function run(argv = process.argv.slice(2)) {
   // any mismatch into a refusal rather than a silent mode switch.
   const targetSchema = command.targetSchema
     ? Number(command.targetSchema)
-    : (currentPath ? RETIRED_EXACT_TARGET_SCHEMA : DOMAIN_READER_TARGET_SCHEMA);
+    : (currentPath ? RETIRED_EXACT_TARGET_SCHEMA : EDIT_MODE_READERS_TARGET_SCHEMA);
   if (![RETIRED_EXACT_TARGET_SCHEMA, HEURISTIC_TARGET_SCHEMA, FILTERED_TARGET_SCHEMA,
     SURFACE_FILTERED_TARGET_SCHEMA, BANKED_EXPLAINED_WRITER_TARGET_SCHEMA,
     CORPUS_COVERAGE_TARGET_SCHEMA, EPOCH_DARK_CORPUS_TARGET_SCHEMA,
@@ -2885,8 +3033,9 @@ export function run(argv = process.argv.slice(2)) {
     COMPANION_GATE_TARGET_SCHEMA, STRESS_TOPOLOGY_TARGET_SCHEMA,
     LINEAGE_REANCHOR_TARGET_SCHEMA, EXEMPTION_RETIREMENT_TARGET_SCHEMA,
     BANK_FENCE_TARGET_SCHEMA, RELATIONSHIPS_MOUNT_TARGET_SCHEMA,
-    DOMAIN_READER_TARGET_SCHEMA].includes(targetSchema)) {
-    throw new Error(`observed-shape --target-schema must be ${DOMAIN_READER_TARGET_SCHEMA} (live domain-reader leaf),`
+    DOMAIN_READER_TARGET_SCHEMA, EDIT_MODE_READERS_TARGET_SCHEMA].includes(targetSchema)) {
+    throw new Error(`observed-shape --target-schema must be ${EDIT_MODE_READERS_TARGET_SCHEMA} (live edit-mode-readers leaf),`
+      + ` ${DOMAIN_READER_TARGET_SCHEMA} (retired domain-reader leaf),`
       + ` ${RELATIONSHIPS_MOUNT_TARGET_SCHEMA} (retired relationships-mount leaf),`
       + ` ${BANK_FENCE_TARGET_SCHEMA} (retired bank-fence leaf),`
       + ` ${EXEMPTION_RETIREMENT_TARGET_SCHEMA} (retired exemption-retirement leaf),`

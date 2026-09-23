@@ -44,6 +44,7 @@ import {
   RETIRED_EXEMPTION_RETIREMENT_BASELINE_SCHEMA,
   RETIRED_BANK_FENCE_BASELINE_SCHEMA,
   RETIRED_RELATIONSHIPS_MOUNT_BASELINE_SCHEMA,
+  RETIRED_DOMAIN_READER_BASELINE_SCHEMA,
   RETIRED_FILTERED_LEAF_BASELINE_SCHEMA,
   RETIRED_SURFACE_FILTERED_LEAF_BASELINE_SCHEMA,
   RETIRED_UNFILTERED_LEAF_BASELINE_SCHEMA,
@@ -73,6 +74,7 @@ import {
   validateSchema20Baseline,
   validateSchema21Baseline,
   validateSchema22Baseline,
+  validateSchema23Baseline,
 } from '../../scripts/lib/observed-shape-baseline.mjs';
 import {
   artifactBaselineSchemaOf,
@@ -91,6 +93,7 @@ import {
   declaredBankOf,
   RELATIONSHIPS_MOUNT_TARGET_SCHEMA,
   DOMAIN_READER_TARGET_SCHEMA,
+  EDIT_MODE_READERS_TARGET_SCHEMA,
 } from '../../scripts/migrate-observed-shape-readers.mjs';
 
 const HASH_A = 'a'.repeat(64);
@@ -1103,6 +1106,20 @@ describe('observed-shape anti-vacuity sentinel telemetry', () => {
       'deltas on eventLog',
       'event on eventLog',
       'narrativeSummary on eventLog',
+      // ⭐⭐ THE NINTH AND TENTH, DECLARED TOGETHER AT THE SCHEMA-23 RUNG (EM-C4b / EM-E1 /
+      // EM-F1, judgment 273, under the same ODQ §934.16 ruling rung 22 spent). The roster
+      // has moved five times — grown by four at 9, by one at 11, shrunk by one at 19, held
+      // at 21 and 22 — and this is the FIRST growth of two. Both are ordinary
+      // `save-time-writer` entries: the edit mode writes them from the STORE, one lifecycle
+      // step outside the generation the corpus executes.
+      // ⚠ DECLARING IS KEYED BY IDENTITY, so `decrees on settlement` also tags the ONE
+      // ordinary row the estate already carried at src/domain/ai/personaSlicer.js. That is
+      // the price the rung pays deliberately, and it is not the posture change rungs 21 and
+      // 22 refused for `interSettlementRelationships on settlement`: there the seven
+      // ordinary rows read a key whose writers had nothing to do with the rung; here the one
+      // ordinary row reads the same registry `commitRegistry` writes.
+      'decrees on settlement',
+      'kind on settlement',
     ]);
     // ⚠ INDEX-ALIGNED WITH THE ROSTER ABOVE, one entry per line so a removal cannot
     // silently re-pair the survivors. The retired `factions on locks` was the OTHER
@@ -1116,6 +1133,8 @@ describe('observed-shape anti-vacuity sentinel telemetry', () => {
       'save-time-writer', //             deltas on eventLog
       'save-time-writer', //             event on eventLog
       'save-time-writer', //             narrativeSummary on eventLog
+      'save-time-writer', //             decrees on settlement
+      'save-time-writer', //             kind on settlement
     ]);
     expect(EXPLAINED_WRITER_EXEMPTIONS.map(({ writer }) => writer)).toEqual([
       'src/generators/economy/economicState.js',
@@ -1128,6 +1147,16 @@ describe('observed-shape anti-vacuity sentinel telemetry', () => {
       'src/domain/events/applyEvent.js',
       'src/domain/events/applyEvent.js',
       'src/domain/events/applyEvent.js',
+      // The registry's ONE store write site, `commitRegistry`.
+      'src/store/editSlice.js',
+      // ⚠ THE MINT IS ALSO A READER, AND THE ENTRY IS STILL HONEST. `mintPhantom` writes
+      // `kind: PHANTOM_KIND` into the record literal at phantoms.js; the file's own shelf
+      // predicate then reads the discriminant back, which is one of the two rows this
+      // declaration banks. That is a real object-literal WRITE beside a real read, not the
+      // clause-1 laundering the companion-gate rung refused — there a pure reader's own READ
+      // SITE was being accepted as a write shape. Gate 0 admits this file on `property`,
+      // `quoted` and `shorthand`, and nothing else in src/ writes the phantom's `kind`.
+      'src/domain/edit/phantoms.js',
     ]);
     // ⚠ THE M9 eventLog BANK NAMES ONE RULING, AND THE SAME ONE FOR ALL FOUR.
     // At genesis this exact string is stamped into every tagged row's `reason`,
@@ -1217,11 +1246,17 @@ describe('observed-shape anti-vacuity sentinel telemetry', () => {
       'deltas on eventLog',
       'event on eventLog',
       'narrativeSummary on eventLog',
+      // ⭐ THE SCHEMA-23 PAIR. Gate 0 reads `src/store/editSlice.js` and
+      // `src/domain/edit/phantoms.js` out of the SCANNED tree on every scan, so the edit
+      // mode's two save-time writers are re-proved here rather than asserted once.
+      'decrees on settlement',
+      'kind on settlement',
     ]);
     expect(evidence.map(({ key }) => key)).toEqual([
       'isCriminal',
       'neighbourNetwork', 'stresses', 'worldPulse',
       'appliedAt', 'deltas', 'event', 'narrativeSummary',
+      'decrees', 'kind',
     ]);
     // ⚠ THE M9 SPLIT IS MACHINE-DRAWN, NOT ARGUED. The same probe that admits
     // the four banked keys on `applyEvent.js` REFUSES the two nearest
@@ -1472,7 +1507,14 @@ describe('observed-shape anti-vacuity sentinel telemetry', () => {
     // identity's address between files, so the register changes and the bank does not. The
     // figure is MEASURED off the live scan, never derived from "+1 -1".
     expect(declaredBankOf(DOMAIN_READER_TARGET_SCHEMA)).toEqual({ bankedReads: 61, taggedRows: 40 });
-    expect(declaredBankOf(BASELINE_SCHEMA)).toEqual(declaredBankOf(DOMAIN_READER_TARGET_SCHEMA));
+    // ⭐⭐ AND 23 GROWS IT, WHICH IS THE THIRD KIND OF MOVE THIS TABLE HAS SEEN: 21 grew the
+    // tagged row count under a FIXED roster, 22 moved an address under a fixed roster, and
+    // this rung grows the ROSTER itself — two declarations, five addresses, eight reads —
+    // so the pair goes 61/40 -> 69/45. MEASURED off the live scan at the subject, never
+    // predicted: the arithmetic is checkable but it is not the source.
+    expect(declaredBankOf(EDIT_MODE_READERS_TARGET_SCHEMA)).toEqual({ bankedReads: 69, taggedRows: 45 });
+    expect(declaredBankOf(BASELINE_SCHEMA)).toEqual(declaredBankOf(EDIT_MODE_READERS_TARGET_SCHEMA));
+    expect(declaredBankOf(RETIRED_DOMAIN_READER_BASELINE_SCHEMA)).toEqual({ bankedReads: 61, taggedRows: 40 });
     expect(declaredBankOf(RETIRED_RELATIONSHIPS_MOUNT_BASELINE_SCHEMA)).toEqual({ bankedReads: 61, taggedRows: 40 });
     expect(declaredBankOf(RETIRED_BANK_FENCE_BASELINE_SCHEMA)).toEqual({ bankedReads: 60, taggedRows: 39 });
     expect(declaredBankOf(RETIRED_EXEMPTION_RETIREMENT_BASELINE_SCHEMA)).toEqual({ bankedReads: 60, taggedRows: 39 });
@@ -1543,7 +1585,14 @@ describe('observed-shape anti-vacuity sentinel telemetry', () => {
     // into `src/domain`. Its reconciliation moves two rows by ADDRESS and deletes two, adds
     // NONE, and retires the identity `crossSettlementConflicts on settlement` outright — the
     // first time this ratchet has driven one to zero addresses. The bank stands still.
-    expect(BASELINE_SCHEMA).toBe(22);
+    // ⭐ SCHEMA 23 (2026-09-23, EM-C4b / EM-E1 / EM-F1, judgment 273, under the SAME
+    // ODQ §934.16 ruling): schema 22's envelope and tag law UNCHANGED, re-governed to a
+    // register that ADMITS THE EDIT MODE'S SAVE-TIME READERS — four NEW rows at
+    // `kind on settlement` and `decrees on settlement`, both DECLARED, so the roster goes
+    // EIGHT -> TEN and the bank 61/40 -> 69/45. Unlike 22 it adds rows rather than moving
+    // them, and unlike 21 it grows the ROSTER rather than only the tagged row count.
+    expect(BASELINE_SCHEMA).toBe(23);
+    expect(RETIRED_DOMAIN_READER_BASELINE_SCHEMA).toBe(22);
     expect(RETIRED_RELATIONSHIPS_MOUNT_BASELINE_SCHEMA).toBe(21);
     expect(RETIRED_BANK_FENCE_BASELINE_SCHEMA).toBe(20);
     expect(RETIRED_EXEMPTION_RETIREMENT_BASELINE_SCHEMA).toBe(19);
@@ -1564,13 +1613,14 @@ describe('observed-shape anti-vacuity sentinel telemetry', () => {
     // ⭐ 15 retired at §893.4, 16 at the stress-topology rung, 17 at the lineage-reanchor
     // rung, 18 at the exemption-retirement rung, 19 at the bank-fence rung; the LIVE
     // envelope is validated by 20 now.
-    expect(validateSchema22Baseline(live)).toBe(live);
-    // … and 18, 19, 20 and 21 keep their own literals, so each refuses the live envelope it
-    // used to accept.
+    expect(validateSchema23Baseline(live)).toBe(live);
+    // … and 18, 19, 20, 21 and 22 keep their own literals, so each refuses the live envelope
+    // it used to accept.
     expect(() => validateSchema18Baseline(live)).toThrow(/is not schema 18/);
     expect(() => validateSchema19Baseline(live)).toThrow(/is not schema 19/);
     expect(() => validateSchema20Baseline(live)).toThrow(/is not schema 20/);
     expect(() => validateSchema21Baseline(live)).toThrow(/is not schema 21/);
+    expect(() => validateSchema22Baseline(live)).toThrow(/is not schema 22/);
     expect(assertExplainedWriterRowTags(live)).toBe(live);
     expect(() => validateSchema4Baseline(live)).toThrow(/noncanonical fields/);
     expect(() => validateSchema5Baseline(live)).toThrow(/noncanonical fields/);
@@ -1704,7 +1754,7 @@ describe('observed-shape anti-vacuity sentinel telemetry', () => {
     // `artifactBaselineSchemaOf` exists to prevent.
     expect(artifactBaselineSchemaOf('legacy-leaf')).toBe(2);
     expect(artifactBaselineSchemaOf('exact-origin')).toBe(3);
-    expect(BASELINE_SCHEMA).toBe(22);
+    expect(BASELINE_SCHEMA).toBe(23);
     expect(() => artifactBaselineSchemaOf('heuristic')).toThrow(/scan mode is unsupported/);
   });
 
