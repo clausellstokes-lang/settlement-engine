@@ -32,7 +32,12 @@ function instId(name) {
   return `institution.${String(name).replace(/[^a-zA-Z0-9]+/g, '_').replace(/^_+|_+$/g, '').toLowerCase()}`;
 }
 
-registerStep(FACTIONCORRELATIONPASS, {
+// The step's OWN NAME stays spelled here as a literal, never hoisted to the const above:
+// tests/helpers/generationForkCensus.js :: declaredSymbols counts a step declaration by
+// the form /^[ \t]*registerStep[ \t]*\([ \t]*['\"`]/ and reads the name back from the RAW
+// source between those quotes, so a bound identifier here resolves to no declaration at all
+// (CI run 35826251599: 20 of 22).
+registerStep('factionCorrelationPass', {
   deps: ['neighbourFactions', 'generateEconomy', 'buildGenerationContext'],
   reads: ['categoryToggles', 'effectiveConfig', 'generationContext', 'institutionToggles', 'institutions', 'powerStructure', 'tier'], // ctx keys this step consumes that another step produces (A+ generators.3 data-flow contract)
   provides: [],
