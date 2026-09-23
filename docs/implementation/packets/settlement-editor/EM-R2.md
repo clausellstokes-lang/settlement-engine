@@ -11,7 +11,36 @@
   every §P citation below is the sixth's numbering, measured rather than predicted. The
   preamble block below carries the hash executed at that tip; the chair re-stamps the Preamble
   line at placement (§P9(c)).
-- **Packet version:** 2
+- **Packet version:** 5
+  - ⛔ **VERSION 5 IS THE PRE-PROOF RE-MEASUREMENT AT TRAIN EM-T15's FLIPPED TIP
+    `64b75240c` (Opus PRE-PROOF seat, session cce01f87, 2026-09-23).** NOT ONE CONTRACT
+    CLAUSE MOVED: all thirteen `requiredSymbols` are verbatim at count 1, the CREATE target is
+    absent, the four `holderTable.js` rows are byte-identical at `:169 :237 :238 :239`, and the
+    J-T1 window `f76bd62ab..64b75240c` moves NOT ONE of the twelve change-manifest and
+    `requiredSymbols` paths. What version 5 ADDS is **one §7 `REGISTER` row the tree convicted**:
+    EM-R1's LANDED `tests/lint/heldKeyWriterCensus.walker.test.js` arm A3(b) reds on this
+    member's own planned text (§0.U — EXECUTED), and no row paid it. What version 5 RESTATES is
+    four stale figures: the worker ceiling (`1395972` → **`1392364`**, measured from the arm),
+    the read tip of §0.S/§0.T (re-executed at `64b75240c`: 6/63 control, 63/63 with the member),
+    the validator's error shape (EM-R2 is PLACED READY at version 2 in this tree, so the one
+    error is `verifiedBase disagrees with packet Markdown`, not `packetPath does not exist`),
+    and the pipelinePinnedMode "no other arm moves" enumeration, which predates EM-R1's two
+    landed arms in that file.
+  - ⛔ **VERSION 4 IS THE CHAIR'S RE-CUT UNDER JUDGMENT 204 (2026-09-22 23:0x).** EM-R2 left
+    train EM-T15 on judgment 202 and rides EM-T16. Version 4 keeps every C-contract, the four
+    `holderTable.js` addresses and the REGISTER row of versions 2 and 3 UNCHANGED, re-measures
+    §0.S and §0.T at train EM-T15's COMPOSED tip `f76bd62ab` (where EM-R1 v3's shape-4 merge
+    clone and EM-R5's `partitionTrace` are LANDED), and carries the two landed reproduction arms
+    as its own TEST rows under judgment 148's law. ⛔ **NO DEPENDENCY ON EM-R2b**: EM-R2b is
+    RETIRED as written (its compile seat measured this member's bytes alone at 63/63 and the
+    proposed skip at +0), so the dependency version 3's delta anticipated is STRUCK before it
+    was ever written.
+  - ⛔ **VERSION 3 IS A RE-PLACEMENT CUT, NOT A RE-COMPILE.** The three C-contracts, the four
+    `holderTable.js` addresses and the REGISTER row are UNCHANGED and all seven of §9's arms are
+    green at the built bytes; what version 3 adds is §0.S, §0.T and §4a Q5/Q6 — the finding two
+    LANDED arms convicted at train EM-T15's gate window 66 job 2, measured in plain node by the
+    build lane. THE DELTA IS IN `EM-R2.v3.DELTA.md` BESIDE THIS FILE and the chair takes Q5 and
+    Q6 before any re-placement; §7 and §9 move only if Q5 is answered (a).
   - Version 1 was the first cut, compiled against train EM-T12's landed tip `91cc9ef5a` by an
     Opus COMPILE seat (session cce01f87, 2026-09-22). It refutes ONE clause of the charter's row
     by measurement — see §0.R — and contracts the narrower behaviour the tree supports.
@@ -23,7 +52,7 @@
     five classes of STALE TEXT the window created: (a) the sixth amendment is LANDED, so the
     header's "the fifth stands at the read tip" sentence and the fifth's hash are replaced by
     the measured sixth; (b) the worker ceiling has moved twice under this packet
-    (`1396015` → `1395972`) and the worker closure is 188, not 187 — both restated as measured
+    (`1396015` → `1395972` → `1393432` → `1392364`) and the worker closure is 188, not 187 — both restated as measured
     figures with their instrument named by symbol; (c) §5a's disjointness table is corrected by
     measurement — EM-R1 DOES share `scripts/mutation-coverage-manifest.json` (lawfully, under
     distinct row keys) and EM-R3 and EM-R4 each MODIFY `assembleSettlement.js`; (d) EM-R0d's
@@ -47,11 +76,16 @@
   ⛔ A `__BASE__` packet can NEVER pass `validate:packets`; validation is downstream of this
   stamp, never a precondition of it. The chair's placement replaces `__BASE__` with the form
   `parsePacketHeader` parses into BOTH fields — ``- **Verified base:** `em-t15-r2-<date>` at
-  `<the train base's 40-char sha>` `` — with the value ALONE on its line (§P9(c)); EXECUTED at
-  this tip through the tree's own `validatePacketManifest` with EM-T14's three members flipped
-  LANDED and this entry placed READY at `c69d16a5d…`, the ONLY EM-R2 error is
-  `EM-R2.packetPath does not exist`, which the chair's placement fixes by writing the body —
-  ZERO duplicate change-path and ZERO duplicate register-row-key errors.
+  `<the train base's 40-char sha>` `` — with the value ALONE on its line (§P9(c)); ⭐ **RE-EXECUTED AT
+  `64b75240c` (version 5)** through the tree's own `validatePacketManifest`: EM-R1 and EM-R5 read
+  `LANDED` at this tip and **EM-R2 is already PLACED there, READY, at version 2**, so the error
+  shape has MOVED — with this version's capsule placed READY at the tip's 40-char sha the ONLY
+  EM-R2 error is `EM-R2 verifiedBase disagrees with packet Markdown: manifest=64b75240c…
+  packet=ec4cd1c2d…`, which the chair's placement fixes by writing THIS body over the version-2
+  body and stamping both fields to one sha. ZERO duplicate change-path and ZERO duplicate
+  register-row-key errors with EM-R2 alone; ONE (`tests/generators/pipelinePinnedMode.test.js`,
+  EM-R2 + EM-R1b) if stage 2 were placed non-terminal beside it, which is why stage 2 rides the
+  flip (§5a).
 - **Last revalidated:** left for the chair, with the sentence above.
 - **Depends on:**
   - **EM-R1** — pins cloned on entry at the runner (design §22 ruling 6). A HARD dependency and
@@ -94,6 +128,15 @@
   on `scripts/mutation-coverage-manifest.json`; it is ROW-KEYED (TOOL-27, `900a2368d`), each
   under a DISTINCT `rowKey`, so they do not collide — EXECUTED in §4a through the tree's own
   validator: zero duplicate-row-key errors with this member placed.
+  ⭐ **VERSION 4 ADDS ONE ORDERING CONSTRAINT, MEASURED AT `f76bd62ab` THROUGH THE TREE'S OWN
+  `validatePacketManifest`:** EM-R1 carries its own `TEST` row on
+  `tests/generators/pipelinePinnedMode.test.js`, so with both non-terminal the validator says
+  `duplicate change path across packets: tests/generators/pipelinePinnedMode.test.js (EM-R1,
+  EM-R2)`. With EM-T15's members flipped LANDED — which the terminal does before EM-T16 is
+  placed — that error is GONE and EM-R2's only remaining error is the base stamp the chair
+  writes at placement. ⇒ **EM-R2 v4 may be placed only on a train whose promotion commit
+  follows EM-R1's LANDED flip; EM-T16 satisfies it**, and this member's §7 row quotes that
+  file's lines AS THEY READ AT THE COMPOSED TIP, after EM-R1's own edit.
 - **Commit authority:** edits only; the chair commits
 - **Baseline posture:** RE-MEASURED at `c69d16a5d` (version 2, UNCHANGED from version 1) —
   **no `scripts/.size-baseline.json` row exists for any of the three source files** (measured,
@@ -215,6 +258,88 @@ dropped that clause and **no later row picked it up**. Under EM-R1's runner clon
 that is not final. It is NOT taken here: a fourth logic file breaks the standard's cap of three
 (§3), and the intake rule forbids a quiet widening. §4a **Q2** slots it.
 
+### §0.S — ⛔ THE KEY `npcs` NAMES TWO FACTS, AND THE GATE IS DEFINED ON THE RECORD'S · CONFIRMED
+
+`runPipeline`'s chooser rule is `const choosers = step.provides`, so a lawful full-step bag for
+`generatePopulation` may be built from **ctx**, where `npcs` is that step's PRE-enrichment roster.
+The RECORD's `npcs` is the coherence tail's output. Measured at `fb5267f2e`, one settlement:
+ctx's roster carries 15 keys per entry in the order `npc_1,npc_2,npc_3`; the record's carries 21
+in the order `npc_1,npc_4,npc_2`; `identical: false`. Two facts, one key — and `npcs` is the one
+record path with a SECOND writer downstream of its producer step, which is why no other key shows
+it.
+
+**THE MEMBER IS DEFINED ON THE RECORD'S, AND THAT IS THE PRODUCT'S OWN CHANNEL.**
+`src/domain/edit/dmLayer.js :: pinsFrom(record, layer, declarations, engine)` `structuredClone`s
+`source[key]` OUT OF THE RECORD; `rederive` is the only caller a DM edit reaches. Measured at the
+COMPOSED tip `f76bd62ab` over the 63-row census corpus, through that real `rederive`:
+
+| tree | re-derived record BYTE-IDENTICAL to the record |
+|---|---|
+| `f76bd62ab` WITHOUT this member | **6 / 63** (57 divergent) — the negative control |
+| `f76bd62ab` + this member's staged bytes, and nothing else | **63 / 63** |
+| ⭐ **`64b75240c` (the FLIPPED tip) WITHOUT this member** | **6 / 63** (57 divergent) — RE-EXECUTED by the pre-proof, version 5 |
+| ⭐ **`64b75240c` + this member's planned bytes, and nothing else** | **63 / 63** |
+
+⭐ **RE-EXECUTED AT THE LANDING TIP (version 5, §P10.11(ii)).** Version 4's two figures were taken
+at `f76bd62ab`, which is six commits behind the tip this member lands on; both are re-run at
+`64b75240c` itself, through the same real `rederive` over the same 63-row census corpus, and BOTH
+READ THE SAME. Beside them THE PROMISE is executed rather than argued: with NO pin bag, a 41-row
+stride of the golden corpus hashes to the same digest-of-digests
+(`83bdf7188c6ce84ec7f3cb1e7b26b067569c6e17b4be5abc980a0503a67dd88f`) at the tip and with this
+member's planned bytes — not one generated byte moves.
+
+⇒ the member's own claim is proved at corpus scale on the channel the product uses, and the
+control proves the measurement is not an empty read.
+
+### §0.T — ⛔ WHAT §0.D's `corruptionPass` WRITE-THROUGH IS AT THE COMPOSED TIP · CONFIRMED
+
+Version 3 measured 3 of 5 corpus rows still divergent under a record-built bag and slotted it to
+EM-R2b. **That figure was taken at `fb5267f2e`, BEFORE EM-R1 v3's merge clone landed, and it is
+false of the tip this member lands on** (§P10.11(ii): a sibling's LANDED fence outranks a
+measurement taken before it). At `f76bd62ab` — and, re-measured on the record channel at `64b75240c`, unchanged — the pass still re-rolls over a held roster — 36 of 63
+rows, 276 draws over 42 drawing rows, on its OWN named child stream — but EM-R1 v3 keeps
+`ctx.__pins.npcs` un-aliased from `ctx.npcs`, so this member's `chooseOrPin` at the coherence seam
+returns the PRISTINE bag's roster and the pass's in-place writes are discarded before
+`assembleSettlement` builds the settlement: **0 of 63 rows move `npcs` or `factions`**, under a
+no-op override and under a real edit alike. §0.D's finding stands as a CONTEXT-level waste (276
+unused draws, 36 rows of doomed writes); it is not a record defect and it is not this member's.
+
+### §0.U — ⛔ THE LANDED HELD-KEY WRITER CENSUS CONVICTS THIS MEMBER'S OWN TEXT · CONFIRMED
+
+EM-R1's LANDED walker `tests/lint/heldKeyWriterCensus.walker.test.js` carries arm
+**A3(b)**, which reads the assembly step's OWN import specifiers and holds the discovery set
+exact in both directions:
+
+```
+expect(discovered, 'the assembly step calls an imported symbol no roster or exempt row names')
+  .toEqual(declared);
+```
+
+EXECUTED at `64b75240c` with the walker's own `assemblyImports` / `assemblyBody` / `called`
+helpers, over the tip and over this member's planned `assembleSettlement.js`:
+
+| tree | `discovered` | equals `declared` (17) |
+|---|---:|---|
+| `64b75240c` as it stands | **17** | **true** — the arm is live and non-vacuous |
+| `64b75240c` + this member's planned text | **18** | **false** — EXTRA `["chooseOrPin"]`, MISSING `[]` |
+
+C2 widens the assembly step's `from '../pipeline.js'` import to `{ chooseOrPin, registerStep }`
+and CALLS `chooseOrPin` in the step body, so this member is the FIRST caller of the runner's pin
+primitive inside the assembly step and carries that arm (§P10.11(i), judgment 148; judgment 156
+names each roster's red separately — here it is ONE roster, `DISCOVERY_EXEMPT`, and ONE arm).
+⛔ Without the §7 REGISTER row below, the member's own §10 step 2 (`tests/lint` WHOLE, minus the lighting
+walker, **MUST EXIT 0**) cannot pass. ⭐ The cure is the walker's own declared door and it is
+EXACTLY one symbol wide: the executed EXTRA set is the singleton `chooseOrPin` and the MISSING
+set is empty, so declaring that one symbol closes both directions. `chooseOrPin` is not a writer
+of a held key — it is the runner's pin primitive, the same class as the landed
+`registerStep` row ("the runner's registration door; it declares the step and writes nothing").
+⚠ The walker asserts `DISCOVERY_EXEMPT.every((row) => row.reason.length >= 40)`, so the row's
+reason is written at or above forty characters. §4a **Q8** puts the choice (DISCOVERY_EXEMPT
+versus a ROSTER class row) to the chair.
+⚠ **EM-R4 INHERITS THIS THE DAY IT LANDS** — its own capsule widens the same import to
+`{ chooseOrPin, registerStep }` — so whichever of the two lands FIRST pays the row and the other
+must not re-add it. EM-R2 is first.
+
 ---
 
 ## §1 · Reconciled authority
@@ -281,12 +406,13 @@ follow it.**
 | Direct consumers | 0 at this member's landing (EM-B2a4's `rederive` is the first caller) | ≤2 |
 | New logic-bearing production leaves | **0** | ≤2 |
 | Existing logic-bearing production files modified | **3** | ≤3 |
-| Additional registration-only files | 2 — the mutation-coverage row and the `holderTable.js` CITATION row (§P2.14: an addresses-only citation row is outside the cap of three modified logic files and never splits a packet) | ≤3 |
-| Handwritten files total | **6** | ≤12 |
+| Additional registration-only files | 3 — the mutation-coverage row, the `holderTable.js` CITATION row and the held-key-writer-census `DISCOVERY_EXEMPT` row (§0.U) (§P2.14: an addresses-only citation row is outside the cap of three modified logic files and never splits a packet) | ≤3 |
+| Handwritten files total | **9** | ≤12 |
+| Effective lines of the ONE new leaf (a TEST file) | **308**, eslint's own `Linter` (§P9) | ≤250 governs a new **production** leaf only (`PACKET_STANDARD.md`, the hard-scope list: *"each new production leaf at most 250 effective lines"*); this member's only CREATE is under `tests/` and its production-leaf count is **0** |
 | New/changed effective production lines | **+10, MEASURED** (`narrativeGenerator.js` +1 · `assembleSettlement.js` +4 · `generatePopulation.js` +5), eslint's own `Linter` under `max-lines` with `skipBlankLines` + `skipComments` (§P9) | ≤400 |
 | Effective lines per touched file after the edit | 763 · 167 · 161, all against the generator layer's **800** | ≤250 for a NEW leaf |
 | Delta in a shared/baselined file | **0** — no file carries a `scripts/.size-baseline.json` row | ≤15 |
-| Acceptance cases | **7** | ≤8 |
+| Acceptance cases | **8** | ≤8 |
 
 Overrides approved before dispatch: **NONE, and none is needed.** ⛔ No budget is raised or
 invented here. ⚠ `narrativeGenerator.js` ends at 763 effective against 800 — **37 lines of
@@ -314,7 +440,7 @@ Dry-read against `scripts/implementation-session.mjs`, check by check, **RE-RUN 
 | every `requiredSymbols` row resolving | **PASSES** — all THIRTEEN resolve VERBATIM at count 1 AND at their recorded symbols, EXECUTED at `c69d16a5d`; through the tree's own `validatePacketManifest`, with EM-T14's three members flipped LANDED and this entry placed READY at the tip's 40-char sha, the ONLY EM-R2 error is `packetPath does not exist`, which the chair's placement fixes by writing the body |
 | git-clean / foreign dirt fingerprinted without target overlap | no EM-T14 or EM-T15 sibling writes any of the three logic files; the `holderTable.js` overlap with EM-R0d is DISCHARGED at this tip (§4a Q3), and the two LATER siblings that share `assembleSettlement.js` (EM-R3, EM-R4) are named in §5a so neither is placed non-terminal beside this member |
 
-### §4a · THE FOUR QUESTIONS ONLY THE CHAIR CAN ANSWER
+### §4a · THE QUESTIONS ONLY THE CHAIR CAN ANSWER (Q1-Q4 answered at placement; Q5-Q7 are version 4's; Q8 is version 5's)
 
 Each carries the measurement that raises it and a one-line recommendation; none is decided here.
 
@@ -340,6 +466,10 @@ validator over a copy of `PACKET_MANIFEST.json`: with EM-R2 and EM-R0d both non-
 `duplicate change path across packets: src/domain/prose/holderTable.js (EM-R2, EM-R0d)`; with
 EM-R0d LANDED, that error is gone and EM-R2's only errors are the two a `__BASE__` DRAFT always
 carries.
+⭐ **RE-EXECUTED AT `64b75240c` (version 5): the four rows are STILL at `:169 :237 :238 :239`
+with their addresses `assembleSettlement.js:100`, `:119`, `:120` and `narrativeGenerator.js:1113`
+byte-identical, and the J-T1 window `f76bd62ab..64b75240c` moves NOT ONE of this member's twelve
+paths.** The reservation is discharged twice over.
 **Recommend: place EM-R2 on a train whose promotion commit follows EM-R0d's LANDED flip** —
 EM-R0d rides EM-T14, so EM-T15 satisfies it — and have the pre-proof RE-MEASURE the four
 addresses at the then-tip rather than copy §7's predictions (§P2.16).
@@ -357,6 +487,41 @@ after a DM removes a seat-holder.
 **Recommend: GATE it, as contracted and as the charter's row names it** — it is a PRODUCER of
 `npcs` and §22 ruling 1 admits no producer into a final roster; the arm that proves the gate
 carries its own uncovered-roster control so it cannot pass vacuously.
+
+
+**Q5 — WHICH BAG IS THE RE-DERIVATION'S? ANSWERED BY JUDGMENT 202/204: THE RECORD'S.** The design
+calls the record's roster the held fact and `dmLayer :: pinsFrom` builds from it; the runner's
+chooser rule addresses the step's provides. The two disagree for `npcs` alone (§0.S). The chair
+ruled the RE-PIN: the two landed reproduction arms build their bag from the RECORD and reproduce
+THROUGH `rederive`, carried here as §7 TEST rows under judgment 148's law. ⛔ The alternative
+(growing `assembleSettlement`'s `mutates` to `['powerStructure','stress','npcs']`) was NOT taken:
+it is a data-flow contract change every consumer of `ctx.npcs` would inherit.
+
+**Q6 — `corruptionPass` (§0.D, §0.T).** ANSWERED: EM-R2b is RETIRED as written — its own compile
+seat measured the chartered outcome already true (63/63 with this member alone) and its proposed
+skip at +0 on the record while making the raw-runner channel worse (14/63 → 9/63). What remains is
+a CONTEXT-level waste, and if the chair ever wants it, its honest outcome sentence is *"under a
+held `npcs` roster the pass takes no draw and writes nothing"*, proved at the ctx level
+(36/63 → 0/63 by `onStep`). **This member does not depend on it.**
+
+**Q7 — THE ACCEPTANCE CAP IS REACHED AT EXACTLY 8.** A8 covers BOTH re-pinned arms in one case
+and §9's matrix homes it in both files, because a case per file would be 9 and the standard's
+maximum is 8. *Recommend: ratify the two-home spelling* (the count prover version 4 reads every
+backticked path in the Home cell and holds each to its own §7 row); the alternative is to split
+the second arm's re-pin into a member of its own, which buys nothing the one case does not already
+assert.
+
+**Q8 — THE HELD-KEY WRITER CENSUS'S DOOR: `DISCOVERY_EXEMPT`, OR A ROSTER CLASS ROW?** §0.U
+measures EM-R1's LANDED A3(b) red on this member's own planned text, with the EXTRA set the
+singleton `chooseOrPin` and the MISSING set empty.
+**Recommend: the `DISCOVERY_EXEMPT` row as §7 spells it** — `chooseOrPin` writes no held key, it
+is the runner's pin primitive, and the landed `registerStep` row ("the runner's registration
+door; it declares the step and writes nothing") is the precedent in that same roster. ⚠ The
+alternative — a twelfth `ROSTER` row — would move `expect(ROSTER).toHaveLength(11)`, would have
+to carry a `cls` from the frozen six-word vocabulary (`producer · mutator · enricher · replay ·
+mint · MIRROR`), none of which describes a chooser, and would put the primitive into A5's stream
+rule. ⛔ Either way the ruling is the chair's; this member does not adjudicate a landed sibling's
+register.
 
 ---
 
@@ -396,12 +561,22 @@ clause.
 
 | sibling | train | its declared change paths | intersection with this member's SIX rows |
 |---|---|---|---|
-| **EM-R1** | EM-T15, **this train** | `src/generators/pipeline.js` · `src/generators/steps/assembleInstitutions.js` · `src/generators/steps/generatePower.js` · `tests/lint/heldKeyWriterCensus.walker.test.js` CREATE · `tests/generators/pipelinePinnedMode.test.js` TEST · **`scripts/mutation-coverage-manifest.json` REGISTER** | **{ mutation-coverage-manifest.json }** — lawful ONLY under distinct `rowKey`s (TOOL-27). ⚠ Measured: EM-R1's row carries **no `rowKey` field** today, which the tree's own validator refuses by name; that is EM-R1's row to fill, named here so the train's placement cannot miss it. And `pipeline.js` is a `requiredSymbols` path of THIS member (two rows) — a fact that MOVES under this member before placement, so the two rows are re-run verbatim at the train's base (§P9(e), judgment 134) |
+| **EM-R1** | EM-T15, LANDS BEFORE (version 4) | `src/generators/pipeline.js` · `src/generators/steps/assembleInstitutions.js` · `src/generators/steps/generatePower.js` · `tests/lint/heldKeyWriterCensus.walker.test.js` CREATE · `tests/generators/pipelinePinnedMode.test.js` TEST · **`scripts/mutation-coverage-manifest.json` REGISTER** | **{ mutation-coverage-manifest.json }** — lawful ONLY under distinct `rowKey`s (TOOL-27). ⚠ Measured: EM-R1's row carries **no `rowKey` field** today, which the tree's own validator refuses by name; that is EM-R1's row to fill, named here so the train's placement cannot miss it. And `pipeline.js` is a `requiredSymbols` path of THIS member (two rows) — a fact that MOVES under this member before placement, so the two rows are re-run verbatim at the train's base (§P9(e), judgment 134) |
 | **EM-R5** | EM-T15, this train | `src/domain/edit/tracePartition.js` CREATE · `src/store/settlementRederiveAction.js` · a TEST | **∅** |
 | **EM-R0d** | EM-T14, lands BEFORE | `src/data/bandLadders.js` · … · **`src/domain/prose/holderTable.js`** | **{ holderTable.js }** — DISCHARGED: its landed edit is in this read tip and moved five OTHER rows; this member's four are byte-identical (judgment 174c) |
 | **EM-R0f** · **EM-R6** | EM-T14, land BEFORE | — | **∅** on every row of this member, change paths and `requiredSymbols` paths alike |
 | **EM-R3** · **EM-R4** | EM-T16 and later, land AFTER | each MODIFIES **`src/generators/steps/assembleSettlement.js`** (EM-R4 also carries a `mutation-coverage-manifest.json` row under its own `rowKey`) | **{ assembleSettlement.js }** — theirs to re-measure against THIS member's landed fence, never this member's against their predicted one. Neither may be placed non-terminal beside EM-R2 |
-| every other waiting packet (36 manifests scanned) | — | — | **∅** on the four source files |
+| **EM-R1b** | EM-T16 stage 2, lands AFTER | `src/generators/pipeline.js` · `src/domain/edit/dmLayer.js` · `tests/lint/transientChooserRegistry.walker.test.js` CREATE · **`tests/generators/pipelinePinnedMode.test.js` TEST** · `tests/property/dmLayerGoldenIsolation.test.js` TEST · `scripts/mutation-coverage-manifest.json` REGISTER (rowKey `invariants['tests/lint/transientChooserRegistry.walker.test.js']`) | **{ pipelinePinnedMode.test.js, mutation-coverage-manifest.json }**. The register is row-keyed and the two keys DIFFER (TOOL-27), so it is lawful. The test file is NOT row-keyed: EXECUTED at `64b75240c` through the tree's own `validatePacketManifest`, with both placed non-terminal the validator says `duplicate change path across packets: tests/generators/pipelinePinnedMode.test.js (EM-R2, EM-R1b)`. ⇒ **stage 2 is placed on stage 1's FLIP**, which is the train's own order. EM-R1b also MODIFIES `pipeline.js`, a `requiredSymbols` path of this member (two rows) — theirs to re-measure against this member's landed fence, never this member's against their predicted one |
+| every other waiting packet (36 manifests scanned) | — | — | **∅** on the four source files, and **∅** on `tests/lint/heldKeyWriterCensus.walker.test.js` (measured: no waiting capsule names it) |
+
+⭐ **THE TWO FACTS OF THIS MEMBER'S THAT MOVE AFTER ITS LANDING, for the chair's stage order** —
+EM-R3 carries a `_pendingRequiredSymbols` row on `src/generators/steps/assembleSettlement.js ::
+const pins = ctx.__pins || null;`, which is text THIS member plants, so EM-R2's landing
+DISCHARGES it (judgment 151: re-measure it verbatim at the discharge, never promote it as
+written); and EM-R4's `requiredSymbols` name `src/domain/prose/holderTable.js ::
+export const HOLDER_SOURCES` and five `assembleSettlement.js` texts, every one of which this
+member leaves byte-identical (it inserts lines and re-writes four `cite:` VALUES only), so they
+survive verbatim and only their LINE addresses move — and EM-R4's capsule addresses by symbol.
 
 ---
 
@@ -533,6 +708,10 @@ quoted in §12 and in `EM-R2.evidence.md`.
 | `MODIFY` | `src/domain/prose/holderTable.js` | `HOLDER_SOURCES` — four `cite:` ADDRESSES | **4 lines** | C4. §P2.14 CITATION ROW: addresses only, no logic byte. RE-MEASURE each address against the built tree before writing it. |
 | `CREATE` | `tests/generators/rosterFinalUnderHeldRoster.test.js` | A1–A7 of §9 — **adds exactly 7 literal `it`s**, one per sealed acceptance case, under ONE literal `describe` | **7 `it`s** | Copy `tests/generators/pipelinePinnedMode.test.js` arm for arm. Flat literal `it(...)` under ONE literal `describe`; `it` / `test` / `describe` each bound EXACTLY ONCE and never as a variable or arrow parameter; no bare seed loop (collect, then assert once); every negative assertion anchored on the line IMMEDIATELY above the `expect` itself; every asserted set IMPORTED (`RECORD_CLASSES` and `CLASS_EXCEPTIONS` from `recordRegister.js`, `goldenCorpus()` for the rows), never re-typed. |
 | `REGISTER` | `scripts/mutation-coverage-manifest.json` | `invariants['tests/generators/rosterFinalUnderHeldRoster.test.js']` | **+1 row** | Add ONE row beside its siblings, surgically: `{ "kind": "rationale", "ref": "generators-tree-admitted-subject-coupled-2026-08-30" }` — the `ADMITTED_TREE_REF` of `tests/lint/mutationCoverage.shared.mjs :: ADMITTED_TREE_REF`, the exact shape 99 landed rows carry. `tests/generators` IS an enforcer dir (`mutationCoverage.shared.mjs :: ENFORCER_DIRS`), so the row is OWED. ⛔ Never re-serialise the manifest whole; touch no other row; `uncoveredBaseline` (186) UNMOVED. |
+| `TEST` | `tests/generators/pipelinePinnedMode.test.js` | `EM-P0 › A2` | **adds exactly 0 literal `it`s · re-pins exactly 1 existing `it`** | ⭐ JUDGMENT 148's LAW. The arm's bag is REBUILT FROM THE RECORD and its reproduction asserted THROUGH `rederive`: replace the two lines `const pins = pinsFromContext(first);` / `expect(JSON.stringify(second.settlement)).toBe(JSON.stringify(first.settlement));` with a bag taken from the RECORD (`first.settlement`) driven through `src/domain/edit/dmLayer.js :: rederive` with a no-op root override, asserting the re-derived record byte-identical to the record. The `for (const key of CHOOSER_KEYS) expect(pins[key]).toBeDefined();` liveness line is KEPT. Title RENAMED count-neutrally to `A2 — the pin reproduces the record: a record-built bag rebuilds the settlement through rederive`. ⛔ NO OTHER ARM, HELPER OR ASSERTION IN THE FILE MOVES — A1, A3-A7, EM-B2a2's four arms AND **EM-R1's two LANDED arms in this file (`EM-R1 › A7`, `EM-R1 › A8` — measured present at `64b75240c`)** are byte-identical, `pinsFromContext` STAYS (EM-P0's A3 and A6 and EM-B2a2's A3 use it — measured at `:204`, `:280`, `:420`), and no spec is weakened. |
+| `TEST` | `tests/generators/generationForkCensus.test.js` | `EM-P2 › A1`, its C2 block | **adds exactly 0 literal `it`s · re-pins exactly 1 existing `it`** | ⭐ JUDGMENT 148's LAW. ONLY the two-line reproduction claim moves: the two-line claim `expect(JSON.stringify(pinnedContext.settlement), 'the pinned run reproduces the record')` / `  .toBe(JSON.stringify(unpinnedContext.settlement));` — WRAPPED in the tree, measured at `64b75240c`, which is why it is quoted here as the two lines it is — is replaced by a RECORD-built bag driven through `rederive`, asserting the re-derived record byte-identical. ⛔ C2's DRAW controls keep their ctx-built bag and are byte-identical (`a fully pinned step draws nothing` is true of ANY full bag and is not this member's claim), and C0, C1, C3 and every other arm of the file are untouched. NO TITLE MOVES (this title carries measured figures; renaming it would put them in question). |
+
+| `REGISTER` | `tests/lint/heldKeyWriterCensus.walker.test.js` | `DISCOVERY_EXEMPT` | **+1 row** | ⭐ §0.U, JUDGMENT 148'S LAW. ⛔ `REGISTER`, not `TEST`, and the action is MEASURED rather than chosen: this row adds no `it` and re-pins no arm BODY — it widens ONE frozen declared set, surgically — and the estate's own vocabulary for that is REGISTER on a walker file (ten landed rows: GR-4D, HB-0/1/2, EM-B1h, EM-B1i on `vocabularyTotality`/`couplingInclusion`/`sovereigntyLightingContract`). `heldKeyWriterCensus.walker.test.js` is NOT in `ROW_KEYED_REGISTER_SET` (measured at the tip), so no `rowKey` is owed and none is taken. Add ONE row to `DISCOVERY_EXEMPT`, beside `registerStep`, in that roster's own shape: `{ symbol: 'chooseOrPin', reason: "the runner's pin primitive; it returns an own-present pin or calls the thunk and writes no held key itself." }` — the reason is at or above the walker's own forty-character floor. ⛔ Touch NO other row: `ROSTER` stays at eleven, `ASSERTS` at two, `ASSERT_EXEMPT`, `STEP_ROSTER`, `CLASSES` and every `it` body are byte-identical, and no arm is weakened. The row is owed because C2 makes this member the FIRST caller of `chooseOrPin` inside the assembly step. |
 
 **Generated artifacts: `NONE`.**
 
@@ -561,6 +740,20 @@ quoted in §12 and in `EM-R2.evidence.md`.
 > `totals.*` **UNMOVED**. ⚠ The same walker's SEAM car 5b arm IS owed, and it is paid by the
 > `holderTable.js` citation row above — that arm re-derives every producer write from a live
 > syntax-tree pass, so a stale address reds it.
+
+> ⭐ **LINE-ADDRESSED CITATIONS OUTSIDE `holderTable.js`: A MEASURED NON-ROW.** `git grep -n -F
+> '<path>:' -- src docs/content tests` over the three files whose lines this member shifts finds,
+> besides C4's own four rows, exactly FOUR hits — `docs/content/RECEIPT_POOLS_DOSSIER_STATE.md`
+> citing `src/generators/narrativeGenerator.js` at `:235-446`, `:563-668`, `:751-799` and
+> `:811-859`/`:876-949` — all BELOW the four-raw-line import insertion at `:52`, so each is off by
+> four after the edit. ⛔ NO ROW IS OWED AND NONE IS TAKEN, measured rather than assumed:
+> `tests/lint/sourceCitationIntegrity.walker.test.js` (a SEALED check of this member) gates on
+> PAST-EOF only — ARM 1 over live code with no baseline, ARM 2 over live docs against
+> `.source-citation-baseline.json`, which holds ZERO rows for any of this member's files — and
+> this member GROWS `narrativeGenerator.js` (1,123 → 1,142 raw), so no address can pass its file's
+> end. That walker's ARM 3 (symbol) and its bare-number arm are REPORT-ONLY by their own header
+> ("⛔ IT NEVER GATES"). The corpus dock is the chair's surface under its own ritual, not a
+> member's manifest row; the shift is named here so it is a decision and not an oversight.
 
 > ⭐ **PROSE-NUMERICS: `none found`.** `tests/lint/.prose-numerics-baseline.json` holds **ZERO**
 > rows addressed at any of this member's four source files (measured, 0 row-lines each), so no
@@ -617,7 +810,7 @@ quoted in §12 and in `EM-R2.evidence.md`.
   `src/data/bandLadders.js` — and all three source files are still IN it while
   `src/domain/prose/holderTable.js` is still OUT. ⛔ **AND THE CEILING HAS MOVED TWICE UNDER
   THIS PACKET:** `tests/build/generationWorkerLazy.test.js :: WORKER_BUNDLE_CEILING_BYTES`
-  reads **`1395972`** at this tip (version 1 quoted `1396015`, train EM-T12's value; the
+  reads **`1392364`** at this tip (version 1 quoted `1396015`, train EM-T12's value; the
   T13 terminal's 12-byte buy-back `5c60fa791` lowered it, and EM-T14's buy-back `0f1a205a0`
   bought 3,901 B of headroom ahead of EM-R0d). The figure is EXACT, with zero slack, and it is
   re-read from the arm itself at the train's terminal rather than copied from here. **Predicted price:
@@ -672,6 +865,7 @@ Seven cases. Every one names the file that holds it and the §7 row that authori
 | **A5** | THE APPENDER MUST NOT ADD. Held roster short an office-holder ⇒ the roster is exactly the held length and carries no newly minted `generatedAs: 'faction_structural'` entry. BOTH DIRECTIONS: the same input unpinned appends N > 0 | same | §7's `CREATE` row |
 | **A6** | THE LINKAGE'S DEAD RUN IS RETIRED. With `factions` held the four linkage-only lookups are not built, while the trace's direct/attraction/scatter classification is SET-EQUAL to the unpinned run's, both directions | same | §7's `CREATE` row |
 | **A7** | THE CLASS REGISTER IS THE SOURCE. The gated key and the ungated mirror path are read BY IMPORT from `recordRegister.js` (`RECORD_CLASSES.npcs === 'HELD'`; `CLASS_EXCEPTIONS['factions[].members[]'] === 'MIRROR'`), never re-typed. WRITTEN-CONTRACT: proved by a perturbed-input counterforce | same | §7's `CREATE` row |
+| **A8** | THE LANDED REPRODUCTION ARMS TAKE THE RECORD'S BAG. Both landed arms build their pin bag from the RECORD, through the product's own `dmLayer :: pinsFrom` channel, and assert the re-derived record BYTE-IDENTICAL to the record through `rederive`. RED-FIRST AT CORPUS SCALE, MEASURED: without this member's gate the same assertion reproduces 6 of 63 census rows; with it, 63 of 63. | `tests/generators/pipelinePinnedMode.test.js` + `tests/generators/generationForkCensus.test.js` | §7's two `TEST` rows |
 
 ### §9a · ⭐ THE NEGATIVE CONTROLS THIS BATTERY MUST CARRY
 
@@ -693,12 +887,17 @@ Run through the shared gate mutex, one holder at a time; a lane runs no gated li
 parallel train (§P10.5) — it writes ONE gate script with a `records.tsv` row per step and the
 chair's queue runs it.
 
-1. The sealed `checks` of `EM-R2.manifest.json` — **14 arrays, 56 test files in 9 directory
-   groups**, computed by §P7's interim rule (TOOL-26's `scripts/governing-tests.mjs` does NOT
+1. The sealed `checks` of `EM-R2.manifest.json` — **14 arrays; measured at `64b75240c`, 60 test-file
+   arguments in 10 directory groups (59 at version 4, plus §0.U's walker, which joins the
+   EXISTING `tests/lint` array — no new array)**, computed by §P7's interim rule (TOOL-26's `scripts/governing-tests.mjs` does NOT
    exist at this tip — measured), MINUS the lighting walker and MINUS the two dist-reading byte
-   arms. The array ENDS with `node scripts/implementation-packets.mjs validate`. ⭐ Re-measured at `c69d16a5d`: all 58
+   arms. The array ENDS with `node scripts/implementation-packets.mjs validate`. ⭐ Re-measured at `64b75240c` (version 5): all 59
 existing test-file arguments of the sealed `checks` are PRESENT, and the only absent one is the
 CREATE target itself, by design.
+1b. ⭐ **`tests/lint/heldKeyWriterCensus.walker.test.js` IS A SEALED CHECK** (§0.U): EM-R1's
+   LANDED arm A3(b) reds on this member's planned text before the §7 row lands and is green
+   after. Its RED-FIRST is the member's own `DISCOVERY_EXEMPT` row removed, and the red's own
+   message is `the assembly step calls an imported symbol no roster or exempt row names`.
 2. **THE EXCLUDED DIRECTORY RUN, the build lane's instrument and never a sealed check:**
    `npx vitest run --pool=threads --maxWorkers=2 tests/lint --exclude=tests/lint/sovereigntyLightingContract.walker.test.js`
    MUST EXIT 0, with the exclusion proved by vitest's own collection listing.
@@ -711,6 +910,11 @@ CREATE target itself, by design.
 6. Both TypeScript configurations BY NAME over the member's own `src/` paths, measured in plain
    node with the compiler API before any gate slot is asked for (§P7: EM-B3f version 3 reported
    GATE-READY on bare eslint and the queue redded `typecheck:ratchet` at two errors).
+7b. **THE TWO RE-PINNED ARMS, BY FILE** — `tests/generators/pipelinePinnedMode.test.js` and
+   `tests/generators/generationForkCensus.test.js`, both already named in the sealed `checks`
+   (array 0, measured). Each is run WHOLE, and its red-first is the member's own gate removed:
+   the pre-change `narrativeGenerator.js` / `assembleSettlement.js` planted by copy reds the
+   re-pinned arm BY NAME. ⛔ Never `vitest -t` (a regex; a title it cannot match exits 0).
 7. `tests/property/generatorGoldenMaster.test.js` and `tests/property/dossierProseManifest.test.js`
    — UNMOVED is the contract (§P3.1); motion is a STOP.
 8. The mutants of §P6, each proving the source bytes changed, reddening the NAMED title,
@@ -733,7 +937,7 @@ In addition to `PACKET_STANDARD.md`'s list and §P8's:
 7. Any instrument of §P2.21 redding with a figure this packet did not predict — the arm's own
    message decides, and a figure adopted by hand is the failure.
 8. The worker's byte price rising past the train's byte-arm holder's stated bound, or any re-mint
-   of `tests/build/generationWorkerLazy.test.js :: WORKER_BUNDLE_CEILING_BYTES` — `1395972` at
+   of `tests/build/generationWorkerLazy.test.js :: WORKER_BUNDLE_CEILING_BYTES` — `1392364` at
    `c69d16a5d`, EXACT with zero slack, and RE-READ FROM THE ARM at the terminal rather than
    copied from this packet (§P11.2 — a rise is the owner's; the cure is a buy-back).
 9. A number landing under `src/generators` that is a genuine simulation dial (§P11.3 — the
@@ -741,7 +945,14 @@ In addition to `PACKET_STANDARD.md`'s list and §P8's:
 10. The `holderTable.js` reservation firing at placement, i.e. EM-R0d still non-terminal — or
     any of this member's four `HOLDER_SOURCES` rows found MOVED at dispatch from the addresses
     §4a Q3 measured at `c69d16a5d` (`:169 :237 :238 :239`).
-11. A spec, walker or ratchet needing to be weakened, widened or skipped.
+11. A spec, walker or ratchet needing to be weakened, widened or skipped. ⛔ The `DISCOVERY_EXEMPT`
+    row of §0.U is NOT a widening of a spec: it is that roster's own declared door, with its
+    written reason, and `ROSTER`, `ASSERTS`, `STEP_ROSTER`, `CLASSES` and every arm body stay
+    byte-identical. Any need to move one of THOSE is a STOP.
+12. `tests/lint/heldKeyWriterCensus.walker.test.js`'s A3(b) red persisting after the §7 row, or
+    any OTHER arm of that walker moving (A1, A2, A4, A5, A6 are measured UNMOVED by this
+    member's planned text: A5's `'npc-enrichment'` literal count stays 1, its wrapper regex still
+    matches and its five substream labels are byte-identical, EXECUTED at `64b75240c`).
 
 ---
 

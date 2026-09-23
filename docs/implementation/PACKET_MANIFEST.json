@@ -39557,6 +39557,24 @@
           "path": "scripts/mutation-coverage-manifest.json",
           "rowKey": "invariants['tests/generators/rosterFinalUnderHeldRoster.test.js']",
           "_note": "One row, `kind: \"rationale\"`, `ref: \"generators-tree-admitted-subject-coupled-2026-08-30\"` (`tests/lint/mutationCoverage.shared.mjs :: ADMITTED_TREE_REF`). The file executes the real registered pipeline and asserts on what came back, which is the admitted-tree class exactly. Touch no other row and no other key; `uncoveredBaseline` (186 at c69d16a5d) UNMOVED."
+        },
+        {
+          "action": "TEST",
+          "path": "tests/generators/pipelinePinnedMode.test.js",
+          "symbol": "EM-P0 › A2",
+          "_note": "tests/generators/pipelinePinnedMode.test.js :: EM-P0 A2 — judgment 148's law. The arm's bag is rebuilt FROM THE RECORD and its reproduction asserted THROUGH `src/domain/edit/dmLayer.js :: rederive`; the title is renamed count-neutrally. Adds 0 literal `it`s, re-pins exactly 1. No other arm, helper or assertion in the file moves and `pinsFromContext` stays (A3 and A6 use it)."
+        },
+        {
+          "action": "TEST",
+          "path": "tests/generators/generationForkCensus.test.js",
+          "symbol": "EM-P2 › A1",
+          "_note": "tests/generators/generationForkCensus.test.js :: EM-P2 A1, its C2 block — judgment 148's law. ONLY the two-line reproduction claim moves to a RECORD-built bag through `rederive`; C2's DRAW controls keep their ctx-built bag byte-identical, and NO TITLE MOVES (the title carries measured figures). Adds 0 literal `it`s, re-pins exactly 1."
+        },
+        {
+          "action": "REGISTER",
+          "path": "tests/lint/heldKeyWriterCensus.walker.test.js",
+          "symbol": "DISCOVERY_EXEMPT",
+          "_note": "tests/lint/heldKeyWriterCensus.walker.test.js :: DISCOVERY_EXEMPT — §0.U, judgment 148's law. EM-R1's LANDED arm A3(b) reads the assembly step's OWN import specifiers and holds the discovery set exact in both directions; EXECUTED at 64b75240c with the walker's own assemblyImports/assemblyBody/called helpers, the tip reads 17 == 17 while this member's planned text reads 18, EXTRA [\"chooseOrPin\"] and MISSING []. C2 makes this member the FIRST caller of the runner's pin primitive inside the assembly step, so it carries the arm. ONE row is added to DISCOVERY_EXEMPT beside registerStep, in that roster's own shape, with its reason at or above the walker's forty-character floor. REGISTER rather than TEST, measured: the row adds no `it` and moves no arm BODY — it widens ONE frozen declared set (ten landed REGISTER-on-walker rows are the precedent), and heldKeyWriterCensus.walker.test.js is not in ROW_KEYED_REGISTER_SET so no rowKey is owed. No arm body, ROSTER (11), ASSERTS (2), ASSERT_EXEMPT, STEP_ROSTER or CLASSES moves and no spec is weakened. ⚠ EM-R4 widens the same import and inherits this row the day it lands; whichever lands first pays it and the other must not re-add it."
         }
       ],
       "requiredSymbols": [
@@ -39637,7 +39655,7 @@
         },
         {
           "id": "A2",
-          "case": "THE SKIP AND ITS EXACT SITE. With `{ npcs: <the record’s own roster> }` in the bag, `generateCoherence` returns the HELD ARRAY BY REFERENCE and the `npc-enrichment` child stream is never entered — asserted with a draw counter on the coherence stream, which reads 0 for that label and its pre-edit value for every other. THE ANTI-VACUITY ARM: at the read tip the enrichment runs unconditionally, so a bare \"the pinned run reproduces the record\" assertion is GREEN BEFORE THIS MEMBER EXISTS; this arm pins a DELIBERATELY ALTERED roster and asserts the output IS that roster.",
+          "case": "THE SKIP AND ITS EXACT SITE. With `{ npcs: <a DELIBERATELY ALTERED roster> }` in the bag, `generateCoherence` returns THAT ROSTER (the held array, by reference at the direct call) and the `npc-enrichment` child stream is never entered — asserted with a draw counter on the coherence stream, which reads 0 for that label and its pre-edit value for every other. THE ANTI-VACUITY ARM: at the read tip the enrichment runs unconditionally, so a bare \"the pinned run reproduces the record\" assertion is GREEN BEFORE THIS MEMBER EXISTS; this arm pins a DELIBERATELY ALTERED roster and asserts the output IS that roster.",
           "home": "tests/generators/rosterFinalUnderHeldRoster.test.js",
           "authorizedBy": "§7's `CREATE` row for `tests/generators/rosterFinalUnderHeldRoster.test.js` (adds exactly 7 literal `it`s, one per sealed case)"
         },
@@ -39670,6 +39688,12 @@
           "case": "THE CLASS REGISTER IS THE SOURCE, NOT A SECOND LIST. The gated key and the ungated mirror path are read BY IMPORT from `src/domain/edit/recordRegister.js` — `RECORD_CLASSES.npcs === \"HELD\"` and `CLASS_EXCEPTIONS[\"factions[].members[]\"] === \"MIRROR\"` — never re-typed (`contractTestAntiVacuity` Rule 2). A member that gated the mirror, or that failed to gate the roster, reds this arm by name.",
           "home": "tests/generators/rosterFinalUnderHeldRoster.test.js",
           "authorizedBy": "§7's `CREATE` row for `tests/generators/rosterFinalUnderHeldRoster.test.js` (adds exactly 7 literal `it`s, one per sealed case)"
+        },
+        {
+          "id": "A8",
+          "case": "THE LANDED REPRODUCTION ARMS TAKE THE RECORD'S BAG. Both landed arms build their pin bag from the RECORD, through the product's own `src/domain/edit/dmLayer.js :: pinsFrom` channel, and assert the re-derived record BYTE-IDENTICAL to the record through `rederive`. RED-FIRST AT CORPUS SCALE, MEASURED at train EM-T15's composed tip f76bd62ab: without this member's gate the same assertion reproduces 6 of 63 census rows; with this member's staged bytes and nothing else, 63 of 63.",
+          "home": "tests/generators/pipelinePinnedMode.test.js + tests/generators/generationForkCensus.test.js",
+          "authorizedBy": "§7's two `TEST` rows, for tests/generators/pipelinePinnedMode.test.js and tests/generators/generationForkCensus.test.js (each adds exactly 0 literal `it`s and re-pins exactly 1 existing `it`)"
         }
       ],
       "checks": [
@@ -39712,6 +39736,7 @@
           "tests/lint/contractTestAntiVacuity.walker.test.js",
           "tests/lint/distributionEnvelopePower.test.js",
           "tests/lint/editDeclarations.walker.test.js",
+          "tests/lint/heldKeyWriterCensus.walker.test.js",
           "tests/lint/mutationCoverageManifest.test.js",
           "tests/lint/negativeAssertionAnchor.walker.test.js",
           "tests/lint/noPremadeDeityPool.walker.test.js",
@@ -39827,7 +39852,9 @@
         ]
       ],
       "_checksDerivation": "TOOL-26 (`scripts/governing-tests.mjs`) has NOT landed at c69d16a5d either (re-measured at version 2: the path still does not exist), so the sixth amendment’s interim form governs: `git grep -l -F <basename> -- tests` for every file this member changes (narrativeGenerator, assembleSettlement, generatePopulation, holderTable) and for the ONE exported symbol whose CALL SHAPE changes (`generateCoherence`), plus every walker governing `tests/generators`, where this member CREATEs. That union is 51 paths; three of them are not test files (`.tuning-inventory.json`, `.tuning-register.json`, `mutationCoverage.shared.mjs`) and are dropped, and eight direct governors of the gated symbols are added by name (factionStructuralOfficeCoverage, regenNpcEnrichment, regenPreservesUserCanon, pipelinePinnedChoosers, factionMemberPublicParity.pglite, recordRegisterTotality, contractTestAntiVacuity, sourceCitationIntegrity) — 56 files in 9 directory arrays. MINUS `tests/lint/sovereigntyLightingContract.walker.test.js` (reds by design under a train; its presence would make `check:packet` unpassable) and MINUS the two dist-reading byte arms `tests/build/generationWorkerLazy.test.js` and `tests/build/vendorPdfLazy.test.js` (§P2.11: the byte arms leave the sealed checks and belong to the train’s byte-arm holder). ⭐ VERSION 2, re-measured at c69d16a5d: 58 of the 59 test-file arguments in these arrays are PRESENT in the tree and the single absent one is the CREATE target itself, by design.",
-      "_dependencyNote": "Depends on EM-R1 (the runner clones the pin bag on entry, design ruling 6) -- a packet, not yet landed; this member declares NO local clone because EM-R1 owns that rule. EM-R1 is this member's TRAIN-MATE on EM-T15 and it MODIFIES src/generators/pipeline.js, which carries two of this member's requiredSymbols rows: both are re-run verbatim at the train's base (judgment 134). EM-R1 also carries a scripts/mutation-coverage-manifest.json REGISTER row -- lawful beside this one only under distinct rowKeys (TOOL-27), and measured 2026-09-22 its row declares none, which the tree's own validator refuses by name. Depends on the LANDED EM-P0 (the runner's pins channel), EM-B2a2 (the chooseOrPin export) and EM-R0a (the class register). The EM-R0d reservation on src/domain/prose/holderTable.js is DISCHARGED by a placement on EM-T15: EM-R0d rides EM-T14, and the tree's own validatePacketManifest with EM-T14's three members flipped LANDED and this entry placed READY at c69d16a5d returns ZERO duplicate change-path errors and one error only, packetPath does not exist. EM-R3 and EM-R4 each MODIFY src/generators/steps/assembleSettlement.js and are compiled for later trains: neither may be placed non-terminal beside EM-R2."
+      "_dependencyNote": "Depends on EM-R1 (the runner clones the pin bag on entry, design ruling 6) -- a packet, not yet landed; this member declares NO local clone because EM-R1 owns that rule. EM-R1 is this member's TRAIN-MATE on EM-T15 and it MODIFIES src/generators/pipeline.js, which carries two of this member's requiredSymbols rows: both are re-run verbatim at the train's base (judgment 134). EM-R1 also carries a scripts/mutation-coverage-manifest.json REGISTER row -- lawful beside this one only under distinct rowKeys (TOOL-27), and measured 2026-09-22 its row declares none, which the tree's own validator refuses by name. Depends on the LANDED EM-P0 (the runner's pins channel), EM-B2a2 (the chooseOrPin export) and EM-R0a (the class register). The EM-R0d reservation on src/domain/prose/holderTable.js is DISCHARGED by a placement on EM-T15: EM-R0d rides EM-T14, and the tree's own validatePacketManifest with EM-T14's three members flipped LANDED and this entry placed READY at c69d16a5d returns ZERO duplicate change-path errors and one error only, packetPath does not exist. EM-R3 and EM-R4 each MODIFY src/generators/steps/assembleSettlement.js and are compiled for later trains: neither may be placed non-terminal beside EM-R2.",
+      "_version4Note": "Version 4, judgment 204: EM-R2 rides EM-T16 with NO dependency on EM-R2b (retired as written). §0.S/§0.T re-measured at the composed tip f76bd62ab; the two landed reproduction arms are carried as TEST rows under judgment 148's law. The REGISTER rowKey is unmoved; the lighting titles delta is unmoved at +7 because both TEST rows add zero `it`s.",
+      "_version5Note": "VERSION 5 — the Opus PRE-PROOF re-measurement at train EM-T15's FLIPPED tip 64b75240c (session cce01f87, 2026-09-23). NOT ONE CONTRACT CLAUSE MOVED: thirteen requiredSymbols verbatim at count 1, the CREATE target absent, the four holderTable.js rows byte-identical at :169 :237 :238 :239, and the J-T1 window f76bd62ab..64b75240c moving NOT ONE of the twelve change/required paths. ADDED: one TEST row on tests/lint/heldKeyWriterCensus.walker.test.js, which EM-R1's LANDED arm A3(b) convicts on this member's own planned text (§0.U, EXECUTED) and which the sealed checks now run. RESTATED: the worker ceiling 1395972 -> 1392364 (read from tests/build/generationWorkerLazy.test.js :: WORKER_BUNDLE_CEILING_BYTES at the tip); §0.S/§0.T re-executed at 64b75240c (6/63 control, 63/63 with the member, and THE PROMISE's 41-row golden stride digest-identical with no bag); the validator's error shape (EM-R2 is PLACED READY at version 2 in this tree, so the one error is 'verifiedBase disagrees with packet Markdown', not 'packetPath does not exist'); and the pipelinePinnedMode 'no other arm moves' enumeration, which predated EM-R1's two landed arms in that file."
     },
     {
       "id": "EM-R5",
@@ -40082,6 +40109,207 @@
       ],
       "_checksDerivation": "RE-COMPUTED at c69d16a5d by the pre-proof (version 1's derivation was taken at 91cc9ef5a, where the store seat did not yet exist and both MODIFY-side basenames read as new). (1) `git grep -l -F 'dmLayer' -- tests` -> 13 files; twelve are here and tests/build/vendorPdfLazy.test.js is deliberately NOT, because it is a dist-reading byte arm and belongs to the train's byte-arm holder alone (EM-PREAMBLE §P2.11, §P10.8). (2) `git grep -l -F 'tracePartition' -- tests` and `... 'partitionTrace' -- tests` -> nothing; both names are new. (3) `git grep -l -F 'recordRegister' -- tests` -> tests/domain/dmLayer.test.js, tests/lib/importScrub.test.js, tests/lint/recordRegisterTotality.walker.test.js (judgment 110: the governing set is re-derived for every module the contract IMPORTS). (4) every walker that governs tests/domain, in which this member CREATEs a test file: `git grep -l -F 'tests/domain' -- tests/lint` = 30 entries at the tip, MINUS tests/lint/.tuning-register.json (not a test) and MINUS tests/lint/sovereigntyLightingContract.walker.test.js (red by design under a train, so its presence in a sealed array means check:packet can never pass); tests/lint/flavorFields.census.test.js JOINED that set since version 1's tip. (5) tests/domain/trace*.test.js are the rosters over src/domain/trace.js, whose two symbols are requiredSymbols. (6) tests/property/dmLayerGoldenIsolation.test.js is the LANDED arm over rederive itself (judgment 148's first-importer law); the pre-proof executed all six of its rederive arms against the planned edit in plain node and every one is green, so it is a CHECK and not a TEST row and no assertion of it moves. (7) The goldens are named because §P3.1 makes their motion a STOP. The count prover is kit furniture and is never a check. tests/lint/proseWiringCensus.walker.test.js stays OUT for §P2.13's reason (judgment 87): it is RED on exactly two arms from this member's src/domain CREATE until the train's terminal regeneration, so a sealed check naming it means check:packet can never pass; it is the build lane's own instrument, run ALONE and expected NONZERO (§10).",
       "_dependencyNote": "EM-B2a4 is LANDED (train EM-T13, 35a031ac7) and is NO LONGER an ordering constraint: version 2's MODIFY names src/domain/edit/dmLayer.js, landed by EM-B2a1 on train EM-T10, rather than the store seat EM-B2a4 created. Read as real code at c69d16a5d (judgment 134): dmLayer.js :: rederive is arity five, computes its bag with pinsFrom and has one return point; the seat's regenerateWithLayer is a four-argument async wrapper that forwards to it and holds no pin set. EM-R1 (pins cloned on entry; judgment 170a's held-step skip) and EM-R2 (the roster final) ride train EM-T15 beside this member and their change paths are path-disjoint from these three, measured over the waiting manifests. EM-R3 (EM-T16) is path-disjoint too and owes a re-measurement rather than a path (judgment 184d). EM-R0a is LANDED and is the leaf's one import. EM-R0c (the merge) is NOT a dependency. THE ONE LIVE RESERVATION: EM-B2b, a waiting DRAFT that is not placed, also names src/domain/edit/dmLayer.js - placement order decides it and the second one placed carries the collision row."
+    },
+    {
+      "id": "EM-R0b",
+      "status": "READY",
+      "packetPath": "docs/implementation/packets/settlement-editor/EM-R0b.md",
+      "_verifiedBaseNote": "VERSION 8. Compiled at claude/composite-r4 32602dc607b7423838249cf57d73baf08feb047d, pre-proofed at 141a1d7752e8d9199c0bf347ea99808121733b0b (2026-09-20), and RE-MEASURED WHOLE by the Opus pre-proof lane of train EM-T16 stage 1 at 64b75240c98831693e4495efedeb2639cfa691f7 -- train EM-T15's flipped tip -- on 2026-09-23, under the SIXTH amendment. THE J-T1 WINDOW over every changeManifest path and every requiredSymbols path (the five discharged rows included) across the 206 commits from 141a1d775 moves FOUR files and NO fact: src/data/bandLadders.js (+90, a CREATE: EM-R0d landing) and src/domain/edit/recordRegister.js (+190, a CREATE: EM-R0a landing) are the two dependencies ARRIVING; src/generators/generateSettlementPipeline.js moves ONE line (EM-R1 v3's pin forwarding, inert when options.pins is undefined); tests/build/domainGeneratorsBoundary.test.js gains judgment 111's root-derivation arm while BASELINE_EDGES stays FOUR importing files and FIVE specifiers. src/domain/activeConditions.js and tests/helpers/goldenMasterCorpus.js do not move at all. THE BASE: assertAncestorAndSubstrate builds substrate = non-CREATE change rows UNION requiredSymbols paths UNION retiredSymbols paths, refuses on any diff across base..HEAD, and refuses again for any substrate path the capsule omits -- BUT it returns early on the literal guard 'if (head === packet.verifiedBase) return;'. Both substrate providers have now LANDED, so any tip from EM-T14 onward is lawful and base === HEAD is the cleanest promotion.",
+      "_preProofNote": "Opus PRE-PROOF lane, train EM-T16 stage 1, 2026-09-23, at 64b75240c. Preamble SHA-256 MEASURED LIVE as 125c693214235a81bf4f2b38506b621859a35e0325ff2ea58d335b4e0681a99d at docs/implementation/preambles/EM-PREAMBLE.md -- the SIXTH amendment, landed as train EM-T13's first commit 7bc14e003; the 09-20 value 16dfb96f... is SUPERSEDED and the COMPILE-RULES.interim.md governing row is DELETED (the amendment retires the sheet in terms). NO PREMISE IS REFUTED. FIVE PACKET CORRECTIONS. (1) All five _pendingRequiredSymbols rows DISCHARGE into requiredSymbols, each re-measured verbatim at the tip (grep -cF = 1 each; judgment 151), and two more are ADDED that the deliverable now reads: FOOD_SECURITY_BANDS and LEGITIMACY_BANDS. (2) THREE INSTRUMENTS HOLD A NEW src/domain FILE AT ZERO and versions 1-7 were silent on all three -- the voice walker's em-dash count (the famine label carries an em dash), the tuning register's P2/P3 populations (section 6's 0.5), and prose-numerics (a rendered number in a message). Two of them would have RED at the build under a live seal. Section 6 now carries the measured cures and section 12 questions 1-2 put both to the chair. (3) The rounding rule is re-expressed in INTEGER arithmetic and proved equivalent on 20,402 triples with 0 differences, reproducing section 6's six-row table exactly. (4) The sealed checks array is widened to the seven GOVERNING WALKER FILES the sixth amendment computes, with the lighting and wiring-census walkers deliberately OUT. (5) The reason for '+0 bytes' is corrected: 'nothing anywhere in src/ imports that directory' is FALSE at this tip (three src/ importers of src/domain/edit/**), while the DELTA is unchanged and rests on the measured membership facts (EAGER_FIRST_PAINT_MODULES 270 modules / 0 src/domain/edit; worker closure 230 modules / 0 src/domain/edit; nothing imports these three leaves). Section 12's stride question is carried unchanged and RENUMBERED to 3.",
+      "verifiedBase": "64b75240c98831693e4495efedeb2639cfa691f7",
+      "changeManifest": [
+        {
+          "action": "CREATE",
+          "path": "src/domain/edit/recordInvariants.js",
+          "symbol": "recordInvariants"
+        },
+        {
+          "action": "CREATE",
+          "path": "src/domain/edit/recordInvariantMeta.js",
+          "symbol": "CHECK_META"
+        },
+        {
+          "action": "CREATE",
+          "path": "src/domain/edit/recordInvariantFlags.js",
+          "symbol": "FLAGS_EVER_TRUE"
+        },
+        {
+          "action": "CREATE",
+          "path": "tests/domain/recordInvariants.test.js"
+        }
+      ],
+      "_changeManifestNote": "FOUR rows, set-equal with the packet's section 7 table; UNCHANGED at version 8. Row 4 is CREATE, not TEST (ESTATE-REPAIR-2): a new test file is a CREATE, and implementation-packets.mjs exempts only CREATE from the row-existence arm. RE-MEASURED at 64b75240c: all four targets are ABSENT and no other packet in the waiting estate CREATEs any of them. PATH-DISJOINTNESS, MEASURED BOTH WAYS at this pre-proof: (i) inside train EM-T16 stage 1, EM-R2's eight paths and these four are DISJOINT, and no register row is shared (EM-R2 REGISTERs scripts/mutation-coverage-manifest.json; this packet has no REGISTER row); (ii) across stages 2 and 3, EM-R1b, EM-R3, EM-R0c and EM-R4 MODIFY or CREATE NONE of these four paths -- the single tie is that EM-R0c NAMES src/domain/edit/recordInvariants.js in its requiredSymbols, which is the family order (this member lands first) and not a collision. No REGISTER row, no generated artifact: tests/domain is not a mutation-coverage ENFORCER_DIR and recordInvariants.test.js matches no NAME_PATTERN token (both re-measured by importing tests/lint/mutationCoverage.shared.mjs); the lighting-census baseline is NEVER a packet row; no src/ path of this packet is an input to any edge-shared bundle meta.",
+      "requiredSymbols": [
+        {
+          "path": "src/domain/activeConditions.js",
+          "symbol": "export function severityBand",
+          "_note": "The one domain-layer band producer the module imports. RE-PROVEN at 64b75240c by grep -cF -> 2. The 2 is a SUBSTRING ARTEFACT, not a double declaration: the file declares severityBand and a separate plural sibling severityBands, which the -F prefix match also catches (cited by symbol, never by line, per the sixth amendment's rule 22). The file did not move in the J-T1 window. POST-EDIT SIMULATION: this packet CREATEs only and does not touch that file, so the text is present verbatim after its own edits."
+        },
+        {
+          "path": "tests/helpers/goldenMasterCorpus.js",
+          "symbol": "export function goldenCorpus",
+          "_note": "The 525-row corpus, one spelling. RE-PROVEN at 64b75240c by grep -cF -> 1; the file did not move in the J-T1 window. The module exports goldenCorpus and keyOf and NOTHING ELSE -- it defines no stride, sample or slice, which is the packet's section 12 question 3. Executed at this tip: 525 rows, index 510 keys town|germanic|mountain|mountain_pass|civilized|golden-master-v3 (the pin), and i % 8 === 6 yields 65 rows carrying it."
+        },
+        {
+          "path": "tests/helpers/goldenMasterCorpus.js",
+          "symbol": "export const keyOf",
+          "_note": "RE-PROVEN at 64b75240c by grep -cF -> 1. Untouched in the J-T1 window."
+        },
+        {
+          "path": "src/generators/generateSettlementPipeline.js",
+          "symbol": "export function generateSettlementPipeline",
+          "_note": "The pipeline the control runs; the TEST calls it and the MODULE never does. RE-PROVEN at 64b75240c by grep -cF -> 1. The file MOVED ONE LINE in the J-T1 window (EM-R1 v3's pin forwarding through runPipeline's options, inert when options.pins is undefined); the symbol text and the entry signature are unchanged. Its static import closure was re-walked at this tip: 226 modules, ZERO of them under src/domain/edit/."
+        },
+        {
+          "path": "tests/build/domainGeneratorsBoundary.test.js",
+          "symbol": "const BASELINE_EDGES",
+          "_note": "The shrink-only domain->generators ratchet, in this packet's checks and asserted by A8. RE-PROVEN at 64b75240c by grep -cF -> 1. The file MOVED in the J-T1 window -- judgment 111's root-derivation arm was added and the cardinality guard re-titled -- but THE FROZEN SET DID NOT: four importing files and five specifiers (checkDraftEdit.js, neighbourBackLink.js, institutionLifecycle.js, and resourceDynamicsKernel.js with two). None of this packet's three leaves imports src/generators, so the text and the frozen set are unchanged after its edits. THIS FILE IS RUN, NEVER EDITED: A8 lands no `it` here, which is why the lighting delta is titles +7 and not +8, and the file's own count rising from three `it`s to four does not touch that delta because an UNEDITED file contributes nothing."
+        },
+        {
+          "path": "src/data/bandLadders.js",
+          "symbol": "export function legitimacyBandOf",
+          "_note": "DISCHARGED FROM _pendingRequiredSymbols AT THIS PRE-PROOF (judgment 151): EM-R0d LANDED on train EM-T14 and the file is PRESENT at 64b75240c. RE-MEASURED VERBATIM rather than promoted as written: grep -cF -> 1."
+        },
+        {
+          "path": "src/data/bandLadders.js",
+          "symbol": "export function readinessBandOf",
+          "_note": "DISCHARGED at this pre-proof; EM-R0d LANDED. grep -cF -> 1 at 64b75240c."
+        },
+        {
+          "path": "src/data/bandLadders.js",
+          "symbol": "export function foodSecurityBandOf",
+          "_note": "DISCHARGED at this pre-proof; EM-R0d LANDED. grep -cF -> 1 at 64b75240c. Its ladder is OPEN BELOW on a strict >, against integer cuts -- which is what makes section 6's integer form of the rounding rule exact (STOP-3 still binds if that operator or those cuts change)."
+        },
+        {
+          "path": "src/data/bandLadders.js",
+          "symbol": "export const FOOD_SECURITY_CUTS",
+          "_note": "DISCHARGED at this pre-proof; EM-R0d LANDED. grep -cF -> 1 at 64b75240c. All four cuts are INTEGERS (deficit 40, importDependent 15, pressured 5, surplus 40), measured -- the precondition section 6's integer tolerance rests on."
+        },
+        {
+          "path": "src/domain/edit/recordRegister.js",
+          "symbol": "export const RECORD_CLASSES",
+          "_note": "DISCHARGED at this pre-proof; EM-R0a LANDED. grep -cF -> 1 at 64b75240c. Acceptance case A2 reads it to prove every CHECK_META key is a classed key; the module never imports it. Measured at this tip: 47 top-level keys, and ALL FOURTEEN this packet's CHECK_META names are among them."
+        },
+        {
+          "path": "src/data/bandLadders.js",
+          "symbol": "export const FOOD_SECURITY_BANDS",
+          "_note": "NEW AT THIS PRE-PROOF, and it is the cure for a measured walker red, not an addition to the contract. tests/copy/voiceMechanics.test.js holds a new src/data or src/domain file at ZERO em dashes inside string literals, and one of the six food labels carries an em dash; src/data/bandLadders.js holds that label lawfully under that walker's exact-string AUTHORED_VOCABULARY_ALLOWLIST and this packet does not. So FLAGS_EVER_TRUE is keyed by the ladder's BAND KEY and recordInvariants.js resolves a record's label through this imported table at runtime, spelling no label anywhere. grep -cF -> 1 at 64b75240c. Section 12 question 1."
+        },
+        {
+          "path": "src/data/bandLadders.js",
+          "symbol": "export const LEGITIMACY_BANDS",
+          "_note": "NEW AT THIS PRE-PROOF, for symmetry with FOOD_SECURITY_BANDS: the legitimacy half of the flag-vector table is keyed by band key too, so neither ladder's labels are spelled in any leaf. grep -cF -> 1 at 64b75240c."
+        }
+      ],
+      "retiredSymbols": [],
+      "_retiredSymbolsNote": "EMPTY. Version 3's edits are three CREATEs under src/domain/edit/ and one CREATE under tests/domain/. It moves, renames and deletes no symbol at any path, and it touches no file that any requiredSymbols row of any packet names.",
+      "acceptanceCases": [
+        {
+          "id": "A1",
+          "case": "THE CONTROL, AND THE PIN BOTH WAYS. On the declared stride __STRIDE_RULE__ recordInvariants returns [] on __STRIDE_N_MINUS_1__ rows and exactly the pinned V-SUMMARY-DEPS, with its exact message, on town|germanic|mountain|mountain_pass|civilized|golden-master-v3 (corpus index 510). The violating-row SET equals KNOWN_VIOLATIONS in BOTH directions, so curing the generator REDS this arm and FIX-G1 must remove the pin. Not a skip, not a filter, not a widened tolerance. THE CARDINALITY IS A MARKED PLACEHOLDER until the packet's section 12 question 1 is ruled: 'the 63-row stride' is defined in no tree artifact and no arithmetic stride over 525 yields 63. The arm's SHAPE is EXECUTED at 141a1d775 both ways -- full 525: 1 violating row and it is the pin; recommended stride i % 8 === 6 (65 rows): 64 clean, 1 violating, and it is the pin. A stride that misses index 510 makes this arm VACUOUS."
+        },
+        {
+          "id": "A2",
+          "case": "CHECK_META IS TOTAL, ITS KEYS RESOLVE, AND A VIOLATION CARRIES THEM. (i) every id in CHECK_IDS has a CHECK_META row and every row names a declared id, BOTH directions (measured 33/33, none missing, none extra); (ii) every key any row names is a key EM-R0a's RECORD_CLASSES classes, and every paths entry heads at a key its own keys[] carries (measured: 14 distinct keys, 0 bad); (iii) CROSS_KEY_CHECKS is exactly the rows with no arms and more than one key, and equals the SEVEN ids of section 5.4 - asserted against the literal seven so a hand-edit that adds an eighth reds; (iv) every violation the stride produces carries kind and non-empty keys, and V-FLAGVEC's carries ONE key, the arm's, never the union."
+        },
+        {
+          "id": "A3",
+          "case": "GUARD THE GUARD. For each of the 33 checks, the smallest mutation of a real record returns exactly that check's id and no other, each step clearing its check's own tolerance. V-FLAGVEC's foodSecurity arm needs an Import-Dependent carrier. The three duplication mutants are measured isolating: control clean 63/63, convict 63/63, trip no other check 0/63."
+        },
+        {
+          "id": "A4",
+          "case": "NO THRESHOLD, NO ENVELOPE. The four band checks call legitimacyBandOf / readinessBandOf / foodSecurityBandOf / severityBand, and recordInvariants.js contains no numeric literal outside its tolerance constants, asserted by a scan of the module's own source."
+        },
+        {
+          "id": "A5",
+          "case": "THE ROUNDING RULE. Constructed records at deficitPct = 15 and = 5: both adjacent labels pass at each cut and a label two rungs away REDS. Section 6's six-row table, executed. The facts that forced the rule re-measure identically at 32602dc60 (36 rows in the (15,20] window, 12 isPressured and 24 isDeficit)."
+        },
+        {
+          "id": "A6",
+          "case": "THE FLAG DATA IS DECLARED, NOT DERIVED. The shipped FLAGS_EVER_TRUE covers every label the 63-row stride shows (5 of 5 labels, none lost from the 525-row table), and a flag DERIVED from the published deficitPct is shown to disagree with the record on the (15,20] rows - the reason the table is declared."
+        },
+        {
+          "id": "A7",
+          "case": "ABSENCE, UNSEEN LABEL, PURITY, IDEMPOTENCY, AND THE DUPLICATION PAIRS. [] for a record with economicViability, isolationSupport and activeConditions deleted and for a record whose foodSecurity.label is unknown; the record deep-equal to a pre-call clone; two calls equal; and each duplication check ABSTAINS when either side of its pair is absent - it may never convict a partial record."
+        },
+        {
+          "id": "A8",
+          "case": "THE LAYERING BOUNDARY HOLDS. The live src/domain -> src/generators edge scan equals BASELINE_EDGES and none of the three new leaves appears. Run, never edited."
+        }
+      ],
+      "checks": [
+        [
+          "npx",
+          "eslint",
+          "src/domain/edit/recordInvariants.js",
+          "src/domain/edit/recordInvariantMeta.js",
+          "src/domain/edit/recordInvariantFlags.js",
+          "tests/domain/recordInvariants.test.js"
+        ],
+        [
+          "npm",
+          "run",
+          "typecheck:ratchet"
+        ],
+        [
+          "npm",
+          "run",
+          "typecheck:domain:strict"
+        ],
+        [
+          "npx",
+          "vitest",
+          "run",
+          "--pool=threads",
+          "--maxWorkers=2",
+          "tests/domain/recordInvariants.test.js"
+        ],
+        [
+          "npx",
+          "vitest",
+          "run",
+          "--pool=threads",
+          "--maxWorkers=2",
+          "tests/build/domainGeneratorsBoundary.test.js"
+        ],
+        [
+          "npx",
+          "vitest",
+          "run",
+          "--pool=threads",
+          "--maxWorkers=2",
+          "tests/property/generatorGoldenMaster.test.js",
+          "tests/property/dossierProseManifest.test.js"
+        ],
+        [
+          "npx",
+          "vitest",
+          "run",
+          "--pool=threads",
+          "--maxWorkers=2",
+          "tests/lint/tuningRegister.walker.test.js",
+          "tests/lint/proseNumerics.test.js",
+          "tests/lint/domainAnyCastBaseline.test.js",
+          "tests/lint/ruinFilterRoster.walker.test.js",
+          "tests/lint/entropyRootCensus.walker.test.js",
+          "tests/lint/seedLoopTotality.walker.test.js"
+        ],
+        [
+          "npx",
+          "vitest",
+          "run",
+          "--pool=threads",
+          "--maxWorkers=2",
+          "tests/copy/voiceMechanics.test.js"
+        ],
+        [
+          "node",
+          "scripts/implementation-packets.mjs",
+          "validate"
+        ]
+      ],
+      "_checksNote": "WIDENED AT VERSION 8 to the GOVERNING WALKER FILES, per the sixth amendment's section P2 row 19 ('a sealed checks array names files, never the tests/lint directory'; scripts/governing-tests.mjs has not landed, so the set is COMPUTED the way that row prescribes). Two arrays are new -- six tests/lint walker files and tests/copy/voiceMechanics.test.js -- and each of the four they cover holds a NEW file at ZERO, which is what versions 1-7 never met: voiceMechanics (em/bang inside string literals over src/data + src/domain), tuningRegister (P2 named numerics and P3 bare decimals over src/domain + src/generators), proseNumerics (all of src/, per-file with category ceilings) and domainAnyCastBaseline. ruinFilterRoster and entropyRootCensus are sealed as the negative proofs section 7 predicts; seedLoopTotality governs tests WHOLE and therefore this packet's new test file. TWO WALKERS ARE DELIBERATELY OUT and run only in section 10: sovereigntyLightingContract (excluded by section P2 row 19 in terms -- it reds by design under a train) and proseWiringCensus (whose producer-count arm this packet DECLARES as an interior red, regenerated at the terminal by the chair). A guaranteed-red suite inside checks makes check:packet unpassable. npm run typecheck:ratchet is restored alongside typecheck:domain:strict because BOTH type configs govern the three src/domain/edit CREATEs (tsconfig.full.json includes src/domain/**/*.js; tsconfig.domain-strict.json turns strict + noImplicitAny on over the same tree) while NEITHER governs the test file. NO GENERATOR is among these commands, so the 'a generator goes LAST' rule has nothing to order and this packet declares no generated path; check-domain-strict.mjs and check-full-typecheck.mjs write their baselines only under --update. One test directory per vitest array; the array ends with the validate row.",
+      "_dischargedPendingNote": "THE _pendingRequiredSymbols BLOCK IS GONE AT VERSION 8 BECAUSE ITS PROVIDERS LANDED. All five rows (src/data/bandLadders.js x4 -- EM-R0d, landed on train EM-T14; src/domain/edit/recordRegister.js x1 -- EM-R0a) were RE-MEASURED VERBATIM at 64b75240c with grep -cF (1 each) and moved into requiredSymbols, which is judgment 151's law: a pending row is re-measured at its discharge, never promoted as written, because a contract's spelling ('export const X;') is not the code's ('export const X = ...'). Two further rows were ADDED for symbols the deliverable now reads (FOOD_SECURITY_BANDS, LEGITIMACY_BANDS). No pending row remains and the chair adds nothing at promotion. SUBSTRATE CONSEQUENCE: src/data/bandLadders.js and src/domain/edit/recordRegister.js are now declared substrate, which is lawful at any tip from EM-T14 onward and free when base === HEAD."
     }
   ]
 }
