@@ -3,7 +3,7 @@
 **Preamble:** docs/implementation/preambles/EM-PREAMBLE.md (SHA-256: **TO BE STAMPED BY THE CHAIR, MEASURED AT THE PLACEMENT TIP.** ⛔ **THIS PACKET NAMES NO HASH TO STAMP AND CARRIES NO 64-HEX DIGEST ANYWHERE IN ITS BODY** — §P3.5: the preamble's SHA-256 is measured at the placement tip with `shasum -a 256`, never carried in a document.)
 - **The law this packet is written to:** ⭐ **THE SIXTH AMENDMENT, AND IT IS NOW LANDED AND MEASURED.** The compile (read tip `91cc9ef5a`) wrote this member to the sixth as SELECTED (judgment 144) while the fifth still stood in the tree. At this pre-proof's read tip `c69d16a5d` — train EM-T14's composed tip — the sixth is the tree's own preamble, measured rather than quoted: `shasum -a 256 docs/implementation/preambles/EM-PREAMBLE.md` at `c69d16a5d`, with §P2 rows 19–21 and the C2 tier-gate clause present in the file (train EM-T13's first commit `7bc14e003`). The sixth's §P2.19–21 instrument list, §P2.21(a)'s whole-`src/` entropy corpus, §P9's one effective-line instrument, §P2.11's byte-arm rule and §P10.11's two methods are the standards this version answers, each with an executed figure at `c69d16a5d`. **The hash itself is the chair's stamp at the placement tip and is named nowhere here.**
 
-- **Status:** `READY`
+- **Status:** `LANDED`
   — Compiled 2026-09-22 by an Opus COMPILE seat (session cce01f87) at read tip `91cc9ef5a`, train
   EM-T12's landed tip, under `briefs/launch/COMPILE-EM-R1-cce01f87.md`; **RE-MEASURED to version 2
   by an Opus PRE-PROOF seat (same session) at `c69d16a5d`, train EM-T14's COMPOSED tip**, under
@@ -14,6 +14,7 @@
   ⚠ The status value stands ALONE on its line because `scripts/implementation-packets.mjs ::
   parsePacketHeader` anchors the status row at end-of-line and takes `status` only when exactly one
   row matches (§P9(c)) — re-read by symbol at `c69d16a5d`.
+- **Landed at:** `ae01c1face13fcde1161dcbc1f661733297cef05` — the pin bag cloned on entry at the runner, once, and cloned INTO ctx at the patch merge under a pin (version 3, shape 4 — judgment 200: two entry clones alone let a producer's patch alias ctx[k] to the pin; measured 0/63 aliased at every step and __pins pristine 0/63 on all three channels after the merge clone; chooseOrPin by reference untouched; the no-pins path byte-identical); EM-B2a3's local step clones retired; the held-key writer census walker (producer · mutator · enricher · replay · mint · mirror); the leak 42/63 → 0/63 through the runner; judgments 170 a–f, 197 b/e/i, 200
 - **Packet version:** 3
   > ⭐⭐ **WHAT VERSION 3 CHANGED, AND WHY — THE CHAIR'S JUDGMENT 200, 2026-09-22.** The BUILD lane
   > built version 2 exactly as written, ran the pre-seal eight and then MEASURED the member's own

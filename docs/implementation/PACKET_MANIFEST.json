@@ -39187,9 +39187,10 @@
     },
     {
       "id": "EM-R1",
-      "status": "READY",
+      "status": "LANDED",
       "packetPath": "docs/implementation/packets/settlement-editor/EM-R1.md",
       "verifiedBase": "ec4cd1c2d5aebbda4df788fd4e600252adb81b5c",
+      "landedAt": "ae01c1face13fcde1161dcbc1f661733297cef05",
       "changeManifest": [
         {
           "action": "MODIFY",
@@ -39830,9 +39831,10 @@
     },
     {
       "id": "EM-R5",
-      "status": "READY",
+      "status": "LANDED",
       "packetPath": "docs/implementation/packets/settlement-editor/EM-R5.md",
       "verifiedBase": "ec4cd1c2d5aebbda4df788fd4e600252adb81b5c",
+      "landedAt": "f76bd62ab90babc9b2ad8c79f2c382072fa81be8",
       "_baseNote": "Left for the chair. Version 2 RE-MEASURED by an Opus PRE-PROOF seat at c69d16a5dd6462068cddf140b98129bbb66d80373 (train EM-T14's composed tip: EM-R0d, EM-R0f and EM-R6 over train EM-T13's landed tip 35a031ac7 and the worker buy-back; worktree read-tip-em-t14, DETACHED, `git status --porcelain` EMPTY before and after). The preamble measured `125c693214235a81bf4f2b38506b621859a35e0325ff2ea58d335b4e0681a99d` — the SIXTH amendment, LANDED, byte-identical to the chair's draft. THERE IS NO PLACEMENT PRECONDITION LEFT: version 1's MODIFY named the file EM-B2a4 creates, and version 2 names `src/domain/edit/dmLayer.js`, which has existed since EM-B2a1 landed on train EM-T10. Both CREATE targets ABSENT, the MODIFY target PRESENT, all ten requiredSymbols verbatim at count 1, retiredSymbols EMPTY, every figure re-executed.",
       "_member": "The re-entry family EM-R, member 7. `simulationTrace` is partitioned BY STEP: a step whose entries are ABOUT a held key contributes its RECORDED run, every other step contributes the re-derivation's, an unregistered step's entries are carried in a declared tail, and `ts` is re-stamped to the output position. With nothing held the derived array is returned BY IDENTITY, so no golden can move.",
       "changeManifest": [

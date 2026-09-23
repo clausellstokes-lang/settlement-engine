@@ -1,6 +1,6 @@
 # Settlement editor / EM-R5 — THE TRACE PARTITIONED BY EVERY STEP ABOUT A HELD KEY: a carried step's recorded run is restored whole, a deriving step's is the re-derivation's, the clock is re-stamped to the position it always was, and the draw-skip that already landed stops losing 2,207 entries
 
-- **Status:** `READY`
+- **Status:** `LANDED`
   ⚠ The status value above stands ALONE on its line because `parsePacketHeader`
   (`scripts/implementation-packets.mjs`) anchors the status row at end-of-line and takes `status`
   only when exactly one row matches. Every stamp, caveat and date belongs on these continuation
@@ -11,6 +11,7 @@
   measures the sixth itself, byte-identical to the chair's draft `drafts/amendment-6/EM-PREAMBLE.amended.md`
   (judgment 144), both `125c693214235a81bf4f2b38506b621859a35e0325ff2ea58d335b4e0681a99d`.
   ⛔ VERSION 2 MOVED THE ONE MODIFY ROW, MEASURED: `rederive` does not live in the store seat.
+- **Landed at:** `f76bd62ab90babc9b2ad8c79f2c382072fa81be8` — the trace partitioned by every step about a held key (version 2): the pure leaf tracePartition.js with the subject register over 47 recordTrace sites and 4,810 corpus entries; partitionTrace carries a held step's recorded run whole, a deriving step's is the re-derivation's, ts re-stamped (2,207 entries carried, 63/63 restored); the MODIFY re-homed to dmLayer.js :: rederive (judgment 197f) with dmLayerGoldenIsolation in its checks (197g); the byte-arm holder of train EM-T15 (197h); judgments 184 a–d, 197 f–h
 - **Packet version:** 2
   - Version 1 was the first cut, compiled against train EM-T12's landed tip `91cc9ef5a` by an Opus
     COMPILE seat (session cce01f87, 2026-09-22). It ANSWERS ruling 8's "MEASUREMENT OWED" by
