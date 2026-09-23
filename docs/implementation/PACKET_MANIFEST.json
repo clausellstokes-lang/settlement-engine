@@ -34628,7 +34628,8 @@
         {
           "_note": "⛔⛔ THE BOUNDARY THIS MEMBER MAY NOT CROSS, and the reason its leaf is safe to land dark. The record-class register declares `dmLayer` NOT YET WRITTEN, and tests/lint/recordRegisterTotality.walker.test.js holds that register EQUAL IN BOTH DIRECTIONS against records generated through the REAL pipeline over a 63-row stride of the golden corpus. `applyEdit` is pure and returns a LAYER, so generation still writes no `dmLayer` key and the row stays true. The FIRST member whose landing makes generation write the key owes this row's removal; it is not this one, and naming the symbol keeps that fact executable rather than remembered. Verbatim at src/domain/edit/recordRegister.js:59.",
           "path": "src/domain/edit/recordRegister.js",
-          "symbol": "export const NOT_YET_WRITTEN_KEYS = Object.freeze(['dmLayer', 'decrees', 'crossSettlementConflicts']);"
+          "symbol": "export const NOT_YET_WRITTEN_KEYS = Object.freeze(['dmLayer', 'decrees', 'crossSettlementConflicts']);",
+          "retiredBy": "§934.47 addendum 133 (the OBSERVED-SHAPE SCHEMA-23 RUNG, act 1 on the train at `8cc2926d0`: `dmLayer` and `decrees` moved out of NOT_YET_WRITTEN_KEYS into SAVED_ONLY_KEYS with their writers NAMED — the edit mode's four save-time reads admitted by a governed register migration under the owner's own ruling ODQ §934.16, judgments 273/274/279. The pin is a historical claim about a world the ruling deliberately changed; §731.3's idiom, judgment 269's path, tests-only mode. THE PIN IS KEPT, NEVER DELETED.)"
         },
         {
           "_note": "⛔ THE RIVAL WRITER of DM field ownership, inherited from the parent's §0 block. It mutates the entity's field and records { value, originalValue, editedAt } under entity._userEdits[path], then sets entity._authored = true. §0's fork was DECIDED — it went to EM-B4 as F1/SUBSUME (ODQ §934.47 B: roots fold to dmLayer.roots, derived and history to dmLayer.notes) — so this member neither re-opens it nor edits the file. Named so that a second writer of the state `dmLayer` will OWN cannot appear without redding. Verbatim at src/domain/userEdits.js:181.",
@@ -37298,7 +37299,8 @@
         },
         {
           "path": "src/domain/edit/recordRegister.js",
-          "symbol": "export const NOT_YET_WRITTEN_KEYS = Object.freeze(['dmLayer', 'decrees', 'crossSettlementConflicts']);"
+          "symbol": "export const NOT_YET_WRITTEN_KEYS = Object.freeze(['dmLayer', 'decrees', 'crossSettlementConflicts']);",
+          "retiredBy": "§934.47 addendum 133 (the OBSERVED-SHAPE SCHEMA-23 RUNG, act 1 on the train at `8cc2926d0`: `dmLayer` and `decrees` moved out of NOT_YET_WRITTEN_KEYS into SAVED_ONLY_KEYS with their writers NAMED — the edit mode's four save-time reads admitted by a governed register migration under the owner's own ruling ODQ §934.16, judgments 273/274/279. The pin is a historical claim about a world the ruling deliberately changed; §731.3's idiom, judgment 269's path, tests-only mode. THE PIN IS KEPT, NEVER DELETED.)"
         },
         {
           "path": "tests/lint/mutationCoverage.shared.mjs",
@@ -38102,7 +38104,8 @@
         {
           "_note": "⛔ THE BOUNDARY THIS MEMBER MAY NOT CROSS. The record-class register declares `dmLayer` NOT YET WRITTEN and `tests/lint/recordRegisterTotality.walker.test.js` holds it equal IN BOTH DIRECTIONS against records generated through the REAL pipeline. `rederive` returns a record and an unapplied list to its CALLER and writes no `dmLayer` key onto a generated record, so the row stays true; the first member whose landing makes generation write it owes the row's removal, and it is EM-B3, not this one. Verbatim at src/domain/edit/recordRegister.js:59.",
           "path": "src/domain/edit/recordRegister.js",
-          "symbol": "export const NOT_YET_WRITTEN_KEYS = Object.freeze(['dmLayer', 'decrees', 'crossSettlementConflicts']);"
+          "symbol": "export const NOT_YET_WRITTEN_KEYS = Object.freeze(['dmLayer', 'decrees', 'crossSettlementConflicts']);",
+          "retiredBy": "§934.47 addendum 133 (the OBSERVED-SHAPE SCHEMA-23 RUNG, act 1 on the train at `8cc2926d0`: `dmLayer` and `decrees` moved out of NOT_YET_WRITTEN_KEYS into SAVED_ONLY_KEYS with their writers NAMED — the edit mode's four save-time reads admitted by a governed register migration under the owner's own ruling ODQ §934.16, judgments 273/274/279. The pin is a historical claim about a world the ruling deliberately changed; §731.3's idiom, judgment 269's path, tests-only mode. THE PIN IS KEPT, NEVER DELETED.)"
         },
         {
           "_note": "⭐ THE GROUND OF THIS MEMBER'S LIGHTING DELTA. The walker's `files` figure is `TEST_FILES.length` and `TEST_FILES` walks `tests/` ONLY, so this member's new `src/store/**` leaf and its MODIFY of a `src/domain/**` leaf move the census by NOTHING, and its ONE new TEST file moves it by one. `EM-PREAMBLE.md` §P2.1 states the opposite cause and is refuted here for the fifth time; the correction rides the fifth amendment. Verbatim at tests/lint/sovereigntyLightingContract.walker.test.js:515.",
