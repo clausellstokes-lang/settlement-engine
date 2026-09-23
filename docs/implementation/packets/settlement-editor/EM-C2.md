@@ -1,6 +1,6 @@
 # Settlement editor / EM-C2 — THE GUARD ENGINE: a pure fold over the pending registry that judges nothing itself, guarantees `proceed` on every guard it returns, and reads the op DECLARATION rather than the flattened `Op`
 
-- **Status:** `READY`
+- **Status:** `LANDED`
   ⚠ The status value above stands ALONE on its line because `parsePacketHeader`
   (`scripts/implementation-packets.mjs`) anchors the status row at end-of-line and takes
   `status` only when exactly one row matches. Every stamp, caveat and date goes on these
@@ -12,6 +12,7 @@
   ⛔ EM-C1 IS NOT COMPILED — the per-tick registry cap is the owner's decision point and the
   charter holds EM-C1 behind it. This packet therefore DECLARES the decree ENTRY shape it reads
   (§5, §6) and EM-C1 produces it; nothing here imports `registry.js`.
+- **Landed at:** `81252c0f8b3dff9ae12e4faaebae6fdbc328a450` — the guard engine (version 3): evaluateGuards folds pending entries through the rule set's project, mints stable guard ids, guarantees proceed, marks overrides; the vocabulary and typedefs live here (236); built at 81252c0f8 on train EM-T17
 - **Packet version:** 3
   - **Version 3 (2026-09-23, the Opus PRE-PROOF seat for train EM-T17 stage 1) re-measures
     version 2 against the train's base `a545899ff` and changes only FACTS THAT WERE STALE OR

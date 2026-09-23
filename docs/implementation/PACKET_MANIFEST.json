@@ -41483,9 +41483,10 @@
     },
     {
       "id": "EM-C2",
-      "status": "READY",
+      "status": "LANDED",
       "packetPath": "docs/implementation/packets/settlement-editor/EM-C2.md",
       "verifiedBase": "a545899ff55b7e4c3f219b3ca58cd86ddcf0f3cd",
+      "landedAt": "81252c0f8b3dff9ae12e4faaebae6fdbc328a450",
       "changeManifest": [
         {
           "action": "CREATE",
