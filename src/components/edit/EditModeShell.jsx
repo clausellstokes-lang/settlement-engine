@@ -33,6 +33,24 @@
  * ⛔ THE PENCIL BINDS BY ROLE AND NAME (judgment 264c). No marker attribute is minted
  * anywhere in this file; a reader finds a pencil the way a DM does, by its words.
  *
+ * ⭐ AND THE PLUS ON EACH ROSTER ROOT OPENS THE SAME DOOR IN CREATE MODE (EM-D1c, design §2.5's
+ * registry row). A roster newcomer is not a plain edit and never was: there is no row to write
+ * yet, so the act is ORDERED as a decree and the tick is what makes the person real. The plus
+ * therefore reaches the SAME one injected seam the pencil does, a different function from the
+ * same store leaf, and this file still holds no op, no id policy and no catalogue.
+ *
+ * ⛔ WHICH FIELDS THAT DOOR SHOWS IS THE OP'S ANSWER, READ THROUGH THE STORE AND NEVER RETYPED.
+ * `addOpPayloadFor(cardType)` reports the catalogue's own payload rows for the card's add-op, so
+ * the create form is a name and a role for a person rather than the whole card; the rest of the
+ * declared fields are written afterwards through the ordinary pencil. A roster root the
+ * catalogue carries NO add-op for keeps the disabled plus and the line that says why, so the
+ * control is offered only where a writer exists.
+ *
+ * ⛔ THE POOL CATALOGUE IS THE DOOR'S TO SERVE, NOT THIS LEAF'S. The writer judges a pooled value
+ * against the catalogue its caller hands in, and the door is the party that drew the options; so
+ * the door passes them with the values and this file's edge set into the edit volume stays the
+ * declaration table alone, which its own arm convicts.
+ *
  * ⭐ THE FOURTH ROSTER IS THE COUNTERPARTIES (EM-F3, design §2.8; the chair's judgment 275).
  * The three roster roots above are collections of the record; this one is not on the record at
  * all — it is the town's neighbour partners and the DM's own off-stage counterparties, which
@@ -116,8 +134,8 @@ import { t } from '../../copy/index.js';
 import { savePhase } from '../../domain/campaign/canon.js';
 import { declarationsFor, isEditableCard } from '../../domain/edit/fieldDeclarations.js';
 import {
-  applyPlainEditIntent, DECREE_ACTIONS, EDITOR_MODE_OFF, EDITOR_MODE_PREF_KEY,
-  selectDecrees, selectEditorMode, selectGuards, takeGuardOffer,
+  addOpPayloadFor, applyPlainEditIntent, DECREE_ACTIONS, EDITOR_MODE_OFF, EDITOR_MODE_PREF_KEY,
+  selectDecrees, selectEditorMode, selectGuards, stageAddDecreeIntent, takeGuardOffer,
 } from '../../store/editSlice.js';
 import { useStore } from '../../store/index.js';
 import { counterpartiesOf, mintPhantomIntent } from '../../store/phantomMintAction.js';
@@ -354,6 +372,24 @@ function targetSubjectOf(record, op) {
 }
 
 /**
+ * ⭐ THE FIELDS ONE CARD'S ADD-OP DECLARES, as the door's CREATE errand takes them, or NULL for
+ * a card the catalogue adds nothing for. The names are the store reader's own answer and the
+ * door joins them to EM-A1's rows, so neither leaf retypes the other's table and a payload that
+ * gains a field moves the form with it.
+ *
+ * `null` is a real answer and the caller renders a DISABLED plus for it: a roster whose newcomer
+ * no op can express is a plus with nothing to order, never a plus that opens an empty form.
+ * @param {string} cardType
+ * @returns {string[]|null}
+ */
+function addFieldsFor(cardType) {
+  const rows = addOpPayloadFor(cardType);
+  return rows.length === 0
+    ? null
+    : rows.map((row) => String(/** @type {{field?: unknown}} */ (row).field ?? ''));
+}
+
+/**
  * The values the door shows for one subject, as the strings EM-D0e's controls take.
  * @param {CardSubject|null} subject @param {readonly FieldDeclaration[]} rows
  * @returns {Record<string, string>}
@@ -439,6 +475,23 @@ export default function EditModeShell() {
   /** @param {Record<string, string>} values */
   const mint = (values) => mintPhantomIntent(useStore.getState, useStore.setState, values);
 
+  // ⛔ THE ONE BINDING OF THE ROSTER'S ADD, in that same shape once more. The card is the only
+  // thing this leaf adds to what the door sends: the values are the DM's, the pool catalogue is
+  // the one the door drew its own options from, and the newcomer's id, the op and the registry
+  // entry are the store's to make.
+  /** @param {string} cardType */
+  const addTo = (cardType) => (
+    /** @param {Record<string, string>} values @param {object} pools */
+    (values, pools) => stageAddDecreeIntent(
+      useStore.getState, useStore.setState, { cardType, values, pools },
+    )
+  );
+
+  // The CREATE seam of one card: the counterparty is a SAVE and every roster newcomer is a
+  // DECREE, which is one fact about the subject and not a mode this file keeps.
+  /** @param {string} cardType */
+  const createSeam = (cardType) => (cardType === PHANTOM_CARD ? mint : addTo(cardType));
+
   // ⛔ THE TWO REGISTRY VERBS THE PAGE WRITES WITH, each bound by NAME off EM-C4b's own
   // declaration and each spelled where a scanner can see it. The page's exported
   // `REGISTRY_ACTION_NAMES` is exactly this pair, pinned against the slice's declaration by
@@ -513,6 +566,9 @@ export default function EditModeShell() {
     const subject = subjectOf(settlement, cardType);
     const name = t(CARD_NAME_KEYS[cardType]);
     const roster = collectionOf(declarationsFor(cardType)) !== '';
+    // The plus is live exactly where an add-op exists to order, and the reason line stands
+    // where one does not: an offer with no writer is words, not a control.
+    const addable = addFieldsFor(cardType) !== null;
     return (
       <div key={cardType} style={rowBox}>
         <Button
@@ -524,11 +580,16 @@ export default function EditModeShell() {
           {t('edit.shell.pencil', { card: name })}
         </Button>
         {roster ? (
-          <Button variant="ghost" size="sm" disabled>
+          <Button
+            variant="ghost"
+            size="sm"
+            disabled={!addable}
+            onClick={() => addable && setOpen({ cardType, subject: NEW_SUBJECT, create: true })}
+          >
             {t('edit.shell.plus', { card: name })}
           </Button>
         ) : null}
-        {roster ? <span style={quiet}>{t('edit.shell.plusReason')}</span> : null}
+        {roster && !addable ? <span style={quiet}>{t('edit.shell.plusReason')}</span> : null}
       </div>
     );
   };
@@ -654,7 +715,8 @@ export default function EditModeShell() {
         seed={String(seed ?? '')}
         phase={phase === 'draft' ? 'draft' : 'canon'}
         apply={open !== null && open.create ? null : apply}
-        create={open !== null && open.create ? mint : null}
+        create={open !== null && open.create ? createSeam(open.cardType) : null}
+        createFields={open !== null && open.create ? addFieldsFor(open.cardType) : null}
         onClose={() => setOpen(null)}
       />
     </section>
