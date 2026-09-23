@@ -38,6 +38,10 @@ import { codeOnly } from '../helpers/codeOnlySource.js';
 import { en } from '../../src/copy/en.js';
 import { t } from '../../src/copy/index.js';
 import { declarationsFor, FIELD_DECLARATIONS } from '../../src/domain/edit/fieldDeclarations.js';
+import {
+  draftPeaceOffer, draftTerms, withPeaceOffer,
+} from '../../src/domain/worldPulse/peaceTermsDrafting.js';
+import { SEAL_ACTS, selectDecrees } from '../../src/store/editSlice.js';
 import { createAuthSlice } from '../../src/store/authSlice.js';
 import { STAFF_ROLES } from '../../src/lib/staffEntitlements.js';
 
@@ -276,6 +280,12 @@ describe('EM-D1 — the edit-mode shell', () => {
     expect(sealNames.length).toBe(16);
     const disabled = sealNames
       .map((name) => screen.getByRole('button', { name }).hasAttribute('disabled'));
+    // ⭐ EM-E4d: EVERY SEAL IS STILL SHUT ON THIS FIXTURE, AND THAT IS NOW A MEASUREMENT
+    //    RATHER THAN A CONSTANT. A seal opens only when its act is BOUND and its §18
+    //    condition HOLDS against exactly one counterparty (judgment 296). This record carries
+    //    no standing peace offer, so the one bound seal is shut; the arm below proves the
+    //    OTHER side of that rule, so this line cannot be the vacuous green of a control
+    //    nothing can ever open.
     expect(disabled).toEqual(sealNames.map(() => true));
     const body = document.body.textContent;
     const reasons = Object.keys(en.edit.shell.reason).map((id) => en.edit.shell.reason[id]);
@@ -283,7 +293,26 @@ describe('EM-D1 — the edit-mode shell', () => {
     // does: `reasons.map(f)` against `reasons.map(g)` asserts NOTHING over an emptied bag,
     // so §18's eleven preconditions are pinned before they are looked for on the page.
     expect(reasons.length).toBe(11);
-    expect(reasons.map((line) => body.includes(line))).toEqual(reasons.map(() => true));
+
+    // ⭐ EM-E4d RE-RECORDS THE REASON HALF, AND THE CAUSE IS THAT IT USED TO BE A LIE. Every
+    //    one of §18's eleven lines stood on the page under a note admitting nothing had been
+    //    read, so "No peace has been offered" was the design's ENTRY for a seal and not an
+    //    answer about this town (the verifier's NOTE-8). The shell reads the predicates now,
+    //    so a §18 line is drawn ONLY for a seal whose act exists — otherwise the herald says
+    //    the act is unbuilt, which is the true reason that control is shut.
+    const bound = Object.keys(SEAL_ACTS);
+    expect(bound.length, 'no seal is bound, so the partition below is one-sided and vacuous')
+      .toBeGreaterThan(0);
+    const needed = [...new Set(bound.map((name) => en.edit.shell.reason[SEAL_ACTS[name].needs]))];
+    expect(needed.map((line) => body.includes(line))).toEqual(needed.map(() => true));
+    const unread = reasons.filter((line) => !needed.includes(line));
+    expect(unread.length, 'every §18 line belongs to a bound seal, so the absence below is'
+      + ' vacuous').toBeGreaterThan(0);
+    expect(unread.map((line) => body.includes(line))).toEqual(unread.map(() => false));
+    expect(body.includes(t('edit.shell.sealUnbuilt'))).toBe(true);
+    // The ambiguity line belongs to a condition that holds against SEVERAL counterparties,
+    // which this fixture does not carry, so it is absent here and driven in sealWriters.
+    expect(body.includes(t('edit.shell.sealAmbiguous'))).toBe(false);
     expect(body.includes(t('edit.shell.actsNote'))).toBe(true);
 
     // (iv) §14's PROVENANCE NOTE on the two derived cards, and DONE.
@@ -472,5 +501,91 @@ describe('EM-D1 — the edit-mode shell', () => {
       'edit.shell.derivedHead',
     ]);
     expect(rows[at].querySelector('h2').textContent.length).toBeGreaterThan(0);
+  });
+
+  /* ── EM-E4d · THE SEALS' TWO HALVES ──────────────────────────────────────── */
+
+  /**
+   * ⛔ THE TERMS ARE THE DRAFTING TABLE'S OWN OUTPUT, and the offer its own producer's:
+   * `draftPeaceOffer` refuses a draft with no term, so a hand-shaped bag would be `null` and
+   * both arms below would assert over a record the tree would never write.
+   * @param {readonly string[]} fromIds
+   */
+  function seatStandingOffers(fromIds) {
+    const drafted = draftTerms({
+      ranked: [{ termType: 'tribute', value: 10 }, { termType: 'reparations', value: 6 }],
+      budget: 12, margin01: 0.7, press: 1, tick: 9,
+    });
+    expect(drafted.terms.length, 'the drafting table stopped drafting').toBeGreaterThan(0);
+    storeState.settlement = fromIds.reduce(
+      (carried, fromId) => withPeaceOffer(carried, draftPeaceOffer({
+        fromId, toId: SETTLEMENT.id, terms: drafted.terms, budgetSpent: drafted.budgetSpent, tick: 9,
+      })),
+      { ...SETTLEMENT, _seed: 'seed-1', decrees: [] },
+    );
+  }
+
+  /** The one seal this estate binds an act to, read OFF the store's table. */
+  const boundSeal = () => Object.keys(SEAL_ACTS).sort()[0];
+  const sealButton = (name) => screen.getByRole('button', { name: t(`edit.shell.seal.${name}`) });
+
+  it('A10: a seal opens only when its §18 condition holds AND its act is bound, and its click stages the act it names', async () => {
+    seatState('premium', STAFF_ROLES[0]);
+    seatStandingOffers(['town.harrow']);
+    await mountShell();
+
+    // (i) THE OPEN HALF. The one seal with an act behind it, over a condition that holds
+    //     against exactly one counterparty, is the only control on this block that is live.
+    const open = boundSeal();
+    const every = Object.keys(en.edit.shell.seal);
+    expect(every.length, 'the seal roster is empty, so the partition below is vacuous')
+      .toBeGreaterThan(1);
+    expect(every.map((name) => sealButton(name).hasAttribute('disabled')))
+      .toEqual(every.map((name) => name !== open));
+
+    // (ii) AND ITS HERALD LINE IS GONE, because the world does offer the act now. The line
+    //      the other seals draw is the one that says no act is built, never a §18 finding.
+    const body = () => document.body.textContent;
+    expect(body().includes(en.edit.shell.reason[SEAL_ACTS[open].needs])).toBe(false);
+    expect(body().includes(t('edit.shell.sealUnbuilt'))).toBe(true);
+
+    // (iii) THE CLICK STAGES THE ACT IT NAMES, through the estate's one registry write site,
+    //       naming the counterparty the offer itself named.
+    expect(selectDecrees(storeState)).toEqual([]);
+    fireEvent.click(sealButton(open));
+    const rows = selectDecrees(storeState);
+    expect(rows.length).toBe(1);
+    expect(rows[0].status).toBe('pending');
+    expect(rows[0].op.type).toBe(SEAL_ACTS[open].type);
+    expect(rows[0].op.payload.counterparty).toBe('town.harrow');
+    expect(rows[0].op.target.id).toBe('town.harrow');
+  });
+
+  it('A11: the world offering an act to SEVERAL counterparties still shuts the seal, and the two tables name one condition per seal', async () => {
+    seatState('premium', STAFF_ROLES[0]);
+    seatStandingOffers(['town.harrow', 'town.dunmere']);
+    await mountShell();
+
+    // The condition HOLDS, so the §18 finding would be false; the act names ONE counterparty,
+    // so the control must not open. The herald says exactly that, and nothing else.
+    const open = boundSeal();
+    expect(sealButton(open).hasAttribute('disabled')).toBe(true);
+    const body = document.body.textContent;
+    expect(body.includes(t('edit.shell.sealAmbiguous'))).toBe(true);
+    expect(body.includes(en.edit.shell.reason[SEAL_ACTS[open].needs])).toBe(false);
+    expect(selectDecrees(storeState)).toEqual([]);
+
+    // ⛔ THE DRIFT PIN. The register's own row and the store's writer table name the SAME §18
+    //    condition for every seal that has an act: a seal that OPENED on one condition and
+    //    WROTE from another would be an open control whose click refuses.
+    // The register's own table, read from the leaf that renders it rather than retyped.
+    const { SEALS } = await import('../../src/components/edit/EditModeShell.jsx');
+    const rows = Object.values(SEALS).flat();
+    const bound = Object.keys(SEAL_ACTS);
+    expect(bound.length, 'no seal is bound, so the equality below is vacuous').toBeGreaterThan(0);
+    expect(bound.map((name) => rows.filter((row) => row.seal === name).map((row) => row.needs)))
+      .toEqual(bound.map((name) => [SEAL_ACTS[name].needs]));
+    // And every seal the register draws is one the copy registry names, in both directions.
+    expect(rows.map((row) => row.seal).sort()).toEqual(Object.keys(en.edit.shell.seal).sort());
   });
 });

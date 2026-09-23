@@ -24,19 +24,27 @@
  * command adapter. This leaf imports no op producer and no layer, which is the whole of
  * what `tests/lint/editMutationPath.walker.test.js` convicts.
  *
- * ⛔ IT READS NO WORLD PREDICATE AT THIS LANDING, and the copy says so rather than
- * implying otherwise. `src/domain/edit/worldConditions.js` has no importer under `src/`,
- * and EM-E4/EM-E7 own the acts themselves; so every seal renders DISABLED beside the
- * state design §18 says it needs, under one standing note that names the boundary. That
- * is §19 ruling 2's own register for an unbuilt seam, not a measurement of the live world.
+ * ⭐ IT READS DESIGN §18's PREDICATES NOW, AND A SEAL OPENS ONLY WHEN ITS CONDITION HOLDS
+ * **AND** ITS ACT IS BOUND (EM-E4d, U88; the chair's judgment 296). The verifier's NOTE-8
+ * found the old register dishonest: every seal rendered DISABLED beside a line that reads
+ * like a finding ("No peace has been offered") while nothing here had asked. Both halves are
+ * asked here now, and NEITHER alone opens a control: a condition that holds behind an act the
+ * catalogue cannot express is a dead control that looks live, which is worse than one that is
+ * honestly closed, and a bound act whose condition is false is the world not offering it.
  *
- * ⛔ AND THE REASON LINE BESIDE EACH DISABLED SEAL IS THAT REGISTER'S OWN ROW, NEVER A
- * READING OF THIS WORLD (the verifier's NOTE-8): the herald names the §18 condition the act
- * wants and nothing here has asked whether it holds, so every row shows for every card and
- * a line that reads like a finding ("No peace has been offered") is the design's entry for
- * that seal rather than an answer about this town. The predicate half waits for the binder
- * that seats the seals' writers (U88), and until it lands the honest register is the whole
- * of what this block can say.
+ * ⛔ AND THE READING IS BOUND FROM THE STORE, NEVER TAKEN DIRECTLY (the same law as the three
+ * readers below). `worldConditionsOf` is one function this mount already imports the leaf for;
+ * lane S EXECUTED a direct edge from this file to `src/domain/edit/worldConditions.js` and it
+ * reds `editShellPlusDoor` D5 and this file's own A7, both of which pin the edge set into
+ * `src/domain/edit/` at the declaration table ALONE.
+ *
+ * ⛔ SO THE §18 LINE IS NOW A READING, AND IT IS SHOWN ONLY WHERE ONE WAS TAKEN. A seal whose
+ * act is unbound shows a line that says exactly that and never a finding about this town; a
+ * seal whose condition holds against SEVERAL counterparties shows its own line, because the
+ * act names one and the DM has not said which. The mount holds no campaign — it is mounted
+ * outside every campaign boundary, which is the same measurement that leaves `inCampaign`
+ * unbound below — so a campaign-reading condition answers false here, and no such condition
+ * gates a seal that has an act. That is why no §18 finding this block draws can be a guess.
  *
  * ⛔ THE PENCIL BINDS BY ROLE AND NAME (judgment 264c). No marker attribute is minted
  * anywhere in this file; a reader finds a pencil the way a DM does, by its words.
@@ -161,10 +169,13 @@ import { savePhase } from '../../domain/campaign/canon.js';
 import { declarationsFor, isEditableCard } from '../../domain/edit/fieldDeclarations.js';
 import {
   addOpPayloadFor, applyPlainEditIntent, DECREE_ACTIONS, EDITOR_MODE_OFF, EDITOR_MODE_PREF_KEY,
-  selectDecrees, selectEditorMode, selectGuards, stageAddDecreeIntent, takeGuardOffer,
+  SEAL_ACTS, selectDecrees, selectEditorMode, selectGuards, stageAddDecreeIntent,
+  stageSealDecreeIntent, takeGuardOffer,
 } from '../../store/editSlice.js';
 import { useStore } from '../../store/index.js';
-import { counterpartiesOf, counterpartyBadgeOf, mintPhantomIntent } from '../../store/phantomMintAction.js';
+import {
+  counterpartiesOf, counterpartyBadgeOf, mintPhantomIntent, worldConditionsOf,
+} from '../../store/phantomMintAction.js';
 import { PULSE_UNDO_CAP } from '../../store/pulseUndoCap.js';
 import { raisedHere, REFUSAL_SURFACES } from '../../lib/refusalReasons.js';
 import { ClerkNote } from '../generate/ClerkNote.jsx';
@@ -215,9 +226,14 @@ const NEW_SUBJECT = Object.freeze({ id: '', values: Object.freeze({}) });
  * ⛔ `npc` CARRIES BOTH MARKS. A person's card wears EM-A1's pencils and §17's mission
  * seal, which is exactly the design's "the same gesture edits a fact and directs a
  * process, and the glyph tells them which".
+ *
+ * ⭐ AND IT IS EXPORTED SO THE JOIN CAN BE PINNED RATHER THAN TRUSTED (EM-E4d). The store's
+ * `SEAL_ACTS` names the same §18 condition for every seal it binds a writer to, and
+ * `tests/components/sealWriters.test.jsx` holds the two EQUAL: a seal that OPENED on one
+ * condition and WROTE from another would be the drift that makes an open seal refuse.
  * @type {Readonly<Record<string, readonly {seal: string, needs: string}[]>>}
  */
-const SEALS = Object.freeze({
+export const SEALS = Object.freeze({
   war: Object.freeze([
     Object.freeze({ seal: 'suePeace', needs: 'warInProgress' }),
     Object.freeze({ seal: 'acceptPeace', needs: 'pendingPeaceOffer' }),
@@ -514,6 +530,15 @@ export default function EditModeShell() {
     )
   );
 
+  // ⛔ THE ONE BINDING OF THE SEALS' WRITER (EM-E4d), in the identical shape and for the
+  // identical reason as the three above: the act's name and the counterparty the §18 reading
+  // named it open against, and nothing else. This file holds no op, no id policy and no
+  // registry rule, and the seal that reaches this binder is the one the reading opened.
+  /** @param {string} seal @param {string} counterparty */
+  const stageSeal = (seal, counterparty) => stageSealDecreeIntent(
+    useStore.getState, useStore.setState, { seal, counterparty },
+  );
+
   // The CREATE seam of one card: the counterparty is a SAVE and every roster newcomer is a
   // DECREE, which is one fact about the subject and not a mode this file keeps.
   /** @param {string} cardType */
@@ -588,6 +613,11 @@ export default function EditModeShell() {
     );
   }
 
+  // ⛔ DESIGN §18's READING, TAKEN ONCE AND THROUGH THE STORE. `worldConditionsOf` is memoized
+  // on the record by identity, so a re-render evaluates no predicate; the campaign half is
+  // honestly absent at this mount (see the header) and the leaf answers false for it.
+  const conditions = worldConditionsOf(settlement);
+
   /** @param {string} cardType */
   const pencilRow = (cardType) => {
     const subject = subjectOf(settlement, cardType);
@@ -621,6 +651,41 @@ export default function EditModeShell() {
     );
   };
 
+  /**
+   * ⭐ ONE SEAL'S TWO HALVES, AND THE LINE THAT IS TRUE OF WHICHEVER IS MISSING (EM-E4d).
+   *
+   * `named` is the whole state: the counterparty this act would be sealed with, or the empty
+   * string for a seal that must stay shut. It is non-empty only when the act is BOUND, the
+   * condition HOLDS and it names EXACTLY ONE subject, so the control and the writer's argument
+   * are the same reading and an open seal can never refuse.
+   * @param {{seal: string, needs: string}} act
+   */
+  const sealRow = (act) => {
+    const bound = Object.hasOwn(SEAL_ACTS, act.seal);
+    const read = Object.hasOwn(conditions, act.needs) ? conditions[act.needs] : null;
+    const subjects = read === null || !read.holds ? [] : read.subjects;
+    const named = bound && subjects.length === 1 ? subjects[0] : '';
+    // The herald says which half is missing, and never a finding nobody measured: the §18
+    // line is the condition's own reading and is drawn ONLY for a seal whose act exists.
+    let reason = '';
+    if (!bound) reason = t('edit.shell.sealUnbuilt');
+    else if (subjects.length > 1) reason = t('edit.shell.sealAmbiguous');
+    else if (named === '') reason = t(REASON_KEYS[act.needs]);
+    return (
+      <div key={act.seal} style={rowBox}>
+        <Button
+          variant="secondary"
+          size="sm"
+          disabled={named === ''}
+          onClick={() => named !== '' && stageSeal(act.seal, named)}
+        >
+          {t(SEAL_NAME_KEYS[act.seal])}
+        </Button>
+        {reason === '' ? null : <span style={quiet}>{reason}</span>}
+      </div>
+    );
+  };
+
   /** @param {string} cardType */
   const sealBlock = (cardType) => (
     <div
@@ -631,12 +696,7 @@ export default function EditModeShell() {
       }}
     >
       <span style={quiet}>{t(CARD_NAME_KEYS[cardType])}</span>
-      {SEALS[cardType].map((act) => (
-        <div key={act.seal} style={rowBox}>
-          <Button variant="secondary" size="sm" disabled>{t(SEAL_NAME_KEYS[act.seal])}</Button>
-          <span style={quiet}>{t(REASON_KEYS[act.needs])}</span>
-        </div>
-      ))}
+      {SEALS[cardType].map((act) => sealRow(act))}
     </div>
   );
 

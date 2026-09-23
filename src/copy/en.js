@@ -1888,10 +1888,13 @@ export const en = Object.freeze({
     // and no prose, so the sentence lives here and the id is the join: a
     // condition renamed there leaves its key unanswered rather than drifting.
     //
-    // ⛔ `actsNote` IS WHAT MAKES EVERY REASON LINE BELOW HONEST. The shell does
-    // not read the predicates at this landing (EM-E4/EM-E7 wire the acts), so a
-    // reason line states the condition an act needs and never a measurement of
-    // the live world. The note says exactly that, once, above them all.
+    // ⭐ A `reason` LINE IS A READING NOW, AND IT IS DRAWN ONLY WHERE ONE WAS
+    // TAKEN (EM-E4d, U88; the verifier's NOTE-8 closed). The shell asks
+    // `worldConditionsOf` for every row of that roster, so "No peace has been
+    // offered" is an answer about this town rather than the design's entry for
+    // that seal. A seal whose act the catalogue cannot express never reaches
+    // these lines at all: it draws `sealUnbuilt`, because a finding nobody
+    // measured is the lie this member exists to take off the page.
     shell: {
       title:          'Edit mode',
       indicator:      'This settlement is open for editing.',
@@ -1917,7 +1920,13 @@ export const en = Object.freeze({
       // through the page of decrees. The line survives for the roster that has no such
       // act, which is the only place the shell still shows it.
       plusReason:     'No act adds to this card yet, so its plus stays closed.',
-      actsNote:       'Each act names the state it needs. This shell does not yet read that state, and no act is open.',
+      actsNote:       'Each act names the state it needs. An act opens when that state holds here and the act behind it is built.',
+      // ⭐ THE TWO LINES THAT KEEP THE §18 ROSTER BELOW HONEST (EM-E4d, judgment 296). A seal
+      // is closed for THREE different reasons and only one of them is a finding about this
+      // town, so the other two say what they actually are: no act stands behind the control,
+      // or the condition holds against more than one counterparty and the act names one.
+      sealUnbuilt:    'No act is built behind this seal yet, so it stays closed.',
+      sealAmbiguous:  'More than one counterparty stands here, so this act cannot name which.',
       provenance:     'Follows from {source}, so change {source}.',
       counterpartiesHead: 'Counterparties',
       done:           'Done',

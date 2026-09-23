@@ -17,10 +17,14 @@
  *   take. THAT is why EM-C1b's reference is written inside the hook's own apply and
  *   nowhere else, and the arm below still proves a post-tick writer would be declined.
  *
- * Case E2b-2 is the shell's own fence: its header says what is TRUE of the seal block at
- * this landing — the reason line beside each disabled seal is design §18's register, not a
- * reading of this world — so a reader cannot mistake the herald's line for a measurement
- * the shell never made (NOTE-8; the seals' writers are U88's binder).
+ * Case E2b-2 is unit 2's own fence: the shell's header says what is TRUE of the seal block.
+ * ⭐ RE-RECORDED BY EM-E4d (U88), and the cause is that this member BUILT the binder the old
+ * wording was waiting for. At EM-E2b's landing the truth was "the reason line is design §18's
+ * register, not a reading of this world"; the shell now asks `worldConditionsOf` for every row
+ * of that roster, so the same sentence would be the lie NOTE-8 found. The fence is unchanged
+ * in kind — it still holds the header to what the block actually does — and what it now
+ * requires is the pair judgment 296 made law: a seal opens only when its condition HOLDS and
+ * its act is BOUND, and a §18 line is drawn only where a reading was taken.
  *
  * ⭐ THE C1b ARMS ARE THE CURE, AND THEY DRIVE THE REAL PARTS. The reference the hook writes
  * is held EQUAL to what EM-E2's own `decreeChronicleLine` mints for the same row (the hook
@@ -121,14 +125,21 @@ describe('EM-E2b — the chronicle voice: where its writer must sit, and what th
     expect(Object.hasOwn(repaired[0], 'chronicleRef'), 'and it stays absent after the tick').toBe(false);
   });
 
-  it('E2b-2 the shell\'s header says the reason beside a disabled seal is design §18\'s REGISTER and not a reading of this world', () => {
+  it('E2b-2 the shell\'s header says a seal opens only when its §18 condition holds AND its act is bound, and that the reason line is a reading drawn only where one was taken', () => {
     const prose = shellHeaderProse();
     expect(prose.length, 'the header was read').toBeGreaterThan(0);
-    expect(prose, 'the boundary is still declared').toContain('IT READS NO WORLD PREDICATE AT THIS LANDING');
-    expect(prose, 'and the REASON LINE is named as the register it is')
-      .toContain('THE REASON LINE BESIDE EACH DISABLED SEAL IS THAT REGISTER\'S OWN ROW, NEVER A READING OF THIS WORLD');
-    expect(prose, 'and the header says the predicates are waiting for their binder rather than silent')
-      .toContain('waits for the binder');
+    expect(prose, 'the pair judgment 296 made law is declared')
+      .toContain('A SEAL OPENS ONLY WHEN ITS CONDITION HOLDS **AND** ITS ACT IS BOUND');
+    expect(prose, 'and the §18 line is named as the reading it now is, with the fence on where'
+      + ' it may be drawn')
+      .toContain('THE §18 LINE IS NOW A READING, AND IT IS SHOWN ONLY WHERE ONE WAS TAKEN');
+    expect(prose, 'and the header says a seal with no act draws its own line rather than a'
+      + ' finding about this town')
+      .toContain('never a finding about this town');
+    // AND THE SUPERSEDED CLAIM IS GONE RATHER THAN LEFT STANDING BESIDE ITS SUCCESSOR: a
+    // header that said both would be a file describing two different surfaces.
+    expect(prose, 'EM-E2b\'s wording was REPLACED, not appended to')
+      .not.toContain('IT READS NO WORLD PREDICATE AT THIS LANDING');
   });
 });
 
