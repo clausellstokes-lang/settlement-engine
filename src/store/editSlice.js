@@ -29,15 +29,23 @@
  * rule set is an ARGUMENT so this module imports no rule and reaches no generator. It also
  * carries the DIALOG'S BINDER (judgment 146c), which reaches the plain-edit writer through
  * the one generic adapter and mints no second one.
+ *
+ * ⭐ EM-C4c ADDS THE GUARD OFFERS' WRITER at the foot: `takeGuardOffer`, one door from an
+ * offer EM-C2's engine minted to the act its name means — fulfil STAGES the guard's own op
+ * before the entry it serves, proceed and keep-both RECORD the override on the entry through
+ * EM-C1's eighth verb, and the two clash offers WITHDRAW the right one of the pair. It mints
+ * no op type, no id policy and no vocabulary: every word it reads is `GUARD_OFFERS`',
+ * `DECREE_AUTHORS`' or the catalogue's own.
  */
 
 import { isCanonSave, savePhase } from '../domain/campaign/canon.js';
 import { applyEdit, mintDmId } from '../domain/edit/dmLayer.js';
 import { declarationsFor, isEditableCard } from '../domain/edit/fieldDeclarations.js';
-import { EMPTY_RULE_SET, evaluateGuards } from '../domain/edit/guards.js';
+import { EMPTY_RULE_SET, evaluateGuards, GUARD_OFFERS } from '../domain/edit/guards.js';
 import { makeOp, OP_TYPES, validateOp } from '../domain/edit/operations.js';
 import {
-  markApplied, reopen, reorder, resolveDecree, revertTick, stage, withdraw,
+  DECREE_AUTHORS, markApplied, recordOverride, reopen, reorder, resolveDecree, revertTick,
+  stage, withdraw,
 } from '../domain/edit/registry.js';
 
 /**
@@ -538,6 +546,14 @@ export const markDecreeApplied = (get, set, request) =>
  */
 export const revertDecreesOfTick = (get, set, request) =>
   commitRegistry(get, set, request?.saveId, (rows) => revertTick(request?.restored, rows));
+/**
+ * EM-C4c's override half of design 2.7's "proceed": the guard's own id is recorded on the
+ * entry through the SAME one write site, so the DM's word and the guard's finding live in
+ * one place and EM-C2 reads `overrode` to mark the finding rather than to drop it.
+ * @param {Function} get @param {Function} set @param {object} request
+ */
+export const recordDecreeOverride = (get, set, request) =>
+  commitRegistry(get, set, request?.saveId, (rows) => recordOverride(rows, request?.entryId, request?.guardId));
 
 /**
  * ⭐ THE DECLARATION: EM-C1's verb name -> the store action that dispatches it. EXPORTED
@@ -548,6 +564,7 @@ export const revertDecreesOfTick = (get, set, request) =>
  */
 export const DECREE_ACTIONS = Object.freeze({
   markApplied: markDecreeApplied,
+  recordOverride: recordDecreeOverride,
   reopen: reopenDecree,
   reorder: reorderDecree,
   revertTick: revertDecreesOfTick,
@@ -764,10 +781,11 @@ function mintNewcomerId(seed, layer, decrees) {
  * lands it on every phase.
  *
  * @param {Function} get @param {Function} set
- * @param {{cardType: string, values: object, pools: object, orderedAt?: string, when?: object}} request
+ * @param {{cardType: string, values: object, pools: object, orderedAt?: string, when?: object,
+ *   addedBy?: string}} request
  *   `pools` is the live pool catalogue, `<pool name> -> readonly values`; `orderedAt` is the
  *   caller's stamp (HZ-STAMP) and an absent one is read from the clock HERE, in the command
- *   that writes it.
+ *   that writes it; `addedBy` is a `DECREE_AUTHORS` member and an absent one reads `dm`.
  * @returns {{ok: true, saveId: string, decreeId: string, op: object, decrees: readonly object[]}
  *          |{ok: false, reason: string, errors: readonly string[]}} NEITHER branch throws; on
  *   `ok:false` the store is unchanged and no argument is mutated.
@@ -822,6 +840,17 @@ export function stageAddDecreeIntent(get, set, request) {
     return refuseAdd('not_staged');
   }
 
+  // 7. WHO STAGED IT. Absent it is the DM's own act, which is every caller but one: EM-C4c's
+  //    `fulfil` offer stages through THIS binder and marks the entry the GUARD's, which is
+  //    design 2.7's own words ("a visible, seeded, editable entry marked as added by the
+  //    guard") and the first writer of `DECREE_AUTHORS`' second member. The word is READ FROM
+  //    THE PRODUCER, never spelled here, and an author outside that closed vocabulary is
+  //    refused rather than handed to `stage`, which would return the rows unchanged and leave
+  //    this door reporting a decree id nothing holds.
+  const authors = /** @type {readonly unknown[]} */ (DECREE_AUTHORS);
+  const addedBy = request?.addedBy === undefined ? DECREE_AUTHORS[0] : request.addedBy;
+  if (!authors.includes(addedBy)) return refuseAdd('not_staged');
+
   const committed = stageDecree(get, set, {
     saveId,
     op,
@@ -830,7 +859,7 @@ export function stageAddDecreeIntent(get, set, request) {
       orderedAt: typeof request?.orderedAt === 'string' && request.orderedAt.length > 0
         ? request.orderedAt
         : new Date().toISOString(),
-      addedBy: 'dm',
+      addedBy,
       ...(isPlainObject(request?.when) ? { when: request.when } : {}),
     },
   });
@@ -1079,4 +1108,321 @@ export async function applyRosterDecreesAtTick(get, set, request) {
     rederived: true,
     unapplied: Array.isArray(reported) ? Object.freeze([...reported]) : NO_ROWS,
   };
+}
+
+/* ── EM-C4c · THE GUARD OFFERS' WRITER ─────────────────────────────────────── */
+
+/** EM-C1's pending status, spelled here as EM-E8 spells `applied`, for the same reason. */
+const DECREE_PENDING = 'pending';
+
+/**
+ * The refusal SHAPE both doors answer in, aliased so this member's refusals read in its own
+ * vocabulary while the shape keeps one home. The two VOCABULARIES stay apart: a word of
+ * `ADD_DECREE_REFUSALS` is never reported here except the ones E8's binder itself raises,
+ * which travel back VERBATIM because the fulfil offer stages through that binder.
+ */
+const refuseOffer = refuseAdd;
+
+/**
+ * The closed refusal set of THIS door, EXPORTED so a test asserts it in both directions
+ * rather than re-typing it. TEN, frozen, in codepoint order, and every one reachable.
+ *
+ * ⛔ IT WIDENS NO OTHER VOCABULARY. `GUARD_OFFERS` and `GUARD_KINDS` are EM-C2's and are
+ * imported never re-spelled (the chair's judgment 236); a CATALOGUE refusal is not re-worded
+ * here but travels verbatim in `errors` — `validateOp`'s own frozen sorted array under
+ * `invalid_op`, and EM-C1's own `{ missing, was }` pair under `stale_vocabulary`.
+ * @type {readonly string[]}
+ */
+export const GUARD_OFFER_REFUSALS = Object.freeze([
+  'invalid_op', 'no_fulfil', 'no_save', 'no_writer', 'not_staged',
+  'stale_vocabulary', 'unknown_entry', 'unknown_guard', 'unknown_offer', 'unknown_target',
+]);
+
+/**
+ * @param {{saveId: string, offer: string, entry: Record<string, unknown>}} seat
+ * @param {readonly object[]} decrees @param {string|null} decreeId
+ * @returns {{ok: true, saveId: string, offer: string, entryId: string, decreeId: string|null,
+ *            decrees: readonly object[]}}
+ */
+const offerReceipt = (seat, decrees, decreeId) => ({
+  ok: /** @type {true} */ (true),
+  saveId: seat.saveId,
+  offer: seat.offer,
+  entryId: String(seat.entry.id),
+  decreeId,
+  decrees,
+});
+
+/**
+ * The inverse of `ADD_OP_TYPES`, READ OFF THE DECLARATION rather than re-spelled: the card
+ * whose add-op this type is, or nothing. A type claimed by two cards is nothing, because a
+ * fulfil that could mint two different newcomers is not one act.
+ * @param {string} type @returns {string|null}
+ */
+function cardOfAddOp(type) {
+  const claimed = Object.keys(ADD_OP_TYPES).filter((card) => ADD_OP_TYPES[card] === type);
+  return claimed.length === 1 ? claimed[0] : null;
+}
+
+/** @param {Record<string, unknown>} request @returns {string} the caller's stamp, or this
+ *  command's own clock read — HZ-STAMP: a clock is read where the write happens. */
+const stampOf = (request) => (typeof request.orderedAt === 'string' && request.orderedAt.length > 0
+  ? request.orderedAt
+  : new Date().toISOString());
+
+/**
+ * The pending list EM-C1's `reorder` itself addresses: `orderIndex` ascending with a
+ * codepoint tie-break on `id`. A move is a position in THAT list and in no other reading,
+ * so a fulfil placed by any other order would land before the wrong entry.
+ * @param {readonly object[]} rows @returns {string[]} the pending ids, in the DM's list order
+ */
+function pendingIdsOf(rows) {
+  return rows
+    .filter((row) => isPlainObject(row) && row.status === DECREE_PENDING)
+    .map((row) => /** @type {{id: unknown, orderIndex?: unknown}} */ (row))
+    .sort((a, b) => ((typeof a.orderIndex === 'number' ? a.orderIndex : 0)
+      - (typeof b.orderIndex === 'number' ? b.orderIndex : 0))
+      || byCodepoint(String(a.id), String(b.id)))
+    .map((row) => String(row.id));
+}
+
+/**
+ * ⭐ PROCEED, AND KEEP BOTH: the DM's word is RECORDED on the entry and the finding STANDS.
+ * EM-C2 reads `overrode` and marks the guard `overridden` rather than suppressing it — "a
+ * surface may hide a marked guard, and could never recover a suppressed one" — so proceeding
+ * never loses the warning and never blocks the act. That is design 7 C's "proceed always
+ * applies", written as a write.
+ * @param {Function} get @param {Function} set
+ * @param {{saveId: string, offer: string, guard: Record<string, unknown>,
+ *   entry: Record<string, unknown>, request: Record<string, unknown>}} seat
+ */
+function overrideOffer(get, set, seat) {
+  const committed = recordDecreeOverride(get, set, {
+    saveId: seat.saveId, entryId: String(seat.entry.id), guardId: String(seat.guard.id),
+  });
+  if (committed.ok === false) return refuseOffer(committed.reason);
+  return offerReceipt(seat, committed.decrees, null);
+}
+
+/**
+ * One clash offer's withdrawal, through EM-C4b's landed action and EM-C1's own verb. The
+ * entry is KEPT for the record with its order index (design 2.5a: application never deletes
+ * an entry), and NO `withdrawnReason` is written — design 20.3 makes that absence mean the
+ * DM withdrew it by hand, which a clash offer taken by the DM is.
+ * @param {Function} get @param {Function} set
+ * @param {{saveId: string, offer: string, guard: Record<string, unknown>,
+ *   entry: Record<string, unknown>, request: Record<string, unknown>}} seat
+ * @param {string} entryId
+ */
+function withdrawForOffer(get, set, seat, entryId) {
+  const standing = selectDecrees(get())
+    .find((row) => isPlainObject(row) && row.id === entryId && row.status === DECREE_PENDING);
+  if (standing === undefined) return refuseOffer('unknown_entry');
+  const committed = withdrawDecree(get, set, { saveId: seat.saveId, entryId });
+  if (committed.ok === false) return refuseOffer(committed.reason);
+  return offerReceipt(seat, committed.decrees, null);
+}
+
+/** KEEP THE FIRST: the earlier entry stands and the one the guard JUDGED is withdrawn. */
+function keepFirstOffer(get, set, seat) {
+  return withdrawForOffer(get, set, seat, String(seat.entry.id));
+}
+
+/** KEEP THE LAST: the entry the guard judged stands and the one it NAMES is withdrawn. A
+ *  finding that names no related entry can keep no pair, and says so. */
+function keepLastOffer(get, set, seat) {
+  const related = typeof seat.guard.relatedEntryId === 'string' ? seat.guard.relatedEntryId : '';
+  if (!related) return refuseOffer('unknown_entry');
+  return withdrawForOffer(get, set, seat, related);
+}
+
+/**
+ * The NON-ADD half of the fulfil offer: an op the catalogue can express that mints nobody, so
+ * the entry's id is the CALLER's exactly as `stage`'s own contract makes it (HZ-STAMP). The
+ * TARGET is the caller's too, because a guard's `fulfil` is a TYPE and a PAYLOAD and names no
+ * subject; `makeOp` refuses a missing or empty-id target, which is the one refusal here.
+ * @param {Function} get @param {Function} set
+ * @param {{saveId: string, offer: string, guard: Record<string, unknown>,
+ *   entry: Record<string, unknown>, request: Record<string, unknown>}} seat
+ * @param {string} type @param {Record<string, unknown>} values
+ */
+function stageFulfilOp(get, set, seat, type, values) {
+  const id = String(seat.request.id ?? '');
+  const held = selectDecrees(get());
+  if (!id || held.some((row) => String(/** @type {{id?: unknown}} */ (row)?.id ?? '') === id)) {
+    return refuseOffer('not_staged');
+  }
+  const target = isPlainObject(seat.request.target) ? seat.request.target : null;
+  const op = target === null ? null : makeOp(type, target, values);
+  if (op === null) return refuseOffer('unknown_target');
+  const verdict = validateOp(op, null);
+  if (verdict.ok === false) return refuseOffer('invalid_op', verdict.errors);
+  const resolution = /** @type {{ok: boolean, missing?: string, was?: string}} */ (
+    resolveDecree({ id, op }, { opTypes: OP_TYPES, pools: seat.request.pools })
+  );
+  if (resolution.ok === false) {
+    return refuseOffer('stale_vocabulary', Object.freeze([String(resolution.missing), String(resolution.was)]));
+  }
+  const committed = stageDecree(get, set, {
+    saveId: seat.saveId,
+    op,
+    meta: { id, orderedAt: stampOf(seat.request), addedBy: DECREE_AUTHORS[1] },
+  });
+  if (committed.ok === false) return refuseOffer(committed.reason);
+  return { ok: /** @type {true} */ (true), decreeId: id, decrees: committed.decrees };
+}
+
+/**
+ * ⭐ FULFIL IT FOR ME (design 2.7): the guard's own op is staged as ITS OWN entry, marked as
+ * added by the guard, and PLACED BEFORE the entry it serves — which is the whole point, since
+ * the tick applies the pending entries in the DM's list order and a prerequisite staged after
+ * its dependent grounds nothing.
+ *
+ * ⛔ ONE PATH AND NO SECOND OP MINT. An `add-` op is the ROSTER family's and goes through
+ * EM-E8's binder, which mints the newcomer's stable id, builds the op through the catalogue's
+ * own constructor, resolves its words against the caller's pools and stages it; everything
+ * else is built here through the SAME constructor and the SAME resolver. Neither branch
+ * re-implements a pool rule, an id policy or a validation.
+ *
+ * ⛔ THE GUARD'S PAYLOAD IS A SEED, NOT AN OP. Measured at this tip, every `fulfil` the five
+ * landed rules mint is catalogue-INCOMPLETE — `add-institution` carries a name and no
+ * `category`, `rebalance-power` carries a display string the row does not declare, and the
+ * connection rule's is an empty payload — so the DM's own `values` are merged OVER the seed
+ * and a fulfil that is still incomplete is refused with the CATALOGUE's own words rather than
+ * with a second opinion about them.
+ *
+ * @param {Function} get @param {Function} set
+ * @param {{saveId: string, offer: string, guard: Record<string, unknown>,
+ *   entry: Record<string, unknown>, request: Record<string, unknown>}} seat
+ */
+function fulfilOffer(get, set, seat) {
+  const fulfil = isPlainObject(seat.guard.fulfil) ? seat.guard.fulfil : null;
+  const type = fulfil === null ? '' : String(fulfil.type ?? '');
+  if (!type) return refuseOffer('no_fulfil');
+  const values = {
+    ...(fulfil !== null && isPlainObject(fulfil.payload) ? fulfil.payload : {}),
+    ...(isPlainObject(seat.request.values) ? seat.request.values : {}),
+  };
+  const card = cardOfAddOp(type);
+  const staged = card === null
+    ? stageFulfilOp(get, set, seat, type, values)
+    : stageAddDecreeIntent(get, set, {
+      cardType: card,
+      values,
+      pools: seat.request.pools,
+      orderedAt: stampOf(seat.request),
+      addedBy: DECREE_AUTHORS[1],
+    });
+  if (staged.ok === false) return refuseOffer(staged.reason, staged.errors);
+
+  // ⛔ PLACED BEFORE THE ENTRY IT SERVES, through EM-C1's own permutation. `stage` appended
+  //    the new entry at the END of the DM's list; moving it to the served entry's OWN position
+  //    in that list pushes the served entry one place down, so the ground is laid first and no
+  //    other entry's index moves. The reading is `reorder`'s own, never a second one.
+  const served = pendingIdsOf(staged.decrees).indexOf(String(seat.entry.id));
+  if (served < 0) return refuseOffer('unknown_entry');
+  const placed = reorderDecree(get, set, {
+    saveId: seat.saveId, entryId: staged.decreeId, toIndex: served,
+  });
+  if (placed.ok === false) return refuseOffer(placed.reason);
+  return offerReceipt(seat, placed.decrees, staged.decreeId);
+}
+
+/** REORDER and I WILL DO IT MYSELF have no writer in this member, and each absence is a
+ *  measurement rather than an omission. `reorder` is the registry page's OWN move controls
+ *  bound to EM-C4b's landed verb, and minting a second reorder path behind an offer would be
+ *  the second path design 2.3 refuses; `self` is design 2.7's own "Cancel is always the DM's
+ *  own choice", which writes nothing by definition. The refusal NAMES the offer, so a later
+ *  member turns either row into a writer without widening one vocabulary. */
+function noWriterOffer() {
+  return refuseOffer('no_writer');
+}
+
+/**
+ * ⭐ THE OFFER TABLE: EM-C2's seven offers -> the act each one is. It is a DECLARATION with
+ * COMPUTED KEYS, so the seven words live in `GUARD_OFFERS` and nowhere else (judgment 236),
+ * and a test pins it SET-EQUAL IN BOTH DIRECTIONS against that vocabulary: an offer the
+ * engine can mint and this door cannot act on would show up there rather than falling
+ * silently through. The dispatch is off THIS frozen table and never off the store handle,
+ * which is the premise `tests/store/deadOperationRatchet.test.js` holds.
+ * @type {Readonly<Record<string, (get: Function, set: Function, seat: {saveId: string,
+ *   offer: string, guard: Record<string, unknown>, entry: Record<string, unknown>,
+ *   request: Record<string, unknown>}) => object>>}
+ */
+export const GUARD_OFFER_ACTS = Object.freeze({
+  [GUARD_OFFERS[0]]: fulfilOffer,
+  [GUARD_OFFERS[1]]: overrideOffer,
+  [GUARD_OFFERS[2]]: keepFirstOffer,
+  [GUARD_OFFERS[3]]: keepLastOffer,
+  [GUARD_OFFERS[4]]: overrideOffer,
+  [GUARD_OFFERS[5]]: noWriterOffer,
+  [GUARD_OFFERS[6]]: noWriterOffer,
+});
+
+/**
+ * ⭐ THE GUARD OFFERS HAVE A WRITER (EM-C4c; design 2.7's three offers, 2.7a's connection
+ * and 7 C's "overrides recorded").
+ *
+ * EM-D3's page renders each offer and calls `onGuardOffer(guard, offerName)` — "this page
+ * invents no writer". This is the writer: one door from an offer the ENGINE minted to the
+ * act it names, judged by the offer's own name out of `GUARD_OFFERS` and carried out by
+ * EM-C4b's landed actions over EM-C1's pure verbs. It mints no op type, no guard rule, no
+ * status and no author.
+ *
+ * ⛔ IT LIFTS NO GATE AND MAKES NO CANON RULE. `canEditSettlement()` is untouched; design
+ * 2.6 puts a pooled act in the REGISTRY on canon, and the registry is where every branch
+ * here leaves it, on every phase.
+ *
+ * ⛔ THE PRECONDITIONS FAIL CLOSED, AND THE ENTRY IS RESOLVED FROM THE LIVE REGISTRY RATHER
+ * THAN FROM THE CALLER. A guard is a reading of a queue that may have moved since it was
+ * read, so the entry it names must still be there and still be PENDING; and the request's
+ * own `entryId` must AGREE with the guard's, because acting on one entry with another's
+ * finding is the data-safety class step 1 of the plain-edit writer exists to prevent.
+ *
+ * @param {Function} get @param {Function} set
+ * @param {{saveId: string, entryId: string, guard: object, offer: string, values?: object,
+ *   pools?: object, target?: object, id?: string, orderedAt?: string}} request
+ *   `values`, `pools`, `target` and `id` are the FULFIL offer's alone: the DM's completion of
+ *   the guard's seeded payload, the live pool catalogue, the subject a non-add op acts on and
+ *   the new entry's id. The other six offers need none of them.
+ * @returns {{ok: true, saveId: string, offer: string, entryId: string, decreeId: string|null,
+ *            decrees: readonly object[]}
+ *          |{ok: false, reason: string, errors: readonly string[]}} NEITHER branch throws; on
+ *   `ok:false` the store is unchanged and no argument is mutated.
+ */
+export function takeGuardOffer(get, set, request) {
+  const bag = isPlainObject(request) ? request : {};
+
+  // 1. THE ACTIVE SAVE, for the reason every registry write gives: the write indexes
+  //    `get().settlement`.
+  const saveId = String(bag.saveId ?? '');
+  if (!saveId || saveId !== String(get().activeSaveId ?? '')) return refuseOffer('no_save');
+
+  // 2. THE OFFER, against EM-C2's closed vocabulary AND against this door's own table, by an
+  //    own-key lookup: `constructor` is an unknown offer like any other.
+  const offer = String(bag.offer ?? '');
+  const offers = /** @type {readonly unknown[]} */ (GUARD_OFFERS);
+  if (!offers.includes(offer) || !Object.hasOwn(GUARD_OFFER_ACTS, offer)) {
+    return refuseOffer('unknown_offer');
+  }
+
+  // 3. THE GUARD, which must be the engine's own shape and must CARRY the offer taken: an
+  //    offer no finding made is not the DM's to take.
+  const guard = isPlainObject(bag.guard) ? bag.guard : null;
+  const carried = guard !== null && Array.isArray(guard.offers) ? guard.offers : [];
+  if (guard === null || typeof guard.id !== 'string' || guard.id.length === 0
+    || !carried.includes(offer)) {
+    return refuseOffer('unknown_guard');
+  }
+
+  // 4. THE ENTRY, resolved from the LIVE registry and required PENDING.
+  const entryId = String(bag.entryId ?? '');
+  if (!entryId || entryId !== String(guard.entryId ?? '')) return refuseOffer('unknown_entry');
+  const entry = selectDecrees(get())
+    .find((row) => isPlainObject(row) && row.id === entryId && row.status === DECREE_PENDING);
+  if (entry === undefined) return refuseOffer('unknown_entry');
+
+  return GUARD_OFFER_ACTS[offer](get, set, {
+    saveId, offer, guard, entry: /** @type {Record<string, unknown>} */ (entry), request: bag,
+  });
 }
