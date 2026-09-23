@@ -9,7 +9,19 @@
   the corpus (unit 1 alone moves a refusal reason and lights nothing; unit 2 alone is unreachable
   behind unit 1) — measured, §0.3.
 - **Owner:** the chair (Fable 5.1, session cce01f87) · compiled by an Opus COMPILE seat, 2026-09-23
-- **Packet version:** `3`
+- **Packet version:** `4`
+  version 4 = version 3 with the type-floor cure’s rewrite of one pinned line retired
+  (judgment 253) and §6 re-cut to the built text (judgment 248). The BUILD lane measured the
+  compiled contract RED on the type floor — the three new functions sat BETWEEN `pinsFrom`’s
+  JSDoc block and `pinsFrom`, detaching all four `@param` tags (four TS7006 under the strict
+  config); `StepRoster` did not carry `paths` (TS2339 under BOTH configs); and
+  `_ATOMIC_EDIT_JOINS`’ inferred literal type refused a `string` index (TS7053). The cure is
+  REAL TYPES ONLY (no `any`, no `@ts-` directive, no baseline row) and it REWRITES
+  `requiredSymbols[4]`, the PASS 4 array-branch write — so judgment 227’s law gives that row a
+  `retiredBy` and §5.2 spells it verbatim: **`retiredSymbols` is FOUR**. Every other
+  `requiredSymbols` row was re-audited against the BUILT tree at the lane’s HEAD (`grep -c -F`
+  per row): eleven PRESENT at count 1, three already retired, one newly retired — no other row
+  moved. §6, §3 and §5.8 now state what was BUILT, measured, not what was planned.
   version 3 = version 2 re-measured at train EM-T17's base `a545899ff` by an Opus PRE-PROOF seat.
   The J-T1 window over every manifest and `requiredSymbols` path is EMPTY, so no contract fact
   moved; what version 3 changes is what the compile could not yet see. (i) §0.3, §9's A4 and §12
@@ -218,9 +230,9 @@ npc and power-seat cards are unmoved.
 | bound | this packet | limit |
 |---|---|---|
 | handwritten files | 4 (2 MODIFY, 1 CREATE, 1 TEST) + 1 REGISTER row | ≤12 |
-| new/changed effective production lines | **+67** (`pipeline.js` 157→176, `dmLayer.js` 207→255; eslint's own `Linter` under `max-lines` with `skipBlankLines`+`skipComments`, re-executed at `a545899ff`) | ≤400 |
+| new/changed effective production lines | **+68 AS BUILT** (`pipeline.js` 157→176, `dmLayer.js` 207→256; eslint's own `Linter` under `max-lines` with `skipBlankLines`+`skipComments`, executed on the BUILT tree. Version 3 declared +67 against `dmLayer.js` 207→255; the ONE extra effective line is the type-floor cure's two-line ternary in `rosterOf`, restated here rather than silently carried) | ≤400 |
 | each NEW production leaf | n/a — the two `src/` rows are EXISTING files; the CREATE is a `tests/lint` walker | ≤250 |
-| shared / hot-file delta | **does not bind**: neither `src/generators/pipeline.js` nor `src/domain/edit/dmLayer.js` is on `PACKET_STANDARD.md`'s hot-file standing list, and neither carries a `scripts/.size-baseline.json` row (both measured at `a545899ff`); the eslint ceiling governing both trees is **800** effective lines against 176 and 255 | ≤15 (hot/shared only) |
+| shared / hot-file delta | **does not bind**: neither `src/generators/pipeline.js` nor `src/domain/edit/dmLayer.js` is on `PACKET_STANDARD.md`'s hot-file standing list, and neither carries a `scripts/.size-baseline.json` row (both measured at `a545899ff`); the eslint ceiling governing both trees is **800** effective lines against 176 and 256 | ≤15 (hot/shared only) |
 | new logic leaves | 0 (the CREATE is a `tests/lint` walker) | ≤2 |
 | existing logic files modified | 2 | ≤3 |
 | acceptance cases | 8 | ≤8 |
@@ -258,20 +270,23 @@ one-command re-measurement of the window, the symbols, the line addresses and th
 | src/domain/edit/recordRegister.js | `  institutions: 'name',` |
 | src/domain/edit/recordRegister.js | `  npcs: 'id',` |
 
-### §5.2 · The post-edit simulation: `retiredSymbols` is exactly THREE
+### §5.2 · The post-edit simulation: `retiredSymbols` is exactly FOUR
 
-⛔ Three required symbols this member REWRITES at their own path carry `retiredBy` in the capsule at
+⛔ Four required symbols this member REWRITES at their own path carry `retiredBy` in the capsule at
 placement (§731.3's idiom, judgment 227), spelled here VERBATIM as the capsule spells them:
 
 ```
   const held = (/** @type {string} */ key) => Object.hasOwn(source, key);
   for (const key of [...pinKeys].sort(byCodepoint)) pins[key] = structuredClone(source[key]);
         .find((e) => /** @type {{ id: unknown }} */ (e).id === row.entityId);
+      /** @type {Record<string, unknown>} */ (entity)[row.leaf] = row.value;
 ```
 
-No OTHER packet names any of the three — measured with `grep -c -F` over
-`docs/implementation/PACKET_MANIFEST.json` at the tip: **0 hits each**. Every other required symbol is
-PRESERVED verbatim, including `REDERIVE_UNAPPLIED_REASONS` (this member removes a CAUSE of
+No OTHER packet names any of the four — measured with `grep -c -F` over
+`docs/implementation/PACKET_MANIFEST.json`: **0 hits each** (the fourth row re-measured at the
+lane's own HEAD against the 231 packets other than this one). Every other required symbol is
+PRESERVED verbatim — re-audited against the BUILT tree at the lane's HEAD, eleven rows at
+`grep -c -F` = 1 — including `REDERIVE_UNAPPLIED_REASONS` (this member removes a CAUSE of
 `step_not_pinnable` and adds no reason) and the two `KEYED_COLLECTIONS` rows it reads.
 
 ### §5.3 · THE LANDED ARMS OVER THESE TWO FILES, EACH EXECUTED OVER THE PLANTED TEXT (judgment 148's law)
@@ -340,7 +355,7 @@ arms (all on the npc and power cards) are unmoved by construction.
 | `tests/lint/proseWiringCensus.walker.test.js` | `producerIndexFiles` **+0** | neither file is a `src/domain/prose` producer, and neither is named in the census's `stamp.files` |
 | the negative-assertion anchor walker (judgment 219) | **+0** | every arm of the CREATE asserts positively; the one negative control (A3's blind roster) asserts an EQUALITY on the refusal, not an absence |
 | the any-cast ratchet (judgment 213) | **+0** | MEASURED with the ratchet's OWN counter (`scripts/count-domain-any.mjs :: countText`): `pipeline.js` `{any:0,suppress:0}` → `{any:0,suppress:0}`, `dmLayer.js` `{any:0,suppress:0}` → `{any:0,suppress:0}`; neither file carries a `tests/lint/.domain-any-baseline.json` row or a `DECLARED_OVERRUNS` row. The lane re-measures before its seal |
-| ⛔ the TYPE FLOOR, the TWO configs | **0 errors under each** is the claim | `tsconfig.full.json` includes `src/domain/**/*.js` AND `src/generators/**/*.js`, so it governs BOTH paths and IS the gate's typecheck (`npm run typecheck`, zero errors). `tsconfig.domain-strict.json` declares only `extends` + `compilerOptions` and inherits `tsconfig.json`'s include `["src/domain/**/*.js","src/domain/**/*.ts"]`, so it governs **`src/domain/edit/dmLayer.js` ONLY, never `pipeline.js`** — `dmLayer.js` is the one path that must read ZERO under both, and a worsened `src/domain` file is a STOP |
+| ⛔ the TYPE FLOOR, the TWO configs | **0 errors under each, AS BUILT** — ⛔ the compiled contract was RED here (4×TS7006 from the detached `@param` block, TS2339 on `StepRoster`, TS7053 on the one-row join table) and the cure is REAL TYPES inside §7 (judgments 248/253); estate-wide the built tree reads 167 under `tsconfig.full.json` and 1797 under the strict config, EXACTLY the base's figures, so this member adds zero type errors anywhere | `tsconfig.full.json` includes `src/domain/**/*.js` AND `src/generators/**/*.js`, so it governs BOTH paths and IS the gate's typecheck (`npm run typecheck`, zero errors). `tsconfig.domain-strict.json` declares only `extends` + `compilerOptions` and inherits `tsconfig.json`'s include `["src/domain/**/*.js","src/domain/**/*.ts"]`, so it governs **`src/domain/edit/dmLayer.js` ONLY, never `pipeline.js`** — `dmLayer.js` is the one path that must read ZERO under both, and a worsened `src/domain` file is a STOP |
 | the reviewed-set pin (§P2.20) | **NOT OWED** | this member registers no application command and dispatches no store writer: `application/commands` and `editSlice` occur 0 times in `pipeline.js`'s planted text and once in `dmLayer.js`'s, in a COMMENT (`src/store` in the header's importability note) |
 
 ### §5.5 · Line-addressed registers, and the addresses this member shifts
@@ -414,7 +429,9 @@ correctly OUT —
 | `src/domain/edit/recordRegister.js` | OUT | OUT | not named |
 
 ⇒ the edge-shared rebuild is **NOT OWED** (0 of 5 metas name any path). The planted text adds **+1,045
-raw B** to `pipeline.js` (17,662 → 18,707) and **+3,571** to `dmLayer.js` (25,762 → 29,333); only the
+raw B** to `pipeline.js` (17,662 → 18,707 — UNMOVED by the type-floor cure, which is wholly inside
+`dmLayer.js`) and, AS BUILT, **+3,760** to `dmLayer.js` (25,762 → 29,522; version 3 declared
++3,571 → 29,333, before that cure); only the
 first lands in a budget. Most of `pipeline.js`'s addition is the declaration's comment block, which
 minification removes; what survives is fourteen key/path string pairs and one `Object.fromEntries`
 expression: **PREDICTED +550 to +900 B minified**, a RISE against a zero-slack, owner-signed ceiling.
@@ -437,7 +454,13 @@ beside `_TRANSIENT_CHOOSERS` and for the same stated reason (the register is pro
 §5.7). `getStepMeta()` gains, per step, `recordPaths: Record<string, string>` — that step's own
 provided keys that carry a path, `{}` otherwise; no other member of the meta row moves and no step is
 re-registered. `src/domain/edit/dmLayer.js :: rosterOf` carries it through as `paths` (a non-object
-reads as `{}`; the leaf THROWS NEVER). `pinsFrom` resolves `held(key)` and the bag's value through ONE
+reads as `{}`; the leaf THROWS NEVER), and the `StepRoster` typedef gains
+`paths: Record<string, unknown>` — ⛔ **`unknown`, not `string`, and that is the HONEST carried
+type**: the roster is read from an UNTRUSTED injected handle, so `rosterOf` narrows the row with
+the file’s own landed idiom (`isPlainObject` guards at RUNTIME, a JSDoc type expression carries
+the type — exactly as the landed line above it does for `engine`) and `pinsFrom` keeps a
+`typeof p === 'string'` filter at the READ site. Measured: both type configs read ZERO on this
+file under that spelling and +1 under any looser one. `pinsFrom` resolves `held(key)` and the bag's value through ONE
 private reader: a key with NO declared path reads `source[key]` exactly as today; a key with one walks
 the path's segments after the leading `record`, and a missing segment at any depth reads as NOT HELD.
 The bag stays keyed by the CTX KEY (the runner consults `pins[ctxKey]`), stays ASCII-ascending, and
@@ -451,7 +474,9 @@ a bag may carry keys it could not before — `stress` and `stressTypes` on the i
 ### Unit 2 — the DM's value lands at the DECLARED RECORD PATH of the NAMED entity
 
 `pinsFrom` imports `KEYED_COLLECTIONS` from `./recordRegister.js` and declares ONE row,
-`_ATOMIC_EDIT_JOINS = { 'powerStructure.factions': 'faction' }` (§0.5). `joinFor(collectionPath)`
+`_ATOMIC_EDIT_JOINS = Object.freeze({ 'powerStructure.factions': 'faction' })` (§0.5), carrying
+`/** @type {Readonly<Record<string, string>>} */` — a REAL type, never a cast: without it the
+one-row literal’s inferred type refuses the `string` index `joinFor` performs (TS7053, measured). `joinFor(collectionPath)`
 returns the register's spec when it is a STRING, this member's row for the one atomic collection, and
 `null` otherwise — a MULTI-FIELD spec (an array) resolves to `null`, and no declared card writes into
 such a collection today. PASS 4 becomes a declared-path write: the leaf is walked segment by segment
@@ -462,6 +487,16 @@ shape). A bag value that is itself an array is hopped at the collection path. **
 the declared leaf is `unknown_key`**, today's reason; the closed refusal set is UNMOVED at two.
 **Absence:** a leaf whose final segment is itself an array hop is refused, never guessed.
 ⛔ The record is never touched, and `chooseOrPin` is untouched.
+
+⭐ **WHERE THE THREE NEW FUNCTIONS SIT, AND WHY IT IS A CONTRACT FACT.** `joinFor`,
+`soleEntry` and `writeDeclared` are declared **ABOVE** `pinsFrom`’s own JSDoc block, never
+between it and `pinsFrom`. Measured: a declaration placed between them DETACHES all four
+`@param` tags from the function they document and the strict domain config reports four TS7006
+on a file whose floor is zero. Each carries its parameter types inline in the file’s landed
+idiom (`/** @type {string} */ collectionPath`), and `writeDeclared`’s array hops read through
+`/** @type {Record<string, unknown>} */` type expressions. ⛔ ZERO `any`, zero `@ts-` directive,
+zero baseline row: the any-cast ratchet’s own `countText` reads `{any:0, suppress:0}` on the
+built file, exactly as on the base.
 
 ### User-facing copy
 
