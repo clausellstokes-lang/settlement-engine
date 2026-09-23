@@ -40814,10 +40814,11 @@
     },
     {
       "id": "EM-R0c",
-      "status": "READY",
+      "status": "LANDED",
       "packetPath": "docs/implementation/packets/settlement-editor/EM-R0c.md",
       "_verifiedBaseNote": "Compiled at claude/composite-r4 32602dc607b7423838249cf57d73baf08feb047d; pre-proofed at 141a1d775 on 2026-09-20; FULL PRE-PROOF at 6a0178b7b on 2026-09-23 (train EM-T16's stage-1 placement tip, EIGHT trains later). THE J-T1 WINDOW IS NOT EMPTY: `git diff --stat 141a1d775 6a0178b7b` over every changeManifest path and every requiredSymbols path, present and pending, returns FOUR files over 207 commits - src/data/economyFingerprint.js +53 (EM-R0f's CREATE, LANDED), src/domain/edit/recordRegister.js +190 (EM-R0a's CREATE, LANDED), src/generators/generateSettlementPipeline.js 1+/1- (EM-R1's pin forwarding) and tests/build/domainGeneratorsBoundary.test.js 55+/6- (judgment 111's root fix plus EM-R0f's re-baseline). All three CREATE targets ABSENT (git ls-files -> 0). SIX of the eight pending symbols are DISCHARGED into requiredSymbols below, each re-measured verbatim with grep -cF at its landed address (judgment 151). The chair stamps the base at or AFTER EM-R0b VERSION 8 lands at train EM-T16 stage 1's flip: the sealed dispatch's substrate check names src/domain/edit/recordInvariants.js, which is the last absent file (measured: git ls-files -> 0 at 6a0178b7b).",
       "verifiedBase": "88515782a8001d5e10aff2becf8775b4f61f9936",
+      "landedAt": "15f2ca5d7527e57c73eb16bd94a54c259b639eb3",
       "changeManifest": [
         {
           "action": "CREATE",

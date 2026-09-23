@@ -1,6 +1,6 @@
 # `settlement-editor / EM-R0c` — THE MERGE: the consequence of an edit is the difference of two re-derivations, applied to the record by consistency group
 
-- **Status:** `READY`
+- **Status:** `LANDED`
   ⚠ The status value above stands ALONE on its line, and it must: `parsePacketHeader`
   (`scripts/implementation-packets.mjs`) anchors the status row at END-OF-LINE
   (`/^\s*(?:-\s*)?\*\*Status:\*\*\s*`?([A-Za-z]+)`?\s*$/gmi`) and takes `status` only when
@@ -14,6 +14,7 @@
   ⛔ Version 5's condition named FOUR unlanded packets. Three of them (EM-R0a, EM-R0d, EM-R0f)
   landed on trains EM-T13 and EM-T14 and are measured here as LANDED FENCES, never as predictions
   (judgment 134).
+- **Landed at:** `15f2ca5d7527e57c73eb16bd94a54c259b639eb3` — the merge — the consequence of an edit is the difference of two re-derivations applied to the record by consistency group (version 6): two src/domain/edit leaves with their own arms, ten required symbols verbatim, five instruments at zero (212); built at 15f2ca5d7 on train EM-T16 stage 2b
 - **Packet version:** `6`
   - ⭐⭐ **Version 6 is the FULL PRE-PROOF at train EM-T16's stage-1 placement tip `6a0178b7b`**
     (Opus pre-proof seat, 2026-09-23; the packet's previous pre-proof was 2026-09-20 at `141a1d775`,
