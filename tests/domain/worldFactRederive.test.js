@@ -376,4 +376,67 @@ describe('EM-B2b — world facts by consequence: the route, the refusals and the
     expect(Object.keys(WORLD_FACT_SOURCES), 'EM-P3\'s roster still carries every field this '
       + 'battery\'s adapter serves').toEqual(expect.arrayContaining(Object.keys(OPTION_SETS)));
   }, 900_000);
+
+  it('A9 — THE ROUTE IS TOTAL OVER ALL FIVE FACTS (EM-B2b2): each DM word lands at its OWN declared outputKey, on three fixed rows', () => {
+    // ⭐⭐ WHY THIS ARM EXISTS, AND WHY IT IS HERE RATHER THAN IN A FILE OF ITS OWN. A1 proves the
+    // route for ONE fact, and a route proven on one member is a route measured on one member: the
+    // gap it left was found by EM-R7's corpus ratchet and cured by EM-B2b2. MEASURED at
+    // 795d2a582, with each fact's own in-set plant carried into `config′`:
+    //
+    //     terrain 3/3 · culture 3/3 · monsterThreat 3/3 · stressors 3/3 · resources 0/3
+    //
+    // `worldFact.resources` is the one fact whose declared `inputKey` is ALSO the key its producing
+    // step WRITES BACK (`config.nearbyResources`), so the random branch re-rolled the roster and
+    // the DM's word was gone on 62 of the 63 census rows. The totality below is the instrument that
+    // would have said so at this packet's own landing, and it now covers every member in both
+    // directions: a sixth fact joins it the day it joins the table.
+    //
+    // ⛔ IT READS `record.<outputKey>` AND NOT THE TIER-1 recordPath, deliberately. The tier-1 pair
+    // is allowed to be a PREFIX of the landing address (the walker's own branch c), and for
+    // `monsterThreat` it is exactly that — `record.config`, the WHOLE config. `outputKey` is the
+    // one address that is EXACT for all five, which is what makes one loop able to hold all five.
+    const PLANTS = Object.freeze({
+      terrain: 'coastal',
+      culture: 'norse',
+      monsterThreat: MONSTER_THREAT_TIERS[MONSTER_THREAT_TIERS.length - 1],
+      stressors: [Object.keys(STRESS_TYPE_MAP)[0]],
+      resources: ['magical_node'],
+    });
+    const FIXED = [0, 21, 42];
+    expect(FIELD_DECLARATIONS.worldFact.map((row) => row.field).sort(),
+      'the five declared world facts, read from the table rather than re-typed here')
+      .toEqual(Object.keys(PLANTS).sort());
+
+    // ANTI-VACUITY, PER FACT AND IN BOTH DIRECTIONS: every plant is a member of the set the
+    // consult serves (or the re-derivation would REFUSE rather than carry), and the world does not
+    // already hold it on all three rows (or equality below would measure nothing).
+    const outOfSet = Object.entries(PLANTS).filter(([field, value]) => {
+      const members = OPTION_SETS[field] ?? [];
+      return (Array.isArray(value) ? value : [value]).some((each) => !members.includes(each));
+    });
+    expect(outOfSet.map(([field]) => field), 'every plant is inside its own option set').toEqual([]);
+
+    const landedAt = (record, row) => readAt(record, `record.${row.outputKey}`);
+    const carried = {};
+    const alreadyHeld = {};
+    for (const row of FIELD_DECLARATIONS.worldFact) {
+      carried[row.field] = 0;
+      alreadyHeld[row.field] = 0;
+      for (const index of FIXED) {
+        const { config, record } = worldFor(census[index]);
+        const control = rederive(record, config, EMPTY_DM_LAYER, ENGINE, DECLARATIONS);
+        const layer = layerOf([[rootKey('worldFact', 'world', row.field), PLANTS[row.field]]]);
+        const moved = rederive(record, config, layer, ENGINE, DECLARATIONS);
+        if (sha(landedAt(control.record, row).value) === sha(PLANTS[row.field])) alreadyHeld[row.field] += 1;
+        if (sha(landedAt(moved.record, row).value) === sha(PLANTS[row.field])) carried[row.field] += 1;
+      }
+    }
+    expect(Object.entries(alreadyHeld).filter(([, held]) => held === FIXED.length).map(([field]) => field),
+      'no fact is already at its plant on all three rows, or its carried count below is vacuous')
+      .toEqual([]);
+    expect(carried, 'EVERY declared world fact the DM edits stands at its OWN declared outputKey on '
+      + 'every fixed row. A fact that carries on some rows and not others is the applied-looking-'
+      + 'and-absent class, and it is the exact shape EM-B2b2 cured for `resources`.')
+      .toEqual({ terrain: 3, culture: 3, monsterThreat: 3, stressors: 3, resources: 3 });
+  }, 900_000);
 });

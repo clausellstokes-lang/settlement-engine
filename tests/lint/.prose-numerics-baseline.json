@@ -1045,13 +1045,13 @@
           },
           {
                     "path": "src/generators/steps/resolveResources.js",
-                    "line": 555,
+                    "line": 586,
                     "category": "floatInterpolation",
                     "snippet": "`Tier-weighted depletion (${Math.round((DEPLETION_PROB[tier] ?? 0.25) * 100)}%) marked this resource as depleted.`"
           },
           {
                     "path": "src/generators/steps/resolveResources.js",
-                    "line": 555,
+                    "line": 586,
                     "category": "percentToken",
                     "snippet": "`Tier-weighted depletion (${Math.round((DEPLETION_PROB[tier] ?? 0.25) * 100)}%) marked this resource as depleted.`"
           },
