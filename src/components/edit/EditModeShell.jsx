@@ -30,6 +30,14 @@
  * state design §18 says it needs, under one standing note that names the boundary. That
  * is §19 ruling 2's own register for an unbuilt seam, not a measurement of the live world.
  *
+ * ⛔ AND THE REASON LINE BESIDE EACH DISABLED SEAL IS THAT REGISTER'S OWN ROW, NEVER A
+ * READING OF THIS WORLD (the verifier's NOTE-8): the herald names the §18 condition the act
+ * wants and nothing here has asked whether it holds, so every row shows for every card and
+ * a line that reads like a finding ("No peace has been offered") is the design's entry for
+ * that seal rather than an answer about this town. The predicate half waits for the binder
+ * that seats the seals' writers (U88), and until it lands the honest register is the whole
+ * of what this block can say.
+ *
  * ⛔ THE PENCIL BINDS BY ROLE AND NAME (judgment 264c). No marker attribute is minted
  * anywhere in this file; a reader finds a pencil the way a DM does, by its words.
  *
