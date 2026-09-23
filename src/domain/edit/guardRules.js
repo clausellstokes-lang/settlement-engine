@@ -407,11 +407,21 @@ export function project(world, op, catalogue) {
   }
   if (type === 'add-faction' || type === 'remove-faction' || type === 'rebalance-power') {
     const rows = factionsOf(world).map((row) => ({ ...row }));
+    // ⛔ U80 — THE ADDRESS IS THE CATALOGUE'S OWN TARGET KIND, NEVER A LITERAL. An op
+    // addresses its subject at the kind ITS OWN ROW declares: `offeredOp` mints every
+    // fulfil target from `row.target`, `isEntityRef` admits only the declared seven, and
+    // the two faction-roster ops do NOT share one kind — `remove-faction` declares
+    // `faction`, `rebalance-power` declares `power`, because a share is a fact of the
+    // POWER card. A literal `faction:` here therefore compared `faction:Guild` against a
+    // rebalance's `power:Guild`, matched no row, and returned a NEW world with the roster
+    // UNCHANGED: the guard then judged a share that never moved, and nothing said so.
+    // Read from the row, the fold cannot disagree with a declaration that moves.
+    const seat = `${String(bagOf(bagOf(catalogue)[type]).target || '')}:`;
     const next = type === 'add-faction'
       ? [...rows, { faction: String(payload.faction || ''), power: Number(payload.power) || 0 }]
       : (type === 'remove-faction'
-        ? rows.filter((row) => `faction:${String(row.faction || '')}` !== address)
-        : rows.map((row) => (`faction:${String(row.faction || '')}` === address
+        ? rows.filter((row) => `${seat}${String(row.faction || '')}` !== address)
+        : rows.map((row) => (`${seat}${String(row.faction || '')}` === address
           ? { ...row, power: Number(payload.power) || 0 } : row)));
     return { ...world, powerStructure: { ...bagOf(world.powerStructure), factions: next } };
   }
