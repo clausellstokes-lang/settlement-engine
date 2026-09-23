@@ -7,7 +7,9 @@
  * seam, which is design item 7's rule kept by construction rather than by review. The
  * only edge to the edit volume is the JSDoc typedef below.
  *
- * NOTHING MOUNTS THIS YET. EM-D0e is the first caller.
+ * WHAT MOUNTS IT: `CardEditorDialog.jsx`'s `controlFor` renders this for every
+ * `kind: 'pool'` row (EM-D0e landed), handing it the resolved `declaration` and
+ * `options` above plus a `roll` already bound to `rollFrom(row.pool, world, ...)`.
  *
  * WHY A NATIVE SELECT AND NOT THE ESTATE'S ARIA COMBOBOX (ratified): every pool the
  * first door draws is a CLOSED bounded vocabulary of a few members, the estate's

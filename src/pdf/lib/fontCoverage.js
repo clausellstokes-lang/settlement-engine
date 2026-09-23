@@ -44,10 +44,13 @@
  * is therefore the INTERSECTION across its faces, which is `buildCoveredCodepoints`'s
  * own rule.
  *
- * ⛔ NOTHING MOUNTS THIS YET. FreeField takes the report through an injected prop and
- * never imports this module, because importing it is precisely the edge the chunk law
- * forbids; the editor door that wires the two is not this member's file. With this leaf
- * landed the product renders not one pixel differently.
+ * ⭐ WHAT MOUNTS IT, AND WHAT IT READS (EM-D2b/EM-D2c). `CardEditorDialog.jsx`'s
+ * `faceCoverageReporter` is the one caller, and only there -- a dynamic
+ * `import('../../pdf/lib/fontCoverage.js')` fired on the first free-control draw, never
+ * at import time. It reads `ROLE_FAMILIES`, `loadFamilyCoverage`, `fetchFace`,
+ * `familiesForRole` and `coverageAcross` to build a per-role reporter, and hands that
+ * reporter to FreeField as the injected `coverage` prop -- FreeField itself still
+ * imports nothing from this file, which stays precisely the edge the chunk law forbids.
  */
 
 /**
