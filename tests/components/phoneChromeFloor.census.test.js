@@ -311,7 +311,22 @@ const ROUTE_BASELINE = Object.freeze({
 
   // App.jsx's own chrome. It is on the list because it renders on every route and
   // AppViews names none of it — the exact shape of hole this rewrite closes.
-  '(shell)':                { roots: 1, files: 61, floored: 138, ruled: 3, bare: 0 },
+  //
+  // ⭐ RE-MEASURED BY EM-D1 (2026-09-23), floored 138 -> 143, and the cause is a REACH
+  // rather than a new small size. App.jsx's closure now follows one `lazy(() =>
+  // import('./components/edit/EditModeShell.jsx'))` edge, so the shell survey reaches the
+  // settlement editor's volume for the first time: the door, its two field controls and
+  // the two primitives they mount. Every one of the five new sites was ALREADY FLOORED
+  // where it lives, and they attribute exactly —
+  //   src/components/edit/FreeField.jsx          1
+  //   src/components/edit/PoolField.jsx          1
+  //   src/components/generate/ClerkNote.jsx      1
+  //   src/components/primitives/PortablePopup.jsx 2
+  // EM-D1's own leaf contributes ZERO: `EditModeShell.jsx` spells no sub-floor size at
+  // all, so it is neither floored nor bare nor ruled here. `bare` stays 0 and `ruled`
+  // stays 3 for the same reason, and `files` is a FLOOR the grown tree (61 -> 68) still
+  // clears — growth needs no pin, by this registry's own rule above.
+  '(shell)':                { roots: 1, files: 61, floored: 143, ruled: 3, bare: 0 },
 });
 
 /**

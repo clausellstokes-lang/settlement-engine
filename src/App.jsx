@@ -82,6 +82,14 @@ const PricingMomentCard = lazy(() => import('./components/pricing/PricingMomentC
 // lazy so both stay off first paint; each self-gates on `visible`.
 const FloatingAffordances = lazy(() => import('./components/FloatingAffordances.jsx'));
 
+// The settlement editor's mode shell (EM-D1). LAZY, and the laziness is the whole price
+// of the wave: the eager first-paint graph walks STATIC edges only, so this one dynamic
+// edge keeps the shell, EM-A1's declaration table, EM-D0e's door and EM-C4a's store slice
+// out of the entry closure — the membership fact tests/build/vendorPdfLazy.test.js prices.
+// It is mounted only while the editor's transient mode preference is set, so a session
+// that never enters edit mode never fetches the chunk at all.
+const EditModeShell = lazy(() => import('./components/edit/EditModeShell.jsx'));
+
 // ⭐ THE BAR'S ITEMS COME FROM lib/routes.js `barNav`, WHICH IS THE PAINTING'S OWN ORDER
 // (owner, ODQ §934.26 + its addendum). The explicit MOBILE_NAV_PRIORITY array that used
 // to live here is retired with the Realm's phone seat: it existed only to choose which
@@ -169,6 +177,14 @@ export default function App() {
   // post-save claim sets this; App renders it as one calm transient toast.
   const dossierClaimToast = useStore(s => s.dossierClaimToast);
   const setDossierClaimToast = useStore(s => s.setDossierClaimToast);
+  // ⛔ THE EDITOR'S MODE IS READ AS A BARE PREFERENCE HERE, NEVER THROUGH ITS SLICE
+  // (EM-D1). This shell is EAGER and the eager first-paint graph walks STATIC edges, so
+  // one `import … from './store/editSlice.js'` would drag the store slice, EM-A1's
+  // declaration table and EM-D0e's door into first paint and red the editor-train arm of
+  // tests/build/vendorPdfLazy.test.js. The key is `editSlice.js`'s own
+  // EDITOR_MODE_PREF_KEY, and tests/components/editModeShell.test.jsx pins THIS read
+  // against that export so the two spellings cannot drift apart.
+  const editorMode = useStore(s => s.userPrefs?.editorMode);
 
   // ── Bare-root front door ──────────────────────────────────────────────────
   // The bare root (settlementforge.com) canonicalizes for EVERYONE, but not to
@@ -860,6 +876,17 @@ export default function App() {
           <PurchaseModal onClose={() => setPurchaseModalOpen(false)} />
         </Suspense>
       )}
+
+      {/* ── Edit mode (EM-D1) ────────────────────────────────────
+          The tome's register while the editor is on. The condition is a BARE
+          truthiness read: the authoritative reading of the stored word — and the
+          refusal for an account the gate does not admit — belong to the shell,
+          beside the slice that owns the vocabulary and the predicate. */}
+      {editorMode ? (
+        <Suspense fallback={null}>
+          <EditModeShell />
+        </Suspense>
+      ) : null}
 
       {/* ── Feedback widget (global floating affordance) ─────────
           Off the auth/checkout chrome; self-contained (reads the store, owns its

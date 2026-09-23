@@ -1829,6 +1829,9 @@ export const en = Object.freeze({
       rollAnother:     'Roll another',
       rollUnavailable: 'Rolling is unavailable here',
       limit:           '{actual} of {max} characters',
+      // EM-D2's font-coverage note (U7). The control reports the characters the
+      // printed dossier cannot draw; this is the sentence it will carry.
+      uncovered:       'These characters will not print: {chars}',
     },
     dialog: {
       title:                   'Editor',
@@ -1844,6 +1847,91 @@ export const en = Object.freeze({
       refusalUndeclaredField:  '{field} is not declared for this card.',
       refusalUnknownTarget:    'The record this card names could not be found, so {field} is unchanged.',
       refusalUnknown:          'The edit did not apply, so {field} is unchanged.',
+    },
+
+    // ── The edit-mode shell (EM-D1) ─────────────────────────────────────────
+    // Design §3 (the mode indicator, the pencils, the pluses, Done), §14 item 3
+    // (the derived card's provenance line) and §17/§18 (the seals by card, and
+    // the herald's reason for a seal the world does not yet offer).
+    //
+    // ⛔ THE REASON LINES ARE KEYED BY THE WORLD CONDITION'S OWN ID, the ten
+    // `WORLD_CONDITIONS` rows of src/domain/edit/worldConditions.js plus the
+    // `always` row §18's table gives the chronicle. That leaf carries predicates
+    // and no prose, so the sentence lives here and the id is the join: a
+    // condition renamed there leaves its key unanswered rather than drifting.
+    //
+    // ⛔ `actsNote` IS WHAT MAKES EVERY REASON LINE BELOW HONEST. The shell does
+    // not read the predicates at this landing (EM-E4/EM-E7 wire the acts), so a
+    // reason line states the condition an act needs and never a measurement of
+    // the live world. The note says exactly that, once, above them all.
+    shell: {
+      title:          'Edit mode',
+      indicator:      'This settlement is open for editing.',
+      enter:          'Edit',
+      enterNamed:     'Edit {name}',
+      cardsHead:      'Cards',
+      actsHead:       'Acts',
+      derivedHead:    'Derived',
+      pencil:         'Edit the {card} card',
+      plus:           'Add to {card}',
+      plusReason:     'Nothing writes a new entry yet, so additions are not open.',
+      actsNote:       'Each act names the state it needs. This shell does not yet read that state, and no act is open.',
+      provenance:     'Follows from {source}, so change {source}.',
+      done:           'Done',
+      refusalRubric:  'The editor is closed',
+      refusalGated:   'The settlement editor is not open on this account.',
+
+      // The card names the register shows. `npc` is the person's card on both
+      // sides: it wears the pencils of §14 and the mission seal of §17.
+      card: {
+        institution: 'Institution',
+        npc:         'Person',
+        faction:     'Faction',
+        powerSeat:   'Power seat',
+        worldFact:   'World facts',
+        goods:       'Goods',
+        services:    'Services',
+        war:         'War',
+        trade:       'Trade',
+        rumour:      'Rumour',
+        chronicle:   'Chronicle',
+      },
+
+      // §17's acts, in the herald's voice, by the card they start on.
+      seal: {
+        suePeace:       'Sue for peace',
+        acceptPeace:    'Accept the peace',
+        refusePeace:    'Refuse the peace',
+        directForce:    'Direct the force',
+        resupply:       'Resupply',
+        letSiegeFall:   'Let the siege fall',
+        letCoupFail:    'Let the coup fail',
+        receiveEnvoy:   'Receive the envoy',
+        turnEnvoyAway:  'Turn the envoy away',
+        directTrade:    'Direct trade',
+        embargo:        'Embargo',
+        confirmRumour:  'Confirm it',
+        castDoubt:      'Cast doubt',
+        twistRumour:    'Twist it',
+        scheduleEvent:  'Schedule an event',
+        sendOnMission:  'Send on a mission',
+      },
+
+      // §18's preconditions, each naming the act that would create it, or wait.
+      // `pendingPeaceOffer` is the design's own worked sentence, verbatim.
+      reason: {
+        always:            'This act opens once the catalogue behind it is built.',
+        beliefExists:      'No belief is recorded here. Let one spread, or wait.',
+        envoyArrived:      'No envoy has arrived. Send for one, or wait.',
+        forceInField:      'No force is in the field. Muster one, or wait.',
+        npcPresent:        'No one is present to send. Recall someone, or wait.',
+        openRoute:         'No route is open. Open one, or wait.',
+        pendingPeaceOffer: 'No peace has been offered. Make them sue for it, or wait.',
+        plotInMotion:      'No plot is in motion. Stir a coup, or wait.',
+        siegeInProgress:   'No siege is under way. Lay one, or wait.',
+        tradeWith:         'No trade runs with that partner. Open it, or wait.',
+        warInProgress:     'No war is under way. Declare one, or wait.',
+      },
     },
   },
 });

@@ -298,13 +298,22 @@ describe('EM-A1 — the field declarations, their shape law and their existence 
     // static edge from a DYNAMIC one over this very target.
     const EXPECTED_IMPORTERS = [
       // ⭐ EM-D0e WIDENS THIS ARM IN PLACE, BY ADDITION AND NEVER BY DELETION. The first entry
-      // is the first editor door, and it is LAZY in the only sense this arm measures: NOTHING
-      // MOUNTS IT — the App root is out of its manifest (judgment 146a) and no e2e spec can
-      // reach it — so it is composed by no eager slice, contributes 0 members to
-      // EAGER_FIRST_PAINT_MODULES, and the +0 B price this arm defends is unmoved. Measured by
-      // EM-D0e's own first-paint membership probe, which imports the exported set and reads no
-      // build output.
+      // is the first editor door, and it is LAZY in the only sense this arm measures: EM-D1's
+      // SHELL MOUNTS IT (the entry below), and that shell is itself reached from the App root
+      // through a single `lazy(() => import(...))` edge — so the door is composed by no eager
+      // slice, contributes 0 members to EAGER_FIRST_PAINT_MODULES, and the +0 B price this arm
+      // defends is unmoved. Measured by EM-D0e's own first-paint membership probe, which
+      // imports the exported set and reads no build output.
       'src/components/edit/CardEditorDialog.jsx imports src/domain/edit/fieldDeclarations.js',
+      // ⭐ EM-D1 WIDENS THIS ARM IN PLACE, BY ADDITION AND NEVER BY DELETION. The edit-mode
+      // shell is the FIRST MOUNTED consumer of the declaration table: it asks `isEditableCard`
+      // which cards wear a pencil and `declarationsFor` which collection a card's subjects live
+      // in, and it imports NOTHING ELSE from the edit volume — no op catalogue, no world
+      // conditions, no layer. It is LAZY in this arm's own sense: `src/App.jsx` reaches it
+      // through one `lazy(() => import(...))` edge, which the eager first-paint graph does not
+      // follow, so the table still enters no first-paint closure. The editor-train arm of
+      // tests/build/vendorPdfLazy.test.js prices that same membership from the build config.
+      'src/components/edit/EditModeShell.jsx imports src/domain/edit/fieldDeclarations.js',
       'src/domain/edit/operations.js imports src/domain/edit/fieldDeclarations.js',
       'src/store/editSlice.js imports src/domain/edit/fieldDeclarations.js',
     ];
