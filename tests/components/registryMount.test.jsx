@@ -39,6 +39,11 @@ import { dirname, join } from 'node:path';
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import { cleanup, fireEvent, render, screen } from '@testing-library/react';
 
+import { evaluateGuards, GUARD_OFFERS } from '../../src/domain/edit/guards.js';
+import { makeGuardRuleSet } from '../../src/domain/edit/guardRules.js';
+import { OP_TYPES } from '../../src/domain/edit/operations.js';
+import { renormalizeFactionPower } from '../../src/generators/power/rulingStructure.js';
+import { checkStructuralValidity } from '../../src/generators/structuralValidator.js';
 import { REGISTRY_ACTION_NAMES } from '../../src/components/edit/DecreeRegistryPage.jsx';
 import { decreeChronicleLine } from '../../src/domain/display/stateProse/decreeProse.js';
 import { declarationsFor } from '../../src/domain/edit/fieldDeclarations.js';
@@ -55,11 +60,13 @@ const SAVE = 'save-1';
 const T0 = '2026-09-23T10:00:00.000Z';
 const T1 = '2026-09-23T11:00:00.000Z';
 
-/** One op at the rigid shape `src/domain/edit/types.js` authors. */
-const opOf = (type, kind, id) => Object.freeze({
+/** One op at the rigid shape `src/domain/edit/types.js` authors. ⭐ EM-C4c WIDENS THE PAYLOAD
+ *  PARAMETER IN PLACE, BY ADDITION: an absent one is the empty payload every arm above already
+ *  builds, so their registry is byte-identical and only M6 supplies one. */
+const opOf = (type, kind, id, payload = {}) => Object.freeze({
   type,
   target: Object.freeze({ kind, id }),
-  payload: Object.freeze({}),
+  payload: Object.freeze({ ...payload }),
   stage: 'home',
   consequence: 'home',
   requires: Object.freeze([]),
@@ -131,6 +138,43 @@ vi.mock('../../src/store/index.js', () => {
 });
 
 vi.mock('../../src/hooks/useIsMobile.js', () => ({ default: () => false, getIsMobile: () => false }));
+
+/**
+ * ⭐ EM-C4c: THE RULE SET, AND NOTHING ELSE, IS SUPPLIED (design §7 C; EM-D3c's own header).
+ *
+ * `selectGuards(state)` at its default answers `EMPTY_RULE_SET`'s honest empty verdict, and the
+ * MOUNT supplies no rule set on purpose — composing `makeGuardRuleSet` in the shell would put a
+ * second `src/domain/edit/` edge on a file whose edge set is pinned, and would need the two
+ * generator writers injected from a leaf that reaches no generator. "The wiring lights the day
+ * a rule set arrives"; this is that day, in one suite. Only the READER is replaced, with the
+ * REAL engine over the REAL rule set and the REAL injected writers, reading the store's own
+ * registry and record: the writer under test (`takeGuardOffer`), the registry verbs and the
+ * store all stay the landed ones, spread from the actual module.
+ *
+ * ⛔ IT CHANGES NOTHING FOR M1 TO M5, and that is measured rather than hoped: every entry of
+ * their registry is a `set-field` with an empty payload on its own target, which no rule of the
+ * five can speak about, so their verdict is empty either way. M6 seats its own rows.
+ */
+vi.mock('../../src/store/editSlice.js', async (importOriginal) => {
+  const actual = await importOriginal();
+  const [engine, rules, catalogue, validator, power] = await Promise.all([
+    import('../../src/domain/edit/guards.js'),
+    import('../../src/domain/edit/guardRules.js'),
+    import('../../src/domain/edit/operations.js'),
+    import('../../src/generators/structuralValidator.js'),
+    import('../../src/generators/power/rulingStructure.js'),
+  ]);
+  const ruleSet = rules.makeGuardRuleSet({
+    checkStructuralValidity: validator.checkStructuralValidity,
+    renormalizeFactionPower: power.renormalizeFactionPower,
+  });
+  return {
+    ...actual,
+    selectGuards: (state) => engine.evaluateGuards(
+      actual.selectDecrees(state), state?.settlement ?? null, catalogue.OP_TYPES, ruleSet,
+    ),
+  };
+});
 
 vi.mock('../../src/lib/analytics.js', () => ({
   track: vi.fn(),
@@ -307,5 +351,67 @@ describe('EM-D3c — the page of decrees, mounted at the dossier foot', () => {
     expect(live()).toBe(beforeRows);
     expect(live().map((row) => row.status))
       .toEqual(beforeRows.map((row) => row.status));
+  });
+
+  it('M6: the guard offer is a CONTROL and it drives EM-C4c own verb through the real store — proceed records the guard own id on the entry and the badge comes back marked, keep the first withdraws the judged entry', async () => {
+    // TWO WAITING ENTRIES SETTING ONE FACT, so the real rule set has something to say. The rows
+    // are EM-C1's own `stage` over the catalogue's own shape, exactly as REGISTRY is.
+    let clashing = stage([], opOf('set-field', 'npc', FIRST_NPC, { field: 'note', value: 'one' }),
+      { id: 'd_one', orderedAt: T0 });
+    clashing = stage(clashing, opOf('set-field', 'npc', FIRST_NPC, { field: 'note', value: 'two' }),
+      { id: 'd_two', orderedAt: T0 });
+    seatState('premium', STAFF_ROLES[0], clashing);
+
+    // THE FINDING, from the REAL engine over the REAL rule set — the same answer the mount
+    // reads, derived here rather than typed, so the id below is the product's own mint.
+    const ruleSet = makeGuardRuleSet({ checkStructuralValidity, renormalizeFactionPower });
+    const verdict = () => evaluateGuards(live(), storeState.settlement, OP_TYPES, ruleSet);
+    const finding = verdict().guards[0];
+    expect(verdict().guards.length).toBe(1);
+    expect([finding.entryId, finding.relatedEntryId]).toEqual(['d_two', 'd_one']);
+
+    const { container, rerender, Shell } = await mountShell();
+    const badge = () => rowFor(container, 'd_two').querySelector('[data-testid="decree-guard"]');
+    const controls = () => [...rowFor(container, 'd_two')
+      .querySelectorAll('[data-testid="decree-guard-offer"]')];
+
+    // AN OFFER WITH A WRITER IS A CONTROL, not words: each is a real button and carries an
+    // offer the engine minted, so no control can offer a word the vocabulary does not hold.
+    expect(controls().map((node) => node.tagName)).toEqual(['BUTTON', 'BUTTON', 'BUTTON']);
+    expect(controls().map((node) => node.getAttribute('data-offer'))).toEqual([...finding.offers]);
+    expect(controls().filter((node) => !GUARD_OFFERS.includes(node.getAttribute('data-offer'))))
+      .toEqual([]);
+    expect(badge().getAttribute('data-guard-overridden')).toBe('no');
+
+    // PROCEED: the click reaches the landed verb, and the STORE — never a spy — carries the
+    // guard's own id on the entry the guard judged, and on no other.
+    const proceed = controls().find((node) => node.getAttribute('data-offer') === GUARD_OFFERS[4]);
+    fireEvent.click(proceed);
+    expect(rowOf('d_two').overrode).toEqual([finding.id]);
+    expect(Object.hasOwn(rowOf('d_one'), 'overrode')).toBe(false);
+    expect(live().map((row) => row.status)).toEqual(['pending', 'pending']);
+
+    // THE FINDING STANDS, MARKED. The page reads the moved store and says so, which is the
+    // whole of "the DM's word stands beside the guard's" as a reader meets it.
+    rerender(<Shell />);
+    expect(verdict().guards.map((guard) => [guard.id, guard.overridden]))
+      .toEqual([[finding.id, true]]);
+    expect(badge().getAttribute('data-guard-overridden')).toBe('yes');
+
+    // KEEP THE FIRST: the entry the guard JUDGED is withdrawn and kept for the record, and the
+    // page re-groups it — one more offer, the same binding, the same store.
+    const keepFirst = controls().find((node) => node.getAttribute('data-offer') === GUARD_OFFERS[2]);
+    fireEvent.click(keepFirst);
+    expect([rowOf('d_two').status, rowOf('d_one').status]).toEqual(['withdrawn', 'pending']);
+    expect(live().length).toBe(2);
+    rerender(<Shell />);
+    expect(idsIn(container, 'decree-registry-pending')).toEqual(['d_one']);
+    expect(idsIn(container, 'decree-registry-withdrawn')).toEqual(['d_two']);
+
+    // THE BINDING IS SPELLED WHERE A SCANNER CAN SEE IT, and it is the DOOR rather than one of
+    // `DECREE_ACTIONS`' verbs — so the page's own `REGISTRY_ACTION_NAMES` pair is unmoved.
+    expect(SHELL_SOURCE.includes('onGuardOffer={guardOffer}')).toBe(true);
+    expect(SHELL_SOURCE.includes('takeGuardOffer(useStore.getState, useStore.setState,')).toBe(true);
+    expect(boundVerbsIn(SHELL_SOURCE)).toEqual([...REGISTRY_ACTION_NAMES].sort());
   });
 });

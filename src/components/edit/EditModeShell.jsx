@@ -63,7 +63,20 @@
  * request is re-shaped on the way: the page hands `commitRegistry` its own `{saveId,
  * entryId, ...}` and this file passes the landed action through.
  *
- * ⛔ THREE OF THE PAGE'S SEAMS ARE HANDED NOTHING, AND EACH ABSENCE IS A MEASUREMENT.
+ * ⛔ FOUR OF THE PAGE'S SEAMS ARE HANDED NOTHING, AND EACH ABSENCE IS A MEASUREMENT.
+ *   · `inCampaign` — a UI module the unarmed app graph reaches may name NO runtime-gated
+ *     campaign action (`tests/store/campaignRuntimeCallerCoverage.test.js`, whose two
+ *     census arms derive the campaignLazy boundaries rather than listing them). This leaf
+ *     is mounted from `src/App.jsx` OUTSIDE every one of those boundaries, so asking the
+ *     store `isSettlementClockBound` — a `CAMPAIGN_CORE_ACTIONS` delegate — would arm the
+ *     campaign runtime behind a surface that has no business arming it. The walker's own
+ *     law offers two cures and this mount can take neither: the fact is not on a prop,
+ *     because the edit register is not the campaign surface and the shell takes no props;
+ *     and a boundary of its own is the walker's to bless, not a member's to mint.
+ *     Re-deriving the membership from raw state instead would be a SECOND HOME for a rule
+ *     the store owns, which is the drift class `campaignSliceShared.js`'s own header
+ *     exists to close. So the page is told nothing and draws the estate's existing rung,
+ *     which is the branch it already carries.
  *   · `advanceControl` — the realm owns the Advance control (`WorldMapToolbar.jsx`'s
  *     `handleAdvanceRealm`, drawn only while a campaign is active) and this leaf is the
  *     dossier's. Minting a second one here would be a second advance path; reaching the
@@ -73,9 +86,15 @@
  *     MODULE-PRIVATE const with no export. Re-typing the number here would be a second
  *     home for one fact, so the page is told nothing and states the session fact without
  *     a figure, which is the branch it already carries.
- *   · `onGuardOffer` — design §2.7's offers are WRITES and neither writer exists at this
- *     tip (EM-C1 mints no override verb, `DECREE_ACTIONS` carries none), so the offers
- *     render as words. An offer with no writer is words, not a control.
+ * ⭐ AND ONE OF THOSE FOUR IS NOW BOUND (EM-C4c), so the count above is D3c's and reads
+ * THREE from this landing on. `onGuardOffer` — design §2.7's offers are WRITES, and at D3c's
+ * landing neither writer existed, so the offers rendered as words. Both
+ * exist now: EM-C1's `recordOverride` and the slice's `takeGuardOffer`, which judges an offer
+ * by its own name out of `GUARD_OFFERS` and reaches EM-C4b's landed actions. The page hands
+ * this binder the GUARD the engine minted and the offer's name, and knows nothing about saves;
+ * the save id, like the store handles, is supplied HERE. An offer this door does not write
+ * (`reorder`, which is the page's own move controls, and `self`, which is the DM's own act)
+ * comes back refused by name and the page is unchanged by it.
  *
  * ⛔ THE VERDICT IS THE SLICE'S OWN, AT ITS DEFAULT RULE SET. `selectGuards(state)` with no
  * rule set is the engine's honest empty answer. Composing EM-C3's `makeGuardRuleSet` would
@@ -98,7 +117,7 @@ import { savePhase } from '../../domain/campaign/canon.js';
 import { declarationsFor, isEditableCard } from '../../domain/edit/fieldDeclarations.js';
 import {
   applyPlainEditIntent, DECREE_ACTIONS, EDITOR_MODE_OFF, EDITOR_MODE_PREF_KEY,
-  selectDecrees, selectEditorMode, selectGuards,
+  selectDecrees, selectEditorMode, selectGuards, takeGuardOffer,
 } from '../../store/editSlice.js';
 import { useStore } from '../../store/index.js';
 import { counterpartiesOf, mintPhantomIntent } from '../../store/phantomMintAction.js';
@@ -404,11 +423,6 @@ export default function EditModeShell() {
   const saveId = useStore((state) => state.activeSaveId);
   const decrees = useStore((state) => selectDecrees(state));
   const verdict = useStore((state) => selectGuards(state));
-  // ⛔ IS THIS SETTLEMENT IN THE REALM? The estate answers that with ONE predicate, and this
-  // is its second reader: `isSettlementClockBound` is what `SettlementDossierHero` asks
-  // before it offers the gold "Send it to the Realm" rung, so the page suppresses the rung
-  // on exactly the settlements the dossier already stops offering it to.
-  const clockBound = useStore((state) => state.isSettlementClockBound);
   /** @type {[{cardType: string, subject: CardSubject, create: boolean}|null, Function]} */
   const [open, setOpen] = useState(null);
 
@@ -436,6 +450,19 @@ export default function EditModeShell() {
     reorder: (request) => DECREE_ACTIONS.reorder(useStore.getState, useStore.setState, request),
     withdraw: (request) => DECREE_ACTIONS.withdraw(useStore.getState, useStore.setState, request),
   };
+
+  // ⛔ THE ONE BINDING OF THE OFFERS' WRITER (EM-C4c), in the identical shape and for the
+  // identical reason as the three above: the page hands over the GUARD the engine minted and
+  // the offer's own name, and knows nothing about saves. It is NOT bound off `DECREE_ACTIONS`
+  // — `takeGuardOffer` is the DOOR, which judges the offer and then reaches those actions —
+  // so the page's `REGISTRY_ACTION_NAMES` pair and EM-D3's arm over it are unmoved.
+  /** @param {{entryId?: unknown}} guard @param {string} offerName */
+  const guardOffer = (guard, offerName) => takeGuardOffer(useStore.getState, useStore.setState, {
+    saveId: String(saveId ?? ''),
+    entryId: String(guard?.entryId ?? ''),
+    guard,
+    offer: offerName,
+  });
 
   // ⛔ REOPEN IS THE DOOR, NOT A WRITE (see the header). The entry's own card and the record
   // row its op targets, or nothing at all when the record no longer holds that row.
@@ -610,10 +637,10 @@ export default function EditModeShell() {
         saveId={String(saveId ?? '')}
         decrees={decrees}
         verdict={verdict}
-        inCampaign={!!(saveId && typeof clockBound === 'function' && clockBound(saveId))}
         actions={decreeActions}
         chronicleHref={chronicleHrefFor}
         onReopen={reopenEntry}
+        onGuardOffer={guardOffer}
       />
 
       <Button variant="primary" size="sm" onClick={leaveMode}>{t('edit.shell.done')}</Button>
