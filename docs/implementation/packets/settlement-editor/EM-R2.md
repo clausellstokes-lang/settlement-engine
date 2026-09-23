@@ -61,7 +61,7 @@
     `path:NNN` citation in the body and in the capsule's `_note`s is re-spelled `path :: symbol`
     under §P2.22 / rule 32 — the member shifts lines in three of the four files its own capsule
     cited, which §P2.16's ⭐ clause (judgment 124) makes its own row to re-address.
-- **Verified base:** `em-t15-r2-2026-09-22` at `ec4cd1c2d5aebbda4df788fd4e600252adb81b5c`
+- **Verified base:** `em-t16-r2-2026-09-23` at `64b75240c98831693e4495efedeb2639cfa691f7`
   ⚠ Left for the chair's promotion stamp. **The revalidation sentence the chair will use:**
   *"Re-measured at `c69d16a5d6462068cddf140b98129bbb66d80373` (train EM-T14's composed tip;
   read tip `read-tip-em-t14`, DETACHED, `git status --short` EMPTY before and after): the
@@ -86,7 +86,7 @@
   register-row-key errors with EM-R2 alone; ONE (`tests/generators/pipelinePinnedMode.test.js`,
   EM-R2 + EM-R1b) if stage 2 were placed non-terminal beside it, which is why stage 2 rides the
   flip (§5a).
-- **Last revalidated:** left for the chair, with the sentence above.
+- **Last revalidated:** `64b75240c98831693e4495efedeb2639cfa691f7` — stamped by the chair at promotion (train EM-T16 stage 1; the re-placement stamp corrected, judgment 209).
 - **Depends on:**
   - **EM-R1** — pins cloned on entry at the runner (design §22 ruling 6). A HARD dependency and
     the reason this member declares NO local clone: EM-B2a3 landed two LOCAL clones whose own
