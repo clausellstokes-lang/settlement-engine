@@ -932,9 +932,16 @@ function storedConfigFor(state, saveId) {
  * ⛔ IT VOICES NOTHING. The chronicle cause is EM-E1's and EM-E2's; this member writes no
  * chronicle line, no news entry and no receipt beyond its own return value.
  *
- * ⛔ IT WRITES THE ACTIVE VIEW, exactly as `applyPlainEditToDraft` does, and persists nothing
- * of its own: the library row and the durable save are the estate's existing save flow's, and a
- * durable write at the tick is a persistence question that is the owner's, not a lane's.
+ * ⛔ IT WRITES THE ACTIVE VIEW **AND THE LIBRARY ROW OF THE SAME SAVE** (EM-E8b A, U48), and
+ * still persists nothing of its own. MEASURED at EM-E8's tip over the real advance in local
+ * mode: the durable save came back carrying the decree as `applied` and NOBODY on the roster —
+ * the record said the table's order had been carried out and the saved world held no such
+ * person. Writing only the view left the row behind, and the row is what the advance's own
+ * outbox reads (`applyWorldPulseResultToState` composes its `persistUpdates` from
+ * `state.savedSettlements`). So the row moves HERE, in the same one write, and the DURABLE
+ * half is the advance's — `withMintedRosterState` in `campaignAdvanceSession.js` folds this
+ * record into the outbox payload that flush already carries, so the tick is ONE op per save
+ * and this module still opens no persistence path of its own.
  *
  * ⛔ ONE `set`, AND BOTH HOMES MOVE IN IT OR NEITHER DOES. The layer is the INPUT and the
  * record is the OUTPUT (design §14), so a write that landed one without the other would be the
@@ -1000,7 +1007,18 @@ export async function applyRosterDecreesAtTick(get, set, request) {
   //    own write and is never carried from the pre-run record.
   const next = carryForward(/** @type {object} */ (live), /** @type {object} */ (derived));
   /** @type {Record<string, unknown>} */ (next).dmLayer = layer;
-  set((state) => { state.settlement = next; });
+  set((state) => {
+    state.settlement = next;
+    // EM-E8b A (U48): the SAME record onto the library row, inside the SAME write. The view
+    // and the row are two homes for one save, and the advance's outbox reads the ROW — a
+    // mint that moved only the view persisted nothing and left the durable save holding an
+    // `applied` decree with nobody on the roster.
+    const idx = (state.savedSettlements || [])
+      .findIndex((row) => String(row?.id ?? '') === saveId);
+    if (idx !== -1) {
+      state.savedSettlements[idx] = { ...state.savedSettlements[idx], settlement: next };
+    }
+  });
   const reported = /** @type {{unapplied?: unknown}} */ (out).unapplied;
   return {
     ok: /** @type {true} */ (true),

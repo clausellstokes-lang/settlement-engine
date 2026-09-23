@@ -238,6 +238,69 @@ export function reconcileWizardNewsForCommit(resultWizardNews, liveWizardNews, p
 }
 
 /**
+ * ⭐ EM-E8b A (U48) — THE TICK'S MINTED ROSTER STATE, FOLDED INTO THE OUTBOX PAYLOAD THE
+ * ADVANCE ALREADY CARRIES. ONE PERSISTENCE PATH AND NO SECOND WRITER OF A SAVE ROW.
+ *
+ * MEASURED at EM-E8's tip, over the real advance in local mode: the tick minted the newcomer
+ * onto the active view and the DURABLE save came back with the decree `applied` and nobody on
+ * the roster. The roster half ran AFTER `flushWorldPulsePersist`, so the outbox had already
+ * carried the pre-mint record. The cure is not a second write — it is this fold plus the call
+ * site's move to BEFORE that one flush, so the minted record rides the SAME
+ * `persistSaveUpdates` the pulse's own `settlementUpdates` ride.
+ *
+ * ⛔ IT REPLACES, IT NEVER APPENDS A SECOND OP FOR ONE SAVE. `applyWorldPulseResultToState`
+ * already put an entry on this list for every member the pulse updated; a second entry for the
+ * same save would be two ops racing for one row. A save with no entry (a member the pulse left
+ * alone) gets ONE, because a mint that reached no op would not persist at all.
+ *
+ * ⛔ A BIRTH ENVELOPE KEEPS ITS SHAPE. `createSave` is the WR-3 upsert of a first-class birth;
+ * re-reading the whole row is how its minted roster reaches the same envelope without turning
+ * an upsert into a partial update.
+ *
+ * ⛔ BY REFERENCE WHEN NOTHING MINTED, so a dormant advance's payload is the identical array
+ * and two dormant advances compare alike.
+ *
+ * @param {any} state the store AFTER the tick's roster writes (the rows are the source)
+ * @param {any[]} persistUpdates the advance's own outbox payload
+ * @param {any} receipts one receipt from the tick's roster half in `editSlice.js` (its
+ *   `{ok, saveId, minted}` shape), or a list of them. The symbol is deliberately NOT named
+ *   here: `tests/store/rosterOpsAtTick.test.js` case C4 pins this file's reaches at EXACTLY
+ *   ONE, and that walker reads the raw source, so even a doc mention would convict it.
+ * @returns {any[]} the payload, minted state folded in
+ */
+export function withMintedRosterState(state, persistUpdates, receipts) {
+  const rows = Array.isArray(receipts) ? receipts : [receipts];
+  const minting = rows.filter(
+    (receipt) => receipt && receipt.ok === true
+      && Array.isArray(receipt.minted) && receipt.minted.length > 0,
+  );
+  if (minting.length === 0) return persistUpdates;
+  const updates = Array.isArray(persistUpdates) ? [...persistUpdates] : [];
+  for (const receipt of minting) {
+    const saveId = String(receipt.saveId ?? '');
+    const row = (state?.savedSettlements || []).find(
+      (/** @type {any} */ save) => String(save?.id ?? '') === saveId,
+    );
+    if (!saveId || !row || !row.settlement) continue;
+    const idx = updates.findIndex(
+      (/** @type {any} */ update) => String(update?.saveId ?? '') === saveId,
+    );
+    if (idx === -1) {
+      updates.push({
+        saveId,
+        settlement: cloneJson(row.settlement),
+        campaignState: cloneJson(row.campaignState),
+      });
+    } else if (updates[idx].createSave) {
+      updates[idx] = { ...updates[idx], createSave: cloneJson(row) };
+    } else {
+      updates[idx] = { ...updates[idx], settlement: cloneJson(row.settlement) };
+    }
+  }
+  return updates;
+}
+
+/**
  * The advance BODY — snapshot + drain + lift (Phase 1), the pure/awaited compute
  * (flag-branched single-tick vs multi-tick, worker vs in-thread), the commit
  * (Phase 2 + pause-park), then the analytics + persist + party-replay tail. Split
@@ -666,6 +729,44 @@ export async function runAdvanceCampaignWorld({
       }
     }
 
+    // ⭐ EM-E8 — THE ROSTER OPS' TICK HALF (design §2.6's head of the tick, §14's regeneration
+    // from the layer). EM-E1's hook marked every due decree APPLIED inside the pulse and left
+    // "the world effect of each op" to the members that bind the verbs; the roster family's
+    // binder is the store's, because only the store may reach the DM layer's writer and
+    // EM-B2a4's re-derivation seam. It mints every applied add-decree the layer does not
+    // already hold and re-derives ONCE.
+    //
+    // ⭐ EM-E8b A (U48) — AND IT RUNS **BEFORE** THE ONE FLUSH BELOW, WHICH IS THE WHOLE CURE.
+    // At EM-E8's tip this block sat after `flushWorldPulsePersist`, so the outbox had already
+    // carried the PRE-MINT record and the durable save came back with an `applied` decree and
+    // nobody on the roster — the record claiming an order carried out over a world that held no
+    // such person. Moved here, the minted rows ride the SAME `persistSaveUpdates` the pulse's
+    // own `settlementUpdates` ride (`withMintedRosterState` folds them into that payload), so
+    // the tick is ONE durable op per save and the members-before-snapshot barrier still holds.
+    // The two replays below are unaffected: neither reads the roster, and both persist their
+    // own writes through their own actions exactly as before.
+    //
+    // ⛔ DORMANT BY REFERENCE, AND THE GUARD IS WHAT MAKES IT FREE. A save that carries no
+    // `decrees` key — every world today — reaches no import, runs nothing and allocates
+    // nothing, so this line composes exactly what it composed before EM-E8.
+    //
+    // ⛔ THE EDGE IS DYNAMIC, which is the estate's own store idiom and what keeps the edit
+    // leaf out of every eager closure (`EAGER_FIRST_PAINT_MODULES` walks STATIC edges only).
+    // Best-effort and session-fenced, exactly as the two replays are: the roster half never
+    // blocks the advance, and the pre-pulse snapshot already covers it for undo.
+    const liveDecrees = get().settlement?.decrees;
+    if (result && result.ok !== false && Array.isArray(liveDecrees) && liveDecrees.length > 0) {
+      if (!sessionCurrent(isSessionCurrent)) return AUTH_SESSION_CHANGED_RESULT;
+      try {
+        const editSlice = await import('./editSlice.js');
+        if (!sessionCurrent(isSessionCurrent)) return AUTH_SESSION_CHANGED_RESULT;
+        const receipt = await editSlice.applyRosterDecreesAtTick(get, set, {
+          saveId: String(get().activeSaveId ?? ''),
+        });
+        persistUpdates = withMintedRosterState(get(), persistUpdates, receipt);
+      } catch { /* best-effort */ }
+      if (!sessionCurrent(isSessionCurrent)) return AUTH_SESSION_CHANGED_RESULT;
+    }
     if (!sessionCurrent(isSessionCurrent)) return AUTH_SESSION_CHANGED_RESULT;
     await flushWorldPulsePersist({
       result,
@@ -715,33 +816,6 @@ export async function runAdvanceCampaignWorld({
         } catch { /* best-effort */ }
         if (!sessionCurrent(isSessionCurrent)) return AUTH_SESSION_CHANGED_RESULT;
       }
-    }
-    // ⭐ EM-E8 — THE ROSTER OPS' TICK HALF (design §2.6's head of the tick, §14's regeneration
-    // from the layer). EM-E1's hook marked every due decree APPLIED inside the pulse and left
-    // "the world effect of each op" to the members that bind the verbs; the roster family's
-    // binder is the store's, because only the store may reach the DM layer's writer and
-    // EM-B2a4's re-derivation seam. It mints every applied add-decree the layer does not
-    // already hold and re-derives ONCE.
-    //
-    // ⛔ DORMANT BY REFERENCE, AND THE GUARD IS WHAT MAKES IT FREE. A save that carries no
-    // `decrees` key — every world today — reaches no import, runs nothing and allocates
-    // nothing, so this line composes exactly what it composed before EM-E8.
-    //
-    // ⛔ THE EDGE IS DYNAMIC, which is the estate's own store idiom and what keeps the edit
-    // leaf out of every eager closure (`EAGER_FIRST_PAINT_MODULES` walks STATIC edges only).
-    // Best-effort and session-fenced, exactly as the two replays above are: the roster half
-    // never blocks the advance, and the pre-pulse snapshot already covers it for undo.
-    const liveDecrees = get().settlement?.decrees;
-    if (result && result.ok !== false && Array.isArray(liveDecrees) && liveDecrees.length > 0) {
-      if (!sessionCurrent(isSessionCurrent)) return AUTH_SESSION_CHANGED_RESULT;
-      try {
-        const editSlice = await import('./editSlice.js');
-        if (!sessionCurrent(isSessionCurrent)) return AUTH_SESSION_CHANGED_RESULT;
-        await editSlice.applyRosterDecreesAtTick(get, set, {
-          saveId: String(get().activeSaveId ?? ''),
-        });
-      } catch { /* best-effort */ }
-      if (!sessionCurrent(isSessionCurrent)) return AUTH_SESSION_CHANGED_RESULT;
     }
     return result;
 }
