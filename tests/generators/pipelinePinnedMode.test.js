@@ -630,3 +630,129 @@ describe('EM-R1 — the pin bag is cloned on entry, at the runner', () => {
     expect(Object.prototype.hasOwnProperty.call(inheritedCopy, 'own')).toBe(true);
   }, 180_000);
 });
+
+/** The step whose two choosers are the rule's whole subject: one transient, one record-backed. */
+const POWER_STEP = 'generatePower';
+/** The record-backed chooser of that step, and the key a DM's own record can supply. */
+const POWER_KEY = 'powerStructure';
+/** The value A5 plants INTO the transient chooser's pin, to prove the seam still hands it back. */
+const INTENT_SENTINEL = 'EM-R1b SENTINEL INTENT';
+
+describe('EM-R1b — a recordPath-less chooser is not counted against a record-built bag', () => {
+  it('A4 — EM-R1b: a record-built power bag runs unrefused on every census row, and a partial bag still refuses', () => {
+    const rows = censusCorpus();
+    expect(rows, 'the census corpus is the floor every figure here rests on').toHaveLength(CENSUS_ROWS);
+    const choosers = getStepMeta().find((meta) => meta.name === POWER_STEP).provides;
+    expect(choosers, 'the ROSTER is kept: this member changes the rule, never the declaration')
+      .toEqual(['powerIntent', POWER_KEY]);
+
+    // THE BAG IS READ AT THE RECORD PATH. `record.powerStructure` is the only chooser of this step
+    // a DM's own record can supply; `powerIntent` never lands on a record at all, which is exactly
+    // why counting it against this bag refused a re-derivation that is otherwise complete.
+    const refused = [];
+    const took = [];
+    for (const row of rows) {
+      const record = runCorpusRow(row, createPRNG(row._seed)).settlement;
+      const bag = { [POWER_KEY]: structuredClone(record[POWER_KEY]) };
+      let landed = false;
+      try {
+        runCorpusRow(row, createPRNG(row._seed), {
+          pins: bag,
+          onStep: (name, ctx, patch) => {
+            if (name !== POWER_STEP || !patch) return;
+            landed = JSON.stringify(patch[POWER_KEY]) === JSON.stringify(bag[POWER_KEY]);
+          },
+        });
+      } catch (error) {
+        refused.push(`${keyOf(row)}: ${error.message}`);
+        continue;
+      }
+      took.push(landed);
+    }
+    expect(refused, 'the record-built power bag was refused: a transient chooser is still counted')
+      .toEqual([]);
+    // ANTI-VACUITY AT THE PRODUCER'S OWN BOUNDARY: the held structure really was TAKEN on every
+    // row, which is what tells a cured rule apart from a run that quietly dropped the pin.
+    expect(took.filter(Boolean), 'the held structure was not taken, so the zero above proves nothing')
+      .toHaveLength(CENSUS_ROWS);
+
+    // ⭐ THE POSITIVE CONTROL, IN THIS ARM: the narrowing must not go wide. A bag supplying ONE of
+    // four RECORD-BACKED choosers is still a partial pin, refused by the whole sentence, with the
+    // same three keys in its strict report.
+    const complete = runHeadless(createPRNG(SEED));
+    const partial = { relationships: complete.relationships };
+    let thrown = null;
+    try {
+      runHeadless(createPRNG(SEED), { pins: partial });
+    } catch (error) {
+      thrown = error;
+    }
+    expect(thrown, 'a partial bag over record-backed choosers must still refuse').toBeInstanceOf(Error);
+    expect(thrown.message).toBe(
+      `Pipeline pins: step "${POPULATION_STEP}" has choosers [${CHOOSER_KEYS.join(', ')}] `
+      + 'but pins supply only [relationships]. Pin every chooser of a step or none of them.',
+    );
+    const violations = [];
+    runHeadless(createPRNG(SEED), {
+      pins: partial,
+      onStrictViolation: (violation) => violations.push(violation),
+    });
+    expect(violations).toContainEqual({
+      step: POPULATION_STEP,
+      kind: 'pin',
+      keys: ['npcs', 'factions', 'conflicts'],
+    });
+  }, 600_000);
+
+  it('A5 — EM-R1b: a supplied transient chooser is still handed back, and the unpinned path is inert', () => {
+    // (1) THE SEAM IS UNTOUCHED. `chooseOrPin` still returns an own-present pin, transient or not:
+    // the RULE stopped counting the key, the primitive never stopped honouring it.
+    const row = censusCorpus()[0];
+    const produced = {};
+    const record = runCorpusRow(row, createPRNG(row._seed), {
+      onStep: (name, ctx, patch) => { if (name === POWER_STEP && patch) produced.patch = structuredClone(patch); },
+    }).settlement;
+    expect(produced.patch, 'the step produced no patch, so the sentinel below would land nowhere')
+      .toBeDefined();
+    let taken = null;
+    runCorpusRow(row, createPRNG(row._seed), {
+      pins: {
+        powerIntent: { ...produced.patch.powerIntent, sentinel: INTENT_SENTINEL },
+        [POWER_KEY]: structuredClone(record[POWER_KEY]),
+      },
+      onStep: (name, ctx, patch) => {
+        if (name === POWER_STEP && patch) taken = patch.powerIntent?.sentinel ?? null;
+      },
+    });
+    expect(taken, 'a SUPPLIED transient chooser is no longer handed back by chooseOrPin')
+      .toBe(INTENT_SENTINEL);
+
+    // THE COUNTERFORCE, IN THIS ARM (§P6): the same run with the transient chooser NOT supplied
+    // re-rolls it on the step's own stream, so the sentinel arrives only because the PIN carried
+    // it. Without this, the assertion above would also pass on a step that never consults a pin.
+    let unpinned = 'not reached';
+    runCorpusRow(row, createPRNG(row._seed), {
+      pins: { [POWER_KEY]: structuredClone(record[POWER_KEY]) },
+      onStep: (name, ctx, patch) => {
+        if (name === POWER_STEP && patch) unpinned = patch.powerIntent?.sentinel ?? null;
+      },
+    });
+    expect(unpinned, 'the step re-rolls an unsupplied transient chooser, so the sentinel can only '
+      + 'have come from the pin channel').toBeNull();
+
+    // (2) THE UNPINNED PATH IS INERT. With `pins` absent the rule cannot execute at all, so the
+    // committed golden is unmoved over the same fixed stride EM-P0's A1 samples.
+    const goldenRows = goldenCorpus();
+    const goldenManifest = JSON.parse(readFileSync(GOLDEN_MANIFEST, 'utf-8'));
+    const goldenStride = Math.max(1, Math.floor(goldenRows.length / 40));
+    const moved = [];
+    let checked = 0;
+    for (let index = 0; index < goldenRows.length; index += goldenStride) {
+      const goldenRow = goldenRows[index];
+      checked += 1;
+      if (goldenManifest[keyOf(goldenRow)] !== hashFor(goldenRow)) moved.push(keyOf(goldenRow));
+    }
+    expect(checked).toBeGreaterThanOrEqual(40);
+    expect(moved, 'the golden moved: an unpinned run took a branch this member added').toEqual([]);
+  }, 600_000);
+});

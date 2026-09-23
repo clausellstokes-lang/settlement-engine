@@ -1152,6 +1152,10 @@
       "kind": "mutation",
       "label": "determinism/transcendental Math.pow in domain"
     },
+    "tests/lint/transientChooserRegistry.walker.test.js": {
+      "kind": "rationale",
+      "rationale": "THE TRANSIENT-CHOOSER WALKER (EM-R1b, the re-entry family). Its catching power is an EXACT PARTITION held in BOTH DIRECTIONS between two sets it IMPORTS from their producers and never re-types: the runner's _TRANSIENT_CHOOSERS declaration, read through getStepMeta().transient, and the provides keys whose every GENERATION_TIER1 row carries recordPath null. A mutant cannot PERTURB a set equality of two imported sets - it can only delete an arm, which the sovereignty-lighting census and this manifest both convict - so a planted mutation here would measure the planter rather than the guard. The behaviour those sets govern IS mutation-tested, at the file that owns it: EM-R1b plants its mutants in src/generators/pipeline.js (the filtered choosers expression, the declaration, the getStepMeta row) and in src/domain/edit/dmLayer.js (the closure skip), each proved to red A1, A2, A3, A4 or A6 by name, per EM-PREAMBLE section P6. A3 is the arm that makes the partition behavioural: it drives pinsFrom through an injected stub roster with and without the declaration, so a leaf that stopped reading the channel reds on a refusal rather than on a literal."
+    },
     "tests/lint/uiA11yContract.walker.test.js": {
       "kind": "rationale",
       "ref": "self-proving-meta"

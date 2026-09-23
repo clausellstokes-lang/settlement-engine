@@ -58,6 +58,22 @@ const _LEDGER_KEYS = new Set(['_traceClock', 'simulationTrace']);
 // scan is stated here BY NAME — a rule, not an accident of when it happens to be seeded.
 const _PINS_KEY = '__pins';
 
+// THE CHOOSERS A RECORD-BUILT BAG CAN NEVER CARRY. `GENERATION_TIER1`'s `recordPath` is `null` for
+// every step that provides one of these keys, which is the register's way of saying the value never
+// lands on the record: a bag built FROM a record cannot hold it, and counting it against that bag
+// refuses a re-derivation that is otherwise complete. So the partial-pin rule below does NOT COUNT a
+// transient chooser, and the step re-rolls it on its own stream exactly as an unpinned run does,
+// while every record-backed chooser the bag lacks is still a partial pin, refused by name.
+// The register is production-unreachable by its own law, so the set is declared here and
+// `tests/lint/transientChooserRegistry.walker.test.js` holds the two equal in both directions.
+// A transient chooser a caller DOES supply is still honoured: `chooseOrPin` is untouched.
+const _TRANSIENT_CHOOSERS = new Set([
+  'catalogForTier', 'categoryToggles', 'generationContentProfile', 'generationContext',
+  'goodsToggles', 'institutionToggles', 'neighbourEconBias', 'neighbourFacBias', 'neighbourProfile',
+  'noMagic', 'powerIntent', 'priorityMagicEffective', 'rawNeighbour', 'resolvedTerrain',
+  'servicesToggles', 'structural', 'threat', 'townPlus', 'tradeRoute',
+]);
+
 function _undeclaredWrites(step, before, ctx) {
   const declared = new Set([...(step.provides || []), ...(step.mutates || []), ...(step.scratch || []), ..._LEDGER_KEYS, _PINS_KEY]);
   const offenders = [];
@@ -219,7 +235,7 @@ export function runPipeline(initialContext, rng, options = {}) {
     // every one of them or none. (A DM's root edit is not a partial pin — the caller builds a
     // pin for every chooser from the record and then overrides a VALUE.)
     if (pinned) {
-      const choosers = step.provides || [];
+      const choosers = (step.provides || []).filter((k) => !_TRANSIENT_CHOOSERS.has(k));
       const supplied = choosers.filter(k => Object.prototype.hasOwnProperty.call(pins, k));
       if (supplied.length && supplied.length < choosers.length) {
         const missing = choosers.filter(k => !supplied.includes(k));
@@ -305,6 +321,7 @@ export function getStepMeta() {
       reads: step.reads || [],
       mutates: step.mutates || [],
       scratch: step.scratch || [],
+      transient: (step.provides || []).filter((k) => _TRANSIENT_CHOOSERS.has(k)),
       readsVersion: step.readsVersion || {},
       phase: step.phase || 'unknown',
     });
