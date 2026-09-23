@@ -9,7 +9,7 @@
  * Consumes the output of domain/regenerationDelta.js#
  * deriveRegenerationDelta(before, after). Pure presentational.
  *
- * Layout: collapsible card with seven sections, each rendering only
+ * Layout: collapsible card with nine sections, each rendering only
  * when it has content:
  *   1. Direct effects    — system state deltas (immediate result of
  *                          the change)
@@ -19,6 +19,8 @@
  *   5. Preserved canon   — entities that survived the rerun
  *   6. New opportunities — hooks the rerun introduced
  *   7. New risks         — threats / conditions / clocks introduced
+ *   8. The DM's fields   — EM-E3, field-level: the layer's plain roots
+ *   9. World facts set   — EM-E3, field-level: the layer's world-fact roots
  *
  * Broken dependencies surfaces inline as a warning row when present.
  *
@@ -211,6 +213,31 @@ export function RegenerationDeltaCard({ delta, onDismiss, heading = 'What change
             detail={() => 'introduced by the change'}
           />
 
+          {/* ── THE DM'S OWN FIELDS (EM-E3; ARCH §6's advance-report row, design
+              §14). `deriveRegenerationDelta` partitions the layer's roots BY
+              PROVENANCE into exactly two groups — `roots` (every root that is not a
+              world fact) and `worldFacts` (named by the key the ENGINE reads, never
+              by the field name). Two is what the partition HAS at this base, so two
+              is what is rendered; a third group would be a section with no carrier.
+
+              ⛔ THEY DO NOT SUMMON THE CARD. `countItems` is deliberately unmoved,
+              mirroring `regenerationDeltaSize`'s own pinned rule that a DM's own
+              field is not a change the world made — the sections report the DM's
+              hand inside a card the WORLD's changes opened. REVERSAL: add the two
+              lengths to `countItems` (and a part to `summarizeCounts`). */}
+          <Section title="The DM's fields"
+            items={delta.dmFields?.roots}
+            color={COLORS.gold}
+            describe={dmFieldLabel}
+            detail={d => formatBandChange(d.engineValue, d.dmValue)}
+          />
+          <Section title="World facts the DM set"
+            items={delta.dmFields?.worldFacts}
+            color={COLORS.direct}
+            describe={d => d.configKey}
+            detail={d => formatBandChange(d.engineValue, d.dmValue)}
+          />
+
           {/* Summary lines from the derivation, if any */}
           {Array.isArray(delta.summary) && delta.summary.length > 0 && (
             <div style={{
@@ -309,6 +336,20 @@ function summarizeCounts(delta) {
 function rippleWord(entry, band) {
   if (!band || !entry?.variable) return band;
   return causalBandWord(entry.variable, band).toLowerCase();
+}
+
+/**
+ * One DM root's name (EM-E3). The root key is `<cardShape>:<entityId>:<field>` and the
+ * derivation hands the three parts over already split, so the label is built from them
+ * and never re-parsed here. A key the derivation could not split reports as ITSELF
+ * rather than as a blank row — the reader is told a field was set either way.
+ * @param {any} row one `dmFields.roots` entry
+ * @returns {string}
+ */
+function dmFieldLabel(row) {
+  const where = [row?.cardShape, row?.entityId].filter(Boolean).join(' ');
+  const field = row?.field || '';
+  return where && field ? `${where}: ${field}` : String(row?.key ?? '');
 }
 
 function formatBandChange(before, after) {

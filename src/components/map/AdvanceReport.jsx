@@ -2,7 +2,8 @@
  * AdvanceReport — THE CHRONICLE advance-report surface (design
  * docs/DESIGN_CHRONICLE_LEGIBILITY.md). The span-scaled zoom pyramid (§1) +
  * delta-first lead (§3) + typed threads (§2) + the deputy's diary (§4) + THE
- * DECREE TRACKER (§5/§5b) — one navigable report after every advance.
+ * DECREE TRACKER (§5/§5b) + THE ORDERS THE TICK CARRIED OUT (EM-E3) — one
+ * navigable report after every advance.
  *
  * Pure display: it reads ONLY the durable stores through the chronicle
  * read-models (never the capped wizardNews feed — §6). SELF-GATES TO EMPTY: a
@@ -346,6 +347,96 @@ function DecreeSection({ decrees }) {
   );
 }
 
+// ── THE ORDERS THE TICK CARRIED OUT (EM-E3; ARCH §6, design §2.6) ────────────
+
+/** @typedef {import('../../domain/worldPulse/decreeHook.js').DecreeCause} DecreeCause */
+
+/**
+ * THE APPLIED DECREES OF ONE ADVANCE, IN THE ORDER THE TICK APPLIED THEM.
+ *
+ * The pulse record carries EM-E1's receipt under `decreeCauses`, and only when the
+ * tick applied something: `pulseKernel` spreads that key ONLY for a non-empty cause
+ * list, so an advance with no decree has no key at all and this reader must read the
+ * absence as zero rather than as a shape it can trust (decreeHook.js's header).
+ *
+ * `orderIndex` is EM-C1's reading order — the sequence the guards judged and the tick
+ * applied — so it is the sequence a reader is shown. Two causes cannot share a decree
+ * id, but the id breaks a tie anyway, because a report that re-orders itself between
+ * two renders of the same record is a report nobody can cite.
+ *
+ * @param {{ record?: unknown }|null} entry one advance entry (chronicleGraph's shape)
+ * @returns {DecreeCause[]} the causes, never null, safe to map
+ */
+function appliedDecreeCauses(entry) {
+  const record = entry && typeof entry.record === 'object' ? entry.record : null;
+  const raw = record && Array.isArray(/** @type {{ decreeCauses?: unknown }} */(record).decreeCauses)
+    ? /** @type {{ decreeCauses: DecreeCause[] }} */(record).decreeCauses
+    : [];
+  return [...raw]
+    .filter((cause) => !!cause && typeof cause === 'object')
+    .sort((a, b) => {
+      const byOrder = (Number(a.orderIndex) || 0) - (Number(b.orderIndex) || 0);
+      if (byOrder !== 0) return byOrder;
+      // Codepoint, never `localeCompare` — a reader's locale may not reorder a record
+      // (the estate's `byStr` idiom; tests/lint/localeFormatGuard.test.js).
+      const [x, y] = [String(a.decreeId), String(b.decreeId)];
+      return x < y ? -1 : x > y ? 1 : 0;
+    });
+}
+
+/**
+ * ONE applied decree, as the tick recorded it. Every word here is the receipt's own:
+ * the op in reader words (`humanizeToken`, the estate's one chokepoint), the settlement
+ * it landed on, and the off-stage marker the cause carries or does not. Nothing is
+ * derived and nothing is defaulted — a cause without a `saveId` names nobody rather
+ * than inventing a party, exactly as the relationship chip above refuses to.
+ *
+ * THE CHRONICLE LINK is the mount's, not this leaf's (DecreeRegistryPage's idiom): the
+ * report holds a receipt, and only the surface that owns the routing knows where a
+ * chronicle reference resolves. No href, no link — never a dead one.
+ */
+function DecreeCauseRow({ cause, resolveName, chronicleHref }) {
+  const mobile = useIsMobile();
+  const where = cause.saveId ? resolveName(cause.saveId) : '';
+  const raw = typeof chronicleHref === 'function' ? chronicleHref(cause) : null;
+  const href = typeof raw === 'string' ? raw : '';
+  return (
+    <div data-testid="chronicle-decree-cause" style={{ border: `1px solid ${BORDER2}`, background: CARD, padding: '6px 8px', display: 'grid', gap: 4 }}>
+      {/* TONE, NEVER A WASH (the deep-craft kill list): every cell here is a
+          `Chip` at its default ground, so the row carries no tinted callout and
+          the floors ride the primitive rather than a second hand-sized span. */}
+      <div style={{ display: 'flex', alignItems: 'center', gap: 6, flexWrap: 'wrap' }}>
+        <Chip tone={AMBER}><Landmark size={10} /> {humanizeToken(cause.opType)}</Chip>
+        {cause.offStage ? <Chip tone={SLATE}>off the map</Chip> : null}
+        {where ? <Chip tone={SECOND}><MapPin size={9} color={GOLD} /> {where}</Chip> : null}
+      </div>
+      {href === '' ? null : (
+        <a href={href} data-testid="decree-chronicle-link" style={{ color: SECOND, fontFamily: sans, fontSize: chromeFontSize(FS.micro, mobile), fontWeight: 800 }}>
+          Read its chronicle line
+        </a>
+      )}
+    </div>
+  );
+}
+
+/** The section, present only when the tick carried an order out — see the byte-identical
+ *  off-state note in this module's header: an advance with no decree renders exactly what
+ *  it rendered before this section existed. */
+function DecreeCauseSection({ causes, resolveName, chronicleHref }) {
+  return (
+    <div data-testid="chronicle-decree-causes" style={{
+      border: `1px solid ${GOLD}`, background: CARD_ALT, padding: '9px 11px', display: 'grid', gap: 7,
+    }}>
+      <SectionTitle icon={Landmark}>Orders carried out this tick</SectionTitle>
+      <div style={{ display: 'grid', gap: 5 }}>
+        {causes.map((cause) => (
+          <DecreeCauseRow key={cause.decreeId} cause={cause} resolveName={resolveName} chronicleHref={chronicleHref} />
+        ))}
+      </div>
+    </div>
+  );
+}
+
 // ── Altitude navigation (§1 zoom pyramid) ────────────────────────────────────
 
 const ALL_ALTITUDES = ['headline', 'chapters', 'threads', 'events'];
@@ -357,6 +448,9 @@ const ALTITUDE_LABEL = { headline: 'Headline', chapters: 'Chapters', threads: 'T
  * @param {Object} props
  * @param {any} props.campaign
  * @param {(id: any) => string} [props.nameFor]
+ * @param {((cause: DecreeCause) => string|null)|null} [props.chronicleHref] EM-E3: where an
+ *   applied decree's chronicle line lives, supplied by the mount that owns the routing.
+ *   Absent (the default), the cause is still reported and carries no link.
  */
 // H2 · THE FIRST ADVANCE — a session-scoped one-shot for the report slip. The
 // advance report lives in the Chronicle section, which the advance flow does not
@@ -368,7 +462,7 @@ const ALTITUDE_LABEL = { headline: 'Headline', chapters: 'Chapters', threads: 'T
 // full reload, so a returning reader sees the report already at rest.
 let reportSlipShown = false;
 
-export default function AdvanceReport({ campaign, nameFor }) {
+export default function AdvanceReport({ campaign, nameFor, chronicleHref = null }) {
   const mobile = useIsMobile();
   const setSelectedSettlementId = useStore(s => s.setSelectedSettlementId);
   const resolveName = nameFor || ((id) => String(id));
@@ -393,6 +487,9 @@ export default function AdvanceReport({ campaign, nameFor }) {
   const hasRecordedEdges = buildRecordedEdges(provenance).size > 0;
   const chronicle = useMemo(() => (entry ? chronicleForAdvance(entry, provenance) : null), [entry, provenance]);
   const decrees = useMemo(() => (entry ? decreesForAdvance(entry, provenance) : null), [entry, provenance]);
+  // EM-E3: the tick's own receipt, read straight off the record — no read model stands
+  // between the kernel's cause list and the reader, because there is nothing to derive.
+  const decreeCauses = useMemo(() => appliedDecreeCauses(entry), [entry]);
 
   // The altitude the reader is viewing — defaults to the span's deepest scaffolding
   // (full descent always AVAILABLE via the tabs).
@@ -490,6 +587,14 @@ export default function AdvanceReport({ campaign, nameFor }) {
           pass seesSecrets={false} (the read model then redacts — pinned). */}
       {tracedId && (
         <CauseWalkPanel worldState={worldState} rootId={tracedId} resolveName={resolveName} seesSecrets onClose={() => setTracedId(null)} />
+      )}
+
+      {/* ── EM-E3 · THE ORDERS THIS TICK CARRIED OUT — present only when the
+          tick applied one, so an advance with no decree renders byte-for-byte
+          what it rendered before this section existed (the off-state note in
+          this module's header). ─────────────────────────────────────────── */}
+      {decreeCauses.length > 0 && (
+        <DecreeCauseSection causes={decreeCauses} resolveName={resolveName} chronicleHref={chronicleHref} />
       )}
 
       {/* ── THE DECREE TRACKER — always present, never top-forced ────────── */}
