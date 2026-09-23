@@ -39472,10 +39472,47 @@
           "tests/build": 30,
           "tests/lint": 17,
           "note": "EXACT IN BOTH DIRECTIONS; the CREATE spells the import.meta.url root so the population is UNMOVED and no row is owed"
+        },
+        "buildLaneShape4": {
+          "aliasedAtAnyStepRowsOf63": {
+            "generatePopulation": 0,
+            "assembleInstitutions": 0,
+            "generatePower": 0
+          },
+          "pinsBagMutatedRowsOf63": {
+            "generatePopulation": 0,
+            "assembleInstitutions": 0,
+            "generatePower": 0
+          },
+          "callerRecordMutatedRowsOf63": {
+            "generatePopulation": 0,
+            "assembleInstitutions": 0,
+            "generatePower": 0
+          },
+          "structuredCloneCallsInOneRun": {
+            "noPins": 1,
+            "emptyBag": 3,
+            "fullFourKeyBag": 7,
+            "note": "the baseline 1 is the pipeline graph's own (aiLayer.js); the runner contributes 0 unpinned, 2 with an empty bag (zero MERGE clones) and 2 + one per held key with a bag"
+          },
+          "a7NegativeControlRowsOf63": 42,
+          "effectiveLines": {
+            "src/generators/pipeline.js": 150,
+            "src/generators/steps/assembleInstitutions.js": 585,
+            "src/generators/steps/generatePower.js": 105
+          },
+          "goldenStride": {
+            "corpus": 525,
+            "stride": 35,
+            "checked": 15,
+            "moved": 0
+          },
+          "landedArmsReRun": "EM-B2a3 A6 member 0/0/63/0 both steps and uncloned 52/2/'Cannot add property 1, object is not extensible' and 30/0; EM-B2a2 A1 by-reference at the primitive true; EM-P0 A2/A3/A4/A6 all green (315 unpinned draws, 0 pinned, refusal byte-identical); step roster 22"
         }
       },
-      "_byteArm": "NOT the byte-arm holder. This member names NO ceiling literal: WORKER_BUNDLE_CEILING_BYTES read 1396015 at the compile and 1395972 at c69d16a5d (judgment 187's buy-back), and EM-R0d's own comment states train EM-T14's terminal lowers it again. A SHRINK is predicted; the arm is toBeLessThanOrEqual.",
-      "_siblingPathFacts": "EM-R2 and EM-R4 each carry REGISTER scripts/mutation-coverage-manifest.json (row-keyed, TOOL-27). EM-R4's rowKey is distinct; EM-R2's capsule declares NO rowKey, which the placement must settle before EM-R2 rides one train beside this member. EM-R2/R3/R4/R5 pin symbols in src/generators/pipeline.js (chooseOrPin, _PINS_KEY, getStepOrder() {, _LEDGER_KEYS) - every one a declaration or module-scope const this member leaves byte-identical."
+      "_byteArm": "NOT the byte-arm holder. This member names NO ceiling literal. VERSION 3 (judgment 200) WITHDRAWS version 2's SIGNED SHRINK: the merge clone adds minified bytes back to src/generators/pipeline.js, so the only claim made is that the movement is SMALL and its SIGN is UNSTATED; the terminal's one real build measures it and the arm is toBeLessThanOrEqual. If that build measures a RISE, section 11 item 5 governs and the buy-back is the owner's.",
+      "_siblingPathFacts": "EM-R2 and EM-R4 each carry REGISTER scripts/mutation-coverage-manifest.json (row-keyed, TOOL-27). EM-R4's rowKey is distinct; EM-R2's capsule declares NO rowKey, which the placement must settle before EM-R2 rides one train beside this member. EM-R2/R3/R4/R5 pin symbols in src/generators/pipeline.js (chooseOrPin, _PINS_KEY, getStepOrder() {, _LEDGER_KEYS) - every one a declaration or module-scope const this member leaves byte-identical.",
+      "_version3": "Judgment 200, 2026-09-22, written by the Opus BUILD lane at the sealed placement fb5267f2e. The BUILD measured version 2's own A8 against the built tree and REFUTED it: ctx.__pins[k] !== ctx[k] was FALSE at the last step in 63 of 63 census rows on all three channels, and the bag was corrupted in 42/56/11 of 63 (population/institutions/power), because chooseOrPin returns the pin BY REFERENCE and a held key's PRODUCER writes that reference back into ctx through its patch, overwriting the runner's second ENTRY clone. The cure the chair ruled is SHAPE 4: the runner RE-CLONES A TAKEN PIN AT THE PATCH MERGE, under a bag only, gated on IDENTITY. Measured with it: 0/63 aliased at EVERY step and 0/63 corrupted on all three channels, caller's record still 0/63, every landed pinned-mode arm green, the no-pins path byte-identical (the runner executes ZERO clones unpinned and ZERO merge clones with an empty bag; a 15-row golden stride moved none), one clone per held key per run. NO COUNT MOVED: the CREATE still declares six arms, the TEST row two, the matrix eight cases, the lighting delta files +1 / parked +0 / credited +1 / titles +8 / suiteTitles +2. The contract, the changeManifest, the requiredSymbols, the acceptanceCases and the checks are byte-unmoved from version 2; only section 7's pipeline.js price (+8 eff -> +12 eff), sections 6, 5.6, 5.8, 3, 5.7, 8, 11 and 12 moved. Shape 2 (clone at the primitive) refused: a landed primitive's contract is not this member's. Shape 3 (narrow A8) refused: it ships the census over held facts that are not final."
     },
     {
       "id": "EM-R2",

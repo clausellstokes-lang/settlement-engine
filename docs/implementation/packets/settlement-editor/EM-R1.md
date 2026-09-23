@@ -14,7 +14,27 @@
   ⚠ The status value stands ALONE on its line because `scripts/implementation-packets.mjs ::
   parsePacketHeader` anchors the status row at end-of-line and takes `status` only when exactly one
   row matches (§P9(c)) — re-read by symbol at `c69d16a5d`.
-- **Packet version:** 2
+- **Packet version:** 3
+  > ⭐⭐ **WHAT VERSION 3 CHANGED, AND WHY — THE CHAIR'S JUDGMENT 200, 2026-09-22.** The BUILD lane
+  > built version 2 exactly as written, ran the pre-seal eight and then MEASURED the member's own
+  > arm against the built tree, and A8 was refuted: `ctx.__pins[k] !== ctx[k]` was FALSE at the last
+  > step in **63 of 63** census rows on all three pin channels, and §0.3's pristine property failed
+  > in **42 / 56 / 11 of 63** rows (population / institutions / power). The cause is one step, not
+  > one clone: `chooseOrPin` returns the pin BY REFERENCE (EM-B2a2's landed contract, which §5.1
+  > requires stay true), so a held key's PRODUCER writes that very reference back into `ctx` through
+  > its own patch, and the runner's second ENTRY clone — spent at the context spread — is overwritten
+  > by the first patch that lands. Two clones at entry separate the channels only until each key's
+  > producer runs. ⇒ **THE CHAIR RULED SHAPE 4 (judgment 200): THE RUNNER RE-CLONES A TAKEN PIN AT
+  > THE PATCH MERGE, UNDER A BAG ONLY.** Version 3 carries that one construction and nothing else:
+  > the contract's OUTCOME, its acceptance matrix (A1–A8, unchanged word for word), its manifest,
+  > its `checks`, its count law and its two step-file rows are all as version 2 left them. What moved
+  > is §6 (the merge-clone paragraph), §5.8 (the byte price is no longer a signed shrink), §7's
+  > `pipeline.js` row (re-priced `+8 eff` → `+12 eff`), §0.3 (one sentence naming why the entry clone
+  > alone is not enough), §5.6 (A7's negative control had to be re-cut) and §12 (three new receipt
+  > rows). Shape 2 (cloning at the primitive) was REFUSED — a landed primitive's contract is not this
+  > member's to move — and shape 3 (narrowing A8) was REFUSED — it would ship the census over held
+  > facts that are not final, the defect §0.3 exists to prevent. Every figure in this block is
+  > EXECUTED; the lane's ledger is `SHAPE-4.MEASUREMENTS.md`.
   > **What version 2 changed, and why.** Nothing in the contract. Version 2 is the pre-proof's
   > re-measurement of every figure against `c69d16a5d`, twenty-three packets and two trains after
   > the compile's base. Eleven figures moved and are re-stated from their own executed commands
@@ -152,6 +172,19 @@ say one thing. A5 is written to the ruled reading; §11 item 1 records what a re
 > record and no consult placed at a mutator reads a mutated value as a held fact (A8 is the arm;
 > the 63/63 alias measured today is the red-first)."* ⇒ **§6's two-channel clone and A8 stand as
 > written.** The measurement below is what the ruling rests on, re-executed at `c69d16a5d`.
+>
+> ⛔⭐ **AND WHAT THE BUILD MEASURED, WHICH COMPLETES IT (judgment 200, 2026-09-22).** Two clones AT
+> ENTRY are necessary and NOT sufficient, because they separate the channels only until each held
+> key's PRODUCER STEP runs: `chooseOrPin` hands the pin back BY REFERENCE and the step writes that
+> reference into its patch, so `Object.assign(ctx, patch)` re-points `ctx[key]` at the very object
+> `_PINS_KEY` holds, and the next in-place mutator writes through the held bag. MEASURED on the
+> built member with the entry clones alone: `ctx.__pins[k] === ctx[k]` at the last step in **63 of
+> 63** rows on every channel, and the bag itself corrupted in **42 of 63** (population), **56 of
+> 63** (institutions) and **11 of 63** (power). **What restores it is a THIRD act of the runner's,
+> at the PATCH MERGE:** a patch value that IS one of the bag's own objects by identity is stored
+> into `ctx` as a clone. With it, all three channels read **0 of 63** aliased at EVERY step and
+> **0 of 63** corrupted, `chooseOrPin` is byte-identical, and the caller's record still moves
+> **0 of 63**. The ruling of 170b is not reversed; it is completed.
 
 `runPipeline` builds the context as `{ ...initialContext, ...pins, [_PINS_KEY]: pins }`
 (`src/generators/pipeline.js :: runPipeline`, the context-accumulation expression): the bag's
@@ -266,15 +299,16 @@ later members gate. No held key changes hands; no golden moves.
 | handwritten files | 12 | **6** | §7 |
 | new LOGIC leaves | 2 | **0** | the CREATE is a test |
 | existing LOGIC files modified | 3 | **3** (`pipeline.js`, `assembleInstitutions.js`, `generatePower.js`) | at the cap, not over |
-| new/changed effective production lines | 400 | **+8 / −0 net** (see below) | eslint `Linter`, `max-lines`, `skipBlankLines` + `skipComments` (§P9) |
+| new/changed effective production lines | 400 | **+12 / −0 net** (see below) | eslint `Linter`, `max-lines`, `skipBlankLines` + `skipComments` (§P9) |
 | each new leaf | 250 eff | **n/a** — no new `src/` leaf | — |
 | acceptance cases | 8 | **8** | §9 |
 
 Effective lines MEASURED at `c69d16a5d` with the one instrument, and UNMOVED from the compile's
 figures: `pipeline.js` **138**, `assembleInstitutions.js` **585**, `generatePower.js` **105** (the
 control text reads 2, so the instrument is live; the 800-line layer ceiling governs
-the last two). Predicted after: `pipeline.js` **146** (+8: two clone statements, the refusal guard
-and its message), `assembleInstitutions.js` **585** (+0 — three wrappers unwrapped IN PLACE),
+the last two). Predicted after, RE-PRICED AT VERSION 3 and measured on the built member: `pipeline.js` **150**
+(+12: the entry-clone guard and its two statements, the named refusal, and judgment 200's merge
+clone), `assembleInstitutions.js` **585** (+0 — three wrappers unwrapped IN PLACE),
 `generatePower.js` **105** (+0 — two wrappers unwrapped IN PLACE). ⛔ **THE +0 FIGURES ARE A
 CONTRACT, NOT AN ESTIMATE**: §7 forbids changing the LINE COUNT of either step file, because two
 line-addressed registers sit in them (§5.5).
@@ -446,6 +480,16 @@ register is UNMOVED. The commands are quoted in the pre-proof report.**
   plain `node`; §12 makes the build lane run it and quote `[]`.)
 - The goldens (`generatorGoldenMaster.test.js`, `dossierProseManifest.test.js`) — **UNMOVED BY
   CONSTRUCTION**: with `options.pins` absent, `pins === null` and not one new statement executes.
+  MEASURED at the build by counting every `structuredClone` a run executes: **no pins = the
+  pipeline graph's own 1** (the runner contributes none), **empty bag = 3** (the two entry clones,
+  and ZERO merge clones), **a full four-key bag = 7**. The no-pins and empty-bag settlements are
+  byte-identical, and a 15-row stride over the COMMITTED `generator-golden-master.json` moved none.
+- ⛔ **A7's NEGATIVE CONTROL IS RE-CUT FOR THE MERGE CLONE (judgment 200).** A control that undoes
+  the aliasing only at the FIRST step boundary is defeated by the merge clone and reports a FALSE
+  `0 of 63`. The control this member ships re-points `ctx[k]` AND `ctx.__pins[k]` at the caller's
+  own objects at **every** step boundary, which is byte-for-byte the aliasing the pre-member runner
+  carried for the whole run; measured, it lands on §0.1's published figures exactly — **42 of 63,
+  `npcs` 42 and `factions` 42**. A control that comes back green is a false proof, not a pass.
 
 ### §5.7 · The instrument list (§P2.21), every disposition a row
 
@@ -459,7 +503,7 @@ register is UNMOVED. The commands are quoted in the pre-proof report.**
 | `stamp.producerIndexFiles` (`docs/content/wiring-census.json`) | **1,182** (1,181 at the compile; EM-R0d's `src/data/bandLadders.js` joined the producer index) | **+0** | this member CREATEs no `.js` under `src/domain` or `src/generators`; `stamp.files` (7 entries, all `src/domain/display/stateProse/**`) names none of its paths and is UNMOVED |
 | `EAGER_FIRST_PAINT_MODULES` | **270** modules, imported from the tree's own `vite.config.js` (no `dist` read, cannot skip) | **+0 modules, +0 B** | none of the three paths is a member |
 | ⛔ `tests/lint/moduleScopeCwdRatchet.test.js` — **NEW AT THE PRE-PROOF, NOT PRICED BY THE COMPILE** | `POPULATION_CEILING = { 'tests/build': 30, 'tests/lint': 17 }`, **EXACT IN BOTH DIRECTIONS** (A4 reds an overrun, its sibling arm reds an underrun). The predicate is a module-scope `process.cwd()` call in comment-stripped source | **+0, BY CONSTRUCTION AND ONLY BY CONSTRUCTION** | ⛔ OWED AS A CONSTRAINT, not a row: this member's CREATE **reads source**, so it needs a root, and a root spelled `process.cwd()` at module scope takes `tests/lint` **17 → 18** and reds A4 BY NAME. §7's CREATE row therefore spells the cured root — `const ROOT = join(dirname(fileURLToPath(import.meta.url)), '../..')` — which is the shape the ratchet's own CURE names. With the cured root the population is UNMOVED and no manifest row is owed |
-| `WORKER_BUNDLE_CEILING_BYTES` | **1,395,972 at this tip** (the compile read 1,396,015; judgment 187's sentinel buy-back lowered it, and train EM-T14's own terminal lowers it again) | **a predicted SHRINK** | ⛔ see §5.8. **This packet names no ceiling literal**: the constant is whatever this member's train base carries |
+| `WORKER_BUNDLE_CEILING_BYTES` | **1,395,972 at this tip** (the compile read 1,396,015; judgment 187's sentinel buy-back lowered it, and train EM-T14's own terminal lowers it again) | **small, SIGN UNSTATED** (version 3) | ⛔ see §5.8. **This packet names no ceiling literal**: the constant is whatever this member's train base carries |
 | `e2e/` browser suite (§P2.15) | this member touches no component, route, `data-testid` or accessible name | **none** | NOT OWED, and it names no spec |
 
 ### §5.8 · The byte price, and the MEMBERSHIP PROOF that cannot skip
@@ -473,9 +517,14 @@ triangulates), with `pipeline.js`, `assembleInstitutions.js` and `generatePower.
 (`src/components/nav/ArrowControl.jsx`) correctly absent. **The membership verdict — the only fact
 the packet rests on — did not move; only the closure's size did.**
 
-**Predicted delta: a SHRINK.** Five `structuredClone(…)` wrappers leave two worker-closure files and
-two are added to a third, with one short refusal message. The minified movement is a net
-**−20 to −80 B**, and the ceiling's arm is `toBeLessThanOrEqual`, so a shrink cannot red it.
+**Predicted delta: SMALL AND UNSIGNED (re-stated at version 3).** Five `structuredClone(…)` wrappers
+leave two worker-closure files; the runner gains two entry clones, one short refusal message and the
+merge-clone guard (a four-line `if`/`for` over `Object.keys(patch)`). Version 2 predicted a signed
+**−20 to −80 B** shrink on the strength of the five wrappers alone; judgment 200's third act adds
+minified bytes back to `pipeline.js`, so **this packet now predicts only that the movement is small
+and does not name its SIGN** — the terminal's one real build measures it, and the ceiling's arm is
+`toBeLessThanOrEqual`. ⛔ If that build measures a RISE, §11 item 5 governs and the buy-back is the
+owner's, not this lane's.
 ⛔ **THIS MEMBER MUST NOT RISE THE CEILING** (§P11.2) and **compiles as if it is NOT the train's
 byte-arm holder** (§P2.11): it carries **NO row** on `tests/build/generationWorkerLazy.test.js` or
 `tests/build/vendorPdfLazy.test.js`, states its delta under the holder's bound, and names the holder
@@ -503,7 +552,20 @@ added, before the step loop and after the existing `options.pins` type validatio
   - `ctx[_PINS_KEY]` receives the other, so the bag every consult reads stays pristine no matter
     what a later pass writes through `ctx` (§0.3).
   `structuredClone({})` is `{}`, so the empty bag stays byte-identical and `pinned` is still false.
-- **The clone is taken ONCE, before the first step**, never per step and never per consult.
+- **The ENTRY clone is taken ONCE, before the first step**, never per step and never per consult.
+- ⭐⭐ **AND THE RUNNER RE-CLONES A TAKEN PIN AT THE PATCH MERGE (judgment 200).** Two entry clones
+  separate the channels only until a held key's PRODUCER runs: `chooseOrPin` returns the pin BY
+  REFERENCE, the step puts that reference in its patch, and `Object.assign(ctx, patch)` re-points
+  `ctx[key]` at the object `_PINS_KEY` holds — after which the key's in-place mutators write through
+  the held bag (MEASURED without this act: aliased at the last step in 63 of 63 rows on all three
+  channels; the bag corrupted in 42 / 56 / 11 of 63). So, immediately after the merge and ONLY when
+  a bag is present, every patch key that is an OWN key of the bag whose merged value IS the bag's
+  own object by IDENTITY is replaced in `ctx` by its own `structuredClone`. ⛔ **IDENTITY, NEVER
+  VALUE**: a step that produced an equal-looking value of its own is left alone, so the act cannot
+  reach a key the bag did not hand over. ⛔ **`chooseOrPin` IS BYTE-IDENTICAL** — the PRIMITIVE still
+  clones nothing, and EM-B2a2's landed by-reference row stays true at its own home. Cost, counted:
+  **one clone per held key per run** (a full four-key bag executes four), **zero** with an empty bag,
+  and **zero** in the unpinned path, where the whole block is guarded off by `pins !== null`.
 - **The partial-pin refusal is EXACTLY as EM-P0 landed it** — same condition, same message, same
   `onStrictViolation` branch — and it is evaluated against the CLONE, which carries the same own
   keys (measured below).
@@ -591,7 +653,7 @@ runs NO generation and reads no `dist`, so it cannot skip and it costs the gate 
 
 | Action | File | Symbol/region | Maximum delta | Coding instruction |
 |---|---|---|---:|---|
-| `MODIFY` | `src/generators/pipeline.js` | `runPipeline`, inside the body, after the `options.pins` type guard and BEFORE `const stepOrder = getStepOrder();` | **+8 eff** | Take the two `structuredClone` calls, one per channel, and the named refusal. ⛔ Insert BELOW `export function runPipeline`'s own declaration line and far below `const _PINS_KEY = '__pins';` — EM-B2a2's landed `_note`s cite both addresses (§5.5). ⛔ `chooseOrPin` is untouched: the PRIMITIVE still clones nothing. ⛔ No em dash and no exclamation point in the new string literal — the voice baseline is `em 2 · bang 0` and never rises. ⛔ No numeral: the tuning inventory reads 0 / 0 here and must still. |
+| `MODIFY` | `src/generators/pipeline.js` | `runPipeline`: the two entry clones after the `options.pins` type guard and BEFORE `const stepOrder = getStepOrder();`, the context-spread expression, and ⭐ the MERGE CLONE immediately after `Object.assign(ctx, patch)` inside the step loop | **+12 eff** (re-priced at version 3 from `+8`; measured 138 → 150 with eslint's `Linter`) | Take the two entry `structuredClone` calls, one per channel, the named refusal, and ⭐ **judgment 200's third act: after the patch merges, and only when `pins !== null`, replace `ctx[key]` with `structuredClone(ctx[key])` for every patch key that is an OWN key of the bag whose merged value IS the bag's own object BY IDENTITY.** ⛔ `chooseOrPin` stays byte-identical: the clone is the RUNNER's at both sites and never the primitive's. ⛔ Insert BELOW `export function runPipeline`'s own declaration line and far below `const _PINS_KEY = '__pins';` — EM-B2a2's landed `_note`s cite both addresses (§5.5). ⛔ `chooseOrPin` is untouched: the PRIMITIVE still clones nothing. ⛔ No em dash and no exclamation point in the new string literal — the voice baseline is `em 2 · bang 0` and never rises. ⛔ No numeral: the tuning inventory reads 0 / 0 here and must still. |
 | `MODIFY` | `src/generators/steps/assembleInstitutions.js` | `assembleInstitutions`, the held-roster early return and the docblock immediately above it | **+0 eff, +0 LINES** | Unwrap the three `structuredClone(held.X)` to `held.X`. Re-word the comment LINE FOR LINE. ⛔ **THE FILE MUST STILL BE 783 LINES**: `tests/generators/generationForkCensus.test.js`'s `DISPLAY_NAME_KEYED_SITES` reads `assembleInstitutions.js:774` LIVE and reds with `<site> no longer carries inst.name`, and SIX prose-numerics rows sit at `:62` and `:69` (both above the edit). ⛔ `provides:` and `registerStep('assembleInstitutions'` byte-identical; `const UNPINNED = Symbol();` byte-identical (judgment 187's buy-back, not this member's). |
 | `MODIFY` | `src/generators/steps/generatePower.js` | `generatePower`, the two held consults and their comment | **+0 eff, +0 LINES** | Unwrap `structuredClone(heldIntent)` and `structuredClone(heldStructure)`. Re-word the comment LINE FOR LINE. ⛔ `provides:` and `registerStep('generatePower'` byte-identical; `const UNPINNED = Symbol();` byte-identical. ⛔ The trace loop below the consults is untouched — its 62/63 reproduction is EM-R3's seam, recorded by EM-B2a3 and not this member's. |
 | `CREATE` | `tests/lint/heldKeyWriterCensus.walker.test.js` | the frozen roster + A1–A6 | 250 eff | ⭐ **ADDS SIX `it`s UNDER ONE `describe`** — the same six §9 homes here and the same six the deferred lighting row prices. Flat literal `it(...)` under ONE literal `describe`; `it`/`test`/`describe` each bound EXACTLY ONCE; no `.each`, no loop, no conditional registration, no nested describe; every asserted set IMPORTED from its producer; every negative anchored. ⛔ **THE ROOT IS `const ROOT = join(dirname(fileURLToPath(import.meta.url)), '../..');` AND NEVER `process.cwd()`** — `tests/lint/moduleScopeCwdRatchet.test.js` banks `tests/lint` at 17 EXACT IN BOTH DIRECTIONS and the working-directory spelling reds A4 by name (§5.7). Copy the arm shape of `tests/lint/recordRegisterTotality.walker.test.js`. Carry a `CANNOT-CATCH:` header block. |
@@ -625,7 +687,10 @@ runs NO generation and reads no `dist`, so it cannot skip and it costs the gate 
 2. **RED FIRST, at the runner.** Write A7 and A8 into `tests/generators/pipelinePinnedMode.test.js`
    and run them against the UNCHANGED tree: A7 must be RED at 42/63 and A8 RED on the alias. Quote
    the COUNT LINE — a log with no test count did not run (§P7).
-3. Edit `src/generators/pipeline.js` per §7. Re-run step 2's arms: both green.
+3. Edit `src/generators/pipeline.js` per §7 — the two entry clones, the named refusal AND judgment
+   200's merge clone. Re-run step 2's arms: both green. ⛔ Then re-measure A8 at EVERY step
+   boundary, not only the last: the entry clones alone pass a last-step-only probe on the steps
+   above each producer and fail 63 of 63 at the producer, which is what version 2 shipped.
 4. Unwrap `assembleInstitutions.js`, then `generatePower.js`. Prove each file's LINE COUNT unchanged
    (`wc -l` before and after is the right instrument for a LINE count) and its effective count
    unchanged with the `Linter`.
@@ -709,7 +774,12 @@ In addition to `PACKET_STANDARD.md`'s list and §P8's, this member STOPS when:
 8. A spec, a walker or a ratchet would be weakened, widened or skipped to make this member pass —
    including the census's own IMPORTED denominator: a key outside `RECORD_CLASSES` (`powerIntent`
    is the live instance) is EM-R1b's subject and is never reached by re-typing the held set here.
-9. ⛔ **`tests/lint/moduleScopeCwdRatchet.test.js` reds** — the CREATE spelled its root from the
+9. ⛔ **THE MERGE CLONE REACHES A KEY THE BAG DID NOT HAND OVER.** The act is gated on IDENTITY
+   (`ctx[key] === pins[key]` with `hasOwnProperty`), never on value: a step that produced an
+   equal-looking value of its own must be left alone, and any run in which a non-pinned key is
+   re-cloned is a STOP. The counted budget is ONE clone per held key per run, ZERO with an empty
+   bag and ZERO unpinned; a count that exceeds it is the same STOP.
+10. ⛔ **`tests/lint/moduleScopeCwdRatchet.test.js` reds** — the CREATE spelled its root from the
    working directory and took `tests/lint` from 17 to 18 (§5.7). The cure is the root's spelling,
    never a raised ceiling: "raising a number here is not a repair" is that file's own law.
 
@@ -720,6 +790,9 @@ In addition to `PACKET_STANDARD.md`'s list and §P8's, this member STOPS when:
 - Exact changed files and effective-line counts (eslint `Linter`, `skipBlankLines` + `skipComments`), before and after, for all three `src/` files:
 - ⛔ `wc -l` on both step files, before and after (must be IDENTICAL), and `tests/generators/generationForkCensus.test.js`'s `DISPLAY_NAME_KEYED_SITES` arm re-run green:
 - Acceptance cases A1–A8, executed, with A7's negative control (42/63) and A6's counterforce quoted:
+- ⭐ JUDGMENT 200's THREE MEASUREMENTS, each per channel over the whole 63-row census corpus: (i) A8 at EVERY step boundary, rows aliased at ANY step (expected 0 / 63 on all three); (ii) the `__pins` bag's own mutation during the run (expected 0 / 63 on all three); (iii) the merge clone's counted budget — `structuredClone` calls inside one run with NO pins, with an EMPTY bag and with a full bag (expected: the runner contributes 0, 2 and 2 + one per held key):
+- ⭐ A7's RE-CUT NEGATIVE CONTROL: the bypass re-aliases at EVERY step boundary and is quoted with its figure (expected 42 / 63, `npcs` 42 · `factions` 42); a control that comes back 0 is a FALSE proof and is reported as one:
+- ⭐ EVERY LANDED PINNED-MODE ARM re-run, and the grep that found every identity comparison against a pin object in the estate (expected exactly two: EM-B2a2's A1 at the PRIMITIVE, untouched, and `pipelinePinnedChoosers.test.js`'s `handedBackByReference`, asserted at 0):
 - ⭐ The §P6 mutants: each planted in `src/generators/pipeline.js`, each reddening its OWN acceptance title, each restored to the exact pre-mutant SHA-256:
 - The red-first log's COUNT LINE for A7 and A8 against the unchanged tree (a log with no count DID NOT RUN):
 - The golden stride: rows checked, rows moved (must be zero), and the committed fixture's identity:
