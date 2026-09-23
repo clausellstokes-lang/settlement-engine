@@ -11,7 +11,8 @@
   measures at this version's read tip. Every citation in this packet is `path :: symbol` (§P2.22); no line address is
   carried anywhere but in the two places the TREE ITSELF addresses by line, and both are quoted
   as the register's own data rather than as this packet's citation.
-- **Packet version:** 2
+- **Packet version:** 3
+  - ⭐ Version 3 is the CAPSULE repair only (2026-09-23, the chair, judgment 227; the build lane's STOP at `02e66ed63` after its seal): the capsule's `requiredSymbols[4]` — the one `assembleSettlement.js` line this member rewrites in place (`settlementName` → `settlement.name`) — now carries `retiredBy` citing ODQ §934.47 addendum 132 (§731.3's idiom, 948 landed rows), so `validate` (sealed check 8) discharges its absence after the edit; the deferred `_retiredSymbolsAtLanding` idiom (unprecedented in the estate) is retired as inert. ⛔ No contract, budget, acceptance case, change row or non-goal moved; the built bytes are re-applied byte-identical under the new seal.
   - Version 1 was the first cut, compiled against train EM-T12's landed tip `91cc9ef5a` by an
     Opus COMPILE seat (session cce01f87, 2026-09-22). It refutes NO clause of the charter's row.
     It narrows the charter's older wording by MEASUREMENT in one place — the "world facts" half

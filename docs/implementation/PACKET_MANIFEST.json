@@ -41066,6 +41066,7 @@
         {
           "path": "src/generators/steps/assembleSettlement.js",
           "symbol": "e.summary = renderStressSummary(e.type, settlementName, e.summaryRoll);",
+          "retiredBy": "§934.47 addendum 132 (EM-R4 §7 hunk 2: the one line rewritten in place to settlement.name — retired by the member itself; §731.3's idiom; version 3, judgment 227)",
           "_note": "⛔ THE ONE LINE THIS MEMBER REWRITES IN PLACE (to `settlement.name`), so the F8 re-render speaks the HELD name rather than the minted one. It is therefore ALSO a `retiredSymbols` row at the LANDED flip — declared in `_retiredSymbolsAtLanding` below rather than silently dropped. Measured: this text is quoted by NO packet in docs/implementation/PACKET_MANIFEST.json and by NO waiting packet in the chair's packets-waiting/. count 1."
         },
         {
