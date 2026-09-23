@@ -448,4 +448,37 @@ describe('EM-D2b: the door passes the coverage and the field names what the doss
         'phantom.name both',
       ]);
   });
+
+  it('N10: the field\'s header names the door that mounts it and the two keys it resolves, and no longer claims to have no mount at all', () => {
+    const fieldSource = readFileSync(join(ROOT, 'src/components/edit/FreeField.jsx'), 'utf8');
+    // The header is everything above the first import, which is where a leaf's claims live.
+    const header = fieldSource.slice(0, fieldSource.indexOf('\nimport '));
+    expect(header.length > 0).toBe(true);
+
+    // THE CLAIM IS CHECKABLE BECAUSE THE MOUNT IS REAL: the door really does import this
+    // leaf, measured the way the build measures, so the header is not describing a wish.
+    expect(staticSpecifiersIn(DOOR_SOURCE).filter((spec) => spec.endsWith('FreeField.jsx')))
+      .toEqual(['./FreeField.jsx']);
+    expect(DOOR_SOURCE.includes('<FreeField')).toBe(true);
+
+    // WHAT IT NO LONGER SAYS (U85). The probe is driven over a text that DOES carry the
+    // retired sentence in the same breath, so the false below is a measurement of this
+    // file and not of a search that stopped working.
+    const STALE = 'NOTHING MOUNTS THIS YET';
+    expect([`x ${STALE} y`.includes(STALE), header.includes(STALE)]).toEqual([true, false]);
+
+    // ...AND WHAT IT SAYS INSTEAD: the door by name, the injected reporter by prop name,
+    // and the two copy keys it resolves -- which are exactly the two `t()` calls the leaf
+    // really makes, so the header cannot claim a key the file does not use.
+    const claims = ['CardEditorDialog.jsx', 'coverage', 'edit.field.limit', 'edit.field.uncovered'];
+    expect(claims.map((claim) => header.includes(claim))).toEqual(claims.map(() => true));
+    // The `t(` must be a CALL and not the tail of `import(` or `.split(`, so the character
+    // before it is required to be a non-word one -- and the scanner is driven over a line
+    // carrying both spellings, so the pair below is a reading and not a lucky regex.
+    const keysIn = (src) => [...new Set([...src.matchAll(/(?:^|[^\w.$])t\('([^']+)'/g)]
+      .map((m) => m[1]))].sort();
+    expect(keysIn("import('./x.js'); s.split('{chars}'); const a = t('one.key');"))
+      .toEqual(['one.key']);
+    expect(keysIn(fieldSource)).toEqual(['edit.field.limit', 'edit.field.uncovered']);
+  });
 });

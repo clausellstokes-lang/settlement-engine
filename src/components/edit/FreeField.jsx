@@ -6,8 +6,24 @@
  * imports nothing from the edit volume at runtime: the only edge to `src/domain/edit/`
  * is the JSDoc typedef below, which is EM-A1's own idiom.
  *
- * NOTHING MOUNTS THIS YET. EM-D0e is the first caller, so with this leaf landed the
- * product renders not one pixel differently.
+ * ⭐ WHAT MOUNTS IT, AND WHAT IT READS (EM-D2c; the sentence here said "NOTHING MOUNTS
+ * THIS YET" from EM-D0d until now, and it has been false since EM-D0e). The ONE caller is
+ * `CardEditorDialog.jsx`: the door generates a control for every row EM-A1's table
+ * declares and draws THIS one wherever the declared kind is `free` or `free-cascade`, and
+ * the door is itself reached only through the one lazy edge EM-D1's edit shell holds. So
+ * the product does render differently now -- behind the shell's gate, on a card the table
+ * declares, for a DM who opened the pencil.
+ *
+ * Everything this leaf shows that it did not derive from its own props comes from that
+ * door or from the copy registry, and from nowhere else:
+ *   • `declaration` and `value` -- EM-A1's frozen row and the DM's in-flight text, both
+ *     the door's; this leaf resolves neither and stores neither.
+ *   • `coverage` -- the font-coverage reporter the door binds PER ROW (EM-D2b wired it;
+ *     EM-D2c binds the face the field is really drawn in). Injected, never imported: see
+ *     the chunk law below.
+ *   • `edit.field.limit` and `edit.field.uncovered` -- the only two copy keys this leaf
+ *     resolves, both through `t()`. Its caption is the declaration's own label, so the
+ *     leaf mints no string at all and renders nothing en.js did not write.
  *
  * THE ELEMENT BRANCHES ON THE DECLARED KIND, NEVER ON A NUMBER. An annotation
  * (`free`) is a short paragraph and takes a textarea; a join key (`free-cascade`) is
