@@ -59,6 +59,7 @@ import {
   markDecreeApplied,
   PLAIN_EDIT_REFUSALS,
   readRootKey,
+  recordDecreeOverride,
   REDERIVE_SEAM,
   reopenDecree,
   reorderDecree,
@@ -267,11 +268,22 @@ describe('EM-C4a — the store plain-edit half', () => {
     // the module writes into an op must read off the ONE coords record. Without this the
     // pin is a tautology, because one call produced both halves.
     const source = readFileSync(join(REPO_ROOT, SLICE_PATH), 'utf8');
-    const coordinateSources = (text) => [...text.matchAll(/^\s*(cardType|field):\s*([^,\n]+),/gm)]
+    // ⭐ EM-C4c ADDS ONE ROW THAT IS NOT AN OP COORDINATE, and it is EXCLUDED BY NAME rather
+    // than by shape so a fourth row cannot hide behind it: `cardType: card` is the REQUEST key
+    // of EM-E8's binder, read off `ADD_OP_TYPES`' own inverse and never off a request, and the
+    // claim this scan makes — every coordinate the module writes INTO AN OP reads off the one
+    // `coords` record — is unchanged by it.
+    const NOT_AN_OP_COORDINATE = Object.freeze(['cardType: card']);
+    const rawSources = (text) => [...text.matchAll(/^\s*(cardType|field):\s*([^,\n]+),/gm)]
       .map((match) => `${match[1]}: ${match[2]}`);
+    const coordinateSources = (text) => rawSources(text)
+      .filter((row) => !NOT_AN_OP_COORDINATE.includes(row));
     const mutant = source.replace('cardType: coords.cardType,', 'cardType: request.cardType,');
     const offenders = (text) => coordinateSources(text)
       .filter((row) => !row.endsWith(`coords.${row.split(':')[0]}`));
+    // anchored: the excluded row is asserted PRESENT in the raw scan first, so the exclusion
+    // above cannot rot into a filter that silences a row nothing writes any more.
+    expect(rawSources(source).filter((row) => row === NOT_AN_OP_COORDINATE[0]).length).toBe(1);
     expect(coordinateSources(source).length).toBe(2);
     expect(offenders(source)).toEqual([]);
     expect(offenders(mutant)).toEqual(['cardType: request.cardType']);
@@ -471,6 +483,10 @@ const applyRequest = (id) => ({
   saveId: SAVE_ID, entryId: id, meta: { appliedAt: '2026-01-02T00:00:00.000Z', tickRef: 'tick-7' },
 });
 const revertRequest = (restored) => ({ saveId: SAVE_ID, restored });
+/** ⭐ EM-C4c's seventh row. The guard id is stored VERBATIM by the verb, so this arm needs
+ *  no engine here: the suites that judge what an override MEANS drive the real engine. */
+const GUARD_ID = 'contention:dec-1:dec-0:-';
+const overrideRequest = (id) => ({ saveId: SAVE_ID, entryId: id, guardId: GUARD_ID });
 
 /** A draft store carrying ONE staged entry, so every arm below starts from the same rows. */
 function seededStore() {
@@ -479,7 +495,8 @@ function seededStore() {
   return store;
 }
 
-/** EM-C1's SIX amendment verbs, DERIVED from the module rather than listed: an exported
+/** EM-C1's SEVEN amendment verbs (EM-C4c's `recordOverride` is the seventh), DERIVED from
+ *  the module rather than listed: an exported
  *  function that takes a registry AND at least one further argument and answers with a NEW
  *  FROZEN registry. `compareDecrees` answers a number, `resolveDecree` a verdict, and the
  *  reading `orderedDecrees` takes the registry alone — so none of the three is a verb. */
@@ -522,7 +539,7 @@ const fixtureRuleSet = () => ({
 });
 
 describe('EM-C4b — the store registry half', () => {
-  it('A1 — MAIN: each of the six actions dispatches its OWN pure verb onto the record through one write site, the stored registry IS the returned array, and DECREE_ACTIONS is SET-EQUAL in both directions to the registry module\'s own six verbs', () => {
+  it('A1 — MAIN: each of the seven actions dispatches its OWN pure verb onto the record through one write site, the stored registry IS the returned array, and DECREE_ACTIONS is SET-EQUAL in both directions to the registry module\'s own seven verbs', () => {
     const first = makeStore();
     const staged = stageDecree(first.getState, first.setState, stageRequest('dec-1'));
     expect(staged).toEqual({ ok: true, saveId: SAVE_ID, decrees: staged.decrees });
@@ -560,6 +577,11 @@ describe('EM-C4b — the store registry half', () => {
         pure: (rows) => registry.markApplied(rows, 'dec-1', applyRequest('dec-1').meta),
       },
       {
+        verb: 'recordOverride',
+        act: (store) => recordDecreeOverride(store.getState, store.setState, overrideRequest('dec-1')),
+        pure: (rows) => registry.recordOverride(rows, 'dec-1', GUARD_ID),
+      },
+      {
         verb: 'revertTick',
         act: (store) => revertDecreesOfTick(store.getState, store.setState, revertRequest([])),
         pure: (rows) => registry.revertTick([], rows),
@@ -580,7 +602,7 @@ describe('EM-C4b — the store registry half', () => {
 
     // THE DECLARATION ↔ PRODUCER PIN, both directions, both sides DERIVED: a verb added to
     // the registry and not to DECREE_ACTIONS (or the reverse) cannot ship.
-    expect(liveVerbs().length).toBe(6);
+    expect(liveVerbs().length).toBe(7);
     expect(actions.map(({ verb }) => verb).sort(compareCodepoint)).toEqual(liveVerbs());
     expect(declaredVerbs()).toEqual(liveVerbs());
     // anchored: the same two rosters are non-empty above, so neither absence below is the
