@@ -2,7 +2,7 @@
  * @vitest-environment jsdom
  *
  * libraryShelfCounts.test.jsx — U23: THE SHELF'S COUNT AND BULK-SELECT SEE ONLY WHAT THE
- * SHELF SHOWS.
+ * SHELF SHOWS. U79: AND NO BY-ID READER REACHES PAST IT.
  *
  * THE CLAIM. `SettlementsPanel` used to hand the RAW `saves` array to two readers that
  * answer about the library: the toolbar's `totalCount`, and `useLibraryBulkSelect`'s
@@ -33,6 +33,15 @@
  * so arm C2 takes a five-real library to reach the second. The `minimal` threshold itself
  * still reads the RAW length and is deliberately left alone — it is an OWNER-VETOABLE
  * threshold documented at the render site, not one of this unit's two counts.
+ *
+ * ⛔ U79 — THE SAME SHELF, ASKED BY ID. The count arms above prove the shelf's LIST is
+ * clean. Three readers resolved a save BY ID off the raw array instead, so the hiding had
+ * a door in it: the world map's FOCUS effect (`selectedSettlementId`), the route→detail
+ * effect (`/settlements/:id`) and `PlacementDetailCard`'s own lookup. `isSaveActive` is
+ * NOT the test here and is deliberately left alone — it reads `accessState`, and EM-F1b
+ * composed the quota, reactivation and retention counters on that reading; folding the
+ * phantom discriminant into it would move all three. The three readers take the SHELF'S
+ * ROWS, which is the one place the phantom test already lives.
  *
  * @enforced-by this test
  */
@@ -130,6 +139,12 @@ function baseStore(user = { id: 'owner-A' }) {
     setAdvanceAutoResolve: vi.fn(),
     advanceInFlight: [],
     campaignMutationLocks: [],
+    // The world-map keys `PlacementDetailCard` reads. Additive: `SettlementsPanel`
+    // reads none of them, so the arms above are untouched by their presence.
+    selectedBurgId: null,
+    clearSelectedBurgId: vi.fn(),
+    removePlacementLocal: vi.fn(),
+    mapState: { placements: {} },
   };
   state.setSavedSettlements = vi.fn((rows) => {
     state.savedSettlements = rows;
@@ -152,8 +167,19 @@ vi.mock('../../src/store/index.js', () => {
   return { useStore };
 });
 
+// `PlacementDetailCard` imports the store by its DIRECTORY specifier; both spellings
+// resolve to the same module, and both are registered so neither arm can read a real store.
+vi.mock('../../src/store', () => {
+  function useStore(selector) { return selector(storeState); }
+  useStore.subscribe = () => () => {};
+  useStore.getState = () => storeState;
+  return { useStore };
+});
+
 const { saves } = await import('../../src/lib/saves.js');
 const SettlementsPanel = (await import('../../src/components/SettlementsPanel.jsx')).default;
+const PlacementDetailCard = (
+  await import('../../src/components/map/PlacementDetailCard.jsx')).default;
 const { isPhantomSave, mintPhantom } = await import('../../src/domain/edit/phantoms.js');
 const { mintDmId } = await import('../../src/domain/edit/dmLayer.js');
 const { rollFrom } = await import('../../src/domain/edit/pools.js');
@@ -318,5 +344,102 @@ describe('U23 — the shelf\'s count sees only what the shelf shows', () => {
       'and the bulk corpus is the whole library, exactly as it was — this unit removed rows'
       + ' the shelf hides and nothing else')
       .toEqual(towns.map((row) => row.id).sort());
+  });
+});
+
+describe('U79 — a phantom is unreachable BY ID, from the map, a route or the placement card', () => {
+  /** Three real towns and one minted phantom: the library every arm below asks by id. */
+  const u79Library = () => {
+    const towns = [townRow('Ashford', 30), townRow('Bellweather', 20), townRow('Caldwyn', 10)];
+    const phantom = phantomRow('seed-ashford', 'Greymoor', 0);
+    return { towns, phantom, rows: [...towns, phantom] };
+  };
+
+  /**
+   * Render the panel over one library, with a focus request or a route already standing.
+   *
+   * ⚠ THE SETTLE POINT IS THE ARM'S, NOT THIS HELPER'S, and deliberately so: an opened
+   * detail REPLACES the shelf (the panel early-returns `SettlementDetail`), so "three
+   * cards" and "a detail" are mutually exclusive end states. Waiting on the wrong one
+   * races the effect flush — measured, not guessed: waiting on the cards and then reading
+   * the detail synchronously passed only when a previous arm had warmed the module.
+   */
+  function renderPanel(rows, { focusId = null, routeId = undefined } = {}) {
+    storeState = baseStore();
+    storeState.selectedSettlementId = focusId;
+    saves.list.mockResolvedValueOnce(rows);
+    render(<SettlementsPanel onNavigate={() => {}} routeId={routeId} />);
+  }
+
+  /** The end state when a by-id reader OPENS something. */
+  const detailOpens = () => waitFor(() =>
+    expect(screen.getByTestId('settlement-detail')).toBeTruthy());
+
+  /** The end state when it does not: the shelf, still standing, with its three cards. */
+  const shelfStands = () => waitFor(() =>
+    expect(screen.getAllByTestId('settlement-card')).toHaveLength(3));
+
+  test('D1: the world-map FOCUS effect opens a real save and REFUSES a phantom', async () => {
+    const { towns, phantom, rows } = u79Library();
+
+    // THE ANCHOR, POSITIVE FIRST: the effect really does open a detail from a focus
+    // request, so the refusal below is the phantom's doing and not a dead effect.
+    renderPanel(rows, { focusId: towns[0].id });
+    await detailOpens();
+    cleanup();
+
+    // THE MEMBER. `saves.find` over the raw array resolved the phantom, and
+    // `isSaveActive` reads `accessState` — a minted phantom is ACTIVE, so it passed.
+    expect(rows.filter(isPhantomSave),
+      'the ANCHOR for the refusal below: the row focused IS a phantom, by EM-F1s own predicate')
+      .toHaveLength(1);
+    renderPanel(rows, { focusId: phantom.id });
+    await shelfStands();
+    expect(screen.queryByTestId('settlement-detail'),
+      'a focus request naming a PHANTOM opens nothing — the shelf cannot offer that row,'
+      + ' so no id may reach past it. The shelf is still standing above, which is the same'
+      + ' commit the effect flushed in')
+      .toBeNull();
+  });
+
+  test('D2: the route to detail opens a real save and REFUSES a phantom', async () => {
+    const { towns, phantom, rows } = u79Library();
+
+    // THE ANCHOR, POSITIVE FIRST: /settlements/:id really does open a detail.
+    renderPanel(rows, { routeId: towns[1].id });
+    await detailOpens();
+    cleanup();
+
+    // THE MEMBER. A deep link, a refresh or Back/Forward on a phantom's id is the same
+    // door as the focus effect, through the same raw-array read.
+    expect(rows.filter(isPhantomSave),
+      'the ANCHOR for the refusal below: the id routed to IS a phantom').toHaveLength(1);
+    renderPanel(rows, { routeId: phantom.id });
+    await shelfStands();
+    expect(screen.queryByTestId('settlement-detail'),
+      'a route naming a PHANTOM opens nothing').toBeNull();
+  });
+
+  test('D3: PlacementDetailCard resolves a real save and REFUSES a phantom', async () => {
+    const { towns, phantom, rows } = u79Library();
+    storeState = baseStore();
+    storeState.savedSettlements = rows;
+
+    // THE ANCHOR, POSITIVE FIRST: the card renders from the store's saves, so an empty
+    // card below is a refusal rather than a component that renders nothing either way.
+    storeState.selectedSettlementId = towns[2].id;
+    const real = render(<PlacementDetailCard onOpenDetail={() => {}} />);
+    expect(real.container.textContent,
+      'the card really does resolve a REAL save by id').toContain('Caldwyn');
+    cleanup();
+
+    // THE MEMBER. `saves.find` on the raw array again — the third by-id reader.
+    expect(rows.filter(isPhantomSave),
+      'the ANCHOR for the refusal below: the selected id IS a phantom').toHaveLength(1);
+    storeState.selectedSettlementId = phantom.id;
+    const ghost = render(<PlacementDetailCard onOpenDetail={() => {}} />);
+    expect(ghost.container.textContent,
+      'a selection naming a PHANTOM renders no card at all — the map cannot open a row'
+      + ' the shelf hides').toBe('');
   });
 });

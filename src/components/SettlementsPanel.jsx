@@ -282,6 +282,68 @@ export default function SettlementsPanel({ onNavigate, routeId }) {
   const activeSlotsUsed = useMemo(() => activeSaveCount(saves), [saves]);
   const canReactivateInactive = authTier === 'free' && activeSlotsUsed < Math.min(maxSaves || 0, 3);
 
+  /**
+   * ⛔ THE SHELF'S OWN ROWS — what the library ACTUALLY holds, before any search term or
+   * chip narrows it. `applyLibraryFilters` hides EM-F1's phantom counterparties at the
+   * HEAD of its pipeline (a phantom is an off-stage prop that persists as a save, not a
+   * settlement the DM keeps), so the raw `saves` array is not the library: it is the
+   * library plus rows no viewer can ever reach. Two readers used to take that raw array
+   * and so answered about rows the shelf does not show:
+   *
+   *   • `totalCount` — the toolbar's DENOMINATOR. With a phantom in it the toolbar read
+   *     "4 of 5" over a shelf of four, and the minimal face offered to search a
+   *     settlement that is not there. A count is a sentence the GM reads.
+   *   • `useLibraryBulkSelect`'s corpus — the rows a bulk action resolves a selection
+   *     against. No rendered card can put a phantom into that selection TODAY, because
+   *     the cards come off `filteredSaves`; this half therefore closes the HABITAT
+   *     rather than a reachable bug, which is the honest description of it. What the
+   *     bulk actions can reach is now exactly what the shelf can offer.
+   *
+   * The query, the sort's chips and the campaign context are deliberately NOT applied
+   * here: a denominator that moved with the filters would make "N of M" read "M of M"
+   * forever, and the numerator (`filteredSaves`) is the one that answers the chips.
+   *
+   * ⛔ U50 — AND THE RENDER BELOW ASKS THE SAME QUESTION SIX TIMES, so it reads the same
+   * answer six times. Every `saves.length` in the returned tree was a reader of "how much
+   * library is there", and each one was answering over rows the viewer cannot reach:
+   *
+   *   • THE EMPTY-SHELF SENTENCE (its gate AND its count). A library holding NOTHING BUT
+   *     phantoms used to render "No settlements match your search or filters … clear the
+   *     active filters to see all 1" — over a shelf with no filter on and nothing to
+   *     clear. Curing only the count would have produced "see all 0", which is a worse
+   *     sentence, so the gate moves with it.
+   *   • THE FIRST-RUN GATE. Once the sentence's gate reads the shelf, a phantom-only
+   *     library falls past it — and would land on the card region with no cards, a blank
+   *     panel. Read off the shelf, that library IS empty, so it gets the SAMPLE DASHBOARD
+   *     an empty library has always got. This is the same reading EM-F1b already made of
+   *     the quota (`activeSaveCount`): a phantom is the estate's row, not the user's.
+   *   • THE TOOLBAR'S OWN GATE and the bulk bar's, for the same reason: a search box over
+   *     an empty shelf offering to "Search 0 settlements…" is the blank panel again.
+   *   • THE MINIMAL FACE. `minimal` keyed on the RAW length, so four real saves and two
+   *     phantoms drew the full six-control toolbar over a four-town shelf. THE THRESHOLD
+   *     VALUE (5) IS THE OWNER'S AND IS UNTOUCHED (legibility wave, 2026-07-22) — only
+   *     the count it is compared against moved.
+   *
+   * `filteredSaves` stays the numerator, and the two library WRITERS
+   * (`createLibraryDeleteHandlers`, `createLibraryBatchPersister`) keep the raw array, as
+   * U23 left them: they persist against the WHOLE library, phantoms included.
+   *
+   * ⛔ U79 — AND THE SHELF IS ALSO WHAT AN ID MAY RESOLVE AGAINST. The two effects below
+   * asked the RAW array BY ID, so the hiding had a door in it: a world-map focus request
+   * or a `/settlements/:id` route naming a phantom's id opened its detail, with the whole
+   * dossier surface behind it. That is why this memo now lives HERE, above its first
+   * reader, instead of beside the toolbar — one reading of "what the library holds",
+   * consulted by the effects, the toolbar, bulk-select and the render alike.
+   *
+   * ⛔ AND IT IS THE SHELF'S FILTER THAT DOES IT, NOT `isSaveActive`. That predicate reads
+   * `accessState` and nothing else, and a minted phantom is ACTIVE — which is exactly why
+   * the guard beside it let one through. Folding the phantom discriminant into
+   * `isSaveActive` would move EM-F1b's quota, reactivation and retention counters, which
+   * compose it deliberately; the phantom test stays where EM-F1 put it, at the head of
+   * the shelf's own pipeline.
+   */
+  const shelfSaves = useMemo(() => _applyLibraryFilters(saves), [saves]);
+
   // LIBRARY_VIEWED — once per session, after saves have loaded so the count
   // band is accurate. useFunnelEvent fires on the false→true transition and
   // self-dedupes per session; payload resolves at fire time. Fire-and-forget.
@@ -342,15 +404,15 @@ export default function SettlementsPanel({ onNavigate, routeId }) {
   // focus request changes, not when `detail` becomes truthy (we early-
   // return for that).
   useEffect(() => {
-    if (pendingFocusId == null || savesLoading || !saves.length || detail) return;
-    const match = saves.find(s => String(s.id) === String(pendingFocusId));
+    if (pendingFocusId == null || savesLoading || !shelfSaves.length || detail) return;
+    const match = shelfSaves.find(s => String(s.id) === String(pendingFocusId));
     if (match && isSaveActive(match)) {
       // eslint-disable-next-line react-hooks/set-state-in-effect
       setDetail({ ...match, saveData: match });
       clearSelectedSettlement();
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [pendingFocusId, savesLoading, saves]);
+  }, [pendingFocusId, savesLoading, shelfSaves]);
 
   // ── URL ↔ detail sync (path routing, /settlements/:id) ───────────────────
   // Two one-directional effects keep the address bar and the open detail
@@ -366,7 +428,7 @@ export default function SettlementsPanel({ onNavigate, routeId }) {
     const openId = detail?.saveData?.id ?? null;
     if (routeId) {
       if (String(openId) === String(routeId)) return;   // already showing it
-      const match = saves.find(s => String(s.id) === String(routeId));
+      const match = shelfSaves.find(s => String(s.id) === String(routeId));
       // eslint-disable-next-line react-hooks/set-state-in-effect
       if (match && isSaveActive(match)) setDetail({ ...match, saveData: match });
     } else if (openId !== null) {
@@ -375,7 +437,7 @@ export default function SettlementsPanel({ onNavigate, routeId }) {
     }
     // `detail` intentionally omitted — see note above.
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [routeId, savesLoading, saves]);
+  }, [routeId, savesLoading, shelfSaves]);
 
   // detail → route: opening/closing the detail in-app (list click, world-map
   // focus, Back-to-list, delete) writes the canonical URL. Guarded three ways
@@ -619,54 +681,6 @@ export default function SettlementsPanel({ onNavigate, routeId }) {
   // owning-campaign worldState the cards render from — one source of truth, no
   // divergent recompute) for the "At war" / campaign filters.
   const { filterContext } = useLibraryLiveWorld(activeCampaigns);
-
-  /**
-   * ⛔ THE SHELF'S OWN ROWS — what the library ACTUALLY holds, before any search term or
-   * chip narrows it. `applyLibraryFilters` hides EM-F1's phantom counterparties at the
-   * HEAD of its pipeline (a phantom is an off-stage prop that persists as a save, not a
-   * settlement the DM keeps), so the raw `saves` array is not the library: it is the
-   * library plus rows no viewer can ever reach. Two readers used to take that raw array
-   * and so answered about rows the shelf does not show:
-   *
-   *   • `totalCount` — the toolbar's DENOMINATOR. With a phantom in it the toolbar read
-   *     "4 of 5" over a shelf of four, and the minimal face offered to search a
-   *     settlement that is not there. A count is a sentence the GM reads.
-   *   • `useLibraryBulkSelect`'s corpus — the rows a bulk action resolves a selection
-   *     against. No rendered card can put a phantom into that selection TODAY, because
-   *     the cards come off `filteredSaves`; this half therefore closes the HABITAT
-   *     rather than a reachable bug, which is the honest description of it. What the
-   *     bulk actions can reach is now exactly what the shelf can offer.
-   *
-   * The query, the sort's chips and the campaign context are deliberately NOT applied
-   * here: a denominator that moved with the filters would make "N of M" read "M of M"
-   * forever, and the numerator (`filteredSaves`) is the one that answers the chips.
-   *
-   * ⛔ U50 — AND THE RENDER BELOW ASKS THE SAME QUESTION SIX TIMES, so it reads the same
-   * answer six times. Every `saves.length` in the returned tree was a reader of "how much
-   * library is there", and each one was answering over rows the viewer cannot reach:
-   *
-   *   • THE EMPTY-SHELF SENTENCE (its gate AND its count). A library holding NOTHING BUT
-   *     phantoms used to render "No settlements match your search or filters … clear the
-   *     active filters to see all 1" — over a shelf with no filter on and nothing to
-   *     clear. Curing only the count would have produced "see all 0", which is a worse
-   *     sentence, so the gate moves with it.
-   *   • THE FIRST-RUN GATE. Once the sentence's gate reads the shelf, a phantom-only
-   *     library falls past it — and would land on the card region with no cards, a blank
-   *     panel. Read off the shelf, that library IS empty, so it gets the SAMPLE DASHBOARD
-   *     an empty library has always got. This is the same reading EM-F1b already made of
-   *     the quota (`activeSaveCount`): a phantom is the estate's row, not the user's.
-   *   • THE TOOLBAR'S OWN GATE and the bulk bar's, for the same reason: a search box over
-   *     an empty shelf offering to "Search 0 settlements…" is the blank panel again.
-   *   • THE MINIMAL FACE. `minimal` keyed on the RAW length, so four real saves and two
-   *     phantoms drew the full six-control toolbar over a four-town shelf. THE THRESHOLD
-   *     VALUE (5) IS THE OWNER'S AND IS UNTOUCHED (legibility wave, 2026-07-22) — only
-   *     the count it is compared against moved.
-   *
-   * `filteredSaves` stays the numerator, and the two library WRITERS
-   * (`createLibraryDeleteHandlers`, `createLibraryBatchPersister`) keep the raw array, as
-   * U23 left them: they persist against the WHOLE library, phantoms included.
-   */
-  const shelfSaves = useMemo(() => _applyLibraryFilters(saves), [saves]);
 
   const filteredSaves = useMemo(() => {
     return _applyLibraryFilters(saves, {

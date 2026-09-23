@@ -244,8 +244,16 @@ const ROUTE_BASELINE = Object.freeze({
   // ⭐ RE-MEASURED AT THE TRAIN TIP (2026-09-23, the chair; U25): /realm and /map floored 484 -> 485 —
   // EM-E3's advance report adds ONE correctly floored anchor line reached by both routes
   // (src/components/map/AdvanceReport.jsx); attributed by planting the pre-change body.
-  '/realm':                 { roots: 2, files: 153, floored: 485, ruled: 1, bare: 0, owner: 'lane 28 — generate/ClerkNote.jsx, mounted here' },
-  '/map':                   { roots: 2, files: 153, floored: 485, ruled: 1, bare: 0, owner: 'lane 28 — generate/ClerkNote.jsx, mounted here' },
+  // ⭐ RE-MEASURED AT THE TRAIN TIP (2026-09-23, cure lane D2; U79): /realm and /map floored
+  // 485 -> 493 and ruled 1 -> 3. THE CAUSE IS AN IMPORT, NOT A SIZE. PlacementDetailCard.jsx
+  // resolved a selected settlement by id off the RAW save array, so a selection carrying an
+  // EM-F1 phantom's id opened a card over a row the shelf hides; it now resolves through the
+  // shelf's own filter, `applyLibraryFilters`, which lives in library/LibraryToolbar.jsx. That
+  // one edge brings the toolbar's ALREADY-FLOORED sites (8) and its two written rulings into
+  // the map's closure. `bare` holds at 0 on both rows — nothing sub-floor shipped, and not one
+  // fontSize was written, moved or ruled by this unit.
+  '/realm':                 { roots: 2, files: 153, floored: 493, ruled: 3, bare: 0, owner: 'lane 28 — generate/ClerkNote.jsx, mounted here' },
+  '/map':                   { roots: 2, files: 153, floored: 493, ruled: 3, bare: 0, owner: 'lane 28 — generate/ClerkNote.jsx, mounted here' },
 
   // floored 991 -> 992 (review wave 2 car 3, 2026-09-19): the Library's sample fork used to
   // answer EVERY null with the purchase modal, so it now renders the estate's refusal notice

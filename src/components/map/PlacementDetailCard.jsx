@@ -17,6 +17,7 @@ import { formatCount } from '../../domain/formatNumber.js';
 import { settlementSizeLabel, humanizeToken } from '../../domain/display/humanizeEngineTokens.js';
 import { resolveSettlementTerrain } from '../../domain/resolveTerrain.js';
 import { INK, MUTED, SECOND, BORDER, BORDER2, CARD, CARD_HDR, FS, SP, EMPTY_VALUE } from '../theme.js';
+import { applyLibraryFilters } from '../library/LibraryToolbar.jsx';
 import Button from '../primitives/Button.jsx';
 import IconButton from '../primitives/IconButton.jsx';
 import useIsMobile from '../../hooks/useIsMobile.js';
@@ -36,7 +37,15 @@ export default function PlacementDetailCard({ onOpenDetail }) {
   // Resolve the placement + save entry for the current selection
   const { settlement, placementBurgId } = useMemo(() => {
     if (selectedSettlementId == null) return { settlement: null, placementBurgId: null };
-    const save = (saves || []).find(s => String(s.id) === String(selectedSettlementId)) || null;
+    // ⛔ U79 — THE SHELF'S ROWS, NEVER THE RAW ARRAY. `savedSettlements` is the library
+    // PLUS EM-F1's phantom counterparties, which persist as saves and which the shelf
+    // hides at the head of `applyLibraryFilters`. Resolved off the raw array, a selection
+    // carrying a phantom's id opened this card over the map — the same hole the panel's
+    // focus and route effects had. The shelf's own filter is the one place that question
+    // is asked; `isSaveActive` is not it (a minted phantom is ACTIVE, and EM-F1b composes
+    // the quota, reactivation and retention counters on that reading).
+    const save = applyLibraryFilters(saves)
+      .find(s => String(s.id) === String(selectedSettlementId)) || null;
     // Also locate which burgId corresponds to this settlement for removal
     let burgId = null;
     for (const [bid, p] of Object.entries(placements || {})) {
