@@ -26,7 +26,9 @@
  *     and seven derived `CROSS_KEY_CHECKS` (STOP-4 discharged), but THE ARM IS STILL UNEXERCISED
  *     HERE: the prototype instrument is the recon's 25-check version with no cross-key entry, and the
  *     corpus produced ZERO escalations, so nothing measured in this packet depends on it. EM-R7 is
- *     where the ladder meets real cross-key data.
+ *     where the ladder meets real cross-key data. ⭐ FROM EM-R8's LANDING THE ARM IS EXERCISED:
+ *     `tests/domain/mergeLadderHeldKeys.test.js` drives the ladder over the eight-edit census
+ *     through the REAL re-derivation and holds that no rung's scope ever carries a HELD key.
  * 9.  THE `history-age` GROUP'S EFFECT ON THE MERGED VALUE. V14 proves the group arm and the
  *     order arm do not interfere, and that `members: null` would silence the order arm. It does NOT
  *     prove the group changes any merged value here: `history` re-derives faithfully in this corpus
@@ -44,6 +46,17 @@
  * 7.  merge∘merge vs merge(both) beyond five pairs. Five were run, one disagrees; all 28 ordered
  *     pairs are EM-R7's.
  * 8.  A DM edit outside the eight-edit corpus. The runtime guard is what covers it, by design.
+ * 11. ⭐ WHAT `recomputeReceipts` DOES FROM EM-R8's LANDING, so A7's account is not silently
+ *     stale. At this file's own compile the whole of it is A7's: the mirrors recomputed, and the
+ *     one declared RECEIPT recomputed over the merged record and never taken from `R1`. EM-R8
+ *     gives the same function a SECOND act, before that body runs: a module-local restatement of
+ *     the coherence receipt's two PROSE-COUNT evidence rows -- `finalGraph`'s NPC and
+ *     relationship counts and `narrative`'s historical-event count -- from the MERGED record's
+ *     own rosters, declared a MIRROR sub-path in `recordRegister.js :: CLASS_EXCEPTIONS`. It
+ *     moves ONLY the digits those two patterns capture, it never reads or writes
+ *     `generationCoherenceReceipt.repairs` (THE PROMISE's immutable lived history), and it
+ *     leaves this function's RETURN exactly the economy fingerprint's own boolean that A7
+ *     asserts. Its arms are `tests/domain/mergeLadderHeldKeys.test.js`'s, not this file's.
  */
 import { describe, it, expect } from 'vitest';
 import { goldenCorpus, keyOf } from '../helpers/goldenMasterCorpus.js';
