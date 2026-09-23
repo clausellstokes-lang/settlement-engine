@@ -165,7 +165,7 @@ const PAIRWISE = 'powerStructure.factionRelationships[]';
  * declared ONCE here and applied at BOTH homes, so a field added for one can
  * never be forgotten at the other.
  */
-const NPC_HOMES = Object.freeze(['npcs[]', 'factions[].members[]']);
+export const NPC_HOMES = Object.freeze(['npcs[]', 'factions[].members[]']);
 
 /**
  * Every faction-name-bearing field an NPC record carries. `list` marks a field
@@ -275,6 +275,19 @@ export const FACTION_RENAME_SURFACES = Object.freeze([
  * The ledger of stored fields that DO hold a faction name and are deliberately
  * left alone. Kept beside the cascade so a future sweep reads a decision rather
  * than finding an apparent miss.
+ *
+ * THE ESTATE'S RULE FOR EVERY NON-CASCADED LEDGER, WRITTEN HERE BECAUSE THIS IS
+ * THE FILE THE OTHERS COPY (EM-R6's Q5, ruled). "NEVER TOUCHED" MEANS NEVER
+ * WRITTEN. A non-cascaded path may still be READ: a sweep that reports what it
+ * could not heal has to look at the paths it is forbidden to rewrite, and that
+ * is not a violation of the ruling, it is the ruling working. So a reader
+ * DECLARES ITSELF ON THE ROW rather than reaching in silently, and a second
+ * reader of any row is a decision the chair grants rather than a default.
+ * The typed form of the rule lives in src/domain/institutionRename.js, whose
+ * ledger carries a `readable` field per row with exactly one row true, and whose
+ * removal RESOLVES that one path from the ledger instead of spelling it, so the
+ * flag is load-bearing rather than decorative. This ledger states the rule in
+ * prose and takes no new field: none of its own rows has a reader.
  *
  * @type {ReadonlyArray<{ path: string, why: string }>}
  */
