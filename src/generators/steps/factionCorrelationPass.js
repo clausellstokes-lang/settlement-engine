@@ -24,12 +24,15 @@ import { cullPlanarWithoutCircle } from '../isolationGenerator.js';
 import { applySubsumption } from './subsumptionPass.js';
 import { collapseUpgradeChains } from './assembleInstitutions.js';
 import { recordTrace } from '../../domain/trace.js';
+// Shared phrases hoisted once (train EM-T16's worker buy-back, judgment 214c): each is spelled here and referenced below; every emitted value is byte-identical.
+const FACTIONCORRELATIONPASS = 'factionCorrelationPass';
+
 
 function instId(name) {
   return `institution.${String(name).replace(/[^a-zA-Z0-9]+/g, '_').replace(/^_+|_+$/g, '').toLowerCase()}`;
 }
 
-registerStep('factionCorrelationPass', {
+registerStep(FACTIONCORRELATIONPASS, {
   deps: ['neighbourFactions', 'generateEconomy', 'buildGenerationContext'],
   reads: ['categoryToggles', 'effectiveConfig', 'generationContext', 'institutionToggles', 'institutions', 'powerStructure', 'tier'], // ctx keys this step consumes that another step produces (A+ generators.3 data-flow contract)
   provides: [],
@@ -73,7 +76,7 @@ registerStep('factionCorrelationPass', {
         recordTrace(ctx, {
           targetType: 'institution',
           targetId:   instId(add.name),
-          step:       'factionCorrelationPass',
+          step:       FACTIONCORRELATIONPASS,
           result:     'faction_pulled',
           causes: [
             { source: `faction.${String(triggerFaction).toLowerCase().replace(/\s+/g, '_')}`,
@@ -89,7 +92,7 @@ registerStep('factionCorrelationPass', {
       // lesser is absorbed by an existing greater). MUST go through the
       // shared guarded matcher.
       applySubsumption(institutions, ctx, {
-        step: 'factionCorrelationPass', result: 'subsumed_after_faction_pull',
+        step: FACTIONCORRELATIONPASS, result: 'subsumed_after_faction_pull',
       });
 
       // A faction pull can seat a planar institution on a roster with no
@@ -99,7 +102,7 @@ registerStep('factionCorrelationPass', {
         recordTrace(ctx, {
           targetType: 'institution',
           targetId:   instId(removedName),
-          step:       'factionCorrelationPass',
+          step:       FACTIONCORRELATIONPASS,
           result:     'requires_teleportation_circle',
           causes: [
             { source: instId('Teleportation circle'), effect: 'missing prerequisite',
@@ -114,7 +117,7 @@ registerStep('factionCorrelationPass', {
         recordTrace(ctx, {
           targetType: 'institution',
           targetId:   instId(removedName),
-          step:       'factionCorrelationPass',
+          step:       FACTIONCORRELATIONPASS,
           result:     'upgrade_collapsed_after_faction_pull',
           causes: [
             { source: 'factionInstitutionBoost', effect: 'collapsed',
@@ -140,7 +143,7 @@ registerStep('factionCorrelationPass', {
       recordTrace(ctx, {
         targetType: 'institution',
         targetId:   instId(name),
-        step:       'factionCorrelationPass',
+        step:       FACTIONCORRELATIONPASS,
         result:     'world_law_stripped',
         causes: [
           { source: 'world.generationLaw', effect: 'removed',

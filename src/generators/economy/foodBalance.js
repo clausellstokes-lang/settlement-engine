@@ -21,6 +21,12 @@ import {
   isTradeRouteDisconnected,
   SEASONAL_ROUTE_FOOD_IMPORT_RATE,
 } from '../../domain/tradeRouteSemantics.js';
+// Shared phrases hoisted once (train EM-T16's worker buy-back, judgment 214c): each is spelled here and referenced below; every emitted value is byte-identical.
+const ESTABLISH_SEASONAL_ACCESS_PATRONAGE_OR_A_DEPENDABLE_TRADE_ROUTE = 'Establish seasonal access, patronage, or a dependable trade route';
+const FERTILE_FLOODPLAIN = 'fertile_floodplain';
+const PROVISIONING_AT_SCALE = 'Provisioning at Scale';
+const UNCOVERED_LOCAL_FOOD_DEFICIT = 'Uncovered Local Food Deficit';
+
 
 
 // ECONOMIC_CONSTANTS
@@ -54,13 +60,13 @@ export const deriveFoodBalanceAnalysis = (population, terrain, institutions, con
   // Agriculture modifier from resource+institution combinations
   let agriMod = 0;
   if (
-    hasResource(['grain_fields', 'fertile_floodplain']) &&
+    hasResource(['grain_fields', FERTILE_FLOODPLAIN]) &&
     hasInstitution(['farm', 'granary', 'mill', 'subsistence', 'grain'])
   )
     agriMod += 0.25;
-  if (hasResource(['fertile_floodplain']) && hasInstitution(['farm', 'granary', 'subsistence'])) agriMod += 0.1;
+  if (hasResource([FERTILE_FLOODPLAIN]) && hasInstitution(['farm', 'granary', 'subsistence'])) agriMod += 0.1;
   if (
-    hasResource(['grazing_land', 'fertile_floodplain']) &&
+    hasResource(['grazing_land', FERTILE_FLOODPLAIN]) &&
     hasInstitution(['graz', 'livestock', 'butcher', 'common graz', 'pasture'])
   )
     agriMod += 0.1;
@@ -356,12 +362,12 @@ export const deriveFoodBalanceAnalysis = (population, terrain, institutions, con
         issues.push({
           severity: SEVERITY.CRITICAL,
           category: 'Food Production',
-          title: 'Uncovered Local Food Deficit',
+          title: UNCOVERED_LOCAL_FOOD_DEFICIT,
           description: `Settlement cannot cover ~${Math.round(deficit)} lbs of food per day (${Math.round(deficitPercent)}% of needs) and has no dependable trade route.`,
           impact: 'The current population cannot survive this provisioning gap without a new support path.',
           suggestedFixes: [
             'Strengthen the local foodshed or reduce the supported population',
-            'Establish seasonal access, patronage, or a dependable trade route',
+            ESTABLISH_SEASONAL_ACCESS_PATRONAGE_OR_A_DEPENDABLE_TRADE_ROUTE,
             'Add reserves only as a temporary buffer, not a permanent food source',
           ],
         });
@@ -402,12 +408,12 @@ export const deriveFoodBalanceAnalysis = (population, terrain, institutions, con
         issues.push({
           severity: SEVERITY.CRITICAL,
           category: 'Food Production',
-          title: 'Uncovered Local Food Deficit',
+          title: UNCOVERED_LOCAL_FOOD_DEFICIT,
           description: `Settlement cannot cover ~${Math.round(deficit)} lbs of food per day (${Math.round(deficitPercent)}% of needs) and has no dependable trade route.`,
           impact: 'The current population is not viable without another provisioning path.',
           suggestedFixes: [
             'Strengthen the local foodshed',
-            'Establish seasonal access, patronage, or a dependable trade route',
+            ESTABLISH_SEASONAL_ACCESS_PATRONAGE_OR_A_DEPENDABLE_TRADE_ROUTE,
           ],
         });
       } else {
@@ -601,7 +607,7 @@ export function appendProvisioningAtScaleDeps(
   if (!hasGrainDep && !foodDeficit) {
     warnings.push({
       severity: SEVERITY.DEPENDENCY,
-      category: 'Provisioning at Scale',
+      category: PROVISIONING_AT_SCALE,
       title: 'Imports staple food at urban scale',
       description: `A ${config.tier} cannot grow its staples within its walls; it depends on a steady grain supply from the surrounding region.`,
       impact: 'A disrupted supply line means hunger within days.',
@@ -613,7 +619,7 @@ export function appendProvisioningAtScaleDeps(
   // grain/timber/metal-free mustImport terrains like hills before this floor).
   warnings.push({
     severity: SEVERITY.DEPENDENCY,
-    category: 'Provisioning at Scale',
+    category: PROVISIONING_AT_SCALE,
     title: 'Imports bulk materials and fuel',
     description: `A ${config.tier} consumes building materials and fuel faster than any local hinterland can supply.`,
     impact: 'Construction and industry stall when material convoys are interrupted.',
@@ -624,7 +630,7 @@ export function appendProvisioningAtScaleDeps(
   if (config?.tier === 'metropolis') {
     warnings.push({
       severity: SEVERITY.DEPENDENCY,
-      category: 'Provisioning at Scale',
+      category: PROVISIONING_AT_SCALE,
       title: 'Imports finished goods and luxuries',
       description: 'An imperial metropolis depends on a constant inflow of finished goods, textiles, and luxuries its populace and elite demand.',
       impact: 'Shortfalls drive price spikes, unrest, and loss of prestige.',

@@ -9,6 +9,15 @@
  * INSTITUTION_DEFAULT_CATEGORY as the final fallback.
  */
 import { SERVICE_CATEGORY_MAP, INSTITUTION_DEFAULT_CATEGORY } from './serviceCategoryTables.js';
+// Shared phrases hoisted once (train EM-T16's worker buy-back, judgment 214c): each is spelled here and referenced below; every emitted value is byte-identical.
+const APPRENTICESHIP_AND_TRAINING = 'apprenticeship and training';
+const COMMISSION_HUNTING = 'commission hunting';
+const COMPANION_TRAINING = 'companion training';
+const HIGH_STAKES_GAMBLING = 'high-stakes gambling';
+const HIGH_STAKES_GAMBLING_2 = 'high stakes gambling';
+const MONSTER_INTELLIGENCE = 'monster intelligence';
+const PARTY_REGISTRATION = 'party registration';
+
 
 // classifyService(serviceName, instName) → category string.
 //   y = lowercased service name, v = lowercased institution name (retained
@@ -162,8 +171,8 @@ export const classifyService = (serviceName, instName) => {
                       y.includes('enter as combatant') ||
                       y.includes('private performance') ||
                       y.includes('public performance') ||
-                      y.includes('high-stakes gambling') ||
-                      y.includes('high stakes gambling') ||
+                      y.includes(HIGH_STAKES_GAMBLING) ||
+                      y.includes(HIGH_STAKES_GAMBLING_2) ||
                       y.includes('public games')
                     ? 'entertainment'
                     : [
@@ -241,11 +250,11 @@ export const classifyService = (serviceName, instName) => {
                         : y.includes('planar') || y.includes('extraplanar') || y.includes('draconic')
                           ? 'magic'
                           : y.includes('monster component') ||
-                              y.includes('monster intelligence') ||
-                              y.includes('commission hunting') ||
+                              y.includes(MONSTER_INTELLIGENCE) ||
+                              y.includes(COMMISSION_HUNTING) ||
                               y.includes('processing and preserv') ||
                               y.includes('guard animals') ||
-                              y.includes('companion training') ||
+                              y.includes(COMPANION_TRAINING) ||
                               y.includes('messenger beast') ||
                               y.includes('reagent sourcing') ||
                               y.includes('labour hire') ||
@@ -273,7 +282,7 @@ export const classifyService = (serviceName, instName) => {
                               : y.includes('contract board') ||
                                   y.includes('rumour board') ||
                                   y.includes('rumor board') ||
-                                  y.includes('monster intelligence') ||
+                                  y.includes(MONSTER_INTELLIGENCE) ||
                                   y.includes('emergency muster') ||
                                   y.includes('bounty board') ||
                                   y.includes('delve contract')
@@ -311,7 +320,7 @@ export const classifyService = (serviceName, instName) => {
                                       y.includes('employment') ||
                                       y.includes('specialist warrior') ||
                                       y.includes('training service') ||
-                                      y.includes('party registration') ||
+                                      y.includes(PARTY_REGISTRATION) ||
                                       y.includes('patrol and escort') ||
                                       y.includes('escort') ||
                                       y.includes('threat reporting') ||
@@ -322,19 +331,19 @@ export const classifyService = (serviceName, instName) => {
                                       y.includes('guard hire') ||
                                       y.includes('convoy escort') ||
                                       y.includes('naval escort') ||
-                                      y.includes('commission hunting') ||
+                                      y.includes(COMMISSION_HUNTING) ||
                                       y.includes('labour hire') ||
-                                      y.includes('companion training') ||
+                                      y.includes(COMPANION_TRAINING) ||
                                       y.includes('messenger beast') ||
                                       y.includes('contract board') ||
                                       y.includes('emergency muster') ||
                                       y.includes('monster bounty') ||
                                       y.includes('monster contract') ||
                                       y.includes('hired swords') ||
-                                      y.includes('party registration') ||
+                                      y.includes(PARTY_REGISTRATION) ||
                                       y.includes('rumour board') ||
                                       y.includes('rumor board') ||
-                                      y.includes('monster intelligence') ||
+                                      y.includes(MONSTER_INTELLIGENCE) ||
                                       y.includes('bounty board') ||
                                       y.includes('delve contract') ||
                                       y.includes('charter contract')
@@ -363,9 +372,9 @@ export const classifyService = (serviceName, instName) => {
                                         y.includes('news and') ||
                                         y.includes('price') ||
                                         (y.includes('apprenticeship') &&
-                                          !y.includes('apprenticeship and training'))
+                                          !y.includes(APPRENTICESHIP_AND_TRAINING))
                                       ? 'information'
-                                      : y.includes('apprenticeship and training')
+                                      : y.includes(APPRENTICESHIP_AND_TRAINING)
                                         ? 'employment'
                                         : y.includes('sanctuary') || y.includes('pilgrim') || y.includes('alms')
                                           ? 'healing'
@@ -420,7 +429,7 @@ export const classifyService = (serviceName, instName) => {
                                                                     ? 'information'
                                                                     : y.includes('textile labour') ||
                                                                         y.includes(
-                                                                          'apprenticeship and training'
+                                                                          APPRENTICESHIP_AND_TRAINING
                                                                         ) ||
                                                                         y.includes('siege specialist')
                                                                       ? 'employment'
@@ -461,9 +470,9 @@ export const classifyService = (serviceName, instName) => {
                                                                               y.includes('smoke')
                                                                             ? 'equipment'
                                                                             : y.includes(
-                                                                                  'high-stakes gambling'
+                                                                                  HIGH_STAKES_GAMBLING
                                                                                 ) ||
-                                                                                y.includes('high stakes gambling')
+                                                                                y.includes(HIGH_STAKES_GAMBLING_2)
                                                                               ? 'entertainment'
                                                                               : y.includes('weapon enchant') ||
                                                                                   y.includes('magical weapon')

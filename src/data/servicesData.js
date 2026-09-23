@@ -12,9 +12,13 @@
 //   2. no source may shadow a dedicated INSTITUTION_SERVICES entry — such a
 //      row is dead weight and must be deleted (give the institution its own
 //      entry instead of redirecting it).
+
+// Shared phrases hoisted once (train EM-T16's worker buy-back, judgment 214c): each is spelled here and referenced below; every emitted value is byte-identical.
+const INN_TAVERN_DISTRICT = "Inn/Tavern District";
+const SPELLCASTING_SERVICES = "Spellcasting Services";
 export const LOCALE_SERVICE_OVERRIDES = {
   // Lodging & hospitality variants
-  "hospitality district": "Inn/Tavern District",
+  "hospitality district": INN_TAVERN_DISTRICT,
   tavern: "Inn/Tavern",
   alehouse: "Inn/Tavern",
   "wayside inn": "Inn/Tavern",
@@ -41,9 +45,9 @@ export const LOCALE_SERVICE_OVERRIDES = {
   "adventurers' guild hall": "Adventurers Guild",
   // Arcane
   "multiple wizard towers": "Wizard Tower",
-  "spellcasting services (1st-4th level)": "Spellcasting Services",
-  "spellcasting services (1st-6th level)": "Spellcasting Services",
-  "spellcasting services (1st-8th level)": "Spellcasting Services",
+  "spellcasting services (1st-4th level)": SPELLCASTING_SERVICES,
+  "spellcasting services (1st-6th level)": SPELLCASTING_SERVICES,
+  "spellcasting services (1st-8th level)": SPELLCASTING_SERVICES,
   "magic item consignment": "Magic Item",
   // Entertainment & learning
   "professional arena": "Arena",
@@ -56,9 +60,9 @@ export const LOCALE_SERVICE_OVERRIDES = {
   "dwellings (4-16)": "Inn/Tavern",
   "dwellings (17-80)": "Inn/Tavern",
   "dwellings (80-180)": "Inn/Tavern",
-  "housing (180-1000 structures)": "Inn/Tavern District",
-  "housing (1000-5000 structures)": "Inn/Tavern District",
+  "housing (180-1000 structures)": INN_TAVERN_DISTRICT,
+  "housing (1000-5000 structures)": INN_TAVERN_DISTRICT,
   "multiple water sources": "Inn/Tavern",
   "water source": "Inn/Tavern",
-  "sewage system": "Inn/Tavern District",
+  "sewage system": INN_TAVERN_DISTRICT,
 };

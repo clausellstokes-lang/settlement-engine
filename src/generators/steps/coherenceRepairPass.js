@@ -40,6 +40,11 @@ import {
 import {
   nativeSemanticNames,
 } from '../../domain/content/customContentSemanticAuthority.js';
+// Shared phrases hoisted once (train EM-T16's worker buy-back, judgment 214c): each is spelled here and referenced below; every emitted value is byte-identical.
+const COHERENCEREPAIRPASS = 'coherenceRepairPass';
+const DEPENDENCY_VIOLATION = 'dependency_violation';
+const EXCLUSION_VIOLATION = 'exclusion_violation';
+
 
 function institutionId(name) {
   return `institution.${slugify(name, { sep: '_', raw: true })}`;
@@ -135,7 +140,7 @@ function recordRepair(ctx, repair) {
   recordTrace(ctx, {
     targetType: 'institution',
     targetId: institutionId(repair.subject),
-    step: 'coherenceRepairPass',
+    step: COHERENCEREPAIRPASS,
     result: repair.action,
     causes: [{
       source: `coherence.${repair.type}`,
@@ -280,7 +285,7 @@ function recordUnrepairable(ctx, violation) {
   recordTrace(ctx, {
     targetType: 'condition',
     targetId: `condition.${violation.type}`,
-    step: 'coherenceRepairPass',
+    step: COHERENCEREPAIRPASS,
     result: 'observed_no_repair',
     causes: [{
       source: `structural.${violation.type}`,
@@ -303,8 +308,8 @@ function recordUnrepairable(ctx, violation) {
  */
 const REPAIRABLE_VIOLATION_TYPES = new Set([
   'access_violation',
-  'dependency_violation',
-  'exclusion_violation',
+  DEPENDENCY_VIOLATION,
+  EXCLUSION_VIOLATION,
 ]);
 
 /**
@@ -341,7 +346,7 @@ function repairHardViolations(ctx, entries, observed) {
         ) || changed;
         continue;
       }
-      if (violation.type === 'dependency_violation') {
+      if (violation.type === DEPENDENCY_VIOLATION) {
         const missing = Array.isArray(violation.missing)
           ? violation.missing
           : [];
@@ -363,7 +368,7 @@ function repairHardViolations(ctx, entries, observed) {
         }
         continue;
       }
-      if (violation.type === 'exclusion_violation') {
+      if (violation.type === EXCLUSION_VIOLATION) {
         changed = removeUnprotected(
           ctx,
           violation.institution,
@@ -387,7 +392,7 @@ function repairHardViolations(ctx, entries, observed) {
   }
 }
 
-registerStep('coherenceRepairPass', {
+registerStep(COHERENCEREPAIRPASS, {
   deps: ['factionCorrelationPass'],
   reads: [
     'effectiveConfig',
@@ -418,7 +423,7 @@ registerStep('coherenceRepairPass', {
   repairHardViolations(ctx, entries, observedUnrepairable);
 
   applySubsumption(ctx.institutions, ctx, {
-    step: 'coherenceRepairPass',
+    step: COHERENCEREPAIRPASS,
     result: 'subsumed_after_repair',
   });
   collapseUpgradeChains(ctx.institutions);
@@ -456,7 +461,7 @@ registerStep('coherenceRepairPass', {
   // roster once more before taking the persisted support measurement.
   repairHardViolations(ctx, entries, observedUnrepairable);
   applySubsumption(ctx.institutions, ctx, {
-    step: 'coherenceRepairPass',
+    step: COHERENCEREPAIRPASS,
     result: 'subsumed_after_isolation_repair',
   });
   collapseUpgradeChains(ctx.institutions);
