@@ -135,7 +135,19 @@ const SURVEY_DEFERRED = 41;
 const SURVEY_SETTLED = 3;
 
 /** How many rows in the WHOLE registry declare an outcome vocabulary. Exact, both directions. */
-const ROWS_WITH_ACTION_VOCABULARY = 5;
+// ⭐ 5 -> 6 AT EM-E0b, AND IT IS A WIN BANKED IN THE SAME COMMIT rather than a bump. This
+// arm's own message says growth means "a fork learned to name its own outcomes", and that is
+// exactly what happened: EM-E7 landed `STAY_DETECTION_OUTCOMES` as an EXPORT of the draw's
+// OWN module (`espionageGauntlet.js`, beside `STAY_DETECTION_FORK_ID`) and pinned HBF-05's
+// null so the hand-off could not be lost; this member moves the row, which is the order
+// design §19 ruling 1 asks and HBF-44's `closeOwed` spells — the export first, the row after.
+// ⛔ THE REGISTRATION'S OWN FOUR ARE UNMOVED AT FOUR, and that is structural rather than
+// lucky: HBF-05 carries `discovery: 'idiom'`, so it is not a SURVEY_ROW and neither the
+// set-equality against Table 4 nor the registration's DEFER/STAY split can absorb it. The
+// row is held to the STRICTER form regardless, because arm (b) resolves the name BY IMPORT
+// off `moduleFile(row)` — HBF-05's own module — so `offModule` stays one row long and HBF-17
+// is still the estate's only off-module declaration.
+const ROWS_WITH_ACTION_VOCABULARY = 6;
 
 /** Table 4's rows as `module.js#symbol`, split by the "R" (registration owed) column. */
 function surveyTable4() {
