@@ -29,9 +29,15 @@
  *   • `missionDispatcher.js` and `operationGrammar.js` are DARK by their own suites' pins
  *     (zero `src/` importers, and one respectively), so nothing here wires a production
  *     caller; the direction verbs are read exactly as those suites read the module.
- *   • HBF-05's registry ROW still carries `actionVocabulary: null`. Case E7-10 pins that on
- *     purpose: the row is EM-E0's file, and ruling 1's own order is that the vocabulary must
- *     be an EXPORT before a row may name it. This member lands the export.
+ *   • HBF-05's registry ROW carries `actionVocabulary: 'STAY_DETECTION_OUTCOMES'` as of
+ *     EM-E0b, which moved the row this member's export made lawful. Ruling 1's own order is
+ *     that the vocabulary must be an EXPORT before a row may name it, and it is satisfied in
+ *     that order rather than asserted: this member landed the export and pinned the null so
+ *     the hand-off could not be lost; EM-E0b moved the row and re-aimed the pin.
+ *     ⚠ THE BULLET NAMED E7-10 AND THE PIN WAS NEVER THERE — E7-10 pins the STAGE honouring
+ *     a pin over a real dwelling errand, and the registry read has always lived in E7-14.
+ *     Corrected with the flip, because a header aiming a reader at the wrong case is how a
+ *     pin comes to be "moved" twice.
  *
  * ⚠ ONE FIXTURE IS COPIED RATHER THAN SHARED, and it is named: the covert errand built in
  * `seeded()` is the fixture of `tests/property/espionageGauntletDormancyFence.test.js`,
@@ -543,11 +549,16 @@ describe('EM-E7 — missions: a direction over MISSION_KINDS, a pin on the catch
     const row = HABIT_FORK_REGISTRY.find((entry) => entry.forkId === STAY_DETECTION_FORK_ID);
     expect(row.symbol).toBe('stayDetectionRoll');
     expect(row.module).toBe('src/domain/worldPulse/espionage/espionageGauntlet');
-    // ⛔ THE ROW STILL CARRIES NULL, AND THIS PIN IS THE MEASUREMENT HANDED ON. EM-E0's law
-    // is that a vocabulary is declared only where the DRAW'S OWN MODULE exports one, and
-    // HBF-44's closeOwed spells the order: the export first, the row after. This member
-    // landed the export; moving the row is EM-E0's file and EM-E0b's act.
-    expect(row.actionVocabulary).toBe(null);
+    // ⭐ THE ROW NOW CARRIES THE EXPORT, AND THE ORDER IS THE WHOLE CLAIM. EM-E0's law is
+    // that a vocabulary is declared only where the DRAW'S OWN MODULE exports one, and
+    // HBF-44's closeOwed spells the order: the export first, the row after. EM-E7 landed the
+    // export and pinned this row's null so the hand-off could not be lost; EM-E0b moved the
+    // row, and the pin is re-aimed rather than deleted — a deleted pin is how the other half
+    // of a two-member hand-off stops being checked at all.
+    // ⛔ THE DISPOSITION IS DELIBERATELY UNMOVED: a vocabulary types what the outcome IS, and
+    // this row's open question is whether an ACTOR chooses it, which `closeOwed` still names.
+    expect(row.actionVocabulary).toBe('STAY_DETECTION_OUTCOMES');
+    expect(row.disposition).toBe('DEFER');
     // The export itself is total, frozen, and maps each word to the verdict it implies —
     // EM-E4's SIEGE_VERDICT_BANDS shape, so a herald shows the word and the stage reads the
     // boolean without a second rule deriving either from the other.

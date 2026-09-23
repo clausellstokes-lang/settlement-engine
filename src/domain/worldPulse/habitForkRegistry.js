@@ -143,9 +143,19 @@ export const HABIT_FORK_REGISTRY = Object.freeze([
     reason: 'a keyed race choosing a dispatch cadence; the espionage ladder owns its own close vocabulary and the join has not been read',
     closeOwed: 'grade a cadence against the errand outcomes it produced, using the ladder\'s own close rather than a second scale',
   }),
+  // ⭐ EM-E0b — THE ROW FOLLOWS THE EXPORT, WHICH IS RULING 1'S ORDER AND THE ONLY LAWFUL ONE.
+  // EM-E7 landed `STAY_DETECTION_OUTCOMES` on the DRAW'S OWN MODULE — a frozen word-to-verdict
+  // map in `SIEGE_VERDICT_BANDS`' shape, spelled beside `STAY_DETECTION_FORK_ID` — and pinned
+  // this row's null so the hand-off could not be lost between two members. This one moves the
+  // row and nothing else.
+  // ⛔ THE DISPOSITION STAYS DEFER, AND THE DISTINCTION IS THE POINT. A vocabulary answers what
+  // this roll's outcome is TYPED as; it does not answer whether an ACTOR chooses it, which is
+  // the reading `closeOwed` below still owes. Settling the second on the strength of the first
+  // is exactly the "seal with invented words" FINITE-SEMANTICS refuses.
   fork({
     forkId: 'HBF-05', module: 'src/domain/worldPulse/espionage/espionageGauntlet',
     symbol: 'stayDetectionRoll', discovery: 'idiom', disposition: 'DEFER',
+    actionVocabulary: 'STAY_DETECTION_OUTCOMES',
     reason: 'a keyed detection roll; whether an ACTOR chooses anything here, or the world resolves a hazard against them, has not been read at the site',
     closeOwed: 'establish whether this is a chooser at all — if the roll has no actor-selected candidate set, this row becomes STAY with that finding as its reason',
   }),
