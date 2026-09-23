@@ -15,6 +15,13 @@
  * library row claims — the estate's own `editSlice.js :: mintNewcomerId` idiom — and the local
  * create REFUSES a caller's id the device already holds, by a named code, before any write.
  *
+ * EM-F3c ADDS TWO ARMS TO THIS FILE, both about the LOCAL half of a cure whose defect was the
+ * cloud's (U83; `tests/store/phantomCloudId.test.js` carries that half). W6 pins that the local
+ * backend is UNMOVED: it takes the mint's own key, so the door's receipt, the row and the record
+ * are one string and the act owes no reconciling write. W7 pins the walk's SECOND coordinate
+ * without leaving this substrate — a row that claims an index by its SEED under a key the mint
+ * would never produce (the shape every cloud row has) is walked past just the same.
+ *
  * Substrate: LOCAL mode (the supabase mock below), so the save service binds its real
  * localStorage path and every hop is EXECUTED rather than stubbed — EM-F3's own idiom, which
  * is what lets these arms read the DEVICE rather than a stub's memory of it.
@@ -269,5 +276,55 @@ describe('EM-F3b — the mint index walks past every claimed id', () => {
     expect((await saves.list()).filter((row) => String(row.id) === String(planted.id))
       .map((row) => row.settlement.name),
     'and the counterparty already on that key is reached, once, and is still itself').toEqual(['Greymoor']);
+  });
+
+  test('W6: EM-F3c — the door answers the key the SERVICE gave the row, and on this backend that is the mint\'s own, so nothing moves', async () => {
+    // The door now replies with `saves.save()`'s answer rather than the record's id. On the
+    // local backend `localSaveEntry` honours the envelope's explicit id, so the two are the same
+    // string and this whole cure is invisible here — which is the point of reading the service's
+    // answer instead of branching on which backend is configured.
+    const update = vi.spyOn(saves, 'update');
+    const answer = await mint('Greymoor');
+    expect(answer.ok, 'the counterparty was founded').toBe(true);
+
+    const rows = await saves.list();
+    expect(rows.filter((row) => String(row.id) === String(answer.id))
+      .map((row) => String(row.settlement.id)),
+    'the receipt, the row and the record inside it are one key, reached once')
+      .toEqual([String(answer.id)]);
+    expect(update.mock.calls.length,
+      'and the act owed no reconciling write: the backend took the mint\'s key first time').toBe(0);
+    update.mockRestore();
+  });
+
+  test('W7: EM-F3c — an index a library row already claims by its SEED is walked past, whatever key that row wears', async () => {
+    // THE SECOND COORDINATE, ISOLATED. This row carries index 0's phantom seed under a key the
+    // mint could never produce — the shape EVERY row has on the cloud backend, where the table
+    // assigns `gen_random_uuid()`. The id half of the claimed set cannot see it, so only the
+    // seed half can stop the walk re-founding a world the library already holds.
+    const seed0 = mintDmId(TOWN_SEED, PHANTOM_KIND, 0);
+    const foreignKey = 'a-key-the-mint-never-made';
+    await saves.save({
+      id: foreignKey, name: 'Greymoor', tier: 'town', seed: seed0, config: null,
+      aiData: {}, versionHistory: [],
+      settlement: {
+        id: foreignKey, kind: PHANTOM_KIND, name: 'Greymoor', seed: seed0,
+        traits: { culture: 'coastal', size: 'town', terrain: 'forest' },
+      },
+    });
+    storeState.savedSettlements = await saves.list();
+    expect((await saves.list()).filter(isPhantomSave).length,
+      'the library holds one counterparty, on a key of its own').toBe(1);
+
+    const next = await mint('Harrowfen');
+    expect(next.ok, 'the second counterparty was founded').toBe(true);
+    const row = (await saves.list()).find((entry) => String(entry.id) === String(next.id));
+    expect(String(row.settlement.seed),
+      'and it takes the first index NO library row claims, so the two are two worlds')
+      .toBe(mintDmId(TOWN_SEED, PHANTOM_KIND, 1));
+    expect((await saves.list()).filter(isPhantomSave)
+      .filter((entry) => String(entry.settlement.seed) === seed0)
+      .map((entry) => String(entry.id)),
+    'the planted counterparty is still the only holder of index 0').toEqual([foreignKey]);
   });
 });
