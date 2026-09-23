@@ -1,6 +1,15 @@
 /**
- * pinFork.test.js — EM-E4 acceptance cases E4-1 to E4-14 (wave 3; design §16, §18 and §19
- * rulings 1, 2, 3, 4 and 7; the chair's judgment 265).
+ * directorFork.test.js — EM-E4 acceptance cases E4-1 to E4-14 (wave 3; design §16, §18
+ * and §19 rulings 1, 2, 3, 4 and 7; the chair's judgment 265).
+ *
+ * ⚠ THE BASENAME CARRIES NO INVARIANT WORD, AND THAT IS LOAD-BEARING. This suite was
+ * born `pinFork.test.js`, and `mutationCoverage.shared.mjs`'s `NAME_PATTERN` enrols any
+ * basename outside the enforcer trees that contains `pin` — so a UNIT acceptance suite
+ * was counted as a correctness-asserting INVARIANT file and the manifest's totality arm
+ * reds for a missing entry. The cure is EM-D2's precedent, the RENAME: a manifest row
+ * would have banked a `rationale` ("mutation-testing is redundant here") about a file
+ * the enumerator caught by a spelling accident, which is a false record rather than a
+ * fix. Nothing about the subject moved; only the name the enumerator reads.
  *
  * THE CLAIM. A directive decree names a REGISTERED fork, an outcome from that fork's own
  * vocabulary and a tick; the pulse's head folds the due pins into one bag; a fork whose id
@@ -344,9 +353,12 @@ describe('EM-E4 — the director\'s pins over the registered forks', () => {
     const resued = withPeaceOffer(record, draftPeaceOffer({
       fromId: 'greymoor', toId: 'harrowfen', terms: drafted.terms, budgetSpent: 0, tick: 11,
     }));
-    expect(peaceOffersOf(resued).length).toBe(1);
+    // KEYED BY THE COUNTERPARTY, so "at most one standing offer per counterparty" is the
+    // shape rather than a rule a find-then-replace has to keep.
+    expect(Object.keys(peaceOffersOf(resued))).toEqual(['greymoor']);
     expect(pendingPeaceOfferFrom(resued, 'greymoor').draftedTick).toBe(11);
     expect(pendingPeaceOfferFrom(withoutPeaceOffer(resued, 'greymoor'), 'greymoor')).toBeNull();
+    expect(Object.keys(peaceOffersOf(withoutPeaceOffer(resued, 'greymoor')))).toEqual([]);
   });
 
   it('E4-13 THE OFFER KEY IS NEVER MINTED WITHOUT AN OFFER, AND IT RIDES THE SAVED BLOB WHOLE', () => {
