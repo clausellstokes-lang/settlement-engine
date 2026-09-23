@@ -54,6 +54,32 @@
  * and its roller is `rollFrom`, both bound per declaration and both the producer's; two
  * renders with the same props reach the same markup, and it runs no effect, sets no
  * timeout, mounts no portal and touches no browser storage.
+ *
+ * ── WHAT THE PRINTED DOSSIER CANNOT DRAW: THIS DOOR IS THE READER'S ONE IMPORTER (EM-D2b) ──
+ * EM-D2 landed the cmap reader and EM-D0d landed the field that reports it, and the two
+ * were never joined: `FreeField` takes its check as a PURE FUNCTION PROP and imports
+ * nothing, because a static edge from a field control into the PDF volume is the chunk
+ * cost that leaf's own header forbids. THE JOIN BELONGS HERE, and it is made the only way
+ * a door may make it -- through a DYNAMIC import, which the build's own eager-graph
+ * derivation treats as a lazy boundary by construction (`computeEagerModuleGraph` in
+ * vite.config.js follows static specifiers alone). So the reader can never enter the
+ * first-paint closure behind this file, and the roster row in
+ * tests/build/vendorPdfLazy.test.js is what convicts a static edge the day one is typed.
+ *
+ * THE ANSWER IS KEPT HERE BECAUSE THE LEAF REFUSES TO KEEP IT: `loadFamilyCoverage`
+ * caches nothing and says why -- a cache is a lifecycle, and the caller that decides WHEN
+ * to read is the one that decides how long to hold. The dossier's free text is set in
+ * Lora, so Lora is the family read, and it is read ONCE per page load.
+ *
+ * ⛔ AND IT IS READ WITH NO EFFECT, NO TIMER AND NO PIECE OF STATE, which is this door's
+ * standing law four lines up and not a rule bent for a new errand. The request is kicked
+ * off by the first render that actually DRAWS a free control, and the answer is read from
+ * that same call on the next one. THE COST IS NAMED RATHER THAN HIDDEN: a card whose
+ * stored text already carries an uncovered character is silent on the door's first paint
+ * and speaks from the next render on -- the first keystroke, the first roll, the first
+ * anything. Silence while unmeasured is `coverageOf`'s own FAILS-OPEN rule, written down
+ * there in full; a door that re-rendered itself from a promise would be exactly the state
+ * this file does not hold.
  */
 import { useState } from 'react';
 
@@ -72,6 +98,14 @@ import PoolField from './PoolField.jsx';
 /** @typedef {import('../../domain/edit/types.js').FieldDeclaration} FieldDeclaration */
 
 /**
+ * One character the embedded faces cannot draw, in the reader's own shape. RESTATED
+ * rather than imported, exactly as `FreeField` restates it: a JSDoc edge would be free at
+ * runtime, but the two leaves that must not import the PDF volume are the two that read
+ * this shape, and one spelling of the rule is easier to keep than two.
+ * @typedef {{ char: string, codePoint: number, index: number }} UncoveredCharacter
+ */
+
+/**
  * One edit, in the coordinates the adapter's caller needs and in NO other shape.
  * @typedef {{ cardType: string, entityId: string, field: string, value: string }} CardEdit
  */
@@ -88,6 +122,51 @@ import PoolField from './PoolField.jsx';
  * @type {readonly FieldDeclaration[]}
  */
 const NO_ROWS = Object.freeze([]);
+
+/**
+ * The registered family the dossier sets a DM's free text in, named once and MEASURED
+ * rather than assumed: `src/pdf/theme.js` gives `body`, `body_em`, `prose` and `italic`
+ * -- every style a paragraph of the DM's own writing lands in -- fontFamily 'Lora', and
+ * keeps Nunito for labels, pills, captions and nav.
+ *
+ * ⚠ ONE FAMILY IS READ, AND THAT IS A NAMED EDGE RATHER THAN AN OVERSIGHT. A NAME the
+ * dossier happens to set in a Nunito label is measured here against Lora's four faces.
+ * The two families are both broad Latin cuts, so the characters that divide them are few;
+ * but the honest report for a name would be the UNION of what either face cannot draw,
+ * and that is a second read this member does not make.
+ */
+const DOSSIER_TEXT_FAMILY = 'Lora';
+
+/** The reporter once the faces are in, or null until then. @type {((text: string) => UncoveredCharacter[])|null} */
+let facesRead = null;
+/** The one request, so eight faces are fetched once per page load. @type {Promise<void>|null} */
+let facesRequested = null;
+
+/**
+ * THE FONT-COVERAGE REPORTER, or null while it is still coming. Calling this is what
+ * KICKS THE READ OFF, so the read happens only for a door that really drew a free
+ * control, and never at import time.
+ *
+ * ⛔ IT SWALLOWS A FAILED READ ON PURPOSE. A face that will not load leaves the reporter
+ * null, and a null reporter is a silent field -- the same FAILS-OPEN answer `coverageOf`
+ * gives for an unmeasured text, and for its reason: slandering a DM's perfectly good
+ * writing because a font request was slow teaches every user to ignore the note.
+ *
+ * EXPORTED because the seam is ASYNCHRONOUS: a test that could not await it could only
+ * ever assert the null, which is the half that was already true.
+ * @returns {((text: string) => UncoveredCharacter[])|null}
+ */
+export function faceCoverageReporter() {
+  if (facesRequested === null) {
+    facesRequested = import('../../pdf/lib/fontCoverage.js')
+      .then(async (faces) => {
+        const family = await faces.loadFamilyCoverage(DOSSIER_TEXT_FAMILY, faces.fetchFace);
+        facesRead = (text) => faces.coverageOf(text, family).uncovered;
+      })
+      .catch(() => { facesRead = null; });
+  }
+  return facesRead;
+}
 
 /** The closed refusal set, mapped to copy. FROZEN, in codepoint order. */
 export const REFUSAL_COPY_KEYS = Object.freeze({
@@ -320,6 +399,7 @@ export default function CardEditorDialog({
           value={valueOf(row)}
           onChange={(next) => setField(row.field, next)}
           disabled={readOnly}
+          coverage={faceCoverageReporter()}
         />
       );
     }

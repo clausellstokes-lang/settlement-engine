@@ -41,14 +41,18 @@
  * FUNCTION the caller supplies -- `PoolField`'s own `roll` idiom -- and with no
  * function passed the report simply never appears.
  *
- * ⚠ THE NOTE CARRIES THE CHARACTERS AND NOT YET A SENTENCE, and this is a recorded
- * boundary rather than an oversight: `en.js` and `editFields.test.jsx`'s A7 (which pins
- * the leaves' copy keys to an EXACT five-key set) both sit outside this member's file
- * manifest, so minting a key here would be a silent edit to another owner's file. The
- * slot the chair owns is one row -- `edit.field.uncovered`, reading
- * 'These characters will not print: {chars}' -- plus that key in A7's DECLARED_KEYS.
- * Until it lands the glyphs themselves are the report, which is the whole of the law
- * even if not yet the whole of the sentence.
+ * ⭐ THE NOTE IS A SENTENCE NOW (EM-D2b, the slot EM-D2 recorded above). The landed key
+ * `edit.field.uncovered` is the only string this leaf gained, and A7's DECLARED_KEYS
+ * carries it in the same commit, so the leaf still mints no copy and still renders
+ * nothing en.js did not write.
+ *
+ * ⛔ AND THE CHARACTERS KEEP AN ELEMENT OF THEIR OWN. The sentence is SPLIT AT ITS OWN
+ * `{chars}` PLACEHOLDER rather than interpolated whole, so the glyphs stay one node with
+ * one attribute: a reader -- a person's eye, a test, a future affordance that wants to
+ * point at them -- can take the characters without parsing a sentence out from around
+ * them, and the sentence's own wording stays en.js's business alone. The halves come
+ * from `t()` with NO vars, which copy/index.js leaves placeholder-intact by its own
+ * documented law, so not one word of the key is retyped here.
  */
 import { useId } from 'react';
 
@@ -88,6 +92,12 @@ export default function FreeField({
     if (char !== '' && !distinct.includes(char)) distinct.push(char);
   }
   const unprintable = distinct.join(' ');
+  // The sentence's two halves around the characters, resolved ONLY when there is
+  // something to say. `t` with no vars leaves `{chars}` literal (copy/index.js), which is
+  // what makes the split possible without retyping the key's words; a key that ever loses
+  // the placeholder yields one half and an undefined second, which React renders as
+  // nothing -- the sentence degrades, the characters never do.
+  const sentence = unprintable === '' ? null : t('edit.field.uncovered').split('{chars}');
 
   const quiet = { color: MUTED, fontFamily: sans, fontSize: chromeFontSize(FS.xs, mobile) };
   const shared = {
@@ -132,9 +142,15 @@ export default function FreeField({
       {atLimit
         ? <span style={quiet}>{t('edit.field.limit', { actual: text.length, max })}</span>
         : null}
-      {unprintable === ''
+      {sentence === null
         ? null
-        : <span style={quiet} data-uncovered={unprintable}>{unprintable}</span>}
+        : (
+          <span style={quiet}>
+            {sentence[0]}
+            <span data-uncovered={unprintable}>{unprintable}</span>
+            {sentence[1]}
+          </span>
+        )}
     </div>
   );
 }

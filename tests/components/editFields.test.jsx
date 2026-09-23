@@ -41,13 +41,23 @@ const LEAF_PATHS = [
 ];
 const LEAF_SOURCES = LEAF_PATHS.map((rel) => readFileSync(join(ROOT, rel), 'utf8'));
 
-/** §6.3's five keys, and the only strings either leaf may render. */
+/**
+ * §6.3's five keys, and the only strings either leaf may render.
+ *
+ * ⭐ A SIXTH ROW (EM-D2b, U7b). `FreeField` now says the font-coverage report as a
+ * SENTENCE rather than as bare glyphs, through the landed key `edit.field.uncovered`,
+ * and this is the row that admits it: the set equality below is exact in both
+ * directions, so the leaf could not have started rendering it without this line, and
+ * this line reds the day the leaf stops. The key lands in the commit that makes the
+ * leaf read it, which is the whole of the rule EM-D2's own header recorded.
+ */
 const DECLARED_KEYS = [
   'edit.field.emptyOption',
   'edit.field.limit',
   'edit.field.noOptions',
   'edit.field.rollAnother',
   'edit.field.rollUnavailable',
+  'edit.field.uncovered',
 ];
 
 /** Every literal first argument of a `t(` call in one source. */

@@ -1810,6 +1810,13 @@ describe('ARCH car 2 — the three first-paint budgets stay where the owner sign
       'src/domain/density/densityCreateBoundary.js',
       'src/generators/generateSettlementPipeline.js',
       'src/generators/pipeline.js',
+      // ⭐ EM-D2's font-coverage reader, which EM-D2b wires from the door above and from
+      // nowhere else. It is the train's ONLY member that lives inside src/pdf/, and the
+      // door reaches it through a DYNAMIC import precisely so that it cannot follow the
+      // door anywhere: this row is what convicts the day somebody rewrites that edge as a
+      // static one — a leaf under src/pdf/ in the first-paint closure is the doorway the
+      // whole vendor-pdf stack walks through, and no lane may open it by accident.
+      'src/pdf/lib/fontCoverage.js',
       'src/store/editSlice.js',
       // ⭐ EM-F3's phantom mint: the editor's own half of the counterparties roster. It is the
       // one module of the train that touches the EAGER save service, so it is exactly where a
