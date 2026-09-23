@@ -241,8 +241,11 @@ const ROUTE_BASELINE = Object.freeze({
   '/home':                  { roots: 1, files: 19, floored: 6, ruled: 4, bare: 19, owner: 'lane 28 — the landing' },
   // The Realm lazily mounts the create flow's ClerkNote for its one advisory
   // line, so lane 28's file lands on a route it does not own. One site.
-  '/realm':                 { roots: 2, files: 153, floored: 484, ruled: 1, bare: 0, owner: 'lane 28 — generate/ClerkNote.jsx, mounted here' },
-  '/map':                   { roots: 2, files: 153, floored: 484, ruled: 1, bare: 0, owner: 'lane 28 — generate/ClerkNote.jsx, mounted here' },
+  // ⭐ RE-MEASURED AT THE TRAIN TIP (2026-09-23, the chair; U25): /realm and /map floored 484 -> 485 —
+  // EM-E3's advance report adds ONE correctly floored anchor line reached by both routes
+  // (src/components/map/AdvanceReport.jsx); attributed by planting the pre-change body.
+  '/realm':                 { roots: 2, files: 153, floored: 485, ruled: 1, bare: 0, owner: 'lane 28 — generate/ClerkNote.jsx, mounted here' },
+  '/map':                   { roots: 2, files: 153, floored: 485, ruled: 1, bare: 0, owner: 'lane 28 — generate/ClerkNote.jsx, mounted here' },
 
   // floored 991 -> 992 (review wave 2 car 3, 2026-09-19): the Library's sample fork used to
   // answer EVERY null with the purchase modal, so it now renders the estate's refusal notice
@@ -326,7 +329,14 @@ const ROUTE_BASELINE = Object.freeze({
   // all, so it is neither floored nor bare nor ruled here. `bare` stays 0 and `ruled`
   // stays 3 for the same reason, and `files` is a FLOOR the grown tree (61 -> 68) still
   // clears — growth needs no pin, by this registry's own rule above.
-  '(shell)':                { roots: 1, files: 61, floored: 143, ruled: 3, bare: 0 },
+  //
+  // ⭐ RE-MEASURED AT THE TRAIN TIP (2026-09-23, the chair; judgment 271 / U25), floored 143 -> 144:
+  // TWO branches moved this row without seeing each other — EM-D1 re-recorded 138 -> 143 above
+  // (the reach into the editor), and EM-D4's surveyor bridge added ONE floored line in
+  // src/components/surveyor/InterpretApplyPanel.jsx without touching this census. EM-E3 and
+  // EM-F3 were measured at zero for this row with their component bodies planted. `bare`
+  // stays 0 and `ruled` stays 3; `files` is a FLOOR the grown tree still clears.
+  '(shell)':                { roots: 1, files: 61, floored: 144, ruled: 3, bare: 0 },
 });
 
 /**
