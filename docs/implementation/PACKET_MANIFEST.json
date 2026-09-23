@@ -41020,9 +41020,10 @@
     },
     {
       "id": "EM-R4",
-      "status": "READY",
+      "status": "LANDED",
       "packetPath": "docs/implementation/packets/settlement-editor/EM-R4.md",
       "verifiedBase": "63d046e758e220fbe45190763d044c6182016357",
+      "landedAt": "dcfe24f018364f94204de186ab313e6ef723f785",
       "changeManifest": [
         {
           "action": "MODIFY",

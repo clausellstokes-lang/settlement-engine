@@ -1,6 +1,6 @@
 # Settlement editor / EM-R4 — THE SETTLEMENT NAME IS HELD THROUGH ASSEMBLY: the mint RUNS at its exact draw position, spends its two draws on the shared ambient stream, and its result is DISCARDED under a held name
 
-- **Status:** `READY`
+- **Status:** `LANDED`
   ⚠ The status value above stands ALONE on its line because `parsePacketHeader`
   (`scripts/implementation-packets.mjs`) anchors the status row at end-of-line and takes `status`
   only when exactly one row matches. Every stamp, caveat and date goes on these continuation
@@ -11,6 +11,7 @@
   measures at this version's read tip. Every citation in this packet is `path :: symbol` (§P2.22); no line address is
   carried anywhere but in the two places the TREE ITSELF addresses by line, and both are quoted
   as the register's own data rather than as this packet's citation.
+- **Landed at:** `dcfe24f018364f94204de186ab313e6ef723f785` — the name held through assembly (version 3): the held name survives assembleSettlement's re-derivation; the writer-census row inherited from EM-R2 never re-added (207d); the line it rewrites retired on its own capsule row (227); built at dcfe24f01 on train EM-T16 stage 3
 - **Packet version:** 3
   - ⭐ Version 3 is the CAPSULE repair only (2026-09-23, the chair, judgment 227; the build lane's STOP at `02e66ed63` after its seal): the capsule's `requiredSymbols[4]` — the one `assembleSettlement.js` line this member rewrites in place (`settlementName` → `settlement.name`) — now carries `retiredBy` citing ODQ §934.47 addendum 132 (§731.3's idiom, 948 landed rows), so `validate` (sealed check 8) discharges its absence after the edit; the deferred `_retiredSymbolsAtLanding` idiom (unprecedented in the estate) is retired as inert. ⛔ No contract, budget, acceptance case, change row or non-goal moved; the built bytes are re-applied byte-identical under the new seal.
   - Version 1 was the first cut, compiled against train EM-T12's landed tip `91cc9ef5a` by an
