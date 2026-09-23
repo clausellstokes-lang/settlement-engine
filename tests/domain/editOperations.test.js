@@ -29,6 +29,9 @@ import {
 import { FACTION_RENAME_SURFACES, NPC_RENAME_SURFACES } from '../../src/domain/factionRename.js';
 import { EDIT_KINDS } from '../../src/domain/pendingEdits.js';
 import { COUP_STRESSOR_TYPE } from '../../src/domain/worldPulse/coup.js';
+import {
+  draftPeaceOffer, withPeaceOffer, withoutPeaceOffer,
+} from '../../src/domain/worldPulse/peaceTermsDrafting.js';
 import { PRIMARY_RELATIONSHIP_TYPES } from '../../src/domain/worldPulse/relationshipCompatibility.js';
 import {
   OP_CONSEQUENCE_POLICIES, OP_STAGES, OP_TYPES, makeOp, validateOp,
@@ -92,7 +95,12 @@ const THE_TEN_CONDITIONS = [
   'beliefExists', 'envoyArrived', 'forceInField', 'npcPresent', 'openRoute',
   'pendingPeaceOffer', 'plotInMotion', 'siegeInProgress', 'tradeWith', 'warInProgress',
 ];
-const ABSENT_CONDITIONS = ['envoyArrived', 'pendingPeaceOffer'];
+/**
+ * ⭐ ONE, NOT TWO, SINCE U28. `pendingPeaceOffer` moved to LIVE the day EM-E4's standing
+ * offer record landed on the receiving settlement; the arm below reads it through E4's own
+ * writer, so this roster shrinks only when a row's state actually exists.
+ */
+const ABSENT_CONDITIONS = ['envoyArrived'];
 
 const GOOD_TARGET = Object.freeze({ kind: 'institution', id: 'i1' });
 const campaign = (worldState, regionalGraph) => ({ worldState, regionalGraph });
@@ -242,12 +250,16 @@ describe('EM-B1a — the op vocabulary, the fourteen home ops, and the world hal
       missing: THE_TEN_CONDITIONS.filter((i) => !ids.includes(i)),
     }, 'the roster is set-equal to §16.1 in both directions').toEqual({ undeclared: [], missing: [] });
     const absent = ids.filter((i) => WORLD_CONDITIONS[i].source === 'EM-E4').sort(compareCodepoint);
-    expect(absent, 'exactly two rows are honestly absent, and openRoute and plotInMotion are'
-      + ' asserted OUT of that set by name: design §19 ruling 6 made structural').toEqual(ABSENT_CONDITIONS);
+    expect(absent, 'exactly ONE row is honestly absent, and openRoute, plotInMotion and'
+      + ' pendingPeaceOffer are asserted OUT of that set by name: design §19 ruling 6 made'
+      + ' structural, and U28 re-pointed the peace row at the record EM-E4 landed')
+      .toEqual(ABSENT_CONDITIONS);
     // anchored: `absent` is asserted exactly equal to the two ids above, so this is never vacuous.
     expect(absent, 'openRoute is LIVE, not an EM-E4 gap').not.toContain('openRoute');
     // anchored: the same exact set-equality two assertions above anchors this negative too.
     expect(absent, 'plotInMotion is LIVE, not an EM-E4 gap').not.toContain('plotInMotion');
+    // anchored: the same exact set-equality three assertions above anchors this negative too.
+    expect(absent, 'pendingPeaceOffer is LIVE since U28, not an EM-E4 gap').not.toContain('pendingPeaceOffer');
 
     // ── EVERY LIVE ROW DECLARES A READER; EVERY ABSENT ROW DECLARES NONE ───────────────
     const readerProblems = [];
@@ -319,6 +331,15 @@ describe('EM-B1a — the op vocabulary, the fourteen home ops, and the world hal
       stressors: [{ type: COUP_STRESSOR_TYPE, lifecycleStage: stage, affectedSettlementIds: ids }],
     });
     const peopled = (status) => ({ id: 'me', npcs: [{ name: 'n', status }] });
+    // ⭐ U28 — THE SAVE IS BUILT BY EM-E4's OWN WRITER, never by hand. `withPeaceOffer` is
+    // the one path that mints the key and `draftPeaceOffer` the one that shapes an offer, so
+    // this pair proves the round trip from the writer to the condition rather than asserting
+    // against a record shape a test invented. SCOPING IS STRUCTURAL HERE and so has no
+    // NEIGHBOUR row: the offers stand ON THE RECEIVER'S OWN RECORD, so a neighbour's standing
+    // offer is a key on a record this predicate is never handed.
+    const sued = (fromId) => withPeaceOffer(SUBJECT, draftPeaceOffer({
+      fromId, toId: 'me', terms: [{ type: 'tribute' }], budgetSpent: 1, tick: 3,
+    }));
 
     const scoping = [];
     const check = (label, id, record, state, expected) => {
@@ -333,6 +354,10 @@ describe('EM-B1a — the op vocabulary, the fourteen home ops, and the world hal
     check('POSITIVE a present person', 'npcPresent', peopled(STATUS_ACTIVE), campaign({}), true);
     check('POSITIVE a person stored without the key', 'npcPresent', { id: 'me', npcs: [{ name: 'n' }] }, campaign({}), true);
     check('STAGE nobody present', 'npcPresent', peopled('dead'), campaign({}), false);
+    check('POSITIVE a standing offer sued on my own record', 'pendingPeaceOffer', sued('greymoor'), campaign({}), true);
+    check('STAGE nobody has sued for peace', 'pendingPeaceOffer', SUBJECT, campaign({}), false);
+    check('STAGE the one standing offer accepted or refused away', 'pendingPeaceOffer',
+      withoutPeaceOffer(sued('greymoor'), 'greymoor'), campaign({}), false);
     check('POSITIVE a channel from me', 'openRoute', SUBJECT, channelWorld, true);
     check('NEIGHBOUR a confirmed trade_route from somewhere else', 'openRoute', SUBJECT,
       campaign({}, { channels: [{ from: 'other', to: 'x', type: 'trade_route', status: 'confirmed', visibility: 'public' }] }), false);
