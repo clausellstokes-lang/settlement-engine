@@ -360,7 +360,29 @@ describe('EM-C4c — the guard offers writer', () => {
         offer: REORDER,
       }],
       ['no_fulfil', { saveId: SAVE_ID, entryId: noOp.entryId, guard: noOp, offer: FULFIL }],
-      ['invalid_op', { saveId: SAVE_ID, entryId: gate.entryId, guard: gate, offer: FULFIL, pools: poolsFor(store) }],
+      // ⛔ `invalid_op` IS STILL REACHABLE, AND THIS ROW IS WHY THE ROW BELOW COULD MOVE AT
+      //    ALL. The row that used to reach it — the fulfil taken with NO completion — no
+      //    longer can, because U65 gave the seed its catalogue-COMPLETE payload; so the
+      //    attempt written for this refusal is now a DM value the row does not declare,
+      //    which `validateOp` convicts in its own words BEFORE the resolver is consulted.
+      //    Without it the closed-set assertions at the foot of this arm would pass
+      //    vacuously on nine reasons while the door can still produce ten.
+      ['invalid_op', {
+        saveId: SAVE_ID, entryId: gate.entryId, guard: gate, offer: FULFIL,
+        values: { shares: 'half' }, pools: poolsFor(store),
+      }],
+      // ⛔ RE-RECORDED, CAUSE MEASURED (U65, 5bd3271cf on this lineage): this row was written
+      //    for `invalid_op` — the DM completes nothing, and the catalogue answers that the
+      //    required `category` is absent. U65 shaped every `fulfil` from the catalogue row,
+      //    filling a field the rule does not compute from the value THE ENTRY carries, and
+      //    `d_gate` stages `category: 'military'`. The field is therefore present and the
+      //    catalogue has no absence to report; what it reports instead is that the word is
+      //    not one `institution.class` offers, which is design 20.3 ruling 3 exactly — an act
+      //    whose pooled word the live vocabulary no longer holds is refused, never applied
+      //    best-effort. Planted back, U65's pre-image answers `invalid_op` here again; and
+      //    with pools.js planted at its pre-U81 image the answer is STILL `stale_vocabulary`
+      //    on the same word, so U81 is not the mover and the door has no defect to cure.
+      ['stale_vocabulary', { saveId: SAVE_ID, entryId: gate.entryId, guard: gate, offer: FULFIL, pools: poolsFor(store) }],
       ['stale_vocabulary', {
         saveId: SAVE_ID, entryId: gate.entryId, guard: gate, offer: FULFIL,
         values: { category: 'a word no pool holds' }, pools: poolsFor(store),
