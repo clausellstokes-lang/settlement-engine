@@ -919,6 +919,33 @@ const ARGUED_UNLAYERED = Object.freeze({
     reason: 'FP substrate — the pulse\'s CLOSED fate vocabulary: the one spelling of every word the world pulse may stamp on worldPulseFate, with the kind each writer\'s own record literal earns it, spoken by every layer that closes, raises or renames an institution; it imports nothing at all, which is what makes its empty reads structural rather than argued',
     reads: Object.freeze([]),
   }),
+  // EM-E1: the head-of-tick application of the DM's decrees. THE ARGUMENT IS THE ONE
+  // worldPulseFates.js carries one row up, and it is the clearest case the roster has for
+  // "spoken by every port, speaking none back": a decree's SUBJECT is whatever the DM
+  // decreed, and the charter's own wave-3 rows say so by enumeration — EM-E4 pins forks
+  // across WAR (the siege verdict), FAITH (the festival), POP (the court's verdict, the
+  // exile's landing) and GRAMMAR (the envoy's road); EM-E5 binds the realm verbs and the
+  // information ops; EM-E6 the event catalogue; EM-E7 missions. Filing the hook under any
+  // one of those would make every OTHER port's decree a cross-layer coupling into that
+  // port — the inversion the substrate reading exists to prevent — and it is not the HOST
+  // kind either: that set is closed at four by exact equality, and this leaf mounts no
+  // stage. What it owns is the SCHEDULE and the CAUSE SHAPE (which staged entries are due
+  // at this tick, in EM-C1's reading order, and the finite receipt each one lands), which
+  // is a verdict shape rather than any port's subject — missionAcceptance.js's reading,
+  // one volume across.
+  // MEASURED AT THE RAISE, never copied: the leaf imports TWO modules and NEITHER is
+  // layered. `../edit/registry.js` sits outside CENSUS_SCOPE_RE (worldPulse + spatial) and
+  // therefore carries no layer at all; `./pulseHelpers.js` is in the PRE-PROGRAM unlayered
+  // baseline, and an unlayered read is not a cross-layer reach. Its layered reach is
+  // therefore 0, it is declared `reads: []`, and NO edge leaves the pair scan. What the
+  // raise buys is that the FIRST port this leaf ever reaches reds by name — which matters
+  // more here than usual, because wave 3's whole remaining programme is bindings between
+  // this leaf and the ports.
+  'src/domain/worldPulse/decreeHook.js': Object.freeze({
+    kind: 'substrate',
+    reason: 'EM substrate — the head-of-tick SCHEDULE and CAUSE SHAPE for the DM\'s decrees: which staged entries are due at this tick, in the registry\'s own reading order, and the finite receipt each one lands; it decides no port\'s state, rolls nothing and holds no clock, and the subject of a decree is whatever the DM decreed, which is every port by the charter\'s own wave-3 enumeration',
+    reads: Object.freeze([]),
+  }),
 });
 
 /** The CLOSED host set. A fifth infrastructure host is a chair conversation. */
@@ -1064,7 +1091,16 @@ const ARGUED_HOSTS = Object.freeze([
 // and it mints no cross-layer pair in either direction (scanCrossLayerPairs iterates LAYERED
 // importers and skips unlayered deps, and its one consumer, calamityKernel.js, is itself
 // unlayered). Deliberate, in this diff, per this anchor's law.
-const ARGUED_ROSTER_CEILING = 29;
+// 29 -> 30 at EM-E1: decreeHook.js admitted as substrate — the head-of-tick schedule and
+// cause shape for the DM's decrees, whose subject is whatever the DM decreed and therefore
+// every port at once (the full argument sits on its roster entry above). Its two imports
+// are BOTH unlayered — one outside CENSUS_SCOPE_RE, one in the pre-program baseline — so
+// `reads: []` is measured rather than asserted and no edge leaves the pair scan. THE RAISE
+// IS OWED BY THE CHARTER'S OWN CREATE, not chosen: this header's law is that a new .js
+// under src/domain/worldPulse takes a family or an argued entry in the SAME commit, and
+// wave 3's row puts the leaf at exactly that address. Deliberate, in this diff, per this
+// anchor's law.
+const ARGUED_ROSTER_CEILING = 30;
 
 /** The FP scope the unlayered census is TOTAL over. */
 const CENSUS_SCOPE_RE = /^src\/domain\/(?:worldPulse|spatial)\//;

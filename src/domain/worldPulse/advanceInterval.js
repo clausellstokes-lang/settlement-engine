@@ -192,10 +192,36 @@ export function collapseIntervalHistory(worldState, appendedRecords, wizardNews 
     }
   }
   const envoyEvidence = [...envoyEvidenceById.values()];
+  // ⭐ EM-E1 — THE DECREE RECEIPT SURVIVES THE COLLAPSE, and it is the one thing this
+  // orchestrator owes the tick hook (design §2.6, §11; ARCH §6's "scheduling touches the
+  // interval orchestrator, not the hook alone"). MEASURED, not assumed: a one_month
+  // advance runs four kernel ticks, a decree due at tick 1 applies at tick 1, and the
+  // ring policy above then keeps ONLY the final tick's record — so without this the DM's
+  // own act would be applied to the world and erased from the record in the same advance,
+  // which is precisely the lie design §9 names ("the pulse must treat decrees as
+  // first-class causes or the chronicle lies"). The registry itself is NOT at risk: it
+  // rides `settlementUpdates` through `foldUpdatesOntoSaves`, so an entry applies exactly
+  // once across the interval (measured over four ticks) — it is the RECEIPT that was lost.
+  // Same shape as WR-7a's evidence above, for the same reason: a durable interval fact,
+  // first occurrence in tick order, deduped by the producer's own key. The key is the
+  // PAIR (saveId, decreeId), because `decrees` is a key on the saved settlement (design
+  // §2.5) and two registries may mint the same entry id without meaning one act.
+  const decreeCauseByKey = new Map();
+  for (const record of intervalRecords) {
+    for (const cause of Array.isArray(record?.decreeCauses) ? record.decreeCauses : []) {
+      const key = `${String(cause?.saveId ?? '')} ${String(cause?.decreeId ?? '')}`;
+      if (cause?.decreeId && !decreeCauseByKey.has(key)) decreeCauseByKey.set(key, cause);
+    }
+  }
+  const decreeCauses = [...decreeCauseByKey.values()];
   let composedFinalRecord = (mechanicalRumorSeeds.length || carriesAuthoritativeMechanicalSeeds)
     ? { ...finalRecord, mechanicalRumorSeeds }
     : finalRecord;
   if (envoyEvidence.length) composedFinalRecord = { ...composedFinalRecord, envoyEvidence };
+  // The spread re-writes the key IN PLACE when the final tick carried causes of its own,
+  // so the merged list never moves a key; an interval with no decree adds nothing at all
+  // and the composed record stays byte-identical to the one this collapse wrote before.
+  if (decreeCauses.length) composedFinalRecord = { ...composedFinalRecord, decreeCauses };
   const composed = [
     ...survivors,
     composedFinalRecord,
