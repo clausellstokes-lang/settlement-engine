@@ -13,9 +13,9 @@ import {
   computePublicLegitimacy,
 } from '../../src/generators/factionDynamics.js';
 import { generateSettlementPipeline } from '../../src/generators/generateSettlementPipeline.js';
+import { fingerprintPowerEconomyInput } from '../../src/data/economyFingerprint.js';
 import {
   assertPowerEconomyFreshness,
-  fingerprintPowerEconomyInput,
 } from '../../src/generators/power/economyReconciliation.js';
 
 const STALE_SEED_CONFIG = {

@@ -19,9 +19,9 @@
  * created.
  */
 
+import { fingerprintPowerEconomyInput } from '../../data/economyFingerprint.js';
 import { deepClone } from '../../domain/clone.js';
 import { deriveFactionProfile } from '../../domain/factionProfile.js';
-import { fnv1a32 } from '../../kernel/proseHash.js';
 import { createPRNG } from '../../kernel/prng.js';
 import { clearActiveRng, setActiveRng } from '../../kernel/rngContext.js';
 import {
@@ -34,7 +34,6 @@ import {
 // stale intent object handed across the seam mid-run — nothing is persisted.
 const POWER_INTENT_VERSION = 2;
 const POWER_PROJECTION_VERSION = 1;
-const ECONOMY_FINGERPRINT_VERSION = 'power-economy-v1';
 const POWER_STREAM = 'power-structure';
 const NEIGHBOUR_SOURCES = new Set([
   'neighbour_mirror',
@@ -80,34 +79,6 @@ function powerLabelFor(power) {
       : power >= 18 ? 'Significant'
         : power >= 10 ? 'Minor'
           : 'Suppressed';
-}
-
-function economyProjectionInput(economicState, tier) {
-  return {
-    tier: String(tier || ''),
-    prosperity: economicState?.prosperity || 'Moderate',
-    safetyLabel: economicState?.safetyProfile?.safetyLabel || 'Moderate',
-    foodLabel: economicState?.foodSecurity?.label || 'Secure',
-  };
-}
-
-/**
- * Versioned, draw-free fingerprint of every economic field the power projector
- * reads. FNV-1a is appropriate here because this is an internal freshness
- * assertion, not a security boundary; the explicit tuple order avoids object-key
- * ordering ambiguity.
- */
-export function fingerprintPowerEconomyInput(economicState, tier) {
-  const input = economyProjectionInput(economicState, tier);
-  const serialized = JSON.stringify([
-    ECONOMY_FINGERPRINT_VERSION,
-    input.tier,
-    input.prosperity,
-    input.safetyLabel,
-    input.foodLabel,
-  ]);
-  const digest = fnv1a32(serialized).toString(16).padStart(8, '0');
-  return `${ECONOMY_FINGERPRINT_VERSION}:${digest}`;
 }
 
 /**

@@ -51,13 +51,13 @@ const domainDir = resolve(repoRoot, 'src/domain');
  * an entry when its inversion lands) but NEVER grow. Adding a domain→generators
  * edge that isn't here is a layering regression and fails the test below.
  *
- * Baseline captured at HEAD 8e10816 (verified by grep over src/domain/**):
- *   1. coherence/checkDraftEdit.js      → generators/structuralValidator.js
- *   2. display/defenseDisplay.js        → generators/defenseGenerator.js
- *   3. events/mutateEntities.js         → generators/prng.js (moved from mutate.js in the god-module split)
- *   4. relationships/neighbourBackLink.js → generators/crossSettlementConflicts.js
- *   5. worldPulse/pulseKernel.js        → generators/prng.js
- *   6. worldPulse/institutionLifecycle.js → generators/computeActiveChains.js
+ * Baseline captured at HEAD 8e10816. THAT CAPTURE IS HISTORICAL (see the W6
+ * re-baseline below); BASELINE_EDGES is the authority, and the live set is FOUR
+ * files / FIVE specifiers: checkDraftEdit.js, neighbourBackLink.js,
+ * institutionLifecycle.js and resourceDynamicsKernel.js (two specifiers).
+ * EM-R0f is why the set will not grow: the power/economy input fingerprint moved
+ * DOWN a layer, to src/data/economyFingerprint.js, so that EM-R0c's
+ * src/domain/edit record merge reads it without becoming the fifth file here.
  */
 // MASTER MERGE W6 RE-BASELINE (honest, both directions): master's frozen list
 // was re-derived against this lineage's tree. SHRINK — defenseDisplay,
@@ -166,12 +166,12 @@ describe('architecture boundary — domain → generators ratchet', () => {
     ).toEqual([]);
   });
 
-  it('baseline is exactly the 6 known edges (cardinality guard)', () => {
+  it('baseline is exactly the 4 files and 5 known edges (cardinality guard)', () => {
     // A coarse second lock: even if the per-file diff above were somehow fooled,
     // the total count must match the documented baseline. Lower is fine (cycle
     // shrank); higher means an edge crept in.
     const liveCount = Object.values(edges).reduce((n, specs) => n + specs.length, 0);
-    expect(liveCount).toBeLessThanOrEqual(6);
+    expect(liveCount).toBeLessThanOrEqual(5);
   });
 
   it('derives its repository root from this module URL, never the working directory', () => {
