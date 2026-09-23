@@ -333,6 +333,16 @@ describe('EM-D1 — the edit-mode shell', () => {
       .split("from './components/edit/").length).toBe(2);
     // The shell is mounted exactly once, and behind the preference the entry writes.
     expect(APP_SOURCE.split('<EditModeShell />').length).toBe(2);
+
+    // ⛔ AND THE BOUNDARY IS NARRATED, NOT SILENT (the witnessed-wait ratchet,
+    // tests/lint/loadingNarrationRatchet.test.js). This fallback really paints: the
+    // chunk is fetched over the network the first time a DM enters edit mode, so the
+    // wait is perceptible and the ratchet's justify-imperceptible door does not apply.
+    const mountBlock = APP_SOURCE.split('<EditModeShell />')[0].split('{editorMode ?')[1];
+    expect(mountBlock.includes('role="status"')).toBe(true);
+    expect(mountBlock.includes('fallback={null}')).toBe(false);
+    // GUARD-THE-GUARD: the same slice of a silent boundary reads the other way.
+    expect('{editorMode ? (<Suspense fallback={null}>'.includes('fallback={null}')).toBe(true);
   });
 
   it('A6: every string the two surfaces render comes from en.js through t(), and every key the shell maps resolves', async () => {
@@ -350,6 +360,14 @@ describe('EM-D1 — the edit-mode shell', () => {
     expect(copyKeysIn(CARD_SOURCE).filter((key) => key.startsWith('edit.')))
       .toEqual(['edit.shell.enter', 'edit.shell.enterNamed']);
     expect(APP_SOURCE.split(`s.userPrefs?.${slice.EDITOR_MODE_PREF_KEY}`).length).toBe(2);
+
+    // ⛔ THE WAIT LINE'S JOIN. Its one home is the registry; the EAGER root spells it as
+    // a literal because reaching `t()` there would pull copy/index.js and en.js into the
+    // first-paint closure (measured 270 -> 272 modules), which the editor-train arm
+    // refuses. This equality is what keeps the two from drifting apart.
+    expect(typeof en.edit.shell.opening).toBe('string');
+    expect(APP_SOURCE.split(en.edit.shell.opening).length).toBe(2);
+    expect(en.edit.shell.opening.includes('\u2014') || en.edit.shell.opening.includes('!')).toBe(false);
     expect(CARD_SOURCE.split("import('../../store/editSlice.js')").length).toBe(2);
   });
 

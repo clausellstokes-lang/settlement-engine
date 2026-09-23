@@ -881,9 +881,21 @@ export default function App() {
           The tome's register while the editor is on. The condition is a BARE
           truthiness read: the authoritative reading of the stored word — and the
           refusal for an account the gate does not admit — belong to the shell,
-          beside the slice that owns the vocabulary and the predicate. */}
+          beside the slice that owns the vocabulary and the predicate.
+          ⛔ THE BOUNDARY IS NARRATED, NOT SILENT (the witnessed-wait ratchet): this
+          fallback really paints, for a real network round trip, the first time a DM
+          enters edit mode. The sentence's one home is `edit.shell.opening` in
+          src/copy/en.js; it is spelled as a LITERAL here because this file is EAGER
+          and reaching the registry through `t()` would pull copy/index.js and en.js
+          into the first-paint closure (measured: 270 -> 272 modules), which is the
+          rise the editor-train arm exists to refuse. editModeShell.test.jsx pins the
+          literal BYTE-EQUAL to the registry's own line. */}
       {editorMode ? (
-        <Suspense fallback={null}>
+        <Suspense fallback={(
+          <span role="status" style={{ display: 'block', padding: `${SP.md}px ${SP.lg}px`, color: BODY, fontFamily: sans, fontSize: FS.sm }}>
+            Opening the editor…
+          </span>
+        )}>
           <EditModeShell />
         </Suspense>
       ) : null}
