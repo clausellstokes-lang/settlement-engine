@@ -1,5 +1,5 @@
 /**
- * forkSitesConsultPins.test.js — EM-E4b acceptance cases E4b-1 to E4b-8 (wave 3; design
+ * forkSitesConsult.test.js — EM-E4b acceptance cases E4b-1 to E4b-8 (wave 3; design
  * §16 and §19 rulings 1, 3 and 4; the chair's judgments 265 and 270).
  *
  * THE CLAIM. EM-E4 landed the pin bag and the consult verb; the registered fork SITES did

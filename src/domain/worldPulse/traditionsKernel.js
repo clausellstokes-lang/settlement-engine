@@ -140,7 +140,7 @@ export const TRADITION_OUTCOME = Object.freeze({
  * `cancelled` is written by the DETERMINISTIC skip arm — a town at war holds no festival — so
  * a pin naming it would pin a draw that never happens, the exact shape design §19 ruling 4
  * refuses. EM-E4's case E4-3 measured the narrowing; the arm in
- * tests/simulation/forkSitesConsultPins.test.js holds this list equal to the words the real
+ * tests/simulation/forkSitesConsult.test.js holds this list equal to the words the real
  * `outcomeForDraw` produces, so the two can never drift.
  * @type {Readonly<{ id: string, outcomes: readonly string[] }>}
  */
