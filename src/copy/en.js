@@ -1857,9 +1857,24 @@ export const en = Object.freeze({
       createSubject:           'the counterparty',
       refusalMintFailed:       'The counterparty could not be founded, so nothing was written.',
       refusalMintInvalidName:  'A counterparty needs a name, so nothing was written.',
-      refusalMintNoSeed:       'This settlement has no seed open, so {field} could not be founded.',
+      // ⛔ THE ONE LINE THE TWO CREATE ERRANDS SHARE, AND THEREFORE THE ONE WITHOUT A
+      // SUBJECT (EM-D1c). A save with no seed can found nothing and can order nothing,
+      // so the same sentence answers the counterparty's door and a roster newcomer's;
+      // naming one of them here would make it false on the other.
+      refusalMintNoSeed:       'This settlement has no seed open, so nothing could be founded.',
       refusalMintOffPool:      'One of the choices is not on its list, so {field} was not founded.',
       refusalMintSaveFailed:   'The library did not take {field}, so nothing was written.',
+
+      // ── The roster CREATE errand (EM-D1c) ──────────────────────────────────
+      // The plus on a roster root orders a newcomer as a DECREE, so its refusals are
+      // the registry's own closed set and not the mint's. Each line says what was not
+      // written rather than what the DM did wrong, and none of them names a subject:
+      // the door shows them over a form that has not been staged at all.
+      refusalAddInvalidOp:     'This build does not accept that new entry, so nothing was ordered.',
+      refusalAddNoSave:        'This settlement is not the open save, so nothing was ordered.',
+      refusalAddNotStaged:     'The order was not written, so the page of decrees is unchanged.',
+      refusalAddStaleVocabulary: 'One of the choices is not on its list, so nothing was ordered.',
+      refusalAddUnknownTarget: 'This card takes no new entry at this door, so nothing was ordered.',
     },
 
     // ── The edit-mode shell (EM-D1) ─────────────────────────────────────────
@@ -1897,7 +1912,11 @@ export const en = Object.freeze({
       derivedHead:    'Derived',
       pencil:         'Edit the {card} card',
       plus:           'Add to {card}',
-      plusReason:     'Nothing writes a new entry yet, so additions are not open.',
+      // ⭐ RE-WORDED BY EM-D1c, and the cause is that the old sentence became false: the
+      // three roster roots the catalogue carries an add-op for DO write a new entry now,
+      // through the page of decrees. The line survives for the roster that has no such
+      // act, which is the only place the shell still shows it.
+      plusReason:     'No act adds to this card yet, so its plus stays closed.',
       actsNote:       'Each act names the state it needs. This shell does not yet read that state, and no act is open.',
       provenance:     'Follows from {source}, so change {source}.',
       counterpartiesHead: 'Counterparties',

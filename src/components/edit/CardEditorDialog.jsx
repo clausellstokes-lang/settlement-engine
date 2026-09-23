@@ -27,6 +27,23 @@
  * has always been, one call per CHANGED field. The two seams are never both bound by the same
  * mount, and neither knows what the other writes.
  *
+ * ⭐ AND THE CREATE ERRAND'S FIELDS ARE THE CALLER'S, NOT THIS DOOR'S GUESS (EM-D1c). A roster
+ * newcomer is ordered as a DECREE whose payload the op catalogue declares, and that payload is a
+ * SUBSET of the card's declared rows: a person joins the roster with a name and a role, and her
+ * status and her note are written afterwards through the ordinary pencil. So the mount NAMES the
+ * fields its errand writes and this door draws EM-A1's own rows for exactly those — their
+ * labels, their limits and their pools, in the table's authored order — while a mount that names
+ * none draws every declared row, which is what the editor and the phantom's create both want. A
+ * named field the table does not declare draws nothing at all, because a control this door
+ * cannot label is one it cannot honestly render.
+ *
+ * ⛔ AND THE POOL CATALOGUE TRAVELS WITH THE VALUES. The writer resolves every pooled value
+ * against the catalogue its CALLER hands in, and this door is the only party that knows which
+ * pools it drew; so Confirm hands over the pool table's OWN answer for each pooled row it
+ * rendered, under that pool's own name. It is the RAW answer and never the option list the
+ * control shows: that list may carry a value the record holds off-list, and handing that back as
+ * the vocabulary would make the writer's own check agree with anything.
+ *
  * ⛔ THE CANON RULE HAS NO SUBJECT ON THE CREATE ERRAND, and the door says so by construction
  * rather than by disabling a control it cannot explain. `readOnly` exists because design §2.6
  * turns an EDIT OF THIS RECORD into an event once the settlement is canonized; a CREATE form
@@ -101,15 +118,67 @@ export const CREATE_REFUSAL_COPY_KEYS = Object.freeze({
 });
 
 /**
+ * EM-D1c's ROSTER CREATE refusals, mapped to copy. FROZEN, in codepoint order, and a THIRD map
+ * for the reason the second one exists: the roster writer's closed set is its own vocabulary and
+ * not the phantom mint's. The two CREATE sets meet in exactly ONE word — a save with no seed can
+ * found nothing, whichever errand asked — so that word keeps ONE line, spelled in the map above
+ * and subject-free, and these five are the words only this errand can say. The lookup below
+ * reads both maps and needs no errand flag, which is only true while they stay disjoint.
+ */
+export const ADD_REFUSAL_COPY_KEYS = Object.freeze({
+  invalid_op: 'edit.dialog.refusalAddInvalidOp',
+  no_save: 'edit.dialog.refusalAddNoSave',
+  not_staged: 'edit.dialog.refusalAddNotStaged',
+  stale_vocabulary: 'edit.dialog.refusalAddStaleVocabulary',
+  unknown_target: 'edit.dialog.refusalAddUnknownTarget',
+});
+
+/**
+ * ONE CREATE refusal's line, by OWN-KEY lookup in both maps and then the one fallback. The
+ * lookup is `Object.hasOwn` rather than a bracket read because the word arrives from an
+ * executor: an inherited name is an unknown refusal like any other and takes the fallback.
+ * @param {unknown} reason @returns {string} a copy key
+ */
+const createRefusalKey = (reason) => {
+  const word = String(reason ?? '');
+  if (Object.hasOwn(CREATE_REFUSAL_COPY_KEYS, word)) return CREATE_REFUSAL_COPY_KEYS[word];
+  if (Object.hasOwn(ADD_REFUSAL_COPY_KEYS, word)) return ADD_REFUSAL_COPY_KEYS[word];
+  return REFUSAL_FALLBACK_KEY;
+};
+
+/**
+ * The rows one errand draws: EM-A1's declared rows in the table's AUTHORED order, kept to the
+ * field names the caller named. No list at all is the whole card. A named field the table does
+ * not declare is not drawn, and a call that names only such fields draws no form at all.
+ *
+ * ⛔ SPELLED AS A LOOP WITH A GUARD for the reason the save walk gives below: A3's source scan
+ * reads this leaf's RAW bytes and forbids the selecting and ordering spellings anywhere in them.
+ * @param {readonly FieldDeclaration[]} rows @param {readonly string[]|null|undefined} fields
+ * @returns {readonly FieldDeclaration[]}
+ */
+function rowsFor(rows, fields) {
+  if (!Array.isArray(fields)) return rows;
+  /** @type {FieldDeclaration[]} */
+  const kept = [];
+  for (const row of rows) {
+    if (fields.includes(row.field)) kept.push(row);
+  }
+  return kept;
+}
+
+/**
  * @param {{ open: boolean, cardType: string, entityId: string,
  *   values: Readonly<Record<string, string>>, world: object|null, seed: string,
  *   phase: 'draft'|'canon',
  *   apply?: ((edit: CardEdit) => Promise<ApplyResult>)|null,
- *   create?: ((values: Record<string, string>) => Promise<ApplyResult>)|null,
+ *   create?: ((values: Record<string, string>,
+ *     pools: Readonly<Record<string, readonly string[]>>) => Promise<ApplyResult>)|null,
+ *   createFields?: readonly string[]|null,
  *   onClose: () => void }} props
  */
 export default function CardEditorDialog({
-  open, cardType, entityId, values, world, seed, phase, apply = null, create = null, onClose,
+  open, cardType, entityId, values, world, seed, phase,
+  apply = null, create = null, createFields = null, onClose,
 }) {
   // THE HOOKS STAND ABOVE THE TWO EARLY RETURNS, which is React's own invariant and the
   // shape both door primitives already use; the observable algorithm is unchanged.
@@ -119,7 +188,11 @@ export default function CardEditorDialog({
   const [busy, setBusy] = useState(false);
 
   if (!open) return null;
-  const declarations = isEditableCard(cardType) ? declarationsFor(cardType) : NO_ROWS;
+  const declared = isEditableCard(cardType) ? declarationsFor(cardType) : NO_ROWS;
+  // THE ERRAND'S OWN ROWS. With no field list this is the card, by identity, which is every
+  // mount this door had before EM-D1c; a form with no row at all renders nothing, exactly as an
+  // undeclared card does, because a Confirm over no field would write an empty subject.
+  const declarations = rowsFor(declared, createFields);
   if (declarations.length === 0) return null;
 
   // ONE derivation, spelled ONCE: the first door is a DRAFT surface, and on canon the
@@ -141,6 +214,20 @@ export default function CardEditorDialog({
     const pool = poolValues(row.pool, world ?? null);
     const held = valueOf(row);
     return held !== '' && !pool.includes(held) ? [held, ...pool] : pool;
+  };
+
+  // THE POOL CATALOGUE THIS ERRAND DREW, keyed by the pool's own name (see the header). It is
+  // the pool table's RAW answer — `optionsFor` above may prepend a value the record holds
+  // off-list, and a catalogue carrying that would agree with anything.
+  const poolsDrawn = () => {
+    /** @type {Record<string, readonly string[]>} */
+    const bag = {};
+    for (const row of declarations) {
+      if (row.kind === 'pool' && typeof row.pool === 'string') {
+        bag[row.pool] = poolValues(row.pool, world ?? null);
+      }
+    }
+    return bag;
   };
 
   const dispatchable = typeof apply === 'function';
@@ -178,10 +265,11 @@ export default function CardEditorDialog({
     onClose();
   };
 
-  // THE CREATE ERRAND. ONE call carrying EVERY declared field, in the table's authored order,
-  // because a subject that does not exist yet cannot be written one field at a time. The values
-  // are gathered by the same reader the controls render from, so what the caller receives is
-  // exactly what the DM sees. The guard is spelled twice for the same reason the editor's is:
+  // THE CREATE ERRAND. ONE call carrying every field THIS ERRAND DRAWS, in the table's authored
+  // order, because a subject that does not exist yet cannot be written one field at a time, and
+  // with the pool catalogue those fields were drawn from. The values are gathered by the same
+  // reader the controls render from, so what the caller receives is exactly what the DM sees,
+  // and no row the door did not show is sent. The guard is spelled twice for the editor's reason:
   // once where the control's disabled state is computed and again as the handler's first
   // statement, so an absent seam has no call path.
   const onConfirm = async () => {
@@ -192,16 +280,14 @@ export default function CardEditorDialog({
     for (const row of declarations) gathered[row.field] = valueOf(row);
     let result;
     try {
-      result = await create(gathered);
+      result = await create(gathered, poolsDrawn());
     } catch {
       result = null;
     }
     if (!result || result.ok !== true) {
       setNotice({
         rubric: t('edit.dialog.refusalRubric'),
-        line: t(CREATE_REFUSAL_COPY_KEYS[result?.reason] ?? REFUSAL_FALLBACK_KEY, {
-          field: t('edit.dialog.createSubject'),
-        }),
+        line: t(createRefusalKey(result?.reason), { field: t('edit.dialog.createSubject') }),
       });
       setBusy(false);
       return;
