@@ -64,9 +64,19 @@ import {
   contentRuntimeFromCampaignBinding,
 } from '../domain/content/contentEnvironment.js';
 
-// Per-campaign cap on retained pre-pulse snapshots (multi-step undo depth). Mirrors
-// the slice's PULSE_UNDO_CAP — the advance body that reads it now lives here.
-const PULSE_UNDO_CAP = 10;
+/**
+ * Per-campaign cap on retained pre-pulse snapshots (multi-step undo depth). THE ONE HOME
+ * of the number: the advance body that reads it lives here, the slice that once mirrored
+ * it no longer spells it, and nothing else in src/ declares a second one.
+ *
+ * ⛔ EXPORTED SO A READER IMPORTS IT INSTEAD OF PARSING THIS FILE (U8, judgment 267). The
+ * registry page states the rewind's reach to the DM, and its acceptance arm used to
+ * recover the number with a regex over this source — a second spelling of the declaration
+ * that goes quietly wrong the day the `const` is re-formatted, and one that cannot follow a
+ * rename. A surface that advertises the cap now reads the value; the pin on it is the
+ * page's own A7 arm.
+ */
+export const PULSE_UNDO_CAP = 10;
 const AUTH_SESSION_CHANGED_RESULT = Object.freeze({ ok: false, reason: 'auth_session_changed' });
 
 function sessionCurrent(isSessionCurrent) {
