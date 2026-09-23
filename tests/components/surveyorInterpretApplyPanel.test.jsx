@@ -102,6 +102,35 @@ describe('InterpretApplyPanel', () => {
     expect(receipt.textContent).toMatch(/seed-xyz/);
   });
 
+  // EM-D4 (design §3's Surveyor row): the barrier now speaks the REGISTRY's vocabulary.
+  // The count line stays — the arm above still reads it — and beside it each blocked
+  // proposal renders as one Guard: a kind from EM-C2's own five and its offers, addressed
+  // to the decree id that proposal would take the moment consent is given.
+  it('EM-D4 (2): a blocked proposal renders as a guard kind with its offers, addressed to the decree it would become', async () => {
+    interpret();
+    await waitFor(() => screen.getByTestId('op-3'));
+    fireEvent.click(screen.getAllByRole('button', { name: /approve this op/i })[3]);
+    fireEvent.click(screen.getByRole('button', { name: /apply accepted ops/i }));
+    await waitFor(() => screen.getByTestId('apply-result'));
+
+    const guards = screen.getByTestId('apply-consent-guards');
+    const row = guards.querySelector('[data-guard-kind]');
+    expect(row.getAttribute('data-guard-kind'), 'the kind is EM-C2\'s prerequisite: consent'
+      + ' is a thing that must be true FIRST').toBe('prerequisite');
+    expect(row.getAttribute('data-guard-entry'), 'and it addresses the decree id derived'
+      + ' from the review artifact plus the proposal\'s own review index')
+      .toMatch(/^decree:review:.*:3$/);
+    expect([...row.querySelectorAll('[data-offer]')].map((node) => node.getAttribute('data-offer')),
+      'the two offers, in the order a reader sees them').toEqual(['self', 'proceed']);
+    expect(row.textContent).toMatch(/seal_the_vault is protected/i);
+    expect(row.textContent).toMatch(/edit it yourself/i);
+    expect(row.textContent).toMatch(/tick to consent/i);
+    // The barrier is UNWEAKENED: rendering it in the guard vocabulary judges nothing a
+    // second time, so the writer still never ran for the un-consented op.
+    expect(applyEventRef.fn).toHaveBeenCalledTimes(0);
+    expect(screen.getByTestId('apply-result').textContent).toMatch(/1 blocked/i);
+  });
+
   it('a consented protected op DOES apply', async () => {
     interpret();
     await waitFor(() => screen.getByTestId('op-3'));
