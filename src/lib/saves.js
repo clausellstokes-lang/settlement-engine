@@ -87,11 +87,35 @@ async function loadNormalize() {
   return _normalize;
 }
 
-/** Generate a client-side UUID for saves we must reference before insert
- *  (the bidirectional link embeds the new save's id in both rows). */
+/**
+ * Generate a client-side UUID for saves we must reference before insert
+ * (the bidirectional link embeds the new save's id in both rows).
+ *
+ * ⛔ U52 — THE FALLBACK USED TO BE THE CLOCK ALONE, WHICH IS U22'S COLLISION SHAPE
+ * WEARING A UUID. `Date.now()` has MILLISECOND resolution, so two saves minted inside one
+ * millisecond took the SAME uuid — and this id is not a label: `supabaseSave` embeds it
+ * in BOTH rows of a bidirectional neighbour link and then creates+updates against it, so
+ * a repeat makes two settlements one primary key on the server exactly as it did on the
+ * device. The local backend's mint was cured at U22; this is the same hole in the other
+ * backend, and it is cured with THE SAME FUNCTION rather than a second spelling of it.
+ *
+ * `newLocalSaveId` is the monotonic source: the clock stays the high part and a counter
+ * sits beside it, so a same-millisecond pair cannot converge. It is called with an EMPTY
+ * row list because there is nothing to avoid here — the device's localStorage rows are
+ * not this backend's keyspace — and what is wanted from it is precisely the half that
+ * does not depend on rows: "a key no earlier mint of this module used". The UUID's
+ * SHAPE is untouched (`00000000-0000-4000-8000-` + twelve hex), so nothing that reads,
+ * stores or validates one of these ids sees a different kind of value.
+ *
+ * `crypto.randomUUID` still wins wherever it exists, which is every browser the product
+ * ships to; the fallback is the one that had no answer.
+ *
+ * @returns {string} a v4-shaped id no earlier mint of this module has produced
+ */
 function newSaveId() {
   if (globalThis.crypto?.randomUUID) return globalThis.crypto.randomUUID();
-  return `00000000-0000-4000-8000-${Date.now().toString(16).padStart(12, '0').slice(-12)}`;
+  const tick = newLocalSaveId([]);
+  return `00000000-0000-4000-8000-${tick.toString(16).padStart(12, '0').slice(-12)}`;
 }
 
 // ── Local storage helpers ───────────────────────────────────────────────────
