@@ -24,9 +24,9 @@
  *     now-impossible future instead of leaving a fast-forward restore.
  *   • SATURATION (R-1 MUST-FIX) — the stamped depth is the session counter
  *     `advanceSeqByCampaign`, NOT a count of retained advance snapshots: the
- *     advance stack evicts past PULSE_UNDO_CAP (10), so a retained-entry count
- *     pegs at the cap and would pass STALE proposal snapshots after the 10th
- *     advance. The counter keeps rising through eviction, and undoLastPulse
+ *     advance stack evicts past PULSE_UNDO_CAP, so a retained-entry count
+ *     pegs at the cap and would pass STALE proposal snapshots once the retained
+ *     window is full. The counter keeps rising through eviction, and undoLastPulse
  *     decrements it as it pops so the legitimate walk-back still re-arms.
  *   • OWNER FENCE — entries stamp the owner/session at push and refuse to
  *     restore under a different session (same-UUID campaigns across accounts;
@@ -78,6 +78,7 @@ vi.mock('../../src/lib/analytics.js', async (importOriginal) => {
 import { createCampaignSlice } from '../../src/store/campaignSlice.js';
 import { createCampaignWorldPulseSlice } from '../../src/store/campaignWorldPulseSlice.js';
 import { PROPOSAL_UNDO_CAP } from '../../src/store/campaignWorldPulseDeferred.js';
+import { PULSE_UNDO_CAP } from '../../src/store/campaignAdvanceSession.js';
 import { finishConfirmedCampaignDelete } from '../../src/store/campaignDeletionSession.js';
 import { captureCampaignSession } from '../../src/store/campaignSliceShared.js';
 import { ensureRegionalGraph } from '../../src/domain/region/index.js';
@@ -396,39 +397,41 @@ describe('R-1 proposal-undo ring (queue #5)', () => {
   test('SATURATION: an advance past PULSE_UNDO_CAP eviction still invalidates the stale snapshot, and the legitimate walk-back re-arms', async () => {
     const store = makeStore();
     seedStore(store, { proposals: [pendingProposal('a')] });
-    // As if 10 real advances (PULSE_UNDO_CAP, campaignAdvanceSession.js) already
-    // landed: the retained window is FULL and the logical depth counter agrees.
+    // As if PULSE_UNDO_CAP real advances already landed: the retained window is
+    // FULL and the logical depth counter agrees. The cap is READ from the advance
+    // session that owns it (U8 gave it one home), never copied as a figure here.
     // The synthetic entries are never restored — only the real advance below is.
     store.setState(state => {
-      state.pulseUndoStack = Array.from({ length: 10 }, (_, i) => ({
+      state.pulseUndoStack = Array.from({ length: PULSE_UNDO_CAP }, (_, i) => ({
         campaignId: 'camp-1', tick: i + 1, synthetic: true,
       }));
-      state.advanceSeqByCampaign = { 'camp-1': 10 };
+      state.advanceSeqByCampaign = { 'camp-1': PULSE_UNDO_CAP };
     });
 
-    // Apply at depth 10, then land one REAL advance: the push EVICTS the oldest
-    // retained snapshot (count pegs at 10 — the old guard's fail-open input)
-    // while the logical depth moves to 11.
+    // Apply at the capped depth, then land one REAL advance: the push EVICTS the
+    // oldest retained snapshot (the count pegs at the cap — the old guard's
+    // fail-open input) while the logical depth moves one past it.
     expect(await store.getState().applyWorldPulseProposal('camp-1', 'world_proposal.famine.a.0')).toBeTruthy();
-    expect(ringOf(store)[0].advanceDepth).toBe(10);
+    expect(ringOf(store)[0].advanceDepth).toBe(PULSE_UNDO_CAP);
     expect(await store.getState().advanceCampaignWorld('camp-1', 'one_month', { now: NOW })).toBeTruthy();
-    expect(stackOf(store)).toHaveLength(10);
-    expect(store.getState().advanceSeqByCampaign['camp-1']).toBe(11);
+    expect(stackOf(store)).toHaveLength(PULSE_UNDO_CAP);
+    expect(store.getState().advanceSeqByCampaign['camp-1']).toBe(PULSE_UNDO_CAP + 1);
     const postAdvanceTick = store.getState().campaigns[0].worldState.tick;
 
     // The pre-apply snapshot describes a world 1 advance old. A retained-entry
-    // count says depth 10 === stamp 10 and would restore it STALE; the counter
-    // says 11 !== 10 and refuses, leaving the entry for the coherent walk.
+    // count says the depth still equals the stamp and would restore it STALE; the
+    // counter has moved one past the stamp and refuses, leaving the entry for the
+    // coherent walk.
     expect(await store.getState().undoLastProposalApply('camp-1')).toBe(false);
     expect(ringOf(store)).toHaveLength(1);
     expect(statusOf(store, 'world_proposal.famine.a.0')).toBe('applied');
     expect(store.getState().campaigns[0].worldState.tick).toBe(postAdvanceTick);
 
-    // Legitimate ordering preserved: undoing the advance restores depth 10
+    // Legitimate ordering preserved: undoing the advance restores the capped depth
     // (pop decrements; the prune keeps entries stamped AT the restored depth),
     // and the proposal snapshot becomes honestly poppable again.
     expect(await store.getState().undoLastPulse('camp-1')).toBe(true);
-    expect(store.getState().advanceSeqByCampaign['camp-1']).toBe(10);
+    expect(store.getState().advanceSeqByCampaign['camp-1']).toBe(PULSE_UNDO_CAP);
     expect(ringOf(store)).toHaveLength(1);
     expect(await store.getState().undoLastProposalApply('camp-1')).toBe(true);
     expect(statusOf(store, 'world_proposal.famine.a.0')).toBe('pending');

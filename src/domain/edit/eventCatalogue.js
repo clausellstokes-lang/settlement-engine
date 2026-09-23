@@ -37,10 +37,13 @@
  * The charter gives EM-E6 two files, the pools and this reader. The chronicle's own leaf
  * (`decreeProse.js`) belongs to EM-E2, so the two clauses this member adds are drawn
  * HERE, from EM-E6's two blocks of that corpus, in the very shape `decreeLineParts`
- * returns. Splicing them into the line is a later one-line change on the leaf's own
- * branch; until then the clauses are proven where they are authored, and the cause walker
- * drives THIS reader for its reachability law so no sentence of the new blocks can sit in
- * the corpus unread.
+ * returns. THE SPLICE HAS LANDED (U5, on that leaf's own branch): `decreeLineParts` takes
+ * `partyDeed` and `scheduledEvent` on its options bag and seats them between how the decree
+ * stands and the warnings set aside — what the party already did, then what is set for a
+ * turn still to come — re-proving each clause against the corpus before it joins the line,
+ * so a clause nobody authored cannot ride in on this shape. The clauses are still drawn and
+ * proven HERE, and the cause walker drives THIS reader for its reachability law so no
+ * sentence of the new blocks can sit in the corpus unread.
  *
  * ⛔ THE VOCABULARY COMES FROM THE LEAF, THE PIPELINE FROM THE MODULE. `PARTY_IMPACT_KINDS`
  * is taken from `partyImpactKinds.js`, the dependency-free leaf that exists because
