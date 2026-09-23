@@ -109,6 +109,27 @@ export function draftTerms({ ranked, budget, margin01, press, tick }) {
  * witness hashes a serialized year and a key minted with no cause moves a byte golden with
  * no cause (design §12.11).
  *
+ * ⛔ THE OFFERS ARE KEYED BY THE COUNTERPARTY, NOT LISTED, AND THE WALKER IS WHY THE SHAPE
+ * WAS RE-READ RATHER THAN THE REASON IT CHANGED. "At most one standing offer per
+ * counterparty" (design §18's condition names exactly one) was enforced by a find-then-
+ * replace over a list; keyed by the sender it is structural, the read is a lookup, and
+ * withdrawal is the removal of one key. `observedShapeReaders.walker.test.js` reported the
+ * list form as `fromId on settlement`: its documented resolution rules carry a receiver's
+ * shape through a computed member access and through an array method into the callback, so
+ * an element of `settlement[PEACE_OFFER_KEY]` grounds to the SETTLEMENT and every literal
+ * key read off it is a read of a key no settlement writer produces. That reading is true of
+ * the corpus and it is also true of the code as it was written: the counterparty's id was
+ * being asked of a settlement-shaped value. Keyed, nothing reads a literal key off an
+ * element at all. ⚠ FOR THE NEXT MEMBER: `withPeaceOffer` reads `offer.fromId` off its own
+ * BARE PARAMETER, which the scanner leaves ungrounded only while no `src/` caller hands it
+ * a settlement-derived value; the first live caller should pass an offer built by
+ * `draftPeaceOffer` rather than one read back out of a record.
+ *
+ * ⛔ THE KEY ORDER IS CODEPOINT, NOT ARRIVAL, which is this module's own convention
+ * (`draftTerms` sorts its terms for exactly this reason): two histories that reach the same
+ * standing set must serialize alike, or a save's bytes would carry the order in which its
+ * wars happened to be sued.
+ *
  * PURE. No clock, no draw, no id: the tick and the parties are the caller's, exactly as
  * EM-C1's `stage` takes its own stamp.
  */
@@ -127,6 +148,17 @@ function isBag(value) {
 /** @param {unknown} value @returns {value is string} a non-empty string */
 function isId(value) {
   return typeof value === 'string' && value.length > 0;
+}
+
+/** One frozen empty record, so a settlement with no offer allocates nothing and compares alike. */
+const EMPTY_OFFERS = Object.freeze({});
+
+/** @param {Record<string, unknown>} bag @returns {Readonly<Record<string, unknown>>} the same entries, codepoint-keyed */
+function sealByKey(bag) {
+  /** @type {Record<string, unknown>} */
+  const sorted = {};
+  for (const key of Object.keys(bag).sort()) sorted[key] = bag[key];
+  return Object.freeze(sorted);
 }
 
 /**
@@ -152,12 +184,13 @@ export function draftPeaceOffer({ fromId, toId, terms, budgetSpent, tick }) {
 }
 
 /**
- * The offers standing on one settlement record, total on garbage and on absence.
- * @param {unknown} settlement @returns {readonly PeaceOffer[]}
+ * The offers standing on one settlement record, KEYED BY THE COUNTERPARTY that made each.
+ * Total on garbage and on absence: anything that is not a plain bag reads as none.
+ * @param {unknown} settlement @returns {Readonly<Record<string, PeaceOffer>>}
  */
 export function peaceOffersOf(settlement) {
   const held = isBag(settlement) ? settlement[PEACE_OFFER_KEY] : undefined;
-  return /** @type {readonly PeaceOffer[]} */ (Array.isArray(held) ? held : []);
+  return /** @type {Readonly<Record<string, PeaceOffer>>} */ (isBag(held) ? held : EMPTY_OFFERS);
 }
 
 /**
@@ -169,25 +202,19 @@ export function peaceOffersOf(settlement) {
  */
 export function pendingPeaceOfferFrom(settlement, fromId) {
   if (!isId(fromId)) return null;
-  const found = peaceOffersOf(settlement)
-    .find((offer) => isBag(offer) && offer.fromId === fromId);
-  return found || null;
+  const offers = peaceOffersOf(settlement);
+  return Object.hasOwn(offers, fromId) ? offers[fromId] : null;
 }
 
 /**
- * Stand one offer on the record. An offer from a counterparty that already has one
- * REPLACES it in place, so a second suing never mints a duplicate; every other offer keeps
- * its own position. Returns the record BY REFERENCE when the offer is not a real one.
+ * Stand one offer on the record, under the counterparty that made it. A second suing by
+ * the same counterparty REPLACES its own standing offer and touches no other. Returns the
+ * record BY REFERENCE when the offer is not a real one.
  * @param {unknown} settlement @param {unknown} offer @returns {unknown}
  */
 export function withPeaceOffer(settlement, offer) {
   if (!isBag(settlement) || !isBag(offer) || !isId(offer.fromId)) return settlement;
-  const standing = peaceOffersOf(settlement);
-  const at = standing.findIndex((each) => isBag(each) && each.fromId === offer.fromId);
-  const next = at < 0
-    ? [...standing, offer]
-    : standing.map((each, index) => (index === at ? offer : each));
-  return { ...settlement, [PEACE_OFFER_KEY]: Object.freeze(next) };
+  return { ...settlement, [PEACE_OFFER_KEY]: sealByKey({ ...peaceOffersOf(settlement), [offer.fromId]: offer }) };
 }
 
 /**
@@ -198,8 +225,9 @@ export function withPeaceOffer(settlement, offer) {
  */
 export function withoutPeaceOffer(settlement, fromId) {
   if (!isBag(settlement) || !pendingPeaceOfferFrom(settlement, fromId)) return settlement;
-  const kept = peaceOffersOf(settlement).filter((offer) => !isBag(offer) || offer.fromId !== fromId);
-  return { ...settlement, [PEACE_OFFER_KEY]: Object.freeze(kept) };
+  const kept = { ...peaceOffersOf(settlement) };
+  delete kept[String(fromId)];
+  return { ...settlement, [PEACE_OFFER_KEY]: sealByKey(kept) };
 }
 
 /**
