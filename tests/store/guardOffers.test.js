@@ -259,7 +259,21 @@ describe('EM-C4c — the guard offers writer', () => {
     //     seed carries its NAME and the DM supplies the pooled `category` the row requires.
     const store = makeStore();
     const gate = guardById(store, GATE);
-    expect(gate.fulfil).toEqual({ type: 'add-institution', payload: { name: 'City walls and gates' } });
+    // ⛔ RE-RECORDED, CAUSE MEASURED (U65, 5bd3271cf on this lineage): the fulfil op is no
+    //    longer written beside the rule but SHAPED BY THE CATALOGUE ROW — the row's own
+    //    declared target kind against the id the offer is about, and exactly the fields the
+    //    row declares. `name` is the value the FINDING computed; `category` is the value THE
+    //    ENTRY carries under the same name, and `d_gate` above stages `category: 'military'`.
+    //    U65 declared this shift as a count (12 fulfil ops minted / 0 accepted by `validateOp`
+    //    to 8 of 8) and named no pin, so the old two-key shape survived here. Planted back,
+    //    U65's pre-image answers `{ type, payload: { name } }` again. The arm's INTENT is
+    //    unmoved: the seed still names the institution the town lacks, and the DM still
+    //    supplies the pooled `category` below.
+    expect(gate.fulfil).toEqual({
+      type: 'add-institution',
+      target: { kind: 'institution', id: 'City walls and gates' },
+      payload: { category: 'military', name: 'City walls and gates' },
+    });
     expect(gate.offers).toEqual([FULFIL, SELF, PROCEED]);
     const category = poolsFor(store)['institution.class'][0];
     const staged = offerOn(store, GATE, FULFIL, {
@@ -278,7 +292,14 @@ describe('EM-C4c — the guard offers writer', () => {
     //      its subject and its entry id are the caller's, exactly as `stage` contracts.
     const other = makeStore();
     const sequence = guardById(other, SEQUENCE);
-    expect(sequence.fulfil).toEqual({ type: 'declare-war', payload: {} });
+    // RE-RECORDED, SAME CAUSE (U65): the row's one REQUIRED `ref` field is filled from the
+    // value this entry already carries, and the target is the row's own declared kind against
+    // the offer's id. `casusBelli` is not required, so the row does not declare it here.
+    expect(sequence.fulfil).toEqual({
+      type: 'declare-war',
+      target: { kind: 'phantom', id: PHANTOM },
+      payload: { counterparty: PHANTOM },
+    });
     const war = offerOn(other, SEQUENCE, FULFIL, {
       values: { counterparty: PHANTOM },
       target: { kind: 'phantom', id: PHANTOM },
@@ -291,12 +312,21 @@ describe('EM-C4c — the guard offers writer', () => {
       .toEqual(['declare-war', DECREE_AUTHORS[1]]);
     expect(pendingIds(other)).toEqual(['d_gate', 'd_war', 'd_force', 'd_state', 'd_remove']);
 
-    // (iii) THE SEED IS NOT AN OP. Taken with no completion, the same offer is refused in the
-    //       CATALOGUE's own words and the registry is byte-identical.
+    // (iii) THE SEED IS AN OP THE DM HAS NOT ANSWERED FOR. Taken with no completion, the same
+    //       offer is refused in the CATALOGUE's own words and the registry is byte-identical.
+    //       RE-RECORDED, SAME CAUSE (U65): before it, the seed was catalogue-INCOMPLETE and the
+    //       refusal was `invalid_op` ('payload.category is required'). Now the field is present
+    //       and carries the ENTRY's own 'military', which `institution.class` does not offer —
+    //       so the door answers design 20.3 ruling 3's `stale_vocabulary` and hands back EM-C1's
+    //       own `{ missing, was }` pair verbatim. MEASURED: U81 is NOT the mover here; with
+    //       pools.js planted at its pre-U81 image the answer is `stale_vocabulary` on the same
+    //       'military' word, because that lowercase PRIORITY CATEGORY was never a member of this
+    //       pool under either reading of the table. The claim the arm makes is untouched: a
+    //       completion the catalogue cannot accept stages nothing.
     const bare = makeStore();
     const before = JSON.stringify(bare.getState().settlement);
     const refused = offerOn(bare, GATE, FULFIL, { pools: poolsFor(bare), orderedAt: ORDERED_AT });
-    expect(refused).toEqual({ ok: false, reason: 'invalid_op', errors: ['payload.category is required'] });
+    expect(refused).toEqual({ ok: false, reason: 'stale_vocabulary', errors: ['pool-value', 'military'] });
     expect(JSON.stringify(bare.getState().settlement)).toBe(before);
     expect(live(bare).length).toBe(4);
   });
