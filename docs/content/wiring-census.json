@@ -2,10 +2,10 @@
   "schema": "wiring-census/1",
   "stamp": {
     "files": {
-      "src/domain/display/stateProse/generalStateProse.js": "5ca2ee51b1a2367df4efc5d0f6cfd7a62c688be8efec684eafb502ab14991d88",
+      "src/domain/display/stateProse/generalStateProse.js": "35fdd6b101093537d5c47d6b18f6901c01c673004011f91e2ccd24f103d06f01",
       "src/domain/display/stateProse/powerStateProse.js": "78d22210d6d2ca5d44a4af32cf3a13b7c123d0577850458e9ce36ec893e3d2c8",
       "src/domain/display/stateProse/economyStateProse.js": "3ff22cc33ba04eed4af871d17fdd858669c90b4acadd264801767e6ac7e498a0",
-      "src/domain/display/stateProse/defenseStateProse.js": "45bf8b0547218a65a8d7cf53cb10bd9b6a1badc08957c0f2bf447acb98d1a202",
+      "src/domain/display/stateProse/defenseStateProse.js": "a1cfd7adae7f4e01fc8e3038c0ce55a793e8e4c728e283cc3f46f70de4a4ef1f",
       "src/domain/display/stateProse/stressorsStateProse.js": "e128aa4ece932c8eae009c22eb9ad9f77f47b3967b5652687f80c76933027fd1",
       "src/domain/display/stateProse/warFaithStateProse.js": "95882ecdf30f617f44ed3f460c4a67109107f5e645fc7e9820a60de0e67b1fb0",
       "src/domain/display/stateProse/dossierMounts.js": "392b5d89c2a5694f33c76c535e6592670e8a8fde89739e0deb1538d5381e01b1"
@@ -18,7 +18,7 @@
       "src/domain/display/stateProse/stressorsStateProseCandidates.js": "ee0548fc8b662da76e4bf85a1fae30433e9f738277c774e16c6a7abd7fb93552",
       "src/domain/display/stateProse/warFaithStateProseCandidates.js": "b5b193dd2a2c83d077da5f82fd4a5fc5f5ad15a3b6a214725daf41ede442324b"
     },
-    "producerIndexFiles": 1184
+    "producerIndexFiles": 1185
   },
   "totals": {
     "pools": 708,
