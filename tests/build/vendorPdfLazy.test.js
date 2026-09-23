@@ -1784,13 +1784,25 @@ describe('ARCH car 2 — the three first-paint budgets stay where the owner sign
     expect(eagerRel.has('src/main.jsx'), 'and it holds the entry').toBe(true);
     const editorTrain = [
       'src/components/edit/CardEditorDialog.jsx',
+      // ⭐ EM-D3's registry page, which EM-D3c mounts FROM THE SHELL BELOW and from nowhere
+      // else. A page is the member most likely to acquire a static edge from a router or a
+      // panel that is already eager, and this row is what convicts that edge on the day it
+      // is written rather than inside a build nobody reruns: the page reaches first paint
+      // only through the shell's one lazy edge, or it does not reach it at all.
+      'src/components/edit/DecreeRegistryPage.jsx',
       // EM-D1's shell is the train's FIRST MOUNTED member, and it is exactly where a rise
       // would enter: App.jsx is eager, so a STATIC edge from the root to this file would
       // drag the shell, EM-A1's table, EM-D0e's door and EM-C4a's slice into first paint
       // at once. The one `lazy(() => import(...))` edge is what keeps this list empty below.
       'src/components/edit/EditModeShell.jsx',
       'src/copy/en.js',
+      // ⭐ EM-E5's direction leaf and EM-E6's catalogue reader, the train's two remaining
+      // dark domain leaves. EM-E6's is the one that would cost the most: it imports
+      // `partyImpact.js` for the single write path, so a static edge into an eager module
+      // would drag the whole party-impact apply pipeline into first paint behind it.
+      'src/domain/edit/directions.js',
       'src/domain/edit/dmLayer.js',
+      'src/domain/edit/eventCatalogue.js',
       'src/domain/edit/fieldDeclarations.js',
       'src/domain/edit/guardRules.js',
       'src/domain/edit/operations.js',
