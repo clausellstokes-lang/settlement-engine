@@ -96,7 +96,7 @@ re-litigates it):
 - **The parent carried TWO mechanisms.** §0A/§6 put `drawRoot(rng, key, pool, layer)` at every
   root chooser with the draw always consumed; §0Z put the override on a **released pin** and
   declares itself to supersede §0A. **EM-P0 has landed and implements §0Z**, and its own code
-  rules how a DM edit rides it (`src/generators/pipeline.js:193-196`, verbatim: *"PARTIAL PINNING
+  rules how a DM edit rides it (`src/generators/pipeline.js :: runPipeline`, verbatim: *"PARTIAL PINNING
   IS AN ERROR… (A DM's root edit is not a partial pin — the caller builds a pin for every chooser
   from the record and then overrides a VALUE.)"*). ⭐ **This member is INDIFFERENT to that
   ruling** — `layerRead`, `applyEdit` and `mintDmId` are required under both — which is why it is

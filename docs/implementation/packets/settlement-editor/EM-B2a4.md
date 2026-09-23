@@ -107,7 +107,7 @@
   > exports**, so the §5 "DECLARED, not yet present" table is DISCHARGED into
   > `requiredSymbols`, each row re-measured VERBATIM at the tip (judgment 151: a contract's
   > spelling is not the code's). (5) **`applyEdit` is arity THREE**
-  > (`src/domain/edit/dmLayer.js:164`, judgment 77), which re-writes §5's interface row and
+  > (`src/domain/edit/dmLayer.js :: applyEdit`, judgment 77), which re-writes §5's interface row and
   > A6's round trip. Three absolutes are also restated as deltas: the eager closure (269 →
   > 270 live), the mutation manifest's `invariants` (716 → 723) and the wiring census's
   > `producerIndexFiles` (1172 → 1181).
@@ -360,7 +360,7 @@ measurement, and the lane does not make it. ⇒ **QUESTION Q1.**
 0. ⭐⭐ **THE CHAIR'S RULINGS THAT ARRIVED AFTER VERSION 1 WAS COMPILED, each measured here:**
    **judgment 77** — `applyEdit` is ARITY THREE and its consult is INJECTED, never imported
    (measured: `export function applyEdit(layer, op, declarations) {` at
-   `src/domain/edit/dmLayer.js:164`, and the leaf's own header `:15` says so); this REVISES the
+   `src/domain/edit/dmLayer.js :: applyEdit`, and the leaf's own header `:15` says so); this REVISES the
    partition ruling's Q3 below, whose two-argument spelling could not reach two of its three
    ruled refusals. **Judgment 145** — *"the packet that plugs re-derivation in adds the cascade
    branch's consult in the same §7 MODIFY row of `src/store/editSlice.js`; its pre-proof measures
@@ -377,7 +377,7 @@ measurement, and the lane does not make it. ⇒ **QUESTION Q1.**
    with a CLOSED reason set of THREE — ⛔ **Q3's ARITY IS REVISED BY JUDGMENT 77** (row 0); the
    closed reason set of three stands and is measured LANDED
    (`export const APPLY_EDIT_REASONS = Object.freeze(['invalid_op', 'undeclared_field', 'unknown_target']);`
-   at `dmLayer.js:71`); Q4: **no member carries the observed-shape REGISTER row**.
+   at `dmLayer.js :: APPLY_EDIT_REASONS`); Q4: **no member carries the observed-shape REGISTER row**.
    ⭐ Its consequence for this member, verbatim: *"an override outside the chooser's candidate set
    is NOT APPLIED AND IS REPORTED — never silently ignored, never deleted from the layer."*
 2. **`COMPILE-RULES.interim.md`** (the chair, 2026-09-20), which governs where it and the preamble

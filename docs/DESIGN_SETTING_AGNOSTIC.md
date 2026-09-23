@@ -127,14 +127,14 @@ price and drops the system.
 | Proper noun | Addresses | Cured to |
 | --- | --- | --- |
 | `Zone of Truth` | `institutionDescVariants.js:218,219` · `institutionalCatalog.js:2154` · `defenseGenerator.js:251` (comment) | compelled truth |
-| `Cure Wounds` | `institutionDescVariants.js:1238,1239` · `institutionServices.js:488` · `institutionalCatalog.js:860` | a closed wound / wounds closed |
-| `Lesser Restoration` | `institutionServices.js:488` | sickness lifted |
+| `Cure Wounds` | `institutionDescVariants.js:1238,1239` · `institutionServices.js :: INSTITUTION_SERVICES['Druid Circle']['Healing (nature)']` · `institutionalCatalog.js:860` | a closed wound / wounds closed |
+| `Lesser Restoration` | `institutionServices.js :: INSTITUTION_SERVICES['Druid Circle']['Healing (nature)']` | sickness lifted |
 | `Sending Stones` | `institutionDescVariants.js:258,259` · `institutionalCatalog.js:2261` · `spatialData.js:482` | `Speaking Stones` (the corpus's own alternative) |
 | `Conjure Animals` | `chainMagicSubstitution.js:67` | conjured game |
 | `Plant Growth` | `chainMagicSubstitution.js:68` · `foodBalance.js:249` · `defenseGenerator.js:385` (comment) | quickened growth |
 | `Fabricate` | `chainMagicSubstitution.js:88,113,27` (last is a comment) | arcane fabrication |
 | `Transmute Rock` | `chainMagicSubstitution.js:113` | stone-shaping |
-| `Speak with Animals`, `Detect Poison`, `Purify Food`, `Pass Without Trace` | `institutionServices.js:486` | descriptive phrases |
+| `Speak with Animals`, `Detect Poison`, `Purify Food`, `Pass Without Trace` | `institutionServices.js :: INSTITUTION_SERVICES['Druid Circle']['Nature magic services']` | descriptive phrases |
 | `Goodberry` | `defenseGenerator.js:385` (comment) | conjured forage |
 | `Detect Thoughts` | `defenseGenerator.js:249` (comment) | thought-reading |
 
@@ -147,8 +147,8 @@ price and drops the system.
 | `institutionDescVariants.js:342,343` · `institutionalCatalog.js:1982` | `3rd-level spell` / `(3rd level)` | a greater working |
 | `institutionDescVariants.js:506,507` · `institutionalCatalog.js:320` | `1st-level spells` | the smallest spells |
 | `institutionDescVariants.js:1242,1243` · `institutionalCatalog.js:824` | `1st to 3rd level spells` | minor spells |
-| `institutionServices.js:142,172` (+7 consumer sites) | `Spellcasting (1st-3rd level)` / `(1st-8th level)` | `Spellcasting (minor)` / `(greater)` |
-| `institutionServices.js:1567` (+2 consumer sites) | `Cure light wounds` | `Wound closing` |
+| `institutionServices.js :: INSTITUTION_SERVICES['Wizard Tower']['Spellcasting (minor)'] and ['Spellcasting Services']['Spellcasting (greater)']` (+7 consumer sites) | `Spellcasting (1st-3rd level)` / `(1st-8th level)` | `Spellcasting (minor)` / `(greater)` |
+| `institutionServices.js :: INSTITUTION_SERVICES['Healer (divine, 1st level)']['Wound closing']` (+2 consumer sites) | `Cure light wounds` | `Wound closing` |
 
 ### 2d. The alignment grid — two copies, one user-facing select
 
@@ -195,7 +195,7 @@ key is a keys-car row.
 **`servicesData.js:44-46`** — three `spellcasting services (1st-Nth level)`
 LOCALE override SOURCES. **Measured rather than assumed:** the lookup is an
 EXACT lowercased key access (`LOCALE_SERVICE_OVERRIDES[instName.toLowerCase()]`
-at `generators/services/institutionServices.js:111`, and the same shape at
+at `src/generators/services/institutionServices.js :: getServicesForInstitution`, and the same shape at
 `display/institutionProfile.js:118`), and no producer in `src/` emits an
 institution named `spellcasting services (1st-Nth level)`. So the three rows are
 UNREACHABLE today. **Deliberately NOT renamed:** renaming an unreachable lookup
@@ -333,7 +333,7 @@ generation. It is nevertheless reader-visible, which is the whole point.
 ### The three `cantrip` sites deliberately LEFT
 
 `serviceCategoryTables.js:552` (`'Cantrips and minor magic'`),
-`institutionServices.js:142` (`"Cantrips, light spells, minor enchantments…"`)
+`institutionServices.js :: INSTITUTION_SERVICES['Wizard Tower']['Spellcasting (minor)']` (`"Cantrips, light spells, minor enchantments…"`)
 and the matcher `serviceAvailability.js:50` (`svc.includes('cantrip')`) all keep
 the word, per §0: here it reads as the Scots noun, not as a level. Leaving them
 also leaves the matcher pointed at a name that still exists, which is G3's law.

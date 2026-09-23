@@ -32335,7 +32335,7 @@
         {
           "path": "src/generators/pipeline.js",
           "symbol": "getStepMeta",
-          "provenAt": "pipeline.js:259",
+          "provenAt": "pipeline.js :: getStepMeta",
           "by": "grep -nE '^export (function|const) (registerStep|getStepOrder|getStepMeta|runPipeline)' src/generators/pipeline.js"
         },
         {
@@ -32347,7 +32347,7 @@
         {
           "path": "src/generators/pipeline.js",
           "symbol": "runPipeline",
-          "provenAt": "pipeline.js:171",
+          "provenAt": "pipeline.js :: runPipeline",
           "by": "same command"
         },
         {
@@ -37223,22 +37223,22 @@
       ],
       "requiredSymbols": [
         {
-          "_note": "⭐ VERSION 4.1 · DISCHARGED FROM _pendingRequiredSymbols: EM-B2a1 has LANDED (f9b68387a, train EM-T10) and src/domain/edit/dmLayer.js is REAL at 80e855f26. CONFIRMED against the LANDED code, read WHOLE (239 lines): applyEdit(layer, op, declarations) is ARITY THREE at dmLayer.js:164; the op shape is exactly { kind: 'set-root', key, cardType, field, value } with cardType and field declared TRANSIENT COMMAND COORDINATES that persist nothing (:153-156); an unusable consult FAILS CLOSED to unknown_target (:185-186); on ok:true the returned layer is a NEW deeply-frozen object whose keys holds exactly the keys the call wrote (:208-214); on ok:false the argument layer is returned by identity and nothing is allocated. A move in its arity, its op shape or its reason set is section 11 STOP 5. git grep -c -F -> 1.",
+          "_note": "⭐ VERSION 4.1 · DISCHARGED FROM _pendingRequiredSymbols: EM-B2a1 has LANDED (f9b68387a, train EM-T10) and src/domain/edit/dmLayer.js is REAL at 80e855f26. CONFIRMED against the LANDED code, read WHOLE (239 lines): applyEdit(layer, op, declarations) is ARITY THREE at dmLayer.js :: applyEdit; the op shape is exactly { kind: 'set-root', key, cardType, field, value } with cardType and field declared TRANSIENT COMMAND COORDINATES that persist nothing (:154-157); an unusable consult FAILS CLOSED to unknown_target (:186-187); on ok:true the returned layer is a NEW deeply-frozen object whose keys holds exactly the keys the call wrote (:209-215); on ok:false the argument layer is returned by identity and nothing is allocated. A move in its arity, its op shape or its reason set is section 11 STOP 5. git grep -c -F -> 1.",
           "path": "src/domain/edit/dmLayer.js",
           "symbol": "export function applyEdit"
         },
         {
-          "_note": "⭐ VERSION 4.1 · DISCHARGED: section 6.5's read path. CONFIRMED at dmLayer.js:125-129 — own-property only (Object.hasOwn), a non-string key reads undefined, and it never throws; a stored undefined is impossible because applyEdit refuses it, so 'absent' and 'overridden to undefined' can never be confused. git grep -c -F -> 1.",
+          "_note": "⭐ VERSION 4.1 · DISCHARGED: section 6.5's read path. CONFIRMED at dmLayer.js :: layerRead — own-property only (Object.hasOwn), a non-string key reads undefined, and it never throws; a stored undefined is impossible because applyEdit refuses it, so 'absent' and 'overridden to undefined' can never be confused. git grep -c -F -> 1.",
           "path": "src/domain/edit/dmLayer.js",
           "symbol": "export function layerRead"
         },
         {
-          "_note": "⭐ VERSION 4.1 · DISCHARGED: section 6.5's absence rule — an absent layer reads as this. CONFIRMED at dmLayer.js:55-60 as deeply frozen (the object and all four sub-objects roots/worldFacts/minted/phantoms). git grep -c -F -> 1.",
+          "_note": "⭐ VERSION 4.1 · DISCHARGED: section 6.5's absence rule — an absent layer reads as this. CONFIRMED at dmLayer.js :: EMPTY_DM_LAYER as deeply frozen (the object and all four sub-objects roots/worldFacts/minted/phantoms). git grep -c -F -> 1.",
           "path": "src/domain/edit/dmLayer.js",
           "symbol": "export const EMPTY_DM_LAYER"
         },
         {
-          "_note": "⭐ VERSION 4.1 · DISCHARGED: A3 asserts APPLY_EDIT_REASONS is a SUBSET of PLAIN_EDIT_REFUSALS, so the two sets can never drift. CONFIRMED at dmLayer.js:71 as exactly ['invalid_op', 'undeclared_field', 'unknown_target']; and the leaf's own header (:67-68) FIXES the refusal ORDER as invalid_op (shape) then unknown_target (card type) then undeclared_field (field) — which is exactly what section 6.1 step 6 states and does not re-order. A fourth member is section 11 STOP 5. git grep -c -F -> 1.",
+          "_note": "⭐ VERSION 4.1 · DISCHARGED: A3 asserts APPLY_EDIT_REASONS is a SUBSET of PLAIN_EDIT_REFUSALS, so the two sets can never drift. CONFIRMED at dmLayer.js :: APPLY_EDIT_REASONS as exactly ['invalid_op', 'undeclared_field', 'unknown_target']; and the leaf's own header (:68-69) FIXES the refusal ORDER as invalid_op (shape) then unknown_target (card type) then undeclared_field (field) — which is exactly what section 6.1 step 6 states and does not re-order. A fourth member is section 11 STOP 5. git grep -c -F -> 1.",
           "path": "src/domain/edit/dmLayer.js",
           "symbol": "export const APPLY_EDIT_REASONS"
         },
@@ -37986,7 +37986,7 @@
       "_layerBoundary": "⛔⛔ THE ONE PLACE THIS PACKET DOES NOT COMPILE TO THE PARTITION'S §2 INTERFACE TABLE, and the launch brief's named exception. The table homes `pinsFrom`, `rederive` AND `regenerateWithLayer` in `src/domain/edit/dmLayer.js`, with `regenerateWithLayer` calling the REAL entry `generateSettlementPipeline` under `src/generators/**`. MEASURED: `tests/build/domainGeneratorsBoundary.test.js` is a shrink-only ratchet whose `BASELINE_EDGES` is `Object.freeze` over FOUR files / FIVE specifiers, and whose first arm pushes `NEW importer: <file>` for any `src/domain/**` file carrying a generators specifier that the frozen map does not list. It matches DYNAMIC `import('…/generators/…')` as well as static `from '…/generators/…'`, by its own stated design (\"so a refactor can't dodge the ratchet by switching import style\"), and its second arm forbids widening the map. The live edge set equals the frozen set exactly (5 specifiers, 0 dynamic — executed). ⇒ the table's home for `regenerateWithLayer` is UNBUILDABLE. THE SMALLEST LAWFUL HOME, compiled to instead: `pinsFrom` and `rederive` STAY in `src/domain/edit/dmLayer.js` and NEITHER IMPORTS THE ENGINE — `rederive` takes it as an INJECTED parameter, which is the inversion the walker's own failure message prescribes (\"invert it … or DI the generator fn\") and the shape `src/lib/instantWorld/composeInstantWorld.js:226` already ships (`engine = { generateSettlementPipeline }`); `regenerateWithLayer` LEAVES `dmLayer.js` for the store's lazy application-command seam (design §2.3), which is where the estate's three real importers of the engine already live and which is already this member's own MODIFY path. a1's five exports are untouched.",
       "changeManifest": [
         {
-          "_note": "⭐ THE ORCHESTRATION, ADDED TO MEMBER 1'S LEAF. Two new exports at §6's exact signatures, and NOT the three the partition's table named — see `_layerBoundary` above. (1) `pinsFrom(record) -> { pins, missing }`: a pin for EVERY key the registered steps provide that the record holds, the chooser roster IMPORTED FROM ITS PRODUCER `getStepMeta()` (src/generators/pipeline.js:259) and NEVER re-typed — `contractTestAntiVacuity` Rule 2 convicts a hardcoded exhaustive claim, and `runPipeline` throws `Pipeline pins: step \"<name>\" has choosers [...] but pins supply only [...]` on a partial set, so `missing` is the caller's proof it may not pin that step at all. ⛔ `pinsFrom` reads the RECORD and imports NOTHING from `src/generators/**` — the roster reaches it through the injected engine handle, never a specifier string. (2) `rederive(record, config, layer, engine) -> { record, unapplied }`: builds the pin set, merges the layer's `roots` overrides INTO THE PIN BAG (the layer never enters `src/generators/**`), deep-clones the bag on entry (design §22 ruling 6 — an aliased bag mutated the caller's own record in 36/63), and runs `engine.generateSettlementPipeline`. ⛔ THE POOL-MEMBERSHIP RULE, exactly as the chair ruled it: an override outside the chooser's candidate set is NOT APPLIED AND IS REPORTED — it is returned in `unapplied` as a typed row with a CLOSED reason set, the layer KEEPS it, and nothing is silently ignored or deleted (a later world-fact change may make the value a member again). ⛔ NO PRNG, no clock, no locale, no import of src/components, src/store or src/generators.",
+          "_note": "⭐ THE ORCHESTRATION, ADDED TO MEMBER 1'S LEAF. Two new exports at §6's exact signatures, and NOT the three the partition's table named — see `_layerBoundary` above. (1) `pinsFrom(record) -> { pins, missing }`: a pin for EVERY key the registered steps provide that the record holds, the chooser roster IMPORTED FROM ITS PRODUCER `getStepMeta()` (src/generators/pipeline.js :: getStepMeta) and NEVER re-typed — `contractTestAntiVacuity` Rule 2 convicts a hardcoded exhaustive claim, and `runPipeline` throws `Pipeline pins: step \"<name>\" has choosers [...] but pins supply only [...]` on a partial set, so `missing` is the caller's proof it may not pin that step at all. ⛔ `pinsFrom` reads the RECORD and imports NOTHING from `src/generators/**` — the roster reaches it through the injected engine handle, never a specifier string. (2) `rederive(record, config, layer, engine) -> { record, unapplied }`: builds the pin set, merges the layer's `roots` overrides INTO THE PIN BAG (the layer never enters `src/generators/**`), deep-clones the bag on entry (design §22 ruling 6 — an aliased bag mutated the caller's own record in 36/63), and runs `engine.generateSettlementPipeline`. ⛔ THE POOL-MEMBERSHIP RULE, exactly as the chair ruled it: an override outside the chooser's candidate set is NOT APPLIED AND IS REPORTED — it is returned in `unapplied` as a typed row with a CLOSED reason set, the layer KEEPS it, and nothing is silently ignored or deleted (a later world-fact change may make the value a member again). ⛔ NO PRNG, no clock, no locale, no import of src/components, src/store or src/generators.",
           "action": "MODIFY",
           "path": "src/domain/edit/dmLayer.js"
         },
@@ -38064,17 +38064,17 @@
           "symbol": "export function generateSettlementPipeline(config = {}, importedNeighbour = null, options = {}) {"
         },
         {
-          "_note": "EM-P0's LANDED runner. `options.pins` ABSENT or `{}` reproduces today's behaviour EXACTLY and every step still runs; a partial pin set THROWS by name. This member supplies pins and must not change that contract — 'pins absent = the golden' is the whole mechanism by which A7's golden arm can be true. Verbatim at src/generators/pipeline.js:171.",
+          "_note": "EM-P0's LANDED runner. `options.pins` ABSENT or `{}` reproduces today's behaviour EXACTLY and every step still runs; a partial pin set THROWS by name. This member supplies pins and must not change that contract — 'pins absent = the golden' is the whole mechanism by which A7's golden arm can be true. Verbatim at src/generators/pipeline.js :: runPipeline.",
           "path": "src/generators/pipeline.js",
           "symbol": "export function runPipeline(initialContext, rng, options = {})"
         },
         {
-          "_note": "⭐ THE CHOOSER ROSTER'S PRODUCER. `pinsFrom` enumerates the pinnable keys by IMPORTING this, never by re-typing a list: `contractTestAntiVacuity` Rule 2 convicts a hardcoded exhaustive claim, and the pipeline's partial-pin refusal means a re-typed roster that drifts by one key turns into a runtime throw rather than a quiet miss. Verbatim at src/generators/pipeline.js:259.",
+          "_note": "⭐ THE CHOOSER ROSTER'S PRODUCER. `pinsFrom` enumerates the pinnable keys by IMPORTING this, never by re-typing a list: `contractTestAntiVacuity` Rule 2 convicts a hardcoded exhaustive claim, and the pipeline's partial-pin refusal means a re-typed roster that drifts by one key turns into a runtime throw rather than a quiet miss. Verbatim at src/generators/pipeline.js :: getStepMeta.",
           "path": "src/generators/pipeline.js",
           "symbol": "export function getStepMeta()"
         },
         {
-          "_note": "⛔ VERSION 1'S ROW WAS REFUTED AT 16f0bc71c. EM-B2a2 LANDED the primitive at its ONE exported home on the runner: `export function chooseOrPin(pins, key, draw) {` at src/generators/pipeline.js:152, count=1. At the old path the version-1 text counts ZERO; steps/generatePopulation.js:18, steps/assembleInstitutions.js:11 and steps/generatePower.js:15 now IMPORT it. PRESERVED, never called here: this member supplies pins to runPipeline and never reaches the primitive.",
+          "_note": "⛔ VERSION 1'S ROW WAS REFUTED AT 16f0bc71c. EM-B2a2 LANDED the primitive at its ONE exported home on the runner: `export function chooseOrPin(pins, key, draw) {` at src/generators/pipeline.js :: chooseOrPin, count=1. At the old path the version-1 text counts ZERO; steps/generatePopulation.js:18, steps/assembleInstitutions.js:11 and steps/generatePower.js:15 now IMPORT it. PRESERVED, never called here: this member supplies pins to runPipeline and never reaches the primitive.",
           "path": "src/generators/pipeline.js",
           "symbol": "export function chooseOrPin(pins, key, draw) {"
         },
