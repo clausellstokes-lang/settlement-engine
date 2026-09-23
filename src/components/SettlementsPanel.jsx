@@ -285,10 +285,21 @@ export default function SettlementsPanel({ onNavigate, routeId }) {
   // LIBRARY_VIEWED — once per session, after saves have loaded so the count
   // band is accurate. useFunnelEvent fires on the false→true transition and
   // self-dedupes per session; payload resolves at fire time. Fire-and-forget.
+  //
+  // ⛔ U51 — THE BAND MEASURES WHAT THE USER HOLDS, so it reads `activeSlotsUsed`
+  // (`activeSaveCount`, the estate's ONE quota count) rather than the raw array length.
+  // The raw length counts two kinds of row the user does not hold: an EM-F1 phantom
+  // counterparty, which is an off-stage prop the shelf can never show — the estate's row,
+  // not the user's, exactly as EM-F1b already ruled for the quota — and an INACTIVE save,
+  // which is retained rather than held and is excluded from every other count on this
+  // page. Banded, that is not a rounding error: three held saves beside two phantoms
+  // banded as `3_5` where the honest answer is `1_2`, so the funnel read a library the GM
+  // does not have. `activeSlotsUsed` is the memo the quota meter already renders from, so
+  // this is one reading of the library rather than a second spelling of it.
   useFunnelEvent(
     EVENTS.LIBRARY_VIEWED,
     !savesLoading,
-    () => ({ save_count_band: saveCountBand(saves.length), campaign_count: campaigns.length }),
+    () => ({ save_count_band: saveCountBand(activeSlotsUsed), campaign_count: campaigns.length }),
   );
 
   const handleReactivateSave = async (save) => {
@@ -701,7 +712,9 @@ export default function SettlementsPanel({ onNavigate, routeId }) {
       days_since_edited_band: dayGapBand(lastEditedMs(s)),
       canon_phase: canonPhaseOf(s),
       has_ai_data: hasAiData(s),
-      save_count_band: saveCountBand(saves.length),
+      // The SAME reading as LIBRARY_VIEWED's band above, and for the same reason: the
+      // revisit event's denominator is the library the GM holds. See the note there.
+      save_count_band: saveCountBand(activeSlotsUsed),
       via: 'library',
     }, { subjectId: s.id });
     setDetail({ ...s, saveData: s });
