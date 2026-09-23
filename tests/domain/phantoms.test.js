@@ -325,6 +325,13 @@ describe('EM-F1 — the leaf imports nothing, draws nothing, and the shelf is it
       // itself imports nothing at all, so the shelf gains one zero-dependency module and no
       // transitive closure with it.
       'src/components/library/LibraryToolbar.jsx imports src/domain/edit/phantoms.js',
+      // ⭐ The generation lane, EM-F2's promotion (design §2.8): forging a phantom's seed
+      // replaces its minimal record in place, so the lane must read the DISCRIMINANT where it
+      // is spelled rather than re-typing the word and letting the shelf, the badge and the
+      // policy drift. It is LAZY too — reached only through settlementSlice.js's dynamic
+      // import, and neither it nor this leaf is in the eager first-paint graph (MEASURED
+      // against EAGER_FIRST_PAINT_MODULES) — so the second edge costs the first paint nothing.
+      'src/store/settlementGenerateAction.js imports src/domain/edit/phantoms.js',
     ];
     expect([...importers].sort(),
       'the importer roster is EXACT in both directions. An UNLISTED importer is a bundle edge nobody'
