@@ -24,13 +24,13 @@
     "The derivation history — every prior row, its cause, and the census laws — stays in the walker",
     "beside the assertions, deliberately. Only the live tuple moved."
   ],
-  "measuredAtSha": "5c60fa7916be59763878f282ac97f97a1c63b238",
+  "measuredAtSha": "6f1c795104a9ba1b46531787e6e4f6ef3888bb9b",
   "measuredBy": "chair-fable-cce01f87",
-  "date": "2026-09-22",
-  "note": "the nineteenth refreeze: train EM-T13 (EM-B1b +1 file +8 titles +1 suite · EM-D0e +1 file +8 titles +1 suite · EM-B2a4 +1 file +7 titles +1 suite · EM-A3 +1 file +7 titles +1 suite) over 91cc9ef5a",
-  "files": 2687,
+  "date": "2026-09-23",
+  "note": "the twentieth refreeze: train EM-T14 (EM-R0d +1 file +8 titles +1 suite · EM-R6 +2 files +10 titles +2 suites · EM-R0f +0) at its composed tip; the sum declared by the three packets over the nineteenth 2687·359·2328·25743·6841 = 2690·359·2331·25761·6844; the successor chair, session cce01f87, 2026-09-22",
+  "files": 2690,
   "parked": 359,
-  "credited": 2328,
-  "titles": 25743,
-  "suiteTitles": 6841
+  "credited": 2331,
+  "titles": 25761,
+  "suiteTitles": 6844
 }
