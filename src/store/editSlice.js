@@ -897,17 +897,49 @@ function carryForward(live, derived) {
 }
 
 /**
+ * ⭐ EM-E8b B (U49): ONE MEMBER SAVE'S OWN RECORD, for a save that is not the hydrated one.
+ * Design §2.5 puts `decrees` on the SAVED SETTLEMENT, so a campaign's tick is N registries and
+ * the roster binder is owed to every one of them — not only to the save the DM has open.
+ * Own-property reads only; a row with no record reads as nothing at all, never a throw.
+ * @param {object} state @param {string} saveId @returns {object|null}
+ */
+function memberRecordOf(state, saveId) {
+  const row = (state?.savedSettlements || [])
+    .find((entry) => String(/** @type {{id?: unknown}} */ (entry)?.id ?? '') === saveId);
+  const record = isPlainObject(row) ? row.settlement : undefined;
+  return isPlainObject(record) ? record : null;
+}
+
+/**
+ * The registry on ANY record — `selectDecrees`' own reading, one record wider, so the open
+ * save and a member save are read by ONE rule. A value that is not an array reads as the
+ * SHARED empty one, because a malformed legacy value is carried inert and repaired by nobody.
+ * @param {unknown} record @returns {readonly object[]}
+ */
+function recordDecrees(record) {
+  const rows = isPlainObject(record) ? record.decrees : undefined;
+  return Array.isArray(rows) ? rows : NO_DECREES;
+}
+
+/**
  * The generation config a save stored, read where the estate's own bridge reads it
  * (`campaignContentBindingSession.js:47`): the library row's `config` first, the record's own
  * `_config` second, an empty bag last.
- * @param {object} state @param {string} saveId @returns {object}
+ *
+ * ⛔ THE EMBEDDED FALLBACK IS THE **NAMED RECORD'S** OWN (EM-E8b B): for the open save that is
+ * `get().settlement`, byte-identically to before, and for any other member it is that member's
+ * record — reading the hydrated view's `_config` while re-deriving a different save would build
+ * save Y's world from save X's configuration.
+ *
+ * @param {object} state @param {string} saveId @param {unknown} record the save's own record
+ * @returns {object}
  */
-function storedConfigFor(state, saveId) {
+function storedConfigFor(state, saveId, record) {
   const row = (state?.savedSettlements || [])
     .find((entry) => String(/** @type {{id?: unknown}} */ (entry)?.id ?? '') === saveId);
   const stored = isPlainObject(row) ? row.config : undefined;
   if (isPlainObject(stored)) return stored;
-  const embedded = /** @type {{_config?: unknown}} */ (state?.settlement)?._config;
+  const embedded = /** @type {{_config?: unknown}} */ (record)?._config;
   return isPlainObject(embedded) ? embedded : {};
 }
 
@@ -920,6 +952,14 @@ function storedConfigFor(state, saveId) {
  * APPLIED add-decree whose newcomer the layer does not already hold is applied to the layer
  * through the ONE writer, and the world is then re-derived ONCE through EM-B2a4's scoped seam —
  * one re-derivation per tick, never one per decree — so the newcomer exists on the record.
+ *
+ * ⛔ ANY MEMBER SAVE OF THE CAMPAIGN, NOT ONLY THE OPEN ONE (EM-E8b B, U49). MEASURED at
+ * EM-E8's tip: a two-save campaign whose NON-ACTIVE member carried a due add-decree in ITS
+ * registry came out of the tick with that registry `applied` and its roster holding NOBODY —
+ * EM-E1's hook is N registries wide (design §2.5: `decrees` is a key on the SAVED SETTLEMENT)
+ * and this binder was one save wide. So the OPEN save is read and written through the live
+ * view, any other member through its own library row, and the run refuses to write if the save
+ * it started on is no longer the save it would land on.
  *
  * ⛔ DORMANT BY REFERENCE. A save with no applied add-decree reads its registry, finds nothing
  * due, and returns ONE shared frozen receipt without touching the store, reaching the lane or
@@ -959,12 +999,22 @@ function storedConfigFor(state, saveId) {
  */
 export async function applyRosterDecreesAtTick(get, set, request) {
   const saveId = String(request?.saveId ?? '');
-  if (!saveId || saveId !== String(get().activeSaveId ?? '')) return refuseAdd('no_save');
+  if (!saveId) return refuseAdd('no_save');
+  // EM-E8b B (U49): the OPEN save is read through the live view — the hydrated record is the
+  // authority for the save the DM has in front of them — and any OTHER member of the campaign
+  // through its own library row. The save this run started on must still be that save when it
+  // writes (`stillOurs` below), which is the same data-safety refusal the active-only guard
+  // was: re-deriving save X's world onto save Y is the defect, not the save being unopened.
+  const isActive = saveId === String(get().activeSaveId ?? '');
+  const record = isActive ? get().settlement : memberRecordOf(get(), saveId);
+  if (!isPlainObject(record)) return refuseAdd('no_save');
+  const stillOurs = () => (isActive
+    ? saveId === String(get().activeSaveId ?? '')
+    : memberRecordOf(get(), saveId) === record);
 
-  const record = get().settlement;
   const held = mintedRowsOf(/** @type {{dmLayer?: unknown}} */ (record)?.dmLayer);
   // Codepoint order on the newcomer's id, so two ticks over one registry mint in one order.
-  const due = selectDecrees(get())
+  const due = recordDecrees(record)
     .map((row) => ({ row, id: appliedNewcomerIdOf(row) }))
     .filter((entry) => entry.id !== '' && !Object.hasOwn(held, entry.id))
     .sort((a, b) => byCodepoint(a.id, b.id));
@@ -991,16 +1041,15 @@ export async function applyRosterDecreesAtTick(get, set, request) {
   const lane = seamIsScoped
     ? /** @type {{regenerateWithLayer?: Function}|null} */ (await reachRederiveLane())
     : null;
-  // The lane load yielded. The active save may have changed underneath, and re-deriving save
-  // X's world onto save Y is the data-safety defect step 1 exists to prevent.
-  if (typeof lane?.regenerateWithLayer !== 'function') return NOTHING_MINTED;
-  if (saveId !== String(get().activeSaveId ?? '')) return NOTHING_MINTED;
-  const live = get().settlement;
+  // The lane load yielded. The save may have changed underneath, and re-deriving save X's
+  // world onto save Y is the data-safety defect step 1 exists to prevent.
+  if (typeof lane?.regenerateWithLayer !== 'function' || !stillOurs()) return NOTHING_MINTED;
+  const live = isActive ? get().settlement : record;
   const out = await lane.regenerateWithLayer(
-    live, storedConfigFor(get(), saveId), layer, DECLARATION_CONSULT,
+    live, storedConfigFor(get(), saveId, live), layer, DECLARATION_CONSULT,
   ).then(null, () => null);
   const derived = isPlainObject(out) ? /** @type {{record?: unknown}} */ (out).record : null;
-  if (!isPlainObject(derived) || saveId !== String(get().activeSaveId ?? '')) return NOTHING_MINTED;
+  if (!isPlainObject(derived) || !stillOurs()) return NOTHING_MINTED;
 
   // ⛔ ONE WRITE, CARRYING BOTH HOMES. The derived record is a fresh full generation, so every
   //    key the live record holds and it does not is carried forward; the LAYER is this member's
@@ -1008,7 +1057,10 @@ export async function applyRosterDecreesAtTick(get, set, request) {
   const next = carryForward(/** @type {object} */ (live), /** @type {object} */ (derived));
   /** @type {Record<string, unknown>} */ (next).dmLayer = layer;
   set((state) => {
-    state.settlement = next;
+    // EM-E8b B (U49): the live view is the OPEN save's other home and nobody else's — writing
+    // it for a member save the DM does not have hydrated would put save X's world on screen
+    // under save Y's name.
+    if (isActive) state.settlement = next;
     // EM-E8b A (U48): the SAME record onto the library row, inside the SAME write. The view
     // and the row are two homes for one save, and the advance's outbox reads the ROW — a
     // mint that moved only the view persisted nothing and left the durable save holding an

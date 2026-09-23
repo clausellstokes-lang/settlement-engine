@@ -227,6 +227,60 @@ export function reconcileWizardNewsForCommit(resultWizardNews, liveWizardNews, p
   return appendWizardNewsEntries(resultWizardNews, cloneJson(landed), { now });
 }
 
+/** One shared frozen empty list, so a campaign that carries no registry names nobody alike. */
+const NO_ROSTER_SAVES = /** @type {readonly string[]} */ (Object.freeze([]));
+
+/**
+ * ⭐ EM-E8b B (U49) — THE MEMBER SAVES THE TICK'S ROSTER HALF IS OWED, IN THE CAMPAIGN'S OWN
+ * MEMBER ORDER: the SAME saves `applyDecreesToSaves` just walked.
+ *
+ * MEASURED at EM-E8's tip: a two-save campaign whose NON-ACTIVE member carried a due
+ * add-decree in ITS registry came out of the tick with that registry `applied` and its roster
+ * holding NOBODY. The kernel's hook is N registries wide (design §2.5: `decrees` is a key on
+ * the SAVED SETTLEMENT, so a campaign's tick is N registries, not one) and the store's binder
+ * was one save wide. This reader is what makes the two the same width.
+ *
+ * ⛔ THE OPEN SAVE IS READ THROUGH THE LIVE VIEW. The hydrated record is the authority for the
+ * save the DM has in front of them — its library row can legitimately lag a staged decree —
+ * so a reader that took the row for it would miss exactly the registry the DM just wrote.
+ *
+ * ⛔ IT IS APPENDED WHEN IT IS NOT A MEMBER of this campaign, so the reach EM-E8 shipped (the
+ * active save, whatever its membership) is never narrowed by this widening.
+ *
+ * ⛔ IT ASKS FOR THE KEY'S PRESENCE AND NEVER READS ITS VALUE, and that is MEASURED rather
+ * than stylistic. `decrees` is one of the record register's NOT_YET_WRITTEN keys — nothing in
+ * generation writes it — so a guarded value read of it here mints an observed-shape
+ * reader-with-no-writer row, and this file holds NO frozen row, which makes every new identity
+ * a ceiling-0 violation. Measured: the value spelling reported
+ * "src/store/campaignAdvanceSession.js: NEW decrees on settlement — 2 read(s) … (ceiling 0)".
+ * `Object.hasOwn` asks the dormancy question exactly — does this save carry a registry at all
+ * — without asking the record for the key's value.
+ *
+ * ⛔ DORMANT BY REFERENCE: a campaign whose members carry no `decrees` key — every world today
+ * — returns ONE shared frozen list and allocates nothing of its own.
+ *
+ * @param {any} state @param {string} campaignId
+ * @returns {readonly string[]} member ids, in campaign order, each carrying a registry key
+ */
+export function rosterTickSaveIds(state, campaignId) {
+  const activeSaveId = String(state?.activeSaveId ?? '');
+  const carriesRegistry = (/** @type {any} */ record) =>
+    record !== null && typeof record === 'object' && Object.hasOwn(record, 'decrees');
+  /** @type {string[]|null} */
+  let ids = null;
+  for (const save of campaignSettlements(state, campaignId)) {
+    const id = String(save?.id ?? '');
+    if (!id) continue;
+    if (carriesRegistry(id === activeSaveId ? state?.settlement : save?.settlement)) {
+      (ids ||= []).push(id);
+    }
+  }
+  if (activeSaveId && carriesRegistry(state?.settlement) && !(ids || []).includes(activeSaveId)) {
+    (ids ||= []).push(activeSaveId);
+  }
+  return ids === null ? NO_ROSTER_SAVES : ids;
+}
+
 /**
  * ⭐ EM-E8b A (U48) — THE TICK'S MINTED ROSTER STATE, FOLDED INTO THE OUTBOX PAYLOAD THE
  * ADVANCE ALREADY CARRIES. ONE PERSISTENCE PATH AND NO SECOND WRITER OF A SAVE ROW.
@@ -745,15 +799,28 @@ export async function runAdvanceCampaignWorld({
     // Best-effort and session-fenced, exactly as the two replays are: the roster half never
     // blocks the advance, and the pre-pulse snapshot already covers it for undo.
     const liveDecrees = get().settlement?.decrees;
-    if (result && result.ok !== false && Array.isArray(liveDecrees) && liveDecrees.length > 0) {
+    const rosterSaveIds = result && result.ok !== false
+      ? rosterTickSaveIds(get(), campaignId)
+      : NO_ROSTER_SAVES;
+    if (result && result.ok !== false
+        && ((Array.isArray(liveDecrees) && liveDecrees.length > 0) || rosterSaveIds.length > 0)) {
       if (!sessionCurrent(isSessionCurrent)) return AUTH_SESSION_CHANGED_RESULT;
       try {
         const editSlice = await import('./editSlice.js');
         if (!sessionCurrent(isSessionCurrent)) return AUTH_SESSION_CHANGED_RESULT;
-        const receipt = await editSlice.applyRosterDecreesAtTick(get, set, {
-          saveId: String(get().activeSaveId ?? ''),
-        });
-        persistUpdates = withMintedRosterState(get(), persistUpdates, receipt);
+        /** @type {any[]} */
+        const receipts = [];
+        // EM-E8b B (U49): ONE pass over the member saves the tick's hook just walked, in the
+        // campaign's own order, so two ticks over one campaign mint in one order. Each save's
+        // own run is idempotent on ITS layer, so a member that already holds its newcomer
+        // mints nobody and reaches the re-derivation lane not at all.
+        for (const rosterSaveId of rosterSaveIds) {
+          if (!sessionCurrent(isSessionCurrent)) return AUTH_SESSION_CHANGED_RESULT;
+          receipts.push(
+            await editSlice.applyRosterDecreesAtTick(get, set, { saveId: rosterSaveId }),
+          );
+        }
+        persistUpdates = withMintedRosterState(get(), persistUpdates, receipts);
       } catch { /* best-effort */ }
       if (!sessionCurrent(isSessionCurrent)) return AUTH_SESSION_CHANGED_RESULT;
     }
