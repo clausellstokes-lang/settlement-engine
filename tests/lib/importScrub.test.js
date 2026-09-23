@@ -305,9 +305,13 @@ describe('EM-B3d — scrubImportedEditState: an import carries no editor state',
   });
 
   it('A2 — is REFERENCE-IDENTICAL when there is nothing to strip', () => {
-    // Nothing in src/ writes either key at this commit (recordRegister.js's
-    // NOT_YET_WRITTEN_KEYS), so this branch is 100% of real imports today. A
-    // shallow-copy-always strip would silently move the bytes of every one of them.
+    // GENERATION writes neither key (recordRegister.js's GENERATED_KEYS), so this branch
+    // is every import of a world nobody edited. Both keys DO have writers now — U47: the
+    // editor's store writes `dmLayer`, its `commitRegistry` writes `decrees`, and the
+    // rewind restores `decrees` — which is why they left NOT_YET_WRITTEN_KEYS at the
+    // observed-shape register's schema-23 rung, and why the strip arm above is live
+    // traffic rather than a dormant branch. A shallow-copy-always strip would silently
+    // move the bytes of every unedited import.
     const dark = { name: 'Dark', tier: 'village', economicState: { foodSecurity: { storageMonths: 2 } } };
     expect(scrubImportedEditState(dark)).toBe(dark);
     const bare = { name: 'NoEconomy' };

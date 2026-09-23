@@ -193,11 +193,22 @@ export function scrubGalleryImportLivingContent(settlement) {
  * read only at a property access; `settlement.dmLayer` would mint a register row for
  * a key no generated record carries. Measured, not assumed (EM-B3d §6).
  *
+ * ⛔ BOTH KEYS NOW HAVE WRITERS, AND NAMING THEM IS THE POINT (U47). This note used to
+ * say that nothing in src/ wrote either one, citing `recordRegister.js`'s
+ * NOT_YET_WRITTEN_KEYS; they LEFT that list at the observed-shape register's schema-23
+ * rung, which is where the claim stopped being a declaration and became a measured one.
+ * The writers, by name: `dmLayer` from `src/store/editSlice.js`'s two
+ * `state.settlement.dmLayer = applied.layer` sites, and `decrees` from that same
+ * module's `commitRegistry` (`state.settlement.decrees = decrees`), with the rewind in
+ * `campaignWorldPulseDeferred.js` restoring `decrees` on the undo path. Every one of
+ * them runs on the EDITING keeper's own machine, one lifecycle step outside generation,
+ * which is exactly what makes an arriving record's copy of them another table's session
+ * and this strip the thing that drops it.
+ *
  * Pure, and REFERENCE-IDENTICAL when there is nothing to strip: a settlement carrying
- * neither key — which is EVERY settlement at this commit, because nothing writes
- * either one (`src/domain/edit/recordRegister.js`'s NOT_YET_WRITTEN_KEYS) — comes
- * back as the very object that went in, so this can never move a byte on the dormant
- * path.
+ * neither key — which is every GENERATED record, since generation produces neither
+ * (`recordRegister.js`'s GENERATED_KEYS) — comes back as the very object that went in,
+ * so an import of a world nobody edited cannot move a byte.
  *
  * @param {Record<string, any>|null|undefined} settlement
  * @returns {Record<string, any>|null|undefined}
