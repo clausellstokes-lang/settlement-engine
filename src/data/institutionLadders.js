@@ -7,17 +7,36 @@
  * Importing it must never register a pipeline step.
  */
 
+// Shared phrases hoisted once (train EM-T15's worker buy-back, judgment 203): each is spelled here and referenced below; the exported tables are byte-identical.
+const ADVENTURERS_CHARTER_HALL = 'adventurers\' charter hall';
+const APOTHECARY_DISTRICT = "Apothecary district";
+const APOTHECARY_ESTABLISHED = "Apothecary (established)";
+const BOWYERS_FLETCHERS_GUILD = "Bowyers & fletchers (guild)";
+const CARAVAN_MASTERS_EXCHANGE = "Caravan masters' exchange";
+const CARAVAN_MASTERS_EXCHANGE_2 = "caravan masters' exchange";
+const CARRIERS_HIRING_HALL = "Carriers' hiring hall";
+const CRAFT_GUILDS_30_80 = 'craft guilds (30-80)';
+const CRAFT_GUILDS_5_15 = 'craft guilds (5-15)';
+const FENCE_WORD_OF_MOUTH = 'fence (word of mouth)';
+const MERCHANT_GUILDS_15_40 = 'merchant guilds (15-40)';
+const MERCHANT_GUILDS_3_8 = 'merchant guilds (3-8)';
+const PACK_ANIMAL_TRADER = 'pack animal trader';
+const PARISH_CHURCHES_10_30 = "Parish churches (10-30)";
+const PARISH_CHURCHES_2_5 = "Parish churches (2-5)";
+const PROFESSIONAL_CITY_WATCH = "Professional city watch";
+const TRAVELING_PERFORMERS = "Traveling performers";
+
 // Pairs are scale tiers of the SAME function. Complementary infrastructure
 // must not appear here: the greater replaces the lesser.
 export const UPGRADE_CHAINS = Object.freeze([
-  ["Parish church", "Parish churches (2-5)"],
-  ["Parish church", "Parish churches (10-30)"],
-  ["Parish churches (2-5)", "Parish churches (10-30)"],
+  ["Parish church", PARISH_CHURCHES_2_5],
+  ["Parish church", PARISH_CHURCHES_10_30],
+  [PARISH_CHURCHES_2_5, PARISH_CHURCHES_10_30],
   ["Wayside shrine", "Parish church"],
   ["Water source", "Multiple water sources"],
   ["Citizen militia", "Town watch"],
-  ["Citizen militia", "Professional city watch"],
-  ["Town watch", "Professional city watch"],
+  ["Citizen militia", PROFESSIONAL_CITY_WATCH],
+  ["Town watch", PROFESSIONAL_CITY_WATCH],
   ["Palisade or earthworks", "Town walls"],
   ["Town walls", "City walls and gates"],
   ["Barracks", "Garrison"],
@@ -25,9 +44,9 @@ export const UPGRADE_CHAINS = Object.freeze([
   ["Gambling den", "Gambling halls"],
   ["Gambling halls", "Gambling district"],
   ["Gambling den", "Gambling district"],
-  ["Traveling performers", "Theaters"],
+  [TRAVELING_PERFORMERS, "Theaters"],
   ["Theaters", "Multiple theaters"],
-  ["Traveling performers", "Multiple theaters"],
+  [TRAVELING_PERFORMERS, "Multiple theaters"],
   ["River boatyard", "Shipyard"],
   ["Hedge wizard", "Wizard's tower"],
   ["Traveling hedge wizard", "Hedge wizard"],
@@ -37,20 +56,20 @@ export const UPGRADE_CHAINS = Object.freeze([
   ["Town hall", "City hall"],
   ["Blacksmith", "Blacksmiths (3-10)"],
   ["Carpenter", "Carpenters (5-15)"],
-  ["Carriers' hiring hall", "Carriers' guild"],
-  ["Carriers' guild", "Caravan masters' exchange"],
-  ["Carriers' hiring hall", "Caravan masters' exchange"],
+  [CARRIERS_HIRING_HALL, "Carriers' guild"],
+  ["Carriers' guild", CARAVAN_MASTERS_EXCHANGE],
+  [CARRIERS_HIRING_HALL, CARAVAN_MASTERS_EXCHANGE],
   ["Small prison/stocks", "Large prison"],
   ["Courthouse", "Multiple courthouses"],
   ["Craft guilds (5-15)", "Craft guilds (30-80)"],
   ["Merchant guilds (3-8)", "Merchant guilds (15-40)"],
   ["Adventurers' charter hall", "Multiple adventurers' guilds"],
-  ["Bowyers & fletchers (guild)", "Dungeon delving supply district"],
-  ["Apothecary", "Apothecary (established)"],
-  ["Apothecary (established)", "Apothecary district"],
-  ["Apothecary", "Apothecary district"],
+  [BOWYERS_FLETCHERS_GUILD, "Dungeon delving supply district"],
+  ["Apothecary", APOTHECARY_ESTABLISHED],
+  [APOTHECARY_ESTABLISHED, APOTHECARY_DISTRICT],
+  ["Apothecary", APOTHECARY_DISTRICT],
   ["Cartographer's workshop", "Cartographer's guild"],
-  ["Bowyer & fletcher", "Bowyers & fletchers (guild)"],
+  ["Bowyer & fletcher", BOWYERS_FLETCHERS_GUILD],
   ["Small hospital", "Major hospital"],
   ["Slave market", "Slave market district"],
 ]);
@@ -63,19 +82,19 @@ export const SUBSUMPTION_RULES = Object.freeze([
   { greater: 'mages\' guild', lesser: ['wizard\'s tower', 'alchemist shop'] },
   { greater: 'mages\' district', lesser: ['wizard\'s tower', 'mages\' guild', 'alchemist shop', 'alchemist quarter'] },
   { greater: 'academy of magic', lesser: ['wizard\'s tower', 'mages\' guild'] },
-  { greater: 'multiple adventurers\' guild', lesser: ['adventurers\' charter hall', 'hireling hall'] },
-  { greater: 'adventurers\' guild', lesser: ['adventurers\' charter hall', 'hireling hall'] },
+  { greater: 'multiple adventurers\' guild', lesser: [ADVENTURERS_CHARTER_HALL, 'hireling hall'] },
+  { greater: 'adventurers\' guild', lesser: [ADVENTURERS_CHARTER_HALL, 'hireling hall'] },
   { greater: 'cathedral', lesser: ['parish church', 'priest (resident)', 'wayside shrine'] },
   { greater: 'major hospital', lesser: ['small hospital'] },
   { greater: 'professional city watch', lesser: ['town watch', 'citizen militia'] },
   { greater: 'multiple courthouses', lesser: ['courthouse'] },
   { greater: 'major port', lesser: ['docks/port facilities', 'river boatyard', 'river ferry'] },
-  { greater: 'craft guilds (30-80)', lesser: ['craft guilds (5-15)'] },
-  { greater: 'craft guilds (100-150+)', lesser: ['craft guilds (30-80)', 'craft guilds (5-15)'] },
-  { greater: 'merchant guilds (15-40)', lesser: ['merchant guilds (3-8)'] },
-  { greater: 'merchant guilds (50-100+)', lesser: ['merchant guilds (15-40)', 'merchant guilds (3-8)'] },
-  { greater: 'thieves\' guild chapter', lesser: ['fence (word of mouth)', 'local fence', 'bandit affiliate'] },
-  { greater: 'black market', lesser: ['fence (word of mouth)', 'local fence'] },
+  { greater: CRAFT_GUILDS_30_80, lesser: [CRAFT_GUILDS_5_15] },
+  { greater: 'craft guilds (100-150+)', lesser: [CRAFT_GUILDS_30_80, CRAFT_GUILDS_5_15] },
+  { greater: MERCHANT_GUILDS_15_40, lesser: [MERCHANT_GUILDS_3_8] },
+  { greater: 'merchant guilds (50-100+)', lesser: [MERCHANT_GUILDS_15_40, MERCHANT_GUILDS_3_8] },
+  { greater: 'thieves\' guild chapter', lesser: [FENCE_WORD_OF_MOUTH, 'local fence', 'bandit affiliate'] },
+  { greater: 'black market', lesser: [FENCE_WORD_OF_MOUTH, 'local fence'] },
   { greater: 'brewery', lesser: ['brewer'] },
   { greater: "cobbler's guild", lesser: ['cobbler'] },
   { greater: "tailor's guild", lesser: ['tailor'] },
@@ -92,9 +111,9 @@ export const SUBSUMPTION_RULES = Object.freeze([
   { greater: 'banking district', lesser: ['pawnbroker', 'banking houses'] },
   { greater: 'major hospital', lesser: ['almshouse'] },
   { greater: 'hospital network', lesser: ['almshouse', 'foundling home'] },
-  { greater: "caravan masters' exchange", lesser: ["caravaneer's post", 'waystation', 'pack animal trader'] },
-  { greater: "caravaneer's post", lesser: ['waystation', 'pack animal trader'] },
-  { greater: 'international trade center', lesser: ["caravan masters' exchange", "caravaneer's post"] },
+  { greater: CARAVAN_MASTERS_EXCHANGE_2, lesser: ["caravaneer's post", 'waystation', PACK_ANIMAL_TRADER] },
+  { greater: "caravaneer's post", lesser: ['waystation', PACK_ANIMAL_TRADER] },
+  { greater: 'international trade center', lesser: [CARAVAN_MASTERS_EXCHANGE_2, "caravaneer's post"] },
   { greater: 'luxury goods quarter', lesser: ['jeweller'] },
   { greater: 'specialized metalworkers', lesser: ['jeweller'] },
   // [W-I INFORMATION BROKERAGES] I1 (design §3): the guild form of each information
