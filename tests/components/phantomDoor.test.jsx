@@ -309,4 +309,45 @@ describe('EM-F3 — the counterparties roster, the plus and the Forge control', 
     const admitted = await mountShell();
     expect(admitted.container.textContent.includes(t('edit.shell.counterpartiesHead'))).toBe(true);
   });
+  it('F7: the door opens only over a SAVED settlement: with no active save the plus is shut, says why, and mints nothing', async () => {
+    // ⛔ THE RED THIS ARM WAS WRITTEN FOR (the verifier's NOTE-11). Design §1 makes edit mode a
+    // state of a SAVED settlement's dossier and never an anonymous draft, and every other editor
+    // writer refuses `no_save` at its own door. The plus did not: on a draft it opened the form
+    // and founded a counterparty rooted at the draft's seed and owned by no settlement.
+    //
+    // ⛔ THE GATE IS THE SAVE AND NOTHING ELSE. `canEditSettlement()` is untouched above and the
+    // roster's own reading of a counterparty's reality is untouched below: part (i) proves the
+    // register, the roster and the Forge control all still stand on the very same seat.
+    storeState.activeSaveId = null;
+    const draft = await mountShell();
+
+    // (i) NOTHING ELSE IS TAKEN AWAY: the roster stands and the off-stage row keeps its forge.
+    expect(draft.container.textContent.includes(t('edit.shell.counterpartiesHead')), 'the roster still stands').toBe(true);
+    expect(buttonNames().filter((name) => name === t('edit.shell.counterparty.forge')), 'and the Forge control is unmoved')
+      .toEqual([t('edit.shell.counterparty.forge')]);
+
+    // (ii) THE PLUS IS SHUT, AND THE REGISTER SAYS WHY IN ITS OWN IDIOM — the same shape a roster
+    // whose newcomer no op can express already wears.
+    const plus = screen.getByRole('button', { name: t('edit.shell.counterparty.add') });
+    expect(plus.hasAttribute('disabled'), 'the plus is shut over a dossier that was never saved').toBe(true);
+    expect(draft.container.textContent.split(t('edit.shell.counterparty.addReason')).length, 'and the line says why, once')
+      .toBe(2);
+
+    // (iii) AND THE SEAM IS UNREACHABLE: the click opens no door, so nothing can be minted.
+    fireEvent.click(plus);
+    expect(screen.queryAllByText(t('edit.dialog.title')).length, 'no door opened').toBe(0);
+    expect(minted, 'and nothing was minted').toEqual([]);
+    cleanup();
+
+    // (iv) THE CONTROL, on the SAME seat with the save put back: the plus opens and the line is
+    // gone, so (ii) measured the save rather than a plus that is always shut.
+    seatState('premium', STAFF_ROLES[0]);
+    const saved = await mountShell();
+    const open = screen.getByRole('button', { name: t('edit.shell.counterparty.add') });
+    expect(open.hasAttribute('disabled'), 'a saved dossier keeps its plus').toBe(false);
+    expect(saved.container.textContent.split(t('edit.shell.counterparty.addReason')).length, 'and shows no line at all')
+      .toBe(1);
+    fireEvent.click(open);
+    expect(screen.queryAllByText(t('edit.dialog.title')).length, 'and the door opens').toBe(1);
+  });
 });

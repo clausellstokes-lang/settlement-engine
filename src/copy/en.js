@@ -1965,6 +1965,12 @@ export const en = Object.freeze({
       // of one fact, so a row marked off-stage is exactly a row the forge may take.
       counterparty: {
         add:      'Add a counterparty',
+        // ⭐ THE ONE NEW LINE OF NOTE-11, and it is the register's OWN idiom rather than a
+        // second voice: `plusReason` above says why a roster's plus is shut when no act can
+        // order its newcomer, and this says why THIS plus is shut when there is no settlement
+        // for the newcomer to belong to. Design §1: edit mode is a state of a SAVED
+        // settlement's dossier, never an anonymous draft.
+        addReason: 'This settlement is not saved yet, so the plus stays closed.',
         forge:    'Forge this counterparty',
         none:     'No counterparty is named here yet.',
         note:     'A counterparty off-stage is a name the table keeps, never a world the simulation carries.',

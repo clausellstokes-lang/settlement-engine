@@ -57,6 +57,15 @@
  * are SAVES (EM-F1). Its plus opens the SAME door in CREATE mode on EM-A1's `phantom` card, and
  * each off-stage row carries the FORGE control that hands EM-F2's promotion the row's own id.
  *
+ * ⛔ AND THAT PLUS OPENS ONLY OVER A SAVED SETTLEMENT (the verifier's NOTE-11). Design §1 makes
+ * edit mode a state of a SAVED settlement's dossier and never an anonymous draft, and every
+ * other editor writer already refuses `no_save` at its own door; the mint read the draft's seed
+ * and asked for no save, so on a draft this plus founded a counterparty owned by no settlement.
+ * The gate is READ HERE, at the control, from the active save id this mount already holds — so
+ * the DM is told before she fills a form rather than refused after. It LIFTS NOTHING: the tier
+ * gate above is untouched, the mint's own preconditions are the store's, and the roster, its
+ * reality mark and the Forge control are unmoved.
+ *
  * ⛔ AND IT REACHES NEITHER THE PHANTOM LEAF NOR THE POOL TABLE. This file's edge set into
  * `src/domain/edit/` is EXACTLY the declaration table, pinned by its own arm, so the reading of
  * a counterparty's reality and the mint itself are bound the way EM-D1 bound the writer: one
@@ -663,6 +672,10 @@ export default function EditModeShell() {
   );
 
   const counterparties = counterpartiesOf(settlement, saved);
+  // ⛔ THE DOOR ONTO A COUNTERPARTY NEEDS A SETTLEMENT FOR IT TO BELONG TO (NOTE-11; design §1).
+  // The active save id is the estate's own name for that fact and this mount already reads it
+  // for the page of decrees, so nothing new is asked of the store and no second rule is minted.
+  const overSave = String(saveId ?? '') !== '';
   const declared = CARD_REGISTER.filter((cardType) => isEditableCard(cardType));
   const sealed = CARD_REGISTER.filter((cardType) => Object.hasOwn(SEALS, cardType));
   const derived = CARD_REGISTER.filter((cardType) => Object.hasOwn(DERIVED_SOURCE, cardType));
@@ -685,11 +698,13 @@ export default function EditModeShell() {
         <Button
           variant="secondary"
           size="sm"
-          onClick={() => setOpen({ cardType: PHANTOM_CARD, subject: NEW_SUBJECT, create: true })}
+          disabled={!overSave}
+          onClick={() => overSave && setOpen({ cardType: PHANTOM_CARD, subject: NEW_SUBJECT, create: true })}
         >
           {t('edit.shell.counterparty.add')}
         </Button>
         <span style={quiet}>{t('edit.shell.counterparty.note')}</span>
+        {overSave ? null : <span style={quiet}>{t('edit.shell.counterparty.addReason')}</span>}
       </div>
       {counterparties.length === 0
         ? <span style={quiet}>{t('edit.shell.counterparty.none')}</span>
