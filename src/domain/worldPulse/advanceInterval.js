@@ -387,6 +387,12 @@ export function foldMemberBirthsOntoCampaign(campaign, births) {
  *   Wizard News receipts are captured before feed dedupe/retention.
  * @param {Record<string, unknown>|null} [args.customContent] Immutable projection
  *   resolved from the campaign's pinned content binding.
+ * @param {{ opTypes?: Record<string, unknown>, pools?: Record<string, unknown> }|null} [args.decreeCatalogues]
+ *   U72 (design §20.3): the live vocabularies a pending decree points into, composed ONCE
+ *   per user advance by the store — the one layer that holds the live member settlements a
+ *   pool's values are read from — and carried WHOLE to every tick's kernel call, so a
+ *   fifty-two-week year resolves against one reading rather than fifty-two. Null on every
+ *   world with no pending decree, which is what keeps this path byte-identical to its base.
  *
  * ASYNC: the orchestrator is async + yields to the event loop every
  * YIELD_EVERY_TICKS ticks (see yieldToEventLoop) so a long advance (up to 52
@@ -401,7 +407,7 @@ export function foldMemberBirthsOntoCampaign(campaign, births) {
 export async function simulateCampaignWorldInterval({
   campaign, saves = [], interval = 'one_month', commit = false, now,
   autoResolve = true, resume = null, onProgress = null, onTickObservation = null, weeks = null,
-  customContent = null, advanceEpoch = null,
+  customContent = null, advanceEpoch = null, decreeCatalogues = null,
 } = {}) {
   // Structural pin-`now` guard (same contract as the kernel): the multi-tick path
   // threads ONE pinned `now` across every synchronous tick, so an unpinned interval
@@ -513,6 +519,16 @@ export async function simulateCampaignWorldInterval({
       // carries `::tick:N`. A per-tick nonce would be destroyed by the interval collapse
       // (which keeps ONE record) and replay would be impossible.
       advanceEpoch,
+      // ⛔ U72 — §20.3's LIVE CATALOGUES, CARRIED WHOLE ACROSS EVERY TICK OF THE INTERVAL.
+      // The bag is the STORE's (only it knows the live settlements the pools are read
+      // from) and it is composed ONCE per user advance, not once per tick, so a 52-week
+      // year resolves against one reading of the vocabulary rather than fifty-two. It is
+      // plain data by construction — the op catalogue's frozen rows and frozen pool value
+      // lists — so it crosses the advance worker's structured clone and the R-18 paranoia
+      // pass's JSON clone unchanged, and the worker and in-thread runs cannot diverge on
+      // it. Null on every path that composes none, which is every world with no pending
+      // decree: the kernel then hands the hook `{ now }` exactly as before this member.
+      decreeCatalogues,
       // ⛔ E5 — THE STALE STRAP, TOLD TO THE KERNEL. A resumed tick is re-derived
       // from `resume.preWorldState`, so the rules the kernel reads are the ones
       // FROZEN INTO THE CURSOR AT PAUSE TIME. That is correct for the seed and

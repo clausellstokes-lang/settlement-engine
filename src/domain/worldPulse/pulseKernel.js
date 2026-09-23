@@ -254,8 +254,20 @@ function nextWorldStateForPulse(worldState, campaign, interval) {
  *   mid-pause, where the store's live read withheld the value, and a legacy cursor that
  *   never carried one. The store gate covers the resume path; this one guards fresh
  *   advances. See `assertEpochPinnedInTest` in ../clock.js.
+ * @param {{ opTypes?: Record<string, unknown>, pools?: Record<string, unknown> }|null} [args.decreeCatalogues]
+ *   U72 (design §20.3) — THE LIVE VOCABULARIES A PENDING DECREE POINTS INTO, `{ opTypes,
+ *   pools }`, HANDED IN exactly as EM-C1's `resolveDecree` requires. The head-of-tick hook
+ *   resolves every due pending entry against them and WITHDRAWS one whose op type, pool or
+ *   enum word has moved, with `withdrawnReason: { kind: 'vocabulary-moved', … }`, instead of
+ *   applying it ("a pin on a fork that no longer means what the DM chose is a lie"). It is an
+ *   ARGUMENT and never an import: this kernel may no more reach the op catalogue than the
+ *   hook may, so the ONE caller that can compose them — the store's advance, which knows the
+ *   live settlements the pools are read from — composes and threads them. ABSENT (every
+ *   direct caller, every preview, every test that does not supply them) resolution is not
+ *   consulted and each due entry applies, which is `applyDecreesAtTick`'s own documented
+ *   shape and byte-identical to this member's base.
  */
-export function simulateCampaignWorldPulse({ campaign, saves = [], interval = 'one_month', commit = false, now, deferMajors = false, dismissMajorIds = null, intervalStartTick, newsReceiptSink = null, advanceEpoch = null, resumedSegment = false } = {}) {
+export function simulateCampaignWorldPulse({ campaign, saves = [], interval = 'one_month', commit = false, now, deferMajors = false, dismissMajorIds = null, intervalStartTick, newsReceiptSink = null, advanceEpoch = null, resumedSegment = false, decreeCatalogues = null } = {}) {
   // Structural pin-`now` guard: an unpinned call is reproducible-forfeiting, so in a
   // test run it throws (never silently divergent bytes); production pins `now` and
   // falls back to the wall clock only here, at the boundary.
@@ -345,7 +357,7 @@ export function simulateCampaignWorldPulse({ campaign, saves = [], interval = 'o
   // draws epoch-free while every later stage of the same tick draws epoch-bearing — not a
   // smaller version of the feature but its inversion. Dark, the stamp returns the identical
   // reference and no `spatialLedgers` namespace is ever created.
-  let worldState = { ...nextWorldStateForPulse(startingWorldState, campaign, tickInterval), simulationRules }; worldState = stampAdvanceEpochYear(worldState, epochTerm); const forkPins = forkPinsFor((Array.isArray(saves) ? saves : []).flatMap((save) => dueEntriesAtTick(worldState, save?.settlement?.decrees)), { [TRADITION_FORK.id]: TRADITION_FORK.outcomes, [SIEGE_FORK.id]: SIEGE_FORK.outcomes }); const decreeTick = applyDecreesToSaves(worldState, saves, pulseIdFor(campaign?.id, worldState.tick), { now }); saves = Array.isArray(decreeTick.saves) ? decreeTick.saves : saves;
+  let worldState = { ...nextWorldStateForPulse(startingWorldState, campaign, tickInterval), simulationRules }; worldState = stampAdvanceEpochYear(worldState, epochTerm); const forkPins = forkPinsFor((Array.isArray(saves) ? saves : []).flatMap((save) => dueEntriesAtTick(worldState, save?.settlement?.decrees)), { [TRADITION_FORK.id]: TRADITION_FORK.outcomes, [SIEGE_FORK.id]: SIEGE_FORK.outcomes }); const decreeTick = applyDecreesToSaves(worldState, saves, pulseIdFor(campaign?.id, worldState.tick), decreeCatalogues ? { now, catalogues: decreeCatalogues } : { now }); saves = Array.isArray(decreeTick.saves) ? decreeTick.saves : saves;
   // ⭐ EM-E1 — THE HEAD OF THE TICK, `;`-JOINED ONTO THE LINE ABOVE AT +0 EFFECTIVE LINES
   // (design §2.6, §12.11; ARCH §6). "The pulse's head takes the pending decrees in order,
   // applies each as a cause, then runs the simulation." THE POSITION IS THE POINT and it

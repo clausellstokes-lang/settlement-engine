@@ -77,6 +77,86 @@ import {
  * page's own A7 arm.
  */
 export const PULSE_UNDO_CAP = 10;
+/**
+ * ⭐ U72 — §20.3's LIVE CATALOGUES FOR THE HEAD OF THE TICK, COMPOSED AT THE ONE LAYER THAT
+ * CAN COMPOSE THEM (design §20.3; ARCH §1 and §6; the verifier's FIX-3).
+ *
+ * "A pending decree that no longer resolves is WITHDRAWN WITH ITS REASON — never dropped,
+ * never applied … the tick hook calls the resolver before it applies anything." EM-C1's
+ * `resolveDecree` takes `{ opTypes, pools }` HANDED IN and the hook guards its whole
+ * resolution on the bag being present, so until something composed one, every due entry
+ * applied and design §20.3's rejected branch — best-effort application, "a pin on a fork
+ * that no longer means what the DM chose is a lie" — was the shipping behaviour.
+ *
+ * ⛔ THE STORE IS THE ONLY LAYER THAT CAN. The op catalogue may not be imported by the
+ * kernel or by the hook (`editMutationPath.walker` and EM-E1's two-import pin), and a pool's
+ * values are a function of A SETTLEMENT — `npc.role` reads its institutions, `power.holder`
+ * its factions, `institution.class` its tier — so the reading needs the live member saves,
+ * which only this path holds. The bag then travels as an ARGUMENT the whole way down.
+ *
+ * ⛔ THE EDGE IS DYNAMIC, and that is what keeps the edit leaves out of every eager closure
+ * (`EAGER_FIRST_PAINT_MODULES` walks STATIC edges only). It is the same idiom, and the same
+ * reason, as the roster half's own dynamic reach into the edit slice further down this file
+ * — ⛔ WHOSE CALL FORM IS NAMED IN WORDS AND NOT IN ITS OWN SPELLING ON PURPOSE, because
+ * `tests/store/rosterOpsAtTick.test.js` case C4 counts that form over this file's RAW
+ * SOURCE, comments included, and pins the total at ONE. A campaign whose saves hold no
+ * PENDING decree — every world today — reaches no import at all, composes nothing, and
+ * hands the kernel `null`, so the whole path is dormant by construction.
+ *
+ * ⛔ ONLY THE POOLS THE PENDING ENTRIES ACTUALLY NAME ARE READ, and that is a measurement,
+ * not thrift: two of the seventeen (`name.settlement`, `name.npc`) are CROSS PRODUCTS of the
+ * naming bag and would be thousands of strings on a payload that crosses a worker boundary.
+ * The pool ids come from the op catalogue's own payload specs, so a row that grows a pool
+ * field is covered the day it lands and nothing here is transcribed.
+ *
+ * ⛔ ACROSS MEMBER SAVES A POOL IS THE UNION OF WHAT EACH LIVE SETTLEMENT OFFERS, which is
+ * the one honest reading available to a hook that takes ONE bag for N registries (design
+ * §2.5: `decrees` is a key on the SAVED SETTLEMENT). It can only ever be LAX — a word alive
+ * in some member town is admitted — and never strict, so this member cannot withdraw a
+ * decree that should have applied. Design §9's own rule, which EM-E1's header quotes: a
+ * missing warning costs less trust than a false one. On the single-settlement world the
+ * DM actually stages decrees in, the union IS that settlement's own vocabulary.
+ *
+ * PURE apart from the two dynamic imports: it reads no clock, takes no draw and writes
+ * nothing.
+ *
+ * @param {unknown} saves the advance's own plain member clones
+ * @returns {Promise<{ opTypes: Record<string, unknown>, pools: Record<string, readonly string[]> }|null>}
+ *   null when nothing is pending anywhere — the kernel then resolves nothing, as before.
+ */
+export async function decreeCataloguesForSaves(saves) {
+  const rows = Array.isArray(saves) ? saves : [];
+  const pending = rows.filter((row) => Array.isArray(row?.settlement?.decrees)
+    && row.settlement.decrees.some((/** @type {any} */ entry) => entry?.status === 'pending'));
+  if (pending.length === 0) return null;
+  const [operations, pools] = await Promise.all([
+    import('../domain/edit/operations.js'),
+    import('../domain/edit/pools.js'),
+  ]);
+  const opTypes = operations.OP_TYPES;
+  /** @type {Record<string, readonly string[]>} */
+  const live = {};
+  for (const row of pending) {
+    for (const entry of row.settlement.decrees) {
+      if (entry?.status !== 'pending') continue;
+      const decl = /** @type {any} */ (opTypes)[entry?.op?.type];
+      const specs = decl && typeof decl === 'object' ? decl.payload : null;
+      if (!specs || typeof specs !== 'object') continue;
+      for (const spec of Object.values(specs)) {
+        const poolId = spec && typeof spec === 'object' && /** @type {any} */ (spec).kind === 'pool'
+          ? /** @type {any} */ (spec).pool
+          : null;
+        if (typeof poolId !== 'string' || poolId === '') continue;
+        const offered = pools.poolValues(poolId, row.settlement);
+        live[poolId] = Object.hasOwn(live, poolId)
+          ? Object.freeze([...new Set([...live[poolId], ...offered])])
+          : offered;
+      }
+    }
+  }
+  return { opTypes, pools: Object.freeze(live) };
+}
+
 const AUTH_SESSION_CHANGED_RESULT = Object.freeze({ ok: false, reason: 'auth_session_changed' });
 
 function sessionCurrent(isSessionCurrent) {
@@ -541,6 +621,14 @@ export async function runAdvanceCampaignWorld({
         .map((/** @type {any} */ e) => String(e?.id))
     );
 
+    // U72 (design §20.3) — THE LIVE CATALOGUES, COMPOSED ONCE PER USER ADVANCE AND BEFORE
+    // THE COMPUTE. It is read off the same plain member clones the pulse is about to run
+    // over, so the vocabulary the hook judges by is the vocabulary of the world the tick
+    // enters. Null — and a single flag read's worth of work — for a campaign with no
+    // pending decree, which is every world today.
+    const decreeCatalogues = await decreeCataloguesForSaves(simSaves);
+    if (!sessionCurrent(isSessionCurrent)) return AUTH_SESSION_CHANGED_RESULT;
+
     // Pure, heavy compute OUTSIDE the producer. The multi-tick path is awaited: the
     // orchestrator yields to the event loop between tick batches so a long advance
     // (up to 48 one-week kernel passes) does not freeze the UI. The compute is a pure
@@ -565,6 +653,10 @@ export async function runAdvanceCampaignWorld({
         // payload spread into the worker AND the in-thread fallback alike.
         ...(catchUpWeeks != null ? { weeks: catchUpWeeks } : {}),
         advanceEpoch,
+        // U72: §20.3's live catalogues for the head of every tick of this advance, composed
+        // ONCE here (see `decreeCataloguesForSaves`) and null for a world with no pending
+        // decree — which keeps the flag-OFF and flag-ON paths alike byte-identical there.
+        decreeCatalogues,
       };
       result = useMultiTick
         // The worker runs the SAME simulate function off the main thread; the
@@ -584,6 +676,7 @@ export async function runAdvanceCampaignWorld({
             now,
             customContent: pinnedCustomContent,
             advanceEpoch,
+            decreeCatalogues,
           });
       if (!sessionCurrent(isSessionCurrent)) return AUTH_SESSION_CHANGED_RESULT;
 
@@ -985,6 +1078,14 @@ export async function runResolveIntervalMajors({
   const contentRuntime = contentRuntimeFromCampaignBinding(
     simCampaign.contentBinding,
   );
+  // U72 (design §20.3) — THE RESUMED SEGMENT'S CATALOGUES ARE THE PAUSED ADVANCE'S OWN.
+  // THE CONSTRAINT IS THE SAME ONE THE EPOCH RE-THREAD OBEYS: a resume re-derives the
+  // paused tick and must land byte-identically, so it may not take a FRESH reading of the
+  // vocabulary. The fresh path composed its bag from the PRE-ADVANCE member clones, and the
+  // cursor parked exactly those (`pre.saves`), so reading them back reproduces that bag
+  // word for word. A legacy cursor that parked no saves falls back to the live clones —
+  // still resolution, still §20.3, and the only reading available on that shape.
+  const decreeCatalogues = await decreeCataloguesForSaves(pre.saves ?? simSaves);
   const resumeArgs = {
     campaign: simCampaign,
     saves: simSaves,
@@ -993,6 +1094,7 @@ export async function runResolveIntervalMajors({
     autoResolve: false,
     customContent: contentRuntime.customContent,
     advanceEpoch: epochTerm,
+    decreeCatalogues,
     resume: {
       interval: cursor.interval,
       ticksTotal: cursor.ticksTotal,

@@ -362,6 +362,15 @@ describe('EM-A1 — the field declarations, their shape law and their existence 
     // is why any row naming it would be a NEW closure edge and reds here.
     const B1A_LEAVES = ['src/domain/edit/operations.js', 'src/domain/edit/worldConditions.js'];
     const EXPECTED_SECOND_ORDER = [
+      // ⭐ U72's SECOND SANCTIONED RUNTIME EDGE, AND IT IS DYNAMIC. Design §20.3 puts the
+      // stale-vocabulary resolver at the head of the tick, and only the store's advance can
+      // compose the `{ opTypes, pools }` the resolver takes — a pool's values are a function
+      // of a live SETTLEMENT, which neither the kernel nor the hook may reach. The advance
+      // session therefore names this leaf, behind `await import(…)` and behind a dormancy
+      // guard: a campaign whose saves hold no PENDING decree reaches the import not at all.
+      // The +0 B price is unmoved and MEASURED, not argued — `EAGER_FIRST_PAINT_MODULES`
+      // walks STATIC edges only and reads 270 with this row in place, exactly as before.
+      'src/store/campaignAdvanceSession.js imports src/domain/edit/operations.js',
       'src/store/editSlice.js imports src/domain/edit/operations.js',
     ];
     const secondOrder = [];
