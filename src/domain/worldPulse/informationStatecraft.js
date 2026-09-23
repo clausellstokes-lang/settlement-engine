@@ -317,6 +317,17 @@ export function makeBlaineyCredibilityFn(worldState, tick) {
  */
 
 /**
+ * THE CLOSED UNION AS VALUES, in the fold's own order (EM-E5; the `NPC_STATUS_VALUES`
+ * idiom, and EM-E4's `SIGHT_VERDICT_BANDS` precedent of one export line beside the words
+ * it names). The four kinds were typed and never spelled at value level, so a DM surface
+ * that offers one had nothing to import and would have had to retype them. Nothing in
+ * this module's behaviour moves: the fold below still tests each word literally, and this
+ * constant is the same four words in the same order for a reader outside the file.
+ * @type {ReadonlyArray<string>}
+ */
+export const CREDIBILITY_DELTA_KINDS = Object.freeze(['proven_true', 'deception', 'fracture', 'climb_down']);
+
+/**
  * Fold this tick's credibility deltas into the ledger: decay every prior entry to
  * `now`, apply the deltas (proven-true SLOW rise, deception/fracture SHARP fall,
  * clamped to ±SCORE_MAX), prune spent marks, persist codepoint-sorted (drop-when-empty
