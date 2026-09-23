@@ -67,6 +67,16 @@ const MIRROR_PATHS = Object.entries(CLASS_EXCEPTIONS)
   .filter(([, cls]) => cls === 'MIRROR').map(([path]) => path);
 
 /**
+ * The declared HISTORY sub-paths — THE PROMISE's immutable lived history. The tree merge keeps
+ * one from the RECORD (`recordMergeTree.js :: mergeNode`, its `KEPT_BY_CLASS` set), and a rung
+ * that takes the parent key RESTORES it, so no repair carries `R1`'s history in with the reading
+ * it repairs. ⛔ A row spelled with `[]` is not addressable by a dotted restore and none is
+ * declared: `tests/domain/mergeLadderHistory.test.js` H1 holds the table to that shape.
+ */
+const HISTORY_PATHS = Object.entries(CLASS_EXCEPTIONS)
+  .filter(([, cls]) => cls === 'HISTORY').map(([path]) => path);
+
+/**
  * `factions[].members[]` — a complete copy of the NPC its `id` names, and a MIRROR by class: a pure
  * function of held facts, RECOMPUTED after the merge, never merged. A member whose id the merged
  * roster no longer carries is left exactly as the record has it (removing a person is the op's
@@ -193,6 +203,23 @@ function ladderFor(violation) {
 }
 
 /**
+ * ONE RUNG'S WRITE (`ladderFor`'s own steps): the reading is taken from `R1`, and every declared
+ * HISTORY sub-path beneath that key keeps the value the merged record already carried — the
+ * record's own lived history, which a top-level `put` would otherwise overwrite with `R1`'s.
+ * A MIRROR or RECEIPT sub-path is NOT restored here: both are RECOMPUTED after every rung.
+ * ⛔ `undefined` RESTORES ABSENCE: a history the record never carried is not made by a repair.
+ * @param {RecordCard} merged @param {string} key @param {unknown} source @returns {void}
+ */
+function takeReading(merged, key, source) {
+  const kept = HISTORY_PATHS.filter((path) => path.startsWith(`${key}.`))
+    .map((path) => ({ path, value: clone(at(merged, path)) }));
+  put(merged, key, source);
+  for (const { path, value } of kept) {
+    if (isObj(at(merged, path.slice(0, path.lastIndexOf('.'))))) put(merged, path, value);
+  }
+}
+
+/**
  * Judge the merged record with the town's own invariants and repair it deterministically. A
  * violation the pre-edit record, the edited record or `R1` already carries is EXEMPT (it is not the
  * merge's). Every other one escalates up `ladderFor`, taking its scope from `R1`; it terminates
@@ -216,7 +243,7 @@ export function guardMergedRecord(merged, R1, exempt) {
       for (const key of rung.scope) {
         const source = clone(at(R1, key));
         if (source === undefined) continue;
-        put(merged, key, source);
+        takeReading(merged, key, source);
       }
       recomputeReceipts(merged);
       outstanding = live();

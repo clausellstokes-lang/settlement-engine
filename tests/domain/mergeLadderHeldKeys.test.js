@@ -33,12 +33,13 @@
  *     (`worldFacts` is read by nobody until EM-B2b), so `R1` there is a plain generation of a
  *     DIFFERENT town. A2 records what the cure leaves live on that channel — `V-DEFENSE-INST` 31
  *     and `V-EVIDENCE-CONFLICT` 22 — and EM-B2b owns the seam. This file does not close it.
- * 2.  ⛔ THE LADDER'S RUNG WRITES AT THE TOP-LEVEL KEY, so a declared HISTORY or AUTHORED
- *     SUB-PATH under a READING key is not protected by `CLASS_EXCEPTIONS` the way the tree merge
- *     protects it. Measured at `a545899ff`: `generationCoherenceReceipt.repairs` moves in 12 of
- *     the 120 config-channel trials, BEFORE this member and after it alike, in every case because
- *     a rung took `generationCoherenceReceipt` whole from `R1`. A5 asserts exactly that shape and
- *     no figure of it; the cure is not this member's.
+ * 2.  THE LADDER'S RUNG WRITE. When this file was written the rung wrote at the TOP-LEVEL key, so
+ *     a declared HISTORY sub-path under a READING key was carried along by a take: measured at
+ *     `a545899ff`, `generationCoherenceReceipt.repairs` moved in 12 of the 120 config-channel
+ *     trials, in every case because a rung took `generationCoherenceReceipt` whole from `R1`.
+ *     EM-R8b cured that (`mergeConsequence.js :: takeReading`) and A5's last expectation is its
+ *     pin here; the LAW itself, with its constructed controls, is
+ *     `tests/domain/mergeLadderHistory.test.js`.
  * 3.  `V-EVIDENCE-EVENTS` has NO POPULATION in this corpus: the generated narrative evidence
  *     agrees with `history.historicalEvents` in 498 of 498 trials. A8 is therefore a CONSTRUCTED
  *     positive control with its own counterforce, and the corpus proves nothing about it.
@@ -380,6 +381,9 @@ describe('EM-R8 — the escalation ladder never overwrites a HELD key, and the r
     // anchored: the same census carries 48 noisy trials (A2), so the explanation below is exercised.
     expect(unexplained, 'repairs moved for a reason other than a rung taking generationCoherenceReceipt '
       + `whole from R1 — the ladder's own top-level write, which no CLASS_EXCEPTIONS row reaches:\n${unexplained.join('\n')}`).toEqual([]);
+    const movedAtAll = all.filter((trial) => !trial.repairsSame).map((trial) => `${trial.label} ${trial.key}`);
+    expect(movedAtAll, 'and since EM-R8b a rung\'s take restores the declared HISTORY sub-path, so the '
+      + `lived history does not move at all:\n${movedAtAll.join('\n')}`).toEqual([]);
   }, SLOW);
 
   it('A6 · where no rung fires the merged record IS the post-pass pipeline, byte for byte', () => {
