@@ -1608,7 +1608,7 @@ describe('DS-DEF-9 — magic dependency, and the slot filled from the right ROLE
     expect(magicDependencyPoolKey(true, true)).toBe('magicDependency true, with a NAMED dependent chain');
     expect(magicDependencyPoolKey(false, false)).toBe('magicDependency false');
     expect(magicDependencyPoolKey(false, true)).toBe('magicDependency false');
-    // An unmeasured town is not an independent one. `defenseGenerator.js:639` writes the
+    // An unmeasured town is not an independent one. `defenseGenerator.js :: generateDefenseProfile` writes the
     // flag into every profile it builds, so an absent value is a fixture or a bad import.
     expect(magicDependencyPoolKey(undefined, false)).toBeNull();
     expect(magicDependencyPoolKey(null, true)).toBeNull();

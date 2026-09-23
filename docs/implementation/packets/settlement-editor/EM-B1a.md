@@ -608,7 +608,7 @@ op writes **none of them directly**:
 |---|---|---|
 | W1 | `src/generators/power/rulingStructure.js:787` | **GENERATION.** Derives the name from the roster: `(factions.find(f => f.isGoverning) || {}).faction`. Its own comment is the law — *"it must always name the faction entry that carries `isGoverning`"* |
 | W2 | `src/domain/rulingPower.js:657` | **THE TRANSFER OF POWER.** Writes `governingName` and `government` together with `previousGovernments`, `publicLegitimacy` and `stability` |
-| P1 | `src/generators/power/economyReconciliation.js:277` | a **propagation**, copying `projected.governingName` — not an independent decision |
+| P1 | `src/generators/power/economyReconciliation.js :: reconcilePowerStructure` | a **propagation**, copying `projected.governingName` — not an independent decision |
 
 ⛔ **So `set-power-holder`'s payload names the new holder and the op moves `isGoverning` on the
 roster, calling W2's transfer path; it NEVER writes `governingName` or `government` itself.** A

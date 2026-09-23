@@ -132,7 +132,7 @@
  * ⛔ AND IT HAS A MEASURED FALSE POSITIVE, WHICH IS WHY IT MUST NEVER GATE. Of the
  * 31 findings in its first run, ONE was wrong, and it was wrong in the way this
  * arm is structurally able to be wrong: a NEIGHBOURING backtick wins the
- * attribution. `scripts/wiring-census.mjs` cites `defenseGenerator.js:189-191`
+ * attribution. `scripts/wiring-census.mjs` cites `defenseGenerator.js :: computeDefenseScores`
  * for a `milUpkeepMult` derivation, with `economicGates.military` backticked
  * beside it; the arm attributed `economicGates` (declared far below) to the span
  * and convicted a citation that was TRUE. It was caught only by reading the

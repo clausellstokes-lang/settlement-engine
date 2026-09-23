@@ -789,7 +789,7 @@ describe.runIf(distExists)('Tier 9.7 — vendor-pdf lazy load contract', () => {
     // of true headroom), a `readFileSync(path, 'utf-8').length` here would read 107 B
     // OPTIMISTIC and could pass a build that ships over the line. Read bytes: statSync().size,
     // or readFileSync() with no encoding (a Buffer's .length is bytes — that is the spelling
-    // generationWorkerLazy.test.js:472 uses for the worker ceiling, and it is equally correct).
+    // generationWorkerLazy.test.js :: WORKER_BUNDLE_CEILING_BYTES uses for the ceiling, and it is equally correct).
     // Never a decoded string's .length. (FIX-B2, 2026-09-20; TOOL-12 item 9.)
     const size = statSync(join(assetsDir, engine)).size;
     // It should stay meaningfully large (the generation pipeline lives here).

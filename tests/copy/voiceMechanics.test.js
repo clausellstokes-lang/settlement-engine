@@ -359,7 +359,7 @@ const AUTHORED_VOCABULARY_ALLOWLIST = Object.freeze({
     'Subsistence — survival economy': { count: 1, why: 'COMPLEXITY_LABEL.SUBSISTENCE :135 — transcribes prosperity.js:314 byte for byte.' },
   }),
   'src/domain/display/stateProse/generalStateProse.js': Object.freeze({
-    'Deficit — Active Famine': { count: 1, why: 'the FOOD_POOL_OF key :266 — transcribes src/generators/foodGenerator.js:342 byte for byte, and the map\'s own docblock (:40, :255) names that producer line as its source.' },
+    'Deficit — Active Famine': { count: 1, why: 'the FOOD_POOL_OF key :266 — transcribes src/data/bandLadders.js :: FOOD_SECURITY_BANDS.famine byte for byte (the label\'s one home since EM-R0d; foodGenerator.js reads it through foodSecurityBandOf), and the map\'s own docblock (:40, :255) names that source.' },
     '—': { count: 2, why: 'the two `.split(\'—\')` DELIMITERS at :323 (safetyPoolKey) and :1728 (the Systems Health rung) — the separator they split on is composed by src/generators/safetyProfile.js:235 (`${strain} — ${condition}`). A parser argument, not copy: it burns WITH the producer, the same way Tier 3\'s six banked JSX dashes do.' },
   }),
 });

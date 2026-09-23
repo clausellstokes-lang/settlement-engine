@@ -1688,7 +1688,7 @@ describe('car 0f — the ALIAS DRAFT: measured, nothing ratified, no leaf writte
       'src/generators/npcGenerator.js',
     ]);
     for (const withdrawn of ['src/generators/structuralValidator.js:588', 'src/generators/stressNarrative.js:80',
-      'src/generators/defenseGenerator.js:608', 'src/generators/narrativeText.js:53',
+      'src/generators/defenseGenerator.js:603', 'src/generators/narrativeText.js:53', // :603 re-derived: generateDefenseProfile's `Disasters & Famine` comment, which EM-R0d shifted -5 from :608
       'src/generators/stressNarrative.js:83']) {
       expect(draft.rows.map((r) => r.at), `${withdrawn} was a comment, a string or an arrow parameter`)
         .not.toContain(withdrawn); // anchored: the four sound citations are asserted above

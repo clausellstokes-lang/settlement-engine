@@ -1543,7 +1543,7 @@ export function defenseSupportingProse(settlement, options = {}) {
  * gives the paragraph the town's own voice beside the generator's.
  *
  * ── ⭐ REACHABILITY, MEASURED OVER GENERATED WORLDS RATHER THAN ASSUMED ─────────────
- * `defenseProfile.magicDependency` is written by `defenseGenerator.js:449` as
+ * `defenseProfile.magicDependency` is written by `defenseGenerator.js :: computeDefenseScores` as
  * `magicOn && ((under_siege && (arcane||druid||divine)) || (famine && (druid||divine)) ||
  * (plague_onset && (divine||alchemy)) || (arcaneGuild && (under_siege||famine)))`, and the
  * binding term is the STRESS, not the magic. Measured over generated worlds:
@@ -1557,7 +1557,7 @@ export function defenseSupportingProse(settlement, options = {}) {
  * is the honest reason for a pool to be seldom drawn. A four-world census would have called
  * this block dead; it is not.
  *
- * ⚠ AN ABSENT FLAG IS SILENCE, NOT `false`. `defenseGenerator.js:639` writes
+ * ⚠ AN ABSENT FLAG IS SILENCE, NOT `false`. `defenseGenerator.js :: generateDefenseProfile` writes
  * `magicDependency: finalScores.magicDependency || false` into every profile it builds, so a
  * generated settlement always carries a boolean; an absent one is a hand-built fixture or a
  * malformed import, and "nothing structural here depends on arcane work" is a claim about a

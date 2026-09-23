@@ -259,7 +259,7 @@ an **institution's** description (`assembleInstitutions.js:745`), a **building's
 (`npcData.js:1334`). ⭐ **And the fact the ruling did not have: the pulse keys an NPC by
 `npc.id`** — `npcAgency.js:194-196`, `npc.id ||` first, written unconditionally on every generated
 NPC at `npcGenerator.js:1629-1631`, and kept OUT of the cascade by name
-(`factionRename.js:283`, `NON_CASCADED_SURFACES`: *"the durable identity undo keys on; a rename
+(`factionRename.js :: NON_CASCADED_SURFACES`: *"the durable identity undo keys on; a rename
 changes the label only"*). The one NPC-name-keyed draw is generation-time, and **the first door
 performs no pipeline re-entry at all** (charter 16:2x; EM-C4a §6.4), so the stored prose is not
 re-picked. The staleness a draft rename causes is the staleness the estate already chose

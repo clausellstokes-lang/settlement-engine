@@ -1316,7 +1316,7 @@ codebase whose own law is typed buckets, and a `@typedef`-level ambiguity every 
 `bdbf7c89c` by reading `src/store/settlementRenameHelpers.js` WHOLE: `renameNpcImpl` (`:422-444`)
 calls `applyNpcRenameToSettlement` and nothing else, while `renameFactionImpl` (`:351-358`) walks
 `state.savedSettlements` and calls `applyFactionRenameToPartner` on each. The NPC partner writer
-**exists and is exported** (`applyNpcRenameToPartner`, `factionRename.js:941`) and its only callers
+**exists and is exported** (`factionRename.js :: applyNpcRenameToPartner`) and its only callers
 are the LIBRARY lane — `src/components/settlements/helpers.js:82` (`withNpcRenamed`), used by
 `SettlementsPanel.jsx:422`. ⇒ **a neighbour save keeps the old name in
 `interSettlementRelationships[].npcName` after a store-lane NPC rename**, which is the same shape

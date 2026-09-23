@@ -173,7 +173,7 @@ name moves it — a coupling EM-B2's pinned re-derivation carries.
 | `holder` | `root` | `powerStructure.governingName` | **36 / 36** | `pool` | ⭐ **`power.holder` — MINTED BY EM-A2b VERSION 4 (§11 BLOCK-4b)** | `…/generatePower.js#generatePower` |
 
 ⚠ **DECLARED WITH A NAMED HAZARD.** `governingName` has **TWO writers** (`rulingStructure.js:787`
-and `power/economyReconciliation.js:277`) against `EM-PREAMBLE.md` §P4's one-writer law; the seat is
+and `power/economyReconciliation.js :: reconcilePowerStructure`) against `EM-PREAMBLE.md` §P4's one-writer law; the seat is
 a projection of `factions[].isGoverning` (36 of 204 = 17.6 %), so a `set-power-holder` op must
 **move the flag and let the name follow, never write the name**. ⭐ `powerStructure.governingName`
 is ITSELF a declared `FACTION_RENAME_SURFACES` key (V-9), which is what makes the pool the faction
@@ -969,7 +969,7 @@ next wave.
   and refutes two rows of ruling 1; BLOCK-3 and BLOCK-5 reported, not blocking.
 - Out-of-scope observations, without investigation:
   1. `powerStructure.governingName` has **TWO writers** — `rulingStructure.js:787` and
-     `power/economyReconciliation.js:277` — against `EM-PREAMBLE.md` §P4's one-writer law.
+     `power/economyReconciliation.js :: reconcilePowerStructure` — against `EM-PREAMBLE.md` §P4's one-writer law.
   2. `powerStructure.factions[].category` is inferred from the faction's display NAME
      (`inferFactionCategory`), and `factionRoles.js` infers an archetype by name pattern.
   3. **52 of the 114 `.js` files under `src/generators` declare at least one symbol more than once**
@@ -979,7 +979,7 @@ next wave.
   5. `GENERATION_BLIND_HALVES`'s `hash-channel` row names the `pairProse` FNV pick at
      `src/generators/generateSettlementPipeline.js:216` as UNATTRIBUTED. **It bears on no field this
      packet declares.**
-  6. ⭐ **`renormalizeFactionPower` has a FILE-LOCAL COPY** at `src/generators/factionDynamics.js:508`,
+  6. ⭐ **`renormalizeFactionPower` has a FILE-LOCAL COPY** at `src/generators/factionDynamics.js :: renormTo100`,
      declared in its own comment as *"File-local copy of power/rulingStructure's
      renormalizeFactionPower"* because importing would close an import cycle the architecture test
      bans. Two homes for one totality rule, named and not investigated — it bears on `faction.power`
