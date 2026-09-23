@@ -17,18 +17,21 @@
  * An op whose verb is not yet bound still lands as a cause rather than as nothing, and
  * nothing here asserts that a `set-field` moved a field.
  *
- * ⛔ THE UNDO PATH'S LIVE WIRING IS NOT IN THIS BUILD'S OWNERSHIP, AND CASE E1-4 SAYS SO
- * IN EXECUTABLE FORM RATHER THAN IN PROSE. The charter's Wave 3 row names
- * `campaignAdvanceSession.js` as "the undo path"; that file holds the advance, the resume
- * and the snapshot PUSH, and the restore chokepoint both undo verbs share is
- * `restorePulseSnapshotOnDraft` in `src/store/campaignWorldPulseDeferred.js` — the one
- * seam where the restored registry and the live pre-undo registry are both in hand. Case
- * E1-4 executes the merge that seam owes, over the real snapshot and registry shapes, so
- * the wiring lands against a proof that already exists.
+ * ⛔ CASE E1-4 DRIVES THE REAL STORE, NOT A MODEL OF IT. The charter's Wave 3 row names
+ * `campaignAdvanceSession.js` as "the undo path"; MEASURED, that file holds the advance,
+ * the resume and the snapshot PUSH, and never a restore. The chokepoint both undo verbs
+ * share is `restorePulseSnapshotOnDraft` in `src/store/campaignWorldPulseDeferred.js` —
+ * the one seam where the restored registry and the live pre-undo registry are both in
+ * hand — and that is where the wiring lives. E1-4 therefore builds the real slices,
+ * advances the real clock through `advanceCampaignWorld`, stages an entry AFTER the tick
+ * and calls `undoLastPulse`, asserting the library row AND the live active view.
  *
  * Proof shape copied from `tests/domain/decreeRegistry.test.js` (EM-C1): straight-line
  * literal `it`s under ONE literal `describe`, its own `vitest` import, and the leaf's own
- * source read for the structural fence.
+ * source read for the structural fence. The store harness (the four module mocks, the
+ * localStorage double and the two-slice store) is copied from
+ * `tests/store/lineageMemberBirthUndo.test.js`, the estate's own real-path undo battery,
+ * so the undo this file drives is the one production drives.
  *
  * @enforced-by this test
  */
@@ -36,8 +39,44 @@ import { createHash } from 'node:crypto';
 import { readFileSync } from 'node:fs';
 import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { describe, expect, it } from 'vitest';
+import { describe, expect, it, vi } from 'vitest';
+import { create } from 'zustand';
+import { immer } from 'zustand/middleware/immer';
 
+const { saveUpdate, saveUpsert, saveDelete } = vi.hoisted(() => ({
+  saveUpdate: vi.fn(() => Promise.resolve()),
+  saveUpsert: vi.fn(entry => Promise.resolve(entry?.id)),
+  saveDelete: vi.fn(id => Promise.resolve(id)),
+}));
+
+vi.mock('../../src/lib/saves.js', () => ({
+  saves: { update: saveUpdate, upsert: saveUpsert, delete: saveDelete, isConfigured: false },
+}));
+
+vi.mock('../../src/lib/campaigns.js', () => {
+  const cached = new Map();
+  const clone = (value) => JSON.parse(JSON.stringify(value));
+  return {
+    isCampaignActive: (campaign) => (campaign?.accessState || 'active') === 'active',
+    campaigns: {
+      loadCached: vi.fn((ownerId = 'anon') => clone(cached.get(ownerId) || [])),
+      cache: vi.fn((rows = [], ownerId = 'anon') => cached.set(ownerId, clone(rows))),
+      list: vi.fn(() => Promise.resolve([])),
+      upsert: vi.fn((campaign) => Promise.resolve(campaign?.id)),
+      delete: vi.fn(() => Promise.resolve()),
+      isConfigured: false,
+    },
+  };
+});
+
+vi.mock('../../src/lib/flags.js', () => ({ flag: vi.fn(() => false) }));
+vi.mock('../../src/lib/analytics.js', async (importOriginal) => {
+  const actual = await importOriginal();
+  return { ...actual, track: vi.fn() };
+});
+
+import { createCampaignSlice } from '../../src/store/campaignSlice.js';
+import { createCampaignWorldPulseSlice } from '../../src/store/campaignWorldPulseSlice.js';
 import { revertTick } from '../../src/domain/edit/registry.js';
 import {
   DECREE_CAUSE, applyDecreesAtTick, applyDecreesToSaves, retractDecreesOfTick,
@@ -45,7 +84,7 @@ import {
 import { simulateCampaignWorldPulse } from '../../src/domain/worldPulse/pulseKernel.js';
 import { simulateCampaignWorldInterval } from '../../src/domain/worldPulse/advanceInterval.js';
 import { ensureRegionalGraph, ensureWizardNewsFeed } from '../../src/domain/region/index.js';
-import { createNewCampaignWorldState } from '../../src/domain/worldPulse/worldState.js';
+import { createNewCampaignWorldState, ensureWorldState } from '../../src/domain/worldPulse/worldState.js';
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), '../..');
 const LEAF_REL = 'src/domain/worldPulse/decreeHook.js';
@@ -138,6 +177,54 @@ const registryOf = (result) => result.settlementUpdates
 /** The row shape every registry assertion below reads. */
 const rowOf = (row) => [row.id, row.status, row.orderIndex, row.tickRef ?? null];
 
+/** A localStorage double — the store's cache writes reach it and nothing else. */
+function installLocalStorage() {
+  const data = new Map();
+  globalThis.localStorage = {
+    getItem: (key) => data.get(String(key)) ?? null,
+    setItem: (key, value) => data.set(String(key), String(value)),
+    removeItem: (key) => data.delete(String(key)),
+    clear: () => data.clear(),
+  };
+}
+
+/** The two slices the advance and the undo actually live on. */
+const makeStore = () => create(immer((...args) => ({
+  savedSettlements: [], settlement: null, activeSaveId: null, phase: 'draft',
+  eventLog: [], locks: {}, generatedAt: null, editedAt: null, canonizedAt: null,
+  lastExportAt: null,
+  ...createCampaignSlice(...args),
+  ...createCampaignWorldPulseSlice(...args),
+})));
+
+/** One canonized campaign of one member, whose registry is `decrees`. */
+function seedStore(store, decrees) {
+  installLocalStorage();
+  const save = town(HOME, 'Harrowfen', decrees);
+  const campaign = { id: 'camp-1', name: 'Realm' };
+  store.setState((state) => {
+    state.savedSettlements = [save];
+    state.campaigns = [{
+      ...campaign,
+      settlementIds: [HOME],
+      regionalGraph: ensureRegionalGraph({ edges: [] }, { now: NOW }),
+      wizardNews: ensureWizardNewsFeed(undefined, { now: NOW }),
+      worldState: ensureWorldState({ rngSeed: 'decree-tick-undo', tick: 0, canonizedAt: NOW }, campaign),
+    }];
+    state.activeSaveId = HOME;
+    state.settlement = cloneRows(save.settlement);
+    state.phase = 'canon';
+  });
+  return store;
+}
+
+/** A plain deep copy, so the live view and its library row are two objects as in production. */
+const cloneRows = (value) => JSON.parse(JSON.stringify(value));
+
+/** The registry on the library row, and the one on the live active view. */
+const storedDecrees = (store) => store.getState().savedSettlements[0].settlement.decrees;
+const viewedDecrees = (store) => store.getState().settlement.decrees;
+
 /**
  * THE SIMULATION'S OWN OUTPUT, with every decree-derived word removed. What is left is
  * exactly what a consumed draw would move, so comparing two of these IS the seed trace.
@@ -207,27 +294,60 @@ describe('EM-E1 — the tick hook', () => {
       'the digest blessed a different stream — it compares nothing').toBe(false);
   });
 
-  it('E1-4 the rewind restores the registry with every later-staged entry re-appended, and retractDecreesOfTick returns that tick\'s entries to pending', () => {
-    // The real shapes: `capturePulseSnapshot` deep-clones `save.settlement`, so the
-    // snapshot's registry IS the pre-tick one; the live registry is what the tick wrote
-    // plus whatever the DM staged afterwards. This is the merge
-    // `restorePulseSnapshotOnDraft` (src/store/campaignWorldPulseDeferred.js) owes.
-    const preTick = [entry('a', 0), entry('b', 1)];
+  it('E1-4 the REAL undo rewinds the registry — the tick\'s entries return to pending, everything staged after it is re-appended, and the live view agrees with its row', async () => {
+    // THE WHOLE UNDO, through the store the product uses: the real two slices, the real
+    // `advanceCampaignWorld`, the real `undoLastPulse` and therefore the real
+    // `restorePulseSnapshotOnDraft`. `capturePulseSnapshot` deep-clones `save.settlement`,
+    // so the snapshot's registry IS the pre-tick one; what the restore alone would throw
+    // away is whatever the DM staged AFTER the tick.
+    const store = seedStore(makeStore(), [entry('a', 0), entry('b', 1)]);
+    const advanced = await store.getState().advanceCampaignWorld('camp-1', 'one_week', { now: NOW });
+    expect(advanced?.ok, 'the advance ran — an un-canonized world would refuse and make every arm below vacuous').not.toBe(false);
+    const tickRef = 'world_pulse.camp_1.1';
+    expect(storedDecrees(store).map(rowOf), 'the tick applied both entries')
+      .toEqual([['a', 'applied', 0, tickRef], ['b', 'applied', 1, tickRef]]);
+    // The DM stages one more AFTER the tick. EM-C4b owns the real `stageDecree` action, so
+    // the row is written onto both readers here exactly as that action will — the layer is
+    // applied ON WRITE and every reader sees one record (design §12's finding 5).
+    const afterTick = [...cloneRows(storedDecrees(store)), entry('c', 2)];
+    store.setState((state) => {
+      state.savedSettlements[0].settlement.decrees = cloneRows(afterTick);
+      state.settlement.decrees = cloneRows(afterTick);
+    });
+
+    expect(await store.getState().undoLastPulse('camp-1'), 'the undo ran').toBe(true);
+
+    const rewound = [['a', 'pending', 0, null], ['b', 'pending', 1, null], ['c', 'pending', 2, null]];
+    expect(storedDecrees(store).map(rowOf), 'the tick\'s entries are pending again in their own order, and nothing staged later is lost')
+      .toEqual(rewound);
+    expect(viewedDecrees(store).map(rowOf), 'and the live active view was rewound to the SAME rows as its library entry')
+      .toEqual(rewound);
+    // The liveness anchor for the negative below: the pre-undo registry really did carry
+    // two applied stamps, so their absence now is the rewind's doing.
+    expect(afterTick.filter((row) => row.tickRef === tickRef).length, 'two entries carried this tick before the undo').toBe(2);
+    expect(storedDecrees(store).some((row) => 'appliedAt' in row || 'tickRef' in row),
+      'no applied stamp survives the rewind — the chronicle line is retracted with it').toBe(false);
+  });
+
+  it('E1-4b a later-staged entry the snapshot never held comes back PENDING, so no rewind leaves an applied ghost', () => {
+    // The stale-stamp half of the same seam, at the leaf. It is reachable in production on
+    // the two paths whose snapshot PREDATES the tick that applied an entry the snapshot
+    // does not hold: the proposal ring restored over a later advance, and R-5b's parked
+    // pre-INTERVAL snapshot after a pause in which the DM staged. Driving either through
+    // the store takes a pause/resume fixture; the composition the store runs is executed
+    // here directly, in the order `restorePulseSnapshotOnDraft` runs it.
+    const preTick = [entry('a', 0)];
     const applied = pulse(realm(preTick));
     const tickRef = applied.pulseRecord.id;
-    const liveRegistry = [...registryOf(applied), entry('c', 2)];
-    const restored = revertTick(preTick, liveRegistry);
-    expect(restored.map(rowOf), 'the restored entries are pending again in their own order, and nothing staged later is lost')
-      .toEqual([['a', 'pending', 0, null], ['b', 'pending', 1, null], ['c', 'pending', 2, null]]);
-    // The no-snapshot half of the same rewind: the hook's own verb, over the live registry.
-    const retracted = retractDecreesOfTick(liveRegistry, tickRef);
-    expect(retracted.map(rowOf), 'retraction returns exactly this tick\'s entries and leaves the later one alone')
-      .toEqual([['a', 'pending', 0, null], ['b', 'pending', 1, null], ['c', 'pending', 2, null]]);
-    // The liveness anchor for the negative below: the live registry really did hold two
-    // APPLIED entries carrying this tickRef, so the refusal that follows is about the ref.
-    expect(liveRegistry.filter((row) => row.tickRef === tickRef).length, 'two entries carried this tick').toBe(2);
+    const ghost = { ...entry('c', 2), status: 'applied', appliedAt: NOW, tickRef };
+    const liveRegistry = [...registryOf(applied), ghost];
+    const merged = revertTick(preTick, retractDecreesOfTick(liveRegistry, tickRef));
+    expect(merged.map(rowOf), 'the restored entry wins, and the later-staged one comes back pending rather than stamped for a tick that no longer exists')
+      .toEqual([['a', 'pending', 0, null], ['c', 'pending', 2, null]]);
+    // The liveness anchor for the negative below: the ghost really was applied going in.
+    expect(ghost.status, 'the fixture carried an applied ghost').toBe('applied');
     expect(retractDecreesOfTick(liveRegistry, 'world_pulse.decree_tick.999') === liveRegistry,
-      'another tick\'s rewind touches nothing and returns the registry BY REFERENCE').toBe(true);
+      'and another tick\'s rewind touches nothing, returning the registry BY REFERENCE').toBe(true);
   });
 
   it('E1-5 a `when` in the future is untouched by an earlier tick, and the registry comes back by reference', () => {
