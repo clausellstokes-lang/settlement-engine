@@ -27,6 +27,7 @@
  * and import-free.
  */
 import { sha256Hex } from '../content/contentFingerprint.js';
+import { partitionTrace } from './tracePartition.js';
 
 /**
  * @typedef {{ roots: Record<string, unknown>, worldFacts: Record<string, unknown>,
@@ -473,6 +474,18 @@ export function rederive(record, config, layer, engine, declarations) {
   const derived = typeof run !== 'function' ? undefined : (Object.keys(pins).length === 0
     ? run(config, null, { seed })
     : run(config, null, { seed, pins: structuredClone(pins) }));
+  // ⭐ THE TRACE IS PARTITIONED BY STEP (EM-R5; design §22 ruling 8 as §22.1 correction 4
+  //    amends it). A step whose entries are ABOUT a held key contributes the RECORD's run and
+  //    every other step the re-derivation's own; with nothing held the leaf returns the derived
+  //    array BY IDENTITY, so a dormant layer's re-derivation is still the committed golden.
+  const heldKeys = Object.keys(pins);
+  const out = /** @type {Record<string, unknown>} */ (isPlainObject(derived) ? derived : {});
+  if (heldKeys.length > 0 && Array.isArray(out.simulationTrace)) {
+    const kept = /** @type {Record<string, unknown>} */ (isPlainObject(record) ? record : {});
+    out.simulationTrace = partitionTrace(
+      Array.isArray(kept.simulationTrace) ? kept.simulationTrace : [], out.simulationTrace, heldKeys,
+    );
+  }
   return { record: derived, unapplied };
 }
 
