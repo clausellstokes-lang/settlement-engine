@@ -19,6 +19,7 @@
  *     newOpportunities:    Reference[]   newEntities of type 'hook'
  *     newRisks:            Reference[]   newEntities of type 'threat' | 'condition' | 'clock'
  *     summary:             string[]
+ *     dmFields:            { roots, worldFacts }  EM-B2b
  *   }
  *
  * Pure read-only. The two settlements are never mutated.
@@ -78,6 +79,99 @@ function diffEntityCatalogs(before, after) {
   return { preserved, added, removed };
 }
 
+// ── The DM's fields (EM-B2b) ─────────────────────────────────────────────
+
+/**
+ * A plain, non-array object — the only shape either snapshot may be read through.
+ * @param {unknown} value any value at all; both snapshots are opaque to this module
+ * @returns {value is Record<string, unknown>}
+ */
+const isRecordLike = (value) => typeof value === 'object' && value !== null && !Array.isArray(value);
+
+/**
+ * The ENGINE'S OWN value for a declared root, read from the BEFORE snapshot at the declaration's
+ * `outputKey`.
+ *
+ * ⛔ REGISTER-FREE BY CONSTRUCTION, AND THAT IS DELIBERATE. An array hop (`npcs[].role`) selects
+ * the SOLE entry carrying `entityId` among its own values and resolves to `undefined` on zero or
+ * on several rather than guessing, so this reporter can be wrong-by-silence but never
+ * wrong-by-value. The AUTHORITATIVE join lives in `src/domain/edit/recordRegister.js` and is
+ * deliberately NOT imported: this module renders a diff into the version-diff bundle, and an edge
+ * into the edit volume for a label would carry that whole volume with it.
+ *
+ * @param {unknown} before @param {unknown} outputKey @param {string} entityId
+ * @returns {unknown} `undefined` means "not resolvable here", never "the engine had nothing".
+ */
+function engineValueAt(before, outputKey, entityId) {
+  let cursor = before;
+  for (const segment of String(outputKey).split('.')) {
+    const hop = segment.endsWith('[]');
+    const name = hop ? segment.slice(0, -2) : segment;
+    if (!isRecordLike(cursor) || !Object.hasOwn(cursor, name)) return undefined;
+    cursor = cursor[name];
+    if (!hop) continue;
+    if (!Array.isArray(cursor)) return undefined;
+    const hits = cursor.filter((entry) => isRecordLike(entry) && Object.values(entry).some((value) => value === entityId));
+    if (hits.length !== 1) return undefined;
+    cursor = hits[0];
+  }
+  return cursor;
+}
+
+/**
+ * ⭐ THE TWELFTH KEY — "THE DM'S FIELDS", PARTITIONED BY PROVENANCE (EM-B2b, the chair's
+ * judgment 241 ruling 1). §12.12's "kept" is an ENTITY diff; this is the FIELD-level section, and
+ * it answers the one question the entity diff cannot: of everything that moved, which values are
+ * the DM's own hand and which are the world's answer to them.
+ *
+ * ⛔ IT READS `after.dmLayer.roots` AND NEVER `after.dmLayer.worldFacts`. That bag is INERT —
+ * written by nobody, read by nobody — so a section built from it would report EMPTY for every
+ * edit a DM ever makes. A world fact lives in `roots` like every other declared edit and it is
+ * the DECLARATION'S `provenance` that sorts it, which is why the partition is total.
+ *
+ * ⛔ THE CONSULT ARRIVES FROM THE CALLER AND NO DECLARATION TABLE IS IMPORTED HERE. A root this
+ * module cannot resolve — no consult, or no declaration row, or a world fact whose declaration
+ * names no engine key — reports in `roots`, which is §6's own rule that every root that is not a
+ * world fact is a root. Nothing is dropped and nothing is invented.
+ *
+ * @param {unknown} before @param {unknown} after
+ * @param {unknown} declarations the INJECTED declaration consult, read defensively
+ * @returns {{ roots: Array<{ key: string, cardShape: string, entityId: string, field: string,
+ *                            dmValue: unknown, engineValue: unknown }>,
+ *             worldFacts: Array<{ configKey: string, dmValue: unknown, engineValue: unknown }> }}
+ *   both arrays ASCII-ascending on their first field, both empty when the layer is absent or empty
+ */
+function dmFieldsOf(before, after, declarations) {
+  const roots = [];
+  const worldFacts = [];
+  const layer = isRecordLike(after) && isRecordLike(after.dmLayer) ? after.dmLayer : null;
+  const bag = layer !== null && isRecordLike(layer.roots) ? layer.roots : {};
+  const consult = isRecordLike(declarations) && typeof declarations.declarationsFor === 'function'
+    ? /** @type {(cardType: string) => unknown} */ (declarations.declarationsFor) : null;
+  const storedConfig = isRecordLike(before) && isRecordLike(before.config) ? before.config : null;
+
+  for (const key of Object.keys(bag).sort()) {
+    // The root key is `<cardType>:<entityId>:<field>`, and the entity id is whatever lies between
+    // the first and last separators, so an id carrying one cannot be mis-read.
+    const parts = key.split(':');
+    const cardShape = parts[0];
+    const entityId = parts.length > 2 ? parts.slice(1, -1).join(':') : '';
+    const field = parts.length > 2 ? parts[parts.length - 1] : '';
+    let declared;
+    try { declared = consult === null ? null : consult(cardShape); } catch { declared = null; }
+    const row = (Array.isArray(declared) ? declared.filter(isRecordLike) : []).find((each) => each.field === field);
+    const named = row?.inputKey;
+    const inputKey = typeof named === 'string' && named.length > 0 ? named : null;
+    if (row?.provenance === 'world-fact' && inputKey !== null) {
+      worldFacts.push({ configKey: inputKey, dmValue: bag[key], engineValue: storedConfig?.[inputKey] });
+      continue;
+    }
+    roots.push({ key, cardShape, entityId, field, dmValue: bag[key], engineValue: engineValueAt(before, row?.outputKey, entityId) });
+  }
+  worldFacts.sort((a, b) => (a.configKey < b.configKey ? -1 : (a.configKey > b.configKey ? 1 : 0)));
+  return { roots, worldFacts };
+}
+
 // ── Composer ─────────────────────────────────────────────────────────────
 
 /**
@@ -85,9 +179,12 @@ function diffEntityCatalogs(before, after) {
  *
  * @param {Object} before
  * @param {Object} after
+ * @param {unknown} [declarations] the INJECTED declaration consult (EM-B2b). It is read only to
+ *   partition `dmFields`; every other key is derived exactly as before, and a caller that passes
+ *   nothing sees the twelfth key with every root reported as a root.
  * @returns {Object}
  */
-export function deriveRegenerationDelta(before, after) {
+export function deriveRegenerationDelta(before, after, declarations) {
   if (!before || !after) {
     return {
       directEffects: [],
@@ -101,6 +198,7 @@ export function deriveRegenerationDelta(before, after) {
       newOpportunities: [],
       newRisks: [],
       summary: [],
+      dmFields: { roots: [], worldFacts: [] },
     };
   }
 
@@ -160,6 +258,7 @@ export function deriveRegenerationDelta(before, after) {
     newOpportunities,
     newRisks,
     summary,
+    dmFields: dmFieldsOf(before, after, declarations),
   };
 }
 

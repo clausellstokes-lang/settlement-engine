@@ -55,6 +55,24 @@ const ALL_ROWS = Object.values(FIELD_DECLARATIONS).flat();
 const PENCIL_MARKER = 'data-edit-pencil';
 
 /**
+ * ⭐ EM-B2b's JOIN (judgment 241 ruling 2) — the step a world-fact row's OWN `tier1.step` names,
+ * as a repo-relative path. The row is bound to that producer by the register already, so joining
+ * `inputKey` against it is a join against a PRODUCER rather than a second spelling of the list.
+ */
+const stepPathFor = (step) => `src/generators/steps/${step}.js`;
+
+/**
+ * ⛔ THE NON-IDENTIFIER LOOKAHEAD IS LOAD-BEARING, AND IT WAS MEASURED RATHER THAN ASSUMED: a bare
+ * substring scores `config.terrain` at FIVE, because it is a prefix of BOTH `config.terrainOverride`
+ * and `config.terrainType`, so the clause would have passed on the very spelling it exists to
+ * refuse. ⚠ `git grep -E` silently ignores `\b`, so this is a JS `RegExp` and never a shelled grep.
+ * @param {string} source @param {string} inputKey @returns {number} sites of `config.<inputKey>`
+ */
+function configReadCount(source, inputKey) {
+  return (source.match(new RegExp(`config\\.${inputKey}(?![A-Za-z0-9_$])`, 'g')) ?? []).length;
+}
+
+/**
  * ARM I-2 — the pool arm. Returns one message per offending row.
  * @param {readonly import('../../src/domain/edit/types.js').FieldDeclaration[]} rows
  * @returns {string[]}
@@ -121,6 +139,25 @@ function rootOffenders(rows) {
     const prefix = typeof held.recordPath === 'string' && want.startsWith(`${held.recordPath}.`);
     if (!exact && !prefix) {
       offenders.push(`${at} [branch c, world-fact]: Tier-1 pair (${pair.step}, ${pair.key}) holds recordPath '${held.recordPath}', which neither equals nor prefixes '${want}'`);
+      continue;
+    }
+    // ⭐ EM-B2b's inputKey CLAUSE (judgment 241 ruling 2). `outputKey` says where the value LANDS
+    // and `tier1` names the ctx key; NEITHER is the key the engine READS, and a `config′` keyed by
+    // either moves nothing while echoing the DM's word back onto `record.config` — the estate's
+    // cardinal applied-looking-and-absent class. So the row's own declared `inputKey` must be READ
+    // as `config.<inputKey>` by the step its own `tier1.step` names.
+    const inputKey = row.inputKey;
+    if (typeof inputKey !== 'string' || !/^[A-Za-z_$][A-Za-z0-9_$]*$/.test(inputKey)) {
+      offenders.push(`${at} [branch c, world-fact]: inputKey '${inputKey}' is not a declared identifier-shaped config key`);
+      continue;
+    }
+    const stepPath = stepPathFor(pair.step);
+    if (!existsSync(join(ROOT, stepPath))) {
+      offenders.push(`${at} [branch c, world-fact]: the step its tier1 names has no source at '${stepPath}'`);
+      continue;
+    }
+    if (configReadCount(readFileSync(join(ROOT, stepPath), 'utf8'), inputKey) === 0) {
+      offenders.push(`${at} [branch c, world-fact]: ${stepPath} never reads 'config.${inputKey}', so the declared inputKey is a key the engine reads NOWHERE`);
     }
   }
   return offenders;
@@ -236,9 +273,20 @@ describe('EM-A1 — the declaration walker: pools, the pencil, the root join and
 
     // P4 — a real world fact whose Tier-1 pair resolves to nothing.
     expect(rootOffenders(withRow({
-      card: 'worldFact', field: 'terrain', kind: 'pool', provenance: 'world-fact', label: 'Terrain', group: 'world', outputKey: 'config.terrainType', pool: 'worldFact.terrain.planted', tier1: { step: 'resolveConfig', key: 'noSuchCtxKey' },
+      card: 'worldFact', field: 'terrain', kind: 'pool', provenance: 'world-fact', label: 'Terrain', group: 'world', outputKey: 'config.terrainType', inputKey: 'terrainOverride', pool: 'worldFact.terrain.planted', tier1: { step: 'resolveConfig', key: 'noSuchCtxKey' },
     }))).toEqual([
       "worldFact.terrain [branch c, world-fact]: no GENERATION_TIER1 row joins (step 'resolveConfig', key 'noSuchCtxKey')",
+    ]);
+
+    // ⭐ P8 (EM-B2b, judgment 241 ruling 2) — THE VOCABULARY'S OWN GUARD-THE-GUARD. The row is the
+    // LIVE terrain declaration with one word changed: `inputKey: 'terrain'`, the FIELD-name
+    // spelling versions 3 and 4 of the packet carried. `resolveConfig` never reads
+    // `config.terrain`, so it REDS BY NAME — and it is the plant that proves the non-identifier
+    // lookahead is doing work, because a bare substring scores that same spelling at FIVE.
+    expect(rootOffenders(withRow({
+      card: 'worldFact', field: 'terrain', kind: 'pool', provenance: 'world-fact', label: 'Terrain', group: 'world', outputKey: 'config.terrainType', inputKey: 'terrain', pool: 'worldFact.terrain.planted', tier1: { step: 'resolveConfig', key: 'terrainType' },
+    }))).toEqual([
+      "worldFact.terrain [branch c, world-fact]: src/generators/steps/resolveConfig.js never reads 'config.terrain', so the declared inputKey is a key the engine reads NOWHERE",
     ]);
   });
 
@@ -282,5 +330,51 @@ describe('EM-A1 — the declaration walker: pools, the pencil, the root join and
     expect(writerOffenders(replacing('npc', 'status', 'EM-B1a#set-npc-status'))).toEqual([
       "npc.status: writer path 'EM-B1a' does not exist",
     ]);
+  });
+
+  test('A8: EM-B2b — every world fact\'s inputKey is READ by the step its own tier1 names, the three superseded spellings are refused, and the lookahead is load-bearing', () => {
+    // Step 0: the population is asserted before zero offenders means anything, and the producer
+    // sets are IMPORTED above rather than re-typed here.
+    const worldFactRows = ALL_ROWS.filter((row) => row.provenance === 'world-fact');
+    expect(worldFactRows.length, 'no world-fact row at all, so this arm would be vacuous').toBe(5);
+    expect(Object.keys(WORLD_FACT_SOURCES).length, 'WORLD_FACT_SOURCES is empty, so the rows below join nothing').toBeGreaterThan(0);
+
+    // THE JOIN, ROW BY ROW AND MEASURED: the step each row's OWN tier1 names must read
+    // `config.<inputKey>` at least once. The counts are asserted as a set of positives rather
+    // than pinned to exact numbers, because a step gaining or losing one read of its own config
+    // key is not this table's business — the key being read NOWHERE is.
+    const measured = worldFactRows.map((row) => {
+      const stepPath = stepPathFor(row.tier1.step);
+      expect(existsSync(join(ROOT, stepPath)), `${row.card}.${row.field}: the step its tier1 names must have a source`).toBe(true);
+      return {
+        at: `${row.card}.${row.field}`,
+        sites: configReadCount(readFileSync(join(ROOT, stepPath), 'utf8'), row.inputKey),
+      };
+    });
+    expect(
+      measured.filter((probe) => probe.sites === 0),
+      'a declared inputKey the engine reads NOWHERE is the estate\'s applied-looking-and-absent'
+      + ' class: the DM\'s word is echoed back onto record.config while the fact she edited never'
+      + ' moves. Every world fact\'s input key is joined to its producing step, measured.',
+    ).toEqual([]);
+
+    // ⛔ THE NEGATIVE CONTROL, BOTH DIRECTIONS. The three FIELD-name spellings versions 3 and 4 of
+    // EM-B2b carried score ZERO on the same clause, so it CONVICTS the old vocabulary rather than
+    // passing vacuously over it. Read through the same counter the live arm runs.
+    const superseded = [['resolveConfig', 'terrain'], ['resolveStress', 'stressors'], ['resolveResources', 'resources']];
+    expect(
+      superseded.map(([step, wrong]) => `${wrong}=${configReadCount(readFileSync(join(ROOT, stepPathFor(step)), 'utf8'), wrong)}`),
+      'the superseded FIELD-name spellings must all score zero, or the clause proves nothing',
+    ).toEqual(['terrain=0', 'stressors=0', 'resources=0']);
+
+    // ⛔ THE LOOKAHEAD IS LOAD-BEARING, MEASURED AND NOT ASSUMED. `config.terrain` is a PREFIX of
+    // both `config.terrainOverride` and `config.terrainType`, so a bare substring scores it at
+    // FIVE in the very step that reads it nowhere — the clause would have passed on the exact
+    // spelling it exists to refuse.
+    const resolveConfigSource = readFileSync(join(ROOT, stepPathFor('resolveConfig')), 'utf8');
+    const bareSubstring = (resolveConfigSource.match(/config\.terrain/g) ?? []).length;
+    expect(bareSubstring, 'a bare substring join scores the refused spelling as a PASS').toBe(5);
+    expect(configReadCount(resolveConfigSource, 'terrain'), 'the lookahead scores the same spelling ZERO').toBe(0);
+    expect(configReadCount(resolveConfigSource, 'terrainOverride'), 'and it still finds the real key').toBe(5);
   });
 });

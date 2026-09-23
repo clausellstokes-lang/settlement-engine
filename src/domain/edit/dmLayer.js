@@ -56,9 +56,18 @@ const LAYER_KEYS = Object.freeze(['roots', 'worldFacts', 'minted', 'phantoms']);
 
 /**
  * The ONE spelling of an untouched layer. Deeply frozen: the object and all four
- * sub-objects. `worldFacts` is minted EMPTY and read by nobody until EM-B2b; it is present
- * from the first landing because widening a shipped persistence shape costs a migration that
- * an empty frozen sub-object costs nothing to avoid.
+ * sub-objects. `worldFacts` is minted EMPTY; it is present from the first landing because
+ * widening a shipped persistence shape costs a migration that an empty frozen sub-object costs
+ * nothing to avoid.
+ *
+ * ⛔ `worldFacts` IS AN INERT FIELD, AND THAT IS A RULING RATHER THAN AN OVERSIGHT (the chair's
+ * judgment 241 ruling 1, at EM-B2b). a1 minted it "read by nobody until EM-B2b", and EM-B2b
+ * measured why it could never be that reader: `applyEdit` — the estate's ONE writer — stores a
+ * world-fact op in `roots` like every other declared edit, so the bag is `{}` on all five fields
+ * on all 63 census rows and a leaf that read it would report an empty section for every edit a DM
+ * ever makes. The world-fact channel is routed by the DECLARATION'S `provenance`, not by an
+ * address in the layer. So the bag stays: written by nobody, read by nobody, frozen and empty —
+ * because REMOVING it is a persistence-shape change and that is the owner's, never a lane's.
  * @type {DmLayer}
  */
 export const EMPTY_DM_LAYER = Object.freeze({
@@ -256,6 +265,17 @@ export function mintDmId(seed, kind, n) {
  */
 
 /**
+ * ⭐ ONE OVERRIDE ON THE CONFIG CHANNEL (EM-B2b, the chair's judgment 241 ruling 1). It is what a
+ * root whose DECLARATION carries `provenance: 'world-fact'` becomes: it leaves the pin population
+ * entirely, so it is never pinned, never closed over and never reported `unknown_key`.
+ * `inputKey` is `null` exactly when the declaration names no engine key, which `rederive` refuses
+ * rather than guesses; `field` is the declaration's own field name, which is how the option sets
+ * are keyed.
+ * @typedef {{ key: string, value: unknown, field: string,
+ *             inputKey: string|null }} RoutedWorldFact
+ */
+
+/**
  * (4) THE CLOSED REFUSAL SET for an override the pin bag will not take. TWO members, frozen,
  * in codepoint order, EXPORTED so a test asserts it in both directions rather than re-typing it.
  *
@@ -396,14 +416,23 @@ function writeDeclared(/** @type {unknown} */ bag, /** @type {string} */ collect
  * record's collection and the CLONE is pinned. The bag carries the DM's value at that one leaf
  * and the record's own value everywhere else, and ⛔ the record itself is never touched.
  *
+ * ⭐ AND A WORLD FACT TAKES THE OTHER CHANNEL ENTIRELY (EM-B2b, judgment 241 ruling 1). A root
+ * whose declaration carries `provenance: 'world-fact'` is ROUTED to `config′` in PASS 1 and never
+ * reaches the bag: the two channels are disjoint BY PROVENANCE, which is what makes the partition
+ * total. ⛔ It is NOT the layer's `worldFacts` sub-object that routes it — that bag is inert and
+ * this leaf never reads it — it is the DECLARATION.
+ *
  * @param {unknown} record a generated or saved settlement record
  * @param {unknown} layer read through EM-B2a1's absence rules
  * @param {unknown} declarations the INJECTED declaration set; ⛔ this leaf imports none
  * @param {unknown} engine the INJECTED handle; only its `getStepMeta` member is read here
  * @returns {{ pins: Record<string, unknown>,
  *            missing: Array<{ step: string, keys: string[] }>,
- *            unapplied: Array<{ key: string, value: unknown, reason: RederiveUnappliedReason }> }}
- *   `pins` keys are ASCII-ascending. THROWS NEVER.
+ *            unapplied: Array<{ key: string, value: unknown, reason: RederiveUnappliedReason }>,
+ *            routed: RoutedWorldFact[] }}
+ *   `pins` keys are ASCII-ascending and `routed` is in root-key order. ⛔ THROWS NEVER, including
+ *   for a world fact: the REFUSAL of an undeclared key or an out-of-set value is `rederive`'s,
+ *   because this function answers what CAN be pinned and never what the engine may be run with.
  */
 export function pinsFrom(record, layer, declarations, engine) {
   const source = isPlainObject(record) ? /** @type {Record<string, unknown>} */ (record) : {};
@@ -440,6 +469,8 @@ export function pinsFrom(record, layer, declarations, engine) {
   const resolved = [];
   /** @type {Array<{ key: string, value: unknown, reason: RederiveUnappliedReason }>} */
   const unapplied = [];
+  /** @type {RoutedWorldFact[]} */
+  const routed = [];
   for (const key of Object.keys(roots).sort(byCodepoint)) {
     const value = roots[key];
     const coords = consult === null ? null : coordsOf(key);
@@ -448,6 +479,21 @@ export function pinsFrom(record, layer, declarations, engine) {
     try { declared = coords === null ? null : (consult?.declarationsFor(coords.cardType) ?? null); } catch { declared = null; }
     const row = (Array.isArray(declared) ? declared.filter(isPlainObject) : [])
       .find((r) => /** @type {{ field: unknown }} */ (r).field === coords?.field);
+    // ⭐ THE ROUTE, BY PROVENANCE, AND IT IS TAKEN BEFORE THE OUTPUT KEY IS EVEN SPLIT. A world
+    // fact's `outputKey` addresses `config`, which NO step provides, so the landed path below
+    // reports it `unknown_key` — measured 63/63 over the census corpus, for all five facts. It is
+    // not a pin and it was never going to be one: it is an input the engine resolves FROM, so it
+    // takes the config channel and leaves this population entirely.
+    if (row !== undefined && /** @type {{ provenance?: unknown }} */ (row).provenance === 'world-fact') {
+      const named = /** @type {{ inputKey?: unknown }} */ (row).inputKey;
+      routed.push({
+        key,
+        value,
+        field: typeof coords?.field === 'string' ? coords.field : '',
+        inputKey: typeof named === 'string' && named.length > 0 ? named : null,
+      });
+      continue;
+    }
     const split = row === undefined
       ? null
       : splitOutputKey(/** @type {{ outputKey?: unknown }} */ (row).outputKey);
@@ -514,7 +560,85 @@ export function pinsFrom(record, layer, declarations, engine) {
   const missing = roster
     .map((step) => ({ step: step.name, keys: step.provides.filter((k) => !held(k)) }))
     .filter((row) => row.keys.length > 0);
-  return { pins, missing, unapplied: dedupeByKey(unapplied) };
+  return { pins, missing, unapplied: dedupeByKey(unapplied), routed };
+}
+
+/**
+ * Resolve the INJECTED world-fact option sets, FAILING CLOSED on this leaf's own law (EM-B2b,
+ * judgment 241 ruling 3). The sets reach the leaf as the `worldFactOptions` member of the SAME
+ * consult `declarationsFor` arrives on, keyed by the declaration's FIELD name, so
+ * ⛔ `src/domain/edit/dmLayer.js` IMPORTS `src/domain/worldFactOptions.js` NOWHERE and the
+ * CALLER's adapter stays the one place the canonical sets are read.
+ *
+ * ⛔ AN ABSENT OR UNUSABLE MEMBER RESOLVES NOTHING, exactly as `usableDeclarations` resolves no
+ * declaration: the caller has not adopted the world-fact channel, so every world-fact root is
+ * REFUSED and `config′` stays `config`. It can only close the door and never widen it. ⭐ THE
+ * MEMBER'S PRESENCE IS THE CALLER'S DECLARATION THAT IT HAS ADOPTED THE CHANNEL — once it is
+ * there, every override is validated and a miss THROWS, including one this member answers
+ * nothing for. Not wired is quiet; wired and wrong is loud.
+ * @param {unknown} declarations
+ * @returns {((field: string) => unknown[])|null} `null` means unusable, which closes the door.
+ */
+function worldFactOptionsOf(declarations) {
+  /** @type {unknown} */
+  let member = null;
+  if (isPlainObject(declarations)) {
+    // A hostile consult may throw from a GETTER, before the member is ever called.
+    try { member = /** @type {{ worldFactOptions?: unknown }} */ (declarations).worldFactOptions; } catch { member = null; }
+  }
+  if (typeof member !== 'function') return null;
+  const serve = /** @type {(field: string) => unknown} */ (member);
+  return (field) => {
+    try {
+      const set = serve(field);
+      return Array.isArray(set) ? [...set] : [];
+    } catch { return []; }
+  };
+}
+
+/**
+ * ⭐ `config′` — THE WORLD-FACT CHANNEL (EM-B2b, judgment 241 ruling 1). The routed overrides are
+ * merged OVER the save's stored config at each declaration's `inputKey`, in root-key order.
+ *
+ * ⛔ THERE IS NO SILENT FALLBACK, NO CLAMP AND NO WARN-AND-CONTINUE, and the reason is measured
+ * rather than stylistic: THE ENGINE WILL NOT REFUSE A BAD VALUE FOR US. `config.culture =
+ * 'dwarven'` resolves silently to `'mixed'` on all 63 census rows, so a fallback here would make
+ * the DM's stated world quietly untrue, which is the one thing design §14's "consequence by
+ * design" does not license. The refusal is this leaf's own throw.
+ *
+ * An ARRAY value (stressors, resources) is validated MEMBER BY MEMBER, because the option set is
+ * the vocabulary of one member and never of the whole selection.
+ *
+ * ⛔ AND WITH NO OPTION-SET MEMBER ON THE CONSULT THE DOOR IS SIMPLY SHUT: `config` comes back BY
+ * IDENTITY, every world-fact root refused, the run bit-for-bit the one with no world fact at all.
+ * That is the fail-closed path `usableDeclarations` already takes for a root, and it is why a
+ * caller that has not adopted the channel cannot be broken by this member landing.
+ * @param {object} config the save's stored config
+ * @param {RoutedWorldFact[]} routed
+ * @param {unknown} declarations the INJECTED consult, read through `worldFactOptionsOf`
+ * @returns {object} `config` ITSELF when the channel is not adopted; otherwise a NEW object.
+ *   ⛔ `config` is never mutated on either path.
+ * @throws {TypeError} `unknown_world_fact` when the declaration names no engine key;
+ *   `value_not_in_option_set` when a value is outside the set an ADOPTED consult serves for its
+ *   field, including the empty set a wired-but-broken vocabulary answers.
+ */
+function worldFactConfig(config, routed, declarations) {
+  const optionsFor = worldFactOptionsOf(declarations);
+  if (optionsFor === null) return config;
+  const merged = { ...(isPlainObject(config) ? /** @type {Record<string, unknown>} */ (config) : {}) };
+  for (const fact of routed) {
+    if (fact.inputKey === null) {
+      throw new TypeError(`rederive: unknown_world_fact: the declaration for '${fact.key}' names no inputKey, so there is no engine config key to write`);
+    }
+    const accepted = optionsFor(fact.field);
+    const values = Array.isArray(fact.value) ? fact.value : [fact.value];
+    const refused = accepted.length === 0 ? values : values.filter((member) => !accepted.includes(member));
+    if (accepted.length === 0 || refused.length > 0) {
+      throw new TypeError(`rederive: value_not_in_option_set: '${fact.key}' sets config.${fact.inputKey} to ${JSON.stringify(fact.value)}, and ${JSON.stringify(refused)} is outside the accepted set for '${fact.field}', which is ${JSON.stringify(accepted)}`);
+    }
+    merged[fact.inputKey] = fact.value;
+  }
+  return merged;
 }
 
 /**
@@ -533,21 +657,34 @@ export function pinsFrom(record, layer, declarations, engine) {
  * context AND hands the same object to every step, so a caller that passes an aliased bag can have
  * its own record written through by the run. Cloning severs both channels.
  *
+ * ⭐ A WORLD FACT ENTERS AS `config′` AND AS NOTHING ELSE (EM-B2b, judgment 241 ruling 1). Every
+ * `roots` key whose DECLARATION carries `provenance: 'world-fact'` is routed by `pinsFrom` and
+ * merged over `config` at its declared `inputKey`; the engine then re-derives the settlement from
+ * the changed world, and design §14 final rules the resulting movement CONSEQUENCE BY DESIGN.
+ * ⛔ WITH NO WORLD-FACT ROOT `config′` IS `config` ITSELF, BY IDENTITY, so a dormant layer's
+ * re-derivation is bit-for-bit the one the golden committed.
+ * ⛔ `layer.worldFacts` IS NOT READ. It is an inert field EM-B2a1 shipped empty and frozen, and a
+ * persistence-shape change is the owner's, never a lane's.
+ *
  * @param {unknown} record @param {object} config @param {unknown} layer
  * @param {{ run: Function, getStepMeta: Function }} engine ⛔ INJECTED
- * @param {unknown} declarations the INJECTED declaration set
+ * @param {unknown} declarations the INJECTED declaration set, carrying `declarationsFor` and
+ *   EM-P3's option sets as `worldFactOptions`
  * @returns {{ record: unknown,
  *            unapplied: Array<{ key: string, value: unknown, reason: RederiveUnappliedReason }> }}
  *   `unapplied` is ASCII-ascending on `key` and deduplicated. THROWS NEVER for a malformed layer;
- *   it throws only what the engine throws.
+ *   ⛔ it throws for a world fact an ADOPTED option-set consult refuses (`unknown_world_fact`,
+ *   `value_not_in_option_set`), it REFUSES every world fact quietly when that consult is absent
+ *   or unusable, and otherwise it throws only what the engine throws.
  */
 export function rederive(record, config, layer, engine, declarations) {
-  const { pins, unapplied } = pinsFrom(record, layer, declarations, engine);
+  const { pins, unapplied, routed } = pinsFrom(record, layer, declarations, engine);
+  const configPrime = routed.length === 0 ? config : worldFactConfig(config, routed, declarations);
   const seed = isPlainObject(record) ? /** @type {{ _seed?: unknown }} */ (record)._seed : undefined;
   const run = /** @type {{ run?: unknown }} */ (engine)?.run;
   const derived = typeof run !== 'function' ? undefined : (Object.keys(pins).length === 0
-    ? run(config, null, { seed })
-    : run(config, null, { seed, pins: structuredClone(pins) }));
+    ? run(configPrime, null, { seed })
+    : run(configPrime, null, { seed, pins: structuredClone(pins) }));
   // ⭐ THE TRACE IS PARTITIONED BY STEP (EM-R5; design §22 ruling 8 as §22.1 correction 4
   //    amends it). A step whose entries are ABOUT a held key contributes the RECORD's run and
   //    every other step the re-derivation's own; with nothing held the leaf returns the derived
