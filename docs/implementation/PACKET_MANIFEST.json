@@ -41671,6 +41671,508 @@
       "_preproofNote": "PRE-PROOF (Opus seat, train EM-T17 stage 1, 2026-09-23, at a545899ff) - version 3. Changed only stale or unstated facts: the voice literal count 35 -> 36; §6 now names all six typedefs and pins the two vocabulary spellings; the type floor's two configs are assigned per path; judgment 196's title law is stated with its measurement; the preamble hash, the register absolutes and the whole J-T1 window are re-measured at a545899ff. NO contract, acceptance case, path, check or budget figure moved, and the §5 clause was NOT touched (SHA-256 unchanged, still byte-identical to EM-C3's). node scripts/implementation-packets.mjs validate at a545899ff prints 'valid: 230 packets (0 READY)' and exits 0. PATH-DISJOINTNESS, MEASURED BOTH WAYS: the intersection of this member's three CREATE paths with EM-R1c (stage 1) is EMPTY, and with EM-C3, EM-R7 and EM-B2b (stage 2) it is EMPTY.",
       "_openForTheChair": "⛔ ONE CONTRADICTION WITH EM-C3 v2, MEASURED AND NOT REPAIRED ON EM-C3's SIDE. EM-C3.md's §7 row for tests/build/vendorPdfLazy.test.js asserts that EM-C2 adds 'src/domain/edit/guards.js' to the editorTrain array and leaves a TWELVE-row array. THIS PACKET CARRIES NO SUCH ROW. Measured at a545899ff: editorTrain holds ELEVEN rows, and the arm is expect(present).toEqual(editorTrain) over existsSync plus expect(present.filter(inEager)).toEqual([]) - it pins that every LISTED module exists and none is eager, with NO totality arm over src/domain/edit, so an unlisted CREATE reds nothing and this member is not forced to carry the row. The chair closes it: adding the row would give stage 1 and stage 2 of ONE train a shared path (judgment 239), would move this packet's collision group off 'no file path is shared', and would require this packet's count prover to be corrected, because its testFiles counter increments on every tests/ row and a TEST row on an existing file would break the files/credited/suiteTitles laws that are green today.",
       "_stageTwoMovesAfterMe": "EM-C3 CREATEs src/domain/edit/guardRules.js, the FIRST importer of this leaf (the leaf stops being import-dark; EM-C3 itself lands dark, so no emitted chunk is reached and +0 B survives both landings), and re-adds the flavour census's dropped fourth root as two FILE roots, the first being 'src/domain/edit/guards.js' - so this leaf becomes a WALKED root of tests/lint/flavorFields.census.test.js at EM-C3's landing and not before (§12 ruling 2). EM-R1c, EM-R7 and EM-B2b touch no path of this member."
+    },
+    {
+      "id": "EM-C3",
+      "status": "READY",
+      "packetPath": "docs/implementation/packets/settlement-editor/EM-C3.md",
+      "verifiedBase": "0d6143b58206e3e4e1b2550ae0ba4c353ee88a21",
+      "changeManifest": [
+        {
+          "action": "CREATE",
+          "path": "src/domain/edit/guardRules.js"
+        },
+        {
+          "action": "CREATE",
+          "path": "tests/domain/editGuardRules.test.js"
+        },
+        {
+          "action": "TEST",
+          "path": "tests/build/vendorPdfLazy.test.js"
+        },
+        {
+          "action": "TEST",
+          "path": "tests/lint/flavorFields.census.test.js"
+        },
+        {
+          "action": "TEST",
+          "path": "tests/lint/ruinFilterRoster.walker.test.js"
+        },
+        {
+          "action": "TEST",
+          "path": "tests/lint/opGuardCoverage.walker.test.js"
+        }
+      ],
+      "requiredSymbols": [
+        {
+          "path": "src/generators/structuralValidator.js",
+          "symbol": "export const checkStructuralValidity",
+          "_note": "THE PREREQUISITE RULE'S GROUND, and half of the chair's ruling 7 correction carried in EM-B1a's LANDED rows. MEASURED BY EXECUTION at this tip, not read off its docblock: (institutions, config = {}) -> { violations, suggestions }; it consumes ZERO draws and two calls with no active RNG are byte-identical, which is what makes it lawful inside a PURE guard. Violation rows carry {type, institution, reason, severity} plus {missing} on a dependency violation and {conflicting, group} on an exclusivity one. ⛔ THIS PACKET DOES NOT IMPORT IT: tests/build/domainGeneratorsBoundary.test.js refuses a new src/domain -> src/generators edge (measured: arm 1 names the file, arm 3 goes 5 -> 7), so it arrives on ctx.deps and the CREATE preserves this symbol's text untouched. count 1."
+        },
+        {
+          "path": "src/generators/power/rulingStructure.js",
+          "symbol": "export const renormalizeFactionPower",
+          "_note": "THE TOTALITY RULE'S fulfil WRITER (design §12.8; the charter's EM-C3 row). ⚠ IT MUTATES IN PLACE - factions[s.i].power = s.floor - and returns the SAME reference, which is why the rule renormalises a CLONE and why the rule reads its TARGET from the clone's own sum rather than spelling a literal 100 (the tuning register's P2 arm holds a new file at zero named numeric constants). It returns the argument unchanged on an empty or all-zero roster, which the rule relies on for silence. ⛔ INJECTED, never imported, for the boundary reason above. count 1."
+        },
+        {
+          "path": "src/generators/structuralValidator.js",
+          "symbol": "export const checkInstCompat",
+          "_note": "⛔ NAMED AND REFUTED, and the refutation is now EXECUTED rather than argued. The charter's row says it is a prose picker that consumes a draw and orders the compile to measure it: under an instrumented setActiveRng at this tip, checkInstCompat(insts, 'city', 50) consumes EXACTLY ONE DRAW and returns a narrative SENTENCE through pickRandom -> pick -> the ambient channel. No boolean, no violations, no verdict. This packet calls it NOWHERE, and the row stands so the correction is findable from the manifest rather than re-discovered - the same posture EM-B1a's LANDED row takes. count 1."
+        },
+        {
+          "path": "src/data/spatialData.js",
+          "symbol": "export const GATE_FEATURES",
+          "_note": "THE REAL PREREQUISITE TABLE, and the ONE symbol of the three this leaf may import DIRECTLY: it already lives a layer down, in src/data, so the boundary ratchet's /generators/ specifier regex never sees it. MEASURED at this tip: 96 keys over eight field shapes - reason,requires,suggestionOnly | reason,requires | reason | accessViolationReason,reason,requires,requiresAccess | minTier,reason,requires | minTier,reason | accessViolationReason,reason,requiresAccess | reason,requiresAny. The rule reads a gate's `reason` for its message and the validator's own violation rows for what is missing. count 1."
+        },
+        {
+          "path": "src/domain/institutions/institutionRoster.js",
+          "symbol": "export function liveInstitutions",
+          "_note": "THE ESTATE'S ONE FUNCTIONAL-LIVENESS ACCESSOR, and the reason this CREATE is COMPLIANT rather than EXEMPT under tests/lint/ruinFilterRoster.walker.test.js. MEASURED: (settlement) -> settlement.institutions filtered by isLiveInstitution, which refuses _worldPulseInactive === true and the four INACTIVE_STATUS words ruined|removed|destroyed|remnant; a non-array roster yields []. The leaf imports NOTHING (zero import lines), so this edge costs no closure. A calamity-ruined wall must not satisfy a citadel's gate, which is precisely the over-crediting class that walker exists for. count 1."
+        },
+        {
+          "path": "src/domain/deterministicSort.js",
+          "symbol": "export const compareCodepoint",
+          "_note": "THE ESTATE'S ONE SANCTIONED STRING ORDER, locale-free by construction. Every list this leaf emits is sorted through it - the unmet world predicates in a prerequisite message, the missing prerequisites, the renormalised share line, the owed registry types - so a guard's text is a function of the world and never of the engine's iteration order. EM-B1a names the same symbol for OP_TYPES' key order. count 1."
+        },
+        {
+          "path": "src/domain/edit/operations.js",
+          "symbol": "export const OP_TYPES = Object.freeze({",
+          "_note": "THE CATALOGUE THIS MEMBER JUDGES AGAINST AND NEVER IMPORTS UNDER src/. tests/lint/editMutationPath.walker.test.js convicts by name every src/ module that statically imports OP_TYPES, makeOp or validateOp outside its three declared EDIT_PATH members, and READ_ONLY_CONSUMERS is EMPTY at this tip; so the engine reads the catalogue and hands each rule its one row as ctx.decl, and only the TEST file (outside that walker's src/-only walk) imports it. MEASURED shape the rules read: requires is the {world, registry} SPLIT on the declaration (flat only on the built Op), plus relatedTo and conflictsWith, every key required on every row. count 1."
+        },
+        {
+          "path": "src/domain/edit/types.js",
+          "symbol": "export {};",
+          "_note": "THE EDIT VOLUME'S TYPES-ONLY LEAF, named by `@typedef {import('./types.js').Op}` in this CREATE exactly as operations.js and operationsNpcRename.js name it. The import specifier is TYPE-ONLY: it erases at emit, creates no runtime edge and closes no cycle. This packet does NOT modify types.js - a second member's rows on a landed leaf buy nothing here. count 1."
+        }
+      ],
+      "_retiredSymbols": [],
+      "acceptanceCases": [
+        {
+          "id": "A1",
+          "case": "THE ROSTER AND THE VOCABULARY, both directions and non-empty: GUARD_KINDS is exactly connection, contention, contradiction, prerequisite, totality (design §12.8's five with the range rule DROPPED); GUARD_RULES' ids are that same list in compareCodepoint order; every rule carries all four required keys (id, appliesTo, needs, evaluate) with evaluate a function; and every op type named in any rule's appliesTo is a key of the IMPORTED OP_TYPES, so a rule can never be declared for a type the catalogue does not author"
+        },
+        {
+          "id": "A2",
+          "case": "NO RULE CAN REFUSE: over EVERY row of OP_TYPES, driven with a world the rule fires on and with an empty world, every finding's kind is a GUARD_KINDS member and every offer is a GUARD_OFFERS member, and not one finding carries an offer set that the engine's proceed-append could not make lawful; collected once and asserted once (the seedLoopTotality law)"
+        },
+        {
+          "id": "A3",
+          "case": "PREREQUISITE, GATE FACET, through the REAL injected checkStructuralValidity: staging add-institution for Citadel into a world whose roster lacks both walls returns a prerequisite finding whose message carries GATE_FEATURES.Citadel.reason and whose fulfil is an add-institution op naming the first missing prerequisite in compareCodepoint order; the SAME world with City walls and gates seated returns null. NEGATIVE CONTROL in the same arm: an institution name absent from GATE_FEATURES returns null before the validator is called at all"
+        },
+        {
+          "id": "A4",
+          "case": "THE STANDING-ROSTER LAW: the same world, with the wall row carrying _worldPulseInactive true, fires the gate finding where the live wall silenced it - so the rule judges liveInstitutions and a calamity-ruined wall cannot satisfy a gate. PREREQUISITE, WORLD FACET, in the same arm: remove-npc against a world whose npcs lack the target returns the world-facet finding naming npcPresent, and returns null once the person is present"
+        },
+        {
+          "id": "A5",
+          "case": "TOTALITY READS ITS TARGET FROM THE WRITER: a roster summing to 97 fires with a message naming 97 and 100 and a shares line sorted by compareCodepoint; the SAME roster already summing to 100 is silence; an ALL-ZERO roster is silence (the writer returns it unchanged, so live sum equals clone sum); and the world handed in is BYTE-IDENTICAL after the call, proving the clone and not the roster was mutated"
+        },
+        {
+          "id": "A6",
+          "case": "CONTRADICTION AND CONTENTION FIRE ONLY ON ONE TARGET: remove-institution staged after set-institution-state on the SAME institution returns a contradiction naming that entry (the pair OP_TYPES itself declares); the same two ops on DIFFERENT institutions return null from both rules; two set-field entries sharing a payload field on one target return a contention, and the same two on different targets return null"
+        },
+        {
+          "id": "A7",
+          "case": "CONNECTION JUDGES THE REGISTRY HALF AND NEVER op.requires: promote-phantom with no found-phantom before it returns a connection finding offering reorder when a found-phantom entry is staged LATER and only fulfil when none is; remove-npc, whose decl.requires.registry is empty and whose op.requires (flattened by makeOp) reads npcPresent, returns NO connection finding - the arm that separates the world half from the registry half by name"
+        },
+        {
+          "id": "A8",
+          "case": "THE FOLD AND PURITY: project returns a NEW world for each of the five op types it knows and null for every other catalogue row, and the world handed to it is byte-identical afterwards; rulesFor is total (every OP_TYPES key yields at least the four unconditional rules, and the three share-space types yield five); and every rule evaluated over every catalogue row with a deliberately malformed world returns without throwing, because the engine wraps nothing"
+        }
+      ],
+      "checks": [
+        [
+          "npx",
+          "vitest",
+          "run",
+          "--pool=threads",
+          "--maxWorkers=2",
+          "tests/domain/editGuardRules.test.js",
+          "tests/domain/editOperations.test.js",
+          "tests/domain/editDeclarations.test.js",
+          "tests/domain/mundaneDisplayAndValidator.test.js",
+          "tests/domain/editGuards.test.js"
+        ],
+        [
+          "npx",
+          "vitest",
+          "run",
+          "--pool=threads",
+          "--maxWorkers=2",
+          "tests/lint/flavorFields.census.test.js",
+          "tests/lint/opGuardCoverage.walker.test.js",
+          "tests/lint/editMutationPath.walker.test.js",
+          "tests/lint/editDeclarations.walker.test.js",
+          "tests/lint/ruinFilterRoster.walker.test.js",
+          "tests/lint/entropyRootCensus.walker.test.js",
+          "tests/lint/tuningRegister.walker.test.js",
+          "tests/lint/domainAnyCastBaseline.test.js",
+          "tests/lint/domainStrictBaseline.test.js",
+          "tests/lint/negativeAssertionAnchor.walker.test.js",
+          "tests/lint/contractTestAntiVacuity.walker.test.js",
+          "tests/lint/seedLoopTotality.walker.test.js",
+          "tests/lint/moduleScopeCwdRatchet.test.js",
+          "tests/lint/proseNumerics.test.js",
+          "tests/lint/sourceCitationIntegrity.walker.test.js",
+          "tests/lint/mutationCoverageManifest.test.js"
+        ],
+        [
+          "npx",
+          "vitest",
+          "run",
+          "--pool=threads",
+          "--maxWorkers=2",
+          "tests/generators/structuralValidatorDeterminism.test.js",
+          "tests/generators/structuralOverrideDedup.test.js",
+          "tests/generators/isolationSupport.test.js",
+          "tests/generators/neighbourFactionRenorm.test.js",
+          "tests/generators/normalizeFactionsZeroPowerGuard.test.js"
+        ],
+        [
+          "npx",
+          "vitest",
+          "run",
+          "--pool=threads",
+          "--maxWorkers=2",
+          "tests/copy/voiceMechanics.test.js"
+        ],
+        [
+          "npx",
+          "vitest",
+          "run",
+          "--pool=threads",
+          "--maxWorkers=2",
+          "tests/property/generatorGoldenMaster.test.js",
+          "tests/property/dossierProseManifest.test.js"
+        ],
+        [
+          "node",
+          "scripts/implementation-packets.mjs",
+          "validate"
+        ]
+      ],
+      "_checksNote": "COMPUTED, not recalled (EM-PREAMBLE §P7 / §P2 row 19's interim rule). The governing set is the union of `git grep -l -F` over each symbol/basename this member touches: spatialData.js -> GATE_FEATURES consumers under tests; structuralValidator.js and rulingStructure.js -> the five generator suites above; institutionRoster.js -> the ruin-filter family; operations.js -> the editOperations/opGuardCoverage/editMutationPath trio. tests/build/generationWorkerLazy.test.js and tests/build/vendorPdfLazy.test.js are OMITTED from `checks` because they read `dist` (the dist-gate rule); vendorPdfLazy is a TEST row of the manifest and the build lane runs it under `verify:dist` at the landing. tests/lint/sovereigntyLightingContract.walker.test.js is OMITTED as a NAMED INTERIOR RED (the +1/+1/+8/+1 delta below), never sealed. ⛔ RE-COMPUTED AT VERSION 2: EM-C2 LANDS FIRST (judgment 236), so tests/domain/editGuards.test.js is already in the first array; tests/property/guardsAcceptApplies.test.js is EM-C2's own property home and stays with EM-C2. tests/lint/flavorFields.census.test.js joins the lint array because this member MODIFIES it (the fourth root).",
+      "_lightingDelta": {
+        "files": 1,
+        "parked": 0,
+        "credited": 1,
+        "titles": 8,
+        "suiteTitles": 1
+      },
+      "_deferredRows": [
+        "tests/lint/.lighting-census-baseline.json - an INTERIOR RED, delta only (files +1, parked +0, credited +1, titles +8, suiteTitles +1, MEASURED with the walker's own parkReasonsFor/liveTitlesIn/liveSuiteTitlesIn over the planted text; the CREATE is CREDITED, zero park reasons). Refrozen by the chair at the train's terminal; the member never runs a refreeze.",
+        "docs/content/wiring-census.json - stamp.producerIndexFiles +1 (1190 -> 1191 measured at bb0497eb4; 1191 -> 1192 at EM-C2's flip, since guards.js takes the first +1) and the produced-key set +4 AT bb0497eb4 (appliesTo, evaluate, fulfil, relatedEntryId, measured with the census's own astTokens against its own producerIndex of 13,580 keys) but +2 AT EM-C2's FLIP (appliesTo, evaluate - EXECUTED: guards.js itself produces fulfil and relatedEntryId among its nine novel keys). stamp.files UNMOVED (its 7 entries name neither path). Car 0 reds on 'byte-identical to a fresh build'; the chair regenerates once at the terminal."
+      ],
+      "_mutationCoverageRowKey": "NONE - tests/domain is not one of the eight ENFORCER_DIRS and editGuardRules.test.js matches no NAME_PATTERN token, measured with tests/lint/mutationCoverage.shared.mjs's own enumerateInvariants predicate; this is the same disposition tests/domain/editOperations.test.js has.",
+      "_collisionGroup": [
+        "src/domain/edit/guards.js (EM-C2's CREATE - this leaf IMPORTS it; EM-C2 lands FIRST, judgment 236). NOT a shared PATH: EM-C2's three change paths and this member's five intersect in the EMPTY SET, measured at bb0497eb4.",
+        "tests/build/vendorPdfLazy.test.js - EM-A3/EM-D0b/EM-D0c/EM-B2a4 are the LANDED holders; NO in-flight member claims it. Version 2's claim that EM-C2 adds a row to the same editorTrain array is RETIRED by the chair's judgment 243: EM-C2 version 3 carries no such row and the array is ELEVEN rows at bb0497eb4, measured here.",
+        "tests/lint/flavorFields.census.test.js (EM-A3's LANDED file; no in-flight member touches it).",
+        "tests/lint/ruinFilterRoster.walker.test.js (EM-A2b's LANDED file; no in-flight member touches it - the only manifest entries naming it are MF-UC0, MF-UC1, MF-UC2 and EM-A2b, all LANDED).",
+        "tests/lint/opGuardCoverage.walker.test.js (EM-B1b's LANDED CREATE; no in-flight member touches it - measured at bb0497eb4 over the 232-entry branch manifest and every waiting capsule. The widen lands INSIDE the landed C5 and C7 bodies: zero new it(, zero new describe(, no landed title moved.)"
+      ],
+      "_byteArm": "NOT THE BYTE-ARM HOLDER IN THE BUDGET SENSE, and this member names no ceiling literal - but it DOES hold tests/build/vendorPdfLazy.test.js's editorTrain row on train EM-T17 (judgment 239), and the holder's receipt is: the array is ELEVEN rows at bb0497eb4, the row makes it twelve, the toEqual(editorTrain) assertion moves in CARDINALITY only, and the eager-membership assertion stays [] . MEMBERSHIP, measured at bb0497eb4 by a plain-node static-import BFS that reads no dist and by importing EAGER_FIRST_PAINT_MODULES from the tree's own vite.config.js: the CREATE lands DARK (zero importers under src/, exactly as operations.js did at EM-B1a), so it enters NO emitted chunk - the generation worker (WORKER_BUNDLE_CEILING_BYTES 1391327, exact, zero slack), the lazy engine (< 679_000) and the first-paint closure (EAGER_FIRST_PAINT_MODULES 270, naming NOTHING under src/domain/edit/) each move by 0 B. Two modules of this leaf's own closure (institutionRoster.js, deterministicSort.js) are ALREADY eager, which is why the delta is membership and not bytes. THE COST IS EM-C4b's, AND IT IS PRICED HERE SO THAT PACKET INHERITS THE NUMBER: the injection site must live OUTSIDE src/domain (the boundary ratchet), which makes it src/store/editSlice.js :: validateOp's home; its closure then gains src/generators/structuralValidator.js (33 modules / 641,035 raw B) and src/generators/power/rulingStructure.js (68 / 1,185,208), of which 77 modules / 1,395,659 raw B are new to it (RE-MEASURED at bb0497eb4; version 2 read 1,185,188 and 1,395,639 - the hygiene commit's one comment line in src/generators/economy/economicState.js moved each by +20 B). editSlice.js is NOT eager today and the editorTrain arm asserts it stays so.",
+      "_measuredAtCompile": {
+        "readTip": "1b073009f",
+        "preambleSha256": "125c693214235a81bf4f2b38506b621859a35e0325ff2ea58d335b4e0681a99d",
+        "checkInstCompat": "draws 1, returns a prose STRING - the charter's claim re-measured by execution and CONFIRMED",
+        "checkStructuralValidity": "draws 0, deterministic with no active RNG, { violations, suggestions }",
+        "gateFeatures": "96 keys, eight field shapes",
+        "boundaryRatchet": "tip [] / liveCount 5; static plant NEW importer + 7; dynamic plant NEW importer + 6; DI plant [] / 5",
+        "effectiveLines": {
+          "src/domain/edit/guardRules.js": "0 -> 168 at version 2 (154 at version 1), against 250 per leaf"
+        },
+        "voice": {
+          "src/domain/edit/guardRules.js": "em 0 bang 0 over 80 string literals (a CREATE is held at zero)"
+        },
+        "anyDebt": {
+          "src/domain/edit/guardRules.js": "any 0, suppress 0 (a NEW src/domain file with any debt FAILS)"
+        },
+        "tuning": {
+          "p2UnregisteredNamed": 0,
+          "p3BareDecimals": 0
+        },
+        "entropyCreatePrngSites": {
+          "src/domain": 36,
+          "src": 47,
+          "delta": "+0"
+        },
+        "ruinFilter": "ENROLS (project reads .institutions in code) and is COMPLIANT (imports institutionRoster.js): ROUTED, no exempt row",
+        "goodsRoster": "NOT OWED - the leaf imports no goods identity half-table",
+        "edgeShared": "NOT OWED - none of the five metas' inputs lists (107/74/108/2/2) names either path",
+        "proseNumerics": "none found - 0 baseline rows name either path",
+        "sourceCitations": "none found - 0 baseline rows name either path",
+        "lightingLiveCensusAtTheTip": "2697 · 359 · 2338 · 25820 · 6855, EXACTLY the committed twenty-second refreeze (the harness's anti-vacuity control)",
+        "wiringProducerIndex": {
+          "files": 1190,
+          "producedKeys": 13580,
+          "novelKeysFromThePlant": 4,
+          "novelKeys": [
+            "appliesTo",
+            "evaluate",
+            "fulfil",
+            "relatedEntryId"
+          ]
+        },
+        "eagerFirstPaintModules": 270,
+        "mutationCoverageRowOwed": false,
+        "packetVersion": 2,
+        "leafStaticClosure": "5 modules / 62,950 raw B (guardRules.js, guards.js, spatialData.js, deterministicSort.js, institutionRoster.js) - +1 module / +17,281 B over version 1, which is guards.js itself; the leaf is still DARK, so 0 B reach any emitted chunk",
+        "flavourCensusFourthRoot": "RE-ADDED as TWO FILE roots (filesUnder applies no glob). Measured: the census's free rows are exactly institution.note and npc.note; neither new root spells `.note` in comment-blanked code (0 and 0), and guardRules.js's three `.name` reads are institutions[].name, a free-cascade row the census does not govern. A4's empty-root arm is satisfied because both files exist at the landing commit.",
+        "sharedClauseSha256": "20ff767bc6a53ff5b3f178932017eab9af721b03bc98f65bbd62d100a8576aae"
+      },
+      "_sharedClause": "⛔ THE §5 CLAUSE IS THE CHAIR'S ONE TEXT (judgment 236), COPIED BYTE FOR BYTE. Source: $SP/lane-em-compile-EM-C2-scratch/SHARED-CLAUSE.final.md (file sha256 7b55931c8a63e27fd574ba2549a460b5845ddfea03219ef937e97f7d58dc5154). The fenced block is 8,288 bytes and its own sha256 is 20ff767bc6a53ff5b3f178932017eab9af721b03bc98f65bbd62d100a8576aae, ELEVEN numbered items. This packet's count prover RECOMPUTES that digest over the copy in EM-C3.md and refuses a byte that differs; EM-C2's prover does the same over its copy. The two deltas this seat measured at version 1 are items 4/5/10/11 (the rule `needs` field and the injected ctx.deps with the unevaluated report); delta 3 went to the ENGINE, so item 9 carries the value half and the staging order is EM-C2 then EM-C3.",
+      "_pendingRequiredSymbols": [
+        {
+          "path": "src/domain/edit/guards.js",
+          "symbol": "export const GUARD_KINDS = Object.freeze(",
+          "_note": "EM-C2's CREATE, and the reason this member carries `Depends on: EM-C2` (judgment 236). ABSENT at this packet's own base: a `requiredSymbols` row on a file that does not exist refuses at validation, so it rides here and is DISCHARGED at the placement, RE-MEASURED VERBATIM with `grep -c -F` at the then-tip (judgment 151: a contract's spelling is not the code's). The value this leaf reads is the design's five kinds in compareCodepoint order, and this leaf re-spells neither vocabulary."
+        },
+        {
+          "path": "src/domain/edit/guards.js",
+          "symbol": "export const GUARD_OFFERS = Object.freeze(",
+          "_note": "The same CREATE's second vocabulary, ARCH §2's seven offers in compareCodepoint order. The rules index it by position rather than spelling a literal, so a member that reordered the vocabulary would move this leaf's offers rather than silently disagree with the engine that validates them. Discharged and re-measured verbatim at the placement (judgment 151). The four typedefs this leaf names (`GuardContext`, `GuardFinding`, `GuardRule`, `ProjectFn`) live in the same file and are TYPE-ONLY, so they create no runtime edge and are not required symbols."
+        }
+      ],
+      "_versionNote": "VERSION 4 (the chair's judgment 251, 2026-09-23; the same Opus PRE-PROOF seat at bb0497eb4). EM-C2b is CLOSED, not slotted, and its payload is re-slotted here as ONE §7 TEST row: tests/lint/opGuardCoverage.walker.test.js is widened to import rulesFor and assert the DERIVED coverage per op type (every type reaches a non-empty rule set; the 19x4 / 3x5 table in both directions; C7's populated row given its semantics in the code - coverage is derived from the rules, never authored on a row, and OP_TYPES[*].guards stays the inert empty array). The widen lands inside the landed C5 and C7 bodies: ZERO new it(, no landed title moved (judgment 148's law), lighting UNCHANGED at +1/+0/+1/+8/+1, +0 B. Nothing else moves: no src/ path added, the §5 clause untouched, the ruin-filter row kept, _pendingRequiredSymbols unchanged, the matrix still A1-A8. A C9 arm was refused by the count law: §P9(f) ties a declared arm to a homed case and §3's case budget is 8 of 8. VERSION 3 (the Opus PRE-PROOF seat for train EM-T17 stage 2, session cce01f87, 2026-09-23, read tip bb0497eb4; the chair's judgments 243 and 245). Re-measured, not re-designed: no contract moved, no acceptance case changed, the shared clause is byte-identical. ONE ROW ADDED - TEST tests/lint/ruinFilterRoster.walker.test.js, the census arm 94 -> 95, because the CREATE enrols in that walker's discovery set and EM-PREAMBLE P2.21(b) wants the disposition as a TEST row with the count as a delta (EM-A2a's exact omission, cured as EM-A2b v7 under judgment 138). The vendorPdfLazy row re-written against the ELEVEN-row array measured here, every sentence about EM-C2's row dropped (judgment 243). The voice literal count corrected 107 -> 80. The wiring novel-key delta stated at both tips (+4 here, +2 at EM-C2's flip). Two version-1 residues re-spelled (GUARD_RULE_SET, 'the three imports'). Ruling 2's byte figures re-measured (+20 B each) and its one line address re-spelled by symbol. VERSION 2 (the chair's judgment 236, 2026-09-23): the fork closed. The vocabularies are the engine's and are imported; the typedefs are named type-only; Depends on gains EM-C2; two _pendingRequiredSymbols rows ride to the placement (judgment 151); the flavour census's dropped fourth root is re-added; every instrument re-measured over the version-2 planted leaf. Version 1's GUARD_KINDS/GUARD_OFFERS/GUARD_RULE_SET exports are GONE from this leaf and makeGuardRuleSet(deps) replaces the last of them at EMPTY_RULE_SET's three keys.",
+      "_remeasuredAtPreProof": {
+        "readTip": "bb0497eb4b78855efe30766f51c14b75f487c55a (train EM-T17's STAGE-1 PLACEMENT; EM-R1c v3 and EM-C2 v3 READY on the branch)",
+        "seat": "Opus PRE-PROOF, train EM-T17 stage 2, session cce01f87, 2026-09-23",
+        "jT1Window": "git diff --stat 1b073009f bb0497eb4 -- <the 5 change paths, the 8 requiredSymbols paths, guards.js> = EMPTY (no name-status row). The whole-tree window is 27 files: 24 docs, src/domain/settlement.schema.js, src/generators/economy/economicState.js and tests/generators/configPatchAllowlistWalker.test.js, one line each.",
+        "preambleSha256": "125c693214235a81bf4f2b38506b621859a35e0325ff2ea58d335b4e0681a99d (the landed SIXTH amendment, re-measured with shasum -a 256; unchanged from the compile)",
+        "createTargetsAbsent": "src/domain/edit/guardRules.js ABSENT, tests/domain/editGuardRules.test.js ABSENT, src/domain/edit/guards.js ABSENT (git ls-files empty for each)",
+        "requiredSymbolsVerbatim": "8 of 8 at count=1 (grep -c -F)",
+        "pendingRequiredSymbols": "2 of 2 at count=0 - the provider EM-C2 has NOT landed at this tip, so both rows STAY PENDING and are discharged at the flip",
+        "dryValidator": "validatePacketManifest over the live 232-entry manifest: CONTROL ok=true, 0 errors; with this capsule placed exactly TWO errors, both placement-only (packetPath does not exist; verifiedBase must be a lowercase 40-character SHA). Zero content errors, zero duplicate change paths.",
+        "effectiveLines": "src/domain/edit/guardRules.js 0 -> 168 of 250 (eslint's own Linter, max-lines, skipBlankLines + skipComments); 345 raw",
+        "voice": "em 0 / bang 0 over 80 string literals (the walker's own espree literal walk). The src/generators Tier-5 budget is 28 of 28 and this member spells no src/generators literal: +0.",
+        "entropy": "createPRNG( sites src/domain 36, src 47, planted leaf 0 => +0. WORLD_ROOTS are worldState|startingWorldState|state|ws|raw|base and the leaf reads none of them.",
+        "tuning": "P2 0 named numeric consts, P3 0 bare decimals - measured the walker's OWN way, codeOnly(raw) then NAMED_NUMERIC_CONST_RE / BARE_DECIMAL_RE (a raw-source read wrongly finds 4: the section numbers 2.7, 12.8, 22.3, 12.8 in JSDoc)",
+        "anyCast": "0 @type {any}/{*}, 0 @ts- directives",
+        "ruinFilter": "ENROLS and is COMPLIANT. discoverReaders() EXECUTED with the walker's own regexes: tip 94 (exactly the census arm's pin), with this plant 95 {compliant: true}, with EM-C2's plant alone 94 (guards.js does not enrol). => A TEST ROW IS OWED and is now carried.",
+        "lighting": "LIVE census at bb0497eb4 = 2697 . 359 . 2338 . 25820 . 6855, byte-equal to the committed twenty-second refreeze (the anti-vacuity control). Planted test file: parkReasonsFor [] (CREDITED), liveTitlesIn 8, liveSuiteTitlesIn 1 => files +1 . parked +0 . credited +1 . titles +8 . suiteTitles +1. Every one of the eight titles is UNIQUE in tests/ (zero substring hits across 2,697 files).",
+        "wiring": "producerIndexFiles 1190 at bb0497eb4; stamp.files 7, naming neither path; novel produced keys +4 here, +2 at EM-C2's flip",
+        "boundaryRatchet": "tip [] / liveCount 5; static plant NEW importer + 7; dynamic plant NEW importer + 6; the DI plant [] / 5 - re-measured at bb0497eb4, identical to the compile",
+        "editorTrain": "ELEVEN rows at bb0497eb4 (judgment 243). The arm's four assertions: toEqual(editorTrain) moves 11 -> 12 on both sides; the eager filter stays []; the two anti-vacuity legs are untouched. No totality over src/domain/edit/.",
+        "eagerFirstPaintModules": 270,
+        "observedShapeAndWriterReach": "NOT OWED. isObservedShapeScanPath(guardRules.js) is true and the corpus is 2,263 files, but EXPLAINED_WRITER_EXEMPTIONS (8 rows) names no src/domain/edit path, and 0 of the 50 EM packets name an observed-shape or writer-reach path in a change manifest while 10 LANDED members CREATE under src/domain/edit/ (pools.js, a .institutions reader, among them). The register's arms are corpus-driven, so this is the one PLAUSIBLE row.",
+        "leafStaticClosure": "5 runtime modules / 62,950 raw B (guardRules.js, guards.js, spatialData.js, deterministicSort.js, institutionRoster.js). A text scan that follows the JSDoc type-only import('./types.js') reads 6 / 66,920 B; types.js (3,970 B) erases at emit and is not a runtime edge.",
+        "engineStaticClosure": "2 runtime modules (guards.js + deterministicSort.js), which is EM-C2's own measurement re-confirmed here",
+        "opGuardCoverageWalker": "CREDITED at bb0497eb4 with FOUR titles (C5, C6, C7, C8) and ONE suite title; parkReasonsFor []. The in-place widen adds ZERO it( and ZERO describe(, so files/parked/credited/titles/suiteTitles all move +0 and the member's lighting delta is unchanged. Measured beside it: OP_TYPES is 22 rows, populated [] , all 22 guardsStated match /\\bno guard\\b/i, and the derived table from rulesFor is 19 x 4 / 3 x 5 with ZERO empty rows (the three five-rule types are exactly the totality rule's appliesTo). The mutation register already holds invariants['tests/lint/opGuardCoverage.walker.test.js'] = {kind:'rationale'} with a 1,787-character reason, which C8 asserts and this member does not move."
+      }
+    },
+    {
+      "id": "EM-R8",
+      "status": "READY",
+      "packetPath": "docs/implementation/packets/settlement-editor/EM-R8.md",
+      "verifiedBase": "0d6143b58206e3e4e1b2550ae0ba4c353ee88a21",
+      "changeManifest": [
+        {
+          "action": "MODIFY",
+          "path": "src/domain/edit/mergeConsequence.js",
+          "symbol": "ladderFor",
+          "_note": "src/domain/edit/mergeConsequence.js :: ladderFor and :: recomputeReceipts. THE LADDER'S HELD-KEY LAW, in three hunks and nothing else (judgment 245, SHAPE B). (1) Beside `vkey`: `const CLASS_OF = new Map(Object.entries(RECORD_CLASSES));` and `const isHeldScope = (key) => CLASS_OF.get(key.split(/[.[]/)[0]) === 'HELD';`. (2) Between recomputeMirrors and recomputeReceipts: the two capture-group patterns ROSTER_STATED and EVENTS_STATED (the leaf's own ROSTER_RE and EVENTS_RE from recordInvariants.js, with the surrounding text captured), then the JSDoc block, then the MODULE-LOCAL `function restateProseCounts(merged)`; and ONE line inside recomputeReceipts, as its FIRST statement, calling it. (3) ladderFor's `return steps;` becomes a map that filters each rung's scope through `!isHeldScope(key)` and a filter that drops a rung whose scope empties. NOTHING ELSE MOVES. THE HELPER STAYS MODULE-LOCAL: tests/domain/recordMerge.test.js :: A8 enumerates FIVE exports by name and a sixth reds it. TWO SPELLING LAWS THE COMPILE'S OWN TYPECHECK FOUND AND CURED, each measured with the TypeScript compiler API over both configs: the class table is read through CLASS_OF because `RECORD_CLASSES[<string>]` is an implicit-any index on a frozen literal-typed object, and the two regex consts sit BEFORE the JSDoc block because a block above them attaches to the first const and leaves `merged` implicitly any. As re-cut, tsconfig.full.json reports 0 and tsconfig.domain-strict.json reports 0 on this path. MEASURED AT a545899ff with each instrument's own logic: eslint's own Linter under max-lines with skipBlankLines and skipComments reads 141 -> 171 effective lines, against the src/domain ceiling of 800; the voice walker's literal scan reads em 0 -> 0 and bang 0 -> 0; the tuning inventory's NAMED_NUMERIC_CONST_RE and BARE_DECIMAL_RE read P2 0 -> 0 and P3 5 -> 5; countText reads {any: 0, suppress: 0} -> {any: 0, suppress: 0}; scanProseNumericsSource reads 0 -> 0 hits and the line-addressed baseline names this path 0 times; the createPRNG( site count is 0 -> 0 with the live pins at 36 and 47; the ruin-filter READER_RE over codeOnly is false -> false; dmLayerGoldenIsolation's A8 generators regex is false -> false. NO landed requiredSymbols row in the estate names anything in this file, so no retiredSymbols row is owed."
+        },
+        {
+          "action": "MODIFY",
+          "path": "src/domain/edit/recordRegister.js",
+          "symbol": "CLASS_EXCEPTIONS",
+          "_note": "src/domain/edit/recordRegister.js :: CLASS_EXCEPTIONS. ONE DATA ROW AND ITS NOTE, inserted INSIDE the frozen table immediately after the generationCoherenceReceipt.repairs row: `'generationCoherenceReceipt.judgments[].evidence': 'MIRROR',` with the eight comment lines §6 spells verbatim. THE NOTE IS THE CONTRACT (judgment 245 item i): it states WHICH DECLARATION GOVERNS WHICH ACT, because the same path is also an ATOMIC_COLLECTIONS row - ATOMIC governs THE MERGE (the evidence array has no sound key, so the tree merge takes it from R1 as ONE value) and this MIRROR row governs THE POST-PASS (the two counted rows are restated from the merged record afterwards, and never merged). Acceptance case A4 proves both acts on ONE trial. MEASURED AT a545899ff: the row is LIVE by the register-totality walker's own A2 reading (every declared CLASS_EXCEPTIONS path must be OBSERVED on a generated record; it is), and INERT in the tree merge (recordMergeTree.js :: KEPT_BY_CLASS is ['HISTORY', 'AUTHORED'], so a MIRROR exception never reaches the node rule's early return) - proven end to end by 126 of 126 trials whose merged record, escalations and evidence are identical with and without the planted register. eslint's own Linter reads 139 -> 140 effective lines (+9 raw, 8 of them comment). Every one of the eighteen landed requiredSymbols rows the estate holds on this path is PRESERVED VERBATIM, each measured 1 -> 1 on the planted file, so no retiredSymbols row is owed. THE INSERTION POINT IS PART OF THE CONTRACT: nine lines after CLASS_EXCEPTIONS shifts KEYED_COLLECTIONS, ATOMIC_COLLECTIONS and CONSISTENCY_GROUPS down by nine, which is the drift the packet declares and which reds nothing (the source-citation walker convicts only a past-EOF address and this edit grows the file)."
+        },
+        {
+          "action": "CREATE",
+          "path": "tests/domain/mergeLadderHeldKeys.test.js",
+          "_note": "THE BATTERY: adds exactly 8 literal `it`s, ONE per sealed acceptance case A1 to A8, under ONE literal `describe`. Straight-line registration, its own vitest import, and no variable or parameter named `it`, `test` or `describe` (measured 0 re-bindings; OPENER_UNRESOLVED parks 26 of the estate's 384 parked files for that alone). Every loop COLLECTS and the arm asserts ONCE: seedLoopTotality.walker.test.js's OWN stripNoise and regexes over the draft find NO bare seed loop, and tests/domain's frozen habitat (12 rows) is shrink-only and outside this manifest. The 63-row stride is DERIVED from goldenCorpus() and no fixture is committed; the eight-edit census is built ONCE and shared by A1, A2, A3, A5 and A6. Each arm carries a 300_000 ms timeout, the tests/domain/institutionRemoval.test.js precedent; the whole file measured 81 s end to end under the planted contract, of which A7's chain is 43 s to 58 s. THE NAME IS A CONTRACT: mergeLadderHeldKeys.test.js matches no NAME_PATTERN token and tests/domain is not an ENFORCER_DIR, so enumerateInvariants does not enumerate it and the mutation-coverage row is NOT OWED - a row for it would red that walker's own 'no stale entries' arm. A spelling carrying contract, census, walker, golden, pin or ratchet would enrol it. LIGHTING POSTURE EXECUTED at a545899ff through the walker's own classifier: parkReasonsFor -> [], liveTitlesIn -> 8, liveSuiteTitlesIn -> 1, so the delta is files +1, parked +0, credited +1, titles +8, suiteTitles +1; all nine titles are unique across the estate's 2,697 test files. THE WHOLE FILE WAS EXECUTED AT COMPILE, in plain node over the planted contract: 8 of 8 arms GREEN under the cure and 0 of 8 at the tip, each red for its own reason."
+        },
+        {
+          "action": "TEST",
+          "path": "tests/domain/recordMerge.test.js",
+          "_note": "EM-R0c's LANDED eight arms, the arm-holder for both src files this member modifies (judgment 148's law). THE EDIT IS THE FILE HEADER ONLY and adds 0 literal `it`s, re-pins 0, and homes 0 acceptance cases: its CANNOT-CATCH row 3 gains the sentence that the cross-key escalation arm is exercised in tests/domain/mergeLadderHeldKeys.test.js from this landing, and a new row records that recomputeReceipts now ALSO restates the receipt's two counted evidence rows, so A7's account of it is not silently stale. EVERY EXISTING TITLE AND EVERY EXISTING ASSERTION IS KEPT BYTE-IDENTICAL. All eight landed arms were REPLAYED IN PLAIN NODE over the planted contract at a545899ff and are GREEN 8 of 8 (A1 identity 63/63, A2 63 subjects, A3 and A4 54, A5 61, A6 57, A7 63, A8 the five enumerated exports), so nothing in the file reds and no assertion may be touched to make it pass. No register addresses this file by line: git grep -nE 'tests/domain/recordMerge\\.test\\.js:[0-9]' over src, tests, scripts and docs returns nothing, and no mutation-coverage or frozen-habitat row names it."
+        }
+      ],
+      "requiredSymbols": [
+        {
+          "path": "src/domain/edit/recordRegister.js",
+          "symbol": "export const CLASS_EXCEPTIONS = Object.freeze({",
+          "_note": "THE TABLE THIS MEMBER ADDS ONE ROW TO. The deliverable must find it with exactly this spelling, because the row is inserted inside it, immediately after the `generationCoherenceReceipt.repairs` row (line 66 at bb0497eb4), so every address at or below 67 shifts by +9 (V22). RE-MEASURED at the STAGE-1 PLACEMENT tip: EM-R2 holds a LANDED row on this EXACT text and EM-R0c holds one on its prefix `export const CLASS_EXCEPTIONS`; EM-R1c holds THREE READY rows further down this file (`export const KEYED_COLLECTIONS = Object.freeze({`, `  institutions: 'name',`, `  npcs: 'id',`) which this member must leave verbatim. The POST-EDIT SIMULATION over all THIRTY rows on this member's paths counts 1 -> 1 with ZERO non-unity. count 1, measured 1 -> 1 on the planted file. NO LINE ADDRESS IS CARRIED (§P2.22)."
+        },
+        {
+          "path": "src/domain/edit/recordRegister.js",
+          "symbol": "export const RECORD_CLASSES = Object.freeze({",
+          "_note": "THE CLASS TABLE THE FILTER READS, through a Map built from Object.entries. The HELD denominator is ten keys at this tip and is DERIVED from this table by both the leaf and the acceptance battery, never re-typed. EM-R2 and EM-R5 hold landed rows on this same text. count 1, measured 1 -> 1."
+        },
+        {
+          "path": "src/domain/edit/recordRegister.js",
+          "symbol": "export const ATOMIC_COLLECTIONS = Object.freeze([",
+          "_note": "THE OTHER DECLARATION OF THE SAME PATH, and the reason the new CLASS_EXCEPTIONS row must say which governs which act. generationCoherenceReceipt.judgments[].evidence is a member of this frozen list at the tip, which is what makes the tree merge take the evidence array from R1 as ONE value; acceptance case A4 reads BOTH tables from the register and proves both acts on one trial. EM-R5 holds a landed row on this text. count 1, measured 1 -> 1."
+        },
+        {
+          "path": "src/domain/edit/mergeConsequence.js",
+          "symbol": "export function recomputeReceipts(merged) {",
+          "_note": "THE POST-PASS THE RESTATEMENT JOINS, as its FIRST statement. THE CALL SITE IS LOAD-BEARING AND THE PROOF IS A CONTROL: recomputeReceipts runs after mergeTree AND after every rung of the ladder, so the restatement is the LAST WORD on every path; the identical helper called from recomputeMirrors instead leaves 34 of 498 trials carrying a live V-EVIDENCE-ROSTER, against 0 of 498 here. The signature, the arity and the RETURN (the economy fingerprint's own boolean) are unchanged, which is what keeps tests/domain/recordMerge.test.js :: A7 green. count 1, measured 1 -> 1 on the planted file."
+        },
+        {
+          "path": "src/domain/edit/mergeConsequence.js",
+          "symbol": "export function guardMergedRecord(merged, R1, exempt) {",
+          "_note": "THE GUARD THE LADDER SERVES. This member changes NOT ONE LINE of it: the rungs it walks come from ladderFor, and the filter is applied there. The rung's own write stays `put(merged, key, source)` at the TOP-LEVEL key - which is exactly why a declared HISTORY sub-path under a READING key is still carried along by a rung that takes its parent, measured at 12 of 120 config-channel trials before this member and after it alike. count 1, measured 1 -> 1."
+        },
+        {
+          "path": "src/domain/edit/recordMergeTree.js",
+          "symbol": "const KEPT_BY_CLASS = new Set(['HISTORY', 'AUTHORED']);",
+          "_note": "WHY A MIRROR ROW IS INERT IN THE TREE MERGE, and the one fact the new register row rests on. mergeNode consults CLASS_EXCEPTIONS and acts only when the exception's class is a member of this set; MIRROR is not, so the node rule is unmoved and the evidence array keeps taking the ATOMIC path. Measured end to end: the merged record, the escalations and the evidence are identical with and without the planted register in 126 of 126 trials. This member edits this file not at all. count 1."
+        },
+        {
+          "path": "src/domain/edit/recordInvariants.js",
+          "symbol": "const ROSTER_RE = /(\\d+)\\s+NPCs?\\s*\\/\\s*(\\d+)\\s+relationships?/;",
+          "_note": "THE PATTERN THE RESTATEMENT MIRRORS, and the reason ROSTER_STATED is that pattern with its surrounding text captured rather than a second spelling of it. V-EVIDENCE-ROSTER reads the receipt's finalGraph evidence with this regex and compares the two numbers with npcs.length and relationships.length; the restatement writes exactly those two numbers back. A bent pattern is the mutant §P6 requires and it cures nothing, measured. count 1. This member edits this file not at all."
+        },
+        {
+          "path": "src/domain/edit/recordInvariants.js",
+          "symbol": "const EVENTS_RE = /(\\d+)\\s+historical events?/;",
+          "_note": "THE SECOND PATTERN, for V-EVIDENCE-EVENTS's narrative evidence against history.historicalEvents. It has NO POPULATION in the corpus - the generated narrative evidence already agrees in 498 of 498 trials - which is why acceptance case A8 is a CONSTRUCTED positive control with its own bent-pattern counterforce, as judgment 245 item ii requires. count 1. This member edits this file not at all."
+        },
+        {
+          "path": "src/domain/edit/recordInvariantMeta.js",
+          "symbol": "'V-EVIDENCE-ROSTER': { kind: 'prose-count', paths: [JUDGMENT_EVIDENCE, 'npcs', 'relationships'], keys: ['generationCoherenceReceipt', 'npcs', 'relationships'] },",
+          "_note": "THE ROW THAT MAKES THE DEFECT. ladderFor takes a cross-key check's step-1 scope from the violation's own keys, and two of these three are HELD - which is how an unedited held fact moves through a rung. The deliverable must find this row unchanged, because the filter is a statement about it. This member edits this file not at all. count 1."
+        },
+        {
+          "path": "tests/domain/recordMerge.test.js",
+          "symbol": "      'enclosingGroup', 'guardMergedRecord', 'mergeConsequence', 'recomputeMirrors', 'recomputeReceipts',",
+          "_note": "THE FIVE-EXPORT PIN, and the reason restateProseCounts is module-local. A8 asserts Object.keys(mergeModule).sort() equals exactly this list; a sixth export reds it by name. The member keeps the helper unexported and this row is what makes that a contract rather than a preference. count 1."
+        }
+      ],
+      "acceptanceCases": [
+        {
+          "id": "A1",
+          "case": "THE NAMED-PERSON LAW. Over the 126 power-card trials (63 corpus rows crossed with the share edit and the seat edit) and the 498-trial eight-edit census, through the REAL rederive and the REAL merge: no rung moves a HELD key with the two declared exceptions removed, and no named person leaves or joins the merged roster. MEASURED AT COMPILE under the planted contract: held moved 0 of 126 and 0 of 498, gone 0 of 498, arrived 0 of 498. RED-FIRST at the tip: 5 of 126 and 66 of 498 move a held key, 26 trials LOSE a named person and 20 INVENT one - The High Priestess leaves village|germanic|hills|road|civilized|golden-master-v3 on a faction-share edit while the delta card reports cured true.",
+          "home": "tests/domain/mergeLadderHeldKeys.test.js",
+          "authorizedBy": "§7's `CREATE` row for `tests/domain/mergeLadderHeldKeys.test.js` (adds exactly 8 literal `it`s, one per sealed case A1 to A8)"
+        },
+        {
+          "id": "A2",
+          "case": "THE ESCALATION CENSUS BY CHANNEL. The layer-driven channel (E1 npc name, E2 npc role, E3 remove institution, E4 add institution, E5 faction share, E6 seat; 378 trials) carries 0 escalations and 0 live non-exempt violations. The world-fact channel (E7 terrain, E8 culture; 120 trials) escalates on 31 and 17 trials, every one EXHAUSTED, and leaves exactly V-DEFENSE-INST 31 and V-EVIDENCE-CONFLICT 22 live, with V-EVIDENCE-ROSTER at 0. That figure is asserted AT THIS LANDING and DECLARED as EM-B2b's seam, which EM-R7 section 6 states is dark until worldFacts has a reader. RED-FIRST at the tip: the layer channel escalates on 5 trials.",
+          "home": "tests/domain/mergeLadderHeldKeys.test.js",
+          "authorizedBy": "§7's `CREATE` row for `tests/domain/mergeLadderHeldKeys.test.js` (adds exactly 8 literal `it`s, one per sealed case A1 to A8)"
+        },
+        {
+          "id": "A3",
+          "case": "THE MIRROR. In every trial the receipt's two counted rows equal the merged record's own rosters (finalGraph 498 of 498 against npcs and relationships, narrative 498 of 498 against history.historicalEvents), and the evidence with EVERY digit run masked is byte-identical to the PURE TREE MERGE's in 498 of 498 - so nothing but those digits moves. A PLANTED POSITIVE CONTROL on one corpus row, whose graph evidence is off by five, is restated by an identity merge to the merged rosters. RED-FIRST at the tip: the planted control is not restated.",
+          "home": "tests/domain/mergeLadderHeldKeys.test.js",
+          "authorizedBy": "§7's `CREATE` row for `tests/domain/mergeLadderHeldKeys.test.js` (adds exactly 8 literal `it`s, one per sealed case A1 to A8)"
+        },
+        {
+          "id": "A4",
+          "case": "ONE TRIAL, TWO DECLARATIONS (judgment 245 item i). Both tables are read from the register: ATOMIC_COLLECTIONS includes generationCoherenceReceipt.judgments[].evidence and CLASS_EXCEPTIONS classes it MIRROR. ACT ONE, the merge: receipts.atomicTaken from mergeTree contains that path and the merged row before the post-pass is R1's verbatim, `7 NPCs / 12 relationships`, which is NOT the record's own `8 NPCs / 12 relationships`. ACT TWO, the post-pass: recomputeReceipts restates it to the MERGED rosters' own 8 and 12, and the evidence with every digit masked is still R1's text. RED-FIRST at the tip: CLASS_EXCEPTIONS for that path is undefined.",
+          "home": "tests/domain/mergeLadderHeldKeys.test.js",
+          "authorizedBy": "§7's `CREATE` row for `tests/domain/mergeLadderHeldKeys.test.js` (adds exactly 8 literal `it`s, one per sealed case A1 to A8)"
+        },
+        {
+          "id": "A5",
+          "case": "THE PROMISE: the repairs sub-path is never read and never written by the restatement. A DIRECT UNIT CALL on the corpus row that really carries a generation repair - recomputeReceipts restates a planted narrative digit, leaves generationCoherenceReceipt.repairs byte-identical, and still returns the economy fingerprint's own false. AND THE CENSUS, honestly scoped: repairs moves in NO trial where a rung did not fire (450 of 450 quiet trials byte-identical), and EVERY trial where it moves is one in which a rung took generationCoherenceReceipt whole from R1 (12 of 12) - the ladder's own TOP-LEVEL write, which no CLASS_EXCEPTIONS row reaches, present before this member and after it alike. RED-FIRST at the tip: the planted digit is not restated.",
+          "home": "tests/domain/mergeLadderHeldKeys.test.js",
+          "authorizedBy": "§7's `CREATE` row for `tests/domain/mergeLadderHeldKeys.test.js` (adds exactly 8 literal `it`s, one per sealed case A1 to A8)"
+        },
+        {
+          "id": "A6",
+          "case": "NO RUNG, NO CHANGE. In every trial where no rung fires, the merged record IS mergeTree plus recomputeMirrors plus recomputeReceipts of its own inputs, byte for byte - 450 of 450 - and the ladder's whole blast radius is the 48 config-channel trials A2 measures. RED-FIRST at the tip: 432 quiet trials, not 450, because the ladder still fires on the layer channel.",
+          "home": "tests/domain/mergeLadderHeldKeys.test.js",
+          "authorizedBy": "§7's `CREATE` row for `tests/domain/mergeLadderHeldKeys.test.js` (adds exactly 8 literal `it`s, one per sealed case A1 to A8)"
+        },
+        {
+          "id": "A7",
+          "case": "THE CHAIN. Chain determinism 252 of 252 and undo-then-re-edit 126 of 126 over the whole 63-row stride, unmoved. And over the eight NAMED ordered pairs on five NAMED rows - the four rows that carry every disagreement the tip produces for those pairs, plus one control row that never disagrees - the four pairs carrying the SHARE edit COMMUTE again (8 disagreements to 0), while the four carrying the SEAT edit still do not, on town|germanic|auto|random_trade|civilized|gm-seed-a alone (16 to 4). The second half is the positive control that the pairs are really being compared, and it is design section 22.2 item 6's history rather than the ladder's. RED-FIRST at the tip: the share pairs disagree on two rows.",
+          "home": "tests/domain/mergeLadderHeldKeys.test.js",
+          "authorizedBy": "§7's `CREATE` row for `tests/domain/mergeLadderHeldKeys.test.js` (adds exactly 8 literal `it`s, one per sealed case A1 to A8)"
+        },
+        {
+          "id": "A8",
+          "case": "THE CONSTRUCTED EVENTS CONTROL (judgment 245 item ii). V-EVIDENCE-EVENTS has no population in the corpus, so the arm builds one: a narrative evidence row planted three events off its own history, convicted by recordInvariants before the merge (1 violation), restated by an identity merge to the merged history's own count, convicted no longer (0), with no character outside the counted digits moved and the town outside the receipt byte-identical. ITS COUNTERFORCE, quoted in the receipt: the same restatement with EVENTS_STATED bent to /historic events?/ cures nothing. RED-FIRST at the tip: the count stays wrong and the violation stays live.",
+          "home": "tests/domain/mergeLadderHeldKeys.test.js",
+          "authorizedBy": "§7's `CREATE` row for `tests/domain/mergeLadderHeldKeys.test.js` (adds exactly 8 literal `it`s, one per sealed case A1 to A8)"
+        }
+      ],
+      "checks": [
+        [
+          "npx",
+          "eslint",
+          "src/domain/edit/mergeConsequence.js",
+          "src/domain/edit/recordRegister.js",
+          "tests/domain/mergeLadderHeldKeys.test.js",
+          "tests/domain/recordMerge.test.js"
+        ],
+        [
+          "npm",
+          "run",
+          "typecheck:ratchet"
+        ],
+        [
+          "npm",
+          "run",
+          "typecheck:domain:strict"
+        ],
+        [
+          "npx",
+          "vitest",
+          "run",
+          "--pool=threads",
+          "--maxWorkers=2",
+          "tests/domain/mergeLadderHeldKeys.test.js",
+          "tests/domain/recordMerge.test.js",
+          "tests/domain/recordInvariants.test.js",
+          "tests/domain/dmLayer.test.js",
+          "tests/domain/tracePartition.test.js"
+        ],
+        [
+          "npx",
+          "vitest",
+          "run",
+          "--pool=threads",
+          "--maxWorkers=2",
+          "tests/generators/rosterFinalUnderHeldRoster.test.js",
+          "tests/generators/nameHeldThroughAssembly.test.js"
+        ],
+        [
+          "npx",
+          "vitest",
+          "run",
+          "--pool=threads",
+          "--maxWorkers=2",
+          "tests/lint/recordRegisterTotality.walker.test.js",
+          "tests/lint/heldKeyWriterCensus.walker.test.js",
+          "tests/lint/tuningRegister.walker.test.js",
+          "tests/lint/proseNumerics.test.js",
+          "tests/lint/domainAnyCastBaseline.test.js",
+          "tests/lint/ruinFilterRoster.walker.test.js",
+          "tests/lint/entropyRootCensus.walker.test.js",
+          "tests/lint/seedLoopTotality.walker.test.js",
+          "tests/lint/negativeAssertionAnchor.walker.test.js",
+          "tests/lint/sourceCitationIntegrity.walker.test.js"
+        ],
+        [
+          "npx",
+          "vitest",
+          "run",
+          "--pool=threads",
+          "--maxWorkers=2",
+          "tests/copy/voiceMechanics.test.js"
+        ],
+        [
+          "npx",
+          "vitest",
+          "run",
+          "--pool=threads",
+          "--maxWorkers=2",
+          "tests/property/dmLayerGoldenIsolation.test.js",
+          "tests/property/generatorGoldenMaster.test.js",
+          "tests/property/dossierProseManifest.test.js"
+        ],
+        [
+          "node",
+          "scripts/implementation-packets.mjs",
+          "validate"
+        ]
+      ]
     }
   ]
 }
