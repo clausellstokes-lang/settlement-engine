@@ -26,6 +26,7 @@ import { describe, expect, it } from 'vitest';
 import { chronicleTimeline } from '../../src/domain/display/chronicleTimeline.js';
 import { GUARD_KINDS } from '../../src/domain/edit/guards.js';
 import { OP_STAGES, OP_TYPES, makeOp } from '../../src/domain/edit/operations.js';
+import { DECREE_AUTHORS, DECREE_STATUSES } from '../../src/domain/edit/registry.js';
 import {
   applyPartyDecree, authorableEventTypes, partyActionFor, partyDeedClause,
   scheduledEventClause,
@@ -45,10 +46,16 @@ import {
   DECREE_STANDING_POOLS,
 } from '../../src/domain/display/stateProse/decreeProsePools.js';
 
-/** Design §20.3's three statuses, which EM-C1 §6 lands as `DECREE_STATUSES`. */
-const STATUSES = ['applied', 'pending', 'withdrawn'];
-/** EM-C1 §6's three authors, which it lands as `DECREE_AUTHORS`. */
-const AUTHORS = ['dm', 'guard', 'surveyor'];
+/**
+ * Design §20.3's three statuses and EM-C1 §6's three authors, TAKEN FROM THE REGISTRY THAT
+ * LANDS THEM rather than spelled a second time here (U5). EM-E2 was built before EM-C1 was
+ * in the tree, so these two rows were transcriptions with the source named in a comment;
+ * the comment cannot red when the vocabulary moves and the import can. Every arm below that
+ * walks the cross, and the two that hold the pool keys to their source, now read the
+ * registry's own frozen words.
+ */
+const STATUSES = [...DECREE_STATUSES];
+const AUTHORS = [...DECREE_AUTHORS];
 
 /** Every authored sentence of this corpus, by the pool it lives in. */
 const TEXTS_BY_POOL = new Map(
@@ -306,10 +313,18 @@ describe('EM-E2 — the chronicle\'s voice for a decree', () => {
     expect(DECREE_PROSE_BLOCKS['DEC-FORM']).toBe(DECREE_FORM_POOLS);
     expect(DECREE_PROSE_BLOCKS['DEC-OVERRIDE']).toBe(DECREE_OVERRIDE_POOLS);
     expect(DECREE_PROSE_BLOCKS['DEC-FOLLOWS']['*']).toBe(DECREE_FOLLOWS_FROM_POOL);
-    // The four closed vocabularies the pool keys ARE, each named by its source.
-    expect(Object.keys(DECREE_HAND_POOLS).sort(), 'EM-C1 §6\'s authors').toEqual(AUTHORS);
-    expect(Object.keys(DECREE_STANDING_POOLS).sort(), 'design §20.3\'s statuses').toEqual(STATUSES);
+    // The four closed vocabularies the pool keys ARE, each held to the ROSTER THAT LANDS
+    // IT and not to a list written here: the leaf imports nothing by design, so this is
+    // where its keys are joined to their sources, exactly as EM-E6's two blocks are.
+    expect(Object.keys(DECREE_HAND_POOLS).sort(), 'EM-C1\'s own DECREE_AUTHORS')
+      .toEqual([...DECREE_AUTHORS].sort());
+    expect(Object.keys(DECREE_STANDING_POOLS).sort(), 'EM-C1\'s own DECREE_STATUSES (design §20.3)')
+      .toEqual([...DECREE_STATUSES].sort());
     expect(Object.keys(DECREE_OVERRIDE_POOLS).sort(), 'the landed GUARD_KINDS').toEqual([...GUARD_KINDS].sort());
+    // NON-VACUOUS: the two registry rosters really are the three-word vocabularies the
+    // corpus is keyed on, so neither arm above can be satisfied by an emptied export.
+    expect([DECREE_AUTHORS.length, DECREE_STATUSES.length], 'three authors and three statuses')
+      .toEqual([3, 3]);
   });
 });
 
@@ -541,5 +556,81 @@ describe('EM-E6 — events, predetermined or by the party', () => {
     expect(offenders, 'no seed renders a slot the caller never filled').toEqual([]);
     expect(SEEDS.some((seed) => scheduledEventClause(realm, { seed, cause: 'table', settlement: 'Kolstad' })
       .text.includes('Kolstad')), 'and the settlement sentence is reachable when it is filled').toBe(true);
+  });
+
+  it('U5 — the two clauses SPLICE into the line, and a clause this corpus does not hold is refused', () => {
+    const realm = authorableEventTypes().find((type) => AFFORDANCE_MANIFEST[type].family === 'Realm');
+    const kind = Object.keys(PARTY_IMPACT_KINDS).sort()[0];
+    const drawn = { seed: 'seed-a', cause: 'party', settlement: WORLD.name };
+    const scheduledEvent = scheduledEventClause(realm, drawn);
+    const partyDeed = partyDeedClause(kind, drawn);
+    expect([scheduledEvent, partyDeed].filter(Boolean).length, 'EM-E6 drew both clauses').toBe(2);
+
+    const entry = entryOf();
+    const line = { seed: 'seed-a', cause: 'party', scheduledEvent, partyDeed };
+    /** @param {object} over the options this line is rendered with instead */
+    const partsOf = (over) => decreeLineParts(entry, WORLD, { ...line, ...over }).map((p) => p.part);
+
+    // THE SPLICE. The two clauses join the line in the reader's own order — what the party
+    // already did, then what is set for a turn still to come — between how the decree
+    // stands and the warnings set aside, and the prose is still the parts and only them.
+    const parts = decreeLineParts(entry, WORLD, line);
+    expect(parts.map((p) => p.part)).toEqual(['hand', 'form', 'standing', 'party-deed', 'event']);
+    expect(parts.map((p) => p.blockId).slice(3)).toEqual(['DEC-PARTY', 'DEC-EVENT']);
+    expect([parts[3].text, parts[4].text]).toEqual([partyDeed.text, scheduledEvent.text]);
+    expect(everyPartIsAuthored(parts), 'every spliced clause is an authored member').toBe(true);
+    expect(decreeChronicleLine(entry, WORLD, line).prose).toBe(parts.map((p) => p.text).join(' '));
+
+    // ANCHORED: this very entry with no clause handed renders EM-E2's three parts, so every
+    // absence below is the splice refusing and never the line having gone quiet.
+    expect(partsOf({ scheduledEvent: undefined, partyDeed: undefined }))
+      .toEqual(['hand', 'form', 'standing']);
+
+    // ⛔ THE PLANT, which is why the splice is a corpus lookup and not a concat: a clause
+    // assembled BY HAND, carrying a true address and a true vid, is refused.
+    expect(partsOf({ partyDeed: { ...partyDeed, text: `${partyDeed.text} And more besides.` } }))
+      .toEqual(['hand', 'form', 'standing', 'event']);
+    // A true sentence of the corpus filed under the WRONG pool, block or vid is refused too.
+    expect(partsOf({ partyDeed: { ...partyDeed, poolKey: 'nowhere' } }))
+      .toEqual(['hand', 'form', 'standing', 'event']);
+    expect(partsOf({ scheduledEvent: { ...scheduledEvent, blockId: 'DEC-HAND' } }))
+      .toEqual(['hand', 'form', 'standing', 'party-deed']);
+    expect(partsOf({ scheduledEvent: { ...scheduledEvent, blockId: 'constructor' } }))
+      .toEqual(['hand', 'form', 'standing', 'party-deed']);
+    expect(partsOf({ scheduledEvent: { ...scheduledEvent, vid: -1 } }))
+      .toEqual(['hand', 'form', 'standing', 'party-deed']);
+    expect(partsOf({ partyDeed: null, scheduledEvent: 'a sentence' }))
+      .toEqual(['hand', 'form', 'standing']);
+
+    // ⛔ THE CAUSE STILL SELECTS. The deed block speaks for the party alone, so under the
+    // table's hand the same clause names an actor this line does not have.
+    expect(partsOf({ cause: 'table' })).toEqual(['hand', 'form', 'standing', 'event']);
+
+    // ⛔ AND THE FILL IS THIS LINE'S OWN TOWN. A clause filled with another settlement's
+    // name is refused; the very same variant filled with this line's name splices.
+    const SEEDS = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h'];
+    const slotSeed = SEEDS.find((seed) => scheduledEventClause(realm, { seed, cause: 'party', settlement: WORLD.name })
+      .text.includes(WORLD.name));
+    expect(slotSeed, 'some seed draws the one slotted event variant').toBeTruthy();
+    const elsewhere = scheduledEventClause(realm, { seed: slotSeed, cause: 'party', settlement: 'Harrowmere' });
+    expect(elsewhere.text.includes('Harrowmere'), 'and it really carries the other name').toBe(true);
+    expect(partsOf({ scheduledEvent: elsewhere })).toEqual(['hand', 'form', 'standing', 'party-deed']);
+    expect(partsOf({ scheduledEvent: scheduledEventClause(realm, { seed: slotSeed, cause: 'party', settlement: WORLD.name }) }))
+      .toEqual(['hand', 'form', 'standing', 'party-deed', 'event']);
+
+    // ⛔ EVERY POOL OF BOTH BLOCKS NOW REACHES THE LINE, which is what the splice was owed:
+    // a sentence EM-E6 can draw and the line refuses is a corpus nobody reads.
+    const refusedEvents = authorableEventTypes().filter((type) => !decreeLineParts(entry, WORLD, {
+      seed: 'seed-a', cause: 'table', settlement: WORLD.name,
+      scheduledEvent: scheduledEventClause(type, { seed: 'seed-a', cause: 'table', settlement: WORLD.name }),
+    }).some((p) => p.part === 'event'));
+    expect(refusedEvents, 'every authorable event type splices its clause').toEqual([]);
+    const refusedDeeds = Object.keys(PARTY_IMPACT_KINDS).filter((k) => !decreeLineParts(entry, WORLD, {
+      seed: 'seed-a', cause: 'party',
+      partyDeed: partyDeedClause(k, { seed: 'seed-a', settlement: WORLD.name }),
+    }).some((p) => p.part === 'party-deed'));
+    expect(refusedDeeds, 'every party impact kind splices its deed').toEqual([]);
+    expect([refusedEvents.length + authorableEventTypes().length, Object.keys(PARTY_IMPACT_KINDS).length],
+      'and both catalogues really were walked').toEqual([32, 12]);
   });
 });

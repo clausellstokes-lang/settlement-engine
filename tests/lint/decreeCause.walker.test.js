@@ -56,6 +56,7 @@ import {
   AFFORDANCE_MANIFEST, NON_AUTHORABLE_EVENTS, VERB_FAMILIES,
 } from '../../src/domain/events/affordanceManifest.js';
 import { PARTY_IMPACT_KINDS } from '../../src/domain/worldPulse/partyImpactKinds.js';
+import { DECREE_AUTHORS, DECREE_STATUSES } from '../../src/domain/edit/registry.js';
 import {
   DECREE_FORMS, decreeChronicleLine, decreeLineParts,
 } from '../../src/domain/display/stateProse/decreeProse.js';
@@ -69,9 +70,14 @@ const POOLS_REL = 'src/domain/display/stateProse/decreeProsePools.js';
 /** EM-E6's reader, held to the same free-text and no-second-catalogue laws. */
 const CATALOGUE_REL = 'src/domain/edit/eventCatalogue.js';
 
-/** Design §20.3's statuses and EM-C1 §6's authors, the two vocabularies the pools key on. */
-const STATUSES = ['applied', 'pending', 'withdrawn'];
-const AUTHORS = ['dm', 'guard', 'surveyor'];
+/**
+ * Design §20.3's statuses and EM-C1 §6's authors, the two vocabularies the pools key on,
+ * TAKEN FROM THE REGISTRY THAT LANDS THEM (U5). EM-E2 was built before EM-C1 was in the
+ * tree, so these two rows were transcriptions; a transcription cannot red on the day the
+ * vocabulary moves, and the import can.
+ */
+const STATUSES = [...DECREE_STATUSES];
+const AUTHORS = [...DECREE_AUTHORS];
 
 /**
  * Every string literal a source really holds — template quasis included, interpolation
@@ -397,11 +403,12 @@ describe('the decree cause walker — no line is free text', () => {
       }
     }
     // ⛔ EM-E6'S TWO BLOCKS ARE DRAWN BY THEIR OWN READER, NOT EXEMPTED FROM THE LAW.
-    // `decreeLineParts` belongs to EM-E2's leaf and does not yet splice these clauses in
-    // (that is one line on that leaf's own branch), so the reachability half below would
-    // be satisfiable by adding a slot to every new sentence — which is how a corpus goes
-    // unread with a green suite. Instead the arm drives `eventCatalogue.js`, which is the
-    // module that actually draws them, over the WHOLE of both catalogues.
+    // `eventCatalogue.js` is the module that DRAWS them — `decreeLineParts` splices the
+    // drawn clause and re-proves it against the corpus (U5), so a draw that never happened
+    // is a clause that never reaches a line. Driving the reader here keeps the reachability
+    // half below from being satisfiable by adding a slot to every new sentence, which is
+    // how a corpus goes unread with a green suite. The splice's own arm — every authorable
+    // type and every impact kind reaching a rendered line — lives in the battery.
     for (const type of authorableEventTypes()) {
       for (const cause of DECREE_LINE_CAUSES) {
         for (let seed = 0; seed < 40; seed += 1) {

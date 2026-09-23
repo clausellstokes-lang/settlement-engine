@@ -54,6 +54,23 @@
  * Everything else the options bag carries is a fill or a stamp the caller owns, never a
  * sentence, and an absent bag renders the shortest true line rather than nothing.
  *
+ * ── AND EM-E6'S TWO CLAUSES, SPLICED RATHER THAN DRAWN HERE (U5) ────────────────────
+ * The event a decree schedules and the deed the party did are EM-E6's, drawn by
+ * `src/domain/edit/eventCatalogue.js` out of this same corpus's `DEC-EVENT` and
+ * `DEC-PARTY` blocks, in this leaf's own part shape. They are drawn THERE because the
+ * catalogue read is a catalogue fact — a type's family, a kind's spec — and this leaf
+ * would have to import `partyImpact.js`'s whole apply pipeline to reach it, which is the
+ * same closure measurement the paragraph below makes about `OP_STAGES`. So the caller
+ * hands the clause it already drew and this leaf SPLICES it, exactly as it is handed the
+ * guards and the registry it cannot recover from an entry alone.
+ *
+ * ⛔ A HANDED CLAUSE IS ADMITTED ONLY IF THIS CORPUS REALLY HOLDS IT. A splice is the one
+ * door through which failure 3 above could walk in wearing a part's shape: a sentence
+ * nobody authored, addressed to a pool that exists. So the clause is looked up by its own
+ * `blockId`, `poolKey` and `vid`, and its text must be what THIS line's slots render that
+ * variant to under THIS line's cause. A hand-written clause with a true address is refused,
+ * and so is one filled with another town's name or spoken under the other hand.
+ *
  * ⛔ WHAT THIS LEAF DOES NOT IMPORT, AND WHY THAT IS A MEASUREMENT. `GUARD_KINDS` comes
  * from `src/domain/edit/guards.js`, whose whole static closure is itself plus
  * `deterministicSort.js`. `OP_STAGES` would come from `src/domain/edit/operations.js`,
@@ -72,12 +89,13 @@
 import { compareCodepoint } from '../../deterministicSort.js';
 import { GUARD_KINDS } from '../../edit/guards.js';
 import {
-  DECREE_FOLLOWS_FROM_POOL, DECREE_FORM_POOLS, DECREE_HAND_POOLS, DECREE_LINE_CAUSES,
-  DECREE_OVERRIDE_POOLS, DECREE_STANDING_POOLS,
+  DECREE_EVENT_POOLS, DECREE_FOLLOWS_FROM_POOL, DECREE_FORM_POOLS, DECREE_HAND_POOLS,
+  DECREE_LINE_CAUSES, DECREE_OVERRIDE_POOLS, DECREE_PARTY_DEED_POOLS, DECREE_STANDING_POOLS,
 } from './decreeProsePools.js';
 import { drawVariant, eligibleVariants, fillSlots, speakTierNoun, stableVid } from './stateProseKernel.js';
 
 /** @typedef {import('./decreeProsePools.js').DecreeProseVariant} DecreeProseVariant */
+/** @typedef {import('./decreeProsePools.js').DecreeProseBlock} DecreeProseBlock */
 
 /**
  * The off-stage forms of design §13, which are also this leaf's FORM pool keys. `home`
@@ -94,10 +112,17 @@ const PHANTOM = 'phantom';
 /** The cause the tick hook records for a decree nobody else moved (ARCH's `cause`). */
 const CAUSE_TABLE = 'table';
 
-/** The five parts of a line, in the order a reader meets them. */
+/**
+ * The seven parts of a line, in the order a reader meets them: who moved it, where it
+ * lands, how it stands, what the party did, what is set for the coming turn, the warnings
+ * set aside, and the decree it stands on. The two middle names are EM-E6's own, spelled
+ * the way its reader spells them so a spliced clause keeps the name it was drawn under.
+ */
 const PART_HAND = 'hand';
 const PART_FORM = 'form';
 const PART_STANDING = 'standing';
+const PART_PARTY = 'party-deed';
+const PART_EVENT = 'event';
 const PART_OVERRIDE = 'override';
 const PART_FOLLOWS = 'follows-from';
 
@@ -105,8 +130,21 @@ const PART_FOLLOWS = 'follows-from';
 const BLOCK_HAND = 'DEC-HAND';
 const BLOCK_FORM = 'DEC-FORM';
 const BLOCK_STANDING = 'DEC-STANDING';
+const BLOCK_EVENT = 'DEC-EVENT';
+const BLOCK_PARTY = 'DEC-PARTY';
 const BLOCK_OVERRIDE = 'DEC-OVERRIDE';
 const BLOCK_FOLLOWS = 'DEC-FOLLOWS';
+
+/**
+ * THE TWO BLOCKS A CLAUSE MAY BE SPLICED FROM, and the part name each one carries. A Map
+ * rather than an object because the block id arrives from the caller and a lookup by a
+ * word the caller supplied must not be able to reach a prototype member.
+ * @type {Map<string, { part: string, block: DecreeProseBlock }>}
+ */
+const SPLICEABLE_BLOCKS = new Map([
+  [BLOCK_PARTY, { part: PART_PARTY, block: DECREE_PARTY_DEED_POOLS }],
+  [BLOCK_EVENT, { part: PART_EVENT, block: DECREE_EVENT_POOLS }],
+]);
 
 /** The reserved pool key of the follows-from block, which carries one unlabelled pool. */
 const SOLE = '*';
@@ -157,6 +195,9 @@ const isPlainObject = (value) => typeof value === 'object' && value !== null && 
  * @property {string|null} [tierNoun] the settlement's own noun, already resolved by the caller
  * @property {ReadonlyArray<{id?: unknown, kind?: unknown}>} [overrodeGuards] the guards the DM was shown
  * @property {ReadonlyArray<unknown>} [registry] the decrees this one may follow from
+ * @property {unknown} [partyDeed] EM-E6's `partyDeedClause`, for what the party did
+ * @property {unknown} [scheduledEvent] EM-E6's `scheduledEventClause`, for the event this
+ *   decree sets for a coming turn
  */
 
 /**
@@ -247,6 +288,37 @@ function followsFromRefs(followsFrom, registry) {
 }
 
 /**
+ * ONE CLAUSE EM-E6'S READER DREW, RE-PROVED AGAINST THE CORPUS BEFORE IT JOINS THE LINE.
+ * The clause names the pool it came out of, so this resolves that address and re-renders
+ * the variant it names under THIS line's slots and THIS line's cause: a text that is not
+ * what the corpus says there is not a clause of this corpus, whoever assembled it.
+ *
+ * Returns `null` — the same silence the rest of this leaf keeps — for an absent clause, a
+ * block outside EM-E6's two, a pool the block does not hold, a `vid` no variant carries, a
+ * variant that cannot speak for this line's cause, and a text the fill does not produce.
+ *
+ * @param {unknown} clause @param {string} cause @param {Record<string, unknown>} slots
+ * @returns {DecreeLinePart|null}
+ */
+function splicedPart(clause, cause, slots) {
+  if (!isPlainObject(clause)) return null;
+  const blockId = isText(clause.blockId) ? clause.blockId : '';
+  const home = SPLICEABLE_BLOCKS.get(blockId);
+  if (!home) return null;
+  const poolKey = isText(clause.poolKey) ? clause.poolKey : '';
+  const pool = home.block[poolKey];
+  if (!Array.isArray(pool)) return null;
+  const vid = typeof clause.vid === 'number' ? clause.vid : null;
+  const variant = vid === null ? undefined : pool.find((row) => stableVid(row) === vid);
+  if (!variant || !variant.causes.includes(cause)) return null;
+  const text = fillSlots(variant.text, slots);
+  if (text === null || !isText(clause.text) || text !== clause.text) return null;
+  return Object.freeze({
+    part: home.part, blockId, poolKey, vid, angle: variant.angle || '', text,
+  });
+}
+
+/**
  * EVERY CLAUSE OF ONE LINE, in the order a reader meets them, or an empty list when the
  * entry has nothing sayable. Exported because the battery and the cause walker both need
  * to see WHICH pool each sentence came from: a line proved only as a joined string cannot
@@ -291,6 +363,13 @@ export function decreeLineParts(entry, world, options = {}) {
   const parts = [hand];
   if (form) parts.push(form);
   parts.push(standing);
+
+  // EM-E6'S TWO, in the reader's own order: what the party already did, then what is set
+  // for a turn still to come. Each is admitted only if the corpus holds it (U5).
+  for (const clause of [options.partyDeed, options.scheduledEvent]) {
+    const spliced = splicedPart(clause, cause, slots);
+    if (spliced) parts.push(spliced);
+  }
 
   for (const kind of overriddenKinds(entry.overrode, options.overrodeGuards)) {
     const clause = drawPart(DECREE_OVERRIDE_POOLS[kind], PART_OVERRIDE, BLOCK_OVERRIDE, kind, cause, seed, audience, slots);
