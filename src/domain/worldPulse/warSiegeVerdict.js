@@ -75,6 +75,23 @@ export function siegeFallOddsWordFor(pFall) {
   if (p < PFALL_FOREGONE) return SIEGE_FALL_ODDS_WORDS[2];
   return SIEGE_FALL_ODDS_WORDS[3];
 }
+
+/**
+ * THE ROLL'S OWN OUTCOME VOCABULARY, band to `falls` (EM-E4; design §19 rulings 3 and 4,
+ * the chair's judgment 265 (e)). The four bands `resolveSiegeVerdict` writes AFTER the
+ * stochastic roll, each mapped to the direction it already implies at the band derivation
+ * below: a `_success` band is a town that fell, a `_fail` band one that held.
+ *
+ * ⚠ IT IS THE ROLL'S FOUR AND NOT THE FIELD'S SIX. `hold` and `withdrawal` are written by
+ * the deterministic arms (the feasibility gate's harassment downgrade and the hard-ceiling
+ * lift), which take no roll at all, so a directive naming either would pin a draw that
+ * never happens. `SIEGE_FALL_ODDS_WORDS` above stays the world's honest READING of `pFall`
+ * and is not this: ruling 4 is explicit that a verdict pinned without its band would leave
+ * `pFall`, the odds words and the reasons describing a draw that never happened, which is
+ * why the pin carries the band and the band carries `falls`.
+ * @type {Readonly<Record<string, boolean>>}
+ */
+export const SIEGE_VERDICT_BANDS = Object.freeze({ costly_success: true, decisive_fail: false, decisive_success: true, narrow_fail: false });
 // Defender-resolve (P4, flag-gated) — the WILL track. A resolute defender shifts the
 // siege log-odds toward holding; a broken one toward falling. WILL_BIAS_STRENGTH is the
 // max shift (comparable to the hold bias). At/below the capitulate floor the will has
