@@ -3,7 +3,7 @@
 **Preamble:** docs/implementation/preambles/EM-PREAMBLE.md (SHA-256: **TO BE STAMPED BY THE CHAIR, MEASURED AT THE PLACEMENT TIP.** ⛔ **THIS PACKET NAMES NO HASH TO STAMP** — §P3.5: the preamble's SHA-256 is measured at the placement tip with `shasum -a 256`, never carried in a document. ⭐ As executed HISTORY with its as-of mark, and for no other use: `125c693214235a81bf4f2b38506b621859a35e0325ff2ea58d335b4e0681a99d` at `6a0178b7b`, this PRE-PROOF's read tip — that is the LANDED **SIXTH** amendment, measured with `shasum -a 256` by the pre-proof seat. ⛔ The compile's own as-of mark — the FIFTH amendment's digest at `91cc9ef5a` — is NOT spelled here: §P3.6 and this packet's own count prover allow exactly ONE 64-hex digest in a body, and it must be the live one. The compile's digest is recorded in `EM-R3.preproof.report.md` §0.)
 - **The law this packet is written to:** ⭐ **THE SIXTH AMENDMENT, LANDED** (judgment 144; it landed as train EM-T13's first commit `7bc14e003`, with cite-by-symbol). ⭐ **MEASURED at this pre-proof's read tip `6a0178b7b`**: `docs/implementation/preambles/EM-PREAMBLE.md` hashes `125c693214235a81bf4f2b38506b621859a35e0325ff2ea58d335b4e0681a99d`, so the sixth IS the tree's live preamble and every figure below is measured against a tree that already carries it. The compile measured the FIFTH at `91cc9ef5a` and every one of its figures was RE-EXECUTED here. Every citation in this body is `path :: symbol` (§P2.22); no `path:NNN` address is spelled anywhere, because a READY packet body is a live document in `tests/lint/sourceCitationIntegrity.walker.test.js`'s only-shrinks arm.
 
-- **Status:** `READY`
+- **Status:** `LANDED`
   — Compiled 2026-09-22 by an Opus COMPILE seat (session cce01f87) at read tip `91cc9ef5a`, train
   EM-T12's landed tip, under `briefs/launch/COMPILE-EM-R3-cce01f87.md`.
   ⭐ **PRE-PROOVED IN FULL 2026-09-23 by an Opus PRE-PROOF seat (session cce01f87) at read tip
@@ -16,6 +16,7 @@
   ⚠ The status value stands ALONE on its line because `parsePacketHeader`
   (`scripts/implementation-packets.mjs :: parsePacketHeader`) anchors the status row at
   end-of-line and takes `status` only when exactly one row matches (§P9(c)).
+- **Landed at:** `98e7daadf17118a2088b791dfe00c870786bd06e` — the power roster held through reconciliation (version 2): reconcilePowerStructure consults the pin at one module-private site and returns the held roster without replaying (57/57 the DM's seat, shares and legitimacy); the freshness assertion's optional options bag; the trace consequence discharged through the partition (182/211); built at 98e7daadf on train EM-T16 stage 2a
 - **Packet version:** 2
   > **What version 2 changed and why.** Version 1 was compiled at `91cc9ef5a`, FOUR trains ago.
   > Version 2 changes no mechanism, no contract clause, no acceptance case and no scope figure.
