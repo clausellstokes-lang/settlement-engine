@@ -52,6 +52,10 @@ import {
   STRESS_DESCS,
   STRESS_NOTES,
 } from '../data/narrativeData.js';
+// The runner's ONE pin primitive (EM-B2a2's landed export). This module consults a pin
+// through it and nowhere else: no local clone (EM-R1 clones the bag on entry at the runner)
+// and no second spelling of the own-property rule.
+import { chooseOrPin } from './pipeline.js';
 
 // Re-export: STRESS_DESCS' public import path stays THIS module (tests + UI import it
 // from here); the table itself now lives in the data leaf.
@@ -1053,17 +1057,32 @@ function inCoherenceSubstream(rng, label, operation) {
   }
 }
 
-export const generateCoherence = (settlement, coherenceRng = null) => {
+export const generateCoherence = (settlement, coherenceRng = null, pins = null) => {
   if (!settlement) return settlement;
 
   // Each output owns a stable draw budget. Conditional work in NPC enrichment
   // (for example a stress overlay) cannot move the prominent-relationship
   // selection, and narrative-only work cannot rewrite canonical NPC state.
-  const mergedNpcs = inCoherenceSubstream(
+  //
+  // ── THE ROSTER IS FINAL UNDER A HELD KEY (design §22 ruling 1, EM-R2). The key is the
+  // RECORD PATH the producer writes, per `runPipeline`'s `@typedef Pins` — never a step name
+  // and never an entity id. With `npcs` held, `enrichNpcCoherence` and its four producers
+  // (buildPoliticalNarrative, mergeNPCLists, disperseNamedRoster, enrichNPCsWithStructure) do
+  // not run and the `npc-enrichment` child stream is never forked.
+  //
+  // THE SKIP IS LAWFUL BECAUSE THE STREAM IS NAMED AND FORKED. `prng.js :: fork` derives a
+  // child from (seed, label) alone, so a child that is never created cannot move a sibling
+  // (§22.1 correction 1 admits a skip ONLY inside a writer's own named child stream; a writer
+  // on a SHARED ambient stream must consume and discard instead). `relinkFactionMembers`
+  // below is a MIRROR, not a producer, and is never gated (§22.1 correction 2).
+  //
+  // `pins` absent or null means today's behaviour EXACTLY: every existing caller keeps its
+  // arity and `chooseOrPin` calls the thunk.
+  const mergedNpcs = chooseOrPin(pins, 'npcs', () => inCoherenceSubstream(
     coherenceRng,
     'npc-enrichment',
     () => enrichNpcCoherence(settlement),
-  );
+  ));
 
   const history = settlement.history || {};
 

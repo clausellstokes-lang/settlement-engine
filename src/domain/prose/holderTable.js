@@ -166,7 +166,7 @@ export const HOLDER_SOURCES = Object.freeze({
   incomeSources: Object.freeze({ kind: 'treasury', cite: 'src/generators/economy/economicState.js:873', read: true }),
   viable: Object.freeze({ kind: 'treasury', cite: 'src/generators/economy/viability.js:565', read: true }),
   criticalIssueCount: Object.freeze({ kind: 'treasury', cite: 'src/generators/economy/viability.js:585', read: true }),
-  economicViability: Object.freeze({ kind: 'treasury', cite: 'src/generators/steps/assembleSettlement.js:100', read: true }),
+  economicViability: Object.freeze({ kind: 'treasury', cite: 'src/generators/steps/assembleSettlement.js:110', read: true }),
 
   // ── the market: what the town makes, sends and takes in ──
   primaryExports: Object.freeze({ kind: 'market', cite: 'src/generators/economy/economicState.js:812', read: true }),
@@ -234,9 +234,9 @@ export const HOLDER_SOURCES = Object.freeze({
   monsterThreat: Object.freeze({ kind: 'road', cite: 'src/generators/steps/resolveConfig.js:201', read: true }),
 
   // ── the office itself: the record's own audit of the record ──
-  structuralViolations: Object.freeze({ kind: 'office', cite: 'src/generators/steps/assembleSettlement.js:119', read: true }),
-  structuralSuggestions: Object.freeze({ kind: 'office', cite: 'src/generators/steps/assembleSettlement.js:120', read: true }),
-  prominentRelationship: Object.freeze({ kind: 'office', cite: 'src/generators/narrativeGenerator.js:1113', read: true }),
+  structuralViolations: Object.freeze({ kind: 'office', cite: 'src/generators/steps/assembleSettlement.js:129', read: true }),
+  structuralSuggestions: Object.freeze({ kind: 'office', cite: 'src/generators/steps/assembleSettlement.js:130', read: true }),
+  prominentRelationship: Object.freeze({ kind: 'office', cite: 'src/generators/narrativeGenerator.js:1132', read: true }),
 });
 
 /**

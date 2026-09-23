@@ -152,6 +152,7 @@ const ASSERT_EXEMPT = Object.freeze([
  */
 const DISCOVERY_EXEMPT = Object.freeze([
   { symbol: 'registerStep', reason: 'the runner\'s registration door; it declares the step and writes nothing.' },
+  { symbol: 'chooseOrPin', reason: 'the runner\'s pin primitive; it returns an own-present pin or calls the thunk and writes no held key itself.' },
   { symbol: 'renderStressSummary', reason: 're-renders a stress summary string; touches `stress`, a READING, never a held key.' },
   { symbol: 'generatePressureSentence', reason: 'presentation prose for the settlement header; writes no held key.' },
   { symbol: 'generateArrivalScene', reason: 'presentation prose for the arrival scene; writes no held key.' },

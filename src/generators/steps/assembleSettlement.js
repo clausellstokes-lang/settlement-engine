@@ -8,7 +8,7 @@
  * Final assembly step for the settlement generation pipeline.
  */
 
-import { registerStep } from '../pipeline.js';
+import { chooseOrPin, registerStep } from '../pipeline.js';
 import { generateSettlementName } from '../npcGenerator.js';
 // F8: re-render stress summaries with the real settlement name. resolveStress
 // (step 3) rolled them 16 steps ago with an empty name and stashed the
@@ -76,6 +76,12 @@ function inAssemblySubstream(stepRng, label, operation) {
   }
 }
 
+// The sentinel the appender's gate consults `chooseOrPin` with (EM-B2a3's landed idiom).
+// `chooseOrPin` hands back the HELD ARRAY while `ensureFactionStructuralNpcs` returns a
+// SETTLEMENT, so the gate cannot read the pinned value itself; a `null` or `undefined`
+// sentinel could collide with a bag value, and a unique Symbol cannot.
+const UNPINNED = Symbol('assembleSettlement:unpinned');
+
 registerStep('assembleSettlement', {
   // structuralValidationPass provides ctx.structural — the coherence receipt
   // for the FINAL roster (Wave 4b moved it out of assembleInstitutions).
@@ -92,6 +98,10 @@ registerStep('assembleSettlement', {
   mutates: ['powerStructure', 'stress'],
   phase: 'assembly',
 }, (ctx, rng) => {
+  // The runner hands the pins through the context under its reserved key; absent pins mean
+  // today's behaviour exactly, and the partial-pin refusal already fired in the runner. The
+  // same spelling `generatePopulation.js` and `assembleInstitutions.js` already carry.
+  const pins = ctx.__pins || null;
   const {
     tier, population, institutions, effectiveConfig,
     neighbourProfile, rawNeighbour,
@@ -260,7 +270,7 @@ registerStep('assembleSettlement', {
   const coherenceUpdates = inAssemblySubstream(
     rng,
     'canonical-coherence',
-    coherenceRng => generateCoherence(settlement, coherenceRng),
+    coherenceRng => generateCoherence(settlement, coherenceRng, pins),
   );
   Object.assign(settlement, coherenceUpdates);
 
@@ -269,11 +279,20 @@ registerStep('assembleSettlement', {
   // implied structural NPCs exist with the right importance tier and
   // institution/faction linkage. Idempotent — won't duplicate NPCs
   // the population step already generated for the same role + faction.
-  const withStructural = ensureFactionStructuralNpcs(
-    settlement,
-    ctx.generationContext,
-  );
-  Object.assign(settlement, withStructural);
+  //
+  // ── GATED AS A PRODUCER (EM-R2). It APPENDS to `npcs`, so under a held roster it is a
+  // producer writing into a record the edit calls final: a DM op that removes a seat-holder
+  // is exactly the uncovered case, and an ungated appender would mint the seat back. The
+  // gate is the same key and the same primitive the coherence seam uses, so the two cannot
+  // disagree about what "held" means. It takes NO draw at any tier, so skipping it consumes
+  // nothing and moves no stream.
+  if (chooseOrPin(pins, 'npcs', () => UNPINNED) === UNPINNED) {
+    const withStructural = ensureFactionStructuralNpcs(
+      settlement,
+      ctx.generationContext,
+    );
+    Object.assign(settlement, withStructural);
+  }
 
   // A durable, seed-stable receipt over the FINAL player-facing dossier.
   // Repairs happen in their owning passes; this boundary proves that the
