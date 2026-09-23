@@ -75,6 +75,54 @@ export const EMBEDDED_FACES = Object.freeze({
 export const FONT_URL_PREFIX = '/fonts/';
 
 /**
+ * ⭐ THE DOSSIER SETS TWO FAMILIES, AND WHICH ONE A VALUE LANDS IN IS A FACT ABOUT THE
+ * DOCUMENT RATHER THAN ABOUT THE FIELD (EM-D2c). A reader that asked one family for every
+ * text answered the wrong question for half of them: a character Lora carries and Nunito
+ * does not prints WRONG in a Nunito label while the field said nothing, and a character
+ * only Nunito carries was reported as unprintable although the label it lands in draws it.
+ *
+ * MEASURED 2026-09-23 from src/pdf/theme.js's own `type` scale, and restated here for the
+ * two reasons EMBEDDED_FACES is restated above -- a name is cheap, an edge is not:
+ *   Lora    cover_title · page_head · section · body · body_em · prose · italic ·
+ *           numeric_xl · numeric, and the page's own default (`sheet.page`)
+ *   Nunito  cover_meta · sub · sub_alt · label · label_em · label_plain · caption · pill
+ * `tests/components/freeFieldGlyphNotice.test.jsx` re-derives both lists FROM THAT FILE'S
+ * BYTES, so the restatement cannot drift unnoticed any more than the eight file names can.
+ * It is that file rather than the battery beside this module because the basename of a
+ * `tests/pdf/fontCoverage*.test.js` would enrol into the mutation-coverage spine and owe a
+ * register row -- the trap `tests/pdf/fontCmap.test.js`'s own header already documents.
+ *
+ * ⛔ `both` IS NOT A THIRD FACE, IT IS THE HONEST ANSWER FOR A VALUE DRAWN TWICE. A NAME
+ * is set as a Lora card title AND in a Nunito caption, pill or running header, so the only
+ * report that cannot promise a character will print when it will not is the UNION of what
+ * either family lacks -- which `coverageAcross` computes as the INTERSECTION of the covered
+ * sets. It is the widest role, so it is also the answer an UNNAMED role takes below.
+ * @type {Readonly<Record<string, readonly string[]>>}
+ */
+export const ROLE_FAMILIES = Object.freeze({
+  body: Object.freeze(['Lora']),
+  label: Object.freeze(['Nunito']),
+  both: Object.freeze(['Lora', 'Nunito']),
+});
+
+/**
+ * The families one role is drawn in. TOTAL: a role this module does not name -- a caller's
+ * typo, or a field whose draw sites nobody has measured yet -- takes the WIDEST list
+ * rather than a narrow one, because an over-report is a visible, fixable complaint and an
+ * under-report is the silent wrong letter this whole module exists to prevent. That is not
+ * a retreat from `coverageOf`'s fail-open rule: fail-open answers "the faces have not
+ * loaded", and this answers "which faces", which is a different question.
+ *
+ * `Object.hasOwn`, never a bracket read: 'constructor' is an unnamed role like any other.
+ * @param {unknown} role
+ * @returns {readonly string[]} a frozen member of ROLE_FAMILIES, never a copy
+ */
+export function familiesForRole(role) {
+  const word = typeof role === 'string' ? role : '';
+  return Object.hasOwn(ROLE_FAMILIES, word) ? ROLE_FAMILIES[word] : ROLE_FAMILIES.both;
+}
+
+/**
  * ⛔ U+FFFF IS NOT A COVERED CHARACTER, AND THIS IS THE ONE PLACE THIS READER AND
  * fontkit DISAGREE. A format-4 subtable is REQUIRED to end with a segment whose
  * startCode and endCode are both 0xFFFF; in all eight shipped faces that segment
@@ -295,6 +343,41 @@ export async function fetchFace(file) {
 }
 
 /**
+ * ONE WALK, ASKED A DIFFERENT QUESTION BY EACH ANSWER BELOW. The code-point rule lives
+ * here once: a string iterator yields whole code points, so an astral character arrives
+ * once rather than as two lone surrogates neither of which any font claims, and the UTF-16
+ * index is advanced by the character's own length so a caller can slice the original.
+ *
+ * @param {string} text the DM's own text, returned to nobody and altered in no way
+ * @param {(codePoint: number) => boolean} drawable
+ * @returns {UncoveredCharacter[]} in the text's OWN order, one entry per occurrence
+ */
+function uncoveredIn(text, drawable) {
+  const source = typeof text === 'string' ? text : '';
+  /** @type {UncoveredCharacter[]} */
+  const uncovered = [];
+  let index = 0;
+  for (const char of source) {
+    const codePoint = char.codePointAt(0) ?? 0;
+    if (!drawable(codePoint)) uncovered.push({ char, codePoint, index });
+    index += char.length;
+  }
+  return uncovered;
+}
+
+/**
+ * Only the families that were really measured. A family that is absent, malformed or
+ * empty contributes NOTHING rather than everything, which is `coverageOf`'s own fail-open
+ * rule applied one layer up.
+ * @param {ReadonlyArray<FamilyCoverage|null|undefined>|null|undefined} families
+ * @returns {FamilyCoverage[]}
+ */
+function measuredOnly(families) {
+  return (Array.isArray(families) ? families : [])
+    .filter((family) => family && family.covered instanceof Set && family.covered.size > 0);
+}
+
+/**
  * THE ANSWER A FIELD ASKS: which characters of this text will not print.
  *
  * Pure, deterministic and total. The result is in the text's OWN order, one entry per
@@ -313,20 +396,40 @@ export async function fetchFace(file) {
  * @returns {{ family: string|null, uncovered: UncoveredCharacter[] }}
  */
 export function coverageOf(text, family) {
-  const source = typeof text === 'string' ? text : '';
   const covered = family && family.covered instanceof Set ? family.covered : null;
   const name = family && typeof family.family === 'string' ? family.family : null;
   if (covered === null || covered.size === 0) return { family: name, uncovered: [] };
+  return { family: name, uncovered: uncoveredIn(text, (codePoint) => covered.has(codePoint)) };
+}
 
-  /** @type {UncoveredCharacter[]} */
-  const uncovered = [];
-  let index = 0;
-  // A string iterator yields whole code points, so an astral character arrives once
-  // rather than as two lone surrogates neither of which any font claims.
-  for (const char of source) {
-    const codePoint = char.codePointAt(0) ?? 0;
-    if (!covered.has(codePoint)) uncovered.push({ char, codePoint, index });
-    index += char.length;
-  }
-  return { family: name, uncovered };
+/**
+ * THE ANSWER A FIELD DRAWN IN MORE THAN ONE FAMILY ASKS: which characters of this text
+ * will not print IN AT LEAST ONE of the families it lands in (EM-D2c).
+ *
+ * ⛔ THE UNION OF THE FAILURES IS THE INTERSECTION OF THE COVERAGES, and that direction is
+ * the whole point. A name is set as a Lora card title and again in a Nunito running header;
+ * a character only one of them carries prints correctly in one place and WRONG in the
+ * other, and a report that called it fine because SOME face could draw it would be exactly
+ * the silent wrong letter. So a character is reported unless EVERY measured family draws it.
+ *
+ * Pure, deterministic, total, and FAILS OPEN for the same reason `coverageOf` does: with no
+ * family measured at all it reports nothing rather than everything, because slandering a
+ * DM's perfectly good writing while a font request is in flight teaches every user to
+ * ignore the note. Handed ONE family it is `coverageOf`'s own answer, by construction.
+ *
+ * @param {string} text the DM's own text, returned to nobody and altered in no way
+ * @param {ReadonlyArray<FamilyCoverage|null|undefined>|null|undefined} families
+ * @returns {{ families: string[], uncovered: UncoveredCharacter[] }} the families that
+ *   really answered, so a caller can tell a measured silence from an unmeasured one
+ */
+export function coverageAcross(text, families) {
+  const measured = measuredOnly(families);
+  if (measured.length === 0) return { families: [], uncovered: [] };
+  return {
+    families: measured.map((family) => family.family),
+    uncovered: uncoveredIn(
+      text,
+      (codePoint) => measured.every((family) => family.covered.has(codePoint)),
+    ),
+  };
 }

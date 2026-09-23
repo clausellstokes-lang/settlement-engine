@@ -68,8 +68,16 @@
  *
  * THE ANSWER IS KEPT HERE BECAUSE THE LEAF REFUSES TO KEEP IT: `loadFamilyCoverage`
  * caches nothing and says why -- a cache is a lifecycle, and the caller that decides WHEN
- * to read is the one that decides how long to hold. The dossier's free text is set in
- * Lora, so Lora is the family read, and it is read ONCE per page load.
+ * to read is the one that decides how long to hold. BOTH registered families are read, and
+ * read ONCE per page load.
+ *
+ * ⭐ AND EACH FIELD IS MEASURED AGAINST THE FACE IT IS REALLY DRAWN IN (EM-D2c, U84). The
+ * first wiring asked Lora for every field, which was the wrong question for half of them:
+ * the dossier sets a NAME as a Lora card title AND in a Nunito caption, pill or running
+ * page header, so a character only one family carries printed wrong in one of those places
+ * while the field either said nothing or slandered a name it could draw. The join is made
+ * HERE because this door is the one party that knows both halves -- EM-A1's declared rows
+ * and the dossier's type scale -- and it is made ONCE, in `FIELD_GROUP_ROLES` below.
  *
  * ⛔ AND IT IS READ WITH NO EFFECT, NO TIMER AND NO PIECE OF STATE, which is this door's
  * standing law four lines up and not a rule bent for a new errand. The request is kicked
@@ -124,48 +132,90 @@ import PoolField from './PoolField.jsx';
 const NO_ROWS = Object.freeze([]);
 
 /**
- * The registered family the dossier sets a DM's free text in, named once and MEASURED
- * rather than assumed: `src/pdf/theme.js` gives `body`, `body_em`, `prose` and `italic`
- * -- every style a paragraph of the DM's own writing lands in -- fontFamily 'Lora', and
- * keeps Nunito for labels, pills, captions and nav.
+ * WHICH DOSSIER ROLE A DECLARED FIELD'S VALUE IS DRAWN IN, keyed by the row's OWN `group`
+ * and MEASURED rather than assumed (2026-09-23, against src/pdf/sections and the two
+ * primitives every section draws through):
  *
- * ⚠ ONE FAMILY IS READ, AND THAT IS A NAMED EDGE RATHER THAN AN OVERSIGHT. A NAME the
- * dossier happens to set in a Nunito label is measured here against Lora's four faces.
- * The two families are both broad Latin cuts, so the characters that divide them are few;
- * but the honest report for a name would be the UNION of what either face cannot draw,
- * and that is a second read this member does not make.
+ *   'identity' -- a NAME. It is a Lora card title (`type.body_em` in Institutions,
+ *      NotableNPCs, NPCQuickRef, PowerStructure and Relationships; `type.cover_title` on a
+ *      cover) AND a Nunito label: `KeyValRow` sets an institution's Head and a chain's
+ *      processors in `type.caption`, `Pill` sets an NPC's faction in `type.pill`, and
+ *      `PageChrome` sets the settlement's own name in `type.label` on EVERY page header.
+ *      Drawn in both, so the honest report is what either family cannot draw.
+ *   'annotation' -- a NOTE. `Institutions.jsx` sets it in `type.italic` and every other
+ *      prose slot is `type.body` / `type.prose`: Lora, and only Lora.
+ *
+ * ⛔ THE KEY IS `group` BECAUSE `kind` DOES NOT PARTITION: `phantom.name` is kind 'free'
+ * like the two notes and is a name like the three cascades, while `group` splits the six
+ * free rows exactly two ways. A group this map does not name takes the widest answer
+ * `familiesForRole` gives -- the default is spelled THERE, once, and never here.
+ *
+ * EXPORTED so the arm that walks EM-A1's whole table can assert every free row's group is
+ * one of these two and every value is a role the reader really knows.
  */
-const DOSSIER_TEXT_FAMILY = 'Lora';
+export const FIELD_GROUP_ROLES = Object.freeze({
+  annotation: 'body',
+  identity: 'both',
+});
 
-/** The reporter once the faces are in, or null until then. @type {((text: string) => UncoveredCharacter[])|null} */
-let facesRead = null;
-/** The one request, so eight faces are fetched once per page load. @type {Promise<void>|null} */
+/**
+ * The dossier role one declared row is drawn in, or null for a group this door has not
+ * measured -- which the reader answers with its own widest list.
+ * `Object.hasOwn`, never a bracket read: 'constructor' is an unmeasured group like any other.
+ * @param {FieldDeclaration|null|undefined} declaration @returns {string|null}
+ */
+function roleOf(declaration) {
+  const group = declaration && typeof declaration.group === 'string' ? declaration.group : '';
+  return Object.hasOwn(FIELD_GROUP_ROLES, group) ? FIELD_GROUP_ROLES[group] : null;
+}
+
+/**
+ * The per-role reporter factory once every face is in, or null until then.
+ * @type {((role: string|null) => (text: string) => UncoveredCharacter[])|null}
+ */
+let reporterForRole = null;
+/** The one request, so the eight faces are fetched once per page load. @type {Promise<void>|null} */
 let facesRequested = null;
 
 /**
- * THE FONT-COVERAGE REPORTER, or null while it is still coming. Calling this is what
- * KICKS THE READ OFF, so the read happens only for a door that really drew a free
- * control, and never at import time.
+ * THE FONT-COVERAGE REPORTER FOR ONE ROW, or null while the faces are still coming.
+ * Calling this is what KICKS THE READ OFF, so the read happens only for a door that really
+ * drew a free control, and never at import time.
  *
- * ⛔ IT SWALLOWS A FAILED READ ON PURPOSE. A face that will not load leaves the reporter
- * null, and a null reporter is a silent field -- the same FAILS-OPEN answer `coverageOf`
- * gives for an unmeasured text, and for its reason: slandering a DM's perfectly good
- * writing because a font request was slow teaches every user to ignore the note.
+ * ⛔ IT WAITS FOR EVERY FAMILY BEFORE IT ANSWERS FOR ANY. A union taken over the one family
+ * that happened to arrive first would be a report that says "these will print" about a face
+ * it has not read -- silence is the honest state until the whole answer exists, and silence
+ * while unmeasured is `coverageOf`'s own fail-open rule.
+ *
+ * ⛔ IT SWALLOWS A FAILED READ ON PURPOSE. A face that will not load leaves the factory
+ * null, and a null reporter is a silent field, for that same reason: slandering a DM's
+ * perfectly good writing because a font request was slow teaches every user to ignore the
+ * note.
  *
  * EXPORTED because the seam is ASYNCHRONOUS: a test that could not await it could only
  * ever assert the null, which is the half that was already true.
+ * @param {FieldDeclaration|null} [declaration] the row whose control will show the report
  * @returns {((text: string) => UncoveredCharacter[])|null}
  */
-export function faceCoverageReporter() {
+export function faceCoverageReporter(declaration = null) {
   if (facesRequested === null) {
     facesRequested = import('../../pdf/lib/fontCoverage.js')
       .then(async (faces) => {
-        const family = await faces.loadFamilyCoverage(DOSSIER_TEXT_FAMILY, faces.fetchFace);
-        facesRead = (text) => faces.coverageOf(text, family).uncovered;
+        /** @type {Record<string, object>} */
+        const loaded = {};
+        // THE FAMILIES ARE THE READER'S OWN WIDEST ROLE, never a name typed here: this door
+        // spells no font family at all, so a re-cut dossier moves one file and not two.
+        for (const family of faces.ROLE_FAMILIES.both) {
+          loaded[family] = await faces.loadFamilyCoverage(family, faces.fetchFace);
+        }
+        reporterForRole = (role) => {
+          const wanted = faces.familiesForRole(role).map((family) => loaded[family]);
+          return (text) => faces.coverageAcross(text, wanted).uncovered;
+        };
       })
-      .catch(() => { facesRead = null; });
+      .catch(() => { reporterForRole = null; });
   }
-  return facesRead;
+  return reporterForRole === null ? null : reporterForRole(roleOf(declaration));
 }
 
 /** The closed refusal set, mapped to copy. FROZEN, in codepoint order. */
@@ -399,7 +449,7 @@ export default function CardEditorDialog({
           value={valueOf(row)}
           onChange={(next) => setField(row.field, next)}
           disabled={readOnly}
-          coverage={faceCoverageReporter()}
+          coverage={faceCoverageReporter(row)}
         />
       );
     }
