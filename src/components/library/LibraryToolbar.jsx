@@ -22,6 +22,7 @@
 import { useState } from 'react';
 import { sans, FS, SP, R, swatch, BORDER, PARCH, INK, MUTED, BODY } from '../theme.js';
 import { isCanonSave, savePhase } from '../../domain/campaign/canon.js';
+import { isPhantomSave } from '../../domain/edit/phantoms.js';
 import { settlementSignals, needsAttention, healthPip } from '../settlements/livingWorldSignals.js';
 import { isDestroyedRow } from '../map/heraldRegister.js';
 import Button from '../primitives/Button.jsx';
@@ -79,7 +80,14 @@ function attentionSeverity(save) {
  */
 export function applyLibraryFilters(saves, { query = '', sort = 'recent', filters = {} } = {}, context = {}) {
   if (!Array.isArray(saves)) return [];
-  let out = saves;
+  // ⛔ EM-F1 — A PHANTOM IS NEVER ON THE SHELF, BEFORE ANY QUERY, CHIP OR SORT IS READ.
+  // A phantom counterparty is a save (design §2.8: it persists as a save blob, so the
+  // neighbour back-link resolves it like any other), and it is an OFF-STAGE prop, not a
+  // settlement the DM keeps. Hiding it here rather than at one of the chips is what makes
+  // "hidden from the shelf" total: a phantom cannot be surfaced by searching its name,
+  // by clearing every filter, or by a sort that floats it. The predicate is the domain's
+  // one reading of the discriminant, never a second spelling of it.
+  let out = saves.filter((save) => !isPhantomSave(save));
 
   if (query && query.trim()) {
     const q = query.trim().toLowerCase();
