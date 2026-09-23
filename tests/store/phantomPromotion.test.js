@@ -425,11 +425,25 @@ describe('EM-F2 — one path: the generation action, and no second writer', () =
     expect(scanned.length, 'the src walk found nothing, so the roster below would be vacuous')
       .toBeGreaterThan(400);
     const importers = importersOfLeaf(scanned.map((rel) => [rel, readFileSync(join(ROOT, rel), 'utf8')]));
+    // ⭐ EM-F3 ADDS THE THIRD READER, BY ADDITION AND NEVER BY DELETION, and it is the one the
+    // first two were always waiting for: the editor's own half, which MINTS a phantom and reads
+    // which of the library's rows are off-stage for the counterparties roster. It is the reading
+    // that makes the mint and the shelf agree by construction — the same predicate, in one place
+    // per act (hide / promote / found), never a fourth opinion about what a phantom is.
+    const DOOR_REL = 'src/store/phantomMintAction.js';
     expect([...importers].sort(),
-      'the phantom discriminant is read in EXACTLY two places: the library shelf, which hides a'
-      + ' phantom row, and the generation lane, which promotes one. A third reader is a second'
-      + ' opinion about what a phantom is; a missing one means a reader was lost')
-      .toEqual([SHELF_REL, LANE_REL].sort());
+      'the phantom discriminant is read in EXACTLY three places: the library shelf, which hides a'
+      + ' phantom row, the generation lane, which promotes one, and the editor\'s mint, which'
+      + ' founds one and rosters the rest. A fourth reader is a second opinion about what a'
+      + ' phantom is; a missing one means a reader was lost')
+      .toEqual([SHELF_REL, LANE_REL, DOOR_REL].sort());
+
+    // ⛔ AND THE THIRD READER IS NOT A SECOND PROMOTION WRITER, which is the claim the two arms
+    // below make about the shelf and the lane. It writes a save row of its OWN through the save
+    // service; it never writes an existing row's blob.
+    expect(rowBlobWrites(readFileSync(join(ROOT, DOOR_REL), 'utf8')),
+      'the editor\'s mint writes no saved row\'s blob, so the lane is still the one promotion writer')
+      .toEqual([]);
 
     const shelf = readFileSync(join(ROOT, SHELF_REL), 'utf8');
     expect(shelf.includes('applyLibraryFilters'),
