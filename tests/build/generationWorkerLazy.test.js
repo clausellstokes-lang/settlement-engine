@@ -220,7 +220,33 @@ const SENTINEL = 'settlementforge:generation:worker-v1';
 // 36d82a469 on a fresh build in consist: EM-R2's roster consult (+161 B by CI), EM-R1b's nineteen-key declaration, EM-R3's and EM-R4's
 // consults and the early buy-back's eleven literal hoists (-1,916 B) measured TOGETHER at the composed tip. The ceiling follows the measurement DOWN to the byte
 // and stays MONOTONE-DOWN from this value; every rise of the train was bought back before this reading (BUY-BACK-LEDGER row 9).
-export const WORKER_BUNDLE_CEILING_BYTES = 1391327;
+// 1,391,327 -> 1,391,256 (2026-09-23, the buy-back cure seat, BUY-BACK-LEDGER row 10): the train tip's real build
+// read the worker at 1,391,472 B against this zero-slack ceiling — +145 B, EM-B2b2's resolveResources.js, and a rise
+// is never a lane's edit — so the bytes were BOUGHT BACK by row 7's literal-hoist shape on two modules of the
+// worker's own static closure and the ceiling follows the composed measurement DOWN:
+// src/generators/structuralValidator.js (5 consts of 33 over 14 sites) and
+// src/generators/generationReceiptJudgments.js (4 of 10 over 8 sites, folded into ONE statement so the F31 800-line
+// ratchet is unmoved). ⛔ THE OTHER 28 AND 6 ARE NOT A CHOICE: a const planted at a file's END is in its TEMPORAL
+// DEAD ZONE for any site evaluated at MODULE TOP LEVEL — `import()` of the unpruned variant threw
+// `ReferenceError: Cannot access 'MULTIPLE_MARKET_SQUARES' before initialization` at SPATIAL_FEATURES — so each was
+// pruned BY EXECUTION until the module imported clean. Both blocks ARE planted at their file's end, which is what
+// keeps every `path:line` citation true: the prose-numerics baseline's rows at structuralValidator.js:679/686/694 and
+// the record-register walker's cite to generationReceiptJudgments.js:654-660 still name the same bytes (every
+// original line asserted byte-identical IN PLACE; only literal->identifier substitutions moved). The emitted values
+// cannot move — JS strings are immutable primitives — and each file round-trips to its previous blob BYTE FOR BYTE
+// when the identifiers are put back.
+// ⛔ AND THE PLAN'S THIRD MODULE IS REFUSED BY MEASUREMENT, WHICH IS WHY THIS BUYS -216 B AND NOT -1,132 B.
+// src/generators/power/rulingStructure.js prices -766 B and its hoist is clean (19 consts, 61 sites, TDZ-free,
+// round-trip identical), but the file is 800 raw lines against `MODULE_LINE_CEILING = 800` in
+// tests/generators/powerStructure.test.js — ZERO slack on a SECOND ceiling the buy-back's own measurement did not
+// read (it read eslint's effective-line room, 732 of 800, and the size baseline, which has no row). One added line
+// reds that arm ("rulingStructure.js: 821 lines"), and a hoist cannot add none; raising a size ratchet is not a
+// cure seat's edit, so the bytes stay unbought and the ledger keeps them.
+// Measured, not argued: a CONTROL build at the base 56b085fc5 reproduced 1,391,472 B
+// (generation.worker-MbKUCYhb.js), CI run 35892227226's figure to the byte and the chunk name; the cured build reads
+// 1,391,256 B (generation.worker-DusCNPis.js) = -216 B, and esbuild's per-module pricing predicted -212 B. The
+// ceiling follows the measurement DOWN and stays MONOTONE-DOWN from this value.
+export const WORKER_BUNDLE_CEILING_BYTES = 1391256;
 
 const source = (path) => readFileSync(join(ROOT, path), 'utf8');
 
