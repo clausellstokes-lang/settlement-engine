@@ -43339,6 +43339,710 @@
         "35897831415"
       ],
       "_acceptanceNote": "the acceptance cases are named BY TITLE in the commit body of 91329cdea and quoted in the packet's §9; they are not restated as manifest rows because the body's shape is prose, not an id table."
+    },
+    {
+      "id": "EM-E0",
+      "status": "LANDED",
+      "packetPath": "docs/implementation/packets/settlement-editor/EM-E0.md",
+      "verifiedBase": "51384b364ddd7adea37f0d4d8e7d5452dd7c874a",
+      "landedAt": "1bc628100d2d251bd142f688f96a272d3c3732c5",
+      "changeManifest": [
+        {
+          "action": "MODIFY",
+          "path": "src/domain/worldPulse/habitForkRegistry.js"
+        },
+        {
+          "action": "TEST",
+          "path": "tests/lint/chooserTotality.walker.test.js"
+        }
+      ],
+      "requiredSymbols": [],
+      "acceptanceCases": [],
+      "checks": [
+        [
+          "npx",
+          "vitest",
+          "run",
+          "--pool=threads",
+          "--maxWorkers=2",
+          "tests/lint/chooserTotality.walker.test.js"
+        ],
+        [
+          "node",
+          "scripts/implementation-packets.mjs",
+          "validate"
+        ]
+      ],
+      "_recordPacket": "A RECORD written after the fact by the HISTORIAN seat (U3; ODQ §934.47 addendum 133), 2026-09-23. Built under TESTS-ONLY MODE (rule 39; stasis S11): a branch, a one-page brief, the tests with the code, GitHub's run read against the declared reds, a local merge by pick — no packet, no seal, no placement, no flip. It pins NO symbol (`requiredSymbols` is empty by design) and is not dispatchable.",
+      "_branch": "feat/em-e0-registration",
+      "_laneCommits": [
+        "fa5305b45",
+        "c6728329c"
+      ],
+      "_trainCommits": [
+        "52268f55c4d8384d4359af27443da20c83396197",
+        "1bc628100d2d251bd142f688f96a272d3c3732c5"
+      ],
+      "_ciRuns": [
+        "35868472048"
+      ],
+      "_acceptanceNote": "the acceptance cases are named BY TITLE in the commit body of 52268f55c, 1bc628100 and quoted in the packet's §9; they are not restated as manifest rows because the body's shape is prose, not an id table."
+    },
+    {
+      "id": "EM-E2",
+      "status": "LANDED",
+      "packetPath": "docs/implementation/packets/settlement-editor/EM-E2.md",
+      "verifiedBase": "51384b364ddd7adea37f0d4d8e7d5452dd7c874a",
+      "landedAt": "dec645fa1b6de6038ae4a3db7a5d39a61156ad44",
+      "changeManifest": [
+        {
+          "action": "REGISTER",
+          "path": "scripts/mutation-coverage-manifest.json"
+        },
+        {
+          "action": "CREATE",
+          "path": "src/domain/display/stateProse/decreeProse.js"
+        },
+        {
+          "action": "CREATE",
+          "path": "src/domain/display/stateProse/decreeProsePools.js"
+        },
+        {
+          "action": "CREATE",
+          "path": "tests/domain/decreeProse.test.js"
+        },
+        {
+          "action": "CREATE",
+          "path": "tests/lint/decreeCause.walker.test.js"
+        }
+      ],
+      "requiredSymbols": [],
+      "acceptanceCases": [],
+      "checks": [
+        [
+          "npx",
+          "vitest",
+          "run",
+          "--pool=threads",
+          "--maxWorkers=2",
+          "tests/domain/decreeProse.test.js",
+          "tests/lint/decreeCause.walker.test.js"
+        ],
+        [
+          "node",
+          "scripts/implementation-packets.mjs",
+          "validate"
+        ]
+      ],
+      "_recordPacket": "A RECORD written after the fact by the HISTORIAN seat (U3; ODQ §934.47 addendum 133), 2026-09-23. Built under TESTS-ONLY MODE (rule 39; stasis S11): a branch, a one-page brief, the tests with the code, GitHub's run read against the declared reds, a local merge by pick — no packet, no seal, no placement, no flip. It pins NO symbol (`requiredSymbols` is empty by design) and is not dispatchable.",
+      "_branch": "feat/em-e2-chronicle-voice",
+      "_laneCommits": [
+        "5b3bc89fa",
+        "23cf8368d"
+      ],
+      "_trainCommits": [
+        "9ddf72419010abcb704612f0d26bf9e23c305565",
+        "dec645fa1b6de6038ae4a3db7a5d39a61156ad44"
+      ],
+      "_ciRuns": [
+        "35868186955"
+      ],
+      "_acceptanceNote": "the acceptance cases are named BY TITLE in the commit body of 9ddf72419, dec645fa1 and quoted in the packet's §9; they are not restated as manifest rows because the body's shape is prose, not an id table."
+    },
+    {
+      "id": "EM-E6",
+      "status": "LANDED",
+      "packetPath": "docs/implementation/packets/settlement-editor/EM-E6.md",
+      "verifiedBase": "5b3bc89fad7d5fa9b6e7ff7a45ff683ea55be21a",
+      "landedAt": "63cf7fb2a4e38ca4180dca4f7df7dfc6e570975a",
+      "changeManifest": [
+        {
+          "action": "MODIFY",
+          "path": "src/domain/display/stateProse/decreeProsePools.js"
+        },
+        {
+          "action": "CREATE",
+          "path": "src/domain/edit/eventCatalogue.js"
+        },
+        {
+          "action": "TEST",
+          "path": "tests/domain/decreeProse.test.js"
+        },
+        {
+          "action": "TEST",
+          "path": "tests/lint/decreeCause.walker.test.js"
+        }
+      ],
+      "requiredSymbols": [],
+      "acceptanceCases": [],
+      "checks": [
+        [
+          "npx",
+          "vitest",
+          "run",
+          "--pool=threads",
+          "--maxWorkers=2",
+          "tests/domain/decreeProse.test.js",
+          "tests/lint/decreeCause.walker.test.js"
+        ],
+        [
+          "node",
+          "scripts/implementation-packets.mjs",
+          "validate"
+        ]
+      ],
+      "_recordPacket": "A RECORD written after the fact by the HISTORIAN seat (U3; ODQ §934.47 addendum 133), 2026-09-23. Built under TESTS-ONLY MODE (rule 39; stasis S11): a branch, a one-page brief, the tests with the code, GitHub's run read against the declared reds, a local merge by pick — no packet, no seal, no placement, no flip. It pins NO symbol (`requiredSymbols` is empty by design) and is not dispatchable.",
+      "_branch": "feat/em-e6-events",
+      "_laneCommits": [
+        "427163939"
+      ],
+      "_trainCommits": [
+        "63cf7fb2a4e38ca4180dca4f7df7dfc6e570975a"
+      ],
+      "_acceptanceNote": "the acceptance cases are named BY TITLE in the commit body of 63cf7fb2a and quoted in the packet's §9; they are not restated as manifest rows because the body's shape is prose, not an id table."
+    },
+    {
+      "id": "EM-E1",
+      "status": "LANDED",
+      "packetPath": "docs/implementation/packets/settlement-editor/EM-E1.md",
+      "verifiedBase": "586949ce3e5a272536ddf2d75ae9e7f21f7f38fb",
+      "landedAt": "76e54857e2eab97278142444b718d64d8d727a98",
+      "changeManifest": [
+        {
+          "action": "MODIFY",
+          "path": "src/domain/worldPulse/advanceInterval.js"
+        },
+        {
+          "action": "CREATE",
+          "path": "src/domain/worldPulse/decreeHook.js"
+        },
+        {
+          "action": "MODIFY",
+          "path": "src/domain/worldPulse/pulseKernel.js"
+        },
+        {
+          "action": "MODIFY",
+          "path": "src/store/campaignWorldPulseDeferred.js"
+        },
+        {
+          "action": "TEST",
+          "path": "tests/lint/couplingInclusion.walker.test.js"
+        },
+        {
+          "action": "TEST",
+          "path": "tests/lint/newsAuthoringCensus.shared.mjs"
+        },
+        {
+          "action": "TEST",
+          "path": "tests/lint/wizardNewsAuthoring.walker.test.js"
+        },
+        {
+          "action": "CREATE",
+          "path": "tests/simulation/decreeTick.test.js"
+        }
+      ],
+      "requiredSymbols": [],
+      "acceptanceCases": [
+        {
+          "id": "E1-1",
+          "case": "a due decree applies at the head of the pulse as a cause, in orderIndex order, and its entry is markApplied with this tick's tickRef"
+        },
+        {
+          "id": "E1-2",
+          "case": "zero decrees leave the pulse record byte-identical — the key roster and its order are the witness's own bytes"
+        },
+        {
+          "id": "E1-3",
+          "case": "the hook consumes NO PRNG — the tick's whole simulation is byte-identical with and without a decree"
+        },
+        {
+          "id": "E1-4",
+          "case": "the rewind restores the registry with every later-staged entry re-appended, and retractDecreesOfTick returns that tick's entries to pending"
+        },
+        {
+          "id": "E1-5",
+          "case": "a `when` in the future is untouched by an earlier tick, and the registry comes back by reference"
+        },
+        {
+          "id": "E1-6",
+          "case": "the interval orchestrator advances `when`-due entries per interval — each applies exactly once, and its receipt survives the ring collapse"
+        },
+        {
+          "id": "E1-7",
+          "case": "retraction is the EXACT inverse of application — the round trip returns the serialized registry unchanged"
+        },
+        {
+          "id": "E1-8",
+          "case": "the leaf takes no draw, reads no clock, and imports only the registry and the pulse helpers"
+        }
+      ],
+      "checks": [
+        [
+          "npx",
+          "vitest",
+          "run",
+          "--pool=threads",
+          "--maxWorkers=2",
+          "tests/lint/couplingInclusion.walker.test.js",
+          "tests/lint/wizardNewsAuthoring.walker.test.js",
+          "tests/simulation/decreeTick.test.js"
+        ],
+        [
+          "node",
+          "scripts/implementation-packets.mjs",
+          "validate"
+        ]
+      ],
+      "_recordPacket": "A RECORD written after the fact by the HISTORIAN seat (U3; ODQ §934.47 addendum 133), 2026-09-23. Built under TESTS-ONLY MODE (rule 39; stasis S11): a branch, a one-page brief, the tests with the code, GitHub's run read against the declared reds, a local merge by pick — no packet, no seal, no placement, no flip. It pins NO symbol (`requiredSymbols` is empty by design) and is not dispatchable.",
+      "_branch": "feat/em-e1-tick-hook",
+      "_laneCommits": [
+        "302b225da",
+        "e4a596e6e",
+        "0d68ff027"
+      ],
+      "_trainCommits": [
+        "2148a796ee0d4797ccec072b9de4a6075167ef52",
+        "b880d3c5627603c06c601c6ce9cf1b87105a4aec",
+        "76e54857e2eab97278142444b718d64d8d727a98"
+      ],
+      "_ciRuns": [
+        "35876513319",
+        "35883800275"
+      ],
+      "_acceptanceNote": "the member records 9 acceptance cases by title in its commit body; the first eight are carried here (the estate's ceiling) and all 9 are quoted in the packet's §9."
+    },
+    {
+      "id": "EM-E4",
+      "status": "LANDED",
+      "packetPath": "docs/implementation/packets/settlement-editor/EM-E4.md",
+      "verifiedBase": "ec09c2e47020bc6fd0e3f24e972e7915515c9964",
+      "landedAt": "837a995d39b824f1761997f438ac8f348164f497",
+      "changeManifest": [
+        {
+          "action": "CREATE",
+          "path": "src/domain/edit/directives.js"
+        },
+        {
+          "action": "MODIFY",
+          "path": "src/domain/worldPulse/decreeHook.js"
+        },
+        {
+          "action": "MODIFY",
+          "path": "src/domain/worldPulse/peaceTermsDrafting.js"
+        },
+        {
+          "action": "MODIFY",
+          "path": "src/domain/worldPulse/warSiegeVerdict.js"
+        },
+        {
+          "action": "CREATE",
+          "path": "tests/simulation/directorFork.test.js"
+        }
+      ],
+      "requiredSymbols": [],
+      "acceptanceCases": [
+        {
+          "id": "E4-1",
+          "case": "ruling 1 is live: both first-cut forks carry a registered row WITH a vocabulary, and the event lottery carries a row WITHOUT one (the negative half)."
+        },
+        {
+          "id": "E4-2",
+          "case": "the four bands the REAL `resolveSiegeVerdict` rolls are exactly `SIEGE_VERDICT_BANDS`, and each one's `falls` agrees with the verdict's own."
+        },
+        {
+          "id": "E4-3",
+          "case": "the festival's pin words are the DRAW's own; `cancelled` is the deterministic skip arm's and is not among them (six typed, five drawn — measured, not assumed)."
+        },
+        {
+          "id": "E4-4",
+          "case": "a pin yields the pinned outcome and the stream is where it was — the festival, against a control trace that never reaches the fork, with the unpinned negative."
+        },
+        {
+          "id": "E4-5",
+          "case": "the same for the siege band, and the band carries `falls` with it."
+        },
+        {
+          "id": "E4-6",
+          "case": "an unpinned fork draws exactly as today, and a rotted bag entry draws too."
+        },
+        {
+          "id": "E4-7",
+          "case": "an out-of-vocabulary outcome and a fork with no vocabulary are BOTH refused before any tick; the siege's READING words are refused as pin words; a non-pin op is silence."
+        },
+        {
+          "id": "E4-8",
+          "case": "a refused pin never enters the bag, so the fork is never reached by it at the tick."
+        }
+      ],
+      "checks": [
+        [
+          "npx",
+          "vitest",
+          "run",
+          "--pool=threads",
+          "--maxWorkers=2",
+          "tests/simulation/directorFork.test.js"
+        ],
+        [
+          "node",
+          "scripts/implementation-packets.mjs",
+          "validate"
+        ]
+      ],
+      "_recordPacket": "A RECORD written after the fact by the HISTORIAN seat (U3; ODQ §934.47 addendum 133), 2026-09-23. Built under TESTS-ONLY MODE (rule 39; stasis S11): a branch, a one-page brief, the tests with the code, GitHub's run read against the declared reds, a local merge by pick — no packet, no seal, no placement, no flip. It pins NO symbol (`requiredSymbols` is empty by design) and is not dispatchable.",
+      "_branch": "feat/em-e4-director-pins",
+      "_laneCommits": [
+        "ad9321796",
+        "2d55007ef"
+      ],
+      "_trainCommits": [
+        "1ac56429bdb6ed0eb172c8a2e3645548c827c65d",
+        "837a995d39b824f1761997f438ac8f348164f497"
+      ],
+      "_ciRuns": [
+        "35878071414",
+        "35885657684"
+      ],
+      "_acceptanceNote": "the member records 14 acceptance cases by title in its commit body; the first eight are carried here (the estate's ceiling) and all 14 are quoted in the packet's §9.",
+      "_supersededPaths": [
+        "tests/simulation/pinFork.test.js"
+      ]
+    },
+    {
+      "id": "EM-E7",
+      "status": "LANDED",
+      "packetPath": "docs/implementation/packets/settlement-editor/EM-E7.md",
+      "verifiedBase": "ad9321796533647899e4f39d70028e5eb636b317",
+      "landedAt": "ef8910740e6b5c88f7fb1c481543dcc6091366fb",
+      "changeManifest": [
+        {
+          "action": "MODIFY",
+          "path": "src/domain/worldPulse/espionage/espionageGauntlet.js"
+        },
+        {
+          "action": "MODIFY",
+          "path": "src/domain/worldPulse/espionage/espionageMissions.js"
+        },
+        {
+          "action": "MODIFY",
+          "path": "src/domain/worldPulse/operations/missionDispatcher.js"
+        },
+        {
+          "action": "CREATE",
+          "path": "tests/simulation/sendOnMission.test.js"
+        }
+      ],
+      "requiredSymbols": [],
+      "acceptanceCases": [
+        {
+          "id": "E7-1",
+          "case": "every mission kind the catalog carries stages as a direction, and nothing else does"
+        },
+        {
+          "id": "E7-2",
+          "case": "the tick resolves a direction through the estate own procedure, doors and words unchanged"
+        },
+        {
+          "id": "E7-3",
+          "case": "the per-principal cap and the doctrine door bind a directed mission exactly as an endogenous one"
+        },
+        {
+          "id": "E7-4",
+          "case": "the cut is STAY-deterministic: the same directions in any order yield the same candidates"
+        },
+        {
+          "id": "E7-5",
+          "case": "the direction carries no urgency and no invented confidence, because both are the world own"
+        },
+        {
+          "id": "E7-6",
+          "case": "a person card mission reads its four covert facets from the layer own vocabulary"
+        },
+        {
+          "id": "E7-7",
+          "case": "the catch is a pin resolved in chooseOrPinFork shape over the fork own two words"
+        },
+        {
+          "id": "E7-8",
+          "case": "the fork draw is CONSUMED under the pin: only the verdict moves, and the row names the hand"
+        }
+      ],
+      "checks": [
+        [
+          "npx",
+          "vitest",
+          "run",
+          "--pool=threads",
+          "--maxWorkers=2",
+          "tests/simulation/sendOnMission.test.js"
+        ],
+        [
+          "node",
+          "scripts/implementation-packets.mjs",
+          "validate"
+        ]
+      ],
+      "_recordPacket": "A RECORD written after the fact by the HISTORIAN seat (U3; ODQ §934.47 addendum 133), 2026-09-23. Built under TESTS-ONLY MODE (rule 39; stasis S11): a branch, a one-page brief, the tests with the code, GitHub's run read against the declared reds, a local merge by pick — no packet, no seal, no placement, no flip. It pins NO symbol (`requiredSymbols` is empty by design) and is not dispatchable.",
+      "_branch": "feat/em-e7-missions",
+      "_laneCommits": [
+        "20eba5d39"
+      ],
+      "_trainCommits": [
+        "ef8910740e6b5c88f7fb1c481543dcc6091366fb"
+      ],
+      "_ciRuns": [
+        "35882036655"
+      ],
+      "_acceptanceNote": "the member records 14 acceptance cases by title in its commit body; the first eight are carried here (the estate's ceiling) and all 14 are quoted in the packet's §9."
+    },
+    {
+      "id": "EM-E4b",
+      "status": "LANDED",
+      "packetPath": "docs/implementation/packets/settlement-editor/EM-E4b.md",
+      "verifiedBase": "ad9321796533647899e4f39d70028e5eb636b317",
+      "landedAt": "d238afd86fe99b815ef94b2590399cb354965974",
+      "changeManifest": [
+        {
+          "action": "MODIFY",
+          "path": "src/domain/worldPulse/pulseKernel.js"
+        },
+        {
+          "action": "MODIFY",
+          "path": "src/domain/worldPulse/traditionsKernel.js"
+        },
+        {
+          "action": "MODIFY",
+          "path": "src/domain/worldPulse/warSiegeVerdict.js"
+        },
+        {
+          "action": "REGISTER",
+          "path": "tests/lint/.tuning-inventory.json"
+        }
+      ],
+      "requiredSymbols": [],
+      "acceptanceCases": [
+        {
+          "id": "E4b-1",
+          "case": "a staged pin on HBF-85 yields the pinned outcome AT THE TICK through the real `simulateCampaignWorldPulse`, the year root is never composed, the unpinned control composes exactly one, and a second word proves the site is not constant."
+        },
+        {
+          "id": "E4b-2",
+          "case": "the siege verdict consults its pin over all four bands: the band is the pin's, `falls` is the band's, `roll` is 0, the fork count is 0, and the unpinned verdict is object-equal to today's on every fixture roll."
+        },
+        {
+          "id": "E4b-3",
+          "case": "zero pins ⇒ the pulse record is byte-identical to a world holding no decree, and two dormant ticks hand back ONE frozen bag by reference."
+        },
+        {
+          "id": "E4b-4",
+          "case": "a word outside the vocabulary never reaches the site — the festival answers the DRAWN word (a positive equality), the entry still lands as a cause, and the siege's four READING words are refused at the fold while a band is admitted."
+        },
+        {
+          "id": "E4b-5",
+          "case": "the fold precedes the apply on ONE shared line, and the kernel's effective line count equals `scripts/.size-baseline.json`'s banked 1,581."
+        },
+        {
+          "id": "E4b-6",
+          "case": "each fork's pin words are its own draw's, collected from the live `outcomeForDraw` and the live `resolveSiegeVerdict` rather than transcribed."
+        },
+        {
+          "id": "E4b-7",
+          "case": "the bag rides the growth chain's argument bag through the three leaves this member does not own, executed through the DENSITY head the kernel calls."
+        },
+        {
+          "id": "E4b-8",
+          "case": "the declared gap above, asserted."
+        }
+      ],
+      "checks": [
+        [
+          "node",
+          "scripts/implementation-packets.mjs",
+          "validate"
+        ]
+      ],
+      "_recordPacket": "A RECORD written after the fact by the HISTORIAN seat (U3; ODQ §934.47 addendum 133), 2026-09-23. Built under TESTS-ONLY MODE (rule 39; stasis S11): a branch, a one-page brief, the tests with the code, GitHub's run read against the declared reds, a local merge by pick — no packet, no seal, no placement, no flip. It pins NO symbol (`requiredSymbols` is empty by design) and is not dispatchable.",
+      "_branch": "feat/em-e4b-fork-sites",
+      "_laneCommits": [
+        "0b8df9f90",
+        "c0ef2cffe"
+      ],
+      "_trainCommits": [
+        "8ea9c3a32e7109c91748e38c022b9044d0d5aaca",
+        "d238afd86fe99b815ef94b2590399cb354965974"
+      ],
+      "_ciRuns": [
+        "35883383624",
+        "35887956452"
+      ],
+      "_supersededPaths": [
+        "tests/simulation/forkSitesConsultPins.test.js"
+      ]
+    },
+    {
+      "id": "EM-E5",
+      "status": "LANDED",
+      "packetPath": "docs/implementation/packets/settlement-editor/EM-E5.md",
+      "verifiedBase": "ad9321796533647899e4f39d70028e5eb636b317",
+      "landedAt": "78a54b255ca8a60ec962f134fd628255b89f317e",
+      "changeManifest": [
+        {
+          "action": "CREATE",
+          "path": "src/domain/edit/directions.js"
+        },
+        {
+          "action": "MODIFY",
+          "path": "src/domain/worldPulse/informationStatecraft.js"
+        },
+        {
+          "action": "CREATE",
+          "path": "tests/domain/editDirections.test.js"
+        }
+      ],
+      "requiredSymbols": [],
+      "acceptanceCases": [
+        {
+          "id": "E5-1",
+          "case": "the surfaced set EQUALS the manifest's proposal lane BOTH DIRECTIONS, and it is the chartered fourteen (14 of the manifest's 16, measured)."
+        },
+        {
+          "id": "E5-2",
+          "case": "the `direct-realm` row's vocabulary IS that surfaced set."
+        },
+        {
+          "id": "E5-3",
+          "case": "all sixteen render as seals in the manifest's order, and `offered` equals the predicate's own verdict verb for verb, with both halves non-empty."
+        },
+        {
+          "id": "E5-4",
+          "case": "a grayed seal's reason is the manifest's own sentence, verbatim, at a dark wave gate AND at a seal-level refusal; an offered seal carries none."
+        },
+        {
+          "id": "E5-5",
+          "case": "REINFORCE/INTERCEPT are the deferred pair, never offered, each covering its own deferral code, grayed with the manifest's reason and `realmVetoProse`'s prose."
+        },
+        {
+          "id": "E5-6",
+          "case": "the veto prose a card speaks is only for a code THAT verb covers."
+        },
+        {
+          "id": "E5-7",
+          "case": "the seal reader is total on a malformed world and a malformed seal."
+        },
+        {
+          "id": "E5-8",
+          "case": "the roster is the twelve, authored in codepoint order."
+        }
+      ],
+      "checks": [
+        [
+          "npx",
+          "vitest",
+          "run",
+          "--pool=threads",
+          "--maxWorkers=2",
+          "tests/domain/editDirections.test.js"
+        ],
+        [
+          "node",
+          "scripts/implementation-packets.mjs",
+          "validate"
+        ]
+      ],
+      "_recordPacket": "A RECORD written after the fact by the HISTORIAN seat (U3; ODQ §934.47 addendum 133), 2026-09-23. Built under TESTS-ONLY MODE (rule 39; stasis S11): a branch, a one-page brief, the tests with the code, GitHub's run read against the declared reds, a local merge by pick — no packet, no seal, no placement, no flip. It pins NO symbol (`requiredSymbols` is empty by design) and is not dispatchable.",
+      "_branch": "feat/em-e5-direction",
+      "_laneCommits": [
+        "ad7d7ff3f"
+      ],
+      "_trainCommits": [
+        "78a54b255ca8a60ec962f134fd628255b89f317e"
+      ],
+      "_ciRuns": [
+        "35882470065",
+        "35888099156"
+      ],
+      "_acceptanceNote": "the member records 25 acceptance cases by title in its commit body; the first eight are carried here (the estate's ceiling) and all 25 are quoted in the packet's §9."
+    },
+    {
+      "id": "EM-E3",
+      "status": "LANDED",
+      "packetPath": "docs/implementation/packets/settlement-editor/EM-E3.md",
+      "verifiedBase": "38552f4e4edb55fa6b2bd36ee059e4a01cf228ca",
+      "landedAt": "c6340722cc8236a4debb2dbf9b8b3ae5f83bf949",
+      "changeManifest": [
+        {
+          "action": "MODIFY",
+          "path": "src/components/map/AdvanceReport.jsx"
+        },
+        {
+          "action": "MODIFY",
+          "path": "src/components/primitives/RegenerationDeltaCard.jsx"
+        },
+        {
+          "action": "CREATE",
+          "path": "tests/components/advanceReportDecrees.test.jsx"
+        }
+      ],
+      "requiredSymbols": [],
+      "acceptanceCases": [
+        {
+          "id": "E3-1",
+          "case": "a tick that applied no decree renders the report it rendered before — no section, no wrapper, no node"
+        },
+        {
+          "id": "E3-2",
+          "case": "N decrees render N cause rows in orderIndex order, each with its chronicle link [RED-FIRST]"
+        },
+        {
+          "id": "E3-3",
+          "case": "a mount with no chronicle routing reports the cause and offers no dead link [RED-FIRST]"
+        },
+        {
+          "id": "E3-4",
+          "case": "an off-stage cause wears its marker and a cause with no save names nobody [RED-FIRST]"
+        },
+        {
+          "id": "E3-5",
+          "case": "each provenance group in dmFields renders with its own count, name and transition [RED-FIRST]"
+        },
+        {
+          "id": "E3-6",
+          "case": "an empty partition renders neither section, and an absent one is the same silence"
+        },
+        {
+          "id": "E3-7",
+          "case": "a DM field is not a change the world made, so it does not open the card by itself"
+        }
+      ],
+      "checks": [
+        [
+          "npx",
+          "vitest",
+          "run",
+          "--pool=threads",
+          "--maxWorkers=2",
+          "tests/components/advanceReportDecrees.test.jsx"
+        ],
+        [
+          "node",
+          "scripts/implementation-packets.mjs",
+          "validate"
+        ]
+      ],
+      "_recordPacket": "A RECORD written after the fact by the HISTORIAN seat (U3; ODQ §934.47 addendum 133), 2026-09-23. Built under TESTS-ONLY MODE (rule 39; stasis S11): a branch, a one-page brief, the tests with the code, GitHub's run read against the declared reds, a local merge by pick — no packet, no seal, no placement, no flip. It pins NO symbol (`requiredSymbols` is empty by design) and is not dispatchable.",
+      "_branch": "feat/em-e3-advance-report",
+      "_laneCommits": [
+        "1fc5ec325",
+        "91fc471e4"
+      ],
+      "_trainCommits": [
+        "0b0c5082ca1b5bc5f433991bfcd5ecf04a020ed0",
+        "c6340722cc8236a4debb2dbf9b8b3ae5f83bf949"
+      ],
+      "_ciRuns": [
+        "35888172909",
+        "35893813178"
+      ]
     }
   ]
 }
