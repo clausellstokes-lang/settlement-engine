@@ -20,18 +20,36 @@
  * the FINITE-SEMANTICS law exists to refuse, so the editor's mode carries VALUES and
  * takes its own name.
  *
- * ⛔ IT PERSISTS NOTHING. The layer is written onto the live record; carrying it to a
- * server is EM-B3's, re-deriving from it is EM-B2a4's (the no-op seam below), and the
- * decree registry is EM-C4b's.
+ * ⛔ IT PERSISTS NOTHING OF ITS OWN. The layer and the registry are written onto the
+ * live record, whose save path EM-B3a already proved byte-exact for both keys; carrying
+ * the layer to a server is EM-B3's and re-deriving from it is EM-B2a4's (the seam below).
+ *
+ * ⭐ EM-C4b ADDS THE REGISTRY HALF on this same leaf: the `decree` mode, six store actions
+ * over EM-C1's PURE registry through ONE write site, and `selectGuards`, memoized, whose
+ * rule set is an ARGUMENT so this module imports no rule and reaches no generator. It also
+ * carries the DIALOG'S BINDER (judgment 146c), which reaches the plain-edit writer through
+ * the one generic adapter and mints no second one.
  */
 
 import { isCanonSave, savePhase } from '../domain/campaign/canon.js';
 import { applyEdit } from '../domain/edit/dmLayer.js';
 import { declarationsFor, isEditableCard } from '../domain/edit/fieldDeclarations.js';
-import { validateOp } from '../domain/edit/operations.js';
+import { EMPTY_RULE_SET, evaluateGuards } from '../domain/edit/guards.js';
+import { makeOp, OP_TYPES, validateOp } from '../domain/edit/operations.js';
+import {
+  markApplied, reopen, reorder, revertTick, stage, withdraw,
+} from '../domain/edit/registry.js';
 
-/** The closed transient vocabulary. VALUES, never a boolean. `decree` joins at EM-C4b. */
-export const EDITOR_MODES = Object.freeze(['off', 'plain']);
+/**
+ * The closed transient vocabulary. VALUES, never a boolean. `decree` JOINS HERE (EM-C4b)
+ * and the list is written in `compareCodepoint` order, which is why the default below is
+ * NAMED: EM-C4a read it as `EDITOR_MODES[0]`, and a codepoint splice would have made
+ * `decree` the value an unknown stored word falls back to.
+ */
+export const EDITOR_MODES = Object.freeze(['decree', 'off', 'plain']);
+
+/** The member an absent or unknown stored value reads as. Named, never positional. */
+export const EDITOR_MODE_OFF = 'off';
 
 /** The key under uiSlice's shipped userPrefs bag. */
 export const EDITOR_MODE_PREF_KEY = 'editorMode';
@@ -167,12 +185,12 @@ export function readRootKey(key) {
 
 /**
  * @param {object} state the live store state
- * @returns {'off'|'plain'} never undefined; an unknown stored value reads as 'off'
+ * @returns {'decree'|'off'|'plain'} never undefined; an unknown stored value reads as 'off'
  */
 export function selectEditorMode(state) {
   const stored = state?.userPrefs?.[EDITOR_MODE_PREF_KEY];
-  return /** @type {'off'|'plain'} */ (
-    EDITOR_MODES.includes(stored) ? stored : EDITOR_MODES[0]
+  return /** @type {'decree'|'off'|'plain'} */ (
+    EDITOR_MODES.includes(stored) ? stored : EDITOR_MODE_OFF
   );
 }
 
@@ -381,4 +399,196 @@ export async function applyPlainEditToDraft(get, set, request) {
     keys: applied.keys,
     layer: applied.layer,
   };
+}
+
+/**
+ * ⭐ THE DIALOG'S `apply` SEAM, BOUND (judgment 146c, carried here by judgment 264).
+ *
+ * EM-D0e's `CardEditorDialog` takes `apply(edit) => Promise<result>` INJECTED with a `null`
+ * default, and its contract is the four COORDINATES a component can honestly know:
+ * `{ cardType, entityId, field, value }`. Turning those into the writer's `request` — the
+ * op, the root key and the live save — is STORE work with no home until this member, so it
+ * lives here beside the writer and EM-D1's shell wires the prop to this ONE export.
+ *
+ * ⛔ IT REACHES THE WRITER THROUGH THE ONE GENERIC ADAPTER, NEVER AROUND IT. The act travels
+ * envelope -> executor -> the registered `plainEditApply` spec -> `context.actions`, which is
+ * exactly the path EM-C4a's own A1 drives; this module registers NO second adapter and no
+ * second spec, and a decree COMMAND is its own slot (EM-C4c) rather than a shape borrowed here.
+ *
+ * ⛔ THE RUNTIME ARRIVES BY A DYNAMIC IMPORT, which is the estate's own store-side idiom
+ * (`settlementPendingEditActions.js` reaches `pendingEditCommitRuntime.js` the same way) and
+ * is what keeps this leaf's STATIC import list at the six the walker pins: a static edge here
+ * would hang the whole command registry off a leaf whose whole price is that first paint
+ * never pulls it.
+ *
+ * ⛔ IT WIDENS NO VOCABULARY. The writer's refusal travels back VERBATIM through
+ * `plainEditFacadeResult`, so every refusal this seam can report for a reached edit is a
+ * member of `PLAIN_EDIT_REFUSALS`; the one refusal made HERE is `no_save`, for the store that
+ * owns no edit scope at all and can therefore name no owner on an envelope.
+ *
+ * @param {Function} get @param {Function} set
+ * @param {{cardType: string, entityId: string, field: string, value: unknown}} intent
+ * @returns {Promise<{ok: true, saveId: string, keys: string[], layer: object}
+ *                  |{ok: false, reason: string}>} NEITHER branch throws.
+ */
+export async function applyPlainEditIntent(get, set, intent) {
+  const coords = rootKeyFor(
+    String(intent?.cardType ?? ''),
+    String(intent?.entityId ?? ''),
+    String(intent?.field ?? ''),
+  );
+  const value = intent?.value;
+  const [runtime, intents] = await Promise.all([
+    import('../application/commands/plainEditRuntime.js'),
+    import('../domain/pendingEditIntents.js'),
+  ]);
+  // The save/draft namespace that owns pending work, read from the estate's ONE home for it
+  // (`pendingEditOwnerScope`) rather than re-spelled here, so this seam and the pending-edit
+  // commit seam address the same owner for the same save.
+  const ownerScope = () => intents.pendingEditOwnerScope(get()).ownerKey;
+  const liveSaveId = () => String(get().activeSaveId ?? '');
+  const ownerKey = ownerScope();
+  if (!ownerKey) return refuse('no_save');
+  return runtime.runPlainEditCommand(
+    {
+      ownerKey,
+      saveId: liveSaveId(),
+      rootKey: coords.key,
+      op: makeOp(
+        'set-field',
+        { kind: coords.cardType, id: coords.entityId },
+        { field: coords.field, value },
+      ),
+      value,
+    },
+    {
+      journalScope: get,
+      readContext: () => ({ ownerKey: ownerScope(), saveId: liveSaveId() }),
+      applyPlainEdit: (request) => applyPlainEditToDraft(get, set, request),
+    },
+  );
+}
+
+/* ── EM-C4b · THE REGISTRY HALF ─────────────────────────────────────────────── */
+
+/** The shared frozen empty registry. A READ never materializes the key: EM-B3a's case
+ *  A2 is that a world which was never edited carries neither editor key at any hop. */
+const NO_DECREES = Object.freeze([]);
+
+/**
+ * The registry as it stands on the live record. Own-property only, never a throw and
+ * never a write; a value that is not an array reads as the shared empty one, because a
+ * malformed legacy value is CARRIED INERT on the record and repaired by nobody.
+ * @param {object} state @returns {readonly object[]}
+ */
+export function selectDecrees(state) {
+  const rows = state?.settlement?.decrees;
+  return Array.isArray(rows) ? rows : NO_DECREES;
+}
+
+/**
+ * ⛔ THE REGISTRY'S ONE STORE WRITE SITE. Every action below is this function with a
+ * different PURE verb, BOUND BY THE CALLER and never resolved from a string: a table
+ * keyed by verb name would be a computed dispatch at one remove, and
+ * `tests/store/deadOperationRatchet.test.js`'s premise arm exists to keep every dispatch
+ * a scanner can see. The verbs are EM-C1's and they are TOTAL — none throws, each returns
+ * a NEW frozen array, and a refused amendment returns the rows unchanged — so this site
+ * has no second refusal to make about them.
+ *
+ * ⛔ NO CANON GATE, AND THAT IS DESIGN LAW RATHER THAN AN OMISSION. Design 2.6: a
+ * CANONIZED settlement turns every edit into an EVENT applied at the next advance, and
+ * the registry is where that event waits. `canon_locked` therefore belongs to the
+ * plain-edit writer above and to nothing here. The one precondition is the ACTIVE SAVE,
+ * for the same data-safety reason step 1 gives there: the write indexes `get().settlement`.
+ *
+ * @param {Function} get @param {Function} set @param {unknown} saveId
+ * @param {(rows: readonly object[]) => readonly object[]} produce EM-C1's verb, bound
+ * @returns {{ok: true, saveId: string, decrees: readonly object[]}
+ *          |{ok: false, reason: string}} NEITHER branch throws; on `ok:false` the store
+ *   is unchanged and no argument is mutated.
+ */
+function commitRegistry(get, set, saveId, produce) {
+  const id = String(saveId ?? '');
+  if (!id || id !== String(get().activeSaveId ?? '')) return refuse('no_save');
+  const decrees = produce(selectDecrees(get()));
+  set((state) => { state.settlement.decrees = decrees; });
+  return { ok: /** @type {true} */ (true), saveId: id, decrees };
+}
+
+/** @param {Function} get @param {Function} set @param {object} request */
+export const stageDecree = (get, set, request) =>
+  commitRegistry(get, set, request?.saveId, (rows) => stage(rows, request?.op, request?.meta));
+/** @param {Function} get @param {Function} set @param {object} request */
+export const reorderDecree = (get, set, request) =>
+  commitRegistry(get, set, request?.saveId, (rows) => reorder(rows, request?.entryId, request?.toIndex));
+/** @param {Function} get @param {Function} set @param {object} request */
+export const withdrawDecree = (get, set, request) =>
+  commitRegistry(get, set, request?.saveId, (rows) => withdraw(rows, request?.entryId, request?.reason));
+/** @param {Function} get @param {Function} set @param {object} request */
+export const reopenDecree = (get, set, request) =>
+  commitRegistry(get, set, request?.saveId, (rows) => reopen(rows, request?.entryId, request?.op));
+/** @param {Function} get @param {Function} set @param {object} request */
+export const markDecreeApplied = (get, set, request) =>
+  commitRegistry(get, set, request?.saveId, (rows) => markApplied(rows, request?.entryId, request?.meta));
+/**
+ * The rewind's registry half (design 12.1). `restored` is the snapshot's registry and the
+ * LIVE rows are the later-staged ones, so a restored entry wins on a shared id and every
+ * decree staged after the tick is re-appended in its own order.
+ * @param {Function} get @param {Function} set @param {object} request
+ */
+export const revertDecreesOfTick = (get, set, request) =>
+  commitRegistry(get, set, request?.saveId, (rows) => revertTick(request?.restored, rows));
+
+/**
+ * ⭐ THE DECLARATION: EM-C1's verb name -> the store action that dispatches it. EXPORTED
+ * so the battery pins it SET-EQUAL IN BOTH DIRECTIONS against the registry module's own
+ * exported verbs, exactly as EM-C4a pins CASCADE_WRITERS against CASCADE_DISPATCH: a verb
+ * added to one and not the other cannot ship. It is a DECLARATION and never a dispatcher
+ * — nothing reads a name out of it at run time.
+ */
+export const DECREE_ACTIONS = Object.freeze({
+  markApplied: markDecreeApplied,
+  reopen: reopenDecree,
+  reorder: reorderDecree,
+  revertTick: revertDecreesOfTick,
+  stage: stageDecree,
+  withdraw: withdrawDecree,
+});
+
+/** @type {?{registry: unknown, record: unknown, ruleSet: unknown, value: unknown}} */
+let _guardsMemo = null;
+
+/**
+ * ⭐ THE MEMOIZED GUARD READ (the architecture's store row: memoized over `decrees` and
+ * the record).
+ *
+ * ⛔ THE RULE SET IS AN ARGUMENT AND THIS MODULE IMPORTS NO RULE. EM-C2's shared clause
+ * item 10 rules the two generator writers INJECTED by the engine's CALLER from outside
+ * `src/domain/**`; `src/store` composes neither and reaches `src/generators` nowhere, so
+ * `makeGuardRuleSet(deps)` is the caller's act and its first caller is the registry page.
+ * With no rule set the engine gives EMPTY_RULE_SET's honest answer: no guard, and nothing
+ * left unevaluated.
+ *
+ * ⛔ THE KEY IS IDENTITY ON THREE HANDLES. `ruleSet` joins the registry and the record
+ * because a different rule set is a different question about the same world, and a memo
+ * that ignored it would answer the previous one. The cache holds ONE entry and is a pure
+ * function of its key, so it is a cache and never a second state.
+ *
+ * @param {object} state @param {object} [ruleSet]
+ * @returns {{guards: readonly object[], unevaluated: readonly string[]}}
+ */
+export function selectGuards(state, ruleSet = EMPTY_RULE_SET) {
+  const registry = selectDecrees(state);
+  const record = state?.settlement ?? null;
+  if (_guardsMemo !== null
+    && _guardsMemo.registry === registry
+    && _guardsMemo.record === record
+    && _guardsMemo.ruleSet === ruleSet) {
+    return /** @type {{guards: readonly object[], unevaluated: readonly string[]}} */ (
+      _guardsMemo.value
+    );
+  }
+  const value = evaluateGuards(registry, record, OP_TYPES, ruleSet);
+  _guardsMemo = { registry, record, ruleSet, value };
+  return value;
 }

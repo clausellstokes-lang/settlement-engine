@@ -1,5 +1,6 @@
 /**
- * editSlice.test.js — EM-C4a cases A1, A2, A3 and A8.
+ * editSlice.test.js — EM-C4a cases A1, A2, A3 and A8; EM-C4b cases A1 to A6 and the
+ * judgment-264 binder's A7.
  *
  * THE CLAIM: one typed op travels the estate's EXISTING application-command boundary
  * and comes back as a receipt; the record carries the edited value, the DM's layer
@@ -33,27 +34,42 @@ import { readFileSync } from 'node:fs';
 import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
+import { PLAIN_EDIT_APPLY } from '../../src/application/commands/adapters/plainEditApply.js';
 import { COMMAND_STATUS } from '../../src/application/commands/commandReceipts.js';
 import { runPlainEditCommand } from '../../src/application/commands/plainEditRuntime.js';
 import { clearSessionCommandJournal } from '../../src/application/commands/sessionCommandRuntime.js';
+import { standardCommandRegistry } from '../../src/application/commands/standardCommandRegistry.js';
 import { compareCodepoint } from '../../src/domain/deterministicSort.js';
 import { APPLY_EDIT_REASONS } from '../../src/domain/edit/dmLayer.js';
 import { declarationsFor, FIELD_DECLARATIONS } from '../../src/domain/edit/fieldDeclarations.js';
+import { EMPTY_RULE_SET, GUARD_KINDS, GUARD_OFFERS } from '../../src/domain/edit/guards.js';
 import { makeOp } from '../../src/domain/edit/operations.js';
+import * as registry from '../../src/domain/edit/registry.js';
 import { NPC_RENAME_SURFACES } from '../../src/domain/factionRename.js';
 import { createSettlementSlice } from '../../src/store/settlementSlice.js';
 import {
+  applyPlainEditIntent,
   applyPlainEditToDraft,
   CASCADE_DISPATCH,
   CASCADE_WRITERS,
+  DECREE_ACTIONS,
   EDITOR_MODES,
+  EDITOR_MODE_OFF,
   EDITOR_MODE_PREF_KEY,
+  markDecreeApplied,
   PLAIN_EDIT_REFUSALS,
   readRootKey,
   REDERIVE_SEAM,
+  reopenDecree,
+  reorderDecree,
+  revertDecreesOfTick,
   rootKeyFor,
   selectCanonState,
+  selectDecrees,
   selectEditorMode,
+  selectGuards,
+  stageDecree,
+  withdrawDecree,
 } from '../../src/store/editSlice.js';
 
 const REPO_ROOT = join(dirname(fileURLToPath(import.meta.url)), '../..');
@@ -194,7 +210,7 @@ describe('EM-C4a — the store plain-edit half', () => {
       .map((hit) => hit[1]);
     // anchored: both scans are LIVE — the import scan sees the four modules this file
     // really imports, and the assignment scan sees the two layer writes it really makes.
-    expect(imported.length).toBe(4);
+    expect(imported.length).toBe(6);
     expect(assigned.filter((target) => target === 'state.settlement.dmLayer').length).toBe(2);
     expect(imported.filter((specifier) => /factionRename|RenameHelpers|pendingEdits/.test(specifier))).toEqual([]);
     expect(assigned.filter((target) => /npcs|factions|relationships/.test(target))).toEqual([]);
@@ -410,14 +426,328 @@ describe('EM-C4a — the store plain-edit half', () => {
     expect(JSON.stringify(seamStore.getState().settlement)).toBe(beforeSeam);
 
     // The transient mode reads through uiSlice's shipped bag and never a boolean.
-    expect([...EDITOR_MODES]).toEqual(['off', 'plain']);
+    // ⭐ EM-C4b WIDENS THESE ROWS IN PLACE, BY ADDITION AND NEVER BY DELETION: `decree`
+    // JOINS the vocabulary in compareCodepoint order, so it is no longer an unknown word,
+    // and the default an unknown word falls back to is now the NAMED EDITOR_MODE_OFF rather
+    // than EDITOR_MODES[0]. The unknown-word row keeps its meaning with a word that is still
+    // outside the set, so the negative it proves is unmoved.
+    expect([...EDITOR_MODES]).toEqual(['decree', 'off', 'plain']);
     expect(EDITOR_MODE_PREF_KEY).toBe('editorMode');
+    expect(EDITOR_MODE_OFF).toBe('off');
     expect(selectEditorMode({ userPrefs: {} })).toBe('off');
     expect(selectEditorMode({ userPrefs: { [EDITOR_MODE_PREF_KEY]: 'plain' } })).toBe('plain');
-    expect(selectEditorMode({ userPrefs: { [EDITOR_MODE_PREF_KEY]: 'decree' } })).toBe('off');
+    expect(selectEditorMode({ userPrefs: { [EDITOR_MODE_PREF_KEY]: 'decree' } })).toBe('decree');
+    expect(selectEditorMode({ userPrefs: { [EDITOR_MODE_PREF_KEY]: 'pencil' } })).toBe('off');
     expect(selectEditorMode(undefined)).toBe('off');
     // The one declared cascade row, and the declarations it is keyed against.
     expect(CASCADE_WRITERS).toEqual({ 'npc:name': 'renameNPC' });
     expect(declarationsFor('npc').map((row) => row.field)).toEqual(['name', 'role', 'status', 'note']);
+  });
+});
+
+/* ── EM-C4b ─ the registry half's fixtures, each READ from its producer ─────── */
+
+/** Design §20.3's withdrawal reason, built from EM-C1's own frozen vocabularies at the two
+ *  indexes that leaf itself reads them at (`WITHDRAWN_REASON_KINDS[0]`,
+ *  `RESOLUTION_MISSING_KINDS[4]`), never re-typed as words here. */
+const WITHDRAWN_REASON = Object.freeze({
+  kind: registry.WITHDRAWN_REASON_KINDS[0],
+  missing: registry.RESOLUTION_MISSING_KINDS[4],
+  was: 'sawyer',
+});
+const ORDERED_AT = '2026-01-01T00:00:00.000Z';
+
+const stageRequest = (id, field = 'role', value = 'Warden') => ({
+  saveId: SAVE_ID, op: opFor(field, value), meta: { id, orderedAt: ORDERED_AT },
+});
+const reorderRequest = (id, toIndex) => ({ saveId: SAVE_ID, entryId: id, toIndex });
+const withdrawRequest = (id) => ({ saveId: SAVE_ID, entryId: id, reason: WITHDRAWN_REASON });
+const reopenRequest = (id) => ({ saveId: SAVE_ID, entryId: id, op: opFor('note', 'owes the miller') });
+const applyRequest = (id) => ({
+  saveId: SAVE_ID, entryId: id, meta: { appliedAt: '2026-01-02T00:00:00.000Z', tickRef: 'tick-7' },
+});
+const revertRequest = (restored) => ({ saveId: SAVE_ID, restored });
+
+/** A draft store carrying ONE staged entry, so every arm below starts from the same rows. */
+function seededStore() {
+  const store = makeStore();
+  stageDecree(store.getState, store.setState, stageRequest('dec-1'));
+  return store;
+}
+
+/** EM-C1's SIX amendment verbs, DERIVED from the module rather than listed: an exported
+ *  function that takes a registry AND at least one further argument and answers with a NEW
+ *  FROZEN registry. `compareDecrees` answers a number, `resolveDecree` a verdict, and the
+ *  reading `orderedDecrees` takes the registry alone — so none of the three is a verb. */
+const liveVerbs = () => Object.keys(registry)
+  .filter((name) => typeof registry[name] === 'function' && registry[name].length >= 2)
+  .filter((name) => {
+    const answer = registry[name]([]);
+    return Array.isArray(answer) && Object.isFrozen(answer);
+  })
+  .sort(compareCodepoint);
+
+/** The declaration's own side of the same fact. */
+const declaredVerbs = () => Object.keys(DECREE_ACTIONS).sort(compareCodepoint);
+
+/** One rule that speaks for every entry, and one whose injected dependency the caller does
+ *  NOT supply so `unevaluated` NAMES it instead of reading as clean coverage. A NEW object
+ *  every call, because the memo's third handle is identity. Both vocabularies are read from
+ *  EM-C2's frozen exports. */
+const fixtureRuleSet = () => ({
+  rules: [
+    {
+      id: 'fixture.speaks',
+      appliesTo: null,
+      needs: [],
+      evaluate: (ctx) => ({
+        kind: GUARD_KINDS[0],
+        message: `the fixture rule judged ${ctx.entry.id}`,
+        offers: [GUARD_OFFERS[0]],
+      }),
+    },
+    {
+      id: 'fixture.underSupplied',
+      appliesTo: null,
+      needs: ['renormalizeFactionPower'],
+      evaluate: () => null,
+    },
+  ],
+  project: null,
+  deps: {},
+});
+
+describe('EM-C4b — the store registry half', () => {
+  it('A1 — MAIN: each of the six actions dispatches its OWN pure verb onto the record through one write site, the stored registry IS the returned array, and DECREE_ACTIONS is SET-EQUAL in both directions to the registry module\'s own six verbs', () => {
+    const first = makeStore();
+    const staged = stageDecree(first.getState, first.setState, stageRequest('dec-1'));
+    expect(staged).toEqual({ ok: true, saveId: SAVE_ID, decrees: staged.decrees });
+    expect(first.getState().settlement.decrees).toBe(staged.decrees);
+    expect(staged.decrees.map((entry) => entry.id)).toEqual(['dec-1']);
+    expect(staged.decrees[0].status).toBe('pending');
+
+    // Each action is run on its OWN store seeded with the same rows, and its answer is
+    // compared with the PURE verb run over those same rows: a wrongly bound verb reds here
+    // rather than passing because the two happened to agree on one shape.
+    const actions = [
+      {
+        verb: 'stage',
+        act: (store) => stageDecree(store.getState, store.setState, stageRequest('dec-2')),
+        pure: (rows) => registry.stage(rows, stageRequest('dec-2').op, stageRequest('dec-2').meta),
+      },
+      {
+        verb: 'reorder',
+        act: (store) => reorderDecree(store.getState, store.setState, reorderRequest('dec-1', 0)),
+        pure: (rows) => registry.reorder(rows, 'dec-1', 0),
+      },
+      {
+        verb: 'withdraw',
+        act: (store) => withdrawDecree(store.getState, store.setState, withdrawRequest('dec-1')),
+        pure: (rows) => registry.withdraw(rows, 'dec-1', WITHDRAWN_REASON),
+      },
+      {
+        verb: 'reopen',
+        act: (store) => reopenDecree(store.getState, store.setState, reopenRequest('dec-1')),
+        pure: (rows) => registry.reopen(rows, 'dec-1', reopenRequest('dec-1').op),
+      },
+      {
+        verb: 'markApplied',
+        act: (store) => markDecreeApplied(store.getState, store.setState, applyRequest('dec-1')),
+        pure: (rows) => registry.markApplied(rows, 'dec-1', applyRequest('dec-1').meta),
+      },
+      {
+        verb: 'revertTick',
+        act: (store) => revertDecreesOfTick(store.getState, store.setState, revertRequest([])),
+        pure: (rows) => registry.revertTick([], rows),
+      },
+    ];
+    const outcomes = actions.map(({ verb, act, pure }) => {
+      const store = seededStore();
+      const before = store.getState().settlement.decrees;
+      const result = act(store);
+      return [
+        verb,
+        result.ok,
+        store.getState().settlement.decrees === result.decrees,
+        JSON.stringify(result.decrees) === JSON.stringify(pure(before)),
+      ];
+    });
+    expect(outcomes).toEqual(actions.map(({ verb }) => [verb, true, true, true]));
+
+    // THE DECLARATION ↔ PRODUCER PIN, both directions, both sides DERIVED: a verb added to
+    // the registry and not to DECREE_ACTIONS (or the reverse) cannot ship.
+    expect(liveVerbs().length).toBe(6);
+    expect(actions.map(({ verb }) => verb).sort(compareCodepoint)).toEqual(liveVerbs());
+    expect(declaredVerbs()).toEqual(liveVerbs());
+    // anchored: the same two rosters are non-empty above, so neither absence below is the
+    // emptiness of a scan that stopped working.
+    expect(declaredVerbs().filter((verb) => !liveVerbs().includes(verb))).toEqual([]);
+    expect(liveVerbs().filter((verb) => !declaredVerbs().includes(verb))).toEqual([]);
+  });
+
+  it('A2 — DORMANT: a world that was never edited materializes NO key on a read, the empty registry is the shared frozen one, `decree` is a member of the closed mode vocabulary, and the empty rule set answers with no guard and nothing unevaluated', () => {
+    const store = makeStore();
+    // anchored: the same record carries `npcs`, so the absence below is a real own-property
+    // reading and not a lookup on nothing.
+    expect(Object.hasOwn(store.getState().settlement, 'npcs')).toBe(true);
+    expect(Object.hasOwn(store.getState().settlement, 'decrees')).toBe(false);
+    const read = selectDecrees(store.getState());
+    expect(read).toEqual([]);
+    expect(Object.isFrozen(read)).toBe(true);
+    expect(selectDecrees({ settlement: { decrees: 'not-an-array' } })).toBe(read);
+    expect(selectDecrees(undefined)).toBe(read);
+    // A READ never writes: the key is still absent after both readings.
+    expect(Object.hasOwn(store.getState().settlement, 'decrees')).toBe(false);
+    expect(EDITOR_MODES.includes('decree')).toBe(true);
+    expect(selectGuards(store.getState(), EMPTY_RULE_SET)).toEqual({ guards: [], unevaluated: [] });
+    expect(Object.hasOwn(store.getState().settlement, 'decrees')).toBe(false);
+  });
+
+  it('A3 — COUNTERFORCE: a saveId that is not the active save refuses no_save with the settlement byte-identical and no verb run, and a CANONIZED save is the paired positive control because a decree is what canon stages', () => {
+    const foreign = makeStore();
+    const before = JSON.stringify(foreign.getState().settlement);
+    const refused = stageDecree(foreign.getState, foreign.setState, {
+      ...stageRequest('dec-1'), saveId: 'save-9',
+    });
+    expect(refused).toEqual({ ok: false, reason: 'no_save' });
+    expect(PLAIN_EDIT_REFUSALS.includes(refused.reason)).toBe(true);
+    // anchored: the same stringify of the same store is compared, and the positive control
+    // below moves it - so this equality measures a store that did not move.
+    expect(JSON.stringify(foreign.getState().settlement)).toBe(before);
+    expect(Object.hasOwn(foreign.getState().settlement, 'decrees')).toBe(false);
+    expect(stageDecree(foreign.getState, foreign.setState, { ...stageRequest('dec-1'), saveId: '' }))
+      .toEqual({ ok: false, reason: 'no_save' });
+
+    // THE PAIRED POSITIVE CONTROL, and design §2.6's law: on canon an edit becomes an event
+    // applied at the next advance, and the registry is where it waits — so canon is NOT a
+    // refusal here, unlike the plain-edit writer above.
+    const canon = makeStore('canon');
+    const staged = stageDecree(canon.getState, canon.setState, stageRequest('dec-1'));
+    expect(staged.ok).toBe(true);
+    expect(canon.getState().settlement.decrees.map((entry) => entry.id)).toEqual(['dec-1']);
+    expect(JSON.stringify(foreign.getState().settlement)).toBe(before);
+  });
+
+  it('A4 — BOUNDARY: a withdrawn entry keeps design §20.3\'s reason, its own op and its order index, the registry that comes back is a NEW array, and the rows handed in are not mutated', () => {
+    const store = seededStore();
+    const staged = store.getState().settlement.decrees;
+    const copy = structuredClone(staged);
+    const after = withdrawDecree(store.getState, store.setState, withdrawRequest('dec-1')).decrees;
+
+    expect(after).not.toBe(staged);
+    expect(staged).toEqual(copy);
+    const row = after.find((entry) => entry.id === 'dec-1');
+    expect(row.status).toBe('withdrawn');
+    expect(row.withdrawnReason).toEqual(WITHDRAWN_REASON);
+    expect(row.orderIndex).toBe(copy[0].orderIndex);
+    expect(row.op).toEqual(copy[0].op);
+    expect(row.orderedAt).toBe(ORDERED_AT);
+    // A hand withdrawal carries NO reason at all, which is what design §20.3 makes the
+    // absence mean; the malformed reason is refused by EM-C1 and written by nobody.
+    const byHand = seededStore();
+    const handled = withdrawDecree(byHand.getState, byHand.setState, {
+      saveId: SAVE_ID, entryId: 'dec-1', reason: { kind: 'not-a-kind' },
+    }).decrees;
+    // anchored: the same field IS written on the row above, so this absence is the reason
+    // shape being refused rather than a field this suite never reaches.
+    expect(Object.hasOwn(handled[0], 'withdrawnReason')).toBe(false);
+    expect(handled[0].status).toBe('withdrawn');
+  });
+
+  it('A5 — IDEMPOTENCY: selectGuards is memoized on the registry, the record and the rule set, the same three handles answer with the SAME object, each change re-evaluates, every finding is in the closed guard vocabularies and an under-supplied rule is NAMED unevaluated', () => {
+    const store = seededStore();
+    const ruleSet = fixtureRuleSet();
+    const first = selectGuards(store.getState(), ruleSet);
+    expect(selectGuards(store.getState(), ruleSet)).toBe(first);
+    expect(first.guards.length).toBe(1);
+    expect(first.guards.every((guard) => GUARD_KINDS.includes(guard.kind))).toBe(true);
+    expect(first.guards.flatMap((guard) => [...guard.offers])
+      .every((offer) => GUARD_OFFERS.includes(offer))).toBe(true);
+    // The caller supplied no `renormalizeFactionPower`, so the rule that needs it is NAMED
+    // rather than counted as clean coverage: the deps are the caller's (judgment 263 Q3).
+    expect([...first.unevaluated]).toEqual(['fixture.underSupplied']);
+
+    // A CHANGED REGISTRY re-evaluates.
+    stageDecree(store.getState, store.setState, stageRequest('dec-2'));
+    const second = selectGuards(store.getState(), ruleSet);
+    expect(second).not.toBe(first);
+    expect(second.guards.length).toBe(2);
+    // A CHANGED RULE SET re-evaluates: a different question about the same world.
+    const third = selectGuards(store.getState(), fixtureRuleSet());
+    expect(third).not.toBe(second);
+    expect(third.guards.map((guard) => guard.entryId)).toEqual(second.guards.map((guard) => guard.entryId));
+    // And the same three handles are still one answer after all of it.
+    expect(selectGuards(store.getState(), ruleSet)).not.toBe(second);
+  });
+
+  it('A6 — LIFECYCLE: the rewind\'s registry half takes the RESTORED entry on a shared id, re-appends every decree staged after the tick, and moves no entry\'s order index', () => {
+    const store = seededStore();
+    markDecreeApplied(store.getState, store.setState, applyRequest('dec-1'));
+    expect(store.getState().settlement.decrees[0].status).toBe('applied');
+    // The snapshot `undoLastPulse` restores: that tick's decrees, back to pending, in order.
+    const restored = structuredClone([...store.getState().settlement.decrees])
+      .map((entry) => ({ ...entry, status: 'pending' }));
+    stageDecree(store.getState, store.setState, stageRequest('dec-2', 'note', 'owes the miller'));
+
+    const after = revertDecreesOfTick(store.getState, store.setState, revertRequest(restored)).decrees;
+    expect(after.map((entry) => entry.id)).toEqual(['dec-1', 'dec-2']);
+    expect(after.map((entry) => entry.status)).toEqual(['pending', 'pending']);
+    expect(after.map((entry) => entry.orderIndex))
+      .toEqual([restored[0].orderIndex, restored[0].orderIndex + 1]);
+    // anchored: the pre-undo row for that id IS applied above, so taking the restored entry
+    // is a choice between two real rows rather than the only row there was.
+    expect(after.filter((entry) => entry.status === 'applied')).toEqual([]);
+    expect(store.getState().settlement.decrees).toBe(after);
+
+    // The later-staged entry keeps its own words, and the order the DM reads is the
+    // registry's own — every id present exactly once, nothing reordered by the rewind.
+    expect(after[1].op).toEqual(stageRequest('dec-2', 'note', 'owes the miller').op);
+    expect([...new Set(after.map((entry) => entry.id))].length).toBe(after.length);
+  });
+});
+
+describe('EM-C4b — the plain-edit intent binder (judgment 264)', () => {
+  it('A7 — the dialog\'s four-coordinate intent reaches the writer THROUGH the one generic adapter, the draft carries the edit at the minted root key, a refused intent surfaces a member of the closed refusal set, and a store with no edit scope is refused without throwing', async () => {
+    const store = makeStore();
+    clearSessionCommandJournal(store.getState);
+    const applied = await applyPlainEditIntent(store.getState, store.setState, {
+      cardType: 'npc', entityId: NPC_ID, field: 'role', value: 'Warden',
+    });
+
+    // (i) THE BOUNDARY REALLY RAN: the receipt is the executor's own, and the live registry
+    //     carries EXACTLY ONE plain-edit capability — a second adapter would be a second row.
+    expect(applied.ok).toBe(true);
+    expect(applied.commandReceipt.status).toBe(COMMAND_STATUS.APPLIED);
+    expect(standardCommandRegistry.list().map((spec) => spec.kind)
+      .filter((kind) => kind.startsWith('settlement.plain-edit'))).toEqual([PLAIN_EDIT_APPLY]);
+
+    // (ii) THE DRAFT CARRIES THE EDIT, and the layer records the ONE root key the binder
+    //      minted from the intent's four coordinates.
+    expect(store.getState().settlement.npcs[0].role).toBe('Warden');
+    expect(applied.keys).toEqual([rootKeyFor('npc', NPC_ID, 'role').key]);
+    expect(store.getState().settlement.dmLayer.roots)
+      .toEqual({ [rootKeyFor('npc', NPC_ID, 'role').key]: 'Warden' });
+
+    // (iii) A REFUSED INTENT: the canon rule refuses, and the word that reaches the dialog is
+    //       a member of the writer's own closed set rather than one minted at this seam.
+    const canon = makeStore('canon');
+    clearSessionCommandJournal(canon.getState);
+    const before = JSON.stringify(canon.getState().settlement);
+    const refused = await applyPlainEditIntent(canon.getState, canon.setState, {
+      cardType: 'npc', entityId: NPC_ID, field: 'role', value: 'Warden',
+    });
+    expect(refused.ok).not.toBe(true);
+    expect(refused.reason).toBe('canon_locked');
+    expect(PLAIN_EDIT_REFUSALS.includes(refused.reason)).toBe(true);
+    // anchored: the identical intent DID move the draft store above, so this equality
+    // measures a refusal that wrote nothing rather than a seam that never ran.
+    expect(JSON.stringify(canon.getState().settlement)).toBe(before);
+
+    // (iv) TOTAL: a store that owns no edit scope at all can name no owner on an envelope,
+    //      and is refused with this module's own word instead of throwing.
+    const scopeless = create(immer(() => ({ activeSaveId: null })));
+    expect(await applyPlainEditIntent(scopeless.getState, scopeless.setState, {
+      cardType: 'npc', entityId: NPC_ID, field: 'role', value: 'Warden',
+    })).toEqual({ ok: false, reason: 'no_save' });
   });
 });
