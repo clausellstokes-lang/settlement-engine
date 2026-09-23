@@ -7,10 +7,10 @@
     "    npx vitest run tests/lint/tuningRegister.walker.test.js",
     "The refreeze EXITS NON-ZERO by design; the proof is a separate ordinary run."
   ],
-  "measuredAtSha": "0b8df9f9049f4fa516ca44ec1ca414aa7311caf6",
-  "measuredBy": "EM-E4b builder (Claude Opus 5), session cce01f87, tests-only mode",
+  "measuredAtSha": "78a54b255ca8a60ec962f134fd628255b89f317e",
+  "measuredBy": "chair-fable-cce01f87",
   "date": "2026-09-23",
-  "note": "EM-E4b (0b8df9f90): the pulse kernel now imports TRADITION_FORK from traditionsKernel.js to compose the fork-pin vocabulary catalogue at the head of the tick, so src/domain/worldPulse/pulseKernel.js joins TRAD_TUNING's dependents. ONE row, ONE field: spanDigest, keys, idiom and every leaf are byte-identical, no dial moved, and the P2/P3 populations and all four totals are unchanged (237 tables, 535 named, 6975 bare, 2114 keys).",
+  "note": "No dial moved: dependents only, composed at the train tip 78a54b255 (judgment 278). EM-E4b (c0ef2cffe): pulseKernel.js joins traditionsKernel.js#TRAD_TUNING's dependents. EM-E5 (ad7d7ff3f): src/domain/edit/directions.js imports the vocabularies of seven digested modules, so ten tables gain it as a dependent (E5's own refreeze ea8baaaf0 superseded by this one). spanDigest, keys, idiom and every leaf byte-identical; totals unchanged.",
   "schemaVersion": 1,
   "trees": {
     "p1": [
@@ -2342,6 +2342,7 @@
       },
       "dependents": [
         "src/domain/display/settlementBeliefs.js",
+        "src/domain/edit/directions.js",
         "src/domain/roads/embassyHazard.js",
         "src/domain/roads/knownWorld.js",
         "src/domain/roads/verification.js",
@@ -2402,6 +2403,7 @@
       },
       "dependents": [
         "src/domain/display/settlementBeliefs.js",
+        "src/domain/edit/directions.js",
         "src/domain/roads/embassyHazard.js",
         "src/domain/roads/knownWorld.js",
         "src/domain/roads/verification.js",
@@ -2481,6 +2483,7 @@
         "EXHAUSTION_W": 0.25
       },
       "dependents": [
+        "src/domain/edit/directions.js",
         "src/domain/worldPulse/brokerageServicesFeed.js",
         "src/domain/worldPulse/brokerageServicesPlant.js",
         "src/domain/worldPulse/brokerageServicesRules.js"
@@ -2501,6 +2504,7 @@
         "BAND_CUTS.2": 0.65
       },
       "dependents": [
+        "src/domain/edit/directions.js",
         "src/domain/worldPulse/brokerageServicesFeed.js",
         "src/domain/worldPulse/brokerageServicesPlant.js",
         "src/domain/worldPulse/brokerageServicesRules.js"
@@ -2874,6 +2878,7 @@
         "MERC_REINFORCE_CAP": 0.3
       },
       "dependents": [
+        "src/domain/edit/directions.js",
         "src/domain/events/realmManifest.js",
         "src/domain/worldPulse/coup.js",
         "src/domain/worldPulse/peaceReasons.js",
@@ -3706,7 +3711,7 @@
       "exported": true,
       "idiom": "literal",
       "keys": 3,
-      "line": 142,
+      "line": 169,
       "spanDigest": "a5da95dcebc47ef008491d904306a7794fbd2c92eb510eadee04d12cfba2f3b0",
       "leaves": {
         "DWELL_INTERVAL_TICKS": 2,
@@ -4345,6 +4350,7 @@
       },
       "dependents": [
         "src/domain/display/credibilityRead.js",
+        "src/domain/edit/directions.js",
         "src/domain/worldPulse/brokerageServicesPlant.js",
         "src/domain/worldPulse/corruptionWeb.js",
         "src/domain/worldPulse/envoyPulse.js",
@@ -4365,7 +4371,7 @@
       "exported": true,
       "idiom": "literal",
       "keys": 23,
-      "line": 744,
+      "line": 755,
       "spanDigest": "170f4c16c27f0088f860cc97ee7afc207cc0b8fc746e6046c0a5c126bb0e128e",
       "leaves": {
         "SEE_DECAY_KEEP": 0.8,
@@ -4394,6 +4400,7 @@
       },
       "dependents": [
         "src/domain/display/credibilityRead.js",
+        "src/domain/edit/directions.js",
         "src/domain/worldPulse/brokerageServicesPlant.js",
         "src/domain/worldPulse/corruptionWeb.js",
         "src/domain/worldPulse/envoyPulse.js",
@@ -4892,6 +4899,7 @@
         }
       },
       "dependents": [
+        "src/domain/edit/directions.js",
         "src/domain/worldPulse/generosityKernel.js",
         "src/domain/worldPulse/momentum.js",
         "src/domain/worldPulse/pulseKernel.js",
@@ -5439,6 +5447,7 @@
       },
       "dependents": [
         "src/components/admin/AdminSimTuningPanel.jsx",
+        "src/domain/edit/directions.js",
         "src/domain/worldPulse/deploymentReturn.js",
         "src/domain/worldPulse/pulseKernel.js",
         "src/domain/worldPulse/sovereigntyTransfer.js"
@@ -6935,6 +6944,7 @@
       },
       "dependents": [
         "src/domain/display/dossierViewModel.js",
+        "src/domain/edit/directions.js",
         "src/domain/worldPulse/pulseKernel.js",
         "src/domain/worldPulse/warCoalitionExpenditure.js",
         "src/domain/worldPulse/warCosts.js"
