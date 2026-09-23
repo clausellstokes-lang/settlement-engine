@@ -420,4 +420,40 @@ describe('EM-D1 — the edit-mode shell', () => {
     const on = await mountShell();
     expect(on.container.innerHTML.length).toBeGreaterThan(0);
   });
+
+  /**
+   * ⭐ EM-D3c — THE PLACEMENT ONLY. What the page of decrees SHOWS, and every binding it
+   * shows it from, is tests/components/registryMount.test.jsx's; this arm is the register's
+   * own half of the join, because "at the dossier's foot" is a fact about this file's render
+   * order and about nothing else. Design §2.5's registry row: a page of decrees after the
+   * cards, in the tome's idiom.
+   */
+  it('A9: the page of decrees hangs at the register foot, inside the gated section, with Done after it and no second heading minted for it', async () => {
+    const { container } = await mountShell();
+    const section = container.querySelector('section');
+    const rows = [...section.children];
+    const at = rows.findIndex((node) => node.getAttribute('data-testid') === 'decree-registry-page');
+
+    // It is a child of the SAME section the gate returns from, never a sibling of it.
+    expect(at).toBeGreaterThan(-1);
+    expect(rows.length - at).toBe(2);
+
+    // AT THE FOOT: every heading the register draws stands before the page, and the one
+    // thing after it is Done. The count below is the register's own four heads, so a head
+    // that grew BELOW the page reds here rather than reading as "at the foot".
+    const headsBefore = rows.slice(0, at).filter((node) => node.tagName === 'H3').length;
+    expect(headsBefore).toBe(rows.filter((node) => node.tagName === 'H3').length);
+    expect(headsBefore).toBe(4);
+    expect(rows[at + 1].textContent.trim()).toBe(t('edit.shell.done'));
+
+    // THE PAGE CARRIES ITS OWN TITLE, so the register mints none: the shell's mapped head
+    // keys are still exactly the four it drew before this member, as a set equality.
+    expect(mappedKeysIn(SHELL_SOURCE).filter((key) => key.endsWith('Head'))).toEqual([
+      'edit.shell.actsHead',
+      'edit.shell.cardsHead',
+      'edit.shell.counterpartiesHead',
+      'edit.shell.derivedHead',
+    ]);
+    expect(rows[at].querySelector('h2').textContent.length).toBeGreaterThan(0);
+  });
 });

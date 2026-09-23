@@ -363,7 +363,7 @@ describe('EM-D3: the registry page at the dossier foot', () => {
     expect(controls.filter((node) => node.getAttribute('tabindex') === '-1')).toEqual([]);
   });
 
-  it('A10 it lands dark, draws nothing, and its static imports are the declared four', () => {
+  it('A10 it draws nothing, its static imports are the declared four, and its ONE importer under src is the shell', () => {
     expect(importsOf(LEAF_SOURCE).slice().sort()).toEqual([
       '../../copy/index.js',
       '../../domain/deterministicSort.js',
@@ -372,9 +372,19 @@ describe('EM-D3: the registry page at the dossier foot', () => {
     ]);
     expect(drawsIn(LEAF_SOURCE)).toEqual([]);
     expect(drawsIn(DRAW_CONTROL).length).toBe(3);
-    // NO IMPORTER ANYWHERE IN `src/`, so no eager closure can contain it: +0 first-paint
-    // modules, and the mount is EM-D1's to add.
-    expect(importersIn(join(ROOT, 'src'))).toEqual([]);
+    // ⭐ FLIPPED BY EM-D3c, AND THE SHAPE OF THE ARM IS UNCHANGED. At EM-D3's landing this
+    // equality read `[]` — no importer anywhere under `src/`, which is what "it lands dark"
+    // meant and why the mount could be nobody's accident. The mount this page's own header
+    // reserved has now landed, so the SET EQUALITY names it: exactly ONE importer, and it is
+    // the edit-mode shell, which `src/App.jsx` reaches through a single `lazy(() =>
+    // import(...))` edge. The first-paint claim therefore still holds by construction — the
+    // eager graph walks STATIC edges only — and it is priced where the eager set can be read,
+    // in tests/build/vendorPdfLazy.test.js's editor-train arm, on the shell's own row.
+    //
+    // ⛔ THE PREDICATE IS STILL A BARE NAME SCAN. A second file that so much as NAMES this
+    // leaf in prose reds here exactly as an import would, which is what keeps the mount a
+    // measurement rather than a promise.
+    expect(importersIn(join(ROOT, 'src'))).toEqual(['src/components/edit/EditModeShell.jsx']);
     expect(importersOfSource("import X from './DecreeRegistryPage.jsx';")).toBe(true);
   });
 });
