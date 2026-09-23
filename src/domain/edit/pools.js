@@ -38,7 +38,7 @@
  */
 import { createPRNG } from '../../kernel/prng.js';
 import { compareCodepoint } from '../deterministicSort.js';
-import { getInstitutionsForTier } from '../institutionLookups.js';
+import { getInstitutionalCatalog } from '../institutionLookups.js';
 import { FACTION_ARCHETYPES } from '../factionArchetypes.js';
 import { NPC_STATUS_VALUES } from '../entities/npcs.js';
 import { ENTITY_STATUS_VALUES } from '../entities/status.js';
@@ -155,6 +155,17 @@ function rosterField(rows, field, spare = '') {
  *    caught by the acceptance rather than shipped; the two state pools read the frozen
  *    vocabulary each union keeps in its OWN home file, imported and never re-spelled.
  *
+ * ⛔ U81 — AND IT READS THE RIGHT AXIS OF THAT TABLE. `institution.class` fills the
+ *    institution card's `category` (`institutions[].category`), and the declared writer
+ *    `assembleInstitutions` walks the tier table and writes each entry's SECOND-LEVEL
+ *    KEY — the GROUPING (Economy, Crafts, Religious, …), declared canonically in
+ *    data/categoryVocabulary.js. This row read `getInstitutionsForTier`, the tier's
+ *    institution NAMES, so the DM was offered "Adventurers' charter hall" for a field
+ *    no writer ever fills with one: not one of the 85 values it answered at town was a
+ *    category. It now reads the SAME tier-gated catalogue at the SAME domain address —
+ *    its keys rather than its leaves. The join to the canonical declaration is asserted
+ *    in the acceptance, where it costs this leaf no import.
+ *
  * ⭐ AN ABSENT `tier` READS THE VILLAGE CATALOGUE. That default is this module's
  *    contract decision and not an inherited one: the tier reader has no special case and
  *    answers an empty set for anything outside the ladder.
@@ -164,7 +175,19 @@ function rosterField(rows, field, spare = '') {
  * @type {Readonly<Record<string, PoolSource>>}
  */
 export const POOLS = Object.freeze({
-  'institution.class': { read: (world) => [...getInstitutionsForTier(world.tier ?? 'village')] },
+  'institution.class': {
+    // ⭐ THE LADDER MEMBERSHIP IS THIS ROW'S, NOT THE READER'S, AND IT KEEPS THIS
+    // MODULE'S STATED CONTRACT. The catalogue reader answers the VILLAGE table for the
+    // wizard's `random` / `custom` sentinels; this leaf promises the opposite above — an
+    // absent tier reads village BY THIS MODULE'S DECISION, and anything outside the
+    // ladder is the empty set. `TIER_ORDER` is this file's own already-imported
+    // vocabulary, so the test is the ladder itself and never a second tier GATE (the
+    // `minTier` gate stays where it is, inside the reader).
+    read: (world) => {
+      const tier = String(world.tier ?? 'village');
+      return TIER_ORDER.includes(tier) ? Object.keys(getInstitutionalCatalog(tier)) : EMPTY;
+    },
+  },
   'faction.category': { read: () => Object.values(FACTION_ARCHETYPES) },
   'cause.remove': { values: CAUSE_REMOVE },
   commodity: {

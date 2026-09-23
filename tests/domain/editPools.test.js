@@ -29,7 +29,7 @@ import { expectAbsentWithAnchor } from '../helpers/anchoredNegatives.js';
 import { POOLS, poolValues, rollFrom } from '../../src/domain/edit/pools.js';
 import { FIELD_DECLARATIONS } from '../../src/domain/edit/fieldDeclarations.js';
 import { compareCodepoint } from '../../src/domain/deterministicSort.js';
-import { getInstitutionsForTier, getInstitutionalCatalog } from '../../src/domain/institutionLookups.js';
+import { getInstitutionalCatalog } from '../../src/domain/institutionLookups.js';
 import { FACTION_ARCHETYPES } from '../../src/domain/factionArchetypes.js';
 import { NPC_STATUS_VALUES } from '../../src/domain/entities/npcs.js';
 import { ENTITY_STATUS_VALUES } from '../../src/domain/entities/status.js';
@@ -40,6 +40,9 @@ import { RESOURCE_DATA, SPECIAL_RESOURCES } from '../../src/data/resourceData.js
 import { TIER_ORDER } from '../../src/data/constants.js';
 import { MONSTER_THREAT_TIERS, MONSTER_THREAT_RANDOM_POOL } from '../../src/data/monsterThreat.js';
 import { STRESS_TYPE_MAP } from '../../src/data/stressTypes.js';
+import { INSTITUTION_GROUPINGS } from '../../src/data/categoryVocabulary.js';
+import { institutionalCatalog } from '../../src/data/institutionalCatalog.js';
+import { OP_TYPES, makeOp, validateOp } from '../../src/domain/edit/operations.js';
 import { createPRNG } from '../../src/kernel/prng.js';
 import { setActiveRng, clearActiveRng, random } from '../../src/kernel/rngContext.js';
 
@@ -203,9 +206,14 @@ describe('EM-A2a — the pool machinery and the eleven TABLE pools', () => {
       .filter(([, fault]) => fault !== '');
     expect(faults, 'every pool answers a frozen non-empty duplicate-free string list').toEqual([]);
 
-    expect(poolValues('institution.class', TOWN), 'institution.class IS the tier-gated catalogue')
-      .toEqual([...getInstitutionsForTier('town')].sort(compareCodepoint));
-    expect(poolValues('institution.class', TOWN).length, 'eighty-five at town, executed').toBe(85);
+    // ⭐ U81 RE-RECORDED (cure lane D2, 2026-09-23): institution.class is the tier-gated
+    // catalogue's CATEGORY AXIS, not its leaves. The field it fills is the institution
+    // card's `category` (`institutions[].category`) and the declared writer fills it with
+    // the table's second-level key, so the pool read the wrong level: 85 institution NAMES
+    // where ten groupings were owed. Same table, same domain address, its keys.
+    expect(poolValues('institution.class', TOWN), 'institution.class IS the tier-gated catalogue s category axis')
+      .toEqual(Object.keys(getInstitutionalCatalog('town')).sort(compareCodepoint));
+    expect(poolValues('institution.class', TOWN).length, 'ten groupings at town, executed').toBe(10);
     expect(poolValues('faction.category', TOWN), 'faction.category IS the archetype table')
       .toEqual([...Object.values(FACTION_ARCHETYPES)].sort(compareCodepoint));
     expect(poolValues('faction.category', TOWN).length, 'thirteen archetypes').toBe(13);
@@ -268,11 +276,14 @@ describe('EM-A2a — the pool machinery and the eleven TABLE pools', () => {
     expect(faults, 'every pool answers a frozen array on every absent world, and an empty pool rolls null')
       .toEqual([]);
 
-    expect(poolValues('institution.class', { tier: 'town' }).length, 'a real tier reads its own catalogue').toBe(85);
-    expect(poolValues('institution.class', { tier: 'city' }).length, 'and a second real tier a different one').toBe(81);
-    expect(poolValues('institution.class', null).length, 'absence reads this module own village default').toBe(58);
-    expect(poolValues('institution.class', undefined).length, 'and so does an absent argument').toBe(58);
-    expect(poolValues('institution.class', {}).length, 'and so does a world with no tier at all').toBe(58);
+    // ⭐ U81 RE-RECORDED (cure lane D2): the same three readings on the CATEGORY axis —
+    // ten groupings at town, eleven at city (the city table opens `Exotic`), eight at the
+    // village default. The tier gate still separates them, which is what these rows pin.
+    expect(poolValues('institution.class', { tier: 'town' }).length, 'a real tier reads its own catalogue').toBe(10);
+    expect(poolValues('institution.class', { tier: 'city' }).length, 'and a second real tier a different one').toBe(11);
+    expect(poolValues('institution.class', null).length, 'absence reads this module own village default').toBe(8);
+    expect(poolValues('institution.class', undefined).length, 'and so does an absent argument').toBe(8);
+    expect(poolValues('institution.class', {}).length, 'and so does a world with no tier at all').toBe(8);
     expect(poolValues('institution.class', { tier: 'nonsense' }), 'a non-catalogue tier string answers empty').toEqual([]);
     expect(poolValues('institution.class', { tier: 'random' }), 'and so do the wizard sentinels, which no stored record carries').toEqual([]);
     expect(poolValues('institution.class', { tier: 'custom' }), 'both of them').toEqual([]);
@@ -282,7 +293,7 @@ describe('EM-A2a — the pool machinery and the eleven TABLE pools', () => {
 
   it('A3 source identity, the import scan, wizard parity, and the tier gate proved live', () => {
     const sources = [
-      ['institution.class', [...getInstitutionsForTier('town')]],
+      ['institution.class', Object.keys(getInstitutionalCatalog('town'))],
       ['faction.category', Object.values(FACTION_ARCHETYPES)],
       ['commodity', commoditySource()],
       ['tier', [...TIER_ORDER]],
@@ -329,19 +340,38 @@ describe('EM-A2a — the pool machinery and the eleven TABLE pools', () => {
     expect(poolValues('worldFact.monsterThreat', TOWN), 'and never the generator weighted roll pool, which is a different set')
       .not.toEqual([...MONSTER_THREAT_RANDOM_POOL]);
 
+    // ⭐ U81 RE-RECORDED (cure lane D2), IN TWO HALVES, BECAUSE THE POOL MOVED AXIS AND
+    // ONE OF THE TWO GATES IS NO LONGER OBSERVABLE THROUGH IT — said rather than faked.
+    //
+    // (1) THE TIER LADDER, still proved THROUGH THE POOL: the city table opens a grouping
+    // the town table has no entry for, and the thorp table opens half of them. Derived
+    // from the pool's own answers, never typed.
+    const townClasses = poolValues('institution.class', { tier: 'town' });
     const cityClasses = poolValues('institution.class', { tier: 'city' });
-    const metroClasses = poolValues('institution.class', { tier: 'metropolis' });
+    const cityOnly = cityClasses.filter((grouping) => !townClasses.includes(grouping));
+    expect([cityOnly, [poolValues('institution.class', { tier: 'thorp' }).length, townClasses.length, cityClasses.length]],
+      'the tier gate on the category axis, executed: a city offers a grouping a town has no'
+      + ' entry for at all, and the ladder widens five to ten to eleven')
+      .toEqual([['Exotic'], [5, 10, 11]]);
+
+    // (2) THE `minTier` GATE, proved on the READER the pool reads through. It removes
+    // ROWS, and no tier of the catalogue loses a whole grouping to it, so the pool's own
+    // answers cannot witness it any more. The reader still can, and the pool's values are
+    // that reader's keys — so a collapse of the gate still reds one line from here.
+    const namesIn = (tier) => Object.values(getInstitutionalCatalog(tier)).flatMap((group) => Object.keys(group));
     const gated = Object.values(getInstitutionalCatalog('metropolis'))
       .flatMap((category) => Object.entries(category))
       .filter(([, definition]) => definition && definition.minTier === 'metropolis')
       .map(([name]) => name)
       .sort(compareCodepoint);
-    expect(gated.length, 'the catalogue really holds metropolis-gated rows').toBeGreaterThan(0);
-    expect(cityClasses.length, 'the city catalogue, executed').toBe(81);
-    expect(metroClasses.length, 'the metropolis catalogue, executed').toBe(115);
-    expect(metroClasses, 'a metropolis-gated row IS offered at metropolis').toContain(gated[0]);
+    const cityNames = namesIn('city');
+    const metroNames = namesIn('metropolis');
+    expect([gated.length > 0, cityNames.length, metroNames.length],
+      'the catalogue really holds metropolis-gated rows, and the two tables the gate separates are live')
+      .toEqual([true, 81, 115]);
+    expect(metroNames, 'a metropolis-gated row IS in the table at metropolis').toContain(gated[0]);
     expectAbsentWithAnchor(
-      cityClasses, gated[0], metroClasses.find((name) => cityClasses.includes(name)), 'the minTier gate at city',
+      cityNames, gated[0], metroNames.find((name) => cityNames.includes(name)), 'the minTier gate at city',
     );
   });
 
@@ -692,6 +722,53 @@ describe('EM-A2a — the pool machinery and the eleven TABLE pools', () => {
     expect(['src/domain/display/pantheonDepth.js'].filter(isDisplay),
       'THE MATCHER, PROVED LIVE on the one address in the estate that projects a pantheon')
       .toEqual(['src/domain/display/pantheonDepth.js']);
+  });
+
+  it('U81 institution.class offers the CATEGORY the writer writes, never an institution NAME', () => {
+    // THE FIELD THIS POOL FILLS, read from the declaration rather than assumed: the
+    // institution card's `category`, whose declared writer is assembleInstitutions and
+    // whose record path is `institutions[].category`.
+    const declared = FIELD_DECLARATIONS.institution
+      .filter((row) => row.pool === 'institution.class')
+      .map((row) => [row.field, row.outputKey, row.writer]);
+    expect(declared, 'the ANCHOR: exactly one field draws from this pool, and it is a category')
+      .toEqual([['category', 'institutions[].category',
+        'src/generators/steps/assembleInstitutions.js#assembleInstitutions']]);
+
+    // THE WRITER'S OWN VOCABULARY, at its two lawful homes. assembleInstitutions walks
+    // `institutionalCatalog[tier]` and writes each entry's SECOND-LEVEL KEY as its
+    // `category`; categoryVocabulary.js is the canonical declaration of that axis, and
+    // tests/data/categoryGovernance.test.js holds the catalogue to it. So the set the
+    // writer can produce at a tier is the tier table's own keys, and every one of them
+    // is a grouping.
+    const written = (tier) => Object.keys(institutionalCatalog[tier] || {}).sort(compareCodepoint);
+    const strays = TIER_ORDER.flatMap(written)
+      .filter((category) => !INSTITUTION_GROUPINGS.includes(category));
+    expect(strays, 'the ANCHOR for the join below: every category the writer writes at any'
+      + ' tier is a declared grouping, so the two homes agree before the pool is asked')
+      .toEqual([]);
+
+    // THE MEMBER. The pool used to read `getInstitutionsForTier` — the tier's institution
+    // NAMES — so the DM was offered "Adventurers' charter hall" for a field the writer
+    // only ever fills with "Adventuring". Not one of the 85 values it offered at town was
+    // a category any writer writes.
+    const offered = poolValues('institution.class', TOWN);
+    const notACategory = offered.filter((value) => !INSTITUTION_GROUPINGS.includes(value));
+    expect([notACategory, offered],
+      'every value the pool offers is a declared grouping, and the set IS the writer own'
+      + ' table for that tier — read at the tier-gated catalogue, never re-typed')
+      .toEqual([[], written('town')]);
+
+    // AND THE OP THE DM WOULD MINT. `validateOp` judges a pool field by its DECLARATION,
+    // not by pool membership, so it said `ok` either way — which is exactly why this was
+    // silent: the catalogue accepted an op carrying a value the record never holds.
+    const minted = makeOp('add-institution',
+      { kind: OP_TYPES['add-institution'].target, id: 'Almshouse' },
+      { name: 'Almshouse', category: offered[0] });
+    expect([validateOp(minted, TOWN).ok, INSTITUTION_GROUPINGS.includes(minted.payload.category)],
+      'the op validates AND the category it carries is one the writer writes — the second'
+      + ' half is the one the catalogue could not check')
+      .toEqual([true, true]);
   });
 
   it('B8 the seat pool is the faction roster off the record, and nothing else', () => {
