@@ -1784,6 +1784,11 @@ describe('ARCH car 2 — the three first-paint budgets stay where the owner sign
     expect(eagerRel.has('src/main.jsx'), 'and it holds the entry').toBe(true);
     const editorTrain = [
       'src/components/edit/CardEditorDialog.jsx',
+      // EM-D1's shell is the train's FIRST MOUNTED member, and it is exactly where a rise
+      // would enter: App.jsx is eager, so a STATIC edge from the root to this file would
+      // drag the shell, EM-A1's table, EM-D0e's door and EM-C4a's slice into first paint
+      // at once. The one `lazy(() => import(...))` edge is what keeps this list empty below.
+      'src/components/edit/EditModeShell.jsx',
       'src/copy/en.js',
       'src/domain/edit/dmLayer.js',
       'src/domain/edit/fieldDeclarations.js',
