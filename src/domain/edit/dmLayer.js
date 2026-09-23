@@ -240,7 +240,7 @@ export function mintDmId(seed, kind, n) {
 }
 
 /**
- * @typedef {{ name: string, provides: string[] }} StepRoster
+ * @typedef {{ name: string, provides: string[], transient: string[] }} StepRoster
  * @typedef {{ declarationsFor: (cardType: string) => readonly { field: string,
  *             outputKey?: string }[] }} DeclarationSet
  * @typedef {'step_not_pinnable'|'unknown_key'} RederiveUnappliedReason
@@ -290,9 +290,10 @@ function rosterOf(engine) {
     const rows = typeof getStepMeta === 'function' ? getStepMeta() : null;
     if (!Array.isArray(rows)) return [];
     return rows.filter(isPlainObject).map((row) => {
-      const step = /** @type {{ name: unknown, provides: unknown }} */ (row);
+      const step = /** @type {{ name: unknown, provides: unknown, transient: unknown }} */ (row);
       const provides = Array.isArray(step.provides) ? step.provides.filter((k) => typeof k === 'string') : [];
-      return { name: typeof step.name === 'string' ? step.name : '', provides };
+      const transient = Array.isArray(step.transient) ? step.transient.filter((k) => typeof k === 'string') : [];
+      return { name: typeof step.name === 'string' ? step.name : '', provides, transient };
     });
   } catch { return []; }
 }
@@ -353,6 +354,11 @@ export function pinsFrom(record, layer, declarations, engine) {
   /** Every step that provides a given record path. */
   const providersOf = (/** @type {string} */ key) => roster.filter((s) => s.provides.includes(key));
   const held = (/** @type {string} */ key) => Object.hasOwn(source, key);
+  // A TRANSIENT CHOOSER IS NOT REQUIRED AND NOT PINNED (the runner's own rule, read through the
+  // injected roster rather than re-declared here): its value never lands on the record, so a bag
+  // built from this record can never carry it and the closure must not demand it.
+  const transientKeys = new Set(roster.flatMap((s) => s.transient));
+  const isTransient = (/** @type {string} */ key) => transientKeys.has(key);
 
   const consult = usableDeclarations(declarations);
   const { roots } = normalizeLayer(layer);
@@ -393,10 +399,10 @@ export function pinsFrom(record, layer, declarations, engine) {
     const queue = [seedKey];
     while (queue.length > 0) {
       const key = /** @type {string} */ (queue.pop());
-      if (need.has(key)) continue;
+      if (need.has(key) || isTransient(key)) continue;
       need.add(key);
       if (!held(key)) return null;
-      for (const step of providersOf(key)) queue.push(...step.provides.filter((k) => !need.has(k)));
+      for (const step of providersOf(key)) queue.push(...step.provides.filter((k) => !need.has(k) && !isTransient(k)));
     }
     return need;
   };

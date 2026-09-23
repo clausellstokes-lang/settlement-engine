@@ -25,11 +25,14 @@ import { describe, expect, it } from 'vitest';
 import {
   EMPTY_DM_LAYER, REDERIVE_UNAPPLIED_REASONS, applyEdit, mintDmId, pinsFrom, rederive,
 } from '../../src/domain/edit/dmLayer.js';
-import { declarationsFor, isEditableCard } from '../../src/domain/edit/fieldDeclarations.js';
+import { FIELD_DECLARATIONS, declarationsFor, isEditableCard } from '../../src/domain/edit/fieldDeclarations.js';
 import { BOUNDARY_CLASSES, PIPELINE_REACHERS } from '../../src/domain/density/densityCreateBoundary.js';
+import { GENERATION_TIER1 } from '../../src/domain/generation/generationForkRegistry.js';
 import { generateSettlementPipeline } from '../../src/generators/generateSettlementPipeline.js';
 import { getStepMeta } from '../../src/generators/pipeline.js';
+import { createPRNG } from '../../src/kernel/prng.js';
 import { EAGER_FIRST_PAINT_MODULES } from '../../vite.config.js';
+import { censusCorpus, runHeadless as runCensusRow } from '../helpers/generationForkCensus.js';
 import { goldenCorpus, keyOf } from '../helpers/goldenMasterCorpus.js';
 
 const ROOT = process.cwd();
@@ -267,4 +270,145 @@ describe('EM-B2a4 — the DM layer, its pin bag and the golden isolation propert
       'the class is a member of the producer\'s own closed vocabulary').toBe(true);
     expect([...PIPELINE_REACHERS[SEAT].payloadAwaitedBy]).toEqual([SEAT]);
   });
+});
+
+/** The census corpus's own declared row count (EM-P2's 63): the floor every figure below rests on. */
+const CENSUS_ROWS = 63;
+/** The DM's power-card override, at EM-C4a's own root-key spelling. */
+const SEAT_HOLDER = 'The Warden of the Probe';
+/**
+ * The ONE entity coordinate A7 spells. It is deliberately a constant: the bag `pinsFrom` builds is
+ * decided by the declaration's COLLECTION and the record's own keys, and the entity id only picks
+ * which row PASS 4 writes into. A7 asks what the RUNNER does with the bag, so a placeholder keeps
+ * the arm free of per-card knowledge the declaration table already owns.
+ */
+const PROBE_ENTITY = 'the-probe-entity';
+
+describe('EM-R1b — the power card stops being refused', () => {
+  it('A6 — EM-R1b: a power-seat edit comes back APPLIED on every census row, with a bag of exactly the structure', () => {
+    const rows = censusCorpus();
+    expect(rows, 'the census corpus is live, or every count below is a count of nothing')
+      .toHaveLength(CENSUS_ROWS);
+    const layer = layerOf([[rootKey('powerSeat', 'seat', 'holder'), SEAT_HOLDER]]);
+    // ANTI-VACUITY: the layer is NON-DORMANT. A dormant layer refuses nothing by construction and
+    // would pass the emptiness below on air.
+    expect(Object.keys(layer.roots), 'a dormant layer applies nothing and proves nothing here')
+      .toHaveLength(1);
+    expect(isEditableCard('powerSeat'), 'the consult resolves the card, or the edit never resolves')
+      .toBe(true);
+
+    const refused = [];
+    const bags = [];
+    for (const row of rows) {
+      const { config, record } = worldFor(row);
+      const { pins } = pinsFrom(record, layer, DECLARATIONS, ENGINE);
+      bags.push(Object.keys(pins).sort().join(','));
+      const out = rederive(record, config, layer, ENGINE, DECLARATIONS);
+      if (out.unapplied.length > 0) {
+        refused.push(`${keyOf(row)}: ${out.unapplied.map((entry) => entry.reason).join(',')}`);
+      }
+    }
+    expect(refused, 'the DM\'s power-seat edit is still refused through the real rederive').toEqual([]);
+    expect([...new Set(bags)], 'the bag pinsFrom builds for a power edit is exactly the structure')
+      .toEqual(['powerStructure']);
+    // The refusal the base gave is a member of the leaf's OWN closed set, read from the producer,
+    // so the emptiness above cannot be green because the vocabulary moved underneath it.
+    expect([...REDERIVE_UNAPPLIED_REASONS].sort(), 'the closed refusal set is exactly two: this '
+      + 'member removes a CAUSE of step_not_pinnable and adds no reason')
+      .toEqual(['step_not_pinnable', 'unknown_key']);
+  }, 900_000);
+
+  it('A7 — EM-R1b: every bag pinsFrom builds for a declared collection is one the runner accepts', () => {
+    // THE COLLECTION SET IS READ FROM ITS PRODUCER, never re-typed: every editable card's own
+    // declarations, each one an override this leaf must be able to turn into a bag.
+    const cards = Object.keys(FIELD_DECLARATIONS).filter((cardType) => isEditableCard(cardType));
+    const overrides = cards.flatMap((cardType) => declarationsFor(cardType)
+      .filter((declaration) => typeof declaration.outputKey === 'string')
+      .map((declaration) => [cardType, declaration.field]));
+    expect(cards.length, 'the declaration table named no editable card').toBeGreaterThan(0);
+    expect(overrides.length, 'no declared field carries an outputKey, so no bag can be built')
+      .toBeGreaterThan(0);
+
+    const rows = censusCorpus();
+    const violations = [];
+    const threw = [];
+    const built = [];
+    for (const row of rows) {
+      const { record } = worldFor(row);
+      // The bag is decided by the declaration's COLLECTION, so two fields of one collection build
+      // the same bag: every override is still RESOLVED here, and the runner pass is taken once per
+      // distinct bag rather than once per field.
+      const driven = new Set();
+      for (const [cardType, field] of overrides) {
+        const layer = layerOf([[rootKey(cardType, PROBE_ENTITY, field), SEAT_HOLDER]]);
+        const { pins } = pinsFrom(record, layer, DECLARATIONS, ENGINE);
+        const signature = Object.keys(pins).sort().join(',');
+        if (signature === '') continue;
+        built.push(`${cardType}.${field}=${signature}`);
+        if (driven.has(signature)) continue;
+        driven.add(signature);
+        try {
+          runCensusRow(row, createPRNG(row._seed), {
+            pins: structuredClone(pins),
+            onStrictViolation: (violation) => {
+              if (violation.kind === 'pin') violations.push(`${violation.step}[${violation.keys.join(',')}]`);
+            },
+          });
+        } catch (error) {
+          threw.push(`${keyOf(row)}|${cardType}.${field}: ${error.message}`);
+        }
+      }
+    }
+    // ANTI-VACUITY: at least one bag was non-empty and really went through the runner, and the
+    // overrides reached MORE THAN ONE collection — so the two empty lists below are measurements
+    // over both channels rather than an empty loop or a single surviving one.
+    expect(built.length, 'every bag came back empty: nothing was ever driven through the runner')
+      .toBeGreaterThan(0);
+    expect([...new Set(built.map((entry) => entry.split('=')[1]))].length,
+      'the declared overrides reached ONE collection: a channel this member cures is unpinnable')
+      .toBeGreaterThan(1);
+    expect(threw, 'a bag pinsFrom built made the runner throw').toEqual([]);
+    expect([...new Set(violations)], 'the leaf built a bag the runner calls a PARTIAL PIN: the two '
+      + 'channels have drifted apart, which is the whole failure this arm exists to catch')
+      .toEqual([]);
+  }, 900_000);
+
+  it('A8 — EM-R1b: the institution card is a SECOND defect, still refused, blocked by a nested record path', () => {
+    const rows = censusCorpus();
+    const reasons = [];
+    const blockers = [];
+    let measured = 0;
+    for (const row of rows) {
+      const { config, record } = worldFor(row);
+      const institution = (record.institutions || [])[0];
+      if (institution === undefined) continue;
+      measured += 1;
+      const layer = layerOf([[rootKey('institution', institution.id, 'state'), 'struggling']]);
+      const out = rederive(record, config, layer, ENGINE, DECLARATIONS);
+      for (const entry of out.unapplied) reasons.push(entry.reason);
+      const missing = pinsFrom(record, layer, DECLARATIONS, ENGINE).missing
+        .find((entry) => entry.step === 'assembleInstitutions');
+      blockers.push((missing?.keys || []).join(','));
+    }
+    expect(measured, 'no corpus row carried an institution, so this arm measured nothing')
+      .toBeGreaterThan(0);
+    expect(reasons.length, 'the institution card applied: case 2 was cured here, outside this '
+      + 'member\'s manifest').toBe(measured);
+    expect([...new Set(reasons)], 'the institution card refuses for a different reason than the one '
+      + 'this member measured').toEqual(['step_not_pinnable']);
+    // THE BLOCKING KEY, AND WHY IT BLOCKS. `generationRepairs` HAS a record path, so this member's
+    // rule does not exempt it; that path is NESTED, and the bag builder reads a chooser by its
+    // ctx-key NAME at the record's top level. That is EM-B2a4's ground and a slot of its own.
+    expect([...new Set(blockers)], 'the institution step is blocked by a different key set than the '
+      + 'one the second defect was measured on').toEqual(['catalogForTier,generationRepairs']);
+    const repairsRows = GENERATION_TIER1
+      .filter((entry) => entry.key === 'generationRepairs' && entry.via === 'provides')
+      .map((entry) => entry.recordPath);
+    expect(repairsRows.length, 'the register declares the blocking key nowhere, so the path below '
+      + 'is a claim about an empty list').toBeGreaterThan(0);
+    expect([...new Set(repairsRows)], 'the blocking key\'s record path moved: the second defect is '
+      + 'not the one that was measured').toEqual(['record.generationCoherenceReceipt.repairs']);
+    expect([...REDERIVE_UNAPPLIED_REASONS], 'the closed refusal set is unmoved at two')
+      .toEqual(['step_not_pinnable', 'unknown_key']);
+  }, 900_000);
 });
