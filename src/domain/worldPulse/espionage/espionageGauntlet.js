@@ -133,15 +133,21 @@ export const STAY_DETECTION_FORK_ID = 'HBF-05';
  * ⛔ THE TWO WORDS THAT TYPE THIS ROLL'S OUTCOME, AND THEY ARE AN EXPORT BEFORE THEY ARE A
  * REGISTRY ROW, WHICH IS THE ONLY LAWFUL ORDER (EM-E7).
  *
- * HBF-05 carries no `actionVocabulary` today, and the registration's own law says why: a
- * vocabulary is declared only where a constant EXPORTED BY THE DRAW'S OWN MODULE types that
- * draw's own outcome, and where the outcome is a bare boolean the row names what it is and
- * carries null, because FINITE-SEMANTICS forbids a seal with invented words. HBF-44's
- * `closeOwed` states the cure in the order it must happen — the vocabulary must become an
- * export before the row can carry one. THIS IS THAT EXPORT, and it mints nothing: `caught`
- * is this roll's own returned field, and `uncaught` is the word the landing side already
- * writes for the same fact (`espionageProducts.js`'s `reason` for an uncaptured walk). The
- * ROW is EM-E0's file and stays EM-E0b's to move.
+ * HBF-05's row now carries `actionVocabulary: 'STAY_DETECTION_OUTCOMES'`, and the ORDER is
+ * the whole of why it may (U60). The registration's law is that a vocabulary is declared
+ * only where a constant EXPORTED BY THE DRAW'S OWN MODULE types that draw's own outcome; a
+ * row whose outcome is a bare boolean names what it is and carries null instead, because
+ * FINITE-SEMANTICS forbids a seal with invented words. HBF-44's `closeOwed` states the cure
+ * in the order it must happen — the vocabulary must become an export before the row can
+ * carry one. EM-E7 made THIS THAT EXPORT, minting nothing: `caught` is this roll's own
+ * returned field, and `uncaught` is the word the landing side already writes for the same
+ * fact (`espionageProducts.js`'s `reason` for an uncaptured walk). EM-E0b then moved the
+ * row, in `habitForkRegistry.js`, which is EM-E0's file and never this one.
+ *
+ * ⛔ AND THE DISPOSITION STAYS `DEFER`, WHICH IS THE DISTINCTION THIS PARAGRAPH EXISTS FOR.
+ * A vocabulary answers what this roll's outcome is TYPED as. It does not answer whether an
+ * ACTOR chooses it, which is the reading HBF-05's own `closeOwed` still owes, and settling
+ * the second on the strength of the first would be the seal FINITE-SEMANTICS refuses.
  *
  * ⛔ THE SHAPE IS EM-E4's `SIEGE_VERDICT_BANDS`, DELIBERATELY AND EXACTLY — a frozen
  * WORD-to-verdict map, so a pin carries the word a herald can show AND the boolean this

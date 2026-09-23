@@ -9,11 +9,16 @@
  * chronicle links; the withdrawn kept for the record (design §2.5: application never
  * deletes an entry).
  *
- * ⛔ IT LANDS DARK. Nothing mounts it at this landing, so no account sees anything new and
- * the eager first-paint closure gains 0 members (`EAGER_FIRST_PAINT_MODULES` walks STATIC
- * edges from the shell entry, and no edge reaches this leaf). The mount is EM-D1's, behind
- * the tier gate that member owns: this file spells no gate, names no tier and reads no
- * entitlement.
+ * ⛔ IT IS MOUNTED, AND IT IS STILL DARK, WHICH ARE DIFFERENT FACTS (U54). EM-D3c mounts
+ * this page at the dossier's foot from `EditModeShell.jsx` and from nowhere else; the shell
+ * is the member that owns the gate, and it renders the whole of Edit Mode only behind its
+ * own `canEditSettlement()` read, so no account sees anything new until that entitlement
+ * says so. This file still spells no gate, names no tier and reads no entitlement. The
+ * eager first-paint closure gains 0 members by that mount: `EAGER_FIRST_PAINT_MODULES`
+ * walks STATIC edges from the shell entry, the shell itself is reached through one
+ * `lazy(() => import(...))` edge, and ARCH car 2's editor-train roster in
+ * `tests/build/vendorPdfLazy.test.js` now carries this file's row so the day an eager edge
+ * reaches it reds beside the three signed budgets it would move.
  *
  * ⛔ IT IS A CONTAINER, NOT A WRITER, AND IT HOLDS NO STATE AT ALL. Everything it cannot
  * honestly know arrives as a prop — EM-D0e's landed idiom one layer up. It imports nothing
