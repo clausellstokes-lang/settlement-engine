@@ -64,18 +64,33 @@ const ROOT = join(dirname(fileURLToPath(import.meta.url)), '../..');
 const SELF_REL = relative(ROOT, fileURLToPath(import.meta.url)).split('\\').join('/');
 
 /**
- * THE SCAN SCOPE (judgment 157b). THREE roots, and the third is a FILE.
+ * THE SCAN SCOPE (judgment 157b). FIVE roots, and the last three are FILES.
  *
- * ⛔ THE FOURTH ROOT IS DROPPED AND ITS ABSENCE IS WRITTEN DOWN RATHER THAN WALKED. The
- * governing document named `src/domain/edit/guards*`; the pattern `/(^|\/)guard[A-Za-z]*\.js$/`
- * matches ZERO files anywhere under `src/`, and a root resolving to an empty set would make
- * case A4's own fence red on its own contract. A later lane finds the measurement here
- * rather than re-adding the root.
+ * ⭐ THE FOURTH ROOT IS RE-ADDED, AND THE MEASUREMENT THAT DROPPED IT IS KEPT RATHER THAN
+ * DELETED. The governing document named `src/domain/edit/guards*`. When this census landed
+ * (EM-A3, wave 1) the pattern `/(^|\/)guard[A-Za-z]*\.js$/` matched ZERO files anywhere
+ * under `src/`, and a root resolving to an empty set would make case A4's own fence red on
+ * its own contract — so the root was dropped with the measurement written down for a later
+ * lane. THAT LANE IS EM-C3 (wave 2): the pattern now matches TWO files, EM-C2's guard engine
+ * `src/domain/edit/guards.js` and EM-C3's rule set `src/domain/edit/guardRules.js`, both of
+ * which exist at this member's landing commit, so A4's empty-root fence is satisfied.
+ *
+ * ⛔ `filesUnder` TAKES A DIRECTORY OR A FILE AND APPLIES NO GLOB, so the fourth root is
+ * spelled as the two FILE roots themselves rather than as the document's pattern. A third
+ * guard-named leaf would need its own row here; that is the price of a glob-free walk and it
+ * is cheaper than a pattern nobody can read off the scanned set.
+ *
+ * ⛔ AND THE CENSUS'S CLAIM DOES NOT MOVE, MEASURED RATHER THAN ASSUMED: `freeRows()` filters
+ * `kind === 'free'`, which at this tip is exactly `institution.note` and `npc.note`, and
+ * NEITHER new root spells `note` at all (0 and 0 over the raw bytes). `guardRules.js`'s
+ * `.name` reads are `institutions[].name` — a `free-cascade` row this census does not govern.
  */
 const SCAN_ROOTS = Object.freeze([
   'src/generators',
   'src/domain/worldPulse',
   'src/domain/causalState.js',
+  'src/domain/edit/guards.js',
+  'src/domain/edit/guardRules.js',
 ]);
 
 /** The declared root shape the resolver grounds a receiver through. */
