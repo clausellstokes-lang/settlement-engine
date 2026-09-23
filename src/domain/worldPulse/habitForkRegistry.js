@@ -388,4 +388,302 @@ export const HABIT_FORK_REGISTRY = Object.freeze([
     symbol: 'deliberationRead', discovery: 'guard-chain', disposition: 'STAY',
     reason: 'THE GUARD-CHAIN REGISTER\'S ONE MEMBER. MEASURED: a chain of early returns with ZERO weighted arms, so it is not a fork at all — a site that answers zero on all four idioms is not a chooser, whatever a seam sentence says about it. ⚠ IT IS RECORDED RATHER THAN OMITTED because it was carried as a learning site in one table while two others already ruled it deterministic: one symbol, three rows, two answers, through two review rounds. A registry that permits that permits anything',
   }),
+  // ── EM-E0: THE SIMULATION'S REGISTRATION — THE SURVEY'S FORTY-FOUR ────────────
+  //
+  // Design §19 ruling 1, over Table 4 "R" of
+  // docs/implementation/surveys/SIM-SEALS-SURVEY-2026-09-19.md: every UNREGISTERED draw
+  // symbol that survey ruled REGISTRATION OWED. They carry `discovery: 'checklist'`
+  // because that is what they ARE — a HAND-MAINTAINED census taken over a WIDER idiom set
+  // (the survey also censused `.random()`, which no signature here reads) and WIDER roots
+  // (`src/domain/roads`, outside SCAN_ROOTS) — so not one of them is reachable by the four
+  // signatures the walker runs, and filing them as `idiom` would convict the partition arm
+  // in its phantom direction on all forty-four at once.
+  //
+  // ⭐ THEY CARRY NO `domain`, AND THAT ONE FACT IS THE PARTITION KEY. A checklist row WITH
+  // an owner-named domain is the owner's named-domain instrument (fourteen rows, its own
+  // totality assertion); a checklist row WITHOUT one is this registration. The walker
+  // derives both populations from that fact rather than restating either roster, and the
+  // registration's roster is asserted SET-EQUAL, both directions, against Table 4 parsed
+  // out of the survey markdown itself — so a row invented here reds exactly as loudly as a
+  // row the survey found and this file forgot.
+  //
+  // ⚠ `actionVocabulary` IS DECLARED ON FOUR ROWS AND NOT ONE MORE, AND THE THINNESS IS THE
+  // MEASUREMENT. §16's "each with a typed outcome vocabulary" was wrong of the tree at one
+  // of forty-two; it is wrong of these forty-four too. A vocabulary is declared only where a
+  // constant EXPORTED BY THE DRAW'S OWN MODULE types that draw's own outcome or its typed
+  // reading, and the walker resolves every one BY IMPORT rather than by name. Where the
+  // outcome is a bare boolean, a scalar, an inline literal union, or a vocabulary living one
+  // module over, the row names what it is instead and carries null: FINITE-SEMANTICS forbids
+  // a seal with invented words, and ruling 1 rules such a fork MEASUREMENT OWED, never
+  // pinnable. Two rows the design's own first seal cut names (the season, the event lottery)
+  // land measurement-owed for exactly that reason, and say so.
+  //
+  // ⛔ NO BEHAVIOUR CHANGE, STRUCTURALLY. Nothing under `src` imports this file; the habit
+  // family's reverse-import closure in tests/domain/habitCurve.test.js is that claim's
+  // standing instrument, so these rows are a record and cannot move a byte of world output.
+  fork({
+    forkId: 'HBF-43', module: 'src/domain/roads/embassyHazard',
+    symbol: 'evaluateEmbassyHazard', discovery: 'checklist', disposition: 'DEFER',
+    reason: 'SURVEY U-01 — the embassy interception race: an informed third-party hunter or a plain home enemy takes the embassy in transit BEFORE the target\'s own column can convert the encounter into a road parley. The outcome at the roll is a bare boolean; the venue words belong to the sibling disposition roll (HBF-44), and this module exports no constant at all',
+    closeOwed: 'grade an interception against whether the suit was ever heard at the hall it was carried to; the disposition roll IS that close, so this row and HBF-44 close together or not at all',
+  }),
+  fork({
+    forkId: 'HBF-44', module: 'src/domain/roads/embassyHazard',
+    symbol: 'embassyDisposition', discovery: 'checklist', disposition: 'DEFER',
+    reason: 'SURVEY U-02 — the venue disposition roll: the captor rolls RECEIVED (the suit is heard), HOSTAGE (the standard ransom) or TURNED HOME, shifted by the insult and humility amplifier and never worse than hostage. ⚠ The three outcomes are INLINE LITERALS: this module exports no vocabulary, so none can be declared here without minting one, which is not this wave\'s to do',
+    closeOwed: 'grade a disposition against what the suit produced at the hall it reached; a seal may not name words the tree does not type, so the venue vocabulary must become an export before this row can carry one',
+  }),
+  fork({
+    forkId: 'HBF-45', module: 'src/domain/roads/seaRoads',
+    symbol: 'resolveSeaHazard', discovery: 'checklist', disposition: 'DEFER',
+    reason: 'SURVEY U-03 — the sea-hazard branch, FOUR draws in one symbol: the blockade capture gate, the storm incidence, the storm delay length, and the piracy gate, at most one resolution per tick under the no-double-jeopardy law. ⚠ The storm pair in particular looks like a RATE rather than a choice, and this wave does not make that reading',
+    closeOwed: 'establish, per modality, whether a hazard gate chooses anything or the world resolves a hazard against a traveller who selects nothing; a rate takes STAY with that finding, and only the rest can be graded against the cargo that arrived',
+  }),
+  fork({
+    forkId: 'HBF-46', module: 'src/domain/roads/thirdPartyRansom',
+    symbol: 'resolveThirdPartyRansom', discovery: 'checklist', disposition: 'DEFER',
+    reason: 'SURVEY U-04 — the third-party checkpoint, called once per ransom at half-term: a refusal roll over the highest-EV payer, then an outcome fork between a COMPROMISED payer and a debt. ⚠ The outcome words and the payer motives are inline literals; the module exports only its tuning',
+    closeOwed: 'grade a compromised payer against whether the leverage it minted ever produced anything for the party that holds it — HBF-40\'s question over a yielded will, word for word, so the two close together',
+  }),
+  fork({
+    forkId: 'HBF-47', module: 'src/domain/spatial/armyTransit',
+    symbol: 'resolveFieldBattle', discovery: 'checklist', disposition: 'DEFER',
+    reason: 'SURVEY U-05 — the field battle roll against the favourite\'s probability, over a stable composite key; the outcome is which army holds the field, plus bounded attrition scaled by how decisive the engagement was. ⚠ MEASURED AT THIS WAVE: the survey\'s Table-1 landing quotes ARMY_ENVOY_INTENT_KINDS in its outcome column and that is a DIFFERENT fork\'s vocabulary (the intent an envoy carries on a transiting column). The battle roll types nothing of its own',
+    closeOwed: 'grade a committed engagement against the ground it held and the strength it kept; establish first whether an army CHOOSES to give battle at this site or is already committed by the time the roll fires',
+  }),
+  fork({
+    forkId: 'HBF-48', module: 'src/domain/spatial/calamity',
+    symbol: 'draw', discovery: 'checklist', disposition: 'STAY',
+    reason: 'SURVEY U-06 — ⛔ NOT A FORK, MEASURED: `draw` is this module\'s local rng READER, five lines that clamp one uniform and return 1 when no rng is threaded. It has no actor, no candidate set and no outcome; every preference it ever expresses belongs to the caller that compares it. It is the same class as the four idiom DEFINITIONS in region/contestMath.js that the survey excluded BY NAME, and it reached Table 4 only because the `.random()` idiom carries no declares-its-own-helper rule the way the three named helpers do. ⚠ RECORDED RATHER THAN OMITTED, on HBF-31\'s precedent: a totality roster does not get to drop a row it measured, and the next census must meet the FINDING rather than the site',
+  }),
+  fork({
+    forkId: 'HBF-49', module: 'src/domain/spatial/commodityFlow',
+    symbol: 'advanceCommodityFlow', discovery: 'checklist', disposition: 'DEFER',
+    reason: 'SURVEY U-07 — one draw inside the flow advance (produce, arrive, consume, dispatch, starve), which the survey reads as whether the cargo arrives. Whether it selects an ACTION or splits a carried quantity has not been read at the load point',
+    closeOwed: 'identify what the flow draw is graded against — arrival versus loss on the leg it took — and establish whether any actor selects here at all; a pure split takes STAY with that finding',
+  }),
+  fork({
+    forkId: 'HBF-50', module: 'src/domain/spatial/embattlement',
+    symbol: 'banditryLoss', discovery: 'checklist', disposition: 'DEFER',
+    reason: 'SURVEY U-08 — a seeded, sporadic, BOUNDED banditry loss on a trade channel through embattled ground: a fire gate, then a bounded loss fraction. ⚠ The outcome of the second draw is a NUMBER and not a member of any vocabulary. It is the draw a DM actually wants on a caravan, and it is a different symbol from the registered `chooseRoute` in the same file (HBF-26)',
+    closeOwed: 'grade a taken caravan against whether the shipment ever arrived, which the commodity ledger already records; the loss fraction may be a rate rather than a choice, and that reading is owed first',
+  }),
+  fork({
+    forkId: 'HBF-51', module: 'src/domain/spatial/generosityEV',
+    symbol: 'loadedDraw', discovery: 'checklist', disposition: 'STAY',
+    reason: 'SURVEY U-09 — ⛔ NOT A FORK, MEASURED: the module documents this as a PRIMITIVE, and its own header rules that the weights come FIRST from state and that the fork only picks within what the world has already made probable. It carries no subject, no candidate set of its own and no outcome vocabulary; every preference it expresses was built by its caller. It is the exported twin of the weighted-sample helper one directory over that the walker excludes by its declares-its-own-idiom rule. ⚠ RECORDED RATHER THAN OMITTED on HBF-31\'s precedent, and its CALLERS remain registrable in their own right',
+  }),
+  fork({
+    forkId: 'HBF-52', module: 'src/domain/spatial/generosityEV',
+    symbol: 'shouldInitiateAsk', discovery: 'checklist', disposition: 'DEFER',
+    reason: 'SURVEY U-10 — the significance gate: does a relief ASK fire at all this tick, a situation-loaded bernoulli whose rarity baseline is ramped by pressure squared. ⭐ Genuinely actor-addressable and genuinely weighted, so the STAY reading is refused on evidence rather than deferred for want of one. ⚠ It is EXACTLY the bernoulli gate this registry\'s header names as undiscoverable by any signature, which is why it arrives on the hand-maintained half',
+    closeOwed: 'grade an ask against what it produced — the module\'s own lending verdicts already type the three answers — and against what asking cost the asker in standing when it was refused',
+  }),
+  fork({
+    forkId: 'HBF-53', module: 'src/domain/spatial/intelActs',
+    symbol: 'intelEligible', discovery: 'checklist', disposition: 'DEFER',
+    reason: 'SURVEY U-11 — the TICK-INVARIANT yearly eligibility draw, forked on the canonical pair and the YEAR rather than the tick, so a collapsed catch-up can never shift which pairs trade. The outcome is a bare boolean',
+    closeOwed: 'establish whether an eligibility draw chooses anything or merely sets a cadence; a cadence takes STAY, and only if it is a choice can a pair be graded against what the trade between them produced',
+  }),
+  fork({
+    forkId: 'HBF-54', module: 'src/domain/spatial/migration',
+    symbol: 'splitTravellers', discovery: 'checklist', disposition: 'DEFER',
+    reason: 'SURVEY U-12 — the SCATTER weights in the split across scored destinations: a per-destination noise term blended with the score-weighted share, under a scatter floor that stops the top destination taking everything. ⚠ MEASURED: the survey\'s Table-1 landing quotes COLUMN_CLASSES, which types the COLUMN and not the destination — a different axis from the one this draw moves',
+    closeOwed: 'grade a column\'s destination against whether it was taken in and survived there; establish first whether the scatter term is a preference at all, or the deliberate score-blind brake its own header calls it',
+  }),
+  fork({
+    forkId: 'HBF-55', module: 'src/domain/spatial/navalLayer',
+    symbol: 'blockadeRunRoll', discovery: 'checklist', disposition: 'DEFER',
+    reason: 'SURVEY U-13 — a lone runner\'s chance to slip a blockade, driven DOWN by the blockading fleet\'s strength so a strong fleet is near-zero and no fleet is the base chance. The outcome is a bare boolean pair with no typed words behind it',
+    closeOwed: 'grade a run against the cargo that actually arrived, which the commodity and naval transit ledgers already carry between them',
+  }),
+  fork({
+    forkId: 'HBF-56', module: 'src/domain/spatial/pestilence',
+    symbol: 'armyContraction', discovery: 'checklist', disposition: 'DEFER',
+    reason: 'SURVEY U-14 — the seeded army CONTRACTION roll at a plagued settlement; a contracting army also becomes a VECTOR, and the caller seeds the next stop from it. Whether an actor chooses anything here has not been read at the site',
+    closeOwed: 'establish whether an army selects at this site or the world resolves a hazard against it; if it is a hazard this row becomes STAY with that finding, and only otherwise can it be graded against the front the host reached',
+  }),
+  fork({
+    forkId: 'HBF-57', module: 'src/domain/spatial/pestilence',
+    symbol: 'advancePestilence', discovery: 'checklist', disposition: 'DEFER',
+    reason: 'SURVEY U-15 — the epidemic ledger advance, TWO draws: the propagation gate along carrier edges and the clearance gate at a node. The same question HBF-56 asks one layer down, and one answer cannot be true for the army and false for the front',
+    closeOwed: 'establish whether propagation is chosen by anyone at all; a spread rate takes STAY, and if a court\'s own guard choices gate it, grade those against the front they actually held. It closes with HBF-56 or not at all',
+  }),
+  fork({
+    forkId: 'HBF-58', module: 'src/domain/spatial/rumorNetwork',
+    symbol: 'degradeTelling', discovery: 'checklist', disposition: 'DEFER',
+    reason: 'SURVEY U-16 — the organic per-hop weathering roll in Unreliable mode: a distribution with tails over completeness and accuracy, forked per event, carrier, edge and hop rather than per settlement so cross-confirmation independence survives. ⛔ It sits in the OBSERVATION-NOISE family that design §19 ruling 4 rules never a DM act: a pin decides what an observer happened to perceive while the provenance still reads observed',
+    closeOwed: 'establish whether a weathering hop is a chosen act at all before any close is written. ⚠ If it is not, this row becomes STAY; and if it is, it is the noise on an observation, which ruling 4 already rules dishonest to pin',
+  }),
+  fork({
+    forkId: 'HBF-59', module: 'src/domain/worldPulse/calamityKernel',
+    symbol: 'resolveStrikeOnSettlement', discovery: 'checklist', disposition: 'DEFER',
+    reason: 'SURVEY U-17 — the strike-COUNT draw: one uniform scaled by the tier\'s strike cap, on the single path the organic annual draw and the BUILT force-calamity verb both run. ⚠ The outcome is an integer count, not a member of any vocabulary, and the calamity reason words the survey quotes live in eventProse.js one module over',
+    closeOwed: 'grade a strike count against the bounded loss it actually caused, which the same return already carries; establish first whether a count is a choice or a severity',
+  }),
+  fork({
+    forkId: 'HBF-60', module: 'src/domain/worldPulse/candidateEvents',
+    symbol: 'candidateRoll', discovery: 'checklist', disposition: 'DEFER',
+    reason: 'SURVEY U-18 — THE EVENT LOTTERY\'S per-candidate keyed roll, forked on the candidate\'s own stable key so a pin is already addressable. ⭐ The COMPARISON lives in `rollCandidates` one declaration below, so the roll alone types nothing; the vocabulary the survey quotes is every candidate\'s own type, which is the forty-one-type affordance catalogue in another module. ⚠ Design §19 ruling 3 lists this fork in the first seal cut; under ruling 1 it is MEASUREMENT OWED, because one key covers the whole catalogue and no single vocabulary of this module describes it',
+    closeOwed: 'grade a landed candidate against what the world then did with it, and put to the chair whether the graded unit is the candidate or its whole family — one key covering the entire catalogue is a different learning problem from one fork',
+  }),
+  fork({
+    forkId: 'HBF-61', module: 'src/domain/worldPulse/causeLifecycle',
+    symbol: 'pickPath', discovery: 'checklist', disposition: 'DEFER',
+    reason: 'SURVEY U-19 — the weighted seeded pick among the three lifecycle paths, which this module\'s own comment types as reform, recause or historicize. ⚠ Those three are INLINE LITERALS in a doc line; the module exports only its tuning, and the fourteen typed cause classes the survey quotes live in causeVocabulary.js one module over',
+    closeOwed: 'grade a chosen path against whether the decline it explained actually lifted, which the lifecycle ledger already follows to its end',
+  }),
+  fork({
+    forkId: 'HBF-62', module: 'src/domain/worldPulse/causeLifecycle',
+    symbol: 'pickCoherentCause', discovery: 'checklist', disposition: 'DEFER',
+    reason: 'SURVEY U-20 — the seeded TIE-BREAK among equally role-coherent causes. ⚠ Very likely a determinism device rather than a preference, which is HBF-11\'s question over the ladder tiebreak word for word, and the site has not been read for whether the tie is ever non-trivial',
+    closeOwed: 'establish whether the tiebreak expresses a preference; if it exists only to make an exact tie deterministic this row becomes STAY, and a load there would be a thumb on a coin. It closes with HBF-11 or not at all',
+  }),
+  fork({
+    forkId: 'HBF-63', module: 'src/domain/worldPulse/convergence',
+    symbol: 'advanceIntervention', discovery: 'checklist', disposition: 'DEFER',
+    reason: 'SURVEY U-21 — the loaded-dice INITIATION gate: whether a neighbour\'s best motive converts into a committed intervention this tick, or a visible deferral. ⚠ MEASURED AT THIS WAVE: none of this module\'s three exported vocabularies belongs to this draw. The motive is chosen by a deterministic argmax over scores, the engagement move by a deterministic highest-EV pick, and the intervention state is an aftermath stamp a later pass writes',
+    closeOwed: 'grade a committed intervention against whether the contest it entered went the way it was entered for, which the coup verdict already resolves and already reads back',
+  }),
+  fork({
+    forkId: 'HBF-64', module: 'src/domain/worldPulse/corruptionImpair',
+    symbol: 'advanceInstitutionReform', discovery: 'checklist', disposition: 'DEFER',
+    reason: 'SURVEY U-22 — the reform roll for every corruption-impaired institution in a settlement, forked per institution name so the order of the roster cannot change which halls clean themselves. The outcome is reformed or not',
+    closeOwed: 'grade a reform against whether the impairment stayed lifted, which the institution record already carries as a dated status',
+  }),
+  fork({
+    forkId: 'HBF-65', module: 'src/domain/worldPulse/corruptionWeb',
+    symbol: 'advanceCorruptionWeb', discovery: 'checklist', disposition: 'DEFER',
+    reason: 'SURVEY U-23 — the tempo rarity gate on the recruitment weight: whether a patron court mints ONE new covert asset this tick, behind a stack of channel, scarcity and affordability guards that each produce a visible deferral instead of a silence',
+    closeOwed: 'grade a minted asset against what it ever produced for its patron before the leash ended; HBF-66 is the other end of the same record, so the two close together',
+  }),
+  fork({
+    forkId: 'HBF-66', module: 'src/domain/worldPulse/corruptionWeb',
+    symbol: 'advanceWilledLeashEnds', discovery: 'checklist', disposition: 'DEFER',
+    reason: 'SURVEY U-24 — the two typed ENDS of a willed leash, a pass that exists because the organic exposure lane is the only thing that ever ends one and a willed man is taken out of that lane by construction',
+    closeOwed: 'grade an ended leash against which typed end it took and whether the court that willed it got anything for the hold; it closes with HBF-65 or not at all, because a mint and its end are one record',
+  }),
+  fork({
+    forkId: 'HBF-67', module: 'src/domain/worldPulse/deityStanceLane',
+    symbol: 'evaluateDeityStanceLane', discovery: 'checklist', disposition: 'DEFER',
+    reason: 'SURVEY U-25 — the per-pair stance roll over the realm\'s deity-bearing related pairs, forked per pair and per tick. ⛔ DEITY DOCTRINE, ADDENDUM 15: THE FOLLOWERS ACT AND THE GOD DOES NOT, so anything this row becomes is worded about the two creeds\' PEOPLE and their settlement standing, never about a deity choosing anything',
+    closeOwed: 'grade a hardened stance against what the two creeds\' people then did to one another, read off the relationship plane; a close worded about a deity is refused by doctrine before it is ever measured',
+  }),
+  fork({
+    forkId: 'HBF-68', module: 'src/domain/worldPulse/demographicsKernel',
+    symbol: 'advanceDemographics', discovery: 'checklist', disposition: 'DEFER',
+    reason: 'SURVEY U-26 — the kernel\'s own draw inside the per-settlement demographic step. Whether it selects an ACTION or resolves a rate has not been read, which is the question HBF-02 already leaves open for the plan advance',
+    closeOwed: 'identify the graded outcome of a demographic step and whether it is a choice at all; it closes with HBF-02 or not at all, because one answer about this lane cannot be true for the plan and false for the kernel',
+  }),
+  fork({
+    forkId: 'HBF-69', module: 'src/domain/worldPulse/deploymentReturn',
+    symbol: 'deploymentReturnOutcomes', discovery: 'checklist', disposition: 'DEFER',
+    actionVocabulary: 'RETURN_ODDS_WORDS',
+    reason: 'SURVEY U-27 — the TWO homecoming rolls: whether a returning host throws off the occupation at its own gate, and whether it relieves the home siege, each against a strength-scaled success probability. ⭐ THE VOCABULARY IS DECLARED AND IT IS THE SIEGE ROW\'S SHAPE EXACTLY: this module types its own reading of that success probability and prints the word into BOTH receipts, which is what makes the words this fork\'s own rather than a neighbour\'s',
+    closeOwed: 'grade a homecoming against whether the occupation or the siege stayed lifted; ⛔ a pin here must carry the odds word with it, or the receipt explains a draw that never happened (design §19 ruling 4)',
+  }),
+  fork({
+    forkId: 'HBF-70', module: 'src/domain/worldPulse/factionCapture',
+    symbol: 'advanceFactionCapture', discovery: 'checklist', disposition: 'DEFER',
+    reason: 'SURVEY U-28 — the guild\'s capture ladder, TWO draws: an advance roll and a recover roll against chances scored from corrupt rank, security and prosperity. It feeds the guild strength read directly, and the built expose and impose affordances are corrections rather than this organic fork',
+    closeOwed: 'grade a capture against whether the hall stayed taken to the next exposure, which the capture-transition history already records with its dates',
+  }),
+  fork({
+    forkId: 'HBF-71', module: 'src/domain/worldPulse/informationStatecraft',
+    symbol: 'pickMouthpiece', discovery: 'checklist', disposition: 'DEFER',
+    reason: 'SURVEY U-32 — the seeded, importance-weighted draw over a settlement\'s notable roster for who says a bluff OUT LOUD, returning null when no eligible soul exists and the court then speaks anonymously. ⭐ The candidate set is PEOPLE, so the only dimension a load could tilt is WHICH PERSON a court puts forward, and HBF-22, HBF-35 and HBF-37 all rule an identity preference forbidden ground',
+    closeOwed: 'establish FIRST whether an identity pick may ever carry a load at all here; only then grade a mouthpiece against whether the bluff held and what speaking cost them in credibility',
+  }),
+  fork({
+    forkId: 'HBF-72', module: 'src/domain/worldPulse/informationStatecraft',
+    symbol: 'processLies', discovery: 'checklist', disposition: 'DEFER',
+    reason: 'SURVEY U-33 — the lie lifecycle\'s own gate across seed, propagate, corroborate, contradict, expose and blowback. ⚠ HOT FILE: the survey measures this module past fifteen hundred raw lines and design §19 already calls for a headroom measurement before the information ops touch it',
+    closeOwed: 'grade a planted lie against whether it was believed and whether it was caught, both of which are already typed outcomes of this same pass and need no second scale',
+  }),
+  fork({
+    forkId: 'HBF-73', module: 'src/domain/worldPulse/informationStatecraft',
+    symbol: 'processSecrecy', discovery: 'checklist', disposition: 'DEFER',
+    reason: 'SURVEY U-34 — the ENTER rarity gate on the hide postures: a concealment pressure built from paranoia and weakness before believed-hostile strength drives an enter and exit hysteresis with dwell, because paranoia is sticky',
+    closeOwed: 'grade a secrecy posture against whether it kept the watcher out for as long as it was paid for; it closes with HBF-74 or not at all, because seeing and hiding are one counterplay',
+  }),
+  fork({
+    forkId: 'HBF-74', module: 'src/domain/worldPulse/informationStatecraft',
+    symbol: 'processSight', discovery: 'checklist', disposition: 'DEFER',
+    reason: 'SURVEY U-35 — TWO draws in the sight postures: the ENGAGE rarity gate on paid eyes, and the EXPOSURE roll against a hiding target at odds that rise with that target\'s secrecy. The survey calls this the fog of war and the cleanest lever the owner did not name',
+    closeOwed: 'grade an engaged posture against what it actually saw, and an exposure against the blowback it drew on its watcher; it closes with HBF-73 or not at all',
+  }),
+  fork({
+    forkId: 'HBF-75', module: 'src/domain/worldPulse/navalKernel',
+    symbol: 'advanceNaval', discovery: 'checklist', disposition: 'DEFER',
+    reason: 'SURVEY U-36 — the naval layer\'s own gate inside the tick advance, which the survey reads as whether a blockade holds or lifts. The LIFT already has its written news and no DM reach at all, while the declare verb is built',
+    closeOwed: 'grade a held blockade against whether the sea leg it closed stayed closed, which the naval transit ledger already carries hop by hop',
+  }),
+  fork({
+    forkId: 'HBF-76', module: 'src/domain/worldPulse/npcAgency',
+    symbol: 'advanceNpcCorruption', discovery: 'checklist', disposition: 'DEFER',
+    reason: 'SURVEY U-39 — THREE draws that are ONE lifecycle rather than three questions: onset for a clean eligible soul with a corruptible flaw, organic exposure of a corrupt one, and replacement at the bottom of the rank. ⚠ MEASURED: this module\'s exported action-family table is a per-family tuning and patch record, NOT these draws\' outcome vocabulary',
+    closeOwed: 'grade an exposure against what it cost the exposed and what the guild gained, which the standing demotion and the cooled heat already record on the same pass',
+  }),
+  fork({
+    forkId: 'HBF-77', module: 'src/domain/worldPulse/resourceDynamicsKernel',
+    symbol: 'evaluateResourceDynamics', discovery: 'checklist', disposition: 'DEFER',
+    reason: 'SURVEY U-40 — the organic mover\'s own draw over the deplete and recover lane, riding the tier candidate lane and dormant to the same reference when its rule is absent. The built deplete and recover affordances are CORRECTIONS; this organic fork has no pin',
+    closeOwed: 'grade a depletion against whether the seam ever came back, and a recovery against whether it held; both are one record read at two ends, so they close together',
+  }),
+  fork({
+    forkId: 'HBF-78', module: 'src/domain/worldPulse/roadsKernel',
+    symbol: 'weightedPick', discovery: 'checklist', disposition: 'STAY',
+    reason: 'SURVEY U-41 — ⛔ NOT A FORK, MEASURED: a module-local, UNEXPORTED, generic weighted sample WITHOUT replacement over an input its own doc line declares already codepoint-stable. It walks a cumulative total and splices; it has no subject, no candidate set of its own and no outcome. Its callers choose, it counts. Same class as HBF-48 and HBF-51, and as the idiom definitions the walker excludes by rule. ⚠ RECORDED RATHER THAN OMITTED on HBF-31\'s precedent: the roster keeps the FINDING, never merely the site',
+  }),
+  fork({
+    forkId: 'HBF-79', module: 'src/domain/worldPulse/roadsKernel',
+    symbol: 'advanceLitRoads', discovery: 'checklist', disposition: 'DEFER',
+    reason: 'SURVEY U-42 — THE DENSEST UNREGISTERED CLUSTER IN THE ESTATE, NINE draws behind one symbol: the road hazard classes that decide hostage against robbed, delayed or trapped; the detention gate at a destination; the captive CONVERSION draw that returns a released traveller as somebody\'s creature; and the stay-length draws. ⚠ The six outcome words are INLINE LITERALS on the branch lines and this module exports no constant at all, so no vocabulary can be declared without minting one',
+    closeOwed: 'grade a hazard outcome against what the traveller reached and what it cost, and the conversion draw against whether the corruption edge it minted ever produced anything. ⛔ Nine draws behind one symbol is not one question: whether this row SPLITS is the chair\'s before any of it can close',
+  }),
+  fork({
+    forkId: 'HBF-80', module: 'src/domain/worldPulse/seasons',
+    symbol: 'seasonalSeverityFor', discovery: 'checklist', disposition: 'DEFER',
+    reason: 'SURVEY U-43 — ONE uniform off a TICK-INVARIANT fork of the WORLD seed, so every week of the same year reads the same verdict and replay is exact. The survey calls it the cheapest high-value pin in the tree, and it shades the harvest, the festival score and the harvest-pressure peace reason alike. ⚠ The module\'s own comment types the return as drought, hard winter, bountiful or null, and those four are INLINE LITERALS: this module exports only its tuning. Design §19 ruling 3 lists this fork in the first seal cut; under ruling 1 it is MEASUREMENT OWED until the four words are a typed export, because a seal may not name words the tree does not type',
+    closeOwed: 'grade a season against the harvest, the festival outcome and the peace pressure it shaded, all three of which already read it; the four words must become an export before this row can declare one',
+  }),
+  fork({
+    forkId: 'HBF-81', module: 'src/domain/worldPulse/settlementLifecycleKernel',
+    symbol: 'advanceSettlementLifecycle', discovery: 'checklist', disposition: 'DEFER',
+    reason: 'SURVEY U-45 — TWO draws: the satellite lane\'s own draw and the site draw handed down to a founding. ⛔ OWNER-GATED, and the gate is not this registry\'s to lift: this lane can END a settlement, and design §19 ruling 5 offers it only behind the built abandon and resettle verbs, never as a bare pin',
+    closeOwed: 'grade a founding against whether the steading survived its own first decade, which the lifecycle record already dates. ⛔ The terminal-death arm takes NO close until the owner rules, because it destroys data',
+  }),
+  fork({
+    forkId: 'HBF-82', module: 'src/domain/worldPulse/settlementPolitics',
+    symbol: 'advanceSettlementPolitics', discovery: 'checklist', disposition: 'DEFER',
+    reason: 'SURVEY U-47 — TWO draws: the defection windows that fracture a bloc under strain, and the ONE new formation per tick under the cap, the latter a weighted draw over pair affinities that the settlement\'s own people gate',
+    closeOwed: 'grade a formed bloc against whether it held to its own next succession, which the bloc record already dates, and a fracture against what the strain that caused it then did',
+  }),
+  fork({
+    forkId: 'HBF-83', module: 'src/domain/worldPulse/stressors',
+    symbol: 'wanderStep', discovery: 'checklist', disposition: 'DEFER',
+    reason: 'SURVEY U-48 — TWO draws: the wander gate, and then the weighted neighbour pick that decides where a roaming trouble goes next. The survey calls the wandering what makes a region feel alive. ⚠ The pick is over PLACES rather than acts, which is the identity-preference shape HBF-35 and HBF-37 rule forbidden ground for PEOPLE; whether a place is the same case has not been read',
+    closeOwed: 'establish whether choosing a destination for a trouble is a preference the world may learn at all, then grade a wander against what the trouble actually did where it landed',
+  }),
+  fork({
+    forkId: 'HBF-84', module: 'src/domain/worldPulse/stressors',
+    symbol: 'ageRoamingStressors', discovery: 'checklist', disposition: 'DEFER',
+    actionVocabulary: 'STRESSOR_LIFECYCLE_STAGES',
+    reason: 'SURVEY U-49 — the RESOLUTION roll, forked on the stressor\'s OWN id rather than a shared stream consumed in list order, so reordering the persisted list cannot change which crises resolve. ⭐ THE VOCABULARY IS DECLARED: the roll writes the lifecycle stage, and this module re-exports the estate\'s seven-stage vocabulary for exactly that field, so the words are the fork\'s own and resolve by import from this very module',
+    closeOwed: 'grade a resolution against whether the trouble stayed resolved or GRADUATED into a lasting condition, which the aftermath pass already records without a second scale',
+  }),
+  fork({
+    forkId: 'HBF-85', module: 'src/domain/worldPulse/traditionsKernel',
+    symbol: 'advanceLitTraditions', discovery: 'checklist', disposition: 'DEFER',
+    actionVocabulary: 'TRADITION_OUTCOME',
+    reason: 'SURVEY U-50 — THE FESTIVAL DRAW: one uniform off the year stream, handed with the observance score to the outcome map. ⭐ THE VOCABULARY IS DECLARED and this is the registry\'s cleanest row — six typed outcomes the tab already renders, a dated and named recurring occasion a party can attend. ⚠ HBF-21 rules the SCORE stay-deterministic PERMANENTLY; this is the DRAW, a different symbol and a different question, and collapsing the two would file one ruling over both',
+    closeOwed: 'grade a festival outcome against the prosperity and the standing it moved, which this same pass already applies; the score\'s own permanence is untouched by closing the draw',
+  }),
+  fork({
+    forkId: 'HBF-86', module: 'src/domain/worldPulse/warSiegeVerdict',
+    symbol: 'resolveSiegeVerdict', discovery: 'checklist', disposition: 'DEFER',
+    actionVocabulary: 'SIEGE_FALL_ODDS_WORDS',
+    reason: 'SURVEY U-51 — THE SIEGE VERDICT\'S ONE ROLL, reached only after a DETERMINISTIC feasibility gate rules the matchup plausible; everything else resolves with NO roll, which is why a thorpe can never storm a fortified city on a lucky number. ⭐ THE VOCABULARY IS DECLARED: this module types its own reading of the fall probability and prints that word into the verdict\'s receipt, so the four words are the fork\'s own',
+    closeOwed: 'grade a verdict against what the taken or held town then cost the hand that holds it. ⛔ Design §19 rulings 3 and 4 both require a pin here to carry the BAND with the verdict, or the receipt would explain a draw that never happened',
+  }),
 ]);
