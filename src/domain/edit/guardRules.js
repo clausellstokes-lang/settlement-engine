@@ -35,6 +35,20 @@
  * satisfy a citadel's gate; reading the raw roster here would be precisely the
  * over-crediting class `tests/lint/ruinFilterRoster.walker.test.js` exists for.
  *
+ * ⛔ A FULFIL OFFER IS AN OP THE CATALOGUE ACCEPTS, OR IT IS NOT OFFERED AT ALL (U65).
+ * `validateOp` judges a fulfil the moment a surface stages it, and it reads three things:
+ * a well-formed target, every REQUIRED field of the row, and no field the row does not
+ * declare. So the offer is SHAPED BY THE ROW rather than hand-written beside it — the row
+ * for the offered type, read off `ctx.catalogue`, which is the seam the engine hands in
+ * precisely so a rule may ask about a type that is not its own entry's. Each declared
+ * field takes the value the FINDING computed, else the value the ENTRY carries under the
+ * same name, else — for a required field the row spells as a plain string — the target's
+ * own id, which the DM edits. A required POOL, INT or ENUM value nothing can name is the
+ * catalogue's word to choose, so the offer is dropped instead of guessed: the `fulfil`
+ * OFFER still stands on the finding (it already does when more than one act is owed) and
+ * the DM authors the act. The op carries type, target and payload and nothing else: the
+ * store's staging path re-mints it through `makeOp`, which is the one op writer.
+ *
  * ⛔ ZERO `any`, ZERO SUPPRESSIONS, NO NAMED NUMERIC CONSTANT.
  * `tests/lint/domainAnyCastBaseline.test.js` fails a NEW `src/domain` file that
  * carries any suppression debt, and `tests/lint/tuningRegister.walker.test.js`'s
@@ -99,6 +113,9 @@ const payloadOf = (entry) => bagOf(opOf(entry).payload);
 /** @param {Bag} entry @returns {string} the entry's own id */
 const idOf = (entry) => String(entry.id || '');
 
+/** @param {Bag} entry @returns {string} the id the entry's target names, or the empty string */
+const targetIdOf = (entry) => String(bagOf(opOf(entry).target).id || '');
+
 /**
  * The declaration's `requires` SPLIT, narrowed. The engine types `ctx.decl` loosely,
  * and design §18's two kinds are judged by two different rules, so the split is read
@@ -125,9 +142,58 @@ function factionsOf(world) {
 /** @param {readonly FactionRow[]} rows @returns {number} the roster's power sum */
 const shareSum = (rows) => rows.reduce((total, row) => total + (Number(row.power) || 0), 0);
 
-/** @param {string} type @param {Bag} payload @returns {Op} a fulfil offer's op, shape only */
-const offeredOp = (type, payload) => /** @type {Op} */ (/** @type {unknown} */ (
-  Object.freeze({ type, payload: Object.freeze(payload) })));
+/**
+ * The catalogue's row for ONE op type, read off the context. `ctx.decl` answers for the
+ * ENTRY's type alone, and an offer is by definition about another act, so the offer is
+ * shaped by this row; `Object.hasOwn`, never a prototype walk, so `constructor` is an
+ * unknown type like any other.
+ * @param {GuardContext} ctx @param {string} type @returns {Bag} the row, or an empty bag
+ */
+function rowOf(ctx, type) {
+  const catalogue = bagOf(ctx.catalogue);
+  return Object.hasOwn(catalogue, type) ? bagOf(catalogue[type]) : {};
+}
+
+/**
+ * The two payload-spec kinds that hold a PLAIN STRING, which is the only kind of required
+ * value a rule may fill from the target's own id. `operations.js` keeps its own
+ * `PAYLOAD_SPEC_KINDS` module-private and this leaf may not import that module at all, so
+ * the two words are spelled here exactly as `registry.js` spells the two vocabulary-bearing
+ * kinds, and the acceptance asserts them against the live catalogue's own kind set.
+ */
+const FREE_SPEC = 'free';
+const REF_SPEC = 'ref';
+
+/**
+ * ONE fulfil offer the catalogue accepts, or `null` (U65; see the header clause). The
+ * payload carries EXACTLY the fields the row declares, in `compareCodepoint` order so the
+ * same finding mints the same bytes twice, and the target is the row's own declared kind
+ * against the id the offer is about.
+ * @param {GuardContext} ctx @param {string} type the op type offered
+ * @param {string} id the id the offered act is about
+ * @param {Bag} known the fields the FINDING itself computed
+ * @returns {Op|null} null when the catalogue cannot express the act
+ */
+function offeredOp(ctx, type, id, known) {
+  const row = rowOf(ctx, type);
+  const kind = String(row.target || '');
+  if (!kind || !id) return null;
+  const declared = bagOf(row.payload);
+  const carried = payloadOf(bagOf(ctx.entry));
+  /** @type {Bag} */
+  const payload = {};
+  for (const field of Object.keys(declared).sort(compareCodepoint)) {
+    const spec = bagOf(declared[field]);
+    const given = [known[field], carried[field]].find((value) => value !== undefined);
+    if (given !== undefined) payload[field] = given;
+    else if (spec.required !== true) continue;
+    else if (spec.kind === FREE_SPEC || spec.kind === REF_SPEC) payload[field] = id;
+    else return null;
+  }
+  return /** @type {Op} */ (/** @type {unknown} */ (Object.freeze({
+    type, target: Object.freeze({ kind, id }), payload: Object.freeze(payload),
+  })));
+}
 
 /**
  * The gate table KEYED FOR A STRING LOOKUP, built once at module scope. The imported
@@ -177,11 +243,17 @@ function prerequisiteRule(ctx) {
   const against = verdict.violations.filter((row) => row.institution === named);
   if (!against.length) return null;
   const missing = [...new Set(against.flatMap((row) => [...(row.missing || [])]))].sort(compareCodepoint);
+  // The offer seats the FIRST missing prerequisite in codepoint order. Its class is the one
+  // the staged act itself carries, because the row requires that field and a pool value is
+  // the catalogue's word rather than a guard's.
+  const ground = missing.length
+    ? offeredOp(ctx, 'add-institution', missing[0], { name: missing[0] })
+    : null;
   return {
     kind: GUARD_KINDS[3], facet: 'gate',
     message: `${named} rests on something the town does not have: ${String(gate.reason || '')}`,
     offers: missing.length ? [GUARD_OFFERS[0], GUARD_OFFERS[6]] : [GUARD_OFFERS[6]],
-    ...(missing.length ? { fulfil: offeredOp('add-institution', { name: missing[0] }) } : {}),
+    ...(ground ? { fulfil: ground } : {}),
   };
 }
 
@@ -204,10 +276,21 @@ function totalityRule(ctx) {
   const shares = clone
     .map((row) => `${String(row.faction || '')} ${Number(row.power) || 0}`)
     .sort(compareCodepoint).join(', ');
+  // The message reads the WHOLE rebalanced roster, because that is what the DM must see;
+  // the offer can only carry what the row expresses, which is ONE faction at one power. It
+  // is the faction this act touches while the folded roster still holds it, and otherwise
+  // the first in codepoint order — and the power is the WRITER'S, read off the same clone
+  // the message quotes, never a second arithmetic.
+  const named = clone.map((row) => String(row.faction || '')).sort(compareCodepoint);
+  const here = targetIdOf(bagOf(ctx.entry));
+  const who = named.includes(here) ? here : named[0];
+  const seat = clone.filter((row) => String(row.faction || '') === who)[0];
+  const rebalanced = offeredOp(ctx, 'rebalance-power', who,
+    { faction: who, power: Number(bagOf(seat).power) || 0 });
   return {
     kind: GUARD_KINDS[4], facet: 'share', offers: [GUARD_OFFERS[0], GUARD_OFFERS[6]],
     message: `The factions hold ${sum} points of power between them, not ${target}. Rebalanced they would read: ${shares}.`,
-    fulfil: offeredOp('rebalance-power', { shares }),
+    ...(rebalanced ? { fulfil: rebalanced } : {}),
   };
 }
 
@@ -258,12 +341,18 @@ function connectionRule(ctx) {
   const owed = requiresOf(ctx).registry.filter((type) => !before.has(type));
   if (owed.length) {
     const waiting = ctx.laterEntries.find((other) => owed.includes(typeOf(bagOf(other))));
+    // ONE owed act can be offered; two or more leave the DM the order. The owed act is
+    // about the same thing this entry is about, so it takes this entry's target and, for
+    // every field the owed row and this entry both declare, this entry's own value.
+    const ground = owed.length === 1
+      ? offeredOp(ctx, owed[0], targetIdOf(bagOf(ctx.entry)), {})
+      : null;
     return {
       kind: GUARD_KINDS[0], facet: 'sequence',
       message: `This follows from ${[...owed].sort(compareCodepoint).join(', ')}, which is not staged before it.`,
       offers: waiting ? [GUARD_OFFERS[0], GUARD_OFFERS[5]] : [GUARD_OFFERS[0]],
       ...(waiting ? { relatedEntryId: idOf(bagOf(waiting)) } : {}),
-      ...(owed.length === 1 ? { fulfil: offeredOp(owed[0], {}) } : {}),
+      ...(ground ? { fulfil: ground } : {}),
     };
   }
   const related = relationOf(ctx, 'relatedTo');
