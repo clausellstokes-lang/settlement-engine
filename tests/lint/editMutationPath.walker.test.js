@@ -72,12 +72,21 @@ const EDIT_PATH = Object.freeze([
  *  EMPTY today, and an addition here is a declaration that the module never mutates. */
 const READ_ONLY_CONSUMERS = Object.freeze([]);
 
-/** The store leaf's import list, exactly as version 1 declared it (case A5). */
+/** The store leaf's import list. ⭐ EM-C4b WIDENS IT IN PLACE, BY ADDITION AND NEVER BY
+ *  DELETION: the registry half reaches EM-C1's pure verbs and EM-C2's engine, and both edges
+ *  are STATIC because `selectGuards` is a synchronous memoized read that an `await` cannot
+ *  serve. Neither costs a first-paint byte — this leaf is in no eager closure, which its own
+ *  membership probe proves by importing the exported set. The command runtime the judgment-264
+ *  binder reaches is NOT here and must not be: that edge is DYNAMIC, the estate's own store
+ *  idiom, and the list stays EXACT in both directions so a rename helper, a component, a
+ *  generator or a second cascade would show up HERE first. */
 const EDIT_SLICE_IMPORTS = Object.freeze([
   '../domain/campaign/canon.js',
   '../domain/edit/dmLayer.js',
   '../domain/edit/fieldDeclarations.js',
+  '../domain/edit/guards.js',
   '../domain/edit/operations.js',
+  '../domain/edit/registry.js',
 ]);
 
 /** Every .js/.jsx under src/, repo-relative with forward slashes. */
@@ -203,7 +212,7 @@ describe('EM-C4a — ONE MUTATION PATH (no second writer of a settlement edit)',
     ).toEqual([]);
   });
 
-  it('A5 — the store leaf imports EXACTLY the four declared modules, so the cascade branch adds zero import edges', () => {
+  it('A5 — the store leaf imports EXACTLY the six declared modules, so neither the cascade branch nor the registry half adds an unlisted import edge', () => {
     const source = readFileSync(join(REPO_ROOT, 'src/store/editSlice.js'), 'utf8');
     const specifiers = [...source.matchAll(/^import[\s\S]*?from '([^']+)';$/gm)].map((hit) => hit[1]).sort();
     // A rename helper, a component or a second cascade would show up HERE first: the
