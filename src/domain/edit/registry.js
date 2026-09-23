@@ -3,10 +3,13 @@
  * §2.5a, §11, §12.1 and §20.3).
  *
  * The estate's single writer of the `decrees` key (§P4: "exactly one writer per state").
- * Seven verbs and one reading, all pure: every one takes a registry and returns a NEW
+ * EIGHT verbs and one reading, all pure: every one takes a registry and returns a NEW
  * frozen registry, reads no clock, takes no draw, mints no id and mutates nothing it was
  * handed. The leaf lands DARK: no writer calls it, no consumer imports it, zero importers
- * at this tip, and EM-C4b's slice actions are its first caller.
+ * at this tip, and EM-C4b's slice actions are its first caller. The eighth verb is
+ * EM-C4c's `recordOverride`, which is what makes design §2.7's "proceed" a WRITE rather
+ * than a word; its store action joins `DECREE_ACTIONS` in the same landing, because the
+ * declaration and the producer are pinned set-equal in both directions.
  *
  * ⛔ THE CATALOGUES ARE ARGUMENTS, AND THAT IS MEASURED RATHER THAN CHOSEN. This leaf
  * imports ONE module, `../deterministicSort.js`. It does not import `./operations.js`:
@@ -294,6 +297,38 @@ export function withdraw(registry, entryId, reason) {
     const next = { ...row, status: WITHDRAWN };
     if (clean) next.withdrawnReason = clean;
     return next;
+  });
+}
+
+/**
+ * Record the DM's override of ONE guard on ONE PENDING entry (design §2.5's
+ * `overrode?: guardId[]`; §2.7: "Proceed records the override on the entry").
+ *
+ * ⛔ THE ID IS THE ENGINE'S OWN MINT AND IS NEVER RE-SPELLED HERE. EM-C2 mints a
+ * guard's id from its RULE id, its entry, its related entry and its facet, and reads
+ * `overrode.includes(id)` to mark a finding `overridden`. A registry that rebuilt that
+ * string out of a guard's KIND and facet would be a second spelling of the mint, and
+ * the first rule whose id is not its kind would silently orphan the DM's word. So the
+ * caller passes the guard's own `id` and this verb stores it verbatim.
+ *
+ * ⛔ IT MINTS NO KEY. `overrode` is design §2.5's own optional key and this module's
+ * `Decree` typedef already declares it, so the override rides inside a `decrees` row
+ * the save already carries whole: no settlement key is added anywhere by this verb.
+ *
+ * KEPT AND IDEMPOTENT: the ids are appended in the order the DM recorded them, any
+ * member that is not a non-empty string is dropped, and recording one twice leaves
+ * one. An APPLIED entry is history (design §12's product ruling) and an unknown id,
+ * a non-pending one or a guard id that is not a name each leave the registry as it
+ * is — this module's one refusal shape.
+ *
+ * @param {unknown} registry @param {unknown} entryId @param {unknown} guardId
+ * @returns {readonly Decree[]}
+ */
+export function recordOverride(registry, entryId, guardId) {
+  if (!isName(guardId)) return sealRegistry(rowsOf(registry));
+  return amendPending(registry, entryId, (row) => {
+    const held = (Array.isArray(row.overrode) ? row.overrode : []).filter(isName);
+    return held.includes(guardId) ? row : { ...row, overrode: [...held, guardId] };
   });
 }
 
