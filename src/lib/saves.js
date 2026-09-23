@@ -149,6 +149,64 @@ function localWrite(saves) {
   localStorage.setItem(LOCAL_KEY, JSON.stringify(saves));
 }
 
+/** The tail of the local library's write queue. Never rejects — see serializeLocalWrite. */
+let _localLibraryTail = Promise.resolve();
+
+/**
+ * ⛔ U69 — EVERY LOCAL READ-MODIFY-WRITE OF THE LIBRARY RUNS ALONE, BECAUSE THE WHOLE
+ * ARRAY IS THE ROW.
+ *
+ * `localStorage.setItem` is atomic; a load/modify/write TRANSACTION over one key is not.
+ * Every mutator below reads the ENTIRE library, patches one entry and writes the whole
+ * array back — and the read is `await localLoad()`, which yields. MEASURED at this cure's
+ * base, over the real advance in local mode: the world-pulse flush hands its member
+ * updates to `Promise.all`, so every call suspended at that same `await` BEFORE any of
+ * them wrote, all read the identical pre-flush array, and the last `localWrite` won. Two
+ * members flushed in one tick came out with one row's write gone ("lost: ["save-2"]");
+ * three came out with two gone. N members ⇒ N−1 rows lose their write, deterministically.
+ * Under THE PROMISE a save is the DM's lived history, so a flush that drops a member's
+ * row is data loss, not a scheduling detail.
+ *
+ * THE CURE IS AT THE BOUNDARY THAT HAS THE DEFECT, not at the one call site that
+ * surfaced it. The fan-out lives in the store's pulse flush, but the broken invariant is
+ * this module's: the library array has ONE writer at a time. Serializing here also covers
+ * the parallel local DELETE fan-out of the same flush and every other concurrent pair on
+ * the device; serializing the caller would have left them.
+ *
+ * ⛔ IT IS A CHAIN AND NOT `withLocalAuthorityLock`, AND THAT IS MEASURED RATHER THAN
+ * STYLISTIC. That mutex refuses an asynchronous critical section by construction — its
+ * `runSynchronous` THROWS on a thenable ("A local authority critical section must be
+ * synchronous.") — and every section here OPENS with `await localLoad()`.
+ * ⛔ AND THE BYTE ARGUMENT IS NOT THE ONE IT LOOKS LIKE, so it is stated as measured:
+ * `src/lib/localAuthorityMutex.js` is ALREADY in `EAGER_FIRST_PAINT_MODULES` (270 modules),
+ * so an edge to it would cost the first paint nothing. What would cost is the SYNCHRONOUS
+ * section the mutex demands: it would have to reach `saveAdmission.js`, which is NOT eager,
+ * and hoisting that parser into the first-paint chain is the one thing this file's lazy
+ * seams exist to prevent.
+ *
+ * ⛔ WHAT IT DOES NOT CLAIM: cross-DOCUMENT exclusion. A second tab runs a second module
+ * instance with its own tail, so two tabs writing at once still race — the hazard
+ * `localAuthorityMutex.js` exists for, wider than the one measured here and not this
+ * cure's to claim.
+ *
+ * ⛔ THE CLOUD PATH NEVER REACHES THIS. The queue wraps the `local*` bodies only; the
+ * exported service still routes to the `supabase*` functions when `isConfigured`, whose
+ * writes are per-row on the server and were never the losing shape.
+ *
+ * ⛔ THE TAIL NEVER CARRIES A REJECTION FORWARD. A refused batch or a quota-exceeded
+ * write is the CALLER's to see (it gets `run`), but a poisoned tail would refuse every
+ * later write on the device, so the queue keeps a settled, handler-attached copy.
+ *
+ * @template T
+ * @param {() => Promise<T>} write the read-modify-write section, run with the queue held
+ * @returns {Promise<T>} the section's own outcome
+ */
+function serializeLocalWrite(write) {
+  const run = _localLibraryTail.then(write);
+  _localLibraryTail = run.then(() => undefined, () => undefined);
+  return run;
+}
+
 /** The highest key this module instance has minted, so the clock cannot repeat itself. */
 let _lastLocalSaveId = 0;
 
@@ -808,31 +866,36 @@ async function localSaveEntry(
   );
   const v2 = migrateSaveToV2(entry);
   const settlement = withNeighbourNetworkFromRelationship(v2.settlement);
-  const saves = await localLoad();
-  // An explicit id still wins, exactly as before (`||`, so the falsy ids this module has
-  // always re-minted keep being re-minted); only the fallback changed. See newLocalSaveId.
-  const id = v2.id || newLocalSaveId(saves);
+  // U69: the section runs alone. It reaches the rows ALREADY ON THE DEVICE twice — once
+  // for the id mint, once for the neighbour partner — so an interleaved writer would both
+  // lose this row and let the mint re-use a key.
+  return serializeLocalWrite(async () => {
+    const saves = await localLoad();
+    // An explicit id still wins, exactly as before (`||`, so the falsy ids this module has
+    // always re-minted keep being re-minted); only the fallback changed. See newLocalSaveId.
+    const id = v2.id || newLocalSaveId(saves);
 
-  // Bidirectional neighbour link (see supabaseSave): when the named neighbour
-  // already exists as an active save, write the reciprocal back-link onto the
-  // partner row alongside the new save.
-  if (settlement?.neighborRelationship?.name) {
-    const { buildNeighbourBackLink } = await loadNeighbourBackLink();
-    const existing = saves.filter(isSaveActive);
-    const link = buildNeighbourBackLink({ ...v2, id, settlement }, existing);
-    if (link) {
-      const next = saves.map(s => String(s.id) === String(link.partner.id)
-        ? { ...s, settlement: link.partner.settlement }
-        : s);
-      next.unshift({ ...v2, settlement: link.settlement, id, savedAt: Date.now() });
-      localWrite(next);
-      return id;
+    // Bidirectional neighbour link (see supabaseSave): when the named neighbour
+    // already exists as an active save, write the reciprocal back-link onto the
+    // partner row alongside the new save.
+    if (settlement?.neighborRelationship?.name) {
+      const { buildNeighbourBackLink } = await loadNeighbourBackLink();
+      const existing = saves.filter(isSaveActive);
+      const link = buildNeighbourBackLink({ ...v2, id, settlement }, existing);
+      if (link) {
+        const next = saves.map(s => String(s.id) === String(link.partner.id)
+          ? { ...s, settlement: link.partner.settlement }
+          : s);
+        next.unshift({ ...v2, settlement: link.settlement, id, savedAt: Date.now() });
+        localWrite(next);
+        return id;
+      }
     }
-  }
 
-  saves.unshift({ ...v2, settlement, id, savedAt: Date.now() });
-  localWrite(saves);
-  return id;
+    saves.unshift({ ...v2, settlement, id, savedAt: Date.now() });
+    localWrite(saves);
+    return id;
+  });
 }
 
 async function localUpsert(
@@ -843,63 +906,85 @@ async function localUpsert(
   const v2 = migrateSaveToV2(entry);
   if (!v2?.id) throw new Error('Explicit-id save upsert requires an id.');
   const settlement = withNeighbourNetworkFromRelationship(v2.settlement);
-  const rows = await localLoad();
-  const index = rows.findIndex(row => String(row.id) === String(v2.id));
-  const next = {
-    ...(index === -1 ? {} : rows[index]),
-    ...v2,
-    settlement,
-    id: v2.id,
-    savedAt: index === -1 ? Date.now() : rows[index].savedAt,
-  };
-  if (index === -1) rows.unshift(next);
-  else rows[index] = next;
-  localWrite(rows);
-  return v2.id;
+  // U69: a member BIRTH rides the same flush as its siblings' updates, so this section
+  // takes the queue for the same reason `localUpdate` does.
+  return serializeLocalWrite(async () => {
+    const rows = await localLoad();
+    const index = rows.findIndex(row => String(row.id) === String(v2.id));
+    const next = {
+      ...(index === -1 ? {} : rows[index]),
+      ...v2,
+      settlement,
+      id: v2.id,
+      savedAt: index === -1 ? Date.now() : rows[index].savedAt,
+    };
+    if (index === -1) rows.unshift(next);
+    else rows[index] = next;
+    localWrite(rows);
+    return v2.id;
+  });
 }
 
-async function localUpdate(id, partial) {
-  const saves = await localLoad();
-  // String() both sides (ported master fix): a numeric id passed as a string
-  // must still match — the module's other id compares already coerce.
-  const idx = saves.findIndex(s => String(s.id) === String(id));
-  if (idx !== -1) {
-    Object.assign(saves[idx], partial);
-    localWrite(saves);
-  }
+// U69: THE MEASURED PATH. The world-pulse flush hands every member's update to
+// `Promise.all`, so without the queue all of them read one pre-flush array and only the
+// last write survived.
+function localUpdate(id, partial) {
+  return serializeLocalWrite(async () => {
+    const saves = await localLoad();
+    // String() both sides (ported master fix): a numeric id passed as a string
+    // must still match — the module's other id compares already coerce.
+    const idx = saves.findIndex(s => String(s.id) === String(id));
+    if (idx !== -1) {
+      Object.assign(saves[idx], partial);
+      localWrite(saves);
+    }
+  });
 }
 
 async function localDelete(id, expectedOwnerId = null, isSessionCurrent = null) {
   assertSaveSessionCurrent(expectedOwnerId, isSessionCurrent, expectedOwnerId);
-  const saves = await localLoad();
-  const existed = saves.some(save => String(save.id) === String(id));
-  localWrite(saves.filter(save => String(save.id) !== String(id)));
-  return existed ? id : null;
+  // U69: the pulse's own delete fan-out is a second `Promise.all` over this backend, and
+  // a lost delete RESURRECTS a row the DM removed.
+  return serializeLocalWrite(async () => {
+    const saves = await localLoad();
+    const existed = saves.some(save => String(save.id) === String(id));
+    localWrite(saves.filter(save => String(save.id) !== String(id)));
+    return existed ? id : null;
+  });
 }
 
 async function localCount() {
   return activeSaveCount(await localLoad());
 }
 
-async function localReactivateFreeSettlement(id) {
-  const saves = await localLoad();
-  const idx = saves.findIndex(save => String(save.id) === String(id));
-  if (idx === -1) return { ok: false, reason: 'not_found' };
-  saves[idx] = {
-    ...saves[idx],
-    accessState: ACTIVE_SAVE_STATE,
-    inactiveReason: null,
-    inactiveSince: null,
-    retentionExpiresAt: null,
-    reactivatedFreeAt: new Date().toISOString(),
-  };
-  localWrite(saves);
-  return { ok: true };
+function localReactivateFreeSettlement(id) {
+  return serializeLocalWrite(async () => {
+    const saves = await localLoad();
+    const idx = saves.findIndex(save => String(save.id) === String(id));
+    if (idx === -1) return { ok: false, reason: 'not_found' };
+    saves[idx] = {
+      ...saves[idx],
+      accessState: ACTIVE_SAVE_STATE,
+      inactiveReason: null,
+      inactiveSince: null,
+      retentionExpiresAt: null,
+      reactivatedFreeAt: new Date().toISOString(),
+    };
+    localWrite(saves);
+    return { ok: true };
+  });
 }
 
-/** Batch-write the full saves array (local mode only). */
-async function localWriteAll(entries) {
-  localWrite(entries);
+/**
+ * Batch-write the full saves array (local mode only).
+ *
+ * U69: it takes the queue although it READS nothing. Its array was composed from an
+ * earlier read by its caller, so it is a whole-library write like every other section —
+ * landing it BETWEEN another section's read and write would lose that section's row just
+ * as surely, and the caller's own staleness is a separate question this never claimed.
+ */
+function localWriteAll(entries) {
+  return serializeLocalWrite(async () => { localWrite(entries); });
 }
 
 /**
@@ -947,15 +1032,19 @@ async function localMutateBatch(
   }
   const deleted = new Set(deletes.map(String));
   const updateMap = new Map(updates.map(entry => [String(entry.id), entry]));
-  const next = (await localLoad())
-    .filter(entry => !deleted.has(String(entry.id)))
-    .map(entry => {
-      const patch = updateMap.get(String(entry.id));
-      return patch ? { ...entry, ...patch } : entry;
-    });
-  for (const entry of creates) next.unshift({ ...migrateSaveToV2(entry), savedAt: Date.now() });
-  localWrite(next);
-  return updates.length + deletes.length + creates.length;
+  // U69: the refusal above still runs BEFORE the read and before any write — and now
+  // before the queue is even taken, so a refused batch waits for nothing either.
+  return serializeLocalWrite(async () => {
+    const next = (await localLoad())
+      .filter(entry => !deleted.has(String(entry.id)))
+      .map(entry => {
+        const patch = updateMap.get(String(entry.id));
+        return patch ? { ...entry, ...patch } : entry;
+      });
+    for (const entry of creates) next.unshift({ ...migrateSaveToV2(entry), savedAt: Date.now() });
+    localWrite(next);
+    return updates.length + deletes.length + creates.length;
+  });
 }
 
 // ── Exported API ────────────────────────────────────────────────────────────
