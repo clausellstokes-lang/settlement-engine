@@ -27,11 +27,22 @@ import { chronicleTimeline } from '../../src/domain/display/chronicleTimeline.js
 import { GUARD_KINDS } from '../../src/domain/edit/guards.js';
 import { OP_STAGES, OP_TYPES, makeOp } from '../../src/domain/edit/operations.js';
 import {
+  applyPartyDecree, authorableEventTypes, partyActionFor, partyDeedClause,
+  scheduledEventClause,
+} from '../../src/domain/edit/eventCatalogue.js';
+import {
+  AFFORDANCE_MANIFEST, NON_AUTHORABLE_EVENTS, VERB_FAMILIES,
+} from '../../src/domain/events/affordanceManifest.js';
+import { PARTY_IMPACT_KINDS } from '../../src/domain/worldPulse/partyImpactKinds.js';
+import { applyPartyImpact } from '../../src/domain/worldPulse/partyImpact.js';
+import { ensureRegionalGraph } from '../../src/domain/region/index.js';
+import {
   DECREE_FORMS, decreeChronicleLine, decreeForm, decreeLineParts,
 } from '../../src/domain/display/stateProse/decreeProse.js';
 import {
-  DECREE_FOLLOWS_FROM_POOL, DECREE_FORM_POOLS, DECREE_HAND_POOLS, DECREE_LINE_CAUSES,
-  DECREE_OVERRIDE_POOLS, DECREE_PROSE_BLOCKS, DECREE_STANDING_POOLS,
+  DECREE_EVENT_POOLS, DECREE_FOLLOWS_FROM_POOL, DECREE_FORM_POOLS, DECREE_HAND_POOLS,
+  DECREE_LINE_CAUSES, DECREE_OVERRIDE_POOLS, DECREE_PARTY_DEED_POOLS, DECREE_PROSE_BLOCKS,
+  DECREE_STANDING_POOLS,
 } from '../../src/domain/display/stateProse/decreeProsePools.js';
 
 /** Design §20.3's three statuses, which EM-C1 §6 lands as `DECREE_STATUSES`. */
@@ -299,5 +310,236 @@ describe('EM-E2 — the chronicle\'s voice for a decree', () => {
     expect(Object.keys(DECREE_HAND_POOLS).sort(), 'EM-C1 §6\'s authors').toEqual(AUTHORS);
     expect(Object.keys(DECREE_STANDING_POOLS).sort(), 'design §20.3\'s statuses').toEqual(STATUSES);
     expect(Object.keys(DECREE_OVERRIDE_POOLS).sort(), 'the landed GUARD_KINDS').toEqual([...GUARD_KINDS].sort());
+  });
+});
+
+/**
+ * EM-E6's acceptance battery (the charter's wave-3 EM-E6 row; design §16, §19 ruling 2).
+ *
+ * WHAT IT PROVES, beyond EM-E2's. That the two things a decree needs from the wider
+ * simulation come from the simulation's OWN two surfaces: the event a decree schedules is
+ * one of the affordance manifest's typed settlement events minus its folds, and the party
+ * cause is one of the twelve impact kinds, applied through the one door that already
+ * exists for it. Every arm below drives the imported catalogue rather than a list written
+ * here, so a verb or a kind added upstream is measured and never transcribed.
+ *
+ * ⛔ THE WRITE-PATH ARM RUNS THE REAL `applyPartyImpact` OVER A REAL CAMPAIGN, and asserts
+ * that a decree and a direct party action produce the SAME result object. An arm that only
+ * checked the action's shape would pass on the day the decree path stopped calling it.
+ */
+
+const NOW = '2026-02-01T00:00:00.000Z';
+
+/** @param {string} name */
+const partySettlement = (name) => ({
+  name,
+  tier: 'town',
+  population: 1600,
+  config: { tradeRouteAccess: 'road' },
+  institutions: [],
+  economicState: { primaryExports: [], primaryImports: [] },
+  powerStructure: { publicLegitimacy: { score: 40 }, factions: [], conflicts: [] },
+  npcs: [{ id: 'reeve', name: 'Reeve Mara', importance: 'key' }],
+  activeConditions: [],
+});
+
+/** @param {string} id @param {string} name */
+const partySave = (id, name) => ({
+  id,
+  name,
+  phase: 'canon',
+  settlement: partySettlement(name),
+  campaignState: { phase: 'canon', eventLog: [], locks: {} },
+});
+
+const PARTY_SAVES = [partySave('a', 'Ashford'), partySave('b', 'Briarwatch')];
+
+/**
+ * ⛔ THE REGIONAL GRAPH IS BUILT ONCE AND CLONED, NEVER REBUILT PER CAMPAIGN.
+ * `ensureRegionalGraph` stamps its edges with the wall clock, so two campaigns built a
+ * few milliseconds apart carry different `updatedAt` values and the two-doors arm below
+ * would compare a difference this fixture invented (measured: a nine-millisecond drift).
+ * One build, cloned per campaign, keeps the inputs identical AND the objects independent.
+ */
+const PARTY_GRAPH = ensureRegionalGraph({
+  edges: [{ id: 'edge.a.b', from: 'a', to: 'b', relationshipType: 'hostile' }],
+});
+
+const partyCampaign = () => ({
+  id: 'camp-e6',
+  name: 'Decree Campaign',
+  settlementIds: ['a', 'b'],
+  worldState: {
+    rngSeed: 'e6-seed',
+    tick: 5,
+    stressors: [{
+      id: 'world_stressor.siege.a',
+      type: 'siege',
+      severity: 0.82,
+      affectedSettlementIds: ['a'],
+      residualEffects: ['damaged_walls'],
+    }],
+    relationshipStates: {
+      'edge.a.b': { relationshipType: 'hostile', trust: 0.05, resentment: 0.78, fear: 0.72 },
+    },
+  },
+  regionalGraph: structuredClone(PARTY_GRAPH),
+  wizardNews: { currentTick: 5, entries: [] },
+});
+
+describe('EM-E6 — events, predetermined or by the party', () => {
+  it('a party-cause decree carries the kind\'s own targets and its default magnitude', () => {
+    let fields = 0;
+    for (const [kind, spec] of Object.entries(PARTY_IMPACT_KINDS)) {
+      /** @type {Record<string, unknown>} */
+      const payload = { kind };
+      for (const field of spec.targets) { payload[field] = `given:${field}`; fields += 1; }
+      const action = partyActionFor(payload);
+      expect(action, `${kind} builds an action`).toBeTruthy();
+      expect(action.kind, kind).toBe(kind);
+      // THE MAGNITUDE IS THE CATALOGUE'S, not a number this train chose.
+      expect(action.magnitude, `${kind} takes its default magnitude`).toBe(spec.defaultMagnitude);
+      for (const field of spec.targets) {
+        expect(action[field], `${kind}/${field} is carried`).toBe(`given:${field}`);
+      }
+      // A stated magnitude wins, and it is the ONLY thing that overrides the default.
+      expect(partyActionFor({ ...payload, magnitude: 0.11 }).magnitude, kind).toBe(0.11);
+      expect(partyActionFor({ ...payload, magnitude: 'a lot' }).magnitude, kind)
+        .toBe(spec.defaultMagnitude);
+      // ⛔ EVERY DECLARED TARGET IS REQUIRED. A decree missing one is not half-applied
+      // with a hole in it; it is not an action at all.
+      // anchored: the positive limb just above built this very action from this very
+      // payload, so a null here is the missing field and never a broken builder.
+      for (const field of spec.targets) {
+        const short = { ...payload };
+        delete short[field];
+        expect(partyActionFor(short), `${kind} without ${field}`).toBe(null);
+      }
+    }
+    // NON-VACUOUS: all twelve kinds and every declared field really were exercised.
+    expect(Object.keys(PARTY_IMPACT_KINDS).length, 'the one party vocabulary').toBe(12);
+    // Measured, not guessed: six kinds declare one target field and six declare two.
+    expect(fields, 'and every target field the twelve declare').toBe(18);
+    // A kind outside the vocabulary builds nothing, so no second party vocabulary can
+    // slip in through a payload.
+    expect(partyActionFor({ kind: 'broke_the_siege', stressorId: 'x' })).toBe(null);
+    expect(partyActionFor({ kind: '' })).toBe(null);
+    expect(partyActionFor(null)).toBe(null);
+  });
+
+  it('a party-cause decree applies THROUGH applyPartyImpact, by the one door', () => {
+    const payload = {
+      kind: 'resolve_stressor',
+      stressorId: 'world_stressor.siege.a',
+      label: 'The party broke the siege of Ashford',
+    };
+    const action = partyActionFor(payload);
+    expect(action.magnitude, 'the catalogue\'s own decisiveness')
+      .toBe(PARTY_IMPACT_KINDS.resolve_stressor.defaultMagnitude);
+
+    const viaDecree = applyPartyDecree({
+      campaign: partyCampaign(), saves: PARTY_SAVES, payload, now: NOW,
+    });
+    const viaDoor = applyPartyImpact({
+      campaign: partyCampaign(), saves: PARTY_SAVES, action, now: NOW,
+    });
+    expect(viaDecree, 'the decree reached the world').not.toBeNull();
+    // ⛔ THE SAME DOOR, PROVEN BY THE RESULT AND NOT BY A COMMENT. A decree and a direct
+    // party action are the same act, so their whole result object is the same object.
+    expect(viaDecree).toEqual(viaDoor);
+    // And it really moved the world: the siege is no longer active.
+    const siege = (viaDecree.worldState.stressors || [])
+      .find((s) => s.id === 'world_stressor.siege.a');
+    expect(siege.status, 'the crisis the party ended').toBe('residual');
+
+    // ⛔ THE PAIRED NEGATIVE, both limbs: a kind the vocabulary cannot type reaches the
+    // world through neither door, so the decree path adds no reach of its own.
+    // anchored: the limbs above applied a real kind through both doors over this very
+    // campaign, so a null here is the vocabulary closing and never a dead fixture.
+    const unknown = { kind: 'broke_the_siege', stressorId: 'world_stressor.siege.a' };
+    expect(applyPartyDecree({ campaign: partyCampaign(), saves: PARTY_SAVES, payload: unknown, now: NOW }))
+      .toBe(null);
+    expect(applyPartyImpact({ campaign: partyCampaign(), saves: PARTY_SAVES, action: unknown, now: NOW }))
+      .toBe(null);
+    expect(applyPartyDecree({ campaign: partyCampaign(), saves: PARTY_SAVES, now: NOW })).toBe(null);
+    expect(applyPartyDecree()).toBe(null);
+  });
+
+  it('the chronicle says "by the party\'s hand" FROM THE POOL, and a hand-written clause is not one', () => {
+    const RULING = 'by the party\'s hand';
+    // THE WORDS ARE IN THE CORPUS, in both blocks that can speak for the party.
+    const handSays = Object.values(DECREE_HAND_POOLS).flat()
+      .filter((v) => v.causes.includes('party') && v.text.includes(RULING));
+    expect(handSays.length, 'the hand block carries the ruling\'s words').toBeGreaterThan(0);
+    expect(Object.entries(DECREE_PARTY_DEED_POOLS)
+      .filter(([, pool]) => !pool.some((v) => v.text.includes(RULING)))
+      .map(([kind]) => kind), 'and every deed pool can say them too').toEqual([]);
+
+    // AND THEY REACH A RENDERED LINE, drawn rather than written.
+    const SEEDS = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h'];
+    const lines = SEEDS.map((seed) => decreeChronicleLine(entryOf(), WORLD, { seed, cause: 'party' }).prose);
+    expect(lines.some((prose) => prose.includes(RULING)),
+      'some seed speaks the ruling in the line itself').toBe(true);
+    const unauthored = SEEDS
+      .filter((seed) => !everyPartIsAuthored(decreeLineParts(entryOf(), WORLD, { seed, cause: 'party' })));
+    expect(unauthored, 'and every clause of every such line is an authored member').toEqual([]);
+
+    // The deed clause for every kind is an authored member of its own pool.
+    const deeds = new Set(Object.values(DECREE_PARTY_DEED_POOLS).flat().map((v) => v.text));
+    for (const kind of Object.keys(PARTY_IMPACT_KINDS)) {
+      const clause = partyDeedClause(kind, { seed: 'seed-a' });
+      expect(clause, `${kind} renders a deed clause`).toBeTruthy();
+      expect(deeds.has(clause.text), `${kind} draws an authored sentence`).toBe(true);
+    }
+    // ⛔ THE PLANT: a clause assembled by hand carries the same ruling words and is NOT an
+    // authored member of the pool it claims. This is the free-text failure the corpus
+    // exists to prevent, run through the battery's own membership predicate.
+    expect(everyPartIsAuthored([{
+      blockId: 'DEC-PARTY',
+      poolKey: 'remove_npc',
+      text: `The party took them, ${RULING}.`,
+    }]), 'a hand-written clause is not an authored member').toBe(false);
+  });
+
+  it('every authorable event type draws a clause on its own family, and the folded nine draw none', () => {
+    // The two new blocks are ADDRESSED, so the reader and the walker can both reach them.
+    expect(DECREE_PROSE_BLOCKS['DEC-EVENT']).toBe(DECREE_EVENT_POOLS);
+    expect(DECREE_PROSE_BLOCKS['DEC-PARTY']).toBe(DECREE_PARTY_DEED_POOLS);
+    // The two closed vocabularies the new pool keys ARE, each named by its source.
+    expect(Object.keys(DECREE_EVENT_POOLS).sort(), 'the manifest\'s own families')
+      .toEqual([...VERB_FAMILIES].sort());
+    expect(Object.keys(DECREE_PARTY_DEED_POOLS).sort(), 'the twelve party-impact kinds')
+      .toEqual(Object.keys(PARTY_IMPACT_KINDS).sort());
+
+    const authorable = authorableEventTypes();
+    expect(authorable.length, 'forty-one typed events minus the nine folds').toBe(32);
+    const homeless = authorable
+      .filter((type) => !DECREE_EVENT_POOLS[AFFORDANCE_MANIFEST[type].family]);
+    expect(homeless, 'every authorable type reaches a pool of the block').toEqual([]);
+    for (const type of authorable) {
+      const clause = scheduledEventClause(type, { seed: 'seed-a', cause: 'table' });
+      expect(clause.poolKey, `${type} draws on its catalogue family`)
+        .toBe(AFFORDANCE_MANIFEST[type].family);
+    }
+    // anchored: the loop above drew a clause for all thirty-two, so the silence below is
+    // the fold closing rather than an emptied block.
+    expect([...NON_AUTHORABLE_EVENTS].filter((type) => scheduledEventClause(type, { seed: 'seed-a' })),
+      'and not one folded type draws a sentence').toEqual([]);
+
+    // THE ONE SLOTTED VARIANT of the new blocks: filled it reaches the reader, unfilled it
+    // shortens the clause rather than rendering its own braces.
+    const realm = authorable.find((type) => AFFORDANCE_MANIFEST[type].family === 'Realm');
+    const SEEDS = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h'];
+    const offenders = SEEDS.flatMap((seed) => {
+      const bare = scheduledEventClause(realm, { seed, cause: 'table' });
+      const filled = scheduledEventClause(realm, { seed, cause: 'table', settlement: 'Kolstad' });
+      const bad = [];
+      if (bare && bare.text.includes('{')) bad.push(`bare/${seed}: ${bare.text}`);
+      if (filled && filled.text.includes('{')) bad.push(`filled/${seed}: ${filled.text}`);
+      return bad;
+    });
+    expect(offenders, 'no seed renders a slot the caller never filled').toEqual([]);
+    expect(SEEDS.some((seed) => scheduledEventClause(realm, { seed, cause: 'table', settlement: 'Kolstad' })
+      .text.includes('Kolstad')), 'and the settlement sentence is reachable when it is filled').toBe(true);
   });
 });
