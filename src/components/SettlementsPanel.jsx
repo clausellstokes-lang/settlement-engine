@@ -609,6 +609,29 @@ export default function SettlementsPanel({ onNavigate, routeId }) {
   // divergent recompute) for the "At war" / campaign filters.
   const { filterContext } = useLibraryLiveWorld(activeCampaigns);
 
+  /**
+   * ⛔ THE SHELF'S OWN ROWS — what the library ACTUALLY holds, before any search term or
+   * chip narrows it. `applyLibraryFilters` hides EM-F1's phantom counterparties at the
+   * HEAD of its pipeline (a phantom is an off-stage prop that persists as a save, not a
+   * settlement the DM keeps), so the raw `saves` array is not the library: it is the
+   * library plus rows no viewer can ever reach. Two readers used to take that raw array
+   * and so answered about rows the shelf does not show:
+   *
+   *   • `totalCount` — the toolbar's DENOMINATOR. With a phantom in it the toolbar read
+   *     "4 of 5" over a shelf of four, and the minimal face offered to search a
+   *     settlement that is not there. A count is a sentence the GM reads.
+   *   • `useLibraryBulkSelect`'s corpus — the rows a bulk action resolves a selection
+   *     against. No rendered card can put a phantom into that selection TODAY, because
+   *     the cards come off `filteredSaves`; this half therefore closes the HABITAT
+   *     rather than a reachable bug, which is the honest description of it. What the
+   *     bulk actions can reach is now exactly what the shelf can offer.
+   *
+   * The query, the sort's chips and the campaign context are deliberately NOT applied
+   * here: a denominator that moved with the filters would make "N of M" read "M of M"
+   * forever, and the numerator (`filteredSaves`) is the one that answers the chips.
+   */
+  const shelfSaves = useMemo(() => _applyLibraryFilters(saves), [saves]);
+
   const filteredSaves = useMemo(() => {
     return _applyLibraryFilters(saves, {
       query: libraryQuery,
@@ -619,7 +642,9 @@ export default function SettlementsPanel({ onNavigate, routeId }) {
 
   // ── Bulk multi-select (state + actions live in the extracted hook) ─────────
   const bulk = useLibraryBulkSelect({
-    saves,
+    // The shelf's rows, never the raw array — a bulk action may only resolve a
+    // selection against what the shelf can offer. See `shelfSaves` above.
+    saves: shelfSaves,
     addToCampaign,
     canonizeSavedSettlement,
     bulkDeleteConfirmed,
@@ -715,7 +740,7 @@ export default function SettlementsPanel({ onNavigate, routeId }) {
           query={libraryQuery} setQuery={setLibraryQuery}
           sort={librarySort} setSort={setLibrarySort}
           filters={libraryFilters} setFilters={setLibraryFilters}
-          totalCount={saves.length} visibleCount={filteredSaves.length}
+          totalCount={shelfSaves.length} visibleCount={filteredSaves.length}
           minimal={saves.length < 5}
           selectMode={selectMode} onToggleSelectMode={bulk.toggleMode}
         /></div>
