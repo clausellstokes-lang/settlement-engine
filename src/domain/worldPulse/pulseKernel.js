@@ -983,7 +983,7 @@ export function simulateCampaignWorldPulse({ campaign, saves = [], interval = 'o
     rng: rng.fork('war-layer'),
     tick: worldState.tick,
     now,
-    rules: simulationRules,
+    rules: simulationRules, forkPins,
   });
   /** @type {any[]} */ let warReturnOutcomes = [], tradeWarOutcomes = [], occupationOutcomes = [];
   // Occupation-layer outcomes (occupation_resistance / occupation_burden /

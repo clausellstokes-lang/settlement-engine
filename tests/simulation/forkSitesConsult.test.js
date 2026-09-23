@@ -24,12 +24,13 @@
  * `evaluateWarLayer` decides the siege, and every one of the fork's four bands answers with
  * the direction `SIEGE_VERDICT_BANDS` types for it.
  *
- * ⛔ WHAT IT STILL DOES NOT CLAIM, STATED SO NOBODY READS IT AS COVERAGE. ONE TOKEN IS OWED
- * AT THE PULSE'S HEAD. `pulseKernel.js` folds the bag and hands it to the growth chain, but
- * its own `evaluateWarLayer({ … })` call does not pass it, so a DECREE does not yet pin a
- * siege at a real tick — the layer's door is open and the kernel has not walked through it.
- * That file belongs to no builder on this lane, so the gap is asserted positively below and
- * reds the day the token lands.
+ * ⭐ AND THE PULSE'S OWN TOKEN LANDED TOO (U71, the verifier's FIX-2). `pulseKernel.js`
+ * folded the bag and handed it to the growth chain while its own `evaluateWarLayer({ … })`
+ * call omitted it, so a DECREE could not pin a siege at a REAL TICK — the layer's door was
+ * open and the kernel had not walked through it. The kernel's war call now passes `forkPins`,
+ * and E4b-8's second half is the pinned siege driven through `simulateCampaignWorldPulse`
+ * that the old half asked its author for: the bag is folded by the pulse from the save's own
+ * due decrees and the fall is read from OUTSIDE as the occupation a taken town seeds.
  *
  * ⚠ TWO SYNTHETIC LITERALS ARE DECLARED, AND BOTH ARE MEASURED RATHER THAN INVENTED. The
  * four siege rolls are EM-E4's own fixture rolls, re-derived into the whole band set on
@@ -206,9 +207,10 @@ const warTown = (name, patch) => ({
   npcs: [{ id: `reeve_${name}`, name: `Reeve ${name}`, importance: 'key' }],
   activeConditions: [],
 });
-/** @param {string} id @param {string} name @param {Record<string, unknown>} patch */
-const warSave = (id, name, patch) => ({
-  id, name, phase: 'canon', settlement: warTown(name, patch),
+/** @param {string} id @param {string} name @param {Record<string, unknown>} patch @param {unknown[]|null} [decrees] */
+const warSave = (id, name, patch, decrees = null) => ({
+  id, name, phase: 'canon',
+  settlement: { ...warTown(name, patch), ...(decrees ? { decrees } : {}) },
   campaignState: { phase: 'canon', eventLog: [], locks: {} },
 });
 /** ONE tick of the war layer over a standing siege, with the bag handed in at its door. */
@@ -241,6 +243,44 @@ function siegeAtTheLayer(/** @type {unknown} */ forkPins) {
 }
 /** Did the town FALL, read from outside the layer. @param {Record<string, any>} war */
 const townFell = (war) => war.outcomes.some((/** @type {Record<string, unknown>} */ o) => o.candidateType === 'conquest');
+
+// ── U71's SIEGE AT A REAL TICK. The SAME two towns and the SAME standing siege, driven
+//    through `simulateCampaignWorldPulse` with the DM's pin staged on the besieger's own
+//    registry — so the pin bag is the PULSE's, folded from the save's due decrees at the
+//    head, and nothing here hands the war layer anything. The fall is read from outside as
+//    the occupation a conquest seeds (`worldState.occupations`), which is the kernel's own
+//    downstream record of a taken town and not the verdict the layer keeps to itself.
+/** ONE real tick over the standing siege. @param {unknown[]|null} decrees */
+function siegeAtTheTick(decrees) {
+  const saves = [
+    warSave('strong', 'Ironhold', { tier: 'city', population: 45000, legitimacy: 60,
+      factions: [{ faction: 'Military Council', category: 'military', power: 78, isGoverning: true }] }, decrees),
+    warSave('weak', 'Thornmere', { tier: 'village', population: 280, legitimacy: 24,
+      factions: [{ faction: 'Village Elders', category: 'civic', power: 30, isGoverning: true }] }),
+  ];
+  const campaign = {
+    id: 'em-e4b-war-tick', name: 'Fork Sites at War', settlementIds: ['strong', 'weak'],
+    worldState: {
+      rngSeed: 'em-e4b::the-walls', tick: 4,
+      relationshipStates: { 'edge.strong.weak': { relationshipType: 'hostile' } },
+      simulationRules: { warLayerEnabled: true },
+      deployments: { strong: { targetId: 'weak', sinceTick: 1, role: 'siege' } },
+    },
+    regionalGraph: ensureRegionalGraph({
+      edges: [{ id: 'edge.strong.weak', from: 'strong', to: 'weak', relationshipType: 'hostile' }],
+      channels: [],
+    }),
+    wizardNews: { currentTick: 4, entries: [] },
+  };
+  const result = /** @type {Record<string, any>} */ (simulateCampaignWorldPulse({
+    campaign, saves, interval: 'one_week', now: WAR_NOW,
+  }));
+  return {
+    occupied: Object.keys(result?.worldState?.occupations || {}),
+    causes: (result?.pulseRecord?.decreeCauses || []).length,
+    tick: result?.tick,
+  };
+}
 
 describe('EM-E4b — the registered fork sites consult the director\'s pins', () => {
   it('E4b-1 A STAGED PIN ON HBF-85 YIELDS THE PINNED OUTCOME AT THE TICK, AND THE YEAR ROOT IS NEVER COMPOSED', () => {
@@ -399,7 +439,7 @@ describe('EM-E4b — the registered fork sites consult the director\'s pins', ()
     expect(through({})).toBe(drawn);
   });
 
-  it('E4b-8 HBF-86\'S LAST HOP IS WIRED (U35): a bag handed to evaluateWarLayer decides the siege, band by band, and the kernel\'s own token is what is still owed', () => {
+  it('E4b-8 HBF-86\'S LAST HOP IS WIRED END TO END (U35 + U71): a bag handed to evaluateWarLayer decides the siege band by band, AND a DECREE pins that siege at a real tick', () => {
     // ⭐ THE POSITIVE TWIN THE OLD ARM ASKED FOR. This drives the WAR LAYER, not the leaf:
     // the pin goes in at `evaluateWarLayer`'s door and the answer is read from OUTSIDE as
     // the `conquest` outcome a fallen town produces, so nothing here inspects the verdict
@@ -428,15 +468,30 @@ describe('EM-E4b — the registered fork sites consult the director\'s pins', ()
     expect(warHead).toContain('const verdict = resolveSiegeVerdict({ targetId, besiegers,');
     expect(warHead).toContain('spatialSiege, forkPins });');
     expect(warHead).toContain('rules = {}, forkPins = null }');
-    // ⛔ ONE TOKEN IS STILL OWED, AND A DECLARED GAP IS ASSERTED, NEVER DESCRIBED. The
-    // kernel folds the bag (it hands it to the growth chain on the line below) but does not
-    // pass it to the war layer, so a DECREE still cannot pin a siege at a real tick. When
-    // that token lands, THIS half reds and its author replaces it with a pinned siege driven
-    // through `simulateCampaignWorldPulse` — which is the point of spelling it this way.
+    // ⭐ U71 — THE HALF THE OLD ARM ASKED FOR, EXECUTED. The token landed at the kernel's own
+    // war call, so this is no longer a declared gap but a DECREE pinning a siege at a REAL
+    // TICK: the DM stages one `pin-fork` on the besieger's registry, the pulse folds its own
+    // bag at the head and threads it to the war layer, and the town falls or holds by the
+    // band the DM chose. Read from OUTSIDE the layer as the occupation a conquest seeds.
+    const bareTick = siegeAtTheTick(null);
+    expect(bareTick.tick, 'the fixture stopped advancing — the calendar drifted').toBe(5);
+    expect(bareTick.occupied, 'the unpinned siege HOLDS at a real tick, so a pinned fall is a real flip').toEqual([]);
+    expect(bareTick.causes, 'the control staged no decree').toBe(0);
+    /** @type {Record<string, boolean>} */
+    const fellAtTheTick = {};
+    for (const band of SIEGE_FORK.outcomes) {
+      const pinned = siegeAtTheTick(stagedPin(`d-siege-${band}`, pinOp(SIEGE_FORK.id, band)));
+      expect(pinned.causes, 'the pin landed as a cause of the tick like every decree').toBe(1);
+      fellAtTheTick[band] = pinned.occupied.includes('weak');
+    }
+    expect(fellAtTheTick, 'a DECREE reached the siege THROUGH the pulse, and each band answered'
+      + ' with the direction its own vocabulary types for it').toEqual(SIEGE_VERDICT_BANDS);
+    // The kernel's own token, read in the source that owns it, so a refactor that keeps the
+    // behaviour but drops the forward is still convicted by name.
     const warCall = KERNEL.indexOf('evaluateWarLayer({');
     expect(warCall).toBeGreaterThan(0);
-    expect(KERNEL.slice(warCall, warCall + 240).includes('forkPins'), 'the kernel gained its'
-      + ' token — replace this half with a pinned siege at a real tick').toBe(false);
+    expect(KERNEL.slice(warCall, warCall + 240).includes('forkPins'), 'the kernel lost its'
+      + ' token — a DECREE can no longer pin a siege at a real tick').toBe(true);
     expect(KERNEL).toContain('forkPins,');
   });
 });
