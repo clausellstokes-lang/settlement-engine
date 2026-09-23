@@ -44,6 +44,8 @@ import { chooseOrPin, getStepMeta, getStepOrder, runPipeline } from '../../src/g
 import { generateRelationships } from '../../src/generators/npcGenerator.js';
 import { generateConflicts, generateFactions } from '../../src/generators/powerGenerator.js';
 import { resolveConfigWithUserContentTunables } from '../../src/domain/content/userContentTunables.js';
+import { pinsFrom, rederive } from '../../src/domain/edit/dmLayer.js';
+import { declarationsFor, isEditableCard } from '../../src/domain/edit/fieldDeclarations.js';
 import { withCustomContent } from '../../src/lib/dependencyEngine.js';
 import { createPRNG } from '../../src/kernel/prng.js';
 import { clearActiveRng, setActiveRng } from '../../src/kernel/rngContext.js';
@@ -186,13 +188,27 @@ describe('EM-P0 — the pipeline seam: pins are consulted per chooser, on one st
     expect(JSON.stringify(empty.settlement)).toBe(JSON.stringify(plain.settlement));
   }, 180_000);
 
-  it('A2 — the pin reproduces the record: pinning every chooser rebuilds the settlement', () => {
+  it('A2 — the pin reproduces the record: a record-built bag rebuilds the settlement through rederive', () => {
     const first = runHeadless(createPRNG(SEED));
-    const pins = pinsFromContext(first);
+    // ⭐ THE BAG IS BUILT FROM THE RECORD, THROUGH THE PRODUCT'S OWN CHANNEL (EM-R2 §0.S,
+    // judgment 204b). The key `npcs` names TWO facts: ctx's PRE-enrichment roster and the
+    // record's post-coherence roster. `dmLayer :: pinsFrom` structuredClones `source[key]` out
+    // of the RECORD, and `rederive` is the only caller a DM edit reaches — so the record's is
+    // the fact the gate is defined on, and a ctx-built bag would assert a claim the product
+    // never makes. The root override re-states the record's own value, so the bag is the
+    // record's own roster and nothing else.
+    const record = first.settlement;
+    const engine = { run: generateSettlementPipeline, getStepMeta };
+    const declarations = { declarationsFor, isEditableCard };
+    const npc0 = (record.npcs || [])[0] || {};
+    const layer = {
+      roots: { [`npc:${npc0.id}:status`]: npc0.status }, worldFacts: {}, minted: {}, phantoms: {},
+    };
+    const { pins } = pinsFrom(record, layer, declarations, engine);
     for (const key of CHOOSER_KEYS) expect(pins[key]).toBeDefined();
 
-    const second = runHeadless(createPRNG(SEED), { pins });
-    expect(JSON.stringify(second.settlement)).toBe(JSON.stringify(first.settlement));
+    const second = rederive(record, { ...CONFIG }, layer, engine, declarations);
+    expect(JSON.stringify(second.record)).toBe(JSON.stringify(record));
   }, 120_000);
 
   it('A3 — a pinned chooser does not draw: 67 derive-half draws unpinned, zero fully pinned', () => {

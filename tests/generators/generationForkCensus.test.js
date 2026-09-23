@@ -104,6 +104,8 @@ const { goldenCorpus, keyOf } = await import('../helpers/goldenMasterCorpus.js')
 const { expectAbsentWithAnchor } = await import('../helpers/anchoredNegatives.js');
 const { generateSettlementPipeline } = await import('../../src/generators/generateSettlementPipeline.js');
 const { getStepMeta, getStepOrder } = await import('../../src/generators/pipeline.js');
+const { pinsFrom, rederive } = await import('../../src/domain/edit/dmLayer.js');
+const { declarationsFor, isEditableCard } = await import('../../src/domain/edit/fieldDeclarations.js');
 const {
   GENERATION_CENSUS_ROWS, GENERATION_CHANNELS, GENERATION_TIER1, GENERATION_TIER2,
 } = await import('../../src/domain/generation/generationForkRegistry.js');
@@ -265,8 +267,30 @@ describe('EM-P2 — generation census by execution: the instrument, the classifi
     const pinned = instrumentedRoot(PIN_ROW._seed);
     const pinnedContext = runHeadless(PIN_ROW, pinned.root, { pins });
     expect(pinned.perStep.get(POPULATION_STEP).draws, 'a fully pinned step draws nothing').toBe(0);
-    expect(JSON.stringify(pinnedContext.settlement), 'the pinned run reproduces the record')
-      .toBe(JSON.stringify(unpinnedContext.settlement));
+    // ⭐ THE REPRODUCTION CLAIM IS THE RECORD'S (EM-R2 §0.S, judgment 204b). The draw controls
+    // above keep their ctx-built bag: `a fully pinned step draws nothing` is true of ANY full
+    // bag and is not this member's claim. But the key `npcs` names TWO facts — ctx's
+    // PRE-enrichment roster and the RECORD's post-coherence roster — and the product's own
+    // channel is the record's: `dmLayer :: pinsFrom` structuredClones `source[key]` out of the
+    // record, and `rederive` is the only caller a DM edit reaches. So the reproduction is
+    // asserted on a RECORD-built bag, through `rederive`, with a no-op root override.
+    const record = unpinnedContext.settlement;
+    const engine = { run: generateSettlementPipeline, getStepMeta };
+    const declarations = { declarationsFor, isEditableCard };
+    const npc0 = (record.npcs || [])[0] || {};
+    const layer = {
+      roots: { [`npc:${npc0.id}:status`]: npc0.status }, worldFacts: {}, minted: {}, phantoms: {},
+    };
+    const { pins: recordPins } = pinsFrom(record, layer, declarations, engine);
+    for (const key of CHOOSER_KEYS) expect(recordPins[key], `record pin ${key}`).toBeDefined();
+    const pinRowConfig = Object.fromEntries(Object.entries(PIN_ROW).filter(([key]) => key !== '_seed'));
+    const rederived = rederive(record, pinRowConfig, layer, engine, declarations);
+    expect(JSON.stringify(rederived.record), 'the record-built bag reproduces the record through rederive')
+      .toBe(JSON.stringify(record));
+    // The ctx-pinned run above is kept as the DRAW control and stays byte-identical; this is its
+    // liveness anchor, so the binding the replaced claim used is still read and asserts nothing
+    // about reproduction.
+    expect(pinnedContext.settlement, 'the ctx-pinned draw control still produced a settlement').toBeDefined();
 
     // ── C3 — THE MINT CENSUS. A total of 4 is the signature of a mock that never reached the
     // generator graph: it is exactly what the pre-proof's negative control produced while every
