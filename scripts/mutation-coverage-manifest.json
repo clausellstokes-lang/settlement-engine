@@ -889,6 +889,10 @@
       "kind": "rationale",
       "ref": "generators-tree-admitted-subject-coupled-2026-08-30"
     },
+    "tests/generators/nameHeldThroughAssembly.test.js": {
+      "kind": "rationale",
+      "ref": "generators-tree-admitted-subject-coupled-2026-08-30"
+    },
     "tests/helpers/sourceContract.test.js": {
       "kind": "rationale",
       "ref": "self-proving-meta"
