@@ -194,7 +194,7 @@ const _getTierConstraints = (text, instNames, tier, govOverride) => {
   const militaryRef =
     has('garrison')           ? 'the garrison'          :
     has('barracks')            ? 'the barracks guard'   :
-    has('professional guard')  ? 'the professional guard':
+    has(PROFESSIONAL_GUARD)  ? 'the professional guard':
     has('city watch') || has('town watch') ? 'the watch' :
     has('militia')             ? 'the militia'           :
     has('mercenary')           ? 'the mercenary company' :
@@ -433,7 +433,7 @@ export const checkStructuralValidity = (institutions, config = {}) => {
         });
       } else {
         violations.push({
-          type:        'dependency_violation',
+          type:        DEPENDENCY_VIOLATION,
           institution: instName,
           missing:     gate.requires,
           reason:      authoredReason(instName, gate.reason),
@@ -444,7 +444,7 @@ export const checkStructuralValidity = (institutions, config = {}) => {
 
     if (gate.requiresAny?.length > 0 && !gate.requiresAny.some(requirementIsSatisfied)) {
       violations.push({
-        type:        'dependency_violation',
+        type:        DEPENDENCY_VIOLATION,
         institution: instName,
         missing:     gate.requiresAny,
         reason:      authoredReason(instName, gate.reason),
@@ -554,21 +554,21 @@ export const checkStructuralValidity = (institutions, config = {}) => {
     if (!hasFort && !hasMilForce) {
       violations.push({
         type:        'survival_crisis',
-        institution: 'Settlement (Regional Threat)',
+        institution: SETTLEMENT_REGIONAL_THREAT,
         reason:      'Embattled region with no fortification or military force. Constant creature pressure makes this settlement unsurvivable without defensive infrastructure.',
         severity:    isTownPlus ? 'warning' : 'error',
       });
     } else if (!hasFort) {
       violations.push({
         type:        'survival_crisis',
-        institution: 'Settlement (Regional Threat)',
+        institution: SETTLEMENT_REGIONAL_THREAT,
         reason:      'Embattled region with no fortification. Walls, a palisade, or a citadel are not optional under constant creature pressure. Defenders need something to stand behind.',
         severity:    isTownPlus ? 'warning' : 'error',
       });
     } else if (!hasMilForce) {
       violations.push({
         type:        'survival_crisis',
-        institution: 'Settlement (Regional Threat)',
+        institution: SETTLEMENT_REGIONAL_THREAT,
         reason:      'Embattled region with no military force. Walls without defenders are a convenient funnel. A garrison, militia, or mercenary force is required.',
         severity:    isTownPlus ? 'warning' : 'error',
       });
@@ -593,7 +593,7 @@ export const checkStructuralValidity = (institutions, config = {}) => {
   } else if (threat === 'frontier' && !hasFort && tierAtLeast(tier, 'town')) {
     violations.push({
       type:        'survival_crisis',
-      institution: 'Settlement (Regional Threat)',
+      institution: SETTLEMENT_REGIONAL_THREAT,
       reason:      'Frontier region with no fortification. Active monster threats make an unfortified town-scale settlement a liability. Raiders and creatures exploit the lack of a perimeter.',
       severity:    'warning',
     });
@@ -605,12 +605,12 @@ export const checkStructuralValidity = (institutions, config = {}) => {
 
   if (isCityPlus) {
     const hasProfMilitary = lowerNames.some(n =>
-      n.includes('garrison') || n.includes('professional guard') ||
-      n.includes('professional city watch') || n.includes('multiple garrison'));
+      n.includes('garrison') || n.includes(PROFESSIONAL_GUARD) ||
+      n.includes(PROFESSIONAL_CITY_WATCH_2) || n.includes('multiple garrison'));
     if (!hasProfMilitary) {
       violations.push({
         type:        'structural_gap',
-        institution: 'Settlement Defense',
+        institution: SETTLEMENT_DEFENSE,
         reason:      `A ${tier} without a garrison or professional guard is indefensible. City-scale settlements require permanent military infrastructure: the walls require someone to man them.`,
         severity:    'error',
       });
@@ -619,15 +619,15 @@ export const checkStructuralValidity = (institutions, config = {}) => {
 
   if (isMetropolis) {
     const hasMultiple = lowerNames.some(n =>
-      n.includes('multiple garrison') || n.includes('professional guard'));
+      n.includes('multiple garrison') || n.includes(PROFESSIONAL_GUARD));
     const hasSingle = lowerNames.some(n =>
       n.includes('garrison') || n.includes('barracks'));
     const hasCityWatch = lowerNames.some(n =>
-      n.includes('professional city watch') || n.includes('professional guard') || n.includes('city watch'));
+      n.includes(PROFESSIONAL_CITY_WATCH_2) || n.includes(PROFESSIONAL_GUARD) || n.includes('city watch'));
     if (!hasMultiple && !(hasSingle && hasCityWatch)) {
       violations.push({
         type:        'structural_gap',
-        institution: 'Settlement Defense',
+        institution: SETTLEMENT_DEFENSE,
         reason:      'A metropolis requires multiple garrisons or a professional guard force of hundreds. A single garrison cannot secure a city of this scale.',
         severity:    'warning',
       });
@@ -873,3 +873,10 @@ export const checkStructuralValidity = (institutions, config = {}) => {
  * @param {Object} [goodsToggles]- Goods toggle overrides
  * @returns {number} Adjusted probability clamped to [0, 1]
  */
+
+// Shared phrases hoisted once (the generation worker's buy-back, BUY-BACK-LEDGER row 10): each is spelled here and referenced below; every emitted value is byte-identical.
+const DEPENDENCY_VIOLATION = 'dependency_violation';
+const PROFESSIONAL_CITY_WATCH_2 = 'professional city watch';
+const PROFESSIONAL_GUARD = 'professional guard';
+const SETTLEMENT_DEFENSE = 'Settlement Defense';
+const SETTLEMENT_REGIONAL_THREAT = 'Settlement (Regional Threat)';
