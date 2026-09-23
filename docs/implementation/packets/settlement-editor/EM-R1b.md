@@ -12,7 +12,7 @@ pre-proof and the landed READY sibling `EM-R0b` version 8 carries the same measu
 way. ⛔ This is the ONLY 64-hex digest in this body, and no golden digest appears at all (§P3.6).)
 - **The law this packet is written to:** ⭐ **THE SIXTH AMENDMENT, LANDED AND MEASURED AT THIS COMPILE'S READ TIP.** §P2.19 (the voice counter over the planted text), §P2.21 (the instrument list, each run with its own logic), §P2.22 (cite by `path :: symbol`), §P3.5 (every register figure a DELTA), §P9 (the ONE effective-line instrument; the six capsule-shape rules; the count prover), §P10.8 (the row-keyed register), §P11.2 (a signed ceiling is the owner's) are the standards this version answers, each with an executed figure.
 
-- **Status:** `READY`
+- **Status:** `LANDED`
   — Compiled 2026-09-22 by an Opus COMPILE seat (session cce01f87) at read tip `f76bd62ab`, train
   EM-T15's COMPOSED tip, under `briefs/launch/COMPILE-EM-R1b-cce01f87.md`; chartered by judgment
   182a, its second case by 182e.
@@ -30,6 +30,7 @@ way. ⛔ This is the ONLY 64-hex digest in this body, and no golden digest appea
   `rederive`. ⛔ **THIS MEMBER IS PLACED ON STAGE 1's FLIP** (EM-R2 version 5 · EM-R0b version 8):
   §0.2 names the ONE reservation that clears there, and `EM-R1b.remeasure.sh` re-proves every fact
   stage 1 can move.
+- **Landed at:** `282012b8cbcda92d9d83aa2042c5e0609993dccb` — the partial-pin rule keys on the tier-1 record path (version 2): the nineteen transient choosers declared beside _LEDGER_KEYS, pinsFrom reading the same declaration through getStepMeta, the DM's power card applied 63/63 through rederive; the byte-arm holder of the train (206c/206d/210); built at 282012b8c on train EM-T16 stage 2a
 - **Packet version:** 2
   > **What version 2 changed, and why (the Opus PRE-PROOF seat, 2026-09-23, at `6a0178b7b`).**
   > NOTHING IN THE CONTRACT MOVED — the twelve required symbols are verbatim at `count=1`, the CREATE

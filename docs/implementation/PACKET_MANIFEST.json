@@ -40315,9 +40315,10 @@
     },
     {
       "id": "EM-R1b",
-      "status": "READY",
+      "status": "LANDED",
       "packetPath": "docs/implementation/packets/settlement-editor/EM-R1b.md",
       "verifiedBase": "17fcf092bb878eb5b168f63f264c2a4dff316f19",
+      "landedAt": "282012b8cbcda92d9d83aa2042c5e0609993dccb",
       "changeManifest": [
         {
           "action": "MODIFY",
