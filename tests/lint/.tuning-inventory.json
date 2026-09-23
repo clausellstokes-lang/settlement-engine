@@ -7,10 +7,10 @@
     "    npx vitest run tests/lint/tuningRegister.walker.test.js",
     "The refreeze EXITS NON-ZERO by design; the proof is a separate ordinary run."
   ],
-  "measuredAtSha": "959faad1984dbac7f5aab43749e9184d1d4e2772",
-  "measuredBy": "chair-fable-5.1 (session 923472dc)",
-  "date": "2026-09-19",
-  "note": "the 2026-09-18 fixes consist: dependents of eight tables moved (the print desk, the desk reads, the weave); no tuning value moved; the print desk carries no dial",
+  "measuredAtSha": "577e5fe1d906661a002c467fd3994a5af27ed11e",
+  "measuredBy": "chair-fable-cce01f87",
+  "date": "2026-09-23",
+  "note": "the twentieth landing (train EM-T14): EM-R0d moved the three band ladders into src/data/bandLadders.js, so src/generators/factionDynamics.js carries ten fewer bare decimals (48 -> 38) — a shrink banked at the terminal by the chair; no value moved (THE PROMISE: the values are the owner s)",
   "schemaVersion": 1,
   "trees": {
     "p1": [
@@ -968,7 +968,7 @@
       "exported": true,
       "idiom": "literal",
       "keys": 76,
-      "line": 222,
+      "line": 236,
       "spanDigest": "4022da79ff916d15332a466d7fa53eeefcac8566abf2308d49a97d08543811cc",
       "leaves": {
         "OBSERVANCE_LEAD_WEEKS": 2,
@@ -2580,7 +2580,7 @@
       "exported": true,
       "idiom": "literal",
       "keys": 10,
-      "line": 100,
+      "line": 104,
       "spanDigest": "dbfcfab0b85ba11ba37df86f68c8a9d37aa788b3f5ec60b8be4eb7d9065dee53",
       "leaves": {
         "RESOLUTION_HOLD_TICKS": 4,
@@ -7948,7 +7948,7 @@
     "src/generators/economy/neighbourEconomicBias.js": 2,
     "src/generators/economy/prosperity.js": 13,
     "src/generators/factionCorrelation.js": 4,
-    "src/generators/factionDynamics.js": 48,
+    "src/generators/factionDynamics.js": 38,
     "src/generators/foodGenerator.js": 63,
     "src/generators/generationCoherence.js": 1,
     "src/generators/history/historyEventStrands.js": 47,
@@ -7987,7 +7987,7 @@
     "tables": 237,
     "keys": 2114,
     "unregisteredNamed": 535,
-    "bareDecimals": 6985,
+    "bareDecimals": 6975,
     "zeroDependentTables": 8,
     "zeroNamedDependentTables": 151
   }
