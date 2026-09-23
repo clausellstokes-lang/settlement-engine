@@ -364,7 +364,20 @@ describe('EM-D1 — the edit-mode shell', () => {
 
   it('A6: every string the two surfaces render comes from en.js through t(), and every key the shell maps resolves', async () => {
     const slice = await import('../../src/store/editSlice.js');
-    const shellKeys = [...new Set([...copyKeysIn(SHELL_SOURCE), ...mappedKeysIn(SHELL_SOURCE)])].sort();
+    const copyKeys = copyKeysIn(SHELL_SOURCE);
+    const mappedKeys = mappedKeysIn(SHELL_SOURCE);
+    const shellKeys = [...new Set([...copyKeys, ...mappedKeys])].sort();
+    // ⛔ THE SCRAPE IS PROVEN LIVE BEFORE ANYTHING IS COMPARED OVER IT. The four assertions
+    // below are all `shellKeys.map(f)` against `shellKeys.map(g)`, so an EMPTY scrape makes
+    // every one of them `[] === []` — and a blind scrape is the exact failure this arm
+    // exists to catch: a shell that re-spelled its keys with double quotes, or reached them
+    // through a constant, would pass the whole arm while rendering nothing from en.js. BOTH
+    // halves are anchored, not just the union: `mappedKeys` alone covers every key
+    // `copyKeys` finds, so a union-only count would stay green while the `t(` scrape went
+    // blind on its own.
+    expect(copyKeys.length, "the t( scrape found none of the shell's own calls").toBeGreaterThan(0);
+    expect(mappedKeys.length, "the mapped-key scrape found none of the shell's own keys").toBeGreaterThan(0);
+    expect(shellKeys.length, 'the set the four comparisons below stand on is EMPTY').toBeGreaterThan(0);
     const values = shellKeys.map((key) => resolve(key));
     expect(values.map((value) => typeof value)).toEqual(shellKeys.map(() => 'string'));
     expect(values.map((value, index) => value === shellKeys[index])).toEqual(shellKeys.map(() => false));
