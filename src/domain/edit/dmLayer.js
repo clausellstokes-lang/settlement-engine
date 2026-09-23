@@ -28,6 +28,14 @@
  */
 import { sha256Hex } from '../content/contentFingerprint.js';
 import { partitionTrace } from './tracePartition.js';
+import { KEYED_COLLECTIONS } from './recordRegister.js';
+
+// EM-R1c unit 2 — THE ONE EDITABLE COLLECTION THE REGISTER DECLARES ATOMIC, and its ruled join.
+// `powerStructure.factions` is ATOMIC for its CROSS-ENTRY TOTAL (power sums to 100), not for want
+// of a key; design §22.4 rules a faction's identity IS its display name, measured unique on every
+// entry of every corpus row. The walker holds this one row against both.
+/** @type {Readonly<Record<string, string>>} */
+const _ATOMIC_EDIT_JOINS = Object.freeze({ 'powerStructure.factions': 'faction' });
 
 /**
  * @typedef {{ roots: Record<string, unknown>, worldFacts: Record<string, unknown>,
@@ -240,7 +248,8 @@ export function mintDmId(seed, kind, n) {
 }
 
 /**
- * @typedef {{ name: string, provides: string[], transient: string[] }} StepRoster
+ * @typedef {{ name: string, provides: string[], transient: string[],
+ *             paths: Record<string, unknown> }} StepRoster
  * @typedef {{ declarationsFor: (cardType: string) => readonly { field: string,
  *             outputKey?: string }[] }} DeclarationSet
  * @typedef {'step_not_pinnable'|'unknown_key'} RederiveUnappliedReason
@@ -290,10 +299,13 @@ function rosterOf(engine) {
     const rows = typeof getStepMeta === 'function' ? getStepMeta() : null;
     if (!Array.isArray(rows)) return [];
     return rows.filter(isPlainObject).map((row) => {
-      const step = /** @type {{ name: unknown, provides: unknown, transient: unknown }} */ (row);
+      const step = /** @type {{ name: unknown, provides: unknown, transient: unknown, recordPaths: unknown }} */ (row);
       const provides = Array.isArray(step.provides) ? step.provides.filter((k) => typeof k === 'string') : [];
       const transient = Array.isArray(step.transient) ? step.transient.filter((k) => typeof k === 'string') : [];
-      return { name: typeof step.name === 'string' ? step.name : '', provides, transient };
+      /** @type {Record<string, unknown>} */
+      const paths = isPlainObject(step.recordPaths)
+        ? /** @type {Record<string, unknown>} */ (step.recordPaths) : {};
+      return { name: typeof step.name === 'string' ? step.name : '', provides, transient, paths };
     });
   } catch { return []; }
 }
@@ -325,6 +337,51 @@ function coordsOf(key) {
   return coords.cardType && coords.entityId && coords.field ? coords : null;
 }
 
+/** The join the register declares for a collection path, or the one atomic row this member declares. */
+function joinFor(/** @type {string} */ collectionPath) {
+  const spec = Object.hasOwn(KEYED_COLLECTIONS, collectionPath)
+    ? /** @type {Record<string, unknown>} */ (KEYED_COLLECTIONS)[collectionPath]
+    : (Object.hasOwn(_ATOMIC_EDIT_JOINS, collectionPath) ? _ATOMIC_EDIT_JOINS[collectionPath] : null);
+  return typeof spec === 'string' ? spec : null;
+}
+
+/** The sole entry of `rows` whose declared join equals `entityId`, or null for zero or several. */
+function soleEntry(/** @type {unknown[]} */ rows, /** @type {string} */ collectionPath, /** @type {string} */ entityId) {
+  const field = joinFor(collectionPath);
+  if (field === null) return null;
+  const hits = rows.filter(isPlainObject)
+    .filter((e) => String(/** @type {Record<string, unknown>} */ (e)[field] ?? '') === entityId);
+  return hits.length === 1 ? /** @type {Record<string, unknown>} */ (hits[0]) : null;
+}
+
+/** Write `value` at `leaf` inside `bag`, hopping arrays by the declared join. TRUE when written. */
+function writeDeclared(/** @type {unknown} */ bag, /** @type {string} */ collectionPath, /** @type {string} */ leaf, /** @type {string} */ entityId, /** @type {unknown} */ value) {
+  let node = bag;
+  let path = collectionPath;
+  if (Array.isArray(node)) {
+    node = soleEntry(node, path, entityId);
+    if (node === null) return false;
+  }
+  const segs = leaf.split('.');
+  for (const seg of segs.slice(0, -1)) {
+    const hop = seg.endsWith('[]');
+    const name = hop ? seg.slice(0, -2) : seg;
+    if (!isPlainObject(node)) return false;
+    path = `${path}.${name}`;
+    let next = /** @type {Record<string, unknown>} */ (node)[name];
+    if (hop) {
+      if (!Array.isArray(next)) return false;
+      next = soleEntry(next, path, entityId);
+      if (next === null) return false;
+    }
+    node = next;
+  }
+  const last = segs[segs.length - 1];
+  if (last.endsWith('[]') || !isPlainObject(node)) return false;
+  /** @type {Record<string, unknown>} */ (node)[last] = value;
+  return true;
+}
+
 /**
  * (5) THE CHOOSER ROSTER, READ FROM ITS PRODUCER, WITH THE DM'S OVERRIDES MERGED IN.
  *
@@ -353,7 +410,22 @@ export function pinsFrom(record, layer, declarations, engine) {
   const roster = rosterOf(engine);
   /** Every step that provides a given record path. */
   const providersOf = (/** @type {string} */ key) => roster.filter((s) => s.provides.includes(key));
-  const held = (/** @type {string} */ key) => Object.hasOwn(source, key);
+  /** @type {Map<string, string>} */
+  const recordPaths = new Map();
+  for (const s of roster) for (const [k, p] of Object.entries(s.paths || {})) if (typeof p === 'string') recordPaths.set(k, p);
+  const readAt = (/** @type {string} */ key) => {
+    const path = recordPaths.get(key);
+    if (path === undefined) return Object.hasOwn(source, key) ? { found: true, value: source[key] } : { found: false, value: undefined };
+    const segs = path.split('.');
+    if (segs[0] !== 'record') return { found: false, value: undefined };
+    /** @type {unknown} */ let cursor = source;
+    for (const seg of segs.slice(1)) {
+      if (!isPlainObject(cursor) || !Object.hasOwn(/** @type {Record<string, unknown>} */ (cursor), seg)) return { found: false, value: undefined };
+      cursor = /** @type {Record<string, unknown>} */ (cursor)[seg];
+    }
+    return { found: true, value: cursor };
+  };
+  const held = (/** @type {string} */ key) => readAt(key).found;
   // A TRANSIENT CHOOSER IS NOT REQUIRED AND NOT PINNED (the runner's own rule, read through the
   // injected roster rather than re-declared here): its value never lands on the record, so a bag
   // built from this record can never carry it and the closure must not demand it.
@@ -426,19 +498,15 @@ export function pinsFrom(record, layer, declarations, engine) {
   // all and the runner takes its unpinned path. Keys are ASCII-ascending.
   /** @type {Record<string, unknown>} */
   const pins = {};
-  for (const key of [...pinKeys].sort(byCodepoint)) pins[key] = structuredClone(source[key]);
+  for (const key of [...pinKeys].sort(byCodepoint)) pins[key] = structuredClone(readAt(key).value);
 
-  // PASS 4 — the DM's value, written at the leaf INSIDE THE CLONE. ⛔ The record is never touched.
+  // PASS 4 — THE DM'S VALUE, WRITTEN AT THE DECLARED RECORD PATH OF THE NAMED ENTITY, INSIDE THE
+  // CLONE. ⛔ The record is never touched. The entity is found by the join the REGISTER declares for
+  // that collection (`npcs` by 'id', `institutions` by 'name' — design §22.4's ruled identity,
+  // never a bare `.id`), and a leaf path may carry an ARRAY HOP (`factions[].power`), which is why
+  // a write that lands on a literal 'factions[].power' key is the defect this pass removes.
   for (const row of applicable) {
-    const bag = pins[row.collection];
-    if (Array.isArray(bag)) {
-      const entity = bag.filter(isPlainObject)
-        .find((e) => /** @type {{ id: unknown }} */ (e).id === row.entityId);
-      if (entity === undefined) { unapplied.push({ key: row.key, value: row.value, reason: 'unknown_key' }); continue; }
-      /** @type {Record<string, unknown>} */ (entity)[row.leaf] = row.value;
-    } else if (isPlainObject(bag)) {
-      /** @type {Record<string, unknown>} */ (bag)[row.leaf] = row.value;
-    } else {
+    if (!writeDeclared(pins[row.collection], row.collection, row.leaf, row.entityId, row.value)) {
       unapplied.push({ key: row.key, value: row.value, reason: 'unknown_key' });
     }
   }
