@@ -191,24 +191,27 @@ const SENTINEL = 'settlementforge:generation:worker-v1';
 // a bundle, and the other worker bundles did not move at all. The ceiling follows the measurement
 // DOWN and stays MONOTONE-DOWN from this value.
 // EM-R0d, 2026-09-22 (the band ladders get one home; train EM-T14): THE CEILING IS NOT MOVED HERE.
-// Four modules of this member sit in the generation worker's static closure (221 first-party
-// modules walked from src/workers/generation.worker.js): src/data/bandLadders.js is NEW (2,517 B
-// minified) and the three producers SHED 716 B (factionDynamics.js -119, defenseGenerator.js -360,
-// foodGenerator.js -237). EXACTLY FOUR modules move. The lane priced the rise at +1,801 B
-// per-module / +1,343 B tree-shaken (esbuild units); the chair's control build at the EM-T14 base
-// read this ceiling exactly (1,395,972 B, zero slack) and, with this member applied, 1,397,370 B:
-// the REAL rise is +1,355 B (judgment 188). A rise is the OWNER's (EM-PREAMBLE §P11.2), so the bytes
-// were BOUGHT BACK AHEAD of this member (judgment 191; the cure 006aa3442 sits in this train's base):
-// repeated string literals in three src/data tables hoisted once to named module-local consts,
-// -3,901 B on the worker (1,395,972 -> 1,392,071 B at the landed tip; the nine exported tables
-// byte-identical by JSON and key order). The ledger's row 4 (resolveConfig.js, 8,198 B) is REFUTED
-// as a buy-back: a live registered step. This constant is LOWERED at train EM-T14's terminal to the
-// composed measurement (this rise and that buy-back together) — never here, never upward.
+// Four modules of this member sit in the generation worker's static closure: src/data/bandLadders.js
+// is NEW (+6,722 B rendered) and the three producers SHED bytes (factionDynamics.js -503,
+// defenseGenerator.js -576, foodGenerator.js -642 rendered): +5,001 B rendered net, judgment 198e's
+// attribution build at the composed tip. Two measurements, each true of its OWN tree (judgment 198):
+// at the stacked base 0b9d3ec8d the measurement seat's control read 1,396,015 B (that base's ceiling,
+// zero slack) and 1,397,370 B with this member — +1,355 B; the buy-back lane's control at the EM-T14
+// base 35a031ac7 read 1,395,972 B (after judgment 187's -55 B), so the same member reads +1,398 B
+// against it. A rise is the OWNER's (EM-PREAMBLE §P11.2), so the bytes were BOUGHT BACK AHEAD of
+// this member (judgment 191; the cure 006aa3442 in this train's base): repeated string literals in
+// three src/data tables hoisted once to named module-local consts, 1,395,972 -> 1,392,071 B at the
+// landed tip (-3,901 B; the nine exported tables byte-identical). The ledger's row 4
+// (resolveConfig.js, 8,198 B) is REFUTED as a buy-back: a live registered step. This constant is
+// LOWERED at train EM-T14's terminal to the composed measurement -- never here, never upward.
 // 1,395,972 -> 1,393,432 (2026-09-22, the chair, judgment 194): train EM-T14's terminal read the worker at its composed tip
-// 57639207f on a fresh build in consist: EM-R0d's real rise (+1,355 B, judgment 188) and judgment 191's literal hoist
-// (-3,901 B, the cure 006aa3442 in the train's base) measured TOGETHER, with EM-R0f's leaf move and EM-R6's two
-// leaves in the same tree. The ceiling follows the measurement DOWN to the byte and stays MONOTONE-DOWN from
-// this value; no member of the train read a rise against it (the buy-back landed first).
+// c69d16a5d on a fresh build in consist (queue window 63). Against the placement base dc2e52d6f (with the hoist:
+// 1,392,071 B) the composed tip is +1,361 B, and judgment 198e's attribution build names EXACTLY SIX moved modules in
+// two members: EM-R0d's four (bandLadders.js new; the three producers shed) and EM-R0f's two (src/data/economyFingerprint.js
+// NEW in the closure, +2,218 B rendered; economyReconciliation.js -1,027 rendered) -- EM-R0f's "+0" at build was a
+// MEMBERSHIP fact, its bytes are real; EM-R6 moved nothing in the closure. The holder's sum (judgment 160d) is this
+// attribution, not the members' membership claims. The ceiling follows the measurement DOWN to the byte and stays
+// MONOTONE-DOWN from this value; no member of the train read a rise against it (the buy-back landed first).
 export const WORKER_BUNDLE_CEILING_BYTES = 1393432;
 
 const source = (path) => readFileSync(join(ROOT, path), 'utf8');
