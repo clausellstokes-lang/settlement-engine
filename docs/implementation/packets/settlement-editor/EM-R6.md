@@ -1,6 +1,6 @@
 # Settlement editor / EM-R6 — an INSTITUTION gets the rename cascade a faction already has, and a REMOVAL sweeps the same list
 
-- **Status:** `READY`
+- **Status:** `LANDED`
   ⚠ The status value above stands ALONE on its line because `parsePacketHeader`
   (`scripts/implementation-packets.mjs`) anchors the status row at end-of-line.
   > ⭐ **READY-able at `bfca6b7d6`** (train EM-T12's CURED tip) — re-pre-proofed by the Opus
@@ -11,6 +11,7 @@
   > `_pendingRequiredSymbols` block, so judgment 151's discharge owes nothing; `retiredSymbols`
   > is empty by measurement. ⛔ **The status stays DRAFT and the two base fields stay `__BASE__`
   > — the chair promotes and stamps.**
+- **Landed at:** `5806628a9699c6670565dfbba76f0c35558e1dd6` — an institution gets the rename cascade a faction already has, and a removal sweeps the same list (version 8: A4 (v) reads every parenthetical literal in servicesGenerator.js with the addCrimeService anchor retained because four sentinels are written by direct pushes — judgment 183; A1 42 exact shapes / 1 catalogue-majority / 4 normalised-majority / 0 undeclared; A2 zero dangling values over 525; the ruin set 94 exact with neither leaf enrolled; 183b the A4 (iv) arm as built; lighting +2/+0/+2/+10/+2); judgments 158 a–c, 183, 189
 - **Packet version:** 8
   > **WHAT VERSION 8 CHANGED AND WHY (the Opus BUILD lane for train EM-T14, session cce01f87,
   > 2026-09-22, at its own sealed HEAD `0b9d3ec8d` over base `3aba63857`; ruled by the chair as

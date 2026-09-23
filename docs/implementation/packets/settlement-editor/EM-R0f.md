@@ -1,6 +1,7 @@
 # `settlement editor / record merge` — EM-R0f: the economy fingerprint moves down a layer, and the move is proven invisible
 
-- **Status:** `READY`
+- **Status:** `LANDED`
+- **Landed at:** `d7d6ceef7f30fab49a4840c1a968e6842c9e6745` — the economy fingerprint moves down a layer to src/data/economyFingerprint.js and the move is proven invisible (version 3: its byte row withdrawn under the one-holder rule; every importer, golden and baseline re-measured; the domain-generators boundary walker and the power-economy freshness test re-addressed; lighting +0); judgment 161 a–e; re-sealed at the re-base (judgment 189)
 - **Packet version:** `3`
   - **Version 3 is the train EM-T14 pre-proof** (Opus PRE-PROOF seat, session cce01f87, 2026-09-22),
     re-measured WHOLE against train EM-T12's cured tip `bfca6b7d6`. Six facts moved and one was
