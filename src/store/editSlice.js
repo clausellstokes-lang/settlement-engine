@@ -32,12 +32,12 @@
  */
 
 import { isCanonSave, savePhase } from '../domain/campaign/canon.js';
-import { applyEdit } from '../domain/edit/dmLayer.js';
+import { applyEdit, mintDmId } from '../domain/edit/dmLayer.js';
 import { declarationsFor, isEditableCard } from '../domain/edit/fieldDeclarations.js';
 import { EMPTY_RULE_SET, evaluateGuards } from '../domain/edit/guards.js';
 import { makeOp, OP_TYPES, validateOp } from '../domain/edit/operations.js';
 import {
-  markApplied, reopen, reorder, revertTick, stage, withdraw,
+  markApplied, reopen, reorder, resolveDecree, revertTick, stage, withdraw,
 } from '../domain/edit/registry.js';
 
 /**
@@ -591,4 +591,255 @@ export function selectGuards(state, ruleSet = EMPTY_RULE_SET) {
   const value = evaluateGuards(registry, record, OP_TYPES, ruleSet);
   _guardsMemo = { registry, record, ruleSet, value };
   return value;
+}
+
+/* ── EM-E8 (A) · THE ROSTER ADD-DECREE BINDER ──────────────────────────────── */
+
+/**
+ * ⭐ THE CARD TABLE OF THE THREE HOME ROSTER OPS. `<cardType>` -> the catalogue's op type,
+ * frozen, in codepoint order. It is a DECLARATION and never a dispatcher: the row is read by
+ * an `Object.hasOwn` key lookup and the op type reaches `makeOp` as a VALUE, so no computed
+ * dispatch off the store handle is minted and `tests/store/deadOperationRatchet.test.js`'s
+ * premise arm is untouched.
+ *
+ * ⛔ THE THREE WORDS LIVE HERE AND IN THE CATALOGUE, AND NOWHERE ELSE IN THE STORE. Case
+ * A4 pins this table SET-EQUAL IN BOTH DIRECTIONS against the live catalogue's `add-` rows,
+ * exactly as CASCADE_WRITERS is pinned against CASCADE_DISPATCH, so a fourth add-op cannot
+ * ship half-bound and a retired one cannot leave a dead row here.
+ */
+export const ADD_OP_TYPES = Object.freeze({
+  faction: 'add-faction', institution: 'add-institution', npc: 'add-npc',
+});
+
+/**
+ * The identity class `mintDmId` mints a NEWCOMER under (`dm:minted:<hash16>`). The layer's
+ * own `DM_ID_KINDS` is module-private by design, so this is the argument's value and not a
+ * second vocabulary: case A3 asserts the minted id lands inside the layer's exported
+ * namespace and inside `minted`, which is the only claim this word makes.
+ */
+const DM_MINT_KIND = 'minted';
+
+/**
+ * The closed refusal set of THIS door, EXPORTED so a test asserts it in both directions
+ * rather than re-typing it. SIX, frozen, in codepoint order, and every one reachable.
+ *
+ * ⛔ IT WIDENS NO OTHER VOCABULARY. `PLAIN_EDIT_REFUSALS` belongs to the plain-edit writer
+ * and is untouched; a CATALOGUE refusal is never re-worded here but travels VERBATIM in the
+ * result's `errors` — `validateOp`'s own frozen sorted array under `invalid_op`, and EM-C1's
+ * own `{ missing, was }` pair under `stale_vocabulary`.
+ * @type {readonly string[]}
+ */
+export const ADD_DECREE_REFUSALS = Object.freeze([
+  'invalid_op', 'no_save', 'no_seed', 'not_staged', 'stale_vocabulary', 'unknown_target',
+]);
+
+/** One shared frozen empty list, returned BY IDENTITY for every card with no add-op. */
+const NO_PAYLOAD_FIELDS = /** @type {readonly object[]} */ (Object.freeze([]));
+
+/** One shared frozen empty list for a refusal that names no catalogue word. */
+const NO_ERRORS = /** @type {readonly string[]} */ (Object.freeze([]));
+
+/** Codepoint order, spelled locally so this leaf's import list stays the six A5 pins. */
+const byCodepoint = (/** @type {string} */ a, /** @type {string} */ b) => (a < b ? -1 : (a > b ? 1 : 0));
+
+/** @param {unknown} value @returns {value is Record<string, unknown>} a plain, non-array object */
+const isPlainObject = (value) => typeof value === 'object' && value !== null && !Array.isArray(value);
+
+/**
+ * @param {string} reason a member of ADD_DECREE_REFUSALS
+ * @param {readonly string[]} [errors] the CATALOGUE's own words, verbatim
+ * @returns {{ok: false, reason: string, errors: readonly string[]}}
+ */
+const refuseAdd = (reason, errors = NO_ERRORS) => ({ ok: /** @type {false} */ (false), reason, errors });
+
+/** @param {unknown} cardType @returns {string|null} the catalogue's op type, or nothing */
+function addOpTypeFor(cardType) {
+  const card = String(cardType ?? '');
+  return Object.hasOwn(ADD_OP_TYPES, card) ? ADD_OP_TYPES[card] : null;
+}
+
+/**
+ * ⭐ THE READ SHAPE THE DOOR RENDERS **CREATE** MODE FROM, so no component ever imports the
+ * op catalogue (A6 pins its importer roster EXACT at this one module, in both directions).
+ *
+ * Each row is the catalogue's own payload spec, flattened and frozen: `field`, `kind`,
+ * `required`, plus `pool` ONLY when the spec names one and `values` ONLY when it declares
+ * them — ABSENCE IS A FACT here exactly as it is on a declaration row.
+ *
+ * ⛔ THE `pool` NAME IS THE CALLER'S CONTRACT. `stageAddDecreeIntent` resolves every pooled
+ * value against the pool catalogue the caller HANDS IN, so a door that renders a field from
+ * this row must serve the same pool under the same name.
+ *
+ * @param {unknown} cardType
+ * @returns {readonly object[]} codepoint order by `field`; the SHARED frozen empty array by
+ *   identity for a card with no add-op, never null and never a throw.
+ */
+export function addOpPayloadFor(cardType) {
+  const type = addOpTypeFor(cardType);
+  if (type === null) return NO_PAYLOAD_FIELDS;
+  const specs = /** @type {Record<string, {kind: string, pool?: string, values?: readonly string[], required: boolean}>} */ (
+    OP_TYPES[type].payload
+  );
+  return Object.freeze(Object.keys(specs).sort(byCodepoint).map((field) => {
+    const spec = specs[field];
+    /** @type {Record<string, unknown>} */
+    const row = { field, kind: spec.kind, required: spec.required === true };
+    if (typeof spec.pool === 'string') row.pool = spec.pool;
+    if (Array.isArray(spec.values)) row.values = Object.freeze([...spec.values]);
+    return Object.freeze(row);
+  }));
+}
+
+/**
+ * The layer's `minted` sub-object as it stands on a record, own-property only and never a
+ * write. A malformed value reads as EMPTY, which claims no id at all.
+ * @param {unknown} layer @returns {Record<string, unknown>}
+ */
+function mintedRowsOf(layer) {
+  const rows = isPlainObject(layer) ? layer.minted : undefined;
+  return isPlainObject(rows) ? rows : {};
+}
+
+/**
+ * ⭐ THE ID IS STABLE AND UNIQUE, AND BOTH HALVES ARE MEASURED RATHER THAN HOPED.
+ *
+ * STABLE because `mintDmId` is a pure hash of `(seed, kind, n)` — the same save in the same
+ * state mints the same id forever. UNIQUE because `n` starts at the count of ids this save
+ * has ALREADY CLAIMED and then walks past any that are taken.
+ *
+ * ⛔ THE CLAIM SET IS THE LAYER **AND** THE REGISTRY, which is the whole reason the walk
+ * exists. The layer's `minted` rows are written at the TICK, so two newcomers staged before
+ * any advance would both read a layer count of zero and collide on one id; the pending
+ * entries are therefore claims too. A claim is an add-op entry's own `target.id`.
+ *
+ * @param {string} seed @param {unknown} layer @param {readonly object[]} decrees
+ * @returns {string} an id no row of either home holds
+ */
+function mintNewcomerId(seed, layer, decrees) {
+  /** @type {Set<string>} */
+  const claimed = new Set(Object.keys(mintedRowsOf(layer)));
+  for (const row of decrees) {
+    const op = /** @type {{type?: unknown, target?: unknown}} */ (isPlainObject(row) ? row.op : null);
+    const target = isPlainObject(op) ? /** @type {{id?: unknown}} */ (op.target) : null;
+    // WIDENED to `readonly unknown[]` at the membership test, never the value NARROWED: a row
+    // arriving with any other op type must read as "not an add-op", which is what `includes`
+    // answers — the same shape `validateOp` takes for its own declared vocabularies.
+    const bound = /** @type {readonly unknown[]} */ (Object.values(ADD_OP_TYPES));
+    const claims = bound.includes(op?.type)
+      && isPlainObject(target) && typeof target.id === 'string';
+    if (claims) claimed.add(String(/** @type {{id: string}} */ (target).id));
+  }
+  let index = claimed.size;
+  let id = mintDmId(seed, DM_MINT_KIND, index);
+  // Bounded by construction: `claimed` is finite and every step tries a fresh index.
+  while (claimed.has(id)) {
+    index += 1;
+    id = mintDmId(seed, DM_MINT_KIND, index);
+  }
+  return id;
+}
+
+/**
+ * ⭐ THE BINDER FROM A CREATE INTENT TO AN `add-<card>` DECREE (EM-E8 A; design §12's ops,
+ * §2.5's registry, §22.3 ruling 9's newcomer).
+ *
+ * The four coordinates a CREATE door can honestly know are the card type and the values the
+ * DM typed; turning those into a NEWCOMER'S STABLE ID, the catalogue's op and a registry
+ * entry is STORE work with no home until this member, so it lives here beside the plain-edit
+ * binder and reaches the registry through EM-C4b's ONE write site.
+ *
+ * ⛔ IT ADDS NO IMPORT EDGE AND NO OP TYPE. `mintDmId` and `resolveDecree` ride specifiers
+ * this module already holds (A5 pins the list EXACT at six), `operations.js` is byte-untouched
+ * and the three op types are the catalogue's own.
+ *
+ * ⛔ IT MAKES NO POOL RULE OF ITS OWN. Pool membership is judged by EM-C1's `resolveDecree`
+ * against the catalogue the CALLER hands in — the same verb design §20.3 resolves a stale
+ * entry with — so this door and the tick's own resolution can never disagree, and the refusal
+ * carries EM-C1's two words rather than a third spelling of them. A caller that serves no
+ * pool for a pooled field is REFUSED, not waved through: an unverifiable pooled value is
+ * exactly what FINITE-SEMANTICS exists to keep off the record.
+ *
+ * ⛔ IT LIFTS NO GATE. `canEditSettlement()` is untouched and no canon rule is made here:
+ * design §2.6 puts a pooled act in the REGISTRY on canon, and the registry is where this
+ * lands it on every phase.
+ *
+ * @param {Function} get @param {Function} set
+ * @param {{cardType: string, values: object, pools: object, orderedAt?: string, when?: object}} request
+ *   `pools` is the live pool catalogue, `<pool name> -> readonly values`; `orderedAt` is the
+ *   caller's stamp (HZ-STAMP) and an absent one is read from the clock HERE, in the command
+ *   that writes it.
+ * @returns {{ok: true, saveId: string, decreeId: string, op: object, decrees: readonly object[]}
+ *          |{ok: false, reason: string, errors: readonly string[]}} NEITHER branch throws; on
+ *   `ok:false` the store is unchanged and no argument is mutated.
+ */
+export function stageAddDecreeIntent(get, set, request) {
+  // 1. THE CARD, against BOTH tables. A card with no add-op and a card EM-A1 declares
+  //    nothing for are the same refusal, because neither can name a newcomer's fields.
+  const cardType = String(request?.cardType ?? '');
+  const type = addOpTypeFor(cardType);
+  if (type === null || !isEditableCard(cardType)) return refuseAdd('unknown_target');
+
+  // 2. THE ACTIVE SAVE, for the same data-safety reason the plain-edit writer gives: the
+  //    registry write indexes `get().settlement`.
+  const saveId = String(get().activeSaveId ?? '');
+  if (!saveId || saveId !== String(get().activeSaveId ?? '')) return refuseAdd('no_save');
+
+  // 3. THE SEED, which is what makes the id STABLE rather than merely unique. A save with no
+  //    stored seed can mint no reproducible identity, and inventing one is the defect
+  //    §22.4's identity table refuses.
+  const record = get().settlement;
+  const seed = typeof (/** @type {{_seed?: unknown}} */ (record)?._seed) === 'string'
+    ? String(/** @type {{_seed: string}} */ (record)._seed)
+    : '';
+  if (!seed) return refuseAdd('no_seed');
+
+  const decrees = selectDecrees(get());
+  const id = mintNewcomerId(seed, /** @type {{dmLayer?: unknown}} */ (record)?.dmLayer, decrees);
+
+  // 4. THE OP, built by the catalogue's own constructor from the values VERBATIM — every key
+  //    the DM sent, so an UNDECLARED one is answered by `validateOp` in the catalogue's own
+  //    words rather than silently dropped here.
+  const op = makeOp(type, { kind: cardType, id }, isPlainObject(request?.values) ? request.values : {});
+  if (op === null) return refuseAdd('invalid_op');
+  const verdict = validateOp(op, null);
+  if (verdict.ok === false) return refuseAdd('invalid_op', verdict.errors);
+
+  // 5. THE VOCABULARY, through EM-C1's own resolver against the caller's catalogue.
+  const resolution = /** @type {{ok: boolean, missing?: string, was?: string}} */ (
+    resolveDecree({ id, op }, { opTypes: OP_TYPES, pools: request?.pools })
+  );
+  if (resolution.ok === false) {
+    return refuseAdd('stale_vocabulary', Object.freeze([String(resolution.missing), String(resolution.was)]));
+  }
+
+  // 6. THE ID IS THE ENTRY'S TOO, and that is one act with one name rather than two
+  //    namespaces for one newcomer: the entry the DM ordered and the row the tick will mint
+  //    name the same person, which is what makes the tick's apply idempotent without a
+  //    second join. A registry that already holds this id is a refusal and NOTHING IS
+  //    STAGED — `stage` would return the rows unchanged and this door would have written an
+  //    equal registry for no act.
+  if (decrees.some((row) => String(/** @type {{id?: unknown}} */ (row)?.id ?? '') === id)) {
+    return refuseAdd('not_staged');
+  }
+
+  const committed = stageDecree(get, set, {
+    saveId,
+    op,
+    meta: {
+      id,
+      orderedAt: typeof request?.orderedAt === 'string' && request.orderedAt.length > 0
+        ? request.orderedAt
+        : new Date().toISOString(),
+      addedBy: 'dm',
+      ...(isPlainObject(request?.when) ? { when: request.when } : {}),
+    },
+  });
+  if (committed.ok === false) return refuseAdd(committed.reason);
+  return {
+    ok: /** @type {true} */ (true),
+    saveId,
+    decreeId: id,
+    op,
+    decrees: committed.decrees,
+  };
 }
