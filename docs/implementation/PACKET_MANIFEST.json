@@ -41016,6 +41016,265 @@
         ],
         "_discharged": "The compile's _blocked note is RETIRED and STOP-4 survives only as a landing-time guard (section 8's K-gate). At the EM-T16 pre-proof SIX further rows were discharged: EM-R0a's five recordRegister.js exports and EM-R0f's economyFingerprint.js export, each verified with grep -cF at 6a0178b7b rather than promoted as written (judgment 151). EM-R0d is a dependency of EM-R0b, not of this packet, and this manifest never named a bandLadders.js symbol."
       }
+    },
+    {
+      "id": "EM-R4",
+      "status": "READY",
+      "packetPath": "docs/implementation/packets/settlement-editor/EM-R4.md",
+      "verifiedBase": "63d046e758e220fbe45190763d044c6182016357",
+      "changeManifest": [
+        {
+          "action": "MODIFY",
+          "path": "src/generators/steps/assembleSettlement.js",
+          "symbol": "registerStep('assembleSettlement'",
+          "_note": "src/generators/steps/assembleSettlement.js :: registerStep('assembleSettlement' — the step's callback. TWO hunks at version 2 (version 1's third, the import widening, is DONE — EM-R2 version 5 LANDED it), and EVERY INSERTED LINE SITS BELOW THE SETTLEMENT LITERAL'S CLOSING `};`: (1) one consult statement inserted immediately after the literal, spelling `settlement.name = chooseOrPin(pins, 'name', () => settlementName);` — REUSING EM-R2's landed `const pins = ctx.__pins || null;` binding, never re-spelling it (a second binding of that name is §11 item 9's STOP, the identical rule EM-R3's C3 carries for this file); (2) the F8 re-render's second argument becomes `settlement.name` in place. The mint expression itself is BYTE-IDENTICAL — it is what consumes the two draws. MEASURED at 5412caf7a: the widened import reads count 1 and the pre-EM-R2 form count 0, so the import hunk is ZERO bytes; eslint's own Linter reads 167 effective before and 168 after (345 → 351 raw); the voice walker's own countFile reads {em:0,bang:0} on the planted file."
+        },
+        {
+          "action": "CREATE",
+          "path": "tests/generators/nameHeldThroughAssembly.test.js",
+          "_note": "The battery: adds exactly 7 literal `it`s, one per sealed acceptance case, under ONE literal `describe`. Straight-line registration, its own `vitest` import, and no variable or parameter named `it`, `test` or `describe` (the OPENER_UNRESOLVED park reason)."
+        },
+        {
+          "action": "REGISTER",
+          "path": "scripts/mutation-coverage-manifest.json",
+          "rowKey": "invariants['tests/generators/nameHeldThroughAssembly.test.js']",
+          "_note": "ONE row, `{ \"kind\": \"rationale\", \"ref\": \"generators-tree-admitted-subject-coupled-2026-08-30\" }` — ADMITTED_TREE_REF (tests/lint/mutationCoverage.shared.mjs :: ADMITTED_TREE_REF), the exact shape EM-B2a3's own tests/generators/pipelinePinnedChoosers.test.js row carries. The file runs the real registered pipeline and asserts on what came back, which is the admitted-tree class exactly. Touch no other row and no other key; `uncoveredBaseline` UNMOVED."
+        }
+      ],
+      "requiredSymbols": [
+        {
+          "path": "src/generators/steps/assembleSettlement.js",
+          "symbol": "const settlementName = (effectiveConfig.customName?.trim()) || generateSettlementName(culture);",
+          "_note": "⭐ THE MINT EXPRESSION, PRESERVED BYTE-IDENTICAL AND IN PLACE. It is the member's whole subject: it RUNS unconditionally so its two draws are spent at their exact position on the assembly step's shared ambient stream, and the consult below discards its result when the name is held. Moving it, wrapping it or gating it is the member's ONE forbidden edit (§11 STOP 1). count 1. NO LINE ADDRESS IS CARRIED HERE (§P2.22)."
+        },
+        {
+          "path": "src/generators/steps/assembleSettlement.js",
+          "symbol": "    name: settlementName,",
+          "_note": "The settlement literal's own name row, UNTOUCHED: with no pin bag it is still the value the record carries, and the consult below is a no-op. Preserving it is what keeps every line of the literal — and therefore holderTable.js's three `cite:` addresses into this file — exactly where it is. count 1."
+        },
+        {
+          "path": "src/generators/steps/assembleSettlement.js",
+          "symbol": "    _config: { ...config },",
+          "_note": "THE INSERT ANCHOR. The consult statement goes after the literal this row closes, so every inserted line is BELOW the literal. count 1."
+        },
+        {
+          "path": "src/generators/steps/assembleSettlement.js",
+          "symbol": "registerStep('assembleSettlement', {",
+          "_note": "The step declaration: `deps`, `reads`, `readsVersion`, `provides`, `mutates` and `phase` are all UNTOUCHED. `__pins` is the runner's reserved channel and is exempt from the undeclared-write scan BY NAME (src/generators/pipeline.js :: _PINS_KEY), so reading it declares nothing. count 1."
+        },
+        {
+          "path": "src/generators/steps/assembleSettlement.js",
+          "symbol": "e.summary = renderStressSummary(e.type, settlementName, e.summaryRoll);",
+          "_note": "⛔ THE ONE LINE THIS MEMBER REWRITES IN PLACE (to `settlement.name`), so the F8 re-render speaks the HELD name rather than the minted one. It is therefore ALSO a `retiredSymbols` row at the LANDED flip — declared in `_retiredSymbolsAtLanding` below rather than silently dropped. Measured: this text is quoted by NO packet in docs/implementation/PACKET_MANIFEST.json and by NO waiting packet in the chair's packets-waiting/. count 1."
+        },
+        {
+          "path": "src/generators/steps/assembleSettlement.js",
+          "symbol": "import { chooseOrPin, registerStep } from '../pipeline.js';",
+          "_note": "⭐ NEW AT VERSION 2, AND IT IS THE RESOLUTION OF VERSION 1's CONDITIONAL RETIREMENT. EM-R2 version 5 LANDED the widening, so C1's POST-state for the import clause is already the tree's state: this member PRESERVES the line byte-identical and changes it by ZERO bytes. Measured at 5412caf7a: this text count 1, and the pre-EM-R2 form `import { registerStep } from '../pipeline.js';` count 0. ⛔ NEVER ADD A SECOND `from '../pipeline.js'` IMPORT (§11 item 3). It is also the row that keeps the file's ONE `chooseOrPin` import site honest for tests/lint/heldKeyWriterCensus.walker.test.js's A3(b) discovery equality, which reads the raw import specifiers. count 1."
+        },
+        {
+          "path": "src/generators/npcGenerator.js",
+          "symbol": "export const generateSettlementName = (r = 'germanic') => {",
+          "_note": "THE MINT ITSELF, NOT EDITED BY THIS MEMBER. Its two `_rng()` draws (prefix index, suffix index) are measured at exactly 2 per generation in 63/63 rows. The consult is deliberately NOT placed here: this function is never called on the `customName` path, so a consult inside it loses the held name whenever the record was generated with a custom name (measured 3/3). count 1."
+        },
+        {
+          "path": "src/generators/pipeline.js",
+          "symbol": "export function chooseOrPin(pins, key, draw) {",
+          "_note": "EM-B2a2's landed primitive, UNCHANGED and the member's only consult mechanism. It does not advance the stream when a pin is present — which is why the mint is evaluated BEFORE the call and handed in as a no-draw thunk. That inversion is the whole of §22.1 correction 1's consume-and-discard, expressed in the estate's own primitive with no new export. count 1."
+        },
+        {
+          "path": "src/generators/pipeline.js",
+          "symbol": "const _PINS_KEY = '__pins';",
+          "_note": "EM-B2a2's reserved channel, kept byte-identical; this member adds no runner edit, so EM-R1's own cited lines in this file do not move because of it. count 1."
+        },
+        {
+          "path": "src/generators/stressNarrative.js",
+          "symbol": "export function renderStressSummary(type, name, roll) {",
+          "_note": "The F8 re-render's producer, UNCHANGED: only the ARGUMENT the assembly step passes it changes. Its `name` parameter is the settlement name the summary embeds, which is why a held name must reach it. count 1."
+        },
+        {
+          "path": "src/domain/edit/recordRegister.js",
+          "symbol": "export const RECORD_CLASSES",
+          "_note": "THE HELD DENOMINATOR, IMPORTED. EM-R0a's landed register classes `name: 'HELD'` (measured at src/domain/edit/recordRegister.js); acceptance case A6 reads that by import and never re-types it, which is the shape contractTestAntiVacuity Rule 2 convicts. count 1."
+        },
+        {
+          "path": "src/domain/prose/holderTable.js",
+          "symbol": "export const HOLDER_SOURCES",
+          "_note": "⛔ THE LINE-ADDRESSED REGISTER THIS MEMBER MUST NOT MOVE — and therefore NOT a change path. Three of its `cite:` rows address src/generators/steps/assembleSettlement.js by LINE and tests/lint/proseWiringCensus.walker.test.js reads them live. Every line this member inserts is BELOW all three cited lines, so all three keep the addresses they carry at the verified base; §10 runs the walker and §11 STOP 2 is the rule. ⚠ EM-R2 legitimately RE-ADDRESSES these rows when it lands, so no address is quoted in this manifest — only the register's stable symbol. count 1."
+        }
+      ],
+      "_retiredSymbols": [],
+      "_retiredSymbolsAtLanding": [
+        {
+          "path": "src/generators/steps/assembleSettlement.js",
+          "symbol": "e.summary = renderStressSummary(e.type, settlementName, e.summaryRoll);",
+          "successor": "e.summary = renderStressSummary(e.type, settlement.name, e.summaryRoll);",
+          "_note": "The post-edit validation simulated (LANE-EM-PREPROOF step 10): this text is the one `requiredSymbols` row this member's own edit removes, so it moves to `retiredSymbols` at the LANDED flip and its successor joins `requiredSymbols` there. Discharge check run at this compile: the text is quoted by NO other packet (215 estate packets + 36 waiting manifests scanned by the same greps EM-R2's compile used); nothing else must be discharged. ⭐ VERSION 2: RE-MEASURED at 5412caf7a — the text still reads count 1 in the live file, and the discharge check re-run over the estate's 228-packet PACKET_MANIFEST.json and the chair's 54 waiting manifest files finds it quoted by NO other packet. The SECOND row version 1 carried conditionally (the pipeline import) is RESOLVED AND REMOVED: EM-R2 landed the widening, so exactly ONE row is owed at the LANDED flip."
+        }
+      ],
+      "acceptanceCases": [
+        {
+          "id": "A1",
+          "case": "INERT WITH NO PINS - THE GOLDENS CANNOT MOVE. With no pin bag and with `pins: {}`, a stride of at least 40 rows of the golden master's own 525-row corpus hashes byte-identical to the COMMITTED fixture. MEASURED AT COMPILE through the member's exact edit applied in memory: 63/63 rows byte-identical to the base tree's own generation. Its written-contract counterforce (§P6): the same arm with a PLANTED `name` pin reds, so the arm cannot pass on a member that does nothing.",
+          "home": "tests/generators/nameHeldThroughAssembly.test.js",
+          "authorizedBy": "§7's `CREATE` row for `tests/generators/nameHeldThroughAssembly.test.js` (adds exactly 7 literal `it`s, one per sealed case)"
+        },
+        {
+          "id": "A2",
+          "case": "THE DRAWS ARE CONSUMED, NOT SKIPPED. With `{ name: <the record's own name> }` in the bag, the assembly step's own stream takes the SAME number of draws as the unpinned run, on every corpus row, counted on the honest per-step instrument. THE ANTI-VACUITY ARM, both directions: a SKIP implementation reads exactly 2 fewer draws at the mint and, because the shared stream re-phases, between 9 and 24 fewer over the whole step in 9 of 63 rows - the arm convicts it by number, not by prose.",
+          "home": "tests/generators/nameHeldThroughAssembly.test.js",
+          "authorizedBy": "§7's `CREATE` row for `tests/generators/nameHeldThroughAssembly.test.js` (adds exactly 7 literal `it`s, one per sealed case)"
+        },
+        {
+          "id": "A3",
+          "case": "THE RECORD REPRODUCES UNDER ITS OWN NAME. With `{ name: <the record's own name> }` the re-derived settlement is byte-identical to the record on every corpus row (63/63 measured). THIS IS THE ARM THAT CONVICTS BOTH WRONG IMPLEMENTATIONS: a held writer that SKIPS reads 0/63 here, and a consult placed inside `generateSettlementName` reads 0/63 here, while a naive `no pins => goldens unmoved` arm passes for all three.",
+          "home": "tests/generators/nameHeldThroughAssembly.test.js",
+          "authorizedBy": "§7's `CREATE` row for `tests/generators/nameHeldThroughAssembly.test.js` (adds exactly 7 literal `it`s, one per sealed case)"
+        },
+        {
+          "id": "A4",
+          "case": "THE PIN IS TAKEN, AND ONLY WHAT SPEAKS THE NAME MOVES. With a deliberately altered name in the bag, `settlement.name` IS that value on every row, and the ONLY record keys that differ from the record are the five that speak the name - `name`, `arrivalScene`, `pressureSentence`, `stress[].summary` and `stressors[].summary` (measured: name 63/63, arrivalScene 63/63, stress and stressors 54/63, pressureSentence 51/63, and 36 other record keys byte-identical on every row). No unedited held fact moves.",
+          "home": "tests/generators/nameHeldThroughAssembly.test.js",
+          "authorizedBy": "§7's `CREATE` row for `tests/generators/nameHeldThroughAssembly.test.js` (adds exactly 7 literal `it`s, one per sealed case)"
+        },
+        {
+          "id": "A5",
+          "case": "THE customName SHORT-CIRCUIT KEEPS THE HELD NAME. With `effectiveConfig.customName` set AND the name held, the HELD name wins, and the mint is not called and takes no draw on that path (measured: 0 mint calls, the step's draws fall by exactly 2, 3/3 tiers). THE ANCHORED NEGATIVE with its positive control: the SAME arm against a consult placed inside the mint reads the customName instead of the pin, 3/3 - which is why the consult is at the EXPRESSION and not in the mint.",
+          "home": "tests/generators/nameHeldThroughAssembly.test.js",
+          "authorizedBy": "§7's `CREATE` row for `tests/generators/nameHeldThroughAssembly.test.js` (adds exactly 7 literal `it`s, one per sealed case)"
+        },
+        {
+          "id": "A6",
+          "case": "THE CLASS REGISTER IS THE SOURCE, NOT A SECOND LIST. The held key this member gates is read BY IMPORT from `src/domain/edit/recordRegister.js` - `RECORD_CLASSES.name === 'HELD'` - and the pin key the consult uses is that same string, never re-typed (contractTestAntiVacuity Rule 2). A member that gated some other key, or that spelled the key by hand, reds this arm by name.",
+          "home": "tests/generators/nameHeldThroughAssembly.test.js",
+          "authorizedBy": "§7's `CREATE` row for `tests/generators/nameHeldThroughAssembly.test.js` (adds exactly 7 literal `it`s, one per sealed case)"
+        },
+        {
+          "id": "A7",
+          "case": "NO NEW STREAM, AND NO NEW FORK. The member mints no PRNG and takes no fork: `src/generators/steps/assembleSettlement.js` contains ZERO `createPRNG(` occurrences after the edit (anchored negative, with the positive control that the whole-src count is unchanged at its pinned figure), and the assembly step's fork labels under a `name` pin are set-equal to the unpinned run's on every corpus row. A consume-and-discard uses the EXISTING stream by construction.",
+          "home": "tests/generators/nameHeldThroughAssembly.test.js",
+          "authorizedBy": "§7's `CREATE` row for `tests/generators/nameHeldThroughAssembly.test.js` (adds exactly 7 literal `it`s, one per sealed case)"
+        }
+      ],
+      "checks": [
+        [
+          "npx",
+          "vitest",
+          "run",
+          "--pool=threads",
+          "--maxWorkers=2",
+          "tests/generators/nameHeldThroughAssembly.test.js",
+          "tests/generators/stressSummaryName.test.js",
+          "tests/generators/pipelinePinnedMode.test.js",
+          "tests/generators/pipelinePinnedChoosers.test.js",
+          "tests/generators/pipelineContract.test.js",
+          "tests/generators/pipelineStrictMode.test.js",
+          "tests/generators/dataFlowContract.test.js",
+          "tests/generators/stepMetadataSync.test.js",
+          "tests/generators/configPatchAllowlistWalker.test.js",
+          "tests/generators/ghostFamine.test.js",
+          "tests/generators/legitimacyBgConsistency.test.js",
+          "tests/generators/tuningBatchE2.test.js"
+        ],
+        [
+          "npx",
+          "vitest",
+          "run",
+          "--pool=threads",
+          "--maxWorkers=2",
+          "tests/lint/contractTestAntiVacuity.walker.test.js",
+          "tests/lint/seedLoopTotality.walker.test.js",
+          "tests/lint/mutationCoverageManifest.test.js",
+          "tests/lint/recordRegisterTotality.walker.test.js",
+          "tests/lint/entropyRootCensus.walker.test.js",
+          "tests/lint/ruinFilterRoster.walker.test.js",
+          "tests/lint/tuningRegister.walker.test.js",
+          "tests/lint/proseNumerics.test.js",
+          "tests/lint/proseWiringCensus.walker.test.js",
+          "tests/lint/sourceCitationIntegrity.walker.test.js",
+          "tests/lint/generationForkRegistry.contract.test.js",
+          "tests/lint/editDeclarations.walker.test.js",
+          "tests/lint/worldGenerationClockSeam.walker.test.js",
+          "tests/lint/noPremadeDeityPool.walker.test.js",
+          "tests/lint/heldKeyWriterCensus.walker.test.js"
+        ],
+        [
+          "npx",
+          "vitest",
+          "run",
+          "--pool=threads",
+          "--maxWorkers=2",
+          "tests/domain/distribution.test.js",
+          "tests/domain/eventBatch.test.js",
+          "tests/domain/schemaCanonicalShape.test.js",
+          "tests/domain/simulationSpine.test.js",
+          "tests/domain/stressorsStateProseDesk.test.js",
+          "tests/domain/trace.coverage.test.js"
+        ],
+        [
+          "npx",
+          "vitest",
+          "run",
+          "--pool=threads",
+          "--maxWorkers=2",
+          "tests/joins/conflictsSeam.test.js",
+          "tests/joins/crisisTripleSync.test.js",
+          "tests/joins/eventConditions.test.js"
+        ],
+        [
+          "npx",
+          "vitest",
+          "run",
+          "--pool=threads",
+          "--maxWorkers=2",
+          "tests/pdf/exportDateSeam.test.js"
+        ],
+        [
+          "npx",
+          "vitest",
+          "run",
+          "--pool=threads",
+          "--maxWorkers=2",
+          "tests/copy/voiceMechanics.test.js"
+        ],
+        [
+          "npx",
+          "vitest",
+          "run",
+          "--pool=threads",
+          "--maxWorkers=2",
+          "tests/property/generatorGoldenMaster.test.js",
+          "tests/property/dossierProseManifest.test.js"
+        ],
+        [
+          "node",
+          "scripts/implementation-packets.mjs",
+          "validate"
+        ]
+      ],
+      "_checksDerivation": "COMPUTED, not recalled (EM-PREAMBLE §P7). RE-COMPUTED AT VERSION 2's READ TIP 5412caf7a. TOOL-26 (`scripts/governing-tests.mjs`) has STILL NOT landed (measured: the path does not exist), so the sixth amendment's interim form governs: `git grep -l -F <basename> -- tests` for the ONE file this member changes (`assembleSettlement` -> EIGHTEEN paths at this tip, one more than at 91cc9ef5a) and for the producer whose argument changes (`renderStressSummary` -> 1 path, tests/lint/heldKeyWriterCensus.walker.test.js), PLUS the walkers governing `tests/generators`, where this member CREATEs, PLUS the two goldens and the voice walker. ⭐ THE ONE ADDITION AT VERSION 2 IS `tests/lint/heldKeyWriterCensus.walker.test.js`: it did not exist at 91cc9ef5a, it landed with EM-R1 on train EM-T15, it names this member's ONE MODIFY path as ASSEMBLY_FILE and reads its source, and it reads NO dist and runs NO generation so it cannot skip. MINUS `tests/lint/sovereigntyLightingContract.walker.test.js` (it reds by design under a train, and its presence in a sealed array means check:packet can never pass) and MINUS `tests/build/generationWorkerLazy.test.js` and `tests/build/vendorPdfLazy.test.js` (both carry skipIf(!requireDistRead) dist arms; a skipped arm proves no budget, and this member is NOT the train's byte-arm holder — EM-R1b is, judgment 206d). ALSO DELIBERATELY OUT: `tests/generators/rosterFinalUnderHeldRoster.test.js`, EM-R2's landed battery over this step's pin seam — the computed rule does not return it (the file spells neither `assembleSettlement` nor any symbol whose call shape this member changes) and its seven arms carry 600,000-900,000 ms timeouts, so it is a NAMED NON-SEALED read in §10 item 9 that the build lane runs once and quotes. Every file named was verified to exist at 5412caf7a. The array ends with the validator, no array names a test DIRECTORY, and NO generator (`npm run build:edge-shared` and kin) is among the checks, so no check re-stamps a declared path.",
+      "_lightingDelta": {
+        "files": 1,
+        "parked": 0,
+        "credited": 1,
+        "titles": 7,
+        "suiteTitles": 1
+      },
+      "_deferredRows": [
+        "tests/lint/.lighting-census-baseline.json - an INTERIOR RED, delta only, refrozen by the chair at the train's terminal (EM-PREAMBLE §P2 row 1). The delta files +1 · parked +0 · credited +1 · titles +7 · suiteTitles +1 was EXECUTED at version 2 through the walker's own parkReasonsFor / liveTitlesIn / liveSuiteTitlesIn over the planted CREATE: parkReasons=[] titles=7 suiteTitles=1, CREDITED; the register's live tuple at this tip is the chair's refreeze INPUT and is asserted by no arm of this member.",
+        "docs/content/wiring-census.json - RE-MEASURED at 5412caf7a: `stamp.files` (7 entries, all under src/domain/display/stateProse/) names NO file this member modifies, so the stale-bytes arm cannot fire; `stamp.producerIndexFiles` is 1,185 (a NUMBER, read from the census) and moves +0 (this member creates no src/ module); regenerated by the chair at the terminal only if the terminal's own sum requires it."
+      ],
+      "_mutationCoverageRowKey": "invariants['tests/generators/nameHeldThroughAssembly.test.js']",
+      "_laneBranch": "em-t16-em-r4-<date>  (NOT a manifest key in the live estate: parsePacketHeader takes verifiedBranch FROM the packet's Verified base row, `<branch>` at `<sha>`)",
+      "_collisionGroup": [
+        "src/generators/steps/assembleSettlement.js"
+      ],
+      "_collisionNote": "RE-MEASURED AT 5412caf7a BY THE VALIDATOR ITSELF, run DRY on a scratch copy (nothing in the tree written). The estate manifest holds 228 entries and validates 0 errors / 0 warnings; appending this capsule adds EXACTLY TWO errors and no warning: `EM-R4.packetPath does not exist: docs/implementation/packets/settlement-editor/EM-R4.md` (the body is not in the tree yet; the chair's placement writes it) and `duplicate change path across packets: src/generators/steps/assembleSettlement.js (EM-R3, EM-R4)`. THE SECOND IS THE MEASURED, EXPECTED, STAGE-3 COLLISION that clears at EM-R3's flip (judgment 206a); EM-R2's and EM-R5's reservations on this path cleared when they LANDED. THERE IS NO OTHER DUPLICATE, which is the positive proof that (a) EM-R1b shares only the ROW-KEYED scripts/mutation-coverage-manifest.json under a DISTINCT rowKey (TOOL-27, §P10.8) — its own §0.2 states the same disjointness from the other side — and its src/generators/pipeline.js edit is a file this member only READS by symbol; (b) EM-R0b shares nothing (three CREATEs under src/domain/edit/ and one under tests/domain/); (c) the EARLY BUY-BACK lane is disjoint by its own brief, which forbids steps/assembleSettlement.js, scripts/mutation-coverage-manifest.json and any tests/generators/* a member CREATEs, and whose four files resolve to src/generators/servicesGenerator.js, src/data/institutionalCatalog.js, src/generators/power/rulingStructure.js and src/domain/activeConditions.js — none a requiredSymbols path of this member. No waiting packet CREATEs tests/generators/nameHeldThroughAssembly.test.js (measured over the chair's 54 waiting manifest files: only EM-R4's names it). This member takes NO other change path: src/domain/prose/holderTable.js is deliberately avoided (its three cite: rows read :110 :129 :130 at this tip, all ABOVE the insert), and src/generators/pipeline.js is deliberately avoided (no new primitive is minted, so EM-R1's and EM-R1b's runner edits are untouched).",
+      "_baseNote": "Left for the chair. Version 2 RE-MEASURED at 5412caf7a1dbd3a67f26feb369de0f07d550c58e (train EM-T16's stage-2a placement tip; worktree read-tip-em-t15, DETACHED, `git status --short` EMPTY before and after). The preamble measured 125c693214235a81bf4f2b38506b621859a35e0325ff2ea58d335b4e0681a99d — THE SIXTH AMENDMENT, LANDED (train EM-T13's first commit 7bc14e003), which is the law this packet is written to; the fifth's fdecd426...dacc9e7c that version 1 carried is superseded. ⚠ THE CHAIR PLACES THIS MEMBER ON EM-R3's FLIP and re-runs EM-R4.remeasure.sh there first: EM-R3 version 2 MODIFIES the same file (its two assertPowerEconomyFreshness calls and its one reconcilePowerStructure call, all BELOW this member's anchors and below its insert point) and judgment 134 forbids resting on a sibling's predicted fence.",
+      "_member": "The re-entry family EM-R, member 4. The settlement NAME is held through assembly: the mint RUNS at its exact draw position, spends its two draws on the assembly step's shared ambient stream, and its result is DISCARDED when the name is held (§22 ruling 1 as corrected by §22.1 correction 1). Version 2 is the FULL pre-proof at train EM-T16's stage-2a placement tip. The charter's `world facts` half is NOT a packet - world facts already flow as `config'` (charter :137, measured).",
+      "_dependencyNote": "VERSION 2. THE ONE LIVE ORDERING DEPENDENCY IS EM-R3 (version 2, READY on stage 2a): it is the only other non-landed packet that MODIFIES src/generators/steps/assembleSettlement.js, measured by the dry validator, and this member is placed on its FLIP (judgment 206a; the chair's stage 3). EM-R2 (version 5), EM-R1 and EM-B2a4 have all LANDED and are now SUBSTRATE rather than dependencies: EM-R2 carries the widened pipeline import, the `const pins = ctx.__pins || null;` binding this member reuses and the chooseOrPin DISCOVERY_EXEMPT row that pays the writer census for this member too (judgment 207d — NO second row); EM-R1 carries the runner's clone per channel, which is what makes a record-built bag safe to hand in, so this member still declares NO local clone; EM-B2a4 forwards `pins` from generateSettlementPipeline, the caller path that makes this consult reachable from rederive, and is a reachability dependency, not a change-path one. Also LANDED: EM-P0 (the runner's pins channel), EM-B2a2 (chooseOrPin and _PINS_KEY) and EM-R0a (RECORD_CLASSES.name === 'HELD').",
+      "_byteNote": "RE-MEASURED AT VERSION 2's READ TIP 5412caf7a. MEMBERSHIP, EXECUTED BY A PROBE THAT READS NO dist AND THEREFORE CANNOT SKIP (§P2.11): src/generators/steps/assembleSettlement.js IS in the generation worker's source import closure (230 modules walked from src/workers/generation.worker.js, following `from`, dynamic and side-effect specifiers; 228 at 91cc9ef5a), so this member spends bytes against the ZERO-SLACK WORKER_BUNDLE_CEILING_BYTES, which now reads 1392364 (tests/build/generationWorkerLazy.test.js :: WORKER_BUNDLE_CEILING_BYTES) — LOWERED twice since version 1's 1396015 (judgments 187 and 203) and never raised. The edit is ONE inserted statement plus one in-place argument change: PLAUSIBLE minified cost about 30 B (the comment block costs nothing; minifiers strip comments), stated as an estimate x2 = 60 B upper bound. ⛔ VERSION 1's NAMED BUY-BACK IS CONSUMED: BUY-BACK-LEDGER row 2 was the narrowing of `chooseOrPin(ctx.__pins || null, ...)` to `chooseOrPin(pins, ...)` once EM-R2's binding landed; it HAS landed, so the narrowed spelling is this version's CONTRACT and its ~16 B are already inside the 30 B estimate. THIS MEMBER HOLDS NO BUY-BACK OF ITS OWN. ⛔ THIS MEMBER IS NOT THE BYTE-ARM HOLDER: judgment 206d names EM-R1b the holder of train EM-T16, so this member carries NO row on tests/build/generationWorkerLazy.test.js, states its predicted delta under the holder's bound, and names the holder. The train's cover is the EARLY BUY-BACK lane (ledger row 9, judgment 214c), whose brief prices the worst sum as EM-R2 +161 B measured by CI, EM-R1b +400..700 B predicted, and small rises from EM-R3/EM-R4, and targets ≥ 1,600 B bought back. A RISE BEYOND THE HOLDER'S BOUND, AND ANY RE-MINT OF THE CEILING, IS THE OWNER's (§P11.2). The first-paint set was measured by IMPORTING vite.config.js's EAGER_FIRST_PAINT_MODULES (270 live): neither assembleSettlement.js nor pipeline.js is a member, so no first-paint byte moves.",
+      "_placementReMeasurement": "THE PLACEMENT OWES THE VERBATIM RE-RUN OF ALL TWELVE requiredSymbols (`grep -c -F` >= 1 each) AT EM-R3's FLIP, which is what EM-R4.remeasure.sh does and prints. RESOLVED AT VERSION 2: (a) the pipeline import row — EM-R2 LANDED the widening, so the widened text is present (count 1), the pre-EM-R2 form is absent (count 0), this member's import hunk is ZERO bytes and the conditional _retiredSymbolsAtLanding row is REMOVED; (b) holderTable.js's three cite: addresses into this file — EM-R2 re-addressed them to :110 :129 :130 (version 1 PREDICTED :111 :130 :131, one high on each; judgment 134 is exactly why a predicted fence is never measured against), and this member's rule is unchanged: every inserted line is below the literal's closing `};` at raw line 181, more than fifty lines below the lowest cited line, so all three keep their addresses; (c) WHAT MOVES UNDER THIS MEMBER BEFORE ITS PLACEMENT — EM-R3 version 2 on this same file (three call sites, all below the anchors), EM-R1b version 2 on src/generators/pipeline.js (the partial-pin rule's `choosers` list narrowed by _TRANSIENT_CHOOSERS; it is still keyed on step.provides, where `name` does not appear, so a { name } bag still triggers no partial-pin refusal) and on the ROW-KEYED mutation-coverage manifest, EM-R0b's four CREATEs (disjoint), and the EARLY BUY-BACK lane's four files (disjoint by its own brief). NONE of them touches a text this member preserves; remeasure.sh proves that rather than asserting it."
     }
   ]
 }
