@@ -290,7 +290,7 @@ Six rows over **four distinct keys** — the duplicates are the multi-producer k
 
 Three channels, three mechanisms. **No edit to `src/kernel/**` or `src/generators/**` is required, and none is permitted.**
 
-**(a) Tier 1's counting instrument needs NO MOCK AT ALL.** `runPipeline` takes the root PRNG as an argument (VF-2) and `pipeline.js:229` hands the object the root's `fork` returned to `setActiveRng` (VF-3). A test-side recursive counting proxy over the root therefore sees every channel a step's own stream carries — the ambient `kernel/rngContext.js` helpers, `pickRandom2`, and every `.fork(` receiver spelling — because they are all the same `random()`. **Precedent copied by shape:** `tests/generators/pipelinePinnedMode.test.js`, `countingStream` / `instrumentedRoot` / `runHeadless` / `withAmbientCounter`, extended to all 22 steps and to recursive sub-forks.
+**(a) Tier 1's counting instrument needs NO MOCK AT ALL.** `runPipeline` takes the root PRNG as an argument (VF-2) and `pipeline.js :: runPipeline` hands the object the root's `fork` returned to `setActiveRng` (VF-3). A test-side recursive counting proxy over the root therefore sees every channel a step's own stream carries — the ambient `kernel/rngContext.js` helpers, `pickRandom2`, and every `.fork(` receiver spelling — because they are all the same `random()`. **Precedent copied by shape:** `tests/generators/pipelinePinnedMode.test.js`, `countingStream` / `instrumentedRoot` / `runHeadless` / `withAmbientCounter`, extended to all 22 steps and to recursive sub-forks.
 
 **(b) The MINT census is `vi.mock` + `importOriginal`, AND IT MUST RE-IMPLEMENT `fork`.**
 
@@ -410,7 +410,7 @@ If a golden moves, **STOP** (§P3.1, §11 STOP-3). If `direct` mints ≠ 4 or to
 
 **The four arms, with no discretion:**
 - **A** the `outputKey` RESOLVES on a generated record — occupancy > 0 over the Tier-2 corpus (42 rows, every tier × terrain once). Measured occupancy: rows 1, 2, 3, 4, 6–10 at **42/42**; row 5 (`npcs[].status`) at **18/42** — the structural-seat family EM-A1 §1c.2 names, declared and shown empty, so the arm's floor for row 5 is `> 0`, not `=== 42`.
-- **B** the holding `(step, key)` EXISTS in `GENERATION_TIER1`, and `forkId === step` (at this base the runner forks by step name — `pipeline.js:207` `rng.fork(name)` — so a sub-fork label is Tier-1 observed data and never a row key; the arity problem of the STOP's S2 dissolves).
+- **B** the holding `(step, key)` EXISTS in `GENERATION_TIER1`, and `forkId === step` (at this base the runner forks by step name — `pipeline.js :: runPipeline` `rng.fork(name)` — so a sub-fork label is Tier-1 observed data and never a row key; the arity problem of the STOP's S2 dissolves).
 - **C** `origin` EQUALS the measurement: the field's value list moves under the holding step's perturbation in ≥ 1 corpus row ⟺ `drawn`; in 0 rows ⟺ `computed`.
 - **D** `module#symbol` is declared **EXACTLY ONCE** in its file by the resolver of §6.6.
 

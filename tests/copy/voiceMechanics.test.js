@@ -1005,7 +1005,7 @@ const AGNOSTIC_TELLS_DEFERRED = Object.freeze({
   'src/data/economicData.js :: spell-level scale':
     'The same institution key, in the economic table that prices it.',
   'src/data/servicesData.js :: spell-level scale':
-    'The three `spellcasting services (1st-Nth level)` LOCALE override SOURCES. MEASURED UNREACHABLE: the lookup is an exact lowercased key access (generators/services/institutionServices.js:111, display/institutionProfile.js:118) and no producer in src/ emits an institution by that name. Their honest disposition is DELETION in a dead-code car, not a rename that invents a differently-dead key.',
+    'The three `spellcasting services (1st-Nth level)` LOCALE override SOURCES. MEASURED UNREACHABLE: the lookup is an exact lowercased key access (src/generators/services/institutionServices.js :: getServicesForInstitution, display/institutionProfile.js:118) and no producer in src/ emits an institution by that name. Their honest disposition is DELETION in a dead-code car, not a rename that invents a differently-dead key.',
   'src/domain/display/institutionVocabulary.js :: spell-level scale':
     'The same institution key, twice, as a display-map key.',
 });
