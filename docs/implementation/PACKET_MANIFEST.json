@@ -40809,6 +40809,211 @@
         ]
       ],
       "_checksNote": "COMPUTED, not recalled, and RE-COMPUTED at 6a0178b7b: `git grep -l -F '<basename>' -- tests` for each of the three source basenames this member changes, for the two step names, and for each of the exported symbols whose call shape it changes (reconcilePowerStructure, assertPowerEconomyFreshness, refreshPowerGenerationTraces), minus the .json hits, minus tests/helpers, and MINUS the lighting walker, which reds by design under a train and whose presence in a sealed array means check:packet can never pass. The recomputation returns 23 files against the compile's 21; the TWO new hits are both EM-T15 arrivals and are dispositioned here. (1) tests/lint/heldKeyWriterCensus.walker.test.js -- EM-R1's LANDED CREATE, which reads all three of this member's src/ files by name. ADDED to the tests/lint array (judgment 148's law): its A3(d) assert-surface equality over economyReconciliation.js, its A3(b) discovery equality over assembleSettlement.js's import set, its A4 MIRROR measurement and its A6 clone arms were all run over this member's PLANTED text in plain node and are UNMOVED (see EM-R3.preproof.report.md section 6). (2) tests/build/generationWorkerLazy.test.js -- REFUSED, and the refusal is the law: it is the train byte-arm holder's arm, it needs a real build, and its WORKER_BUNDLE_CEILING_BYTES is EXACT with zero slack, so sealing it here would make check:packet depend on a build this lane never runs (EM-PREAMBLE section P2.11; the holder is EM-R1b, judgment 206d). 22 files, grouped one directory per argv array. The member CREATEs and RENAMEs no test file, so no directory-governing walker joins the set. TOOL-26's scripts/governing-tests.mjs is used instead once it has landed."
+    },
+    {
+      "id": "EM-R0c",
+      "status": "READY",
+      "packetPath": "docs/implementation/packets/settlement-editor/EM-R0c.md",
+      "_verifiedBaseNote": "Compiled at claude/composite-r4 32602dc607b7423838249cf57d73baf08feb047d; pre-proofed at 141a1d775 on 2026-09-20; FULL PRE-PROOF at 6a0178b7b on 2026-09-23 (train EM-T16's stage-1 placement tip, EIGHT trains later). THE J-T1 WINDOW IS NOT EMPTY: `git diff --stat 141a1d775 6a0178b7b` over every changeManifest path and every requiredSymbols path, present and pending, returns FOUR files over 207 commits - src/data/economyFingerprint.js +53 (EM-R0f's CREATE, LANDED), src/domain/edit/recordRegister.js +190 (EM-R0a's CREATE, LANDED), src/generators/generateSettlementPipeline.js 1+/1- (EM-R1's pin forwarding) and tests/build/domainGeneratorsBoundary.test.js 55+/6- (judgment 111's root fix plus EM-R0f's re-baseline). All three CREATE targets ABSENT (git ls-files -> 0). SIX of the eight pending symbols are DISCHARGED into requiredSymbols below, each re-measured verbatim with grep -cF at its landed address (judgment 151). The chair stamps the base at or AFTER EM-R0b VERSION 8 lands at train EM-T16 stage 1's flip: the sealed dispatch's substrate check names src/domain/edit/recordInvariants.js, which is the last absent file (measured: git ls-files -> 0 at 6a0178b7b).",
+      "verifiedBase": "88515782a8001d5e10aff2becf8775b4f61f9936",
+      "changeManifest": [
+        {
+          "action": "CREATE",
+          "path": "src/domain/edit/recordMergeTree.js",
+          "symbol": "mergeTree"
+        },
+        {
+          "action": "CREATE",
+          "path": "src/domain/edit/mergeConsequence.js",
+          "symbol": "mergeConsequence"
+        },
+        {
+          "action": "CREATE",
+          "path": "tests/domain/recordMerge.test.js"
+        }
+      ],
+      "_changeManifestNote": "THREE rows, set-equal with the packet's section 7 table. No MODIFY row, no REGISTER row, no generated artifact. RE-MEASURED AT 6a0178b7b: tests/domain is not one of mutationCoverage.shared.mjs's EIGHT ENFORCER_DIRS and NAME_PATTERN's 16 tokens match neither recordMerge nor recordMerge.test; the lighting-census baseline is NEVER a packet row (EM-PREAMBLE section P2.1) and is re-derived whole by the chair at the train's terminal; no src/ path of this packet is an input to any of the five edge-shared bundle metas. PATH DISJOINTNESS, RE-MEASURED: none of these three paths appears in any of PACKET_MANIFEST.json's 226 packets, in the kit's packets-waiting/, or in either stage-2 sibling (EM-R1b, EM-R3), stage 1 (EM-R2 v5, EM-R0b v8) or stage 3 (EM-R4). On the two row-keyed registers the train shares - scripts/mutation-coverage-manifest.json and heldKeyWriterCensus's DISCOVERY_EXEMPT - this packet holds NO row, so no rowKey can collide (TOOL-27). PRE-PROOF ADDITION: no baseline of any tests/lint walker is a row either, and section 7's five instrument pins plus section 10's two new sealed arrays are what EARN that claim rather than assume it.",
+      "requiredSymbols": [
+        {
+          "path": "src/generators/generateSettlementPipeline.js",
+          "symbol": "export function generateSettlementPipeline",
+          "_note": "The acceptance test builds its 63-row stride through this entry, exactly as tests/property/generatorGoldenMaster.test.js does. PROVEN at 32602dc60, 141a1d775 and RE-PROVEN at 6a0178b7b: grep -cF -> 1, still at line 77. The one line that moved in the window (EM-R1's pin forwarding, at :135) is inside the function body and below this text. POST-EDIT SIMULATION: this packet does not touch that file, so the text is present verbatim after its own edits; no retiredSymbols row is owed and no other LANDED packet's row for this (path, symbol) pair is disturbed."
+        },
+        {
+          "path": "tests/helpers/goldenMasterCorpus.js",
+          "symbol": "export function goldenCorpus",
+          "_note": "PROVEN at 32602dc60 and 141a1d775 and RE-PROVEN at 6a0178b7b: grep -cF -> 1, still at line 76. Untouched by this packet's edits and unmoved in the window."
+        },
+        {
+          "path": "tests/helpers/goldenMasterCorpus.js",
+          "symbol": "export const keyOf",
+          "_note": "PROVEN at 32602dc60 and 141a1d775 and RE-PROVEN at 6a0178b7b: grep -cF -> 1, still at line 60. Untouched by this packet's edits and unmoved in the window."
+        },
+        {
+          "path": "tests/build/domainGeneratorsBoundary.test.js",
+          "symbol": "const BASELINE_EDGES",
+          "_note": "The shrink-only domain->generators ratchet, in this packet's checks. PROVEN at 32602dc60 and at 141a1d775 at line 60; RE-PROVEN at 6a0178b7b: grep -cF -> 1, NOW AT LINE 70. The file moved 55+/6- in the window (judgment 111's repoRoot fix and EM-R0f's re-baseline), so the address is re-stamped here - tests/lint/sourceCitationIntegrity.walker.test.js reads this _note against the live tree (judgment 124). The live edge set is FOUR files / FIVE specifiers, identical to BASELINE_EDGES, and the cardinality guard now reads toBeLessThanOrEqual(5). This packet adds none and removes none."
+        },
+        {
+          "path": "src/domain/edit/recordRegister.js",
+          "symbol": "export const RECORD_CLASSES",
+          "_note": "DISCHARGED FROM _pendingRequiredSymbols AT THIS PRE-PROOF (judgment 151): EM-R0a, LANDED landed, and the row is re-measured VERBATIM rather than promoted as written - grep -cF -> 1 at src/domain/edit/recordRegister.js:14, measured at 6a0178b7b."
+        },
+        {
+          "path": "src/domain/edit/recordRegister.js",
+          "symbol": "export const CLASS_EXCEPTIONS",
+          "_note": "DISCHARGED FROM _pendingRequiredSymbols AT THIS PRE-PROOF (judgment 151): EM-R0a, LANDED landed, and the row is re-measured VERBATIM rather than promoted as written - grep -cF -> 1 at src/domain/edit/recordRegister.js:62, measured at 6a0178b7b."
+        },
+        {
+          "path": "src/domain/edit/recordRegister.js",
+          "symbol": "export const KEYED_COLLECTIONS",
+          "_note": "DISCHARGED FROM _pendingRequiredSymbols AT THIS PRE-PROOF (judgment 151): EM-R0a, LANDED landed, and the row is re-measured VERBATIM rather than promoted as written - grep -cF -> 1 at src/domain/edit/recordRegister.js:70, measured at 6a0178b7b."
+        },
+        {
+          "path": "src/domain/edit/recordRegister.js",
+          "symbol": "export const ATOMIC_COLLECTIONS",
+          "_note": "DISCHARGED FROM _pendingRequiredSymbols AT THIS PRE-PROOF (judgment 151): EM-R0a, LANDED landed, and the row is re-measured VERBATIM rather than promoted as written - grep -cF -> 1 at src/domain/edit/recordRegister.js:122, measured at 6a0178b7b. economicState.incomeSources (:125) and powerStructure.factions (:131) are members, and both are also CROSS_ENTRY_TOTALS rows, so section 6's 'a collection under a cross-entry total is ONE value' rule is bought by this import alone and this packet imports no second register (A5)."
+        },
+        {
+          "path": "src/domain/edit/recordRegister.js",
+          "symbol": "export const CONSISTENCY_GROUPS",
+          "_note": "DISCHARGED FROM _pendingRequiredSymbols AT THIS PRE-PROOF (judgment 151): EM-R0a, LANDED landed, and the row is re-measured VERBATIM rather than promoted as written - grep -cF -> 1 at src/domain/edit/recordRegister.js:175, measured at 6a0178b7b. It carries SEVEN entries at this tip and the seventh is exactly { id: 'history-age', root: 'history', members: Object.freeze(['age','founding.age']) } - V14's whole subject, and section 8 step 1's K-gate re-checks the seven-ness at the stamped base because members: null there would silence the order arm on four collections."
+        },
+        {
+          "path": "src/data/economyFingerprint.js",
+          "symbol": "export function fingerprintPowerEconomyInput",
+          "_note": "DISCHARGED FROM _pendingRequiredSymbols AT THIS PRE-PROOF (judgment 151): EM-R0f, LANDED landed, and the row is re-measured VERBATIM rather than promoted as written - grep -cF -> 1 at src/data/economyFingerprint.js:42, measured at 6a0178b7b. The leaf is 53 lines with exactly ONE export and imports only fnv1a32 from ../kernel/proseHash.js; ECONOMY_FINGERPRINT_VERSION (:25) and economyProjectionInput (:27) are module-private and this packet names neither. src/generators/power/economyReconciliation.js now IMPORTS this symbol at :22 and keeps no forwarding definition, so the text has exactly one address."
+        }
+      ],
+      "retiredSymbols": [],
+      "_retiredSymbolsNote": "EMPTY, and proved rather than asserted: this packet's edits are two CREATEs under src/domain/edit/ and one CREATE under tests/domain/. It moves, renames and deletes no symbol at any path, and it touches no file that any requiredSymbols row of any packet names. RE-MEASURED AT 6a0178b7b: EM-R0f has LANDED and did NOT keep a forwarding definition - src/generators/power/economyReconciliation.js now IMPORTS fingerprintPowerEconomyInput at :22 - so the moved text lives at exactly one address, src/data/economyFingerprint.js:42, which is a requiredSymbols row above. EP-0 (LANDED) holds a row on economyReconciliation.js for 'rngSeed: stepRng.fork(POWER_STREAM).seed,', which survived the move and now sits at :103, undisturbed by this packet, which touches that file not at all.",
+      "acceptanceCases": [
+        {
+          "id": "A1",
+          "case": "IDENTITY AND THE WRITE BASE. Over the 63-row stride, mergeConsequence(record, X, X) with X deep-equal on both sides returns a record byte-identical to the record; the caller's record is unmutated; NO TOP-LEVEL key of `record` is absent from the result (the chair's 2026-09-19 20:16 contract, ODQ 934.60, executed); escalations and readings are both empty. Executed: 63/63 identical, 0 mutated, 0 keys lost, 0 escalations, 0 readings. PRE-PROOF: the arm is written at the TOP LEVEL, as the compile measured it. Byte-identity already covers depth for THIS arm because R0 === R1 makes every node short-circuit; but the absolute 'no key of record is absent' is FALSE at depth under a real edit (245 measured lawful deep losses over 693 trials, 0 of them under a node where R0 === R1) and section 6 now scopes it in the chair's own words, 'present in the record AND UNTOUCHED BY THE EDIT'."
+        },
+        {
+          "id": "A2",
+          "case": "THE GROUP IS THE UNIT - a label never sits beside a flag that contradicts it. With economicState.foodSecurity.label differing between R0 and R1 and isSecure identical in both, the merged group is R1's WHOLE. enclosingGroup('economicState.foodSecurity.label') is 'food-security'; enclosingGroup('availableServices.legal') is null (a measured NON-group, design 22.3 item 4). THE PAIRED NEGATIVE: with the group rule off, the same inputs produce the contradictory pair. Executed: 63/63 whole, 0 split."
+        },
+        {
+          "id": "A3",
+          "case": "ABSENT IS A VALUE, AND NOTHING IS MERGED BY POSITION. When R0 and R1 agree on a collection LONGER than the record's, the record's own array stands unpadded; a key both re-derivations carry and the record does not stays ABSENT from the result. Executed: 63/63 and 63/63."
+        },
+        {
+          "id": "A4",
+          "case": "KEYED BY THE DECLARED KEY. With R1's availableServices.food permuted and one entry changed, the changed entry joins BY NAME, every other entry is byte-identical to the record's, and the order arm is COUNTED in delta.orderMoved. Executed: 31/31."
+        },
+        {
+          "id": "A5",
+          "case": "A CROSS-ENTRY TOTAL IS ATOMIC (design 22.3 item 3). economicState.incomeSources - whose shares total 100 - comes from R1 as ONE value, never entry by entry beside settled neighbours. Executed: 61/61."
+        },
+        {
+          "id": "A6",
+          "case": "THE ORDER RULE'S TWO ARMS, on economicState.activeChains - the READING collection the corpus itself re-ordered 43 of 67 times. NEVER on institutions: it is HELD, the tree merge never reaches it, and an arm written there measures 0 and proves nothing. Arm 1: R0 and R1 agree on the commons' order, so the record's order stands and delta.orderMoved is silent. Arm 2: R1 reverses them, so R1's order governs and delta.orderMoved names the collection. Executed: 55/55 and 55/55."
+        },
+        {
+          "id": "A7",
+          "case": "MIRRORS RECOMPUTED, THE RECEIPT RECOMPUTED AND NEVER TAKEN. recomputeMirrors is a no-op on a plain record; after a role change the member chip follows the merged roster. With R1 carrying a planted digest and a changed prosperity, the merged record's economyInputFingerprint is the RECOMPUTED value, never R1's (taking R1's is WRONG for the merged record in 31 of 315 measured trials). Executed: 63/63, 63/63, 63/63."
+        },
+        {
+          "id": "A8",
+          "case": "THE CHAIN IS THE SEMANTICS. An ARRAY of edits throws TypeError with the law in the message; a single edit yields delta.appliedEdit as a STRING; delta.nextBase is R1 (the next edit's R0); delta.orphaned is the op's EM-R6 rows verbatim and [] when the op has none; and the module's export list is enumerated in the assertion so NO exported symbol takes more than one edit. Executed: throws, string, true, verbatim, 5 exports enumerated."
+        }
+      ],
+      "checks": [
+        [
+          "npx",
+          "eslint",
+          "src/domain/edit/mergeConsequence.js",
+          "src/domain/edit/recordMergeTree.js",
+          "tests/domain/recordMerge.test.js"
+        ],
+        [
+          "npm",
+          "run",
+          "typecheck:ratchet"
+        ],
+        [
+          "npm",
+          "run",
+          "typecheck:domain:strict"
+        ],
+        [
+          "npx",
+          "vitest",
+          "run",
+          "--pool=threads",
+          "--maxWorkers=2",
+          "tests/domain/recordMerge.test.js"
+        ],
+        [
+          "npx",
+          "vitest",
+          "run",
+          "--pool=threads",
+          "--maxWorkers=2",
+          "tests/build/domainGeneratorsBoundary.test.js"
+        ],
+        [
+          "npx",
+          "vitest",
+          "run",
+          "--pool=threads",
+          "--maxWorkers=2",
+          "tests/property/generatorGoldenMaster.test.js",
+          "tests/property/dossierProseManifest.test.js"
+        ],
+        [
+          "node",
+          "-e",
+          "const{pathToFileURL}=require('node:url');import(pathToFileURL('vite.config.js').href).then(m=>{const S=Array.from(m.EAGER_FIRST_PAINT_MODULES);const bad=['src/domain/institutionRename.js','src/domain/institutionRemoval.js'].filter(p=>S.some(x=>String(x).includes(p)));console.log('EAGER_FIRST_PAINT_MODULES:',S.length,'| EM-R6 leaves in the eager closure:',bad.length?bad.join(', '):'NONE');if(bad.length)process.exit(1);})"
+        ],
+        [
+          "npx",
+          "vitest",
+          "run",
+          "--pool=threads",
+          "--maxWorkers=2",
+          "tests/lint/tuningRegister.walker.test.js",
+          "tests/lint/proseNumerics.test.js",
+          "tests/lint/domainAnyCastBaseline.test.js",
+          "tests/lint/ruinFilterRoster.walker.test.js",
+          "tests/lint/entropyRootCensus.walker.test.js",
+          "tests/lint/seedLoopTotality.walker.test.js"
+        ],
+        [
+          "npx",
+          "vitest",
+          "run",
+          "--pool=threads",
+          "--maxWorkers=2",
+          "tests/copy/voiceMechanics.test.js"
+        ],
+        [
+          "node",
+          "scripts/implementation-packets.mjs",
+          "validate"
+        ]
+      ],
+      "_checksNote": "NO GENERATOR is among these commands, so section P2.12's 'a generator goes LAST' rule has nothing to order and this packet declares no generated path. npm run typecheck:domain:strict runs scripts/check-domain-strict.mjs, which writes its baseline ONLY under --update; npm run typecheck:ratchet runs scripts/check-full-typecheck.mjs over tsconfig.full.json, whose include holds src/domain/**/*.js - BOTH CREATEs are governed by both configs (V11), and the strict ceiling is a HARD ZERO rather than a shrinking baseline. One test directory per vitest array. ADDED AT THE EM-T16 PRE-PROOF: the SIX governing lint walkers and the voice walker, in two arrays - each governs a directory this packet CREATEs into and each is MEASURED AT ZERO on this packet's planted text (V17-V21), so sealing them is lawful. TWO walkers are deliberately NOT sealed and run only as section 10 instruments: sovereigntyLightingContract (it reds BY DESIGN under a train) and proseWiringCensus (whose producer-count arm section 7 declares as an interior red). validate:packets stays LAST, the position 37 of the 38 landed rows that name the script take.",
+      "_pendingRequiredSymbols": {
+        "_pending": "ADDED BY THE CHAIR AT PROMOTION, once EM-R0b VERSION 8 has LANDED at train EM-T16 stage 1's flip. RE-MEASURED AT 6a0178b7b: src/domain/edit/recordInvariants.js does not exist (git ls-files -> 0), so these TWO rows - and only these two - remain pending; the other SIX are DISCHARGED into requiredSymbols above, each re-measured verbatim at its landed address. EM-R0b version 8's own section 6 spells both texts, and its STOP-11 exists to keep them byte-identical for this packet. EM-R0c.remeasure.sh carries the verbatim grep for each, for the chair to re-run at the flip.",
+        "symbols": [
+          {
+            "path": "src/domain/edit/recordInvariants.js",
+            "symbol": "export function recordInvariants",
+            "owner": "EM-R0b v8 (READY in the tree at 6a0178b7b; lands at stage 1 of train EM-T16)"
+          },
+          {
+            "path": "src/domain/edit/recordInvariants.js",
+            "symbol": "export { CHECK_META, CHECK_IDS, CROSS_KEY_CHECKS } from './recordInvariantMeta.js';",
+            "owner": "EM-R0b v8 (READY in the tree at 6a0178b7b; lands at stage 1 of train EM-T16)",
+            "_note": "NEW AT THE PRE-PROOF, and it is the DISCHARGE of the compile's STOP-4. Section 6 imports { recordInvariants, CHECK_META } from './recordInvariants.js'; EM-R0b version 3's section 7 row states in terms that it re-exports CHECK_META, CHECK_IDS and CROSS_KEY_CHECKS 'so EM-R0c's compiled import is satisfied verbatim'. The symbol text quoted here is that RE-EXPORT LINE, which is what grep -cF will find at that path; a row naming the bare token CHECK_META would not be verbatim-safe. ODQ 934.47 addendum 38."
+          }
+        ],
+        "_discharged": "The compile's _blocked note is RETIRED and STOP-4 survives only as a landing-time guard (section 8's K-gate). At the EM-T16 pre-proof SIX further rows were discharged: EM-R0a's five recordRegister.js exports and EM-R0f's economyFingerprint.js export, each verified with grep -cF at 6a0178b7b rather than promoted as written (judgment 151). EM-R0d is a dependency of EM-R0b, not of this packet, and this manifest never named a bandLadders.js symbol."
+      }
     }
   ]
 }
