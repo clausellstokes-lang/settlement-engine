@@ -128,7 +128,13 @@ import { clone, saveId, compactOutcomeForHistory, compactImpactDigest, usableTic
 // 1581 with ZERO slack, a raise is a chair-signed act (J-EP-11 bought the only one), and
 // the tick hook is owed no ratchet at all — ONE leaf, ONE shared import line, and its
 // call below shares the line the tick's world is already composed on.
-import { assertNoResidueLeak } from './residueStripGuard.js'; import { advanceTreasury, applyTreasuryLegitimacyDeltas } from './treasury.js'; import { treasuryNewsEntries } from './treasuryNews.js'; import { applyDecreesToSaves } from './decreeHook.js';
+// EM-E4b — the fork consult's three leaves join the SAME shared import line at +0
+// effective lines, for the reason the two notes above state. Two of the three are
+// ALREADY in this file's static closure (traditionsKernel through the growth chain's
+// name-swap, warSiegeVerdict through warDeployment) and the third is the directive leaf
+// decreeHook already reaches, so the edge costs the engine chunk zero bytes and the
+// generation worker's closure does not contain this file at all.
+import { assertNoResidueLeak } from './residueStripGuard.js'; import { advanceTreasury, applyTreasuryLegitimacyDeltas } from './treasury.js'; import { treasuryNewsEntries } from './treasuryNews.js'; import { applyDecreesToSaves, dueEntriesAtTick } from './decreeHook.js'; import { forkPinsFor } from '../edit/directives.js'; import { TRADITION_FORK } from './traditionsKernel.js'; import { SIEGE_FORK } from './warSiegeVerdict.js';
 
 /**
  * RESIDUE-STRIP REGISTRY (machine-enforced; replaces the old prose checklist).
@@ -339,7 +345,7 @@ export function simulateCampaignWorldPulse({ campaign, saves = [], interval = 'o
   // draws epoch-free while every later stage of the same tick draws epoch-bearing — not a
   // smaller version of the feature but its inversion. Dark, the stamp returns the identical
   // reference and no `spatialLedgers` namespace is ever created.
-  let worldState = { ...nextWorldStateForPulse(startingWorldState, campaign, tickInterval), simulationRules }; worldState = stampAdvanceEpochYear(worldState, epochTerm); const decreeTick = applyDecreesToSaves(worldState, saves, pulseIdFor(campaign?.id, worldState.tick), { now }); saves = Array.isArray(decreeTick.saves) ? decreeTick.saves : saves;
+  let worldState = { ...nextWorldStateForPulse(startingWorldState, campaign, tickInterval), simulationRules }; worldState = stampAdvanceEpochYear(worldState, epochTerm); const forkPins = forkPinsFor((Array.isArray(saves) ? saves : []).flatMap((save) => dueEntriesAtTick(worldState, save?.settlement?.decrees)), { [TRADITION_FORK.id]: TRADITION_FORK.outcomes, [SIEGE_FORK.id]: SIEGE_FORK.outcomes }); const decreeTick = applyDecreesToSaves(worldState, saves, pulseIdFor(campaign?.id, worldState.tick), { now }); saves = Array.isArray(decreeTick.saves) ? decreeTick.saves : saves;
   // ⭐ EM-E1 — THE HEAD OF THE TICK, `;`-JOINED ONTO THE LINE ABOVE AT +0 EFFECTIVE LINES
   // (design §2.6, §12.11; ARCH §6). "The pulse's head takes the pending decrees in order,
   // applies each as a cause, then runs the simulation." THE POSITION IS THE POINT and it
@@ -355,6 +361,32 @@ export function simulateCampaignWorldPulse({ campaign, saves = [], interval = 'o
   // and is handed none; `tickRef` is the record's own id, composed by the same call the
   // receipt uses below, so a cause and its record name one tick by construction.
   //
+  // ⭐ EM-E4b — THE FORK CONSULT'S ONE COMPOSING LINE, `;`-JOINED AHEAD OF THE APPLY ON THE
+  // SAME LINE AT +0 EFFECTIVE LINES (design §16; the chair's judgments 265 and 270). It folds
+  // every save's DUE pending decrees — `dueEntriesAtTick` per registry, because §2.5 puts
+  // `decrees` on the SAVED SETTLEMENT, so a campaign's tick is N registries — into ONE frozen
+  // pin bag, judged against each registered fork's OWN declared words. The two vocabularies are
+  // read from the modules that own the draws and composed HERE, which is the only place that
+  // holds both; the directive leaf takes them as an argument and imports no catalogue.
+  //
+  // ⛔ THE POSITION IS THE WHOLE CLAIM. `isDue` is pending-only by law and the apply marks
+  // every entry it applies, so this read must happen BEFORE `applyDecreesToSaves` on this same
+  // line or the bag is empty for ever after — EM-E4's case E4-10 executes exactly that, and
+  // the two readings cannot drift because both call the same `isDue` over the same three `when`
+  // classes. It writes nothing, reads no clock and takes no draw, so this file's twenty-two
+  // stage draws are untouched in count and in order (advanceEpochForkParity's own arms).
+  //
+  // ⛔ AT ZERO DUE PINS THE FOLD HANDS BACK ONE SHARED FROZEN BAG, so a world with no
+  // directive composes a bag by reference, every consult on it is a miss, and each registered
+  // fork takes its own draw exactly as it did before this member — which is why the preset
+  // lighting witness, a JSON byte golden over a simulated year, cannot move at zero pins.
+  //
+  // ⛔ WHAT THE BAG REACHES TODAY, SAID OUT LOUD RATHER THAN LEFT TO BE DISCOVERED: HBF-85,
+  // through the growth chain's own argument bag (the traditions leaf's seam). HBF-86's last hop
+  // is `warDeployment.js`'s — `evaluateWarLayer` destructures a closed arg list and spells
+  // `resolveSiegeVerdict`'s sixteen arguments by name — and that file belongs to no builder at
+  // this wave, so the siege's own consult is landed and proven in `warSiegeVerdict.js` and its
+  // pin is admitted to the bag here, waiting on two tokens there.
   // ⛔ DORMANCY IS BY REFERENCE, NOT BY EQUALITY. A world whose saves carry no `decrees`
   // key gets the SAME `saves` array back, so this line composes character-for-character
   // what it composed before EM-E1 and the preset lighting witness — a JSON byte golden
@@ -2687,7 +2719,7 @@ export function simulateCampaignWorldPulse({ campaign, saves = [], interval = 'o
   // version, `_densityLawVersion`: the product dial is held at v1, so every world it makes today reads
   // dormant here and the mover returns its inputs by reference. NO rng — the leaf takes no draw at all.
   ({ worldState: memoryState, settlementUpdates, wizardNews } = applyPulseMover(advanceNpcGrowthWithFabricAndConsequenceAndLadderAndTraditionsAndRoadsAndCommonsAndAssizeAndDensity({
-    snapshot: postTimeSnapshot, worldState: memoryState, settlementUpdates, saves,
+    snapshot: postTimeSnapshot, worldState: memoryState, settlementUpdates, saves, forkPins,
     graph: applied.regionalGraph, tick: worldState.tick, now,
   }), memoryState, settlementUpdates, wizardNews, now, newsReceiptSink));
   // W-PEACE-2 — THE PRICE OF PEACE (DESIGN_PEACE_ENGINE.md §11-15). When a war
