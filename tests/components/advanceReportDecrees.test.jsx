@@ -37,15 +37,29 @@
  *   src/components/primitives/RegenerationDeltaCard.jsx
  *   being the two surfaces those arms govern.
  */
+import { Suspense } from 'react';
 import { afterEach, describe, expect, test, vi } from 'vitest';
-import { cleanup, render, screen, within } from '@testing-library/react';
+import { cleanup, fireEvent, render, screen, within } from '@testing-library/react';
 
 const setSelectedSettlementId = vi.fn();
-const STORE = { setSelectedSettlementId };
+// ⭐ EM-D3c (U43) widened this bag by the four handles the REAL mount's siblings read off
+// the store (the letter panel's read mark, the wizard panel's saves, its chronicle append
+// and its credit write). Every one is inert here; they are present so that mounting
+// `HeraldBody` measures the report's own wiring rather than dying in a sibling.
+const STORE = {
+  setSelectedSettlementId,
+  markCampaignLettersRead: vi.fn(),
+  savedSettlements: [],
+  appendCampaignChronicle: vi.fn(),
+  setCreditBalance: vi.fn(),
+};
 vi.mock('../../src/store/index.js', () => ({ useStore: selector => selector(STORE) }));
 
 import AdvanceReport from '../../src/components/map/AdvanceReport.jsx';
+import HeraldBody from '../../src/components/map/HeraldBody.jsx';
 import { RegenerationDeltaCard } from '../../src/components/primitives/RegenerationDeltaCard.jsx';
+import { decreeChronicleLine } from '../../src/domain/display/stateProse/decreeProse.js';
+import { markApplied, stage } from '../../src/domain/edit/registry.js';
 
 afterEach(() => { cleanup(); });
 
@@ -170,6 +184,75 @@ describe('EM-E3 · the advance report at N applied decrees', () => {
     expect(rows[1].textContent).not.toMatch(/Aldermoor|Town /);
     expect(rows[1].textContent).toMatch(/set field/);
   });
+});
+
+/**
+ * ⭐ EM-D3c (U43) OWNS THIS ONE ARM. E3-2 and E3-3 above prove what the report does WITH an
+ * injected `chronicleHref` and what it does without one; neither could see that the only
+ * real mount of this report passed nothing, so every cause row the product actually renders
+ * carried no link at all. That was the measured gap, and it is a fact about `HeraldBody.jsx`
+ * rather than about the report — so it is measured on the MOUNTED report, through the door a
+ * DM opens (the Dashboard's session-prep page), and not on a hand-passed prop.
+ */
+describe('EM-D3c (U43) · the report AS MOUNTED carries the chronicle address', () => {
+  /** One applied registry entry with the id the receipt below names, built by EM-C1's verbs. */
+  function appliedEntry(decreeId) {
+    const op = Object.freeze({
+      type: 'set-field', target: Object.freeze({ kind: 'npc', id: 'npc-1' }), payload: Object.freeze({}),
+      stage: 'home', consequence: 'home', requires: Object.freeze([]), enables: Object.freeze([]),
+      relatedTo: Object.freeze([]), conflictsWith: Object.freeze([]), duration: null,
+    });
+    const staged = stage([], op, { id: decreeId, orderedAt: '2026-09-23T10:00:00.000Z' });
+    return markApplied(staged, decreeId, { appliedAt: '2026-09-23T11:00:00.000Z', tickRef: 'tick-4' })[0];
+  }
+
+  test('E3-8: the mounted report links every cause row to EM-E2 own reference for that decree', async () => {
+    // Handed in SCRAMBLED, so the order below is the report's `orderIndex` reading.
+    const causes = [cause('d-second', 1, 'seat-holder'), cause('d-first', 0, 'rename-faction')];
+    render(
+      <Suspense fallback={null}>
+        <HeraldBody
+          section="dashboard"
+          campaign={campaignWith({ decreeCauses: causes })}
+          feed={{ bySection: {}, counts: {} }}
+          nameById={new Map([['A', 'Aldermoor']])}
+          emptyHandlers={{}}
+          canManageCampaigns
+          tier="premium"
+        />
+      </Suspense>,
+    );
+    // The DM's own way in: the Dashboard's prose session-prep page is where the report
+    // lives. BOTH waits are real and BOTH are lazy leaves — the glance page must arrive
+    // before the toggle can be clicked, and turning the page suspends AGAIN on the wizard
+    // panel, which React answers by hiding the tree it already drew. The generous window is
+    // not slack: a chunk that has to be transformed competes with every other file the
+    // runner has in flight, and the default one second is a measurement of the machine
+    // rather than of this mount.
+    const CHUNK_WAIT = { timeout: 30000 };
+    fireEvent.click(await screen.findByRole('button', { name: 'Prose session-prep' }, CHUNK_WAIT));
+    const section = await screen.findByTestId('chronicle-decree-causes', undefined, CHUNK_WAIT);
+    const rows = within(section).getAllByTestId('chronicle-decree-cause');
+    expect(rows).toHaveLength(2);
+
+    // ONE DECREE, ONE PLACE. The address is not re-typed here: EM-E2's own producer is
+    // driven over an entry carrying the same decree id, and the mount's href is held equal
+    // to the reference it mints. A change to that grammar reds this arm.
+    const first = decreeChronicleLine(appliedEntry('d-first'), { name: 'Aldermoor', tier: 'town' });
+    const second = decreeChronicleLine(appliedEntry('d-second'), { name: 'Aldermoor', tier: 'town' });
+    expect([first, second].map((line) => line === null)).toEqual([false, false]);
+    expect([first.id, second.id]).toEqual(['decree:d-first', 'decree:d-second']);
+    const links = within(section).getAllByTestId('decree-chronicle-link');
+    expect(links.map((a) => a.getAttribute('href')))
+      .toEqual([`#chronicle-${first.id}`, `#chronicle-${second.id}`]);
+    expect(links.map((a) => a.textContent))
+      .toEqual(['Read its chronicle line', 'Read its chronicle line']);
+    // ⛔ ANTI-VACUITY: the two hrefs above were read off a section that really held the
+    // report, so the equality is about a mount rather than about an empty query.
+    expect(within(section).getAllByText('Aldermoor')).toHaveLength(2);
+  // The arm's own budget, generous for the same reason the two waits above are: it awaits
+  // two real chunk loads and it is the only arm in this file that mounts anything lazy.
+  }, 60000);
 });
 
 describe('EM-E3 · the regeneration card\'s field-level DM sections', () => {

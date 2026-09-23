@@ -153,7 +153,20 @@ function DashboardBody({ campaign, feed = { bySection: {} }, canManageCampaigns,
       {prose && campaign && (
         <div style={{ display: 'grid', gap: SP.md }}>
           <ChroniclersLetterPanel campaign={campaign} />
-          <AdvanceReport campaign={campaign} nameFor={nameFor} />
+          {/* EM-D3c (U43) — WHERE AN APPLIED DECREE'S CHRONICLE LINE LIVES. The report holds
+              the tick's receipt and the MOUNT owns the routing, so the address is supplied
+              here: EM-E2's own reference for a decree that recorded none (`decree:` and the
+              decree's own id) in the estate's hash-anchor form. It is the SAME address the
+              edit-mode registry page gives an applied entry — one decree, one place — and
+              the two spellings are held equal by advanceReportDecrees.test.jsx's own arm.
+              A receipt that names no decree gets no href, and so no dead link. */}
+          <AdvanceReport
+            campaign={campaign}
+            nameFor={nameFor}
+            chronicleHref={(cause) => (typeof cause?.decreeId === 'string' && cause.decreeId !== ''
+              ? `#chronicle-decree:${cause.decreeId}`
+              : null)}
+          />
           <WizardNewsPanel campaign={campaign} />
         </div>
       )}
