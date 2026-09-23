@@ -7,10 +7,10 @@
     "    npx vitest run tests/lint/tuningRegister.walker.test.js",
     "The refreeze EXITS NON-ZERO by design; the proof is a separate ordinary run."
   ],
-  "measuredAtSha": "47f2edfebb7b08a542f06e5f77969013714cb0dc",
-  "measuredBy": "chair-fable-cce01f87",
+  "measuredAtSha": "0b8df9f9049f4fa516ca44ec1ca414aa7311caf6",
+  "measuredBy": "EM-E4b builder (Claude Opus 5), session cce01f87, tests-only mode",
   "date": "2026-09-23",
-  "note": "re-stamp only (judgment 198b): the twentieth landing banked EM-R0d s win (factionDynamics.js 48 -> 38) at a commit later re-created with a corrected subject, so measuredAtSha named a retired sha; the same measurement re-taken at a branch commit; no value moved",
+  "note": "EM-E4b (0b8df9f90): the pulse kernel now imports TRADITION_FORK from traditionsKernel.js to compose the fork-pin vocabulary catalogue at the head of the tick, so src/domain/worldPulse/pulseKernel.js joins TRAD_TUNING's dependents. ONE row, ONE field: spanDigest, keys, idiom and every leaf are byte-identical, no dial moved, and the P2/P3 populations and all four totals are unchanged (237 tables, 535 named, 6975 bare, 2114 keys).",
   "schemaVersion": 1,
   "trees": {
     "p1": [
@@ -6818,7 +6818,7 @@
       "exported": false,
       "idiom": "literal",
       "keys": 24,
-      "line": 130,
+      "line": 156,
       "spanDigest": "7573ec8c010daee36df99dfe512258ea00f59260a7299272b53ebc2bcdcabf0e",
       "leaves": {
         "BASE": 0.55,
@@ -6859,6 +6859,7 @@
         "FAIR_TRADE_PULSE": 1
       },
       "dependents": [
+        "src/domain/worldPulse/pulseKernel.js",
         "src/domain/worldPulse/roadsKernel.js"
       ],
       "namedDependents": []
