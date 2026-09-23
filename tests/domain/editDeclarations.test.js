@@ -162,6 +162,7 @@ function shapeOffenders(rows) {
       if (row.kind === 'free') offenders.push(`${at(row)}: no root row is kind 'free'`);
       if (!nonBlank(row.outputKey)) offenders.push(`${at(row)}: a root row carries a non-blank outputKey`);
       if (Object.hasOwn(row, 'tier1')) offenders.push(`${at(row)}: tier1 is the world-fact join and is absent on a root row`);
+      if (Object.hasOwn(row, 'inputKey')) offenders.push(`${at(row)}: inputKey is the world-fact ENGINE key and is absent on a root row`);
       if (Object.hasOwn(row, 'readersProof')) offenders.push(`${at(row)}: readersProof is absent on a root row`);
     }
     if (row.provenance === 'world-fact') {
@@ -169,6 +170,13 @@ function shapeOffenders(rows) {
       if (!nonBlank(row.outputKey)) offenders.push(`${at(row)}: a world-fact row carries a non-blank outputKey`);
       if (hasWriter || hasCreatedBy) offenders.push(`${at(row)}: writer and createdBy are both absent on a world-fact row`);
       if (!row.tier1 || !nonBlank(row.tier1.step) || !nonBlank(row.tier1.key)) offenders.push(`${at(row)}: a world-fact row carries tier1 as a non-blank { step, key }`);
+      // ⭐ EM-B2b's THIRD WORD (judgment 241 ruling 2). `outputKey` says where the value LANDS and
+      // `tier1` names the ctx key; NEITHER is the key the engine READS, and for terrain the three
+      // are three different words. The cell is here and not only in the walker because this
+      // predicate carries NO unknown-key check — it never enumerates a row's own keys — so an
+      // undeclared inputKey would pass silently and this file's own "which keys a row carries is a
+      // contract, not a convenience" claim would go false.
+      if (!nonBlank(row.inputKey)) offenders.push(`${at(row)}: a world-fact row carries a non-blank inputKey, the config key the ENGINE reads`);
       if (Object.hasOwn(row, 'readersProof')) offenders.push(`${at(row)}: readersProof is absent on a world-fact row`);
     }
     if (row.provenance === 'annotation') {
@@ -176,6 +184,7 @@ function shapeOffenders(rows) {
       if (Object.hasOwn(row, 'outputKey')) offenders.push(`${at(row)}: an annotation row carries no outputKey, and the absence IS the claim that nothing on the record reads it`);
       if (hasWriter || hasCreatedBy) offenders.push(`${at(row)}: writer and createdBy are both absent on an annotation row`);
       if (Object.hasOwn(row, 'tier1')) offenders.push(`${at(row)}: tier1 is absent on an annotation row`);
+      if (Object.hasOwn(row, 'inputKey')) offenders.push(`${at(row)}: inputKey is absent on an annotation row`);
       if (!nonBlank(row.readersProof)) offenders.push(`${at(row)}: an annotation row carries a non-blank readersProof`);
     }
 
@@ -432,6 +441,27 @@ describe('EM-A1 — the field declarations, their shape law and their existence 
     const plantedAnnotation = ALL_ROWS.map((row) => (row === annotationRow ? { ...row, outputKey: 'institutions[].note' } : row));
     expect(shapeOffenders(plantedAnnotation)).toEqual([
       'institution.note: an annotation row carries no outputKey, and the absence IS the claim that nothing on the record reads it',
+    ]);
+
+    // ⭐ EM-B2b's THREE inputKey CELLS, and their plant, through the SAME predicate. The
+    // population is asserted non-empty first, exactly as tier1's own cells are, or the three
+    // cells below would be green on nothing.
+    const worldFactRows = ALL_ROWS.filter((row) => row.provenance === 'world-fact');
+    expect(worldFactRows.length, 'no world-fact row exists, so the inputKey cells have no subject').toBe(5);
+    expect(
+      worldFactRows.filter((row) => typeof row.inputKey !== 'string' || row.inputKey.trim().length === 0),
+      'every world-fact row declares the config key the ENGINE reads',
+    ).toEqual([]);
+
+    // The plant: a world-fact row STRIPPED of its inputKey. Without this cell the predicate has no
+    // unknown-key check to fall back on, so the row would pass silently and `config′` would be
+    // keyed by nothing.
+    const terrainRow = worldFactRows.find((row) => row.field === 'terrain');
+    const plantedInputKey = ALL_ROWS.map((row) => (row === terrainRow
+      ? Object.fromEntries(Object.entries(row).filter(([key]) => key !== 'inputKey'))
+      : row));
+    expect(shapeOffenders(plantedInputKey)).toEqual([
+      'worldFact.terrain: a world-fact row carries a non-blank inputKey, the config key the ENGINE reads',
     ]);
   });
 

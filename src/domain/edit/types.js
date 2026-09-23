@@ -38,14 +38,22 @@
  * Which optional keys are present is NOT free: §6.2's absence table binds them by
  * provenance, and `tests/domain/editDeclarations.test.js` asserts every cell of it over
  * the whole table. In short — a root row carries exactly one of `writer` / `createdBy`
- * and no `tier1`; a world-fact row carries `tier1` and neither writer key; an annotation
- * row carries `readersProof` and no `outputKey` at all, and that absence IS the claim
- * that nothing on the record reads it.
+ * and no `tier1`; a world-fact row carries `tier1` AND `inputKey` and neither writer key;
+ * an annotation row carries `readersProof` and no `outputKey` at all, and that absence IS
+ * the claim that nothing on the record reads it.
+ *
+ * ⭐ `inputKey` IS THE ENGINE'S OWN CONFIG KEY, and it is a THIRD word from the two the
+ * row already carries (EM-B2b, the chair's judgment 241 ruling 2). `outputKey` says where
+ * the value LANDS on the record and `tier1` names the ctx key; for terrain the engine
+ * READS `config.terrainOverride` while the value lands at `config.terrainType`, so a
+ * re-derivation keyed by either of the other two moves nothing. It is declared here and
+ * joined to its producing step by `tests/lint/editDeclarations.walker.test.js`, never held
+ * privately by a reader.
  *
  * @typedef {{ card: 'institution'|'npc'|'faction'|'powerSeat'|'worldFact', field: string,
  *   kind: FieldKind, provenance: FieldProvenance, label: string, group: string,
  *   outputKey?: string, pool?: string, maxLength?: number, readersProof?: string,
- *   writer?: string, createdBy?: string,
+ *   writer?: string, createdBy?: string, inputKey?: string,
  *   tier1?: { step: string, key: string } }} FieldDeclaration
  */
 

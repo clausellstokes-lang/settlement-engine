@@ -16,7 +16,11 @@
  *   root        exactly one of `writer` / `createdBy`; `outputKey`; never `tier1`,
  *               never `readersProof`, never kind 'free'
  *   world-fact  kind is always 'pool'; `tier1` names the Tier-1 (step, key) pair that
- *               HOLDS the fact on the record; neither writer key
+ *               HOLDS the fact on the record; `inputKey` names the config key the ENGINE
+ *               READS, which is a THIRD word from the other two — terrain lands at
+ *               `config.terrainType` and is read from `config.terrainOverride`, so a
+ *               re-derivation keyed by `outputKey` or by the field name moves nothing;
+ *               neither writer key
  *   annotation  kind is always 'free'; `readersProof`; and NO `outputKey` at all,
  *               because the absence IS the claim that nothing on the record reads it
  * `pool` is present iff the kind is 'pool'; `maxLength` iff the kind is 'free-cascade'
@@ -111,11 +115,11 @@ export const FIELD_DECLARATIONS = Object.freeze({
     { card: 'powerSeat', field: 'holder', kind: 'pool', provenance: 'root', label: 'Governing seat', group: 'standing', outputKey: 'powerStructure.governingName', pool: 'power.holder', writer: 'src/generators/steps/generatePower.js#generatePower' },
   ]),
   worldFact: frozenCard([
-    { card: 'worldFact', field: 'terrain', kind: 'pool', provenance: 'world-fact', label: 'Terrain', group: 'world', outputKey: 'config.terrainType', pool: 'worldFact.terrain', tier1: { step: 'resolveConfig', key: 'terrainType' } },
-    { card: 'worldFact', field: 'culture', kind: 'pool', provenance: 'world-fact', label: 'Culture', group: 'world', outputKey: 'config.culture', pool: 'worldFact.culture', tier1: { step: 'resolveConfig', key: 'culture' } },
-    { card: 'worldFact', field: 'monsterThreat', kind: 'pool', provenance: 'world-fact', label: 'Monster threat', group: 'world', outputKey: 'config.monsterThreat', pool: 'worldFact.monsterThreat', tier1: { step: 'resolveConfig', key: 'effectiveConfig' } },
-    { card: 'worldFact', field: 'stressors', kind: 'pool', provenance: 'world-fact', label: 'Stressors', group: 'world', outputKey: 'config.stressTypes', pool: 'worldFact.stressors', tier1: { step: 'resolveStress', key: 'stressTypes' } },
-    { card: 'worldFact', field: 'resources', kind: 'pool', provenance: 'world-fact', label: 'Nearby resources', group: 'world', outputKey: 'config.nearbyResources', pool: 'worldFact.resources', tier1: { step: 'resolveResources', key: 'nearbyResources' } },
+    { card: 'worldFact', field: 'terrain', kind: 'pool', provenance: 'world-fact', label: 'Terrain', group: 'world', outputKey: 'config.terrainType', inputKey: 'terrainOverride', pool: 'worldFact.terrain', tier1: { step: 'resolveConfig', key: 'terrainType' } },
+    { card: 'worldFact', field: 'culture', kind: 'pool', provenance: 'world-fact', label: 'Culture', group: 'world', outputKey: 'config.culture', inputKey: 'culture', pool: 'worldFact.culture', tier1: { step: 'resolveConfig', key: 'culture' } },
+    { card: 'worldFact', field: 'monsterThreat', kind: 'pool', provenance: 'world-fact', label: 'Monster threat', group: 'world', outputKey: 'config.monsterThreat', inputKey: 'monsterThreat', pool: 'worldFact.monsterThreat', tier1: { step: 'resolveConfig', key: 'effectiveConfig' } },
+    { card: 'worldFact', field: 'stressors', kind: 'pool', provenance: 'world-fact', label: 'Stressors', group: 'world', outputKey: 'config.stressTypes', inputKey: 'stressTypes', pool: 'worldFact.stressors', tier1: { step: 'resolveStress', key: 'stressTypes' } },
+    { card: 'worldFact', field: 'resources', kind: 'pool', provenance: 'world-fact', label: 'Nearby resources', group: 'world', outputKey: 'config.nearbyResources', inputKey: 'nearbyResources', pool: 'worldFact.resources', tier1: { step: 'resolveResources', key: 'nearbyResources' } },
   ]),
 });
 
