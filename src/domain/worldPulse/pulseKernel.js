@@ -123,7 +123,12 @@ import { clone, saveId, compactOutcomeForHistory, compactImpactDigest, usableTic
 // ratchet-up in its history (J-EP-11, 1580 -> 1581) was chair-signed for exactly one
 // import line. W-COIN takes no such ratchet: the import shares a physical line and the
 // call below shares one with the statement it already stood beside.
-import { assertNoResidueLeak } from './residueStripGuard.js'; import { advanceTreasury, applyTreasuryLegitimacyDeltas } from './treasury.js'; import { treasuryNewsEntries } from './treasuryNews.js';
+// EM-E1 — the decree hook's leaf is `;`-joined onto this same line at +0 effective
+// lines, for the reason W-COIN's note above states: this file is BANKED PERMANENTLY at
+// 1581 with ZERO slack, a raise is a chair-signed act (J-EP-11 bought the only one), and
+// the tick hook is owed no ratchet at all — ONE leaf, ONE shared import line, and its
+// call below shares the line the tick's world is already composed on.
+import { assertNoResidueLeak } from './residueStripGuard.js'; import { advanceTreasury, applyTreasuryLegitimacyDeltas } from './treasury.js'; import { treasuryNewsEntries } from './treasuryNews.js'; import { applyDecreesToSaves } from './decreeHook.js';
 
 /**
  * RESIDUE-STRIP REGISTRY (machine-enforced; replaces the old prose checklist).
@@ -334,7 +339,27 @@ export function simulateCampaignWorldPulse({ campaign, saves = [], interval = 'o
   // draws epoch-free while every later stage of the same tick draws epoch-bearing — not a
   // smaller version of the feature but its inversion. Dark, the stamp returns the identical
   // reference and no `spatialLedgers` namespace is ever created.
-  let worldState = { ...nextWorldStateForPulse(startingWorldState, campaign, tickInterval), simulationRules }; worldState = stampAdvanceEpochYear(worldState, epochTerm);
+  let worldState = { ...nextWorldStateForPulse(startingWorldState, campaign, tickInterval), simulationRules }; worldState = stampAdvanceEpochYear(worldState, epochTerm); const decreeTick = applyDecreesToSaves(worldState, saves, pulseIdFor(campaign?.id, worldState.tick), { now }); saves = Array.isArray(decreeTick.saves) ? decreeTick.saves : saves;
+  // ⭐ EM-E1 — THE HEAD OF THE TICK, `;`-JOINED ONTO THE LINE ABOVE AT +0 EFFECTIVE LINES
+  // (design §2.6, §12.11; ARCH §6). "The pulse's head takes the pending decrees in order,
+  // applies each as a cause, then runs the simulation." THE POSITION IS THE POINT and it
+  // is the earliest one that exists: the tick's world is composed on the line above and
+  // nothing has been read from it yet, so the decrees are the FIRST causes of the tick —
+  // ahead of the hold-then-expire pass, ahead of the first snapshot, and ahead of every
+  // draw (the first is the actor_memory stage's npc-state fork). ⛔ THAT FORK IS NAMED IN
+  // WORDS AND NOT IN ITS OWN SPELLING ON PURPOSE: tests/domain/advanceEpochForkParity.test.js
+  // counts `rng` + `.fork(` over this file's RAW SOURCE, comments included, and pins the
+  // total at 22 — so writing the call form in a comment mints a twenty-third fork site
+  // that does not exist and reds an instrument whose own header forbids re-deriving the
+  // number to make a file pass. The hook takes NO stream
+  // and is handed none; `tickRef` is the record's own id, composed by the same call the
+  // receipt uses below, so a cause and its record name one tick by construction.
+  //
+  // ⛔ DORMANCY IS BY REFERENCE, NOT BY EQUALITY. A world whose saves carry no `decrees`
+  // key gets the SAME `saves` array back, so this line composes character-for-character
+  // what it composed before EM-E1 and the preset lighting witness — a JSON byte golden
+  // over a simulated year — cannot move at zero decrees. The `Array.isArray` narrowing is
+  // the type floor's, not a defence: the hook returns what it was handed.
   // M10a — CL-3 HOLD-THEN-EXPIRE: retire any actor-initiated-major proposal (a held
   // war declaration / coup) that has waited ACTOR_MAJOR_HOLD_WEEKS with no DM word —
   // the actor stands down (expire-to-decline). Byte-invisible for legacy/default
@@ -1871,7 +1896,12 @@ export function simulateCampaignWorldPulse({ campaign, saves = [], interval = 'o
       })),
     } : {}),
     ...(warAuthorityVerdicts.length ? { warAuthorityVerdicts } : {}),
-    ...(warTermination?.receipts.length ? { warTerminationReads: warTermination.receipts } : {}),
+    // EM-E1's receipt is `;`-joined onto the war-termination row at +0 effective lines and
+    // is LAST in the literal on purpose: an ABSENT-SHAPE key (the idiom five rows of this
+    // record already use) appended at the end cannot move one byte of a record composed on
+    // a world with no due decree, which is exactly what design §12.11 requires of the
+    // preset witness. The causes are the tick's own, in the order the head applied them.
+    ...(warTermination?.receipts.length ? { warTerminationReads: warTermination.receipts } : {}), ...(decreeTick.causes.length ? { decreeCauses: decreeTick.causes } : {}),
   };
   // Realm-scope arcs: promote stressors shared across many settlements into
   // named realm-wide Wizard News ("The Great Hunger", "The War"), plus the
