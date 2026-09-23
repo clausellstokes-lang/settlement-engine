@@ -1,6 +1,6 @@
 # Settlement editor / EM-R1c — THE NESTED-RECORDPATH BAG BUILDER AND THE RULED ENTITY JOIN: a chooser is read AT THE RECORD PATH THE REGISTER NAMES, and the DM's value lands at the DECLARED RECORD PATH OF THE NAMED ENTITY
 
-- **Status:** `READY`
+- **Status:** `LANDED`
   Compiled under the chair's judgment 233 (a–d), which ruled this member's two units, the dragged
   `stress` and the shape, and judgment 237 R1, whose three faction fields §0.6 folds in and §9
   asserts at the VALUE. ⛔ ONE instruction of judgment 237 IS REFUTED BY MEASUREMENT and is owed
@@ -9,6 +9,7 @@
   the corpus (unit 1 alone moves a refusal reason and lights nothing; unit 2 alone is unreachable
   behind unit 1) — measured, §0.3.
 - **Owner:** the chair (Fable 5.1, session cce01f87) · compiled by an Opus COMPILE seat, 2026-09-23
+- **Landed at:** `e26525629b9719b22db65efca0a97a462b7e7403` — the nested-recordPath bag builder (version 4): pinsFrom's read keyed on GENERATION_TIER1's recordPath through the injected channel (fourteen keys); the DM's value at the named entity's declared leaf (§22.4's join) — the institution card lights 63/63, the faction card's silent misreport removed (233/237/238); built at e26525629 on train EM-T17
 - **Packet version:** `4`
   version 4 = version 3 with the type-floor cure’s rewrite of one pinned line retired
   (judgment 253) and §6 re-cut to the built text (judgment 248). The BUILD lane measured the
