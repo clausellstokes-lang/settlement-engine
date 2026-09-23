@@ -629,6 +629,31 @@ export default function SettlementsPanel({ onNavigate, routeId }) {
    * The query, the sort's chips and the campaign context are deliberately NOT applied
    * here: a denominator that moved with the filters would make "N of M" read "M of M"
    * forever, and the numerator (`filteredSaves`) is the one that answers the chips.
+   *
+   * ⛔ U50 — AND THE RENDER BELOW ASKS THE SAME QUESTION SIX TIMES, so it reads the same
+   * answer six times. Every `saves.length` in the returned tree was a reader of "how much
+   * library is there", and each one was answering over rows the viewer cannot reach:
+   *
+   *   • THE EMPTY-SHELF SENTENCE (its gate AND its count). A library holding NOTHING BUT
+   *     phantoms used to render "No settlements match your search or filters … clear the
+   *     active filters to see all 1" — over a shelf with no filter on and nothing to
+   *     clear. Curing only the count would have produced "see all 0", which is a worse
+   *     sentence, so the gate moves with it.
+   *   • THE FIRST-RUN GATE. Once the sentence's gate reads the shelf, a phantom-only
+   *     library falls past it — and would land on the card region with no cards, a blank
+   *     panel. Read off the shelf, that library IS empty, so it gets the SAMPLE DASHBOARD
+   *     an empty library has always got. This is the same reading EM-F1b already made of
+   *     the quota (`activeSaveCount`): a phantom is the estate's row, not the user's.
+   *   • THE TOOLBAR'S OWN GATE and the bulk bar's, for the same reason: a search box over
+   *     an empty shelf offering to "Search 0 settlements…" is the blank panel again.
+   *   • THE MINIMAL FACE. `minimal` keyed on the RAW length, so four real saves and two
+   *     phantoms drew the full six-control toolbar over a four-town shelf. THE THRESHOLD
+   *     VALUE (5) IS THE OWNER'S AND IS UNTOUCHED (legibility wave, 2026-07-22) — only
+   *     the count it is compared against moved.
+   *
+   * `filteredSaves` stays the numerator, and the two library WRITERS
+   * (`createLibraryDeleteHandlers`, `createLibraryBatchPersister`) keep the raw array, as
+   * U23 left them: they persist against the WHOLE library, phantoms included.
    */
   const shelfSaves = useMemo(() => _applyLibraryFilters(saves), [saves]);
 
@@ -735,19 +760,21 @@ export default function SettlementsPanel({ onNavigate, routeId }) {
           (SP.xl) lives here: the toolbar opens the GM's own content region, so
           the funnel cluster above (header + meter) reads as a separate, lighter
           band and the town list survives the squint as the dominant layer. */}
-      {saves.length > 0 && (
+      {shelfSaves.length > 0 && (
         <div style={{ marginTop:SP.xl }}><LibraryToolbar
           query={libraryQuery} setQuery={setLibraryQuery}
           sort={librarySort} setSort={setLibrarySort}
           filters={libraryFilters} setFilters={setLibraryFilters}
           totalCount={shelfSaves.length} visibleCount={filteredSaves.length}
-          minimal={saves.length < 5}
+          // The THRESHOLD (5) is the owner's and is unchanged; only the count it reads is
+          // the shelf's now, so a phantom cannot draw the full face over a small library.
+          minimal={shelfSaves.length < 5}
           selectMode={selectMode} onToggleSelectMode={bulk.toggleMode}
         /></div>
       )}
 
       {/* Bulk multi-select action bar + its delete confirm (W4a). */}
-      {selectMode && saves.length > 0 && (
+      {selectMode && shelfSaves.length > 0 && (
         <BulkActionBar bulk={bulk} campaigns={activeCampaigns} canManageCampaigns={canManageCampaigns} />
       )}
 
@@ -787,7 +814,7 @@ export default function SettlementsPanel({ onNavigate, routeId }) {
             <div key={i} aria-hidden="true" style={{ height:76, background:PARCH, border:`1px solid ${BORDER}`, borderLeft:`3px solid ${BORDER}` }} />
           ))}
         </div>
-      ) : (saves.length === 0 && campaigns.length === 0) ? (
+      ) : (shelfSaves.length === 0 && campaigns.length === 0) ? (
         // Tier 8.2 — show sample dossiers instead of a bare empty state.
         // Eliminates the "you have nothing — go figure it out" first run.
         // Gated on campaigns too: a campaign-first user (campaigns made before
@@ -799,14 +826,14 @@ export default function SettlementsPanel({ onNavigate, routeId }) {
           <RefusalNotice refusal={lastRefusal} style={{ marginBottom: SP.md }} />
           <SampleDashboard onFork={forkSample} forkingId={forkingId} tier={authTier} />
         </div>
-      ) : (filteredSaves.length === 0 && saves.length > 0) ? (
+      ) : (filteredSaves.length === 0 && shelfSaves.length > 0) ? (
         // The library has saves, but none survive the active search/filters.
         // Offer a recovery CTA rather than a silent dead-end (no inert list).
         // Flat PARCH placeholder surface — distinct from the CARD-filled real
         // cards so the surface itself carries the elevation difference.
         <div style={{ padding:'28px 16px', textAlign:'center', background:PARCH, display:'flex', flexDirection:'column', alignItems:'center', gap:SP.sm }}>
           <h2 style={{ margin:0, fontFamily:serif_, fontSize:FS.lg, fontWeight:600, color:INK }}>No settlements match your search or filters</h2>
-          <div style={{ maxWidth:PROSE_MAX, fontFamily:sans, fontSize:FS.sm, color:BODY }}>Try a broader term, or clear the active filters to see all {saves.length} saved settlement{saves.length === 1 ? '' : 's'}.</div>
+          <div style={{ maxWidth:PROSE_MAX, fontFamily:sans, fontSize:FS.sm, color:BODY }}>Try a broader term, or clear the active filters to see all {shelfSaves.length} saved settlement{shelfSaves.length === 1 ? '' : 's'}.</div>
           <Button variant="secondary" size="sm" onClick={() => { setLibraryQuery(''); setLibraryFilters({}); }}>Clear filters</Button>
         </div>
       ) : (
