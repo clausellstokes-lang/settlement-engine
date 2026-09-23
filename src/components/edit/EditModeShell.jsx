@@ -63,7 +63,20 @@
  * request is re-shaped on the way: the page hands `commitRegistry` its own `{saveId,
  * entryId, ...}` and this file passes the landed action through.
  *
- * ⛔ THREE OF THE PAGE'S SEAMS ARE HANDED NOTHING, AND EACH ABSENCE IS A MEASUREMENT.
+ * ⛔ FOUR OF THE PAGE'S SEAMS ARE HANDED NOTHING, AND EACH ABSENCE IS A MEASUREMENT.
+ *   · `inCampaign` — a UI module the unarmed app graph reaches may name NO runtime-gated
+ *     campaign action (`tests/store/campaignRuntimeCallerCoverage.test.js`, whose two
+ *     census arms derive the campaignLazy boundaries rather than listing them). This leaf
+ *     is mounted from `src/App.jsx` OUTSIDE every one of those boundaries, so asking the
+ *     store `isSettlementClockBound` — a `CAMPAIGN_CORE_ACTIONS` delegate — would arm the
+ *     campaign runtime behind a surface that has no business arming it. The walker's own
+ *     law offers two cures and this mount can take neither: the fact is not on a prop,
+ *     because the edit register is not the campaign surface and the shell takes no props;
+ *     and a boundary of its own is the walker's to bless, not a member's to mint.
+ *     Re-deriving the membership from raw state instead would be a SECOND HOME for a rule
+ *     the store owns, which is the drift class `campaignSliceShared.js`'s own header
+ *     exists to close. So the page is told nothing and draws the estate's existing rung,
+ *     which is the branch it already carries.
  *   · `advanceControl` — the realm owns the Advance control (`WorldMapToolbar.jsx`'s
  *     `handleAdvanceRealm`, drawn only while a campaign is active) and this leaf is the
  *     dossier's. Minting a second one here would be a second advance path; reaching the
@@ -404,11 +417,6 @@ export default function EditModeShell() {
   const saveId = useStore((state) => state.activeSaveId);
   const decrees = useStore((state) => selectDecrees(state));
   const verdict = useStore((state) => selectGuards(state));
-  // ⛔ IS THIS SETTLEMENT IN THE REALM? The estate answers that with ONE predicate, and this
-  // is its second reader: `isSettlementClockBound` is what `SettlementDossierHero` asks
-  // before it offers the gold "Send it to the Realm" rung, so the page suppresses the rung
-  // on exactly the settlements the dossier already stops offering it to.
-  const clockBound = useStore((state) => state.isSettlementClockBound);
   /** @type {[{cardType: string, subject: CardSubject, create: boolean}|null, Function]} */
   const [open, setOpen] = useState(null);
 
@@ -610,7 +618,6 @@ export default function EditModeShell() {
         saveId={String(saveId ?? '')}
         decrees={decrees}
         verdict={verdict}
-        inCampaign={!!(saveId && typeof clockBound === 'function' && clockBound(saveId))}
         actions={decreeActions}
         chronicleHref={chronicleHrefFor}
         onReopen={reopenEntry}
