@@ -43,6 +43,7 @@ import { cleanup, fireEvent, render } from '@testing-library/react';
 
 import DecreeRegistryPage, {
   AUTHOR_LABELS,
+  COUNTERPARTY_BADGE_LABELS,
   GUARD_KIND_LABELS,
   GUARD_OFFER_LABELS,
   REGISTRY_ACTION_NAMES,
@@ -52,6 +53,7 @@ import {
   DECREE_AUTHORS, DECREE_STATUSES, markApplied, stage, withdraw,
 } from '../../src/domain/edit/registry.js';
 import { GUARD_KINDS, GUARD_OFFERS } from '../../src/domain/edit/guards.js';
+import { COUNTERPARTY_BADGES } from '../../src/domain/edit/phantoms.js';
 import { DECREE_ACTIONS, reorderDecree, selectGuards, withdrawDecree } from '../../src/store/editSlice.js';
 import { PULSE_UNDO_CAP } from '../../src/store/campaignAdvanceSession.js';
 import { t } from '../../src/copy/index.js';
@@ -397,6 +399,49 @@ describe('EM-D3: the registry page at the dossier foot', () => {
     // measurement rather than a promise.
     expect(importersIn(join(ROOT, 'src'))).toEqual(['src/components/edit/EditModeShell.jsx']);
     expect(importersOfSource("import X from './DecreeRegistryPage.jsx';")).toBe(true);
+  });
+
+  it('A11 the reality badge vocabulary is the resolver own in both directions, and an answer it has no words for draws nothing', () => {
+    // EM-F1e, design §13. The words are this page's, the VOCABULARY is the resolver's: the
+    // pin lives here rather than in the leaf because A10 above holds the page's static
+    // imports at exactly four, which is the same reason `AUTHOR_LABELS` spells its keys.
+    const set = (rows) => [...rows].sort();
+    expect(set(Object.keys(COUNTERPARTY_BADGE_LABELS))).toEqual(set(COUNTERPARTY_BADGES));
+    expect(Object.values(COUNTERPARTY_BADGE_LABELS).map((word) => typeof word === 'string' && word.length > 0))
+      .toEqual(COUNTERPARTY_BADGES.map(() => true));
+    // Each word is WORDS, never the badge key handed back as its own label.
+    expect(Object.entries(COUNTERPARTY_BADGE_LABELS).map(([key, word]) => key === word))
+      .toEqual(COUNTERPARTY_BADGES.map(() => false));
+
+    // TOLD A BADGE, THE PAGE DRAWS IT on the entry the reader answered for — and the reader
+    // is asked with the ENTRY itself, once per rendered row, rather than with an id this page
+    // invented out of one.
+    const asked = [];
+    const { container } = render(pageOf({
+      badgeFor: (entry) => {
+        asked.push(entry.id);
+        return entry.id === 'd_alpha' ? COUNTERPARTY_BADGES[0] : null;
+      },
+    }));
+    const badge = rowFor(container, 'd_alpha').querySelector('[data-testid="decree-entry-reality"]');
+    expect(badge.getAttribute('data-badge')).toBe(COUNTERPARTY_BADGES[0]);
+    expect(badge.textContent).toBe(COUNTERPARTY_BADGE_LABELS[COUNTERPARTY_BADGES[0]]);
+    expect(set(asked)).toEqual(set(REGISTRY.map((row) => row.id)));
+    expect(nodes(container, 'decree-entry-reality').length).toBe(1);
+
+    // AN ANSWER THE PAGE HAS NO LABEL FOR DRAWS NOTHING, so a resolver that learned a third
+    // badge can never put an unlabelled string in front of a DM.
+    cleanup();
+    const strange = render(pageOf({ badgeFor: () => 'SPECTRAL' })).container;
+    expect(nodes(strange, 'decree-entry').length).toBe(REGISTRY.length);
+    expect(nodes(strange, 'decree-entry-reality').length).toBe(0);
+
+    // TOLD NOTHING AT ALL, THE SAME: measured beside the rows that ARE drawn, so the absence
+    // is a reading of the seam rather than of an empty page.
+    cleanup();
+    const untold = render(pageOf({})).container;
+    expect(nodes(untold, 'decree-entry').length).toBe(REGISTRY.length);
+    expect(nodes(untold, 'decree-entry-reality').length).toBe(0);
   });
 });
 

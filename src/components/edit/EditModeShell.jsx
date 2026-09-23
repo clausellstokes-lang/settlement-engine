@@ -164,7 +164,7 @@ import {
   selectDecrees, selectEditorMode, selectGuards, stageAddDecreeIntent, takeGuardOffer,
 } from '../../store/editSlice.js';
 import { useStore } from '../../store/index.js';
-import { counterpartiesOf, mintPhantomIntent } from '../../store/phantomMintAction.js';
+import { counterpartiesOf, counterpartyBadgeOf, mintPhantomIntent } from '../../store/phantomMintAction.js';
 import { PULSE_UNDO_CAP } from '../../store/pulseUndoCap.js';
 import { raisedHere, REFUSAL_SURFACES } from '../../lib/refusalReasons.js';
 import { ClerkNote } from '../generate/ClerkNote.jsx';
@@ -689,6 +689,17 @@ export default function EditModeShell() {
   const derived = CARD_REGISTER.filter((cardType) => Object.hasOwn(DERIVED_SOURCE, cardType));
   const openRows = open === null ? declarationsFor('') : declarationsFor(open.cardType);
 
+  // ⛔ THE REGISTRY'S REALITY BADGE IS A READER, BOUND HERE AND RESOLVED IN THE STORE LEAF
+  // (design §13 "Reality is shown"; the verifier's FIX-6). The question needs the LIBRARY —
+  // `badgeFor` answers REAL only for a save row — and the page holds none and may import none
+  // (ARCH §28). This mount holds the library already, so it hands the page an answer rather
+  // than a source, exactly as it hands `chronicleHref` one. The resolution itself is NOT
+  // written here: this file's `src/domain/edit/*` edge set is pinned at the declaration table
+  // alone (editShellPlusDoor D5) and the phantom leaf's importer roster is pinned exact
+  // (phantoms A12), both MEASURED red against a direct edge, so the reading comes through the
+  // one store function this mount already binds for the roster beside it.
+  const badgeForEntry = (entry) => counterpartyBadgeOf(saved, entry);
+
   return (
     <section aria-labelledby={headingId} style={frame}>
       <h2 id={headingId} style={rubric}>{t('edit.shell.title')}</h2>
@@ -736,6 +747,7 @@ export default function EditModeShell() {
         onReopen={reopenEntry}
         onGuardOffer={guardOffer}
         rewindLimit={PULSE_UNDO_CAP}
+        badgeFor={badgeForEntry}
       />
 
       <Button variant="primary" size="sm" onClick={leaveMode}>{t('edit.shell.done')}</Button>

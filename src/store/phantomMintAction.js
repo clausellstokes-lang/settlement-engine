@@ -68,7 +68,7 @@
 
 import { mintDmId } from '../domain/edit/dmLayer.js';
 import {
-  PHANTOM_KIND, PHANTOM_TRAIT_POOLS, isPhantomSave, mintPhantom,
+  PHANTOM_KIND, PHANTOM_TRAIT_POOLS, applyOffStage, badgeFor, isPhantomSave, mintPhantom,
 } from '../domain/edit/phantoms.js';
 import { poolValues, rollFrom } from '../domain/edit/pools.js';
 import { effectiveNeighboursOf } from '../domain/relationships/effectiveNeighbours.js';
@@ -156,6 +156,48 @@ export function counterpartiesOf(settlement, saveRows) {
     out.push(Object.freeze({ id: String(row.id), name, offStage: true }));
   }
   return Object.freeze(out);
+}
+
+/**
+ * ⭐ THE REGISTRY'S REALITY READING, AS THE SHELL BINDS IT (design §13 "Reality is shown";
+ * the verifier's FIX-6). One registry entry in, one badge or nothing out.
+ *
+ * ⛔ IT LIVES HERE BECAUSE BOTH HALVES OF THE QUESTION DO, AND BECAUSE TWO LANDED ARMS SAY
+ * SO. `badgeFor` answers REAL only for a SAVE ROW — its `isRealCounterparty` reads
+ * `target.settlement` — so the reading needs the library, which the registry page may not
+ * have (it imports nothing from `src/store`, ARCH §28) and which the edit shell holds but
+ * may not ask this leaf for directly: `tests/components/editShellPlusDoor.test.jsx` D5 pins
+ * the shell's `src/domain/edit/*` edge set at the declaration table ALONE, and
+ * `tests/domain/phantoms.test.js` A12 pins that leaf's importer roster EXACT in both
+ * directions with this file as its third row. Both were MEASURED red against a direct shell
+ * edge before this shape was chosen. So the shell binds this function and passes the answer
+ * down, exactly as EM-D1 bound the writer and as A12's own third row prescribes.
+ *
+ * ⛔ THE OP'S OWN PREDICATE IS THE DOMAIN'S, NEVER RE-SPELLED HERE. `applyOffStage` asked
+ * with NO target answers `record: null` unless the op is one the off-stage resolver speaks
+ * for, and its `record.counterparty` is the name IT reads out of the op — so neither the
+ * policy word `by-target-reality` nor the payload's `counterparty` field is spelled a
+ * second time in this file, in the shell or in the page. Every home act answers null and
+ * the page draws nothing for it.
+ *
+ * ⛔ THE COUNTERPARTY IS RESOLVED BY THE ID THE RECORD HOLDS, WHICH IS THE ROW'S KEY ON
+ * BOTH BACKENDS (EM-F3c). The local backend takes the mint's `dm:phantom:<hex>` id as the
+ * row key; the cloud backend mints its own uuid and EM-F3c writes THAT key back onto the
+ * record inside the row, so `row.id` and `row.settlement.id` agree either way and one
+ * lookup serves both. `counterpartiesOf` above already hands the roster the same
+ * `String(row.id)`, so the id a decree carries is the id this walk matches.
+ *
+ * @param {unknown} saveRows the library's rows, as the shell already holds them
+ * @param {unknown} entry one registry entry, as the page is handed it
+ * @returns {'PHANTOM'|'REAL'|null} `null` when the entry's op names no counterparty at all
+ */
+export function counterpartyBadgeOf(saveRows, entry) {
+  const op = isPlainObject(entry) ? entry.op : null;
+  const named = applyOffStage(op, null, null).record;
+  if (named === null || named.counterparty === '') return null;
+  const rows = Array.isArray(saveRows) ? saveRows : [];
+  const found = rows.find((row) => isPlainObject(row) && String(row.id) === named.counterparty);
+  return badgeFor(found ?? null);
 }
 
 /**

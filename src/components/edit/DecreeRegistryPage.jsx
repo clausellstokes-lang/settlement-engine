@@ -49,6 +49,17 @@
  * carries none. So each offer renders as a control exactly when the caller supplies the
  * `onGuardOffer` seam and as a stated offer otherwise, and this page invents no writer.
  *
+ * ⛔ REALITY IS SHOWN, AND THE PAGE IS TOLD IT RATHER THAN READING IT (design §13; the
+ * verifier's FIX-6). Every off-stage decree wears a PHANTOM or REAL badge, and which one is a
+ * fact about the LIBRARY — `badgeFor` in `src/domain/edit/phantoms.js` answers REAL only for
+ * a save row — which this page cannot reach and must not: it imports nothing from `src/store`
+ * (see above), and A10 below pins its static imports at exactly four. So the badge arrives the
+ * way every other thing this page cannot honestly know arrives: as a bound reader the mount
+ * supplies, exactly like `chronicleHref`. The reader answers `null` for an entry whose op names
+ * no counterparty — which is every home act — and a page of ordinary decrees therefore renders
+ * byte for byte as it did before this seam existed. An answer this page has no words for draws
+ * nothing, so the vocabulary below can never be outrun by a resolver that learned a third badge.
+ *
  * ⛔ IT NAMES THE OP TYPE AND NEVER A CATALOGUE LABEL. A row says what it does and what it
  * requires out of the ENTRY (`op.type`, `op.target`, `op.requires`), because `OP_TYPES` is
  * one of the four symbols `tests/lint/editMutationPath.walker.test.js` convicts a component
@@ -136,6 +147,19 @@ export const GUARD_OFFER_LABELS = Object.freeze({
 });
 
 /**
+ * Design §13's two badges in the reader's words. Pinned SET-EQUAL against
+ * `COUNTERPARTY_BADGES`, so a badge the resolver can answer always has words and this page can
+ * never draw a word the resolver does not know. The pin lives in the SUITE, not here: the
+ * vocabulary's home is `src/domain/edit/phantoms.js` and A10 holds this page's static imports
+ * at exactly four, which is the same reason `AUTHOR_LABELS` spells its keys rather than
+ * importing `DECREE_AUTHORS`.
+ */
+export const COUNTERPARTY_BADGE_LABELS = Object.freeze({
+  PHANTOM: 'Off-stage counterparty',
+  REAL: 'A settlement on the map',
+});
+
+/**
  * The store verbs this page WRITES with, exported so a test pins them inside EM-C4b's
  * `DECREE_ACTIONS`. `reopen` is deliberately absent: it is the modal's Save (see the header).
  */
@@ -197,6 +221,7 @@ const styles = Object.freeze({
  *   rewindLimit?: number|null,
  *   actions?: Readonly<Record<string, (request: object) => unknown>>|null,
  *   chronicleHref?: ((entry: object) => string|null)|null,
+ *   badgeFor?: ((entry: object) => string|null)|null,
  *   onReopen?: ((entry: object) => void)|null,
  *   onGuardOffer?: ((guard: object, offer: string) => void)|null }} props
  */
@@ -209,6 +234,7 @@ export default function DecreeRegistryPage({
   rewindLimit = null,
   actions = null,
   chronicleHref = null,
+  badgeFor = null,
   onReopen = null,
   onGuardOffer = null,
 }) {
@@ -255,6 +281,15 @@ export default function DecreeRegistryPage({
     if (typeof chronicleHref !== 'function') return '';
     const href = chronicleHref(entry);
     return typeof href === 'string' ? href : '';
+  };
+
+  // TOLD NOTHING, OR TOLD A WORD IT HAS NO LABEL FOR, IT DRAWS NO BADGE. Both absences read
+  // the same as an entry whose op names no counterparty, which is what keeps a registry of
+  // ordinary decrees identical to the one this page drew before the seam existed.
+  const realityOf = (entry) => {
+    if (typeof badgeFor !== 'function') return '';
+    const badge = badgeFor(entry);
+    return typeof badge === 'string' && Object.hasOwn(COUNTERPARTY_BADGE_LABELS, badge) ? badge : '';
   };
 
   const offerOf = (guard, name) => {
@@ -309,9 +344,15 @@ export default function DecreeRegistryPage({
 
   const rowHeadOf = (entry) => {
     const requires = requiresOf(entry);
+    const reality = realityOf(entry);
     return (
       <>
         <span style={styles.line} data-testid="decree-entry-summary">{summaryOf(entry)}</span>
+        {reality === '' ? null : (
+          <span style={styles.meta} data-testid="decree-entry-reality" data-badge={reality}>
+            {COUNTERPARTY_BADGE_LABELS[reality]}
+          </span>
+        )}
         {requires.length === 0 ? null : (
           <span style={styles.line} data-testid="decree-entry-requires">
             {`Requires: ${requires.join(', ')}`}
