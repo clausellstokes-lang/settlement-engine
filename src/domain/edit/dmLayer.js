@@ -104,11 +104,32 @@ const DM_ID_KINDS = Object.freeze(['minted', 'phantom']);
 const DM_ID_SHAPE = Object.freeze({ hexLength: 16 });
 
 /**
+ * ⭐ THE THREE ROSTER ADD-OPS, SPELLED HERE AND JOINED TO THE CATALOGUE BY A TEST (EM-E8 B).
+ *
+ * ⛔ THIS LEAF MAY NO MORE IMPORT `./operations.js` THAN `registry.js` MAY, and for the same
+ * measured reason: `tests/lint/editMutationPath.walker.test.js` convicts by name any `src/`
+ * module outside the declared edit path that reaches an op, and this leaf is a PRODUCER of
+ * that boundary rather than a member of it. So the three words live here as EM-C1's `POOL_SPEC`
+ * and `ENUM_SPEC` do, and case B4 asserts them SET-EQUAL IN BOTH DIRECTIONS against the live
+ * catalogue's `add-` rows — a fourth add-op reds there rather than minting nothing here.
+ *
+ * ⛔ THE CARD TYPE IS THE OP'S OWN `target.kind` AND IS NEVER DERIVED FROM THE TYPE'S SPELLING.
+ * A map from `add-npc` to `npc` would be a second identity table; the target already carries it.
+ */
+export const MINT_OP_TYPES = Object.freeze(['add-faction', 'add-institution', 'add-npc']);
+
+/**
  * A plain, non-array object — the only shape a layer or a sub-object may legally have.
  * @param {unknown} value any value at all — this guard is the leaf’s narrowing entry point.
  * @returns {boolean}
  */
 const isPlainObject = (value) => typeof value === 'object' && value !== null && !Array.isArray(value);
+
+/**
+ * @param {unknown} value a command coordinate, read straight off an unknown op.
+ * @returns {boolean} true ONLY for a non-empty string.
+ */
+const isFilled = (value) => typeof value === 'string' && value.length > 0;
 
 /**
  * THE ABSENCE RULES, in one place. Absent, `null`, a non-object, an array or an object
@@ -167,31 +188,38 @@ function usableConsult(declarations) {
 /**
  * (2) THE OP APPLICATION. Pure; a layer in, a NEW layer out. ⛔ IT NEVER TOUCHES A RECORD.
  *
+ * ⭐ IT TAKES TWO OP SHAPES AND WRITES TWO SUB-OBJECTS (EM-E8 B). A `set-root` op writes
+ * `roots`; one of `MINT_OP_TYPES` writes `minted`, which is design §14's other half — the DM
+ * ADDS a person as well as correcting one, and both are inputs to the same re-derivation.
+ * ⛔ THE REFUSAL SET IS UNWIDENED AND THE ORDER IS THE SAME ON BOTH BRANCHES.
+ *
  * @param {unknown} layer read through the absence rules
- * @param {unknown} op `{ kind: 'set-root', key, cardType, field, value }`. ⭐ `key` is the
- *   OPAQUE root key and is the ONLY thing the layer STORES. `cardType` and `field` are
- *   TRANSIENT COMMAND COORDINATES, used for the consult and then discarded, so ⛔ NO
- *   PERSISTED SHAPE MOVES.
+ * @param {unknown} op `{ kind: 'set-root', key, cardType, field, value }`, or a ROSTER ADD-OP
+ *   `{ type, target: { kind, id }, payload }`. ⭐ `key` is the OPAQUE root key and is the ONLY
+ *   thing the root branch STORES. `cardType` and `field` are TRANSIENT COMMAND COORDINATES,
+ *   used for the consult and then discarded, so ⛔ NO PERSISTED SHAPE MOVES: `minted` is a
+ *   sub-object EM-B2a1 already shipped and typed.
  * @param {unknown} declarations a `DeclarationConsult`, read defensively
  * @returns {{ ok: true, layer: DmLayer, keys: string[] }
  *          | { ok: false, reason: ApplyEditReason, layer: unknown }}
- *   On `ok:true` the layer is a NEW deeply-frozen object and `keys` holds exactly the keys
+ *   On `ok:true` the layer is a NEW deeply-frozen object — EXCEPT on a repeated mint, which
+ *   allocates nothing and returns the layer it was handed — and `keys` holds exactly the keys
  *   this call wrote, ASCII-ascending. On `ok:false` `layer` is `===` the argument and nothing
  *   is allocated. NEITHER branch throws and NEITHER mutates an argument.
  */
 export function applyEdit(layer, op, declarations) {
   /** @param {ApplyEditReason} reason */
   const refuse = (reason) => ({ ok: /** @type {false} */ (false), reason, layer });
-  /**
-   * @param {unknown} value a command coordinate, read straight off an unknown op.
-   * @returns {boolean} true ONLY for a non-empty string.
-   */
-  const isFilled = (value) => typeof value === 'string' && value.length > 0;
 
   // 1. SHAPE ONLY, no consult. A wrong kind, an unfilled coordinate or an absent value is the
   //    op's own fault and is answered before any declaration is read.
   if (!isPlainObject(op)) return refuse('invalid_op');
-  const command = /** @type {{ kind: unknown, key: unknown, cardType: unknown, field: unknown, value: unknown }} */ (op);
+  const command = /** @type {{ kind: unknown, key: unknown, cardType: unknown, field: unknown, value: unknown, type: unknown }} */ (op);
+  // ⭐ EM-E8 — THE SECOND OP SHAPE THIS WRITER TAKES: a ROSTER ADD-OP, which carries no root
+  //    key at all because it names a person who does not exist yet. It is answered by its own
+  //    branch, in the SAME refusal order and with the SAME closed reason set.
+  const mintTypes = /** @type {readonly unknown[]} */ (MINT_OP_TYPES);
+  if (mintTypes.includes(command.type)) return mintRow(layer, op, declarations, refuse);
   if (command.kind !== 'set-root') return refuse('invalid_op');
   if (!isFilled(command.key) || !isFilled(command.cardType) || !isFilled(command.field)) return refuse('invalid_op');
   if (command.value === undefined) return refuse('invalid_op');
@@ -230,6 +258,83 @@ export function applyEdit(layer, op, declarations) {
     phantoms: base.phantoms,
   });
   return { ok: /** @type {true} */ (true), layer: next, keys: [key] };
+}
+
+/**
+ * ⭐ (2b) THE MINTED ROW — one ROSTER ADD-OP applied to the layer (EM-E8 B; design §22.3
+ * ruling 9's newcomer, §14's "the record is regenerated FROM the layer").
+ *
+ * The layer is the INPUT, so a person the DM adds is a ROW OF THE LAYER and never a write to
+ * a record: `minted[id] = { kind, …payload }`, where `id` is the op's own target id (the
+ * store minted it with `mintDmId`, which is what makes it stable) and `kind` is the card the
+ * newcomer belongs to. ⛔ THE ROW CARRIES NO `id` KEY OF ITS OWN — the map key IS the id, and
+ * two homes for one fact is what the register exists to refuse. `pinsFrom` puts the id back
+ * on the record's row, where a roster entry is expected to carry one.
+ *
+ * ⛔ SAME REFUSALS, SAME FIXED ORDER, NO NEW WORD. `invalid_op` (shape) then `unknown_target`
+ * (card type, FAIL CLOSED on an unusable consult) then `undeclared_field` — a payload key the
+ * card does not declare is the same refusal a root override gets for the same reason, so the
+ * DM can never mint a person carrying a field the editor could not have shown.
+ *
+ * ⛔ IDEMPOTENT BY ID, AND THE SECOND APPLY ALLOCATES NOTHING. The tick applies every applied
+ * add-decree it finds, and a decree is applied once but read many times, so a repeat must be a
+ * no-op rather than an overwrite: FIRST WRITE WINS, the layer comes back BY REFERENCE, and
+ * `keys` still names the id so the caller's receipt is the same on both passes.
+ *
+ * @param {unknown} layer @param {unknown} op @param {unknown} declarations
+ * @param {(reason: ApplyEditReason) => {ok: false, reason: ApplyEditReason, layer: unknown}} refuse
+ * @returns {{ ok: true, layer: DmLayer, keys: string[] }
+ *          | { ok: false, reason: ApplyEditReason, layer: unknown }}
+ */
+function mintRow(layer, op, declarations, refuse) {
+  // 1. SHAPE ONLY, no consult. An add-op with no well-formed target names nobody, and a
+  //    non-object payload is not a set of typed facts.
+  const command = /** @type {{ target: unknown, payload: unknown }} */ (op);
+  const target = isPlainObject(command.target)
+    ? /** @type {{ kind: unknown, id: unknown }} */ (command.target)
+    : null;
+  if (target === null || !isFilled(target.kind) || !isFilled(target.id)) return refuse('invalid_op');
+  if (!isPlainObject(command.payload)) return refuse('invalid_op');
+  const cardType = /** @type {string} */ (target.kind);
+  const id = /** @type {string} */ (target.id);
+  const payload = /** @type {Record<string, unknown>} */ (command.payload);
+
+  // 2. THE CARD TYPE, against the injected consult, FAIL CLOSED — the same guard the root
+  //    path takes, so an unusable consult can only close this door too.
+  const consult = usableConsult(declarations);
+  if (consult === null) return refuse('unknown_target');
+  /** @type {boolean} */
+  let editable;
+  /** @type {unknown} */
+  let declared;
+  try {
+    editable = consult.isEditableCard(cardType) === true;
+    declared = consult.declarationsFor(cardType);
+  } catch {
+    return refuse('unknown_target');
+  }
+  if (!editable) return refuse('unknown_target');
+
+  // 3. EVERY PAYLOAD FIELD, against the same consult. A non-array is "no declarations".
+  const rows = Array.isArray(declared) ? declared.filter(isPlainObject) : [];
+  const fields = new Set(rows.map((row) => /** @type {{ field: unknown }} */ (row).field));
+  const keys = Object.keys(payload).sort(byCodepoint);
+  if (keys.some((key) => !fields.has(key))) return refuse('undeclared_field');
+
+  // 4/5. Read through the absence rules. A row already held is the SAME row: nothing is
+  //      allocated and the layer comes back by reference.
+  const base = normalizeLayer(layer);
+  if (Object.hasOwn(base.minted, id)) return { ok: /** @type {true} */ (true), layer: base, keys: [id] };
+  /** @type {Record<string, unknown>} */
+  const row = { kind: cardType };
+  for (const key of keys) row[key] = payload[key];
+  const next = Object.freeze({
+    roots: base.roots,
+    worldFacts: base.worldFacts,
+    minted: Object.freeze({ ...base.minted, [id]: Object.freeze(row) }),
+    phantoms: base.phantoms,
+  });
+  return { ok: /** @type {true} */ (true), layer: next, keys: [id] };
 }
 
 /**
@@ -374,6 +479,68 @@ function soleEntry(/** @type {unknown[]} */ rows, /** @type {string} */ collecti
   return hits.length === 1 ? /** @type {Record<string, unknown>} */ (hits[0]) : null;
 }
 
+/**
+ * ⭐ APPEND a newcomer's row to the ARRAY the card's declared `outputKey` addresses inside a
+ * PINNED collection (EM-E8 B). `npcs[].name` makes the collection itself the array; a leaf
+ * that carries an ARRAY HOP (`factions[].faction`) names the array one level in. No join is
+ * read and no entry is matched: an append is the one write that addresses nobody.
+ * @param {unknown} bag @param {string} leaf @param {object} entry
+ * @returns {boolean} TRUE when appended
+ */
+function appendDeclared(bag, leaf, entry) {
+  if (Array.isArray(bag)) {
+    bag.push(entry);
+    return true;
+  }
+  /** @type {unknown} */
+  let node = bag;
+  for (const seg of leaf.split('.')) {
+    if (!seg.endsWith('[]')) {
+      if (!isPlainObject(node)) return false;
+      node = /** @type {Record<string, unknown>} */ (node)[seg];
+      continue;
+    }
+    if (!isPlainObject(node)) return false;
+    const next = /** @type {Record<string, unknown>} */ (node)[seg.slice(0, -2)];
+    if (!Array.isArray(next)) return false;
+    next.push(entry);
+    return true;
+  }
+  return false;
+}
+
+/**
+ * Resolve the INJECTED minted-row defaults, FAILING QUIET on this leaf's own law (the same
+ * shape `worldFactOptionsOf` takes for EM-B2b's option sets). The defaults reach the leaf as
+ * the `mintedDefaults` member of the SAME consult `declarationsFor` arrives on, keyed by the
+ * CARD TYPE, so ⛔ this leaf holds no world vocabulary of its own and the CALLER stays the one
+ * place a card's neutral values are spelled.
+ *
+ * ⛔ AN ABSENT OR UNUSABLE MEMBER RESOLVES NOTHING, which is the landed state: EM-A1's
+ * declaration table declares no default for any field, so a newcomer wears its typed payload
+ * and its id and NOTHING ELSE — the same absence a generated person has when `set-npc-status`
+ * says it "CREATES the field on a person who lacks it". Wiring the member later is the one
+ * move that fills a field, and it can only ADD keys the card already declares.
+ * @param {unknown} declarations
+ * @returns {((cardType: string) => Record<string, unknown>)|null}
+ */
+function mintedDefaultsOf(declarations) {
+  /** @type {unknown} */
+  let member = null;
+  if (isPlainObject(declarations)) {
+    // A hostile consult may throw from a GETTER, before the member is ever called.
+    try { member = /** @type {{ mintedDefaults?: unknown }} */ (declarations).mintedDefaults; } catch { member = null; }
+  }
+  if (typeof member !== 'function') return null;
+  const serve = /** @type {(cardType: string) => unknown} */ (member);
+  return (cardType) => {
+    try {
+      const bag = serve(cardType);
+      return isPlainObject(bag) ? /** @type {Record<string, unknown>} */ (bag) : {};
+    } catch { return {}; }
+  };
+}
+
 /** Write `value` at `leaf` inside `bag`, hopping arrays by the declared join. TRUE when written. */
 function writeDeclared(/** @type {unknown} */ bag, /** @type {string} */ collectionPath, /** @type {string} */ leaf, /** @type {string} */ entityId, /** @type {unknown} */ value) {
   let node = bag;
@@ -415,6 +582,13 @@ function writeDeclared(/** @type {unknown} */ bag, /** @type {string} */ collect
  * declaration writes a LEAF inside one, so the DM's value is written INTO A DEEP CLONE of the
  * record's collection and the CLONE is pinned. The bag carries the DM's value at that one leaf
  * and the record's own value everywhere else, and ⛔ the record itself is never touched.
+ *
+ * ⭐ AND A MINTED ROW IS APPENDED TO THAT SAME CLONE (EM-E8 B). A newcomer has no root key and
+ * overrides nothing, so it PINS its card's collection by the very same closure and is appended
+ * to the held roster the runner is handed — which is what makes design §14's "the record is
+ * regenerated FROM the layer" true for an ADDITION and not only for a correction. ⛔ The record
+ * is never touched, and a card whose declarations address a key no step provides is reported
+ * `unknown_key` rather than guessed at.
  *
  * ⭐ AND A WORLD FACT TAKES THE OTHER CHANNEL ENTIRELY (EM-B2b, judgment 241 ruling 1). A root
  * whose declaration carries `provenance: 'world-fact'` is ROUTED to `config′` in PASS 1 and never
@@ -462,7 +636,7 @@ export function pinsFrom(record, layer, declarations, engine) {
   const isTransient = (/** @type {string} */ key) => transientKeys.has(key);
 
   const consult = usableDeclarations(declarations);
-  const { roots } = normalizeLayer(layer);
+  const { roots, minted } = normalizeLayer(layer);
 
   // PASS 1 — resolve every override to its collection, refusing what cannot resolve at all.
   /** @type {Array<{ key: string, value: unknown, entityId: string, collection: string, leaf: string }>} */
@@ -504,6 +678,40 @@ export function pinsFrom(record, layer, declarations, engine) {
     }
   }
 
+  // ⭐ PASS 1b — THE NEWCOMERS (EM-E8 B). A minted row resolves to the COLLECTION its card
+  // writes, read from the card's own first declared `outputKey` rather than from a second
+  // table: `npcs[].name` names `npcs`, `powerStructure.factions[].faction` names
+  // `powerStructure`, and a card whose declarations address `config` — a world fact — names a
+  // key no step provides and is reported rather than guessed at. Codepoint order on the id, so
+  // two runs over one layer append in one order.
+  const defaultsFor = mintedDefaultsOf(declarations);
+  /** @type {Array<{ id: string, row: object, collection: string, leaf: string }>} */
+  const newcomers = [];
+  for (const id of Object.keys(minted).sort(byCodepoint)) {
+    const stored = minted[id];
+    const card = isPlainObject(stored) ? /** @type {{ kind?: unknown }} */ (stored).kind : undefined;
+    const cardType = isFilled(card) ? /** @type {string} */ (card) : '';
+    /** @type {unknown} */
+    let declared;
+    try {
+      declared = consult === null || cardType === '' ? null : consult.declarationsFor(cardType);
+    } catch { declared = null; }
+    const rows = Array.isArray(declared) ? declared.filter(isPlainObject) : [];
+    const split = rows
+      .map((r) => splitOutputKey(/** @type {{ outputKey?: unknown }} */ (r).outputKey))
+      .find((found) => found !== null) ?? null;
+    if (split === null || providersOf(split[0]).length === 0) {
+      unapplied.push({ key: id, value: stored, reason: 'unknown_key' });
+      continue;
+    }
+    // ⛔ THE RECORD'S ROW CARRIES ITS `id` AND NOT THE LAYER'S `kind`: the map key is the
+    // identity a roster entry is expected to hold, and the card is the collection it landed
+    // in. The DM's typed values win over every default, which can only fill what was absent.
+    const { kind: _card, ...typed } = /** @type {Record<string, unknown>} */ (stored);
+    const filled = defaultsFor === null ? {} : defaultsFor(cardType);
+    newcomers.push({ id, row: { ...filled, id, ...typed }, collection: split[0], leaf: split[1] });
+  }
+
   // PASS 2 — THE PIN CLOSURE, and it is the whole reason an edit can be pinned at all. The
   // runner refuses a step whose choosers are pinned in part, so pinning an EDITED collection
   // drags in every chooser of every step that provides it, and then every chooser of every step
@@ -538,6 +746,18 @@ export function pinsFrom(record, layer, declarations, engine) {
     for (const key of closure) pinKeys.add(key);
     applicable.push(row);
   }
+  // ⭐ A NEWCOMER PINS ITS COLLECTION BY THE SAME CLOSURE (EM-E8 B). It is the same act as a
+  // leaf override — the collection is held and handed to the runner — so it takes the same
+  // fixpoint and the same `step_not_pinnable` refusal when the record cannot supply one.
+  /** @type {typeof newcomers} */
+  const applicableNewcomers = [];
+  for (const row of newcomers) {
+    if (!closures.has(row.collection)) closures.set(row.collection, closureFor(row.collection));
+    const closure = closures.get(row.collection);
+    if (closure === null || closure === undefined) { unapplied.push({ key: row.id, value: row.row, reason: 'step_not_pinnable' }); continue; }
+    for (const key of closure) pinKeys.add(key);
+    applicableNewcomers.push(row);
+  }
 
   // PASS 3 — the bag. ⛔ WITH NO APPLICABLE OVERRIDE THE BAG IS EMPTY, which is what makes a
   // dormant layer's re-derivation bit-for-bit today's generation: the caller passes no pins at
@@ -554,6 +774,17 @@ export function pinsFrom(record, layer, declarations, engine) {
   for (const row of applicable) {
     if (!writeDeclared(pins[row.collection], row.collection, row.leaf, row.entityId, row.value)) {
       unapplied.push({ key: row.key, value: row.value, reason: 'unknown_key' });
+    }
+  }
+
+  // ⭐ PASS 5 — THE NEWCOMERS, APPENDED TO THE CLONED ROSTER (EM-E8 B). ⛔ The record is never
+  // touched: the append lands inside the deep clone PASS 3 made, which is what the runner is
+  // handed, so the newcomer exists for the re-derivation and for nothing else until the run
+  // returns. `structuredClone` severs the layer's frozen row from the bag, which the runner
+  // spreads into a context every step may write.
+  for (const row of applicableNewcomers) {
+    if (!appendDeclared(pins[row.collection], row.leaf, structuredClone(row.row))) {
+      unapplied.push({ key: row.id, value: row.row, reason: 'unknown_key' });
     }
   }
 
