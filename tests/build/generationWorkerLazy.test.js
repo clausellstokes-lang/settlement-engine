@@ -216,7 +216,11 @@ const SENTINEL = 'settlementforge:generation:worker-v1';
 // c7d472ec2 on a fresh build in consist: EM-R1's merge clone and its retired step clones, EM-R2's roster consult and EM-R5's
 // pure leaf (outside the worker) measured TOGETHER at the composed tip. The ceiling follows the measurement DOWN to the byte and stays MONOTONE-DOWN from
 // this value; no member of the train read a rise against it (the buy-back landed first).
-export const WORKER_BUNDLE_CEILING_BYTES = 1392364;
+// 1,392,364 -> 1,391,327 (2026-09-23, the chair, judgment 194 (the T16 reading)): train EM-T16's terminal read the worker at its composed tip
+// 36d82a469 on a fresh build in consist: EM-R2's roster consult (+161 B by CI), EM-R1b's nineteen-key declaration, EM-R3's and EM-R4's
+// consults and the early buy-back's eleven literal hoists (-1,916 B) measured TOGETHER at the composed tip. The ceiling follows the measurement DOWN to the byte
+// and stays MONOTONE-DOWN from this value; every rise of the train was bought back before this reading (BUY-BACK-LEDGER row 9).
+export const WORKER_BUNDLE_CEILING_BYTES = 1391327;
 
 const source = (path) => readFileSync(join(ROOT, path), 'utf8');
 
