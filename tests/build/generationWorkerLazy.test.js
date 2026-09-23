@@ -190,6 +190,20 @@ const SENTINEL = 'settlementforge:generation:worker-v1';
 // 643,798 → 643,743 and customContentPreview.worker 1,622,741 → 1,622,686; nothing entered or left
 // a bundle, and the other worker bundles did not move at all. The ceiling follows the measurement
 // DOWN and stays MONOTONE-DOWN from this value.
+// EM-R0d, 2026-09-22 (the band ladders get one home; train EM-T14): THE CEILING IS NOT MOVED HERE.
+// Four modules of this member sit in the generation worker's static closure (221 first-party
+// modules walked from src/workers/generation.worker.js): src/data/bandLadders.js is NEW (2,517 B
+// minified) and the three producers SHED 716 B (factionDynamics.js -119, defenseGenerator.js -360,
+// foodGenerator.js -237). EXACTLY FOUR modules move. The lane priced the rise at +1,801 B
+// per-module / +1,343 B tree-shaken (esbuild units); the chair's control build at the EM-T14 base
+// read this ceiling exactly (1,395,972 B, zero slack) and, with this member applied, 1,397,370 B:
+// the REAL rise is +1,355 B (judgment 188). A rise is the OWNER's (EM-PREAMBLE §P11.2), so the bytes
+// were BOUGHT BACK AHEAD of this member (judgment 191; the cure 006aa3442 sits in this train's base):
+// repeated string literals in three src/data tables hoisted once to named module-local consts,
+// -3,901 B on the worker (1,395,972 -> 1,392,071 B at the landed tip; the nine exported tables
+// byte-identical by JSON and key order). The ledger's row 4 (resolveConfig.js, 8,198 B) is REFUTED
+// as a buy-back: a live registered step. This constant is LOWERED at train EM-T14's terminal to the
+// composed measurement (this rise and that buy-back together) — never here, never upward.
 export const WORKER_BUNDLE_CEILING_BYTES = 1395972;
 
 const source = (path) => readFileSync(join(ROOT, path), 'utf8');

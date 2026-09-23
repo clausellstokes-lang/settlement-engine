@@ -18,6 +18,7 @@
 
 import { getActiveRng } from '../kernel/rngContext.js';
 import { FOOD_IMPORT_RATES } from '../data/foodImportRates.js';
+import { foodSecurityBandOf, foodSecurityFlagsOf } from '../data/bandLadders.js';
 import { customDeps } from '../lib/dependencyEngine.js';
 import {
   nativeSemanticNames,
@@ -337,26 +338,7 @@ export function generateFoodSecurity(tier, institutions, config) {
   const foodRatio     = Math.min(2.0, localRatio + importedRatio + magicRatio);
 
   // ── Food security label ───────────────────────────────────────────────────
-  let label, color, bg;
-  if (stressFamine) {
-    label = 'Deficit — Active Famine';
-    color = '#8b1a1a'; bg = '#fdf4f4';
-  } else if (deficitPct > 40) {
-    label = 'Deficit';
-    color = '#8b1a1a'; bg = '#fdf4f4';
-  } else if (deficitPct > 15) {
-    label = 'Import-Dependent';
-    color = '#8a3010'; bg = '#fdf0e8';
-  } else if (deficitPct > 5) {
-    label = 'Pressured';
-    color = '#7a5010'; bg = '#faf8e8';
-  } else if (surplusPct > 40) {
-    label = 'Surplus';
-    color = '#1a5a28'; bg = '#f0faf4';
-  } else {
-    label = 'Secure';
-    color = '#2a6a38'; bg = '#f4fbf6';
-  }
+  const { label, color, bg } = foodSecurityBandOf(stressFamine, deficitPct, surplusPct);
 
   // ── Prosperity modifier ───────────────────────────────────────────────────
   // Food security floors or caps prosperity before other modifiers apply
@@ -472,10 +454,7 @@ export function generateFoodSecurity(tier, institutions, config) {
     magicNote,
 
     // Stress flags
-    isDeficit:        deficitPct > 20 || stressFamine,
-    isPressured:      deficitPct > 5 && deficitPct <= 20,
-    isSecure:         deficitPct <= 5 && surplusPct <= 40,
-    isSurplus:        surplusPct > 40,
+    ...foodSecurityFlagsOf(stressFamine, deficitPct, surplusPct),
     hasFamine:        stressFamine,
     hasSiege:         stressSiege,
 

@@ -335,8 +335,8 @@ const AUTHORED_VOCABULARY_ALLOWLIST = Object.freeze({
     'Mercenary services — trained companies available for hire': { count: 1, why: 'primary-export band :628 — the mercenary-institution arm of the same militaryExport ladder.' },
     'Military services — garrison contracts and armed escort': { count: 1, why: 'primary-export band :629 — the lower-effectiveness arm of the same militaryExport ladder.' },
   }),
-  'src/generators/foodGenerator.js': Object.freeze({
-    'Deficit — Active Famine': { count: 1, why: 'food-security band :342 — byte-identical to the pool key at src/domain/display/stateProse/generalStateProse.js:266, which transcribes this producer and says so in its own docblock (:40, :255).' },
+  'src/data/bandLadders.js': Object.freeze({
+    'Deficit — Active Famine': { count: 1, why: 'the food-security band ladder FOOD_SECURITY_BANDS.famine :59 — the ladders\' one home since EM-R0d, and byte-identical to the pool key at src/domain/display/stateProse/generalStateProse.js:266, which transcribes this rung and says so in its own docblock (:40, :255).' },
   }),
 
   // ── THE TIER-2 HALF (LT41 car 2): THE EIGHT TRANSCRIBED DASHES ──────────────

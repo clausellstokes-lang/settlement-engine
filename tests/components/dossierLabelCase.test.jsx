@@ -52,6 +52,7 @@ import { parse } from 'espree';
 
 import { generateSettlementPipeline } from '../../src/generators/generateSettlementPipeline.js';
 import { SAFETY_BANDS, STABILITY_BANDS } from '../../src/domain/display/labelBands.js';
+import { FOOD_SECURITY_BANDS, READINESS_BANDS } from '../../src/data/bandLadders.js';
 import { TABLE_KIND_LABEL } from '../../src/domain/summary/tonightAtTheTable.js';
 import { tokenCase, statusCase, nameOrTokenCase } from '../../src/components/new/labelLadder.js';
 import { PowerTab } from '../../src/components/new/tabs/PowerTab.jsx';
@@ -204,8 +205,8 @@ const READINESS_LABELS = Object.freeze([
 
 /**
  * THE FOOD-SECURITY AND CRIMINAL-STRUCTURE VOCABULARIES, transcribed the same way and for the
- * same reason: neither is exported (the food band rides on `economicState.foodSecurity.label`,
- * the criminal one on a frozen table inside `defenseDisplay.js`), and browser pass 3 met both
+ * same reason: the food band rides on `economicState.foodSecurity.label` and the criminal one
+ * on a frozen table inside `defenseDisplay.js`, and browser pass 3 met both
  * in their declared case — "Import-Dependent" in Overview's Systems Health and
  * "Semi-Organized" on Defense. The guard arm re-reads both sources, so a transcription cannot
  * fall behind silently.
@@ -220,8 +221,6 @@ const CRIMINAL_STRUCTURE_LABELS = Object.freeze([
 // ⚠ `process.cwd()`, NOT `import.meta.url`. This file runs in the JSDOM environment, where
 // `import.meta.url` is an http URL and `fileURLToPath` throws 'The URL must be of scheme
 // file' before a single arm runs — the same resolution the golden-master suite uses.
-const GENERATOR_SRC = resolve(process.cwd(), 'src/generators/defenseGenerator.js');
-const FOOD_SRC = resolve(process.cwd(), 'src/generators/foodGenerator.js');
 const CRIMINAL_SRC = resolve(process.cwd(), 'src/domain/display/defenseDisplay.js');
 
 /** Every frozen band word that is MULTIWORD and Title-Cased at its source. */
@@ -234,14 +233,13 @@ describe('the dossier speaks a status, it does not Title-Case one', () => {
   test('the band vocabulary this arm walks is real, and still spelled this way at its source', () => {
     // ⛔ GUARD THE GUARD. Every arm below is a search for members of this list; if the list
     // were empty, or named words no producer emits, they would all pass on nothing. The
-    // readiness labels are checked against the generator's own source because they are the
-    // only ones this file transcribes.
-    const src = readFileSync(GENERATOR_SRC, 'utf8');
-    const missing = READINESS_LABELS.filter((l) => !src.includes(`'${l}'`));
-    expect(missing, 'a readiness label this file names is no longer in the generator').toEqual([]);
-    const foodSrc = readFileSync(FOOD_SRC, 'utf8');
-    expect(FOOD_SECURITY_LABELS.filter((l) => !foodSrc.includes(`'${l}'`)),
-      'a food-security label this file names is no longer in the generator').toEqual([]);
+    // readiness and food-security labels are checked against the band ladders' one home,
+    // src/data/bandLadders.js, as ARRAY EQUALITIES — a strict upgrade on the source-text
+    // search this replaced, which could not see a reordering, a duplicate or an addition.
+    expect(READINESS_LABELS, 'a readiness label this file names is no longer in the leaf')
+      .toEqual(READINESS_BANDS.map((band) => band.label));
+    expect(FOOD_SECURITY_LABELS, 'a food-security label this file names is no longer in the leaf')
+      .toEqual(Object.values(FOOD_SECURITY_BANDS).map((band) => band.label));
     const crimSrc = readFileSync(CRIMINAL_SRC, 'utf8');
     expect(CRIMINAL_STRUCTURE_LABELS.filter((l) => !crimSrc.includes(`'${l}'`)),
       'a criminal-structure label this file names is no longer in the classifier').toEqual([]);

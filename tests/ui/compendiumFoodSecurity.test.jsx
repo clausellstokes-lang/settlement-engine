@@ -6,18 +6,13 @@
  * THE GAP: the dossier binds a headline stat to the foodGenerator's Food Security band
  * ladder (Surplus / Secure / Pressured / Import-Dependent / Deficit / Active Famine),
  * but the Compendium never defined it. This pins the new ladder to the PRODUCER labels
- * so a foodGenerator rename reds the copy, and confirms it renders on the Economy tab.
+ * so a rename in the ladder's one home reds the copy, and confirms it renders on the Economy tab.
  */
 import { describe, test, expect, afterEach } from 'vitest';
 import { render, cleanup } from '@testing-library/react';
-import { readFileSync } from 'node:fs';
-import { fileURLToPath } from 'node:url';
-import { dirname, join } from 'node:path';
-
 import { COMPENDIUM_DATA as CD } from '../../src/domain/compendium/generated/compendiumData.generated.js';
 import { EconomyTab } from '../../src/components/compendium/CatalogTabs.jsx';
-
-const ROOT = join(dirname(fileURLToPath(import.meta.url)), '../..');
+import { FOOD_SECURITY_BANDS } from '../../src/data/bandLadders.js';
 
 afterEach(cleanup);
 
@@ -32,9 +27,12 @@ describe('compendium food security — bound to the foodGenerator labels', () =>
   });
 
   test('every rung name is a real foodGenerator label (drift guard)', () => {
-    const src = readFileSync(join(ROOT, 'src/generators/foodGenerator.js'), 'utf8');
+    // The Compendium's top rung is `Active Famine` and the producer's is
+    // `Deficit — Active Famine`, so the relation the old `src.includes(name)` had by
+    // accident is stated on purpose here: a rung name is a SUBSTRING of a real label.
+    const produced = Object.values(FOOD_SECURITY_BANDS).map((band) => band.label);
     for (const { name } of ladder.levels) {
-      expect(src.includes(name), `foodGenerator no longer stamps the label "${name}"`).toBe(true);
+      expect(produced.some((label) => label.includes(name)), `the food ladder no longer stamps the label "${name}"`).toBe(true);
     }
   });
 

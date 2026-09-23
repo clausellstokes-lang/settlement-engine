@@ -89,6 +89,7 @@ import { PLOT_HOOK_CATEGORIES, collectPlotHooks } from '../../src/domain/dossier
 import { deriveEscalationClocks } from '../../src/domain/hookEscalation.js';
 import { populationTrendBand } from '../../src/domain/display/trendLens.js';
 import { generateSettlementPipeline } from '../../src/generators/generateSettlementPipeline.js';
+import { FOOD_SECURITY_BANDS, READINESS_BANDS } from '../../src/data/bandLadders.js';
 import { mustExtract } from '../helpers/sourceContract.js';
 import { fillShapeViolation, mergeSlotShapes, parseSlotShapes } from '../../scripts/lib/dossier-slot-shapes.mjs';
 import { expectAbsentWithAnchor } from '../helpers/anchoredNegatives.js';
@@ -192,30 +193,24 @@ function draw(readings) {
   };
 }
 
-// ── The producer vocabularies, extracted from the producers themselves ───────────────
+// ── The producer vocabularies, read from the producers' own tables ──────────────────
 
 /**
- * `defenseGenerator.js`'s readiness band table — six labels, inline literals.
+ * The readiness band table, read from its one home — six labels, in the producer's order.
  * @returns {string[]}
  */
 function readinessLabels() {
-  const body = src('src/generators/defenseGenerator.js');
-  mustExtract(body, 'readiness >= 76 ?', 'the readiness band table in defenseGenerator.js');
-  const window = body.slice(body.indexOf('readiness >= 76 ?'));
-  const found = [...window.slice(0, 900).matchAll(/label: '([^']+)'/g)].map((m) => m[1]);
+  const found = READINESS_BANDS.map((band) => band.label);
   if (found.length !== 6) throw new Error(`readinessLabels extracted ${found.length}, expected 6`);
   return found;
 }
 
 /**
- * `foodGenerator.js`'s food-security ladder — six labels, inline assignments.
+ * The food-security ladder, read from its one home — six labels, in the chain's order.
  * @returns {string[]}
  */
 function foodLabels() {
-  const body = src('src/generators/foodGenerator.js');
-  mustExtract(body, "label = 'Deficit — Active Famine'", 'the food security ladder in foodGenerator.js');
-  const found = [...body.matchAll(/^\s*label = '([^']+)';$/gm)].map((m) => m[1]);
-  const unique = [...new Set(found)];
+  const unique = [...new Set(Object.values(FOOD_SECURITY_BANDS).map((band) => band.label))];
   if (unique.length !== 6) throw new Error(`foodLabels extracted ${unique.length}, expected 6`);
   return unique;
 }

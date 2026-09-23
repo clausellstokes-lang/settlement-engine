@@ -17,6 +17,7 @@ import {
 import { hasTradeRouteConnection } from '../domain/tradeRouteSemantics.js';
 import { partitionDefenseInstitutions } from '../domain/institutions/defenseInstitutionBuckets.js';
 import { resolveGenerationWorldLaw } from './generationContext.js';
+import { readinessBandOf } from '../data/bandLadders.js';
 
 // ─── getDefenseInstitutions ───────────────────────────────────────────────────
 /**
@@ -512,14 +513,8 @@ const computeDefenseReadiness = (scores, threat, tier, magicExists = true) => {
   // Persist the numeric readiness alongside the label. It was previously computed
   // here and discarded (only the label survived), which left causalState's measured
   // readiness read permanently dead. Additive: existing consumers use .label/.color.
-  const band =
-    readiness >= 76 ? { label: 'Fortress',         color: '#1a4a2a', background: '#f0faf2', border: '#a8d8b0' } :
-    readiness >= 55 ? { label: 'Well-Defended',    color: '#1a3a6a', background: '#f0f4fa', border: '#a8c0d8' } :
-    readiness >= 38 ? { label: 'Defensible',       color: '#5a6a1a', background: '#f4f8ec', border: '#b8d0a8' } :
-    readiness >= 24 ? { label: 'Lightly Defended', color: '#7a5010', background: '#faf6ec', border: '#e0c880' } :
-    readiness >= 12 ? { label: 'Vulnerable',       color: '#8a3010', background: '#fdf8ec', border: '#e8c080' } :
-                      { label: 'Undefended',       color: '#8b1a1a', background: '#fdf4f4', border: '#e8c0c0' };
-  return { score: readiness, ...band };
+  const band = readinessBandOf(readiness);
+  return { score: readiness, label: band.label, color: band.color, background: band.background, border: band.border };
 };
 
 // ─── generateDefenseProfile ───────────────────────────────────────────────────

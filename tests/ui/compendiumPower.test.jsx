@@ -6,22 +6,17 @@
  * The Power tab hung "Faction power = institutional base x public legitimacy" on a
  * legitimacy vocabulary it never defined, named no faction archetypes despite the tab
  * name, and defined no governance-stability vocabulary. This pins the additions:
- *   1. The Public Legitimacy ladder is bound to the factionDynamics band labels.
+ *   1. The Public Legitimacy ladder is bound to the band ladder's one home.
  *   2. CD.factionArchetypes covers every FACTION_ARCHETYPES value with a label + reading.
  *   3. The Power tab renders the legitimacy ladder, the faction archetypes, and the
  *      governance-stability labels.
  */
 import { describe, test, expect, afterEach } from 'vitest';
 import { render, cleanup } from '@testing-library/react';
-import { readFileSync } from 'node:fs';
-import { fileURLToPath } from 'node:url';
-import { dirname, join } from 'node:path';
-
 import { COMPENDIUM_DATA as CD } from '../../src/domain/compendium/generated/compendiumData.generated.js';
 import { PowerTab_ } from '../../src/components/compendium/CatalogTabs.jsx';
 import { FACTION_ARCHETYPES } from '../../src/domain/factionArchetypes.js';
-
-const ROOT = join(dirname(fileURLToPath(import.meta.url)), '../..');
+import { LEGITIMACY_BANDS } from '../../src/data/bandLadders.js';
 
 afterEach(cleanup);
 
@@ -32,10 +27,10 @@ describe('compendium power — legitimacy, factions, governance', () => {
     expect(ladder.levels.map((x) => x.name)).toEqual([
       'Endorsed', 'Approved', 'Tolerated', 'Contested', 'Legitimacy Crisis',
     ]);
-    const src = readFileSync(join(ROOT, 'src/generators/factionDynamics.js'), 'utf8');
-    for (const { name } of ladder.levels) {
-      expect(src.includes(`'${name}'`), `factionDynamics no longer stamps legitimacy label "${name}"`).toBe(true);
-    }
+    // An ARRAY EQUALITY, in order, against the producer's own table — a strict upgrade on
+    // the `src.includes` this replaced, which could not see a reordering or a duplicate.
+    expect(ladder.levels.map((x) => x.name), 'the Compendium ladder IS the producer ladder, in order')
+      .toEqual(LEGITIMACY_BANDS.map((band) => band.label));
   });
 
   test('CD.factionArchetypes covers every FACTION_ARCHETYPES value with a label + reading', () => {

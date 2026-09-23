@@ -15,6 +15,7 @@
  *   applyLegitimacyMultipliers → mutates faction array in place
  */
 
+import { LEGITIMACY_CUTS, legitimacyBandOf } from '../data/bandLadders.js';
 // ── Public legitimacy contributions ──────────────────────────────────────────
 // Prosperity → ±20
 const PROSPERITY_CONTRIB = {
@@ -103,34 +104,15 @@ export const legitimacyDefScale = (tier) =>
  *   governanceFractured: boolean }}
  */
 export function legitimacyBandFor(score) {
-  let label, color, bg;
-  if      (score >= 75) { label = 'Endorsed';        color = '#1a5a28'; bg = '#f0faf4'; }
-  else if (score >= 60) { label = 'Approved';         color = '#4a7a2a'; bg = '#f4faf0'; }
-  else if (score >= 45) { label = 'Tolerated';        color = '#a0762a'; bg = '#faf8ec'; }
-  else if (score >= 30) { label = 'Contested';        color = '#8a4010'; bg = '#fdf6ec'; }
-  else                  { label = 'Legitimacy Crisis';color = '#8b1a1a'; bg = '#fdf4f4'; }
-
-  const govMultiplier =
-    score >= 75 ? 1.30 :
-    score >= 60 ? 1.15 :
-    score >= 45 ? 1.00 :
-    score >= 30 ? 0.80 :
-                  0.60;
-  const crimMultiplier =
-    score >= 75 ? 0.75 :
-    score >= 60 ? 0.90 :
-    score >= 45 ? 1.00 :
-    score >= 30 ? 1.15 :
-                  1.30;
-
+  const { label, color, bg, govMultiplier, crimMultiplier } = legitimacyBandOf(score);
   return {
     label, color, bg, govMultiplier, crimMultiplier,
-    isEndorsed:         score >= 75,
-    isApproved:         score >= 60,
-    isTolerated:        score >= 45 && score < 60,
-    isContested:        score >= 30 && score < 45,
-    isLegitimacyCrisis: score <  30,
-    governanceFractured: score < 30,
+    isEndorsed:          score >= LEGITIMACY_CUTS.endorsed,
+    isApproved:          score >= LEGITIMACY_CUTS.approved,
+    isTolerated:         score >= LEGITIMACY_CUTS.tolerated && score < LEGITIMACY_CUTS.approved,
+    isContested:         score >= LEGITIMACY_CUTS.contested && score < LEGITIMACY_CUTS.tolerated,
+    isLegitimacyCrisis:  score <  LEGITIMACY_CUTS.contested,
+    governanceFractured: score <  LEGITIMACY_CUTS.contested,
   };
 }
 

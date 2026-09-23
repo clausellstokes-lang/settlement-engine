@@ -191,8 +191,8 @@ export const HOLDER_SOURCES = Object.freeze({
   mercenary: Object.freeze({ kind: 'muster', cite: 'src/domain/institutions/defenseInstitutionBuckets.js:98', read: true }),
   charter: Object.freeze({ kind: 'muster', cite: 'src/domain/institutions/defenseInstitutionBuckets.js:101', read: true }),
   force: Object.freeze({ kind: 'muster', cite: 'src/generators/threatDefensePolicy.js:13', read: true }),
-  magicDependency: Object.freeze({ kind: 'muster', cite: 'src/generators/defenseGenerator.js:458', read: true }),
-  economicGates: Object.freeze({ kind: 'muster', cite: 'src/generators/defenseGenerator.js:467', read: true }),
+  magicDependency: Object.freeze({ kind: 'muster', cite: 'src/generators/defenseGenerator.js:459', read: true }),
+  economicGates: Object.freeze({ kind: 'muster', cite: 'src/generators/defenseGenerator.js:468', read: true }),
   besiegedBy: Object.freeze({ kind: 'muster', cite: 'src/domain/display/warStatus.js:297', read: true }),
   besiegingTargets: Object.freeze({ kind: 'muster', cite: 'src/domain/display/warStatus.js:297', read: true }),
   ticksToDeploy: Object.freeze({ kind: 'muster', cite: 'src/domain/display/mobilizationStatus.js:94', read: true }),
@@ -212,9 +212,9 @@ export const HOLDER_SOURCES = Object.freeze({
   safetyProfile: Object.freeze({ kind: 'watch', cite: 'src/generators/economy/economicState.js:884', read: true }),
 
   // ── the court: the seat, its legitimacy, the blocs under it and the treaties it signs ──
-  govMultiplier: Object.freeze({ kind: 'court', cite: 'src/generators/factionDynamics.js:127', read: true }),
-  governanceFractured: Object.freeze({ kind: 'court', cite: 'src/generators/factionDynamics.js:133', read: true }),
-  breakdown: Object.freeze({ kind: 'court', cite: 'src/generators/factionDynamics.js:179', read: true }),
+  govMultiplier: Object.freeze({ kind: 'court', cite: 'src/generators/factionDynamics.js:109', read: true }),
+  governanceFractured: Object.freeze({ kind: 'court', cite: 'src/generators/factionDynamics.js:115', read: true }),
+  breakdown: Object.freeze({ kind: 'court', cite: 'src/generators/factionDynamics.js:161', read: true }),
   blocs: Object.freeze({ kind: 'court', cite: 'src/domain/worldPulse/settlementPolitics.js:992', read: true }),
   stability: Object.freeze({ kind: 'court', cite: 'src/generators/power/rulingStructure.js:702', read: true }),
   recentConflict: Object.freeze({ kind: 'court', cite: 'src/generators/power/rulingStructure.js:702', read: true }),
