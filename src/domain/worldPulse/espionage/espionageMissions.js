@@ -66,6 +66,7 @@ import {
   ENVOY_COVERT_FACES,
   ENVOY_COVERT_LEG_REFS,
   ENVOY_COVERT_PRODUCTS,
+  ENVOY_COVERT_TAPS,
   MAX_COVERT_ITINERARY_STOPS,
 } from '../envoyErrandVocabulary.js';
 import { mintErrandSpine } from '../errandMint.js';
@@ -272,6 +273,13 @@ export function mintCovertMission({
  * persistence DTOs match against these words, so a second spelling would let an import
  * forge a mission no writer authored. Re-exporting is not minting: there is exactly one
  * `Object.freeze` behind each of these, and it is not in this file.
+ *
+ * ⏱ `taps` JOINED AT EM-E7, AND THE PLACE IS THE POINT. The tap levels were reachable only
+ * through `espionageMath.js`'s `TAP_LEVELS` alias, so the wave that needed all four facets
+ * of a mission a DM directs — demand, face, product, tap (design §19 ruling 8) — would have
+ * had to read two modules to read ONE vocabulary. This export exists precisely so that a
+ * consumer reads one; the member is the same frozen array behind both names, and
+ * `covertMissionFacetsOf` below is its first reader.
  */
 export const COVERT_MISSION_VOCABULARY = Object.freeze({
   demands: ENVOY_COVERT_DEMANDS,
@@ -279,4 +287,60 @@ export const COVERT_MISSION_VOCABULARY = Object.freeze({
   legRefs: ENVOY_COVERT_LEG_REFS,
   maxStops: MAX_COVERT_ITINERARY_STOPS,
   products: ENVOY_COVERT_PRODUCTS,
+  taps: ENVOY_COVERT_TAPS,
 });
+
+/** @param {unknown} value @returns {Record<string, unknown>} */
+function bagOf(value) {
+  return value && typeof value === 'object' && !Array.isArray(value)
+    ? /** @type {Record<string, unknown>} */ (value)
+    : {};
+}
+
+/**
+ * THE FOUR FACETS OF A DIRECTED MISSION, READ AGAINST THIS LEAF'S OWN WORDS (EM-E7; design
+ * §17's "Send on a mission" and §19 ruling 8).
+ *
+ * A `send-on-mission` decree may say WHAT the court wants confirmed (`demand`), WHAT FACE the
+ * traveller wears (`face`), WHAT it is to bring back (`product`) and HOW DEEP it is to listen
+ * (`tap`). Each is judged against the one totality read above and against nothing else, so
+ * the editor's pop-up can only ever offer words the errand DTOs will accept on the way back
+ * out of a save file — FINITE-SEMANTICS, enforced at the door rather than promised.
+ *
+ * ⛔ IT REFUSES BY NAMING, NEVER BY THROWING AND NEVER BY GUESSING. A facet the caller did
+ * not give is ABSENT (`''`); a facet the caller gave in a word this vocabulary does not carry
+ * is absent AND named in `unlawful`. Collapsing the two would make "the DM said nothing" and
+ * "the DM said something the world cannot mean" indistinguishable, and only the second is a
+ * thing a herald must say out loud (design §2.7: guards judge, they never refuse).
+ *
+ * PURE and TOTAL: it reads no world, opens no gate and mints no id, so a dark layer is as
+ * unmoved by it as a lit one. That is why it carries no `espionageActive` read — there is
+ * nothing here for a gate to hold back.
+ *
+ * @param {unknown} payload a `send-on-mission` payload, or any bag at all
+ * @returns {{demand: string, face: string, product: string, tap: string,
+ *   unlawful: ReadonlyArray<string>}}
+ */
+export function covertMissionFacetsOf(payload) {
+  const row = bagOf(payload);
+  /** @type {string[]} */
+  const unlawful = [];
+  /** @param {string} name @param {readonly string[]} words @returns {string} */
+  const facet = (name, words) => {
+    const raw = row[name];
+    const word = typeof raw === 'string' ? raw.trim() : '';
+    if (!word) return '';
+    if (words.includes(word)) return word;
+    unlawful.push(name);
+    return '';
+  };
+  // The four are read in `compareCodepoint` order of their names, so `unlawful` is a stable
+  // list a receipt can print without a second sort.
+  const demand = facet('demand', COVERT_MISSION_VOCABULARY.demands);
+  const face = facet('face', COVERT_MISSION_VOCABULARY.faces);
+  const product = facet('product', COVERT_MISSION_VOCABULARY.products);
+  const tap = facet('tap', COVERT_MISSION_VOCABULARY.taps);
+  return {
+    demand, face, product, tap, unlawful: Object.freeze(unlawful),
+  };
+}

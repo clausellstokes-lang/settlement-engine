@@ -123,6 +123,33 @@ import { observerClusterIds, overdueForeignNotables } from './espionageWariness.
  */
 export const COVERT_HOLD_CAUSE = FOREIGN_GUEST_HOLD_COVERT_CAUSE;
 
+/**
+ * THE REGISTERED FORK THE DM MAY PIN — `HABIT_FORK_REGISTRY`'s row for this roll, spelled
+ * once, here, beside the draw it names (EM-E7; design §17 and §19 ruling 8).
+ */
+export const STAY_DETECTION_FORK_ID = 'HBF-05';
+
+/**
+ * ⛔ THE TWO WORDS THAT TYPE THIS ROLL'S OUTCOME, AND THEY ARE AN EXPORT BEFORE THEY ARE A
+ * REGISTRY ROW, WHICH IS THE ONLY LAWFUL ORDER (EM-E7).
+ *
+ * HBF-05 carries no `actionVocabulary` today, and the registration's own law says why: a
+ * vocabulary is declared only where a constant EXPORTED BY THE DRAW'S OWN MODULE types that
+ * draw's own outcome, and where the outcome is a bare boolean the row names what it is and
+ * carries null, because FINITE-SEMANTICS forbids a seal with invented words. HBF-44's
+ * `closeOwed` states the cure in the order it must happen — the vocabulary must become an
+ * export before the row can carry one. THIS IS THAT EXPORT, and it mints nothing: `caught`
+ * is this roll's own returned field, and `uncaught` is the word the landing side already
+ * writes for the same fact (`espionageProducts.js`'s `reason` for an uncaptured walk). The
+ * ROW is EM-E0's file and stays EM-E0b's to move.
+ *
+ * ⛔ THE SHAPE IS EM-E4's `SIEGE_VERDICT_BANDS`, DELIBERATELY AND EXACTLY — a frozen
+ * WORD-to-verdict map, so a pin carries the word a herald can show AND the boolean this
+ * stage reads, and neither is derived from the other by a second rule that could drift.
+ * @type {Readonly<Record<string, boolean>>}
+ */
+export const STAY_DETECTION_OUTCOMES = Object.freeze({ caught: true, uncaught: false });
+
 // ES-5c §3.4b — the two declared-absence states of `gatherOrGovernRead`, frozen at MODULE
 // level so the read returns the SAME array identity every call and cannot be mutated by a
 // consumer. Which one is returned is decided by whether a carrier really supplied the term.
@@ -374,20 +401,50 @@ export function stayDetectionKey(errandId, stopIndex, intervalIdx) {
  * forget: `catchChance01` returns 0 for any rung outside `{rival, cold_war, hostile}`, and
  * `0 > u` is false for every `u` in [0,1).
  *
- * @param {{errandId?: unknown, factors?: unknown, dwell?: unknown}} args
- * @returns {{caught: boolean, catch01: number, roll01: number, key: string, ramp: number}}
+ * ── ⛔ THE DM'S PIN, AND WHY THE DRAW IS STILL TAKEN (EM-E7; design §19 rulings 4 and 8) ──
+ * `pinnedOutcome` is a word of `STAY_DETECTION_OUTCOMES` and nothing else; anything else —
+ * absent, empty, a boolean, a word this fork does not type — leaves every returned field
+ * byte-identical to a world with no editor at all, which is what keeps the pin from being a
+ * second write path into a stage that runs on every pulse.
+ *
+ * ⭐ THE DRAW IS CONSUMED EVEN WHEN THE PIN HOLDS, and that is the RULE rather than an
+ * oversight. §19 ruling 4 names the failure exactly: "a verdict pinned WITHOUT its roll would
+ * leave `pFall`, the odds words and the reasons describing a draw that never happened". Every
+ * reader of this record — the wariness receipt, the ramp, the honest `catch01` a herald turns
+ * into odds — must keep describing the world's own reading, so the pin overrides the VERDICT
+ * and only the verdict, and the row says whose hand it was. This is the one place the shape
+ * departs from `chooseOrPinFork`'s no-advance rule, and it costs nothing to depart: this
+ * fork's draw is a KEYED HASH of the interval's identity (see the header), not a stream, so
+ * taking it advances no state and shifts no downstream draw.
+ *
+ * ⛔ THE CONSULT ITSELF IS NOT HERE. `chooseOrPinFork` lives in `src/domain/edit`, and this
+ * stage is inside the pulse worker's closure through `envoyPulse.js`; importing the consult
+ * would pull the director's leaf and the decree registry into that closure for a three-line
+ * read, and a byte rise is the owner's. EM-E4 recorded the identical measured refusal for
+ * `decreeHook.js` one member earlier. So the SITE composes the consult in one line and hands
+ * this stage the word it yielded — the caller that already holds the pins hands them in, the
+ * estate's third measurement of the same shape.
+ *
+ * @param {{errandId?: unknown, factors?: unknown, dwell?: unknown, pinnedOutcome?: unknown}} args
+ * @returns {{caught: boolean, catch01: number, roll01: number, key: string, ramp: number,
+ *   pinnedOutcome?: string}}
  */
-export function stayDetectionRoll({ errandId, factors, dwell } = {}) {
+export function stayDetectionRoll({ errandId, factors, dwell, pinnedOutcome } = {}) {
   const stop = recordOf(dwell);
   const key = stayDetectionKey(errandId, stop.stopIndex, stop.intervalIdx);
   const catch01 = catchChance01(/** @type {Parameters<typeof catchChance01>[0]} */ (factors));
   const roll01 = hash01(key);
+  const held = text(pinnedOutcome);
+  const pinned = Object.hasOwn(STAY_DETECTION_OUTCOMES, held)
+    ? STAY_DETECTION_OUTCOMES[held]
+    : null;
   return {
-    caught: roll01 < catch01,
+    caught: typeof pinned === 'boolean' ? pinned : roll01 < catch01,
     catch01,
     roll01,
     key,
     ramp: dwellRamp(stop.intervalIdx),
+    ...(typeof pinned === 'boolean' ? { pinnedOutcome: held } : {}),
   };
 }
 
@@ -508,9 +565,17 @@ export function captorLeniencyRead({ doctrine } = {}) {
  * with no covert sub-records has nothing to walk — so the byte-identity claim rests on a
  * structural fact and not only on a gate.
  *
+ * ⛔ `pinnedCatch` IS ONE WORD FOR THE WHOLE TICK, AND THAT IS THE DESIGN'S OWN SHAPE rather
+ * than a simplification: a directive names a FORK, an outcome and a tick (design §16), and
+ * this stage runs one fork. Absent or unrecognised, every row is byte-identical to a world
+ * with no editor — the stage's dormancy rests on the gate, on the absence of covert rows AND
+ * now on the word, so a pin can no more wake a dark layer than a lit one can be moved by a
+ * word its fork does not type.
+ *
  * @param {{worldState?: unknown, tick?: unknown, snapshot?: unknown, regionalGraph?: unknown,
  *   insideAssetAt?: ((targetId: string, homeId: string) => boolean)|null,
- *   npcFor?: ((errand: Record<string, unknown>) => unknown)|null}} [args]
+ *   npcFor?: ((errand: Record<string, unknown>) => unknown)|null,
+ *   pinnedCatch?: unknown}} [args]
  * @returns {{detections: Array<Record<string, unknown>>, skipped: Array<Record<string, unknown>>}}
  */
 export function advanceEspionageGauntlet({
@@ -520,6 +585,7 @@ export function advanceEspionageGauntlet({
   regionalGraph = null,
   insideAssetAt = null,
   npcFor = null,
+  pinnedCatch = '',
 } = {}) {
   /** @type {Array<Record<string, unknown>>} */
   const detections = [];
@@ -556,7 +622,9 @@ export function advanceEspionageGauntlet({
         ? insideAssetAt(dwell.settlementId, homeId) === true
         : false,
     });
-    const roll = stayDetectionRoll({ errandId: errand.id, factors, dwell });
+    const roll = stayDetectionRoll({
+      errandId: errand.id, factors, dwell, pinnedOutcome: pinnedCatch,
+    });
     detections.push({
       errandId: text(errand.id),
       npcId: text(errand.npcId),
@@ -582,6 +650,10 @@ export function advanceEspionageGauntlet({
       wariness01: factors.wariness01,
       overdueNotables: factors.overdueNotables,
       warinessTermsAbsent: factors.warinessTermsAbsent,
+      // EM-E7 — THE HAND, ON THE ROW THE PIN MOVED AND ON NO OTHER. §19 ruling 4 asks the
+      // receipt to name whose hand a verdict was; a row without the key is a row the world
+      // resolved, and the key can only ever hold a word this fork types.
+      ...(roll.pinnedOutcome ? { pinnedOutcome: roll.pinnedOutcome } : {}),
     });
   }
   return { detections, skipped };

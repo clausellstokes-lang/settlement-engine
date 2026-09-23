@@ -114,7 +114,7 @@ import { hash01 } from '../../region/contestMath.js';
 import { DOCTRINE_TARGETINGS } from '../espionage/espionageDoctrine.js';
 import { DELIBERATION_VERDICTS, deliberationRead } from '../espionage/espionageMath.js';
 import { stablePart } from '../stablePart.js';
-import { isDispatchableKind, missionKindRow } from './operationGrammar.js';
+import { MISSION_KINDS, isDispatchableKind, missionKindRow } from './operationGrammar.js';
 
 /**
  * ── ES-5's DOCTRINE TARGETING, APPLIED — AND THE HALF THAT DOES NOT EXIST, NAMED ───────
@@ -474,4 +474,143 @@ export function dispatchRefusalTotality() {
     ...fromVerdicts,
     'over_cap',
   ]);
+}
+
+// ── EM-E7: "SEND ON A MISSION" IS A DIRECTION, NOT A SECOND DISPATCHER ────────────────────
+//
+// design §17 puts the seal on the PERSON'S CARD and §19 ruling 8 measures what it is: a
+// DIRECTION over `MISSION_KINDS`, resolved at the tick by the estate's own procedure. The
+// three verbs below are the whole of that, and together they add no rule: they read a decree,
+// shape it into THE DEMAND ROW this module already takes, and call `dispatchMissionCandidates`
+// unchanged. Every door that refuses — the qualification law, ES-5's doctrine, the one-mint
+// law, §3.12's verdict, the cap — refuses a directed demand exactly as it refuses an
+// endogenous one, in the same word, and nothing here may soften any of them.
+//
+// ⛔ WHY A DIRECTION AND NOT A PIN, IN ONE LINE, BECAUSE THE DISTINCTION IS THE CHARTER'S:
+// HBF-35 is STAY-DETERMINISTIC PERMANENTLY — the roll in `dispatchMissionCandidates` is an
+// unweighted tiebreak over an already-canonical order, and the only thing a load could tilt
+// is WHICH SUBJECT a court watches, which is the autonomous dispatcher ES-7 was refused for.
+// A DM does not tilt the cut; a DM NAMES THE MISSION, and the world casts and resolves it.
+
+/**
+ * The one directive op type this member binds, spelled once and beside the procedure that
+ * resolves it. The op catalogue's row is the edit layer's to author; this is the word the
+ * tick reads (`PIN_FORK_TYPE`'s idiom, one fork over).
+ */
+export const SEND_ON_MISSION_TYPE = 'send-on-mission';
+
+/**
+ * ONE DECREE'S DIRECTION, or nothing. Total on garbage: an entry whose op is not a
+ * `send-on-mission`, or whose payload carries no kind this catalog knows and no subject,
+ * reads as no direction at all.
+ *
+ * ⭐ THE KIND IS JUDGED AGAINST `MISSION_KINDS` — ALL SEVEN — AND NOT AGAINST
+ * `DISPATCHABLE_MISSION_KINDS`, and the difference is the whole honesty of the seal. A DM may
+ * STAGE any kind the catalog carries; what the three UNVERIFIED kinds then meet at the tick is
+ * the task qualification law's own refusal, `kind_unqualified`, from the door that already
+ * owns that judgment. Refusing them at the reader instead would hide a measured gap behind a
+ * seal that simply never appeared, and the catalog's own header exists to stop exactly that.
+ *
+ * @param {unknown} entry a registry entry, or a bare op-bearing bag
+ * @returns {{kind: string, subjectId: string}|null}
+ */
+export function sendOnMissionOf(entry) {
+  if (!entry || typeof entry !== 'object' || Array.isArray(entry)) return null;
+  const row = /** @type {Record<string, unknown>} */ (entry);
+  const op = row.op && typeof row.op === 'object' && !Array.isArray(row.op)
+    ? /** @type {Record<string, unknown>} */ (row.op)
+    : row;
+  if (text(op.type) !== SEND_ON_MISSION_TYPE) return null;
+  const payload = op.payload && typeof op.payload === 'object' && !Array.isArray(op.payload)
+    ? /** @type {Record<string, unknown>} */ (op.payload)
+    : {};
+  const kind = text(payload.kind);
+  const subjectId = text(payload.subjectId);
+  // The catalog's own set, widened to `string` for the membership test alone: `MISSION_KINDS`
+  // is a tuple of literal kinds, and a narrow tuple refuses `includes(aString)` outright. The
+  // widening is the registry leaf's own idiom and it narrows nothing that matters — the
+  // ANSWER is what this reader uses, and the answer is the catalog's.
+  const catalogKinds = /** @type {readonly string[]} */ (MISSION_KINDS);
+  if (!catalogKinds.includes(kind) || !subjectId) return null;
+  return { kind, subjectId };
+}
+
+/**
+ * THE DIRECTED DEMANDS for one principal, in this module's own demand shape.
+ *
+ * ⛔ `decidingConfidence01` IS DELIBERATELY ABSENT, AND THAT IS A READING RATHER THAN A HOLE.
+ * §3.12 waits on a decision the court is UNSURE of, and a court that has just been told to
+ * send somebody holds no confidence reading at all about the thing it was told to confirm —
+ * which `deliberationRead` reads as stale, which is the honest answer. Writing a number here
+ * would be inventing the court's own picture on the DM's behalf.
+ *
+ * ⛔ `urgent` IS FALSE AND A DM CANNOT SET IT. Urgency is §3.12's closed three-member list of
+ * banded world reads (a siege at the gate, an overflow, war strain) and it FORCES `act_now`,
+ * which is a refusal to dispatch. A directive that could set it would be a seal whose only
+ * effect is to cancel itself.
+ *
+ * THE DEMAND ID is derived from `(kind, subjectId)` through `stablePart`, never from a display
+ * name and never minted, so the same direction yields the same id on every replay and the
+ * STAY-deterministic cut above stays reproducible.
+ *
+ * @param {unknown} directions the due `send-on-mission` entries, in the registry's own order
+ * @param {unknown} [standingFor] the injected `(subjectId) => standing` read (ES-5's doctrine
+ *   half; absent ⇒ every subject carries no standing, which `all_courts` alone admits)
+ * @returns {Array<Record<string, unknown>>}
+ */
+export function directedMissionDemands(directions, standingFor) {
+  const rows = Array.isArray(directions) ? directions : [];
+  const standing = typeof standingFor === 'function'
+    ? /** @type {(id: string) => unknown} */ (standingFor)
+    : null;
+  /** @type {Array<Record<string, unknown>>} */
+  const demands = [];
+  for (const row of rows) {
+    const direction = sendOnMissionOf(row);
+    if (direction === null) continue;
+    demands.push({
+      demandId: `demand.direction.${stablePart(direction.kind)}.${stablePart(direction.subjectId)}`,
+      kind: direction.kind,
+      subjectId: direction.subjectId,
+      subjectStanding: standing ? text(standing(direction.subjectId)) : '',
+      urgent: false,
+      dispatched: false,
+      ticksSinceDispatch: 0,
+    });
+  }
+  return demands;
+}
+
+/**
+ * THE DIRECTION, RESOLVED AT THE TICK BY THE ESTATE'S OWN PROCEDURE (design §17, §19 ruling 8).
+ *
+ * One composition and no second rule: the due directives become demands, and
+ * `dispatchMissionCandidates` runs over them with every door it already owns. The result is
+ * the module's own `{candidates, refusals, cap, considered}` record, unrenamed, so a caller
+ * reading `kind_unqualified` off a directed mission is reading the same word the qualification
+ * law writes for an endogenous one.
+ *
+ * ⚠ THE CANDIDATES STAY `applyMode: 'proposal'`, because `operationCandidate` writes that word
+ * unconditionally and this verb does not touch it. That is ES-7's refusal honoured one rung
+ * up: a direction proposes a mission a seat answers; it does not apply one.
+ *
+ * @param {{principalId?: unknown, tick?: unknown, directions?: unknown, standingFor?: unknown,
+ *   openOperations?: unknown, targeting?: unknown, frequency01?: unknown,
+ *   castable?: unknown, cap?: unknown}} [args]
+ * @returns {ReturnType<typeof dispatchMissionCandidates>}
+ */
+export function dispatchDirectedMissions({
+  principalId, tick, directions, standingFor, openOperations, targeting, frequency01, castable,
+  cap,
+} = {}) {
+  return dispatchMissionCandidates({
+    principalId,
+    tick,
+    demands: directedMissionDemands(directions, standingFor),
+    openOperations,
+    targeting,
+    frequency01,
+    castable,
+    cap,
+  });
 }
