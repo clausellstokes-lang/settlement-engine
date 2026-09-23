@@ -41278,6 +41278,398 @@
       "_dependencyNote": "VERSION 2. THE ONE LIVE ORDERING DEPENDENCY IS EM-R3 (version 2, READY on stage 2a): it is the only other non-landed packet that MODIFIES src/generators/steps/assembleSettlement.js, measured by the dry validator, and this member is placed on its FLIP (judgment 206a; the chair's stage 3). EM-R2 (version 5), EM-R1 and EM-B2a4 have all LANDED and are now SUBSTRATE rather than dependencies: EM-R2 carries the widened pipeline import, the `const pins = ctx.__pins || null;` binding this member reuses and the chooseOrPin DISCOVERY_EXEMPT row that pays the writer census for this member too (judgment 207d — NO second row); EM-R1 carries the runner's clone per channel, which is what makes a record-built bag safe to hand in, so this member still declares NO local clone; EM-B2a4 forwards `pins` from generateSettlementPipeline, the caller path that makes this consult reachable from rederive, and is a reachability dependency, not a change-path one. Also LANDED: EM-P0 (the runner's pins channel), EM-B2a2 (chooseOrPin and _PINS_KEY) and EM-R0a (RECORD_CLASSES.name === 'HELD').",
       "_byteNote": "RE-MEASURED AT VERSION 2's READ TIP 5412caf7a. MEMBERSHIP, EXECUTED BY A PROBE THAT READS NO dist AND THEREFORE CANNOT SKIP (§P2.11): src/generators/steps/assembleSettlement.js IS in the generation worker's source import closure (230 modules walked from src/workers/generation.worker.js, following `from`, dynamic and side-effect specifiers; 228 at 91cc9ef5a), so this member spends bytes against the ZERO-SLACK WORKER_BUNDLE_CEILING_BYTES, which now reads 1392364 (tests/build/generationWorkerLazy.test.js :: WORKER_BUNDLE_CEILING_BYTES) — LOWERED twice since version 1's 1396015 (judgments 187 and 203) and never raised. The edit is ONE inserted statement plus one in-place argument change: PLAUSIBLE minified cost about 30 B (the comment block costs nothing; minifiers strip comments), stated as an estimate x2 = 60 B upper bound. ⛔ VERSION 1's NAMED BUY-BACK IS CONSUMED: BUY-BACK-LEDGER row 2 was the narrowing of `chooseOrPin(ctx.__pins || null, ...)` to `chooseOrPin(pins, ...)` once EM-R2's binding landed; it HAS landed, so the narrowed spelling is this version's CONTRACT and its ~16 B are already inside the 30 B estimate. THIS MEMBER HOLDS NO BUY-BACK OF ITS OWN. ⛔ THIS MEMBER IS NOT THE BYTE-ARM HOLDER: judgment 206d names EM-R1b the holder of train EM-T16, so this member carries NO row on tests/build/generationWorkerLazy.test.js, states its predicted delta under the holder's bound, and names the holder. The train's cover is the EARLY BUY-BACK lane (ledger row 9, judgment 214c), whose brief prices the worst sum as EM-R2 +161 B measured by CI, EM-R1b +400..700 B predicted, and small rises from EM-R3/EM-R4, and targets ≥ 1,600 B bought back. A RISE BEYOND THE HOLDER'S BOUND, AND ANY RE-MINT OF THE CEILING, IS THE OWNER's (§P11.2). The first-paint set was measured by IMPORTING vite.config.js's EAGER_FIRST_PAINT_MODULES (270 live): neither assembleSettlement.js nor pipeline.js is a member, so no first-paint byte moves.",
       "_placementReMeasurement": "THE PLACEMENT OWES THE VERBATIM RE-RUN OF ALL TWELVE requiredSymbols (`grep -c -F` >= 1 each) AT EM-R3's FLIP, which is what EM-R4.remeasure.sh does and prints. RESOLVED AT VERSION 2: (a) the pipeline import row — EM-R2 LANDED the widening, so the widened text is present (count 1), the pre-EM-R2 form is absent (count 0), this member's import hunk is ZERO bytes and the conditional _retiredSymbolsAtLanding row is REMOVED; (b) holderTable.js's three cite: addresses into this file — EM-R2 re-addressed them to :110 :129 :130 (version 1 PREDICTED :111 :130 :131, one high on each; judgment 134 is exactly why a predicted fence is never measured against), and this member's rule is unchanged: every inserted line is below the literal's closing `};` at raw line 181, more than fifty lines below the lowest cited line, so all three keep their addresses; (c) WHAT MOVES UNDER THIS MEMBER BEFORE ITS PLACEMENT — EM-R3 version 2 on this same file (three call sites, all below the anchors), EM-R1b version 2 on src/generators/pipeline.js (the partial-pin rule's `choosers` list narrowed by _TRANSIENT_CHOOSERS; it is still keyed on step.provides, where `name` does not appear, so a { name } bag still triggers no partial-pin refusal) and on the ROW-KEYED mutation-coverage manifest, EM-R0b's four CREATEs (disjoint), and the EARLY BUY-BACK lane's four files (disjoint by its own brief). NONE of them touches a text this member preserves; remeasure.sh proves that rather than asserting it."
+    },
+    {
+      "id": "EM-R1c",
+      "status": "READY",
+      "packetPath": "docs/implementation/packets/settlement-editor/EM-R1c.md",
+      "verifiedBase": "a545899ff55b7e4c3f219b3ca58cd86ddcf0f3cd",
+      "_note": "RE-MEASURED to VERSION 3 by an Opus PRE-PROOF seat at train EM-T17's base a545899ff55b7e4c3f219b3ca58cd86ddcf0f3cd (session cce01f87, 2026-09-23). THE J-T1 WINDOW 1b073009f -> a545899ff IS EMPTY over every change-manifest path and every requiredSymbols path, so every contract fact the compile measured still holds byte-for-byte; 15 of 15 required symbols re-found verbatim at count 1, the CREATE target absent, no _pendingRequiredSymbols, 0 hits on the three retired symbols across 61 waiting capsules and 230 registry packets, and no READY packet in the registry. WHAT VERSION 3 CHANGES is what the compile could not yet see. (i) The institution card's THREE root fields, not state alone, go 0/63 -> 63/63 at the value on the re-derived record (name is the free-cascade rename of the join field itself, resolved in one hop) - the same omission judgment 237 R1 cured on the faction card; A4 is widened to all three and the case count stays at eight. (ii) Judgment 148's law is measured in its general form: all SEVENTEEN declared (card, field) pairs, tip versus plant, of which ONLY the institution card's three root fields move - which subsumes the five transcribed arms and covers tests/generators/pipelinePinnedMode.test.js, whose seventeen pinsFrom/rederive arms the compile had not reached. (iii) THE LIGHTING DELTA is corrected from the walker's own classifier: tests/property/dmLayerGoldenIsolation.test.js is CREDITED with 10 titles and 2 suiteTitles, so the delta is files +1, parked +0, credited +1, titles +8, suiteTitles +2. (iv) THE COUNT LAW (P9(f)): section 5.4, 5.6 and 7 carried version 1's it-counts against version 2's matrix; every row now states the same numbers and the count prover gains check (i) with its own failing control. (v) Section 5.5 is rewritten from measurement - EM-B2a2's pipeline.js:182 _note was re-spelled by symbol in the base commit and the one surviving line address, :59, sits ABOVE the insertion point, so this member owes NO re-address. (vi) The negative-assertion anchor constraint is carried: tests/property is a generation-facing tree held at EXACT ZERO and this file carries no quarantine row. (vii) The mutation-coverage rowKey adopts the estate idiom invariants['<path>'] that twelve landed packets and EM-R7 v1 use. Judgment 237 R2 stays WITHDRAWN by judgment 240 (the roster escalation is EM-R8's, the ladder's); this member asserts nothing about it and section 11 item 7 STOPs a lane that reaches for it.",
+      "changeManifest": [
+        {
+          "action": "MODIFY",
+          "path": "src/generators/pipeline.js",
+          "symbol": "_CHOOSER_RECORD_PATHS + getStepMeta"
+        },
+        {
+          "action": "MODIFY",
+          "path": "src/domain/edit/dmLayer.js",
+          "symbol": "rosterOf + pinsFrom + joinFor/soleEntry/writeDeclared"
+        },
+        {
+          "action": "CREATE",
+          "path": "tests/lint/chooserRecordPathRegistry.walker.test.js",
+          "symbol": "adds 3 `it`s (one per homed case A1-A3) under ONE literal describe"
+        },
+        {
+          "action": "TEST",
+          "path": "tests/property/dmLayerGoldenIsolation.test.js",
+          "symbol": "adds 5 `it`s (this member's cases A4-A8) under ONE new literal describe, and RE-TITLES the landed A8 by the exact row (section 5.3) - a re-title adds no title"
+        },
+        {
+          "action": "REGISTER",
+          "path": "scripts/mutation-coverage-manifest.json",
+          "symbol": "the CREATE's row",
+          "rowKey": "invariants['tests/lint/chooserRecordPathRegistry.walker.test.js']"
+        }
+      ],
+      "requiredSymbols": [
+        {
+          "path": "src/domain/edit/dmLayer.js",
+          "symbol": "export function pinsFrom(record, layer, declarations, engine) {",
+          "_note": "src/domain/edit/dmLayer.js :: pinsFrom - count=1 at 1b073009f"
+        },
+        {
+          "path": "src/domain/edit/dmLayer.js",
+          "symbol": "  const held = (/** @type {string} */ key) => Object.hasOwn(source, key);",
+          "retiredBy": "§934.47 addendum 132 (judgment 206h-4, the EM-R1c slot, ruled by judgment 233: this member REWRITES pinsFrom's held() so a chooser is read at the record path the register names in place — retired by the member itself; §731.3's idiom; version 2). The chair re-stamps the addendum number at this member's own landing.",
+          "_note": "src/domain/edit/dmLayer.js :: pinsFrom's held() - UNIT 1 rewrites it; count=1; 0 hits in PACKET_MANIFEST.json"
+        },
+        {
+          "path": "src/domain/edit/dmLayer.js",
+          "symbol": "  for (const key of [...pinKeys].sort(byCodepoint)) pins[key] = structuredClone(source[key]);",
+          "retiredBy": "§934.47 addendum 132 (judgment 206h-4, the EM-R1c slot, ruled by judgment 233: this member REWRITES pinsFrom's PASS 3 bag row so the clone is taken of the value at the record path in place — retired by the member itself; §731.3's idiom; version 2). The chair re-stamps the addendum number at this member's own landing.",
+          "_note": "src/domain/edit/dmLayer.js :: pinsFrom PASS 3 - UNIT 1 rewrites it; count=1; 0 hits in PACKET_MANIFEST.json"
+        },
+        {
+          "path": "src/domain/edit/dmLayer.js",
+          "symbol": "        .find((e) => /** @type {{ id: unknown }} */ (e).id === row.entityId);",
+          "retiredBy": "§934.47 addendum 132 (judgment 206h-4, the EM-R1c slot, ruled by judgment 233: this member REWRITES pinsFrom's PASS 4 entity find so the join is the record register's declared key, design 22.4's ruled identity rather than a bare .id in place — retired by the member itself; §731.3's idiom; version 2). The chair re-stamps the addendum number at this member's own landing.",
+          "_note": "src/domain/edit/dmLayer.js :: pinsFrom PASS 4 - UNIT 2 rewrites it; count=1; 0 hits in PACKET_MANIFEST.json"
+        },
+        {
+          "path": "src/domain/edit/dmLayer.js",
+          "symbol": "      /** @type {Record<string, unknown>} */ (entity)[row.leaf] = row.value;",
+          "_note": "src/domain/edit/dmLayer.js :: pinsFrom PASS 4's array-branch write - the line UNIT 2 replaces with the declared-path write; count=1"
+        },
+        {
+          "path": "src/domain/edit/dmLayer.js",
+          "symbol": "function rosterOf(engine) {",
+          "_note": "src/domain/edit/dmLayer.js :: rosterOf - the injected channel unit 1 extends; count=1"
+        },
+        {
+          "path": "src/domain/edit/dmLayer.js",
+          "symbol": "export const REDERIVE_UNAPPLIED_REASONS = Object.freeze(['step_not_pinnable', 'unknown_key']);",
+          "_note": "src/domain/edit/dmLayer.js :: REDERIVE_UNAPPLIED_REASONS - PRESERVED byte-identical (A7's claim: a CAUSE removed, no reason added); count=1"
+        },
+        {
+          "path": "src/domain/edit/dmLayer.js",
+          "symbol": "import { partitionTrace } from './tracePartition.js';",
+          "_note": "src/domain/edit/dmLayer.js - the import unit 2's new edge sits beside; tracePartition already imports recordRegister, so the edge adds 0 module bytes (packet 5.7); count=1"
+        },
+        {
+          "path": "src/generators/pipeline.js",
+          "symbol": "const _TRANSIENT_CHOOSERS = new Set([",
+          "_note": "src/generators/pipeline.js :: _TRANSIENT_CHOOSERS - EM-R1b's landed declaration, the shape unit 1 copies; count=1"
+        },
+        {
+          "path": "src/generators/pipeline.js",
+          "symbol": "export function getStepMeta() {",
+          "_note": "src/generators/pipeline.js :: getStepMeta - the injected handle's only member pinsFrom reads; count=1"
+        },
+        {
+          "path": "src/generators/pipeline.js",
+          "symbol": "      transient: (step.provides || []).filter((k) => _TRANSIENT_CHOOSERS.has(k)),",
+          "_note": "src/generators/pipeline.js :: getStepMeta - the transient row, PRESERVED beside the new recordPaths row; count=1"
+        },
+        {
+          "path": "src/domain/generation/generationForkRegistry.js",
+          "symbol": "export const GENERATION_TIER1 = Object.freeze(",
+          "_note": "src/domain/generation/generationForkRegistry.js :: GENERATION_TIER1 - the walker imports it (A1/A2); count=1"
+        },
+        {
+          "path": "src/domain/edit/recordRegister.js",
+          "symbol": "export const KEYED_COLLECTIONS = Object.freeze({",
+          "_note": "src/domain/edit/recordRegister.js :: KEYED_COLLECTIONS - unit 2 imports it; count=1"
+        },
+        {
+          "path": "src/domain/edit/recordRegister.js",
+          "symbol": "  institutions: 'name',",
+          "_note": "src/domain/edit/recordRegister.js :: KEYED_COLLECTIONS - the institution join design 22.4 rules; count=1"
+        },
+        {
+          "path": "src/domain/edit/recordRegister.js",
+          "symbol": "  npcs: 'id',",
+          "_note": "src/domain/edit/recordRegister.js :: KEYED_COLLECTIONS - the npc join, today's behaviour preserved; count=1"
+        }
+      ],
+      "acceptanceCases": [
+        {
+          "id": "A1",
+          "case": "_CHOOSER_RECORD_PATHS equals GENERATION_TIER1's non-null, non-identity recordPath rows in BOTH directions - fourteen keys - each set IMPORTED from its producer and neither re-typed, and (key -> recordPath) is a FUNCTION over the register (zero keys carry two paths)"
+        },
+        {
+          "id": "A2",
+          "case": "pinsFrom reads a NESTED record path through an INJECTED stub roster, and is blind to that key without the map (the negative control), the record itself untouched"
+        },
+        {
+          "id": "A3",
+          "case": "joinFor returns KEYED_COLLECTIONS' own spec for institutions and npcs, and this member's single declared row for powerStructure.factions, whose join field is measured PRESENT and UNIQUE on every entry of every corpus row"
+        },
+        {
+          "id": "A4",
+          "case": "the INSTITUTION card's THREE ROOT fields through the REAL rederive over the corpus: state, category and name each applied 63/63 AND each PRESENT at record.institutions[the named one].<field> 63/63 - the value, never unapplied === [] - red-first at 0/63 on all three (name is the free-cascade RENAME of the join field itself, resolved in one hop)"
+        },
+        {
+          "id": "A5",
+          "case": "faction.faction (the join field itself, renamed): the DM's name PRESENT at record.powerStructure.factions[the renamed one].faction 63/63 - red-first at 0/63"
+        },
+        {
+          "id": "A6",
+          "case": "faction.category: the DM's category PRESENT at record.powerStructure.factions[the named one].category 63/63 - red-first at 0/63"
+        },
+        {
+          "id": "A7",
+          "case": "faction.power: the DM's share PRESENT at record.powerStructure.factions[the named one].power 63/63 - red-first at 0/63 - and NO key matching []. anywhere in the bag, 0/63, red-first at 63/63"
+        },
+        {
+          "id": "A8",
+          "case": "the npc and power-seat cards UNMOVED (applied and the value at the declared leaf, 63/63 each), and a dormant layer re-derives the record byte-identically 63/63"
+        }
+      ],
+      "checks": [
+        [
+          "npx",
+          "vitest",
+          "run",
+          "--pool=threads",
+          "--maxWorkers=2",
+          "tests/lint",
+          "--exclude",
+          "tests/lint/sovereigntyLightingContract.walker.test.js"
+        ],
+        [
+          "npx",
+          "vitest",
+          "run",
+          "--pool=threads",
+          "--maxWorkers=2",
+          "tests/property/dmLayerGoldenIsolation.test.js"
+        ],
+        [
+          "npx",
+          "vitest",
+          "run",
+          "--pool=threads",
+          "--maxWorkers=2",
+          "tests/generators"
+        ],
+        [
+          "npx",
+          "vitest",
+          "run",
+          "--pool=threads",
+          "--maxWorkers=2",
+          "tests/domain/dmLayer.test.js",
+          "tests/store/editSlice.test.js"
+        ],
+        [
+          "npx",
+          "vitest",
+          "run",
+          "--pool=threads",
+          "--maxWorkers=2",
+          "tests/property/generatorGoldenMaster.test.js"
+        ],
+        [
+          "npx",
+          "vitest",
+          "run",
+          "--pool=threads",
+          "--maxWorkers=2",
+          "tests/property/dossierProseManifest.test.js"
+        ]
+      ]
+    },
+    {
+      "id": "EM-C2",
+      "status": "READY",
+      "packetPath": "docs/implementation/packets/settlement-editor/EM-C2.md",
+      "verifiedBase": "a545899ff55b7e4c3f219b3ca58cd86ddcf0f3cd",
+      "changeManifest": [
+        {
+          "action": "CREATE",
+          "path": "src/domain/edit/guards.js",
+          "symbol": "evaluateGuards",
+          "_note": "src/domain/edit/guards.js :: evaluateGuards, GUARD_KINDS, GUARD_OFFERS, EMPTY_RULE_SET. THE GUARD ENGINE, exactly as §6 contracts it (version 2: it returns `{ guards, unevaluated }` and checks each rule's `needs` against `ruleSet.deps` ONCE, before the fold): a pure fold over the PENDING entries of a decree registry, ordered by design §11's `when` then `orderIndex` (made total by season then id), one folded world per entry from the rule set's own `project`, the rules that apply to each entry's op type run in compareCodepoint order of their ids, and every finding normalised into a frozen Guard with a stable derived id and the `proceed` offer guaranteed. ONE IMPORT, `../deterministicSort.js`: the two generator writers EM-C3's rules use arrive on `ctx.deps` from the caller, because a `src/domain/edit -> src/generators` specifier reds the landed domain-to-generators boundary ratchet. RE-MEASURED BY THE PRE-PROOF at train EM-T17's base a545899ff, every figure identical to the compile seat's at 1b073009f, with each instrument's own logic: eslint's own Linter under max-lines with skipBlankLines and skipComments reads 164 effective lines (365 raw); the voice walker's own espree literal scan reads {em: 0, bang: 0} over 36 literals (version 2 stated 35; the em/bang figures the walker reds on were and are correct); the any-cast ratchet's own countText reads {any: 0, suppress: 0}; the tuning inventory's own countUnregisteredNamed and countBareDecimals both read {}; the entropy census's createPRNG( site count is 0 and its READ_RE finds 0 rngSeed reads; the ruin-filter roster's READER_RE finds no .institutions in the comment-blanked code; the TypeScript compiler API reports ZERO errors under tsconfig.full.json and ZERO under tsconfig.domain-strict.json. VERSION 3 PINS TWO SPELLINGS VERBATIM (judgment 151): the leaf spells `export const GUARD_KINDS = Object.freeze(` and `export const GUARD_OFFERS = Object.freeze(`, which are EM-C3's two _pendingRequiredSymbols rows against this path, re-measured with grep -c -F at EM-C3's placement; count=1 each over the planted text. AND IT DECLARES ALL SIX TYPEDEFS BY NAME - ProjectFn, GuardContext, GuardFinding, GuardRule, Guard, GuardVerdict - because guardRules.js names the first four type-only and a name this leaf never declared is a tsc error under BOTH configs at EM-C3's build rather than at its placement; version 2's text named only GuardFinding and GuardRule. All six are JSDoc, which max-lines skips, so the 164 figure does not move. THE TYPE FLOOR: tsconfig.full.json includes src/domain/**/*.js and tsconfig.domain-strict.json extends tsconfig.json, whose include is the same, so BOTH govern this path and NEITHER governs the two test files (both exclude tests); scripts/.domain-strict-baseline.json carries no src/domain/edit row, so a zero-error leaf owes it none."
+        },
+        {
+          "action": "CREATE",
+          "path": "tests/domain/editGuards.test.js",
+          "_note": "The battery: adds exactly 7 literal `it`s, ONE per sealed acceptance case A1 to A7, under ONE literal `describe`. Straight-line registration, its own `vitest` import, and no variable or parameter named `it`, `test` or `describe` (the OPENER_UNRESOLVED park reason, which parked 26 of the estate's 384 parked files). It imports the REAL `OP_TYPES` and `makeOp` and synthesises its own rules; it imports no rules module, so it is provable with EM-C3 unlanded. Proof shape copied from tests/domain/editOperations.test.js. A5 at version 2 also drives the `needs`/`deps`/`unevaluated` mechanics over three dependency bags and an empty registry. A7's written-contract counterforce (§P6) is a planted engine that mutates its world argument, which reds A7 by name. JUDGMENT 196's TITLE LAW, MEASURED at a545899ff: every `it` title BEGINS `A<n> - EM-C2: `, unique in tests/ because git grep -c -F over tests returns 0 for EM-C2, 0 for editGuards and 0 for guardsAcceptApplies; the only two hits for the phrase 'the guard engine' are assertion messages in tests/domain/editOperations.test.js and tests/domain/recordMerge.test.js, neither a title. vitest -t is a REGEX, so the separator is a hyphen, not an em dash."
+        },
+        {
+          "action": "CREATE",
+          "path": "tests/property/guardsAcceptApplies.test.js",
+          "_note": "The property: adds exactly 1 literal `it` under ONE literal `describe`, homing acceptance case A8. Queues of 1 to 10 over the real catalogue, every row COLLECTED and asserted ONCE — `tests/lint/seedLoopTotality.walker.test.js` convicts a bare `for (const … of …) { expect(…) }` and its habitat is shrink-only. Every new negative assertion carries its `// anchored:` marker on the line IMMEDIATELY ABOVE the `expect` itself (never above a wrapped expect's first line), with the positive control that anchors it. At version 2 the single `it` runs the queues TWICE — once unwired and once with a `needs`-declaring rule against a fully supplied `deps` — and asserts `unevaluated` EMPTY at every length. Proof shape copied from tests/property/dmLayerGoldenIsolation.test.js. Its one title BEGINS `A8 - EM-C2: `, unique in tests/ by the same measurement (judgment 196)."
+        }
+      ],
+      "requiredSymbols": [
+        {
+          "path": "src/domain/deterministicSort.js",
+          "symbol": "export const compareCodepoint = (a, b) => {",
+          "_note": "THE LEAF'S ONE IMPORT. Every string order in the engine is this comparator's order: the fold's season and id tie-breaks, and the rule dispatch order. Spelling a comparator by hand here would be a second ordering authority the estate already refuses. count 1. NO LINE ADDRESS IS CARRIED (§P2.22)."
+        },
+        {
+          "path": "src/domain/edit/operations.js",
+          "symbol": "export const OP_TYPES = Object.freeze({",
+          "_note": "THE CATALOGUE THIS ENGINE IS HANDED. 22 frozen rows at this tip, every one carrying `requires: { world, registry }`, `enables`, `relatedTo`, `conflictsWith`, `duration`, `guards: []` and a non-empty `guardsStated`. The ENGINE never imports it (the catalogue is an argument, which is what keeps guards.js's import closure at one module); the acceptance battery imports it, so the deliverable must find it unchanged. This member populates NOTHING on it, so tests/lint/opGuardCoverage.walker.test.js case C7 stays green. count 1."
+        },
+        {
+          "path": "src/domain/edit/operations.js",
+          "symbol": "export function makeOp(type, target, payload) {",
+          "_note": "THE OP CONSTRUCTOR the acceptance battery builds its fixtures with, and the reason this member exists in the shape it does: makeOp FLATTENS the declaration's `requires: { world, registry }` into one array, so an Op cannot tell a WORLD predicate id from a REGISTRY prerequisite op type. Measured at this tip: makeOp('promote-phantom', …).requires reads [\"found-phantom\"] and makeOp('remove-npc', …).requires reads [\"npcPresent\"]. count 1."
+        },
+        {
+          "path": "src/domain/edit/operations.js",
+          "symbol": " *   requires: { world: readonly string[], registry: readonly string[] },",
+          "_note": "THE `OpTypeDeclaration` ROW THE ENGINE'S §5 CLAUSE ITEM 3 RESTS ON — the two-kind split, preserved on the DECLARATION, which is where operations.js's own docblock says the guards read it. If this row's shape changed, `ctx.decl.requires.registry` would name nothing and every prerequisite and connection rule would go silently vacuous. count 1."
+        }
+      ],
+      "acceptanceCases": [
+        {
+          "id": "A1",
+          "case": "THE FOLD IS WHAT MAKES IT NON-VACUOUS. A queue of two over the real catalogue — `found-phantom` then `promote-phantom` (whose `requires.registry` is ['found-phantom']), and the same two reversed — judged by one synthetic prerequisite rule reading `ctx.decl.requires.registry` against `ctx.priorEntries`. MEASURED AT COMPILE through the planted engine: IN ORDER 0 guards, OUT OF ORDER 1 guard of kind `prerequisite` on the promote-phantom entry. A queue of one is judged exactly as a queue of ten (design §12's product ruling).",
+          "home": "tests/domain/editGuards.test.js",
+          "authorizedBy": "§7's `CREATE` row for `tests/domain/editGuards.test.js` (adds exactly 7 literal `it`s, one per sealed case A1 to A7)"
+        },
+        {
+          "id": "A2",
+          "case": "THE DECLARATION, NEVER THE FLATTENED `Op` — the member's whole reason. All 22 catalogue rows staged as one queue and judged twice by the same rule, once reading `ctx.decl.requires.registry` and once reading `ctx.op.requires`. MEASURED AT COMPILE: the declaration reads 3 prerequisite guards, the flattened Op reads 5, and the 2 extra are exactly the entries for `remove-npc` and `set-npc-status` — the two rows whose `requires.world` is ['npcPresent'], a design §18 world-state condition that decides which seals a card OFFERS and is not a guard at all. THE ANTI-VACUITY ARM names both op types, so a member that silently read `op.requires` reds by name rather than by count.",
+          "home": "tests/domain/editGuards.test.js",
+          "authorizedBy": "§7's `CREATE` row for `tests/domain/editGuards.test.js` (adds exactly 7 literal `it`s, one per sealed case A1 to A7)"
+        },
+        {
+          "id": "A3",
+          "case": "PROCEED ALWAYS, AND ONLY DECLARED OFFERS. One entry judged by a rule offering ['reorder','nonsense','reorder','fulfil'] and by a second rule offering nothing at all. MEASURED: the first guard's offers read ['reorder','fulfil','proceed'] — deduped in the RULE's own order, the undeclared member dropped, `proceed` appended; the offer-less rule's guard reads exactly ['proceed']. No guard returned anywhere in this file has an empty `offers` or lacks `proceed`, which is design §2.7 and §P8 made structural.",
+          "home": "tests/domain/editGuards.test.js",
+          "authorizedBy": "§7's `CREATE` row for `tests/domain/editGuards.test.js` (adds exactly 7 literal `it`s, one per sealed case A1 to A7)"
+        },
+        {
+          "id": "A4",
+          "case": "THE ORDER IS DESIGN §11's, AND IT IS TOTAL. Five entries shuffled — orderIndex 2 with no `when`, orderIndex 9 with no `when`, when.tick 1, when.tick 3, when.season 'winter' — judged by one rule that fires on every entry. MEASURED: the guards come back [\"v\",\"z\",\"w\",\"x\",\"y\"]: absent `when` first (by orderIndex, because an unscheduled entry is due at the next advance), then ticks ascending, then the season-only entry, which has no tick to compare and never resolves one (the engine reads no clock). Shuffling the input does not move the output.",
+          "home": "tests/domain/editGuards.test.js",
+          "authorizedBy": "§7's `CREATE` row for `tests/domain/editGuards.test.js` (adds exactly 7 literal `it`s, one per sealed case A1 to A7)"
+        },
+        {
+          "id": "A5",
+          "case": "ONLY PENDING, ONLY WELL-FORMED, AND ONLY WIRED (re-derived at version 2). A registry holding one `applied`, one `withdrawn` and one `pending` entry; a rule yielding null, 42, a finding with a kind outside GUARD_KINDS, a finding with an empty message, and one good finding; and a rule set of three — one `needs: ['checkStructuralValidity']`, one `needs: ['renormalizeFactionPower']`, one with NO `needs` key — run against three `deps` bags and once against an EMPTY registry. MEASURED: exactly ONE entry is judged and exactly ONE finding survives the malformed five ([\"kept\"]). Both deps supplied: `unevaluated` [] and `ctx.deps` carries both names. One supplied: guards [\"also\"], unevaluated [\"wired\"]. None: guards [], unevaluated [\"also\",\"wired\"] — deduped and codepoint-sorted. On an EMPTY registry the wiring is STILL reported ([\"also\",\"wired\"]), because what is wrong is the CALLER and an empty queue must not hide it. The rule with no `needs` key is malformed and appears in NEITHER half. A non-array registry and an absent ruleSet both yield two empty halves; the verdict and both halves are FROZEN. Design §9 is the tie-break for every skip: a false warning costs more trust than a missing one.",
+          "home": "tests/domain/editGuards.test.js",
+          "authorizedBy": "§7's `CREATE` row for `tests/domain/editGuards.test.js` (adds exactly 7 literal `it`s, one per sealed case A1 to A7)"
+        },
+        {
+          "id": "A6",
+          "case": "THE ID IS STABLE, AND AN OVERRIDE MARKS ITS GUARD. A1's out-of-order queue evaluated twice, then the same queue with the first guard's id written into that entry's `overrode`. MEASURED: both evaluations mint `prereq-from-decl:p:-:found-phantom`; with the id in `overrode` the guard is STILL RETURNED and reads `overridden: true`. Two findings under one identity come back ['twin:t:-:-','twin:t:-:-:2'] — an ordinal, never a collision and never a lost finding. Suppression is REFUSED by contract: it would make the guard set depend on history a rewind cannot reproduce, and a suppressed guard cannot be un-proceeded.",
+          "home": "tests/domain/editGuards.test.js",
+          "authorizedBy": "§7's `CREATE` row for `tests/domain/editGuards.test.js` (adds exactly 7 literal `it`s, one per sealed case A1 to A7)"
+        },
+        {
+          "id": "A7",
+          "case": "PURE: NOTHING THE ENGINE WAS HANDED MOVES, AND `project` IS THE ONLY FOLD. A deeply frozen world and a frozen two-entry registry, judged first with a projector that appends each op type to a NEW array and then with `project: null`. MEASURED: with the projector entry 0 sees \"\" and entry 1 sees \"promote-phantom\"; the registry's JSON is byte-identical before and after and the frozen world's array is still empty. With no projector, `ctx.folded === world` by IDENTITY for every entry. THE WRITTEN-CONTRACT COUNTERFORCE (§P6, the arm holds at the base so it cannot be red-first): the same arm run against a planted engine that mutates its world argument reds the named title, the exact pre-mutant SHA-256 is restored, and the arm is green again.",
+          "home": "tests/domain/editGuards.test.js",
+          "authorizedBy": "§7's `CREATE` row for `tests/domain/editGuards.test.js` (adds exactly 7 literal `it`s, one per sealed case A1 to A7)"
+        },
+        {
+          "id": "A8",
+          "case": "THE PROPERTY, OVER QUEUES OF 1 TO 10 (ARCH §6, design §7 lane C; re-derived at version 2). Ten queues of lengths 1 to 10 alternating `found-phantom` and `promote-phantom`, judged TWICE — by a prerequisite rule and a fires-always rule, and again with a third rule declaring `needs: ['checkStructuralValidity']` against a fully supplied `deps` — every row COLLECTED and asserted ONCE. MEASURED AT COMPILE for all ten lengths in both runs: every guard offers `proceed` (true 10/10), every guard id is unique within its run (true 10/10), the guards are ordered by entry and then by rule id (true 10/10), and the guard counts read 1..10 unwired and 2..20 wired. `unevaluated` is EMPTY at every length when the rule set is fully wired — the property's other half, since a silently unrun rule would otherwise read as clean coverage. There is no refusal value to return, which is the property's structural half.",
+          "home": "tests/property/guardsAcceptApplies.test.js",
+          "authorizedBy": "§7's `CREATE` row for `tests/property/guardsAcceptApplies.test.js` (adds exactly 1 literal `it`, homing sealed case A8)"
+        }
+      ],
+      "checks": [
+        [
+          "npx",
+          "vitest",
+          "run",
+          "--pool=threads",
+          "--maxWorkers=2",
+          "tests/domain/editGuards.test.js",
+          "tests/domain/editOperations.test.js",
+          "tests/domain/deterministicSort.test.js"
+        ],
+        [
+          "npx",
+          "vitest",
+          "run",
+          "--pool=threads",
+          "--maxWorkers=2",
+          "tests/property/guardsAcceptApplies.test.js",
+          "tests/property/generatorGoldenMaster.test.js",
+          "tests/property/dossierProseManifest.test.js"
+        ],
+        [
+          "npx",
+          "vitest",
+          "run",
+          "--pool=threads",
+          "--maxWorkers=2",
+          "tests/lint/opGuardCoverage.walker.test.js",
+          "tests/lint/editMutationPath.walker.test.js",
+          "tests/lint/editDeclarations.walker.test.js",
+          "tests/lint/flavorFields.census.test.js",
+          "tests/lint/entropyRootCensus.walker.test.js",
+          "tests/lint/ruinFilterRoster.walker.test.js",
+          "tests/lint/tuningRegister.walker.test.js",
+          "tests/lint/domainAnyCastBaseline.test.js",
+          "tests/lint/recordRegisterTotality.walker.test.js",
+          "tests/lint/heldKeyWriterCensus.walker.test.js",
+          "tests/lint/transientChooserRegistry.walker.test.js",
+          "tests/lint/localeCompareGuard.test.js",
+          "tests/lint/contractTestAntiVacuity.walker.test.js",
+          "tests/lint/seedLoopTotality.walker.test.js",
+          "tests/lint/negativeAssertionAnchor.walker.test.js",
+          "tests/lint/sourceCitationIntegrity.walker.test.js",
+          "tests/lint/mutationCoverageManifest.test.js",
+          "tests/lint/proseNumerics.test.js",
+          "tests/lint/testRatchet.test.js"
+        ],
+        [
+          "npx",
+          "vitest",
+          "run",
+          "--pool=threads",
+          "--maxWorkers=2",
+          "tests/build/domainGeneratorsBoundary.test.js"
+        ],
+        [
+          "npx",
+          "vitest",
+          "run",
+          "--pool=threads",
+          "--maxWorkers=2",
+          "tests/copy/voiceMechanics.test.js"
+        ],
+        [
+          "node",
+          "scripts/implementation-packets.mjs",
+          "validate"
+        ]
+      ],
+      "_checksDerivation": "TOOL-26 (`scripts/governing-tests.mjs`) has NOT landed at this tip (`ls` reports no such file), so the governing set is DERIVED as §P7 directs: `git grep -l -F '<basename without extension>' -- tests` for every changed file, `git grep -l -F 'src/domain/edit' -- tests scripts` for the directory this member CREATEs a leaf in, and the walkers that govern BOTH `tests/domain` and `tests/property` (the two directories this member CREATEs a test file in), MINUS `tests/lint/sovereigntyLightingContract.walker.test.js` and MINUS `tests/lint/proseWiringCensus.walker.test.js`, each of which reds BY DESIGN under a train and whose presence in a sealed array would mean `check:packet` can never pass (§P2.1, §P2.13, §P7). Both excluded walkers are run ALONE by the build lane, expected NONZERO, and quoted in §12. `tests/build/domainGeneratorsBoundary.test.js` is a pure SOURCE scan with no dist gate (measured: no `dist`, `runIf`, `skipIf` or `requireDistRead` token in it), so naming it cannot be refused by TOOL-2's dist-gate guard. No generator is named in any array, so the §P2.14 ordering law has nothing to order.",
+      "_lightingDelta": "files +2 · parked +0 · credited +2 · titles +8 · suiteTitles +2 — ALL FIVE FIGURES in the register's own order (§P2.1). The two CREATEd test files each register straight-line literal `it`s under ONE literal `describe` with their own `vitest` import and no binding named `it`/`test`/`describe`, so each is CREDITED rather than PARKED. Titles: 7 in tests/domain/editGuards.test.js plus 1 in tests/property/guardsAcceptApplies.test.js. The baseline at this read tip is 2697 · 359 · 2338 · 25820 · 6855 (as of e5eab80c8, the twenty-second refreeze) and is NEVER quoted as this packet's prediction; the refreeze is the chair's terminal act and `tests/lint/.lighting-census-baseline.json` appears in no row, no check and no §7 table.",
+      "_deferredRows": [
+        "tests/lint/.lighting-census-baseline.json — the chair's terminal refreeze carries this member's five-figure delta. NOT a change-manifest row, NOT a check, NOT a §7 row; the walker holds no live tuple and a deferred row addressed at the walker would reserve a path the terminal never writes (§P2.1).",
+        "docs/content/wiring-census.json — `stamp.producerIndexFiles` +1, the one new leaf NAMED: src/domain/edit/guards.js. `stamp.files` and `stamp.candidateLeaves` UNMOVED (this member touches no src/domain/display/stateProse/ path, which is what those two sha maps key on); `totals.*` UNMOVED (it produces no pool, no variant and no relation). Measured against the two roots scripts/wiring-census.mjs walks, `src/generators` and `src/domain`: 1190 .js files at this tip, which is exactly the stamp's value. The regeneration is the TRAIN TERMINAL's act by the chair; no member runs `node scripts/wiring-census.mjs` and the path appears in no row (§P2.13)."
+      ],
+      "_mutationCoverageRowKey": "NONE — not owed. `ENFORCER_DIRS` read at this tip from tests/lint/mutationCoverage.shared.mjs is tests/lint · tests/design · tests/docs · tests/data · tests/copy · tests/security · tests/edgeFunctions · tests/generators; neither `tests/domain` nor `tests/property` is a member, and NAME_PATTERN (census|scan|baseline|ratchet|walker|killlist|parity|coverage|governance|freshness|integrity|exhaustiveness|roundtrip|golden|contract|pin) matches neither `editGuards.test.js` nor `guardsAcceptApplies.test.js`.",
+      "_byteNote": "+0 B in EVERY emitted chunk, and the MEMBERSHIP PROOF reads no dist and therefore cannot skip: `src/domain/edit/guards.js` is a NEW leaf with ZERO importers at its landing (EM-C4b's `selectGuards` is its first caller, a later wave), so it enters no import closure — not the generation worker's (`WORKER_BUNDLE_CEILING_BYTES` = 1391327 at this tip, zero slack), not the lazy engine's, not the eager first-paint set's (`EAGER_FIRST_PAINT_MODULES`, imported rather than listed). This member is NOT the train's byte-arm holder, carries NO budget test row on tests/build/generationWorkerLazy.test.js or tests/build/vendorPdfLazy.test.js, and states its own predicted delta as zero under whichever holder the chair names at the placement (§P2.11).",
+      "_collisionGroup": "EM-C3 (the shared §5 rules-interface clause, byte-identical in both packets) and EM-C1 (the decree entry shape §5 declares). NO FILE PATH IS SHARED with either member: all three of this member's paths are CREATEs that no sibling names.",
+      "_collisionNote": "EM-C1 IS NOT COMPILED — the charter holds it behind the owner's decision point on the per-tick registry cap (`waves 2-5` row: 'the per-tick registry cap (default: none) is asked before EM-C1 is compiled'). This member therefore declares the ENTRY SHAPE it reads in §5 and imports nothing from registry.js; if EM-C1's compile lands a different entry shape, the contradiction is measured against this §5 block and is a STOP for whichever member is compiled second.",
+      "_dependencyNote": "Depends on NONE. `src/domain/edit/guards.js` imports exactly one module, `src/domain/deterministicSort.js`. EM-C3's rules arrive as the fourth ARGUMENT, their two generator writers on `ruleSet.deps`, and EM-C1's entries as DATA, so this member is buildable, testable and landable with both unlanded. Judgment 236 makes it the FIRST of the two to land: EM-C3 imports GUARD_KINDS and GUARD_OFFERS from this leaf and carries `Depends on: EM-C2`.",
+      "_baseNote": "Compiled at the read tip 1b073009f (train EM-T16's LANDED tip) and RE-MEASURED at train EM-T17's base a545899ff (= 1b073009f + the hygiene commit d44159dc0). THE J-T1 WINDOW IS EMPTY: git diff --stat 1b073009f a545899ff over EVERY change-manifest path AND EVERY requiredSymbols path prints nothing, and none of the window's 24 files is an instrument, a config or a register this packet reads. The three CREATE targets are ABSENT; the four required symbols read count=1 verbatim; every instrument figure re-runs identical; the engine probe's figures (flat 5 / decl 3 / the 2 extra remove-npc and set-npc-status) re-execute identical against the real OP_TYPES at a545899ff. Every figure in this capsule is a DELTA or an executed measurement; the two register absolutes quoted anywhere (the lighting tuple and 1190) carry their as-of mark and are never this packet's prediction.",
+      "_member": "Wave 2 of the edit-mode charter: EM-C1 the registry · EM-C2 THE GUARD ENGINE · EM-C3 the rules · EM-C4b the slice's registry actions. Rides train EM-T17 beside EM-R7, EM-R1c and EM-C3.",
+      "_archDeviations": [
+        "ARCH §5's `evaluateGuards(registry, world, catalogue)` is EXTENDED by a fourth argument, `ruleSet` = `{ rules, project, deps }`. The three named arguments keep their names, order and meanings.",
+        "Design §2.7's BARE ARRAY return is SUPERSEDED by the shared §5 clause, deliberately and in both packets (the chair's judgment 236): `evaluateGuards` returns `{ guards, unevaluated }`, so ARCH §5's 'coverage is stated when empty' becomes a runtime statement and a rule the caller under-supplied cannot vanish.",
+        "ARCH §5's sentence 'Coverage is declared per op type in OP_TYPES[type].guards and stated when empty' is NOT acted on: tests/lint/opGuardCoverage.walker.test.js C7 pins that roster empty AND pins every row's 'no guard' sentence, so populating it is a MODIFY of operations.js plus a widen of that walker. The chair closed it as EM-C2b (judgment 235b), after both members land.",
+        "ARCH §2's `Guard` typedef gains THREE fields with their reasons in §6 and nothing is removed: `id` (an entry's `overrode` records guard IDS, so something must mint them), `ruleId` (which rule spoke) and `overridden` (the registry page's badge; MARKED, never suppressed — ratified by judgment 236). This is the same deliberate extension EM-A1's src/domain/edit/types.js already records against ARCH §2.",
+        "Design §2.7's kinds ('prerequisite'|'contradiction'|'duration'|'range') are SUPERSEDED by §12.8, which GOVERNS: the five kinds, with `duration` and `range` dropped until a count table exists."
+      ],
+      "_sharedClause": "THE ONE TEXT the chair landed (judgment 236), carried VERBATIM in this packet's §5 and in EM-C3.md's §5: SHA-256 20ff767bc6a53ff5b3f178932017eab9af721b03bc98f65bbd62d100a8576aae, 8,288 bytes. The kit's standalone copy is SHARED-CLAUSE.final.md. Each packet's count prover prints the digest of its own copy; a divergence at either placement or either build is a STOP (§11.9). Version 1's draft was 80f9dcf3…3f721 (5,515 B) and EM-C3's was 5eb6aa67…14d64 (7,643 B).",
+      "_rulingNote": "JUDGMENT 236 (2026-09-23) decided all four rulings version 1 owed: Delta 1 (`needs`) and Delta 2 (`deps`, the skipped-rule report, the `{ guards, unevaluated }` return) ADOPTED — this packet's version 2; Delta 3 decided for the ENGINE, so GUARD_KINDS, GUARD_OFFERS and the typedefs stay in guards.js and EM-C2 LANDS BEFORE EM-C3 (which carries Depends on: EM-C2); OP_TYPES[*].guards stays empty (EM-C2b later, 235b); an overridden guard is MARKED, never suppressed; the flavour census's dropped fourth root is re-added by EM-C3 version 2, not here.",
+      "_preproofNote": "PRE-PROOF (Opus seat, train EM-T17 stage 1, 2026-09-23, at a545899ff) - version 3. Changed only stale or unstated facts: the voice literal count 35 -> 36; §6 now names all six typedefs and pins the two vocabulary spellings; the type floor's two configs are assigned per path; judgment 196's title law is stated with its measurement; the preamble hash, the register absolutes and the whole J-T1 window are re-measured at a545899ff. NO contract, acceptance case, path, check or budget figure moved, and the §5 clause was NOT touched (SHA-256 unchanged, still byte-identical to EM-C3's). node scripts/implementation-packets.mjs validate at a545899ff prints 'valid: 230 packets (0 READY)' and exits 0. PATH-DISJOINTNESS, MEASURED BOTH WAYS: the intersection of this member's three CREATE paths with EM-R1c (stage 1) is EMPTY, and with EM-C3, EM-R7 and EM-B2b (stage 2) it is EMPTY.",
+      "_openForTheChair": "⛔ ONE CONTRADICTION WITH EM-C3 v2, MEASURED AND NOT REPAIRED ON EM-C3's SIDE. EM-C3.md's §7 row for tests/build/vendorPdfLazy.test.js asserts that EM-C2 adds 'src/domain/edit/guards.js' to the editorTrain array and leaves a TWELVE-row array. THIS PACKET CARRIES NO SUCH ROW. Measured at a545899ff: editorTrain holds ELEVEN rows, and the arm is expect(present).toEqual(editorTrain) over existsSync plus expect(present.filter(inEager)).toEqual([]) - it pins that every LISTED module exists and none is eager, with NO totality arm over src/domain/edit, so an unlisted CREATE reds nothing and this member is not forced to carry the row. The chair closes it: adding the row would give stage 1 and stage 2 of ONE train a shared path (judgment 239), would move this packet's collision group off 'no file path is shared', and would require this packet's count prover to be corrected, because its testFiles counter increments on every tests/ row and a TEST row on an existing file would break the files/credited/suiteTitles laws that are green today.",
+      "_stageTwoMovesAfterMe": "EM-C3 CREATEs src/domain/edit/guardRules.js, the FIRST importer of this leaf (the leaf stops being import-dark; EM-C3 itself lands dark, so no emitted chunk is reached and +0 B survives both landings), and re-adds the flavour census's dropped fourth root as two FILE roots, the first being 'src/domain/edit/guards.js' - so this leaf becomes a WALKED root of tests/lint/flavorFields.census.test.js at EM-C3's landing and not before (§12 ruling 2). EM-R1c, EM-R7 and EM-B2b touch no path of this member."
     }
   ]
 }
