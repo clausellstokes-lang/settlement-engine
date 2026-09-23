@@ -1869,6 +1869,16 @@ export const en = Object.freeze({
       indicator:      'This settlement is open for editing.',
       enter:          'Edit',
       enterNamed:     'Edit {name}',
+      // ⛔ THE ONE HOME FOR THE WAIT LINE, AND THE ONE KEY THE EAGER SHELL MAY NOT
+      // RESOLVE THROUGH `t()`. `src/App.jsx` owns the shell's Suspense boundary and is
+      // EAGER: measured, one `import { t } from './copy/index.js'` there puts THIS FILE
+      // into the first-paint closure (270 -> 272 modules), which reds the editor-train
+      // arm of tests/build/vendorPdfLazy.test.js and moves three owner-signed budgets.
+      // So the root spells the sentence as a literal, exactly as every other narrated
+      // Suspense fallback in the estate does, and tests/components/editModeShell.test.jsx
+      // pins the two BYTE-EQUAL — the sentence still has one home and a locale still
+      // finds it here.
+      opening:        'Opening the editor…',
       cardsHead:      'Cards',
       actsHead:       'Acts',
       derivedHead:    'Derived',
