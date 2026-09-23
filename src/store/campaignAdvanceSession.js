@@ -22,7 +22,7 @@
  * SAME dynamic-import seam tests mock, and this module never gains a static edge to
  * the sim (keeping the lazy chunking + the mockability of the kernel intact).
  */
-import { ensureWorldState } from '../domain/worldPulse/worldState.js';
+import { ensureWorldState, pulseIdFor } from '../domain/worldPulse/worldState.js';
 import { appendWizardNewsEntries } from '../domain/region/index.js';
 // Lane-2 drain-path parity (domain-events-region-1 twin): the LIGHT eager-safe gate
 // deciding whether a queued event is a NON-party canon relationship verb — the SAME
@@ -178,6 +178,93 @@ export async function decreeCataloguesForSaves(saves) {
     poolsBySave[helpers.saveId(row)] = Object.freeze(live);
   }
   return { opTypes, poolsBySave: Object.freeze(poolsBySave) };
+}
+
+/** One frozen empty list, so an advance with no applied decree allocates nothing. */
+const NO_CHRONICLE_ENTRIES = /** @type {readonly Record<string, unknown>[]} */ (Object.freeze([]));
+
+/**
+ * ⭐ U76 — THE APPLIED DECREE'S CHRONICLE LINE, COMPOSED FOR THE CAMPAIGN'S ONE CHRONICLE
+ * (EM-C1b unit 2; the verifier's FIX-7; design §2.6, §11; ARCH §1).
+ *
+ * "The pulse must treat decrees as first-class causes or the chronicle lies" (design §9).
+ * EM-E1's hook applied them and EM-E2 wrote the voice, and nothing joined the two: an
+ * applied decree landed a RECEIPT and an advance-report row and left the realm's actual
+ * scrollback silent about the one act the DM ordered by hand.
+ *
+ * ⛔ WHY THE COMPOSITION IS HERE AND THE REFERENCE IS IN THE HOOK. They are two writes at
+ * two instants and neither may move. The `chronicleRef` can ONLY be written at the instant
+ * of application (`amendPending` amends a pending row and nothing else), so the hook writes
+ * it — see `decreeHook.js`'s `CHRONICLE_REF_PREFIX`. The LINE needs EM-E2's prose leaf and
+ * the campaign, and the hook may reach neither: case E1-8 pins its import list at EXACTLY
+ * TWO, and the prose leaf has no `src/` importer on purpose. So the advance — which already
+ * holds the campaign, the result and the bound writer — composes, and the two halves are
+ * joined by ONE ADDRESS that case C1b-1 holds equal to the producer's own minting.
+ *
+ * ⛔ NO SECOND WRITER AND NO NEW PERSISTED KEY. The entries below are exactly the four keys
+ * `appendCampaignChronicle` already persists (`id`, `tick`, `prose`, `createdAt`) and go
+ * through that one action. The prose leaf's return also carries `decreeId`, `cause` and
+ * `followsFrom`; they are deliberately NOT carried across, because a chronicle entry that
+ * grew a field would be a persisted-shape change and that is the owner's (U93). The CAUSE
+ * is not lost by dropping the key — it is the receipt's own hand word, handed to the
+ * producer below so the sentence it draws is the table's.
+ *
+ * ⛔ THE EDGE IS DYNAMIC and the early return is BEFORE it, so an advance with no applied
+ * decree — every world today — reaches no import, composes nothing and appends nothing.
+ *
+ * ⛔ THE TICK IS RECOVERED WITH THE PRODUCER'S OWN VERB. An entry applied at tick 3 of a
+ * fifty-two week advance must be filed at tick 3, not at the interval's landing tick, or
+ * the scrollback puts the DM's act in the wrong year. `markApplied` wrote `pulseIdFor`'s
+ * output onto the entry, so the ticks of this advance are run back through `pulseIdFor`
+ * and matched — never by parsing the id, which would be a second spelling of its grammar.
+ *
+ * PURE apart from the one dynamic import: no clock, no draw, no write.
+ *
+ * @param {unknown} result the composed pulse result this advance is committing
+ * @param {unknown} campaignId @param {unknown} preTick the world tick before the advance
+ * @returns {Promise<readonly Record<string, unknown>[]>} the entries to append, in the
+ *   order the tick applied them; the shared empty list when the tick applied none.
+ */
+export async function decreeChronicleEntriesForResult(result, campaignId, preTick) {
+  const bag = result && typeof result === 'object' ? /** @type {any} */ (result) : {};
+  const history = Array.isArray(bag.worldState?.pulseHistory) ? bag.worldState.pulseHistory : [];
+  // The tick's own receipt, which the interval collapse deliberately carries across every
+  // tick of the advance (deduped by the (saveId, decreeId) pair) precisely so the DM's act
+  // cannot be applied and erased from the record in one advance.
+  const causes = Array.isArray(history[history.length - 1]?.decreeCauses)
+    ? history[history.length - 1].decreeCauses
+    : [];
+  if (causes.length === 0) return NO_CHRONICLE_ENTRIES;
+  const updates = Array.isArray(bag.settlementUpdates) ? bag.settlementUpdates : [];
+  const bySave = new Map(updates.map((/** @type {any} */ row) => [String(row?.saveId), row]));
+  const endTick = Number.isFinite(bag.tick) ? Number(bag.tick) : null;
+  const startTick = Number.isFinite(preTick) ? Number(preTick) : endTick;
+  /** @type {Map<string, number>} */
+  const tickByRef = new Map();
+  if (endTick !== null && startTick !== null) {
+    for (let t = startTick; t <= endTick; t += 1) tickByRef.set(pulseIdFor(campaignId, t), t);
+  }
+  const { decreeChronicleLine } = await import('../domain/display/stateProse/decreeProse.js');
+  /** @type {Record<string, unknown>[]} */
+  const entries = [];
+  for (const cause of causes) {
+    const update = bySave.get(String(/** @type {any} */ (cause)?.saveId));
+    const registry = Array.isArray(update?.settlement?.decrees) ? update.settlement.decrees : [];
+    const entry = registry.find((/** @type {any} */ row) => row?.id === /** @type {any} */ (cause)?.decreeId);
+    if (!entry) continue;
+    const tick = tickByRef.get(String(entry.tickRef));
+    const line = /** @type {any} */ (decreeChronicleLine(entry, update?.settlement, {
+      registry,
+      cause: /** @type {any} */ (cause)?.cause,
+      ...(tick === undefined ? {} : { tick }),
+    }));
+    // The leaf returns null for a row it cannot say anything true about, and design §11's
+    // own rule is that half a sentence about a decree is worse than none: a silent entry
+    // is skipped rather than filed with an empty line.
+    if (!line || typeof line.prose !== 'string' || line.prose === '') continue;
+    entries.push({ id: line.id, tick: line.tick, prose: line.prose, createdAt: line.createdAt });
+  }
+  return entries.length === 0 ? NO_CHRONICLE_ENTRIES : entries;
 }
 
 const AUTH_SESSION_CHANGED_RESULT = Object.freeze({ ok: false, reason: 'auth_session_changed' });
@@ -949,6 +1036,26 @@ export async function runAdvanceCampaignWorld({
         persistUpdates = withMintedRosterState(get(), persistUpdates, receipts);
       } catch { /* best-effort */ }
       if (!sessionCurrent(isSessionCurrent)) return AUTH_SESSION_CHANGED_RESULT;
+    }
+    // ⭐ U76 — AND THEN THE RECORD OF IT (EM-C1b unit 2; design §2.6, §9, §11). The order
+    // is the act's own: the hook applied the decree, the roster half above carried out its
+    // world effect, and this files the line the realm reads. It runs BEFORE the one flush
+    // below for the reason EM-E8b A moved the roster half there — so the tick's writes are
+    // one durable moment — though `appendCampaignChronicle` also persists on its own, which
+    // is what makes it the single writer of `chronicles[]` rather than a helper.
+    //
+    // ⛔ THE WRITER IS THE CAMPAIGN SLICE'S OWN BOUND ACTION, reached off `get()` exactly as
+    // the two replays below reach theirs, so THERE IS NO NEW IMPORT EDGE from the domain
+    // hook into the store and no second writer of the chronicle. Best-effort and
+    // session-fenced like its neighbours: the record half never blocks the advance.
+    if (result && result.ok !== false) {
+      const chronicleEntries = await decreeChronicleEntriesForResult(result, campaignId, preTick);
+      if (chronicleEntries.length > 0 && typeof get().appendCampaignChronicle === 'function') {
+        for (const chronicleEntry of chronicleEntries) {
+          if (!sessionCurrent(isSessionCurrent)) return AUTH_SESSION_CHANGED_RESULT;
+          try { get().appendCampaignChronicle(campaignId, chronicleEntry); } catch { /* best-effort */ }
+        }
+      }
     }
     if (!sessionCurrent(isSessionCurrent)) return AUTH_SESSION_CHANGED_RESULT;
     await flushWorldPulsePersist({

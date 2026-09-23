@@ -69,6 +69,22 @@ const VOCABULARY_MOVED = 'vocabulary-moved';
 /** The off-stage marker of ARCH §2's `Op.stage`. */
 const OFF_STAGE = 'off-stage';
 
+/**
+ * ⭐ EM-E2'S OWN ADDRESS FOR ONE DECREE'S CHRONICLE LINE, RE-SPELLED HERE AND HELD EQUAL
+ * RATHER THAN IMPORTED (EM-C1b unit 2 / the verifier's FIX-7, U76).
+ *
+ * `decreeChronicleLine` mints a line's id from the entry's RECORDED reference when it has
+ * one and from `decree:` plus the decree's own id when it does not, so this prefix is that
+ * leaf's grammar and not a second one. It is spelled here for the reason case E1-8 spells
+ * out: THIS FILE'S IMPORT LIST IS EXACTLY TWO, and the prose leaf — which has no `src/`
+ * importer at all, on purpose, so its volume stays out of the editor's chunk — cannot be
+ * the third. `EditModeShell.jsx`'s `chronicleHrefFor` already re-spells the same grammar
+ * for the same reason, and the estate's answer to a re-spelling is the one taken here:
+ * case C1b-1 drives the REAL producer over the same row and holds the two EQUAL, so a
+ * change to the leaf's minting reds rather than drifting.
+ */
+const CHRONICLE_REF_PREFIX = 'decree:';
+
 /** One frozen empty list, so a dormant tick allocates nothing and compares alike. */
 const NO_CAUSES = /** @type {readonly DecreeCause[]} */ (Object.freeze([]));
 
@@ -221,7 +237,17 @@ export function applyDecreesAtTick(worldState, registry, tickRef, options) {
       }
     }
     if (!isName(now)) continue;
-    const next = markApplied(current, entryId, { appliedAt: now, tickRef });
+    // ⭐ THE LINE'S REFERENCE IS WRITTEN IN THE SAME ACT AS THE APPLICATION, because this is
+    // the ONLY instant at which it can be: `markApplied` reaches its row through EM-C1's
+    // `amendPending`, which amends a PENDING entry and nothing else, so a writer seated
+    // after the tick hands the reference to a verb that has already declined it — silently,
+    // the registry re-sealed and the key absent (EM-E2b measured exactly that, case E2b-1,
+    // and STOPPED on it). The LINE itself is composed and appended by the advance, which is
+    // the layer that holds the campaign and its one `chronicles[]` writer; this leaf may
+    // reach neither, and the address is all it needs to write.
+    const next = markApplied(current, entryId, {
+      appliedAt: now, tickRef, chronicleRef: `${CHRONICLE_REF_PREFIX}${entryId}`,
+    });
     current = next;
     causes.push(causeFor(row, saveKey, tickRef));
   }
