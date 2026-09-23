@@ -18,13 +18,14 @@ compiled after this amendment carries no interim row and no clause saying which 
 they disagree."* Measured at `64b75240c`. Every law the deleted row carried is in the preamble, in
 `PACKET_STANDARD.md` or in `PACKET_TEMPLATE.md`; nothing this packet asserts rested on the sheet.
 
-- **Status:** `READY`
+- **Status:** `LANDED`
   ⚠ The status value stands ALONE on its line because `parsePacketHeader` anchors the status row at end-of-line.
 
   ⭐ **READY-able at `64b75240c`** (train EM-T15's flipped tip) — RE-MEASURED WHOLE by the Opus
   pre-proof lane of train EM-T16 stage 1, 2026-09-23, under the SIXTH amendment. The 09-20 pre-proof at
   `141a1d775` was stale by eight trains; every verified fact is re-executed here (evidence T16-1…T16-14).
   FOUR contracts are open for the chair (§12 questions 1–4); nothing is refuted.
+- **Landed at:** `ce696cf86658e135972ce3c39d95e5a25feb1f96` — recordInvariants — the town's own invariants as a module (version 8): three pure leaves under src/domain/edit with their own arms; the five pending symbols discharged (151); the famine label keyed by band key, the integer tolerance, the 65-row stride with a count guard (208 a–c); +0 bytes in both closures by measured membership; built at ce696cf86 on train EM-T16 stage 1
 - **Packet version:** 8
   - ⭐⭐ **What version 8 changed and why (the Opus PRE-PROOF lane of train EM-T16, 2026-09-23, at
     `64b75240c`).** The 09-20 pre-proof was taken at `141a1d775`, under the SECOND amendment, **206
