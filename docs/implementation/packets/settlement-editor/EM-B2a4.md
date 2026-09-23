@@ -90,7 +90,7 @@
   > siblings AS PACKETS. All three have since LANDED as real code on train EM-T12
   > (`16f0bc71c`), and judgment 134's law makes a sibling's LANDED fence the only one a
   > member may measure, so every fact this member took on prediction was re-measured. FIVE
-  > facts moved. (1) **EM-B2a2 landed `chooseOrPin` at a NEW HOME** — `src/generators/pipeline.js:152`,
+  > facts moved. (1) **EM-B2a2 landed `chooseOrPin` at a NEW HOME** — `src/generators/pipeline.js :: chooseOrPin`,
   > EXPORTED — so version 1's `requiredSymbols` row naming
   > `src/generators/steps/generatePopulation.js` returns `count=0` and is REFUTED; the row is
   > re-pointed. (2) **EM-C4a landed `REDERIVE_SEAM` and named this member its owner**
@@ -137,7 +137,7 @@
   `DM_ID_NS` `:63`, `APPLY_EDIT_REASONS` `:71`, `layerRead` `:125`, `applyEdit` `:164` AT ARITY
   THREE, `mintDmId` `:230`);
   **EM-B2a2** LANDED (`export function chooseOrPin(pins, key, draw)` at
-  `src/generators/pipeline.js:152` — the primitive's ONE exported home, MOVED off
+  `src/generators/pipeline.js :: chooseOrPin` — the primitive's ONE exported home, MOVED off
   `steps/generatePopulation.js`, which now IMPORTS it at `:18`);
   **EM-B2a3** LANDED (`assembleInstitutions.js:236-238` and `generatePower.js:74,:84` consult
   the pin seam for every key they provide, through an `UNPINNED` sentinel);

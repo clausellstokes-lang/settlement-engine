@@ -163,7 +163,7 @@ taken from the charter. **The per-file counts version 1 recorded still hold exac
 · `magicFilter` **1**. Version 1's pinned counts are CONFIRMED at this slot.
 
 ⭐⭐ **AND THE SWEEP FOUND A SIXTH PRODUCTION READER THE CHARTER'S CENSUS OF FIVE MISSED.**
-`src/generators/priorityHelpers.js:147` — `computeEffectiveMagicPresence`, the self-described
+`src/generators/priorityHelpers.js :: computeEffectiveMagicPresence` — `computeEffectiveMagicPresence`, the self-described
 *"single source of truth for magic level across Daily Life, Defense, and Power"* — reads
 `instCategories.some(c => c === 'magic' || c === 'exotic')` and adds folk weight to a
 settlement's magic score for any roster row on those shelves. It is a live generation consumer
@@ -525,6 +525,6 @@ first.
 * **The village `Smuggling network` still declares `minTier: 'city'`** inside the village block
   (`:897-903`). NOT open work — `MF-CH3`'s panel recommended deleting the row and the chair RULED
   NEITHER, refusing the data-move class on measurement. A recorded deferral, not a bug to re-find.
-* **`priorityHelpers.js:147` is a sixth production reader of the display shelf** and
+* **`priorityHelpers.js :: computeEffectiveMagicPresence` is a sixth production reader of the display shelf** and
   `INST_WEIGHTS.folk` still keys magic on the faith string `"healer (divine"`. Both are recorded
   with their measurements in §1.0 above.

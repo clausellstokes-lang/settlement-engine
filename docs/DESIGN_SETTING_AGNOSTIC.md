@@ -131,7 +131,7 @@ price and drops the system.
 | `Lesser Restoration` | `institutionServices.js :: INSTITUTION_SERVICES['Druid Circle']['Healing (nature)']` | sickness lifted |
 | `Sending Stones` | `institutionDescVariants.js:258,259` · `institutionalCatalog.js:2261` · `spatialData.js:482` | `Speaking Stones` (the corpus's own alternative) |
 | `Conjure Animals` | `chainMagicSubstitution.js:67` | conjured game |
-| `Plant Growth` | `chainMagicSubstitution.js:68` · `foodBalance.js:249` · `defenseGenerator.js:385` (comment) | quickened growth |
+| `Plant Growth` | `chainMagicSubstitution.js:68` · `foodBalance.js :: deriveFoodBalanceAnalysis` · `defenseGenerator.js:385` (comment) | quickened growth |
 | `Fabricate` | `chainMagicSubstitution.js:88,113,27` (last is a comment) | arcane fabrication |
 | `Transmute Rock` | `chainMagicSubstitution.js:113` | stone-shaping |
 | `Speak with Animals`, `Detect Poison`, `Purify Food`, `Pass Without Trace` | `institutionServices.js :: INSTITUTION_SERVICES['Druid Circle']['Nature magic services']` | descriptive phrases |
@@ -192,7 +192,7 @@ generated file `institutionServiceKeys.generated.js` and four by-name pins in
 family exactly. Its own SERVICE (`Cure light wounds`) was cured; the institution
 key is a keys-car row.
 
-**`servicesData.js:44-46`** — three `spellcasting services (1st-Nth level)`
+**`servicesData.js :: LOCALE_SERVICE_OVERRIDES`** — three `spellcasting services (1st-Nth level)`
 LOCALE override SOURCES. **Measured rather than assumed:** the lookup is an
 EXACT lowercased key access (`LOCALE_SERVICE_OVERRIDES[instName.toLowerCase()]`
 at `src/generators/services/institutionServices.js :: getServicesForInstitution`, and the same shape at

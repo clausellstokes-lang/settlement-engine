@@ -64,7 +64,7 @@
   stamp, never a precondition of it. The chair's placement replaces `__BASE__` with the form
   `parsePacketHeader` parses into BOTH fields — ``- **Verified base:** `em-t16-em-r4-<date>` at
   `<the train base's 40-char sha>` `` — with the value ALONE on its line (§P9(c)).
-- **Last revalidated:** left for the chair, with the sentence above.
+- **Last revalidated:** `1b073009f003c6d0bdf4a12de719ca54f0f8cc98` — stamped by the chair at train EM-T16's landing (the member landed at 36d82a469; judgment 231).
 - **Depends on:**
   - **EM-R3** (version 2, READY on train EM-T16's stage 2a) — ⛔ **THE ONE LIVE ORDERING
     DEPENDENCY.** It is the ONLY other non-landed packet that MODIFIES

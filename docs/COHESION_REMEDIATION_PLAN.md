@@ -148,7 +148,7 @@ Built incrementally: Wave 0 lands the skeleton + assertions for currently-health
 ## Wave 4 — Roster integrity: subsumption, ports, faction boost, power seam
 
 1. **Subsumption guards.** Never delete self/required/forced/custom institutions; kill the producer-eating rules (verified: zero breweries survive across 120 settlements; every city loses its required courthouses; cathedrals erase parish networks). `subsumptionPass.js:74-117`.
-2. **Port economy end-to-end.** Remove the docks→warehouse UPGRADE_CHAIN pair + the harbour-master-subsumes-docks rule; fix `Port Duties` gating on phantom `'Major port'`; fix `hasPort`'s `'transPORT'` substring false positive (`priorityHelpers.js:49`). The flagship trade-route type works again.
+2. **Port economy end-to-end.** Remove the docks→warehouse UPGRADE_CHAIN pair + the harbour-master-subsumes-docks rule; fix `Port Duties` gating on phantom `'Major port'`; fix `hasPort`'s `'transPORT'` substring false positive (`priorityHelpers.js :: getInstitutionNames`). The flagship trade-route type works again.
 3. **Faction-institution boost.** `factionCorrelation.js`: `def.baseChance` (rarity respected), resolve user toggles with the real key format (DM exclusions honored), and run the pass **before** `generateEconomy` so boosted institutions join chains/services/income.
 4. **`powerStructure.governingName` written.** Seven sim consumers read it; nothing writes it — the central gen→sim power break. Write it in `powerGenerator`/`generatePower`; consume or delete `_neighbourGovBias`.
 5. **Validator step order.** Move `checkStructuralValidity` after the last roster mutation (subsumption/cascade/isolation/factionCorrelation) so the DM's coherence receipt describes the real roster.
@@ -169,7 +169,7 @@ Built incrementally: Wave 0 lands the skeleton + assertions for currently-health
 
 ## Wave 6 — Receipts honesty: narrative/AI grounding + display + dead code
 
-1. **AI/narrative grounding reads.** Fix the six fields read but never written (`aiLayer.js`, `narrativeGenerator.js:153-167`), the stability-string-as-number bug (power notes ALWAYS describe authority as contested), and the lbs/day → "1200% food surplus" render.
+1. **AI/narrative grounding reads.** Fix the six fields read but never written (`aiLayer.js`, `narrativeGenerator.js :: genSettSummary`), the stability-string-as-number bug (power notes ALWAYS describe authority as contested), and the lbs/day → "1200% food surplus" render.
 1b. **Silent-override receipts.** The isolated→road rewrite and the plagued military-floor apply to EXPLICIT user choices with no trace (and one trace claims a floor that didn't happen) — emit honest receipts on the explicit paths (`resolveConfig.js:101,123,184-214`).
 2. **Two-band vocabulary collision.** Stop concatenating causal-band deltas (surplus/adequate/strained/critical/collapsed) with display-band deltas (Stable/Strained/Vulnerable/Critical) in one panel (`eventPipeline.js:255-261`) — substrate deltas become internal/diagnostic; the DM reads the four dials.
 3. **explanation.js provenance.** Capacities described as *sibling readers of the ledger*, not "feeds the substrate" (false provenance).

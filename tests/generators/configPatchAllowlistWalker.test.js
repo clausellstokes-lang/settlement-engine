@@ -53,7 +53,7 @@
  * 73 -> 72 at the landing base 60255ca8e, and the two STRIPPED SETS ARE
  * IDENTICAL -- the consist reads no new config key in code. The three that leave
  * are all comment-only: `js` and `primaryDeitySnapshot` (generateSettlementPipeline.js
- * :173 and :169) and `eventConditions` (steps/assembleSettlement.js:320 and
+ * :173 and :169) and `eventConditions` (steps/assembleSettlement.js :: the eventConditions comment and
  * steps/resolveStress.js:123, present at the base too). Component writers hold
  * at 20 and the seam twin's UI writers at 17: no write moved.
  *

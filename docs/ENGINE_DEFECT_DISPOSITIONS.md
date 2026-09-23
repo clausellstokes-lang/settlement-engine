@@ -114,7 +114,7 @@ whole checkout returns **zero**, so §708.4's ordering defect is not in this tre
 
 ## §3 — VERDICT: `fires(n)`'s 65-ceiling is a RARITY DIAL, not an off-by-one (2026-09-15, lane-LT40-engine)
 
-**The question.** `src/generators/priorityHelpers.js:464-472` computes
+**The question.** `src/generators/priorityHelpers.js :: getStressFlags` computes
 `threshold = |(e·7 + m·13 + r·17 + mg·19 + c·23) % 97|` and `fires = (n) => threshold < n`,
 and all thirteen call sites pass `n ≤ 65`. Does that mean 32 of the 97 slider-hashes can never
 fire ANY compound-stress flag **by design**, or is it an **off-by-one in shipped flag logic**?
@@ -166,7 +166,7 @@ flag true. **The conditions silence the default sliders, not the hash ceiling.**
 | step | where | what it does |
 |---|---|---|
 | producer | `src/generators/economy/economicState.js:62` | `ecoInstFlags = getInstFlags(config, institutions)` — the **raw** roster |
-| the read under it | `src/generators/priorityHelpers.js:42` | `nativeSemanticNames(institutions)` — never `liveInstitutions()` |
+| the read under it | `src/generators/priorityHelpers.js :: getInstitutionNames` | `nativeSemanticNames(institutions)` — never `liveInstitutions()` |
 | the stamp | `src/generators/economy/economicState.js:883` | `compound: ecoInstFlags` — written **once**, at generation |
 | the consumer | `src/domain/display/stateProse/defenseStateProse.js:578` + `:616` | `const compound = settlement?.economicState?.compound?.inst \|\| {}`, then `civicFlag(compound.hasCourtSystem), civicFlag(compound.hasPrison)` (`civicFlag` itself at `:269`) |
 | the pool that keys on it | same file, `:1369` (the DS-DEF-6 collision block) | DS-DEF-2 row 3 `internalRowPoolKey` = `hasCourtSystem` × `hasPrison` |
@@ -311,7 +311,7 @@ a quiet-lie candidate"*, chartered **for its own look**. The look is done.
 
 | the claim | the finding |
 |---|---|
-| the pass deletes | TRUE. `removeUnprotected` (`coherenceRepairPass.js:226`) splices at `:232` |
+| the pass deletes | TRUE. `coherenceRepairPass.js :: removeUnprotected` splices at `:237` |
 | ...without a receipt | **FALSE.** `:233` calls `recordRepair`, which at `:133` freezes `{id, type, action:'removed', subject, reason}` onto `ctx.generationRepairs` AND writes a coherence trace |
 | the three deleting classes | `:339` `access_compatibility`, `:360` `unsupported_institution` (§503.4's own class), `:370` `mutual_exclusion` — all three route through the same receipted function |
 | and it is recent damage | **FALSE.** `git log -S "unsupported_institution"` on the file names `c1ea091f7` (2026-07-26), a month BEFORE §503.4 was written |

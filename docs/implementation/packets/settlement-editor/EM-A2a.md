@@ -415,7 +415,7 @@ The sentinels are WIZARD tokens that die at generation, measured end to end at `
 `src/generators/steps/resolveConfig.js:92-94` is the one resolver — `'custom'` →
 `popToTier(population)`, `'random'` → `rng.pick(TIER_ORDER)`, anything else → `config.settType ||
 'village'`; `popToTier`'s codomain (`src/data/constants.js`) is exactly the six `TIER_ORDER`
-members; `src/generators/steps/assembleSettlement.js:116` writes THAT resolved value as the
+members; `src/generators/steps/assembleSettlement.js :: the tier key` writes THAT resolved value as the
 settlement record's `tier`, and `resolveConfig.js` returns the same value beside `effectiveConfig`,
 so `config.tier` is concrete too (`src/generators/institutionProbability.js`: *"popToTier resolved
 the true tier into config.tier"*). `git grep -n -E "tier\s*[:=][^;]*settType" -- src` returns

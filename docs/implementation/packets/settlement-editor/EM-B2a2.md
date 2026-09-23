@@ -181,7 +181,7 @@ lines; 13,769 → 14,281 and 10,051 → 9,559 bytes (version 3: measured at `e34
 `generatePopulation.js` 160 effective.
 
 ### §5.5 · The A7 arm that reads the step's source — measured to survive
-EM-P0's A7 (`pipelinePinnedMode.test.js:292`) reads `generatePopulation.js` as TEXT and asserts
+EM-P0's A7 (`pipelinePinnedMode.test.js :: A7`) reads `generatePopulation.js` as TEXT and asserts
 `stepSource.match(/registerStep\(/g)` has length **1** and `stepSource.match(/fork\(/g)` is
 **null**. Measured on the post-lift probe copy: **1 and null**. The widened import contains
 `registerStep,` with no open paren, so the count cannot move.
