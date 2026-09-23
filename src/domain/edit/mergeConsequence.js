@@ -52,6 +52,11 @@ function isObj(value) { return typeof value === 'object' && value !== null && !A
 const dotted = (path) => path.replace(/\[(\d+)\]/g, '.$1');
 /** @param {Violation} violation @returns {string} One violation's identity. */
 const vkey = (violation) => `${violation.id}@${violation.path}`;
+/** The register's class table as a real map: a string key reads one with no index cast, exactly
+ *  as `recordMergeTree.js` reads the same three tables. */
+const CLASS_OF = new Map(Object.entries(RECORD_CLASSES));
+/** @param {string} key @returns {boolean} The register classes this path's top-level key HELD. */
+const isHeldScope = (key) => CLASS_OF.get(key.split(/[.[]/)[0]) === 'HELD';
 
 /** Every top-level READING key, in the register's declaration order — the ladder's last step. */
 const READING_KEYS = Object.entries(RECORD_CLASSES)
@@ -89,6 +94,43 @@ export function recomputeMirrors(merged) {
   return rewritten;
 }
 
+/** `V-EVIDENCE-ROSTER`'s own `ROSTER_RE`, with the surrounding text captured so only the digits move. */
+const ROSTER_STATED = /(\d+)(\s+NPCs?\s*\/\s*)(\d+)(\s+relationships?)/;
+/** `V-EVIDENCE-EVENTS`'s own `EVENTS_RE`, captured the same way. */
+const EVENTS_STATED = /(\d+)(\s+historical events?)/;
+
+/**
+ * The two PROSE-COUNT evidence rows of the coherence receipt — the pair `recordInvariants` reads
+ * for `V-EVIDENCE-ROSTER` and `V-EVIDENCE-EVENTS` — restated from the MERGED record's own
+ * rosters. Only the digits these patterns capture move; no other character of the evidence,
+ * and `generationCoherenceReceipt.repairs` (HISTORY) is never read or written.
+ * ⛔ MODULE-LOCAL: `tests/domain/recordMerge.test.js` A8 enumerates this module's FIVE exports.
+ * @param {RecordCard} merged @returns {number} evidence rows restated
+ */
+function restateProseCounts(merged) {
+  const receipt = merged.generationCoherenceReceipt;
+  if (!isObj(receipt) || !Array.isArray(receipt.judgments)) return 0;
+  const npcs = merged.npcs;
+  const links = merged.relationships;
+  const history = merged.history;
+  const events = isObj(history) ? history.historicalEvents : undefined;
+  let restated = 0;
+  for (const judgment of receipt.judgments) {
+    if (!isObj(judgment) || !Array.isArray(judgment.evidence)) continue;
+    for (const row of judgment.evidence) {
+      if (!isObj(row) || typeof row.evidence !== 'string') continue;
+      let next = row.evidence;
+      if (row.path === 'finalGraph' && Array.isArray(npcs) && Array.isArray(links)) {
+        next = next.replace(ROSTER_STATED, (whole, head, mid, tail, end) => `${npcs.length}${mid}${links.length}${end}`);
+      } else if (row.path === 'narrative' && Array.isArray(events)) {
+        next = next.replace(EVENTS_STATED, (whole, head, end) => `${events.length}${end}`);
+      }
+      if (next !== row.evidence) { row.evidence = next; restated += 1; }
+    }
+  }
+  return restated;
+}
+
 /**
  * The one declared RECEIPT — `powerStructure.economyInputFingerprint` — recomputed LAST, over the
  * merged record. ⛔ It is never taken from `R1`: wherever a declared group kept the record's own
@@ -96,6 +138,7 @@ export function recomputeMirrors(merged) {
  * @param {RecordCard} merged @returns {boolean} whether the digest moved
  */
 export function recomputeReceipts(merged) {
+  restateProseCounts(merged);
   const power = merged.powerStructure;
   const economy = merged.economicState;
   if (!isObj(power) || !isObj(economy)) return false;
@@ -144,7 +187,9 @@ function ladderFor(violation) {
   }
   steps.push({ step: 2, scope: keys, group: null });
   steps.push({ step: 3, scope: READING_KEYS, group: null });
-  return steps;
+  return steps
+    .map((rung) => ({ ...rung, scope: rung.scope.filter((key) => !isHeldScope(key)) }))
+    .filter((rung) => rung.scope.length > 0);
 }
 
 /**

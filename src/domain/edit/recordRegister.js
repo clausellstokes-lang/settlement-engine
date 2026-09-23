@@ -64,6 +64,15 @@ export const CLASS_EXCEPTIONS = Object.freeze({
   'factions[].members[]': 'MIRROR',
   // ⭐ MEASURED, not named: the ONLY receipt sub-path that reads an input the record lacks.
   'generationCoherenceReceipt.repairs': 'HISTORY',
+  // ⛔ ONE PATH, TWO DECLARATIONS, TWO DIFFERENT ACTS -- and it is in both tables on purpose.
+  //    ATOMIC_COLLECTIONS governs THE MERGE: the evidence array has no sound key, so the tree
+  //    merge takes it from R1 as ONE value, exactly as it always has.
+  //    This MIRROR row governs THE POST-PASS: the two PROSE-COUNT rows the receipt carries
+  //    (finalGraph's NPC and relationship counts, narrative's historical-event count) are a pure
+  //    function of the MERGED record's own HELD rosters, RESTATED after the merge and never
+  //    merged. Only the digits those two patterns capture move; no other character does.
+  //    generationCoherenceReceipt.repairs stays HISTORY and is neither read nor written by it.
+  'generationCoherenceReceipt.judgments[].evidence': 'MIRROR',
 });
 
 /** Collections merged BY a declared key (48). A string is one field; an array is a composite. */
