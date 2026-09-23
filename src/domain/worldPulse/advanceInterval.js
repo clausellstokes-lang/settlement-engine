@@ -206,10 +206,16 @@ export function collapseIntervalHistory(worldState, appendedRecords, wizardNews 
   // first occurrence in tick order, deduped by the producer's own key. The key is the
   // PAIR (saveId, decreeId), because `decrees` is a key on the saved settlement (design
   // §2.5) and two registries may mint the same entry id without meaning one act.
+  // ⛔ THE PAIR IS JOINED BY `JSON.stringify`, NOT BY A SEPARATOR CHARACTER, and that is a
+  // CURE rather than a preference: this key first shipped joined on a NUL, and the escape
+  // was written into the source as a RAW 0x00 byte, which `tests/lint/controlBytes.test.js`
+  // convicts by law ("no raw control bytes"). A JSON array is separator-free — it escapes
+  // its own quotes, so no id can forge another pair — and it is plain ASCII, so the file
+  // stays text on every tool that reads it.
   const decreeCauseByKey = new Map();
   for (const record of intervalRecords) {
     for (const cause of Array.isArray(record?.decreeCauses) ? record.decreeCauses : []) {
-      const key = `${String(cause?.saveId ?? '')} ${String(cause?.decreeId ?? '')}`;
+      const key = JSON.stringify([String(cause?.saveId ?? ''), String(cause?.decreeId ?? '')]);
       if (cause?.decreeId && !decreeCauseByKey.has(key)) decreeCauseByKey.set(key, cause);
     }
   }
