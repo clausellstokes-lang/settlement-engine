@@ -68,6 +68,7 @@ import { ROUTE_GRADES, readRouteNetwork, routeLifecycleActive } from '../worldPu
  *
  * @typedef {{
  *   predicate: (record: unknown, campaignState: unknown) => boolean,
+ *   subjects?: (record: unknown, campaignState: unknown) => readonly string[],
  *   readers: readonly WorldConditionReader[],
  *   source: 'live'|'EM-E4',
  * }} WorldConditionRow
@@ -75,6 +76,7 @@ import { ROUTE_GRADES, readRouteNetwork, routeLifecycleActive } from '../worldPu
  * A row as its author writes it: `source` is the helper's to stamp, never the author's.
  * @typedef {{
  *   predicate: (record: unknown, campaignState: unknown) => boolean,
+ *   subjects?: (record: unknown, campaignState: unknown) => readonly string[],
  *   readers: readonly WorldConditionReader[],
  * }} WorldConditionRowDraft
  *
@@ -175,6 +177,24 @@ function counterpartiesOf(graph, id) {
     if (to === id && from) others.add(from);
   }
   return [...others];
+}
+
+/**
+ * ⭐ THE COUNTERPARTIES WHOSE PEACE OFFER STANDS ON THIS RECORD, AND THE ONE HOME OF THAT
+ * READING (EM-E4d unit 1).
+ *
+ * A seal that SEALS a standing offer has to name the counterparty it seals with, and a
+ * predicate answers `true`/`false` and never a name. So the row's SUBJECTS are drawn here,
+ * through the very gate the predicate used to call — `peaceOffersOf` for the keys and
+ * `pendingPeaceOfferFrom` for each one, so a bag entry that is not a real offer is no more a
+ * subject than it was a reason to light the seal — and the PREDICATE IS DERIVED FROM THEM.
+ * Two answers about one fact cannot disagree when one is computed from the other, which is the
+ * same shape `validateOp` gives `ok` and `errors`.
+ * @param {unknown} record @returns {readonly string[]} frozen; empty on any absence
+ */
+function standingPeaceOffers(record) {
+  return Object.freeze(Object.keys(peaceOffersOf(record))
+    .filter((fromId) => !!pendingPeaceOfferFrom(record, fromId)));
 }
 
 /** @param {string} id @param {string} module @param {string} symbol @returns {WorldConditionReader} */
@@ -288,9 +308,13 @@ export const WORLD_CONDITIONS = Object.freeze({
   // read from ONE named court is `pendingPeaceOfferFrom` itself, which is why the keys come
   // from `peaceOffersOf` and each is put back through that exported gate rather than being
   // trusted as a key. A bag entry that is not a real offer therefore cannot light the seal.
+  // ⭐ AND IT IS THE ONE ROW THAT NAMES ITS SUBJECTS (EM-E4d unit 1), because it is the one
+  // whose seal has an act behind it: `make-peace` takes a counterparty, and the standing offer
+  // is where that name honestly comes from. The predicate below is DERIVED from that list, so
+  // the seal can never light for a fact the writer cannot then act on.
   pendingPeaceOffer: liveRow({
-    predicate: (record) => Object.keys(peaceOffersOf(record))
-      .some((fromId) => !!pendingPeaceOfferFrom(record, fromId)),
+    predicate: (record) => standingPeaceOffers(record).length > 0,
+    subjects: standingPeaceOffers,
     readers: [reader('peace-offer-record', 'src/domain/worldPulse/peaceTermsDrafting.js', 'pendingPeaceOfferFrom')],
   }),
 
@@ -364,3 +388,53 @@ export const WORLD_CONDITIONS = Object.freeze({
     readers: [reader('war-layer', 'src/domain/roads/embassyHazard.js', 'atWarWith')],
   }),
 });
+
+/** One shared frozen empty list, returned BY IDENTITY for every row that names no subject. */
+const NO_SUBJECTS = /** @type {readonly string[]} */ (Object.freeze([]));
+
+/**
+ * ⭐ THE LEAF'S FIRST DOOR (EM-E4d unit 1; the verifier's NOTE-8, lane S's measured shape).
+ *
+ * ⛔ WHY A FUNCTION AND NOT THE TABLE. `WORLD_CONDITIONS` is the roster and a caller that
+ * indexed it would have to know that an unknown id has no row, that a row's `predicate` is
+ * the thing to call and that `always` is design §18's own word and not a row at all. Every
+ * one of those is this leaf's law, so it is answered here, once: an id the roster does not
+ * carry is FALSE, exactly as an absent field is, and no caller can get a throw out of it.
+ *
+ * ⛔ IT IS STILL PURE, TOTAL AND FALSE-ON-ABSENCE. It reads no store, draws nothing and
+ * writes nothing; `campaignState` travels to the row VERBATIM, so a caller that honestly has
+ * no campaign passes `null` and the campaign-reading rows answer false rather than guessing.
+ *
+ * @param {string} id one `WORLD_CONDITIONS` key
+ * @param {unknown} record the card's subject settlement
+ * @param {unknown} campaignState the campaign, or `null` where the caller has none
+ * @returns {boolean} never throws
+ */
+export function worldConditionHolds(id, record, campaignState) {
+  if (typeof id !== 'string' || !Object.hasOwn(WORLD_CONDITIONS, id)) return false;
+  return WORLD_CONDITIONS[id].predicate(record, campaignState) === true;
+}
+
+/**
+ * ⭐ THE SAME DOOR, ASKED FOR NAMES (EM-E4d unit 1).
+ *
+ * A seal whose act names a counterparty cannot be written from a boolean, so a row MAY declare
+ * the subjects it holds against. ONE row does today (`pendingPeaceOffer`), and its predicate is
+ * derived from this very list, so a seal that opens always has a subject to act on.
+ *
+ * ⛔ A ROW THAT NAMES NONE ANSWERS THE SHARED EMPTY LIST BY IDENTITY, never null and never a
+ * throw: "this condition names no subject" and "this condition does not hold" are different
+ * facts, and the caller reads the first here and the second above.
+ *
+ * @param {string} id one `WORLD_CONDITIONS` key
+ * @param {unknown} record the card's subject settlement
+ * @param {unknown} campaignState the campaign, or `null` where the caller has none
+ * @returns {readonly string[]} frozen, in the row's own order; never throws
+ */
+export function worldConditionSubjects(id, record, campaignState) {
+  if (typeof id !== 'string' || !Object.hasOwn(WORLD_CONDITIONS, id)) return NO_SUBJECTS;
+  const named = WORLD_CONDITIONS[id].subjects;
+  if (typeof named !== 'function') return NO_SUBJECTS;
+  const found = named(record, campaignState);
+  return Array.isArray(found) ? Object.freeze(found.map(String)) : NO_SUBJECTS;
+}

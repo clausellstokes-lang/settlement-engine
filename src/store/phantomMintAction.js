@@ -2,6 +2,13 @@
  * phantomMintAction.js — THE STORE'S HALF OF THE PHANTOM DOOR (EM-F3, wave 5; design
  * §2.8 and §13, the chair's judgments 261 and 275).
  *
+ * ⭐ ITS SUBJECT IS THE OFF-STAGE COUNTERPARTY AS THE STORE SEES IT, and EM-F1e's reality badge
+ * and EM-E4d's §18 reading joined the two below it under exactly that subject: whether an act
+ * has a counterparty, whether that counterparty is real, and which of design §18's world-state
+ * conditions the record holds and against whom. Each arrived here for the SAME measured reason
+ * the first two give — the shell's own arms pin its `src/domain/edit/*` edge set at the
+ * declaration table alone — and each is a pure read the shell binds and passes down.
+ *
  * TWO EXPORTS, ONE SUBJECT: the off-stage counterparty as the store sees it. `mintPhantomIntent`
  * is the WRITER the edit shell's plus is bound to — it mints EM-F1's record through EM-F1's own
  * leaf and writes it as ONE save through the estate's REAL save path; `counterpartiesOf` is the
@@ -71,6 +78,9 @@ import {
   PHANTOM_KIND, PHANTOM_TRAIT_POOLS, applyOffStage, badgeFor, isPhantomSave, mintPhantom,
 } from '../domain/edit/phantoms.js';
 import { poolValues, rollFrom } from '../domain/edit/pools.js';
+import {
+  WORLD_CONDITIONS, worldConditionHolds, worldConditionSubjects,
+} from '../domain/edit/worldConditions.js';
 import { effectiveNeighboursOf } from '../domain/relationships/effectiveNeighbours.js';
 import { saves as savesService } from '../lib/saves.js';
 import {
@@ -94,6 +104,10 @@ export const MINT_REFUSALS = Object.freeze([
 const [INVALID_NAME, MINT_FAILED, NO_SEED, OFF_POOL, SAVE_FAILED] = MINT_REFUSALS;
 
 /** One counterparty row the shell renders. @typedef {{ id: string, name: string, offStage: boolean }} Counterparty */
+
+/** The one-entry cache of the §18 reading below, keyed on the record by identity. */
+/** @type {?{record: unknown, value: Readonly<Record<string, Readonly<{holds: boolean, subjects: readonly string[]}>>>}} */
+let _conditionsMemo = null;
 
 /** @param {unknown} value @returns {value is Record<string, unknown>} */
 function isPlainObject(value) {
@@ -198,6 +212,58 @@ export function counterpartyBadgeOf(saveRows, entry) {
   const rows = Array.isArray(saveRows) ? saveRows : [];
   const found = rows.find((row) => isPlainObject(row) && String(row.id) === named.counterparty);
   return badgeFor(found ?? null);
+}
+
+/**
+ * ⭐ DESIGN §18's WORLD-STATE CONDITIONS, AS THE SHELL BINDS THEM (EM-E4d unit 1; the
+ * verifier's NOTE-8). One record in, one frozen answer per condition out: does it hold, and
+ * against whom.
+ *
+ * ⛔ IT LIVES IN THE STORE FOR THE REASON THE TWO READERS ABOVE DO, AND THE REASON IS
+ * MEASURED. The shell's `src/domain/edit/*` edge set is pinned at the declaration table ALONE
+ * in TWO places — `tests/components/editShellPlusDoor.test.jsx` D5 and
+ * `tests/components/editModeShell.test.jsx` A7 — and lane S EXECUTED a direct shell edge to
+ * the world-condition leaf and reds both. So the estate's answer is the one EM-D1 gave for the
+ * writer and EM-F1e gave for the reality badge (the chair's judgment 298): the shell binds one
+ * store function and passes the answer down. This leaf is already where the editor's
+ * counterparty questions are asked, and every §18 condition that gates a seal with an act
+ * behind it is a question about a counterparty.
+ *
+ * ⚠ AND IT AGES A LANDED ROSTER, DECLARED RATHER THAN QUIETLY ABSORBED. EM-B1a's two leaves
+ * are pinned EXACT in two homes — `tests/domain/editOperations.test.js` A6 and
+ * `tests/domain/editDeclarations.test.js`'s dormancy arm — and both said the world-condition
+ * leaf had NO importer under `src/` at all. It has one now, and it is this file.
+ *
+ * ⛔ THE CAMPAIGN IS `null`, HONESTLY, AND THE SHELL IS WHY. The edit register is mounted from
+ * `src/App.jsx` outside every campaign boundary, and `tests/store/campaignRuntimeCallerCoverage
+ * .test.js` convicts a UI module that names a runtime-gated campaign action — which is exactly
+ * why the register tells the page of decrees nothing about `inCampaign`. So the campaign half
+ * of a predicate is not available at this mount and is not faked: a condition that reads the
+ * campaign answers FALSE here, and the surface must therefore never present such an answer as
+ * a finding about the world. The two conditions that gate anything today (`npcPresent`,
+ * `pendingPeaceOffer`) read the RECORD alone, so their answers are complete.
+ *
+ * ⛔ MEMOIZED ON THE RECORD BY IDENTITY, so a re-render re-runs no predicate and the caller
+ * gets the same frozen value back. The cache holds ONE entry and is a pure function of its
+ * key, so it is a cache and never a second state.
+ *
+ * @param {unknown} settlement the open settlement, as the store holds it
+ * @returns {Readonly<Record<string, Readonly<{holds: boolean, subjects: readonly string[]}>>>}
+ *   one row per `WORLD_CONDITIONS` id; frozen, never null, never a throw
+ */
+export function worldConditionsOf(settlement) {
+  if (_conditionsMemo !== null && _conditionsMemo.record === settlement) {
+    return _conditionsMemo.value;
+  }
+  const value = Object.freeze(Object.fromEntries(Object.keys(WORLD_CONDITIONS).map((id) => [
+    id,
+    Object.freeze({
+      holds: worldConditionHolds(id, settlement, null),
+      subjects: worldConditionSubjects(id, settlement, null),
+    }),
+  ])));
+  _conditionsMemo = { record: settlement, value };
+  return value;
 }
 
 /**

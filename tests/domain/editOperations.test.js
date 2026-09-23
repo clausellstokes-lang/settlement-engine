@@ -555,10 +555,33 @@ describe('EM-B1a — the op vocabulary, the fourteen home ops, and the world hal
     // catalogue's FIRST RUNTIME IMPORTER. It is LAZY, and that is MEASURED rather than argued:
     // `src/store/index.js` names it nowhere and it has ZERO importers under `src/`, static or
     // dynamic, at this tip — so it is composed by no eager slice, enters no first-paint closure,
-    // and the +0 B price is unmoved. The world-condition leaf still has NO importer at all, so
-    // any row naming it here would be a NEW closure edge.
+    // and the +0 B price is unmoved.
+    //
+    // ⭐ EM-E4d WIDENS IT ONCE MORE, AND ITS ROW IS THE WORLD-CONDITION LEAF'S FIRST IMPORTER
+    // ANYWHERE. The paragraph above used to end "The world-condition leaf still has NO importer
+    // at all, so any row naming it here would be a NEW closure edge", and that stopped being
+    // true the day design §18's preconditions got a reader: judgment 296 forbids OFFERING a
+    // seal whose act is unbound and forbids opening one whose condition nothing asked, so
+    // something under `src/` has to ask. It is the STORE that asks and not the shell — the
+    // shell's `src/domain/edit/*` edge set is pinned at the declaration table alone in two
+    // homes (editShellPlusDoor D5, editModeShell A7), lane S EXECUTED the direct shell edge and
+    // red both, and EM-F1e took this same store route for the reality badge on the chair's
+    // judgment 298. The edge is still LAZY and the price still +0 B, MEASURED: that leaf's only
+    // importer under `src/` is the edit shell, which `src/App.jsx` reaches through one
+    // `lazy(() => import(…))` edge, and `EAGER_FIRST_PAINT_MODULES` walks STATIC edges only and
+    // still reads 270 with this row in place.
+    // ⚠ AND ONE ROW IS NOT EM-E4d's: `campaignAdvanceSession.js` took U72's DYNAMIC edge to the
+    // catalogue (design §20.3's stale-vocabulary resolver at the head of the tick) and this
+    // roster was not told, so the arm has been RED at every tip since that landing while its
+    // SIBLING roster — `tests/domain/editDeclarations.test.js`'s second-order scan — has listed
+    // the same edge with its full reason all along. It is recorded here because this member is
+    // re-recording the roster anyway and a second seat editing these same lines would collide;
+    // the edge itself is U72's and unchanged, and the price is still +0 B because
+    // `EAGER_FIRST_PAINT_MODULES` walks STATIC edges only.
     const EXPECTED_IMPORTERS = [
+      'src/store/campaignAdvanceSession.js imports src/domain/edit/operations.js',
       'src/store/editSlice.js imports src/domain/edit/operations.js',
+      'src/store/phantomMintAction.js imports src/domain/edit/worldConditions.js',
     ];
     const importers = [];
     for (const rel of scanned) {

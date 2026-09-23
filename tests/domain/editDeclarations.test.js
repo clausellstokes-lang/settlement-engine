@@ -358,8 +358,9 @@ describe('EM-A1 — the field declarations, their shape law and their existence 
     // argued: `src/store/index.js` names it nowhere and it has ZERO importers under `src/`,
     // static or dynamic, at this tip — so EM-A1's declaration table still reaches no bundle
     // closure THROUGH EM-B1a's leaves and the +0 B price stays true BY CONSTRUCTION rather than
-    // by an absence. The world-condition leaf still has NO importer under `src/` at all, which
-    // is why any row naming it would be a NEW closure edge and reds here.
+    // by an absence. ⭐ THE WORLD-CONDITION LEAF NOW HAS ONE IMPORTER TOO (EM-E4d), listed
+    // below with its own reason: it is LAZY by the same measurement, so the roster still
+    // carries no eager edge and an UNLISTED importer is still what would put one there.
     const B1A_LEAVES = ['src/domain/edit/operations.js', 'src/domain/edit/worldConditions.js'];
     const EXPECTED_SECOND_ORDER = [
       // ⭐ U72's SECOND SANCTIONED RUNTIME EDGE, AND IT IS DYNAMIC. Design §20.3 puts the
@@ -372,6 +373,20 @@ describe('EM-A1 — the field declarations, their shape law and their existence 
       // walks STATIC edges only and reads 270 with this row in place, exactly as before.
       'src/store/campaignAdvanceSession.js imports src/domain/edit/operations.js',
       'src/store/editSlice.js imports src/domain/edit/operations.js',
+      // ⭐ EM-E4d's ROW, AND IT IS THE WORLD-CONDITION LEAF'S FIRST IMPORTER ANYWHERE. The
+      // paragraph above still described that leaf as having none, which stopped being true the
+      // day design §18's preconditions got a reader: a seal may not be OFFERED without its
+      // condition and may not be WRITTEN without a bound act (the chair's judgment 296), so
+      // something under `src/` has to ask. It is the STORE that asks, not the shell — the
+      // shell's own arms pin its `src/domain/edit/*` edge set at the declaration table alone
+      // (editShellPlusDoor D5, editModeShell A7), lane S EXECUTED a direct shell edge and red
+      // both, and EM-F1e took the same store route for the reality badge on the chair's
+      // judgment 298. The +0 B price is unmoved and MEASURED rather than argued: this leaf's
+      // ONLY importer under `src/` is `src/components/edit/EditModeShell.jsx`, which
+      // `src/App.jsx` reaches through one `lazy(() => import(…))` edge, and
+      // `EAGER_FIRST_PAINT_MODULES` walks STATIC edges only and still reads 270 with this row
+      // in place.
+      'src/store/phantomMintAction.js imports src/domain/edit/worldConditions.js',
     ];
     const secondOrder = [];
     for (const rel of scanned.filter((each) => !B1A_LEAVES.includes(each))) {
@@ -386,7 +401,7 @@ describe('EM-A1 — the field declarations, their shape law and their existence 
       [...secondOrder].sort(),
       'the importer roster of EM-B1a\'s two leaves is EXACT, in both directions. EM-B1a LANDED'
       + ' dark, and its op catalogue\'s first runtime importer is EM-C4a\'s LAZY store slice,'
-      + ' listed here exactly; its world-condition leaf still has no importer under src/ at all.'
+      + ' listed here exactly; its world-condition leaf has exactly one, EM-E4d\'s store reader.'
       + ' An UNLISTED importer can carry EM-A1\'s declaration table into a bundle closure behind'
       + ' this arm\'s back; a MISSING listed one means a sanctioned edge is gone and the roster'
       + ' has aged instead of convicting.',

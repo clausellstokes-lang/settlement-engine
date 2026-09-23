@@ -732,6 +732,25 @@ function mintedRowsOf(layer) {
  * @param {string} seed @param {unknown} layer @param {readonly object[]} decrees
  * @returns {string} an id no row of either home holds
  */
+/**
+ * ⭐ THE WALK ITSELF, ONE HOME, TWO CLAIM SETS (EM-E4d unit 1). The two doors below claim
+ * DIFFERENT things — a newcomer's id is the add-op's own target, a seal decree's id is an
+ * ENTRY id and names nobody — so each builds its own set and both walk it the same way. The
+ * add door's set is byte-identical to what it always was, so no minted identity moves.
+ * @param {string} seed @param {ReadonlySet<string>} claimed
+ * @returns {string} an id the set does not hold
+ */
+function mintClaimedId(seed, claimed) {
+  let index = claimed.size;
+  let id = mintDmId(seed, DM_MINT_KIND, index);
+  // Bounded by construction: `claimed` is finite and every step tries a fresh index.
+  while (claimed.has(id)) {
+    index += 1;
+    id = mintDmId(seed, DM_MINT_KIND, index);
+  }
+  return id;
+}
+
 function mintNewcomerId(seed, layer, decrees) {
   /** @type {Set<string>} */
   const claimed = new Set(Object.keys(mintedRowsOf(layer)));
@@ -746,14 +765,7 @@ function mintNewcomerId(seed, layer, decrees) {
       && isPlainObject(target) && typeof target.id === 'string';
     if (claims) claimed.add(String(/** @type {{id: string}} */ (target).id));
   }
-  let index = claimed.size;
-  let id = mintDmId(seed, DM_MINT_KIND, index);
-  // Bounded by construction: `claimed` is finite and every step tries a fresh index.
-  while (claimed.has(id)) {
-    index += 1;
-    id = mintDmId(seed, DM_MINT_KIND, index);
-  }
-  return id;
+  return mintClaimedId(seed, claimed);
 }
 
 /**
@@ -1284,12 +1296,16 @@ function stageFulfilOp(get, set, seat, type, values) {
  * else is built here through the SAME constructor and the SAME resolver. Neither branch
  * re-implements a pool rule, an id policy or a validation.
  *
- * ⛔ THE GUARD'S PAYLOAD IS A SEED, NOT AN OP. Measured at this tip, every `fulfil` the five
- * landed rules mint is catalogue-INCOMPLETE — `add-institution` carries a name and no
- * `category`, `rebalance-power` carries a display string the row does not declare, and the
- * connection rule's is an empty payload — so the DM's own `values` are merged OVER the seed
- * and a fulfil that is still incomplete is refused with the CATALOGUE's own words rather than
- * with a second opinion about them.
+ * ⛔ THE GUARD'S PAYLOAD IS A COMPLETE ACT, AND THE DM'S `values` EDIT IT RATHER THAN FINISH
+ * IT (U65, `94b90c042`). The claim this paragraph used to make — that every `fulfil` the
+ * landed rules mint is catalogue-INCOMPLETE, so the merge below was the DM's completion of a
+ * seed — stopped being true the day `guardRules.js :: offeredOp` began SHAPING each offer BY
+ * THE ROW: every declared field takes the finding's value, else the entry's, else the target's
+ * own id for a required plain string, and an offer whose required pool, int or enum value
+ * nothing can name is DROPPED rather than minted short. So the merge is still the DM's word
+ * winning over the guard's, and an act that is still incomplete is still refused with the
+ * CATALOGUE's own words rather than with a second opinion about them; what changed is that the
+ * incompleteness now arrives from the DM's edit and no longer from the rule.
  *
  * @param {Function} get @param {Function} set
  * @param {{saveId: string, offer: string, guard: Record<string, unknown>,
@@ -1425,4 +1441,181 @@ export function takeGuardOffer(get, set, request) {
   return GUARD_OFFER_ACTS[offer](get, set, {
     saveId, offer, guard, entry: /** @type {Record<string, unknown>} */ (entry), request: bag,
   });
+}
+
+/* ── EM-E4d (1) · THE SEALS' WRITERS ───────────────────────────────────────── */
+
+/**
+ * ⭐ THE SEAL TABLE: `<seal id>` -> the act behind it, as DATA (EM-E4d unit 1; design §13's
+ * verbs, §17's acts, §18's preconditions; the chair's judgment 296).
+ *
+ * ⛔ ONE ROW TODAY, AND THE COUNT IS A MEASUREMENT RATHER THAN A STAGE OF THE WORK. The
+ * shell offers SIXTEEN seals and the catalogue declares SEVEN off-stage acts, and the two
+ * sets do not join by any fact the tree holds: twelve seals name an act the catalogue does
+ * not express at all (`Resupply`, `Let the siege fall`, `Let the coup fail`, the three
+ * rumour acts, the two envoy acts, `Refuse the peace`, `Schedule an event`, `Send on a
+ * mission`, `Sue for peace`), and three more (`Direct the force`, `Direct trade`,
+ * `Embargo`) would need somebody to RULE which catalogue verb a herald phrase means, which
+ * is an authoring decision and not a reading. `Accept the peace` is the one seal whose ACT
+ * and whose COUNTERPARTY are both fixed by the design's own words — design §13's peace seal
+ * over §18's standing offer — so it is the one with a writer, and the other fifteen stay
+ * shut rather than offering a control whose click would do nothing (judgment 296).
+ *
+ * ⛔ IT IS A DECLARATION AND NEVER A DISPATCHER. The row is reached by an own-key lookup and
+ * the op type travels to `makeOp` as a VALUE, exactly as `ADD_OP_TYPES` does, so no computed
+ * dispatch off the store handle is minted and `tests/store/deadOperationRatchet.test.js`'s
+ * premise arm is untouched.
+ *
+ * ⛔ `needs` IS THE SAME §18 CONDITION THE SHELL'S OWN ROW NAMES, and the two are pinned
+ * EQUAL by `tests/components/sealWriters.test.jsx` rather than trusted: a seal that opened on
+ * one condition and wrote from another would be the drift that makes an open seal refuse.
+ * @type {Readonly<Record<string, Readonly<{type: string, needs: string}>>>}
+ */
+export const SEAL_ACTS = Object.freeze({
+  acceptPeace: Object.freeze({ type: 'make-peace', needs: 'pendingPeaceOffer' }),
+});
+
+/**
+ * The closed refusal set of THIS door, EXPORTED so a test asserts it in both directions
+ * rather than re-typing it. SEVEN, frozen, in codepoint order.
+ *
+ * ⛔ IT WIDENS NO OTHER VOCABULARY. A CATALOGUE refusal is never re-worded here but travels
+ * VERBATIM in `errors` — `validateOp`'s own frozen sorted array under `invalid_op`, and
+ * EM-C1's own `{ missing, was }` pair under `stale_vocabulary` — exactly as the two doors
+ * above carry them.
+ * @type {readonly string[]}
+ */
+export const SEAL_DECREE_REFUSALS = Object.freeze([
+  'invalid_op', 'no_save', 'no_seed', 'no_writer', 'not_staged',
+  'stale_vocabulary', 'unknown_target',
+]);
+
+/** The refusal SHAPE all three doors answer in, aliased as EM-C4c aliases it. */
+const refuseSeal = refuseAdd;
+
+/**
+ * ⛔ THE DECREE-ENTRY SCOPE, AND IT IS A MEASURED CURE RATHER THAN A FLOURISH.
+ *
+ * A seal decree mints NOBODY: its id is an ENTRY's address and never an entity's, so it must
+ * not compete for the newcomer's sequence. Drawn from the same `(seed, 'minted', n)` walk it
+ * DOES, and the collision was EXECUTED before this scope existed: two seal acts took n=0 and
+ * n=1, and the very next roster add — whose claim set is the add-ops' own targets and nothing
+ * else — re-derived n=0, found the registry already holding that id and refused `not_staged`.
+ * A DM who sealed a peace could no longer add a faction.
+ *
+ * Scoping the SEED puts the entries on a walk the newcomer's can never reach, and leaves
+ * `mintNewcomerId` byte-identical, so no identity this estate has already minted moves. The
+ * kind stays `minted`, because `DM_ID_KINDS` is a closed two-member vocabulary in the layer's
+ * own leaf and widening a persisted id namespace is not this member's to do.
+ */
+const DECREE_ID_SCOPE = 'decree';
+
+/**
+ * One seal decree's ENTRY id, stable in the save's seed and unique in the registry. The claim
+ * set is EVERY entry the registry already holds — the only home an entry id can collide in —
+ * so two seal acts cannot take one address, which `stage` would answer by returning the rows
+ * unchanged and leaving this door reporting a decree nothing holds.
+ * @param {string} seed @param {readonly object[]} decrees @returns {string}
+ */
+function mintSealEntryId(seed, decrees) {
+  /** @type {Set<string>} */
+  const claimed = new Set();
+  for (const row of decrees) {
+    const id = isPlainObject(row) ? row.id : undefined;
+    if (typeof id === 'string' && id.length > 0) claimed.add(id);
+  }
+  return mintClaimedId(`${seed}|${DECREE_ID_SCOPE}`, claimed);
+}
+
+/**
+ * ⭐ A SEAL'S CLICK STAGES THE ACT IT NAMES (EM-E4d unit 1; design §13, §17, §18).
+ *
+ * The shell's seal block offered sixteen controls and every one of them was rendered
+ * `disabled` with no handler at all, so design §17's acts existed as words. This is the
+ * writer behind the one seal whose act the catalogue expresses: the DM seals the peace that
+ * is standing, and the act travels the SAME road every other act travels — the catalogue's
+ * own constructor, the catalogue's own validator, EM-C1's own resolver, and EM-C4b's ONE
+ * registry write site. The tick applies it like any other entry.
+ *
+ * ⛔ NO SECOND STAGING PATH AND NO SECOND OP MINT. `makeOp` builds it, `validateOp` judges
+ * it, `resolveDecree` resolves its words against the caller's catalogue and `stageDecree`
+ * writes it; this door re-implements none of the four and mints no op type.
+ *
+ * ⛔ THE COUNTERPARTY IS THE CALLER'S, AND THAT IS EM-C4c's OWN SHAPE RATHER THAN A SHORTCUT.
+ * `stageFulfilOp` one section up takes its target from the request for the same reason: a
+ * staged op that mints nobody names a subject this leaf cannot derive, and the party that
+ * OFFERED the control is the party that read which counterparty it was offered against. Design
+ * §18 is explicit that a world-state condition decides WHICH SEALS A CARD OFFERS — "not a guard
+ * refusing an act" — so re-testing it here would mint a refusal the design does not ask for,
+ * and §2.7's "nothing blocks" would be broken by this door rather than honoured by it. The one
+ * thing this door does refuse is a target the CATALOGUE cannot accept: `makeOp` answers null
+ * for an empty id, which is `unknown_target`.
+ *
+ * ⛔ IT LIFTS NO GATE AND MAKES NO CANON RULE. `canEditSettlement()` is untouched, and design
+ * §2.6 puts the act in the REGISTRY on every phase, which is where this leaves it.
+ *
+ * @param {Function} get @param {Function} set
+ * @param {{seal: string, counterparty: string, pools?: object, orderedAt?: string}} request
+ * @returns {{ok: true, saveId: string, seal: string, decreeId: string, op: object,
+ *            decrees: readonly object[]}
+ *          |{ok: false, reason: string, errors: readonly string[]}} NEITHER branch throws; on
+ *   `ok:false` the store is unchanged and no argument is mutated.
+ */
+export function stageSealDecreeIntent(get, set, request) {
+  const bag = isPlainObject(request) ? request : {};
+
+  // 1. THE SEAL, against the one table, by an own-key lookup: `constructor` is a seal with no
+  //    act like any other, and a seal with no row is a control that must never have opened.
+  const seal = String(bag.seal ?? '');
+  if (!Object.hasOwn(SEAL_ACTS, seal)) return refuseSeal('no_writer');
+  const act = SEAL_ACTS[seal];
+  const declared = Object.hasOwn(OP_TYPES, act.type) ? OP_TYPES[act.type] : null;
+  if (declared === null) return refuseSeal('invalid_op');
+
+  // 2. THE ACTIVE SAVE, for the data-safety reason every registry write gives: the write
+  //    indexes `get().settlement`.
+  const saveId = String(get().activeSaveId ?? '');
+  if (!saveId) return refuseSeal('no_save');
+  const record = get().settlement;
+
+  // 3. THE SEED, which is what makes the entry's id STABLE rather than merely unique.
+  const seed = typeof (/** @type {{_seed?: unknown}} */ (record)?._seed) === 'string'
+    ? String(/** @type {{_seed: string}} */ (record)._seed)
+    : '';
+  if (!seed) return refuseSeal('no_seed');
+
+  // 4. THE COUNTERPARTY THE CALLER READ THE SEAL OPEN AGAINST, carried verbatim. An act with
+  //    nobody on the other side is the one target refusal this door makes.
+  const counterparty = String(bag.counterparty ?? '');
+  if (counterparty === '') return refuseSeal('unknown_target');
+
+  // 5. THE OP, at the row's OWN declared target kind — the word is read off the catalogue and
+  //    never spelled here, so a row that moved families moves this call with it.
+  const op = makeOp(act.type, { kind: declared.target, id: counterparty }, { counterparty });
+  if (op === null) return refuseSeal('invalid_op');
+  const verdict = validateOp(op, null);
+  if (verdict.ok === false) return refuseSeal('invalid_op', verdict.errors);
+
+  // 6. THE ENTRY'S ID AND THE VOCABULARY, through EM-C1's own resolver.
+  const decrees = selectDecrees(get());
+  const id = mintSealEntryId(seed, decrees);
+  const resolution = /** @type {{ok: boolean, missing?: string, was?: string}} */ (
+    resolveDecree({ id, op }, { opTypes: OP_TYPES, pools: bag.pools })
+  );
+  if (resolution.ok === false) {
+    return refuseSeal('stale_vocabulary', Object.freeze([String(resolution.missing), String(resolution.was)]));
+  }
+
+  // 7. THE REGISTRY ROW. `stage` is TOTAL and answers a refused amendment with the rows
+  //    unchanged, so the receipt is checked against the rows it returned rather than assumed.
+  const committed = stageDecree(get, set, {
+    saveId, op, meta: { id, orderedAt: stampOf(bag), addedBy: DECREE_AUTHORS[0] },
+  });
+  if (committed.ok === false) return refuseSeal(committed.reason);
+  if (!committed.decrees.some((row) => String(/** @type {{id?: unknown}} */ (row)?.id ?? '') === id)) {
+    return refuseSeal('not_staged');
+  }
+  return {
+    ok: /** @type {true} */ (true), saveId, seal, decreeId: id, op, decrees: committed.decrees,
+  };
 }
