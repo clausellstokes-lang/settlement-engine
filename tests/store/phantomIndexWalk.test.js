@@ -256,8 +256,13 @@ describe('EM-F3b — the mint index walks past every claimed id', () => {
     seatStore({ savedSettlements: [] });
     const answer = await mintPhantomIntent(get, set, { name: 'Impostor' });
     expect(answer.ok, 'the door answered a refusal').toBe(false);
+    // ⛔ THE MESSAGE IS SPELLED IN THE DOOR'S OWN SYMBOLS, NEVER IN A SENTENCE. The wording it
+    // replaces ("…the reason is a member of…") aligned 18 fixed characters against a live
+    // corpus variant (`general :: DS-GEN-8 :: steading row: organic :: vid 2`), which
+    // `tests/lint/proseDrawnAnchors.walker.test.js` convicts by name. The asserted expression
+    // is untouched; only the sentence a reader sees on a red is.
     expect(MINT_REFUSALS.includes(String(answer.reason)),
-      'and the reason is a member of the door\'s own closed set').toBe(true);
+      'the answered word is declared by MINT_REFUSALS').toBe(true);
     expect(String(answer.reason), 'a device that refused the write is the door\'s save_failed state')
       .toBe('save_failed');
     expect(JSON.stringify(await saves.list()), 'the device holds exactly the rows it held').toBe(deviceBefore);
