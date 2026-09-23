@@ -42181,6 +42181,1164 @@
           "validate"
         ]
       ]
+    },
+    {
+      "id": "EM-C1",
+      "status": "LANDED",
+      "packetPath": "docs/implementation/packets/settlement-editor/EM-C1.md",
+      "verifiedBase": "51384b364ddd7adea37f0d4d8e7d5452dd7c874a",
+      "landedAt": "e891a1ed4d104244d2f31e6a7bf29be8c690ce30",
+      "changeManifest": [
+        {
+          "action": "CREATE",
+          "path": "src/domain/edit/registry.js"
+        },
+        {
+          "action": "CREATE",
+          "path": "tests/domain/decreeRegistry.test.js"
+        }
+      ],
+      "requiredSymbols": [],
+      "acceptanceCases": [
+        {
+          "id": "A1",
+          "case": "EM-C1: the four vocabularies are frozen and closed, the reading order is design 11s, and every verb returns a NEW frozen registry that leaves its input untouched"
+        },
+        {
+          "id": "A2",
+          "case": "EM-C1: stage appends one pending entry at the next index, writes only the six required keys plus what the caller supplied, and refuses five malformed calls without throwing"
+        },
+        {
+          "id": "A3",
+          "case": "EM-C1: reorder permutes the PENDING entries over the index values they already occupy, so an applied entry never loses its place, and an unknown id, a non-finite target and an applied entry are each a no-op"
+        },
+        {
+          "id": "A4",
+          "case": "EM-C1: withdraw and reopen touch PENDING entries only, the withdrawn row is kept with its original words and its index, and withdrawnReason is written ONLY for design 20.3s exact shape"
+        },
+        {
+          "id": "A5",
+          "case": "EM-C1: markApplied moves a pending entry to applied with the callers stamps, writes chronicleRef only when it is supplied, keeps the index, and never re-applies"
+        },
+        {
+          "id": "A6",
+          "case": "EM-C1: revertTick re-appends every entry staged after the tick onto the restored snapshot, loses nothing, reorders nothing, and lets the RESTORED entry win an id that is in both"
+        },
+        {
+          "id": "A7",
+          "case": "EM-C1: resolveDecree answers ok for all 22 live op types, names op-type on a retired type and pool-value on a moved word, is stable, never throws, and reaches exactly two of the five declared missing kinds at this tip"
+        },
+        {
+          "id": "A8",
+          "case": "EM-C1: every op type NAMES the catalogues its payload points into, the two spec kinds that carry a vocabulary are exactly the two the leaf spells, and the leaf imports one module and is imported by none"
+        }
+      ],
+      "checks": [
+        [
+          "npx",
+          "vitest",
+          "run",
+          "--pool=threads",
+          "--maxWorkers=2",
+          "tests/domain/decreeRegistry.test.js"
+        ],
+        [
+          "node",
+          "scripts/implementation-packets.mjs",
+          "validate"
+        ]
+      ],
+      "_recordPacket": "A RECORD written after the fact by the HISTORIAN seat (U3; ODQ §934.47 addendum 133), 2026-09-23. Built under TESTS-ONLY MODE (rule 39; stasis S11): a branch, a one-page brief, the tests with the code, GitHub's run read against the declared reds, a local merge by pick — no packet, no seal, no placement, no flip. It pins NO symbol (`requiredSymbols` is empty by design) and is not dispatchable.",
+      "_branch": "feat/em-c1-registry",
+      "_laneCommits": [
+        "586949ce3"
+      ],
+      "_trainCommits": [
+        "e891a1ed4d104244d2f31e6a7bf29be8c690ce30"
+      ]
+    },
+    {
+      "id": "EM-R8b",
+      "status": "LANDED",
+      "packetPath": "docs/implementation/packets/settlement-editor/EM-R8b.md",
+      "verifiedBase": "703fd5b6367da0168b293f7e8f5350ddb0fdacbd",
+      "landedAt": "50f611f4ae454567c77bd17238b4a26ee8b70f15",
+      "changeManifest": [
+        {
+          "action": "MODIFY",
+          "path": "src/domain/edit/mergeConsequence.js"
+        },
+        {
+          "action": "TEST",
+          "path": "tests/domain/mergeLadderHeldKeys.test.js"
+        },
+        {
+          "action": "CREATE",
+          "path": "tests/domain/mergeLadderHistory.test.js"
+        }
+      ],
+      "requiredSymbols": [],
+      "acceptanceCases": [
+        {
+          "id": "H1",
+          "case": "every declared HISTORY sub-path is one the restore can address, under a key a rung takes — HISTORY rows 1, unaddressable 0, unreachable 0"
+        },
+        {
+          "id": "H2",
+          "case": "the lived history is byte-identical in every trial, and the ladder explains itself — 0 moved of 120, 48 rung-firing, 48/48 tree-kept"
+        },
+        {
+          "id": "H3",
+          "case": "the take is attributable: a rung writes nothing the post-pass pipeline had not written — 0 receipt fields moved over 48 trials"
+        },
+        {
+          "id": "H4",
+          "case": "three constructed controls: a history is never rewritten, invented or made from absence — kept verbatim, [] stays [], hasOwnProperty false"
+        },
+        {
+          "id": "H5",
+          "case": "nothing judges the restored history: no invariant check reads it — 33 checks, 0 readers"
+        }
+      ],
+      "checks": [
+        [
+          "npx",
+          "vitest",
+          "run",
+          "--pool=threads",
+          "--maxWorkers=2",
+          "tests/domain/mergeLadderHeldKeys.test.js",
+          "tests/domain/mergeLadderHistory.test.js"
+        ],
+        [
+          "node",
+          "scripts/implementation-packets.mjs",
+          "validate"
+        ]
+      ],
+      "_recordPacket": "A RECORD written after the fact by the HISTORIAN seat (U3; ODQ §934.47 addendum 133), 2026-09-23. Built under TESTS-ONLY MODE (rule 39; stasis S11): a branch, a one-page brief, the tests with the code, GitHub's run read against the declared reds, a local merge by pick — no packet, no seal, no placement, no flip. It pins NO symbol (`requiredSymbols` is empty by design) and is not dispatchable.",
+      "_branch": "feat/em-r8b-history-restore",
+      "_laneCommits": [
+        "ed696b994"
+      ],
+      "_trainCommits": [
+        "50f611f4ae454567c77bd17238b4a26ee8b70f15"
+      ]
+    },
+    {
+      "id": "EM-C4b",
+      "status": "LANDED",
+      "packetPath": "docs/implementation/packets/settlement-editor/EM-C4b.md",
+      "verifiedBase": "586949ce3e5a272536ddf2d75ae9e7f21f7f38fb",
+      "landedAt": "c64d0808bd7aa5066269dfa38b08cffd57438477",
+      "changeManifest": [
+        {
+          "action": "MODIFY",
+          "path": "src/store/editSlice.js"
+        },
+        {
+          "action": "TEST",
+          "path": "tests/lint/editMutationPath.walker.test.js"
+        },
+        {
+          "action": "TEST",
+          "path": "tests/store/editSlice.test.js"
+        }
+      ],
+      "requiredSymbols": [],
+      "acceptanceCases": [
+        {
+          "id": "A1",
+          "case": "MAIN (six actions -> six pure verbs, the stored registry IS the returned array, DECREE_ACTIONS set-equal both ways to the module's own six verbs, both sides derived)"
+        },
+        {
+          "id": "A2",
+          "case": "DORMANT (a read materializes no key, the shared frozen empty registry, `decree` a member, EMPTY_RULE_SET answers `{guards:[],unevaluated:[]}`)"
+        },
+        {
+          "id": "A3",
+          "case": "COUNTERFORCE (a foreign save refuses no_save, settlement byte-identical; a CANON save is the paired positive control and APPLIES)"
+        },
+        {
+          "id": "A4",
+          "case": "BOUNDARY (§20.3's reason, the op and the orderIndex kept; a NEW array; the input rows unmutated; a malformed reason written by nobody)"
+        },
+        {
+          "id": "A5",
+          "case": "IDEMPOTENCY (the memo on three handles; each change re-evaluates; every kind in GUARD_KINDS, every offer in GUARD_OFFERS; an under-supplied rule NAMED unevaluated)"
+        },
+        {
+          "id": "A6",
+          "case": "LIFECYCLE (the rewind takes the RESTORED entry on a shared id, re-appends the later entry, moves no orderIndex)"
+        },
+        {
+          "id": "A7",
+          "case": "THE BINDER (judgment 264: the intent reaches the writer through the one adapter with the executor's receipt APPLIED and exactly one plain-edit kind in the live registry; the draft carries the edit at the minted root key; a canon intent surfaces `canon_locked`,"
+        }
+      ],
+      "checks": [
+        [
+          "npx",
+          "vitest",
+          "run",
+          "--pool=threads",
+          "--maxWorkers=2",
+          "tests/lint/editMutationPath.walker.test.js",
+          "tests/store/editSlice.test.js"
+        ],
+        [
+          "node",
+          "scripts/implementation-packets.mjs",
+          "validate"
+        ]
+      ],
+      "_recordPacket": "A RECORD written after the fact by the HISTORIAN seat (U3; ODQ §934.47 addendum 133), 2026-09-23. Built under TESTS-ONLY MODE (rule 39; stasis S11): a branch, a one-page brief, the tests with the code, GitHub's run read against the declared reds, a local merge by pick — no packet, no seal, no placement, no flip. It pins NO symbol (`requiredSymbols` is empty by design) and is not dispatchable.",
+      "_branch": "feat/em-c4b-store-registry",
+      "_laneCommits": [
+        "60e8af08d"
+      ],
+      "_trainCommits": [
+        "c64d0808bd7aa5066269dfa38b08cffd57438477"
+      ]
+    },
+    {
+      "id": "EM-B2b",
+      "status": "LANDED",
+      "packetPath": "docs/implementation/packets/settlement-editor/EM-B2b.md",
+      "verifiedBase": "25f54664983d4c00f61c1d7b6e8f7c5c15e214ee",
+      "landedAt": "24bf8ccc8fbce6a06651c708efdc57155eab256c",
+      "changeManifest": [
+        {
+          "action": "MODIFY",
+          "path": "src/domain/edit/dmLayer.js"
+        },
+        {
+          "action": "MODIFY",
+          "path": "src/domain/edit/fieldDeclarations.js"
+        },
+        {
+          "action": "MODIFY",
+          "path": "src/domain/edit/types.js"
+        },
+        {
+          "action": "MODIFY",
+          "path": "src/domain/regenerationDelta.js"
+        },
+        {
+          "action": "TEST",
+          "path": "tests/domain/editDeclarations.test.js"
+        },
+        {
+          "action": "TEST",
+          "path": "tests/domain/regenerationDelta.test.js"
+        },
+        {
+          "action": "CREATE",
+          "path": "tests/domain/worldFactRederive.test.js"
+        },
+        {
+          "action": "TEST",
+          "path": "tests/lint/editDeclarations.walker.test.js"
+        }
+      ],
+      "requiredSymbols": [],
+      "acceptanceCases": [
+        {
+          "id": "A1",
+          "case": "the DIFFERENCE between two re-derivations — the DM's terrain stands at the fact's own DECLARED leaf (`record.config.terrainType`, read from GENERATION_TIER1's recordPath, not typed) on 63/63 census rows, and where the coast is NEW the two re-derivations differ"
+        },
+        {
+          "id": "A2",
+          "case": "dormant and absent — no world-fact root re-derives exactly as today, and a layer whose inert `worldFacts` bag is NON-EMPTY is byte-identical to the same layer with it empty"
+        },
+        {
+          "id": "A3",
+          "case": "no silent fallback — the undeclared key and the out-of-set value THROW; a consult with no option-set member REFUSES every world fact and the run is the one with no world fact at all; a wired-but-broken vocabulary throws"
+        },
+        {
+          "id": "A4",
+          "case": "the stated blast radius is COMPLETE — the culture reader set under src/generators, exact in both directions"
+        },
+        {
+          "id": "A5",
+          "case": "idempotency and purity — three identical config′ re-derives byte-identical WITH the DM's fact at its leaf in all three; record, config and layer unmutated"
+        },
+        {
+          "id": "A6",
+          "case": "the delta partitions by provenance (tests/domain/regenerationDelta.test.js)"
+        },
+        {
+          "id": "A7",
+          "case": "the goldens cannot see any of it — both fixtures byte-identical by SHA-256 (7177cd6e…8f1e, 88983938…4084) and a no-layer re-derivation is still the committed golden"
+        },
+        {
+          "id": "A8",
+          "case": "the vocabulary is joined to its producer, both directions (tests/lint/editDeclarations.walker.test.js)"
+        }
+      ],
+      "checks": [
+        [
+          "npx",
+          "vitest",
+          "run",
+          "--pool=threads",
+          "--maxWorkers=2",
+          "tests/domain/editDeclarations.test.js",
+          "tests/domain/regenerationDelta.test.js",
+          "tests/domain/worldFactRederive.test.js",
+          "tests/lint/editDeclarations.walker.test.js"
+        ],
+        [
+          "node",
+          "scripts/implementation-packets.mjs",
+          "validate"
+        ]
+      ],
+      "_recordPacket": "A RECORD written after the fact by the HISTORIAN seat (U3; ODQ §934.47 addendum 133), 2026-09-23. Built under TESTS-ONLY MODE (rule 39; stasis S11): a branch, a one-page brief, the tests with the code, GitHub's run read against the declared reds, a local merge by pick — no packet, no seal, no placement, no flip. It pins NO symbol (`requiredSymbols` is empty by design) and is not dispatchable.",
+      "_branch": "feat/em-b2b-world-facts",
+      "_laneCommits": [
+        "0e27ed73b"
+      ],
+      "_trainCommits": [
+        "24bf8ccc8fbce6a06651c708efdc57155eab256c"
+      ]
+    },
+    {
+      "id": "EM-D2",
+      "status": "LANDED",
+      "packetPath": "docs/implementation/packets/settlement-editor/EM-D2.md",
+      "verifiedBase": "51384b364ddd7adea37f0d4d8e7d5452dd7c874a",
+      "landedAt": "2586a6e75f34284b87ba225fb80725530ef048f6",
+      "changeManifest": [
+        {
+          "action": "MODIFY",
+          "path": "src/components/edit/FreeField.jsx"
+        },
+        {
+          "action": "CREATE",
+          "path": "src/pdf/lib/fontCoverage.js"
+        },
+        {
+          "action": "CREATE",
+          "path": "tests/components/freeFieldGlyphs.test.jsx"
+        },
+        {
+          "action": "CREATE",
+          "path": "tests/pdf/fontCmap.test.js"
+        }
+      ],
+      "requiredSymbols": [],
+      "acceptanceCases": [
+        {
+          "id": "C1",
+          "case": "the eight declared faces ARE the eight TTFs public/fonts ships, and every one reads"
+        },
+        {
+          "id": "C2",
+          "case": "the reader agrees with fontkit on every face, and differs by exactly the structural U+FFFF"
+        },
+        {
+          "id": "C3",
+          "case": "a family set is the INTERSECTION over its faces, and the two families genuinely differ"
+        },
+        {
+          "id": "C4",
+          "case": "a format-12 subtable is read, over a SYNTHETIC face assembled byte by byte"
+        },
+        {
+          "id": "C5",
+          "case": "coverageOf reports every uncovered OCCURRENCE with its UTF-16 index, in the text order"
+        },
+        {
+          "id": "C6",
+          "case": "a fully covered text reports nothing, so the report measures the text and not the call"
+        },
+        {
+          "id": "C7",
+          "case": "coverageOf FAILS OPEN: with no coverage loaded it reports nothing rather than everything"
+        },
+        {
+          "id": "C8",
+          "case": "loadFamilyCoverage reads ON DEMAND through the INJECTED reader, once per face"
+        }
+      ],
+      "checks": [
+        [
+          "npx",
+          "vitest",
+          "run",
+          "--pool=threads",
+          "--maxWorkers=2",
+          "tests/components/freeFieldGlyphs.test.jsx",
+          "tests/pdf/fontCmap.test.js"
+        ],
+        [
+          "node",
+          "scripts/implementation-packets.mjs",
+          "validate"
+        ]
+      ],
+      "_recordPacket": "A RECORD written after the fact by the HISTORIAN seat (U3; ODQ §934.47 addendum 133), 2026-09-23. Built under TESTS-ONLY MODE (rule 39; stasis S11): a branch, a one-page brief, the tests with the code, GitHub's run read against the declared reds, a local merge by pick — no packet, no seal, no placement, no flip. It pins NO symbol (`requiredSymbols` is empty by design) and is not dispatchable.",
+      "_branch": "feat/em-d2-font-coverage",
+      "_laneCommits": [
+        "aecb284fa",
+        "3f924796d"
+      ],
+      "_trainCommits": [
+        "490175ee0f6798881a0815c211afeb95298357d8",
+        "2586a6e75f34284b87ba225fb80725530ef048f6"
+      ],
+      "_ciRuns": [
+        "35876591684"
+      ],
+      "_acceptanceNote": "the member records 11 acceptance cases by title in its commit body; the first eight are carried here (the estate's ceiling) and all 11 are quoted in the packet's §9.",
+      "_supersededPaths": [
+        "tests/components/freeFieldCoverage.test.jsx",
+        "tests/pdf/fontCoverage.test.js"
+      ]
+    },
+    {
+      "id": "EM-D3",
+      "status": "LANDED",
+      "packetPath": "docs/implementation/packets/settlement-editor/EM-D3.md",
+      "verifiedBase": "60e8af08d8d36243ba858e61709735a6ae0e1c8f",
+      "landedAt": "6b6e4859c6f852954f9efa564c79f38f193ea6f8",
+      "changeManifest": [
+        {
+          "action": "CREATE",
+          "path": "src/components/edit/DecreeRegistryPage.jsx"
+        },
+        {
+          "action": "CREATE",
+          "path": "tests/components/decreeRegistryPage.test.jsx"
+        }
+      ],
+      "requiredSymbols": [],
+      "acceptanceCases": [
+        {
+          "id": "A1",
+          "case": "renders the waiting entries in the DM own order, with applied and withdrawn below"
+        },
+        {
+          "id": "A2",
+          "case": "move up and move down reach EM-C4b reorder with the store own request, and the registry permutes"
+        },
+        {
+          "id": "A3",
+          "case": "withdraw reaches EM-C4b withdraw, and the entry is kept for the record"
+        },
+        {
+          "id": "A4",
+          "case": "reopen is offered on pending entries only and reaches the seam, applied entries are read-only with chronicle links"
+        },
+        {
+          "id": "A5",
+          "case": "the guard badges show each guard kind and its offers, from the store own selectGuards"
+        },
+        {
+          "id": "A6",
+          "case": "outside a campaign the page shows the estate own rung and no advance control"
+        },
+        {
+          "id": "A7",
+          "case": "the rewind session limit is stated from the estate own constant"
+        },
+        {
+          "id": "A8",
+          "case": "every vocabulary is the producer own, in both directions"
+        }
+      ],
+      "checks": [
+        [
+          "npx",
+          "vitest",
+          "run",
+          "--pool=threads",
+          "--maxWorkers=2",
+          "tests/components/decreeRegistryPage.test.jsx"
+        ],
+        [
+          "node",
+          "scripts/implementation-packets.mjs",
+          "validate"
+        ]
+      ],
+      "_recordPacket": "A RECORD written after the fact by the HISTORIAN seat (U3; ODQ §934.47 addendum 133), 2026-09-23. Built under TESTS-ONLY MODE (rule 39; stasis S11): a branch, a one-page brief, the tests with the code, GitHub's run read against the declared reds, a local merge by pick — no packet, no seal, no placement, no flip. It pins NO symbol (`requiredSymbols` is empty by design) and is not dispatchable.",
+      "_branch": "feat/em-d3-registry-page",
+      "_laneCommits": [
+        "a5badf679"
+      ],
+      "_trainCommits": [
+        "6b6e4859c6f852954f9efa564c79f38f193ea6f8"
+      ],
+      "_ciRuns": [
+        "35874642968"
+      ],
+      "_acceptanceNote": "the member records 10 acceptance cases by title in its commit body; the first eight are carried here (the estate's ceiling) and all 10 are quoted in the packet's §9."
+    },
+    {
+      "id": "EM-D4",
+      "status": "LANDED",
+      "packetPath": "docs/implementation/packets/settlement-editor/EM-D4.md",
+      "verifiedBase": "586949ce3e5a272536ddf2d75ae9e7f21f7f38fb",
+      "landedAt": "4224d03357518aec16a637aa88d6e3c0dcc66fca",
+      "changeManifest": [
+        {
+          "action": "MODIFY",
+          "path": "src/components/surveyor/InterpretApplyPanel.jsx"
+        },
+        {
+          "action": "MODIFY",
+          "path": "src/lib/intent/interpretApply.js"
+        },
+        {
+          "action": "TEST",
+          "path": "tests/components/surveyorInterpretApplyPanel.test.jsx"
+        },
+        {
+          "action": "TEST",
+          "path": "tests/lib/interpretApply.test.js"
+        }
+      ],
+      "requiredSymbols": [],
+      "acceptanceCases": [],
+      "checks": [
+        [
+          "npx",
+          "vitest",
+          "run",
+          "--pool=threads",
+          "--maxWorkers=2",
+          "tests/components/surveyorInterpretApplyPanel.test.jsx",
+          "tests/lib/interpretApply.test.js"
+        ],
+        [
+          "node",
+          "scripts/implementation-packets.mjs",
+          "validate"
+        ]
+      ],
+      "_recordPacket": "A RECORD written after the fact by the HISTORIAN seat (U3; ODQ §934.47 addendum 133), 2026-09-23. Built under TESTS-ONLY MODE (rule 39; stasis S11): a branch, a one-page brief, the tests with the code, GitHub's run read against the declared reds, a local merge by pick — no packet, no seal, no placement, no flip. It pins NO symbol (`requiredSymbols` is empty by design) and is not dispatchable.",
+      "_branch": "feat/em-d4-surveyor-bridge",
+      "_laneCommits": [
+        "814ffa398"
+      ],
+      "_trainCommits": [
+        "4224d03357518aec16a637aa88d6e3c0dcc66fca"
+      ],
+      "_ciRuns": [
+        "35872816716"
+      ],
+      "_acceptanceNote": "the acceptance cases are named BY TITLE in the commit body of 4224d0335 and quoted in the packet's §9; they are not restated as manifest rows because the body's shape is prose, not an id table."
+    },
+    {
+      "id": "EM-D1",
+      "status": "LANDED",
+      "packetPath": "docs/implementation/packets/settlement-editor/EM-D1.md",
+      "verifiedBase": "ac14093c79a1c6715164a9c1f31eb221111842c5",
+      "landedAt": "d09fd3cf727d23b8aee3822c2e8079574e0d9d39",
+      "changeManifest": [
+        {
+          "action": "MODIFY",
+          "path": "src/App.jsx"
+        },
+        {
+          "action": "CREATE",
+          "path": "src/components/edit/EditModeShell.jsx"
+        },
+        {
+          "action": "MODIFY",
+          "path": "src/components/settlements/SettlementCard.jsx"
+        },
+        {
+          "action": "MODIFY",
+          "path": "src/copy/en.js"
+        },
+        {
+          "action": "TEST",
+          "path": "tests/build/vendorPdfLazy.test.js"
+        },
+        {
+          "action": "CREATE",
+          "path": "tests/components/editModeShell.test.jsx"
+        },
+        {
+          "action": "TEST",
+          "path": "tests/components/phoneChromeFloor.census.test.js"
+        },
+        {
+          "action": "TEST",
+          "path": "tests/domain/editDeclarations.test.js"
+        }
+      ],
+      "requiredSymbols": [],
+      "acceptanceCases": [
+        {
+          "id": "A1",
+          "case": "the landed gate refuses anon and free in the house shape, and the account it admits enters"
+        },
+        {
+          "id": "A2",
+          "case": "the register wears a pencil on every DECLARED card and on no other, a plus on every roster, a seal with its herald line on each process card, the provenance note and Done"
+        },
+        {
+          "id": "A3",
+          "case": "a pencil opens the door, and the door hands applyPlainEditIntent the four coordinates"
+        },
+        {
+          "id": "A4",
+          "case": "the library row offers Edit behind the landed gate alone, and entering sets the editor mode and opens the same dossier"
+        },
+        {
+          "id": "A5",
+          "case": "the App root reaches the shell through exactly one lazy edge and no static one"
+        },
+        {
+          "id": "A6",
+          "case": "every string the two surfaces render comes from en.js through t(), and every key resolves"
+        },
+        {
+          "id": "A7",
+          "case": "the shell spells no tier fact and mints no pencil marker, each scanner driven over a control"
+        },
+        {
+          "id": "A8",
+          "case": "the mode the slice reads as OFF renders nothing at all"
+        }
+      ],
+      "checks": [
+        [
+          "npx",
+          "vitest",
+          "run",
+          "--pool=threads",
+          "--maxWorkers=2",
+          "tests/build/vendorPdfLazy.test.js",
+          "tests/components/editModeShell.test.jsx",
+          "tests/components/phoneChromeFloor.census.test.js",
+          "tests/domain/editDeclarations.test.js"
+        ],
+        [
+          "node",
+          "scripts/implementation-packets.mjs",
+          "validate"
+        ]
+      ],
+      "_recordPacket": "A RECORD written after the fact by the HISTORIAN seat (U3; ODQ §934.47 addendum 133), 2026-09-23. Built under TESTS-ONLY MODE (rule 39; stasis S11): a branch, a one-page brief, the tests with the code, GitHub's run read against the declared reds, a local merge by pick — no packet, no seal, no placement, no flip. It pins NO symbol (`requiredSymbols` is empty by design) and is not dispatchable.",
+      "_branch": "feat/em-d1-edit-mode-shell",
+      "_laneCommits": [
+        "1b632654f",
+        "88a66c59c"
+      ],
+      "_trainCommits": [
+        "b5ee6041c15b113d5901937b1cc059014da2ed42",
+        "d09fd3cf727d23b8aee3822c2e8079574e0d9d39"
+      ],
+      "_ciRuns": [
+        "35881309468",
+        "35887245219"
+      ]
+    },
+    {
+      "id": "EM-F1",
+      "status": "LANDED",
+      "packetPath": "docs/implementation/packets/settlement-editor/EM-F1.md",
+      "verifiedBase": "a5badf679b40b7110b7264a85f50cfd597f977c1",
+      "landedAt": "795d2a582242d4d9bc6ade7b474d35e6b6834618",
+      "changeManifest": [
+        {
+          "action": "MODIFY",
+          "path": "src/components/library/LibraryToolbar.jsx"
+        },
+        {
+          "action": "CREATE",
+          "path": "src/domain/edit/phantoms.js"
+        },
+        {
+          "action": "CREATE",
+          "path": "tests/domain/phantoms.test.js"
+        },
+        {
+          "action": "CREATE",
+          "path": "tests/store/phantomSaves.test.js"
+        }
+      ],
+      "requiredSymbols": [],
+      "acceptanceCases": [
+        {
+          "id": "A1",
+          "case": "the minted record carries EXACTLY the declared keys, frozen, and not one more"
+        },
+        {
+          "id": "A2",
+          "case": "the same seed and index mint the same record forever, and a different seed or index a different one"
+        },
+        {
+          "id": "A3",
+          "case": "every declared trait pool is a LIVE pool id and every rolled trait is a member of its own pool"
+        },
+        {
+          "id": "A4",
+          "case": "a malformed argument, an unusable tool bag or a producer that throws all answer null, never a partial record"
+        },
+        {
+          "id": "A5",
+          "case": "the discriminant is read in one place, over a record and over a save row alike"
+        },
+        {
+          "id": "A6",
+          "case": "an unreal counterparty admits the record-only consequence and a saved settlement admits the world"
+        },
+        {
+          "id": "A7",
+          "case": "the badge and the policy are ONE fact read twice, in both directions"
+        },
+        {
+          "id": "A8",
+          "case": "each off-stage op touches the home procedures and the record only — the world comes back by identity, byte-identical"
+        }
+      ],
+      "checks": [
+        [
+          "npx",
+          "vitest",
+          "run",
+          "--pool=threads",
+          "--maxWorkers=2",
+          "tests/domain/phantoms.test.js",
+          "tests/store/phantomSaves.test.js"
+        ],
+        [
+          "node",
+          "scripts/implementation-packets.mjs",
+          "validate"
+        ]
+      ],
+      "_recordPacket": "A RECORD written after the fact by the HISTORIAN seat (U3; ODQ §934.47 addendum 133), 2026-09-23. Built under TESTS-ONLY MODE (rule 39; stasis S11): a branch, a one-page brief, the tests with the code, GitHub's run read against the declared reds, a local merge by pick — no packet, no seal, no placement, no flip. It pins NO symbol (`requiredSymbols` is empty by design) and is not dispatchable.",
+      "_branch": "feat/em-f1-phantoms",
+      "_laneCommits": [
+        "5022eeca3"
+      ],
+      "_trainCommits": [
+        "795d2a582242d4d9bc6ade7b474d35e6b6834618"
+      ],
+      "_ciRuns": [
+        "35878167406"
+      ],
+      "_acceptanceNote": "the member records 16 acceptance cases by title in its commit body; the first eight are carried here (the estate's ceiling) and all 16 are quoted in the packet's §9."
+    },
+    {
+      "id": "EM-F1b",
+      "status": "LANDED",
+      "packetPath": "docs/implementation/packets/settlement-editor/EM-F1b.md",
+      "verifiedBase": "5022eeca3720ef40e84caf2cb6f6f37d2adcf738",
+      "landedAt": "c5145435eac26f1dcbb9988120844aeffeeb255e",
+      "changeManifest": [
+        {
+          "action": "MODIFY",
+          "path": "src/lib/saveAccess.js"
+        },
+        {
+          "action": "CREATE",
+          "path": "tests/store/phantomQuota.test.js"
+        }
+      ],
+      "requiredSymbols": [],
+      "acceptanceCases": [
+        {
+          "id": "F1",
+          "case": "three real saves plus two phantoms read as THREE toward a maxSaves-3 tier, and the fourth real save is refused as today"
+        },
+        {
+          "id": "F2",
+          "case": "a tier with maxSaves Infinity is untouched — every premium figure is identical with the phantoms present and absent"
+        },
+        {
+          "id": "F3",
+          "case": "the quota meter reads THREE OF THREE, and the account cards unclamped \"N / 3\" is the sentence that would have lied"
+        },
+        {
+          "id": "F4",
+          "case": "no tier fact moved — the gates caps and the free save limit are the values they were"
+        },
+        {
+          "id": "F5",
+          "case": "the two spellings of the discriminant are ONE word, and the two predicates agree row for row"
+        },
+        {
+          "id": "F6",
+          "case": "the quota counters importer roster under src is EXACT, and the three raw-length siblings are a closed census"
+        },
+        {
+          "id": "F7",
+          "case": "the F42 BOUNDARY — a metadata-projected row has no blob to read, and nothing under src reads that projection today"
+        }
+      ],
+      "checks": [
+        [
+          "npx",
+          "vitest",
+          "run",
+          "--pool=threads",
+          "--maxWorkers=2",
+          "tests/store/phantomQuota.test.js"
+        ],
+        [
+          "node",
+          "scripts/implementation-packets.mjs",
+          "validate"
+        ]
+      ],
+      "_recordPacket": "A RECORD written after the fact by the HISTORIAN seat (U3; ODQ §934.47 addendum 133), 2026-09-23. Built under TESTS-ONLY MODE (rule 39; stasis S11): a branch, a one-page brief, the tests with the code, GitHub's run read against the declared reds, a local merge by pick — no packet, no seal, no placement, no flip. It pins NO symbol (`requiredSymbols` is empty by design) and is not dispatchable.",
+      "_branch": "feat/em-f1b-phantom-quota",
+      "_laneCommits": [
+        "f82f3e8fd"
+      ],
+      "_trainCommits": [
+        "c5145435eac26f1dcbb9988120844aeffeeb255e"
+      ],
+      "_ciRuns": [
+        "35883377727"
+      ]
+    },
+    {
+      "id": "EM-F1c",
+      "status": "LANDED",
+      "packetPath": "docs/implementation/packets/settlement-editor/EM-F1c.md",
+      "verifiedBase": "2d82c462c83bb6ae35ff207d6b962770ef46578a",
+      "landedAt": "12c437de4b427c8663500e3df966ef8f20fa7b21",
+      "changeManifest": [
+        {
+          "action": "MODIFY",
+          "path": "src/store/galleryImportMap.js"
+        },
+        {
+          "action": "MODIFY",
+          "path": "src/store/galleryImportSettlement.js"
+        },
+        {
+          "action": "MODIFY",
+          "path": "src/store/instantWorldBody.js"
+        },
+        {
+          "action": "TEST",
+          "path": "tests/store/phantomQuota.test.js"
+        },
+        {
+          "action": "CREATE",
+          "path": "tests/store/quotaGates.test.js"
+        }
+      ],
+      "requiredSymbols": [],
+      "acceptanceCases": [
+        {
+          "id": "G0",
+          "case": "the fixture really is five rows the viewer can reach two of, and the control really is a full shelf"
+        },
+        {
+          "id": "G1",
+          "case": "the gallery-settlement import ADMITS one more into that library, and still refuses a genuinely full shelf"
+        },
+        {
+          "id": "G2",
+          "case": "the gallery-campaign import ADMITS a one-member campaign into that library, and still refuses a genuinely full shelf"
+        },
+        {
+          "id": "G3",
+          "case": "the Instant World pre-flight ADMITS its realm when the reachable saves leave room, and refuses when they do not"
+        }
+      ],
+      "checks": [
+        [
+          "npx",
+          "vitest",
+          "run",
+          "--pool=threads",
+          "--maxWorkers=2",
+          "tests/store/phantomQuota.test.js",
+          "tests/store/quotaGates.test.js"
+        ],
+        [
+          "node",
+          "scripts/implementation-packets.mjs",
+          "validate"
+        ]
+      ],
+      "_recordPacket": "A RECORD written after the fact by the HISTORIAN seat (U3; ODQ §934.47 addendum 133), 2026-09-23. Built under TESTS-ONLY MODE (rule 39; stasis S11): a branch, a one-page brief, the tests with the code, GitHub's run read against the declared reds, a local merge by pick — no packet, no seal, no placement, no flip. It pins NO symbol (`requiredSymbols` is empty by design) and is not dispatchable.",
+      "_branch": "feat/em-f1c-quota-siblings",
+      "_laneCommits": [
+        "c808f13ed"
+      ],
+      "_trainCommits": [
+        "12c437de4b427c8663500e3df966ef8f20fa7b21"
+      ],
+      "_ciRuns": [
+        "35891004370"
+      ]
+    },
+    {
+      "id": "EM-F2",
+      "status": "LANDED",
+      "packetPath": "docs/implementation/packets/settlement-editor/EM-F2.md",
+      "verifiedBase": "5022eeca3720ef40e84caf2cb6f6f37d2adcf738",
+      "landedAt": "9a49c6dddc29fb959dcb85bbebfc71e26c069060",
+      "changeManifest": [
+        {
+          "action": "MODIFY",
+          "path": "src/store/settlementGenerateAction.js"
+        },
+        {
+          "action": "TEST",
+          "path": "tests/domain/phantoms.test.js"
+        },
+        {
+          "action": "TEST",
+          "path": "tests/lint/snapshotPromotion.census.walker.test.js"
+        },
+        {
+          "action": "CREATE",
+          "path": "tests/store/phantomPromotion.test.js"
+        }
+      ],
+      "requiredSymbols": [],
+      "acceptanceCases": [],
+      "checks": [
+        [
+          "npx",
+          "vitest",
+          "run",
+          "--pool=threads",
+          "--maxWorkers=2",
+          "tests/domain/phantoms.test.js",
+          "tests/lint/snapshotPromotion.census.walker.test.js",
+          "tests/store/phantomPromotion.test.js"
+        ],
+        [
+          "node",
+          "scripts/implementation-packets.mjs",
+          "validate"
+        ]
+      ],
+      "_recordPacket": "A RECORD written after the fact by the HISTORIAN seat (U3; ODQ §934.47 addendum 133), 2026-09-23. Built under TESTS-ONLY MODE (rule 39; stasis S11): a branch, a one-page brief, the tests with the code, GitHub's run read against the declared reds, a local merge by pick — no packet, no seal, no placement, no flip. It pins NO symbol (`requiredSymbols` is empty by design) and is not dispatchable.",
+      "_branch": "feat/em-f2-promotion",
+      "_laneCommits": [
+        "3544c3d30",
+        "88992bdb7",
+        "394b24bcf"
+      ],
+      "_trainCommits": [
+        "32f23d72731a4ebda0b043028a71ed25763db5c7",
+        "f1fce5d3f3f4e21c803b48811e1cde6fdf064b63",
+        "9a49c6dddc29fb959dcb85bbebfc71e26c069060"
+      ],
+      "_ciRuns": [
+        "35882132699",
+        "35887953396"
+      ],
+      "_acceptanceNote": "the acceptance cases are named BY TITLE in the commit body of 32f23d727, f1fce5d3f, 9a49c6ddd and quoted in the packet's §9; they are not restated as manifest rows because the body's shape is prose, not an id table."
+    },
+    {
+      "id": "EM-B2b2",
+      "status": "LANDED",
+      "packetPath": "docs/implementation/packets/settlement-editor/EM-B2b2.md",
+      "verifiedBase": "795d2a582242d4d9bc6ade7b474d35e6b6834618",
+      "landedAt": "dde845c15294aeab61d13f5d4336cdcc1770aaf5",
+      "changeManifest": [
+        {
+          "action": "MODIFY",
+          "path": "src/generators/steps/resolveResources.js"
+        },
+        {
+          "action": "CREATE",
+          "path": "tests/domain/editWorldFactResources.test.js"
+        },
+        {
+          "action": "TEST",
+          "path": "tests/domain/worldFactRederive.test.js"
+        },
+        {
+          "action": "REGISTER",
+          "path": "tests/lint/.prose-numerics-baseline.json"
+        }
+      ],
+      "requiredSymbols": [],
+      "acceptanceCases": [
+        {
+          "id": "A1",
+          "case": "the DM's roster stands at its own declared leaf - byte-equal on rows 0/21/42 and carried on 63 of 63 census rows (1 at the base)"
+        },
+        {
+          "id": "A2",
+          "case": "the no-edit path is unmoved - byte-identical to the PRE-CHANGE step's own output, captured by copy, never re-recorded"
+        },
+        {
+          "id": "A3",
+          "case": "the regeneration delta names the resources row and its dmValue is the value standing at the leaf, 3 of 3"
+        },
+        {
+          "id": "A4",
+          "case": "a roster outside RESOURCE_DATA is still refused by EM-B2b's own throw"
+        },
+        {
+          "id": "A6",
+          "case": "the mark is NOT the echo - a replay from the resolved `record.config` is byte-identical to the pre-change replay on all three rows"
+        },
+        {
+          "id": "A5",
+          "case": "U39 STOPS on its own row - no GENERATION_TIER1 pair resolves to `record.config.monsterThreat`, so the narrowing has no shape at this base"
+        },
+        {
+          "id": "A9",
+          "case": "(worldFactRederive.test.js) the route is TOTAL over all five facts, each at its own declared outputKey: terrain 3 / culture 3 / monsterThreat 3 / stressors 3 / resources 3"
+        }
+      ],
+      "checks": [
+        [
+          "npx",
+          "vitest",
+          "run",
+          "--pool=threads",
+          "--maxWorkers=2",
+          "tests/domain/editWorldFactResources.test.js",
+          "tests/domain/worldFactRederive.test.js"
+        ],
+        [
+          "node",
+          "scripts/implementation-packets.mjs",
+          "validate"
+        ]
+      ],
+      "_recordPacket": "A RECORD written after the fact by the HISTORIAN seat (U3; ODQ §934.47 addendum 133), 2026-09-23. Built under TESTS-ONLY MODE (rule 39; stasis S11): a branch, a one-page brief, the tests with the code, GitHub's run read against the declared reds, a local merge by pick — no packet, no seal, no placement, no flip. It pins NO symbol (`requiredSymbols` is empty by design) and is not dispatchable.",
+      "_branch": "feat/em-b2b2-resources-pin",
+      "_laneCommits": [
+        "a7ecd644e"
+      ],
+      "_trainCommits": [
+        "dde845c15294aeab61d13f5d4336cdcc1770aaf5"
+      ],
+      "_ciRuns": [
+        "35892227226"
+      ]
+    },
+    {
+      "id": "EM-F3",
+      "status": "LANDED",
+      "packetPath": "docs/implementation/packets/settlement-editor/EM-F3.md",
+      "verifiedBase": "9a49c6dddc29fb959dcb85bbebfc71e26c069060",
+      "landedAt": "91329cdead30acbedc38595207a45bbdbb4a38ba",
+      "changeManifest": [
+        {
+          "action": "MODIFY",
+          "path": "src/components/edit/CardEditorDialog.jsx"
+        },
+        {
+          "action": "MODIFY",
+          "path": "src/components/edit/EditModeShell.jsx"
+        },
+        {
+          "action": "MODIFY",
+          "path": "src/copy/en.js"
+        },
+        {
+          "action": "MODIFY",
+          "path": "src/domain/edit/fieldDeclarations.js"
+        },
+        {
+          "action": "MODIFY",
+          "path": "src/domain/edit/types.js"
+        },
+        {
+          "action": "MODIFY",
+          "path": "src/lib/refusalReasons.js"
+        },
+        {
+          "action": "CREATE",
+          "path": "src/store/phantomMintAction.js"
+        },
+        {
+          "action": "TEST",
+          "path": "tests/build/vendorPdfLazy.test.js"
+        },
+        {
+          "action": "TEST",
+          "path": "tests/components/editModeShell.test.jsx"
+        },
+        {
+          "action": "CREATE",
+          "path": "tests/components/phantomDoor.test.jsx"
+        },
+        {
+          "action": "TEST",
+          "path": "tests/domain/editDeclarations.test.js"
+        },
+        {
+          "action": "TEST",
+          "path": "tests/domain/editPools.test.js"
+        },
+        {
+          "action": "TEST",
+          "path": "tests/domain/phantoms.test.js"
+        },
+        {
+          "action": "TEST",
+          "path": "tests/lint/editDeclarations.walker.test.js"
+        },
+        {
+          "action": "TEST",
+          "path": "tests/lint/flavorFields.census.test.js"
+        },
+        {
+          "action": "TEST",
+          "path": "tests/store/editSlice.test.js"
+        },
+        {
+          "action": "CREATE",
+          "path": "tests/store/phantomMint.test.js"
+        },
+        {
+          "action": "TEST",
+          "path": "tests/store/phantomPromotion.test.js"
+        }
+      ],
+      "requiredSymbols": [],
+      "acceptanceCases": [],
+      "checks": [
+        [
+          "npx",
+          "vitest",
+          "run",
+          "--pool=threads",
+          "--maxWorkers=2",
+          "tests/build/vendorPdfLazy.test.js",
+          "tests/components/editModeShell.test.jsx",
+          "tests/components/phantomDoor.test.jsx",
+          "tests/domain/editDeclarations.test.js",
+          "tests/domain/editPools.test.js",
+          "tests/domain/phantoms.test.js",
+          "tests/lint/editDeclarations.walker.test.js",
+          "tests/lint/flavorFields.census.test.js",
+          "tests/store/editSlice.test.js",
+          "tests/store/phantomMint.test.js",
+          "tests/store/phantomPromotion.test.js"
+        ],
+        [
+          "node",
+          "scripts/implementation-packets.mjs",
+          "validate"
+        ]
+      ],
+      "_recordPacket": "A RECORD written after the fact by the HISTORIAN seat (U3; ODQ §934.47 addendum 133), 2026-09-23. Built under TESTS-ONLY MODE (rule 39; stasis S11): a branch, a one-page brief, the tests with the code, GitHub's run read against the declared reds, a local merge by pick — no packet, no seal, no placement, no flip. It pins NO symbol (`requiredSymbols` is empty by design) and is not dispatchable.",
+      "_branch": "feat/em-f3-phantom-door",
+      "_laneCommits": [
+        "4eebab111"
+      ],
+      "_trainCommits": [
+        "91329cdead30acbedc38595207a45bbdbb4a38ba"
+      ],
+      "_ciRuns": [
+        "35897831415"
+      ],
+      "_acceptanceNote": "the acceptance cases are named BY TITLE in the commit body of 91329cdea and quoted in the packet's §9; they are not restated as manifest rows because the body's shape is prose, not an id table."
     }
   ]
 }
