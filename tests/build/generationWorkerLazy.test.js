@@ -212,7 +212,11 @@ const SENTINEL = 'settlementforge:generation:worker-v1';
 // MEMBERSHIP fact, its bytes are real; EM-R6 moved nothing in the closure. The holder's sum (judgment 160d) is this
 // attribution, not the members' membership claims. The ceiling follows the measurement DOWN to the byte and stays
 // MONOTONE-DOWN from this value; no member of the train read a rise against it (the buy-back landed first).
-export const WORKER_BUNDLE_CEILING_BYTES = 1393432;
+// 1,393,432 -> 1,392,364 (2026-09-22, the chair, judgment 194 (the T15 reading)): train EM-T15's terminal read the worker at its composed tip
+// c7d472ec2 on a fresh build in consist: EM-R1's merge clone and its retired step clones, EM-R2's roster consult and EM-R5's
+// pure leaf (outside the worker) measured TOGETHER at the composed tip. The ceiling follows the measurement DOWN to the byte and stays MONOTONE-DOWN from
+// this value; no member of the train read a rise against it (the buy-back landed first).
+export const WORKER_BUNDLE_CEILING_BYTES = 1392364;
 
 const source = (path) => readFileSync(join(ROOT, path), 'utf8');
 
