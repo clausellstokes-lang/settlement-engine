@@ -902,11 +902,49 @@ async function localWriteAll(entries) {
   localWrite(entries);
 }
 
+/**
+ * ⛔ U53 — A LOCAL BATCH CREATE CARRIES ITS OWN ID, OR THE WHOLE BATCH IS REFUSED.
+ *
+ * This is the one create path in the module that mints NOTHING: `localSaveEntry` falls
+ * back to `newLocalSaveId`, `supabaseSave` pre-mints `newSaveId` or lets the server
+ * assign, and `localUpsert` refuses outright ("Explicit-id save upsert requires an id.").
+ * Here `migrateSaveToV2` only reshapes, so an unkeyed create used to land a row with
+ * `id: undefined` — and every id compare in this module is `String(entry.id)`, so that
+ * row's identity is the literal string "undefined": two of them are ONE row, `localUpdate`
+ * reaches whichever came first, and `localDelete` filters by inequality and takes both.
+ * The same data-loss shape U22 cured at the local mint.
+ *
+ * MEASURED, which is why this is a refusal and not a mint. Every producer of `creates`
+ * in the tree supplies an id, and the two that can reach THIS backend do so explicitly:
+ *   • `store/importReconciliationCommandTransaction.js` spreads `id: targets.saveId`
+ *     LAST, so the command's own id always wins;
+ *   • `components/settlements/libraryDeleteHandlers.js` passes `options.creates || []`
+ *     through, and every caller of that persister (the panel's three, and the two delete
+ *     handlers) passes deletes only — so the list is empty in the shipped tree;
+ *   • `saves.js`'s own neighbour-link batch pre-mints `newSaveId()` and goes straight to
+ *     the Supabase backend.
+ * The rollback in `createLibraryBatchPersister` already reads `creates[].id` to build its
+ * touched-id set, so the caller's OWN compensation assumes the key is there. Minting one
+ * here would therefore invent an identity the caller is not holding and cannot roll back;
+ * refusing NAMES the broken precondition at the boundary that has it.
+ *
+ * The check runs BEFORE the read and before any write, so a refused batch leaves the
+ * device exactly as it found it — the same atomicity the Supabase backend gets from its
+ * RPC.
+ */
 async function localMutateBatch(
   { updates = [], deletes = [], creates = [] } = {},
   { expectedOwnerId = null, isSessionCurrent = null } = {},
 ) {
   assertSaveSessionCurrent(expectedOwnerId, isSessionCurrent, expectedOwnerId);
+  // `!entry?.id` is `localUpsert`'s own predicate, deliberately: two spellings of "this
+  // row has no key" on one table is the divergence these cures exist to close.
+  if (creates.some(entry => !entry?.id)) {
+    throw Object.assign(
+      new Error('Explicit-id save batch create requires an id.'),
+      { code: 'batch_create_requires_id' },
+    );
+  }
   const deleted = new Set(deletes.map(String));
   const updateMap = new Map(updates.map(entry => [String(entry.id), entry]));
   const next = (await localLoad())
