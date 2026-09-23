@@ -215,13 +215,14 @@ registerStep('assembleSettlement', {
     settlement.powerStructure,
     settlement.economicState,
     tier,
+    { pins },
   );
   if (settlement.defenseProfile?.readiness?.label) {
     const { beforeFactions } = reconcilePowerStructure(
       settlement.powerStructure,
       settlement.economicState,
       ctx.powerIntent,
-      { defenseLabel: settlement.defenseProfile.readiness.label },
+      { defenseLabel: settlement.defenseProfile.readiness.label, pins },
     );
     refreshPowerGenerationTraces(
       ctx,
@@ -234,6 +235,7 @@ registerStep('assembleSettlement', {
     settlement.powerStructure,
     settlement.economicState,
     tier,
+    { pins },
   );
 
   // ── ODQ §810 SEAM 1b: size the political roster to the tier's faction band.
