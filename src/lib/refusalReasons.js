@@ -172,6 +172,13 @@ export const REFUSAL_SURFACES = Object.freeze({
   GENERATE_WIZARD: 'generateWizard',
   /** The exact-seed forge (components/generate/LayeredConfigurationPanel.jsx). */
   SEED_FIELD: 'seedField',
+  /**
+   * The editor's Forge control on an off-stage counterparty's row
+   * (components/edit/EditModeShell.jsx, EM-F3). It reaches the SAME generation lane as
+   * every surface above — a promotion is a forge that lands on a saved row — so it can be
+   * handed the same gate refusals, and it says so where the DM clicked.
+   */
+  EDIT_FORGE: 'editForge',
 });
 
 /**

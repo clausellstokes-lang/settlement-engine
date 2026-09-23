@@ -33,6 +33,17 @@
  * ⛔ THE PENCIL BINDS BY ROLE AND NAME (judgment 264c). No marker attribute is minted
  * anywhere in this file; a reader finds a pencil the way a DM does, by its words.
  *
+ * ⭐ THE FOURTH ROSTER IS THE COUNTERPARTIES (EM-F3, design §2.8; the chair's judgment 275).
+ * The three roster roots above are collections of the record; this one is not on the record at
+ * all — it is the town's neighbour partners and the DM's own off-stage counterparties, which
+ * are SAVES (EM-F1). Its plus opens the SAME door in CREATE mode on EM-A1's `phantom` card, and
+ * each off-stage row carries the FORGE control that hands EM-F2's promotion the row's own id.
+ *
+ * ⛔ AND IT REACHES NEITHER THE PHANTOM LEAF NOR THE POOL TABLE. This file's edge set into
+ * `src/domain/edit/` is EXACTLY the declaration table, pinned by its own arm, so the reading of
+ * a counterparty's reality and the mint itself are bound the way EM-D1 bound the writer: one
+ * function from the store, passed down. Nothing about a phantom is decided here.
+ *
  * ⚠ THE REGISTER IS PER CARD TYPE, NOT PER SUBJECT. The shell places one mark per card
  * the tome shows and opens the door on that card's FIRST subject; the per-entity pencils
  * ride the dossier's own cards, which are not this member's files. That is a scope line,
@@ -48,8 +59,11 @@ import {
   applyPlainEditIntent, EDITOR_MODE_OFF, EDITOR_MODE_PREF_KEY, selectEditorMode,
 } from '../../store/editSlice.js';
 import { useStore } from '../../store/index.js';
+import { counterpartiesOf, mintPhantomIntent } from '../../store/phantomMintAction.js';
+import { raisedHere, REFUSAL_SURFACES } from '../../lib/refusalReasons.js';
 import { ClerkNote } from '../generate/ClerkNote.jsx';
 import Button from '../primitives/Button.jsx';
+import RefusalNotice from '../primitives/RefusalNotice.jsx';
 import { BORDER, GOLD, GOLD_TXT, INK, MUTED, sans, serif_, FS, SP } from '../theme.js';
 import CardEditorDialog from './CardEditorDialog.jsx';
 
@@ -72,6 +86,17 @@ const CARD_REGISTER = Object.freeze([
   'war', 'trade', 'rumour', 'chronicle',
   'goods', 'services',
 ]);
+
+/**
+ * ⭐ THE CREATE-ONLY CARD. EM-A1 declares it, and it wears NO pencil: its subject is a save of
+ * its own rather than a row of this record, so `CARD_REGISTER` above does not name it and the
+ * only door onto it is the counterparties roster's plus. Spelled once, here.
+ */
+const PHANTOM_CARD = 'phantom';
+
+/** The subject a CREATE door opens on: no row, no values, and the door generates from the table. */
+/** @type {CardSubject} */
+const NEW_SUBJECT = Object.freeze({ id: '', values: Object.freeze({}) });
 
 /**
  * ⭐ DESIGN §17's ACTS, BY THE CARD THEY START ON, each with the §18 world-state
@@ -252,13 +277,21 @@ export default function EditModeShell() {
   const headingId = useId();
   const mode = useStore((state) => selectEditorMode(state));
   const settlement = useStore((state) => state.settlement);
+  const saved = useStore((state) => state.savedSettlements);
+  const generate = useStore((state) => state.generateSettlement);
+  // ⛔ NO GATE REFUSES SILENTLY (the owner's ruling, ODQ §934.24(c)). The Forge control
+  // reaches the generation lane, so it can be handed the same gate refusals every other forge
+  // can, and the DM is told WHERE SHE CLICKED. The record is ONE store slot that every mount
+  // renders, so the call stamps its own surface and this mount asks whether the record is its
+  // own before it says anything.
+  const lastRefusal = useStore((state) => state.lastRefusal);
   const seed = useStore((state) => state.lastSeed);
   const phase = useStore((state) => savePhase(state));
   const setUserPref = useStore((state) => state.setUserPref);
   const admitted = useStore(
     (state) => (typeof state.canEditSettlement === 'function' ? state.canEditSettlement() : false),
   );
-  /** @type {[{cardType: string, subject: CardSubject}|null, Function]} */
+  /** @type {[{cardType: string, subject: CardSubject, create: boolean}|null, Function]} */
   const [open, setOpen] = useState(null);
 
   const leaveMode = () => setUserPref?.(EDITOR_MODE_PREF_KEY, EDITOR_MODE_OFF);
@@ -268,6 +301,11 @@ export default function EditModeShell() {
   // second path; the four coordinates come from the door, verbatim.
   /** @param {{cardType: string, entityId: string, field: string, value: string}} intent */
   const apply = (intent) => applyPlainEditIntent(useStore.getState, useStore.setState, intent);
+
+  // ⛔ THE ONE BINDING OF THE MINT, in the identical shape and for the identical reason: the
+  // door hands over the declared values and knows nothing about records, pools or saves.
+  /** @param {Record<string, string>} values */
+  const mint = (values) => mintPhantomIntent(useStore.getState, useStore.setState, values);
 
   // The forge's gold on the tome's own ground (design §3). The halo and the umber belong
   // to the POP-UP alone (§3 halo item 5), so nothing here carries either.
@@ -315,7 +353,7 @@ export default function EditModeShell() {
           variant="secondary"
           size="sm"
           disabled={subject === null}
-          onClick={() => subject !== null && setOpen({ cardType, subject })}
+          onClick={() => subject !== null && setOpen({ cardType, subject, create: false })}
         >
           {t('edit.shell.pencil', { card: name })}
         </Button>
@@ -358,6 +396,36 @@ export default function EditModeShell() {
     </div>
   );
 
+  /**
+   * ⭐ ONE OFF-STAGE ROW. The reality mark and the Forge control are the same fact read twice:
+   * a row the roster reports off-stage is a phantom save, so it is the one that may be forged.
+   * The lane is handed the row's own id under `promote` and the surface stamp under `at`, and
+   * NOTHING ELSE: no seed, no intent, no config. The forge takes the phantom's OWN seed, which
+   * is EM-F2's landed contract rather than this leaf's argument, and `at` changes nothing about
+   * the generation beyond naming which surface any refusal belongs to.
+   * @param {{ id: string, name: string, offStage: boolean }} row
+   */
+  const counterpartyRow = (row) => (
+    <div key={row.id} style={rowBox}>
+      <span style={line}>{row.name}</span>
+      <span style={quiet}>
+        {row.offStage ? t('edit.shell.counterparty.offStage') : t('edit.shell.counterparty.real')}
+      </span>
+      {row.offStage ? (
+        <Button
+          variant="secondary"
+          size="sm"
+          onClick={() => generate?.(undefined, {
+            promote: row.id, at: REFUSAL_SURFACES.EDIT_FORGE,
+          })}
+        >
+          {t('edit.shell.counterparty.forge')}
+        </Button>
+      ) : null}
+    </div>
+  );
+
+  const counterparties = counterpartiesOf(settlement, saved);
   const declared = CARD_REGISTER.filter((cardType) => isEditableCard(cardType));
   const sealed = CARD_REGISTER.filter((cardType) => Object.hasOwn(SEALS, cardType));
   const derived = CARD_REGISTER.filter((cardType) => Object.hasOwn(DERIVED_SOURCE, cardType));
@@ -375,6 +443,24 @@ export default function EditModeShell() {
       <ClerkNote rubric={t('edit.shell.actsHead')}>{t('edit.shell.actsNote')}</ClerkNote>
       {sealed.map((cardType) => sealBlock(cardType))}
 
+      <h3 style={head}>{t('edit.shell.counterpartiesHead')}</h3>
+      <div style={rowBox}>
+        <Button
+          variant="secondary"
+          size="sm"
+          onClick={() => setOpen({ cardType: PHANTOM_CARD, subject: NEW_SUBJECT, create: true })}
+        >
+          {t('edit.shell.counterparty.add')}
+        </Button>
+        <span style={quiet}>{t('edit.shell.counterparty.note')}</span>
+      </div>
+      {counterparties.length === 0
+        ? <span style={quiet}>{t('edit.shell.counterparty.none')}</span>
+        : counterparties.map((row) => counterpartyRow(row))}
+      <RefusalNotice
+        refusal={raisedHere(lastRefusal, REFUSAL_SURFACES.EDIT_FORGE) ? lastRefusal : null}
+      />
+
       <h3 style={head}>{t('edit.shell.derivedHead')}</h3>
       {derived.map((cardType) => provenanceRow(cardType))}
 
@@ -388,7 +474,8 @@ export default function EditModeShell() {
         world={settlement ?? null}
         seed={String(seed ?? '')}
         phase={phase === 'draft' ? 'draft' : 'canon'}
-        apply={apply}
+        apply={open !== null && open.create ? null : apply}
+        create={open !== null && open.create ? mint : null}
         onClose={() => setOpen(null)}
       />
     </section>

@@ -105,6 +105,14 @@ function existenceOffenders(rows, corpus) {
   const offenders = [];
   for (const row of rows) {
     if (row.provenance === 'annotation') continue;
+    // ⭐ EM-F3 WIDENS THIS ARM IN PLACE, BY ADDITION AND NEVER BY DELETION. A `dm` row is OUT of
+    // this arm's population by construction, and for a reason the annotation exclusion does not
+    // carry: an annotation row has no record path because nothing READS it, while a `dm` row has
+    // none because its subject is not on this record AT ALL — a phantom counterparty is a SAVE
+    // OF ITS OWN (EM-F1, judgment 261). Asking a generated corpus whether it holds
+    // `phantom.name` would ask the wrong question of the wrong record. The join a `dm` row DOES
+    // owe — its pooled fields against the mint's own trait table — is ARM I-5's, in the walker.
+    if (row.provenance === 'dm') continue;
     if (row.provenance === 'world-fact') {
       if (!corpus.some((record) => pathExists(record, row.outputKey))) {
         offenders.push(`${row.card}.${row.field}: world-fact outputKey '${row.outputKey}' is not a live record path in any generated tier`);
@@ -149,7 +157,7 @@ function shapeOffenders(rows) {
     }
     if (!CARD_TYPES.includes(row.card)) offenders.push(`${at(row)}: card is outside the closed five the table declares`);
     if (!['pool', 'free', 'free-cascade', 'share'].includes(row.kind)) offenders.push(`${at(row)}: kind is outside the closed four`);
-    if (!['root', 'world-fact', 'annotation'].includes(row.provenance)) offenders.push(`${at(row)}: provenance is outside the closed three`);
+    if (!['root', 'world-fact', 'annotation', 'dm'].includes(row.provenance)) offenders.push(`${at(row)}: provenance is outside the closed four`);
 
     const pair = `${row.card}::${row.field}`;
     if (seenPairs.has(pair)) offenders.push(`${at(row)}: a duplicate (card, field) row`);
@@ -186,6 +194,20 @@ function shapeOffenders(rows) {
       if (Object.hasOwn(row, 'tier1')) offenders.push(`${at(row)}: tier1 is absent on an annotation row`);
       if (Object.hasOwn(row, 'inputKey')) offenders.push(`${at(row)}: inputKey is absent on an annotation row`);
       if (!nonBlank(row.readersProof)) offenders.push(`${at(row)}: an annotation row carries a non-blank readersProof`);
+    }
+
+    // ⭐ EM-F3's FOURTH PROVENANCE, cell by cell, in the same shape as the other three. A `dm`
+    // row declares a field of a DM-MINTED ENTITY: the value is an ARGUMENT OF THE MINT that
+    // writes that entity's own save, so there is no record path, no generating writer, no
+    // packet that will one day add one, and no Tier-1 pair. The absence of `outputKey` is
+    // therefore a DIFFERENT claim from the annotation row's, and it is asserted here so the
+    // day somebody gives a `dm` row an outputKey the table says what went wrong.
+    if (row.provenance === 'dm') {
+      if (!['pool', 'free'].includes(row.kind)) offenders.push(`${at(row)}: a dm row is kind 'pool' or 'free'`);
+      if (Object.hasOwn(row, 'outputKey')) offenders.push(`${at(row)}: a dm row carries no outputKey, and the absence IS the claim that its subject is not on this record at all`);
+      if (hasWriter || hasCreatedBy) offenders.push(`${at(row)}: writer and createdBy are both absent on a dm row`);
+      if (Object.hasOwn(row, 'tier1')) offenders.push(`${at(row)}: tier1 is absent on a dm row`);
+      if (Object.hasOwn(row, 'inputKey')) offenders.push(`${at(row)}: inputKey is absent on a dm row`);
     }
 
     if (Object.hasOwn(row, 'pool') !== (row.kind === 'pool')) offenders.push(`${at(row)}: pool is present iff kind is 'pool'`);
@@ -380,7 +402,7 @@ describe('EM-A1 — the field declarations, their shape law and their existence 
   });
 
   test('A1: every declared card type returns its authored rows, in authored order, frozen', () => {
-    expect(CARD_TYPES.length, 'the table declares five card types').toBe(5);
+    expect(CARD_TYPES.length, 'the table declares six card types').toBe(6);
     const problems = [];
     for (const cardType of CARD_TYPES) {
       const rows = declarationsFor(cardType);
@@ -392,7 +414,7 @@ describe('EM-A1 — the field declarations, their shape law and their existence 
       if (filedElsewhere.length) problems.push(`${cardType}: rows filed under the wrong card: ${filedElsewhere.join(', ')}`);
     }
     expect(problems).toEqual([]);
-    expect(ALL_ROWS.length, 'seventeen declared fields across the five cards').toBe(17);
+    expect(ALL_ROWS.length, 'nineteen declared fields across the six cards').toBe(19);
   });
 
   test('A2: an unknown, absent or non-string card type returns the SAME frozen empty array, and never throws', () => {
@@ -435,6 +457,9 @@ describe('EM-A1 — the field declarations, their shape law and their existence 
     // ...and the annotation rows really are out of this arm's population by construction:
     // they carry no outputKey at all, so a population that included them could not pass.
     expect(ALL_ROWS.filter((row) => row.provenance === 'annotation').length).toBe(2);
+    // ...and so are EM-F3's dm rows, for the second reason this arm's own predicate states.
+    expect(ALL_ROWS.filter((row) => row.provenance === 'dm').length).toBe(2);
+    expect(ALL_ROWS.filter((row) => row.provenance === 'dm' && Object.hasOwn(row, 'outputKey'))).toEqual([]);
   });
 
   test('A4: the §6.2 shape law holds for all seventeen rows, and two planted rows RED', () => {
@@ -450,6 +475,26 @@ describe('EM-A1 — the field declarations, their shape law and their existence 
     const plantedAnnotation = ALL_ROWS.map((row) => (row === annotationRow ? { ...row, outputKey: 'institutions[].note' } : row));
     expect(shapeOffenders(plantedAnnotation)).toEqual([
       'institution.note: an annotation row carries no outputKey, and the absence IS the claim that nothing on the record reads it',
+    ]);
+
+    // ⭐ EM-F3's dm CELLS, and their plant, through the SAME predicate. The population is
+    // asserted non-empty first, exactly as the others are, or the cells would be green on
+    // nothing; the plant is the LIVE name row given an outputKey, which is the one mistake a
+    // later author would make — declaring a phantom's field as though it were a record field.
+    const dmRows = ALL_ROWS.filter((row) => row.provenance === 'dm');
+    expect(dmRows.length, 'no dm row exists, so the dm cells have no subject').toBe(2);
+    const dmNameRow = dmRows.filter((row) => row.field === 'name')[0];
+    expect(shapeOffenders(ALL_ROWS.map((row) => (row === dmNameRow
+      ? { ...row, outputKey: 'phantoms[].name' }
+      : row)))).toEqual([
+      'phantom.name: a dm row carries no outputKey, and the absence IS the claim that its subject is not on this record at all',
+    ]);
+    // ...and a dm row given a WRITER reds on its own cell, so the two halves of the absence
+    // table are separable rather than one lump.
+    expect(shapeOffenders(ALL_ROWS.map((row) => (row === dmNameRow
+      ? { ...row, writer: 'src/generators/steps/generatePopulation.js#generatePopulation' }
+      : row)))).toEqual([
+      'phantom.name: writer and createdBy are both absent on a dm row',
     ]);
 
     // ⭐ EM-B2b's THREE inputKey CELLS, and their plant, through the SAME predicate. The

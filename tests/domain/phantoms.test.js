@@ -332,6 +332,15 @@ describe('EM-F1 — the leaf imports nothing, draws nothing, and the shelf is it
       // import, and neither it nor this leaf is in the eager first-paint graph (MEASURED
       // against EAGER_FIRST_PAINT_MODULES) — so the second edge costs the first paint nothing.
       'src/store/settlementGenerateAction.js imports src/domain/edit/phantoms.js',
+      // ⭐ EM-F3's DOOR (design §2.8, judgment 275): the edit shell's counterparties roster mints
+      // a phantom and reads which of its rows are off-stage, and BOTH questions are answered
+      // here rather than in the component — the shell's own arm pins its `src/domain/edit/*`
+      // edge set at the declaration table alone, so this leaf is reached through one store
+      // function the shell binds and passes down, exactly as EM-D1 bound the writer. It is LAZY
+      // too: this module's only importer under src/ is that shell, which `src/App.jsx` reaches
+      // through one `lazy(() => import(...))` edge, so neither it nor this leaf is in the eager
+      // first-paint graph and the third edge costs the first paint nothing.
+      'src/store/phantomMintAction.js imports src/domain/edit/phantoms.js',
     ];
     expect([...importers].sort(),
       'the importer roster is EXACT in both directions. An UNLISTED importer is a bundle edge nobody'

@@ -11,9 +11,15 @@
  *   - `FieldKind` carries 'share' because design §14 rules a faction's power share a
  *     root under a totality guard, not a pool member. A bounded number whose totality
  *     is a guard's is a fourth kind or it is undeclarable.
- *   - `FieldProvenance` is exactly THREE. Design §14 names five kinds of fact; DERIVED
- *     is never editable on any card, and MINTED is a property of an ENTITY rather than
- *     of a field, so only three of the five are ever a field's provenance.
+ *   - `FieldProvenance` is FOUR, and the fourth arrived by measurement rather than by
+ *     taste (EM-F3). Design §14 names five kinds of fact; DERIVED is never editable on
+ *     any card, so three of the five were ever a field's provenance while every declared
+ *     card was a card of the RECORD. MINTED is a property of an ENTITY rather than of a
+ *     field — and the phantom counterparty is exactly that entity: a card whose fields
+ *     are the mint's own arguments and land on a SAVE OF ITS OWN, never on the open
+ *     settlement's record. So `dm` is the provenance of a field of a DM-minted entity,
+ *     and its absence table (no `outputKey` at all, no writer key, no `tier1`, no
+ *     `inputKey`) is asserted cell by cell exactly as the other three are.
  *   - `EntityRef`'s `kind` is the closed seven EM-B1a's `OpTypeDeclaration.target`
  *     names, and `Op`'s ten fields are EM-B1a §6's rule that EVERY field is required on
  *     every row: an empty relation is `[]` and an absent duration is `null`, never an
@@ -30,7 +36,7 @@
 /** @typedef {'pool'|'free'|'free-cascade'|'share'} FieldKind */
 
 /** Which of design §14's five kinds of fact a declared field is. */
-/** @typedef {'root'|'world-fact'|'annotation'} FieldProvenance */
+/** @typedef {'root'|'world-fact'|'annotation'|'dm'} FieldProvenance */
 
 /**
  * ONE editable field of ONE card type.
@@ -40,7 +46,9 @@
  * the whole table. In short — a root row carries exactly one of `writer` / `createdBy`
  * and no `tier1`; a world-fact row carries `tier1` AND `inputKey` and neither writer key;
  * an annotation row carries `readersProof` and no `outputKey` at all, and that absence IS
- * the claim that nothing on the record reads it.
+ * the claim that nothing on the record reads it; a `dm` row carries no `outputKey` either,
+ * and there the absence is the claim that the field is not a record field at all — it is an
+ * argument of the mint that writes the DM-minted entity's own save (EM-F3, design §2.8).
  *
  * ⭐ `inputKey` IS THE ENGINE'S OWN CONFIG KEY, and it is a THIRD word from the two the
  * row already carries (EM-B2b, the chair's judgment 241 ruling 2). `outputKey` says where
@@ -50,7 +58,7 @@
  * joined to its producing step by `tests/lint/editDeclarations.walker.test.js`, never held
  * privately by a reader.
  *
- * @typedef {{ card: 'institution'|'npc'|'faction'|'powerSeat'|'worldFact', field: string,
+ * @typedef {{ card: 'institution'|'npc'|'faction'|'powerSeat'|'worldFact'|'phantom', field: string,
  *   kind: FieldKind, provenance: FieldProvenance, label: string, group: string,
  *   outputKey?: string, pool?: string, maxLength?: number, readersProof?: string,
  *   writer?: string, createdBy?: string, inputKey?: string,

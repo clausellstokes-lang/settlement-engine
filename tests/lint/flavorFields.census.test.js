@@ -162,6 +162,25 @@ const CARDS_WITHOUT_FREE = Object.freeze(['faction', 'powerSeat', 'worldFact']);
 const CARDS_WITH_FREE = Object.freeze(['institution', 'npc']);
 
 /**
+ * ⭐⭐ EM-F3: THIS CENSUS'S POPULATION IS A FREE FIELD OF A CARD OF THE RECORD, AND THAT WAS
+ * ALWAYS ITS SUBJECT — it is stated here because a fourth provenance now makes the boundary
+ * visible instead of accidental. Both halves of the census ask a question ABOUT THE RECORD: the
+ * value-join half asks whether the field's key is a declared cascade surface of a stored path,
+ * and the receiver-shape half grounds reads of the key ON ITS CARD'S STORED SHAPE. A `dm` row
+ * declares a field of a DM-MINTED ENTITY (design §2.8's phantom counterparty, which is a SAVE OF
+ * ITS OWN), so its card has no stored shape, no array home and no key on the record at all —
+ * `shapeOf` answers null for it, which is the measurement rather than a gap. Asking either half
+ * about it would not be a weaker claim, it would be a question with no subject.
+ *
+ * ⛔ IT IS AN EXCLUSION BY PROVENANCE AND BY NOTHING ELSE, and case A2 asserts the excluded set
+ * is EXACTLY the `dm` rows, that each still carries its own non-blank proof, and that not one of
+ * them carries an `outputKey` — which is what makes "no key on the record" a fact this file
+ * measured rather than a claim it accepted.
+ */
+const CENSUSED_PROVENANCES = Object.freeze(['root', 'world-fact', 'annotation']);
+const isOfTheRecord = (row) => CENSUSED_PROVENANCES.includes(row.provenance);
+
+/**
  * THE ONE NAMED EXCEPTION, in the estate's own landed spelling
  * (`tests/domain/editDeclarations.test.js :: shapeOffenders`): a `free-cascade` row whose
  * cascade a later member mints. It is not a silencer — case A1 asserts the exception still
@@ -285,9 +304,9 @@ function filesUnder(root) {
   return out.sort();
 }
 
-/** Every `kind: 'free'` row of the live table. */
+/** Every `kind: 'free'` row of the live table that is a field OF THE RECORD (see above). */
 function freeRows() {
-  return declarationRows().filter((row) => row.kind === 'free');
+  return declarationRows().filter((row) => row.kind === 'free' && isOfTheRecord(row));
 }
 
 /**
@@ -457,10 +476,27 @@ describe('EM-A3 — the flavor census: a free field has zero derivation readers,
   });
 
   test('A2 — a card with no free row runs both halves and reports nothing, over a non-empty denominator', () => {
+    const censused = (rows) => rows.filter(isOfTheRecord);
     const measuredWithout = Object.keys(FIELD_DECLARATIONS)
-      .filter((card) => (FIELD_DECLARATIONS[card] ?? []).every((row) => row.kind !== 'free')).sort();
+      .filter((card) => censused(FIELD_DECLARATIONS[card] ?? []).length > 0
+        && censused(FIELD_DECLARATIONS[card] ?? []).every((row) => row.kind !== 'free')).sort();
     const measuredWith = Object.keys(FIELD_DECLARATIONS)
-      .filter((card) => (FIELD_DECLARATIONS[card] ?? []).some((row) => row.kind === 'free')).sort();
+      .filter((card) => censused(FIELD_DECLARATIONS[card] ?? []).some((row) => row.kind === 'free')).sort();
+
+    // ⭐ EM-F3's BOUNDARY, MEASURED IN BOTH DIRECTIONS before it is used. The rows this census
+    // does not govern are EXACTLY the `dm` rows; every one of them carries its own non-blank
+    // proof, and not one carries an `outputKey` — so "no key on the record" is a fact read off
+    // the table here rather than a claim the exclusion above asks anyone to take on trust.
+    const outside = declarationRows().filter((row) => !isOfTheRecord(row));
+    expect(outside.map((row) => row.provenance), 'the excluded rows are exactly the dm rows')
+      .toEqual(outside.map(() => 'dm'));
+    expect(outside.length, 'nothing is excluded, so the boundary below is vacuous').toBeGreaterThan(0);
+    expect(outside.filter((row) => Object.hasOwn(row, 'outputKey')),
+      'an excluded row with an outputKey would be a key on the record this census stopped watching')
+      .toEqual([]);
+    expect(outside.filter((row) => row.kind === 'free'
+      && (typeof row.readersProof !== 'string' || row.readersProof.trim().length === 0)),
+      'and every excluded free row still names the instrument that grounded ITS OWN value').toEqual([]);
     expect(
       measuredWith,
       'a card type changed side: the declaration table now carries free rows on a different set of'
@@ -555,6 +591,10 @@ describe('EM-A3 — the flavor census: a free field has zero derivation readers,
   test('A5 — every free row carries a live proof, and no other kind carries one', () => {
     const offenders = [];
     for (const row of declarationRows()) {
+      // ⭐ EM-F3: a row outside this census's population is outside BOTH branches below — it
+      // neither owes this file's name in its proof nor is convicted for carrying one. Case A2
+      // holds the excluded set to its own proof rule.
+      if (!isOfTheRecord(row)) continue;
       const carries = Object.hasOwn(row, 'readersProof');
       if (row.kind === 'free') {
         if (!carries) offenders.push(`${addressOf(row)} is free and carries no readersProof`);
