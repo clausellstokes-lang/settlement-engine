@@ -204,7 +204,12 @@ const SENTINEL = 'settlementforge:generation:worker-v1';
 // byte-identical by JSON and key order). The ledger's row 4 (resolveConfig.js, 8,198 B) is REFUTED
 // as a buy-back: a live registered step. This constant is LOWERED at train EM-T14's terminal to the
 // composed measurement (this rise and that buy-back together) — never here, never upward.
-export const WORKER_BUNDLE_CEILING_BYTES = 1395972;
+// 1,395,972 -> 1,393,432 (2026-09-22, the chair, judgment 194): train EM-T14's terminal read the worker at its composed tip
+// 57639207f on a fresh build in consist: EM-R0d's real rise (+1,355 B, judgment 188) and judgment 191's literal hoist
+// (-3,901 B, the cure 006aa3442 in the train's base) measured TOGETHER, with EM-R0f's leaf move and EM-R6's two
+// leaves in the same tree. The ceiling follows the measurement DOWN to the byte and stays MONOTONE-DOWN from
+// this value; no member of the train read a rise against it (the buy-back landed first).
+export const WORKER_BUNDLE_CEILING_BYTES = 1393432;
 
 const source = (path) => readFileSync(join(ROOT, path), 'utf8');
 
