@@ -20,6 +20,19 @@
  * DOM-re-enabled control never reaches the handler and the second guard is unobservable
  * from the rendered surface.
  *
+ * ⭐ ONE SURFACE, TWO ERRANDS (EM-F3). The same generated body EDITS a subject that exists and
+ * CREATES one that does not, and which errand it is on is read off the injected seams rather
+ * than off a mode word: with `create` bound the door is a CREATE form — one Confirm that hands
+ * the caller EVERY declared field's value at once — and with `apply` bound it is the editor it
+ * has always been, one call per CHANGED field. The two seams are never both bound by the same
+ * mount, and neither knows what the other writes.
+ *
+ * ⛔ THE CANON RULE HAS NO SUBJECT ON THE CREATE ERRAND, and the door says so by construction
+ * rather than by disabling a control it cannot explain. `readOnly` exists because design §2.6
+ * turns an EDIT OF THIS RECORD into an event once the settlement is canonized; a CREATE form
+ * writes no field of this record at all — EM-F3's phantom is a save of its own — so the one
+ * derivation simply has no subject there, spelled once, in one place.
+ *
  * ⛔ IT DRAWS NO RANDOM NUMBER AND READS NO CLOCK. Its options come from `poolValues`
  * and its roller is `rollFrom`, both bound per declaration and both the producer's; two
  * renders with the same props reach the same markup, and it runs no effect, sets no
@@ -74,14 +87,29 @@ export const REFUSAL_COPY_KEYS = Object.freeze({
 export const REFUSAL_FALLBACK_KEY = 'edit.dialog.refusalUnknown';
 
 /**
+ * EM-F3's CREATE refusals, mapped to copy. FROZEN, in codepoint order, and a SECOND map rather
+ * than five more rows on the one above: `REFUSAL_COPY_KEYS` is asserted set-equal to the landed
+ * plain-edit refusal set in both directions, and a create refusal is not a plain-edit refusal.
+ * An unknown word takes the same one fallback line.
+ */
+export const CREATE_REFUSAL_COPY_KEYS = Object.freeze({
+  invalid_name: 'edit.dialog.refusalMintInvalidName',
+  mint_failed: 'edit.dialog.refusalMintFailed',
+  no_seed: 'edit.dialog.refusalMintNoSeed',
+  off_pool: 'edit.dialog.refusalMintOffPool',
+  save_failed: 'edit.dialog.refusalMintSaveFailed',
+});
+
+/**
  * @param {{ open: boolean, cardType: string, entityId: string,
  *   values: Readonly<Record<string, string>>, world: object|null, seed: string,
  *   phase: 'draft'|'canon',
  *   apply?: ((edit: CardEdit) => Promise<ApplyResult>)|null,
+ *   create?: ((values: Record<string, string>) => Promise<ApplyResult>)|null,
  *   onClose: () => void }} props
  */
 export default function CardEditorDialog({
-  open, cardType, entityId, values, world, seed, phase, apply = null, onClose,
+  open, cardType, entityId, values, world, seed, phase, apply = null, create = null, onClose,
 }) {
   // THE HOOKS STAND ABOVE THE TWO EARLY RETURNS, which is React's own invariant and the
   // shape both door primitives already use; the observable algorithm is unchanged.
@@ -96,8 +124,10 @@ export default function CardEditorDialog({
 
   // ONE derivation, spelled ONCE: the first door is a DRAFT surface, and on canon the
   // record's fields are not this door's to write, so it SAYS SO rather than offering a
-  // control that will be refused.
-  const readOnly = phase !== 'draft';
+  // control that will be refused. On the CREATE errand the rule has no subject — the form
+  // writes no field of this record — so the derivation answers false there by construction.
+  const creating = typeof create === 'function';
+  const readOnly = !creating && phase !== 'draft';
 
   const storedOf = (row) => String(values?.[row.field] ?? '');
   // `Object.hasOwn`, never truthiness, so a field the DM has CLEARED reads as the empty
@@ -148,6 +178,38 @@ export default function CardEditorDialog({
     onClose();
   };
 
+  // THE CREATE ERRAND. ONE call carrying EVERY declared field, in the table's authored order,
+  // because a subject that does not exist yet cannot be written one field at a time. The values
+  // are gathered by the same reader the controls render from, so what the caller receives is
+  // exactly what the DM sees. The guard is spelled twice for the same reason the editor's is:
+  // once where the control's disabled state is computed and again as the handler's first
+  // statement, so an absent seam has no call path.
+  const onConfirm = async () => {
+    if (typeof create !== 'function') return;
+    setBusy(true);
+    /** @type {Record<string, string>} */
+    const gathered = {};
+    for (const row of declarations) gathered[row.field] = valueOf(row);
+    let result;
+    try {
+      result = await create(gathered);
+    } catch {
+      result = null;
+    }
+    if (!result || result.ok !== true) {
+      setNotice({
+        rubric: t('edit.dialog.refusalRubric'),
+        line: t(CREATE_REFUSAL_COPY_KEYS[result?.reason] ?? REFUSAL_FALLBACK_KEY, {
+          field: t('edit.dialog.createSubject'),
+        }),
+      });
+      setBusy(false);
+      return;
+    }
+    setBusy(false);
+    onClose();
+  };
+
   const controlFor = (row) => {
     if (row.kind === 'pool') {
       return (
@@ -190,9 +252,15 @@ export default function CardEditorDialog({
         <ClerkNote rubric={t('edit.dialog.refusalRubric')}>{t('edit.dialog.canonNotice')}</ClerkNote>
       ) : null}
       {declarations.map((row) => controlFor(row))}
-      <Button variant="primary" disabled={readOnly || !dispatchable || busy} onClick={onSave}>
-        {t('edit.dialog.save')}
-      </Button>
+      {creating ? (
+        <Button variant="primary" disabled={busy} onClick={onConfirm}>
+          {t('edit.dialog.confirm')}
+        </Button>
+      ) : (
+        <Button variant="primary" disabled={readOnly || !dispatchable || busy} onClick={onSave}>
+          {t('edit.dialog.save')}
+        </Button>
+      )}
     </div>
   );
 

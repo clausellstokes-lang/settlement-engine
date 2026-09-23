@@ -19,6 +19,13 @@
  *                      key whose Tier-1 pair resolves and holds its record path.
  *   ARM I-3  WRITERS — every `writer` parses as `path#symbol`, the path exists, and the
  *                      symbol is declared in it EXACTLY ONCE by the LANDED resolver.
+ *   ARM I-5  MINT    — EM-F3's fourth provenance. A `dm` row declares a field of a
+ *                      DM-MINTED ENTITY, so it has no producer in the generation
+ *                      register to join against; the producer it DOES have is the mint
+ *                      itself, and the join is exact: the card's pooled fields are the
+ *                      mint's own trait names, each row's pool id is the pool that trait
+ *                      is rolled from, and the free field is the mint's one free
+ *                      argument. IMPORTED from `phantoms.js`, never re-typed.
  *
  * ⛔ NOTHING HERE RE-TYPES A PRODUCER'S SET. `GENERATION_TIER1`, `GENERATION_TIER2`,
  * their cardShape strings, `WORLD_FACT_SOURCES`'s keys and `DECL_FORMS` are all IMPORTED.
@@ -41,6 +48,8 @@ import {
   tier2For,
 } from '../../src/domain/generation/generationForkRegistry.js';
 import { WORLD_FACT_SOURCES } from '../../src/domain/worldFactOptions.js';
+import { PHANTOM_RECORD_KEYS, PHANTOM_TRAIT_POOLS } from '../../src/domain/edit/phantoms.js';
+import { POOLS } from '../../src/domain/edit/pools.js';
 import { declaredSymbols } from '../helpers/generationForkCensus.js';
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), '../..');
@@ -111,6 +120,12 @@ function rootOffenders(rows) {
     // shape law owns "an annotation row carries no outputKey"; asserting it here too is
     // what made version 4's plants red on two arms at once.
     if (row.provenance === 'annotation') continue;
+    // (d) ⭐ EM-F3 WIDENS THIS ARM IN PLACE, BY ADDITION AND NEVER BY DELETION. A `dm` row is
+    // OUT of this arm's population because the register it joins against is the GENERATION
+    // register: a DM-minted entity is by definition a thing generation never made, so there is
+    // no Tier-2 row to find and no step to read a config key from. The join a `dm` row owes is
+    // ARM I-5's, below, and it is against the MINT rather than against the generator.
+    if (row.provenance === 'dm') continue;
     if (row.provenance === 'root') {
       // (a) PRESENCE only: membership of the frozen wave-1 list is ARM I-1's, in the
       // domain file, which is the one home that list has.
@@ -207,7 +222,7 @@ describe('EM-A1 — the declaration walker: pools, the pencil, the root join and
   test('A5: every pool row names a unique pool id, no other kind does, and no pencil exists yet', () => {
     // ARM I-2. The population is asserted non-empty before zero offenders means anything.
     const poolRows = ALL_ROWS.filter((row) => row.kind === 'pool');
-    expect(poolRows.length, 'no pool row at all, so the pool arm would report zero offenders vacuously').toBe(11);
+    expect(poolRows.length, 'no pool row at all, so the pool arm would report zero offenders vacuously').toBe(12);
     expect(poolOffenders(ALL_ROWS)).toEqual([]);
 
     // PRINTED for EM-A2a's totality arm to be held against. process.stdout.write, not
@@ -330,6 +345,46 @@ describe('EM-A1 — the declaration walker: pools, the pencil, the root join and
     expect(writerOffenders(replacing('npc', 'status', 'EM-B1a#set-npc-status'))).toEqual([
       "npc.status: writer path 'EM-B1a' does not exist",
     ]);
+  });
+
+  test('A9: ARM I-5 — EM-F3\'s dm card joins THE MINT: its pooled fields are the mint\'s own traits, and two planted rows RED', () => {
+    // Step 0: both producers are non-empty, or every equality below would be vacuous.
+    const dmRows = ALL_ROWS.filter((row) => row.provenance === 'dm');
+    expect(dmRows.length, 'no dm row at all, so this arm would be vacuous').toBe(2);
+    expect(Object.keys(PHANTOM_TRAIT_POOLS).length, 'the mint rolls no trait, so the join below is vacuous').toBe(3);
+
+    // (i) THE CARD IS ONE. A `dm` row's card is the phantom's, and no other card carries one:
+    // the fourth provenance is not a licence to file a record field under it.
+    expect([...new Set(dmRows.map((row) => row.card))], 'the dm rows use one card spelling').toEqual(['phantom']);
+
+    // (ii) THE POOLED FIELDS ARE A SUBSET OF THE MINT'S OWN TRAIT NAMES, and each one's pool id
+    // is EXACTLY the pool that trait is rolled from. A trait the card does not offer is lawful
+    // (the seed rolls it); a pooled field the mint does not roll is not.
+    const traits = Object.keys(PHANTOM_TRAIT_POOLS);
+    const pooled = dmRows.filter((row) => row.kind === 'pool');
+    expect(pooled.map((row) => row.field).filter((field) => !traits.includes(field)),
+      'a pooled dm field the mint rolls no trait for would be a control that writes nowhere').toEqual([]);
+    expect(pooled.map((row) => `${row.field}=${row.pool}`),
+      'and each pooled field names the pool ITS OWN trait is rolled from, read off the mint')
+      .toEqual(pooled.map((row) => `${row.field}=${PHANTOM_TRAIT_POOLS[row.field]}`));
+    expect(pooled.map((row) => Object.hasOwn(POOLS, row.pool)),
+      'every one of those pool ids is a live row of the pool table').toEqual(pooled.map(() => true));
+
+    // (iii) THE FREE FIELD IS THE MINT'S OWN FREE ARGUMENT, joined to the record's key list.
+    const free = dmRows.filter((row) => row.kind === 'free');
+    expect(free.map((row) => row.field), 'the card offers exactly the one free field the mint takes')
+      .toEqual(['name']);
+    expect(free.map((row) => PHANTOM_RECORD_KEYS.includes(row.field)),
+      'and that field IS a key of the minted record').toEqual(free.map(() => true));
+
+    // GUARD-THE-GUARD, through the SAME two equalities: a pooled field the mint rolls nothing
+    // for, and a real trait pointed at the wrong pool, each convicted on its own clause.
+    const planted = [...pooled, { card: 'phantom', field: 'stance', kind: 'pool', pool: 'tier' }];
+    expect(planted.map((row) => row.field).filter((field) => !traits.includes(field)),
+      'a field the mint rolls no trait for must convict').toEqual(['stance']);
+    const crossed = pooled.map((row) => ({ ...row, pool: 'commodity' }));
+    expect(crossed.map((row) => `${row.field}=${row.pool}`))
+      .not.toEqual(crossed.map((row) => `${row.field}=${PHANTOM_TRAIT_POOLS[row.field]}`));
   });
 
   test('A8: EM-B2b — every world fact\'s inputKey is READ by the step its own tier1 names, the three superseded spellings are refused, and the lookahead is load-bearing', () => {

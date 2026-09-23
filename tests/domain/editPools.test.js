@@ -214,7 +214,11 @@ describe('EM-A2a — the pool machinery and the eleven TABLE pools', () => {
     const declared = [...new Set(
       Object.values(FIELD_DECLARATIONS).flat().filter((row) => row.pool).map((row) => row.pool),
     )].sort(compareCodepoint);
-    expect(declared.length, 'EM-A1 declares eleven pool ids').toBe(11);
+    // ⭐ EM-F3 MOVES THIS NUMBER BY ONE, BY ADDITION AND NEVER BY DELETION. EM-A1's phantom card
+    // declares `tier` — the pool that had a source here and no field asking for it, and the same
+    // pool EM-F1's `PHANTOM_TRAIT_POOLS.size` rolls a counterparty's size from. So `declared`
+    // gains it and the `own` residue below loses it; no row of POOLS moved, in either direction.
+    expect(declared.length, 'EM-A1 declares twelve pool ids').toBe(12);
     const pending = declared.filter((id) => !ids.includes(id));
     const own = ids.filter((id) => !declared.includes(id));
     expect(ids.filter((id) => declared.includes(id)).length, 'shared is declared minus pending')
@@ -236,8 +240,8 @@ describe('EM-A2a — the pool machinery and the eleven TABLE pools', () => {
     expect(pending, 'declared but not pooled: EM-A2b has landed, so the residue is empty').toEqual(
       [],
     );
-    expect(own, 'pooled but declared by no field today: the two packets own exactly these six').toEqual(
-      ['cause.remove', 'commodity', 'deity', 'name.npc', 'name.settlement', 'tier'],
+    expect(own, 'pooled but declared by no field today: the two packets own exactly these five').toEqual(
+      ['cause.remove', 'commodity', 'deity', 'name.npc', 'name.settlement'],
     );
   });
 
@@ -424,13 +428,18 @@ describe('EM-A2a — the pool machinery and the eleven TABLE pools', () => {
     expect(sources.filter(({ text }) => TYPES_LEAF_SPECIFIER.test(text)).length,
       'THE MATCHER, PROVED LIVE: the same shape DOES find a sibling edit leaf that is imported')
       .toBeGreaterThan(0);
-    // ⭐ EM-D0e is the pool leaf's FIRST and ONLY runtime importer under src/, and it is LAZY
-    // in the sense this arm measures: nothing mounts the editor door, so the leaf still enters no
-    // eager closure and no golden can move behind this arm's back.
-    expect(sources.filter(({ text }) => POOL_LEAF_SPECIFIER.test(text)).map(({ rel }) => rel),
-      'the pool leaf has EXACTLY ONE importer under src, EM-D0e\'s editor door, which nothing'
-      + ' mounts, so no bundle closure gains it and no golden can move')
-      .toEqual(['src/components/edit/CardEditorDialog.jsx']);
+    // ⭐ EM-D0e is the pool leaf's FIRST runtime importer under src/, and ⭐ EM-F3 WIDENS THIS
+    // ROSTER IN PLACE, BY ADDITION AND NEVER BY DELETION, with its SECOND: the phantom mint
+    // binds `rollFrom` as EM-F1's injected roller and reads `poolValues` to refuse a DM's word
+    // that is not on its own list. BOTH are LAZY in the sense this arm measures — the door is
+    // mounted only by the edit shell and the mint module is imported only by that same shell,
+    // which `src/App.jsx` reaches through one `lazy(() => import(...))` edge — so the leaf still
+    // enters no eager closure and no golden can move behind this arm's back.
+    expect(sources.filter(({ text }) => POOL_LEAF_SPECIFIER.test(text)).map(({ rel }) => rel).sort(),
+      'the pool leaf\'s importers under src are EXACTLY these two, in both directions: EM-D0e\'s'
+      + ' editor door and EM-F3\'s phantom mint, both reached only through the edit shell\'s one'
+      + ' lazy edge, so no bundle closure gains it and no golden can move')
+      .toEqual(['src/components/edit/CardEditorDialog.jsx', 'src/store/phantomMintAction.js']);
   });
 
   it('A7 the import fence, in both directions', () => {

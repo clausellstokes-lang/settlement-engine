@@ -1,9 +1,9 @@
 /**
  * fieldDeclarations.js — WHAT THE DM MAY EDIT, DECLARED ONCE (EM-A1, wave 1).
  *
- * SEVENTEEN rows across FIVE card types: 10 `root`, 5 `world-fact`, 2 `annotation`;
- * by kind, 11 `pool`, 3 `free-cascade`, 2 `free`, 1 `share`. The editor's modal is
- * GENERATED from this table, so a card without a row here has no pencil at all.
+ * NINETEEN rows across SIX card types: 10 `root`, 5 `world-fact`, 2 `annotation`,
+ * 2 `dm`; by kind, 12 `pool`, 3 `free-cascade`, 3 `free`, 1 `share`. The editor's modal
+ * is GENERATED from this table, so a card without a row here has no pencil at all.
  *
  * ⛔ THE TABLE HOLDS STRINGS AND JOINS NOTHING. It imports no registry, no pool
  * catalogue and no option set: `outputKey`, `pool`, `writer` and `tier1` are NAMES,
@@ -23,6 +23,11 @@
  *               neither writer key
  *   annotation  kind is always 'free'; `readersProof`; and NO `outputKey` at all,
  *               because the absence IS the claim that nothing on the record reads it
+ *   dm          kind is 'pool' or 'free'; NO `outputKey` at all, and there the absence
+ *               is a DIFFERENT claim from the annotation row's — the field is not a
+ *               record field of the open settlement at all, it is an ARGUMENT OF THE
+ *               MINT that writes a DM-minted entity's own save (EM-F3, design §2.8);
+ *               neither writer key, no `tier1`, no `inputKey`
  * `pool` is present iff the kind is 'pool'; `maxLength` iff the kind is 'free-cascade'
  * or 'free'. A 'share' row carries neither, and that is what convicts the planted one.
  *
@@ -61,6 +66,8 @@ const TEXT_LIMITS = Object.freeze({ name: 60, note: 280 });
  * it points at; this string names the census design asks for and claims no proof that
  * has not been run.
  */
+const PHANTOM_NAME_PROOF = 'tests/store/phantomMint.test.js: arm S1 grounds this free value at exactly ONE writer, `mintPhantom`\'s own `name` argument, read back off the minted save row; arm S5 grounds it at ZERO readers of THIS record by asserting the open settlement, in the store and on the device, is byte-identical before and after the mint. The flavor census does not govern a `dm` row, and states why: its two halves both ask a question about the record, and this field is on none.';
+
 const ANNOTATION_PROOF = 'tests/lint/flavorFields.census.test.js: the value-join arm finds no cascade key for this field, and the receiver-shape arm grounds zero reads of this key on this card shape under src/generators, src/domain/worldPulse and src/domain/causalState.js, its key-level site roster holding only the declared unrelated receivers; the resolver grounds part of the corpus, so the claim is zero GROUNDED reads.';
 
 /**
@@ -113,6 +120,41 @@ export const FIELD_DECLARATIONS = Object.freeze({
   ]),
   powerSeat: frozenCard([
     { card: 'powerSeat', field: 'holder', kind: 'pool', provenance: 'root', label: 'Governing seat', group: 'standing', outputKey: 'powerStructure.governingName', pool: 'power.holder', writer: 'src/generators/steps/generatePower.js#generatePower' },
+  ]),
+  phantom: frozenCard([
+    // ⭐⭐ THE PHANTOM COUNTERPARTY'S CARD (EM-F3, design §2.8; the chair's judgment 275).
+    // It is the ONE card in this table whose subject is not on the open settlement's
+    // record: a phantom is a SAVE OF ITS OWN (EM-F1, judgment 261), so every row carries
+    // `provenance: 'dm'` and NO `outputKey` at all. The door generated from these rows is
+    // a CREATE form, not a pencil, and the shell renders no pencil for this card.
+    //
+    // ⛔ TWO ROWS, AND THE TWO DESIGN §2.8 ALSO SPELLS ARE CLOSED BY MEASUREMENT RATHER
+    // THAN MINTED (U24, EM-F3's judgment). §2.8's vocabulary is `name (free), kind
+    // (pool), size (pool), stance (pool), traits (rolled)`, and EM-F1 EXECUTED two of
+    // those words against this estate:
+    //   `kind`   — the minted record's own `kind` IS the discriminant `'phantom'`,
+    //              spelled once in `phantoms.js` so the shelf's hiding, the registry's
+    //              badge and the apply-time policy can never disagree; and that leaf's
+    //              own measurement is that "the place-type in this estate IS the tier",
+    //              which the `size` row below already declares. A second pooled word for
+    //              one fact would be the drift, not the coverage.
+    //   `stance` — "already carried where it belongs — the neighbour link's own
+    //              `relationshipType`, written by the back-link when the phantom
+    //              resolves" (`phantoms.js`). The editor may not write it HERE: design
+    //              §13 gives a phantom act exactly two products, the home procedures and
+    //              the record, and forbids a treaty, a trade route or any relationship
+    //              state derived from a phantom. A stance the mint wrote onto the link
+    //              would be exactly that derivation.
+    // Veto: mint `phantom.kind` and `phantom.stance` pools in `pools.js` and declare
+    // them here, accepting a second word for the tier and a relationship state the
+    // editor writes against §13.
+    { card: 'phantom', field: 'name', kind: 'free', provenance: 'dm', label: 'Name', group: 'identity', maxLength: TEXT_LIMITS.name, readersProof: PHANTOM_NAME_PROOF },
+    // ⭐ THE TIER POOL, DECLARED AT LAST. `tier` is the pool EM-F1's own
+    // `PHANTOM_TRAIT_POOLS.size` names, so the DM's list here IS the vocabulary the mint
+    // rolls from, joined by the acceptance rather than re-typed — and the DM's pick
+    // reaches the record through the mint's INJECTED roller, never by a second writer of
+    // the persisted record's shape.
+    { card: 'phantom', field: 'size', kind: 'pool', provenance: 'dm', label: 'Size', group: 'identity', pool: 'tier' },
   ]),
   worldFact: frozenCard([
     { card: 'worldFact', field: 'terrain', kind: 'pool', provenance: 'world-fact', label: 'Terrain', group: 'world', outputKey: 'config.terrainType', inputKey: 'terrainOverride', pool: 'worldFact.terrain', tier1: { step: 'resolveConfig', key: 'terrainType' } },

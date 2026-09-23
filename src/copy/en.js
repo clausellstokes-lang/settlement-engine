@@ -1847,6 +1847,19 @@ export const en = Object.freeze({
       refusalUndeclaredField:  '{field} is not declared for this card.',
       refusalUnknownTarget:    'The record this card names could not be found, so {field} is unchanged.',
       refusalUnknown:          'The edit did not apply, so {field} is unchanged.',
+
+      // ── The CREATE errand (EM-F3) ──────────────────────────────────────────
+      // The same door, generating the same declared fields, for a subject that does
+      // not exist yet: one Confirm, and its own refusals. `createSubject` is the word
+      // those refusals put where an edit's refusal names the field, because a create
+      // refusal is about the whole form rather than one row of it.
+      confirm:                 'Confirm',
+      createSubject:           'the counterparty',
+      refusalMintFailed:       'The counterparty could not be founded, so nothing was written.',
+      refusalMintInvalidName:  'A counterparty needs a name, so nothing was written.',
+      refusalMintNoSeed:       'This settlement has no seed open, so {field} could not be founded.',
+      refusalMintOffPool:      'One of the choices is not on its list, so {field} was not founded.',
+      refusalMintSaveFailed:   'The library did not take {field}, so nothing was written.',
     },
 
     // ── The edit-mode shell (EM-D1) ─────────────────────────────────────────
@@ -1887,6 +1900,7 @@ export const en = Object.freeze({
       plusReason:     'Nothing writes a new entry yet, so additions are not open.',
       actsNote:       'Each act names the state it needs. This shell does not yet read that state, and no act is open.',
       provenance:     'Follows from {source}, so change {source}.',
+      counterpartiesHead: 'Counterparties',
       done:           'Done',
       refusalRubric:  'The editor is closed',
       refusalGated:   'The settlement editor is not open on this account.',
@@ -1925,6 +1939,18 @@ export const en = Object.freeze({
         twistRumour:    'Twist it',
         scheduleEvent:  'Schedule an event',
         sendOnMission:  'Send on a mission',
+      },
+
+      // The fourth roster (EM-F3, design §2.8): the town's neighbour partners and the
+      // DM's own off-stage counterparties. `offStage` and `real` are the two readings
+      // of one fact, so a row marked off-stage is exactly a row the forge may take.
+      counterparty: {
+        add:      'Add a counterparty',
+        forge:    'Forge this counterparty',
+        none:     'No counterparty is named here yet.',
+        note:     'A counterparty off-stage is a name the table keeps, never a world the simulation carries.',
+        offStage: 'Off-stage',
+        real:     'On the map',
       },
 
       // §18's preconditions, each naming the act that would create it, or wait.

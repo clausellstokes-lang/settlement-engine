@@ -190,8 +190,18 @@ const tierWordsIn = (src) => TIER_WORDS.filter((word) => codeOnly(src).includes(
 const PENCIL_MARKER = 'data-edit-pencil';
 const markerHitsIn = (src) => (src.includes(PENCIL_MARKER) ? [PENCIL_MARKER] : []);
 
-/** The five card types EM-A1 declares, read from the landed table and never retyped. */
+/** Every card type EM-A1 declares, read from the landed table and never retyped. */
 const DECLARED_CARDS = Object.keys(FIELD_DECLARATIONS).sort();
+/**
+ * ⭐ EM-F3's CREATE-ONLY CARD, NAMED RATHER THAN FILTERED BY A SHAPE. The phantom card is
+ * declared like any other, and it wears NO pencil: its subject is a SAVE OF ITS OWN rather than
+ * a row of this record (design §2.8), so the shell's register does not name it and the only door
+ * onto it is the counterparties roster's plus, which EM-F3's own suite proves. Naming it here
+ * keeps A2's set equality EXACT in both directions — a card that stopped being create-only, or a
+ * new one that quietly took a pencil, still reds.
+ */
+const CREATE_ONLY_CARDS = ['phantom'];
+const PENCIL_CARDS = DECLARED_CARDS.filter((card) => !CREATE_ONLY_CARDS.includes(card));
 /** Of those, the ones whose subjects live in a roster (an `outputKey` with a `[]`). */
 const ROSTER_CARDS = DECLARED_CARDS
   .filter((card) => declarationsFor(card).some((row) => String(row.outputKey || '').includes('[]')))
@@ -241,10 +251,17 @@ describe('EM-D1 — the edit-mode shell', () => {
     // (i) THE PENCILS, as a positive SET EQUALITY against EM-A1's own five card types.
     //     An undeclared row of the shell's register (war, trade, rumour, chronicle,
     //     goods, services) cannot appear here without breaking this equality.
-    const wantedPencils = DECLARED_CARDS
+    const wantedPencils = PENCIL_CARDS
       .map((card) => t('edit.shell.pencil', { card: t(`edit.shell.card.${card}`) })).sort();
     expect(names.filter((name) => wantedPencils.includes(name)).sort()).toEqual(wantedPencils);
     expect(wantedPencils.length).toBe(5);
+    // ⭐ EM-F3: the create-only card really is declared (so the exclusion above is a MEASUREMENT
+    // of the register rather than a list that silently covers a missing declaration), and every
+    // one of its rows carries no outputKey at all, which is what makes it uncollectable and
+    // therefore unpencilled.
+    expect(CREATE_ONLY_CARDS.filter((card) => !DECLARED_CARDS.includes(card))).toEqual([]);
+    expect(CREATE_ONLY_CARDS.flatMap((card) => declarationsFor(card))
+      .filter((row) => Object.hasOwn(row, 'outputKey'))).toEqual([]);
 
     // (ii) THE PLUSES, one per roster root and no more.
     const wantedPluses = ROSTER_CARDS

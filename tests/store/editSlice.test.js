@@ -256,7 +256,11 @@ describe('EM-C4a — the store plain-edit half', () => {
     const disagreements = roundTrips.filter(
       (pair) => JSON.stringify(pair.mint) !== JSON.stringify(pair.read),
     );
-    expect(declared.length).toBe(17);
+    // ⭐ EM-F3 MOVES THIS DENOMINATOR BY TWO, BY ADDITION AND NEVER BY DELETION: the phantom
+    // card's two rows. They round-trip through the SAME mint as every other row — the key is a
+    // (cardType, entityId, field) triple and knows nothing about where a card's subject lives —
+    // so the claim this arm makes is unchanged and its population is simply larger.
+    expect(declared.length).toBe(19);
     expect(disagreements).toEqual([]);
 
     // (ii) THE SOURCE SCAN, with its own planted mutant: every `cardType:` and `field:`

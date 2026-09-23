@@ -1799,6 +1799,11 @@ describe('ARCH car 2 — the three first-paint budgets stay where the owner sign
       'src/generators/generateSettlementPipeline.js',
       'src/generators/pipeline.js',
       'src/store/editSlice.js',
+      // ⭐ EM-F3's phantom mint: the editor's own half of the counterparties roster. It is the
+      // one module of the train that touches the EAGER save service, so it is exactly where a
+      // rise would enter — its only importer under src/ is the shell above, which is reached
+      // through that one lazy edge, and this row is what keeps that true.
+      'src/store/phantomMintAction.js',
       'src/store/settlementRederiveAction.js',
     ];
     const present = editorTrain.filter((rel) => existsSync(resolve(process.cwd(), rel)));
