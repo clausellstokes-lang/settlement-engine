@@ -843,3 +843,170 @@ export function stageAddDecreeIntent(get, set, request) {
     decrees: committed.decrees,
   };
 }
+
+/* ── EM-E8 (C) · THE TICK'S HALF ───────────────────────────────────────────── */
+
+/** EM-C1's applied status, spelled here so this leaf's import list stays the six A5 pins. */
+const DECREE_APPLIED = 'applied';
+
+/** One shared frozen empty list of ROWS, as NO_ERRORS is one of words. */
+const NO_ROWS = /** @type {readonly object[]} */ (Object.freeze([]));
+
+/** One shared frozen receipt for a tick that minted nobody, so a dormant advance allocates
+ *  nothing and two dormant ticks compare alike. */
+const NOTHING_MINTED = Object.freeze({
+  ok: /** @type {true} */ (true), saveId: '', minted: NO_ERRORS, rederived: false, unapplied: NO_ROWS,
+});
+
+/**
+ * One registry entry's add-op target id, or the empty string for anything that is not an
+ * APPLIED roster add-decree. Own-property reads only; never a throw.
+ * @param {unknown} row @returns {string}
+ */
+function appliedNewcomerIdOf(row) {
+  if (!isPlainObject(row) || /** @type {{status?: unknown}} */ (row).status !== DECREE_APPLIED) return '';
+  const op = isPlainObject(row.op) ? /** @type {{type?: unknown, target?: unknown}} */ (row.op) : null;
+  const bound = /** @type {readonly unknown[]} */ (Object.values(ADD_OP_TYPES));
+  if (op === null || !bound.includes(op.type) || !isPlainObject(op.target)) return '';
+  const id = /** @type {{id?: unknown}} */ (op.target).id;
+  return typeof id === 'string' ? id : '';
+}
+
+/**
+ * ⛔ CARRY FORWARD EVERY OWN KEY A RE-DERIVATION CANNOT PRODUCE — the SAVED-ONLY class of
+ * EM-R0a's record register, and the data-loss defect this member would otherwise be.
+ *
+ * A re-derivation is a FULL GENERATION of the same world, so every GENERATED key is present on
+ * its output and the only own keys missing are the six nothing in generation writes
+ * (`neighbourNetwork`, `interSettlementRelationships`, `crossSettlementConflicts`,
+ * `populationHistory`, `dmLayer`, `decrees`). The rule is therefore STRUCTURAL rather than a
+ * name list: a key the live record holds and the derived one does not survives. That is total
+ * by construction — a seventh saved-only key added later is carried with no edit here — and it
+ * needs no import, which is what keeps A5's six specifiers exact.
+ *
+ * @param {object} live the record being replaced @param {object} derived the re-derivation
+ * @returns {object} `derived`, MUTATED — it is this function's own fresh allocation
+ */
+function carryForward(live, derived) {
+  for (const key of Object.keys(live)) {
+    if (!Object.hasOwn(derived, key)) {
+      /** @type {Record<string, unknown>} */ (derived)[key] = /** @type {Record<string, unknown>} */ (live)[key];
+    }
+  }
+  return derived;
+}
+
+/**
+ * The generation config a save stored, read where the estate's own bridge reads it
+ * (`campaignContentBindingSession.js:47`): the library row's `config` first, the record's own
+ * `_config` second, an empty bag last.
+ * @param {object} state @param {string} saveId @returns {object}
+ */
+function storedConfigFor(state, saveId) {
+  const row = (state?.savedSettlements || [])
+    .find((entry) => String(/** @type {{id?: unknown}} */ (entry)?.id ?? '') === saveId);
+  const stored = isPlainObject(row) ? row.config : undefined;
+  if (isPlainObject(stored)) return stored;
+  const embedded = /** @type {{_config?: unknown}} */ (state?.settlement)?._config;
+  return isPlainObject(embedded) ? embedded : {};
+}
+
+/**
+ * ⭐ THE TICK'S HALF OF THE ROSTER OPS (EM-E8 C; design §2.6's head of the tick, §14's
+ * regeneration from the layer).
+ *
+ * EM-E1's hook marks a due decree APPLIED and produces its cause; "the world effect of each op
+ * belongs to the members that bind the verbs", and this is the ROSTER family's binder. Every
+ * APPLIED add-decree whose newcomer the layer does not already hold is applied to the layer
+ * through the ONE writer, and the world is then re-derived ONCE through EM-B2a4's scoped seam —
+ * one re-derivation per tick, never one per decree — so the newcomer exists on the record.
+ *
+ * ⛔ DORMANT BY REFERENCE. A save with no applied add-decree reads its registry, finds nothing
+ * due, and returns ONE shared frozen receipt without touching the store, reaching the lane or
+ * allocating anything: a world that carries no decree comes out of this exactly as it went in.
+ *
+ * ⛔ IT IS IDEMPOTENT, AND THAT IS THE WHOLE POINT OF KEYING ON THE LAYER RATHER THAN ON THE
+ * TICK. An applied entry is history and is read at every later tick; the layer's `minted` rows
+ * are the record of who already exists, so a second tick finds nothing due and mints nobody.
+ *
+ * ⛔ IT VOICES NOTHING. The chronicle cause is EM-E1's and EM-E2's; this member writes no
+ * chronicle line, no news entry and no receipt beyond its own return value.
+ *
+ * ⛔ IT WRITES THE ACTIVE VIEW, exactly as `applyPlainEditToDraft` does, and persists nothing
+ * of its own: the library row and the durable save are the estate's existing save flow's, and a
+ * durable write at the tick is a persistence question that is the owner's, not a lane's.
+ *
+ * ⛔ ONE `set`, AND BOTH HOMES MOVE IN IT OR NEITHER DOES. The layer is the INPUT and the
+ * record is the OUTPUT (design §14), so a write that landed one without the other would be the
+ * exact split design §12's finding 5 refuses — and it would be PERMANENT, because the next tick
+ * reads the layer to decide who already exists and would mint nobody. A lane that cannot load
+ * or a run that throws therefore writes NOTHING and reports `minted: []`; the id is a pure
+ * function of the decree, so the next tick mints the SAME person and the member converges.
+ *
+ * @param {Function} get @param {Function} set
+ * @param {{saveId: string}} request
+ * @returns {Promise<{ok: true, saveId: string, minted: readonly string[], rederived: boolean,
+ *                    unapplied: readonly object[]}
+ *                  |{ok: false, reason: string, errors: readonly string[]}>} NEITHER branch
+ *   throws.
+ */
+export async function applyRosterDecreesAtTick(get, set, request) {
+  const saveId = String(request?.saveId ?? '');
+  if (!saveId || saveId !== String(get().activeSaveId ?? '')) return refuseAdd('no_save');
+
+  const record = get().settlement;
+  const held = mintedRowsOf(/** @type {{dmLayer?: unknown}} */ (record)?.dmLayer);
+  // Codepoint order on the newcomer's id, so two ticks over one registry mint in one order.
+  const due = selectDecrees(get())
+    .map((row) => ({ row, id: appliedNewcomerIdOf(row) }))
+    .filter((entry) => entry.id !== '' && !Object.hasOwn(held, entry.id))
+    .sort((a, b) => byCodepoint(a.id, b.id));
+  if (due.length === 0) return NOTHING_MINTED;
+
+  /** @type {unknown} */
+  let layer = /** @type {{dmLayer?: unknown}} */ (record)?.dmLayer;
+  /** @type {string[]} */
+  const minted = [];
+  for (const entry of due) {
+    const applied = applyEdit(layer, /** @type {{op: object}} */ (entry.row).op, DECLARATION_CONSULT);
+    // A row the layer refuses is left unminted and the tick carries on: a decree the vocabulary
+    // no longer resolves is EM-C1's withdrawal, not a half-written roster.
+    if (applied.ok === false) continue;
+    layer = applied.layer;
+    minted.push(...applied.keys);
+  }
+  if (minted.length === 0) return NOTHING_MINTED;
+
+  // ⭐ THE RE-DERIVATION SEAM, CONSULTED, AND THE LANE RUN — ONCE, for every newcomer this tick
+  //    minted together. `calls: 1` is a SCOPE: one re-derivation per applied edit, which for a
+  //    tick is one per tick.
+  const seamIsScoped = REDERIVE_SEAM.kind === 'scoped' && REDERIVE_SEAM.calls === 1;
+  const lane = seamIsScoped
+    ? /** @type {{regenerateWithLayer?: Function}|null} */ (await reachRederiveLane())
+    : null;
+  // The lane load yielded. The active save may have changed underneath, and re-deriving save
+  // X's world onto save Y is the data-safety defect step 1 exists to prevent.
+  if (typeof lane?.regenerateWithLayer !== 'function') return NOTHING_MINTED;
+  if (saveId !== String(get().activeSaveId ?? '')) return NOTHING_MINTED;
+  const live = get().settlement;
+  const out = await lane.regenerateWithLayer(
+    live, storedConfigFor(get(), saveId), layer, DECLARATION_CONSULT,
+  ).then(null, () => null);
+  const derived = isPlainObject(out) ? /** @type {{record?: unknown}} */ (out).record : null;
+  if (!isPlainObject(derived) || saveId !== String(get().activeSaveId ?? '')) return NOTHING_MINTED;
+
+  // ⛔ ONE WRITE, CARRYING BOTH HOMES. The derived record is a fresh full generation, so every
+  //    key the live record holds and it does not is carried forward; the LAYER is this member's
+  //    own write and is never carried from the pre-run record.
+  const next = carryForward(/** @type {object} */ (live), /** @type {object} */ (derived));
+  /** @type {Record<string, unknown>} */ (next).dmLayer = layer;
+  set((state) => { state.settlement = next; });
+  const reported = /** @type {{unapplied?: unknown}} */ (out).unapplied;
+  return {
+    ok: /** @type {true} */ (true),
+    saveId,
+    minted,
+    rederived: true,
+    unapplied: Array.isArray(reported) ? Object.freeze([...reported]) : NO_ROWS,
+  };
+}

@@ -706,6 +706,33 @@ export async function runAdvanceCampaignWorld({
         if (!sessionCurrent(isSessionCurrent)) return AUTH_SESSION_CHANGED_RESULT;
       }
     }
+    // ⭐ EM-E8 — THE ROSTER OPS' TICK HALF (design §2.6's head of the tick, §14's regeneration
+    // from the layer). EM-E1's hook marked every due decree APPLIED inside the pulse and left
+    // "the world effect of each op" to the members that bind the verbs; the roster family's
+    // binder is the store's, because only the store may reach the DM layer's writer and
+    // EM-B2a4's re-derivation seam. It mints every applied add-decree the layer does not
+    // already hold and re-derives ONCE.
+    //
+    // ⛔ DORMANT BY REFERENCE, AND THE GUARD IS WHAT MAKES IT FREE. A save that carries no
+    // `decrees` key — every world today — reaches no import, runs nothing and allocates
+    // nothing, so this line composes exactly what it composed before EM-E8.
+    //
+    // ⛔ THE EDGE IS DYNAMIC, which is the estate's own store idiom and what keeps the edit
+    // leaf out of every eager closure (`EAGER_FIRST_PAINT_MODULES` walks STATIC edges only).
+    // Best-effort and session-fenced, exactly as the two replays above are: the roster half
+    // never blocks the advance, and the pre-pulse snapshot already covers it for undo.
+    const liveDecrees = get().settlement?.decrees;
+    if (result && result.ok !== false && Array.isArray(liveDecrees) && liveDecrees.length > 0) {
+      if (!sessionCurrent(isSessionCurrent)) return AUTH_SESSION_CHANGED_RESULT;
+      try {
+        const editSlice = await import('./editSlice.js');
+        if (!sessionCurrent(isSessionCurrent)) return AUTH_SESSION_CHANGED_RESULT;
+        await editSlice.applyRosterDecreesAtTick(get, set, {
+          saveId: String(get().activeSaveId ?? ''),
+        });
+      } catch { /* best-effort */ }
+      if (!sessionCurrent(isSessionCurrent)) return AUTH_SESSION_CHANGED_RESULT;
+    }
     return result;
 }
 
