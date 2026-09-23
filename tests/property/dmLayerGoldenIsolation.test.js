@@ -373,42 +373,235 @@ describe('EM-R1b — the power card stops being refused', () => {
       .toEqual([]);
   }, 900_000);
 
-  it('A8 — EM-R1b: the institution card is a SECOND defect, still refused, blocked by a nested record path', () => {
+  it('A8 — EM-R1b, CURED BY EM-R1c: the institution card applies on 63 of 63 rows, its nested blocker gone and its value at the declared leaf', () => {
     const rows = censusCorpus();
     const reasons = [];
     const blockers = [];
+    const landed = [];
     let measured = 0;
     for (const row of rows) {
       const { config, record } = worldFor(row);
       const institution = (record.institutions || [])[0];
       if (institution === undefined) continue;
       measured += 1;
-      const layer = layerOf([[rootKey('institution', institution.id, 'state'), 'struggling']]);
+      // THE RULED JOIN, not a bare `.id`: an institution's identity IS its name (design §22.4), and
+      // 0 of 2,428 generated institutions carry an `id` at all — the root key this arm built before
+      // EM-R1c's unit 2 therefore named an entity the leaf could never find.
+      const layer = layerOf([[rootKey('institution', institution.name, 'state'), 'struggling']]);
       const out = rederive(record, config, layer, ENGINE, DECLARATIONS);
       for (const entry of out.unapplied) reasons.push(entry.reason);
       const missing = pinsFrom(record, layer, DECLARATIONS, ENGINE).missing
         .find((entry) => entry.step === 'assembleInstitutions');
       blockers.push((missing?.keys || []).join(','));
+      // ⭐ THE VALUE AT ITS DECLARED LEAF, never `unapplied === []`: the quiet-lie class this
+      // member's unit 2 exists to remove is an edit that REPORTS applied and reaches no entity.
+      const hit = (out.record?.institutions || []).find((entry) => entry.name === institution.name);
+      landed.push(hit?.state);
     }
     expect(measured, 'no corpus row carried an institution, so this arm measured nothing')
-      .toBeGreaterThan(0);
-    expect(reasons.length, 'the institution card applied: case 2 was cured here, outside this '
-      + 'member\'s manifest').toBe(measured);
-    expect([...new Set(reasons)], 'the institution card refuses for a different reason than the one '
-      + 'this member measured').toEqual(['step_not_pinnable']);
-    // THE BLOCKING KEY, AND WHY IT BLOCKS. `generationRepairs` HAS a record path, so this member's
-    // rule does not exempt it; that path is NESTED, and the bag builder reads a chooser by its
-    // ctx-key NAME at the record's top level. That is EM-B2a4's ground and a slot of its own.
+      .toBe(CENSUS_ROWS);
+    expect(reasons.length, 'the institution card is refused again: the nested record path is no '
+      + 'longer being read, or the ruled join no longer reaches the named entity').toBe(0);
+    expect([...new Set(landed)], 'the DM\'s state did not reach the NAMED institution on every row')
+      .toEqual(['struggling']);
+    // THE BLOCKING KEY THAT REMAINS, AND WHY IT STILL BLOCKS NOTHING. `generationRepairs` HAS a
+    // record path and that path is NESTED, so before EM-R1c the bag builder — which read a chooser
+    // by its ctx-key NAME at the record's top level — could not hold it and the step was unpinnable.
+    // Unit 1 reads it where the register says it lives, so `catalogForTier` is the only key the
+    // record genuinely does not carry.
     expect([...new Set(blockers)], 'the institution step is blocked by a different key set than the '
-      + 'one the second defect was measured on').toEqual(['catalogForTier,generationRepairs']);
+      + 'one this cure was measured on').toEqual(['catalogForTier']);
     const repairsRows = GENERATION_TIER1
       .filter((entry) => entry.key === 'generationRepairs' && entry.via === 'provides')
       .map((entry) => entry.recordPath);
-    expect(repairsRows.length, 'the register declares the blocking key nowhere, so the path below '
-      + 'is a claim about an empty list').toBeGreaterThan(0);
-    expect([...new Set(repairsRows)], 'the blocking key\'s record path moved: the second defect is '
+    expect(repairsRows.length, 'the register declares the formerly blocking key nowhere, so the path '
+      + 'below is a claim about an empty list').toBeGreaterThan(0);
+    expect([...new Set(repairsRows)], 'the formerly blocking key\'s record path moved: the cure is '
       + 'not the one that was measured').toEqual(['record.generationCoherenceReceipt.repairs']);
     expect([...REDERIVE_UNAPPLIED_REASONS], 'the closed refusal set is unmoved at two')
       .toEqual(['step_not_pinnable', 'unknown_key']);
+  }, 900_000);
+});
+
+/** The DM's institution override, one per ROOT field of the card (`note` is an annotation). */
+const INSTITUTION_EDITS = Object.freeze([
+  Object.freeze({ field: 'state', value: 'struggling' }),
+  Object.freeze({ field: 'category', value: 'probed-category' }),
+  Object.freeze({ field: 'name', value: 'A Probed Institution Name' }),
+]);
+
+/** The DM's faction overrides, one per declared field of the card. */
+const FACTION_EDITS = Object.freeze([
+  Object.freeze({ field: 'faction', value: 'A Probed Faction' }),
+  Object.freeze({ field: 'category', value: 'probed-category' }),
+  Object.freeze({ field: 'power', value: 40 }),
+]);
+
+/** A literal `<collection>[].<field>` key anywhere in a bag: the quiet lie, in one predicate. */
+const carriesStrayBracketKey = (pins) => JSON.stringify(pins).includes('[].');
+
+describe('EM-R1c — a chooser is read at its declared record path, and the DM\'s value lands at the named entity', () => {
+  it('A4 — EM-R1c: all THREE institution ROOT fields apply on every census row AND carry their value at the declared leaf', () => {
+    const rows = censusCorpus();
+    expect(rows, 'the census corpus is live, or every count below is a count of nothing')
+      .toHaveLength(CENSUS_ROWS);
+    const applied = new Map(INSTITUTION_EDITS.map((edit) => [edit.field, 0]));
+    const carried = new Map(INSTITUTION_EDITS.map((edit) => [edit.field, 0]));
+    const reasons = [];
+    let measured = 0;
+    for (const row of rows) {
+      const { config, record } = worldFor(row);
+      const institution = (record.institutions || [])[0];
+      if (institution === undefined) continue;
+      measured += 1;
+      for (const edit of INSTITUTION_EDITS) {
+        const layer = layerOf([[rootKey('institution', institution.name, edit.field), edit.value]]);
+        const out = rederive(record, config, layer, ENGINE, DECLARATIONS);
+        if (out.unapplied.length === 0) applied.set(edit.field, applied.get(edit.field) + 1);
+        for (const entry of out.unapplied) reasons.push(`${edit.field}:${entry.reason}`);
+        // `name` is the card's FREE-CASCADE field and therefore RENAMES the join field itself: the
+        // root key names the OLD name and the write sets the new one, resolved in ONE hop. So the
+        // entry is found by whichever name it should now carry.
+        const wanted = edit.field === 'name' ? edit.value : institution.name;
+        const hit = (out.record?.institutions || []).find((entry) => entry.name === wanted);
+        if (hit?.[edit.field] === edit.value) carried.set(edit.field, carried.get(edit.field) + 1);
+      }
+    }
+    expect(measured, 'no corpus row carried an institution, so every figure below is a figure of '
+      + 'nothing').toBe(CENSUS_ROWS);
+    expect([...applied].map(([field, count]) => `${field}:${count}`),
+      'an institution ROOT field is still refused through the real rederive').toEqual([
+      `state:${CENSUS_ROWS}`, `category:${CENSUS_ROWS}`, `name:${CENSUS_ROWS}`,
+    ]);
+    // ⭐ THE ARM THAT MATTERS: the VALUE at `record.institutions[<the named one>].<field>`, never
+    // `unapplied === []`. An edit that reports applied and reaches no entity passes the line above
+    // and fails this one — which is exactly the class judgment 233d named.
+    expect([...carried].map(([field, count]) => `${field}:${count}`),
+      'an institution ROOT field reports applied while its value reaches no entity').toEqual([
+      `state:${CENSUS_ROWS}`, `category:${CENSUS_ROWS}`, `name:${CENSUS_ROWS}`,
+    ]);
+    expect(reasons, 'the institution card refused at least once').toEqual([]);
+  }, 900_000);
+
+  it('A5 — EM-R1c: a faction RENAME lands on the renamed entry, because the join field is the one being written', () => {
+    const rows = censusCorpus();
+    const edit = FACTION_EDITS[0];
+    let measured = 0;
+    let carried = 0;
+    let stray = 0;
+    for (const row of rows) {
+      const { config, record } = worldFor(row);
+      const faction = (record.powerStructure?.factions || [])[0];
+      if (faction === undefined) continue;
+      measured += 1;
+      const layer = layerOf([[rootKey('faction', faction.faction, edit.field), edit.value]]);
+      const { pins } = pinsFrom(record, layer, DECLARATIONS, ENGINE);
+      if (carriesStrayBracketKey(pins)) stray += 1;
+      const out = rederive(record, config, layer, ENGINE, DECLARATIONS);
+      const hit = (out.record?.powerStructure?.factions || []).find((entry) => entry.faction === edit.value);
+      if (hit?.faction === edit.value) carried += 1;
+    }
+    expect(measured, 'no corpus row carried a faction, so both figures below are figures of nothing')
+      .toBe(CENSUS_ROWS);
+    expect(carried, 'the DM\'s new faction name did not reach the renamed entry: the join field is '
+      + 'the field being written, and the one hop that resolves it is gone').toBe(CENSUS_ROWS);
+    expect(stray, 'the bag still carries a literal `[].` key: the write did not walk the declared '
+      + 'record path').toBe(0);
+  }, 900_000);
+
+  it('A6 — EM-R1c: a faction CATEGORY edit lands on the named faction rather than on a literal key', () => {
+    const rows = censusCorpus();
+    const edit = FACTION_EDITS[1];
+    let measured = 0;
+    let carried = 0;
+    let stray = 0;
+    for (const row of rows) {
+      const { config, record } = worldFor(row);
+      const faction = (record.powerStructure?.factions || [])[0];
+      if (faction === undefined) continue;
+      measured += 1;
+      const layer = layerOf([[rootKey('faction', faction.faction, edit.field), edit.value]]);
+      const { pins } = pinsFrom(record, layer, DECLARATIONS, ENGINE);
+      if (carriesStrayBracketKey(pins)) stray += 1;
+      const out = rederive(record, config, layer, ENGINE, DECLARATIONS);
+      const hit = (out.record?.powerStructure?.factions || []).find((entry) => entry.faction === faction.faction);
+      if (hit?.category === edit.value) carried += 1;
+    }
+    expect(measured, 'no corpus row carried a faction, so both figures below are figures of nothing')
+      .toBe(CENSUS_ROWS);
+    expect(carried, 'the DM\'s category did not reach the named faction on every row').toBe(CENSUS_ROWS);
+    expect(stray, 'the bag still carries a literal `[].` key').toBe(0);
+  }, 900_000);
+
+  it('A7 — EM-R1c: the faction SHARE lands at its declared leaf, and no literal bracket key survives anywhere in the bag', () => {
+    const rows = censusCorpus();
+    const edit = FACTION_EDITS[2];
+    let measured = 0;
+    let carried = 0;
+    let stray = 0;
+    let reported = 0;
+    for (const row of rows) {
+      const { config, record } = worldFor(row);
+      const faction = (record.powerStructure?.factions || [])[0];
+      if (faction === undefined) continue;
+      measured += 1;
+      const layer = layerOf([[rootKey('faction', faction.faction, edit.field), edit.value]]);
+      const { pins } = pinsFrom(record, layer, DECLARATIONS, ENGINE);
+      if (carriesStrayBracketKey(pins)) stray += 1;
+      const out = rederive(record, config, layer, ENGINE, DECLARATIONS);
+      if (out.unapplied.length === 0) reported += 1;
+      const hit = (out.record?.powerStructure?.factions || []).find((entry) => entry.faction === faction.faction);
+      if (hit?.power === edit.value) carried += 1;
+    }
+    expect(measured, 'no corpus row carried a faction, so every figure below is a figure of nothing')
+      .toBe(CENSUS_ROWS);
+    // ⭐ THE QUIET LIE, IN ONE PAIR OF LINES. Before this member the card REPORTED applied on every
+    // row (the line below was already green) while the share reached no faction at all and a key
+    // nothing reads sat in the bag. Reporting alone is not evidence; the value is.
+    expect(reported, 'the faction card is refused through the real rederive').toBe(CENSUS_ROWS);
+    expect(carried, 'the DM\'s share did not reach the named faction: the write landed somewhere '
+      + 'nothing reads').toBe(CENSUS_ROWS);
+    expect(stray, 'a literal `factions[].power` key survives in the bag, which is the whole defect '
+      + 'this member removes').toBe(0);
+  }, 900_000);
+
+  it('A8 — EM-R1c: the npc and power-seat cards are UNMOVED, and a dormant layer still re-derives the record byte for byte', () => {
+    const rows = censusCorpus();
+    let measured = 0;
+    let npcCarried = 0;
+    let seatCarried = 0;
+    let dormantIdentical = 0;
+    const reasons = [];
+    for (const row of rows) {
+      const { config, record } = worldFor(row);
+      const npc = (record.npcs || [])[0];
+      if (npc === undefined) continue;
+      measured += 1;
+
+      const npcLayer = layerOf([[rootKey('npc', npc.id, 'status'), 'missing']]);
+      const npcOut = rederive(record, config, npcLayer, ENGINE, DECLARATIONS);
+      for (const entry of npcOut.unapplied) reasons.push(`npc:${entry.reason}`);
+      const npcHit = (npcOut.record?.npcs || []).find((entry) => entry.id === npc.id);
+      if (npcHit?.status === 'missing') npcCarried += 1;
+
+      const seatLayer = layerOf([[rootKey('powerSeat', 'seat', 'holder'), SEAT_HOLDER]]);
+      const seatOut = rederive(record, config, seatLayer, ENGINE, DECLARATIONS);
+      for (const entry of seatOut.unapplied) reasons.push(`powerSeat:${entry.reason}`);
+      if (seatOut.record?.powerStructure?.governingName === SEAT_HOLDER) seatCarried += 1;
+
+      // THE DORMANCY CONTROL, and it is the goldens' protection BY CONSTRUCTION: this member
+      // changes how a bag is READ and WRITTEN, and an empty layer builds no bag at all.
+      const dormant = rederive(record, config, EMPTY_DM_LAYER, ENGINE, DECLARATIONS);
+      if (sha(dormant.record) === sha(record)) dormantIdentical += 1;
+    }
+    expect(measured, 'no corpus row carried an npc, so every figure below is a figure of nothing')
+      .toBe(CENSUS_ROWS);
+    expect(npcCarried, 'the npc card MOVED: its value no longer reaches the entity `id` names')
+      .toBe(CENSUS_ROWS);
+    expect(seatCarried, 'the power-seat card MOVED: its plain-object leaf is no longer written')
+      .toBe(CENSUS_ROWS);
+    expect(reasons, 'a card this member leaves alone started being refused').toEqual([]);
+    expect(dormantIdentical, 'a dormant layer stopped re-deriving the record byte for byte, which '
+      + 'is the property every committed golden rests on').toBe(CENSUS_ROWS);
   }, 900_000);
 });

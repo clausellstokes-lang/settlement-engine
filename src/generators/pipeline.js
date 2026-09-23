@@ -74,6 +74,23 @@ const _TRANSIENT_CHOOSERS = new Set([
   'servicesToggles', 'structural', 'threat', 'townPlus', 'tradeRoute',
 ]);
 
+const _CHOOSER_RECORD_PATHS = new Map([
+  ['culture', 'record.config.culture'],
+  ['effectiveConfig', 'record.config'],
+  ['generationRepairs', 'record.generationCoherenceReceipt.repairs'],
+  ['magicLevel', 'record.config.magicLevel'],
+  ['nearbyResourceDefinitions', 'record.config.nearbyResourceDefinitions'],
+  ['nearbyResourceDefinitionsDepleted', 'record.config.nearbyResourceDefinitionsDepleted'],
+  ['nearbyResources', 'record.config.nearbyResources'],
+  ['nearbyResourcesCustom', 'record.config.nearbyResourcesCustom'],
+  ['nearbyResourcesDepleted', 'record.config.nearbyResourcesDepleted'],
+  ['nearbyResourcesNative', 'record.config.nearbyResources'],
+  ['nearbyResourcesNativeDepleted', 'record.config.nearbyResourcesNativeDepleted'],
+  ['settlement', 'record'],
+  ['stressTypes', 'record.config.stressTypes'],
+  ['terrainType', 'record.config.terrainType'],
+]);
+
 function _undeclaredWrites(step, before, ctx) {
   const declared = new Set([...(step.provides || []), ...(step.mutates || []), ...(step.scratch || []), ..._LEDGER_KEYS, _PINS_KEY]);
   const offenders = [];
@@ -322,6 +339,9 @@ export function getStepMeta() {
       mutates: step.mutates || [],
       scratch: step.scratch || [],
       transient: (step.provides || []).filter((k) => _TRANSIENT_CHOOSERS.has(k)),
+      recordPaths: Object.fromEntries((step.provides || [])
+        .filter((k) => _CHOOSER_RECORD_PATHS.has(k))
+        .map((k) => [k, _CHOOSER_RECORD_PATHS.get(k)])),
       readsVersion: step.readsVersion || {},
       phase: step.phase || 'unknown',
     });
