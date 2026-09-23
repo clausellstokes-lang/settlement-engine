@@ -7,10 +7,10 @@
     "    npx vitest run tests/lint/tuningRegister.walker.test.js",
     "The refreeze EXITS NON-ZERO by design; the proof is a separate ordinary run."
   ],
-  "measuredAtSha": "47f2edfebb7b08a542f06e5f77969013714cb0dc",
-  "measuredBy": "chair-fable-cce01f87",
+  "measuredAtSha": "ad7d7ff3f08af2c64faeaa7c54c28bf7e05d3b7f",
+  "measuredBy": "EM-E5 (builder seat, branch feat/em-e5-direction)",
   "date": "2026-09-23",
-  "note": "re-stamp only (judgment 198b): the twentieth landing banked EM-R0d s win (factionDynamics.js 48 -> 38) at a commit later re-created with a corrected subject, so measuredAtSha named a retired sha; the same measurement re-taken at a branch commit; no value moved",
+  "note": "No dial moved: dependents only. EM-E5 created src/domain/edit/directions.js, which imports the vocabularies of seven digested modules (beliefMap, brokerageServices, convergence, informationStatecraft, mobilization, occupation, treasury), so ten tables gained it as a dependent; and informationStatecraft.js gained one typed export, CREDIBILITY_DELTA_KINDS, which is not a numeric constant and moves no digest or leaf.",
   "schemaVersion": 1,
   "trees": {
     "p1": [
@@ -2342,6 +2342,7 @@
       },
       "dependents": [
         "src/domain/display/settlementBeliefs.js",
+        "src/domain/edit/directions.js",
         "src/domain/roads/embassyHazard.js",
         "src/domain/roads/knownWorld.js",
         "src/domain/roads/verification.js",
@@ -2402,6 +2403,7 @@
       },
       "dependents": [
         "src/domain/display/settlementBeliefs.js",
+        "src/domain/edit/directions.js",
         "src/domain/roads/embassyHazard.js",
         "src/domain/roads/knownWorld.js",
         "src/domain/roads/verification.js",
@@ -2481,6 +2483,7 @@
         "EXHAUSTION_W": 0.25
       },
       "dependents": [
+        "src/domain/edit/directions.js",
         "src/domain/worldPulse/brokerageServicesFeed.js",
         "src/domain/worldPulse/brokerageServicesPlant.js",
         "src/domain/worldPulse/brokerageServicesRules.js"
@@ -2501,6 +2504,7 @@
         "BAND_CUTS.2": 0.65
       },
       "dependents": [
+        "src/domain/edit/directions.js",
         "src/domain/worldPulse/brokerageServicesFeed.js",
         "src/domain/worldPulse/brokerageServicesPlant.js",
         "src/domain/worldPulse/brokerageServicesRules.js"
@@ -2874,6 +2878,7 @@
         "MERC_REINFORCE_CAP": 0.3
       },
       "dependents": [
+        "src/domain/edit/directions.js",
         "src/domain/events/realmManifest.js",
         "src/domain/worldPulse/coup.js",
         "src/domain/worldPulse/peaceReasons.js",
@@ -4345,6 +4350,7 @@
       },
       "dependents": [
         "src/domain/display/credibilityRead.js",
+        "src/domain/edit/directions.js",
         "src/domain/worldPulse/brokerageServicesPlant.js",
         "src/domain/worldPulse/corruptionWeb.js",
         "src/domain/worldPulse/envoyPulse.js",
@@ -4365,7 +4371,7 @@
       "exported": true,
       "idiom": "literal",
       "keys": 23,
-      "line": 744,
+      "line": 755,
       "spanDigest": "170f4c16c27f0088f860cc97ee7afc207cc0b8fc746e6046c0a5c126bb0e128e",
       "leaves": {
         "SEE_DECAY_KEEP": 0.8,
@@ -4394,6 +4400,7 @@
       },
       "dependents": [
         "src/domain/display/credibilityRead.js",
+        "src/domain/edit/directions.js",
         "src/domain/worldPulse/brokerageServicesPlant.js",
         "src/domain/worldPulse/corruptionWeb.js",
         "src/domain/worldPulse/envoyPulse.js",
@@ -4892,6 +4899,7 @@
         }
       },
       "dependents": [
+        "src/domain/edit/directions.js",
         "src/domain/worldPulse/generosityKernel.js",
         "src/domain/worldPulse/momentum.js",
         "src/domain/worldPulse/pulseKernel.js",
@@ -5439,6 +5447,7 @@
       },
       "dependents": [
         "src/components/admin/AdminSimTuningPanel.jsx",
+        "src/domain/edit/directions.js",
         "src/domain/worldPulse/deploymentReturn.js",
         "src/domain/worldPulse/pulseKernel.js",
         "src/domain/worldPulse/sovereigntyTransfer.js"
@@ -6934,6 +6943,7 @@
       },
       "dependents": [
         "src/domain/display/dossierViewModel.js",
+        "src/domain/edit/directions.js",
         "src/domain/worldPulse/pulseKernel.js",
         "src/domain/worldPulse/warCoalitionExpenditure.js",
         "src/domain/worldPulse/warCosts.js"
