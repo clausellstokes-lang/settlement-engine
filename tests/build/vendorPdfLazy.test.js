@@ -1787,6 +1787,7 @@ describe('ARCH car 2 — the three first-paint budgets stay where the owner sign
       'src/copy/en.js',
       'src/domain/edit/dmLayer.js',
       'src/domain/edit/fieldDeclarations.js',
+      'src/domain/edit/guardRules.js',
       'src/domain/edit/operations.js',
       'src/domain/edit/operationsOffStage.js',
       'src/domain/density/densityCreateBoundary.js',
