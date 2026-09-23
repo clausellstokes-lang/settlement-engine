@@ -285,7 +285,7 @@ describe('EM-F1b — the discriminant, the roster and the boundary', () => {
       + ' which is the direction that can never silently widen a paid cap').toBe(false);
   });
 
-  test('F6: the quota counters importer roster under src is EXACT, and the three raw-length siblings are a closed census', () => {
+  test('F6: the quota counters importer roster under src is EXACT, and the raw-length census is now EMPTY', () => {
     const corpus = srcCode();
     expect(corpus.length, 'the src walk found nothing, so both rosters below would be vacuous')
       .toBeGreaterThan(400);
@@ -295,33 +295,48 @@ describe('EM-F1b — the discriminant, the roster and the boundary', () => {
       .map(([rel]) => rel);
     expect([...readers].sort(), 'THE QUOTA COUNTERS READERS, EXACT IN BOTH DIRECTIONS. A surface that'
       + ' measures the library against a cap must come through this counter — an unlisted reader is a'
-      + ' surface nobody checked for phantoms, and a missing listed one means a surface stopped counting')
+      + ' surface nobody checked for phantoms, and a missing listed one means a surface stopped counting.'
+      + ' EM-F1c added the last three: the slot pre-flights that used to count a raw length')
       .toEqual([
         'src/components/AccountPage.jsx',
         'src/components/SettlementsPanel.jsx',
         'src/components/account/AccountDataPrivacySection.jsx',
         'src/lib/saves.js',
         'src/store/accountImportBody.js',
+        'src/store/galleryImportMap.js',
+        'src/store/galleryImportSettlement.js',
+        'src/store/instantWorldBody.js',
         'src/store/saveMoments.js',
         'src/store/selectors.js',
       ].sort());
 
-    // THE CENSUS OF THE SIBLINGS THAT DO NOT. Three shipped slot pre-flights compare a RAW
-    // `.length` over `savedSettlements` against `maxSaves`, so they count an inactive save
-    // and a phantom alike. That divergence PREDATES this member — it is a raw length, never
-    // this counter — and closing it is a store-file edit outside this manifest, so it is
-    // frozen EXACT here instead: a FOURTH one reds the day it lands, and a cured one reds too.
-    const rawSiblings = corpus
-      .filter(([, code]) => /\(\s*[A-Za-z_$][A-Za-z0-9_$]*\.savedSettlements\s*\|\|\s*\[\]\s*\)\.length/.test(code)
-        && /\bmaxSaves\b/.test(code))
-      .map(([rel]) => rel);
-    expect([...rawSiblings].sort(), 'exactly three slot pre-flights count with a raw length instead of'
-      + ' this counter — a closed census, not an allowlist')
-      .toEqual([
-        'src/store/galleryImportMap.js',
-        'src/store/galleryImportSettlement.js',
-        'src/store/instantWorldBody.js',
-      ].sort());
+    // THE CENSUS OF THE SIBLINGS THAT DO NOT, AND IT IS NOW EMPTY (EM-F1c). Three shipped slot
+    // pre-flights compared a RAW `.length` over `savedSettlements` against `maxSaves`, so they
+    // counted an inactive save and a phantom alike — a divergence that PREDATED EM-F1b and was
+    // frozen here while it lived. All three now ask this counter and appear in the roster above.
+    // A FOURTH raw site reds the day it lands.
+    const countsRawLength = ([, code]) => (
+      /\(\s*[A-Za-z_$][A-Za-z0-9_$]*\.savedSettlements\s*\|\|\s*\[\]\s*\)\.length/.test(code)
+      && /\bmaxSaves\b/.test(code)
+    );
+    expect(corpus.filter(countsRawLength).map(([rel]) => rel),
+      'not one slot pre-flight counts with a raw length any more — a closed census, not an allowlist')
+      .toEqual([]);
+
+    // ⛔ AN EMPTY CENSUS IS THE VACUITY SHAPE, so the detector is shown ALIVE on the SAME
+    // function the census just ran: it still convicts the exact spelling the three gates carried
+    // one commit ago, and it acquits the cured spelling. Without this pair, a regex that had
+    // silently gone blind would read as a cure.
+    const BEFORE_CURE = "  const max = (typeof st.maxSaves === 'function') ? st.maxSaves() : Infinity;\n"
+      + '  const activeNow = (st.savedSettlements || []).length;\n';
+    const AFTER_CURE = "  const max = (typeof st.maxSaves === 'function') ? st.maxSaves() : Infinity;\n"
+      + '  const activeNow = activeSaveCount(st.savedSettlements);\n';
+    expect(countsRawLength(['probe', codeOnly(BEFORE_CURE)]),
+      'the detector still convicts the spelling the gates carried at EM-F1b, so the emptiness above'
+      + ' is a measurement rather than a blind regex').toBe(true);
+    expect(countsRawLength(['probe', codeOnly(AFTER_CURE)]),
+      'and it acquits the cured spelling, so the census emptied because the gates changed rather'
+      + ' than because the rule widened').toBe(false);
   });
 
   test('F7: the F42 BOUNDARY — a metadata-projected row has no blob to read, and nothing under src reads that projection today', async () => {
