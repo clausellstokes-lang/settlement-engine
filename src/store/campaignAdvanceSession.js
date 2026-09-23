@@ -113,19 +113,35 @@ export { PULSE_UNDO_CAP } from './pulseUndoCap.js';
  * The pool ids come from the op catalogue's own payload specs, so a row that grows a pool
  * field is covered the day it lands and nothing here is transcribed.
  *
- * ⛔ ACROSS MEMBER SAVES A POOL IS THE UNION OF WHAT EACH LIVE SETTLEMENT OFFERS, which is
- * the one honest reading available to a hook that takes ONE bag for N registries (design
- * §2.5: `decrees` is a key on the SAVED SETTLEMENT). It can only ever be LAX — a word alive
- * in some member town is admitted — and never strict, so this member cannot withdraw a
- * decree that should have applied. Design §9's own rule, which EM-E1's header quotes: a
- * missing warning costs less trust than a false one. On the single-settlement world the
- * DM actually stages decrees in, the union IS that settlement's own vocabulary.
+ * ⭐ EACH SAVE IS JUDGED BY ITS OWN TOWN'S VOCABULARY, AND THAT IS U86's WHOLE MEMBER.
+ * U72 shipped the LAX UNION — one `pools` bag folded across every member — because the hook
+ * took ONE bag for N registries and a union is the only honest reading available to that
+ * shape. Its own header recorded the cost and left the ruling to the chair: a word alive in
+ * SOME member town admitted an order in a town that had never offered it, so a decree could
+ * be applied against a vocabulary that is not its settlement's. It was ruled (U86, lane E's
+ * ruling 2): the bag is keyed BY SAVE ID, `applyDecreesToSaves` hands each registry the
+ * pools of ITS OWN save, and the union is gone rather than merely unread. Design §2.5 is
+ * the reason it can be: `decrees` is a key on the SAVED SETTLEMENT, so the tick's subject
+ * was always N registries and never one.
  *
- * PURE apart from the two dynamic imports: it reads no clock, takes no draw and writes
+ * ⛔ THE KEY IS THE KERNEL'S OWN `saveId`, IMPORTED RATHER THAN RE-SPELLED, so the word this
+ * bag is filed under is the word the hook looks it up by — one spelling, never a second,
+ * which is the same law E1-8 holds the hook's own import list to. It joins the dynamic
+ * block below rather than this file's static imports for the reason the other two are
+ * there: a campaign with no pending decree must reach no import at all.
+ *
+ * ⛔ AND A MEMBER THIS BAG DOES NOT NAME RESOLVES NOTHING — it is not a member with an empty
+ * vocabulary. That distinction is design §9's tie-break made structural: a caller that
+ * composed for a different realm (or for none) would otherwise have every pool-typed word
+ * in the unnamed town read as stale, which is a FALSE warning on an order nobody judged.
+ * A member NAMED with no words is the other fact, and its orders are resolved and withdrawn.
+ *
+ * PURE apart from the three dynamic imports: it reads no clock, takes no draw and writes
  * nothing.
  *
  * @param {unknown} saves the advance's own plain member clones
- * @returns {Promise<{ opTypes: Record<string, unknown>, pools: Record<string, readonly string[]> }|null>}
+ * @returns {Promise<{ opTypes: Record<string, unknown>,
+ *   poolsBySave: Record<string, Record<string, readonly string[]>> }|null>}
  *   null when nothing is pending anywhere — the kernel then resolves nothing, as before.
  */
 export async function decreeCataloguesForSaves(saves) {
@@ -133,14 +149,17 @@ export async function decreeCataloguesForSaves(saves) {
   const pending = rows.filter((row) => Array.isArray(row?.settlement?.decrees)
     && row.settlement.decrees.some((/** @type {any} */ entry) => entry?.status === 'pending'));
   if (pending.length === 0) return null;
-  const [operations, pools] = await Promise.all([
+  const [operations, pools, helpers] = await Promise.all([
     import('../domain/edit/operations.js'),
     import('../domain/edit/pools.js'),
+    import('../domain/worldPulse/pulseHelpers.js'),
   ]);
   const opTypes = operations.OP_TYPES;
-  /** @type {Record<string, readonly string[]>} */
-  const live = {};
+  /** @type {Record<string, Record<string, readonly string[]>>} */
+  const poolsBySave = {};
   for (const row of pending) {
+    /** @type {Record<string, readonly string[]>} */
+    const live = {};
     for (const entry of row.settlement.decrees) {
       if (entry?.status !== 'pending') continue;
       const decl = /** @type {any} */ (opTypes)[entry?.op?.type];
@@ -151,14 +170,14 @@ export async function decreeCataloguesForSaves(saves) {
           ? /** @type {any} */ (spec).pool
           : null;
         if (typeof poolId !== 'string' || poolId === '') continue;
-        const offered = pools.poolValues(poolId, row.settlement);
-        live[poolId] = Object.hasOwn(live, poolId)
-          ? Object.freeze([...new Set([...live[poolId], ...offered])])
-          : offered;
+        // Two pending entries in ONE town may name the same pool; the town's own reading of
+        // it is one fact, so the second read is skipped rather than folded.
+        if (!Object.hasOwn(live, poolId)) live[poolId] = pools.poolValues(poolId, row.settlement);
       }
     }
+    poolsBySave[helpers.saveId(row)] = Object.freeze(live);
   }
-  return { opTypes, pools: Object.freeze(live) };
+  return { opTypes, poolsBySave: Object.freeze(poolsBySave) };
 }
 
 const AUTH_SESSION_CHANGED_RESULT = Object.freeze({ ok: false, reason: 'auth_session_changed' });

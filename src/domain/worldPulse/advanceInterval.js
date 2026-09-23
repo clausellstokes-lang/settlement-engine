@@ -387,8 +387,9 @@ export function foldMemberBirthsOntoCampaign(campaign, births) {
  *   Wizard News receipts are captured before feed dedupe/retention.
  * @param {Record<string, unknown>|null} [args.customContent] Immutable projection
  *   resolved from the campaign's pinned content binding.
- * @param {{ opTypes?: Record<string, unknown>, pools?: Record<string, unknown> }|null} [args.decreeCatalogues]
- *   U72 (design §20.3): the live vocabularies a pending decree points into, composed ONCE
+ * @param {{ opTypes?: Record<string, unknown>, poolsBySave?: Record<string, unknown> }|null} [args.decreeCatalogues]
+ *   U72 (design §20.3), U86: the live vocabularies a pending decree points into, KEYED BY
+ *   SAVE ID so each member is judged by its own town's words, composed ONCE
  *   per user advance by the store — the one layer that holds the live member settlements a
  *   pool's values are read from — and carried WHOLE to every tick's kernel call, so a
  *   fifty-two-week year resolves against one reading rather than fifty-two. Null on every

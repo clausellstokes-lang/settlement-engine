@@ -276,6 +276,23 @@ export function dueEntriesAtTick(worldState, registry) {
  * NEVER MINTED here: the persisted shape is the owner's, and a world that holds no
  * decree must come out of the kernel exactly as it went in (design §12.11).
  *
+ * ⭐ AND BECAUSE THE TICK'S SUBJECT IS N REGISTRIES, IT IS N VOCABULARIES (U86, lane E's
+ * ruling 2). `options.catalogues` here is the REALM's bag — `{ opTypes, poolsBySave }` —
+ * and each registry is judged against the pools filed under ITS OWN save id, never against
+ * a fold across the members. EM-E1's `applyDecreesAtTick` still takes the FLAT
+ * `{ opTypes, pools }` that `resolveDecree` requires; this verb is where the realm's bag
+ * becomes one town's, which is the only layer that knows which registry belongs to whom.
+ * U72 shipped the LAX UNION and recorded the cost in its own header: a word alive in SOME
+ * member town admitted an order in a town that had never offered it — "a pin on a fork
+ * that no longer means what the DM chose is a lie" told about the wrong town.
+ *
+ * ⛔ A SAVE THE BAG DOES NOT NAME IS HANDED NO CATALOGUES AT ALL, which is not the same
+ * fact as a save named with an empty pool set. The first is silence — the composer never
+ * read that town, so nothing here may claim its words moved (design §9: a missing warning
+ * costs less trust than a false one) — and resolution is simply not consulted, exactly as
+ * it is for every caller that composes no bag. The second is a reading, and its orders are
+ * resolved and withdrawn on it.
+ *
  * @param {unknown} worldState @param {unknown} saves @param {unknown} tickRef
  * @param {{ now?: unknown, catalogues?: unknown }} [options]
  * @returns {{ saves: unknown, causes: readonly DecreeCause[] }} the saves BY REFERENCE
@@ -284,14 +301,28 @@ export function dueEntriesAtTick(worldState, registry) {
 export function applyDecreesToSaves(worldState, saves, tickRef, options) {
   const rows = Array.isArray(saves) ? saves : [];
   if (rows.length === 0 || !isName(tickRef)) return { saves, causes: NO_CAUSES };
+  const bag = isPlainObject(options) ? options : {};
+  const realm = isPlainObject(bag.catalogues) ? bag.catalogues : null;
+  const poolsBySave = realm && isPlainObject(realm.poolsBySave) ? realm.poolsBySave : null;
+  // Lifted out of the walk because the op catalogue is ONE table for the realm — only the
+  // pools are a town's own — and because reading it here is what keeps the narrowing on
+  // `realm` a real one rather than a cast inside the loop (the any-cast floor is zero).
+  const opTypes = realm ? realm.opTypes : undefined;
   /** @type {DecreeCause[]} */
   const causes = [];
   let moved = false;
   const next = rows.map((save) => {
     const settlement = isPlainObject(save) && isPlainObject(save.settlement) ? save.settlement : null;
     if (!settlement || !Array.isArray(settlement.decrees) || settlement.decrees.length === 0) return save;
+    const saveKey = saveId(save);
     const applied = applyDecreesAtTick(worldState, settlement.decrees, tickRef, {
-      ...(isPlainObject(options) ? options : {}), saveId: saveId(save),
+      ...bag,
+      saveId: saveKey,
+      // `undefined` is the ABSENCE the hook's own guard reads, so an unnamed member takes
+      // the documented no-resolution path rather than an empty vocabulary.
+      catalogues: poolsBySave && Object.hasOwn(poolsBySave, saveKey)
+        ? { opTypes, pools: poolsBySave[saveKey] }
+        : undefined,
     });
     if (applied.registry === settlement.decrees) return save;
     moved = true;

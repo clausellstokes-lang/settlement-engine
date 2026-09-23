@@ -85,13 +85,17 @@ const registryOf = (/** @type {any} */ result, /** @type {string} */ saveId) => 
   return /** @type {any[]} */ (update?.settlement?.decrees || []);
 };
 
-/** ONE real tick over one member save. @param {string} role @param {unknown} decreeCatalogues */
-function tickWith(role, decreeCatalogues) {
-  const saves = [saveOf('a', ['Steward', 'Reeve'], staged('d1', role))];
-  const result = /** @type {any} */ (simulateCampaignWorldPulse({
+/** ONE real tick over a whole realm. @param {any[]} saves @param {unknown} decreeCatalogues */
+function tickRealm(saves, decreeCatalogues) {
+  return /** @type {any} */ (simulateCampaignWorldPulse({
     campaign: campaignOf(saves), saves, interval: 'one_week', now: NOW,
     ...(decreeCatalogues === undefined ? {} : { decreeCatalogues }),
   }));
+}
+
+/** ONE real tick over one member save. @param {string} role @param {unknown} decreeCatalogues */
+function tickWith(role, decreeCatalogues) {
+  const result = tickRealm([saveOf('a', ['Steward', 'Reeve'], staged('d1', role))], decreeCatalogues);
   return {
     entry: registryOf(result, 'a')[0],
     causes: (result?.pulseRecord?.decreeCauses || []).length,
@@ -158,13 +162,19 @@ describe('U72 — the tick resolves a stale vocabulary as design §20.3 says', (
     const bag = /** @type {any} */ (await decreeCataloguesForSaves(saves));
     // The op catalogue is handed over whole and by reference — it is a frozen table, not a copy.
     expect(bag.opTypes).toBe(OP_TYPES);
-    // ⭐ EXACTLY ONE POOL IS READ, and it is the one the staged op's own payload names. The
-    // other sixteen are never touched — two of them (`name.npc`, `name.settlement`) are cross
-    // products of the naming bag and would be thousands of strings on a worker payload.
-    expect(Object.keys(bag.pools)).toEqual([ROLE_POOL]);
-    // ⭐ ACROSS MEMBER SAVES THE POOL IS THE UNION of what each live settlement offers, which
-    // is the one reading that can never withdraw a decree that should have applied.
-    expect([...bag.pools[ROLE_POOL]].sort()).toEqual(['Harbourmaster', 'Reeve', 'Steward']);
+    // ⭐ EXACTLY ONE POOL IS READ PER MEMBER, and it is the one the staged op's own payload
+    // names. The other sixteen are never touched — two of them (`name.npc`,
+    // `name.settlement`) are cross products of the naming bag and would be thousands of
+    // strings on a worker payload.
+    expect(Object.keys(bag.poolsBySave.a)).toEqual([ROLE_POOL]);
+    expect(Object.keys(bag.poolsBySave.b)).toEqual([ROLE_POOL]);
+    // ⭐ AMENDED BY U86, AND THE AMENDMENT IS THE WHOLE OF THAT MEMBER. This arm read the
+    // LAX UNION here — the one reading available to a hook that took ONE bag for N
+    // registries — and lane E's own header declared the strict per-save bag as the chair's
+    // to rule. It was ruled (U86): the reading below is each member's OWN, keyed by its own
+    // save id, and neither town's vocabulary is ever mixed with its sibling's.
+    expect([...bag.poolsBySave[saves[0].id][ROLE_POOL]].sort()).toEqual(['Reeve', 'Steward']);
+    expect([...bag.poolsBySave[saves[1].id][ROLE_POOL]].sort()).toEqual(['Harbourmaster']);
     // And it is each settlement's OWN reading that goes in: neither town alone offers both.
     expect([...poolValues(ROLE_POOL, saves[0].settlement)].sort()).toEqual(['Reeve', 'Steward']);
     expect([...poolValues(ROLE_POOL, saves[1].settlement)].sort()).toEqual(['Harbourmaster']);
@@ -210,5 +220,69 @@ describe('U72 — the tick resolves a stale vocabulary as design §20.3 says', (
       campaign: campaignOf(saves), saves, interval: 'one_week', commit: true, now: NOW,
     }));
     expect(registryOf(untold, 'a')[0].status).toBe('applied');
+  });
+});
+
+describe('U86 — a decree is judged by its OWN save\'s vocabulary, never a sibling\'s', () => {
+  it('U86-1 A WORD THAT LIVES ONLY IN A SIBLING TOWN IS NOT THIS TOWN\'S VOCABULARY: the decree is WITHDRAWN at the tick, while the sibling whose own town offers it still applies', async () => {
+    const saves = [
+      saveOf('a', ['Steward', 'Reeve'], staged('d1', 'Harbourmaster')),
+      saveOf('b', ['Harbourmaster'], staged('d2', 'Harbourmaster')),
+    ];
+    // ⭐ THE SPLIT IS MEASURED WITH THE PRODUCT'S OWN READER, never typed: the word really is
+    // absent from A's reading and present in B's, so a fixture that stopped splitting the
+    // two towns reds here rather than passing this arm vacuously.
+    expect(poolValues(ROLE_POOL, saves[0].settlement).includes('Harbourmaster'),
+      'the fixture stopped withholding the word from the first town').toBe(false);
+    expect(poolValues(ROLE_POOL, saves[1].settlement).includes('Harbourmaster'),
+      'the fixture stopped offering the word in the second town').toBe(true);
+
+    const catalogues = await decreeCataloguesForSaves(saves);
+    const result = tickRealm(saves, catalogues);
+    const first = registryOf(result, 'a')[0];
+    const second = registryOf(result, 'b')[0];
+    expect(first.status, 'the first town\'s decree was judged by its SIBLING\'s vocabulary').toBe('withdrawn');
+    expect(first.withdrawnReason, 'and §20.3\'s reason names the word that is not this town\'s').toEqual({
+      kind: 'vocabulary-moved', missing: 'pool-value', was: 'Harbourmaster',
+    });
+    // ⛔ THE NEGATIVE CONTROL IS IN THE SAME TICK AND THE SAME BAG. Without it "withdrawn"
+    // above would also be the answer of a resolver handed nothing at all.
+    expect(second.status, 'the town whose own institutions offer the word was refused it').toBe('applied');
+    expect((result?.pulseRecord?.decreeCauses || []).map((/** @type {any} */ c) => c.decreeId),
+      'the record claims a cause for the order the tick refused').toEqual(['d2']);
+  });
+
+  it('U86-2 THE COMPOSER HANDS THE POOLS PER SAVE — each member\'s own reading under its own id, and the lax union is GONE rather than merely unread', async () => {
+    const saves = [
+      saveOf('a', ['Steward', 'Reeve'], staged('d1', 'Steward')),
+      saveOf('b', ['Harbourmaster'], staged('d2', 'Harbourmaster')),
+    ];
+    const bag = /** @type {any} */ (await decreeCataloguesForSaves(saves));
+    expect(Object.keys(bag).sort(), 'the bag is the op catalogue and the per-save pools, and nothing else')
+      .toEqual(['opTypes', 'poolsBySave']);
+    expect(Object.keys(bag.poolsBySave).sort(), 'every member that staged a pending decree is named')
+      .toEqual(['a', 'b']);
+    // ⛔ THE KEY IS THE KERNEL'S OWN SAVE ID, not the array position: `applyDecreesToSaves`
+    // reads the bag by `saveId(save)`, so a realm whose members arrive in another order
+    // still hands each town its own words.
+    expect(bag.poolsBySave[saves[0].id][ROLE_POOL]).toEqual(poolValues(ROLE_POOL, saves[0].settlement));
+    expect(bag.poolsBySave[saves[1].id][ROLE_POOL]).toEqual(poolValues(ROLE_POOL, saves[1].settlement));
+    // ⛔ STILL PLAIN DATA. The bag crosses the advance worker's structured clone and the
+    // R-18 paranoia pass's JSON clone, so a resolver FUNCTION could never have been the
+    // shape here however much cleaner it reads.
+    expect(JSON.stringify(structuredClone(bag))).toBe(JSON.stringify(bag));
+  });
+
+  it('U86-3 A SAVE THE BAG DOES NOT NAME RESOLVES NOTHING AT ALL — design §9\'s tie-break, so a bag composed for another realm can never withdraw an order it never read', () => {
+    const saves = [saveOf('a', ['Steward', 'Reeve'], staged('d1', 'Harbourmaster'))];
+    // A bag that names a DIFFERENT member. Strictly read, this town's pools would be the
+    // empty set and every pool-typed word in it would be stale — a false warning on an
+    // order nobody judged, which design §9 costs higher than a missing one.
+    const elsewhere = tickRealm(saves, { opTypes: OP_TYPES, poolsBySave: { elsewhere: { [ROLE_POOL]: ['Steward'] } } });
+    expect(registryOf(elsewhere, 'a')[0].status, 'a town the bag never read was judged anyway').toBe('applied');
+    // And the empty reading is a different fact from an absent one: a member NAMED with no
+    // words is a town that offers none, and its order is withdrawn.
+    const named = tickRealm(saves, { opTypes: OP_TYPES, poolsBySave: { a: {} } });
+    expect(registryOf(named, 'a')[0].status, 'a member named with no words still resolves').toBe('withdrawn');
   });
 });

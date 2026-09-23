@@ -254,9 +254,11 @@ function nextWorldStateForPulse(worldState, campaign, interval) {
  *   mid-pause, where the store's live read withheld the value, and a legacy cursor that
  *   never carried one. The store gate covers the resume path; this one guards fresh
  *   advances. See `assertEpochPinnedInTest` in ../clock.js.
- * @param {{ opTypes?: Record<string, unknown>, pools?: Record<string, unknown> }|null} [args.decreeCatalogues]
+ * @param {{ opTypes?: Record<string, unknown>, poolsBySave?: Record<string, unknown> }|null} [args.decreeCatalogues]
  *   U72 (design §20.3) — THE LIVE VOCABULARIES A PENDING DECREE POINTS INTO, `{ opTypes,
- *   pools }`, HANDED IN exactly as EM-C1's `resolveDecree` requires. The head-of-tick hook
+ *   poolsBySave }` — U86: the pools KEYED BY SAVE ID, because the tick's subject is N
+ *   registries and therefore N vocabularies; the hook hands each registry the flat
+ *   `{ opTypes, pools }` of its OWN town, exactly as EM-C1's `resolveDecree` requires. The head-of-tick hook
  *   resolves every due pending entry against them and WITHDRAWS one whose op type, pool or
  *   enum word has moved, with `withdrawnReason: { kind: 'vocabulary-moved', … }`, instead of
  *   applying it ("a pin on a fork that no longer means what the DM chose is a lie"). It is an
