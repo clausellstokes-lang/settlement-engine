@@ -391,9 +391,15 @@ function appliedDecreeCauses(entry) {
  * derived and nothing is defaulted — a cause without a `saveId` names nobody rather
  * than inventing a party, exactly as the relationship chip above refuses to.
  *
- * THE CHRONICLE LINK is the mount's, not this leaf's (DecreeRegistryPage's idiom): the
- * report holds a receipt, and only the surface that owns the routing knows where a
- * chronicle reference resolves. No href, no link — never a dead one.
+ * THE CHRONICLE LINK is the mount's, not this leaf's — EM-D3's registry surface takes
+ * the same injected `chronicleHref`: the report holds a receipt, and only the surface
+ * that owns the routing knows where a chronicle reference resolves. No href, no link —
+ * never a dead one.
+ *
+ * ⛔ THAT SURFACE IS CITED BY PACKET ID AND BY PROP, NEVER BY ITS MODULE NAME, AND NOT
+ * BY ACCIDENT. EM-D3's page lands DARK: its A10 arm asserts that NOTHING under `src`
+ * names it, and the arm's predicate is a bare name scan, so a prose mention in this
+ * comment reds it exactly as an import would. The mount is EM-D3c's to add.
  */
 function DecreeCauseRow({ cause, resolveName, chronicleHref }) {
   const mobile = useIsMobile();

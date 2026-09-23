@@ -26,8 +26,16 @@
  * commit body, which is where a one-shot measurement belongs; freezing that HTML
  * here would mint a golden over every inline style in the report.
  *
- * @enforced-by itself (the arms below); the surfaces are src/components/map/
- *   AdvanceReport.jsx and src/components/primitives/RegenerationDeltaCard.jsx
+ * ⛔ EVERY TARGET BELOW IS WHOLE ON ITS OWN LINE. `tests/docs/enforcedByExists.test.js`
+ * reads the marker's line AND each continuation line that OPENS with a path token, so a
+ * path wrapped mid-way leaves its basename alone at the head of the next line and is
+ * read as a repo-relative path that resolves to nothing. This tag's first cut wrapped
+ * after `src/components/map/` and dangled `AdvanceReport.jsx`; never wrap a target.
+ *
+ * @enforced-by tests/components/advanceReportDecrees.test.jsx (this file's own arms),
+ *   src/components/map/AdvanceReport.jsx
+ *   src/components/primitives/RegenerationDeltaCard.jsx
+ *   being the two surfaces those arms govern.
  */
 import { afterEach, describe, expect, test, vi } from 'vitest';
 import { cleanup, render, screen, within } from '@testing-library/react';
