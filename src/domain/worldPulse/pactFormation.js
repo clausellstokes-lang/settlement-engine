@@ -211,16 +211,35 @@ const codepoint = (a, b) => (a < b ? -1 : a > b ? 1 : 0);
  * not belief, and the reason this composer sits outside the K3 set. `beliefRecord(x, x)` is
  * never written anywhere in this estate (the recorded absent-self-belief hazard), so a
  * self-read routed through the belief map would silently return nothing forever.
+ *
+ * ⚠ ITS OWN RITES ARE READ WHERE THE FAITH SUBSYSTEM KEEPS THEM (FPQ-27). The devotion used
+ * to be read off a `religionState` key on the settlement record, a key NOTHING in the estate
+ * writes (the observed-shape register's banked reader-with-no-writer row for this file), so
+ * every court reported no devotion and the faith_communion occasion could never cross. A court's
+ * religion state lives at `worldState.religionStates[id]`: `religiousContest.js ::
+ * advanceReligionStates` writes it every tick, the pulse kernel folds it into the world, and
+ * the belief map's devotion family bands every subject from the same record through the same
+ * `devotionGroundTruth` (`beliefMap.js`). So what a court knows of its own rites and what
+ * its neighbours come to believe of them are one reading of one record. Writing a
+ * `religionState` onto the settlement instead was REFUSED: a second writer of faith state.
  * @param {unknown} settlement
+ * @param {unknown} religionState the court's own record, from `ownFaithOf`
  * @returns {{scarcity: Record<string, unknown>, pull: string, devotion: string}}
  */
-function selfBandsOf(settlement) {
+function selfBandsOf(settlement, religionState) {
   const row = recordOf(settlement);
   return {
     scarcity: recordOf(scarcityGroundTruth(row)),
     pull: text(recordOf(conditionsGroundTruth(row)).pullBand),
-    devotion: text(devotionGroundTruth(row.religionState)),
+    devotion: text(devotionGroundTruth(religionState)),
   };
+}
+
+/** A COURT'S OWN RELIGION STATE, where the faith subsystem keeps it (FPQ-27): the one read of
+ *  `worldState.religionStates` in this file. The empty record when the court keeps no faith.
+ *  @param {Record<string, unknown>} worldState @param {string} id @returns {Record<string, unknown>} */
+function ownFaithOf(worldState, id) {
+  return recordOf(recordOf(recordOf(worldState).religionStates)[id]);
 }
 
 /** WHAT A COURT BELIEVES ABOUT ITS NEIGHBOUR — only ever through the belief map.
@@ -682,6 +701,9 @@ export function advancePeacetimePacts({
   const settlementOf = (id) => freshest.get(id)
     || recordOf(recordOf(items.find((it) => String(recordOf(it).id) === id)).settlement);
   const ids = items.map((it) => String(recordOf(it).id)).filter(Boolean).sort(codepoint);
+  /** WHAT A COURT KNOWS OF ITSELF, read ONE way at every site below (FPQ-27): its freshest
+   *  settlement and its own religion state. @param {string} id */
+  const selfOf = (id) => selfBandsOf(settlementOf(id), ownFaithOf(worldState, id));
   /** THE SNAPSHOT ITEM, with the freshest settlement spliced over it — `settlementStrength`
    *  reads `item.settlement` (population, activeConditions) AND `item` (tier), so a bare
    *  record is not enough. @param {string} id @returns {Record<string, unknown>|null} */
@@ -765,7 +787,7 @@ export function advancePeacetimePacts({
       });
       continue;
     }
-    const responderSelf = selfBandsOf(settlementOf(String(proposal.to)));
+    const responderSelf = selfOf(String(proposal.to));
     const back = crossingsFor({
       worldState: state, rows, fromId: String(proposal.to), toId: String(proposal.from),
       self: responderSelf, strengthFor: strength, threatId: '',
@@ -807,7 +829,7 @@ export function advancePeacetimePacts({
 
   // ── 3. THE CROSSINGS. Every ordered pair, best occasion first, one proposal per pair. ──
   for (const fromId of ids) {
-    const self = selfBandsOf(settlementOf(fromId));
+    const self = selfOf(fromId);
     for (const toId of ids) {
       if (toId === fromId
         || hostileBetween(state, keyOf, fromId, toId)
@@ -821,7 +843,7 @@ export function advancePeacetimePacts({
       const best = crossings[0];
       const reciprocal = crossingsFor({
         worldState: state, rows, fromId: toId, toId: fromId,
-        self: selfBandsOf(settlementOf(toId)), strengthFor: strength, threatId: '',
+        self: selfOf(toId), strengthFor: strength, threatId: '',
       }).some((back) => back.trigger === best.trigger);
       const sheet = draftPactSheet({
         trigger: best.trigger, fromId, toId, reciprocal, tick, score01: best.score01,

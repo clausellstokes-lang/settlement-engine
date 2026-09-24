@@ -62,6 +62,14 @@
  *   their keys and every earlier arm reads what it read before), and the FPQ-35 block below drives
  *   the production shape: ids minted by the region graph's normalizer, records by the plane's writer.
  *
+ * 2026-09-24 — THIRD RECORD (cure lane LIT1b-pre, unit U2, FPQ-27). ⚠ A DECLARED LIT-PATH SHIFT, the
+ *   map's D1 row. CAUSE, in one sentence: a court's own devotion was read off
+ *   `settlement.religionState`, which nothing in src writes, so the faith_communion occasion's self
+ *   leg was always empty. WHAT MOVES: the self leg now reads the court's own record at
+ *   `worldState.religionStates[id]` (the faith subsystem's), so faith_communion can cross wherever a
+ *   court keeps a faith AND believes a neighbour's devotion. The believed leg is written only by
+ *   SP-B's devotion family, lit in no preset, so no preset world moves; dark, nothing moves.
+ *
  * @enforced-by this file
  */
 import { describe, expect, test } from 'vitest';
@@ -87,6 +95,7 @@ import { makeGridPack, placeSettlements } from '../fixtures/spatialPackFixtures.
 import { edgeIdFor, ensureRegionalGraph } from '../../src/domain/region/graph.js';
 import { ensureRelationshipStatesForGraph } from '../../src/domain/worldPulse/relationshipEvolution.js';
 import { ensureRelationshipState, relationshipKeyFromEdge } from '../../src/domain/worldPulse/relationshipState.js';
+import { ensureReligionState } from '../../src/domain/worldPulse/religionState.js';
 import {
   DUE_TICK, OPEN_TICK, SEAT, pactBeliefs, pactSnapshot, pactWorld, relKey,
 } from '../helpers/pactFixture.js';
@@ -709,6 +718,50 @@ describe('FPQ-35 — THE RELATIONSHIP KEYS: the stage reads the record the relat
     const threat = pactProposalsOf(first.worldState).find((row) => row.trigger === 'shared_threat');
     expect(threat).toMatchObject({ from: 'A', to: 'B' });
     expect(receiptOf(first, 'pact_proposed').receipt).toContain('Both courts reckon the web around C');
+  });
+});
+
+describe('FPQ-27 — THE COURT\'S DEVOTION: read where the faith subsystem keeps it', () => {
+  /**
+   * A COURT WITH A LIT CREED: its patron seated in its own config, and its religion state
+   * seeded by the faith subsystem's own seeder (`ensureReligionState`, the constructor
+   * `advanceReligionStates` builds every record with) and filed where that writer files it,
+   * `worldState.religionStates[id]`. An ascendant patron reads `devout`.
+   * @param {string} id
+   */
+  const litCreed = (id) => ensureReligionState(null, {
+    id, name: id, config: { primaryDeitySnapshot: { name: 'The Dawn Warden', _deityRef: 'deity.dawn' } },
+  }, 'town');
+  /** A believes B `faithful` and nothing else, so the faith occasion is the only one A can find. */
+  const faithWorld = (religionStates) => ({
+    ...pactWorld({ flag: true, beliefs: pactBeliefs({ aSeesB: { devotionBand: 'faithful' }, bSeesA: {} }) }),
+    ...(religionStates ? { religionStates } : {}),
+  });
+  const openOn = (worldState, settlementUpdates = []) => advancePeacetimePacts({
+    snapshot: pactSnapshot(), worldState, settlementUpdates, tick: OPEN_TICK,
+  });
+
+  test('a court with a lit creed reports its devotion, and the faith communion crosses on it', () => {
+    const first = openOn(faithWorld({ A: litCreed('A') }));
+    const communion = pactProposalsOf(first.worldState).find((row) => row.trigger === 'faith_communion');
+    expect(communion).toMatchObject({ from: 'A', to: 'B', state: 'open' });
+    expect(receiptOf(first, 'pact_proposed').receipt)
+      .toContain('Both courts are believed to keep the rites: devout here, faithful there.');
+    // ANTI-VACUITY: the belief alone crosses nothing. Without the court's own record the self
+    // leg is empty, so the occasion above is the religion state's doing.
+    const faithless = openOn(faithWorld(null));
+    // anchored: the same world with the creed opens a faith_communion row two assertions above.
+    expect(pactProposalsOf(faithless.worldState).map((row) => row.trigger)).toEqual([]);
+  });
+
+  test('THE DEAD FIELD IS NOT A SOURCE: the same creed on `settlement.religionState` crosses nothing', () => {
+    // The key the stage used to read. Nothing in src writes it; a creed put there by hand is
+    // exactly the record no live world can carry, and the stage must not see it.
+    const dead = openOn(faithWorld(null), [
+      { saveId: 'A', settlement: { ...pactSnapshot().settlements[0].settlement, religionState: litCreed('A') } },
+    ]);
+    // anchored: the lit-creed world opens a faith_communion row in the test above.
+    expect(pactProposalsOf(dead.worldState).map((row) => row.trigger)).toEqual([]);
   });
 });
 
