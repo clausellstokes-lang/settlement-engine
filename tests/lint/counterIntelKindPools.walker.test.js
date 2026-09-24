@@ -64,16 +64,18 @@ describe('SP-6 phrased-kind registry — IN-3 the counter-game\'s two public bea
   test('the registry rows and the five typed joins are exact', () => {
     const hunt = rowOf('false_accusation');
     const hum = rowOf('sweep_launched');
-    expect(hunt).toMatchObject({ kind: 'false_accusation', significance: 'notable', audience: 'public', section: 'war' });
-    expect(hum).toMatchObject({ kind: 'sweep_launched', significance: 'routine', audience: 'public', section: 'war' });
+    // FP IN-5 (SR-1): the interim `war` desk became the knowledge desk IN-5 minted, for both rows.
+    expect(hunt).toMatchObject({ kind: 'false_accusation', significance: 'notable', audience: 'public', section: 'knowledge' });
+    expect(hum).toMatchObject({ kind: 'sweep_launched', significance: 'routine', audience: 'public', section: 'knowledge' });
     for (const row of [hunt, hum]) {
       expect(Object.isFrozen(row)).toBe(true);
       expect(row.requiredSlots).toHaveLength(row.pool.length);
       expect(row.pool.length).toBeGreaterThanOrEqual(FREQUENCY_FLOORS[row.significance]);
       expect(row.requiredSlots.filter((slots) => slots.length === 0).length).toBeGreaterThan(0);
       expect(registrationReasons(row, { phrases: WHAT_PHRASES, sectionOf: SECTION_OF })).toEqual([]);
-      expect(EXACT_SECTION[row.kind]).toBe('war');
-      expect(SECTION_OF(row.kind)).toBe(SECTION_OF('infowar_spy_exposed'));
+      expect(EXACT_SECTION[row.kind]).toBe('knowledge');
+      // The built catch beat keeps its war desk; the counter-game's own beats moved (FP IN-5).
+      expect(SECTION_OF(row.kind)).not.toBe(SECTION_OF('infowar_spy_exposed'));
       expect(typeof WHAT_PHRASES[row.kind]).toBe('string');
     }
   });
@@ -119,7 +121,7 @@ describe('SP-6 phrased-kind registry — IN-3 the counter-game\'s two public bea
     expect(rest).toEqual([]);
     expect(beat).toMatchObject({
       id: 'wizard_news.5.false_accusation.h', kind: 'false_accusation', impactKind: 'false_accusation', settlementIds: ['h'],
-      npcIds: ['h:ilse'], audience: 'public', section: 'war', significance: 'notable', tick: 5,
+      npcIds: ['h:ilse'], audience: 'public', section: 'knowledge', significance: 'notable', tick: 5,
     });
     const voiced = informationReceipt('false_accusation', 'sweep:h:5', { settlement: 'h-town', npc: 'Ilse' });
     expect(beat.summary).toBe(voiced.line);
@@ -127,7 +129,7 @@ describe('SP-6 phrased-kind registry — IN-3 the counter-game\'s two public bea
     expect(beat.reasons).toHaveLength(2);
     const quiet = resolveSweep({ ...sweptWorld(false), settlementId: 'h', tick: 5, rng, nameFor: (id) => `${id}-town` });
     const [hum] = quiet.newsEntries;
-    expect(hum).toMatchObject({ id: 'wizard_news.5.sweep_launched.h', kind: 'sweep_launched', impactKind: 'sweep_launched', audience: 'public', section: 'war', significance: 'routine' });
+    expect(hum).toMatchObject({ id: 'wizard_news.5.sweep_launched.h', kind: 'sweep_launched', impactKind: 'sweep_launched', audience: 'public', section: 'knowledge', significance: 'routine' });
     expect(hum.summary).toBe(informationReceipt('sweep_launched', 'sweep:h:5', { settlement: 'h-town', npc: '' }).line);
     // anchored: the accusation beat above carries its npcIds; a quiet sweep names nobody.
     expect(hum).not.toHaveProperty('npcIds');

@@ -236,6 +236,7 @@ export default function HeraldBody({
       war: 'War and diplomacy fills once a campaign is live.',
       faith: 'Faith and the pantheon fill once a campaign is live.',
       trade: 'Trade and treaties fill once a campaign is live.',
+      knowledge: 'What the courts believe fills once a campaign is live.',
       events: 'The realm\'s events fill once a campaign is live.',
       divination: 'The forecast reads a live campaign\'s rising pressures.',
       adjudication: 'Decisions await once a campaign\'s realm is live.',
@@ -294,6 +295,14 @@ export default function HeraldBody({
       <HeraldSection items={bySection.trade} worldState={campaign.worldState} nameById={nameById} emptyLead={focusEmpty('No trade shifted since the last turning. The roads run as they did.')} totalCount={totalFor('trade')} narrowing={narrowing}>
         <TreatyPanel campaign={campaign} nameById={nameById} />
       </HeraldSection>
+    );
+  }
+
+  // FP IN-5 — THE KNOWLEDGE DESK, the seventh routing section: its items render through the same
+  // report surface as the other content doors. It carries no live block of its own.
+  if (section === 'knowledge') {
+    return (
+      <HeraldSection items={bySection.knowledge} worldState={campaign.worldState} nameById={nameById} emptyLead={focusEmpty('No word of what the courts believe since the last turning.')} totalCount={totalFor('knowledge')} narrowing={narrowing} />
     );
   }
 

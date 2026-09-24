@@ -41,6 +41,7 @@ export const HEADLINE_TEMPLATES = Object.freeze(/** @type {Record<HeraldSection,
   war: { reasonLabel: 'Casus' },
   faith: { reasonLabel: 'From' },
   trade: { reasonLabel: 'Driver' },
+  knowledge: { reasonLabel: 'Grounds' }, // FP IN-5: what the belief or the lie rested on
   events: { reasonLabel: 'Origin' },
   divination: { reasonLabel: 'Drivers' },
   adjudication: { reasonLabel: 'Stakes' },

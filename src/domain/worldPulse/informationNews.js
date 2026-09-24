@@ -19,11 +19,10 @@
  * would route a token nothing files. ⇒ this row registers WITHOUT routing, which is exactly
  * what raises the estate-wide registered-minus-routed honesty check by one.
  *
- * ⛔ THE INTERIM KNOWLEDGE DESK IS NOT THIS FILE'S. The IN corpus files most of its beats at
- * a Herald knowledge desk that does not exist; the section vocabulary is a frozen six and the
- * seventh is IN-5's to mint. A no-desk row is how this wave avoids riding that silent
- * catch-all fallback without deciding anything. The interim declaration belongs to the wave
- * that mints a routed INFORMATION beat.
+ * THE KNOWLEDGE DESK EXISTS SINCE FP IN-5. The IN corpus files most of its beats at the Herald's
+ * knowledge desk, the seventh section IN-5 minted; the interim `war` desk IN-2 declared for the
+ * routed rows below was re-filed there in IN-5's desk commit. This one row still files no desk,
+ * because a dossier line reaches none, and that derivation is unchanged by the desk's arrival.
  *
  * ── ⚠ THE PARTY BINDING, AND WHY THIS FAMILY HAS NO ROLE TABLE ────────────────────
  *
@@ -121,17 +120,16 @@ function informationKindRow(kind, significance, audience, section, requiredSlots
 export const INFORMATION_KIND_REGISTRY = Object.freeze([
   // IN-3 THE COUNTER-GAME: the witch-hunt's receipt, the annex's `sweep_witch_hunt` block (the
   // kind the volume names `false_accusation`). PUBLIC: the town remembers whose name it was. It
-  // files at the interim desk IN-2 declared (`war`, beside the built catch beat
-  // `infowar_spy_exposed`), until IN-5 mints the knowledge desk. Codepoint-sorted (SR-7).
-  informationKindRow('false_accusation', 'notable', 'public', 'war', [
+  // filed at the interim desk IN-2 declared (`war`) until FP IN-5 minted the knowledge desk,
+  // where it files now (the annex's own desk). Codepoint-sorted (SR-7).
+  informationKindRow('false_accusation', 'notable', 'public', 'knowledge', [
     ['settlement'], ['npc'], ['npc'], ['npc'], ['settlement'], [],
   ]),
-  // IN-2 THE LURE. THE INTERIM DESK, DECLARED BY THE FIRST WAVE THAT MINTS A ROUTED
-  // INFORMATION BEAT (this file's header reserved the declaration for it): `war`, where the
-  // lure's own siblings `infowar_lie_exposed` and `plant_took` already file, until IN-5 mints
-  // the knowledge desk. DM truth, so `dm-only` (the producer sets `covert` fail-closed).
-  // Codepoint-sorted insertion (SR-7).
-  informationKindRow('lure_sprung', 'notable', 'dm-only', 'war', [
+  // IN-2 THE LURE. The interim desk `war` was declared by the first wave that minted a routed
+  // information beat (this file's header reserved the declaration for it); FP IN-5 minted the
+  // knowledge desk and the lure files there now, as the annex heads its block. DM truth, so
+  // `dm-only` (the producer sets `covert` fail-closed). Codepoint-sorted insertion (SR-7).
+  informationKindRow('lure_sprung', 'notable', 'dm-only', 'knowledge', [
     [], ['faction', 'route', 'counterpart', 'house'], ['settlement'], ['counterpart', 'faction'], [], ['settlement', 'season'],
   ]),
   informationKindRow('mirror_standing_line', 'routine', 'public', null, [
@@ -140,8 +138,8 @@ export const INFORMATION_KIND_REGISTRY = Object.freeze([
   ]),
   // IN-3 THE SWEEP HUM, the annex's `sweep_launched` block: the line a sweep that found nothing
   // leaves in the town (a catch speaks through the built beat, a witch-hunt through the row
-  // above). Public, routine, the same interim desk. Codepoint-sorted (SR-7).
-  informationKindRow('sweep_launched', 'routine', 'public', 'war', [
+  // above). Public, routine, at the knowledge desk since FP IN-5. Codepoint-sorted (SR-7).
+  informationKindRow('sweep_launched', 'routine', 'public', 'knowledge', [
     ['settlement'], ['faction', 'settlement'], ['reason'], ['settlement'], ['settlement'],
     ['settlement'], ['settlement'], [], [],
   ]),

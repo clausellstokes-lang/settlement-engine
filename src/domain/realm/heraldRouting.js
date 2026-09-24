@@ -3,11 +3,20 @@
  * 2026-07-22, THE REALM INSPECTOR = NEWSPAPER).
  *
  * THE LOAD-BEARING ARTIFACT. Every event the Herald (the rebuilt Realm Inspector)
- * renders is filed under EXACTLY ONE of its six news sections:
+ * renders is filed under EXACTLY ONE of its seven news sections:
  *
- *     war  ·  faith  ·  trade  ·  events  ·  divination  ·  adjudication
+ *     war  ·  faith  ·  trade  ·  knowledge  ·  events  ·  divination  ·  adjudication
  *
- * (Dashboard is not a section here — it is the front-page aggregate OF these six.)
+ * (Dashboard is not a section here — it is the front-page aggregate OF these seven.)
+ *
+ * THE SEVENTH SECTION (FP IN-5, J-INF-7): `knowledge` is the desk of the medium itself — what
+ * courts believe, buy, plant, hunt and misjudge. It grew this closed vocabulary as vocabulary
+ * work, never a config toggle: the token, its correspondence rows (KIND_SECTION_DIVERGENCES
+ * below), the walker's figure, and every reader of HERALD_SECTIONS audited by an executed census
+ * (tests/domain/beliefVoiceIn5.test.js holds that census as a pin, so a new reader reds until it
+ * is audited). It routes EXACTLY the kinds the design names and nothing by word-association: the
+ * information program's own routed beats and the `belief_misjudgment` refile (J-INF-6).
+ * `intel_transfer` stays under trade (the authored ruling below stands, J-INF-7).
  *
  * THREE LAWS (FINITE-SEMANTICS + THE NEWS ADDRESS LAW):
  *   1. TOTAL — every candidateType / impactKind / stressor type / proposal kind the
@@ -55,13 +64,14 @@
  */
 
 /**
- * The six news sections. Frozen, ordered as the paper reads. Adjudication and
- * divination are reachable via heraldSectionOfRecord (structural) and — for the
- * pressure-candidate tokens — SECTION_OF.
- * @typedef {'war'|'faith'|'trade'|'events'|'divination'|'adjudication'} HeraldSection
+ * The seven news sections. Frozen, ordered as the paper reads: the four content desks, then
+ * the sundry catch-all, the forecast and the decisions. Adjudication and divination are
+ * reachable via heraldSectionOfRecord (structural) and — for the pressure-candidate tokens —
+ * SECTION_OF. `knowledge` (FP IN-5) sits after trade and before the catch-all.
+ * @typedef {'war'|'faith'|'trade'|'knowledge'|'events'|'divination'|'adjudication'} HeraldSection
  * @type {ReadonlyArray<HeraldSection>}
  */
-export const HERALD_SECTIONS = Object.freeze(['war', 'faith', 'trade', 'events', 'divination', 'adjudication']);
+export const HERALD_SECTIONS = Object.freeze(['war', 'faith', 'trade', 'knowledge', 'events', 'divination', 'adjudication']);
 
 /** The explicit catch-all (the "sundry" section). A known token routes here on
  *  purpose; an unknown string lands here as the totality floor. */
@@ -127,18 +137,10 @@ export const EXACT_SECTION = Object.freeze(/** @type {Record<string, HeraldSecti
   webwar_campaign_minted: 'war', webwar_raid: 'war', webwar_wrong_village: 'war',
   webwar_campaign_abandoned: 'war', webwar_campaign_complete: 'war',
   infowar_lie_exposed: 'war', infowar_spy_exposed: 'war',
-  // IN-0a `plant_took` files with its own siblings for the same authored reason the nine
-  // above carry: a commissioned falsehood taking hold in a rival court is an act of a war
-  // doctrine, not a market report. [JUDGMENT J-IN0A-3, vetoable — IN-5 mints the KNOWLEDGE
-  // desk and RE-FILES this token there with the rest of the lane; filing it under `events`
-  // in the meantime would have hidden it from the desk it is being written for.]
-  plant_took: 'war',
-  // IN-2 `lure_sprung` (DM truth, covert at the producer) files with the same siblings for the
-  // same reason: a bought weakness put an army on the road. IN-5's knowledge desk re-files it.
-  lure_sprung: 'war',
-  // IN-3 the counter-game's two public beats file beside the built catch beat
-  // (`infowar_spy_exposed`, above) until IN-5's knowledge desk re-files the lane.
-  false_accusation: 'war', sweep_launched: 'war',
+  // ⛔ `plant_took`, `lure_sprung`, `false_accusation` and `sweep_launched` FILED HERE UNTIL
+  // FP IN-5 minted the knowledge desk, each under a recorded interim judgment (J-IN0A-3 and its
+  // IN-2/IN-3 successors) that named IN-5 as the re-filer. They are RE-FILED in the KNOWLEDGE
+  // block at the foot of this table; the built war-doctrine beats above keep their desk.
   // relationship types that are adversarial route to war (a cold_war / hostile turn
   // is a war-section beat; commercial/hierarchy relations are trade, below).
   rival: 'war', cold_war: 'war', hostile: 'war',
@@ -146,7 +148,9 @@ export const EXACT_SECTION = Object.freeze(/** @type {Record<string, HeraldSecti
   // ── FAITH — deities, religion, belief, pantheon ──────────────────────────────
   faith_foothold_recruited: 'faith', faith_pact_formed: 'faith',
   pantheon: 'faith', pantheon_ascendancy: 'faith', pantheon_twilight: 'faith',
-  belief_misjudgment: 'faith', religious_conversion_fracture: 'faith',
+  // ⛔ `belief_misjudgment` FILED HERE until FP IN-5 (the survey's word-association misfile: a
+  // fog-of-war beat is not a pantheon beat). RE-FILED to the KNOWLEDGE block below (J-INF-6).
+  religious_conversion_fracture: 'faith',
   religious_pact_betrayal: 'faith', religious_authority: 'faith', religious_pressure: 'faith',
   deity_war_pressure: 'faith', deity_peace_pressure: 'faith',
   strategy_missionize: 'faith', compound_gods_abandonment: 'faith',
@@ -396,6 +400,17 @@ export const EXACT_SECTION = Object.freeze(/** @type {Record<string, HeraldSecti
   regional_pressure: 'divination', food_pressure: 'divination', disease_pressure: 'divination',
   conflict_pressure: 'divination', trade_pressure: 'divination', legitimacy_pressure: 'divination',
   crime_pressure: 'divination', envoy_silence_inference: 'divination',
+
+  // ── KNOWLEDGE — the medium: belief, the bought lie, the hunt, the misjudgment (FP IN-5) ──
+  // EXACTLY the kinds the design names, each by its OWN exact row (never a family prefix, the
+  // cheap door WF-8a and ENC-4 refused): the information program's routed beats, re-filed
+  // from the interim `war` desk their minting waves declared (IN-0a's plant that took, IN-2's
+  // sprung lure, IN-3's witch-hunt and sweep hum), and the `belief_misjudgment` REFILE from
+  // faith (J-INF-6, goldens captured first under the Full Simulation preset:
+  // tests/fixtures/herald-knowledge-desk-golden.json). IN-5's own voice kinds join below as
+  // they are minted. ⛔ `intel_transfer` is NOT here: it stays under trade (J-INF-7).
+  belief_misjudgment: 'knowledge',
+  false_accusation: 'knowledge', lure_sprung: 'knowledge', plant_took: 'knowledge', sweep_launched: 'knowledge',
 }));
 
 /**
@@ -738,6 +753,11 @@ export const KIND_SECTION_DIVERGENCES = Object.freeze(/** @type {Record<string, 
   // GR-6: the letter files the war that did not happen under `courts`, beside the pact beats; the
   // Herald files it with the treaty cohort (JUDGMENT, vetoable — the GR-2b pair's reading).
   brokered_back: 'trade',
+  // FP IN-5 (J-INF-6): the letter files the misjudgment under `traditions` (a split of faith and
+  // events), and the Herald files it at the knowledge desk, which has no letter predecessor: a
+  // fog-of-war beat is the medium's, not the pantheon's. This is the knowledge desk's one
+  // correspondence row today — every other kind it routes has no KIND_SECTION key.
+  belief_misjudgment: 'knowledge',
   // NB: cause_lifecycle and moral_reckoning are `traditions` keys, and `traditions`
   // is a documented SPLIT (faith | events) — routing them to events is a split
   // outcome, not a divergence, so they are deliberately NOT listed here.

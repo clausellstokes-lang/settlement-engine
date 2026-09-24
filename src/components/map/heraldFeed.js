@@ -2,7 +2,7 @@
 // owner doctrine 2026-07-22).
 //
 // Turns a campaign's recorded pulse + wizard-news records into ONE normalized,
-// section-filed feed of HeraldItems the six news doors render. The filing is the
+// section-filed feed of HeraldItems the seven news doors render. The filing is the
 // routing table (domain/realm/heraldRouting.js) — never a prose scan. This is a
 // PURE display selector: no store, no React, no Date/rng. It reads the already-
 // recorded shape and files it; it never mints, tunes, or reorders the engine's data.
@@ -25,7 +25,7 @@ import {
 } from './WorldPulseData.js';
 
 /**
- * @typedef {'war'|'faith'|'trade'|'events'|'divination'|'adjudication'} HeraldSection
+ * @typedef {'war'|'faith'|'trade'|'knowledge'|'events'|'divination'|'adjudication'} HeraldSection
  * @typedef {Object} HeraldItem
  * @property {string} id
  * @property {HeraldSection} section
@@ -50,6 +50,8 @@ const FALLBACK_HEADLINE_BY_SECTION = Object.freeze({
   war: 'A military report from the realm',
   faith: 'A matter of faith in the realm',
   trade: 'A change in the realm’s trade',
+  // FP IN-5: the knowledge desk (the seventh section) — a section-level truth like its siblings.
+  knowledge: 'A matter of what the realm believes',
   events: 'A matter of the realm',
   divination: 'A possible turn ahead',
   adjudication: 'A decision awaits review',

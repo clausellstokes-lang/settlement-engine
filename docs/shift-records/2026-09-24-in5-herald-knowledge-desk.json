@@ -1,0 +1,16 @@
+{
+  "_doc": "ENROLLED 2026-09-24 by the FP chair (session 87797a6a) through its dispatch of IN-5 (the FP kit's briefs/BUILD-FP-I5-in5.md and the dispatch message to lane FP-I5), which assigns this unit `tests/fixtures/ (the NEW non-omniscient goldens)` and orders them captured FIRST, before the routing table moves. An ENROLL, which the door's ACTIONS table makes chair-signed and vetoable (protection only grows); no owner signature is claimed and none is needed for an enroll. Prepared, measured and executed by lane FP-I5 (IN-5, Opus 5.5) at the clean base 57b52b510 (fp/i5-in5) with no product file edited: the capture ran from a script outside the tree through tests/helpers/goldenRecordDoor.js recordGolden, over the producer that the suite later imports byte-identically (tests/helpers/heraldDeskGolden.js). A successor chair does not inherit this signature: it re-confirms in its own chat.",
+  "ownerWords": "the new non-omniscient goldens captured FIRST and any EXISTING golden that moves is a STOP",
+  "ownerDate": "2026-09-24",
+  "odqRow": "§5 block #21 IN-5 of docs/DESIGN_FP_ARCHITECTURE.md (the belief_misjudgment REFILE with non-omniscient-infoMode goldens captured FIRST, the Full Simulation preset named; J-INF-6) and §2 of docs/DESIGN_FP_ARCH_IN.md; no ODQ row carries it yet",
+  "cause": "ONE CAUSE: the goldens-first discipline of the belief_misjudgment refile (J-INF-6). The refile is NOT dark-safe: the kind's producer is gated on beliefsActive, and the Full Simulation preset ships infoMode 'full', so moving the kind from the faith desk to the knowledge desk changes the Herald of a reachable, already-supported realm. This enrolls ONE NEW surface and moves no existing one: the Herald of the reader corpus's full_simulation row rr-fresh-full after one year at the harness's own grain, read through buildHeraldFeed's campaign lens, recorded as the section-free content digest of every item, the item count, and the desk each item filed under at capture. At capture: 241 items, events 183, trade 24, war 22, divination 10, faith 2, and the two faith items are exactly the realm's two belief_misjudgment beats (wizard_news.19.belief_misjudgment.soak-a.soak-c and wizard_news.19.belief_misjudgment.soak-c.soak-d). The suite holds the content digest and the count byte-stable after the refile and asserts every item's desk equals its captured desk except the declared refile set, which must read the new desk.",
+  "seat": "the FP chair (session 87797a6a) signs the enroll by its dispatch; lane FP-I5 / IN-5 (Opus 5.5) prepared this record, measured the projection twice in two processes (byte-identical) and executed the enroll through tests/helpers/goldenRecordDoor.js recordGolden at the clean base",
+  "surfaces": [
+    {
+      "surface": "herald-knowledge-desk-golden",
+      "action": "enroll",
+      "predictedRows": 243,
+      "proofForm": "derived-artefact"
+    }
+  ]
+}

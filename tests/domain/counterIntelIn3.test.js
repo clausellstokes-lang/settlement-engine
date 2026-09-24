@@ -331,7 +331,8 @@ describe('IN-3 — the sweep: the clean miss, the false accusation and the catch
     const out = resolveSweep({ ...world, settlementId: 'h', tick: 9, rng: ZERO_RNG, nameFor: (id) => id.toUpperCase() });
     expect(out).toMatchObject({ refused: null, outcome: 'clean_miss', caughtWatcherIds: [], accusedNpcId: null, deltas: [] });
     expect(out.newsEntries.map((entry) => entry.kind)).toEqual(['sweep_launched']);
-    expect(out.newsEntries[0]).toMatchObject({ id: 'wizard_news.9.sweep_launched.h', audience: 'public', section: 'war', settlementIds: ['h'] });
+    // FP IN-5 (SR-1): the interim `war` desk became the knowledge desk IN-5 minted.
+    expect(out.newsEntries[0]).toMatchObject({ id: 'wizard_news.9.sweep_launched.h', audience: 'public', section: 'knowledge', settlementIds: ['h'] });
     // THE PRICE: a court too poor to pay for the hunt is refused, not charged.
     const poor = court({ prosperity: PROSPERITY_TIERS[0] });
     expect(resolveSweep({ ...poor, settlementId: 'h', tick: 9, rng: ZERO_RNG }).refused).toBe('cannot_afford');

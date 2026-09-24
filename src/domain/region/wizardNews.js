@@ -10,12 +10,12 @@ export const WIZARD_NEWS_SIGNIFICANCE = Object.freeze({
   ROUTINE: 'routine',
 });
 
-// The governed section vocabulary mirrors the Herald's six desks without
+// The governed section vocabulary mirrors the Herald's seven desks without
 // importing the reader-only routing module into the regional engine graph.
 // Unknown persisted values fail closed to absence; every valid supplied desk
 // survives normalization unchanged.
 const WIZARD_NEWS_SECTIONS = new Set([
-  'war', 'faith', 'trade', 'events', 'divination', 'adjudication',
+  'war', 'faith', 'trade', 'knowledge', 'events', 'divination', 'adjudication',
 ]);
 
 const MAX_ENTRIES = 240;

@@ -2,9 +2,9 @@
  * RealmInspector.jsx — THE HERALD (owner doctrine 2026-07-22, THE REALM INSPECTOR =
  * NEWSPAPER). The Realm's right-dock rail, rebuilt as a newspaper.
  *
- * THE PAPER (seven news doors): Dashboard (front page + prose session-prep) · War ·
- * Faith · Trade · Events · Divination (the forecast) · Adjudication (the decisions
- * desk). The old eleven doors consolidate here: Letter -> Dashboard prose mode,
+ * THE PAPER (eight news doors): Dashboard (front page + prose session-prep) · War ·
+ * Faith · Trade · Knowledge (FP IN-5: the medium — belief, the bought lie, the hunt) ·
+ * Events · Divination (the forecast) · Adjudication (the decisions desk). The old eleven doors consolidate here: Letter -> Dashboard prose mode,
  * Pantheon -> Faith, Treaties -> Trade, War & Resolve -> War, and the Pulse +
  * Chronicle CONTENT distributes into the topical doors via the routing table
  * (heraldFeed). History is a LENS, not a door — the time-lens toggle (this advance /
@@ -29,7 +29,7 @@ import { Suspense, useCallback, useMemo, useEffect, useRef, useState } from 'rea
 // Footprints is a MAP-ONLY icon (no surface outside src/components/map imports it), so
 // vite's map-only lucide split routes it into the lazy vendor-icons-map chunk and it
 // costs first paint nothing. @see tests/build/iconChunkSplit.test.js
-import { LayoutDashboard, Swords, Sparkles, Coins, CalendarClock, Eye, Gavel, ScrollText, Landmark, Footprints, Route, History, X, Minus, Maximize2, Minimize2 } from 'lucide-react';
+import { LayoutDashboard, Swords, Sparkles, Coins, BookOpen, CalendarClock, Eye, Gavel, ScrollText, Landmark, Footprints, Route, History, X, Minus, Maximize2, Minimize2 } from 'lucide-react';
 
 import { useStore } from '../../store/index.js';
 import { nameMapFromSaves } from './WorldPulseData.js';
@@ -96,6 +96,7 @@ export const REALM_INSPECTOR_SECTIONS = Object.freeze([
   { id: 'war',          label: 'War',          Icon: Swords },
   { id: 'faith',        label: 'Faith',        Icon: Sparkles },
   { id: 'trade',        label: 'Trade',        Icon: Coins },
+  { id: 'knowledge',    label: 'Knowledge',    Icon: BookOpen },
   { id: 'events',       label: 'Events',       Icon: CalendarClock },
   { id: 'divination',   label: 'Divination',   Icon: Eye },
   { id: 'adjudication', label: 'Adjudication', Icon: Gavel },

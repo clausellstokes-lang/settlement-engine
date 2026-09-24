@@ -185,7 +185,8 @@ describe('IN-2 — the four dormancy fences and the lit-mutant control', () => {
     expect(sprung).toHaveLength(1);
     expect(sprung[0]).toMatchObject({
       id: 'wizard_news.10.lure_sprung.h.m.v', impactKind: 'lure_sprung', settlementIds: ['h', 'm', 'v'],
-      audience: 'dm-only', covert: true, section: 'war', significance: 'notable', tick: TICK, severity: 0.5,
+      // FP IN-5 (SR-1): the interim `war` desk became the knowledge desk IN-5 minted.
+      audience: 'dm-only', covert: true, section: 'knowledge', significance: 'notable', tick: TICK, severity: 0.5,
     });
     const exposed = lit.newsEntries.filter((entry) => entry.kind === 'infowar_lie_exposed');
     expect(exposed.map((entry) => entry.settlementIds)).toEqual([['a', 'b'], ['h', 'b']]);

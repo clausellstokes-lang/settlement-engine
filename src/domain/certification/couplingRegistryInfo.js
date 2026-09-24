@@ -81,7 +81,9 @@ export const IN0A_PLANT_HANDOFF_COUPLING = couplingRow({
   ]),
   owningVolume: 'INFORMATION',
   owningWave: 'IN-0a',
-  intendedDesk: 'war',
+  // FP IN-5 moved `plant_took` to the knowledge desk; the row's desk moves in the SAME commit
+  // (seam SC-2, the same-commit obligation), so the desk walker reads agreement through the flip.
+  intendedDesk: 'knowledge',
   kinds: Object.freeze(['plant_took']),
 });
 

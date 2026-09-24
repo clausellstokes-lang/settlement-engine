@@ -54,14 +54,15 @@ function reachable(interp) {
 describe('SP-6 phrased-kind registry — IN-2 the lure_sprung spring', () => {
   test('the registry row and the five typed joins are exact', () => {
     const row = rowOf();
-    expect(row).toMatchObject({ kind: KIND, significance: 'notable', audience: 'dm-only', section: 'war' });
+    // FP IN-5 (SR-1): the interim `war` desk became the knowledge desk IN-5 minted.
+    expect(row).toMatchObject({ kind: KIND, significance: 'notable', audience: 'dm-only', section: 'knowledge' });
     expect(Object.isFrozen(row)).toBe(true);
     expect(row.pool).toHaveLength(6);
     expect(row.requiredSlots).toHaveLength(6);
     expect(row.pool.length).toBeGreaterThanOrEqual(FREQUENCY_FLOORS[row.significance]);
     expect(row.requiredSlots.filter((slots) => slots.length === 0)).toHaveLength(2);
     expect(registrationReasons(row, { phrases: WHAT_PHRASES, sectionOf: SECTION_OF })).toEqual([]);
-    expect(EXACT_SECTION[KIND]).toBe('war');
+    expect(EXACT_SECTION[KIND]).toBe('knowledge');
     expect(SECTION_OF(KIND)).toBe(SECTION_OF('plant_took'));
     expect(typeof WHAT_PHRASES[KIND]).toBe('string');
   });
@@ -120,7 +121,7 @@ describe('SP-6 phrased-kind registry — IN-2 the lure_sprung spring', () => {
     expect(rest).toEqual([]);
     expect(entry).toMatchObject({
       id: 'wizard_news.5.lure_sprung.h.m.v', kind: KIND, impactKind: KIND, settlementIds: ['h', 'm', 'v'],
-      audience: 'dm-only', covert: true, section: 'war', significance: 'notable', tick: 5,
+      audience: 'dm-only', covert: true, section: 'knowledge', significance: 'notable', tick: 5,
     });
     expect(entry.familyId).toMatch(/^lure_sprung\.[1-6]$/);
     expect(entry.reasons).toHaveLength(2);

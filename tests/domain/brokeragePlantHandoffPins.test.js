@@ -869,7 +869,9 @@ describe('IN-0a — lifecycle and registration', () => {
     // heraldRouting: an EXPLICIT desk of the frozen vocabulary, filed with its own siblings.
     // Asserting membership alone would pass on the catch-all, i.e. on no registration at all.
     expect(HERALD_SECTIONS).toContain(SECTION_OF(PLANT_TOOK_KIND));
-    expect(SECTION_OF(PLANT_TOOK_KIND)).toBe(SECTION_OF('infowar_lie_exposed'));
+    // FP IN-5 (SR-1): the plant filed beside `infowar_lie_exposed` at the interim war desk until
+    // IN-5 minted the knowledge desk and re-filed the lane there; the built beat keeps war.
+    expect(SECTION_OF(PLANT_TOOK_KIND)).toBe('knowledge');
     expect(SECTION_OF(PLANT_TOOK_KIND)).not.toBe(SECTION_OF('a_kind_nobody_registered'));
     // SP-6a: a CLASS ASSIGNMENT into the spine's significance family, never a minted scale.
     const entry = plantTookEntry({
