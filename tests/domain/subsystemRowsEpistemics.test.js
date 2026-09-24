@@ -40,6 +40,7 @@ import {
 } from '../../src/domain/certification/knowledgeLaneEvidence.js';
 import { moverFamilyOf } from '../../scripts/audit/behavioral-observation.mjs';
 import { expectAbsentWithAnchor } from '../helpers/anchoredNegatives.js';
+import { impactKindCensus, measuredResidual, routedKindCensus } from '../helpers/knowledgeResidualCensus.js';
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), '../..');
 const sourceOf = (rel) => readFileSync(join(ROOT, rel), 'utf8');
@@ -246,6 +247,38 @@ describe('the knowledge-lane evidence catalog', () => {
     expect(moverFamilyOf({ kind: 'webwar_raid' })).toBe('war');
     expect(moverFamilyOf({ kind: 'intel_transfer' })).toBe('knowledge');
     expect(KNOWLEDGE_FAMILY_RESIDUAL_IMPACT_KINDS).toContain('diplomacy');
+  });
+
+  test('THE DECONTAMINATION RATCHET (FP IN-6 U1): the residual catalog is EXACTLY the live census residual', () => {
+    // Re-measured at build, never quoted from a volume (DESIGN_FP_ARCH_IN.md R8): the census
+    // enumerates the estate's impactKind literals and its exact Herald routing tokens and runs the
+    // production classifier on each, so the catalog can neither grow in the tree unseen nor keep a
+    // row the tree has cured. Exact equality in both directions is the ratchet: a new residual kind
+    // reds by name (give it its own vocabulary), and a cured one reds until the catalog banks it.
+    const impact = impactKindCensus();
+    const routed = routedKindCensus();
+    // GUARD-THE-GUARD: an enumerator that silently found nothing would pass the equalities below.
+    expect(impact.length, 'the impactKind census is not vacuous').toBeGreaterThan(40);
+    expect(routed.length, 'the routed-kind census is not vacuous').toBeGreaterThan(200);
+    const measured = measuredResidual();
+    const catalogImpact = [...KNOWLEDGE_FAMILY_RESIDUAL_IMPACT_KINDS];
+    const catalogKinds = [...KNOWLEDGE_FAMILY_RESIDUAL_KINDS];
+    expect(
+      measured.impactKinds.filter((kind) => !catalogImpact.includes(kind)),
+      'impactKinds that reach knowledge only through their wizard-news id and are not catalogued',
+    ).toEqual([]);
+    expect(
+      catalogImpact.filter((kind) => !measured.impactKinds.includes(kind)),
+      'catalogued impactKinds the live census no longer finds residual (the cure: shrink the catalog)',
+    ).toEqual([]);
+    expect(
+      measured.kinds.filter((kind) => !catalogKinds.includes(kind)),
+      'routed kinds that reach knowledge only through their wizard-news id and are not catalogued',
+    ).toEqual([]);
+    expect(
+      catalogKinds.filter((kind) => !measured.kinds.includes(kind)),
+      'catalogued kinds the live census no longer finds residual (the cure: shrink the catalog)',
+    ).toEqual([]);
   });
 
   test('every catalogued knowledge container still has its literal-key writer', () => {
