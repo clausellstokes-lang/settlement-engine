@@ -2,6 +2,7 @@ import { goodCriticality } from './goodsCatalog.js';
 import { ensureRegionalGraphOnce } from './graph.js';
 import { wallClockNow } from '../clock.js';
 import { compareCodepoint } from '../deterministicSort.js';
+import { INTERVAL_WEEKS } from '../worldPulse/intervalWeeks.js';
 
 export const WIZARD_NEWS_SCHEMA_VERSION = 1;
 export const WIZARD_NEWS_SIGNIFICANCE = Object.freeze({
@@ -19,6 +20,13 @@ const WIZARD_NEWS_SECTIONS = new Set([
 ]);
 
 const MAX_ENTRIES = 240;
+
+// FP-31 (the chair's ruling of 2026-09-24 on FP-21 U2, vetoable by the owner): THE FEED KEEPS
+// THE LAST YEAR WHOLE. Every entry inside the newest RETENTION_WINDOW_TICKS of the feed
+// survives the cap; MAX_ENTRIES and the arc rescue govern only what survives beyond it (see
+// capEntries). The span is the estate's own year, IMPORTED from the one interval table rather
+// than mirrored, so the window cannot drift from the calendar the advance menu offers.
+const RETENTION_WINDOW_TICKS = INTERVAL_WEEKS.one_year;
 
 // ── Types ──────────────────────────────────────────────────────────────────
 
@@ -771,7 +779,46 @@ function sortEntries(entries) {
 }
 
 /**
- * Cap the feed to `max`. At or below the cap this is the byte-identical recency
+ * Cap the feed. FP-31, A STATED BEHAVIOUR CHANGE (the chair's ruling of 2026-09-24 on FP-21 U2,
+ * vetoable by the owner): THE LAST YEAR IS KEPT WHOLE. Every entry inside the newest
+ * RETENTION_WINDOW_TICKS of the feed survives; the policy of record (`recencyArcCap`: recency
+ * plus the major-arc rescue) runs unchanged over the whole feed and decides only what survives
+ * BEYOND the window. The two compose as a union:
+ *   - at or below `max` nothing is evicted (unchanged);
+ *   - when the policy already keeps the whole window, the result IS the policy's own array,
+ *     byte-identical to the pre-FP-31 cap (every feed that holds fewer than `max` entries in
+ *     its newest year, rescue room included);
+ *   - otherwise the window entries the policy would evict are restored in global order, and
+ *     every head the policy rescued stays: the biggest burnings still outlive the year, and a
+ *     lesser one is still forgotten once it leaves it (believedRazings.js, THE RECORDED LIMIT,
+ *     now with a one-year floor).
+ * WHY: the kernel appends once per weekly tick and every append re-caps, so at the year grain
+ * the news of the advance in progress was evicted before any surface showed it (FP EXPERIENCE
+ * READ 2 §3 S4: year one minted 426, the feed kept 240). The window is anchored on the NEWEST
+ * ENTRY'S tick and knows nothing of the advance grain, so a one-year advance still composes the
+ * same feed as fifty-two one-week advances (advanceCampaignWorldInterval.test.js EQUIVALENCE).
+ * @param {WizardNewsEntry[]} sortedEntries  already sorted newest-first
+ * @param {number} [max]
+ * @returns {WizardNewsEntry[]}
+ */
+function capEntries(sortedEntries, max = MAX_ENTRIES) {
+  if (sortedEntries.length <= max) return sortedEntries.slice(0, max);
+  const capped = recencyArcCap(sortedEntries, max);
+  // The window is a PREFIX of the newest-first order: sortEntries' first key is the tick.
+  const floorTick = sortedEntries[0].tick - RETENTION_WINDOW_TICKS;
+  /** @type {Set<WizardNewsEntry>} */
+  const kept = new Set(capped);
+  let restored = 0;
+  for (const entry of sortedEntries) {
+    if (entry.tick <= floorTick) break;
+    if (!kept.has(entry)) { kept.add(entry); restored += 1; }
+  }
+  return restored === 0 ? capped : sortedEntries.filter(e => kept.has(e));
+}
+
+/**
+ * THE POLICY OF RECORD (the pre-FP-31 capEntries, unchanged; capEntries above adds the
+ * one-year window over it). At or below the cap this is the byte-identical recency
  * slice (`sortedEntries.slice(0, max)`). Above it: keep the most-recent `max`
  * (RECENCY — so recent low-volume notables, e.g. a season marker, always
  * survive), then RESCUE the heads of major arcs that recency would flush — one
@@ -782,10 +829,10 @@ function sortEntries(entries) {
  * deterministic: operates on the pre-sorted array and filters by reference, so
  * the global newest-first order is preserved and the total is always <= max.
  * @param {WizardNewsEntry[]} sortedEntries  already sorted newest-first
- * @param {number} [max]
+ * @param {number} max
  * @returns {WizardNewsEntry[]}
  */
-function capEntries(sortedEntries, max = MAX_ENTRIES) {
+function recencyArcCap(sortedEntries, max) {
   if (sortedEntries.length <= max) return sortedEntries.slice(0, max);
   const recent = sortedEntries.slice(0, max);
   /** @type {Set<WizardNewsEntry>} */
