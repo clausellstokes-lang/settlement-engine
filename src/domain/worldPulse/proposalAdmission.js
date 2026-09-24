@@ -15,7 +15,9 @@
  * The cap is an attention budget, and a budget may only ration work that can
  * come back. A ONE-SHOT VERDICT cannot: its trigger is consumed in the same tick
  * that produces it, so a deferral is a deletion. Those outcomes are admitted
- * regardless of saturation (ONE_SHOT_VERDICT_RULE_IDS below).
+ * regardless of saturation (ONE_SHOT_VERDICT_RULE_IDS below). A war-time peace
+ * suit is admitted past its own court's minor cap, never past the realm's (FP-22
+ * U2, the same list's second member).
  *
  * And an unanswered question does not hold its place forever: a row nobody has answered for
  * DOCKET_TUNING.expiryWeeks of the world's clock EXPIRES through this module's writer (FP-22 U1,
@@ -78,6 +80,24 @@ export const DOCKET_TUNING = Object.freeze({
  *   - population_growth / _decline / _emigration (populationDynamics.js) apply
  *     no population delta when unadmitted, so the pressure persists and the
  *     candidate re-derives.
+ *
+ * THE LIST'S SECOND MEMBER, FP-22 (the chair's ruling of 2026-09-24, cure unit
+ * FP-PEACE-2 U2): A WAR-TIME PEACE SUIT. Made under the owner's word of
+ * 2026-09-24, "Again, I leave all judgment to you", OVER this 2026-07-30 ruling,
+ * which set the list at the one-shot verdicts alone. It lifts LESS than a
+ * verdict does: the suing court's own minor-lane cap (perSettlementMinorPending)
+ * and nothing else.
+ * THE REALM LANE CAP IS NOT LIFTED: the suit still waits while the realm's minor
+ * lane is full, and a suit read as a major meets its court's one major place.
+ * Why: the courts chose the suit on 11 of 46 attacking-court ticks in 5 of the 6
+ * lit wars, and the docket refused all 11 at the suing court's own minor lane,
+ * held by routine questions of the court's peace (findings/FP-PEACE-SUIT.md,
+ * rung R7). It is no ruleId in this array: the array is read only by the
+ * guaranteed mouth (admitGuaranteedProposalOutcomes), which the suit never passes
+ * and which lifts every cap, and a war's pressure re-derives the suit, so it is
+ * no one-shot verdict. The suit is a stochastic candidate, refused in
+ * candidateEvents.js :: rollCandidates, so this member is read where that refusal
+ * is taken, proposalDocketAllows, through isWarTimePeaceSuit below.
  *
  * @type {ReadonlyArray<string>}
  */
@@ -148,6 +168,25 @@ function requiresProposalAdmission(candidate) {
 export function isOneShotVerdictOutcome(candidate) {
   const record = asRecord(candidate);
   return ONE_SHOT_VERDICT_RULE_IDS.includes(String(record?.ruleId ?? ''));
+}
+
+/**
+ * FP-22 U2: the exemption list's second member (above), the WAR-TIME PEACE SUIT, which is the chooser's
+ * bilateral offer. The three conjuncts are warPeaceDecision.js :: isBilateralPeaceOffer's, spelled here
+ * because that reader's graph is not imported into this light module (a pin holds the two in agreement).
+ * The ONE offer writer, settlementStrategy.js :: peaceSuitCandidate, stamps `peaceOffer` only while
+ * warLayer and warTermination are lit AND the suing court holds a live front against the court it sues,
+ * so the marker is the war's own evidence: a suit written in peacetime never carries it, and with the war
+ * rulings dark no suit does (dark: the docket admits exactly as before).
+ * @param {unknown} candidate
+ * @returns {boolean}
+ */
+export function isWarTimePeaceSuit(candidate) {
+  const record = asRecord(candidate);
+  const payload = asRecord(record?.proposalPayload);
+  return record?.candidateType === 'strategy_sue_for_peace'
+    && payload?.kind === 'relationship_label_change'
+    && payload?.peaceOffer === true;
 }
 
 /**
@@ -429,7 +468,9 @@ export function buildProposalDocket(worldState, realmSize = 0) {
 /**
  * Whether a proposal candidate has room in both its realm-global lane and its
  * settlement-local lane. Major and minor lanes are independent so a flood of
- * routine questions can never consume major-choice capacity.
+ * routine questions can never consume major-choice capacity. A war-time peace
+ * suit needs room in the realm's minor lane only: its own court's minor cap is
+ * lifted, and nothing else is (FP-22 U2, isWarTimePeaceSuit).
  *
  * @param {ProposalDocket} docket
  * @param {unknown} candidate
@@ -439,12 +480,13 @@ export function proposalDocketAllows(docket, candidate) {
   const lane = isMajorOutcome(candidate) ? 'major' : 'minor';
   const settlementKey = settlementKeyOf(candidate);
   const local = countsAt(docket.bySettlement, settlementKey);
+  const courtCapLifted = lane === 'minor' && isWarTimePeaceSuit(candidate);
   return docket.counts[lane] < docket.caps[lane]
-    && local[lane] < (
+    && (courtCapLifted || local[lane] < (
       lane === 'major'
         ? docket.caps.perSettlementMajor
         : docket.caps.perSettlementMinor
-    );
+    ));
 }
 
 /**
