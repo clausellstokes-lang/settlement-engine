@@ -7,10 +7,10 @@
     "    npx vitest run tests/lint/tuningRegister.walker.test.js",
     "The refreeze EXITS NON-ZERO by design; the proof is a separate ordinary run."
   ],
-  "measuredAtSha": "aa30e331addcc297fa73ca4695705aff184d985a",
+  "measuredAtSha": "d2b380dc13bb0540d1c9415da5fe18cd99d338ce",
   "measuredBy": "the FP chair (session 87797a6a, Fable 5.1)",
   "date": "2026-09-24",
-  "note": "FP batch landing 1 at 253d14848: WF-0 + cure, TR-2's cures, LIT-1a (Owner-Signed §934.84), TR-3, IN-2 + two cures, GR-6, IN-4/1, GR-5b — the batch's declared deltas, re-measured once at the tip",
+  "note": "FP batch landing 2 at 6efff620b: GR-5b's ownership cure, IN-3 (two commits), cure lane P1 (five), LIT1b-pre (three) — the batch's declared deltas, re-measured once at the tip",
   "schemaVersion": 1,
   "trees": {
     "p1": [
@@ -1058,6 +1058,7 @@
         "src/domain/roads/seaRoads.js",
         "src/domain/roads/thirdPartyRansom.js",
         "src/domain/roads/verification.js",
+        "src/domain/worldPulse/counterIntelSweep.js",
         "src/domain/worldPulse/envoyCasting.js",
         "src/domain/worldPulse/espionage/espionageCareer.js",
         "src/domain/worldPulse/espionage/espionageGauntlet.js",
@@ -2423,6 +2424,7 @@
         "src/domain/worldPulse/settlementStrategy.js",
         "src/domain/worldPulse/sovereigntyMarketStage.js",
         "src/domain/worldPulse/supplyWebWarfare.js",
+        "src/domain/worldPulse/suspicion.js",
         "src/domain/worldPulse/warAllianceRisk.js"
       ],
       "namedDependents": [
@@ -2486,6 +2488,7 @@
         "src/domain/worldPulse/settlementStrategy.js",
         "src/domain/worldPulse/sovereigntyMarketStage.js",
         "src/domain/worldPulse/supplyWebWarfare.js",
+        "src/domain/worldPulse/suspicion.js",
         "src/domain/worldPulse/warAllianceRisk.js"
       ],
       "namedDependents": [
@@ -2578,11 +2581,27 @@
       ],
       "namedDependents": []
     },
+    "src/domain/worldPulse/brokerageServicesPlant.js#PLANT_HEAT_TUNING": {
+      "exported": true,
+      "idiom": "literal",
+      "keys": 1,
+      "line": 107,
+      "spanDigest": "2622a6c9ac22def65b43765e9430e6c3a395eb40af9b163975127e83cf4fed84",
+      "leaves": {
+        "tooHotBand": "pressing"
+      },
+      "dependents": [
+        "src/domain/briefs/composers.js",
+        "src/domain/worldPulse/brokerageServicesRules.js",
+        "src/domain/worldPulse/envoyInterceptionStage.js"
+      ],
+      "namedDependents": []
+    },
     "src/domain/worldPulse/brokerageServicesPlant.js#PLANT_PRICE_TUNING": {
       "exported": true,
       "idiom": "literal",
       "keys": 6,
-      "line": 114,
+      "line": 141,
       "spanDigest": "4b63605458152ea05320cdcbaa3ab23c196924049caba0b8e987bec9ccdfdc34",
       "leaves": {
         "BASE": 0.18,
@@ -3010,6 +3029,39 @@
       ],
       "namedDependents": []
     },
+    "src/domain/worldPulse/counterIntelSweep.js#SWEEP_TUNING": {
+      "exported": true,
+      "idiom": "literal",
+      "keys": 6,
+      "line": 80,
+      "spanDigest": "ab5faec0c4fbbaf98eb0f4c952402f8d5733e27b951b40cd2b632d604e5e3f13",
+      "leaves": {
+        "catchOdds": 0.35,
+        "affordFloor": 0.3,
+        "falseAccusationCharge": 0.5,
+        "accusationSeverity": 0.4,
+        "humSeverity": 0.2,
+        "unknownProsperity": 0.5
+      },
+      "dependents": [
+        "src/components/new/tabs/WatchPanel.jsx"
+      ],
+      "namedDependents": []
+    },
+    "src/domain/worldPulse/counterIntelSweep.js#SEND_TWO_TUNING": {
+      "exported": true,
+      "idiom": "literal",
+      "keys": 1,
+      "line": 90,
+      "spanDigest": "53adb6c9b81eb4f56da5200fa26be1f7ca40b4140c2d5a937fa310c6b736b1aa",
+      "leaves": {
+        "toleranceRung": "reported"
+      },
+      "dependents": [
+        "src/components/new/tabs/WatchPanel.jsx"
+      ],
+      "namedDependents": []
+    },
     "src/domain/worldPulse/deityStance.js#STANCE_TUNING": {
       "exported": true,
       "idiom": "literal",
@@ -3087,6 +3139,7 @@
         "CROWDING_THINNED_SCORE": 56
       },
       "dependents": [
+        "src/domain/worldPulse/calamityKernel.js",
         "src/domain/worldPulse/demographicsKernel.js"
       ],
       "namedDependents": []
@@ -4440,7 +4493,7 @@
       "exported": true,
       "idiom": "literal",
       "keys": 11,
-      "line": 162,
+      "line": 166,
       "spanDigest": "9ba19d8cb43ef7d0920e24ad6d3c258846e7e9120f6679938b684e6f4a519d5d",
       "leaves": {
         "SCORE_MAX": 12,
@@ -4478,7 +4531,7 @@
       "exported": true,
       "idiom": "literal",
       "keys": 23,
-      "line": 767,
+      "line": 771,
       "spanDigest": "170f4c16c27f0088f860cc97ee7afc207cc0b8fc746e6046c0a5c126bb0e128e",
       "leaves": {
         "SEE_DECAY_KEEP": 0.8,
@@ -5622,9 +5675,9 @@
     "src/domain/worldPulse/pactFormation.js#PACT_FORMATION_TUNING": {
       "exported": true,
       "idiom": "literal",
-      "keys": 7,
-      "line": 118,
-      "spanDigest": "c5676cae413cd6a762f6766556049404d2688ded3eb1ccd6249b84c63d1a9481",
+      "keys": 9,
+      "line": 123,
+      "spanDigest": "ea39eeb42da761e69792ebcc57028ba6c5babddc1d5f8ce0c6fa559c0f4b8bed",
       "leaves": {
         "RESERVE_BASE01": 0.5,
         "RISK_APPETITE_RELIEF": 0.25,
@@ -5632,7 +5685,9 @@
         "OUT_OF_POSTURE_PRICE01": 0.15,
         "REFUSAL_TRUST_DELTA": -0.04,
         "REFUSAL_COOLDOWN_TICKS": 52,
-        "PEACETIME_MAGNITUDE01": 0.5
+        "PEACETIME_MAGNITUDE01": 0.5,
+        "SIGNING_BEAT_SEVERITY01": 0.55,
+        "SIGNING_BEAT_SCORE": 66
       },
       "dependents": [
         "src/domain/events/realmManifest.js",
@@ -5748,6 +5803,23 @@
         "src/domain/display/pantheonDepth.js",
         "src/domain/worldPulse/religiousContest.js"
       ]
+    },
+    "src/domain/worldPulse/patronExposure.js#PATRON_EXPOSURE_TUNING": {
+      "exported": true,
+      "idiom": "literal",
+      "keys": 1,
+      "line": 41,
+      "spanDigest": "53de105f3c1d38085356332a4a5118d2f1222299f633251a00191bd32fefff7d",
+      "leaves": {
+        "oddsByRank.0": 0,
+        "oddsByRank.1": 0,
+        "oddsByRank.2": 0.35,
+        "oddsByRank.3": 0.7
+      },
+      "dependents": [
+        "src/components/new/tabs/HousesBlock.jsx"
+      ],
+      "namedDependents": []
     },
     "src/domain/worldPulse/peaceReasons.js#PEACE_REASON_TUNING": {
       "exported": true,
@@ -6865,9 +6937,12 @@
         }
       },
       "dependents": [
-        "src/domain/worldPulse/pactFormation.js"
+        "src/domain/worldPulse/pactFormation.js",
+        "src/domain/worldPulse/suspicion.js"
       ],
-      "namedDependents": []
+      "namedDependents": [
+        "src/domain/worldPulse/suspicion.js"
+      ]
     },
     "src/domain/worldPulse/stressorGates.js#UPHEAVAL_TUNING": {
       "exported": true,
@@ -6962,6 +7037,35 @@
         "src/domain/worldPulse/realmVerbExecution.js"
       ],
       "namedDependents": []
+    },
+    "src/domain/worldPulse/suspicion.js#SUSPICION_TUNING": {
+      "exported": true,
+      "idiom": "literal",
+      "keys": 9,
+      "line": 97,
+      "spanDigest": "5e3b56ad468d54344e7918752177dc75716c748aaacc8f2520b1b9a89698028d",
+      "leaves": {
+        "scandalWeight": 0.45,
+        "grievanceWeight": 0.6,
+        "mirrorWeight": 0.35,
+        "presentAt": 0.15,
+        "pressingAt": 0.4,
+        "decisiveAt": 0.7,
+        "clearsAt": 0.4,
+        "zealAt": 0.55,
+        "doubtFloor": 0.6
+      },
+      "dependents": [
+        "src/components/new/tabs/HousesBlock.jsx",
+        "src/components/new/tabs/WatchPanel.jsx",
+        "src/domain/worldPulse/brokerageServicesPlant.js",
+        "src/domain/worldPulse/counterIntelSweep.js",
+        "src/domain/worldPulse/informationStatecraft.js",
+        "src/domain/worldPulse/patronExposure.js"
+      ],
+      "namedDependents": [
+        "src/domain/worldPulse/counterIntelSweep.js"
+      ]
     },
     "src/domain/worldPulse/tradeSalience.js#TRADE_SALIENCE_TUNING": {
       "exported": true,
@@ -8163,11 +8267,11 @@
   },
   "unclosed": [],
   "totals": {
-    "tables": 245,
-    "keys": 2140,
+    "tables": 250,
+    "keys": 2160,
     "unregisteredNamed": 535,
     "bareDecimals": 6975,
     "zeroDependentTables": 10,
-    "zeroNamedDependentTables": 159
+    "zeroNamedDependentTables": 162
   }
 }
