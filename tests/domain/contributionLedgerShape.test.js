@@ -264,15 +264,24 @@ describe('WC-0E · the war-circulation flags, the contribution ledger shape, and
     expect(contributionLedgerActive({ warCirculationEnabled: 1, contributionLedgerEnabled: 1 })).toBe(false);
     expect(contributionLedgerActive({ warCirculationEnabled: 'true', contributionLedgerEnabled: 'true' })).toBe(false);
 
-    // ⛔ AND BOTH KEYS ARE STRUCTURALLY DARK: absent from the defaults and from every preset's
-    // RESOLVED rules object — not the preset wrapper, which can never own a rule key.
+    // ⛔ AND BOTH KEYS ARE VIRTUAL: absent from the defaults, and read off every preset's RESOLVED
+    // rules object — not the preset wrapper, which can never own a rule key.
+    // ⭐ AMENDED AT LIT-0 (2026-09-24): J-EM-16, the lit law (LGT-C2 `432ff6441` the precedent).
+    // This block read "absent from the defaults AND from every preset" (`carriers` had to be
+    // `[]`) until the owner's word "shipped lit". VIRTUAL means ABSENT FROM
+    // DEFAULT_SIMULATION_RULES, and so from every preset's defaults spread and from the
+    // RULE_COMPARISON_KEYS derived from it; a lighting unit may declare a key in the presets it
+    // names, and dark stays ABSENT (CR-WR10-C), so every carrier carries a strict `true`.
+    expect(Object.keys(DEFAULT_SIMULATION_RULES).length).toBeGreaterThan(10);
     for (const flag of FLAGS) {
       expect(Object.prototype.hasOwnProperty.call(DEFAULT_SIMULATION_RULES, flag)).toBe(false);
       const carriers = Object.entries(SIMULATION_RULE_PRESETS)
         .filter(([, preset]) => preset?.rules
           && Object.prototype.hasOwnProperty.call(preset.rules, flag))
         .map(([id]) => id);
-      expect(carriers).toEqual([]);
+      // anchored: the non-vacuity loop below proves each resolved rules object is readable.
+      expect(carriers.filter((id) => SIMULATION_RULE_PRESETS[id].rules[flag] !== true),
+        `${flag}: a preset declares it without lighting it`).toEqual([]);
     }
     // Non-vacuity: the probe is reading real resolved rule objects and can see a key in them.
     for (const id of Object.keys(SIMULATION_RULE_PRESETS)) {

@@ -392,7 +392,15 @@ describe('EP-1 fence 4 — the gate-polarity census over the real source tree', 
     ]);
   });
 
-  test('VIRTUALITY: the key is absent from the defaults and from every preset', () => {
+  test('VIRTUALITY: the key is absent from the defaults, and a preset declares it only lit', () => {
+    // ⭐ AMENDED AT LIT-0 (2026-09-24): J-EM-16, the lit law (LGT-C2 `432ff6441` the precedent).
+    // This arm read "absent from the defaults AND from every preset" until the owner's word
+    // "shipped lit" (2026-09-23). VIRTUAL means ABSENT FROM DEFAULT_SIMULATION_RULES, and so from
+    // every preset's defaults spread and from the RULE_COMPARISON_KEYS derived from it, which is
+    // what keeps preset identity; a lighting unit may then declare the key in the presets it
+    // names. Dark stays ABSENT (CR-WR10-C), never a declared false, so a declaration is `true`.
+    // The dark arms of this fence are unchanged.
+    expect(Object.keys(DEFAULT_SIMULATION_RULES).length).toBeGreaterThan(10);
     expect(Object.keys(DEFAULT_SIMULATION_RULES).includes(FLAG)).toBe(false);
     // SIMULATION_RULE_PRESETS is a RECORD, not an array — a `.some()` over it would
     // iterate nothing and pass vacuously.
@@ -407,15 +415,18 @@ describe('EP-1 fence 4 — the gate-polarity census over the real source tree', 
     const declaring = presetNames.filter(
       (name) => Object.keys(SIMULATION_RULE_PRESETS[name]?.rules || {}).includes(FLAG),
     );
-    expect(declaring).toEqual([]);
+    // anchored: the preset catalog is asserted non-empty above and populated below.
+    expect(declaring.filter((name) => SIMULATION_RULE_PRESETS[name].rules[FLAG] !== true),
+      'a preset declares the key without lighting it').toEqual([]);
     expect(
       Object.keys(SIMULATION_RULE_PRESETS[presetNames[0]]?.rules || {}).length,
-      'the presets carry no rule keys — the absence above would be a lookup into nothing',
+      'the presets carry no rule keys — the scan above would be a lookup into nothing',
     ).toBeGreaterThan(0);
-    // …and the estate's own derived answer agrees. THE REGISTER records the gate; THIS list
-    // records that no preset has lit it yet, and the key leaves it the day one does.
-    expect(ENGINE_GATED_DORMANT_RULE_KEYS, `${FLAG} is registered but a preset has lit it`)
-      .toContain(FLAG);
+    // …and the estate's own derived answer agrees IN EITHER STATE. THE REGISTER records the gate;
+    // THE DORMANT LIST records whether any preset has lit it, and the key leaves it the day one does.
+    expect(ENGINE_GATED_DORMANT_RULE_KEYS.includes(FLAG),
+      `${FLAG}: the derived dormant list disagrees with the presets that declare it (${declaring.join(', ') || 'none'})`)
+      .toBe(declaring.length === 0);
   });
 
   test('MANIFEST MEMBERSHIP: the key is engine-gated and censusable', () => {
