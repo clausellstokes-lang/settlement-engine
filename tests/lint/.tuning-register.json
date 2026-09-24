@@ -1710,6 +1710,16 @@
       "band": null,
       "note": ""
     },
+    "src/domain/worldPulse/proposalAdmission.js#DOCKET_TUNING": {
+      "role": null,
+      "status": "draft",
+      "signedAt": null,
+      "unit": {
+        "expiryWeeks": "weeks"
+      },
+      "band": null,
+      "note": "FP-22 U1 THE DOCKET'S HORIZON (cure unit FP-PEACE-2; the chair's ruling of 2026-09-24 under the owner's word 'Again, I leave all judgment to you'): how long a pending proposal row may wait unanswered before it expires through the docket's own writer, on the 52-week clock. PROPOSED = 52. FLOOR, a law: no row may expire inside the advance that minted it (the actor-major DM-attention law, worldpulse-core-3), and the retiring seam cannot see the advance's start, so the horizon must reach past the longest advance, one year (INTERVAL_WEEKS.one_year). MEASURED, the docket's own history in the lit fixture set (the peace-suit realm, seeds fp-lit-map and fp-read-1 to 3, the four envoy keys and the errand spine): a DM ruling at every monthly panel answered 1675 rows, the longest wait 4 weeks; at every yearly panel 1160 rows, the longest wait 52, and 355 of them waited exactly 52, so a horizon of 51 would expire them unseen; a DM who never rules left 62 of the 68 rows the four realms ever asked in twenty years pending at the end, 981 to 1039 weeks old. DRAFT, registered by the unit's builder seat; the owner signs it at the tuning sitting."
+    },
     "src/domain/worldPulse/ransomClaim.js#RANSOM_TUNING": {
       "role": null,
       "status": "draft",

@@ -15,6 +15,7 @@ import { classifyRecurringConditionCandidate } from './conditionRefreshRecordMod
 import {
   admitGuaranteedProposalOutcomes,
   buildProposalDocket,
+  expireUnansweredDocketRows,
   peacetimeSuitOvertakenByWar,
   PROPOSAL_DOCKET_POLICY,
   proposalDocketAllows,
@@ -205,7 +206,10 @@ export function suppressEquivalentPendingProposalCandidates(candidates, worldSta
  * once per pulse, after admission, and reconciles the feed right after), so the
  * docket's second retirement rides it rather than a kernel edit (L1): FP-17's
  * peacetime suits a war overtook (proposalAdmission.js ::
- * retireWarOvertakenPeaceSuits), which is the identity when nothing matches.
+ * retireWarOvertakenPeaceSuits), which is the identity when nothing matches. Its
+ * third rides it the same way: FP-22 U1's rows unanswered past the docket's
+ * horizon (proposalAdmission.js :: expireUnansweredDocketRows), also the identity
+ * when nothing matches.
  * @template T
  * @param {T} worldState
  * @param {{ tick?: number, now?: string|null }} [context]
@@ -230,9 +234,9 @@ export function supersedeLegacyRecordModeProposals(worldState, context = {}) {
       supersessionReason: 'record_mode_upgrade',
     };
   });
-  return retireWarOvertakenPeaceSuits(changed
+  return expireUnansweredDocketRows(retireWarOvertakenPeaceSuits(changed
     ? /** @type {T} */ (/** @type {unknown} */ ({ ...state, proposals: nextProposals }))
-    : worldState, context);
+    : worldState, context), context);
 }
 
 function pressureConditionCandidate(/** @type {any} */ pressure, /** @type {any} */ tick, /** @type {Record<string, unknown> | null} */ rules = null) {

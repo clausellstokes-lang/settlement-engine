@@ -16,8 +16,13 @@
  * come back. A ONE-SHOT VERDICT cannot: its trigger is consumed in the same tick
  * that produces it, so a deferral is a deletion. Those outcomes are admitted
  * regardless of saturation (ONE_SHOT_VERDICT_RULE_IDS below).
+ *
+ * And an unanswered question does not hold its place forever: a row nobody has answered for
+ * DOCKET_TUNING.expiryWeeks of the world's clock EXPIRES through this module's writer (FP-22 U1,
+ * expireUnansweredDocketRows below), and its lane frees in the tick it expires.
  */
 
+import { isActorInitiatedMajorType } from './actorMajorApproval.js';
 import { isMajorOutcome } from './decisionTier.js';
 import {
   isStateOnlyOutcome,
@@ -32,6 +37,24 @@ export const PROPOSAL_DOCKET_POLICY = Object.freeze({
   perSettlementMinorPending: 3,
   perSettlementMajorPending: 1,
   majorProposalSlotsPerTick: 1,
+});
+
+/**
+ * FP-22 U1 (the chair's ruling of 2026-09-24, taken under the owner's word of that day, "Again, I leave
+ * all judgment to you"; CURE UNIT FP-PEACE-2) — THE DOCKET'S HORIZON. `expiryWeeks`, on the world's
+ * 52-week clock, is how long a pending row may wait unanswered before it expires. DRAFT: its row in
+ * tests/lint/.tuning-register.json carries the measurement, and the owner signs it at the tuning sitting.
+ *
+ * THE FLOOR IS A LAW, NOT A TASTE. No row may expire inside the advance that minted it (the DM-attention
+ * law the actor-major hold keeps, worldpulse-core-3). The seam that retires the row cannot see the
+ * advance's start tick (the kernel threads `intervalStartTick` to expireStaleActorMajors alone, and
+ * pulseKernel.js takes no edit), so the horizon itself must reach past the longest advance: one year of
+ * fifty-two weekly pulses (INTERVAL_WEEKS.one_year), after which every row has had one panel. The docket's
+ * own history measured the same figure from the other side: the longest a row waited before a DM who
+ * rules at every panel answered it is exactly one year.
+ */
+export const DOCKET_TUNING = Object.freeze({
+  expiryWeeks: 52,
 });
 
 /**
@@ -240,6 +263,92 @@ export function retireWarOvertakenPeaceSuits(worldState, context = {}) {
     : worldState;
 }
 
+/**
+ * FP-22 U1 — AN UNANSWERED ROW EXPIRES. A pending row that has waited DOCKET_TUNING.expiryWeeks since it
+ * was asked (its own `tick`, else its outcome's `generatedAtTick`) expires: the docket reads it as absent
+ * in that tick, so its lane frees for the tick's own admission, and the tick's docket-row supersession
+ * seam retires it after admission, exactly as FP-17's overtaken suit is read and retired. The row is kept
+ * as an audit tombstone in the estate's retirement shape: 'superseded', with its stamp, its tick and
+ * this reason. The receipt is written ONCE, in that tick, by the feed half of the writer
+ * (worldPulseFeedCuration.js :: reconcileSupersededProposalNews): one 'expired' entry of the question's
+ * own kind. No flag governs the docket, so the horizon binds every campaign.
+ *
+ * Two families are not this horizon's to expire. The DM's own orders (a realm-verb order, its payload
+ * kind DM_ORDER_PAYLOAD_KIND below) are the table's commands, never the docket's questions (the scope in
+ * this module's header). A held actor-initiated major keeps its own, shorter hold-then-expire and its own
+ * terminal (actorMajorApproval.js :: expireStaleActorMajors, which runs first in every pulse).
+ */
+export const UNANSWERED_ROW_EXPIRY_REASON = 'unanswered_row_expired';
+
+/**
+ * The payload kind of a DM realm-verb order: realmVerbExecution.js :: REALM_VERB_PAYLOAD_KIND, spelled
+ * here because that module's graph is not imported into this light one (a pin holds the two equal). Read
+ * through the payload's `kind`, a key the executed corpus carries, rather than the outcome's
+ * `provenance`, which it never does (the observed-shape readers' ratchet).
+ */
+const DM_ORDER_PAYLOAD_KIND = 'realm_verb_order';
+
+/**
+ * @param {unknown} raw a proposal row
+ * @param {unknown} tick the tick being read
+ * @returns {boolean}
+ */
+function expiredUnanswered(raw, tick) {
+  const proposal = asRecord(raw);
+  if (proposal?.status !== 'pending') return false;
+  if (typeof tick !== 'number' || !Number.isFinite(tick)) return false;
+  const outcome = asRecord(proposal.outcome);
+  if (asRecord(outcome?.proposalPayload)?.kind === DM_ORDER_PAYLOAD_KIND) return false;
+  if (isActorInitiatedMajorType(String(outcome?.candidateType ?? ''))) return false;
+  const askedAt = proposal.tick ?? outcome?.generatedAtTick;
+  if (typeof askedAt !== 'number' || !Number.isFinite(askedAt)) return false;
+  return tick - askedAt >= DOCKET_TUNING.expiryWeeks;
+}
+
+/**
+ * Whether this pending row has waited out the docket's horizon unanswered at `tick` (FP-22 U1 above).
+ * @param {unknown} proposal
+ * @param {unknown} tick
+ * @returns {boolean}
+ */
+export function proposalExpiredUnanswered(proposal, tick) {
+  return expiredUnanswered(proposal, tick);
+}
+
+/**
+ * THE DOCKET'S WRITER FOR FP-22 U1: expire every pending row that has waited out the horizon, as a
+ * terminal 'superseded' row carrying the estate's retirement stamp, and nothing else. The same world
+ * reference when nothing expires.
+ * @template T
+ * @param {T} worldState
+ * @param {{ tick?: number, now?: string|null }} [context]
+ * @returns {T}
+ */
+export function expireUnansweredDocketRows(worldState, context = {}) {
+  const state = asRecord(worldState);
+  const rows = state?.proposals;
+  if (!state || !Array.isArray(rows) || rows.length === 0) return worldState;
+  const tick = typeof context.tick === 'number' ? context.tick : state.tick;
+  if (typeof tick !== 'number' || !Number.isFinite(tick)) return worldState;
+  let changed = false;
+  const next = rows.map((raw) => {
+    if (!expiredUnanswered(raw, tick)) return raw;
+    changed = true;
+    const proposal = /** @type {Record<string, unknown>} */ (raw);
+    return {
+      ...proposal,
+      status: 'superseded',
+      updatedAt: context.now ?? proposal.updatedAt ?? proposal.createdAt ?? null,
+      supersededAt: context.now ?? null,
+      supersededAtTick: tick,
+      supersessionReason: UNANSWERED_ROW_EXPIRY_REASON,
+    };
+  });
+  return changed
+    ? /** @type {T} */ (/** @type {unknown} */ ({ ...state, proposals: next }))
+    : worldState;
+}
+
 /** @param {unknown} candidate @returns {string} */
 function stableAdmissionKey(candidate) {
   const record = asRecord(candidate);
@@ -281,6 +390,7 @@ export function buildProposalDocket(worldState, realmSize = 0) {
   /** @type {Record<string, ProposalLaneCounts>} */
   const bySettlement = {};
   const openings = latestWarOpeningByCourt(state);
+  const tick = state?.tick;
 
   for (const raw of rows) {
     const proposal = asRecord(raw);
@@ -289,6 +399,8 @@ export function buildProposalDocket(worldState, realmSize = 0) {
     // FP-17: a peacetime suit a war overtook is read as absent in the war's own opening tick; the
     // tick's supersession seam retires the row after admission.
     if (overtakenByWar(proposal, openings)) continue;
+    // FP-22 U1: a row past the docket's horizon is read as absent in the tick it expires, the same way.
+    if (expiredUnanswered(proposal, tick)) continue;
     const outcome = proposal?.outcome;
     const lane = isMajorOutcome(outcome) ? 'major' : 'minor';
     const settlementKey = settlementKeyOf(outcome);

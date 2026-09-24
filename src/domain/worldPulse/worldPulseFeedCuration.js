@@ -1,5 +1,6 @@
 import { clamp01 } from '../../kernel/math.js';
-import { WAR_OVERTAKEN_PEACE_SUIT_REASON } from './proposalAdmission.js';
+import { appendWizardNewsEntries } from '../region/wizardNews.js';
+import { UNANSWERED_ROW_EXPIRY_REASON, WAR_OVERTAKEN_PEACE_SUIT_REASON } from './proposalAdmission.js';
 
 /** @typedef {import('./pulseShapes.js').PulseOutcome} PulseOutcome */
 /** @typedef {import('../region/wizardNews.js').RawWizardNewsEntry} RawWizardNewsEntry */
@@ -11,7 +12,7 @@ import { WAR_OVERTAKEN_PEACE_SUIT_REASON } from './proposalAdmission.js';
  * @typedef {RawWizardNewsEntry & RumorSeedEntry & { recordMode?: string }} CurationEntry
  */
 /** @typedef {RawWizardNewsEntry[]|{ entries?: RawWizardNewsEntry[], [key: string]: unknown }|null|undefined} NewsFeed */
-/** @typedef {{ outcome?: PulseOutcome, status?: string, supersessionReason?: string }} ProposalLike */
+/** @typedef {{ outcome?: PulseOutcome, status?: string, supersessionReason?: string, supersededAt?: string|null, supersededAtTick?: number|null }} ProposalLike */
 /** @typedef {{ proposals?: ProposalLike[], wizardNews?: NewsFeed, [key: string]: unknown }} CuratedWorldState */
 /** @typedef {{ tick?: unknown, consequenceOutcomes?: PulseOutcome[], mechanicalOutcomes?: PulseOutcome[], mechanicalRumorSeeds?: CurationEntry[] }} PulseHistoryRecord */
 
@@ -200,17 +201,80 @@ export function stateOnlyRumorSeedsFromHistory(pulseHistory = [], publicEntries 
 }
 
 /**
+ * FP-22 U1's RECEIPT: the one feed entry a row the docket expired unanswered earns (proposalAdmission.js ::
+ * expireUnansweredDocketRows). It mints no kind: its impactKind is the question's own, routed, voiced and
+ * phrased as the question was when it was queued, and its transition is 'expired', the one the regional
+ * lifecycle already files and voices when an impact ages out. It keeps the question's own headline, never
+ * the applied rewrite (the question did not come to pass), and it carries the question's own weight
+ * without the docket's bump for asking (the outcome read as auto, as an applied outcome of its kind is).
+ * @param {ProposalLike} proposal
+ * @param {number} tick the tick the row expired
+ * @returns {CurationEntry|null}
+ */
+export function unansweredExpiryNewsEntry(proposal, tick) {
+  const outcome = proposal?.outcome;
+  if (!outcome?.id) return null;
+  const asked = newsEntryForOutcome({ ...outcome, applyMode: 'auto' }, tick, 'proposal');
+  return {
+    ...asked,
+    id: `wizard_news.${asked.tick}.world_pulse.expired.${outcome.id}`,
+    kind: 'expired',
+    tags: /** @type {string[]} */ (['world_pulse', outcome.type, outcome.candidateType, 'expired'].filter(Boolean)),
+  };
+}
+
+/**
+ * The receipts owed this tick: one per row the docket expired AT this tick whose entry the feed does not
+ * already carry, so the apply mouth's rerun of the reconcile between advances adds nothing. The same
+ * feed reference when none is owed.
+ * @param {CuratedWorldState} worldState
+ * @param {NewsFeed} feed
+ * @returns {NewsFeed}
+ */
+function appendUnansweredExpiryReceipts(worldState, feed) {
+  const tick = worldState?.tick;
+  if (typeof tick !== 'number' || !Number.isFinite(tick)) return feed;
+  const expired = (worldState?.proposals || []).filter((/** @type {ProposalLike} */ proposal) => (
+    proposal?.status === 'superseded'
+    && proposal?.supersessionReason === UNANSWERED_ROW_EXPIRY_REASON
+    && proposal?.supersededAtTick === tick
+  ));
+  if (expired.length === 0) return feed;
+  const entries = Array.isArray(feed) ? feed : feed?.entries;
+  const present = new Set((Array.isArray(entries) ? entries : []).map((entry) => String(entry?.id ?? '')));
+  const owed = expired
+    .map((/** @type {ProposalLike} */ proposal) => unansweredExpiryNewsEntry(proposal, tick))
+    .filter((entry) => entry !== null && !present.has(String(entry.id)));
+  if (owed.length === 0) return feed;
+  const base = Array.isArray(feed) ? { entries: feed } : (feed || {});
+  return appendWizardNewsEntries(base, /** @type {RawWizardNewsEntry[]} */ (owed), { now: expired[0]?.supersededAt ?? null });
+}
+
+/**
  * Retire the public question that belonged to a proposal made obsolete by the
  * v4 record-mode upgrade, by a bilateral peace offer whose live relationship
  * has moved on, or by a war opening against a court whose peacetime suit still
  * waited (FP-17, proposalAdmission.js :: retireWarOvertakenPeaceSuits). This is
  * deliberately a surgical filter rather than a feed normalization: unrelated
- * entries and feed metadata keep their exact shape.
+ * entries and feed metadata keep their exact shape. A row the docket EXPIRED
+ * unanswered (FP-22 U1) keeps its question, because the question was asked, and
+ * earns its one 'expired' receipt instead (appendUnansweredExpiryReceipts above).
  * @param {CuratedWorldState} worldState
  * @param {NewsFeed} wizardNews
  * @returns {{ worldState: CuratedWorldState, wizardNews: NewsFeed }}
  */
 export function reconcileSupersededProposalNews(worldState, wizardNews) {
+  const reconciled = retireSupersededQuestions(worldState, wizardNews);
+  const receipted = appendUnansweredExpiryReceipts(reconciled.worldState, reconciled.wizardNews);
+  return receipted === reconciled.wizardNews ? reconciled : { ...reconciled, wizardNews: receipted };
+}
+
+/**
+ * @param {CuratedWorldState} worldState
+ * @param {NewsFeed} wizardNews
+ * @returns {{ worldState: CuratedWorldState, wizardNews: NewsFeed }}
+ */
+function retireSupersededQuestions(worldState, wizardNews) {
   const sourceIds = new Set((worldState?.proposals || [])
     .filter((/** @type {ProposalLike} */ proposal) => proposal?.status === 'superseded'
       && (String(proposal?.supersessionReason || '').startsWith('record_mode_upgrade')
