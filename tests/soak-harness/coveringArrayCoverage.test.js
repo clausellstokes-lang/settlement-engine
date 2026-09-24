@@ -238,6 +238,9 @@ describe('the covering array and its constraint manifest', () => {
     // `flagDomainCensus` with this suite's own arguments before the literals moved: virtual 36,
     // union 93, governed 25 and ungoverned 32 unmoved, nonBoolean 13, overlap empty.
     expect(census.virtual.length).toBe(36);
+    // LIT-0 (2026-09-24): this arm closes IDENTICALLY with a register key lit in a preset, because a
+    // lit key is enumerated once, by the register, and never again by `ungoverned`; the lit-state
+    // proof is the next arm, which drives the census over a lit copy of the live table.
     expect(census.overlap).toEqual([]);
     // 85 -> 86 at the WAR landing (§876): the same coupled-union key, same re-measure.
     // 86 -> 87 at ENC-3 (§893): the virtual mint above, moving in lockstep.
@@ -256,6 +259,74 @@ describe('the covering array and its constraint manifest', () => {
     // 67 -> 68 at FP TR-2: likewise virtual, so it lands outside the normalizer.
     expect(census.union.length - census.governed.length).toBe(68);
     expect(census.nonBoolean.length).toBe(13);
+  });
+
+  it('LIT-0 — a register key a preset LIGHTS is enumerated ONCE, by the register, and the flag domain does not move', () => {
+    // ⛔ THE DEFECT (LIT-1's map, §3a; J-EM-16, the lit law, LGT-C2 `432ff6441` the precedent): the census
+    // was fed the REGISTER as its virtual arm and read every preset boolean the defaults do not govern
+    // as `ungoverned`, so the day a register key lit it was claimed TWICE. One FP key lit in the four
+    // world-alive presets measured `overlap` 0 -> 1 and a sum of 94 against a union of 93; all eighteen
+    // measured 0 -> 18. Lighting is a property of the PRESET, never a second enumeration.
+    const KEY = 'faithUnseatingEnabled';
+    const WORLD_ALIVE = ['realistic_regional', 'dramatic_campaign', 'living_realm', 'full_simulation'];
+    expect(ENGINE_GATED_VIRTUAL_RULE_KEYS).toContain(KEY);
+    expect(WORLD_ALIVE.filter((id) => SIMULATION_RULE_PRESETS[id])).toEqual(WORLD_ALIVE);
+    // The copies are built FROM the live table with KEY first removed everywhere, so this arm reads the
+    // same whether or not a lighting unit has since lit KEY for real — it must never become the
+    // tripwire it exists to retire.
+    /** @param {boolean} value @param {string[]} ids */
+    const tableWith = (value, ids) => Object.fromEntries(Object.entries(SIMULATION_RULE_PRESETS).map(([id, entry]) => {
+      /** @type {Record<string, unknown>} */
+      const rules = { ...entry.rules };
+      delete rules[KEY];
+      if (ids.includes(id)) rules[KEY] = value;
+      return [id, { ...entry, rules }];
+    }));
+    /** @param {Record<string, { rules: Record<string, unknown> }>} presets */
+    const censusOf = (presets) => flagDomainCensus({
+      defaults: DEFAULT_SIMULATION_RULES, presets, virtualKeys: ENGINE_GATED_VIRTUAL_RULE_KEYS,
+    });
+    const darkTable = tableWith(true, []);
+    // anchored: SK.U4's order, the fixture's own shape first — the dark copy declares KEY nowhere, and
+    // the lit copies below are asserted to declare it, so the comparison is dark against lit.
+    expect(Object.values(darkTable).filter((entry) => KEY in entry.rules)).toEqual([]);
+    const dark = censusOf(darkTable);
+    // The live table's census IS the dark copy's, in either lighting state of KEY: lighting moves no arm.
+    expect(liveCensus()).toEqual(dark);
+    const states = [
+      ['lit true in the four world-alive presets', tableWith(true, WORLD_ALIVE)],
+      // Any BOOLEAN is a declaration (deriveDormantRuleKeys reads it the same way), so the WR-9a
+      // declared-false shape must be counted once as well.
+      ['declared false in the ceiling alone', tableWith(false, ['full_simulation'])],
+    ];
+    for (const [label, presets] of states) {
+      // The copy really does declare KEY — without this the loop would re-measure the dark table.
+      expect(Object.values(presets).filter((entry) => KEY in entry.rules).length, label).toBeGreaterThan(0);
+      const census = censusOf(presets);
+      // anchored: the virtual arm is asserted to hold KEY exactly once on the next line.
+      expect(census.overlap, label).toEqual([]);
+      expect(census.virtual.filter((key) => key === KEY), label).toEqual([KEY]);
+      // anchored: `ungoverned` is asserted equal to the dark census's own arm on the line after this.
+      expect(census.ungoverned, label).not.toContain(KEY);
+      expect(census.ungoverned, label).toEqual(dark.ungoverned);
+      expect(census.governed, label).toEqual(dark.governed);
+      expect(census.virtual, label).toEqual(dark.virtual);
+      // The same set IN THE SAME ORDER: the lit key keeps its register position, so the factors the
+      // covering array varies — and therefore its rows — are identical in both states.
+      expect(census.union, label).toEqual(dark.union);
+      expect(varyingFactors(census), label).toEqual(varyingFactors(dark));
+      expect(census.governed.length + census.ungoverned.length + census.virtual.length, label)
+        .toBe(census.union.length);
+    }
+    // ⛔ THE OVERLAP ARM IS NOT BLINDED BY THE CURE: a register key that enters DEFAULT_SIMULATION_RULES
+    // is governed AND registered — the double claim that is still real, because such a key is no
+    // longer virtual — and it is reported.
+    const leaked = flagDomainCensus({
+      defaults: { ...DEFAULT_SIMULATION_RULES, [KEY]: false },
+      presets: SIMULATION_RULE_PRESETS,
+      virtualKeys: ENGINE_GATED_VIRTUAL_RULE_KEYS,
+    });
+    expect(leaked.overlap).toEqual([KEY]);
   });
 
   it('all-on is recast as the MAXIMAL-LAWFUL row, and all-off stays the dark control', () => {
