@@ -128,14 +128,17 @@ function asObject(v) {
  * infoMode != 'omniscient') AND the virtual flag infoStatecraftEnabled === true, read
  * defensively (absent ⇒ false ⇒ dormant). NO entry in DEFAULT_SIMULATION_RULES, so
  * every existing golden is byte-identical.
+ * ⛔ ONE STATEMENT, ON PURPOSE (CURE-P1 U6, FPQ-25; IN-2's cure dc4001a22 is the precedent): the
+ * observed-shape corpus (scripts/lib/observed-shape-corpus.mjs :: discoverSimulationFlags) finds
+ * the flags it lights by scanning for `simulationRules…<key>` on ONE line, and the two-statement
+ * read this gate used before hid its own read from the writer-reach instrument. Behaviour is
+ * identical; the read stays the strict, by-name `=== true`.
  * @param {{ spatialCanonVersion?: unknown, simulationRules?: Record<string, unknown> } | null | undefined} worldState
  * @returns {boolean}
  */
 export function infoStatecraftActive(worldState) {
   if (!beliefsActive(worldState)) return false;
-  const rules = worldState && typeof worldState === 'object' ? worldState.simulationRules : null;
-  return !!(rules && typeof rules === 'object'
-    && /** @type {Record<string, unknown>} */ (rules).infoStatecraftEnabled === true);
+  return asObject(asObject(worldState).simulationRules).infoStatecraftEnabled === true;
 }
 
 // ── CREDIBILITY AS A STOCK (design §4 — the wave's one new mechanic) ────────────
