@@ -8,7 +8,7 @@
   "The reviewable slice is computed by RULE (reviewableDark), never hand-listed."
  ],
  "schema": 1,
- "frozenAtSha": "455a2ba2ed5b747a582d7ea6df205697a7547f6d",
+ "frozenAtSha": "b571727e1242767342f1c17c0096c8adc2d29ed4",
  "charter": "§18.1 WRWALKER Car 1 (HORIZON) — chair-signed vetoably at the INSTR-WRW pre-stage",
  "minRows": 40,
  "corpusMeta": {
@@ -16,13 +16,13 @@
   "configs": 4,
   "generations": 16,
   "pulseIntervals": 12,
-  "simulationFlagsLit": 91,
+  "simulationFlagsLit": 92,
   "steadingsMinted": 12,
   "shapeCount": 1300,
   "originCount": 8562,
   "transitionCount": 14503
  },
- "shapesDigest": "43a952be0f40af3c9b15cfb3b4031938e94dcd1d9f243ea2515d4430e6aae9c5",
+ "shapesDigest": "85516e111c99e9824f49083c980e61d570a87858d250bb9e37716f151d7cdc68",
  "detectorDigest": "c6ff47ec59b08a91703b4ede8f31f937a14c15ff7eca284e54f8a8f7075ef154",
  "verdictDigest": "7b5fdd14acee353a43d543226650498a7f6bc461efdd902102195f9476f099db",
  "surfaceRoots": {
@@ -72,7 +72,7 @@
   "json-export"
  ],
  "closureSizes": {
-  "web-display": 732,
+  "web-display": 734,
   "web-transitive": 930,
   "dossier-pdf": 429,
   "campaign-pdf": 75,
@@ -86,20 +86,20 @@
   "lit": 577,
   "litName": 4690,
   "dark": 1285,
-  "thinKeys": 9159,
+  "thinKeys": 9160,
   "thinShapes": 963,
   "knownShapes": 337
  },
  "scanStats": {
-  "files": 1663,
-  "sites": 39542,
-  "propRead": 37423,
+  "files": 1665,
+  "sites": 39658,
+  "propRead": 37536,
   "elemRead": 0,
-  "destructure": 2104,
+  "destructure": 2107,
   "inOp": 15,
-  "rGrades": 6036,
-  "nGrades": 901079,
-  "resolvedReceivers": 6799
+  "rGrades": 6037,
+  "nGrades": 904160,
+  "resolvedReceivers": 6803
  },
  "registerDigest": "3f57ab58c6f6803cd5965b29668e268a24db983833a4ab7ee3a167aba29ae1f1",
  "pendingSurfaceCeiling": 3,

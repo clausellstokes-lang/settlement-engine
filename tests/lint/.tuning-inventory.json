@@ -7,10 +7,10 @@
     "    npx vitest run tests/lint/tuningRegister.walker.test.js",
     "The refreeze EXITS NON-ZERO by design; the proof is a separate ordinary run."
   ],
-  "measuredAtSha": "0a9d82c723ad5defc04454d1d1976fb6045c7984",
+  "measuredAtSha": "b571727e1242767342f1c17c0096c8adc2d29ed4",
   "measuredBy": "FP chair (session 87797a6a, Fable 5.1)",
   "date": "2026-09-24",
-  "note": "FP batch landing 4: LIT-1b + two cures · WR-RECALL U1/U2 · the Herald lens U1/U2 + two cures · PEACE-2 U1/U2 · the seasons arm re-scoped (FP-32)",
+  "note": "FP batch landing 5: BUY-BACK-1 · TREATY-VOICE U1/U3 + the desk re-record · LIT-2 mediation · CW-1",
   "schemaVersion": 1,
   "trees": {
     "p1": [
@@ -724,6 +724,23 @@
       "namedDependents": [
         "src/generators/density/successionGrammar.js"
       ]
+    },
+    "src/domain/display/cascadeBraid.js#CASCADE_BRAID_TUNING": {
+      "exported": true,
+      "idiom": "literal",
+      "keys": 4,
+      "line": 75,
+      "spanDigest": "40476f146df91711714b18ad016a16b141d9a874b71bd5ea50ff6007da234cf6",
+      "leaves": {
+        "MEMBER_FLOOR": 3,
+        "WINDOW_WEEKS": 13,
+        "LAYER_FLOOR": 3,
+        "DAMPED_SEVERITY": 0.35
+      },
+      "dependents": [
+        "src/components/map/heraldFeed.js"
+      ],
+      "namedDependents": []
     },
     "src/domain/display/stateProse/economyStateProse.js#SOLE_EARNER_FROM": {
       "exported": false,
@@ -8348,11 +8365,11 @@
   },
   "unclosed": [],
   "totals": {
-    "tables": 254,
-    "keys": 2169,
+    "tables": 255,
+    "keys": 2173,
     "unregisteredNamed": 535,
     "bareDecimals": 6975,
     "zeroDependentTables": 9,
-    "zeroNamedDependentTables": 165
+    "zeroNamedDependentTables": 166
   }
 }
