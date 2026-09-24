@@ -181,6 +181,11 @@ const LAYER_PATTERNS = Object.freeze({
     // CR-FP-11 arm A: TR-1's casus-commercii family. Four leaves landed in FP cycle 1
     // matching NO pattern here, which made them invisible on BOTH sides of the scan.
     /^src\/domain\/worldPulse\/commercial[A-Z]/,
+    // FP TR-2 (lane FP-D, 2026-09-23): the merchant house — the ledger writer and the chooser
+    // leaf. A house is a TRADE subject (commerce at faction grain), and both leaves read only
+    // unlayered substrate: the faction-plane id comes through dossier/realmEntityWeb.js, never
+    // from INTERIOR's factionCompetition.js, so the family owes no coupling row at this wave.
+    /^src\/domain\/worldPulse\/house[A-Z]/,
     /^src\/domain\/spatial\/(?:tradeFlow|commodityFlow|supplyShipments|entrepots|dispatchEV|smuggle|seaLanes)\.js$/,
   ],
   FAITH: [

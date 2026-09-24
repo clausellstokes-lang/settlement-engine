@@ -173,6 +173,9 @@ export function extractSpatialUsage(worldState) {
     // drop-when-neutral at four levels, so an actor appears here only while it holds a
     // contrast that is genuinely off neutral — a count of courts that have learned something.
     habit_actors: recCount(L.habits?.rows),
+    // TR-2 THE MERCHANT HOUSES. Houses standing with books — a ruined house's cooldown
+    // tombstone carries no books and is not counted, so a nonzero count is live commerce.
+    merchant_houses: countWhere(L.houses, (r) => isObj(r) && !('ruinedAtTick' in r)),
   };
   const migrationPop = sumLeaf(L.migration, r => r?.arrivals);
 
@@ -207,6 +210,7 @@ export function extractSpatialUsage(worldState) {
     ['pact_formation', counts.pacts_awaiting_answer], // GR-2 peacetime offers afoot
     ['mission_credit', counts.mission_credits],       // ES-5d graded covert missions crediting careers
     ['habit_conditioning', counts.habit_actors],      // HB-2 courts holding a learned contrast
+    ['merchant_houses', counts.merchant_houses],     // TR-2 factions carrying house books
   ];
   const moversActive = MOVER_PRESENCE.filter(([, n]) => n > 0).map(([name]) => name);
 
@@ -323,6 +327,15 @@ export const TRACKED_LEDGER_KEYS = Object.freeze([
   // every generated world today. A reading of zero while the layer is dark is the truth, not a
   // blind spot — the same sentence routeNetwork and demographicPlans are carried on.
   'habits',
+  // TR-2 THE MERCHANT HOUSES (houseLedger.js, its ONE writer). TRACKED on the habits,
+  // pactProposals and routeNetwork footing, and the exemption's conjunction fails in BOTH
+  // halves: NO TRACKED FLAG (`merchantHousesEnabled` is virtual and lit in no preset) and NO
+  // TRACKED MOVER (nothing else in this list can see a house form or fall). AND POSITIVELY:
+  // house books are a DEPOSIT, event-accrued and PRESERVED across regeneration, never a
+  // re-derivation. Prop hygiene holds as for the others: the keys are faction identities,
+  // and we emit a COUNT and never a key. ⚠ THE HONEST LIMIT: the writer has no src/ caller
+  // at this wave, so this reads ZERO on every world until the wiring wave mounts it.
+  'houses',
 ]);
 
 /**

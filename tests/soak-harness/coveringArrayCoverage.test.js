@@ -234,13 +234,17 @@ describe('the covering array and its constraint manifest', () => {
     // composition; this census was met at the composed-tip proof by the landing chair, one
     // landing after SEAT-78's was met the same way. The registry the mint site can enumerate
     // (TE-GUARDS-1) is still the cure.
-    expect(census.virtual.length).toBe(35);
+    // 35 -> 36 at FP TR-2 (lane FP-D, 2026-09-23): `merchantHousesEnabled`, MEASURED by calling
+    // `flagDomainCensus` with this suite's own arguments before the literals moved: virtual 36,
+    // union 93, governed 25 and ungoverned 32 unmoved, nonBoolean 13, overlap empty.
+    expect(census.virtual.length).toBe(36);
     expect(census.overlap).toEqual([]);
     // 85 -> 86 at the WAR landing (§876): the same coupled-union key, same re-measure.
     // 86 -> 87 at ENC-3 (§893): the virtual mint above, moving in lockstep.
     // 87 -> 88 at SEAT-78 (§900): the virtual mint above, moving in lockstep.
     // 88 -> 92 at the LIGHTING landing (§901): the four virtual mints above, moving in lockstep.
-    expect(census.union.length).toBe(92);
+    // 92 -> 93 at FP TR-2: the virtual mint above, moving in lockstep.
+    expect(census.union.length).toBe(93);
     expect(census.governed.length + census.ungoverned.length + census.virtual.length).toBe(census.union.length);
     // 57 of 82 sit outside the normalizer's fail-closed coercion — the measured content of
     // "the normalizer is NOT the oracle", and the reason the manifest had to be minted. It
@@ -249,7 +253,8 @@ describe('the covering array and its constraint manifest', () => {
     // 61 -> 62 at ENC-3 (§893): likewise virtual, so it lands outside the normalizer.
     // 62 -> 63 at SEAT-78 (§900): likewise virtual, so it lands outside the normalizer.
     // 63 -> 67 at the LIGHTING landing (§901): four virtual keys, all outside the normalizer.
-    expect(census.union.length - census.governed.length).toBe(67);
+    // 67 -> 68 at FP TR-2: likewise virtual, so it lands outside the normalizer.
+    expect(census.union.length - census.governed.length).toBe(68);
     expect(census.nonBoolean.length).toBe(13);
   });
 

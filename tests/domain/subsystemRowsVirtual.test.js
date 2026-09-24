@@ -233,6 +233,11 @@ const OPERATIONS_VOICE = 'operationsVoiceEnabled';
 // gate lives beside the spine's own door and AND-composes with the SPINE, because the
 // catalog is a menu of business a named person on the road is sent on.
 const ENVOY_TASK_CATALOG = 'envoyTaskCatalogEnabled';
+// FP TR-2 (lane FP-D). The merchant house, minted with its manifest entry, its certification
+// row APPENDED at the tail of VIRTUAL_SUBSYSTEM_ROWS (TR has no family leaf) and its ONE
+// by-name gate read (`houseLedger.merchantHousesActive`) in a single commit — the
+// §49-ruling-3 cost above, paid in these three module-scope edits with ZERO new test titles.
+const MERCHANT_HOUSES = 'merchantHousesEnabled';
 // AUTHORING ORDER, not alphabetical: the assertion below is an exact ordered equality
 // against VIRTUAL_SUBSYSTEM_ROWS, so this list mirrors the file's own section order.
 //
@@ -264,6 +269,7 @@ const VIRTUAL_RULES = Object.freeze([
   FOREIGN_SEAT, LEGITIMACY_UPHEAVAL, IRREGULAR_FORCE, WAR_MEMORY,
   INFILTRATION_DEPTH, MISSION_DISPATCHER, OPERATIONS_VOICE, ENVOY_TASK_CATALOG,
   CHANCE_ENCOUNTERS,
+  MERCHANT_HOUSES,
 ]);
 
 const rowFor = (rule) => SUBSYSTEM_CERTIFICATION_REGISTRY.find((row) => row.rule === rule);
@@ -442,6 +448,8 @@ const LANE_LEAVES = Object.freeze({
   // relationshipEvolution) are deliberately NOT here: each is a shared mouth minting
   // candidates for a dozen other lanes, so tracing this member's zero-candidate claim
   // through them would measure the whole pulse's vocabulary rather than this lane's.
+  // TR-2. The writer (the gate, the latches, the normalizer) and the chooser leaf.
+  [MERCHANT_HOUSES]: ['src/domain/worldPulse/houseLedger.js', 'src/domain/worldPulse/houseActs.js'],
   [CHANCE_ENCOUNTERS]: [
     'src/domain/worldPulse/envoyChanceMeeting.js',
     'src/domain/worldPulse/envoyChanceMeetingLedger.js',
