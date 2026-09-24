@@ -524,6 +524,60 @@ function rewoundDecrees(restoredDecrees, liveDecrees) {
 }
 
 /**
+ * ⭐ EM-C1c — THE REWIND'S CHRONICLE HALF (U98; judgment 306; design §12.1, §2.6), for ONE
+ * save: the ADDRESSES of the chronicle lines the undone tick wrote.
+ *
+ * EM-C1b gave an applied decree a line in the campaign's own `chronicles[]` and measured
+ * what the rewind then did with it: `[undo=true, chroniclesBefore=1, chroniclesAfter=1,
+ * decreeStatus='pending', chronicleRef=undefined]`. The registry half above was already
+ * right — the decree went back to the waiting sequence and `retractDecreesOfTick` took its
+ * reference off — and that is exactly what made the surviving line an ORPHAN: a sentence
+ * in the realm's scrollback about an act the realm no longer remembers ordering, with
+ * nothing left pointing at it.
+ *
+ * ⛔ BY ADDRESS, NEVER BY LENGTH, AND THE ORDER IS THE MEASUREMENT THAT SAYS SO.
+ * `appendCampaignChronicle` PREPENDS, so a line the wizard's paid AI prose writes AFTER
+ * the advance sits AHEAD of the tick's own line. A retraction that trusted a count, a
+ * length or an index would delete the table's newest paid sentence and keep the one it
+ * meant to remove (case C1c-2 drives exactly that order through the real writer). So the
+ * lines are removed by the addresses the tick minted, and no other hand can collide with
+ * one: the hook writes `decree:<id>` at the instant of application, `decreeChronicleLine`
+ * records the line under that same reference, and every other entry takes the store's own
+ * `chronicle_<campaign>_<tick>_<stamp>` id.
+ *
+ * ⛔ WHY THE SNAPSHOT NEED CARRY NOTHING NEW. The addresses are read off the LIVE rows this
+ * restore is about to replace, by the same reasoning `rewoundDecrees` gives for reading
+ * refs rather than computing a tick RANGE: a decree the snapshot already holds as APPLIED
+ * was applied before the state being restored to, so its line is HISTORY and stays (THE
+ * PROMISE) — which is what keeps the one chokepoint correct for both of its callers at
+ * once, the advance undo rewinding a whole interval and the proposal undo rewinding no
+ * tick at all. Nothing is added to `capturePulseSnapshot`, so the session snapshot's shape
+ * is untouched and the promotion census's `reads:` sentence still describes it exactly.
+ *
+ * ⛔ DORMANT BY CONSTRUCTION, like its sibling: a save with no live registry contributes
+ * nothing, and an empty set leaves the campaign's chronicle untouched — no realm grows a
+ * `chronicles` key it did not have.
+ *
+ * @param {any} restoredDecrees the snapshot's registry for this save
+ * @param {any} liveDecrees the PRE-UNDO registry for the same save
+ * @param {Set<string>} into the campaign-wide address set this save contributes to
+ * @returns {void}
+ */
+function collectRetractedChronicleRefs(restoredDecrees, liveDecrees, into) {
+  if (!Array.isArray(liveDecrees) || liveDecrees.length === 0) return;
+  const restored = Array.isArray(restoredDecrees) ? restoredDecrees : [];
+  const appliedBefore = new Set(restored
+    .filter(row => row?.status === DECREE_APPLIED)
+    .map(row => String(row?.id ?? '')));
+  for (const row of liveDecrees) {
+    if (row?.status !== DECREE_APPLIED) continue;
+    if (typeof row?.chronicleRef !== 'string' || row.chronicleRef === '') continue;
+    if (appliedBefore.has(String(row?.id ?? ''))) continue;
+    into.add(row.chronicleRef);
+  }
+}
+
+/**
  * Restore one full pre-pulse/pre-apply snapshot onto the Immer draft: the
  * campaign world unit (worldState + regionalGraph + wizardNews), every member
  * save the snapshot carries, and the live active view when it belongs to this
@@ -577,6 +631,11 @@ function restorePulseSnapshotOnDraft(
   // finding 5 — every reader sees one record), so a view and a row that disagreed about
   // the registry would be exactly the split this estate refuses.
   const rewoundBySave = new Map();
+  // EM-C1c: the addresses of the chronicle lines the undone tick wrote, gathered across
+  // the saves this restore actually rewinds. A DETACHED member is deliberately absent —
+  // its registry is not rewound either, so its lines are not the tick's to retract.
+  /** @type {Set<string>} */
+  const retractedChronicleRefs = new Set();
   // Membership is read at undo time. A save detached since the snapshot must
   // not be silently rewound by an older campaign snapshot.
   for (const saved of snapshot.saves || []) {
@@ -588,7 +647,11 @@ function restorePulseSnapshotOnDraft(
     // Read the PRE-UNDO registry BEFORE the row below is replaced, and lift it out of the
     // draft: the proxy is revoked when this producer returns, and the merged rows ride
     // into persistUpdates.
-    const rewound = rewoundDecrees(restoredSettlement?.decrees, cloneJson(state.savedSettlements[savedIndex]?.settlement?.decrees));
+    const liveDecrees = cloneJson(state.savedSettlements[savedIndex]?.settlement?.decrees);
+    // EM-C1c reads the SAME lifted rows the registry merge reads, before the row below
+    // replaces them: one clone, two halves of one rewind.
+    collectRetractedChronicleRefs(restoredSettlement?.decrees, liveDecrees, retractedChronicleRefs);
+    const rewound = rewoundDecrees(restoredSettlement?.decrees, liveDecrees);
     if (rewound !== undefined && restoredSettlement) { restoredSettlement.decrees = rewound; rewoundBySave.set(String(saved.id), rewound); }
     const restoredCampaignState = cloneJson(saved.campaignState);
     state.savedSettlements[savedIndex] = {
@@ -602,6 +665,17 @@ function restorePulseSnapshotOnDraft(
       settlement: cloneJson(restoredSettlement),
       campaignState: cloneJson(restoredCampaignState),
     });
+  }
+
+  // ⭐ EM-C1c — AND THE RECORD OF THE UNDONE ACT GOES WITH IT (U98; judgment 306). The
+  // campaign world, its topology, its news and now its scrollback are ONE undo unit: the
+  // campaign's own `chronicles[]` loses exactly the lines the undone tick filed, by the
+  // addresses gathered above, and keeps every line any other hand wrote. Guarded on a live
+  // list so a realm that never had a chronicle does not grow one at a rewind, and on a
+  // non-empty set so a rewind that retracted no decree does not rewrite the array at all.
+  if (retractedChronicleRefs.size > 0 && Array.isArray(campaign.chronicles)) {
+    campaign.chronicles = campaign.chronicles
+      .filter((/** @type {any} */ line) => !retractedChronicleRefs.has(String(line?.id ?? '')));
   }
 
   if (removedActiveBirth) {

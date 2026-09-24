@@ -151,12 +151,19 @@ describe('Wizard News authoring presence — static census wall', () => {
   // inside the excluded literal, whose bytes therefore still hash to `f4ac01180f8aaf35`.
   // The new address was MEASURED by running the census, not computed from a diffstat.
   // Re-anchored at measured truth, not widened; the exclusion is still exactly one.
+  // EXACT RE-PIN 2026-09-23, THE SAME SHAPE A FOURTH TIME and the second today: `line` moved
+  // 936 → 1010, SIGNATURE UNCHANGED and COLUMN UNCHANGED. The cause is EM-C1c, which wired
+  // the rewind's CHRONICLE half into the same chokepoint EM-E1 wired its registry half into
+  // (U98) — a documented `collectRetractedChronicleRefs` helper, its call and address set
+  // inside the restore, and the filter that drops the undone tick's lines — every one of
+  // them ABOVE this site and none inside the excluded literal, whose bytes therefore still
+  // hash to `f4ac01180f8aaf35`. MEASURED by running the census. Not widened.
   test('the store-side proposal undo snapshot is the one exact non-authoring exclusion', () => {
     expect(census.candidateSites.length).toBe(census.sites.length + 1);
     expect(census.excludedSites).toEqual([
       expect.objectContaining({
         path: 'src/store/campaignWorldPulseDeferred.js',
-        line: 936,
+        line: 1010,
         column: 23,
         signature: 'f4ac01180f8aaf35',
         routeField: 'kind',
