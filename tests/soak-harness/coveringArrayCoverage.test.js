@@ -264,7 +264,9 @@ describe('the covering array and its constraint manifest', () => {
     // 39 → 40 at FP IN-3 (lane FP-I3, 2026-09-24; SR-1): `counterIntelEnabled`, measured by this run.
     // 40 → 41 at the FP integration pick: IN-3's virtual mint, the fifth tonight (SR-1, the union; re-measured by this run).
     // 41 → 42 at the FP integration pick: IN-4/2's virtual mint, the sixth tonight (SR-1, the union; re-measured by this run).
-    expect(census.virtual.length).toBe(42);
+    // 42 → 43 at FP CW-1 (lane fp/cw-1, 2026-09-24; SR-1): `cascadeGovernorEnabled`, the virtual mint,
+    // in no rules surface, so it enters the union through the virtual arm alone.
+    expect(census.virtual.length).toBe(43);
     // 39 -> 40 at FP IN-4 commit 2 (lane FP-I2, 2026-09-24; SR-1): `reputationRaceEnabled`, MEASURED
     // by calling `flagDomainCensus` with this suite's own arguments on the IN-4 tree: virtual 40,
     // union 97, governed 25 and ungoverned 32 unmoved, nonBoolean 13, overlap empty.
@@ -282,7 +284,8 @@ describe('the covering array and its constraint manifest', () => {
     // 96 → 97 at FP IN-3: the virtual mint above, moving in lockstep.
     // 97 → 98 at the FP integration pick: IN-3's key, in lockstep.
     // 98 → 99 at the FP integration pick: IN-4/2's key, in lockstep.
-    expect(census.union.length).toBe(99);
+    // 99 → 100 at FP CW-1: the virtual mint above, moving in lockstep.
+    expect(census.union.length).toBe(100);
     // 93 -> 94 at FP GR-6: the virtual mint above, moving in lockstep.
     // 95 -> 96 at FP IN-4 commit 1: the virtual mint above, moving in lockstep.
     // 96 -> 97 at FP IN-4 commit 2: the virtual mint above, moving in lockstep.
@@ -303,7 +306,8 @@ describe('the covering array and its constraint manifest', () => {
     // 71 → 72 at FP IN-3: likewise virtual, so it lands outside the normalizer.
     // 72 → 73 at the FP integration pick: IN-3's key, outside the normalizer.
     // 73 → 74 at the FP integration pick: IN-4/2's key, outside the normalizer.
-    expect(census.union.length - census.governed.length).toBe(74);
+    // 74 → 75 at FP CW-1: likewise virtual, so it lands outside the normalizer.
+    expect(census.union.length - census.governed.length).toBe(75);
     // 68 -> 69 at FP GR-6: likewise virtual, so it lands outside the normalizer.
     // 70 -> 71 at FP IN-4 commit 1: likewise virtual, so it lands outside the normalizer.
     // 71 -> 72 at FP IN-4 commit 2: likewise virtual, so it lands outside the normalizer.

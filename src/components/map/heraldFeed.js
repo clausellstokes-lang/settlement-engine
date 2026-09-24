@@ -19,6 +19,7 @@
 // (outcomeSubjectDescriptor / collectSettlementIds), so a HeraldItem carries exactly
 // what the AddressChain resolver needs — ids, never names.
 
+import { braidCascadesInto, cascadeGovernorActive } from '../../domain/display/cascadeBraid.js';
 import { heraldSectionOfRecord, HERALD_SECTIONS } from '../../domain/realm/heraldRouting.js';
 import {
   ACTIVE_UI_STAGES,
@@ -273,6 +274,9 @@ export function buildHeraldFeed(campaign, opts = {}) {
       }));
     }
   }
+
+  // CW-1 THE CASCADE GOVERNOR (dark behind its virtual flag): the one guarded delegation.
+  if (cascadeGovernorActive(worldState)) braidCascadesInto(bySection, campaign, toHeraldItem);
 
   /** @type {Record<HeraldSection, number>} */
   const counts = /** @type {any} */ ({});

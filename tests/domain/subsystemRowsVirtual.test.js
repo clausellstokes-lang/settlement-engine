@@ -266,6 +266,11 @@ const COUNTER_INTEL = 'counterIntelEnabled';
 // (`reputationRaceConsumer.reputationRaceActive`) in a single commit: the same three module-scope
 // edits, ZERO new test titles.
 const REPUTATION_RACE = 'reputationRaceEnabled';
+// FP CW-1 (lane fp/cw-1). The cascade governor, minted with its manifest entry, its certification
+// row APPENDED at the tail after IN-4's and its ONE by-name gate read
+// (`cascadeBraid.cascadeGovernorActive`) in a single commit: the same three module-scope edits,
+// ZERO new test titles (SR-11: a registration the unit's own files trip).
+const CASCADE_GOVERNOR = 'cascadeGovernorEnabled';
 // AUTHORING ORDER, not alphabetical: the assertion below is an exact ordered equality
 // against VIRTUAL_SUBSYSTEM_ROWS, so this list mirrors the file's own section order.
 //
@@ -304,6 +309,7 @@ const VIRTUAL_RULES = Object.freeze([
   INTEL_TRADE,
   COUNTER_INTEL,
   REPUTATION_RACE,
+  CASCADE_GOVERNOR,
 ]);
 
 const rowFor = (rule) => SUBSYSTEM_CERTIFICATION_REGISTRY.find((row) => row.rule === rule);
@@ -511,6 +517,11 @@ const LANE_LEAVES = Object.freeze({
   // `module` list because a reader needs them, and are deliberately absent here: the host is the
   // lifecycle layer's own mouth and mints its own candidate vocabulary.
   [REPUTATION_RACE]: ['src/domain/worldPulse/reputationRaceConsumer.js'],
+  // CW-1. THE LEAF ALONE: the gate, the detection, the braid and the damping live in
+  // cascadeBraid.js. The composer is in the row's wider `module` list because a reader needs the
+  // seam, and is deliberately absent here: it is the Herald's own normalizer and names every
+  // record field a receipt can carry.
+  [CASCADE_GOVERNOR]: ['src/domain/display/cascadeBraid.js'],
   [CHANCE_ENCOUNTERS]: [
     'src/domain/worldPulse/envoyChanceMeeting.js',
     'src/domain/worldPulse/envoyChanceMeetingLedger.js',

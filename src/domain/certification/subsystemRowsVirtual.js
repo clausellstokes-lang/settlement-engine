@@ -843,6 +843,47 @@ export const VIRTUAL_SUBSYSTEM_ROWS = Object.freeze([
     // No channel at all, so the row can never be ALIVE and says so honestly.
     soakEvidence: 'unobserved',
   }),
+  // ── CW-1 · THE CASCADE GOVERNOR (FP CW-1, docs/DESIGN_FP_ARCH_CW.md §CW-1; block #58) ─────────
+  // APPENDED AT THE TAIL after IN-4's row, the add-a-row protocol above. A DISPLAY-SIDE layer:
+  // every channel is empty because it writes nothing, and the row says what it gates, what it
+  // never does and the observation that would grade it.
+  Object.freeze({
+    rule: 'cascadeGovernorEnabled',
+    title: 'The cascade governor (the braid of causes at Herald composition)',
+    module: 'src/domain/display/cascadeBraid.js,src/components/map/heraldFeed.js',
+    aliveness: Object.freeze({
+      // DELIBERATELY EMPTY per the evidence law: the braid mints no pulse candidate; it composes
+      // view items over receipts other layers recorded.
+      eventTypes: Object.freeze([]),
+      // DELIBERATELY EMPTY: no mover family carries a display composition.
+      moverFamilies: Object.freeze([]),
+      // DELIBERATELY EMPTY: the braid writes nothing at all. It reads the provenance ledger and the
+      // durable records the feed files from, whose containers live in worlds it never braids.
+      stateKeys: Object.freeze([]),
+      other: 'A DISPLAY COMPOSITION OVER RECORDED RECEIPTS, WHICH IS WHY EVERY CHANNEL IS EMPTY AND WHY THAT IS THE CORRECT READING. ONE GATE, by name and strict: cascadeGovernorActive (cascadeBraid.js) is the only read of the key in src, and the Herald feed composer (heraldFeed.js, buildHeraldFeed) asks it on one guarded line before the braid is entered. WHAT IT DOES, LIT: at Herald composition it finds a cascade, the member floor or more filed receipts inside a closed window of one season that share one causal ancestor by identity through a recorded provenance edge and whose links cross the layer floor or more coupling registry layers, and it files one story item at the top significance of the cascade. Its sentence names the ancestor in its own recorded words, the layers crossed and the count; its body is the chain rendered forward by the discourse kernel. Every member stays in its desk with its id, damped to the routine class, and a major member is never damped. WHAT IT NEVER DOES: it writes no ledger, no record and no save byte, draws nothing, braids no covert receipt and no decision awaiting the DM, and braids nothing without a recorded common parent. THE OBSERVATION NEEDED to close the gap is a lit soak whose volumes record their causes at the mint, so that chains across layers exist to braid; until then the lane is pinned in tests/domain/cascadeBraidCw1.test.js, which carries its four dormancy fences and the lit-mutant control.',
+    }),
+    // A braid needs a recorded chain across layers: sparse by design, and only where one exists.
+    expectedTempo: 'reactive',
+    invariants: Object.freeze([
+      Object.freeze({
+        name: 'dark_is_byte_identical',
+        description: 'With the key absent, false, or any truthy non-true value, the Herald feed over a world whose receipts braid the moment the key is lit is exactly the feed the composer built before the braid existed: the same items, the same order, the same bytes.',
+        check: 'Expressible from state and asserted that way in tests/domain/cascadeBraidCw1.test.js fence one (a pinned digest of the dark feed, computed with the pre-braid composer planted), under every shipped preset, with the lit-mutant control on the same fixture.',
+      }),
+      Object.freeze({
+        name: 'damped_never_dropped',
+        description: 'Lit, the feed is the dark feed item for item plus the story items: every member keeps its id, its desk and its place, damped to the routine class, and a major member keeps its severity and its class.',
+        check: 'Asserted by an item count and a per-desk id order in tests/domain/cascadeBraidCw1.test.js (the cascade pin and the major member pin).',
+      }),
+      Object.freeze({
+        name: 'the_braid_writes_nothing',
+        description: 'The braid reads the campaign and the provenance ledger and writes only into the fresh section map of the composer: no record, ledger or save key changes, and a second composition returns the same bytes.',
+        check: 'Asserted by a serialized comparison of the campaign before and after, and by a second composition, in tests/domain/cascadeBraidCw1.test.js.',
+      }),
+    ]),
+    // No channel at all, so the row can never be ALIVE and says so honestly.
+    soakEvidence: 'unobserved',
+  }),
 ]);
 
 /**

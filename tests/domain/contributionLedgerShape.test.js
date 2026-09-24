@@ -134,8 +134,10 @@ describe('WC-0E · the war-circulation flags, the contribution ledger shape, and
     // before this line was moved.
     // 40 → 41 at the FP integration pick (the chair, 2026-09-24): IN-3 minted counterIntelEnabled, the fifth tonight (SR-1, the union).
     // 41 → 42 at the FP integration pick (the chair, 2026-09-24): IN-4/2 minted reputationRaceEnabled, the sixth tonight (SR-1, the union).
-    expect(ENGINE_GATED_VIRTUAL_RULE_KEYS).toHaveLength(42);
-    expect(VIRTUAL_SUBSYSTEM_ROWS).toHaveLength(42);
+    // 42 → 43 at FP CW-1 (lane fp/cw-1, 2026-09-24; SR-1): `cascadeGovernorEnabled`, its row at the
+    // tail of VIRTUAL_SUBSYSTEM_ROWS after IN-4's. Both literals were read off the live modules.
+    expect(ENGINE_GATED_VIRTUAL_RULE_KEYS).toHaveLength(43);
+    expect(VIRTUAL_SUBSYSTEM_ROWS).toHaveLength(43);
     // 36 → 37 at FP GR-6 (lane FP-B2, 2026-09-24): `mediationGeneralizedEnabled`, its row at the
     // tail of VIRTUAL_SUBSYSTEM_ROWS. Both literals were read off the live modules (37 and 37)
     // before this line was moved.

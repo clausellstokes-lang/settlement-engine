@@ -993,6 +993,10 @@ describe('engine-gated rule keys (the census-invisible subsystem class)', () => 
       // footing — the four fences, the pulse hash arm and the lit-mutant control live in the
       // wave's own acceptance file.
       believedMarketsEnabled: 'tests/domain/believedMarketsTr3.test.js',
+      // FP CW-1 (lane fp/cw-1, 2026-09-24): the register's display-side member minted by the cascade
+      // governor. Its brief places the four fences and the lit-mutant control in the wave's own
+      // acceptance file, beside the braid they fence.
+      cascadeGovernorEnabled: 'tests/domain/cascadeBraidCw1.test.js',
       // FP GR-6 (lane FP-B2, 2026-09-24): the register's THIRTY-SEVENTH member, on TR-2's reading:
       // its brief places the four fences and the lit-mutant control in the wave's own
       // acceptance file.

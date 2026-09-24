@@ -304,6 +304,19 @@
       "band": null,
       "note": ""
     },
+    "src/domain/display/cascadeBraid.js#CASCADE_BRAID_TUNING": {
+      "role": null,
+      "status": "draft",
+      "signedAt": null,
+      "unit": {
+        "DAMPED_SEVERITY": "fraction01",
+        "LAYER_FLOOR": "count",
+        "MEMBER_FLOOR": "count",
+        "WINDOW_WEEKS": "weeks"
+      },
+      "band": null,
+      "note": "FP CW-1 (lane fp/cw-1): the cascade governor's bands, DRAFT, registered in the minting commit because a new tuning table has no silent door. MEMBER_FLOOR 3: the fewest filed receipts a cascade braids (two consequences are a pair, not a cascade). WINDOW_WEEKS 13: the closed window opened at the ancestor's tick, INTERVAL_WEEKS.one_season (held equal in tests/domain/cascadeBraidCw1.test.js). LAYER_FLOOR 3: the charter's depth threshold, the links cross at least three coupling-registry layers (docs/DESIGN_FP_ARCHITECTURE.md §5 block #58). DAMPED_SEVERITY 0.35: the most severity a damped member keeps, inside heraldFilter's routine band (below 0.4, held there by the acceptance). None is measured on a soak: the floors and the depth are the charter's, the window its INTERVAL_WEEKS denomination, the damped value read off the routine band; the owner signs them at the lit soak with the charter's member cap and braid-class bands."
+    },
     "src/domain/dossier/hookRetention.js#DEFAULT_RETENTION_TUNING": {
       "role": null,
       "status": "draft",
