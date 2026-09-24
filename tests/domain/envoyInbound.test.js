@@ -356,7 +356,7 @@ describe('FP SP-D2 — the inbound read, the envoyArrived condition and the rece
     const { payload } = envoyReceptionRow;
     expect(Object.keys(payload).sort(), 'three fields').toEqual(['decision', 'errandId', 'reason']);
     expect(payload.decision.values, 'the decision is the vocabulary BY REFERENCE').toBe(ENVOY_RECEPTION_DECISIONS);
-    expect(payload.reason.values, 'and the reason is the parlay\'s own list BY REFERENCE').toBe(ENVOY_PARLAY_REFUSAL_REASONS);
+    expect(payload.reason.values, 'and the reason, too, is the parlay\'s own list BY REFERENCE').toBe(ENVOY_PARLAY_REFUSAL_REASONS);
     expect([payload.decision.required, payload.errandId.required, payload.reason.required, payload.errandId.kind],
       'decision and errand required, reason optional, the errand a reference').toEqual([true, true, false, 'ref']);
     const frozen = [envoyReceptionRow, payload, payload.decision, payload.errandId, payload.reason,
