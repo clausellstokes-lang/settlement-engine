@@ -610,6 +610,15 @@ export function lureCommission({ worldState, snapshot, liarId, subjectId, axis, 
 }
 
 // ── THE SPRING AND THE COLLISION (lit only; the head asks the gate first) ─────
+/**
+ * THE SPRING'S HERALD WEIGHT, a named dial (the tuning register's DRAFT row; nothing signed). A
+ * zero-to-one severity the feed turns into its own integer score, read off the public
+ * `belief_misjudgment` beat's own weight — the same march, read from the street — so one desk
+ * ranks one event one way. The beat is covert: it reaches only the DM's feed, and moves no
+ * player meter.
+ */
+export const LURE_NEWS_TUNING = Object.freeze({ sprungSeverity: 0.5 });
+
 /** A weakness bait: a strength lie that tells the mark its subject is WEAKER than it is.
  *  @param {Row} rec @returns {boolean} */
 function isWeaknessBait(rec) {
@@ -675,7 +684,7 @@ export function lureSprungEntries({ worldState, disinfo, tick, nameFor }) {
       // The public twin's own material weight (`belief_misjudgment`, the same march read from the
       // street): a covert beat reaches only the DM's feed (`projectWizardNewsForAudience` omits
       // it for every other reader), so the weight moves no player meter.
-      severity: 0.5,
+      severity: LURE_NEWS_TUNING.sprungSeverity,
       score: 60,
       tick: now,
       scope: 'regional',

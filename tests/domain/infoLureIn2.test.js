@@ -74,6 +74,9 @@ const { PHANTOM_KIND } = await import('../../src/domain/edit/phantoms.js');
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), '../..');
 const FLAG = 'infoLureEnabled';
+/** The lit drive, spelled LITERALLY: the E-H lit-coverage walker credits a flag only through a
+ *  literal `<flag>: true` in a test (tests/property/mechanismLitCoverage.test.js, credit (a)). */
+const LIT = Object.freeze({ infoLureEnabled: true });
 
 // ⟦FIXTURE⟧ — read verbatim by the digest script that computed PRE_IN2_DARK_DIGEST against the base head.
 const TICK = 10;
@@ -175,7 +178,8 @@ describe('IN-2 — the four dormancy fences and the lit-mutant control', () => {
   });
 
   test('THE LIT-MUTANT CONTROL — the same fixture lit springs the lure, names both bluffs and names the bought plant\'s subject', () => {
-    const lit = processLies(fixture({ [FLAG]: true }));
+    expect(Object.keys(LIT)).toEqual([FLAG]);
+    const lit = processLies(fixture(LIT));
     expect(digest(bytesOf(lit))).not.toBe(PRE_IN2_DARK_DIGEST);
     const sprung = lit.newsEntries.filter((entry) => entry.kind === 'lure_sprung');
     expect(sprung).toHaveLength(1);
