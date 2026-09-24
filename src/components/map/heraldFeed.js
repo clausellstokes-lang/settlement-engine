@@ -8,7 +8,9 @@
 // recorded shape and files it; it never mints, tunes, or reorders the engine's data.
 //
 // TWO TIME LENSES (history is a lens, not a door):
-//   - 'advance'  — THIS advance: the LATEST pulse's outcomes + impact digest.
+//   - 'advance'  — THIS advance: every beat recorded inside the SPAN of the advance
+//                  just taken (a week, a month, a year: the span the DM chose), per
+//                  advanceLensFloorTick below (FP-21), never only its final week.
 //   - 'campaign' — the WHOLE campaign: every recorded pulse's outcomes + digest,
 //                  filed the same way. The live stressors + forecast are lens-
 //                  independent (they are the realm's present state, not history).
@@ -149,6 +151,49 @@ function emptyBySection() {
 }
 
 /**
+ * FP-21 (the chair's ruling of 2026-09-24, on FP EXPERIENCE READ 1 §3 S1 and READ 2 §6:
+ * under monthly advances this lens filed 134 of the 661 receipts minted, every one from
+ * the month's final week). THE ADVANCE LENS FOLLOWS THE ADVANCE'S SPAN. This returns the
+ * EXCLUSIVE floor of the advance just taken: the lens files a recorded beat exactly when
+ * its tick is above it.
+ *
+ * WHY THE PREVIOUS RECORD MARKS THE START. The interval orchestrator collapses every
+ * advance to ONE pulse record at its final tick (advanceInterval.js
+ * `collapseIntervalHistory`, the Stage 5 ring policy), so the record before the latest is
+ * the previous advance's end: the clock this advance began from. Read at display time
+ * from the durable history; nothing is written, and the engine never reads it.
+ *
+ *   no record         → null: nothing has advanced, the whole feed is current (unchanged).
+ *   a paused interval → `pausedAdvance.atTick − ticksDone`: its interior records have not
+ *                       collapsed yet, and the Stage 3 cursor counts the weeks this
+ *                       interval has run (a resumed segment counts from its start).
+ *   two or more       → the previous record's tick (a completed advance of any grain).
+ *   one record        → 0: the campaign's first advance ran from the birth clock
+ *                       (ensureWorldState floors the tick at 0).
+ * CLAMPED to the latest tick minus one, so the window is never narrower than the final
+ * week the lens kept before this ruling, and a one-week advance reads byte-identically.
+ *
+ * @param {{ pulseHistory?: unknown, pausedAdvance?: { atTick?: unknown, ticksDone?: unknown } | null } | null | undefined} worldState
+ * @returns {number|null}
+ */
+export function advanceLensFloorTick(worldState) {
+  const history = Array.isArray(worldState?.pulseHistory) ? worldState.pulseHistory : [];
+  if (!history.length) return null;
+  const latestTick = num(history[history.length - 1]?.tick);
+  const paused = worldState?.pausedAdvance;
+  const atTick = paused ? paused.atTick : undefined;
+  const ticksDone = paused ? paused.ticksDone : undefined;
+  const pausedFloor = typeof atTick === 'number' && Number.isFinite(atTick)
+    && typeof ticksDone === 'number' && Number.isFinite(ticksDone) && ticksDone >= 1
+    ? atTick - ticksDone
+    : null;
+  const floor = pausedFloor != null
+    ? pausedFloor
+    : (history.length >= 2 ? num(history[history.length - 2]?.tick) : 0);
+  return Math.min(floor, latestTick - 1);
+}
+
+/**
  * Build the section-filed feed for a campaign under a time lens.
  * @param {any} campaign
  * @param {{ lens?: 'advance'|'campaign' }} [opts]
@@ -166,10 +211,15 @@ export function buildHeraldFeed(campaign, opts = {}) {
     (bySection[item.section] || bySection.events).push(item);
   };
 
-  // The recorded pulses: the whole campaign under the campaign lens, only the
-  // latest under the advance lens.
+  // The recorded pulses: the whole campaign under the campaign lens; under the
+  // advance lens every record above the advance's floor (FP-21). A completed advance
+  // of any grain has ONE record above it (the interval collapse); a paused interval
+  // has one for each week it has run.
   const history = Array.isArray(worldState.pulseHistory) ? worldState.pulseHistory : [];
-  const pulses = lens === 'campaign' ? history : history.slice(-1);
+  const floorTick = lens === 'advance' ? advanceLensFloorTick(worldState) : null;
+  const pulses = lens === 'campaign'
+    ? history
+    : history.filter((pulse) => floorTick == null || num(pulse?.tick) > floorTick);
   for (const pulse of pulses) {
     for (const outcome of (pulse?.selectedOutcomes || [])) file(toHeraldItem(outcome));
     for (const entry of (pulse?.impactDigest || [])) file(toHeraldItem(entry));
@@ -189,13 +239,14 @@ export function buildHeraldFeed(campaign, opts = {}) {
   // never showed them even after their receipts gained ids. Read-only on data the
   // campaign already carries; the `seen` set dedupes the digest twins by id, so an
   // entry recorded in both sources files once. Lens: a pulse's movers are handed
-  // worldState.tick — the same value the pulse record stores — so `tick >=
-  // latestPulse.tick` IS "this advance's beats"; with no recorded pulse the whole
-  // feed is current.
-  const latestPulseTick = pulses.length ? num(pulses[pulses.length - 1]?.tick) : null;
+  // worldState.tick, the same value the pulse record stores, so a beat belongs to
+  // this advance exactly when its tick is ABOVE the advance's floor. The retired rule,
+  // `tick >= latestPulse.tick`, was that only for a one-week advance: on a composed
+  // month or year it kept the final week alone (R-57 recorded it; FP-21 retired it on
+  // the reads' evidence). With no recorded pulse the whole feed is current.
   for (const entry of (campaign?.wizardNews?.entries || [])) {
     if (!entry || entry.id == null) continue;
-    if (lens === 'advance' && latestPulseTick != null && num(entry.tick) < latestPulseTick) continue;
+    if (floorTick != null && num(entry.tick) <= floorTick) continue;
     file(toHeraldItem(entry));
   }
 
