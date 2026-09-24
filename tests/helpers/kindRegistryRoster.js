@@ -33,6 +33,7 @@ import {
 } from '../../src/domain/worldPulse/eventProse.js';
 import { CHANCE_MEETING_KIND_REGISTRY } from '../../src/domain/worldPulse/envoyChanceMeetingNews.js';
 import { COMMERCIAL_KIND_REGISTRY } from '../../src/domain/worldPulse/commercialReasonsNews.js';
+import { MARKET_KIND_REGISTRY } from '../../src/domain/worldPulse/marketNews.js';
 import { GRAMMAR_KIND_REGISTRY } from '../../src/domain/worldPulse/grammarNews.js';
 import { FAITH_KIND_REGISTRY } from '../../src/domain/worldPulse/faithNews.js';
 import { INFORMATION_KIND_REGISTRY } from '../../src/domain/worldPulse/informationNews.js';
@@ -50,6 +51,12 @@ export const KIND_REGISTRIES = Object.freeze([
   ['WAR_COALITION', WAR_COALITION_KIND_REGISTRY],
   ['ENVOY', ENVOY_KIND_REGISTRY],
   ['COMMERCIAL', COMMERCIAL_KIND_REGISTRY],
+  // TR-3: the THIRTEENTH registry family, and the estate's FOURTH deliberately one-row one,
+  // declared beside its TRADE sibling rather than appended (SR-7). Its single kind is the T-1
+  // tellable, the wrong-market arrival, which CARRIES a desk (an EXACT_SECTION row at trade),
+  // so like FAITH's obituary it moves ROUTED_TOKENS and REGISTERED_KIND_COUNT together and
+  // leaves the registered-minus-routed difference where it was.
+  ['MARKET', MARKET_KIND_REGISTRY],
   ['GRAMMAR', GRAMMAR_KIND_REGISTRY],
   ['SOVEREIGNTY', SOVEREIGNTY_KIND_REGISTRY],
   // IN-1c-a: the fifth FP registry family, and the estate's first ONE-ROW registry. Its single
@@ -114,20 +121,24 @@ export const KIND_REGISTRIES = Object.freeze([
  *   registeredMinusRouted: number }>}
  */
 export const KIND_REGISTRATION_FREEZES = Object.freeze({
-  /** Registry families in KIND_REGISTRIES above. ENC-4 took this 11 → 12 (CHANCE_MEETING). */
-  registries: 12,
+  /** Registry families in KIND_REGISTRIES above. ENC-4 took this 11 → 12 (CHANCE_MEETING); TR-3 12 → 13 (MARKET). */
+  registries: 13,
   /**
    * The families under five rows, in registry declaration order. ⛔ A family joining this
    * list is a REVIEWED ACT, never a number that slipped, and each entry carries a recorded
    * shrink-back obligation on the member that takes its family to five rows or more.
    */
-  smallFamilies: Object.freeze(['INFORMATION', 'FAITH', 'CHANCE_MEETING']),
+  // ⭐ TR-3 ADMITS MARKET, a one-row family, as the reviewed act this list exists to force: the
+  // TRADE annex authors eight TR-3 kinds and this wave registers the one whose producer exists
+  // (the WHERE composer's wrong-market evidence). ⛔ THE SHRINK-BACK IS A RECORDED OBLIGATION of
+  // the TR-3 member that takes MARKET to five rows or more: strike it from this list in that commit.
+  smallFamilies: Object.freeze(['MARKET', 'INFORMATION', 'FAITH', 'CHANCE_MEETING']),
   /** Every registry row in the estate. ENC-4 took this 113 → 114, and ENC-4b (§900) 114 → 115
    * with `chance_meeting_exposed`, the seventh family's second desk-bearing exact row. */
-  registeredKinds: 117, // +2 at GR-2b: GR-2b registers pact_proposed and realm_verb_propose_pact, two desk-bearing GRAMMAR rows
+  registeredKinds: 118, // +2 at GR-2b (pact_proposed and realm_verb_propose_pact, two desk-bearing GRAMMAR rows) and +1 at FP TR-3 (`market_wrong_market_arrival`, the MARKET family's first row) — the UNION at the FP integration pick, 2026-09-24 (the chair; SR-1: measured by the roster's own readers at the tip)
   /** `Object.keys(EXACT_SECTION).length`. ENC-4 took this 379 → 380, WITH registeredKinds, and
    * ENC-4b (§900) 380 → 381 with `chance_meeting_exposed`. */
-  routedTokens: 383, // +2 at GR-2b: GR-2b registers pact_proposed and realm_verb_propose_pact, each on its own EXACT_SECTION row
+  routedTokens: 384, // +2 at GR-2b (each on its own EXACT_SECTION row) and +1 at FP TR-3 (`market_wrong_market_arrival`'s desk-bearing EXACT_SECTION row at trade) — the UNION at the FP integration pick, 2026-09-24
   /**
    * Herald-routed tokens with no phrased pool at all. ⛔ SHRINK-ONLY: the content annexes'
    * wiring waves lower it; nothing may raise it. Unmoved since the freeze: GR-2b's two new

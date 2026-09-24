@@ -46,6 +46,7 @@ import {
   WR7_TWO_PICTURE_PARLAY_COUPLING,
   TR1_CASUS_COMMERCII_COUPLINGS,
   TR1_SEVERANCE_PRESSURE_COUPLING,
+  TR3_BELIEVED_MARKETS_COUPLINGS,
   GR2_BELIEVED_DEMAND_COUPLING,
   GR2_PACT_FORMATION_COUPLINGS,
   GR2_SHARED_THREAT_COUPLING,
@@ -149,6 +150,10 @@ describe('CW-0 coupling registry', () => {
       ...WR6B_WAR_TREASURY_COUPLINGS,
       ...WR7_ENVOY_COUPLINGS,
       ...TR1_CASUS_COMMERCII_COUPLINGS,
+      // FP TR-3 (2026-09-24): the TRADE leaf's second set, composed beside its first (SR-7) —
+      // one row, the WHERE composer's INFO→TRADE read of believed dearness (SR-1: an ordered
+      // registry pin the wave grows by its own law, re-recorded with the cause).
+      ...TR3_BELIEVED_MARKETS_COUPLINGS,
       // FP GR-2 (2026-08-06): the THIRD volume leaf, appended in wave order like the
       // second. Three rows, one per direction peacetime formation reads across.
       ...GR2_PACT_FORMATION_COUPLINGS,

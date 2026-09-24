@@ -37,7 +37,7 @@ import {
 } from './couplingRegistryWar.js';
 // The first non-WAR leaf (FP wave TR-1). One sibling per volume, as CW-0w slice 1 built
 // this family to accept.
-import { TR1_CASUS_COMMERCII_COUPLINGS } from './couplingRegistryTrade.js';
+import { TR1_CASUS_COMMERCII_COUPLINGS, TR3_BELIEVED_MARKETS_COUPLINGS } from './couplingRegistryTrade.js';
 import { GR2_PACT_FORMATION_COUPLINGS, GR3_TERM_FAMILY_COUPLINGS, GR4_BREACH_CREDIBILITY_COUPLINGS } from './couplingRegistryGrammar.js';
 import { IN_INFORMATION_COUPLINGS } from './couplingRegistryInfo.js';
 // The ESPIONAGE leaf (FP wave ES-1). ES is a wave family OF the INFORMATION program in
@@ -59,6 +59,8 @@ export {
 export {
   TR1_SEVERANCE_PRESSURE_COUPLING,
   TR1_CASUS_COMMERCII_COUPLINGS,
+  TR3_BELIEVED_DEARNESS_COUPLING,
+  TR3_BELIEVED_MARKETS_COUPLINGS,
 } from './couplingRegistryTrade.js';
 
 export {
@@ -157,6 +159,9 @@ export const COUPLING_REGISTRY = Object.freeze([
   ...WR6B_WAR_TREASURY_COUPLINGS,
   ...WR7_ENVOY_COUPLINGS,
   ...TR1_CASUS_COMMERCII_COUPLINGS,
+  // FP TR-3 (2026-09-24): the TRADE leaf's second set, beside its first rather than appended
+  // (SR-7): the WHERE composer's read of believed dearness, licensing its one INFO→TRADE pair.
+  ...TR3_BELIEVED_MARKETS_COUPLINGS,
   ...GR2_PACT_FORMATION_COUPLINGS,
   ...GR3_TERM_FAMILY_COUPLINGS,
   // FP GR-4c (2026-08-12): the GRAMMAR leaf's THIRD set, appended in wave order beside

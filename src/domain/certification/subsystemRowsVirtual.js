@@ -621,6 +621,45 @@ export const VIRTUAL_SUBSYSTEM_ROWS = Object.freeze([
     // No channel at all, so the row can never be ALIVE and says so honestly.
     soakEvidence: 'unobserved',
   }),
+  // ── TR-3 · BELIEVED MARKETS (FP TR-3, docs/DESIGN_FP_TRADE.md §TR-3; block #25) ────────────
+  // APPENDED AT THE TAIL, after TR-2's row, by the add-a-row protocol above: TR still has no
+  // family leaf, and a row inserted before TR-2's would shift that row's index and move
+  // certification output (the ODQ §864 ordinal class). The flag MANIFEST takes its codepoint
+  // position (SR-7); this ordered array keeps the protocol's append.
+  Object.freeze({
+    rule: 'believedMarketsEnabled',
+    title: 'Believed markets (the WHERE composer, the wrong-market tellable)',
+    module: 'src/domain/spatial/dispatchDestination.js,src/domain/worldPulse/beliefScarcity.js,src/domain/worldPulse/marketNews.js',
+    aliveness: Object.freeze({
+      // DELIBERATELY EMPTY: the layer mints no pulse candidate; the wrong-market arrival is
+      // RETURNED evidence the orchestrator hands back, voiced by a Herald kind no mount feeds yet.
+      eventTypes: Object.freeze([]),
+      // DELIBERATELY EMPTY: no behavioural family can carry a queue order without grading this
+      // row alive off the trade layer's ordinary traffic in worlds where it never ran.
+      moverFamilies: Object.freeze([]),
+      // DELIBERATELY EMPTY: the wave persists NOTHING (the TR volume: receipts only). The belief
+      // pictures it reads are SP-B's and the stocks and shipments it orders are M6a's.
+      stateKeys: Object.freeze([]),
+      other: 'A QUEUE ORDER AND A RETURNED RECEIPT, WHICH IS WHY EVERY CHANNEL IS EMPTY AND WHY THAT IS THE CORRECT READING. ONE GATE, by name and strict: believedMarketsActive (dispatchDestination.js) is the only read of the key in src/, made once per tick by the commodity-flow orchestrator. WHAT IT DOES: when an origin\'s finite stock cannot fill every market that wants it, the destination loop stops walking its links in codepoint order and walks them in the order the WHERE composer returns, through dispatchEV.js\'s destination-consumer seam: the markets the supplying court BELIEVES dearest in the good\'s class first (SP-B\'s own believed plenty, read by the sibling leaf beliefScarcity.js), a tie between two believed markets going to the deeper TRUE need, and the loop\'s key last. The seam admits a permutation of the loop\'s own keys and nothing else, so no caravan is created, lost or duplicated. A caravan that lands and leaves its market in the truth-side surplus band while its origin still believes that market dear is returned as the wrong-market arrival, naming both bands side by side (the T-1 tellable). WHAT IT NEVER DOES: it never merges the two scarcities into one number (Seam Three: the order is lexicographic, and the acceptance file\'s token scan convicts any mixing expression), never touches the three need-premium reads the EV, the spill and the trickle make, never writes a belief, and draws no random number. THE OBSERVATION NEEDED to close the gap is a WIRING WAVE: mount the wrong-market voice on the pulse\'s news and a receipt can count the arrivals; until then the lane is pinned in tests/domain/believedMarketsTr3.test.js, which carries its four dormancy fences, the pulse hash arm and the lit-mutant control.',
+    }),
+    // A queue order moves only when an origin is short of stock, and a wrong-market arrival only
+    // when a believed market has turned, so the layer's output is sparse and driven by its world.
+    expectedTempo: 'reactive',
+    invariants: Object.freeze([
+      Object.freeze({
+        name: 'dark_is_byte_identical',
+        description: 'With the key absent, false, or any truthy non-true value, the orchestrator\'s whole output and six real pulse records are the pre-wave output and records byte for byte, over fixtures that send the caravan to the other market and tell a wrong-market arrival the moment the key is lit.',
+        check: 'Expressible from state and asserted that way in tests/domain/believedMarketsTr3.test.js fences 1 and 2 and the hash arm, against sha256 figures measured at the lane\'s base, with the lit-mutant control on the same fixtures.',
+      }),
+      Object.freeze({
+        name: 'the_two_scarcities_never_merge',
+        description: 'The believed band and the truth-side need are read in one module only, the whitelisted dispatch composer, and no expression there combines them arithmetically: belief decides the order, truth only breaks a belief tie.',
+        check: 'NOT expressible from a receipt. Pinned in tests/domain/believedMarketsTr3.test.js by a token scan with a seeded deliberate-average control and a co-import census with a planted third co-importer.',
+      }),
+    ]),
+    // No channel at all, so the row can never be ALIVE and says so honestly.
+    soakEvidence: 'unobserved',
+  }),
 ]);
 
 /**

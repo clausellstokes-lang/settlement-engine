@@ -366,3 +366,31 @@ export function dispatchDecision({ short, needPremium: needPrem, appetite, belie
     override: overridden ? override : null,
   };
 }
+
+// ── THE DESTINATION-CONSUMER SEAM (FP TR-3, believed markets) ─────────────────────
+/**
+ * The order the dispatch loop visits its destination links in. This is the ORIGIN side's
+ * second question beside `dispatchDecision`'s WHETHER: not "does this caravan go" but "which
+ * market does the finite stock meet first". With no composer (believed markets dark, or any
+ * caller that never heard of them) the answer is the codepoint walk the M6a loop has always
+ * made, byte-identical. With one (spatial/dispatchDestination.js's WHERE composer, handed in
+ * by the loop behind its one gate read) the composer's order is taken verbatim, PROVIDED it
+ * is a permutation of the loop's own keys: an order that drops, repeats or invents a key is
+ * refused whole and the codepoint walk stands, so a WHERE can reorder the queue but never
+ * create, lose or duplicate a caravan. The composer is handed a copy. The seam reads no
+ * belief and no stock: it hands the loop one of two orders and computes neither.
+ * @param {Iterable<string>} keys  the loop's destination link keys
+ * @param {((sorted: string[]) => unknown) | null} [composer]
+ * @returns {string[]}
+ */
+export function dispatchDestinationOrder(keys, composer = null) {
+  const sorted = [...keys].sort();
+  if (typeof composer !== 'function') return sorted;
+  const composed = composer([...sorted]);
+  if (!Array.isArray(composed) || composed.length !== sorted.length) return sorted;
+  const owed = new Set(sorted);
+  for (const key of composed) {
+    if (typeof key !== 'string' || !owed.delete(key)) return sorted;
+  }
+  return /** @type {string[]} */ ([...composed]);
+}

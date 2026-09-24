@@ -264,6 +264,10 @@ export const WHAT_PHRASES = Object.freeze({
   commercial_casus_suppressed: 'a commercial grievance struck out by the stock book',
   commercial_severance_crossing: 'a trading tie cut',
   commercial_partnership_crossing: 'two towns binding their markets together',
+  // TR-3 BELIEVED MARKETS — the T-1 tellable, the wrong-market arrival (marketNews.js). A noun
+  // phrase like its TR-1 neighbours, so it reads both capitalized-first and after 'word of …';
+  // it names the glut the caravans found and never the band either side believed.
+  market_wrong_market_arrival: 'caravans unloading into a market that no longer wanted them',
   // GR-0 THE LIFECYCLE VOICE — the two moments the pact grammar used to pass over in
   // silence. Phrased world-side while the virtual flag is dark, for the same reason the
   // WR-10 cohort above is: a privileged projection or a later replay must never fall

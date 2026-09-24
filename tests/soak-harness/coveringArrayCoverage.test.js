@@ -237,17 +237,23 @@ describe('the covering array and its constraint manifest', () => {
     // 35 -> 36 at FP TR-2 (lane FP-D, 2026-09-23): `merchantHousesEnabled`, MEASURED by calling
     // `flagDomainCensus` with this suite's own arguments before the literals moved: virtual 36,
     // union 93, governed 25 and ungoverned 32 unmoved, nonBoolean 13, overlap empty.
-    expect(census.virtual.length).toBe(36);
     // LIT-0 (2026-09-24): this arm closes IDENTICALLY with a register key lit in a preset, because a
     // lit key is enumerated once, by the register, and never again by `ungoverned`; the lit-state
     // proof is the next arm, which drives the census over a lit copy of the live table.
+    // 36 -> 37 at FP TR-3 (lane FP-D2, 2026-09-24): `believedMarketsEnabled`, MEASURED by calling
+    // `flagDomainCensus` with this suite's own arguments before the literals moved: virtual 37,
+    // union 94, governed 25 and ungoverned 32 unmoved, nonBoolean 13, overlap empty; the key is
+    // absent from DEFAULT_SIMULATION_RULES and from every preset spread (SR-1). Re-measured at the
+    // FP integration pick (the chair, 2026-09-24): the figure below is the tip's own census.
+    expect(census.virtual.length).toBe(37);
     expect(census.overlap).toEqual([]);
     // 85 -> 86 at the WAR landing (§876): the same coupled-union key, same re-measure.
     // 86 -> 87 at ENC-3 (§893): the virtual mint above, moving in lockstep.
     // 87 -> 88 at SEAT-78 (§900): the virtual mint above, moving in lockstep.
     // 88 -> 92 at the LIGHTING landing (§901): the four virtual mints above, moving in lockstep.
     // 92 -> 93 at FP TR-2: the virtual mint above, moving in lockstep.
-    expect(census.union.length).toBe(93);
+    // 93 -> 94 at FP TR-3: the virtual mint above, moving in lockstep.
+    expect(census.union.length).toBe(94);
     expect(census.governed.length + census.ungoverned.length + census.virtual.length).toBe(census.union.length);
     // 57 of 82 sit outside the normalizer's fail-closed coercion — the measured content of
     // "the normalizer is NOT the oracle", and the reason the manifest had to be minted. It
@@ -257,7 +263,8 @@ describe('the covering array and its constraint manifest', () => {
     // 62 -> 63 at SEAT-78 (§900): likewise virtual, so it lands outside the normalizer.
     // 63 -> 67 at the LIGHTING landing (§901): four virtual keys, all outside the normalizer.
     // 67 -> 68 at FP TR-2: likewise virtual, so it lands outside the normalizer.
-    expect(census.union.length - census.governed.length).toBe(68);
+    // 68 -> 69 at FP TR-3: likewise virtual, so it lands outside the normalizer.
+    expect(census.union.length - census.governed.length).toBe(69);
     expect(census.nonBoolean.length).toBe(13);
   });
 

@@ -1371,6 +1371,16 @@
       "band": null,
       "note": ""
     },
+    "src/domain/worldPulse/marketNews.js#MARKET_NEWS_TUNING": {
+      "role": null,
+      "status": "draft",
+      "signedAt": null,
+      "unit": {
+        "notableSeverity": "fraction01"
+      },
+      "band": null,
+      "note": "FP TR-3 (lane FP-D2): the wrong-market arrival's Herald weight, the trade desk's notable class. A zero-to-one severity the feed turns into its own integer score, read off TR-1's notable commercial weight so one desk ranks one class one way. DRAFT, registered in the minting commit because a new tuning table has no silent door; the unit is a label read off the source, and nothing here is signed or proposed."
+    },
     "src/domain/worldPulse/martialReadiness.js#MARTIAL_READINESS_TUNING": {
       "role": null,
       "status": "draft",

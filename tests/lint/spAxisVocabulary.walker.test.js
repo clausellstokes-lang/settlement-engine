@@ -90,6 +90,17 @@ const ARGUED_FIELD_SPELLERS = Object.freeze({
     + ' the belief record and hands the WORDS to the pure trigger leaf. It spells the three'
     + ' fields and nothing else — it declares no ladder and renames no rung, which is why it'
     + ' appears here and not in the ladder census above',
+  'src/domain/worldPulse/beliefScarcity.js':
+    'FP TR-3, the believed-markets consumer this header names: the belief-side read of the'
+    + ' scarcity family, the sibling leaf the TR volume chartered so beliefMap.js stays'
+    + ' net-zero. believedScarcityOf reads the one field off the observer\'s own record through'
+    + ' beliefMap\'s selector and hands back ONE rung; it declares no ladder, spells no rung'
+    + ' (every word is read out of SCARCITY_BANDS by position) and writes nothing',
+  'src/domain/certification/couplingRegistryTrade.js':
+    'FP TR-3, the coupling row that licenses the believed-markets read: a row addressed by'
+    + ' FIELD PATH must name the field it reads, or its receipt address says nothing a sampler'
+    + ' can resolve — the same reason the three certification rows above are argued. It'
+    + ' spells the field inside one receiptField string and declares no ladder and no rung',
   'src/domain/worldPulse/envoyErrandVocabulary.js':
     'FP ES-1, and it is the only speller here that WRITES none of them. ⟨F5⟩ closes the'
     + ' covert mission\'s ACQUIRE target list — the appraisal legs a spy may be sent to fill'

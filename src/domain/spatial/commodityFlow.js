@@ -75,7 +75,10 @@
 import { hasSpatialLedger, getSpatialLedger } from './distanceRead.js';
 import { chooseRoute, banditryLoss, embattlementLevel, routeDangerLevel } from './embattlement.js';
 import { supplyActive, routeIntercepted, routeWeeks, pickSource, starvationReceipt } from './supplyShipments.js';
-import { dispatchDecision, appetiteOf, stepAppetite, needPremium, DISPATCH_TUNING } from './dispatchEV.js';
+import {
+  dispatchDecision, appetiteOf, stepAppetite, needPremium, DISPATCH_TUNING, dispatchDestinationOrder,
+} from './dispatchEV.js';
+import { believedMarketsActive, composeDispatchOrder, wrongMarketArrival } from './dispatchDestination.js';
 import {
   worstGate, smuggleSuccessChance, smuggleDetected, smugglePipeline, seizureTake,
   goodsResistance, smuggleDispatchWarrant,
@@ -436,7 +439,10 @@ function shipmentCut(rec, ctx, skipInterception) {
  *   nextAppetite: Record<string, import('./dispatchEV.js').AppetiteRecord>|null,
  *   nextWillingness: Record<string, import('./dispatchEV.js').WillingnessRecord>|null,
  *   emboldenEvents: Array<{ originId: string, destId: string }>,
- *   changed: boolean, outcomes: Record<string, CommodityLinkOutcome>, accounting: GoodsAccounting }}
+ *   changed: boolean, outcomes: Record<string, CommodityLinkOutcome>, accounting: GoodsAccounting,
+ *   wrongMarketArrivals?: Array<import('./dispatchDestination.js').WrongMarketArrival> }}
+ *   `wrongMarketArrivals` (FP TR-3) is present ONLY while believed markets are lit: the T-1
+ *   evidence, returned and never persisted. Dark, the result has exactly its pre-TR-3 keys.
  */
 export function advanceCommodityFlow({
   producers, links, worldState, digest, tick, tickWeeks, season = null, rng = null,
@@ -679,7 +685,18 @@ export function advanceCommodityFlow({
   // link auto-prunes to willing). Codepoint-stable via the sorted key walk below.
   /** @type {Record<string, import('./dispatchEV.js').WillingnessRecord>} */
   const nextWillingness = {};
-  for (const key of [...linkByKey.keys()].sort()) {
+  // FP TR-3 BELIEVED MARKETS — the one read of `believedMarketsEnabled` this orchestrator
+  // makes. Dark, the loop walks the codepoint order it always walked and consults nothing.
+  // Lit, dispatchEV.js's destination-consumer seam takes the WHERE composer's order, which the
+  // composer builds from believed dearness first and the truth-side need only on a belief tie.
+  // The three need-premium reads below are untouched: the WHERE decides the queue, never WHETHER.
+  const marketsBelieved = believedMarketsActive(worldState);
+  /** @type {Array<import('./dispatchDestination.js').WrongMarketArrival>} */
+  const wrongMarketArrivals = [];
+  const destinationOrder = dispatchDestinationOrder(linkByKey.keys(), marketsBelieved
+    ? (sorted) => composeDispatchOrder(sorted.map((key) => destinationCandidate(key, linkByKey, stocks)), worldState)
+    : null);
+  for (const key of destinationOrder) {
     const link = linkByKey.get(key);
     if (!link) continue;
     const sid = String(link.settlementId);
@@ -803,6 +820,16 @@ export function advanceCommodityFlow({
       ...(smuggleArrival ? { smuggleBranch: smuggleArrival.branch, smuggleGateId: smuggleArrival.gateId, ...(smuggleArrival.take ? { seizedTake: smuggleArrival.take } : {}) } : {}),
       ...(smuggleDispatched ? { smuggleDispatched: true } : {}),
     };
+    // FP TR-3, T-1: a caravan that landed this tick and left its market in SURPLUS (the truth
+    // side, decided here where the stock lives) is handed to the composer, the one module that
+    // may read what its origin believed. Lit only; the evidence is returned, never persisted.
+    if (marketsBelieved && arrivedKeys.has(key) && outcomes[key].band === COMMODITY_BANDS.SURPLUS) {
+      const arrival = wrongMarketArrival({
+        originId: String(asObject(priorShipments[key]).sourceId ?? ''), destinationId: sid, good: gid,
+        foundBand: COMMODITY_BANDS.SURPLUS, worldState,
+      });
+      if (arrival) wrongMarketArrivals.push(arrival);
+    }
     // A starving link with no caravan still leaves a ledger latch (M2 parity, for the
     // M2b interdiction read) — a sourceId-less, 0-carry record.
     if (!nextShipments[key] && starving) {
@@ -865,6 +892,7 @@ export function advanceCommodityFlow({
     changed: stocksChanged || shipmentsChanged || appetiteChanged || willingnessChanged,
     outcomes,
     accounting,
+    ...(marketsBelieved ? { wrongMarketArrivals } : {}),
   };
 }
 
@@ -875,6 +903,25 @@ function byProducer(a, b) {
   const ka = `${a.settlementId}:${a.good}`;
   const kb = `${b.settlementId}:${b.good}`;
   return ka < kb ? -1 : ka > kb ? 1 : 0;
+}
+
+/**
+ * FP TR-3: one destination link as the WHERE composer reads it, the TRUTH side's half: the
+ * market, the good, the court whose picture decides (the link's first-ranked supplier), and the
+ * market's stock and target at the loop's start.
+ * @param {string} key @param {Map<string, CommodityLink>} linkByKey
+ * @param {Record<string, Record<string, number>>} stocks
+ * @returns {import('./dispatchDestination.js').DestinationCandidate}
+ */
+function destinationCandidate(key, linkByKey, stocks) {
+  const link = linkByKey.get(key);
+  const sid = String(link?.settlementId ?? '');
+  const gid = String(link?.input ?? '');
+  const first = link && Array.isArray(link.rankedSources) ? link.rankedSources[0] : null;
+  return {
+    key, destinationId: sid, good: gid, observerId: first ? String(first.sourceId) : '',
+    stock: stockOf(stocks, sid, gid, 0), target: intNonNeg(link?.target, COMMODITY_TUNING.STOCKPILE_TARGET),
+  };
 }
 
 /** The ≥2-source co-built brake, inherited from M2 (a fragile CRITICAL link is

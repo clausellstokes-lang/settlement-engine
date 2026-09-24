@@ -238,6 +238,11 @@ const ENVOY_TASK_CATALOG = 'envoyTaskCatalogEnabled';
 // by-name gate read (`houseLedger.merchantHousesActive`) in a single commit — the
 // §49-ruling-3 cost above, paid in these three module-scope edits with ZERO new test titles.
 const MERCHANT_HOUSES = 'merchantHousesEnabled';
+// FP TR-3 (lane FP-D2). Believed markets, minted with its manifest entry at its codepoint
+// position, its certification row APPENDED at the tail after TR-2's (the add-a-row protocol) and
+// its ONE by-name gate read (`dispatchDestination.believedMarketsActive`) in a single commit —
+// the same three module-scope edits, ZERO new test titles.
+const BELIEVED_MARKETS = 'believedMarketsEnabled';
 // AUTHORING ORDER, not alphabetical: the assertion below is an exact ordered equality
 // against VIRTUAL_SUBSYSTEM_ROWS, so this list mirrors the file's own section order.
 //
@@ -270,6 +275,7 @@ const VIRTUAL_RULES = Object.freeze([
   INFILTRATION_DEPTH, MISSION_DISPATCHER, OPERATIONS_VOICE, ENVOY_TASK_CATALOG,
   CHANCE_ENCOUNTERS,
   MERCHANT_HOUSES,
+  BELIEVED_MARKETS,
 ]);
 
 const rowFor = (rule) => SUBSYSTEM_CERTIFICATION_REGISTRY.find((row) => row.rule === rule);
@@ -450,6 +456,16 @@ const LANE_LEAVES = Object.freeze({
   // through them would measure the whole pulse's vocabulary rather than this lane's.
   // TR-2. The writer (the gate, the latches, the normalizer) and the chooser leaf.
   [MERCHANT_HOUSES]: ['src/domain/worldPulse/houseLedger.js', 'src/domain/worldPulse/houseActs.js'],
+  // TR-3. The gate and the composer, the belief-side read, and the Herald voice with its corpus.
+  // commodityFlow.js, the host that consults them, is deliberately NOT here: it is the M6a
+  // orchestrator every trade row shares, so tracing this member's zero-candidate claim through
+  // it would measure the whole commodity layer rather than this lane.
+  [BELIEVED_MARKETS]: [
+    'src/domain/spatial/dispatchDestination.js',
+    'src/domain/worldPulse/beliefScarcity.js',
+    'src/domain/worldPulse/marketNews.js',
+    'src/domain/worldPulse/marketReceiptPools.js',
+  ],
   [CHANCE_ENCOUNTERS]: [
     'src/domain/worldPulse/envoyChanceMeeting.js',
     'src/domain/worldPulse/envoyChanceMeetingLedger.js',

@@ -241,6 +241,12 @@ export const EXACT_SECTION = Object.freeze(/** @type {Record<string, HeraldSecti
   commercial_route_predation: 'trade', commercial_route_wardenship: 'trade',
   commercial_casus_suppressed: 'trade',
   commercial_severance_crossing: 'trade', commercial_partnership_crossing: 'trade',
+  // TR-3 BELIEVED MARKETS — the T-1 tellable. The annex files it at the MARKET desk, which is
+  // the trade desk: a caravan unloading into a market that did not want it is a goods-and-price
+  // beat by its own nature (law 3). An EXACT row rather than a `market_` family prefix, the
+  // refusal of the cheap door ENC-4 and WF-8a recorded, so the registered kind is routed by its
+  // own token and the registered-minus-routed honesty check does not move.
+  market_wrong_market_arrival: 'trade',
   // GR-0 THE LIFECYCLE VOICE — the treaty cohort's own desk. A pact reaching the end of
   // its term and a court entering a shortfall in its ledger change the same things a
   // signing changes (terms, tribute, trade normalization), so they file beside

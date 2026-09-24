@@ -176,7 +176,9 @@ const LEGACY_UNVOICED_TOKENS = 274;
 // here. So the literal lives in the roster and nowhere else. (+1 at ENC-4b: `chance_meeting_exposed`,
 // the refusal that travelled — moved IN THE ROSTER, with its attribution, at the §900 composition.)
 // (+2 at GR-2b, in the roster too: GR-2b registers pact_proposed and realm_verb_propose_pact, each
-// routed on its own EXACT_SECTION row, so 381 → 383.)
+// routed on its own EXACT_SECTION row, so 381 → 383; +1 at FP TR-3: `market_wrong_market_arrival`,
+// the MARKET family's desk-bearing exact row, 383 → 384 — moved IN THE ROSTER beside
+// REGISTERED_KIND_COUNT below. The union at the FP integration pick, 2026-09-24.)
 const ROUTED_TOKENS = KIND_REGISTRATION_FREEZES.routedTokens;
 // +1 at IN-0C: the eighth GR-0 lifecycle pool (`treaty_disclosure_opened`).
 // +1 at GR-4b: the ninth (`disavowed_by_succession`), the registry's first `major` row.
@@ -211,7 +213,11 @@ const ROUTED_TOKENS = KIND_REGISTRATION_FREEZES.routedTokens;
 // thirteenth and fourteenth rows and the DM verb PROPOSE_PACT's two news kinds (SR-8). Both carry
 // the treaty cohort's desk, so ROUTED_TOKENS moves with them (381 → 383, in the roster) and the
 // divergence below stays at 8; the unvoiced ceiling holds at 274 because they are REGISTERED.
-const REGISTERED_KIND_COUNT = 117;
+// +1 at FP TR-3 (lane FP-D2): `market_wrong_market_arrival`, the whole of the estate's THIRTEENTH
+// registry family (MARKET) and its first row. It carries a desk (an EXACT_SECTION row at trade),
+// so ROUTED_TOKENS moves with it and the divergence below stays at 8 (SR-1, SR-8).
+// The UNION at the FP integration pick (the chair, 2026-09-24): 115 + 2 + 1.
+const REGISTERED_KIND_COUNT = 118;
 
 const violations = floorViolations(ALL_ROWS, { declaredExceptions: DECLARED_EXCEPTIONS });
 const unvoiced = Object.keys(EXACT_SECTION).filter((token) => !REGISTERED_KINDS.has(token));
@@ -220,11 +226,11 @@ describe('SP-E frequency-scaled floors — anti-vacuity anchors', () => {
   test('every registry is live and the denominator is real', () => {
     // Nothing below means anything if a registry emptied or an import went stale: a violation
     // list is trivially short when there is nothing to violate.
-    // ⛔ THE `12` IS PARSED OUT OF THIS LINE by scripts/base-state-capsule.mjs (:388) and
+    // ⛔ THE `13` IS PARSED OUT OF THIS LINE by scripts/base-state-capsule.mjs (:388) and
     // re-read by regex in tests/scripts/baseStateCapsule.test.js (:157). It must stay a bare
     // numeric literal in this exact spelling; the roster equality on the next line is what
     // keeps it from forking away from tests/domain/pantheon.test.js.
-    expect(REGISTRIES).toHaveLength(12);
+    expect(REGISTRIES).toHaveLength(13);
     expect(
       KIND_REGISTRATION_FREEZES.registries,
       'the roster and this walker disagree on the registry count — move BOTH in the registering'

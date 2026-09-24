@@ -186,7 +186,17 @@ const LAYER_PATTERNS = Object.freeze({
     // unlayered substrate: the faction-plane id comes through dossier/realmEntityWeb.js, never
     // from INTERIOR's factionCompetition.js, so the family owes no coupling row at this wave.
     /^src\/domain\/worldPulse\/house[A-Z]/,
-    /^src\/domain\/spatial\/(?:tradeFlow|commodityFlow|supplyShipments|entrepots|dispatchEV|smuggle|seaLanes)\.js$/,
+    // FP TR-3 (lane FP-D2, 2026-09-24): the believed market's Herald voice and its corpus. A
+    // `market[A-Z]` prefix on TR-1's and TR-2's reading: the TRADE annex authors eight `market.*`
+    // kinds for this wave's family, so the prefix claims leaves that ARE designed, and no module
+    // in the tree matched it before this line (measured). Both leaves read only unlayered
+    // substrate and TR-1's own reader fence, so the family owes no coupling row of its own.
+    /^src\/domain\/worldPulse\/market[A-Z]/,
+    // FP TR-3 adds `dispatchDestination` — the WHERE composer — to the spatial dispatch family
+    // beside dispatchEV. It reads worldPulse/beliefScarcity.js (INFO), the one INFO→TRADE pair
+    // this wave mints, licensed in the same commit by
+    // `CPL-9.INFO_TO_TRADE.TR-3.believed_dearness` in couplingRegistryTrade.js.
+    /^src\/domain\/spatial\/(?:tradeFlow|commodityFlow|supplyShipments|entrepots|dispatchEV|dispatchDestination|smuggle|seaLanes)\.js$/,
   ],
   FAITH: [
     /^src\/domain\/worldPulse\/(?:faith|sacred|religion|pantheon|conversion|piety|deity|temple)/,
