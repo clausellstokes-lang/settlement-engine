@@ -19,7 +19,7 @@
 | draw-idiom hits in the simulation roots | **122** | `sites2.mjs` over `worldPulse`, `spatial`, `region`, `traditions`, `roads`, `causalState.js`; idioms `.random()`, `hash01(`, `softmaxWeights(`, `stableSampleByWeight(` |
 | …inside a registered symbol | 34 | same, joined against the registry |
 | …outside any registered symbol | 88 raw → **82 real** (6 excluded: 4 helper *definitions* in `region/contestMath.js`, 1 in `worldPulse/relationshipRuleHelpers.js`, 1 false positive — the literal string `hash01` inside an `HBF-33` `reason` field) | same |
-| **distinct UNREGISTERED draw symbols** | **51** (56 raw − 5 excluded) | same |
+| **distinct UNREGISTERED draw symbols** | **51** (56 raw − 5 excluded) — ⭐ ANNOTATED, NOT REWRITTEN, at U10: 51 is what the six roots above hold and it still reproduces; over the WHOLE `src/domain` the figure is **55** (Table 4's U-52 to U-55) | same |
 | `pickRandom(` / ambient `rngContext` helpers | **0 sites** — these idioms do not exist in this tree | idiom census |
 | `createPRNG(` sites (stream *minting*, not a draw) | 22 across 12 files | idiom census |
 | `.fork(` sites (child stream, not a draw) | 92 across 35 files | idiom census |
@@ -299,6 +299,9 @@ Every row of `HABIT_FORK_REGISTRY` (`src/domain/worldPulse/habitForkRegistry.js`
 
 Idioms censused: `.random()`, `hash01(`, `softmaxWeights(`, `stableSampleByWeight(`, `createPRNG(` (stream mint), `.fork(` (child stream), `forkFn`. `pickRandom(` and ambient `rngContext` helpers **do not exist in this tree — 0 sites**. Roots: `worldPulse`, `spatial`, `region`, `traditions`, `roads`, `causalState.js`.
 **R = REGISTRATION OWED** (a chooser a DM would want to pin, which must become a registry row before a pin can name it — *not* a seal invented here).
+**B = BARE** (added by U10 at the unfreeze, 2026-09-23): a draw no idiom signature can see, which judgment 282 rules STAYS BARE — it is DECLARED BY NAME as a `discovery: 'bare'` row in the habit fork registry, never classified with weights it does not spell, and it is *not* registration-owed: a bare row carries no pinnable vocabulary.
+
+⭐ **THE ROOTS WERE EXTENDED AT THE UNFREEZE (U10, runbook act 6), and the extension is the finding.** The census above ran over six roots and could see neither the TOP-LEVEL `src/domain` files nor the generation directories, so `rulingPowerCoup.js` — the file holding the coup verdict the owner named — was invisible to the one table that claims draw totality. Re-measured over the WHOLE `src/domain` at `799103301` with the chooser walker's own comment-and-string strip: **four more draw symbols, U-52 to U-55**, and not one row above them moves. The walker holds this table and the registry equal in both directions, so the four are placed here or they red there.
 
 | # | unregistered symbol · path | draws | R? | lands at |
 |---|---|---|---|---|
@@ -353,8 +356,12 @@ Idioms censused: `.random()`, `hash01(`, `softmaxWeights(`, `stableSampleByWeigh
 | U-49 | `ageRoamingStressors` · `worldPulse/stressors.js:405` | 1 | **R** | row 131 |
 | U-50 | `advanceLitTraditions` · `worldPulse/traditionsKernel.js:732` | 1 | **R** ⭐⭐ | row 61 |
 | U-51 | `resolveSiegeVerdict` · `worldPulse/warSiegeVerdict.js:340` | 1 | **R** ⭐⭐ (owner-named) | rows 1, 2 |
+| U-52 | `resolveCoupVerdict` · `rulingPowerCoup.js:210,222` | 2 | **B** ⭐⭐ (owner-named; judgment 282 — the hold roll and the winner sample STAY BARE) | rows 3, 4 |
+| U-53 | `instantNpc` · `npc/npcOps.js:230` | 1 | no — an ID MINT: the draw makes the instant NPC's id suffix, the §14.2 pencil class | — (generation) |
+| U-54 | `countedStream` · `townCartography/cartographySynthesis.js:91` | 1 | no — a STREAM PRIMITIVE its callers choose with, and it counts its own draws; the HBF-51 / HBF-78 class | — (generation) |
+| U-55 | `interpret` · `townMap/arch/interpreter.js:133` | 1 | no — a keyed DRAW PRIMITIVE (`ctx.rand`, one cached stream per stable path); the same class | — (generation) |
 
-**51 unregistered draw symbols found, 51 classified** (82 draw sites). **44 are REGISTRATION OWED**; 6 are §14 roots reached by a pencil, not a pin (U-29, U-30, U-37, U-38, U-44, U-46); 1 is derivation-only (U-31).
+**55 unregistered draw symbols found, 55 classified** (82 draw sites over the six original roots, plus the 5 sites U-52 to U-55 add). **44 are REGISTRATION OWED**; **1 is BARE** (U-52, the coup verdict); 6 are §14 roots reached by a pencil, not a pin (U-29, U-30, U-37, U-38, U-44, U-46); 3 are generation-side mints and primitives outside the simulation entirely (U-53, U-54, U-55); 1 is derivation-only (U-31).
 Excluded as non-draws and named so the totality is honest: 4 idiom *definitions* in `region/contestMath.js` (`hash01`, `softmaxWeights`, `stableSampleByWeight`×2), 1 in `worldPulse/relationshipRuleHelpers.js` (`hash01`), and 1 false positive — the literal string `hash01` inside HBF-33's `reason` field in `habitForkRegistry.js`.
 
 ---
