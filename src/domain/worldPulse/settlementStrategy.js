@@ -508,7 +508,10 @@ function strategyCandidate({ move, sId, tick, severity, headline, summary, reaso
  * termination read on a held peace proposal. Approval may happen on a later
  * pulse; this compact row records whose books actually made the offer without
  * freezing any control scalar or copying the full pulse receipt into the
- * proposal docket.
+ * proposal docket. `kind` and `settlementIds` are identity, not control: WR-5
+ * hands this stored row to the envoy as the offerer's read, and the envoy's
+ * acceptance check (envoyErrandOffer.js :: normalizeEnvoyAcceptance) requires
+ * both (CURE-PEACE-1 U3; without them every accepted organic suit died there).
  * @param {any} termination
  */
 function compactWarRulingRead(termination) {
@@ -517,7 +520,7 @@ function compactWarRulingRead(termination) {
     : null;
   if (!receipt) return null;
   const keys = [
-    'id', 'tick', 'attackerId', 'targetId', 'authoritySignature',
+    'id', 'kind', 'tick', 'attackerId', 'targetId', 'settlementIds', 'authoritySignature',
     'booksInterest', 'booksDirection', 'booksReason', 'booksPublicReason',
     'rulerId', 'rulerName', 'factionId', 'factionName', 'patronId', 'patronName',
     'rulerSecurityBand', 'rulerLawfulnessBand', 'rulerMoralityBand',
