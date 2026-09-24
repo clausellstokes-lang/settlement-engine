@@ -16,9 +16,10 @@
  *   3. VERDICT   each row reaches each verdict it can reach, against receipts
  *                that differ in exactly one field.
  *
- * The knowledge catalog's central claim — that the `knowledge` mover family is a
- * RESIDUAL bucket and therefore cannot carry a verdict — is asserted by RUNNING
- * the production classifier, never by re-reading its token lists.
+ * The knowledge catalog's central claim — once that the `knowledge` mover family was
+ * a RESIDUAL bucket, and since FP IN-6 U2 that the family is EARNED and its residual
+ * is empty — is asserted by RUNNING the production classifier, never by re-reading
+ * its token lists.
  */
 import { readFileSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
@@ -207,46 +208,30 @@ describe('the knowledge-lane evidence catalog', () => {
     expect(sourceOf('src/domain/worldPulse/beliefMap.js')).toContain("impactKind: 'belief_misjudgment'");
   });
 
-  test('the knowledge family is a RESIDUAL bucket, proven by running the classifier', () => {
-    // THE MECHANISM, asserted directly so this test cannot go vacuous as the
-    // catalog shrinks: a record whose only vocabulary is an unrecognised kind
-    // still lands in `knowledge`, purely because its wizard-news id tokenizes to
-    // include `news`. No length floor is asserted, because SHRINKING the catalog
-    // (giving one of these kinds a family of its own, or narrowing the token) is
-    // the cure, and a ratchet that reds on the cure is a ratchet pointed backwards.
-    expect(moverFamilyOf({ id: 'wizard_news.5.zzz_unrecognised_kind.observer' })).toBe('knowledge');
-    for (const kind of KNOWLEDGE_FAMILY_RESIDUAL_IMPACT_KINDS) {
-      // On its own vocabulary the kind belongs to NO family at all...
-      expect(moverFamilyOf({ impactKind: kind }), `${kind} on its own`).toBeNull();
-      // ...yet the same record carrying its ordinary wizard-news id lands in
-      // `knowledge`, purely because that id tokenizes to include `news`. This is
-      // why no certification row may treat a knowledge count as its evidence.
-      expect(
-        moverFamilyOf({ impactKind: kind, id: `wizard_news.5.${kind}.observer.subject` }),
-        `${kind} with its wizard-news id`,
-      ).toBe('knowledge');
-    }
+  test('the knowledge family is EARNED, proven by running the classifier (FP IN-6 U2)', () => {
+    // THE MECHANISM, asserted directly: until FP IN-6 U2 a record whose only vocabulary was an
+    // unrecognised kind still landed in `knowledge`, purely because its wizard-news id tokenized
+    // to include the bare `news` token. U2 removed the token, so the id scaffold alone now earns
+    // NO family, and the residual catalog banks the cure at zero (the ratchet below re-derives
+    // it from the live census on every run).
+    expect(moverFamilyOf({ id: 'wizard_news.5.zzz_unrecognised_kind.observer' })).toBeNull();
+    expect(KNOWLEDGE_FAMILY_RESIDUAL_IMPACT_KINDS).toEqual([]);
+    // A kind that once rode the id (diplomacy, the old catalog's first example) now has no family
+    // with or without its id: unclassified is the honest reading, never a borrowed one.
+    expect(moverFamilyOf({ impactKind: 'diplomacy', id: 'wizard_news.5.diplomacy.observer.subject' })).toBeNull();
   });
 
-  test('the KIND-ONLY residual sibling holds the same proof, and its exclusions are executed facts', () => {
-    // The late-lane authors (momentum, supply-web warfare, information statecraft)
-    // mint their routing token AS `kind` with no impactKind, so the impactKind
-    // census above cannot see them; this sibling carries the identical residual
-    // proof on the `kind` field.
-    for (const kind of KNOWLEDGE_FAMILY_RESIDUAL_KINDS) {
-      expect(moverFamilyOf({ kind }), `${kind} on its own`).toBeNull();
-      expect(
-        moverFamilyOf({ kind, id: `wizard_news.5.${kind}.actor.target` }),
-        `${kind} with its wizard-news id`,
-      ).toBe('knowledge');
-    }
-    // The catalog's three EXCLUSIONS are claims about the classifier, so they are
-    // executed rather than trusted: raid is `war` on its own vocabulary, intel is
-    // `knowledge` on its own vocabulary (the one earned filing), and the treaty
-    // beat is censused through its impactKind in the list above.
+  test('the KIND-ONLY sibling is cured too, and the catalog exclusions are still executed facts', () => {
+    expect(KNOWLEDGE_FAMILY_RESIDUAL_KINDS).toEqual([]);
+    // The late-lane beats the old sibling listed: the statecraft exposure beats now EARN the
+    // family on their own `infowar` vocabulary, and the momentum beat no longer borrows it.
+    expect(moverFamilyOf({ kind: 'infowar_lie_exposed', id: 'wizard_news.5.infowar_lie_exposed.actor.target' })).toBe('knowledge');
+    expect(moverFamilyOf({ kind: 'momentum_climb_down', id: 'wizard_news.5.momentum_climb_down.actor.target' })).toBeNull();
+    // The catalog's EXCLUSIONS are claims about the classifier, so they are executed rather than
+    // trusted: raid is `war` on its own vocabulary, and intel is `knowledge` on its own vocabulary
+    // (the one late-lane filing that was always earned).
     expect(moverFamilyOf({ kind: 'webwar_raid' })).toBe('war');
     expect(moverFamilyOf({ kind: 'intel_transfer' })).toBe('knowledge');
-    expect(KNOWLEDGE_FAMILY_RESIDUAL_IMPACT_KINDS).toContain('diplomacy');
   });
 
   test('THE DECONTAMINATION RATCHET (FP IN-6 U1): the residual catalog is EXACTLY the live census residual', () => {

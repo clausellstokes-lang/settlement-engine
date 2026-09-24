@@ -70,8 +70,19 @@ const FAMILY_TOKENS = Object.freeze({
     // the contamination path IN-6's ratchet exists to shrink. Executed census before adding
     // it: exactly one other token in src/ or scripts/ contains the substring, and it is the
     // internal envoy-picture patch `kind: 'plant'`, which is not a news kind.
+    // ⭐ FP IN-6 U2, THE EARNED-CLASSIFICATION CURE: the bare `news` token is REMOVED. Every
+    // wizard-news receipt id is `wizard_news.<tick>.<kind>...`, so `news` filed any receipt no
+    // earlier family matched into this family on its id alone (33 impactKinds and 145 routed kinds
+    // at 85c170e8e, IN-6 U1's re-measure). The family is now earned by its own vocabulary: the
+    // counter-game's `sweep` and `accusation`, the lure's `lure`, the statecraft exposure beats'
+    // `infowar`, IN-0c's `disclosure`, and four COMPOUNDS (a kind's own full name, which outranks a
+    // bare word inside it, see moverFamilyOf) for the race beats, whose `person` is a people word,
+    // and for the truth that arrived too late. tests/lint/earnedClassification.walker.test.js holds
+    // every registered knowledge kind here and reds on any token the id scaffold can satisfy.
     'belief', 'rumor', 'intel', 'information', 'discourse', 'misjudgment',
-    'reconcile', 'credibility', 'news', 'revelation', 'plant',
+    'reconcile', 'credibility', 'revelation', 'plant',
+    'accusation', 'disclosure', 'infowar', 'lure', 'sweep',
+    'race_person', 'race_story', 'race_together', 'word_came_too_late',
   ]),
 });
 
@@ -151,9 +162,23 @@ function containsToken(value, candidates) {
   ));
 }
 
+/** Each family's COMPOUND tokens (a kind's own full name, spelled with an underscore). */
+const FAMILY_COMPOUNDS = Object.freeze(Object.fromEntries(
+  Object.entries(FAMILY_TOKENS).map(([family, tokens]) => [
+    family,
+    Object.freeze(tokens.filter((token) => token.includes('_'))),
+  ]),
+));
+
 /**
  * Classify an outcome into exactly one broad mover family. Unknown records stay
  * unknown instead of being forced into a convenient bucket.
+ *
+ * TWO PASSES (FP IN-6 U2): a registered COMPOUND, a kind's own full name, is matched
+ * first across every family, so `race_person` files where its registration says rather
+ * than under the bare `person` inside it; the bare-word pass then runs exactly as before.
+ * Before IN-6 no family carried a compound, so the first pass adds only the registrations
+ * made with it and moves no other classification.
  */
 export function moverFamilyOf(record) {
   const text = [
@@ -165,6 +190,9 @@ export function moverFamilyOf(record) {
     record?.kind,
     record?.id,
   ].filter(Boolean).join('.');
+  for (const family of BEHAVIORAL_MOVER_FAMILIES) {
+    if (containsToken(text, FAMILY_COMPOUNDS[family] || [])) return family;
+  }
   for (const family of BEHAVIORAL_MOVER_FAMILIES) {
     if (containsToken(text, FAMILY_TOKENS[family] || [])) return family;
   }
