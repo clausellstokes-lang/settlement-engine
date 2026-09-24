@@ -229,7 +229,38 @@ const CENSUS = (() => {
  * were the pricing page's, and the public-path walk found them on the phone: eleven-pixel
  * prose on the page that asks for money. They are cured, /pricing's row loses its `owner`,
  * and the estate now has 117 sub-floor sites left on the two surfaces lane 28 still owns
- * (98 + 19).
+ * (98 + 19) — 116 as of the re-measure below (97 + 19).
+ *
+ * ⭐⭐ RE-MEASURED WHOLE AT THE CURE DAY'S TIP (2026-09-23, the unfreeze's lane 2; pass 2a's
+ * NOTE-19, which asked for this register RE-MEASURED and never SUMMED from the declared
+ * deltas, because both of that day's moves were made by an IMPORT CLOSURE rather than by
+ * written sites). Every row was re-derived at `8b5565922` by this file's own derivation and
+ * its own scanner — 36 routes and the shell — and the day's declared moves re-measure
+ * EXACTLY: /realm and /map floored 493 ruled 3 (U79's PlacementDetailCard edge), (shell)
+ * floored 144 (U25's two causes composed). `roots`, `floored`, `ruled` and `bare` are exact
+ * on every row but one; no route lacks a row and no row names a route the router retired.
+ *
+ * ⛔ AND ONE ROW WAS STALE IN THE ONE DIRECTION THE ARM CANNOT SEE. /create's `bare` measures
+ * 97, not 98: an OWNED row may only FALL, so the fall passed in silence for four days and the
+ * row carried a spare site nobody had to justify. The cause is named and executed —
+ * `1280cb6bb` (browser pass 3, 2026-09-19) put src/components/generate/WizardOutputToolbar.jsx's
+ * single 10 px line on `chromeFontSize(FS.xxs, isMobile)` and moved that file onto the PUBLIC
+ * roster (tests/components/publicChromeFloor.census.test.js), so lane 28's owed count fell by
+ * one here. Measured by re-running this file's scanner over the /create closure at four shas:
+ * 98 at `16501b699`, 97 at `1280cb6bb`, and per-file IDENTICAL from `5dd5e8e68` to `8b5565922`.
+ * Banking it re-tightens the ratchet — a 98th site reds from now on.
+ *
+ * ⚠ `files` IS A FLOOR AND STAYS ONE; THE GROWTH IS RECORDED, NOT PINNED (this registry's own
+ * rule above: "Growth needs no pin"). Live at this tip against the floors — /settlements 208
+ * (206), /realm 157 (153), /map 157 (153), /signin 13 (11), (shell) 70 (61); every other row
+ * exact. NOT ONE CLOSURE COLLAPSED, which is the only failure this field exists to catch. The
+ * growth is attributable file by file to named members: the editor's five leaves on (shell)
+ * (EM-D0d's two field controls, EM-D0e's door, EM-D1's shell, EM-D3's registry page — all
+ * reached through App.jsx's one lazy edge), primitives/RefusalNotice.jsx (§934.24 car 3),
+ * primitives/DialogClose.jsx (§934.29), primitives/NameColumns.jsx (the Power tab's columns)
+ * and map/RealmPhoneNotice.jsx (§934.26 car 1). Raising the floors to today's counts would red
+ * every in-flight branch that adds an import anywhere inside a 208-file subtree, which is the
+ * cost this field was deliberately shaped to avoid.
  */
 const ROUTE_BASELINE = Object.freeze({
   // ⛔ lane 28 (the create page, the tier picker, the landing and the header nav)
@@ -237,7 +268,12 @@ const ROUTE_BASELINE = Object.freeze({
   // src/components/generate, src/components/home, src/components/pricing or the
   // /create-only panels in src/components — none of it is reachable from any
   // other route except the four ClerkNote sites the Realm shares, named below.
-  '/create':                { roots: 1, files: 165, floored: 750, ruled: 5, bare: 98, owner: 'lane 28 — the create page + the tier picker' },
+  // ⭐ RE-MEASURED AT THE CURE DAY'S TIP (2026-09-23, the unfreeze; NOTE-19), bare 98 -> 97 —
+  // the cause is `1280cb6bb`, quoted in full in the docblock above: one cured 10 px site in
+  // src/components/generate/WizardOutputToolbar.jsx, which is now the public roster's. Nothing
+  // on this surface was floored, written or ruled by the re-measure itself; 97 is the count
+  // lane 28 has left to do.
+  '/create':                { roots: 1, files: 165, floored: 750, ruled: 5, bare: 97, owner: 'lane 28 — the create page + the tier picker' },
   '/home':                  { roots: 1, files: 19, floored: 6, ruled: 4, bare: 19, owner: 'lane 28 — the landing' },
   // The Realm lazily mounts the create flow's ClerkNote for its one advisory
   // line, so lane 28's file lands on a route it does not own. One site.
