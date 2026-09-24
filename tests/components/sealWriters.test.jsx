@@ -29,8 +29,9 @@ vi.mock('../../src/lib/saves.js', () => ({
 
 import { compareCodepoint } from '../../src/domain/deterministicSort.js';
 import { DM_ID_NS } from '../../src/domain/edit/dmLayer.js';
-import { OP_TYPES, validateOp } from '../../src/domain/edit/operations.js';
+import { OP_TYPES, makeOp, validateOp } from '../../src/domain/edit/operations.js';
 import { OFF_STAGE_OP_TYPES } from '../../src/domain/edit/operationsOffStage.js';
+import { resolveDecree } from '../../src/domain/edit/registry.js';
 import { WORLD_CONDITIONS } from '../../src/domain/edit/worldConditions.js';
 import {
   PEACE_OFFER_KEY, draftPeaceOffer, draftTerms, withPeaceOffer,
@@ -218,6 +219,9 @@ describe('EM-E4d — the seals get their writers', () => {
       [noWriter, { seal: '' }],
       [noSave, { seal: firstBoundSeal() }],
       [noSeed, { seal: firstBoundSeal() }],
+      // AND THE TARGET REFUSAL, DRIVEN AT THIS DOOR'S OWN STEP 4 rather than hand-added to
+      // the produced set below (NOTE-21): an act with nobody on the other side.
+      [noWriter, { seal: firstBoundSeal(), counterparty: '' }],
     ].map(([store, request]) => {
       const answer = seal(store, request);
       return { reason: answer.reason, rows: selectDecrees(store.getState()).length };
@@ -228,14 +232,56 @@ describe('EM-E4d — the seals get their writers', () => {
       { reason: 'no_writer', rows: 0 },
       { reason: 'no_save', rows: 0 },
       { reason: 'no_seed', rows: 0 },
+      { reason: 'unknown_target', rows: 0 },
     ]);
+
+    // ⛔ THE THREE DECLARED WORDS NO CALLER CAN REACH AT THIS TIP, AND WHY EACH IS SAFE TO
+    //    ACCOUNT FOR UNDRIVEN (NOTE-21). This is the arm's own statement of what it does NOT
+    //    drive — never a mirror of a producer's set — and it is what lets the closure below
+    //    run in BOTH directions: with only "produced ⊆ declared", 'not_staged' was deleted
+    //    from the export and this arm stayed GREEN at 6 passed. Each word carries the
+    //    measurement that reds the day the door can answer it.
+    const undriven = ['invalid_op', 'not_staged', 'stale_vocabulary'];
+    const bound = boundSeals();
+
+    // · 'invalid_op' is the CATALOGUE's word. This door builds its own op from a non-empty
+    //   counterparty and carries NO caller payload, so there is no field left for the
+    //   catalogue to refuse: every bound act's op is built and judged clean here, and a seal
+    //   act that gained a second required field — the one shape that reaches the word —
+    //   would red on this line instead of hiding behind an undriven declaration.
+    const built = bound.map((name) => makeOp(
+      SEAL_ACTS[name].type,
+      { kind: OP_TYPES[SEAL_ACTS[name].type].target, id: 'town.harrow' },
+      { counterparty: 'town.harrow' },
+    ));
+    expect(built.map((op) => op !== null)).toEqual(bound.map(() => true));
+    expect(built.map((op) => validateOp(op, null).errors)).toEqual(bound.map(() => []));
+
+    // · 'stale_vocabulary' is EM-C1's word, and its resolver refuses a POOLED or an ENUM
+    //   field and nothing else. Driven over those same ops with the hostile-most catalogue a
+    //   caller can hand — no pool at all — they resolve, so no 'pools' bag reaches the word.
+    expect(built.map((op) => resolveDecree({ id: 'e4d-4', op }, { opTypes: OP_TYPES, pools: {} }).ok))
+      .toEqual(bound.map(() => true));
+
+    // · 'not_staged' is the receipt check over EM-C1's 'stage', which refuses a malformed id,
+    //   a malformed stamp, a malformed op, or an id the registry already holds. The id is
+    //   minted against every id the registry holds and the op is this door's own, so the one
+    //   lever a caller has is the stamp — and the door DEFAULTS it: handed none, the act
+    //   still stages.
+    const unstamped = makeStore(['town.harrow']);
+    const answer = seal(unstamped, { seal: firstBoundSeal(), orderedAt: '' });
+    expect([answer.ok, selectDecrees(unstamped.getState()).length]).toEqual([true, 1]);
 
     // THE SET IS CLOSED IN BOTH DIRECTIONS against the words this door can answer, and it is
     // frozen and in codepoint order, as the two doors beside it are.
     expect([...SEAL_DECREE_REFUSALS].sort(compareCodepoint)).toEqual([...SEAL_DECREE_REFUSALS]);
     expect(Object.isFrozen(SEAL_DECREE_REFUSALS)).toBe(true);
-    const answered = [...new Set([...driven.map((row) => row.reason), 'unknown_target'])];
+    const answered = [...new Set(driven.map((row) => row.reason))].sort(compareCodepoint);
+    const accounted = [...new Set([...answered, ...undriven])].sort(compareCodepoint);
     expect(answered.filter((reason) => !SEAL_DECREE_REFUSALS.includes(reason))).toEqual([]);
+    expect(accounted.length).toBe(SEAL_DECREE_REFUSALS.length);
+    expect(accounted.filter((reason) => !SEAL_DECREE_REFUSALS.includes(reason))).toEqual([]);
+    expect([...SEAL_DECREE_REFUSALS].filter((reason) => !accounted.includes(reason))).toEqual([]);
   });
 
   it('E4d-5: two seal acts take two entry ids, and the add door\'s own minted identity is UNMOVED by the shared walk', () => {
