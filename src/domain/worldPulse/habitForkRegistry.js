@@ -696,4 +696,69 @@ export const HABIT_FORK_REGISTRY = Object.freeze([
     reason: 'SURVEY U-51 - THE SIEGE VERDICT\'S ONE ROLL, reached only after a DETERMINISTIC feasibility gate rules the matchup plausible; everything else resolves with NO roll, which is why a thorpe can never storm a fortified city on a lucky number. ⭐ THE VOCABULARY IS DECLARED, AND SINCE U18 IT IS THE ROLL\'S BANDS RATHER THAN ITS READING (the chair\'s judgment 265 (e)): SIEGE_VERDICT_BANDS types the four bands this roll writes and the direction each one implies, which is exactly what design §19 ruling 4 requires a pin to carry. ⚠ SIEGE_FALL_ODDS_WORDS, which this row named until U18, is the world\'s honest READING of the fall probability and is printed into the receipt; a directive naming one of those four words is REFUSED at the fold, so the row was declaring a vocabulary no pin could ever use',
     closeOwed: 'grade a verdict against what the taken or held town then cost the hand that holds it. ⛔ Design §19 rulings 3 and 4 both require a pin here to carry the BAND with the verdict, or the receipt would explain a draw that never happened',
   }),
+  // ── U10: THE BARE HALF — the forks no signature sees and no draw census exposes ──
+  //
+  // ⛔ THE THIRD DISCOVERY KIND, AND IT IS A DECLARATION RATHER THAN A DISCOVERY. The
+  // `idiom` half is found by SIGNATURE and pinned exactly against the live scan; the
+  // `checklist` half is a hand-maintained census taken over a WIDER idiom set and WIDER
+  // roots; this half is neither, and saying so is the point. Judgment 282 rules that the
+  // coup's draws STAY BARE — a decision, not drift — and judgment 265 (c) sends the
+  // processes design §19 ruling 3 named that draw NOTHING or resolve on a keyed HASH to
+  // the same place. A row here is a NAME with a measured sentence beside it, never a
+  // classification of weights the module does not spell, and it is explicitly NOT
+  // registration-owed: a bare row advertises no vocabulary, so no seal can be offered
+  // over it while it stays bare.
+  //
+  // ⭐ THREE FAMILIES, THREE OPENING SENTENCES, AND EACH ONE IS A PREDICATE THE WALKER
+  // RE-DERIVES FROM THE TREE at `tests/lint/chooserTotality.walker.test.js` (the U10
+  // bare-draw arms) rather than reads back as prose:
+  //     'A BARE DRAW.'        the symbol takes an unweighted uniform no signature reads
+  //     'HASHED, NOT DRAWN.'  the fork resolves on a keyed hash and consumes ZERO rng
+  //     'NO WEIGHT, NO FORK.' the symbol carries no draw and no roll of any kind
+  // The walker measures the SITE, derives which of the three the tree says, and reds if a
+  // row says a different one — so a declared-bare fork that gains weights, or a
+  // declared-dry process that gains a draw, cannot sit here quietly being false. U62's
+  // lesson taken before it could bite twice: a prose row nobody re-derives is a row that
+  // rots. The bare-draw roster is also held SET-EQUAL, both directions, against the
+  // survey's Table 4 "B" column, so a row invented here reds as loudly as a draw the
+  // survey found and this file forgot.
+  //
+  // ⚠ WHAT THIS HALF DOES NOT CLAIM. It is total over BARE DRAWS across the whole
+  // `src/domain` (the walker scans for them and demands every one be placed). It is NOT a
+  // census of HASHED forks: the two hashed rows below are the two judgment 265 (c) NAMES,
+  // and a sweep for every keyed-hash fork in the tree is a chair-sized program (judgment
+  // 282's own words). `npcCirculation.js`'s pressure-gated rehost hash is the measured
+  // NOTICE that such a sweep would find more.
+  fork({
+    forkId: 'HBF-87', module: 'src/domain/rulingPowerCoup',
+    symbol: 'resolveCoupVerdict', discovery: 'bare', disposition: 'DEFER',
+    reason: 'A BARE DRAW. SURVEY U-52, and the owner named it first (Table 1 rows 3 and 4): TWO unweighted uniforms, the HOLD roll against a clamped pHold at :210 and the WINNER taken in proportion to challenger weight at :222, the sample spelled INLINE rather than through the estate\'s weighted-sample helper, which is exactly why no idiom signature reads it. ⛔ JUDGMENT 282: THE DRAWS STAY BARE, and that is a DECISION rather than drift. Teaching the signatures to read a bare uniform would expose a census nobody has commissioned, and filing the fork as registration-owed would advertise a pinnable vocabulary this module does not type. So it is declared BY NAME, and the walker holds the name against Table 4 in both directions. ⚠ THE FILE SITS AT THE TOP LEVEL of src/domain, a PLACE the walker\'s root mechanism could not express at all until this act widened it; the instrument gap was the finding, not the fork',
+    closeOwed: 'grade a held or a fallen seat against what the court that kept or took it then did with it, which the faction records already date. ⛔ Before any of that, design §19 ruling 3 requires a hold pin to carry its own roll: pinning the verdict alone would leave pHold and the written reason prose explaining a draw that never happened',
+  }),
+  fork({
+    forkId: 'HBF-88', module: 'src/domain/worldPulse/npcVerdictTable',
+    symbol: 'resolveVerdict', discovery: 'bare', disposition: 'DEFER',
+    reason: 'HASHED, NOT DRAWN. Judgment 265 (c) names the court\'s verdict as one of the two processes in design §19 ruling 3 that resolve on a keyed hash. MEASURED at the site: an eligible arm enters a genuinely WEIGHTED choice against the base verdict, the weights are the consequences tuning\'s own, and the roll is an FNV-1a reading of a labelled composite key through this module\'s local roll helper, so the choice consumes ZERO rng by construction. ⭐ The fork is therefore REAL while the stream is untouched, which is why neither a draw census nor any of the four signatures can see it. ⚠ NO VOCABULARY IS DECLARED and the reason is measured rather than modest: this module\'s four-word verdict vocabulary shares its exported NAME with a second module one directory over, so a declaration here would name a word two volumes spell differently, which the vocabulary arm refuses by design',
+    closeOwed: 'grade a verdict against what the sentenced official then did and what the town paid for it, which the exposure record and the displacement lane already carry between them. Establish FIRST whether the eligible arm expresses a preference at all or exists to make an exact contest deterministic, because that is HBF-11\'s question one family over and one answer cannot be true there and false here',
+  }),
+  fork({
+    forkId: 'HBF-89', module: 'src/domain/worldPulse/warTermination',
+    symbol: 'readWarTerminations', discovery: 'bare', disposition: 'STAY',
+    reason: 'NO WEIGHT, NO FORK. MEASURED: judgment 265 (c) found that four of the processes design §19 ruling 3 names as seals draw NOTHING, and this is the first of them. The whole module carries no draw, no roll and no weighted arm of any kind: the automatic win is READ off the thirteen close roads, a total function from the war record to which road, if any, has been walked. ⛔ RECORDED RATHER THAN OMITTED, on HBF-31\'s precedent: a seal was proposed over it, so the roster keeps the FINDING and the next census meets that rather than the site. A pin here would not tilt a draw, it would overwrite a reading',
+  }),
+  fork({
+    forkId: 'HBF-90', module: 'src/domain/worldPulse/envoyErrand',
+    symbol: 'advanceEnvoyErrands', discovery: 'bare', disposition: 'STAY',
+    reason: 'NO WEIGHT, NO FORK. MEASURED, the second of judgment 265 (c)\'s four: the envoy\'s road advances by position, elapsed ticks and the errand state vocabulary, and the module carries no draw, no roll and no weighted arm anywhere in it. What befalls an envoy is written by the LAYERS the column travels through, each of which owns its own registered or declared fork, and this pass only reads their results into the errand record. ⛔ RECORDED RATHER THAN OMITTED on HBF-31\'s precedent, because a seal was proposed over it; the finding is what the next census must meet',
+  }),
+  fork({
+    forkId: 'HBF-91', module: 'src/domain/worldPulse/npcCirculation',
+    symbol: 'admissionFor', discovery: 'bare', disposition: 'STAY',
+    reason: 'NO WEIGHT, NO FORK. MEASURED at the SYMBOL rather than the module, and the distinction is load-bearing: the exile\'s landing walks the settlement\'s factions in codepoint order and takes the first reading that admits, with belief rather than truth deciding, and the slice holds no draw and no roll. ⚠ The MODULE does hold keyed hashes, in the rehost gate and the sibling branch pick, which is why the walker measures the symbol\'s own slice and why those two are the NOTICE recorded above rather than a claim made here. ⛔ RECORDED on HBF-31\'s precedent: a seal was proposed over this symbol, so the roster keeps the finding',
+  }),
+  fork({
+    forkId: 'HBF-92', module: 'src/domain/worldPulse/narrativeTempo',
+    symbol: 'foldNarrativeTempo', discovery: 'bare', disposition: 'STAY',
+    reason: 'NO WEIGHT, NO FORK. MEASURED, the last of judgment 265 (c)\'s four: the tempo folds what the tick already selected and deferred into a ledger and reads a tier off frozen edges, with no draw, no roll and no weighted arm in the module. ⭐ Design §19 ruling 3 offers it as a DIRECTION rather than a pin, and the measurement agrees with that shape exactly: there is no draw to pin, only a banded reading to overwrite, and a direction that sets the band is an honest act where a pin would be a fiction. ⛔ RECORDED rather than omitted on HBF-31\'s precedent',
+  }),
 ]);
