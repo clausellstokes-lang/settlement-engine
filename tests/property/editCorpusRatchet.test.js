@@ -438,7 +438,19 @@ describe('the edit corpus ratchet: the re-entry seam and the merge over the 63-r
       .map((rel) => ({ rel, clause: /import\s*\{([^}]*)\}\s*from\s*'[^']*factionRename\.js'/s.exec(readFileSync(resolve(ROOT, 'src', rel), 'utf8')) }))
       .filter((each) => each.clause !== null);
     expect(importers.length, 'the scan is not vacuous: factionRename.js HAS src/ importers').toBe(3);
+    // THE POSITIVE CONTROL. `importers.length` proves the importer SCAN is live; nothing proved the
+    // CLAUSE READER would fire on a real violation — a renamed ledger export, a dropped `NPC_`
+    // alternation or a lost `\b` leaves a reader that matches NOTHING, and the empty filter below
+    // then passes forever. Every sibling scrape in this family (freeFieldGlyphNotice N4/N8/N10,
+    // registryRealityBadge R4, editShellPlusDoor D5) drives its extractor over a control before it
+    // trusts the extractor's silence. The two spellings a violation would wear are READ OUT OF
+    // factionRename.js's own exports rather than re-typed here, so a rename there reds this arm
+    // instead of blinding it, and the control runs the SAME reader the filter below runs.
+    const readsClause = (clause) => /\b(NPC_)?NON_CASCADED_SURFACES\b/.test(clause);
+    const ledgerExports = [...readFileSync(resolve(ROOT, 'src/domain/factionRename.js'), 'utf8').matchAll(/export const ([A-Z_]*NON_CASCADED_SURFACES)\b/g)].map((each) => each[1]);
+    expect(ledgerExports, 'the ledger still spells both surfaces the reader looks for').toEqual(['NON_CASCADED_SURFACES', 'NPC_NON_CASCADED_SURFACES']);
+    expect(ledgerExports.map((name) => readsClause(`${importers[0].clause[1]} ${name} `)), 'THE CONTROL: the clause reader FIRES on a real importer clause that gained each surface').toEqual([true, true]);
     // anchored: a faction roster row that GAINS a reader without declaring `readable` reds here.
-    expect(importers.filter((each) => /\b(NPC_)?NON_CASCADED_SURFACES\b/.test(each.clause[1])).map((each) => each.rel)).toEqual([]);
+    expect(importers.filter((each) => readsClause(each.clause[1])).map((each) => each.rel)).toEqual([]);
   }, ARM_TIMEOUT);
 });
