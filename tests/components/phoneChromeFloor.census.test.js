@@ -65,7 +65,7 @@
  */
 
 import { describe, expect, test } from 'vitest';
-import { readFileSync } from 'node:fs';
+import { readdirSync, readFileSync } from 'node:fs';
 import { join } from 'node:path';
 
 // ⭐ THE RULE ITSELF LIVES IN ONE PLACE (2026-09-19, ODQ §934.22 item 2). It was
@@ -620,6 +620,33 @@ describe('THE PHONE CHROME FLOOR — a census of the source, on every route the 
       'the shell closure is as large as the whole census — the AppViews cut stopped working, so the '
       + 'shell row is measuring every route instead of the chrome around them',
     ).toBeLessThan(CENSUS_FILES.length / 2);
+
+    // ⭐ THE EDITOR'S PAGES, AND THE ONE EDGE THEY HANG FROM (U11, the unfreeze, 2026-09-23;
+    // judgment 267(4) reserved this widening until the mount landed, and EM-D3c landed it).
+    // src/components/edit reaches this census ONLY through App.jsx's single
+    // `lazy(() => import('./components/edit/EditModeShell.jsx'))` edge and the shell's own
+    // mount of the registry page, so every editor surface is measured on the (shell) row and
+    // on no route's — AppViews declares no editor view. Measured at 8b5565922: five files,
+    // two floored sites (FreeField.jsx 1, PoolField.jsx 1); the shell, the door and the
+    // registry page spell no sub-floor size at all, so they are neither floored nor bare.
+    //
+    // ⛔ THE EQUALITY IS A REACHABILITY PIN, AND IT NAMES A DEFECT THIS ESTATE ALREADY SHIPPED:
+    // DecreeRegistryPage.jsx lived for five hours with NO importer under src (U46) — no reader
+    // could open it and no floor instrument could see it, because an unmounted page is absent
+    // from every route closure. Such a page is missing from CENSUS_FILES, so it reds HERE, by
+    // name, instead of going unmeasured in silence.
+    const editorTree = readdirSync(join(ROOT, 'src/components/edit'))
+      .filter((f) => /\.jsx?$/.test(f) && !/\.test\./.test(f))
+      .map((f) => `src/components/edit/${f}`)
+      .sort();
+    expect(editorTree.length, 'src/components/edit holds no page — has the editor moved?')
+      .toBeGreaterThanOrEqual(5);
+    expect(
+      editorTree.filter((f) => !CENSUS_FILES.includes(f)),
+      '\nAn editor page is in the tree but reaches NO surface the router declares: nothing mounts '
+      + 'it, so no reader can open it and no phone floor governs it. Mount it (the edit shell is '
+      + 'its home, and App.jsx reaches the shell by one lazy edge) or retire the file:\n',
+    ).toEqual([]);
 
     // The acceptance test this file is the twin of must still reach the census
     // layer, or the two instruments have come apart.
