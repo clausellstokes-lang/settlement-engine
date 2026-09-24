@@ -223,7 +223,19 @@ describe('pulse mutators are gated while an advance is in flight', () => {
 
     kernelGate.release();
     const result = await advancing;
-    expect(result.ok).not.toBe(false);
+    // ⛔ THE ADVANCE IS PROVEN TO HAVE COMMITTED (U109 — lane T2's idiom). `result.ok` was read
+    // through `.not.toBe(false)` here, and the pulse result carries NO `ok` key at all on the
+    // success path (measured keys: campaignId, interval, tick, calendar, worldState,
+    // regionalGraph, wizardNews, settlementUpdates, candidates, selected, rollExplanations,
+    // autoApplied, proposals, resolvedStressors, majors, deferredMajors, pulseRecord, status),
+    // so the matcher convicted the typed refusals and NOTHING else: an advance that computed and
+    // RETURNED while its wholesale Phase-2 commit never landed — the very clobber this file
+    // exists for — walked straight through it (measured: the dead-commit plant leaves this line
+    // green and reds the line below). The receipt is the TICK the pulse returns beside the
+    // campaign clock that committed it (measured: 4 and 4 — one_month is four ticks on the
+    // multi-tick path this file forces ON).
+    expect([result?.tick, worldOf(store).tick],
+      'the real advance ran to a committed result').toEqual([4, 4]);
     expect(worldOf(store).tick).toBeGreaterThan(0);
     // The blocked edit did not half-land anywhere the commit could resurrect.
     expect(worldOf(store).simulationRules?.warLayerEnabled).not.toBe(true);
@@ -246,7 +258,12 @@ describe('pulse mutators are gated while an advance is in flight', () => {
       now: '2026-02-01T00:00:00.000Z',
       autoResolve: true,
     });
-    expect(first.ok).not.toBe(false);
+    // The same positive (U109): `first.ok` is `undefined` on every success, so the receipt that
+    // this first advance really landed is the tick it returns beside the committed campaign
+    // clock (measured: 4 and 4). The snapshot assertion below survives a dead commit — the undo
+    // push happens before the world write — so this line is the one that must have teeth.
+    expect([first?.tick, worldOf(store).tick],
+      'the first advance ran to a committed result').toEqual([4, 4]);
     expect(store.getState().pulseUndoStack).toHaveLength(1);
     const tickAfterFirst = worldOf(store).tick;
 
@@ -264,7 +281,10 @@ describe('pulse mutators are gated while an advance is in flight', () => {
 
     kernelGate.release();
     const result = await advancing;
-    expect(result.ok).not.toBe(false);
+    // The same positive (U109) for the SECOND advance: a second one_month interval on top of the
+    // first, so the pulse's own tick and the campaign clock both read 8 (measured).
+    expect([result?.tick, worldOf(store).tick],
+      'the second advance ran to a committed result').toEqual([8, 8]);
     expect(worldOf(store).tick).toBeGreaterThan(tickAfterFirst);
     expect(store.getState().pulseUndoStack).toHaveLength(2);
 
