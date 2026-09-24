@@ -438,8 +438,8 @@ export const ENVOY_PARLAY_REFUSAL_REASONS = Object.freeze([
  * the envoy away yet, but tests his word first (R-29). A new MEMBER of this one reception
  * vocabulary, never a new direction: SP-D2's reception row types `decision` by reference, so
  * the row resolves the word the moment it is here. Codepoint order holds (receive, turn_away,
- * vet). The deterministic verdict is `counterIntelSweep.js :: vetEnvoyWord`, over the BUILT
- * vetting reader and the testimony ladder; its consumer in the parlay stage is SP-D2-c's.
+ * vet). The court answers it in `counterIntelSweep.js :: weighEnvoyWord`, by the one vetting
+ * home's verdict and the testimony ladder; its consumer in the parlay stage is SP-D2-c's.
  */
 export const ENVOY_RECEPTION_DECISIONS = Object.freeze(['receive', 'turn_away', 'vet']);
 

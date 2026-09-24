@@ -15,8 +15,9 @@
  *     hum is its receipt; no spy is ever fabricated), FALSE_ACCUSATION (nothing found by a court
  *     whose suspicion clears its zeal band: it names a resident anyway, a REPUTATION event only,
  *     priced as a deception charge against its own court, the people's credibility stock).
- *   VET ("Test their word."): the third reception arm, `vet` in `ENVOY_RECEPTION_DECISIONS`. A
- *     deterministic verdict over the envoy's testimony rung and the BUILT vetting reader.
+ *   VET ("Test their word."): the third reception arm, `vet` in `ENVOY_RECEPTION_DECISIONS`, a
+ *     CONSUMER of the one vetting home (`sendTwoDivergence.js :: vetVolunteerEnvoy`, ⟨F8⟩): it
+ *     carries that decider's verdict whole and moves the envoy's testimony rung by it.
  *   SEND-TWO: consumes `sendTwoDivergence.js`, the one home of the divergence reader (J-INF-15),
  *     with the tolerance rung that keeps two honest, weathered accounts from reading as a traitor.
  *   THE EDITOR (SR-2): the direction `sweep-for-agents` in `operations.js`'s OpTypeDeclaration
@@ -237,18 +238,20 @@ export const VET_DECISION = ENVOY_RECEPTION_DECISIONS.filter((word) => word === 
 const COVERT_CLASS = ENVOY_PURPOSE_CLASSES.filter((word) => word === 'covert')[0] || '';
 
 /**
- * VET: TEST THEIR WORD. A careful reading of the envoy through the BUILT vetting reader; a man
- * the seat's own records clear keeps his testimony rung, a man they flag drops one rung toward
- * tavern talk. Deterministic: same envoy, same records, same verdict.
+ * VET: TEST THEIR WORD, answered by the ONE vetting home. The careful seat of
+ * `sendTwoDivergence.js :: vetVolunteerEnvoy` decides; this arm carries its verdict WHOLE and
+ * mints no acceptance and no refusal basis of its own (⟨F8⟩: a vetting refusal is minted in one
+ * place). A man the verdict clears keeps his testimony rung, a man it refuses drops one rung
+ * toward tavern talk. Deterministic: same envoy, same records, same verdict.
  * @param {{ rung: unknown, volunteer: unknown }} args
- * @returns {{ decision: string, accepted: boolean, basis: string, rung: string }}
+ * @returns {{ decision: string, verdict: ReturnType<typeof vetVolunteerEnvoy>, rung: string }}
  */
-export function vetEnvoyWord({ rung, volunteer }) {
+export function weighEnvoyWord({ rung, volunteer }) {
   const careful = VETTING_QUALITIES.filter((q) => q === 'careful')[0] || '';
-  const read = vetVolunteerEnvoy({ quality: careful, volunteer });
+  const verdict = vetVolunteerEnvoy({ quality: careful, volunteer });
   const index = testimonyRungOf(rung);
-  const vetted = read.reason === 'vetted' && read.accepted ? index : Math.min(TESTIMONY_LADDER.length - 1, index + 1);
-  return { decision: VET_DECISION, accepted: read.reason === 'vetted' && read.accepted, basis: read.basis, rung: TESTIMONY_LADDER[vetted] };
+  const after = verdict.accepted ? index : Math.min(TESTIMONY_LADDER.length - 1, index + 1);
+  return { decision: VET_DECISION, verdict, rung: TESTIMONY_LADDER[after] };
 }
 
 /**

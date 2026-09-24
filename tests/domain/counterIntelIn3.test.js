@@ -41,7 +41,7 @@ const {
 const {
   COUNTER_INTEL_WORLD_CONDITIONS, SEND_TWO_TUNING, SUSPICION_ABOVE_CONDITION, SUSPICION_ABOVE_ROW, SWEEP_DIRECTION_OP_TYPES,
   SWEEP_DIRECTION_TYPE, SWEEP_OUTCOMES, SWEEP_REFUSALS, SWEEP_TUNING, VET_DECISION, castAccused, covertWatchersOf,
-  resolveSweep, sendTwoRead, suspicionAboveSubjects, vetEnvoyWord, watchRowsFor,
+  resolveSweep, sendTwoRead, suspicionAboveSubjects, watchRowsFor, weighEnvoyWord,
 } = await import('../../src/domain/worldPulse/counterIntelSweep.js');
 const { PATRON_EXPOSURE_TUNING, exposedPatronInstitutions, projectedPatronBindingsFor } = await import('../../src/domain/worldPulse/patronExposure.js');
 const { advanceInformationStatecraft, processLies, processSecrecy, SIGHT_TUNING } = await import('../../src/domain/worldPulse/informationStatecraft.js');
@@ -51,7 +51,7 @@ const { QUERY_REFUSALS } = await import('../../src/domain/worldPulse/brokerageSe
 const { ENVOY_RECEPTION_DECISIONS } = await import('../../src/domain/worldPulse/envoyErrandVocabulary.js');
 const { ENVOY_RECEPTION_TYPE, envoyReceptionRow } = await import('../../src/domain/worldPulse/envoyInbound.js');
 const { TESTIMONY_LADDER } = await import('../../src/domain/worldPulse/envoyTestimony.js');
-const { readSendTwoDivergence } = await import('../../src/domain/worldPulse/sendTwoDivergence.js');
+const { readSendTwoDivergence, vetVolunteerEnvoy } = await import('../../src/domain/worldPulse/sendTwoDivergence.js');
 const { projectPatronBindings } = await import('../../src/domain/worldPulse/brokeragePatronage.js');
 const { hash01 } = await import('../../src/domain/region/contestMath.js');
 const { HABIT_FORK_REGISTRY } = await import('../../src/domain/worldPulse/habitForkRegistry.js');
@@ -62,6 +62,13 @@ const { PHANTOM_KIND } = await import('../../src/domain/edit/phantoms.js');
 const { PROSPERITY_TIERS } = await import('../../src/data/constants.js');
 const { mintCovert } = await import('../helpers/errandSpineFixture.js');
 const { advanceEnvoyErrands } = await import('../../src/domain/worldPulse/envoyErrand.js');
+const { IN3_ENVOY_WORD_COUPLING, IN3_TEMPER_AND_WOUNDS_COUPLING } = await import('../../src/domain/certification/couplingRegistryInfo.js');
+/** The modules the wave's two coupling rows address, as namespaces (a row naming any other module reds). */
+const ADDRESSED = Object.freeze({
+  'src/domain/worldPulse/suspicion.js': await import('../../src/domain/worldPulse/suspicion.js'),
+  'src/domain/worldPulse/counterIntelSweep.js': await import('../../src/domain/worldPulse/counterIntelSweep.js'),
+  'src/domain/worldPulse/strategicPosture.js': await import('../../src/domain/worldPulse/strategicPosture.js'),
+});
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), '../..');
 const FLAG = 'counterIntelEnabled';
@@ -442,10 +449,19 @@ describe('IN-3 — VET, the third reception arm, and SEND-TWO over the one reade
     expect(resolveDecree(stage([], op('vet'), { id: 'd1', orderedAt: 't0' })[0], catalogues)).toEqual({ ok: true });
     expect(resolveDecree(stage([], op('interrogate'), { id: 'd2', orderedAt: 't0' })[0], catalogues)).toEqual({ ok: false, missing: 'pool-value', was: 'interrogate' });
     const clean = { npcId: 'n1', loyaltyBand: 'proven', foreignTieBand: 'none' };
-    expect(vetEnvoyWord({ rung: 'corroborated', volunteer: clean })).toEqual({ decision: 'vet', accepted: true, basis: 'nothing_found', rung: 'corroborated' });
-    expect(vetEnvoyWord({ rung: 'corroborated', volunteer: { ...clean, loyaltyBand: 'suspect' } })).toEqual({ decision: 'vet', accepted: false, basis: 'loyalty', rung: 'reported' });
-    expect(vetEnvoyWord({ rung: 'tavern_talk', volunteer: { ...clean, foreignTieBand: 'close' } }).rung).toBe(TESTIMONY_LADDER[3]);
-    expect(vetEnvoyWord({ rung: 'corroborated', volunteer: clean })).toEqual(vetEnvoyWord({ rung: 'corroborated', volunteer: clean }));
+    // ⟨F8⟩ THE ONE VETTING HOME DECIDES: the arm carries the careful seat's own verdict whole and
+    // moves only the testimony rung by it (a cleared man keeps his rung, a refused one drops one).
+    const careful = (volunteer) => vetVolunteerEnvoy({ quality: 'careful', volunteer });
+    expect(careful(clean)).toEqual({ accepted: true, quality: 'careful', basis: 'nothing_found', reason: 'vetted' });
+    expect(weighEnvoyWord({ rung: 'corroborated', volunteer: clean })).toEqual({ decision: 'vet', verdict: careful(clean), rung: 'corroborated' });
+    const suspect = { ...clean, loyaltyBand: 'suspect' };
+    expect(careful(suspect)).toMatchObject({ accepted: false, basis: 'loyalty' });
+    expect(weighEnvoyWord({ rung: 'corroborated', volunteer: suspect })).toEqual({ decision: 'vet', verdict: careful(suspect), rung: 'reported' });
+    expect(weighEnvoyWord({ rung: 'tavern_talk', volunteer: { ...clean, foreignTieBand: 'close' } }).rung).toBe(TESTIMONY_LADDER[3]);
+    // A volunteer the seat cannot read is the decider's own refusal, carried as it came.
+    expect(careful({}).reason).toBe('invalid_volunteer');
+    expect(weighEnvoyWord({ rung: 'corroborated', volunteer: {} })).toEqual({ decision: 'vet', verdict: careful({}), rung: 'reported' });
+    expect(weighEnvoyWord({ rung: 'corroborated', volunteer: clean })).toEqual(weighEnvoyWord({ rung: 'corroborated', volunteer: clean }));
   });
 
   test('SEND-TWO: two honest carriers of weathered hearsay never read as a traitor, a reported divergence does', () => {
@@ -460,7 +476,7 @@ describe('IN-3 — VET, the third reception arm, and SEND-TWO over the one reade
     expect(SEND_TWO_TUNING.toleranceRung).toBe('reported');
   });
 
-  test('THE ONE HOME: the divergence reader and its vocabulary are declared once, and the sweep imports them, a planted fork convicted', () => {
+  test('THE ONE HOME: the divergence reader, its vocabulary and the vetting decision each live once; the sweep consumes them, planted forks convicted', () => {
     const declarations = (files) => files.flatMap(([rel, text]) => (
       /export\s+function\s+readSendTwoDivergence\b|export\s+const\s+SEND_TWO_VERDICTS\b/.test(codeOnly(text)) ? [rel] : []));
     const tree = walk(join(ROOT, 'src')).map((abs) => [relative(ROOT, abs).replace(/\\/g, '/'), readFileSync(abs, 'utf8')]);
@@ -469,6 +485,19 @@ describe('IN-3 — VET, the third reception arm, and SEND-TWO over the one reade
     expect(sweep).toMatch(/import \{ readSendTwoDivergence, VETTING_QUALITIES, vetVolunteerEnvoy \} from '\.\/sendTwoDivergence\.js';/);
     const forked = [...tree, ['src/domain/worldPulse/counterIntelSweep.js', `${sweep}\nexport function readSendTwoDivergence() { return null; }\n`]];
     expect(declarations(forked)).toEqual(['src/domain/worldPulse/sendTwoDivergence.js', 'src/domain/worldPulse/counterIntelSweep.js']);
+    // ⟨F8⟩ THE VETTING DECISION, mirroring tests/domain/sendTwoDivergenceWr7d.test.js's one-home
+    // scan so this suite reds on its own module: no vetting-named function here, and no acceptance
+    // or basis spelled (the non-decider price that scan's enrolled derivers pay).
+    const F8_SPELLING = /function\s+\w*[vV]et(Volunteer|Candidate|Envoy|ting)\w*\s*\(/;
+    expect(F8_SPELLING.test(`${sweep}\nexport function vetEnvoyWord() { return null; }\n`)).toBe(true);
+    expect(F8_SPELLING.test(sweep)).toBe(false);
+    expect(sweep).toMatch(/const verdict = vetVolunteerEnvoy\(\{ quality: careful, volunteer \}\);/);
+    // The rung moves on the decider's own answer alone: no second acceptance rule composed here.
+    expect(sweep).toMatch(/const after = verdict\.accepted \? index : /);
+    // anchored: the decider call and the rung rule are pinned just above on this same live source.
+    expect(sweep).not.toContain('accepted:');
+    // anchored: the same live source whose decider call and rung rule are pinned above.
+    expect(sweep).not.toContain('basis:');
   });
 });
 
@@ -537,13 +566,22 @@ describe('IN-3 — the editor line: the direction and the predicate, headless', 
 });
 
 describe('IN-3 — the registry rows and the manifest', () => {
-  test('HBF-103 registers the sweep draw with SWEEP_OUTCOMES from the fork\'s own module, and the key is manifested virtual', () => {
+  test('HBF-103 registers the sweep draw with SWEEP_OUTCOMES from the fork\'s own module, the key is manifested virtual, and the coupling rows name live exports', () => {
     const row = HABIT_FORK_REGISTRY.find((r) => r.symbol === 'resolveSweep');
     expect(row).toMatchObject({ forkId: 'HBF-103', module: 'src/domain/worldPulse/counterIntelSweep', discovery: 'checklist', disposition: 'DEFER', actionVocabulary: 'SWEEP_OUTCOMES' });
     expect(HABIT_FORK_REGISTRY.find((r) => r.symbol === 'exposedPatronInstitutions')).toMatchObject({ forkId: 'HBF-104', discovery: 'idiom', disposition: 'DEFER', actionVocabulary: null });
     expect(ENGINE_GATED_VIRTUAL_RULE_KEYS).toContain(FLAG);
     const at = ENGINE_GATED_VIRTUAL_RULE_KEYS.indexOf(FLAG);
     expect(ENGINE_GATED_VIRTUAL_RULE_KEYS[at - 1] < FLAG && FLAG < ENGINE_GATED_VIRTUAL_RULE_KEYS[at + 1]).toBe(true);
+    // THE WAVE'S TWO COUPLING ROWS NAME LIVE EXPORTS. No coupling walker resolves a row's `#symbol`,
+    // so a rename would strand an address in silence (the ⟨F8⟩ cure renamed the VET arm).
+    for (const row of [IN3_ENVOY_WORD_COUPLING, IN3_TEMPER_AND_WOUNDS_COUPLING]) {
+      for (const address of [row.read, row.counterforce]) {
+        const [path, symbol] = address.split('#');
+        expect(typeof ADDRESSED[path]?.[symbol], address).toBe('function');
+      }
+    }
+    expect(IN3_ENVOY_WORD_COUPLING.counterforce).toBe('src/domain/worldPulse/counterIntelSweep.js#weighEnvoyWord');
   });
 
   test('NO-FATES and no numbers across every sentence the counter-game composes', () => {

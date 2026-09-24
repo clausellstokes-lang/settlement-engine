@@ -150,11 +150,12 @@ export const IN0C_DISCLOSURE_SIGNING_CREDIT_COUPLING = couplingRow({
  * THE READ is `suspicionOf`, whose band is spelled in the estate's ONE intensity ladder, borrowed
  * from the GRAMMAR vocabulary leaf that declares it (`envoyErrandVocabulary.js`). Its REACHABLE
  * receipt at this wave is the gate the head writes when that band clears: the secrecy posture
- * opened in answer. THE COUNTERFORCE is VET (`vetEnvoyWord`), the third reception arm: it reads
+ * opened in answer. THE COUNTERFORCE is VET (`weighEnvoyWord`), the third reception arm: it reads
  * the testimony ladder (`envoyTestimony.js`), the reception words IN-3 grows by `vet`, and the one
  * inbound reader (`envoyInbound.js`) the sweep seal's ES arm consults, and it tests a report before
- * the court acts on it. VET's own verdict persists when SP-D2-c's parlay consumer lands; until
- * then this row names only the half the shipped road can write, and re-aims when that lands.
+ * the court acts on it, by the one vetting home's verdict (⟨F8⟩). VET's answer persists when
+ * SP-D2-c's parlay consumer lands; until then this row names only the half the shipped road can
+ * write, and re-aims when that lands.
  *
  * DARK ⇒ NOTHING: every door rides `counterIntelEnabled` by name, and the inbound reader answers
  * empty while the envoy layer or the errand spine is dark.
@@ -166,7 +167,7 @@ export const IN3_ENVOY_WORD_COUPLING = couplingRow({
   direction: 'GRAMMAR→INFO',
   read: 'src/domain/worldPulse/suspicion.js#suspicionOf',
   receiptField: 'spatialLedgers.secrecyPostures[].{level01,enteredTick}',
-  counterforce: 'src/domain/worldPulse/counterIntelSweep.js#vetEnvoyWord',
+  counterforce: 'src/domain/worldPulse/counterIntelSweep.js#weighEnvoyWord',
   flags: Object.freeze([
     'counterIntelEnabled',
   ]),
