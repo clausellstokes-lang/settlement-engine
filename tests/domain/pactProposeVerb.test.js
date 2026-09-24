@@ -156,8 +156,17 @@ describe('GR-2b — PROPOSE_PACT, the DM verb on the realm proposal lane', () =>
     expect(resolve('maybe')).toEqual({ ok: false, missing: 'pool-value', was: 'maybe' });
   });
 
-  it('A7: a phantom counterparty is never offered, and every reader of proposal rows takes a phantom row without throwing', () => {
-    const ctx = { settlements: [court('a'), court('b'), phantomCourt], tick: TICK };
+  it('A7: a phantom never reaches the campaign\'s court list — excluded BY CONSTRUCTION, never by a runtime filter — and every reader of proposal rows takes a phantom row without throwing', () => {
+    // THE LIBRARY holds the phantom; THE CAMPAIGN never named it. `ctx.settlements` is built
+    // exactly as the realm composer and the store's own mint build it (RealmVerbComposer.jsx;
+    // campaignSettlements() in store/campaignSliceShared.js): the library, filtered down to the
+    // campaign's own settlementIds. 'ph' is a row on the shelf and nothing more.
+    const library = [court('a'), court('b'), phantomCourt];
+    const memberIds = new Set(['a', 'b']);
+    const ctx = { settlements: library.filter((s) => memberIds.has(s.id)), tick: TICK };
+    expect(ctx.settlements.map((s) => s.id),
+      'the campaign\'s court list is phantom-free by symbol: a phantom on the shelf that was never'
+      + ' added to settlementIds never reaches it — no discriminant read required').toEqual(['a', 'b']);
     expect(manifest.pactCounterpartyOptions(lit(), ctx, 'a').map((o) => o.id)).toEqual(['b']);
     expect(manifest.pactPartyOptions(lit(), ctx).map((o) => o.id)).toEqual(['a', 'b']);
     const world = withRows(lit(), [openRow('a', 'ph')]);
