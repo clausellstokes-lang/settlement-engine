@@ -373,6 +373,22 @@ describe('SP-B fence 4 — gate polarity and purity, censused over the real tree
   }));
 
   test('every production read of every SP-B flag is the strict === true form', () => {
+    // ⭐ A PRESET DECLARATION IS NOT A READ (LIT-1b, 2026-09-24; J-EM-16, the lit law, signed as
+    // ODQ §934.84; LIT-1a's oath fence the precedent). The lighting unit declares two of these keys
+    // in the preset table's FP_LIT_BELIEF fragment, and the one lawful spelling there is a strict
+    // `true` (dark is ABSENT, never a declared false), so exactly that shape in exactly that file is
+    // set aside, counted neither as a read nor as an offence; every other site, in that file or any
+    // other, must still be the strict read, and the non-vacuity floor below still counts real gates.
+    const PRESET_TABLE = 'src/domain/worldPulse/simulationRules.js';
+    /** @param {string} rel @param {string} flag @param {string} line */
+    const isLitDeclaration = (rel, flag, line) => rel === PRESET_TABLE
+      && new RegExp(`^${flag}\\s*:\\s*true\\s*,?$`).test(line.trim());
+    // GUARD THE GUARD: a declared false, a truthy read and the same line in another file are all
+    // still convicted, so the exemption cannot widen into a pass for a loose read.
+    expect(isLitDeclaration(PRESET_TABLE, FLAGS[0], `  ${FLAGS[0]}: true,`)).toBe(true);
+    expect(isLitDeclaration(PRESET_TABLE, FLAGS[0], `  ${FLAGS[0]}: false,`)).toBe(false);
+    expect(isLitDeclaration(PRESET_TABLE, FLAGS[0], `  if (rules.${FLAGS[0]}) {`)).toBe(false);
+    expect(isLitDeclaration('src/domain/x.js', FLAGS[0], `  ${FLAGS[0]}: true,`)).toBe(false);
     for (const flag of FLAGS) {
       /** @type {string[]} */
       const offenders = [];
@@ -380,6 +396,7 @@ describe('SP-B fence 4 — gate polarity and purity, censused over the real tree
       for (const { rel, code } of sources) {
         for (const line of code.split('\n')) {
           if (!line.includes(flag)) continue;
+          if (isLitDeclaration(rel, flag, line)) continue;
           reads += 1;
           if (!new RegExp(`${flag}\\s*===\\s*true`).test(line)) offenders.push(`${rel}: ${line.trim()}`);
         }

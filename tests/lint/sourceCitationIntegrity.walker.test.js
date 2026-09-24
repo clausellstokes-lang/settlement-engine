@@ -47,7 +47,11 @@
  * past-EOF citations this gate deliberately does not see. FOUR rules select them,
  * each checkable, and the full roster is committed in the baseline's
  * `archivalExclusionAtFreeze.files`:
- *   tree (20)    docs/review-r2/**, docs/shift-records/**
+ *   tree (21)    docs/review-r2/**, docs/shift-records/**
+ *                (2026-09-24-fp-lighting-1b.json joined 2026-09-24, 20 -> 21 at the pick onto
+ *                fp/integration (18 -> 19 at its base): LIT-1b's signed record of the
+ *                preset-lighting-witness re-record, born inside docs/shift-records/; a
+ *                GROWTH that hid nothing, zero past-EOF of its own.)
  *                (2026-09-24-in5-herald-knowledge-desk.json joined 2026-09-24, 19 -> 20: IN-5's
  *                signed ENROLL record of the herald-knowledge-desk golden, born inside
  *                docs/shift-records/ at 6cf6920d4; the roster row owed by the lane, cured at FP

@@ -753,6 +753,14 @@ const ONE_REGEN = Object.freeze({
 // (SR-7), or cuts a new fragment for a new set.
 //   FP_LIT_ALIVE: the four world-alive presets. Faith unseating's other gate is data (a
 //     deity world); pact formation's shared-threat occasion needs no belief substrate.
+//   FP_LIT_BELIEF (LIT-1b, 2026-09-24): the presets that carry pactFormationEnabled AND an
+//     infoMode that records beliefs, dramatic_campaign and living_realm 'perfect_delayed' and
+//     full_simulation 'full'. The belief axes host and its scarcity and conditions families are
+//     what the pact stage's trade_demand and migration_pressure occasions read (the FP kit's LIT
+//     dependency map, chain 4). realistic_regional carries the pact stage but is omniscient,
+//     where beliefsActive is false and the chain cannot act, so it lights nothing here (ruling
+//     FP-24 keeps it omniscient). believedDevotionEnabled (faith_communion's family) is not a
+//     member: the unit lights the three.
 //   FP_LIT_WARPEACE: the two presets where warLayerEnabled and peaceEngineEnabled are both
 //     lit (peaceCausalActive): that door opens the treaty fold the lifecycle voice and the
 //     renewal memory run inside, and the war-end mint the oath holder stamps.
@@ -762,6 +770,11 @@ const ONE_REGEN = Object.freeze({
 const FP_LIT_ALIVE = Object.freeze({
   faithUnseatingEnabled: true,
   pactFormationEnabled: true,
+});
+const FP_LIT_BELIEF = Object.freeze({
+  beliefAxesEnabled: true,
+  believedConditionsEnabled: true,
+  believedScarcityEnabled: true,
 });
 const FP_LIT_WARPEACE = Object.freeze({
   oathHolderEnabled: true,
@@ -913,8 +926,15 @@ export const SIMULATION_RULE_PRESETS = Object.freeze({
     religionDynamicsEnabled: true,
     seasonsEnabled: true,
     disastersEnabled: true,
+    // LIT-1b, RULING FP-24 (the FP chair, 2026-09-24, under the owner's word "Again, I leave
+    // all judgment to you", vetoable): the belief-recording infoMode living_realm carries, so
+    // the belief chain can act in the DM-facing reference preset. NOT a comparison key, so an
+    // installed Dramatic Campaign (stored omniscient) keeps its preset id and its own mode.
+    infoMode: 'perfect_delayed',
     // LIT-1a: the FP layers whose every prerequisite this preset carries (war and peace lit).
+    // LIT-1b: the belief chain, now that this preset records beliefs (see FP_LIT_BELIEF).
     ...FP_LIT_ALIVE,
+    ...FP_LIT_BELIEF,
     ...FP_LIT_WARPEACE,
     // W-R2-LIGHT: the nine engine-wave gates — dramatic_campaign is a world-alive
     // preset, so it runs the full anti-stasis stack (virtual flags; see WAVES).
@@ -955,7 +975,9 @@ export const SIMULATION_RULE_PRESETS = Object.freeze({
     // key, so pre-3.5 saves carrying this preset keep their identity.
     infoMode: 'perfect_delayed',
     // LIT-1a: the FP layers whose every prerequisite this preset carries (see FP_LIT_ALIVE).
+    // LIT-1b: the belief chain this preset's infoMode records (see FP_LIT_BELIEF).
     ...FP_LIT_ALIVE,
+    ...FP_LIT_BELIEF,
     // W-R2-LIGHT: a "living realm" without the living-engine waves would lie — its
     // distinction from full_simulation is APPROVAL POSTURE (routine autonomy), not
     // engine depth, so it runs the same nine engine-wave gates (owner ruling).
@@ -1167,7 +1189,9 @@ export const SIMULATION_RULE_PRESETS = Object.freeze({
     // string key is invisible to it either way.
     realmMagicDefault: 'magical',
     // LIT-1a: the FP layers whose every prerequisite this preset carries (war and peace lit).
+    // LIT-1b: the belief chain this preset's infoMode records (see FP_LIT_BELIEF).
     ...FP_LIT_ALIVE,
+    ...FP_LIT_BELIEF,
     ...FP_LIT_WARPEACE,
     // W-R2-LIGHT: the ceiling is everything-on by name — it runs the full nine-wave
     // anti-stasis stack (warLayer is lit above, so intervention/peaceEngine/
@@ -1237,7 +1261,7 @@ export function deriveDormantRuleKeys(register, defaults, presets) {
  * declares it. Its live readers are the five dormancy fences, each asserting this claim
  * about its own key, and the walker that proves the derivation.
  *
- * It is the register less every key a preset lights (LIT-1a lit the first five, 2026-09-24),
+ * It is the register less every key a preset lights (LIT-1a lit five, LIT-1b three, 2026-09-24),
  * in register order. That difference is a MEASUREMENT of the tree, not a property of code.
  *
  * @type {ReadonlyArray<string>}

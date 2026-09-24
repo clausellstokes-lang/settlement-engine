@@ -11,6 +11,7 @@ import {
   ENGINE_GATED_VIRTUAL_RULE_KEYS,
   NEW_CAMPAIGN_SIMULATION_PRESET_ID,
   SIMULATION_RULE_PRESETS,
+  infoModeOf,
   newCampaignSimulationRules,
   normalizeSimulationRules,
 } from '../../src/domain/worldPulse/simulationRules.js';
@@ -559,6 +560,76 @@ describe('simulation rules preset — stability under future-flag churn', () => 
       expect(normalizeSimulationRules(installed).presetId, `${id} installed identity`).toBe(id);
     }
     expect(normalizeSimulationRules({}).presetId).toBe(DEFAULT_SIMULATION_PRESET_ID);
+  });
+
+  // ⭐ LIT-1b (2026-09-24; J-EM-16 under the owner's word of 2026-09-23, "no just build it all
+  // shipped lit", signed as ODQ §934.84). The belief chain lights where the pact stage is lit AND
+  // the preset's infoMode records beliefs: the belief axes host and its scarcity and conditions
+  // families, the three keys the pact stage's trade_demand and migration_pressure occasions read
+  // (the FP kit's LIT dependency map, chain 4). RULING FP-24 (the FP chair, 2026-09-24, vetoable) gave dramatic_campaign
+  // living_realm's 'perfect_delayed' in the same act and kept realistic_regional omniscient, where
+  // beliefsActive is false and the chain cannot act, so that preset lights none of the three. The
+  // roster is spelled here independently of the source fragment (FP_LIT_BELIEF), and the lit set
+  // is ALSO derived from the table, so a rename, a stray lighting or a re-darkened infoMode reds.
+  const FP_LIT_BELIEF_FLAGS = ['beliefAxesEnabled', 'believedConditionsEnabled', 'believedScarcityEnabled'];
+  const FP_BELIEF_PRESET_IDS = ['dramatic_campaign', 'living_realm', 'full_simulation'];
+
+  test('LIT-1b: the belief chain is PRESENT exactly where the pact stage is lit and beliefs are recorded, and stays VIRTUAL', () => {
+    // Anti-vacuity on the rosters: three distinct keys, three lit presets, and the dark side SPELLED
+    // rather than derived as the complement, so a preset added to or dropped from either side reds.
+    expect(new Set(FP_LIT_BELIEF_FLAGS).size).toBe(3);
+    const darkIds = ['quiet_local', 'realistic_regional', 'static_campaign', 'narrative_campaign'];
+    expect([...FP_BELIEF_PRESET_IDS, ...darkIds].sort()).toEqual([...PRESET_IDS].sort());
+    for (const flag of FP_LIT_BELIEF_FLAGS) {
+      // Every one a REGISTER member rather than a name this file invented, gone from the DERIVED
+      // dormant list, lit in its three presets and ABSENT (never a declared false) elsewhere.
+      expect(ENGINE_GATED_VIRTUAL_RULE_KEYS.includes(flag), `${flag} must stay registered`).toBe(true);
+      expect(ENGINE_GATED_DORMANT_RULE_KEYS.includes(flag), `${flag} must leave the dormant list`).toBe(false);
+      for (const id of FP_BELIEF_PRESET_IDS) {
+        expect(SIMULATION_RULE_PRESETS[id].rules[flag], `${id}.${flag} must be lit`).toBe(true);
+      }
+      for (const id of darkIds) {
+        expect(flag in SIMULATION_RULE_PRESETS[id].rules, `${id}.${flag} must stay absent`).toBe(false);
+      }
+      // VIRTUAL: no defaults entry, therefore no comparison key and no identity effect.
+      expect(flag in DEFAULT_SIMULATION_RULES, `${flag} must stay absent from the defaults`).toBe(false);
+      expect(RULE_COMPARISON_KEYS.includes(flag), `${flag} must not be a comparison key`).toBe(false);
+    }
+    // THE PREREQUISITE, DERIVED FROM THE TABLE: exactly the presets that light the pact stage AND
+    // record beliefs (an infoMode other than omniscient; beliefMap.beliefsActive's own read).
+    const derived = PRESET_IDS.filter((id) => SIMULATION_RULE_PRESETS[id].rules.pactFormationEnabled === true
+      && infoModeOf(SIMULATION_RULE_PRESETS[id].rules) !== 'omniscient');
+    expect([...derived].sort()).toEqual([...FP_BELIEF_PRESET_IDS].sort());
+    // FP-24, both halves. The figure it replaces for dramatic_campaign, verbatim: 'omniscient'.
+    expect(SIMULATION_RULE_PRESETS.dramatic_campaign.rules.infoMode).toBe('perfect_delayed');
+    expect(SIMULATION_RULE_PRESETS.realistic_regional.rules.pactFormationEnabled).toBe(true);
+    expect(SIMULATION_RULE_PRESETS.realistic_regional.rules.infoMode).toBe('omniscient');
+    // SP-B's third family (devotion) is not this unit's: still registered, dormant, absent everywhere.
+    expect(ENGINE_GATED_VIRTUAL_RULE_KEYS.includes('believedDevotionEnabled')).toBe(true);
+    expect(ENGINE_GATED_DORMANT_RULE_KEYS.includes('believedDevotionEnabled')).toBe(true);
+    for (const id of PRESET_IDS) {
+      expect('believedDevotionEnabled' in SIMULATION_RULE_PRESETS[id].rules, `${id} must not declare believedDevotionEnabled`).toBe(false);
+    }
+    // IDENTITY, three ways (the 432ff6441 idiom): a keyless copy of every preset re-infers itself
+    // (the One-Regen identity arm above covers all seven); an installed save carrying NONE of the
+    // three re-infers its own id; and the keyless default still infers realistic_regional.
+    for (const id of FP_BELIEF_PRESET_IDS) {
+      const installed = { ...SIMULATION_RULE_PRESETS[id].rules };
+      delete installed.presetId;
+      for (const flag of FP_LIT_BELIEF_FLAGS) delete installed[flag];
+      expect(normalizeSimulationRules(installed).presetId, `${id} installed identity`).toBe(id);
+    }
+    expect(normalizeSimulationRules({}).presetId).toBe(DEFAULT_SIMULATION_PRESET_ID);
+    // …and FP-24's own identity case: an installed Dramatic Campaign stored with the old omniscient
+    // mode and none of the three keeps its id AND its stored mode, because infoMode is not a
+    // comparison key (the STEP 3.5 law); only a world BORN into the preset receives the new mode.
+    const storedOmniscient = { ...SIMULATION_RULE_PRESETS.dramatic_campaign.rules, infoMode: 'omniscient' };
+    delete storedOmniscient.presetId;
+    for (const flag of FP_LIT_BELIEF_FLAGS) delete storedOmniscient[flag];
+    const reloaded = normalizeSimulationRules(storedOmniscient);
+    expect(reloaded.presetId).toBe('dramatic_campaign');
+    expect(reloaded.infoMode).toBe('omniscient');
+    expect(normalizeSimulationRules(SIMULATION_RULE_PRESETS.dramatic_campaign.rules).infoMode).toBe('perfect_delayed');
   });
 
   // #5 — custom detection still fires (proves matching is not always-true).

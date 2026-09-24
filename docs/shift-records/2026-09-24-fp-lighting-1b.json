@@ -1,0 +1,97 @@
+{
+  "_doc": "SIGNED 2026-09-24 by the FP chair (session 87797a6a) under the owner's word of 2026-09-23, quoted verbatim in `ownerWords` and recorded as ODQ §934.84 (THE FP LIGHTING SIGNATURE): the signature is the chair's dispatch of LIT-1b (the FP kit's briefs/BUILD-FP-LIT-1b.md), which names this file, its one cause and its signer. Prepared, measured and executed by the LIT-1b seat (Opus 5.5) on base 6efff620b (fp/lit-1b). THE SHIFT RECORD FOR THE SECOND FP LIGHTING UNIT: the belief chain the pact stage reads (the belief axes host and its scarcity and conditions families) is declared `true` in the presets that carry pactFormationEnabled AND an infoMode that records beliefs, through one shared fragment in src/domain/worldPulse/simulationRules.js (FP_LIT_BELIEF), and dramatic_campaign takes living_realm's infoMode 'perfect_delayed' in the same act (ruling FP-24). A lighting act, not tuning: no band, weight or threshold moves, and THE PROMISE's owner-signed tuning is untouched. Every key stays VIRTUAL (absent from DEFAULT_SIMULATION_RULES) and infoMode is not a comparison key, so no installed save is re-labelled, gains a byte or changes its stored mode on load; the shift is for worlds BORN into a lit preset, and for a campaign whose DM applies one (the toolbar chip or the rules dialog writes the preset's current rules as a ruleset change, with its receipt). A successor chair does not inherit this signature: it re-confirms in its own chat.",
+  "ownerWords": "no just build it all shipped lit",
+  "ownerDate": "2026-09-23",
+  "odqRow": "§934.84 of docs/OWNER_DECISION_QUEUE.md (THE FP LIGHTING SIGNATURE, recorded by the FP chair 2026-09-24 04:37 EDT on the ledger branch review-fixes-2026-07-08 at dd1e67bff), the owner's word of §12.8 of docs/DESIGN_FP_ARCHITECTURE.md (J-EM-15 item 3, the lighting law J-EM-16)",
+  "cause": "ONE CAUSE: the owner's word, shipped lit (J-EM-16; ODQ §934.84), applied by LIT-1b in the dependency order of the FP kit's LIT dependency map (chain 4: the pact stage acts only when the belief axes are lit and beliefs are recorded). The preset table now declares beliefAxesEnabled, believedConditionsEnabled and believedScarcityEnabled in dramatic_campaign, living_realm and full_simulation, and dramatic_campaign's infoMode reads 'perfect_delayed' where it read 'omniscient' (ruling FP-24, the FP chair under the owner's word of 2026-09-24, 'Again, I leave all judgment to you'). The preset-lighting witness moves exactly five fields in each of those three rows (ruleKeyCount and litFlagCount by three each, rulesSha256, bornWorldSha256, and worldStateSha256 because the rules ride inside the persisted worldState) and nothing else: __birth_default__, quiet_local, realistic_regional, static_campaign and narrative_campaign are byte-identical to the base measurement, no pulse digest (wizardNewsSha256, settlementUpdatesSha256, regionalGraphSha256) moved in any row between the base and the lit tree (the witness realm is two aspatial settlements over one year, where beliefs are not recorded), and distinctWorldStateHashes stays 8.",
+  "seat": "the FP chair (session 87797a6a) signs by its dispatch; the LIT-1b seat (Opus 5.5) prepared this record, measured the witness through its single writer (tests/simulation/presetLightingWitnessRun.js) at the clean base and on the lit tree, and executed the register act through tests/helpers/goldenRecordDoor.js recordGolden at the unit's own committed tree",
+  "lit": {
+    "beliefAxesEnabled": [
+      "dramatic_campaign",
+      "living_realm",
+      "full_simulation"
+    ],
+    "believedConditionsEnabled": [
+      "dramatic_campaign",
+      "living_realm",
+      "full_simulation"
+    ],
+    "believedScarcityEnabled": [
+      "dramatic_campaign",
+      "living_realm",
+      "full_simulation"
+    ]
+  },
+  "presetValueEdits": {
+    "dramatic_campaign.infoMode": "omniscient -> perfect_delayed (ruling FP-24, the same act; not a comparison key, so an installed Dramatic Campaign keeps its preset id and its stored omniscient mode, measured)"
+  },
+  "heldDark": {
+    "realistic_regional": "It carries pactFormationEnabled but its infoMode is omniscient, where beliefMap.beliefsActive is false and the belief chain cannot act; ruling FP-24 keeps it omniscient, so it lights none of the three.",
+    "believedDevotionEnabled": "Not this unit's: the brief lights the three keys the pact stage's scarcity and conditions occasions need. It stays registered, dormant and absent from every preset."
+  },
+  "surfaces": [
+    {
+      "surface": "preset-lighting-witness",
+      "action": "re-record",
+      "predictedRows": 15,
+      "proofForm": "derived-artefact",
+      "expected": {
+        "rows": 15,
+        "witnessRows": 8,
+        "movedRows": [
+          "dramatic_campaign",
+          "living_realm",
+          "full_simulation"
+        ],
+        "unmovedRows": [
+          "__birth_default__",
+          "quiet_local",
+          "realistic_regional",
+          "static_campaign",
+          "narrative_campaign"
+        ],
+        "movedFieldsPerRow": [
+          "ruleKeyCount",
+          "litFlagCount",
+          "rulesSha256",
+          "bornWorldSha256",
+          "worldStateSha256"
+        ],
+        "ruleKeyCount": {
+          "dramatic_campaign": "61 -> 64",
+          "living_realm": "57 -> 60",
+          "full_simulation": "75 -> 78"
+        },
+        "litFlagCount": {
+          "dramatic_campaign": "40 -> 43",
+          "living_realm": "33 -> 36",
+          "full_simulation": "50 -> 53"
+        },
+        "distinctWorldStateHashes": 8,
+        "wholeFileShaBefore": "17ff68dcbe0afef07933f0337f0802393ca3bcaa62d305676e8bed02ddbef893",
+        "wholeFileShaAfter": "9cb549fd2e409f75e7e726bbf24166ea72ac5d6dd23919d8b25f786acd0a1ef2"
+      }
+    }
+  ],
+  "notThisRecordsCause": {
+    "what": "wizardNewsSha256 of dramatic_campaign (94fc69ef... -> 3a936351...) and of full_simulation (bf07cce8... -> 74447747...)",
+    "measured": "The witness was already red at this unit's base 6efff620b on exactly those two fields. Bisected with the manifest's own recipe over git archives of src: 5ca43dc60 (CURE-P1 U2) reproduces the recorded manifest, 87d1b1c00 (CURE-P1 U3, FPQ-23: the npc_goal_rebranch reason's new tellings) does not, and the lighting moves neither field (the base and the lit tree measure them identically).",
+    "disposition": "One record carries one cause, so this re-record leaves both fields at their recorded values: the witness arm 'every witnessed row matches the recorded witness' stays red on exactly those two fields, as it was at the base. Their own signed record landed on the FP tip at 54c009fb2 (docs/shift-records/2026-09-24-fp-witness-prose-cure-p1.json, after this unit's base); the two re-records carry disjoint fields, their union equals this tree's lit measurement in every field (sha256 b0983ac9948d8448add43f0af3a4560550a7c2e652263b571ebaeffb33da44b3), and the register row is re-stamped to it once, at the pick."
+  },
+  "shiftBeyondTheWitness": "The witness realm records no belief, so it records the lighting without observing it act. In a world born into one of the three presets: where the realm is canonized, belief records carry the believed scarcity and conditions axes the pact stage's trade_demand and migration_pressure occasions read; beliefAxesEnabled is also the D-1 deep-couplings host, so belief records gain the population-trend and observance axes and a tradition mutation that reshapes a settlement's dominant observance mints its tradition_change beat, a gate on the flag alone (beliefAxes.beliefAxesActive, read by traditionsKernel.advanceLitTraditions), canonized or not; and a world born into dramatic_campaign runs the non-omniscient information layer ('perfect_delayed') instead of omniscience.",
+  "declaredEdits": [
+    "tests/domain/simulationRulesPreset.stability.test.js: a LIT-1b arm (the three keys lit exactly in their presets and absent elsewhere, virtual, registered, out of the dormant list; the lit set DERIVED as the presets carrying the pact stage and a belief-recording infoMode; FP-24 both halves; believedDevotionEnabled still dormant; identity three ways plus an installed Dramatic Campaign stored omniscient). The birth price does not move: realistic_regional lights nothing here (added 30, total 60, gate keys 23, born 30, measured).",
+    "tests/soak-harness/soakRulesBaseline.json: re-captured by executing the 0cbb0177 literal composition block verbatim over the LIT-1b preset table (75 -> 78 keys per --seasons variant); soakScriptSeams ARM 5's capturedAtHead pin and ARM 8's leak table amended as declared edits, the old values kept",
+    "tests/property/believedWorldAxesDormancyFence.test.js FENCE 4 (the gate-polarity census, a code-only scan of src/): the preset table's strict-true declaration is set aside as a declaration, not a read, with guard-the-guard controls; a declared false, a truthy read and the same line in another file are still convicted",
+    "tests/domain/infoModeUnlock.test.js: dramatic_campaign leaves the omniscient roster (the roster kept verbatim in the comment) and its round trip and stored-omniscient identity are asserted",
+    "scripts/soak/flagConstraints.mjs: NO edit. The three SP-B requires rows (each family -> beliefAxesEnabled) are already present; the covering array is unmoved (78 rows, 17,966 of 17,966 reachable pairs, zero rows crediting a family under a dark host, the same rows digest)",
+    "tests/lint/.source-citation-baseline.json and the citation walker's header: this record joins the archival `tree` roster (18 -> 19)",
+    "docs/GOLDEN_SHIFT_LEDGER.md: the field-by-field row diff with this cause"
+  ],
+  "doorSequence": [
+    "1. The unit's code, instruments and ledger entry are committed by explicit paths on fp/lit-1b, with the re-recorded fixture, this record and the register left as the only uncommitted paths.",
+    "2. The door: GOLDEN_SHIFT_SIGNED=docs/shift-records/2026-09-24-fp-lighting-1b.json, recordGolden({ surface: 'preset-lighting-witness', produce: the fixture bytes already re-recorded from the manifest's own recipe }), which re-stamps the register row (sha256, rows, ownerRow) and FAILS BY DESIGN on a successful write.",
+    "3. The plain runs: tests/lint/goldenFreeze.walker.test.js green; tests/simulation/presetLightingWitness.test.js green but for the one arm declared above, red on exactly the two fields this record does not carry.",
+    "4. The fixture, the register and this record join the same commit (one unit, one commit), which the chair lands; the Owner-Signed trailer the door's commit backstop names is the chair's to add at the landing (ODQ §934.84)."
+  ]
+}
