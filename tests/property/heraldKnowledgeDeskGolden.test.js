@@ -59,7 +59,9 @@ describe('the knowledge desk — the non-omniscient Herald golden (captured firs
   it('the manifest exists and closes at its captured row count', () => {
     expect(existsSync(MANIFEST)).toBe(true);
     // 2 fixed keys + 241 items, captured at the clean base (the enroll record predicted 243).
-    expect(Object.keys(manifest)).toHaveLength(243);
+    // 243 → 366 at the Herald lens U2's pick (FP-31, 2026-09-24): the feed keeps its newest 52 weeks whole and
+    // caps only beyond them, so the year-one desk carries the entries the bare 240 cap used to drop.
+    expect(Object.keys(manifest)).toHaveLength(366);
   });
 
   it('the declared refile set is exactly the knowledge desk the routing table carries', () => {
@@ -96,7 +98,9 @@ describe('the knowledge desk — the non-omniscient Herald golden (captured firs
       // golden and live. The other refiled kinds still mint nothing here.
       expect(moved).toEqual([]);
       const misjudged = Object.keys(live.sections).filter((id) => kindOfNewsId(id) === 'belief_misjudgment').sort();
+      // Under the year window (the Herald lens U2, FP-31) the desk keeps every misjudgment beat of the year:
       expect(misjudged).toEqual([
+        'wizard_news.10.belief_misjudgment.soak-a.soak-c',
         'wizard_news.24.belief_misjudgment.soak-a.soak-c',
         'wizard_news.36.belief_misjudgment.soak-a.soak-c',
       ]);
