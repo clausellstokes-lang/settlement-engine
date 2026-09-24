@@ -40,9 +40,11 @@
  * neighbour through the record alone). The court's own strength is its ground truth, which is
  * knowledge and not belief: at the tick the stage injects its pressure-aware reader, and off the
  * tick (the DM's verb and the editor's seal) it is the one derivation with no pressure index,
- * the `opportunism.js` idiom. The baseline is the lead the war door RECORDED
- * (`believedMarginAtSignature`, read from the demander's side), so an instrument that recorded
- * none (a peace between equals) offers no swing and is renewed, never renegotiated.
+ * the `opportunism.js` idiom. The baseline is the lead RECORDED AT THE SIGNING
+ * (`believedMarginAtSignature`, read from the demander's side): the war door records the
+ * victor's, and the formation door records a negotiated pact's first party's (GR-5c-b), so a
+ * peace made in peace swings too. An instrument that recorded none offers no swing and is
+ * renewed, never renegotiated.
  *
  * THE ASK IS CAPPED. A demand asks back the swing itself as a fraction of each owed clause's
  * weight: never more than the believed ratio moved, and never more than the cap (a demand past
@@ -122,7 +124,8 @@
  * PURE: no rng, no clock, no store. It reads the ledgers and the rows it is handed, and every
  * write goes back to its caller.
  *
- * @enforced-by tests/domain/pactRenewalGr5b.test.js, tests/domain/pactRenegotiationGr5c.test.js
+ * @enforced-by tests/domain/pactRenewalGr5b.test.js, tests/domain/pactRenegotiationGr5c.test.js,
+ *   tests/domain/pactRenewalOrganic.test.js, tests/domain/pactRenegotiationNegotiated.test.js
  */
 import { clamp01 } from '../../kernel/math.js';
 import { NPC_UNAVAILABLE_STATUSES } from '../entities/npcs.js';
@@ -130,7 +133,8 @@ import { OFF_STAGE_STATUSES, isOffStage } from '../roads/state.js';
 import { beliefRecord, strengthOfBand } from './beliefMap.js';
 import { oathHolderActive, stampSworn } from './oathHolder.js';
 import {
-  PACT_LINEAGE_ACTS, amendPactInstrument, lineageOf, stackingCellOf, termIdOf, treatyRenewalActive,
+  PACT_LINEAGE_ACTS, PACT_PROVENANCE, amendPactInstrument, lineageOf, provenanceOf, stackingCellOf, termIdOf,
+  treatyRenewalActive,
 } from './pactAmendment.js';
 import { answerDueTickFor, openPactProposal, pactCounterpartiesFor, settlePactProposal } from './pactProposals.js';
 import { PACT_TRIGGERS } from './pactTriggers.js';
@@ -183,6 +187,9 @@ const RENEWAL_ACT = PACT_LINEAGE_ACTS.filter((act) => act === 'renewed')[0] || '
 
 /** GR-5c's act, read out of the same vocabulary. */
 const RENEGOTIATION_ACT = PACT_LINEAGE_ACTS.filter((act) => act === 'renegotiated')[0] || '';
+
+/** THE PROVENANCE a peace made in peace records (GR-5c-b reads it), out of the closed vocabulary. */
+const NEGOTIATED_PROVENANCE = PACT_PROVENANCE.filter((provenance) => provenance === 'negotiated')[0] || '';
 
 /**
  * THE UNAVAILABLE STATUSES THE CHOKEPOINT LEAVES TO EACH CONSUMER (today, `dead`), DERIVED
@@ -340,19 +347,65 @@ export function draftRenewalSheet(treaty, tick) {
 }
 
 /**
- * THE DEMANDER'S STANDING AT THE SIGNING: the lead the war door recorded
- * (`believedMarginAtSignature`, the victor's over the loser) read from the demander's side,
- * through the ONE orientation reader (CR-WR10-G): the victor's own lead, or the loser's
- * deficit. Null for an instrument that recorded no margin (every peace between equals) and for
- * a court that is neither war party, because a swing needs a signing to swing from.
+ * THE TWO COURTS OF A NEGOTIATED INSTRUMENT, in the order its record keeps them, or the empty
+ * list. Read from the record itself (its `provenance` through the one provenance reader, and its
+ * `parties`), never from `treatyOrientationOf`, which answers `unknown` for a peace nobody
+ * dictated: the formation door writes both parties in codepoint order and the provenance
+ * `negotiated`, and nothing else in the estate writes that provenance.
+ * @param {unknown} treaty @returns {string[]}
+ */
+function negotiatedPartiesOf(treaty) {
+  if (!NEGOTIATED_PROVENANCE || provenanceOf(treaty) !== NEGOTIATED_PROVENANCE) return [];
+  const parties = Array.isArray(recordOf(treaty).parties) ? /** @type {unknown[]} */ (recordOf(treaty).parties).map(text) : [];
+  return parties.length === 2 && parties[0] && parties[1] && parties[0] !== parties[1] ? parties : [];
+}
+
+/**
+ * THE DEMANDER'S STANDING AT THE SIGNING, read from the demander's side. A war's end records the
+ * victor's lead over the loser (`believedMarginAtSignature`, read through the ONE orientation
+ * reader, CR-WR10-G): the victor's own lead, or the loser's deficit. A NEGOTIATED instrument
+ * records its FIRST party's lead over its second in the same field, written at the signing by
+ * `signingLeadRecordOf` (GR-5c-b, READ 3: no peacetime pact could ever be renegotiated): the first
+ * party's own lead, or the second's deficit, the war door's own convention with the first party
+ * in the victor's place. Null for an instrument that recorded no margin and for a court that is
+ * neither party, because a swing needs a signing to swing from.
  * @param {unknown} treaty @param {string} demanderId @returns {number|null}
  */
 function signatureLeadOf(treaty, demanderId) {
   const margin = finite(recordOf(treaty).believedMarginAtSignature);
+  if (margin === null || !demanderId) return null;
   const orientation = treatyOrientationOf(recordOf(treaty));
-  if (margin === null || orientation.kind !== 'wartime' || !demanderId) return null;
-  if (demanderId === orientation.receiverId) return margin;
-  return demanderId === orientation.giverId ? -margin : null;
+  if (orientation.kind === 'wartime') {
+    if (demanderId === orientation.receiverId) return margin;
+    return demanderId === orientation.giverId ? -margin : null;
+  }
+  const [first, second] = negotiatedPartiesOf(treaty);
+  if (first && demanderId === first) return margin;
+  return second && demanderId === second ? -margin : null;
+}
+
+/**
+ * THE LEAD RECORDED AT A NEGOTIATED SIGNING (GR-5c-b), the record `signatureLeadOf` reads. The
+ * formation door spreads it into the instrument it mints: the FIRST party's believed lead over
+ * its second, the court's own strength (the stage's knowledge of itself) less its OWN picture of
+ * the other (`beliefMap.js :: beliefRecord`, the band's midpoint), the same two reads the swing
+ * is later measured with, so a swing is a change and never a level. The empty record when the
+ * layer is dark, no strength reader was handed in, or the first party holds no picture of the
+ * second: the key is drop-when-absent, and an instrument that recorded none is renewed, never
+ * renegotiated.
+ * @param {{worldState: unknown, parties: ReadonlyArray<string>, strengthFor?: ((id: string) => number)|null}} input
+ * @returns {{believedMarginAtSignature?: number}}
+ */
+export function signingLeadRecordOf({ worldState, parties, strengthFor = null }) {
+  if (!treatyRenewalActive(worldState) || typeof strengthFor !== 'function') return {};
+  const first = text(parties[0]);
+  const second = text(parties[1]);
+  if (!first || !second || first === second) return {};
+  const band = finite(recordOf(beliefRecord(
+    /** @type {Parameters<typeof beliefRecord>[0]} */ (worldState), first, second,
+  )).strengthBand);
+  const own = finite(strengthFor(first));
+  return band === null || own === null ? {} : { believedMarginAtSignature: round4(own - strengthOfBand(band)) };
 }
 
 /**

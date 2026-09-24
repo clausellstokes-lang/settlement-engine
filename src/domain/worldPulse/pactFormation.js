@@ -97,7 +97,9 @@ import { amendPactInstrument, closeTermsBrokenByWar, termIdOf } from './pactAmen
 import {
   openPactProposal, pactFormationActive, pactProposalsOf, prunePactProposals, settlePactProposal,
 } from './pactProposals.js';
-import { openRenegotiationDemands, openRenewalProposals, settleRenewalProposal } from './pactRenewal.js';
+import {
+  openRenegotiationDemands, openRenewalProposals, settleRenewalProposal, signingLeadRecordOf,
+} from './pactRenewal.js';
 import {
   dependencyFearOf, scoreFaithCommunion, scoreMigrationPressure, scoreSharedThreat, scoreTradeDemand,
 } from './pactTriggers.js';
@@ -504,12 +506,14 @@ function courtNamesOf(ids, settlementOf) {
  * and the pair gains no second instrument.
  *
  * @param {{worldState: Record<string, unknown>, proposal: Record<string, unknown>,
- *   tick: number, settlementOf?: (id: string) => unknown}} input
+ *   tick: number, settlementOf?: (id: string) => unknown, strengthFor?: ((id: string) => number)|null}} input
+ *   `strengthFor` is the stage's knowledge of each court, read once at a MINT for the lead the
+ *   renewal leaf records (GR-5c-b); absent, the instrument records no lead.
  * @returns {{worldState: Record<string, unknown>, minted: boolean, amended: boolean,
  *   refused: ReadonlyArray<{cell: string, type: string, receipt: string}>, receipt: string,
  *   added: ReadonlyArray<Record<string, unknown>>}}
  */
-export function signPactProposal({ worldState, proposal, tick, settlementOf = () => null }) {
+export function signPactProposal({ worldState, proposal, tick, settlementOf = () => null, strengthFor = null }) {
   // `added` (LIT1b-pre U4) is the clauses this signature actually wrote: every drafted term on a
   // mint, the non-colliding ones on an amendment, none when every clause collided. The signing
   // beat reads it to know what it may honestly say.
@@ -564,6 +568,8 @@ export function signPactProposal({ worldState, proposal, tick, settlementOf = ()
     // T4, drop-when-absent: the saved court names (TREATY-VOICE U1), see `courtNamesOf`.
     ...(partyNames ? { partyNames } : {}),
     mintedTick: tick,
+    // GR-5c-b: the first party's believed lead over the second, lit only, drop-when-absent (the renewal leaf's record).
+    ...signingLeadRecordOf({ worldState, parties: [first, second], strengthFor }),
     budgetGranted: 0,
     budgetSpent: round4(terms.reduce((sum, term) => sum + (Number(term.weightSpent) || 0), 0)),
     treatyTicksPerYear: CURRENT_TREATY_TICKS_PER_YEAR,
@@ -954,7 +960,7 @@ export function advancePeacetimePacts({
       continue;
     }
     if (answer.verdict === 'signed') {
-      const signed = signPactProposal({ worldState: state, proposal, tick, settlementOf });
+      const signed = signPactProposal({ worldState: state, proposal, tick, settlementOf, strengthFor: strength });
       state = settlePactProposal({
         worldState: signed.worldState, id, state: signed.minted || signed.amended ? 'signed' : 'refused',
       }).worldState;
