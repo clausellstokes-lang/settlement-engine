@@ -143,9 +143,10 @@ describe('FP-17 — a peacetime suit retires when a war opens against its court,
     expect(retired).toMatchObject({
       status: 'superseded',
       supersessionReason: 'peacetime_suit_overtaken_by_war',
-      supersededAtTick: 5,
       supersededAt: NOW,
     });
+    // anchored: the row carries its read stamp on the lines above; the unread tick is not generated (writer-reach, ceiling 0).
+    expect(Object.keys(retired)).not.toContain('supersededAtTick');
     expect(admission.WAR_OVERTAKEN_PEACE_SUIT_REASON).toBe('peacetime_suit_overtaken_by_war');
     expect(buildProposalDocket(after.worldState).bySettlement.strong?.minor ?? 0,
       'the court\'s minor lane counts one row fewer').toBe(0);

@@ -114,10 +114,12 @@ export function proposalDetails(outcome = {}) {
     ].filter(Boolean);
   }
   if (payload.kind === 'government_change') {
+    // The institutions line is the payload's own fact (factionCompetition.js writes
+    // `preserveInstitutions`), never a constant this card asserts on its behalf.
     return [
       humanizeToken(payload.governmentPreference),
       humanizeToken(payload.legitimacyBand),
-      'preserve institutions',
+      ...(payload.preserveInstitutions === true ? ['preserve institutions'] : []),
     ];
   }
   if (payload.kind === 'institution_suppression' || payload.kind === 'institution_capture') {

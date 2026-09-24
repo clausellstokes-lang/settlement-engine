@@ -204,9 +204,13 @@ export function peacetimeSuitOvertakenByWar(proposal, worldState) {
 
 /**
  * THE DOCKET'S WRITER FOR FP-17: retire every pending peacetime suit a war has overtaken, as a
- * terminal 'superseded' row carrying the estate's retirement stamp (the shape
- * `candidateEvents.js :: supersedeLegacyRecordModeProposals` writes), and nothing else. The row is
- * kept as an audit tombstone. The same world reference when nothing is retired.
+ * terminal 'superseded' row carrying the stamp its readers read, and nothing else: `supersededAt`
+ * (the Herald's resolved log times the row by it) and `supersessionReason` (the feed's reconcile
+ * retires the row's queued question by it; registered engine-internal in
+ * scripts/lib/writer-dark-register.mjs). `supersededAtTick` is deliberately NOT written: no surface
+ * and no engine path reads it, and a generated fact nobody reads is the defect the writer-reach
+ * walker refuses at ceiling 0 (CURE-PEACE-1, the walker's owed registration). The row is kept as an
+ * audit tombstone. The same world reference when nothing is retired.
  * @template T
  * @param {T} worldState
  * @param {{ tick?: number, now?: string|null }} [context]
@@ -228,7 +232,6 @@ export function retireWarOvertakenPeaceSuits(worldState, context = {}) {
       status: 'superseded',
       updatedAt: context.now ?? proposal.updatedAt ?? proposal.createdAt ?? null,
       supersededAt: context.now ?? null,
-      supersededAtTick: typeof context.tick === 'number' && Number.isFinite(context.tick) ? context.tick : null,
       supersessionReason: WAR_OVERTAKEN_PEACE_SUIT_REASON,
     };
   });

@@ -53,6 +53,17 @@ describe('World Pulse presentation translation', () => {
     })).toEqual([]);
   });
 
+  test('a government change states the preserved institutions only when its payload carries that fact', () => {
+    // CURE-PEACE-1: the line is read from the payload's own preserveInstitutions (the writer-reach walker's
+    // owed registration), where it used to be a constant the card asserted for every government change.
+    const change = (extra) => proposalDetails({
+      proposalPayload: { kind: 'government_change', governmentPreference: 'merchant_charter', legitimacyBand: 'contested', ...extra },
+    });
+    expect(change({ preserveInstitutions: true })).toEqual(['merchant charter', 'contested', 'preserve institutions']);
+    // anchored: the same payload with the fact set yields the line on the line above, so its absence here is the payload's.
+    expect(change({})).not.toContain('preserve institutions');
+  });
+
   test('outcome tier changes use the same size vocabulary', () => {
     expect(outcomeDetails({
       tierChange: { fromTier: 'large_town', toTier: 'capital' },

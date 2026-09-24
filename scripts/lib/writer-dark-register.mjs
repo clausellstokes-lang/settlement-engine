@@ -84,6 +84,13 @@ export const SIMULATION_FLAG_PATTERN = /^[a-z][A-Za-z0-9]*Enabled$/;
  * reviewed environment holds a living-content definition, and the walker's
  * corpus is generated under `customContent: {}`.
  *
+ * The sixth row (2026-09-24, CURE-PEACE-1) is `supersessionReason on proposals`, engine-internal: the
+ * lane's docket retirement (FP-17) is the first supersession writer the executed corpus runs, so the
+ * reason code every supersession writer stamps became judgeable, and its one reader is the feed
+ * reconcile. Its sibling stamp `supersededAtTick` had no reader at all and is no longer written by that
+ * writer; the three older writers still write it (applyWorldPulse.js twice, candidateEvents.js), out of
+ * the corpus's reach.
+ *
  * Rows 3 and 6 were Car 1's:
  * Car 0 adjudicated all six at C' (⟦G0-13⟧) and found rows 1–2 are Car 3's
  * (their keys are not written under the dark corpus at all), row 4's key never
@@ -180,6 +187,24 @@ export const WRITER_DARK_REGISTER = Object.freeze([
       + 'would fix it is the half-told version of the fact, so this key rides with the container to the same owner '
       + 'ruling rather than being banked as unreviewed.',
     charter: '§7 WRWALKER, the drafted register row 6, measured DARK by Car 0 at C-prime',
+  }),
+  Object.freeze({
+    identity: 'supersessionReason on proposals',
+    key: 'supersessionReason',
+    shape: 'proposals',
+    writer: 'src/domain/worldPulse/proposalAdmission.js',
+    reason: 'engine-internal',
+    consumer: Object.freeze({
+      file: 'src/domain/worldPulse/worldPulseFeedCuration.js',
+      symbol: 'reconcileSupersededProposalNews, which retires the queued question of a superseded row by its reason',
+    }),
+    why: 'Why a docket row was superseded is plumbing. The engine writes a closed reason code (record_mode_upgrade,'
+      + ' bilateral_peace_lapsed, peacetime_suit_overtaken_by_war) so the feed reconcile can retire the queued'
+      + ' question of a row whose premise died, and that reconcile is its only reader. What the DM is shown is the'
+      + ' row itself in the Herald resolved log, timed by supersededAt, which that log reads. A surface that wants to'
+      + ' explain a supersession would voice the cause in words, never print this code.',
+    charter: '§7 WRWALKER, the row CURE-PEACE-1 owes for U1 (the chair ruling FP-17): the retirement writer is the'
+      + ' first the executed corpus runs, measured DARK at the integration tip 6cf6920d4',
   }),
 ]);
 
