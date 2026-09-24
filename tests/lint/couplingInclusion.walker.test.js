@@ -691,6 +691,24 @@ const ARGUED_UNLAYERED = Object.freeze({
     reason: 'map-geometry substrate — the provenance stamp answering "is the pack in hand the geometry these coordinates came from" (W-SEAM SEAM-3), asked by every port that reads a stored coordinate; a port here would make a pure map-provenance read a cross-layer coupling into whichever family won the name',
     reads: Object.freeze([]),
   }),
+  // ── FP WY-1 (THE SCALE CHARTER): the one mode-speed table, argued as substrate ──
+  //
+  // OWED BY THE CHARTER'S OWN CREATE (docs/DESIGN_FP_ARCHITECTURE.md §5, CR-FP-11 arm B:
+  // a new .js under src/domain/spatial/ takes an ARGUED_UNLAYERED entry in the same commit,
+  // never a baseline row). The lawWord.js / bandFamilies.js argument, one rung down: the
+  // leaf owns no subject. It holds J-D11(b)'s ONE mode-speed table, the admission of the
+  // map's km-scale datum and the reach-band words, and every mover of every port reads its
+  // distance through it (armies, envoys, wanderers, columns, caravans, via
+  // distanceRead.hopWeeks), so a family here would make each port's own march a cross-layer
+  // coupling. MEASURED: its one import is intervalWeeks.js, which sits in the pre-program
+  // baseline (unlayered), so its layered reach is 0 and `reads: []` is structural; its
+  // importers (distanceRead.js, spatialDigest.js, the store's canonize body) are unlayered
+  // or outside the census scope, so no edge leaves the pair scan.
+  'src/domain/spatial/modeSpeeds.js': Object.freeze({
+    kind: 'substrate',
+    reason: 'WY-1 spine substrate — the ONE mode-speed table and the km-scale admission every mover\'s distance is read through (J-D11(b)); owns no subject',
+    reads: Object.freeze([]),
+  }),
   // ── 2026-08-10: THREE LEAVES THAT LANDED WITHOUT THEIR CLASSIFICATION ──────────
   //
   // These three are not new arguments. They are the SAME two arguments already on this
@@ -1105,7 +1123,12 @@ const ARGUED_HOSTS = Object.freeze([
 // under src/domain/worldPulse takes a family or an argued entry in the SAME commit, and
 // wave 3's row puts the leaf at exactly that address. Deliberate, in this diff, per this
 // anchor's law.
-const ARGUED_ROSTER_CEILING = 30;
+// 30 -> 31 at WY-1 (SR-1: a count pin the wave's own CREATE moves): modeSpeeds.js admitted as
+// substrate — J-D11(b)'s one mode-speed table and the km-scale admission, owning no subject;
+// its one import (intervalWeeks.js) is pre-program baselined, so `reads: []` is measured and no
+// edge leaves the pair scan. OWED BY THE CHARTER'S OWN CREATE, not chosen. Deliberate, in this
+// diff, per this anchor's law.
+const ARGUED_ROSTER_CEILING = 31;
 
 /** The FP scope the unlayered census is TOTAL over. */
 const CENSUS_SCOPE_RE = /^src\/domain\/(?:worldPulse|spatial)\//;

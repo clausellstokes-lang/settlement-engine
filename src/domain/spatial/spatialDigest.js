@@ -52,6 +52,7 @@ import {
 import { buildSeaLanes } from './seaLanes.js';
 import { buildTeleportEdges } from './teleportEdges.js';
 import { deriveLakes } from './waterBodies.js';
+import { admitKmScale } from './modeSpeeds.js';
 
 // ── Input shapes (the captured pack + placements the builder consumes) ───────
 /**
@@ -567,12 +568,18 @@ function buildTerrainDisagreements(seeds, idOf, placements, pack) {
  * (non-frame-touching) open-water bodies, each with its cell count, shoreline land-cell ids,
  * typed subtype and the water-budget readings behind it. Omitted, or opted-in on a pack with
  * no interior water (every existing golden/canon) ⇒ NO lakes key ⇒ byte-identical.
+ * THE SCALE CHARTER (WY-1): `kmScale` (km per map-coordinate unit) stamps the additive
+ * `kmScale` datum, appended LAST and ONLY when modeSpeeds.admitKmScale admits it (a finite
+ * positive number). The canonize seam supplies it (creation-supplied on the first canonize,
+ * the prior digest's value carried forward on every re-canonize) and carries the heal
+ * receipt for a refused one. Absent or refused (the default, and every existing golden/
+ * canon) ⇒ NO kmScale key ⇒ byte-identical, and every reader keeps the normalized weeks.
  * @param {{ pack: CapturedSpatialPack, placements?: SpatialPlacementRow[] | null,
  *           spatialGeometryVersion?:number, costLawVersion?:number,
  *           overlayVersion?:number, seasonalRoads?:boolean, seaLanes?:boolean, teleport?:boolean,
  *           biomeTexture?:boolean, climateTexture?:boolean, lakes?:boolean,
  *           cellResolution?:Array<{id:string, from:number|null, to:number|null, reason:string}>|null,
- *           sidecar?:object|null }} input
+ *           sidecar?:object|null, kmScale?:unknown }} input
  *           `sidecar` is SEAM-3's provenance stamp, typed here as the opaque object this
  *           builder treats it as: it is carried VERBATIM into the capture receipt and never
  *           re-derived, so the digest deliberately knows nothing about its interior.
@@ -884,6 +891,12 @@ export function buildSpatialDigest(input) {
     }
     : null;
 
+  // WY-1 THE SCALE CHARTER: the map's own km scale, appended LAST and ONLY when admitted.
+  // Absent or refused (every existing golden/canon/fixture) ⇒ NO key ⇒ byte-identical. The
+  // KEY ORDER is fixed here once — captureReceipt, then kmScale — so the datum changes a
+  // VALUE of a scaled canon, never the serialized shape of an unscaled one.
+  const kmScale = admitKmScale(input?.kmScale).kmScale;
+
   // ── assemble the digest (fixed key order; object-shaped for the conditional
   //    ledger clone; nested arrays live INSIDE) ───────────────────────────────
   return {
@@ -905,5 +918,6 @@ export function buildSpatialDigest(input) {
     ...(climate ? { climate } : {}),
     ...(lakes ? { lakes } : {}),
     ...(captureReceipt ? { captureReceipt } : {}),
+    ...(kmScale !== null ? { kmScale } : {}),
   };
 }
