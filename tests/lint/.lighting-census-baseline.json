@@ -24,13 +24,13 @@
     "The derivation history — every prior row, its cause, and the census laws — stays in the walker",
     "beside the assertions, deliberately. Only the live tuple moved."
   ],
-  "measuredAtSha": "e5eab80c84d6b1c8f53eb30e586b7ed8e8fd9bdd",
-  "measuredBy": "chair-fable-cce01f87",
-  "date": "2026-09-23",
-  "note": "the twenty-second refreeze: train EM-T16 (EM-R2 +1 file +7 titles +1 suite · EM-R0b +1 file +7 titles +1 suite · EM-R1b +1 file +8 titles +3 suites · EM-R3 +0 files +6 titles +1 suite · EM-R0c +1 file +8 titles +1 suite · EM-R4 +1 file +7 titles +1 suite; the citations cure and the early buy-back add no title) over the twenty-first 2692·359·2333·25777·6847 = 2697·359·2338·25820·6855; signed by the chair under the recorded 09-20 deferral — history restated",
-  "files": 2697,
+  "measuredAtSha": "da720b26d7636ea47f85cb083f8667c098f48214",
+  "measuredBy": "the chair, session cce01f87 — THE UNFREEZE act 2",
+  "date": "2026-09-24",
+  "note": "the cure day (2026-09-23) landed 30 members on plain branches under tests-only mode, picked on local proofs; every new or renamed test file is a member's declared new file (git: 59 new test files since 1b073009f); refrozen once at the final tip after unfreeze lanes 2 and 3",
+  "files": 2756,
   "parked": 359,
-  "credited": 2338,
-  "titles": 25820,
-  "suiteTitles": 6855
+  "credited": 2397,
+  "titles": 26262,
+  "suiteTitles": 6941
 }

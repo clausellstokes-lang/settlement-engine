@@ -796,7 +796,7 @@ jobs:
   # build. Both registers are regenerated ONCE, at a train's terminal, so on the
   # BLOCKING `Gate / test ratchet` job above they reported a declared delta rather
   # than a defect — and a gate that is red on every branch hides the reds it exists
-  # to show. That job now carries CENSUS_STASIS=1; THIS job is where the real
+  # to show. That job ran with CENSUS_STASIS=1 during the stasis and asserts again since the unfreeze of 2026-09-23 (799103301); THIS job is where the real
   # assertion is observed, on the weekly cron and on demand, with no switch set.
   # Its red is the observation STASIS-REGISTER row S6 promises, and the unfreeze
   # train refreezes both registers once and moves the two files back onto the
