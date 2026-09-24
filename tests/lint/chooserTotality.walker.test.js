@@ -169,7 +169,14 @@ const LOCAL_HASH_ROLL = /\b(?:[A-Za-z_$][\w$]*Roll01|fnv1a32|hashUnit|hash32)\s*
 // registration's to presume. The five founding derivations (HBF-97..HBF-101, genesis.js +
 // customFounding.js) are STAY and do not touch this number, the same shape U10's four STAY
 // rows held against 77 -> 79 above.
-const DEFER_CEILING = 83;
+// 83 -> 82 at WF-0's RULING FP-14 (the chair, vetoable by the owner): HBF-95 (pickOwner)
+// re-files STAY on the HBF-37/HBF-91 precedent — the chair banking exactly the measurement
+// this wave's own row already carried, with a re-file note ("if WF-2/WF-5 mints a
+// tradition-owner direction") living in the row's reason rather than a closeOwed, since a
+// STAY row carries none. Three DEFER rows remain from this registration: HBF-93 claimRoll,
+// HBF-94 driftDue, HBF-96 reexpressed. No SURVEY_DEFERRED/SURVEY_SETTLED arm moves: HBF-95
+// carries domain:'FAITH' and was never a SURVEY_ROWS member (domain === null only).
+const DEFER_CEILING = 82;
 
 /** The named-domain checklist's row count, asserted rather than read off.
  *  14 -> 23 at WF-0: nine FAITH rows (HBF-93..HBF-101) for the traditions registration
