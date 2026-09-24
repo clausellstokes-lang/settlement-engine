@@ -318,8 +318,24 @@ describe('EM-E8b A — a tick-minted roster row reaches the durable save through
     const result = await advance(store);
     const after = await durableRow();
 
-    expect(result?.ok, 'the advance ran, or the absences below measure a tick that never happened')
-      .not.toBe(false);
+    // ⛔ THE TICK IS PROVEN TO HAVE RUN BEFORE ANY ABSENCE IS READ. `runAdvanceCampaignWorld`
+    // opens `let result = null` and every Phase-1 bail is a bare `return;`, so an advance that
+    // never happens resolves to NULL — and `null?.ok` is `undefined`, which the `.not.toBe(false)`
+    // this replaces passed. All three absences below ALSO hold on a tick that never ran, so this
+    // was the one arm in the file with no independent positive: green on a dead advance (measured
+    // — the dead-advance plant reds A1, A2, B1–B3 and C1–C2 and leaves A5 alone). The pulse result
+    // carries NO `ok` on success (measured keys: campaignId, interval, tick, calendar, worldState,
+    // …, pulseRecord), so the receipt is the TICK the pulse returns and the campaign clock that
+    // committed it; `.toBe(true)` would be a fiction.
+    expect([result?.tick, store.getState().campaigns.find((row) => row.id === 'camp-1')?.worldState?.tick],
+      'THE POSITIVE: the advance RAN and its tick COMMITTED — the pulse\'s own receipt beside the'
+      + ' campaign clock, because no absence below can tell a dead advance from a quiet one')
+      .toEqual([1, 1]);
+    // …and the tick reached THIS durable row: the pulse rewrites the very row the absences are
+    // read off (measured: economicState, powerStructure, npcs and activeConditions all move), so
+    // they measure what the tick LEFT rather than the pre-tick bytes of a save nothing touched.
+    expect(JSON.stringify(after.settlement) !== JSON.stringify(before.settlement),
+      'and the tick REWROTE this durable row, so the absences below are its own').toBe(true);
     expect(Object.hasOwn(before.settlement, 'decrees'),
       'the fixture carried no registry to begin with').toBe(false);
     // anchored: A1 over the same seedCampaign harness DOES mint both keys, so the two absences
