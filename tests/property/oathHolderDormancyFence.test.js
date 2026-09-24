@@ -487,7 +487,22 @@ describe('GR-1 FENCE 4 — gate-polarity census', () => {
     expect(codeResidue(
       `  const note = \`the mayor's writ\`; return rules.${FLAG} === true; const w = \`the guild's hall\`;`,
     ).includes(FLAG)).toBe(true);
-    const loose = sites.filter((site) => !/\.\s*oathHolderEnabled\s*===\s*true/.test(site.code));
+    // ⭐ A PRESET DECLARATION IS NOT A READ (LIT-1a, 2026-09-24; J-EM-16, the lit law; LGT-C2
+    // 432ff6441 the precedent). The lighting unit declares the key in the preset table's
+    // FP_LIT_WARPEACE fragment, and the one lawful spelling there is a strict `true` (dark is
+    // ABSENT, never a declared false), so exactly that shape in exactly that file is set
+    // aside; every other site, in that file or any other, must still be the strict read.
+    const PRESET_TABLE = join(SRC_ROOT, 'domain/worldPulse/simulationRules.js');
+    const isLitDeclaration = (site) => site.file === PRESET_TABLE
+      && /^oathHolderEnabled\s*:\s*true\s*,?$/.test(site.code);
+    // GUARD THE GUARD: a declared false, a truthy read and the same line in another file are
+    // all still convicted, so the exemption cannot widen into a pass for a loose read.
+    expect(isLitDeclaration({ file: PRESET_TABLE, code: `${FLAG}: true,` })).toBe(true);
+    expect(isLitDeclaration({ file: PRESET_TABLE, code: `${FLAG}: false,` })).toBe(false);
+    expect(isLitDeclaration({ file: PRESET_TABLE, code: `if (rules.${FLAG}) {` })).toBe(false);
+    expect(isLitDeclaration({ file: join(SRC_ROOT, 'domain/x.js'), code: `${FLAG}: true,` })).toBe(false);
+    const loose = sites.filter((site) => !isLitDeclaration(site)
+      && !/\.\s*oathHolderEnabled\s*===\s*true/.test(site.code));
     expect(
       loose.map((site) => `${site.file}:${site.line} ${site.code}`),
       'a non-strict read of the flag: ABSENT and FALSE stop being the same answer at a'

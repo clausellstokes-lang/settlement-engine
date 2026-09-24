@@ -7,6 +7,8 @@ import {
   DEFAULT_SIMULATION_RULES,
   DEFAULT_SIMULATION_PRESET_ID,
   CUSTOM_SIMULATION_PRESET_ID,
+  ENGINE_GATED_DORMANT_RULE_KEYS,
+  ENGINE_GATED_VIRTUAL_RULE_KEYS,
   NEW_CAMPAIGN_SIMULATION_PRESET_ID,
   SIMULATION_RULE_PRESETS,
   newCampaignSimulationRules,
@@ -495,6 +497,70 @@ describe('simulation rules preset — stability under future-flag churn', () => 
     }
   });
 
+  // ⭐ LIT-1a (2026-09-24; J-EM-16 under the owner's word of 2026-09-23, "no just build it
+  // all shipped lit"). The first REGISTER keys a preset declares, each lit ONLY in the
+  // presets that carry every layer it reads. The rosters are spelled here independently of
+  // the source fragments (FP_LIT_ALIVE / FP_LIT_WARPEACE), so a rename or a stray lighting
+  // there reds HERE, and the two keys the unit HELD DARK are pinned dark beside them.
+  const FP_LIT_ALIVE_FLAGS = ['faithUnseatingEnabled', 'pactFormationEnabled'];
+  const FP_LIT_WARPEACE_FLAGS = ['oathHolderEnabled', 'treatyLifecycleVoiceEnabled', 'treatyRenewalEnabled'];
+  const FP_WARPEACE_PRESET_IDS = ['dramatic_campaign', 'full_simulation'];
+  const FP_HELD_DARK_FLAGS = ['errandSpineEnabled', 'merchantHousesEnabled'];
+
+  test('LIT-1a: each lit FP layer is PRESENT exactly in the presets its unit names, and stays VIRTUAL', () => {
+    const roster = Object.fromEntries([
+      ...FP_LIT_ALIVE_FLAGS.map((flag) => [flag, WAVE_LIT_PRESET_IDS]),
+      ...FP_LIT_WARPEACE_FLAGS.map((flag) => [flag, FP_WARPEACE_PRESET_IDS]),
+    ]);
+    // Anti-vacuity on the rosters: five distinct keys, every one a REGISTER member rather
+    // than a name this file invented, and every one gone from the DERIVED dormant list.
+    expect(Object.keys(roster).length).toBe(5);
+    for (const [flag, litIds] of Object.entries(roster)) {
+      expect(ENGINE_GATED_VIRTUAL_RULE_KEYS.includes(flag), `${flag} must stay registered`).toBe(true);
+      expect(ENGINE_GATED_DORMANT_RULE_KEYS.includes(flag), `${flag} must leave the dormant list`).toBe(false);
+      const darkIds = PRESET_IDS.filter((id) => !litIds.includes(id));
+      // lit ∪ dark = PRESET_IDS and both sides are non-empty, so neither can quietly shed a
+      // preset and take its assertion with it.
+      expect([...litIds, ...darkIds].sort(), flag).toEqual([...PRESET_IDS].sort());
+      expect(litIds.length, flag).toBeGreaterThan(0);
+      expect(darkIds.length, flag).toBeGreaterThan(0);
+      for (const id of litIds) {
+        expect(SIMULATION_RULE_PRESETS[id].rules[flag], `${id}.${flag} must be lit`).toBe(true);
+      }
+      for (const id of darkIds) {
+        // Dark is ABSENT, never a declared false (CR-WR10-C; the LIT-0/2 VIRTUAL law).
+        expect(flag in SIMULATION_RULE_PRESETS[id].rules, `${id}.${flag} must stay absent`).toBe(false);
+      }
+      // VIRTUAL: no defaults entry, therefore no comparison key and no identity effect.
+      expect(flag in DEFAULT_SIMULATION_RULES, `${flag} must stay absent from the defaults`).toBe(false);
+      expect(RULE_COMPARISON_KEYS.includes(flag), `${flag} must not be a comparison key`).toBe(false);
+    }
+    // The treaty trio's presets are DERIVED, not only asserted: exactly where warLayerEnabled
+    // and peaceEngineEnabled are both lit (peaceCausalActive), which is why they light there.
+    const warPeace = PRESET_IDS.filter((id) => SIMULATION_RULE_PRESETS[id].rules.warLayerEnabled === true
+      && SIMULATION_RULE_PRESETS[id].rules.peaceEngineEnabled === true);
+    expect([...warPeace].sort()).toEqual([...FP_WARPEACE_PRESET_IDS].sort());
+    // THE TWO HELD DARK: still registered, still dormant, absent from every preset.
+    for (const flag of FP_HELD_DARK_FLAGS) {
+      expect(ENGINE_GATED_VIRTUAL_RULE_KEYS.includes(flag), `${flag} must stay registered`).toBe(true);
+      expect(ENGINE_GATED_DORMANT_RULE_KEYS.includes(flag), `${flag} must stay dormant`).toBe(true);
+      for (const id of PRESET_IDS) {
+        expect(flag in SIMULATION_RULE_PRESETS[id].rules, `${id}.${flag} must stay absent`).toBe(false);
+      }
+    }
+    // IDENTITY, three ways (the 432ff6441 idiom): a keyless copy of every preset re-infers
+    // itself (the One-Regen identity arm above covers all seven); an installed save carrying
+    // NONE of the five re-infers its own id; and the keyless default still infers
+    // realistic_regional.
+    for (const id of WAVE_LIT_PRESET_IDS) {
+      const installed = { ...SIMULATION_RULE_PRESETS[id].rules };
+      delete installed.presetId;
+      for (const flag of Object.keys(roster)) delete installed[flag];
+      expect(normalizeSimulationRules(installed).presetId, `${id} installed identity`).toBe(id);
+    }
+    expect(normalizeSimulationRules({}).presetId).toBe(DEFAULT_SIMULATION_PRESET_ID);
+  });
+
   // #5 — custom detection still fires (proves matching is not always-true).
   test('flipping one comparison key away from every preset yields custom', () => {
     const base = SIMULATION_RULE_PRESETS.dramatic_campaign.rules;
@@ -579,14 +645,18 @@ describe('new-campaign birth seam — one address, dark today, proven live', () 
     // successor is now 28 (30 -> 58): the seven above plus those twenty-one. The
     // number is re-derived here rather than carried, and the split is asserted
     // separately so a future drift cannot hide inside a single total.
+    // ⭐ AND IT MOVED AGAIN BY A DECLARED ACT (LIT-1a, 2026-09-24; J-EM-16 under the owner's
+    // word of 2026-09-23, "no just build it all shipped lit"). The FP_LIT_ALIVE fragment lit
+    // two virtual register keys in this preset, so the price is now 30 (30 -> 60): the
+    // seven profile axes plus 23 gate keys. The figures it replaces, verbatim: 28, 58, 21.
     const lit = newCampaignSimulationRules(DEFAULT_SIMULATION_PRESET_ID);
     const added = Object.keys(lit).filter(key => !(key in born));
-    expect(added.length).toBe(28);
-    expect(Object.keys(lit).length).toBe(58);
+    expect(added.length).toBe(30);
+    expect(Object.keys(lit).length).toBe(60);
     // The profile half is exactly the seven asserted absent above; everything else
     // is a virtual gate key, never a profile axis, which is what keeps the CL-0
     // constitutional law intact for the campaigns that never name a preset at all.
-    expect(added.filter(key => key.endsWith('Enabled')).length).toBe(21);
+    expect(added.filter(key => key.endsWith('Enabled')).length).toBe(23);
     expect(Object.keys(born).length).toBe(30);
   });
 

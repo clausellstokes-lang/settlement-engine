@@ -684,6 +684,34 @@ const ONE_REGEN = Object.freeze({
   roadsEnabled: true,
 });
 
+// ── THE FP LAYERS, SHIPPED LIT (LIT-1a, 2026-09-24; J-EM-16 under the owner's word ─────
+// of 2026-09-23, "no just build it all shipped lit"). The first REGISTER keys a preset
+// declares. Like WAVES / ONE_REGEN they are VIRTUAL: absent from DEFAULT_SIMULATION_RULES,
+// so outside RULE_COMPARISON_KEYS, so an installed save keeps its preset id and gains no
+// byte. What moves is a world BORN into one of these presets, a declared same-seed shift
+// (docs/shift-records/2026-09-24-fp-lighting-1a.json). The register above keeps every key;
+// ENGINE_GATED_DORMANT_RULE_KEYS drops each by derivation. ONE FRAGMENT PER PRESET SET: a
+// key lights only in the presets that carry every layer it reads, and a later lighting
+// unit inserts its key at its codepoint-sorted place in the fragment whose set it names
+// (SR-7), or cuts a new fragment for a new set.
+//   FP_LIT_ALIVE: the four world-alive presets. Faith unseating's other gate is data (a
+//     deity world); pact formation's shared-threat occasion needs no belief substrate.
+//   FP_LIT_WARPEACE: the two presets where warLayerEnabled and peaceEngineEnabled are both
+//     lit (peaceCausalActive): that door opens the treaty fold the lifecycle voice and the
+//     renewal memory run inside, and the war-end mint the oath holder stamps.
+// HELD DARK ON PURPOSE: the errand spine, whose envoy arm needs the six envoy keys (dark in
+// every preset) and whose pact arm, lit alone, labels a proposal as carried by an envoy no
+// errand ever sent; and the merchant houses, which have no pulse mount yet (vacuous).
+const FP_LIT_ALIVE = Object.freeze({
+  faithUnseatingEnabled: true,
+  pactFormationEnabled: true,
+});
+const FP_LIT_WARPEACE = Object.freeze({
+  oathHolderEnabled: true,
+  treatyLifecycleVoiceEnabled: true,
+  treatyRenewalEnabled: true,
+});
+
 // ── THE NEUTRAL-CONNECTED DEFAULT (realm directive 2 / J-D2, 2026-07-31) ────
 // `neutralNeighborsEnabled` is a VIRTUAL flag of the same class as WAVES /
 // ONE_REGEN / memoryWeaveEnabled: NO entry in DEFAULT_SIMULATION_RULES, read
@@ -777,6 +805,8 @@ export const SIMULATION_RULE_PRESETS = Object.freeze({
     disastersEnabled: true,
     commodityFlowEnabled: true,
     allyIntelSharingEnabled: true,
+    // LIT-1a: the FP layers whose every prerequisite this preset carries (see FP_LIT_ALIVE).
+    ...FP_LIT_ALIVE,
     ...WAVES,
     ...ONE_REGEN,
   }),
@@ -826,6 +856,9 @@ export const SIMULATION_RULE_PRESETS = Object.freeze({
     religionDynamicsEnabled: true,
     seasonsEnabled: true,
     disastersEnabled: true,
+    // LIT-1a: the FP layers whose every prerequisite this preset carries (war and peace lit).
+    ...FP_LIT_ALIVE,
+    ...FP_LIT_WARPEACE,
     // W-R2-LIGHT: the nine engine-wave gates — dramatic_campaign is a world-alive
     // preset, so it runs the full anti-stasis stack (virtual flags; see WAVES).
     ...WAVES,
@@ -864,6 +897,8 @@ export const SIMULATION_RULE_PRESETS = Object.freeze({
     // the realm canonizes a spatial digest (the engine gate); NOT a comparison
     // key, so pre-3.5 saves carrying this preset keep their identity.
     infoMode: 'perfect_delayed',
+    // LIT-1a: the FP layers whose every prerequisite this preset carries (see FP_LIT_ALIVE).
+    ...FP_LIT_ALIVE,
     // W-R2-LIGHT: a "living realm" without the living-engine waves would lie — its
     // distinction from full_simulation is APPROVAL POSTURE (routine autonomy), not
     // engine depth, so it runs the same nine engine-wave gates (owner ruling).
@@ -1074,6 +1109,9 @@ export const SIMULATION_RULE_PRESETS = Object.freeze({
     // census is boolean-only (subsystemCertification.simulationRuleKeys), so a
     // string key is invisible to it either way.
     realmMagicDefault: 'magical',
+    // LIT-1a: the FP layers whose every prerequisite this preset carries (war and peace lit).
+    ...FP_LIT_ALIVE,
+    ...FP_LIT_WARPEACE,
     // W-R2-LIGHT: the ceiling is everything-on by name — it runs the full nine-wave
     // anti-stasis stack (warLayer is lit above, so intervention/peaceEngine/
     // supplyWebWarfare fire here; the composition smoke + whole-world soak drive
@@ -1142,8 +1180,8 @@ export function deriveDormantRuleKeys(register, defaults, presets) {
  * declares it. Its live readers are the five dormancy fences, each asserting this claim
  * about its own key, and the walker that proves the derivation.
  *
- * Today every registered key is still dark, so this equals the register exactly, in
- * register order. That equality is a MEASUREMENT of the tree, not a property of the code.
+ * It is the register less every key a preset lights (LIT-1a lit the first five, 2026-09-24),
+ * in register order. That difference is a MEASUREMENT of the tree, not a property of code.
  *
  * @type {ReadonlyArray<string>}
  */

@@ -73,7 +73,10 @@ export const REQUIRES_ROWS = Object.freeze([
   ['believedDevotionEnabled', ['beliefAxesEnabled'], 'ENGINE_GATED_VIRTUAL_RULE_KEYS comment: conjunction with beliefAxesEnabled'],
   ['believedScarcityEnabled', ['beliefAxesEnabled'], 'ENGINE_GATED_VIRTUAL_RULE_KEYS comment: conjunction with beliefAxesEnabled'],
   ['espionageEnabled', ['errandSpineEnabled', 'beliefAxesEnabled'], 'the same block: a THREE-DOOR conjunction (beliefs live, the errand spine lit, then the flag)'],
+  ['oathHolderEnabled', ['warLayerEnabled', 'peaceEngineEnabled'], 'LIT-1a (J-EM-16): oathHolder.stampSworn stamps the war-end treaty mint inside peaceTerms.advanceTreaties, which returns before its fold unless warReasons.peaceCausalActive (warLayerEnabled && peaceEngineEnabled). Two more routes reach the same stamp and this conjunction-only graph can state neither: the pact sign (pactFormation.js) and the sovereignty sale (peaceTermsSale.js, behind sovereigntyAssets.sovereigntyTradeActive, dark in every preset). So the row is CONSERVATIVE: it forgoes credit on those routes rather than credit a cell no treaty reached'],
   ['settlementPoliticsEnabled', ['factionCompetitionEnabled'], 'the code conjunction settlementPoliticsEnabled === true && factionCompetitionEnabled === true'],
+  ['treatyLifecycleVoiceEnabled', ['warLayerEnabled', 'peaceEngineEnabled'], 'LIT-1a (J-EM-16): its mover read sits inside peaceTerms.advanceTreaties, which returns before the treaty fold unless warReasons.peaceCausalActive (warLayerEnabled && peaceEngineEnabled)'],
+  ['treatyRenewalEnabled', ['warLayerEnabled', 'peaceEngineEnabled'], 'LIT-1a (J-EM-16): read inside peaceTerms.advanceTreaties behind the same peaceCausalActive door (warLayerEnabled && peaceEngineEnabled)'],
 ].map(([key, parents, source]) => Object.freeze({
   kind: 'requires', key, parents: Object.freeze(parents), source,
   rationale: 'A row lighting this key under a dark parent runs a subsystem that never engaged; its finding would be about the harness.',
