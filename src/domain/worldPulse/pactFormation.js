@@ -94,6 +94,7 @@ import { amendPactInstrument, closeTermsBrokenByWar, termIdOf } from './pactAmen
 import {
   openPactProposal, pactFormationActive, pactProposalsOf, prunePactProposals, settlePactProposal,
 } from './pactProposals.js';
+import { settleRenewalProposal } from './pactRenewal.js';
 import {
   dependencyFearOf, scoreFaithCommunion, scoreMigrationPressure, scoreSharedThreat, scoreTradeDemand,
 } from './pactTriggers.js';
@@ -719,6 +720,13 @@ export function advancePeacetimePacts({
     const answer = answerPactProposal({
       worldState: state, proposal, responderDemand01: back.length ? back[0].score01 : 0, tick,
     });
+    // GR-5b: a renewal settles in its own leaf, renewed or a clean lapse with no memory; this pass writes what it hands back.
+    const renewal = settleRenewalProposal({ worldState: state, proposal, answer, tick, settlementOf });
+    if (renewal) {
+      state = renewal.ledger ? setSpatialLedger(renewal.worldState, 'treaties', renewal.ledger) : renewal.worldState;
+      receipts.push(renewal.receipt);
+      continue;
+    }
     if (answer.verdict === 'signed') {
       const signed = signPactProposal({ worldState: state, proposal, tick, settlementOf });
       state = settlePactProposal({

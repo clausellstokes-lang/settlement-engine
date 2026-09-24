@@ -1585,6 +1585,16 @@
       "band": null,
       "note": ""
     },
+    "src/domain/worldPulse/pactRenewal.js#RENEWAL_WINDOW_TUNING": {
+      "role": null,
+      "status": "draft",
+      "signedAt": null,
+      "unit": {
+        "WINDOW_WEEKS": "weeks"
+      },
+      "band": null,
+      "note": "FP GR-5b THE RENEWAL WINDOW (lane FP-B3; ruling FP-15): the last weeks of an instrument's longest live clause in which either court may ask to renew it, on the 52-week clock. PROPOSED = 26. FLOOR: the far court's answer, two legs of the real road plus the deliberation (pactProposals.js answerDueTickFor), measured over real digests of four realm sizes: longest answer 8 / 12 / 18 / 22 weeks at 9 / 20 / 40 / 80 seats, so a renewal asked on the window's first day is answered while the instrument lives. CEILING: below the shortest clause either door mints, 52 weeks (the war door's one-year affordability floor, 21 of 117 clauses over 60 lit mints; peacetime drafts run 156 to 416). DRAFT, registered by the lane's builder seat; the owner signs it at the tuning sitting."
+    },
     "src/domain/worldPulse/pactTriggers.js#PACT_TRIGGER_TUNING": {
       "role": null,
       "status": "draft",

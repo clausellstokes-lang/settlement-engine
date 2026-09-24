@@ -46,6 +46,7 @@ import {
   pactFormationActive, pactCounterpartiesFor, PACT_PROPOSAL_REFUSALS, PACT_VETO_PROSE,
 } from '../worldPulse/pactProposals.js';
 import { PACT_DRAFT_LENS } from '../worldPulse/pactFormation.js';
+import { RENEWAL_TRIGGER } from '../worldPulse/pactRenewal.js';
 
 /** The schema-owned loose record alias (the affordanceManifest Mut idiom —
  * the looseness is declared and any-census-counted where it is OWNED,
@@ -359,6 +360,8 @@ export const REALM_MANIFEST = Object.freeze({
   // that holds the clause, and the transport is physics the one writer derives from the envoy
   // spine — neither is a dial (the chair's amendment of 2026-09-23). The apply arm drafts
   // through the grammar's own drafter and opens through the ledger's ONE writer.
+  // GR-5b (ruling FP-15): the renewal word joins the SAME clause dial, because its lens ladder
+  // is empty: a renewal re-offers the standing instrument's own clauses (pactRenewal.js).
   PROPOSE_PACT: Object.freeze({
     verb: 'PROPOSE_PACT', label: 'Propose a pact', family: 'War',
     scope: 'realm', lane: 'proposal', module: 'pactProposals.js',
@@ -366,7 +369,7 @@ export const REALM_MANIFEST = Object.freeze({
     dials: [
       settlementTargetDial('fromId', 'The court that asks'),
       settlementTargetDial('toId', 'The court it asks'),
-      enumDial('termType', [...PACT_CLAUSE_TYPES], PACT_CLAUSE_TYPES[0], 'The clause offered'),
+      enumDial('termType', [...PACT_CLAUSE_TYPES, RENEWAL_TRIGGER], PACT_CLAUSE_TYPES[0], 'The clause offered'),
     ],
     targetsFrom: 'campaignSettlements',
     targetOptions: (/** @type {Mut} */ ws, /** @type {RealmCtx} */ ctx) => pactPartyOptions(ws, ctx),

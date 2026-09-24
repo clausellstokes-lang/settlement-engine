@@ -53,10 +53,12 @@ import { pactFormationActive } from './pactProposals.js';
 /**
  * THE CLOSED LINEAGE VOCABULARY (§4, R1 law). `formed` and `amended` are this wave's;
  * `broken_by_war` is the war-overtaken closure's; `war_ended` is the war door's amendment
- * awareness. GR-5's `renewed`/`converted` join this list in their own wave.
+ * awareness. GR-5b's `renewed` joins as growth (R-GR5-2): the renewal leaf
+ * (`pactRenewal.js`) records it through `amendPactInstrument` when a renewal is accepted.
+ * GR-5d's `converted` joins in its own wave.
  * @type {readonly string[]}
  */
-export const PACT_LINEAGE_ACTS = Object.freeze(['amended', 'broken_by_war', 'disavowed_by_succession', 'formed', 'war_ended']);
+export const PACT_LINEAGE_ACTS = Object.freeze(['amended', 'broken_by_war', 'disavowed_by_succession', 'formed', 'renewed', 'war_ended']);
 
 /**
  * THE CLOSED FORMATION ENDINGS (§GR-7's vocabulary). Every member has a producer in this
@@ -359,8 +361,10 @@ export function closeTermsBrokenByWar({ worldState, aId, bId, tick }) {
     : ledger[treatyPairKey(bId, aId)] ? treatyPairKey(bId, aId) : '';
   if (!key) return nothing;
   const treaty = recordOf(ledger[key]);
+  // GR-5b: a RENEWED clause was agreed in peace as surely as a formed or amended one, so a
+  // war closes it too; without the act here a renewal would quietly make a pact war-proof.
   const negotiated = new Set(lineageOf(treaty)
-    .filter((entry) => entry.act === 'formed' || entry.act === 'amended')
+    .filter((entry) => entry.act === 'formed' || entry.act === 'amended' || entry.act === 'renewed')
     .flatMap((entry) => (Array.isArray(entry.termIds) ? entry.termIds.map(String) : [])));
   const doomed = termsOf(treaty)
     .filter((term) => negotiated.has(termIdOf(term)) && Number(term.expiresTick) > tick);

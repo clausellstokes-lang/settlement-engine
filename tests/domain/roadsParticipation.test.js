@@ -477,6 +477,17 @@ describe('participation chokepoint — the .npcs-reader inventory ratchet (§8 c
     // NPCs without a display name, so the fallback is unreachable today and the raw base keeps
     // it that way.
     'src/domain/worldPulse/npcVerdictPulse.js',
+    // FP GR-5b THE RENEWAL'S NEW OATH (dark unless `treatyRenewalEnabled` is lit and a renewal
+    // is accepted): ONE roster read, `onStageSettlementOf`, the cast GR-1's re-stamp picks from
+    // at a `renewed` act, and it STORES NO PERSON beyond the stamp GR-1's own writer lands. It
+    // applies the ONE participation chokepoint itself (`roads/state.js :: isOffStage`, paired
+    // with the status that chokepoint leaves to its consumers, derived from
+    // NPC_UNAVAILABLE_STATUSES by the houseLedger.js idiom), so it answers the same over the raw
+    // roster and over the participation view the answer step hands it in the live pulse: the
+    // gate filters the same people twice, never differently. Participation-DEPENDENT by intent
+    // (R-20): a holder who is off stage or dead does not swear the renewed oath. Dispositioned by
+    // GR-5b in the commit that lands the reader (SR-1's cause).
+    'src/domain/worldPulse/pactRenewal.js',
     'src/domain/worldPulse/partyImpact.js',
     'src/domain/worldPulse/pulseKernel.js',
     'src/domain/worldPulse/religionLegitimacy.js',
