@@ -107,8 +107,10 @@ function reachableIndexes(kind, interp, draws = 400) {
 describe('SP-6 phrased-kind registry — IN-1c-a the INFORMATION standing line', () => {
   test('the one-kind census and every reader join are exact', () => {
     // 1 -> 2 at FP IN-2 (SR-1): IN-2 registers lure_sprung, at its codepoint-sorted slot.
-    expect(INFORMATION_KINDS).toEqual(['lure_sprung', ...IN1_KINDS]);
-    expect(INFORMATION_KIND_REGISTRY).toHaveLength(2);
+    // 2 -> 4 at FP IN-3 (SR-8): false_accusation and sweep_launched, each at its sorted slot; both
+    // are certified by their own walker, tests/lint/counterIntelKindPools.walker.test.js.
+    expect(INFORMATION_KINDS).toEqual(['false_accusation', 'lure_sprung', ...IN1_KINDS, 'sweep_launched']);
+    expect(INFORMATION_KIND_REGISTRY).toHaveLength(4);
     for (const [kind, significance, audience, section, depth] of EXPECTED) {
       const row = INFORMATION_KIND_REGISTRY.find((candidate) => candidate.kind === kind);
       expect(row).toMatchObject({ kind, significance, audience, section });

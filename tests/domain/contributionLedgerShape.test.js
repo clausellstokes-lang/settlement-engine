@@ -129,8 +129,12 @@ describe('WC-0E · the war-circulation flags, the contribution ledger shape, and
     // 36-key base; the tip carries both (SR-1, the union).
     // 38 → 39 at the FP integration pick (the chair, 2026-09-24): GR-6 minted a third virtual key (SR-1, the union).
     // 39 → 40 at the FP integration pick (the chair, 2026-09-24): IN-4/1 declared intelTradeEnabled, the fourth tonight (SR-1, the union).
-    expect(ENGINE_GATED_VIRTUAL_RULE_KEYS).toHaveLength(40);
-    expect(VIRTUAL_SUBSYSTEM_ROWS).toHaveLength(40);
+    // 39 → 40 at FP IN-3 (lane FP-I3, 2026-09-24; SR-1): IN-3 adds `counterIntelEnabled`, its row at
+    // the tail of VIRTUAL_SUBSYSTEM_ROWS. Both literals were read off the live modules (40 and 40)
+    // before this line was moved.
+    // 40 → 41 at the FP integration pick (the chair, 2026-09-24): IN-3 minted counterIntelEnabled, the fifth tonight (SR-1, the union).
+    expect(ENGINE_GATED_VIRTUAL_RULE_KEYS).toHaveLength(41);
+    expect(VIRTUAL_SUBSYSTEM_ROWS).toHaveLength(41);
     // 36 → 37 at FP GR-6 (lane FP-B2, 2026-09-24): `mediationGeneralizedEnabled`, its row at the
     // tail of VIRTUAL_SUBSYSTEM_ROWS. Both literals were read off the live modules (37 and 37)
     // before this line was moved.

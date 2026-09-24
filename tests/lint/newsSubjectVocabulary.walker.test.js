@@ -254,6 +254,10 @@ const DYNAMIC_MINTS = Object.freeze([
   'src/domain/worldPulse/warCostsNews.js:impactKind:receipt.kind',
   'src/domain/worldPulse/warRulingsNews.js:impactKind:receipt.kind',
   'src/domain/worldPulse/lineageNews.js:impactKind:args.kind',
+  // FP IN-3 (lane FP-I3, 2026-09-24; SR-11): the counter-game's two beats deliver through the
+  // INFORMATION registry (`informationNews.js`), joined to WHAT_PHRASES by their own walker,
+  // tests/lint/counterIntelKindPools.walker.test.js. The registry governs; this is the delivery site.
+  'src/domain/worldPulse/counterIntelSweep.js:impactKind:receipt.kind',
   // ── ARCHETYPE TABLES. A local map keyed by a lane's own enum; the values are
   // literals in the same file and are reachable by the literal arm above.
   'src/domain/worldPulse/deploymentReturn.js:candidateType:archetype',

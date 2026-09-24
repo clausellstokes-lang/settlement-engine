@@ -259,6 +259,12 @@ const LAYER_PATTERNS = Object.freeze({
     // owns its ledger and its one exposure law), so the leaf takes INFO on the IN-1 reading
     // above. ⛔ EXACT-PATH, NOT an `info[A-Z]` prefix, for the same reason.
     /^src\/domain\/worldPulse\/infoLure\.js$/,
+    // IN-3: the counter-game. Suspicion, the sweep and the house exposure are INFORMATION's own
+    // subject (the court defending its own mind), so the three leaves take INFO on the same reading.
+    // ⛔ EXACT-PATH, for the same reason.
+    /^src\/domain\/worldPulse\/suspicion\.js$/,
+    /^src\/domain\/worldPulse\/counterIntelSweep\.js$/,
+    /^src\/domain\/worldPulse\/patronExposure\.js$/,
     /^src\/domain\/spatial\/(?:rumorNetwork|intelActs)\.js$/,
     // W-SEAT SEAT-4: the anticipated-reaction forecast. HOMED BY CHAIR DECLARATION
     // (ODQ §861, the SEAT-A2 landing) rather than by the landing lane's judgment, because

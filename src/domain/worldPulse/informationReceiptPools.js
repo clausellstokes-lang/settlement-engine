@@ -48,6 +48,17 @@
 
 /** @type {Readonly<Record<string, readonly ProseVariant[]>>} */
 export const INFORMATION_RECEIPTS = Object.freeze({
+  // IN-3 THE COUNTER-GAME — the annex's # IN-3 `sweep_witch_hunt` block, verbatim, registered as
+  // `false_accusation` (the volume's kind; the annex heading names the ending that mints it).
+  // REPUTATION only: the accused is named, never removed.
+  false_accusation: [
+    (x) => `They found no spy at ${x.settlement}, and named one anyway. The town remembers whose name it was.`,
+    (x) => `The sweep turned up nothing; ${x.npc} was named on a season's association and nothing firmer.`,
+    (x) => `The seat wanted an answer more than it wanted the truth, and ${x.npc}'s name was the nearest one to hand.`,
+    (x) => `${x.npc}'s custom fell away within the week; the charge was never proved and never withdrawn.`,
+    (x) => `The commons hold this against the seat at ${x.settlement}; it will be remembered longer than the sweep was.`,
+    'No spy. One name. The town can count.',
+  ],
   // IN-2 THE LURE — the WEAKNESS bait's block of the annex's # IN-2 (the one bait whose spring
   // is built), verbatim. Variants 2 and 6 name a {route} and a {season} no producer supplies at
   // this base, so they are declared unreachable and stay in the pool (the IN-1 rule above).
@@ -70,5 +81,19 @@ export const INFORMATION_RECEIPTS = Object.freeze({
     (x) => `The last thing ${x.counterpart} was handed, it was handed in ${x.season}.`,
     'They work from an accounting, not from us.',
     'Thin, dated, and ours to have written.',
+  ],
+  // IN-3 THE SWEEP HUM — the annex's # IN-3 `sweep_launched` block, verbatim. Variants 2 and 3
+  // name a {faction} and a {reason} the producer does not supply at this base, so they are
+  // declared unreachable and stay in the pool (the IN-1 rule above).
+  sweep_launched: [
+    (x) => `The gates grow teeth; every stranger at ${x.settlement} is twice questioned.`,
+    (x) => `${x.faction}'s enforcer at ${x.settlement} has the gate rolls out; carters wait a day and answer for their loads.`,
+    (x) => `The seat is paying men to ask questions, and the cost stands in the town's book under ${x.reason}.`,
+    (x) => `Nobody at ${x.settlement} is accused. Everybody is asked.`,
+    (x) => `The seat's book at ${x.settlement} opens a line for extra watchmen, lamp oil, and a clerk to keep the gate rolls.`,
+    (x) => `The carters at ${x.settlement} have learned to bring their papers and their patience.`,
+    (x) => `A stranger coming into ${x.settlement} this season answers at the gate, at the inn, and again in the morning.`,
+    'Nothing has been found yet. The looking is already changing who comes.',
+    'The questioning began at the turn of the season, and the season is being remembered by it.',
   ],
 });

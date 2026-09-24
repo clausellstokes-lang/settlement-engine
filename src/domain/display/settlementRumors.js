@@ -299,6 +299,9 @@ export const WHAT_PHRASES = Object.freeze({
   plant_took: 'a story taking hold that somebody paid to plant',
   // IN-2: the week a planted weakness puts the mark's army on the road.
   lure_sprung: 'a march made on a weakness somebody planted',
+  // IN-3: the sweep that found no spy and named one anyway, and the hum of a quiet sweep.
+  false_accusation: 'a spy named where none was found',
+  sweep_launched: 'strangers questioned at the gates',
   intel_transfer: 'word passing quietly between courts',
   // power / faction / coup
   coup_succeeded: 'a seizure of power',

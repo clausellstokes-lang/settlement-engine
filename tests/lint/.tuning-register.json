@@ -680,6 +680,16 @@
       "band": null,
       "note": ""
     },
+    "src/domain/worldPulse/brokerageServicesPlant.js#PLANT_HEAT_TUNING": {
+      "role": null,
+      "status": "draft",
+      "signedAt": null,
+      "unit": {
+        "tooHotBand": "rank"
+      },
+      "band": null,
+      "note": "FP IN-3 (lane FP-I3): the plant counter's risk arm, the band of the TARGET court's suspicion (a word of the borrowed intensity ladder) at or above which a house refuses a commission as too_hot. DRAFT, registered in the minting commit because a new tuning table has no silent door; the unit is a label read off the source, and nothing here is signed or proposed."
+    },
     "src/domain/worldPulse/brokerageServicesPlant.js#PLANT_PRICE_TUNING": {
       "role": null,
       "status": "draft",
@@ -815,6 +825,31 @@
       "unit": null,
       "band": null,
       "note": ""
+    },
+    "src/domain/worldPulse/counterIntelSweep.js#SEND_TWO_TUNING": {
+      "role": null,
+      "status": "draft",
+      "signedAt": null,
+      "unit": {
+        "toleranceRung": "rank"
+      },
+      "band": null,
+      "note": "FP IN-3 (lane FP-I3): the send-two tolerance, the testimony-ladder rung a divergence's best account must reach before the one divergence reader's signature reads as a traitor, so two honest carriers of weathered hearsay never do. DRAFT, registered in the minting commit; nothing here is signed or proposed."
+    },
+    "src/domain/worldPulse/counterIntelSweep.js#SWEEP_TUNING": {
+      "role": null,
+      "status": "draft",
+      "signedAt": null,
+      "unit": {
+        "accusationSeverity": "fraction01",
+        "affordFloor": "fraction01",
+        "catchOdds": "probability",
+        "falseAccusationCharge": "fraction01",
+        "humSeverity": "fraction01",
+        "unknownProsperity": "fraction01"
+      },
+      "band": null,
+      "note": "FP IN-3 (lane FP-I3): the sweep's dials. catchOdds is the keyed draw per covert watcher; affordFloor is the prosperity rank a court must hold to pay for a hunt (the SEE upkeep idiom, a gate and never a drain); falseAccusationCharge is the deception-class credibility charge a witch-hunt lays on its own court; the two severities are the two beats' Herald weights; unknownProsperity is the rank an absent prosperity reads at (mid, non-blocking, the SEE upkeep's own reading). DRAFT, registered in the minting commit; the units are labels read off the source, and nothing here is signed or proposed."
     },
     "src/domain/worldPulse/deityStance.js#STANCE_TUNING": {
       "role": null,
@@ -1611,6 +1646,19 @@
       "band": null,
       "note": ""
     },
+    "src/domain/worldPulse/patronExposure.js#PATRON_EXPOSURE_TUNING": {
+      "role": null,
+      "status": "draft",
+      "signedAt": null,
+      "unit": {
+        "oddsByRank.0": "probability",
+        "oddsByRank.1": "probability",
+        "oddsByRank.2": "probability",
+        "oddsByRank.3": "probability"
+      },
+      "band": null,
+      "note": "FP IN-3 (lane FP-I3): the organic exposure producer's odds by the host court's suspicion rank on the intensity ladder, rising by rank so exposure is monotone in the band; quiet and present expose nothing. DRAFT, registered in the minting commit; nothing here is signed or proposed."
+    },
     "src/domain/worldPulse/peaceReasons.js#PEACE_REASON_TUNING": {
       "role": null,
       "status": "draft",
@@ -1946,6 +1994,24 @@
       "unit": null,
       "band": null,
       "note": ""
+    },
+    "src/domain/worldPulse/suspicion.js#SUSPICION_TUNING": {
+      "role": null,
+      "status": "draft",
+      "signedAt": null,
+      "unit": {
+        "clearsAt": "fraction01",
+        "decisiveAt": "fraction01",
+        "doubtFloor": "multiplier",
+        "grievanceWeight": "fraction01",
+        "mirrorWeight": "fraction01",
+        "pressingAt": "fraction01",
+        "presentAt": "fraction01",
+        "scandalWeight": "fraction01",
+        "zealAt": "fraction01"
+      },
+      "band": null,
+      "note": "FP IN-3 (lane FP-I3): the suspicion read's dials. Three evidence weights (the scandal condition, the deception-class grievance held, the injected mirror gap), the three cuts onto the borrowed intensity ladder, the two entry thresholds before SP-4's posture factor (clearsAt opens HIDE's answer and the sweep seal, the suspicionAbove band; zealAt turns a fruitless sweep into a witch-hunt), and the floor castDoubt's discount never passes. DRAFT, registered in the minting commit; the units are labels read off the source, and nothing here is signed or proposed."
     },
     "src/domain/worldPulse/tradeSalience.js#TRADE_SALIENCE_TUNING": {
       "role": null,

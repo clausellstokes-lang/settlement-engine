@@ -993,6 +993,9 @@ describe('engine-gated rule keys (the census-invisible subsystem class)', () => 
       // its brief places the four fences and the lit-mutant control in the wave's own
       // acceptance file.
       mediationGeneralizedEnabled: 'tests/domain/mediationGeneralizedGr6.test.js',
+      // FP IN-3 (lane FP-I3, 2026-09-24): the register's FORTIETH member, on TR-2's reading: its
+      // brief places the four fences and the lit-mutant control in the wave's own acceptance file.
+      counterIntelEnabled: 'tests/domain/counterIntelIn3.test.js',
     });
     const fenceFiles = walk(join(ROOT, 'tests/property'))
       .filter((p) => /DormancyFence\.test\.js$/.test(p))

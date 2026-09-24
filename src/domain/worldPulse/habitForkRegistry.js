@@ -865,4 +865,24 @@ export const HABIT_FORK_REGISTRY = Object.freeze([
     symbol: 'rumourReinforcesAt', discovery: 'bare', disposition: 'STAY',
     reason: 'HASHED, NOT DRAWN. Judgment J-EM-5 sends this keyed chooser to IN-2 and IN-2 registers it. MEASURED at the site: an FNV-1a reading of a labelled composite key (observer, roamer, elapsed ticks) under a tuning share, so it consumes ZERO rng by construction. Its two outcomes are the story GREW in the telling or DIED on the road, returned as a boolean and never exported as words. ⛔ NEVER PINNABLE, and that is the class rather than a delay: it is an OBSERVATION\'S NOISE (L10 (a), the survey\'s D-2 class; R-4 rules rumour weathering the same way), and a pin would make the world lie with provenance reading observed. So no vocabulary is declared, and STAY is the ruling rather than a deferral',
   }),
+  // ⭐ FP IN-3 (the fold's EDITOR line (a): the sweep's catch is a DRAW, and it registers WITH its
+  // outcome vocabulary, minted beside the producer). Sorted by id at the tail (SR-7). HBF-103 is a
+  // NAMED-DOMAIN CHECKLIST row (the owner's "dynamics between settlements": a court hunting the
+  // agents a neighbour keeps in it): the signature scan does not see a keyed catch fork, a bare
+  // DRAW row belongs to the survey's Table 4 roster (not this wave's to write), and a domain-less
+  // checklist row is the survey registration. HBF-104 IS signature-visible, so it sits on the idiom half.
+  fork({
+    forkId: 'HBF-103', module: 'src/domain/worldPulse/counterIntelSweep',
+    symbol: 'resolveSweep', discovery: 'checklist', disposition: 'DEFER',
+    actionVocabulary: 'SWEEP_OUTCOMES',
+    domain: 'INTER-SETTLEMENT DYNAMICS',
+    reason: 'A KEYED DRAW, one fork per swept town and tick (the stream-theft rule, sweep:<home>:<tick>), one reading per covert watcher standing on the town, against the catch odds of SWEEP_TUNING. Its answers are the three words SWEEP_OUTCOMES names, minted in the producer\'s own module: a clean miss, a false accusation, or the watchers caught. The accusation arm is a threshold over the court\'s own suspicion and draws nothing',
+    closeOwed: 'the pin seam: the sweep consumer (IN-3-c, at the direction transport) consults a pending pin over SWEEP_OUTCOMES before the catch draw, the HBF-86 idiom, so a DM may decide what a sweep finds and the world plays the consequence',
+  }),
+  fork({
+    forkId: 'HBF-104', module: 'src/domain/worldPulse/patronExposure',
+    symbol: 'exposedPatronInstitutions', discovery: 'idiom', disposition: 'DEFER',
+    reason: 'HASHED, NOT DRAWN, and discovered by the scan because it is a keyed choice: one reading per (host, house) off the cured hash01 root, compared against PATRON_EXPOSURE_TUNING odds that rise with the host court\'s suspicion rank, so the answer is stable while the band holds and monotone in it. It consumes ZERO rng. Its answer is binary (the covert patronage stands exposed or it does not) and is never exported as words',
+    closeOwed: 'whether the exposure is DM-addressable as a pin (the house unmasked, a binary outcome with no vocabulary yet) or only through a direction over the counter-game; until that is ruled the reading stays the world\'s',
+  }),
 ]);

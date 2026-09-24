@@ -433,7 +433,15 @@ export const ENVOY_PARLAY_REFUSAL_REASONS = Object.freeze([
  * direction transport the Edit Mode program composes (U123), so at this landing the words
  * are declared, resolvable and read by nothing that moves the world.
  */
-export const ENVOY_RECEPTION_DECISIONS = Object.freeze(['receive', 'turn_away']);
+/*
+ * FP IN-3 — THE THIRD ARM, `vet` ("Test their word."): the court neither receives nor turns
+ * the envoy away yet, but tests his word first (R-29). A new MEMBER of this one reception
+ * vocabulary, never a new direction: SP-D2's reception row types `decision` by reference, so
+ * the row resolves the word the moment it is here. Codepoint order holds (receive, turn_away,
+ * vet). The deterministic verdict is `counterIntelSweep.js :: vetEnvoyWord`, over the BUILT
+ * vetting reader and the testimony ladder; its consumer in the parlay stage is SP-D2-c's.
+ */
+export const ENVOY_RECEPTION_DECISIONS = Object.freeze(['receive', 'turn_away', 'vet']);
 
 export const STATE_SET = new Set(ENVOY_ERRAND_STATES);
 // Every state a parlay can already have happened in. `travelling` is the only

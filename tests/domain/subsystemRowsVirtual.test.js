@@ -257,6 +257,10 @@ const MEDIATION_GENERALIZED = 'mediationGeneralizedEnabled';
 // read (`intelActs.intelTradeActive`) older than both: the same three module-scope edits, ZERO
 // new test titles.
 const INTEL_TRADE = 'intelTradeEnabled';
+// FP IN-3 (lane FP-I3). The counter-game, minted with its manifest entry, its certification row
+// APPENDED at the tail after GR-6's and its ONE by-name gate read (`suspicion.counterIntelActive`)
+// in a single commit: the same three module-scope edits, ZERO new test titles.
+const COUNTER_INTEL = 'counterIntelEnabled';
 // AUTHORING ORDER, not alphabetical: the assertion below is an exact ordered equality
 // against VIRTUAL_SUBSYSTEM_ROWS, so this list mirrors the file's own section order.
 //
@@ -293,6 +297,7 @@ const VIRTUAL_RULES = Object.freeze([
   INFO_LURE,
   MEDIATION_GENERALIZED,
   INTEL_TRADE,
+  COUNTER_INTEL,
 ]);
 
 const rowFor = (rule) => SUBSYSTEM_CERTIFICATION_REGISTRY.find((row) => row.rule === rule);
@@ -493,6 +498,8 @@ const LANE_LEAVES = Object.freeze({
   // and statecraft layers' own mouths, so tracing this lane's zero-candidate claim through them
   // would measure two other lanes' vocabulary.
   [INTEL_TRADE]: ['src/domain/spatial/intelActs.js'],
+  // IN-3. The gate and the read, the sweep, the exposure producer, and the head that carries both seams.
+  [COUNTER_INTEL]: ['src/domain/worldPulse/suspicion.js', 'src/domain/worldPulse/counterIntelSweep.js', 'src/domain/worldPulse/patronExposure.js', 'src/domain/worldPulse/informationStatecraft.js'],
   [CHANCE_ENCOUNTERS]: [
     'src/domain/worldPulse/envoyChanceMeeting.js',
     'src/domain/worldPulse/envoyChanceMeetingLedger.js',

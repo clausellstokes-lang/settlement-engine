@@ -176,7 +176,13 @@ const LOCAL_HASH_ROLL = /\b(?:[A-Za-z_$][\w$]*Roll01|fnv1a32|hashUnit|hash32)\s*
 // STAY row carries none. Three DEFER rows remain from this registration: HBF-93 claimRoll,
 // HBF-94 driftDue, HBF-96 reexpressed. No SURVEY_DEFERRED/SURVEY_SETTLED arm moves: HBF-95
 // carries domain:'FAITH' and was never a SURVEY_ROWS member (domain === null only).
-const DEFER_CEILING = 82;
+// 82 -> 84 at FP IN-3 (lane FP-I3, 2026-09-24; SR-1): the wave REGISTERS AT MINT the two forks its
+// own leaves create, as its brief's EDITOR line (a) orders: HBF-103 (resolveSweep, the sweep's keyed
+// catch draw, WITH its outcome vocabulary SWEEP_OUTCOMES and the pin seam as its closeOwed) and
+// HBF-104 (exposedPatronInstitutions, the exposure producer's keyed zero-draw reading, whether it
+// takes a pin or a direction owed). Neither is a DISCOVERED fork filed on the way past: both are
+// the wave's own, named in the same commit that mints them, and neither presumes a STAY ruling.
+const DEFER_CEILING = 84;
 
 /** The named-domain checklist's row count, asserted rather than read off.
  *  14 -> 23 at WF-0: nine FAITH rows (HBF-93..HBF-101) for the traditions registration
@@ -184,7 +190,10 @@ const DEFER_CEILING = 82;
  *  §4's draw scan) finding more forks in an already-named domain, not a new domain; the
  *  eight-label set (J-HB-23 (b)) and the owner's seven-domain mapping (J-HB-23 (c)) are
  *  both untouched. */
-const NAMED_DOMAIN_ROWS = 23;
+// 23 -> 24 at FP IN-3 (lane FP-I3, 2026-09-24; SR-1): HBF-103, the sweep's keyed catch draw, joins
+// the named-domain checklist under INTER-SETTLEMENT DYNAMICS (a court hunting a neighbour's agents),
+// a fork the wave mints and registers at mint; no label and no owner mapping moves.
+const NAMED_DOMAIN_ROWS = 24;
 
 /**
  * ⭐⭐ EM-E0 — THE REGISTRATION'S ROSTER IS THE SURVEY'S, AND IT IS PARSED RATHER THAN RESTATED.
@@ -237,7 +246,10 @@ const SURVEY_SETTLED = 3;
 // 6 -> 7 AT FP IN-2 (lane FP-I, 2026-09-24; SR-1), the same banked win: IN-2 adds HBF-72's
 // LIE_OUTCOMES (told, believed, caught), minted in infoLure.js beside the one exposure law and
 // re-exported by informationStatecraft.js, the fork's own module, so arm (b) resolves it there.
-const ROWS_WITH_ACTION_VOCABULARY = 7;
+// 7 -> 8 AT FP IN-3 (lane FP-I3, 2026-09-24; SR-1), the same banked win: HBF-103 declares
+// SWEEP_OUTCOMES (clean_miss, false_accusation, caught), minted in counterIntelSweep.js, the fork's
+// own module, beside the producer that answers one of the three for every sweep.
+const ROWS_WITH_ACTION_VOCABULARY = 8;
 
 /**
  * Table 4's rows as `module.js#symbol`, split by the "R" (registration owed) and "B" (bare,

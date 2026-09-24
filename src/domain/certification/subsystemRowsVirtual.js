@@ -773,6 +773,42 @@ export const VIRTUAL_SUBSYSTEM_ROWS = Object.freeze([
     // One exact channel the v5 census can read the day a receipt carries the flag: `indirect`.
     soakEvidence: 'indirect',
   }),
+  // ── IN-3 · THE COUNTER-GAME (FP IN-3, docs/DESIGN_FP_INFORMATION.md §5 IN-3; block #19) ─────
+  // APPENDED AT THE TAIL, the add-a-row protocol above; an append here shifts no existing index.
+  Object.freeze({
+    rule: 'counterIntelEnabled',
+    title: 'The counter-game (suspicion, the sweep, the gates closed in answer)',
+    module: 'src/domain/worldPulse/suspicion.js,src/domain/worldPulse/counterIntelSweep.js,src/domain/worldPulse/patronExposure.js,src/domain/worldPulse/informationStatecraft.js',
+    aliveness: Object.freeze({
+      // DELIBERATELY EMPTY: the counter-game mints no pulse candidate; its two beats are news
+      // entries of the sweep producer, whose consumer lands with the direction transport.
+      eventTypes: Object.freeze([]),
+      // DELIBERATELY EMPTY: the knowledge family is a residual bucket, so no behavioural family
+      // can grade the counter-game alive without grading every ordinary bluff with it.
+      moverFamilies: Object.freeze([]),
+      // DELIBERATELY EMPTY: the answer writes through spatialLedgers.secrecyPostures, whose ONE
+      // writer is the statecraft head, and ambient paranoia keeps that key alive in dark worlds.
+      stateKeys: Object.freeze([]),
+      other: 'A DERIVED READ AND TWO PULSE SEAMS ON EXISTING LEDGERS, WHICH IS WHY EVERY CHANNEL IS EMPTY AND WHY THAT IS THE CORRECT READING. ONE GATE, by name and strict: counterIntelActive (suspicion.js) is the only read of the key in src/, a conjunction with the belief gate. WHAT IT DOES, LIT: suspicionOf reads how hard the receipts a court holds press it (the corruption scandal on its own record, the deception-class scars on its own edges weighted by the resentment still held, and an injected mirror gap), banded on the estate intensity ladder and never reading truth. Two seams in the statecraft head: a court whose suspicion clears its posture-scaled threshold closes its gates by decision and reopens them by the ambient exit law once the evidence decays, and a suspicious court believes a planted claim less, the discount composed on the mouthpiece plane weight. The houses: a covert patronage stands exposed while its host is suspicious enough that a keyed reading of the house falls under the band odds, which supplies projectPatronBindings its exposed list at last, and the plant counter refuses a story too hot to sell (too_hot). The leaves also DEFINE the sweep-for-agents direction and the suspicionAbove predicate headless (IN-3-c: the consumer lands when U123 composes the direction transport), the sweep producer and its three outcomes, VET as the third reception arm and SEND-TWO over the one divergence reader. WHAT IT NEVER DOES: it stores no suspicion, reads no truth in the suspicion read, fates no one (the accused is named, never removed), and forks no stream but the keyed catch. THE OBSERVATION NEEDED to close the gap is a lit soak in which a scarred court closes its gates in answer and reopens them; until then the lane is pinned in tests/domain/counterIntelIn3.test.js, which carries its four dormancy fences and the lit-mutant control.',
+    }),
+    // The read answers only to receipts a court already holds, so its output is sparse and
+    // driven entirely by its world.
+    expectedTempo: 'reactive',
+    invariants: Object.freeze([
+      Object.freeze({
+        name: 'dark_is_byte_identical',
+        description: 'With the key absent, false, or any truthy non-true value, the statecraft head over a fixture that closes a gate in answer and doubts a planted claim the moment the key is lit returns exactly the bytes it returned before IN-3.',
+        check: 'Expressible from state and asserted that way in tests/domain/counterIntelIn3.test.js fence 1 (a pinned digest of the dark output), with the lit-mutant control on the same fixture.',
+      }),
+      Object.freeze({
+        name: 'suspicion_never_reads_truth',
+        description: 'The suspicion read imports no truth reader and names no truth ledger, so a court can be rightly suspicious with no spy present and wrongly calm with several.',
+        check: 'Expressible from source and asserted that way in tests/domain/counterIntelIn3.test.js by an import pin and a token scan, with a planted truth read convicted and the sweep, which reads truth, convicted as the guard-the-guard control.',
+      }),
+    ]),
+    // No channel at all, so the row can never be ALIVE and says so honestly.
+    soakEvidence: 'unobserved',
+  }),
 ]);
 
 /**

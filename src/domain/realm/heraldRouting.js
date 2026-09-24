@@ -136,6 +136,9 @@ export const EXACT_SECTION = Object.freeze(/** @type {Record<string, HeraldSecti
   // IN-2 `lure_sprung` (DM truth, covert at the producer) files with the same siblings for the
   // same reason: a bought weakness put an army on the road. IN-5's knowledge desk re-files it.
   lure_sprung: 'war',
+  // IN-3 the counter-game's two public beats file beside the built catch beat
+  // (`infowar_spy_exposed`, above) until IN-5's knowledge desk re-files the lane.
+  false_accusation: 'war', sweep_launched: 'war',
   // relationship types that are adversarial route to war (a cold_war / hostile turn
   // is a war-section beat; commercial/hierarchy relations are trade, below).
   rival: 'war', cold_war: 'war', hostile: 'war',

@@ -104,6 +104,7 @@ import {
 // IN-2 — THE LURE. The ONE axis-typed exposure law, the lie's outcome words (HBF-72, re-exported
 // below as this fork's own), the spring and the bluff collision. A pure leaf of this family.
 import { LIE_OUTCOMES, bluffCollisionReasons, infoLureActive, lieClaimClause, lieExposedBandOf, lieExposure, lureSprungEntries } from './infoLure.js';
+import { claimDoubtOf, secrecyInAnswer } from './suspicion.js'; // IN-3: castDoubt's world side and HIDE-as-answer, identities dark
 
 export { LIE_TUNING, lieWillingness, LIE_OUTCOMES };
 
@@ -721,7 +722,7 @@ export function processLies({
         strengthBand: assertedBand,
         allianceLabel: prior.allianceLabel,
         faithLabel: prior.faithLabel,
-        confidence01: round4(clamp01(T.BASE_CONFIDENCE * credW)),
+        confidence01: round4(clamp01(T.BASE_CONFIDENCE * credW * claimDoubtOf({ worldState, snapshot, settlementId: audienceId }))),
         lastUpdateTick: now,
       };
       setOverride(audienceId, liarId, planted);
@@ -1325,7 +1326,7 @@ export function advanceInformationStatecraft({
   const priorSight = asObject(getSpatialLedger(state, 'sightPostures'));
 
   // (1) HIDE — the secrecy postures.
-  const nextSecrecy = processSecrecy({ snapshot: snap, priorSecrecy, beliefMaps, rng, tick, strengthOf: strengthFn, alignmentOf: alignFn });
+  const nextSecrecy = secrecyInAnswer(processSecrecy({ snapshot: snap, priorSecrecy, beliefMaps, rng, tick, strengthOf: strengthFn, alignmentOf: alignFn }), { worldState: state, snapshot: snap, priorSecrecy, tick, tuning: SIGHT_TUNING });
   const prevSec = JSON.stringify(Object.keys(priorSecrecy).length ? priorSecrecy : null);
   const nextSec = JSON.stringify(nextSecrecy);
   if (prevSec !== nextSec) {

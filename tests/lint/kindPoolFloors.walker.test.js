@@ -224,7 +224,8 @@ const ROUTED_TOKENS = KIND_REGISTRATION_FREEZES.routedTokens;
 // with it (383 → 384, in the roster) and the divergence below stays at 8; the unvoiced ceiling holds.
 // The UNION at the FP integration pick (the chair, 2026-09-24): 115 + 2 (GR-2b) + 1 (TR-3) + 1 (IN-2).
 // +1 at FP GR-6 (brokered_back) — the UNION at the pick: 115 + 2 + 1 + 1 + 1.
-const REGISTERED_KIND_COUNT = 120;
+// 120 → 122 at FP IN-3 (lane FP-I3, 2026-09-24; SR-8): `false_accusation` and `sweep_launched`.
+const REGISTERED_KIND_COUNT = 122;
 // +1 at GR-6: GR-6 registers brokered_back (the war that did not happen), the GRAMMAR family's
 // fifteenth row and the mediation leaf's one news kind (SR-8). It carries the treaty cohort's
 // desk, so ROUTED_TOKENS moves with it (383 → 384, in the roster) and the divergence below stays

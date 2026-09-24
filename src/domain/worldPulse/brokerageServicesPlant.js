@@ -62,6 +62,8 @@ import { PLANT_HANDOFF_LAG_TICKS } from './disinformationPlant.js';
 import { getSpatialLedger } from '../spatial/distanceRead.js';
 import { brokerageEffectsActive, brokerageHouseRosterIn } from './brokerageStamps.js';
 import { servicesAvailable, patronPurse01, QUERY_PRICE_BANDS } from './brokerageServices.js';
+// IN-3 — the risk arm reads the TARGET court's suspicion through the counter-game's one gate.
+import { SUSPICION_BANDS, counterIntelActive } from './suspicion.js';
 
 /**
  * THE WIRING. `processLies` consumes `commissionedPlants` after carrying/exposing
@@ -86,10 +88,35 @@ export const PLANT_WIRING = 'informationStatecraft.processLies: commissionedPlan
  */
 export const PLANT_INTENTS = Object.freeze(['inflate', 'deflate']);
 
-/** The closed refusal vocabulary. @type {readonly string[]} */
+/**
+ * The closed refusal vocabulary. SEVEN since FP IN-3: `too_hot` is APPENDED (never inserted,
+ * so no existing word changes its position) as the house's risk arm, a commission refused
+ * because the TARGET court's own suspicion prices the blowback too high. `QUERY_REFUSALS`
+ * (brokerageServices.js) is a different vocabulary and is untouched.
+ * @type {readonly string[]}
+ */
 export const PLANT_REFUSALS = Object.freeze([
-  'dormant', 'no_market', 'bad_intent', 'cannot_pay', 'no_channel', 'already_active',
+  'dormant', 'no_market', 'bad_intent', 'cannot_pay', 'no_channel', 'already_active', 'too_hot',
 ]);
+
+/**
+ * IN-3 THE RISK ARM'S DIAL (a DRAFT register row; nothing signed): the band of the TARGET
+ * court's suspicion at or above which a house refuses to place a story there, a word of the
+ * borrowed intensity ladder rather than a number.
+ */
+export const PLANT_HEAT_TUNING = Object.freeze({ tooHotBand: 'pressing' });
+
+/**
+ * Is the target court too hot to sell into? Dark (the counter-game unlit), or with no reading
+ * supplied, never: the arm is skipped and the counter is byte-identical.
+ * @param {unknown} worldState @param {unknown} reading a `suspicion.js :: suspicionOf` reading
+ * @returns {boolean}
+ */
+export function plantTooHot(worldState, reading) {
+  if (reading == null || !counterIntelActive(worldState)) return false;
+  const rank = SUSPICION_BANDS.indexOf(text(asObject(reading).band));
+  return rank >= 0 && rank >= SUSPICION_BANDS.indexOf(PLANT_HEAT_TUNING.tooHotBand);
+}
 
 /** Fields a paid plant may move on one frozen WR-7b negotiation picture. */
 export const ENVOY_PICTURE_PLANT_FIELDS = Object.freeze([
@@ -386,11 +413,13 @@ function refuse(reason, detail) {
  * @param {unknown} args.intent one of PLANT_INTENTS
  * @param {number} args.tick
  * @param {Record<string, unknown>|null} [args.target] optional exact WR-7b envoy-picture target
+ * @param {unknown} [args.audienceSuspicion] IN-3: the TARGET court's suspicion reading, when the
+ *   caller holds one (the risk arm; absent, the arm is skipped)
  * @returns {PlantResult}
  */
 export function commissionPlant({
   worldState, item, patronId, audienceId, subjectId, subjectTrueBand, audienceBelief, intent, tick,
-  target = null,
+  target = null, audienceSuspicion = null,
 }) {
   if (!brokerageEffectsActive(worldState)) {
     return refuse('dormant', 'No market in this world sells that.');
@@ -405,6 +434,9 @@ export function commissionPlant({
   const prior = asObject(audienceBelief);
   if (!Object.keys(prior).length) {
     return refuse('no_channel', 'That court has never heard of the place; there is nothing to correct and no ear to correct it in.');
+  }
+  if (plantTooHot(worldState, audienceSuspicion)) {
+    return refuse('too_hot', 'That court is already hunting for paid stories, and the house will not sell into a swept court.');
   }
   const pictureTarget = target == null
     ? null

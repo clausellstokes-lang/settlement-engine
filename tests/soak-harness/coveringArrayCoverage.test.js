@@ -261,7 +261,9 @@ describe('the covering array and its constraint manifest', () => {
     // DEFAULT_SIMULATION_RULES and from every preset spread, and the census enumerates the register,
     // never the engine's reads), so it enters the union through the virtual arm alone.
     // 39 → 40 at the FP integration pick: IN-4/1's declared key, the fourth tonight (SR-1, the union; re-measured by this run).
-    expect(census.virtual.length).toBe(40);
+    // 39 → 40 at FP IN-3 (lane FP-I3, 2026-09-24; SR-1): `counterIntelEnabled`, measured by this run.
+    // 40 → 41 at the FP integration pick: IN-3's virtual mint, the fifth tonight (SR-1, the union; re-measured by this run).
+    expect(census.virtual.length).toBe(41);
     expect(census.overlap).toEqual([]);
     // 85 -> 86 at the WAR landing (§876): the same coupled-union key, same re-measure.
     // 86 -> 87 at ENC-3 (§893): the virtual mint above, moving in lockstep.
@@ -273,7 +275,9 @@ describe('the covering array and its constraint manifest', () => {
     // 94 → 95 at the FP integration pick: both virtual mints, in lockstep.
     // 95 → 96 at the FP integration pick: GR-6's mint, in lockstep.
     // 96 → 97 at the FP integration pick: IN-4/1's key, in lockstep.
-    expect(census.union.length).toBe(97);
+    // 96 → 97 at FP IN-3: the virtual mint above, moving in lockstep.
+    // 97 → 98 at the FP integration pick: IN-3's key, in lockstep.
+    expect(census.union.length).toBe(98);
     // 93 -> 94 at FP GR-6: the virtual mint above, moving in lockstep.
     // 95 -> 96 at FP IN-4 commit 1: the virtual mint above, moving in lockstep.
     expect(census.governed.length + census.ungoverned.length + census.virtual.length).toBe(census.union.length);
@@ -290,7 +294,9 @@ describe('the covering array and its constraint manifest', () => {
     // 69 → 70 at the FP integration pick: both virtual keys, outside the normalizer.
     // 70 → 71 at the FP integration pick: GR-6's key, outside the normalizer.
     // 71 → 72 at the FP integration pick: IN-4/1's key, outside the normalizer.
-    expect(census.union.length - census.governed.length).toBe(72);
+    // 71 → 72 at FP IN-3: likewise virtual, so it lands outside the normalizer.
+    // 72 → 73 at the FP integration pick: IN-3's key, outside the normalizer.
+    expect(census.union.length - census.governed.length).toBe(73);
     // 68 -> 69 at FP GR-6: likewise virtual, so it lands outside the normalizer.
     // 70 -> 71 at FP IN-4 commit 1: likewise virtual, so it lands outside the normalizer.
     expect(census.nonBoolean.length).toBe(13);

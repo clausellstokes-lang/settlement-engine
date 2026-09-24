@@ -142,8 +142,74 @@ export const IN0C_DISCLOSURE_SIGNING_CREDIT_COUPLING = couplingRow({
   kinds: Object.freeze(['treaty_disclosure_opened']),
 });
 
+/**
+ * IN-3 / GRAMMAR→INFORMATION. THE COURT READS ITS ALARM IN THE ENVOY PROGRAM'S WORDS, AND TESTS
+ * THE ENVOY'S WORD BEFORE IT ACTS (the volume's INFO×GRAMMAR coupling line: VET and SEND-TWO are
+ * shared with the envoy program by cross-reference, never forked).
+ *
+ * THE READ is `suspicionOf`, whose band is spelled in the estate's ONE intensity ladder, borrowed
+ * from the GRAMMAR vocabulary leaf that declares it (`envoyErrandVocabulary.js`). Its REACHABLE
+ * receipt at this wave is the gate the head writes when that band clears: the secrecy posture
+ * opened in answer. THE COUNTERFORCE is VET (`vetEnvoyWord`), the third reception arm: it reads
+ * the testimony ladder (`envoyTestimony.js`), the reception words IN-3 grows by `vet`, and the one
+ * inbound reader (`envoyInbound.js`) the sweep seal's ES arm consults, and it tests a report before
+ * the court acts on it. VET's own verdict persists when SP-D2-c's parlay consumer lands; until
+ * then this row names only the half the shipped road can write, and re-aims when that lands.
+ *
+ * DARK ⇒ NOTHING: every door rides `counterIntelEnabled` by name, and the inbound reader answers
+ * empty while the envoy layer or the errand spine is dark.
+ * @type {Readonly<CouplingRegistryRow>}
+ */
+export const IN3_ENVOY_WORD_COUPLING = couplingRow({
+  couplingId: 'CPL-19.GRAMMAR_TO_INFO.IN-3.envoy_word_tested',
+  pairId: 'CPL-19',
+  direction: 'GRAMMAR→INFO',
+  read: 'src/domain/worldPulse/suspicion.js#suspicionOf',
+  receiptField: 'spatialLedgers.secrecyPostures[].{level01,enteredTick}',
+  counterforce: 'src/domain/worldPulse/counterIntelSweep.js#vetEnvoyWord',
+  flags: Object.freeze([
+    'counterIntelEnabled',
+  ]),
+  owningVolume: 'INFORMATION',
+  owningWave: 'IN-3',
+  intendedDesk: 'war',
+});
+
+/**
+ * IN-3 / INTERIOR→INFORMATION. THE COURT'S TEMPER AND ITS OLD WOUNDS DECIDE HOW SOON IT SHUTS ITS
+ * GATES (Spine 13 ENGAGED; the volume's INFO×INTERIOR coupling line).
+ *
+ * `suspicionOf` reads two INTERIOR substrates: the relationship memory on the court's own edges
+ * (the deception-class incidents and the resentment still HELD, keyed by the writer's own
+ * `relationshipKeyFromEdge`) and SP-C's posture (`courtPostureOf`'s factor scales every entry
+ * threshold). Its reachable receipt is the gate the HEAD writes when that suspicion clears: the
+ * secrecy posture opened in answer. THE COUNTERFORCE is the posture's own cap, a posture that
+ * colours and never drowns, so no temper can make a court shut its gates on no evidence.
+ *
+ * DARK ⇒ NOTHING: `secrecyInAnswer` returns the head's own ledger by reference, and the read is
+ * the quiet reading, while `counterIntelEnabled` is anything but true.
+ * @type {Readonly<CouplingRegistryRow>}
+ */
+export const IN3_TEMPER_AND_WOUNDS_COUPLING = couplingRow({
+  couplingId: 'CPL-20.INTERIOR_TO_INFO.IN-3.suspicion_temper',
+  pairId: 'CPL-20',
+  direction: 'INTERIOR→INFO',
+  read: 'src/domain/worldPulse/suspicion.js#suspicionOf',
+  receiptField: 'spatialLedgers.secrecyPostures[].{level01,enteredTick}',
+  counterforce: 'src/domain/worldPulse/strategicPosture.js#courtPostureOf',
+  flags: Object.freeze([
+    'counterIntelEnabled',
+    'infoStatecraftEnabled',
+  ]),
+  owningVolume: 'INFORMATION',
+  owningWave: 'IN-3',
+  intendedDesk: 'war',
+});
+
 /** Every INFORMATION row, in wave order. @type {ReadonlyArray<Readonly<CouplingRegistryRow>>} */
 export const IN_INFORMATION_COUPLINGS = Object.freeze([
   IN0A_PLANT_HANDOFF_COUPLING,
   IN0C_DISCLOSURE_SIGNING_CREDIT_COUPLING,
+  IN3_ENVOY_WORD_COUPLING,
+  IN3_TEMPER_AND_WOUNDS_COUPLING,
 ]);

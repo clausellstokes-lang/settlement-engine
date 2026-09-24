@@ -339,7 +339,9 @@ describe('FP SP-D2 — the inbound read, the envoyArrived condition and the rece
 
   it('A3b: the row is the eleven-field declaration with both vocabularies imported by reference, and the leaf spells none of their words', () => {
     expect(ENVOY_RECEPTION_TYPE, 'one op type for both seals').toBe('receive-envoy');
-    expect(ENVOY_RECEPTION_DECISIONS, 'the two words, codepoint-ordered').toEqual(['receive', 'turn_away']);
+    // ['receive', 'turn_away'] → + 'vet' at FP IN-3 (lane FP-I3, 2026-09-24; SR-1): IN-3 adds VET,
+    // the third reception arm ("Test their word."), as a MEMBER of this one vocabulary (R-29).
+    expect(ENVOY_RECEPTION_DECISIONS, 'the three words, codepoint-ordered').toEqual(['receive', 'turn_away', 'vet']);
     expect(Object.isFrozen(ENVOY_RECEPTION_DECISIONS), 'and frozen').toBe(true);
     expect(Object.keys(envoyReceptionRow).sort(), 'operations.js\'s eleven declaration keys, no more').toEqual([
       'conflictsWith', 'consequence', 'duration', 'enables', 'guards', 'guardsStated',

@@ -899,7 +899,12 @@ describe('EP-0 · the closure record, re-run rather than transcribed', () => {
     // with the receipt the stage hands it. The caller is DARK at this commit (`chanceEncountersEnabled` is off in
     // every preset), so the arrival is a source fact and not yet a behaviour. MEASURED code-only over the live
     // tree at the composed tip: 18 callers; the mention population stays strictly larger.
-    expect(callers).toHaveLength(18);
+    // ⭐ RE-RECORDED 2026-09-24 BY FP IN-3 (lane FP-I3; SR-1): 18 -> 19, a DECLARED arrival.
+    // `src/domain/worldPulse/patronExposure.js` is the organic exposure producer; it reads a house's
+    // exposure off the CURED root, keyed (host, house) and zero-draw, for the reason every caller
+    // above it did. It composes no root and reads no seed at all; dark (`counterIntelEnabled` in no
+    // preset) the call is never reached, so the arrival is a source fact and not yet a behaviour.
+    expect(callers).toHaveLength(19);
     // ⭐ AND THE TWO POPULATIONS NOW DIFFER IN KIND RATHER THAN BY LUCK. `mentions` stays a
     // RAW scan deliberately — it is the mention population, and the contrast is the claim.
     const mentions = ALL_FILES.filter((f) => read(f).includes('hash01'));

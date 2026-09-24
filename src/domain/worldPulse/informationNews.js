@@ -97,7 +97,8 @@ function informationKindRow(kind, significance, audience, section, requiredSlots
 
 /**
  * The governed rows. TWO since FP IN-2 (`lure_sprung`, the lure's DM-truth spring, is the first
- * ROUTED information beat and carries the interim desk declaration below). IN-1's singular was a
+ * ROUTED information beat and carries the interim desk declaration below); FOUR since FP IN-3
+ * (`false_accusation` and `sweep_launched`, the counter-game's two public beats). IN-1's singular was a
  * measurement rather than a stage of construction: `mirror_shift`'s strength arm is inexpressible at this base (the collector
  * applies no seeded-tick filter to plants, so an earlier tick returns the present answer
  * wearing a past clock) and `mirror_confidence_degraded` has no honest producer at all (the
@@ -118,6 +119,13 @@ function informationKindRow(kind, significance, audience, section, requiredSlots
  * @type {ReadonlyArray<Readonly<InformationRegistryEntry>>}
  */
 export const INFORMATION_KIND_REGISTRY = Object.freeze([
+  // IN-3 THE COUNTER-GAME: the witch-hunt's receipt, the annex's `sweep_witch_hunt` block (the
+  // kind the volume names `false_accusation`). PUBLIC: the town remembers whose name it was. It
+  // files at the interim desk IN-2 declared (`war`, beside the built catch beat
+  // `infowar_spy_exposed`), until IN-5 mints the knowledge desk. Codepoint-sorted (SR-7).
+  informationKindRow('false_accusation', 'notable', 'public', 'war', [
+    ['settlement'], ['npc'], ['npc'], ['npc'], ['settlement'], [],
+  ]),
   // IN-2 THE LURE. THE INTERIM DESK, DECLARED BY THE FIRST WAVE THAT MINTS A ROUTED
   // INFORMATION BEAT (this file's header reserved the declaration for it): `war`, where the
   // lure's own siblings `infowar_lie_exposed` and `plant_took` already file, until IN-5 mints
@@ -129,6 +137,13 @@ export const INFORMATION_KIND_REGISTRY = Object.freeze([
   informationKindRow('mirror_standing_line', 'routine', 'public', null, [
     [], ['counterpart', 'band', 'season'], ['band'], ['counterpart'], ['band'],
     [], ['counterpart', 'season'], [], [],
+  ]),
+  // IN-3 THE SWEEP HUM, the annex's `sweep_launched` block: the line a sweep that found nothing
+  // leaves in the town (a catch speaks through the built beat, a witch-hunt through the row
+  // above). Public, routine, the same interim desk. Codepoint-sorted (SR-7).
+  informationKindRow('sweep_launched', 'routine', 'public', 'war', [
+    ['settlement'], ['faction', 'settlement'], ['reason'], ['settlement'], ['settlement'],
+    ['settlement'], ['settlement'], [], [],
   ]),
 ]);
 

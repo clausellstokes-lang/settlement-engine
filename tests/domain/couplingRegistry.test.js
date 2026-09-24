@@ -81,6 +81,7 @@ import {
   couplingRowFor,
   couplingRowsFor,
 } from '../../src/domain/certification/couplingRegistry.js';
+import { IN3_ENVOY_WORD_COUPLING, IN3_TEMPER_AND_WOUNDS_COUPLING } from '../../src/domain/certification/couplingRegistryInfo.js';
 
 /**
  * The twelve chartered volume prefixes (DESIGN_FP_ARCHITECTURE.md §9 seam row 32 /
@@ -738,6 +739,9 @@ describe('CW-0 coupling registry', () => {
       .toEqual([
         WR7_SILENCE_INFERENCE_COUPLING,
         IN0C_DISCLOSURE_SIGNING_CREDIT_COUPLING,
+        // FP IN-3 (lane FP-I3, 2026-09-24; SR-1): the counter-game's row takes the INFO seat after
+        // IN-0c's, the volume composing ahead of ESPIONAGE; every row below shifts down one.
+        IN3_ENVOY_WORD_COUPLING,
         ES1_COVERT_MISSION_MINT_COUPLING,
         ES1_MISSION_VOCABULARY_COUPLING,
         ES2_GAUNTLET_DWELL_READ_COUPLING,
@@ -762,7 +766,9 @@ describe('CW-0 coupling registry', () => {
     // ES-3's second row points at the volume's OWN anchor for INFO × INTERIOR rather than
     // minting a twenty-second pair: the standoff's flaw distortion extends the ladder's
     // `riskAppetiteOf` instead of re-parsing personality words.
-    expect(couplingRowsFor('CPL-20', 'INTERIOR→INFO')).toEqual([ES3_FLAW_DISTORTION_COUPLING]);
+    // FP IN-3 (lane FP-I3, 2026-09-24; SR-1): the counter-game's temper-and-wounds row takes the
+    // INFO seat AHEAD of ES-3's, the INFO volume composing ahead of ESPIONAGE (IN-0c's reading above).
+    expect(couplingRowsFor('CPL-20', 'INTERIOR→INFO')).toEqual([IN3_TEMPER_AND_WOUNDS_COUPLING, ES3_FLAW_DISTORTION_COUPLING]);
     // ES-5c is the SECOND INFO→INTERIOR row under CPL-20 and the FIRST touching the ladder.
     // It needs its own row rather than ES-5b's because `licensingRows` joins on the IMPORTER
     // module, and the two rows name different importers — so this pair is licensed here or

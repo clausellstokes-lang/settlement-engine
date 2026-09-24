@@ -356,6 +356,12 @@ describe('participation chokepoint — the .npcs-reader inventory ratchet (§8 c
     // per person besides, pairing `dead` itself as the chokepoint's consumers do; a captive or a
     // shelved soul never fronts a commissioned lie. It writes nothing onto any person.
     'src/domain/worldPulse/infoLure.js',
+    // FP IN-3 (lane FP-I3, 2026-09-24): the witch-hunt's ACCUSED cast (`castAccused`) reads the
+    // home's PARTICIPATION view (the snapshot item's settlement, via-snapshot, protected) and asks
+    // the ONE chokepoint, `isOffStage`, per person besides, pairing `dead` itself as the
+    // chokepoint's consumers do: a captive or a shelved soul is never the one named. It writes
+    // nothing onto any person; the accusation is a reputation, never a fate.
+    'src/domain/worldPulse/counterIntelSweep.js',
     // D-2 (fold batch 3): the statecraft MOUTHPIECE draw reads the participation view (a
     // hostage cannot front a court's bluff — via-snapshot, protected); the credibility PRUNE
     // scan reads the UNTOUCHED item.save roster (the roadsKernel idiom) so a captive's
