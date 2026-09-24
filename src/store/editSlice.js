@@ -1016,6 +1016,12 @@ function storedConfigFor(state, saveId, record) {
  * TICK. An applied entry is history and is read at every later tick; the layer's `minted` rows
  * are the record of who already exists, so a second tick finds nothing due and mints nobody.
  *
+ * ⛔ AND THE **RE-DERIVATION** READS THAT SAME ROLL (EM-E8d, U111). A newcomer is minted once: the
+ * run is handed the rows THIS tick added and no others, because the base it regenerates from is
+ * the live record, which already carries every earlier one. Handing it the whole layer appended
+ * them a second time — MEASURED, a newcomer duplicated on all three homes at the tick that minted
+ * the NEXT one — and a duplicated person is not a person the DM can ever un-add.
+ *
  * ⛔ IT VOICES NOTHING. The chronicle cause is EM-E1's and EM-E2's; this member writes no
  * chronicle line, no news entry and no receipt beyond its own return value.
  *
@@ -1071,6 +1077,11 @@ export async function applyRosterDecreesAtTick(get, set, request) {
   let layer = /** @type {{dmLayer?: unknown}} */ (record)?.dmLayer;
   /** @type {string[]} */
   const minted = [];
+  // ⭐ THE ROWS **THIS** TICK ADDED, KEPT APART FROM THE ONES THE RECORD ALREADY CARRIES
+  //    (EM-E8d, U111). They are the whole of what the re-derivation below is handed; the layer
+  //    WRITTEN to the record is still the whole one.
+  /** @type {Record<string, object>} */
+  const mintedNow = {};
   for (const entry of due) {
     const applied = applyEdit(layer, /** @type {{op: object}} */ (entry.row).op, DECLARATION_CONSULT);
     // A row the layer refuses is left unminted and the tick carries on: a decree the vocabulary
@@ -1078,6 +1089,7 @@ export async function applyRosterDecreesAtTick(get, set, request) {
     if (applied.ok === false) continue;
     layer = applied.layer;
     minted.push(...applied.keys);
+    for (const key of applied.keys) mintedNow[key] = applied.layer.minted[key];
   }
   if (minted.length === 0) return NOTHING_MINTED;
 
@@ -1092,8 +1104,22 @@ export async function applyRosterDecreesAtTick(get, set, request) {
   // world onto save Y is the data-safety defect step 1 exists to prevent.
   if (typeof lane?.regenerateWithLayer !== 'function' || !stillOurs()) return NOTHING_MINTED;
   const live = isActive ? get().settlement : record;
+  // ⛔ THE RE-DERIVATION IS HANDED THE NEWCOMERS **THIS TICK** MINTED, NEVER THE ONES THE RECORD
+  //    ALREADY HOLDS (EM-E8d, U111). MEASURED at 2dba3ffa0 over the REAL advance in local mode:
+  //    stage A -> advance -> stage B -> advance left A on the roster TWICE, on the live view, the
+  //    library row AND the durable save alike (the roster grew by two at the second tick), while
+  //    A's own entry read `applied` once with tick 1's `appliedAt` and `tickRef` — so nothing was
+  //    applied twice. The re-derivation's base is a CLONE OF THE LIVE RECORD, which already
+  //    carries A, and every row of the layer's `minted` is APPENDED to that clone on every run.
+  //    The trim is the same reading `due` above already makes: a row `held` names is a person the
+  //    record HAS, so it is in the base and must not be appended a second time.
+  // ⛔ NO PERSISTED SHAPE MOVES. This is the re-derivation's INPUT; the layer written to the
+  //    record below is the whole one, and a tick whose layer held nobody before it composes a
+  //    bag equal to that layer — so a first newcomer's re-derivation is unmoved.
+  const whole = /** @type {{roots: object, worldFacts: object, minted: object, phantoms: object}} */ (layer);
+  const layerForRun = Object.freeze({ ...whole, minted: Object.freeze(mintedNow) });
   const out = await lane.regenerateWithLayer(
-    live, storedConfigFor(get(), saveId, live), layer, DECLARATION_CONSULT,
+    live, storedConfigFor(get(), saveId, live), layerForRun, DECLARATION_CONSULT,
   ).then(null, () => null);
   const derived = isPlainObject(out) ? /** @type {{record?: unknown}} */ (out).record : null;
   if (!isPlainObject(derived) || !stillOurs()) return NOTHING_MINTED;
