@@ -75,7 +75,8 @@
 
 import { mintDmId } from '../domain/edit/dmLayer.js';
 import {
-  PHANTOM_KIND, PHANTOM_TRAIT_POOLS, applyOffStage, badgeFor, isPhantomSave, mintPhantom,
+  PHANTOM_KIND, PHANTOM_TRAIT_POOLS, applyOffStage, badgeFor, consequenceFor, isPhantomSave,
+  mintPhantom,
 } from '../domain/edit/phantoms.js';
 import { poolValues, rollFrom } from '../domain/edit/pools.js';
 import {
@@ -212,6 +213,80 @@ export function counterpartyBadgeOf(saveRows, entry) {
   const rows = Array.isArray(saveRows) ? saveRows : [];
   const found = rows.find((row) => isPlainObject(row) && String(row.id) === named.counterparty);
   return badgeFor(found ?? null);
+}
+
+/**
+ * ⭐ DESIGN §13's CONSEQUENCE POLICY, RESOLVED FOR ONE MEMBER'S PENDING OFF-STAGE DECREES
+ * (EM-E4d unit 3; the verifier's FIX-6's OTHER HALF). The badge above answers the DM's eye;
+ * this answers the TICK. One save in, one frozen `{ entryId: policy }` table out — and the
+ * table is the only thing the head of the tick needs in order to apply §13 rather than guess
+ * it: *"the op catalogue carries one `consequence` policy per off-stage op —
+ * `home-procedures+record` for a phantom target, `world` for a real save — decided at apply
+ * time by the target's reality; the tick hook (EM-E1) applies that policy and nothing else."*
+ *
+ * ⛔ THE POLICY WORD IS NEVER SPELLED HERE, IN THE ADVANCE OR IN THE HOOK. It is
+ * `consequenceFor`'s own return, carried verbatim from `PHANTOM_CONSEQUENCE_POLICIES`, and
+ * this call is that verb's FIRST runtime consumer anywhere under `src/` — measured at this
+ * base, where its only reader was `applyOffStage`'s own body. The badge and the policy
+ * therefore stay ONE fact read twice (the leaf's own law): both come from
+ * `isRealCounterparty`, so an entry this table calls `world` is exactly an entry
+ * `counterpartyBadgeOf` badges REAL, and `offStageConsequence.test.js` asserts that
+ * biconditional over the same rows rather than trusting the two readings to agree.
+ *
+ * ⛔ REAL MEANS "A SAVED SETTLEMENT IN THE SAME CAMPAIGN", WHICH IS WHY `members` IS THE
+ * TICK'S OWN SAVES AND NOT THE LIBRARY. That is design §13's own definition, and it is also
+ * the only roster the advance can honestly hand across the worker boundary. A counterparty
+ * the campaign does not hold — a phantom on the hidden shelf, a deleted row, a name nothing
+ * resolves — is NOT FOUND and reads `home-procedures+record` through the leaf's fail-closed
+ * clause: the safe direction is the one that writes no world state.
+ *
+ * ⛔ IT ANSWERS IN PLAIN DATA — STRINGS KEYED BY STRING — BECAUSE THE ANSWER CROSSES A
+ * `postMessage`. `flagRegistry.js` has `simAdvanceWorker: true`, so the DEFAULT advance posts
+ * its whole payload to `advanceInterval.worker.js`; a BOUND FUNCTION in that bag would throw
+ * `DataCloneError` out of `postMessage` inside the client's Promise executor and REJECT the
+ * DM's advance (executed: `structuredClone({a:1,f:()=>1})` → "could not be cloned"). So the
+ * resolver runs HERE, on the main thread beside the library it needs, and the hook is handed
+ * the RESOLUTION — still an argument and never an import, exactly as U72's catalogues are.
+ *
+ * ⛔ PENDING ONLY, AND NO ROW FOR AN ACT THIS RESOLVER DOES NOT SPEAK FOR. An applied or
+ * withdrawn entry is not the tick's subject, and a HOME act's op answers `record: null`, so
+ * it takes no key at all — absence is the fact, and the hook writes no consequence word for
+ * an act design §13 never spoke about.
+ *
+ * ⛔ IT TAKES THE REGISTRY'S ROWS AND NOT THE SAVE, WHICH THE OBSERVED-SHAPE WALKER DECIDED
+ * RATHER THAN TASTE. Reading `save.settlement.decrees` here mints a reader-with-no-writer row
+ * in a file that has none — `decrees` is a PERSISTED key on the saved settlement (design §2.5)
+ * and no scanned producer writes it — and that register only ever shrinks. The caller already
+ * holds the rows (the advance walks them for the pools in the same loop), so the reach is the
+ * caller's and this leaf judges what it is handed. EXECUTED: with the save-shaped signature
+ * `check-observed-shape-readers.mjs` reported "NEW decrees on settlement — 2 read(s); this
+ * file has no frozen row for it (ceiling 0)"; with this one it exits 0.
+ *
+ * PURE. No clock, no draw, no write, no throw.
+ *
+ * @param {unknown} entries one member's registry rows, as the advance already holds them
+ * @param {unknown} members the campaign's member saves — §13's test of a REAL counterparty
+ * @returns {Readonly<Record<string, string>>} `{ [entryId]: ConsequencePolicy }`, frozen
+ */
+export function offStageConsequencesFor(entries, members) {
+  const decrees = Array.isArray(entries) ? entries : [];
+  const rows = Array.isArray(members) ? members : [];
+  /** @type {Record<string, string>} */
+  const table = {};
+  for (const entry of decrees) {
+    if (!isPlainObject(entry) || entry.status !== 'pending') continue;
+    const id = typeof entry.id === 'string' ? entry.id : '';
+    if (id === '') continue;
+    // The op's own predicate, asked of the domain: `record` is null for every act whose
+    // declared consequence is not `by-target-reality`, and its `counterparty` is the name
+    // THAT leaf reads out of the op — so neither the policy flag nor the payload's field is
+    // spelled a second time here, exactly as `counterpartyBadgeOf` above refuses to.
+    const named = applyOffStage(entry.op, null, null).record;
+    if (named === null || named.counterparty === '') continue;
+    const found = rows.find((row) => isPlainObject(row) && String(row.id) === named.counterparty);
+    table[id] = consequenceFor(found ?? null);
+  }
+  return Object.freeze(table);
 }
 
 /**

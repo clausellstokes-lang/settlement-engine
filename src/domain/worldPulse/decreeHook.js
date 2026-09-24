@@ -54,9 +54,16 @@ import { saveId } from './pulseHelpers.js';
  * `offStage`, `overrode` and `followsFrom` are CARRIED from the entry and are absent when
  * the entry does not hold them, because absence is a fact (EM-C1's header, design §20.3).
  *
+ * ⭐ `consequence` IS DESIGN §13's RESOLVED POLICY (EM-E4d unit 3, U88) and is CARRIED
+ * exactly as the three above are: present only for an act the off-stage resolver speaks
+ * for, absent — never defaulted, never `null` — for every home act and for every caller
+ * that composed no resolution. Its two words are `PHANTOM_CONSEQUENCE_POLICIES`' and are
+ * spelled NOWHERE in this file; see `applyDecreesAtTick`'s `consequences` clause.
+ *
  * @typedef {{ decreeId: string, saveId: string, opType: string, cause: 'table',
  *   tickRef: string, orderIndex: number, target?: unknown, offStage?: true,
- *   overrode?: readonly unknown[], followsFrom?: readonly unknown[] }} DecreeCause
+ *   consequence?: string, overrode?: readonly unknown[],
+ *   followsFrom?: readonly unknown[] }} DecreeCause
  */
 
 /** The one cause word an applied decree carries (ARCH §6; design §2.6's "the table's hand"). */
@@ -166,9 +173,10 @@ function isDue(row, tick, season) {
  * One entry's cause, in the kernel's event form (ARCH §6). Frozen, finite, and built
  * only from what the entry holds — no field is invented and none is defaulted.
  * @param {Record<string, unknown>} row @param {string} saveKey @param {string} tickRef
+ * @param {unknown} consequence design §13's policy for THIS entry, or absent
  * @returns {DecreeCause}
  */
-function causeFor(row, saveKey, tickRef) {
+function causeFor(row, saveKey, tickRef, consequence) {
   const op = isPlainObject(row.op) ? row.op : {};
   /** @type {Record<string, unknown>} */
   const cause = {
@@ -181,6 +189,7 @@ function causeFor(row, saveKey, tickRef) {
   };
   if (isPlainObject(op.target)) cause.target = op.target;
   if (op.stage === OFF_STAGE) cause.offStage = true;
+  if (isName(consequence)) cause.consequence = consequence;
   if (Array.isArray(row.overrode)) cause.overrode = Object.freeze([...row.overrode]);
   if (Array.isArray(row.followsFrom)) cause.followsFrom = Object.freeze([...row.followsFrom]);
   return /** @type {DecreeCause} */ (Object.freeze(cause));
@@ -203,8 +212,33 @@ function causeFor(row, saveKey, tickRef) {
  * consulted and every due entry applies; that is this wave's shape, because the caller
  * that can supply the catalogues is the store (EM-C4b), not the kernel.
  *
+ * ⭐ `options.consequences` IS DESIGN §13's POLICY, RESOLVED AND HANDED IN (EM-E4d unit 3,
+ * U88; the verifier's FIX-6). *"The op catalogue carries one `consequence` policy per
+ * off-stage op — `home-procedures+record` for a phantom target, `world` for a real save —
+ * decided at apply time by the target's reality; the tick hook applies that policy and
+ * nothing else."* This is the "applies" half: one flat `{ entryId: policy }` table for THIS
+ * registry, and each applied entry named in it carries its word onto its cause. ABSENT (every
+ * direct caller, every preview, every test that does not supply one) no cause carries the
+ * key and the output is byte-identical to this member's base.
+ *
+ * ⛔ THE HOOK RESOLVES NOTHING AND SPELLS NOTHING, FOR THE REASON IT RESOLVES NO VOCABULARY.
+ * Reality is a fact about the SAVES and the verb that judges it is `phantoms.js`'s
+ * `consequenceFor`, under `src/domain/edit` — the one directory case E1-8's two-import pin
+ * exists to keep out of this leaf, and whose own importer roster is asserted EXACT in both
+ * directions by `tests/domain/phantoms.test.js` A12. So the knowledge travels as an argument,
+ * exactly as `catalogues` does, and the two policy words are carried verbatim rather than
+ * compared: a SECOND spelling of them here is precisely the drift the estate refuses ("the
+ * badge and the policy are one fact read twice").
+ *
+ * ⛔ AND "NOTHING ELSE" IS STRUCTURAL RATHER THAN POLICED. This verb reads no world state and
+ * writes none on either policy — a phantom act produces the home procedures and the record,
+ * and a REAL counterparty's consequence is the simulator's, "which the editor only hands the
+ * decree". The cause is that hand. Case E4d3-3 executes it: the whole simulation digest is
+ * byte-identical with a phantom act, with a real one, and with no decree at all.
+ *
  * @param {unknown} worldState @param {unknown} registry @param {unknown} tickRef
- * @param {{ now?: unknown, saveId?: unknown, catalogues?: unknown }} [options]
+ * @param {{ now?: unknown, saveId?: unknown, catalogues?: unknown,
+ *   consequences?: unknown }} [options]
  * @returns {{ registry: unknown, causes: readonly DecreeCause[] }} the registry BY
  *   REFERENCE when nothing moved, else EM-C1's sealed registry.
  */
@@ -213,6 +247,7 @@ export function applyDecreesAtTick(worldState, registry, tickRef, options) {
   if (rows.length === 0 || !isName(tickRef)) return { registry, causes: NO_CAUSES };
   const bag = isPlainObject(options) ? options : {};
   const now = bag.now;
+  const consequences = isPlainObject(bag.consequences) ? bag.consequences : null;
   const saveKey = isName(bag.saveId) ? bag.saveId : '';
   const tick = tickOf(worldState);
   const season = seasonOf(worldState);
@@ -249,7 +284,9 @@ export function applyDecreesAtTick(worldState, registry, tickRef, options) {
       appliedAt: now, tickRef, chronicleRef: `${CHRONICLE_REF_PREFIX}${entryId}`,
     });
     current = next;
-    causes.push(causeFor(row, saveKey, tickRef));
+    // Own-key only, so a policy inherited from a prototype is not one this tick applies.
+    causes.push(causeFor(row, saveKey, tickRef,
+      consequences && Object.hasOwn(consequences, entryId) ? consequences[entryId] : undefined));
   }
   if (causes.length === 0 && current === registry) return { registry, causes: NO_CAUSES };
   return { registry: current, causes: Object.freeze(causes) };
@@ -319,6 +356,12 @@ export function dueEntriesAtTick(worldState, registry) {
  * it is for every caller that composes no bag. The second is a reading, and its orders are
  * resolved and withdrawn on it.
  *
+ * ⭐ THE REALM'S BAG CARRIES A THIRD TABLE AT THIS MEMBER — `consequenceBySave` (EM-E4d unit
+ * 3, U88) — filed under the SAME `saveId` and narrowed by the same own-key reading, because
+ * design §13's policy is decided by a fact about the campaign's saves and is therefore a
+ * town's own just as its vocabulary is. A realm bag without the key hands every registry
+ * `undefined` and no cause carries a policy word, which is this member's base exactly.
+ *
  * @param {unknown} worldState @param {unknown} saves @param {unknown} tickRef
  * @param {{ now?: unknown, catalogues?: unknown }} [options]
  * @returns {{ saves: unknown, causes: readonly DecreeCause[] }} the saves BY REFERENCE
@@ -330,6 +373,13 @@ export function applyDecreesToSaves(worldState, saves, tickRef, options) {
   const bag = isPlainObject(options) ? options : {};
   const realm = isPlainObject(bag.catalogues) ? bag.catalogues : null;
   const poolsBySave = realm && isPlainObject(realm.poolsBySave) ? realm.poolsBySave : null;
+  // ⭐ §13's RESOLUTION IS FILED THE SAME WAY THE VOCABULARY IS, and for the same reason: the
+  // tick's subject is N registries, so a town's consequences are its own town's. Narrowed
+  // here rather than in `applyDecreesAtTick` because THIS is the layer that knows which
+  // registry belongs to whom (EM-E4d unit 3).
+  const consequenceBySave = realm && isPlainObject(realm.consequenceBySave)
+    ? realm.consequenceBySave
+    : null;
   // Lifted out of the walk because the op catalogue is ONE table for the realm — only the
   // pools are a town's own — and because reading it here is what keeps the narrowing on
   // `realm` a real one rather than a cast inside the loop (the any-cast floor is zero).
@@ -348,6 +398,9 @@ export function applyDecreesToSaves(worldState, saves, tickRef, options) {
       // the documented no-resolution path rather than an empty vocabulary.
       catalogues: poolsBySave && Object.hasOwn(poolsBySave, saveKey)
         ? { opTypes, pools: poolsBySave[saveKey] }
+        : undefined,
+      consequences: consequenceBySave && Object.hasOwn(consequenceBySave, saveKey)
+        ? consequenceBySave[saveKey]
         : undefined,
     });
     if (applied.registry === settlement.decrees) return save;

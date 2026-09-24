@@ -1,6 +1,7 @@
 /**
  * decreeTick.test.js — EM-E1 acceptance cases E1-1 to E1-8 (wave 3; ARCH §1 and §6,
- * design §2.5a, §2.6, §11, §12.1, §12.11 and §20.3).
+ * design §2.5a, §2.6, §11, §12.1, §12.11 and §20.3), plus E1-9 (EM-E4d unit 3, U88:
+ * design §13's consequence policy, as this leaf CARRIES it).
  *
  * THE CLAIM. `applyDecreesAtTick` runs at the head of `simulateCampaignWorldPulse`: every
  * DUE pending entry becomes a CAUSE in the registry's own reading order and is marked
@@ -77,6 +78,7 @@ vi.mock('../../src/lib/analytics.js', async (importOriginal) => {
 
 import { createCampaignSlice } from '../../src/store/campaignSlice.js';
 import { createCampaignWorldPulseSlice } from '../../src/store/campaignWorldPulseSlice.js';
+import { PHANTOM_CONSEQUENCE_POLICIES } from '../../src/domain/edit/phantoms.js';
 import { revertTick } from '../../src/domain/edit/registry.js';
 import {
   DECREE_CAUSE, applyDecreesAtTick, applyDecreesToSaves, retractDecreesOfTick,
@@ -90,6 +92,9 @@ const ROOT = join(dirname(fileURLToPath(import.meta.url)), '../..');
 const LEAF_REL = 'src/domain/worldPulse/decreeHook.js';
 const NOW = '2026-04-04T00:00:00.000Z';
 const HOME = 'harrowfen';
+/** Design §13's two policy words, READ OFF the domain leaf rather than typed (case E1-9). */
+const RECORD_ONLY = PHANTOM_CONSEQUENCE_POLICIES[0];
+const WORLD = PHANTOM_CONSEQUENCE_POLICIES[1];
 
 const sha256 = (value) => createHash('sha256').update(JSON.stringify(value)).digest('hex');
 
@@ -302,7 +307,14 @@ describe('EM-E1 — the tick hook', () => {
     // away is whatever the DM staged AFTER the tick.
     const store = seedStore(makeStore(), [entry('a', 0), entry('b', 1)]);
     const advanced = await store.getState().advanceCampaignWorld('camp-1', 'one_week', { now: NOW });
-    expect(advanced?.ok, 'the advance ran — an un-canonized world would refuse and make every arm below vacuous').not.toBe(false);
+    // ⛔ U109 — A POSITIVE ANCHOR, BECAUSE THE OLD GUARD WAS SATISFIED BY NOTHING. This arm
+    // read `expect(advanced?.ok, …).not.toBe(false)`, and lane T2 MEASURED that the advance's
+    // result carries no `ok` key at all on success (seventeen keys): `undefined` is not
+    // `false`, so a tick that never ran passed the guard and left every arm below vacuous.
+    // The idiom is lane T2's landed one (935f798ad · 95413f2d6, `tickPersistence.test.js`):
+    // anchor on the tick the advance RETURNS beside the tick it COMMITTED to the campaign.
+    expect([advanced?.tick, store.getState().campaigns.find((row) => row.id === 'camp-1')?.worldState?.tick],
+      'the real advance ran to a committed result').toEqual([1, 1]);
     const tickRef = 'world_pulse.camp_1.1';
     expect(storedDecrees(store).map(rowOf), 'the tick applied both entries')
       .toEqual([['a', 'applied', 0, tickRef], ['b', 'applied', 1, tickRef]]);
@@ -421,5 +433,39 @@ describe('EM-E1 — the tick hook', () => {
     expect(source.includes(`export const DECREE_CAUSE = '${DECREE_CAUSE}'`), 'the leaf\'s source is the one under test').toBe(true);
     expect(source.includes('Date.now') || source.includes('Math.random') || source.includes('createPRNG'),
       'and the leaf reads no clock and mints no stream — the stamp and the tickRef are the caller\'s').toBe(false);
+  });
+
+  it('E1-9 a cause carries the consequence policy its CALLER resolved, mints no key without one, and spells neither of design §13\'s two words (EM-E4d unit 3, U88)', () => {
+    // ⭐ THE SEAM FIX-6 NAMED, AS THIS SUITE'S OWN UNIT. Design §13 decides an off-stage
+    // act's consequence "at apply time by the target's reality", and reality is a fact
+    // about the SAVES that `phantoms.js :: consequenceFor` judges — a leaf case E1-8's
+    // two-import pin exists to keep out of this file. So the resolution arrives as an
+    // ARGUMENT, exactly as `catalogues` does, and this arm holds the CARRY honest: the
+    // key roster, its order, and the four ways a cause must NOT grow one.
+    // The end-to-end reading (the store composes it, the phantom and the member differ,
+    // and the world moves on neither path) is `tests/simulation/offStageConsequence.test.js`.
+    const BASE_CAUSE_KEYS = ['decreeId', 'saveId', 'opType', 'cause', 'tickRef', 'orderIndex', 'target'];
+    const at = (consequences) => applyDecreesAtTick({ tick: 0 }, [entry('d1', 0)], 'tick::e1-9', {
+      now: NOW, saveId: HOME, ...(consequences === undefined ? {} : { consequences }),
+    }).causes[0];
+
+    expect(Object.keys(at(undefined)), 'with no resolution the roster and its ORDER are this member\'s base, byte for byte')
+      .toEqual(BASE_CAUSE_KEYS);
+    expect(Object.keys(at({ d1: WORLD })), 'and a resolved entry grows EXACTLY one key, at the end of the off-stage family')
+      .toEqual([...BASE_CAUSE_KEYS, 'consequence']);
+    // Carried VERBATIM: the two policy words are `PHANTOM_CONSEQUENCE_POLICIES`' and are
+    // read here off that leaf, never typed — a second spelling of them in the hook is the
+    // drift phantoms.js' own header refuses ("the badge and the policy are one fact read twice").
+    expect(at({ d1: WORLD }).consequence, 'the word is the domain\'s, carried and never re-decided').toBe(WORLD);
+    expect(at({ d1: 'a-word-no-catalogue-holds' }).consequence,
+      'CARRIED VERBATIM, and this is how that is provable: the leaf judges the policy against NO vocabulary,'
+      + ' because a second copy of §13\'s two words here could drift from the one the resolver answers with')
+      .toBe('a-word-no-catalogue-holds');
+    expect([RECORD_ONLY, WORLD], 'and those two words are the domain leaf\'s own, read rather than typed')
+      .toEqual(['home-procedures+record', 'world']);
+    expect(Object.hasOwn(at({ d9: WORLD }), 'consequence'), 'an entry the resolution does not name takes no word').toBe(false);
+    expect(Object.hasOwn(at({ d1: 7 }), 'consequence'), 'and a value that is not a word is no policy at all').toBe(false);
+    expect(Object.hasOwn(at(Object.create({ d1: WORLD })), 'consequence'),
+      'own-key only — a policy inherited from a prototype is not one this tick applies').toBe(false);
   });
 });

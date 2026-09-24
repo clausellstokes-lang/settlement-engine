@@ -139,9 +139,23 @@ export { PULSE_UNDO_CAP } from './pulseUndoCap.js';
  * PURE apart from the three dynamic imports: it reads no clock, takes no draw and writes
  * nothing.
  *
+ * ⭐ AND IT CARRIES DESIGN §13's RESOLVED CONSEQUENCE BESIDE THE VOCABULARY (EM-E4d unit 3,
+ * U88; the verifier's FIX-6). The hook must apply `home-procedures+record` to an act against
+ * a phantom and `world` to one against a saved settlement of this campaign, and it can read
+ * neither: the reality of a counterparty is a fact about the SAVES, and the verb that judges
+ * it lives under `src/domain/edit`, which case E1-8 pins the hook out of (its import list is
+ * EXACTLY TWO). So the reading is composed HERE, in the same dormant block and on the same
+ * member clones, and handed across as the pools are — `consequenceBySave[saveId][entryId]`, a
+ * word the store never spells and only carries. ⛔ IT IS DATA AND NOT A BOUND FUNCTION FOR A
+ * MEASURED REASON: `simAdvanceWorker` defaults TRUE, this bag rides `worker.postMessage`, and
+ * a function in it throws `DataCloneError` out of the client's Promise executor — which
+ * REJECTS the DM's advance rather than falling back (`advanceWorkerClient.js`'s own taxonomy
+ * calls that a sim failure). `offStageConsequencesFor` carries that reason in full.
+ *
  * @param {unknown} saves the advance's own plain member clones
  * @returns {Promise<{ opTypes: Record<string, unknown>,
- *   poolsBySave: Record<string, Record<string, readonly string[]>> }|null>}
+ *   poolsBySave: Record<string, Record<string, readonly string[]>>,
+ *   consequenceBySave: Record<string, Record<string, string>> }|null>}
  *   null when nothing is pending anywhere — the kernel then resolves nothing, as before.
  */
 export async function decreeCataloguesForSaves(saves) {
@@ -149,14 +163,17 @@ export async function decreeCataloguesForSaves(saves) {
   const pending = rows.filter((row) => Array.isArray(row?.settlement?.decrees)
     && row.settlement.decrees.some((/** @type {any} */ entry) => entry?.status === 'pending'));
   if (pending.length === 0) return null;
-  const [operations, pools, helpers] = await Promise.all([
+  const [operations, pools, helpers, reality] = await Promise.all([
     import('../domain/edit/operations.js'),
     import('../domain/edit/pools.js'),
     import('../domain/worldPulse/pulseHelpers.js'),
+    import('./phantomMintAction.js'),
   ]);
   const opTypes = operations.OP_TYPES;
   /** @type {Record<string, Record<string, readonly string[]>>} */
   const poolsBySave = {};
+  /** @type {Record<string, Record<string, string>>} */
+  const consequenceBySave = {};
   for (const row of pending) {
     /** @type {Record<string, readonly string[]>} */
     const live = {};
@@ -175,9 +192,19 @@ export async function decreeCataloguesForSaves(saves) {
         if (!Object.hasOwn(live, poolId)) live[poolId] = pools.poolValues(poolId, row.settlement);
       }
     }
-    poolsBySave[helpers.saveId(row)] = Object.freeze(live);
+    // ONE key, ONE spelling: the kernel's own `saveId` files both tables, so the word the
+    // hook looks each of them up by is the word they were filed under (E1-8's law for the
+    // pools, unchanged here). §13's REAL is "a saved settlement in the same campaign", so
+    // the roster handed to the resolver is `rows` — every member, not just the pending ones.
+    const saveKey = helpers.saveId(row);
+    poolsBySave[saveKey] = Object.freeze(live);
+    consequenceBySave[saveKey] = reality.offStageConsequencesFor(row.settlement.decrees, rows);
   }
-  return { opTypes, poolsBySave: Object.freeze(poolsBySave) };
+  return {
+    opTypes,
+    poolsBySave: Object.freeze(poolsBySave),
+    consequenceBySave: Object.freeze(consequenceBySave),
+  };
 }
 
 /** One frozen empty list, so an advance with no applied decree allocates nothing. */

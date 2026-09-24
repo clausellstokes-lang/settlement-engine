@@ -258,8 +258,15 @@ describe('U86 — a decree is judged by its OWN save\'s vocabulary, never a sibl
       saveOf('b', ['Harbourmaster'], staged('d2', 'Harbourmaster')),
     ];
     const bag = /** @type {any} */ (await decreeCataloguesForSaves(saves));
-    expect(Object.keys(bag).sort(), 'the bag is the op catalogue and the per-save pools, and nothing else')
-      .toEqual(['opTypes', 'poolsBySave']);
+    // ⚠ RE-RECORDED BY EM-E4d UNIT 3 (U88), CAUSE NAMED: the bag grew a THIRD table,
+    // `consequenceBySave` — design §13's consequence policy resolved per member and per entry,
+    // because the head of the tick must apply `home-procedures+record` against a phantom
+    // counterparty and `world` against a saved member, and neither the kernel nor the hook may
+    // reach the verb that judges reality (case E1-8 pins the hook's imports at exactly two).
+    // It is filed under the SAME `saveId` as the pools and travels the SAME way, which is why
+    // it lands in this roster rather than beside it. The pools half below is UNMOVED.
+    expect(Object.keys(bag).sort(), 'the bag is the op catalogue, the per-save pools and the per-save consequence, and nothing else')
+      .toEqual(['consequenceBySave', 'opTypes', 'poolsBySave']);
     expect(Object.keys(bag.poolsBySave).sort(), 'every member that staged a pending decree is named')
       .toEqual(['a', 'b']);
     // ⛔ THE KEY IS THE KERNEL'S OWN SAVE ID, not the array position: `applyDecreesToSaves`
