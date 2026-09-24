@@ -405,11 +405,13 @@ describe('GR-5A — the monotone memory (treatyRenewalEnabled)', () => {
     // (tests/domain/mediationGeneralizedGr6.test.js, "the fraying read honours worstObservedEver"),
     // so the pin is re-aimed at the consumer set rather than retired: GR-5d's gate is the next
     // import this list must name, in that wave's commit.
+    // ⭐ AND GR-5d LANDED (GR-RENEWAL U3, SR-1): the conversion gate in the renewal leaf reads the memory
+    // BY NAME; its reachability arm is tests/domain/pactConversionGr5d.test.js U3-A3 ("the gate is the
+    // RECORDED history").
     expect(
       consumersOf('worstObservedEverOf'),
-      'worstObservedEverOf has gained a src/ consumer beyond GR-6\'s fraying occasion. If that is '
-      + 'GR-5d landing, the conversion gate is reading the memory BY NAME: add it here, with its own '
-      + 'reachability arm in that wave.',
-    ).toEqual(['src/domain/worldPulse/mediationPressure.js']);
+      'worstObservedEverOf has gained a src/ consumer beyond GR-6\'s fraying occasion and GR-5d\'s '
+      + 'conversion gate: name it here, with its own reachability arm in its wave.',
+    ).toEqual(['src/domain/worldPulse/mediationPressure.js', 'src/domain/worldPulse/pactRenewal.js']);
   });
 });

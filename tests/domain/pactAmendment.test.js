@@ -51,8 +51,10 @@ describe('the closed vocabularies', () => {
     // accepted renewal records through amendPactInstrument, produced by pactRenewal.js.
     // GR-5c adds `renegotiated` (SR-1, growth by the wave's own law): the act an accepted
     // mid-term demand records through the same writer, produced by the same leaf.
+    // GR-5d adds `converted` (SR-1, GR-RENEWAL U3): the act a renewal accepted over a compelled
+    // alliance honoured throughout records through the same writer, produced by the same leaf.
     expect(PACT_LINEAGE_ACTS).toEqual([
-      'amended', 'broken_by_war', 'disavowed_by_succession', 'formed', 'renegotiated', 'renewed', 'war_ended',
+      'amended', 'broken_by_war', 'converted', 'disavowed_by_succession', 'formed', 'renegotiated', 'renewed', 'war_ended',
     ]);
     expect(PACT_ENDINGS).toEqual([
       'broken_by_war', 'disavowed_by_succession', 'expired_unanswered', 'no_overlap',

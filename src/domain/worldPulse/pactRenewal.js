@@ -59,6 +59,15 @@
  * is when a court reckons its accounts, so a refused demand is raised again a year later rather
  * than at every answer. The DM's verb is the table's hand and waits for neither.
  *
+ * ── CONVERSION (GR-5d; J-GR-9 the shape, R-24 the court's own act) ─────────────────
+ * A renewal accepted over a compelled alliance whose RECORDED history was honoured throughout
+ * (`worstObservedEverOf`, the monotone memory, read by name) and whose pair's trust stands at or
+ * above `CONVERSION_TUNING.TRUST_BAND` (DRAFT) converts it: a `converted` lineage act through the
+ * one amendment writer closes the compelled clause and writes the frozen composable pair (mutual
+ * defence and non-aggression) held by both courts on its span, the provenance becomes `converted`,
+ * and the new holders swear. Below the band, or on a record ever seen strained, the renewal renews
+ * AS IS. The conversion is never the DM's to direct; the DM's lever is the relationship label.
+ *
  * ── THE WORLD ASKS TOO (GR-RENEWAL U1) ──────────────────────────────────────────────
  * The window was reachable only through the DM's verb until the pact stage consumed the seal's
  * own predicate. Now, in an instrument's first weeks inside its window (as long as one answer
@@ -108,24 +117,28 @@
  * does not swear the new oath. The landed stamp doors are NOT retrofitted (R-20).
  *
  * ── WHAT THIS FAMILY DOES NOT DO, NAMED ───────────────────────────────────────────
- * No re-draft of a renewal at the believed ratio (a renewal is AS IS). No renegotiation evaluator of the answering court's own ratio (the answer is the one
- * threshold every pact answer uses). No conversion (GR-5d). No news kind (GR-5e is the voice;
- * the verb's two registered pools already speak the order). No provenance write (`provenance`
- * records how an instrument BEGAN; the lineage says what happened since). No new top-level
- * key and no new ledger.
+ * No re-draft of a renewal at the believed ratio (a renewal is AS IS). No renegotiation evaluator
+ * of the answering court's own ratio (the answer is the one threshold every pact answer uses). No
+ * relationship label (J-GR-9's `allied` proposal rides the plane's own label lane, slot GR-5d-l,
+ * owed by the unit that owns the relationship rules). No news kind (GR-5e is the voice; the
+ * verb's two registered pools already speak the order). No provenance write for a renewal or a
+ * renegotiation (`provenance` records how an instrument BEGAN; the lineage says what happened
+ * since); a conversion writes `converted`, because J-GR-9 rules the document says what the
+ * compelled thing has become. No new top-level key and no new ledger.
  *
  * THE EDITOR (L10): `RENEWAL_WORLD_CONDITIONS.renewalWindowOpen` and
  * `RENEGOTIATION_WORLD_CONDITIONS.renegotiationOpen` are DEFINED here in `worldConditions.js`'s
  * live-row shape and composed by the chair; their seals' consumers are the slots "GR-5b-c" and
  * "GR-5c-c: the consumer lands at U123". The act is PROPOSE_PACT with the family's two words on
- * its clause dial (a realm verb, applied by the realm lane at the tick). Real-only: phantoms
- * never enter a campaign's courts.
+ * its clause dial (a realm verb, applied by the realm lane at the tick). GR-5d mints no seal, by
+ * design (R-24: conversion stays the court's). Real-only: phantoms never enter a campaign's courts.
  *
  * PURE: no rng, no clock, no store. It reads the ledgers and the rows it is handed, and every
  * write goes back to its caller.
  *
  * @enforced-by tests/domain/pactRenewalGr5b.test.js, tests/domain/pactRenegotiationGr5c.test.js,
- *   tests/domain/pactRenewalOrganic.test.js, tests/domain/pactRenegotiationNegotiated.test.js
+ *   tests/domain/pactRenewalOrganic.test.js, tests/domain/pactRenegotiationNegotiated.test.js,
+ *   tests/domain/pactConversionGr5d.test.js
  */
 import { clamp01 } from '../../kernel/math.js';
 import { NPC_UNAVAILABLE_STATUSES } from '../entities/npcs.js';
@@ -133,11 +146,12 @@ import { OFF_STAGE_STATUSES, isOffStage } from '../roads/state.js';
 import { beliefRecord, strengthOfBand } from './beliefMap.js';
 import { oathHolderActive, stampSworn } from './oathHolder.js';
 import {
-  PACT_LINEAGE_ACTS, PACT_PROVENANCE, amendPactInstrument, lineageOf, provenanceOf, stackingCellOf, termIdOf,
-  treatyRenewalActive,
+  COMPOSABLE_SECURITY_PAIR, PACT_LINEAGE_ACTS, PACT_PROVENANCE, amendPactInstrument, lineageOf, provenanceOf,
+  stackingCellOf, termIdOf, treatyRenewalActive, worstObservedEverOf,
 } from './pactAmendment.js';
 import { answerDueTickFor, openPactProposal, pactCounterpartiesFor, settlePactProposal } from './pactProposals.js';
 import { PACT_TRIGGERS } from './pactTriggers.js';
+import { TERM_CATALOG, termLabel } from './peaceTermsCatalog.js';
 import { accrueStrainResentment } from './peaceTermsOverlay.js';
 import { round4, treatyPairKey } from './peaceTermsPrimitives.js';
 import { edgeKeyBetween, normalizeRelationshipType, settlementStrength } from './relationshipEvolution.js';
@@ -174,6 +188,17 @@ export const RENEGOTIATION_TUNING = Object.freeze({
 });
 
 /**
+ * ⚠ DRAFT — GR-5d's band, signed by the owner at the tuning sitting (tests/lint/.tuning-register.json).
+ * The measurement that places it lives in U3's commit body and its acceptance arm.
+ */
+export const CONVERSION_TUNING = Object.freeze({
+  /** The trust between the pair, on the relationship plane's own scale, at or above which a
+   *  compelled alliance accepted for renewal becomes a chosen one. Above what a trading pair, a
+   *  client or a vassal holds by default, and at or below what an allied pair holds by default. */
+  TRUST_BAND: 0.68,
+});
+
+/**
  * THE TRIGGER WORD, read OUT of the closed trigger vocabulary rather than typed here, so an
  * upstream rename empties it and every renewal road refuses instead of pointing at nothing.
  */
@@ -190,6 +215,13 @@ const RENEGOTIATION_ACT = PACT_LINEAGE_ACTS.filter((act) => act === 'renegotiate
 
 /** THE PROVENANCE a peace made in peace records (GR-5c-b reads it), out of the closed vocabulary. */
 const NEGOTIATED_PROVENANCE = PACT_PROVENANCE.filter((provenance) => provenance === 'negotiated')[0] || '';
+
+/** GR-5d's act and the provenance it writes (J-GR-9), out of their closed vocabularies. */
+const CONVERSION_ACT = PACT_LINEAGE_ACTS.filter((act) => act === 'converted')[0] || '';
+const CONVERTED_PROVENANCE = PACT_PROVENANCE.filter((provenance) => provenance === 'converted')[0] || '';
+
+/** THE CLAUSE THAT CONVERTS, read out of the catalogue: the war door's compelled alliance. */
+const COMPELLED_ALLIANCE = Object.keys(TERM_CATALOG).filter((type) => type === 'compelled_alliance')[0] || '';
 
 /**
  * THE UNAVAILABLE STATUSES THE CHOKEPOINT LEAVES TO EACH CONSUMER (today, `dead`), DERIVED
@@ -626,19 +658,25 @@ function onStageSettlementOf(settlementOf) {
  * for swears in the seat's voice, exactly as at a mint. Dark, the record's signature is left as
  * it stands (GR-1's own dormancy).
  *
+ * `closing` names clauses the act closes beyond the sheet's own cells: a conversion writes its pair
+ * into a cell the compelled clause never held, so the compelled clause is closed by name.
+ *
  * @param {{treaty: Record<string, unknown>, terms: ReadonlyArray<unknown>, tick: number,
  *   worldState: unknown, ids: ReadonlyArray<string>, settlementOf: (id: string) => unknown,
- *   act: string, reissue: (term: Record<string, unknown>, tick: number) => Record<string, unknown>|null}} input
+ *   act: string, reissue: (term: Record<string, unknown>, tick: number) => Record<string, unknown>|null,
+ *   closing?: ReadonlyArray<Record<string, unknown>>}} input
  * @returns {{treaty: Record<string, unknown>, added: Array<Record<string, unknown>>,
  *   refused: Array<{cell: string, type: string, receipt: string}>,
  *   superseded: Array<Record<string, unknown>>}}
  */
-function supersedeWith({ treaty, terms, tick, worldState, ids, settlementOf, act, reissue }) {
+function supersedeWith({ treaty, terms, tick, worldState, ids, settlementOf, act, reissue, closing = [] }) {
   const at = wholeTick(tick);
   const sheet = present(listOfRecords(terms).map((term) => reissue(term, at)));
   const cells = new Set(sheet.map(stackingCellOf));
+  const closed = new Set(closing.map(termIdOf));
   const standing = listOfRecords(recordOf(treaty).terms);
-  const superseded = standing.filter((term) => Number(term.expiresTick) > at && cells.has(stackingCellOf(term)));
+  const superseded = standing.filter((term) => Number(term.expiresTick) > at
+    && (cells.has(stackingCellOf(term)) || closed.has(termIdOf(term))));
   const base = { ...treaty, lineage: lineageOf(treaty), terms: standing.filter((term) => !superseded.includes(term)) };
   const amended = amendPactInstrument({ treaty: base, terms: sheet, tick: at, act });
   if (amended.added.length === 0) return { treaty, added: [], refused: amended.refused, superseded: [] };
@@ -685,6 +723,67 @@ function askedOf(treaty, sheet, tick) {
     if (was !== null && was > 0 && asked !== null) return clamp01(1 - asked / was);
   }
   return 0;
+}
+
+/**
+ * IS THIS ACCEPTED RENEWAL A CONVERSION? (GR-5d; J-GR-9 the shape, R-24 the court's own act.) The
+ * instrument still binds a compelled alliance and the accepted sheet re-offers it; its RECORDED
+ * history was honoured throughout (`pactAmendment.js :: worstObservedEverOf`, read BY NAME: the gate
+ * is the record's monotone memory, never the calendar and never this tick's observation); and the
+ * pair's trust stands at or above the band on the relationship record the plane keeps for their
+ * edge. The live compelled clauses, or the empty list.
+ * @param {{worldState: unknown, snapshot: unknown, treaty: Record<string, unknown>,
+ *   sheet: ReadonlyArray<Record<string, unknown>>, fromId: string, toId: string, tick: number}} input
+ * @returns {Array<Record<string, unknown>>}
+ */
+function compelledToConvert({ worldState, snapshot, treaty, sheet, fromId, toId, tick }) {
+  if (!COMPELLED_ALLIANCE || !CONVERSION_ACT || worstObservedEverOf(treaty) !== 'honored') return [];
+  if (!sheet.some((term) => text(term.type) === COMPELLED_ALLIANCE)) return [];
+  const trust = finite(relationBetween(worldState, snapshot, fromId, toId).trust);
+  if (trust === null || !(trust >= CONVERSION_TUNING.TRUST_BAND)) return [];
+  return liveTermsOf(treaty, tick).filter((term) => text(term.type) === COMPELLED_ALLIANCE);
+}
+
+/**
+ * THE CHOSEN PAIR, for one compelled clause: the frozen composable pair
+ * (`COMPOSABLE_SECURITY_PAIR`, mutual defence and non-aggression), each held by BOTH courts
+ * (`beneficiary: 'both'`, the obligation reader's mutual verdict), each the catalogue's own clause at
+ * its own weight, on the compelled clause's own span: the same bond, run again, now chosen.
+ * @param {Record<string, unknown>} compelled @param {string} a @param {string} b
+ * @returns {Array<Record<string, unknown>>}
+ */
+function chosenPairFor(compelled, a, b) {
+  return COMPOSABLE_SECURITY_PAIR.map((type) => {
+    const spec = TERM_CATALOG[type];
+    return {
+      type, family: spec.family, magnitude: spec.baseMag,
+      mintedTick: Number(compelled.mintedTick), expiresTick: Number(compelled.expiresTick),
+      weightSpent: spec.weight, complianceState: 'honored', trueState: 'honored', burden01: 0, beneficiary: 'both',
+      receipt: `${a} and ${b} promise ${termLabel(type)} to each other by choice, where once one marched under the other by compulsion.`,
+    };
+  });
+}
+
+/**
+ * CONVERT A STANDING INSTRUMENT (J-GR-9): the accepted sheet with every compelled clause replaced by
+ * its chosen pair, the compelled clauses closed by name, the whole re-issued from the signing on the
+ * clauses' own spans, the `converted` act recorded through the ONE amendment writer, the provenance
+ * written as `converted` (the document says what the instrument now is; the lineage keeps what it was),
+ * and the pair re-stamped (see `supersedeWith`).
+ * @param {{treaty: Record<string, unknown>, sheet: ReadonlyArray<Record<string, unknown>>,
+ *   compelled: ReadonlyArray<Record<string, unknown>>, tick: number, worldState: unknown,
+ *   ids: ReadonlyArray<string>, settlementOf: (id: string) => unknown}} input
+ * @returns {ReturnType<typeof supersedeWith>}
+ */
+function convertPactInstrument({ treaty, sheet, compelled, tick, worldState, ids, settlementOf }) {
+  const [a, b] = ids;
+  const terms = sheet.flatMap((term) => (text(term.type) === COMPELLED_ALLIANCE ? chosenPairFor(term, a, b) : [term]));
+  const converted = supersedeWith({
+    treaty, terms, tick, worldState, ids, settlementOf, act: CONVERSION_ACT, reissue: reissuedAt, closing: compelled,
+  });
+  return converted.added.length > 0
+    ? { ...converted, treaty: { ...converted.treaty, provenance: CONVERTED_PROVENANCE } }
+    : converted;
 }
 
 /**
@@ -784,15 +883,21 @@ export function settleRenewalProposal({ worldState, proposal, answer, tick, sett
     tick: at, id, fromId, toId, offer01: answer.offer01, reserve01: answer.reserve01,
   };
   if (answer.verdict === 'signed' && standing !== null && binding) {
-    const renewal = renewPactInstrument({
-      treaty: standing.treaty, terms: listOfRecords(recordOf(row.sheet).terms), tick: at, worldState,
-      ids: [fromId, toId], settlementOf,
-    });
+    const sheet = listOfRecords(recordOf(row.sheet).terms);
+    // GR-5d: an accepted renewal over a compelled alliance honoured throughout, past the trust band, converts it.
+    const compelled = compelledToConvert({ worldState, snapshot, treaty: standing.treaty, sheet, fromId, toId, tick: at });
+    const renewal = compelled.length > 0
+      ? convertPactInstrument({ treaty: standing.treaty, sheet, compelled, tick: at, worldState, ids: [fromId, toId], settlementOf })
+      : renewPactInstrument({ treaty: standing.treaty, terms: sheet, tick: at, worldState, ids: [fromId, toId], settlementOf });
     if (renewal.added.length > 0) {
       return {
         worldState: settlePactProposal({ worldState, id, state: 'signed' }).worldState,
         ledger: { ...recordOf(treatyLedgerOf(/** @type {Parameters<typeof treatyLedgerOf>[0]} */ (worldState))), [standing.key]: renewal.treaty },
-        receipt: {
+        receipt: compelled.length > 0 ? {
+          kind: 'pact_converted', ending: 'signed', ...heard,
+          converted: renewal.added.map(termIdOf).sort(), superseded: renewal.superseded.map(termIdOf).sort(),
+          receipt: `${answer.receipt} The compelled alliance between ${fromId} and ${toId} is compelled no longer: they renewed it as a bond of mutual defence both courts chose.`,
+        } : {
           kind: 'pact_renewed', ending: 'signed', ...heard,
           renewed: renewal.added.map(termIdOf).sort(), superseded: renewal.superseded.map(termIdOf).sort(),
           receipt: `${answer.receipt} ${fromId} and ${toId} have renewed the instrument that stood between them, and its clauses run again from this signing.`,
