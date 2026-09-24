@@ -306,6 +306,15 @@ export const ENGINE_GATED_VIRTUAL_RULE_KEYS = Object.freeze([
   // genuinely gated, and invisible here.
   'habitConditioningEnabled',
   'infoStatecraftEnabled',
+  // Joined 2026-09-23 by FP wave TR-2 (lane FP-D) under CR-WR10-C item 4 (the compiled
+  // charter's §3 flag law), in the SAME commit as its first real gate read —
+  // `houseLedger.merchantHousesActive`, the ONE `=== true` by-name read of this key in the
+  // tree — and its AUTHORED certification row at the tail of VIRTUAL_SUBSYSTEM_ROWS. Never a
+  // pending entry: manifesting is itself the act that makes a virtual key censusable.
+  // ⚠ IT IS A SINGLE CONJUNCT AT THIS WAVE, deliberately: the house layer reads no other
+  // layer's ledger, and TR-1 before it is a LIGHTING-ORDER precondition the trade contract
+  // (`tradeConvergenceContract.evaluateTradeFlagLighting`) judges, never a door here.
+  'merchantHousesEnabled',
   'migrationRumorsEnabled',
   // Joined 2026-08-04 by FP wave GR-1 under CR-WR10-C item 4 (the compiled charter's
   // §3 flag law), in the SAME commit as its first real gate read

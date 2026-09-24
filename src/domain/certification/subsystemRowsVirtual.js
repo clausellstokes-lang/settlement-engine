@@ -582,6 +582,45 @@ export const VIRTUAL_SUBSYSTEM_ROWS = Object.freeze([
   // ENC-3 appends LAST, which shifts no existing row — the whole point of putting a
   // growing family's home at the tail (§864's append-last precedent).
   ...ENCOUNTERS_SUBSYSTEM_ROWS,
+  // ── TR-2 · THE MERCHANT HOUSE (FP TR-2, docs/DESIGN_FP_TRADE.md §TR-2; block #24) ──────
+  // APPENDED AT THE TAIL, the add-a-row protocol above: TR has no family leaf (TR-1's row
+  // sits inside the compact BODY block, whose own header forbids an append there), and an
+  // append here shifts no existing row's index.
+  Object.freeze({
+    rule: 'merchantHousesEnabled',
+    title: 'The merchant house (books, the ruin latch, the threshold acts)',
+    module: 'src/domain/worldPulse/houseLedger.js,src/domain/worldPulse/houseActs.js',
+    aliveness: Object.freeze({
+      // DELIBERATELY EMPTY: the ledger mints no pulse candidate; its formations, ruins and
+      // acts are RETURNED receipts, and the house news kinds are not minted at this wave.
+      eventTypes: Object.freeze([]),
+      // DELIBERATELY EMPTY: no behavioural family can carry a house without grading this
+      // row alive off the trade layer's ordinary traffic in worlds where it never ran.
+      moverFamilies: Object.freeze([]),
+      // DELIBERATELY EMPTY, on TR-1's reasoning: `spatialLedgers.houses` is real, this lane's
+      // own, and has exactly ONE writer (advanceHouses), but the writer has NO CALLER in src/,
+      // so a declared channel would grade this row SILENT for a layer that never ran.
+      stateKeys: Object.freeze([]),
+      other: 'A DARK INSTRUMENT WITH NO MOUNT, WHICH IS WHY EVERY CHANNEL IS EMPTY AND WHY THAT IS THE CORRECT READING. ONE GATE, by name and strict: merchantHousesActive (houseLedger.js) is the only read of the key in src/, and advanceHouses returns its input world by reference before it reads anything else. WHAT IT DOES: a faction whose canonical archetype reads merchant (factionArchetypes.factionArchetype, the only eligibility door, whose name-regex fallback makes a rename able to break it) in a town with a live commercial institution (institutionRoster.liveInstitutions) earns BOOKS in spatialLedgers.houses: banded holdings and credit, typed interests, an appetite band. Formation is deterministic (institution seniority, then the faction id by codepoint) under a per-town cap; holdings step one band per season toward the town\'s own fortune, raised one rung while an interest is live, so there is no wealth ratchet and a town fallen to its bottom band carries its houses to ruin. RUIN closes the books and leaves a tombstone whose cooldown refuses an undead house; eligibility loss (a rename, the last market ruined) sends the entry DORMANT WITH ITS BOOKS, and restored eligibility wakes the same entry. The threshold chooser (houseActs.js, import list pinned empty) picks one of four closed verbs and never names a victim; the factor is cast per act through roads/state.isOffStage and never stored. WHAT IT NEVER DOES: it draws no random number, reads no relationship graph, and moves no other layer\'s state. THE OBSERVATION NEEDED to close the gap is a WIRING WAVE: mount advanceHouses on the pulse and the v5 census over spatialLedgers.houses grades this row directly, at which point the stateKeys channel is owed. Until then the lane is pinned in tests/domain/houseLedgerTr2.test.js, which carries its four dormancy fences and the lit-mutant control.',
+    }),
+    // Formation and ruin are season-grade state crossings, and an act fires only when an
+    // interest lapses, so the layer's expected output is sparse and driven by its world.
+    expectedTempo: 'reactive',
+    invariants: Object.freeze([
+      Object.freeze({
+        name: 'dark_is_byte_identical',
+        description: 'With the key absent, false, or any truthy non-true value, advanceHouses returns its input world by reference over a fixture that forms two houses the moment the key is lit, so a dark world carries zero bytes of the layer in spatialLedgers.',
+        check: 'Expressible from state and asserted that way in tests/domain/houseLedgerTr2.test.js fence 1, with the lit-mutant control on the same fixture.',
+      }),
+      Object.freeze({
+        name: 'no_undead_house',
+        description: 'A ruined house whose faction is still eligible does not re-open inside the ruin cooldown, and re-forms after it as a NEW entry with fresh books and a lineage count.',
+        check: 'Expressible from state and asserted that way in tests/domain/houseLedgerTr2.test.js on a fixture driven from the top holdings band to ruin and back.',
+      }),
+    ]),
+    // No channel at all, so the row can never be ALIVE and says so honestly.
+    soakEvidence: 'unobserved',
+  }),
 ]);
 
 /**
