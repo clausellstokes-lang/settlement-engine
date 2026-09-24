@@ -24,13 +24,13 @@
     "The derivation history — every prior row, its cause, and the census laws — stays in the walker",
     "beside the assertions, deliberately. Only the live tuple moved."
   ],
-  "measuredAtSha": "da720b26d7636ea47f85cb083f8667c098f48214",
-  "measuredBy": "the chair, session cce01f87 — THE UNFREEZE act 2",
+  "measuredAtSha": "253d148487883aa60677b8d30c4c1e38999fc001",
+  "measuredBy": "the FP chair (session 87797a6a, Fable 5.1)",
   "date": "2026-09-24",
-  "note": "the cure day (2026-09-23) landed 30 members on plain branches under tests-only mode, picked on local proofs; every new or renamed test file is a member's declared new file (git: 59 new test files since 1b073009f); refrozen once at the final tip after unfreeze lanes 2 and 3",
-  "files": 2756,
+  "note": "FP batch landing 1 at 253d14848: WF-0 + cure, TR-2's cures, LIT-1a (Owner-Signed §934.84), TR-3, IN-2 + two cures, GR-6, IN-4/1, GR-5b — the batch's declared deltas, re-measured once at the tip",
+  "files": 2768,
   "parked": 359,
-  "credited": 2397,
-  "titles": 26262,
-  "suiteTitles": 6941
+  "credited": 2409,
+  "titles": 26426,
+  "suiteTitles": 6981
 }
