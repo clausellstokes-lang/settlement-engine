@@ -193,14 +193,33 @@ describe('EM-E4d — the seals get their writers', () => {
   });
 
   it('E4d-3: no standing offer and SEVERAL standing offers each stage NOTHING, because a seal writes about the counterparty its own condition named', () => {
+    // ⛔ THE RULE IS READ AND SPELLED IN THE ARM, NEVER LEFT TO THE FILE'S `seal()` HELPER
+    //    (NOTE-22). The helper derives the counterparty exactly as the shell's `sealRow` does,
+    //    so both rows below hand the door ONE EMPTY STRING for two different reasons — and
+    //    with the derivation hidden in the helper the arm could not tell the two worlds
+    //    apart: a fixture that seated no offer at all would answer `unknown_target` twice
+    //    and pass as though the SEVERAL-counterparty world had been driven. The §18 reading
+    //    is the fact that differs, so it is taken here, off each store's own record, and
+    //    pinned in the table below before the door is driven at all. The SURFACE half of this
+    //    rule is `tests/components/editModeShell.test.jsx` A11 ("the world offering an act to
+    //    SEVERAL counterparties still shuts the seal"), and the plant that reds A11 — a
+    //    reading that names no subject — now reds this arm at its own anchor.
+    const needs = SEAL_ACTS[firstBoundSeal()].needs;
     const collected = [['town.harrow', 'town.dunmere'], []].map((fromIds) => {
       const store = makeStore(fromIds);
-      const answer = seal(store, { seal: firstBoundSeal() });
-      return { ok: answer.ok, reason: answer.reason, rows: selectDecrees(store.getState()).length };
+      const read = worldConditionsOf(store.getState().settlement)[needs];
+      // The shell's own rule: the counterparty is the one this seal's condition NAMED, and a
+      // condition that named any number other than one names nobody.
+      const counterparty = read.subjects.length === 1 ? read.subjects[0] : '';
+      const answer = seal(store, { seal: firstBoundSeal(), counterparty });
+      return {
+        holds: read.holds, subjects: read.subjects.length, counterparty,
+        ok: answer.ok, reason: answer.reason, rows: selectDecrees(store.getState()).length,
+      };
     });
     expect(collected).toEqual([
-      { ok: false, reason: 'unknown_target', rows: 0 },
-      { ok: false, reason: 'unknown_target', rows: 0 },
+      { holds: true, subjects: 2, counterparty: '', ok: false, reason: 'unknown_target', rows: 0 },
+      { holds: false, subjects: 0, counterparty: '', ok: false, reason: 'unknown_target', rows: 0 },
     ]);
   });
 
