@@ -113,6 +113,20 @@ export const SAVED_KEY_WRITERS = Object.freeze([
     key: 'decrees', file: 'src/store/editSlice.js', symbol: 'commitRegistry',
     sites: 1, spelling: 'assign', reachedFromSrc: true,
   }),
+  // EM-E4d unit 1 (97f18610b): a seal's click stages the act it names — the seal writer commits
+  // its decree row through the registry, a second `decrees` write in editSlice.js beside
+  // commitRegistry. Re-recorded at the train tip by the chair, 2026-09-23 (judgment 271's idiom).
+  Object.freeze({
+    key: 'decrees', file: 'src/store/editSlice.js', symbol: 'stageSealDecreeIntent',
+    sites: 1, spelling: 'literal', reachedFromSrc: true,
+  }),
+  // EM-F3d (b5d5ca71f): the delete scrubs every edge that names the deleted save — the scrub
+  // withdraws the pending rows naming the counterparty through the registry's typed verb, a
+  // third `decrees` write in editSlice.js. Re-recorded at the train tip by the chair, 2026-09-23.
+  Object.freeze({
+    key: 'decrees', file: 'src/store/editSlice.js', symbol: 'scrubDeletedCounterparty',
+    sites: 1, spelling: 'literal', reachedFromSrc: true,
+  }),
   // EM-E1's rewind, three sites in one symbol: the library row, and the live view on EACH of the
   // two rehydration branches. The `sites: 3` is what keeps the pair of branches visible.
   Object.freeze({

@@ -667,7 +667,10 @@ describe('EM-R1 — the writer census of every held key', () => {
       'src/store/editSlice.js',
     ]);
     const totalSites = SAVED_KEY_WRITERS.reduce((sum, row) => sum + row.sites, 0);
-    expect(totalSites, 'the measured write sites of the governed keys').toBe(10);
+    // RE-RECORDED AT THE TRAIN TIP (2026-09-23, the chair): 10 → 12 — EM-E4d unit 1 (97f18610b) added
+    // `stageSealDecreeIntent` and EM-F3d (b5d5ca71f) added `scrubDeletedCounterparty`, two more `decrees`
+    // writes in editSlice.js (the register's two new rows name them).
+    expect(totalSites, 'the measured write sites of the governed keys').toBe(12);
 
     // (c2) ⭐ NOTE-14's SECOND MEASUREMENT: a DECLARED writer is not a LIVE one. `reachedFromSrc`
     // is re-derived from the call graph, so the register can never imply that `peaceOffers` is
@@ -683,7 +686,9 @@ describe('EM-R1 — the writer census of every held key', () => {
     expect(SAVED_KEY_WRITERS.filter((row) => row.reachedFromSrc === false).map((row) => row.symbol).sort(),
       'NOTE-14\'s two writers are the whole of the unreached set').toEqual(['withPeaceOffer', 'withoutPeaceOffer']);
     expect(SAVED_KEY_WRITERS.filter((row) => row.reachedFromSrc === true).length,
-      'every other writer is reached from src/').toBe(6);
+      // RE-RECORDED AT THE TRAIN TIP (2026-09-23, the chair): 6 → 8 — E4d's stageSealDecreeIntent and
+      // F3d's scrubDeletedCounterparty are both reached from src/ (the seal click; the delete).
+      'every other writer is reached from src/').toBe(8);
 
     // (d) EVERY NON-WRITER CARRIES A WRITTEN REASON, so the exempt table cannot become a silent
     // allow-list. anchored: the table is asserted non-empty first, so this is not a vacuous every.
