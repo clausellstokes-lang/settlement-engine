@@ -53,14 +53,65 @@ export const GENERATED_KEYS = Object.freeze([
  *  ⭐ THE EDITOR'S TWO JOINED THIS CLASS AT THE OBSERVED-SHAPE REGISTER'S SCHEMA-23 RUNG, which
  *  is where the claim is PROVED rather than merely asserted: that rung's gate 0 re-reads each
  *  named writer out of the scanned tree on every scan, so a key listed here whose writer is
- *  deleted or renamed reds the register instead of leaving a stale row. The writers, by name:
- *    dmLayer   — src/store/editSlice.js, `state.settlement.dmLayer = applied.layer`
- *    decrees   — src/store/editSlice.js, `commitRegistry`'s `state.settlement.decrees = decrees`
+ *  deleted or renamed reds the register instead of leaving a stale row. Their writers are no
+ *  longer named in this sentence — they are DATA, in `EDITOR_KEY_WRITERS` below, so that the
+ *  claim is re-derived from source by an arm rather than believed from a comment (U62).
  *  The other four keep the writers they always had (the save path's neighbour back-link, the
  *  link/undo/import paths, and the campaign's population history). */
 export const SAVED_ONLY_KEYS = Object.freeze([
   'neighbourNetwork', 'interSettlementRelationships', 'crossSettlementConflicts', 'populationHistory',
   'dmLayer', 'decrees',
+]);
+
+/**
+ * ⭐ EVERY WRITER OF THE EDITOR'S TWO KEYS, BY FILE AND BY SYMBOL — U62, and the row it closes
+ * said this register "names ONE writer per save-time key" while the tree carried more. A claim
+ * about who writes a key is exactly the kind that rots between landings: EM-E8 added a
+ * whole-record write of `dmLayer` at the roster tick, EM-E1's rewind added three `decrees`
+ * writes on the undo path, and EM-C1b's per-save resolution added a fourth in the pulse's own
+ * hook — none of which a prose sentence naming two sites could notice.
+ *
+ * ⛔ THE ROW IS NOT THE PROOF; THE ARM IS. `tests/lint/heldKeyWriterCensus.walker.test.js`'s A7
+ * RE-DERIVES this set out of `src/` on every run and holds it equal BOTH WAYS — a writer that
+ * appears, moves symbol, moves file or retires reds by name, and a row here that resolves to no
+ * site reds too. That is the promotion census's A3 idiom: a claim re-derived every run, never
+ * believed. This table is therefore a MEASUREMENT of the tree, not an intention about it.
+ *
+ * `sites` is the number of write sites of that key inside that symbol, so the undo path's two
+ * rehydration branches cannot silently collapse into one. `spelling` is the shape the arm's
+ * scanner matches: `assign` is `<expr>.<key> = …`, `literal` is `<key>: …` inside an object
+ * literal that rebuilds the record.
+ */
+export const EDITOR_KEY_WRITERS = Object.freeze([
+  Object.freeze({
+    key: 'dmLayer', file: 'src/store/editSlice.js', symbol: 'applyCascadeEdit',
+    sites: 1, spelling: 'assign',
+  }),
+  Object.freeze({
+    key: 'dmLayer', file: 'src/store/editSlice.js', symbol: 'applyPlainEditToDraft',
+    sites: 1, spelling: 'assign',
+  }),
+  // EM-E8's whole-record write: the roster tick re-derives the world and carries the layer onto
+  // the fresh record, so the key is written on an object that is not `state.settlement` yet.
+  Object.freeze({
+    key: 'dmLayer', file: 'src/store/editSlice.js', symbol: 'applyRosterDecreesAtTick',
+    sites: 1, spelling: 'assign',
+  }),
+  Object.freeze({
+    key: 'decrees', file: 'src/store/editSlice.js', symbol: 'commitRegistry',
+    sites: 1, spelling: 'assign',
+  }),
+  // EM-E1's rewind, three sites in one symbol: the library row, and the live view on EACH of the
+  // two rehydration branches. The `sites: 3` is what keeps the pair of branches visible.
+  Object.freeze({
+    key: 'decrees', file: 'src/store/campaignWorldPulseDeferred.js', symbol: 'restorePulseSnapshotOnDraft',
+    sites: 3, spelling: 'assign',
+  }),
+  // EM-C1b's per-save resolution: the pulse's own hook rebuilds the save around a new registry.
+  Object.freeze({
+    key: 'decrees', file: 'src/domain/worldPulse/decreeHook.js', symbol: 'applyDecreesToSaves',
+    sites: 1, spelling: 'literal',
+  }),
 ]);
 /** Declared, classed SAVED-ONLY, and still written by NOTHING IN src/ — an OVERLAY on the list
  *  above rather than a class of its own, so arm A1 asserts both the partition and this subset.

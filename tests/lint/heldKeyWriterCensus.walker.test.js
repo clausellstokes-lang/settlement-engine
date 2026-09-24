@@ -56,14 +56,26 @@
  * 7.  A6 READS THE THREE `src/` FILES' TEXT. It proves WHERE the clone is spelled, not that the
  *     runtime took it; `tests/generators/pipelinePinnedMode.test.js`'s A7 and A8 are the executed
  *     halves and this arm is their source-level counterpart.
+ * 8.  ⭐ A7'S SCANNER IS A LINE PREDICATE, NOT A PARSER, and three holes follow from that. They are
+ *     named here rather than discovered later. (i) A write reached through a COMPUTED key
+ *     (`record[KEY] = …`, the shape `peaceTermsDrafting.js` uses for `peaceOffers`) carries no
+ *     literal key on the line and is invisible. The two keys A7 governs are written by their own
+ *     names at every site in the tree today, and the both-directions equality is what would
+ *     notice a site moving to that shape — it would VANISH from the derived set and red. (ii) The
+ *     enclosing symbol is the nearest column-zero binding head at or above the line, the same
+ *     backward scan `tests/lint/moduleScopeCwdRatchet.test.js` drives against live controls; a
+ *     site inside a nested helper is attributed to its outermost declaration. (iii) A NON-WRITER
+ *     row's site count is not pinned, only its presence, so a second `decrees:` line inside an
+ *     already-declared display helper does not red. WRITER counts ARE pinned, which is the half
+ *     that matters: the undo path's two rehydration branches cannot collapse into one unnoticed.
  */
-import { readFileSync } from 'node:fs';
+import { readdirSync, readFileSync, statSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
-import { dirname, join } from 'node:path';
+import { dirname, join, relative } from 'node:path';
 
 import { describe, expect, it } from 'vitest';
 
-import { RECORD_CLASSES, SAVED_ONLY_KEYS } from '../../src/domain/edit/recordRegister.js';
+import { EDITOR_KEY_WRITERS, RECORD_CLASSES, SAVED_ONLY_KEYS } from '../../src/domain/edit/recordRegister.js';
 import { getStepMeta, getStepOrder } from '../../src/generators/pipeline.js';
 import { codeOnly } from '../helpers/codeOnlySource.js';
 import { declaredSymbols } from '../helpers/generationForkCensus.js';
@@ -244,6 +256,103 @@ function bodyOf(relative, symbol) {
 
 const called = (body, symbol) => new RegExp(`\\b${symbol}\\s*\\(`).test(body);
 
+/* ── A7's surface: the editor's two saved-only keys and every site that names them ────────── */
+
+/** One spelling of "sorted copy", so two arms of this file cannot order a set differently. */
+const sorted = (values) => [...values].sort();
+
+/** The two keys `EDITOR_KEY_WRITERS` governs, DERIVED from the roster itself, never re-typed. */
+const EDITOR_KEYS = Object.freeze([...new Set(EDITOR_KEY_WRITERS.map((row) => row.key))].sort());
+
+/** Every module under `src/`, so the scan has no hand-typed file surface to go stale. */
+function srcFiles(dir = join(ROOT, 'src'), out = []) {
+  for (const name of readdirSync(dir).sort()) {
+    const full = join(dir, name);
+    if (statSync(full).isDirectory()) srcFiles(full, out);
+    else if (/\.(js|jsx|mjs)$/.test(name)) out.push(full);
+  }
+  return out;
+}
+
+/** A module-scope or nested binding head at column zero — the same backward scan the cwd ratchet drives. */
+const DECL_HEAD = /^(?:export\s+)?(?:async\s+)?function\s+([A-Za-z0-9_$]+)|^(?:export\s+)?(?:const|let|var)\s+([A-Za-z0-9_$]+)\s*=/;
+
+/**
+ * Every site in `src/` that names one of the editor's keys, as `key|file|symbol|spelling` with
+ * its site count. Read from CODE, never from prose: `codeOnly` blanks comments and literal text,
+ * so this register's own documentation of its keys is not counted as a use of them.
+ */
+function editorKeySites() {
+  /** @type {Map<string, number>} */
+  const rows = new Map();
+  for (const abs of srcFiles()) {
+    const file = relative(ROOT, abs).split('\\').join('/');
+    const lines = codeOnly(readFileSync(abs, 'utf8')).split('\n');
+    lines.forEach((line, index) => {
+      for (const key of EDITOR_KEYS) {
+        const assign = new RegExp(`\\.${key}\\s*=[^=]`).test(line);
+        const literal = new RegExp(`(^|[{,(\\s])${key}\\s*:`).test(line);
+        if (!assign && !literal) continue;
+        let symbol = '(module)';
+        for (let back = index; back >= 0; back -= 1) {
+          const head = lines[back].match(DECL_HEAD);
+          if (head) { symbol = head[1] || head[2]; break; }
+        }
+        const id = `${key}|${file}|${symbol}|${assign ? 'assign' : 'literal'}`;
+        rows.set(id, (rows.get(id) || 0) + 1);
+      }
+    });
+  }
+  return rows;
+}
+
+/**
+ * THE DECLARED NON-WRITERS: every site the scanner finds that names an editor key and writes it
+ * on NOTHING THAT IS A RECORD. Each carries a written reason, and the equality in A7 is held in
+ * both directions, so a site that IS a record write cannot hide in here.
+ */
+const EDITOR_KEY_NON_WRITERS = Object.freeze([
+  {
+    id: 'dmLayer|src/domain/edit/recordRegister.js|RECORD_CLASSES|literal',
+    reason: 'the register CLASSING its own key. Pure frozen data that describes the record and '
+      + 'writes none: the shared source strip exists for exactly this case, a registry convicted '
+      + 'for describing the thing it classifies.',
+  },
+  {
+    id: 'decrees|src/domain/edit/recordRegister.js|RECORD_CLASSES|literal',
+    reason: 'the same row as the line above, for the second editor key; one source line carries '
+      + 'both class declarations and neither is a write.',
+  },
+  {
+    id: 'decrees|src/domain/ai/personaSlicer.js|buildPersonaSlice|literal',
+    reason: 'a field of the PERSONA SLICE handed to the clerk, capped at six entries and read out '
+      + 'of the home record. The slice is a projection built for one prompt and is never written '
+      + 'back to any settlement.',
+  },
+  {
+    id: 'decrees|src/domain/display/decreeTracker.js|describeCluster|literal',
+    reason: 'a field of a DISPLAY read model row — the tracker\'s per-cluster section — built for '
+      + 'the advance report. The read model is rebuilt from the record on every render and is '
+      + 'never a record itself.',
+  },
+  {
+    id: 'decrees|src/domain/display/decreeTracker.js|decreeHistory|literal',
+    reason: 'the same display read model as the row above, at its per-advance entry shape; it '
+      + 'carries a tick and a span label beside the section, which no record key does.',
+  },
+  {
+    id: 'decrees|src/store/editSlice.js|stageAddDecreeIntent|literal',
+    reason: 'the ACTION RESULT envelope the caller gets back — `{ ok, saveId, decreeId, op, '
+      + 'decrees }`. The store\'s write already happened in `commitRegistry`; this is the report '
+      + 'of it, and a UI reads it rather than saving it.',
+  },
+  {
+    id: 'decrees|src/store/editSlice.js|stageFulfilOp|literal',
+    reason: 'the same action-result envelope as the row above, returned by the fulfilment path; '
+      + 'it names the registry the commit produced and writes nothing.',
+  },
+]);
+
 describe('EM-R1 — the writer census of every held key', () => {
   it('A1 — the held denominator is IMPORTED from the record register, never re-typed', () => {
     const derived = Object.entries(RECORD_CLASSES)
@@ -423,5 +532,58 @@ describe('EM-R1 — the writer census of every held key', () => {
     expect(power.match(/structuredClone\(/g)).toBeNull();
     expect(institutions).toMatch(/registerStep\(/);
     expect(power).toMatch(/registerStep\(/);
+  });
+
+  it('A7 — the EDITOR\'s two keys: every writer RE-DERIVED from source, both directions (U62)', () => {
+    // THE DENOMINATOR IS REFUSED FIRST. An empty file walk or an empty key set would make every
+    // equality below two empty sets, which is the way a census goes vacuously green.
+    const modules = srcFiles();
+    expect(modules.length, 'the src/ walk found no modules: every equality below would be vacuous')
+      .toBeGreaterThan(500);
+    expect(EDITOR_KEYS, 'the roster governs exactly the two keys the editor writes').toEqual(['decrees', 'dmLayer']);
+
+    // THE ROSTER IS TIED TO THE REGISTER IT LIVES IN: both keys are SAVED-ONLY and both are
+    // AUTHORED, so a reclassification cannot leave this roster pointing at a key that moved class.
+    const misfiled = EDITOR_KEYS.filter((key) => !SAVED_ONLY_KEYS.includes(key) || RECORD_CLASSES[key] !== 'AUTHORED');
+    expect(misfiled, `an editor key left the saved-only class or stopped being AUTHORED:\n${misfiled.join('\n')}`).toEqual([]);
+
+    // (a) BOTH DIRECTIONS over the SITES. Every site the scanner finds is a declared writer or a
+    // declared non-writer, and every declared row resolves to a site that exists.
+    const derived = editorKeySites();
+    const declared = [
+      ...EDITOR_KEY_WRITERS.map((row) => `${row.key}|${row.file}|${row.symbol}|${row.spelling}`),
+      ...EDITOR_KEY_NON_WRITERS.map((row) => row.id),
+    ].sort();
+    expect(sorted(new Set(declared)), 'a declared id is spelled twice').toEqual(declared);
+    expect(sorted(derived.keys()),
+      'a site naming an editor key is declared by no writer and no non-writer row, or a declared'
+      + ' row names a site the tree no longer carries. Add the writer to EDITOR_KEY_WRITERS in the'
+      + ' record register, or the non-writer here WITH ITS REASON — never widen the scan.')
+      .toEqual(declared);
+
+    // (b) THE WRITER COUNTS ARE THE CLAIM'S SECOND HALF. A symbol that gains or loses a write site
+    // keeps its id, so without this the undo path's three branches could collapse into one.
+    const countFaults = EDITOR_KEY_WRITERS
+      .filter((row) => derived.get(`${row.key}|${row.file}|${row.symbol}|${row.spelling}`) !== row.sites)
+      .map((row) => `${row.file} :: ${row.symbol} writes ${row.key} at `
+        + `${derived.get(`${row.key}|${row.file}|${row.symbol}|${row.spelling}`)} site(s), not the declared ${row.sites}`);
+    expect(countFaults, `a declared writer's site count moved:\n${countFaults.join('\n')}`).toEqual([]);
+
+    // (c) THE MEASUREMENT IS NOT ONE-SIDED. Both keys really are written, in more than one file,
+    // which is the fact the cured claim exists to carry: the row it closes named ONE writer each.
+    expect(EDITOR_KEY_WRITERS.length, 'the roster is empty').toBeGreaterThan(0);
+    const writerFiles = sorted(new Set(EDITOR_KEY_WRITERS.map((row) => row.file)));
+    expect(writerFiles, 'the editor keys are written from three homes, not one').toEqual([
+      'src/domain/worldPulse/decreeHook.js',
+      'src/store/campaignWorldPulseDeferred.js',
+      'src/store/editSlice.js',
+    ]);
+    const totalSites = EDITOR_KEY_WRITERS.reduce((sum, row) => sum + row.sites, 0);
+    expect(totalSites, 'the measured write sites of the editor\'s two keys').toBe(8);
+
+    // (d) EVERY NON-WRITER CARRIES A WRITTEN REASON, so the exempt table cannot become a silent
+    // allow-list. anchored: the table is asserted non-empty first, so this is not a vacuous every.
+    expect(EDITOR_KEY_NON_WRITERS.length, 'the non-writer table is empty').toBeGreaterThan(0);
+    expect(EDITOR_KEY_NON_WRITERS.every((row) => row.reason.length >= 40)).toBe(true);
   });
 });
