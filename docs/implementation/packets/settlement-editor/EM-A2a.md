@@ -15,6 +15,7 @@
     tip is its parent `e348d59b6`) re-measures VERSION 6 against the live tree and makes SIX
     edits, each one a measurement, none of them a preference.** **(1) A2's tier claim is
     REFUTED and replaced by the measured truth:** `getInstitutionsForTier` is
+> retiredBy: lane D2's U81 (b683e8ed6, 2026-09-23) — `institution.class` reads `getInstitutionalCatalog`'s categories (the writer writes a CATEGORY; this clause's reader returned institution NAMES — a wiring defect, judgment 300). The clause stays as landed history; the cure supersedes it. Annotated by the chair 22:46.
     `institutionalCatalog[t] || {}` and has NO random/custom case — `'random'`, `'custom'`,
     `'nonsense'`, `'all'`, `''`, `null` and `undefined` ALL return an EMPTY `Set`, so version 6's
     anchor was vacuous and its **58** came from this packet's own `?? 'village'`. The special case
