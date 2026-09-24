@@ -21,7 +21,7 @@ const WIZARD_NEWS_SECTIONS = new Set([
 const MAX_ENTRIES = 240;
 
 // FP-31 (the chair's ruling of 2026-09-24 on FP-21 U2, vetoable by the owner): THE FEED KEEPS
-// THE LAST YEAR WHOLE. Every entry inside the newest RETENTION_WINDOW_TICKS of the feed
+// THE LAST YEAR WHOLE. Every entry inside the newest windowWeeks ticks of the feed
 // survives the cap; MAX_ENTRIES and the arc rescue govern only what survives beyond it (see
 // capEntries). The span is the estate's own year, IMPORTED from the one interval table rather
 // than mirrored, so the window cannot drift from the calendar the advance menu offers.
@@ -31,7 +31,7 @@ const MAX_ENTRIES = 240;
 // (the import owed about 387 B of eager bytes; a signed budget never rises by the chair's hand) and
 // the tuning inventory sees a table, not a named magic number. The owner signs it at the tuning sitting.
 export const FEED_RETENTION_TUNING = Object.freeze({ windowWeeks: 52 });
-const RETENTION_WINDOW_TICKS = FEED_RETENTION_TUNING.windowWeeks;
+// Read in capEntries, never at module scope: a top-level read held this module in first paint.
 
 // ── Types ──────────────────────────────────────────────────────────────────
 
@@ -786,7 +786,7 @@ function sortEntries(entries) {
 /**
  * Cap the feed. FP-31, A STATED BEHAVIOUR CHANGE (the chair's ruling of 2026-09-24 on FP-21 U2,
  * vetoable by the owner): THE LAST YEAR IS KEPT WHOLE. Every entry inside the newest
- * RETENTION_WINDOW_TICKS of the feed survives; the policy of record (`recencyArcCap`: recency
+ * FEED_RETENTION_TUNING.windowWeeks ticks survives; the policy of record (`recencyArcCap`: recency
  * plus the major-arc rescue) runs unchanged over the whole feed and decides only what survives
  * BEYOND the window. The two compose as a union:
  *   - at or below `max` nothing is evicted (unchanged);
@@ -810,7 +810,7 @@ function capEntries(sortedEntries, max = MAX_ENTRIES) {
   if (sortedEntries.length <= max) return sortedEntries.slice(0, max);
   const capped = recencyArcCap(sortedEntries, max);
   // The window is a PREFIX of the newest-first order: sortEntries' first key is the tick.
-  const floorTick = sortedEntries[0].tick - RETENTION_WINDOW_TICKS;
+  const floorTick = sortedEntries[0].tick - FEED_RETENTION_TUNING.windowWeeks;
   /** @type {Set<WizardNewsEntry>} */
   const kept = new Set(capped);
   let restored = 0;
