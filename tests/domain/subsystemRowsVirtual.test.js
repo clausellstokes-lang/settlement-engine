@@ -252,6 +252,11 @@ const INFO_LURE = 'infoLureEnabled';
 // forbids an append) and its ONE by-name gate read (`mediationPressure.mediationGeneralizedActive`)
 // in a single commit — these three module-scope edits, ZERO new test titles.
 const MEDIATION_GENERALIZED = 'mediationGeneralizedEnabled';
+// FP IN-4 commit 1 (lane FP-I2; J-INA-4). The intel lane's invisible key DECLARED: its manifest
+// entry and its certification row APPENDED at the tail after IN-2's land together, over a gate
+// read (`intelActs.intelTradeActive`) older than both: the same three module-scope edits, ZERO
+// new test titles.
+const INTEL_TRADE = 'intelTradeEnabled';
 // AUTHORING ORDER, not alphabetical: the assertion below is an exact ordered equality
 // against VIRTUAL_SUBSYSTEM_ROWS, so this list mirrors the file's own section order.
 //
@@ -287,6 +292,7 @@ const VIRTUAL_RULES = Object.freeze([
   BELIEVED_MARKETS,
   INFO_LURE,
   MEDIATION_GENERALIZED,
+  INTEL_TRADE,
 ]);
 
 const rowFor = (rule) => SUBSYSTEM_CERTIFICATION_REGISTRY.find((row) => row.rule === rule);
@@ -481,6 +487,12 @@ const LANE_LEAVES = Object.freeze({
   [INFO_LURE]: ['src/domain/worldPulse/infoLure.js', 'src/domain/worldPulse/informationStatecraft.js'],
   // GR-6. The one leaf: the gate, the pressure, the receipt pass and the editor's rows.
   [MEDIATION_GENERALIZED]: ['src/domain/worldPulse/mediationPressure.js'],
+  // IN-4 commit 1. THE PURE LEAF ALONE: the gate, the decision and the pricing live in intelActs.js.
+  // generosityKernel.js and informationStatecraft.js are in the row's wider `module` list because a
+  // reader needs the two doors' addresses, and are deliberately absent here: they are the generosity
+  // and statecraft layers' own mouths, so tracing this lane's zero-candidate claim through them
+  // would measure two other lanes' vocabulary.
+  [INTEL_TRADE]: ['src/domain/spatial/intelActs.js'],
   [CHANCE_ENCOUNTERS]: [
     'src/domain/worldPulse/envoyChanceMeeting.js',
     'src/domain/worldPulse/envoyChanceMeetingLedger.js',

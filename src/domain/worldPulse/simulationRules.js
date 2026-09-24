@@ -326,6 +326,17 @@ export const ENGINE_GATED_VIRTUAL_RULE_KEYS = Object.freeze([
   // and the mirror are LIGHTING-ORDER preconditions the LIT-n unit judges, never doors here.
   'infoLureEnabled',
   'infoStatecraftEnabled',
+  // Joined 2026-09-24 by FP wave IN-4 commit 1 (lane FP-I2; J-INA-4, docs/DESIGN_FP_ARCH_IN.md §2
+  // and §6 Q3) under CR-WR10-C item 4, with its AUTHORED certification row at the tail of
+  // VIRTUAL_SUBSYSTEM_ROWS. ⚠ THE READ IS NOT NEW, THE DECLARATION IS — the
+  // settlementPoliticsEnabled footing: `intelActs.intelTradeActive` has read this key `=== true`
+  // since deep-couplings D-3 landed, the ONE by-name read of it in the tree, and the engine-gated
+  // walker carried it on its measured BACKLOG as an invisible key. Declaring it writes the key
+  // into no rules object and no preset, so no world byte moves on any path.
+  // ⚠ A SINGLE CONJUNCT: the lane's other doors (beliefs live and infoStatecraftEnabled at the
+  // generosity deposit, the statecraft gate at the consume arm) are its CALLERS' conjunctions,
+  // never reads of this key. Inserted at its codepoint-sorted position (SR-7).
+  'intelTradeEnabled',
   // Joined 2026-09-24 by FP wave GR-6 (lane FP-B2) under CR-WR10-C item 4 (the compiled
   // charter's §3 flag law), in the SAME commit as its first real gate read —
   // `mediationPressure.mediationGeneralizedActive`, the ONE `=== true` by-name read of this key

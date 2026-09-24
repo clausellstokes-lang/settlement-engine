@@ -733,6 +733,46 @@ export const VIRTUAL_SUBSYSTEM_ROWS = Object.freeze([
     // No channel at all, so the row can never be ALIVE and says so honestly.
     soakEvidence: 'unobserved',
   }),
+  // ── THE INTEL LANE (deep-couplings D-3, docs/DESIGN_DEEP_COUPLINGS.md §7; FP IN-4 commit 1,
+  // J-INA-4) ──────────────────────────────────────────────────────────────────────────────
+  // APPENDED AT THE TAIL, the add-a-row protocol above. The gate is OLDER than this row: the key
+  // sat on the engine-gated walker's measured backlog as an invisible read until IN-4 declared it,
+  // and manifesting it is the act that makes the row come due.
+  Object.freeze({
+    rule: 'intelTradeEnabled',
+    title: 'The intel lane (a belief given or sold between courts)',
+    module: 'src/domain/spatial/intelActs.js,src/domain/worldPulse/generosityKernel.js,src/domain/worldPulse/informationStatecraft.js',
+    aliveness: Object.freeze({
+      // DELIBERATELY EMPTY per the evidence law: the lane mints no pulse candidate. Its one beat,
+      // intel_transfer, is a statecraft news entry, and its obligations fold through the
+      // generosity writer's own ledger.
+      eventTypes: Object.freeze([]),
+      // DELIBERATELY EMPTY: the beat classifies into `knowledge`, the contaminated residual.
+      moverFamilies: Object.freeze([]),
+      // ONE channel, and it is exact: generosityKernel.advanceGenerosity is the ONE writer of
+      // the per-pair cooldown, it materializes only when a lit transfer fires, and it outlives
+      // the one-tick deposit by the whole cooldown horizon, so a yearly census can see a lane
+      // whose deposit ledger (pruned the tick after it lands) it would almost never catch.
+      stateKeys: Object.freeze(['spatialLedgers.intelCooldown']),
+      other: 'ONE GATE, BY NAME AND STRICT, AND IT IS OLDER THAN THIS ROW. intelActs.intelTradeActive is the only read of the key in src/, and exactly two doors call it: the deposit in generosityKernel.advanceGenerosity, conjoined there with beliefs live and infoStatecraftEnabled and reached only while the generosity movers run at all, and the consume arm in informationStatecraft.advanceInformationStatecraft, behind the statecraft gate. WHAT IT DOES, LIT: when a court updates a belief this tick and a bonded ally or a trade partner with a stake in the subject knows it less well, a rare act (a trigger, a per-pair cooldown, a yearly eligibility draw and a per-tick cap) deposits the seller snapshot. A gift binds the receiver in gratitude; a sale repays a debt the seller owes the buyer or mints one the other way. On the next tick the one-tick deposit courier injects the read into the receiver seat at the seller fidelity, voices an intel_transfer beat, and the self-policing resolver credits or charges the seller credibility against the subject true band. WHAT IT NEVER DOES: it runs no per-tick scanner, so no trigger means no act; the generosity side writes no belief; and nobody sells to an enemy. THE ONE-TICK DEPOSIT COURIER IS THE SHAPE FP IN-4 CHARTERS TO RETIRE behind this key and errandSpineEnabled together, and that retirement is not part of this row. THE OBSERVATION NEEDED to grade the lane: a receipt whose rules record this key true and whose yearly census carries spatialLedgers.intelCooldown. Until then it is pinned in tests/domain/intelActs.test.js, tests/domain/intelSelfPolicing.test.js and tests/property/intelTradeDormancyGolden.test.js.',
+    }),
+    // A handful of transfers a year at most, each answering a fresh belief: sparse and reactive.
+    expectedTempo: 'reactive',
+    invariants: Object.freeze([
+      Object.freeze({
+        name: 'dark_deposits_nothing',
+        description: 'With the key absent, false, or any truthy non-true value, advanceGenerosity deposits no transfer and writes no cooldown, and the consume arm injects nothing, even in a fully lit substrate of beliefs, statecraft and constructive flows.',
+        check: 'Pinned in tests/property/intelTradeDormancyGolden.test.js (the dormancy manifest and its contract arm). Expressible from state: a receipt whose rules keep this key dark for the whole run never carries spatialLedgers.intelCooldown in its census.',
+      }),
+      Object.freeze({
+        name: 'a_deposit_is_consumed_once',
+        description: 'A deposited transfer is injected exactly once, on the tick after its deposit, and pruned by its own writer that same tick, so a read reaches its receiver at most once whatever the save cadence.',
+        check: 'NOT expressible from a receipt: the deposit ledger lives one tick. Pinned at the movers in tests/domain/intelActs.test.js and tests/domain/intelSelfPolicing.test.js.',
+      }),
+    ]),
+    // One exact channel the v5 census can read the day a receipt carries the flag: `indirect`.
+    soakEvidence: 'indirect',
+  }),
 ]);
 
 /**

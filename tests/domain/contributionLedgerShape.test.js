@@ -128,11 +128,15 @@ describe('WC-0E · the war-circulation flags, the contribution ledger shape, and
     // 37 → 38 at the FP integration pick (the chair, 2026-09-24): TR-3 and IN-2 each minted one virtual key on a
     // 36-key base; the tip carries both (SR-1, the union).
     // 38 → 39 at the FP integration pick (the chair, 2026-09-24): GR-6 minted a third virtual key (SR-1, the union).
-    expect(ENGINE_GATED_VIRTUAL_RULE_KEYS).toHaveLength(39);
-    expect(VIRTUAL_SUBSYSTEM_ROWS).toHaveLength(39);
+    // 39 → 40 at the FP integration pick (the chair, 2026-09-24): IN-4/1 declared intelTradeEnabled, the fourth tonight (SR-1, the union).
+    expect(ENGINE_GATED_VIRTUAL_RULE_KEYS).toHaveLength(40);
+    expect(VIRTUAL_SUBSYSTEM_ROWS).toHaveLength(40);
     // 36 → 37 at FP GR-6 (lane FP-B2, 2026-09-24): `mediationGeneralizedEnabled`, its row at the
     // tail of VIRTUAL_SUBSYSTEM_ROWS. Both literals were read off the live modules (37 and 37)
     // before this line was moved.
+    // 38 → 39 at FP IN-4 commit 1 (lane FP-I2, 2026-09-24; J-INA-4, SR-1): `intelTradeEnabled`,
+    // the invisible key declared, its row at the tail of VIRTUAL_SUBSYSTEM_ROWS after IN-2's. Both
+    // literals were read off the live modules (39 and 39) before this line was moved.
     // ⭐ THE BIJECTION IS A TRIPLE, NOT A PAIR. The ordered-equality pin in
     // subsystemRowsVirtual.test.js couples the manifest to VIRTUAL_RULES; direction 3 of
     // engineGatedRuleKeys couples the manifest to the certification rows. A flag mint moves

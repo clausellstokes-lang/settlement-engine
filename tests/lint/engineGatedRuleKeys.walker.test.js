@@ -199,7 +199,6 @@ const BACKLOG_RULE_KEYS = Object.freeze({
   economicCoupReadEnabled: 'THE ECONOMIC COUP READ — a coup-verdict term behind its own virtual flag (worldPulse/coup.js).',
   heirsEnabled: 'V-7 HEIRS-LITE — an npc-ladder sub-layer behind its own virtual flag (worldPulse/npcLadderKernel.js).',
   heraldCausalVoiceEnabled: 'THE HERALD CAUSAL VOICE — a display layer dark behind its own virtual flag (display/heraldCausalVoice.js).',
-  intelTradeEnabled: 'D-3 THE INTEL LANE — the bounded event-driven belief trade (spatial/intelActs.js).',
   ladderPoliticalWindowsEnabled: 'LADDER POLITICAL WINDOWS — an npc-ladder sub-layer behind its own virtual flag (worldPulse/npcLadderKernel.js).',
   memoryWeaveEnabled: 'THE MEMORY WEAVE — a relationship-evolution layer behind its own virtual flag (worldPulse/relationshipEvolution.js).',
   migrationCorruptionPushEnabled: 'THE MIGRATION CORRUPTION PUSH — a migration multiplier dark at x1 (worldPulse/migrationKernel.js).',
@@ -978,6 +977,11 @@ describe('engine-gated rule keys (the census-invisible subsystem class)', () => 
       // FP IN-2 (lane FP-I, 2026-09-24): its brief places the four fences and the lit-mutant
       // control in the wave's own acceptance file, beside the spring they fence.
       infoLureEnabled: 'tests/domain/infoLureIn2.test.js',
+      // FP IN-4 commit 1 (lane FP-I2, 2026-09-24; J-INA-4): the invisible key declared. Its dark
+      // proof predates the declaration: the D-3 dormancy golden drives the gate ABSENT through a
+      // fully lit substrate (beliefs, statecraft, constructive flows, bonded and trade edges),
+      // hashes the projection, and carries its lit control on the same fixture.
+      intelTradeEnabled: 'tests/property/intelTradeDormancyGolden.test.js',
       // FP TR-2 (lane FP-D, 2026-09-23): the register's THIRTY-SIXTH member. Its brief places
       // the four fences and the lit-mutant control in the wave's own acceptance file.
       merchantHousesEnabled: 'tests/domain/houseLedgerTr2.test.js',
@@ -1043,7 +1047,10 @@ describe('engine-gated rule keys (the census-invisible subsystem class)', () => 
     ).toEqual(measuredGap);
     // The ceiling is the burn-down marker, never the guard. Lower it whenever a key
     // earns its manifest entry and its certification row; never raise it.
-    expect(Object.keys(BACKLOG_RULE_KEYS).length).toBeLessThanOrEqual(17);
+    // 17 → 16 at FP IN-4 commit 1 (lane FP-I2, 2026-09-24; J-INA-4, SR-1): `intelTradeEnabled`
+    // earned its manifest entry and its authored row, so its backlog row is deleted (the burn-down
+    // win banked, never widened) and the ceiling follows the list down.
+    expect(Object.keys(BACKLOG_RULE_KEYS).length).toBeLessThanOrEqual(16);
   });
 
   test('the pending manifest key is the recorded next step, not a red', () => {
