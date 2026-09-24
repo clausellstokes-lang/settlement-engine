@@ -155,7 +155,12 @@ describe("the soak script's extracted seams", () => {
     // three belief keys of FP_LIT_BELIEF, so the same literal block was executed a third time over
     // the LIT-1b table (75 -> 78 keys per variant). The pin it replaces, verbatim:
     // '4d2667579686bcc329b331cfa99c61c6b9dff2c7'.
-    expect(BASELINE.capturedAtHead).toBe('6efff620b5bcbdb293393d7945e1b6437a2d163b');
+    // ⭐ AND AGAIN (LIT-2, 2026-09-24; J-EM-16, ODQ §934.84, ruling FP-36): full_simulation also
+    // declares mediationGeneralizedEnabled (FP_LIT_WARPEACE), so the same literal block was
+    // executed a fourth time over the LIT-2 table (78 -> 79 keys per variant; the same block over
+    // the parent's table reproduced the previous capture byte-for-byte). The pin it replaces,
+    // verbatim: '6efff620b5bcbdb293393d7945e1b6437a2d163b'.
+    expect(BASELINE.capturedAtHead).toBe('90cbf7963526a467a6db20b6a7c6d56ebf9aea0f');
     for (const seasons of ['preset', 'on', 'off']) {
       const composed = composeSoakRules({ preset: PRESET, seasons, overlay: {} });
       expect(composed.fullRules, `fullRules moved for --seasons ${seasons}`)
@@ -395,12 +400,17 @@ describe("the soak script's extracted seams", () => {
     // declaring none of them leaks three more: quiet_local 38 + 3 = 41, narrative_campaign
     // 38 + 3 = 41, static_campaign 39 + 3 = 42, realistic_regional 15 + 3 = 18. living_realm
     // stays 18 and dramatic_campaign 14 (both declare the three); full_simulation stays 0.
+    // ⭐ AND AGAIN (LIT-2, 2026-09-24; J-EM-16, ODQ §934.84, ruling FP-36): full_simulation and
+    // dramatic_campaign took mediationGeneralizedEnabled (FP_LIT_WARPEACE), so every preset that
+    // does not declare it leaks one more: quiet_local 41 + 1 = 42, narrative_campaign 41 + 1 = 42,
+    // static_campaign 42 + 1 = 43, realistic_regional 18 + 1 = 19, living_realm 18 + 1 = 19.
+    // dramatic_campaign stays 14 (it declares the key) and full_simulation stays 0.
     expect(leakedUnderOverlay).toEqual({
-      quiet_local: 41,
-      realistic_regional: 18,
-      narrative_campaign: 41,
-      static_campaign: 42,
-      living_realm: 18,
+      quiet_local: 42,
+      realistic_regional: 19,
+      narrative_campaign: 42,
+      static_campaign: 43,
+      living_realm: 19,
       dramatic_campaign: 14,
       full_simulation: 0,
     });

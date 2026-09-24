@@ -192,18 +192,43 @@ describe('GR-6 — the four dormancy fences and the lit-mutant control', () => {
   });
 
   test('fence 4 — the gate polarity census: the one code read of the key is the strict === true form', () => {
+    // ⭐ A PRESET DECLARATION IS NOT A READ (LIT-2, 2026-09-24; J-EM-16, the lit law, signed as ODQ
+    // §934.84; LIT-1a's oath fence and LIT-1b's SP-B fence are the precedents). The lighting unit
+    // declares the key in the preset table's FP_LIT_WARPEACE fragment, and the one lawful spelling
+    // there is a strict `true` (dark is ABSENT, never a declared false), so exactly that shape in
+    // exactly that file is set aside, counted neither as a read nor as loose. Every other site must
+    // still be the strict read, the reads roster below still names the one real gate, and the
+    // declaration is counted, so the fragment stays its one home.
+    const PRESET_TABLE = 'src/domain/worldPulse/simulationRules.js';
+    /** @param {string} rel @param {string} line */
+    const isLitDeclaration = (rel, line) => rel === PRESET_TABLE
+      && /^mediationGeneralizedEnabled\s*:\s*true\s*,?$/.test(line.trim());
+    // GUARD THE GUARD: a declared false, a truthy read and the same line in another file are all
+    // still convicted, so the exemption cannot widen into a pass for a loose read.
+    expect(isLitDeclaration(PRESET_TABLE, '  mediationGeneralizedEnabled: true,')).toBe(true);
+    expect(isLitDeclaration(PRESET_TABLE, '  mediationGeneralizedEnabled: false,')).toBe(false);
+    expect(isLitDeclaration(PRESET_TABLE, '  if (rules.mediationGeneralizedEnabled) {')).toBe(false);
+    expect(isLitDeclaration('src/domain/x.js', '  mediationGeneralizedEnabled: true,')).toBe(false);
     const reads = [];
     const loose = [];
+    const declarations = [];
     for (const abs of walk(join(ROOT, 'src'))) {
       const rel = relative(ROOT, abs).replace(/\\/g, '/');
       const code = codeOnly(readFileSync(abs, 'utf8'));
       for (const match of code.matchAll(/\bmediationGeneralizedEnabled\b/g)) {
+        const lineStart = code.lastIndexOf('\n', match.index) + 1;
+        const lineEnd = code.indexOf('\n', match.index);
+        if (isLitDeclaration(rel, code.slice(lineStart, lineEnd < 0 ? code.length : lineEnd))) {
+          declarations.push(rel);
+          continue;
+        }
         const tail = code.slice(match.index + match[0].length, match.index + match[0].length + 12);
         (/^\s*===\s*true/.test(tail) ? reads : loose).push(rel);
       }
     }
     expect(loose, 'a read of the key that is not the strict === true form').toEqual([]);
     expect(reads).toEqual(['src/domain/worldPulse/mediationPressure.js']);
+    expect(declarations, 'the preset table declares the key once, in its fragment').toEqual([PRESET_TABLE]);
     for (const rules of DARK_RULES) expect(leaf.mediationGeneralizedActive({ simulationRules: rules })).toBe(false);
     expect(leaf.mediationGeneralizedActive({ simulationRules: LIT })).toBe(true);
     // The conjunction: a lit key over a dark peace engine stays dark.

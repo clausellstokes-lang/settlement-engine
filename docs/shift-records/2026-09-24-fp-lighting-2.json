@@ -1,0 +1,78 @@
+{
+  "_doc": "SIGNED 2026-09-24 by the FP chair (session 87797a6a) under the owner's word of 2026-09-23, quoted verbatim in `ownerWords` and recorded as ODQ §934.84 (THE FP LIGHTING SIGNATURE): the signature is the chair's dispatch of LIT-2 (the FP kit's briefs/BUILD-FP-LIT-2.md, narrowed by the chair's ruling FP-36 and re-dispatched to a second seat), which names this file, its one cause and its signer. Prepared, measured and executed by the LIT-2 second seat (Opus 5.5) on base 90cbf7963 (fp/lit-2), from the first seat's measurement. THE SHIFT RECORD FOR THE THIRD FP LIGHTING UNIT: the generalized mediation is declared `true` in the two presets where war and peace are both lit, through the existing shared fragment FP_LIT_WARPEACE in src/domain/worldPulse/simulationRules.js, because its one gate (mediationPressure.mediationGeneralizedActive) is that fragment's own conjunction, warLayerEnabled and peaceEngineEnabled. A lighting act, not tuning: no band, weight or threshold moves, and THE PROMISE's owner-signed tuning is untouched. The key stays VIRTUAL (absent from DEFAULT_SIMULATION_RULES), so no installed save is re-labelled, gains a byte or changes on load; the shift is for worlds BORN into a lit preset, and for a campaign whose DM applies one (the toolbar chip or the rules dialog writes the preset's current rules as a ruleset change, with its receipt). THE STATECRAFT HEAD IS NOT IN THIS RECORD: ruling FP-36 would have lit it with the information game in this unit, and the seat measured its shift and held it (see `heldDark`), under the dispatch's own stop clause. A successor chair does not inherit this signature: it re-confirms in its own chat.",
+  "ownerWords": "no just build it all shipped lit",
+  "ownerDate": "2026-09-23",
+  "odqRow": "§934.84 of docs/OWNER_DECISION_QUEUE.md (THE FP LIGHTING SIGNATURE, recorded by the FP chair 2026-09-24 04:37 EDT on the ledger branch review-fixes-2026-07-08 at dd1e67bff), the owner's word of §12.8 of docs/DESIGN_FP_ARCHITECTURE.md (J-EM-15 item 3, the lighting law J-EM-16)",
+  "cause": "ONE CAUSE: the owner's word, shipped lit (J-EM-16; ODQ §934.84), applied by LIT-2 under the FP chair's ruling FP-36. The preset table now declares mediationGeneralizedEnabled in dramatic_campaign and full_simulation (the FP_LIT_WARPEACE fragment), the two presets where warLayerEnabled and peaceEngineEnabled are both lit. The preset-lighting witness moves exactly five fields in each of those two rows (ruleKeyCount and litFlagCount by one each, rulesSha256, bornWorldSha256, and worldStateSha256 because the rules ride inside the persisted worldState) and nothing else: __birth_default__, quiet_local, realistic_regional, static_campaign, narrative_campaign and living_realm are byte-identical to the base measurement, no pulse digest (wizardNewsSha256, settlementUpdatesSha256, regionalGraphSha256) moved in any row between the base and the lit tree (the witness realm is two aspatial settlements with no seated deity over one year, where no broker stands between a pair), and distinctWorldStateHashes stays 8.",
+  "seat": "the FP chair (session 87797a6a) signs by its dispatch; the LIT-2 second seat (Opus 5.5) prepared this record, measured the witness through its single writer (tests/simulation/presetLightingWitnessRun.js) at the clean base and on the lit tree, and executed the register act through tests/helpers/goldenRecordDoor.js recordGolden at the unit's own committed tree",
+  "lit": {
+    "mediationGeneralizedEnabled": [
+      "dramatic_campaign",
+      "full_simulation"
+    ]
+  },
+  "heldDark": {
+    "infoStatecraftEnabled": "THE STATECRAFT HEAD (informationStatecraft.infoStatecraftActive), with informationBrokeragesEnabled (brokerageStamps.brokerageEffectsActive, still declared false on the ceiling by W-I2): ruling FP-36 lit it with the information game in the three belief presets, and the dispatch told the seat to STOP if its shift is larger than a lighting may carry, a golden of another program moving or a same-seed world diverging beyond news. MEASURED, twin runs over the reader corpus's canonized four-court realm, twenty yearly advances, seed fp-read-2, the head alone against the preset alone: the world diverges in every one of the twenty years in all three presets, with or without a seated deity, and not only in news: factions and notables in all three, faith where a deity is seated, stressors and war posture where war runs. News volume moves 4757 to 4895 (dramatic_campaign), 5369 to 5081 (living_realm) and 6422 to 5390 (full_simulation, sixteen percent fewer items); generosity refusals fall 1239 to 322 (full_simulation) and 616 to 187 (living_realm); dramatic_campaign's war mobilizations fall 108 to 3, its rival sabotage rises 189 to 311, and a settlement_terminal_death beat appears there that the dark twin does not have. The same instrument puts the accepted pact chain of LIT-1a and LIT-1b at about a quarter of that divergence in full_simulation, and this unit's mediation at 16 kind-changes against the head's 1916. Held, not lit: the lure and the counter-intelligence sweep, whose every arm runs inside the head, stay dark with it. The register goldens under a plant of the chartered table: 49 of 51 green, the witness (this unit's own) and IN-5's herald-knowledge-desk golden (rr-fresh-full|1: contentSha256 8941ee55 to e33d2999, itemCount 364 to 356) red.",
+    "infoLureEnabled": "Every arm runs inside the statecraft head (informationStatecraft.processLies behind infoStatecraftActive); the lure's sprung arm also needs the brokerages (infoLure.lureSprungEntries behind brokerageEffectsActive), and infoLure.lureCommission has no caller. Dark while the head is held.",
+    "counterIntelEnabled": "Its two pulse seams (suspicion.secrecyInAnswer, suspicion.claimDoubtOf) run only inside the statecraft head; counterIntelSweep.resolveSweep has no production caller (IN-3-c waits on U123); WatchPanel.jsx and HousesBlock.jsx are not mounted. Dark while the head is held.",
+    "reputationRaceEnabled": "reputationRaceConsumer.reputationRaceEntries skips any arrival whose story does not arrive (J-INF-5), and routeNetworkConsumersRace.storyArrivalTicks answers arrives false unless routeNetworkLedger.routeLifecycleActive holds: the owner's key, dark in every preset, over a network routeNetworkGenesis.ensureGenesisRouteNetwork has no caller to build (FPQ-44). Forcing the route key did not release the race: no network was built and the story reached 0 of 12 pairs.",
+    "errandSpineEnabled": "The envoy road is envoyErrandOffer.envoyDiplomacyActive (the owner's envoy keys, dark in every preset) gating envoyDiplomacy.dispatchAcceptedPeaceEnvoy, the only errand minter; lit alone the spine only relabels every pact proposal's transport 'envoy' (pactProposals.pactTransportFor), 93 of 93 rows, with no errand."
+  },
+  "surfaces": [
+    {
+      "surface": "preset-lighting-witness",
+      "action": "re-record",
+      "predictedRows": 15,
+      "proofForm": "derived-artefact",
+      "expected": {
+        "rows": 15,
+        "witnessRows": 8,
+        "movedRows": [
+          "dramatic_campaign",
+          "full_simulation"
+        ],
+        "unmovedRows": [
+          "__birth_default__",
+          "quiet_local",
+          "realistic_regional",
+          "static_campaign",
+          "narrative_campaign",
+          "living_realm"
+        ],
+        "movedFieldsPerRow": [
+          "ruleKeyCount",
+          "litFlagCount",
+          "rulesSha256",
+          "bornWorldSha256",
+          "worldStateSha256"
+        ],
+        "ruleKeyCount": {
+          "dramatic_campaign": "64 -> 65",
+          "full_simulation": "78 -> 79"
+        },
+        "litFlagCount": {
+          "dramatic_campaign": "43 -> 44",
+          "full_simulation": "53 -> 54"
+        },
+        "distinctWorldStateHashes": 8,
+        "wholeFileShaBefore": "b0983ac9948d8448add43f0af3a4560550a7c2e652263b571ebaeffb33da44b3",
+        "wholeFileShaAfter": "366e8448c2ee78fb938cdb3314ce04b876d9d2335f9133d2dc8c7a9c8b009d62"
+      }
+    }
+  ],
+  "shiftBeyondTheWitness": "The witness realm seats no deity, so no broker stands between a pair and it records the lighting without observing it act. In a world born into dramatic_campaign or full_simulation where a broker stands between two courts (the reader corpus's canonized four-court realm with the WF-0 two-faith seating, twenty yearly advances, seed fp-read-2), an ordered war is held back and told as the war that did not happen: 1 brokered_back beat in dramatic_campaign and 3 in full_simulation, with the broker's two-edge trust and the other deltas they cause (full_simulation: 16 news-kind changes in all, the news total unchanged at 6422). With no seated deity, or at seed fp-lit-map, both presets run byte-identical to dark over the twenty years. IN-5's herald-knowledge-desk golden (rr-fresh-full, no seated deity) is unmoved: contentSha256 8941ee55, 364 items, measured on the lit tree.",
+  "declaredEdits": [
+    "tests/domain/simulationRulesPreset.stability.test.js: a LIT-2 arm (the key lit exactly in dramatic_campaign and full_simulation and absent elsewhere, virtual, registered, out of the dormant list; the lit set DERIVED as the presets carrying warLayerEnabled and peaceEngineEnabled; the five keys the unit held dark still registered, dormant and absent from every preset, and the brokerages key still lit nowhere; identity three ways). The birth price does not move: realistic_regional lights nothing here.",
+    "tests/soak-harness/soakRulesBaseline.json: re-captured by executing the 0cbb0177 literal composition block verbatim over the LIT-2 preset table (78 -> 79 keys per --seasons variant; the same block over the parent's table reproduced the previous capture byte-for-byte); soakScriptSeams ARM 5's capturedAtHead pin and ARM 8's leak table amended as declared edits, the old values kept",
+    "tests/domain/mediationGeneralizedGr6.test.js FENCE 4 (the gate-polarity census, a code-only scan of src/): the preset table's strict-true declaration is set aside as a declaration, not a read, with guard-the-guard controls, and counted (one, in the preset table); a declared false, a truthy read and the same line in another file are still convicted",
+    "scripts/soak/flagConstraints.mjs: the requires row mediationGeneralizedEnabled -> warLayerEnabled, peaceEngineEnabled (the code conjunction). Without it the covering array lit the key under a dark parent in 1 of 71 rows; with it, 0 of 74 rows, 18,368 of 18,368 reachable pairs covered (228 -> 256 constraint-forbidden pairs)",
+    "tests/lint/.source-citation-baseline.json and the citation walker's header: this record joins the archival `tree` roster (23 -> 24)",
+    "docs/GOLDEN_SHIFT_LEDGER.md: the field-by-field row diff with this cause"
+  ],
+  "doorSequence": [
+    "1. The unit's code, instruments and ledger entry are committed by explicit paths on fp/lit-2, with the re-recorded fixture, this record and the register left as the only uncommitted paths.",
+    "2. The door: GOLDEN_SHIFT_SIGNED=docs/shift-records/2026-09-24-fp-lighting-2.json, recordGolden({ surface: 'preset-lighting-witness', produce: the fixture bytes already re-recorded from the manifest's own recipe }), which re-stamps the register row (sha256, rows, ownerRow) and FAILS BY DESIGN on a successful write.",
+    "3. The plain runs: tests/lint/goldenFreeze.walker.test.js and tests/simulation/presetLightingWitness.test.js green.",
+    "4. The fixture, the register and this record join the same commit (one unit, one commit), which the chair lands; the Owner-Signed trailer the door's commit backstop names is the chair's to add at the landing (ODQ §934.84)."
+  ]
+}

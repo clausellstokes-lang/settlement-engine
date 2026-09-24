@@ -632,6 +632,70 @@ describe('simulation rules preset — stability under future-flag churn', () => 
     expect(normalizeSimulationRules(SIMULATION_RULE_PRESETS.dramatic_campaign.rules).infoMode).toBe('perfect_delayed');
   });
 
+  // ⭐ LIT-2 (2026-09-24; J-EM-16 under the owner's word of 2026-09-23, "no just build it all
+  // shipped lit", signed as ODQ §934.84; the FP chair's ruling FP-36). Pair 1's lighting lights ONE
+  // key: the generalized mediation joins FP_LIT_WARPEACE, because its one gate
+  // (mediationPressure.mediationGeneralizedActive) is that fragment's own conjunction, warLayerEnabled
+  // and peaceEngineEnabled. The other keys of the unit stay DARK in every preset, each held by an arm
+  // outside FP's lighting, and are pinned here beside it: the lure and the counter-intelligence sweep
+  // run only inside the statecraft head (informationStatecraft.infoStatecraftActive), whose own key the
+  // unit measured and held for a ruling because its shift is larger than a lighting may carry; the
+  // reputation race's story leg answers only over the lived route network
+  // (routeNetworkLedger.routeLifecycleActive, the owner's key, with a genesis that has no caller yet,
+  // FPQ-44); and the errand spine's envoy road waits on the owner's envoy keys.
+  const LIT2_LIT_FLAG = 'mediationGeneralizedEnabled';
+  const LIT2_HELD_DARK_FLAGS = [
+    'counterIntelEnabled', 'errandSpineEnabled', 'infoLureEnabled', 'infoStatecraftEnabled', 'reputationRaceEnabled',
+  ];
+
+  test('LIT-2: mediation is PRESENT exactly where war and peace are lit, and the keys it held dark stay dormant', () => {
+    // Anti-vacuity on the rosters: the dark side SPELLED rather than derived as the complement, so a
+    // preset added to or dropped from either side reds.
+    const darkIds = ['quiet_local', 'realistic_regional', 'static_campaign', 'narrative_campaign', 'living_realm'];
+    expect([...FP_WARPEACE_PRESET_IDS, ...darkIds].sort()).toEqual([...PRESET_IDS].sort());
+    expect(ENGINE_GATED_VIRTUAL_RULE_KEYS.includes(LIT2_LIT_FLAG), 'mediation must stay registered').toBe(true);
+    expect(ENGINE_GATED_DORMANT_RULE_KEYS.includes(LIT2_LIT_FLAG), 'mediation must leave the dormant list').toBe(false);
+    for (const id of FP_WARPEACE_PRESET_IDS) {
+      expect(SIMULATION_RULE_PRESETS[id].rules[LIT2_LIT_FLAG], `${id}.${LIT2_LIT_FLAG} must be lit`).toBe(true);
+    }
+    for (const id of darkIds) {
+      // Dark is ABSENT, never a declared false (CR-WR10-C; the LIT-0/2 VIRTUAL law).
+      expect(LIT2_LIT_FLAG in SIMULATION_RULE_PRESETS[id].rules, `${id}.${LIT2_LIT_FLAG} must stay absent`).toBe(false);
+    }
+    // VIRTUAL: no defaults entry, therefore no comparison key and no identity effect.
+    expect(LIT2_LIT_FLAG in DEFAULT_SIMULATION_RULES).toBe(false);
+    expect(RULE_COMPARISON_KEYS.includes(LIT2_LIT_FLAG)).toBe(false);
+    // THE PREREQUISITE, DERIVED FROM THE TABLE: the key is lit exactly where the gate's two other
+    // conjuncts are, so it can never be lit where its gate cannot open, nor dark where it can.
+    const warPeace = PRESET_IDS.filter((id) => SIMULATION_RULE_PRESETS[id].rules.warLayerEnabled === true
+      && SIMULATION_RULE_PRESETS[id].rules.peaceEngineEnabled === true);
+    const lit = PRESET_IDS.filter((id) => SIMULATION_RULE_PRESETS[id].rules[LIT2_LIT_FLAG] === true);
+    expect([...lit].sort()).toEqual([...warPeace].sort());
+    // THE KEYS HELD DARK: every one registered, still dormant, and absent from every preset. The
+    // head's second key is not a register member: it stays declared false on the ceiling (the W-I2
+    // declaration) and lit nowhere.
+    expect(new Set(LIT2_HELD_DARK_FLAGS).size).toBe(5);
+    for (const flag of LIT2_HELD_DARK_FLAGS) {
+      expect(ENGINE_GATED_VIRTUAL_RULE_KEYS.includes(flag), `${flag} must stay registered`).toBe(true);
+      expect(ENGINE_GATED_DORMANT_RULE_KEYS.includes(flag), `${flag} must stay dormant`).toBe(true);
+      for (const id of PRESET_IDS) {
+        expect(flag in SIMULATION_RULE_PRESETS[id].rules, `${id}.${flag} must stay absent`).toBe(false);
+      }
+    }
+    expect(PRESET_IDS.filter((id) => SIMULATION_RULE_PRESETS[id].rules.informationBrokeragesEnabled === true)).toEqual([]);
+    expect(SIMULATION_RULE_PRESETS.full_simulation.rules.informationBrokeragesEnabled).toBe(false);
+    // IDENTITY, three ways (the 432ff6441 idiom): a keyless copy of every preset re-infers itself
+    // (the One-Regen identity arm above covers all seven); an installed save carrying no mediation
+    // key re-infers its own id; and the keyless default still infers realistic_regional.
+    for (const id of FP_WARPEACE_PRESET_IDS) {
+      const installed = { ...SIMULATION_RULE_PRESETS[id].rules };
+      delete installed.presetId;
+      delete installed[LIT2_LIT_FLAG];
+      expect(normalizeSimulationRules(installed).presetId, `${id} installed identity`).toBe(id);
+    }
+    expect(normalizeSimulationRules({}).presetId).toBe(DEFAULT_SIMULATION_PRESET_ID);
+  });
+
   // #5 — custom detection still fires (proves matching is not always-true).
   test('flipping one comparison key away from every preset yields custom', () => {
     const base = SIMULATION_RULE_PRESETS.dramatic_campaign.rules;

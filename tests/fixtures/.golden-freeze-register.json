@@ -837,11 +837,11 @@
       "suite": "tests/simulation/presetLightingWitness.test.js",
       "recordEnv": null,
       "proofForm": null,
-      "sha256": "b0983ac9948d8448add43f0af3a4560550a7c2e652263b571ebaeffb33da44b3",
+      "sha256": "366e8448c2ee78fb938cdb3314ce04b876d9d2335f9133d2dc8c7a9c8b009d62",
       "rows": 15,
       "seedSet": null,
       "distinctFloor": null,
-      "ownerRow": "§934.47 addendum 133 (the tests-only/stasis day) and §934.84 (the FP lighting signature) — the trailer cites §934.47",
+      "ownerRow": "§934.84 of docs/OWNER_DECISION_QUEUE.md (THE FP LIGHTING SIGNATURE, recorded by the FP chair 2026-09-24 04:37 EDT on the ledger branch review-fixes-2026-07-08 at dd1e67bff), the owner's word of §12.8 of docs/DESIGN_FP_ARCHITECTURE.md (J-EM-15 item 3, the lighting law J-EM-16)",
       "note": "FROZEN AT THE GENESIS 2026-09-16 at the bytes committed at d22ceff01 (the owner's signature 'sign the golden'; record docs/shift-records/2026-09-16-genesis-freeze-generator-golden-master.json); measured, not moved: sha256 = bytes of `path`, rows = the manifest's key count where it is JSON. NO CAPTURE ARM EXISTS, AND THAT IS THE POINT. This is the estate's only bit-level witness of WHICH simulation preset a NEW CAMPAIGN is born with: every other pulse and dormancy golden drives literal rules, so lighting the shipped default — or silently re-darkening it later — is invisible to all of them. The manifest records, per preset plus a `__birth_default__` row born through the real birth door with no preset id, the resolved birth rules and the hashes of one simulated year (52 interior one-week ticks). It carries no env spelling and no writeFileSync: the door writes recorded values onto these rows, and every such value must stay null until the freeze act, so a capture arm routed through the door today would poison this register. Re-recorded BY HAND under the golden-shift discipline, from the recipe in the manifest's own _doc, which drives tests/simulation/presetLightingWitnessRun.js — the single writer of the measurement, imported by the suite so the recorded world and the asserted world cannot diverge. The path is deliberately named `-golden` so arm 2's tests/fixtures/*golden*.json glob claims it: a witness named outside that glob would be enrolled only by this lane's good faith, and a later deletion of this row would red nothing. Enrolled by lane LGT-P14-WITNESS (seat Opus 5 — Fable-unvalidated) in the same commit that minted the surface. When the freeze act arms this register, its re-record path becomes the door like every other."
     },
     {

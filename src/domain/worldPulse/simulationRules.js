@@ -763,10 +763,19 @@ const ONE_REGEN = Object.freeze({
 //     member: the unit lights the three.
 //   FP_LIT_WARPEACE: the two presets where warLayerEnabled and peaceEngineEnabled are both
 //     lit (peaceCausalActive): that door opens the treaty fold the lifecycle voice and the
-//     renewal memory run inside, and the war-end mint the oath holder stamps.
+//     renewal memory run inside, and the war-end mint the oath holder stamps. LIT-2
+//     (2026-09-24) adds the generalized mediation, whose one gate is the same conjunction
+//     (mediationPressure.mediationGeneralizedActive): a broker standing between a pair holds
+//     an ordered war back, and the war that did not happen is told. Its signed record:
+//     docs/shift-records/2026-09-24-fp-lighting-2.json.
 // HELD DARK ON PURPOSE: the errand spine, whose envoy arm needs the six envoy keys (dark in
 // every preset) and whose pact arm, lit alone, labels a proposal as carried by an envoy no
-// errand ever sent; and the merchant houses, which have no pulse mount yet (vacuous).
+// errand ever sent; the merchant houses, which have no pulse mount yet (vacuous); the lure
+// and the counter-intelligence sweep, whose every arm runs inside the statecraft head
+// (informationStatecraft.infoStatecraftActive, whose own key is lit in no preset: LIT-2
+// measured the head's shift and held it for a ruling); and the reputation race, whose story
+// leg answers only over the lived route network (routeNetworkLedger.routeLifecycleActive,
+// the owner's key, with a genesis that has no caller yet).
 const FP_LIT_ALIVE = Object.freeze({
   faithUnseatingEnabled: true,
   pactFormationEnabled: true,
@@ -777,6 +786,7 @@ const FP_LIT_BELIEF = Object.freeze({
   believedScarcityEnabled: true,
 });
 const FP_LIT_WARPEACE = Object.freeze({
+  mediationGeneralizedEnabled: true,
   oathHolderEnabled: true,
   treatyLifecycleVoiceEnabled: true,
   treatyRenewalEnabled: true,
@@ -1261,8 +1271,9 @@ export function deriveDormantRuleKeys(register, defaults, presets) {
  * declares it. Its live readers are the five dormancy fences, each asserting this claim
  * about its own key, and the walker that proves the derivation.
  *
- * It is the register less every key a preset lights (LIT-1a lit five, LIT-1b three, 2026-09-24),
- * in register order. That difference is a MEASUREMENT of the tree, not a property of code.
+ * It is the register less every key a preset lights (LIT-1a lit five, LIT-1b three and LIT-2
+ * one, all 2026-09-24), in register order. That difference is a MEASUREMENT of the tree, not
+ * a property of code.
  *
  * @type {ReadonlyArray<string>}
  */

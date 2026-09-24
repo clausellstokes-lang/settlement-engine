@@ -2561,3 +2561,105 @@ band on any of them (lit, 36 records carry each family).
   (`resolveExportSeam` passes `settlementId: saveId`); the live-world slice resolves the
   settlement's generated id, which no ledger keys. A harness defect the lighting exposes, owed a
   cure where the harness lives.
+
+## 2026-09-24 — preset-lighting-witness re-recorded: two rows, five fields each, the third FP lighting unit (LIT-2)
+
+*The LIT-2 second seat (Opus 5.5), on base `90cbf7963` (`fp/lit-2`), at the FP chair's re-dispatch
+under ruling FP-36, building from the first seat's measurement.*
+
+**Surface:** `tests/fixtures/preset-lighting-witness-golden.json` (registered as
+`preset-lighting-witness`). Re-measured through the manifest's own RE-RECORD RECIPE, which
+re-runs `tests/simulation/presetLightingWitnessRun.js`, the single writer of these figures,
+once at the clean base (which reproduced the recorded rows exactly) and once on the lit tree.
+The frozen register row is re-stamped through `tests/helpers/goldenRecordDoor.js`
+`recordGolden`: sha256 `b0983ac9…` -> `366e8448…`, rows 15 -> 15.
+
+**Cause (stated, legitimate, signed):** `docs/shift-records/2026-09-24-fp-lighting-2.json`, the
+owner's word, shipped lit (J-EM-16; ODQ §934.84). The preset table declares
+`mediationGeneralizedEnabled` inside the existing shared fragment `FP_LIT_WARPEACE` of
+`src/domain/worldPulse/simulationRules.js`, first by codepoint (SR-7), so it lights in
+dramatic_campaign and full_simulation: the two presets where `warLayerEnabled` and
+`peaceEngineEnabled` are both lit, which is the key's own gate
+(`mediationPressure.mediationGeneralizedActive` reads the three in one conjunction). The key
+stays VIRTUAL, so no installed save is re-labelled, gains a byte or changes on load; a campaign
+changes only when it is born into one of the two presets or when its DM applies one (the toolbar
+chip or the rules dialog writes the preset's current rules as a ruleset change, with its
+receipt).
+
+**The row diff, field by field:**
+
+| row | ruleKeyCount | litFlagCount | rulesSha256 | bornWorldSha256 | worldStateSha256 |
+|---|---|---|---|---|---|
+| `dramatic_campaign` | 64 -> 65 | 43 -> 44 | `1b3929c8…` -> `d6b432b0…` | `695829ad…` -> `d578f848…` | `8378430f…` -> `d42e2bd0…` |
+| `full_simulation` | 78 -> 79 | 53 -> 54 | `a18ff389…` -> `d57a8cb8…` | `2f9a3fdb…` -> `dfc191d7…` | `2926e9ca…` -> `387c61ab…` |
+
+Each count moves by exactly one, the key the preset lit; `worldStateSha256` moves because the
+rules ride inside the persisted worldState. The base and lit measurements agree on every pulse
+digest in every row (`wizardNewsSha256`, `settlementUpdatesSha256`, `regionalGraphSha256`), on
+`darkFlagCount`, `advanceEpochLit`, the statuses and the tick counts: the witness realm seats no
+deity, so no broker stands between a pair and the witness records the lighting without
+observing it act. `__birth_default__`, `quiet_local`, `realistic_regional`, `static_campaign`,
+`narrative_campaign` and `living_realm` are unmoved; `distinctWorldStateHashes` stays 8, the
+roster and the birth-successor constant (`null`) are unchanged, and `recordedBy` names this
+re-record and the ones before it.
+
+**The one-time shift, stated plainly:** in a world born into dramatic_campaign or
+full_simulation where a broker stands between two courts, an ordered war can be held back and
+is told as the war that did not happen (the `brokered_back` beat, naming the broker), the broker
+earns the two-edge trust the war-exit broker earns, and a fraying pact with a broker between its
+parties strains one banded notch more slowly. Measured over the reader corpus's canonized
+four-court realm with the WF-0 two-faith seating, twenty yearly advances, seed `fp-read-2`: 1
+`brokered_back` beat in dramatic_campaign and 3 in full_simulation (16 news-kind changes in
+all there, the news total unchanged at 6,422). With no seated deity, or at seed `fp-lit-map`,
+both presets run byte-identical to dark for the twenty years. `__birth_default__` did not move
+because `NEW_CAMPAIGN_SIMULATION_PRESET_ID` is still `null` (ODQ §903 row 1, the owner's).
+
+**Moved with the same cause, each a declared edit that keeps its old figure:**
+`tests/soak-harness/soakRulesBaseline.json`, re-captured by executing the 0cbb0177 literal block
+over the lit table (78 -> 79 keys in each `--seasons` variant; the same block over the parent's
+table reproduced the previous capture byte-for-byte), with soakScriptSeams ARM 5's
+`capturedAtHead` pin (`6efff620b…` -> `90cbf7963…`) and ARM 8's leak table beside it (quiet_local
+41 -> 42, narrative_campaign 41 -> 42, static_campaign 42 -> 43, realistic_regional 18 -> 19,
+living_realm 18 -> 19; dramatic_campaign 14 and full_simulation 0 unmoved); FENCE 4 of
+`tests/domain/mediationGeneralizedGr6.test.js`, which now sets aside the preset table's
+strict-true declaration as a declaration rather than a read, and counts it; a LIT-2 arm in
+`tests/domain/simulationRulesPreset.stability.test.js`; the covering array's `requires` row
+(`scripts/soak/flagConstraints.mjs`: mediation needs war and peace; without it 1 of 71 rows lit
+the key under a dark parent, with it 0 of 74 rows do, and all 18,368 reachable pairs are
+covered); and the citation walker's archival roster (this unit's record joins `tree`, 23 -> 24).
+
+**Unmoved, measured:** the birth price (realistic_regional lights nothing here); the flag-domain
+census (union 99, virtual 42); the raw-text `*Enabled` token set of `simulationRules.js` (102
+before, 102 after, the same set); the register (42 keys, while the derived dormant list goes
+34 -> 33); preset identity, checked three ways (a keyless copy of every preset re-infers its own
+id, an installed save carrying no mediation key re-infers its own id,
+`normalizeSimulationRules({})` still infers realistic_regional); IN-5's
+`herald-knowledge-desk-golden` (`rr-fresh-full|1`, no seated deity: contentSha256 `8941ee55…`,
+364 items, measured on the lit tree).
+
+**⛔ WHAT THIS UNIT HELD, AND WHY (the FP chair's ruling FP-36 asked for more).** FP-36 would
+also have lit the statecraft head, `infoStatecraftEnabled` with `informationBrokeragesEnabled`,
+together with the lure and the counter-intelligence sweep, in the three belief presets, and told
+the seat to STOP if the head's shift is larger than a lighting may carry (a golden of another
+program moving, or a same-seed world diverging beyond news). Measured with the first seat's
+twin-run driver, the head alone against the preset alone over the same realm and seed, the world
+diverges in every one of the twenty years in all three presets, with or without a seated deity,
+and not only in news. The news volume goes 4,757 -> 4,895 (dramatic_campaign), 5,369 -> 5,081
+(living_realm) and 6,422 -> 5,390 (full_simulation, sixteen percent fewer items). Generosity
+refusals fall 1,239 -> 322 (full_simulation) and 616 -> 187 (living_realm), and dramatic_campaign's
+war mobilizations fall 108 -> 3. The same instrument puts the accepted pact chain of LIT-1a and
+LIT-1b at about a quarter of that divergence in full_simulation, and this unit's mediation at 16
+kind-changes against the head's 1,916. So the head stays dark, with the lure and the sweep that
+ride it, and the ruling is the chair's. Under a plant of the chartered table the register's
+goldens stayed green but for the witness and IN-5's desk golden (`rr-fresh-full|1`
+contentSha256 `8941ee55…` -> `e33d2999…`, 364 -> 356 items). `reputationRaceEnabled` stays dark
+(its story leg answers only over the lived route network: the owner's `routeLifecycleEnabled`,
+and a genesis with no caller, FPQ-44) and `errandSpineEnabled` stays dark (its envoy road is the
+owner's envoy keys).
+
+**Owed at the landing, and not this unit's to take:** the observed-shape corpus discovers flags
+from the raw text of `src/domain`, and the new `mediationGeneralizedEnabled: true` line is a
+discovery, so `tests/lint/writerReach.walker.test.js` reds on its thinKeys and digest arms until
+the governed observed-shape rung and the writer-reach rebank (the chair's); `simulationRules.js` is
+an input of the edge-shared `aiCharterBundle` and `aiOutputSchemaBundle`, so their freshness arms
+red until the landing's rebuild; the lighting census moves by this unit's new test titles.
