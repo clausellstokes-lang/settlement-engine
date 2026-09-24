@@ -194,10 +194,27 @@ function removeDeletedSettlementReferences(saves, id) {
 }
 
 /**
+ * The rows THE SCRUB moved, by OBJECT IDENTITY against the snapshot this act took
+ * before it ran (EM-F3d-b). `scrubDeletedCounterparty` replaces a row it withdraws on
+ * and leaves every other one the same object, so identity is an exact reading of what
+ * moved; a deep compare would be a second, weaker one. A row the act DELETED is absent
+ * from `afterRows` and is therefore never offered back to the batch, and a row the act
+ * only removed from a campaign is untouched here because `removeFromCampaign` writes
+ * campaigns rather than saves.
+ */
+function scrubbedRowIds(beforeRows, afterRows) {
+  const before = new Map((beforeRows || []).map(row => [String(row?.id), row]));
+  return (afterRows || [])
+    .filter(row => before.has(String(row?.id)) && before.get(String(row?.id)) !== row)
+    .map(row => row.id);
+}
+
+/**
  * Build the Library's delete handlers outside SettlementsPanel's max-lines wall.
  * The store lock spans the awaited cloud batch, then the successful ids pass
  * through removeSavedSettlement with that lock token so campaign membership and
- * queued intentions are pruned before another advance can start.
+ * queued intentions are pruned before another advance can start — and the rows that
+ * chokepoint's edge scrub moved go down in one further batch of the SAME act.
  */
 export function createLibraryDeleteHandlers({
   ownerId,
@@ -223,13 +240,50 @@ export function createLibraryDeleteHandlers({
     return result;
   };
 
-  const removeSuccessfulIds = (ids, mutationToken) => {
+  /**
+   * ⭐ THE CHOKEPOINT, AND THE SCRUB'S DURABLE HALF (EM-F3d-b; U110 — the second half of
+   * the verifier's STOP-2, whose first half EM-F3d landed).
+   *
+   * THE DEFECT, MEASURED. EM-F3d made `removeSavedSettlement` withdraw every PENDING
+   * decree that named the row the DM just deleted. This act ran its batch BEFORE that
+   * chokepoint, so the batch carried the UN-SCRUBBED registries: the scrub reached the
+   * live view and never the store, and a RELOAD re-read a pending decree naming an id
+   * that no longer exists — which EM-F3b's claim walk then hands to the next
+   * counterparty. Its acceptance line, at the base: the persisted member registry read
+   * `['d_far:pending']` where the record read withdrawn.
+   *
+   * ⛔ WHY THE SCRUB DOES NOT PRECEDE THE BATCH, WHICH IS THE WHOLE CHOICE HERE. A
+   * refused batch must leave the record exactly as it found it. A `target_deleted`
+   * withdrawal written for a delete that never happened is design §20.3's reason saying
+   * something FALSE about a save that is still there — and the OPEN record's registry is
+   * `state.settlement.decrees` rather than a library row, so `rollbackLibraryMutation`
+   * could not take it back. So the order is: persist the delete, scrub at the chokepoint,
+   * then persist what the scrub moved. `deleteScrub.test.js` D8 pins the refused branch.
+   *
+   * ⛔ THE SCRUB IS AWAITED RATHER THAN RACED. It rides the chokepoint's receipt as a
+   * promise because it reaches the edit lane by a dynamic import (that lane is kept out
+   * of first paint); awaiting it is what makes the rows read below the finished ones.
+   *
+   * ⛔ THE SECOND BATCH IS THE SCRUB'S AND NOTHING ELSE'S: only rows whose object identity
+   * changed across the chokepoint go into it, so a delete that named nobody sends exactly
+   * the one batch it always sent (D7, a golden by copy). Its own refusal is reported by
+   * the persister — the same error text and the same operation-scoped rollback — and does
+   * not turn a delete that DID happen into a refusal, because `ok` describes the delete.
+   */
+  const removeSuccessfulIds = async (ids, mutationToken) => {
     const remove = useStore.getState().removeSavedSettlement;
     if (typeof remove !== 'function') throw new Error('Settlement deletion action is unavailable.');
+    const beforeScrub = useStore.getState().savedSettlements || [];
+    const scrubs = [];
     for (const id of ids) {
       const result = remove(id, { mutationToken });
       if (result?.ok === false) return result;
+      scrubs.push(result?.scrubbed);
     }
+    await Promise.all(scrubs);
+    const afterScrub = useStore.getState().savedSettlements || [];
+    const scrubbedIds = scrubbedRowIds(beforeScrub, afterScrub);
+    if (scrubbedIds.length > 0) await persistBatch(afterScrub, scrubbedIds);
     return { ok: true };
   };
 

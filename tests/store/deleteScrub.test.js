@@ -28,6 +28,15 @@
  * `[]`, counts against numbers, one JSON string against another, one boolean against
  * `false` — so no `// anchored:` marker is owed anywhere in this file.
  *
+ * ⭐ EM-F3d-b ADDS THE DURABLE HALF (U110; the second half of the verifier's STOP-2). D1–D5
+ * above drive the STORE's delete chokepoint and stop at the live view. D6–D8 below drive the
+ * LIBRARY'S OWN DELETE ACT — `createLibraryDeleteHandlers` over `createLibraryBatchPersister`,
+ * the two factories `SettlementsPanel` itself composes — and then RELOAD, re-reading the rows
+ * through the save service exactly as the next boot does. The measured gap they convict: the
+ * act ran its batch BEFORE the chokepoint, so the batch carried the UN-SCRUBBED registries and
+ * a reload re-read a PENDING decree naming an id that no longer exists (NOTE-10's class: a
+ * write that reaches the view and not the store).
+ *
  * @enforced-by this test
  */
 import { beforeEach, describe, expect, test, vi } from 'vitest';
@@ -37,6 +46,28 @@ import { immer } from 'zustand/middleware/immer';
 // Force LOCAL mode: the save service binds localStorage, never a network client.
 vi.mock('../../src/lib/supabase.js', () => ({
   supabase: null, isConfigured: false, setSessionPersistence: () => {},
+}));
+
+/**
+ * ⛔ THE ONE PIECE OF ASSEMBLY STOOD IN FOR (EM-F3d-b). The Library's delete act reaches the
+ * store through the app's SINGLETON (`src/store/index.js`), which composes every slice in the
+ * estate — and nothing in D1's graph imports it, so this seat is inert for D1–D5. It hands the
+ * act THIS file's own composed store: the same real settlement slice, the same real edit lane,
+ * the same real save service. The module under test is the product's, unchanged.
+ */
+const storeSeat = vi.hoisted(() => ({ current: /** @type {any} */ (null) }));
+vi.mock('../../src/store/index.js', () => {
+  const useStore = (selector) => selector(storeSeat.current.getState());
+  useStore.getState = () => storeSeat.current.getState();
+  useStore.subscribe = () => () => {};
+  return { useStore };
+});
+
+/** Analytics is a transport with its own suites; this act only counts a deletion. */
+vi.mock('../../src/lib/analytics.js', () => ({
+  track: () => {},
+  Funnel: { track: () => {} },
+  EVENTS: new Proxy({}, { get: (_target, key) => String(key) }),
 }));
 
 // Map-backed localStorage shim (EM-F1's own idiom) — node env, no jsdom. Installed at
@@ -57,6 +88,9 @@ import { RESOLUTION_MISSING_KINDS, WITHDRAWN_REASON_KINDS } from '../../src/doma
 import { counterpartiesOf, counterpartyBadgeOf, mintPhantomIntent } from '../../src/store/phantomMintAction.js';
 import { DELETE_SCRUB_REASONS, selectDecrees, stageDecree } from '../../src/store/editSlice.js';
 import { createSettlementSlice } from '../../src/store/settlementSlice.js';
+import {
+  createLibraryBatchPersister, createLibraryDeleteHandlers,
+} from '../../src/components/settlements/libraryDeleteHandlers.js';
 
 const TOWN_SEED = 'seed-ashford';
 const SAVE_ID = 'row-ashford';
@@ -297,5 +331,171 @@ describe('EM-F3d — a delete scrubs every edge that names the deleted save', ()
       RESOLUTION_MISSING_KINDS.includes(selectDecrees(store.getState())[0].withdrawnReason.missing),
       Object.isFrozen(DELETE_SCRUB_REASONS),
     ], 'the door widens no vocabulary of its own').toEqual([true, true, true]);
+  });
+});
+
+/* ── EM-F3d-b · THE DURABLE HALF (U110) ─────────────────────────────────────── */
+
+/**
+ * THE LIBRARY'S DELETE ACT, assembled from the product's own two factories over this file's
+ * real store and real save service — the same composition `SettlementsPanel` performs at
+ * render (`createLibraryBatchPersister` for the batch, `createLibraryDeleteHandlers` for the
+ * order it is sent in). Nothing here re-implements either: the arms below drive the module.
+ *
+ * The deletion LOCK is campaignSlice's and this file does not compose that slice, so it is
+ * seated with the one thing the act asks of it — a mutation token. Its refusals are
+ * `deleteMemberPrunesCampaign.test.js`'s own ground and are not re-proved here.
+ */
+function seatLibraryAct(store, { onPersistenceError = () => {} } = {}) {
+  storeSeat.current = store;
+  store.setState((state) => {
+    state.withSettlementDeletionLock = async (_ids, operation) =>
+      operation({ mutationToken: 'em-f3d-b-lock', campaignIds: [] });
+  });
+  const rows = store.getState().savedSettlements || [];
+  const seat = {
+    ownerId: null,
+    detail: null,
+    setDetail: () => {},
+    setPersistenceError: onPersistenceError,
+    setSaves: (next, hydration = null) => store.getState().setSavedSettlements(next, hydration),
+  };
+  return createLibraryDeleteHandlers({
+    ...seat,
+    saves: rows,
+    setDeleteId: () => {},
+    persistBatch: createLibraryBatchPersister({ ...seat, previousSaves: rows }),
+  });
+}
+
+/**
+ * A SECOND MEMBER whose own registry holds a PENDING decree against `counterparty`, written
+ * THROUGH THE SAVE SERVICE so the arm's "before" is a genuinely persisted row rather than a
+ * cache entry. D4's own seeding, kept separate so that landed arm is not edited here.
+ */
+async function seedMemberAgainst(store, counterparty) {
+  await saves.save({
+    id: 'row-bramford', name: 'Bramford', tier: 'town', seed: 'seed-bramford',
+    settlement: {
+      _seed: 'seed-bramford', id: 'set-bramford', name: 'Bramford', tier: 'town',
+      npcs: [], factions: [],
+      decrees: [{
+        id: 'd_far', status: 'pending', addedBy: 'dm', orderIndex: 0, orderedAt: 'then',
+        op: makeOp('declare-war', { kind: OP_TYPES['declare-war'].target, id: counterparty },
+          { counterparty }),
+      }],
+    },
+    config: null, aiData: {}, versionHistory: [],
+  });
+  const rows = await saves.list();
+  store.setState((state) => { state.savedSettlements = rows; });
+  return rows;
+}
+
+/** THE RELOAD: one row's registry as the next boot reads it, from the save service itself. */
+async function persistedStatusesOf(saveId) {
+  const row = (await saves.list()).find((entry) => String(entry.id) === String(saveId));
+  return (row?.settlement?.decrees || []).map((entry) => `${entry.id}:${entry.status}`);
+}
+
+describe('EM-F3d-b — the delete act persists the scrub it made', () => {
+  test('D6: THE RELOAD — a reboot reads the withdrawal, never the un-scrubbed registry', async () => {
+    const store = await seatedStore();
+    const greymoor = await mint(store, 'Greymoor');
+    await seedMemberAgainst(store, String(greymoor.id));
+
+    // THE KEY IS ALREADY CARRIED, MEASURED BEFORE THE ACT: `decrees` round-trips through the
+    // save service today, so this cure asks for NO persisted-shape change — only that the
+    // rows the scrub moved go down in the act that moved them.
+    expect(await persistedStatusesOf('row-bramford'),
+      'the persisted registry names the counterparty, pending').toEqual(['d_far:pending']);
+
+    const { deleteConfirmed } = seatLibraryAct(store);
+    expect(await deleteConfirmed(String(greymoor.id)),
+      'the act reported a clean delete').toEqual({ ok: true });
+
+    // ⭐ THE LINE THE GAP PRINTED: at the base this read `['d_far:pending']`, because the
+    // batch went down BEFORE the chokepoint scrubbed.
+    expect(await persistedStatusesOf('row-bramford'),
+      'THE PERSISTED REGISTRY SHOWS THE WITHDRAWAL').toEqual(['d_far:withdrawn']);
+
+    const reloaded = await saves.list();
+    const entry = reloaded.find((row) => String(row.id) === 'row-bramford').settlement.decrees[0];
+    expect(entry.withdrawnReason, 'with design §20.3\'s reason, naming the id that went')
+      .toEqual({ kind: 'target_deleted', missing: 'target', was: String(greymoor.id) });
+    expect(String(entry.op?.payload?.counterparty ?? ''),
+      'and the DM\'s own words are unedited on the persisted row').toBe(String(greymoor.id));
+    expect(reloaded.filter((row) => String(row.id) === String(greymoor.id)).length,
+      'the deleted row has left the persisted library').toBe(0);
+  });
+
+  test('D7: a delete with NO edges persists byte-equal to today, in exactly ONE batch', async () => {
+    const store = await seatedStore();
+    const greymoor = await mint(store, 'Greymoor');
+    const harrowfen = await mint(store, 'Harrowfen');
+    await seedMemberAgainst(store, String(harrowfen.id));
+
+    // THE GOLDEN, BY COPY: the persisted library as it stands, minus the row about to go.
+    const before = JSON.stringify((await saves.list())
+      .filter((row) => String(row.id) !== String(greymoor.id)));
+
+    const batch = vi.spyOn(saves, 'mutateBatch');
+    const { deleteConfirmed } = seatLibraryAct(store);
+    await deleteConfirmed(String(greymoor.id));
+    const sent = batch.mock.calls.length;
+    batch.mockRestore();
+
+    expect(JSON.stringify(await saves.list()),
+      'a delete nothing names leaves every persisted row exactly as it was').toBe(before);
+    expect(sent, 'and it sends the one batch it always sent').toBe(1);
+  });
+
+  test('D8: THE ORDER\'S COUNTERFORCE — a REFUSED batch withdraws nothing, on the record or on disk', async () => {
+    const store = await seatedStore();
+    const greymoor = await mint(store, 'Greymoor');
+    await seedMemberAgainst(store, String(greymoor.id));
+    stageAgainst(store, 'd_war', String(greymoor.id));
+
+    const errors = [];
+    const batch = vi.spyOn(saves, 'mutateBatch').mockRejectedValue(new Error('offline'));
+    const { deleteConfirmed } = seatLibraryAct(store, {
+      onPersistenceError: (text) => errors.push(text),
+    });
+    const refused = await deleteConfirmed(String(greymoor.id));
+    batch.mockRestore();
+
+    // ⛔ THIS IS WHY THE SCRUB CANNOT PRECEDE THE BATCH. A `target_deleted` withdrawal written
+    // for a delete that never happened is design §20.3's reason saying something FALSE about a
+    // save that is still there — and the OPEN record's registry is `state.settlement.decrees`
+    // rather than a library row, so the optimistic rollback could not take it back.
+    expect(refused, 'the act refused, naming the persistence')
+      .toEqual({ ok: false, reason: 'persist_failed' });
+    expect(statusesOf(store), 'the open record keeps its decree: the delete did not happen')
+      .toEqual(['d_war:pending']);
+    expect(await persistedStatusesOf('row-bramford'),
+      'and the persisted member registry is untouched').toEqual(['d_far:pending']);
+    expect((await saves.list()).filter((row) => String(row.id) === String(greymoor.id)).length,
+      'the row the DM tried to delete is still there').toBe(1);
+    expect(errors.filter((text) => typeof text === 'string').length,
+      'and the DM was told, once').toBe(1);
+  });
+
+  test('D9: THE BULK DOOR — the same act, the same durable half, over N deleted rows', async () => {
+    const store = await seatedStore();
+    const greymoor = await mint(store, 'Greymoor');
+    const harrowfen = await mint(store, 'Harrowfen');
+    await seedMemberAgainst(store, String(harrowfen.id));
+
+    const { bulkDeleteConfirmed } = seatLibraryAct(store);
+    expect(await bulkDeleteConfirmed([String(greymoor.id), String(harrowfen.id)]),
+      'both rows went in one act').toEqual({ ok: true });
+
+    // The Library's OTHER delete door shares the cured chokepoint call, so the member
+    // registry that named the second of them is withdrawn ON DISK as well.
+    expect(await persistedStatusesOf('row-bramford'),
+      'the persisted registry followed the bulk delete too').toEqual(['d_far:withdrawn']);
+    const reloaded = await saves.list();
+    expect(reloaded.filter((row) => [String(greymoor.id), String(harrowfen.id)]
+      .includes(String(row.id))).length, 'and both deleted rows have left the library').toBe(0);
   });
 });
