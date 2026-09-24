@@ -107,12 +107,14 @@ function strictText(v) {
  * virtual flag, read BY NAME with the strict idiom; this is the ONE read of the key in the
  * tree. Its lighting-order preconditions (the brokerages, statecraft, the mirror) are the
  * LIT-n unit's to judge, never doors here; `processLies` only runs under statecraft anyway.
+ * ⛔ ONE STATEMENT, ON PURPOSE (the chair's ruling on IN-2): the observed-shape corpus finds
+ * the flags it lights by scanning for `simulationRules…<key>` on ONE line, and a reader it
+ * cannot see is a true reader hidden from the writer-reach instrument.
  * @param {unknown} worldState @returns {boolean}
  */
 export function infoLureActive(worldState) {
   if (!beliefsActive(/** @type {Parameters<typeof beliefsActive>[0]} */ (asObject(worldState)))) return false;
-  const rules = asObject(asObject(worldState).simulationRules);
-  return rules.infoLureEnabled === true;
+  return asObject(asObject(worldState).simulationRules).infoLureEnabled === true;
 }
 
 // ── THE VOCABULARIES ──────────────────────────────────────────────────────────
