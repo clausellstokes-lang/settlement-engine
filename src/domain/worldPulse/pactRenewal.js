@@ -7,7 +7,7 @@
  * was the end: every clause lapsed on its own day and the record pruned in silence. In the
  * last weeks of an instrument's LONGEST live clause either court may now ask to renew it, the
  * other court answers by the same threshold every pact answer uses, and the two outcomes are
- * the whole of GR-5b:
+ * the whole of GR-5b (a court now asks on its own too, in its window's first weeks, below):
  *
  *   ACCEPTED ⇒ a `renewed` LINEAGE ACT on the LIVING record, never a re-mint at the pair key.
  *     The superseded clauses close, the same clauses are re-issued at their own spans from the
@@ -57,13 +57,23 @@
  * is when a court reckons its accounts, so a refused demand is raised again a year later rather
  * than at every answer. The DM's verb is the table's hand and waits for neither.
  *
+ * ── THE WORLD ASKS TOO (GR-RENEWAL U1) ──────────────────────────────────────────────
+ * The window was reachable only through the DM's verb until the pact stage consumed the seal's
+ * own predicate. Now, in an instrument's first weeks inside its window (as long as one answer
+ * takes on the pair's road), a court OWED something on the instrument asks its counterpart to
+ * renew it AS IS, through the same conjuncts the seal reads and only while the two are at
+ * peace. Any question it puts is answered after those weeks, so it asks once a window: a
+ * refusal is a clean lapse, and nothing chases it. A question already standing on the day the
+ * window opens defers the ask to its answer rather than losing it.
+ *
  * ── ONE HOME FOR THE FAMILY'S LOGIC (the chair's ruling FP-15) ─────────────────────
  * The window, the demand, the sheets, the supersession, the acts, the re-stamp, the clean lapse
  * and the strain all live HERE. The landed modules carry fold calls and nothing else: the tick's
  * answer step (`pactFormation.js :: advancePeacetimePacts`) hands a renewal or renegotiation row
  * to `settleRenewalProposal` and writes the ledger it is handed back, the same step asks
- * `openRenegotiationDemands` for the court's own demands, and the DM's verb (`realmVerbExecution.js`,
- * PROPOSE_PACT) drafts both words through `renewalClauseSheet`.
+ * `openRenewalProposals` for the court's own renewals before its crossings and
+ * `openRenegotiationDemands` for the court's own demands after them, and the DM's verb
+ * (`realmVerbExecution.js`, PROPOSE_PACT) drafts both words through `renewalClauseSheet`.
  *
  * ⚠ THIS LEAF WRITES NO TREATY LEDGER, AND THAT IS DELIBERATE. The oath-stamp totality
  * walker makes every module that writes `treaties` either a registered signing door or a
@@ -96,8 +106,7 @@
  * does not swear the new oath. The landed stamp doors are NOT retrofitted (R-20).
  *
  * ── WHAT THIS FAMILY DOES NOT DO, NAMED ───────────────────────────────────────────
- * No organic renewal opener and no re-draft of a renewal at the believed ratio (a renewal is
- * AS IS). No renegotiation evaluator of the answering court's own ratio (the answer is the one
+ * No re-draft of a renewal at the believed ratio (a renewal is AS IS). No renegotiation evaluator of the answering court's own ratio (the answer is the one
  * threshold every pact answer uses). No conversion (GR-5d). No news kind (GR-5e is the voice;
  * the verb's two registered pools already speak the order). No provenance write (`provenance`
  * records how an instrument BEGAN; the lineage says what happened since). No new top-level
@@ -123,11 +132,11 @@ import { oathHolderActive, stampSworn } from './oathHolder.js';
 import {
   PACT_LINEAGE_ACTS, amendPactInstrument, lineageOf, stackingCellOf, termIdOf, treatyRenewalActive,
 } from './pactAmendment.js';
-import { openPactProposal, pactCounterpartiesFor, settlePactProposal } from './pactProposals.js';
+import { answerDueTickFor, openPactProposal, pactCounterpartiesFor, settlePactProposal } from './pactProposals.js';
 import { PACT_TRIGGERS } from './pactTriggers.js';
 import { accrueStrainResentment } from './peaceTermsOverlay.js';
 import { round4, treatyPairKey } from './peaceTermsPrimitives.js';
-import { settlementStrength } from './relationshipEvolution.js';
+import { edgeKeyBetween, normalizeRelationshipType, settlementStrength } from './relationshipEvolution.js';
 import { courtPostureOf } from './strategicPosture.js';
 import { treatyTicksPerYearOf } from './treatyClock.js';
 import { treatyLedgerOf } from './treatyEnforcement.js';
@@ -750,6 +759,94 @@ export function settleRenewalProposal({ worldState, proposal, answer, tick, sett
         : `The instrument between ${fromId} and ${toId} ran out before the answer came, and there was nothing left to renew.`,
     },
   };
+}
+
+/**
+ * THE PAIR'S RELATIONSHIP RECORD, found through the edge that joins the two courts (FPQ-35: every
+ * relationship writer keys its record by the graph edge's id, and `edgeKeyBetween` is the plane's
+ * one pair reader), or the empty record when no edge joins them.
+ * @param {unknown} worldState @param {unknown} snapshot @param {string} a @param {string} b
+ * @returns {Record<string, unknown>}
+ */
+function relationBetween(worldState, snapshot, a, b) {
+  const key = edgeKeyBetween(edgesOf(snapshot), a, b);
+  return key ? recordOf(recordOf(recordOf(worldState).relationshipStates)[key]) : {};
+}
+
+/** ARE THE TWO COURTS AT WAR? The relationship overlay's own durable mark, the read the pact
+ *  stage's crossings and its answer step already make.
+ *  @param {unknown} worldState @param {unknown} snapshot @param {string} a @param {string} b */
+function atWarBetween(worldState, snapshot, a, b) {
+  return normalizeRelationshipType(text(relationBetween(worldState, snapshot, a, b).relationshipType)) === 'hostile';
+}
+
+/**
+ * DOES THIS COURT HOLD SOMETHING ON THE INSTRUMENT? A live clause it is owed, or one both courts
+ * hold, read through the one per-clause obligation reader (`treatyOrientation.js ::
+ * termObligationOf`). A court that only pays does not ask to keep paying: the court that asks is
+ * the court a clause runs TO, the formation door's own direction (a drafted clause runs to the
+ * court that asked for it).
+ * @param {unknown} treaty @param {string} courtId @param {number} tick @returns {boolean}
+ */
+function owedOn(treaty, courtId, tick) {
+  return liveTermsOf(treaty, tick).some((term) => {
+    const obligation = termObligationOf(recordOf(treaty), term);
+    return obligation.resolved && (obligation.mutual || obligation.obligeeId === courtId);
+  });
+}
+
+/**
+ * THE ASKING WEEKS: the window is open on `tick` and was still closed one answer's length earlier
+ * (`dwell`, the weeks this pair's road takes to carry a question and bring its answer back). Any
+ * question the court puts inside them is answered after them, so a court asks ONCE a window, and a
+ * refused renewal is a clean lapse the court does not chase; a question already standing between
+ * the pair on the day the window opens defers the ask to its answer instead of losing it.
+ * @param {unknown} treaty @param {number} tick @param {number} dwell @returns {boolean}
+ */
+function inAskingWeeks(treaty, tick, dwell) {
+  return renewalWindowOpenFor(treaty, tick) && !renewalWindowOpenFor(treaty, tick - dwell);
+}
+
+/**
+ * THE COURT'S OWN RENEWAL (GR-5b's organic proposer; READ 3 measured the window reachable only
+ * through the DM's verb: 0 of 1,094 proposals carried the trigger) — the fold
+ * `advancePeacetimePacts` makes into this leaf between its answers and its crossings, so a standing
+ * bond is reckoned before any new occasion. In an instrument's asking weeks, a court OWED
+ * something on it asks its counterpart to renew it AS IS, through the SAME conjuncts the editor's
+ * seal reads (`renewalCounterpartiesFor`: the pact verb's four, the layer lit, the window open),
+ * and only while the two are at peace. The row rides the ledger's one writer with the trigger
+ * `renewal`, and its answer is the tick's one answer road (`settleRenewalProposal`): accepted
+ * renews, refused is a clean lapse. Dark, the seal's conjuncts answer nothing (the layer's one
+ * gate is their first), so nothing is asked and the reference comes back untouched.
+ * @param {{worldState: Record<string, unknown>, ids: ReadonlyArray<string>, tick: number,
+ *   snapshot?: unknown, digest?: unknown, season?: unknown}} input
+ * @returns {{worldState: Record<string, unknown>, receipts: Array<Record<string, unknown>>}}
+ */
+export function openRenewalProposals({ worldState, ids, tick, snapshot = null, digest = null, season = null }) {
+  /** @type {Array<Record<string, unknown>>} */
+  const receipts = [];
+  const at = wholeTick(tick);
+  let state = worldState;
+  for (const courtId of ids) {
+    // The seal's own subjects, gate and all: dark, they are empty, so nothing is asked.
+    for (const counterpartId of renewalCounterpartiesFor(state, ids, courtId, at)) {
+      const standing = instrumentBetween(state, courtId, counterpartId);
+      const dwell = answerDueTickFor({ digest, fromId: courtId, toId: counterpartId, season, tick: at }).answerDueTick - at;
+      if (standing === null || !inAskingWeeks(standing.treaty, at, dwell) || !owedOn(standing.treaty, courtId, at)
+        || atWarBetween(state, snapshot, courtId, counterpartId)) continue;
+      const opened = openPactProposal({
+        worldState: state, from: courtId, to: counterpartId, trigger: RENEWAL_TRIGGER,
+        sheet: { terms: draftRenewalSheet(standing.treaty, at) }, tick: at, digest, season,
+      });
+      state = opened.worldState;
+      receipts.push({
+        kind: opened.proposal ? 'pact_renewal_proposed' : 'pact_not_proposed', tick: at, fromId: courtId, toId: counterpartId,
+        trigger: RENEWAL_TRIGGER, refusal: opened.refusal, transport: opened.proposal ? opened.proposal.transport : '',
+        receipt: `${courtId} asks ${counterpartId} to renew the instrument between them while its last clause still binds. ${opened.receipt}`,
+      });
+    }
+  }
+  return { worldState: state, receipts };
 }
 
 /**

@@ -97,7 +97,7 @@ import { amendPactInstrument, closeTermsBrokenByWar, termIdOf } from './pactAmen
 import {
   openPactProposal, pactFormationActive, pactProposalsOf, prunePactProposals, settlePactProposal,
 } from './pactProposals.js';
-import { openRenegotiationDemands, settleRenewalProposal } from './pactRenewal.js';
+import { openRenegotiationDemands, openRenewalProposals, settleRenewalProposal } from './pactRenewal.js';
 import {
   dependencyFearOf, scoreFaithCommunion, scoreMigrationPressure, scoreSharedThreat, scoreTradeDemand,
 } from './pactTriggers.js';
@@ -984,6 +984,10 @@ export function advancePeacetimePacts({
       offer01: answer.offer01, reserve01: answer.reserve01, receipt: answer.receipt,
     });
   }
+
+  // GR-RENEWAL U1: in an instrument's first window weeks, a court owed something on it asks to renew it, from its own leaf, before any new occasion is read.
+  const renewals = openRenewalProposals({ worldState: state, ids, tick, snapshot, digest, season });
+  state = renewals.worldState; receipts.push(...renewals.receipts);
 
   // ── 3. THE CROSSINGS. Every ordered pair, best occasion first, one proposal per pair. ──
   for (const fromId of ids) {
