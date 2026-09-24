@@ -27,9 +27,52 @@
  * Proof shape as its neighbours: straight-line literal `it`s under ONE literal `describe`,
  * its own `vitest` import, the real kernel and the real store leaf.
  *
+ * ⭐ EXTENDED BY U108 (EM-C1e; judgment 311) — WHICH MOMENT THE VOCABULARY IS READ AT, and
+ * the last arm of this file is the one that answers it. EM-C1c's seat NOTICED a second
+ * `add-npc`, staged between two advances, coming back `withdrawn` for a role the town had
+ * offered, and the question it left was whether §20.3 was working ("a pending decree that no
+ * longer resolves ... is resolved against the LIVE catalogues" at the head of the tick) or
+ * whether the bag was composed from the wrong tick — a valid act withdrawn being a quiet lie.
+ * MEASURED over the real store: it is §20.3 working. The advance's own result can MOVE the
+ * vocabulary (applying a roster order re-derives the member's record, and a record whose
+ * institutions were never generation's own comes back with generation's), and the bag the
+ * next advance composes is the reading of the world that tick ENTERS — the same world the
+ * hook applies the orders to. U108-1 pins that with a DISCRIMINATOR PAIR whose two verdicts
+ * can only both hold for one reading moment.
+ *
  * @enforced-by this test
  */
-import { describe, expect, it } from 'vitest';
+import { describe, expect, it, vi } from 'vitest';
+
+// U108's arm drives the REAL store, so the durable cloud-write seams a hydrated campaign
+// reaches are stubbed here exactly as tests/simulation/decreeChronicleVoice.test.js stubs
+// them. No arm above reaches one: the composer's three imports are the op catalogue, the
+// pool leaf and the kernel's own `saveId`, and nothing here reads a clock or a network.
+vi.mock('../../src/lib/saves.js', () => ({
+  saves: { update: vi.fn(() => Promise.resolve()), isConfigured: false },
+}));
+vi.mock('../../src/lib/campaigns.js', () => {
+  const cached = new Map();
+  const copy = (/** @type {any} */ value) => JSON.parse(JSON.stringify(value));
+  return {
+    isCampaignActive: (/** @type {any} */ campaign) => (campaign?.accessState || 'active') === 'active',
+    campaigns: {
+      loadCached: vi.fn((ownerId = 'anon') => copy(cached.get(ownerId) || [])),
+      cache: vi.fn((campaigns = [], ownerId = 'anon') => { cached.set(ownerId, copy(campaigns)); }),
+      list: vi.fn(() => Promise.resolve([])),
+      upsert: vi.fn((/** @type {any} */ campaign) => Promise.resolve(campaign?.id)),
+      delete: vi.fn(() => Promise.resolve()),
+      isConfigured: false,
+    },
+  };
+});
+vi.mock('../../src/lib/analytics.js', async (importOriginal) => {
+  const actual = /** @type {any} */ (await importOriginal());
+  return { ...actual, track: vi.fn() };
+});
+
+import { create } from 'zustand';
+import { immer } from 'zustand/middleware/immer';
 
 import { simulateCampaignWorldPulse } from '../../src/domain/worldPulse/pulseKernel.js';
 import { simulateCampaignWorldInterval } from '../../src/domain/worldPulse/advanceInterval.js';
@@ -37,6 +80,8 @@ import { stage, withdraw } from '../../src/domain/edit/registry.js';
 import { OP_TYPES } from '../../src/domain/edit/operations.js';
 import { poolValues } from '../../src/domain/edit/pools.js';
 import { decreeCataloguesForSaves } from '../../src/store/campaignAdvanceSession.js';
+import { createCampaignSlice } from '../../src/store/campaignSlice.js';
+import { createCampaignWorldPulseSlice } from '../../src/store/campaignWorldPulseSlice.js';
 
 const NOW = '2026-04-04T00:00:00.000Z';
 
@@ -381,4 +426,144 @@ describe('U97 — the advance composes a bag entry for every save the tick will 
     expect(await decreeCataloguesForSaves([historyOnly]), 'a realm with nothing pending composed a bag anyway')
       .toBeNull();
   });
+});
+
+/* ── U108 (EM-C1e) · THE MOMENT THE VOCABULARY IS READ AT ──────────────────────────────── */
+
+/** The seed the tick's re-derivation reads off the record it is about to re-generate. */
+const U108_SEED = 'u108::ashford';
+
+/** The file's own member save, carrying that seed and one person for the roster to hold. */
+const seededSave = (/** @type {string} */ id, /** @type {string[]} */ roles, /** @type {unknown[]|null} */ decrees) => {
+  const save = saveOf(id, roles, decrees);
+  return {
+    ...save,
+    settlement: {
+      ...save.settlement,
+      _seed: U108_SEED,
+      npcs: [{ id: 'npc.varn', name: 'Lord Varn', role: 'Reeve', status: 'active' }],
+    },
+  };
+};
+
+/** A localStorage double. The campaign cache is the only thing in this arm that reaches it. */
+function installLocalStorage() {
+  const data = new Map();
+  globalThis.localStorage = /** @type {any} */ ({
+    getItem: (/** @type {any} */ key) => data.get(String(key)) ?? null,
+    setItem: (/** @type {any} */ key, /** @type {any} */ value) => { data.set(String(key), String(value)); },
+    removeItem: (/** @type {any} */ key) => { data.delete(String(key)); },
+    clear: () => { data.clear(); },
+  });
+}
+
+/** The REAL store over the two real slices, holding one campaign and its one member save. */
+function storeWith(/** @type {any} */ save) {
+  installLocalStorage();
+  const store = create(immer((/** @type {any[]} */ ...a) => ({
+    savedSettlements: [], settlement: null, activeSaveId: null, phase: 'draft',
+    eventLog: [], locks: {}, generatedAt: null, editedAt: null, canonizedAt: null, lastExportAt: null,
+    ...createCampaignSlice(...a), ...createCampaignWorldPulseSlice(...a),
+  })));
+  store.setState((/** @type {any} */ state) => {
+    state.savedSettlements = [save];
+    state.campaigns = [{
+      id: 'camp-1', name: 'Realm', settlementIds: [save.id],
+      regionalGraph: { edges: [] },
+      wizardNews: { currentTick: 1, entries: [] },
+      worldState: { rngSeed: 'u108::vocabulary', tick: 1, canonizedAt: '2026-01-01T00:00:00.000Z' },
+    }];
+  });
+  return store;
+}
+
+/** The member save as the store holds it — read outside every producer, so it is plain. */
+const memberOf = (/** @type {any} */ store) => store.getState().savedSettlements[0];
+/** That member's live vocabulary, read with the PRODUCT's own reader and never transcribed. */
+const wordsOf = (/** @type {any} */ store) => [...poolValues(ROLE_POOL, memberOf(store).settlement)];
+/** Its registry, as the tick left it. */
+const rowsOf = (/** @type {any} */ store) => /** @type {any[]} */ (memberOf(store).settlement.decrees || []);
+/** ONE real advance of the realm, through the store's own action. */
+const advanceOnce = (/** @type {any} */ store) =>
+  store.getState().advanceCampaignWorld('camp-1', 'one_week', { now: NOW });
+
+/**
+ * Two further orders on the member's own registry, through EM-C1's own `stage`. The rows are
+ * lifted to plain objects first: they are read off the store outside any producer, and the
+ * newcomer's id is the ENTRY's so two orders are two people rather than one written twice.
+ */
+function stageBoth(/** @type {any} */ store, /** @type {any} */ first, /** @type {any} */ second) {
+  const rows = JSON.parse(JSON.stringify(rowsOf(store)));
+  const withFirst = stage(rows, { ...addNpc(first.role), target: { kind: 'npc', id: `npc-${first.id}` } },
+    { id: first.id, orderedAt: NOW });
+  const withBoth = stage(withFirst, { ...addNpc(second.role), target: { kind: 'npc', id: `npc-${second.id}` } },
+    { id: second.id, orderedAt: NOW });
+  store.setState((/** @type {any} */ state) => { state.savedSettlements[0].settlement.decrees = withBoth; });
+}
+
+describe('U108 — a decree is judged against the vocabulary OF THE WORLD IT IS APPLIED TO', () => {
+  it('U108-1 THE WITHDRAWAL IS THE WORLD\'S, NOT THE BAG\'S: a word the tick itself retired is withdrawn with §20.3\'s reason while a sibling staged from the SAME post-tick reading applies — one tick, one bag, two verdicts', async () => {
+    const store = storeWith(seededSave('a', ['Steward', 'Reeve'], staged('d1', 'Reeve')));
+
+    // ⭐ THE PRE-TICK VOCABULARY, MEASURED with the product's own reader over the very member
+    // the advance is about to hand the kernel — this file never types a live word.
+    const before = wordsOf(store);
+    expect([...before].sort(), 'the fixture town stopped offering exactly the two words it seeds')
+      .toEqual(['Reeve', 'Steward']);
+
+    await advanceOnce(store);
+    expect(rowsOf(store).map((row) => row.status),
+      'the first order APPLIED — the tick ran, and it is that application which moves the world below')
+      .toEqual(['applied']);
+
+    // ⛔ THE TICK'S OWN RESULT MOVED THE VOCABULARY, which is U108's whole premise and is a
+    // MEASUREMENT here rather than a claim: applying a roster order re-derives the member's
+    // record (`applyRosterDecreesAtTick` → the re-derivation seam), and a record whose
+    // institutions were never generation's own comes back holding generation's instead. Both
+    // directions are read, so a tree where the tick stopped moving the pool reds here rather
+    // than passing the pair below vacuously.
+    const after = wordsOf(store);
+    const retired = before.find((word) => !after.includes(word));
+    const minted = after.find((word) => !before.includes(word));
+    expect([typeof retired, typeof minted],
+      'the tick left the vocabulary unmoved, so nothing below discriminates anything')
+      .toEqual(['string', 'string']);
+
+    // ⭐ THE DISCRIMINATOR PAIR, STAGED TOGETHER BETWEEN THE TICKS. `retired` resolves ONLY
+    // against the world as it was BEFORE the first tick; `minted` ONLY against the world as
+    // that tick left it. Judged in ONE tick against ONE bag, the two verdicts name the moment
+    // the bag was read at and nothing else can produce them: a bag from the pre-tick world
+    // would apply `retired` and withdraw `minted`, a bag from a third world would withdraw
+    // both, and a resolver that refuses everything would withdraw both as well.
+    stageBoth(store, { id: 'd2', role: retired }, { id: 'd3', role: minted });
+
+    const bag = /** @type {any} */ (await decreeCataloguesForSaves(
+      [JSON.parse(JSON.stringify(memberOf(store)))]));
+    expect(bag.poolsBySave.a[ROLE_POOL],
+      'the bag the advance composes IS the reading of the world the tick enters')
+      .toEqual(poolValues(ROLE_POOL, memberOf(store).settlement));
+    expect([bag.poolsBySave.a[ROLE_POOL].includes(retired), bag.poolsBySave.a[ROLE_POOL].includes(minted)],
+      'and it holds the live word while the retired one is gone from it')
+      .toEqual([false, true]);
+
+    await advanceOnce(store);
+    const judged = rowsOf(store);
+    expect(judged.map((row) => [row.id, row.status]),
+      'the retired word is withdrawn and the live one applies, in the same tick and the same bag')
+      .toEqual([['d1', 'applied'], ['d2', 'withdrawn'], ['d3', 'applied']]);
+    expect(judged[1].withdrawnReason, '§20.3\'s reason NAMES the word that left the world')
+      .toEqual({ kind: 'vocabulary-moved', missing: 'pool-value', was: retired });
+    expect([judged[1].op.payload.role, judged[1].orderIndex],
+      'and the withdrawn entry keeps its place and every word the DM ordered (§20.3: never dropped)')
+      .toEqual([retired, 1]);
+    expect(String(judged[2].tickRef).length > 0,
+      'while the sibling wears the tick that carried it out').toBe(true);
+
+    // ⛔ AND THE VOCABULARY DID NOT MOVE ACROSS THIS SECOND TICK. That is what makes the pair
+    // a measurement of the bag's MOMENT rather than of a second move — `minted` was staged
+    // and applied against one and the same reading — and it is U108's headline in one line:
+    // a valid act is never withdrawn for a vocabulary that did not move.
+    expect(wordsOf(store), 'the second tick left the vocabulary where the first tick put it')
+      .toEqual(after);
+  }, 20000);
 });
