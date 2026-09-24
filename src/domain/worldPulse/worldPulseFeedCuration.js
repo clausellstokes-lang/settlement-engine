@@ -1,4 +1,5 @@
 import { clamp01 } from '../../kernel/math.js';
+import { WAR_OVERTAKEN_PEACE_SUIT_REASON } from './proposalAdmission.js';
 
 /** @typedef {import('./pulseShapes.js').PulseOutcome} PulseOutcome */
 /** @typedef {import('../region/wizardNews.js').RawWizardNewsEntry} RawWizardNewsEntry */
@@ -200,9 +201,11 @@ export function stateOnlyRumorSeedsFromHistory(pulseHistory = [], publicEntries 
 
 /**
  * Retire the public question that belonged to a proposal made obsolete by the
- * v4 record-mode upgrade or by a bilateral peace offer whose live relationship
- * has moved on. This is deliberately a surgical filter rather than a feed
- * normalization: unrelated entries and feed metadata keep their exact shape.
+ * v4 record-mode upgrade, by a bilateral peace offer whose live relationship
+ * has moved on, or by a war opening against a court whose peacetime suit still
+ * waited (FP-17, proposalAdmission.js :: retireWarOvertakenPeaceSuits). This is
+ * deliberately a surgical filter rather than a feed normalization: unrelated
+ * entries and feed metadata keep their exact shape.
  * @param {CuratedWorldState} worldState
  * @param {NewsFeed} wizardNews
  * @returns {{ worldState: CuratedWorldState, wizardNews: NewsFeed }}
@@ -211,7 +214,8 @@ export function reconcileSupersededProposalNews(worldState, wizardNews) {
   const sourceIds = new Set((worldState?.proposals || [])
     .filter((/** @type {ProposalLike} */ proposal) => proposal?.status === 'superseded'
       && (String(proposal?.supersessionReason || '').startsWith('record_mode_upgrade')
-        || proposal?.supersessionReason === 'bilateral_peace_lapsed'))
+        || proposal?.supersessionReason === 'bilateral_peace_lapsed'
+        || proposal?.supersessionReason === WAR_OVERTAKEN_PEACE_SUIT_REASON))
     .map((/** @type {ProposalLike} */ proposal) => proposal?.outcome?.id)
     .filter(Boolean)
     .map(String));

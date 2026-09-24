@@ -15,9 +15,11 @@ import { classifyRecurringConditionCandidate } from './conditionRefreshRecordMod
 import {
   admitGuaranteedProposalOutcomes,
   buildProposalDocket,
+  peacetimeSuitOvertakenByWar,
   PROPOSAL_DOCKET_POLICY,
   proposalDocketAllows,
   recordProposalAdmission,
+  retireWarOvertakenPeaceSuits,
 } from './proposalAdmission.js';
 import { isMajorOutcome } from './decisionTier.js';
 import { activeChannelsFrom } from '../region/index.js';
@@ -168,6 +170,7 @@ export function suppressEquivalentPendingProposalCandidates(candidates, worldSta
     const proposal = proposalRecord(raw);
     if (proposal?.status !== 'pending') continue;
     if (proposalRequiresRecordModeSupersession(proposal)) continue;
+    if (peacetimeSuitOvertakenByWar(proposal, worldState)) continue; // FP-17: a dead question holds nothing
     const key = proposalSemanticKey(proposal.outcome);
     if (key) pendingKeys.add(key);
   }
@@ -197,6 +200,12 @@ export function suppressEquivalentPendingProposalCandidates(candidates, worldSta
  * defend are unconditionally suppressive. Close those known legacy rows even
  * when no equivalent candidate emits this tick. Retain each as an audit
  * tombstone; only status metadata changes.
+ *
+ * THIS IS THE TICK'S ONE DOCKET-ROW SUPERSESSION SEAM (pulseKernel.js calls it
+ * once per pulse, after admission, and reconciles the feed right after), so the
+ * docket's second retirement rides it rather than a kernel edit (L1): FP-17's
+ * peacetime suits a war overtook (proposalAdmission.js ::
+ * retireWarOvertakenPeaceSuits), which is the identity when nothing matches.
  * @template T
  * @param {T} worldState
  * @param {{ tick?: number, now?: string|null }} [context]
@@ -221,9 +230,9 @@ export function supersedeLegacyRecordModeProposals(worldState, context = {}) {
       supersessionReason: 'record_mode_upgrade',
     };
   });
-  return changed
+  return retireWarOvertakenPeaceSuits(changed
     ? /** @type {T} */ (/** @type {unknown} */ ({ ...state, proposals: nextProposals }))
-    : worldState;
+    : worldState, context);
 }
 
 function pressureConditionCandidate(/** @type {any} */ pressure, /** @type {any} */ tick, /** @type {Record<string, unknown> | null} */ rules = null) {

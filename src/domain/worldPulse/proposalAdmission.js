@@ -127,6 +127,116 @@ export function isOneShotVerdictOutcome(candidate) {
   return ONE_SHOT_VERDICT_RULE_IDS.includes(String(record?.ruleId ?? ''));
 }
 
+/**
+ * FP-17 (the chair's ruling of 2026-09-24, CURE LANE FP-PEACE-1 U1; vetoable) — THE STALE
+ * PEACETIME SUIT RETIRES WHEN THE WAR BEGINS. A `strategy_sue_for_peace` row proposed while its
+ * court was at peace asks the DM to step a label down in peacetime. Once a war opens against that
+ * court (a live deployment, the court as attacker OR target, whose opening tick is LATER than the
+ * row's), the question's premise is dead: a war-time peace is the war-time offer's, and the stale row
+ * was holding one of the court's three minor places while nobody could answer it (measured:
+ * findings/FP-PEACE-SUIT.md §0 item 2, four of the five refused wars). The docket reads such a row
+ * as absent, exactly as it reads a row awaiting record-mode supersession, and the tick's docket-row
+ * supersession seam retires it (`retireWarOvertakenPeaceSuits`), so the lane frees at the war's
+ * opening. Rows the ruling does not reach keep their places: a suit proposed in or after the war's
+ * opening tick (the WR-1-dark war-time suit), a bilateral offer (`proposalPayload.peaceOffer`, the
+ * marker `warPeaceDecision.js :: isBilateralPeaceOffer` reads; its reader graph is not imported into
+ * this light module), and every other question. The exemption list above is untouched.
+ *
+ * COURT, NOT PAIR (vetoable): a peacetime row names its counterparty only through the edge id in
+ * `relationshipKey`, and neither worldState nor a relationship record carries that edge's endpoints
+ * (the regional graph does, and no docket seam receives it), so the retirement reads the suing
+ * court's own war. A peacetime suit the court made toward a third court retires with it.
+ */
+export const WAR_OVERTAKEN_PEACE_SUIT_REASON = 'peacetime_suit_overtaken_by_war';
+
+/**
+ * The latest opening tick of a live deployment touching each court, as attacker or as target.
+ * @param {Record<string, unknown>|null} state
+ * @returns {Map<string, number>}
+ */
+function latestWarOpeningByCourt(state) {
+  /** @type {Map<string, number>} */
+  const latest = new Map();
+  const deployments = asRecord(state?.deployments);
+  if (!deployments) return latest;
+  for (const [attackerId, raw] of Object.entries(deployments)) {
+    const deployment = asRecord(raw);
+    const opened = deployment?.sinceTick;
+    if (typeof opened !== 'number' || !Number.isFinite(opened)) continue;
+    const targetId = deployment?.targetId;
+    const courts = [attackerId, typeof targetId === 'string' || typeof targetId === 'number' ? String(targetId) : ''];
+    for (const court of courts) {
+      if (!court) continue;
+      const prior = latest.get(court);
+      if (prior === undefined || opened > prior) latest.set(court, opened);
+    }
+  }
+  return latest;
+}
+
+/**
+ * @param {unknown} raw a proposal row
+ * @param {Map<string, number>} openings from latestWarOpeningByCourt
+ * @returns {boolean}
+ */
+function overtakenByWar(raw, openings) {
+  const proposal = asRecord(raw);
+  if (proposal?.status !== 'pending' || !openings.size) return false;
+  const outcome = asRecord(proposal.outcome);
+  if (outcome?.candidateType !== 'strategy_sue_for_peace') return false;
+  if (asRecord(outcome.proposalPayload)?.peaceOffer === true) return false;
+  const proposedAt = proposal.tick ?? outcome.generatedAtTick;
+  if (typeof proposedAt !== 'number' || !Number.isFinite(proposedAt)) return false;
+  const court = outcome.targetSaveId;
+  const opened = typeof court === 'string' || typeof court === 'number' ? openings.get(String(court)) : undefined;
+  return opened !== undefined && opened > proposedAt;
+}
+
+/**
+ * Whether this pending row is a peacetime suit a war has overtaken (FP-17 above).
+ * @param {unknown} proposal
+ * @param {unknown} worldState
+ * @returns {boolean}
+ */
+export function peacetimeSuitOvertakenByWar(proposal, worldState) {
+  return overtakenByWar(proposal, latestWarOpeningByCourt(asRecord(worldState)));
+}
+
+/**
+ * THE DOCKET'S WRITER FOR FP-17: retire every pending peacetime suit a war has overtaken, as a
+ * terminal 'superseded' row carrying the estate's retirement stamp (the shape
+ * `candidateEvents.js :: supersedeLegacyRecordModeProposals` writes), and nothing else. The row is
+ * kept as an audit tombstone. The same world reference when nothing is retired.
+ * @template T
+ * @param {T} worldState
+ * @param {{ tick?: number, now?: string|null }} [context]
+ * @returns {T}
+ */
+export function retireWarOvertakenPeaceSuits(worldState, context = {}) {
+  const state = asRecord(worldState);
+  const rows = state?.proposals;
+  if (!state || !Array.isArray(rows) || rows.length === 0) return worldState;
+  const openings = latestWarOpeningByCourt(state);
+  if (!openings.size) return worldState;
+  let changed = false;
+  const next = rows.map((raw) => {
+    if (!overtakenByWar(raw, openings)) return raw;
+    changed = true;
+    const proposal = /** @type {Record<string, unknown>} */ (raw);
+    return {
+      ...proposal,
+      status: 'superseded',
+      updatedAt: context.now ?? proposal.updatedAt ?? proposal.createdAt ?? null,
+      supersededAt: context.now ?? null,
+      supersededAtTick: typeof context.tick === 'number' && Number.isFinite(context.tick) ? context.tick : null,
+      supersessionReason: WAR_OVERTAKEN_PEACE_SUIT_REASON,
+    };
+  });
+  return changed
+    ? /** @type {T} */ (/** @type {unknown} */ ({ ...state, proposals: next }))
+    : worldState;
+}
+
 /** @param {unknown} candidate @returns {string} */
 function stableAdmissionKey(candidate) {
   const record = asRecord(candidate);
@@ -167,11 +277,15 @@ export function buildProposalDocket(worldState, realmSize = 0) {
   const counts = { minor: 0, major: 0 };
   /** @type {Record<string, ProposalLaneCounts>} */
   const bySettlement = {};
+  const openings = latestWarOpeningByCourt(state);
 
   for (const raw of rows) {
     const proposal = asRecord(raw);
     if (proposal?.status !== 'pending') continue;
     if (proposalRequiresRecordModeSupersession(proposal)) continue;
+    // FP-17: a peacetime suit a war overtook is read as absent in the war's own opening tick; the
+    // tick's supersession seam retires the row after admission.
+    if (overtakenByWar(proposal, openings)) continue;
     const outcome = proposal?.outcome;
     const lane = isMajorOutcome(outcome) ? 'major' : 'minor';
     const settlementKey = settlementKeyOf(outcome);
