@@ -110,7 +110,9 @@ describe('four durable prose-family exact-totality contract', () => {
       // ⭐ THE OTHER FOUR NULL HOMES ARE UNCHANGED, INCLUDING THE RUMOUR-SEED LANE THAT MOVED LAST
       // TIME. Four of five homes standing still is what keeps this a null-RETENTION arm and not a
       // corpus-size arm — a cause that moved every home would prove nothing about retention.
-      'pulseHistory[].impactDigest[].channelType': 150,
+      // FP BATCH 3 (2026-09-24): 150 → 151 — ONE more impact-digest record, the SAME reading of the same arm a fourth time;
+      // the other four null homes UNCHANGED. Attributed by bisect to CURE-PEACE-1 U1 (c9b24fe51), see prose-family-contract.mjs.
+      'pulseHistory[].impactDigest[].channelType': 151,
       'pulseHistory[].mechanicalOutcomes[].type': 4,
       // TE36 (ODQ §271): 30 → 19. The retired bare-decline outcomes were seeding rumours;
       // the null-VALUE census follows the outcomes that produced them. Every other null home
@@ -163,7 +165,8 @@ describe('four durable prose-family exact-totality contract', () => {
     // TE36 (ODQ §271): the digest follows the counts it hashes. It is re-recorded here and in
     // prose-family-contract.mjs's EXPECTED_ROWS_SHA256 together, which is what keeps the
     // test-side and library-side denominators from ever disagreeing.
-    expect(live.rowsSha256).toBe('4cf433b2d508986fad5a1afdb8c2bd700751186411e87c179d39b927ff849a39');
+    // FP BATCH 3 (2026-09-24): 4cf433b2… → 438fe9c4…, re-recorded together with EXPECTED_ROWS_SHA256 (the bytes hold at 8271).
+    expect(live.rowsSha256).toBe('438fe9c4a22d184c4133f0151216611d6a554e9673b063637b215f85f64f7466');
     const counted = live.rows.findIndex((row) => row.occurrences > row.distinctValues);
     const movements = [
       [...clone(live.rows), { family: 'timeline', path: 'zz', field: 'type', distinctValues: 1, occurrences: 1 }],
@@ -184,7 +187,9 @@ describe('four durable prose-family exact-totality contract', () => {
     // WAR LANDING (§876): 1064/5199 → 1067/5263, the same seven off the new totals (1074 − 7,
     // 5270 − 7). `chronicle` is byte-identical at 7/7/7 for the third re-record running, which is
     // why this counterfeit's arithmetic keeps tracking with a single subtraction.
-    counterfeit.totals = { families: 3, identities: 56, distinctValues: 1067, occurrences: 5263 };
+    // FP BATCH 3 (2026-09-24): 1067/5263 → 1071/5285, the same seven off the new totals (1078 − 7, 5292 − 7); `chronicle`
+    // byte-identical at 7/7/7 for the fourth re-record running.
+    counterfeit.totals = { families: 3, identities: 56, distinctValues: 1071, occurrences: 5285 };
     counterfeit.rowsSha256 = proseFamilyRowsSha256(counterfeit.rows);
     expect(() => validateProseFamilyBaseline(counterfeit)).toThrow(/immutable/);
     for (const mutate of [
@@ -225,11 +230,15 @@ describe('four durable prose-family exact-totality contract', () => {
     // WHOLE movement on `5a529f100` (T4 SEAT-2b) and measures ZERO from every other pick and from
     // all three WAR mini-window cars — including W-MEM's `publishRuling` funnel, which the lane
     // brief named as the cause and which this corpus never reaches.
-    expect(familyTotal(live, 'pulseHistory')).toEqual({ family: 'pulseHistory', identities: 50, distinctValues: 1051, occurrences: 5075 });
+    // FP BATCH 3 (2026-09-24): 1051/5075 → 1055/5097 — sixteen pulseHistory rows grow by the ONE new wizard-news id's
+    // impact digest and its selected/consequence beats; identities 50 HOLD. Attributed by bisect to CURE-PEACE-1 U1 (c9b24fe51).
+    expect(familyTotal(live, 'pulseHistory')).toEqual({ family: 'pulseHistory', identities: 50, distinctValues: 1055, occurrences: 5097 });
     const history = scalarRows.filter((row) => row.root === 'worldState');
     expect([...new Set(history.map((row) => row.path[1].value))]).toEqual([...Array(12).keys()]);
     const headline = (home) => live.rows.find((row) => row.path === `pulseHistory[].${home}[].headline`);
-    expect(headline('selectedOutcomes')).toMatchObject({ distinctValues: 78, occurrences: 153 });
+    // FP BATCH 3 (2026-09-24): `selectedOutcomes` 78/153 → 78/154 (one occurrence, no new spelling); `mechanicalOutcomes` HOLDS at
+    // 28/53; `consequenceOutcomes` 72/184 → 72/185 (one occurrence, no new spelling).
+    expect(headline('selectedOutcomes')).toMatchObject({ distinctValues: 78, occurrences: 154 });
     // TE36: the two lanes that carried the retired family move; `selectedOutcomes` above does
     // NOT, because ordinary population drift was already `state_only` and never selected.
     // mechanical distinctValues RISES (24 → 29) while its occurrences fall — the retired
@@ -244,7 +253,7 @@ describe('four durable prose-family exact-totality contract', () => {
     // `consequenceOutcomes` 73/184 → 72/184, losing one spelling and no occurrence — the exact
     // mirror image, and between them the arithmetic of a re-deal rather than of a gain or a loss.
     expect(headline('mechanicalOutcomes')).toMatchObject({ distinctValues: 28, occurrences: 53 });
-    expect(headline('consequenceOutcomes')).toMatchObject({ distinctValues: 72, occurrences: 184 });
+    expect(headline('consequenceOutcomes')).toMatchObject({ distinctValues: 72, occurrences: 185 });
   });
 
   it('A6 reaches the regional audit log while proving its selected prose zero', () => {

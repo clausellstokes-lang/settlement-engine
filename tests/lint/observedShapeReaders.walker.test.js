@@ -631,7 +631,12 @@ describe('reader-with-no-writer ratchet: the EXECUTED corpus', () => {
       canonEventLogEntries: 1,
       wizardNewsFinalEntries: 240,
       wizardNewsAccumulatedEntries: 1567,
-      wizardNewsUnique: 272,
+      // FP BATCH 3 (2026-09-24, the FP chair): 272 → 273, ONE new unique wizard-news id. ATTRIBUTED BY BISECT over the
+      // fourteen commits since landing 2, the corpus builder run per sha: 272 at df7aeaef4, 273 at c9b24fe51 = CURE-PEACE-1 U1
+      // (a peacetime suit retires when a war opens against its court; its feed reconcile mints the one id). Accumulated 1567
+      // and final 240 DO NOT MOVE. Cross-recorded in the same act: news-voice (introductions 273), prose-family
+      // (scalarRows 25549, pulseHistory 1055/5097), the OSR register --write at 98e0d8664 (exact, 1970 findings).
+      wizardNewsUnique: 273,
       pulseHistory: 12,
       // TE36 (ODQ §271): 109 → 73, one cause — the regional event log carries the pulse's
       // selected outcomes, and the retired bare-decline family was 36 of them. That mint's

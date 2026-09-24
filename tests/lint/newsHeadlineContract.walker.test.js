@@ -112,7 +112,9 @@ describe('complete Wizard News address and headline rewrite contract', () => {
     // ⭐ `distinctValues` HOLDS AT 393 THROUGH ALL OF THAT while occurrences rise 536 → 544: the
     // vocabulary is the same size, dealt to different homes. Provenance and the five-arm control
     // are recorded once, at news-headline-contract.mjs's ADDRESS_TOTALS.
-    expect(baseline.addressTotality.totals).toEqual({ homes: 50, fields: 2, identities: 100, prospectiveIdentities: 12, indicativeIdentities: 88, distinctValues: 393, occurrences: 544 });
+    // FP BATCH 3 (2026-09-24): 50/2/100/12/88/393/544 → 51/2/102/13/89/395/546 — one new home (a new address, prospective),
+    // ATTRIBUTED BY BISECT to CURE-PEACE-1 U1 (c9b24fe51); see scripts/lib/news-headline-contract.mjs's RE-RECORDED block.
+    expect(baseline.addressTotality.totals).toEqual({ homes: 51, fields: 2, identities: 102, prospectiveIdentities: 13, indicativeIdentities: 89, distinctValues: 395, occurrences: 546 });
   });
 
   it('A3 freezes both raw lanes and all 26 exact rewrite counts', () => {

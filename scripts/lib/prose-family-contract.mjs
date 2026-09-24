@@ -82,6 +82,17 @@ const EXPECTED_ROOTS = new Map([
 // ⚠ SCOPE, unchanged from the TE36 note above: `demographicsEnabled` is virtual and false in every
 // shipped preset, and this denominator is the ONLY place in the estate that observes the lit
 // engine. No player, no shipped golden and no dark-control cell sees any of this.
+// ── RE-RECORDED 2026-09-24 BY FP BATCH LANDING 3 (the FP chair, session 87797a6a), IN THE SAME ACT AS THE OSR
+// WALKER'S PIN AND THE NEWS-VOICE CONTRACT ─────────────────────────────────────────────────────────────────
+// scalarRows 25527 → 25549; wizardNewsUnique 272 → 273; pulseHistory 1051/5075 → 1055/5097; totals
+// 1074/5270 → 1078/5292; rows bytes 8271 → 8271. ⭐ THE SHAPE IS UNTOUCHED FOR THE FOURTH RE-RECORD RUNNING: 63 identities
+// before and after, the same four families, chronicle 7/7/7, regionalLog 2/8/176 and timeline 4/8/12 unmoved —
+// only pulseHistory's counts grow. ONE CAUSE, ATTRIBUTED BY BISECT (the corpus builder run per sha over the
+// fourteen commits since landing 2, then these walkers run at the culprit): CURE-PEACE-1 U1 (c9b24fe51) — a
+// peacetime suit retires when a war opens against its court, and the feed's reconcile of the superseded proposal
+// mints ONE new wizard-news id, whose impact digest lands in the twelve pulse-history records (channelType
+// 150 → 151, the +22 scalar rows). The walkers at c9b24fe51 and at the landing tip 98e0d8664 measure every
+// figure identically; no other batch-3 pick moves any of them.
 // ── RE-RECORDED 2026-09-01 BY THE WAR LANDING (§876), IN THE SAME ACT AS
 // `tests/lint/.prose-family-contract-baseline.json` ────────────────────────────────────────────
 // ⭐ THE SHAPE IS UNTOUCHED FOR THE THIRD RE-RECORD RUNNING: 63 identities before and after, ZERO
@@ -113,19 +124,19 @@ const EXPECTED_ROOTS = new Map([
 // is the ONLY place in the estate that observes the lit engine. No player, no shipped golden and
 // no dark-control cell sees any of this.
 const EXPECTED_CORPUS = Object.freeze({
-  scalarRows: 25527, canonEventLogEntries: 1, wizardNewsFinalEntries: 240,
-  wizardNewsAccumulatedEntries: 1567, wizardNewsUnique: 272, pulseHistory: 12,
+  scalarRows: 25549, canonEventLogEntries: 1, wizardNewsFinalEntries: 240,
+  wizardNewsAccumulatedEntries: 1567, wizardNewsUnique: 273, pulseHistory: 12,
   regionalEventLog: 77, regionalEventLogUnique: 77, aiChronicle: 1,
 });
 const EXPECTED_FAMILY_TOTALS = Object.freeze([
   { family: 'chronicle', identities: 7, distinctValues: 7, occurrences: 7 },
-  { family: 'pulseHistory', identities: 50, distinctValues: 1051, occurrences: 5075 },
+  { family: 'pulseHistory', identities: 50, distinctValues: 1055, occurrences: 5097 },
   { family: 'regionalLog', identities: 2, distinctValues: 8, occurrences: 176 },
   { family: 'timeline', identities: 4, distinctValues: 8, occurrences: 12 },
 ]);
-const EXPECTED_TOTALS = Object.freeze({ families: 4, identities: 63, distinctValues: 1074, occurrences: 5270 });
+const EXPECTED_TOTALS = Object.freeze({ families: 4, identities: 63, distinctValues: 1078, occurrences: 5292 });
 const EXPECTED_ROWS_BYTES = 8271;
-const EXPECTED_ROWS_SHA256 = '4cf433b2d508986fad5a1afdb8c2bd700751186411e87c179d39b927ff849a39';
+const EXPECTED_ROWS_SHA256 = '438fe9c4a22d184c4133f0151216611d6a554e9673b063637b215f85f64f7466';
 const codepoint = (left, right) => (left < right ? -1 : left > right ? 1 : 0);
 const same = (left, right) => JSON.stringify(left) === JSON.stringify(right);
 const identityOf = (row) => `${row.family}\0${row.path}\0${row.field}`;

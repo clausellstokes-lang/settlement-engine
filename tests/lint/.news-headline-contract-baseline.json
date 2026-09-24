@@ -2,10 +2,10 @@
   "schemaVersion": 1,
   "corpus": {
     "pulseRoots": 12,
-    "introductions": 272,
-    "retirements": 32,
+    "introductions": 273,
+    "retirements": 33,
     "finalEntries": 240,
-    "homes": 50
+    "homes": 51
   },
   "addressTotality": {
     "rows": [
@@ -556,6 +556,20 @@
         "occurrences": 1
       },
       {
+        "home": "queued|legitimacy_pressure",
+        "field": "headline",
+        "voiceClass": "prospective",
+        "distinctValues": 1,
+        "occurrences": 1
+      },
+      {
+        "home": "queued|legitimacy_pressure",
+        "field": "summary",
+        "voiceClass": "indicative",
+        "distinctValues": 1,
+        "occurrences": 1
+      },
+      {
         "home": "queued|neutral_to_rival",
         "field": "headline",
         "voiceClass": "prospective",
@@ -710,15 +724,15 @@
         "occurrences": 4
       }
     ],
-    "rowsSha256": "4c95070ec842b9b9a24b2b801e14fb079c6d7667cc7d1b9aa22f89c517804cd3",
+    "rowsSha256": "b5079d1e4314a5659ca488c76ee4ba29d1982b68ed72a07c6bbe13b30ef04d56",
     "totals": {
-      "homes": 50,
+      "homes": 51,
       "fields": 2,
-      "identities": 100,
-      "prospectiveIdentities": 12,
-      "indicativeIdentities": 88,
-      "distinctValues": 393,
-      "occurrences": 544
+      "identities": 102,
+      "prospectiveIdentities": 13,
+      "indicativeIdentities": 89,
+      "distinctValues": 395,
+      "occurrences": 546
     }
   },
   "rewriteLiveness": {
@@ -738,18 +752,18 @@
         {
           "field": "selectedOutcomes",
           "capPerPulse": 24,
-          "headlineOccurrences": 153,
+          "headlineOccurrences": 154,
           "distinctValues": 78,
-          "prospectiveOccurrences": 95,
+          "prospectiveOccurrences": 96,
           "prospectiveDistinctValues": 63,
           "indicativeOccurrences": 58,
           "indicativeDistinctValues": 15
         }
       ],
       "union": {
-        "headlineOccurrences": 206,
+        "headlineOccurrences": 207,
         "distinctValues": 78,
-        "prospectiveOccurrences": 144,
+        "prospectiveOccurrences": 145,
         "prospectiveDistinctValues": 63,
         "indicativeOccurrences": 62,
         "indicativeDistinctValues": 15
@@ -929,7 +943,7 @@
         "flags": "",
         "replacement": "takes hold",
         "distinctValues": 5,
-        "occurrences": 19
+        "occurrences": 20
       },
       {
         "source": "\\bmay undermine\\b",
@@ -944,7 +958,7 @@
       "activeRules": 16,
       "inertRules": 10,
       "distinctValues": 63,
-      "occurrences": 144
+      "occurrences": 145
     },
     "knownInert": [
       {

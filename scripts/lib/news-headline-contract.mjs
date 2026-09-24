@@ -13,7 +13,16 @@ const LANES = Object.freeze({ mechanicalOutcomes: 8, selectedOutcomes: 24 });
 // ── RE-RECORDED 2026-09-01 BY THE WAR LANDING (§876) — STILL THE SECOND COPY OF THE SAME TUPLE.
 // 268/28/51 → 272/32/50. The provenance, the five-arm single-variable control and the falsified
 // dispatch causes are recorded once, at the voice contract's copy, exactly as before.
-const CORPUS = Object.freeze({ pulseRoots: 12, introductions: 272, retirements: 32, finalEntries: 240, homes: 50 });
+// ── RE-RECORDED 2026-09-24 BY FP BATCH LANDING 3 (the FP chair, session 87797a6a), IN THE SAME ACT AS THE NEWS-VOICE
+// CONTRACT, THE PROSE-FAMILY CONTRACT AND THE OSR WALKER'S PIN ───────────────────────────────────────────────
+// CORPUS 272/32/240/50 → 273/33/240/51; ADDRESS_TOTALS 50/2/100/12/88/393/544 → 51/2/102/13/89/395/546;
+// REWRITE_TOTALS occurrences 144 → 145 (rules 26, active 16, inert 10, distinct 63 HOLD); RAW_LIVENESS: the selectedOutcomes lane
+// gains one headline occurrence and the mechanical lane holds. ONE CAUSE, ATTRIBUTED BY BISECT (the corpus builder run per
+// sha over the fourteen commits since landing 2, then these walkers at the culprit): CURE-PEACE-1 U1 (c9b24fe51) — a
+// peacetime suit retires when a war opens against its court, and the feed's reconcile of the superseded proposal mints
+// ONE new wizard-news id with a home of its own (a new address, prospective voice, one spelling). Every figure here was
+// derived by the walkers' own functions from one corpus build and cross-checked at c9b24fe51 and at the landing tip.
+const CORPUS = Object.freeze({ pulseRoots: 12, introductions: 273, retirements: 33, finalEntries: 240, homes: 51 });
 // ── RE-RECORDED 2026-09-01 BY T8 · SHIFT (ODQ §858 + §860) ─────────────────────────────────────
 // 53/106/14/92/400/544 → 51/102/12/90/393/536. `fields` holds at 2, as it must: the address grammar
 // is still headline-and-summary and nothing was added to it.
@@ -42,7 +51,7 @@ const CORPUS = Object.freeze({ pulseRoots: 12, introductions: 272, retirements: 
 // `applied|stressor_birth_*` homes, and `applied|trade_pressure` +1 occurrence on both fields.
 // The single-variable control and the two falsified dispatch causes are recorded once, at
 // `scripts/lib/news-voice-contract.mjs`.
-const ADDRESS_TOTALS = Object.freeze({ homes: 50, fields: 2, identities: 100, prospectiveIdentities: 12, indicativeIdentities: 88, distinctValues: 393, occurrences: 544 });
+const ADDRESS_TOTALS = Object.freeze({ homes: 51, fields: 2, identities: 102, prospectiveIdentities: 13, indicativeIdentities: 89, distinctValues: 395, occurrences: 546 });
 const RAW_LIVENESS = Object.freeze({
   pulseRecords: 12,
   lanes: Object.freeze([
@@ -68,7 +77,7 @@ const RAW_LIVENESS = Object.freeze({
     // number of "may" beats in FEWER spellings and two more settled ones. That is `5a529f100`'s
     // upheaval gates re-dealing which seats are fragile when — a lane the corruption work could not
     // reach, and the first cause in three re-records that does.
-    Object.freeze({ field: 'selectedOutcomes', capPerPulse: 24, headlineOccurrences: 153, distinctValues: 78, prospectiveOccurrences: 95, prospectiveDistinctValues: 63, indicativeOccurrences: 58, indicativeDistinctValues: 15 }),
+    Object.freeze({ field: 'selectedOutcomes', capPerPulse: 24, headlineOccurrences: 154, distinctValues: 78, prospectiveOccurrences: 96, prospectiveDistinctValues: 63, indicativeOccurrences: 58, indicativeDistinctValues: 15 }),
   ]),
   // TE36: the union follows the mechanical lane alone — 228 → 207 (−21, the same 21),
   // 83 → 80 distinct, 168 → 147 prospective. The indicative halves do not move at all.
@@ -81,7 +90,8 @@ const RAW_LIVENESS = Object.freeze({
   // SELECTED lane's exactly — 80 = 80 before, 78 = 78 now — so the mechanical lane's 28 spellings
   // are still a strict subset of the public lane's. That is what makes the union's distinct half
   // an honest check on the lanes rather than a restatement of them.
-  union: Object.freeze({ headlineOccurrences: 206, distinctValues: 78, prospectiveOccurrences: 144, prospectiveDistinctValues: 63, indicativeOccurrences: 62, indicativeDistinctValues: 15 }),
+  // FP BATCH 3 (2026-09-24): the union follows the selectedOutcomes lane — 206/144 → 207/145; the distinct and indicative halves hold.
+  union: Object.freeze({ headlineOccurrences: 207, distinctValues: 78, prospectiveOccurrences: 145, prospectiveDistinctValues: 63, indicativeOccurrences: 62, indicativeDistinctValues: 15 }),
 });
 // TE36 (ODQ §271): 17/9 → 16/10 and 69/168 → 66/147. THE RULE COUNT IS UNCHANGED AT 26 —
 // no rewrite rule was added or deleted; one CROSSED from active to inert because the corpus
@@ -100,7 +110,7 @@ const RAW_LIVENESS = Object.freeze({
 // `may intensify` 2/4 → 1/2, `may reform` 23/50 → 23/49, `may suppress` 6/12 → 5/11, `may take
 // hold` 5/18 → 5/19. The three that lose a spelling are the −3 distinct; the occurrences net to
 // −1. Every one of them is an upheaval-adjacent verb, which is `5a529f100` read off the registry.
-const REWRITE_TOTALS = Object.freeze({ rules: 26, activeRules: 16, inertRules: 10, distinctValues: 63, occurrences: 144 });
+const REWRITE_TOTALS = Object.freeze({ rules: 26, activeRules: 16, inertRules: 10, distinctValues: 63, occurrences: 145 });
 
 export const KNOWN_INERT_HEADLINE_REWRITES = Object.freeze([
   { source: '\\bmay close its doors\\b', flags: '', replacement: 'closes its doors', reason: 'institutionLifecycle.js::evaluateInstitutionLifecycle is the live institution-closure authoring seam; the executed AO-0 12-record persisted public+mechanical union contains no closure headline.' },

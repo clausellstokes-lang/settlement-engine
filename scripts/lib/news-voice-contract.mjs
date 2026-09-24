@@ -19,6 +19,15 @@ const TOTAL_KEYS = Object.freeze(['identities', 'distinctValues', 'occurrences']
 // `retirements` and `homes`. Anyone re-recording this from a failure message alone would have
 // left two thirds of the drift in place; the figures here are measured from a probe that reports
 // every field instead of throwing on the first.
+// ── RE-RECORDED 2026-09-24 BY FP BATCH LANDING 3 (the FP chair, session 87797a6a), IN THE SAME ACT AS THE OSR
+// WALKER'S PIN AND THE PROSE-FAMILY CONTRACT ─────────────────────────────────────────────────────────────
+// 272/32/50 → 273/33/51. pulseRoots 12 and finalEntries 240 do not move for the third re-record running, and
+// conservation still closes: 273 − 33 = 240. `homes` 50 → 51: the new id introduces a home of its own (measured, not
+// predicted — the first run of this re-record predicted 50 and the walker corrected it: 'homes drifted: expected 50, got 51'). ONE CAUSE, ATTRIBUTED BY BISECT (the corpus builder run per sha over
+// the fourteen commits since landing 2): CURE-PEACE-1 U1 (c9b24fe51) — a peacetime suit retires when a war opens
+// against its court, and the feed's reconcile of the superseded proposal mints ONE new wizard-news id that the
+// twelve pulse roots introduce and retire within the corpus. Every other batch-3 pick measures 272 before it and
+// 273 after it, identically; nothing else in the batch touches this count.
 // ── RE-RECORDED 2026-09-01 BY THE WAR LANDING (§876), IN THE SAME ACT AS THE OSR WALKER ───────
 // 268/28/51 → 272/32/50. pulseRoots 12 and finalEntries 240 do not move for the second
 // re-record running, and conservation still closes: 272 − 32 = 240.
@@ -50,7 +59,7 @@ const TOTAL_KEYS = Object.freeze(['identities', 'distinctValues', 'occurrences']
 // four other stressor homes reach further, and the address `distinctValues` total holds at 393
 // exactly. Fewer homes, more occurrences, the same vocabulary size — that is redistribution.
 const CORPUS = Object.freeze({
-  pulseRoots: 12, introductions: 272, retirements: 32, finalEntries: 240, homes: 50,
+  pulseRoots: 12, introductions: 273, retirements: 33, finalEntries: 240, homes: 51,
 });
 
 export const NEWS_VOICE_PROTECTED_SUBSTRATE = Object.freeze([
