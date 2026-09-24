@@ -96,11 +96,13 @@ const THE_TEN_CONDITIONS = [
   'pendingPeaceOffer', 'plotInMotion', 'siegeInProgress', 'tradeWith', 'warInProgress',
 ];
 /**
- * ⭐ ONE, NOT TWO, SINCE U28. `pendingPeaceOffer` moved to LIVE the day EM-E4's standing
- * offer record landed on the receiving settlement; the arm below reads it through E4's own
- * writer, so this roster shrinks only when a row's state actually exists.
+ * ⭐ NONE SINCE FP SP-D2 (and one, not two, since U28). `pendingPeaceOffer` moved to LIVE the
+ * day EM-E4's standing offer record landed on the receiving settlement, and `envoyArrived` the
+ * day SP-D2 re-pointed it at the SENDER's errand through `envoyInbound.js`
+ * (tests/domain/envoyInbound.test.js proves it TRUE in a real world). Each moved only when its
+ * row's state actually existed, which is the rule this roster keeps.
  */
-const ABSENT_CONDITIONS = ['envoyArrived'];
+const ABSENT_CONDITIONS = [];
 
 const GOOD_TARGET = Object.freeze({ kind: 'institution', id: 'i1' });
 const campaign = (worldState, regionalGraph) => ({ worldState, regionalGraph });
@@ -242,7 +244,7 @@ describe('EM-B1a — the op vocabulary, the fourteen home ops, and the world hal
     expect(undeclaredKey.errors, 'an undeclared payload key names itself and its op type')
       .toContain('payload.bogus is not declared for add-npc');
 
-    // ── THE ROSTER IS TEN AND THE ABSENT SET IS TWO, BY NAME ───────────────────────────
+    // ── THE ROSTER IS TEN AND THE ABSENT SET IS EMPTY, BY NAME ─────────────────────────
     const ids = Object.keys(WORLD_CONDITIONS);
     expect(ids.length, 'ten ids; openRoute is ONE id answered by TWO readers, not two ids').toBe(10);
     expect({
@@ -250,16 +252,19 @@ describe('EM-B1a — the op vocabulary, the fourteen home ops, and the world hal
       missing: THE_TEN_CONDITIONS.filter((i) => !ids.includes(i)),
     }, 'the roster is set-equal to §16.1 in both directions').toEqual({ undeclared: [], missing: [] });
     const absent = ids.filter((i) => WORLD_CONDITIONS[i].source === 'EM-E4').sort(compareCodepoint);
-    expect(absent, 'exactly ONE row is honestly absent, and openRoute, plotInMotion and'
-      + ' pendingPeaceOffer are asserted OUT of that set by name: design §19 ruling 6 made'
-      + ' structural, and U28 re-pointed the peace row at the record EM-E4 landed')
+    expect(absent, 'NO row is honestly absent since FP SP-D2 re-pointed envoyArrived at the'
+      + ' SENDER\'s errand; U28 had already re-pointed the peace row at the record EM-E4 landed,'
+      + ' and design §19 ruling 6 made openRoute and plotInMotion structural')
       .toEqual(ABSENT_CONDITIONS);
-    // anchored: `absent` is asserted exactly equal to the two ids above, so this is never vacuous.
-    expect(absent, 'openRoute is LIVE, not an EM-E4 gap').not.toContain('openRoute');
-    // anchored: the same exact set-equality two assertions above anchors this negative too.
-    expect(absent, 'plotInMotion is LIVE, not an EM-E4 gap').not.toContain('plotInMotion');
-    // anchored: the same exact set-equality three assertions above anchors this negative too.
-    expect(absent, 'pendingPeaceOffer is LIVE since U28, not an EM-E4 gap').not.toContain('pendingPeaceOffer');
+    // ⭐ ONE MORE LIVE ROW, ONE FEWER ABSENT (the SP-D2 re-record). The three negatives this arm
+    // carried against a one-member absent set would be vacuous against an empty one, so the
+    // same four facts are asserted POSITIVELY: the live partition is the whole roster, and each
+    // row that was once a gap is named in it.
+    const live = ids.filter((i) => WORLD_CONDITIONS[i].source === 'live').sort(compareCodepoint);
+    expect(live, 'the live partition is the whole roster of ten').toEqual(THE_TEN_CONDITIONS);
+    const onceGaps = ['envoyArrived', 'openRoute', 'pendingPeaceOffer', 'plotInMotion'];
+    expect(onceGaps.filter((i) => live.includes(i)), 'envoyArrived (SP-D2), openRoute and plotInMotion'
+      + ' (§19 ruling 6) and pendingPeaceOffer (U28) are LIVE, by name').toEqual(onceGaps);
 
     // ── EVERY LIVE ROW DECLARES A READER; EVERY ABSENT ROW DECLARES NONE ───────────────
     const readerProblems = [];

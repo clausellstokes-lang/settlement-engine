@@ -24,12 +24,13 @@
  * ⛔ PURE, TOTAL, FALSE-ON-ABSENCE. An absent field yields `false`, never a throw, so a
  * card simply does not offer the seal. No writes, no draws, no store, no React.
  *
- * ⭐ TEN IDS, NINE OF THEM LIVE. `openRoute` is ONE id answered by TWO readers (the
- * regional graph's confirmed channel, always live; the route-network ledger, gated
+ * ⭐ TEN IDS, ALL TEN LIVE SINCE FP SP-D2. `openRoute` is ONE id answered by TWO readers
+ * (the regional graph's confirmed channel, always live; the route-network ledger, gated
  * behind `routeLifecycleEnabled`, which is off by default), and `readers` is the data
- * position the ruling names when it says "the seal names which". ONE row is still
- * honestly absent, declares `source: 'EM-E4'` and `readers: []`, and returns `false`
- * until the packet that lands its state arrives; it is not invented here.
+ * position the ruling names when it says "the seal names which". The last honestly absent
+ * row, `envoyArrived`, now reads the SENDER's errand through `envoyInbound.js` (its row
+ * says how); `source: 'EM-E4'` with `readers: []` stays the shape a row takes while its
+ * state does not exist, and none is invented here.
  *
  * ⭐ `pendingPeaceOffer` IS NO LONGER ONE OF THEM (U28). EM-E4 landed the standing offer
  * as a record on the RECEIVING settlement, keyed by the counterparty that made it
@@ -46,6 +47,7 @@ import { PRIMARY_RELATIONSHIP_TYPES } from '../worldPulse/relationshipCompatibil
 import { hasBeliefMaps } from '../display/settlementBeliefs.js';
 import { getSpatialLedger } from '../spatial/spatialLedgerAccess.js';
 import { COUP_STRESSOR_TYPE } from '../worldPulse/coup.js';
+import { inboundEnvoySenders } from '../worldPulse/envoyInbound.js';
 import { peaceOffersOf, pendingPeaceOfferFrom } from '../worldPulse/peaceTermsDrafting.js';
 import { REGIONAL_CHANNEL_TYPES, activeChannelsFrom } from '../region/graph.js';
 import { ROUTE_GRADES, readRouteNetwork, routeLifecycleActive } from '../worldPulse/routeNetworkLedger.js';
@@ -207,15 +209,8 @@ function liveRow(row) {
   return Object.freeze({ ...row, readers: Object.freeze(row.readers), source: 'live' });
 }
 
-/** A row whose state does not exist yet. It answers false and says why, as data. */
-const ABSENT_UNTIL_E4 = Object.freeze({
-  predicate: () => false,
-  readers: Object.freeze([]),
-  source: 'EM-E4',
-});
-
 /**
- * THE ROSTER. Ten ids, authored in codepoint order; nine live, one honestly absent.
+ * THE ROSTER. Ten ids, authored in codepoint order; all ten live since FP SP-D2.
  * @type {Readonly<Record<string, WorldConditionRow>>}
  */
 export const WORLD_CONDITIONS = Object.freeze({
@@ -235,7 +230,21 @@ export const WORLD_CONDITIONS = Object.freeze({
     readers: [reader('belief-ledger', 'src/domain/spatial/spatialLedgerAccess.js', 'getSpatialLedger')],
   }),
 
-  envoyArrived: ABSENT_UNTIL_E4,
+  // FP SP-D2 — THE INBOUND READ (the FP fold §12.2 rows 8 and 9). SUBJECT: design §19 ruling
+  // 6's own nuance, "an envoy's arrival is LIVE on the SENDER's errand", so the reader keeps
+  // the errands whose TARGET is this settlement, and the row's SUBJECTS are their senders:
+  // the courts a reception acts toward (J-EM-3, the pendingPeaceOffer shape, the predicate
+  // derived from the list). STAGE: at the gate and still undecided, both held by the reader.
+  // The layer's own gates (`envoyDiplomacyActive`, `errandSpineActive`) sit inside the reader,
+  // so a dark layer offers no seal; and with the campaign `null`, as the shell passes it
+  // today, the row honestly answers false.
+  envoyArrived: liveRow({
+    predicate: (record, campaignState) => (
+      inboundEnvoySenders(worldOf(campaignState), subjectId(record)).length > 0
+    ),
+    subjects: (record, campaignState) => inboundEnvoySenders(worldOf(campaignState), subjectId(record)),
+    readers: [reader('inbound-envoy', 'src/domain/worldPulse/envoyInbound.js', 'inboundEnvoysAt')],
+  }),
 
   // SUBJECT and STAGE both already held by the reader: the deployment ledger is keyed by
   // the fielding settlement's OWN id, and presence in it IS the live stage. A recalled
