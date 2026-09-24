@@ -1,6 +1,6 @@
 {
-  "rr-fresh-full|1|contentSha256": "8941ee5578ecca93bb2aada3e62b2363999c042e5e96c43d4104cd4caf0b13be",
-  "rr-fresh-full|1|itemCount": 364,
+  "rr-fresh-full|1|contentSha256": "07e400be1e168684d7ff239c84cd6556038a0d736673091ff5479c068dc899af",
+  "rr-fresh-full|1|itemCount": 365,
   "rr-fresh-full|1|section|candidate.relationship.trade_route_disruption.edge.soak-c.soak-d.52": "events",
   "rr-fresh-full|1|section|tempo_pressure.42": "events",
   "rr-fresh-full|1|section|tempo_pressure.45": "events",
@@ -241,6 +241,7 @@
   "rr-fresh-full|1|section|wizard_news.38.roads.soak-c.depart.road.soak-c.soak-c:npc_5.38": "trade",
   "rr-fresh-full|1|section|wizard_news.38.world_pulse.applied.candidate.relationship.neutral_border_incident.edge.soak_b.soak_d.38": "events",
   "rr-fresh-full|1|section|wizard_news.39.refuge.bergstadt.oberdorf": "events",
+  "rr-fresh-full|1|section|wizard_news.39.treaty_default_detected.soak_d.soak_b": "trade",
   "rr-fresh-full|1|section|wizard_news.4.aftermath.world_stressor.betrayal.soak_b": "events",
   "rr-fresh-full|1|section|wizard_news.4.queued.regional_impact.candidate_resource_deplete_soak_a_foraging_areas_3.channel_trade_dependency_soak_a_soak_b_medicinal_herbs.relief.medicinal_herbs": "events",
   "rr-fresh-full|1|section|wizard_news.4.world_pulse.applied.candidate.npc.exploit.soak_c_npc_4.4": "events",

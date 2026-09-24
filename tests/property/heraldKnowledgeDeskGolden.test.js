@@ -61,7 +61,9 @@ describe('the knowledge desk — the non-omniscient Herald golden (captured firs
     // 2 fixed keys + 241 items, captured at the clean base (the enroll record predicted 243).
     // 243 → 366 at the Herald lens U2's pick (FP-31, 2026-09-24): the feed keeps its newest 52 weeks whole and
     // caps only beyond them, so the year-one desk carries the entries the bare 240 cap used to drop.
-    expect(Object.keys(manifest)).toHaveLength(366);
+    // 366 → 367 at the treaty-voice pick (FP-28, 2026-09-24): a peacetime pact's default beat now speaks
+    // (wizard_news.39.treaty_default_detected joins the year-one desk).
+    expect(Object.keys(manifest)).toHaveLength(367);
   });
 
   it('the declared refile set is exactly the knowledge desk the routing table carries', () => {
