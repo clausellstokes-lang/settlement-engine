@@ -56,6 +56,7 @@ import {
 } from '../../src/domain/worldPulse/advanceInterval.js';
 import { buildWorldSnapshot } from '../../src/domain/worldPulse/worldSnapshot.js';
 import { SIMULATION_RULE_PRESETS } from '../../src/domain/worldPulse/simulationRules.js';
+import { soakAdvanceEpoch } from '../../scripts/audit/soakRules.mjs';
 
 const NOW = '2026-01-01T00:00:00.000Z';
 
@@ -198,6 +199,12 @@ describe('WR-3 lineage member birth persistence and undo', () => {
       interval: 'one_month',
       commit: true,
       now: NOW,
+      // LIT-0 (2026-09-24): a direct interval call is one ADVANCE, so it threads the flag-gated epoch
+      // the kernel demands once `advanceEpochEnabled` is lit (the soak's `soakAdvanceEpoch` idiom;
+      // the store path mints its own). Dark it is null, byte-identical.
+      advanceEpoch: soakAdvanceEpoch({
+        simulationRules: sourceCampaign.worldState?.simulationRules, seed: String(sourceCampaign.worldState?.rngSeed), year: 1,
+      }),
     });
 
     expect(result.status).toBe('complete');
@@ -259,6 +266,12 @@ describe('WR-3 lineage member birth persistence and undo', () => {
       interval: 'one_month',
       commit: true,
       now: NOW,
+      // LIT-0 (2026-09-24): the ceiling rule stack is the preset a lighting unit lights first, so this
+      // direct advance threads the flag-gated epoch (the soak's `soakAdvanceEpoch` idiom). Dark it is
+      // null, byte-identical.
+      advanceEpoch: soakAdvanceEpoch({
+        simulationRules: campaign.worldState?.simulationRules, seed: String(campaign.worldState?.rngSeed), year: 1,
+      }),
     });
 
     expect(result.status).toBe('complete');
