@@ -12,18 +12,18 @@
   "amended": {
     "at": "22cedb1b0dcc00fbd217f5b3b6312b6394f2f767",
     "on": "2026-08-15",
-    "by": "lane TE14, the IN-1C-A terminal, under OWNER_DECISION_QUEUE.md \u00a785.2",
+    "by": "lane TE14, the IN-1C-A terminal, under OWNER_DECISION_QUEUE.md §85.2",
     "what": "ONE entry added: informationReceiptPools. The list grows 23 -> 24, and this block is the reason that growth is a REGISTRATION rather than a silent re-record.",
-    "why": "\u26d4 A DELIBERATE, VETOABLE ADMISSION OF DEBT, RULED BY THE CHAIR RATHER THAN TAKEN BY THE LANE. IN-1c-a mints the estate's FIFTH phrased-kind registry family, and informationReceiptPools.js is its annex-verbatim pool leaf: nine mirror_standing_line variants, ZERO imports, and no standing flag-ON lit proof of its own. The module is genuinely DARK at this landing, reached through informationNews.js's registry rather than driven by a lit walkthrough, so an inventory row is the honest record and a coverage claim would be a false one. \u26d4 It was NOT taken as an implementer's convenience: this file is named in IN-1C-A's INDEX keep-out cell AND in the packet's \u00a714 STOP list, the terminal STOPPED on it, and \u00a785.2 is the ruling that released it.",
+    "why": "⛔ A DELIBERATE, VETOABLE ADMISSION OF DEBT, RULED BY THE CHAIR RATHER THAN TAKEN BY THE LANE. IN-1c-a mints the estate's FIFTH phrased-kind registry family, and informationReceiptPools.js is its annex-verbatim pool leaf: nine mirror_standing_line variants, ZERO imports, and no standing flag-ON lit proof of its own. The module is genuinely DARK at this landing, reached through informationNews.js's registry rather than driven by a lit walkthrough, so an inventory row is the honest record and a coverage claim would be a false one. ⛔ It was NOT taken as an implementer's convenience: this file is named in IN-1C-A's INDEX keep-out cell AND in the packet's §14 STOP list, the terminal STOPPED on it, and §85.2 is the ruling that released it.",
     "measurement": "MEASURED by this walker's own uncoveredMechanisms computation, never transcribed from a review: at base d5a6c009 the RATCHET (modules) arm is GREEN at 23 names; at I1 22cedb1b and at this terminal it reports those identical 23 PLUS informationReceiptPools. The name's spelling and its position between envoyInterceptionStage and lineageNews are taken from that output, which is the walker's own order.",
     "notBurnedDown": "informationReceiptPools is INVENTORIED, not repaired. Writing its lit walkthrough is a separate wave and IN-1c-b is the natural home. The list stays SHRINK-ONLY: strike this name the moment a lit proof lands, in that same commit.",
-    "law": "\u2b50 THE FIRST PRICED INSTANCE OF THE REGISTRY-MINT TWO-OBLIGATION LAW (\u00a785.4): a registry family that mints a seeded pick AND a pool module costs TWO estate-wide census rows, this one and a habitForkRegistry.js classification row (HBF-33). Neither was priced in IN-1C-A's packet, and both were found only by the full gate. A compiler prices both up front."
+    "law": "⭐ THE FIRST PRICED INSTANCE OF THE REGISTRY-MINT TWO-OBLIGATION LAW (§85.4): a registry family that mints a seeded pick AND a pool module costs TWO estate-wide census rows, this one and a habitForkRegistry.js classification row (HBF-33). Neither was priced in IN-1C-A's packet, and both were found only by the full gate. A compiler prices both up front."
   },
   "shrunk": {
-    "on": "2026-08-31",
-    "by": "lane T4 · SEAT-B (W-SEAT SEAT-5, the liberation un-install)",
-    "what": "ONE entry STRUCK: applyWorldPulseOccupationAuthority. The list shrinks 24 → 23. This is the direction the walker exists to force — 'a baseline entry that GAINS coverage also fails, forcing the baseline to shrink and locking the win' — so it is a BANKED WIN rather than an admission, and it needs no chair ruling the way the 23 → 24 growth above did.",
-    "why": "SEAT-5 gave the module its first standing flag-ON lit proof. tests/domain/occupationLiberationUninstall.test.js drives liftOccupationAuthority and conquestExtractionCondition with foreignSeatEnabled LIT, against a roster built by running the module's own installOccupationAuthority — so the coverage is a real lit walkthrough of the module's whole install/un-install surface, not an import that happens to touch it. The module had carried NO lit proof since the inventory was frozen: its install half shipped inside THE DECOMPOSITION WAVE's file-4 split and nothing ever exercised it flag-ON."
+    "on": "2026-09-24",
+    "by": "the FP chair (session 87797a6a, Fable 5.1)",
+    "what": "STRUCK: mechanisms:envoyInterceptionStage, mechanisms:peaceTermsOverlay. The list shrinks 23 → 21 mechanisms and 1 → 1 flag(s) — the direction the walker exists to force, a BANKED WIN, no chair ruling needed. It succeeds the strike of 2026-08-31 by lane T4 · SEAT-B (W-SEAT SEAT-5, the liberation un-install): ONE entry STRUCK: applyWorldPulseOccupationAuthority.",
+    "why": "FP batch landing 1 at 253d14848: WF-0 + cure, TR-2's cures, LIT-1a (Owner-Signed §934.84), TR-3, IN-2 + two cures, GR-6, IN-4/1, GR-5b — the batch's declared deltas, re-measured once at the tip"
   },
   "mechanisms": [
     "applyWorldPulseBetrayal",
@@ -34,7 +34,6 @@
     "envoyErrandEncounterWriter",
     "envoyErrandEvidence",
     "envoyErrandParlay",
-    "envoyInterceptionStage",
     "informationReceiptPools",
     "lineageNews",
     "npcDmVerbAuthority",
@@ -44,7 +43,6 @@
     "peaceTermsCoalition",
     "peaceTermsDocument",
     "peaceTermsGraph",
-    "peaceTermsOverlay",
     "peaceTermsPrimitives",
     "secrecyTradeFactor",
     "sovereigntyReceiptPools",
