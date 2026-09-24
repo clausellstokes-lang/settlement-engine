@@ -244,7 +244,7 @@ const DYNAMIC_MINTS = Object.freeze([
   // this file — the one arm here that proves its vocabulary rather than declaring it.
   'src/domain/region/wizardNews.js:impactKind:impact.kind',
   'src/domain/worldPulse/settlementLifecycleKernel.js:impactKind:kind',
-  // ── THE SEVEN RECEIPT REGISTRIES. Each has its own kind-pool walker under
+  // ── THE EIGHT RECEIPT REGISTRIES. Each has its own kind-pool walker under
   // tests/lint/*KindPools.walker.test.js, and each of those already joins its rows to
   // WHAT_PHRASES. The registry is the governing artifact; this is the delivery site.
   'src/domain/worldPulse/commercialReasonsNews.js:impactKind:receipt.kind',
@@ -258,6 +258,9 @@ const DYNAMIC_MINTS = Object.freeze([
   // INFORMATION registry (`informationNews.js`), joined to WHAT_PHRASES by their own walker,
   // tests/lint/counterIntelKindPools.walker.test.js. The registry governs; this is the delivery site.
   'src/domain/worldPulse/counterIntelSweep.js:impactKind:receipt.kind',
+  // FP IN-4 (2026-09-24): the reputation race's beats, governed by informationNews.js's
+  // INFORMATION_KIND_REGISTRY and joined by tests/lint/reputationRaceKindPools.walker.test.js.
+  'src/domain/worldPulse/reputationRaceConsumer.js:impactKind:kind',
   // ── ARCHETYPE TABLES. A local map keyed by a lane's own enum; the values are
   // literals in the same file and are reachable by the literal arm above.
   'src/domain/worldPulse/deploymentReturn.js:candidateType:archetype',

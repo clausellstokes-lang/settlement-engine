@@ -332,6 +332,10 @@ export const EXACT_SECTION = Object.freeze(/** @type {Record<string, HeraldSecti
   // WR-7a errand records carry governed desks below. Token-only fallbacks for
   // the court acts remain events; the moving-person beat is likewise an event.
   // Silence is a belief forecast and therefore has an explicit divination home.
+  // IN-4 THE ROAD: the reputation race at the arrivals the ledgers keep, and its jewel. Public
+  // rumor-mill beats, filed with the envoy comings and goings until IN-5's knowledge desk
+  // re-files the lane.
+  race_person: 'events', race_story: 'events', race_together: 'events', word_came_too_late: 'events',
   envoy_departed: 'events', envoy_on_the_road: 'events', envoy_returning: 'events',
   envoy_home: 'events', envoy_lost: 'events', terms_never_reached: 'events',
   envoy_parlaying: 'events', envoy_terms_agreed: 'events', envoy_held: 'events',

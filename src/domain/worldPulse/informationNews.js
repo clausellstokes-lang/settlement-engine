@@ -57,7 +57,8 @@ import { INFORMATION_RECEIPTS } from './informationReceiptPools.js';
 /**
  * @typedef {{kind:string, significance:'notable'|'routine'|'major'|'n/a',
  *   audience:'public'|'dm-only', section:string|null,
- *   pool:readonly ProseVariant[], requiredSlots:ReadonlyArray<readonly string[]>}}
+ *   pool:readonly ProseVariant[], requiredSlots:ReadonlyArray<readonly string[]>,
+ *   contexts:ReadonlyArray<readonly string[]|null>}}
  *   InformationRegistryEntry
  */
 
@@ -66,7 +67,12 @@ import { INFORMATION_RECEIPTS } from './informationReceiptPools.js';
  * `(kind, significance, audience, section, requiredSlots, …)`. A family that re-orders its row
  * constructor is a family whose rows cannot be read across the estate by eye.
  *
- * ⚠ POSITION SIX — GR-0's `contexts` axis — IS DELIBERATELY UNOCCUPIED rather than accepted
+ * ⭐ POSITION SIX IS OCCUPIED SINCE FP IN-4, WITH ITS OWN DRIVING CASE, exactly as the paragraph
+ * below reserved it: the race pools speak of a MAN ("He reached the gate before his story did"),
+ * and a marching column races its story too. Each race variant declares the racer contexts it is
+ * honest under (`reputationRaceConsumer.js :: RACER_CONTEXTS`), a row that declares none is honest
+ * under all of them, and the picker filters on the caller's context: GR-0's axis, copied.
+ * ⚠ (history) POSITION SIX — GR-0's `contexts` axis — WAS DELIBERATELY UNOCCUPIED rather than accepted
  * and ignored. GR-0 needs it because two of its pools are authored ACROSS a fact the receipt
  * carries, so a family that declares no contexts is honest under all of them. This corpus
  * authors no such split: every one of the nine standing sentences is honest about any record
@@ -80,9 +86,10 @@ import { INFORMATION_RECEIPTS } from './informationReceiptPools.js';
  * @param {'public'|'dm-only'} audience
  * @param {string|null} section
  * @param {ReadonlyArray<readonly string[]>} requiredSlots
+ * @param {ReadonlyArray<readonly string[]|null>} [contexts]
  * @returns {Readonly<InformationRegistryEntry>}
  */
-function informationKindRow(kind, significance, audience, section, requiredSlots) {
+function informationKindRow(kind, significance, audience, section, requiredSlots, contexts) {
   const pool = /** @type {readonly ProseVariant[]} */ (INFORMATION_RECEIPTS[kind]);
   return Object.freeze({
     kind,
@@ -91,8 +98,13 @@ function informationKindRow(kind, significance, audience, section, requiredSlots
     section,
     pool,
     requiredSlots: Object.freeze(requiredSlots.map((slots) => Object.freeze([...slots]))),
+    contexts: Object.freeze((contexts || pool.map(() => null))
+      .map((row) => (row ? Object.freeze([...row]) : null))),
   });
 }
+
+/** The racer context a sentence that speaks of a man is honest under. */
+const PERSON_ONLY = Object.freeze(['person']);
 
 /**
  * The governed rows. TWO since FP IN-2 (`lure_sprung`, the lure's DM-truth spring, is the first
@@ -136,12 +148,29 @@ export const INFORMATION_KIND_REGISTRY = Object.freeze([
     [], ['counterpart', 'band', 'season'], ['band'], ['counterpart'], ['band'],
     [], ['counterpart', 'season'], [], [],
   ]),
+  // IN-4 THE ROAD: the three race kinds (the built RACE_OUTCOMES tokens, `neither` silent by law)
+  // and the jewel. PUBLIC, the rumor mill's beats, filed at `events` beside the envoy comings and
+  // goings the race reads (envoy_home's desk) until IN-5 mints the knowledge desk. Every sentence
+  // that speaks of a man is honest for a PERSON racer only (the context axis above).
+  // Codepoint-sorted insertion (SR-7).
+  informationKindRow('race_person', 'notable', 'public', 'events', [
+    [], ['npc', 'settlement', 'counterpart'], ['settlement'], [], ['route'], ['settlement'],
+  ], [PERSON_ONLY, PERSON_ONLY, PERSON_ONLY, PERSON_ONLY, PERSON_ONLY, PERSON_ONLY]),
+  informationKindRow('race_story', 'notable', 'public', 'events', [
+    [], ['settlement', 'counterpart', 'npc'], ['settlement'], [], [], ['season', 'band', 'settlement'],
+  ], [PERSON_ONLY, PERSON_ONLY, PERSON_ONLY, PERSON_ONLY, null, PERSON_ONLY]),
+  informationKindRow('race_together', 'routine', 'public', 'events', [
+    ['npc', 'counterpart', 'settlement'], [], ['settlement'], [], [], ['settlement'], ['settlement'], [], [],
+  ], [PERSON_ONLY, PERSON_ONLY, null, PERSON_ONLY, null, null, null, PERSON_ONLY, PERSON_ONLY]),
   // IN-3 THE SWEEP HUM, the annex's `sweep_launched` block: the line a sweep that found nothing
   // leaves in the town (a catch speaks through the built beat, a witch-hunt through the row
   // above). Public, routine, at the knowledge desk since FP IN-5. Codepoint-sorted (SR-7).
   informationKindRow('sweep_launched', 'routine', 'public', 'knowledge', [
     ['settlement'], ['faction', 'settlement'], ['reason'], ['settlement'], ['settlement'],
     ['settlement'], ['settlement'], [], [],
+  ]),
+  informationKindRow('word_came_too_late', 'notable', 'public', 'events', [
+    ['npc', 'settlement'], ['counterpart'], ['settlement'], ['reason'], [], [],
   ]),
 ]);
 
@@ -164,17 +193,22 @@ const KIND_BY_ID = new Map(
  * @param {string} kind
  * @param {string|null|undefined} seed
  * @param {Record<string, unknown>} [interp]
+ * @param {string|null} [context] the racer context a row's declared contexts filter on (IN-4)
  * @returns {{kind:string, line:string, familyId:string, templateIndex:number,
  *   significance:string, audience:string, section:string|null} | null}
  */
-export function informationReceipt(kind, seed, interp = {}) {
+export function informationReceipt(kind, seed, interp = {}, context = null) {
   const row = KIND_BY_ID.get(String(kind));
   if (!row) return null;
   const eligible = row.pool
     .map((_, templateIndex) => templateIndex)
-    .filter((templateIndex) => row.requiredSlots[templateIndex].every((slot) => (
-      typeof interp[slot] === 'string' && String(interp[slot]).trim().length > 0
-    )));
+    .filter((templateIndex) => {
+      const contexts = row.contexts[templateIndex];
+      if (contexts && !contexts.includes(String(context))) return false;
+      return row.requiredSlots[templateIndex].every((slot) => (
+        typeof interp[slot] === 'string' && String(interp[slot]).trim().length > 0
+      ));
+    });
   if (eligible.length === 0) return null;
   // THE KEYED PICK, copied from `grammarNews.js` and cured for the same recorded reason:
   // `hash01` avalanches before the multiply, so the choice does not alias onto a parity class

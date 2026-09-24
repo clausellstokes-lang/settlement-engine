@@ -1782,6 +1782,20 @@
       "band": null,
       "note": ""
     },
+    "src/domain/worldPulse/reputationRaceConsumer.js#REPUTATION_RACE_TUNING": {
+      "role": null,
+      "status": "draft",
+      "signedAt": null,
+      "unit": {
+        "GAP_A_SEASON_MAX": "weeks",
+        "GAP_A_WEEK_MAX": "weeks",
+        "GAP_WEEKS_MAX": "weeks",
+        "NOTABLE_SEVERITY": "fraction01",
+        "ROUTINE_SEVERITY": "fraction01"
+      },
+      "band": null,
+      "note": "FP IN-4 commit 2 (lane FP-I2): the reputation race's Herald weights and the three week ceilings that band how far a true account came behind its story. The weights are READ OFF the siblings rather than authored (the notable one is the public misjudgment beat's material weight, the routine one the weight a DM assignment's comings and goings carry); the ceilings are one week, a month and a season. DRAFT, registered in the minting commit because a new tuning table has no silent door; the units are labels read off the source, and nothing here is signed or proposed."
+    },
     "src/domain/worldPulse/resourceDynamicsKernel.js#RESOURCE_DYNAMICS_TUNING": {
       "role": null,
       "status": "draft",

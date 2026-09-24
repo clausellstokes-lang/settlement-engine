@@ -265,6 +265,11 @@ const LAYER_PATTERNS = Object.freeze({
     /^src\/domain\/worldPulse\/suspicion\.js$/,
     /^src\/domain\/worldPulse\/counterIntelSweep\.js$/,
     /^src\/domain\/worldPulse\/patronExposure\.js$/,
+    // IN-4: the reputation race's consumer. Who knew first, the traveller or his story, is
+    // INFORMATION's own subject (the medium racing the man), so the leaf takes INFO on the IN-1
+    // and IN-2 readings above; its three foreign reads (the route network, the army ledger, the
+    // envoy errands) are licensed by IN-4's three rows. ⛔ EXACT-PATH, for the same reason.
+    /^src\/domain\/worldPulse\/reputationRaceConsumer\.js$/,
     /^src\/domain\/spatial\/(?:rumorNetwork|intelActs)\.js$/,
     // W-SEAT SEAT-4: the anticipated-reaction forecast. HOMED BY CHAIR DECLARATION
     // (ODQ §861, the SEAT-A2 landing) rather than by the landing lane's judgment, because

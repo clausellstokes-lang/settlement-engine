@@ -809,6 +809,40 @@ export const VIRTUAL_SUBSYSTEM_ROWS = Object.freeze([
     // No channel at all, so the row can never be ALIVE and says so honestly.
     soakEvidence: 'unobserved',
   }),
+  // ── IN-4 · THE ROAD (FP IN-4 commit 2, docs/DESIGN_FP_ARCH_IN.md §4 IN-4; block #20) ─────────
+  // APPENDED AT THE TAIL after the intel lane's row, the add-a-row protocol above.
+  Object.freeze({
+    rule: 'reputationRaceEnabled',
+    title: 'The reputation race (the traveller against his own story, at the gate)',
+    module: 'src/domain/worldPulse/reputationRaceConsumer.js,src/domain/worldPulse/routeNetworkConsumersRace.js,src/domain/worldPulse/settlementLifecycleKernel.js',
+    aliveness: Object.freeze({
+      // DELIBERATELY EMPTY per the evidence law: the stage mints no pulse candidate; its four
+      // beats are news entries the lifecycle host hands to the pulse.
+      eventTypes: Object.freeze([]),
+      // DELIBERATELY EMPTY: the beats classify into `knowledge`, the contaminated residual.
+      moverFamilies: Object.freeze([]),
+      // DELIBERATELY EMPTY: the stage writes nothing at all. It reads the army, envoy and npc
+      // ledgers, whose containers stay alive in worlds where the race never ran.
+      stateKeys: Object.freeze([]),
+      other: 'A NEWS-ONLY STAGE OVER LEDGERS OTHER LAYERS WRITE, WHICH IS WHY EVERY CHANNEL IS EMPTY AND WHY THAT IS THE CORRECT READING. ONE GATE, by name and strict: reputationRaceActive (reputationRaceConsumer.js) is the only read of the key in src/, and advanceReputationRace asks it before any ledger is read. The stage is mounted in the lifecycle host, own flag before the host gate, and its beats ride both of the host return paths. WHAT IT DOES, LIT: at every arrival a ledger kept last tick (an army column landing at its destination, an envoy coming home from a parlay, a DM-assigned roamer placed at his new host), it runs the reputation race, the story walking the lived route network from the same seat and departure while the traveller keeps the timing his own ledger recorded, and voices the built RACE_OUTCOMES token through the INFORMATION registry: race_person, race_story or race_together, each honest for its racer. An envoy whose story beat him home after his court resolved a misjudged decision about the very court he parleyed with is voiced word_came_too_late instead, the truth that arrived too late. WHAT IT NEVER DOES: it writes no ledger and no field, draws no random number, stores no verdict, and mints nothing when no story is in flight (the trivial race is silent) or when neither telling can arrive. REFUGEE COLUMNS ARE NOT READ: the release deletes a landed column and keeps no origin anywhere in the world. THE OBSERVATION NEEDED to close the gap is a lit soak whose route network is lit and whose armies, envoys or DM-assigned roamers arrive with a story on the road; until then the lane is pinned in tests/domain/reputationRaceIn4.test.js, which carries its four dormancy fences and the lit-mutant control.',
+    }),
+    // A beat needs an arrival with a story in flight over open road: sparse by design.
+    expectedTempo: 'reactive',
+    invariants: Object.freeze([
+      Object.freeze({
+        name: 'dark_is_byte_identical',
+        description: 'With the key absent, false, or any truthy non-true value, the lifecycle host over a world whose arrivals race the moment the key is lit returns exactly what it returned before IN-4: the same worldState reference, the same vote and the same news.',
+        check: 'Expressible from state and asserted that way in tests/domain/reputationRaceIn4.test.js fence 1 (a pinned digest of the dark host output, computed with the pre-IN-4 host planted), with the lit-mutant control on the same fixture.',
+      }),
+      Object.freeze({
+        name: 'the_race_writes_nothing',
+        description: 'Lit, the stage hands back the very worldState it was given and adds only news entries: no ledger, no field, no stored verdict, so the act a late true account arrives after is never rewritten.',
+        check: 'Asserted by reference identity and a byte comparison of pulseHistory in tests/domain/reputationRaceIn4.test.js (the jewel and the mount pins).',
+      }),
+    ]),
+    // No channel at all, so the row can never be ALIVE and says so honestly.
+    soakEvidence: 'unobserved',
+  }),
 ]);
 
 /**

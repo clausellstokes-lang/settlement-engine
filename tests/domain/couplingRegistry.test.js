@@ -79,6 +79,10 @@ import {
   ENC_ENCOUNTERS_COUPLINGS,
   IN0A_PLANT_HANDOFF_COUPLING,
   IN0C_DISCLOSURE_SIGNING_CREDIT_COUPLING,
+  IN4_ARMY_ARRIVAL_COUPLING,
+  IN4_ENVOY_RETURN_COUPLING,
+  IN4_RACE_ROAD_COUPLING,
+  IN4_REPUTATION_RACE_COUPLINGS,
   IN_INFORMATION_COUPLINGS,
   couplingRowFor,
   couplingRowsFor,
@@ -221,6 +225,10 @@ describe('CW-0 coupling registry', () => {
       // FP GR-5c (2026-09-24; SR-1, SR-11): the two renegotiation rows, appended last on the same
       // tiebreak argument; the first-row seats of CPL-19 and CPL-21 in their directions are unmoved.
       ...GR5C_RENEGOTIATION_COUPLINGS,
+      // FP IN-4 (2026-09-24; SR-1, an ordered registry pin the wave grows by its own law): the
+      // reputation race's three reads, appended LAST on the same tiebreak argument, so the
+      // CPL-4 / WAR→INFO first-row seat stays ES-5's.
+      ...IN4_REPUTATION_RACE_COUPLINGS,
     ]);
     // The W-SEAT D10 row spelled out, on the WR-3 precedent above: a composition assertion
     // proves ORDER, never CONTENT, and this is the estate's first `irregularForceEnabled`
@@ -766,6 +774,11 @@ describe('CW-0 coupling registry', () => {
         // last precisely so WR-7's silence inference keeps the first-row seat asserted on
         // the next line: a landing act does not move a legacy tiebreak to tidy an ordinal.
         WR6C_ANTICIPATED_REACTION_CASUS_COUPLING,
+        // FP IN-4 is the NINTH (2026-09-24; SR-1, the bucket grows by the registry's own
+        // composition law): the reputation race reads the envoy ledger's HOMECOMINGS, the one
+        // arrival a court-level telling rides home on. It sits LAST because COUPLING_REGISTRY
+        // appends the IN-4 rows last, and WR-7's silence inference keeps the seat on the next line.
+        IN4_ENVOY_RETURN_COUPLING,
       ]);
     expect(couplingRowFor('CPL-19', 'GRAMMAR→INFO')).toBe(WR7_SILENCE_INFERENCE_COUPLING);
     // ES-1's third row OPENS a pair: nobody had read across TRADE and GRAMMAR before, and
@@ -791,8 +804,13 @@ describe('CW-0 coupling registry', () => {
     // both read INFO→WAR across CPL-4, and the doctrine stage is the first read back the
     // other way — the espionage doctrine spelling its moral axis with the estate's ONE
     // exported moral ladder rather than growing a private band inside the ES family.
-    expect(couplingRowsFor('CPL-4', 'WAR→INFO')).toEqual([ES5_DOCTRINE_MORAL_LADDER_COUPLING]);
+    // FP IN-4's army-arrival read is the SECOND WAR→INFO row (2026-09-24; SR-1): the race reads
+    // the army ledger's arrival records. Appended last, so the first-row seat stays ES-5's, which
+    // is the property this test is named for and the reason the IN-4 rows compose last.
+    expect(couplingRowsFor('CPL-4', 'WAR→INFO')).toEqual([ES5_DOCTRINE_MORAL_LADDER_COUPLING, IN4_ARMY_ARRIVAL_COUPLING]);
     expect(couplingRowFor('CPL-4', 'WAR→INFO')).toBe(ES5_DOCTRINE_MORAL_LADDER_COUPLING);
+    // IN-4's road read OPENS a pair+direction: no row had read the lived road network into INFO.
+    expect(couplingRowsFor('CPL-9', 'TRADE→INFO')).toEqual([IN4_RACE_ROAD_COUPLING]);
     // The leaf composes exactly its rows, in wave order.
     expect(ES_ESPIONAGE_COUPLINGS).toEqual([
       ES1_COVERT_MISSION_MINT_COUPLING,

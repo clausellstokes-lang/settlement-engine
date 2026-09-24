@@ -39,7 +39,7 @@ import {
 // this family to accept.
 import { TR1_CASUS_COMMERCII_COUPLINGS, TR3_BELIEVED_MARKETS_COUPLINGS } from './couplingRegistryTrade.js';
 import { GR2_PACT_FORMATION_COUPLINGS, GR3_TERM_FAMILY_COUPLINGS, GR4_BREACH_CREDIBILITY_COUPLINGS, GR5C_RENEGOTIATION_COUPLINGS, GR6_MEDIATION_COUPLINGS } from './couplingRegistryGrammar.js';
-import { IN_INFORMATION_COUPLINGS } from './couplingRegistryInfo.js';
+import { IN4_REPUTATION_RACE_COUPLINGS, IN_INFORMATION_COUPLINGS } from './couplingRegistryInfo.js';
 // The ESPIONAGE leaf (FP wave ES-1). ES is a wave family OF the INFORMATION program in
 // the LAYER map, and a volume of its own in the WAVE map — couplingIds carry the `ES`
 // prefix and two lanes building IN-* and ES-* must not serialize on one registry file.
@@ -89,6 +89,10 @@ export {
 export {
   IN0A_PLANT_HANDOFF_COUPLING,
   IN0C_DISCLOSURE_SIGNING_CREDIT_COUPLING,
+  IN4_ARMY_ARRIVAL_COUPLING,
+  IN4_ENVOY_RETURN_COUPLING,
+  IN4_RACE_ROAD_COUPLING,
+  IN4_REPUTATION_RACE_COUPLINGS,
   IN_INFORMATION_COUPLINGS,
 } from './couplingRegistryInfo.js';
 
@@ -233,6 +237,13 @@ export const COUPLING_REGISTRY = Object.freeze([
   // LAST on the same tiebreak argument: CPL-19 and CPL-21's first-row seats in these directions
   // belong to rows composed far above, so this append moves nothing a single-row caller resolves.
   ...GR5C_RENEGOTIATION_COUPLINGS,
+  // FP IN-4 (2026-09-24): the reputation race's three reads (TRADE→INFO, WAR→INFO,
+  // GRAMMAR→INFO), all at reputationRaceConsumer.js. ⛔ APPENDED LAST, on the tiebreak argument
+  // WR-6c, W-MEM and W-SEAT D10 all make, and CHECKED RATHER THAN ASSUMED: composed beside the
+  // IN-0 rows the WAR→INFO row would sit ahead of ES_ESPIONAGE_COUPLINGS and take the
+  // CPL-4 / WAR→INFO first-row seat from ES-5's doctrine ladder; appended here it takes none
+  // (CPL-9 / TRADE→INFO had no row, CPL-19 / GRAMMAR→INFO stays WR-7's).
+  ...IN4_REPUTATION_RACE_COUPLINGS,
 ]);
 
 /** @type {ReadonlyArray<Readonly<CouplingRegistryRow>>} */

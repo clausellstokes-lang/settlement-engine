@@ -263,7 +263,11 @@ describe('the covering array and its constraint manifest', () => {
     // 39 → 40 at the FP integration pick: IN-4/1's declared key, the fourth tonight (SR-1, the union; re-measured by this run).
     // 39 → 40 at FP IN-3 (lane FP-I3, 2026-09-24; SR-1): `counterIntelEnabled`, measured by this run.
     // 40 → 41 at the FP integration pick: IN-3's virtual mint, the fifth tonight (SR-1, the union; re-measured by this run).
-    expect(census.virtual.length).toBe(41);
+    // 41 → 42 at the FP integration pick: IN-4/2's virtual mint, the sixth tonight (SR-1, the union; re-measured by this run).
+    expect(census.virtual.length).toBe(42);
+    // 39 -> 40 at FP IN-4 commit 2 (lane FP-I2, 2026-09-24; SR-1): `reputationRaceEnabled`, MEASURED
+    // by calling `flagDomainCensus` with this suite's own arguments on the IN-4 tree: virtual 40,
+    // union 97, governed 25 and ungoverned 32 unmoved, nonBoolean 13, overlap empty.
     expect(census.overlap).toEqual([]);
     // 85 -> 86 at the WAR landing (§876): the same coupled-union key, same re-measure.
     // 86 -> 87 at ENC-3 (§893): the virtual mint above, moving in lockstep.
@@ -277,9 +281,11 @@ describe('the covering array and its constraint manifest', () => {
     // 96 → 97 at the FP integration pick: IN-4/1's key, in lockstep.
     // 96 → 97 at FP IN-3: the virtual mint above, moving in lockstep.
     // 97 → 98 at the FP integration pick: IN-3's key, in lockstep.
-    expect(census.union.length).toBe(98);
+    // 98 → 99 at the FP integration pick: IN-4/2's key, in lockstep.
+    expect(census.union.length).toBe(99);
     // 93 -> 94 at FP GR-6: the virtual mint above, moving in lockstep.
     // 95 -> 96 at FP IN-4 commit 1: the virtual mint above, moving in lockstep.
+    // 96 -> 97 at FP IN-4 commit 2: the virtual mint above, moving in lockstep.
     expect(census.governed.length + census.ungoverned.length + census.virtual.length).toBe(census.union.length);
     // 57 of 82 sit outside the normalizer's fail-closed coercion — the measured content of
     // "the normalizer is NOT the oracle", and the reason the manifest had to be minted. It
@@ -296,9 +302,11 @@ describe('the covering array and its constraint manifest', () => {
     // 71 → 72 at the FP integration pick: IN-4/1's key, outside the normalizer.
     // 71 → 72 at FP IN-3: likewise virtual, so it lands outside the normalizer.
     // 72 → 73 at the FP integration pick: IN-3's key, outside the normalizer.
-    expect(census.union.length - census.governed.length).toBe(73);
+    // 73 → 74 at the FP integration pick: IN-4/2's key, outside the normalizer.
+    expect(census.union.length - census.governed.length).toBe(74);
     // 68 -> 69 at FP GR-6: likewise virtual, so it lands outside the normalizer.
     // 70 -> 71 at FP IN-4 commit 1: likewise virtual, so it lands outside the normalizer.
+    // 71 -> 72 at FP IN-4 commit 2: likewise virtual, so it lands outside the normalizer.
     expect(census.nonBoolean.length).toBe(13);
   });
 

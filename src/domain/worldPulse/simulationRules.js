@@ -378,6 +378,16 @@ export const ENGINE_GATED_VIRTUAL_RULE_KEYS = Object.freeze([
   // from this very census; read ONCE because two doors on one flag is how a deleted guard
   // hides behind a surviving one.
   'pactFormationEnabled',
+  // Joined 2026-09-24 by FP wave IN-4 commit 2 (lane FP-I2) under CR-WR10-C item 4 (the compiled
+  // charter's §3 flag law), in the SAME commit as its first real gate read —
+  // `reputationRaceConsumer.reputationRaceActive`, the ONE `=== true` by-name read of this key in
+  // the tree, spelled in one statement so the observed-shape discovery sees it — and its AUTHORED
+  // certification row at the tail of VIRTUAL_SUBSYSTEM_ROWS. Inserted at its codepoint-sorted
+  // position (SR-7). ⚠ A SINGLE CONJUNCT, deliberately: the race's story leg walks the lived route
+  // network (routeLifecycleEnabled's), its gate listeners are the brokerage layer's own gate, and
+  // the arrivals it reads exist only where their own layers ran; those are the race's DATA, and
+  // distancePricedNewsEnabled is a LIGHTING-ORDER precondition the LIT-n unit judges, never a door.
+  'reputationRaceEnabled',
   // Joined 2026-08-12 by FP wave IN-1a under CR-WR10-C item 4 (the compiled charter's §3
   // flag law), in the SAME commit as its first real gate read
   // (secondOrderBelief.secondOrderBeliefActive, the ONE `=== true` by-name read of this

@@ -303,6 +303,11 @@ export const WHAT_PHRASES = Object.freeze({
   false_accusation: 'a spy named where none was found',
   sweep_launched: 'strangers questioned at the gates',
   intel_transfer: 'word passing quietly between courts',
+  // IN-4: the reputation race, read at the arrivals the ledgers keep, and its jewel.
+  race_person: 'a traveller arriving ahead of his own story',
+  race_story: 'a story arriving ahead of the man it is about',
+  race_together: 'a traveller and his story arriving together',
+  word_came_too_late: 'a true account arriving after the ruling it would have changed',
   // power / faction / coup
   coup_succeeded: 'a seizure of power',
   coup_suppressed: 'an uprising put down',

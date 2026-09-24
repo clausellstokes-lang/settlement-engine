@@ -982,6 +982,10 @@ describe('engine-gated rule keys (the census-invisible subsystem class)', () => 
       // fully lit substrate (beliefs, statecraft, constructive flows, bonded and trade edges),
       // hashes the projection, and carries its lit control on the same fixture.
       intelTradeEnabled: 'tests/property/intelTradeDormancyGolden.test.js',
+      // FP IN-4 commit 2 (lane FP-I2, 2026-09-24): the register's member minted by the race wave.
+      // Its brief places the four fences and the lit-mutant control in the wave's own acceptance
+      // file, beside the race they fence.
+      reputationRaceEnabled: 'tests/domain/reputationRaceIn4.test.js',
       // FP TR-2 (lane FP-D, 2026-09-23): the register's THIRTY-SIXTH member. Its brief places
       // the four fences and the lit-mutant control in the wave's own acceptance file.
       merchantHousesEnabled: 'tests/domain/houseLedgerTr2.test.js',

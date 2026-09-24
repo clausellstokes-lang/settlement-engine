@@ -261,6 +261,11 @@ const INTEL_TRADE = 'intelTradeEnabled';
 // APPENDED at the tail after GR-6's and its ONE by-name gate read (`suspicion.counterIntelActive`)
 // in a single commit: the same three module-scope edits, ZERO new test titles.
 const COUNTER_INTEL = 'counterIntelEnabled';
+// FP IN-4 commit 2 (lane FP-I2). The reputation race, minted with its manifest entry, its
+// certification row APPENDED at the tail after the intel lane's and its ONE by-name gate read
+// (`reputationRaceConsumer.reputationRaceActive`) in a single commit: the same three module-scope
+// edits, ZERO new test titles.
+const REPUTATION_RACE = 'reputationRaceEnabled';
 // AUTHORING ORDER, not alphabetical: the assertion below is an exact ordered equality
 // against VIRTUAL_SUBSYSTEM_ROWS, so this list mirrors the file's own section order.
 //
@@ -298,6 +303,7 @@ const VIRTUAL_RULES = Object.freeze([
   MEDIATION_GENERALIZED,
   INTEL_TRADE,
   COUNTER_INTEL,
+  REPUTATION_RACE,
 ]);
 
 const rowFor = (rule) => SUBSYSTEM_CERTIFICATION_REGISTRY.find((row) => row.rule === rule);
@@ -500,6 +506,11 @@ const LANE_LEAVES = Object.freeze({
   [INTEL_TRADE]: ['src/domain/spatial/intelActs.js'],
   // IN-3. The gate and the read, the sweep, the exposure producer, and the head that carries both seams.
   [COUNTER_INTEL]: ['src/domain/worldPulse/suspicion.js', 'src/domain/worldPulse/counterIntelSweep.js', 'src/domain/worldPulse/patronExposure.js', 'src/domain/worldPulse/informationStatecraft.js'],
+  // IN-4 commit 2. THE LEAF ALONE: the gate, the arrival reads, the race and the beats live in
+  // reputationRaceConsumer.js. The race module and the lifecycle host are in the row's wider
+  // `module` list because a reader needs them, and are deliberately absent here: the host is the
+  // lifecycle layer's own mouth and mints its own candidate vocabulary.
+  [REPUTATION_RACE]: ['src/domain/worldPulse/reputationRaceConsumer.js'],
   [CHANCE_ENCOUNTERS]: [
     'src/domain/worldPulse/envoyChanceMeeting.js',
     'src/domain/worldPulse/envoyChanceMeetingLedger.js',

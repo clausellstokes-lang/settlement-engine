@@ -132,15 +132,16 @@ export const KIND_REGISTRATION_FREEZES = Object.freeze({
   // TRADE annex authors eight TR-3 kinds and this wave registers the one whose producer exists
   // (the WHERE composer's wrong-market evidence). ⛔ THE SHRINK-BACK IS A RECORDED OBLIGATION of
   // the TR-3 member that takes MARKET to five rows or more: strike it from this list in that commit.
-  smallFamilies: Object.freeze(['MARKET', 'INFORMATION', 'FAITH', 'CHANCE_MEETING']),
+  // ⭐ FP IN-4 BANKS THE SHRINK-BACK INFORMATION OWED: its four race rows take the family from two
+  // rows to six, so it leaves this list in the registering commit, as the obligation above requires.
+  smallFamilies: Object.freeze(['MARKET', 'FAITH', 'CHANCE_MEETING']),
   /** Every registry row in the estate. ENC-4 took this 113 → 114, and ENC-4b (§900) 114 → 115
    * with `chance_meeting_exposed`, the seventh family's second desk-bearing exact row. */
   // +1 at LIT1b-pre U4 (SR-1, SR-8): `signed`, the pact stage's signing beat, a desk-bearing GRAMMAR row.
-  registeredKinds: 123, // the UNION at the FP integration pick, 2026-09-24 (the chair): 115 + 2 (GR-2b) + 1 (TR-3) + 1 (IN-2) + 1 (GR-6) + 2 (IN-3: false_accusation, sweep_launched) + 1 (LIT1b-pre U4: signed) — measured by the roster's readers at the tip
+  registeredKinds: 127, // the UNION at the FP integration pick, 2026-09-24 (the chair): 115 + 2 (GR-2b) + 1 (TR-3) + 1 (IN-2) + 1 (GR-6) + 2 (IN-3) + 1 (LIT1b-pre U4: signed) + 4 (IN-4: race_person, race_story, race_together, word_came_too_late) — measured by the roster's readers at the tip
   /** `Object.keys(EXACT_SECTION).length`. ENC-4 took this 379 → 380, WITH registeredKinds, and
    * ENC-4b (§900) 380 → 381 with `chance_meeting_exposed`. */
-  // +1 at LIT1b-pre U4: `signed` on its own EXACT_SECTION row (trade), REGISTERED in the commit that routes it.
-  routedTokens: 389, // the UNION at the FP integration pick, 2026-09-24: 381 + 2 + 1 + 1 + 1 + 2 + 1
+  routedTokens: 393, // the UNION at the FP integration pick, 2026-09-24: 381 + 2 + 1 + 1 + 1 + 2 + 1 + 4 (the race kinds at `events`)
   /**
    * Herald-routed tokens with no phrased pool at all. ⛔ SHRINK-ONLY: the content annexes'
    * wiring waves lower it; nothing may raise it. Unmoved since the freeze: GR-2b's two new

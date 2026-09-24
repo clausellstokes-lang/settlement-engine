@@ -82,6 +82,38 @@ export const INFORMATION_RECEIPTS = Object.freeze({
     'They work from an accounting, not from us.',
     'Thin, dated, and ours to have written.',
   ],
+  // IN-4 THE ROAD: the race kinds of the annex's # IN-4 block, verbatim (the built
+  // RACE_OUTCOMES tokens `person`, `story` and `together`; `neither` has no pool, by law, J-INF-5).
+  // No producer supplies a bare route name, a season or a notoriety band at this base, so the
+  // variants naming `{route}`, `{season}` or `{band}` are declared unreachable and STAY in the pool
+  // (the IN-1 rule above).
+  race_person: [
+    'He reached the gate before his story did.',
+    (x) => `${x.npc} came into ${x.settlement} ahead of any word out of ${x.counterpart}, and the council heard it from a mouth and not a market.`,
+    (x) => `The gate opened on the man himself; whatever ${x.settlement} decides, it decides on his own account.`,
+    'No rumour was waiting for him. He got to tell it his way, which is rarer than it sounds.',
+    (x) => `The ${x.route} road was kind, and the winter was kinder to riders than to talk.`,
+    (x) => `The market at ${x.settlement} heard it from a man standing in it, which is not how markets usually hear anything.`,
+  ],
+  race_story: [
+    'The tale wore the road faster than the man; the gate was answered before he knocked.',
+    (x) => `${x.settlement} had the story of ${x.counterpart} a season before ${x.npc} arrived to correct it, and the gate was already set against him.`,
+    (x) => `What reached ${x.settlement} first came by many mouths and no name; what came second came by one man with everything to lose.`,
+    'The council had decided before he was in sight, and his account is filed as a correction.',
+    'Word travels light. Men travel with baggage.',
+    (x) => `By ${x.season} the story stood at ${x.band} in every tavern at ${x.settlement}; the man himself is a late witness to it.`,
+  ],
+  race_together: [
+    (x) => `${x.npc} and the word out of ${x.counterpart} came into ${x.settlement} the same week, and each proved the other.`,
+    'The tale was at the gate and the man behind it; corroboration is cheap when it arrives on time.',
+    (x) => `${x.settlement}'s clerks had two accounts of one thing and no reason to choose, so they kept both.`,
+    'He told them what they had just heard, which is the best a man can do.',
+    'The clerks enter both accounts on the same day and note that they agree, which is worth entering.',
+    (x) => `The market at ${x.settlement} heard it twice in a morning and traded on it by noon.`,
+    (x) => `${x.settlement} will decide quickly, and quickly is what corroboration buys.`,
+    'He passed the carters carrying it on the last stretch of road and came in beside them.',
+    'The word and the man agreed. It happens, and it is never remembered.',
+  ],
   // IN-3 THE SWEEP HUM — the annex's # IN-3 `sweep_launched` block, verbatim. Variants 2 and 3
   // name a {faction} and a {reason} the producer does not supply at this base, so they are
   // declared unreachable and stay in the pool (the IN-1 rule above).
@@ -95,5 +127,16 @@ export const INFORMATION_RECEIPTS = Object.freeze({
     (x) => `A stranger coming into ${x.settlement} this season answers at the gate, at the inn, and again in the morning.`,
     'Nothing has been found yet. The looking is already changing who comes.',
     'The questioning began at the turn of the season, and the season is being remembered by it.',
+  ],
+  // THE TRUTH THAT ARRIVED TOO LATE, the wave's jewel (the annex's POOL HANDLE, registered under
+  // that name). No producer supplies a typed `{reason}` at this base: variant 4 is declared
+  // unreachable and stays.
+  word_came_too_late: [
+    (x) => `The word clearing ${x.npc} reached ${x.settlement} after the seat had already ruled on the story, and the hours between are in the record.`,
+    (x) => `${x.counterpart}'s letter came in on the evening tide; the gate had been answered at noon.`,
+    (x) => `Both tellings are filed together at ${x.settlement}: the false one first, and the true one under it.`,
+    (x) => `The seat acted on ${x.reason} and learned better in a fortnight; the acting cannot be taken back.`,
+    'Nobody lied. The road did the rest.',
+    'The clearing letter is entered with its hour, and the hour is after the ruling\'s. The clerks were careful to write both.',
   ],
 });

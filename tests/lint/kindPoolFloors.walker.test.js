@@ -229,12 +229,17 @@ const ROUTED_TOKENS = KIND_REGISTRATION_FREEZES.routedTokens;
 // row. It carries the treaty cohort's desk, so ROUTED_TOKENS moves with it (386 → 387, in the roster) and
 // the divergence below stays at 8; the unvoiced ceiling holds because the token is REGISTERED.
 // The UNION at the FP integration pick (the chair, 2026-09-24): 122 + 1.
-const REGISTERED_KIND_COUNT = 123;
+// +4 at FP IN-4 (the race kinds) — the UNION at the pick: 123 + 4.
+const REGISTERED_KIND_COUNT = 127;
 // +1 at GR-6: GR-6 registers brokered_back (the war that did not happen), the GRAMMAR family's
 // fifteenth row and the mediation leaf's one news kind (SR-8). It carries the treaty cohort's
 // desk, so ROUTED_TOKENS moves with it (383 → 384, in the roster) and the divergence below stays
 // at 8; the unvoiced ceiling holds at 274 because the token is REGISTERED in the commit that
 // routes it.
+// +4 at FP IN-4 (SR-1, SR-8): IN-4 registers race_person, race_story, race_together and
+// word_came_too_late, the INFORMATION family's third to sixth rows. All four carry the envoy comings
+// and goings' desk (`events`), so ROUTED_TOKENS moves with them (385 → 389, in the roster) and the
+// divergence below stays at 8; the unvoiced ceiling holds because all four are REGISTERED.
 
 const violations = floorViolations(ALL_ROWS, { declaredExceptions: DECLARED_EXCEPTIONS });
 const unvoiced = Object.keys(EXACT_SECTION).filter((token) => !REGISTERED_KINDS.has(token));

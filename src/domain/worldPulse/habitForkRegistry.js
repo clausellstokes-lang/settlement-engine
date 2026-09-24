@@ -656,7 +656,7 @@ export const HABIT_FORK_REGISTRY = Object.freeze([
     forkId: 'HBF-79', module: 'src/domain/worldPulse/roadsKernel',
     symbol: 'advanceLitRoads', discovery: 'checklist', disposition: 'DEFER',
     reason: 'SURVEY U-42 - THE DENSEST UNREGISTERED CLUSTER IN THE ESTATE, NINE draws behind one symbol: the road hazard classes that decide hostage against robbed, delayed or trapped; the detention gate at a destination; the captive CONVERSION draw that returns a released traveller as somebody\'s creature; and the stay-length draws. ⚠ The six outcome words are INLINE LITERALS on the branch lines and this module exports no constant at all, so no vocabulary can be declared without minting one',
-    closeOwed: 'grade a hazard outcome against what the traveller reached and what it cost, and the conversion draw against whether the corruption edge it minted ever produced anything. ⛔ Nine draws behind one symbol is not one question: whether this row SPLITS is the chair\'s before any of it can close',
+    closeOwed: 'grade a hazard outcome against what the traveller reached and what it cost, and the conversion draw against whether the corruption edge it minted ever produced anything. ⛔ Nine draws behind one symbol is not one question: whether this row SPLITS is the chair\'s before any of it can close. ⭐ A NOTE FROM THE ROAD WAVE: the reputation race (reputationRaceConsumer.js) reads the ARRIVALS this row and its sibling transits stage and draws nothing of its own, so it registers no row. Its verdict is a derivation over arrival ticks, a pin on a race outcome would falsify the arrival physics this row owns, and a directed race is a directed arrival, sealed here or nowhere',
   }),
   fork({
     forkId: 'HBF-80', module: 'src/domain/worldPulse/seasons',
