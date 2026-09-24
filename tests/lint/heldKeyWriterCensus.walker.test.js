@@ -50,21 +50,22 @@
  *     is absent from `RECORD_CLASSES`, so the IMPORTED denominator excludes it. That is deliberate:
  *     the `recordPath`-less chooser is EM-R1b's subject, and widening the denominator by hand here
  *     to reach it is a named STOP of this member's packet (§11 item 8).
- * 6.  THE THREE HELD-BUT-SAVED-ONLY KEYS are asserted EXCLUDED, never observed. Generation writes
- *     none of `neighbourNetwork`, `interSettlementRelationships` or `crossSettlementConflicts`; the
- *     arm that watches them over a real save then load is EM-R7's.
+ * 6.  THE FOUR HELD-BUT-SAVED-ONLY KEYS are asserted EXCLUDED, never observed. Generation writes
+ *     none of `neighbourNetwork`, `interSettlementRelationships`, `crossSettlementConflicts` or
+ *     `peaceOffers` (NOTE-14, which classed the fourth); the arm that watches them over a real
+ *     save then load is EM-R7's.
  * 7.  A6 READS THE THREE `src/` FILES' TEXT. It proves WHERE the clone is spelled, not that the
  *     runtime took it; `tests/generators/pipelinePinnedMode.test.js`'s A7 and A8 are the executed
  *     halves and this arm is their source-level counterpart.
- * 8.  ⭐ A7'S SCANNER IS A LINE PREDICATE, NOT A PARSER, and three holes follow from that. They are
- *     named here rather than discovered later. (i) A write reached through a COMPUTED key
- *     (`record[KEY] = …`, the shape `peaceTermsDrafting.js` uses for `peaceOffers`) carries no
- *     literal key on the line and is invisible. The two keys A7 governs are written by their own
- *     names at every site in the tree today, and the both-directions equality is what would
- *     notice a site moving to that shape — it would VANISH from the derived set and red. (ii) The
+ * 8.  ⭐ A7'S SCANNER IS A LINE PREDICATE, NOT A PARSER, and two holes follow from that. They are
+ *     named here rather than discovered later. A THIRD was closed at NOTE-14: a COMPUTED-key write
+ *     (`{ …record, [KEY]: … }`, the shape `peaceTermsDrafting.js` uses for `peaceOffers`) carries
+ *     no literal key on the line, so the scanner now resolves the CONSTANTS whose literal value IS
+ *     a governed key out of RAW source and matches a bracket that OPENS a property — which is what
+ *     keeps the ternary `settlement[PEACE_OFFER_KEY] : undefined` out of the write set. (i) The
  *     enclosing symbol is the nearest column-zero binding head at or above the line, the same
  *     backward scan `tests/lint/moduleScopeCwdRatchet.test.js` drives against live controls; a
- *     site inside a nested helper is attributed to its outermost declaration. (iii) A NON-WRITER
+ *     site inside a nested helper is attributed to its outermost declaration. (ii) A NON-WRITER
  *     row's site count is not pinned, only its presence, so a second `decrees:` line inside an
  *     already-declared display helper does not red. WRITER counts ARE pinned, which is the half
  *     that matters: the undo path's two rehydration branches cannot collapse into one unnoticed.
@@ -75,7 +76,7 @@ import { dirname, join, relative } from 'node:path';
 
 import { describe, expect, it } from 'vitest';
 
-import { EDITOR_KEY_WRITERS, RECORD_CLASSES, SAVED_ONLY_KEYS } from '../../src/domain/edit/recordRegister.js';
+import { RECORD_CLASSES, SAVED_KEY_WRITERS, SAVED_ONLY_KEYS } from '../../src/domain/edit/recordRegister.js';
 import { getStepMeta, getStepOrder } from '../../src/generators/pipeline.js';
 import { codeOnly } from '../helpers/codeOnlySource.js';
 import { declaredSymbols } from '../helpers/generationForkCensus.js';
@@ -256,13 +257,13 @@ function bodyOf(relative, symbol) {
 
 const called = (body, symbol) => new RegExp(`\\b${symbol}\\s*\\(`).test(body);
 
-/* ── A7's surface: the editor's two saved-only keys and every site that names them ────────── */
+/* ── A7's surface: the written saved-only keys and every site that names them ─────────────── */
 
 /** One spelling of "sorted copy", so two arms of this file cannot order a set differently. */
 const sorted = (values) => [...values].sort();
 
-/** The two keys `EDITOR_KEY_WRITERS` governs, DERIVED from the roster itself, never re-typed. */
-const EDITOR_KEYS = Object.freeze([...new Set(EDITOR_KEY_WRITERS.map((row) => row.key))].sort());
+/** The keys `SAVED_KEY_WRITERS` governs, DERIVED from the roster itself, never re-typed. */
+const WRITTEN_KEYS = Object.freeze([...new Set(SAVED_KEY_WRITERS.map((row) => row.key))].sort());
 
 /** Every module under `src/`, so the scan has no hand-typed file surface to go stale. */
 function srcFiles(dir = join(ROOT, 'src'), out = []) {
@@ -278,27 +279,70 @@ function srcFiles(dir = join(ROOT, 'src'), out = []) {
 const DECL_HEAD = /^(?:export\s+)?(?:async\s+)?function\s+([A-Za-z0-9_$]+)|^(?:export\s+)?(?:const|let|var)\s+([A-Za-z0-9_$]+)\s*=/;
 
 /**
- * Every site in `src/` that names one of the editor's keys, as `key|file|symbol|spelling` with
- * its site count. Read from CODE, never from prose: `codeOnly` blanks comments and literal text,
- * so this register's own documentation of its keys is not counted as a use of them.
+ * EVERY `src/` MODULE READ ONCE — the raw text and the comment/literal-blanked strip. Three of
+ * A7's derivations walk the same tree, and re-reading it per roster row is what made the first
+ * cut of this arm time out at twenty seconds; the cache is the whole cure.
+ * @type {{file: string, raw: string, lines: string[]}[]|null}
  */
-function editorKeySites() {
+let SRC_CACHE = null;
+function srcModules() {
+  if (SRC_CACHE === null) {
+    SRC_CACHE = srcFiles().map((abs) => {
+      const raw = readFileSync(abs, 'utf8');
+      return { file: relative(ROOT, abs).split('\\').join('/'), raw, lines: codeOnly(raw).split('\n') };
+    });
+  }
+  return SRC_CACHE;
+}
+
+/**
+ * The module CONSTANTS whose literal value IS one of the governed keys, mapped to that key. Read
+ * from RAW source because `codeOnly` blanks literal text by design — the very text this needs.
+ * This is what lets the scanner see a COMPUTED-key write without being told the constant's name.
+ */
+function keyConstants() {
+  /** @type {Map<string, string>} */
+  const byName = new Map();
+  for (const module of srcModules()) {
+    for (const match of module.raw.matchAll(/(?:^|\n)[ \t]*(?:export[ \t]+)?const[ \t]+([A-Z][A-Z0-9_]*)[ \t]*=[ \t]*'([^']*)'[ \t]*;/g)) {
+      if (WRITTEN_KEYS.includes(match[2])) byName.set(match[1], match[2]);
+    }
+  }
+  return byName;
+}
+
+/** A bracket that OPENS a property: `{ [KEY]: …` or `, [KEY]: …`, never a ternary's `] : …`. */
+const COMPUTED_WRITE = /(?:^|[{,])\s*\[\s*([A-Za-z_$][\w$]*)\s*\]\s*(?::|=[^=])/g;
+
+/**
+ * Every site in `src/` that names one of the governed keys, as `key|file|symbol|spelling` with its
+ * site count. Read from CODE, never from prose: `codeOnly` blanks comments and literal text, so
+ * this register's own documentation of its keys is not counted as a use of them.
+ */
+function savedKeySites() {
   /** @type {Map<string, number>} */
   const rows = new Map();
-  for (const abs of srcFiles()) {
-    const file = relative(ROOT, abs).split('\\').join('/');
-    const lines = codeOnly(readFileSync(abs, 'utf8')).split('\n');
+  const constants = keyConstants();
+  for (const { file, lines } of srcModules()) {
+    const symbolAt = (index) => {
+      for (let back = index; back >= 0; back -= 1) {
+        const head = lines[back].match(DECL_HEAD);
+        if (head) return head[1] || head[2];
+      }
+      return '(module)';
+    };
     lines.forEach((line, index) => {
-      for (const key of EDITOR_KEYS) {
+      for (const key of WRITTEN_KEYS) {
         const assign = new RegExp(`\\.${key}\\s*=[^=]`).test(line);
         const literal = new RegExp(`(^|[{,(\\s])${key}\\s*:`).test(line);
         if (!assign && !literal) continue;
-        let symbol = '(module)';
-        for (let back = index; back >= 0; back -= 1) {
-          const head = lines[back].match(DECL_HEAD);
-          if (head) { symbol = head[1] || head[2]; break; }
-        }
-        const id = `${key}|${file}|${symbol}|${assign ? 'assign' : 'literal'}`;
+        const id = `${key}|${file}|${symbolAt(index)}|${assign ? 'assign' : 'literal'}`;
+        rows.set(id, (rows.get(id) || 0) + 1);
+      }
+      for (const match of line.matchAll(COMPUTED_WRITE)) {
+        const key = constants.get(match[1]);
+        if (key === undefined) continue;
+        const id = `${key}|${file}|${symbolAt(index)}|computed`;
         rows.set(id, (rows.get(id) || 0) + 1);
       }
     });
@@ -307,11 +351,35 @@ function editorKeySites() {
 }
 
 /**
+ * How many times each of the given symbols is CALLED anywhere in `src/`, its own declaration line
+ * excluded — ONE pass over the cached tree for all of them, never one pass per symbol.
+ * @param {readonly string[]} symbols @returns {Map<string, number>}
+ */
+function callCounts(symbols) {
+  const probes = symbols.map((symbol) => ({
+    symbol,
+    call: new RegExp(`\\b${symbol}\\s*\\(`),
+    declaration: new RegExp(`(?:^|[^\\w$])(?:export\\s+)?(?:async\\s+)?function\\s+${symbol}\\s*\\(`),
+  }));
+  const counts = new Map(symbols.map((symbol) => [symbol, 0]));
+  for (const { lines } of srcModules()) {
+    for (const line of lines) {
+      for (const probe of probes) {
+        if (probe.call.test(line) && !probe.declaration.test(line)) {
+          counts.set(probe.symbol, counts.get(probe.symbol) + 1);
+        }
+      }
+    }
+  }
+  return counts;
+}
+
+/**
  * THE DECLARED NON-WRITERS: every site the scanner finds that names an editor key and writes it
  * on NOTHING THAT IS A RECORD. Each carries a written reason, and the equality in A7 is held in
  * both directions, so a site that IS a record write cannot hide in here.
  */
-const EDITOR_KEY_NON_WRITERS = Object.freeze([
+const SAVED_KEY_NON_WRITERS = Object.freeze([
   {
     id: 'dmLayer|src/domain/edit/recordRegister.js|RECORD_CLASSES|literal',
     reason: 'the register CLASSING its own key. Pure frozen data that describes the record and '
@@ -322,6 +390,12 @@ const EDITOR_KEY_NON_WRITERS = Object.freeze([
     id: 'decrees|src/domain/edit/recordRegister.js|RECORD_CLASSES|literal',
     reason: 'the same row as the line above, for the second editor key; one source line carries '
       + 'both class declarations and neither is a write.',
+  },
+  {
+    id: 'peaceOffers|src/domain/edit/recordRegister.js|RECORD_CLASSES|literal',
+    reason: 'NOTE-14\'s class row, the third of the same kind. The register classes the key as '
+      + 'HELD and writes it nowhere; its two real writers live in the world pulse and are '
+      + 'declared in SAVED_KEY_WRITERS.',
   },
   {
     id: 'decrees|src/domain/ai/personaSlicer.js|buildPersonaSlice|literal',
@@ -371,7 +445,12 @@ describe('EM-R1 — the writer census of every held key', () => {
       .filter(([key, cls]) => cls === 'HELD' && [...SAVED_ONLY_KEYS].includes(key))
       .map(([key]) => key)
       .sort();
-    expect(savedOnlyHeld).toEqual(['crossSettlementConflicts', 'interSettlementRelationships', 'neighbourNetwork']);
+    // ⭐ FOUR, NOT THREE, SINCE NOTE-14: `peaceOffers` was a top-level saved key with no class in
+    // the register at all. It is classed HELD with its three cross-settlement neighbours and for
+    // their reason — a first-hand relational fact generation never re-derives.
+    expect(savedOnlyHeld).toEqual([
+      'crossSettlementConflicts', 'interSettlementRelationships', 'neighbourNetwork', 'peaceOffers',
+    ]);
     // anchored: the line above proves all three are live HELD rows of the register, so this
     // disjointness is an exclusion the denominator made, not a table that drifted away.
     expect(savedOnlyHeld.filter((key) => HELD_KEYS.includes(key))).toEqual([]);
@@ -534,36 +613,44 @@ describe('EM-R1 — the writer census of every held key', () => {
     expect(power).toMatch(/registerStep\(/);
   });
 
-  it('A7 — the EDITOR\'s two keys: every writer RE-DERIVED from source, both directions (U62)', () => {
+  it('A7 — the SAVED-ONLY keys with writers: every one RE-DERIVED from source, both directions (U62, NOTE-14)', () => {
     // THE DENOMINATOR IS REFUSED FIRST. An empty file walk or an empty key set would make every
     // equality below two empty sets, which is the way a census goes vacuously green.
     const modules = srcFiles();
     expect(modules.length, 'the src/ walk found no modules: every equality below would be vacuous')
       .toBeGreaterThan(500);
-    expect(EDITOR_KEYS, 'the roster governs exactly the two keys the editor writes').toEqual(['decrees', 'dmLayer']);
+    expect(WRITTEN_KEYS, 'the roster governs the editor\'s two keys and NOTE-14\'s third')
+      .toEqual(['decrees', 'dmLayer', 'peaceOffers']);
 
-    // THE ROSTER IS TIED TO THE REGISTER IT LIVES IN: both keys are SAVED-ONLY and both are
-    // AUTHORED, so a reclassification cannot leave this roster pointing at a key that moved class.
-    const misfiled = EDITOR_KEYS.filter((key) => !SAVED_ONLY_KEYS.includes(key) || RECORD_CLASSES[key] !== 'AUTHORED');
-    expect(misfiled, `an editor key left the saved-only class or stopped being AUTHORED:\n${misfiled.join('\n')}`).toEqual([]);
+    // THE ROSTER IS TIED TO THE REGISTER IT LIVES IN: every governed key is SAVED-ONLY and carries
+    // a class, so a reclassification cannot leave this roster pointing at a key that moved out.
+    const misfiled = WRITTEN_KEYS.filter((key) => !SAVED_ONLY_KEYS.includes(key) || !(key in RECORD_CLASSES));
+    expect(misfiled, `a governed key left the saved-only class or lost its class row:\n${misfiled.join('\n')}`).toEqual([]);
+
+    // ⛔ THE COMPUTED SCANNER'S POSITIVE CONTROL, BEFORE THE EQUALITY THAT DEPENDS ON IT. NOTE-14's
+    // key is written only through a constant, so a scanner that resolved none would report those
+    // two writers missing rather than report that it had gone blind.
+    const constants = keyConstants();
+    expect([...constants.entries()].sort(), 'the key constants the computed scanner resolves')
+      .toEqual([['PEACE_OFFER_KEY', 'peaceOffers']]);
 
     // (a) BOTH DIRECTIONS over the SITES. Every site the scanner finds is a declared writer or a
     // declared non-writer, and every declared row resolves to a site that exists.
-    const derived = editorKeySites();
+    const derived = savedKeySites();
     const declared = [
-      ...EDITOR_KEY_WRITERS.map((row) => `${row.key}|${row.file}|${row.symbol}|${row.spelling}`),
-      ...EDITOR_KEY_NON_WRITERS.map((row) => row.id),
+      ...SAVED_KEY_WRITERS.map((row) => `${row.key}|${row.file}|${row.symbol}|${row.spelling}`),
+      ...SAVED_KEY_NON_WRITERS.map((row) => row.id),
     ].sort();
     expect(sorted(new Set(declared)), 'a declared id is spelled twice').toEqual(declared);
     expect(sorted(derived.keys()),
-      'a site naming an editor key is declared by no writer and no non-writer row, or a declared'
-      + ' row names a site the tree no longer carries. Add the writer to EDITOR_KEY_WRITERS in the'
+      'a site naming a governed key is declared by no writer and no non-writer row, or a declared'
+      + ' row names a site the tree no longer carries. Add the writer to SAVED_KEY_WRITERS in the'
       + ' record register, or the non-writer here WITH ITS REASON — never widen the scan.')
       .toEqual(declared);
 
     // (b) THE WRITER COUNTS ARE THE CLAIM'S SECOND HALF. A symbol that gains or loses a write site
     // keeps its id, so without this the undo path's three branches could collapse into one.
-    const countFaults = EDITOR_KEY_WRITERS
+    const countFaults = SAVED_KEY_WRITERS
       .filter((row) => derived.get(`${row.key}|${row.file}|${row.symbol}|${row.spelling}`) !== row.sites)
       .map((row) => `${row.file} :: ${row.symbol} writes ${row.key} at `
         + `${derived.get(`${row.key}|${row.file}|${row.symbol}|${row.spelling}`)} site(s), not the declared ${row.sites}`);
@@ -571,19 +658,36 @@ describe('EM-R1 — the writer census of every held key', () => {
 
     // (c) THE MEASUREMENT IS NOT ONE-SIDED. Both keys really are written, in more than one file,
     // which is the fact the cured claim exists to carry: the row it closes named ONE writer each.
-    expect(EDITOR_KEY_WRITERS.length, 'the roster is empty').toBeGreaterThan(0);
-    const writerFiles = sorted(new Set(EDITOR_KEY_WRITERS.map((row) => row.file)));
-    expect(writerFiles, 'the editor keys are written from three homes, not one').toEqual([
+    expect(SAVED_KEY_WRITERS.length, 'the roster is empty').toBeGreaterThan(0);
+    const writerFiles = sorted(new Set(SAVED_KEY_WRITERS.map((row) => row.file)));
+    expect(writerFiles, 'the governed keys are written from four homes, not one').toEqual([
       'src/domain/worldPulse/decreeHook.js',
+      'src/domain/worldPulse/peaceTermsDrafting.js',
       'src/store/campaignWorldPulseDeferred.js',
       'src/store/editSlice.js',
     ]);
-    const totalSites = EDITOR_KEY_WRITERS.reduce((sum, row) => sum + row.sites, 0);
-    expect(totalSites, 'the measured write sites of the editor\'s two keys').toBe(8);
+    const totalSites = SAVED_KEY_WRITERS.reduce((sum, row) => sum + row.sites, 0);
+    expect(totalSites, 'the measured write sites of the governed keys').toBe(10);
+
+    // (c2) ⭐ NOTE-14's SECOND MEASUREMENT: a DECLARED writer is not a LIVE one. `reachedFromSrc`
+    // is re-derived from the call graph, so the register can never imply that `peaceOffers` is
+    // live saved state while nothing in src/ calls the two functions that would write it.
+    const counts = callCounts(SAVED_KEY_WRITERS.map((row) => row.symbol));
+    const reachFaults = SAVED_KEY_WRITERS
+      .filter((row) => (counts.get(row.symbol) > 0) !== row.reachedFromSrc)
+      .map((row) => `${row.file} :: ${row.symbol} is called ${counts.get(row.symbol)} time(s) in src/,`
+        + ` which contradicts reachedFromSrc: ${row.reachedFromSrc}`);
+    expect(reachFaults, `a declared writer's reach moved:\n${reachFaults.join('\n')}`).toEqual([]);
+    // anchored: the roster is asserted non-empty above, so this partition is over real rows — and
+    // BOTH sides are non-empty, which is what makes the predicate a discriminating one.
+    expect(SAVED_KEY_WRITERS.filter((row) => row.reachedFromSrc === false).map((row) => row.symbol).sort(),
+      'NOTE-14\'s two writers are the whole of the unreached set').toEqual(['withPeaceOffer', 'withoutPeaceOffer']);
+    expect(SAVED_KEY_WRITERS.filter((row) => row.reachedFromSrc === true).length,
+      'every other writer is reached from src/').toBe(6);
 
     // (d) EVERY NON-WRITER CARRIES A WRITTEN REASON, so the exempt table cannot become a silent
     // allow-list. anchored: the table is asserted non-empty first, so this is not a vacuous every.
-    expect(EDITOR_KEY_NON_WRITERS.length, 'the non-writer table is empty').toBeGreaterThan(0);
-    expect(EDITOR_KEY_NON_WRITERS.every((row) => row.reason.length >= 40)).toBe(true);
+    expect(SAVED_KEY_NON_WRITERS.length, 'the non-writer table is empty').toBeGreaterThan(0);
+    expect(SAVED_KEY_NON_WRITERS.every((row) => row.reason.length >= 40)).toBe(true);
   });
 });

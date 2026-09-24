@@ -35,6 +35,7 @@ import { compareCodepoint } from '../../src/domain/deterministicSort.js';
 import { SAVED_ONLY_KEYS } from '../../src/domain/edit/recordRegister.js';
 import { poolValues } from '../../src/domain/edit/pools.js';
 import { applyDecreesToSaves, retractDecreesOfTick } from '../../src/domain/worldPulse/decreeHook.js';
+import { draftPeaceOffer, withPeaceOffer } from '../../src/domain/worldPulse/peaceTermsDrafting.js';
 import { generateSettlementPipeline } from '../../src/generators/generateSettlementPipeline.js';
 import { createSettlementSlice } from '../../src/store/settlementSlice.js';
 import {
@@ -194,6 +195,15 @@ describe('EM-E8 C — an applied add-decree mints its row at the tick, once, and
       state.settlement.interSettlementRelationships = [{ npcName: 'Cara', partnerName: 'Ilsa' }];
       state.settlement.crossSettlementConflicts = [{ id: 'c1' }];
       state.settlement.populationHistory = [{ tick: 0, population: 40 }];
+      // ⭐ NOTE-14's key joined SAVED_ONLY_KEYS when the register finally classed it, and the
+      //    equality below is over that list, so this fixture has to carry it or the arm would
+      //    red on a key nobody seeded rather than on a key the re-derivation dropped. SEEDED
+      //    WITH THE PRODUCT'S OWN WRITER, never typed: `withPeaceOffer` is the writer the
+      //    register names, so the shape here cannot drift from the shape a real offer has.
+      state.settlement.peaceOffers = withPeaceOffer({}, draftPeaceOffer({
+        fromId: 'ilsa-town', toId: 'cara-town', terms: [{ kind: 'tribute', years: 3 }],
+        budgetSpent: 2, tick: 0,
+      })).peaceOffers;
     });
     const before = structuredClone(store.getState().settlement);
     runTick(store);
@@ -204,7 +214,7 @@ describe('EM-E8 C — an applied add-decree mints its row at the tick, once, and
 
     expect(receipt.rederived, 'the record WAS replaced by a fresh re-derivation, or this arm'
       + ' measures a record nothing rebuilt').toBe(true);
-    expect(survived, 'every SAVED-ONLY key of EM-R0a\'s register survived — the six nothing in'
+    expect(survived, 'every SAVED-ONLY key of EM-R0a\'s register survived — the SEVEN nothing in'
       + ' generation writes, so a re-derivation that simply replaced the record would DELETE them')
       .toEqual([...SAVED_ONLY_KEYS].sort(compareCodepoint));
     expect(after.neighbourNetwork, 'and each one is carried VERBATIM')
@@ -212,6 +222,7 @@ describe('EM-E8 C — an applied add-decree mints its row at the tick, once, and
     expect(after.interSettlementRelationships).toEqual(before.interSettlementRelationships);
     expect(after.crossSettlementConflicts).toEqual(before.crossSettlementConflicts);
     expect(after.populationHistory).toEqual(before.populationHistory);
+    expect(after.peaceOffers, 'NOTE-14\'s key was dropped by the re-derivation').toEqual(before.peaceOffers);
     expect(after.decrees.map((row) => row.id), 'the REGISTRY above all: losing it would erase the'
       + ' DM\'s own history at the very tick that applied it').toEqual([staged.decreeId]);
     expect(after.dmLayer.minted[staged.decreeId], 'and the layer is THIS member\'s own write, never'

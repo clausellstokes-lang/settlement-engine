@@ -241,7 +241,13 @@ describe('EM-R8 — the escalation ladder never overwrites a HELD key, and the r
     const power = powerCard();
     expect(all.length, 'the eight-edit census over the 63-row derived stride').toBe(498);
     expect(power.length, 'the 126 power-card trials the defect was first measured on').toBe(126);
-    expect(HELD_KEYS.length, 'the HELD denominator is imported from the register, never re-typed').toBe(10);
+    // ⭐ TEN -> ELEVEN AT NOTE-14, AND THE JOIN IS THE POINT OF THIS PIN. `peaceOffers` was a
+    // top-level saved key the record register classed NOWHERE; classing it HELD — with its three
+    // cross-settlement saved-only neighbours and for their reason — is what put it in this
+    // denominator. Nothing writes the key in src/ today, so no trial below can carry it and the
+    // census figures are unmoved; this line is the roster join made visible, which is the law
+    // this arm's title states.
+    expect(HELD_KEYS.length, 'the HELD denominator is imported from the register, never re-typed').toBe(11);
 
     const movedOnPowerCard = power.filter((trial) => trial.heldMoved.length > 0).map((trial) => `${trial.label} ${trial.key} -> ${h(trial.heldMoved)}`);
     const movedAnywhere = all.filter((trial) => trial.heldMoved.length > 0).map((trial) => `${trial.label} ${trial.key} -> ${h(trial.heldMoved)}`);

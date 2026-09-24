@@ -31,9 +31,13 @@ export const RECORD_CLASSES = Object.freeze({
   structuralSuggestions: 'READING', structuralViolations: 'READING', tier: 'READING',
   // AUTHORED (2 live) — the DM's and the clerk's words, untouched BY CLASS.
   userCanon: 'AUTHORED', aiOverlays: 'AUTHORED',
-  // SAVED-ONLY (6) — generation produces none of these; see SAVED_ONLY_KEYS.
+  // SAVED-ONLY (7) — generation produces none of these; see SAVED_ONLY_KEYS.
   neighbourNetwork: 'HELD', interSettlementRelationships: 'HELD',
   crossSettlementConflicts: 'HELD', populationHistory: 'HISTORY',
+  // ⭐ NOTE-14: EM-E4's standing peace offers, keyed by the counterparty that made each. HELD
+  //    with its three cross-settlement neighbours above and for their reason: it is a
+  //    first-hand relational fact the simulation states and generation never re-derives.
+  peaceOffers: 'HELD',
   // THE EDITOR'S (2) — SAVED-ONLY since the editor landed its writers; see SAVED_ONLY_KEYS.
   dmLayer: 'AUTHORED', decrees: 'AUTHORED',
 });
@@ -54,19 +58,20 @@ export const GENERATED_KEYS = Object.freeze([
  *  is where the claim is PROVED rather than merely asserted: that rung's gate 0 re-reads each
  *  named writer out of the scanned tree on every scan, so a key listed here whose writer is
  *  deleted or renamed reds the register instead of leaving a stale row. Their writers are no
- *  longer named in this sentence — they are DATA, in `EDITOR_KEY_WRITERS` below, so that the
+ *  longer named in this sentence — they are DATA, in `SAVED_KEY_WRITERS` below, so that the
  *  claim is re-derived from source by an arm rather than believed from a comment (U62).
  *  The other four keep the writers they always had (the save path's neighbour back-link, the
- *  link/undo/import paths, and the campaign's population history). */
+ *  link/undo/import paths, and the campaign's population history). `peaceOffers` joined at
+ *  NOTE-14 through the same door and carries its writers in that same table. */
 export const SAVED_ONLY_KEYS = Object.freeze([
   'neighbourNetwork', 'interSettlementRelationships', 'crossSettlementConflicts', 'populationHistory',
-  'dmLayer', 'decrees',
+  'dmLayer', 'decrees', 'peaceOffers',
 ]);
 
 /**
- * ⭐ EVERY WRITER OF THE EDITOR'S TWO KEYS, BY FILE AND BY SYMBOL — U62, and the row it closes
- * said this register "names ONE writer per save-time key" while the tree carried more. A claim
- * about who writes a key is exactly the kind that rots between landings: EM-E8 added a
+ * ⭐ EVERY WRITER OF THE SAVED-ONLY KEYS THAT HAVE ONE, BY FILE AND BY SYMBOL — U62, and the row
+ * it closes said this register "names ONE writer per save-time key" while the tree carried more.
+ * A claim about who writes a key is exactly the kind that rots between landings: EM-E8 added a
  * whole-record write of `dmLayer` at the roster tick, EM-E1's rewind added three `decrees`
  * writes on the undo path, and EM-C1b's per-save resolution added a fourth in the pulse's own
  * hook — none of which a prose sentence naming two sites could notice.
@@ -80,37 +85,56 @@ export const SAVED_ONLY_KEYS = Object.freeze([
  * `sites` is the number of write sites of that key inside that symbol, so the undo path's two
  * rehydration branches cannot silently collapse into one. `spelling` is the shape the arm's
  * scanner matches: `assign` is `<expr>.<key> = …`, `literal` is `<key>: …` inside an object
- * literal that rebuilds the record.
+ * literal that rebuilds the record, and `computed` is `[<CONST>]: …` opening a property of one.
+ *
+ * ⚠ `reachedFromSrc` IS THE SECOND MEASUREMENT AND IT IS THE ONE THAT KEEPS THIS TABLE HONEST.
+ * A declared writer is not a live one: NOTE-14's `peaceOffers` has two writers in `src/` and NO
+ * `src/` caller reaches either, so no save carries the key today. `false` says exactly that, the
+ * arm re-derives it from the call graph, and the day a caller lands the row reds until it is
+ * told the truth. That is a different fact from `NOT_YET_WRITTEN_KEYS`, which is for a key with
+ * no writer at all.
  */
-export const EDITOR_KEY_WRITERS = Object.freeze([
+export const SAVED_KEY_WRITERS = Object.freeze([
   Object.freeze({
     key: 'dmLayer', file: 'src/store/editSlice.js', symbol: 'applyCascadeEdit',
-    sites: 1, spelling: 'assign',
+    sites: 1, spelling: 'assign', reachedFromSrc: true,
   }),
   Object.freeze({
     key: 'dmLayer', file: 'src/store/editSlice.js', symbol: 'applyPlainEditToDraft',
-    sites: 1, spelling: 'assign',
+    sites: 1, spelling: 'assign', reachedFromSrc: true,
   }),
   // EM-E8's whole-record write: the roster tick re-derives the world and carries the layer onto
   // the fresh record, so the key is written on an object that is not `state.settlement` yet.
   Object.freeze({
     key: 'dmLayer', file: 'src/store/editSlice.js', symbol: 'applyRosterDecreesAtTick',
-    sites: 1, spelling: 'assign',
+    sites: 1, spelling: 'assign', reachedFromSrc: true,
   }),
   Object.freeze({
     key: 'decrees', file: 'src/store/editSlice.js', symbol: 'commitRegistry',
-    sites: 1, spelling: 'assign',
+    sites: 1, spelling: 'assign', reachedFromSrc: true,
   }),
   // EM-E1's rewind, three sites in one symbol: the library row, and the live view on EACH of the
   // two rehydration branches. The `sites: 3` is what keeps the pair of branches visible.
   Object.freeze({
     key: 'decrees', file: 'src/store/campaignWorldPulseDeferred.js', symbol: 'restorePulseSnapshotOnDraft',
-    sites: 3, spelling: 'assign',
+    sites: 3, spelling: 'assign', reachedFromSrc: true,
   }),
   // EM-C1b's per-save resolution: the pulse's own hook rebuilds the save around a new registry.
   Object.freeze({
     key: 'decrees', file: 'src/domain/worldPulse/decreeHook.js', symbol: 'applyDecreesToSaves',
-    sites: 1, spelling: 'literal',
+    sites: 1, spelling: 'literal', reachedFromSrc: true,
+  }),
+  // ⭐ NOTE-14's two, and they are the reason `reachedFromSrc` exists. Both stand or lift one
+  // counterparty's offer by rebuilding the record around `PEACE_OFFER_KEY`, and BOTH ARE
+  // UNREACHED: measured at this tip, nothing in `src/` calls either one, so the key is declared
+  // and classed but no save carries it yet.
+  Object.freeze({
+    key: 'peaceOffers', file: 'src/domain/worldPulse/peaceTermsDrafting.js', symbol: 'withPeaceOffer',
+    sites: 1, spelling: 'computed', reachedFromSrc: false,
+  }),
+  Object.freeze({
+    key: 'peaceOffers', file: 'src/domain/worldPulse/peaceTermsDrafting.js', symbol: 'withoutPeaceOffer',
+    sites: 1, spelling: 'computed', reachedFromSrc: false,
   }),
 ]);
 /** Declared, classed SAVED-ONLY, and still written by NOTHING IN src/ — an OVERLAY on the list
