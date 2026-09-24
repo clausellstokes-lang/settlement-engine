@@ -139,7 +139,7 @@ describe('EM-E2b — the chronicle voice: where its writer must sit, and what th
     // AND THE SUPERSEDED CLAIM IS GONE RATHER THAN LEFT STANDING BESIDE ITS SUCCESSOR: a
     // header that said both would be a file describing two different surfaces.
     expect(prose, 'EM-E2b\'s wording was REPLACED, not appended to')
-      .not.toContain('IT READS NO WORLD PREDICATE AT THIS LANDING');
+      .not.toContain('IT READS NO WORLD PREDICATE AT THIS LANDING'); // anchored: the toContain arms above prove `prose` is the live header, never an empty read
   });
 });
 
