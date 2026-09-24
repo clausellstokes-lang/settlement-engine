@@ -24,13 +24,13 @@
     "The derivation history — every prior row, its cause, and the census laws — stays in the walker",
     "beside the assertions, deliberately. Only the live tuple moved."
   ],
-  "measuredAtSha": "abf2f91c535b98f78b7a62be7721231d5d76b9d7",
+  "measuredAtSha": "4b2d3f6fdded17c112de03201427c208e24e50f9",
   "measuredBy": "FP chair (session 87797a6a, Fable 5.1)",
   "date": "2026-09-24",
-  "note": "FP batch landing 5 (part 1): BUY-BACK-1 · TREATY-VOICE U1/U3 + the desk re-record",
-  "files": 2789,
+  "note": "FP batch landing 5: BUY-BACK-1 · TREATY-VOICE U1/U3 + the desk re-record · LIT-2 mediation · CW-1",
+  "files": 2790,
   "parked": 360,
-  "credited": 2429,
-  "titles": 26616,
-  "suiteTitles": 7020
+  "credited": 2430,
+  "titles": 26642,
+  "suiteTitles": 7023
 }
