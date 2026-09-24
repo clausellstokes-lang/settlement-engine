@@ -27,6 +27,30 @@
  * already, for a faith fork living outside them; this arm caught a second directory the
  * widening had missed, holding the very contest one of the owner-named rows depends on.
  *
+ * ⭐⭐ U10 — THE THIRD HALF, AND THE PLACE THE ROOT MECHANISM COULD NOT EXPRESS. Judgment
+ * 282 measured that this walker could not admit `src/domain/rulingPowerCoup.js` AT ALL: the
+ * root-set arm keyed a file's place by its first THREE path segments, which for a top-level
+ * domain file is the FILE, while `IN_ROOTS` keyed membership by `startsWith(root + '/')`,
+ * which no `SCAN_ROOTS` value could satisfy for that same file. Two keyings, one tree, and
+ * the owner-named coup verdict fell between them — an instrument gap, not a cured fork. It
+ * is closed here by ONE place function used by BOTH (`placeOf` below), and `src/domain`
+ * itself joins the roots as the top-level files' place. MEASURED INERT for the weighted
+ * half at this tip: +109 files enter the scan and DISCOVERED stays 30, the identical set.
+ *
+ * ⛔ AND THE BARE HALF ITSELF, DECLARED RATHER THAN DISCOVERED. Judgment 282 rules the
+ * coup's two unweighted uniforms STAY BARE, and judgment 265 (c) sends the processes design
+ * §19 ruling 3 named that resolve on a keyed HASH or draw NOTHING to the same place: the
+ * registry's `discovery: 'bare'` rows. Those rows are not free prose — the U10 arms below
+ * re-derive each one from the tree (the site's own slice), hold the bare-DRAW roster
+ * SET-EQUAL against the survey's Table 4 "B" column in both directions, and demand that
+ * EVERY bare draw anywhere in `src/domain` be placed by a registry row or by a Table 4
+ * verdict. A new bare draw reds; a declared-bare fork that acquires a weighted signature
+ * reds; a declared-dry process that acquires a draw reds. ⚠ WHAT IT IS NOT: a census of
+ * HASHED forks. The two hashed rows are judgment 265 (c)'s two NAMES, and sweeping the tree
+ * for every keyed-hash fork is a chair-sized program (judgment 282's own words), with
+ * `npcCirculation.js`'s pressure-gated rehost hash as the measured notice that it would
+ * find more.
+ *
  * ⭐ THE ONE NORMALIZATION POINT. The registry stores EXTENSIONLESS module ids so that it
  * cannot read as an importer to a raw-source scan keyed on a filename. `moduleFile()` below
  * is the single place the `.js` suffix is appended, and the guard-the-guard case proves the
@@ -58,7 +82,13 @@ import {
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), '../..');
 
 /**
- * THE DECLARED ROOTS. Checked against the tree below, never trusted.
+ * THE DECLARED ROOTS, which are PLACES rather than prefixes. Checked against the tree
+ * below, never trusted.
+ * ⭐ `src/domain` JOINED AT U10 and it is the TOP-LEVEL FILES' place, not the whole subtree:
+ * membership goes through `placeOf`, so `src/domain/npc/foo.js` still lives in the place
+ * `src/domain/npc` and is still outside. Judgment 282 measured the widening INERT for the
+ * weighted half (29 = 29 then; +109 files and DISCOVERED 30 = 30 at this tip, the identical
+ * set), which is what makes it a place the instrument can finally SEE rather than a census.
  * @type {readonly string[]}
  */
 const SCAN_ROOTS = Object.freeze([
@@ -66,6 +96,7 @@ const SCAN_ROOTS = Object.freeze([
   'src/domain/spatial',
   'src/domain/traditions',
   'src/domain/region',
+  'src/domain',
 ]);
 
 /** The FOUR idiom signatures. The fourth is a register rather than a scan, by design. */
@@ -89,6 +120,19 @@ const GUARD_CHAIN_CHOOSERS = Object.freeze([
 const DECLARES_IDIOM = /(?:export\s+)?function\s+(?:hash01|softmaxWeights|stableSampleByWeight)\s*\(/;
 
 /**
+ * ⭐ U10 — THE BARE SIGNATURE, and it is deliberately NOT one of the four above. It finds a
+ * plain uniform off a threaded stream: no weights, no key, nothing a weighted-chooser
+ * signature could recognise. It is kept OUT of `IDIOM_SIGNATURES` because a bare draw is
+ * not evidence of a fork — most of the estate's are rates, mints and primitives — so it
+ * drives a PLACEMENT arm ("every one of these is placed, by a registry row or by the
+ * survey's own verdict") rather than the partition's classification law.
+ */
+const BARE_DRAW = /\.\s*random\s*\(\s*\)/;
+
+/** A module-local hash roll: the shape that resolves a fork while consuming ZERO rng. */
+const LOCAL_HASH_ROLL = /\b(?:[A-Za-z_$][\w$]*Roll01|fnv1a32|hashUnit|hash32)\s*\(/;
+
+/**
  * THE DEFER CEILING, exact in BOTH directions. Growth means a fork JOINED the defer list,
  * which the stop law forbids — a newly discovered fork is a chair-sized event, not an
  * automatic deferral. A shrink means a row found its close, and the number moves DOWN in
@@ -109,7 +153,15 @@ const DECLARES_IDIOM = /(?:export\s+)?function\s+(?:hash01|softmaxWeights|stable
 // ⛔ THE CEILING'S MEANING IS UNCHANGED — it is still every DEFER row in both directions — and
 // the registration is pinned SEPARATELY below (SURVEY_REGISTRATION_ROWS and its split), so a
 // row leaking between the two populations reds even though this one total would absorb it.
-const DEFER_CEILING = 77;
+// 77 -> 79 at U10 (the unfreeze train, runbook act 6), and it is the SAME chair-authorized
+// mint as every move above rather than a lane absorbing a discovery: HBF-87, the coup
+// verdict's two bare uniforms that judgment 282 rules STAY BARE, and HBF-88, the court's
+// verdict, a genuinely weighted arm resolved on an FNV-1a reading of a labelled key that
+// takes no draw at all (judgment 265 (c)). Both were MEASURED at their sites and neither is
+// discoverable: that is why they arrive DECLARED. ⛔ The other four U10 rows are STAY and
+// touch this number not at all, which is the ceiling working as written: a permanent
+// finding is not a deferral.
+const DEFER_CEILING = 79;
 
 /** The named-domain checklist's row count, asserted rather than read off. */
 const NAMED_DOMAIN_ROWS = 14;
@@ -126,9 +178,24 @@ const SURVEY_SOURCE = 'docs/implementation/surveys/SIM-SEALS-SURVEY-2026-09-19.m
 /** `| U-NN | `symbol` · `path:lines` | draws | R? | lands |` — Table 4's row shape. */
 const SURVEY_TABLE4_ROW = /^\|\s*(U-\d+)\s*\|\s*`([A-Za-z_$][\w$]*)`[^|]*?·\s*`([^`]+)`\s*\|\s*(\d+)\s*\|([^|]*)\|/gm;
 
-/** The survey's own stated totals, so a parser that silently stopped matching cannot pass. */
-const SURVEY_SYMBOLS = 51;
+/**
+ * The survey's own stated totals, so a parser that silently stopped matching cannot pass.
+ * ⭐ RE-RECORDED AT U10, 51 -> 55, AND THE CAUSE IS THE TABLE'S OWN ROOTS. The survey
+ * censused six roots and could see neither the TOP-LEVEL `src/domain` files nor the
+ * generation directories, so four bare draws were never placed by the one table that claims
+ * draw totality — the coup verdict among them. Re-measured over the WHOLE `src/domain` at
+ * `799103301`: U-52 (the coup, marked B) plus U-53/54/55 (an id mint and two draw
+ * primitives, ruled "no" in the table's own existing idiom). Every row above them is
+ * untouched, which is why the second figure does NOT move.
+ * ⛔ 44 IS RE-RECORDED UNMOVED, AND THAT IS THE POINT OF A NEW MARK. `**B**` cannot pass the
+ * `^\*\*R\*\*` filter, so declaring a draw BARE creates no registration and offers no seal:
+ * judgment 282 in the one place a later reader would otherwise have to take on trust.
+ */
+const SURVEY_SYMBOLS = 55;
 const SURVEY_REGISTRATION_ROWS = 44;
+
+/** Of the fifty-five: the bare-draw roster, held set-equal to the registry's bare rows. */
+const SURVEY_BARE_ROWS = 1;
 
 /** Of the forty-four: three are measured NON-choosers (rng readers and weighted-sample helpers). */
 const SURVEY_DEFERRED = 41;
@@ -149,14 +216,21 @@ const SURVEY_SETTLED = 3;
 // is still the estate's only off-module declaration.
 const ROWS_WITH_ACTION_VOCABULARY = 6;
 
-/** Table 4's rows as `module.js#symbol`, split by the "R" (registration owed) column. */
+/**
+ * Table 4's rows as `module.js#symbol`, split by the "R" (registration owed) and "B" (bare,
+ * U10) marks. `placed` is EVERY row's key whatever its mark, because the table's "no — …"
+ * verdicts place a draw just as finally as a registration does, and the bare-draw totality
+ * arm below is only honest if it reads them.
+ */
 function surveyTable4() {
   const raw = readFileSync(join(ROOT, SURVEY_SOURCE), 'utf8');
   const all = [...raw.matchAll(SURVEY_TABLE4_ROW)];
-  const owed = all
-    .filter((m) => /^\*\*R\*\*/.test(m[5].trim()))
-    .map((m) => `src/domain/${m[3].replace(/:.*$/, '')}#${m[2]}`);
-  return { all, owed: [...owed].sort() };
+  const keyOf = (m) => `src/domain/${m[3].replace(/:.*$/, '')}#${m[2]}`;
+  const owed = all.filter((m) => /^\*\*R\*\*/.test(m[5].trim())).map(keyOf);
+  const bare = all.filter((m) => /^\*\*B\*\*/.test(m[5].trim())).map(keyOf);
+  return {
+    all, owed: [...owed].sort(), bare: [...bare].sort(), placed: new Set(all.map(keyOf)),
+  };
 }
 
 /**
@@ -168,6 +242,19 @@ function surveyTable4() {
 const SURVEY_ROWS = HABIT_FORK_REGISTRY
   .filter((row) => row.discovery === 'checklist' && row.domain === null);
 const VOCABULARY_ROWS = HABIT_FORK_REGISTRY.filter((row) => row.actionVocabulary !== null);
+
+/**
+ * ⭐ U10 — THE BARE HALF: rows DECLARED because nothing can discover them (judgment 282 for
+ * the coup, judgment 265 (c) for the hashed and the dry). Each row's opening sentence is a
+ * CLAIM ABOUT THE TREE, and `bareFamilyOf` below re-derives which of the three the tree
+ * actually says, so the sentence cannot drift away from the site it describes.
+ */
+const BARE_ROWS = HABIT_FORK_REGISTRY.filter((row) => row.discovery === 'bare');
+
+/** The three families, in the words a row must open with. */
+const BARE_DRAW_SENTENCE = 'A BARE DRAW.';
+const BARE_HASHED_SENTENCE = 'HASHED, NOT DRAWN.';
+const BARE_DRY_SENTENCE = 'NO WEIGHT, NO FORK.';
 
 /**
  * ⭐ THE ONE NORMALIZATION POINT between the registry's extensionless ids and the tree's
@@ -244,22 +331,57 @@ function codeOnly(src) {
   );
 }
 
+/** The top-level declaration boundaries of a blanked module, in source order. */
+const TOP_LEVEL_DECL = /^(?:export\s+)?(?:async\s+)?function\s+([A-Za-z_$][\w$]*)|^(?:export\s+)?const\s+([A-Za-z_$][\w$]*)\s*=/gm;
+
 /** The nearest preceding top-level declaration name at an offset. */
 function enclosingSymbol(code, index) {
-  const decl = /^(?:export\s+)?(?:async\s+)?function\s+([A-Za-z_$][\w$]*)|^(?:export\s+)?const\s+([A-Za-z_$][\w$]*)\s*=/gm;
   let best = null;
-  for (const m of [...code.matchAll(decl)]) {
+  for (const m of [...code.matchAll(new RegExp(TOP_LEVEL_DECL.source, 'gm'))]) {
     if (m.index > index) break;
     best = m[1] || m[2];
   }
   return best;
 }
 
+/**
+ * ⭐ U10 — A SYMBOL'S OWN SLICE, which is the unit a bare row's claim is made about. A
+ * module-wide read would be the wrong instrument and the measurement says so: the exile's
+ * landing carries no roll, while two OTHER symbols in its module do. Runs from a top-level
+ * declaration to the next one, over the blanked source, so a citation in a neighbour's
+ * comment cannot answer for this symbol.
+ * @param {string} code @returns {Map<string, string>}
+ */
+function symbolSlices(code) {
+  const marks = [...code.matchAll(new RegExp(TOP_LEVEL_DECL.source, 'gm'))]
+    .map((m) => ({ name: m[1] || m[2], at: m.index }));
+  /** @type {Map<string, string>} */
+  const slices = new Map();
+  for (let i = 0; i < marks.length; i += 1) {
+    const end = i + 1 < marks.length ? marks[i + 1].at : code.length;
+    slices.set(marks[i].name, code.slice(marks[i].at, end));
+  }
+  return slices;
+}
+
+/**
+ * ⭐⭐ U10 — THE ONE PLACE KEY, and the gap it closes was two keyings of the same idea. A
+ * file's PLACE is its directory under `src/domain`, which for a TOP-LEVEL domain file is
+ * `src/domain` itself rather than the file's own name. The root-set arm and `IN_ROOTS` both
+ * go through this, so a root that the arm would demand is a root membership can honour —
+ * which `startsWith(root + '/')` could never be for a top-level file (judgment 282).
+ * @param {string} rel @returns {string}
+ */
+function placeOf(rel) {
+  const segments = rel.split('/');
+  return segments.length > 3 ? segments.slice(0, 3).join('/') : segments.slice(0, 2).join('/');
+}
+
 const DOMAIN_FILES = walk(join(ROOT, 'src/domain'))
   .map((p) => relative(ROOT, p).replace(/\\/g, '/'))
   .sort();
 
-const IN_ROOTS = DOMAIN_FILES.filter((rel) => SCAN_ROOTS.some((r) => rel.startsWith(`${r}/`)));
+const IN_ROOTS = DOMAIN_FILES.filter((rel) => SCAN_ROOTS.includes(placeOf(rel)));
 
 /** Every `module#symbol` a signature finds inside the declared roots. */
 function scanIdiomForks(files) {
@@ -276,9 +398,38 @@ function scanIdiomForks(files) {
   return [...found].sort();
 }
 
+/**
+ * ⭐ U10 — every `module#symbol` taking a BARE uniform, over the WHOLE `src/domain` rather
+ * than the declared roots. The roots exist to bound the CLASSIFICATION law; placement is
+ * cheap and total, so this one asks the whole tree and every answer must be placed.
+ * @returns {Map<string, number[]>} key -> the 1-based lines it draws on
+ */
+function scanBareDraws() {
+  /** @type {Map<string, number[]>} */
+  const found = new Map();
+  for (const rel of DOMAIN_FILES) {
+    const code = codeOnly(readFileSync(join(ROOT, rel), 'utf8'));
+    if (DECLARES_IDIOM.test(code)) continue;
+    for (const m of code.matchAll(new RegExp(BARE_DRAW.source, 'g'))) {
+      const key = `${rel}#${enclosingSymbol(code, m.index) || '<module>'}`;
+      found.set(key, [...(found.get(key) || []), code.slice(0, m.index).split('\n').length]);
+    }
+  }
+  return found;
+}
+
 const DISCOVERED = [...new Set([...scanIdiomForks(IN_ROOTS), ...GUARD_CHAIN_CHOOSERS])].sort();
+const BARE_SITES = scanBareDraws();
+const BARE_DISCOVERED = [...BARE_SITES.keys()].sort();
+/**
+ * ⛔ THE PARTITION'S OWN HALF IS THE SIGNATURE-BACKED KINDS, NAMED rather than negated. It
+ * read `discovery !== 'checklist'` while there were two kinds and a third arriving would
+ * have joined this side silently and convicted the partition of a phantom: U10's `bare` is
+ * that third kind, so the membership is now positive and the exhaustiveness is asserted.
+ */
+const SIGNATURE_KINDS = Object.freeze(['idiom', 'guard-chain']);
 const CLASSIFIED = HABIT_FORK_REGISTRY
-  .filter((row) => row.discovery !== 'checklist')
+  .filter((row) => SIGNATURE_KINDS.includes(String(row.discovery)))
   .map((row) => `${moduleFile(row)}#${row.symbol}`)
   .sort();
 const CHECKLIST_ROWS = HABIT_FORK_REGISTRY.filter((row) => row.discovery === 'checklist');
@@ -303,6 +454,23 @@ describe('HB-1 — the chooser-totality partition and the named-domain checklist
     expect(Object.keys(IDIOM_SIGNATURES)).toHaveLength(3);
     expect(DISCOVERED).toContain('src/domain/worldPulse/settlementStrategy.js#evaluateSettlementStrategyRules');
     expect(DISCOVERED.length).toBeGreaterThan(GUARD_CHAIN_CHOOSERS.length);
+    // ⭐ U10 — THE PLACE KEY IS REAL WORK IN BOTH SHAPES, and the top-level case is the whole
+    // reason it exists: a three-segment key answers a top-level file with its own FILENAME,
+    // which no root can ever equal, and the coup verdict fell through exactly that hole.
+    expect(placeOf('src/domain/rulingPowerCoup.js')).toBe('src/domain');
+    expect(placeOf('src/domain/worldPulse/espionage/espionageMath.js')).toBe('src/domain/worldPulse');
+    expect(placeOf('src/domain/npc/npcOps.js')).toBe('src/domain/npc');
+    expect(IN_ROOTS, 'the widened roots stopped admitting the coup file').toContain('src/domain/rulingPowerCoup.js');
+    // anchored: the line above proves IN_ROOTS is populated and holds the coup file, so this absence is a real exclusion rather than an empty collection
+    expect(IN_ROOTS, 'the place key widened into a whole subtree: a generation directory is NOT a declared root').not.toContain('src/domain/npc/npcOps.js');
+    // …and the BARE scan is live, with the coup as its positive control. A placement arm
+    // over an empty scan is the missed-root failure wearing a different hat.
+    expect(BARE_DISCOVERED.length).toBeGreaterThan(30);
+    expect(BARE_DISCOVERED).toContain('src/domain/rulingPowerCoup.js#resolveCoupVerdict');
+    expect(BARE_SITES.get('src/domain/rulingPowerCoup.js#resolveCoupVerdict'), 'the coup draws twice: the hold roll and the winner sample').toHaveLength(2);
+    // anchored: the subject is a LITERAL built on this line and the positive case below runs the same matcher over the same stripper, so a strip that returned nothing reds there
+    expect(codeOnly('const r = \'a bare rng.random() draw\';'), 'a quoted CITATION reads as a bare draw').not.toMatch(BARE_DRAW);
+    expect(codeOnly('const r = rng.random();'), 'a REAL bare draw stopped being read').toMatch(BARE_DRAW);
     // ⭐ THE STRING STRIP IS PINNED IN BOTH DIRECTIONS, because a strip that blanked one
     // character too many would silently DELETE discoveries and this whole walker would
     // report SUCCESS for the same reason a missed root does. The registry's own row shape
@@ -371,7 +539,7 @@ describe('HB-1 — the chooser-totality partition and the named-domain checklist
     const declared = new Set(SCAN_ROOTS);
     const missed = new Set();
     for (const rel of DOMAIN_FILES) {
-      const directory = rel.split('/').slice(0, 3).join('/');
+      const directory = placeOf(rel);
       if (declared.has(directory)) continue;
       const code = codeOnly(readFileSync(join(ROOT, rel), 'utf8'));
       if (DECLARES_IDIOM.test(code)) continue;
@@ -626,7 +794,16 @@ describe('HB-1 — the chooser-totality partition and the named-domain checklist
     // is a reviewable act. The registration's split is pinned SEPARATELY from DEFER_CEILING
     // because one total would absorb a row leaking between the two populations: forty-four rows
     // arriving while forty-four older ones quietly left would leave the total untouched.
-    expect(HABIT_FORK_REGISTRY.length).toBe(DISCOVERED.length + CHECKLIST_ROWS.length);
+    // ⭐ THE IDENTITY GAINED ITS THIRD TERM AT U10 (86 = 30 + 56 -> 92 = 30 + 56 + 6), and it
+    // is the arm that makes a new discovery kind safe: a row that drifts between the three
+    // halves moves two of these terms at once, and a kind nobody counted would break the sum
+    // rather than hide inside it. The kind vocabulary is asserted closed just below.
+    expect(HABIT_FORK_REGISTRY.length)
+      .toBe(DISCOVERED.length + CHECKLIST_ROWS.length + BARE_ROWS.length);
+    expect(
+      [...new Set(HABIT_FORK_REGISTRY.map((row) => String(row.discovery)))].sort(),
+      'a FOURTH population arrived: a discovery kind no term of the identity above counts',
+    ).toEqual(['bare', 'checklist', 'guard-chain', 'idiom']);
     expect(SURVEY_ROWS.length, 'the registration changed size').toBe(SURVEY_REGISTRATION_ROWS);
     expect(
       SURVEY_ROWS.filter((row) => row.disposition === 'DEFER').length,
@@ -644,5 +821,100 @@ describe('HB-1 — the chooser-totality partition and the named-domain checklist
     // silently acquire a third population that neither instrument would then count.
     expect(CHECKLIST_ROWS.length)
       .toBe(CHECKLIST_ROWS.filter((row) => row.domain !== null).length + SURVEY_ROWS.length);
+  });
+
+  test('⭐⭐ U10 (a) — EVERY bare draw in src/domain is PLACED, and the declared ones are still bare', () => {
+    // ⛔ THE LAW THIS ARM CARRIES, AND IT IS DELIBERATELY WEAKER THAN THE PARTITION'S. A bare
+    // uniform is not evidence of a fork: most of the estate's are rates, mints and stream
+    // primitives. So the demand is PLACEMENT, not classification — every bare draw is either
+    // a habit-fork registry row or a row of the survey's Table 4 carrying that table's own
+    // verdict. What it refuses is a bare draw NOBODY has looked at, which is what the coup
+    // verdict was until this act: judgment 282 could rule it stays bare precisely because
+    // someone measured it, and this arm is what keeps that true of the next one.
+    const placed = surveyTable4().placed;
+    const registryKeys = new Set(HABIT_FORK_REGISTRY.map((row) => `${moduleFile(row)}#${row.symbol}`));
+    const unplaced = BARE_DISCOVERED
+      .filter((key) => !registryKeys.has(key) && !placed.has(key))
+      .map((key) => `${key} :${(BARE_SITES.get(key) || []).join(',')}`);
+    expect(
+      unplaced,
+      'a BARE DRAW is live in src/domain and no instrument has placed it. Measure the site,'
+      + ' then either give it a habit-fork registry row or place it in the survey\'s Table 4'
+      + ' with the verdict the measurement supports (a fork, a rate, a mint, a primitive).'
+      + ' ⛔ A draw nobody has read is not "bare by decision" — judgment 282 is a ruling over'
+      + ' a MEASURED fork, never a licence to skip the measurement.',
+    ).toEqual([]);
+    // ⭐ AND THE DECLARED ONES ARE STILL BARE, which is the other direction and the one that
+    // rots. A bare row whose symbol acquires a weighted signature belongs on the idiom half
+    // that same commit — EM-E0 (a)'s "a registered draw IS signature-visible" law, pointed at
+    // the half that exists because nothing can see it.
+    const nowVisible = BARE_ROWS
+      .map((row) => `${moduleFile(row)}#${row.symbol}`)
+      .filter((key) => DISCOVERED.includes(key));
+    expect(
+      nowVisible,
+      'a DECLARED-BARE fork now answers an idiom signature: it gained weights the scan can'
+      + ' read, so it is discoverable and belongs on the idiom half with a disposition, not'
+      + ' on the half reserved for what no instrument can find.',
+    ).toEqual([]);
+    // …and the roster is not empty, so neither absence above is vacuous.
+    expect(BARE_ROWS.length).toBeGreaterThan(0);
+  });
+
+  test('⭐ U10 (b) — each bare row\'s OPENING SENTENCE is re-derived from its own site, and the draw roster is the survey\'s', () => {
+    // ⛔ WHY A SENTENCE IS AN ASSERTION HERE. U62's register named its writers in prose and
+    // was true the day it was written and false three landings later, because nothing
+    // re-derived it. These rows make three kinds of claim about the tree — it draws bare, it
+    // rolls a hash and takes no draw, it has no roll at all — so the tree is asked which one
+    // is true of each site and the row must already say that one.
+    /** @type {Map<string, Map<string, string>>} rel -> symbol -> its blanked slice */
+    const sliceCache = new Map();
+    const sliceOf = (rel, symbol) => {
+      if (!sliceCache.has(rel)) sliceCache.set(rel, symbolSlices(codeOnly(readFileSync(join(ROOT, rel), 'utf8'))));
+      return (sliceCache.get(rel) || new Map()).get(symbol) || '';
+    };
+    const bareFamilyOf = (rel, symbol) => {
+      const key = `${rel}#${symbol}`;
+      if (BARE_DISCOVERED.includes(key)) return BARE_DRAW_SENTENCE;
+      const slice = sliceOf(rel, symbol);
+      if (LOCAL_HASH_ROLL.test(slice)) return BARE_HASHED_SENTENCE;
+      if (Object.values(IDIOM_SIGNATURES).some((re) => re.test(slice))) return 'SIGNATURE-VISIBLE';
+      return BARE_DRY_SENTENCE;
+    };
+    // GUARD THE GUARD: the reader is proved live on all three families before any row is
+    // judged by it, over sites this file names rather than over whatever the rows happen to
+    // point at — otherwise a slicer that returned '' would call the whole registry dry.
+    expect([
+      bareFamilyOf('src/domain/rulingPowerCoup.js', 'resolveCoupVerdict'),
+      bareFamilyOf('src/domain/worldPulse/npcVerdictTable.js', 'resolveVerdict'),
+      bareFamilyOf('src/domain/worldPulse/narrativeTempo.js', 'foldNarrativeTempo'),
+    ]).toEqual([BARE_DRAW_SENTENCE, BARE_HASHED_SENTENCE, BARE_DRY_SENTENCE]);
+    const wrong = [];
+    for (const row of BARE_ROWS) {
+      const said = bareFamilyOf(moduleFile(row), String(row.symbol));
+      if (!String(row.reason).startsWith(said)) {
+        wrong.push(`${row.forkId}: the site says "${said}" and the row opens "${String(row.reason).slice(0, 20)}…"`);
+      }
+    }
+    expect(
+      wrong,
+      'a bare row\'s opening sentence no longer matches what its own site measures. The three'
+      + ' sentences ARE the claim: a dry process that gained a draw, or a bare draw whose'
+      + ' uniform moved away, must move its row in the same commit that moved the code.',
+    ).toEqual([]);
+    // ⭐ THE DRAW FAMILY'S ROSTER BELONGS TO THE SURVEY, exactly as the registration's does:
+    // Table 4's "B" column and the registry's bare DRAW rows are one roster read twice, so a
+    // name invented here reds as loudly as a bare draw the table placed and this file forgot.
+    const { bare } = surveyTable4();
+    expect(bare, 'the "B" column stopped parsing').toHaveLength(SURVEY_BARE_ROWS);
+    const declaredDraws = BARE_ROWS
+      .filter((row) => String(row.reason).startsWith(BARE_DRAW_SENTENCE))
+      .map((row) => `${moduleFile(row)}#${row.symbol}`)
+      .sort();
+    expect(
+      declaredDraws,
+      'the registry\'s bare DRAW rows and Table 4\'s "B" roster disagree. The roster belongs'
+      + ' to the survey: place the draw there first, then declare it here.',
+    ).toEqual(bare);
   });
 });
