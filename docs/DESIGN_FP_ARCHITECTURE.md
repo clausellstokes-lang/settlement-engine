@@ -90,7 +90,9 @@ would have minted a 35-module dist chunk-cycle (the TDZ boot class), and
 R-BLD-10 proved the kernel's PRNG call order IS the stream identity.
 
 **L2 — FLAGS.** Every FP flag is VIRTUAL: absent from
-DEFAULT_SIMULATION_RULES and every preset spread, strict `=== true` reads,
+DEFAULT_SIMULATION_RULES and so from every preset's defaults spread (never
+from the presets its LIT-n lighting unit names — J-EM-16, the lit law,
+LGT-C2 `432ff6441` the precedent), strict `=== true` reads,
 dark-never-permissive. Manifest timing is MECHANICAL (CR-WR10-C): the flag
 joins `ENGINE_GATED_VIRTUAL_RULE_KEYS` (`simulationRules.js:185`) in the SAME
 commit as its first real gate read, with its certification row (or a
@@ -442,8 +444,10 @@ build. Never quote a figure from a volume — including this one.
 ## contract)
 
 **The law (all 63, no exceptions — CR-WR10-C, superseding every volume's §3
-mechanics):** VIRTUAL (absent from DEFAULT_SIMULATION_RULES and every preset
-spread); strict `=== true` reads, dark-never-permissive; at least one BY-NAME
+mechanics):** VIRTUAL (absent from DEFAULT_SIMULATION_RULES and so from every
+preset's defaults spread, and PRESENT, strictly `true`, in the presets a LIT-n
+lighting unit names — J-EM-16, the lit law, LGT-C2 `432ff6441` the precedent);
+strict `=== true` reads, dark-never-permissive; at least one BY-NAME
 read (the conjunction-gate hole, §1 L2); the flag joins
 `ENGINE_GATED_VIRTUAL_RULE_KEYS` + its certification row OR declared-pending
 entry + its first real gate read in ONE COMMIT (pending entries convert to
