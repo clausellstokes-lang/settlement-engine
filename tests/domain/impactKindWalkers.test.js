@@ -98,6 +98,9 @@ const EXPECTED_VOICE = {
   // GR-2b: the applied PROPOSE_PACT order speaks its own authored line from the grammar
   // registry, so it borrows no crier category on top of it. The explicit null IS the decision.
   realm_verb_propose_pact: null,
+  // IN-2 (SR-8): the DM-truth lure beat speaks its own authored line from the information
+  // registry and is covert at the producer, so no crier proclaims it. The explicit null IS the decision.
+  lure_sprung: null,
   spring_thaw: null, stressor_aftermath: null, stressor_graduated: null, stressor_wind_down: null,
   // THE GROWTH LAYER (owner commission #36): a person weathering into a learned trait is a
   // quiet local character beat, NOT a town-crier proclamation — deliberately unvoiced.

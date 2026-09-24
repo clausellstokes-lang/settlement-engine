@@ -122,8 +122,13 @@ describe('WC-0E · the war-circulation flags, the contribution ledger shape, and
     // 36 → 37 at FP TR-3 (lane FP-D2, 2026-09-24): `believedMarketsEnabled`, its row at the tail
     // of VIRTUAL_SUBSYSTEM_ROWS after TR-2's. Both literals were read off the live modules (37
     // and 37) before this line was moved (SR-1: a count the wave grows by its own law).
-    expect(ENGINE_GATED_VIRTUAL_RULE_KEYS).toHaveLength(37);
-    expect(VIRTUAL_SUBSYSTEM_ROWS).toHaveLength(37);
+    // 36 → 37 at FP IN-2 (lane FP-I, 2026-09-24; SR-1): IN-2 adds `infoLureEnabled`, its row at
+    // the tail of VIRTUAL_SUBSYSTEM_ROWS. Both literals were read off the live modules (37 and 37)
+    // before this line was moved.
+    // 37 → 38 at the FP integration pick (the chair, 2026-09-24): TR-3 and IN-2 each minted one virtual key on a
+    // 36-key base; the tip carries both (SR-1, the union).
+    expect(ENGINE_GATED_VIRTUAL_RULE_KEYS).toHaveLength(38);
+    expect(VIRTUAL_SUBSYSTEM_ROWS).toHaveLength(38);
     // ⭐ THE BIJECTION IS A TRIPLE, NOT A PAIR. The ordered-equality pin in
     // subsystemRowsVirtual.test.js couples the manifest to VIRTUAL_RULES; direction 3 of
     // engineGatedRuleKeys couples the manifest to the certification rows. A flag mint moves

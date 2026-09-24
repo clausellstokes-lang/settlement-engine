@@ -101,8 +101,11 @@ import {
   plantExposureReasons,
   plantTookEntry,
 } from './brokeragePlantHandoff.js';
+// IN-2 — THE LURE. The ONE axis-typed exposure law, the lie's outcome words (HBF-72, re-exported
+// below as this fork's own), the spring and the bluff collision. A pure leaf of this family.
+import { LIE_OUTCOMES, bluffCollisionReasons, infoLureActive, lieClaimClause, lieExposedBandOf, lieExposure, lureSprungEntries } from './infoLure.js';
 
-export { LIE_TUNING, lieWillingness };
+export { LIE_TUNING, lieWillingness, LIE_OUTCOMES };
 
 // ── Small pure helpers ────────────────────────────────────────────────────────
 /** @param {unknown} v @param {number} fallback @returns {number} */
@@ -444,6 +447,12 @@ const HOSTILE_LABELS = new Set(['hostile', 'cold_war', 'rival']);
  *   personal credibility charge + the lie-stigma land on this soul (a REPUTATION cost, §0.5).
  * @property {{receipt:Record<string,unknown>,target?:Record<string,unknown>}} [commission]
  *   paid-plant provenance retained on the plant row; ordinary court lies omit it.
+ * @property {string} [axis] IN-2: the belief axis an axis-typed lie is told on (infoLure's
+ *   `LURE_AXES`); ABSENT ⇒ the legacy strength lie above — the only migration is no migration.
+ * @property {string} [assertedValue] IN-2: what the axis-typed lie asserts (a ladder word or label)
+ * @property {string} [trueValue] IN-2: the axis's truth at seed (the contradiction reference)
+ * @property {string} [intent] IN-2: 'inflate' | 'deflate', absent on a label lie; the four are
+ *   spelled into a record ONLY by `infoLure.lureRecordOf`, drop-when-absent.
  */
 
 // D-2 (design §6): only government/notable souls front a court's bluff (the mouthpiece floor
@@ -544,6 +553,8 @@ export function processLies({
   // npcCredibilityEnabled is lit (else no spokesperson is stamped, credW is settlement-only,
   // and every existing infoStatecraft golden is byte-identical).
   const npcCredLit = npcCredibilityActive(worldState);
+  // IN-2: the lure's lit-only arms (the spring, the bluff collision) ask this ONE gate first.
+  const lureLit = infoLureActive(worldState);
   /** @type {Map<string, Map<string, BeliefRecord>>} */
   const overrides = new Map();
   /** @type {CredibilityDelta[]} */
@@ -571,11 +582,9 @@ export function processLies({
   for (const key of Object.keys(priorDisinfo).sort(compareCodepoint)) {
     const rec = /** @type {DisinfoRecord} */ (priorDisinfo[key]);
     if (!rec || typeof rec !== 'object') continue;
-    const belief = seatBeliefRecord(beliefMaps, rec.audienceId, rec.subjectId);
-    const curBand = belief ? Math.round(finiteNumber(belief.strengthBand, T.INFLATE_BANDS)) : rec.trueBand;
-    // CONTRADICTION: the audience's belief has drifted off the plant back toward truth.
-    const contradicted = Math.abs(curBand - Math.round(rec.assertedBand)) >= T.EXPOSE_CONTRADICT_BANDS;
-    const agedOut = now - Math.floor(finiteNumber(rec.seededTick, now)) >= T.EXPOSE_MAX_AGE_TICKS;
+    // THE ONE EXPOSURE LAW, AXIS-TYPED (IN-2, infoLure.lieExposure): an absent `axis` is this head's
+    // strength law moved byte for byte. CONTRADICTION: the reckoning drifted back toward truth.
+    const { current: curBand, contradicted, agedOut } = lieExposure(rec, seatBeliefRecord(beliefMaps, rec.audienceId, rec.subjectId), now);
     if (contradicted || agedOut) {
       deltas.push({ id: rec.liarId, kind: 'deception', magnitude01: T.EXPOSE_CHARGE01 });
       // D-2 THE PERSONAL CHARGE (§6): the court takes today's deception delta unchanged AND
@@ -583,8 +592,7 @@ export function processLies({
       // magnitude band (the size of the exaggeration) rides as lieExposedBand so the ladder
       // can scale the stigma sev. Only when a spokesperson was stamped (npcCredibility lit).
       if (rec.spokespersonNpcId) {
-        const band = clamp(Math.abs(Math.round(finiteNumber(rec.assertedBand, 0)) - Math.round(finiteNumber(rec.trueBand, 0))), 0, 4);
-        npcDeltas.push({ id: String(rec.spokespersonNpcId), kind: 'deception', magnitude01: T.EXPOSE_CHARGE01, lieExposedBand: band });
+        npcDeltas.push({ id: String(rec.spokespersonNpcId), kind: 'deception', magnitude01: T.EXPOSE_CHARGE01, lieExposedBand: lieExposedBandOf(rec) });
       }
       // THE LIE EDGE-GRIEVANCE (W-DOCTRINE-2b follow-up from 2a's boundary): beyond the
       // news receipt, the exposure banks a PEOPLE-HELD grievance on the (audience↔liar)
@@ -601,7 +609,7 @@ export function processLies({
         id: `wizard_news.${now}.infowar_lie_exposed.${stablePart(rec.liarId)}.${stablePart(rec.audienceId)}`,
         kind: 'infowar_lie_exposed',
         headline: `${name(rec.liarId)}'s bluff is exposed`,
-        summary: `A telling ${name(rec.liarId)} planted in ${name(rec.audienceId)} (that its strength was greater than it is) has met independent word and collapsed. The lie traces to ${name(rec.liarId)}'s own court.`,
+        summary: `A telling ${name(rec.liarId)} planted in ${name(rec.audienceId)} ${lieClaimClause(rec, name, lureLit)} has met independent word and collapsed. The lie traces to ${name(rec.liarId)}'s own court.`,
         reasons: [
           contradicted
             ? `${name(rec.audienceId)}'s reckoning re-anchored toward the truth; the exaggeration no longer holds.`
@@ -611,6 +619,8 @@ export function processLies({
           // still carries one. Empty for a court's own bluff ⇒ byte-identical for every
           // exposure a world without both information flags lit can produce.
           ...plantExposureReasons(rec, name),
+          // IN-2 BLUFF AGAINST BLUFF: an aged-out bluff whose audience's own bluff was standing.
+          ...(lureLit ? bluffCollisionReasons(rec, { contradicted, agedOut }, priorDisinfo, name) : []),
         ],
         settlementIds: [String(rec.liarId), String(rec.audienceId)],
         // Actor layer (NEWS ADDRESS LAW): the court's stamped mouthpiece, who
@@ -632,9 +642,11 @@ export function processLies({
     // court whose reckoning now sits exactly on the asserted band, has DONE what it was
     // paid to do. DM truth only, one-shot, no new state (the leaf reads the record's own
     // age against the belief in hand); null for every uncommissioned bluff.
-    const took = plantTookEntry({ record: rec, currentBand: curBand, tick: now, nameFor: name });
+    const took = plantTookEntry({ record: rec, currentBand: Number(curBand), tick: now, nameFor: name });
     if (took) newsEntries.push(took);
   }
+  // IN-2 THE SPRING: last pulse's misjudged march on a court a weakness bait stood against.
+  if (lureLit) newsEntries.push(...lureSprungEntries({ worldState, disinfo: priorDisinfo, tick: now, nameFor: name }));
 
   // ── (2) FOLD PAID PLANTS through this one writer. They enter the same
   // disinfo lifecycle as an ordinary bluff; the optional envoy target emits

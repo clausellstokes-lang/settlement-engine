@@ -52,6 +52,15 @@ const EXPECTED = Object.freeze([
   ['mirror_standing_line', 'routine', 'public', null, 9],
 ]);
 
+/**
+ * ⚠ THE REGISTRY GREW BY ITS OWN LAW AT FP IN-2 (SR-1, SR-8): `lure_sprung`, a desk-bearing
+ * dm-only row certified in its OWN walker (tests/lint/infoLureKindPools.walker.test.js, L6). The
+ * one-kind arms below are therefore read over THIS wave's kind, never over the whole registry.
+ */
+const IN1_KINDS = Object.freeze(EXPECTED.map(([kind]) => kind));
+/** The IN-1c-a row, found by kind (the registry is codepoint-ordered, so it is no longer [0]). */
+const IN1_ROW = () => INFORMATION_KIND_REGISTRY.find((row) => row.kind === 'mirror_standing_line');
+
 /** The wave's own slice anchors. */
 const SECTION = '## IN-1';
 const UNTIL = '## IN-2';
@@ -97,8 +106,9 @@ function reachableIndexes(kind, interp, draws = 400) {
 
 describe('SP-6 phrased-kind registry — IN-1c-a the INFORMATION standing line', () => {
   test('the one-kind census and every reader join are exact', () => {
-    expect(INFORMATION_KINDS).toEqual(EXPECTED.map(([kind]) => kind));
-    expect(INFORMATION_KIND_REGISTRY).toHaveLength(1);
+    // 1 -> 2 at FP IN-2 (SR-1): IN-2 registers lure_sprung, at its codepoint-sorted slot.
+    expect(INFORMATION_KINDS).toEqual(['lure_sprung', ...IN1_KINDS]);
+    expect(INFORMATION_KIND_REGISTRY).toHaveLength(2);
     for (const [kind, significance, audience, section, depth] of EXPECTED) {
       const row = INFORMATION_KIND_REGISTRY.find((candidate) => candidate.kind === kind);
       expect(row).toMatchObject({ kind, significance, audience, section });
@@ -128,8 +138,10 @@ describe('SP-6 phrased-kind registry — IN-1c-a the INFORMATION standing line',
     // THE REGISTRY IS CLOSED, AND IT IS WHOLLY PUBLIC AND WHOLLY DESKLESS. Asserted as
     // emptiness of the complements rather than per-row, so a SECOND row that arrived covert
     // or desk-bearing reds here instead of slipping past a loop written for one kind.
-    expect(INFORMATION_KIND_REGISTRY.filter((row) => row.audience !== 'public')).toEqual([]);
-    expect(INFORMATION_KIND_REGISTRY.filter((row) => row.section !== null)).toEqual([]);
+    const own = INFORMATION_KIND_REGISTRY.filter((row) => IN1_KINDS.includes(row.kind));
+    expect(own).toHaveLength(1);
+    expect(own.filter((row) => row.audience !== 'public')).toEqual([]);
+    expect(own.filter((row) => row.section !== null)).toEqual([]);
     expect(informationReceipt('mirror_unknown', 'seed', WITH_SEASON)).toBeNull();
     // Read against a call known to ANSWER, so the null above is a closed door rather than a
     // picker that returns nothing for everything.
@@ -142,7 +154,7 @@ describe('SP-6 phrased-kind registry — IN-1c-a the INFORMATION standing line',
 
   test('the pool is the annex\'s, verbatim and in order, and the annex decides the arity', () => {
     const [[kind]] = EXPECTED;
-    const row = INFORMATION_KIND_REGISTRY[0];
+    const row = IN1_ROW();
     const rendered = row.pool.map((variant) => (
       typeof variant === 'function' ? String(variant(WITH_SEASON)) : String(variant)
     ));
@@ -177,7 +189,7 @@ describe('SP-6 phrased-kind registry — IN-1c-a the INFORMATION standing line',
     // a rotted or duplicated heading) and the resolution must land in the INFORMATION volume.
     // If a later merge forwards this pool to the legacy annex, this reddens instead of the
     // pool silently reading as stale sentences.
-    const address = INFORMATION_KINDS.map((kind) => annexPool(kind, WITH_SEASON).from);
+    const address = IN1_KINDS.map((kind) => annexPool(kind, WITH_SEASON).from);
     expect(address).toHaveLength(1);
     expect([...new Set(address)]).toEqual(['information']);
   });
@@ -188,7 +200,7 @@ describe('SP-6 phrased-kind registry — IN-1c-a the INFORMATION standing line',
     // single here, and the two mutants below prove the guard fires rather than decorating.
     expect(() => anchoredOnce(ANNEX_SOURCE, /^## IN-1(?=[ \n])/gm, 'IN-1 section')).not.toThrow();
     expect(() => anchoredOnce(ANNEX_SOURCE, /^## IN-2(?=[ \n])/gm, 'terminator')).not.toThrow();
-    for (const kind of INFORMATION_KINDS) {
+    for (const kind of IN1_KINDS) {
       const hits = [...ANNEX_SOURCE.matchAll(new RegExp(`^### ${kind}(?= )`, 'gm'))];
       expect(hits, `${kind}: annex heading count`).toHaveLength(1);
     }
@@ -213,7 +225,7 @@ describe('SP-6 phrased-kind registry — IN-1c-a the INFORMATION standing line',
   });
 
   test('the no-desk row files no desk and claims no reader phrase', () => {
-    const row = INFORMATION_KIND_REGISTRY[0];
+    const row = IN1_ROW();
     // THE POSITIVE CONTROL COMES FIRST, because both absences below are only measurements if
     // the readers they are read against are alive and populated on this run.
     expect(Object.keys(WHAT_PHRASES).length).toBeGreaterThan(1);
@@ -244,7 +256,7 @@ describe('SP-6 phrased-kind registry — IN-1c-a the INFORMATION standing line',
     expect(reachableIndexes(kind, WITH_SEASON)).toEqual([0, 1, 2, 3, 4, 5, 6, 7, 8]);
     // The two unreachable variants are named BY INDEX rather than by count, so a corpus edit
     // that moved the season into a different variant reds instead of counting to seven again.
-    const row = INFORMATION_KIND_REGISTRY[0];
+    const row = IN1_ROW();
     expect(row.requiredSlots
       .map((slots, index) => (slots.includes('season') ? index : -1))
       .filter((index) => index >= 0)).toEqual([...SEASON_ONLY_INDEXES]);

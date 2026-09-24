@@ -607,7 +607,8 @@ export const HABIT_FORK_REGISTRY = Object.freeze([
   fork({
     forkId: 'HBF-72', module: 'src/domain/worldPulse/informationStatecraft',
     symbol: 'processLies', discovery: 'checklist', disposition: 'DEFER',
-    reason: 'SURVEY U-33 - the lie lifecycle\'s own gate across seed, propagate, corroborate, contradict, expose and blowback. ⚠ HOT FILE: the survey measures this module past fifteen hundred raw lines and design §19 already calls for a headroom measurement before the information ops touch it',
+    actionVocabulary: 'LIE_OUTCOMES',
+    reason: 'SURVEY U-33 - the lie lifecycle\'s own gate across seed, propagate, corroborate, contradict, expose and blowback. ⚠ HOT FILE: the survey measures this module past fifteen hundred raw lines and design §19 already calls for a headroom measurement before the information ops touch it. ⭐ THE VOCABULARY IS DECLARED AT IN-2, AS THE PASS WIDENED TO AXIS-TYPED LIES: told, believed and caught are the three answers the ONE exposure law (infoLure.lieExposure) gives for every record, minted in infoLure.js beside that law and re-exported by informationStatecraft.js, the fork\'s own module, so the words resolve where the pass draws them',
     closeOwed: 'grade a planted lie against whether it was believed and whether it was caught, both of which are already typed outcomes of this same pass and need no second scale',
   }),
   fork({
@@ -849,5 +850,13 @@ export const HABIT_FORK_REGISTRY = Object.freeze([
     symbol: 'adaptCustomTradition', discovery: 'checklist', disposition: 'STAY',
     domain: 'FAITH',
     reason: 'FAITH: a founding derivation, root-shaped (the survey\'s U-29/U-30 class). A DM-authored custom tradition\'s `startWeekOfYear` is seeded off the tradition\'s OWN id (randInt(0,51)+1), the module\'s own header: "A seeded, stable startWeekOfYear stands in for the absent authored date, the same way genesis seeds its windows" (HBF-98\'s twin, for the one field an authoring form cannot supply). View-only (the dossier\'s Traditions tab consumption, not the tick-time mover), and it never touches the golden-pinned deriveFoundingTraditions leaf it appends after',
+  }),
+  // ⭐ FP IN-2 (J-EM-5; the id HBF-93 the lane minted was taken by WF-0's claimRoll at the landing — renumbered HBF-102 by the chair at the pick, the union): the first hashed row named by the Edit Mode fold rather than by judgment
+  // 265 (c). It joins this half on the same terms — a NAME with a measured sentence the walker
+  // re-derives from the site — and it still makes this half no census of hashed forks.
+  fork({
+    forkId: 'HBF-102', module: 'src/domain/worldPulse/npcCirculationBelief',
+    symbol: 'rumourReinforcesAt', discovery: 'bare', disposition: 'STAY',
+    reason: 'HASHED, NOT DRAWN. Judgment J-EM-5 sends this keyed chooser to IN-2 and IN-2 registers it. MEASURED at the site: an FNV-1a reading of a labelled composite key (observer, roamer, elapsed ticks) under a tuning share, so it consumes ZERO rng by construction. Its two outcomes are the story GREW in the telling or DIED on the road, returned as a boolean and never exported as words. ⛔ NEVER PINNABLE, and that is the class rather than a delay: it is an OBSERVATION\'S NOISE (L10 (a), the survey\'s D-2 class; R-4 rules rumour weathering the same way), and a pin would make the world lie with provenance reading observed. So no vocabulary is declared, and STAY is the ruling rather than a deferral',
   }),
 ]);

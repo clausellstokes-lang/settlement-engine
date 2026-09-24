@@ -2290,6 +2290,10 @@
       "kind": "rationale",
       "ref": "in1c-a-information-kind-pools-executed-2026-08-15"
     },
+    "tests/lint/infoLureKindPools.walker.test.js": {
+      "kind": "rationale",
+      "rationale": "FP IN-2's INFORMATION phrased-kind walker for lure_sprung, the lure's DM-truth spring (its OWN walker file, L6). Its catching power is EXECUTED IN THE TEST BODY on every ordinary run rather than claimed: the FIRST-MATCH LAW arm requires the weakness block's open and close anchors to resolve exactly once and the kind heading to occur exactly three times in the volume, so a duplicated or rotted heading throws instead of silently retargeting the slice; the arity arm derives each variant's slot set from the DOCUMENT under sentinel fills and pins it against the registry's parallel array, and asserts the witness can disagree (four of six variants carry a slot); the eligibility arm names the two unreachable variants BY INDEX (route, season) and pins four eligible without them and six with them; the address-chain arm drives the REAL producer (infoLure.lureSprungEntries) over a record-and-march fixture and holds its summary equal to the registry's own line for the producer's own seed; the pool arm carries a no-digit and a no-fates scan over the rendered lines. RED-FIRST at the IN-2 landing by plant-and-restore (sha256-exact): the pre-IN-2 news files planted over the tree red this walker by title. WHY RATIONALE AND NOT kind:mutation: a standing plant in scripts/mutation-sweep.sh is validated by executing the sweep, whose revert is the checkout family, which the shared-tree protocol forbids in this worktree (the reason already recorded at in1c-a-information-kind-pools-executed-2026-08-15). Promote to kind:mutation once the sweep can run from CI or a single-owner checkout."
+    },
     "tests/lint/faithKindPools.walker.test.js": {
       "kind": "rationale",
       "ref": "wf8a-faith-kind-pools-executed-2026-08-21"

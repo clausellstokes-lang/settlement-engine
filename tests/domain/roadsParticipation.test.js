@@ -350,6 +350,12 @@ describe('participation chokepoint — the .npcs-reader inventory ratchet (§8 c
     // before the roster is read. Dispositioned by the TR-2 cure (SR-1's cause: the reader the
     // wave landed, named in the commit that owes it).
     'src/domain/worldPulse/houseLedger.js',
+    // FP IN-2 (lane FP-I, 2026-09-24): the lure's MOUTHPIECE cast (`castLureMouthpiece`) reads
+    // the liar's PARTICIPATION view — the snapshot item's settlement, which the master gate
+    // already filtered (via-snapshot, protected) — and asks the ONE chokepoint, `isOffStage`,
+    // per person besides, pairing `dead` itself as the chokepoint's consumers do; a captive or a
+    // shelved soul never fronts a commissioned lie. It writes nothing onto any person.
+    'src/domain/worldPulse/infoLure.js',
     // D-2 (fold batch 3): the statecraft MOUTHPIECE draw reads the participation view (a
     // hostage cannot front a court's bluff — via-snapshot, protected); the credibility PRUNE
     // scan reads the UNTOUCHED item.save roster (the roadsKernel idiom) so a captive's

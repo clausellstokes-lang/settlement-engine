@@ -217,7 +217,11 @@ const ROUTED_TOKENS = KIND_REGISTRATION_FREEZES.routedTokens;
 // registry family (MARKET) and its first row. It carries a desk (an EXACT_SECTION row at trade),
 // so ROUTED_TOKENS moves with it and the divergence below stays at 8 (SR-1, SR-8).
 // The UNION at the FP integration pick (the chair, 2026-09-24): 115 + 2 + 1.
-const REGISTERED_KIND_COUNT = 118;
+// +1 at FP IN-2 (SR-1, SR-8): IN-2 registers lure_sprung, the INFORMATION family's second row and
+// the lure's DM-truth spring. It carries the infowar siblings' desk (`war`), so ROUTED_TOKENS moves
+// with it (383 → 384, in the roster) and the divergence below stays at 8; the unvoiced ceiling holds.
+// The UNION at the FP integration pick (the chair, 2026-09-24): 115 + 2 (GR-2b) + 1 (TR-3) + 1 (IN-2).
+const REGISTERED_KIND_COUNT = 119;
 
 const violations = floorViolations(ALL_ROWS, { declaredExceptions: DECLARED_EXCEPTIONS });
 const unvoiced = Object.keys(EXACT_SECTION).filter((token) => !REGISTERED_KINDS.has(token));

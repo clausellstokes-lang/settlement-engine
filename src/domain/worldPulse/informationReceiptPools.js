@@ -48,6 +48,18 @@
 
 /** @type {Readonly<Record<string, readonly ProseVariant[]>>} */
 export const INFORMATION_RECEIPTS = Object.freeze({
+  // IN-2 THE LURE — the WEAKNESS bait's block of the annex's # IN-2 (the one bait whose spring
+  // is built), verbatim. Variants 2 and 6 name a {route} and a {season} no producer supplies at
+  // this base, so they are declared unreachable and stay in the pool (the IN-1 rule above).
+  // The annex's WEALTH and DEVOTION sub-pools join with their springs (IN-2b).
+  lure_sprung: [
+    'They marched on a weakness that was bought for them.',
+    (x) => `${x.faction}'s column is on the ${x.route} road to ${x.counterpart}, moving on a muster count that ${x.house} sold them.`,
+    (x) => `The commission at ${x.settlement} is discharged in full: the mark bought the story, then bought a war with it.`,
+    (x) => `Nobody at ${x.counterpart} lied to ${x.faction}. Someone else did, a season earlier, for money.`,
+    'The purchased word aged into common knowledge, and common knowledge put an army on the road.',
+    (x) => `A story went out of ${x.settlement} in ${x.season}; the spears crossed the border before the year turned.`,
+  ],
   mirror_standing_line: [
     'Less than we fear, and the reckoning is a season stale.',
     (x) => `${x.counterpart} has been shown ${x.band}; nothing since ${x.season}.`,

@@ -317,6 +317,14 @@ export const ENGINE_GATED_VIRTUAL_RULE_KEYS = Object.freeze([
   // this census exists: a computed member access attributes to NO key and would be fully wired,
   // genuinely gated, and invisible here.
   'habitConditioningEnabled',
+  // Joined 2026-09-24 by FP wave IN-2 (lane FP-I) under CR-WR10-C item 4 (the compiled
+  // charter's §3 flag law), in the SAME commit as its first real gate read —
+  // `infoLure.infoLureActive`, the ONE `=== true` by-name read of this key in the tree — and
+  // its AUTHORED certification row at the tail of VIRTUAL_SUBSYSTEM_ROWS. Inserted at its
+  // codepoint-sorted position (SR-7). ⚠ A SINGLE CONJUNCT AT THIS WAVE, deliberately: the lure
+  // rides the statecraft head, which runs only under infoStatecraftEnabled, and the brokerages
+  // and the mirror are LIGHTING-ORDER preconditions the LIT-n unit judges, never doors here.
+  'infoLureEnabled',
   'infoStatecraftEnabled',
   // Joined 2026-09-23 by FP wave TR-2 (lane FP-D) under CR-WR10-C item 4 (the compiled
   // charter's §3 flag law), in the SAME commit as its first real gate read —

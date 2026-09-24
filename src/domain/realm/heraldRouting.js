@@ -133,6 +133,9 @@ export const EXACT_SECTION = Object.freeze(/** @type {Record<string, HeraldSecti
   // desk and RE-FILES this token there with the rest of the lane; filing it under `events`
   // in the meantime would have hidden it from the desk it is being written for.]
   plant_took: 'war',
+  // IN-2 `lure_sprung` (DM truth, covert at the producer) files with the same siblings for the
+  // same reason: a bought weakness put an army on the road. IN-5's knowledge desk re-files it.
+  lure_sprung: 'war',
   // relationship types that are adversarial route to war (a cold_war / hostile turn
   // is a war-section beat; commercial/hierarchy relations are trade, below).
   rival: 'war', cold_war: 'war', hostile: 'war',

@@ -57,7 +57,7 @@ import { INFORMATION_RECEIPTS } from './informationReceiptPools.js';
 
 /**
  * @typedef {{kind:string, significance:'notable'|'routine'|'major'|'n/a',
- *   audience:'public'|'dm-only', section:null,
+ *   audience:'public'|'dm-only', section:string|null,
  *   pool:readonly ProseVariant[], requiredSlots:ReadonlyArray<readonly string[]>}}
  *   InformationRegistryEntry
  */
@@ -79,7 +79,7 @@ import { INFORMATION_RECEIPTS } from './informationReceiptPools.js';
  * @param {string} kind
  * @param {'notable'|'routine'|'major'|'n/a'} significance
  * @param {'public'|'dm-only'} audience
- * @param {null} section
+ * @param {string|null} section
  * @param {ReadonlyArray<readonly string[]>} requiredSlots
  * @returns {Readonly<InformationRegistryEntry>}
  */
@@ -96,8 +96,9 @@ function informationKindRow(kind, significance, audience, section, requiredSlots
 }
 
 /**
- * The governed rows. ONE today, and the singular is a measurement rather than a stage of
- * construction: `mirror_shift`'s strength arm is inexpressible at this base (the collector
+ * The governed rows. TWO since FP IN-2 (`lure_sprung`, the lure's DM-truth spring, is the first
+ * ROUTED information beat and carries the interim desk declaration below). IN-1's singular was a
+ * measurement rather than a stage of construction: `mirror_shift`'s strength arm is inexpressible at this base (the collector
  * applies no seeded-tick filter to plants, so an earlier tick returns the present answer
  * wearing a past clock) and `mirror_confidence_degraded` has no honest producer at all (the
  * collector reads the arrival tick and throws it away). ⛔ A registry row without an honest
@@ -117,6 +118,14 @@ function informationKindRow(kind, significance, audience, section, requiredSlots
  * @type {ReadonlyArray<Readonly<InformationRegistryEntry>>}
  */
 export const INFORMATION_KIND_REGISTRY = Object.freeze([
+  // IN-2 THE LURE. THE INTERIM DESK, DECLARED BY THE FIRST WAVE THAT MINTS A ROUTED
+  // INFORMATION BEAT (this file's header reserved the declaration for it): `war`, where the
+  // lure's own siblings `infowar_lie_exposed` and `plant_took` already file, until IN-5 mints
+  // the knowledge desk. DM truth, so `dm-only` (the producer sets `covert` fail-closed).
+  // Codepoint-sorted insertion (SR-7).
+  informationKindRow('lure_sprung', 'notable', 'dm-only', 'war', [
+    [], ['faction', 'route', 'counterpart', 'house'], ['settlement'], ['counterpart', 'faction'], [], ['settlement', 'season'],
+  ]),
   informationKindRow('mirror_standing_line', 'routine', 'public', null, [
     [], ['counterpart', 'band', 'season'], ['band'], ['counterpart'], ['band'],
     [], ['counterpart', 'season'], [], [],

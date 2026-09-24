@@ -243,6 +243,10 @@ const MERCHANT_HOUSES = 'merchantHousesEnabled';
 // its ONE by-name gate read (`dispatchDestination.believedMarketsActive`) in a single commit —
 // the same three module-scope edits, ZERO new test titles.
 const BELIEVED_MARKETS = 'believedMarketsEnabled';
+// FP IN-2 (lane FP-I). The lure, minted with its manifest entry, its certification row
+// APPENDED at the tail after TR-2's and its ONE by-name gate read (`infoLure.infoLureActive`)
+// in a single commit: the same three module-scope edits, ZERO new test titles.
+const INFO_LURE = 'infoLureEnabled';
 // AUTHORING ORDER, not alphabetical: the assertion below is an exact ordered equality
 // against VIRTUAL_SUBSYSTEM_ROWS, so this list mirrors the file's own section order.
 //
@@ -276,6 +280,7 @@ const VIRTUAL_RULES = Object.freeze([
   CHANCE_ENCOUNTERS,
   MERCHANT_HOUSES,
   BELIEVED_MARKETS,
+  INFO_LURE,
 ]);
 
 const rowFor = (rule) => SUBSYSTEM_CERTIFICATION_REGISTRY.find((row) => row.rule === rule);
@@ -466,6 +471,8 @@ const LANE_LEAVES = Object.freeze({
     'src/domain/worldPulse/marketNews.js',
     'src/domain/worldPulse/marketReceiptPools.js',
   ],
+  // IN-2. The leaf (the gate, the law, the spring) and the head that folds it.
+  [INFO_LURE]: ['src/domain/worldPulse/infoLure.js', 'src/domain/worldPulse/informationStatecraft.js'],
   [CHANCE_ENCOUNTERS]: [
     'src/domain/worldPulse/envoyChanceMeeting.js',
     'src/domain/worldPulse/envoyChanceMeetingLedger.js',

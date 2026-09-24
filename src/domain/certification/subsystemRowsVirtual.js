@@ -660,6 +660,42 @@ export const VIRTUAL_SUBSYSTEM_ROWS = Object.freeze([
     // No channel at all, so the row can never be ALIVE and says so honestly.
     soakEvidence: 'unobserved',
   }),
+  // ── IN-2 · THE LURE (FP IN-2, docs/DESIGN_FP_INFORMATION.md §5 IN-2; block #18) ─────────
+  // APPENDED AT THE TAIL, the add-a-row protocol above (the belief block's header forbids an
+  // append there, where IN-1a's mirror sits); an append here shifts no existing row's index.
+  Object.freeze({
+    rule: 'infoLureEnabled',
+    title: 'The lure (axis-typed lies, the spring, bluff against bluff)',
+    module: 'src/domain/worldPulse/infoLure.js,src/domain/worldPulse/informationStatecraft.js',
+    aliveness: Object.freeze({
+      // DELIBERATELY EMPTY: the lure mints no pulse candidate; its one beat, lure_sprung, is a
+      // statecraft news entry, and a candidate channel would grade this row off nothing.
+      eventTypes: Object.freeze([]),
+      // DELIBERATELY EMPTY: the knowledge family is a residual bucket (IN-6's decontamination),
+      // so no behavioural family can grade the lure alive without grading every bluff with it.
+      moverFamilies: Object.freeze([]),
+      // DELIBERATELY EMPTY: the lure writes through spatialLedgers.disinfo, whose ONE writer is
+      // the statecraft head, and ordinary bluffs keep that key alive in worlds the lure never lit.
+      stateKeys: Object.freeze([]),
+      other: 'A LIT-ONLY SET OF ARMS ON AN EXISTING LEDGER, WHICH IS WHY EVERY CHANNEL IS EMPTY AND WHY THAT IS THE CORRECT READING. ONE GATE, by name and strict: infoLureActive (infoLure.js) is the only read of the key in src/, and processLies asks it once, before the spring, the bluff collision and the exposure clause. The axis-typed exposure law it consults is the ONE law for every record, legacy included, and moves no legacy byte: an absent axis is the head\'s own strength law, moved verbatim, and an axis record is judged on its own ladder at the same tolerance or, for the faith label, by inequality. WHAT IT DOES, LIT: a weakness bait (a deflate strength lie about a court) that stood in a mark\'s reckoning when the mark chose to march on that court, on exactly the band it asserted, becomes the DM-truth lure_sprung beat, covert and addressed to all three courts; an aged-out bluff whose audience\'s own counter-bluff was standing in the liar\'s court is exposed naming both lies; and a bought strength plant about a third court names that court and its direction at exposure. The leaf also DEFINES the commission-lie direction and the plantChannel predicate headless (IN-2-c: the consumer lands when U123 composes the direction transport), with the producer that consumer will call. WHAT IT NEVER DOES: it draws no random number and hashes nothing, reads the phantom discriminant nowhere (a phantom never enters the snapshot), and writes no ledger of its own. THE OBSERVATION NEEDED to close the gap is a lit soak in which a bought deflate plant meets its mark\'s misjudged march; until then the lane is pinned in tests/domain/infoLureIn2.test.js, which carries its four dormancy fences and the lit-mutant control.',
+    }),
+    // A spring needs a bought lie AND the mark's own march on the same court: sparse by design.
+    expectedTempo: 'reactive',
+    invariants: Object.freeze([
+      Object.freeze({
+        name: 'dark_is_byte_identical',
+        description: 'With the key absent, false, or any truthy non-true value, processLies over a fixture that springs a lure and collides two bluffs the moment the key is lit returns exactly the bytes it returned before IN-2.',
+        check: 'Expressible from state and asserted that way in tests/domain/infoLureIn2.test.js fence 1 (a pinned digest of the dark output), with the lit-mutant control on the same fixture.',
+      }),
+      Object.freeze({
+        name: 'legacy_records_read_as_strength',
+        description: 'A disinfo record with no axis field is judged by the strength law alone, so every save written before IN-2 exposes on exactly the tick it would have.',
+        check: 'Expressible from state and asserted that way in tests/domain/infoLureIn2.test.js over a table of legacy records, beside the head\'s own pins.',
+      }),
+    ]),
+    // No channel at all, so the row can never be ALIVE and says so honestly.
+    soakEvidence: 'unobserved',
+  }),
 ]);
 
 /**

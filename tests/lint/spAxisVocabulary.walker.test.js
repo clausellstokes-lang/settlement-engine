@@ -127,6 +127,14 @@ const ARGUED_FIELD_SPELLERS = Object.freeze({
     + ' granary and roads — and hands the resulting record onward under SP-B\'s own field'
     + ' name. Like the leaf above it declares no ladder and renames no rung; the spelling'
     + ' is the join, and indirecting it would hide the coupling this list makes visible',
+  'src/domain/worldPulse/infoLure.js':
+    'FP IN-2, the lure, and the first module that PLANTS a believed family: a commissioned'
+    + ' story writes one rung into the mark\'s reckoning under SP-B\'s own field (withAxisValue)'
+    + ' and the one axis-typed exposure law reads it back (axisValueOf). It spells the three'
+    + ' fields ONCE, in IN2_AXIS_FAMILIES, on purpose: that literal is §9 seam row 12\'s'
+    + ' tripwire, authored against the at-build set so axisFamiliesGrewSinceIn2 can hold it'
+    + ' against SUBJECT_AXIS_FIELDS — deriving it would make the tripwire unable to trip. It'
+    + ' declares no ladder and renames no rung; the band words arrive by import',
 });
 
 function walk(dir, out = []) {

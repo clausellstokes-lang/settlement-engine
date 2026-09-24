@@ -234,7 +234,10 @@ const SURVEY_SETTLED = 3;
 // row is held to the STRICTER form regardless, because arm (b) resolves the name BY IMPORT
 // off `moduleFile(row)` — HBF-05's own module — so `offModule` stays one row long and HBF-17
 // is still the estate's only off-module declaration.
-const ROWS_WITH_ACTION_VOCABULARY = 6;
+// 6 -> 7 AT FP IN-2 (lane FP-I, 2026-09-24; SR-1), the same banked win: IN-2 adds HBF-72's
+// LIE_OUTCOMES (told, believed, caught), minted in infoLure.js beside the one exposure law and
+// re-exported by informationStatecraft.js, the fork's own module, so arm (b) resolves it there.
+const ROWS_WITH_ACTION_VOCABULARY = 7;
 
 /**
  * Table 4's rows as `module.js#symbol`, split by the "R" (registration owed) and "B" (bare,

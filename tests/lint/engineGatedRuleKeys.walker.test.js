@@ -975,6 +975,9 @@ describe('engine-gated rule keys (the census-invisible subsystem class)', () => 
       missionDispatcherEnabled: 'tests/domain/missionDispatcher.test.js',
       operationsVoiceEnabled: 'tests/domain/operationsVoice.test.js',
       envoyTaskCatalogEnabled: 'tests/domain/envoyTaskCatalog.test.js',
+      // FP IN-2 (lane FP-I, 2026-09-24): its brief places the four fences and the lit-mutant
+      // control in the wave's own acceptance file, beside the spring they fence.
+      infoLureEnabled: 'tests/domain/infoLureIn2.test.js',
       // FP TR-2 (lane FP-D, 2026-09-23): the register's THIRTY-SIXTH member. Its brief places
       // the four fences and the lit-mutant control in the wave's own acceptance file.
       merchantHousesEnabled: 'tests/domain/houseLedgerTr2.test.js',

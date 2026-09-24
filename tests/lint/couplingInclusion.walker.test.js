@@ -255,6 +255,10 @@ const LAYER_PATTERNS = Object.freeze({
     // ⛔ AN EXACT-PATH REGEX, NOT A `second[A-Z]` PREFIX: a prefix would claim files nobody
     // has designed and silently widen a frozen family.
     /^src\/domain\/worldPulse\/secondOrderBelief\.js$/,
+    // IN-2: the lure. A lie that baits is INFORMATION's own subject (the layer mints the lie,
+    // owns its ledger and its one exposure law), so the leaf takes INFO on the IN-1 reading
+    // above. ⛔ EXACT-PATH, NOT an `info[A-Z]` prefix, for the same reason.
+    /^src\/domain\/worldPulse\/infoLure\.js$/,
     /^src\/domain\/spatial\/(?:rumorNetwork|intelActs)\.js$/,
     // W-SEAT SEAT-4: the anticipated-reaction forecast. HOMED BY CHAIR DECLARATION
     // (ODQ §861, the SEAT-A2 landing) rather than by the landing lane's judgment, because
