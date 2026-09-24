@@ -807,6 +807,102 @@ function causalReasonLines(entry, label) {
 }
 
 /**
+ * THE ONE PEACE-OFFER WRITER (CURE-PEACE-1 U4; the chair's ruling FP-19). The
+ * strategy_sue_for_peace candidate a court's suit writes toward `target`. The chooser's
+ * sampled move (emitMove, below) and the DM's SUE_FOR_PEACE order
+ * (realmVerbExecution.js) both mint it here, so a decreed offer is the organic offer,
+ * field for field, and the lanes that answer the one answer the other: WR-5's target
+ * court when warLayer AND warTermination are lit, the approval itself when they are not.
+ * Returns null when the pair has no edge on the hostile axis to step down.
+ * @param {{ sId: string, name: string, target: string|null|undefined, snapshot: PulseSnapshot, tick: number,
+ *   worldState?: import('./beliefMap.js').BeliefWorldState|null, exhaustion?: number, rng?: RngLike,
+ *   chaosPull?: number, rust?: number,
+ *   termination?: { suePressure01:number, dissolvedCauseTypes?:string[], receipt?:{reason?:string}, targetId?:string }|null }} args
+ */
+export function peaceSuitCandidate({ sId, name, target, snapshot, tick, worldState = null, exhaustion = 0, rng = null, chaosPull = 0, rust = 0, termination = null }) {
+  const warRulingsLit = worldState?.simulationRules?.warLayerEnabled === true
+    && worldState?.simulationRules?.warTerminationEnabled === true;
+  const edge = target ? hostileEdgeBetween(snapshot, sId, target) : null;
+  if (!edge) return null; // no edge to de-escalate — fall through to nothing
+  // Read the edge's ACTUAL current label (the relationshipStates overlay wins over
+  // the raw edge) and step it ONE rung down the PEACE_STEP ladder. An edge that is
+  // not on the hostile axis has nothing to wind down.
+  const relState = ensureRelationshipState(
+    normalizeRelationshipEdge(edge),
+    snapshot?.worldState?.relationshipStates?.[relationshipKeyFromEdge(edge)],
+  );
+  const fromType = relState.relationshipType;
+  const toType = PEACE_STEP[/** @type {keyof typeof PEACE_STEP} */ (fromType)];
+  if (!toType) return null;
+  const key = relationshipKeyFromEdge(edge);
+  // W-C1 item 1b legibility: name the war-bankruptcy reading + any chaos/rust misread of it.
+  const perceived = termination ? clamp01(Number(termination.suePressure01) || 0) : perceivedPeaceExhaustion({ exhaustion, rng, tick, sId, chaosPull, rust });
+  const peaceEntry = peaceCausalActive(worldState)
+    ? peaceReasonsFor(worldState, String(sId), String(target), termination?.dissolvedCauseTypes)
+    : null;
+  const reasons = termination ? [
+    ...(termination.receipt?.reason ? [termination.receipt.reason] : []),
+    ...(termination.receipt?.booksPublicReason ? [termination.receipt.booksPublicReason] : []),
+    ...(Array.isArray(termination.receipt?.dispositionReasons)
+      ? termination.receipt.dispositionReasons
+      : []),
+    ...terminationPeaceReasonLines(peaceEntry),
+  ] : [
+    `${name} can no longer pay for the war it is fighting, and that is what brings it to the table.`,
+    'Sue-for-peace pulls the existing de-escalation levers (hostile_truce / wind-down).',
+    ...causalReasonLines(peaceEntry, 'Casus pacis'),
+  ];
+  if (!termination && perceived !== exhaustion) {
+    const timingWord = perceived > exhaustion ? 'early' : 'late';
+    const driver = chaosPull > 0 && rust > 0 ? "its patron's chaos and a rusty army"
+      : chaosPull > 0 ? "its patron's chaos" : 'a rusty army';
+    reasons.push(
+      `A misread of its own war-bankruptcy: ${driver} distorted the reading, so the suit came ${timingWord}.`,
+    );
+  }
+  const warRulingRead = warRulingsLit ? compactWarRulingRead(termination) : null;
+  const peaceFront = worldState?.deployments?.[String(sId)];
+  const peaceFrontSinceTick = inputTick(peaceFront?.sinceTick);
+  const bilateralOffer = warRulingsLit
+    && !!termination
+    && String(peaceFront?.targetId || '') === String(target)
+    && peaceFrontSinceTick != null;
+  return strategyCandidate({
+    move: 'sue_for_peace',
+    sId,
+    tick,
+    severity: MOVE_SEVERITY,
+    headline: `${name} sues for peace`,
+    summary: `War-weary and economically drained, ${name} seeks to wind the conflict down.`,
+    reasons,
+    metadata: {
+      ...(warRulingRead ? { warRulingRead } : {}),
+    },
+    proposal: {
+      relationshipKey: key,
+      relationshipPatch: { proposedRelationshipType: toType, trajectory: 'transitioning' },
+      proposalPayload: {
+        kind: 'relationship_label_change',
+        relationshipKey: key,
+        fromType,
+        toType,
+        // WR-5 G2: approval is the OFFERER'S yes, not bilateral peace by
+        // itself. The apply mouth resolves the named target court's second
+        // decision before this existing label/recall/treaty writer may run.
+        ...(bilateralOffer ? {
+          peaceOffer: true,
+          offererId: String(sId),
+          targetId: String(target),
+          peaceFrontOwnerId: String(sId),
+          peaceFrontSinceTick,
+        } : {}),
+        reason: `${name} sued for peace; the sponsored hostility winds down.`,
+      },
+    },
+  });
+}
+
+/**
  * Emit the chosen move as a probability-1 candidate. `deploy` carries an
  * army_deployed condition; `sue_for_peace` carries a relationship_label_change
  * proposal (pulling the existing de-escalation levers); `defend` / `hold` emit an
@@ -817,8 +913,6 @@ function causalReasonLines(entry, label) {
  */
 function emitMove({ move, bestTargetId = null, sId, item, ctx, tick, exhaustion, snapshot, strengthFor, rng = null, chaosPull = 0, rust = 0, worldState = null, beliefActive = false, trueStrengthFor = null, termination = null, warCasusFor = null }) {
   const name = item?.name || item?.settlement?.name || String(sId);
-  const warRulingsLit = worldState?.simulationRules?.warLayerEnabled === true
-    && worldState?.simulationRules?.warTerminationEnabled === true;
 
   if (move === 'sue_for_peace') {
     // Wind down the war we are ACTUALLY fighting: prefer the settlement we besiege that
@@ -830,84 +924,7 @@ function emitMove({ move, bestTargetId = null, sId, item, ctx, tick, exhaustion,
       ? String(termination.targetId) : null;
     const besiegingTarget = ctx.besieging.find((/** @type {string} */ t) => hostileEdgeBetween(snapshot, sId, t));
     const target = terminationTarget || besiegingTarget || ctx.hostileTargets[0] || ctx.besieging[0];
-    const edge = target ? hostileEdgeBetween(snapshot, sId, target) : null;
-    if (!edge) return null; // no edge to de-escalate — fall through to nothing
-    // Read the edge's ACTUAL current label (the relationshipStates overlay wins over
-    // the raw edge) and step it ONE rung down the PEACE_STEP ladder. An edge that is
-    // not on the hostile axis has nothing to wind down.
-    const relState = ensureRelationshipState(
-      normalizeRelationshipEdge(edge),
-      snapshot?.worldState?.relationshipStates?.[relationshipKeyFromEdge(edge)],
-    );
-    const fromType = relState.relationshipType;
-    const toType = PEACE_STEP[/** @type {keyof typeof PEACE_STEP} */ (fromType)];
-    if (!toType) return null;
-    const key = relationshipKeyFromEdge(edge);
-    // W-C1 item 1b legibility: name the war-bankruptcy reading + any chaos/rust misread of it.
-    const perceived = termination ? clamp01(Number(termination.suePressure01) || 0) : perceivedPeaceExhaustion({ exhaustion, rng, tick, sId, chaosPull, rust });
-    const peaceEntry = peaceCausalActive(worldState)
-      ? peaceReasonsFor(worldState, String(sId), String(target), termination?.dissolvedCauseTypes)
-      : null;
-    const reasons = termination ? [
-      ...(termination.receipt?.reason ? [termination.receipt.reason] : []),
-      ...(termination.receipt?.booksPublicReason ? [termination.receipt.booksPublicReason] : []),
-      ...(Array.isArray(termination.receipt?.dispositionReasons)
-        ? termination.receipt.dispositionReasons
-        : []),
-      ...terminationPeaceReasonLines(peaceEntry),
-    ] : [
-      `${name} can no longer pay for the war it is fighting, and that is what brings it to the table.`,
-      'Sue-for-peace pulls the existing de-escalation levers (hostile_truce / wind-down).',
-      ...causalReasonLines(peaceEntry, 'Casus pacis'),
-    ];
-    if (!termination && perceived !== exhaustion) {
-      const timingWord = perceived > exhaustion ? 'early' : 'late';
-      const driver = chaosPull > 0 && rust > 0 ? "its patron's chaos and a rusty army"
-        : chaosPull > 0 ? "its patron's chaos" : 'a rusty army';
-      reasons.push(
-        `A misread of its own war-bankruptcy: ${driver} distorted the reading, so the suit came ${timingWord}.`,
-      );
-    }
-    const warRulingRead = warRulingsLit ? compactWarRulingRead(termination) : null;
-    const peaceFront = worldState?.deployments?.[String(sId)];
-    const peaceFrontSinceTick = inputTick(peaceFront?.sinceTick);
-    const bilateralOffer = warRulingsLit
-      && !!termination
-      && String(peaceFront?.targetId || '') === String(target)
-      && peaceFrontSinceTick != null;
-    return strategyCandidate({
-      move,
-      sId,
-      tick,
-      severity: MOVE_SEVERITY,
-      headline: `${name} sues for peace`,
-      summary: `War-weary and economically drained, ${name} seeks to wind the conflict down.`,
-      reasons,
-      metadata: {
-        ...(warRulingRead ? { warRulingRead } : {}),
-      },
-      proposal: {
-        relationshipKey: key,
-        relationshipPatch: { proposedRelationshipType: toType, trajectory: 'transitioning' },
-        proposalPayload: {
-          kind: 'relationship_label_change',
-          relationshipKey: key,
-          fromType,
-          toType,
-          // WR-5 G2: approval is the OFFERER'S yes, not bilateral peace by
-          // itself. The apply mouth resolves the named target court's second
-          // decision before this existing label/recall/treaty writer may run.
-          ...(bilateralOffer ? {
-            peaceOffer: true,
-            offererId: String(sId),
-            targetId: String(target),
-            peaceFrontOwnerId: String(sId),
-            peaceFrontSinceTick,
-          } : {}),
-          reason: `${name} sued for peace; the sponsored hostility winds down.`,
-        },
-      },
-    });
+    return peaceSuitCandidate({ sId, name, target, snapshot, tick, worldState, exhaustion, rng, chaosPull, rust, termination });
   }
 
   if (move === 'deploy') {

@@ -34,6 +34,8 @@ import { planConvoy, planBlockade } from '../spatial/navalLayer.js';
 import { migrationActive } from '../spatial/migration.js';
 import { declareCasus } from './warReasons.js';
 import { sueForPeaceOrder } from './peaceReasons.js';
+import { peaceSuitCandidate } from './settlementStrategy.js';
+import { readWarTerminationForParty } from './warTermination.js';
 import { orderSupplyRaid, declareTradeEmbargo } from './supplyWebWarfare.js';
 import {
   interventionActive, liveCoupContests, INTERVENTION_SIDES,
@@ -331,6 +333,35 @@ function orderNews(verb, headline, summary, ids, tick, now) {
   };
 }
 
+/**
+ * FP-19 (CURE-PEACE-1 U4; the chair's ruling, vetoable: a DM-facing behaviour change recorded
+ * for the owner's veto). The DM's SUE_FOR_PEACE is the court's REAL peace offer as well as its
+ * recall: the offer the tick's own suit would write toward the foe, from the ONE offer writer
+ * (settlementStrategy.js :: peaceSuitCandidate), handed back as the order's substitute outcome
+ * so the apply mouth's standing lanes answer it (the precedent the lifecycle verbs set). With
+ * warLayer AND warTermination lit, the offer carries the court's own WR-1 read and WR-5's target
+ * court decides it; there, an offer that cannot be made bilateral is not made, so the order never
+ * speaks for the other court. Dark, the approval is the peace, as an approved organic suit is.
+ * Null (the recall alone) when the pair has no edge on the hostile axis to step down.
+ * @param {Mut} state the world the order applies to, before its recall
+ * @param {Mut} shim the apply snapshot, byId guaranteed
+ * @param {string} partyId @param {string} foeId @param {number} tick
+ * @returns {Mut|null}
+ */
+function decreePeaceOffer(state, shim, partyId, foeId, tick) {
+  const rules = asObject(state.simulationRules);
+  const warRulingsLit = rules.warLayerEnabled === true && rules.warTerminationEnabled === true;
+  const liveSnapshot = { ...shim, byId: shim.byId, settlements: shim.settlements, regionalGraph: shim.regionalGraph, worldState: state };
+  const termination = warRulingsLit
+    ? readWarTerminationForParty({ worldState: state, snapshot: liveSnapshot, tick, actorId: partyId, opponentId: foeId })
+    : null;
+  const offer = peaceSuitCandidate({
+    sId: partyId, name: nameOf(shim, partyId), target: foeId, snapshot: liveSnapshot, tick, worldState: state, termination,
+  });
+  if (!offer || (warRulingsLit && asObject(asObject(offer).proposalPayload).peaceOffer !== true)) return null;
+  return { ...offer, applyMode: 'auto' };
+}
+
 // ── The arm dispatcher ────────────────────────────────────────────────────────
 /**
  * Apply an APPROVED realm_verb_order outcome against the CURRENT world.
@@ -385,7 +416,7 @@ export function applyRealmVerbOrder({ state, snapshot, settlementUpdates, outcom
       return applied(r.worldState, [orderNews(verb,
         headlineFor(verb, args, shim),
         `${nameOf(shim, partyId)}'s army is ordered home. The recall resolves through the standing withdrawal next tick.`,
-        [partyId, foeId].filter(Boolean), nowTick, now)]);
+        [partyId, foeId].filter(Boolean), nowTick, now)], null, decreePeaceOffer(state, shim, partyId, foeId, nowTick));
     }
     case 'REPUDIATE_TREATY': {
       const r = repudiateTreaty(state, { fromId: args.fromId, toId: args.toId, tick: nowTick });
