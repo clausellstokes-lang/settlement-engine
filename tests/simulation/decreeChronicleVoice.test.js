@@ -275,7 +275,23 @@ describe('EM-C1b — an applied decree writes its chronicle line, cause = the ta
     // a dormant path and not a refused advance.
     expect(campaignOf(store).worldState.tick, 'the advance did not run').toBeGreaterThan(1);
     expect(campaignOf(store).chronicles, 'a decree-free tick minted a chronicle').toBe(undefined);
-    expect(Object.hasOwn(result?.pulseRecord || {}, 'decreeCauses'),
+
+    // ⛔ THE RECORD IS PROVEN PRESENT BEFORE THE KEY IS READ OFF IT (NOTE-23). The line below
+    //    read through `result?.pulseRecord || {}`, and a fallback cannot tell "no composer
+    //    was reached" from "there is no such record": with the pulse record renamed at its
+    //    ONE writer (`pulseKernel.js`, the advance otherwise untouched) this file stayed
+    //    5 passed. So the record is anchored twice — it exists, and it is THIS advance's own,
+    //    stamped with the tick the campaign committed — and only then is the absence read.
+    //    The companion positive, for the KEY rather than the record, is
+    //    `decreeTick.test.js` E1-2: "the key exists when there is a decree".
+    const record = result?.pulseRecord;
+    expect(record !== null && typeof record === 'object',
+      'the advance returned NO pulse record, so the absence below reads an empty fallback')
+      .toBe(true);
+    expect([typeof record.id, record.id !== '', record.tick],
+      'the pulse record is not this advance\'s — it names no id, or a tick the campaign never committed')
+      .toEqual(['string', true, campaignOf(store).worldState.tick]);
+    expect(Object.hasOwn(record, 'decreeCauses'),
       'a decree-free tick claimed a decree cause').toBe(false);
   });
 });
