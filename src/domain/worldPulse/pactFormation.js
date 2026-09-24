@@ -97,7 +97,7 @@ import { amendPactInstrument, closeTermsBrokenByWar, termIdOf } from './pactAmen
 import {
   openPactProposal, pactFormationActive, pactProposalsOf, prunePactProposals, settlePactProposal,
 } from './pactProposals.js';
-import { settleRenewalProposal } from './pactRenewal.js';
+import { openRenegotiationDemands, settleRenewalProposal } from './pactRenewal.js';
 import {
   dependencyFearOf, scoreFaithCommunion, scoreMigrationPressure, scoreSharedThreat, scoreTradeDemand,
 } from './pactTriggers.js';
@@ -168,10 +168,11 @@ const F = PACT_FORMATION_TUNING;
  * it. Every produced ladder starts at `min: 0`, which is what preserves the GR-2 promise
  * that a crossed trigger always drafts something.
  *
- * `renewal` is the ONE empty ladder left, and it is a TOMBSTONE rather than an oversight:
- * its family is GR-5's. A trigger with no draftable family scores, crosses, and is then
- * refused at the draft with `no_draftable_family` in its own receipt — visible, never
- * silent — which is the direction the recorded orphan-vocabulary law wants.
+ * `renegotiation` and `renewal` are the two empty ladders, and by design rather than as
+ * tombstones: GR-5's renewal leaf drafts both from the STANDING instrument, never from a lens.
+ * Handed to this drafter, either is refused at the draft with `no_draftable_family` in its own
+ * receipt — visible, never silent — which is the direction the recorded orphan-vocabulary law
+ * wants.
  *
  * ⚠ THE SIX BOUNDS ARE AUTHORED LITERALS AND THEY ARE UNSOAKED, exactly like every band
  * in `PACT_FORMATION_TUNING`. They are NOT derived from catalog weights and no code may
@@ -200,6 +201,7 @@ export const PACT_DRAFT_LENS = Object.freeze({
   trade_demand: Object.freeze([
     Object.freeze({ min: 0, terms: Object.freeze(['resource_share']) }),
   ]),
+  renegotiation: Object.freeze([]),
   renewal: Object.freeze([]),
 });
 
@@ -892,8 +894,8 @@ export function advancePeacetimePacts({
     const answer = answerPactProposal({
       worldState: state, proposal, responderDemand01: back.length ? back[0].score01 : 0, tick, edges,
     });
-    // GR-5b: a renewal settles in its own leaf, renewed or a clean lapse with no memory; this pass writes what it hands back.
-    const renewal = settleRenewalProposal({ worldState: state, proposal, answer, tick, settlementOf });
+    // GR-5b/5c: a renewal or a demand settles in its own leaf (a clean lapse, or a strain for a refused demand); this pass writes what it hands back.
+    const renewal = settleRenewalProposal({ worldState: state, proposal, answer, tick, settlementOf, snapshot });
     if (renewal) {
       state = renewal.ledger ? setSpatialLedger(renewal.worldState, 'treaties', renewal.ledger) : renewal.worldState;
       receipts.push(renewal.receipt);
@@ -972,6 +974,10 @@ export function advancePeacetimePacts({
       });
     }
   }
+
+  // GR-5c: a court whose believed lead has swung past the band demands new terms on its instrument's year-turn, from its own leaf.
+  const demands = openRenegotiationDemands({ worldState: state, ids, strengthFor: strength, tick, digest, season });
+  state = demands.worldState; receipts.push(...demands.receipts);
 
   // ── 4. A QUEUE, NOT AN ARCHIVE. Settled rows are gone once their receipt has landed. ──
   state = prunePactProposals({ worldState: state });

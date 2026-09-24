@@ -38,7 +38,7 @@ import {
 // The first non-WAR leaf (FP wave TR-1). One sibling per volume, as CW-0w slice 1 built
 // this family to accept.
 import { TR1_CASUS_COMMERCII_COUPLINGS, TR3_BELIEVED_MARKETS_COUPLINGS } from './couplingRegistryTrade.js';
-import { GR2_PACT_FORMATION_COUPLINGS, GR3_TERM_FAMILY_COUPLINGS, GR4_BREACH_CREDIBILITY_COUPLINGS, GR6_MEDIATION_COUPLINGS } from './couplingRegistryGrammar.js';
+import { GR2_PACT_FORMATION_COUPLINGS, GR3_TERM_FAMILY_COUPLINGS, GR4_BREACH_CREDIBILITY_COUPLINGS, GR5C_RENEGOTIATION_COUPLINGS, GR6_MEDIATION_COUPLINGS } from './couplingRegistryGrammar.js';
 import { IN_INFORMATION_COUPLINGS } from './couplingRegistryInfo.js';
 // The ESPIONAGE leaf (FP wave ES-1). ES is a wave family OF the INFORMATION program in
 // the LAYER map, and a volume of its own in the WAVE map — couplingIds carry the `ES`
@@ -74,6 +74,9 @@ export {
   GR3_TERM_FAMILY_COUPLINGS,
   GR4C_BREACH_CREDIBILITY_COUPLING,
   GR4_BREACH_CREDIBILITY_COUPLINGS,
+  GR5C_BELIEVED_SWING_COUPLING,
+  GR5C_DEMAND_NERVE_COUPLING,
+  GR5C_RENEGOTIATION_COUPLINGS,
   GR6_INTENT_BROKER_COUPLING,
   GR6_SOFT_GATE_COUPLING,
   GR6_MEDIATION_COUPLINGS,
@@ -225,6 +228,11 @@ export const COUPLING_REGISTRY = Object.freeze([
   // tiebreak argument WR-6c, W-MEM and WR-6e make: both directions' CPL-5 first-row seats are
   // held by rows composed far above, so this append moves nothing a single-row caller resolves.
   ...GR6_MEDIATION_COUPLINGS,
+  // FP GR-5c (2026-09-24): the two renegotiation rows, licensing pactRenewal.js's read of the
+  // demander's picture (INFO) and of the court's own strength and posture (INTERIOR). ⛔ APPENDED
+  // LAST on the same tiebreak argument: CPL-19 and CPL-21's first-row seats in these directions
+  // belong to rows composed far above, so this append moves nothing a single-row caller resolves.
+  ...GR5C_RENEGOTIATION_COUPLINGS,
 ]);
 
 /** @type {ReadonlyArray<Readonly<CouplingRegistryRow>>} */

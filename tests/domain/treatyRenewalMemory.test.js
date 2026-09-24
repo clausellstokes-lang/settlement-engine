@@ -252,11 +252,15 @@ describe('GR-5A — the monotone memory (treatyRenewalEnabled)', () => {
     expect(spy.calls, 'the spy is not wired to the real fold').toBeGreaterThan(0);
   });
 
-  it('exactly three src files name treatyRenewalEnabled and the only gate is a strict === true read', () => {
+  it('exactly four src files name treatyRenewalEnabled and the only gate is a strict === true read', () => {
     // FENCE 4 — the gate-polarity census. Modelled on the landed GR-0 fence: a FOURTH file
     // naming this key reds until somebody classifies it, which is the point.
     const naming = SRC_FILES.filter(({ src }) => src.includes(FLAG)).map(({ rel }) => rel).sort();
     expect(naming).toEqual([
+      // GR-5c (SR-1, SR-11): the GRAMMAR coupling rows' `flags` column names the key as DATA, a
+      // string member of a frozen table and never a gate, exactly as pactFormationEnabled's census
+      // classifies the same file. The one gate below is still the only read.
+      'src/domain/certification/couplingRegistryGrammar.js',
       // ⚠ RE-AIMED BY TE-VIRT-1 (ODQ §868/§870.4), not admitted as a new namer: the row
       // moved WHOLE out of subsystemRowsVirtual.js when that file was decomposed at its
       // 800/800 ceiling. Measured at the move — every spelling of this key left the old

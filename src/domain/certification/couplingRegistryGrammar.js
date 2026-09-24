@@ -336,3 +336,61 @@ export const GR6_SOFT_GATE_COUPLING = couplingRow({
 
 /** @type {ReadonlyArray<Readonly<CouplingRegistryRow>>} */
 export const GR6_MEDIATION_COUPLINGS = Object.freeze([GR6_INTENT_BROKER_COUPLING, GR6_SOFT_GATE_COUPLING]);
+
+/**
+ * ── GR-5c's TWO ROWS: THE DEMAND FROM STRENGTH, READ FROM BOTH SIDES OF THE RATIO ─────────
+ *
+ * GR-5c / INFORMATION→GRAMMAR (CPL-19). THE SWING IS A BELIEF ON THE COUNTERPART'S SIDE. The
+ * renewal leaf (`pactRenewal.js`) reads the demander's OWN picture of its counterpart
+ * (`beliefMap.js :: beliefRecord`, the banded strength at the band's midpoint) against the lead
+ * the war door recorded at the signing, and a court whose believed lead has swung past the band
+ * demands new terms. No picture, no demand: never truth and never the neutral guess.
+ *
+ * THE COUNTERFORCE is the answer: the counterpart weighs the lighter sheet by the one threshold
+ * every pact answer uses, and a refusal is written back on the pair's record as a strain fact,
+ * so the belief that powered the demand is the belief the refusal is remembered against.
+ */
+export const GR5C_BELIEVED_SWING_COUPLING = couplingRow({
+  couplingId: 'CPL-19.INFO_TO_GRAMMAR.GR-5c.believed_swing',
+  pairId: 'CPL-19',
+  direction: 'INFO→GRAMMAR',
+  read: 'src/domain/worldPulse/pactRenewal.js#renegotiationSwingOf',
+  receiptField: 'spatialLedgers.pactProposals[].{trigger,sheet,openedTick,answerDueTick}',
+  counterforce: 'src/domain/worldPulse/pactRenewal.js#settleRenewalProposal',
+  flags: Object.freeze(['pactFormationEnabled', 'treatyRenewalEnabled']),
+  owningVolume: 'GRAMMAR',
+  owningWave: 'GR-5c',
+  intendedDesk: 'diplomacy',
+});
+
+/**
+ * GR-5c / INTERIOR→GRAMMAR (CPL-21). THE COURT'S OWN NERVE AND ITS OWN STRENGTH. The court's
+ * knowledge of itself is the estate's one strength derivation (`relationshipEvolution.js ::
+ * settlementStrength`), and its own demand is coloured by SP-C's posture
+ * (`strategicPosture.js :: courtPostureOf`, which weighs its learned risk appetite), so a timid
+ * rebuilt court sits on its strength and a bold one asks sooner.
+ *
+ * THE COUNTERFORCE is the answering court's own reserve (`pactFormation.js ::
+ * answerPactProposal`: posture and appetite on the other side), and the refusal it can return
+ * lands on the pair's relationship record through the existing strain idiom.
+ */
+export const GR5C_DEMAND_NERVE_COUPLING = couplingRow({
+  couplingId: 'CPL-21.INTERIOR_TO_GRAMMAR.GR-5c.demand_nerve',
+  pairId: 'CPL-21',
+  direction: 'INTERIOR→GRAMMAR',
+  read: 'src/domain/worldPulse/pactRenewal.js#openRenegotiationDemands',
+  receiptField: 'worldState.relationshipStates[...].{resentment,recentIncidents}',
+  counterforce: 'src/domain/worldPulse/pactFormation.js#answerPactProposal',
+  flags: Object.freeze([
+    'dispositionChannelsEnabled',
+    'pactFormationEnabled',
+    'strategicPostureEnabled',
+    'treatyRenewalEnabled',
+  ]),
+  owningVolume: 'GRAMMAR',
+  owningWave: 'GR-5c',
+  intendedDesk: 'diplomacy',
+});
+
+/** @type {ReadonlyArray<Readonly<CouplingRegistryRow>>} */
+export const GR5C_RENEGOTIATION_COUPLINGS = Object.freeze([GR5C_BELIEVED_SWING_COUPLING, GR5C_DEMAND_NERVE_COUPLING]);

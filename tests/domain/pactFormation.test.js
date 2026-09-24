@@ -426,10 +426,13 @@ describe('THE DRAFT LENS — the rung ladders, and what an occasion has earned',
     // until their families landed. Three of those four rows are now producers; `renewal`
     // stays empty and is GR-5's, so the tripwire survives as a single named row rather
     // than as a paragraph — the orphan-vocabulary law is what it still enforces.
+    // GR-5c adds `renegotiation` (SR-1): empty by design, beside renewal, because the renewal
+    // leaf drafts both from the standing instrument rather than from a lens ladder.
     expect(Object.keys(PACT_DRAFT_LENS).sort()).toEqual([
-      'faith_communion', 'migration_pressure', 'renewal', 'shared_threat', 'trade_demand',
+      'faith_communion', 'migration_pressure', 'renegotiation', 'renewal', 'shared_threat', 'trade_demand',
     ]);
     expect(PACT_DRAFT_LENS.renewal).toEqual([]);
+    expect(PACT_DRAFT_LENS.renegotiation).toEqual([]);
     for (const [trigger, ladder] of Object.entries(PACT_DRAFT_LENS)) {
       expect(Object.isFrozen(ladder), trigger).toBe(true);
       for (const rung of ladder) {

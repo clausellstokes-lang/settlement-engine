@@ -1620,6 +1620,17 @@
       "band": null,
       "note": ""
     },
+    "src/domain/worldPulse/pactRenewal.js#RENEGOTIATION_TUNING": {
+      "role": null,
+      "status": "draft",
+      "signedAt": null,
+      "unit": {
+        "ASK_CAP": "fraction01",
+        "DEMAND_SWING": "fraction01"
+      },
+      "band": null,
+      "note": "FP GR-5c RENEGOTIATION FROM STRENGTH (lane FP-B4): the two bands of a mid-term demand. DEMAND_SWING = 0.25 PROPOSED, on the belief map's 0..1 strength scale: how far the demander's believed lead over its counterpart must have moved since the signing (believedMarginAtSignature, read from the demander's side). FLOOR: the swing two FRESH pictures read on the signing day, from the belief map's own quantizer (strengthBandOf / strengthOfBand) over every truth pair on a 101 x 101 grid the war door would sign at: 4686 pairs, max 0.20, p95 0.14, p50 0 (one band stale reaches 0.40: the mistaken court, legal by design). CEILING: the swing a court's recovery from a war's pressure produces, from the one strength derivation (settlementStrength) over 6 tiers x 5 sizes x 3 conflict pressures x 2 exhaustion scars: 180 cases, min 0.09, p50 0.27, max 0.38. 0.25 sits above the floor and at or below the median recovery; the posture colours it to 0.205 .. 0.295 for the court's own demand (still above the fresh floor, still inside the recovery range). ASK_CAP = 0.5 PROPOSED, a fraction of an owed clause's magnitude: at or above the median recovery swing (0.27, so a typical recovery's ask is never capped) and below the relief the war door's own drafter (draftTerms) grants a crushing victory at believed parity (1 - 0.125 / 0.375 = 0.667). DRAFT, registered by the lane's builder seat; the owner signs it at the tuning sitting."
+    },
     "src/domain/worldPulse/pactRenewal.js#RENEWAL_WINDOW_TUNING": {
       "role": null,
       "status": "draft",

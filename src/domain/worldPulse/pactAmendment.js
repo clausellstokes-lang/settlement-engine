@@ -55,10 +55,11 @@ import { pactFormationActive } from './pactProposals.js';
  * `broken_by_war` is the war-overtaken closure's; `war_ended` is the war door's amendment
  * awareness. GR-5b's `renewed` joins as growth (R-GR5-2): the renewal leaf
  * (`pactRenewal.js`) records it through `amendPactInstrument` when a renewal is accepted.
- * GR-5d's `converted` joins in its own wave.
+ * GR-5c's `renegotiated` joins the same way, recorded by the same leaf when a mid-term demand
+ * is accepted. GR-5d's `converted` joins in its own wave.
  * @type {readonly string[]}
  */
-export const PACT_LINEAGE_ACTS = Object.freeze(['amended', 'broken_by_war', 'disavowed_by_succession', 'formed', 'renewed', 'war_ended']);
+export const PACT_LINEAGE_ACTS = Object.freeze(['amended', 'broken_by_war', 'disavowed_by_succession', 'formed', 'renegotiated', 'renewed', 'war_ended']);
 
 /**
  * THE CLOSED FORMATION ENDINGS (§GR-7's vocabulary). Every member has a producer in this
@@ -363,8 +364,9 @@ export function closeTermsBrokenByWar({ worldState, aId, bId, tick }) {
   const treaty = recordOf(ledger[key]);
   // GR-5b: a RENEWED clause was agreed in peace as surely as a formed or amended one, so a
   // war closes it too; without the act here a renewal would quietly make a pact war-proof.
+  // GR-5c: a RENEGOTIATED clause was agreed in peace too, so the same war closes it.
   const negotiated = new Set(lineageOf(treaty)
-    .filter((entry) => entry.act === 'formed' || entry.act === 'amended' || entry.act === 'renewed')
+    .filter((entry) => entry.act === 'formed' || entry.act === 'amended' || entry.act === 'renegotiated' || entry.act === 'renewed')
     .flatMap((entry) => (Array.isArray(entry.termIds) ? entry.termIds.map(String) : [])));
   const doomed = termsOf(treaty)
     .filter((term) => negotiated.has(termIdOf(term)) && Number(term.expiresTick) > tick);

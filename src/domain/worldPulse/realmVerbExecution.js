@@ -246,8 +246,8 @@ export function buildRealmVerbOutcome({ verb, args, worldState, snapshot, tick }
       };
     }
   }
-  // GR-5b: the renewal word on the clause dial is refused before the queue when the pair holds no instrument inside its window.
-  const renewalSheet = predicate.available && verb === 'PROPOSE_PACT' ? renewalClauseSheet({ worldState, termType: String(a.termType ?? ''), fromId: String(a.fromId ?? ''), toId: String(a.toId ?? ''), tick: nowTick }) : null;
+  // GR-5b/5c: the renewal and renegotiation words are refused before the queue when the pair has nothing inside its window or past the band.
+  const renewalSheet = predicate.available && verb === 'PROPOSE_PACT' ? renewalClauseSheet({ worldState, termType: String(a.termType ?? ''), fromId: String(a.fromId ?? ''), toId: String(a.toId ?? ''), tick: nowTick, snapshot }) : null;
   if (renewalSheet && renewalSheet.terms.length === 0) return { ok: false, code: 'invalid_term_sheet', prose: realmVetoProse('invalid_term_sheet') };
   return {
     ok: true,
@@ -419,7 +419,7 @@ export function applyRealmVerbOrder({ state, snapshot, settlementUpdates, outcom
       if (!pactFormationActive(state)) return refused(refuse('pact_gate_dark'));
       const fromId = String(args.fromId ?? '');
       const toId = String(args.toId ?? '');
-      const clause = renewalClauseSheet({ worldState: state, termType: String(args.termType ?? ''), fromId, toId, tick: nowTick })
+      const clause = renewalClauseSheet({ worldState: state, termType: String(args.termType ?? ''), fromId, toId, tick: nowTick, snapshot })
         || pactClauseSheet({ termType: String(args.termType ?? ''), fromId, toId, tick: nowTick });
       const opened = openPactProposal({
         worldState: state, from: fromId, to: toId, trigger: clause.trigger,

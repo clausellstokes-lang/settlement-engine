@@ -56,6 +56,8 @@ import {
   GR3_TERM_FAMILY_COUPLINGS,
   GR4C_BREACH_CREDIBILITY_COUPLING,
   GR4_BREACH_CREDIBILITY_COUPLINGS,
+  GR5C_BELIEVED_SWING_COUPLING,
+  GR5C_RENEGOTIATION_COUPLINGS,
   GR6_INTENT_BROKER_COUPLING,
   GR6_MEDIATION_COUPLINGS,
   GR6_SOFT_GATE_COUPLING,
@@ -216,6 +218,9 @@ describe('CW-0 coupling registry', () => {
       // FP GR-6 (2026-09-24): the two mediation rows, appended last on the same tiebreak
       // argument — CPL-5's first-row seat in each direction belongs to a row composed far above.
       ...GR6_MEDIATION_COUPLINGS,
+      // FP GR-5c (2026-09-24; SR-1, SR-11): the two renegotiation rows, appended last on the same
+      // tiebreak argument; the first-row seats of CPL-19 and CPL-21 in their directions are unmoved.
+      ...GR5C_RENEGOTIATION_COUPLINGS,
     ]);
     // The W-SEAT D10 row spelled out, on the WR-3 precedent above: a composition assertion
     // proves ORDER, never CONTENT, and this is the estate's first `irregularForceEnabled`
@@ -726,6 +731,9 @@ describe('CW-0 coupling registry', () => {
         // ENCOUNTERS leaf after ESPIONAGE, and the legacy first-row seat below is unchanged
         // — which is the property this test is named for.
         ENC3_MEETING_EXPOSURE_WARINESS_COUPLING,
+        // GR-5c (2026-09-24; SR-1): the renegotiation leaf's read of the demander's picture joins
+        // LAST, because the registry composes it last; the first-row seat below is unmoved.
+        GR5C_BELIEVED_SWING_COUPLING,
       ]);
     expect(couplingRowFor('CPL-19', 'INFO→GRAMMAR')).toBe(WR7_MOVING_PICTURE_COUPLING);
     // IN-0C's disclosure credit is the SECOND read on this direction and the first owned by

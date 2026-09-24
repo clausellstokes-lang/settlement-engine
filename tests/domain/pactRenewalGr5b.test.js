@@ -167,7 +167,8 @@ describe('GR-5b — the renewal window: a treaty inside its window renews throug
     const row = manifest.REALM_MANIFEST.PROPOSE_PACT;
     expect(row.dials.map((d) => d.key), 'no fourth dial').toEqual(['fromId', 'toId', 'termType']);
     const clause = row.dials.find((d) => d.key === 'termType');
-    expect(clause.options).toEqual([...manifest.PACT_CLAUSE_TYPES, renewal.RENEWAL_TRIGGER]);
+    // GR-5c adds the renegotiation word to the same dial (SR-1), at its codepoint place before renewal.
+    expect(clause.options).toEqual([...manifest.PACT_CLAUSE_TYPES, renewal.RENEGOTIATION_TRIGGER, renewal.RENEWAL_TRIGGER]);
     expect(renewal.RENEWAL_TRIGGER).toBe('renewal');
     // The clause list itself stays pure TERM_CATALOG vocabulary; only the dial carries the word.
     expectAbsentWithAnchor(manifest.PACT_CLAUSE_TYPES, 'renewal', 'resource_share', 'the clause list');
