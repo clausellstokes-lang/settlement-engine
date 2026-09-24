@@ -86,12 +86,24 @@ describe('the knowledge desk — the non-omniscient Herald golden (captured firs
       }
       // anchored: a desk that moved outside the declared set is a routing change nobody declared
       expect(drifted).toEqual([]);
-      // THE ONE-TIME SHIFT, RECORDED: the realm's two misjudgment beats, faith to knowledge. The
-      // other refiled kinds mint nothing here (their layers are unlit in this preset).
-      expect(moved.sort()).toEqual([
-        'wizard_news.19.belief_misjudgment.soak-a.soak-c: faith -> knowledge',
-        'wizard_news.19.belief_misjudgment.soak-c.soak-d: faith -> knowledge',
+      // THE ONE-TIME SHIFT, RECORDED at IN-5's landing (6cf6920d4): the realm's two misjudgment
+      // beats, faith to knowledge, proven against a golden captured BEFORE the refile. RE-SCOPED at
+      // LIT-1b's pick (FP-33, the FP chair, 2026-09-24): the lit belief chain re-deals the year-one
+      // news (the beats now mint at ids 24 and 36, soak-a -> soak-c), and the golden was
+      // re-recorded through the signed door at the lit tree, so it holds the post-refile desks and
+      // nothing moves against it. The declared set is asserted directly instead: the realm's
+      // misjudgment beats are exactly these two, and every one sits on the knowledge desk in the
+      // golden and live. The other refiled kinds still mint nothing here.
+      expect(moved).toEqual([]);
+      const misjudged = Object.keys(live.sections).filter((id) => kindOfNewsId(id) === 'belief_misjudgment').sort();
+      expect(misjudged).toEqual([
+        'wizard_news.24.belief_misjudgment.soak-a.soak-c',
+        'wizard_news.36.belief_misjudgment.soak-a.soak-c',
       ]);
+      for (const id of misjudged) {
+        expect(live.sections[id]).toBe('knowledge');
+        expect(manifest[`${live.key}|section|${id}`]).toBe('knowledge');
+      }
     }
   }, 240_000);
 });
