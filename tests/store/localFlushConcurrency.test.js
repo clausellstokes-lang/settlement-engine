@@ -243,7 +243,13 @@ describe('EM-E8c — a local flush of several members keeps every row', () => {
     const carried = after.map((row, i) => npcIdsOf(row.settlement).includes(decreeIds[i]));
     const lost = ids.filter((_, i) => !carried[i]);
 
-    expect(result?.ok, 'the real advance ran to a committed result').not.toBe(false);
+    // THE SAME POSITIVE AS A5's (FIX-8). `result?.ok` is `undefined` on a DEAD advance and on a
+    // good one alike — the pulse result carries no `ok` at all — so `.not.toBe(false)` advertised
+    // a liveness check the matcher never made. The receipt is the TICK the pulse returns beside
+    // the campaign clock that committed it (measured: both 1). This arm's later assertions do
+    // convict a dead advance; the claim is now convicted HERE, where it is made.
+    expect([result?.tick, store.getState().campaigns.find((row) => row.id === 'camp-1')?.worldState?.tick],
+      'the real advance ran to a committed result').toEqual([1, 1]);
     expect(before.map((row) => statusesOf(row.settlement)),
       'every durable row carried its decree WAITING before the tick')
       .toEqual(ids.map(() => ['pending']));
@@ -265,7 +271,9 @@ describe('EM-E8c — a local flush of several members keeps every row', () => {
     const carried = after.map((row, i) => npcIdsOf(row.settlement).includes(decreeIds[i]));
     const lost = ids.filter((_, i) => !carried[i]);
 
-    expect(result?.ok, 'the real advance ran to a committed result').not.toBe(false);
+    // The FIX-8 positive again: `result?.ok` is `undefined` on a dead advance and on a good one.
+    expect([result?.tick, store.getState().campaigns.find((row) => row.id === 'camp-1')?.worldState?.tick],
+      'the real advance ran to a committed result').toEqual([1, 1]);
     expect(lost, `THE MEASUREMENT: a third member does not widen the loss (lost: ${
       JSON.stringify(lost)})`).toEqual([]);
     expect(carried, 'all three durable rows carry their own newcomer')

@@ -205,7 +205,13 @@ describe('EM-E8b B — every member save of a campaign takes its roster ops at t
     const afterHome = rowOf(store, HOME).settlement;
 
     expect(home.ok && away.ok, 'both doors staged their CREATE intent').toBe(true);
-    expect(result?.ok, 'and the real advance ran to a committed result').not.toBe(false);
+    // THE SAME POSITIVE AS A5's (FIX-8). `result?.ok` is `undefined` on a DEAD advance and on a
+    // good one alike — the pulse result carries no `ok` at all — so `.not.toBe(false)` advertised
+    // a liveness check the matcher never made. The receipt is the TICK the pulse returns beside
+    // the campaign clock that committed it (measured: both 1). This arm's later assertions do
+    // convict a dead advance; the claim is now convicted HERE, where it is made.
+    expect([result?.tick, store.getState().campaigns.find((row) => row.id === 'camp-1')?.worldState?.tick],
+      'and the real advance ran to a committed result').toEqual([1, 1]);
     expect(statusesOf(afterAway), 'EM-E1\'s hook reached the NON-ACTIVE member\'s own registry')
       .toEqual(['applied']);
     expect(npcIdsOf(afterAway).filter((id) => id === away.decreeId).length,

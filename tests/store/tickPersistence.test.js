@@ -215,7 +215,13 @@ describe('EM-E8b A — a tick-minted roster row reaches the durable save through
     const after = await durableRow();
 
     expect(staged.ok, 'the binder staged the CREATE intent').toBe(true);
-    expect(result?.ok, 'and the real advance ran to a committed result').not.toBe(false);
+    // THE SAME POSITIVE AS A5's (FIX-8). `result?.ok` is `undefined` on a DEAD advance and on a
+    // good one alike — the pulse result carries no `ok` at all — so `.not.toBe(false)` advertised
+    // a liveness check the matcher never made. The receipt is the TICK the pulse returns beside
+    // the campaign clock that committed it (measured: both 1). This arm's later assertions do
+    // convict a dead advance; the claim is now convicted HERE, where it is made.
+    expect([result?.tick, store.getState().campaigns.find((row) => row.id === 'camp-1')?.worldState?.tick],
+      'and the real advance ran to a committed result').toEqual([1, 1]);
     expect((before.settlement.decrees || []).map((row) => row.status),
       'the durable save carried the decree WAITING before the tick').toEqual(['pending']);
     // anchored: the row above holds the same decree as pending, so the status below is this
