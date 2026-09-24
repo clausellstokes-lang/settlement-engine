@@ -33,7 +33,7 @@ import { describe, expect, it } from 'vitest';
 
 import { simulateCampaignWorldPulse } from '../../src/domain/worldPulse/pulseKernel.js';
 import { simulateCampaignWorldInterval } from '../../src/domain/worldPulse/advanceInterval.js';
-import { stage } from '../../src/domain/edit/registry.js';
+import { stage, withdraw } from '../../src/domain/edit/registry.js';
 import { OP_TYPES } from '../../src/domain/edit/operations.js';
 import { poolValues } from '../../src/domain/edit/pools.js';
 import { decreeCataloguesForSaves } from '../../src/store/campaignAdvanceSession.js';
@@ -284,5 +284,94 @@ describe('U86 — a decree is judged by its OWN save\'s vocabulary, never a sibl
     // words is a town that offers none, and its order is withdrawn.
     const named = tickRealm(saves, { opTypes: OP_TYPES, poolsBySave: { a: {} } });
     expect(registryOf(named, 'a')[0].status, 'a member named with no words still resolves').toBe('withdrawn');
+  });
+});
+
+/**
+ * ⭐ U97 — THE COMPOSITION IS THE INVARIANT (judgment 305). EM-C1b's tick SKIPS the
+ * stale-vocabulary check for a save the catalogue bag does not name, which is the right thing at
+ * a tick — a composition gap must never become a mass-withdrawal of a town's orders — and which
+ * is INVISIBLE: nothing reports that the check was skipped. 305 rules that what is owed is not a
+ * runtime branch but an ARM, and this is it.
+ *
+ * ⛔ THE INVARIANT IS NARROWER THAN THE QUEUE ROW'S WORDS, AND THE NARROWING IS MEASURED, NOT
+ * PREFERRED. U97 says "every advance composes a bag entry for EVERY member save". Against this
+ * tree that is FALSE and U97-2 executes the counter-example: `decreeCataloguesForSaves`
+ * (`src/store/campaignAdvanceSession.js`) filters to the saves carrying at least one PENDING
+ * entry and returns `null` when there are none, while `applyDecreesToSaves`
+ * (`src/domain/worldPulse/decreeHook.js`) walks every save whose `decrees` array is merely
+ * NON-EMPTY. So a member whose registry holds only history reaches the bag lookup unnamed. The
+ * TRUE and load-bearing invariant — the one whose failure would silently skip a real check — is
+ * that every save the tick will JUDGE is named, and that is what U97-1 holds in both directions.
+ */
+describe('U97 — the advance composes a bag entry for every save the tick will JUDGE', () => {
+  it('U97-1 A REALM OF FIVE, EVERY MEMBER JUDGED: the composer names all five, the real orchestrator carries the bag to all five, and a bag missing ONE lets that town\'s order through unchecked', async () => {
+    const ids = ['a', 'b', 'c', 'd', 'e'];
+    const saves = ids.map((id, index) => saveOf(id, ['Steward', 'Reeve'], staged(`d-${index}`, 'Harbourmaster')));
+    // ANTI-VACUITY, TWICE. A realm of one would make "all of them" a single fact, and a word
+    // some town DID offer would make the withdrawals below prove nothing about the check.
+    expect(saves.length, 'a realm of one cannot show a totality').toBeGreaterThan(2);
+    const offering = saves.filter((save) => poolValues(ROLE_POOL, save.settlement).includes('Harbourmaster'));
+    expect(offering, 'the fixture started offering the stale word somewhere').toEqual([]);
+
+    // (a) THE COMPOSITION, BOTH DIRECTIONS: five members staged an order, five are named.
+    const bag = /** @type {any} */ (await decreeCataloguesForSaves(saves));
+    expect(Object.keys(bag.poolsBySave).sort(), 'the advance composed a bag that does not name every save it will judge')
+      .toEqual([...ids].sort());
+
+    // (b) AND THE BAG REACHES ALL FIVE THROUGH THE REAL ORCHESTRATOR. Five withdrawals is the
+    // proof: an unnamed save is SKIPPED and its order APPLIES, so "withdrawn" can only be the
+    // answer of a check that actually ran on that town.
+    const result = /** @type {any} */ (await simulateCampaignWorldInterval({
+      campaign: campaignOf(saves), saves, interval: 'one_week', commit: true, now: NOW,
+      decreeCatalogues: bag,
+    }));
+    expect(ids.map((id) => registryOf(result, id)[0].status), 'a member the bag named was not judged at the tick')
+      .toEqual(ids.map(() => 'withdrawn'));
+
+    // (c) ⛔ THE COMPOSITION GAP, EXECUTED — THE THING U97 SAYS NOTHING REPORTS. The same realm
+    // with the first member left out of the composition by copy: its order applies UNCHECKED
+    // while its four siblings are judged, and no cause, no warning and no record says so.
+    const gap = /** @type {any} */ (await decreeCataloguesForSaves(saves.slice(1)));
+    expect(Object.keys(gap.poolsBySave).sort(), 'the copy still named the omitted member').toEqual(['b', 'c', 'd', 'e']);
+    const skipped = /** @type {any} */ (await simulateCampaignWorldInterval({
+      campaign: campaignOf(saves), saves, interval: 'one_week', commit: true, now: NOW,
+      decreeCatalogues: gap,
+    }));
+    expect(registryOf(skipped, 'a')[0].status, 'an unnamed member was judged after all, so (b) proves nothing')
+      .toBe('applied');
+    expect(['b', 'c', 'd', 'e'].map((id) => registryOf(skipped, id)[0].status), 'the named siblings stopped being judged')
+      .toEqual(['withdrawn', 'withdrawn', 'withdrawn', 'withdrawn']);
+  });
+
+  it('U97-2 THE DENOMINATOR IS MEASURED, NOT ASSUMED: the composer names the saves with a PENDING entry, and a member carrying only history is walked by the tick without being named — judgment 305\'s documented no-resolution path, not a composition gap', async () => {
+    const pending = saveOf('a', ['Steward', 'Reeve'], staged('d1', 'Harbourmaster'));
+    const historyOnly = saveOf('b', ['Steward', 'Reeve'], withdraw(staged('d2', 'Harbourmaster'), 'd2'));
+
+    // THE TWO FIXTURES REALLY DIFFER, read with the registry's own verb rather than typed: one
+    // registry carries a pending row and the other carries none, and BOTH are non-empty.
+    expect(pending.settlement.decrees.map((/** @type {any} */ row) => row.status)).toEqual(['pending']);
+    expect(historyOnly.settlement.decrees.map((/** @type {any} */ row) => row.status)).toEqual(['withdrawn']);
+    expect(historyOnly.settlement.decrees.length, 'an EMPTY registry would take the hook\'s early return instead')
+      .toBeGreaterThan(0);
+
+    // (a) THE COMPOSER'S DENOMINATOR, BOTH DIRECTIONS: pending, not membership.
+    const bag = /** @type {any} */ (await decreeCataloguesForSaves([pending, historyOnly]));
+    expect(Object.keys(bag.poolsBySave).sort(), 'the composer\'s denominator moved off "has a pending entry"')
+      .toEqual(['a']);
+
+    // (b) AND THE UNNAMED MEMBER IS STILL WALKED. Its registry is non-empty, so the hook does not
+    // return early on it; it reaches the bag lookup, finds no entry and takes the documented
+    // no-resolution path — which leaves its history exactly as it was.
+    const before = JSON.stringify(historyOnly.settlement.decrees);
+    const result = tickRealm([pending, historyOnly], bag);
+    expect(registryOf(result, 'a')[0].status, 'the named member was not judged').toBe('withdrawn');
+    expect(JSON.stringify(registryOf(result, 'b')), 'the unnamed member\'s history was touched at the tick')
+      .toBe(before);
+
+    // (c) ⛔ THE WHOLE-BAG CASE, so the null return is a measurement and not an inference: a realm
+    // where NO member has a pending entry composes no bag at all.
+    expect(await decreeCataloguesForSaves([historyOnly]), 'a realm with nothing pending composed a bag anyway')
+      .toBeNull();
   });
 });
