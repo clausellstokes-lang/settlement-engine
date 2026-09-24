@@ -30,8 +30,8 @@ const MAX_ENTRIES = 240;
 // by tests/domain/wizardNewsYearWindow.test.js, so intervalWeeks.js stays OUT of the first-paint set
 // (the import owed about 387 B of eager bytes; a signed budget never rises by the chair's hand) and
 // the tuning inventory sees a table, not a named magic number. The owner signs it at the tuning sitting.
-export const FEED_RETENTION = Object.freeze({ windowWeeks: 52 });
-const RETENTION_WINDOW_TICKS = FEED_RETENTION.windowWeeks;
+export const FEED_RETENTION_TUNING = Object.freeze({ windowWeeks: 52 });
+const RETENTION_WINDOW_TICKS = FEED_RETENTION_TUNING.windowWeeks;
 
 // ── Types ──────────────────────────────────────────────────────────────────
 

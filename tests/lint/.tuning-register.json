@@ -2351,7 +2351,7 @@
       "band": null,
       "note": "FP IN-2 (lane FP-I): the lure spring's Herald weight, the covert lure_sprung beat's severity. A zero-to-one weight the feed turns into its own integer score, read off the public belief_misjudgment beat's own weight (the same march, read from the street), so one desk ranks one event one way; the beat is covert and reaches only the DM's feed. DRAFT, registered at the IN-2 cure because the walker's P3 arm convicted the bare decimal (infoLure.js 0 -> 1); the unit is a label read off the source, and nothing here is signed or proposed."
     },
-    "src/domain/region/wizardNews.js#FEED_RETENTION": {
+    "src/domain/region/wizardNews.js#FEED_RETENTION_TUNING": {
       "role": null,
       "status": "draft",
       "signedAt": null,
@@ -2359,7 +2359,7 @@
         "windowWeeks": "weeks"
       },
       "band": null,
-      "note": "FP-31 / FP-34 THE FEED'S RETENTION WINDOW (cure unit FP-HERALD-LENS U2, 32315e384; the chair's rulings of 2026-09-24 under the owner's word 'Again, I leave all judgment to you'): the news feed keeps every entry of its newest windowWeeks whole and applies the 240 cap with its major-arc rescue only beyond them, so a year advance's news survives until the DM is shown it. PROPOSED = 52 = INTERVAL_WEEKS.one_year (pinned equal by tests/domain/wizardNewsYearWindow.test.js; kept as its own table so intervalWeeks.js stays out of the first-paint set — FP-34). MEASURED on read 2's seed: year one minted 434 entries, the bare cap kept 240, the window keeps 433; the persisted feed grows 197 KB → 348 KB after that year (gzip 20 → 37 KB), 263 KB after year two, 248 KB after year three — the owner's decision point FPQ-59 records the growth. DRAFT, registered by the chair at the pick; the owner signs it at the tuning sitting."
+      "note": "FP-31 / FP-34 THE FEED'S RETENTION WINDOW (cure unit FP-HERALD-LENS U2, 32315e384; the chair's rulings of 2026-09-24 under the owner's word 'Again, I leave all judgment to you'): the news feed keeps every entry of its newest windowWeeks whole and applies the 240 cap with its major-arc rescue only beyond them, so a year advance's news survives until the DM is shown it. PROPOSED = 52 = INTERVAL_WEEKS.one_year (pinned equal by tests/domain/wizardNewsYearWindow.test.js; kept as its own table so intervalWeeks.js stays out of the first-paint set — FP-34; named *_TUNING because the inventory measures a table by that suffix, TABLE_DEF_RE). MEASURED on read 2's seed: year one minted 434 entries, the bare cap kept 240, the window keeps 433; the persisted feed grows 197 KB → 348 KB after that year (gzip 20 → 37 KB), 263 KB after year two, 248 KB after year three — the owner's decision point FPQ-59 records the growth. DRAFT, registered by the chair at the pick; the owner signs it at the tuning sitting."
     }
   },
   "roles": {
