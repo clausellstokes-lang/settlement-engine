@@ -417,6 +417,24 @@ export const ENVOY_PARLAY_REFUSAL_REASONS = Object.freeze([
   'no_sheet',
 ]);
 
+/**
+ * FP SP-D2 — THE RECEPTION'S TWO WORDS: what a court does with an envoy who stands at its
+ * gate (design §17's trade card, "Receive the envoy" and "Turn the envoy away"; the FP fold
+ * §12.2 rows 8 and 9). Codepoint-ordered, and minted HERE for the reason every persisted
+ * word in this leaf is: a DM decree names one of them in its payload, and a word a decree
+ * can point into is save-data contract (L10 (e)) — so it gets exactly one spelling, in the
+ * leaf that already owns the parlay's own refusal words beside it.
+ *
+ * `turn_away` is not a new errand state and never becomes one. A turned-away envoy leaves by
+ * the parlay's EXISTING refusal road (`ENVOY_PARLAY_REFUSAL_REASONS` above, the refusal
+ * witness, the mandatory return), which is why the direction's optional `reason` is typed by
+ * that list rather than by a second one. The row that carries these words is
+ * `envoyInbound.js :: envoyReceptionRow`; its consumer in the parlay stage waits on the
+ * direction transport the Edit Mode program composes (U123), so at this landing the words
+ * are declared, resolvable and read by nothing that moves the world.
+ */
+export const ENVOY_RECEPTION_DECISIONS = Object.freeze(['receive', 'turn_away']);
+
 export const STATE_SET = new Set(ENVOY_ERRAND_STATES);
 // Every state a parlay can already have happened in. `travelling` is the only
 // one excluded: nothing has been drafted there, so a refusal witness on it is a
