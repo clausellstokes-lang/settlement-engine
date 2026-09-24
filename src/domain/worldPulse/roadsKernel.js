@@ -266,8 +266,10 @@ function roadsBeat(a) {
     significance: a.significance,
     severity: 0.2,
     score: a.score != null ? a.score : (major ? 52 : a.significance === 'notable' ? 42 : 34),
-    headline: a.headline,
-    summary: a.summary,
+    // CURE-P1 U1: a sentence opens with a capital even when a settlement token leads it as the
+    // stand-in phrase (`placeName` below); every named or authored lead is already capitalized.
+    headline: a.headline.charAt(0).toUpperCase() + a.headline.slice(1),
+    summary: a.summary.charAt(0).toUpperCase() + a.summary.slice(1),
     kind: 'applied',
     impactKind: 'roads',
     channelType: 'settlement',
@@ -398,6 +400,16 @@ function advanceLitRoads(args) {
     const it = itemById.get(String(id));
     return it ? asObject(it.settlement) : {};
   };
+  // CURE-P1 U1 (FPQ-21) — THE NAME, NEVER THE ID. Every settlement token the roads voice speaks
+  // ({home} {dest} {captor} {payer}) resolves HERE, through the roster this composer already holds:
+  // the settlement record's own name, then its snapshot item's. A settlement with no name on the
+  // roster (a razed captor, a vanished destination) reads as the estate's stand-in phrase, the
+  // wizardNews.js finding-11 law, and NEVER as its id. The two lines are paid for by the two
+  // `const s = freshSettlement(homeId)` reads the tokens no longer need: net zero against the
+  // frozen 838 of scripts/.size-baseline.json (tolerance-zero in both directions).
+  /** @param {unknown} id @returns {string} */
+  const placeName = (id) => str(asObject(freshSettlement(str(id))).name
+    || asObject(itemById.get(str(id))).name) || 'a far settlement';
   // THE FULL ROSTER (§8 hostage management): the roads mover MUST see off-stage NPCs to tick
   // their ransoms and clear their whereabouts on release, but the participation snapshot filters
   // them out. `item.save` carries the untouched full roster; merge the update's FRESH on-stage
@@ -495,11 +507,11 @@ function advanceLitRoads(args) {
         const believedReturn = back && Array.isArray(back.path) ? num(back.danger, 0) : Infinity;
         if (!back || believedReturn > num(m.riskTolerance01, 0.65) * ROADS_TUNING.DANGER_REFUSAL_CEILING) {
           if (!m.waitReceipted) {
-            const s = freshSettlement(homeId); const seed = `wait.${mid}.${year}`;
+            const seed = `wait.${mid}.${year}`;
             newsEntries.push(roadsBeat({
               sid: homeId, tick: now2, now, significance: 'notable',
-              headline: pickLine(ROADS_NEWS.trapped.headline, seed, { npc: str(m.npcName), home: str(asObject(s).name || homeId), dest: str(m.destId) }),
-              summary: pickLine(ROADS_NEWS.trapped.summary, seed, { npc: str(m.npcName), home: str(asObject(s).name || homeId), dest: str(m.destId) }),
+              headline: pickLine(ROADS_NEWS.trapped.headline, seed, { npc: str(m.npcName), home: placeName(homeId), dest: placeName(m.destId) }),
+              summary: pickLine(ROADS_NEWS.trapped.summary, seed, { npc: str(m.npcName), home: placeName(homeId), dest: placeName(m.destId) }),
               seed, tags: ['wait'],
             }));
             m.waitReceipted = true;
@@ -528,12 +540,11 @@ function advanceLitRoads(args) {
         verificationReturns.push({ homeId, subject: str(asObject(m.purpose).ref) });
       }
       if (!m.releasedFromRansom) {
-        const s = freshSettlement(homeId);
         const seed = `return.${mid}`;
         newsEntries.push(roadsBeat({
           sid: homeId, tick: now2, now, significance: 'notable',
-          headline: pickLine(ROADS_NEWS.return.headline, seed, { npc: str(m.npcName), home: str(asObject(s).name || homeId), dest: str(m.destId) }),
-          summary: pickLine(ROADS_NEWS.return.summary, seed, { npc: str(m.npcName), home: str(asObject(s).name || homeId), dest: str(m.destId) }),
+          headline: pickLine(ROADS_NEWS.return.headline, seed, { npc: str(m.npcName), home: placeName(homeId), dest: placeName(m.destId) }),
+          summary: pickLine(ROADS_NEWS.return.summary, seed, { npc: str(m.npcName), home: placeName(homeId), dest: placeName(m.destId) }),
           seed, tags: ['return'],
         }));
       }
@@ -667,8 +678,7 @@ function advanceLitRoads(args) {
     }
     if (!res) continue;
 
-    const s = freshSettlement(homeId);
-    const interp = { npc: str(m.npcName), home: str(asObject(s).name || homeId), dest: destId, captor: res.captorId };
+    const interp = { npc: str(m.npcName), home: placeName(homeId), dest: placeName(destId), captor: placeName(res.captorId) };
     if (res.outcome === 'hostage') {
       // MISSION → RANSOM (§8): the hostage goes off-stage (mirror hostage; the R-4 chokepoint).
       const termWeeks = termWeeksFor(w);
@@ -833,14 +843,14 @@ function advanceLitRoads(args) {
       if (eff.ransomSettlementDeposit) ransomSettlementDeposits.push(eff.ransomSettlementDeposit);
       if (eff.bondEventDeposit) bondEventDeposits.push(eff.bondEventDeposit);
     }
-    const s = freshSettlement(homeId); const seed = `ransom.${rid}`;
+    const seed = `ransom.${rid}`;
     /** @type {{ npc: string, home: string, captor: string, dest: string, payer?: string }} */
-    const interp = { npc: str(r.npcName), home: str(asObject(s).name || homeId), captor: captorId, dest: captorId };
+    const interp = { npc: str(r.npcName), home: placeName(homeId), captor: placeName(captorId), dest: placeName(captorId) };
     // D-5 §9 game-feel-3: a third-party release speaks the PAYER's true voice (friend / ally-creditor
     // / rival leash), NOT the home-paid line. payerMotive was stamped on the record at the checkpoint.
     let pool = early === 'party_ransom' ? ROADS_NEWS.partyRansom : early === 'party_rescue' ? ROADS_NEWS.rescue : ROADS_NEWS.ransom;
     if (early === 'third_party') {
-      interp.payer = str(asObject(freshSettlement(str(r.payerId))).name || str(r.payerId));
+      interp.payer = placeName(r.payerId);
       pool = thirdPartyRansomPool(str(r.payerMotive));
     }
     newsEntries.push(roadsBeat({
@@ -1043,7 +1053,7 @@ function advanceLitRoads(args) {
       const pillar = c.w >= ROADS_TUNING.PILLAR_WEIGHT;
       const significance = (pillar || c.major || isEmb) ? 'notable' : 'minor';
       const seed = isEmb ? `embassy-depart.${missionId}` : `depart.${missionId}`;
-      const interp = { npc: str(c.npc.name || c.npcKey), home: str(asObject(s).name || sid), dest: c.dest, purpose: c.purpose.kind };
+      const interp = { npc: str(c.npc.name || c.npcKey), home: placeName(sid), dest: placeName(c.dest), purpose: c.purpose.kind };
       const pool = isEmb ? ROADS_NEWS.embassyDeparture : ROADS_NEWS.departure;
       newsEntries.push(roadsBeat({
         sid, tick: now2, now, significance,
