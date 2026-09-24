@@ -71,23 +71,41 @@ export const DECREE_STATUSES = Object.freeze(/** @type {const} */ (['applied', '
 export const DECREE_AUTHORS = Object.freeze(/** @type {const} */ (['dm', 'guard', 'surveyor']));
 
 /**
- * The withdrawal-reason FAMILIES (design §20.3). One member today, and the vocabulary is
- * the partition's definition rather than this wave's usage: a hand withdrawal carries NO
- * `withdrawnReason` at all, which is why "the DM withdrew it" is not a member here.
+ * The withdrawal-reason FAMILIES (design §20.3). The vocabulary is the partition's
+ * definition rather than this wave's usage: a hand withdrawal carries NO `withdrawnReason`
+ * at all, which is why "the DM withdrew it" is not a member here.
+ *
+ * ⛔ APPENDED, NEVER SPLICED (EM-F3d, the chair's judgment 308). `target_deleted` is the
+ * second family — a PENDING entry whose counterparty the DM DELETED, withdrawn in the same
+ * act as the delete because that act is the one that knows the id is gone. It joins at the
+ * END although `compareCodepoint` would sort it first, and that is a MEASURED choice rather
+ * than an oversight: this list makes no order claim (the three around it do), while
+ * `tests/store/editSlice.test.js` reads `WITHDRAWN_REASON_KINDS[0]` by POSITION for §20.3's
+ * stale-vocabulary reason. A codepoint splice would have silently re-labelled that reason,
+ * which is EM-C4a's own `EDITOR_MODES` lesson in a new coat.
  */
-export const WITHDRAWN_REASON_KINDS = Object.freeze(/** @type {const} */ (['vocabulary-moved']));
+export const WITHDRAWN_REASON_KINDS = Object.freeze(
+  /** @type {const} */ (['vocabulary-moved', 'target_deleted']),
+);
 
 /**
- * What a stale entry points at (design §20.3), codepoint order. TWO of the five are
- * REACHABLE at this tip and three are not, exactly as `OP_STAGES` carries both members
- * while EM-B1a uses one: the op catalogue's only vocabulary-bearing payload specs are
- * `pool` and `enum`, so `op-type` and `pool-value` fire and `event`, `fork` and `outcome`
- * wait for the members that mint their spec kinds (EM-E4's registered forks and their
- * outcome words, EM-E6's catalogue events). Minting this union half-populated would force
- * those members to edit a frozen constant, which is the second-home mistake.
+ * What a withdrawn entry's reason points at (design §20.3), codepoint order. TWO of the
+ * first five are REACHABLE THROUGH `resolveDecree` at this tip and three are not, exactly
+ * as `OP_STAGES` carries both members while EM-B1a uses one: the op catalogue's only
+ * vocabulary-bearing payload specs are `pool` and `enum`, so `op-type` and `pool-value`
+ * fire and `event`, `fork` and `outcome` wait for the members that mint their spec kinds
+ * (EM-E4's registered forks and their outcome words, EM-E6's catalogue events). Minting
+ * this union half-populated would force those members to edit a frozen constant, which is
+ * the second-home mistake.
+ *
+ * ⭐ `target` IS THE SIXTH AND ITS PRODUCER IS NOT THE RESOLVER (EM-F3d). A decree whose
+ * counterparty was deleted points at a TARGET that is gone rather than at a catalogue word,
+ * so the resolver never answers it and the DELETE writes it; it is appended, which keeps
+ * codepoint order and leaves every index this file and its readers take by position where
+ * it was.
  */
 export const RESOLUTION_MISSING_KINDS = Object.freeze(
-  /** @type {const} */ (['event', 'fork', 'op-type', 'outcome', 'pool-value']),
+  /** @type {const} */ (['event', 'fork', 'op-type', 'outcome', 'pool-value', 'target']),
 );
 
 const APPLIED = DECREE_STATUSES[0];

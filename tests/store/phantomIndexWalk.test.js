@@ -22,6 +22,16 @@
  * without leaving this substrate — a row that claims an index by its SEED under a key the mint
  * would never produce (the shape every cloud row has) is walked past just the same.
  *
+ * ⭐ WHAT W2's RE-MINT COSTS, AND WHERE THAT IS NOW PROVED (EM-F3d; judgments 291 and 308).
+ * Judgment 291 kept this walk and set a condition on it: re-minting a deleted row's id is the
+ * newcomer mint's own semantics and shadows nothing LIVE, so the only way it can lie is through
+ * an EDGE that outlived its target. The verifier's pass 2a executed that condition and it
+ * FIRED — a pending decree naming the deleted phantom resolved onto the row minted after it —
+ * so the delete now scrubs its edges in the same act. That half is proved in
+ * `tests/store/deleteScrub.test.js` D1, which re-runs this file's own delete-and-re-mint
+ * sequence and then reads the registry; it is NOT duplicated here, because a second copy of an
+ * executed arm is a second thing to keep true rather than a second proof.
+ *
  * Substrate: LOCAL mode (the supabase mock below), so the save service binds its real
  * localStorage path and every hop is EXECUTED rather than stubbed — EM-F3's own idiom, which
  * is what lets these arms read the DEVICE rather than a stub's memory of it.

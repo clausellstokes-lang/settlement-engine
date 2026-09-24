@@ -74,10 +74,19 @@ describe('EM-C1 - the decree registry, pure: stage, reorder, withdraw, reopen, m
   it('A1 - EM-C1: the four vocabularies are frozen and closed, the reading order is design 11s, and every verb returns a NEW frozen registry that leaves its input untouched', () => {
     expect(DECREE_STATUSES, 'the status three, codepoint order').toEqual(['applied', 'pending', 'withdrawn']);
     expect(DECREE_AUTHORS, 'the author three (ARCH 2 Decree.addedBy)').toEqual(['dm', 'guard', 'surveyor']);
+    // ⛔ RE-RECORDED, CAUSE MEASURED (EM-F3d, the verifier's STOP-2 and the chair's judgment
+    //    308): the delete withdraws a PENDING entry whose counterparty the DM deleted, and an
+    //    ABSENT `withdrawnReason` MEANS "the DM withdrew it by hand" — so the second family is
+    //    what keeps that withdrawal from writing a lie. It is APPENDED rather than spliced into
+    //    codepoint order because this list makes no order claim and index 0 is read BY POSITION
+    //    (tests/store/editSlice.test.js), which a splice would have silently re-labelled.
     expect(WITHDRAWN_REASON_KINDS, 'the withdrawal families (design 20.3); a hand withdrawal carries NO reason at all')
-      .toEqual(['vocabulary-moved']);
-    expect(RESOLUTION_MISSING_KINDS, 'what a stale entry points at (design 20.3), codepoint order')
-      .toEqual(['event', 'fork', 'op-type', 'outcome', 'pool-value']);
+      .toEqual(['vocabulary-moved', 'target_deleted']);
+    // ⛔ RE-RECORDED, SAME CAUSE: `target` is what that entry points at — a counterparty that is
+    //    gone rather than a catalogue word — and it is appended, so codepoint order holds and
+    //    the two indexes this leaf reads by position (op-type at 2, pool-value at 4) are unmoved.
+    expect(RESOLUTION_MISSING_KINDS, 'what a withdrawn entry\'s reason points at (design 20.3), codepoint order')
+      .toEqual(['event', 'fork', 'op-type', 'outcome', 'pool-value', 'target']);
     const frozen = [DECREE_STATUSES, DECREE_AUTHORS, WITHDRAWN_REASON_KINDS, RESOLUTION_MISSING_KINDS]
       .map((vocabulary) => Object.isFrozen(vocabulary));
     expect(frozen, 'all four frozen').toEqual([true, true, true, true]);
@@ -322,12 +331,17 @@ describe('EM-C1 - the decree registry, pure: stage, reorder, withdraw, reopen, m
       .toBe(JSON.stringify(resolveDecree(stalePool, catalogues)));
 
     const reachable = [...new Set(misses.map(([, verdict]) => verdict.missing))].sort(compareCodepoint);
-    expect(reachable, 'TWO of the five fire at this tip').toEqual(['op-type', 'pool-value']);
+    expect(reachable, 'TWO of the six fire through THIS resolver at this tip').toEqual(['op-type', 'pool-value']);
+    // ⛔ RE-RECORDED, CAUSE MEASURED (EM-F3d): `target` joined the union with a PRODUCER — the
+    //    delete's own scrub writes it onto a withdrawn entry whose counterparty is gone — so it
+    //    is unreached HERE for a different reason than the other three: the resolver judges
+    //    catalogue words and a deleted row is not one. The three below still wait for a producer.
     expect(RESOLUTION_MISSING_KINDS.filter((kind) => !reachable.includes(kind)),
-      'and THREE are provably unreached, exactly as OP_STAGES carries both members while EM-B1a uses one:'
-      + ' they wait for EM-E4s registered forks and outcome words and EM-E6s catalogue events. Minting this'
-      + ' union half-populated would force those members to edit a frozen constant')
-      .toEqual(['event', 'fork', 'outcome']);
+      'and FOUR are unreached by the resolver, exactly as OP_STAGES carries both members while EM-B1a uses one:'
+      + ' three wait for EM-E4s registered forks and outcome words and EM-E6s catalogue events, and `target` is'
+      + ' the delete scrubs own (EM-F3d). Minting this union half-populated would force those members to edit'
+      + ' a frozen constant')
+      .toEqual(['event', 'fork', 'outcome', 'target']);
   });
 
   it('A8 - EM-C1: every op type NAMES the catalogues its payload points into, the two spec kinds that carry a vocabulary are exactly the two the leaf spells, and the leaf imports one module and is imported by none', () => {

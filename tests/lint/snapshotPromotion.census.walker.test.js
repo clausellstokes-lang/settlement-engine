@@ -425,6 +425,10 @@ const CENSUS = Object.freeze([
     file: 'src/store/editSlice.js', fn: 'applyRosterDecreesAtTick', sites: 1, shapes: 'W2', kind: FORWARD,
     why: 'EM-E8\'s tick half (C): the settlement written is the ACTIVE row\'s live settlement with the roster decrees that fell due at this tick applied forward — a newcomer minted, a departure struck — computed from the live record and the decree rows the row itself already held; no timeline, ring, snapshot or draft history is read on the path (A3 re-derives this from source every run). Re-recorded at the train tip by the chair, 2026-09-23 (judgment 271\'s idiom: a register moved by a landed member is re-recorded once, at the tip, with its cause named).',
   },
+  {
+    file: 'src/store/editSlice.js', fn: 'scrubDeletedCounterparty', sites: 1, shapes: 'W2', kind: FORWARD,
+    why: 'EM-F3d\'s DELETE SCRUB (the verifier\'s STOP-2; the chair\'s judgments 291 and 308): the settlement written is the member row\'s OWN live settlement with its OWN registry moved one status forward — every PENDING entry whose off-stage op named the row the DM has just deleted is withdrawn through EM-C1\'s typed verb, with design §20.3\'s `target_deleted` reason. Both halves are read off the LIVE row an instant earlier in the same function (`get().savedSettlements`, finalized state, never a draft), the registry is rebuilt by a pure verb that copies each entry it does not amend, and no key outside `decrees` is touched — so nothing a timeline, undo ring, version history or draft history could hold can reach a saved record through it. An APPLIED entry is never selected, which is what keeps THE PROMISE here: the scrub can move what has not happened yet and nothing that has.',
+  },
 ]);
 
 const DECLARED = CENSUS.map((row) => `${row.file}::${row.fn}\t${row.sites}\t${row.shapes}`).sort();

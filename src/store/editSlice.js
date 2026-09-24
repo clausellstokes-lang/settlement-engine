@@ -30,6 +30,12 @@
  * carries the DIALOG'S BINDER (judgment 146c), which reaches the plain-edit writer through
  * the one generic adapter and mints no second one.
  *
+ * ⭐ EM-F3d ADDS THE DELETE'S SCRUB at the very foot: `scrubDeletedCounterparty`, which the
+ * store's delete chokepoint reaches by a DYNAMIC import so this leaf stays out of every eager
+ * closure. It withdraws — through EM-C1's own typed verb — every PENDING entry whose off-stage
+ * op named the row the DM just deleted, on the open save and on every member save, and leaves
+ * applied history alone.
+ *
  * ⭐ EM-C4c ADDS THE GUARD OFFERS' WRITER at the foot: `takeGuardOffer`, one door from an
  * offer EM-C2's engine minted to the act its name means — fulfil STAGES the guard's own op
  * before the entry it serves, proceed and keep-both RECORD the override on the entry through
@@ -42,10 +48,10 @@ import { isCanonSave, savePhase } from '../domain/campaign/canon.js';
 import { applyEdit, mintDmId } from '../domain/edit/dmLayer.js';
 import { declarationsFor, isEditableCard } from '../domain/edit/fieldDeclarations.js';
 import { EMPTY_RULE_SET, evaluateGuards, GUARD_OFFERS } from '../domain/edit/guards.js';
-import { makeOp, OP_TYPES, validateOp } from '../domain/edit/operations.js';
+import { makeOp, OP_CONSEQUENCE_POLICIES, OP_TYPES, validateOp } from '../domain/edit/operations.js';
 import {
-  DECREE_AUTHORS, markApplied, recordOverride, reopen, reorder, resolveDecree, revertTick,
-  stage, withdraw,
+  DECREE_AUTHORS, markApplied, recordOverride, reopen, reorder, RESOLUTION_MISSING_KINDS,
+  resolveDecree, revertTick, stage, withdraw, WITHDRAWN_REASON_KINDS,
 } from '../domain/edit/registry.js';
 
 /**
@@ -1618,4 +1624,152 @@ export function stageSealDecreeIntent(get, set, request) {
   return {
     ok: /** @type {true} */ (true), saveId, seal, decreeId: id, op, decrees: committed.decrees,
   };
+}
+
+/* ── EM-F3d · THE DELETE'S SCRUB ───────────────────────────────────────────── */
+
+/**
+ * The off-stage consequence policy, READ OFF THE CATALOGUE'S OWN FROZEN VOCABULARY at the
+ * index this leaf reads it at. EM-F1's `applyOffStage` gates on exactly this word, and its
+ * leaf may not be imported here — `tests/lint/editMutationPath.walker.test.js` pins this
+ * module's static import list EXACT at six — so the word comes from a module this file
+ * already holds rather than being spelled a second time, which is the same discipline
+ * `DECREE_APPLIED` and `DECREE_PENDING` keep one step less well.
+ */
+const BY_TARGET_REALITY = OP_CONSEQUENCE_POLICIES[1];
+
+/**
+ * ⭐ THE ONE CLOSED REASON THIS DOOR WRITES (design §20.3; the chair's judgment 308).
+ * Both words are EM-C1's own, read off its frozen vocabularies at the indexes this leaf
+ * reads them at and never re-typed here: a family this door invented would be dropped by
+ * `withdrawnReasonOf` in silence, and an ABSENT reason is design §20.3's way of saying the
+ * DM withdrew the entry BY HAND — so an un-typed reason would not merely be unhelpful, it
+ * would write a lie onto the record.
+ */
+const TARGET_DELETED = Object.freeze({
+  kind: WITHDRAWN_REASON_KINDS[1], missing: RESOLUTION_MISSING_KINDS[5],
+});
+
+/**
+ * The closed reason set of THIS door, EXPORTED so a test asserts it in both directions
+ * rather than re-typing it. ONE, frozen, and it is reachable: `tests/store/deleteScrub.test.js`
+ * case D5 pins it SET-EQUAL against the reasons the scrub actually produced, which is
+ * C4c-4's own idiom.
+ *
+ * ⛔ IT WIDENS NO OTHER VOCABULARY. `ADD_DECREE_REFUSALS`, `GUARD_OFFER_REFUSALS` and
+ * `SEAL_DECREE_REFUSALS` are the three DOORS' refusal words and are untouched: this is not
+ * a refusal at all but the reason carried ON a written entry, so putting it in one of
+ * those sets would have made a member no door can produce and reddened their set-equal
+ * arms in both directions.
+ * @type {readonly string[]}
+ */
+export const DELETE_SCRUB_REASONS = Object.freeze([TARGET_DELETED.kind]);
+
+/** One shared frozen receipt for a delete that named nobody, so the ordinary case
+ *  allocates nothing and two edgeless deletes compare alike. */
+const NOTHING_SCRUBBED = Object.freeze({
+  ok: /** @type {true} */ (true), deletedId: '', withdrawn: NO_ERRORS,
+});
+
+/**
+ * The id an off-stage op names as its counterparty, by the DOMAIN RESOLVER'S OWN
+ * precedence — the payload's own ref field first, the op's target second. An op whose
+ * declared consequence is not the off-stage one names no counterparty at all, which is
+ * `applyOffStage`'s first gate and is why a home act is never touched by the scrub.
+ * @param {unknown} op @returns {string} the empty string when the op names nobody
+ */
+function counterpartyIdOf(op) {
+  if (!isPlainObject(op) || op.consequence !== BY_TARGET_REALITY) return '';
+  const payload = isPlainObject(op.payload) ? op.payload : {};
+  const ref = isPlainObject(op.target) ? op.target : {};
+  const named = [payload.counterparty, ref.id]
+    .find((value) => typeof value === 'string' && value.length > 0);
+  return typeof named === 'string' ? named : '';
+}
+
+/**
+ * Every PENDING entry of one registry whose op names `deletedId`, in the registry's own
+ * order. An APPLIED entry is history and is never selected (THE PROMISE), and a WITHDRAWN
+ * one is already at rest.
+ * @param {readonly object[]} rows @param {string} deletedId @returns {string[]}
+ */
+function staleEntryIdsOf(rows, deletedId) {
+  return rows
+    .filter((row) => isPlainObject(row) && row.status === DECREE_PENDING
+      && counterpartyIdOf(row.op) === deletedId)
+    .map((row) => String(/** @type {{id: unknown}} */ (row).id));
+}
+
+/**
+ * ⭐ THE DELETE'S SCRUB (EM-F3d; the verifier's STOP-2, the chair's judgments 291 and 308).
+ *
+ * THE DEFECT, EXECUTED BEFORE THIS EXISTED. `settlementSlice.js :: removeSavedSettlement`
+ * pruned campaign membership and queued intentions and nothing else, so a PENDING decree
+ * whose off-stage op named a phantom by id OUTLIVED its target; EM-F3b's claim walk then
+ * re-minted the deleted id for the next counterparty, and both `rows.find` and
+ * `counterpartyBadgeOf` resolved the DM's decree onto a STRANGER wearing a badge that said
+ * nothing was wrong.
+ *
+ * ⛔ THE DELETE IS THE ONE ACT THAT KNOWS THE ID IS GONE, so the cure is here and not at
+ * the readers. A guard at the badge, the fold and the tick would be three homes for one
+ * fact and would still leave the stale row standing on the record (judgment 308).
+ *
+ * ⛔ THE ENTRY IS KEPT, AND APPLIED HISTORY IS UNTOUCHED. EM-C1's `withdraw` amends
+ * PENDING rows only and keeps the entry with its original words and its own `orderIndex`
+ * (design §2.5a: application never deletes an entry), so what the DM once ordered stays
+ * legible and THE PROMISE's lived history is not rewritten.
+ *
+ * ⛔ N REGISTRIES WIDE, WHICH IS EM-E8b's OWN LESSON (U49). Design §2.5 puts `decrees` on
+ * the SAVED SETTLEMENT, so a campaign's registries are N: the OPEN save moves through
+ * EM-C4b's landed action and its one write site, and every other member's own row moves in
+ * ONE further `set`, computed from finalized state so no draft is carried into a frozen row.
+ *
+ * ⛔ IT OPENS NO PERSISTENCE PATH AND MINTS NO KEY. Like every other registry write on this
+ * leaf the scrub reaches the live view and the library rows; the durable half is the save
+ * flow's, exactly as staging and the plain edits leave it. No tombstone list and no
+ * high-water mark is written — that key stays the owner's (U82) and the scrub is what makes
+ * it unnecessary.
+ *
+ * @param {Function} get @param {Function} set @param {unknown} deletedId
+ * @returns {{ok: true, deletedId: string, withdrawn: readonly string[]}} NEVER throws; a
+ *   delete that named nobody returns ONE shared frozen receipt and writes nothing at all.
+ */
+export function scrubDeletedCounterparty(get, set, deletedId) {
+  const id = String(deletedId ?? '');
+  if (!id) return NOTHING_SCRUBBED;
+  const reason = { ...TARGET_DELETED, was: id };
+  /** @type {string[]} */
+  const withdrawn = [];
+
+  // (1) THE OPEN SAVE, through EM-C4b's landed action: the registry's one store write site
+  //     and EM-C1's own typed verb, so this door re-implements neither.
+  const saveId = String(get().activeSaveId ?? '');
+  for (const entryId of staleEntryIdsOf(selectDecrees(get()), id)) {
+    if (withdrawDecree(get, set, { saveId, entryId, reason }).ok === true) withdrawn.push(entryId);
+  }
+
+  // (2) EVERY MEMBER SAVE'S OWN REGISTRY. Computed off FINALIZED state and written in one
+  //     `set`, so either every home moves or none does.
+  const rows = get().savedSettlements || [];
+  /** @type {{index: number, row: object}[]} */
+  const moved = [];
+  for (const [index, row] of rows.entries()) {
+    // A row with no record of its own carries no registry, which is a fact about the row
+    // rather than a repair this leaf owes it.
+    if (!isPlainObject(row) || !isPlainObject(row.settlement)) continue;
+    const record = row.settlement;
+    const stale = staleEntryIdsOf(recordDecrees(record), id);
+    if (stale.length === 0) continue;
+    let next = recordDecrees(record);
+    for (const entryId of stale) next = withdraw(next, entryId, reason);
+    moved.push({ index, row: { ...row, settlement: { ...record, decrees: next } } });
+    for (const entryId of stale) if (!withdrawn.includes(entryId)) withdrawn.push(entryId);
+  }
+  if (moved.length > 0) {
+    set((state) => {
+      for (const move of moved) state.savedSettlements[move.index] = move.row;
+    });
+  }
+  if (withdrawn.length === 0) return NOTHING_SCRUBBED;
+  return { ok: /** @type {true} */ (true), deletedId: id, withdrawn: Object.freeze(withdrawn) };
 }
