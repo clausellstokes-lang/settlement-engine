@@ -592,6 +592,19 @@ export function signPactProposal({ worldState, proposal, tick, settlementOf = ()
   };
 }
 
+/**
+ * THE CLAUSES AN AMENDMENT WROTE, in words (TREATY-VOICE U3): each catalogue label once, in the
+ * order written, joined as a sentence joins them. A reciprocal ask writes one clause per court,
+ * and naming the same clause twice would read as two. Never empty on a real amendment (a
+ * wholly refused one mints no beat), and the fallback is still a sentence.
+ * @param {ReadonlyArray<Record<string, unknown>>} terms @returns {string}
+ */
+function clauseListOf(terms) {
+  const labels = [...new Set(terms.map((term) => `the ${termLabel(text(term.type))}`))];
+  if (labels.length === 0) return 'a new clause';
+  return labels.length === 1 ? labels[0] : `${labels.slice(0, -1).join(', ')} and ${labels[labels.length - 1]}`;
+}
+
 /** The signing beat's kind: the annex's `# GR-2` `signed` block, the formation ending spoken on
  *  the Herald. */
 const PACT_SIGNED_KIND = 'signed';
@@ -617,7 +630,11 @@ function signingContextOf(terms, fromId, toId) {
  * THE SIGNING BEAT (cure lane LIT1b-pre U4; the GR-5e voice's core, pulled forward). A pact
  * signed in peace is ONE Herald item: the annex's `# GR-2` `signed` block, "formation ending;
  * Herald (the signing beat)", wired as authored, so every sentence it can say is annex-verbatim.
- * Minted and amended signatures both speak through it (the annex's own lineage note).
+ * Minted and amended signatures both speak through it (the annex's own lineage note), and the
+ * pool line is the annex's either way; the HEADLINE tells them apart (TREATY-VOICE U3): a fresh
+ * signing says the courts set their names to terms, and an amendment names the clauses it wrote
+ * into the instrument that already stood, because READ 3 heard a clause added to a standing
+ * pact announced in the very words of a new one.
  * `{settlement}` is the court that ASKED and `{counterpart}` the court that answered, bound here
  * from the proposal row and never through `grammarSlotRoles`, because a negotiated instrument
  * has no treaty-level obligee. Both names must be real names or nothing is minted: a slug where a
@@ -628,10 +645,12 @@ function signingContextOf(terms, fromId, toId) {
  * change, the owner's. The proposal receipt keeps both. `cause` is the cause row (L10): present only when a decree caused the signing, which is
  * structurally never until the host's answer lands (FPQ-1), and never defaulted.
  * @param {{tick: number, proposal: Record<string, unknown>, terms: ReadonlyArray<Record<string, unknown>>,
- *   fromName: string, toName: string, cause?: string}} input
+ *   fromName: string, toName: string, cause?: string, amended?: boolean}} input
+ *   `terms` is what the signature WROTE (`signPactProposal`'s `added`), so on an amendment it is
+ *   exactly the change; `amended` is that signature's own verdict.
  * @returns {Record<string, unknown>|null}
  */
-export function pactSignedBeat({ tick, proposal, terms, fromName, toName, cause }) {
+export function pactSignedBeat({ tick, proposal, terms, fromName, toName, cause, amended = false }) {
   const fromId = String(proposal.from);
   const toId = String(proposal.to);
   if (!fromName || !toName) return null;
@@ -649,7 +668,9 @@ export function pactSignedBeat({ tick, proposal, terms, fromName, toName, cause 
     score: F.SIGNING_BEAT_SCORE,
     tick,
     scope: 'regional',
-    headline: `${fromName} and ${toName} have set their names to terms, in peace`,
+    headline: amended
+      ? `${fromName} and ${toName} have written ${clauseListOf(terms)} into the instrument that already stood between them`
+      : `${fromName} and ${toName} have set their names to terms, in peace`,
     summary: line.line,
     reasons: ['The court that was asked weighed the terms on its own evidence, and they met what it asked of them.'],
     settlementIds: [fromId, toId],
@@ -944,9 +965,10 @@ export function advancePeacetimePacts({
         offer01: answer.offer01, reserve01: answer.reserve01,
         receipt: `${answer.receipt} ${signed.receipt}`,
       });
-      // U4: THE SIGNING BEAT, one Herald item per signature, minted or amended alike.
+      // U4: THE SIGNING BEAT, one Herald item per signature; TREATY-VOICE U3: an amendment says
+      // what it wrote rather than announcing a new pact.
       const beat = signed.minted || signed.amended ? pactSignedBeat({
-        tick, proposal, terms: signed.added,
+        tick, proposal, terms: signed.added, amended: signed.amended,
         fromName: courtNameOf(String(proposal.from)), toName: courtNameOf(String(proposal.to)),
       }) : null;
       if (beat) newsEntries.push(beat);

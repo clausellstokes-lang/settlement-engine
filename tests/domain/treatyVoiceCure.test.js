@@ -10,14 +10,19 @@
  * U1 — THE NEGOTIATED ARM (FPQ-36, the owner's decision of 09-24: the court names ride a
  * new saved key on the signed record; the beats need a fourth orientation kind because the
  * detection beat's only channel from the record is the orientation itself).
+ * U3 — THE AMENDMENT'S OWN SENTENCE: a clause written into a standing instrument is never
+ * announced as a fresh signing; the headline names what was added.
  */
 import { describe, it, expect } from 'vitest';
 
 import { treatyOrientationOf } from '../../src/domain/worldPulse/treatyOrientation.js';
-import { draftPactSheet, signPactProposal } from '../../src/domain/worldPulse/pactFormation.js';
+import {
+  advancePeacetimePacts, draftPactSheet, pactSignedBeat, signPactProposal,
+} from '../../src/domain/worldPulse/pactFormation.js';
 import { advanceTreaties, treatyPairKey, TERM_CATALOG } from '../../src/domain/worldPulse/peaceTerms.js';
 import { getSpatialLedger } from '../../src/domain/spatial/distanceRead.js';
 import { expectAbsentWithAnchor } from '../helpers/anchoredNegatives.js';
+import { DUE_TICK, OPEN_TICK, pactSnapshot, pactWorld } from '../helpers/pactFixture.js';
 
 const VOICE_LIT = { warLayerEnabled: true, peaceEngineEnabled: true, treatyLifecycleVoiceEnabled: true };
 const VOICE_DARK = { warLayerEnabled: true, peaceEngineEnabled: true };
@@ -205,5 +210,63 @@ describe('TREATY-VOICE U1 — the negotiated pact speaks at its lapse and at its
     const record = pactOf(mintPact());
     expect(record.terms.map((term) => term.type)).toEqual(['resource_share']);
     expect(TERM_CATALOG.resource_share.family).toBe('economic');
+  });
+});
+
+// ═══════════════════════════════════════════════════════════════════════════════
+// U3 — THE AMENDMENT'S OWN SENTENCE.
+// ═══════════════════════════════════════════════════════════════════════════════
+
+const FRESH_HEADLINE = 'Ashford and Irontown have set their names to terms, in peace';
+const clause = (type, beneficiary) => ({ type, family: TERM_CATALOG[type].family, magnitude: 0.3, beneficiary });
+const beatFor = (terms, amended) => pactSignedBeat({
+  tick: 14, proposal: { id: 'pact.14.A.B', from: 'A', to: 'B' }, terms,
+  fromName: 'Ashford', toName: 'Irontown', ...(amended === undefined ? {} : { amended }),
+});
+
+describe('TREATY-VOICE U3 — an amendment is announced as what it changed, never as a fresh signing', () => {
+  it('a fresh signing keeps its sentence, with or without the flag spelled out', () => {
+    expect(beatFor([clause('resource_share', 'A')]).headline).toBe(FRESH_HEADLINE);
+    expect(beatFor([clause('resource_share', 'A')], false).headline).toBe(FRESH_HEADLINE);
+  });
+
+  it('an amendment names the clause it wrote into the standing instrument', () => {
+    const beat = beatFor([clause('resource_share', 'A')], true);
+    expect(beat.headline).toBe('Ashford and Irontown have written the resource share into the instrument that already stood between them');
+    // anchored: the fresh sentence is pinned one test up, so this difference is the cure
+    expect(beat.headline).not.toMatch(/set their names to terms/);
+    expect(beat.kind, 'the same kind and its five joins, only the sentence differs').toBe('signed');
+  });
+
+  it('two clauses of one kind are named once; two kinds are both named, in the order written', () => {
+    expect(beatFor([clause('resource_share', 'A'), clause('resource_share', 'B')], true).headline)
+      .toBe('Ashford and Irontown have written the resource share into the instrument that already stood between them');
+    expect(beatFor([clause('labor_compact', 'A'), clause('migration_right', 'B')], true).headline)
+      .toBe('Ashford and Irontown have written the labour compact and the right of passage into the instrument that already stood between them');
+  });
+
+  it('THROUGH THE STAGE: a pact answered between courts already bound amends, and the Herald says so', () => {
+    const standing = signPactProposal({
+      worldState: pactWorld({ flag: true }),
+      proposal: { from: 'A', to: 'B', sheet: draftPactSheet({ trigger: 'shared_threat', fromId: 'A', toId: 'B', reciprocal: false, tick: 1 }) },
+      tick: 2,
+    });
+    const record = getSpatialLedger(standing.worldState, 'treaties')[treatyPairKey('A', 'B')];
+    expect(record.terms.map((term) => term.type), 'the standing instrument holds a different clause').toEqual(['non_aggression']);
+    const names = { A: 'Ashford', B: 'Irontown' };
+    const base = pactSnapshot();
+    const snapshot = {
+      ...base,
+      settlements: base.settlements.map((row) => (names[row.id]
+        ? { ...row, name: names[row.id], settlement: { ...row.settlement, name: names[row.id] } } : row)),
+    };
+    const world = pactWorld({ flag: true, treaties: { [treatyPairKey('A', 'B')]: record } });
+    const first = advancePeacetimePacts({ snapshot, worldState: world, settlementUpdates: [], tick: OPEN_TICK });
+    const second = advancePeacetimePacts({ snapshot, worldState: first.worldState, settlementUpdates: [], tick: DUE_TICK });
+    const signedReceipt = second.receipts.find((row) => row.kind === 'pact_signed');
+    expect(signedReceipt?.amended, 'the answer really amended the standing instrument').toBe(true);
+    expect(second.newsEntries).toHaveLength(1);
+    expect(second.newsEntries[0].headline)
+      .toBe('Ashford and Irontown have written the resource share into the instrument that already stood between them');
   });
 });
