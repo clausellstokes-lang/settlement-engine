@@ -10,7 +10,7 @@
  * WHY A SEPARATE FILE FROM warReceiptPools.js / sovereigntyReceiptPools.js. The same
  * measured reason WW-C recorded: a wave-scoped corpus gets a wave-scoped file, so a later
  * content batch never lands its neighbours in a decomposition they did not cause. This one
- * carries the fifteen governed pools wired through GR-6.
+ * carries the sixteen governed pools wired through LIT1b-pre U4.
  *
  * ANNEX-VERBATIM. Every line below is byte-identical to its authored variant in the
  * governed GR-0, GR-2, GR-4 and GR-6 blocks of docs/content/RECEIPT_POOLS_GRAMMAR.md, with only the
@@ -138,6 +138,17 @@ export const GRAMMAR_RECEIPTS = Object.freeze({
     (x) => `The answer will take as long as the road does, there and back, and ${x.counterpart} may use every day of it.`,
     'Terms have been offered. What they are worth is now for the other court to say.',
     (x) => `In ${x.settlement}'s hall the clerks copied the ${x.term} out fair before the seal went on.`,
+  ],
+  // LIT1b-pre U4 — THE SIGNING BEAT. `signed` is the `# GR-2` formation ending "Herald (the signing
+  // beat)", authored with the formation corpus on 2026-08-02 and wired for the first time here, as
+  // authored (A-26). The repeated `{good}` fills bind in order, the second carried as `goodSecond`
+  // (the slot convention; GR-6's `counterpartSecond` precedent).
+  signed: [
+    (x) => `${x.good} for ${x.goodSecond}: the courts have set their names to it.`,
+    (x) => `It is signed: ${x.settlement} sends ${x.good}, ${x.counterpart} sends ${x.goodSecond}, and the term runs to a named date.`,
+    (x) => `The market in ${x.settlement} had priced the pact before the seals were dry.`,
+    'Neither court gave way and both took something away, which is what a treaty between equals looks like.',
+    'Signed in peace, and the first wagons move at the turn of the season.',
   ],
   // GR-4b-α — THE SUCCESSION DISAVOWAL, the one `# GR-4` ending whose producer is landed,
   // persisted AND reachable from a mount this wave owns. GR-4b-iii-a now wires the one honest

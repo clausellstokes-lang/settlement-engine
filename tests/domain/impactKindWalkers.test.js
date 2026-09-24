@@ -222,6 +222,11 @@ const EXPECTED_VOICE = {
   // the crier VOICES); no crier register fits a march that never set out. Deliberately unvoiced
   // (JUDGMENT, vetoable — the reaffirmed precedent exactly).
   brokered_back: null,
+  // LIT1b-pre U4 — the pact stage's signing beat (`signed`), from the same authored treaty cohort: an
+  // AUTHORED headline naming both courts over a pact-grammar summary. It shares the cohort's trade
+  // DESK and must not borrow the trade crier for it (the desk FILES, the crier VOICES). Deliberately
+  // unvoiced (JUDGMENT, vetoable — the brokered_back and reaffirmed precedent exactly).
+  signed: null,
   // W-COIN-2's two state-treasury beats. Both file at the trade DESK, and both are
   // deliberately unvoiced for the reason this manifest keeps insisting on: the desk FILES a
   // beat and the crier VOICES one. The trade crier's register is the market — goods, prices,

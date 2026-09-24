@@ -53,13 +53,15 @@
  * oathbreaker credibility), AND the responder's dependency fear must not win. Dropping
  * either arm is an executed mutant, and the no-overlap pin reds for it.
  *
- * ── WHAT THIS WAVE DELIBERATELY DOES NOT MINT ───────────────────────────────────
- * ZERO new `wizard_news` kinds. The stage's whole story rides RECEIPTS and the relationship
- * record's turning-point archive, and the Herald sentences §8 promises land with GR-3, the
- * second slice of this same flag, which mints the term families those sentences name (a
- * "grain for ore" line is not interesting until the families it announces exist). The
- * choice is recorded, vetoable, and PINNED: a vocabulary pin asserts this module mints no
- * news kind, so it reds the day GR-3 adds one — the seam-2 tripwire shape.
+ * ── WHAT THIS STAGE MINTS, AND WHAT IT STILL DOES NOT ───────────────────────────
+ * ONE `wizard_news` kind: the signing beat, `signed` (cure lane LIT1b-pre U4, the GR-5e voice's
+ * core pulled forward). GR-2 shipped ZERO kinds and pinned it, leaving §8's sentences to GR-3;
+ * GR-3 landed its families and minted none, so a pact signed in peace was a treaty on the
+ * panel that no Herald item ever announced (the LIT DEPENDENCY MAP: signatures, no news). The
+ * beat is the annex's `# GR-2` `signed` block wired as authored, with its five joins in the same
+ * commit. Refusals, no-overlaps, expiries and the war-overtaken closure still ride RECEIPTS and
+ * the turning-point archive alone, and the vocabulary pin now asserts exactly that: one kind,
+ * minted only on a signature.
  *
  * ── K3 ──────────────────────────────────────────────────────────────────────────
  * This file is the COMPOSER and therefore sits OUTSIDE the K3 zero-import set, exactly as
@@ -88,6 +90,7 @@ import {
   conditionsGroundTruth, devotionGroundTruth, scarcityGroundTruth,
 } from './beliefAxisSubjects.js';
 import { beliefRecord } from './beliefMap.js';
+import { grammarReceipt } from './grammarNews.js';
 import { credibilityScoreOf } from './informationStatecraft.js';
 import { stampSworn } from './oathHolder.js';
 import { amendPactInstrument, closeTermsBrokenByWar, termIdOf } from './pactAmendment.js';
@@ -109,6 +112,7 @@ import { buildPressureSummary, edgeKeyBetween, settlementStrength } from './rela
 import {
   RELATIONSHIP_DEFAULTS, appendRelationshipTurningPoint, normalizeRelationshipType,
 } from './relationshipState.js';
+import { stablePart } from './stablePart.js';
 import { courtPostureOf, courtRiskAppetiteOf } from './strategicPosture.js';
 import { CURRENT_TREATY_TICKS_PER_YEAR } from './treatyClock.js';
 import { treatyLedgerOf } from './treatyEnforcement.js';
@@ -144,6 +148,11 @@ export const PACT_FORMATION_TUNING = Object.freeze({
   /** The magnitude a peacetime sheet drafts at, as a fraction of the catalog's base. Peace
    *  asks for less than a victory takes — §1c, NO MARGIN IN PEACE. */
   PEACETIME_MAGNITUDE01: 0.5,
+  /** THE SIGNING BEAT'S WEIGHT ON THE FEED (LIT1b-pre U4): the war door's own `treaty_signed`
+   *  weight (peaceTerms.js signingBeat), so the two doors into the one instrument read alike.
+   *  Presentation only; nothing in the world reads it. */
+  SIGNING_BEAT_SEVERITY01: 0.55,
+  SIGNING_BEAT_SCORE: 66,
 });
 
 const F = PACT_FORMATION_TUNING;
@@ -467,9 +476,13 @@ export function answerPactProposal({ worldState, proposal, responderDemand01, ti
  * @param {{worldState: Record<string, unknown>, proposal: Record<string, unknown>,
  *   tick: number, settlementOf?: (id: string) => unknown}} input
  * @returns {{worldState: Record<string, unknown>, minted: boolean, amended: boolean,
- *   refused: ReadonlyArray<{cell: string, type: string, receipt: string}>, receipt: string}}
+ *   refused: ReadonlyArray<{cell: string, type: string, receipt: string}>, receipt: string,
+ *   added: ReadonlyArray<Record<string, unknown>>}}
  */
 export function signPactProposal({ worldState, proposal, tick, settlementOf = () => null }) {
+  // `added` (LIT1b-pre U4) is the clauses this signature actually wrote: every drafted term on a
+  // mint, the non-colliding ones on an amendment, none when every clause collided. The signing
+  // beat reads it to know what it may honestly say.
   const a = String(proposal.from);
   const b = String(proposal.to);
   // ⚠ THE INSTRUMENT RUNS FROM THE SIGNATURE, NOT FROM THE ASKING, and re-basing here is
@@ -499,7 +512,7 @@ export function signPactProposal({ worldState, proposal, tick, settlementOf = ()
     });
     if (amendment.added.length === 0) {
       return {
-        worldState, minted: false, amended: false, refused: amendment.refused,
+        worldState, minted: false, amended: false, refused: amendment.refused, added: [],
         receipt: 'Every clause offered collided with one this instrument already carries.',
       };
     }
@@ -509,6 +522,7 @@ export function signPactProposal({ worldState, proposal, tick, settlementOf = ()
       minted: false,
       amended: true,
       refused: amendment.refused,
+      added: amendment.added,
       receipt: `${a} and ${b} have written a new clause into the instrument that already stood between them.`,
     };
   }
@@ -540,7 +554,80 @@ export function signPactProposal({ worldState, proposal, tick, settlementOf = ()
     minted: true,
     amended: false,
     refused: Object.freeze([]),
+    added: terms,
     receipt: `${first} and ${second} have set their names to it, in peace and not at a war's end.`,
+  };
+}
+
+/** The signing beat's kind: the annex's `# GR-2` `signed` block, the formation ending spoken on
+ *  the Herald. */
+const PACT_SIGNED_KIND = 'signed';
+
+/**
+ * THE TWO FACTS THE SIGNING'S PROSE MAY LEAN ON (A-26 in the annex): whether every court takes
+ * something away (a clause both hold, or clauses owed to each), and whether a clause moves
+ * goods (a catalogue stream). ONE context token, because the picker filters on one; `null` when
+ * neither holds, so only the families honest about any signature can draw.
+ * @param {ReadonlyArray<Record<string, unknown>>} terms @param {string} fromId @param {string} toId
+ * @returns {string|null}
+ */
+function signingContextOf(terms, fromId, toId) {
+  const owed = new Set(terms.map((term) => text(term.beneficiary)));
+  const bothGain = owed.has('both') || (owed.has(fromId) && owed.has(toId));
+  const goods = terms.some((term) => recordOf(TERM_CATALOG[text(term.type)]).stream === true);
+  if (bothGain && goods) return 'both_gain_goods';
+  if (bothGain) return 'both_gain';
+  return goods ? 'goods' : null;
+}
+
+/**
+ * THE SIGNING BEAT (cure lane LIT1b-pre U4; the GR-5e voice's core, pulled forward). A pact
+ * signed in peace is ONE Herald item: the annex's `# GR-2` `signed` block, "formation ending;
+ * Herald (the signing beat)", wired as authored, so every sentence it can say is annex-verbatim.
+ * Minted and amended signatures both speak through it (the annex's own lineage note).
+ * `{settlement}` is the court that ASKED and `{counterpart}` the court that answered, bound here
+ * from the proposal row and never through `grammarSlotRoles`, because a negotiated instrument
+ * has no treaty-level obligee. Both names must be real names or nothing is minted: a slug where a
+ * town belongs is the fabrication the address law forbids. ⚠ The volume's "signing beat with
+ * trigger named and transport mode recorded" is NOT carried as two fields: the wizard-news
+ * normalizer names neither key, so both would be dropped at the first append and on every load
+ * (the allowlist-rebuilder walker's DIRECTION 1), and naming them there is a persisted-shape
+ * change, the owner's. The proposal receipt keeps both. `cause` is the cause row (L10): present only when a decree caused the signing, which is
+ * structurally never until the host's answer lands (FPQ-1), and never defaulted.
+ * @param {{tick: number, proposal: Record<string, unknown>, terms: ReadonlyArray<Record<string, unknown>>,
+ *   fromName: string, toName: string, cause?: string}} input
+ * @returns {Record<string, unknown>|null}
+ */
+export function pactSignedBeat({ tick, proposal, terms, fromName, toName, cause }) {
+  const fromId = String(proposal.from);
+  const toId = String(proposal.to);
+  if (!fromName || !toName) return null;
+  const line = grammarReceipt(PACT_SIGNED_KIND, String(proposal.id),
+    { settlement: fromName, counterpart: toName }, signingContextOf(terms, fromId, toId));
+  if (!line) return null;
+  return {
+    id: `wizard_news.${Math.round(tick)}.${PACT_SIGNED_KIND}.${stablePart(fromId)}.${stablePart(toId)}`,
+    kind: PACT_SIGNED_KIND,
+    // ⛔ LITERAL, the grammar beats' own idiom: the mint scans (the Herald totality walker, the
+    // letter's minter-totality arm, the impactKind voice walker) read `impactKind:` literals.
+    impactKind: 'signed',
+    significance: line.significance,
+    severity: F.SIGNING_BEAT_SEVERITY01,
+    score: F.SIGNING_BEAT_SCORE,
+    tick,
+    scope: 'regional',
+    headline: `${fromName} and ${toName} have set their names to terms, in peace`,
+    summary: line.line,
+    reasons: ['The court that was asked weighed the terms on its own evidence, and they met what it asked of them.'],
+    settlementIds: [fromId, toId],
+    settlementNames: [fromName, toName],
+    parties: [fromId, toId],
+    ending: 'signed',
+    familyId: line.familyId,
+    audience: line.audience,
+    section: line.section,
+    tags: ['world_pulse', 'pact_grammar', 'formation'],
+    ...(cause ? { cause } : {}),
   };
 }
 
@@ -661,7 +748,7 @@ function rememberRefusal({ worldState, keyOf, proposal, tick }) {
  * @property {Record<string, unknown>} worldState  the SAME reference when nothing happened
  * @property {Array<Record<string, unknown>>} settlementUpdates  likewise
  * @property {boolean} changed
- * @property {Array<Record<string, unknown>>} newsEntries  ALWAYS empty in GR-2 (see header)
+ * @property {Array<Record<string, unknown>>} newsEntries  the signing beats, and nothing else (see header)
  * @property {Array<Record<string, unknown>>} receipts
  */
 
@@ -713,6 +800,14 @@ export function advancePeacetimePacts({
     if (fresh) return item ? { ...recordOf(item), settlement: fresh } : { id, settlement: fresh };
     return item ? recordOf(item) : null;
   };
+  /** A COURT'S READER NAME for the signing beat (U4), from the tick's snapshot item, or '' when
+   *  none resolved: a name that is only the id echoed back is not a name, so the beat stays
+   *  silent rather than print a slug. @param {string} id @returns {string} */
+  const courtNameOf = (id) => {
+    const item = recordOf(itemOf(id));
+    const name = (text(item.name) || text(recordOf(item.settlement).name)).trim();
+    return name && name !== id ? name : '';
+  };
   // THE INJECTED STRENGTH READER, for the same reason the market stage injects three: standing
   // a war layer up inside every formation pin would turn this file into a war fixture.
   //
@@ -750,6 +845,8 @@ export function advancePeacetimePacts({
   let state = worldState;
   /** @type {Array<Record<string, unknown>>} */
   const receipts = [];
+  /** @type {Array<Record<string, unknown>>} */
+  const newsEntries = [];
 
   // ── 1. THE WAR-OVERTAKEN CLOSURE. A war has opened between courts who wrote something
   // down in peace; the negotiated clauses end and the receipt names the war that ate them.
@@ -814,6 +911,12 @@ export function advancePeacetimePacts({
         offer01: answer.offer01, reserve01: answer.reserve01,
         receipt: `${answer.receipt} ${signed.receipt}`,
       });
+      // U4: THE SIGNING BEAT, one Herald item per signature, minted or amended alike.
+      const beat = signed.minted || signed.amended ? pactSignedBeat({
+        tick, proposal, terms: signed.added,
+        fromName: courtNameOf(String(proposal.from)), toName: courtNameOf(String(proposal.to)),
+      }) : null;
+      if (beat) newsEntries.push(beat);
       continue;
     }
     state = rememberRefusal({ worldState: state, keyOf, proposal, tick });
@@ -876,7 +979,7 @@ export function advancePeacetimePacts({
     worldState: state,
     settlementUpdates,
     changed: state !== worldState,
-    newsEntries: [],
+    newsEntries,
     receipts,
   };
 }

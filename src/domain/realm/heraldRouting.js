@@ -385,6 +385,9 @@ export const EXACT_SECTION = Object.freeze(/** @type {Record<string, HeraldSecti
   // under TRADE with the treaty cohort (treaty_signed, diplomacy, treaty_breached), because
   // a pact put before a court is terms offered, on the sovereignty pair's precedent above.
   pact_proposed: 'trade', realm_verb_propose_pact: 'trade',
+  // LIT1b-pre U4 — the signing beat (`signed`, GR-2's formation ending on the Herald): it files beside
+  // the offer it answers and the war door's own signing beat (`treaty_signed`, `diplomacy`).
+  signed: 'trade',
   // GR-6 — the war that did not happen (`brokered_back`), a mediation ending: it files beside the
   // treaty cohort it belongs to, where a mediated signing (`diplomacy`) already reads.
   brokered_back: 'trade',
@@ -729,6 +732,9 @@ export const KIND_SECTION_DIVERGENCES = Object.freeze(/** @type {Record<string, 
   // for the whole treaty cohort, as the two EXACT_SECTION rows already say).
   pact_proposed: 'trade',
   realm_verb_propose_pact: 'trade',
+  // LIT1b-pre U4: the letter files the signing under `courts` beside the offer it answers; the Herald
+  // files it with the treaty cohort (JUDGMENT, vetoable — the GR-2b pair's reading).
+  signed: 'trade',
   // GR-6: the letter files the war that did not happen under `courts`, beside the pact beats; the
   // Herald files it with the treaty cohort (JUDGMENT, vetoable — the GR-2b pair's reading).
   brokered_back: 'trade',

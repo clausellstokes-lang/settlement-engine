@@ -135,10 +135,12 @@ export const KIND_REGISTRATION_FREEZES = Object.freeze({
   smallFamilies: Object.freeze(['MARKET', 'INFORMATION', 'FAITH', 'CHANCE_MEETING']),
   /** Every registry row in the estate. ENC-4 took this 113 → 114, and ENC-4b (§900) 114 → 115
    * with `chance_meeting_exposed`, the seventh family's second desk-bearing exact row. */
-  registeredKinds: 122, // +2 at FP IN-3 (`false_accusation` and `sweep_launched`, two desk-bearing INFORMATION rows; SR-8). Before it: +2 at GR-2b (pact_proposed, realm_verb_propose_pact), +1 at FP TR-3 (`market_wrong_market_arrival`), +1 at FP IN-2 (`lure_sprung`), +1 at FP GR-6 (`brokered_back`, a desk-bearing GRAMMAR row) — the UNION at the FP integration pick, 2026-09-24 (the chair; SR-1, measured by the roster's readers at the tip)
+  // +1 at LIT1b-pre U4 (SR-1, SR-8): `signed`, the pact stage's signing beat, a desk-bearing GRAMMAR row.
+  registeredKinds: 123, // the UNION at the FP integration pick, 2026-09-24 (the chair): 115 + 2 (GR-2b) + 1 (TR-3) + 1 (IN-2) + 1 (GR-6) + 2 (IN-3: false_accusation, sweep_launched) + 1 (LIT1b-pre U4: signed) — measured by the roster's readers at the tip
   /** `Object.keys(EXACT_SECTION).length`. ENC-4 took this 379 → 380, WITH registeredKinds, and
    * ENC-4b (§900) 380 → 381 with `chance_meeting_exposed`. */
-  routedTokens: 388, // +2 at FP IN-3 (both kinds on `war`, their own EXACT_SECTION rows; SR-8). Before it: +2 at GR-2b, +1 at FP TR-3 (`market_wrong_market_arrival`'s desk row at trade), +1 at FP IN-2 (`lure_sprung` on `war`), +1 at FP GR-6 (`brokered_back` on its own EXACT_SECTION row) — the UNION at the FP integration pick, 2026-09-24
+  // +1 at LIT1b-pre U4: `signed` on its own EXACT_SECTION row (trade), REGISTERED in the commit that routes it.
+  routedTokens: 389, // the UNION at the FP integration pick, 2026-09-24: 381 + 2 + 1 + 1 + 1 + 2 + 1
   /**
    * Herald-routed tokens with no phrased pool at all. ⛔ SHRINK-ONLY: the content annexes'
    * wiring waves lower it; nothing may raise it. Unmoved since the freeze: GR-2b's two new

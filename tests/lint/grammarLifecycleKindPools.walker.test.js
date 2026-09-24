@@ -1,9 +1,9 @@
 /**
  * grammarLifecycleKindPools.walker.test.js — GR-0's phrased-kind walker.
  *
- * The census of the pact grammar's lifecycle voice: the exact fifteen wired pools, their
+ * The census of the pact grammar's lifecycle voice: the exact sixteen wired pools, their
  * frequency-scaled depth, their annex-verbatim text, the per-pool slot roles (one of them
- * INVERTED), the nine Herald kinds' five joins, and the two pools this wave deliberately
+ * INVERTED), the ten Herald kinds' five joins, and the two pools this wave deliberately
  * did NOT wire. It certifies presentation width only; it is not behavioural soak evidence.
  *
  * THE READER IS THE SHARED ONE. tests/helpers/receiptAnnex.js was EXTENDED with the
@@ -52,6 +52,10 @@ const EXPECTED = Object.freeze([
   // are Herald beats the table's APPROVAL voices, and both take the treaty cohort's desk.
   ['pact_proposed', 'notable', 'public', 'trade', 10],
   ['realm_verb_propose_pact', 'notable', 'public', 'trade', 7],
+  // LIT1b-pre U4 — the pact stage's signing beat (SR-8). `signed` is the `# GR-2` formation ending
+  // "Herald (the signing beat)", wired as authored in the second window below; `major` is the
+  // annex's own class, with the SP-6 floor of four cleared at five. The census moves to sixteen.
+  ['signed', 'major', 'public', 'trade', 5],
   // GR-4b-α — the succession disavowal, and the first `major` row this registry has carried.
   // Its pool is authored in the volume's `# GR-4` section rather than `# GR-0`, which is why
   // the reader below takes a PER-KIND window instead of one file-wide slice.
@@ -95,6 +99,12 @@ const INTERP = Object.freeze({
   // annex-verbatim comparison stays exact; tests/domain/mediationGeneralizedGr6.test.js pins the
   // real beat naming the two courts in party order.
   counterpartSecond: 'Irontown',
+  // LIT1b-pre U4 — `signed` families 1 and 2 name the goods exchanged and bind the repeated `{good}`
+  // IN ORDER, the second carried as `goodSecond`; the walker fills both with the SAME word so the
+  // annex-verbatim comparison stays exact (the `counterpartSecond` reading above). The pact road
+  // records no goods, so those two families never draw there (A-26).
+  good: 'grain',
+  goodSecond: 'grain',
 });
 
 const ANNEX_SOURCE = readFileSync(GRAMMAR_ANNEX_URL, 'utf8');
@@ -142,7 +152,7 @@ const GR4_KINDS = new Set([
  */
 const GR2_SECTION = '# GR-2';
 const GR2_UNTIL = '# GR-3';
-const GR2_KINDS = new Set(['pact_proposed', 'realm_verb_propose_pact']);
+const GR2_KINDS = new Set(['pact_proposed', 'realm_verb_propose_pact', 'signed']);
 /**
  * GR-6's window, the third added to this ONE census on the same reasoning. `# GR-6` is the
  * volume's LAST wave section, so its terminator is the coverage ledger's own heading; only
@@ -167,11 +177,12 @@ function annexPool(kind) {
 const annexLines = (kind) => annexPool(kind).lines;
 
 describe('SP-6 phrased-kind registry — GR-0 the lifecycle voice', () => {
-  test('the fifteen-pool census and every registry field are exact', () => {
+  test('the sixteen-pool census and every registry field are exact', () => {
     expect(GRAMMAR_KINDS).toEqual(EXPECTED.map(([kind]) => kind));
     // 12 through GR-4b-ii-W2; GR-2b registers pact_proposed and realm_verb_propose_pact; GR-6
     // registers brokered_back.
-    expect(GRAMMAR_KIND_REGISTRY).toHaveLength(15);
+    // LIT1b-pre U4 registers signed.
+    expect(GRAMMAR_KIND_REGISTRY).toHaveLength(16);
     for (const [kind, significance, audience, section, depth] of EXPECTED) {
       const row = GRAMMAR_KIND_REGISTRY.find((candidate) => candidate.kind === kind);
       expect(row).toMatchObject({ kind, significance, audience, section });
@@ -222,7 +233,8 @@ describe('SP-6 phrased-kind registry — GR-0 the lifecycle voice', () => {
     const address = GRAMMAR_KINDS.map((kind) => annexPool(kind).from);
     // GR-2b registers pact_proposed and realm_verb_propose_pact: twelve addresses became fourteen;
     // GR-6 registers brokered_back: fourteen became fifteen.
-    expect(address).toHaveLength(15);
+    // LIT1b-pre U4 registers signed: fifteen became sixteen.
+    expect(address).toHaveLength(16);
     expect([...new Set(address)]).toEqual(['war']);
   });
 
@@ -285,12 +297,12 @@ describe('SP-6 phrased-kind registry — GR-0 the lifecycle voice', () => {
     expect(grammarSlotRoles('treaty_true_state_chip')).not.toEqual(DEFAULT_GRAMMAR_SLOT_ROLES);
   });
 
-  test('THE HERALD JOINS: all nine Herald kinds are phrased, routed, filed and desk-consistent', () => {
+  test('THE HERALD JOINS: all ten Herald kinds are phrased, routed, filed and desk-consistent', () => {
     // Six through GR-4b-ii-W2; GR-2b registers pact_proposed and realm_verb_propose_pact; GR-6
     // registers brokered_back, the ninth.
     expect([...GRAMMAR_HERALD_KINDS])
       .toEqual(['treaty_lapsed', 'treaty_default_detected', 'treaty_disclosure_opened',
-        'pact_proposed', 'realm_verb_propose_pact',
+        'pact_proposed', 'realm_verb_propose_pact', 'signed',
         'disavowed_by_succession', 'succession_question_opened', 'reaffirmed', 'brokered_back']);
     for (const kind of GRAMMAR_HERALD_KINDS) {
       // JOIN 3 — the world phrase, so no projection can fall back to an engine token.

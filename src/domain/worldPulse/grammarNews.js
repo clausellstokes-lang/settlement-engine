@@ -160,6 +160,18 @@ export const GRAMMAR_KIND_REGISTRY = Object.freeze([
     ['settlement', 'counterpart', 'term'], ['counterpart', 'term'], ['counterpart'], [],
     ['settlement', 'term'],
   ]),
+  // LIT1b-pre U4 — THE SIGNING BEAT (the GR-5e voice's core, pulled forward; SR-8: the kind lands its
+  // five joins in the mint commit). `signed` is the `# GR-2` formation ending spoken on the Herald,
+  // `major` as the annex classes it, on the treaty cohort's trade desk. Its `{settlement}` is the
+  // court that asked and its `{counterpart}` the court that answered, bound by the stage from the
+  // proposal row, never through `grammarSlotRoles`. HEADLINE HONESTY (A-26), by declaration and
+  // never by rewording: family 4 says both courts took something away, so it is honest only under
+  // `both_gain`; family 5 says wagons move, so only under `goods`; `both_gain_goods` admits both.
+  // Families 1 and 2 name the goods exchanged, which no pact clause records, so they stay
+  // ineligible (`goodSecond` is the in-order second fill). Family 3 is context-free.
+  grammarKindRow('signed', 'major', 'public', 'trade', [
+    ['good', 'goodSecond'], ['settlement', 'good', 'counterpart', 'goodSecond'], ['settlement'], [], [],
+  ], [null, null, null, ['both_gain', 'both_gain_goods'], ['goods', 'both_gain_goods']]),
   // GR-4b-α — THE SUCCESSION DISAVOWAL. A treaty lifecycle beat, so it takes the treaty
   // cohort's trade desk exactly as `treaty_lapsed` does. `major` is the annex's own class and
   // the first row in this registry to use it — the floors table has had the arm all along.
@@ -216,7 +228,7 @@ export const GRAMMAR_KIND_REGISTRY = Object.freeze([
 /** The exact governed pool set. */
 export const GRAMMAR_KINDS = Object.freeze(GRAMMAR_KIND_REGISTRY.map((row) => row.kind));
 
-/** The nine rows that reach the Herald as kinds of their own. */
+/** The ten rows that reach the Herald as kinds of their own. */
 export const GRAMMAR_HERALD_KINDS = Object.freeze(
   GRAMMAR_KIND_REGISTRY.filter((row) => row.section !== null).map((row) => row.kind),
 );

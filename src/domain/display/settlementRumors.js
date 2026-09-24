@@ -488,6 +488,8 @@ export const WHAT_PHRASES = Object.freeze({
   // The lifecycle pair, deliberately answering each other.
   settlement_resettled: 'hearths lit again',
   settlement_terminal_death: 'the last hearths going cold',
+  // LIT1b-pre U4: the signing beat, in the words a market would use for a pact signed in peace.
+  signed: 'a pact signed in peace between courts',
   sovereignty_conveyed: 'a crown passing to another hand',
   steading_forced: 'a new steading founded',
   strategy_sue_for_peace: 'a suit for peace',

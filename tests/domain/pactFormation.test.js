@@ -80,8 +80,12 @@ import {
   advancePeacetimePacts,
   answerPactProposal,
   draftPactSheet,
+  pactSignedBeat,
   reserveFor,
 } from '../../src/domain/worldPulse/pactFormation.js';
+import { grammarReceipt } from '../../src/domain/worldPulse/grammarNews.js';
+import { appendWizardNewsEntries, ensureWizardNewsFeed } from '../../src/domain/region/wizardNews.js';
+import { DECREE_CAUSE } from '../../src/domain/worldPulse/decreeHook.js';
 import { pactProposalsOf } from '../../src/domain/worldPulse/pactProposals.js';
 import { lineageOf, provenanceOf, termIdOf } from '../../src/domain/worldPulse/pactAmendment.js';
 import { treatyBlocksWar, treatyLedgerOf } from '../../src/domain/worldPulse/treatyEnforcement.js';
@@ -113,6 +117,21 @@ function openThenAnswer(worldState, snapshot = pactSnapshot()) {
 
 const endingOf = (pass) => pass.receipts.find((r) => r.ending)?.ending;
 const receiptOf = (pass, kind) => pass.receipts.find((r) => r.kind === kind);
+
+/** The fixture's courts, NAMED (LIT1b-pre U4). The fixture spells each court's name as its id,
+ *  and the signing beat is minted only when both courts resolve to a real name, so every arm that
+ *  means to hear the Herald drives this snapshot. */
+const COURT_NAMES = Object.freeze({ A: 'Ashford', B: 'Irontown', C: 'Crowmere', D: 'Dunmoor', E: 'Elmstead' });
+/** @param {{withThreat?: boolean}} [args] */
+const namedSnapshot = (args) => {
+  const base = pactSnapshot(args);
+  return {
+    ...base,
+    settlements: base.settlements.map((item) => ({
+      ...item, name: COURT_NAMES[item.id], settlement: { ...item.settlement, name: COURT_NAMES[item.id] },
+    })),
+  };
+};
 
 describe('THE LIT WALKTHROUGH, SPELLED OUT', () => {
   test('a world whose rules literally say `pactFormationEnabled: true` forms a pact', () => {
@@ -765,19 +784,118 @@ describe('FPQ-27 — THE COURT\'S DEVOTION: read where the faith subsystem keeps
   });
 });
 
-describe('WHAT THIS WAVE DELIBERATELY DOES NOT MINT', () => {
-  test('ZERO news kinds, in every arm — a tripwire for GR-3', () => {
-    // Recorded design (see the module header): the Herald sentences land with GR-3, which
-    // mints the families they announce. This reds the day a beat is added here, which is
-    // the instruction to land the five Herald joins in that same commit.
-    for (const world of [
-      pactWorld({ flag: true }),
-      pactWorld({ flag: true, relationship: { dependency: 0.95, leverage: 0.05 } }),
-    ]) {
-      const { first, second } = openThenAnswer(world);
-      expect(first.newsEntries).toEqual([]);
-      expect(second.newsEntries).toEqual([]);
+describe('LIT1b-pre U4 — THE SIGNING BEAT: a pact signed in peace is announced once, naming both courts', () => {
+  test('a signed pact yields EXACTLY ONE Herald item, naming both courts, on the treaty desk', () => {
+    const { first, second } = openThenAnswer(pactWorld({ flag: true }), namedSnapshot());
+    expect(endingOf(second)).toBe('signed');
+    // anchored: the answer pass below mints its one beat, so the opening pass's empty list is real.
+    expect(first.newsEntries).toEqual([]);
+    expect(second.newsEntries).toHaveLength(1);
+    const [beat] = second.newsEntries;
+    expect(beat).toMatchObject({
+      kind: 'signed', impactKind: 'signed', significance: 'major', section: 'trade', audience: 'public',
+      settlementIds: ['A', 'B'], settlementNames: ['Ashford', 'Irontown'], parties: ['A', 'B'],
+      ending: 'signed', tick: DUE_TICK,
+      severity: F.SIGNING_BEAT_SEVERITY01, score: F.SIGNING_BEAT_SCORE,
+    });
+    expect(beat.id).toBe(`wizard_news.${DUE_TICK}.signed.a.b`);
+    expect(beat.headline).toBe('Ashford and Irontown have set their names to terms, in peace');
+    // The summary is the annex block's own sentence, picked by the one grammar picker on the
+    // proposal's own id under the reciprocal grain-for-ore sheet's context.
+    const [row] = pactProposalsOf(first.worldState);
+    expect(beat.summary).toBe(grammarReceipt(
+      'signed', String(row.id), { settlement: 'Ashford', counterpart: 'Irontown' }, 'both_gain_goods').line);
+  });
+
+  test('THE HONEST FAMILIES: a one-sided grant never says both took something, and no wagons roll without goods', () => {
+    /** Every family the real builder draws for one clause set, over many proposal ids. */
+    const familiesFor = (terms) => [...new Set(Array.from({ length: 400 }, (_, index) => pactSignedBeat({
+      tick: 20,
+      proposal: { id: `pact.20.a.b.seed${index}`, from: 'A', to: 'B', trigger: 'faith_communion', transport: 'abstract' },
+      terms, fromName: 'Ashford', toName: 'Irontown',
+    })?.familyId))].sort();
+    expect(familiesFor([{ type: 'pilgrimage_right', beneficiary: 'A' }])).toEqual(['signed.3']);
+    expect(familiesFor([{ type: 'non_aggression', beneficiary: 'both' }])).toEqual(['signed.3', 'signed.4']);
+    expect(familiesFor([{ type: 'resource_share', beneficiary: 'A' }])).toEqual(['signed.3', 'signed.5']);
+    expect(familiesFor([
+      { type: 'resource_share', beneficiary: 'A' }, { type: 'resource_share', beneficiary: 'B' },
+    ])).toEqual(['signed.3', 'signed.4', 'signed.5']);
+  });
+
+  test('NO NAME, NO BEAT: a court known only by its id is never printed as one', () => {
+    // The fixture spells each court's name as its id, so this signature has no name to print.
+    const { second } = openThenAnswer(pactWorld({ flag: true }));
+    expect(endingOf(second)).toBe('signed');
+    // anchored: the named run of this same signature mints its one beat in the first test of this block.
+    expect(second.newsEntries).toEqual([]);
+    expect(pactSignedBeat({
+      tick: 20, proposal: { id: 'pact.20.a.b.trade_demand', from: 'A', to: 'B' }, terms: [], fromName: 'Ashford', toName: '',
+    })).toBeNull();
+  });
+
+  test('THE CAUSE ROW: absent on the engine road, carried verbatim when a decree caused the signing', () => {
+    const { second } = openThenAnswer(pactWorld({ flag: true }), namedSnapshot());
+    expect(Object.prototype.hasOwnProperty.call(second.newsEntries[0], 'cause')).toBe(false);
+    const caused = pactSignedBeat({
+      tick: 20,
+      proposal: { id: 'pact.20.a.b.trade_demand', from: 'A', to: 'B', trigger: 'trade_demand', transport: 'abstract' },
+      terms: [{ type: 'resource_share', beneficiary: 'A' }], fromName: 'Ashford', toName: 'Irontown', cause: DECREE_CAUSE,
+    });
+    expect(caused.cause).toBe('table');
+  });
+
+  test('AN AMENDMENT SPEAKS THROUGH THE SAME BEAT: a clause written into a standing deed is announced once', () => {
+    const sale = mintSovereigntySaleTreaties({
+      sales: [{ assetId: 'holding', sellerId: 'A', buyerId: 'B', components: [] }],
+      worldState: pactWorld({ flag: true }),
+      tick: 1,
+    });
+    const { second } = openThenAnswer(sale.worldState, namedSnapshot());
+    expect(receiptOf(second, 'pact_signed').amended).toBe(true);
+    expect(second.newsEntries.map((entry) => entry.kind)).toEqual(['signed']);
+  });
+
+  test('THE PERSISTED FEED KEEPS IT: appended, saved and reloaded, the beat keeps its words, names and desk', () => {
+    // The lifecycle path a news item actually lives on: the wizard-news normalizer is an
+    // ALLOWLIST rebuilder run on every append and every load, so a field it does not name dies
+    // there. Everything a reader meets survives the round trip.
+    const { second } = openThenAnswer(pactWorld({ flag: true }), namedSnapshot());
+    const [beat] = second.newsEntries;
+    const now = '2026-09-24T00:00:00.000Z';
+    const saved = JSON.parse(JSON.stringify(appendWizardNewsEntries(ensureWizardNewsFeed({}, { now }), [beat], { now })));
+    const reloaded = ensureWizardNewsFeed(saved, { now }).entries.find((entry) => entry.id === beat.id);
+    expect(reloaded).toMatchObject({
+      kind: 'signed', impactKind: 'signed', summary: beat.summary, headline: beat.headline,
+      settlementIds: ['A', 'B'], settlementNames: ['Ashford', 'Irontown'], section: 'trade',
+      significance: 'major', severity: F.SIGNING_BEAT_SEVERITY01, score: F.SIGNING_BEAT_SCORE, familyId: beat.familyId,
+    });
+  });
+
+  test('DARK, NOTHING: the same named signature with the layer dark mints no item', () => {
+    for (const flag of [undefined, false]) {
+      const { first, second } = openThenAnswer(pactWorld({ flag }), namedSnapshot());
+      // anchored: the lit run of this same named world mints one beat in the first test of this block.
+      expect([...first.newsEntries, ...second.newsEntries]).toEqual([]);
     }
+  });
+});
+
+describe('WHAT THIS STAGE MINTS: ONE KIND, AND ONLY ON A SIGNATURE', () => {
+  test('ONE news kind, the signing beat, and nothing on any other arm (the tripwire for the rest)', () => {
+    // Recorded design (see the module header): GR-2 minted nothing and pinned it; LIT1b-pre U4
+    // lands the signing beat with its five joins. This reds the day a second kind is added here,
+    // which is the instruction to land ITS five joins in that same commit. The courts are NAMED,
+    // or the signing arm would be silent for want of a name and this pin would see nothing.
+    const snapshot = namedSnapshot();
+    const signedArm = openThenAnswer(pactWorld({ flag: true }), snapshot);
+    expect([...signedArm.first.newsEntries, ...signedArm.second.newsEntries].map((entry) => entry.kind))
+      .toEqual(['signed']);
+    const refusedArm = openThenAnswer(
+      pactWorld({ flag: true, relationship: { dependency: 0.95, leverage: 0.05 } }), snapshot,
+    );
+    expect(endingOf(refusedArm.second)).toBe('refused');
+    // anchored: the signing arm above mints its one beat, so the empty list here is the refusal's silence.
+    expect([...refusedArm.first.newsEntries, ...refusedArm.second.newsEntries]).toEqual([]);
   });
 
   test('every receipt names its ending from the CLOSED formation vocabulary', () => {
