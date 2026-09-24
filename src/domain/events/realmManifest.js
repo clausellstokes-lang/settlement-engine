@@ -15,7 +15,7 @@
  *
  * THE SAME-FUNCTION LAW: predicates wrap the sim's own wave gates
  * (peaceCausalActive, supplyWebWarfareActive, navalActive, interventionActive,
- * momentumActive, settlementLifecycleActive, calamityEnabled) — never
+ * momentumActive, settlementLifecycleActive, calamityEnabled, pactFormationActive) — never
  * re-implementations. Unavailability TEACHES: a dark gate names its flags.
  *
  * FIRST-PAINT LAW: this module is a LAZY LEAF — it imports the worldPulse
@@ -42,6 +42,11 @@ import { forceAbandonEntry, forceResettleEntry } from '../worldPulse/settlementL
 import { activeSpatialDigest } from '../spatial/distanceRead.js';
 import { repudiableTreatyPairs } from '../worldPulse/treatyBreach.js';
 import { sovereigntyTradeActive, tradeableAssetsOf } from '../worldPulse/sovereigntyAssets.js';
+import {
+  pactFormationActive, pactCounterpartiesFor, PACT_PROPOSAL_REFUSALS, PACT_VETO_PROSE,
+} from '../worldPulse/pactProposals.js';
+import { PACT_DRAFT_LENS } from '../worldPulse/pactFormation.js';
+import { isPhantomRecord } from '../edit/phantoms.js';
 
 /** The schema-owned loose record alias (the affordanceManifest Mut idiom —
  * the looseness is declared and any-census-counted where it is OWNED,
@@ -108,6 +113,12 @@ const darkSovereignty = () => no(
   ['The sovereignty market is not active in this campaign.'],
   ['It rides the envoy layer, the demographic layer, and its own rule; no preset lights it yet.'],
 );
+// GR-2b: the pact grammar is lit by no preset and no toggle either, so its refusal names
+// no settings path for the same reason (the unlock never lies).
+const darkPact = () => no(
+  ['The pact grammar is not active in this campaign.'],
+  ['It rides its own rule; no preset lights it yet.'],
+);
 
 // ── Shared target readers (each wraps ONE sim read — never re-derives) ───────
 /** Campaign members as {id, name} options. @param {RealmCtx} ctx */
@@ -146,6 +157,45 @@ export function repudiableTreatyPartyOptions(worldState, ctx) {
   }
   return campaignSettlementOptions(ctx).filter(option => ids.has(option.id));
 }
+
+/** The campaign's REAL courts: members that are not phantom records (a pact is real-only,
+ * design §13 — a phantom absorbs an act and never returns one). @param {RealmCtx} ctx */
+function realCourtOptions(ctx) {
+  const phantoms = new Set((ctx?.settlements || [])
+    .filter((/** @type {Mut} */ item) => isPhantomRecord(item?.settlement))
+    .map((/** @type {Mut} */ item) => String(item?.id ?? '')));
+  return campaignSettlementOptions(ctx).filter(option => !phantoms.has(option.id));
+}
+
+/** The courts one real court may put terms before — exactly the set the ledger's own
+ * `pactCounterpartiesFor` names for that subject, over the campaign's real courts.
+ * @param {Mut} worldState @param {RealmCtx} ctx @param {string} subjectId */
+export function pactCounterpartyOptions(worldState, ctx, subjectId) {
+  const real = realCourtOptions(ctx);
+  const open = new Set(pactCounterpartiesFor(worldState, real.map(option => option.id), subjectId));
+  return real.filter(option => open.has(option.id));
+}
+
+/** Every real court that can ask or be asked — PROPOSE_PACT's two target dials share this
+ * one flat list (the repudiableTreatyPartyOptions idiom); the apply arm's writer judges the
+ * exact pair against the then-current world. @param {Mut} worldState @param {RealmCtx} ctx */
+export function pactPartyOptions(worldState, ctx) {
+  const real = realCourtOptions(ctx);
+  const ids = new Set();
+  for (const subject of real) {
+    const others = pactCounterpartiesFor(worldState, real.map(option => option.id), subject.id);
+    if (!others.length) continue;
+    ids.add(subject.id);
+    for (const id of others) ids.add(id);
+  }
+  return real.filter(option => ids.has(option.id));
+}
+
+/** The clauses a DM may offer — every term the peacetime draft lens admits, codepoint-ordered
+ * (each is a TERM_CATALOG row by the lens's own law; a closed list, never free text). */
+export const PACT_CLAUSE_TYPES = Object.freeze([...new Set(Object.values(PACT_DRAFT_LENS)
+  .flatMap(ladder => ladder.flatMap(rung => [...rung.terms])))]
+  .sort((a, b) => (a < b ? -1 : a > b ? 1 : 0)));
 
 /** Every holding a campaign court could convey — TRANSFER_SOVEREIGNTY's asset dial.
  *
@@ -300,6 +350,31 @@ export const REALM_MANIFEST = Object.freeze({
       !peaceCausalActive(ws) ? darkWar()
         : gate(repudiableTreatyPairs(ws, Number(ctx?.tick) || 0).length > 0,
           'No live non-aggression pact remains to repudiate.'),
+  }),
+
+  // ── The peacetime pact (GR-2b; J-EM-11, R-21) ──────────────────────────
+  // THE ASKING COURT, THE COURT ASKED, AND THE CLAUSE. The occasion is the draft-lens ladder
+  // that holds the clause, and the transport is physics the one writer derives from the envoy
+  // spine — neither is a dial (the chair's amendment of 2026-09-23). The apply arm drafts
+  // through the grammar's own drafter and opens through the ledger's ONE writer.
+  PROPOSE_PACT: Object.freeze({
+    verb: 'PROPOSE_PACT', label: 'Propose a pact', family: 'War',
+    scope: 'realm', lane: 'proposal', module: 'pactProposals.js',
+    candidateType: 'pact_proposed', authority: 'pact_proposed',
+    dials: [
+      settlementTargetDial('fromId', 'The court that asks'),
+      settlementTargetDial('toId', 'The court it asks'),
+      enumDial('termType', [...PACT_CLAUSE_TYPES], PACT_CLAUSE_TYPES[0], 'The clause offered'),
+    ],
+    targetsFrom: 'campaignSettlements',
+    targetOptions: (/** @type {Mut} */ ws, /** @type {RealmCtx} */ ctx) => pactPartyOptions(ws, ctx),
+    coversVetoCodes: ['pact_gate_dark', ...PACT_PROPOSAL_REFUSALS],
+    predicate: (/** @type {Mut} */ ws, /** @type {RealmCtx} */ ctx) =>
+      !pactFormationActive(ws) ? darkPact()
+        : realCourtOptions(ctx).length < 2
+          ? no(['A pact needs two courts. The campaign has fewer.'], ['Canonize a second settlement.'])
+          : gate(pactPartyOptions(ws, ctx).length > 0,
+            'Every court that could ask already has a question standing, or as many offers abroad as it can answer for.'),
   }),
 
   // ── The conveyance verb (WR-10, amendment S) ───────────────────────────
@@ -569,13 +644,15 @@ const REALM_VETO_PROSE_LOCAL = {
 };
 
 /** The DM-facing refusal sentence for a realm veto code. Wraps the wave
- * modules' own prose feeds (CASUS/PEACE/WEBWAR — the same-function law for
+ * modules' own prose feeds (CASUS/PEACE/WEBWAR/PACT — the same-function law for
  * words) and this module's codes for the factory verbs.
  * @param {string|null|undefined} code @param {string} [detail] @returns {string}
  */
 export function realmVetoProse(code, detail = '') {
   const c = String(code || '');
-  const fromModules = /** @type {Record<string, string>} */ ({ ...CASUS_VETO_PROSE, ...PEACE_VETO_PROSE, ...WEBWAR_VETO_PROSE });
+  const fromModules = /** @type {Record<string, string>} */ ({
+    ...CASUS_VETO_PROSE, ...PEACE_VETO_PROSE, ...WEBWAR_VETO_PROSE, ...PACT_VETO_PROSE,
+  });
   if (fromModules[c]) return fromModules[c];
   const f = REALM_VETO_PROSE_LOCAL[c];
   return f ? f(String(detail || '')) : `The order was refused (${c}${detail ? `: ${detail}` : ''}).`;
