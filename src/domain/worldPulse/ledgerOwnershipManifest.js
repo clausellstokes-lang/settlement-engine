@@ -54,6 +54,9 @@ export const LEDGER_OWNERSHIP_MANIFEST = Object.freeze([
     ]),
     writers: refs([
       ref('src/domain/worldPulse/peaceTerms.js', 'advanceTreaties', "setSpatialLedger(out, 'treaties'"),
+      // GR-5b: the tick's answer step writes the instrument an accepted RENEWAL hands back
+      // (pactRenewal.js composes it and writes no ledger; this member of the family writes it).
+      ref('src/domain/worldPulse/pactFormation.js', 'advancePeacetimePacts', "setSpatialLedger(renewal.worldState, 'treaties'"),
       ref('src/domain/worldPulse/pactFormation.js', 'signPactProposal', "setSpatialLedger(worldState, 'treaties'"),
       ref('src/domain/worldPulse/pactAmendment.js', 'closeTermsBrokenByWar', "setSpatialLedger(worldState, 'treaties'"),
       ref('src/domain/worldPulse/peaceTermsSale.js', 'mintSovereigntySaleTreaties', "setSpatialLedger(worldState, 'treaties'"),
