@@ -8,7 +8,7 @@
   "The reviewable slice is computed by RULE (reviewableDark), never hand-listed."
  ],
  "schema": 1,
- "frozenAtSha": "5fa99d1e3210f70fa3530c13e5b3f62c28f18380",
+ "frozenAtSha": "455a2ba2ed5b747a582d7ea6df205697a7547f6d",
  "charter": "§18.1 WRWALKER Car 1 (HORIZON) — chair-signed vetoably at the INSTR-WRW pre-stage",
  "minRows": 40,
  "corpusMeta": {
@@ -16,15 +16,15 @@
   "configs": 4,
   "generations": 16,
   "pulseIntervals": 12,
-  "simulationFlagsLit": 88,
+  "simulationFlagsLit": 91,
   "steadingsMinted": 12,
   "shapeCount": 1300,
   "originCount": 8562,
   "transitionCount": 14503
  },
- "shapesDigest": "9fc59aa137520c6e1d84ed24a82c8b2af3ebce620921fc77c7e48da389cdf886",
+ "shapesDigest": "43a952be0f40af3c9b15cfb3b4031938e94dcd1d9f243ea2515d4430e6aae9c5",
  "detectorDigest": "c6ff47ec59b08a91703b4ede8f31f937a14c15ff7eca284e54f8a8f7075ef154",
- "verdictDigest": "0ecfebe5bf4ef6ef608960194d055625b4e8521973a70215487e9884d36b6890",
+ "verdictDigest": "7b5fdd14acee353a43d543226650498a7f6bc461efdd902102195f9476f099db",
  "surfaceRoots": {
   "web": [
    "src/main.jsx"
@@ -86,20 +86,20 @@
   "lit": 577,
   "litName": 4690,
   "dark": 1285,
-  "thinKeys": 9156,
+  "thinKeys": 9159,
   "thinShapes": 963,
   "knownShapes": 337
  },
  "scanStats": {
   "files": 1663,
-  "sites": 39510,
-  "propRead": 37391,
+  "sites": 39542,
+  "propRead": 37423,
   "elemRead": 0,
   "destructure": 2104,
   "inOp": 15,
-  "rGrades": 6028,
-  "nGrades": 900465,
-  "resolvedReceivers": 6791
+  "rGrades": 6036,
+  "nGrades": 901079,
+  "resolvedReceivers": 6799
  },
  "registerDigest": "3f57ab58c6f6803cd5965b29668e268a24db983833a4ab7ee3a167aba29ae1f1",
  "pendingSurfaceCeiling": 3,
@@ -13427,7 +13427,7 @@
   "severity on proposals": "campaign-pdf=N dossier-pdf=N foundry=N news=N web-display=N web-transitive=N world-book=N",
   "status on proposals": "campaign-pdf=N dossier-pdf=N foundry=N json-export=N news=N web-display=N web-transitive=N world-book=N",
   "summary on proposals": "campaign-pdf=N dossier-pdf=N foundry=N json-export=N news=N web-display=N web-transitive=N world-book=N",
-  "supersededAt on proposals": "web-display=N",
+  "supersededAt on proposals": "web-display=N web-transitive=N",
   "supersessionReason on proposals": "web-transitive=N",
   "tick on proposals": "campaign-pdf=N dossier-pdf=N foundry=N json-export=N news=N web-display=N web-transitive=N world-book=N",
   "updatedAt on proposals": "campaign-pdf=N dossier-pdf=N foundry=N news=N web-display=N web-transitive=N world-book=N",

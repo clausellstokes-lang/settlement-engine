@@ -91,21 +91,21 @@
   "pulseIntervals": 12,
   "seeds": 4,
   "shapeCount": 1300,
-  "simulationFlagsLit": 88,
+  "simulationFlagsLit": 91,
   "steadingsMinted": 12,
   "transitionCount": 14503
  },
  "digests": {
-  "corpusMeta": "31fe63383818069ebfc499450dbcb8e228af148b59a57303f2227b0a14bcf2b6",
+  "corpusMeta": "84a09ad3fdb617e8ad3dd2e2f72b55b5f2a3a70bcf92f256a46768a6b3dc3774",
   "inventory": "c592f2ad720096ea5a3f31657ab224ac08f39529418610d58dec10d6c7f012c8",
-  "manifests": "f17f5ae827da882d6c262040addb8cb10c0ac98741b5f50eb0bb01cd139d236e",
+  "manifests": "8ecfecf908d672c82f637d2147fbfee98ff7719dd585e7e38726b8b19f1fdadc",
   "migrationReview": "627d3e6311abb9a3e188d652556b048ccaf9df4bb884cb05ddb89e6a10b8bc72",
   "rowTags": "f62df84be5fe60b58572d1c6c26b1deb1baafa85d0a4748f4f83e83042cc5c06",
-  "scanStats": "4bcbbcee11903c28104da1ce903cf5e0e2cdf787f671a9269907cf2cf618294e",
-  "sentinel": "2b9179da9e4b0aa32686e2da4bb78c6b32daaabf436565d0ff4db00f7e666c15"
+  "scanStats": "11d2a1d95b7972f041cc85ff383894c452f4be301940f16806908125f1ee2c26",
+  "sentinel": "0b9db0bc2d18c070351ee89b94c5b5e0d264d55c209ddf1f9bb03704889aa199"
  },
  "frozen": "2026-09-24",
- "frozenAtSha": "5fa99d1e3210f70fa3530c13e5b3f62c28f18380",
+ "frozenAtSha": "455a2ba2ed5b747a582d7ea6df205697a7547f6d",
  "identities": 1393,
  "inventory": {
   "src/components/BuyThisDossier.jsx": {
@@ -2364,7 +2364,7 @@
   },
   "executionTree": {
    "algorithm": "sha256-canonical-path-type-mode-size-content-v2",
-   "digest": "968a1c821a58e86f1bd0eb635780517b484f6b509035a15ab1f4e5b3aa2b6b37",
+   "digest": "f67047bbcb2d2370425effd1b7168b2aae70867901f409a2b7f69b827f6f3638",
    "entries": [
     {
      "mode": "100644",
@@ -5106,8 +5106,8 @@
     {
      "mode": "100644",
      "path": "src/components/map/heraldFeed.js",
-     "sha256": "b5031de1ee3b1f95c608e45fd0fff561f915b02f699c212aad4054a91e658769",
-     "size": 10900,
+     "sha256": "0b7563cb72f7f0be181fad56789769dd158235332a80a70c98540c5d1e886ceb",
+     "size": 14030,
      "type": "file"
     },
     {
@@ -10545,8 +10545,8 @@
     {
      "mode": "100644",
      "path": "src/domain/region/wizardNews.js",
-     "sha256": "acd532f6469f8688b175ccb1053681bc2c7d993e5b962aca730978be960cfb5c",
-     "size": 57117,
+     "sha256": "e1a57a832d2a531888d23d4f4ada26554206cc4427320d1fece15bc8a412930c",
+     "size": 60295,
      "type": "file"
     },
     {
@@ -11903,8 +11903,8 @@
     {
      "mode": "100644",
      "path": "src/domain/worldPulse/applyWorldPulse.js",
-     "sha256": "dcc3fdcd1551be1967d5e53f24798700aefcf55490ce9f0206edb2afa106487e",
-     "size": 73128,
+     "sha256": "b031d8c384c1f5260795fc1be18eca347433b1ed6e7c7931a62f3b08e8d4e16d",
+     "size": 73258,
      "type": "file"
     },
     {
@@ -12113,8 +12113,8 @@
     {
      "mode": "100644",
      "path": "src/domain/worldPulse/candidateEvents.js",
-     "sha256": "fe2f5d38764bbb3b862e38babde26daee0e990beb78d6c317c28bef4ac6d4bce",
-     "size": 45761,
+     "sha256": "c5b93a693645e8fe118b986ef1861889aa31bb4233fabbce8615133758b57cd0",
+     "size": 46017,
      "type": "file"
     },
     {
@@ -13849,8 +13849,8 @@
     {
      "mode": "100644",
      "path": "src/domain/worldPulse/peaceTermsGraph.js",
-     "sha256": "3bb9ea9d9fe741590eea06be24e18deb53a761c49ae24a04d0a964038f420148",
-     "size": 7529,
+     "sha256": "bc57647c0ebf48869ead4329458c98783f6c16cfe9ee4ca3056611ffd18a796c",
+     "size": 7784,
      "type": "file"
     },
     {
@@ -13912,8 +13912,8 @@
     {
      "mode": "100644",
      "path": "src/domain/worldPulse/proposalAdmission.js",
-     "sha256": "99ac2a6c7c1bfc2ca985d84c76f4922e1a1a72a25b2dacc5a75697bbb43a8161",
-     "size": 16628,
+     "sha256": "db51931bf7f1fd0584c15732ce1d753e86761ee61368252a14a7811e9ccdefae",
+     "size": 25145,
      "type": "file"
     },
     {
@@ -14395,8 +14395,8 @@
     {
      "mode": "100644",
      "path": "src/domain/worldPulse/simulationRules.js",
-     "sha256": "c3d808c2fa984cfd4bd641f94343b621c52661e237f49f0dad3353f7c9e06c81",
-     "size": 100271,
+     "sha256": "cc5bed0147221eb89e2c41f3eccec7e230d8fccee390fa3ae439771e22291383",
+     "size": 101856,
      "type": "file"
     },
     {
@@ -15046,8 +15046,8 @@
     {
      "mode": "100644",
      "path": "src/domain/worldPulse/worldPulseFeedCuration.js",
-     "sha256": "eb71509afed9099e977743dc62c07b365142a4d7367fc9de0a7a9c123f6135a4",
-     "size": 11363,
+     "sha256": "03bc061a178bf07b670b56e43f9a36c7a71b9ff9aab00f9a4b81f4ed7bd8cedb",
+     "size": 14820,
      "type": "file"
     },
     {
@@ -18631,7 +18631,7 @@
   },
   "scanTree": {
    "algorithm": "sha256-canonical-path-type-mode-size-content-v2",
-   "digest": "b440c304b09e49ad2060cb7c9cab6fbdb1a3037a033914a2a6fa268c792f5b6b",
+   "digest": "26f3160740724a741a11e57226de4fb2b4aeb3536680d7d3ee64a50af1a50630",
    "entries": [
     {
      "mode": "100644",
@@ -21303,8 +21303,8 @@
     {
      "mode": "100644",
      "path": "src/components/map/heraldFeed.js",
-     "sha256": "b5031de1ee3b1f95c608e45fd0fff561f915b02f699c212aad4054a91e658769",
-     "size": 10900,
+     "sha256": "0b7563cb72f7f0be181fad56789769dd158235332a80a70c98540c5d1e886ceb",
+     "size": 14030,
      "type": "file"
     },
     {
@@ -26623,8 +26623,8 @@
     {
      "mode": "100644",
      "path": "src/domain/region/wizardNews.js",
-     "sha256": "acd532f6469f8688b175ccb1053681bc2c7d993e5b962aca730978be960cfb5c",
-     "size": 57117,
+     "sha256": "e1a57a832d2a531888d23d4f4ada26554206cc4427320d1fece15bc8a412930c",
+     "size": 60295,
      "type": "file"
     },
     {
@@ -27981,8 +27981,8 @@
     {
      "mode": "100644",
      "path": "src/domain/worldPulse/applyWorldPulse.js",
-     "sha256": "dcc3fdcd1551be1967d5e53f24798700aefcf55490ce9f0206edb2afa106487e",
-     "size": 73128,
+     "sha256": "b031d8c384c1f5260795fc1be18eca347433b1ed6e7c7931a62f3b08e8d4e16d",
+     "size": 73258,
      "type": "file"
     },
     {
@@ -28191,8 +28191,8 @@
     {
      "mode": "100644",
      "path": "src/domain/worldPulse/candidateEvents.js",
-     "sha256": "fe2f5d38764bbb3b862e38babde26daee0e990beb78d6c317c28bef4ac6d4bce",
-     "size": 45761,
+     "sha256": "c5b93a693645e8fe118b986ef1861889aa31bb4233fabbce8615133758b57cd0",
+     "size": 46017,
      "type": "file"
     },
     {
@@ -29927,8 +29927,8 @@
     {
      "mode": "100644",
      "path": "src/domain/worldPulse/peaceTermsGraph.js",
-     "sha256": "3bb9ea9d9fe741590eea06be24e18deb53a761c49ae24a04d0a964038f420148",
-     "size": 7529,
+     "sha256": "bc57647c0ebf48869ead4329458c98783f6c16cfe9ee4ca3056611ffd18a796c",
+     "size": 7784,
      "type": "file"
     },
     {
@@ -29990,8 +29990,8 @@
     {
      "mode": "100644",
      "path": "src/domain/worldPulse/proposalAdmission.js",
-     "sha256": "99ac2a6c7c1bfc2ca985d84c76f4922e1a1a72a25b2dacc5a75697bbb43a8161",
-     "size": 16628,
+     "sha256": "db51931bf7f1fd0584c15732ce1d753e86761ee61368252a14a7811e9ccdefae",
+     "size": 25145,
      "type": "file"
     },
     {
@@ -30473,8 +30473,8 @@
     {
      "mode": "100644",
      "path": "src/domain/worldPulse/simulationRules.js",
-     "sha256": "c3d808c2fa984cfd4bd641f94343b621c52661e237f49f0dad3353f7c9e06c81",
-     "size": 100271,
+     "sha256": "cc5bed0147221eb89e2c41f3eccec7e230d8fccee390fa3ae439771e22291383",
+     "size": 101856,
      "type": "file"
     },
     {
@@ -31124,8 +31124,8 @@
     {
      "mode": "100644",
      "path": "src/domain/worldPulse/worldPulseFeedCuration.js",
-     "sha256": "eb71509afed9099e977743dc62c07b365142a4d7367fc9de0a7a9c123f6135a4",
-     "size": 11363,
+     "sha256": "03bc061a178bf07b670b56e43f9a36c7a71b9ff9aab00f9a4b81f4ed7bd8cedb",
+     "size": 14820,
      "type": "file"
     },
     {
@@ -34702,7 +34702,7 @@
   },
   "sourceTree": {
    "algorithm": "sha256-canonical-path-type-mode-size-content-v2",
-   "digest": "2e023366f792fcc24af36ca152fe675cdfed408f0b8738024a0065958d9b71ae",
+   "digest": "97e0009f33472718ce5ee49d5dd0df77389f41bebe9ce78d3d29c7faba2598f6",
    "entries": [
     {
      "mode": "100644",
@@ -37374,8 +37374,8 @@
     {
      "mode": "100644",
      "path": "src/components/map/heraldFeed.js",
-     "sha256": "b5031de1ee3b1f95c608e45fd0fff561f915b02f699c212aad4054a91e658769",
-     "size": 10900,
+     "sha256": "0b7563cb72f7f0be181fad56789769dd158235332a80a70c98540c5d1e886ceb",
+     "size": 14030,
      "type": "file"
     },
     {
@@ -42813,8 +42813,8 @@
     {
      "mode": "100644",
      "path": "src/domain/region/wizardNews.js",
-     "sha256": "acd532f6469f8688b175ccb1053681bc2c7d993e5b962aca730978be960cfb5c",
-     "size": 57117,
+     "sha256": "e1a57a832d2a531888d23d4f4ada26554206cc4427320d1fece15bc8a412930c",
+     "size": 60295,
      "type": "file"
     },
     {
@@ -44171,8 +44171,8 @@
     {
      "mode": "100644",
      "path": "src/domain/worldPulse/applyWorldPulse.js",
-     "sha256": "dcc3fdcd1551be1967d5e53f24798700aefcf55490ce9f0206edb2afa106487e",
-     "size": 73128,
+     "sha256": "b031d8c384c1f5260795fc1be18eca347433b1ed6e7c7931a62f3b08e8d4e16d",
+     "size": 73258,
      "type": "file"
     },
     {
@@ -44381,8 +44381,8 @@
     {
      "mode": "100644",
      "path": "src/domain/worldPulse/candidateEvents.js",
-     "sha256": "fe2f5d38764bbb3b862e38babde26daee0e990beb78d6c317c28bef4ac6d4bce",
-     "size": 45761,
+     "sha256": "c5b93a693645e8fe118b986ef1861889aa31bb4233fabbce8615133758b57cd0",
+     "size": 46017,
      "type": "file"
     },
     {
@@ -46117,8 +46117,8 @@
     {
      "mode": "100644",
      "path": "src/domain/worldPulse/peaceTermsGraph.js",
-     "sha256": "3bb9ea9d9fe741590eea06be24e18deb53a761c49ae24a04d0a964038f420148",
-     "size": 7529,
+     "sha256": "bc57647c0ebf48869ead4329458c98783f6c16cfe9ee4ca3056611ffd18a796c",
+     "size": 7784,
      "type": "file"
     },
     {
@@ -46180,8 +46180,8 @@
     {
      "mode": "100644",
      "path": "src/domain/worldPulse/proposalAdmission.js",
-     "sha256": "99ac2a6c7c1bfc2ca985d84c76f4922e1a1a72a25b2dacc5a75697bbb43a8161",
-     "size": 16628,
+     "sha256": "db51931bf7f1fd0584c15732ce1d753e86761ee61368252a14a7811e9ccdefae",
+     "size": 25145,
      "type": "file"
     },
     {
@@ -46663,8 +46663,8 @@
     {
      "mode": "100644",
      "path": "src/domain/worldPulse/simulationRules.js",
-     "sha256": "c3d808c2fa984cfd4bd641f94343b621c52661e237f49f0dad3353f7c9e06c81",
-     "size": 100271,
+     "sha256": "cc5bed0147221eb89e2c41f3eccec7e230d8fccee390fa3ae439771e22291383",
+     "size": 101856,
      "type": "file"
     },
     {
@@ -47314,8 +47314,8 @@
     {
      "mode": "100644",
      "path": "src/domain/worldPulse/worldPulseFeedCuration.js",
-     "sha256": "eb71509afed9099e977743dc62c07b365142a4d7367fc9de0a7a9c123f6135a4",
-     "size": 11363,
+     "sha256": "03bc061a178bf07b670b56e43f9a36c7a71b9ff9aab00f9a4b81f4ed7bd8cedb",
+     "size": 14820,
      "type": "file"
     },
     {
@@ -51183,20 +51183,20 @@
  },
  "scanStats": {
   "files": 2295,
-  "reads": 132525,
-  "resolved": 9866,
-  "unresolved": 122659
+  "reads": 132585,
+  "resolved": 9874,
+  "unresolved": 122711
  },
  "scannerProvenance": {
   "detectorDigest": "ba9de07c77536fb68e4938c3f594237d353442ef912a2cdf9649ec72b869d5ff",
-  "executionTreeDigest": "968a1c821a58e86f1bd0eb635780517b484f6b509035a15ab1f4e5b3aa2b6b37",
-  "scanTreeDigest": "b440c304b09e49ad2060cb7c9cab6fbdb1a3037a033914a2a6fa268c792f5b6b",
-  "sourceTreeDigest": "2e023366f792fcc24af36ca152fe675cdfed408f0b8738024a0065958d9b71ae",
+  "executionTreeDigest": "f67047bbcb2d2370425effd1b7168b2aae70867901f409a2b7f69b827f6f3638",
+  "scanTreeDigest": "26f3160740724a741a11e57226de4fb2b4aeb3536680d7d3ee64a50af1a50630",
+  "sourceTreeDigest": "97e0009f33472718ce5ee49d5dd0df77389f41bebe9ce78d3d29c7faba2598f6",
   "unscannedInputDigest": "b658b56925b87b1b2fc99fadd2c181db97d1fba11998354f33de2e4bfd14072d"
  },
  "schema": 23,
  "sentinel": {
-  "resolvedReads": 9866,
+  "resolvedReads": 9874,
   "totalKeys": 6552,
   "usableShapes": 337
  },

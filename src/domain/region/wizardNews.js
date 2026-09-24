@@ -25,10 +25,13 @@ const MAX_ENTRIES = 240;
 // survives the cap; MAX_ENTRIES and the arc rescue govern only what survives beyond it (see
 // capEntries). The span is the estate's own year, IMPORTED from the one interval table rather
 // than mirrored, so the window cannot drift from the calendar the advance menu offers.
-// FP-34 (the FP chair, 2026-09-24): a LOCAL constant, pinned equal to INTERVAL_WEEKS.one_year by
-// tests/domain/wizardNewsYearWindow.test.js, so intervalWeeks.js stays OUT of the first-paint set
-// (the import owed about 387 B of eager bytes; a signed budget never rises by the chair's hand).
-export const RETENTION_WINDOW_TICKS = 52;
+// FP-34 (the FP chair, 2026-09-24): the feed's retention window is a REGISTERED DRAFT TUNING TABLE
+// (tests/lint/.tuning-register.json, like the docket's horizon), pinned equal to INTERVAL_WEEKS.one_year
+// by tests/domain/wizardNewsYearWindow.test.js, so intervalWeeks.js stays OUT of the first-paint set
+// (the import owed about 387 B of eager bytes; a signed budget never rises by the chair's hand) and
+// the tuning inventory sees a table, not a named magic number. The owner signs it at the tuning sitting.
+export const FEED_RETENTION = Object.freeze({ windowWeeks: 52 });
+const RETENTION_WINDOW_TICKS = FEED_RETENTION.windowWeeks;
 
 // ── Types ──────────────────────────────────────────────────────────────────
 
