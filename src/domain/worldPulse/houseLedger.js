@@ -86,7 +86,10 @@ export const HOUSE_STANDING_CONDITION = 'houseStanding';
 /**
  * THE LEDGER TUNING — raw-authored, owner-signed at the soak redo (THE PROMISE). Ticks are
  * the pulse's weeks: a dwell is a season, an interest lives two seasons, the ruin cooldown is
- * two seasons, and a vanished faction is forgotten on the faction plane's own grace.
+ * two seasons, and a vanished faction is forgotten on the faction plane's own grace. The four
+ * `town*From` edges are where the town's own fortune (`prosperityRank01`, zero to one) starts
+ * pointing its houses at each rung above `broken`; they live in this table so the tuning
+ * register's row covers them (the TR-2 cure: they were four bare decimals in `townBandOf`).
  */
 export const HOUSE_LEDGER_TUNING = Object.freeze({
   maxHousesPerSettlement: 2,
@@ -96,6 +99,10 @@ export const HOUSE_LEDGER_TUNING = Object.freeze({
   // The faction plane's own prune grace (`FACTION_STATE_PRUNE_GRACE_TICKS`), held equal by the
   // acceptance file rather than imported, for the coupling reason the header records.
   absenceGraceTicks: 3,
+  townThinFrom: 0.2,
+  townSteadyFrom: 0.4,
+  townProsperousFrom: 0.6,
+  townDominantFrom: 0.75,
 });
 
 /**
@@ -296,10 +303,11 @@ function liveCommerceOf(settlement) {
 export function townBandOf(settlement) {
   const economic = isPlainObject(settlement.economicState) ? settlement.economicState : {};
   const rank = prosperityRank01(economic.prosperity);
-  if (rank < 0.2) return 0;
-  if (rank < 0.4) return 1;
-  if (rank < 0.6) return 2;
-  if (rank < 0.75) return 3;
+  const edges = HOUSE_LEDGER_TUNING;
+  if (rank < edges.townThinFrom) return 0;
+  if (rank < edges.townSteadyFrom) return 1;
+  if (rank < edges.townProsperousFrom) return 2;
+  if (rank < edges.townDominantFrom) return 3;
   return 4;
 }
 

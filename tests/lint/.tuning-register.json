@@ -1241,6 +1241,40 @@
       "band": null,
       "note": ""
     },
+    "src/domain/worldPulse/houseActs.js#HOUSE_ACT_TUNING": {
+      "role": null,
+      "status": "draft",
+      "signedAt": null,
+      "unit": {
+        "reliefTownAtMost": "rank",
+        "reliefHoldingsAtLeast": "rank",
+        "routeHoldingsAtLeast": "rank",
+        "routeAppetiteAtLeast": "rank",
+        "caravanHoldingsAtLeast": "rank",
+        "creditAtLeast": "rank",
+        "creditAppetiteAtLeast": "rank"
+      },
+      "band": null,
+      "note": "FP TR-2 (lane FP-D): the merchant house's act thresholds. Every key is a band INDEX on the ladder its source comment names (the town fortune band, HOUSE_HOLDINGS_BANDS, HOUSE_APPETITE_BANDS, HOUSE_CREDIT_BANDS), so each names a rung position and its unit is rank. DRAFT, registered by the lane's builder seat at the TR-2 cure because the walker's totality arm convicted the table as unnamed; the units are labels read off the source, and nothing here is signed or proposed."
+    },
+    "src/domain/worldPulse/houseLedger.js#HOUSE_LEDGER_TUNING": {
+      "role": null,
+      "status": "draft",
+      "signedAt": null,
+      "unit": {
+        "maxHousesPerSettlement": "count",
+        "dwellTicks": "ticks",
+        "interestTermTicks": "ticks",
+        "ruinCooldownTicks": "ticks",
+        "absenceGraceTicks": "ticks",
+        "townThinFrom": "fraction01",
+        "townSteadyFrom": "fraction01",
+        "townProsperousFrom": "fraction01",
+        "townDominantFrom": "fraction01"
+      },
+      "band": null,
+      "note": "FP TR-2 (lane FP-D): the merchant house ledger. The cap counts houses per settlement, four keys are pulse ticks, and the four town*From edges are prosperityRank01 readings (zero to one) at which the town's fortune points its houses at each rung above broken; those four were bare decimals in townBandOf and were named into this table by the TR-2 cure, values unmoved. DRAFT, registered by the lane's builder seat because the walker's totality arm convicted the table as unnamed; nothing here is signed or proposed."
+    },
     "src/domain/worldPulse/informationStatecraft.js#CREDIBILITY_TUNING": {
       "role": null,
       "status": "draft",
