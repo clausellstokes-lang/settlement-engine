@@ -38,7 +38,7 @@ import {
 // The first non-WAR leaf (FP wave TR-1). One sibling per volume, as CW-0w slice 1 built
 // this family to accept.
 import { TR1_CASUS_COMMERCII_COUPLINGS, TR3_BELIEVED_MARKETS_COUPLINGS } from './couplingRegistryTrade.js';
-import { GR2_PACT_FORMATION_COUPLINGS, GR3_TERM_FAMILY_COUPLINGS, GR4_BREACH_CREDIBILITY_COUPLINGS } from './couplingRegistryGrammar.js';
+import { GR2_PACT_FORMATION_COUPLINGS, GR3_TERM_FAMILY_COUPLINGS, GR4_BREACH_CREDIBILITY_COUPLINGS, GR6_MEDIATION_COUPLINGS } from './couplingRegistryGrammar.js';
 import { IN_INFORMATION_COUPLINGS } from './couplingRegistryInfo.js';
 // The ESPIONAGE leaf (FP wave ES-1). ES is a wave family OF the INFORMATION program in
 // the LAYER map, and a volume of its own in the WAVE map — couplingIds carry the `ES`
@@ -74,6 +74,9 @@ export {
   GR3_TERM_FAMILY_COUPLINGS,
   GR4C_BREACH_CREDIBILITY_COUPLING,
   GR4_BREACH_CREDIBILITY_COUPLINGS,
+  GR6_INTENT_BROKER_COUPLING,
+  GR6_SOFT_GATE_COUPLING,
+  GR6_MEDIATION_COUPLINGS,
 } from './couplingRegistryGrammar.js';
 
 // The INFORMATION leaf (FP wave IN-0a). Re-exported by name like every other volume's:
@@ -217,6 +220,11 @@ export const COUPLING_REGISTRY = Object.freeze([
   // landing act does not move a legacy tiebreak to tidy an ordinal, so appending here costs
   // nothing and disturbs no single-row caller.
   ...WSEAT_D10_IRREGULAR_FORCE_COUPLINGS,
+  // FP GR-6 (2026-09-24): the two mediation rows, licensing mediationPressure.js's read of the
+  // war intent ledger and the war opener's read of the broker's pressure. ⛔ APPENDED LAST, on the
+  // tiebreak argument WR-6c, W-MEM and WR-6e make: both directions' CPL-5 first-row seats are
+  // held by rows composed far above, so this append moves nothing a single-row caller resolves.
+  ...GR6_MEDIATION_COUPLINGS,
 ]);
 
 /** @type {ReadonlyArray<Readonly<CouplingRegistryRow>>} */

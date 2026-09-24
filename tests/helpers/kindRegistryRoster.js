@@ -135,10 +135,10 @@ export const KIND_REGISTRATION_FREEZES = Object.freeze({
   smallFamilies: Object.freeze(['MARKET', 'INFORMATION', 'FAITH', 'CHANCE_MEETING']),
   /** Every registry row in the estate. ENC-4 took this 113 → 114, and ENC-4b (§900) 114 → 115
    * with `chance_meeting_exposed`, the seventh family's second desk-bearing exact row. */
-  registeredKinds: 119, // +2 at GR-2b (pact_proposed and realm_verb_propose_pact, two desk-bearing GRAMMAR rows), +1 at FP TR-3 (`market_wrong_market_arrival`, the MARKET family's first row), +1 at FP IN-2 (`lure_sprung`, the INFORMATION family's second row) — the UNION at the FP integration pick, 2026-09-24 (the chair; SR-1, measured by the roster's readers at the tip)
+  registeredKinds: 120, // +2 at GR-2b (pact_proposed, realm_verb_propose_pact), +1 at FP TR-3 (`market_wrong_market_arrival`), +1 at FP IN-2 (`lure_sprung`), +1 at FP GR-6 (`brokered_back`, a desk-bearing GRAMMAR row) — the UNION at the FP integration pick, 2026-09-24 (the chair; SR-1, measured by the roster's readers at the tip)
   /** `Object.keys(EXACT_SECTION).length`. ENC-4 took this 379 → 380, WITH registeredKinds, and
    * ENC-4b (§900) 380 → 381 with `chance_meeting_exposed`. */
-  routedTokens: 385, // +2 at GR-2b (each on its own EXACT_SECTION row), +1 at FP TR-3 (`market_wrong_market_arrival`'s desk row at trade), +1 at FP IN-2 (`lure_sprung` on the infowar siblings' desk, `war`) — the UNION at the FP integration pick, 2026-09-24
+  routedTokens: 386, // +2 at GR-2b, +1 at FP TR-3 (`market_wrong_market_arrival`'s desk row at trade), +1 at FP IN-2 (`lure_sprung` on `war`), +1 at FP GR-6 (`brokered_back` on its own EXACT_SECTION row) — the UNION at the FP integration pick, 2026-09-24
   /**
    * Herald-routed tokens with no phrased pool at all. ⛔ SHRINK-ONLY: the content annexes'
    * wiring waves lower it; nothing may raise it. Unmoved since the freeze: GR-2b's two new

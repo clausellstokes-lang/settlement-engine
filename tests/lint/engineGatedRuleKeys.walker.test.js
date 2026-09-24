@@ -985,6 +985,10 @@ describe('engine-gated rule keys (the census-invisible subsystem class)', () => 
       // footing — the four fences, the pulse hash arm and the lit-mutant control live in the
       // wave's own acceptance file.
       believedMarketsEnabled: 'tests/domain/believedMarketsTr3.test.js',
+      // FP GR-6 (lane FP-B2, 2026-09-24): the register's THIRTY-SEVENTH member, on TR-2's reading:
+      // its brief places the four fences and the lit-mutant control in the wave's own
+      // acceptance file.
+      mediationGeneralizedEnabled: 'tests/domain/mediationGeneralizedGr6.test.js',
     });
     const fenceFiles = walk(join(ROOT, 'tests/property'))
       .filter((p) => /DormancyFence\.test\.js$/.test(p))

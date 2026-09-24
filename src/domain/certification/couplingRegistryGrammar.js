@@ -287,3 +287,52 @@ export const GR4C_BREACH_CREDIBILITY_COUPLING = couplingRow({
 
 /** @type {ReadonlyArray<Readonly<CouplingRegistryRow>>} */
 export const GR4_BREACH_CREDIBILITY_COUPLINGS = Object.freeze([GR4C_BREACH_CREDIBILITY_COUPLING]);
+
+/**
+ * ── GR-6's TWO ROWS: ONE BROKER, READ FROM BOTH SIDES OF THE WAR LINE ────────────────────
+ *
+ * GR-6 / WAR→GRAMMAR. THE ORDER THE BROKER STANDS AGAINST. `mediationPressure.js` reads the war
+ * layer's deposited march order (`warIntent.js :: warIntentFor`, and the window its TTL declares)
+ * to find the pair a cross-pressured neighbour stands between, and to tell an order that lapsed
+ * unopened as the war that did not happen.
+ *
+ * THE COUNTERFORCE is in the same module: the pressure is a bounded multiplier on one soft
+ * comparison, so the order it reads can still open whenever its court is strong enough.
+ */
+export const GR6_INTENT_BROKER_COUPLING = couplingRow({
+  couplingId: 'CPL-5.WAR_TO_GRAMMAR.GR-6.intent_broker',
+  pairId: 'CPL-5',
+  direction: 'WAR→GRAMMAR',
+  read: 'src/domain/worldPulse/mediationPressure.js#brokeredWarsThatDidNotHappen',
+  receiptField: 'spatialLedgers.warIntents[].{targetId,tick}',
+  counterforce: 'src/domain/worldPulse/mediationPressure.js#mediationPressureFor',
+  flags: Object.freeze(['mediationGeneralizedEnabled', 'peaceEngineEnabled', 'warLayerEnabled']),
+  owningVolume: 'GRAMMAR',
+  owningWave: 'GR-6',
+  intendedDesk: 'diplomacy',
+});
+
+/**
+ * GR-6 / GRAMMAR→WAR. THE PRESSURE AT THE SOFT GATE. The one war opener
+ * (`warDeployment.js :: evaluateWarLayer`, step 4) reads the broker's multiplier and, below one,
+ * lifts the order's CONQUEST_MARGIN waiver and reads that gate at the scaled strength.
+ *
+ * THE COUNTERFORCE is the rest of the same step: every hard gate — posture, the hostile
+ * confidence floor, the one-army and occupation constraints, the feasibility verdict — runs for
+ * a pressured order exactly as for any other, so mediation never forces a peace.
+ */
+export const GR6_SOFT_GATE_COUPLING = couplingRow({
+  couplingId: 'CPL-5.GRAMMAR_TO_WAR.GR-6.soft_gate',
+  pairId: 'CPL-5',
+  direction: 'GRAMMAR→WAR',
+  read: 'src/domain/worldPulse/warDeployment.js#evaluateWarLayer',
+  receiptField: 'spatialLedgers.warIntents[].{targetId,tick}',
+  counterforce: 'src/domain/worldPulse/warDeployment.js#evaluateWarLayer',
+  flags: Object.freeze(['mediationGeneralizedEnabled', 'peaceEngineEnabled', 'warLayerEnabled']),
+  owningVolume: 'GRAMMAR',
+  owningWave: 'GR-6',
+  intendedDesk: 'diplomacy',
+});
+
+/** @type {ReadonlyArray<Readonly<CouplingRegistryRow>>} */
+export const GR6_MEDIATION_COUPLINGS = Object.freeze([GR6_INTENT_BROKER_COUPLING, GR6_SOFT_GATE_COUPLING]);

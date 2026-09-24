@@ -179,6 +179,8 @@ const LEGACY_UNVOICED_TOKENS = 274;
 // routed on its own EXACT_SECTION row, so 381 → 383; +1 at FP TR-3: `market_wrong_market_arrival`,
 // the MARKET family's desk-bearing exact row, 383 → 384 — moved IN THE ROSTER beside
 // REGISTERED_KIND_COUNT below. The union at the FP integration pick, 2026-09-24.)
+// routed on its own EXACT_SECTION row, so 381 → 383.) (+1 at GR-6, in the roster: brokered_back,
+// routed on its own EXACT_SECTION row, so 383 → 384.)
 const ROUTED_TOKENS = KIND_REGISTRATION_FREEZES.routedTokens;
 // +1 at IN-0C: the eighth GR-0 lifecycle pool (`treaty_disclosure_opened`).
 // +1 at GR-4b: the ninth (`disavowed_by_succession`), the registry's first `major` row.
@@ -221,7 +223,13 @@ const ROUTED_TOKENS = KIND_REGISTRATION_FREEZES.routedTokens;
 // the lure's DM-truth spring. It carries the infowar siblings' desk (`war`), so ROUTED_TOKENS moves
 // with it (383 → 384, in the roster) and the divergence below stays at 8; the unvoiced ceiling holds.
 // The UNION at the FP integration pick (the chair, 2026-09-24): 115 + 2 (GR-2b) + 1 (TR-3) + 1 (IN-2).
-const REGISTERED_KIND_COUNT = 119;
+// +1 at FP GR-6 (brokered_back) — the UNION at the pick: 115 + 2 + 1 + 1 + 1.
+const REGISTERED_KIND_COUNT = 120;
+// +1 at GR-6: GR-6 registers brokered_back (the war that did not happen), the GRAMMAR family's
+// fifteenth row and the mediation leaf's one news kind (SR-8). It carries the treaty cohort's
+// desk, so ROUTED_TOKENS moves with it (383 → 384, in the roster) and the divergence below stays
+// at 8; the unvoiced ceiling holds at 274 because the token is REGISTERED in the commit that
+// routes it.
 
 const violations = floorViolations(ALL_ROWS, { declaredExceptions: DECLARED_EXCEPTIONS });
 const unvoiced = Object.keys(EXACT_SECTION).filter((token) => !REGISTERED_KINDS.has(token));

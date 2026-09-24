@@ -129,6 +129,10 @@ import {
   coalitionDecisionEvidence,
   readCoalitionJoinDecisions,
 } from './warCoalitionDecision.js';
+// GR-6 — THE BROKER BEFORE THE BLOOD. A bounded multiplier (below one only when the layer is lit,
+// an order names the target and a cross-pressured neighbour stands between the pair) that lifts
+// the order's CONQUEST_MARGIN waiver and scales the soft comparison. ×1 ⇒ step 4 runs verbatim.
+import { mediationPressureFor } from './mediationPressure.js';
 import {
   joinAnchorOf,
   warCoalitionActive,
@@ -1081,7 +1085,7 @@ export function evaluateWarLayer({ snapshot, worldState, rng, tick = 0, now = nu
       // target for which the CONQUEST_MARGIN pre-filter is waived below: that filter
       // stands in for a deliberation the seat has now actually performed. Every HARD
       // gate — occupation, already-besieging, and classifyFeasibility — still applies.
-      const ordered = intentNamesTarget(marchOrder, targetId);
+      const ordered = intentNamesTarget(marchOrder, targetId), mediation = mediationPressureFor(worldState, snapshot, graph, fromId, targetId, marchOrder);
       // worldpulse-war-9: under occupation, the ONLY permissible target is the occupier
       // (the uprising). Any third-party siege is blocked while garrisoned.
       if (occupierOfFrom && String(targetId) !== occupierOfFrom) continue;
@@ -1097,7 +1101,7 @@ export function evaluateWarLayer({ snapshot, worldState, rng, tick = 0, now = nu
       const casusRead = peaceCausalActive(/** @type {{ simulationRules?: Record<string, unknown> }} */ (/** @type {unknown} */ (worldState))) ? openerCasusFor(String(fromId), String(targetId)) : null;
       const casusEntry = casusRead?.entry || null;
       const casusMult = casusEntry ? 1 + REASON_TUNING.WAR_FACTOR_W * aggregateReasons01(casusEntry) : 1;
-      if ((!ordered || casusRead?.opportunismCounterforced) && fromStrength * casusMult <= strengthFor(targetId) + CONQUEST_MARGIN) continue; // a counterforced stale case restores the prefilter even for an old order
+      if ((!ordered || casusRead?.opportunismCounterforced || mediation < 1) && fromStrength * casusMult * mediation <= strengthFor(targetId) + CONQUEST_MARGIN) continue; // a counterforced stale case, or a broker's pressure (GR-6), restores the prefilter even for an old order
       const defenderCap = capacityFor(targetId);
       const { verdict } = classifyFeasibility({
         attackerCurrent: fromCap.offensive,

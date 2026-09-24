@@ -8,7 +8,7 @@
   "The reviewable slice is computed by RULE (reviewableDark), never hand-listed."
  ],
  "schema": 1,
- "frozenAtSha": "5123689dff88b48a9948ba4160736aa87ba2d3c3",
+ "frozenAtSha": "4bc3ef9e96f323adb9eff6a7fd6357721fb41840",
  "charter": "§18.1 WRWALKER Car 1 (HORIZON) — chair-signed vetoably at the INSTR-WRW pre-stage",
  "minRows": 40,
  "corpusMeta": {
@@ -23,8 +23,8 @@
   "transitionCount": 14496
  },
  "shapesDigest": "aeb73dc28d89b6db7a220d9affee6b8bfa99ede4e1b0e9d347d084e24a8b595b",
- "detectorDigest": "a416334292debcf0c2606030cb38f4765ab54c5bccde7f50ccb25401fdc90128",
- "verdictDigest": "6c84a6f0a6524f148184528f22183b94200b8da8166247afa119ff22a23c4519",
+ "detectorDigest": "da2f69e837d1b5eddaacce72bd115e87404d42c55ec161b316bedc9e2b367ccc",
+ "verdictDigest": "1ca85fcb7348325226c294c232afc96ab5325cac869b5ac79ba9b27fcecd50d4",
  "surfaceRoots": {
   "web": [
    "src/main.jsx"
@@ -72,38 +72,38 @@
   "json-export"
  ],
  "closureSizes": {
-  "web-display": 725,
-  "web-transitive": 907,
-  "dossier-pdf": 418,
+  "web-display": 732,
+  "web-transitive": 922,
+  "dossier-pdf": 421,
   "campaign-pdf": 75,
   "world-book": 92,
-  "foundry": 328,
+  "foundry": 331,
   "json-export": 8,
   "news": 29
  },
  "population": {
   "judged": 6537,
-  "lit": 572,
-  "litName": 4671,
-  "dark": 1294,
+  "lit": 575,
+  "litName": 4676,
+  "dark": 1286,
   "thinKeys": 9144,
   "thinShapes": 962,
   "knownShapes": 337
  },
  "scanStats": {
-  "files": 1633,
-  "sites": 38877,
-  "propRead": 36809,
+  "files": 1655,
+  "sites": 39230,
+  "propRead": 37137,
   "elemRead": 0,
-  "destructure": 2054,
-  "inOp": 14,
-  "rGrades": 5981,
-  "nGrades": 886152,
-  "resolvedReceivers": 6747
+  "destructure": 2078,
+  "inOp": 15,
+  "rGrades": 6012,
+  "nGrades": 894269,
+  "resolvedReceivers": 6780
  },
  "registerDigest": "14a3b59541fe2288628da0a815192e34c8138d55f73e98ffefae63e902076501",
  "pendingSurfaceCeiling": 3,
- "reviewableDarkCount": 495,
+ "reviewableDarkCount": 487,
  "darkUnregistered": [
   {
    "identity": "Bulk grain and flour on reasons",
@@ -1526,30 +1526,6 @@
    "key": "depletedSince",
    "shape": "resourceDynamics",
    "rows": 800
-  },
-  {
-   "identity": "deployTargetId on autoApplied",
-   "key": "deployTargetId",
-   "shape": "autoApplied",
-   "rows": 757
-  },
-  {
-   "identity": "deployTargetId on majors",
-   "key": "deployTargetId",
-   "shape": "majors",
-   "rows": 49
-  },
-  {
-   "identity": "deployTargetId on metadata",
-   "key": "deployTargetId",
-   "shape": "metadata",
-   "rows": 9384
-  },
-  {
-   "identity": "deployTargetId on selected",
-   "key": "deployTargetId",
-   "shape": "selected",
-   "rows": 506
   },
   {
    "identity": "deployedQuality on osr000",
@@ -6910,30 +6886,6 @@
    "rows": 400
   },
   {
-   "identity": "strategyMove on autoApplied",
-   "key": "strategyMove",
-   "shape": "autoApplied",
-   "rows": 757
-  },
-  {
-   "identity": "strategyMove on majors",
-   "key": "strategyMove",
-   "shape": "majors",
-   "rows": 49
-  },
-  {
-   "identity": "strategyMove on metadata",
-   "key": "strategyMove",
-   "shape": "metadata",
-   "rows": 9384
-  },
-  {
-   "identity": "strategyMove on selected",
-   "key": "strategyMove",
-   "shape": "selected",
-   "rows": 506
-  },
-  {
    "identity": "streak on economyDrift",
    "key": "streak",
    "shape": "economyDrift",
@@ -7934,7 +7886,7 @@
   "createdAt on autoApplied": "campaign-pdf=N dossier-pdf=N foundry=N news=N web-display=N web-transitive=N world-book=N",
   "decayRate on autoApplied": "dossier-pdf=N web-transitive=N",
   "delta on autoApplied": "dossier-pdf=N foundry=N web-display=N web-transitive=N",
-  "deployTargetId on autoApplied": "web-transitive=N",
+  "deployTargetId on autoApplied": "dossier-pdf=N foundry=N web-transitive=N",
   "dotRank on autoApplied": "campaign-pdf=N dossier-pdf=N foundry=N web-transitive=N world-book=N",
   "durationPolicy on autoApplied": "dossier-pdf=N web-display=N web-transitive=N",
   "economicRole on autoApplied": "web-display=N",
@@ -8014,7 +7966,7 @@
   "spreadChannels on autoApplied": "dossier-pdf=N web-transitive=N",
   "state on autoApplied": "dossier-pdf=N foundry=N news=N web-display=N web-transitive=N",
   "status on autoApplied": "campaign-pdf=N dossier-pdf=N foundry=N json-export=N news=N web-display=N web-transitive=N world-book=N",
-  "strategyMove on autoApplied": "web-transitive=N",
+  "strategyMove on autoApplied": "dossier-pdf=N foundry=N web-transitive=N",
   "stressor on autoApplied": "dossier-pdf=N foundry=N news=N web-display=N web-transitive=N",
   "summary on autoApplied": "campaign-pdf=N dossier-pdf=N foundry=N json-export=N news=N web-display=N web-transitive=N world-book=N",
   "synergy on autoApplied": "dossier-pdf=N web-display=N web-transitive=N",
@@ -9051,7 +9003,7 @@
   "condition on majors": "campaign-pdf=N dossier-pdf=N foundry=N web-display=N web-transitive=N world-book=N",
   "conflictResolution on majors": "web-display=N web-transitive=N",
   "conflictTags on majors": "dossier-pdf=N foundry=N web-transitive=N",
-  "deployTargetId on majors": "web-transitive=N",
+  "deployTargetId on majors": "dossier-pdf=N foundry=N web-transitive=N",
   "exclusiveTags on majors": "",
   "exhaustion on majors": "dossier-pdf=N foundry=N web-display=N web-transitive=N",
   "factionId on majors": "dossier-pdf=N foundry=N news=N web-display=N web-transitive=N",
@@ -9080,7 +9032,7 @@
   "settlementId on majors": "campaign-pdf=N dossier-pdf=N foundry=N news=N web-display=N web-transitive=N world-book=N",
   "severity on majors": "campaign-pdf=N dossier-pdf=N foundry=N news=N web-display=N web-transitive=N world-book=N",
   "sourceEventTargetId on majors": "campaign-pdf=N dossier-pdf=N foundry=N web-transitive=N world-book=N",
-  "strategyMove on majors": "web-transitive=N",
+  "strategyMove on majors": "dossier-pdf=N foundry=N web-transitive=N",
   "summary on majors": "campaign-pdf=N dossier-pdf=N foundry=N json-export=N news=N web-display=N web-transitive=N world-book=N",
   "targetSaveId on majors": "campaign-pdf=N dossier-pdf=N foundry=N json-export=N web-display=N web-transitive=N world-book=N",
   "type on majors": "campaign-pdf=N dossier-pdf=N foundry=N json-export=N news=N web-display=N web-transitive=N world-book=N",
@@ -9196,7 +9148,7 @@
   "confidentSaveId on metadata": "",
   "contribution on metadata": "web-transitive=N",
   "decidingTerm on metadata": "dossier-pdf=N foundry=N web-transitive=N",
-  "deployTargetId on metadata": "web-transitive=R",
+  "deployTargetId on metadata": "dossier-pdf=R foundry=R web-transitive=R",
   "dotRank on metadata": "campaign-pdf=N dossier-pdf=N foundry=N web-transitive=N world-book=N",
   "durationPolicy on metadata": "dossier-pdf=N web-display=N web-transitive=N",
   "economicRole on metadata": "web-display=N",
@@ -9250,7 +9202,7 @@
   "sourceNote on metadata": "",
   "sourceNotes on metadata": "",
   "spreadChannels on metadata": "dossier-pdf=N web-transitive=N",
-  "strategyMove on metadata": "web-transitive=R",
+  "strategyMove on metadata": "dossier-pdf=R foundry=R web-transitive=R",
   "streak on metadata": "web-transitive=N",
   "support on metadata": "web-transitive=N",
   "targetId on metadata": "campaign-pdf=N dossier-pdf=N foundry=N news=N web-display=N web-transitive=N world-book=N",
@@ -13356,7 +13308,7 @@
   "rivalPatch on outcome": "dossier-pdf=R foundry=R web-transitive=R",
   "rivalryTargets on outcome": "dossier-pdf=N foundry=N web-transitive=N",
   "roll on outcome": "dossier-pdf=N foundry=N web-display=N web-transitive=N",
-  "ruleFamily on outcome": "dossier-pdf=N foundry=N web-display=N web-transitive=R",
+  "ruleFamily on outcome": "dossier-pdf=R foundry=R web-display=N web-transitive=R",
   "ruleId on outcome": "dossier-pdf=N foundry=N web-transitive=N",
   "severity on outcome": "campaign-pdf=N dossier-pdf=R foundry=R news=N web-display=N web-transitive=R world-book=N",
   "short on outcome": "campaign-pdf=N dossier-pdf=N foundry=N web-display=N web-transitive=N world-book=N",
@@ -13901,7 +13853,7 @@
   "createdAt on selected": "campaign-pdf=N dossier-pdf=N foundry=N news=N web-display=N web-transitive=N world-book=N",
   "decayRate on selected": "dossier-pdf=N web-transitive=N",
   "delta on selected": "dossier-pdf=N foundry=N web-display=N web-transitive=N",
-  "deployTargetId on selected": "web-transitive=N",
+  "deployTargetId on selected": "dossier-pdf=N foundry=N web-transitive=N",
   "dotRank on selected": "campaign-pdf=N dossier-pdf=N foundry=N web-transitive=N world-book=N",
   "durationPolicy on selected": "dossier-pdf=N web-display=N web-transitive=N",
   "economicRole on selected": "web-display=N",
@@ -13991,7 +13943,7 @@
   "spreadChannels on selected": "dossier-pdf=N web-transitive=N",
   "state on selected": "dossier-pdf=N foundry=N news=N web-display=N web-transitive=N",
   "status on selected": "campaign-pdf=N dossier-pdf=N foundry=N json-export=N news=N web-display=N web-transitive=N world-book=N",
-  "strategyMove on selected": "web-transitive=N",
+  "strategyMove on selected": "dossier-pdf=N foundry=N web-transitive=N",
   "stressor on selected": "dossier-pdf=N foundry=N news=N web-display=N web-transitive=N",
   "summary on selected": "campaign-pdf=N dossier-pdf=N foundry=N json-export=N news=N web-display=N web-transitive=N world-book=N",
   "synergy on selected": "dossier-pdf=N web-display=N web-transitive=N",

@@ -216,6 +216,12 @@ const EXPECTED_VOICE = {
   // it shares the cohort's trade DESK (the desk FILES, the crier VOICES). Deliberately
   // unvoiced (JUDGMENT, vetoable — the succession_question_opened precedent exactly).
   reaffirmed: null,
+  // GR-6 — the war that did not happen (`brokered_back`), a mediation ending from the same
+  // authored treaty cohort: an AUTHORED headline over a pact-grammar summary naming the broker.
+  // It shares the cohort's trade DESK and must not borrow the trade crier for it (the desk FILES,
+  // the crier VOICES); no crier register fits a march that never set out. Deliberately unvoiced
+  // (JUDGMENT, vetoable — the reaffirmed precedent exactly).
+  brokered_back: null,
   // W-COIN-2's two state-treasury beats. Both file at the trade DESK, and both are
   // deliberately unvoiced for the reason this manifest keeps insisting on: the desk FILES a
   // beat and the crier VOICES one. The trade crier's register is the market — goods, prices,

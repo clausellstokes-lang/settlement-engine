@@ -1389,6 +1389,20 @@
       "band": null,
       "note": ""
     },
+    "src/domain/worldPulse/mediationPressure.js#MEDIATION_TUNING": {
+      "role": null,
+      "status": "draft",
+      "signedAt": null,
+      "unit": {
+        "intentPressureW": "share",
+        "fraySoften": "share",
+        "fraySoftenSlipped": "share",
+        "beatSeverity": "fraction01",
+        "beatScore": "score100"
+      },
+      "band": null,
+      "note": "FP GR-6 (lane FP-B2): mediation generalized. intentPressureW is the share of a would-be besieger's strength a cross-pressured broker's pressure takes off the war opener's soft comparison (the multiplier is one minus it); fraySoften and fraySoftenSlipped are the share of one tick's strain burden a broker takes off a fraying pact, for a clean record and for a record already strained before the tick; beatSeverity and beatScore are the GR-0 lifecycle voice's presentation weight for a beat above routine, re-read for the brokered_back receipt. DRAFT, registered by the wave's builder seat in the minting commit; nothing here is signed or proposed."
+    },
     "src/domain/worldPulse/mercenaryMarket.js#MERCENARY_MARKET_TUNING": {
       "role": null,
       "status": "draft",

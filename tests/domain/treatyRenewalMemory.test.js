@@ -395,11 +395,17 @@ describe('GR-5A — the monotone memory (treatyRenewalEnabled)', () => {
     // …and the FOLD has exactly one production consumer, which is the second live control:
     // this wave's own import edge is visible to the very scan that reports the reader unused.
     expect(consumersOf('worstObservedEverAfter')).toEqual(['src/domain/worldPulse/peaceTerms.js']);
+    // ⭐ THE TRIPWIRE FIRED AT GR-6 (2026-09-24), AS DESIGNED: the grammar volume names TWO
+    // by-name readers of this memory — GR-5d's conversion gate and GR-6's fraying occasion — and
+    // GR-6 landed first. Its reachability obligation moved into that wave's own acceptance file
+    // (tests/domain/mediationGeneralizedGr6.test.js, "the fraying read honours worstObservedEver"),
+    // so the pin is re-aimed at the consumer set rather than retired: GR-5d's gate is the next
+    // import this list must name, in that wave's commit.
     expect(
       consumersOf('worstObservedEverOf'),
-      'worstObservedEverOf has gained a src/ consumer. That is GR-5d landing: the conversion '
-      + 'gate is reading the memory BY NAME, so this tripwire has done its job — move the '
-      + 'reachability obligation into that wave and retire this pin.',
-    ).toEqual([]);
+      'worstObservedEverOf has gained a src/ consumer beyond GR-6\'s fraying occasion. If that is '
+      + 'GR-5d landing, the conversion gate is reading the memory BY NAME: add it here, with its own '
+      + 'reachability arm in that wave.',
+    ).toEqual(['src/domain/worldPulse/mediationPressure.js']);
   });
 });

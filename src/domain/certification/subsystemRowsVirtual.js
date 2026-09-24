@@ -696,6 +696,43 @@ export const VIRTUAL_SUBSYSTEM_ROWS = Object.freeze([
     // No channel at all, so the row can never be ALIVE and says so honestly.
     soakEvidence: 'unobserved',
   }),
+  // ── GR-6 · MEDIATION GENERALIZED (FP GR-6, docs/DESIGN_FP_GRAMMAR.md §GR-6; block #14) ─────
+  // APPENDED AT THE TAIL, the add-a-row protocol above: the compact-grammar block that holds the
+  // other GR rows forbids an append in its own header, and an append here shifts no index.
+  Object.freeze({
+    rule: 'mediationGeneralizedEnabled',
+    title: 'Mediation generalized (the broker before the blood)',
+    module: 'src/domain/worldPulse/mediationPressure.js',
+    aliveness: Object.freeze({
+      // DELIBERATELY EMPTY: the layer mints no pulse candidate. Its one receipt is a news entry
+      // the treaty stage returns, and no behavioural family carries it.
+      eventTypes: Object.freeze([]),
+      // DELIBERATELY EMPTY: a mediation leaves no mover of its own, and the war layer's and the
+      // treaty layer's ordinary traffic would grade this row alive in worlds where it never ran.
+      moverFamilies: Object.freeze([]),
+      // DELIBERATELY EMPTY, and structural: the layer owns NO state key. It reads the war-intent
+      // and treaty ledgers and writes only trust, through the overlay's own writer.
+      stateKeys: Object.freeze([]),
+      other: 'A PRESSURE WITH NO STATE OF ITS OWN, WHICH IS WHY EVERY CHANNEL IS EMPTY AND WHY THAT IS THE CORRECT READING. ONE GATE, by name and strict: mediationGeneralizedActive (mediationPressure.js) is the only read of the key in src/, a conjunction with the peace engine\'s two keys because every occasion speaks through the treaty stage. WHAT IT DOES: the one cross-pressured finder (peaceTermsGraph.findCrossPressuredMediator), which named a broker only at a war\'s exit, gains two occasions. At the intent stage a broker standing between a pair whose seat left a march order hands the one war opener a bounded multiplier below one, which lifts the order\'s CONQUEST_MARGIN waiver and scales that soft comparison; every hard gate still runs and a strong enough court still marches. An order that reaches the end of its window still standing, with a broker between the pair, is told as the war that did not happen (the brokered_back receipt, naming the broker) and the broker earns the two-edge trust the war-exit broker does (accrueMediationTrust, reused). At a fraying pact a broker between the parties softens the strain accrual one banded notch, a smaller notch for a record already strained. WHAT IT NEVER DOES: it forces nothing, draws nothing, mints no ledger, and names no temple (the temple arm waits on a ruling). THE OBSERVATION NEEDED to close the gap is the mediation mix GR-7 owes: brokered_back beats counted per soak year against the war-intent orders that lapsed, and the decree-caused ones counted apart. Until then the lane is pinned in tests/domain/mediationGeneralizedGr6.test.js, which carries its four dormancy fences and the lit-mutant control.',
+    }),
+    // The pressure reads a live order and the receipt waits on a closing window, so the layer's
+    // output is sparse and driven entirely by its world.
+    expectedTempo: 'reactive',
+    invariants: Object.freeze([
+      Object.freeze({
+        name: 'dark_is_byte_identical',
+        description: 'With the key absent, false, or any truthy non-true value, the opener opens exactly the war it opens without the layer, and the treaty stage returns its input result by reference, over a fixture that holds a war back and mints a receipt the moment the key is lit.',
+        check: 'Expressible from state and asserted that way in tests/domain/mediationGeneralizedGr6.test.js fences 1 and 2, with the lit-mutant control on the same fixture.',
+      }),
+      Object.freeze({
+        name: 'mediation_never_forces',
+        description: 'A pair with a broker and no standing order is untouched, and a pressured order whose court is strong enough still opens its war: the multiplier scales one soft comparison and blocks nothing.',
+        check: 'Expressible from state and asserted that way in tests/domain/mediationGeneralizedGr6.test.js on two fixtures, one held back and one that still marches.',
+      }),
+    ]),
+    // No channel at all, so the row can never be ALIVE and says so honestly.
+    soakEvidence: 'unobserved',
+  }),
 ]);
 
 /**

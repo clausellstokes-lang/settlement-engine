@@ -84,7 +84,7 @@ function grammarKindRow(kind, significance, audience, section, requiredSlots, co
 }
 
 /**
- * The governed rows. `section` is non-null on the eight HERALD kinds only; the clause,
+ * The governed rows. `section` is non-null on the nine HERALD kinds only; the clause,
  * ending, dossier and chip pools are rendered INTO another surface and file nowhere of
  * their own (a section for them would claim a desk they never reach).
  * @type {ReadonlyArray<Readonly<GrammarRegistryEntry>>}
@@ -199,12 +199,24 @@ export const GRAMMAR_KIND_REGISTRY = Object.freeze([
   grammarKindRow('reaffirmed', 'notable', 'public', 'trade', [
     ['npc'], ['settlement'], ['settlement', 'counterpart'], [], [], [], ['npc'],
   ]),
+  // GR-6 — THE WAR THAT DID NOT HAPPEN (`mediationPressure.js`; SR-8: the receipt kind lands its
+  // five joins in the mint commit). A mediation ending beside the treaty cohort, so it takes that
+  // cohort's trade desk. `{settlement}` is the BROKER and `{counterpart}` / `counterpartSecond`
+  // the pair in party order, bound by the producer and never through `grammarSlotRoles`.
+  // HEADLINE HONESTY (the annex's constraint 2) declares two contexts: family 1 promises no war
+  // THIS SPRING, so it is honest only when the calendar's season is spring, and family 3 says both
+  // courts stood their musters down, which this producer never reads, so its context is never
+  // supplied at this wave. Family 2 needs a person (`{npc}`), and no person is cast. Family 4 is
+  // the slotless, context-free sentence every receipt can say.
+  grammarKindRow('brokered_back', 'major', 'public', 'trade', [
+    ['settlement'], ['npc'], ['counterpart', 'counterpartSecond'], [],
+  ], [['spring'], null, ['musters_stood_down'], null]),
 ]);
 
 /** The exact governed pool set. */
 export const GRAMMAR_KINDS = Object.freeze(GRAMMAR_KIND_REGISTRY.map((row) => row.kind));
 
-/** The eight rows that reach the Herald as kinds of their own. */
+/** The nine rows that reach the Herald as kinds of their own. */
 export const GRAMMAR_HERALD_KINDS = Object.freeze(
   GRAMMAR_KIND_REGISTRY.filter((row) => row.section !== null).map((row) => row.kind),
 );

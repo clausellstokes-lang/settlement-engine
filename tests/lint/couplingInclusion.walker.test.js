@@ -302,6 +302,11 @@ const LAYER_PATTERNS = Object.freeze({
     // posture and errand mint, INFORMATION's credibility — are exactly the couplings this
     // ratchet exists to make visible, and burying them in an argument would hide them.
     /^src\/domain\/worldPulse\/pact[A-Z]/,
+    // FP GR-6 (lane FP-B2, 2026-09-24): the mediation leaf. The broker before the blood is a
+    // GRAMMAR subject (the pact grammar's one cross-pressured finder, given new occasions), so
+    // its read of the war layer's march order and the opener's read of its pressure are the two
+    // CPL-5 rows couplingRegistryGrammar.js mints in the same commit.
+    /^src\/domain\/worldPulse\/mediation[A-Z]/,
   ],
   INTERIOR: [
     /^src\/domain\/worldPulse\/(?:faction|legitimacy|relationship|institution|commons|disposition|generosity|grievance|rulingPower|npcLadder|seatBooks)/,

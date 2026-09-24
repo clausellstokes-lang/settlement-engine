@@ -326,6 +326,14 @@ export const ENGINE_GATED_VIRTUAL_RULE_KEYS = Object.freeze([
   // and the mirror are LIGHTING-ORDER preconditions the LIT-n unit judges, never doors here.
   'infoLureEnabled',
   'infoStatecraftEnabled',
+  // Joined 2026-09-24 by FP wave GR-6 (lane FP-B2) under CR-WR10-C item 4 (the compiled
+  // charter's §3 flag law), in the SAME commit as its first real gate read —
+  // `mediationPressure.mediationGeneralizedActive`, the ONE `=== true` by-name read of this key
+  // in the tree — and its AUTHORED certification row at the tail of VIRTUAL_SUBSYSTEM_ROWS.
+  // ⚠ A CONJUNCTION with the peace engine's two keys, deliberately: every occasion speaks
+  // through the treaty stage, which is dark without them, so the pressure at the war opener's
+  // soft gate never lights where its receipt cannot.
+  'mediationGeneralizedEnabled',
   // Joined 2026-09-23 by FP wave TR-2 (lane FP-D) under CR-WR10-C item 4 (the compiled
   // charter's §3 flag law), in the SAME commit as its first real gate read —
   // `houseLedger.merchantHousesActive`, the ONE `=== true` by-name read of this key in the

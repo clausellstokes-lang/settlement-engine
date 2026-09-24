@@ -240,6 +240,9 @@ describe('the covering array and its constraint manifest', () => {
     // 36 -> 37 at FP IN-2 (lane FP-I, 2026-09-24; SR-1): IN-2 adds `infoLureEnabled`, MEASURED by
     // calling `flagDomainCensus` with this suite's own arguments before the literals moved:
     // virtual 37, union 94, governed 25 and ungoverned 32 unmoved, nonBoolean 13, overlap empty.
+    // 36 -> 37 at FP GR-6 (lane FP-B2, 2026-09-24): `mediationGeneralizedEnabled`, MEASURED by
+    // calling `flagDomainCensus` with this suite's own arguments before the literals moved: virtual
+    // 37, union 94, governed 25 and ungoverned 32 unmoved, nonBoolean 13, overlap empty.
     // LIT-0 (2026-09-24): this arm closes IDENTICALLY with a register key lit in a preset, because a
     // lit key is enumerated once, by the register, and never again by `ungoverned`; the lit-state
     // proof is the next arm, which drives the census over a lit copy of the live table.
@@ -250,7 +253,8 @@ describe('the covering array and its constraint manifest', () => {
     // FP integration pick (the chair, 2026-09-24): the figure below is the tip's own census.
     // 37 → 38 at the FP integration pick (the chair, 2026-09-24): TR-3 and IN-2 each measured 37 on a 36-key
     // tree; the tip carries both mints (SR-1, the union; re-measured by this run).
-    expect(census.virtual.length).toBe(38);
+    // 38 → 39 at the FP integration pick: GR-6's virtual mint, the third tonight (SR-1, the union; re-measured by this run).
+    expect(census.virtual.length).toBe(39);
     expect(census.overlap).toEqual([]);
     // 85 -> 86 at the WAR landing (§876): the same coupled-union key, same re-measure.
     // 86 -> 87 at ENC-3 (§893): the virtual mint above, moving in lockstep.
@@ -260,7 +264,9 @@ describe('the covering array and its constraint manifest', () => {
     // 93 -> 94 at FP TR-3: the virtual mint above, moving in lockstep.
     // 93 -> 94 at FP IN-2: the virtual mint above, moving in lockstep.
     // 94 → 95 at the FP integration pick: both virtual mints, in lockstep.
-    expect(census.union.length).toBe(95);
+    // 95 → 96 at the FP integration pick: GR-6's mint, in lockstep.
+    expect(census.union.length).toBe(96);
+    // 93 -> 94 at FP GR-6: the virtual mint above, moving in lockstep.
     expect(census.governed.length + census.ungoverned.length + census.virtual.length).toBe(census.union.length);
     // 57 of 82 sit outside the normalizer's fail-closed coercion — the measured content of
     // "the normalizer is NOT the oracle", and the reason the manifest had to be minted. It
@@ -273,7 +279,9 @@ describe('the covering array and its constraint manifest', () => {
     // 68 -> 69 at FP TR-3: likewise virtual, so it lands outside the normalizer.
     // 68 -> 69 at FP IN-2: likewise virtual, so it lands outside the normalizer.
     // 69 → 70 at the FP integration pick: both virtual keys, outside the normalizer.
-    expect(census.union.length - census.governed.length).toBe(70);
+    // 70 → 71 at the FP integration pick: GR-6's key, outside the normalizer.
+    expect(census.union.length - census.governed.length).toBe(71);
+    // 68 -> 69 at FP GR-6: likewise virtual, so it lands outside the normalizer.
     expect(census.nonBoolean.length).toBe(13);
   });
 

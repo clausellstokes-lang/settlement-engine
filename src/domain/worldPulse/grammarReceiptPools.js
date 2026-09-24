@@ -10,10 +10,10 @@
  * WHY A SEPARATE FILE FROM warReceiptPools.js / sovereigntyReceiptPools.js. The same
  * measured reason WW-C recorded: a wave-scoped corpus gets a wave-scoped file, so a later
  * content batch never lands its neighbours in a decomposition they did not cause. This one
- * carries the fourteen governed pools wired through GR-2b.
+ * carries the fifteen governed pools wired through GR-6.
  *
  * ANNEX-VERBATIM. Every line below is byte-identical to its authored variant in the
- * governed GR-0, GR-2 and GR-4 blocks of docs/content/RECEIPT_POOLS_GRAMMAR.md, with only the
+ * governed GR-0, GR-2, GR-4 and GR-6 blocks of docs/content/RECEIPT_POOLS_GRAMMAR.md, with only the
  * `{slot}` tokens turned into interpolations and editorial `[exemplar, …]` tags stripped.
  * The pools were EXTRACTED from the annex mechanically rather than transcribed, and
  * tests/lint/grammarLifecycleKindPools.walker.test.js re-derives them from the document on
@@ -212,5 +212,16 @@ export const GRAMMAR_RECEIPTS = Object.freeze({
     'It died of short wagons, and the ledger says so.',
     (x) => `What arrived under the ${x.term} had been shrinking for seasons, and ${x.settlement} has finally weighed a year against a year.`,
     (x) => `No herald in ${x.counterpart} announced a breach; the granaries in ${x.settlement} announced it.`,
+  ],
+  // GR-6 — THE WAR THAT DID NOT HAPPEN, the `# GR-6` block authored with the grammar corpus on
+  // 2026-08-02 and wired for the first time here, as authored. `{settlement}` is the BROKER and
+  // the two `{counterpart}` fills are the pair in the receipt's party order (the annex's slot
+  // convention: repeated slots bind in order), so family 3's second fill is carried as
+  // `counterpartSecond` — the one slot token turned into the second party's interpolation.
+  brokered_back: [
+    (x) => `${x.settlement} stood between them before the first march; there will be no war this spring.`,
+    (x) => `The muster went cold, and ${x.npc}'s name is written into the reason for it.`,
+    (x) => `${x.counterpart} and ${x.counterpartSecond} stood their musters down in the same week, and the carters got their roads back.`,
+    'The war that did not happen has a name attached to it, which is rare enough to record.',
   ],
 });

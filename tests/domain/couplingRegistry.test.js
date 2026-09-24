@@ -56,6 +56,9 @@ import {
   GR3_TERM_FAMILY_COUPLINGS,
   GR4C_BREACH_CREDIBILITY_COUPLING,
   GR4_BREACH_CREDIBILITY_COUPLINGS,
+  GR6_INTENT_BROKER_COUPLING,
+  GR6_MEDIATION_COUPLINGS,
+  GR6_SOFT_GATE_COUPLING,
   ES1_COVERT_MISSION_MINT_COUPLING,
   ES1_HIDDEN_FRANCHISE_COUPLING,
   ES1_MISSION_VOCABULARY_COUPLING,
@@ -209,6 +212,9 @@ describe('CW-0 coupling registry', () => {
       // seat belongs to WR4_INSTITUTION_HOME_FRONT_COUPLING, re-proved further down, so this
       // append moves nothing a single-row caller resolves.
       ...WSEAT_D10_IRREGULAR_FORCE_COUPLINGS,
+      // FP GR-6 (2026-09-24): the two mediation rows, appended last on the same tiebreak
+      // argument — CPL-5's first-row seat in each direction belongs to a row composed far above.
+      ...GR6_MEDIATION_COUPLINGS,
     ]);
     // The W-SEAT D10 row spelled out, on the WR-3 precedent above: a composition assertion
     // proves ORDER, never CONTENT, and this is the estate's first `irregularForceEnabled`
@@ -668,6 +674,9 @@ describe('CW-0 coupling registry', () => {
         // row on this pair whose owning volume is GRAMMAR rather than WAR. The legacy
         // first-row tiebreak is unaffected, and the line below re-asserts it.
         GR2_SHARED_THREAT_COUPLING,
+        // GR-6 (2026-09-24): the mediation leaf reading the war's march order joins this
+        // bucket LAST, because the registry composes it last; the first-row seat is unmoved.
+        GR6_INTENT_BROKER_COUPLING,
       ]);
     // GR-3's `mutual_defense` is the THIRD read on this direction and the first owned by
     // GRAMMAR. It is deliberately LAST: registration order is the legacy first-row
@@ -681,6 +690,9 @@ describe('CW-0 coupling registry', () => {
         GR3_MUTUAL_DEFENSE_COUPLING,
         WMEM_TREATY_AT_SEAL_COUPLING,
         WMEM_SEAL_GRACE_WINDOW_COUPLING,
+        // GR-6 (2026-09-24): the war opener reading the broker's pressure joins LAST, on the
+        // same composition order; WR-7's home delivery keeps the first-row seat below.
+        GR6_SOFT_GATE_COUPLING,
       ]);
     expect(couplingRowFor('CPL-5', 'GRAMMAR→WAR')).toBe(WR7_HOME_DELIVERY_COUPLING);
     // GR-3's other two open their pairs: nobody had read across CPL-14 or CPL-17 before.
