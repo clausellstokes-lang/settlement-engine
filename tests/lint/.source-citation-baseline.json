@@ -19,12 +19,13 @@
     "_rosterMove2026-09-20": "ONE document changed class, deliberately, and it hid NOTHING: docs/GAME_GRADE_AUDIT.md joined `banner` (7 -> 8; live 483 -> 482, archival 29 -> 30) when FIX-C2b gave it the estate's own HISTORICAL marker. WHY: it is a point-in-time audit whose own blockquote pins `composite-r4 @ 69b7a8d3` / `8033ddbe` plus uncommitted work, it has not been touched since 2026-07-24, and its citations address a town-map surface DELETED at 43c3ac3805 (TE-STRIP-1, 2026-08-29) — the atlas test exactly. THE PROOF THAT IT SILENCES NOTHING: pastEofCitationsExcluded is UNCHANGED at 377 and ARM 2 was already 0 before and after, so the move buys no green. A class move that changed that number would be a silencing and is forbidden by _law.",
     "_rosterGrowth2026-09-20": "ONE document JOINED the roster by being BORN into it, and it hid NOTHING: docs/shift-records/2026-09-20-cure-j-provenance.json joined `tree` (16 -> 17) when CURE-J's provenance-only re-record of the prose manifest golden landed at 0d0598a75. It is a GROWTH, not a class move — no live document left the gated corpus, because the file entered the tree already inside docs/shift-records/ and the ARCHIVAL_TREES rule classified it on its first commit. WHY IT IS ARCHIVAL: a shift record states what moved in ONE named golden at ONE named sha and is never re-addressed to today's tree, which is the frozen-record contract docs/review-r2/ carries — it is the same class as the nine shift records already on this roster. THE PROOF THAT IT SILENCES NOTHING: pastEofCitationsExcluded is UNCHANGED at 377 (the record carries ZERO past-EOF citations of its own, measured file-by-file) and ARM 2 over live docs is 0 on both sides, so the growth buys no green. Re-measured with the shipped detector at the composition: all 515, live 484, archival 31. Recorded by FIX-P1's lane.",
     "_rosterGrowth2026-09-24": "ONE document JOINED the roster by being BORN into it, and it hid NOTHING: docs/shift-records/2026-09-24-fp-lighting-1a.json joined `tree` (17 -> 18) with LIT-1a, the first FP lighting unit (its signed record of the preset-lighting-witness re-record). A GROWTH, not a class move: the file entered the tree inside docs/shift-records/, so the ARCHIVAL_TREES rule classified it on its first commit and no live document left the gated corpus. It is archival for the reason every shift record on this roster is: it states what moved in ONE named golden at ONE named base and is never re-addressed to today's tree. THE PROOF THAT IT SILENCES NOTHING, measured with the shipped detector (partitionDocs and eofFindings of tests/lint/sourceCitationIntegrity.shared.mjs) at the lane's tree: the record carries ZERO past-EOF citations of its own, so pastEofCitationsExcluded stays 377, and ARM 1 and ARM 2 are both 0. Re-measured: live 546, archival 32. Recorded by lane FP-L / LIT-1a.",
+    "_rosterGrowth2026-09-24-cure-p1": "ONE document JOINED the roster by being BORN into it, and it hid NOTHING: docs/shift-records/2026-09-24-fp-witness-prose-cure-p1.json joined `tree` (18 -> 19) with the preset-lighting-witness re-record for CURE-P1 U3's prose cause (87d1b1c00). A GROWTH, not a class move: the file entered the tree inside docs/shift-records/, so the ARCHIVAL_TREES rule classified it on its first commit and no live document left the gated corpus. THE PROOF THAT IT SILENCES NOTHING, measured with the shipped detector (partitionDocs and eofFindings of tests/lint/sourceCitationIntegrity.shared.mjs): the record carries ZERO past-EOF citations of its own, so pastEofCitationsExcluded stays 377, and ARM 1 and ARM 2 are both 0. Recorded by the LIT-1a lane seat for the FP chair.",
     "pastEofCitationsExcluded": 377,
     "byRule": {
       "banner": 8,
       "dated": 5,
       "sha-pin": 1,
-      "tree": 18
+      "tree": 19
     },
     "files": {
       "banner": [
@@ -64,6 +65,7 @@
         "docs/shift-records/2026-09-19-religious-quarter-text.json",
         "docs/shift-records/2026-09-20-cure-j-provenance.json",
         "docs/shift-records/2026-09-24-fp-lighting-1a.json",
+        "docs/shift-records/2026-09-24-fp-witness-prose-cure-p1.json",
         "docs/shift-records/README.md",
         "docs/shift-records/_TEMPLATE.json"
       ]

@@ -2382,3 +2382,42 @@ observed-shape register's frozen `corpusMeta`, reds on three arms (the shapes di
 9,144 -> 9,148, the lit-dial arm). A control with the five keys spelled as quoted property names
 (the same runtime table, discovery back at 81) turns it green, so the move is the discovery's.
 The governed observed-shape migration rung and the writer-reach rebank are the chair's.
+
+## 2026-09-24 — preset-lighting-witness re-recorded: two rows, one field, CURE-P1 U3's prose cause
+
+*The LIT-1a lane seat (Opus 5.5) for the FP chair, on `fp/witness-rerecord-1` at `df7aeaef4`.*
+
+**Surface:** `tests/fixtures/preset-lighting-witness-golden.json` (registered as
+`preset-lighting-witness`). Re-minted through the manifest's own RE-RECORD RECIPE, which re-runs
+`tests/simulation/presetLightingWitnessRun.js`, the single writer of these figures. The frozen
+register row is re-stamped through `tests/helpers/goldenRecordDoor.js` `recordGolden`: sha256
+`17ff68dc…` -> `8ec8981b…`, rows 15 -> 15.
+
+**Cause (stated, legitimate, signed):** `docs/shift-records/2026-09-24-fp-witness-prose-cure-p1.json`
+(ODQ §934.47 addendum 133 and §934.84): `87d1b1c00`, CURE-P1 U3 (FPQ-23), "the context register
+leaves the page; the rebranch Origin states its cause in words". It rewrote
+`eventProse.js :: NPC_GOAL_NEWS.rebranch.contextReason`, the npc goal-rebranch reason the Herald
+prints as "Origin:", so the sentence states the cause in words instead of listing the context
+key's tokens. The dramatic_campaign and full_simulation rows mint that news within their witnessed
+year; no other row does.
+
+**The row diff, field by field:**
+
+| row | wizardNewsSha256 |
+|---|---|
+| `dramatic_campaign` | `94fc69ef…` -> `3a936351…` |
+| `full_simulation` | `bf07cce8…` -> `74447747…` |
+
+Every other row and every other field (ruleKeyCount, litFlagCount, darkFlagCount, rulesSha256,
+bornWorldSha256, worldStateSha256, settlementUpdatesSha256, regionalGraphSha256, the statuses and
+the tick counts) is byte-identical. `distinctWorldStateHashes` stays 8; the preset roster and the
+birth-successor constant (`null`) are unchanged; `recordedBy` is untouched, as the recipe names
+only the rows and those three header fields.
+
+**Attribution, measured:** with only `87d1b1c00`'s parent copy of `eventProse.js` planted over the
+tip, the witness's single writer reads the two recorded hashes again (`94fc69ef…`, `bf07cce8…`);
+the tip's bytes were restored byte-identical by sha256.
+
+**Discipline:** the record was drafted, with its prediction, before any run; the plain witness run
+red on exactly the two predicted rows before the door; the door re-stamped the register; the plain
+witness run and `tests/lint/goldenFreeze.walker.test.js` are green after it.

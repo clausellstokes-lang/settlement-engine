@@ -1,0 +1,46 @@
+{
+  "_doc": "SIGNED 2026-09-24 by the FP chair (session 87797a6a) under the owner's delegation, quoted verbatim in `ownerWords`: the signature is the chair's dispatch of this re-record, which names this file, its one cause and its seat. The chair's reading of the stasis day (ODQ §934.47 addendum 133) is that goldens re-record with their cause stated; that sentence is the chair's, and the owner's own sentences are the two in `ownerWords`. THE SHIFT RECORD FOR ONE PROSE CAUSE: CURE-P1 U3 (87d1b1c00) changed the text of the npc goal-rebranch reason, which the dramatic_campaign and full_simulation witness rows mint into their wizard news within one year. A repair of prose, not tuning: no band, weight or threshold moves, and no rule, birth seam or pulse byte moves. Prepared, measured and executed by the LIT-1a lane seat (Opus 5.5) on fp/witness-rerecord-1 at df7aeaef4. A successor chair does not inherit this signature: it re-confirms in its own chat.",
+  "ownerWords": "\"there is no settlement built in our database that is designed or intended to be preserved\" (2026-09-23, the stasis day) · \"Again, I leave all judgment to you\" (2026-09-24)",
+  "ownerDate": "2026-09-24",
+  "odqRow": "§934.47 addendum 133 (the tests-only/stasis day) and §934.84 (the FP lighting signature) — the trailer cites §934.47",
+  "cause": "ONE CAUSE: 87d1b1c00, CURE-P1 U3 (FPQ-23), \"the context register leaves the page; the rebranch Origin states its cause in words\". It rewrote eventProse.js :: NPC_GOAL_NEWS.rebranch.contextReason, the npc_goal_rebranch candidate's reasons[0] that the Herald prints as \"Origin:\", so the news the dramatic_campaign and full_simulation rows mint in their witnessed year reads differently. The preset-lighting witness moves exactly one field in exactly those two rows (wizardNewsSha256) and nothing else.",
+  "seat": "the LIT-1a lane seat (Opus 5.5) for the FP chair (session 87797a6a): drafted this record with its prediction before any run, re-minted the fixture through the manifest's own recipe (tests/simulation/presetLightingWitnessRun.js) and executed the register act through tests/helpers/goldenRecordDoor.js recordGolden",
+  "surfaces": [
+    {
+      "surface": "preset-lighting-witness",
+      "action": "re-record",
+      "predictedRows": 15,
+      "proofForm": "derived-artefact",
+      "expected": {
+        "rows": 15,
+        "witnessRows": 8,
+        "movedRows": [
+          "dramatic_campaign",
+          "full_simulation"
+        ],
+        "movedFieldsPerRow": [
+          "wizardNewsSha256"
+        ],
+        "wizardNewsSha256": {
+          "dramatic_campaign": "94fc69ef… -> 3a936351…",
+          "full_simulation": "bf07cce8… -> 74447747…"
+        },
+        "unmovedRows": [
+          "__birth_default__",
+          "quiet_local",
+          "realistic_regional",
+          "static_campaign",
+          "narrative_campaign",
+          "living_realm"
+        ],
+        "wholeFileShaBefore": "17ff68dcbe0afef07933f0337f0802393ca3bcaa62d305676e8bed02ddbef893"
+      }
+    }
+  ],
+  "doorSequence": [
+    "1. This record is drafted, prediction included, before any run; the plain witness run at df7aeaef4 must red on exactly the two predicted rows.",
+    "2. The door: GOLDEN_SHIFT_SIGNED=docs/shift-records/2026-09-24-fp-witness-prose-cure-p1.json, recordGolden({ surface: 'preset-lighting-witness', produce: the fixture re-minted through the manifest's own recipe }), on a tree whose only dirty path is this record; it FAILS BY DESIGN on a successful write.",
+    "3. The plain runs: tests/simulation/presetLightingWitness.test.js and tests/lint/goldenFreeze.walker.test.js green through the gate mutex.",
+    "4. The fixture, the register, this record and the docs/GOLDEN_SHIFT_LEDGER.md entry in ONE commit by explicit paths, with the trailer Owner-Signed: §934.47."
+  ]
+}
