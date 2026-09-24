@@ -24,13 +24,13 @@
     "The derivation history — every prior row, its cause, and the census laws — stays in the walker",
     "beside the assertions, deliberately. Only the live tuple moved."
   ],
-  "measuredAtSha": "6efff620b5bcbdb293393d7945e1b6437a2d163b",
-  "measuredBy": "the FP chair (session 87797a6a, Fable 5.1)",
+  "measuredAtSha": "937a30947a87672c8e78996da782c156fa192f6d",
+  "measuredBy": "FP chair (session 87797a6a, Fable 5.1)",
   "date": "2026-09-24",
-  "note": "FP batch landing 2 at 6efff620b: GR-5b's ownership cure, IN-3 (two commits), cure lane P1 (five), LIT1b-pre (three) — the batch's declared deltas, re-measured once at the tip",
-  "files": 2776,
-  "parked": 359,
-  "credited": 2417,
-  "titles": 26489,
-  "suiteTitles": 7001
+  "note": "FP batch landing 3: GR-5c · PEACE-1 x3 + R · IN-3's one-home cure · the witness re-record · IN-5/1 · IN-4/2 · §13 the seam family",
+  "files": 2783,
+  "parked": 360,
+  "credited": 2423,
+  "titles": 26549,
+  "suiteTitles": 7008
 }
