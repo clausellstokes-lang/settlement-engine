@@ -327,6 +327,117 @@ describe('war-3 — sue-for-peace winds down the physical siege', () => {
 });
 
 // ─────────────────────────────────────────────────────────────────────────────
+// war-3 × FPQ-49 (cure lane WR-RECALL, unit U1) — THE PEACE RECALLS ON EVERY WAR LABEL.
+// Wars are fought over 'rival' and 'cold_war' labels too (settlementStrategyReads.js
+// HOSTILE_TYPES), and all six wars the peace-suit measurement read were fought over
+// 'rival' (findings/FP-PEACE-SUIT.md §0 item 6 d, §2). The one recall line in applyWorldPulse.js
+// read `beforeType === 'hostile'` alone, so an approved suit on those wars stepped the
+// label, signed the peace and left the armies at the walls. The line now also fires for
+// an approved suit for peace on any label; the one offer writer only ever mints a suit one
+// rung down the peace ladder, so it is always a de-escalation. A label change that is not
+// a suit keeps the hostile-only rule it had.
+// ─────────────────────────────────────────────────────────────────────────────
+describe('war-3 × FPQ-49 — an approved suit recalls the armies of a rival or cold_war war, as of a hostile one', () => {
+  const edgeOf = (type) => ({ id: 'edge.strong.weak', from: 'strong', to: 'weak', relationshipType: type });
+  const KEY = relationshipKeyFromEdge(edgeOf('rival'));
+  const SUIT_ID = 'candidate.strategy.sue_for_peace.strong.6';
+  const saves = () => [strongSave('strong', 'Ironhold'), weakSave('weak', 'Thornmere')];
+  const graphOf = (type) => ensureRegionalGraph({ edges: [edgeOf(type)], channels: [{ type: 'war_front', from: 'strong', to: 'weak', status: 'confirmed' }] });
+  // Both courts have an army in the field against the other: the suer's siege and the foe's.
+  const bothArmies = () => ({
+    strong: { targetId: 'weak', sinceTick: 1, role: 'siege' },
+    weak: { targetId: 'strong', sinceTick: 2, role: 'siege' },
+  });
+  const warWorld = (type, extra = {}) => ({
+    tick: 6, simulationRules: { warLayerEnabled: true },
+    relationshipStates: { [KEY]: { relationshipType: type } },
+    deployments: bothArmies(),
+    ...extra,
+  });
+  const labelChange = (id, candidateType, fromType, toType) => ({
+    id, type: 'relationship', candidateType,
+    ruleFamily: 'strategy', targetSaveId: 'strong', severity: 0.72, probability: 1, applyMode: 'auto',
+    headline: 'Strong changes its footing', summary: '', reasons: [],
+    relationshipKey: KEY, relationshipPatch: { proposedRelationshipType: toType, trajectory: 'transitioning' },
+    proposalPayload: { kind: 'relationship_label_change', relationshipKey: KEY, fromType, toType, reason: 'peace' },
+  });
+  const suit = (fromType, toType) => labelChange(SUIT_ID, 'strategy_sue_for_peace', fromType, toType);
+  const applyTo = (type, outcome, extra) => applyOutcomes({ settlements: saves(), worldState: warWorld(type, extra), graph: graphOf(type), outcomes: [outcome] });
+  const labelOf = (result) => result.regionalGraph.edges.find((edge) => edge.id === 'edge.strong.weak').relationshipType;
+  // The siege's stressor twin, sponsored by the besieger (stressorOrigins.test.js's shape).
+  const sponsoredSiege = () => ({
+    id: 'world_stressor.siege.weak', type: 'siege', severity: 0.8, age: 2,
+    durationPolicy: 'structural', originSettlementId: 'weak', affectedSettlementIds: ['weak'],
+    originContext: { variant: 'declared_war', attackerSettlementId: 'strong', sponsorSettlementId: 'strong' },
+  });
+
+  test('an approved rival→trade_partner suit steps the label AND stamps the recall on both armies of the rival war', () => {
+    const result = applyTo('rival', suit('rival', 'trade_partner'));
+    expect(labelOf(result)).toBe('trade_partner');
+    expect(result.worldState.deployments.strong.recalled).toEqual({ cause: 'sue_for_peace', tick: 6 });
+    expect(result.worldState.deployments.weak.recalled).toEqual({ cause: 'sue_for_peace', tick: 6 });
+  });
+
+  test('an approved cold_war→rival suit recalls as well: the whole war axis, one rung down the peace ladder', () => {
+    const result = applyTo('cold_war', suit('cold_war', 'rival'));
+    expect(labelOf(result)).toBe('rival');
+    expect(result.worldState.deployments.strong.recalled).toEqual({ cause: 'sue_for_peace', tick: 6 });
+    expect(result.worldState.deployments.weak.recalled).toEqual({ cause: 'sue_for_peace', tick: 6 });
+  });
+
+  test('the rival peace winds down the siege stressor the war sponsored, with its wind-down news', () => {
+    const result = applyTo('rival', suit('rival', 'trade_partner'), { stressors: [sponsoredSiege()] });
+    const siege = result.worldState.stressors.find((row) => row.id === 'world_stressor.siege.weak');
+    expect(siege.severity).toBeLessThan(0.25);
+    expect(siege.originContext.windDown).toMatchObject({ tick: 6, toType: 'trade_partner' });
+    expect(result.newsEntries.filter((entry) => entry.impactKind === 'stressor_wind_down' && entry.sourceEventId === SUIT_ID)).toHaveLength(1);
+  });
+
+  test('END-TO-END: the war layer executes the rival recall as a withdrawal on the next tick and cannot conquer', () => {
+    const applied = applyTo('rival', suit('rival', 'trade_partner'), { deployments: { strong: { targetId: 'weak', sinceTick: 1, role: 'siege' } } });
+    const worldState = { ...applied.worldState, rngSeed: 'war', tick: 7 };
+    const snap = buildWorldSnapshot({ campaign: { id: 'w', settlementIds: ['strong', 'weak'], worldState, regionalGraph: applied.regionalGraph, wizardNews: { currentTick: 7, entries: [] } }, saves: saves(), worldState });
+    const war = evaluateWarLayer({ snapshot: snap, worldState: snap.worldState, rng: createPRNG('war'), tick: 7, now: NOW, rules: { warLayerEnabled: true } });
+    expect(war.resolvedDeployments).toContainEqual(expect.objectContaining({ attackerId: 'strong', targetId: 'weak', outcome: 'withdrawal' }));
+    // anchored: the withdrawal is resolved on the line above, so the cleared ledger row and the absent conquest are the recall's.
+    expect(war.deployments.strong).toBeUndefined();
+    expect(war.outcomes.some((o) => o.candidateType === 'conquest')).toBe(false);
+  });
+
+  test('CONTROL (unchanged): the approved hostile→cold_war suit still recalls both armies', () => {
+    const result = applyTo('hostile', suit('hostile', 'cold_war'));
+    expect(labelOf(result)).toBe('cold_war');
+    expect(result.worldState.deployments.strong.recalled).toEqual({ cause: 'sue_for_peace', tick: 6 });
+    expect(result.worldState.deployments.weak.recalled).toEqual({ cause: 'sue_for_peace', tick: 6 });
+  });
+
+  test('CONTROL (unchanged): on a hostile edge ANY label step recalls, an organic truce as well as a suit', () => {
+    const truce = labelChange('candidate.relationship.hostile_truce.strong.6', 'hostile_truce', 'hostile', 'cold_war');
+    const result = applyTo('hostile', truce);
+    expect(labelOf(result)).toBe('cold_war');
+    expect(result.worldState.deployments.strong.recalled).toEqual({ cause: 'sue_for_peace', tick: 6 });
+    expect(result.worldState.deployments.weak.recalled).toEqual({ cause: 'sue_for_peace', tick: 6 });
+  });
+
+  test('NEGATIVE: an escalation on a rival war edge (the organic rival→cold_war power play) recalls nothing and winds nothing down', () => {
+    const escalation = labelChange('candidate.relationship.rival_to_cold_war_or_hostile.strong.6', 'rival_to_cold_war_or_hostile', 'rival', 'cold_war');
+    const result = applyTo('rival', escalation, { stressors: [sponsoredSiege()] });
+    expect(labelOf(result)).toBe('cold_war');
+    // anchored: the label stepped on the line above, so the unstamped armies and the untouched siege are the gate's.
+    expect(result.worldState.deployments.strong.recalled).toBeUndefined();
+    expect(result.worldState.deployments.weak.recalled).toBeUndefined();
+    expect(result.worldState.stressors.find((row) => row.id === 'world_stressor.siege.weak').severity).toBe(0.8);
+  });
+
+  test('NEGATIVE: a peacetime rival suit with no army in the field writes no deployment at all', () => {
+    const result = applyTo('rival', suit('rival', 'trade_partner'), { deployments: undefined });
+    expect(labelOf(result)).toBe('trade_partner');
+    // anchored: the peace stepped the label on the line above, so the empty ledger is the recall's no-op.
+    expect(Object.keys(result.worldState.deployments || {})).toEqual([]);
+  });
+});
+
+// ─────────────────────────────────────────────────────────────────────────────
 // war-4 — the emergency recall EXECUTES + de-duplicates
 // ─────────────────────────────────────────────────────────────────────────────
 describe('war-4 — return_home executes and de-duplicates', () => {

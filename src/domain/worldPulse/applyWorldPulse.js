@@ -864,7 +864,7 @@ export function applyWorldPulseOutcomes({
         // the siege/wartime/betrayal stressors that hostility sponsored,
         // instead of leaving them to bleed out at 0.02/tick while the former
         // belligerents trade politely.
-        if (beforeType === 'hostile' && outcome.proposalPayload.toType !== 'hostile') {
+        if ((beforeType === 'hostile' || outcome.candidateType === 'strategy_sue_for_peace') && outcome.proposalPayload.toType !== 'hostile') { // FPQ-49: an approved suit ends the war on every label, not only hostile
           const wind = windDownSponsoredStressors(state, beforeEdge || edge, {
             tick,
             now,
