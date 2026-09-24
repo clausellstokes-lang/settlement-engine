@@ -39,7 +39,7 @@ import { INTERVAL_WEEKS } from '../../src/domain/worldPulse/intervalWeeks.js';
 import { advanceWarReasons, warReasonsFor } from '../../src/domain/worldPulse/warReasons.js';
 import { GOVERNING_SEAT_KEY } from '../../src/domain/worldPulse/beliefMap.js';
 import { getSpatialLedger } from '../../src/domain/spatial/distanceRead.js';
-import { buildPressureSummary } from '../../src/domain/worldPulse/relationshipEvolution.js';
+import { applyRelationshipPatch, buildPressureSummary } from '../../src/domain/worldPulse/relationshipEvolution.js';
 import {
   TREATY_ORIENTATION_KINDS, TREATY_ROLE_WORDS, termObligationOf, treatyOrientationOf,
 } from '../../src/domain/worldPulse/treatyOrientation.js';
@@ -47,6 +47,8 @@ import { draftPactSheet, signPactProposal } from '../../src/domain/worldPulse/pa
 import { lineageOf } from '../../src/domain/worldPulse/pactAmendment.js';
 import { disclosureSigningCredits } from '../../src/domain/worldPulse/peaceTermsDisclosure.js';
 import { treatyDisclosureOpenedBeats } from '../../src/domain/worldPulse/treatyLifecycleVoice.js';
+import { applyWarPeaceRefusal } from '../../src/domain/worldPulse/warPeaceRefusal.js';
+import { recentSueForPeaceIncident } from '../../src/domain/worldPulse/peaceTermsGraph.js';
 
 const LIT = { warLayerEnabled: true, peaceEngineEnabled: true };
 
@@ -1115,5 +1117,135 @@ describe('IN-0C — the open article is minted ONCE, at the signing', () => {
     expect(disclosureSigningCredits(ws, TICK)).toEqual([]);
     expect(disclosureSigningCredits(ws, TICK + 1)).toEqual([{ id: 'weak', kind: 'proven_true' }]);
     expect(disclosureSigningCredits(ws, TICK + 2)).toEqual([]);
+  });
+});
+
+// ── FPQ-50 (cure lane WR-RECALL, unit U2): A REFUSED OFFER MINTS NO TREATY ─────────────
+// The one treaty mint (PASS 1) asks peaceTermsGraph.js :: recentSueForPeaceIncident for the
+// pair's fresh peace. That reader took any incident whose outcome id merely CONTAINED
+// 'sue_for_peace', so WR-5's refusal writer's own row (warPeaceRefusal.js: type
+// peace_refused, keyed by the offer's outcome id) read as a peace. On a war the refusal
+// leaves off 'hostile' (a rival war) the refused offer minted the victor's treaty the next
+// tick; on the target's ALLIED edge, where the refusal charges a co-besieging ally's
+// patience, it minted a treaty between the two allies. The reader now takes only the suit's
+// own de-escalation row, whose TYPE names the suit; a row merely keyed by the suit's id (a
+// refusal, an ally's patience, a coalition betrayal or reimbursement) is not a peace.
+describe('FPQ-50 — a refused offer mints no treaty', () => {
+  const NOW = '2026-01-01T00:00:00.000Z';
+  const SUIT = 'candidate.strategy.sue_for_peace.iron.5';
+  const STEP = { hostile: 'cold_war', rival: 'trade_partner' };
+  const items = [
+    item('iron', { tier: 'city', population: 60000 }),
+    item('weak', { tier: 'village', population: 280, exports: [{ name: 'Grain' }] }),
+    item('ally', { tier: 'city', population: 45000 }),
+  ];
+  /** iron's offer to weak, as the one offer writer mints it on a war edge of `type`. */
+  const offer = (type) => ({
+    id: SUIT, type: 'relationship', candidateType: 'strategy_sue_for_peace', targetSaveId: 'iron', generatedAtTick: 5,
+    relationshipKey: 'edge.iron.weak',
+    relationshipPatch: { proposedRelationshipType: STEP[type], trajectory: 'transitioning' },
+    proposalPayload: { kind: 'relationship_label_change', relationshipKey: 'edge.iron.weak', fromType: type, toType: STEP[type] },
+  });
+  /** iron besieges weak over a `type` edge since t2; with `ally`, weak's ally besieges iron beside it. */
+  function war(type, { ally = true } = {}) {
+    const edges = [edge('iron', 'weak', type), ...(ally ? [edge('weak', 'ally', 'allied')] : [])];
+    const worldState = {
+      tick: 5, simulationRules: { ...LIT }, calendar: { elapsedWeeks: 30 },
+      warExhaustion: { iron: 0.7, weak: 0.8 },
+      deployments: {
+        iron: { targetId: 'weak', sinceTick: 2, role: 'siege' },
+        ...(ally ? { ally: { targetId: 'iron', sinceTick: 3, role: 'siege' } } : {}),
+      },
+      relationshipStates: {
+        'edge.iron.weak': { relationshipType: type, resentment: 0.6, trust: 0.1 },
+        ...(ally ? { 'edge.weak.ally': { relationshipType: 'allied', resentment: 0.1, trust: 0.8 } } : {}),
+      },
+    };
+    return { edges, worldState };
+  }
+  /** weak refuses at t5 through WR-5's own refusal writer (the pair's grievance, the ally's patience). */
+  function refused(type, options) {
+    const { edges, worldState } = war(type, options);
+    const priced = applyWarPeaceRefusal({
+      worldState, settlementUpdates: [], regionalGraph: { edges }, outcome: offer(type),
+      decision: { offererId: 'iron', targetId: 'weak', receipt: {} }, tick: 5, now: NOW,
+    });
+    expect(priced.applied, 'the refusal writer priced the no').toBe(true);
+    return { edges, state: priced.worldState };
+  }
+  const refusalRow = (state, key) => (state.relationshipStates[key].recentIncidents || [])
+    .find((row) => row.type === 'peace_refused' && row.outcomeId === SUIT);
+  const treaties = (out) => getSpatialLedger(out.worldState, 'treaties') || {};
+
+  it('the reader: a refusal row keyed by the suit is not a peace, and the suit\'s own row still is', () => {
+    const refusal = { tick: 5, type: 'peace_refused', outcomeId: SUIT };
+    const peace = { tick: 4, type: 'strategy_sue_for_peace', outcomeId: SUIT };
+    expect(recentSueForPeaceIncident([peace, refusal], 6)).toEqual(peace);
+    // anchored: the same reader returns the suit's row on the line above, so null is the refusal's alone.
+    expect(recentSueForPeaceIncident([refusal], 6)).toBeNull();
+  });
+
+  it('a refused offer on a RIVAL war edge mints no treaty anywhere in the mint window', () => {
+    const { edges, state } = refused('rival', { ally: false });
+    expect(refusalRow(state, 'edge.iron.weak'), 'the refusal wrote its row on the pair').toBeTruthy();
+    expect(state.relationshipStates['edge.iron.weak'].relationshipType, 'the refusal left the war label').toBe('rival');
+    for (const tick of [6, 7, 8]) {
+      // anchored: the accepted twin below mints from this same pair and window, so an empty ledger is the refusal's.
+      expect(Object.keys(treaties(advance({ ...state, tick }, items, edges, tick))), `t${tick}`).toEqual([]);
+    }
+  });
+
+  it('the ally whose patience the refusal charged is not handed a treaty with the court it fights beside', () => {
+    const { edges, state } = refused('hostile');
+    expect(refusalRow(state, 'edge.weak.ally'), 'the refusal charged the co-besieging ally').toBeTruthy();
+    const out = advance({ ...state, tick: 6 }, items, edges, 6);
+    // anchored: the ally's refusal row is present on the first line of this arm, so the empty ledger is the reader's.
+    expect(Object.keys(treaties(out))).toEqual([]);
+  });
+
+  it('a refused offer on a HOSTILE war edge mints no treaty, even when the pair thaws inside the refusal\'s window', () => {
+    const { edges, state } = refused('hostile', { ally: false });
+    // anchored: the hostile pair is skipped by the writer's own label check before the reader is asked.
+    expect(Object.keys(treaties(advance({ ...state, tick: 6 }, items, edges, 6)))).toEqual([]);
+    // Another road (an organic truce) steps the pair off 'hostile' at t7, inside the refusal's window.
+    const thawed = {
+      ...state,
+      tick: 7,
+      relationshipStates: {
+        ...state.relationshipStates,
+        'edge.iron.weak': { ...state.relationshipStates['edge.iron.weak'], relationshipType: 'cold_war' },
+      },
+    };
+    const out = advance(thawed, items, [edge('iron', 'weak', 'cold_war')], 7);
+    // anchored: the accepted twin below mints on a de-escalated pair in the same window, so the empty ledger is the refusal's.
+    expect(Object.keys(treaties(out))).toEqual([]);
+  });
+
+  it('an ACCEPTED offer still mints: the label writer\'s own row on the rival step is the peace', () => {
+    const { edges, worldState } = war('rival', { ally: false });
+    const accepted = applyRelationshipPatch(worldState, offer('rival'), NOW, edges[0]);
+    expect(accepted.relationshipStates['edge.iron.weak'].relationshipType).toBe('trade_partner');
+    const out = advance({ ...accepted, tick: 6 }, items, [edge('iron', 'weak', 'trade_partner')], 6);
+    const treaty = treaties(out)[treatyPairKey('iron', 'weak')];
+    expect(treaty, 'iron dictates the accepted peace').toBeTruthy();
+    expect(treaty.victorId).toBe('iron');
+  });
+
+  it('NEGATIVE: coalition rows keyed by a suit\'s id on an allied edge are not a peace', () => {
+    const worldState = {
+      tick: 6, simulationRules: { ...LIT }, calendar: { elapsedWeeks: 30 }, deployments: {},
+      relationshipStates: {
+        'edge.weak.ally': {
+          relationshipType: 'allied', trust: 0.8, resentment: 0.1,
+          recentIncidents: [
+            { tick: 5, type: 'coalition_betrayal', outcomeId: `${SUIT}:coalition_betrayal:weak:ally` },
+            { tick: 5, type: 'coalition_reimbursement_paid', outcomeId: `${SUIT}.coalition_call.weak.ally.reimbursement` },
+          ],
+        },
+      },
+    };
+    const out = advance(worldState, items, [edge('weak', 'ally', 'allied')], 6);
+    // anchored: the accepted twin above mints through this same writer, so the empty ledger is the reader's.
+    expect(Object.keys(treaties(out))).toEqual([]);
   });
 });
