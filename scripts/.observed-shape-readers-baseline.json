@@ -87,25 +87,25 @@
  "corpusMeta": {
   "configs": 4,
   "generations": 16,
-  "originCount": 8560,
+  "originCount": 8562,
   "pulseIntervals": 12,
   "seeds": 4,
-  "shapeCount": 1299,
-  "simulationFlagsLit": 87,
+  "shapeCount": 1300,
+  "simulationFlagsLit": 88,
   "steadingsMinted": 12,
-  "transitionCount": 14496
+  "transitionCount": 14503
  },
  "digests": {
-  "corpusMeta": "7c1174c641e57b0dba57949db6d1da02bc0e7fd77fddab13a2574381d09398ea",
+  "corpusMeta": "31fe63383818069ebfc499450dbcb8e228af148b59a57303f2227b0a14bcf2b6",
   "inventory": "c592f2ad720096ea5a3f31657ab224ac08f39529418610d58dec10d6c7f012c8",
-  "manifests": "97fa264e562a5c536f3c6f7009c1bccfc7198f929148803c6998f75ffe4f909d",
+  "manifests": "f17f5ae827da882d6c262040addb8cb10c0ac98741b5f50eb0bb01cd139d236e",
   "migrationReview": "627d3e6311abb9a3e188d652556b048ccaf9df4bb884cb05ddb89e6a10b8bc72",
   "rowTags": "f62df84be5fe60b58572d1c6c26b1deb1baafa85d0a4748f4f83e83042cc5c06",
-  "scanStats": "dd4fbee32bf43ecc65a513b8298c75d5e06719f48f74f7506253eaad8422a99a",
-  "sentinel": "3703d2401e9734530ded1612a7159a5fb83d22bda81ef55605f97de63cd6b30b"
+  "scanStats": "4bcbbcee11903c28104da1ce903cf5e0e2cdf787f671a9269907cf2cf618294e",
+  "sentinel": "2b9179da9e4b0aa32686e2da4bb78c6b32daaabf436565d0ff4db00f7e666c15"
  },
  "frozen": "2026-09-24",
- "frozenAtSha": "d2b380dc13bb0540d1c9415da5fe18cd99d338ce",
+ "frozenAtSha": "5fa99d1e3210f70fa3530c13e5b3f62c28f18380",
  "identities": 1393,
  "inventory": {
   "src/components/BuyThisDossier.jsx": {
@@ -2364,7 +2364,7 @@
   },
   "executionTree": {
    "algorithm": "sha256-canonical-path-type-mode-size-content-v2",
-   "digest": "bfbc25094e55c0df0a997cef4355c3cb13d131d2a6a7fde15cc0f2bde70f85d6",
+   "digest": "968a1c821a58e86f1bd0eb635780517b484f6b509035a15ab1f4e5b3aa2b6b37",
    "entries": [
     {
      "mode": "100644",
@@ -4546,8 +4546,8 @@
     {
      "mode": "100644",
      "path": "src/components/map/HeraldBody.jsx",
-     "sha256": "d68e0d28212a6e439b4f85911780ddd2d2a9edcf450bed2b09d22f79553a2fa2",
-     "size": 17694,
+     "sha256": "a6ed12c84c7a64028252b827b2391e22338adb0ad68fdbcfa8438ab3031855f8",
+     "size": 18259,
      "type": "file"
     },
     {
@@ -4784,8 +4784,8 @@
     {
      "mode": "100644",
      "path": "src/components/map/RealmInspector.jsx",
-     "sha256": "a67b15afec1913e21c842c0d89730dfbfa5eca6aa94cff74ffacf53348c381bd",
-     "size": 34356,
+     "sha256": "5d4c3b17a792f328ce6abb1c2c93956e9c8fcc5ebfb3cb4bc77bf1eb39b5b45a",
+     "size": 34503,
      "type": "file"
     },
     {
@@ -5050,8 +5050,8 @@
     {
      "mode": "100644",
      "path": "src/components/map/WorldPulseData.js",
-     "sha256": "18e587fb373d21598398fde3e05db139e425315ced42400202c5afd3e02ccc10",
-     "size": 11404,
+     "sha256": "c45f7ea566a7a15ddb114d17de50967ea30f1390cd1bfc52b544c23ced89b33d",
+     "size": 11623,
      "type": "file"
     },
     {
@@ -5106,8 +5106,8 @@
     {
      "mode": "100644",
      "path": "src/components/map/heraldFeed.js",
-     "sha256": "8db179078e064a009bff14b136a99265499b76e2bba3ebfe8f1621f0efffa989",
-     "size": 10734,
+     "sha256": "b5031de1ee3b1f95c608e45fd0fff561f915b02f699c212aad4054a91e658769",
+     "size": 10900,
      "type": "file"
     },
     {
@@ -5120,8 +5120,8 @@
     {
      "mode": "100644",
      "path": "src/components/map/heraldGrammar.js",
-     "sha256": "09dd4c8de99fa7978b2d0c7f0a5da8df1d14a385d22f4b9714193fb7b8700356",
-     "size": 5851,
+     "sha256": "deab223c32a999ace0f2e4217b3799010543effc8fb76f6d72897543e7a7d55c",
+     "size": 5941,
      "type": "file"
     },
     {
@@ -7612,8 +7612,8 @@
     {
      "mode": "100644",
      "path": "src/domain/certification/couplingRegistry.js",
-     "sha256": "bc47f6d5c6ad7208a86bef2ded49e4856f9f2656d46e196c1cdde2637020952a",
-     "size": 12690,
+     "sha256": "4820d83211d52c90947be8548cf911408c0bee027afd62af6ba6157978646dd8",
+     "size": 13971,
      "type": "file"
     },
     {
@@ -7633,15 +7633,15 @@
     {
      "mode": "100644",
      "path": "src/domain/certification/couplingRegistryGrammar.js",
-     "sha256": "0b951eeb04ca075b52b4212a105e4a450217aa6ce58ed4403f95ab75b5a1581a",
-     "size": 18124,
+     "sha256": "9730f1ff1ee53092f7965d9097cbcebe7b8e07a31d742da7f4b368d9c47de3c8",
+     "size": 21078,
      "type": "file"
     },
     {
      "mode": "100644",
      "path": "src/domain/certification/couplingRegistryInfo.js",
-     "sha256": "6e224112471865ac342f3c887df61ec1be6476a17bec8df6745d0da0bb1c10e7",
-     "size": 11874,
+     "sha256": "4260f513391cef4bb357b1054c0dd06005bd44f88e3719ce35a98cb2faf9c44c",
+     "size": 16704,
      "type": "file"
     },
     {
@@ -7780,8 +7780,8 @@
     {
      "mode": "100644",
      "path": "src/domain/certification/subsystemRowsVirtual.js",
-     "sha256": "42620771d0de87a5b546ac5f69afee2288af6f3c81897a6ae458700cec6ab31d",
-     "size": 87996,
+     "sha256": "621574cbeef59a3a4d21c7c28449c4c00db2bdb93c6c3b0a2e78b34eaf733cb5",
+     "size": 92153,
      "type": "file"
     },
     {
@@ -8991,8 +8991,8 @@
     {
      "mode": "100644",
      "path": "src/domain/display/settlementRumors.js",
-     "sha256": "416a7ae8ff8b7415585b1e42a213a2d89db5497233ccada9804925add29c0c01",
-     "size": 57903,
+     "sha256": "7cded04898e6fd970fab6ee7c3a94cd59e59204a9df439b3b650bbaf6cbdcd05",
+     "size": 58266,
      "type": "file"
     },
     {
@@ -9656,8 +9656,8 @@
     {
      "mode": "100644",
      "path": "src/domain/events/realmManifest.js",
-     "sha256": "4effe0f4fd7b8e0c486c0d31fe169d4cbe2fd51eda6c89bc59aacd67e061ca40",
-     "size": 41470,
+     "sha256": "4f141b642d3b4f3b10fb9b5243be292f1c9c0f88d860be247bc96fdee4b2e9df",
+     "size": 41627,
      "type": "file"
     },
     {
@@ -10384,8 +10384,8 @@
     {
      "mode": "100644",
      "path": "src/domain/realm/heraldRouting.js",
-     "sha256": "a2c609f0c2f37992f5b5b261d6d199719b03953f04a680e7fe9f04a0450033da",
-     "size": 49051,
+     "sha256": "437f2cc2549275fd6a34cceded9a9482a2faa8182a2618063509e6964d03d448",
+     "size": 51252,
      "type": "file"
     },
     {
@@ -10545,8 +10545,8 @@
     {
      "mode": "100644",
      "path": "src/domain/region/wizardNews.js",
-     "sha256": "0eb9512467fb097f31fe157335c68d3fddb126bd9316c9de40677a1c672b2f6c",
-     "size": 57102,
+     "sha256": "acd532f6469f8688b175ccb1053681bc2c7d993e5b962aca730978be960cfb5c",
+     "size": 57117,
      "type": "file"
     },
     {
@@ -12099,8 +12099,8 @@
     {
      "mode": "100644",
      "path": "src/domain/worldPulse/brokerageStamps.js",
-     "sha256": "66fdfadf551e0ffd5bfa7b7b34b69f611b114342c5ea1829807f08a0a2b41bd2",
-     "size": 30696,
+     "sha256": "3056422480e1d8aa44cd5ed0123979d7224c2ed5d93aa5c80c58bd0834f548d3",
+     "size": 30909,
      "type": "file"
     },
     {
@@ -12113,8 +12113,8 @@
     {
      "mode": "100644",
      "path": "src/domain/worldPulse/candidateEvents.js",
-     "sha256": "0348e655176d68df5ccbfc627bb369575371ab3276a4056e810a69fb19a0b2bf",
-     "size": 45170,
+     "sha256": "fe2f5d38764bbb3b862e38babde26daee0e990beb78d6c317c28bef4ac6d4bce",
+     "size": 45761,
      "type": "file"
     },
     {
@@ -12309,8 +12309,8 @@
     {
      "mode": "100644",
      "path": "src/domain/worldPulse/counterIntelSweep.js",
-     "sha256": "1e533ece2e93637720e6e1417c3b036f73589e3e404b2a5dfb2f584d6fc73272",
-     "size": 19730,
+     "sha256": "d7fbd5a85eb27de7252d7d940baf242fb98ca609811a44b81e323d8329b2e66d",
+     "size": 19939,
      "type": "file"
     },
     {
@@ -12666,8 +12666,8 @@
     {
      "mode": "100644",
      "path": "src/domain/worldPulse/envoyErrandVocabulary.js",
-     "sha256": "ed0ae842a766bb7f8ee3fa047eae57494b6d6121378906437ca6ba6ef83a371f",
-     "size": 30190,
+     "sha256": "2d5f04ec459a0c516d1a6d0b605b4171a170a3b10e450c05e661ef2196cadeae",
+     "size": 30191,
      "type": "file"
     },
     {
@@ -13086,8 +13086,8 @@
     {
      "mode": "100644",
      "path": "src/domain/worldPulse/habitForkRegistry.js",
-     "sha256": "d3573facb957bfc16b7515083dc427ddb086abfc7b50275da6e69aa8e81256c8",
-     "size": 95931,
+     "sha256": "9840f2d607df1e4c7ba6d7e438cde765a971ba21b98bbaba28eb619ca60cba31",
+     "size": 96311,
      "type": "file"
     },
     {
@@ -13135,15 +13135,15 @@
     {
      "mode": "100644",
      "path": "src/domain/worldPulse/informationNews.js",
-     "sha256": "887e27377bb589503886d0162cbd5ebe7bf5d83988f930cea865407c3b3a27af",
-     "size": 11835,
+     "sha256": "cf8a87328953bef8f480cd52378a6cc7793356fe1c3828faf4ca562e969d77bd",
+     "size": 14303,
      "type": "file"
     },
     {
      "mode": "100644",
      "path": "src/domain/worldPulse/informationReceiptPools.js",
-     "sha256": "1a7b3a5f556f5fcc51a317a7c7723da0e5dc9997460c692cbb665f74ca232d1d",
-     "size": 7025,
+     "sha256": "b48dd298443567a6f36d48230df9df761b54b2a7f0d4bb0fc945a688f14f7a66",
+     "size": 10592,
      "type": "file"
     },
     {
@@ -13709,15 +13709,15 @@
     {
      "mode": "100644",
      "path": "src/domain/worldPulse/pactAmendment.js",
-     "sha256": "a10b5b7fdaf392f6f32a687b234967030b278a48a02cd563de6f58b37629aeb2",
-     "size": 21651,
+     "sha256": "94584f3f3c6cff642472ce25fa05b4026999231647d29e103a1caaf021db9b88",
+     "size": 21893,
      "type": "file"
     },
     {
      "mode": "100644",
      "path": "src/domain/worldPulse/pactFormation.js",
-     "sha256": "d7009d203a34abdbcb66d16f5a644c678d46eff730bbba34bc3d7298e0d68c64",
-     "size": 54704,
+     "sha256": "0329eca5c0475984ae489c0b7e76a4fea366c4957996a2c702708428ab4557bc",
+     "size": 55158,
      "type": "file"
     },
     {
@@ -13730,15 +13730,15 @@
     {
      "mode": "100644",
      "path": "src/domain/worldPulse/pactRenewal.js",
-     "sha256": "c74932fd8e1d7232d94fe61b1f3e8498c589b460a096cebccc50920c00974816",
-     "size": 22083,
+     "sha256": "47649623d1e4e52e1f2e31037430362f56fcca9c426993f70da686a01751d838",
+     "size": 45512,
      "type": "file"
     },
     {
      "mode": "100644",
      "path": "src/domain/worldPulse/pactTriggers.js",
-     "sha256": "29ef1c22847b8f3212b37a6e28d2e0bf1d8800fffeda7070d478b3cc49e612dc",
-     "size": 17061,
+     "sha256": "72c5287aacd5408377811947de93741cc26507ddd0bac5aa2564f29650b62dc0",
+     "size": 17274,
      "type": "file"
     },
     {
@@ -13786,8 +13786,8 @@
     {
      "mode": "100644",
      "path": "src/domain/worldPulse/peaceReasons.js",
-     "sha256": "5203667ae20f809639defd2796f29512b2a956c7ca133fdb8f9cb845397b852d",
-     "size": 40379,
+     "sha256": "44350988061a68e2d8f060472e8e196cbe73e203622bb4ef276024a43f9fd503",
+     "size": 41162,
      "type": "file"
     },
     {
@@ -13912,8 +13912,8 @@
     {
      "mode": "100644",
      "path": "src/domain/worldPulse/proposalAdmission.js",
-     "sha256": "517c271716c5cf20f0d2c66322cc698f9a8247a4d26a02299415656cdee24093",
-     "size": 10736,
+     "sha256": "99ac2a6c7c1bfc2ca985d84c76f4922e1a1a72a25b2dacc5a75697bbb43a8161",
+     "size": 16628,
      "type": "file"
     },
     {
@@ -14024,8 +14024,8 @@
     {
      "mode": "100644",
      "path": "src/domain/worldPulse/realmVerbExecution.js",
-     "sha256": "7c0cc6256f43cc5a32164ce423d6a1f220ef5ed856dbefb9c73cf4883d8a954f",
-     "size": 56096,
+     "sha256": "6c264c5725cf65e908d9755be77efa338c36083b93d82ee53361d8d6d7cc128c",
+     "size": 58246,
      "type": "file"
     },
     {
@@ -14135,6 +14135,13 @@
     },
     {
      "mode": "100644",
+     "path": "src/domain/worldPulse/reputationRaceConsumer.js",
+     "sha256": "cbe498b8adc1ed48bef25f75a32dfe2f4fad4c7171c3740d98c732809ab787b4",
+     "size": 19062,
+     "type": "file"
+    },
+    {
+     "mode": "100644",
      "path": "src/domain/worldPulse/residueStripGuard.js",
      "sha256": "50a5d67691a11a63b4fe49a27f9b6c35f66ed1ff1b7d4534b50546909a330b36",
      "size": 8211,
@@ -14206,8 +14213,8 @@
     {
      "mode": "100644",
      "path": "src/domain/worldPulse/routeNetworkConsumersRace.js",
-     "sha256": "a8f2d28c31791eaa69b980a79cef45ecfcb69e0034e14b2684533ca0628f58ec",
-     "size": 15176,
+     "sha256": "1032c10fc8ec05e6e9fc3aaf7ae88ce8bb3554db574f1bf64f934c8ee7013e24",
+     "size": 16266,
      "type": "file"
     },
     {
@@ -14353,8 +14360,8 @@
     {
      "mode": "100644",
      "path": "src/domain/worldPulse/settlementLifecycleKernel.js",
-     "sha256": "140ebb2d741b2a44455406e65a125656eef60e90e3ea09579b64f66ee74540d1",
-     "size": 74548,
+     "sha256": "b1548e8bf745209102cebcbc9e3ba20c8fd0c295cb6ac48c1b6ec3ad72cce7c3",
+     "size": 75454,
      "type": "file"
     },
     {
@@ -14367,8 +14374,8 @@
     {
      "mode": "100644",
      "path": "src/domain/worldPulse/settlementStrategy.js",
-     "sha256": "523e6a33807cef47e9a6f327c04e51ebc91c1aac6b5fbbcc5c0386cfd02366ea",
-     "size": 74543,
+     "sha256": "528cc4502b6d1816e3cd017b017f320a253c8a6d420a3f29e304a3ca8b57f153",
+     "size": 75991,
      "type": "file"
     },
     {
@@ -14388,8 +14395,8 @@
     {
      "mode": "100644",
      "path": "src/domain/worldPulse/simulationRules.js",
-     "sha256": "fdc664a97997fe87b21c628cab81fd667fdd8cdac01adf72750ecd88faf45d94",
-     "size": 99371,
+     "sha256": "c3d808c2fa984cfd4bd641f94343b621c52661e237f49f0dad3353f7c9e06c81",
+     "size": 100271,
      "type": "file"
     },
     {
@@ -15039,8 +15046,8 @@
     {
      "mode": "100644",
      "path": "src/domain/worldPulse/worldPulseFeedCuration.js",
-     "sha256": "bb7d27e5451604d8b6a6f06902d19a98179a0827c2cbdef306c46e66e40cf25d",
-     "size": 11076,
+     "sha256": "eb71509afed9099e977743dc62c07b365142a4d7367fc9de0a7a9c123f6135a4",
+     "size": 11363,
      "type": "file"
     },
     {
@@ -18624,7 +18631,7 @@
   },
   "scanTree": {
    "algorithm": "sha256-canonical-path-type-mode-size-content-v2",
-   "digest": "6ae07dc60ef59a472508e68979bbf035888cb9dbf7174f410927b00f74d61633",
+   "digest": "b440c304b09e49ad2060cb7c9cab6fbdb1a3037a033914a2a6fa268c792f5b6b",
    "entries": [
     {
      "mode": "100644",
@@ -20736,8 +20743,8 @@
     {
      "mode": "100644",
      "path": "src/components/map/HeraldBody.jsx",
-     "sha256": "d68e0d28212a6e439b4f85911780ddd2d2a9edcf450bed2b09d22f79553a2fa2",
-     "size": 17694,
+     "sha256": "a6ed12c84c7a64028252b827b2391e22338adb0ad68fdbcfa8438ab3031855f8",
+     "size": 18259,
      "type": "file"
     },
     {
@@ -20974,8 +20981,8 @@
     {
      "mode": "100644",
      "path": "src/components/map/RealmInspector.jsx",
-     "sha256": "a67b15afec1913e21c842c0d89730dfbfa5eca6aa94cff74ffacf53348c381bd",
-     "size": 34356,
+     "sha256": "5d4c3b17a792f328ce6abb1c2c93956e9c8fcc5ebfb3cb4bc77bf1eb39b5b45a",
+     "size": 34503,
      "type": "file"
     },
     {
@@ -21240,8 +21247,8 @@
     {
      "mode": "100644",
      "path": "src/components/map/WorldPulseData.js",
-     "sha256": "18e587fb373d21598398fde3e05db139e425315ced42400202c5afd3e02ccc10",
-     "size": 11404,
+     "sha256": "c45f7ea566a7a15ddb114d17de50967ea30f1390cd1bfc52b544c23ced89b33d",
+     "size": 11623,
      "type": "file"
     },
     {
@@ -21296,8 +21303,8 @@
     {
      "mode": "100644",
      "path": "src/components/map/heraldFeed.js",
-     "sha256": "8db179078e064a009bff14b136a99265499b76e2bba3ebfe8f1621f0efffa989",
-     "size": 10734,
+     "sha256": "b5031de1ee3b1f95c608e45fd0fff561f915b02f699c212aad4054a91e658769",
+     "size": 10900,
      "type": "file"
     },
     {
@@ -21310,8 +21317,8 @@
     {
      "mode": "100644",
      "path": "src/components/map/heraldGrammar.js",
-     "sha256": "09dd4c8de99fa7978b2d0c7f0a5da8df1d14a385d22f4b9714193fb7b8700356",
-     "size": 5851,
+     "sha256": "deab223c32a999ace0f2e4217b3799010543effc8fb76f6d72897543e7a7d55c",
+     "size": 5941,
      "type": "file"
     },
     {
@@ -23718,8 +23725,8 @@
     {
      "mode": "100644",
      "path": "src/domain/certification/couplingRegistry.js",
-     "sha256": "bc47f6d5c6ad7208a86bef2ded49e4856f9f2656d46e196c1cdde2637020952a",
-     "size": 12690,
+     "sha256": "4820d83211d52c90947be8548cf911408c0bee027afd62af6ba6157978646dd8",
+     "size": 13971,
      "type": "file"
     },
     {
@@ -23739,15 +23746,15 @@
     {
      "mode": "100644",
      "path": "src/domain/certification/couplingRegistryGrammar.js",
-     "sha256": "0b951eeb04ca075b52b4212a105e4a450217aa6ce58ed4403f95ab75b5a1581a",
-     "size": 18124,
+     "sha256": "9730f1ff1ee53092f7965d9097cbcebe7b8e07a31d742da7f4b368d9c47de3c8",
+     "size": 21078,
      "type": "file"
     },
     {
      "mode": "100644",
      "path": "src/domain/certification/couplingRegistryInfo.js",
-     "sha256": "6e224112471865ac342f3c887df61ec1be6476a17bec8df6745d0da0bb1c10e7",
-     "size": 11874,
+     "sha256": "4260f513391cef4bb357b1054c0dd06005bd44f88e3719ce35a98cb2faf9c44c",
+     "size": 16704,
      "type": "file"
     },
     {
@@ -23886,8 +23893,8 @@
     {
      "mode": "100644",
      "path": "src/domain/certification/subsystemRowsVirtual.js",
-     "sha256": "42620771d0de87a5b546ac5f69afee2288af6f3c81897a6ae458700cec6ab31d",
-     "size": 87996,
+     "sha256": "621574cbeef59a3a4d21c7c28449c4c00db2bdb93c6c3b0a2e78b34eaf733cb5",
+     "size": 92153,
      "type": "file"
     },
     {
@@ -25062,8 +25069,8 @@
     {
      "mode": "100644",
      "path": "src/domain/display/settlementRumors.js",
-     "sha256": "416a7ae8ff8b7415585b1e42a213a2d89db5497233ccada9804925add29c0c01",
-     "size": 57903,
+     "sha256": "7cded04898e6fd970fab6ee7c3a94cd59e59204a9df439b3b650bbaf6cbdcd05",
+     "size": 58266,
      "type": "file"
     },
     {
@@ -25727,8 +25734,8 @@
     {
      "mode": "100644",
      "path": "src/domain/events/realmManifest.js",
-     "sha256": "4effe0f4fd7b8e0c486c0d31fe169d4cbe2fd51eda6c89bc59aacd67e061ca40",
-     "size": 41470,
+     "sha256": "4f141b642d3b4f3b10fb9b5243be292f1c9c0f88d860be247bc96fdee4b2e9df",
+     "size": 41627,
      "type": "file"
     },
     {
@@ -26455,8 +26462,8 @@
     {
      "mode": "100644",
      "path": "src/domain/realm/heraldRouting.js",
-     "sha256": "a2c609f0c2f37992f5b5b261d6d199719b03953f04a680e7fe9f04a0450033da",
-     "size": 49051,
+     "sha256": "437f2cc2549275fd6a34cceded9a9482a2faa8182a2618063509e6964d03d448",
+     "size": 51252,
      "type": "file"
     },
     {
@@ -26616,8 +26623,8 @@
     {
      "mode": "100644",
      "path": "src/domain/region/wizardNews.js",
-     "sha256": "0eb9512467fb097f31fe157335c68d3fddb126bd9316c9de40677a1c672b2f6c",
-     "size": 57102,
+     "sha256": "acd532f6469f8688b175ccb1053681bc2c7d993e5b962aca730978be960cfb5c",
+     "size": 57117,
      "type": "file"
     },
     {
@@ -28170,8 +28177,8 @@
     {
      "mode": "100644",
      "path": "src/domain/worldPulse/brokerageStamps.js",
-     "sha256": "66fdfadf551e0ffd5bfa7b7b34b69f611b114342c5ea1829807f08a0a2b41bd2",
-     "size": 30696,
+     "sha256": "3056422480e1d8aa44cd5ed0123979d7224c2ed5d93aa5c80c58bd0834f548d3",
+     "size": 30909,
      "type": "file"
     },
     {
@@ -28184,8 +28191,8 @@
     {
      "mode": "100644",
      "path": "src/domain/worldPulse/candidateEvents.js",
-     "sha256": "0348e655176d68df5ccbfc627bb369575371ab3276a4056e810a69fb19a0b2bf",
-     "size": 45170,
+     "sha256": "fe2f5d38764bbb3b862e38babde26daee0e990beb78d6c317c28bef4ac6d4bce",
+     "size": 45761,
      "type": "file"
     },
     {
@@ -28380,8 +28387,8 @@
     {
      "mode": "100644",
      "path": "src/domain/worldPulse/counterIntelSweep.js",
-     "sha256": "1e533ece2e93637720e6e1417c3b036f73589e3e404b2a5dfb2f584d6fc73272",
-     "size": 19730,
+     "sha256": "d7fbd5a85eb27de7252d7d940baf242fb98ca609811a44b81e323d8329b2e66d",
+     "size": 19939,
      "type": "file"
     },
     {
@@ -28737,8 +28744,8 @@
     {
      "mode": "100644",
      "path": "src/domain/worldPulse/envoyErrandVocabulary.js",
-     "sha256": "ed0ae842a766bb7f8ee3fa047eae57494b6d6121378906437ca6ba6ef83a371f",
-     "size": 30190,
+     "sha256": "2d5f04ec459a0c516d1a6d0b605b4171a170a3b10e450c05e661ef2196cadeae",
+     "size": 30191,
      "type": "file"
     },
     {
@@ -29157,8 +29164,8 @@
     {
      "mode": "100644",
      "path": "src/domain/worldPulse/habitForkRegistry.js",
-     "sha256": "d3573facb957bfc16b7515083dc427ddb086abfc7b50275da6e69aa8e81256c8",
-     "size": 95931,
+     "sha256": "9840f2d607df1e4c7ba6d7e438cde765a971ba21b98bbaba28eb619ca60cba31",
+     "size": 96311,
      "type": "file"
     },
     {
@@ -29206,15 +29213,15 @@
     {
      "mode": "100644",
      "path": "src/domain/worldPulse/informationNews.js",
-     "sha256": "887e27377bb589503886d0162cbd5ebe7bf5d83988f930cea865407c3b3a27af",
-     "size": 11835,
+     "sha256": "cf8a87328953bef8f480cd52378a6cc7793356fe1c3828faf4ca562e969d77bd",
+     "size": 14303,
      "type": "file"
     },
     {
      "mode": "100644",
      "path": "src/domain/worldPulse/informationReceiptPools.js",
-     "sha256": "1a7b3a5f556f5fcc51a317a7c7723da0e5dc9997460c692cbb665f74ca232d1d",
-     "size": 7025,
+     "sha256": "b48dd298443567a6f36d48230df9df761b54b2a7f0d4bb0fc945a688f14f7a66",
+     "size": 10592,
      "type": "file"
     },
     {
@@ -29780,15 +29787,15 @@
     {
      "mode": "100644",
      "path": "src/domain/worldPulse/pactAmendment.js",
-     "sha256": "a10b5b7fdaf392f6f32a687b234967030b278a48a02cd563de6f58b37629aeb2",
-     "size": 21651,
+     "sha256": "94584f3f3c6cff642472ce25fa05b4026999231647d29e103a1caaf021db9b88",
+     "size": 21893,
      "type": "file"
     },
     {
      "mode": "100644",
      "path": "src/domain/worldPulse/pactFormation.js",
-     "sha256": "d7009d203a34abdbcb66d16f5a644c678d46eff730bbba34bc3d7298e0d68c64",
-     "size": 54704,
+     "sha256": "0329eca5c0475984ae489c0b7e76a4fea366c4957996a2c702708428ab4557bc",
+     "size": 55158,
      "type": "file"
     },
     {
@@ -29801,15 +29808,15 @@
     {
      "mode": "100644",
      "path": "src/domain/worldPulse/pactRenewal.js",
-     "sha256": "c74932fd8e1d7232d94fe61b1f3e8498c589b460a096cebccc50920c00974816",
-     "size": 22083,
+     "sha256": "47649623d1e4e52e1f2e31037430362f56fcca9c426993f70da686a01751d838",
+     "size": 45512,
      "type": "file"
     },
     {
      "mode": "100644",
      "path": "src/domain/worldPulse/pactTriggers.js",
-     "sha256": "29ef1c22847b8f3212b37a6e28d2e0bf1d8800fffeda7070d478b3cc49e612dc",
-     "size": 17061,
+     "sha256": "72c5287aacd5408377811947de93741cc26507ddd0bac5aa2564f29650b62dc0",
+     "size": 17274,
      "type": "file"
     },
     {
@@ -29857,8 +29864,8 @@
     {
      "mode": "100644",
      "path": "src/domain/worldPulse/peaceReasons.js",
-     "sha256": "5203667ae20f809639defd2796f29512b2a956c7ca133fdb8f9cb845397b852d",
-     "size": 40379,
+     "sha256": "44350988061a68e2d8f060472e8e196cbe73e203622bb4ef276024a43f9fd503",
+     "size": 41162,
      "type": "file"
     },
     {
@@ -29983,8 +29990,8 @@
     {
      "mode": "100644",
      "path": "src/domain/worldPulse/proposalAdmission.js",
-     "sha256": "517c271716c5cf20f0d2c66322cc698f9a8247a4d26a02299415656cdee24093",
-     "size": 10736,
+     "sha256": "99ac2a6c7c1bfc2ca985d84c76f4922e1a1a72a25b2dacc5a75697bbb43a8161",
+     "size": 16628,
      "type": "file"
     },
     {
@@ -30095,8 +30102,8 @@
     {
      "mode": "100644",
      "path": "src/domain/worldPulse/realmVerbExecution.js",
-     "sha256": "7c0cc6256f43cc5a32164ce423d6a1f220ef5ed856dbefb9c73cf4883d8a954f",
-     "size": 56096,
+     "sha256": "6c264c5725cf65e908d9755be77efa338c36083b93d82ee53361d8d6d7cc128c",
+     "size": 58246,
      "type": "file"
     },
     {
@@ -30206,6 +30213,13 @@
     },
     {
      "mode": "100644",
+     "path": "src/domain/worldPulse/reputationRaceConsumer.js",
+     "sha256": "cbe498b8adc1ed48bef25f75a32dfe2f4fad4c7171c3740d98c732809ab787b4",
+     "size": 19062,
+     "type": "file"
+    },
+    {
+     "mode": "100644",
      "path": "src/domain/worldPulse/residueStripGuard.js",
      "sha256": "50a5d67691a11a63b4fe49a27f9b6c35f66ed1ff1b7d4534b50546909a330b36",
      "size": 8211,
@@ -30277,8 +30291,8 @@
     {
      "mode": "100644",
      "path": "src/domain/worldPulse/routeNetworkConsumersRace.js",
-     "sha256": "a8f2d28c31791eaa69b980a79cef45ecfcb69e0034e14b2684533ca0628f58ec",
-     "size": 15176,
+     "sha256": "1032c10fc8ec05e6e9fc3aaf7ae88ce8bb3554db574f1bf64f934c8ee7013e24",
+     "size": 16266,
      "type": "file"
     },
     {
@@ -30424,8 +30438,8 @@
     {
      "mode": "100644",
      "path": "src/domain/worldPulse/settlementLifecycleKernel.js",
-     "sha256": "140ebb2d741b2a44455406e65a125656eef60e90e3ea09579b64f66ee74540d1",
-     "size": 74548,
+     "sha256": "b1548e8bf745209102cebcbc9e3ba20c8fd0c295cb6ac48c1b6ec3ad72cce7c3",
+     "size": 75454,
      "type": "file"
     },
     {
@@ -30438,8 +30452,8 @@
     {
      "mode": "100644",
      "path": "src/domain/worldPulse/settlementStrategy.js",
-     "sha256": "523e6a33807cef47e9a6f327c04e51ebc91c1aac6b5fbbcc5c0386cfd02366ea",
-     "size": 74543,
+     "sha256": "528cc4502b6d1816e3cd017b017f320a253c8a6d420a3f29e304a3ca8b57f153",
+     "size": 75991,
      "type": "file"
     },
     {
@@ -30459,8 +30473,8 @@
     {
      "mode": "100644",
      "path": "src/domain/worldPulse/simulationRules.js",
-     "sha256": "fdc664a97997fe87b21c628cab81fd667fdd8cdac01adf72750ecd88faf45d94",
-     "size": 99371,
+     "sha256": "c3d808c2fa984cfd4bd641f94343b621c52661e237f49f0dad3353f7c9e06c81",
+     "size": 100271,
      "type": "file"
     },
     {
@@ -31110,8 +31124,8 @@
     {
      "mode": "100644",
      "path": "src/domain/worldPulse/worldPulseFeedCuration.js",
-     "sha256": "bb7d27e5451604d8b6a6f06902d19a98179a0827c2cbdef306c46e66e40cf25d",
-     "size": 11076,
+     "sha256": "eb71509afed9099e977743dc62c07b365142a4d7367fc9de0a7a9c123f6135a4",
+     "size": 11363,
      "type": "file"
     },
     {
@@ -34688,7 +34702,7 @@
   },
   "sourceTree": {
    "algorithm": "sha256-canonical-path-type-mode-size-content-v2",
-   "digest": "59830f44e04efaceca0e02cd635ee38bf2e189f78998448aa4c08a5e986fb194",
+   "digest": "2e023366f792fcc24af36ca152fe675cdfed408f0b8738024a0065958d9b71ae",
    "entries": [
     {
      "mode": "100644",
@@ -36800,8 +36814,8 @@
     {
      "mode": "100644",
      "path": "src/components/map/HeraldBody.jsx",
-     "sha256": "d68e0d28212a6e439b4f85911780ddd2d2a9edcf450bed2b09d22f79553a2fa2",
-     "size": 17694,
+     "sha256": "a6ed12c84c7a64028252b827b2391e22338adb0ad68fdbcfa8438ab3031855f8",
+     "size": 18259,
      "type": "file"
     },
     {
@@ -37038,8 +37052,8 @@
     {
      "mode": "100644",
      "path": "src/components/map/RealmInspector.jsx",
-     "sha256": "a67b15afec1913e21c842c0d89730dfbfa5eca6aa94cff74ffacf53348c381bd",
-     "size": 34356,
+     "sha256": "5d4c3b17a792f328ce6abb1c2c93956e9c8fcc5ebfb3cb4bc77bf1eb39b5b45a",
+     "size": 34503,
      "type": "file"
     },
     {
@@ -37304,8 +37318,8 @@
     {
      "mode": "100644",
      "path": "src/components/map/WorldPulseData.js",
-     "sha256": "18e587fb373d21598398fde3e05db139e425315ced42400202c5afd3e02ccc10",
-     "size": 11404,
+     "sha256": "c45f7ea566a7a15ddb114d17de50967ea30f1390cd1bfc52b544c23ced89b33d",
+     "size": 11623,
      "type": "file"
     },
     {
@@ -37360,8 +37374,8 @@
     {
      "mode": "100644",
      "path": "src/components/map/heraldFeed.js",
-     "sha256": "8db179078e064a009bff14b136a99265499b76e2bba3ebfe8f1621f0efffa989",
-     "size": 10734,
+     "sha256": "b5031de1ee3b1f95c608e45fd0fff561f915b02f699c212aad4054a91e658769",
+     "size": 10900,
      "type": "file"
     },
     {
@@ -37374,8 +37388,8 @@
     {
      "mode": "100644",
      "path": "src/components/map/heraldGrammar.js",
-     "sha256": "09dd4c8de99fa7978b2d0c7f0a5da8df1d14a385d22f4b9714193fb7b8700356",
-     "size": 5851,
+     "sha256": "deab223c32a999ace0f2e4217b3799010543effc8fb76f6d72897543e7a7d55c",
+     "size": 5941,
      "type": "file"
     },
     {
@@ -39866,8 +39880,8 @@
     {
      "mode": "100644",
      "path": "src/domain/certification/couplingRegistry.js",
-     "sha256": "bc47f6d5c6ad7208a86bef2ded49e4856f9f2656d46e196c1cdde2637020952a",
-     "size": 12690,
+     "sha256": "4820d83211d52c90947be8548cf911408c0bee027afd62af6ba6157978646dd8",
+     "size": 13971,
      "type": "file"
     },
     {
@@ -39887,15 +39901,15 @@
     {
      "mode": "100644",
      "path": "src/domain/certification/couplingRegistryGrammar.js",
-     "sha256": "0b951eeb04ca075b52b4212a105e4a450217aa6ce58ed4403f95ab75b5a1581a",
-     "size": 18124,
+     "sha256": "9730f1ff1ee53092f7965d9097cbcebe7b8e07a31d742da7f4b368d9c47de3c8",
+     "size": 21078,
      "type": "file"
     },
     {
      "mode": "100644",
      "path": "src/domain/certification/couplingRegistryInfo.js",
-     "sha256": "6e224112471865ac342f3c887df61ec1be6476a17bec8df6745d0da0bb1c10e7",
-     "size": 11874,
+     "sha256": "4260f513391cef4bb357b1054c0dd06005bd44f88e3719ce35a98cb2faf9c44c",
+     "size": 16704,
      "type": "file"
     },
     {
@@ -40034,8 +40048,8 @@
     {
      "mode": "100644",
      "path": "src/domain/certification/subsystemRowsVirtual.js",
-     "sha256": "42620771d0de87a5b546ac5f69afee2288af6f3c81897a6ae458700cec6ab31d",
-     "size": 87996,
+     "sha256": "621574cbeef59a3a4d21c7c28449c4c00db2bdb93c6c3b0a2e78b34eaf733cb5",
+     "size": 92153,
      "type": "file"
     },
     {
@@ -41245,8 +41259,8 @@
     {
      "mode": "100644",
      "path": "src/domain/display/settlementRumors.js",
-     "sha256": "416a7ae8ff8b7415585b1e42a213a2d89db5497233ccada9804925add29c0c01",
-     "size": 57903,
+     "sha256": "7cded04898e6fd970fab6ee7c3a94cd59e59204a9df439b3b650bbaf6cbdcd05",
+     "size": 58266,
      "type": "file"
     },
     {
@@ -41910,8 +41924,8 @@
     {
      "mode": "100644",
      "path": "src/domain/events/realmManifest.js",
-     "sha256": "4effe0f4fd7b8e0c486c0d31fe169d4cbe2fd51eda6c89bc59aacd67e061ca40",
-     "size": 41470,
+     "sha256": "4f141b642d3b4f3b10fb9b5243be292f1c9c0f88d860be247bc96fdee4b2e9df",
+     "size": 41627,
      "type": "file"
     },
     {
@@ -42638,8 +42652,8 @@
     {
      "mode": "100644",
      "path": "src/domain/realm/heraldRouting.js",
-     "sha256": "a2c609f0c2f37992f5b5b261d6d199719b03953f04a680e7fe9f04a0450033da",
-     "size": 49051,
+     "sha256": "437f2cc2549275fd6a34cceded9a9482a2faa8182a2618063509e6964d03d448",
+     "size": 51252,
      "type": "file"
     },
     {
@@ -42799,8 +42813,8 @@
     {
      "mode": "100644",
      "path": "src/domain/region/wizardNews.js",
-     "sha256": "0eb9512467fb097f31fe157335c68d3fddb126bd9316c9de40677a1c672b2f6c",
-     "size": 57102,
+     "sha256": "acd532f6469f8688b175ccb1053681bc2c7d993e5b962aca730978be960cfb5c",
+     "size": 57117,
      "type": "file"
     },
     {
@@ -44353,8 +44367,8 @@
     {
      "mode": "100644",
      "path": "src/domain/worldPulse/brokerageStamps.js",
-     "sha256": "66fdfadf551e0ffd5bfa7b7b34b69f611b114342c5ea1829807f08a0a2b41bd2",
-     "size": 30696,
+     "sha256": "3056422480e1d8aa44cd5ed0123979d7224c2ed5d93aa5c80c58bd0834f548d3",
+     "size": 30909,
      "type": "file"
     },
     {
@@ -44367,8 +44381,8 @@
     {
      "mode": "100644",
      "path": "src/domain/worldPulse/candidateEvents.js",
-     "sha256": "0348e655176d68df5ccbfc627bb369575371ab3276a4056e810a69fb19a0b2bf",
-     "size": 45170,
+     "sha256": "fe2f5d38764bbb3b862e38babde26daee0e990beb78d6c317c28bef4ac6d4bce",
+     "size": 45761,
      "type": "file"
     },
     {
@@ -44563,8 +44577,8 @@
     {
      "mode": "100644",
      "path": "src/domain/worldPulse/counterIntelSweep.js",
-     "sha256": "1e533ece2e93637720e6e1417c3b036f73589e3e404b2a5dfb2f584d6fc73272",
-     "size": 19730,
+     "sha256": "d7fbd5a85eb27de7252d7d940baf242fb98ca609811a44b81e323d8329b2e66d",
+     "size": 19939,
      "type": "file"
     },
     {
@@ -44920,8 +44934,8 @@
     {
      "mode": "100644",
      "path": "src/domain/worldPulse/envoyErrandVocabulary.js",
-     "sha256": "ed0ae842a766bb7f8ee3fa047eae57494b6d6121378906437ca6ba6ef83a371f",
-     "size": 30190,
+     "sha256": "2d5f04ec459a0c516d1a6d0b605b4171a170a3b10e450c05e661ef2196cadeae",
+     "size": 30191,
      "type": "file"
     },
     {
@@ -45340,8 +45354,8 @@
     {
      "mode": "100644",
      "path": "src/domain/worldPulse/habitForkRegistry.js",
-     "sha256": "d3573facb957bfc16b7515083dc427ddb086abfc7b50275da6e69aa8e81256c8",
-     "size": 95931,
+     "sha256": "9840f2d607df1e4c7ba6d7e438cde765a971ba21b98bbaba28eb619ca60cba31",
+     "size": 96311,
      "type": "file"
     },
     {
@@ -45389,15 +45403,15 @@
     {
      "mode": "100644",
      "path": "src/domain/worldPulse/informationNews.js",
-     "sha256": "887e27377bb589503886d0162cbd5ebe7bf5d83988f930cea865407c3b3a27af",
-     "size": 11835,
+     "sha256": "cf8a87328953bef8f480cd52378a6cc7793356fe1c3828faf4ca562e969d77bd",
+     "size": 14303,
      "type": "file"
     },
     {
      "mode": "100644",
      "path": "src/domain/worldPulse/informationReceiptPools.js",
-     "sha256": "1a7b3a5f556f5fcc51a317a7c7723da0e5dc9997460c692cbb665f74ca232d1d",
-     "size": 7025,
+     "sha256": "b48dd298443567a6f36d48230df9df761b54b2a7f0d4bb0fc945a688f14f7a66",
+     "size": 10592,
      "type": "file"
     },
     {
@@ -45963,15 +45977,15 @@
     {
      "mode": "100644",
      "path": "src/domain/worldPulse/pactAmendment.js",
-     "sha256": "a10b5b7fdaf392f6f32a687b234967030b278a48a02cd563de6f58b37629aeb2",
-     "size": 21651,
+     "sha256": "94584f3f3c6cff642472ce25fa05b4026999231647d29e103a1caaf021db9b88",
+     "size": 21893,
      "type": "file"
     },
     {
      "mode": "100644",
      "path": "src/domain/worldPulse/pactFormation.js",
-     "sha256": "d7009d203a34abdbcb66d16f5a644c678d46eff730bbba34bc3d7298e0d68c64",
-     "size": 54704,
+     "sha256": "0329eca5c0475984ae489c0b7e76a4fea366c4957996a2c702708428ab4557bc",
+     "size": 55158,
      "type": "file"
     },
     {
@@ -45984,15 +45998,15 @@
     {
      "mode": "100644",
      "path": "src/domain/worldPulse/pactRenewal.js",
-     "sha256": "c74932fd8e1d7232d94fe61b1f3e8498c589b460a096cebccc50920c00974816",
-     "size": 22083,
+     "sha256": "47649623d1e4e52e1f2e31037430362f56fcca9c426993f70da686a01751d838",
+     "size": 45512,
      "type": "file"
     },
     {
      "mode": "100644",
      "path": "src/domain/worldPulse/pactTriggers.js",
-     "sha256": "29ef1c22847b8f3212b37a6e28d2e0bf1d8800fffeda7070d478b3cc49e612dc",
-     "size": 17061,
+     "sha256": "72c5287aacd5408377811947de93741cc26507ddd0bac5aa2564f29650b62dc0",
+     "size": 17274,
      "type": "file"
     },
     {
@@ -46040,8 +46054,8 @@
     {
      "mode": "100644",
      "path": "src/domain/worldPulse/peaceReasons.js",
-     "sha256": "5203667ae20f809639defd2796f29512b2a956c7ca133fdb8f9cb845397b852d",
-     "size": 40379,
+     "sha256": "44350988061a68e2d8f060472e8e196cbe73e203622bb4ef276024a43f9fd503",
+     "size": 41162,
      "type": "file"
     },
     {
@@ -46166,8 +46180,8 @@
     {
      "mode": "100644",
      "path": "src/domain/worldPulse/proposalAdmission.js",
-     "sha256": "517c271716c5cf20f0d2c66322cc698f9a8247a4d26a02299415656cdee24093",
-     "size": 10736,
+     "sha256": "99ac2a6c7c1bfc2ca985d84c76f4922e1a1a72a25b2dacc5a75697bbb43a8161",
+     "size": 16628,
      "type": "file"
     },
     {
@@ -46278,8 +46292,8 @@
     {
      "mode": "100644",
      "path": "src/domain/worldPulse/realmVerbExecution.js",
-     "sha256": "7c0cc6256f43cc5a32164ce423d6a1f220ef5ed856dbefb9c73cf4883d8a954f",
-     "size": 56096,
+     "sha256": "6c264c5725cf65e908d9755be77efa338c36083b93d82ee53361d8d6d7cc128c",
+     "size": 58246,
      "type": "file"
     },
     {
@@ -46389,6 +46403,13 @@
     },
     {
      "mode": "100644",
+     "path": "src/domain/worldPulse/reputationRaceConsumer.js",
+     "sha256": "cbe498b8adc1ed48bef25f75a32dfe2f4fad4c7171c3740d98c732809ab787b4",
+     "size": 19062,
+     "type": "file"
+    },
+    {
+     "mode": "100644",
      "path": "src/domain/worldPulse/residueStripGuard.js",
      "sha256": "50a5d67691a11a63b4fe49a27f9b6c35f66ed1ff1b7d4534b50546909a330b36",
      "size": 8211,
@@ -46460,8 +46481,8 @@
     {
      "mode": "100644",
      "path": "src/domain/worldPulse/routeNetworkConsumersRace.js",
-     "sha256": "a8f2d28c31791eaa69b980a79cef45ecfcb69e0034e14b2684533ca0628f58ec",
-     "size": 15176,
+     "sha256": "1032c10fc8ec05e6e9fc3aaf7ae88ce8bb3554db574f1bf64f934c8ee7013e24",
+     "size": 16266,
      "type": "file"
     },
     {
@@ -46607,8 +46628,8 @@
     {
      "mode": "100644",
      "path": "src/domain/worldPulse/settlementLifecycleKernel.js",
-     "sha256": "140ebb2d741b2a44455406e65a125656eef60e90e3ea09579b64f66ee74540d1",
-     "size": 74548,
+     "sha256": "b1548e8bf745209102cebcbc9e3ba20c8fd0c295cb6ac48c1b6ec3ad72cce7c3",
+     "size": 75454,
      "type": "file"
     },
     {
@@ -46621,8 +46642,8 @@
     {
      "mode": "100644",
      "path": "src/domain/worldPulse/settlementStrategy.js",
-     "sha256": "523e6a33807cef47e9a6f327c04e51ebc91c1aac6b5fbbcc5c0386cfd02366ea",
-     "size": 74543,
+     "sha256": "528cc4502b6d1816e3cd017b017f320a253c8a6d420a3f29e304a3ca8b57f153",
+     "size": 75991,
      "type": "file"
     },
     {
@@ -46642,8 +46663,8 @@
     {
      "mode": "100644",
      "path": "src/domain/worldPulse/simulationRules.js",
-     "sha256": "fdc664a97997fe87b21c628cab81fd667fdd8cdac01adf72750ecd88faf45d94",
-     "size": 99371,
+     "sha256": "c3d808c2fa984cfd4bd641f94343b621c52661e237f49f0dad3353f7c9e06c81",
+     "size": 100271,
      "type": "file"
     },
     {
@@ -47293,8 +47314,8 @@
     {
      "mode": "100644",
      "path": "src/domain/worldPulse/worldPulseFeedCuration.js",
-     "sha256": "bb7d27e5451604d8b6a6f06902d19a98179a0827c2cbdef306c46e66e40cf25d",
-     "size": 11076,
+     "sha256": "eb71509afed9099e977743dc62c07b365142a4d7367fc9de0a7a9c123f6135a4",
+     "size": 11363,
      "type": "file"
     },
     {
@@ -51161,22 +51182,22 @@
   }
  },
  "scanStats": {
-  "files": 2294,
-  "reads": 132251,
-  "resolved": 9860,
-  "unresolved": 122391
+  "files": 2295,
+  "reads": 132525,
+  "resolved": 9866,
+  "unresolved": 122659
  },
  "scannerProvenance": {
   "detectorDigest": "ba9de07c77536fb68e4938c3f594237d353442ef912a2cdf9649ec72b869d5ff",
-  "executionTreeDigest": "bfbc25094e55c0df0a997cef4355c3cb13d131d2a6a7fde15cc0f2bde70f85d6",
-  "scanTreeDigest": "6ae07dc60ef59a472508e68979bbf035888cb9dbf7174f410927b00f74d61633",
-  "sourceTreeDigest": "59830f44e04efaceca0e02cd635ee38bf2e189f78998448aa4c08a5e986fb194",
+  "executionTreeDigest": "968a1c821a58e86f1bd0eb635780517b484f6b509035a15ab1f4e5b3aa2b6b37",
+  "scanTreeDigest": "b440c304b09e49ad2060cb7c9cab6fbdb1a3037a033914a2a6fa268c792f5b6b",
+  "sourceTreeDigest": "2e023366f792fcc24af36ca152fe675cdfed408f0b8738024a0065958d9b71ae",
   "unscannedInputDigest": "b658b56925b87b1b2fc99fadd2c181db97d1fba11998354f33de2e4bfd14072d"
  },
  "schema": 23,
  "sentinel": {
-  "resolvedReads": 9860,
-  "totalKeys": 6537,
+  "resolvedReads": 9866,
+  "totalKeys": 6552,
   "usableShapes": 337
  },
  "total": 1970

@@ -21,14 +21,20 @@
   },
   "shrunk": {
     "on": "2026-09-24",
-    "by": "FP lane FP-I2 (IN-4 commit 2, the road)",
-    "what": "ONE entry STRUCK: npcDmVerbRecords. The list shrinks 23 → 22. The walker forced it: tests/domain/reputationRaceIn4.test.js imports the module and drives reputationRaceEnabled LIT, so AUTO credit arrived and the unstruck name redded THE RATCHET (modules) beside the base's own envoyInterceptionStage row, which is not this lane's and is left for its owner.",
-    "why": "⛔ READ THE CREDIT FOR WHAT IT IS. The acceptance file calls npcDmVerbRecords.assignmentNewsItem, the ONE writer of the assignment ruling the race joins for an exile's departure seat, so the race is proven lit THROUGH that writer's real item (the writer/reader spelling-drift discipline). That is a lit exercise of one export, not a walkthrough of the module's DM verbs; the strike banks what the walker measures and claims nothing more.",
+    "by": "FP chair (session 87797a6a, Fable 5.1)",
+    "what": "STRUCK: mechanisms:peaceTermsAppraisal, mechanisms:peaceTermsPrimitives. The list shrinks 20 → 18 mechanisms and 1 → 1 flag(s) — the direction the walker exists to force, a BANKED WIN, no chair ruling needed. It succeeds the strike of 2026-09-24 by FP lane FP-I2 (IN-4 commit 2, the road): ONE entry STRUCK: npcDmVerbRecords.",
+    "why": "FP batch landing 3: GR-5c · PEACE-1 x3 + R · IN-3's one-home cure · the witness re-record · IN-5/1 · IN-4/2 · §13 the seam family",
     "prior": {
-      "by": "the FP chair (session 87797a6a, Fable 5.1)",
-      "what": "STRUCK: mechanisms:envoyInterceptionStage, mechanisms:peaceTermsOverlay. The list shrinks 23 → 21 mechanisms and 1 → 1 flag(s) — the direction the walker exists to force, a BANKED WIN, no chair ruling needed. It succeeds the strike of 2026-08-31 by lane T4 · SEAT-B (W-SEAT SEAT-5, the liberation un-install): ONE entry STRUCK: applyWorldPulseOccupationAuthority.",
-      "why": "FP batch landing 1 at 253d14848: WF-0 + cure, TR-2's cures, LIT-1a (Owner-Signed §934.84), TR-3, IN-2 + two cures, GR-6, IN-4/1, GR-5b — the batch's declared deltas, re-measured once at the tip",
-      "note": "the FP chair's landing-1 strike (envoyInterceptionStage, peaceTermsOverlay), 23 → 21; IN-4/2's strike of npcDmVerbRecords is the newer, to 20 at the union"
+      "on": "2026-09-24",
+      "by": "FP lane FP-I2 (IN-4 commit 2, the road)",
+      "what": "ONE entry STRUCK: npcDmVerbRecords. The list shrinks 23 → 22. The walker forced it: tests/domain/reputationRaceIn4.test.js imports the module and drives reputationRaceEnabled LIT, so AUTO credit arrived and the unstruck name redded THE RATCHET (modules) beside the base's own envoyInterceptionStage row, which is not this lane's and is left for its owner.",
+      "why": "⛔ READ THE CREDIT FOR WHAT IT IS. The acceptance file calls npcDmVerbRecords.assignmentNewsItem, the ONE writer of the assignment ruling the race joins for an exile's departure seat, so the race is proven lit THROUGH that writer's real item (the writer/reader spelling-drift discipline). That is a lit exercise of one export, not a walkthrough of the module's DM verbs; the strike banks what the walker measures and claims nothing more.",
+      "prior": {
+        "by": "the FP chair (session 87797a6a, Fable 5.1)",
+        "what": "STRUCK: mechanisms:envoyInterceptionStage, mechanisms:peaceTermsOverlay. The list shrinks 23 → 21 mechanisms and 1 → 1 flag(s) — the direction the walker exists to force, a BANKED WIN, no chair ruling needed. It succeeds the strike of 2026-08-31 by lane T4 · SEAT-B (W-SEAT SEAT-5, the liberation un-install): ONE entry STRUCK: applyWorldPulseOccupationAuthority.",
+        "why": "FP batch landing 1 at 253d14848: WF-0 + cure, TR-2's cures, LIT-1a (Owner-Signed §934.84), TR-3, IN-2 + two cures, GR-6, IN-4/1, GR-5b — the batch's declared deltas, re-measured once at the tip",
+        "note": "the FP chair's landing-1 strike (envoyInterceptionStage, peaceTermsOverlay), 23 → 21; IN-4/2's strike of npcDmVerbRecords is the newer, to 20 at the union"
+      }
     }
   },
   "mechanisms": [
@@ -43,12 +49,10 @@
     "informationReceiptPools",
     "lineageNews",
     "npcDmVerbAuthority",
-    "peaceTermsAppraisal",
     "peaceTermsCarriedSheet",
     "peaceTermsCoalition",
     "peaceTermsDocument",
     "peaceTermsGraph",
-    "peaceTermsPrimitives",
     "secrecyTradeFactor",
     "sovereigntyReceiptPools",
     "warReceiptPools"

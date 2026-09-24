@@ -7,10 +7,10 @@
     "    npx vitest run tests/lint/tuningRegister.walker.test.js",
     "The refreeze EXITS NON-ZERO by design; the proof is a separate ordinary run."
   ],
-  "measuredAtSha": "d2b380dc13bb0540d1c9415da5fe18cd99d338ce",
-  "measuredBy": "the FP chair (session 87797a6a, Fable 5.1)",
+  "measuredAtSha": "5fa99d1e3210f70fa3530c13e5b3f62c28f18380",
+  "measuredBy": "FP chair (session 87797a6a, Fable 5.1)",
   "date": "2026-09-24",
-  "note": "FP batch landing 2 at 6efff620b: GR-5b's ownership cure, IN-3 (two commits), cure lane P1 (five), LIT1b-pre (three) — the batch's declared deltas, re-measured once at the tip",
+  "note": "FP batch landing 3: GR-5c · PEACE-1 x3 + R · IN-3's one-home cure · the witness re-record · IN-5/1 · IN-4/2 · §13 the seam family",
   "schemaVersion": 1,
   "trees": {
     "p1": [
@@ -67,7 +67,8 @@
         "src/domain/worldPulse/brokerageFidelity.js",
         "src/domain/worldPulse/brokerageServices.js",
         "src/domain/worldPulse/brokerageServicesFeed.js",
-        "src/domain/worldPulse/brokerageStamps.js"
+        "src/domain/worldPulse/brokerageStamps.js",
+        "src/domain/worldPulse/reputationRaceConsumer.js"
       ],
       "namedDependents": [
         "src/domain/worldPulse/brokerageFidelity.js",
@@ -1205,6 +1206,7 @@
         "src/domain/worldPulse/envoyInterceptionStage.js",
         "src/domain/worldPulse/momentum.js",
         "src/domain/worldPulse/navalKernel.js",
+        "src/domain/worldPulse/reputationRaceConsumer.js",
         "src/domain/worldPulse/roadsKernel.js",
         "src/domain/worldPulse/seatIntervention.js",
         "src/domain/worldPulse/sovereigntyReach.js",
@@ -2416,6 +2418,7 @@
         "src/domain/worldPulse/momentum.js",
         "src/domain/worldPulse/opportunism.js",
         "src/domain/worldPulse/pactFormation.js",
+        "src/domain/worldPulse/pactRenewal.js",
         "src/domain/worldPulse/peaceReasons.js",
         "src/domain/worldPulse/peaceTerms.js",
         "src/domain/worldPulse/peaceTermsAppraisal.js",
@@ -2480,6 +2483,7 @@
         "src/domain/worldPulse/momentum.js",
         "src/domain/worldPulse/opportunism.js",
         "src/domain/worldPulse/pactFormation.js",
+        "src/domain/worldPulse/pactRenewal.js",
         "src/domain/worldPulse/peaceReasons.js",
         "src/domain/worldPulse/peaceTerms.js",
         "src/domain/worldPulse/peaceTermsAppraisal.js",
@@ -2643,7 +2647,8 @@
         "src/domain/worldPulse/brokerageServicesFeed.js",
         "src/domain/worldPulse/brokerageServicesPlant.js",
         "src/domain/worldPulse/brokerageServicesRules.js",
-        "src/domain/worldPulse/infoLure.js"
+        "src/domain/worldPulse/infoLure.js",
+        "src/domain/worldPulse/reputationRaceConsumer.js"
       ],
       "namedDependents": [
         "src/domain/worldPulse/brokerageServices.js",
@@ -3033,7 +3038,7 @@
       "exported": true,
       "idiom": "literal",
       "keys": 6,
-      "line": 80,
+      "line": 81,
       "spanDigest": "ab5faec0c4fbbaf98eb0f4c952402f8d5733e27b951b40cd2b632d604e5e3f13",
       "leaves": {
         "catchOdds": 0.35,
@@ -3052,7 +3057,7 @@
       "exported": true,
       "idiom": "literal",
       "keys": 1,
-      "line": 90,
+      "line": 91,
       "spanDigest": "53adb6c9b81eb4f56da5200fa26be1f7ca40b4140c2d5a937fa310c6b736b1aa",
       "leaves": {
         "toleranceRung": "reported"
@@ -5720,10 +5725,27 @@
       "exported": true,
       "idiom": "literal",
       "keys": 1,
-      "line": 92,
+      "line": 140,
       "spanDigest": "a3ff244d387cb111750fd146f6697d864176d3074bfb9928fdb6c3200bdab0c7",
       "leaves": {
         "WINDOW_WEEKS": 26
+      },
+      "dependents": [
+        "src/domain/events/realmManifest.js",
+        "src/domain/worldPulse/pactFormation.js",
+        "src/domain/worldPulse/realmVerbExecution.js"
+      ],
+      "namedDependents": []
+    },
+    "src/domain/worldPulse/pactRenewal.js#RENEGOTIATION_TUNING": {
+      "exported": true,
+      "idiom": "literal",
+      "keys": 2,
+      "line": 151,
+      "spanDigest": "4d2c1504148d10a6379880e15a9e24dc1e7352746f8951e7592bda899af9b763",
+      "leaves": {
+        "DEMAND_SWING": 0.25,
+        "ASK_CAP": 0.5
       },
       "dependents": [
         "src/domain/events/realmManifest.js",
@@ -5736,7 +5758,7 @@
       "exported": true,
       "idiom": "literal",
       "keys": 9,
-      "line": 73,
+      "line": 75,
       "spanDigest": "62f6929fd419d58a4492b8dfd634d0d2fb8da12b264e8688d95674f5c9f3821a",
       "leaves": {
         "DEMAND_RUNG_GAP": 2,
@@ -6311,6 +6333,24 @@
       ],
       "namedDependents": []
     },
+    "src/domain/worldPulse/reputationRaceConsumer.js#REPUTATION_RACE_TUNING": {
+      "exported": true,
+      "idiom": "literal",
+      "keys": 5,
+      "line": 94,
+      "spanDigest": "dd2eb2b260c2878f65244005572c0e923b5f1f90f5e671fd193412b354ed50f8",
+      "leaves": {
+        "NOTABLE_SEVERITY": 0.5,
+        "ROUTINE_SEVERITY": 0.3,
+        "GAP_A_WEEK_MAX": 1,
+        "GAP_WEEKS_MAX": 4,
+        "GAP_A_SEASON_MAX": 13
+      },
+      "dependents": [
+        "src/domain/worldPulse/settlementLifecycleKernel.js"
+      ],
+      "namedDependents": []
+    },
     "src/domain/worldPulse/resourceDynamicsKernel.js#RESOURCE_DYNAMICS_TUNING": {
       "exported": true,
       "idiom": "literal",
@@ -6434,8 +6474,12 @@
         "LISTENER_CHANNEL": "persons",
         "MAX_RACE_TICKS": 520
       },
-      "dependents": [],
-      "namedDependents": []
+      "dependents": [
+        "src/domain/worldPulse/reputationRaceConsumer.js"
+      ],
+      "namedDependents": [
+        "src/domain/worldPulse/reputationRaceConsumer.js"
+      ]
     },
     "src/domain/worldPulse/routeNetworkConsumersStrategic.js#ROUTE_STRATEGIC_TUNING": {
       "exported": true,
@@ -6678,7 +6722,7 @@
       "exported": true,
       "idiom": "literal",
       "keys": 43,
-      "line": 175,
+      "line": 176,
       "spanDigest": "53c788ebd3234b658dec1d42b45576bab627820e62dbb95c4d00539153a294a0",
       "leaves": {
         "SEED_BASE_DRIVE": 0.05,
@@ -6774,7 +6818,7 @@
       "exported": true,
       "idiom": "aggregator",
       "keys": 3,
-      "line": 1287,
+      "line": 1307,
       "spanDigest": "eb5d52fecaa15a2aacf6803f04e7dc8dd4c5d7422aa0757424f18cf39d0ab480",
       "leaves": {
         "STRATEGY_K": {
@@ -6789,6 +6833,7 @@
       },
       "dependents": [
         "src/domain/worldPulse/candidateEvents.js",
+        "src/domain/worldPulse/realmVerbExecution.js",
         "src/domain/worldPulse/warCoalitionPulse.js"
       ],
       "namedDependents": []
@@ -6938,6 +6983,7 @@
       },
       "dependents": [
         "src/domain/worldPulse/pactFormation.js",
+        "src/domain/worldPulse/pactRenewal.js",
         "src/domain/worldPulse/suspicion.js"
       ],
       "namedDependents": [
@@ -7635,6 +7681,7 @@
       "dependents": [
         "src/domain/worldPulse/envoyNegotiationPictureBuilder.js",
         "src/domain/worldPulse/pulseKernel.js",
+        "src/domain/worldPulse/realmVerbExecution.js",
         "src/domain/worldPulse/settlementStrategy.js",
         "src/domain/worldPulse/warDeployment.js",
         "src/domain/worldPulse/warPeaceDecision.js"
@@ -8267,11 +8314,11 @@
   },
   "unclosed": [],
   "totals": {
-    "tables": 250,
-    "keys": 2160,
+    "tables": 252,
+    "keys": 2167,
     "unregisteredNamed": 535,
     "bareDecimals": 6975,
-    "zeroDependentTables": 10,
-    "zeroNamedDependentTables": 162
+    "zeroDependentTables": 9,
+    "zeroNamedDependentTables": 163
   }
 }

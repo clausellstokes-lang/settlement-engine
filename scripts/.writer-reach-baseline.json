@@ -8,7 +8,7 @@
   "The reviewable slice is computed by RULE (reviewableDark), never hand-listed."
  ],
  "schema": 1,
- "frozenAtSha": "d2b380dc13bb0540d1c9415da5fe18cd99d338ce",
+ "frozenAtSha": "5fa99d1e3210f70fa3530c13e5b3f62c28f18380",
  "charter": "§18.1 WRWALKER Car 1 (HORIZON) — chair-signed vetoably at the INSTR-WRW pre-stage",
  "minRows": 40,
  "corpusMeta": {
@@ -16,15 +16,15 @@
   "configs": 4,
   "generations": 16,
   "pulseIntervals": 12,
-  "simulationFlagsLit": 87,
+  "simulationFlagsLit": 88,
   "steadingsMinted": 12,
-  "shapeCount": 1299,
-  "originCount": 8560,
-  "transitionCount": 14496
+  "shapeCount": 1300,
+  "originCount": 8562,
+  "transitionCount": 14503
  },
- "shapesDigest": "4c40f7ef9c9ca875f5c4020066ad48ad10d8fe2041cc4141d87a8f0d6d16ad1a",
- "detectorDigest": "da2f69e837d1b5eddaacce72bd115e87404d42c55ec161b316bedc9e2b367ccc",
- "verdictDigest": "1ca85fcb7348325226c294c232afc96ab5325cac869b5ac79ba9b27fcecd50d4",
+ "shapesDigest": "9fc59aa137520c6e1d84ed24a82c8b2af3ebce620921fc77c7e48da389cdf886",
+ "detectorDigest": "c6ff47ec59b08a91703b4ede8f31f937a14c15ff7eca284e54f8a8f7075ef154",
+ "verdictDigest": "0ecfebe5bf4ef6ef608960194d055625b4e8521973a70215487e9884d36b6890",
  "surfaceRoots": {
   "web": [
    "src/main.jsx"
@@ -73,7 +73,7 @@
  ],
  "closureSizes": {
   "web-display": 732,
-  "web-transitive": 927,
+  "web-transitive": 930,
   "dossier-pdf": 429,
   "campaign-pdf": 75,
   "world-book": 92,
@@ -82,28 +82,28 @@
   "news": 29
  },
  "population": {
-  "judged": 6537,
-  "lit": 575,
-  "litName": 4676,
-  "dark": 1286,
-  "thinKeys": 9150,
-  "thinShapes": 962,
+  "judged": 6552,
+  "lit": 577,
+  "litName": 4690,
+  "dark": 1285,
+  "thinKeys": 9156,
+  "thinShapes": 963,
   "knownShapes": 337
  },
  "scanStats": {
-  "files": 1660,
-  "sites": 39382,
-  "propRead": 37276,
+  "files": 1663,
+  "sites": 39510,
+  "propRead": 37391,
   "elemRead": 0,
-  "destructure": 2091,
+  "destructure": 2104,
   "inOp": 15,
-  "rGrades": 6017,
-  "nGrades": 896710,
-  "resolvedReceivers": 6785
+  "rGrades": 6028,
+  "nGrades": 900465,
+  "resolvedReceivers": 6791
  },
- "registerDigest": "14a3b59541fe2288628da0a815192e34c8138d55f73e98ffefae63e902076501",
+ "registerDigest": "3f57ab58c6f6803cd5965b29668e268a24db983833a4ab7ee3a167aba29ae1f1",
  "pendingSurfaceCeiling": 3,
- "reviewableDarkCount": 487,
+ "reviewableDarkCount": 486,
  "darkUnregistered": [
   {
    "identity": "Bulk grain and flour on reasons",
@@ -283,7 +283,7 @@
    "identity": "affinity on metadata",
    "key": "affinity",
    "shape": "metadata",
-   "rows": 9384
+   "rows": 9447
   },
   {
    "identity": "agent_protege on internalSeats",
@@ -361,7 +361,7 @@
    "identity": "appliedHeadline on candidates",
    "key": "appliedHeadline",
    "shape": "candidates",
-   "rows": 3594
+   "rows": 3599
   },
   {
    "identity": "appliedHeadline on majors",
@@ -373,13 +373,13 @@
    "identity": "appliedHeadline on outcome",
    "key": "appliedHeadline",
    "shape": "outcome",
-   "rows": 758
+   "rows": 931
   },
   {
    "identity": "appliedHeadline on selected",
    "key": "appliedHeadline",
    "shape": "selected",
-   "rows": 506
+   "rows": 509
   },
   {
    "identity": "arcaneBlackMarket on flags",
@@ -475,13 +475,13 @@
    "identity": "authoritySignature on metadata",
    "key": "authoritySignature",
    "shape": "metadata",
-   "rows": 9384
+   "rows": 9447
   },
   {
    "identity": "authoritySignature on pulseHistory",
    "key": "authoritySignature",
    "shape": "pulseHistory",
-   "rows": 1594
+   "rows": 1599
   },
   {
    "identity": "authoritySignature on warTerminationReads",
@@ -559,7 +559,7 @@
    "identity": "believedBalanceBand on pulseHistory",
    "key": "believedBalanceBand",
    "shape": "pulseHistory",
-   "rows": 1594
+   "rows": 1599
   },
   {
    "identity": "believedBalanceBand on warTerminationReads",
@@ -571,13 +571,13 @@
    "identity": "booksDirection on metadata",
    "key": "booksDirection",
    "shape": "metadata",
-   "rows": 9384
+   "rows": 9447
   },
   {
    "identity": "booksDirection on pulseHistory",
    "key": "booksDirection",
    "shape": "pulseHistory",
-   "rows": 1594
+   "rows": 1599
   },
   {
    "identity": "booksDirection on warTerminationReads",
@@ -589,13 +589,13 @@
    "identity": "booksReason on metadata",
    "key": "booksReason",
    "shape": "metadata",
-   "rows": 9384
+   "rows": 9447
   },
   {
    "identity": "booksReason on pulseHistory",
    "key": "booksReason",
    "shape": "pulseHistory",
-   "rows": 1594
+   "rows": 1599
   },
   {
    "identity": "booksReason on warTerminationReads",
@@ -643,7 +643,7 @@
    "identity": "causeBand on pulseHistory",
    "key": "causeBand",
    "shape": "pulseHistory",
-   "rows": 1594
+   "rows": 1599
   },
   {
    "identity": "causeBand on warTerminationReads",
@@ -655,19 +655,19 @@
    "identity": "causeLifecycleEvents on pulseHistory",
    "key": "causeLifecycleEvents",
    "shape": "pulseHistory",
-   "rows": 1594
+   "rows": 1599
   },
   {
    "identity": "causeState on metadata",
    "key": "causeState",
    "shape": "metadata",
-   "rows": 9384
+   "rows": 9447
   },
   {
    "identity": "causeState on pulseHistory",
    "key": "causeState",
    "shape": "pulseHistory",
-   "rows": 1594
+   "rows": 1599
   },
   {
    "identity": "causeState on warTerminationReads",
@@ -781,7 +781,7 @@
    "identity": "chainContext on candidates",
    "key": "chainContext",
    "shape": "candidates",
-   "rows": 3594
+   "rows": 3599
   },
   {
    "identity": "chainModifiers on defenseProfile",
@@ -1057,7 +1057,7 @@
    "identity": "committed on pulseHistory",
    "key": "committed",
    "shape": "pulseHistory",
-   "rows": 1594
+   "rows": 1599
   },
   {
    "identity": "conditionNotes on resourceAnalysis",
@@ -1069,13 +1069,13 @@
    "identity": "confidenceGap on metadata",
    "key": "confidenceGap",
    "shape": "metadata",
-   "rows": 9384
+   "rows": 9447
   },
   {
    "identity": "confidentSaveId on metadata",
    "key": "confidentSaveId",
    "shape": "metadata",
-   "rows": 9384
+   "rows": 9447
   },
   {
    "identity": "conjunctionKey on causeLifecycleEvents",
@@ -1087,19 +1087,19 @@
    "identity": "conjunctionKey on pulseHistory",
    "key": "conjunctionKey",
    "shape": "pulseHistory",
-   "rows": 1594
+   "rows": 1599
   },
   {
    "identity": "contribution on candidates",
    "key": "contribution",
    "shape": "candidates",
-   "rows": 3594
+   "rows": 3599
   },
   {
    "identity": "contribution on metadata",
    "key": "contribution",
    "shape": "metadata",
-   "rows": 9384
+   "rows": 9447
   },
   {
    "identity": "copper ore on reasons",
@@ -1117,13 +1117,13 @@
    "identity": "corruptionEvents on pulseHistory",
    "key": "corruptionEvents",
    "shape": "pulseHistory",
-   "rows": 1594
+   "rows": 1599
   },
   {
    "identity": "costToContinueBand on pulseHistory",
    "key": "costToContinueBand",
    "shape": "pulseHistory",
-   "rows": 1594
+   "rows": 1599
   },
   {
    "identity": "costToContinueBand on warTerminationReads",
@@ -1135,7 +1135,7 @@
    "identity": "costToStopBand on pulseHistory",
    "key": "costToStopBand",
    "shape": "pulseHistory",
-   "rows": 1594
+   "rows": 1599
   },
   {
    "identity": "costToStopBand on warTerminationReads",
@@ -1555,7 +1555,7 @@
    "identity": "deterministic on conflictResolution",
    "key": "deterministic",
    "shape": "conflictResolution",
-   "rows": 9829
+   "rows": 9869
   },
   {
    "identity": "discoveryAcc on resourceDynamics",
@@ -1747,13 +1747,13 @@
    "identity": "exclusiveTags on candidates",
    "key": "exclusiveTags",
    "shape": "candidates",
-   "rows": 3594
+   "rows": 3599
   },
   {
    "identity": "exclusiveTags on conflictResolution",
    "key": "exclusiveTags",
    "shape": "conflictResolution",
-   "rows": 9829
+   "rows": 9869
   },
   {
    "identity": "exclusiveTags on majors",
@@ -1765,7 +1765,7 @@
    "identity": "exclusiveTags on selected",
    "key": "exclusiveTags",
    "shape": "selected",
-   "rows": 506
+   "rows": 509
   },
   {
    "identity": "exposedTick on npcs",
@@ -1945,7 +1945,7 @@
    "identity": "factionCaptureEvents on pulseHistory",
    "key": "factionCaptureEvents",
    "shape": "pulseHistory",
-   "rows": 1594
+   "rows": 1599
   },
   {
    "identity": "factionGoal on members",
@@ -1963,7 +1963,7 @@
    "identity": "factionPatch on candidates",
    "key": "factionPatch",
    "shape": "candidates",
-   "rows": 3594
+   "rows": 3599
   },
   {
    "identity": "factionPatch on majors",
@@ -1975,19 +1975,19 @@
    "identity": "factionPatch on outcome",
    "key": "factionPatch",
    "shape": "outcome",
-   "rows": 758
+   "rows": 931
   },
   {
    "identity": "factionPatch on selected",
    "key": "factionPatch",
    "shape": "selected",
-   "rows": 506
+   "rows": 509
   },
   {
    "identity": "fate on candidates",
    "key": "fate",
    "shape": "candidates",
-   "rows": 3594
+   "rows": 3599
   },
   {
    "identity": "flowProfile on relationshipMemory",
@@ -2041,13 +2041,13 @@
    "identity": "fromSaveId on metadata",
    "key": "fromSaveId",
    "shape": "metadata",
-   "rows": 9384
+   "rows": 9447
   },
   {
    "identity": "fromSaveId on selected",
    "key": "fromSaveId",
    "shape": "selected",
-   "rows": 506
+   "rows": 509
   },
   {
    "identity": "fromState on autoApplied",
@@ -2059,13 +2059,13 @@
    "identity": "fromState on metadata",
    "key": "fromState",
    "shape": "metadata",
-   "rows": 9384
+   "rows": 9447
   },
   {
    "identity": "fromState on selected",
    "key": "fromState",
    "shape": "selected",
-   "rows": 506
+   "rows": 509
   },
   {
    "identity": "fuel on osr000",
@@ -2125,13 +2125,13 @@
    "identity": "gapKind on candidates",
    "key": "gapKind",
    "shape": "candidates",
-   "rows": 3594
+   "rows": 3599
   },
   {
    "identity": "gapKind on metadata",
    "key": "gapKind",
    "shape": "metadata",
-   "rows": 9384
+   "rows": 9447
   },
   {
    "identity": "gateEvidence on autoApplied",
@@ -2143,13 +2143,13 @@
    "identity": "gateEvidence on metadata",
    "key": "gateEvidence",
    "shape": "metadata",
-   "rows": 9384
+   "rows": 9447
   },
   {
    "identity": "gateEvidence on selected",
    "key": "gateEvidence",
    "shape": "selected",
-   "rows": 506
+   "rows": 509
   },
   {
    "identity": "gemstone_deposits on depletedSince",
@@ -2191,7 +2191,7 @@
    "identity": "graduatedStressors on pulseHistory",
    "key": "graduatedStressors",
    "shape": "pulseHistory",
-   "rows": 1594
+   "rows": 1599
   },
   {
    "identity": "grain on reasons",
@@ -2239,7 +2239,7 @@
    "identity": "hands on pulseHistory",
    "key": "hands",
    "shape": "pulseHistory",
-   "rows": 1594
+   "rows": 1599
   },
   {
    "identity": "hard_drugs on contentBoundaries",
@@ -2443,7 +2443,7 @@
    "identity": "homeFrontDurationBand on pulseHistory",
    "key": "homeFrontDurationBand",
    "shape": "pulseHistory",
-   "rows": 1594
+   "rows": 1599
   },
   {
    "identity": "homeFrontDurationBand on warTerminationReads",
@@ -2473,13 +2473,13 @@
    "identity": "impairment on candidates",
    "key": "impairment",
    "shape": "candidates",
-   "rows": 3594
+   "rows": 3599
   },
   {
    "identity": "impairment on metadata",
    "key": "impairment",
    "shape": "metadata",
-   "rows": 9384
+   "rows": 9447
   },
   {
    "identity": "importNote on foodSecurity",
@@ -2533,7 +2533,7 @@
    "identity": "interpretedAtTick on metadata",
    "key": "interpretedAtTick",
    "shape": "metadata",
-   "rows": 9384
+   "rows": 9447
   },
   {
    "identity": "iron on osr000",
@@ -2911,7 +2911,7 @@
    "identity": "lastTargetedBy on rivalPatch",
    "key": "lastTargetedBy",
    "shape": "rivalPatch",
-   "rows": 166
+   "rows": 167
   },
   {
    "identity": "lastTargetedTick on npcStates",
@@ -2929,7 +2929,7 @@
    "identity": "lastTargetedTick on rivalPatch",
    "key": "lastTargetedTick",
    "shape": "rivalPatch",
-   "rows": 166
+   "rows": 167
   },
   {
    "identity": "lawPreferences on factionStates",
@@ -3061,7 +3061,7 @@
    "identity": "legitimacyClaim on candidates",
    "key": "legitimacyClaim",
    "shape": "candidates",
-   "rows": 3594
+   "rows": 3599
   },
   {
    "identity": "legitimacyClaim on factionStates",
@@ -3079,13 +3079,13 @@
    "identity": "legitimacyClaim on outcome",
    "key": "legitimacyClaim",
    "shape": "outcome",
-   "rows": 758
+   "rows": 931
   },
   {
    "identity": "legitimacyClaim on selected",
    "key": "legitimacyClaim",
    "shape": "selected",
-   "rows": 506
+   "rows": 509
   },
   {
    "identity": "lieutenant_operator on internalSeats",
@@ -3223,19 +3223,19 @@
    "identity": "markets on pulseHistory",
    "key": "markets",
    "shape": "pulseHistory",
-   "rows": 1594
+   "rows": 1599
   },
   {
    "identity": "mechanicalOutcomeCount on pulseHistory",
    "key": "mechanicalOutcomeCount",
    "shape": "pulseHistory",
-   "rows": 1594
+   "rows": 1599
   },
   {
    "identity": "mechanicalRumorSeeds on pulseHistory",
    "key": "mechanicalRumorSeeds",
    "shape": "pulseHistory",
-   "rows": 1594
+   "rows": 1599
   },
   {
    "identity": "medicinal herbs on reasons",
@@ -3283,7 +3283,7 @@
    "identity": "minimumStreak on metadata",
    "key": "minimumStreak",
    "shape": "metadata",
-   "rows": 9384
+   "rows": 9447
   },
   {
    "identity": "mintFragility01 on osr003",
@@ -3301,7 +3301,7 @@
    "identity": "momentumBand on pulseHistory",
    "key": "momentumBand",
    "shape": "pulseHistory",
-   "rows": 1594
+   "rows": 1599
   },
   {
    "identity": "momentumBand on warTerminationReads",
@@ -3313,13 +3313,13 @@
    "identity": "momentumBroken on metadata",
    "key": "momentumBroken",
    "shape": "metadata",
-   "rows": 9384
+   "rows": 9447
   },
   {
    "identity": "momentumBroken on pulseHistory",
    "key": "momentumBroken",
    "shape": "pulseHistory",
-   "rows": 1594
+   "rows": 1599
   },
   {
    "identity": "momentumBroken on warTerminationReads",
@@ -3373,7 +3373,7 @@
    "identity": "opponentAuthoritySignature on pulseHistory",
    "key": "opponentAuthoritySignature",
    "shape": "pulseHistory",
-   "rows": 1594
+   "rows": 1599
   },
   {
    "identity": "opponentAuthoritySignature on warTerminationReads",
@@ -3385,7 +3385,7 @@
    "identity": "opponentBelievedBalanceBand on pulseHistory",
    "key": "opponentBelievedBalanceBand",
    "shape": "pulseHistory",
-   "rows": 1594
+   "rows": 1599
   },
   {
    "identity": "opponentBelievedBalanceBand on warTerminationReads",
@@ -3397,7 +3397,7 @@
    "identity": "opponentTruthBalanceBand on pulseHistory",
    "key": "opponentTruthBalanceBand",
    "shape": "pulseHistory",
-   "rows": 1594
+   "rows": 1599
   },
   {
    "identity": "opponentTruthBalanceBand on warTerminationReads",
@@ -3415,7 +3415,7 @@
    "identity": "originEvidence on metadata",
    "key": "originEvidence",
    "shape": "metadata",
-   "rows": 9384
+   "rows": 9447
   },
   {
    "identity": "originTick on npcs",
@@ -3439,7 +3439,7 @@
    "identity": "originVariant on metadata",
    "key": "originVariant",
    "shape": "metadata",
-   "rows": 9384
+   "rows": 9447
   },
   {
    "identity": "osr000 on distanceMatrix",
@@ -5557,7 +5557,7 @@
    "identity": "populationConserved on candidates",
    "key": "populationConserved",
    "shape": "candidates",
-   "rows": 3594
+   "rows": 3599
   },
   {
    "identity": "powerBases on factionStates",
@@ -5584,18 +5584,6 @@
    "rows": 420
   },
   {
-   "identity": "preserveInstitutions on majors",
-   "key": "preserveInstitutions",
-   "shape": "majors",
-   "rows": 49
-  },
-  {
-   "identity": "preserveInstitutions on proposalPayload",
-   "key": "preserveInstitutions",
-   "shape": "proposalPayload",
-   "rows": 1369
-  },
-  {
    "identity": "pressureEvidence on autoApplied",
    "key": "pressureEvidence",
    "shape": "autoApplied",
@@ -5605,13 +5593,13 @@
    "identity": "pressureEvidence on metadata",
    "key": "pressureEvidence",
    "shape": "metadata",
-   "rows": 9384
+   "rows": 9447
   },
   {
    "identity": "pressureEvidence on selected",
    "key": "pressureEvidence",
    "shape": "selected",
-   "rows": 506
+   "rows": 509
   },
   {
    "identity": "pressureKind on autoApplied",
@@ -5623,13 +5611,13 @@
    "identity": "pressureKind on metadata",
    "key": "pressureKind",
    "shape": "metadata",
-   "rows": 9384
+   "rows": 9447
   },
   {
    "identity": "pressureKind on selected",
    "key": "pressureKind",
    "shape": "selected",
-   "rows": 506
+   "rows": 509
   },
   {
    "identity": "pressureScore on autoApplied",
@@ -5641,19 +5629,19 @@
    "identity": "pressureScore on metadata",
    "key": "pressureScore",
    "shape": "metadata",
-   "rows": 9384
+   "rows": 9447
   },
   {
    "identity": "pressureScore on selected",
    "key": "pressureScore",
    "shape": "selected",
-   "rows": 506
+   "rows": 509
   },
   {
    "identity": "priorBuilds on metadata",
    "key": "priorBuilds",
    "shape": "metadata",
-   "rows": 9384
+   "rows": 9447
   },
   {
    "identity": "priorCause on causeLifecycleEvents",
@@ -5665,7 +5653,7 @@
    "identity": "priorCause on pulseHistory",
    "key": "priorCause",
    "shape": "pulseHistory",
-   "rows": 1594
+   "rows": 1599
   },
   {
    "identity": "priorCauses on osr005:npc_7",
@@ -5683,7 +5671,7 @@
    "identity": "priorCloses on metadata",
    "key": "priorCloses",
    "shape": "metadata",
-   "rows": 9384
+   "rows": 9447
   },
   {
    "identity": "priorities on economicState",
@@ -5707,13 +5695,13 @@
    "identity": "probabilityMult on metadata",
    "key": "probabilityMult",
    "shape": "metadata",
-   "rows": 9384
+   "rows": 9447
   },
   {
    "identity": "probabilityMult on selected",
    "key": "probabilityMult",
    "shape": "selected",
-   "rows": 506
+   "rows": 509
   },
   {
    "identity": "prosperityAccrued on osr005",
@@ -5917,7 +5905,7 @@
    "identity": "randomDepletionEligible on metadata",
    "key": "randomDepletionEligible",
    "shape": "metadata",
-   "rows": 9384
+   "rows": 9447
   },
   {
    "identity": "randomDepletionEligible on resourceConditions",
@@ -5935,7 +5923,7 @@
    "identity": "randomDepletionEligible on selected",
    "key": "randomDepletionEligible",
    "shape": "selected",
-   "rows": 506
+   "rows": 509
   },
   {
    "identity": "rebirths on osr000",
@@ -6043,13 +6031,13 @@
    "identity": "receiptClass on provenance",
    "key": "receiptClass",
    "shape": "provenance",
-   "rows": 3804
+   "rows": 3822
   },
   {
    "identity": "recentAction on candidates",
    "key": "recentAction",
    "shape": "candidates",
-   "rows": 3594
+   "rows": 3599
   },
   {
    "identity": "recentAction on factionStates",
@@ -6067,13 +6055,13 @@
    "identity": "recentAction on outcome",
    "key": "recentAction",
    "shape": "outcome",
-   "rows": 758
+   "rows": 931
   },
   {
    "identity": "recentAction on selected",
    "key": "recentAction",
    "shape": "selected",
-   "rows": 506
+   "rows": 509
   },
   {
    "identity": "recentMemory on relationshipMemory",
@@ -6091,7 +6079,7 @@
    "identity": "recoveryMode on metadata",
    "key": "recoveryMode",
    "shape": "metadata",
-   "rows": 9384
+   "rows": 9447
   },
   {
    "identity": "recoveryMode on resourceConditions",
@@ -6109,7 +6097,7 @@
    "identity": "recoveryMode on selected",
    "key": "recoveryMode",
    "shape": "selected",
-   "rows": 506
+   "rows": 509
   },
   {
    "identity": "reinforcementFlow on osr000",
@@ -6163,7 +6151,7 @@
    "identity": "renewability on metadata",
    "key": "renewability",
    "shape": "metadata",
-   "rows": 9384
+   "rows": 9447
   },
   {
    "identity": "renewability on resourceTaxonomy",
@@ -6175,7 +6163,7 @@
    "identity": "renewability on selected",
    "key": "renewability",
    "shape": "selected",
-   "rows": 506
+   "rows": 509
   },
   {
    "identity": "requiredCapacity on _isolationSupport",
@@ -6343,13 +6331,13 @@
    "identity": "resourceTaxonomy on metadata",
    "key": "resourceTaxonomy",
    "shape": "metadata",
-   "rows": 9384
+   "rows": 9447
   },
   {
    "identity": "resourceTaxonomy on selected",
    "key": "resourceTaxonomy",
    "shape": "selected",
-   "rows": 506
+   "rows": 509
   },
   {
    "identity": "resource_pressure on reasons",
@@ -6379,13 +6367,13 @@
    "identity": "rulerLawfulnessBand on metadata",
    "key": "rulerLawfulnessBand",
    "shape": "metadata",
-   "rows": 9384
+   "rows": 9447
   },
   {
    "identity": "rulerLawfulnessBand on pulseHistory",
    "key": "rulerLawfulnessBand",
    "shape": "pulseHistory",
-   "rows": 1594
+   "rows": 1599
   },
   {
    "identity": "rulerLawfulnessBand on warTerminationReads",
@@ -6397,13 +6385,13 @@
    "identity": "rulerMoralityBand on metadata",
    "key": "rulerMoralityBand",
    "shape": "metadata",
-   "rows": 9384
+   "rows": 9447
   },
   {
    "identity": "rulerMoralityBand on pulseHistory",
    "key": "rulerMoralityBand",
    "shape": "pulseHistory",
-   "rows": 1594
+   "rows": 1599
   },
   {
    "identity": "rulerMoralityBand on warTerminationReads",
@@ -6643,13 +6631,13 @@
    "identity": "sent on metadata",
    "key": "sent",
    "shape": "metadata",
-   "rows": 9384
+   "rows": 9447
   },
   {
    "identity": "sent on selected",
    "key": "sent",
    "shape": "selected",
-   "rows": 506
+   "rows": 509
   },
   {
    "identity": "settlementCondition on members",
@@ -6685,7 +6673,7 @@
    "identity": "sourceNote on metadata",
    "key": "sourceNote",
    "shape": "metadata",
-   "rows": 9384
+   "rows": 9447
   },
   {
    "identity": "sourceNotes on autoApplied",
@@ -6703,7 +6691,7 @@
    "identity": "sourceNotes on metadata",
    "key": "sourceNotes",
    "shape": "metadata",
-   "rows": 9384
+   "rows": 9447
   },
   {
    "identity": "sourceNotes on pressureEvidence",
@@ -6715,7 +6703,7 @@
    "identity": "sourceNotes on selected",
    "key": "sourceNotes",
    "shape": "selected",
-   "rows": 506
+   "rows": 509
   },
   {
    "identity": "specificIssue on currentTensions",
@@ -6877,7 +6865,7 @@
    "identity": "stores on pulseHistory",
    "key": "stores",
    "shape": "pulseHistory",
-   "rows": 1594
+   "rows": 1599
   },
   {
    "identity": "strangle01 on osr003",
@@ -6895,7 +6883,7 @@
    "identity": "streak on metadata",
    "key": "streak",
    "shape": "metadata",
-   "rows": 9384
+   "rows": 9447
   },
   {
    "identity": "streak on tierDrift",
@@ -6919,7 +6907,7 @@
    "identity": "support on metadata",
    "key": "support",
    "shape": "metadata",
-   "rows": 9384
+   "rows": 9447
   },
   {
    "identity": "support on tierDrift",
@@ -7201,7 +7189,7 @@
    "identity": "timeTicks on pulseHistory",
    "key": "timeTicks",
    "shape": "pulseHistory",
-   "rows": 1594
+   "rows": 1599
   },
   {
    "identity": "tithed on stockpile",
@@ -7219,13 +7207,13 @@
    "identity": "toSaveId on metadata",
    "key": "toSaveId",
    "shape": "metadata",
-   "rows": 9384
+   "rows": 9447
   },
   {
    "identity": "toSaveId on selected",
    "key": "toSaveId",
    "shape": "selected",
-   "rows": 506
+   "rows": 509
   },
   {
    "identity": "toState on autoApplied",
@@ -7237,13 +7225,13 @@
    "identity": "toState on metadata",
    "key": "toState",
    "shape": "metadata",
-   "rows": 9384
+   "rows": 9447
   },
   {
    "identity": "toState on selected",
    "key": "toState",
    "shape": "selected",
-   "rows": 506
+   "rows": 509
   },
   {
    "identity": "torture on contentBoundaries",
@@ -7279,7 +7267,7 @@
    "identity": "truthBalanceBand on pulseHistory",
    "key": "truthBalanceBand",
    "shape": "pulseHistory",
-   "rows": 1594
+   "rows": 1599
   },
   {
    "identity": "truthBalanceBand on warTerminationReads",
@@ -7333,19 +7321,19 @@
    "identity": "warEconomy on metadata",
    "key": "warEconomy",
    "shape": "metadata",
-   "rows": 9384
+   "rows": 9447
   },
   {
    "identity": "warEconomy on selected",
    "key": "warEconomy",
    "shape": "selected",
-   "rows": 506
+   "rows": 509
   },
   {
    "identity": "warRulingRead on metadata",
    "key": "warRulingRead",
    "shape": "metadata",
-   "rows": 9384
+   "rows": 9447
   },
   {
    "identity": "warningCount on metrics",
@@ -9020,7 +9008,7 @@
   "metadata on majors": "dossier-pdf=N foundry=N web-display=N web-transitive=N",
   "momentum on majors": "dossier-pdf=N foundry=N web-transitive=N",
   "power on majors": "campaign-pdf=N dossier-pdf=N foundry=N web-display=N web-transitive=N world-book=N",
-  "preserveInstitutions on majors": "",
+  "preserveInstitutions on majors": "web-display=N",
   "probability on majors": "dossier-pdf=N foundry=N web-display=N web-transitive=N",
   "proposalPayload on majors": "dossier-pdf=N foundry=N web-display=N web-transitive=N",
   "reasons on majors": "campaign-pdf=N dossier-pdf=N foundry=N news=N web-display=N web-transitive=N world-book=N",
@@ -9199,6 +9187,7 @@
   "score on metadata": "campaign-pdf=N dossier-pdf=N foundry=N json-export=N news=N web-display=N web-transitive=N world-book=N",
   "sent on metadata": "web-transitive=N",
   "settlementId on metadata": "campaign-pdf=N dossier-pdf=N foundry=N news=N web-display=N web-transitive=N world-book=N",
+  "settlementIds on metadata": "campaign-pdf=N dossier-pdf=N foundry=N json-export=N news=N web-display=N web-transitive=N world-book=N",
   "sourceNote on metadata": "",
   "sourceNotes on metadata": "",
   "spreadChannels on metadata": "dossier-pdf=N web-transitive=N",
@@ -13268,6 +13257,7 @@
   "timesExposed on osr015:npc_6": "campaign-pdf=N dossier-pdf=N foundry=N web-transitive=N world-book=N",
   "weakness on osr015:npc_6": "",
   "week on osr015:npc_6": "dossier-pdf=N foundry=N web-display=N web-transitive=N",
+  "actionFamily on outcome": "dossier-pdf=N foundry=N web-display=N web-transitive=N",
   "ambitionHeat on outcome": "dossier-pdf=N foundry=N web-transitive=N",
   "appliedHeadline on outcome": "web-transitive=R",
   "applyMode on outcome": "dossier-pdf=N foundry=N json-export=N news=N web-display=N web-transitive=R",
@@ -13277,17 +13267,23 @@
   "conflictTags on outcome": "dossier-pdf=N foundry=N web-transitive=R",
   "corruptionHeat on outcome": "dossier-pdf=N foundry=N web-transitive=N",
   "dotRank on outcome": "campaign-pdf=N dossier-pdf=N foundry=N web-transitive=N world-book=N",
+  "dotRankAfter on outcome": "web-display=N",
+  "dotRankBefore on outcome": "web-display=N",
   "exhaustion on outcome": "dossier-pdf=N foundry=N web-display=N web-transitive=N",
   "factionId on outcome": "dossier-pdf=N foundry=N news=N web-display=N web-transitive=R",
   "factionPatch on outcome": "web-transitive=R",
   "factionSeat on outcome": "dossier-pdf=N foundry=N web-transitive=N",
   "fear on outcome": "dossier-pdf=N foundry=N web-display=N web-transitive=N",
+  "fromType on outcome": "dossier-pdf=N foundry=N web-display=N web-transitive=N",
   "generatedAtTick on outcome": "dossier-pdf=R foundry=R web-transitive=R",
   "goalProgress on outcome": "dossier-pdf=N foundry=N web-transitive=N",
+  "governmentPreference on outcome": "web-display=N web-transitive=N",
   "headline on outcome": "campaign-pdf=N dossier-pdf=N foundry=N json-export=N news=N web-display=R web-transitive=R world-book=N",
   "id on outcome": "campaign-pdf=N dossier-pdf=R foundry=R json-export=R news=N web-display=R web-transitive=R world-book=N",
+  "kind on outcome": "campaign-pdf=N dossier-pdf=N foundry=N json-export=N news=N web-display=N web-transitive=R world-book=N",
   "lastActedTick on outcome": "dossier-pdf=N foundry=N web-transitive=N",
   "lastAction on outcome": "dossier-pdf=N foundry=N web-transitive=N",
+  "legitimacyBand on outcome": "web-display=N",
   "legitimacyClaim on outcome": "web-transitive=N",
   "leverage on outcome": "campaign-pdf=N dossier-pdf=N foundry=N web-transitive=N world-book=N",
   "long on outcome": "campaign-pdf=N dossier-pdf=N foundry=N web-display=N web-transitive=N world-book=N",
@@ -13296,9 +13292,11 @@
   "momentum on outcome": "dossier-pdf=N foundry=N web-transitive=N",
   "npcId on outcome": "dossier-pdf=R foundry=R news=N web-display=N web-transitive=R",
   "npcPatch on outcome": "dossier-pdf=R foundry=R web-display=N web-transitive=R",
+  "preserveInstitutions on outcome": "web-display=N",
   "probability on outcome": "dossier-pdf=N foundry=N web-display=N web-transitive=N",
   "proposalPayload on outcome": "dossier-pdf=R foundry=R web-display=R web-transitive=R",
   "proposedRelationshipType on outcome": "dossier-pdf=N foundry=N web-transitive=N",
+  "reason on outcome": "campaign-pdf=N dossier-pdf=N foundry=N news=N web-display=N web-transitive=N world-book=N",
   "reasons on outcome": "campaign-pdf=N dossier-pdf=R foundry=R news=N web-display=R web-transitive=R world-book=N",
   "recentAction on outcome": "",
   "relationshipKey on outcome": "campaign-pdf=N dossier-pdf=R foundry=R web-display=N web-transitive=R world-book=N",
@@ -13307,13 +13305,16 @@
   "rivalNpcId on outcome": "dossier-pdf=R foundry=R web-transitive=R",
   "rivalPatch on outcome": "dossier-pdf=R foundry=R web-transitive=R",
   "rivalryTargets on outcome": "dossier-pdf=N foundry=N web-transitive=N",
+  "roleArchetype on outcome": "dossier-pdf=N foundry=N web-display=N web-transitive=N",
   "roll on outcome": "dossier-pdf=N foundry=N web-display=N web-transitive=N",
   "ruleFamily on outcome": "dossier-pdf=R foundry=R web-display=N web-transitive=R",
   "ruleId on outcome": "dossier-pdf=N foundry=N web-transitive=N",
+  "settlementId on outcome": "campaign-pdf=N dossier-pdf=R foundry=R news=N web-display=N web-transitive=R world-book=N",
   "severity on outcome": "campaign-pdf=N dossier-pdf=R foundry=R news=N web-display=N web-transitive=R world-book=N",
   "short on outcome": "campaign-pdf=N dossier-pdf=N foundry=N web-display=N web-transitive=N world-book=N",
   "summary on outcome": "campaign-pdf=N dossier-pdf=N foundry=N json-export=N news=N web-display=R web-transitive=R world-book=N",
   "targetSaveId on outcome": "campaign-pdf=N dossier-pdf=R foundry=R json-export=N web-display=N web-transitive=R world-book=N",
+  "toType on outcome": "dossier-pdf=N foundry=N web-display=N web-transitive=N",
   "trajectory on outcome": "dossier-pdf=N foundry=N news=N web-transitive=N",
   "type on outcome": "campaign-pdf=N dossier-pdf=R foundry=R json-export=N news=N web-display=N web-transitive=R world-book=N",
   "chainKey on partiallyExploited": "dossier-pdf=N foundry=N web-display=N",
@@ -13407,7 +13408,7 @@
   "peaceFrontOwnerId on proposalPayload": "dossier-pdf=R foundry=R web-transitive=R",
   "peaceFrontSinceTick on proposalPayload": "dossier-pdf=R foundry=R web-transitive=R",
   "peaceOffer on proposalPayload": "dossier-pdf=R foundry=R web-transitive=R",
-  "preserveInstitutions on proposalPayload": "",
+  "preserveInstitutions on proposalPayload": "web-display=R",
   "reason on proposalPayload": "campaign-pdf=N dossier-pdf=R foundry=R news=N web-display=N web-transitive=R world-book=N",
   "relationshipKey on proposalPayload": "campaign-pdf=N dossier-pdf=R foundry=R web-display=N web-transitive=R world-book=N",
   "rivalNpcId on proposalPayload": "dossier-pdf=N foundry=N web-transitive=N",
@@ -13426,6 +13427,8 @@
   "severity on proposals": "campaign-pdf=N dossier-pdf=N foundry=N news=N web-display=N web-transitive=N world-book=N",
   "status on proposals": "campaign-pdf=N dossier-pdf=N foundry=N json-export=N news=N web-display=N web-transitive=N world-book=N",
   "summary on proposals": "campaign-pdf=N dossier-pdf=N foundry=N json-export=N news=N web-display=N web-transitive=N world-book=N",
+  "supersededAt on proposals": "web-display=N",
+  "supersessionReason on proposals": "web-transitive=N",
   "tick on proposals": "campaign-pdf=N dossier-pdf=N foundry=N json-export=N news=N web-display=N web-transitive=N world-book=N",
   "updatedAt on proposals": "campaign-pdf=N dossier-pdf=N foundry=N news=N web-display=N web-transitive=N world-book=N",
   "reason on prosperityMod": "campaign-pdf=N dossier-pdf=N foundry=N news=N web-display=N web-transitive=N world-book=N",
