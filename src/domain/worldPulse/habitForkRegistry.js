@@ -761,4 +761,94 @@ export const HABIT_FORK_REGISTRY = Object.freeze([
     symbol: 'foldNarrativeTempo', discovery: 'bare', disposition: 'STAY',
     reason: 'NO WEIGHT, NO FORK. MEASURED, the last of judgment 265 (c)\'s four: the tempo folds what the tick already selected and deferred into a ledger and reads a tier off frozen edges, with no draw, no roll and no weighted arm in the module. ⭐ Design §19 ruling 3 offers it as a DIRECTION rather than a pin, and the measurement agrees with that shape exactly: there is no draw to pin, only a banded reading to overwrite, and a direction that sets the band is an honest act where a pin would be a fiction. ⛔ RECORDED rather than omitted on HBF-31\'s precedent',
   }),
+  // ── WF-0: THE FAITH REGISTRATION DEBT — nine traditions/* symbols ─────────────
+  //
+  // FP-ARCHITECTURE-FOLD-2026-09-23.md J-EM-5 ("THE DETERMINISTIC FAMILIES ARE
+  // DIRECTED, NEVER PINNED"): EM-FP-SEAM-MEASUREMENT.md §4's draw scan found 50
+  // sites in 28 symbols under the FP families' modules, 19 already registered, NINE
+  // unregistered — ALL in src/domain/traditions/*, invisible to the idiom scan
+  // above because they draw through the PRNG's own methods (.randInt/.chance/
+  // .pick/.weightedPick/.randFloat/.shuffle), which none of the three signatures
+  // this walker runs (KEYED_RACE/SOFTMAX_SAMPLE/SCORE_EXTREMUM) matches. `checklist`
+  // (not `idiom`) for exactly that reason — MEASURED against the live scan, not
+  // assumed: none of the nine appears in DISCOVERED. `domain: 'FAITH'` joins the
+  // owner's named-domain checklist beside HBF-21/22/23, the precedent for a FAITH
+  // fork found by a LATER measurement pass than the original named-domain round.
+  //
+  // FOUR are politics.js's PULSE-TIME forks (advancePolitics, the T-3 mover's
+  // per-tick reassignment/mutation checkpoints): DEFER, with a written closeOwed,
+  // per this wave's own law — it registers, it does not dispose. NONE carries an
+  // actionVocabulary: MEASURED at this wave, politics.js exports no closed set
+  // that types any of the four draws' own outcome (an identity pick, a Bernoulli
+  // gate, a cadence boolean, and a re-dress pick whose words live in a SIBLING
+  // module, data/traditionCorpus.js — FINITE-SEMANTICS refuses a vocabulary
+  // declared off the draw's own module outside HBF-17's one standing exception).
+  //
+  // FIVE are FOUNDING DERIVATIONS (genesis.js's deriveFoundingTraditions and its
+  // three helpers, plus customFounding.js's adaptCustomTradition): STAY, reason "a
+  // founding derivation — root-shaped (the survey's U-29/U-30 class)" verbatim, per
+  // this wave's brief — genesis.js's own header rules them "the design's MINT-TIME
+  // RULING made concrete... deterministic from the settlement seed alone", the same
+  // class as HBF-25's road graph ("part of what a SEED IS"). NO behaviour change:
+  // nothing under src imports this file (habitForkRegistry.js), so these nine rows
+  // are a record and cannot move a byte of world output — the same structural
+  // guarantee EM-E0's forty-four carry.
+  fork({
+    forkId: 'HBF-93', module: 'src/domain/traditions/politics',
+    symbol: 'claimRoll', discovery: 'checklist', disposition: 'DEFER',
+    domain: 'FAITH',
+    reason: 'FAITH — the ascendant-regime claim roll (§6 reassignment, T3-b). A keyed Bernoulli gate (CLAIM_CHANCE = 0.35) on whether a seat change lets the new order claim a faction/institution-owned tradition. Genuinely actor-addressable (the ascendant regime) and genuinely weighted, so it is read rather than assumed dry — HBF-52\'s shape, one family over. CLAIM_CHANCE is a bare tuning constant, not a vocabulary: the outcome is claimed-or-not, never a member of a closed word set',
+    closeOwed: 'grade a claim against whether the observance stayed with the new seat to its own next checkpoint, which the mutationLog record already dates; no actionVocabulary exists at this module — vocabulary to mint at WF-2/WF-5 if a pin is ever offered here',
+  }),
+  fork({
+    forkId: 'HBF-94', module: 'src/domain/traditions/politics',
+    symbol: 'driftDue', discovery: 'checklist', disposition: 'DEFER',
+    domain: 'FAITH',
+    reason: 'FAITH — generational drift\'s own cadence (§7 mutation, T3-b). A keyed randInt picks a per-record PHASE (0..DRIFT_PERIOD-1) once, deterministically, off the record\'s own id; the boolean "is drift due this year" is then pure arithmetic over that phase. The TICK-INVARIANT-phase-off-a-keyed-fork shape is HBF-80\'s (seasons), which this wave does not re-read past: whether a scheduling phase is a CHOICE or a RATE has not been ruled here either. The outcome is a bare boolean, no vocabulary of any kind',
+    closeOwed: 'establish whether the phase draw chooses anything or merely sets a re-dress cadence, exactly HBF-80\'s open question; a cadence takes STAY. No actionVocabulary exists at this module — vocabulary to mint at WF-2/WF-5 if the reading ever needs one',
+  }),
+  fork({
+    forkId: 'HBF-95', module: 'src/domain/traditions/politics',
+    symbol: 'pickOwner', discovery: 'checklist', disposition: 'DEFER',
+    domain: 'FAITH',
+    reason: 'FAITH — the owner tie-break among equally-fit candidates (§6 assignment). MEASURED, and the shape is worth stating plainly for a later reader: `pool` is built by filtering to the archetype-matching, kind-preferred candidates ALREADY sorted by `cmp(key)` (codepoint), then `rng.randInt(0, pool.length - 1)` picks flatly among them — UNWEIGHTED, over an already-canonical order, which is HBF-37\'s exact shape (drawPick) and HBF-91\'s (admissionFor): a pick that exists to be unbiased by alphabet rather than to prefer one power over another, an identity preference HBF-22/HBF-35/HBF-37/HBF-71 all rule forbidden ground. ⚠ Filed DEFER rather than STAY at this wave: this row\'s brief frames the four politics.js forks by their closeOwed, and a permanent STAY ruling on the strength of one wave\'s own reading — however closely it matches HBF-37 — is the chair\'s to bank, not this registration\'s to presume. The measurement above is offered for exactly that promotion',
+    closeOwed: 'the chair\'s call: promote to STAY on the HBF-37/HBF-91 precedent (unweighted, presorted, identity-forbidden-ground), or grade a chosen owner against whether the observance stayed theirs to the next reassignment checkpoint. No actionVocabulary exists at this module — the outcome is an OwnerCandidate object, not a word',
+  }),
+  fork({
+    forkId: 'HBF-96', module: 'src/domain/traditions/politics',
+    symbol: 'reexpressed', discovery: 'checklist', disposition: 'DEFER',
+    domain: 'FAITH',
+    reason: 'FAITH — the re-dress at a mutation checkpoint (§7, T3-b). TWO draws: `rng.shuffle(...)` orders the act\'s trappings pool (data/traditionCorpus.js\'s TRADITION_TRAPPINGS) and takes the first two, then `rng.fork(\'epithet\').pick(...)` picks one epithet (TRADITION_EPITHETS) — cosmetic re-flavouring of a record\'s `expression`, never its immutable coreMotif. Structurally the HBF-07/HBF-33/HBF-34/HBF-42 prose-pick family\'s open question ("is a pick from a fixed pool a decision at all") one directory over, but NOT that family itself: those four share one hash01 KEYED_RACE signature copied verbatim wave to wave, and this draws through shuffle/pick instead, so it is read on its own rather than inheriting their disposition',
+    closeOwed: 'establish whether re-dressing a tradition\'s expression is a preference at all — if it is pure cosmetic re-flavouring with no consequential outcome, this row becomes STAY with that finding. Both pools (TRADITION_TRAPPINGS, TRADITION_EPITHETS) are exported by data/traditionCorpus.js, a SIBLING module, not politics.js itself — FINITE-SEMANTICS refuses a vocabulary declared off the draw\'s own module (HBF-17 is the one standing exception, cross-volume by the collision contract), so no actionVocabulary is declared here; the words exist, they are simply not this row\'s to name',
+  }),
+  fork({
+    forkId: 'HBF-97', module: 'src/domain/traditions/genesis',
+    symbol: 'deriveFoundingTraditions', discovery: 'checklist', disposition: 'STAY',
+    domain: 'FAITH',
+    reason: 'FAITH — a founding derivation — root-shaped (the survey\'s U-29/U-30 class). THE settlement\'s founding tradition SET (count, then per-record element/act/scale/year via weightedPick/randInt/randFloat), reconstructed byte-identically whether called view-time or tick-time from the settlement seed alone — genesis.js\'s own header: "the design\'s MINT-TIME RULING made concrete... deterministic from the settlement seed alone". The same class as HBF-25\'s founding road graph ("part of what a SEED IS"), not a habit a court forms: there is no repeated occasion here to reinforce, only a settlement\'s one origin, computed once',
+  }),
+  fork({
+    forkId: 'HBF-98', module: 'src/domain/traditions/genesis',
+    symbol: 'buildWindow', discovery: 'checklist', disposition: 'STAY',
+    domain: 'FAITH',
+    reason: 'FAITH — a founding derivation — root-shaped (the survey\'s U-29/U-30 class). The observance window (randInt offset within the element\'s season, then a chance(0.5) one/two-week length for a grand act) is assembled ONCE per record, inside deriveFoundingTraditions\'s own founding pass — HBF-97\'s helper, not a separate occasion a court could learn to favour',
+  }),
+  fork({
+    forkId: 'HBF-99', module: 'src/domain/traditions/genesis',
+    symbol: 'composeName', discovery: 'checklist', disposition: 'STAY',
+    domain: 'FAITH',
+    reason: 'FAITH — a founding derivation — root-shaped (the survey\'s U-29/U-30 class). The tradition\'s display NAME (three seeded pick(...) draws over template/adjective/culture-flavour pools, bounded-retry on collision) is composed ONCE at founding — HBF-97\'s helper. A name is part of a tradition\'s identity, immutable once minted (politics.js\'s own §7 law: "Core motif is IMMUTABLE forever; only the EXPRESSION, scale, and ownership move"), never a repeated choice',
+  }),
+  fork({
+    forkId: 'HBF-100', module: 'src/domain/traditions/genesis',
+    symbol: 'pickTrappings', discovery: 'checklist', disposition: 'STAY',
+    domain: 'FAITH',
+    reason: 'FAITH — a founding derivation — root-shaped (the survey\'s U-29/U-30 class). The FOUNDING trappings pick (a seeded shuffle over the act\'s pool, first k taken) — HBF-97\'s helper, called once per record at genesis. Distinct from politics.js\'s `reexpressed` (HBF-96), which re-picks trappings LATER at a pulse-time mutation checkpoint; this is the origin pick alone',
+  }),
+  fork({
+    forkId: 'HBF-101', module: 'src/domain/traditions/customFounding',
+    symbol: 'adaptCustomTradition', discovery: 'checklist', disposition: 'STAY',
+    domain: 'FAITH',
+    reason: 'FAITH — a founding derivation — root-shaped (the survey\'s U-29/U-30 class). A DM-authored custom tradition\'s `startWeekOfYear` is seeded off the tradition\'s OWN id (randInt(0,51)+1) — the module\'s own header: "A seeded, stable startWeekOfYear stands in for the absent authored date, the same way genesis seeds its windows" (HBF-98\'s twin, for the one field an authoring form cannot supply). View-only (the dossier\'s Traditions tab consumption, not the tick-time mover), and it never touches the golden-pinned deriveFoundingTraditions leaf it appends after',
+  }),
 ]);

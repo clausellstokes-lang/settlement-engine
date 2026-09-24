@@ -161,10 +161,23 @@ const LOCAL_HASH_ROLL = /\b(?:[A-Za-z_$][\w$]*Roll01|fnv1a32|hashUnit|hash32)\s*
 // discoverable: that is why they arrive DECLARED. ⛔ The other four U10 rows are STAY and
 // touch this number not at all, which is the ceiling working as written: a permanent
 // finding is not a deferral.
-const DEFER_CEILING = 79;
+// 79 -> 83 at WF-0 (FP-ARCHITECTURE-FOLD-2026-09-23.md J-EM-5, the faith registration debt):
+// all FOUR of politics.js's pulse-time forks land DEFER (HBF-93 claimRoll, HBF-94 driftDue,
+// HBF-95 pickOwner, HBF-96 reexpressed) and touch this number. HBF-95 measures as unweighted
+// and codepoint-presorted — the HBF-37/HBF-91 STAY shape, spelled out in its own row — but is
+// filed DEFER rather than promoted: a permanent ruling is the chair's to bank, not this
+// registration's to presume. The five founding derivations (HBF-97..HBF-101, genesis.js +
+// customFounding.js) are STAY and do not touch this number, the same shape U10's four STAY
+// rows held against 77 -> 79 above.
+const DEFER_CEILING = 83;
 
-/** The named-domain checklist's row count, asserted rather than read off. */
-const NAMED_DOMAIN_ROWS = 14;
+/** The named-domain checklist's row count, asserted rather than read off.
+ *  14 -> 23 at WF-0: nine FAITH rows (HBF-93..HBF-101) for the traditions registration
+ *  debt join HBF-21/HBF-22/HBF-23 — a LATER measurement pass (EM-FP-SEAM-MEASUREMENT.md
+ *  §4's draw scan) finding more forks in an already-named domain, not a new domain; the
+ *  eight-label set (J-HB-23 (b)) and the owner's seven-domain mapping (J-HB-23 (c)) are
+ *  both untouched. */
+const NAMED_DOMAIN_ROWS = 23;
 
 /**
  * ⭐⭐ EM-E0 — THE REGISTRATION'S ROSTER IS THE SURVEY'S, AND IT IS PARSED RATHER THAN RESTATED.
