@@ -238,7 +238,8 @@ describe('CR-WR10-G — the orientation reader itself', () => {
   });
 
   it('the kind vocabulary and the role words are closed, and the role word follows the instrument', () => {
-    expect([...TREATY_ORIENTATION_KINDS].sort()).toEqual(['sale', 'unknown', 'wartime']);
+    // SR-1: TREATY-VOICE U1 adds `negotiated` (FPQ-36, the owner's decision of 2026-09-24 re-opened GR-3B-ORIENT for a fourth kind).
+    expect([...TREATY_ORIENTATION_KINDS].sort()).toEqual(['negotiated', 'sale', 'unknown', 'wartime']);
     expect(Object.keys(TREATY_ROLE_WORDS).sort()).toEqual([...TREATY_ORIENTATION_KINDS].sort());
     const war = treatyOrientationOf(warTreaty([term('tribute')]));
     expect(treatyRoleWord(war, 'buyer')).toBe('victor');
@@ -445,16 +446,19 @@ describe('CR-GR3B-3-R1 — the per-term obligation reader', () => {
     expect(after.terms.filter((t) => termObligationOf(after, t).obligorId)).toHaveLength(2);
   });
 
-  it('the per-term vocabulary is CLOSED, and the instrument vocabulary is NOT widened', () => {
+  it('the per-term vocabulary is CLOSED, and the instrument vocabulary widened by exactly the negotiated kind', () => {
     expect([...TERM_OBLIGATION_KINDS].sort()).toEqual(['negotiated', 'sale', 'unknown', 'wartime']);
-    // A SUPERSET BY EXACTLY ONE. The three instrument kinds pass through the delegation
-    // arm; `negotiated` is the only kind this reader can add.
-    expect([...TREATY_ORIENTATION_KINDS].sort()).toEqual(['sale', 'unknown', 'wartime']);
+    // SR-1: TREATY-VOICE U1 adds `negotiated` to the INSTRUMENT list (FPQ-36, the owner's decision of
+    // 2026-09-24 re-opened GR-3B-ORIENT for a fourth kind), so the two lists now hold the same four. It adds
+    // a KIND and no direction: a negotiated instrument's role slots stay empty and `resolved` stays false,
+    // and the per-term reader is still the only one that resolves a negotiated clause's direction.
+    expect([...TREATY_ORIENTATION_KINDS].sort()).toEqual(['negotiated', 'sale', 'unknown', 'wartime']);
     expect(TREATY_ORIENTATION_KINDS.filter((k) => !TERM_OBLIGATION_KINDS.includes(k))).toEqual([]);
-    expect(TERM_OBLIGATION_KINDS.filter((k) => !TREATY_ORIENTATION_KINDS.includes(k))).toEqual(['negotiated']);
-    // The ROLE WORDS are not widened either: no consumer speaks a negotiated role yet, and
-    // unconsumed vocabulary is the recorded self-referential-pin habitat.
+    expect(TERM_OBLIGATION_KINDS.filter((k) => !TREATY_ORIENTATION_KINDS.includes(k))).toEqual([]);
+    // The ROLE WORDS gain the one row the closed-key pin demands, and it is the stranger's
+    // pair ('a party'), so no consumer speaks a negotiated ROLE: there is none to speak.
     expect(Object.keys(TREATY_ROLE_WORDS).sort()).toEqual([...TREATY_ORIENTATION_KINDS].sort());
+    expect(TREATY_ROLE_WORDS.negotiated).toEqual(TREATY_ROLE_WORDS.unknown);
 
     // EVERY KIND THE READER CAN ACTUALLY EMIT IS A DECLARED MEMBER — walked over one
     // instrument of each provenance, so the closure is measured rather than asserted.

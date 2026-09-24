@@ -469,6 +469,34 @@ export function answerPactProposal({ worldState, proposal, responderDemand01, ti
 }
 
 /**
+ * THE SIGNED RECORD'S OWN COURT NAMES (TREATY-VOICE U1; FPQ-36, the owner's decision of
+ * 2026-09-24: the names ride a NEW SAVED KEY on the signed record). A war settlement keeps
+ * `victorName`/`loserName` and a sale `sellerName`/`buyerName`; a pact has no roles to hang
+ * a name on, so the key is keyed by COURT, never by position. Null unless BOTH courts
+ * resolve a real reader name (a name that only echoes the id is not a name), so a nameless
+ * signature writes no key at all and its record is byte-identical to the day before.
+ * READERS: `treatyOrientation.js :: treatyOrientationOf` (the negotiated arm), and through
+ * it the lifecycle voice's lapse and default beats (`treatyLifecycleVoice.js`), which name
+ * both courts on the Herald where they used to mint nothing.
+ * LIFECYCLE: written once at the mint below; every later act (an amendment, a renewal, a
+ * war's closure, a war's end absorbed) spreads the record and so carries it; legacy pacts
+ * carry none and read `unknown`, as they always did (no migration: launch-shape
+ * persistence, the stasis plan's no-preserved-data law).
+ * @param {ReadonlyArray<string>} ids @param {(id: string) => unknown} settlementOf
+ * @returns {Record<string, string> | null}
+ */
+function courtNamesOf(ids, settlementOf) {
+  /** @type {Record<string, string>} */
+  const names = {};
+  for (const id of ids) {
+    const name = text(recordOf(settlementOf(id)).name).trim();
+    if (!name || name === id) return null;
+    names[id] = name;
+  }
+  return names;
+}
+
+/**
  * MINT OR AMEND — the FOURTH transport into the one instrument.
  *
  * Where the pair already holds a document the sheet becomes a LINEAGE ACT on it (one record
@@ -529,9 +557,12 @@ export function signPactProposal({ worldState, proposal, tick, settlementOf = ()
     };
   }
   const [first, second] = [a, b].sort(codepoint);
+  const partyNames = courtNamesOf([first, second], settlementOf);
   /** @type {Record<string, unknown>} */
   const treaty = {
     parties: [first, second],
+    // T4, drop-when-absent: the saved court names (TREATY-VOICE U1), see `courtNamesOf`.
+    ...(partyNames ? { partyNames } : {}),
     mintedTick: tick,
     budgetGranted: 0,
     budgetSpent: round4(terms.reduce((sum, term) => sum + (Number(term.weightSpent) || 0), 0)),

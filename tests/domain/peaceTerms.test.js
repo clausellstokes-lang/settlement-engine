@@ -993,9 +993,11 @@ describe('GR-3B-ORIENT — a negotiated clause knows which court owes it', () =>
     expect(treatyOrientationOf(record).resolved).toBe(false);
     expect(treatyOrientationOf(record).kind).toBe('unknown');
 
-    // AND THE INSTRUMENT VOCABULARY IS STILL EXACTLY THREE MEMBERS. Widening it would bind
-    // negotiated pacts into nine consumers that have never bound one.
-    expect([...TREATY_ORIENTATION_KINDS].sort()).toEqual(['sale', 'unknown', 'wartime']);
+    // THE INSTRUMENT VOCABULARY. SR-1: TREATY-VOICE U1 adds `negotiated` (FPQ-36, the owner's decision of
+    // 2026-09-24 re-opened GR-3B-ORIENT for a fourth kind). It binds a negotiated pact into NO consumer that
+    // never bound one: the kind carries empty role slots and `resolved: false`, and it is read only off a
+    // record that names both its courts, which this nameless record does not (so it stays `unknown` above).
+    expect([...TREATY_ORIENTATION_KINDS].sort()).toEqual(['negotiated', 'sale', 'unknown', 'wartime']);
     expect(Object.keys(TREATY_ROLE_WORDS).sort()).toEqual([...TREATY_ORIENTATION_KINDS].sort());
   });
 });
