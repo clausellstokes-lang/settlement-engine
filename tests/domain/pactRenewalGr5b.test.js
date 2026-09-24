@@ -67,9 +67,11 @@ const court = (id, economicState, roster) => ({
     npcs: roster.map((row) => ({ ...row })),
   },
 });
+// THE PAIR'S EDGE (FPQ-35): the pact stage finds the relationship record `pactWorld` writes only
+// through the edge that joins A and B, so the edge the fixture's record key belongs to is declared.
 const snapshotOf = (rosters = ROSTERS) => ({
   settlements: [court('A', A_ECONOMY, rosters.A), court('B', B_ECONOMY, rosters.B)],
-  regionalGraph: { edges: [] },
+  regionalGraph: { edges: [{ from: 'A', to: 'B' }] },
 });
 const settlementOfIn = (snapshot) => (id) => snapshot.settlements.find((item) => item.id === id)?.settlement ?? null;
 /** The standing instrument, signed through the REAL formation door at SIGN_TICK. */

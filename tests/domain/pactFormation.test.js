@@ -50,6 +50,18 @@
  *   writer of. CONTROL EXECUTED: with `armed = {}` the shared-threat rung drops from the
  *   composable pair to the bare NAP and this suite REDS — the arm is not vacuous.
  *
+ * 2026-09-24 — SECOND RECORD (cure lane LIT1b-pre, unit U1, FPQ-35). ⚠ A DECLARED LIT-PATH SHIFT,
+ *   in the dependency map's D2 row. CAUSE, in one sentence: every relationship read in this stage
+ *   minted `rel.<a>.<b>` from a bare pair, while every relationship writer keys its record by the
+ *   regional edge's id (`edge.<a>.<b>`), so in a live world the stage found NO record: the hostility
+ *   read, the refusal memory, the cooldown, the war-overtaken closure and the reliance axes were
+ *   all dead, and shared_threat could never find its threat. WHAT MOVES: lit, a pair joined by an
+ *   edge is now read through `edgeKeyBetween`, so those five reads see the live record; dark,
+ *   nothing (the stage returns before any read). THE FIXTURE MOVED WITH IT: `pactSnapshot` now
+ *   declares the edge of every pair whose record it writes (id-less, so the fixture's records keep
+ *   their keys and every earlier arm reads what it read before), and the FPQ-35 block below drives
+ *   the production shape: ids minted by the region graph's normalizer, records by the plane's writer.
+ *
  * @enforced-by this file
  */
 import { describe, expect, test } from 'vitest';
@@ -72,6 +84,9 @@ import { TERM_CATALOG, orderTermsByAsk } from '../../src/domain/worldPulse/peace
 import { buildSpatialDigest } from '../../src/domain/spatial/index.js';
 import { hopWeeks } from '../../src/domain/spatial/distanceRead.js';
 import { makeGridPack, placeSettlements } from '../fixtures/spatialPackFixtures.js';
+import { edgeIdFor, ensureRegionalGraph } from '../../src/domain/region/graph.js';
+import { ensureRelationshipStatesForGraph } from '../../src/domain/worldPulse/relationshipEvolution.js';
+import { ensureRelationshipState, relationshipKeyFromEdge } from '../../src/domain/worldPulse/relationshipState.js';
 import {
   DUE_TICK, OPEN_TICK, SEAT, pactBeliefs, pactSnapshot, pactWorld, relKey,
 } from '../helpers/pactFixture.js';
@@ -586,6 +601,117 @@ describe('THE WAR-OVERTAKEN CLOSURE, through the stage', () => {
   });
 });
 
+describe('FPQ-35 — THE RELATIONSHIP KEYS: the stage reads the record the relationship plane keeps', () => {
+  /**
+   * THE PRODUCTION SHAPE, end to end. The graph is normalized by the region graph's own builder,
+   * which mints every edge id (`edgeIdFor`), and the records are written by the relationship
+   * plane's own writer (`ensureRelationshipStatesForGraph`), so each record sits at the edge's id
+   * and at no key a bare pair could spell. Before FPQ-35 the stage looked for `rel.<a>.<b>` and
+   * found nothing here: no hostility, no refusal memory, no cooldown, no reliance axes.
+   * @param {{edges?: Array<Record<string, unknown>>, states?: Record<string, Record<string, unknown>>,
+   *   beliefs?: unknown, withThreat?: boolean}} [args]
+   */
+  const liveRealm = ({ edges, states = {}, beliefs, withThreat = false } = {}) => {
+    const graph = ensureRegionalGraph({
+      edges: edges || [{ from: 'A', to: 'B', relationshipType: 'trade_partner' }],
+    }, { now: null });
+    const keyOf = (from, to) => String(relationshipKeyFromEdge(
+      graph.edges.find((edge) => edge.from === from && edge.to === to)));
+    const existing = Object.fromEntries(Object.entries(states).map(([pair, state]) => {
+      const [from, to] = pair.split('>');
+      return [keyOf(from, to), state];
+    }));
+    return {
+      keyOf,
+      snapshot: { ...pactSnapshot({ withThreat }), regionalGraph: graph },
+      worldState: {
+        ...pactWorld({ flag: true, ...(beliefs ? { beliefs } : {}) }),
+        relationshipStates: ensureRelationshipStatesForGraph(graph, existing),
+      },
+    };
+  };
+
+  test('THE PREMISE: the plane keys a record by its edge id, which no bare pair spells', () => {
+    const { keyOf, worldState } = liveRealm();
+    expect(keyOf('A', 'B')).toBe(edgeIdFor('A', 'B'));
+    // anchored: the key is pinned to the edge id one line above, so this reads a real key.
+    expect(keyOf('A', 'B')).not.toBe(relKey('A', 'B'));
+    expect(Object.keys(worldState.relationshipStates)).toEqual([keyOf('A', 'B')]);
+  });
+
+  test('the RELIANCE AXES and the REFUSAL MEMORY are read from, and written to, that record', () => {
+    // The reliance axes decide this answer: at the neutral defaults the same sheet SIGNS (the
+    // walkthrough above), so the refusal is the proof the record was read.
+    const { keyOf, snapshot, worldState } = liveRealm({
+      states: { 'A>B': { relationshipType: 'trade_partner', trust: 0.6, dependency: 0.95, leverage: 0.05 } },
+    });
+    const { second } = openThenAnswer(worldState, snapshot);
+    expect(endingOf(second)).toBe('refused');
+    const relation = second.worldState.relationshipStates[keyOf('A', 'B')];
+    expect(relation.turningPoints.map((point) => point.kind)).toEqual(['pact_refused']);
+    expect(relation.trust).toBeCloseTo(0.6 + F.REFUSAL_TRUST_DELTA, 10);
+    // The memory lands on the ONE record the writer keeps: no second key is minted beside it.
+    expect(Object.keys(second.worldState.relationshipStates)).toEqual([keyOf('A', 'B')]);
+    // THE COOLDOWN reads the same record, so the pair is silent on the next tick.
+    const soon = advancePeacetimePacts({
+      snapshot, worldState: second.worldState, settlementUpdates: [], tick: DUE_TICK + 1,
+    });
+    // anchored: the refusal's turning point is pinned on this record above, so no row here is the cooldown.
+    expect(pactProposalsOf(soon.worldState)).toHaveLength(0);
+  });
+
+  test('A WAR ON A LIVE EDGE closes what the pair signed in peace, exactly once', () => {
+    const { keyOf, snapshot, worldState } = liveRealm({
+      states: { 'A>B': { relationshipType: 'trade_partner', trust: 0.6 } },
+    });
+    const signed = openThenAnswer(worldState, snapshot).second.worldState;
+    expect(Object.keys(treatyLedgerOf(signed))).toEqual(['A>B']);
+    const key = keyOf('A', 'B');
+    const atWar = {
+      ...signed,
+      relationshipStates: {
+        ...signed.relationshipStates,
+        [key]: ensureRelationshipState(snapshot.regionalGraph.edges[0], {
+          ...signed.relationshipStates[key], relationshipType: 'hostile',
+        }),
+      },
+    };
+    const pass = advancePeacetimePacts({ snapshot, worldState: atWar, settlementUpdates: [], tick: DUE_TICK + 5 });
+    const closure = receiptOf(pass, 'pact_broken_by_war');
+    expect(closure).toMatchObject({ ending: 'broken_by_war', fromId: 'A', toId: 'B' });
+    expect(closure.closed).toHaveLength(2);
+    const again = advancePeacetimePacts({
+      snapshot, worldState: pass.worldState, settlementUpdates: [], tick: DUE_TICK + 6,
+    });
+    // anchored: the closure receipt is pinned present one tick earlier, so its absence here is exactly-once.
+    expect(receiptOf(again, 'pact_broken_by_war')).toBeUndefined();
+  });
+
+  test('A HOSTILE THIRD COURT on a live edge is the shared threat the pair treats about', () => {
+    const { snapshot, worldState } = liveRealm({
+      withThreat: true,
+      edges: [
+        { from: 'A', to: 'B', relationshipType: 'trade_partner' },
+        { from: 'A', to: 'C', relationshipType: 'hostile' },
+        { from: 'C', to: 'D', relationshipType: 'allied' },
+        { from: 'C', to: 'E', relationshipType: 'allied' },
+      ],
+      states: {
+        'C>D': { relationshipType: 'allied', pactStrength: 0.9 },
+        'C>E': { relationshipType: 'allied', pactStrength: 0.9 },
+      },
+      beliefs: {
+        A: { [SEAT]: { B: {}, C: { strengthBand: 4 }, D: { strengthBand: 4 }, E: { strengthBand: 4 } } },
+        B: { [SEAT]: { A: {} } },
+      },
+    });
+    const first = advancePeacetimePacts({ snapshot, worldState, settlementUpdates: [], tick: OPEN_TICK });
+    const threat = pactProposalsOf(first.worldState).find((row) => row.trigger === 'shared_threat');
+    expect(threat).toMatchObject({ from: 'A', to: 'B' });
+    expect(receiptOf(first, 'pact_proposed').receipt).toContain('Both courts reckon the web around C');
+  });
+});
+
 describe('WHAT THIS WAVE DELIBERATELY DOES NOT MINT', () => {
   test('ZERO news kinds, in every arm — a tripwire for GR-3', () => {
     // Recorded design (see the module header): the Herald sentences land with GR-3, which
@@ -627,9 +753,12 @@ describe('THE ANSWER, driven directly — so both arms are provably separable', 
     transport: 'abstract',
   };
 
+  // The pair's edge rides with the world: the record the reliance arm reads is found through it (FPQ-35).
+  const { edges } = pactSnapshot().regionalGraph;
+
   test('arm ONE alone decides `no_overlap`; arm TWO alone decides `refused`', () => {
     const value = answerPactProposal({
-      worldState: pactWorld({ flag: true }), proposal, responderDemand01: 0, tick: DUE_TICK,
+      worldState: pactWorld({ flag: true }), proposal, responderDemand01: 0, tick: DUE_TICK, edges,
     });
     expect(value.verdict).toBe('no_overlap');
     const reliance = answerPactProposal({
@@ -637,11 +766,12 @@ describe('THE ANSWER, driven directly — so both arms are provably separable', 
       proposal,
       responderDemand01: 1,
       tick: DUE_TICK,
+      edges,
     });
     expect(reliance.verdict).toBe('refused');
     // …and with BOTH arms satisfied it signs. Three outcomes, three causes, no overlap.
     const both = answerPactProposal({
-      worldState: pactWorld({ flag: true }), proposal, responderDemand01: 1, tick: DUE_TICK,
+      worldState: pactWorld({ flag: true }), proposal, responderDemand01: 1, tick: DUE_TICK, edges,
     });
     expect(both.verdict).toBe('signed');
   });

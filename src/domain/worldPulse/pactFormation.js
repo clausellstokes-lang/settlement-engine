@@ -102,11 +102,12 @@ import { PEACE_TERMS_TUNING, TERM_CATALOG, orderTermsByAsk, termLabel } from './
 import { round4, treatyPairKey } from './peaceTermsPrimitives.js';
 // The estate's ONE strength derivation, imported from the same module the two sibling
 // readers use (mobilizationReactions.js, peaceReasons.js). No new edge: `beliefMap.js`,
-// already imported above, imports these exact two symbols from here.
-import { buildPressureSummary, settlementStrength } from './relationshipEvolution.js';
+// already imported above, imports these exact two symbols from here. `edgeKeyBetween` is
+// the relationship plane's ONE pair reader (FPQ-35), from the same module, so no new edge
+// either.
+import { buildPressureSummary, edgeKeyBetween, settlementStrength } from './relationshipEvolution.js';
 import {
   RELATIONSHIP_DEFAULTS, appendRelationshipTurningPoint, normalizeRelationshipType,
-  relationshipKeyFromEdge,
 } from './relationshipState.js';
 import { courtPostureOf, courtRiskAppetiteOf } from './strategicPosture.js';
 import { CURRENT_TREATY_TICKS_PER_YEAR } from './treatyClock.js';
@@ -201,6 +202,9 @@ function recordOf(v) {
 function text(v) { return typeof v === 'string' && v.length > 0 ? v : ''; }
 /** @param {string} a @param {string} b @returns {number} */
 const codepoint = (a, b) => (a < b ? -1 : a > b ? 1 : 0);
+
+/** One regional graph edge, at the shape `edgeKeyBetween` declares it.
+ *  @typedef {{ from?: unknown, to?: unknown, id?: unknown }} RegionalEdge */
 
 /**
  * WHAT A COURT KNOWS ABOUT ITSELF. Its own granary, its own pull, its own rites — knowledge,
@@ -381,11 +385,15 @@ export function reserveFor({ worldState, responderId, proposerId, tick }) {
 
 /**
  * THE ANSWER. Two arms, both live, and the verdict names which one spoke.
+ *
+ * `edges` is the tick's regional edge list, and it is how the pair's relationship record is
+ * found (FPQ-35): the record is keyed by the edge that joins the two courts. Absent, or with
+ * no edge between them, there is no record and the reliance axes read the neutral defaults.
  * @param {{worldState: Record<string, unknown>, proposal: Record<string, unknown>,
- *   responderDemand01: number, tick: number}} input
+ *   responderDemand01: number, tick: number, edges?: ReadonlyArray<RegionalEdge>}} input
  * @returns {Readonly<{verdict: string, receipt: string, offer01: number, reserve01: number}>}
  */
-export function answerPactProposal({ worldState, proposal, responderDemand01, tick }) {
+export function answerPactProposal({ worldState, proposal, responderDemand01, tick, edges = [] }) {
   const proposerId = String(proposal.from);
   const responderId = String(proposal.to);
   const terms = Array.isArray(recordOf(proposal.sheet).terms)
@@ -401,7 +409,7 @@ export function answerPactProposal({ worldState, proposal, responderDemand01, ti
   const { reserve01, receipt: reserveReceipt } = reserveFor({
     worldState, responderId, proposerId, tick,
   });
-  const relation = relationshipRecordOf(worldState, proposerId, responderId).state;
+  const relation = relationshipRecordOf(worldState, pairKeyReader(edges), proposerId, responderId).state;
   const defaults = RELATIONSHIP_DEFAULTS[normalizeRelationshipType(text(relation.relationshipType))]
     || RELATIONSHIP_DEFAULTS.neutral;
   const posture = courtPostureOf({ kind: 'settlement', id: responderId },
@@ -518,45 +526,86 @@ export function signPactProposal({ worldState, proposal, tick, settlementOf = ()
 }
 
 /**
- * THE ONE PLACE THIS FILE COMPOSES A RELATIONSHIP KEY (the CR-WR10-G one-reader
- * discipline, applied to the other ledger this lane touches).
+ * THE ONE PLACE THIS FILE FINDS A RELATIONSHIP RECORD (the CR-WR10-G one-reader discipline,
+ * applied to the other ledger this lane touches).
  *
- * ⚠ THE KEY IS `rel.A.B` AND IT IS DIRECTED, and both halves of that were a measured bug.
- * The first draft spelled it `[a, b].sort().join('|')` — a hand-rolled key that exists
- * nowhere in the estate — and every pin still passed, because the FIXTURE had been written
- * to the same invented spelling. That is the recorded fixture-mirrors-the-deriver class
- * exactly: the arms were dead and self-consistently green, and only driving a REAL
- * consumer (`canonicalAllianceRows`, which returned an empty web) exposed it. The key is
- * now minted by the estate's own primitive, and because that primitive is DIRECTED the
- * record is looked for under both spellings — the same both-directions read the treaty
- * pair key already takes.
+ * ⚠ THE KEY IS THE REGIONAL EDGE'S OWN ID, AND TWO EARLIER SPELLINGS WERE MEASURED BUGS.
+ * The first draft spelled `[a, b].sort().join('|')`, a key that exists nowhere in the
+ * estate, and every pin still passed because the FIXTURE had been written to the same
+ * invented spelling (the recorded fixture-mirrors-the-deriver class). The second minted
+ * `rel.<a>.<b>` through `relationshipKeyFromEdge` on a bare `{from, to}`, which is only that
+ * primitive's fallback for an edge with no id: every relationship writer keys its record by
+ * the graph edge's id (`region/graph.js :: edgeIdFor`, `edge.<a>.<b>`), so the hostility
+ * read, the refusal memory, the cooldown and the reliance axes never hit a live record
+ * (FPQ-35; the LIT DEPENDENCY MAP measured every run's records as `edge.*`). The key now
+ * comes from `keyOf`, the pass's pair reader over `edgeKeyBetween`, which is the reader the
+ * plane's consumers share, so no key is spelled here at all. A pair no edge joins has no
+ * record, and the empty record is the answer.
  *
- * @param {Record<string, unknown>} worldState @param {string} a @param {string} b
+ * @param {Record<string, unknown>} worldState @param {(a: string, b: string) => string|null} keyOf
+ * @param {string} a @param {string} b
  * @returns {{key: string, state: Record<string, unknown>}}
  */
-function relationshipRecordOf(worldState, a, b) {
-  const states = recordOf(recordOf(worldState).relationshipStates);
-  const forward = String(relationshipKeyFromEdge({ from: a, to: b }));
-  const backward = String(relationshipKeyFromEdge({ from: b, to: a }));
-  const key = states[forward] ? forward : backward;
-  return { key, state: recordOf(states[key]) };
+function relationshipRecordOf(worldState, keyOf, a, b) {
+  const key = keyOf(a, b);
+  if (!key) return { key: '', state: {} };
+  return { key, state: recordOf(recordOf(recordOf(worldState).relationshipStates)[key]) };
+}
+
+/**
+ * THE PASS'S PAIR READER: `edgeKeyBetween` over the tick's regional edges, remembered per
+ * unordered pair. The answer depends on the edges alone, which do not move inside the pass,
+ * and the crossing loop asks the same pair many times. `edgeBetween` matches either
+ * direction and returns the first edge in graph order, so one answer serves both.
+ * @param {ReadonlyArray<RegionalEdge>} edges
+ * @returns {(a: string, b: string) => string|null}
+ */
+function pairKeyReader(edges) {
+  /** @type {Map<string, string|null>} */
+  const seen = new Map();
+  return (a, b) => {
+    const pair = a < b ? `${a}\u0000${b}` : `${b}\u0000${a}`;
+    if (!seen.has(pair)) seen.set(pair, edgeKeyBetween(edges, a, b));
+    return seen.get(pair) ?? null;
+  };
+}
+
+/**
+ * EVERY PAIR THE GRAPH JOINS, once each, in its record key's codepoint order. The courts are
+ * the edge's own two ends and never parsed back out of a key, because the key is an id.
+ * @param {ReadonlyArray<RegionalEdge>} edges @param {(a: string, b: string) => string|null} keyOf
+ * @returns {Array<{key: string, aId: string, bId: string}>}
+ */
+function edgePairsOf(edges, keyOf) {
+  /** @type {Map<string, {key: string, aId: string, bId: string}>} */
+  const pairs = new Map();
+  for (const edge of edges) {
+    const row = recordOf(edge);
+    const aId = row.from != null ? String(row.from) : '';
+    const bId = row.to != null ? String(row.to) : '';
+    if (!aId || !bId || aId === bId) continue;
+    const key = keyOf(aId, bId);
+    if (key && !pairs.has(key)) pairs.set(key, { key, aId, bId });
+  }
+  return [...pairs.values()].sort((x, y) => codepoint(x.key, y.key));
 }
 
 /** ARE THESE TWO COURTS AT WAR? The relationship overlay is the estate's own durable
  *  "this is a war" mark — the same read `peaceTerms.js`'s PASS 1 uses to decide a war has
  *  ENDED, consumed here to decide one is on.
- *  @param {Record<string, unknown>} worldState @param {string} a @param {string} b */
-function hostileBetween(worldState, a, b) {
-  const { state } = relationshipRecordOf(worldState, a, b);
+ *  @param {Record<string, unknown>} worldState @param {(a: string, b: string) => string|null} keyOf
+ *  @param {string} a @param {string} b */
+function hostileBetween(worldState, keyOf, a, b) {
+  const { state } = relationshipRecordOf(worldState, keyOf, a, b);
   return normalizeRelationshipType(text(state.relationshipType)) === 'hostile';
 }
 
 /** HAS THIS PAIR ALREADY BEEN REFUSED, RECENTLY? The remembered refusal IS the cooldown;
  *  read off the relationship record's own archive, never stored a second time.
- *  @param {Record<string, unknown>} worldState @param {string} a @param {string} b
- *  @param {number} tick @returns {boolean} */
-function refusedWithinCooldown(worldState, a, b, tick) {
-  const { state } = relationshipRecordOf(worldState, a, b);
+ *  @param {Record<string, unknown>} worldState @param {(a: string, b: string) => string|null} keyOf
+ *  @param {string} a @param {string} b @param {number} tick @returns {boolean} */
+function refusedWithinCooldown(worldState, keyOf, a, b, tick) {
+  const { state } = relationshipRecordOf(worldState, keyOf, a, b);
   const points = Array.isArray(state.turningPoints) ? state.turningPoints : [];
   return points.some((point) => recordOf(point).kind === 'pact_refused'
     && tick - Number(recordOf(point).tick) <= F.REFUSAL_COOLDOWN_TICKS);
@@ -564,11 +613,11 @@ function refusedWithinCooldown(worldState, a, b, tick) {
 
 /** THE REFUSAL, REMEMBERED. A banded trust delta and a turning-point entry — no grievance,
  *  no casus, no ratchet toward war OR toward pacts (J-GR-7's asymmetry).
- *  @param {{worldState: Record<string, unknown>, proposal: Record<string, unknown>,
- *   tick: number}} input @returns {Record<string, unknown>} */
-function rememberRefusal({ worldState, proposal, tick }) {
+ *  @param {{worldState: Record<string, unknown>, keyOf: (a: string, b: string) => string|null,
+ *   proposal: Record<string, unknown>, tick: number}} input @returns {Record<string, unknown>} */
+function rememberRefusal({ worldState, keyOf, proposal, tick }) {
   const states = recordOf(recordOf(worldState).relationshipStates);
-  const { key, state } = relationshipRecordOf(worldState, String(proposal.from), String(proposal.to));
+  const { key, state } = relationshipRecordOf(worldState, keyOf, String(proposal.from), String(proposal.to));
   if (!Object.keys(state).length) return worldState;
   const trust = clamp01(Number(state.trust) + F.REFUSAL_TRUST_DELTA);
   return {
@@ -668,21 +717,25 @@ export function advancePeacetimePacts({
       return value;
     });
   const rows = canonicalAllianceRows({ ...recordOf(snapshot), worldState });
-  const relationshipStates = recordOf(recordOf(worldState).relationshipStates);
+  // THE TICK'S REGIONAL EDGES, read exactly as `canonicalAllianceRows` reads them one line up,
+  // so the alliance web and every relationship read below see the same graph (FPQ-35).
+  const graphEdges = recordOf(recordOf(snapshot).regionalGraph).edges;
+  const bareEdges = recordOf(snapshot).relationships;
+  /** @type {ReadonlyArray<RegionalEdge>} */
+  const edges = Array.isArray(graphEdges) ? graphEdges : Array.isArray(bareEdges) ? bareEdges : [];
+  const keyOf = pairKeyReader(edges);
 
   let state = worldState;
   /** @type {Array<Record<string, unknown>>} */
   const receipts = [];
 
   // ── 1. THE WAR-OVERTAKEN CLOSURE. A war has opened between courts who wrote something
-  // down in peace; the negotiated clauses end and the receipt names the war that ate them. ──
-  for (const key of Object.keys(relationshipStates).sort(codepoint)) {
-    if (normalizeRelationshipType(text(recordOf(relationshipStates[key]).relationshipType)) !== 'hostile') continue;
-    // `rel.<a>.<b>` — the estate's own directed spelling, parsed rather than re-derived,
-    // and a key that is not that shape is skipped instead of being guessed at.
-    const parts = key.split('.');
-    const [, aId, bId] = parts;
-    if (parts.length !== 3 || parts[0] !== 'rel' || !aId || !bId) continue;
+  // down in peace; the negotiated clauses end and the receipt names the war that ate them.
+  // The pairs are the GRAPH'S, each read through the one pair reader (FPQ-35). The old walk
+  // parsed `rel.<a>.<b>` out of the record keys and so skipped every live record, whose key
+  // is an edge id. ──
+  for (const { aId, bId } of edgePairsOf(edges, keyOf)) {
+    if (!hostileBetween(state, keyOf, aId, bId)) continue;
     const closure = closeTermsBrokenByWar({ worldState: state, aId, bId, tick });
     if (!closure.closed.length) continue;
     state = closure.worldState;
@@ -703,7 +756,7 @@ export function advancePeacetimePacts({
     // war is a louder answer than any refusal. Its clauses are closed by step 1 above; this
     // closes the QUESTION, which would otherwise be answered mid-war and re-signed forever.
     const unanswerable = !ids.includes(String(proposal.to))
-      || hostileBetween(state, String(proposal.from), String(proposal.to));
+      || hostileBetween(state, keyOf, String(proposal.from), String(proposal.to));
     if (unanswerable) {
       state = settlePactProposal({ worldState: state, id, state: 'expired' }).worldState;
       receipts.push({
@@ -718,7 +771,7 @@ export function advancePeacetimePacts({
       self: responderSelf, strengthFor: strength, threatId: '',
     });
     const answer = answerPactProposal({
-      worldState: state, proposal, responderDemand01: back.length ? back[0].score01 : 0, tick,
+      worldState: state, proposal, responderDemand01: back.length ? back[0].score01 : 0, tick, edges,
     });
     // GR-5b: a renewal settles in its own leaf, renewed or a clean lapse with no memory; this pass writes what it hands back.
     const renewal = settleRenewalProposal({ worldState: state, proposal, answer, tick, settlementOf });
@@ -741,7 +794,7 @@ export function advancePeacetimePacts({
       });
       continue;
     }
-    state = rememberRefusal({ worldState: state, proposal, tick });
+    state = rememberRefusal({ worldState: state, keyOf, proposal, tick });
     // BOTH verdicts settle the row `refused`: the question WAS answered, and which answer it
     // was lives on the ENDING. `expired` is reserved for the proposal nobody could answer.
     state = settlePactProposal({ worldState: state, id, state: 'refused' }).worldState;
@@ -757,10 +810,10 @@ export function advancePeacetimePacts({
     const self = selfBandsOf(settlementOf(fromId));
     for (const toId of ids) {
       if (toId === fromId
-        || hostileBetween(state, fromId, toId)
-        || refusedWithinCooldown(state, fromId, toId, tick)) continue;
+        || hostileBetween(state, keyOf, fromId, toId)
+        || refusedWithinCooldown(state, keyOf, fromId, toId, tick)) continue;
       const threat = ids.find((other) => other !== fromId && other !== toId
-        && hostileBetween(state, fromId, other)) || '';
+        && hostileBetween(state, keyOf, fromId, other)) || '';
       const crossings = crossingsFor({
         worldState: state, rows, fromId, toId, self, strengthFor: strength, threatId: threat,
       });
