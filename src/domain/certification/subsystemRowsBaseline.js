@@ -57,7 +57,22 @@ const FAITH_SPREAD_EVENT_TYPES = Object.freeze([
 // rows share one prose block rather than drifting apart. Both keys are held in
 // lockstep by normalizeSimulationRules (simulationRules.js:602 to :606), and the
 // engine consults them through the tolerant isFaithSpreadEnabled reader.
-const FAITH_SPREAD_OTHER = 'TWO GATES, AND THE OUTER ONE IS DATA, NOT CONFIG. religiousContest.js:538 short-circuits the whole module on isSubsystemActive(snapshot, "religion"), which is deity PRESENCE (at least one settlement carrying config.primaryDeitySnapshot or a DM-imposed cult), never a rule flag. The spread flag gates only the inner cross-settlement lane: religious_authority mints, carrier reach, regional prevalence, neighbour recognition, occupation faith-pull, the inter-deity stance lane and the targeted footholds. MEASURED 2026-07-31 against the completed corpus: the soak fixture is DEITY-FREE. generateSettlementPipeline with an empty customContent bag (whole-world-soak.mjs:112) returns no primaryDeitySnapshot, no primaryDeityRef, no cultDeitySnapshots and no latentPantheon for any of the four soak archetypes, which matches the standing deity doctrine (no premade pool). So every completed release case ran this subsystem with its outer gate shut: the release receipts carry zero of the three declared types and zero conversion fractures, and that zero is an ABSENT PRECONDITION, not a silent engine. The receipt faith mover family is NOT this lane either: it is the traditions lane (see subsystemRowsRegen.js). THE OBSERVATION NEEDED to certify this row: one soak case whose settlements carry an embedded config.primaryDeitySnapshot, at a horizon long enough for a patron seat to change, plus a v5 subsystems.stateKeys census over worldState.religionStates. Until such a case exists the honest verdict is UNOBSERVED.';
+const FAITH_SPREAD_OTHER = 'TWO GATES, AND THE OUTER ONE IS DATA, NOT CONFIG. religiousContest.js:538 short-circuits the whole module on isSubsystemActive(snapshot, "religion"), which is deity PRESENCE (at least one settlement carrying config.primaryDeitySnapshot or a DM-imposed cult), never a rule flag. The spread flag gates only the inner cross-settlement lane: religious_authority mints, carrier reach, regional prevalence, neighbour recognition, occupation faith-pull, the inter-deity stance lane and the targeted footholds. MEASURED 2026-07-31 against the completed corpus: the soak fixture is DEITY-FREE. generateSettlementPipeline with an empty customContent bag (whole-world-soak.mjs:112) returns no primaryDeitySnapshot, no primaryDeityRef, no cultDeitySnapshots and no latentPantheon for any of the four soak archetypes, which matches the standing deity doctrine (no premade pool). So every completed release case ran this subsystem with its outer gate shut: the release receipts carry zero of the three declared types and zero conversion fractures, and that zero is an ABSENT PRECONDITION, not a silent engine. The receipt faith mover family is NOT this lane either: it is the traditions lane (see subsystemRowsRegen.js). THE OBSERVATION NEEDED to certify this row: one soak case whose settlements carry an embedded config.primaryDeitySnapshot, at a horizon long enough for a patron seat to change, plus a v5 subsystems.stateKeys census over worldState.religionStates. WF-0 (2026-09-24, DESIGN_FP_ARCH_WF.md "### WF-0 — THE OBSERVATION FLOOR") builds exactly that case — scripts/audit/whole-world-soak-deity-fixture.mjs\'s wf0-deity-bearing, seated through SET_PRIMARY_DEITY/IMPOSE_CULT, never by poking config — and behavioral-observation.mjs\'s buildSubsystemConfiguration now emits the v5 subsystems.deityBearers count the invariant below reads. The verdict stays UNOBSERVED here regardless: the case and its tests prove the instrument works, but no completed, owner-held release soak has yet been RUN with it — that run, not this wave, is what would actually populate this row\'s evidence.';
+
+/**
+ * WF-0 — THE BEARER-COUNT INVARIANT, shared VERBATIM by the canonical row and its
+ * legacy alias (the alias\'s zero IS the canonical row\'s zero — one frozen object,
+ * never two copies that could drift). Before this wave no receipt schema carried a
+ * deity-bearer count, so a zero reading of the three spread-exclusive types could
+ * not be told apart from an absent precondition (no settlement ever carried a
+ * deity); the v5 subsystems.deityBearers field this wave adds is what makes that
+ * telling-apart expressible.
+ */
+const FAITH_SPREAD_BEARER_INVARIANT = Object.freeze({
+  name: 'spread_needs_a_deity_bearer',
+  description: 'Faith cannot spread from nowhere. With no settlement carrying an embedded patron or an imposed cult, the module short-circuits before any fork or mint, so a zero reading proves nothing about the engine.',
+  check: 'A receipt may only be read as a spread SILENCE when it also records that at least one settlement carried a deity. Expressible from v5 subsystems.deityBearers (WF-0): a receipt whose subsystems.deityBearers is zero records an ABSENT PRECONDITION, never a silence; a positive count is the precondition this row needs before a zero reading of the three declared types means anything. A receipt carrying no deityBearers field at all predates the wave and is UNOBSERVED on this axis, exactly as before.',
+});
 
 // ── THE ECONOMY / TRADE COHORT (rows authored 2026-07-31) ────────────────────
 // WHY THE FOUR ECONOMY ROWS BELOW DECLARE AN EMPTY moverFamilies. moverFamilyOf
@@ -227,11 +242,7 @@ export const BASELINE_SUBSYSTEM_ROWS = Object.freeze([
         description: 'The three spread-exclusive types are unreachable with the flag dark: each is minted inside the single spread branch, so a dark-spread realm evolves each pantheon in place and never crosses a settlement boundary.',
         check: 'In any receipt whose subsystems.rules records faithSpreadEnabled false, the summed eventTypeCounts over the three declared types is exactly zero. Expressible from v5 subsystems.rules plus the v4 eventTypeCounts.',
       }),
-      Object.freeze({
-        name: 'spread_needs_a_deity_bearer',
-        description: 'Faith cannot spread from nowhere. With no settlement carrying an embedded patron or an imposed cult, the module short-circuits before any fork or mint, so a zero reading proves nothing about the engine.',
-        check: 'A receipt may only be read as a spread SILENCE when it also records that at least one settlement carried a deity. NOT expressible from any receipt schema today: neither v4 nor v5 carries a deity-bearer count, which is why this row declares soakEvidence unobserved rather than silent.',
-      }),
+      FAITH_SPREAD_BEARER_INVARIANT,
     ]),
     // The lane never ran in any completed case: the fixture carries no deities.
     soakEvidence: 'unobserved',
@@ -261,6 +272,7 @@ export const BASELINE_SUBSYSTEM_ROWS = Object.freeze([
         description: 'Because the two keys name one lane, a certification that graded them differently would be reporting an instrument fault, not two subsystems.',
         check: 'For any receipt, the verdict on religionDynamicsEnabled equals the verdict on faithSpreadEnabled. Expressible from the evaluation output itself, since both rows declare the same channels.',
       }),
+      FAITH_SPREAD_BEARER_INVARIANT,
     ]),
     // Same measurement as the canonical row: the fixture carries no deities.
     soakEvidence: 'unobserved',

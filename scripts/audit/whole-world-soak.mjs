@@ -129,6 +129,7 @@ import {
   buildNeighborControl,
   buildSubsystemConfiguration,
   censusWorldStateKeys,
+  countDeityBearers,
   observeBehavioralYear,
 } from './behavioral-observation.mjs';
 import {
@@ -140,6 +141,7 @@ import {
   observeWarConvergenceYear,
 } from './war-convergence-collector.mjs';
 import { buildWholeWorldSoakSpatialCanon } from './whole-world-soak-spatial-fixture.mjs';
+import { resolveDeityCase, seatDeityBearingCase } from './whole-world-soak-deity-fixture.mjs';
 import {
   buildStoryMixDivergenceEvidence,
   compareStoryMixDistributions,
@@ -159,6 +161,11 @@ const DIVERGENCE_YEARS = Math.max(1, Math.min(YEARS, Number(arg('divergence-year
 const AS_JSON = process.argv.includes('--json');
 const RECEIPT_PATH = arg('receipt', '');
 const CASE_ID = String(arg('case-id', ''));
+// WF-0 — the one authored deity-bearing case (docs/DESIGN_FP_ARCH_WF.md "### WF-0").
+// Empty is the historical deity-free corpus (byte-identical, unconditional); the
+// case id seats it through SET_PRIMARY_DEITY/IMPOSE_CULT; anything else is refused
+// BY NAME below, exactly like an unknown --preset.
+const DEITY_CASE_ID = String(arg('deity-case', ''));
 const SEASONS = String(arg('seasons', 'preset')); // 'on' | 'off' | preset default
 const NEIGHBOR_CONTROL_YEARS = Math.max(
   0,
@@ -192,6 +199,10 @@ const RESTORE_FROM = String(arg('restore-from', ''));
 const SOURCE_SHA = String(arg('source-sha', ''));
 
 const lighting = parseLightingOverlay(LIGHTING);
+// Resolved before the gate (the lighting precedent), so an unknown --deity-case
+// leaves by the same named process.exit(2) every other unknown-id flag does.
+const deityCaseResolution = resolveDeityCase(DEITY_CASE_ID);
+const DEITY_CASE = deityCaseResolution.deityCase;
 const invocationRefusals = [
   ...soakInvocationRefusals({
     skipDivergence: SKIP_DIVERGENCE,
@@ -203,6 +214,7 @@ const invocationRefusals = [
     knownPresets: Object.keys(SIMULATION_RULE_PRESETS),
   }),
   ...lighting.refusals,
+  ...deityCaseResolution.refusals,
 ];
 if (invocationRefusals.length) {
   for (const line of invocationRefusals) console.error(line);
@@ -242,10 +254,13 @@ const REGION = Array.from({ length: SETTLEMENTS }, (_, i) => ({
 }));
 
 function buildFixture(seed, { variant = 'baseline' } = {}) {
-  const saves = REGION.map(({ id, ...config }, i) => {
+  const generated = REGION.map(({ id, ...config }, i) => {
     // Options are the THIRD argument (the second is importedNeighbour; passing
     // an options bag there now throws — the 85bb8c51 fail-closed contract).
-    const settlement = generateSettlementPipeline(config, null, { seed: `${seed}-${i}`, customContent: {} });
+    // WF-0's doctrine pin: the pantheon bag alone never seats a god — handing the
+    // case's customContent to generation is byte-identical to the empty bag, so
+    // this line changes nothing about `settlement` whether or not a case is named.
+    const settlement = generateSettlementPipeline(config, null, { seed: `${seed}-${i}`, customContent: DEITY_CASE ? DEITY_CASE.customContent : {} });
     return {
       id,
       name: settlement.name || id,
@@ -254,6 +269,13 @@ function buildFixture(seed, { variant = 'baseline' } = {}) {
       campaignState: { phase: 'canon', eventLog: [], locks: {} },
     };
   });
+  // WF-0 — seat the case through the product's own affordances (SET_PRIMARY_DEITY /
+  // IMPOSE_CULT via applyEvent), never by poking config, as a head-of-tick decree
+  // drain (campaignState.eventLog gains one viaTick:0 entry per seat). Every run
+  // variant (baseline, neighbor_perturbed, dark) shares this seeded realm; the dark
+  // variant's own unconditional strip below still removes any embed, case or not.
+  const deitySeating = DEITY_CASE ? seatDeityBearingCase(generated, DEITY_CASE, { now: NOW }) : null;
+  const saves = deitySeating ? deitySeating.saves : generated;
 
   if (variant === 'neighbor_perturbed' && saves[0]?.settlement) {
     const settlement = saves[0].settlement;
@@ -352,7 +374,10 @@ function buildFixture(seed, { variant = 'baseline' } = {}) {
       stressors: [],
     },
   };
-  return { campaign, saves };
+  // The seating PLAN travels with the fixture (not merely the seated saves) so a
+  // receipt can name what was seated without re-deriving it — the dark variant's
+  // strip removes the embeds but the plan describes the affordances that were used.
+  return { campaign, saves, deityCasePlan: deitySeating ? deitySeating.plan : null };
 }
 
 // ── NaN / Infinity deep scan (fail-fast every year) ──────────────────────────
@@ -370,7 +395,7 @@ async function runYears(seed, years, label, {
   checkpointDir = '',
 } = {}) {
   const fixture = buildFixture(seed, { variant });
-  const { campaign, saves } = fixture;
+  const { campaign, saves, deityCasePlan } = fixture;
   let runningCampaign = campaign;
   let runningSaves = saves;
   // ⛔ THE RESTORE SEAM. A checkpoint replaces the threaded state and the loop
@@ -563,6 +588,11 @@ async function runYears(seed, years, label, {
     heapUsedBytes: process.memoryUsage().heapUsed,
     peakHeapUsedBytes,
     startPopulations: fixture.saves.map((s) => Number(s.settlement?.population) || 0),
+    // WF-0 — run A's FINAL saves (post-advance settlement snapshots), the exact
+    // input the bearer count is taken over ("at soak end", DESIGN_FP_ARCH_WF.md
+    // WF-0), and the seating plan beside it so a receipt can name what was seated.
+    finalSaves: runningSaves,
+    deityCasePlan: deityCasePlan || null,
     yearlyBehavior,
     yearlyStateKeyCensus,
     yearlyWarConvergence,
@@ -1021,6 +1051,9 @@ const receiptBody = {
   schemaVersion: SOAK_RECEIPT_SCHEMA_VERSION,
   kind: 'whole_world_soak',
   ...(CASE_ID ? { caseId: CASE_ID } : {}),
+  // WF-0 — named only when a case was actually seated, exactly like caseId/presetId
+  // above: the no-flag run's bytes stay untouched.
+  ...(runA.deityCasePlan ? { deityCase: runA.deityCasePlan } : {}),
   // ⭐ THE RECEIPT NAMES THE PRESET IT CERTIFIED — but only when one was NAMED, exactly
   // like `caseId` above. Emitting it unconditionally would move every default receipt's
   // bytes for a field that says what the default already was, and the ruling requires the
@@ -1139,6 +1172,10 @@ const receiptBody = {
     presetId: runA.simulationRules?.presetId,
     rules: runA.simulationRules,
     yearlyCensuses: runA.yearlyStateKeyCensus,
+    // WF-0 — the faith rows' bearer-count invariant reads this field to tell a
+    // spread SILENCE apart from an ABSENT PRECONDITION. Taken over run A's own
+    // final saves so the count is this receipt's world, never a global constant.
+    deityBearers: countDeityBearers(runA.finalSaves),
   }),
   behavioral: buildBehavioralObservation({
     settlementIds: REGION.map((settlement) => settlement.id),
