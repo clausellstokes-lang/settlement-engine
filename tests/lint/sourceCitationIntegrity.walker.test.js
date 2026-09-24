@@ -47,7 +47,11 @@
  * past-EOF citations this gate deliberately does not see. FOUR rules select them,
  * each checkable, and the full roster is committed in the baseline's
  * `archivalExclusionAtFreeze.files`:
- *   tree (21)    docs/review-r2/**, docs/shift-records/**
+ *   tree (22)    docs/review-r2/**, docs/shift-records/**
+ *                (2026-09-24-lit1b-herald-desk-belief-lit.json joined 2026-09-24, 21 -> 22: the chair's
+ *                signed re-record of the herald-knowledge-desk golden at LIT-1b's pick (FP-28), born
+ *                inside docs/shift-records/ with the re-record; a GROWTH that hid nothing, zero
+ *                past-EOF of its own.)
  *                (2026-09-24-fp-lighting-1b.json joined 2026-09-24, 20 -> 21 at the pick onto
  *                fp/integration (18 -> 19 at its base): LIT-1b's signed record of the
  *                preset-lighting-witness re-record, born inside docs/shift-records/; a

@@ -2423,6 +2423,9 @@ red on exactly the two predicted rows before the door; the door re-stamped the r
 witness run and `tests/lint/goldenFreeze.walker.test.js` are green after it.
 ## 2026-09-24 — preset-lighting-witness re-recorded: three rows, five fields each, the second FP lighting unit (LIT-1b)
 
+> **AT THE PICK (the FP chair, 2026-09-24, fp/integration-2026-09-23 @ d53e161cf):** the register row was re-stamped ONCE with the UNION of this re-record and CURE-P1 U3's (54c009fb2): LIT-1b's five lighting fields on its three rows, and CURE-P1's `wizardNewsSha256` on `dramatic_campaign` and `full_simulation` — the seat's prediction that the union equals the lit measurement in every field is proven by the plain witness run at the pick (green), recorded in the FP kit's board. The skeptic's addendum to the signed record (the aspatial tradition-change beats, a second effect of the same cause) is in the record's `_doc`.
+
+
 *The LIT-1b seat (Opus 5.5), on base `6efff620b` (`fp/lit-1b`), at the FP chair's dispatch.*
 
 **Surface:** `tests/fixtures/preset-lighting-witness-golden.json` (registered as
