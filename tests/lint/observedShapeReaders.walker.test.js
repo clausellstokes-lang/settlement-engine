@@ -629,8 +629,12 @@ describe('reader-with-no-writer ratchet: the EXECUTED corpus', () => {
     // never inflation; prose-family 25/63 rows, distinctValues holding at 8).
     expect(scalarCorpus.scalarMeta).toEqual({
       canonEventLogEntries: 1,
-      wizardNewsFinalEntries: 240,
-      wizardNewsAccumulatedEntries: 1567,
+      wizardNewsFinalEntries: 272,
+      wizardNewsAccumulatedEntries: 1604,
+      // FP BATCH 4 (2026-09-24, the FP chair): wizardNewsFinalEntries 240 → 272 and wizardNewsAccumulatedEntries 1567 → 1604 —
+      // the Herald lens U2 (32315e384, FP-31): the feed keeps its newest 52 weeks whole under the 240 cap, so the corpus's
+      // twelve monthly pulses retire one entry instead of thirty-three; unique 273 HOLDS. Attributed by equality with the U2
+      // seat's measurement at its base; cross-recorded in news-voice, news-headline and prose-family in the same act.
       // FP BATCH 3 (2026-09-24, the FP chair): 272 → 273, ONE new unique wizard-news id. ATTRIBUTED BY BISECT over the
       // fourteen commits since landing 2, the corpus builder run per sha: 272 at df7aeaef4, 273 at c9b24fe51 = CURE-PEACE-1 U1
       // (a peacetime suit retires when a war opens against its court; its feed reconcile mints the one id). Accumulated 1567

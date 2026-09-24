@@ -13,6 +13,12 @@ const LANES = Object.freeze({ mechanicalOutcomes: 8, selectedOutcomes: 24 });
 // ── RE-RECORDED 2026-09-01 BY THE WAR LANDING (§876) — STILL THE SECOND COPY OF THE SAME TUPLE.
 // 268/28/51 → 272/32/50. The provenance, the five-arm single-variable control and the falsified
 // dispatch causes are recorded once, at the voice contract's copy, exactly as before.
+// ── RE-RECORDED 2026-09-24 BY FP BATCH LANDING 4 (the FP chair, session 87797a6a), IN THE SAME ACT AS THE NEWS-VOICE
+// CONTRACT, THE PROSE-FAMILY CONTRACT AND THE OSR WALKER'S PINS ─────────────────────────────────────────────────────
+// CORPUS 273/33/240/51 → 273/1/272/51 (retirements and finalEntries only). ADDRESS_TOTALS,
+// RAW_LIVENESS and REWRITE_TOTALS HOLD: the addresses are minted at INTRODUCTION and the raw headline rows are the persisted
+// pulse records, neither of which the retention window touches. ONE CAUSE: the Herald lens U2 (32315e384, FP-31 = P1), the
+// 52-week window under the 240 cap; attributed by equality with the U2 seat's own measurement at its base.
 // ── RE-RECORDED 2026-09-24 BY FP BATCH LANDING 3 (the FP chair, session 87797a6a), IN THE SAME ACT AS THE NEWS-VOICE
 // CONTRACT, THE PROSE-FAMILY CONTRACT AND THE OSR WALKER'S PIN ───────────────────────────────────────────────
 // CORPUS 272/32/240/50 → 273/33/240/51; ADDRESS_TOTALS 50/2/100/12/88/393/544 → 51/2/102/13/89/395/546;
@@ -22,7 +28,7 @@ const LANES = Object.freeze({ mechanicalOutcomes: 8, selectedOutcomes: 24 });
 // peacetime suit retires when a war opens against its court, and the feed's reconcile of the superseded proposal mints
 // ONE new wizard-news id with a home of its own (a new address, prospective voice, one spelling). Every figure here was
 // derived by the walkers' own functions from one corpus build and cross-checked at c9b24fe51 and at the landing tip.
-const CORPUS = Object.freeze({ pulseRoots: 12, introductions: 273, retirements: 33, finalEntries: 240, homes: 51 });
+const CORPUS = Object.freeze({ pulseRoots: 12, introductions: 273, retirements: 1, finalEntries: 272, homes: 51 });
 // ── RE-RECORDED 2026-09-01 BY T8 · SHIFT (ODQ §858 + §860) ─────────────────────────────────────
 // 53/106/14/92/400/544 → 51/102/12/90/393/536. `fields` holds at 2, as it must: the address grammar
 // is still headline-and-summary and nothing was added to it.

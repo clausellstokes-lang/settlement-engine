@@ -3,8 +3,8 @@
   "corpus": {
     "pulseRoots": 12,
     "introductions": 273,
-    "retirements": 33,
-    "finalEntries": 240,
+    "retirements": 1,
+    "finalEntries": 272,
     "homes": 51
   },
   "retroDetection": {

@@ -19,6 +19,13 @@ const TOTAL_KEYS = Object.freeze(['identities', 'distinctValues', 'occurrences']
 // `retirements` and `homes`. Anyone re-recording this from a failure message alone would have
 // left two thirds of the drift in place; the figures here are measured from a probe that reports
 // every field instead of throwing on the first.
+// ── RE-RECORDED 2026-09-24 BY FP BATCH LANDING 4 (the FP chair, session 87797a6a), IN THE SAME ACT AS THE NEWS-HEADLINE
+// CONTRACT, THE PROSE-FAMILY CONTRACT AND THE OSR WALKER'S PINS ─────────────────────────────────────────────────────
+// 273/33/240/51 → 273/1/272/51. introductions and homes DO NOT MOVE; retirements 33 → 1 and finalEntries 240 → 272 move
+// TOGETHER and conservation still closes: 273 − 1 = 272. ONE CAUSE: the Herald lens U2 (32315e384, ruling FP-31 = P1) — the
+// feed keeps every entry of its newest 52 weeks whole and applies the 240 cap only beyond them, so within the corpus's
+// twelve monthly pulses nothing but one entry retires. ATTRIBUTED BY EQUALITY: the U2 seat measured exactly these figures
+// at its own base (its report, stated shift (a)); the batch's other picks (WR-RECALL, PEACE-2) move none of them.
 // ── RE-RECORDED 2026-09-24 BY FP BATCH LANDING 3 (the FP chair, session 87797a6a), IN THE SAME ACT AS THE OSR
 // WALKER'S PIN AND THE PROSE-FAMILY CONTRACT ─────────────────────────────────────────────────────────────
 // 272/32/50 → 273/33/51. pulseRoots 12 and finalEntries 240 do not move for the third re-record running, and
@@ -59,7 +66,7 @@ const TOTAL_KEYS = Object.freeze(['identities', 'distinctValues', 'occurrences']
 // four other stressor homes reach further, and the address `distinctValues` total holds at 393
 // exactly. Fewer homes, more occurrences, the same vocabulary size — that is redistribution.
 const CORPUS = Object.freeze({
-  pulseRoots: 12, introductions: 273, retirements: 33, finalEntries: 240, homes: 51,
+  pulseRoots: 12, introductions: 273, retirements: 1, finalEntries: 272, homes: 51,
 });
 
 export const NEWS_VOICE_PROTECTED_SUBSTRATE = Object.freeze([

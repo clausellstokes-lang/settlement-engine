@@ -1,10 +1,10 @@
 {
   "schemaVersion": 1,
   "corpus": {
-    "scalarRows": 25549,
+    "scalarRows": 26329,
     "canonEventLogEntries": 1,
-    "wizardNewsFinalEntries": 240,
-    "wizardNewsAccumulatedEntries": 1567,
+    "wizardNewsFinalEntries": 272,
+    "wizardNewsAccumulatedEntries": 1604,
     "wizardNewsUnique": 273,
     "pulseHistory": 12,
     "regionalEventLog": 77,

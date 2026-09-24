@@ -82,6 +82,12 @@ const EXPECTED_ROOTS = new Map([
 // ⚠ SCOPE, unchanged from the TE36 note above: `demographicsEnabled` is virtual and false in every
 // shipped preset, and this denominator is the ONLY place in the estate that observes the lit
 // engine. No player, no shipped golden and no dark-control cell sees any of this.
+// ── RE-RECORDED 2026-09-24 BY FP BATCH LANDING 4 (the FP chair, session 87797a6a), IN THE SAME ACT AS THE NEWS-VOICE AND
+// NEWS-HEADLINE CONTRACTS AND THE OSR WALKER'S PINS ──────────────────────────────────────────────────────────────────
+// scalarRows 25549 → 26329; wizardNewsFinalEntries 240 → 272; wizardNewsAccumulatedEntries 1567 → 1604;
+// wizardNewsUnique 273 and every FAMILY ROW HOLD (the 63 identities, their counts, the bytes and the digest are unmoved —
+// the kept news entries live under wizardNews.entries, which this contract excludes by law). ONE CAUSE: the Herald lens U2
+// (32315e384, FP-31 = P1), the 52-week window under the 240 cap; attributed by equality with the U2 seat's own measurement.
 // ── RE-RECORDED 2026-09-24 BY FP BATCH LANDING 3 (the FP chair, session 87797a6a), IN THE SAME ACT AS THE OSR
 // WALKER'S PIN AND THE NEWS-VOICE CONTRACT ─────────────────────────────────────────────────────────────────
 // scalarRows 25527 → 25549; wizardNewsUnique 272 → 273; pulseHistory 1051/5075 → 1055/5097; totals
@@ -124,8 +130,8 @@ const EXPECTED_ROOTS = new Map([
 // is the ONLY place in the estate that observes the lit engine. No player, no shipped golden and
 // no dark-control cell sees any of this.
 const EXPECTED_CORPUS = Object.freeze({
-  scalarRows: 25549, canonEventLogEntries: 1, wizardNewsFinalEntries: 240,
-  wizardNewsAccumulatedEntries: 1567, wizardNewsUnique: 273, pulseHistory: 12,
+  scalarRows: 26329, canonEventLogEntries: 1, wizardNewsFinalEntries: 272,
+  wizardNewsAccumulatedEntries: 1604, wizardNewsUnique: 273, pulseHistory: 12,
   regionalEventLog: 77, regionalEventLogUnique: 77, aiChronicle: 1,
 });
 const EXPECTED_FAMILY_TOTALS = Object.freeze([
