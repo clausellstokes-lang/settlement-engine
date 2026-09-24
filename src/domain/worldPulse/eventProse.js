@@ -208,13 +208,16 @@ export const CALAMITY_TITLES = Object.freeze([
   (x) => `The Great Calamity of ${x.name} in the year ${x.year}`,
 ]);
 
-/** @type {readonly ProseVariant[]} strike summary — interp {name, ruin, deaths}; contains "calamity". */
+/** @type {readonly ProseVariant[]} strike summary — interp {name, ruin, deaths}; contains "calamity".
+ *  CURE-P1 U2 (FPQ-22): `ruin` is a CLAUSE and `deaths` is a quantity PHRASE, both already in
+ *  words (calamityKernel.js :: strikeNews), so each telling sets them as a list after a colon and
+ *  adds no qualifier of its own ("about several hundred" would read twice approximate). */
 export const CALAMITY_SUMMARIES = Object.freeze([
-  (x) => `A calamity has struck ${x.name}: ${x.ruin}, about ${x.deaths} dead, and many more take to the roads.`, // canonical
-  (x) => `Calamity has come to ${x.name}: ${x.ruin}, near ${x.deaths} dead, and the survivors scatter to the roads.`,
-  (x) => `A great calamity has fallen on ${x.name}. The toll is ${x.ruin}, some ${x.deaths} dead, and many take flight along the roads.`,
-  (x) => `${x.name} lies broken by calamity: ${x.ruin}, about ${x.deaths} dead, and the roads fill with those who remain.`,
-  (x) => `Calamity has undone ${x.name}: ${x.ruin}, roughly ${x.deaths} dead, and the living take what they can to the roads.`,
+  (x) => `A calamity has struck ${x.name}: ${x.ruin}, ${x.deaths} dead, and many more take to the roads.`, // canonical
+  (x) => `Calamity has come to ${x.name}: ${x.ruin}, ${x.deaths} dead, and the survivors scatter to the roads.`,
+  (x) => `A great calamity has fallen on ${x.name}. The toll: ${x.ruin}, ${x.deaths} dead, and many take flight along the roads.`,
+  (x) => `${x.name} lies broken by calamity: ${x.ruin}, ${x.deaths} dead, and the roads fill with those who remain.`,
+  (x) => `Calamity has undone ${x.name}: ${x.ruin}, ${x.deaths} dead, and the living take what they can to the roads.`,
 ]);
 
 /** @type {readonly ProseVariant[]} strike reason — bucket-neutral, geography-of-exposure. */
