@@ -47,7 +47,10 @@
  * past-EOF citations this gate deliberately does not see. FOUR rules select them,
  * each checkable, and the full roster is committed in the baseline's
  * `archivalExclusionAtFreeze.files`:
- *   tree (23)    docs/review-r2/**, docs/shift-records/**
+ *   tree (24)    docs/review-r2/**, docs/shift-records/**
+ *                (2026-09-24-treaty-voice-desk-default-beat.json joined 2026-09-24, 23 -> 24: the chair's
+ *                signed re-record of the herald-knowledge-desk golden at the treaty-voice pick (FP-28,
+ *                once per cause); a GROWTH that hid nothing, zero past-EOF of its own.)
  *                (2026-09-24-herald-lens-u2-desk-window.json joined 2026-09-24, 22 -> 23: the chair's
  *                signed re-record of the herald-knowledge-desk golden at the Herald lens U2's pick
  *                (FP-31, once per cause); a GROWTH that hid nothing, zero past-EOF of its own.)
