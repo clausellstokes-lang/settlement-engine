@@ -23,12 +23,13 @@
     "_rosterGrowth2026-09-24-in5": "ONE document JOINED `tree` (19 -> 20) and it hid NOTHING: docs/shift-records/2026-09-24-in5-herald-knowledge-desk.json — IN-5's signed ENROLL record of the herald-knowledge-desk golden (the non-omniscient Herald golden captured FIRST, J-INF-6), born inside docs/shift-records/ at IN-5/1's pick 6cf6920d4 without this roster row (SR-11's registration, owed by the lane, cured at FP batch landing 3 by the chair). A GROWTH, not a reclassification: no live document changed class; the record is a JSON signature with zero source citations of its own, so pastEofCitationsExcluded stays at 377.",
     "_rosterGrowth2026-09-24-lit1b": "ONE document JOINED the roster by being BORN into it, and it hid NOTHING: docs/shift-records/2026-09-24-fp-lighting-1b.json joined `tree` (18 -> 19 at its base; 20 -> 21 at the pick onto fp/integration, after IN-5's record) with LIT-1b, the second FP lighting unit (its signed record of the preset-lighting-witness re-record). A GROWTH, not a class move: the file entered the tree inside docs/shift-records/, so the ARCHIVAL_TREES rule classified it on its first commit and no live document left the gated corpus. It is archival for the reason every shift record on this roster is: it states what moved in ONE named golden at ONE named base and is never re-addressed to today's tree. THE PROOF THAT IT SILENCES NOTHING, measured with the shipped walker at the lane's tree: the record carries ZERO path:line citations of its own, so pastEofCitationsExcluded stays 377, and ARM 1 and ARM 2 are both 0. Recorded by the LIT-1b seat.",
     "_rosterGrowth2026-09-24-lit1b-desk": "ONE document JOINED `tree` (21 -> 22) and it hid NOTHING: docs/shift-records/2026-09-24-lit1b-herald-desk-belief-lit.json — the chair's signed RE-RECORD record of the herald-knowledge-desk golden at LIT-1b's pick (the lit belief chain signs a pact in year one; judgment FP-28), born inside docs/shift-records/ in the same commit as the re-record it signs. A GROWTH, not a reclassification; a JSON signature with zero source citations of its own, so pastEofCitationsExcluded stays at 377.",
+    "_rosterGrowth2026-09-24-herald-u2-desk": "ONE document JOINED `tree` (22 -> 23) and it hid NOTHING: docs/shift-records/2026-09-24-herald-lens-u2-desk-window.json — the chair's signed RE-RECORD record of the herald-knowledge-desk golden at the Herald lens U2's pick (the one-year feed window, FP-31; once per cause, FP-28), born inside docs/shift-records/ with the re-record it signs; a JSON signature with zero source citations of its own, so pastEofCitationsExcluded stays at 377.",
     "pastEofCitationsExcluded": 377,
     "byRule": {
       "banner": 8,
       "dated": 5,
       "sha-pin": 1,
-      "tree": 22
+      "tree": 23
     },
     "files": {
       "banner": [
@@ -70,6 +71,7 @@
         "docs/shift-records/2026-09-24-fp-lighting-1a.json",
         "docs/shift-records/2026-09-24-fp-lighting-1b.json",
         "docs/shift-records/2026-09-24-fp-witness-prose-cure-p1.json",
+        "docs/shift-records/2026-09-24-herald-lens-u2-desk-window.json",
         "docs/shift-records/2026-09-24-in5-herald-knowledge-desk.json",
         "docs/shift-records/2026-09-24-lit1b-herald-desk-belief-lit.json",
         "docs/shift-records/README.md",

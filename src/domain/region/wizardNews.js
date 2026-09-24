@@ -2,7 +2,6 @@ import { goodCriticality } from './goodsCatalog.js';
 import { ensureRegionalGraphOnce } from './graph.js';
 import { wallClockNow } from '../clock.js';
 import { compareCodepoint } from '../deterministicSort.js';
-import { INTERVAL_WEEKS } from '../worldPulse/intervalWeeks.js';
 
 export const WIZARD_NEWS_SCHEMA_VERSION = 1;
 export const WIZARD_NEWS_SIGNIFICANCE = Object.freeze({
@@ -26,7 +25,10 @@ const MAX_ENTRIES = 240;
 // survives the cap; MAX_ENTRIES and the arc rescue govern only what survives beyond it (see
 // capEntries). The span is the estate's own year, IMPORTED from the one interval table rather
 // than mirrored, so the window cannot drift from the calendar the advance menu offers.
-const RETENTION_WINDOW_TICKS = INTERVAL_WEEKS.one_year;
+// FP-34 (the FP chair, 2026-09-24): a LOCAL constant, pinned equal to INTERVAL_WEEKS.one_year by
+// tests/domain/wizardNewsYearWindow.test.js, so intervalWeeks.js stays OUT of the first-paint set
+// (the import owed about 387 B of eager bytes; a signed budget never rises by the chair's hand).
+export const RETENTION_WINDOW_TICKS = 52;
 
 // ── Types ──────────────────────────────────────────────────────────────────
 

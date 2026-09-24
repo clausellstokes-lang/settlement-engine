@@ -21,7 +21,7 @@
  * @enforced-by this file
  */
 import { describe, expect, test } from 'vitest';
-import { appendWizardNewsEntries, ensureWizardNewsFeed } from '../../src/domain/region/wizardNews.js';
+import { RETENTION_WINDOW_TICKS, appendWizardNewsEntries, ensureWizardNewsFeed } from '../../src/domain/region/wizardNews.js';
 import { buildHeraldFeed } from '../../src/components/map/heraldFeed.js';
 import { INTERVAL_WEEKS } from '../../src/domain/worldPulse/intervalWeeks.js';
 
@@ -80,6 +80,8 @@ const ticksOf = (feed) => feed.entries.map((e) => e.tick);
 describe('FP-21 U2 / FP-31 — the feed keeps the last year whole', () => {
   test('a year advance keeps every week\'s items: 400 entries minted across fifty-two weekly appends all survive', () => {
     expect(YEAR).toBe(52);
+    // FP-34: the feed's local window constant IS the year, pinned here so the two can never drift apart.
+    expect(RETENTION_WINDOW_TICKS).toBe(INTERVAL_WEEKS.one_year);
     const feed = appendABusyYear(feedAtTheCap(), 52);
     expect(feed.entries).toHaveLength(400);
     // Every week of the year is present, and every entry is the year's own (the older 240 fell
