@@ -50,7 +50,23 @@
  * module a second distinct-chunk importer and force it into a shared chunk, adding
  * eager first-paint bytes). The builder side (the cost table + buildSeasonalOverlay)
  * stays in spatialCost.
+ *
+ * WY-1 THE SCALE CHARTER (data-gated by `spatialDigest.kmScale`, never by a flag): a
+ * digest carrying the map's own km scale reads ABSOLUTE weeks — the same geometry, the
+ * same pathCost, the same floor and cap, with the weeks-per-cost constant derived from
+ * the declared scale and the mode table (modeSpeeds.js) instead of from the median
+ * primary hop (law M: one position model, no second speed floor). A digest WITHOUT the
+ * datum (every existing canon, golden and fixture) reads exactly the normalized arm
+ * below, byte-identically; a datum the admission refuses reads the same way.
  */
+
+import {
+  admitKmScale,
+  costUnitsPerMapUnit,
+  modeSpeedOf,
+  reachBandOf,
+  MODE_SPEEDS,
+} from './modeSpeeds.js';
 
 // ── Calibration constants (the §II.5-1 anchors; retunable in the soak) ───────
 // The MEDIAN primary-tier (adjacent) hop maps to this many weeks. Anchoring on
@@ -92,7 +108,8 @@ const clamp01 = (v) => (v < 0 ? 0 : v > 1 ? 1 : v);
  *   tiers?: Record<string, Record<string, number>>,
  *   gates?: Array<{ between?: [string, string], cost?: number }>,
  *   routeReceipts?: Record<string, { cost?: number, byTerrain?: Record<string, number> }>,
- *   reserved?: { seasonalOverlay?: SeasonalOverlay | null, seaLanes?: SeaLanes | null, teleportEdges?: TeleportEdges | null } }} SpatialDigest
+ *   reserved?: { seasonalOverlay?: SeasonalOverlay | null, seaLanes?: SeaLanes | null, teleportEdges?: TeleportEdges | null },
+ *   costLawVersion?: number, kmScale?: unknown }} SpatialDigest
  */
 
 /**
@@ -112,6 +129,37 @@ export function activeSpatialDigest(worldState) {
   if (!digest || typeof digest !== 'object') return null;
   if (!digest.distanceMatrix || typeof digest.distanceMatrix !== 'object') return null;
   return digest;
+}
+
+/**
+ * THE SCALE GATE (WY-1). The admission receipt for a digest's km-scale datum: the
+ * admitted scale, or null. Null is the LEGACY arm: every world canonized before the
+ * creation flow ships the datum, and every world whose datum the admission refuses —
+ * the IMPORT HEAL: hydration shares the frozen digest by reference, so an imported value
+ * that is not a scale reaches this gate unrepaired and reads ABSENT here, with the typed
+ * `refusal` as its receipt, and the next receipted re-canonize drops it for good
+ * (modeSpeeds.kmScaleForCanonize). A scale also needs a cost law this reader can
+ * convert, so an unknown `costLawVersion` is refused too. `refusal` is null when the
+ * datum is admitted or simply absent (absence is the legacy identity, not a fault).
+ * @param {SpatialDigest|null|undefined} digest
+ * @returns {{ kmScale: number|null, refusal: import('./modeSpeeds.js').KmScaleRefusal|null }}
+ */
+export function scaleAdmission(digest) {
+  if (!digest || typeof digest !== 'object') return { kmScale: null, refusal: null };
+  const admitted = admitKmScale(digest.kmScale);
+  if (admitted.kmScale === null) return admitted;
+  if (costUnitsPerMapUnit(digest.costLawVersion) === null) return { kmScale: null, refusal: 'unknown_cost_law' };
+  return admitted;
+}
+
+/**
+ * The digest's admitted km scale (km per map-coordinate unit), or null for the legacy
+ * arm. Every absolute read keys on this ONE gate, so the gate cannot drift between them.
+ * @param {SpatialDigest|null|undefined} digest
+ * @returns {number|null}
+ */
+export function activeKmScale(digest) {
+  return scaleAdmission(digest).kmScale;
 }
 
 // ── The SPATIAL LEDGER NAMESPACE accessors (Phase 5.5 FP-R) ────────────────────
@@ -458,6 +506,12 @@ const CALIBRATION_MEMO = new WeakMap();
  * @property {number} anchorWeeks         PRIMARY_HOP_WEEKS_ANCHOR (the fit target).
  * @property {number} floor               DISTANCE_WEIGHT_FLOOR.
  * @property {boolean} derived            true when real primary-hop data drove it.
+ * @property {number} [kmScale]           WY-1: the admitted datum (km per map unit);
+ *   present ONLY on a scaled world, so an unscaled receipt keeps its exact shape.
+ * @property {number} [impliedKmScale]    WY-1: the one km scale at which the absolute
+ *   read and the normalized read coincide on this map.
+ * @property {number} [normalizedWeeksPerCost] WY-1: the normalized constant the absolute
+ *   arm replaced — the receipt names both reads.
  */
 
 /** @param {unknown} v @returns {number|null} finite number or null */
@@ -540,8 +594,37 @@ export function calibration(digest) {
     floor: DISTANCE_WEIGHT_FLOOR,
     derived: primaryCosts.length > 0,
   };
-  CALIBRATION_MEMO.set(digest, receipt);
-  return receipt;
+  const kmScale = activeKmScale(digest);
+  const units = costUnitsPerMapUnit(digest.costLawVersion);
+  const read = kmScale === null || units === null ? receipt : absoluteCalibration(receipt, kmScale, units);
+  CALIBRATION_MEMO.set(digest, read);
+  return read;
+}
+
+/**
+ * THE ABSOLUTE ARM (WY-1; law M — one position model). The same geometry, pathCost,
+ * rounding, floor and cap as the normalized read; only the weeks-per-cost constant
+ * changes, from "a median primary hop is one week" to "one map unit of cheapest-terrain
+ * walking is kmScale km at the foot speed". It is COMPUTED as the normalized constant
+ * times (declared scale / implied scale), where the implied scale is the one km scale at
+ * which the two reads coincide on this map. Algebraically the median cancels, so the
+ * weeks depend only on the cost, the declared scale and the speed: the read is absolute.
+ * Numerically the ratio is exactly one at the implied scale, so there the two reads
+ * agree to the bit, and everywhere else the receipt names both constants.
+ * @param {CalibrationReceipt} normalized @param {number} kmScale @param {number} unitsPerMapUnit
+ * @returns {CalibrationReceipt}
+ */
+function absoluteCalibration(normalized, kmScale, unitsPerMapUnit) {
+  const impliedKmScale = unitsPerMapUnit * MODE_SPEEDS.foot * normalized.weeksPerCost;
+  const weeksPerCost = normalized.weeksPerCost * (kmScale / impliedKmScale);
+  return {
+    ...normalized,
+    weeksPerCost,
+    diameterWeeks: Math.round(normalized.diameterCost * weeksPerCost),
+    kmScale,
+    impliedKmScale,
+    normalizedWeeksPerCost: normalized.weeksPerCost,
+  };
 }
 
 /**
@@ -632,17 +715,109 @@ export function pathCost(digest, fromId, toId, season = null) {
  * (weeks-per-cost) stays the frozen geometric anchor. No season / no overlay ⇒
  * the geometric weeks, byte-identical. Still floored ≥ 1 and capped at
  * MAX_HOP_WEEKS — so even a max-winter mountain hop is SLOW, never infinite.
+ *
+ * WY-1: on a SCALED world (activeKmScale) the weeks are absolute — the calibration's
+ * absolute arm — and the OPTIONAL `mode` names a row of the mode table (modeSpeeds.js;
+ * absent or unknown reads on foot, the base denomination). On an unscaled world the
+ * mode is ignored: the normalized read knows no modes, byte-identically.
  * @param {SpatialDigest} digest @param {string|number} fromId @param {string|number} toId
  * @param {string|null} [season]
+ * @param {string|null} [mode]
  * @returns {number|null}
  */
-export function hopWeeks(digest, fromId, toId, season = null) {
+export function hopWeeks(digest, fromId, toId, season = null, mode = null) {
   const cost = pathCost(digest, fromId, toId, season);
   if (cost == null) return null;
   if (cost === 0) return 0;
+  return legWeeks(Math.round(cost * weeksPerCostOf(digest, mode)));
+}
+
+/**
+ * THE ONE FLOOR AND CAP of a leg (law M binds in every denomination): at least one week
+ * for any distinct reachable pair, at most MAX_HOP_WEEKS. `hopWeeks` and the spectrum
+ * surface both read legs through it, so there is no second floor to drift.
+ * @param {number} rawWeeks the rounded, uncapped weeks @returns {number}
+ */
+function legWeeks(rawWeeks) {
+  return Math.min(MAX_HOP_WEEKS, Math.max(1, rawWeeks));
+}
+
+/**
+ * The weeks-per-cost constant a read uses: the calibration's own (the foot speed on a
+ * scaled world, the normalized constant on an unscaled one, where modes do not exist),
+ * else scaled by the named mode's speed against the foot speed.
+ * @param {SpatialDigest} digest @param {string|null|undefined} mode @returns {number}
+ */
+function weeksPerCostOf(digest, mode) {
+  const read = calibration(digest);
+  if (mode == null || read.kmScale == null) return read.weeksPerCost;
+  const speed = modeSpeedOf(mode);
+  return speed === MODE_SPEEDS.foot ? read.weeksPerCost : read.weeksPerCost * (MODE_SPEEDS.foot / speed);
+}
+
+/**
+ * @typedef {Object} RealmReach
+ * @property {number} legs          unordered reachable settlement pairs measured.
+ * @property {number} minWeeks      the shortest leg, as every mover reads it (floored).
+ * @property {number} medianWeeks   the lower-median leg.
+ * @property {number} maxWeeks      the longest leg, as every mover reads it (capped).
+ * @property {number} clampedLegs   legs whose weeks the one-year cap cut short.
+ * @property {number} reachWeeks    the longest leg BEFORE the cap (floored at one).
+ * @property {import('./modeSpeeds.js').ReachBand} band  reachWeeks' reach band.
+ * @property {number|null} kmScale  the admitted datum, or null (the normalized arm).
+ */
+
+/** @type {WeakMap<object, RealmReach>} */
+const REACH_MEMO = new WeakMap();
+
+/**
+ * THE SPECTRUM SURFACE (WY §1a.3 — the dead-band law applied per map): the world's own
+ * MEASURED leg spectrum in its own denomination, over every unordered pair of mapped
+ * settlements read on foot through the one floor and cap, plus the realm's REACH (its
+ * longest leg before the one-year cap) and that reach's band. On a scaled world the
+ * spectrum and the band rise with the km scale and never fall; an unscaled world
+ * reports its normalized spectrum. A pure function of the frozen digest, memoized on it.
+ * @param {SpatialDigest} digest
+ * @returns {RealmReach}
+ */
+export function realmReach(digest) {
+  if (!digest || typeof digest !== 'object') {
+    return { legs: 0, minWeeks: 0, medianWeeks: 0, maxWeeks: 0, clampedLegs: 0, reachWeeks: 0, band: reachBandOf(0), kmScale: null };
+  }
+  const memo = REACH_MEMO.get(digest);
+  if (memo) return memo;
+  const ids = (Array.isArray(digest.settlementIds) ? digest.settlementIds.map(String) : Object.keys(digest.distanceMatrix || {})).sort();
   const { weeksPerCost } = calibration(digest);
-  const weeks = Math.round(cost * weeksPerCost);
-  return Math.min(MAX_HOP_WEEKS, Math.max(1, weeks));
+  /** @type {number[]} */
+  const weeks = [];
+  let clampedLegs = 0;
+  let reachWeeks = 0;
+  for (let i = 0; i < ids.length; i++) {
+    for (let j = i + 1; j < ids.length; j++) {
+      const cost = pathCost(digest, ids[i], ids[j]);
+      if (cost == null || cost <= 0) continue;
+      const rounded = Math.round(cost * weeksPerCost);
+      const leg = legWeeks(rounded);
+      if (rounded > leg) clampedLegs++;
+      // The reach is the leg BEFORE the cap and never under the floor: the larger of the two.
+      reachWeeks = Math.max(reachWeeks, leg, rounded);
+      weeks.push(leg);
+    }
+  }
+  weeks.sort((a, b) => a - b);
+  /** @type {RealmReach} */
+  const reach = {
+    legs: weeks.length,
+    minWeeks: weeks.length ? weeks[0] : 0,
+    medianWeeks: lowerMedian(weeks) ?? 0,
+    maxWeeks: weeks.length ? weeks[weeks.length - 1] : 0,
+    clampedLegs,
+    reachWeeks,
+    band: reachBandOf(reachWeeks),
+    kmScale: activeKmScale(digest),
+  };
+  REACH_MEMO.set(digest, reach);
+  return reach;
 }
 
 // Per-digest settlement-id membership memo (built once per digest object).

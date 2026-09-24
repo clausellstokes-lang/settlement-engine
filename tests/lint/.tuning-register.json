@@ -480,6 +480,30 @@
       "band": null,
       "note": ""
     },
+    "src/domain/spatial/modeSpeeds.js#KM_SCALE_TUNING": {
+      "role": null,
+      "status": "draft",
+      "signedAt": null,
+      "unit": {
+        "DEFAULT_KM_SCALE": "mixed"
+      },
+      "band": null,
+      "note": "WY-1 THE SCALE CHARTER (FP lane FP-W; docs/DESIGN_FP_ARCH_WY.md §8, J-D11(b) activated): the default km scale, km per map-coordinate unit, for a map that exposes no scale of its own. PROPOSED = 3, FMG's own default distance scale (public/map distanceScaleInput value 3, km per pixel). Read ONLY by the creation flow's seam modeSpeeds.creationKmScale; no canonize applies it by itself, so the wave stays dark until the creation flow ships the datum. UNIT `mixed`: the unit is km per map unit, and the closed vocabulary has no distance word, so the compound is declared `mixed` rather than coerced. DRAFT — registering is not signing; the owner signs it with MODE_SPEED_TUNING at the sitting."
+    },
+    "src/domain/spatial/modeSpeeds.js#MODE_SPEED_TUNING": {
+      "role": null,
+      "status": "draft",
+      "signedAt": null,
+      "unit": {
+        "MODE_SPEEDS.foot": "mixed",
+        "MODE_SPEEDS.cart": "mixed",
+        "MODE_SPEEDS.river": "mixed",
+        "MODE_SPEEDS.coastal": "mixed",
+        "MODE_SPEEDS.sea": "mixed"
+      },
+      "band": null,
+      "note": "WY-1 THE SCALE CHARTER (FP lane FP-W; docs/DESIGN_FP_ARCH_WY.md §8, J-D11(b)'s one mode-speed table): MODE_SPEEDS, km per week for the closed mode set foot | cart | river | coastal | sea. PROPOSED foot 150 (a walker's ~21 km a day), cart 110, river 280, coastal 450, sea 900 — raw-authored, unsoaked. DATA-GATED by spatialDigest.kmScale (decoupled from the port program's flag): an unscaled world never reads it. `foot` is the base denomination every mover inherits through distanceRead.hopWeeks; a caller names another mode explicitly. UNIT `mixed`: km per week is a compound unit and the closed vocabulary has no distance or speed word, so it is declared `mixed` rather than coerced. DRAFT — registering is not signing; the owner-signing obligation of the war volume §7 parking row is unchanged."
+    },
     "src/domain/spatial/moralDrift.js#MORAL_DRIFT_TUNING": {
       "role": null,
       "status": "draft",
