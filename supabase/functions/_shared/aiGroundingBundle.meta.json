@@ -1,7 +1,7 @@
 {
-  "generatedAt": "2026-09-24T10:13:38.948Z",
+  "generatedAt": "2026-09-24T13:11:37.803Z",
   "entry": "src/domain/aiGrounding.js",
-  "sourceHash": "9788abb8fdb7287e",
+  "sourceHash": "5cccd740b80d87b3",
   "inputs": [
     "src/data/constants.js",
     "src/data/entityTags.js",
@@ -28,6 +28,7 @@
     "src/domain/density/densityBands.js",
     "src/domain/density/densityLaw.js",
     "src/domain/deterministicSort.js",
+    "src/domain/display/numberWords.js",
     "src/domain/districtProfile.js",
     "src/domain/dossier/hookRetention.js",
     "src/domain/factionArchetypes.js",
