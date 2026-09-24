@@ -337,6 +337,19 @@ describe('participation chokepoint — the .npcs-reader inventory ratchet (§8 c
     // captive seat-holder's standing (and bonds) persist through captivity exactly
     // like the credibility-prune idiom. No roster read exists in the file.
     'src/domain/worldPulse/gratitudeBonds.js',
+    // FP TR-2 THE MERCHANT HOUSE (dark, no mount): ONE roster read, `castHouseFactor`, which
+    // indexes the house faction's members to cast the factor for one act and STORES NO PERSON —
+    // the id rides the returned receipt and the ledger never holds it. It applies the ONE
+    // participation chokepoint itself (`roads/state.js :: isOffStage`, paired with the one
+    // status that chokepoint leaves to its consumers, derived from NPC_UNAVAILABLE_STATUSES), so
+    // it answers the same over the raw roster and over the participation view: the gate filters
+    // the same people twice, never differently. Participation-DEPENDENT by intent — a shelved or
+    // captive member cannot run a house's errand — and correctly so. Dark by default
+    // (`merchantHousesEnabled` is virtual, absent from DEFAULT_SIMULATION_RULES and every
+    // preset) and with NO src/ caller at this wave: `advanceHouses` returns its input world
+    // before the roster is read. Dispositioned by the TR-2 cure (SR-1's cause: the reader the
+    // wave landed, named in the commit that owes it).
+    'src/domain/worldPulse/houseLedger.js',
     // D-2 (fold batch 3): the statecraft MOUTHPIECE draw reads the participation view (a
     // hostage cannot front a court's bluff — via-snapshot, protected); the credibility PRUNE
     // scan reads the UNTOUCHED item.save roster (the roadsKernel idiom) so a captive's
