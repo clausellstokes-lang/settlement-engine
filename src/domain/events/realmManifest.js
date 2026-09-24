@@ -46,7 +46,6 @@ import {
   pactFormationActive, pactCounterpartiesFor, PACT_PROPOSAL_REFUSALS, PACT_VETO_PROSE,
 } from '../worldPulse/pactProposals.js';
 import { PACT_DRAFT_LENS } from '../worldPulse/pactFormation.js';
-import { isPhantomRecord } from '../edit/phantoms.js';
 
 /** The schema-owned loose record alias (the affordanceManifest Mut idiom —
  * the looseness is declared and any-census-counted where it is OWNED,
@@ -158,13 +157,16 @@ export function repudiableTreatyPartyOptions(worldState, ctx) {
   return campaignSettlementOptions(ctx).filter(option => ids.has(option.id));
 }
 
-/** The campaign's REAL courts: members that are not phantom records (a pact is real-only,
- * design §13 — a phantom absorbs an act and never returns one). @param {RealmCtx} ctx */
+/** The campaign's REAL courts. Every campaign member is real BY CONSTRUCTION: a phantom
+ * is a hidden library row that never enters a campaign's courts (design §13) —
+ * `mintPhantom` (../edit/phantoms.js) and its one caller (store/phantomMintAction.js ::
+ * mintPhantomIntent) write a phantom only as a library save row, never into a campaign's
+ * settlementIds. So `campaignSettlementOptions(ctx)` already IS the real courts, and no
+ * phantom-discriminant read is owed here (GR-2b cure; the construction is asserted in
+ * tests/domain/pactProposeVerb.test.js A7 — a phantom in the library, absent from the
+ * campaign, never reaches this list). @param {RealmCtx} ctx */
 function realCourtOptions(ctx) {
-  const phantoms = new Set((ctx?.settlements || [])
-    .filter((/** @type {Mut} */ item) => isPhantomRecord(item?.settlement))
-    .map((/** @type {Mut} */ item) => String(item?.id ?? '')));
-  return campaignSettlementOptions(ctx).filter(option => !phantoms.has(option.id));
+  return campaignSettlementOptions(ctx);
 }
 
 /** The courts one real court may put terms before — exactly the set the ledger's own
