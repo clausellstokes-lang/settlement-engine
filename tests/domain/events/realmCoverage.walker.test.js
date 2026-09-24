@@ -102,10 +102,11 @@ describe('realm coverage walker (parked shapes → realm manifest, fail-closed)'
     }
   });
 
-  it('the lift census holds: 16 realm verbs — 14 executable, 2 honestly deferred', () => {
-    // 15 at the W-COMPOSER-2 lift; +1 at WR-10's wiring wave (TRANSFER_SOVEREIGNTY).
-    expect(realmVerbs()).toHaveLength(16);
-    expect(executableRealmVerbs()).toHaveLength(14);
+  it('the lift census holds: 17 realm verbs — 15 executable, 2 honestly deferred', () => {
+    // 15 at the W-COMPOSER-2 lift; +1 at WR-10's wiring wave (TRANSFER_SOVEREIGNTY);
+    // +1 at GR-2b: GR-2b adds PROPOSE_PACT (the chair's amendment of 2026-09-23).
+    expect(realmVerbs()).toHaveLength(17);
+    expect(executableRealmVerbs()).toHaveLength(15);
     const deferred = realmVerbs().filter(v => v.lane === 'deferred').map(v => v.verb).sort();
     expect(deferred).toEqual(['INTERCEPT', 'REINFORCE']);
   });

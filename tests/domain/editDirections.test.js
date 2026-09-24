@@ -2,7 +2,7 @@
  * editDirections.test.js — EM-E5's acceptance battery (design §18 and §19 rulings 2, 4
  * and 6; the charter's wave-3 EM-E5 row; judgments 265 and 270).
  *
- * WHAT IS PROVEN HERE. That the direction surface is the world's own: the fourteen verbs
+ * WHAT IS PROVEN HERE. That the direction surface is the world's own: the fifteen verbs
  * it offers ARE the realm manifest's proposal lane in both directions, each seal's
  * offered/grayed verdict is that verb's OWN predicate over the live world, the herald's
  * reason is the manifest's own sentence (or `realmVetoProse` over a code the verb itself
@@ -47,11 +47,12 @@ import { TAX_FORMS, TAX_RATE_BANDS, TREASURY_SUSPENSIONS } from '../../src/domai
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), '../..');
 const LEAF_REL = 'src/domain/edit/directions.js';
 
-/** The fourteen names design §19 ruling 2 and the charter's row both spell, sorted. */
-const CHARTERED_FOURTEEN = [
+/** The fourteen names design §19 ruling 2 and the charter's row both spell, plus the fifteenth:
+ * GR-2b adds PROPOSE_PACT (J-EM-11; the chair's amendment of 2026-09-23), sorted. */
+const CHARTERED_FIFTEEN = [
   'DECLARE_BLOCKADE', 'DECLARE_CASUS', 'DECLARE_TRADE_EMBARGO', 'FORCE_ABANDON',
   'FORCE_CALAMITY', 'FORCE_FOUND_STEADING', 'FORCE_RECONSIDERATION', 'FORCE_RESETTLE',
-  'ORDER_CONVOY', 'ORDER_INTERVENTION', 'ORDER_SUPPLY_RAID', 'REPUDIATE_TREATY',
+  'ORDER_CONVOY', 'ORDER_INTERVENTION', 'ORDER_SUPPLY_RAID', 'PROPOSE_PACT', 'REPUDIATE_TREATY',
   'SUE_FOR_PEACE', 'TRANSFER_SOVEREIGNTY',
 ].sort();
 
@@ -80,14 +81,15 @@ const staged = (type, payload) => stage([], { type, target: { kind: 'settlement'
 const resolved = (type, payload) => resolveDecree(staged(type, payload)[0], { opTypes: DIRECTION_OP_TYPES, pools: {} });
 
 describe('EM-E5 — direction: the realm manifest surfaced on the cards (design §19 ruling 2)', () => {
-  it('E5-1: the surfaced set EQUALS the manifest proposal lane, both directions, and it is the chartered fourteen', () => {
+  it('E5-1: the surfaced set EQUALS the manifest proposal lane, both directions, and it is the chartered fifteen', () => {
     const laneProposal = Object.values(REALM_MANIFEST).filter((v) => v.lane === 'proposal').map((v) => v.verb);
     expect([...REALM_DIRECTION_VERBS].sort(), 'every surfaced verb is a proposal-lane verb, and every proposal-lane verb is surfaced')
       .toEqual([...laneProposal].sort());
-    expect([...REALM_DIRECTION_VERBS].sort(), 'and the set is exactly the fourteen the charter row and design §19 ruling 2 spell')
-      .toEqual(CHARTERED_FOURTEEN);
-    expect(REALM_DIRECTION_VERBS.length, 'fourteen, measured rather than assumed').toBe(14);
-    expect(Object.keys(REALM_MANIFEST).length, 'out of the manifest sixteen').toBe(16);
+    expect([...REALM_DIRECTION_VERBS].sort(), 'and the set is exactly the fourteen the charter row and design §19 ruling 2 spell, and GR-2b\'s PROPOSE_PACT')
+      .toEqual(CHARTERED_FIFTEEN);
+    // GR-2b adds PROPOSE_PACT: fourteen became fifteen, and the manifest sixteen seventeen.
+    expect(REALM_DIRECTION_VERBS.length, 'fifteen, measured rather than assumed').toBe(15);
+    expect(Object.keys(REALM_MANIFEST).length, 'out of the manifest seventeen').toBe(17);
   });
 
   it('E5-2: the direct-realm row vocabulary IS that surfaced set, so a verb outside the manifest cannot be staged', () => {
@@ -97,9 +99,9 @@ describe('EM-E5 — direction: the realm manifest surfaced on the cards (design 
       .toEqual(['dials', 'verb']);
   });
 
-  it('E5-3: every one of the sixteen renders as a seal, and its OWN predicate decides offered or grayed', () => {
+  it('E5-3: every one of the seventeen renders as a seal, and its OWN predicate decides offered or grayed', () => {
     const seals = realmSealsFor(HALF_LIT, CTX);
-    expect(seals.map((s) => s.verb), 'the sixteen, in the manifest own order')
+    expect(seals.map((s) => s.verb), 'the seventeen, in the manifest own order')
       .toEqual(Object.values(REALM_MANIFEST).map((v) => v.verb));
     const byVerb = new Map(seals.map((s) => [s.verb, s]));
     const live = Object.values(REALM_MANIFEST)
@@ -147,7 +149,8 @@ describe('EM-E5 — direction: the realm manifest surfaced on the cards (design 
 
   it('E5-7: the seal reader is total on a malformed world and on a malformed seal', () => {
     const seals = realmSealsFor(null, null);
-    expect(seals.length, 'sixteen seals on an absent world').toBe(16);
+    // GR-2b adds PROPOSE_PACT: sixteen seals became seventeen.
+    expect(seals.length, 'seventeen seals on an absent world').toBe(17);
     expect(seals.filter((s) => s.offered).length, 'and not one of them is offered').toBe(0);
     expect(realmSealReason(null), 'a malformed seal has no reason').toBe('');
     expect(realmSealReason({ offered: true }), 'nor does an offered one').toBe('');

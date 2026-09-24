@@ -368,6 +368,11 @@ export const EXACT_SECTION = Object.freeze(/** @type {Record<string, HeraldSecti
   // agree deliberately — the repudiate-treaty pair is the precedent for a war-family
   // verb whose beats belong beside the terms and tribute they move.
   sovereignty_conveyed: 'trade', realm_verb_transfer_sovereignty: 'trade',
+  // GR-2b PROPOSE_PACT, the same pair: `pact_proposed` is the candidateType the proposal
+  // beat carries and `realm_verb_propose_pact` the applied order's impactKind. Both file
+  // under TRADE with the treaty cohort (treaty_signed, diplomacy, treaty_breached), because
+  // a pact put before a court is terms offered, on the sovereignty pair's precedent above.
+  pact_proposed: 'trade', realm_verb_propose_pact: 'trade',
 
   // ── DIVINATION — the forecast tokens (pressure / emergence in the token itself) ─
   regional_pressure: 'divination', food_pressure: 'divination', disease_pressure: 'divination',
@@ -704,6 +709,11 @@ export const KIND_SECTION_DIVERGENCES = Object.freeze(/** @type {Record<string, 
   // question itself; the Herald files the instrument it leaves standing with the treaty
   // cohort (JUDGMENT, vetoable — one desk for the cohort, as for the five above).
   reaffirmed: 'trade',
+  // GR-2b: the letter files a pact put before a court, and the order that put it there, under
+  // `courts`; the Herald files both beside the terms they offer (JUDGMENT, vetoable — one desk
+  // for the whole treaty cohort, as the two EXACT_SECTION rows already say).
+  pact_proposed: 'trade',
+  realm_verb_propose_pact: 'trade',
   // NB: cause_lifecycle and moral_reckoning are `traditions` keys, and `traditions`
   // is a documented SPLIT (faith | events) — routing them to events is a split
   // outcome, not a divergence, so they are deliberately NOT listed here.

@@ -95,6 +95,9 @@ const EXPECTED_VOICE = {
   generosity_trade_overture: null, harvest: null, hierarchy_cascade: null, hungry_gap: null,
   intervention: null, intervention_clash: null, moral_reckoning: null, pantheon_ascendancy: null,
   pantheon_extinction: null, pantheon_twilight: null, queue_refused: null, realm_verb_refused: null, sea_battle: null,
+  // GR-2b: the applied PROPOSE_PACT order speaks its own authored line from the grammar
+  // registry, so it borrows no crier category on top of it. The explicit null IS the decision.
+  realm_verb_propose_pact: null,
   spring_thaw: null, stressor_aftermath: null, stressor_graduated: null, stressor_wind_down: null,
   // THE GROWTH LAYER (owner commission #36): a person weathering into a learned trait is a
   // quiet local character beat, NOT a town-crier proclamation — deliberately unvoiced.

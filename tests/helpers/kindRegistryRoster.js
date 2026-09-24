@@ -122,13 +122,17 @@ export const KIND_REGISTRATION_FREEZES = Object.freeze({
    * shrink-back obligation on the member that takes its family to five rows or more.
    */
   smallFamilies: Object.freeze(['INFORMATION', 'FAITH', 'CHANCE_MEETING']),
-  /** Every registry row in the estate. ENC-4 took this 113 → 114. */
-  registeredKinds: 115, // +1 at ENC-4b (§900): `chance_meeting_exposed`, the seventh family's second desk-bearing exact row
-  /** `Object.keys(EXACT_SECTION).length`. ENC-4 took this 379 → 380, WITH registeredKinds. */
-  routedTokens: 381, // +1 at ENC-4b (§900): `chance_meeting_exposed`, the seventh family's second desk-bearing exact row
+  /** Every registry row in the estate. ENC-4 took this 113 → 114, and ENC-4b (§900) 114 → 115
+   * with `chance_meeting_exposed`, the seventh family's second desk-bearing exact row. */
+  registeredKinds: 117, // +2 at GR-2b: GR-2b registers pact_proposed and realm_verb_propose_pact, two desk-bearing GRAMMAR rows
+  /** `Object.keys(EXACT_SECTION).length`. ENC-4 took this 379 → 380, WITH registeredKinds, and
+   * ENC-4b (§900) 380 → 381 with `chance_meeting_exposed`. */
+  routedTokens: 383, // +2 at GR-2b: GR-2b registers pact_proposed and realm_verb_propose_pact, each on its own EXACT_SECTION row
   /**
    * Herald-routed tokens with no phrased pool at all. ⛔ SHRINK-ONLY: the content annexes'
-   * wiring waves lower it; nothing may raise it. Unmoved since the freeze.
+   * wiring waves lower it; nothing may raise it. Unmoved since the freeze: GR-2b's two new
+   * EXACT_SECTION rows (`pact_proposed`, `realm_verb_propose_pact`) are REGISTERED in the same
+   * commit that routes them, which is the only lawful road for a desk-bearing token.
    */
   unvoicedTokens: 274,
   /**

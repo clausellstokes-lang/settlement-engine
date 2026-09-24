@@ -284,6 +284,20 @@ AUDIENCE: public
 5. They have asked. Whether {counterpart} answers at all is another matter, and {band} weeks will tell.
 6. The innkeepers on the {route} have seen more riders this month than all last season, and they know what that means.
 7. {settlement} has asked in a season when asking is cheap and refusing is not.
+8. The offer is made, and the next word in the matter belongs to {counterpart}.
+9. In {settlement} a single clerk keeps the copy of the offer, and asks each morning whether the answer has come.
+10. An offer binds nobody; it is only very hard to take back.
+
+### realm_verb_propose_pact (GR-2b) — Herald (the applied order; trade desk) / chronicle — significance: notable
+SLOTS: {settlement} {counterpart} {term}
+AUDIENCE: public
+1. The {term} is the whole of the offer {settlement} has sent to {counterpart}, and it waits on an answer.
+2. The offer now stands in the book between {settlement} and {counterpart}, and the court asked owes the answer.
+3. The market in {settlement} is already wagering on what {counterpart} will say to the {term}.
+4. If {counterpart} signs, the {term} binds both courts; until then it binds neither.
+5. The answer will take as long as the road does, there and back, and {counterpart} may use every day of it.
+6. Terms have been offered. What they are worth is now for the other court to say.
+7. In {settlement}'s hall the clerks copied the {term} out fair before the seal went on.
 
 ### trigger_reason.trade_demand (GR-2) — receipt reason line — significance: routine
 SLOTS: {settlement} {counterpart} {good}
@@ -954,6 +968,13 @@ AUDIENCE: public
 
 ## COVERAGE LEDGER (what this annex covers, and what it deliberately does not)
 
+**Amended 2026-09-24 (GR-2b, A-24): kinds authored 67, variants authored 466.** One block
+joined `# GR-2`, `realm_verb_propose_pact` (seven variants, the applied order's own receipt),
+and three variants were APPENDED to `pact_proposed` (8 to 10), with no existing variant
+reworded, renumbered or dropped and its `SLOTS:` line untouched. GR-2's wave coverage is
+now 21 kinds. The paragraph below is the 2026-08-03 deepening's own record and is kept as
+written.
+
 **Kinds authored: 66. Variants authored: 456** — deepened 2026-08-03 from the
 original 299 to the spine's frequency-scaled floor, by APPEND ONLY (no existing
 variant was reworded, renumbered, or dropped; no `SLOTS:` line changed). The
@@ -1043,6 +1064,10 @@ token similarity with their slots blanked (the family rule, measured).
    composer's own veto vocabulary — a DM-facing offerability surface, not a
    chronicle receipt. Flagged for the composer content pass so the LEGIBILITY
    LAW's glance→sentence obligation is met there.
+   **Discharged 2026-09-24 by GR-2b:** the three codes and the dark layer's
+   `pact_gate_dark` speak through `PACT_VETO_PROSE` in
+   `src/domain/worldPulse/pactProposals.js`, which `realmVetoProse` merges beside
+   the war modules' own feeds.
 3. **The debtor's-heir question** for `credit` obligations is INTERIOR/TRADE
    material by GR-1's own deferral; only the obligation's oath stamp is authored
    here.
@@ -1078,3 +1103,4 @@ token similarity with their slots blanked (the family rule, measured).
 | A-21 | GR-4's `succession_question_opened` pool named the SUCCESSOR through `{npc}`, grouped several treaties through `{band}` / “every,” and marked its slotless exemplar as slotted, while landed GR-4d retains one proposal per exact treaty and carries a fallen-holder id but no successor name or grouped treaty count (2026-08-13, CR-GR4B-10) | **The one-instrument producer and the parchment's history win, under A-11, A-15, A-18 and A-20.** `{npc}` binds only to the **fallen holder**, by matching the question's acting court and `npcId` against the selected treaty's total `sworn` reader, whose name is persisted; it never triggers a successor or roster lookup. `{band}` leaves the block, the multiple-instrument claims are singularized, and variants 2, 4 and 7 speak only the fallen holder's oath and the new seat's pending choice. The slotless exemplar is `[exemplar]`, not `[exemplar, slotted]`. All seven families remain, in order, and every named slot is supplied by the real one-question producer. |
 | A-22 | GR-4's `succession_question_open` dossier pool repeated the successor / grouped-oath defect already corrected for the opening beat, narrowed its exemplar to an unsupported “old peace,” and asserted envoys, prepared letters, town-wide waiting, market activity and universal compliance that neither the pending row nor the selected treaty carries (2026-08-14, CR-GR4B-12) | **The durable question and current parchment win under R-28, A-11, A-15, A-18, A-20 and A-21.** `{npc}` binds only to the **fallen holder** named by the acting court's persisted `sworn` stamp; it never triggers a successor or roster lookup. `{band}` leaves the block. Variant 1 says “old oath”: every eligible row has the matched persisted oath stamp, while no `non_aggression` or peace term is required. Every line is entailed by the exact pending wrapper, its typed HONOR / DISAVOW terminal map, or the currently eligible treaty's parties, live written terms and oath stamp. Distinct pending questions may share one treaty, so the renderer returns one canonically ordered line per validated row rather than claiming per-treaty uniqueness. All eight families remain in order, `public`, and `n/a`. |
 | A-23 | GR-4's two honor pools — `honored_by_silence` and `reaffirmed` — asserted a season's wait, wagons still running, a market that closed the question, captains stood down, a successor who let a date pass, a sentence spoken in open court with its date and words recorded, and a hall of disappointed partisans; GR-4d's landed honor terminals carry a typed HONOR word, a status, a wall-clock stamp and no world tick at all (2026-08-14, CR-GR4B-16) | **The typed terminal and the untouched parchment win, under R-28, A-11, A-15, A-18, A-20, A-21 and A-22.** `{npc}` binds only to the **fallen holder** named on the acting court's persisted `sworn` stamp, by the same settlement-and-holder match the landed opening voice already proves; no successor or roster lookup is ever triggered. Because no honor terminal stamps a world tick, every duration, season, due date and wait leaves both blocks, and because a beat may fire after the instrument has been pruned or spent, no line claims the treaty is still live — each speaks only what was never written to it, which the untouched ledger entails on every road. Eligibility admits any stamped live-term instrument, not only a peace, so both exemplars say "oath" where they said "peace". The two pools are separated by the one distinction the record does carry: `honored_by_silence` speaks the terminal reached with no answer entered, `reaffirmed` the terminal reached by one, and `reaffirmed` may say the answer was unnecessary precisely because the persisted map reads both terminals as honor. A-7's second mapping — the dark-mode scored default — writes nothing on either road and therefore governs no wording here; both pools speak the terminal only. Authored to the union of both expiry roads, so a capacity-evicted row makes no line false and the corpus compels no eviction filter; whether the producer nonetheless declines to voice such rows is a packet question this ruling leaves open. Both pools keep their variant count, order, `public` audience, `SLOTS:` line and significance class. |
+| A-24 | GR-2b's DM verb `PROPOSE_PACT` registers two Herald kinds, and its brief asked for "a new `# GR-2` block" although `pact_proposed` has been authored in `# GR-2` since 2026-08-02; the DM road's beat can speak only once the order is APPROVED and the proposal row opens, and that road records no trigger reason, no route and no week band (2026-09-24, GR-2b) | **The authored block is wired as authored, and the second kind gets its own block.** A second `### pact_proposed` heading would break the volume's first-match law and a rewrite would discard authored content, so `pact_proposed` keeps its seven families in order and APPENDS three (8 to 10) under the deepening's append-only rule, `SLOTS:` untouched; the three are honest at the moment a proposal opens on either road, and variant 10 is the slotless fallback the registry requires. Families 1, 4, 5 and 6 need `{reason}`, `{route}` or `{band}`, which the DM road never fabricates, so they stay ineligible there exactly as `treaty_default_detected`'s band families are on every real beat. The STAGED order is voiced from neither pool: until the table approves it nothing has been offered, and R-28 forbids a sentence that says otherwise. `realm_verb_propose_pact` is authored as the applied order's own receipt (the clause offered, the court that owes the answer, the round trip the answer takes), with `{term}` filled by the catalogue's own herald word, and both kinds file the treaty cohort's trade desk and the letter's courts section. Vetoable. |

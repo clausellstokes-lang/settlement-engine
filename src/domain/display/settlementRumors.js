@@ -464,7 +464,11 @@ export const WHAT_PHRASES = Object.freeze({
   npc_rejection: 'a petitioner turned away',
   npc_verdict: 'a verdict handed down',
   occupation_posture: 'the occupiers changing their bearing',
+  // GR-2b: the DM's PROPOSE_PACT order, as the proposal beat carries it.
+  pact_proposed: 'a pact offered to another court',
   razing: 'buildings put to the torch',
+  // GR-2b: the same order's applied beat, in the words a market would use for it.
+  realm_verb_propose_pact: 'an offer of terms between courts',
   // The regional relief beat. wizardNews intercepts it for its own positive-sign
   // headline; the rumor net had no word for it at all.
   relief: 'the worst of it past',

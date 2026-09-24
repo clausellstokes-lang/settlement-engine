@@ -175,6 +175,8 @@ const LEGACY_UNVOICED_TOKENS = 274;
 // takes `routedTokens` MEASURED from src/domain/realm/heraldRouting.js (:95/:383), never from
 // here. So the literal lives in the roster and nowhere else. (+1 at ENC-4b: `chance_meeting_exposed`,
 // the refusal that travelled — moved IN THE ROSTER, with its attribution, at the §900 composition.)
+// (+2 at GR-2b, in the roster too: GR-2b registers pact_proposed and realm_verb_propose_pact, each
+// routed on its own EXACT_SECTION row, so 381 → 383.)
 const ROUTED_TOKENS = KIND_REGISTRATION_FREEZES.routedTokens;
 // +1 at IN-0C: the eighth GR-0 lifecycle pool (`treaty_disclosure_opened`).
 // +1 at GR-4b: the ninth (`disavowed_by_succession`), the registry's first `major` row.
@@ -205,7 +207,11 @@ const ROUTED_TOKENS = KIND_REGISTRATION_FREEZES.routedTokens;
 // +1 at ENC-4b: `chance_meeting_exposed`, the SEVENTH family's second row and the first member
 // of this arc that did not also mint a family. It carries a desk on the same road, so both
 // censuses move together and the divergence below is untouched.
-const REGISTERED_KIND_COUNT = 115;
+// +2 at GR-2b: GR-2b registers pact_proposed and realm_verb_propose_pact, the GRAMMAR family's
+// thirteenth and fourteenth rows and the DM verb PROPOSE_PACT's two news kinds (SR-8). Both carry
+// the treaty cohort's desk, so ROUTED_TOKENS moves with them (381 → 383, in the roster) and the
+// divergence below stays at 8; the unvoiced ceiling holds at 274 because they are REGISTERED.
+const REGISTERED_KIND_COUNT = 117;
 
 const violations = floorViolations(ALL_ROWS, { declaredExceptions: DECLARED_EXCEPTIONS });
 const unvoiced = Object.keys(EXACT_SECTION).filter((token) => !REGISTERED_KINDS.has(token));

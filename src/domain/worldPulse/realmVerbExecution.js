@@ -59,6 +59,10 @@ import { dispositionTransitionNewsEntries } from './dispositionNews.js';
 import { readSovereigntyAsset, sovereigntyTradeActive } from './sovereigntyAssets.js';
 import { executeSovereigntyTransfer } from './sovereigntyTransfer.js';
 import { applyLegitimacyDeltasToUpdates } from './generosityUpdates.js';
+import { openPactProposal, pactFormationActive } from './pactProposals.js';
+import { PACT_DRAFT_LENS, draftPactSheet } from './pactFormation.js';
+import { termLabel } from './peaceTermsCatalog.js';
+import { grammarReceipt } from './grammarNews.js';
 
 /** The one payload kind the applier dispatches on (the siege_initiation idiom). */
 export const REALM_VERB_PAYLOAD_KIND = 'realm_verb_order';
@@ -114,7 +118,7 @@ const nameOf = (/** @type {Mut} */ snapshot, /** @type {unknown} */ id) => {
 /** Which arg names the ACTING settlement, per verb (targetSaveId + the
  * pendingActorMajorFor dedup key — the M10a "acting settlement" convention). */
 const ACTOR_ARG = Object.freeze({
-  DECLARE_CASUS: 'fromId', SUE_FOR_PEACE: 'partyId', REPUDIATE_TREATY: 'fromId',
+  DECLARE_CASUS: 'fromId', SUE_FOR_PEACE: 'partyId', REPUDIATE_TREATY: 'fromId', PROPOSE_PACT: 'fromId',
   ORDER_SUPPLY_RAID: 'aggressorId', DECLARE_TRADE_EMBARGO: 'aggressorId',
   ORDER_INTERVENTION: 'patronId', ORDER_CONVOY: 'ownerId', DECLARE_BLOCKADE: 'ownerId',
   // The conveying court is DERIVED (see the mint below), never dialled — but it is
@@ -132,6 +136,7 @@ function headlineFor(verb, args, snapshot) {
     case 'DECLARE_CASUS': return `${n(args.fromId)} declares a reason for war against ${n(args.toId)}`;
     case 'SUE_FOR_PEACE': return `${n(args.partyId)} sues for peace`;
     case 'REPUDIATE_TREATY': return `${n(args.fromId)} repudiates its treaty with ${n(args.toId)}`;
+    case 'PROPOSE_PACT': return `${n(args.fromId)} puts terms before ${n(args.toId)}`;
     case 'TRANSFER_SOVEREIGNTY': return `${n(args.sellerId)} conveys ${n(args.assetId)} to ${n(args.buyerId)}`;
     case 'ORDER_SUPPLY_RAID': return `${n(args.aggressorId)} opens a supply-web campaign against ${n(args.targetId)}`;
     case 'DECLARE_TRADE_EMBARGO': return `${n(args.aggressorId)} declares a trade embargo on ${n(args.targetId)}`;
@@ -194,7 +199,9 @@ export function buildRealmVerbOutcome({ verb, args, worldState, snapshot, tick }
     else delete a.sellerId;
   }
   const actorId = String(a[/** @type {Record<string, string>} */ (ACTOR_ARG)[verb]] ?? a.targetId ?? '');
-  const treatyParties = verb === 'REPUDIATE_TREATY'
+  // The two-court verbs address their beat to BOTH courts (the news address law): the pact the
+  // order breaks, or the pact the order offers (GR-2b), so each court's own Herald files it.
+  const treatyParties = verb === 'REPUDIATE_TREATY' || verb === 'PROPOSE_PACT'
     ? [...new Set([String(a.fromId ?? ''), String(a.toId ?? '')].filter(Boolean))]
     : [];
   // The manifest predicate verdict, surfaced for the mint's bounded-by-
@@ -260,6 +267,25 @@ export function buildRealmVerbOutcome({ verb, args, worldState, snapshot, tick }
       proposalPayload: { kind: REALM_VERB_PAYLOAD_KIND, verb, args: a },
     },
   };
+}
+
+/**
+ * GR-2b — THE DM'S CLAUSE, DRAFTED BY THE GRAMMAR'S OWN DRAFTER. The occasion is the lens
+ * ladder that holds the clause; `draftPactSheet` writes that ladder's rung at the bound that
+ * reaches the clause, and the sheet keeps the clause alone, so its magnitude, span,
+ * beneficiary and receipt are the drafter's and are never re-spelled here. A clause no ladder
+ * holds drafts nothing, and the writer refuses the empty sheet as `invalid_term_sheet`.
+ * @param {{ termType: string, fromId: string, toId: string, tick: number }} input
+ * @returns {{ trigger: string, terms: Array<Record<string, unknown>> }}
+ */
+function pactClauseSheet({ termType, fromId, toId, tick }) {
+  for (const trigger of Object.keys(PACT_DRAFT_LENS).sort(codepoint)) {
+    const rung = PACT_DRAFT_LENS[trigger].find(step => step.terms.includes(termType));
+    if (!rung) continue;
+    const sheet = draftPactSheet({ trigger, fromId, toId, reciprocal: false, tick, score01: rung.min });
+    return { trigger, terms: sheet.terms.filter(term => term.type === termType) };
+  }
+  return { trigger: '', terms: [] };
 }
 
 // ── Refusal + small news builders ────────────────────────────────────────────
@@ -378,6 +404,45 @@ export function applyRealmVerbOrder({ state, snapshot, settlementUpdates, outcom
         summary: `${breakerName} openly broke its pact with ${otherName}. Every promise under it ended, and ${otherName} now has cause to answer the breach.`,
         reasons: ['The oath was repudiated in public; its restraints no longer bind either court.'],
       });
+    }
+    // ── PROPOSE_PACT (GR-2b) — the DM puts terms before a court, through the ONE writer ──
+    // The arm re-reads the layer's own gate against the CURRENT world, drafts the clause with
+    // the grammar's drafter, and opens the question through `openPactProposal`, the creation
+    // path the trigger crossing uses, so a DM-opened proposal is answered by the SAME pass as
+    // an engine-opened one (DM parity is structural). The writer's refusals ARE this verb's
+    // veto codes, and the transport is the writer's to derive, never an order's to name.
+    case 'PROPOSE_PACT': {
+      if (!pactFormationActive(state)) return refused(refuse('pact_gate_dark'));
+      const fromId = String(args.fromId ?? '');
+      const toId = String(args.toId ?? '');
+      const clause = pactClauseSheet({ termType: String(args.termType ?? ''), fromId, toId, tick: nowTick });
+      const opened = openPactProposal({
+        worldState: state, from: fromId, to: toId, trigger: clause.trigger,
+        sheet: { terms: clause.terms }, tick: nowTick, digest: activeSpatialDigest(state), season: null,
+      });
+      if (!opened.proposal) return refused(refuse(opened.refusal));
+      // THE TWO BEATS SPEAK THEIR REGISTERED POOLS, AND ONLY NOW (SR-8's address chain). Until
+      // the table approved the order nothing had been offered, so the staged summary stays the
+      // lane's own sentence (R-28); from here the question stands. `{settlement}` is the asking
+      // court, `{counterpart}` the court asked, `{term}` the catalogue's herald word for the
+      // clause. The ledger's own proposal id seeds both picks (namespaced per kind by
+      // `grammarReceipt`), so a replay says the same words. The proposal beat speaks through
+      // the outcome this arm substitutes, as REPUDIATE_TREATY's does, and the order's own beat
+      // through the news entry below; each pool keeps a slotless family, so neither read is empty.
+      const headline = headlineFor(verb, args, shim);
+      const interp = { settlement: nameOf(shim, fromId), counterpart: nameOf(shim, toId), term: termLabel(String(args.termType ?? '')) };
+      const seed = String(opened.proposal.id);
+      const order = grammarReceipt('realm_verb_propose_pact', seed, interp);
+      const offer = grammarReceipt('pact_proposed', seed, interp);
+      return applied(/** @type {Mut} */ (opened.worldState), [{
+        ...orderNews(verb, headline, order ? order.line : `${headline}.`, [fromId, toId], nowTick, now),
+        // ⛔ LITERAL, the grammar beats' own idiom: the mint scans (the Herald totality walker,
+        // the letter's minter-totality arm, the impactKind voice walker) read `impactKind:`
+        // literals, and `orderNews` spells this same token by template, which none of them sees.
+        impactKind: 'realm_verb_propose_pact',
+        settlementNames: [interp.settlement, interp.counterpart],
+        ...(order ? { familyId: order.familyId, audience: order.audience, section: order.section } : {}),
+      }], null, offer ? { ...outcome, summary: offer.line } : null);
     }
     // ── TRANSFER_SOVEREIGNTY — the conveyance, through the ONE writer ──────
     // The DM road and the engine road are the same road: this arm re-runs the verb's

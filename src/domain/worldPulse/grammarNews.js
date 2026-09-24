@@ -84,7 +84,7 @@ function grammarKindRow(kind, significance, audience, section, requiredSlots, co
 }
 
 /**
- * The governed rows. `section` is non-null on the six HERALD kinds only; the clause,
+ * The governed rows. `section` is non-null on the eight HERALD kinds only; the clause,
  * ending, dossier and chip pools are rendered INTO another surface and file nowhere of
  * their own (a section for them would claim a desk they never reach).
  * @type {ReadonlyArray<Readonly<GrammarRegistryEntry>>}
@@ -140,6 +140,26 @@ export const GRAMMAR_KIND_REGISTRY = Object.freeze([
     ['term'], ['counterpart', 'settlement'], [], [], [],
     ['term', 'settlement'], ['counterpart', 'settlement'],
   ]),
+  // GR-2b — THE DM PROPOSES A PACT (J-EM-11, R-21; standing ruling SR-8: a realm verb mints a
+  // news kind). Both beats speak when the table APPROVES the order and the ledger's one writer
+  // opens the question, and both take the treaty cohort's trade desk, as their EXACT_SECTION rows
+  // do. `pact_proposed` is the proposal beat's candidate type, voiced through the outcome the
+  // realm arm substitutes at approval; its families that need a `{reason}`, a `{route}` or a week
+  // `{band}` are simply ineligible on the DM road, which records none of them (NO FABRICATED
+  // BANDS). `realm_verb_propose_pact` is the applied order's own impactKind. Neither row declares
+  // contexts and each keeps a slotless family, so neither read can come back empty. Their
+  // `{settlement}` is the asking court and `{counterpart}` the court asked, bound by the arm
+  // itself and never through `grammarSlotRoles`.
+  grammarKindRow('pact_proposed', 'notable', 'public', 'trade', [
+    ['settlement', 'counterpart', 'reason'], ['settlement', 'counterpart'], ['settlement'],
+    ['settlement', 'route', 'reason'], ['counterpart', 'band'], ['route'], ['settlement'],
+    ['counterpart'], ['settlement'], [],
+  ]),
+  grammarKindRow('realm_verb_propose_pact', 'notable', 'public', 'trade', [
+    ['term', 'settlement', 'counterpart'], ['settlement', 'counterpart'],
+    ['settlement', 'counterpart', 'term'], ['counterpart', 'term'], ['counterpart'], [],
+    ['settlement', 'term'],
+  ]),
   // GR-4b-α — THE SUCCESSION DISAVOWAL. A treaty lifecycle beat, so it takes the treaty
   // cohort's trade desk exactly as `treaty_lapsed` does. `major` is the annex's own class and
   // the first row in this registry to use it — the floors table has had the arm all along.
@@ -184,7 +204,7 @@ export const GRAMMAR_KIND_REGISTRY = Object.freeze([
 /** The exact governed pool set. */
 export const GRAMMAR_KINDS = Object.freeze(GRAMMAR_KIND_REGISTRY.map((row) => row.kind));
 
-/** The six rows that reach the Herald as kinds of their own. */
+/** The eight rows that reach the Herald as kinds of their own. */
 export const GRAMMAR_HERALD_KINDS = Object.freeze(
   GRAMMAR_KIND_REGISTRY.filter((row) => row.section !== null).map((row) => row.kind),
 );
