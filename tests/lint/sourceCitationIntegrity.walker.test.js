@@ -47,11 +47,13 @@
  * past-EOF citations this gate deliberately does not see. FOUR rules select them,
  * each checkable, and the full roster is committed in the baseline's
  * `archivalExclusionAtFreeze.files`:
- *   tree (29)    docs/review-r2/**, docs/shift-records/**
+ *   tree (30)    docs/review-r2/**, docs/shift-records/**
  *                (2026-10-01-urban-band-druid-faith.json joined 2026-10-01, 27 -> 28: the record for the
  *                owner's druid rulings; a GROWTH that hid nothing.)
  *                (2026-10-01-urban-band-warden-census.json joined 2026-10-01, 28 -> 29: the record for J33,
  *                the Warden's Lodge census under the same rulings; a GROWTH that hid nothing.)
+ *                (2026-10-01-urban-band-warden-census-herald.json joined 2026-10-01, 29 -> 30: the herald
+ *                desk's superseding prediction under J33's record; a GROWTH that hid nothing.)
  *                (2026-09-30-urban-band-institutions.json and 2026-10-01-urban-band-herald-rows.json
  *                joined 2026-10-01, 25 -> 27: the urban band's signed record and the record superseding
  *                its one herald prediction; a GROWTH that hid nothing, zero past-EOF of their own.)

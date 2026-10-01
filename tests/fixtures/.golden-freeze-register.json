@@ -850,11 +850,11 @@
       "suite": "tests/property/heraldKnowledgeDeskGolden.test.js",
       "recordEnv": "UPDATE_GOLDEN",
       "proofForm": null,
-      "sha256": "bc3578af55f36516cdda2e6dcc2cc504dbf69b3603bd7608aeb57b5bed330daf",
-      "rows": 400,
+      "sha256": "c82e07ad78bd28d9b2e55d5af917c19fa2f4afcfa065671bd9db9b7c04547280",
+      "rows": 383,
       "seedSet": null,
       "distinctFloor": null,
-      "ownerRow": "§934.86 of docs/OWNER_DECISION_QUEUE.md (THE URBAN BAND, recorded by the urban-band chair 2026-09-30 on the ledger branch review-fixes-2026-07-08 at 9d3b518de)",
+      "ownerRow": "§934.86 addendum 2 of docs/OWNER_DECISION_QUEUE.md (DRUIDS IN A WORLD WITHOUT MAGIC, recorded 2026-10-01 on the ledger branch review-fixes-2026-07-08 at 381aa20a0)",
       "note": "ENROLLED 2026-09-24 by lane FP-I5 (IN-5) under the FP chair's dispatch, record docs/shift-records/2026-09-24-in5-herald-knowledge-desk.json (action enroll, chair-signed). THE NON-OMNISCIENT HERALD GOLDEN of the belief_misjudgment refile (J-INF-6), captured FIRST at the clean base 57b52b510 before the routing table moved: the reader corpus full_simulation row rr-fresh-full after one year, read through buildHeraldFeed campaign lens. Keys: <row>|contentSha256 (every item's content except its desk, sorted by id), <row>|itemCount, and <row>|section|<id> (the desk at capture). tests/property/heraldKnowledgeDeskGolden.test.js holds the digest and count byte-stable and asserts every desk equals its captured desk except the declared refile set, which reads the knowledge desk: the one-time shift, recorded. The single producer is tests/helpers/heraldDeskGolden.js, imported by the suite; the capture ran it byte-identical from outside the tree so the door's clean-tree refusal held."
     }
   ]
