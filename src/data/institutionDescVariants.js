@@ -823,8 +823,8 @@ const PAIRS = [
     "Where a band of soldiers lodges and takes contracts between wars. They hire out by the day for escort, garrison duty, and brief campaigns: less costly than keeping an army, more dependable than a rabble. They form up for a wage, not for treasure.",
   ],
   [
-    "A ranger post, or a waystation kept by druids. Those here watch the wilds, keep the trails, and follow the movements of beasts. In a crisis they turn scout and tracker.",
-    "Rangers or druids keep this lodge, minding the wilderness about the town, tending its trails, and marking where the beasts migrate. When trouble comes they scout and track for the town.",
+    "A ranger post. Those here watch the wilds, keep the trails, and follow the movements of beasts. In a crisis they turn scout and tracker.",
+    "Rangers keep this lodge, minding the wilderness about the town, tending its trails, and marking where the beasts migrate. When trouble comes they scout and track for the town.",
   ],
   [
     "One wizard's home. It holds only past 1,000 people.",

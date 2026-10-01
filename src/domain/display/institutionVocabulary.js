@@ -302,7 +302,7 @@ export const INSTITUTION_IDENTITY = Object.freeze({
   "Wizard's tower": 'The residence and workshop of a single wizard of real ability, viable only where a place is large enough to want one.',
   'Elder Grove Council': "A council of senior druids that governs their circle's dealings with a city, tending hidden groves and speaking for wild places.",
   'Alchemist shop': 'A shop selling potions and alchemical goods, from healing draughts to useful reagents.',
-  "Warden's Lodge": 'A ranger station, or a waypost kept by druids, that watches the surrounding wild, keeps the trails, and turns scout in a crisis.',
+  "Warden's Lodge": 'A ranger station that watches the surrounding wild, keeps the trails, and turns scout in a crisis.',
   'Teleportation circle': 'A rare permanent circle for instant travel, ruinously expensive to build and to keep working.',
   "Mages' guild": 'An organized body of spellcasters that trains, licenses, and polices the arcane within a city.',
   'Alchemist quarter': 'A quarter of alchemical workshops under guild organization, producing potions and compounds at scale.',

@@ -1224,7 +1224,7 @@ export const INSTITUTION_FAMILIES = Object.freeze([
   family('Defense', {
     shared: { name: "Warden's Lodge" },
     at: {
-      town: { required: false, baseChance: 0.2, desc: 'A ranger station, or a waypost kept by druids. They monitor the surrounding wilderness, maintain trails, and keep tabs on beast migrations. In times of crisis they serve as emergency scouts and trackers.', tags: ['military'], magicLicense: 'none', priorityCategory: 'magic' },
+      town: { required: false, baseChance: 0.2, desc: 'A ranger station. They monitor the surrounding wilderness, maintain trails, and keep tabs on beast migrations. In times of crisis they serve as emergency scouts and trackers.', tags: ['military'], magicLicense: 'none', priorityCategory: 'military' },
     },
     ceiling: { tier: 'town', reason: 'A wilderness post; cities have no wild country inside their reach.' },
   }),
