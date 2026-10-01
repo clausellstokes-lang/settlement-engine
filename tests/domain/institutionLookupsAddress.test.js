@@ -222,12 +222,19 @@ describe('EM-P4 — the institutional catalogue has one home and two lawful addr
       gated.filter((name) => !atMetropolis.has(name)),
       'a metropolis-gated row is unreachable even at metropolis — the gate is not filtering, it is deleting',
     ).toEqual([]);
-    // THE ANCHOR: un-gated shelf siblings are present at BOTH tiers, so the absence asserted
-    // above measures the gate rather than an empty, renamed or drifted collection.
+    // THE ANCHOR: un-gated rows are present where the raw catalogue lists them, so the absence
+    // asserted above measures the gate rather than an empty, renamed or drifted collection.
+    // Every un-gated city row is offered at city; and the city rows the registry ALSO lists at
+    // metropolis (the urban band's same-name continuations, read from the raw catalogue) are
+    // offered at both. Before 2026-09-30 every city row was in the metropolis picker by the
+    // retired city -> metropolis merge; a metropolis now lists its own scale rows instead.
+    const rawMetropolis = new Set(Object.values(institutionalCatalog['metropolis'] || {}).flatMap((insts) => Object.keys(insts)));
+    const continued = ungated.filter((name) => rawMetropolis.has(name));
+    expect(continued.length, 'no city row continues to metropolis — the both-tier anchor would prove nothing').toBeGreaterThan(20);
     expect(
-      ungated.filter((name) => !atCity.has(name) || !atMetropolis.has(name)),
-      'an un-gated city row went missing at one of the two tiers — the collection drifted, and the'
-      + ' absence asserted above is vacuous rather than a verdict about the gate',
+      [...ungated.filter((name) => !atCity.has(name)), ...continued.filter((name) => !atMetropolis.has(name))],
+      'an un-gated row went missing at a tier the raw catalogue lists it at — the collection drifted,'
+      + ' and the absence asserted above is vacuous rather than a verdict about the gate',
     ).toEqual([]);
   });
 });

@@ -201,6 +201,21 @@ export const NON_CASCADED_SURFACES = Object.freeze([
     why: 'a FACTION name, owned by the faction rename ledger (src/domain/factionRename.js): it equals a catalog institution name only where the power structure names a governing body\'s faction after the body (\'Democratic assembly\', observable since the urban band\'s weighted government seat of 2026-09-30, ODQ §934.86), and renaming the institution must not silently rename a faction the DM may have renamed on its own' },
   { path: 'factions[].members[].factionAffiliation', kind: 'label', readable: false,
     why: 'the same faction name stamped on each member: it follows the FACTION ledger, never the institution one, for the reason the row above gives' },
+  // The faction ledger's other homes for that same name (src/domain/factionRename.js
+  // FACTION_RENAME_SURFACES declares each one). rulingStructure.js names the governing
+  // faction after the body for two forms ('Democratic assembly'; 'Merchant oligarchy' below
+  // metropolis) and keys its own logic on those spellings, so the label is the power
+  // layer's design, not a stamp of the institution.
+  { path: 'powerStructure.governingName', kind: 'label', readable: false,
+    why: 'the governing FACTION\'s name, owned by the faction rename ledger; it equals the institution name only for the two forms the power layer names after their body, for the reason the powerFactionName row gives' },
+  { path: 'powerStructure.government', kind: 'label', readable: false,
+    why: 'the government type, which at generation equals the governing faction\'s name and moves with it under the faction ledger' },
+  { path: 'powerStructure.factions[].faction', kind: 'label', readable: false,
+    why: 'the power roster\'s faction name, the faction ledger\'s canonical display key' },
+  { path: 'powerStructure.factionRelationships[].pair[]', kind: 'label', readable: false,
+    why: 'each pairwise relationship is keyed by the two faction names, and the faction ledger rewrites the pair' },
+  { path: 'npcs[].factionAffiliation', kind: 'label', readable: false,
+    why: 'a character\'s link to its faction by name, owned by the faction ledger like the member stamp above' },
   { path: 'economicState.safetyProfile.compound.inst.names[]', kind: 'frozen-stamp', readable: false,
     why: 'the SECOND independent stamp, not an alias: economicState and safetyProfile each call getInstFlags, so the two arrays are never the same object. Aliased or duplicated stamps DECLARE ONCE PER PATH by design, because the walk addresses by path and a reloaded save has already split any alias' },
 ]);

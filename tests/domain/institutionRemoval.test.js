@@ -78,6 +78,27 @@ function handleCount(save, name) {
   return total;
 }
 
+/**
+ * The base record with only the declared `drop-entry` rows applied for `name`: each such row
+ * names its handle as the last segment under a one-level list (`availableServices.legal[]
+ * .institution`), and an entry whose handle is the removed house leaves its list. Built from the
+ * ledger, never re-typed, so a new drop-entry row is honoured here the day it is declared.
+ * @param {any} save @param {string} name
+ */
+function withDeclaredDropsApplied(save, name) {
+  const copy = reloaded(save);
+  for (const row of INSTITUTION_RENAME_SURFACES.filter((r) => r.removal === 'drop-entry')) {
+    const cut = row.path.lastIndexOf('[].');
+    if (cut < 0 || row.path.slice(0, cut).includes('[]')) continue;
+    const handle = row.path.slice(cut + 3);
+    for (const site of resolveSites(copy, row.path.slice(0, cut))) {
+      const list = site.owner[site.key];
+      if (Array.isArray(list)) site.owner[site.key] = list.filter((entry) => String(entry?.[handle] ?? '').trim() !== name);
+    }
+  }
+  return copy;
+}
+
 function worstCaseHouse(save) {
   let worst = null;
   let best = -1;
@@ -278,8 +299,15 @@ describe('institution removal: the sweep over the declared cascade list', () => 
       const sibling = rosterOf(base).find((name) => name !== world.worst) || null;
       applyInstitutionRemovalToSettlement(removed, world.worst);
       if (sibling && !rosterOf(removed).includes(sibling)) siblingLost.push(`${world.key}: ${sibling}`);
+      // The view a non-cascaded path is compared against is the base with EXACTLY the declared
+      // drop-entry cascade applied: an entry the removal drops by its handle takes its own
+      // labels with it, and that is the cascade, not a touch (2026-09-30: the urban band's
+      // seed shift made the desert towns' worst house a 'Free company hall' that provides a
+      // legal service, so 'Escort contracts' left with its entry). A label REWRITTEN or MINTED
+      // on any surviving entry still reds here.
+      const expected = withDeclaredDropsApplied(base, world.worst);
       for (const row of NON_CASCADED_SURFACES) {
-        if (JSON.stringify(valuesAt(removed, row.path)) !== JSON.stringify(valuesAt(base, row.path))) nonCascadedMoved.push(`${world.key}: ${row.path}`);
+        if (JSON.stringify(valuesAt(removed, row.path)) !== JSON.stringify(valuesAt(expected, row.path))) nonCascadedMoved.push(`${world.key}: ${row.path}`);
       }
       for (const key of keySetOf(removed)) if (!beforeKeys.has(key)) keyGained.push(`${world.key}: ${key}`);
 

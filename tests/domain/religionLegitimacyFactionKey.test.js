@@ -104,7 +104,10 @@ describe('rulerLens reads the canonical governing seat', () => {
 
     // The premise: the two diverge as RECORDS, and the wrong pick out-powers the seat.
     expect(seat).not.toBe(wrongPick);
-    expect(nameOf(seat)).toBe('Grand Merchant Senate');
+    // 'Grand Merchant Senate' after round one; round two no longer re-spells the seat with the
+    // label it already bears, so it takes the merchant alternate (2026-09-30, rulingPower.js
+    // resolveGovernmentLabel: a change of government never reuses the outgoing seat's name).
+    expect(nameOf(seat)).toBe('Merchant oligarchy');
     expect(nameOf(wrongPick)).toBe('Merchant Guilds');
     expect(Number(wrongPick.power)).toBeGreaterThan(Number(seat.power));
     // ⚠ THE ARCHETYPE HALF OF THE PREMISE CHANGED ON 2026-08-30, and the change is a FIX
