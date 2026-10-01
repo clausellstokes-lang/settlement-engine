@@ -116,7 +116,9 @@ const GOLDEN_MANIFEST_PATH = resolve(process.cwd(), 'tests', 'fixtures', 'genera
 const PRNG_SOURCE_PATH = resolve(process.cwd(), 'src', 'kernel', 'prng.js');
 /** The manifest row A1 pins, and the hash it carries — both asserted, so neither drifts alone. */
 const GOLDEN_CONTROL_KEY = 'town|germanic|plains|road|civilized|golden-master-v3';
-const GOLDEN_CONTROL_HASH = 'b77b5909009112855bad4dacf881847d06e43385f64a15f4b528e0d30c91c3ce';
+// 2026-10-01, the urban band (ODQ §934.86): this row's hash moved with the golden master's re-record through the
+// signed door (917834e22); b77b5909... -> 95a3de2d..., read from the committed manifest and re-derived under both mocks.
+const GOLDEN_CONTROL_HASH = '95a3de2d59b7352ed1856697163952a202e8d1e67ad2fb98292af43afc37d98a';
 /** EM-P0's own pinned-mode row and its four chooser keys, re-measured here under the mocks. */
 const PIN_ROW = {
   settType: 'town', culture: 'germanic', terrainOverride: 'riverside',
@@ -124,7 +126,9 @@ const PIN_ROW = {
 };
 const POPULATION_STEP = 'generatePopulation';
 const CHOOSER_KEYS = ['npcs', 'relationships', 'factions', 'conflicts'];
-const POPULATION_UNPINNED_DRAWS = 315;
+// 2026-10-01, the urban band (ODQ §934.86): 315 -> 307 draws on the pin row's unpinned population step (measured; the same
+// figure pipelinePinnedMode's A2 reads as the unpinned total on this row).
+const POPULATION_UNPINNED_DRAWS = 307;
 /** The row both side channels are censused on (the pre-proof's probe row). */
 const CENSUS_ROW = {
   settType: 'town', culture: 'germanic', terrainOverride: 'riverside',
@@ -133,7 +137,9 @@ const CENSUS_ROW = {
 /** The seed the mint census sees minted FOUR times, and the vias that convict a blind wrapper. */
 const REPEATED_SEED = `${CENSUS_ROW._seed}::generatePower::power-structure`;
 const REPEATED_VIAS = ['fork', 'direct', 'direct', 'direct'];
-const PICK_VARIANT_CALLS = 96;
+// 2026-10-01, the urban band (ODQ §934.86): 96 -> 107 pickVariant calls on the probe row (+11, measured; the institution
+// registry rebuild changed what the same seed assembles); every call is still a real choice with its own seed.
+const PICK_VARIANT_CALLS = 107;
 const FNV_EXTERNAL_CALLS = 6;
 /** The fork law A1 pins: the mint wrapper's equivalence rests on this line and nothing else. */
 const FORK_LAW = 'fork: (label) => createPRNG(`${seed}::${label}`),';
@@ -161,7 +167,7 @@ const OFF_CORPUS_STEP = 'resolveConfig';
  * this packet asserts nothing about their cure.
  */
 const DISPLAY_NAME_KEYED_SITES = [
-  { site: 'src/generators/steps/assembleInstitutions.js:774', channel: 'hash', marker: 'inst.name' },
+  { site: 'src/generators/steps/assembleInstitutions.js:863', channel: 'hash', marker: 'inst.name' }, // 2026-10-01, the urban band (ODQ §934.86): a pure line move, 774 -> 863
   { site: 'src/data/npcData.js:1334', channel: 'hash', marker: '?.name' },
   { site: 'src/domain/townMap/glyphAssign.js:125', channel: 'mint', marker: 'createPRNG(`glyph:${seedId}`)' },
 ];
@@ -224,7 +230,7 @@ describe('EM-P2 — generation census by execution: the instrument, the classifi
     ).toEqual([]);
   };
 
-  it('A1 — the instrument reaches the generator graph: mints split 4 direct / 31 via fork, no golden moves, 315 draws unpinned and 0 pinned', () => {
+  it('A1 — the instrument reaches the generator graph: mints split 4 direct / 31 via fork, no golden moves, 307 draws unpinned and 0 pinned', () => {
     // ── C0 — the mocks lose no export. A replacement that dropped a name would break
     // importers silently, and every figure below would be measured on a crippled module.
     expect(mintCensus.actualKeys.length, 'the prng mock factory never ran').toBeGreaterThan(0);
@@ -355,7 +361,7 @@ describe('EM-P2 — generation census by execution: the instrument, the classifi
     failOnDifference(differences, emitTier1Literal(fresh.rows));
   }, 180_000);
 
-  it('A4 — both landing triples re-executed: the six varies rows, the eighteen disagreements, and zero differing landing paths', () => {
+  it('A4 — both landing triples re-executed: the six varies rows, the sixteen disagreements, and zero differing landing paths', () => {
     const fresh = measure();
     const differences = [];
     for (const row of fresh.rows) {
@@ -390,7 +396,9 @@ describe('EM-P2 — generation census by execution: the instrument, the classifi
 
     failOnDifference(differences, emitTier1Literal(fresh.rows));
     expect(variesRows.length, 'the varies rows of the FINAL comparand').toBe(6);
-    expect(disagreeing.length, 'the rows where the two comparands disagree').toBe(18);
+    // 2026-10-01, the urban band (ODQ §934.86): 18 -> 16 (measured). The institution rebuild moved the producedOnRecord
+    // classes of isolationSupport (varies -> same) and generationRepairs (absent -> varies); the six varies rows stay six.
+    expect(disagreeing.length, 'the rows where the two comparands disagree').toBe(16);
     expect(nonUnanimous.length, 'exactly one row lands in two places, and it is already varies').toBe(1);
     // ⛔ THERE IS NO producedPath, AND THAT IS A MEASUREMENT. If this ever becomes non-zero a
     // second path field is owed and the register is telling half a truth about WHERE.
@@ -434,7 +442,7 @@ describe('EM-P2 — generation census by execution: the instrument, the classifi
     expect(repeated.map(([seed]) => seed), 'exactly one seed is minted more than once').toEqual([REPEATED_SEED]);
   }, 120_000);
 
-  it('A6 — the hash channel: 96 distinct pickVariant seeds, six external fnv1a32 calls, and two censuses disjoint by construction', () => {
+  it('A6 — the hash channel: 107 distinct pickVariant seeds, six external fnv1a32 calls, and two censuses disjoint by construction', () => {
     const seen = censusRun(CENSUS_ROW);
     const realChoices = seen.picks.filter((pick) => pick.poolLen > 1 && pick.seed && pick.seed !== ' undefined');
     const pickSeeds = new Set(seen.picks.map((pick) => pick.seed));
