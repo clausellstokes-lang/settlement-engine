@@ -342,11 +342,11 @@
       "suite": "tests/property/generatorGoldenMaster.test.js",
       "recordEnv": "UPDATE_GOLDEN",
       "proofForm": null,
-      "sha256": "7177cd6e89ebee404dec05d725d91e98ff59d2cfa124104a9a22515a7c8e8f1e",
+      "sha256": "fd2cf1dbd8c6b60e9d03087f5aa38dc9cd43a62b7ea5f8939a12a98bec2439db",
       "rows": 525,
       "seedSet": null,
       "distinctFloor": null,
-      "ownerRow": "§934.22",
+      "ownerRow": "§934.86 of docs/OWNER_DECISION_QUEUE.md (THE URBAN BAND, recorded by the urban-band chair 2026-09-30 on the ledger branch review-fixes-2026-07-08 at 9d3b518de)",
       "note": "RE-RECORDED THROUGH THE SIGNED DOOR at the genesis freeze 2026-09-16 (owner: 'sign the golden'; record docs/shift-records/2026-09-16-genesis-freeze-generator-golden-master.json); 525 rows moved since the em-dash wave e3f6029b2 (banked §901); the key set unchanged."
     },
     {
