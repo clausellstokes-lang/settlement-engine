@@ -71,7 +71,22 @@ function richBase() {
     const record = row.record;
     const balance = record.economicViability?.metrics?.foodBalance;
     const evidence = evidenceOf(record);
+    // 2026-10-01, the urban band (ODQ §934.86): the first rich row used to carry both summary phrases by luck of the
+    // old corpus; under the rebuilt registry a not-viable world's summary ("NOT VIABLE: 2 critical issues ...") names
+    // neither, and V-SUMMARY-DEPS / V-SUMMARY-HOOKS then threw on a null match. Their own inputs are now part of
+    // "rich enough that every check has its inputs"; this narrows the row eligible, it relaxes no assertion. The
+    // same holds for V-BAND-FOODSEC, whose mutant relabels the food card as the importDependent band: it convicts
+    // ONLY its own check when the card is not already that band and every flag the card carries is one that band
+    // has been seen to carry (otherwise V-FLAGVEC fires beside it, which the old base happened never to trigger).
+    const summary = String(record.economicViability?.summary || '');
+    const foodCard = record.economicState?.foodSecurity || {};
+    const foodFlagsFit = foodCard.label !== FOOD_SECURITY_BANDS.importDependent.label
+      && FLAG_FIELDS.economicState.filter((flag) => foodCard[flag] === true)
+        .every((flag) => FLAGS_EVER_TRUE.economicState.importDependent.includes(flag));
     return Boolean(balance && Number.isFinite(balance.rawDeficit) && Number.isFinite(balance.importCoverage))
+      && /(\d+)\s+operational dependenc/.test(summary)
+      && /(\d+)\s+plot hooks? available/.test(summary)
+      && foodFlagsFit
       && (record.activeConditions || []).length > 0
       && (record.conflicts || []).length > 0
       && evidence.some((row2) => row2.path === 'conflicts[0]')

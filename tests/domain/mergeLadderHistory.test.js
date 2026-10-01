@@ -148,8 +148,15 @@ function trials() {
 
 /** One config-channel merge of one corpus row, with the record's receipt bent by the caller. */
 function mergeWithReceipt(bend) {
+  // 2026-10-01, the urban band (ODQ §934.86): THE CONTROL'S SUBJECT ROW MOVED, metropolis|germanic|plains|road ->
+  // metropolis|germanic|forest|isolated. H4's anti-vacuity needs a world whose re-derivation R1 carries a repair
+  // history of its own ("R1 really carries a history of its own to overwrite with"); the old subject's R1 now
+  // carries none (0), so that precondition could not be met. Re-hunted over the 63-row stride under the desert edit
+  // by the three controls' own conditions (a rung takes the receipt, R1 repairs > 0, and the planted, empty and
+  // absent histories each survive): four rows qualify (town coastal port, metropolis forest isolated, metropolis
+  // riverside river, town plains port); this is the one of the same tier as the old subject.
   const row = sample63().find((candidate) => keyOf(candidate)
-    === 'metropolis|germanic|plains|road|civilized|golden-master-v3');
+    === 'metropolis|germanic|forest|isolated|civilized|golden-master-v3');
   const { _seed: seed, ...config } = row;
   const base = generateSettlementPipeline(config, null, { seed, customContent: {} });
   const R0 = rederive(base, config, EMPTY, ENGINE, DECLARATIONS).record;
