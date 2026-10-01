@@ -164,8 +164,8 @@ export function capturedRulingStructure(settlement) {
 export const HOLDER_SOURCES = Object.freeze({
   // ── the treasury: the town's coin, its revenue and the arithmetic that closes or does not ──
   incomeSources: Object.freeze({ kind: 'treasury', cite: 'src/generators/economy/economicState.js:873', read: true }),
-  viable: Object.freeze({ kind: 'treasury', cite: 'src/generators/economy/viability.js:565', read: true }),
-  criticalIssueCount: Object.freeze({ kind: 'treasury', cite: 'src/generators/economy/viability.js:585', read: true }),
+  viable: Object.freeze({ kind: 'treasury', cite: 'src/generators/economy/viability.js:566', read: true }),
+  criticalIssueCount: Object.freeze({ kind: 'treasury', cite: 'src/generators/economy/viability.js:586', read: true }),
   economicViability: Object.freeze({ kind: 'treasury', cite: 'src/generators/steps/assembleSettlement.js:110', read: true }),
 
   // ── the market: what the town makes, sends and takes in ──
@@ -175,9 +175,9 @@ export const HOLDER_SOURCES = Object.freeze({
   isEntrepot: Object.freeze({ kind: 'market', cite: 'src/generators/economy/economicState.js:878', read: true }),
   activeChains: Object.freeze({ kind: 'market', cite: 'src/generators/economy/economicState.js:821', read: true }),
   exportPosture: Object.freeze({ kind: 'market', cite: 'src/domain/display/dossierViewModel.js:565', read: true }),
-  economicStrengths: Object.freeze({ kind: 'market', cite: 'src/generators/resourceGenerator.js:499', read: true }),
-  strategicValue: Object.freeze({ kind: 'market', cite: 'src/generators/resourceGenerator.js:500', read: true }),
-  exploitation: Object.freeze({ kind: 'market', cite: 'src/generators/resourceGenerator.js:417', read: true }),
+  economicStrengths: Object.freeze({ kind: 'market', cite: 'src/generators/resourceGenerator.js:500', read: true }),
+  strategicValue: Object.freeze({ kind: 'market', cite: 'src/generators/resourceGenerator.js:501', read: true }),
+  exploitation: Object.freeze({ kind: 'market', cite: 'src/generators/resourceGenerator.js:418', read: true }),
 
   // ── the toll bar: the route, and what may and may not pass along it ──
   tradeRouteAccess: Object.freeze({ kind: 'toll-bar', cite: 'src/generators/steps/resolveConfig.js:198', read: true }),

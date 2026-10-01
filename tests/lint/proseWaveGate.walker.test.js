@@ -898,7 +898,7 @@ describe('(d) THE FIXTURE SECTION — the interested fact BOTH WAYS (SITTING §T
     expect(fixture.towns.map((t) => t.label)).toEqual(['captured', 'clean']);
     const captured = fixture.towns[0];
     const clean = fixture.towns[1];
-    expect(captured.standing, 'rate-9-2 is the captured town').toBe('INTERESTED');
+    expect(captured.standing, 'rate-11-9 is the captured town').toBe('INTERESTED');
     expect(clean.standing, 'rate-3-0 is the control and it is NOT interested').toBe('LICENSED');
     expect(captured.holder, 'and the holder is the census\'s own answer').toBeTruthy();
   });

@@ -35,7 +35,7 @@ const clean = tasteTown(INTERESTED_TOWNS[1]);
 
 describe('the two fixture towns are the ones §R c-22 names, taken as the generator makes them', () => {
   it('the captured town carries the birth fact and the clean control does not', () => {
-    expect(INTERESTED_TOWNS[0].seed).toBe('rate-9-2');
+    expect(INTERESTED_TOWNS[0].seed).toBe('rate-11-9'); // re-taken 2026-09-30, see tests/fixtures/tasteTowns.js
     expect(INTERESTED_TOWNS[1].seed).toBe('rate-3-0');
     expect(captured.powerStructure?.criminalCaptureState, 'the chair\'s own worked example').toBe('corrupted');
     expect(clean.powerStructure?.criminalCaptureState, 'and the control').toBe('none');
@@ -90,7 +90,10 @@ describe('⭐⭐ THE STANDING, PRINTED AND ASSERTED ON BOTH TOWNS', () => {
       .toContain('captured-at-birth');
     expect(onCaptured.marks.join(' ')).toContain('criminalCaptureState corrupted');
     expect(onClean.standing, 'the clean control is licensed and not interested').toBe('LICENSED');
-    expect(onClean.holder, 'and its treasury record is kept by a different institution').toBe('Weekly market');
+    // Re-measured 2026-09-30 (the urban band, ODQ §934.86): the control's treasury moved from its
+    // Weekly market to its Town hall, the captured town's holder too, so the pair now differs by
+    // the CAPTURE alone, the cleaner pair.
+    expect(onClean.holder, 'and its treasury record is kept by its own Town hall').toBe('Town hall');
     // ⭐ THE DM FACE HAS A MODEL IN THE CORPUS RATHER THAN AN INVENTION: this pool is one of
     // the seven whose SHIPPED variants already cite a record holder (SEAM car 5b's A13 walk),
     // which is why the chair named it.

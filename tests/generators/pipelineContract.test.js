@@ -99,7 +99,12 @@ describe('pipeline data-flow contract — bound-neighbour branch (the writes nul
   // observable marker of each — so the strict assertion above is load-bearing:
   // drop any of the three `mutates` declarations and runPipeline throws here.
   it('all three bound-neighbour in-place writes fire and are declared (strict has teeth)', () => {
-    const seed = 'contract-bound-all-writes';
+    // Re-pinned contract-bound-all-writes to contract-bound-all-writes-1 on 2026-09-30
+    // (the urban band, ODQ §934.86): the same-seed shift moved the rng stream ahead of
+    // neighbourFactions, and the old seed's mirror/opposition draws no longer landed
+    // (relationship and econ bias still fired). -1 is the first sibling on which all
+    // three markers fire; the fixture, the config and every assertion are unchanged.
+    const seed = 'contract-bound-all-writes-1';
     const rng = createPRNG(seed);
     const cfg = {
       settType: 'hamlet', culture: 'germanic', terrain: 'river',

@@ -505,7 +505,9 @@ describe('full-pipeline world-law enforcement', () => {
           priorityReligion: 88,
           priorityCriminal: 18,
         },
-        'semantic-probe-22',
+        // Re-pinned -22 to -0 on 2026-09-30 (the urban band, ODQ §934.86): the same-seed shift left
+        // -22 with no faction conflict to scan; -0 is the first sibling that rolls one and certifies.
+        'semantic-probe-0',
       ],
       [
         {
@@ -522,7 +524,9 @@ describe('full-pipeline world-law enforcement', () => {
           priorityReligion: 94,
           priorityCriminal: 53,
         },
-        'semantic-probe-334',
+        // Re-pinned -334 to -4 on 2026-09-30 for the same cause: -4 is the first sibling that rolls
+        // a conflict and certifies.
+        'semantic-probe-4',
       ],
     ];
 
@@ -537,7 +541,8 @@ describe('full-pipeline world-law enforcement', () => {
 
       // LIVENESS ANCHOR: an empty conflict list stringifies to '[]', which is
       // mundane by construction. Both fixtures roll exactly one conflict
-      // (measured 2026-07-27), so there is always prose to scan.
+      // (measured 2026-07-27; re-measured on the re-pinned seeds 2026-09-30),
+      // so there is always prose to scan.
       expect(conflicts.length, `${seed} generated faction conflicts to scan`).toBeGreaterThan(0);
       // anchored: the assertion above pins a non-empty conflict list, so this exclusion measures the prose rather than its absence.
       expect(conflictProse).not.toMatch(

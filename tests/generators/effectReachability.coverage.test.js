@@ -218,7 +218,11 @@ const CORPUS = Object.freeze([
     // hard_dependency, standard subsumption, and magical transit. `-24` is also the seed
     // tests/generators/coherenceRepairPass.test.js pins for the same config, so the two
     // files keep sharing one metropolis specimen as they did before the wave.
-    seed: 'effect-reach-v1-iso-metro-24',
+    // Re-pinned `-24` to `-3` on 2026-09-30 (the urban band, ODQ §934.86, and the verifier's
+    // FIX 1, which confined the dependency repair to the settlement's own tier block): -24 no
+    // longer adds a hard dependency, and -3 is the first sibling that does (32 of 60 do). Its
+    // isolation_support stratum is gone from every config (UNREACHABLE_STRATA below).
+    seed: 'effect-reach-v1-iso-metro-3',
     config: Object.freeze({
       settType: 'metropolis',
       culture: 'greek',
@@ -433,15 +437,6 @@ const EFFECT_MANIFEST = Object.freeze([
     ),
   }),
   Object.freeze({
-    id: 'repair.isolation_support',
-    description:
-      'coherenceRepairPass injected transit infrastructure because roster '
-      + 'reconciliation reopened an isolation-support gap',
-    detect: settlement => repairs(settlement).some(
-      repair => repair?.type === 'isolation_support',
-    ),
-  }),
-  Object.freeze({
     id: 'repair.hard_dependency',
     description:
       'coherenceRepairPass added a real catalog prerequisite after validation '
@@ -489,6 +484,17 @@ const EFFECT_MANIFEST = Object.freeze([
  *   subjects produce permanent unclearable errors). Retirement is the
  *   recommended owner call (queue EP-g1), measured at 0/400 output change.
  *
+ * - `isolation_support` (re-inject transit when roster reconciliation reopens an isolation
+ *   gap): unreachable BY SAMPLING since 2026-09-30, not by construction — the branch stands
+ *   as a safety net. MF-CH2B made the licensed transit rows take the magic multiplier at
+ *   ASSEMBLY ('Airship docking (high magic)' is seated at chance 1 instead of re-injected late;
+ *   its builder traced it on four seeds, final rosters identical), so reconciliation no longer
+ *   reopens the gap. Measured at the urban-band tip c9bf28ca8: 0 fires in 768 isolated
+ *   settlements (village to metropolis x mountain/desert/forest/coastal x magic 100/50/10/off
+ *   x 12 seeds), 0 in 300 isolated greek-mountain metropolises and cities, and 0 in the
+ *   builder's 240 isolated metropolises. The zero-occurrence ratchet below reds the day it
+ *   fires on the corpus again, and that red is the instruction to re-specimen it.
+ *
  * `access_compatibility` was listed here until 2026-07-27 and its recorded
  * evidence was FALSIFIED by the EP-6 INV-A/INV-B probes: the reasoning held for
  * Docks (a true inclusion-list) but not for Fishmonger, whose FORBIDDEN-list
@@ -505,6 +511,7 @@ const EFFECT_MANIFEST = Object.freeze([
  */
 const UNREACHABLE_STRATA = Object.freeze([
   'repair.mutual_exclusion',
+  'repair.isolation_support',
 ]);
 
 // ── execution ───────────────────────────────────────────────────────────────

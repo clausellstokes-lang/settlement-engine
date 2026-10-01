@@ -259,7 +259,17 @@ describe('institution removal: the sweep over the declared cascade list', () => 
     const labelDeleted = [];
     const refusedToChange = [];
     const labelKeptWithSurvivor = [];
-    for (const world of worlds) {
+    // Each world is swept for its worst-case house AND for the first house a chain label names,
+    // so both orphan kinds run on real worlds whichever house a corpus makes "worst". Added
+    // 2026-09-30 (the urban band, ODQ §934.86): the same-seed shift moved every sampled world's
+    // worst-case house off the chain-labelled ones, and the label kind went unexercised.
+    const sweeps = worlds.flatMap((world) => {
+      const roster = new Set(rosterOf(world.save));
+      const labelled = valuesAt(world.save, labelRow.path).map((value) => value.trim()).find((value) => roster.has(value));
+      return [world.worst, ...(labelled && labelled !== world.worst ? [labelled] : [])]
+        .map((target) => ({ ...world, worst: target }));
+    });
+    for (const world of sweeps) {
       const base = reloaded(world.save);
       const removed = reloaded(world.save);
       const result = applyInstitutionRemovalToSettlement(removed, world.worst);
@@ -277,7 +287,7 @@ describe('institution removal: the sweep over the declared cascade list', () => 
       // ⛔ THE READ IS A READ: the non-cascaded processor list is byte-identical after the sweep.
       if (JSON.stringify(valuesAt(removed, processorPath)) !== JSON.stringify(valuesAt(base, processorPath))) badPaths.push(`${world.key}: the readable path was WRITTEN`);
     }
-    process.stdout.write(`\n[A5] orphan notes over ${worlds.length} removals: ${JSON.stringify(counts)}\n`);
+    process.stdout.write(`\n[A5] orphan notes over ${sweeps.length} removals: ${JSON.stringify(counts)}\n`);
     expect(counts['chain-lost-its-last-processor'], 'anti-vacuity: the first orphan kind never fired over the sample').toBeGreaterThan(0);
     expect(counts['chain-label-names-a-removed-house'], 'anti-vacuity: the second orphan kind never fired over the sample').toBeGreaterThan(0);
     expect(badKinds, 'an orphan note carried a kind outside the closed vocabulary of two').toEqual([]);
