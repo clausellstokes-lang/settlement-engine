@@ -1345,8 +1345,10 @@ describe('reader-with-no-writer ratchet: the live scan', () => {
       // ⭐ `stress` and `stressors` JOIN AT THE SCHEMA-17 RUNG, and they are the corpus's
       // own receipt that the stress-loaded topology pass actually executed: neither shape
       // carried an observed `source` while every config ran unstressed.
+      // ⭐ `militia` JOINS AT THE SCHEMA-24 RUNG (2026-10-01, the urban band's corpus re-deal, ODQ §934.86):
+      // the re-dealt year observes a militia reading that carries its `source`.
       'causes', 'changes', 'charter', 'evidence', 'garrison', 'incomeSources',
-      'institutions', 'magicDef', 'mercenary', 'site', 'stress', 'stressors',
+      'institutions', 'magicDef', 'mercenary', 'militia', 'site', 'stress', 'stressors',
       'walls', 'watch',
     ]);
 
@@ -1759,7 +1761,13 @@ describe('reader-with-no-writer ratchet: the live scan', () => {
     }, 'the schema-7 filters cleared a DIFFERENT amount of the unreviewed-UI cohort than'
       + ' the frozen gap — this is a filter change, not an estate shrink, and it is'
       + ' governed: re-derive the gap and say which filter moved and why').toEqual({
-      files: 1, identities: 18, counts: 48,
+      // ⭐ 1/18/48 → 1/17/44 AT THE SCHEMA-24 RUNG (2026-10-01), RE-DERIVED AND NAMED: no filter's CODE
+      // moved, its INPUT did. M6's shape-family union clears a read whose key lives anywhere in the
+      // receiver's family, and the re-dealt AO-0 year raises no government challenge, so `factionName`
+      // left the outcome family the corpus observes. Its four reads at src/components/map/WorldPulseData.js
+      // (`factionName on stressors` ×4) therefore left the CLEARED set and became one of the 53 ordinary rows
+      // the rung admitted: exactly −1 identity / −4 counts on the gap, the file count unmoved.
+      files: 1, identities: 17, counts: 44,
     });
     expect(UNREVIEWED_UI_COHORT.tag).toBe('UNREVIEWED-UI');
     expect(UNREVIEWED_UI_COHORT.scopes).toEqual([...EXACT_SCAN_EXCLUDED_SCOPE]);
