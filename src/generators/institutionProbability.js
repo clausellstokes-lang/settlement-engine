@@ -125,7 +125,7 @@ export const getBaseChance = (
     // Druid/nature institutions: boost on natural routes, but not excluded from others
     // A sewer druid or urban grove druid can exist anywhere — just less likely
     const isDruidInst = inst.includes('druid') || inst.includes('grove shrine') ||
-                        inst.includes("warden's lodge") || inst.includes('sacred grove') ||
+                        inst.includes('sacred grove') || // J33: Warden's Lodge is defence, not druid (the owner, 2026-10-01)
                         inst.includes('elder grove');
     if (isDruidInst) {
       const route = config.tradeRouteAccess || 'road';

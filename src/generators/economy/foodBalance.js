@@ -239,7 +239,7 @@ export const deriveFoodBalanceAnalysis = (population, terrain, institutions, con
   const hasDruidFood =
     magPri >= 30 &&
     instNames.some((n) =>
-      ['druid circle', 'grove shrine', 'elder grove', "warden's lodge", 'sacred grove'].some((k) => n.includes(k))
+      ['druid circle', 'grove shrine', 'elder grove', 'sacred grove'].some((k) => n.includes(k)) // J33: Warden's Lodge is defence, not druid (the owner, 2026-10-01)
     );
   const hasDivineFood =
     relPri >= 55 &&

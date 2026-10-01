@@ -53,6 +53,9 @@ import { createGenerationWorldLaw } from '../../src/generators/generationContext
 import { institutionalCatalog } from '../../src/data/institutionalCatalog.js';
 import { institutionBackingFactionName } from '../../src/domain/display/institutionProfile.js';
 import { druidicFaithRole } from '../../src/domain/arcaneInstitutionIdentity.js';
+import { computeEffectiveMagicPresence } from '../../src/generators/priorityHelpers.js';
+import { POWER_ROLES_BY_CATEGORY } from '../../src/data/historyData.js';
+import { classifyMagicForm } from '../../src/domain/worldPulse/magicForms.js';
 
 const ROUTES = ['road', 'port', 'river', 'crossroads', 'isolated'];
 const cache = new Map();
@@ -395,3 +398,43 @@ describe("G7 — Warden's Lodge defends in every world, and divine defence needs
   });
 });
 
+describe("G8 — Warden's Lodge is no druid in a magic world either (J33)", () => {
+  // The owner, 2026-10-01: "Warden's Lodge stays defense, not druid". J31 cleared the lodge's text, pairing and
+  // defence reading, but five more readers still counted it a druid or a caster in a magic world: the chains' druid
+  // tradition, druidic cultivation in both food readers, folk magic presence and the Druid Elder's seat. Red on 731e19597.
+  const lodge = { name: "Warden's Lodge", category: 'Defense', ...institutionalCatalog.town.Defense["Warden's Lodge"] };
+  it("seating a Warden's Lodge in a magic town moves no druid or magic reading", () => {
+    const moved = [];
+    let towns = 0;
+    for (const s of g6World('magic')) {
+      if (s.tier !== 'town') continue;
+      towns++;
+      const cfg = s.config || {};
+      const without = (s.institutions || []).filter(r => r.name !== lodge.name);
+      // Every resource DEPLETED, so a druid tradition has chains to sustain; the chains the lodge works as a hunting
+      // processor (a mundane trade) are set aside, and the rest must not move.
+      const res = cfg.nearbyResources || [];
+      const chainsOf = (roster) => computeActiveChains(roster, res, s.tier, cfg.tradeRouteAccess, [], res, cfg.priorityMagic ?? 50);
+      const worked = new Set(chainsOf([...without, lodge]).filter(c => JSON.stringify(c).includes(lodge.name)).map(c => c.chainId));
+      const read = (roster) => ({
+        food: JSON.stringify(generateFoodSecurity(s.tier, roster, cfg)),
+        balance: JSON.stringify(deriveFoodBalanceAnalysis(s.population, null, roster, { ...cfg, tier: s.tier }, s.economicState?.foodSecurity || null)),
+        chains: JSON.stringify(chainsOf(roster).filter(c => !worked.has(c.chainId))),
+        presence: computeEffectiveMagicPresence(roster, cfg).score,
+      });
+      const before = read(without);
+      const after = read([...without, lodge]);
+      for (const k of Object.keys(before)) if (before[k] !== after[k]) moved.push(`${s.name}: ${k}`);
+    }
+    expect(towns, 'magic-world towns').toBeGreaterThan(10);
+    expect(moved).toEqual([]);
+  });
+
+  it('the lodge opens no druid office and no magic form', () => {
+    const druidKeys = Object.values(POWER_ROLES_BY_CATEGORY).flat()
+      .filter(r => /druid/i.test(`${r.role} ${r.title}`)).flatMap(r => r.requiresInstKeyword || []);
+    expect(druidKeys.length, 'a druid office gated on an institution keyword').toBeGreaterThan(0);
+    expect(druidKeys.filter(k => "warden's lodge".includes(k))).toEqual([]);
+    expect(classifyMagicForm(lodge)).toBeNull();
+  });
+});

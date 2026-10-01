@@ -209,7 +209,7 @@ export function computeActiveChains(institutions = [], resources = [], tier = 'v
   const hasTradition = (...kws) => insts.some(i => kws.some(kw => institutionMatchesKeyword(i, kw)));
 
   const traditions = {
-    druid:   magicPriority >= 30 && hasTradition("druid circle","grove shrine","elder grove","warden's lodge","sacred grove"),
+    druid:   magicPriority >= 30 && hasTradition("druid circle","grove shrine","elder grove","sacred grove"), // J33: Warden's Lodge is defence, not druid (the owner, 2026-10-01)
     // Divine PROVISION is supernatural — it needs a world where magic functions,
     // not just a church. resolveConfig zeroes the magic dial when
     // config.magicExists === false, so magicPriority > 0 is the world's magic

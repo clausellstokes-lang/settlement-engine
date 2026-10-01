@@ -130,7 +130,7 @@ export function generateFoodSecurity(tier, institutions, config) {
   const hasOrchard        = hasInst('orchard', 'kitchen garden', 'herb garden');
   const hasMarket         = hasInst('market', 'marketplace', 'daily market', 'district market');
   const _hasBakery         = hasInst('baker', 'bakery');
-  const hasDruid          = hasInst('druid', 'grove', 'elder grove', 'sacred grove', 'warden');
+  const hasDruid          = hasInst('druid', 'grove', 'elder grove', 'sacred grove'); // J33: Warden's Lodge is defence, not druid (the owner, 2026-10-01)
   const hasDivine         = hasInst('cathedral', 'monastery', 'great cathedral', 'parish church');
   const hasArcane         = hasInst('mage', 'wizard', 'arcane', 'spellcasting');
 

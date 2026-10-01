@@ -852,7 +852,7 @@ export const POWER_ROLES_BY_CATEGORY = {
       priority: 7,
       minTier: 'village',
       goalCategories: ['spiritual', 'protection'],
-      requiresInstKeyword: ['druid', 'elder grove', "warden's lodge"],
+      requiresInstKeyword: ['druid', 'elder grove'], // J33: Warden's Lodge is defence, not druid (the owner, 2026-10-01)
     },
     {
       role: 'Warlock/Bargain-Sworn',
