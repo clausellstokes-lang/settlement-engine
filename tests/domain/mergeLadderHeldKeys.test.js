@@ -424,6 +424,8 @@ describe('EM-R8 — the escalation ladder never overwrites a HELD key, and the r
     const CHAIN_EDITS = {
       E1: (record) => { const person = record.npcs?.[1]; if (!person) return null; person.name = 'Aldhelm Prufstein'; return { [`npc:${person.id}:name`]: 'Aldhelm Prufstein' }; },
       E2: (record) => { const person = record.npcs?.[1]; if (!person) return null; person.role = 'Harbourmaster'; return { [`npc:${person.id}:role`]: 'Harbourmaster' }; },
+      // THE CONSTRUCTED CONTROL: a second name for E1's person. Two writes to one leaf cannot commute (the later wins).
+      E1b: (record) => { const person = record.npcs?.[1]; if (!person) return null; person.name = 'Brunhild Ostmark'; return { [`npc:${person.id}:name`]: 'Brunhild Ostmark' }; },
       E5: (record) => {
         const factions = record.powerStructure?.factions || [];
         if (factions.length < 2) return null;
@@ -465,6 +467,7 @@ describe('EM-R8 — the escalation ladder never overwrites a HELD key, and the r
     const seatPairs = [];
     let deterministicTrials = 0;
     let undoTrials = 0;
+    let constructedPairs = 0;
     for (const row of rows) {
       const { _seed: pin, ...config } = row;
       const key = keyOf(row);
@@ -492,6 +495,9 @@ describe('EM-R8 — the escalation ladder never overwrites a HELD key, and the r
         if (left === 'E5' || right === 'E5') { if (disagrees) powerPairs.push(`${key} ${left}|${right}`); }
         else if (disagrees) seatPairs.push(`${key} ${left}|${right}`);
       }
+      const forwardName = chain(base, config, ['E1', 'E1b']);
+      const backwardName = chain(base, config, ['E1b', 'E1']);
+      if (forwardName !== null && backwardName !== null && h(forwardName) !== h(backwardName)) constructedPairs += 1;
     }
     expect(deterministicTrials, 'the determinism denominator over the whole stride').toBe(252);
     expect(undoTrials, 'the undo-then-re-edit denominator').toBe(126);
@@ -499,12 +505,18 @@ describe('EM-R8 — the escalation ladder never overwrites a HELD key, and the r
     expect(nonDeterministic, `the same record and the same sequence produced two different towns:\n${nonDeterministic.join('\n')}`).toEqual([]);
     // anchored: as the line above.
     expect(undoDrifted, `a snapshot restore and the same edit again produced a different town:\n${undoDrifted.join('\n')}`).toEqual([]);
-    // anchored: `seatPairs` below is non-empty on the same five rows, so the pair machinery is live.
+    // anchored: the constructed control below disagrees on all five rows, so the pair machinery is live.
     expect(powerPairs, 'THE SHARE EDIT COMMUTES AGAIN: at the tip these pairs disagreed because the '
       + `ladder rewrote a roster between them, which §22.2 item 6 never meant by history:\n${powerPairs.join('\n')}`).toEqual([]);
-    expect(seatPairs.length, 'and the SEAT edit still does not commute with a roster edit, which IS §22.2 '
-      + 'item 6\'s history and is the positive control that these pairs are really being compared')
-      .toBeGreaterThan(0);
+    // ⛔ RE-CUT 2026-10-01 (the urban band, ODQ §934.86; the chair's judgment under the owner's delegation,
+    // vetoable): this positive control was an OBSERVED seat pair that did not commute with a roster edit. At the
+    // pre-band base exactly one row showed it (gm-seed-a's town, through one simulation-trace reason). After the band
+    // that town is Merchant-oligarchy governed and both orders agree, and a sweep of all 525 golden rows finds no
+    // seat pair that disagrees. Seat order-dependence stays ALLOWED (§22.2 item 6 calls it history), so it is
+    // measured and printed, never forbidden; the anti-vacuity proof is now constructed (E1b), and it cannot vanish.
+    process.stdout.write(`\n[A7] seat pairs that do not commute on the five rows: ${seatPairs.length}\n`);
+    expect(constructedPairs, 'THE CONSTRUCTED CONTROL: two names written to one person never commute, so these '
+      + 'pairs are really being compared').toBe(PAIR_ROWS.size);
   }, SLOW);
 
   it('A8 · the constructed events control: a narrative count the history does not carry is restated', () => {
