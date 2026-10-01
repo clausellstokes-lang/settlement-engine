@@ -276,13 +276,15 @@ describe('golden: seeded port settlements across tiers', () => {
     // isolated route — exactly the roster that used to trip the spurious
     // "Dock facilities require navigable water" viability warning. Re-probed after the
     // urban-band registry (2026-09-30, ODQ §934.86) re-ordered the catalog draws: -0 no
-    // longer rolls the airship; -1 is the first seed that rolls both again.
+    // longer rolls the airship; -1 is the first seed that rolls both again. Re-probed again on the
+    // window's final source (2026-10-01, the verifier's FIX 1 confined the cascade to its own tier):
+    // -1 no longer adds the docks, and -0 is again the first seed that rolls both.
     const s = gen(
       {
         settType: 'metropolis', culture: 'germanic', terrain: 'mountains',
         tradeRouteAccess: 'isolated', magicLevel: 'high', priorityMagic: 90,
       },
-      'airship-exception-1',
+      'airship-exception-0',
     );
     const names = new Set(s.institutions.map((i) => i.name));
     expect(names.has('Airship docking (high magic)')).toBe(true);
