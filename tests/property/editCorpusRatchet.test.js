@@ -63,7 +63,9 @@ import { renormalizeFactionPower } from '../../src/generators/power/rulingStruct
 import { goldenCorpus, keyOf } from '../helpers/goldenMasterCorpus.js';
 
 /** The corpus IS the battery: MEASURED under the runner, the census arm 22.8 s, the value arm
- *  20.5 s and the ordered-pair census 305.6 s, the file 350.7 s end to end. */
+ *  20.5 s and the ordered-pair census 305.6 s, the file 350.7 s end to end. RE-MEASURED 2026-10-01 after the
+ *  pair census was cached by prefix: the census arm 20.5 s, the value arm 19.2 s, the ordered-pair census
+ *  156.9 s (was 324.5 s at the same tip, and a 600 s TIMEOUT under full-suite load), the file 198.3 s. */
 const ARM_TIMEOUT = 600_000;
 const ROOT = process.cwd();
 /** The injected handles, built the way `src/store/settlementRederiveAction.js` builds them. */
@@ -215,19 +217,29 @@ function readDeclared(record, outputKey, anchor) {
   return { found: true, value: node };
 }
 
+/** A chain's starting state: the town as generated, and its dormant re-derivation as R0. */
+function startChain(town) {
+  return { record: clone(town.base), R0: rederive(town.base, town.cfg, EMPTY_DM_LAYER, ENGINE, CONSULT).record, roots: [], rideAlong: 0 };
+}
+/** One edit merged ALONE against the town as it then stands, the layer ACCUMULATING. Pure over its
+ *  state: the plan clones the record it is handed and the merge is handed clones, so a state can be
+ *  stepped from more than once (the pair census below relies on exactly that). */
+function stepChain(town, state, label) {
+  const plan = EDITS.find(([id]) => id === label)[2](state.record, town.cfg);
+  if (plan === null) return null;
+  const roots = [...state.roots, ...plan.roots];
+  const R1 = rederive(plan.rec, town.cfg, layerOf(roots), ENGINE, CONSULT).record;
+  const out = mergeConsequence(plan.rec, clone(state.R0), clone(R1), { edit: { id: label, opType: label } });
+  return { record: out.record, R0: out.delta.nextBase, roots, rideAlong: state.rideAlong + out.delta.honesty.rideAlong };
+}
 /** A chain: each edit merged ALONE against the town as it then stands, the layer ACCUMULATING. */
 function runChain(town, labels) {
-  let record = clone(town.base); let roots = []; let rideAlong = 0;
-  let R0 = rederive(town.base, town.cfg, EMPTY_DM_LAYER, ENGINE, CONSULT).record;
+  let state = startChain(town);
   for (const label of labels) {
-    const plan = EDITS.find(([id]) => id === label)[2](record, town.cfg);
-    if (plan === null) return null;
-    roots = [...roots, ...plan.roots];
-    const R1 = rederive(plan.rec, town.cfg, layerOf(roots), ENGINE, CONSULT).record;
-    const out = mergeConsequence(plan.rec, clone(R0), clone(R1), { edit: { id: label, opType: label } });
-    record = out.record; R0 = out.delta.nextBase; rideAlong += out.delta.honesty.rideAlong;
+    state = stepChain(town, state, label);
+    if (state === null) return null;
   }
-  return { record, rideAlong };
+  return { record: state.record, rideAlong: state.rideAlong };
 }
 const SEQUENCES = Object.freeze([['E1', 'E5'], ['E5', 'E6'], ['E3', 'E5'], ['E2', 'E6']]);
 const UNDO_EDITS = Object.freeze(['E2', 'E5']);
@@ -249,9 +261,18 @@ function chainCensus() {
       out.undoTrials += 1;
       if (h(first.record) !== h(again.record)) out.undoDrifted.push(`${town.key}:${label}`);
     }
+    // ⭐ CACHED BY PREFIX (2026-10-01): the starting R0 and each single-edit state are computed ONCE
+    // per town and stepped from for all thirty ordered pairs, where every pair used to re-derive both.
+    // Measured alone this arm was 325 s and it timed out at 600 s under full-suite load; `stepChain` is
+    // pure over its state, so the census figures are unchanged (A5 and A7 hold them). The determinism
+    // and undo arms above still run their chains twice, independently, which is their whole point.
+    const start = startChain(town);
+    const firsts = new Map(PAIR_EDITS.map((label) => [label, stepChain(town, start, label)]));
     for (const first of PAIR_EDITS) for (const second of PAIR_EDITS) {
       if (first === second) continue;
-      const forward = runChain(town, [first, second]); const backward = runChain(town, [second, first]);
+      const fromFirst = firsts.get(first); const fromSecond = firsts.get(second);
+      const forward = fromFirst === null ? null : stepChain(town, fromFirst, second);
+      const backward = fromSecond === null ? null : stepChain(town, fromSecond, first);
       if (forward === null || backward === null) continue;
       out.pairTrials += 1;
       if (forward.rideAlong > 0) { out.rideAlongChains += 1; out.rideAlongLeaves += forward.rideAlong; }
