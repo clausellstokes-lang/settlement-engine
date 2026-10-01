@@ -264,7 +264,11 @@ const SENTINEL = 'settlementforge:generation:worker-v1';
 // the window's final source reads 1,423,648 B (generation.worker-TUOc-4XJ.js) on a fresh `vite build`. MONOTONE-DOWN from here.
 // 1,423,648 -> 1,423,600 (2026-10-01, the urban-band chair): DOWN 48 B, the monotone-down rule followed. FIX-G1 (4f4747a2b)
 // counts the published dependency list at one site; a fresh `vite build` reads 1,423,600 B (generation.worker-BXVm63G5.js).
-export const WORKER_BUNDLE_CEILING_BYTES = 1423600;
+// 1,423,600 -> 1,416,569 (2026-10-01, the urban-band chair): DOWN 7,031 B, the monotone-down rule followed, and the owner's
+// rise above now funds only bytes still spent. The registry's first-paint buy-back (each value spelled once; every export
+// identical across its 518 rows; tests/build/vendorPdfLazy.test.js) shrinks the worker with it: a fresh `vite build` reads
+// 1,416,569 B (generation.worker-BZWdxs0z.js).
+export const WORKER_BUNDLE_CEILING_BYTES = 1416569;
 
 const source = (path) => readFileSync(join(ROOT, path), 'utf8');
 

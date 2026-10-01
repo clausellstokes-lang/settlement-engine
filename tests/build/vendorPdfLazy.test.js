@@ -562,7 +562,7 @@ const requireDistRead = process.env.VERIFY_DIST === '1';
 // terms with their costs): **"do what you recommend"** — and the recommendation on the table
 // was this raise. Ledger §880.8; the seam is RECORDED AS PRICED AND NOT TAKEN, its prototype
 // kept out of the tree. Monotone-down and owner-signed discipline unchanged.
-const CLOSURE_BUDGET_BYTES = 1_048_000;
+const CLOSURE_BUDGET_BYTES = 1_048_000; // 2026-10-01: unchanged, red cleared by the urban band's own bytes (note at file end)
 // Transfer budgets measure each fetched chunk independently, matching CDN
 // compression rather than compressing an artificial concatenation. Recorded
 // 2026-07-24 from the seven-file closure: raw 1,034,954; gzip 321,341;
@@ -1833,3 +1833,19 @@ describe('ARCH car 2 — the three first-paint budgets stay where the owner sign
       + 'are the owner\'s signature rather than a lane\'s edit').toEqual([]);
   });
 });
+
+// ── NOTES PLANTED AT THE FILE'S END so no cited `vendorPdfLazy.test.js:<line>` moves ──────────────
+// ── (2026-10-01, THE URBAN BAND, ODQ §934.86) BUDGET UNCHANGED AT 1,048,000; RED CLEARED BY THE
+//    REGISTRY'S OWN BYTES (for CLOSURE_BUDGET_BYTES above) ──
+// The institution registry is GENUINELY EAGER: domain/worldPulse/tierOutcomeApply.js (main.jsx ->
+// store/index.js -> settlementSlice.js -> events/mutateEntities.js -> tierOutcomeApply.js) and
+// domain/institutionClassify.js read it synchronously, so placement cannot move it, and an async seam
+// is the store-API change the T13 block above refuses. Its tip read 1,053,273 B, 5,273 OVER, against
+// the FP base 5d699cc68's 1,037,880 (data +14,436, engine-core +957). The budget was NOT raised: the
+// registry was re-expressed with each value spelled once (deriveRow's two defaults left unwritten,
+// families grouped by shelf, a non-numeric value two entries share moved to `shared`), every export
+// proved identical across all 518 rows, data 129,351 -> 122,369 (-6,982). MEASURED 1,046,291 across
+// the same 8 chunks, 1,709 B under; gzip 333,922 / 337,000 and Brotli 280,095 / 283,000 (base 330,362
+// / 277,233). ⚠ THIS LANDING SPENDS 8,411 B OF THE MARGIN the C5 note reserves for honest
+// registration costs, which is the content the owner approved; 1,709 B remain for every other lane.
+// Monotone-down and owner-signed discipline unchanged.
