@@ -57,7 +57,10 @@ const CHOOSER_WALKER = 'tests/lint/chooserTotality.walker.test.js';
  * so a control cannot go on describing a thing that changed. It knows `function` and `const`
  * and nothing else, which is exactly why it cannot name a registered step.
  */
-const MODEL_DECL_LINE = 'const decl = /^(?:export\\s+)?(?:async\\s+)?function\\s+([A-Za-z_$][\\w$]*)'
+// RE-POINTED 2026-10-01 (the urban-band chair, a base red picked up under the owner's "do it all"): U10
+// (da720b26d) hoisted the walker's local `decl` to the module-level `TOP_LEVEL_DECL`, the form set itself
+// byte-identical, so the quote follows the name and the model below is unchanged.
+const MODEL_DECL_LINE = 'const TOP_LEVEL_DECL = /^(?:export\\s+)?(?:async\\s+)?function\\s+([A-Za-z_$][\\w$]*)'
   + '|^(?:export\\s+)?const\\s+([A-Za-z_$][\\w$]*)\\s*=/gm;';
 const modelDeclaredSymbols = (raw) => {
   const decl = /^(?:export\s+)?(?:async\s+)?function\s+([A-Za-z_$][\w$]*)|^(?:export\s+)?const\s+([A-Za-z_$][\w$]*)\s*=/gm;
