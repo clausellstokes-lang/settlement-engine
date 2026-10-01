@@ -516,23 +516,28 @@ const desktopShape = (perView) => Object.fromEntries(
  *     forty-five characters at which anything is measured, so the artefact line
  *     is gone rather than any real one.
  */
+// ── RE-MEASURED 2026-10-01, the urban band (ODQ §934.86): no desktop token moved. The fixture town is generated from
+// a fixed seed and the rebuilt institution registry changed that world, so nine views' counts moved with it
+// (Systems/Services 64 -> 96, Systems/Economics 34 -> 47, World/Relationships 69 -> 63, Summary/Overview 19 -> 20,
+// Summary/Plot Hooks 59 -> 58, Systems/Power 29 -> 28, Systems/Defense 26 -> 28, Systems/Resources 4 -> 5,
+// World/NPCs 46 -> 45); the rest hold. Re-measured by this file's own walk at the committed tree, not predicted.
 const DESKTOP_BASELINE = Object.freeze({
-  "Summary/Overview":    { measured: 19, sub14: 19 },
+  "Summary/Overview":    { measured: 20, sub14: 20 },
   "Summary/DM Summary":  { measured:  9, sub14:  8 },
-  "Summary/Plot Hooks":  { measured: 59, sub14: 59 },
-  "Systems/Services":    { measured: 64, sub14: 64 },
-  "Systems/Economics":   { measured: 34, sub14: 34 },
-  "Systems/Power":       { measured: 29, sub14: 27 },
-  "Systems/Defense":     { measured: 26, sub14: 25 },
-  "Systems/Resources":   { measured:  4, sub14:  4 },
+  "Summary/Plot Hooks":  { measured: 58, sub14: 58 },
+  "Systems/Services":    { measured: 96, sub14: 96 },
+  "Systems/Economics":   { measured: 47, sub14: 47 },
+  "Systems/Power":       { measured: 28, sub14: 27 },
+  "Systems/Defense":     { measured: 28, sub14: 28 },
+  "Systems/Resources":   { measured:  5, sub14:  5 },
   // 4 -> 5 (2026-09-19, browser pass 3 car 4): the receipt strip's culture line now reads the
   // identity's LABEL ("South-Asian-inspired") instead of a key, so it crosses the walk's
   // forty-five characters and is measured — and it is prose, so it takes the prose floor.
   "Systems/Outlook":     { measured:  5, sub14:  5 },
   "Systems/Causes":      { measured:  2, sub14:  2 },
   "Systems/Magic":       { measured:  1, sub14:  1 },
-  "World/NPCs":          { measured: 46, sub14: 46 },
-  "World/Relationships": { measured: 69, sub14: 68 },
+  "World/NPCs":          { measured: 45, sub14: 45 },
+  "World/Relationships": { measured: 63, sub14: 63 },
   "World/Faith":         { measured:  1, sub14:  1 },
   "World/Daily Life":    { measured:  1, sub14:  1 },
   "World/Traditions":    { measured:  3, sub14:  3 },
@@ -569,20 +574,23 @@ const DESKTOP_BASELINE = Object.freeze({
  *
  * Re-measure and re-record ONLY with the shift stated as a deliberate change.
  */
+// ── RE-MEASURED 2026-10-01, the urban band (ODQ §934.86): the same fixture town, a re-generated world. Totals prose
+// 373 -> 418, chrome 18 -> 13, sub14 15 -> 11, sub12 0 -> 0 (the one that must stay zero stays zero, and every
+// line still clears its floor: the floors arm above is green on this walk). Nine views moved, nine hold.
 const MOBILE_BASELINE = Object.freeze({
-  "Summary/Overview":    { prose: 17, chrome: 2, sub14: 1, sub12: 0 },
+  "Summary/Overview":    { prose: 19, chrome: 1, sub14: 0, sub12: 0 },
   "Summary/DM Summary":  { prose:  9, chrome: 0, sub14: 0, sub12: 0 },
-  "Summary/Plot Hooks":  { prose: 56, chrome: 3, sub14: 3, sub12: 0 },
-  "Systems/Services":    { prose: 64, chrome: 0, sub14: 0, sub12: 0 },
-  "Systems/Economics":   { prose: 30, chrome: 3, sub14: 3, sub12: 0 },
-  "Systems/Power":       { prose: 27, chrome: 2, sub14: 0, sub12: 0 },
-  "Systems/Defense":     { prose: 26, chrome: 0, sub14: 0, sub12: 0 },
-  "Systems/Resources":   { prose:  3, chrome: 1, sub14: 1, sub12: 0 },
+  "Summary/Plot Hooks":  { prose: 58, chrome: 0, sub14: 0, sub12: 0 },
+  "Systems/Services":    { prose: 96, chrome: 0, sub14: 0, sub12: 0 },
+  "Systems/Economics":   { prose: 39, chrome: 7, sub14: 7, sub12: 0 },
+  "Systems/Power":       { prose: 27, chrome: 1, sub14: 0, sub12: 0 },
+  "Systems/Defense":     { prose: 27, chrome: 1, sub14: 1, sub12: 0 },
+  "Systems/Resources":   { prose:  4, chrome: 1, sub14: 1, sub12: 0 },
   "Systems/Outlook":     { prose:  5, chrome: 0, sub14: 0, sub12: 0 },
   "Systems/Causes":      { prose:  2, chrome: 0, sub14: 0, sub12: 0 },
   "Systems/Magic":       { prose:  1, chrome: 0, sub14: 0, sub12: 0 },
-  "World/NPCs":          { prose: 45, chrome: 1, sub14: 1, sub12: 0 },
-  "World/Relationships": { prose: 63, chrome: 6, sub14: 6, sub12: 0 },
+  "World/NPCs":          { prose: 45, chrome: 0, sub14: 0, sub12: 0 },
+  "World/Relationships": { prose: 61, chrome: 2, sub14: 2, sub12: 0 },
   "World/Faith":         { prose:  1, chrome: 0, sub14: 0, sub12: 0 },
   "World/Daily Life":    { prose:  1, chrome: 0, sub14: 0, sub12: 0 },
   "World/Traditions":    { prose:  3, chrome: 0, sub14: 0, sub12: 0 },
