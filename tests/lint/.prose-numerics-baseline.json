@@ -997,37 +997,37 @@
   },
   {
     "path": "src/generators/steps/assembleInstitutions.js",
-    "line": 62,
+    "line": 66,
     "category": "floatInterpolation",
     "snippet": "`Base chance for this tier/category was ${Math.round(baseChance * 100)}%.`"
   },
   {
     "path": "src/generators/steps/assembleInstitutions.js",
-    "line": 62,
+    "line": 66,
     "category": "percentToken",
     "snippet": "`Base chance for this tier/category was ${Math.round(baseChance * 100)}%.`"
   },
   {
     "path": "src/generators/steps/assembleInstitutions.js",
-    "line": 69,
+    "line": 73,
     "category": "floatInterpolation",
     "snippet": "`Base chance ${Math.round(baseChance * 100)}% ${lift} by ×${resourceMult.toFixed(2)} from nearby resources + terrain.`"
   },
   {
     "path": "src/generators/steps/assembleInstitutions.js",
-    "line": 69,
+    "line": 73,
     "category": "multiplier",
     "snippet": "`Base chance ${Math.round(baseChance * 100)}% ${lift} by ×${resourceMult.toFixed(2)} from nearby resources + terrain.`"
   },
   {
     "path": "src/generators/steps/assembleInstitutions.js",
-    "line": 69,
+    "line": 73,
     "category": "percentToken",
     "snippet": "`Base chance ${Math.round(baseChance * 100)}% ${lift} by ×${resourceMult.toFixed(2)} from nearby resources + terrain.`"
   },
   {
     "path": "src/generators/steps/assembleInstitutions.js",
-    "line": 69,
+    "line": 73,
     "category": "twoDecimalScore",
     "snippet": "`Base chance ${Math.round(baseChance * 100)}% ${lift} by ×${resourceMult.toFixed(2)} from nearby resources + terrain.`"
   },

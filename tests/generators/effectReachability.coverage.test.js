@@ -232,7 +232,9 @@ const CORPUS = Object.freeze([
     id: 'city-with-walls-excluded',
     targets: 'unsupported-institution repair: the DM force-excludes city walls, so '
       + 'a generated Citadel loses its only hard dependency AND every substitute '
-      + 'the tier could offer — the repair pass must remove the dependent',
+      + 'the tier could offer — the repair pass must remove the dependent. Since the '
+      + 'urban band (2026-09-30, ODQ §934.86) a Citadel accepts Town walls as well, so the '
+      + 'specimen excludes BOTH wall rungs a city could reach for; the effect is unchanged',
     seed: 'effect-reach-v1-city-with-walls-excluded',
     config: Object.freeze({
       settType: 'city',
@@ -243,6 +245,7 @@ const CORPUS = Object.freeze([
       priorityMilitary: 95,
       _institutionToggles: Object.freeze({
         'city::Defense::City walls and gates': Object.freeze({ forceExclude: true }),
+        'city::Defense::Town walls': Object.freeze({ forceExclude: true }),
       }),
     }),
   },
@@ -261,7 +264,9 @@ const CORPUS = Object.freeze([
     // Re-pinned `-1` to `-8` on 2026-08-01 (I1 catalog stream translation, see the block
     // note above); `-8` is one of the 14-in-40 seeds where the cart shed seats and the
     // authored `subsumes` reference then removes it, with the paired control still silent.
-    seed: 'effect-reach-v1-custom-subsumption-town-8',
+    // Re-pinned `-8` to `-2` on 2026-09-30 (the urban-band registry re-ordered the town's
+    // catalog draws, ODQ §934.86); `-2` is the first sibling where the same holds again.
+    seed: 'effect-reach-v1-custom-subsumption-town-2',
     config: Object.freeze({
       settType: 'town',
       culture: 'latin',
@@ -303,7 +308,9 @@ const CORPUS = Object.freeze([
       + "every route it does not name, while INSTITUTION_SPATIAL's requiredAccess "
       + 'is an inclusion-list that rejects it), so the Fishmonger seats and the '
       + 'access check removes it — fired on 10 of 40 sibling seeds',
-    seed: 'effect-reach-v1-mountain-pass-fishmonger-6',
+    // Re-pinned `-6` to `-8` on 2026-09-30 (the urban-band registry re-ordered the village's
+    // catalog draws, ODQ §934.86): `-8` is the first sibling that seats the Fishmonger again.
+    seed: 'effect-reach-v1-mountain-pass-fishmonger-8',
     config: Object.freeze({
       settType: 'village',
       culture: 'germanic',

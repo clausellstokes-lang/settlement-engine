@@ -3,7 +3,7 @@
 // Shared cascade helpers for the settlement generation pipeline.
 
 import { random as _rng } from '../kernel/rngContext.js';
-import { institutionalCatalog } from '../data/institutionalCatalog.js';
+import { institutionalCatalog, institutionRowGuardsPass } from '../data/institutionalCatalog.js';
 import { institutionToggleFor } from './institutionToggleReader.js';
 import { SUPPLY_CHAIN_NEEDS } from '../data/goods/chains.js';
 import {
@@ -75,6 +75,7 @@ function applyCascadeInstitutions(institutions, tier, opts = {}) {
     terrainType = null,
     institutionToggles = null,
     worldLaw = null,
+    population = null,
   } = opts;
   const TIER_ORD  = ['thorp','hamlet','village','town','city','metropolis'];
   const tierIdx   = TIER_ORD.indexOf(tier);
@@ -169,6 +170,9 @@ function applyCascadeInstitutions(institutions, tier, opts = {}) {
         // minTier floor: a catalog entry can sit in a lower tier's catalog while
         // declaring a higher floor — the cascade must not seat it below that floor.
         if (data.minTier && TIER_ORD.indexOf(data.minTier) > tierIdx) return;
+        // The registry's row guards (a stated population floor, a named prerequisite): a
+        // second chance cannot seat what the first roll's guards refused.
+        if (!institutionRowGuardsPass(t, name, { population, presentNames: existingNames })) return;
         // User toggles: a DM's explicit exclusion survives the cascade — the
         // second-chance roll must not resurrect what the user turned off.
         if (toggleExcluded(name, cat, t)) return;

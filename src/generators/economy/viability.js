@@ -31,9 +31,9 @@ const WATER_ROUTES = ['coastal', 'riverside'];
 
 
 // Tier-plausible institution availability — the SAME model assembleInstitutions
-// uses: a settlement of tier T draws only from institutionalCatalog[T]
-// (metropolis merges the city section in), and an entry whose own minTier sits
-// above T is skipped. Viability suggestions may only name institutions the
+// uses: a settlement of tier T draws only from institutionalCatalog[T] (every tier
+// block is complete since the urban-band registry, so no section is merged in), and
+// an entry whose own minTier sits above T is skipped. Viability suggestions may only name institutions the
 // settlement could actually generate at its tier — a thorp's grain gap reads
 // "Mill", never a hundred-item catalog dump with slave markets in it.
 const tierCatalogNameCache = new Map();
@@ -41,9 +41,7 @@ const tierCatalogNameCache = new Map();
 const catalogNamesAvailableAtTier = (tier) => {
   const t = TIER_ORDER.includes(tier) ? tier : 'village';
   if (tierCatalogNameCache.has(t)) return tierCatalogNameCache.get(t);
-  const sections = t === 'metropolis'
-    ? [institutionalCatalog.city || {}, institutionalCatalog.metropolis || {}]
-    : [institutionalCatalog[t] || {}];
+  const sections = [institutionalCatalog[t] || {}];
   const tierIdx = TIER_ORDER.indexOf(t);
   const names = sections.flatMap((section) =>
     Object.values(section).flatMap((group) =>

@@ -197,6 +197,10 @@ export const NON_CASCADED_SURFACES = Object.freeze([
     why: 'the structural validator AUTHORED advice, rendered as a Consider line: a statement about what the town should build, never a reference to what it has' },
   { path: 'economicState.compound.inst.names[]', kind: 'frozen-stamp', readable: false,
     why: 'the LOWERCASED roster stamped once beside the booleans it produced and never recomputed on advance, owner-gated: rewriting the names would make them disagree with their own flags inside a frozen structure nothing reads' },
+  { path: 'factions[].powerFactionName', kind: 'label', readable: false,
+    why: 'a FACTION name, owned by the faction rename ledger (src/domain/factionRename.js): it equals a catalog institution name only where the power structure names a governing body\'s faction after the body (\'Democratic assembly\', observable since the urban band\'s weighted government seat of 2026-09-30, ODQ §934.86), and renaming the institution must not silently rename a faction the DM may have renamed on its own' },
+  { path: 'factions[].members[].factionAffiliation', kind: 'label', readable: false,
+    why: 'the same faction name stamped on each member: it follows the FACTION ledger, never the institution one, for the reason the row above gives' },
   { path: 'economicState.safetyProfile.compound.inst.names[]', kind: 'frozen-stamp', readable: false,
     why: 'the SECOND independent stamp, not an alias: economicState and safetyProfile each call getInstFlags, so the two arrays are never the same object. Aliased or duplicated stamps DECLARE ONCE PER PATH by design, because the walk addresses by path and a reloaded save has already split any alias' },
 ]);

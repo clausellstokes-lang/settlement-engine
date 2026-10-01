@@ -42,7 +42,8 @@ const FACET_KINDS = Object.freeze(['institutionNature', 'institutionFunction', '
 
 /** Every catalog row in the production shape the generator spreads onto a settlement —
  *  `{ category, name, ...entry }`, the same shape tests/domain/undercityStrataExistence.js
- *  builds. One entry per (tier, category, name) triple, which is the 316-row denominator. */
+ *  builds. One entry per (tier, category, name) triple, which is the 518-row denominator (316
+ *  until the urban-band registry of 2026-09-30, ODQ §934.86, carried families across tiers). */
 const CATALOG_ROWS = Object.freeze(Object.entries(institutionalCatalog).flatMap(([tier, groups]) =>
   Object.entries(groups).flatMap(([category, rows]) =>
     Object.entries(rows).map(([name, entry]) => Object.freeze({
@@ -95,21 +96,35 @@ const PRE_CH1_INFERENCE = Object.freeze({
  * stops moving reds too. To land a further deliberate change to `FACET_INFERENCE`, APPEND
  * the cells it moves with their reason. Never delete a row to make this green.
  */
+// ⚠ RE-ADDRESSED, NOT RE-DECIDED (the urban band, 2026-09-30, ODQ §934.86). The four rows CH-1
+// cured did not change; the registry moved three of their ADDRESSES — Warden's Lodge from the
+// Magic to the Defense shelf, the Charlatan fortune tellers from Adventuring to Entertainment,
+// and the Dragon resident from the city block (where `minTier` gated it to metropolis) to the
+// metropolis block — and carried the fortune tellers to city and metropolis, which are the same
+// cure at two more addresses. Every `why` below is CH-1's, unchanged.
 const DECLARED_INFERENCE_DELTA = Object.freeze({
   'village/Religious/Priest (resident)::institutionNature': {
     before: 'vice', after: null,
     why: 'the bare /den/ matched "resi(den)t" — a parish priest drew the tavern interior',
   },
-  "town/Magic/Warden's Lodge::institutionNature": {
+  "town/Defense/Warden's Lodge::institutionNature": {
     before: 'vice', after: null,
     why: 'the bare /den/ matched "War(den)\'s"',
   },
-  'town/Adventuring/Charlatan fortune tellers::institutionNature': {
+  'town/Entertainment/Charlatan fortune tellers::institutionNature': {
     before: 'security', after: null,
     why: 'the bare /fort/ matched "fortune" — a booth read as a barracks; "fortune" opens a '
       + 'word, so only the \\bforts?\\b|\\bfortif|\\bfortress stem set separates the two',
   },
-  'city/Exotic/Dragon resident::institutionNature': {
+  'city/Entertainment/Charlatan fortune tellers::institutionNature': {
+    before: 'security', after: null,
+    why: 'the same row carried to city by the urban band; the same /fort/ cure',
+  },
+  'metropolis/Entertainment/Charlatan fortune tellers::institutionNature': {
+    before: 'security', after: null,
+    why: 'the same row carried to metropolis by the urban band; the same /fort/ cure',
+  },
+  'metropolis/Exotic/Dragon resident::institutionNature': {
     before: 'vice', after: null,
     why: 'the bare /den/ matched "resi(den)t"',
   },
@@ -154,7 +169,7 @@ describe('§I FACET INFERENCE HONESTY — the anchoring walker (CH-1, ODQ §503.
     // were wrong, A3 would be measuring this file's own bug. This arm rules that out by
     // executing the parsed live table against the real chokepoint, cell by cell.
     // MUTANT: drop one alternative from the parser's regex → the reproduction breaks.
-    expect(CATALOG_ROWS.length, 'the catalog row count moved — re-measure, do not re-word').toBe(316);
+    expect(CATALOG_ROWS.length, 'the catalog row count moved — re-measure, do not re-word').toBe(518);
     const disagreements = [];
     for (const row of CATALOG_ROWS) {
       const bare = inferenceOnly(row.inst);
@@ -165,7 +180,7 @@ describe('§I FACET INFERENCE HONESTY — the anchoring walker (CH-1, ODQ §503.
       }
     }
     expect(disagreements).toEqual([]);
-    expect(CATALOG_ROWS.length * FACET_KINDS.length).toBe(948);
+    expect(CATALOG_ROWS.length * FACET_KINDS.length).toBe(1554);
   });
 
   it('A1 · the four mis-inferring rows stop asserting a nature, and the DERIVED INTERIOR each one draws moves to `generic`', () => {
@@ -175,9 +190,9 @@ describe('§I FACET INFERENCE HONESTY — the anchoring walker (CH-1, ODQ §503.
     // `security` again and draws the barracks. Both were executed at the build.
     const cured = [
       ['village/Religious/Priest (resident)', 'vice'],
-      ["town/Magic/Warden's Lodge", 'vice'],
-      ['town/Adventuring/Charlatan fortune tellers', 'security'],
-      ['city/Exotic/Dragon resident', 'vice'],
+      ["town/Defense/Warden's Lodge", 'vice'],
+      ['town/Entertainment/Charlatan fortune tellers', 'security'],
+      ['metropolis/Exotic/Dragon resident', 'vice'],
     ];
     const observed = cured.map(([at]) => {
       const row = CATALOG_ROWS.find((r) => r.at === at);
@@ -191,9 +206,9 @@ describe('§I FACET INFERENCE HONESTY — the anchoring walker (CH-1, ODQ §503.
     });
     expect(Object.fromEntries(observed)).toEqual({
       'village/Religious/Priest (resident)': { inferredNature: null, liveInteriorKind: 'generic' },
-      "town/Magic/Warden's Lodge": { inferredNature: null, liveInteriorKind: 'generic' },
-      'town/Adventuring/Charlatan fortune tellers': { inferredNature: null, liveInteriorKind: 'generic' },
-      'city/Exotic/Dragon resident': { inferredNature: null, liveInteriorKind: 'generic' },
+      "town/Defense/Warden's Lodge": { inferredNature: null, liveInteriorKind: 'generic' },
+      'town/Entertainment/Charlatan fortune tellers': { inferredNature: null, liveInteriorKind: 'generic' },
+      'metropolis/Exotic/Dragon resident': { inferredNature: null, liveInteriorKind: 'generic' },
     });
     // and the BEFORE half, so the arm records a move rather than a state: each of the four
     // DID read the wrong nature under the pre-CH-1 table.
@@ -253,10 +268,10 @@ describe('§I FACET INFERENCE HONESTY — the anchoring walker (CH-1, ODQ §503.
       + 'the only record of what the anchoring actually cost.',
     ).toEqual(Object.fromEntries(Object.entries(DECLARED_INFERENCE_DELTA)
       .map(([k, v]) => [k, { before: v.before, after: v.after }])));
-    expect(Object.keys(moved).length).toBe(4);
+    expect(Object.keys(moved).length).toBe(6);
   });
 
-  it('A4 · the undercity SEED GATE is still: `institutionSubstructure` moves zero of the 316 rows', () => {
+  it('A4 · the undercity SEED GATE is still: `institutionSubstructure` moves zero of the 518 rows', () => {
     // The existence gate (ODQ §311.1) reads this kind through the same chokepoint, so the
     // anchoring had to be proved inert here rather than assumed.
     // MUTANT, EXECUTED AND CORRECTED AT THE BUILD: dropping the `^` from `^access to ` does
@@ -357,7 +372,11 @@ describe('§I FACET INFERENCE HONESTY — the anchoring walker (CH-1, ODQ §503.
     const declared = CATALOG_ROWS
       .filter((row) => row.inst.facets && typeof row.inst.facets === 'object')
       .map((row) => ({ at: row.at, facets: row.inst.facets }));
-    expect(declared.length, 'the declared-facet scan found nothing — it is no longer live').toBe(5);
+    // ── COUNT MOVED 5 → 6 BY THE URBAN BAND (2026-09-30): the `Underground network` family now
+    // has its own metropolis entry (it used to reach the metropolis only through the retired
+    // city+metropolis merge), so the rows carrying a `facets` map are four networks plus the two
+    // metropolis rows.
+    expect(declared.length, 'the declared-facet scan found nothing — it is no longer live').toBe(6);
     const VALUES_BY_KIND = Object.fromEntries(Object.entries(LIVE_TABLE)
       .map(([kind, rowsForKind]) => [kind, rowsForKind.map((r) => r.value)]));
     const check = (facets, at) => Object.entries(facets)

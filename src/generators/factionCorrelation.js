@@ -3,7 +3,7 @@
 // Dominant factions get extra institution chances in their category,
 // constrained by tier caps so small settlements don't over-inflate.
 
-import { institutionalCatalog } from '../data/institutionalCatalog.js';
+import { institutionalCatalog, institutionRowGuardsPass } from '../data/institutionalCatalog.js';
 import { getBaseChance } from './institutionProbability.js';
 import { chance } from './helpers.js';
 import { ARCANE_INST_TAGS, ARCANE_INST_KW } from '../domain/magicFilter.js';
@@ -101,7 +101,7 @@ export function deriveFactionBoosts(factions, tier) {
  */
 export function applyFactionInstitutionBoosts(
   boosts, existingInstitutions, tier, config,
-  institutionToggles = {}, categoryToggles = {}
+  institutionToggles = {}, categoryToggles = {}, population = null,
 ) {
   const cap      = TIER_BOOST_CAPS[tier] || 0;
   if (cap === 0 || boosts.length === 0) return [];
@@ -177,6 +177,8 @@ export function applyFactionInstitutionBoosts(
           if (terrainType && def.terrainRequired && !def.terrainRequired.includes(terrainType)) return false;
           if (def.exclusiveGroup && takenGroups.has(def.exclusiveGroup)) return false;
           if (def.exclusionConditions?.some(ex => existingExact.has(ex))) return false;
+          // The registry's row guards (a stated population floor, a named prerequisite).
+          if (!institutionRowGuardsPass(tier, name, { population, presentNames: existingExact })) return false;
           // Skip arcane-tagged institutions when magic doesn't exist
           if (config?.magicExists === false) {
             const n = name.toLowerCase();

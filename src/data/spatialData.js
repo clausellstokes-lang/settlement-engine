@@ -71,7 +71,9 @@ export const GATE_FEATURES = {
     reason: "Gates are entry points in walls. Walls must exist first."
   },
   Citadel: {
-    requires: [CITY_WALLS_AND_GATES, MASSIVE_WALLS_AND_FORTIFICATIONS],
+    // 'Town walls' added 2026-09-30: a castle town's citadel stands inside town walls, and
+    // without it every town citadel the registry now rolls was deleted as unsupported.
+    requires: ["Town walls", CITY_WALLS_AND_GATES, MASSIVE_WALLS_AND_FORTIFICATIONS],
     reason: "Inner fortress requires outer defenses."
   },
   Garrison: {
@@ -317,8 +319,8 @@ export const GATE_FEATURES = {
     reason: "Specialization emerges from established metalworking tradition."
   },
   "Printing house": {
-    minTier: "city",
-    requires: ["Great library", CRAFT_GUILDS_30_80],
+    minTier: "town",
+    requires: ["Great library", CRAFT_GUILDS_30_80, CRAFT_GUILDS_5_15],
     reason: "Printing requires paper supply, literate market, and skilled craft workers."
   },
   Glassmakers: {
@@ -354,7 +356,9 @@ export const GATE_FEATURES = {
     reason: "A sawmill needs timber access: local forest, a market, or an agricultural economy to source bulk timber commercially."
   },
   Theaters: {
-    minTier: "city",
+    // town since 2026-09-30: the urban band lets a prosperous town keep a small playhouse
+    // (the registry rolls it at 0.15 there); the gate floor may not sit above the catalog.
+    minTier: "town",
     reason: "Professional performance requires wealthy audience and cultural sophistication."
   },
   "Multiple theaters": {
@@ -369,7 +373,9 @@ export const GATE_FEATURES = {
   },
   "Colosseum/arena": {
     minTier: "metropolis",
-    requires: ["Fighting pits"],
+    // The gladiatorial school "feeds the arena circuit" (its own row) and the subsumption pass
+    // absorbs fighting pits into it, so a school must satisfy the arena on its own.
+    requires: ["Fighting pits", "Gladiatorial school"],
     reason: "Colosseum-scale entertainment requires enormous investment and audience."
   },
   "Gambling district": {
@@ -471,7 +477,9 @@ export const GATE_FEATURES = {
     reason: "Enchantment services require established arcane infrastructure."
   },
   "Mages' guild": {
-    minTier: "city",
+    // town since 2026-09-30: a chapter needs 2,000+ people (its row's minPopulation), which
+    // the larger towns reach; the gate floor may not sit above the catalog.
+    minTier: "town",
     requires: ["Wizard's tower"],
     reason: "Organized magical guild requires established tower infrastructure."
   },

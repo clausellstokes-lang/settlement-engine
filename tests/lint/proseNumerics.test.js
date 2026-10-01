@@ -84,6 +84,12 @@ const BASELINE_PATH = join(ROOT, 'tests/lint/.prose-numerics-baseline.json');
 // a 504-settlement corpus). None of them is debt and none is in this baseline: the detector
 // reads numerics that FLOW INTO A PROSE KEY, not numbers written in comments. Humanizing
 // them would have removed reviewable evidence to satisfy an instrument that never saw it.
+// URBAN BAND (ODQ §934.86, 2026-09-30) — SIX PURE LINE MOVES, NO DEBT MOTION. The registry's
+// row-guard import widened assembleInstitutions.js's import block by four lines, so its six
+// legacy rows re-address 62 -> 66 and 69 -> 73 with path, category and snippet byte-identical.
+// The weighted exclusive group's new trace was HUMANIZED before it landed ("won the group
+// seat"; "goes to one of them in proportion to their chances") rather than banked as two
+// percentage tokens, so the census and every ceiling are unmoved.
 // ── LOWERED 2026-08-29 BY TE-STRIP-1 (owner ruling, ODQ §725) ─────────────────────
 // 413 → 408, floatInterpolation 236 → 233, percentToken 79 → 77. THE CAUSE IS TWO DELETED
 // FILES and nothing else: src/components/townMap/scene3d/TownSceneInspector.jsx (3 rows —

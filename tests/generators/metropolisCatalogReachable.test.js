@@ -33,6 +33,17 @@
  *
  * This is a deliberate contract change, not a test fixup: reverting the `lookups.js`
  * filter must red this arm.
+ *
+ * ── SECOND AMENDMENT, THE URBAN BAND (owner-approved 2026-09-30, ODQ §934.86) ────────
+ * The catalog is now a registry of families with an entry at every tier they exist, and
+ * every tier block is COMPLETE: the metropolis block lists every city function at
+ * metropolis scale itself, so no lookup merges the city block in any more (that merge put
+ * 'Parish churches (10-30)' beside '(50-100+)' in 191 of 200 metropolises). The ten rows
+ * that were authored at one tier and gated to another are listed at their gate tier, so
+ * the gated class is now EMPTY — and the arms below pin both facts: the metropolis block
+ * never holds a city scale rung its own family replaces, and the formerly gated ten are
+ * reachable exactly from the tier they can fire at. The reachability ratchet itself is
+ * unchanged.
  */
 
 import { describe, test, expect } from 'vitest';
@@ -41,7 +52,11 @@ import {
   getFullCatalogWithTierMeta,
   getInstitutionsForTier,
 } from '../../src/generators/lookups.js';
-import { institutionalCatalog } from '../../src/data/institutionalCatalog.js';
+import {
+  institutionalCatalog,
+  INSTITUTION_FAMILIES,
+  familyNamesByTier,
+} from '../../src/data/institutionalCatalog.js';
 import { TIER_ORDER, tierAtLeast } from '../../src/data/constants.js';
 
 const namesOf = (catalog) => {
@@ -72,10 +87,24 @@ describe('[generators-pipeline-5] metropolis catalog is reachable from the looku
     }
   });
 
-  test('getInstitutionsForTier("metropolis") includes both city and metropolis names', () => {
+  test('getInstitutionsForTier("metropolis") is the complete metropolis block, and never a city scale rung its family replaces', () => {
     const set = getInstitutionsForTier('metropolis');
-    for (const n of namesOf(institutionalCatalog.metropolis)) expect(set.has(n)).toBe(true);
-    for (const n of namesOf(institutionalCatalog.city)) expect(set.has(n)).toBe(true);
+    expect([...set].sort()).toEqual([...namesOf(institutionalCatalog.metropolis)].sort());
+    // Every city FUNCTION is present at metropolis scale (the cumulative law)…
+    let replaced = 0;
+    for (const fam of INSTITUTION_FAMILIES) {
+      const byTier = Object.fromEntries(familyNamesByTier(fam).map(e => [e.tier, e.name]));
+      if (!byTier.city) continue;
+      expect({ family: byTier.city, atMetropolis: Boolean(byTier.metropolis) })
+        .toEqual({ family: byTier.city, atMetropolis: true });
+      // …and where the metropolis rung has its own name, the city rung is NOT listed there.
+      if (byTier.metropolis !== byTier.city) {
+        replaced++;
+        expect({ cityRung: byTier.city, inMetropolis: set.has(byTier.city) })
+          .toEqual({ cityRung: byTier.city, inMetropolis: false });
+      }
+    }
+    expect(replaced, 'anti-vacuity: some families change name at metropolis').toBeGreaterThan(10);
   });
 
   // Inventory ratchet, amended per CH-3 §3.1 (see the header): every catalog row is
@@ -106,8 +135,19 @@ describe('[generators-pipeline-5] metropolis catalog is reachable from the looku
         }
       }
     }
-    // Non-vacuity: the gated class exists and is the measured ten.
-    expect(gated.length).toBe(10);
+    // The urban band retired the form: every family names each tier it exists at, so no
+    // row is gated above its own block any more. The ten that were are pinned below.
+    expect(gated).toEqual([]);
+    const formerlyGated = ['Airship docking (high magic)', 'Dream parlors (high magic)', 'Message network (high magic)',
+      'Dragon resident', 'Planar traders', 'Colosseum/arena', 'Gambling district', 'Multiple theaters', 'Opera house'];
+    for (const name of formerlyGated) {
+      expect({ name, city: getInstitutionsForTier('city').has(name), metropolis: getInstitutionsForTier('metropolis').has(name) })
+        .toEqual({ name, city: false, metropolis: true });
+    }
+    // The tenth, the village 'Smuggling network', never rolled at village; it is retired
+    // there (the village rung is the smuggling waypoint) and stays a city row.
+    expect(getInstitutionsForTier('village').has('Smuggling network')).toBe(false);
+    expect(getInstitutionsForTier('city').has('Smuggling network')).toBe(true);
 
     for (const { tier, name, minTier } of gated) {
       expect({ name, tier, visible: namesOf(getInstitutionalCatalog(tier)).has(name) })
@@ -130,17 +170,19 @@ describe('[generators-pipeline-5] metropolis catalog is reachable from the looku
         for (const [name, def] of Object.entries(insts)) {
           const entry = full[category]?.[name];
           if (!entry) continue;
-          // The winner of the name merge is the LAST tier that declares it.
+          // The full-meta view keeps the FIRST (lowest) tier that declares a name.
           expect({ name, gateHonest: tierAtLeast(entry.nativeTier, def.minTier || 'thorp') })
             .toEqual({ name, gateHonest: true });
           if (def.minTier && !tierAtLeast(tier, def.minTier)) gatedSeen++;
         }
       }
     }
-    expect(gatedSeen).toBe(10);
-    // The precise claim for the nine city→metropolis rows that no metropolis block
-    // re-declares: the badge now says metropolis.
+    expect(gatedSeen).toBe(0);
+    // The badge names the LOWEST tier a name can roll at (the urban band keeps the first
+    // tier's entry): the formerly gated rows say metropolis, and a town function carried
+    // up to the metropolis still says town.
     expect(full.Entertainment?.['Colosseum/arena']?.nativeTier).toBe('metropolis');
     expect(full.Exotic?.['Dragon resident']?.nativeTier).toBe('metropolis');
+    expect(full.Economy?.['Beast trainers']?.nativeTier).toBe('town');
   });
 });

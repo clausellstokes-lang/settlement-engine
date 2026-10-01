@@ -39,10 +39,10 @@ import { institutionalCatalog } from './institutionalCatalog.js';
  * [CH-3 §3.1 / J-CH-3-1] THE TIER GATE THE GENERATOR APPLIES, MIRRORED HERE.
  *
  * A catalog row may be AUTHORED in one tier's block and GATED to a higher tier by
- * `minTier` — "author here, gate there". Ten rows use that form today: nine city rows
- * gated to metropolis (four Entertainment, five Exotic) and one village row gated to
- * city. The positions are interleaved with un-gated neighbours inside the same shelf,
- * so the form is authored judgement, not a copy-paste run.
+ * `minTier` — "author here, gate there". Since the urban-band registry (2026-09-30) no
+ * catalog row uses the form: every family names each tier it exists at, and the ten rows
+ * that were gated this way are listed at their gate tier. The gate stays for any row that
+ * still carries the field.
  *
  * `assembleInstitutions` refuses such a row below its gate as its FIRST in-loop act:
  *
@@ -108,9 +108,9 @@ const filterCatalogByTierGate = (catalog, tier) => {
   return out;
 };
 
-// pipeline-5: merge a list of tier catalogs (later tiers override on name clash),
-// mirroring assembleInstitutions.mergeCatalogs so the UI lookup and the generator
-// agree about what a metropolis catalog contains.
+// Merge a list of tier catalogs (later tiers override on name clash). Only the cross-tier
+// 'all' browse uses it now: every tier block is complete since the urban-band registry
+// (2026-09-30), so no tier needs another tier merged in to know what it can hold.
 /** @param {string[]} tiers @returns {CatalogShape} */
 const mergeTierCatalogs = (tiers) => {
   /** @type {CatalogShape} */
@@ -131,10 +131,10 @@ const mergeTierCatalogs = (tiers) => {
  * Return the institutional catalog appropriate for a given tier.
  * Special cases:
  *   - random/custom/no-tier → village catalog (sane default for previews)
- *   - metropolis → city + metropolis merge (the 24 metropolis-only entries — e.g.
- *     Academy of magic, Assassins' guild, Underground city — are reachable so the
- *     UI catalog/force path can author them; pipeline-5)
  *   - 'all' → merged catalog across all tiers (metropolis included)
+ * Every other tier reads its own block, which the registry keeps complete — the metropolis
+ * block lists every city function at metropolis scale itself (the old city+metropolis merge
+ * put a city's scale rows beside the metropolis's own).
  *
  * [CH-3 §3.1] Every tier-specific result is passed through the `minTier` gate, so this
  * never offers a row the generator would refuse at that tier. `'all'` is exempt on
@@ -145,7 +145,6 @@ export const getInstitutionalCatalog = (tier) => {
   if (!tier || tier === 'random' || tier === 'custom') {
     return filterCatalogByTierGate(institutionalCatalog['village'] || {}, 'village');
   }
-  if (tier === 'metropolis') return filterCatalogByTierGate(mergeTierCatalogs(['city', 'metropolis']), 'metropolis');
   if (tier === 'all') return mergeTierCatalogs(TIER_ORDER);
   return filterCatalogByTierGate(institutionalCatalog[tier] || {}, tier);
 };
@@ -158,8 +157,12 @@ export const getInstitutionalCatalog = (tier) => {
  * [CH-3 §3.1] `nativeTier` reports the EFFECTIVE tier — the later of the authoring
  * block and the row's own `minTier`. This view spans every tier, so no row is dropped;
  * what was wrong was the LABEL. `InstitutionalGrid` renders `nativeTier` as the badge
- * and in its "Out-of-tier (… tier)" affordance, so a city-authored, metropolis-gated
- * row used to be advertised as a city row a city could never roll.
+ * and in its "Out-of-tier (… tier)" affordance.
+ *
+ * [URBAN BAND, 2026-09-30] A name that exists at several tiers keeps the LOWEST tier it
+ * can roll at (and that tier's def), so a village browsing the full catalog is told
+ * "town tier" for Beast trainers — the tier it first becomes possible — rather than the
+ * last tier the loop happened to visit.
  */
 export const getFullCatalogWithTierMeta = () => {
   /** @type {Record<string, Record<string, CatalogRow & { nativeTier: string }>>} */
@@ -169,6 +172,7 @@ export const getFullCatalogWithTierMeta = () => {
     for (const [category, insts] of Object.entries(tierCat)) {
       if (!merged[category]) merged[category] = {};
       for (const [name, def] of Object.entries(insts)) {
+        if (merged[category][name]) continue;
         merged[category][name] = { ...def, nativeTier: effectiveTierOf(def, t) };
       }
     }
@@ -182,14 +186,10 @@ export const getFullCatalogWithTierMeta = () => {
  * name-for-name — the store derives "is this in-tier?" affordances from it.
  */
 export const getInstitutionsForTier = (tier) => {
-  // metropolis inherits city AND its own top-tier entries (pipeline-5).
-  const tiers = tier === 'metropolis' ? ['city', 'metropolis'] : [tier];
   const names = new Set();
-  for (const t of tiers) {
-    const cat = institutionalCatalog[t] || {};
-    Object.values(cat).forEach(insts => Object.entries(insts).forEach(([n, def]) => {
-      if (institutionAvailableAtTier(def, tier)) names.add(n);
-    }));
-  }
+  const cat = institutionalCatalog[tier] || {};
+  Object.values(cat).forEach(insts => Object.entries(insts).forEach(([n, def]) => {
+    if (institutionAvailableAtTier(def, tier)) names.add(n);
+  }));
   return names;
 };

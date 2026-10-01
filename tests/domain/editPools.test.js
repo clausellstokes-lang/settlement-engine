@@ -277,13 +277,15 @@ describe('EM-A2a — the pool machinery and the eleven TABLE pools', () => {
       .toEqual([]);
 
     // ⭐ U81 RE-RECORDED (cure lane D2): the same three readings on the CATEGORY axis —
-    // ten groupings at town, eleven at city (the city table opens `Exotic`), eight at the
-    // village default. The tier gate still separates them, which is what these rows pin.
+    // ten groupings at town, eleven at city (the city table opens `Exotic`), ten at the
+    // village default (eight until the urban band of 2026-09-30, ODQ §934.86, carried the
+    // charter hall onto Adventuring and the village musician onto Entertainment). The tier
+    // gate still separates them, which is what these rows pin.
     expect(poolValues('institution.class', { tier: 'town' }).length, 'a real tier reads its own catalogue').toBe(10);
     expect(poolValues('institution.class', { tier: 'city' }).length, 'and a second real tier a different one').toBe(11);
-    expect(poolValues('institution.class', null).length, 'absence reads this module own village default').toBe(8);
-    expect(poolValues('institution.class', undefined).length, 'and so does an absent argument').toBe(8);
-    expect(poolValues('institution.class', {}).length, 'and so does a world with no tier at all').toBe(8);
+    expect(poolValues('institution.class', null).length, 'absence reads this module own village default').toBe(10);
+    expect(poolValues('institution.class', undefined).length, 'and so does an absent argument').toBe(10);
+    expect(poolValues('institution.class', {}).length, 'and so does a world with no tier at all').toBe(10);
     expect(poolValues('institution.class', { tier: 'nonsense' }), 'a non-catalogue tier string answers empty').toEqual([]);
     expect(poolValues('institution.class', { tier: 'random' }), 'and so do the wizard sentinels, which no stored record carries').toEqual([]);
     expect(poolValues('institution.class', { tier: 'custom' }), 'both of them').toEqual([]);
@@ -351,27 +353,24 @@ describe('EM-A2a — the pool machinery and the eleven TABLE pools', () => {
     const cityOnly = cityClasses.filter((grouping) => !townClasses.includes(grouping));
     expect([cityOnly, [poolValues('institution.class', { tier: 'thorp' }).length, townClasses.length, cityClasses.length]],
       'the tier gate on the category axis, executed: a city offers a grouping a town has no'
-      + ' entry for at all, and the ladder widens five to ten to eleven')
-      .toEqual([['Exotic'], [5, 10, 11]]);
+      + ' entry for at all, and the ladder widens seven to ten to eleven (five until the urban band'
+      + ' filed the thorp mill access on Crafts and its palisade and levy on Defense)')
+      .toEqual([['Exotic'], [7, 10, 11]]);
 
-    // (2) THE `minTier` GATE, proved on the READER the pool reads through. It removes
-    // ROWS, and no tier of the catalogue loses a whole grouping to it, so the pool's own
-    // answers cannot witness it any more. The reader still can, and the pool's values are
-    // that reader's keys — so a collapse of the gate still reds one line from here.
+    // (2) THE TIER SEPARATION, proved on the READER the pool reads through. Since the urban
+    // band (2026-09-30, ODQ §934.86) the registry lists every row at the tier it can fire at,
+    // so no row is gated by `minTier` any more and the metropolis table is complete in
+    // itself; what separates the two tables is now the rows each tier lists. The formerly
+    // gated 'Colosseum/arena' is the witness: in the table at metropolis, absent at city.
     const namesIn = (tier) => Object.values(getInstitutionalCatalog(tier)).flatMap((group) => Object.keys(group));
-    const gated = Object.values(getInstitutionalCatalog('metropolis'))
-      .flatMap((category) => Object.entries(category))
-      .filter(([, definition]) => definition && definition.minTier === 'metropolis')
-      .map(([name]) => name)
-      .sort(compareCodepoint);
     const cityNames = namesIn('city');
     const metroNames = namesIn('metropolis');
-    expect([gated.length > 0, cityNames.length, metroNames.length],
-      'the catalogue really holds metropolis-gated rows, and the two tables the gate separates are live')
-      .toEqual([true, 81, 115]);
-    expect(metroNames, 'a metropolis-gated row IS in the table at metropolis').toContain(gated[0]);
+    expect([cityNames.length, metroNames.length],
+      'the two tables the tier separates are live (81 and 115 before the urban band)')
+      .toEqual([130, 144]);
+    expect(metroNames, 'a metropolis-only row IS in the table at metropolis').toContain('Colosseum/arena');
     expectAbsentWithAnchor(
-      cityNames, gated[0], metroNames.find((name) => cityNames.includes(name)), 'the minTier gate at city',
+      cityNames, 'Colosseum/arena', metroNames.find((name) => cityNames.includes(name)), 'the tier separation at city',
     );
   });
 
