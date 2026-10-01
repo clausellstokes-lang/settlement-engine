@@ -96,11 +96,12 @@ import {
   RETIRED_BANK_FENCE_BASELINE_SCHEMA,
   RETIRED_RELATIONSHIPS_MOUNT_BASELINE_SCHEMA,
   RETIRED_DOMAIN_READER_BASELINE_SCHEMA,
+  RETIRED_EDIT_MODE_READERS_BASELINE_SCHEMA,
   RETIRED_EXACT_BASELINE_SCHEMA,
   RETIRED_FILTERED_LEAF_BASELINE_SCHEMA,
   RETIRED_SURFACE_FILTERED_LEAF_BASELINE_SCHEMA,
   RETIRED_UNFILTERED_LEAF_BASELINE_SCHEMA,
-  validateSchema23Baseline,
+  validateSchema24Baseline,
 } from './lib/observed-shape-baseline.mjs';
 import {
   parseExactFlags,
@@ -182,7 +183,14 @@ const BASELINE = join(ROOT, 'scripts/.observed-shape-readers-baseline.json');
  *     are DECLARED, which makes this the first rung since 11 to grow the roster and the first
  *     ever to grow it by two. Declaring by IDENTITY also tags the ONE ordinary
  *     `decrees on settlement` row the estate already carried at `src/domain/ai/personaSlicer.js`,
- *     so the bank goes 61/40 -> 69/45 across a roster of TEN. THE LIVE AUTHORITY.
+ *     so the bank goes 61/40 -> 69/45 across a roster of TEN (RETIRED).
+ * 24 = schema 23's topology, tag law and ten-identity roster UNCHANGED, re-governed to a register
+ *     that ADMITS THE URBAN BAND'S CORPUS RE-DEAL (ODQ §934.86 and its addendum 2). The same-seed
+ *     shift re-dealt the AO-0 corpus's year, so the heuristic observes shapes it bound differently
+ *     before — the institution-flags `inst`, the undercity's `facets`, a partial `originContext` —
+ *     and 53 ordinary rows land against them (name collisions with same-named records, and keys
+ *     written only on branches this year does not reach), each admitted under the review's note.
+ *     One row shrinks; nothing is declared; the bank holds at 69/45. THE LIVE AUTHORITY.
  * ⚠ THIS LIST WENT STALE FOR EIGHT RUNGS — it marked 10 as "THE LIVE AUTHORITY" while
  *   the number stood at 18 — so it is filled in here rather than extended by one. Each
  *   rung's full rationale lives beside its own target constant in
@@ -201,6 +209,7 @@ export {
   RETIRED_BANK_FENCE_BASELINE_SCHEMA,
   RETIRED_RELATIONSHIPS_MOUNT_BASELINE_SCHEMA,
   RETIRED_DOMAIN_READER_BASELINE_SCHEMA,
+  RETIRED_EDIT_MODE_READERS_BASELINE_SCHEMA,
   RETIRED_EXACT_BASELINE_SCHEMA, RETIRED_FILTERED_LEAF_BASELINE_SCHEMA,
   RETIRED_SURFACE_FILTERED_LEAF_BASELINE_SCHEMA,
   RETIRED_UNFILTERED_LEAF_BASELINE_SCHEMA,
@@ -1427,7 +1436,7 @@ export function assertExplainedWriterRowTags(
   baseline,
   entries = EXPLAINED_WRITER_EXEMPTIONS,
 ) {
-  validateSchema23Baseline(baseline);
+  validateSchema24Baseline(baseline);
   assertExplainedWriterExemptions(entries);
   const declarations = new Map(entries.map((entry) => [entry.identity, entry]));
   const genesis = baseline.frozenAtSha === baseline.migrationReview.subjectSha;
@@ -2839,7 +2848,7 @@ export function baselineOf({
       'moved row is ORDINARY, exactly like its seven siblings. The bank is therefore unmoved at',
       '61 reads across 40 tagged addresses — `neighbourNetwork on settlement` changes address',
       'and not count — which is the fence proving a MOVE is not a growth.',
-      'SCHEMA 23 = schema 22\'s topology and tag law re-governed to a register that ADMITS THE',
+      'SCHEMA 23 (RETIRED) held schema 22\'s topology and tag law re-governed to a register that ADMITS THE',
       'EDIT MODE\'S SAVE-TIME READERS (EM-C4b / EM-E1 / EM-F1, judgment 273, under the SAME',
       'owner ruling rung 22 spent, ODQ §934.16: a domain-side reader of a save-time key is',
       'bought with a governed register migration, not refused by one). FOUR ROWS LAND, at two',
@@ -2861,6 +2870,23 @@ export function baselineOf({
       '"declare the identity and leave that row ordinary" is not expressible. The bank therefore',
       'goes 61 reads across 40 tagged addresses -> 69 across 45, MEASURED off the live scan at',
       'the subject and declared as data before the write.',
+      'SCHEMA 24 = schema 23\'s topology, tag law and ten-identity roster, all UNCHANGED,',
+      're-governed to a register that ADMITS THE URBAN BAND\'S CORPUS RE-DEAL (ODQ §934.86 and its',
+      'addendum 2). The same-seed shift re-dealt the AO-0 corpus\'s year: the institution registry',
+      'rebuilt every roster and the druid rulings moved the lodge towns, so the year\'s pulse no',
+      'longer reaches a web war, an insurgency birth or a government challenge, and the heuristic',
+      'now observes shapes it bound differently before. 53 ORDINARY rows land (72 reads) and each',
+      'is admitted under its own review note, in two classes: NAME COLLISIONS, where a read of one',
+      'record binds to a same-named record the corpus does observe (`inst` is the institution',
+      'flags while assembleInstitutions reads catalog rows; `facets` is the undercity\'s while the',
+      'war code reads capacity and alignment facets; `stressors` while the panel reads outcomes),',
+      'and RARE-BRANCH WRITERS, keys a real producer writes on a branch this year does not take',
+      '(a partial `originContext`, `proposalPayload`, `outcome`, `tierChange`). Nothing is declared,',
+      'so the roster stays TEN and the bank stays 69/45. ONE ROW SHRINKS, `magicExists on config`',
+      'in defenseGenerator 2 -> 1 (the defence generator reads the world law once). ⛔ THE ONE',
+      'GENUINE READER-WITH-NO-WRITER THE RE-DEAL EXPOSED WAS CURED, NOT ADMITTED: the world-pulse',
+      'panel\'s coalition branch read `primaryInstigatorId` and `supporterIds`, which no producer',
+      'ever wrote, and was removed in its own commit before this rung.',
       'Of the ten declared bank entries NINE bank reads today; `isCriminal on incomeSources`',
       'has banked nothing since schema 17 made its writer observable, and banked is always a',
       `subset of declared. This envelope banks ${bankPhrase(bankOf(inventory, rowTags))}.`,
@@ -2871,7 +2897,7 @@ export function baselineOf({
       'An untagged row means: a guarded read, of a real record rather than browser or language surface,',
       'of a key no writer the corpus runs produces and no declared out-of-corpus writer explains.',
       'A tagged row stays visible as governed explained-writer debt under its numeric ceiling and reason.',
-      'Schemas 4–22 are the RETIRED numeric predecessors.',
+      'Schemas 4–23 are the RETIRED numeric predecessors.',
     ],
     schema: BASELINE_SCHEMA,
     frozen: new Date().toISOString().slice(0, 10),
@@ -3045,7 +3071,7 @@ export async function run(argv = [], overrides = {}) {
     createScanArtifact,
     validateScanArtifact,
     assertFindingSourceEvidence,
-    validateBaseline: validateSchema23Baseline,
+    validateBaseline: validateSchema24Baseline,
     // ⭐ THE BANK FENCE'S TWO HAND-OWNED SIDES, overridable so the sentinel can drive
     // every refusal: the literal module and the migration script's declared post-bank.
     readBankLiteral: readBankLiteralModule,
