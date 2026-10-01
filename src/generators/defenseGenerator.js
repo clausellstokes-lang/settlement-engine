@@ -82,7 +82,8 @@ const computeDefenseScores = (
   // J32 (2026-10-01): the WORLD LAW's reading, not the bare switch: magic exists AND its dial is above 0. A divine
   // tradition is gated by religion, not the dial, so at dial 0 it opened magical defence the owner ruled out ("faith is
   // not magic only applies to the institutions, but not divine magic substitute services").
-  const magicOn   = resolveGenerationWorldLaw(null, config).magicEnabled; // no-magic mode suppresses supernatural effects
+  const worldLaw  = resolveGenerationWorldLaw(null, config);
+  const magicOn   = worldLaw.magicEnabled; // no-magic mode suppresses supernatural effects
   const magPri    = magicOn ? (config.priorityMagic ?? 50) : 0;
   const relPri    = config.priorityReligion ?? 50;
   const TIER_ORD  = ['thorp','hamlet','village','town','city','metropolis'];
@@ -269,7 +270,6 @@ const computeDefenseScores = (
   // gates the ability to mobilize it (see econHealthMult below) — a destitute
   // town does not get "Strong economic base" for owning a granary building.
   const foodSec = config._foodSecurity;
-  const worldLaw = resolveGenerationWorldLaw(null, config);
   const storageMonths = foodSec?.storageMonths ?? (inst.hasGranary ? 4 : 1);
   // Storage → score: 0mo=0, 1mo=10, 3mo=25, 6mo=45, 12mo=70 (diminishing returns)
   const storageScore = Math.min(70, Math.round(storageMonths <= 1 ? storageMonths * 10
@@ -305,9 +305,10 @@ const computeDefenseScores = (
   const _isSmallTier = ['thorp','hamlet','village'].includes(tier);
   // For the tier gate: hasDivine means actual miracle/healing presence, not just a standard parish.
   // Parish church is universal at village+ — it shouldn't unlock magical defense on its own.
-  // J30: a druid opens none where the world law reads no magic ("their effect of food or defense does not exist in non magic settings").
-  const _hasActualMagic = inst.hasMagicInst || hasDruid || hasArcane || (worldLaw.magicEnabled && hasInst('druid'))
-    || hasInst('healer','monastery','cathedral','divine','healing','wizard','mage','arcane','enchant');
+  // J30: a druid opens none where the world law reads no magic ("their effect of food or defense does not exist in non
+  // magic settings") — `!magicOn` below is that reading (J32), so the druid needs no gate of its own here.
+  const _hasActualMagic = inst.hasMagicInst || hasDruid || hasArcane
+    || hasInst('healer','monastery','cathedral','divine','healing','druid','wizard','mage','arcane','enchant');
   const _hasMagicInstitution = _hasActualMagic;
   let magical;
   if (!magicOn || (_isSmallTier && !_hasMagicInstitution)) {
