@@ -262,7 +262,9 @@ const SENTINEL = 'settlementforge:generation:worker-v1';
 // Measured: a control build at 4b86da68a reproduced 1,423,431 B (generation.worker-DCUBvpYr.js); J30–J32 read 1,423,786 B;
 // the buy-back (731e19597: one world-law resolution, J30's redundant gate folded) and J33's seven list trims bought 138 B back;
 // the window's final source reads 1,423,648 B (generation.worker-TUOc-4XJ.js) on a fresh `vite build`. MONOTONE-DOWN from here.
-export const WORKER_BUNDLE_CEILING_BYTES = 1423648;
+// 1,423,648 -> 1,423,600 (2026-10-01, the urban-band chair): DOWN 48 B, the monotone-down rule followed. FIX-G1 (4f4747a2b)
+// counts the published dependency list at one site; a fresh `vite build` reads 1,423,600 B (generation.worker-BXVm63G5.js).
+export const WORKER_BUNDLE_CEILING_BYTES = 1423600;
 
 const source = (path) => readFileSync(join(ROOT, path), 'utf8');
 
