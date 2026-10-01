@@ -83,7 +83,10 @@ export const MANIFEST_PROVENANCE = Object.freeze({
     + ' §934.86): re-recorded over the owner\'s declared same-seed generation shift. The institution'
     + ' registry re-orders the catalog draws, so 980 of the 1,050 rows move and none is added or'
     + ' removed; the PROSE declaration stands because what moves is the composed prose of the moved'
-    + ' worlds, under the same recorder.',
+    + ' worlds, under the same recorder.'
+    + ' 2026-10-01 (DRUIDS IN A WORLD WITHOUT MAGIC, docs/shift-records/2026-10-01-urban-band-druid-faith.json, ODQ'
+    + ' §934.86 addendum 2): re-recorded again because Warden\'s Lodge reads as the ranger post it is (no druid clause)'
+    + ' and defends in every world; 36 of the 1,050 rows move, none added or removed.',
 });
 
 /** This surface's identity in tests/fixtures/.golden-freeze-register.json. */
