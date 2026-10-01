@@ -138,9 +138,10 @@ describe('the composed-prose manifest — the DRIFT corpus, both audiences', () 
     // 2026-09-30, the urban band's re-record (ODQ §934.86): the moved worlds compose a different
     // number of cells (71,052 -> 71,266; 400/396/392 -> 404/400/390). Towns unmoved at 516/3/3/3.
     // 71,266 -> 71,268 at the druid rulings' re-record (2026-10-01, §934.86 addendum 2): Warden's Lodge's
-    // towns compose two more cells.
+    // towns compose two more cells. 71,268 -> 71,262 at J33's re-record (2026-10-01, the same rulings): a magic town
+    // holding the lodge loses the druid readings it alone had opened, and six cells with them.
     expect(tally, 'the DRIFT corpus by seed, cells and towns').toEqual({
-      'golden-master-v3': { cells: 71_268, towns: 516 },
+      'golden-master-v3': { cells: 71_262, towns: 516 },
       'gm-seed-a': { cells: 404, towns: 3 },
       'gm-seed-b': { cells: 400, towns: 3 },
       'gm-seed-c': { cells: 390, towns: 3 },
