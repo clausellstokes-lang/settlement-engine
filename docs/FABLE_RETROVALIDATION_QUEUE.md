@@ -3893,3 +3893,10 @@ No Opus car landed in this act. The twelve rulings, the two recorded owner words
 *Receipts:* the commits' messages (red-first evidence in each), G6 and G7 in tests/generators/urbanBandInstitutions.test.js, and the shift record.
 *Priority:* P2.
 **Status:** enrolled.
+
+### R98 — the druid rulings completed and measured: J33–J38 (Opus 5.5 seat; code on `feat/urban-band-institutions-2026-09-30`, nothing pushed)
+*What was judged:* the Warden's Lodge census (seven lists); the worker ceiling's +217 B; three rewrite rules crossing under §271's inert-row authority; two corpus witnesses kept by construction; H2's node-rule predicate; the regional root reach pinned as a set; writerReach's rebank opened by ruling for a same-seed shift; and O12 not cut at the session's tail.
+*What Fable re-derives:* whether a planted or constructed witness is an honest replacement for an observed one; whether the rebank door should open for a shift's content-keyed churn; whether O12's ~35 declarations under `conditional-generator-branch` are the right cure or need a typed door.
+*Receipts:* the commits' messages (red-first G8; base-versus-tip measurements in each), docs/URBAN_BAND_INSTITUTIONS.md §4d, and the two shift records.
+*Priority:* P2.
+**Status:** enrolled.
