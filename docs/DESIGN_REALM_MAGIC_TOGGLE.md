@@ -480,10 +480,21 @@ every axis for every member. The same-seed MAGICAL twin carries 4 arcane institu
 is a measurement of the world and not of an empty generator.
 
 **THE TWIN-WORLD ENVELOPE (MG-LAW-3) HOLDS, AND HOLDS WELL.** All five compared axes,
-mundane vs magical: members 5 vs 5 (1.000), institutions 142 vs 136 (1.044), factions
-24 vs 24 (1.000), services 199 vs 192 (1.036), history events 24 vs 25 (0.960). A mundane
-realm is not a thinner realm — it is at or above parity on four of the five axes, and
-suppression rides the substitution arms exactly as the law requires.
+mundane vs magical: members 5 vs 5 (1.000), institutions 147 vs 145 (1.014), factions
+26 vs 28 (0.929), services 214 vs 213 (1.005), history events 21 vs 22 (0.955). A mundane
+realm is not a thinner realm — it is at or above parity on three of the five axes and inside
+the provisional bands on the other two, and suppression rides the substitution arms exactly
+as the law requires.
+
+⚠️ **RE-RECORDED 2026-09-30 BY THE URBAN BAND (ODQ §934.86), ONE DECLARED SAME-SEED SHIFT, AND
+BOTH TWINS MOVE.** institutions `142 vs 136` → `147 vs 145`, factions `24 vs 24` → `26 vs 28`,
+services `199 vs 192` → `214 vs 213`, history events `24 vs 25` → `21 vs 22`; members hold at
+`5 vs 5`. The cause is the institution registry, not a thinning of either twin: every tier now
+carries a complete block (a town is a small city), so each member seats more institutions and
+factions and offers more services in the mundane and the magical realm alike, and the same-seed
+rolls re-draw. Every envelope ratio stays inside PENDING_BANDS, so no band is asked to move (the
+bands are the owner's to sign). The figures below this block are the history that preceded it.
+This block and the test header were moved in ONE act.
 
 ⚠️ **THREE OF THOSE FIGURES MOVED 2026-09-30, BY MF-CH2B (THE MAGIC LICENCE), AND IT IS A
 DECLARED SHIFT RATHER THAN DRIFT.** institutions `137 vs 136` → `142 vs 136`, factions

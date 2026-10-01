@@ -247,8 +247,16 @@ describe('HK-3 draws — the corpus, through the real pipeline', () => {
       const hooks = npcHooks(s);
       return n + hooks.length - new Set(hooks).size;
     }, 0);
-    expect(total, 'the corpus NPC-hook total moved — HK-3 must never drop a hook').toBe(855);
-    expect(duplicates, 'the exact-duplicate residual is bounded pool EXHAUSTION and must not move').toBe(28);
+    // ⭐ RE-MEASURED 2026-09-30, THE URBAN BAND (ODQ §934.86), ONE DECLARED SAME-SEED SHIFT.
+    // total 855 → 861, exact duplicates 28 → 26, NPC denominator 613 → 612, hookless 52 → 51.
+    // The cause is the urban-band institution rebuild, not HK-3: the same 60-settlement corpus
+    // (5 tiers × 12 seeds) now seats a different institution set per tier, and the NPC census
+    // follows it — hamlet 61 → 67, village 74 → 74, town 104 → 104, city 165 → 160, metropolis
+    // 209 → 207 (measured by a probe copy of this file's own `genAt`). HK-3's invariant is intact:
+    // every hook is still typed (typed = total = 861) and the above-K share reads 87/861 = 10.10%,
+    // inside the ≤ 12% envelope below. Re-based, not re-argued.
+    expect(total, 'the corpus NPC-hook total moved — HK-3 must never drop a hook').toBe(861);
+    expect(duplicates, 'the exact-duplicate residual is bounded pool EXHAUSTION and must not move').toBe(26);
 
     // A PRE-EXISTING CONDITION, pinned here so HK-3 cannot be blamed for it and so
     // it cannot quietly grow: 52 of the corpus's 613 generated NPCs carry NO
@@ -285,8 +293,8 @@ describe('HK-3 draws — the corpus, through the real pipeline', () => {
     // reason this comment is what a lane reads first.
     const npcTotal = corpus.reduce((n, s) => n + (s.npcs || []).length, 0);
     const hookless = corpus.reduce((n, s) => n + (s.npcs || []).filter((x) => !(x.plotHooks || []).length).length, 0);
-    expect(npcTotal, 'the NPC denominator must be a real corpus').toBe(613);
-    expect(hookless, 'hookless NPCs grew — a hook-bearing record is being dropped downstream').toBe(52);
+    expect(npcTotal, 'the NPC denominator must be a real corpus').toBe(612);
+    expect(hookless, 'hookless NPCs grew — a hook-bearing record is being dropped downstream').toBe(51);
   });
 
   test('pin:same-seed-survivors — the same seed draws the same hooks, forever', () => {
