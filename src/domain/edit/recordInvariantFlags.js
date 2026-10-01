@@ -70,6 +70,7 @@ export const FLAGS_EVER_TRUE = Object.freeze({
 // generator defect; the cure is FIX-G1 (curedBy), picked onto this line the same day from 4e11edfdd: the
 // viability sentence now counts the list the record publishes, proved red-first on a re-pinned witness in
 // tests/generators/foodModelSingleWriter.test.js. A row that shows the defect again must be declared here again.
+/** @type {ReadonlyArray<Readonly<{ corpusKey: string, id: string, found: string, curedBy: string }>>} */
 export const KNOWN_VIOLATIONS = Object.freeze([]);
 
 /** The provenance of `FLAGS_EVER_TRUE`. Strings only; the counts live in the receipt. */
