@@ -189,6 +189,19 @@ const THE_CALLER = 'src/domain/worldPulse/operations/missionDispatcher.js';
  * AND NOWHERE ELSE. Most recently at the ENGINE-HYGIENE landing (SHIFT RECORD,
  * 2026-09-01, TE-AGNOSTIC-1 cars `f2c1ad181` / `97d119c9b`); before that at T8.
  *
+ * ── 2026-10-01, J33: THE WARDEN'S LODGE CENSUS (owner-signed, through the door) ──────────
+ * THE NINTH MOVEMENT OF THIS CONSTANT, under the same owner words as the eighth ("Warden's
+ * Lodge stays defense, not druid"); the record is
+ * docs/shift-records/2026-10-01-urban-band-warden-census.json (odqRow §934.86 addendum 2).
+ * THE MOVER: the census the eighth movement's J31 owed. The lodge leaves every druid and magic
+ * list (the chains' druid tradition, druidic cultivation in both food readers, folk magic
+ * presence, the Druid Elder's seat), so in this magic-world corpus a settlement holding one
+ * loses the druid readings it alone had opened. The base 731e19597 held `4888fd37…` (this
+ * file green there) before this value was taken.
+ * On THIS corpus 29 of 360 rows move, all of them towns; 360/360 hashes stay distinct.
+ * ATTRIBUTION, ZERO RESIDUE: the 29 moved rows are exactly the 29 corpus settlements holding
+ * a Warden's Lodge, and none of the 331 unmoved rows holds one. `4888fd37…` -> `1c3748cb…`.
+ *
  * ── 2026-10-01, DRUIDS IN A WORLD WITHOUT MAGIC (owner-signed, through the door) ─────────
  * THE EIGHTH MOVEMENT OF THIS CONSTANT since the genesis freeze, a signed re-record under
  * tests/helpers/goldenRecordDoor.js like the seventh, and again not a spend of the one
@@ -370,7 +383,7 @@ const THE_CALLER = 'src/domain/worldPulse/operations/missionDispatcher.js';
  * superseded by the ENGINE-HYGIENE re-record above, which is the record of the
  * one chartered window that has been spent since.
  */
-const PRE_COUPLING_CORPUS_SHA = '4888fd37fa5157056fe92f38d02d3f6b79b6e6adbf214f9fc6619d31ea84ce2f';
+const PRE_COUPLING_CORPUS_SHA = '1c3748cb32e8697d90adcc1e73a046c7380028e951df26098e2fcfbfe7194dfc';
 
 const CORPUS_TIERS = Object.freeze(['thorp', 'hamlet', 'village', 'town', 'city', 'metropolis']);
 const CORPUS_ROUTES = Object.freeze(['road', 'isolated', 'port', 'crossroads']);
