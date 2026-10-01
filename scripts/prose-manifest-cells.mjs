@@ -86,7 +86,10 @@ export const MANIFEST_PROVENANCE = Object.freeze({
     + ' worlds, under the same recorder.'
     + ' 2026-10-01 (DRUIDS IN A WORLD WITHOUT MAGIC, docs/shift-records/2026-10-01-urban-band-druid-faith.json, ODQ'
     + ' §934.86 addendum 2): re-recorded again because Warden\'s Lodge reads as the ranger post it is (no druid clause)'
-    + ' and defends in every world; 36 of the 1,050 rows move, none added or removed.',
+    + ' and defends in every world; 36 of the 1,050 rows move, none added or removed.'
+    + ' 2026-10-01 (J33, docs/shift-records/2026-10-01-urban-band-warden-census.json, the same rulings): re-recorded'
+    + ' again because Warden\'s Lodge leaves every druid and magic list, so a magic town holding one loses the druid'
+    + ' readings it alone had opened; 70 of the 1,050 rows move, none added or removed.',
 });
 
 /** This surface's identity in tests/fixtures/.golden-freeze-register.json. */
