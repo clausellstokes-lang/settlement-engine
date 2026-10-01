@@ -350,10 +350,12 @@ describe('EM-B2b — world facts by consequence: the route, the refusals and the
     // digests below are the committed files' new bytes: 7177cd6e.. -> fd2cf1db.. and 88983938.. -> aefaf169... This
     // arm still asserts byte-identity against the committed value and still re-derives no-layer to the committed rows
     // (the stride loop below passed under the new master), which is the claim; a lane re-recording is still a STOP.
+    // Then the druid rulings (ODQ §934.86 addendum 2), each through the door by the CHAIR: fd2cf1db.. -> 48f733d8.. (7c51ffec8)
+    // -> bf978de7.. (72c97b788, J33) and aefaf169.. -> 8f02a2e6.. (baebe2cda) -> 7990bbfb.. (960d99a17, J33).
     expect(shaOfFile(GOLDEN), 'tests/fixtures/generator-golden-master.json moved')
-      .toBe('fd2cf1dbd8c6b60e9d03087f5aa38dc9cd43a62b7ea5f8939a12a98bec2439db');
+      .toBe('bf978de7e574ef862be4b246f1d883ce2b7f6bfa2ee4343cd28792bd3697367e');
     expect(shaOfFile(PROSE_GOLDEN), 'tests/fixtures/dossier-prose-manifest-golden.json moved')
-      .toBe('aefaf16946b913635dc0308e6d541850e31c9cd0dee22741fc0bc53072f868b8');
+      .toBe('7990bbfbfcfb0672f83d1a37952f45d609dfe7d4835d361696c06c5fe9f5a4d7');
 
     // AND THE REASON THEY CANNOT MOVE: fresh generation passes no layer, so no world fact is ever
     // routed and `config′` is `config` itself. Measured against the committed manifest.

@@ -454,7 +454,7 @@ describe('EM-B2a3 — the institution and power choosers consult the pin seam', 
     expect(bareAssemble.mutated).toBe(52);
     expect(bareAssemble.threw).toBe(0);
     expect(bareAssemble.messages).toEqual([]);
-    expect(barePower.mutated).toBe(47); // 2026-10-01, the urban band (ODQ §934.86): 30 -> 47, re-measured
+    expect(barePower.mutated).toBe(46); // 2026-10-01, the urban band (ODQ §934.86): 30 -> 47; the druid rulings (2026-10-01, ODQ §934.86 addendum 2, J30–J33): 47 -> 46; re-measured
     expect(barePower.threw).toBe(0);
     expect(bareAssemble.rows).toBe(63);
   }, 300_000);

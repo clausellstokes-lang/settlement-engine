@@ -128,7 +128,8 @@ const POPULATION_STEP = 'generatePopulation';
 const CHOOSER_KEYS = ['npcs', 'relationships', 'factions', 'conflicts'];
 // 2026-10-01, the urban band (ODQ §934.86): 315 -> 307 draws on the pin row's unpinned population step (measured; the same
 // figure pipelinePinnedMode's A2 reads as the unpinned total on this row).
-const POPULATION_UNPINNED_DRAWS = 307;
+// Then the druid rulings (2026-10-01, ODQ §934.86 addendum 2, J30–J33): 307 -> 310 (measured; pipelinePinnedMode's A2 reads the same 310).
+const POPULATION_UNPINNED_DRAWS = 310;
 /** The row both side channels are censused on (the pre-proof's probe row). */
 const CENSUS_ROW = {
   settType: 'town', culture: 'germanic', terrainOverride: 'riverside',
@@ -230,7 +231,7 @@ describe('EM-P2 — generation census by execution: the instrument, the classifi
     ).toEqual([]);
   };
 
-  it('A1 — the instrument reaches the generator graph: mints split 4 direct / 31 via fork, no golden moves, 307 draws unpinned and 0 pinned', () => {
+  it('A1 — the instrument reaches the generator graph: mints split 4 direct / 31 via fork, no golden moves, 310 draws unpinned and 0 pinned', () => {
     // ── C0 — the mocks lose no export. A replacement that dropped a name would break
     // importers silently, and every figure below would be measured on a crippled module.
     expect(mintCensus.actualKeys.length, 'the prng mock factory never ran').toBeGreaterThan(0);

@@ -293,8 +293,12 @@ describe('HK-3 draws — the corpus, through the real pipeline', () => {
     // reason this comment is what a lane reads first.
     const npcTotal = corpus.reduce((n, s) => n + (s.npcs || []).length, 0);
     const hookless = corpus.reduce((n, s) => n + (s.npcs || []).filter((x) => !(x.plotHooks || []).length).length, 0);
-    expect(npcTotal, 'the NPC denominator must be a real corpus').toBe(612);
-    expect(hookless, 'hookless NPCs grew — a hook-bearing record is being dropped downstream').toBe(51);
+    // the druid rulings (2026-10-01, ODQ §934.86 addendum 2, J30–J33): 612 -> 613 NPCs and 51 -> 52 hookless, and the movers were LISTED against 4b86da68a
+    // rather than argued: every NPC that differs is a structural placeholder (no plotHooks). town-6's Landed Gentry
+    // Lord Mayor seat is now filled (-1); town-8's Thieves' Guild Kingpin and Lieutenant seats are now honestly
+    // unled (+2). No hook-bearing NPC lost its hooks (17 same-id records only re-dealt role or faction).
+    expect(npcTotal, 'the NPC denominator must be a real corpus').toBe(613);
+    expect(hookless, 'hookless NPCs grew — a hook-bearing record is being dropped downstream').toBe(52);
   });
 
   test('pin:same-seed-survivors — the same seed draws the same hooks, forever', () => {

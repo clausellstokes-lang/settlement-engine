@@ -260,7 +260,7 @@ describe('EM-R8 — the escalation ladder never overwrites a HELD key, and the r
     // anchored: same three, and `movedAnywhere` is a superset of the line above.
     expect(movedAnywhere, `a HELD key moved somewhere in the census:\n${movedAnywhere.join('\n')}`).toEqual([]);
     // anchored: `namesOf` is read from the same merged rosters the two lists above compare, and A2
-    // proves the ladder really fires 41 times (48 before the urban band, 2026-10-01), so the roster machinery is live in this very census.
+    // proves the ladder really fires 40 times (48 before the urban band, 41 before the druid rulings, 2026-10-01), so the roster machinery is live in this very census.
     expect(lost, `an edit DELETED a named person from a saved town:\n${lost.join('\n')}`).toEqual([]);
     // anchored: as the line above.
     expect(invented, `an edit INVENTED a person the DM never wrote:\n${invented.join('\n')}`).toEqual([]);
@@ -285,11 +285,12 @@ describe('EM-R8 — the escalation ladder never overwrites a HELD key, and the r
     const byEdit = {};
     for (const trial of escalating) byEdit[trial.label] = (byEdit[trial.label] || 0) + 1;
     expect(Object.entries(byEdit).sort(), 'the config channel escalates on both world-fact edits, at the figures measured at this landing')
-      .toEqual([['E7 terrain to desert', 30], ['E8 culture to norse', 11]]);
+      .toEqual([['E7 terrain to desert', 30], ['E8 culture to norse', 10]]);
     // 2026-10-01, the urban band (ODQ §934.86): E7 31 -> 30 and E8 17 -> 11 (48 -> 41 escalating trials of the 120),
+    // then the druid rulings (2026-10-01, ODQ §934.86 addendum 2, J30–J33): E8 11 -> 10 (41 -> 40),
     // re-measured by this census itself. Every escalation still EXHAUSTS and the layer channel is still silent.
     const unexhausted = escalating.filter((trial) => !trial.escalations.some((step) => step.step === 'EXHAUSTED')).map((trial) => `${trial.label} ${trial.key}`);
-    // anchored: `escalating` is 41 rows by the equality above, so this list is drawn from a live set.
+    // anchored: `escalating` is 40 rows by the equality above, so this list is drawn from a live set.
     expect(unexhausted, `a config-channel escalation that did NOT exhaust:\n${unexhausted.join('\n')}`).toEqual([]);
 
     const liveById = {};
@@ -297,7 +298,8 @@ describe('EM-R8 — the escalation ladder never overwrites a HELD key, and the r
     expect(Object.entries(liveById).sort(), 'what the cure LEAVES on the world-fact channel: the two '
       + 'REFERENTIAL cross-key checks, and no prose-count check at all. EM-B2b owns this seam '
       + '(EM-R7 §6 declares it dark)')
-      .toEqual([['V-DEFENSE-INST', 35], ['V-EVIDENCE-CONFLICT', 11]]);
+      .toEqual([['V-DEFENSE-INST', 35], ['V-EVIDENCE-CONFLICT', 8]]);
+    // the druid rulings (2026-10-01, ODQ §934.86 addendum 2, J30–J33): V-EVIDENCE-CONFLICT 11 -> 8, V-DEFENSE-INST unmoved at 35 (measured).
     // 2026-10-01, the urban band (ODQ §934.86): V-DEFENSE-INST 31 -> 35 and V-EVIDENCE-CONFLICT 22 -> 11, the same
     // two referential ids and no third (the roster of what the cure leaves is unchanged; only its multiplicities
     // moved with the re-derived worlds). Both are EM-B2b's declared-dark seam, not this member's.
@@ -386,11 +388,11 @@ describe('EM-R8 — the escalation ladder never overwrites a HELD key, and the r
     const quiet = all.filter((trial) => trial.escalations.length === 0);
     const noisyRepairs = quiet.filter((trial) => !trial.repairsSame).map((trial) => `${trial.label} ${trial.key}`);
     const unexplained = all.filter((trial) => !trial.repairsSame && !trial.rungTookReceipt).map((trial) => `${trial.label} ${trial.key}`);
-    // 2026-10-01, the urban band (ODQ §934.86): quiet 450 -> 457 of 498 (noisy 48 -> 41).
-    expect(quiet.length, 'the trials in which no rung fires at all').toBe(457);
-    // anchored: 457 of 498 trials are quiet by the expectation above, so this list is drawn from a live set.
+    // 2026-10-01, the urban band (ODQ §934.86): quiet 450 -> 457 of 498 (noisy 48 -> 41); the druid rulings (2026-10-01, ODQ §934.86 addendum 2, J30–J33): 457 -> 458 (41 -> 40).
+    expect(quiet.length, 'the trials in which no rung fires at all').toBe(458);
+    // anchored: 458 of 498 trials are quiet by the expectation above, so this list is drawn from a live set.
     expect(noisyRepairs, `repairs moved with no rung firing at all:\n${noisyRepairs.join('\n')}`).toEqual([]);
-    // anchored: the same census carries 41 noisy trials (A2), so the explanation below is exercised.
+    // anchored: the same census carries 40 noisy trials (A2), so the explanation below is exercised.
     expect(unexplained, 'repairs moved for a reason other than a rung taking generationCoherenceReceipt '
       + `whole from R1 — the ladder's own top-level write, which no CLASS_EXCEPTIONS row reaches:\n${unexplained.join('\n')}`).toEqual([]);
     const movedAtAll = all.filter((trial) => !trial.repairsSame).map((trial) => `${trial.label} ${trial.key}`);
@@ -401,13 +403,13 @@ describe('EM-R8 — the escalation ladder never overwrites a HELD key, and the r
   it('A6 · where no rung fires the merged record IS the post-pass pipeline, byte for byte', () => {
     const all = trials();
     const quiet = all.filter((trial) => trial.escalations.length === 0);
-    expect(quiet.length, 'the quiet trials, which are 457 of 498 once the ladder stops repairing held facts').toBe(457);
+    expect(quiet.length, 'the quiet trials, which are 458 of 498 once the ladder stops repairing held facts').toBe(458);
     const drifted = quiet.filter((trial) => !trial.mergedIsPipeline).map((trial) => `${trial.label} ${trial.key}`);
-    // anchored: `quiet` is 457 rows by the expectation above.
+    // anchored: `quiet` is 458 rows by the expectation above.
     expect(drifted, 'a quiet trial whose merged record is not mergeTree + recomputeMirrors + '
       + `recomputeReceipts of its own inputs — the guard changed something while doing nothing:\n${drifted.join('\n')}`).toEqual([]);
     const noisy = all.filter((trial) => trial.escalations.length > 0);
-    expect(noisy.length, 'and the blast radius of the ladder is exactly the config channel A2 measures').toBe(41);
+    expect(noisy.length, 'and the blast radius of the ladder is exactly the config channel A2 measures').toBe(40);
   }, SLOW);
 
   it('A7 · the chain: determinism and undo hold, and the power card stops making history it did not make', () => {

@@ -575,7 +575,8 @@ describe('EM-R3 — the power structure is final under a held pin', () => {
     // THE COUNTERFORCE, and the reason the two halves are ONE member: in 46 of the 57 rows the
     // held receipt is already stale against the changed world's economy when the closeout runs,
     // so an assert that was not pin-aware would refuse there. (42 before the urban band, 2026-10-01, ODQ §934.86.)
-    expect(staleAtCloseout).toHaveLength(46);
+    // 46 -> 47 at the druid rulings (2026-10-01, ODQ §934.86 addendum 2, J30–J33), measured.
+    expect(staleAtCloseout).toHaveLength(47);
     expect(staleWitness, 'no stale row was captured, so the refusal below proves nothing')
       .not.toBeNull();
     expect(() => assertPowerEconomyFreshness(
@@ -713,7 +714,8 @@ describe('EM-R3 — the power structure is final under a held pin', () => {
     // rows are refused outright by the roster assert, and the rest reach the same fingerprint by
     // arithmetic. What matters is that the replay DOES recompute this receipt when no pin is held.
     // (41 with one refusal before the urban band, 2026-10-01, ODQ §934.86; A1's control counts the same ten.)
-    expect(refreshedAway).toHaveLength(36);
+    // 36 -> 37 at the druid rulings (2026-10-01, ODQ §934.86 addendum 2, J30–J33), measured.
+    expect(refreshedAway).toHaveLength(37);
 
     // ANTI-VACUITY (2): the refresher is not inert in general — skip it on an UNPINNED run and
     // the record moves, so the identity above is a property of the HELD path.
