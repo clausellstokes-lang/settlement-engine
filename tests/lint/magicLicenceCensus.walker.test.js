@@ -110,36 +110,67 @@ const SHELF_ROWS = ROWS.filter(r => r.category === 'Magic' || r.category === 'Ex
  * narrower, whether the entry can stand at all in a world without functioning magic. A circle
  * of druids who "regulate the seasons, mediate disputes with wild creatures, and know which
  * streams run clean" can. See DEITY_DOCTRINE_RELICENSED.
+ *
+ * ⭐ RE-KEYED 2026-09-30, THE URBAN BAND (ODQ §934.86), ONE DECLARED SAME-SEED SHIFT. 28 → 39
+ * declared rows, and the movement is the registry's, row for row, never a new verdict: the
+ * urban-band rebuild (6efa6be61) re-shelves each institution to its natural shelf and makes
+ * every tier block complete (a metropolis block is a complete city block, a city block a
+ * complete town block), and MF-CH2B (94e40b900) had already made the licence govern by NAME
+ * and never by shelf or tier. Measured against the previous table (13 keys left, 24 arrived):
+ *  (a) EIGHT `none` rows left the gated shelves for their own and KEEP their `none` — the
+ *      Adventurers' charter hall at hamlet and village (Adventuring), Druid Circle (village)
+ *      and Elder Grove Council (town) (Religious), Alchemist shop (town) and Alchemist quarter
+ *      (city) (Crafts), Warden's Lodge (Defense), Great library (Infrastructure);
+ *  (b) FIVE Exotic rows moved from city to metropolis (Planar traders, Dragon resident, Dream
+ *      parlors, Airship docking, Message network) and the registry seats Golem workforce and
+ *      Undead labor at both; (c) Mages' guild and Scroll scribe now also stand at town, and
+ *      Wizard's tower, Enchanter's shop, Scroll scribe and Teleportation circle at metropolis;
+ *  (d) THREE `none` rows are cumulative REPEATS of a name ruled at a lower tier
+ *      (CUMULATIVE_REPEATS below): Elder Grove Council at city and metropolis, Alchemist
+ *      quarter at metropolis. Those, with (a), are the eleven licensed rows that sit OFF the
+ *      Magic/Exotic shelves, every one `none`. The four tokens and every value for a name
+ *      that existed before are unchanged: no verdict moved.
  */
 const DECLARED_LICENCES = Object.freeze({
   "hamlet|Magic|Traveling hedge wizard": 'low',
-  "hamlet|Magic|Adventurers' charter hall": 'none',
+  "hamlet|Adventuring|Adventurers' charter hall": 'none',
+  "village|Religious|Druid Circle": 'none',
   "village|Magic|Hedge wizard": 'low',
-  "village|Magic|Druid Circle": 'none',
-  "village|Magic|Adventurers' charter hall": 'none',
   "village|Magic|Healer (divine, 1st level)": 'low',
+  "village|Adventuring|Adventurers' charter hall": 'none',
+  "town|Crafts|Alchemist shop": 'none',
+  "town|Religious|Elder Grove Council": 'none',
+  "town|Defense|Warden's Lodge": 'none',
   "town|Magic|Wizard's tower": 'medium',
-  "town|Magic|Elder Grove Council": 'none',
-  "town|Magic|Alchemist shop": 'none',
-  "town|Magic|Warden's Lodge": 'none',
+  "town|Magic|Mages' guild": 'medium',
+  "town|Magic|Scroll scribe": 'medium',
   "town|Magic|Teleportation circle": 'high',
+  "city|Crafts|Alchemist quarter": 'none',
+  "city|Religious|Elder Grove Council": 'none',
   "city|Magic|Wizard's tower": 'medium',
   "city|Magic|Mages' guild": 'medium',
-  "city|Magic|Alchemist quarter": 'none',
   "city|Magic|Enchanter's shop": 'high',
   "city|Magic|Scroll scribe": 'medium',
   "city|Magic|Teleportation circle": 'high',
-  "city|Exotic|Planar traders": 'high',
-  "city|Exotic|Dragon resident": 'none',
   "city|Exotic|Golem workforce": 'high',
   "city|Exotic|Undead labor": 'high',
-  "city|Exotic|Dream parlors (high magic)": 'high',
-  "city|Exotic|Airship docking (high magic)": 'high',
-  "city|Exotic|Message network (high magic)": 'high',
-  "metropolis|Magic|Academy of magic": 'high',
+  "metropolis|Crafts|Alchemist quarter": 'none',
+  "metropolis|Religious|Elder Grove Council": 'none',
+  "metropolis|Infrastructure|Great library": 'none',
+  "metropolis|Magic|Wizard's tower": 'medium',
   "metropolis|Magic|Mages' district": 'high',
-  "metropolis|Magic|Great library": 'none',
+  "metropolis|Magic|Academy of magic": 'high',
+  "metropolis|Magic|Enchanter's shop": 'high',
+  "metropolis|Magic|Scroll scribe": 'medium',
+  "metropolis|Magic|Teleportation circle": 'high',
   "metropolis|Magic|Planar embassy": 'high',
+  "metropolis|Exotic|Planar traders": 'high',
+  "metropolis|Exotic|Dragon resident": 'none',
+  "metropolis|Exotic|Golem workforce": 'high',
+  "metropolis|Exotic|Undead labor": 'high',
+  "metropolis|Exotic|Dream parlors (high magic)": 'high',
+  "metropolis|Exotic|Airship docking (high magic)": 'high',
+  "metropolis|Exotic|Message network (high magic)": 'high',
 });
 
 /**
@@ -181,6 +212,18 @@ const LICENCE_OVERRIDES_TAG = Object.freeze({
  * circle finds the reason beside the value instead of in a commit message.
  */
 const DEITY_DOCTRINE_RELICENSED = Object.freeze(['Druid Circle', 'Elder Grove Council']);
+
+/**
+ * THE THREE ROWS THE URBAN BAND ADDED ONLY BY MAKING A TIER BLOCK COMPLETE (ODQ §934.86). Each is
+ * a `none` row whose NAME the dossier (R-INST-5) already ruled at a lower tier; the city and
+ * metropolis blocks now repeat it. Named as data so A2's cross-check against R-INST-5 can
+ * subtract exactly these and attributes the movement, rather than absorbing it.
+ */
+const CUMULATIVE_REPEATS = Object.freeze([
+  'city|Religious|Elder Grove Council',
+  'metropolis|Religious|Elder Grove Council',
+  'metropolis|Crafts|Alchemist quarter',
+]);
 
 /**
  * The six words that left `ARCANE_INST_KW` with them. A magic-dependence list is no place for
@@ -234,12 +277,27 @@ describe('MF-CH2a — the magic licence is declared, single-vocabulary and inert
     // be a list compared with itself — the pin-vacuity shape this estate has been bitten by
     // — and would pass on a catalog whose values had all moved.
     const dist = { none: 0, low: 0, medium: 0, high: 0 };
-    for (const { def } of ROWS) {
+    const shelfDist = { none: 0, low: 0, medium: 0, high: 0 };
+    const offShelfKeys = [];
+    for (const { tier, category, name, def } of ROWS) {
       const licence = normaliseMagicLicence(def.magicLicense);
-      if (licence !== null) dist[licence] += 1;
+      if (licence === null) continue;
+      dist[licence] += 1;
+      if (category === 'Magic' || category === 'Exotic') shelfDist[licence] += 1;
+      else offShelfKeys.push(`${tier}|${category}|${name}`);
     }
-    expect(dist).toEqual({ none: 9, low: 3, medium: 4, high: 12 });
-    expect(dist.none + dist.low + dist.medium + dist.high).toBe(SHELF_ROWS.length);
+    // ⭐ RE-MEASURED 2026-09-30, THE URBAN BAND (ODQ §934.86): whole-catalog 9/3/4/12 → 12/3/8/16.
+    // The registry re-shelves each institution to its natural shelf, so the licence rows no longer
+    // all sit on the Magic/Exotic shelves: the SHELF distribution is 1/3/8/16 over the 28 shelf
+    // rows (the eight faith, craft, defence and library rows left them) and ELEVEN licensed rows
+    // stand off-shelf, every one `none` — eight re-shelved, three cumulative repeats. Counted by
+    // a walk of the catalog (above), the closure now reads: licensed = shelf rows + off-shelf rows.
+    expect(dist).toEqual({ none: 12, low: 3, medium: 8, high: 16 });
+    expect(shelfDist).toEqual({ none: 1, low: 3, medium: 8, high: 16 });
+    expect(shelfDist.none + shelfDist.low + shelfDist.medium + shelfDist.high).toBe(SHELF_ROWS.length);
+    expect(dist.none + dist.low + dist.medium + dist.high).toBe(SHELF_ROWS.length + offShelfKeys.length);
+    expect(offShelfKeys.length).toBe(11);
+    for (const key of offShelfKeys) expect(DECLARED_LICENCES[key], key).toBe('none');
     // 7 → 9 and 5 → 3 on 2026-08-24 (TE-CH-6, ODQ §541.8). ATTRIBUTED, not absorbed: exactly
     // these two rows moved, each is named, and the arm reds if a third joins them quietly.
     expect(DEITY_DOCTRINE_RELICENSED.length).toBe(2);
@@ -248,8 +306,15 @@ describe('MF-CH2a — the magic licence is declared, single-vocabulary and inert
     }
     // The dossier's own whole-table figure stays reachable, which is what keeps this arm a
     // cross-check against R-INST-5 rather than a number copied back off the catalog: add its
-    // four Adventuring hand-offs, subtract the rows the estate overruled it on.
-    expect(dist.none + 4 - DEITY_DOCTRINE_RELICENSED.length).toBe(11);
+    // four Adventuring hand-offs, subtract the rows the estate overruled it on — and, since the
+    // urban band, subtract the three rows that are only a complete tier block repeating a name
+    // the dossier had already ruled (CUMULATIVE_REPEATS, each asserted present and `none`).
+    expect(CUMULATIVE_REPEATS.length).toBe(3);
+    for (const key of CUMULATIVE_REPEATS) {
+      expect(offShelfKeys, key).toContain(key);
+      expect(DECLARED_LICENCES[key], key).toBe('none');
+    }
+    expect(dist.none - CUMULATIVE_REPEATS.length + 4 - DEITY_DOCTRINE_RELICENSED.length).toBe(11);
   });
 
   it('A3 — the licence is keyed by NAME, and every repeated name agrees across its tiers', () => {
