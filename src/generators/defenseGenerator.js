@@ -79,7 +79,10 @@ const computeDefenseScores = (
 ) => {
   const hasStress = (type) => stressTypes.includes(type);
   const route     = config.tradeRouteAccess || 'road';
-  const magicOn   = config.magicExists !== false; // no-magic mode suppresses supernatural effects
+  // J32 (2026-10-01): the WORLD LAW's reading, not the bare switch: magic exists AND its dial is above 0. A divine
+  // tradition is gated by religion, not the dial, so at dial 0 it opened magical defence the owner ruled out ("faith is
+  // not magic only applies to the institutions, but not divine magic substitute services").
+  const magicOn   = resolveGenerationWorldLaw(null, config).magicEnabled; // no-magic mode suppresses supernatural effects
   const magPri    = magicOn ? (config.priorityMagic ?? 50) : 0;
   const relPri    = config.priorityReligion ?? 50;
   const TIER_ORD  = ['thorp','hamlet','village','town','city','metropolis'];
@@ -111,8 +114,11 @@ const computeDefenseScores = (
 
   // Druid/nature tradition — not route-gated, but more likely in certain contexts
   const hasDruid    = magicOn && magPri >= 30 && hasInst(
-    'druid circle','grove shrine','elder grove','warden\'s lodge','sacred grove'
+    'druid circle','grove shrine','elder grove','sacred grove'
   );
+  // Warden's Lodge is DEFENCE, NOT DRUID (the owner, 2026-10-01): a ranger post, not a druid tradition, so it
+  // defends in every world, magic or not, with the druid tradition's own +12 for beast lore and tracking (J31).
+  const hasWardens  = hasInst('warden\'s lodge');
 
   // Alchemy — amplifier tradition, lower magic threshold
   const hasAlchemy  = magicOn && magPri >= 15 && hasInst(
@@ -203,6 +209,7 @@ const computeDefenseScores = (
   if (inst.hasWalls)       monster += 20;
   if (inst.hasMilitia)     monster += 12;
   if (inst.hasHospital)    monster +=  5;
+  if (hasWardens)          monster += 12; // rangers: beast lore, tracking (mundane)
 
   // Tradition bonuses — capped at +35 combined
   let monsterMagicBonus = 0;

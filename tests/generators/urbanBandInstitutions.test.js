@@ -349,3 +349,49 @@ describe('G6 — a druid is a priest where magic does not work (J30)', () => {
     expect(wrong).toEqual([]);
   });
 });
+
+describe("G7 — Warden's Lodge defends in every world, and divine defence needs working magic (J31, J32)", () => {
+  // The owner, 2026-10-01: "Warden's Lodge stays defense, not druid" and "faith is not magic only applies to the
+  // institutions, but not divine magic substitute services". Red on d04a2f63e: no magic-free lodge raised monster
+  // defence (0 of 18), and divine magical defence opened in 60 of 60 dial-0 towns, cities and metropolises.
+  it("a seated Warden's Lodge raises monster defence in magic-free worlds", () => {
+    let lodges = 0;
+    const flat = [];
+    for (const kind of ['noMagic', 'deadDial']) {
+      for (let i = 0; i < 20; i++) {
+        const s = generateSettlementPipeline(
+          { settType: 'town', culture: 'celtic', terrainOverride: 'forest', tradeRouteAccess: 'road', priorityReligion: 90, ...G6_WORLDS[kind] },
+          null, { seed: `urban-band-wardens-${kind}-${i}`, customContent: {} },
+        );
+        const lodge = (s.institutions || []).find(r => r.name === "Warden's Lodge");
+        if (!lodge) continue;
+        lodges += 1;
+        const withLodge = generateDefenseProfile(s).scores.monster;
+        const without = generateDefenseProfile({ ...s, institutions: s.institutions.filter(r => r !== lodge) }).scores.monster;
+        if (!(withLodge > without)) flat.push(`${kind}-${i}: ${withLodge} vs ${without}`);
+      }
+    }
+    expect(lodges, 'no magic-free town seated a lodge, so the arm proves nothing').toBeGreaterThan(5);
+    expect(flat).toEqual([]);
+  });
+
+  it('no divine magical defence opens where the world law reads no magic, and it still opens where magic works', () => {
+    const divine = {};
+    for (const kind of ['noMagic', 'deadDial', 'magic']) {
+      let n = 0;
+      for (const settType of ['town', 'city', 'metropolis']) {
+        for (let i = 0; i < 6; i++) {
+          const s = generateSettlementPipeline(
+            { settType, culture: 'germanic', terrainOverride: 'plains', tradeRouteAccess: 'road', priorityReligion: 90, ...G6_WORLDS[kind] },
+            null, { seed: `urban-band-divine-${kind}-${settType}-${i}`, customContent: {} },
+          );
+          if (generateDefenseProfile(s).traditions?.hasDivine === true) n += 1;
+        }
+      }
+      divine[kind] = n;
+    }
+    expect({ noMagic: divine.noMagic, deadDial: divine.deadDial }).toEqual({ noMagic: 0, deadDial: 0 });
+    expect(divine.magic, 'the magic world is the control: divine defence still opens there').toBeGreaterThan(9);
+  });
+});
+
