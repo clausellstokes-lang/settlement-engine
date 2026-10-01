@@ -246,7 +246,16 @@ const SENTINEL = 'settlementforge:generation:worker-v1';
 // (generation.worker-MbKUCYhb.js), CI run 35892227226's figure to the byte and the chunk name; the cured build reads
 // 1,391,256 B (generation.worker-DusCNPis.js) = -216 B, and esbuild's per-module pricing predicted -212 B. The
 // ceiling follows the measurement DOWN and stays MONOTONE-DOWN from this value.
-export const WORKER_BUNDLE_CEILING_BYTES = 1391256;
+// 1,391,256 -> 1,423,431 (2026-10-01, the urban-band chair UNDER THE OWNER'S WORD, ODQ §934.86): A RISE, AND IT
+// IS THE OWNER'S, TAKEN BY THE OWNER'S OWN WORD IN CHAT (2026-09-30, "I defer all judgment to you", given in answer to this
+// exact question) — never a lane's edit. The cause is the content the owner approved: the institution catalog became
+// a registry of 179 families and 518 tier entries (215 new tier entries, 28 new descriptions with their variants), plus
+// MF-CH2B's licence reads and the window's cure (J19-J24, the verifier's fixes). Every byte that could go WAS BOUGHT
+// BACK FIRST (4fccffd60: each repeated description and each variant pair spelled once, every derived structure
+// fingerprint-identical): the combined tip read 1,475,470 B, the buy-back 1,422,127 B, and the window's final source
+// 1,423,431 B on a fresh `vite build` (generation.worker-DCUBvpYr.js). The ceiling follows that measurement to the byte
+// and stays MONOTONE-DOWN from here.
+export const WORKER_BUNDLE_CEILING_BYTES = 1423431;
 
 const source = (path) => readFileSync(join(ROOT, path), 'utf8');
 
