@@ -181,10 +181,20 @@ describe('WorldLaw eligibility predicates', () => {
     expect(deadMagic.allowsInstitution({ name: "Wizard's tower" })).toBe(false);
     expect(deadMagic.allowsInstitution({ name: 'Public well' })).toBe(true);
     expect(deadMagic.allowsRole({ role: 'Hedge Witch', category: 'other' })).toBe(false);
+    // A druid is a PRIEST, and faith is culture, never a species of magic (TE-CH-6, ODQ §541.8):
+    // a world whose magic does not function still holds its druids. Refused here until
+    // 2026-09-30, when `druid` left the magic patterns (judgment J24, ODQ §934.86); a role that
+    // names working magic is still refused, as the arcane title beside it shows.
     expect(deadMagic.allowsRole({
       role: 'High Priest',
       title: 'Druid',
       category: 'religious',
+      source: 'generated',
+    })).toBe(true);
+    expect(deadMagic.allowsRole({
+      role: 'Court Mage',
+      title: 'Mage',
+      category: 'other',
       source: 'generated',
     })).toBe(false);
     expect(deadMagic.allowsRole({ role: 'Healer', category: 'religious' })).toBe(true);
@@ -594,9 +604,14 @@ describe('full-pipeline world-law enforcement', () => {
       'City Watch Chief',
       'river-port generated roles',
     );
+    // The celtic PRIEST's title is 'Druid' (namingData celtic.titles.priest), and since J24
+    // (2026-09-30, TE-CH-6) a magic-disabled world keeps it: before, every celtic priest there was
+    // stripped of their own culture's word for priest. Its magic titles ('Mage', 'Sorcerer') are
+    // still filtered by their own tokens.
+    expect(mundaneSettlement.npcs.map(npc => npc.title)).toContain('Druid');
     expectAbsentWithAnchor(
       mundaneSettlement.npcs.map(npc => npc.title),
-      'Druid',
+      'Mage',
       'Laird',
       'magic-disabled cultural titles',
     );

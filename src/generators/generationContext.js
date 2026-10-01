@@ -40,8 +40,10 @@ import {
 
 export { textAssertsFunctionalMagic };
 
+// `druid` left this list 2026-09-30 with MAGIC_ASSERTION_PATTERN's (J24, TE-CH-6): a druid is a
+// faith role, and a magic-free world still has them.
 const MAGIC_ROLE_PATTERN =
-  /\b(?:archmag(?:e|ister)|artificer|druid|enchanter|hedge witch|mage|magister|sorcerer|warlock|witch|wizard)\b/i;
+  /\b(?:archmag(?:e|ister)|artificer|enchanter|hedge witch|mage|magister|sorcerer|warlock|witch|wizard)\b/i;
 
 const MAGIC_HISTORY_TYPES = new Set([
   'magical',
