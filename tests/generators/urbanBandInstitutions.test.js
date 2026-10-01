@@ -17,6 +17,12 @@
  *   G4  NO ROLLED ROW IS DELETED AS UNSUPPORTED: the dependency table agrees with the tiers
  *       the registry rolls at. Before: town Citadel and town Printing house were deleted by
  *       the coherence pass every time they were rolled.
+ *   G5  A MAGIC-FREE WORLD CERTIFIES ITS OWN LAW: once the gates read the declared licence
+ *       (MF-CH2B), the faith rows licensed `none` (Druid Circle, Elder Grove Council, Warden's
+ *       Lodge) enter magic-free worlds, and the world law's own receipt must not convict them.
+ *       Measured on the combined tip before J20/J21: 25 of 40 magic-free cities failed
+ *       `world_law_magic` on those rows' descriptions, and 19 of 40 villages on the name
+ *       'Druid Circle' alone (0 of 40 at base, where the Magic shelf struck them).
  *
  * Seeds are fixed, so every arm is deterministic: it passes or fails the same way on
  * every run.
@@ -130,5 +136,28 @@ describe('G4 — no rolled row is deleted as unsupported', () => {
       }
     }
     expect(removed).toEqual([]);
+  });
+});
+
+describe('G5 — a magic-free world certifies its own world-law magic check', () => {
+  it('no magic-free settlement fails world_law_magic, at any tier, and the druid rows do appear', () => {
+    const failed = [];
+    let druidRows = 0;
+    for (const tier of ['hamlet', 'village', 'town', 'city', 'metropolis']) {
+      for (let i = 0; i < 12; i++) {
+        const s = generateSettlementPipeline(
+          { settType: tier, culture: 'celtic', terrainOverride: 'forest', tradeRouteAccess: 'isolated',
+            magicExists: false, priorityMagic: 100, priorityReligion: 90 },
+          null,
+          { seed: `urban-band-nomagic-${tier}-${i}`, customContent: {} },
+        );
+        const check = (s.generationCoherenceReceipt?.checks || []).find(k => k.id === 'world_law_magic');
+        if (!check) failed.push(`${tier}-${i}: no world_law_magic check ran`);
+        else if (check.status !== 'pass') failed.push(`${tier}-${i}: ${check.status} ${JSON.stringify((check.findings || [])[0] || {}).slice(0, 140)}`);
+        druidRows += (s.institutions || []).filter(r => /^(Druid Circle|Elder Grove Council|Warden's Lodge)$/.test(r.name)).length;
+      }
+    }
+    expect(druidRows, 'no faith row entered a magic-free world, so the certification proves nothing about them').toBeGreaterThan(5);
+    expect(failed).toEqual([]);
   });
 });

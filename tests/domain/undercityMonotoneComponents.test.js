@@ -74,10 +74,22 @@ function world(settType, terrain, tag) {
 const QUARRY_CITY = world('city', 'mountain', '2');
 /** A walled inland town: a GATE and no waterfront. */
 const WALLED_TOWN = world('town', 'mountain', '2');
-/** An unwalled coastal town: a WATERFRONT and no gate. */
-const HARBOUR_TOWN = world('town', 'coastal', '1');
-/** An unwalled inland town: neither, so the smuggler licence has nowhere to sit. */
-const OPEN_TOWN = world('town', 'plains', '3');
+/**
+ * An unwalled coastal town: a WATERFRONT and no gate.
+ * Re-pinned '1' to '3' on 2026-09-30 (the urban band, ODQ §934.86): the same-seed roster shift
+ * rolled 'Town walls' and 'Gates (if walled)' into seed 1, so it carried a gate as well as a
+ * waterfront and could no longer show the waterfront licensing the subset ALONE. Seed 2 is walled
+ * too; seed 3 is the first sibling that is unwalled, port-routed and above the share floor.
+ */
+const HARBOUR_TOWN = world('town', 'coastal', '3');
+/**
+ * An unwalled inland town: neither, so the smuggler licence has nowhere to sit.
+ * Re-pinned '3' to '4' on 2026-09-30 (the urban band, ODQ §934.86): the same-seed roster shift
+ * left seed 3 unwalled but with a stored criminal share of 0.275, under the smuggler floor, so
+ * its refusal could no longer be the PLACE refusing. Seed 4 is the first sibling that is
+ * unwalled, road-routed, at or above the floor and storing (undercrofts present).
+ */
+const OPEN_TOWN = world('town', 'plains', '4');
 /** A metropolis with many burying institutions — the age and burial-demand fixture. */
 const OLD_CAPITAL = world('metropolis', 'hills', '2');
 

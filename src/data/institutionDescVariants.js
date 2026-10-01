@@ -747,8 +747,8 @@ const PAIRS = [
     "Abandoned babies and young children are received here and given plain care until apprenticeship, a family placement, or a childhood spent in the house itself. Generally a church foundation. The wheel in the wall admits a child by night, no name asked.",
   ],
   [
-    "Senior druids who govern how their circle deals with the city. They may keep a grove hidden beneath the streets, hold the line between the city's spread and the wild, or advise its rulers on the land. Found where a city has come to terms with nature's magic.",
-    "A council of elder druids charged with their circle's standing in the city: sometimes tending a concealed grove below the streets, sometimes mediating between expansion and wild ground, sometimes counselling those in power on ecological matters. It arises only in cities at peace with nature magic.",
+    "Senior druids who govern how their circle deals with the city. They may keep a grove hidden beneath the streets, hold the line between the city's spread and the wild, or advise its rulers on the land. Found where a city has come to terms with the wild.",
+    "A council of elder druids charged with their circle's standing in the city: sometimes tending a concealed grove below the streets, sometimes mediating between expansion and wild ground, sometimes counselling those in power on ecological matters. It arises only in cities at peace with the wild.",
   ],
   [
     "A man of the lord's choosing governs, and noble authority overrides whatever the town was accustomed to.",
@@ -823,7 +823,7 @@ const PAIRS = [
     "Where a band of soldiers lodges and takes contracts between wars. They hire out by the day for escort, garrison duty, and brief campaigns: less costly than keeping an army, more dependable than a rabble. They form up for a wage, not for treasure.",
   ],
   [
-    "A ranger post or druid waystation. Those here watch the wilds, keep the trails, and follow the movements of beasts. In a crisis they turn scout and tracker.",
+    "A ranger post, or a waystation kept by druids. Those here watch the wilds, keep the trails, and follow the movements of beasts. In a crisis they turn scout and tracker.",
     "Rangers or druids keep this lodge, minding the wilderness about the town, tending its trails, and marking where the beasts migrate. When trouble comes they scout and track for the town.",
   ],
   [

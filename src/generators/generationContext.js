@@ -394,6 +394,12 @@ export function createGenerationWorldLaw(config = {}, resolved = {}) {
         // the WHOLE text, trimmed and lower-cased (a record holds `'Magic'`), must be one
         // token. `ARCANE_INST_TAGS` is authored lower-case.
         || CLASSIFICATION_TOKENS.has(text.trim().toLowerCase())
+        // Nor is a catalog institution's own NAME, when the WHOLE text is that name and the
+        // row declares licence `none`: the law admitted the row by that licence (P5), so its
+        // receipt may not convict it for what it is called. 'Druid Circle' is faith, not magic
+        // (TE-CH-6), and before 2026-09-30 a magic-free village holding one failed its own
+        // world_law_magic check on the name alone (19 of 40 probe villages).
+        || institutionCatalogMagicLicence(text) === 'none'
         || !textAssertsFunctionalMagic(text);
     },
     allowsMaritimeClaim: candidate => (

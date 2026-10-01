@@ -939,7 +939,7 @@ export const INSTITUTION_FAMILIES = Object.freeze([
   // Its own text says it is found in cities; it was listed at town only, and on the Magic shelf,
   // until 2026-09-30.
   family('Religious', {
-    shared: { name: 'Elder Grove Council', required: false, desc: "A council of senior druids who govern their circle's relationship with the city. They may maintain a hidden grove beneath the streets, mediate between urban expansion and wild places, or serve as ecological advisors to the ruling authority. Found in cities that have made peace with nature magic.", tags: ['religious'], magicLicense: 'none', priorityCategory: 'military' },
+    shared: { name: 'Elder Grove Council', required: false, desc: "A council of senior druids who govern their circle's relationship with the city. They may maintain a hidden grove beneath the streets, mediate between urban expansion and wild places, or serve as ecological advisors to the ruling authority. Found in cities that have made their peace with the wild.", tags: ['religious'], magicLicense: 'none', priorityCategory: 'military' },
     at: {
       town: { baseChance: 0.15 },
       city: { baseChance: 0.2 },
@@ -1224,7 +1224,7 @@ export const INSTITUTION_FAMILIES = Object.freeze([
   family('Defense', {
     shared: { name: "Warden's Lodge" },
     at: {
-      town: { required: false, baseChance: 0.2, desc: 'A ranger station or druid waypost. They monitor the surrounding wilderness, maintain trails, and keep tabs on beast migrations. In times of crisis they serve as emergency scouts and trackers.', tags: ['military'], magicLicense: 'none', priorityCategory: 'magic' },
+      town: { required: false, baseChance: 0.2, desc: 'A ranger station, or a waypost kept by druids. They monitor the surrounding wilderness, maintain trails, and keep tabs on beast migrations. In times of crisis they serve as emergency scouts and trackers.', tags: ['military'], magicLicense: 'none', priorityCategory: 'magic' },
     },
     ceiling: { tier: 'town', reason: 'A wilderness post; cities have no wild country inside their reach.' },
   }),
