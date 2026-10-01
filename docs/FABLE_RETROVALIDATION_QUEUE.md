@@ -3886,3 +3886,10 @@ No Opus car landed in this act. The twelve rulings, the two recorded owner words
 *Receipts:* the branch's commit messages (each states its evidence), the verifier report, the shift records, and the final full-suite run cited in the chair's report.
 *Priority:* P2 on J22, J24, J29; P3 on the rest.
 **Status:** enrolled.
+
+### R97 — druids in a world without magic: J30–J32 on the owner's four rulings (Opus 5.5 seat; code on `feat/urban-band-institutions-2026-09-30`, nothing pushed)
+*What was judged:* the druid set (the Religious-shelf rows licensed `none`), the chokepoint (one stamp at the end of coherenceRepairPass), the two food and defence leaks cured, Warden's Lodge's mundane +12, and divine defence gated on the world law's dial.
+*What Fable re-derives:* whether the world law's dial-0 reading is the owner's "non magic setting"; whether +12 is the right mundane weight for a ranger post.
+*Receipts:* the commits' messages (red-first evidence in each), G6 and G7 in tests/generators/urbanBandInstitutions.test.js, and the shift record.
+*Priority:* P2.
+**Status:** enrolled.
