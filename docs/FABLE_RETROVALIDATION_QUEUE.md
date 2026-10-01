@@ -3900,3 +3900,10 @@ No Opus car landed in this act. The twelve rulings, the two recorded owner words
 *Receipts:* the commits' messages (red-first G8; base-versus-tip measurements in each), docs/URBAN_BAND_INSTITUTIONS.md §4d, and the two shift records.
 *Priority:* P2.
 **Status:** enrolled.
+
+### R99 — "do it all": J39–J44 (Opus 5.5 seat; code on `feat/urban-band-institutions-2026-09-30`, nothing pushed)
+*What was judged:* FIX-G1 picked from the parked stack; O13 closed rather than built; a dead UI branch removed rather than banked; the observed-shape rung admitting 53 rows as ordinary debt rather than declaring ~35 identities; a test-only census cache in place of a cap raise; four other-lane base reds cured on this line, one of them by a recorded false-positive row.
+*What Fable re-derives:* whether ordinary admission is the honest status for name-collision findings; whether curing another line's base reds here, rather than on that line, is the right placement; whether O13's trace disagreement deserves design work after all.
+*Receipts:* the commits' messages (red-first and before/after measurements in each), the schema-24 migration report and bundle figures, and docs/URBAN_BAND_INSTITUTIONS.md §4e.
+*Priority:* P2.
+**Status:** enrolled.
