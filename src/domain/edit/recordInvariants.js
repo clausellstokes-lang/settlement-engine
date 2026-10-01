@@ -274,8 +274,11 @@ const legitimacySum = (/** @type {RecordCard} */ card) => {
   const { score, breakdown } = card;
   if (!isNum(score) || !isObj(breakdown)) return undefined;
   const parts = Object.values(breakdown).filter(isNum);
+  // The producer CLAMPS (src/generators/factionDynamics.js: Math.max(0, Math.min(100, 50 + …))), so the published
+  // score is the clamped sum (the ceiling is twice the neutral base: no new numeral in this reading leaf, A4) (2026-10-01: a village whose breakdown sums below zero publishes 0, the urban band's
+  // first such row; the unclamped comparison convicted the producer for its own floor).
   return parts.length === Object.keys(breakdown).length
-    ? near(score, parts.reduce((total, part) => total + part, neutralLegitimacyScore)) : undefined;
+    ? near(score, Math.max(0, Math.min(neutralLegitimacyScore + neutralLegitimacyScore, parts.reduce((total, part) => total + part, neutralLegitimacyScore)))) : undefined;
 };
 
 /** @returns {Reading} The named governing body is one the faction roster actually seats. */
