@@ -3879,3 +3879,10 @@ No Opus car landed in this act. The twelve rulings, the two recorded owner words
 *Receipts:* this row and ODQ §934.86 by pathspec on `review-fixes-2026-07-08`; the branch's commits, its full-suite run against the base's five pre-existing reds, the walker's recorded plants, and the shift record `docs/shift-records/2026-09-30-urban-band-institutions.json`.
 *Priority:* P2 on J1, J5, J6; P3 on the rest.
 **Status:** enrolled.
+
+### R96 — the urban band's window closed under the owner's delegation: J19–J29, the verifier's fixes and the seven door acts (Opus 5.5 seat; code on `feat/urban-band-institutions-2026-09-30`, nothing pushed)
+*What was judged:* the cure judgments J19–J24, the closures J25/J26, the landing re-ground J27, the mill re-verification J28 and the worker-ceiling rise J29 (ODQ §934.86 addendum), each taken under the owner's "I defer all judgment to you".
+*What Fable re-derives:* whether J22's re-derived acute floors (city 95.5% → 72.0%) honour directive 6 or call for the tuning-band work J26 declined; whether J24's removal of `druid` from the magic patterns is TE-CH-6's consequence or overreach for custom content; whether J27's re-ground beats re-seeding the landing town.
+*Receipts:* the branch's commit messages (each states its evidence), the verifier report, the shift records, and the final full-suite run cited in the chair's report.
+*Priority:* P2 on J22, J24, J29; P3 on the rest.
+**Status:** enrolled.
