@@ -40,14 +40,19 @@
 
 /** @type {ReadonlyArray<FoundingSeed>} */
 export const FOUNDING_SEEDS = Object.freeze([
+  // RE-CHOSEN 2026-09-30 (the urban band, ODQ §934.86): besi-582's town now reads 'Contested',
+  // so the drama moved to besi-872, the first besi- seed whose forged world proves every receipt
+  // and the synopsis's mining, harvest and guild-master claims. Two specifics are re-verified to
+  // that world: the siege is seven years past (was twelve), and a merchant council governs (was a
+  // mayor).
   Object.freeze({
     id: 'the-contested-crown',
     title: 'The Crown That Will Not Hold',
-    seed: 'besi-582',
+    seed: 'besi-872',
     archetype: 'besieged_holdout',
     settType: 'town',
     synopsis:
-      'A mining town raised on rich ore and poor harvests, twelve years past a siege that broke more than its walls. Its mayor holds a title the streets no longer honour; a guild master has begun, quietly, to write the authority the collapse handed the commercial wards into permanent ink. The coup here is not a rumour. It is a matter of paperwork.',
+      'A mining town raised on rich ore and poor harvests, seven years past a siege that broke more than its walls. Its merchant council holds a title the streets no longer honour; a guild master has begun, quietly, to write the authority the collapse handed the commercial wards into permanent ink. The coup here is not a rumour. It is a matter of paperwork.',
     firstDecade:
       'Opens in a legitimacy crisis: fractured governance, a catastrophic siege in living memory, and a guild master formalising the power a failing crown can no longer reclaim.',
     receipts: Object.freeze([
@@ -63,13 +68,13 @@ export const FOUNDING_SEEDS = Object.freeze([
     archetype: 'besieged_holdout',
     settType: 'town',
     synopsis:
-      'A seasonal camp beside a dependable river fishery that stayed for the traffic the water brought, this river town has turned its wheel through an economic rift, a great migration, a religious war, an occupation, an arcane catastrophe, and a siege a generation gone. Upheaval after upheaval of the first rank, and the mills still turn. A chronicle of endurance, and of what endurance costs.',
+      'Grown from a single logging operation whose owner refused to leave when the contract ended, this river town has turned its wheel through an economic rift, a great migration, a religious war, an occupation, an arcane catastrophe, and a siege a generation gone. Upheaval after upheaval of the first rank, and the mills still turn. A chronicle of endurance, and of what endurance costs.',
     firstDecade:
       'A settlement defined by survival: five or more major upheavals across its history, closing with a siege within the last generation, yet standing today under an approved, steady hand.',
     receipts: Object.freeze([
       'Its remembered history carries five or more MAJOR upheavals.',
       'A major siege sits within its history.',
-      'It was founded as a seasonal camp beside a dependable river fishery.',
+      'It grew from a single logging operation whose owner refused to leave when the contract ended.',
       'Its mills still stand among its institutions.',
       "Its governance today reads as 'Approved' (a survivor, still standing).",
     ]),
