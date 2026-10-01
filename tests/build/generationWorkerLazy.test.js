@@ -255,7 +255,14 @@ const SENTINEL = 'settlementforge:generation:worker-v1';
 // fingerprint-identical): the combined tip read 1,475,470 B, the buy-back 1,422,127 B, and the window's final source
 // 1,423,431 B on a fresh `vite build` (generation.worker-DCUBvpYr.js). The ceiling follows that measurement to the byte
 // and stays MONOTONE-DOWN from here.
-export const WORKER_BUNDLE_CEILING_BYTES = 1423431;
+// 1,423,431 -> 1,423,648 (2026-10-01, the urban-band chair, UNDER THE SAME WORD, ODQ §934.86 addendum 2): A RISE OF 217 B, and
+// its cause is the content the owner ordered in this chat ("druid is magic" … "Warden's Lodge stays defense, not druid"): J30's
+// druid faith role, its chokepoint stamp and its chain idle, and J32's world-law read and the wardens' mundane term. The owner's
+// "I defer all judgment to you" was given in answer to this exact question (J29), and the rise is taken under it, VETOABLE.
+// Measured: a control build at 4b86da68a reproduced 1,423,431 B (generation.worker-DCUBvpYr.js); J30–J32 read 1,423,786 B;
+// the buy-back (731e19597: one world-law resolution, J30's redundant gate folded) and J33's seven list trims bought 138 B back;
+// the window's final source reads 1,423,648 B (generation.worker-TUOc-4XJ.js) on a fresh `vite build`. MONOTONE-DOWN from here.
+export const WORKER_BUNDLE_CEILING_BYTES = 1423648;
 
 const source = (path) => readFileSync(join(ROOT, path), 'utf8');
 
