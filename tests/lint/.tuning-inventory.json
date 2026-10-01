@@ -7,10 +7,10 @@
     "    npx vitest run tests/lint/tuningRegister.walker.test.js",
     "The refreeze EXITS NON-ZERO by design; the proof is a separate ordinary run."
   ],
-  "measuredAtSha": "b571727e1242767342f1c17c0096c8adc2d29ed4",
-  "measuredBy": "FP chair (session 87797a6a, Fable 5.1)",
-  "date": "2026-09-24",
-  "note": "FP batch landing 5: BUY-BACK-1 · TREATY-VOICE U1/U3 + the desk re-record · LIT-2 mediation · CW-1",
+  "measuredAtSha": "0316db3e62cb53e9245b18c8b3113204a732a95e",
+  "measuredBy": "urban-band chair, session 93391427",
+  "date": "2026-10-01",
+  "note": "Base red picked up under the owner do-it-all: the FP line landed pactRenewal.js CONVERSION_TUNING (GR-RENEWAL U3) and moved peaceTermsCatalog dependents without re-measuring the inventory; no tuning value is proposed and nothing is signed.",
   "schemaVersion": 1,
   "trees": {
     "p1": [
@@ -5715,7 +5715,7 @@
       "exported": true,
       "idiom": "literal",
       "keys": 9,
-      "line": 123,
+      "line": 125,
       "spanDigest": "ea39eeb42da761e69792ebcc57028ba6c5babddc1d5f8ce0c6fa559c0f4b8bed",
       "leaves": {
         "RESERVE_BASE01": 0.5,
@@ -5759,7 +5759,7 @@
       "exported": true,
       "idiom": "literal",
       "keys": 1,
-      "line": 140,
+      "line": 167,
       "spanDigest": "a3ff244d387cb111750fd146f6697d864176d3074bfb9928fdb6c3200bdab0c7",
       "leaves": {
         "WINDOW_WEEKS": 26
@@ -5775,11 +5775,27 @@
       "exported": true,
       "idiom": "literal",
       "keys": 2,
-      "line": 151,
+      "line": 178,
       "spanDigest": "4d2c1504148d10a6379880e15a9e24dc1e7352746f8951e7592bda899af9b763",
       "leaves": {
         "DEMAND_SWING": 0.25,
         "ASK_CAP": 0.5
+      },
+      "dependents": [
+        "src/domain/events/realmManifest.js",
+        "src/domain/worldPulse/pactFormation.js",
+        "src/domain/worldPulse/realmVerbExecution.js"
+      ],
+      "namedDependents": []
+    },
+    "src/domain/worldPulse/pactRenewal.js#CONVERSION_TUNING": {
+      "exported": true,
+      "idiom": "literal",
+      "keys": 1,
+      "line": 194,
+      "spanDigest": "38eb1f9b1370285a94121a015e4f96ec99c405524fc714ddc024f45c654af001",
+      "leaves": {
+        "TRUST_BAND": 0.68
       },
       "dependents": [
         "src/domain/events/realmManifest.js",
@@ -5942,6 +5958,7 @@
       "dependents": [
         "src/domain/worldPulse/concludedWars.js",
         "src/domain/worldPulse/pactFormation.js",
+        "src/domain/worldPulse/pactRenewal.js",
         "src/domain/worldPulse/peaceTerms.js",
         "src/domain/worldPulse/peaceTermsAppraisal.js",
         "src/domain/worldPulse/peaceTermsCarriedSheet.js",
@@ -5985,6 +6002,7 @@
       "dependents": [
         "src/domain/worldPulse/concludedWars.js",
         "src/domain/worldPulse/pactFormation.js",
+        "src/domain/worldPulse/pactRenewal.js",
         "src/domain/worldPulse/peaceTerms.js",
         "src/domain/worldPulse/peaceTermsAppraisal.js",
         "src/domain/worldPulse/peaceTermsCarriedSheet.js",
@@ -8365,11 +8383,11 @@
   },
   "unclosed": [],
   "totals": {
-    "tables": 255,
-    "keys": 2173,
+    "tables": 256,
+    "keys": 2174,
     "unregisteredNamed": 535,
     "bareDecimals": 6975,
     "zeroDependentTables": 9,
-    "zeroNamedDependentTables": 166
+    "zeroNamedDependentTables": 167
   }
 }
