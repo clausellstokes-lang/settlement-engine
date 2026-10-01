@@ -65,7 +65,7 @@ describe('claims-parity — each synopsis is proven by the forged world', () => 
     // urban band gave this town new trades and so new exports, so the SAME draw now lands on
     // "grew from a single logging operation whose owner refused to leave when the contract
     // ended". Every other receipt is byte-identical: the six major upheavals (economic rift
-    // to the siege 25 years ago), the mills, 'Approved', and a riverside town on a river route,
+    // to the siege 25 years ago), the mills (governance re-verified to 'Tolerated' 2026-10-01, below), and a riverside town on a river route,
     // so "this river town" still holds. The seed is kept and the founding clause re-verified, in
     // the synopsis and here. No besi- seed in 0-2999 forges all five original receipts.
     //
@@ -90,8 +90,11 @@ describe('claims-parity — each synopsis is proven by the forged world', () => 
     // re-verification above so the seed's title and synopsis keep a proven anchor
     // once the founding clause stopped carrying one (the claims-parity law).
     expect(instNamesOf(t).some((n) => /mill/i.test(n))).toBe(true);
-    // Receipt 5: approved, steady governance today.
-    expect(legitOf(t).label).toBe('Approved');
+    // Receipt 5: governance its people tolerate today. RE-VERIFIED 2026-10-01: the urban band's
+    // final source moved besi-1's legitimacy from 'Approved' to 'Tolerated'; every other receipt
+    // still holds, so the claim was re-verified to the forged world (synopsis line and receipt
+    // with it) rather than the seed re-chosen.
+    expect(legitOf(t).label).toBe('Tolerated');
   });
 
   it('THE ROT BENEATH THE ORE — contested authority, a recent uprising, criminal arrangements', () => {
