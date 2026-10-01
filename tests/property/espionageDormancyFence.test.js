@@ -189,6 +189,21 @@ const THE_CALLER = 'src/domain/worldPulse/operations/missionDispatcher.js';
  * AND NOWHERE ELSE. Most recently at the ENGINE-HYGIENE landing (SHIFT RECORD,
  * 2026-09-01, TE-AGNOSTIC-1 cars `f2c1ad181` / `97d119c9b`); before that at T8.
  *
+ * ── 2026-10-01, DRUIDS IN A WORLD WITHOUT MAGIC (owner-signed, through the door) ─────────
+ * THE EIGHTH MOVEMENT OF THIS CONSTANT since the genesis freeze, a signed re-record under
+ * tests/helpers/goldenRecordDoor.js like the seventh, and again not a spend of the one
+ * window this file's STOP still names. The owner's words (2026-10-01): "druid is magic" ·
+ * "Warden's Lodge stays defense, not druid"; the record is
+ * docs/shift-records/2026-10-01-urban-band-druid-faith.json (odqRow §934.86 addendum 2).
+ * THE MOVER: Warden's Lodge is defence, not druid. Its description, variants and identity
+ * sentence lose the druid clause, its pairing becomes military, and it defends in every
+ * world with a mundane tracking term (J31/J32). The instrument was re-run at the base
+ * 4b86da68a and reproduced `9dab4460…` exactly before this value was taken.
+ * On THIS corpus 29 of 360 rows move, all of them towns; 360/360 hashes stay distinct.
+ * ATTRIBUTION, ZERO RESIDUE: the 29 moved rows are exactly the 29 corpus settlements
+ * holding a Warden's Lodge, and none of the 331 unmoved rows holds one. `9dab4460…` ->
+ * `4888fd37…`.
+ *
  * ── 2026-09-30, THE URBAN BAND (owner-signed, through the door) ──────────────────────────
  * THE SEVENTH MOVEMENT OF THIS CONSTANT since the genesis freeze, and like the ones before
  * it a signed re-record under tests/helpers/goldenRecordDoor.js rather than a spend of
@@ -355,7 +370,7 @@ const THE_CALLER = 'src/domain/worldPulse/operations/missionDispatcher.js';
  * superseded by the ENGINE-HYGIENE re-record above, which is the record of the
  * one chartered window that has been spent since.
  */
-const PRE_COUPLING_CORPUS_SHA = '9dab44602b2716719fe1bf823e37ea1865e146ddb4d16eb6a87fa745933bda11';
+const PRE_COUPLING_CORPUS_SHA = '4888fd37fa5157056fe92f38d02d3f6b79b6e6adbf214f9fc6619d31ea84ce2f';
 
 const CORPUS_TIERS = Object.freeze(['thorp', 'hamlet', 'village', 'town', 'city', 'metropolis']);
 const CORPUS_ROUTES = Object.freeze(['road', 'isolated', 'port', 'crossroads']);

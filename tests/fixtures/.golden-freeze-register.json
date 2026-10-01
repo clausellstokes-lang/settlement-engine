@@ -288,11 +288,11 @@
         "PRE_COUPLING_CORPUS_SHA"
       ],
       "frozenConstants": null,
-      "sha256": "5ee268c3bbc169d3a206109460fdd0b648cc4b39df01d74543b748cea771a72f",
+      "sha256": "b3fec9862d013b851de49efc23284aff1a1567c08a60ea5fb684a268ae976027",
       "rows": null,
       "seedSet": null,
       "distinctFloor": null,
-      "ownerRow": "§934.86 of docs/OWNER_DECISION_QUEUE.md (THE URBAN BAND, recorded by the urban-band chair 2026-09-30 on the ledger branch review-fixes-2026-07-08 at 9d3b518de)",
+      "ownerRow": "§934.86 addendum 2 of docs/OWNER_DECISION_QUEUE.md (DRUIDS IN A WORLD WITHOUT MAGIC, recorded 2026-10-01 on the ledger branch review-fixes-2026-07-08 at 381aa20a0)",
       "note": "FROZEN AT THE GENESIS 2026-09-16 at the bytes committed at d22ceff01 (the owner's signature 'sign the golden'; record docs/shift-records/2026-09-16-genesis-freeze-generator-golden-master.json); measured, not moved: sha256 = bytes of `path`, rows = the manifest's key count where it is JSON.",
       "governance": "Charter §1.1 row 15 / §1.1a. Its header carries a hand-maintained enumeration of chartered movement windows which the freeze act retires into one sentence. Implementation-leave: the fence itself is not rebuilt."
     },
