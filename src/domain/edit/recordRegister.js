@@ -260,7 +260,11 @@ export const CROSS_ENTRY_TOTALS = Object.freeze({
 });
 
 /** ⚠ Rows whose longest observed array is ONE entry: the corpus cannot test uniqueness there,
- *  so the key is declared on its STABILITY and NAMED as unproven. */
+ *  so the key is declared on its STABILITY and NAMED as unproven.
+ *  2026-10-01, the urban band (ODQ §934.86): `generationCoherenceReceipt.repairs` JOINS (9 -> 10). Over the
+ *  re-generated corpus no world carries more than one repair, so the corpus can no longer test that collection's key
+ *  for uniqueness; the arm's own words are "a row that loses its multi-entry observations must JOIN it". The set is
+ *  the one tests/lint/recordRegisterTotality.walker.test.js A4 measures and prints. */
 export const KEY_UNPROVEN_AT_LENGTH_ONE = Object.freeze([
   'activeConditions',
   'activeConditions[].causes',
@@ -270,6 +274,7 @@ export const KEY_UNPROVEN_AT_LENGTH_ONE = Object.freeze([
   'defenseProfile.institutions.watch',
   'economicViability.warnings',
   'generationCoherenceReceipt.authoredTensions',
+  'generationCoherenceReceipt.repairs',
   'structuralSuggestions',
 ]);
 
