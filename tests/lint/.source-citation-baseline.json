@@ -27,12 +27,13 @@
     "_rosterGrowth2026-09-24-treaty-voice-desk": "ONE document JOINED `tree` (23 -> 24) and it hid NOTHING: docs/shift-records/2026-09-24-treaty-voice-desk-default-beat.json — the chair's signed RE-RECORD record of the herald-knowledge-desk golden at the treaty-voice pick (a peacetime pact's default beat now speaks; FP-28 once per cause), born inside docs/shift-records/ with the re-record it signs; a JSON signature with zero source citations of its own, so pastEofCitationsExcluded stays at 377.",
     "_rosterGrowth2026-09-24-lit2": "ONE document JOINED the roster by being BORN into it, and it hid NOTHING: docs/shift-records/2026-09-24-fp-lighting-2.json joined `tree` (23 -> 24 at its base; 24 -> 25 at the pick onto fp/integration, after the treaty-voice desk record) with LIT-2, the third FP lighting unit (its signed record of the preset-lighting-witness re-record for mediationGeneralizedEnabled in dramatic_campaign and full_simulation). A GROWTH, not a class move: the file entered the tree inside docs/shift-records/, so the ARCHIVAL_TREES rule classified it on its first commit and no live document left the gated corpus. It is archival for the reason every shift record on this roster is: it states what moved in ONE named golden at ONE named base and is never re-addressed to today's tree. THE PROOF THAT IT SILENCES NOTHING, measured with the shipped walker at the lane's tree: the record carries ZERO path:line citations of its own, so pastEofCitationsExcluded stays 377, and ARM 1 and ARM 2 are both 0. Recorded by the LIT-2 second seat.",
     "_rosterGrowth2026-09-30-urban-band": "TWO documents JOINED the roster by being BORN into it, and they hid NOTHING: docs/shift-records/2026-09-30-urban-band-institutions.json (the urban band's signed record, ODQ §934.86) and docs/shift-records/2026-10-01-urban-band-herald-rows.json (the record superseding its one herald prediction after the door's PREDICTION_MISS) joined `tree`, 25 -> 27. A GROWTH, not a class move: no live document left the gated corpus, and neither carries a past-EOF citation of its own.",
+    "_rosterGrowth2026-10-01-druid-faith": "ONE document JOINED the roster by being BORN into it, and it hid NOTHING: docs/shift-records/2026-10-01-urban-band-druid-faith.json (the record for the owner's druid rulings, ODQ §934.86 addendum 2) joined `tree`, 27 -> 28. A GROWTH, not a class move; no past-EOF citation of its own.",
     "pastEofCitationsExcluded": 377,
     "byRule": {
       "banner": 8,
       "dated": 5,
       "sha-pin": 1,
-      "tree": 27
+      "tree": 28
     },
     "files": {
       "banner": [
@@ -80,6 +81,7 @@
         "docs/shift-records/2026-09-24-lit1b-herald-desk-belief-lit.json",
         "docs/shift-records/2026-09-24-treaty-voice-desk-default-beat.json",
         "docs/shift-records/2026-09-30-urban-band-institutions.json",
+        "docs/shift-records/2026-10-01-urban-band-druid-faith.json",
         "docs/shift-records/2026-10-01-urban-band-herald-rows.json",
         "docs/shift-records/README.md",
         "docs/shift-records/_TEMPLATE.json"

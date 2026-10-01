@@ -342,11 +342,11 @@
       "suite": "tests/property/generatorGoldenMaster.test.js",
       "recordEnv": "UPDATE_GOLDEN",
       "proofForm": null,
-      "sha256": "fd2cf1dbd8c6b60e9d03087f5aa38dc9cd43a62b7ea5f8939a12a98bec2439db",
+      "sha256": "48f733d8b2e4ff04785f4fddb6878807f4f5fac8f83bd75076c3d7ca32043b64",
       "rows": 525,
       "seedSet": null,
       "distinctFloor": null,
-      "ownerRow": "§934.86 of docs/OWNER_DECISION_QUEUE.md (THE URBAN BAND, recorded by the urban-band chair 2026-09-30 on the ledger branch review-fixes-2026-07-08 at 9d3b518de)",
+      "ownerRow": "§934.86 addendum 2 of docs/OWNER_DECISION_QUEUE.md (DRUIDS IN A WORLD WITHOUT MAGIC, recorded 2026-10-01 on the ledger branch review-fixes-2026-07-08 at 381aa20a0)",
       "note": "RE-RECORDED THROUGH THE SIGNED DOOR at the genesis freeze 2026-09-16 (owner: 'sign the golden'; record docs/shift-records/2026-09-16-genesis-freeze-generator-golden-master.json); 525 rows moved since the em-dash wave e3f6029b2 (banked §901); the key set unchanged."
     },
     {
