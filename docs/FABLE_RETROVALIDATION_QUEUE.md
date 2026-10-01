@@ -3907,3 +3907,10 @@ No Opus car landed in this act. The twelve rulings, the two recorded owner words
 *Receipts:* the commits' messages (red-first and before/after measurements in each), the schema-24 migration report and bundle figures, and docs/URBAN_BAND_INSTITUTIONS.md §4e.
 *Priority:* P2.
 **Status:** enrolled.
+
+### R100 — J45, the first-paint closure bought back rather than raised (Opus 5.5 seat; `6e373d1a5` on `feat/urban-band-institutions-2026-09-30`)
+*What was judged:* the registry re-expressed so each value is spelled once (deriveRow's defaults left unwritten, families grouped by shelf, the generator's sharing rule widened to every non-numeric field), in place of asking the owner for a 5,273 B first-paint raise; the worker ceiling lowered to the measurement in the same act; the budget's note planted at the test file's end, so no `path:line` citation moves.
+*What Fable re-derives:* whether implicit defaults and shared names make the registry harder to author than the bytes are worth; whether spending 8,411 B of the reserved margin on one landing is the right use of it.
+*Receipts:* the commit message (the 518-row export identity and the build measurements), tests/build/vendorPdfLazy.test.js (its end note), and docs/URBAN_BAND_INSTITUTIONS.md §4e.
+*Priority:* P2.
+**Status:** enrolled.
