@@ -327,10 +327,10 @@ const TUNING_SOURCE = resolve(
 const FROZEN = Object.freeze({
   thorp: Object.freeze({ throws: 0, maxInstitutions: 12, maxBuildings: 13 }),
   hamlet: Object.freeze({ throws: 0, maxInstitutions: 25, maxBuildings: 27 }),
-  village: Object.freeze({ throws: 0, maxInstitutions: 41, maxBuildings: 46 }),
-  town: Object.freeze({ throws: 0, maxInstitutions: 63, maxBuildings: 112 }),
-  city: Object.freeze({ throws: 0, maxInstitutions: 56, maxBuildings: 198 }),
-  metropolis: Object.freeze({ throws: 0, maxInstitutions: 65, maxBuildings: 264 }),
+  village: Object.freeze({ throws: 0, maxInstitutions: 42, maxBuildings: 46 }),
+  town: Object.freeze({ throws: 0, maxInstitutions: 69, maxBuildings: 112 }),
+  city: Object.freeze({ throws: 0, maxInstitutions: 83, maxBuildings: 198 }),
+  metropolis: Object.freeze({ throws: 0, maxInstitutions: 86, maxBuildings: 264 }),
 });
 
 /**
