@@ -85,9 +85,16 @@ export const fixture = {
         "tag": "derived · npcs",
         "lead": "Odhrán MacCarthy, mayor",
         "rest": " · goal: use current stability to address structural vulnerabilities before conditions change."
+      },
+      {
+        "kind": "NPC",
+        "tone": "success",
+        "tag": "derived · npcs",
+        "lead": "Rónnat Sullivan, lord/lady of the manor",
+        "rest": " · goal: use current stability to address structural vulnerabilities before conditions change."
       }
     ],
-    "hooksMore": 6
+    "hooksMore": 5
   },
   "voice": {
     "receipts": [

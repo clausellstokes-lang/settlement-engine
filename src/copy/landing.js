@@ -52,10 +52,12 @@ export const landing = {
     waypoint: '01 · Forge',
     h2:    'A living town in one click. Twenty dials when you want them.',
     // Every concrete noun here is a FACT THE FIXTURE CARRIES, so §02 can print
-    // the same four receipts a screen later and the reader recognises them:
-    // the road roll (voice.receipts.route), the market licensing quarrel
-    // (voice.receipts.conflict), the cleared stands (voice.receipts.resource).
-    body:  'Pick a size and forge. Everything after that is derived, not drawn from a table: where the road goes, who holds the market, which faction is owed a favour, what was cut down a generation ago and never grew back. Open the Advanced panel and set terrain, age, wealth and trouble yourself.',
+    // the same three receipts a screen later and the reader recognises them:
+    // the road roll (voice.receipts.route), the travellers' inn the roster seated
+    // (voice.receipts.institution), the cleared stands (voice.receipts.resource).
+    // (Re-grounded 2026-09-30: the urban band's re-emitted fixture no longer carries
+    // the market licensing quarrel, ODQ §934.86.)
+    body:  'Pick a size and forge. Everything after that is derived, not drawn from a table: where the road goes, which inn takes the travellers, which faction is owed a favour, what was cut down a generation ago and never grew back. Open the Advanced panel and set terrain, age, wealth and trouble yourself.',
     axiom: 'Every dossier answers the same question: given these constraints, what must this place be?',
     // ⛔ THE SECTION-LEVEL ASK IS GONE (owner, 2026-09-19, taking the draft's
     // recommendation): ONE ask at the top and ONE at the end. `cta` ("Forge a
@@ -130,8 +132,9 @@ export const landing = {
     h2:     'The same town, in a voice for the table.',
     // ⚓ "never invents facts" is carried VERBATIM — tests/copy/landingClaimsParity
     // binds it to src/domain/aiGrounding.js and its suites. ⚑ The three named
-    // receipts are voice.receipts[1], [2] and [0], in the order the card prints.
-    body:   'Left is what the engine derived about Cnocby: the road it rolled, the timber it marked out, the licence the two factions want. Right is the same four facts for the table. The Narrative Layer never invents facts. Everything it needs is already in the brief.',
+    // receipts are voice.receipts[0], [1] and [2], in the order the card prints
+    // (re-grounded 2026-09-30 with forge.body above).
+    body:   'Left is what the engine derived about Cnocby: the road it rolled, the timber it marked out, the inn it seated for travellers. Right is the same three facts for the table. The Narrative Layer never invents facts. Everything it needs is already in the brief.',
     // Owner directive: disclose the AI up front (not prominent). The Narrative
     // Layer is no longer the ONLY AI surface (the Surveyor workshop is another),
     // so this line evolved (W-DOC reconcile, brief §4) from the stale "only AI

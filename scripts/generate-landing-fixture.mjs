@@ -305,6 +305,7 @@ export function buildFixture(seed, { weeks = DEFAULT_WEEKS, settType = DEFAULT_S
   const conflict = (town.conflicts || [])[0];
   const hooksTotal = a.hooks.length;
   const npcGoals = (town.npcs || []).filter(n => n?.goal?.short).length;
+  const secondNpc = (town.npcs || []).filter(n => n?.goal?.short && n !== npc)[0] || null;
   const arrival = String(town.arrivalScene || '').split(/(?<=\.)\s+/).slice(0, 2).join(' ');
 
   // Voice RAW receipts — real trace entries telling the tension line's story.
@@ -452,11 +453,17 @@ export function buildFixture(seed, { weeks = DEFAULT_WEEKS, settType = DEFAULT_S
       eyebrow: `${cfg.tradeRouteAccess} ${town.tier} · ${cfg.terrainType}`,
       prose: arrival,
       pressure: town.pressureSentence || '',
+      // The brief shows two derived hooks: the first figure's goal and the town's first conflict
+      // hook. A town with NO faction conflict shows its SECOND figure's goal instead, so the card
+      // never prints one hook where it promised two (2026-09-30: the urban band's same-seed shift
+      // left lf-033 without a conflict, ODQ §934.86). `hooksMore` counts what the card does not show.
       hooks: [
         npc && { kind: 'NPC', tone: 'success', tag: 'derived · npcs', lead: `${npc.name}, ${String(npc.role || '').toLowerCase()}`, rest: ` · goal: ${npc.goal.short.replace(/\.$/, '').toLowerCase()}.` },
-        conflict?.plotHooks?.[0] && { kind: 'Hook', tone: 'warning', tag: 'derived · factions', text: conflict.plotHooks[0] },
+        conflict?.plotHooks?.[0]
+          ? { kind: 'Hook', tone: 'warning', tag: 'derived · factions', text: conflict.plotHooks[0] }
+          : secondNpc && { kind: 'NPC', tone: 'success', tag: 'derived · npcs', lead: `${secondNpc.name}, ${String(secondNpc.role || '').toLowerCase()}`, rest: ` · goal: ${secondNpc.goal.short.replace(/\.$/, '').toLowerCase()}.` },
       ].filter(Boolean),
-      hooksMore: Math.max(0, hooksTotal - 1) + Math.max(0, npcGoals - 1),
+      hooksMore: Math.max(0, hooksTotal - (conflict?.plotHooks?.[0] ? 1 : 0)) + Math.max(0, npcGoals - (conflict?.plotHooks?.[0] ? 1 : 2)),
     },
     voice: { receipts, narrated: STOCK_NARRATION },
     realm: {
