@@ -47,6 +47,21 @@ const outcome = (extra = {}) => ({
   proposalPayload: { kind: 'government_change' },
   ...extra,
 });
+// THE PLANTED CHALLENGE (2026-10-01 (the urban band + the druid rulings, ODQ §934.86 and its addendum 2; the urban-band chair)): the re-dealt year no
+// longer reaches a government challenge (queued|faction_government_challenge left the corpus, and its rewrite rule is now
+// known-inert), so the gap A4 and A6 prove is PLANTED in pulse 2's selected lane (its old witness was 2/selectedOutcomes/0),
+// in the producer's own spelling.
+const CHALLENGE_HEADLINE = 'Military/Guard may press a challenge to the government';
+const plantedChallenge = (rows) => {
+  // APPENDED at the end of pulse 2's selected lane, so every corpus row stays exactly as measured and no other rule
+  // loses an occurrence; returns the rows and the planted row's location.
+  const planted = clone(rows);
+  const lane = planted.filter((row) => row.pulseIndex === 2 && row.field === 'selectedOutcomes');
+  if (lane.length === 0 || lane.length >= 24) throw new Error('the planted challenge has no room in pulse 2\'s selected lane');
+  planted.splice(planted.indexOf(lane.at(-1)) + 1, 0,
+    { rootOrdinal: lane[0].rootOrdinal, pulseIndex: 2, field: 'selectedOutcomes', outcomeIndex: lane.length, headline: CHALLENGE_HEADLINE });
+  return { rows: planted, location: `2/selectedOutcomes/${lane.length}` };
+};
 const addressEntry = (impactKind = 'ordinary') => ({ fields: { kind: 'applied', impactKind, headline: 'The deed is done.', summary: 'The deed now stands.' } });
 
 let baseline;
@@ -100,7 +115,7 @@ describe('complete Wizard News address and headline rewrite contract', () => {
     expect(overlapFields.consequenceOutcomes.filter(isStateOnlyOutcome)).toHaveLength(12);
   });
 
-  it('A2 freezes all 100 address rows and their canonical digest', () => {
+  it('A2 freezes all 88 address rows and their canonical digest', () => {
     expect(compareNewsAddressRows(addressRows, baseline.addressTotality.rows)).toBe(true);
     expect(addressRowsSha256(addressRows)).toBe(baseline.addressTotality.rowsSha256);
     // T8 · SHIFT (§858 + §860): 106 → 102 identities over 53 → 51 homes. The two homes that leave
@@ -114,7 +129,9 @@ describe('complete Wizard News address and headline rewrite contract', () => {
     // are recorded once, at news-headline-contract.mjs's ADDRESS_TOTALS.
     // FP BATCH 3 (2026-09-24): 50/2/100/12/88/393/544 → 51/2/102/13/89/395/546 — one new home (a new address, prospective),
     // ATTRIBUTED BY BISECT to CURE-PEACE-1 U1 (c9b24fe51); see scripts/lib/news-headline-contract.mjs's RE-RECORDED block.
-    expect(baseline.addressTotality.totals).toEqual({ homes: 51, fields: 2, identities: 102, prospectiveIdentities: 13, indicativeIdentities: 89, distinctValues: 395, occurrences: 546 });
+    // 2026-10-01 (the urban band + the druid rulings, ODQ §934.86 and its addendum 2; the urban-band chair): 51/2/102/13/89/395/546 → 44/2/88/14/74/385/530,
+    // eleven homes out and four in, named at news-voice-contract.mjs's RE-RECORDED block.
+    expect(baseline.addressTotality.totals).toEqual({ homes: 44, fields: 2, identities: 88, prospectiveIdentities: 14, indicativeIdentities: 74, distinctValues: 385, occurrences: 530 });
   });
 
   it('A3 freezes both raw lanes and all 26 exact rewrite counts', () => {
@@ -132,9 +149,11 @@ describe('complete Wizard News address and headline rewrite contract', () => {
     expect(deriveNewsAddressRows(nullable).map((row) => row.home)).toEqual([
       'applied|null', 'applied|null', 'applied|ordinary', 'applied|ordinary',
     ]);
+    // 2026-10-01 (the urban band + the druid rulings, ODQ §934.86 and its addendum 2; the urban-band chair): the corpus's null-impactKind entries were the
+    // eight web-war campaign beats (minted 4, complete 4), and the re-dealt year mints no web-war campaign, so the corpus carries
+    // NONE. The null-collision law stays pinned by the constructed `nullable` rows just above.
     const nullEntries = reconstruction.entries.filter((entry) => entry.fields.impactKind === null);
-    expect(nullEntries).toHaveLength(8);
-    expect(Object.fromEntries([...new Set(nullEntries.map((entry) => entry.fields.kind))].sort().map((kind) => [kind, nullEntries.filter((entry) => entry.fields.kind === kind).length]))).toEqual({ webwar_campaign_complete: 4, webwar_campaign_minted: 4 });
+    expect(nullEntries).toHaveLength(0);
     expect(() => deriveNewsAddressRows([])).toThrow();
     expect(() => deriveNewsAddressRows([addressEntry(), { ...addressEntry(), fields: { ...addressEntry().fields, headline: 'The deed may happen.' } }])).toThrow(/mixed voice/);
     for (const impactKind of [undefined, '', '   ', 3, true, [], {}, 'null', 'bad|token']) {
@@ -163,7 +182,8 @@ describe('complete Wizard News address and headline rewrite contract', () => {
     const rewriteRows = clone(baseline.rewriteLiveness.rows); rewriteRows.find((row) => row.occurrences > 0).occurrences += 1;
     expect(() => compareHeadlineRewriteRows(rewriteRows, baseline.rewriteLiveness.rows)).toThrow();
     const withoutChallenge = APPLIED_HEADLINE_REWRITES.filter(([pattern]) => pattern.source !== '\\bmay press a challenge to the government\\b');
-    expect(() => measureHeadlineRewriteLiveness(rawRows, withoutChallenge)).toThrow(/uncovered 2\/selectedOutcomes\/0/);
+    const challenge = plantedChallenge(rawRows);
+    expect(() => measureHeadlineRewriteLiveness(challenge.rows, withoutChallenge)).toThrow(`uncovered ${challenge.location}: ${CHALLENGE_HEADLINE}`);
     const capBreach = clone(rawRows); const selectedIndex = capBreach.findLastIndex((row) => row.field === 'selectedOutcomes' && row.pulseIndex === 0); capBreach[selectedIndex].outcomeIndex = 24;
     expect(() => rawHeadlineLivenessOf(capBreach)).toThrow(/cap 24/);
   });
@@ -180,13 +200,16 @@ describe('complete Wizard News address and headline rewrite contract', () => {
 
   it('A6 closes the sole live challenge gap with the exact producer twin', () => {
     const withoutChallenge = APPLIED_HEADLINE_REWRITES.filter(([pattern]) => pattern.source !== '\\bmay press a challenge to the government\\b');
-    const pre = analyzeHeadlineRewriteLiveness(rawRows, withoutChallenge);
+    const planted = plantedChallenge(rawRows);
+    const pre = analyzeHeadlineRewriteLiveness(planted.rows, withoutChallenge);
     // TE36 (ODQ §271): 16/9 → 15/10, carrying A3's single crossing through this derived
     // 25-rule scenario. `rules` stays 25 and the gap below is unchanged, so the challenge
     // rule this arm exists to isolate is untouched — only `may fall` moved sides, exactly
     // once, in both the full registry and this one-rule-short twin.
     expect({ rules: pre.totals.rules, activeRules: pre.totals.activeRules, inertRules: pre.totals.inertRules, overlaps: pre.overlaps.length, indicativeMatches: pre.indicativeMatches.length }).toEqual({ rules: 25, activeRules: 15, inertRules: 10, overlaps: 0, indicativeMatches: 0 });
-    expect(pre.gaps).toEqual([{ location: '2/selectedOutcomes/0', headline: 'Military/Guard may press a challenge to the government' }]);
+    expect(pre.gaps).toEqual([{ location: planted.location, headline: CHALLENGE_HEADLINE }]);
+    // and the full registry closes it: the twin is the rule that covers the planted spelling, and nothing else does.
+    expect(analyzeHeadlineRewriteLiveness(planted.rows, APPLIED_HEADLINE_REWRITES).gaps).toEqual([]);
     const did = FACTION_VERB_PHRASES.faction_government_challenge.did;
     expect(APPLIED_HEADLINE_REWRITES.find(([pattern]) => pattern.source === '\\bmay press a challenge to the government\\b')?.[1]).toBe(did);
     expect(newsEntryForOutcome(outcome(), 7, 'proposal').headline).toBe(outcome().headline);

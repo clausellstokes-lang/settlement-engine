@@ -627,10 +627,15 @@ describe('reader-with-no-writer ratchet: the EXECUTED corpus', () => {
     // homes in this same act (news-voice 268/28/51 → 272/32/50, conservation 272−32=240;
     // news-headline ADDRESS_TOTALS with distinctValues HOLDING at 393 — redistribution,
     // never inflation; prose-family 25/63 rows, distinctValues holding at 8).
+    // 2026-10-01 (the urban band + the druid rulings, ODQ §934.86 and its addendum 2; the urban-band chair): 272/1604/273/77/77 →
+    // 264/1557/265/79/79. ONE CAUSE, MEASURED AT BOTH ENDS: the corpus builder at the pre-band base 5d699cc68 reproduces the
+    // frozen figures exactly, and at the tip the AO-0 worlds re-deal their year (eleven news homes out, four in, named at
+    // news-voice-contract.mjs; root 2's pulse logs no regional event, named at prose-family-contract.mjs). Cross-recorded in
+    // news-voice, news-headline and prose-family in the same act.
     expect(scalarCorpus.scalarMeta).toEqual({
       canonEventLogEntries: 1,
-      wizardNewsFinalEntries: 272,
-      wizardNewsAccumulatedEntries: 1604,
+      wizardNewsFinalEntries: 264,
+      wizardNewsAccumulatedEntries: 1557,
       // FP BATCH 4 (2026-09-24, the FP chair): wizardNewsFinalEntries 240 → 272 and wizardNewsAccumulatedEntries 1567 → 1604 —
       // the Herald lens U2 (32315e384, FP-31): the feed keeps its newest 52 weeks whole under the 240 cap, so the corpus's
       // twelve monthly pulses retire one entry instead of thirty-three; unique 273 HOLDS. Attributed by equality with the U2
@@ -640,7 +645,7 @@ describe('reader-with-no-writer ratchet: the EXECUTED corpus', () => {
       // (a peacetime suit retires when a war opens against its court; its feed reconcile mints the one id). Accumulated 1567
       // and final 240 DO NOT MOVE. Cross-recorded in the same act: news-voice (introductions 273), prose-family
       // (scalarRows 25549, pulseHistory 1055/5097), the OSR register --write at 98e0d8664 (exact, 1970 findings).
-      wizardNewsUnique: 273,
+      wizardNewsUnique: 265,
       pulseHistory: 12,
       // TE36 (ODQ §271): 109 → 73, one cause — the regional event log carries the pulse's
       // selected outcomes, and the retired bare-decline family was 36 of them. That mint's
@@ -648,8 +653,8 @@ describe('reader-with-no-writer ratchet: the EXECUTED corpus', () => {
       // OPPOSITE directions, and 73 → 74 here is the state lane picking up exactly what the
       // Chronicle put down. `wizardNewsFinalEntries` staying at 240 through both mints is
       // the control that keeps the two layers legibly apart.
-      regionalEventLog: 77,
-      regionalEventLogUnique: 77,
+      regionalEventLog: 79,
+      regionalEventLogUnique: 79,
       aiChronicle: 1,
     });
     expect(Object.hasOwn(corpus, 'scalarObservations')).toBe(false);
