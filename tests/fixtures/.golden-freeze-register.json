@@ -498,11 +498,11 @@
       "suite": "tests/pdf/goldenViewModel.test.js",
       "recordEnv": null,
       "proofForm": null,
-      "sha256": "39447f53f8ba615c17ede57350954120e0dfb8c1a86b4a544e1781d7fbc3253e",
+      "sha256": "6dfa0059af3e9b078b51c257f436ec241411d10d1cf59d77b67ede47e3b64718",
       "rows": null,
       "seedSet": null,
       "distinctFloor": null,
-      "ownerRow": "§901",
+      "ownerRow": "§934.86 of docs/OWNER_DECISION_QUEUE.md (THE URBAN BAND, recorded by the urban-band chair 2026-09-30 on the ledger branch review-fixes-2026-07-08 at 9d3b518de)",
       "governance": "THE WRITER IS VITEST ITSELF, NOT REPO SOURCE. This surface is a vitest toMatchSnapshot() file; its lawful re-record path is `vitest -u`. That path carries no env spelling and no writeFileSync, so no source scan can see it and THE DOOR CANNOT REFUSE IT. The walker can only CONVICT the result after the fact via the byte arm. This asymmetry is real and is written here rather than discovered at the freeze: for this one surface the machinery detects but does not prevent. Ruling on whether to convert it to a door-written manifest belongs to the freeze act.",
       "note": "FROZEN AT THE GENESIS 2026-09-16 at the bytes committed at d22ceff01 (the owner's signature 'sign the golden'; record docs/shift-records/2026-09-16-genesis-freeze-generator-golden-master.json); measured, not moved: sha256 = bytes of `path`, rows = the manifest's key count where it is JSON. Charter §1.1 row 6. The only __snapshots__ file in the estate."
     },
