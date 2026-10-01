@@ -973,25 +973,25 @@
   },
   {
     "path": "src/generators/economy/viability.js",
-    "line": 102,
+    "line": 121,
     "category": "floatInterpolation",
     "snippet": "`△ VIABLE WITH PROVISIONING STRAIN: ${deficitPercent}% of daily food need remains uncovered.`"
   },
   {
     "path": "src/generators/economy/viability.js",
-    "line": 102,
+    "line": 121,
     "category": "percentToken",
     "snippet": "`△ VIABLE WITH PROVISIONING STRAIN: ${deficitPercent}% of daily food need remains uncovered.`"
   },
   {
     "path": "src/generators/economy/viability.js",
-    "line": 104,
+    "line": 123,
     "category": "floatInterpolation",
     "snippet": "`✓ VIABLE WITH PROVISIONING SUPPORT: imports, reserves, or extraordinary supply cover ${rawDeficitPercent}% of daily food need.`"
   },
   {
     "path": "src/generators/economy/viability.js",
-    "line": 104,
+    "line": 123,
     "category": "percentToken",
     "snippet": "`✓ VIABLE WITH PROVISIONING SUPPORT: imports, reserves, or extraordinary supply cover ${rawDeficitPercent}% of daily food need.`"
   },
