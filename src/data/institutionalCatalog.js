@@ -1620,7 +1620,7 @@ const clonePlain = (value) => (value && typeof value === 'object' ? JSON.parse(J
  * One family's entry at one tier, as the catalog row every reader takes. Throws on an unknown
  * key so a typo'd field can never ride silently into generation.
  * @param {InstitutionFamily} fam @param {string} tier
- * @returns {{ name: string, row: Record<string, unknown> }}
+ * @returns {{ name: string, row: Record<string, unknown>, guards: { minPopulation?: number, requiresAny?: string[] } | null }}
  */
 function deriveRow(fam, tier) {
   const merged = { ...(fam.shared || {}), ...fam.at[tier] };
