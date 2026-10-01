@@ -472,6 +472,15 @@ const BASELINE_PATH = join(ROOT, 'tests/lint/.prose-numerics-baseline.json');
 // `${x.weight}` interpolations in `worldPulse/warReceiptPools.js` would red on arrival, and a
 // ceiling may never be raised to absorb them. The class is held meanwhile by a behaviour arm
 // (tests/components/statBandsOverDigits.test.jsx), which convicts a planted weight.
+// THE URBAN BAND (2026-09-30, ODQ §934.86) — SEVEN PURE LINE MOVES, NO CEILING CHANGE, NO DEBT
+// MOTION. The registry rebuild's generator work adds one line above the banked rows in
+// `src/generators/economy/viability.js` (the two rows' pairs re-address 101 -> 102 and
+// 103 -> 104, both categories each) and nine lines above the three rows in
+// `src/generators/structuralValidator.js` (679 -> 688, 686 -> 695, 694 -> 703). MEASURED by a
+// probe copy of this file's own live scan: path, category and snippet are byte-identical on
+// all seven, 0 added and 0 removed, the census holds at 218 against a 218 ceiling and no
+// category count moves. The whole baseline diff is fourteen lines, seven -/+ pairs, each a
+// `"line"` value and nothing else.
 const REVIEWED_TOTAL_CEILING = 218;
 const REVIEWED_CATEGORY_CEILINGS = Object.freeze({
   floatInterpolation: 147,

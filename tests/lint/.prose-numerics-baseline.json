@@ -973,25 +973,25 @@
   },
   {
     "path": "src/generators/economy/viability.js",
-    "line": 101,
+    "line": 102,
     "category": "floatInterpolation",
     "snippet": "`△ VIABLE WITH PROVISIONING STRAIN: ${deficitPercent}% of daily food need remains uncovered.`"
   },
   {
     "path": "src/generators/economy/viability.js",
-    "line": 101,
+    "line": 102,
     "category": "percentToken",
     "snippet": "`△ VIABLE WITH PROVISIONING STRAIN: ${deficitPercent}% of daily food need remains uncovered.`"
   },
   {
     "path": "src/generators/economy/viability.js",
-    "line": 103,
+    "line": 104,
     "category": "floatInterpolation",
     "snippet": "`✓ VIABLE WITH PROVISIONING SUPPORT: imports, reserves, or extraordinary supply cover ${rawDeficitPercent}% of daily food need.`"
   },
   {
     "path": "src/generators/economy/viability.js",
-    "line": 103,
+    "line": 104,
     "category": "percentToken",
     "snippet": "`✓ VIABLE WITH PROVISIONING SUPPORT: imports, reserves, or extraordinary supply cover ${rawDeficitPercent}% of daily food need.`"
   },
@@ -1093,19 +1093,19 @@
   },
   {
     "path": "src/generators/structuralValidator.js",
-    "line": 679,
+    "line": 688,
     "category": "floatInterpolation",
     "snippet": "`${tierLabel} closes its isolation-support gap through magical transit (${support.capacity}/${support.requiredCapacity} capacity). If magic fails, its mundane support paths are insufficient.`"
   },
   {
     "path": "src/generators/structuralValidator.js",
-    "line": 686,
+    "line": 695,
     "category": "floatInterpolation",
     "snippet": "`${tierLabel} is viable in isolation through ${support.paths.map(path => path.type.replace(/_/g, ' ')).join(', ')} (${support.capacity}/${support.requiredCapacity} support capacity).`"
   },
   {
     "path": "src/generators/structuralValidator.js",
-    "line": 694,
+    "line": 703,
     "category": "floatInterpolation",
     "snippet": "`${tierLabel} has only ${support.capacity}/${support.requiredCapacity} isolation-support capacity. Local food, reserves, seasonal access, patronage, and any functional magical transit do not cover the settlement's needs.`"
   },
