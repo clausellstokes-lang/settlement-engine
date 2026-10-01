@@ -137,9 +137,13 @@ function applyCascadeInstitutions(institutions, tier, opts = {}) {
   };
   const cascadeCap = CASCADE_CAPS[tier] || 8;
 
-  // Only cascade into institutions from the SAME tier or ONE tier below
-  // (prevents city chains from cascading all the way into thorp catalog at scale)
-  const minCascadeTierIdx = Math.max(0, tierIdx - 1);
+  // Only cascade into institutions from the settlement's OWN tier. Until 2026-09-30 this read
+  // the tier below as well, because a city block lacked most town trades; the urban band made
+  // every tier block complete (ODQ §934.86), so the tier below holds only lesser scale rungs,
+  // ceiling-bound families and (village -> town) a different kind. Reading it leaked them:
+  // Warden's Lodge in 26 of 200 cities past its declared town ceiling, a town's
+  // 'Merchant guilds (3-8)' in 8 cities, a city's Black market in 56 of 200 metropolises.
+  const minCascadeTierIdx = tierIdx;
 
   // Search relevant tiers only
   TIER_ORD.slice(minCascadeTierIdx, tierIdx + 1).forEach(t => {

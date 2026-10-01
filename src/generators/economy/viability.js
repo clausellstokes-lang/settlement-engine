@@ -11,6 +11,9 @@ import { getPriorities, getTradeRouteFeatures, hasTeleportationInfra, evaluateWa
 import { priorityToCategory } from './prosperity.js';
 import { deriveFoodBalanceAnalysis, deriveSupplyRiskAnalysis } from './foodBalance.js';
 import { formatCount } from '../../domain/formatNumber.js';
+// A PRINT goes through the label seam, a match never does (domain/display/institutionDisplayName.js):
+// the sentences below name institutions to a reader, and a city's 'Bakers (5-15)' is its bakers.
+import { institutionDisplayName } from '../../domain/display/institutionDisplayName.js';
 import { deriveIsolationSupport } from '../isolationSupport.js';
 import {
   isMaterializedCustomContent,
@@ -144,7 +147,7 @@ const deriveResourceChainAnalysis = (institutions, terrain, nearbyResources, con
       suggestions.push({
         category: 'Resource Chain',
         title: `Opportunity: process ${resource}`,
-        description: `${resource} is available locally. Add ${reachable.slice(0, MAX_CHAIN_SUGGESTIONS).join(' or ')} to unlock higher-value exports.`,
+        description: `${resource} is available locally. Add ${reachable.slice(0, MAX_CHAIN_SUGGESTIONS).map(institutionDisplayName).join(' or ')} to unlock higher-value exports.`,
       });
     } else if (processingInsts.length > 0) {
       const missing = reachable
@@ -157,7 +160,7 @@ const deriveResourceChainAnalysis = (institutions, terrain, nearbyResources, con
       suggestions.push({
         category: 'Resource Chain',
         title: `Incomplete chain: ${resource}`,
-        description: `Processing ${resource} but missing ${missing.join(', ')} for the full chain.`,
+        description: `Processing ${resource} but missing ${missing.map(institutionDisplayName).join(', ')} for the full chain.`,
         impact: `Exports intermediate goods instead of final products (${outputs.map((o) => o.label || o).join(', ') || 'finished goods'}). Lower profit margins.`,
         suggestedFixes: [`Add ${missing.join(' and ')} to complete the production chain`],
       });
@@ -209,8 +212,8 @@ const deriveWaterDependencyAnalysis = (institutions, terrain, config) => {
         warnings.push({
           severity: SEVERITY.DEPENDENCY,
           category: 'Water Dependency',
-          title: `${inst.name}: requires water access`,
-          description: `${inst.name} requires ${waterNeed.description || 'water access'} but settlement has no river or port.`,
+          title: `${institutionDisplayName(inst.name)}: requires water access`,
+          description: `${institutionDisplayName(inst.name)} requires ${waterNeed.description || 'water access'} but settlement has no river or port.`,
           impact: 'Severely reduced productivity without water access.',
           suggestedFixes: alternatives.length ? alternatives : ['Establish a river or port trade route'],
         });
@@ -538,7 +541,7 @@ export const generateEconomicViability = (settlement, terrainType = null, nearby
           (isSieged
             ? `${critical.length} institution${critical.length > 1 ? 's' : ''} critically impaired by siege: `
             : `${critical.length} institution${critical.length > 1 ? 's' : ''} operating on stockpiles only (isolated trade): `) +
-          critical.map((d) => d.institution).join(', ') +
+          critical.map((d) => institutionDisplayName(d.institution)).join(', ') +
           '.',
       });
     if (vulnerable.length >= 3)

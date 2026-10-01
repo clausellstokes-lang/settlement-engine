@@ -25,7 +25,7 @@ import { institutionalCatalog } from '../../data/institutionalCatalog.js';
 import { recordTrace } from '../../domain/trace.js';
 import { deriveIsolationSupport } from '../isolationSupport.js';
 import { applyTeleportationInfrastructure } from '../isolationGenerator.js';
-import { checkStructuralValidity } from '../structuralValidator.js';
+import { checkStructuralValidity, SPATIAL_FEATURES } from '../structuralValidator.js';
 import { registerStep } from '../pipeline.js';
 import { collapseUpgradeChains } from './assembleInstitutions.js';
 import {
@@ -52,6 +52,37 @@ function institutionId(name) {
 
 function normalizedName(value) {
   return String(value || '').trim().toLowerCase();
+}
+
+/**
+ * THE DEPENDENCY REPAIR'S CANDIDATES: the settlement's OWN tier block only (2026-09-30, the urban
+ * band, ODQ §934.86). Every tier block is complete now, so a lower tier holds only lesser scale
+ * rungs and different kinds, and adding one from there seated a town's 'Adventurers' charter hall'
+ * beside a city's own guilds in 6 of 200 cities and 12 of 200 metropolises. A requirement the
+ * block does not list by name is met by a row the block DOES list that implies it
+ * (SPATIAL_FEATURES: the city's 'Multiple adventurers' guilds' implies the charter hall), which
+ * is the validator's own evidence rule; tests/lint/institutionRegistry.walker.test.js L4 holds
+ * that every gate is satisfiable that way at every tier it rolls. The threat-defense plan keeps
+ * the wider window below: its per-tier fallbacks are authored.
+ * @param {string} tier
+ */
+function ownTierEntries(tier) {
+  const out = [];
+  for (const [category, group] of Object.entries(institutionalCatalog[tier] || {})) {
+    for (const [name, definition] of Object.entries(group || {})) {
+      out.push({ category, name, nativeTier: tier, ...definition });
+    }
+  }
+  return out;
+}
+
+/** Each missing name, then each own-tier row that implies one of them. */
+function dependencyOptions(entries, missing) {
+  const wanted = new Set(missing.map(normalizedName));
+  const implying = entries
+    .filter(entry => (SPATIAL_FEATURES[entry.name] || []).some(name => wanted.has(normalizedName(name))))
+    .map(entry => entry.name);
+  return [...missing, ...implying];
 }
 
 /**
@@ -353,7 +384,7 @@ function repairHardViolations(ctx, entries, observed) {
         const added = addCandidate(
           ctx,
           entries,
-          missing,
+          dependencyOptions(entries, missing),
           'hard_dependency',
           `${violation.institution} requires a compatible supporting institution.`,
         );
@@ -418,6 +449,7 @@ registerStep('coherenceRepairPass', {
 }, ctx => {
   const before = ctx.institutions.map(institution => institution.name);
   const entries = catalogEntriesAtTier(ctx.tier);
+  const dependencyEntries = ownTierEntries(ctx.tier);
   ctx.generationRepairs = Array.isArray(ctx.generationRepairs)
     ? ctx.generationRepairs
     : [];
@@ -425,7 +457,7 @@ registerStep('coherenceRepairPass', {
   // One dedupe set for the whole step run — see repairHardViolations' contract.
   const observedUnrepairable = new Set();
   repairThreatDefense(ctx, entries);
-  repairHardViolations(ctx, entries, observedUnrepairable);
+  repairHardViolations(ctx, dependencyEntries, observedUnrepairable);
 
   applySubsumption(ctx.institutions, ctx, {
     step: COHERENCEREPAIRPASS,
@@ -464,7 +496,7 @@ registerStep('coherenceRepairPass', {
   // Transit infrastructure has the same dependency laws as every other
   // institution. Repair those dependencies after injection, then normalize the
   // roster once more before taking the persisted support measurement.
-  repairHardViolations(ctx, entries, observedUnrepairable);
+  repairHardViolations(ctx, dependencyEntries, observedUnrepairable);
   applySubsumption(ctx.institutions, ctx, {
     step: COHERENCEREPAIRPASS,
     result: 'subsumed_after_isolation_repair',
