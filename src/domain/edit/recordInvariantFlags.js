@@ -66,9 +66,10 @@ export const FLAGS_EVER_TRUE = Object.freeze({
  */
 // EMPTY SINCE 2026-10-01: the urban band's same-seed shift (ODQ §934.86) left the pinned row
 // (town|germanic|mountain|mountain_pass|civilized|golden-master-v3, V-SUMMARY-DEPS, found 2026-09-23)
-// clean, so the row is removed in that act as this comment's rule requires. That is NOT a cure of the
-// generator defect: FIX-G1 (curedBy) remains the owed repair, and a row that shows it again must be
-// declared here again.
+// clean, so the row is removed in that act as this comment's rule requires. That was NOT a cure of the
+// generator defect; the cure is FIX-G1 (curedBy), picked onto this line the same day from 4e11edfdd: the
+// viability sentence now counts the list the record publishes, proved red-first on a re-pinned witness in
+// tests/generators/foodModelSingleWriter.test.js. A row that shows the defect again must be declared here again.
 export const KNOWN_VIOLATIONS = Object.freeze([]);
 
 /** The provenance of `FLAGS_EVER_TRUE`. Strings only; the counts live in the receipt. */

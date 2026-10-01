@@ -199,7 +199,7 @@ describe('EM-R0b — recordInvariants: the town\'s own invariants as a module', 
   it('EM-R0b A1 — the control over the declared stride: every plain generated record is clean, and the declared pins are exactly the offenders', () => {
     // RE-CUT 2026-10-01 (the urban band, ODQ §934.86): the one known pin (the mountain-pass town's V-SUMMARY-DEPS)
     // is clean after the same-seed shift and was removed from KNOWN_VIOLATIONS in that act, as the flags module's
-    // rule requires; FIX-G1 stays the owed cure. "Both directions" now reads: no offender, and no declared pin.
+    // rule requires; FIX-G1 (picked the same day) is the cure. "Both directions" now reads: no offender, and no declared pin.
     // A3's planted mutants remain the proof that every check can still fire.
     const rows = strideSample();
     expect(rows.length, 'the declared stride must keep its cardinality or the control below is a different sample')

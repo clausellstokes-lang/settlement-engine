@@ -164,8 +164,8 @@ export function capturedRulingStructure(settlement) {
 export const HOLDER_SOURCES = Object.freeze({
   // ── the treasury: the town's coin, its revenue and the arithmetic that closes or does not ──
   incomeSources: Object.freeze({ kind: 'treasury', cite: 'src/generators/economy/economicState.js:873', read: true }),
-  viable: Object.freeze({ kind: 'treasury', cite: 'src/generators/economy/viability.js:566', read: true }),
-  criticalIssueCount: Object.freeze({ kind: 'treasury', cite: 'src/generators/economy/viability.js:586', read: true }),
+  viable: Object.freeze({ kind: 'treasury', cite: 'src/generators/economy/viability.js:588', read: true }),
+  criticalIssueCount: Object.freeze({ kind: 'treasury', cite: 'src/generators/economy/viability.js:608', read: true }),
   economicViability: Object.freeze({ kind: 'treasury', cite: 'src/generators/steps/assembleSettlement.js:110', read: true }),
 
   // ── the market: what the town makes, sends and takes in ──
