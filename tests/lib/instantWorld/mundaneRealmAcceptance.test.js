@@ -286,9 +286,19 @@ describe('MG-4.1 — the mundane realm, measured across every member', () => {
  * MEASURED (seed 'mg4-acceptance', small/realistic_regional/highIsland). ALL FIVE AXES the
  * envelope compares, mundane vs magical, machine-checked by the last pin in MG-4.2 against
  * this very line — see THE RECORD IS CHECKED below:
- *   RECORDED-CENSUS: members 5 vs 5 · institutions 137 vs 136 · factions 22 vs 24 · services 195 vs 192 · historyEvents 24 vs 25
- * Ratios: members 1.000 · institutions 1.007 · factions 0.917 · services 1.016 ·
- * historyEvents 0.960 — the mundane realm is at or above parity on three of five axes.
+ *   RECORDED-CENSUS: members 5 vs 5 · institutions 142 vs 136 · factions 24 vs 24 · services 199 vs 192 · historyEvents 24 vs 25
+ * Ratios: members 1.000 · institutions 1.044 · factions 1.000 · services 1.036 ·
+ * historyEvents 0.960 — the mundane realm is at or above parity on four of five axes.
+ * ⚠️ MOVED 2026-09-30 BY MF-CH2B, THE MAGIC LICENCE — a DECLARED shift, not drift.
+ * institutions 137 → 142, factions 22 → 24, services 195 → 199; the magical twin does not
+ * move on any axis. The cause is one sentence: the gates that decided magic-dependence
+ * stopped reading the SHELF an author filed a catalog row on and started reading the row's
+ * declared `magicLicense`, so a magic-free realm keeps the entries licensed `none` — an
+ * alchemist's shop is a chemical trade, a great library is a repository of books, a druid
+ * circle is a faith (R-INST-5 families B and I; the deity doctrine). The arcane census over
+ * the mundane realm (MG-4.1) is still EMPTY and every `world_law_magic` row still certifies,
+ * which is the point: the realm gained buildings, not magic. Every envelope ratio stays
+ * inside PENDING_BANDS and three of the five improve, so no band is asked to move.
  * ⚠️ RE-RECORDED 2026-08-30 (lane TE-RESIDUE-1, the burial-ladder content car, ODQ §708.5):
  * `institutions 134 vs 133 · services 193 vs 189` → `137 vs 136 · 195 vs 192`. THE CAUSE IS
  * FIVE NEW REQUIRED CATALOG ROWS, not a thinning: the catalog could bury the dead at exactly
