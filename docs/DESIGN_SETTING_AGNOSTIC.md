@@ -126,10 +126,10 @@ price and drops the system.
 
 | Proper noun | Addresses | Cured to |
 | --- | --- | --- |
-| `Zone of Truth` | `institutionDescVariants.js:218,219` · `institutionalCatalog.js:2154` · `defenseGenerator.js:251` (comment) | compelled truth |
+| `Zone of Truth` | `institutionDescVariants.js:1330,1331` · `institutionalCatalog.js:1520` · `defenseGenerator.js:251` (comment) | compelled truth |
 | `Cure Wounds` | `institutionDescVariants.js:1238,1239` · `institutionServices.js :: INSTITUTION_SERVICES['Druid Circle']['Healing (nature)']` · `institutionalCatalog.js:860` | a closed wound / wounds closed |
 | `Lesser Restoration` | `institutionServices.js :: INSTITUTION_SERVICES['Druid Circle']['Healing (nature)']` | sickness lifted |
-| `Sending Stones` | `institutionDescVariants.js:258,259` · `institutionalCatalog.js:2261` · `spatialData.js:482` | `Speaking Stones` (the corpus's own alternative) |
+| `Sending Stones` | `institutionDescVariants.js:1354,1355` · `institutionalCatalog.js:1612` · `spatialData.js:482` | `Speaking Stones` (the corpus's own alternative) |
 | `Conjure Animals` | `chainMagicSubstitution.js:67` | conjured game |
 | `Plant Growth` | `chainMagicSubstitution.js:68` · `foodBalance.js :: deriveFoodBalanceAnalysis` · `defenseGenerator.js:385` (comment) | quickened growth |
 | `Fabricate` | `chainMagicSubstitution.js:88,113,27` (last is a comment) | arcane fabrication |
@@ -138,13 +138,15 @@ price and drops the system.
 | `Goodberry` | `defenseGenerator.js:385` (comment) | conjured forage |
 | `Detect Thoughts` | `defenseGenerator.js:249` (comment) | thought-reading |
 
+> Five rows of §2b and §2c were re-addressed 2026-09-30 to the cured text's current homes, after the urban band's registry rewrite (ODQ §934.86) shortened the catalog and spelled each variant pair once; the strings they point at are the "Cured to" column's.
+
 ### 2c. Rulebook scale — spell levels and item plusses (11 sites)
 
 | Address | String | Cured to |
 | --- | --- | --- |
-| `institutionDescVariants.js:18,19` · `institutionalCatalog.js:2192` | `+1 weapons` | warded weapons |
-| `institutionDescVariants.js:250,251` · `institutionalCatalog.js:2243` · `spatialData.js:472` | `5th level Dream spell` | dream-walking |
-| `institutionDescVariants.js:342,343` · `institutionalCatalog.js:1982` | `3rd-level spell` / `(3rd level)` | a greater working |
+| `institutionDescVariants.js:1146,1147` · `institutionalCatalog.js:1332` | `+1 weapons` | warded weapons |
+| `institutionDescVariants.js:1346,1347` · `institutionalCatalog.js:1600` · `spatialData.js:513` | `5th level Dream spell` | dream-walking |
+| `institutionDescVariants.js:838,839` · `institutionalCatalog.js:1265` | `3rd-level spell` / `(3rd level)` | a greater working |
 | `institutionDescVariants.js:506,507` · `institutionalCatalog.js:320` | `1st-level spells` | the smallest spells |
 | `institutionDescVariants.js:1242,1243` · `institutionalCatalog.js:824` | `1st to 3rd level spells` | minor spells |
 | `institutionServices.js :: INSTITUTION_SERVICES['Wizard Tower']['Spellcasting (minor)'] and ['Spellcasting Services']['Spellcasting (greater)']` (+7 consumer sites) | `Spellcasting (1st-3rd level)` / `(1st-8th level)` | `Spellcasting (minor)` / `(greater)` |
