@@ -23,12 +23,36 @@
  *       Measured on the combined tip before J20/J21: 25 of 40 magic-free cities failed
  *       `world_law_magic` on those rows' descriptions, and 19 of 40 villages on the name
  *       'Druid Circle' alone (0 of 40 at base, where the Magic shelf struck them).
+ *   G6  A DRUID IS A PRIEST WHERE MAGIC DOES NOT WORK (J30, the owner, 2026-10-01: "druid is
+ *       magic ... You can keep druid, only if you exclude magical services in non magic
+ *       settings"; "druid, in this case should then be paired as religious authorities in non
+ *       magic settings"; "their effect of food or defense does not exist in non magic
+ *       settings"). In both magic-free readings of the world law (`magicExists: false`, and a
+ *       magic dial at 0), Druid Circle and Elder Grove Council carry the faction role
+ *       'religion' and are backed by the religious faction; no druid or faith service asserts
+ *       working magic while mundane healing stays; and removing a druid row moves no food,
+ *       food-balance, food-chain or defence reading. Magic worlds keep the authored role and
+ *       every druid effect. Warden's Lodge is defence, not druid (the owner, 2026-10-01:
+ *       "Warden's Lodge stays defense, not druid"): the rule never catches it, it keeps its own
+ *       authored role, and it still works the hunting chain where magic does not work.
+ *       Measured at base f41266775: the roles read 'magic' and 'military',
+ *       Elder Grove Council alone kept the forage chain running in 36 of 39 magic-free towns and
+ *       cities holding it, and a Druid Circle opened an 11-point magical defence in every
+ *       dead-dial village holding one (14 of 14).
  *
  * Seeds are fixed, so every arm is deterministic: it passes or fails the same way on
  * every run.
  */
 import { describe, expect, it } from 'vitest';
 import { generateSettlementPipeline } from '../../src/generators/generateSettlementPipeline.js';
+import { generateFoodSecurity } from '../../src/generators/foodGenerator.js';
+import { deriveFoodBalanceAnalysis } from '../../src/generators/economy/foodBalance.js';
+import { generateDefenseProfile } from '../../src/generators/defenseGenerator.js';
+import { computeActiveChains } from '../../src/generators/computeActiveChains.js';
+import { createGenerationWorldLaw } from '../../src/generators/generationContext.js';
+import { institutionalCatalog } from '../../src/data/institutionalCatalog.js';
+import { institutionBackingFactionName } from '../../src/domain/display/institutionProfile.js';
+import { druidicFaithRole } from '../../src/domain/arcaneInstitutionIdentity.js';
 
 const ROUTES = ['road', 'port', 'river', 'crossroads', 'isolated'];
 const cache = new Map();
@@ -159,5 +183,169 @@ describe('G5 — a magic-free world certifies its own world-law magic check', ()
     }
     expect(druidRows, 'no faith row entered a magic-free world, so the certification proves nothing about them').toBeGreaterThan(5);
     expect(failed).toEqual([]);
+  });
+});
+
+// The two magic-free readings the world law admits (generationContext `magicEnabled`: the
+// switch off, or the dial at 0), and one magic world.
+const G6_WORLDS = {
+  noMagic: { magicExists: false, priorityMagic: 100 },
+  deadDial: { magicExists: true, priorityMagic: 0 },
+  magic: { magicExists: true, priorityMagic: 90 },
+};
+const DRUIDIC = /^(Druid Circle|Elder Grove Council)$/;
+const g6Cache = new Map();
+function g6World(kind) {
+  if (!g6Cache.has(kind)) {
+    const out = [];
+    for (const settType of ['village', 'town', 'city', 'metropolis']) {
+      for (const culture of ['celtic', 'germanic', 'norse']) {
+        for (let i = 0; i < 5; i++) {
+          out.push(generateSettlementPipeline(
+            { settType, culture, terrainOverride: 'forest', tradeRouteAccess: i % 2 ? 'isolated' : 'road',
+              priorityReligion: 90, ...G6_WORLDS[kind] },
+            null,
+            { seed: `urban-band-druid-${kind}-${settType}-${culture}-${i}`, customContent: {} },
+          ));
+        }
+      }
+    }
+    g6Cache.set(kind, out);
+  }
+  return g6Cache.get(kind);
+}
+const druidRows = (s) => (s.institutions || []).filter(r => DRUIDIC.test(r.name));
+// Every food and defence reading a druid row could move, read off the settlement's own roster.
+function foodAndDefence(s, roster) {
+  const cfg = s.config || {};
+  const dial = cfg.magicExists === false ? 0 : (cfg.priorityMagic ?? 50);
+  return JSON.stringify({
+    food: generateFoodSecurity(s.tier, roster, cfg),
+    balance: deriveFoodBalanceAnalysis(s.population, null, roster, { ...cfg, tier: s.tier }, s.economicState?.foodSecurity || null),
+    chains: computeActiveChains(roster, cfg.nearbyResources || [], s.tier, cfg.tradeRouteAccess, [], [], dial)
+      .filter(c => c.needKey === 'food_security' || c.needKey === 'defense_security'),
+    defence: generateDefenseProfile({ ...s, institutions: roster }),
+  });
+}
+const druidMoves = (s, row) => foodAndDefence(s, s.institutions) !== foodAndDefence(s, s.institutions.filter(r => r !== row));
+
+describe('G6 — a druid is a priest where magic does not work (J30)', () => {
+  it('in a magic-free world every druid institution is paired with the religious authorities', () => {
+    const wrong = [];
+    let rows = 0;
+    let backed = 0;
+    for (const kind of ['noMagic', 'deadDial']) {
+      for (const s of g6World(kind)) {
+        const factions = s.powerStructure?.factions || [];
+        const hasFaith = factions.some(f => f.category === 'religious');
+        for (const r of druidRows(s)) {
+          rows++;
+          if (r.priorityCategory !== 'religion') wrong.push(`${kind}/${s.name}: ${r.name} role ${r.priorityCategory}`);
+          if (!hasFaith) continue;
+          backed++;
+          const backer = institutionBackingFactionName(r, s);
+          const faction = factions.find(f => (f.faction || f.name) === backer);
+          if (faction?.category !== 'religious') wrong.push(`${kind}/${s.name}: ${r.name} backed by ${backer}`);
+        }
+      }
+    }
+    expect(rows, 'druid rows in magic-free worlds').toBeGreaterThan(40);
+    expect(backed, 'druid rows in a settlement with a religious faction').toBeGreaterThan(20);
+    expect(wrong).toEqual([]);
+  });
+
+  it('in a magic world every druid institution keeps its authored pairing', () => {
+    const wrong = [];
+    let rows = 0;
+    for (const s of g6World('magic')) {
+      for (const r of druidRows(s)) {
+        rows++;
+        const authored = institutionalCatalog[s.tier]?.Religious?.[r.name]?.priorityCategory;
+        if (!authored || r.priorityCategory !== authored) wrong.push(`${s.name}: ${r.name} role ${r.priorityCategory}, authored ${authored}`);
+      }
+    }
+    expect(rows, 'druid rows in magic worlds').toBeGreaterThan(20);
+    expect(wrong).toEqual([]);
+  });
+
+  it('no druid or faith service in a magic-free world asserts working magic, and mundane healing stays', () => {
+    const asserting = [];
+    let faithServices = 0;
+    let healing = 0;
+    for (const kind of ['noMagic', 'deadDial']) {
+      for (const s of g6World(kind)) {
+        const law = createGenerationWorldLaw(s.config || {});
+        if (law.magicEnabled) asserting.push(`${kind}/${s.name}: the world law reads magic as working`);
+        const byName = new Map((s.institutions || []).map(i => [i.name, i]));
+        for (const list of Object.values(s.availableServices || {})) {
+          for (const sv of list || []) {
+            const provider = byName.get(sv.institution);
+            if (!provider || !(provider.category === 'Religious' || (provider.tags || []).includes('religious'))) continue;
+            faithServices++;
+            if (/heal|hospital|sick|infirm/i.test(`${sv.name} ${sv.desc || ''}`)) healing++;
+            if (!law.allowsMagicClaim(`${sv.name} ${sv.desc || sv.description || ''}`)) {
+              asserting.push(`${kind}/${s.name}: ${sv.institution} :: ${sv.name}`);
+            }
+          }
+        }
+      }
+    }
+    expect(faithServices, 'faith services in magic-free worlds').toBeGreaterThan(100);
+    expect(healing, 'mundane faith healing stays in magic-free worlds').toBeGreaterThan(5);
+    expect(asserting).toEqual([]);
+  });
+
+  it('in a magic-free world a druid institution adds no food and no defence', () => {
+    const moved = [];
+    let rows = 0;
+    for (const kind of ['noMagic', 'deadDial']) {
+      for (const s of g6World(kind)) {
+        for (const r of druidRows(s)) {
+          rows++;
+          if (druidMoves(s, r)) moved.push(`${kind}/${s.tier}/${s.name}: ${r.name}`);
+        }
+      }
+    }
+    expect(rows, 'druid rows in magic-free worlds').toBeGreaterThan(40);
+    expect(moved).toEqual([]);
+  });
+
+  it('in a magic world the druids still feed and guard, so the instrument above can see them', () => {
+    let rows = 0;
+    let moving = 0;
+    for (const s of g6World('magic')) {
+      for (const r of druidRows(s)) {
+        rows++;
+        if (druidMoves(s, r)) moving++;
+      }
+    }
+    expect(rows, 'druid rows in magic worlds').toBeGreaterThan(20);
+    expect(moving, `druid rows whose removal moves food or defence in a magic world (of ${rows})`).toBeGreaterThan(rows / 2);
+  });
+
+  it("Warden's Lodge stays defence, not druid: the rule never catches it in a magic-free world", () => {
+    const druidSet = new Set();
+    for (const shelves of Object.values(institutionalCatalog)) {
+      for (const shelfRows of Object.values(shelves)) {
+        for (const name of Object.keys(shelfRows)) if (druidicFaithRole(name, false)) druidSet.add(name);
+      }
+    }
+    expect([...druidSet].sort(), 'the druid set is derived from the registry').toEqual(['Druid Circle', 'Elder Grove Council']);
+    const wrong = [];
+    let lodges = 0;
+    for (const kind of ['noMagic', 'deadDial']) {
+      for (const s of g6World(kind)) {
+        for (const r of (s.institutions || []).filter(x => x.name === "Warden's Lodge")) {
+          lodges++;
+          const authored = institutionalCatalog[s.tier]?.Defense?.[r.name]?.priorityCategory;
+          if (r.priorityCategory === 'religion' || r.priorityCategory !== authored) wrong.push(`${kind}/${s.name}: role ${r.priorityCategory}, authored ${authored}`);
+          const hunting = computeActiveChains(s.institutions, ['hunting_grounds'], s.tier, s.config?.tradeRouteAccess, [], [], 0)
+            .find(c => c.chainId === 'hunting');
+          if (!(hunting?.processingInstitutions || []).includes("Warden's Lodge")) wrong.push(`${kind}/${s.name}: the lodge works no hunting chain`);
+        }
+      }
+    }
+    expect(lodges, "Warden's Lodges seated in magic-free towns").toBeGreaterThan(5);
+    expect(wrong).toEqual([]);
   });
 });

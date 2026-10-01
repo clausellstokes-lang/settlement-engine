@@ -298,9 +298,9 @@ const computeDefenseScores = (
   const _isSmallTier = ['thorp','hamlet','village'].includes(tier);
   // For the tier gate: hasDivine means actual miracle/healing presence, not just a standard parish.
   // Parish church is universal at village+ — it shouldn't unlock magical defense on its own.
-  // Use hasInst() which is already available in this scope.
-  const _hasActualMagic = inst.hasMagicInst || hasDruid || hasArcane
-    || hasInst('healer','monastery','cathedral','divine','healing','druid','wizard','mage','arcane','enchant');
+  // J30: a druid opens none where the world law reads no magic ("their effect of food or defense does not exist in non magic settings").
+  const _hasActualMagic = inst.hasMagicInst || hasDruid || hasArcane || (worldLaw.magicEnabled && hasInst('druid'))
+    || hasInst('healer','monastery','cathedral','divine','healing','wizard','mage','arcane','enchant');
   const _hasMagicInstitution = _hasActualMagic;
   let magical;
   if (!magicOn || (_isSmallTier && !_hasMagicInstitution)) {

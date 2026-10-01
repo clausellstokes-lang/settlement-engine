@@ -20,7 +20,9 @@ import { compareCodepoint } from '../domain/deterministicSort.js';
 import {institutionalCatalog, catalogIdForName} from '../data/institutionalCatalog.js';
 import {
   isMaterializedCustomContent,
+  nativeSemanticName,
 } from '../domain/content/customContentSemanticAuthority.js';
+import { druidicFaithRole } from '../domain/arcaneInstitutionIdentity.js';
 import { resourceKeyForLabel } from '../domain/resourceSemantics.js';
 
 // ── Id-first processor matching (Cohesion Wave 8 — structural prevention) ────
@@ -289,9 +291,14 @@ export function computeActiveChains(institutions = [], resources = [], tier = 'v
         chain.processingInstitutionsByResource?.[resourceInputKey]
         || chain.processingInstitutions
       );
+      // J30 (the owner, 2026-10-01): a druid's "effect of food or defense does not exist in non
+      // magic settings" — where the dial reads no magic, a druidic faith row processes no
+      // food or defence chain. Its herbal remedies stay: healing can be mundane.
+      const druidsIdle = magicPriority <= 0 && (needKey === 'food_security' || needKey === 'defense_security');
       const matchedInsts = processingPatterns.filter(pattern =>
         insts.some(institution => (
           institutionMatchesProcessor(institution, pattern)
+          && !(druidsIdle && druidicFaithRole(nativeSemanticName(institution), false))
         ))
       );
       if (matchedInsts.length === 0) return;

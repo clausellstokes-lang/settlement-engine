@@ -38,8 +38,10 @@ import {
   institutionWouldBeImmediatelyEvicted,
 } from '../../data/institutionLadders.js';
 import {
+  nativeSemanticName,
   nativeSemanticNames,
 } from '../../domain/content/customContentSemanticAuthority.js';
+import { druidicFaithRole } from '../../domain/arcaneInstitutionIdentity.js';
 // Shared phrases hoisted once (train EM-T16's worker buy-back, judgment 214c): each is spelled here and referenced below; every emitted value is byte-identical.
 const COHERENCEREPAIRPASS = 'coherenceRepairPass';
 const DEPENDENCY_VIOLATION = 'dependency_violation';
@@ -513,6 +515,17 @@ registerStep('coherenceRepairPass', {
   ctx.effectiveConfig._magicTradeOnly = isolationSupport.magicDependent === true;
 
   reconcileAddedRepairReceipts(ctx);
+
+  // J30 — A DRUID IS A PRIEST WHERE MAGIC DOES NOT WORK (the owner, 2026-10-01). The one
+  // chokepoint for the faction role: every catalog row has entered by now (assemble, cascade,
+  // faction correlation, the repairs above), and every reader of `priorityCategory` (the NPC
+  // offices, the history, the dossier, the map, the pulse) runs after it. A custom row is the
+  // author's and keeps its own role (nativeSemanticName answers '' for it).
+  const { magicEnabled } = ctx.generationContext.worldLaw;
+  for (const institution of ctx.institutions) {
+    const role = druidicFaithRole(nativeSemanticName(institution), magicEnabled);
+    if (role && institution.priorityCategory !== role) institution.priorityCategory = role;
+  }
 
   const after = ctx.institutions.map(institution => institution.name);
   if (JSON.stringify(before) !== JSON.stringify(after)) {
