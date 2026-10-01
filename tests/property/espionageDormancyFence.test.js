@@ -189,6 +189,22 @@ const THE_CALLER = 'src/domain/worldPulse/operations/missionDispatcher.js';
  * AND NOWHERE ELSE. Most recently at the ENGINE-HYGIENE landing (SHIFT RECORD,
  * 2026-09-01, TE-AGNOSTIC-1 cars `f2c1ad181` / `97d119c9b`); before that at T8.
  *
+ * ── 2026-09-30, THE URBAN BAND (owner-signed, through the door) ──────────────────────────
+ * THE SEVENTH MOVEMENT OF THIS CONSTANT since the genesis freeze, and like the ones before
+ * it a signed re-record under tests/helpers/goldenRecordDoor.js rather than a spend of
+ * the one window this file's STOP still names. The owner's rulings: "Urban-band rebuild
+ * (Recommended)" and "Approve + fold in MF-CH2B (Recommended)" (2026-09-30); the record is
+ * docs/shift-records/2026-09-30-urban-band-institutions.json (odqRow §934.86). THE MOVER, IN
+ * THE RECORD'S OWN WORDS: ONE CAUSE: THE URBAN BAND — the institution catalog became a
+ * registry with two cumulative laws and complete tier blocks, and MF-CH2B's gates read the
+ * declared magic licence (folded in by the owner, which is why MF-CH2B — named below as a
+ * constituent of the LIGHTING WAVE — moves this constant here, through the door, and not
+ * as a spend of that window). The registry re-orders the catalog draws, so every same-seed
+ * roster moves. The instrument was re-run at the base 5d699cc68 and reproduced `0d5dac61…`
+ * exactly before this value was taken.
+ * On THIS corpus 360 of 360 rows move; 360/360 hashes stay distinct. `0d5dac61…` ->
+ * `9dab4460…`.
+ *
  * ── 2026-09-19, THE READER MET 'CHURCHES, MONASTERIES' IN A QUARTER CARD (owner-signed, through the door) ────
  * THE SIXTH MOVEMENT OF THIS CONSTANT since the genesis freeze, and like the ones before
  * it a signed re-record under tests/helpers/goldenRecordDoor.js rather than a spend of
@@ -339,7 +355,7 @@ const THE_CALLER = 'src/domain/worldPulse/operations/missionDispatcher.js';
  * superseded by the ENGINE-HYGIENE re-record above, which is the record of the
  * one chartered window that has been spent since.
  */
-const PRE_COUPLING_CORPUS_SHA = '0d5dac61460956399f7a787d8dae6db93a2bddfdb870883ba958125342fbe430';
+const PRE_COUPLING_CORPUS_SHA = '9dab44602b2716719fe1bf823e37ea1865e146ddb4d16eb6a87fa745933bda11';
 
 const CORPUS_TIERS = Object.freeze(['thorp', 'hamlet', 'village', 'town', 'city', 'metropolis']);
 const CORPUS_ROUTES = Object.freeze(['road', 'isolated', 'port', 'crossroads']);
