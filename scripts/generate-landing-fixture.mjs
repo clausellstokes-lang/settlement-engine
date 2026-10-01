@@ -275,8 +275,18 @@ export function advanceTimelineFor(news, townId = 't', limit = ADVANCE_ENTRIES) 
  * the Grey Council, and the pressure sentence is the mayor's own man drifting
  * out from under him. Every clause below is traceable to a field emitted in the
  * same run.
+ *
+ * ⚠ RE-GROUNDED 2026-09-30 (the urban band, ODQ §934.86). The urban-band
+ * institution rebuild re-rolled this seed's institution draws: the market-
+ * licensing conflict receipt and the "pressured neutral" faction hook are no
+ * longer derived for lf-033 (the pressure sentence now names Donnchadh Brennan
+ * as the mayor's drifting man). The licence-book sentence — the Grey Council and
+ * the Establishment leaning on a neutral name — is therefore DELETED, and
+ * nothing is added: the three surviving receipts (the road roll, the cleared
+ * stands, the travelers' inn) and the pressure sentence and mayor's goal ground
+ * every clause that remains.
  */
-const STOCK_NARRATION = 'The road made Cnocby by a coin’s width, three chances of it against two of nothing, and the mountain stands that raised the travelers’ inn are being cleared faster than they grow back. What is left worth holding is the licence book: the Grey Council and the Establishment both want the market licensing, and both are leaning on the same neutral name to declare before the session. The mayor still means to mend the structure while the weather holds. His own man no longer does what he would approve of, and neither of them says so.';
+const STOCK_NARRATION = 'The road made Cnocby by a coin’s width, three chances of it against two of nothing, and the mountain stands that raised the travelers’ inn are being cleared faster than they grow back. The mayor still means to mend the structure while the weather holds. His own man no longer does what he would approve of, and neither of them says so.';
 
 /**
  * The frozen fixture object for one seed — every selection COMPUTED from engine
