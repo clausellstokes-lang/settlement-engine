@@ -63,7 +63,9 @@ describe('the knowledge desk — the non-omniscient Herald golden (captured firs
     // caps only beyond them, so the year-one desk carries the entries the bare 240 cap used to drop.
     // 366 → 367 at the treaty-voice pick (FP-28, 2026-09-24): a peacetime pact's default beat now speaks
     // (wizard_news.39.treaty_default_detected joins the year-one desk).
-    expect(Object.keys(manifest)).toHaveLength(367);
+    // 367 → 400 at the urban band (ODQ §934.86, 2026-09-30; record docs/shift-records/
+    // 2026-10-01-urban-band-herald-rows.json): fuller rosters feed the year-one desk 33 more items.
+    expect(Object.keys(manifest)).toHaveLength(400);
   });
 
   it('the declared refile set is exactly the knowledge desk the routing table carries', () => {
@@ -101,10 +103,12 @@ describe('the knowledge desk — the non-omniscient Herald golden (captured firs
       expect(moved).toEqual([]);
       const misjudged = Object.keys(live.sections).filter((id) => kindOfNewsId(id) === 'belief_misjudgment').sort();
       // Under the year window (the Herald lens U2, FP-31) the desk keeps every misjudgment beat of the year:
+      // Re-dealt at the urban band's re-record (2026-09-30): the same-seed shift moves the year's
+      // news, so two of the three beats mint at new ids. Still three, still all on knowledge.
       expect(misjudged).toEqual([
         'wizard_news.10.belief_misjudgment.soak-a.soak-c',
-        'wizard_news.24.belief_misjudgment.soak-a.soak-c',
-        'wizard_news.36.belief_misjudgment.soak-a.soak-c',
+        'wizard_news.23.belief_misjudgment.soak-c.soak-d',
+        'wizard_news.4.belief_misjudgment.soak-a.soak-c',
       ]);
       for (const id of misjudged) {
         expect(live.sections[id]).toBe('knowledge');
