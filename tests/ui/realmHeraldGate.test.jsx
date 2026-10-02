@@ -170,8 +170,15 @@ const TOGGLE = /^Toggle the Realm Inspector/;
  * this shape with an explicit budget (`heraldMobileCompanion.test.jsx`, `{ timeout: 3000 }`).
  * A PER-WAIT BUDGET, NEVER A BANK: the number below is the ceiling on ONE lazy chunk
  * arriving, not a per-file grace that would hide a genuinely absent element.
+ *
+ * RAISED 5000 -> 15000 (FPQ-86, 2026-10-02), MEASURED: PR #57's CI run 37055165369, job
+ * 110997953133 ("Coverage floors (money / security)", v8 coverage instrumentation), reddened
+ * the `living-world-gates` arm at THIS wait — the test took 5343 ms against the 5000 budget.
+ * The IDENTICAL tree passed the same job on the push run 37032587973, and the file passes
+ * locally 7 of 7: a lazy chunk arriving late under coverage, not a product defect. Still a
+ * per-wait ceiling, never a bank; vite.config.js's testTimeout (20000) still bounds the test.
  */
-const LAZY_CHUNK = Object.freeze({ timeout: 5000 });
+const LAZY_CHUNK = Object.freeze({ timeout: 15000 });
 
 describe('THE HERALD WAITS FOR THE FIRST ADVANCE (owner order 2026-09-17)', () => {
   beforeEach(() => {

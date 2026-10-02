@@ -116,8 +116,10 @@ async function openMara() {
   // NPCsTab is a deliberate per-tab lazy chunk. The first test in this file is
   // its cold import and can sit just beyond Testing Library's 1s default under
   // the full corpus; later cases are warm. Preserve the production split and
-  // give the real lazy boundary an honest component-test budget.
-  const card = await screen.findByRole('button', { name: /Mara/i }, { timeout: 5000 });
+  // give the real lazy boundary an honest component-test budget. FPQ-86 (2026-10-02): 15 s, not 5 s —
+  // the same 5 s budget behind a lazy boundary failed twice in the coverage-floors job, whose
+  // instrumented runner ran that file about twice as slowly as the push run (realmHeraldGate).
+  const card = await screen.findByRole('button', { name: /Mara/i }, { timeout: 15000 });
   fireEvent.click(card);
   expect(await screen.findByText('She controls the old ferry.')).toBeTruthy();
 }
