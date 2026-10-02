@@ -235,11 +235,21 @@ function tierCandidate(item, drift, tick, rules) {
     // is the LEGACY mode fed through authorityFor (verbatim under routine/full;
     // forced to proposal under dm_only/recommendations).
     applyMode: authorityFor(rules, 'tier_change', rules.majorChangesRequireProposal ? 'proposal' : 'auto'),
-    headline: `${item.name || item.id} may ${drift.direction === 'promotion' ? 'rise' : 'fall'} to ${drift.toTier}`,
+    // ⛔ THE HERALD SPEAKS IN DEEDS (owner, 2026-10-02: "Updates like these need to reflect actions not to potential"): under way, then done.
+    headline: drift.direction === 'promotion'
+      ? `${item.name || item.id} is growing into a ${drift.toTier}`
+      : `${item.name || item.id} is shrinking to a ${drift.toTier}`,
+    appliedHeadline: drift.direction === 'promotion'
+      ? `${item.name || item.id} becomes a ${drift.toTier}`
+      : `${item.name || item.id} falls to a ${drift.toTier}`,
     // Eligibility is conjunctive in substance: population proximity/failure
     // and the support vector jointly decide a tier drift. Name both here so
     // the DM never reads the streak as a population-only threshold.
-    summary: `${item.name || item.id} has met combined population and support ${drift.direction} eligibility for ${drift.streak} consecutive advances.`,
+    // The streak and the eligibility test stay in `reasons`; the line names both halves of the
+    // change in the world's terms (people AND what sustains them), never the threshold.
+    summary: drift.direction === 'promotion'
+      ? `${item.name || item.id} has been growing steadily, in people and in trade.`
+      : `${item.name || item.id} has been losing people and trade steadily.`,
     reasons: [
       drift.reason,
       `Minimum streak ${minimum}; current streak ${drift.streak}.`,
@@ -505,7 +515,9 @@ function resourceCandidatesFor(item, pressureIdx, rules, tick, previousDrift, rn
         severity,
         probability: clamp01(0.05 + severity * 0.34),
         applyMode: authorityFor(rules, 'resource_depletion', rules.majorChangesRequireProposal && severity >= 0.78 ? 'proposal' : 'auto'),
-        headline: `${resource.replace(/_/g, ' ')} may be depleted`,
+        // ⛔ THE HERALD SPEAKS IN DEEDS (owner, 2026-10-02: "Updates like these need to reflect actions not to potential"): under way, then done.
+        headline: `${item.name || item.id} is exhausting its ${resource.replace(/_/g, ' ')}`,
+        appliedHeadline: `${item.name || item.id} has exhausted its ${resource.replace(/_/g, ' ')}`,
         summary: `${item.name || item.id} is consuming ${resource.replace(/_/g, ' ')} faster than it recovers.`,
         reasons: [
           effectivePressure >= 0.5 ? 'The draw on it is heavy, and a settlement of this standing draws hard.' : 'The draw on it is real but not yet heavy, though a settlement of this standing draws hard.',
@@ -556,7 +568,8 @@ function resourceCandidatesFor(item, pressureIdx, rules, tick, previousDrift, rn
         severity,
         probability: clamp01((slow ? 0.02 : 0.08) + severity * (slow ? 0.1 : 0.34)),
         applyMode: authorityFor(rules, 'resource_recovery', 'auto'),
-        headline: `${resource.replace(/_/g, ' ')} may recover`,
+        headline: `${item.name || item.id}'s ${resource.replace(/_/g, ' ')} is recovering`,
+        appliedHeadline: `${item.name || item.id}'s ${resource.replace(/_/g, ' ')} recovers`,
         summary: `${item.name || item.id} consumes less ${resource.replace(/_/g, ' ')}, allowing it to become available again.`,
         reasons: [
           'The draw on it has eased enough for the ground to recover.',

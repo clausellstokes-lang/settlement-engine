@@ -512,7 +512,7 @@ export function advanceCauseLifecycle({ snapshot, worldState, priorLedger, rng, 
               causeClass: rec.causeClass, family: rec.family, stage: 'reformed',
               originTick: rec.originTick, resolvedTick: tick, ageBand: band,
               headline: `${npc?.name || 'A compromised official'} comes clean`,
-              summary: `The pressure lifted (${causeLabel(rec.causeClass)} resolved), and ${npc?.name || 'the official'}, whose corruption was purely situational, reforms.`,
+              summary: `${causeLabel(rec.causeClass)} has eased, and ${npc?.name || 'the official'}, who turned to graft only to get through it, has given it up.`,
               reasons: [`${causeLabel(rec.causeClass)} resolved; the sole-support corruption ended (reform).`],
             }));
             return;   // record dropped — reform clears the tag (undo-clean)

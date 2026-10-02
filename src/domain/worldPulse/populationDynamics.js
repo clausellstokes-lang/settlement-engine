@@ -497,7 +497,9 @@ function populationCandidate({ item, interval, pressureIdx, snapshot, rules, tic
     // a Chronicle beat. Mass emigration and every major transition stay visible
     // (including legacy-auto major changes when proposals are disabled).
     ...(!major && kind !== 'emigration' ? { recordMode: 'state_only' } : {}),
-    headline: `${item.name || sourceId} population may ${delta > 0 ? 'grow' : 'fall'}`,
+    // ⛔ THE HERALD SPEAKS IN DEEDS (owner, 2026-10-02: "Updates like these need to reflect actions not to potential"): under way, then done.
+    headline: `${item.name || sourceId}'s population is ${delta > 0 ? 'growing' : 'falling'}`,
+    appliedHeadline: `${item.name || sourceId}'s population ${delta > 0 ? 'grows' : 'falls'}`,
     // formatCount (not toLocaleString): a bare toLocaleString() renders `12,000`
     // on en-US ICU but `12 000`/`12.000` elsewhere, so persisted candidate
     // summaries — and any golden over advance output — would drift by the runner's

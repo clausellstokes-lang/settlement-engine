@@ -767,8 +767,10 @@ export function evaluateInstitutionLifecycle(/** @type {any} */ worldState, /** 
         severity,
         probability,
         applyMode: rules.majorChangesRequireProposal && severity >= 0.78 ? 'proposal' : 'auto',
-        headline: `${item.name || item.id} may raise a ${gap.name}`,
-        summary: `Sustained prosperity is filling a missing supply-chain step: ${gap.reason}`,
+        // ⛔ THE HERALD SPEAKS IN DEEDS (owner, 2026-10-02: "Updates like these need to reflect actions not to potential"): under way, then done.
+        headline: `${item.name || item.id} is raising a ${gap.name}`,
+        appliedHeadline: `${item.name || item.id} raises a ${gap.name}`,
+        summary: `Good years have given ${item.name || item.id} the means to build what it lacked. ${gap.reason}`,
         reasons: [
           gap.reason,
           `Economy stably healthy for ${drift.streak} tick(s) (minimum ${t.requiredStreak}).`,
@@ -836,7 +838,8 @@ export function evaluateInstitutionLifecycle(/** @type {any} */ worldState, /** 
         severity,
         probability,
         applyMode: rules.majorChangesRequireProposal && severity >= 0.78 ? 'proposal' : 'auto',
-        headline: `${target.inst.name} in ${item.name || item.id} may close its doors`,
+        headline: `${target.inst.name} in ${item.name || item.id} is closing its doors`,
+        appliedHeadline: `${target.inst.name} in ${item.name || item.id} closes its doors`,
         summary: 'Sustained economic decline is squeezing out the institutions the settlement leans on least.',
         reasons: [
           `Economy stably distressed for ${drift.streak} tick(s) (minimum ${t.requiredStreak}).`,

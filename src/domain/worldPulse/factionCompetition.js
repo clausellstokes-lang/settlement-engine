@@ -690,29 +690,32 @@ function legitimacyPressureBand(legitimacyPressure) {
  * builder de-underscored the raw candidateType after "may" → a noun jammed after
  * "may" ('X may exhaustion', 'X may government challenge') that read as debug output
  * on the feed and the proposal queue. This table derives BOTH the
- * hedged candidate headline (`may {may}`) AND the applied twin (`{did}`) from ONE
+ * pending candidate headline (`{doing}`) AND the applied twin (`{did}`) from ONE
  * source, so the de-hedger's straggler class disappears at the source (no downstream
  * exception). A NEW faction candidateType must extend this table (pinned by the
  * register-guard test) or it falls to a grammatical generic phrasing.
- * @type {Record<string, { may: string, did: string }>}
+ * ⛔ THE HERALD SPEAKS IN DEEDS (the owner, 2026-10-02: "Updates like these need to reflect
+ * actions not to potential"): `doing` is the move UNDER WAY, a pending proposal; `did` is
+ * the deed DONE, its applied twin. Never "may".
+ * @type {Readonly<Record<string, { doing: string, did: string }>>}
  */
 export const FACTION_VERB_PHRASES = Object.freeze({
-  faction_government_challenge:    { may: 'press a challenge to the government', did: 'presses a challenge to the government' },
-  faction_institution_suppression: { may: 'move to suppress an institution',     did: 'moves to suppress an institution' },
-  faction_institution_capture:     { may: 'move to capture an institution',      did: 'moves to capture an institution' },
-  faction_service_bolster:         { may: 'bolster its services',                did: 'bolsters its services' },
-  faction_law_preference_push:     { may: 'push its preferred laws',             did: 'pushes its preferred laws' },
-  faction_exhaustion:              { may: 'exhaust itself',                      did: 'exhausts itself' },
-  faction_rival_power_contest:     { may: "contest a rival's power",             did: "contests a rival's power" },
+  faction_government_challenge:    { doing: 'is pressing a challenge to the government', did: 'presses a challenge to the government' },
+  faction_institution_suppression: { doing: 'is moving to suppress an institution',     did: 'suppresses an institution' },
+  faction_institution_capture:     { doing: 'is moving to capture an institution',      did: 'captures an institution' },
+  faction_service_bolster:         { doing: 'is bolstering its services',               did: 'bolsters its services' },
+  faction_law_preference_push:     { doing: 'is pushing its preferred laws',            did: 'pushes its preferred laws through' },
+  faction_exhaustion:              { doing: 'is wearing itself out',                    did: 'wears itself out' },
+  faction_rival_power_contest:     { doing: "is contesting a rival's power",            did: "contests a rival's power" },
 });
 
-/** @param {string} candidateType @returns {{ may: string, did: string }} */
+/** @param {string} candidateType @returns {{ doing: string, did: string }} */
 function factionVerbPhrase(candidateType) {
   const mapped = FACTION_VERB_PHRASES[candidateType];
   if (mapped) return mapped;
-  // Grammatical generic fallback for any future faction_* type (never "may <noun>").
+  // Grammatical generic fallback for any future faction_* type (a deed, never "may <noun>").
   const stem = String(candidateType).replace(/^faction_/, '').replace(/_/g, ' ');
-  return { may: `act on its ${stem}`, did: `acts on its ${stem}` };
+  return { doing: `is acting on its ${stem}`, did: `acts on its ${stem}` };
 }
 
 function candidateBase(/** @type {any} */ { item, entry, state, tick, candidateType, ruleId, severity, probability, applyMode, recordMode = null, reasons, factionPatch, proposalPayload = null, condition = null, metadata = {}, conflictTags = [] }) {
@@ -729,7 +732,7 @@ function candidateBase(/** @type {any} */ { item, entry, state, tick, candidateT
     probability: clamp01(probability),
     applyMode,
     ...(recordMode ? { recordMode } : {}),
-    headline: `${state.name} may ${verb.may}`,
+    headline: `${state.name} ${verb.doing}`,
     // The applied twin (the de-hedger reads outcome.appliedHeadline first).
     appliedHeadline: `${state.name} ${verb.did}`,
     summary: `${state.name} sees an opening to press ${state.governmentPreference.replace(/_/g, ' ')} interests.`,
