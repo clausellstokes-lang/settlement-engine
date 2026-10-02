@@ -707,7 +707,7 @@ export function advanceTreaties({ snapshot, worldState, settlementUpdates = [], 
         continue;
       }
       const role = roles.forTerm(term);
-      const comp = evolveCompliance({ loserCapacity01: role.capacity01, monitorReach01: role.reach01 });
+      const comp = evolveCompliance({ loserCapacity01: role.capacity01, monitorReach01: role.reach01, floors: role.floors });
       term.trueState = comp.trueState;
       term.complianceState = comp.observedState;
       term.burden01 = round4(role.burden01);

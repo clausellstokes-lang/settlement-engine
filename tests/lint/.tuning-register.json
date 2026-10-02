@@ -1715,7 +1715,7 @@
       "signedAt": null,
       "unit": null,
       "band": null,
-      "note": ""
+      "note": "FP-44 (FPQ-67) THE PACT STRAIN BAND, two keys added 2026-10-02 by the PACT-COMPLIANCE seat: PACT_HONORED_FLOOR = 0.5 and PACT_DEFAULT_FLOOR = 0.2, capacity on the same read HONORED_FLOOR and DEFAULT_FLOOR band (1 minus the obligor court's 0.6 economy plus 0.4 food pressure). A clause carrying a beneficiary (a negotiated pact clause) is banded against them; every other clause keeps 0.75 and 0.4, byte for byte. SIGNED BY DELEGATION: the chair's signature FP-44 under ODQ §934.89 (the owner, 2026-10-02: 'I leave everything to your judgement and leave you to build it all'). MEASURED (findings/PACT-STRAIN-MEASURE.md in the FP kit; 15,140 clause-ticks on fp-read-3 and fp-read-4 under dramatic_campaign and full_simulation): day-one hardship falls in two humps, burden 0.15 to 0.40 (an ordinary year) and 0.65 to 0.90 (a famine year); 0.5 sits between them and 0.2 inside the famine hump's upper half; 18 of 27 pacts read strained on the day they were signed under the shared line, 6 of 27 under the band. THE ROW STAYS DRAFT: the register's signing door (scripts/lib/tuning-inventory.mjs applySigningRecord, docs/tuning-signatures) signs a WHOLE table on an owner's record and freezes its digest, and the other keys of this table are not FP-44's, so no lane can honestly fill that record's ids; the chair runs the door."
     },
     "src/domain/worldPulse/pestilenceKernel.js#PESTILENCE_KERNEL_TUNING": {
       "role": null,
