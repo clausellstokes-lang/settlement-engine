@@ -24,13 +24,13 @@
     "The derivation history — every prior row, its cause, and the census laws — stays in the walker",
     "beside the assertions, deliberately. Only the live tuple moved."
   ],
-  "measuredAtSha": "27554a388e170fc6b965050a6b6223dd17fef602",
+  "measuredAtSha": "da0810cd9263a4f44c6bb3b3ea761e9d9544677f",
   "measuredBy": "fp-chair-93391427",
   "date": "2026-10-02",
-  "note": "TREATY-VOICE-2 U1/U2 (FPQ-65/66): the pact title and the sub-year age arms in treatyVoiceCure and treatyDossierTab",
+  "note": "TREATY-VOICE-2 U4 (da0810cd9): three FPQ-32 pins in tests/domain/pactAmendment.test.js; no test file added",
   "files": 2798,
   "parked": 360,
   "credited": 2438,
-  "titles": 26743,
+  "titles": 26746,
   "suiteTitles": 7051
 }
