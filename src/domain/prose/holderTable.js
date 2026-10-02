@@ -218,9 +218,9 @@ export const HOLDER_SOURCES = Object.freeze({
   blocs: Object.freeze({ kind: 'court', cite: 'src/domain/worldPulse/settlementPolitics.js:992', read: true }),
   stability: Object.freeze({ kind: 'court', cite: 'src/generators/power/rulingStructure.js:702', read: true }),
   recentConflict: Object.freeze({ kind: 'court', cite: 'src/generators/power/rulingStructure.js:702', read: true }),
-  termLines: Object.freeze({ kind: 'court', cite: 'src/domain/display/treatyDocument.js:362', read: true }),
-  fraying: Object.freeze({ kind: 'court', cite: 'src/domain/worldPulse/peaceTermsDocument.js:233', read: true }),
-  yearsRemaining: Object.freeze({ kind: 'court', cite: 'src/domain/worldPulse/peaceTermsDocument.js:230', read: true }),
+  termLines: Object.freeze({ kind: 'court', cite: 'src/domain/display/treatyDocument.js:376', read: true }),
+  fraying: Object.freeze({ kind: 'court', cite: 'src/domain/worldPulse/peaceTermsDocument.js:237', read: true }),
+  yearsRemaining: Object.freeze({ kind: 'court', cite: 'src/domain/worldPulse/peaceTermsDocument.js:234', read: true }),
 
   // ── the parish: the faith, and the dead ──
   piety: Object.freeze({ kind: 'parish', cite: 'src/domain/worldPulse/religionState.js:645', read: true }),
