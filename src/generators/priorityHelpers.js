@@ -119,7 +119,7 @@ export const computeEffectiveMagicPresence = (institutions = [], config = {}) =>
   // ── 2. Institution contribution (0–40) ────────────────────────────────────
   // Weighted by sophistication tier — what matters is depth, not headcount.
   const INST_WEIGHTS = {
-    folk:         { weight:  5, keywords: ["hedge wizard","traveling hedge wizard","healer (divine","warden's lodge","druid circle","wayside shrine"] },
+    folk:         { weight:  5, keywords: ["hedge wizard","traveling hedge wizard","healer (divine","druid circle","wayside shrine"] }, // J33: Warden's Lodge is defence, not druid (the owner, 2026-10-01)
     practitioner: { weight: 10, keywords: ["alchemist shop","scroll scribe","apothecary","village scribe"] },
     institutional:{ weight: 18, keywords: ["wizard's tower","mages' guild","alchemist quarter","elder grove council"] },
     advanced:     { weight: 28, keywords: ["enchanter's shop","academy of magic","mages' district","teleportation circle","airship docking","great library"] },

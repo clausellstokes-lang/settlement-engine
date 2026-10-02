@@ -163,7 +163,9 @@ describe('EM-R0c — the merge: the consequence of an edit is the difference of 
 
   it('A3 · absent is a value, and nothing is merged by position', () => {
     const subjects = withFood();
-    expect(subjects.length, 'the rows carrying a food collection the two re-derivations can outgrow').toBe(54);
+    // 2026-10-01, the urban band (ODQ §934.86): 54 -> 61 of the 63 census rows carry a food collection (re-measured by
+    // `withFood()` itself; the rebuilt institution registry gives more worlds a second food entry).
+    expect(subjects.length, 'the rows carrying a food collection the two re-derivations can outgrow').toBe(61);
 
     const padded = [];
     const leaked = [];
@@ -187,7 +189,8 @@ describe('EM-R0c — the merge: the consequence of an edit is the difference of 
 
   it('A4 · keyed by the declared key: a permuted collection joins by name and the order arm is counted', () => {
     const subjects = withFood();
-    expect(subjects.length, 'the rows whose food collection has two entries to permute').toBe(54);
+    // 2026-10-01, the urban band (ODQ §934.86): 54 -> 61, the same re-measured denominator as A3's.
+    expect(subjects.length, 'the rows whose food collection has two entries to permute').toBe(61);
 
     const notJoined = [];
     const neighboursMoved = [];

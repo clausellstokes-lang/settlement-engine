@@ -43,7 +43,13 @@ export const PAIRED_TOWN = Object.freeze({
 });
 
 /**
- * ⭐ THE INTERESTED-FACT PAIR (SITTING §R c-22). `rate-9-2` is the CAPTURED town — the chair's
+ * ⭐ RE-TAKEN 2026-09-30 (the urban band, ODQ §934.86): `rate-9-2` is still corrupted, but the
+ * same-seed shift left its Town hall without a tax service, so its treasury record has no
+ * holder. `rate-11-9` is the first town in the same grid and config that is corrupted with the
+ * Town hall alone keeping the treasury, taken as the generator makes it. PAIRED_TOWN keeps
+ * rate-9-2, which still carries the walls and the security institution its arm needs.
+ *
+ * ⭐ THE INTERESTED-FACT PAIR (SITTING §R c-22). `rate-9-2` was the CAPTURED town — the chair's
  * own worked example, `criminalCaptureState: corrupted`, holder `Town hall` — and `rate-3-0`
  * is the CLEAN control the chair measured beside it. Both are RATE-grid seeds and neither is
  * doctored.
@@ -51,7 +57,7 @@ export const PAIRED_TOWN = Object.freeze({
 export const INTERESTED_TOWNS = Object.freeze([
   Object.freeze({
     label: 'captured',
-    seed: 'rate-9-2',
+    seed: 'rate-11-9',
     config: Object.freeze({
       settType: 'town', tradeRouteAccess: 'road', monsterThreat: 'random_threat', culture: 'germanic', terrainOverride: 'hills',
     }),

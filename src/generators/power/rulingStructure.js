@@ -172,7 +172,7 @@ export const generatePowerStructure = (
       'merchant oligarchy': tier === 'metropolis' ? 'Grand Merchant Oligarchy' : 'Merchant oligarchy',
       'democratic assembly': 'Democratic assembly',
       'city-state government': 'City-State Council',
-      'royal seat': 'Royal Authority',
+      'royal seat': 'Royal Authority', 'town council': tier === 'metropolis' ? 'Grand Council' : tier === 'city' ? 'City Council' : 'Town Council', "lord's reeve": 'Feudal Stewardship', 'village headman': "Headman's Authority", // J23 2026-09-30: seated forms the table never named (docs/URBAN_BAND_INSTITUTIONS.md)
     };
   let govBody = null;
   for (const [key, label] of Object.entries(governanceLabelMap))

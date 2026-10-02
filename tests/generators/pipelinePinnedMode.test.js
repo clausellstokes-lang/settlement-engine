@@ -65,8 +65,11 @@ const CONFIG = {
   tradeRouteAccess: 'river',
   monsterThreat: 'civilized',
 };
-/** The derive half's measured draw budget: generateRelationships 62 + factions 2 + conflicts 3. */
-const DERIVE_HALF_DRAWS = 67;
+/** The derive half's measured draw budget: generateRelationships 67 + factions 2 + conflicts 2.
+ *  2026-10-01, the urban band (ODQ §934.86): 62 + 2 + 3 = 67 -> 67 + 2 + 2 = 71. The probe settlement is
+ *  the same seed, and its institution set (hence its roster of relationship pairs) moved with the rebuilt
+ *  registry; re-measured by the arm's own recipe, not predicted. */
+const DERIVE_HALF_DRAWS = 71;
 /** The seed §0R.1's derive-half probe was measured on, and the settlement it measured over. */
 const DERIVE_PROBE_STREAM = 'em-p0-probe-derive';
 const DERIVE_PROBE_SEED = 'em-p0-probe';
@@ -211,7 +214,7 @@ describe('EM-P0 — the pipeline seam: pins are consulted per chooser, on one st
     expect(JSON.stringify(second.record)).toBe(JSON.stringify(record));
   }, 120_000);
 
-  it('A3 — a pinned chooser does not draw: 67 derive-half draws unpinned, zero fully pinned', () => {
+  it('A3 — a pinned chooser does not draw: 71 derive-half draws unpinned, zero fully pinned', () => {
     const unpinned = instrumentedRoot(SEED);
     const unpinnedCtx = runHeadless(unpinned.root);
     expect(unpinned.record.draws).toBeGreaterThan(DERIVE_HALF_DRAWS);
@@ -244,9 +247,9 @@ describe('EM-P0 — the pipeline seam: pins are consulted per chooser, on one st
         total: counter.calls - start,
       };
     });
-    expect(budget.relationships).toBe(62);
+    expect(budget.relationships).toBe(67);
     expect(budget.factions).toBe(2);
-    expect(budget.conflicts).toBe(3);
+    expect(budget.conflicts).toBe(2);
     expect(budget.total).toBe(DERIVE_HALF_DRAWS);
   }, 180_000);
 
@@ -286,7 +289,7 @@ describe('EM-P0 — the pipeline seam: pins are consulted per chooser, on one st
     expect(labels, 'the runner forks the step exactly once').toEqual([POPULATION_STEP]);
     expect(instrumented.record.streams, 'exactly one stream object serves the step').toHaveLength(1);
     expect(instrumented.record.innerForks, 'nothing inside the step mints a second stream').toBe(0);
-    // Both halves drew on that ONE object: the derive half's 67 cannot fit alone in a count
+    // Both halves drew on that ONE object: the derive half's 71 cannot fit alone in a count
     // that also carries the root half's density band and roster draws.
     expect(instrumented.record.draws).toBeGreaterThan(DERIVE_HALF_DRAWS);
   }, 120_000);
@@ -329,7 +332,7 @@ describe('EM-P0 — the pipeline seam: pins are consulted per chooser, on one st
 
 /** The step's own unpinned draw count at SEED and CONFIG. AS-OF `bdbf7c89c`, re-measured at
  *  EM-B2a2's base; A2 and A3 both re-measure it rather than trusting the numeral. */
-const UNPINNED_STEP_DRAWS = 315;
+const UNPINNED_STEP_DRAWS = 310; // 2026-10-01, the urban band (ODQ §934.86): 315 -> 307; the druid rulings (2026-10-01, ODQ §934.86 addendum 2, J30–J33): 307 -> 310; each re-measured at this seed and config
 /** The overridden VALUE A3 carries through the pin channel into the assembled record. It is
  *  planted by the arm and appears nowhere in the generator's vocabulary. */
 const OVERRIDE_SENTINEL = 'EM-B2a2 SENTINEL BURGRAVE';
@@ -488,7 +491,7 @@ describe('EM-B2a2 — the pin primitive has ONE exported home: chooseOrPin lives
 /** The census corpus's own row count (EM-P2's declared 63). The floor every A7 figure rests on. */
 const CENSUS_ROWS = 63;
 /** The rows §0.1 measured the leak in, and the two keys it moved. RE-MEASURED by A7, never trusted. */
-const LEAKED_ROWS = 42;
+const LEAKED_ROWS = 44; // 2026-10-01, the urban band (ODQ §934.86): 42 -> 44 (corruptionPass mutates npcs and factions on two more rows)
 /** The three pin channels A8 walks: every registered step that provides a held record key. */
 const PIN_CHANNELS = ['generatePopulation', 'assembleInstitutions', 'generatePower'];
 
@@ -522,7 +525,7 @@ function bypassEveryRunnerClone(bag, keys) {
 }
 
 describe('EM-R1 — the pin bag is cloned on entry, at the runner', () => {
-  it('A7 — the leak and the cure: a record-built bag moves 0 of 63, where the uncloned control moves 42', () => {
+  it('A7 — the leak and the cure: a record-built bag moves 0 of 63, where the uncloned control moves 44', () => {
     const rows = censusCorpus();
     const keys = getStepMeta().find((meta) => meta.name === POPULATION_STEP).provides;
     expect(rows, 'the census corpus is the floor every figure here rests on').toHaveLength(CENSUS_ROWS);
@@ -539,8 +542,8 @@ describe('EM-R1 — the pin bag is cloned on entry, at the runner', () => {
         // ANTI-VACUITY, MEASURED AT THE PRODUCER'S OWN BOUNDARY: the pin was TAKEN on this row,
         // which is what tells a cured runner apart from a member that dropped the pin entirely.
         // It is read from the PATCH, never from the finished context: `corruptionPass` mutates
-        // `npcs` and `factions` AFTER the pin lands, so the final context differs on 42 rows by
-        // design and a check placed there would report a false 21 of 63.
+        // `npcs` and `factions` AFTER the pin lands, so the final context differs on 44 rows by
+        // design and a check placed there would report a false 19 of 63 (the 2026-10-01 re-measure; was 42 and 21).
         const bypass = mode === 'bypassed' ? bypassEveryRunnerClone(caller, keys) : null;
         const options = {
           pins: caller,
@@ -575,7 +578,7 @@ describe('EM-R1 — the pin bag is cloned on entry, at the runner', () => {
     expect(through.perKey).toEqual({});
 
     // THE NEGATIVE CONTROL: the same bag with every runner clone defeated is written through on
-    // 42 rows, by npcs and factions alone, so the zero above can never go silently vacuous.
+    // 44 rows, by npcs and factions alone, so the zero above can never go silently vacuous.
     expect(bypassed.moved, 'the control came back clean: the bypass no longer defeats the clones')
       .toBe(LEAKED_ROWS);
     expect(bypassed.perKey).toEqual({ npcs: LEAKED_ROWS, factions: LEAKED_ROWS });

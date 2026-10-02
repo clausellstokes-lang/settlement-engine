@@ -1547,7 +1547,10 @@ describe('DS-GEN-18 over the real generator — the route, measured', () => {
     ['metropolis_riverside_port', { settType: 'metropolis', culture: 'mediterranean', terrainOverride: 'riverside', tradeRouteAccess: 'port' }],
     ['village_coastal_port', { settType: 'village', culture: 'norse', terrainOverride: 'coastal', tradeRouteAccess: 'port' }],
   ];
-  const SEEDS = ['sf-test-2026-04', 'gen3-a', 'gen3-b'];
+  // 'gen3-c' joined 2026-09-30 (the urban band, ODQ §934.86): the same-seed shift moved the three
+  // original seeds onto UNWORKED and STALLED only; gen3-c is the first sibling whose metropolis
+  // reaches BOUGHT-IN, so the arm still measures a route keyed on more than one antecedent.
+  const SEEDS = ['sf-test-2026-04', 'gen3-a', 'gen3-b', 'gen3-c'];
 
   it('the antecedents are REAL: three of the four keys are reached over generated towns', () => {
     /** @type {Record<string, number>} */
@@ -1659,8 +1662,11 @@ describe('DS-GEN-8 — the remnant, the fallen city and the steadings (a lawful 
     // ruin appears on ONE of twelve with `ancientRuinsEnabled` and on NONE of twelve
     // without. So the seeds are scanned rather than pinned, and the flag-off control is
     // what makes the presence a reading of the flag rather than of the seed.
+    // ruin-5..ruin-10 joined the scan 2026-09-30 (the urban band, ODQ §934.86): after the
+    // same-seed shift none of the twelve wrote a ruin; ruin-9 and ruin-10 are the first that do.
     const SEEDS = ['sf-test-2026-04', 'gen3-a', 'gen3-b', 'gen3-c', 'gen3-e', 'gen3-f',
-      'gen3-g', 'gen3-h', 'ruin-1', 'ruin-2', 'ruin-3', 'ruin-4'];
+      'gen3-g', 'gen3-h', 'ruin-1', 'ruin-2', 'ruin-3', 'ruin-4', 'ruin-5', 'ruin-6', 'ruin-7',
+      'ruin-8', 'ruin-9', 'ruin-10'];
     const site = { settType: 'city', culture: 'celtic', terrainOverride: 'hills', tradeRouteAccess: 'river' };
     /** @param {object} config @param {string} seed */
     const ruinOf = (config, seed) => generateSettlementPipeline(config, null, { seed, customContent: {} })

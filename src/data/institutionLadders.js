@@ -7,6 +7,8 @@
  * Importing it must never register a pipeline step.
  */
 
+import { familyLadderPairs } from './institutionalCatalog.js';
+
 // Shared phrases hoisted once (train EM-T15's worker buy-back, judgment 203): each is spelled here and referenced below; the exported tables are byte-identical.
 const ADVENTURERS_CHARTER_HALL = 'adventurers\' charter hall';
 const APOTHECARY_DISTRICT = "Apothecary district";
@@ -28,11 +30,19 @@ const TRAVELING_PERFORMERS = "Traveling performers";
 
 // Pairs are scale tiers of the SAME function. Complementary infrastructure
 // must not appear here: the greater replaces the lesser.
-export const UPGRADE_CHAINS = Object.freeze([
+//
+// ⭐ THE HAND-AUTHORED PAIRS BELOW ARE UNIONED WITH THE REGISTRY'S OWN (2026-09-30): every
+// family in institutionalCatalog.js contributes its consecutive scale names and its declared
+// successor (`familyLadderPairs`), so a scale rung can no longer be missing from the ladder.
+// Before that, the cascade's one-tier-down second chance seated 'Mill' beside 'Mills (2-5)'
+// in 87 of 200 towns and "Travelers' inn" beside 'Inn (multiple)' in 86. Two authored pairs
+// were retired the same day because they were not the same function at two scales: a wayside
+// shrine is a complement to the parish church, and a bowyers' guild is not a dungeon-delving
+// supply district.
+const AUTHORED_UPGRADE_CHAINS = Object.freeze([
   ["Parish church", PARISH_CHURCHES_2_5],
   ["Parish church", PARISH_CHURCHES_10_30],
   [PARISH_CHURCHES_2_5, PARISH_CHURCHES_10_30],
-  ["Wayside shrine", "Parish church"],
   ["Water source", "Multiple water sources"],
   ["Citizen militia", "Town watch"],
   ["Citizen militia", PROFESSIONAL_CITY_WATCH],
@@ -64,7 +74,6 @@ export const UPGRADE_CHAINS = Object.freeze([
   ["Craft guilds (5-15)", "Craft guilds (30-80)"],
   ["Merchant guilds (3-8)", "Merchant guilds (15-40)"],
   ["Adventurers' charter hall", "Multiple adventurers' guilds"],
-  [BOWYERS_FLETCHERS_GUILD, "Dungeon delving supply district"],
   ["Apothecary", APOTHECARY_ESTABLISHED],
   [APOTHECARY_ESTABLISHED, APOTHECARY_DISTRICT],
   ["Apothecary", APOTHECARY_DISTRICT],
@@ -73,6 +82,12 @@ export const UPGRADE_CHAINS = Object.freeze([
   ["Small hospital", "Major hospital"],
   ["Slave market", "Slave market district"],
 ]);
+
+export const UPGRADE_CHAINS = Object.freeze((() => {
+  const seen = new Set(AUTHORED_UPGRADE_CHAINS.map(([lesser, greater]) => `${lesser}\u0000${greater}`));
+  const derived = familyLadderPairs().filter(([lesser, greater]) => !seen.has(`${lesser}\u0000${greater}`));
+  return [...AUTHORED_UPGRADE_CHAINS, ...derived];
+})());
 
 // Same-function collapse rules used by subsumptionPass. Greaters use the
 // pass's historical case-insensitive substring match; lessers are exact.
@@ -107,8 +122,9 @@ export const SUBSUMPTION_RULES = Object.freeze([
   { greater: 'gladiatorial school', lesser: ['fighting pits'] },
   { greater: 'printing house', lesser: ['village scribe'] },
   { greater: 'great library', lesser: ['village scribe', 'printing house'] },
-  { greater: 'banking houses', lesser: ['pawnbroker'] },
-  { greater: 'banking district', lesser: ['pawnbroker', 'banking houses'] },
+  // (2026-09-30) 'pawnbroker' left the two banking absorptions: pledge-lending serves the
+  // people the banks turn away, and the registry now carries it from hamlet to metropolis.
+  { greater: 'banking district', lesser: ['banking houses'] },
   { greater: 'major hospital', lesser: ['almshouse'] },
   { greater: 'hospital network', lesser: ['almshouse', 'foundling home'] },
   { greater: CARAVAN_MASTERS_EXCHANGE_2, lesser: ["caravaneer's post", 'waystation', PACK_ANIMAL_TRADER] },

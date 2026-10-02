@@ -199,6 +199,13 @@ const NPC_FACTION_FIELDS = Object.freeze([
     why: 'the character\'s title is faction-token prose ("Thieves\' Guild Master"); leaving it stale renders a member chip that still names the dissolved faction' },
   { parent: null, key: 'factionGoal', kind: 'prose',
     why: 'the generated goal line names the faction whose position the character maintains' },
+  // ADDED 2026-09-30, the same latent class as role and factionGoal above: npcGenerator's
+  // succession-void goal ("Position themselves before {topFaction} moves first") has always
+  // named a faction, and no denominator seed rolled it until the urban band's same-seed
+  // shift (ODQ §934.86) did. Cascading it is repair under the same ratified prose policy;
+  // goal.long never names a faction, so it is not declared.
+  { parent: 'goal', key: 'short', kind: 'prose',
+    why: 'the succession-void goal names the faction the character means to move before' },
 ]);
 
 /**

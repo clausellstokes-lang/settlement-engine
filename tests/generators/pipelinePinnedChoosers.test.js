@@ -91,7 +91,7 @@ const POWER_DIR = resolve(process.cwd(), 'src', 'generators', 'power');
 /** The one corpus row every single-row figure below was measured on. */
 const PROBE = { settType: 'town', terrainOverride: 'plains' };
 /** `assembleInstitutions`'s own-stream draw budget on PROBE, unpinned. Re-measured by A3. */
-const PROBE_DRAWS = 66;
+const PROBE_DRAWS = 86; // 2026-10-01, the urban band (ODQ §934.86): 66 -> 86, re-measured by A3 on the same row and seed
 /** The label `createPowerGenerationIntent` forks to MINT the power stream's seed. */
 const POWER_MINT_LABEL = 'power-structure';
 /** Planted by A2 and A6 alone; it appears in no generator vocabulary. */
@@ -108,8 +108,10 @@ const WATCHED = [
   'defenseProfile', 'relationships', 'conflicts', 'history', 'spatialLayout', 'isolationSupport',
   'stress', 'name', 'population',
 ];
-/** The three §0.S measured TOTAL under `assembleInstitutions`'s record-built pin. */
-const ASSEMBLE_TOTAL = ['stress', 'name', 'population'];
+/** The keys measured TOTAL under `assembleInstitutions`'s record-built pin: §0.S measured three. 2026-10-01, the urban
+ *  band (ODQ §934.86): `isolationSupport` joined them (measured by A5 over the 63-row corpus; the census agrees,
+ *  isolationPass|isolationSupport producedOnRecordClass 'varies' -> 'same'), so the set is four. */
+const ASSEMBLE_TOTAL = ['isolationSupport', 'stress', 'name', 'population'];
 
 const text = (value) => JSON.stringify(value);
 const probeRow = () => censusCorpus().find(
@@ -417,7 +419,7 @@ describe('EM-B2a3 — the institution and power choosers consult the pin seam', 
     expect(power.whole, 'the power pin no longer reproduces the record').toBe(power.rows);
     expect(WATCHED.filter((key) => power.perKey.get(key) === power.rows)).toEqual(WATCHED);
 
-    // (b) `assembleInstitutions`'s does not, and ONLY three watched keys survive totally. The
+    // (b) `assembleInstitutions`'s does not, and ONLY four watched keys survive totally (three before the urban band, 2026-10-01). The
     // short figures themselves are RECORDED MEASUREMENT with an as-of mark and are asserted
     // nowhere: they belong to the later writers this member does not own (§11).
     const assemble = survivalByInjection(ASSEMBLE, fromRecord(ASSEMBLE));
@@ -443,14 +445,16 @@ describe('EM-B2a3 — the institution and power choosers consult the pin seam', 
       'a chooser handed the caller its own object back').toEqual([0, 0]);
 
     // THE NEGATIVE CONTROL: the same bag, injected BY REFERENCE with no clone anywhere, is
-    // written through by the later passes on most rows and refused outright on two, so the
+    // written through by the later passes on most rows (and, before the urban band, refused outright on two), so the
     // member's clone can never go silently missing.
+    // 2026-10-01, the urban band (ODQ §934.86): the refusals went 2 -> 0 and the one message with them; the
+    // write-through count stays 52, so the control is still not vacuous.
     const bareAssemble = writeThrough(ASSEMBLE, 'uncloned');
     const barePower = writeThrough(POWER, 'uncloned');
     expect(bareAssemble.mutated).toBe(52);
-    expect(bareAssemble.threw).toBe(2);
-    expect(bareAssemble.messages).toEqual(['Cannot add property 1, object is not extensible']);
-    expect(barePower.mutated).toBe(30);
+    expect(bareAssemble.threw).toBe(0);
+    expect(bareAssemble.messages).toEqual([]);
+    expect(barePower.mutated).toBe(46); // 2026-10-01, the urban band (ODQ §934.86): 30 -> 47; the druid rulings (2026-10-01, ODQ §934.86 addendum 2, J30–J33): 47 -> 46; re-measured
     expect(barePower.threw).toBe(0);
     expect(bareAssemble.rows).toBe(63);
   }, 300_000);

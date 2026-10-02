@@ -112,18 +112,26 @@ const FIXED = Object.freeze([0, 21, 42]);
  */
 const PRE_CHANGE = Object.freeze({
   0: Object.freeze({
-    derived: '6d6a00a32714b90ee401710772a327c8bcd5a3eefe9bc253b503bcadade38c9c',
-    replay: '811c1d883ebdf15f665a8cedfc9a027500ddcfea10f8966827508f2023e1d92f',
+    derived: '6eb2b31ba080d09525519f8120216d855ff88468fd3b4abada9095376e8c4c7e',
+    replay: '0db21c820fafd5fb6adca7ba0c6311f627cf884912dabb2f60caee5b4954a01c',
   }),
   21: Object.freeze({
-    derived: 'b77b5909009112855bad4dacf881847d06e43385f64a15f4b528e0d30c91c3ce',
-    replay: '9eee1a5b114212bf577bec50634c88e90b28443f397e47632ce2d98d6d7add01',
+    derived: '95a3de2d59b7352ed1856697163952a202e8d1e67ad2fb98292af43afc37d98a',
+    replay: '8550ab658b42205db8d14f9a0e74e9c29d58054d4f21dd6695767e1905369151',
   }),
   42: Object.freeze({
-    derived: '483e61a32aaffbb8dbe731f9f92ebcfb6ff5c2dee8a0fb39028c94684d1fe0f0',
-    replay: 'e15fd95d7dccb6e6cce21e30a9807b2ee7fbf33c97677cddce1f35eb55aaf8b3',
+    derived: 'a4e5bc0eb2c1a35ad93e47398c1089354dd16efa16e77e42df8a07a8d7a9ba3e',
+    replay: 'd2c2e321d66122032f8585278ad68ed4c4f9864c5a020c26a8466f33730e6461',
   }),
 });
+// ── RE-CAPTURED 2026-10-01, the urban band (ODQ §934.86), BY THE SAME PLANT AND NEVER FROM THE LIVE STEP ALONE ─────
+// The three rows' worlds moved with the rebuilt institution registry, so all six digests moved. They were re-captured
+// the way the block above says: `git show dde845c15^:src/generators/steps/resolveResources.js` (sha256 62e16d59...,
+// the pre-EM-B2b2 step, unchanged since but for B2b2's own +31 lines) planted over a COPY of this tree (0411738d2, whose generator is
+// c9bf28ca8's; never over this checkout), and the three rows' fresh generation and replay hashed. The planted pre-change step and
+// the live step produced the SAME six digests, so this change still moves not one byte of the no-edit path, and the
+// re-capture is attributable to the urban band alone. Row 21's `derived` is the re-recorded golden master's own row
+// 'town|germanic|plains|road|civilized|golden-master-v3' (917834e22), which the census arm A1 also pins.
 
 describe('EM-B2b2 — the DM\'s nearby-resources word survives resolveResources', () => {
   it('A1 — THE DM\'S ROSTER STANDS AT ITS OWN DECLARED LEAF: byte-equal on three fixed seeds, and carried on every census row', () => {

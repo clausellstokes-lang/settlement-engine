@@ -6,7 +6,7 @@
  * the works were chartered to serve.
  *
  * ⭐ THE ONE-TRUTH ROSTER RULE (§441.1). The dossier already generates 'Sewage system'
- * (`institutionalCatalog.js:2225`, the city block, rolled at metropolis too via
+ * (`institutionalCatalog.js:1137`, the family's `shared` row, rolled at metropolis too via
  * `assembleInstitutions.js:243`). So the rung and the roster may never disagree about whether the
  * sewer institution exists:
  *   • FULL WEB exists EXACTLY where the roster carries it — read through UC-0's
@@ -308,7 +308,7 @@ export const WELL_EXTENTS = Object.freeze(/** @type {WellExtent[]} */ (['single'
 /**
  * Tier → the well extent that tier's water need reaches, and whether the roster's engineered
  * water system is present. 'Aqueduct or water system' is `required: true` in the CITY block
- * (`institutionalCatalog.js:2239`), so city and metropolis carry it BY CONSTRUCTION — the tier
+ * (`institutionalCatalog.js:1091`), so city and metropolis carry it BY CONSTRUCTION — the tier
  * read IS the roster read here, and the acceptance pins that against the live catalog rather
  * than asserting it. Below city the need is met by drawn water alone.
  * @type {Readonly<Record<string, { extent: WellExtent, engineered: boolean }>>}

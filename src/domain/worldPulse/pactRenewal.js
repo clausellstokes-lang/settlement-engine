@@ -7,7 +7,7 @@
  * was the end: every clause lapsed on its own day and the record pruned in silence. In the
  * last weeks of an instrument's LONGEST live clause either court may now ask to renew it, the
  * other court answers by the same threshold every pact answer uses, and the two outcomes are
- * the whole of GR-5b:
+ * the whole of GR-5b (a court now asks on its own too, in its window's first weeks, below):
  *
  *   ACCEPTED ⇒ a `renewed` LINEAGE ACT on the LIVING record, never a re-mint at the pair key.
  *     The superseded clauses close, the same clauses are re-issued at their own spans from the
@@ -40,9 +40,11 @@
  * neighbour through the record alone). The court's own strength is its ground truth, which is
  * knowledge and not belief: at the tick the stage injects its pressure-aware reader, and off the
  * tick (the DM's verb and the editor's seal) it is the one derivation with no pressure index,
- * the `opportunism.js` idiom. The baseline is the lead the war door RECORDED
- * (`believedMarginAtSignature`, read from the demander's side), so an instrument that recorded
- * none (a peace between equals) offers no swing and is renewed, never renegotiated.
+ * the `opportunism.js` idiom. The baseline is the lead RECORDED AT THE SIGNING
+ * (`believedMarginAtSignature`, read from the demander's side): the war door records the
+ * victor's, and the formation door records a negotiated pact's first party's (GR-5c-b), so a
+ * peace made in peace swings too. An instrument that recorded none offers no swing and is
+ * renewed, never renegotiated.
  *
  * THE ASK IS CAPPED. A demand asks back the swing itself as a fraction of each owed clause's
  * weight: never more than the believed ratio moved, and never more than the cap (a demand past
@@ -57,13 +59,32 @@
  * is when a court reckons its accounts, so a refused demand is raised again a year later rather
  * than at every answer. The DM's verb is the table's hand and waits for neither.
  *
+ * ── CONVERSION (GR-5d; J-GR-9 the shape, R-24 the court's own act) ─────────────────
+ * A renewal accepted over a compelled alliance whose RECORDED history was honoured throughout
+ * (`worstObservedEverOf`, the monotone memory, read by name) and whose pair's trust stands at or
+ * above `CONVERSION_TUNING.TRUST_BAND` (DRAFT) converts it: a `converted` lineage act through the
+ * one amendment writer closes the compelled clause and writes the frozen composable pair (mutual
+ * defence and non-aggression) held by both courts on its span, the provenance becomes `converted`,
+ * and the new holders swear. Below the band, or on a record ever seen strained, the renewal renews
+ * AS IS. The conversion is never the DM's to direct; the DM's lever is the relationship label.
+ *
+ * ── THE WORLD ASKS TOO (GR-RENEWAL U1) ──────────────────────────────────────────────
+ * The window was reachable only through the DM's verb until the pact stage consumed the seal's
+ * own predicate. Now, in an instrument's first weeks inside its window (as long as one answer
+ * takes on the pair's road), a court OWED something on the instrument asks its counterpart to
+ * renew it AS IS, through the same conjuncts the seal reads and only while the two are at
+ * peace. Any question it puts is answered after those weeks, so it asks once a window: a
+ * refusal is a clean lapse, and nothing chases it. A question already standing on the day the
+ * window opens defers the ask to its answer rather than losing it.
+ *
  * ── ONE HOME FOR THE FAMILY'S LOGIC (the chair's ruling FP-15) ─────────────────────
  * The window, the demand, the sheets, the supersession, the acts, the re-stamp, the clean lapse
  * and the strain all live HERE. The landed modules carry fold calls and nothing else: the tick's
  * answer step (`pactFormation.js :: advancePeacetimePacts`) hands a renewal or renegotiation row
  * to `settleRenewalProposal` and writes the ledger it is handed back, the same step asks
- * `openRenegotiationDemands` for the court's own demands, and the DM's verb (`realmVerbExecution.js`,
- * PROPOSE_PACT) drafts both words through `renewalClauseSheet`.
+ * `openRenewalProposals` for the court's own renewals before its crossings and
+ * `openRenegotiationDemands` for the court's own demands after them, and the DM's verb
+ * (`realmVerbExecution.js`, PROPOSE_PACT) drafts both words through `renewalClauseSheet`.
  *
  * ⚠ THIS LEAF WRITES NO TREATY LEDGER, AND THAT IS DELIBERATE. The oath-stamp totality
  * walker makes every module that writes `treaties` either a registered signing door or a
@@ -96,24 +117,28 @@
  * does not swear the new oath. The landed stamp doors are NOT retrofitted (R-20).
  *
  * ── WHAT THIS FAMILY DOES NOT DO, NAMED ───────────────────────────────────────────
- * No organic renewal opener and no re-draft of a renewal at the believed ratio (a renewal is
- * AS IS). No renegotiation evaluator of the answering court's own ratio (the answer is the one
- * threshold every pact answer uses). No conversion (GR-5d). No news kind (GR-5e is the voice;
- * the verb's two registered pools already speak the order). No provenance write (`provenance`
- * records how an instrument BEGAN; the lineage says what happened since). No new top-level
- * key and no new ledger.
+ * No re-draft of a renewal at the believed ratio (a renewal is AS IS). No renegotiation evaluator
+ * of the answering court's own ratio (the answer is the one threshold every pact answer uses). No
+ * relationship label (J-GR-9's `allied` proposal rides the plane's own label lane, slot GR-5d-l,
+ * owed by the unit that owns the relationship rules). No news kind (GR-5e is the voice; the
+ * verb's two registered pools already speak the order). No provenance write for a renewal or a
+ * renegotiation (`provenance` records how an instrument BEGAN; the lineage says what happened
+ * since); a conversion writes `converted`, because J-GR-9 rules the document says what the
+ * compelled thing has become. No new top-level key and no new ledger.
  *
  * THE EDITOR (L10): `RENEWAL_WORLD_CONDITIONS.renewalWindowOpen` and
  * `RENEGOTIATION_WORLD_CONDITIONS.renegotiationOpen` are DEFINED here in `worldConditions.js`'s
  * live-row shape and composed by the chair; their seals' consumers are the slots "GR-5b-c" and
  * "GR-5c-c: the consumer lands at U123". The act is PROPOSE_PACT with the family's two words on
- * its clause dial (a realm verb, applied by the realm lane at the tick). Real-only: phantoms
- * never enter a campaign's courts.
+ * its clause dial (a realm verb, applied by the realm lane at the tick). GR-5d mints no seal, by
+ * design (R-24: conversion stays the court's). Real-only: phantoms never enter a campaign's courts.
  *
  * PURE: no rng, no clock, no store. It reads the ledgers and the rows it is handed, and every
  * write goes back to its caller.
  *
- * @enforced-by tests/domain/pactRenewalGr5b.test.js, tests/domain/pactRenegotiationGr5c.test.js
+ * @enforced-by tests/domain/pactRenewalGr5b.test.js, tests/domain/pactRenegotiationGr5c.test.js,
+ *   tests/domain/pactRenewalOrganic.test.js, tests/domain/pactRenegotiationNegotiated.test.js,
+ *   tests/domain/pactConversionGr5d.test.js
  */
 import { clamp01 } from '../../kernel/math.js';
 import { NPC_UNAVAILABLE_STATUSES } from '../entities/npcs.js';
@@ -121,13 +146,15 @@ import { OFF_STAGE_STATUSES, isOffStage } from '../roads/state.js';
 import { beliefRecord, strengthOfBand } from './beliefMap.js';
 import { oathHolderActive, stampSworn } from './oathHolder.js';
 import {
-  PACT_LINEAGE_ACTS, amendPactInstrument, lineageOf, stackingCellOf, termIdOf, treatyRenewalActive,
+  COMPOSABLE_SECURITY_PAIR, PACT_LINEAGE_ACTS, PACT_PROVENANCE, amendPactInstrument, lineageOf, provenanceOf,
+  stackingCellOf, termIdOf, treatyRenewalActive, worstObservedEverOf,
 } from './pactAmendment.js';
-import { openPactProposal, pactCounterpartiesFor, settlePactProposal } from './pactProposals.js';
+import { answerDueTickFor, openPactProposal, pactCounterpartiesFor, settlePactProposal } from './pactProposals.js';
 import { PACT_TRIGGERS } from './pactTriggers.js';
+import { TERM_CATALOG, termLabel } from './peaceTermsCatalog.js';
 import { accrueStrainResentment } from './peaceTermsOverlay.js';
 import { round4, treatyPairKey } from './peaceTermsPrimitives.js';
-import { settlementStrength } from './relationshipEvolution.js';
+import { edgeKeyBetween, normalizeRelationshipType, settlementStrength } from './relationshipEvolution.js';
 import { courtPostureOf } from './strategicPosture.js';
 import { treatyTicksPerYearOf } from './treatyClock.js';
 import { treatyLedgerOf } from './treatyEnforcement.js';
@@ -161,6 +188,17 @@ export const RENEGOTIATION_TUNING = Object.freeze({
 });
 
 /**
+ * ⚠ DRAFT — GR-5d's band, signed by the owner at the tuning sitting (tests/lint/.tuning-register.json).
+ * The measurement that places it lives in U3's commit body and its acceptance arm.
+ */
+export const CONVERSION_TUNING = Object.freeze({
+  /** The trust between the pair, on the relationship plane's own scale, at or above which a
+   *  compelled alliance accepted for renewal becomes a chosen one. Above what a trading pair, a
+   *  client or a vassal holds by default, and at or below what an allied pair holds by default. */
+  TRUST_BAND: 0.68,
+});
+
+/**
  * THE TRIGGER WORD, read OUT of the closed trigger vocabulary rather than typed here, so an
  * upstream rename empties it and every renewal road refuses instead of pointing at nothing.
  */
@@ -174,6 +212,16 @@ const RENEWAL_ACT = PACT_LINEAGE_ACTS.filter((act) => act === 'renewed')[0] || '
 
 /** GR-5c's act, read out of the same vocabulary. */
 const RENEGOTIATION_ACT = PACT_LINEAGE_ACTS.filter((act) => act === 'renegotiated')[0] || '';
+
+/** THE PROVENANCE a peace made in peace records (GR-5c-b reads it), out of the closed vocabulary. */
+const NEGOTIATED_PROVENANCE = PACT_PROVENANCE.filter((provenance) => provenance === 'negotiated')[0] || '';
+
+/** GR-5d's act and the provenance it writes (J-GR-9), out of their closed vocabularies. */
+const CONVERSION_ACT = PACT_LINEAGE_ACTS.filter((act) => act === 'converted')[0] || '';
+const CONVERTED_PROVENANCE = PACT_PROVENANCE.filter((provenance) => provenance === 'converted')[0] || '';
+
+/** THE CLAUSE THAT CONVERTS, read out of the catalogue: the war door's compelled alliance. */
+const COMPELLED_ALLIANCE = Object.keys(TERM_CATALOG).filter((type) => type === 'compelled_alliance')[0] || '';
 
 /**
  * THE UNAVAILABLE STATUSES THE CHOKEPOINT LEAVES TO EACH CONSUMER (today, `dead`), DERIVED
@@ -331,19 +379,65 @@ export function draftRenewalSheet(treaty, tick) {
 }
 
 /**
- * THE DEMANDER'S STANDING AT THE SIGNING: the lead the war door recorded
- * (`believedMarginAtSignature`, the victor's over the loser) read from the demander's side,
- * through the ONE orientation reader (CR-WR10-G): the victor's own lead, or the loser's
- * deficit. Null for an instrument that recorded no margin (every peace between equals) and for
- * a court that is neither war party, because a swing needs a signing to swing from.
+ * THE TWO COURTS OF A NEGOTIATED INSTRUMENT, in the order its record keeps them, or the empty
+ * list. Read from the record itself (its `provenance` through the one provenance reader, and its
+ * `parties`), never from `treatyOrientationOf`, which answers `unknown` for a peace nobody
+ * dictated: the formation door writes both parties in codepoint order and the provenance
+ * `negotiated`, and nothing else in the estate writes that provenance.
+ * @param {unknown} treaty @returns {string[]}
+ */
+function negotiatedPartiesOf(treaty) {
+  if (!NEGOTIATED_PROVENANCE || provenanceOf(treaty) !== NEGOTIATED_PROVENANCE) return [];
+  const parties = Array.isArray(recordOf(treaty).parties) ? /** @type {unknown[]} */ (recordOf(treaty).parties).map(text) : [];
+  return parties.length === 2 && parties[0] && parties[1] && parties[0] !== parties[1] ? parties : [];
+}
+
+/**
+ * THE DEMANDER'S STANDING AT THE SIGNING, read from the demander's side. A war's end records the
+ * victor's lead over the loser (`believedMarginAtSignature`, read through the ONE orientation
+ * reader, CR-WR10-G): the victor's own lead, or the loser's deficit. A NEGOTIATED instrument
+ * records its FIRST party's lead over its second in the same field, written at the signing by
+ * `signingLeadRecordOf` (GR-5c-b, READ 3: no peacetime pact could ever be renegotiated): the first
+ * party's own lead, or the second's deficit, the war door's own convention with the first party
+ * in the victor's place. Null for an instrument that recorded no margin and for a court that is
+ * neither party, because a swing needs a signing to swing from.
  * @param {unknown} treaty @param {string} demanderId @returns {number|null}
  */
 function signatureLeadOf(treaty, demanderId) {
   const margin = finite(recordOf(treaty).believedMarginAtSignature);
+  if (margin === null || !demanderId) return null;
   const orientation = treatyOrientationOf(recordOf(treaty));
-  if (margin === null || orientation.kind !== 'wartime' || !demanderId) return null;
-  if (demanderId === orientation.receiverId) return margin;
-  return demanderId === orientation.giverId ? -margin : null;
+  if (orientation.kind === 'wartime') {
+    if (demanderId === orientation.receiverId) return margin;
+    return demanderId === orientation.giverId ? -margin : null;
+  }
+  const [first, second] = negotiatedPartiesOf(treaty);
+  if (first && demanderId === first) return margin;
+  return second && demanderId === second ? -margin : null;
+}
+
+/**
+ * THE LEAD RECORDED AT A NEGOTIATED SIGNING (GR-5c-b), the record `signatureLeadOf` reads. The
+ * formation door spreads it into the instrument it mints: the FIRST party's believed lead over
+ * its second, the court's own strength (the stage's knowledge of itself) less its OWN picture of
+ * the other (`beliefMap.js :: beliefRecord`, the band's midpoint), the same two reads the swing
+ * is later measured with, so a swing is a change and never a level. The empty record when the
+ * layer is dark, no strength reader was handed in, or the first party holds no picture of the
+ * second: the key is drop-when-absent, and an instrument that recorded none is renewed, never
+ * renegotiated.
+ * @param {{worldState: unknown, parties: ReadonlyArray<string>, strengthFor?: ((id: string) => number)|null}} input
+ * @returns {{believedMarginAtSignature?: number}}
+ */
+export function signingLeadRecordOf({ worldState, parties, strengthFor = null }) {
+  if (!treatyRenewalActive(worldState) || typeof strengthFor !== 'function') return {};
+  const first = text(parties[0]);
+  const second = text(parties[1]);
+  if (!first || !second || first === second) return {};
+  const band = finite(recordOf(beliefRecord(
+    /** @type {Parameters<typeof beliefRecord>[0]} */ (worldState), first, second,
+  )).strengthBand);
+  const own = finite(strengthFor(first));
+  return band === null || own === null ? {} : { believedMarginAtSignature: round4(own - strengthOfBand(band)) };
 }
 
 /**
@@ -564,19 +658,25 @@ function onStageSettlementOf(settlementOf) {
  * for swears in the seat's voice, exactly as at a mint. Dark, the record's signature is left as
  * it stands (GR-1's own dormancy).
  *
+ * `closing` names clauses the act closes beyond the sheet's own cells: a conversion writes its pair
+ * into a cell the compelled clause never held, so the compelled clause is closed by name.
+ *
  * @param {{treaty: Record<string, unknown>, terms: ReadonlyArray<unknown>, tick: number,
  *   worldState: unknown, ids: ReadonlyArray<string>, settlementOf: (id: string) => unknown,
- *   act: string, reissue: (term: Record<string, unknown>, tick: number) => Record<string, unknown>|null}} input
+ *   act: string, reissue: (term: Record<string, unknown>, tick: number) => Record<string, unknown>|null,
+ *   closing?: ReadonlyArray<Record<string, unknown>>}} input
  * @returns {{treaty: Record<string, unknown>, added: Array<Record<string, unknown>>,
  *   refused: Array<{cell: string, type: string, receipt: string}>,
  *   superseded: Array<Record<string, unknown>>}}
  */
-function supersedeWith({ treaty, terms, tick, worldState, ids, settlementOf, act, reissue }) {
+function supersedeWith({ treaty, terms, tick, worldState, ids, settlementOf, act, reissue, closing = [] }) {
   const at = wholeTick(tick);
   const sheet = present(listOfRecords(terms).map((term) => reissue(term, at)));
   const cells = new Set(sheet.map(stackingCellOf));
+  const closed = new Set(closing.map(termIdOf));
   const standing = listOfRecords(recordOf(treaty).terms);
-  const superseded = standing.filter((term) => Number(term.expiresTick) > at && cells.has(stackingCellOf(term)));
+  const superseded = standing.filter((term) => Number(term.expiresTick) > at
+    && (cells.has(stackingCellOf(term)) || closed.has(termIdOf(term))));
   const base = { ...treaty, lineage: lineageOf(treaty), terms: standing.filter((term) => !superseded.includes(term)) };
   const amended = amendPactInstrument({ treaty: base, terms: sheet, tick: at, act });
   if (amended.added.length === 0) return { treaty, added: [], refused: amended.refused, superseded: [] };
@@ -623,6 +723,67 @@ function askedOf(treaty, sheet, tick) {
     if (was !== null && was > 0 && asked !== null) return clamp01(1 - asked / was);
   }
   return 0;
+}
+
+/**
+ * IS THIS ACCEPTED RENEWAL A CONVERSION? (GR-5d; J-GR-9 the shape, R-24 the court's own act.) The
+ * instrument still binds a compelled alliance and the accepted sheet re-offers it; its RECORDED
+ * history was honoured throughout (`pactAmendment.js :: worstObservedEverOf`, read BY NAME: the gate
+ * is the record's monotone memory, never the calendar and never this tick's observation); and the
+ * pair's trust stands at or above the band on the relationship record the plane keeps for their
+ * edge. The live compelled clauses, or the empty list.
+ * @param {{worldState: unknown, snapshot: unknown, treaty: Record<string, unknown>,
+ *   sheet: ReadonlyArray<Record<string, unknown>>, fromId: string, toId: string, tick: number}} input
+ * @returns {Array<Record<string, unknown>>}
+ */
+function compelledToConvert({ worldState, snapshot, treaty, sheet, fromId, toId, tick }) {
+  if (!COMPELLED_ALLIANCE || !CONVERSION_ACT || worstObservedEverOf(treaty) !== 'honored') return [];
+  if (!sheet.some((term) => text(term.type) === COMPELLED_ALLIANCE)) return [];
+  const trust = finite(relationBetween(worldState, snapshot, fromId, toId).trust);
+  if (trust === null || !(trust >= CONVERSION_TUNING.TRUST_BAND)) return [];
+  return liveTermsOf(treaty, tick).filter((term) => text(term.type) === COMPELLED_ALLIANCE);
+}
+
+/**
+ * THE CHOSEN PAIR, for one compelled clause: the frozen composable pair
+ * (`COMPOSABLE_SECURITY_PAIR`, mutual defence and non-aggression), each held by BOTH courts
+ * (`beneficiary: 'both'`, the obligation reader's mutual verdict), each the catalogue's own clause at
+ * its own weight, on the compelled clause's own span: the same bond, run again, now chosen.
+ * @param {Record<string, unknown>} compelled @param {string} a @param {string} b
+ * @returns {Array<Record<string, unknown>>}
+ */
+function chosenPairFor(compelled, a, b) {
+  return COMPOSABLE_SECURITY_PAIR.map((type) => {
+    const spec = TERM_CATALOG[type];
+    return {
+      type, family: spec.family, magnitude: spec.baseMag,
+      mintedTick: Number(compelled.mintedTick), expiresTick: Number(compelled.expiresTick),
+      weightSpent: spec.weight, complianceState: 'honored', trueState: 'honored', burden01: 0, beneficiary: 'both',
+      receipt: `${a} and ${b} promise ${termLabel(type)} to each other by choice, where once one marched under the other by compulsion.`,
+    };
+  });
+}
+
+/**
+ * CONVERT A STANDING INSTRUMENT (J-GR-9): the accepted sheet with every compelled clause replaced by
+ * its chosen pair, the compelled clauses closed by name, the whole re-issued from the signing on the
+ * clauses' own spans, the `converted` act recorded through the ONE amendment writer, the provenance
+ * written as `converted` (the document says what the instrument now is; the lineage keeps what it was),
+ * and the pair re-stamped (see `supersedeWith`).
+ * @param {{treaty: Record<string, unknown>, sheet: ReadonlyArray<Record<string, unknown>>,
+ *   compelled: ReadonlyArray<Record<string, unknown>>, tick: number, worldState: unknown,
+ *   ids: ReadonlyArray<string>, settlementOf: (id: string) => unknown}} input
+ * @returns {ReturnType<typeof supersedeWith>}
+ */
+function convertPactInstrument({ treaty, sheet, compelled, tick, worldState, ids, settlementOf }) {
+  const [a, b] = ids;
+  const terms = sheet.flatMap((term) => (text(term.type) === COMPELLED_ALLIANCE ? chosenPairFor(term, a, b) : [term]));
+  const converted = supersedeWith({
+    treaty, terms, tick, worldState, ids, settlementOf, act: CONVERSION_ACT, reissue: reissuedAt, closing: compelled,
+  });
+  return converted.added.length > 0
+    ? { ...converted, treaty: { ...converted.treaty, provenance: CONVERTED_PROVENANCE } }
+    : converted;
 }
 
 /**
@@ -722,15 +883,21 @@ export function settleRenewalProposal({ worldState, proposal, answer, tick, sett
     tick: at, id, fromId, toId, offer01: answer.offer01, reserve01: answer.reserve01,
   };
   if (answer.verdict === 'signed' && standing !== null && binding) {
-    const renewal = renewPactInstrument({
-      treaty: standing.treaty, terms: listOfRecords(recordOf(row.sheet).terms), tick: at, worldState,
-      ids: [fromId, toId], settlementOf,
-    });
+    const sheet = listOfRecords(recordOf(row.sheet).terms);
+    // GR-5d: an accepted renewal over a compelled alliance honoured throughout, past the trust band, converts it.
+    const compelled = compelledToConvert({ worldState, snapshot, treaty: standing.treaty, sheet, fromId, toId, tick: at });
+    const renewal = compelled.length > 0
+      ? convertPactInstrument({ treaty: standing.treaty, sheet, compelled, tick: at, worldState, ids: [fromId, toId], settlementOf })
+      : renewPactInstrument({ treaty: standing.treaty, terms: sheet, tick: at, worldState, ids: [fromId, toId], settlementOf });
     if (renewal.added.length > 0) {
       return {
         worldState: settlePactProposal({ worldState, id, state: 'signed' }).worldState,
         ledger: { ...recordOf(treatyLedgerOf(/** @type {Parameters<typeof treatyLedgerOf>[0]} */ (worldState))), [standing.key]: renewal.treaty },
-        receipt: {
+        receipt: compelled.length > 0 ? {
+          kind: 'pact_converted', ending: 'signed', ...heard,
+          converted: renewal.added.map(termIdOf).sort(), superseded: renewal.superseded.map(termIdOf).sort(),
+          receipt: `${answer.receipt} The compelled alliance between ${fromId} and ${toId} is compelled no longer: they renewed it as a bond of mutual defence both courts chose.`,
+        } : {
           kind: 'pact_renewed', ending: 'signed', ...heard,
           renewed: renewal.added.map(termIdOf).sort(), superseded: renewal.superseded.map(termIdOf).sort(),
           receipt: `${answer.receipt} ${fromId} and ${toId} have renewed the instrument that stood between them, and its clauses run again from this signing.`,
@@ -750,6 +917,94 @@ export function settleRenewalProposal({ worldState, proposal, answer, tick, sett
         : `The instrument between ${fromId} and ${toId} ran out before the answer came, and there was nothing left to renew.`,
     },
   };
+}
+
+/**
+ * THE PAIR'S RELATIONSHIP RECORD, found through the edge that joins the two courts (FPQ-35: every
+ * relationship writer keys its record by the graph edge's id, and `edgeKeyBetween` is the plane's
+ * one pair reader), or the empty record when no edge joins them.
+ * @param {unknown} worldState @param {unknown} snapshot @param {string} a @param {string} b
+ * @returns {Record<string, unknown>}
+ */
+function relationBetween(worldState, snapshot, a, b) {
+  const key = edgeKeyBetween(edgesOf(snapshot), a, b);
+  return key ? recordOf(recordOf(recordOf(worldState).relationshipStates)[key]) : {};
+}
+
+/** ARE THE TWO COURTS AT WAR? The relationship overlay's own durable mark, the read the pact
+ *  stage's crossings and its answer step already make.
+ *  @param {unknown} worldState @param {unknown} snapshot @param {string} a @param {string} b */
+function atWarBetween(worldState, snapshot, a, b) {
+  return normalizeRelationshipType(text(relationBetween(worldState, snapshot, a, b).relationshipType)) === 'hostile';
+}
+
+/**
+ * DOES THIS COURT HOLD SOMETHING ON THE INSTRUMENT? A live clause it is owed, or one both courts
+ * hold, read through the one per-clause obligation reader (`treatyOrientation.js ::
+ * termObligationOf`). A court that only pays does not ask to keep paying: the court that asks is
+ * the court a clause runs TO, the formation door's own direction (a drafted clause runs to the
+ * court that asked for it).
+ * @param {unknown} treaty @param {string} courtId @param {number} tick @returns {boolean}
+ */
+function owedOn(treaty, courtId, tick) {
+  return liveTermsOf(treaty, tick).some((term) => {
+    const obligation = termObligationOf(recordOf(treaty), term);
+    return obligation.resolved && (obligation.mutual || obligation.obligeeId === courtId);
+  });
+}
+
+/**
+ * THE ASKING WEEKS: the window is open on `tick` and was still closed one answer's length earlier
+ * (`dwell`, the weeks this pair's road takes to carry a question and bring its answer back). Any
+ * question the court puts inside them is answered after them, so a court asks ONCE a window, and a
+ * refused renewal is a clean lapse the court does not chase; a question already standing between
+ * the pair on the day the window opens defers the ask to its answer instead of losing it.
+ * @param {unknown} treaty @param {number} tick @param {number} dwell @returns {boolean}
+ */
+function inAskingWeeks(treaty, tick, dwell) {
+  return renewalWindowOpenFor(treaty, tick) && !renewalWindowOpenFor(treaty, tick - dwell);
+}
+
+/**
+ * THE COURT'S OWN RENEWAL (GR-5b's organic proposer; READ 3 measured the window reachable only
+ * through the DM's verb: 0 of 1,094 proposals carried the trigger) — the fold
+ * `advancePeacetimePacts` makes into this leaf between its answers and its crossings, so a standing
+ * bond is reckoned before any new occasion. In an instrument's asking weeks, a court OWED
+ * something on it asks its counterpart to renew it AS IS, through the SAME conjuncts the editor's
+ * seal reads (`renewalCounterpartiesFor`: the pact verb's four, the layer lit, the window open),
+ * and only while the two are at peace. The row rides the ledger's one writer with the trigger
+ * `renewal`, and its answer is the tick's one answer road (`settleRenewalProposal`): accepted
+ * renews, refused is a clean lapse. Dark, the seal's conjuncts answer nothing (the layer's one
+ * gate is their first), so nothing is asked and the reference comes back untouched.
+ * @param {{worldState: Record<string, unknown>, ids: ReadonlyArray<string>, tick: number,
+ *   snapshot?: unknown, digest?: unknown, season?: unknown}} input
+ * @returns {{worldState: Record<string, unknown>, receipts: Array<Record<string, unknown>>}}
+ */
+export function openRenewalProposals({ worldState, ids, tick, snapshot = null, digest = null, season = null }) {
+  /** @type {Array<Record<string, unknown>>} */
+  const receipts = [];
+  const at = wholeTick(tick);
+  let state = worldState;
+  for (const courtId of ids) {
+    // The seal's own subjects, gate and all: dark, they are empty, so nothing is asked.
+    for (const counterpartId of renewalCounterpartiesFor(state, ids, courtId, at)) {
+      const standing = instrumentBetween(state, courtId, counterpartId);
+      const dwell = answerDueTickFor({ digest, fromId: courtId, toId: counterpartId, season, tick: at }).answerDueTick - at;
+      if (standing === null || !inAskingWeeks(standing.treaty, at, dwell) || !owedOn(standing.treaty, courtId, at)
+        || atWarBetween(state, snapshot, courtId, counterpartId)) continue;
+      const opened = openPactProposal({
+        worldState: state, from: courtId, to: counterpartId, trigger: RENEWAL_TRIGGER,
+        sheet: { terms: draftRenewalSheet(standing.treaty, at) }, tick: at, digest, season,
+      });
+      state = opened.worldState;
+      receipts.push({
+        kind: opened.proposal ? 'pact_renewal_proposed' : 'pact_not_proposed', tick: at, fromId: courtId, toId: counterpartId,
+        trigger: RENEWAL_TRIGGER, refusal: opened.refusal, transport: opened.proposal ? opened.proposal.transport : '',
+        receipt: `${courtId} asks ${counterpartId} to renew the instrument between them while its last clause still binds. ${opened.receipt}`,
+      });
+    }
+  }
+  return { worldState: state, receipts };
 }
 
 /**

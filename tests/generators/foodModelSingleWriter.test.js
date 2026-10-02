@@ -19,8 +19,22 @@ import { deriveFoodBalanceAnalysis } from '../../src/generators/economy/foodBala
 import { deriveFoodBalance } from '../../src/domain/display/dossierViewModel.js';
 import { generateEconomicViability } from '../../src/generators/economicGenerator.js';
 import { expectAbsentWithAnchor } from '../helpers/anchoredNegatives.js';
+// ONE SPELLING OF THE CORPUS (ARCH car 1): the FIX-G1 block at the foot of this file
+// addresses its row by the golden's own key function rather than rebuilding a config, so
+// a corpus edit moves the row here instead of silently selecting a different settlement.
+import { goldenCorpus, keyOf } from '../helpers/goldenMasterCorpus.js';
 
 const gen = (config, seed) => generateSettlementPipeline(config, null, { seed, customContent: {} });
+
+/**
+ * The witness whose viability headline over-counted its own dependency list. RE-PINNED 2026-10-01 (the urban band's
+ * same-seed shift, ODQ §934.86, when FIX-G1 joined feat/urban-band-institutions-2026-09-30): the golden's convicted row
+ * (town|germanic|mountain|mountain_pass|civilized|golden-master-v3) no longer files a DEPENDENCY under `issues`, and no
+ * row of the 525 does, so the arm pins the first configuration that meets its own precondition. Measured red-first at
+ * b5c28d8e2 WITHOUT the cure: "has 4 operational dependencies" against a list of 3; with it, 3 and 3.
+ */
+const CONVICTED_CONFIG = Object.freeze({ settType: 'town', culture: 'germanic', terrainOverride: 'mountain', tradeRouteAccess: 'mountain_pass', monsterThreat: 'civilized', magicExists: false });
+const CONVICTED_SEED = 'fix-g1-mountain_pass-mountain-town-n-0';
 
 describe('generators-domain-4 — single-writer food model', () => {
   it('CONTRADICTION KILLER — viability foodBalance never disagrees with foodSecurity on deficit sign or magnitude', () => {
@@ -310,6 +324,87 @@ describe('generators-domain-4 — single-writer food model', () => {
       importChannel: 'road trade',
     });
   });
+});
+
+/**
+ * ── FIX-G1 · THE VIABILITY SUMMARY COUNTS THE LIST IT PUBLISHES (ODQ §934.57) ────────
+ *
+ * The same defect class as the single-writer arms above, one record over: a fact was
+ * DERIVED TWICE from two different populations, and the two spellings disagreed.
+ * `buildViabilitySummary` counted DEPENDENCY-severity rows across `[...issues,
+ * ...warnings]` while `generateEconomicViability` published `dependencies` from
+ * `warnings` ALONE. Two `foodBalance.js` arms (Heavy / Severe Food Import Dependency,
+ * on the `deficitPercent > 40` branch of a connected non-road route) file a DEPENDENCY
+ * into `issues`, so the headline counted a drawer the list never shows.
+ *
+ * MEASURED over the 525-row golden corpus at `ad7ddf2c9`, before the cure: 370 rows
+ * state the count and exactly ONE disagreed —
+ * `town|germanic|mountain|mountain_pass|civilized|golden-master-v3` (Schwarzwalde), whose
+ * sentence said SIX beside a list of FIVE. The LIST was right on all 525: the record's
+ * own second counter, `metrics.dependencyCount`, agreed with it everywhere. After the
+ * cure the same sweep reports ZERO disagreements and the convicted sentence reads FIVE.
+ *
+ * ⛔ THE HABITAT IS STILL THERE, AND THE FIRST ARM ASSERTS IT. The sixth item was not
+ * moved, renamed or dropped — it is still filed under `issues` as "Severe Food Import
+ * Dependency", because WHICH collection it belongs in is a separate question the owner
+ * has not been asked. So the anchor below is that a DEPENDENCY-severity row is STILL
+ * sitting in `issues` on that row. Without it, a future re-filing would empty the defect's
+ * habitat and this arm would go green for the wrong reason, proving nothing about the
+ * counting rule it exists to hold.
+ */
+describe('FIX-G1 — the viability summary counts the list the record publishes', () => {
+  /** The stated count in the headline, or null where the sentence does not state one. */
+  const statedCount = (summary) => {
+    const m = String(summary || '').match(/has (\d+) operational dependenc/);
+    return m ? Number(m[1]) : null;
+  };
+  /** The golden's OWN call shape (generatorGoldenMaster hashFor): `_seed` is not config. */
+  const genRow = (row) => {
+    const { _seed, ...cfg } = row;
+    return generateSettlementPipeline(cfg, null, { seed: _seed, customContent: {} });
+  };
+
+  it('the convicted row: the sentence says what the list holds, with the defect\'s habitat intact', () => {
+    const v = gen(CONVICTED_CONFIG, CONVICTED_SEED).economicViability;
+
+    // THE LIVENESS ANCHOR. A DEPENDENCY-severity row is still filed under `issues`, which
+    // is the ONLY reason the two populations could ever differ here. If this reds, the
+    // food arms were re-filed and the counting arm below has stopped testing anything.
+    const issueDeps = (v.issues || []).filter((i) => i.severity === 'dependency');
+    expect(
+      issueDeps.map((i) => i.title),
+      'no DEPENDENCY sits in `issues` any more, so the over-count is unreachable and this arm is vacuous',
+    ).toEqual(['Severe Food Import Dependency']);
+
+    // …and the sentence counts the PUBLISHED list, not that second drawer. Pre-cure this
+    // read 4 against a list of 3 (measured at b5c28d8e2).
+    expect(statedCount(v.summary), 'the headline stated no count at all').not.toBeNull();
+    expect(statedCount(v.summary)).toBe((v.dependencies || []).length);
+    expect(statedCount(v.summary)).toBe(3);
+    // The record's three readings of one fact now agree, which is the invariant.
+    expect(v.metrics.dependencyCount).toBe((v.dependencies || []).length);
+  });
+
+  it('over the whole golden corpus, no row states a count its own list does not hold', () => {
+    const offenders = [];
+    let stating = 0;
+    for (const row of goldenCorpus()) {
+      const v = genRow(row).economicViability || {};
+      const stated = statedCount(v.summary);
+      if (stated == null) continue;
+      stating += 1;
+      const published = (v.dependencies || []).length;
+      if (stated !== published) offenders.push(`${keyOf(row)}: sentence ${stated} vs list ${published}`);
+      if (v.metrics?.dependencyCount !== published) {
+        offenders.push(`${keyOf(row)}: metric ${v.metrics?.dependencyCount} vs list ${published}`);
+      }
+    }
+    // NON-VACUITY: the corpus really does reach the sentence that states a count. Measured
+    // at 370 of 525 before and after the cure; the floor is well under it so an unrelated
+    // corpus edit cannot red this, while a corpus that stopped producing the sentence does.
+    expect(stating, 'no row stated a dependency count — the sweep judged nothing').toBeGreaterThan(300);
+    expect(offenders, `\n${offenders.join('\n')}\n`).toEqual([]);
+  }, 120_000);
 });
 
 function generateSettlementViability(settlement) {

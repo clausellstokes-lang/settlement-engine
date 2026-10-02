@@ -1,0 +1,16 @@
+{
+  "_doc": "SUPERSEDES ONE PREDICTION of docs/shift-records/2026-10-01-urban-band-warden-census.json and nothing else. That record's act on 'herald-knowledge-desk-golden' was REFUSED by the door (PREDICTION_MISS: predicted 400 rows, produced 383; NOTHING was written), and a record is never edited after its first act, so this one carries the corrected prediction under the SAME owner signature, row and cause. The prediction was wrong, not the change too large: the desk is one simulated year of a four-settlement realm, and its one Warden's Lodge settlement (Strathton, a town in a magic-50 world) is exactly where J33 changes inputs, so the year's news diverges. 333 items keep their ids, 65 leave and 48 arrive (398 -> 381 items). The desk was green at 731e19597 and red only after J33 (a1841d417). Every other surface of J33 stays under the first record.",
+  "ownerWords": "\"druid is magic. sorry. faith is not magic only applies to the institutions, but not divine magic substitute services. healing such as church or parish healing is an exception becasue that can also be mundane. You can keep druid, only if you exclude magical services in non magic settings\" · \"druid, in this case should then be paired as religious authorities in non magic settings.\" · \"this also means that their effect of food or defense does not exist in non magic settings.\" · \"Warden's Lodge stays defense, not druid\"",
+  "ownerDate": "2026-10-01",
+  "odqRow": "§934.86 addendum 2 of docs/OWNER_DECISION_QUEUE.md (DRUIDS IN A WORLD WITHOUT MAGIC, recorded 2026-10-01 on the ledger branch review-fixes-2026-07-08 at 381aa20a0)",
+  "cause": "ONE CAUSE: THE OWNER'S RULING 'Warden's Lodge stays defense, not druid', COMPLETED. The lodge leaves every druid and magic list; its mundane trades stay. In a magic world, a settlement holding a Warden's Lodge loses the druid tradition's chain substitution, druidic food cultivation, the folk-magic weight and a Druid Elder's seat that the lodge alone had opened; nothing else moves.",
+  "seat": "the urban-band chair, session 93391427 (Opus 5.5), executing every door write itself from the committed tree of feat/urban-band-institutions-2026-09-30, one surface per commit",
+  "surfaces": [
+    {
+      "surface": "herald-knowledge-desk-golden",
+      "action": "re-record",
+      "predictedRows": 383,
+      "proofForm": "derived-artefact"
+    }
+  ]
+}

@@ -1633,6 +1633,16 @@
       "band": null,
       "note": ""
     },
+    "src/domain/worldPulse/pactRenewal.js#CONVERSION_TUNING": {
+      "role": null,
+      "status": "draft",
+      "signedAt": null,
+      "unit": {
+        "TRUST_BAND": "fraction01"
+      },
+      "band": null,
+      "note": "FP GR-5d CONVERSION (lane GR-RENEWAL U3; J-GR-9 the shape, R-24 the court's own act): the trust between the pair, on the relationship plane's 0..1 scale (relationshipStates[edge].trust), at or above which a renewal accepted over a compelled alliance honoured throughout converts it into the composable pair both courts hold. PROPOSED = 0.68. FLOOR: every default below an alliance the plane assigns a pair (RELATIONSHIP_DEFAULTS: vassal 0.34, client 0.38, patron 0.42, neutral 0.45, trade_partner 0.62), so no pair converts on the trust its label alone gives it. CEILING: the default the plane gives an allied pair (0.78), so a pair the plane already reads as allied converts. 0.68 is the trust above which the plane's own rules offer an alliance (relationshipRulesCore.js trade_to_allied: trust > 0.68). MEASURED with the war door's own drafter: the compelled alliance's mint nudge (peaceTermsOverlay.js nudgeCompelledAlliance, 0.15 x the clause's magnitude) adds 0.0135 to 0.0945 trust over 45 drafts (margins 0 to 1, presses 0.6 to 1.4, three budgets), so a client or vassal pair never crosses on the nudge and a trading pair crosses only on a heavy alliance. DRAFT, registered by the lane's builder seat; the owner signs it at the tuning sitting."
+    },
     "src/domain/worldPulse/pactRenewal.js#RENEGOTIATION_TUNING": {
       "role": null,
       "status": "draft",

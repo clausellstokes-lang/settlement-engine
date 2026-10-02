@@ -45,6 +45,7 @@ import {
   RETIRED_BANK_FENCE_BASELINE_SCHEMA,
   RETIRED_RELATIONSHIPS_MOUNT_BASELINE_SCHEMA,
   RETIRED_DOMAIN_READER_BASELINE_SCHEMA,
+  RETIRED_EDIT_MODE_READERS_BASELINE_SCHEMA,
   RETIRED_FILTERED_LEAF_BASELINE_SCHEMA,
   RETIRED_SURFACE_FILTERED_LEAF_BASELINE_SCHEMA,
   RETIRED_UNFILTERED_LEAF_BASELINE_SCHEMA,
@@ -75,6 +76,7 @@ import {
   validateSchema21Baseline,
   validateSchema22Baseline,
   validateSchema23Baseline,
+  validateSchema24Baseline,
 } from '../../scripts/lib/observed-shape-baseline.mjs';
 import {
   artifactBaselineSchemaOf,
@@ -94,6 +96,7 @@ import {
   RELATIONSHIPS_MOUNT_TARGET_SCHEMA,
   DOMAIN_READER_TARGET_SCHEMA,
   EDIT_MODE_READERS_TARGET_SCHEMA,
+  CORPUS_REDEAL_TARGET_SCHEMA,
 } from '../../scripts/migrate-observed-shape-readers.mjs';
 
 const HASH_A = 'a'.repeat(64);
@@ -1513,7 +1516,11 @@ describe('observed-shape anti-vacuity sentinel telemetry', () => {
     // so the pair goes 61/40 -> 69/45. MEASURED off the live scan at the subject, never
     // predicted: the arithmetic is checkable but it is not the source.
     expect(declaredBankOf(EDIT_MODE_READERS_TARGET_SCHEMA)).toEqual({ bankedReads: 69, taggedRows: 45 });
-    expect(declaredBankOf(BASELINE_SCHEMA)).toEqual(declaredBankOf(EDIT_MODE_READERS_TARGET_SCHEMA));
+    // ⭐ AND 24 HOLDS IT: the corpus re-deal admits 53 ORDINARY rows, none on a declared identity,
+    // so the pair stays 69/45. MEASURED off the live scan at the subject.
+    expect(declaredBankOf(CORPUS_REDEAL_TARGET_SCHEMA)).toEqual({ bankedReads: 69, taggedRows: 45 });
+    expect(declaredBankOf(BASELINE_SCHEMA)).toEqual(declaredBankOf(CORPUS_REDEAL_TARGET_SCHEMA));
+    expect(declaredBankOf(RETIRED_EDIT_MODE_READERS_BASELINE_SCHEMA)).toEqual({ bankedReads: 69, taggedRows: 45 });
     expect(declaredBankOf(RETIRED_DOMAIN_READER_BASELINE_SCHEMA)).toEqual({ bankedReads: 61, taggedRows: 40 });
     expect(declaredBankOf(RETIRED_RELATIONSHIPS_MOUNT_BASELINE_SCHEMA)).toEqual({ bankedReads: 61, taggedRows: 40 });
     expect(declaredBankOf(RETIRED_BANK_FENCE_BASELINE_SCHEMA)).toEqual({ bankedReads: 60, taggedRows: 39 });
@@ -1591,7 +1598,9 @@ describe('observed-shape anti-vacuity sentinel telemetry', () => {
     // `kind on settlement` and `decrees on settlement`, both DECLARED, so the roster goes
     // EIGHT -> TEN and the bank 61/40 -> 69/45. Unlike 22 it adds rows rather than moving
     // them, and unlike 21 it grows the ROSTER rather than only the tagged row count.
-    expect(BASELINE_SCHEMA).toBe(23);
+    // ⭐ SCHEMA 24: THE URBAN BAND'S CORPUS RE-DEAL (2026-10-01, ODQ §934.86 and its addendum 2): schema 23's envelope, tag law and ten-identity roster UNCHANGED, re-governed to a register that admits 53 ordinary rows the re-dealt AO-0 year exposes and shrinks one; nothing is declared and the bank holds at 69/45.
+    expect(BASELINE_SCHEMA).toBe(24);
+    expect(RETIRED_EDIT_MODE_READERS_BASELINE_SCHEMA).toBe(23);
     expect(RETIRED_DOMAIN_READER_BASELINE_SCHEMA).toBe(22);
     expect(RETIRED_RELATIONSHIPS_MOUNT_BASELINE_SCHEMA).toBe(21);
     expect(RETIRED_BANK_FENCE_BASELINE_SCHEMA).toBe(20);
@@ -1613,7 +1622,7 @@ describe('observed-shape anti-vacuity sentinel telemetry', () => {
     // ⭐ 15 retired at §893.4, 16 at the stress-topology rung, 17 at the lineage-reanchor
     // rung, 18 at the exemption-retirement rung, 19 at the bank-fence rung; the LIVE
     // envelope is validated by 20 now.
-    expect(validateSchema23Baseline(live)).toBe(live);
+    expect(validateSchema24Baseline(live)).toBe(live);
     // … and 18, 19, 20, 21 and 22 keep their own literals, so each refuses the live envelope
     // it used to accept.
     expect(() => validateSchema18Baseline(live)).toThrow(/is not schema 18/);
@@ -1621,6 +1630,7 @@ describe('observed-shape anti-vacuity sentinel telemetry', () => {
     expect(() => validateSchema20Baseline(live)).toThrow(/is not schema 20/);
     expect(() => validateSchema21Baseline(live)).toThrow(/is not schema 21/);
     expect(() => validateSchema22Baseline(live)).toThrow(/is not schema 22/);
+    expect(() => validateSchema23Baseline(live)).toThrow(/is not schema 23/);
     expect(assertExplainedWriterRowTags(live)).toBe(live);
     expect(() => validateSchema4Baseline(live)).toThrow(/noncanonical fields/);
     expect(() => validateSchema5Baseline(live)).toThrow(/noncanonical fields/);
@@ -1754,7 +1764,7 @@ describe('observed-shape anti-vacuity sentinel telemetry', () => {
     // `artifactBaselineSchemaOf` exists to prevent.
     expect(artifactBaselineSchemaOf('legacy-leaf')).toBe(2);
     expect(artifactBaselineSchemaOf('exact-origin')).toBe(3);
-    expect(BASELINE_SCHEMA).toBe(23);
+    expect(BASELINE_SCHEMA).toBe(24);
     expect(() => artifactBaselineSchemaOf('heuristic')).toThrow(/scan mode is unsupported/);
   });
 

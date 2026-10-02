@@ -139,7 +139,7 @@ export const MAGIC_FORM_CATALOG = Object.freeze({
   practitioner: Object.freeze([
     'traveling hedge wizard', 'hedge wizard', "enchanter's shop", 'alchemist shop',
   ]),
-  circle: Object.freeze(['druid circle', 'elder grove council', 'teleportation circle', "warden's lodge"]),
+  circle: Object.freeze(['druid circle', 'elder grove council', 'teleportation circle']), // J33: Warden's Lodge is defence, not druid (the owner, 2026-10-01)
   tower: Object.freeze(["wizard's tower"]),
   guild: Object.freeze([
     "mages' guild", 'alchemist quarter', 'academy of magic', "mages' district",

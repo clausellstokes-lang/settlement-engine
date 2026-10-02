@@ -87,14 +87,14 @@ const rawGate = (catalog, tier) => {
 /** The catalogue a tier argument should answer, rebuilt from the RAW tables. @param {unknown} tier */
 const rebuiltCatalog = (tier) => {
   if (!tier || tier === 'random' || tier === 'custom') return rawGate(institutionalCatalog['village'] || {}, 'village');
-  if (tier === 'metropolis') return rawGate(rawMerge(['city', 'metropolis']), 'metropolis');
+  // The urban band (2026-09-30): every tier block is complete, so no tier merges another in.
   if (tier === 'all') return rawMerge(TIER_ORDER);
   return rawGate(institutionalCatalog[String(tier)] || {}, String(tier));
 };
 
 /** The in-tier NAME set a tier argument should answer, rebuilt from the RAW tables. @param {unknown} tier */
 const rebuiltNames = (tier) => {
-  const blocks = tier === 'metropolis' ? ['city', 'metropolis'] : [String(tier)];
+  const blocks = [String(tier)];
   const names = new Set();
   for (const block of blocks) {
     for (const insts of Object.values(institutionalCatalog[block] || {})) {
@@ -192,20 +192,24 @@ describe('EM-P4 — the institutional catalogue has one home and two lawful addr
     ).toEqual([]);
     expect(
       seam.getInstitutionsForTier('town').size,
-      'the in-tier name count at town moved. This is the figure EM-A2a\'s institution.class pool reads.',
-    ).toBe(85);
+      'the in-tier name count at town moved. This is the figure EM-A2a\'s institution.class pool reads.'
+      + ' (85 → 115 on 2026-09-30: the urban band carries village trades into the town and lets a'
+      + ' prosperous town hold a dozen city rows at low odds — ODQ §934.86.)',
+    ).toBe(115);
   });
 
   it('P6: the minTier gate still bites when the catalogue is read through the domain address', () => {
-    const gated = [];
+    // Since the urban band (2026-09-30) the registry lists every row at the tier it can fire
+    // at, so the catalogue carries no gated row; the gate is proved on the predicate itself,
+    // through the domain address, and the formerly gated rows are pinned to their tier.
+    expect(domainAddress.institutionAvailableAtTier({ minTier: 'metropolis' }, 'city')).toBe(false);
+    expect(domainAddress.institutionAvailableAtTier({ minTier: 'metropolis' }, 'metropolis')).toBe(true);
+    const gated = ['Airship docking (high magic)', 'Colosseum/arena', 'Dragon resident', 'Dream parlors (high magic)',
+      'Gambling district', 'Message network (high magic)', 'Multiple theaters', 'Opera house', 'Planar traders'];
     const ungated = [];
     for (const insts of Object.values(institutionalCatalog['city'] || {})) {
-      for (const [name, def] of Object.entries(insts)) {
-        if (def?.minTier === 'metropolis') gated.push(name);
-        else if (!def?.minTier) ungated.push(name);
-      }
+      for (const [name, def] of Object.entries(insts)) if (!def?.minTier) ungated.push(name);
     }
-    expect(gated.length, 'no city-authored, metropolis-gated row exists — the gate has nothing to bite on').toBeGreaterThan(0);
     expect(ungated.length, 'no un-gated city row exists — the anchor below would prove nothing').toBeGreaterThan(0);
     const atCity = domainAddress.getInstitutionsForTier('city');
     const atMetropolis = domainAddress.getInstitutionsForTier('metropolis');
@@ -218,12 +222,19 @@ describe('EM-P4 — the institutional catalogue has one home and two lawful addr
       gated.filter((name) => !atMetropolis.has(name)),
       'a metropolis-gated row is unreachable even at metropolis — the gate is not filtering, it is deleting',
     ).toEqual([]);
-    // THE ANCHOR: un-gated shelf siblings are present at BOTH tiers, so the absence asserted
-    // above measures the gate rather than an empty, renamed or drifted collection.
+    // THE ANCHOR: un-gated rows are present where the raw catalogue lists them, so the absence
+    // asserted above measures the gate rather than an empty, renamed or drifted collection.
+    // Every un-gated city row is offered at city; and the city rows the registry ALSO lists at
+    // metropolis (the urban band's same-name continuations, read from the raw catalogue) are
+    // offered at both. Before 2026-09-30 every city row was in the metropolis picker by the
+    // retired city -> metropolis merge; a metropolis now lists its own scale rows instead.
+    const rawMetropolis = new Set(Object.values(institutionalCatalog['metropolis'] || {}).flatMap((insts) => Object.keys(insts)));
+    const continued = ungated.filter((name) => rawMetropolis.has(name));
+    expect(continued.length, 'no city row continues to metropolis — the both-tier anchor would prove nothing').toBeGreaterThan(20);
     expect(
-      ungated.filter((name) => !atCity.has(name) || !atMetropolis.has(name)),
-      'an un-gated city row went missing at one of the two tiers — the collection drifted, and the'
-      + ' absence asserted above is vacuous rather than a verdict about the gate',
+      [...ungated.filter((name) => !atCity.has(name)), ...continued.filter((name) => !atMetropolis.has(name))],
+      'an un-gated row went missing at a tier the raw catalogue lists it at — the collection drifted,'
+      + ' and the absence asserted above is vacuous rather than a verdict about the gate',
     ).toEqual([]);
   });
 });

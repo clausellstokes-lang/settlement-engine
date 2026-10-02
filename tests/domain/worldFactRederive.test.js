@@ -345,10 +345,17 @@ describe('EM-B2b — world facts by consequence: the route, the refusals and the
   it('A7 — THE GOLDENS CANNOT SEE ANY OF IT: both fixtures are byte-identical and a no-layer re-derivation is still the committed golden', () => {
     // ⛔ BYTE-IDENTITY, BY SHA-256, AGAINST THE VALUES MEASURED AT THIS PACKET'S BASE. §11 makes a
     // single byte of movement a STOP, and a re-record is the chair's word and never a lane's.
+    // 2026-10-01, the urban band (ODQ §934.86): both fixtures were re-recorded by the CHAIR through the signed door
+    // (917834e22 generator master, 525 of 525 rows; 996063f9a dossier prose manifest, 980 of 1,050), so the two
+    // digests below are the committed files' new bytes: 7177cd6e.. -> fd2cf1db.. and 88983938.. -> aefaf169... This
+    // arm still asserts byte-identity against the committed value and still re-derives no-layer to the committed rows
+    // (the stride loop below passed under the new master), which is the claim; a lane re-recording is still a STOP.
+    // Then the druid rulings (ODQ §934.86 addendum 2), each through the door by the CHAIR: fd2cf1db.. -> 48f733d8.. (7c51ffec8)
+    // -> bf978de7.. (72c97b788, J33) and aefaf169.. -> 8f02a2e6.. (baebe2cda) -> 7990bbfb.. (960d99a17, J33).
     expect(shaOfFile(GOLDEN), 'tests/fixtures/generator-golden-master.json moved')
-      .toBe('7177cd6e89ebee404dec05d725d91e98ff59d2cfa124104a9a22515a7c8e8f1e');
+      .toBe('bf978de7e574ef862be4b246f1d883ce2b7f6bfa2ee4343cd28792bd3697367e');
     expect(shaOfFile(PROSE_GOLDEN), 'tests/fixtures/dossier-prose-manifest-golden.json moved')
-      .toBe('88983938ddcf28341031e186d855fef950e6b299ec4b8fc87f170ece1b994084');
+      .toBe('7990bbfbfcfb0672f83d1a37952f45d609dfe7d4835d361696c06c5fe9f5a4d7');
 
     // AND THE REASON THEY CANNOT MOVE: fresh generation passes no layer, so no world fact is ever
     // routed and `config′` is `config` itself. Measured against the committed manifest.

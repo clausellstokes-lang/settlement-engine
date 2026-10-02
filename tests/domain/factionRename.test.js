@@ -285,6 +285,8 @@ describe('faction rename — the declared surface set', () => {
       // with the surfaces themselves; see NPC_FACTION_FIELDS in factionRename.js).
       role: `${OLD} Harbourmaster`,
       factionGoal: `Maintain ${OLD}'s position against current pressure`,
+      // The succession-void goal names a faction too (added 2026-09-30 with its surface).
+      goal: { short: `Position themselves before ${OLD} moves first`, long: 'Secure authority through the right means, not just the fastest' },
       secret: { what: `Aldis sells ${OLD} manifests to the Militia.`, stakes: `The ${OLD} would drown them for it.` },
     });
     const settlement = {

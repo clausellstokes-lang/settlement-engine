@@ -381,7 +381,8 @@ describe('GR-5c — renegotiation from strength: a believed swing past the band 
   });
 
   it('A8: the lineage act is growth, a war closes what was renegotiated, and an instrument is renegotiated once: no second demand spends the same swing', () => {
-    expect(amendment.PACT_LINEAGE_ACTS).toEqual(['amended', 'broken_by_war', 'disavowed_by_succession', 'formed', 'renegotiated', 'renewed', 'war_ended']);
+    // GR-RENEWAL U3 (GR-5d) adds `converted` at its codepoint place (SR-1, growth by the wave's own law).
+    expect(amendment.PACT_LINEAGE_ACTS).toEqual(['amended', 'broken_by_war', 'converted', 'disavowed_by_succession', 'formed', 'renegotiated', 'renewed', 'war_ended']);
     const bare = { parties: ['A', 'B'], mintedTick: 0, terms: [] };
     expect(amendment.appendLineage(bare, { act: 'renegotiated', tick: 5 }).lineage.map((entry) => entry.act)).toEqual(['formed', 'renegotiated']);
     const { answered } = verbDemand();

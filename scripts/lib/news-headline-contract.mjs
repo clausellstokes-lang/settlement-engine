@@ -28,7 +28,10 @@ const LANES = Object.freeze({ mechanicalOutcomes: 8, selectedOutcomes: 24 });
 // peacetime suit retires when a war opens against its court, and the feed's reconcile of the superseded proposal mints
 // ONE new wizard-news id with a home of its own (a new address, prospective voice, one spelling). Every figure here was
 // derived by the walkers' own functions from one corpus build and cross-checked at c9b24fe51 and at the landing tip.
-const CORPUS = Object.freeze({ pulseRoots: 12, introductions: 273, retirements: 1, finalEntries: 272, homes: 51 });
+// ── RE-RECORDED 2026-10-01 BY THE URBAN-BAND CHAIR (session 93391427), IN THE SAME ACT AS THE NEWS-VOICE CONTRACT, THE
+// PROSE-FAMILY CONTRACT AND THE OSR WALKER'S PINS: CORPUS 273/1/272/51 → 265/1/264/44 (the provenance and the named homes
+// are recorded once, at the voice contract's copy); ADDRESS_TOTALS, RAW_LIVENESS and REWRITE_TOTALS below, each noted.
+const CORPUS = Object.freeze({ pulseRoots: 12, introductions: 265, retirements: 1, finalEntries: 264, homes: 44 });
 // ── RE-RECORDED 2026-09-01 BY T8 · SHIFT (ODQ §858 + §860) ─────────────────────────────────────
 // 53/106/14/92/400/544 → 51/102/12/90/393/536. `fields` holds at 2, as it must: the address grammar
 // is still headline-and-summary and nothing was added to it.
@@ -57,7 +60,9 @@ const CORPUS = Object.freeze({ pulseRoots: 12, introductions: 273, retirements: 
 // `applied|stressor_birth_*` homes, and `applied|trade_pressure` +1 occurrence on both fields.
 // The single-variable control and the two falsified dispatch causes are recorded once, at
 // `scripts/lib/news-voice-contract.mjs`.
-const ADDRESS_TOTALS = Object.freeze({ homes: 51, fields: 2, identities: 102, prospectiveIdentities: 13, indicativeIdentities: 89, distinctValues: 395, occurrences: 546 });
+// 2026-10-01 (the urban band + the druid rulings): 51/2/102/13/89/395/546 → 44/2/88/14/74/385/530. `fields` holds at 2.
+// Eleven homes leave with their 22 rows and four arrive with 8 (five of them prospective); no surviving row flips its voice.
+const ADDRESS_TOTALS = Object.freeze({ homes: 44, fields: 2, identities: 88, prospectiveIdentities: 14, indicativeIdentities: 74, distinctValues: 385, occurrences: 530 });
 const RAW_LIVENESS = Object.freeze({
   pulseRecords: 12,
   lanes: Object.freeze([
@@ -74,7 +79,8 @@ const RAW_LIVENESS = Object.freeze({
     // WAR LANDING (§876): 54/28/50/27/4/1 → 53/28/49/27/4/1. ONE mechanical headline leaves and it
     // was prospective; both distinct counts and the whole indicative half hold, so the departing
     // record was a duplicate spelling of one already in the lane.
-    Object.freeze({ field: 'mechanicalOutcomes', capPerPulse: 8, headlineOccurrences: 53, distinctValues: 28, prospectiveOccurrences: 49, prospectiveDistinctValues: 27, indicativeOccurrences: 4, indicativeDistinctValues: 1 }),
+    // 2026-10-01 (the urban band + the druid rulings): 53/28/49/27/4/1 → 49/22/44/21/5/1, the re-dealt year's mechanical beats.
+    Object.freeze({ field: 'mechanicalOutcomes', capPerPulse: 8, headlineOccurrences: 49, distinctValues: 22, prospectiveOccurrences: 44, prospectiveDistinctValues: 21, indicativeOccurrences: 5, indicativeDistinctValues: 1 }),
     // ⭐ THE CONTROL THAT HELD FOR TWO RE-RECORDS NOW MOVES, AND THAT IS THE POINT OF KEEPING IT.
     // T8 recorded this lane byte-identical twice running because the corruption work never authors
     // into it. WAR LANDING (§876): 151/80/95/66/56/14 → 153/78/95/63/58/15, and the shape names the
@@ -83,7 +89,8 @@ const RAW_LIVENESS = Object.freeze({
     // number of "may" beats in FEWER spellings and two more settled ones. That is `5a529f100`'s
     // upheaval gates re-dealing which seats are fragile when — a lane the corruption work could not
     // reach, and the first cause in three re-records that does.
-    Object.freeze({ field: 'selectedOutcomes', capPerPulse: 24, headlineOccurrences: 154, distinctValues: 78, prospectiveOccurrences: 96, prospectiveDistinctValues: 63, indicativeOccurrences: 58, indicativeDistinctValues: 15 }),
+    // 2026-10-01 (the urban band + the druid rulings): 154/78/96/63/58/15 → 155/75/93/59/62/16.
+    Object.freeze({ field: 'selectedOutcomes', capPerPulse: 24, headlineOccurrences: 155, distinctValues: 75, prospectiveOccurrences: 93, prospectiveDistinctValues: 59, indicativeOccurrences: 62, indicativeDistinctValues: 16 }),
   ]),
   // TE36: the union follows the mechanical lane alone — 228 → 207 (−21, the same 21),
   // 83 → 80 distinct, 168 → 147 prospective. The indicative halves do not move at all.
@@ -97,7 +104,9 @@ const RAW_LIVENESS = Object.freeze({
   // are still a strict subset of the public lane's. That is what makes the union's distinct half
   // an honest check on the lanes rather than a restatement of them.
   // FP BATCH 3 (2026-09-24): the union follows the selectedOutcomes lane — 206/144 → 207/145; the distinct and indicative halves hold.
-  union: Object.freeze({ headlineOccurrences: 207, distinctValues: 78, prospectiveOccurrences: 145, prospectiveDistinctValues: 63, indicativeOccurrences: 62, indicativeDistinctValues: 15 }),
+  // 2026-10-01 (the urban band + the druid rulings): 207/78/145/63/62/15 → 204/75/137/59/67/16, and THE STRUCTURAL FACT SURVIVES:
+  // union.distinctValues equals the selected lane's (75 = 75), so the mechanical spellings are still a subset of the public lane's.
+  union: Object.freeze({ headlineOccurrences: 204, distinctValues: 75, prospectiveOccurrences: 137, prospectiveDistinctValues: 59, indicativeOccurrences: 67, indicativeDistinctValues: 16 }),
 });
 // TE36 (ODQ §271): 17/9 → 16/10 and 69/168 → 66/147. THE RULE COUNT IS UNCHANGED AT 26 —
 // no rewrite rule was added or deleted; one CROSSED from active to inert because the corpus
@@ -116,7 +125,12 @@ const RAW_LIVENESS = Object.freeze({
 // `may intensify` 2/4 → 1/2, `may reform` 23/50 → 23/49, `may suppress` 6/12 → 5/11, `may take
 // hold` 5/18 → 5/19. The three that lose a spelling are the −3 distinct; the occurrences net to
 // −1. Every one of them is an upheaval-adjacent verb, which is `5a529f100` read off the registry.
-const REWRITE_TOTALS = Object.freeze({ rules: 26, activeRules: 16, inertRules: 10, distinctValues: 63, occurrences: 145 });
+// 2026-10-01 (the urban band + the druid rulings): 26/16/10/63/145 → 26/15/11/59/137. THREE RULES CROSS, NAMED, and the chair
+// claims the inert-row authority ("New inert rows require authority", ODQ §271) under the owner's "I defer all judgment to
+// you": `may intensify` and `may press a challenge to the government` go INERT (their homes left the re-dealt year), and
+// `may fall` goes ACTIVE through a second seam, a TIER DEMOTION headline ("Llanton may fall to hamlet", tier_change), not the
+// population decline WAVE P4 gated, so its known-inert row leaves the list below.
+const REWRITE_TOTALS = Object.freeze({ rules: 26, activeRules: 15, inertRules: 11, distinctValues: 59, occurrences: 137 });
 
 export const KNOWN_INERT_HEADLINE_REWRITES = Object.freeze([
   { source: '\\bmay close its doors\\b', flags: '', replacement: 'closes its doors', reason: 'institutionLifecycle.js::evaluateInstitutionLifecycle is the live institution-closure authoring seam; the executed AO-0 12-record persisted public+mechanical union contains no closure headline.' },
@@ -125,12 +139,16 @@ export const KNOWN_INERT_HEADLINE_REWRITES = Object.freeze([
   // THE SIBLING OF THE ROW BELOW, AND THE SAME MECHANISM ONE WAVE LATER. P1 suppressed bare
   // GROWTH under `demographicsEnabled` and `may grow` went inert; WAVE P4 suppresses bare
   // DECLINE under the same flag, for the same reason (design law 1: no growth that is not a
-  // birth, and no shrink that is not a death), and `may fall` follows it. ⚠ READ THE SCOPE:
+  // birth, and no shrink that is not a death), and `may fall` followed it (it left this list 2026-10-01, ACTIVE again
+  // through a tier-demotion headline; see REWRITE_TOTALS). ⚠ READ THE SCOPE:
   // this corpus lights EVERY `*Enabled` flag, so both rows are inert HERE and nowhere else —
   // `demographicsEnabled` is false in every shipped preset, where both seams still author.
-  { source: '\\bmay fall\\b', flags: '', replacement: 'falls', reason: 'populationDynamics.js::populationCandidate is the live decline authoring seam, and WAVE P4 (ODQ §219.3) gated it: with demographicsEnabled lit the lane emits population ONLY as a conserved transfer, so bare decline is refused exactly as bare growth already was and the executed AO-0 12-record persisted public+mechanical union contains no fall headline. THE CORPUS LIGHTS EVERY FLAG, so this row reads INERT here and NOWHERE ELSE: demographicsEnabled is false in every shipped preset, where the seam still authors the headline.' },
   { source: '\\bmay grow\\b', flags: '', replacement: 'grows', reason: 'populationDynamics.js::populationCandidate is the live growth authoring seam; the executed AO-0 12-record persisted public+mechanical union contains no growth headline.' },
   { source: '\\bmay hoard\\b', flags: '', replacement: 'hoards', reason: 'npcAgency.js::deriveNpcCandidates exposes NPC_ACTION_FAMILIES.hoard through candidateForAction; the executed AO-0 12-record persisted public+mechanical union contains no hoard headline.' },
+  // 2026-10-01 (the urban band + the druid rulings; the chair's inert-row authority under the owner's delegation): INERT.
+  { source: '\\bmay intensify\\b', flags: '', replacement: 'intensifies', reason: 'stressors.js::evaluateStressorRules is the live stressor-escalation authoring seam; the executed AO-0 12-record persisted public+mechanical union contains no escalation headline.' },
+  // 2026-10-01 (the urban band + the druid rulings; the chair's inert-row authority under the owner's delegation): INERT.
+  { source: '\\bmay press a challenge to the government\\b', flags: '', replacement: 'presses a challenge to the government', reason: 'factionCompetition.js FACTION_VERB_PHRASES.faction_government_challenge is the live government-challenge authoring seam; the executed AO-0 12-record persisted public+mechanical union contains no government-challenge headline.' },
   { source: '\\bmay raise a\\b', flags: '', replacement: 'raises a', reason: 'institutionLifecycle.js::evaluateInstitutionLifecycle is the live institution-build authoring seam; the executed AO-0 12-record persisted public+mechanical union contains no build headline.' },
   { source: '\\bmay recover\\b', flags: '', replacement: 'recovering', reason: 'tierResourceDynamics.js::evaluateTierResourceDynamics is the live resource-recovery authoring seam; the executed AO-0 12-record persisted public+mechanical union contains no recovery headline.' },
   { source: '\\bmay rise\\b', flags: '', replacement: 'rises', reason: "tierResourceDynamics.js::tierCandidate and relationshipRulesCore.js's vassal-rebellion candidate are live rise authoring seams; the executed AO-0 12-record persisted public+mechanical union contains no rise headline." },

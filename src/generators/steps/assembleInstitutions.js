@@ -10,7 +10,11 @@
 
 import { chooseOrPin, registerStep } from '../pipeline.js';
 import { TIER_ORDER } from '../../data/constants.js';
-import { institutionalCatalog, catalogIdForName } from '../../data/institutionalCatalog.js';
+import {
+  institutionalCatalog,
+  catalogIdForName,
+  institutionRowGuardsPass,
+} from '../../data/institutionalCatalog.js';
 import { INSTITUTION_DESC_VARIANTS } from '../../data/institutionDescVariants.js';
 import { pickVariant } from '../../kernel/proseHash.js';
 import { TERRAIN_DATA } from '../../data/geographyData.js';
@@ -113,16 +117,6 @@ function matchesSubsumptionTarget(institution, target) {
   return institution.name === target.name;
 }
 
-// Merge city+metropolis catalogs
-function mergeCatalogs(base, override) {
-  const merged = {};
-  Object.entries(base).forEach(([cat, insts]) => { merged[cat] = { ...insts }; });
-  Object.entries(override).forEach(([cat, insts]) => {
-    merged[cat] = merged[cat] ? { ...merged[cat], ...insts } : { ...insts };
-  });
-  return merged;
-}
-
 // Resource multiplier for institution base chances
 function getResourceMultiplier(instTags, instName, nearbyResources, instModifiers, tier) {
   let multiplier = 1;
@@ -220,7 +214,7 @@ const UNPINNED = Symbol(); // The description was removed to buy the generation 
 
 registerStep('assembleInstitutions', {
   deps: ['buildGenerationContext', 'resolveResources', 'resolveStress', 'resolveNeighbour'],
-  reads: ['categoryToggles', 'effectiveConfig', 'generationContext', 'goodsToggles', 'institutionToggles', 'nearbyResources', 'neighbourProfile', 'threat', 'tier', 'tradeRoute'], // ctx keys this step consumes that another step produces (A+ generators.3 data-flow contract)
+  reads: ['categoryToggles', 'effectiveConfig', 'generationContext', 'goodsToggles', 'institutionToggles', 'nearbyResources', 'neighbourProfile', 'population', 'threat', 'tier', 'tradeRoute'], // ctx keys this step consumes that another step produces (A+ generators.3 data-flow contract)
   provides: ['institutions', 'catalogForTier', 'generationRepairs'],
   phase: 'institutions',
 }, (ctx, rng) => {
@@ -268,10 +262,12 @@ registerStep('assembleInstitutions', {
   // faction-weighted pass (factionCorrelation) so they can never disagree.
   const isCategoryEnabled = (cat) => sharedIsCategoryEnabled(categoryToggles, config.settType, tier, cat);
 
-  // Build catalog for tier
-  const catalogForTier = tier === 'metropolis'
-    ? mergeCatalogs(institutionalCatalog['city'] || {}, institutionalCatalog['metropolis'] || {})
-    : institutionalCatalog[tier] || {};
+  // The tier's catalog block. Every block is COMPLETE since the urban-band registry
+  // (2026-09-30): a metropolis lists every city function at metropolis scale itself, so the
+  // city block is no longer merged in (the merge put 'Parish churches (10-30)' beside
+  // '(50-100+)' in 191 of 200 metropolises, and let the required City walls row hold the
+  // defenseLevel group so Massive walls could never roll).
+  const catalogForTier = institutionalCatalog[tier] || {};
 
   const institutions = [];
   const generationRepairs = [];
@@ -279,6 +275,80 @@ registerStep('assembleInstitutions', {
   const tierIndex = TIER_ORDER.indexOf(tier);
   const terrainType = getTerrainType(tradeRoute, effectiveConfig.terrainOverride || null);
   const instModifiers = (TERRAIN_DATA[terrainType] || {}).institutionModifiers || [];
+  const population = typeof ctx.population === 'number' ? ctx.population : null;
+
+  /**
+   * Can this non-required catalog row roll here, and at what chance? Every gate the roll has
+   * always applied, in its order, plus the registry's row guards (a stated population floor,
+   * a named prerequisite). A row that cannot roll consumes no draw.
+   * @returns {{ baseChance: number, resourceMult: number, p: number } | null}
+   */
+  const rollFor = (category, name, inst) => {
+    if (inst.minTier && tierIndex < TIER_ORDER.indexOf(inst.minTier)) return null;
+    if (inst.exclusionConditions?.some(ex => institutions.some(i => i.name === ex))) return null;
+    if (inst.tradeRouteRequired) {
+      const routeOk = inst.tradeRouteRequired.includes(tradeRoute);
+      const terrainOk = inst.terrainAccess && inst.terrainAccess.includes(terrainType);
+      if (!routeOk && !terrainOk) return null;
+    }
+    if (inst.forbiddenTradeRoutes && inst.forbiddenTradeRoutes.includes(tradeRoute)) return null;
+    if (inst.terrainRequired && !inst.terrainRequired.includes(terrainType)) return null;
+    // [D6 THE UNDERWAYS] geography-inconsistent-is-impossible: an institution may forbid
+    // itself where a named nearby resource makes it physically impossible — the underways
+    // cannot exist atop a marsh/floodplain (the tunnels flood). Absent the field ⇒ no-op.
+    if (inst.forbiddenResources
+        && inst.forbiddenResources.some(
+          resource => nativeNearbyResources.includes(resource),
+        )) return null;
+    if (!institutionRowGuardsPass(tier, name, {
+      population,
+      presentNames: new Set(institutions.map(i => i.name)),
+    })) return null;
+    const baseChance = getBaseChance(
+      inst.baseChance, category, name, effectiveConfig, neighbourProfile || importedNeighbor, goodsToggles
+    );
+    const resourceMult = getResourceMultiplier(
+      inst.tags || [],
+      name,
+      nativeNearbyResources,
+      instModifiers,
+      tier,
+    );
+    return { baseChance, resourceMult, p: Math.min(1, baseChance * resourceMult) };
+  };
+
+  // THE WEIGHTED EXCLUSIVE GROUP (2026-09-30). A group used to go to whichever member the
+  // catalog happened to list first: the first roll that succeeded took it and every later
+  // member was blocked without a draw, so a member's authored chance only meant anything if it
+  // was listed first ('City administration' at 0.92 governed 1 city in 100; 'Royal seat',
+  // 'Democratic assembly' and 'City-state government' governed none of 200). Now the group
+  // resolves ONCE, at its first member: it fills with the probability that ANY member would
+  // (1 − Π(1 − pᵢ)), and the seat goes to a member in proportion to its chance. One draw.
+  // A group that a required or toggle-forced member will claim never rolls at all.
+  // `exclusiveGroupCoexists` members keep their own independent roll (see below).
+  const groupMembers = new Map();
+  const claimedGroups = new Set();
+  Object.entries(catalogForTier).forEach(([category, categoryInsts]) => {
+    Object.entries(categoryInsts).forEach(([name, inst]) => {
+      const group = inst.exclusiveGroup;
+      if (!group) return;
+      const toggle = institutionToggleFor(institutionToggles, [tier], category, name)
+                  || { allow: true, require: false };
+      const claims = (inst.required && toggle.forceExclude !== true)
+        || (isCategoryEnabled(category) && toggle.require === true);
+      if (claims) {
+        if (worldLaw.allowsInstitution({
+          category, name, ...inst,
+          ...(toggle.require ? { source: 'forced', forcedByToggle: true } : {}),
+        })) claimedGroups.add(group);
+        return;
+      }
+      if (inst.exclusiveGroupCoexists) return;
+      if (!groupMembers.has(group)) groupMembers.set(group, []);
+      groupMembers.get(group).push({ category, name, inst });
+    });
+  });
+  const resolvedGroups = new Set();
 
   // Main catalog iteration
   Object.entries(catalogForTier).forEach(([category, categoryInsts]) => {
@@ -347,6 +417,51 @@ registerStep('assembleInstitutions', {
         });
 
       } else if (!forceExclude && catEnabled && (toggle.allow ?? true)) {
+        const group = inst.exclusiveGroup;
+        if (group && !inst.exclusiveGroupCoexists) {
+          if (exclusiveGroups[group] || claimedGroups.has(group) || resolvedGroups.has(group)) return;
+          resolvedGroups.add(group);
+          const candidates = (groupMembers.get(group) || [])
+            .filter(member => {
+              const memberToggle = institutionToggleFor(institutionToggles, [tier], member.category, member.name)
+                                || { allow: true, require: false };
+              return memberToggle.allow !== false
+                && memberToggle.forceExclude !== true
+                && isCategoryEnabled(member.category)
+                && worldLaw.allowsInstitution({ category: member.category, name: member.name, ...member.inst });
+            })
+            .map(member => ({ ...member, roll: rollFor(member.category, member.name, member.inst) }))
+            .filter(member => member.roll && member.roll.p > 0);
+          if (candidates.length === 0) return;
+          const weightTotal = candidates.reduce((sum, member) => sum + member.roll.p, 0);
+          const fillChance = 1 - candidates.reduce((none, member) => none * (1 - member.roll.p), 1);
+          const draw = rng.random();
+          if (draw >= fillChance) return;
+          let remaining = (draw / fillChance) * weightTotal;
+          let winner = candidates[candidates.length - 1];
+          for (const member of candidates) {
+            remaining -= member.roll.p;
+            if (remaining < 0) { winner = member; break; }
+          }
+          exclusiveGroups[group] = winner.name;
+          institutions.push({ category: winner.category, name: winner.name, ...winner.inst, source: 'generated' });
+          recordTrace(ctx, {
+            targetType: 'institution',
+            targetId:   instId(winner.name),
+            step:       'assembleInstitutions',
+            result:     'selected',
+            causes: [
+              chanceCause(winner.roll.baseChance, winner.roll.resourceMult),
+              {
+                source: `exclusiveGroup.${group}`,
+                effect: 'won the group seat',
+                reason: `One ${group} seat: it fills whenever any candidate would have, and goes to one of them in proportion to their chances.`,
+              },
+            ],
+            downstreamEffects: tagsToDownstream(winner.inst.tags),
+          });
+          return;
+        }
         // [CH-3 §3.2, J-CH-3-2 as REVISED by the chair] THE COEXISTENCE AFFORDANCE, AND WHY
         // IT DRAWS FROM A SIDE STREAM.
         //
@@ -371,38 +486,12 @@ registerStep('assembleInstitutions', {
         // `fork('a').fork('b')` derive the SAME stream (see kernel/prng.js) — nothing
         // else forks `exclusiveCoexist`, so no silent correlation is reachable.
         let drawRng = rng;
-        if (inst.exclusiveGroup && exclusiveGroups[inst.exclusiveGroup]) {
-          if (!inst.exclusiveGroupCoexists) return;
+        if (group && exclusiveGroups[group]) {
           drawRng = rng.fork(`exclusiveCoexist::${tier}::${category}::${name}`);
         }
-        if (inst.exclusionConditions?.some(ex => institutions.some(i => i.name === ex))) return;
-
-        if (inst.tradeRouteRequired) {
-          const routeOk = inst.tradeRouteRequired.includes(tradeRoute);
-          const terrainOk = inst.terrainAccess && inst.terrainAccess.includes(terrainType);
-          if (!routeOk && !terrainOk) return;
-        }
-        if (inst.forbiddenTradeRoutes && inst.forbiddenTradeRoutes.includes(tradeRoute)) return;
-        if (inst.terrainRequired && !inst.terrainRequired.includes(terrainType)) return;
-        // [D6 THE UNDERWAYS] geography-inconsistent-is-impossible: an institution may forbid
-        // itself where a named nearby resource makes it physically impossible — the underways
-        // cannot exist atop a marsh/floodplain (the tunnels flood). Absent the field ⇒ no-op,
-        // byte-identical for every existing institution.
-        if (inst.forbiddenResources
-            && inst.forbiddenResources.some(
-              resource => nativeNearbyResources.includes(resource),
-            )) return;
-
-        const baseChance = getBaseChance(
-          inst.baseChance, category, name, effectiveConfig, neighbourProfile || importedNeighbor, goodsToggles
-        );
-        const resourceMult = getResourceMultiplier(
-          inst.tags || [],
-          name,
-          nativeNearbyResources,
-          instModifiers,
-          tier,
-        );
+        const roll = rollFor(category, name, inst);
+        if (!roll) return;
+        const { baseChance, resourceMult } = roll;
 
         if (drawRng.chance(baseChance * resourceMult)) {
           // A coexisting row does NOT take the group over: the holder stays whoever won

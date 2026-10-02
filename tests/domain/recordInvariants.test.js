@@ -71,7 +71,22 @@ function richBase() {
     const record = row.record;
     const balance = record.economicViability?.metrics?.foodBalance;
     const evidence = evidenceOf(record);
+    // 2026-10-01, the urban band (ODQ §934.86): the first rich row used to carry both summary phrases by luck of the
+    // old corpus; under the rebuilt registry a not-viable world's summary ("NOT VIABLE: 2 critical issues ...") names
+    // neither, and V-SUMMARY-DEPS / V-SUMMARY-HOOKS then threw on a null match. Their own inputs are now part of
+    // "rich enough that every check has its inputs"; this narrows the row eligible, it relaxes no assertion. The
+    // same holds for V-BAND-FOODSEC, whose mutant relabels the food card as the importDependent band: it convicts
+    // ONLY its own check when the card is not already that band and every flag the card carries is one that band
+    // has been seen to carry (otherwise V-FLAGVEC fires beside it, which the old base happened never to trigger).
+    const summary = String(record.economicViability?.summary || '');
+    const foodCard = record.economicState?.foodSecurity || {};
+    const foodFlagsFit = foodCard.label !== FOOD_SECURITY_BANDS.importDependent.label
+      && FLAG_FIELDS.economicState.filter((flag) => foodCard[flag] === true)
+        .every((flag) => FLAGS_EVER_TRUE.economicState.importDependent.includes(flag));
     return Boolean(balance && Number.isFinite(balance.rawDeficit) && Number.isFinite(balance.importCoverage))
+      && /(\d+)\s+operational dependenc/.test(summary)
+      && /(\d+)\s+plot hooks? available/.test(summary)
+      && foodFlagsFit
       && (record.activeConditions || []).length > 0
       && (record.conflicts || []).length > 0
       && evidence.some((row2) => row2.path === 'conflicts[0]')
@@ -181,11 +196,15 @@ const codeOnly = (source) => source
   .replace(/"(?:[^"\\\n]|\\.)*"/g, '""');
 
 describe('EM-R0b — recordInvariants: the town\'s own invariants as a module', () => {
-  it('EM-R0b A1 — the control over the declared stride, and the one known pin in both directions', () => {
+  it('EM-R0b A1 — the control over the declared stride: every plain generated record is clean, and the declared pins are exactly the offenders', () => {
+    // RE-CUT 2026-10-01 (the urban band, ODQ §934.86): the one known pin (the mountain-pass town's V-SUMMARY-DEPS)
+    // is clean after the same-seed shift and was removed from KNOWN_VIOLATIONS in that act, as the flags module's
+    // rule requires; FIX-G1 (picked the same day) is the cure. "Both directions" now reads: no offender, and no declared pin.
+    // A3's planted mutants remain the proof that every check can still fire.
     const rows = strideSample();
     expect(rows.length, 'the declared stride must keep its cardinality or the control below is a different sample')
       .toBe(STRIDE_ROWS);
-    expect(rows.map((row) => row.key).includes(PIN_KEY), 'a stride that misses the pinned row makes this arm vacuous')
+    expect(rows.map((row) => row.key).includes(PIN_KEY), 'the stride still carries the formerly pinned row')
       .toBe(true);
 
     const offenders = [];
@@ -193,13 +212,9 @@ describe('EM-R0b — recordInvariants: the town\'s own invariants as a module', 
       const found = recordInvariants(row.record);
       if (found.length > 0) offenders.push({ key: row.key, ids: found.map((v) => v.id), messages: found.map((v) => v.message) });
     }
-    expect(rows.length - offenders.length, 'every plain generated record but the pin is clean').toBe(STRIDE_ROWS - 1);
+    expect(offenders, 'every plain generated record is clean').toEqual([]);
     expect(offenders.map((row) => row.key).sort(), 'the violating-row SET equals the declared pins, both directions')
       .toEqual(KNOWN_VIOLATIONS.map((known) => known.corpusKey).sort());
-    expect(offenders.map((row) => row.ids), 'and the pin carries exactly its declared check')
-      .toEqual([[KNOWN_VIOLATIONS[0].id]]);
-    expect(offenders[0].messages, 'with its exact message, which renders no figure')
-      .toEqual(['the viability summary names a dependency count the dependencies roster does not carry']);
     expect(FLAG_CORPUS.helper, 'the declared table names the corpus it was taught on')
       .toBe('tests/helpers/goldenMasterCorpus.js');
   });

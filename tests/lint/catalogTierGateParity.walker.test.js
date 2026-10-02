@@ -30,6 +30,14 @@
  * The parity arms model the gate from the SHIPPED engine source (A0) and rebuild the
  * eligible set from the RAW catalog, never from the predicate under test — a set
  * compared with itself is not a proof.
+ *
+ * ── AMENDED FOR THE URBAN BAND (owner-approved 2026-09-30, ODQ §934.86) ──────────────
+ * The registry now lists every row at each tier it exists, so the ten gated rows sit at
+ * their gate tier and the gated class is EMPTY (A1); the metropolis block is complete, so
+ * the engine reads `institutionalCatalog[tier]` alone and the model below stopped merging
+ * the city block (A0 pins the shipped line). The parity law itself is unchanged, and the
+ * gate still exists and still bites (A3 proves it on a synthetic row), so a future row that
+ * re-adopts "author here, gate there" is held exactly as before.
  */
 
 import { describe, test, expect } from 'vitest';
@@ -69,10 +77,10 @@ const engineRefuses = (def, tier) =>
 
 /**
  * The names the generator will consider at `tier` on its probabilistic/required path.
- * Mirrors `catalogForTier` in assembleInstitutions, metropolis merge included.
+ * Mirrors `catalogForTier` in assembleInstitutions: the tier's own (complete) block.
  */
 function generatorEligibleNames(tier) {
-  const blocks = tier === 'metropolis' ? ['city', 'metropolis'] : [tier];
+  const blocks = [tier];
   const byName = new Map();
   for (const t of blocks) {
     for (const insts of Object.values(institutionalCatalog[t] || {})) {
@@ -103,25 +111,26 @@ describe('[CH-3 §3.1] catalog tier-gate parity: the UI reader and the generator
     ).toBe(true);
     // …and it is read against the SETTLEMENT's tier index, not the block's.
     expect(src.includes('const tierIndex = TIER_ORDER.indexOf(tier);')).toBe(true);
+    // …and the engine reads the tier's own block, with no city block merged into the
+    // metropolis (the model below mirrors exactly that).
+    expect(src.includes('const catalogForTier = institutionalCatalog[tier] || {};')).toBe(true);
   });
 
-  test('A1: the gated class is the measured ten, enumerated', () => {
+  test('A1: the gated class is EMPTY since the urban band (it was the measured ten)', () => {
     const gated = [];
     for (const { tier, name, def } of rawRows()) {
       if (engineRefuses(def, tier)) gated.push(`${tier}/${name}→${def.minTier}`);
     }
-    expect(gated.sort()).toEqual([
-      'city/Airship docking (high magic)→metropolis',
-      'city/Colosseum/arena→metropolis',
-      'city/Dragon resident→metropolis',
-      'city/Dream parlors (high magic)→metropolis',
-      'city/Gambling district→metropolis',
-      'city/Message network (high magic)→metropolis',
-      'city/Multiple theaters→metropolis',
-      'city/Opera house→metropolis',
-      'city/Planar traders→metropolis',
-      'village/Smuggling network→city',
-    ]);
+    expect(gated.sort()).toEqual([]);
+    // The ten now sit at the tier their gate named (the village Smuggling network, which
+    // never rolled at village, is retired there; the city row stands).
+    for (const name of ['Airship docking (high magic)', 'Colosseum/arena', 'Dragon resident',
+      'Dream parlors (high magic)', 'Gambling district', 'Message network (high magic)',
+      'Multiple theaters', 'Opera house', 'Planar traders']) {
+      expect({ name, metropolis: namesOf(institutionalCatalog.metropolis).has(name), city: namesOf(institutionalCatalog.city).has(name) })
+        .toEqual({ name, metropolis: true, city: false });
+    }
+    expect(namesOf(institutionalCatalog.village).has('Smuggling network')).toBe(false);
   });
 
   test('A2: getInstitutionalCatalog(tier) === the generator-eligible set, at every tier', () => {
@@ -136,10 +145,11 @@ describe('[CH-3 §3.1] catalog tier-gate parity: the UI reader and the generator
       expect({ tier, names: sorted(getInstitutionsForTier(tier)) })
         .toEqual({ tier, names: sorted(generatorEligibleNames(tier)) });
     }
-    // Non-vacuity: the sets are large, and the gate actually removes something.
+    // Non-vacuity: the sets are large, and the gate the model mirrors still bites — on a
+    // synthetic gated row, since the catalog holds none today.
     expect(getInstitutionsForTier('metropolis').size).toBeGreaterThan(100);
-    expect(generatorEligibleNames('city').size)
-      .toBeLessThan(namesOf(institutionalCatalog.city).size);
+    expect(engineRefuses({ minTier: 'metropolis' }, 'city')).toBe(true);
+    expect(engineRefuses({ minTier: 'metropolis' }, 'metropolis')).toBe(false);
   });
 
   test('A4: the cross-tier browse is the deliberate exemption and stays whole', () => {
@@ -193,15 +203,19 @@ describe('[CH-3 §3.1] catalog tier-gate parity: the UI reader and the generator
       .map((l, i) => (/Object\.entries\(institutionToggles\)\.forEach/.test(l) ? i : -1))
       .filter((i) => i >= 0);
     expect(loopLines.length).toBe(2);
-    // …and `minTier` is named on exactly ONE line of the whole file: the gate.
+    // …and `minTier` is named on exactly TWO lines of the whole file: the gate in the main
+    // iteration and the same gate in `rollFor`, the helper the weighted exclusive group and
+    // the independent roll share (the urban band, 2026-09-30).
     const gateLines = lines
       .map((l, i) => (l.includes('minTier') ? i : -1))
       .filter((i) => i >= 0);
-    expect(gateLines.length).toBe(1);
-    expect(lines[gateLines[0]].trim())
-      .toBe('if (inst.minTier && tierIndex < TIER_ORDER.indexOf(inst.minTier)) return;');
-    // …and it sits BEFORE both forced loops, i.e. inside the probabilistic iteration.
-    expect({ gate: gateLines[0] < loopLines[0] }).toEqual({ gate: true });
+    expect(gateLines.length).toBe(2);
+    expect(gateLines.map((i) => lines[i].trim()).sort()).toEqual([
+      'if (inst.minTier && tierIndex < TIER_ORDER.indexOf(inst.minTier)) return null;',
+      'if (inst.minTier && tierIndex < TIER_ORDER.indexOf(inst.minTier)) return;',
+    ]);
+    // …and both sit BEFORE both forced loops, i.e. inside the probabilistic iteration.
+    expect({ gate: Math.max(...gateLines) < loopLines[0] }).toEqual({ gate: true });
     // If a future car teaches the force path the gate, that is a generation behaviour
     // change and this arm must be re-ruled, not silently updated.
   });
@@ -218,6 +232,6 @@ describe('[CH-3 §3.1] catalog tier-gate parity: the UI reader and the generator
     // village/Criminal and travels the identical code path, so it vanishes under exactly the
     // drift that would make this negative vacuous.
     expectAbsentWithAnchor(village, 'Smuggling network', 'Underground network',
-      'the village Smuggling network row is gated to city, so the village view must refuse it');
+      'the village Smuggling network row (gated to city, so it never rolled there) is retired, so the village view must not offer it');
   });
 });

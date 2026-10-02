@@ -164,8 +164,8 @@ export function capturedRulingStructure(settlement) {
 export const HOLDER_SOURCES = Object.freeze({
   // ── the treasury: the town's coin, its revenue and the arithmetic that closes or does not ──
   incomeSources: Object.freeze({ kind: 'treasury', cite: 'src/generators/economy/economicState.js:873', read: true }),
-  viable: Object.freeze({ kind: 'treasury', cite: 'src/generators/economy/viability.js:565', read: true }),
-  criticalIssueCount: Object.freeze({ kind: 'treasury', cite: 'src/generators/economy/viability.js:585', read: true }),
+  viable: Object.freeze({ kind: 'treasury', cite: 'src/generators/economy/viability.js:588', read: true }),
+  criticalIssueCount: Object.freeze({ kind: 'treasury', cite: 'src/generators/economy/viability.js:608', read: true }),
   economicViability: Object.freeze({ kind: 'treasury', cite: 'src/generators/steps/assembleSettlement.js:110', read: true }),
 
   // ── the market: what the town makes, sends and takes in ──
@@ -175,9 +175,9 @@ export const HOLDER_SOURCES = Object.freeze({
   isEntrepot: Object.freeze({ kind: 'market', cite: 'src/generators/economy/economicState.js:878', read: true }),
   activeChains: Object.freeze({ kind: 'market', cite: 'src/generators/economy/economicState.js:821', read: true }),
   exportPosture: Object.freeze({ kind: 'market', cite: 'src/domain/display/dossierViewModel.js:565', read: true }),
-  economicStrengths: Object.freeze({ kind: 'market', cite: 'src/generators/resourceGenerator.js:499', read: true }),
-  strategicValue: Object.freeze({ kind: 'market', cite: 'src/generators/resourceGenerator.js:500', read: true }),
-  exploitation: Object.freeze({ kind: 'market', cite: 'src/generators/resourceGenerator.js:417', read: true }),
+  economicStrengths: Object.freeze({ kind: 'market', cite: 'src/generators/resourceGenerator.js:500', read: true }),
+  strategicValue: Object.freeze({ kind: 'market', cite: 'src/generators/resourceGenerator.js:501', read: true }),
+  exploitation: Object.freeze({ kind: 'market', cite: 'src/generators/resourceGenerator.js:418', read: true }),
 
   // ── the toll bar: the route, and what may and may not pass along it ──
   tradeRouteAccess: Object.freeze({ kind: 'toll-bar', cite: 'src/generators/steps/resolveConfig.js:198', read: true }),
@@ -191,8 +191,8 @@ export const HOLDER_SOURCES = Object.freeze({
   mercenary: Object.freeze({ kind: 'muster', cite: 'src/domain/institutions/defenseInstitutionBuckets.js:98', read: true }),
   charter: Object.freeze({ kind: 'muster', cite: 'src/domain/institutions/defenseInstitutionBuckets.js:101', read: true }),
   force: Object.freeze({ kind: 'muster', cite: 'src/generators/threatDefensePolicy.js:13', read: true }),
-  magicDependency: Object.freeze({ kind: 'muster', cite: 'src/generators/defenseGenerator.js:459', read: true }),
-  economicGates: Object.freeze({ kind: 'muster', cite: 'src/generators/defenseGenerator.js:468', read: true }),
+  magicDependency: Object.freeze({ kind: 'muster', cite: 'src/generators/defenseGenerator.js:467', read: true }),
+  economicGates: Object.freeze({ kind: 'muster', cite: 'src/generators/defenseGenerator.js:476', read: true }),
   besiegedBy: Object.freeze({ kind: 'muster', cite: 'src/domain/display/warStatus.js:297', read: true }),
   besiegingTargets: Object.freeze({ kind: 'muster', cite: 'src/domain/display/warStatus.js:297', read: true }),
   ticksToDeploy: Object.freeze({ kind: 'muster', cite: 'src/domain/display/mobilizationStatus.js:94', read: true }),

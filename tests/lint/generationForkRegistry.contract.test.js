@@ -57,7 +57,10 @@ const CHOOSER_WALKER = 'tests/lint/chooserTotality.walker.test.js';
  * so a control cannot go on describing a thing that changed. It knows `function` and `const`
  * and nothing else, which is exactly why it cannot name a registered step.
  */
-const MODEL_DECL_LINE = 'const decl = /^(?:export\\s+)?(?:async\\s+)?function\\s+([A-Za-z_$][\\w$]*)'
+// RE-POINTED 2026-10-01 (the urban-band chair, a base red picked up under the owner's "do it all"): U10
+// (da720b26d) hoisted the walker's local `decl` to the module-level `TOP_LEVEL_DECL`, the form set itself
+// byte-identical, so the quote follows the name and the model below is unchanged.
+const MODEL_DECL_LINE = 'const TOP_LEVEL_DECL = /^(?:export\\s+)?(?:async\\s+)?function\\s+([A-Za-z_$][\\w$]*)'
   + '|^(?:export\\s+)?const\\s+([A-Za-z_$][\\w$]*)\\s*=/gm;';
 const modelDeclaredSymbols = (raw) => {
   const decl = /^(?:export\s+)?(?:async\s+)?function\s+([A-Za-z_$][\w$]*)|^(?:export\s+)?const\s+([A-Za-z_$][\w$]*)\s*=/gm;
@@ -157,21 +160,26 @@ describe('EM-P2 — the generation fork register: totality, derivation, and Tier
     expect(Object.isFrozen(GENERATION_BLIND_HALVES), 'GENERATION_BLIND_HALVES is frozen').toBe(true);
     expect(Object.isFrozen(GENERATION_CHANNELS), 'GENERATION_CHANNELS is frozen').toBe(true);
 
-    expect(tallyOf(GENERATION_TIER1, 'class'), 'the entropy tally').toEqual({ drawn: 28, label: 1, pure: 46 });
+    // 2026-10-01, the urban band (ODQ §934.86): drawn 28 -> 29, pure 46 -> 45. The register's re-measure (fc0e2205f)
+    // flipped assembleInstitutions|generationRepairs pure -> drawn (2 of 63 rows), and this tally follows the register.
+    expect(tallyOf(GENERATION_TIER1, 'class'), 'the entropy tally').toEqual({ drawn: 29, label: 1, pure: 45 });
     expect(GENERATION_TIER1.filter((row) => row.class === 'label').map((row) => `${row.step}|${row.key}`),
       'the single label row: a key that moves under a zero-draw step').toEqual(['generatePower|powerIntent']);
     expect(tallyOf(GENERATION_TIER1, 'onRecordClass'), 'the FINAL comparand tally')
       .toEqual({ absent: 19, same: 35, transformed: 15, varies: 6 });
+    // 2026-10-01, the urban band (ODQ §934.86): absent 27 -> 26, same 18 -> 19. The same re-measure moved two rows'
+    // post-step comparand (generationRepairs absent -> varies; isolationSupport varies -> same), and both now agree
+    // with their final comparand, so the disagreeing rows below go 18 -> 16 (generationForkCensus records the same).
     expect(tallyOf(GENERATION_TIER1, 'producedOnRecordClass'), 'the POST-STEP comparand tally')
-      .toEqual({ absent: 27, same: 18, transformed: 15, varies: 15 });
+      .toEqual({ absent: 26, same: 19, transformed: 15, varies: 15 });
 
-    // §6.2b: the register carries both comparands BECAUSE eighteen rows disagree, and every
+    // §6.2b: the register carries both comparands BECAUSE sixteen rows disagree, and every
     // one of them is a key a LATER step rewrites. The set is derived from the register itself.
     const disagreeing = GENERATION_TIER1
       .filter((row) => row.onRecordClass !== row.producedOnRecordClass)
       .map((row) => `${row.step}|${row.key}`);
     process.stdout.write(`\n[A3s] the two comparands disagree on ${disagreeing.length} rows: ${disagreeing.join(', ')}\n`);
-    expect(disagreeing.length, 'the disagreement count is the register\'s reason for carrying both').toBe(18);
+    expect(disagreeing.length, 'the disagreement count is the register\'s reason for carrying both').toBe(16);
     expect(GENERATION_TIER1.filter((row) => row.key === 'effectiveConfig'
       && row.onRecordClass === 'same' && row.producedOnRecordClass === 'absent').length,
     'the seven effectiveConfig rows: the config IS on the record, and no writer handed it there').toBe(7);

@@ -84,6 +84,12 @@ const BASELINE_PATH = join(ROOT, 'tests/lint/.prose-numerics-baseline.json');
 // a 504-settlement corpus). None of them is debt and none is in this baseline: the detector
 // reads numerics that FLOW INTO A PROSE KEY, not numbers written in comments. Humanizing
 // them would have removed reviewable evidence to satisfy an instrument that never saw it.
+// URBAN BAND (ODQ §934.86, 2026-09-30) — SIX PURE LINE MOVES, NO DEBT MOTION. The registry's
+// row-guard import widened assembleInstitutions.js's import block by four lines, so its six
+// legacy rows re-address 62 -> 66 and 69 -> 73 with path, category and snippet byte-identical.
+// The weighted exclusive group's new trace was HUMANIZED before it landed ("won the group
+// seat"; "goes to one of them in proportion to their chances") rather than banked as two
+// percentage tokens, so the census and every ceiling are unmoved.
 // ── LOWERED 2026-08-29 BY TE-STRIP-1 (owner ruling, ODQ §725) ─────────────────────
 // 413 → 408, floatInterpolation 236 → 233, percentToken 79 → 77. THE CAUSE IS TWO DELETED
 // FILES and nothing else: src/components/townMap/scene3d/TownSceneInspector.jsx (3 rows —
@@ -466,6 +472,15 @@ const BASELINE_PATH = join(ROOT, 'tests/lint/.prose-numerics-baseline.json');
 // `${x.weight}` interpolations in `worldPulse/warReceiptPools.js` would red on arrival, and a
 // ceiling may never be raised to absorb them. The class is held meanwhile by a behaviour arm
 // (tests/components/statBandsOverDigits.test.jsx), which convicts a planted weight.
+// THE URBAN BAND (2026-09-30, ODQ §934.86) — SEVEN PURE LINE MOVES, NO CEILING CHANGE, NO DEBT
+// MOTION. The registry rebuild's generator work adds one line above the banked rows in
+// `src/generators/economy/viability.js` (the two rows' pairs re-address 101 -> 102 and
+// 103 -> 104, both categories each) and nine lines above the three rows in
+// `src/generators/structuralValidator.js` (679 -> 688, 686 -> 695, 694 -> 703). MEASURED by a
+// probe copy of this file's own live scan: path, category and snippet are byte-identical on
+// all seven, 0 added and 0 removed, the census holds at 218 against a 218 ceiling and no
+// category count moves. The whole baseline diff is fourteen lines, seven -/+ pairs, each a
+// `"line"` value and nothing else.
 const REVIEWED_TOTAL_CEILING = 218;
 const REVIEWED_CATEGORY_CEILINGS = Object.freeze({
   floatInterpolation: 147,

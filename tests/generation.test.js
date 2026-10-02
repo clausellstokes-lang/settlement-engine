@@ -114,17 +114,21 @@ describe('snapshot shape', () => {
   // accidental restructuring.
   test('village_riverside_river structure is stable', () => {
     const s = gen(FIXTURES[2].config);
+    // 2026-10-01, the urban band (ODQ §934.86): factionCount 6 -> 7, institutionCount 38 -> 39,
+    // npcCount 5 -> 6. Values in an existing shape; no key appeared or vanished. The seed's
+    // institution band was rebuilt (hamlet -> village is now cumulative), so the same seed draws a
+    // different institution set and the faction and NPC counts follow it. Measured, not predicted.
     expect(structureFingerprint(s)).toMatchInlineSnapshot(`
       {
-        "factionCount": 6,
+        "factionCount": 7,
         "hasEconomicState": true,
         "hasEconomicViability": true,
         "hasHistory": true,
         "hasPowerStructure": true,
         "hasSpatial": true,
         "hookCount": 0,
-        "institutionCount": 38,
-        "npcCount": 5,
+        "institutionCount": 39,
+        "npcCount": 6,
         "populationBucket": "100-1000",
         "stressCount": 0,
         "tier": "village",

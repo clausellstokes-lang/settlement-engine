@@ -148,10 +148,30 @@ describe('institutionDisplayName — the shapes the estate actually hands it', (
 describe('institutionDisplayName — the enumeration is pinned to the catalogue', () => {
   test('every parish key in the catalogue is mapped', () => {
     const family = [...everyCatalogueKey()].filter(isParishKey).sort();
-    const mapped = Object.keys(INSTITUTION_DISPLAY_NAMES).sort();
+    const mapped = Object.keys(INSTITUTION_DISPLAY_NAMES).filter(isParishKey).sort();
     // A NEW scale variant added to the catalogue lands here as an unmapped key and
     // reds THIS file, instead of shipping 'Parish churches (100-200)' to a reader.
     expect(family).toEqual(mapped);
+  });
+
+  test('the seam\'s other keys are the urban band\'s count relabels and the two enforced conditions, every one a live catalogue key', () => {
+    // THE URBAN BAND (2026-09-30, ODQ §934.86): five trades carry ONE identity key from town
+    // to metropolis, and the key's count was only ever true of a town; two parentheticals
+    // were CONDITIONS the registry now enforces (minPopulation, requiresAny). The map may
+    // hold nothing else beside the parish family — and nothing the catalogue does not hold.
+    const keys = new Set(everyCatalogueKey());
+    const others = Object.keys(INSTITUTION_DISPLAY_NAMES).filter((k) => !isParishKey(k)).sort();
+    expect(others).toEqual([
+      'Bakers (5-15)', 'Blacksmiths (3-10)', 'Butchers (3-8)', 'Carpenters (5-15)',
+      'Cathedral (10,000+ only)', 'Gates (if walled)', 'Mills (2-5)',
+    ]);
+    for (const key of others) expect({ key, inCatalogue: keys.has(key) }).toEqual({ key, inCatalogue: true });
+    // …and no relabel keeps a count, so a city reader never sees a town's number.
+    for (const key of others) {
+      expect({ key, label: INSTITUTION_DISPLAY_NAMES[key], printsACount: /\(\d/.test(INSTITUTION_DISPLAY_NAMES[key]) })
+        .toEqual({ key, label: INSTITUTION_DISPLAY_NAMES[key], printsACount: false });
+    }
+    expect(institutionDisplayName('Mills (2-5)')).toBe('Mills');
   });
 
   test('the family is exactly the six keys the census found', () => {

@@ -85,7 +85,13 @@ describe('deterministic generation coherence repair', () => {
       // catalog translated and `-7` no longer lands on a two-subject hard_dependency
       // repair. `-24` restores it (and adds a third subject), and is the same seed
       // tests/generators/effectReachability.coverage.test.js pins for this config.
-    }, 'effect-reach-v1-iso-metro-24');
+      // Re-pinned `-24` to `-39` on 2026-09-30 (the urban band, ODQ §934.86): the registry
+      // carries city functions into the metropolis block and aligns the gate table with it,
+      // so far fewer dependencies go missing at all and `-24` now adds none. `-39` adds two
+      // (one of them the old pin's Fighting pits) and leaves the final roster free of hard
+      // violations — of the forty siblings, only -21, -38, -39 and -40 do both. The
+      // effect corpus keeps `-24` for its own strata, so the two files no longer share it.
+    }, 'effect-reach-v1-iso-metro-39');
     const names = new Set(
       settlement.institutions.map(institution => institution.name),
     );
@@ -98,7 +104,7 @@ describe('deterministic generation coherence repair', () => {
       // unchanged: MORE THAN ONE newly visible hard dependency is added and reported.
       expect.objectContaining({
         type: 'hard_dependency',
-        subject: 'Market square',
+        subject: 'Hireling hall',
       }),
       expect.objectContaining({
         type: 'hard_dependency',

@@ -9,6 +9,7 @@ import {TERRAIN_DATA} from '../data/geographyData.js';
 import {RESOURCE_DATA, SPECIAL_RESOURCES} from '../data/goods/identity.js';
 import {RESOURCE_CHAINS} from '../data/goods/chains.js';
 import {institutionHasAnyTag} from '../lib/entities.js';
+import {institutionDisplayName} from '../domain/display/institutionDisplayName.js';
 import {
   isMaterializedCustomContent,
   nativeSemanticNames,
@@ -355,7 +356,7 @@ const evaluateInstitutionChain = (exploitation, institutions) => {
         gaps.push({
           chain:       chain.rawResource,
           institution: institution.name,
-          impact:      `${institution.name} exists but lacks access to ${chain.rawResource}`,
+          impact:      `${institutionDisplayName(institution.name)} exists but lacks access to ${chain.rawResource}`,
           severity:    'high',
         });
       }

@@ -183,7 +183,13 @@
  *     first real exercise, since 20's own re-freeze moved nothing. Its full rationale lives
  *     beside `RELATIONSHIPS_MOUNT_TARGET_SCHEMA`.
  *
- *   schema 22 -> 23 (LIVE)   the same tagged numeric reconciliation, and THE FIRST RUNG WHOSE
+ *   schema 23 -> 24 (LIVE)   the same tagged numeric reconciliation, and THE FIRST RUNG CUT FOR
+ *     A SAME-SEED SHIFT THAT GREW THE REGISTER. Every earlier shift moved figures DOWN; the urban
+ *     band's re-deal of the AO-0 year (ODQ §934.86 and its addendum 2) ADMITS 53 ordinary rows and
+ *     shrinks one, declares nothing, and leaves the roster and the bank where they stood. Its full
+ *     rationale lives beside `CORPUS_REDEAL_TARGET_SCHEMA`.
+ *
+ *   schema 22 -> 23 (RETIRED) the same tagged numeric reconciliation, and THE FIRST RUNG WHOSE
  *     SUBJECT IS THE EDIT MODE. It ADMITS FOUR ROWS at two identities — `kind on settlement`
  *     and `decrees on settlement` — and DECLARES BOTH, which makes it the first rung since 11
  *     to GROW the roster and the first ever to grow it by two. Its full rationale lives beside
@@ -251,6 +257,7 @@ import {
   validateSchema20Baseline,
   validateSchema21Baseline,
   validateSchema22Baseline,
+  validateSchema23Baseline,
 } from './lib/observed-shape-baseline.mjs';
 
 export const MIGRATION_REPORT_SCHEMA = 2;
@@ -843,6 +850,69 @@ export const DOMAIN_READER_TARGET_SCHEMA = 22;
  *  the readers land first, this rung lands second, and its re-freeze lands third. */
 export const EDIT_MODE_READERS_TARGET_SCHEMA = 23;
 
+/* ⭐⭐ THE SCHEMA 23 → 24 RUNG — THE URBAN BAND'S CORPUS RE-DEAL
+ *  (ODQ §934.86, the urban band, and its addendum 2, the druid rulings; the urban-band chair,
+ *  session 93391427, under the owner's "do it all and i leave it to your best judgement").
+ *
+ *  WHAT MOVED, AND IT IS NEITHER THE DETECTOR NOR THE CORPUS DEFINITION — the AO-0 corpus's
+ *  own CONTENT. The corpus executes four seeds × four configs and a twelve-pulse campaign over
+ *  them, and both are byte-unchanged; what changed is the world those inputs generate. The
+ *  institution registry rebuilt every roster and the druid rulings moved the Warden's Lodge
+ *  towns, so the same seeds deal a different year: no web war, no insurgency birth, no
+ *  government challenge. The heuristic therefore OBSERVES shapes it bound differently before,
+ *  and reads of keys those shapes lack become findings.
+ *
+ *  ⭐ THIS IS THE FIRST SHIFT THAT GREW THE REGISTER. TE36 and T8 both moved every figure
+ *  DOWN ("fewer observed shapes can only ever mean fewer resolvable reads"); that sentence
+ *  holds for a corpus that LOSES shapes, and this one GAINED partial ones. A shape observed
+ *  for the first time, or under a same-named record, can convict reads that were unresolved
+ *  before, and that is what 53 rows are.
+ *
+ *  ⛔ THE ROWS ARE ADMITTED AS ORDINARY DEBT, NOT DECLARED, and the distinction is the rung.
+ *  Two classes, each row's class in its own review note:
+ *    • NAME COLLISIONS — a read binds to a same-named record the corpus does observe: `inst` is
+ *      the institution-FLAGS object while `assembleInstitutions` reads catalog ROWS through a
+ *      local of the same name; `facets` is the undercity's {clandestine, subterranean} while the
+ *      war code reads capacity and alignment facets; `stressors` while the map panel reads an
+ *      outcome's optional faction name.
+ *    • RARE-BRANCH WRITERS — keys a real producer writes on a branch this year does not take:
+ *      a partial `originContext` (stressorDynamics' former sponsor), `proposalPayload` and
+ *      `outcome` (factionCompetition's challenge and applied headline), `tierChange`
+ *      (tierResourceDynamics' density band).
+ *  Declaring them under `conditional-generator-branch` was weighed and refused: that class is a
+ *  one-off admission whose typed door is TE-GUARDS-1's question, and ~35 declarations would be
+ *  the posture change its note anticipates. Ordinary admission keeps every row VISIBLE as
+ *  ratchet debt that may only shrink, which is the honest status of a heuristic finding the
+ *  corpus happens to expose.
+ *  ⛔ THE ONE GENUINE READER-WITH-NO-WRITER THE RE-DEAL EXPOSED WAS CURED, NOT ADMITTED: the
+ *  world-pulse panel's coalition branch read `primaryInstigatorId` and `supporterIds`, which no
+ *  producer in src/ ever wrote (`git log -S` finds only the reader's own introduction), and it
+ *  was removed in its own commit before this rung.
+ *
+ *  ⛔ THE RECONCILIATION, MEASURED at ⟨BASE⟩ 57d3a7f0e through `--scan-only
+ *  --scan-mode=legacy-leaf`, against the committed schema-23 register:
+ *
+ *      reads 1,970 → 2,041 · identities 1,393 → 1,446 · files 388 → 394
+ *      NEW 53 · GONE 0 · INCREASED 0 · DECREASED 1 · SAME 1,392
+ *
+ *  The decreased row is `magicExists on config` at src/generators/defenseGenerator.js, 2 → 1:
+ *  the defence generator now resolves the world law once (J32 and its buy-back, 731e19597).
+ *  A GONE or INCREASED row, or a 54th new one, means the tip moved under the measurement and the
+ *  mint STOPS.
+ *
+ *  ⭐ THE BANK DOES NOT MOVE: 69 banked reads across 45 tagged addresses, measured off the live
+ *  scan (no new row is on a declared identity), so the literal module stands still.
+ *
+ *  ⚠ TWO GOVERNED EXECUTION INPUTS MOVED WITH THE SHIFT, and the transition records them:
+ *  src/domain/compendium/generated/compendiumData.generated.js and
+ *  src/domain/data/intentAtlas.distillate.json were regenerated by their documented commands
+ *  in this window. They are data the corpus executes, not detector sources.
+ *
+ *  Its delta is the THREE bookkeeping paths every rung moves. See
+ *  `CORPUS_REDEAL_SCANNER_DELTA_PATHS`. The commit pair holds as at every rung: this rung lands
+ *  ratchet-red, and its re-freeze lands next. */
+export const CORPUS_REDEAL_TARGET_SCHEMA = 24;
+
 export const DECLARED_BANK_BY_TARGET = Object.freeze({
   [EXEMPTION_RETIREMENT_TARGET_SCHEMA]: Object.freeze({ bankedReads: 60, taggedRows: 39 }),
   [BANK_FENCE_TARGET_SCHEMA]: Object.freeze({ bankedReads: 60, taggedRows: 39 }),
@@ -864,6 +934,11 @@ export const DECLARED_BANK_BY_TARGET = Object.freeze({
   // where the committed schema-22 register derives 61/40. The write refuses if the
   // measurement disagrees with this pair or with the walker's hand-owned literal.
   [EDIT_MODE_READERS_TARGET_SCHEMA]: Object.freeze({ bankedReads: 69, taggedRows: 45 }),
+  // MEASURED off the live scan at ⟨BASE⟩ 57d3a7f0e: none of the 53 admitted rows sits on a declared
+  // identity, so `bankOf` derives the same 69 banked reads across 45 tagged addresses the
+  // committed schema-23 register derives. A re-deal that ADDS rows and leaves the bank alone is
+  // the fence's fourth exercise and its first over ordinary growth.
+  [CORPUS_REDEAL_TARGET_SCHEMA]: Object.freeze({ bankedReads: 69, taggedRows: 45 }),
 });
 
 /** The declared post-bank of a target, or `null` for a rung that predates the law. */
@@ -1292,6 +1367,23 @@ export const EDIT_MODE_READERS_SCANNER_DELTA_PATHS = Object.freeze([
   'scripts/migrate-observed-shape-readers.mjs',
 ]);
 
+/**
+ * The 23 → 24 delta — the same bookkeeping set, THREE paths:
+ *   - `check-observed-shape-readers.mjs` — the live-validator binding moving from
+ *     `validateSchema23Baseline` to `validateSchema24Baseline`, the register's `_doc` header and
+ *     the schema index; NO declaration (the roster stays ten);
+ *   - `observed-shape-baseline.mjs` — the 23 → 24 bump, the retired-23 constant and its re-bound
+ *     validator;
+ *   - `migrate-observed-shape-readers.mjs` — this rung and its declared post-bank.
+ * ⛔ THE SUBJECT FILES THE RE-DEAL MOVED ARE NOT IN IT: they are scanned rather than scanning, and
+ * they move `sourceTreeDigest` and `scanTreeDigest`, which the transition records on its own.
+ */
+export const CORPUS_REDEAL_SCANNER_DELTA_PATHS = Object.freeze([
+  'scripts/check-observed-shape-readers.mjs',
+  'scripts/lib/observed-shape-baseline.mjs',
+  'scripts/migrate-observed-shape-readers.mjs',
+]);
+
 export const BANKED_EXPLAINED_WRITER_SCANNER_INPUT_PATHS = Object.freeze([
   'package-lock.json',
   'package.json',
@@ -1334,6 +1426,8 @@ const DOMAIN_READER_SCANNER_TRANSITION_POLICY =
   'schema-21-to-22-exact-scanner-transition-v1';
 const EDIT_MODE_READERS_SCANNER_TRANSITION_POLICY =
   'schema-22-to-23-exact-scanner-transition-v1';
+const CORPUS_REDEAL_SCANNER_TRANSITION_POLICY =
+  'schema-23-to-24-exact-scanner-transition-v1';
 const CORPUS_COVERAGE_SCANNER_TRANSITION_POLICY =
   'schema-7-to-8-exact-scanner-transition-v1';
 const EPOCH_DARK_CORPUS_SCANNER_TRANSITION_POLICY =
@@ -1375,6 +1469,7 @@ export const LEAF_MIGRATION_PREDECESSOR = Object.freeze({
   [RELATIONSHIPS_MOUNT_TARGET_SCHEMA]: BANK_FENCE_TARGET_SCHEMA,
   [DOMAIN_READER_TARGET_SCHEMA]: RELATIONSHIPS_MOUNT_TARGET_SCHEMA,
   [EDIT_MODE_READERS_TARGET_SCHEMA]: DOMAIN_READER_TARGET_SCHEMA,
+  [CORPUS_REDEAL_TARGET_SCHEMA]: EDIT_MODE_READERS_TARGET_SCHEMA,
 });
 
 /**
@@ -1437,6 +1532,10 @@ const LEAF_PREDECESSOR_VALIDATOR = Object.freeze({
   // RETIRED literal from this rung onward, so this entry keeps validating schema 22
   // as schema 22 after the live number moves past it.
   [DOMAIN_READER_TARGET_SCHEMA]: validateSchema22Baseline,
+  // The schema-24 rung's own predecessor. `validateSchema23Baseline` is bound to the
+  // RETIRED literal from this rung onward, so this entry keeps validating schema 23
+  // as schema 23 after the live number moves past it.
+  [EDIT_MODE_READERS_TARGET_SCHEMA]: validateSchema23Baseline,
 });
 
 const RETIRED_EXACT_MIGRATION_KIND = `observed-shape-schema-2-to-${RETIRED_EXACT_TARGET_SCHEMA}-migration`;
@@ -1930,6 +2029,15 @@ const SCANNER_TRANSITION_BY_TARGET = new Map([
     // test-side literal module, none of them subject paths, so the digest cannot move BY
     // THIS RUNG. The permission is carried because the class is lawful, not because this
     // rung exercises it.
+    reviewableUnscannedMovement: true,
+  })],
+  [CORPUS_REDEAL_TARGET_SCHEMA, Object.freeze({
+    deltaPaths: CORPUS_REDEAL_SCANNER_DELTA_PATHS,
+    inputPaths: BANKED_EXPLAINED_WRITER_SCANNER_INPUT_PATHS,
+    policy: CORPUS_REDEAL_SCANNER_TRANSITION_POLICY,
+    // TRUE, matching every rung since 8→9 — and THIS rung exercises it: the window regenerated two
+    // governed execution inputs (the compendium data and the intent-atlas distillate) by their
+    // documented commands, and the report records that movement for the review's decision.
     reviewableUnscannedMovement: true,
   })],
   [EDIT_MODE_READERS_TARGET_SCHEMA, Object.freeze({
@@ -3023,7 +3131,7 @@ export function run(argv = process.argv.slice(2)) {
   // any mismatch into a refusal rather than a silent mode switch.
   const targetSchema = command.targetSchema
     ? Number(command.targetSchema)
-    : (currentPath ? RETIRED_EXACT_TARGET_SCHEMA : EDIT_MODE_READERS_TARGET_SCHEMA);
+    : (currentPath ? RETIRED_EXACT_TARGET_SCHEMA : CORPUS_REDEAL_TARGET_SCHEMA);
   if (![RETIRED_EXACT_TARGET_SCHEMA, HEURISTIC_TARGET_SCHEMA, FILTERED_TARGET_SCHEMA,
     SURFACE_FILTERED_TARGET_SCHEMA, BANKED_EXPLAINED_WRITER_TARGET_SCHEMA,
     CORPUS_COVERAGE_TARGET_SCHEMA, EPOCH_DARK_CORPUS_TARGET_SCHEMA,
@@ -3033,8 +3141,10 @@ export function run(argv = process.argv.slice(2)) {
     COMPANION_GATE_TARGET_SCHEMA, STRESS_TOPOLOGY_TARGET_SCHEMA,
     LINEAGE_REANCHOR_TARGET_SCHEMA, EXEMPTION_RETIREMENT_TARGET_SCHEMA,
     BANK_FENCE_TARGET_SCHEMA, RELATIONSHIPS_MOUNT_TARGET_SCHEMA,
-    DOMAIN_READER_TARGET_SCHEMA, EDIT_MODE_READERS_TARGET_SCHEMA].includes(targetSchema)) {
-    throw new Error(`observed-shape --target-schema must be ${EDIT_MODE_READERS_TARGET_SCHEMA} (live edit-mode-readers leaf),`
+    DOMAIN_READER_TARGET_SCHEMA, EDIT_MODE_READERS_TARGET_SCHEMA,
+    CORPUS_REDEAL_TARGET_SCHEMA].includes(targetSchema)) {
+    throw new Error(`observed-shape --target-schema must be ${CORPUS_REDEAL_TARGET_SCHEMA} (live corpus-redeal leaf),`
+      + ` ${EDIT_MODE_READERS_TARGET_SCHEMA} (retired edit-mode-readers leaf),`
       + ` ${DOMAIN_READER_TARGET_SCHEMA} (retired domain-reader leaf),`
       + ` ${RELATIONSHIPS_MOUNT_TARGET_SCHEMA} (retired relationships-mount leaf),`
       + ` ${BANK_FENCE_TARGET_SCHEMA} (retired bank-fence leaf),`

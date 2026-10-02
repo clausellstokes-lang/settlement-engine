@@ -102,8 +102,11 @@ describe('four durable prose-family exact-totality contract', () => {
     for (const row of scalarRows.filter((candidate) => candidate.value === null && selectedFamily(candidate))) {
       const path = normalizedPath(row); nullHomes.set(path, (nullHomes.get(path) || 0) + 1);
     }
+    // 2026-10-01 (the urban band + the druid rulings, ODQ §934.86 and its addendum 2; the urban-band chair): three of the five null homes move with the
+    // re-dealt year (consequence 5 → 6, mechanical 4 → 5, rumour seeds 17 → 16); the impact digest holds at 151 and the
+    // selected lane at 1, so this is still a RETENTION arm.
     expect(Object.fromEntries([...nullHomes].sort(([left], [right]) => codepoint(left, right)))).toEqual({
-      'pulseHistory[].consequenceOutcomes[].type': 5,
+      'pulseHistory[].consequenceOutcomes[].type': 6,
       // WAR LANDING (§876): 148 → 150, and it is the SAME reading of the same arm a third time —
       // the impact digest carries two more records because `5a529f100`'s upheaval gates author
       // two more public beats, and the null-VALUE census follows the records that produced them.
@@ -113,7 +116,7 @@ describe('four durable prose-family exact-totality contract', () => {
       // FP BATCH 3 (2026-09-24): 150 → 151 — ONE more impact-digest record, the SAME reading of the same arm a fourth time;
       // the other four null homes UNCHANGED. Attributed by bisect to CURE-PEACE-1 U1 (c9b24fe51), see prose-family-contract.mjs.
       'pulseHistory[].impactDigest[].channelType': 151,
-      'pulseHistory[].mechanicalOutcomes[].type': 4,
+      'pulseHistory[].mechanicalOutcomes[].type': 5,
       // TE36 (ODQ §271): 30 → 19. The retired bare-decline outcomes were seeding rumours;
       // the null-VALUE census follows the outcomes that produced them. Every other null home
       // is unchanged, so this arm still measures null RETENTION and not corpus size.
@@ -121,7 +124,7 @@ describe('four durable prose-family exact-totality contract', () => {
       // metronome cure takes one rumour out of all four ledgers, so the rumour-seed lane authors
       // two fewer records across the twelve roots and the null census follows them. The other
       // four null homes are again unchanged, which is what keeps this a RETENTION arm.
-      'pulseHistory[].mechanicalRumorSeeds[].channelType': 17,
+      'pulseHistory[].mechanicalRumorSeeds[].channelType': 16,
       'pulseHistory[].selectedOutcomes[].type': 1,
     });
     const pathEdit = (row, index, value) => ({ ...row, path: row.path.map((part, offset) => (
@@ -149,7 +152,7 @@ describe('four durable prose-family exact-totality contract', () => {
     expect(() => deriveProseFamilyContract(scalarRows.filter((row) => row !== nested), scalarMeta)).not.toThrow();
   });
 
-  it('A3 freezes all 63 identities counts bytes digest and movement polarities', () => {
+  it('A3 freezes all 61 identities counts bytes digest and movement polarities', () => {
     expect(live.rows).toEqual(baseline.rows);
     expect(compareProseFamilyRows(live.rows, baseline.rows)).toBe(true);
     // TE36 (ODQ §271): 8280 → 8274, six bytes, and they are DIGITS not identities — the
@@ -161,12 +164,15 @@ describe('four durable prose-family exact-totality contract', () => {
     // have passed unchanged over a real movement. It is kept because a coincidence is not a
     // licence to delete a pin — but the DIGEST below is the arm that actually convicts, and this
     // is the first re-record in which the two disagree about whether anything happened.
-    expect(Buffer.byteLength(JSON.stringify(live.rows))).toBe(8271);
+    // 2026-10-01 (the urban band + the druid rulings, ODQ §934.86 and its addendum 2; the urban-band chair): 8271 → 8000. Two identities leave (named at
+    // prose-family-contract.mjs's RE-RECORDED block) and 40 of the remaining rows move a count, so bytes and digest both move.
+    expect(Buffer.byteLength(JSON.stringify(live.rows))).toBe(8000);
     // TE36 (ODQ §271): the digest follows the counts it hashes. It is re-recorded here and in
     // prose-family-contract.mjs's EXPECTED_ROWS_SHA256 together, which is what keeps the
     // test-side and library-side denominators from ever disagreeing.
     // FP BATCH 3 (2026-09-24): 4cf433b2… → 438fe9c4…, re-recorded together with EXPECTED_ROWS_SHA256 (the bytes hold at 8271).
-    expect(live.rowsSha256).toBe('438fe9c4a22d184c4133f0151216611d6a554e9673b063637b215f85f64f7466');
+    // 2026-10-01 (the urban band + the druid rulings, ODQ §934.86 and its addendum 2; the urban-band chair): 438fe9c4… → b172d924…, with EXPECTED_ROWS_SHA256.
+    expect(live.rowsSha256).toBe('b172d924bcb0564d70bf812e65ba60433e32cdd8484a4ae50bf7816cc8cd5a06');
     const counted = live.rows.findIndex((row) => row.occurrences > row.distinctValues);
     const movements = [
       [...clone(live.rows), { family: 'timeline', path: 'zz', field: 'type', distinctValues: 1, occurrences: 1 }],
@@ -189,7 +195,9 @@ describe('four durable prose-family exact-totality contract', () => {
     // why this counterfeit's arithmetic keeps tracking with a single subtraction.
     // FP BATCH 3 (2026-09-24): 1067/5263 → 1071/5285, the same seven off the new totals (1078 − 7, 5292 − 7); `chronicle`
     // byte-identical at 7/7/7 for the fourth re-record running.
-    counterfeit.totals = { families: 3, identities: 56, distinctValues: 1071, occurrences: 5285 };
+    // 2026-10-01 (the urban band + the druid rulings): 1071/5285 → 995/5171, the same seven off the new totals (1002 − 7,
+    // 5178 − 7), and identities 56 → 54 (61 − 7); `chronicle` byte-identical at 7/7/7 for the fifth re-record running.
+    counterfeit.totals = { families: 3, identities: 54, distinctValues: 995, occurrences: 5171 };
     counterfeit.rowsSha256 = proseFamilyRowsSha256(counterfeit.rows);
     expect(() => validateProseFamilyBaseline(counterfeit)).toThrow(/immutable/);
     for (const mutate of [
@@ -232,13 +240,17 @@ describe('four durable prose-family exact-totality contract', () => {
     // brief named as the cause and which this corpus never reaches.
     // FP BATCH 3 (2026-09-24): 1051/5075 → 1055/5097 — sixteen pulseHistory rows grow by the ONE new wizard-news id's
     // impact digest and its selected/consequence beats; identities 50 HOLD. Attributed by bisect to CURE-PEACE-1 U1 (c9b24fe51).
-    expect(familyTotal(live, 'pulseHistory')).toEqual({ family: 'pulseHistory', identities: 50, distinctValues: 1055, occurrences: 5097 });
+    // 2026-10-01 (the urban band + the druid rulings, ODQ §934.86 and its addendum 2; the urban-band chair): 50/1055/5097 → 48/979/4979. IDENTITIES MOVE
+    // for the first time in this arm's history: consequenceOutcomes[].proposalPayload.reason and resolvedStressors[].type leave,
+    // because the re-dealt year resolves no stressor and carries no such proposal.
+    expect(familyTotal(live, 'pulseHistory')).toEqual({ family: 'pulseHistory', identities: 48, distinctValues: 979, occurrences: 4979 });
     const history = scalarRows.filter((row) => row.root === 'worldState');
     expect([...new Set(history.map((row) => row.path[1].value))]).toEqual([...Array(12).keys()]);
     const headline = (home) => live.rows.find((row) => row.path === `pulseHistory[].${home}[].headline`);
     // FP BATCH 3 (2026-09-24): `selectedOutcomes` 78/153 → 78/154 (one occurrence, no new spelling); `mechanicalOutcomes` HOLDS at
     // 28/53; `consequenceOutcomes` 72/184 → 72/185 (one occurrence, no new spelling).
-    expect(headline('selectedOutcomes')).toMatchObject({ distinctValues: 78, occurrences: 154 });
+    // 2026-10-01 (the urban band + the druid rulings, ODQ §934.86 and its addendum 2; the urban-band chair): selected 78/154 → 75/155, mechanical 28/53 → 22/49, consequence 72/185 → 68/181.
+    expect(headline('selectedOutcomes')).toMatchObject({ distinctValues: 75, occurrences: 155 });
     // TE36: the two lanes that carried the retired family move; `selectedOutcomes` above does
     // NOT, because ordinary population drift was already `state_only` and never selected.
     // mechanical distinctValues RISES (24 → 29) while its occurrences fall — the retired
@@ -252,8 +264,8 @@ describe('four durable prose-family exact-totality contract', () => {
     // `mechanicalOutcomes` 28/54 → 28/53, losing one occurrence and no spelling; and
     // `consequenceOutcomes` 73/184 → 72/184, losing one spelling and no occurrence — the exact
     // mirror image, and between them the arithmetic of a re-deal rather than of a gain or a loss.
-    expect(headline('mechanicalOutcomes')).toMatchObject({ distinctValues: 28, occurrences: 53 });
-    expect(headline('consequenceOutcomes')).toMatchObject({ distinctValues: 72, occurrences: 185 });
+    expect(headline('mechanicalOutcomes')).toMatchObject({ distinctValues: 22, occurrences: 49 });
+    expect(headline('consequenceOutcomes')).toMatchObject({ distinctValues: 68, occurrences: 181 });
   });
 
   it('A6 reaches the regional audit log while proving its selected prose zero', () => {
@@ -271,12 +283,15 @@ describe('four durable prose-family exact-totality contract', () => {
     // legitimacy-sensitivity table moving WHICH seats are fragile WHEN, never how many kinds of
     // thing can happen — and it is the same claim the car's own redistribution invariant makes,
     // measured here from the far side of the estate rather than from inside the gate.
-    expect(familyTotal(live, 'regionalLog')).toEqual({ family: 'regionalLog', identities: 2, distinctValues: 8, occurrences: 176 });
-    expect(scalarMeta).toMatchObject({ regionalEventLog: 77, regionalEventLogUnique: 77 });
+    // 2026-10-01 (the urban band + the druid rulings, ODQ §934.86 and its addendum 2; the urban-band chair): 176 → 180 and 77 → 79 events, distinct HOLDS
+    // at 8 (the same kinds of change, dealt differently), and ROOT 2 LEAVES THE REACH: that pulse logged no regional event, so the
+    // reach is pinned as the exact set [0,1,3..11] (the library's EXPECTED_REGIONAL_ROOTS) rather than 0..11.
+    expect(familyTotal(live, 'regionalLog')).toEqual({ family: 'regionalLog', identities: 2, distinctValues: 8, occurrences: 180 });
+    expect(scalarMeta).toMatchObject({ regionalEventLog: 79, regionalEventLogUnique: 79 });
     const regional = scalarRows.filter((row) => row.root === 'pulseResult'
       && row.path[0]?.value === 'regionalGraph' && row.path[1]?.value === 'eventLog');
-    expect([...new Set(regional.map((row) => row.rootOrdinal))]).toEqual([...Array(12).keys()]);
-    expect(new Set(regional.map((row) => `${row.rootOrdinal}|${row.path[2].value}`)).size).toBe(77);
+    expect([...new Set(regional.map((row) => row.rootOrdinal))]).toEqual([0, 1, 3, 4, 5, 6, 7, 8, 9, 10, 11]);
+    expect(new Set(regional.map((row) => `${row.rootOrdinal}|${row.path[2].value}`)).size).toBe(79);
     expect(live.rows.filter((row) => row.family === 'regionalLog')).toEqual([
       // TE36: `changes[].kind` is BYTE-IDENTICAL at 6/92 — the retired outcomes carried a
       // sourceEvent but no graph change, so only the second row moves. That asymmetry is the
@@ -288,8 +303,9 @@ describe('four durable prose-family exact-totality contract', () => {
       // distinct count moves. Three added events carry a graph change and a sourceEvent each, and
       // four graph changes between them; no new KIND of change appears in either row, which is
       // what separates "the same world, dealt differently" from "a new kind of thing happening".
-      { family: 'regionalLog', path: 'regionalGraph.eventLog[].changes[].kind', field: 'kind', distinctValues: 7, occurrences: 99 },
-      { family: 'regionalLog', path: 'regionalGraph.eventLog[].sourceEvent.type', field: 'type', distinctValues: 1, occurrences: 77 },
+      // 2026-10-01 (the urban band + the druid rulings, ODQ §934.86 and its addendum 2; the urban-band chair): 7/99 → 7/101 and 1/77 → 1/79; neither distinct count moves.
+      { family: 'regionalLog', path: 'regionalGraph.eventLog[].changes[].kind', field: 'kind', distinctValues: 7, occurrences: 101 },
+      { family: 'regionalLog', path: 'regionalGraph.eventLog[].sourceEvent.type', field: 'type', distinctValues: 1, occurrences: 79 },
     ]);
     const prose = new Set(['headline', 'narrativeSummary', 'reason', 'reasons', 'summary', 'summaryText', 'thesis', 'triggeredBy']);
     expect(live.rows.filter((row) => row.family === 'regionalLog' && prose.has(row.field))).toEqual([]);

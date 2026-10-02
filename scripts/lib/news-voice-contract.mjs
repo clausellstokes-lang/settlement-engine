@@ -65,8 +65,19 @@ const TOTAL_KEYS = Object.freeze(['identities', 'distinctValues', 'occurrences']
 // address book entirely (the occupied insurgency arm the car REPLACES rather than stacks) while
 // four other stressor homes reach further, and the address `distinctValues` total holds at 393
 // exactly. Fewer homes, more occurrences, the same vocabulary size — that is redistribution.
+// ── RE-RECORDED 2026-10-01 BY THE URBAN-BAND CHAIR (session 93391427, under the owner's "I defer all judgment to you"), IN THE
+// SAME ACT AS THE NEWS-HEADLINE CONTRACT, THE PROSE-FAMILY CONTRACT AND THE OSR WALKER'S PINS ──────────────────────────
+// 273/1/272/51 → 265/1/264/44. ONE CAUSE, MEASURED AT BOTH ENDS: THE URBAN BAND'S SAME-SEED SHIFT (ODQ §934.86) AND THE DRUID RULINGS
+// (§934.86 addendum 2). The corpus builder at the pre-band base 5d699cc68 reproduces every frozen figure exactly; at the tip
+// the AO-0 worlds re-deal their year.
+// Conservation closes: 265 − 1 = 264. ELEVEN HOMES LEAVE AND FOUR ARRIVE, NAMED: gone applied|generosity_refusal,
+// applied|stressor_aftermath, applied|stressor_birth_insurgency, applied|stressor_birth_monster_raider_pressure,
+// applied|stressor_escalate_mass_migration, applied|stressor_residual, queued|faction_government_challenge,
+// queued|legitimacy_pressure, queued|npc_reform, webwar_campaign_complete|null, webwar_campaign_minted|null; new
+// applied|reinforcement_cost, queued|npc_exploit, queued|npc_suppress, queued|tier_demotion. The re-dealt year resolves no
+// stressor and mints no web-war campaign; the voice debt stays EMPTY.
 const CORPUS = Object.freeze({
-  pulseRoots: 12, introductions: 273, retirements: 1, finalEntries: 272, homes: 51,
+  pulseRoots: 12, introductions: 265, retirements: 1, finalEntries: 264, homes: 44,
 });
 
 export const NEWS_VOICE_PROTECTED_SUBSTRATE = Object.freeze([

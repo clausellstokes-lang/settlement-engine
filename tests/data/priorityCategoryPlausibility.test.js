@@ -27,7 +27,9 @@ describe('[data-tables-6] priorityCategory spot-fixes', () => {
     const crafts = institutionalCatalog.village?.Crafts || {};
     expect(crafts.Midwife?.priorityCategory).toBe('crafts');
     expect(crafts['Village scribe']?.priorityCategory).toBe('government');
-    expect(crafts.Wildfowler?.priorityCategory).toBe('economy');
+    // The Wildfowler left the Crafts shelf for Economy with the rest of primary production
+    // (the urban band, 2026-09-30, ODQ §934.86, judgment J1); its faction role is unchanged.
+    expect(institutionalCatalog.village?.Economy?.Wildfowler?.priorityCategory).toBe('economy');
   });
 
   // Plausibility ratchet: an entry in a *Criminal* category that is itself

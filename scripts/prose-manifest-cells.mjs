@@ -78,7 +78,18 @@ export const MANIFEST_PROVENANCE = Object.freeze({
     + ' 2026-09-20 (CURE-J, docs/shift-records/2026-09-20-cure-j-provenance.json): re-recorded with'
     + ' ZERO rows moved (rowsSha unchanged) after the recorder identity became comment-insensitive'
     + ' — FIX-C2\'s citation re-address in scripts/prose-rate-corpus.mjs had moved the raw sha of a'
-    + ' recorder file.',
+    + ' recorder file.'
+    + ' 2026-09-30 (THE URBAN BAND, docs/shift-records/2026-09-30-urban-band-institutions.json, ODQ'
+    + ' §934.86): re-recorded over the owner\'s declared same-seed generation shift. The institution'
+    + ' registry re-orders the catalog draws, so 980 of the 1,050 rows move and none is added or'
+    + ' removed; the PROSE declaration stands because what moves is the composed prose of the moved'
+    + ' worlds, under the same recorder.'
+    + ' 2026-10-01 (DRUIDS IN A WORLD WITHOUT MAGIC, docs/shift-records/2026-10-01-urban-band-druid-faith.json, ODQ'
+    + ' §934.86 addendum 2): re-recorded again because Warden\'s Lodge reads as the ranger post it is (no druid clause)'
+    + ' and defends in every world; 36 of the 1,050 rows move, none added or removed.'
+    + ' 2026-10-01 (J33, docs/shift-records/2026-10-01-urban-band-warden-census.json, the same rulings): re-recorded'
+    + ' again because Warden\'s Lodge leaves every druid and magic list, so a magic town holding one loses the druid'
+    + ' readings it alone had opened; 70 of the 1,050 rows move, none added or removed.',
 });
 
 /** This surface's identity in tests/fixtures/.golden-freeze-register.json. */

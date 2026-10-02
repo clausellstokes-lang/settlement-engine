@@ -132,12 +132,21 @@ describe('CORRUPT TRADE TOWN (trade route + corruption)', () => {
 });
 
 // ─────────────────────────────────────────────────────────────────────────────
-// 3. MAGICAL METROPOLIS — metropolis, high magic priority. Config-forced (any
-//    seed reproduces the identity); seed is arbitrary but pinned.
+// 3. MAGICAL METROPOLIS — metropolis, high magic priority. Pinned to a seed whose
+//    seated government is the council the magic dial retypes ('Arcane Senate').
+//    ⚠ NO LONGER CONFIG-FORCED (2026-09-30, the urban band, ODQ §934.86). "Any seed
+//    reproduces the identity" held only because the old exclusive group handed the
+//    government seat to 'Mayor and council' in 30 of 40 of these metropolises (the
+//    first-listed-member defect the weighted seat cured), and that council form is the one
+//    the magic priority retypes. The seat is now shared lawfully — the economy dial at 70
+//    seats merchant and guild forms — and the arcane faction leads in 12 of 40 seeds
+//    (fixture-magic-metropolis-<0..39>), ranks third in 16. Whether the magic dial should
+//    steer a non-council government is open item O9 of docs/URBAN_BAND_INSTITUTIONS.md.
+//    -9 is the first sibling where it leads; every arm below holds on it.
 // ─────────────────────────────────────────────────────────────────────────────
 describe('MAGICAL METROPOLIS (metropolis, high magic)', () => {
   const CONFIG = { settType: 'metropolis', priorityMagic: 95, priorityEconomy: 70, magicExists: true, terrainOverride: 'plains', tradeRouteAccess: 'crossroads' };
-  const SEED = 'fixture-magic-metropolis'; // config-forced; seed arbitrary
+  const SEED = 'fixture-magic-metropolis-9'; // re-pinned from 'fixture-magic-metropolis' (see above)
   let s;
   beforeAll(() => { s = gen(CONFIG, SEED); });
 

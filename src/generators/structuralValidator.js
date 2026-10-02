@@ -395,14 +395,23 @@ export const checkStructuralValidity = (institutions, config = {}) => {
   const effectiveMagicLevel = magicLaw.present ? magicLaw.magicLevel : (magicLevel || 'medium');
 
   // ── GATE_FEATURES checks ─────────────────────────────────────────────────
+  // NATIVE NAMES ONLY (2026-09-30). The gate table is native catalog law: a custom
+  // institution that happens to carry a catalog name ("Mages' guild") is the DM's own
+  // definition, so it neither answers a native row's gate nor stands as a native
+  // prerequisite. Before, an exact-name custom row satisfied a native scroll scribe's
+  // dependency and the coherence pass skipped the native tower it owed
+  // (tests/domain/customContentPresentationClaims.test.js, exposed when towns gained the
+  // scroll scribe in the urban band). Custom names stop at their provenance boundary here
+  // exactly as they do in coherenceRepairPass's candidate guard.
+  const nativeInstNames = nativeSemanticNames(institutions);
   Object.entries(GATE_FEATURES).forEach(([instName, gate]) => {
-    if (!instNames.includes(instName)) return;
+    if (!nativeInstNames.includes(instName)) return;
 
     // Do not let the subject manufacture evidence for its own gate through
     // SPATIAL_FEATURES. Other seated institutions may still imply a supporting
     // feature. A missing prerequisite also remains valid when a centralized
     // scale ladder proves that a seated greater legitimately evicted it.
-    const dependencyInstitutionNames = new Set(instNames);
+    const dependencyInstitutionNames = new Set(nativeInstNames);
     dependencyInstitutionNames.delete(instName);
     const dependencyEvidence = expandInstitutionSet([...dependencyInstitutionNames]);
     const requirementIsSatisfied = requirement => (

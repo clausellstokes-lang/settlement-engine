@@ -86,8 +86,13 @@
  *                          "Induce prophetic dream states. Visions are real…". The second
  *                          says the visions ARE REAL, which is the functional claim itself.
  */
+// ⛔ `druid` LEFT THIS LIST 2026-09-30 (judgment J24, docs/URBAN_BAND_INSTITUTIONS.md O10): FAITH IS
+// CULTURE, NEVER A SPECIES OF MAGIC (TE-CH-6). A world whose magic does not function still holds its
+// druid circles, so naming a druid is not a claim that magic works; a druid said to cast SPELLS still
+// asserts, through `spells` and `magic`. Measured: the token alone decided only the name 'Druid Circle',
+// the NPC title 'Druid' and the history figure 'Druid Elder'.
 export const MAGIC_ASSERTION_PATTERN =
-  /\b(?:arcane|artificer|cantrips?|curses?|druid|enchant(?:ed|ing|ment)?|golems?|mage|magic|magical|necromanc(?:er|y|tic)|planar|runes?|scry(?:ing)?|sorcerer|spells?|teleport(?:ation)?|undead|warlock|witch|wizard|divine healing|divine intervention|divine blessing|divine visions?|raise(?:s|d)? dead|cure (?:light |moderate |serious |critical )?wounds|lesser restoration|prophetic dreams?)\b/i;
+  /\b(?:arcane|artificer|cantrips?|curses?|enchant(?:ed|ing|ment)?|golems?|mage|magic|magical|necromanc(?:er|y|tic)|planar|runes?|scry(?:ing)?|sorcerer|spells?|teleport(?:ation)?|undead|warlock|witch|wizard|divine healing|divine intervention|divine blessing|divine visions?|raise(?:s|d)? dead|cure (?:light |moderate |serious |critical )?wounds|lesser restoration|prophetic dreams?)\b/i;
 
 /**
  * Explicit denials of functional magic. These are clause-shaped instead of

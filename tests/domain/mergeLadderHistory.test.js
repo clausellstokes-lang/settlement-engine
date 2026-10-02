@@ -133,6 +133,10 @@ function trials() {
         rungTookReceipt: out.delta.escalations
           .some((step) => String(step.scope).split(',').includes(RECEIPT)),
         treeKeptHistory: tree.receipts.classKept.includes(`${RECEIPT}.repairs`),
+        // The node rule (recordMergeTree mergeNode: r0 equal to r1 keeps the record's node whole) reaches the
+        // receipt's ROOT first, so where R0 and R1 carry the same receipt the tree keeps the record's history
+        // without ever descending to declare `repairs` by class.
+        treeKeptWhole: h(R0[RECEIPT]) === h(R1[RECEIPT]),
         recordHistory: h(record[RECEIPT]?.repairs),
         r1History: h(R1[RECEIPT]?.repairs),
         mergedHistory: h(merged[RECEIPT]?.repairs),
@@ -148,8 +152,15 @@ function trials() {
 
 /** One config-channel merge of one corpus row, with the record's receipt bent by the caller. */
 function mergeWithReceipt(bend) {
+  // 2026-10-01, the urban band (ODQ §934.86): THE CONTROL'S SUBJECT ROW MOVED, metropolis|germanic|plains|road ->
+  // metropolis|germanic|forest|isolated. H4's anti-vacuity needs a world whose re-derivation R1 carries a repair
+  // history of its own ("R1 really carries a history of its own to overwrite with"); the old subject's R1 now
+  // carries none (0), so that precondition could not be met. Re-hunted over the 63-row stride under the desert edit
+  // by the three controls' own conditions (a rung takes the receipt, R1 repairs > 0, and the planted, empty and
+  // absent histories each survive): four rows qualify (town coastal port, metropolis forest isolated, metropolis
+  // riverside river, town plains port); this is the one of the same tier as the old subject.
   const row = sample63().find((candidate) => keyOf(candidate)
-    === 'metropolis|germanic|plains|road|civilized|golden-master-v3');
+    === 'metropolis|germanic|forest|isolated|civilized|golden-master-v3');
   const { _seed: seed, ...config } = row;
   const base = generateSettlementPipeline(config, null, { seed, customContent: {} });
   const R0 = rederive(base, config, EMPTY, ENGINE, DECLARATIONS).record;
@@ -178,7 +189,11 @@ describe('EM-R8b — a rung takes a reading from R1 and never the lived history 
       .map((trial) => `${trial.label}  ${trial.key}  the town recorded ${trial.recordCount} repair(s), `
         + `the merge left ${trial.mergedCount}`);
     const took = all.filter((trial) => trial.rungTookReceipt);
-    const treeTookToo = took.filter((trial) => !trial.treeKeptHistory)
+    // 2026-10-01, the urban band (ODQ §934.86; the chair, vetoable): two thorp E7 trials (plains, hills) now escalate
+    // from defenseProfile to the wide exhausting rung, whose scope names the receipt, while R0 and R1 carry the SAME
+    // receipt (history [] on every side). The tree keeps that receipt whole by the node rule, so both writers keep
+    // the record's history; the agreement is read through either route, and through nothing wider.
+    const treeTookToo = took.filter((trial) => !trial.treeKeptHistory && !trial.treeKeptWhole)
       .map((trial) => `${trial.label}  ${trial.key}`);
     expect(all.length, 'the config channel of the 63-row stride').toBeGreaterThan(100);
     expect(took.length, 'the trials in which a rung takes the coherence receipt whole from R1, which is the '

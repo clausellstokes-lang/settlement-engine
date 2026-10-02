@@ -129,20 +129,31 @@ const EXPECTED_ROOTS = new Map([
 // `legitimacyUpheavalEnabled` are virtual and false in every shipped preset, and this denominator
 // is the ONLY place in the estate that observes the lit engine. No player, no shipped golden and
 // no dark-control cell sees any of this.
+// ── RE-RECORDED 2026-10-01 BY THE URBAN-BAND CHAIR (session 93391427, under the owner's "I defer all judgment to you"), IN THE
+// SAME ACT AS THE NEWS-VOICE AND NEWS-HEADLINE CONTRACTS AND THE OSR WALKER'S PINS ───────────────────────────────────────
+// ONE CAUSE, MEASURED AT BOTH ENDS: THE URBAN BAND'S SAME-SEED SHIFT (ODQ §934.86) AND THE DRUID RULINGS (§934.86 addendum 2);
+// the corpus builder at the pre-band base 5d699cc68 reproduces every frozen figure below exactly. scalarRows 26329 → 25724;
+// wizardNews 272/1604/273 → 264/1557/265; regionalEventLog 77 → 79. 63 → 61 identities, and the TWO THAT VANISH ARE NAMED:
+// pulseHistory[].consequenceOutcomes[].proposalPayload.reason and pulseHistory[].resolvedStressors[].type. The re-dealt year
+// resolves no stressor and carries no such proposal (the same year the news contracts read). 40 of the 63 rows moved a count.
+// ⭐ THE REGIONAL LOG'S ROOT REACH IS NOW PINNED AS AN EXACT SET: root 2's pulse logged no regional event (the 79 entries are
+// all unique and all sit on the other eleven roots), so the reach is [0,1,3..11]; it was 0..11. Every root still in the
+// set keeps the contiguity law, and any further change to the set reds with the set named.
 const EXPECTED_CORPUS = Object.freeze({
-  scalarRows: 26329, canonEventLogEntries: 1, wizardNewsFinalEntries: 272,
-  wizardNewsAccumulatedEntries: 1604, wizardNewsUnique: 273, pulseHistory: 12,
-  regionalEventLog: 77, regionalEventLogUnique: 77, aiChronicle: 1,
+  scalarRows: 25724, canonEventLogEntries: 1, wizardNewsFinalEntries: 264,
+  wizardNewsAccumulatedEntries: 1557, wizardNewsUnique: 265, pulseHistory: 12,
+  regionalEventLog: 79, regionalEventLogUnique: 79, aiChronicle: 1,
 });
+const EXPECTED_REGIONAL_ROOTS = Object.freeze([0, 1, 3, 4, 5, 6, 7, 8, 9, 10, 11]);
 const EXPECTED_FAMILY_TOTALS = Object.freeze([
   { family: 'chronicle', identities: 7, distinctValues: 7, occurrences: 7 },
-  { family: 'pulseHistory', identities: 50, distinctValues: 1055, occurrences: 5097 },
-  { family: 'regionalLog', identities: 2, distinctValues: 8, occurrences: 176 },
+  { family: 'pulseHistory', identities: 48, distinctValues: 979, occurrences: 4979 },
+  { family: 'regionalLog', identities: 2, distinctValues: 8, occurrences: 180 },
   { family: 'timeline', identities: 4, distinctValues: 8, occurrences: 12 },
 ]);
-const EXPECTED_TOTALS = Object.freeze({ families: 4, identities: 63, distinctValues: 1078, occurrences: 5292 });
-const EXPECTED_ROWS_BYTES = 8271;
-const EXPECTED_ROWS_SHA256 = '438fe9c4a22d184c4133f0151216611d6a554e9673b063637b215f85f64f7466';
+const EXPECTED_TOTALS = Object.freeze({ families: 4, identities: 61, distinctValues: 1002, occurrences: 5178 });
+const EXPECTED_ROWS_BYTES = 8000;
+const EXPECTED_ROWS_SHA256 = 'b172d924bcb0564d70bf812e65ba60433e32cdd8484a4ae50bf7816cc8cd5a06';
 const codepoint = (left, right) => (left < right ? -1 : left > right ? 1 : 0);
 const same = (left, right) => JSON.stringify(left) === JSON.stringify(right);
 const identityOf = (row) => `${row.family}\0${row.path}\0${row.field}`;
@@ -279,7 +290,9 @@ export function deriveProseFamilyContract(scalarRows, scalarMeta) {
   if (!same([...pulseIndexes].sort((a, b) => a - b), [...Array(12).keys()])) throw new Error('pulseHistory record reach is not exactly 0..11');
   if (regionalRecords.size !== scalarMeta.regionalEventLog || scalarMeta.regionalEventLog !== scalarMeta.regionalEventLogUnique) throw new Error('regionalLog record reach disagrees with scalar meta');
   const regionalRoots = [...new Set(regional.map(({ source }) => source.rootOrdinal))].sort((a, b) => a - b);
-  if (!same(regionalRoots, [...Array(12).keys()])) throw new Error('regionalLog root reach is not exactly 0..11');
+  if (!same(regionalRoots, EXPECTED_REGIONAL_ROOTS)) {
+    throw new Error(`regionalLog root reach is not exactly ${JSON.stringify(EXPECTED_REGIONAL_ROOTS)}: ${JSON.stringify(regionalRoots)}`);
+  }
   for (const rootOrdinal of regionalRoots) {
     const indexes = [...new Set(regional.filter(({ source }) => source.rootOrdinal === rootOrdinal)
       .map(({ source }) => source.path[2].value))].sort((a, b) => a - b);

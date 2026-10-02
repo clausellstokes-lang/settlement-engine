@@ -397,7 +397,11 @@ describe('TC-4 C2 — multiplicity resolves canonically, and the mirrors cannot 
     const names = catalogEntryNames();
     expect(names.length).toBeGreaterThan(100);
     const ranged = names.filter((name) => parseCatalogRange(name).max > 1);
-    expect(ranged.length).toBe(17);
+    // 17 → 27 (2026-09-30, the urban band, ODQ §934.86): the count-ranged trades are now
+    // listed at each urban tier they exist (Bakers, Butchers, Carpenters, Blacksmiths and
+    // Mills from town to metropolis), and the metropolis housing rung is its own ranged row.
+    // Every one still spells its range where the resolver reads it — the arm's purpose.
+    expect(ranged.length).toBe(27);
     for (const name of ranged) {
       const { min, max } = parseCatalogRange(name);
       expect(min, name).toBeGreaterThanOrEqual(1);

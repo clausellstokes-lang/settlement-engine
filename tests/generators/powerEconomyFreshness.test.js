@@ -201,11 +201,17 @@ function createPrngSites(relativeRoot) {
 }
 
 describe('bounded final economy -> power reconciliation', () => {
-  test('econ-power-freshness-166 consumes Moderate, not provisional Comfortable', () => {
+  // 2026-10-01, the urban band (ODQ §934.86): THE SEED MOVED, 166 -> 19. The scenario this arm asserts (power forms
+  // from a provisional Comfortable economy, the economy settles to Moderate at economyReconcilePass, the bounded
+  // closeout consumes Moderate) is a property of the SEED, and under the rebuilt institution registry seed 166 stays
+  // Comfortable at all three steps, so the arm could no longer see the stale join. Re-hunted by the arm's own
+  // measurement over `econ-power-freshness-<n>` with the same STALE_SEED_CONFIG: 19, 93, 223 and 262 are the hits in
+  // 0..399; 19 is the first, and the only one of the first three whose closeout powers equal the final powers.
+  test('econ-power-freshness-19 consumes Moderate, not provisional Comfortable', () => {
     const snapshots = {};
     const settlement = generate(
       STALE_SEED_CONFIG,
-      'econ-power-freshness-166',
+      'econ-power-freshness-19',
       {
         onStep(name, ctx) {
           if (
@@ -246,16 +252,17 @@ describe('bounded final economy -> power reconciliation', () => {
     // bounded closeout re-derives from the FINAL economy. Two powers traded one point
     // (Craft Guilds 9 to 8, Merchant City Council 18 to 19); the total still sums to 100
     // and the prosperity-contribution claim above (0, not the stale +8) is unchanged.
+    // Re-pinned 2026-10-01 for the new seed (the urban band, ODQ §934.86): the table below is seed 19's.
     expect(snapshots.powerEconomyReconcilePass.powers).toEqual({
-      'Military/Guard': 22,
-      'Merchant City Council': 19,
-      'Merchant Guilds': 13,
-      'Religious Authorities': 12,
+      'Merchant oligarchy': 23,
+      'Merchant Guilds': 17,
+      'Religious Authorities': 14,
+      'Military/Guard': 13,
       'Craft Guilds': 8,
-      'War Council': 8,
       "Thieves' Guild": 8,
+      'Arcane Orders': 6,
+      "Newcomers' Settlement": 6,
       'Noble Families': 5,
-      'Arcane Orders': 5,
     });
     expect(powerByFaction(settlement)).toEqual(
       snapshots.powerEconomyReconcilePass.powers,
@@ -473,10 +480,13 @@ describe('EM-R3 — the power structure is final under a held pin', () => {
     expect(heldIdentical, 'the held power structure came back changed').toHaveLength(rows.length);
     expect(shareKept, "the DM's halved share was lost").toHaveLength(rows.length);
 
-    // THE COUNTERFORCE, same bag, no pins channel: the replay overwrites the roster in 56 rows
-    // and refuses the 57th by the roster assert, and the DM's share survives in NONE of them.
-    expect(controlOverwritten).toHaveLength(56);
-    expect(controlThrew).toHaveLength(1);
+    // THE COUNTERFORCE, same bag, no pins channel: the replay overwrites the roster in 47 rows
+    // and refuses the other 10 by the roster assert, and the DM's share survives in NONE of them.
+    // 2026-10-01, the urban band (ODQ §934.86): was 56 overwritten and 1 refused. The rebuilt institution registry
+    // moves more desert worlds' rosters (the replay's refusals went 1 -> 10), and the 57 rows still all land in one
+    // of the two columns, so the counterforce is as live as before. Re-measured, not predicted.
+    expect(controlOverwritten).toHaveLength(47);
+    expect(controlThrew).toHaveLength(10);
     expect(controlKept, 'the counterforce kept the share, so this arm proves nothing').toEqual([]);
   }, 180_000);
 
@@ -562,10 +572,11 @@ describe('EM-R3 — the power structure is final under a held pin', () => {
     // THE COUNT IS THE ARM: three sites, reached exactly three times per run, in every row.
     expect([...callCounts]).toEqual([3]);
 
-    // THE COUNTERFORCE, and the reason the two halves are ONE member: in 42 of the 57 rows the
+    // THE COUNTERFORCE, and the reason the two halves are ONE member: in 46 of the 57 rows the
     // held receipt is already stale against the changed world's economy when the closeout runs,
-    // so an assert that was not pin-aware would refuse there.
-    expect(staleAtCloseout).toHaveLength(42);
+    // so an assert that was not pin-aware would refuse there. (42 before the urban band, 2026-10-01, ODQ §934.86.)
+    // 46 -> 47 at the druid rulings (2026-10-01, ODQ §934.86 addendum 2, J30–J33), measured.
+    expect(staleAtCloseout).toHaveLength(47);
     expect(staleWitness, 'no stale row was captured, so the refusal below proves nothing')
       .not.toBeNull();
     expect(() => assertPowerEconomyFreshness(
@@ -699,10 +710,12 @@ describe('EM-R3 — the power structure is final under a held pin', () => {
     expect(receiptKept, "the held receipt was recomputed inside generation").toHaveLength(rows.length);
     expect(identicalWithoutRefresher, 'the trace refresher moved the record under a held structure')
       .toHaveLength(rows.length);
-    // 41 of the 57: the desert world moves the fingerprint's own inputs in those rows, one more
-    // row is refused outright by the roster assert, and the rest reach the same fingerprint by
+    // 36 of the 57: the desert world moves the fingerprint's own inputs in those rows, ten more
+    // rows are refused outright by the roster assert, and the rest reach the same fingerprint by
     // arithmetic. What matters is that the replay DOES recompute this receipt when no pin is held.
-    expect(refreshedAway).toHaveLength(41);
+    // (41 with one refusal before the urban band, 2026-10-01, ODQ §934.86; A1's control counts the same ten.)
+    // 36 -> 37 at the druid rulings (2026-10-01, ODQ §934.86 addendum 2, J30–J33), measured.
+    expect(refreshedAway).toHaveLength(37);
 
     // ANTI-VACUITY (2): the refresher is not inert in general — skip it on an UNPINNED run and
     // the record moves, so the identity above is a property of the HELD path.

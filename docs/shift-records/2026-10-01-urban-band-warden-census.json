@@ -1,0 +1,34 @@
+{
+  "_doc": "THE THIRD RECORD OF THE URBAN BAND'S WINDOW, for the same druid rulings of 2026-10-01 (ODQ §934.86 addendum 2). It does not edit or supersede the second record, whose three acts stand. It covers J33, the census J31 owed: five readers still counted Warden's Lodge a druid or a caster in a magic world (the chains' druid tradition, druidic cultivation in both food readers, folk magic presence, the Druid Elder's seat) and two inert lists still named it. Every source change was committed first (the last at a1841d417). A successor chair does not inherit this signature.",
+  "ownerWords": "\"druid is magic. sorry. faith is not magic only applies to the institutions, but not divine magic substitute services. healing such as church or parish healing is an exception becasue that can also be mundane. You can keep druid, only if you exclude magical services in non magic settings\" · \"druid, in this case should then be paired as religious authorities in non magic settings.\" · \"this also means that their effect of food or defense does not exist in non magic settings.\" · \"Warden's Lodge stays defense, not druid\"",
+  "ownerDate": "2026-10-01",
+  "odqRow": "§934.86 addendum 2 of docs/OWNER_DECISION_QUEUE.md (DRUIDS IN A WORLD WITHOUT MAGIC, recorded 2026-10-01 on the ledger branch review-fixes-2026-07-08 at 381aa20a0)",
+  "cause": "ONE CAUSE: THE OWNER'S RULING 'Warden's Lodge stays defense, not druid', COMPLETED. The lodge leaves every druid and magic list; its mundane trades stay. In a magic world, a settlement holding a Warden's Lodge loses the druid tradition's chain substitution, druidic food cultivation, the folk-magic weight and a Druid Elder's seat that the lodge alone had opened; nothing else moves.",
+  "seat": "the urban-band chair, session 93391427 (Opus 5.5), executing every door write itself from the committed tree of feat/urban-band-institutions-2026-09-30, one surface per commit",
+  "surfaces": [
+    {
+      "surface": "generator-golden-master",
+      "action": "re-record",
+      "predictedRows": 525,
+      "proofForm": "settlement-hash"
+    },
+    {
+      "surface": "espionage-dormancy-fence",
+      "action": "re-record",
+      "predictedRows": 1,
+      "proofForm": "in-file corpus constant"
+    },
+    {
+      "surface": "dossier-prose-manifest",
+      "action": "re-record",
+      "predictedRows": 2,
+      "proofForm": "derived-artefact"
+    },
+    {
+      "surface": "herald-knowledge-desk-golden",
+      "action": "re-record",
+      "predictedRows": 400,
+      "proofForm": "derived-artefact"
+    }
+  ]
+}

@@ -77,13 +77,21 @@ const CONFLICTS = new Set();
 const MAGIC_LICENCE_BY_CATALOG_NAME = new Map();
 /** @type {Set<string>} */
 const LICENCE_CONFLICTS = new Set();
+/**
+ * THE DRUIDIC FAITH ROWS (J30): the Religious shelf's rows licensed `none` (TE-CH-6: Druid
+ * Circle, Elder Grove Council), each with its AUTHORED faction role. DERIVED here, never
+ * re-typed; urbanBandInstitutions G6 pins the members.
+ * @type {Map<string, string>}
+ */
+const DRUIDIC_FAITH_ROLE = new Map();
 
 for (const tiers of Object.values(institutionalCatalog || {})) {
-  for (const insts of Object.values(tiers || {})) {
+  for (const [shelf, insts] of Object.entries(tiers || {})) {
     for (const [name, def] of Object.entries(insts || {})) {
       const key = normName(name);
       if (!key) continue;
       const licence = normaliseMagicLicence(def?.magicLicense);
+      if (shelf === 'Religious' && licence === 'none') DRUIDIC_FAITH_ROLE.set(key, def.priorityCategory);
       if (licence !== null) {
         if (MAGIC_LICENCE_BY_CATALOG_NAME.has(key)) {
           if (MAGIC_LICENCE_BY_CATALOG_NAME.get(key) !== licence) LICENCE_CONFLICTS.add(key);
@@ -127,6 +135,19 @@ export function institutionCatalogMagicLicence(name) {
   const key = normName(name);
   if (!key) return null;
   return MAGIC_LICENCE_BY_CATALOG_NAME.get(key) ?? null;
+}
+
+/**
+ * The faction role a druidic faith row carries in THIS world, or null for every other name.
+ * The owner, 2026-10-01: "druid is magic" and "druid, in this case should then be paired as
+ * religious authorities in non magic settings". Where magic works the row keeps its authored
+ * role; where it does not, it is a priesthood and pairs with the religious authorities.
+ * @param {unknown} name @param {boolean} magicEnabled the world law's own reading
+ * @returns {string|null}
+ */
+export function druidicFaithRole(name, magicEnabled) {
+  const authored = DRUIDIC_FAITH_ROLE.get(normName(name));
+  return authored === undefined ? null : magicEnabled ? authored : 'religion';
 }
 
 /** Catalog names whose tiers declare different licences — must stay empty. */

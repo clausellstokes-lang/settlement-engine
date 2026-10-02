@@ -147,6 +147,7 @@ export const INSTITUTION_DEFAULT_CATEGORY = {
   Waystation: 'lodging',
   'Housing (180-1000 structures)': 'lodging',
   'Housing (1000-5000 structures)': 'lodging',
+  'Housing (5000+ structures)': 'lodging',
   'Dwellings (4-16)': 'lodging',
   'Dwellings (17-80)': 'lodging',
   'Dwellings (80-180)': 'lodging',

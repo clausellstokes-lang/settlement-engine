@@ -63,7 +63,9 @@ import { renormalizeFactionPower } from '../../src/generators/power/rulingStruct
 import { goldenCorpus, keyOf } from '../helpers/goldenMasterCorpus.js';
 
 /** The corpus IS the battery: MEASURED under the runner, the census arm 22.8 s, the value arm
- *  20.5 s and the ordered-pair census 305.6 s, the file 350.7 s end to end. */
+ *  20.5 s and the ordered-pair census 305.6 s, the file 350.7 s end to end. RE-MEASURED 2026-10-01 after the
+ *  pair census was cached by prefix: the census arm 20.5 s, the value arm 19.2 s, the ordered-pair census
+ *  156.9 s (was 324.5 s at the same tip, and a 600 s TIMEOUT under full-suite load), the file 198.3 s. */
 const ARM_TIMEOUT = 600_000;
 const ROOT = process.cwd();
 /** The injected handles, built the way `src/store/settlementRederiveAction.js` builds them. */
@@ -215,19 +217,29 @@ function readDeclared(record, outputKey, anchor) {
   return { found: true, value: node };
 }
 
+/** A chain's starting state: the town as generated, and its dormant re-derivation as R0. */
+function startChain(town) {
+  return { record: clone(town.base), R0: rederive(town.base, town.cfg, EMPTY_DM_LAYER, ENGINE, CONSULT).record, roots: [], rideAlong: 0 };
+}
+/** One edit merged ALONE against the town as it then stands, the layer ACCUMULATING. Pure over its
+ *  state: the plan clones the record it is handed and the merge is handed clones, so a state can be
+ *  stepped from more than once (the pair census below relies on exactly that). */
+function stepChain(town, state, label) {
+  const plan = EDITS.find(([id]) => id === label)[2](state.record, town.cfg);
+  if (plan === null) return null;
+  const roots = [...state.roots, ...plan.roots];
+  const R1 = rederive(plan.rec, town.cfg, layerOf(roots), ENGINE, CONSULT).record;
+  const out = mergeConsequence(plan.rec, clone(state.R0), clone(R1), { edit: { id: label, opType: label } });
+  return { record: out.record, R0: out.delta.nextBase, roots, rideAlong: state.rideAlong + out.delta.honesty.rideAlong };
+}
 /** A chain: each edit merged ALONE against the town as it then stands, the layer ACCUMULATING. */
 function runChain(town, labels) {
-  let record = clone(town.base); let roots = []; let rideAlong = 0;
-  let R0 = rederive(town.base, town.cfg, EMPTY_DM_LAYER, ENGINE, CONSULT).record;
+  let state = startChain(town);
   for (const label of labels) {
-    const plan = EDITS.find(([id]) => id === label)[2](record, town.cfg);
-    if (plan === null) return null;
-    roots = [...roots, ...plan.roots];
-    const R1 = rederive(plan.rec, town.cfg, layerOf(roots), ENGINE, CONSULT).record;
-    const out = mergeConsequence(plan.rec, clone(R0), clone(R1), { edit: { id: label, opType: label } });
-    record = out.record; R0 = out.delta.nextBase; rideAlong += out.delta.honesty.rideAlong;
+    state = stepChain(town, state, label);
+    if (state === null) return null;
   }
-  return { record, rideAlong };
+  return { record: state.record, rideAlong: state.rideAlong };
 }
 const SEQUENCES = Object.freeze([['E1', 'E5'], ['E5', 'E6'], ['E3', 'E5'], ['E2', 'E6']]);
 const UNDO_EDITS = Object.freeze(['E2', 'E5']);
@@ -249,9 +261,18 @@ function chainCensus() {
       out.undoTrials += 1;
       if (h(first.record) !== h(again.record)) out.undoDrifted.push(`${town.key}:${label}`);
     }
+    // ⭐ CACHED BY PREFIX (2026-10-01): the starting R0 and each single-edit state are computed ONCE
+    // per town and stepped from for all thirty ordered pairs, where every pair used to re-derive both.
+    // Measured alone this arm was 325 s and it timed out at 600 s under full-suite load; `stepChain` is
+    // pure over its state, so the census figures are unchanged (A5 and A7 hold them). The determinism
+    // and undo arms above still run their chains twice, independently, which is their whole point.
+    const start = startChain(town);
+    const firsts = new Map(PAIR_EDITS.map((label) => [label, stepChain(town, start, label)]));
     for (const first of PAIR_EDITS) for (const second of PAIR_EDITS) {
       if (first === second) continue;
-      const forward = runChain(town, [first, second]); const backward = runChain(town, [second, first]);
+      const fromFirst = firsts.get(first); const fromSecond = firsts.get(second);
+      const forward = fromFirst === null ? null : stepChain(town, fromFirst, second);
+      const backward = fromSecond === null ? null : stepChain(town, fromSecond, first);
       if (forward === null || backward === null) continue;
       out.pairTrials += 1;
       if (forward.rideAlong > 0) { out.rideAlongChains += 1; out.rideAlongLeaves += forward.rideAlong; }
@@ -328,7 +349,8 @@ describe('the edit corpus ratchet: the re-entry seam and the merge over the 63-r
     // anchored: the zero is a MEASUREMENT and not a pass — the settled receipt has no population on
     // the single-edit corpus, so the ratchet cannot fire here and the arm says so in its own breath.
     expect(census().rows.filter((row) => row.settledLive > 0).length).toBe(0);
-    expect(census().rows.filter((row) => row.takenLive > 0).length, 'the instrument is not idle').toBe(213);
+    // 2026-10-01 (the urban band + the druid rulings, ODQ §934.86 and its addendum 2; the urban-band chair, measured against the pre-band base 5d699cc68, where this file is 8/8): 213 → 220.
+    expect(census().rows.filter((row) => row.takenLive > 0).length, 'the instrument is not idle').toBe(220);
     expect(census().rows.filter((row) => row.groupsJudged > 0).length, 'declared groups ARE judged').toBe(98);
     // THE POSITIVE CONTROL, CONSTRUCTED: one object holding a leaf taken from R1 beside a leaf kept
     // where the record had settled away from R0 IS a MIXED object, and enclosingGroup classes it.
@@ -352,15 +374,18 @@ describe('the edit corpus ratchet: the re-entry seam and the merge over the 63-r
     expect(census().rows.flatMap((row) => row.arrived)).toEqual([]);
     // the ONLY held motion left is the register's own declared RECEIPT, on the config channel
     expect(HELD_EXCEPTIONS).toEqual(['powerStructure.economyInputFingerprint', 'factions[].members[]']);
-    expect(tally(census().rows.filter((row) => row.declaredOnly.length > 0).map((row) => row.label))).toEqual({ E7: 42, E8: 2 });
+    // 2026-10-01 (the urban band + the druid rulings, ODQ §934.86 and its addendum 2; the urban-band chair, measured against the pre-band base 5d699cc68, where this file is 8/8): declared-only {E7 42, E8 2} → {47, 7};
+    // config escalation rows {31, 17} → {30, 10} and steps {136, 76} → {132, 40}, every one still EXHAUSTED; the live residue
+    // 48 → 40 rows, V-DEFENSE-INST 31 → 35 and V-EVIDENCE-CONFLICT 22 → 8 (mergeLadderHeldKeys A2 reads the same re-deal).
+    expect(tally(census().rows.filter((row) => row.declaredOnly.length > 0).map((row) => row.label))).toEqual({ E7: 47, E8: 7 });
     // anchored: the layer channel is clean on all three counts, and a widening reds here.
     expect(layerRows.filter((row) => row.escalations.length > 0)).toEqual([]);
     expect(layerRows.filter((row) => row.live.length > 0)).toEqual([]);
-    expect(tally(configRows.filter((row) => row.escalations.length > 0).map((row) => row.label))).toEqual({ E7: 31, E8: 17 });
-    expect(tally(configRows.flatMap((row) => Array(row.escalations.length).fill(row.label)))).toEqual({ E7: 136, E8: 76 });
-    expect(tally(configRows.filter((row) => row.escalations.some((each) => each.step === 'EXHAUSTED')).map((row) => row.label))).toEqual({ E7: 31, E8: 17 });
-    expect(census().rows.filter((row) => row.live.length > 0).length, 'EM-B2b seam, asserted AT the figure').toBe(48);
-    expect(tally(census().rows.flatMap((row) => row.live))).toEqual({ 'V-DEFENSE-INST': 31, 'V-EVIDENCE-CONFLICT': 22 });
+    expect(tally(configRows.filter((row) => row.escalations.length > 0).map((row) => row.label))).toEqual({ E7: 30, E8: 10 });
+    expect(tally(configRows.flatMap((row) => Array(row.escalations.length).fill(row.label)))).toEqual({ E7: 132, E8: 40 });
+    expect(tally(configRows.filter((row) => row.escalations.some((each) => each.step === 'EXHAUSTED')).map((row) => row.label))).toEqual({ E7: 30, E8: 10 });
+    expect(census().rows.filter((row) => row.live.length > 0).length, 'EM-B2b seam, asserted AT the figure').toBe(40);
+    expect(tally(census().rows.flatMap((row) => row.live))).toEqual({ 'V-DEFENSE-INST': 35, 'V-EVIDENCE-CONFLICT': 8 });
   }, ARM_TIMEOUT);
 
   it('A5 a chain is deterministic, undo then re-edit reproduces the town, and the ordered pairs are counted', () => {
@@ -369,14 +394,19 @@ describe('the edit corpus ratchet: the re-entry seam and the merge over the 63-r
     expect(chains().undoDrifted).toEqual([]);
     expect([chains().determinism, chains().undoTrials, chains().pairTrials]).toEqual([252, 126, 1890]);
     // section 22.2 item 6's history, counted and NAMED rather than smoothed away
-    expect(tally(chains().pairs)).toEqual({ 'E1|E6': 1, 'E2|E6': 1, 'E6|E1': 1, 'E6|E2': 1 });
+    // 2026-10-01 (the urban band + the druid rulings, ODQ §934.86 and its addendum 2; the urban-band chair, measured against the pre-band base 5d699cc68, where this file is 8/8): the four non-commuting pairs move from the SEAT
+    // edit (E6) to the SHARE edit (E5), and the disagreement is still TRACE-ONLY. Probed both ways: on
+    // town|germanic|plains|road|civilized|gm-seed-c, E1|E5 and E2|E5 differ ONLY in simulationTrace[92..93], the relationship
+    // derivation's narrative ("25 edges" | "23 edges", "Direct=1 … scatter=0" | "Direct=0 …"); every world field is identical
+    // in both orders. At the base the seat pairs differed in exactly that kind of trace reason on gm-seed-a's town.
+    expect(tally(chains().pairs)).toEqual({ 'E1|E5': 1, 'E2|E5': 1, 'E5|E1': 1, 'E5|E2': 1 });
     expect(() => mergeConsequence({}, {}, {}, { edit: [] })).toThrow(TypeError);
   }, ARM_TIMEOUT);
 
   it('A6 the order rule second arm is zero on the layer channel and counted on the config channel', () => {
     // anchored: the layer channel moves no key order at all, and a regression there is a real defect.
     expect(byChannel('layer', 'membership').filter((row) => row.orderMoved.length > 0)).toEqual([]);
-    expect(byChannel('config').filter((row) => row.orderMoved.length > 0).length, 'a counted diagnostic with a LIVE population, so the branch is not asserted on nothing').toBe(51);
+    expect(byChannel('config').filter((row) => row.orderMoved.length > 0).length, 'a counted diagnostic with a LIVE population, so the branch is not asserted on nothing').toBe(54); // 2026-10-01: 51 → 54, the same re-deal
   }, ARM_TIMEOUT);
 
   it('A7 the honesty figures are re-measured and the ride-along has its first population in the chain', () => {
@@ -384,12 +414,14 @@ describe('the edit corpus ratchet: the re-entry seam and the merge over the 63-r
     // anchored: rideAlong is a subset of settled and taken; on a FIRST edit R0 IS the record, so
     // nothing has settled and the figure is structurally zero rather than an absent instrument.
     expect(census().rows.reduce((sum, row) => sum + row.honesty.rideAlong, 0)).toBe(0);
-    expect([taken.E1, taken.E5, taken.E6], 'the edits that DO reach a reading').toEqual([677, 389, 746]);
+    // 2026-10-01 (the urban band + the druid rulings, ODQ §934.86 and its addendum 2; the urban-band chair, measured against the pre-band base 5d699cc68, where this file is 8/8): [677, 389, 746] → [719, 211, 926], and the
+    // ride-along's chain population [11, 11] → [12, 12] below.
+    expect([taken.E1, taken.E5, taken.E6], 'the edits that DO reach a reading').toEqual([719, 211, 926]);
     // an npc ROLE reaches ZERO readings over the whole corpus, recorded so the zero is not silence
     expect([taken.E2, taken.E3, taken.E4], 'a role and a dormant membership edit reach none').toEqual([0, 0, 0]);
     // AND THE MACHINERY'S FIRST POPULATION, in the chain: the restatement at the first merge lets
     // the record settle away from R0 at a leaf, so the second merge's receipts carry a ride-along.
-    expect([chains().rideAlongChains, chains().rideAlongLeaves], 'the honesty machinery firing').toEqual([11, 11]);
+    expect([chains().rideAlongChains, chains().rideAlongLeaves], 'the honesty machinery firing').toEqual([12, 12]);
   }, ARM_TIMEOUT);
 
   it('A8 the family declared instruments hold at this seam', () => {
@@ -409,14 +441,18 @@ describe('the edit corpus ratchet: the re-entry seam and the merge over the 63-r
     // ONE plainly generated record that carries a violation is NAMED rather than smoothed away.
     // It reproduces unchanged at train EM-T16's landed tip, so it is the generator's own
     // prose-count residue and not this seam's; the census exempts it wherever it is pre-existing.
-    expect(dirty).toEqual([{ key: 'town|germanic|mountain|mountain_pass|civilized|golden-master-v3', ids: ['V-SUMMARY-DEPS'] }]);
+    // 2026-10-01 (the urban band + the druid rulings, ODQ §934.86 and its addendum 2; the urban-band chair, measured against the pre-band base 5d699cc68, where this file is 8/8): THE SWEEP IS NOW 63 OF 63. The mountain town's
+    // V-SUMMARY-DEPS residue no longer reproduces on the re-dealt record (recordInvariants' own A1 records the same cure).
+    expect(dirty).toEqual([]);
     // anchored: the emitted label and the ladder's own measurement agree on every one of the 126
     // scores, so a ladder cut that drifted from the producer that emits its label reds here.
     expect(bands).toEqual([]);
-    expect([witnessed.legitimacy.size, witnessed.readiness.size], 'the scores are WITNESSED, not assumed').toEqual([25, 34]);
+    // 2026-10-01 (the urban band + the druid rulings, ODQ §934.86 and its addendum 2; the urban-band chair, measured against the pre-band base 5d699cc68, where this file is 8/8): the witnessed sets widen, 25/34 → 28/37;
+    // legitimacy now reaches 0 (the clamped village the V-LEGIT-SUM check mirrors) and readiness spans 8..82 (was 11..81).
+    expect([witnessed.legitimacy.size, witnessed.readiness.size], 'the scores are WITNESSED, not assumed').toEqual([28, 37]);
     // (b) the witnessed score set of the ladders, RECORDED (charter addenda 71 and 73)
-    expect([Math.min(...witnessed.legitimacy), Math.max(...witnessed.legitimacy)]).toEqual([1, 75]);
-    expect([Math.min(...witnessed.readiness), Math.max(...witnessed.readiness)]).toEqual([11, 81]);
+    expect([Math.min(...witnessed.legitimacy), Math.max(...witnessed.legitimacy)]).toEqual([0, 75]);
+    expect([Math.min(...witnessed.readiness), Math.max(...witnessed.readiness)]).toEqual([8, 82]);
     // (c) the duplicated-leaf sweep, RECORDED (charter addendum 38), over the table's own producer
     const leafReaders = {};
     for (const [id, meta] of Object.entries(CHECK_META)) for (const path of meta.paths || []) leafReaders[path] = [...(leafReaders[path] || []), id];
@@ -427,7 +463,9 @@ describe('the edit corpus ratchet: the re-entry seam and the merge over the 63-r
     // (d) THE TWO-SIDED `readable` LAW. EXIT 1, the DECLARED ledger: every row declares the field,
     // exactly one is true, and its ONE consumer RESOLVES that path rather than spelling it — the
     // import above is the proof, because institutionRemoval.js throws at import on any other count.
-    expect([INSTITUTION_NON_CASCADED.length, declaring(INSTITUTION_NON_CASCADED).length]).toEqual([15, 15]);
+    // 2026-10-01 (the urban band, ODQ §934.86): 15 → 22, the seven faction-ledger paths the window declared NON-CASCADED in
+    // institutionRename.js (J16's two, then the five that hold 'Democratic assembly'), every one declaring `readable`.
+    expect([INSTITUTION_NON_CASCADED.length, declaring(INSTITUTION_NON_CASCADED).length]).toEqual([22, 22]);
     expect(INSTITUTION_NON_CASCADED.filter((row) => row.kind === 'matched-pattern' && row.readable).map((row) => row.path)).toEqual(['economicState.activeChains[].processingInstitutions[]']);
     expect(typeof institutionRemovalChanges).toBe('function');
     // EXIT 2, the UNDECLARED ledger: EM-R6's LANDED ruling is that none of its rows has a reader,

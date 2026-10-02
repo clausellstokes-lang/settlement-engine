@@ -1900,7 +1900,9 @@ describe('SEAM car 5b — THE HOLDER CENSUS: the source of each construction (SI
       && sourceOfForTown(row, town).standing === 'INTERESTED')).toEqual([]);
     expect(interested.every((row) => row.source.stateOrgan === true),
       'every interested row names a state organ').toBe(true);
-    expect(interested.length, 'the licensed rows this captured city makes interested').toBe(16);
+    // 16 -> 23 on 2026-09-30 (the urban band, ODQ §934.86): the city's complete block seats more
+    // institutions that keep a state organ's record, so more licensed rows find a holder here.
+    expect(interested.length, 'the licensed rows this captured city makes interested').toBe(23);
     // THE MARK NAMES ITS GROUND rather than asserting a standing nobody can trace.
     const one = sourceOfForTown(interested[0], town);
     expect(one.standing).toBe('INTERESTED');

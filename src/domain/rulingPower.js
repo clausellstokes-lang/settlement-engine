@@ -441,9 +441,17 @@ function resolveGovernmentLabel(archetype, tier, factions, governing, incumbentS
   // demotion the old house stays on the roster under its own name, so excluding it
   // would let a CIVIC winner over a 'Town Council' seat produce two rows both called
   // 'Town Council' — one polity, two identical names, and nothing would have thrown.
+  // ⚠ AND THE OUTGOING SEAT'S OWN NAME IS NEVER REUSED (2026-09-30): a change of government
+  // that hands the seat the label it already bore is a re-spelling, not a new body. The
+  // collision was latent until the urban band let 'Royal seat' govern (ODQ §934.86): a
+  // noble house that took a 'Royal Authority' metropolis came out as 'Royal Authority'
+  // (tests/domain/warSeatBooksFactionAddress.test.js PIN-3). It now falls to the alternate,
+  // the same path the surviving-incumbent guard above already takes.
   const names = factions.filter(f => f !== governing || incumbentSurvives)
     .map(f => nameOf(f).toLowerCase()).filter(Boolean);
-  const takenBy = (/** @type {string} */ label) => names.some(n => n === label.toLowerCase() || n.includes(label.toLowerCase()));
+  const outgoing = governing ? nameOf(governing).toLowerCase() : '';
+  const takenBy = (/** @type {string} */ label) => outgoing === label.toLowerCase()
+    || names.some(n => n === label.toLowerCase() || n.includes(label.toLowerCase()));
   if (!takenBy(preferred)) return preferred;
   const alt = ALT_GOVERNMENT_LABELS[archetype];
   if (alt && !takenBy(alt)) return alt;

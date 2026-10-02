@@ -203,7 +203,9 @@ describe('the habitat is gone', () => {
       + 'not the same field'],
     ['src/data/geographyData.js', 'authored CONTENT strings that contain band words'],
     ['src/data/institutionServices.js', 'authored CONTENT strings that contain band words'],
-    ['src/data/institutionalCatalog.js', 'authored CONTENT strings that contain band words'],
+    // (src/data/institutionalCatalog.js left this list on 2026-09-30: the urban-band registry
+    // writes its rows one entry per line, so no band word in authored prose sits near a number
+    // any more, and the stale exemption reds by design. The file carries no private ladder.)
   ]);
   const EXEMPT_FILES = new Set(EXEMPT.map(([rel]) => rel));
 

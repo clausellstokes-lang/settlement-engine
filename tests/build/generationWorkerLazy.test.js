@@ -246,7 +246,29 @@ const SENTINEL = 'settlementforge:generation:worker-v1';
 // (generation.worker-MbKUCYhb.js), CI run 35892227226's figure to the byte and the chunk name; the cured build reads
 // 1,391,256 B (generation.worker-DusCNPis.js) = -216 B, and esbuild's per-module pricing predicted -212 B. The
 // ceiling follows the measurement DOWN and stays MONOTONE-DOWN from this value.
-export const WORKER_BUNDLE_CEILING_BYTES = 1391256;
+// 1,391,256 -> 1,423,431 (2026-10-01, the urban-band chair UNDER THE OWNER'S WORD, ODQ §934.86): A RISE, AND IT
+// IS THE OWNER'S, TAKEN BY THE OWNER'S OWN WORD IN CHAT (2026-09-30, "I defer all judgment to you", given in answer to this
+// exact question) — never a lane's edit. The cause is the content the owner approved: the institution catalog became
+// a registry of 179 families and 518 tier entries (215 new tier entries, 28 new descriptions with their variants), plus
+// MF-CH2B's licence reads and the window's cure (J19-J24, the verifier's fixes). Every byte that could go WAS BOUGHT
+// BACK FIRST (4fccffd60: each repeated description and each variant pair spelled once, every derived structure
+// fingerprint-identical): the combined tip read 1,475,470 B, the buy-back 1,422,127 B, and the window's final source
+// 1,423,431 B on a fresh `vite build` (generation.worker-DCUBvpYr.js). The ceiling follows that measurement to the byte
+// and stays MONOTONE-DOWN from here.
+// 1,423,431 -> 1,423,648 (2026-10-01, the urban-band chair, UNDER THE SAME WORD, ODQ §934.86 addendum 2): A RISE OF 217 B, and
+// its cause is the content the owner ordered in this chat ("druid is magic" … "Warden's Lodge stays defense, not druid"): J30's
+// druid faith role, its chokepoint stamp and its chain idle, and J32's world-law read and the wardens' mundane term. The owner's
+// "I defer all judgment to you" was given in answer to this exact question (J29), and the rise is taken under it, VETOABLE.
+// Measured: a control build at 4b86da68a reproduced 1,423,431 B (generation.worker-DCUBvpYr.js); J30–J32 read 1,423,786 B;
+// the buy-back (731e19597: one world-law resolution, J30's redundant gate folded) and J33's seven list trims bought 138 B back;
+// the window's final source reads 1,423,648 B (generation.worker-TUOc-4XJ.js) on a fresh `vite build`. MONOTONE-DOWN from here.
+// 1,423,648 -> 1,423,600 (2026-10-01, the urban-band chair): DOWN 48 B, the monotone-down rule followed. FIX-G1 (4f4747a2b)
+// counts the published dependency list at one site; a fresh `vite build` reads 1,423,600 B (generation.worker-BXVm63G5.js).
+// 1,423,600 -> 1,416,569 (2026-10-01, the urban-band chair): DOWN 7,031 B, the monotone-down rule followed, and the owner's
+// rise above now funds only bytes still spent. The registry's first-paint buy-back (each value spelled once; every export
+// identical across its 518 rows; tests/build/vendorPdfLazy.test.js) shrinks the worker with it: a fresh `vite build` reads
+// 1,416,569 B (generation.worker-BZWdxs0z.js).
+export const WORKER_BUNDLE_CEILING_BYTES = 1416569;
 
 const source = (path) => readFileSync(join(ROOT, path), 'utf8');
 

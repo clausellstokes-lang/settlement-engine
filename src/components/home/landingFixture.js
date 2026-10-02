@@ -77,7 +77,7 @@ export const fixture = {
     "tier": "village",
     "eyebrow": "road village · mountain",
     "prose": "Cnocby smells like bread from the gate: a bakehouse near the entrance, open early, already on the second bake of the day. A proper village, large enough to have a market and small enough that strangers are noticed: earth-banked enclosures and older rounded foundations remain visible between newer halls.",
-    "pressure": "Odhrán MacCarthy's relationship with Nuada Walsh is more complicated than their public roles suggest. Nuada Walsh now operates in ways Odhrán MacCarthy would not approve of. Neither discusses the divergence directly.",
+    "pressure": "Donnchadh Brennan now operates in ways Odhrán MacCarthy would not approve of. Neither discusses the divergence directly.",
     "hooks": [
       {
         "kind": "NPC",
@@ -87,20 +87,17 @@ export const fixture = {
         "rest": " · goal: use current stability to address structural vulnerabilities before conditions change."
       },
       {
-        "kind": "Hook",
-        "tone": "warning",
-        "tag": "derived · factions",
-        "text": "A neutral figure is being pressured by both The Grey Council and The Establishment to take a side before the next council session."
+        "kind": "NPC",
+        "tone": "success",
+        "tag": "derived · npcs",
+        "lead": "Rónnat Sullivan, lord/lady of the manor",
+        "rest": " · goal: use current stability to address structural vulnerabilities before conditions change."
       }
     ],
-    "hooksMore": 7
+    "hooksMore": 5
   },
   "voice": {
     "receipts": [
-      {
-        "label": "conflict",
-        "text": "The Grey Council × The Establishment · control of the market licensing process · stakes: commercial supremacy"
-      },
       {
         "label": "route",
         "text": "road · Picked from coherence-safe pool: road, road, road, isolated, isolated."
@@ -114,7 +111,7 @@ export const fixture = {
         "text": "travelers_inn · selected (Base chance 59% lifted by ×1.01 from nearby resources + terrain.)"
       }
     ],
-    "narrated": "The road made Cnocby by a coin’s width, three chances of it against two of nothing, and the mountain stands that raised the travelers’ inn are being cleared faster than they grow back. What is left worth holding is the licence book: the Grey Council and the Establishment both want the market licensing, and both are leaning on the same neutral name to declare before the session. The mayor still means to mend the structure while the weather holds. His own man no longer does what he would approve of, and neither of them says so."
+    "narrated": "The road made Cnocby by a coin’s width, three chances of it against two of nothing, and the mountain stands that raised the travelers’ inn are being cleared faster than they grow back. The mayor still means to mend the structure while the weather holds. His own man no longer does what he would approve of, and neither of them says so."
   },
   "realm": {
     "whyTrace": [
@@ -130,7 +127,7 @@ export const fixture = {
         "from": "strained",
         "to": "adequate",
         "tone": "success",
-        "reason": "Vael (major) anchors religious authority (piety ×1.35). Religious Authorities carries power 13."
+        "reason": "Vael (major) anchors religious authority (piety ×1.36). Religious Authorities carries power 14."
       },
       {
         "axis": "Social trust",

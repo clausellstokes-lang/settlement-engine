@@ -545,7 +545,10 @@ export function DefenseTab({ settlement:r, narrativeNote, publicDossier = false,
         <Button variant="ghost" fullWidth aria-expanded={showForces} onClick={()=>setShowForces(v=>!v)} style={{justifyContent:'space-between',padding:'8px 0',borderColor:'transparent',borderBottom:'1px solid #e0d0b0',borderRadius:0,marginBottom:showForces?10:0,WebkitTapHighlightColor:'transparent'}}>
           <span style={{...serif,fontSize: FS['16'],fontWeight:600,color:swatch.inkMag}}>
             Armed Forces & Fortifications
-            <span style={{fontSize:FS.sm,fontWeight:400,color:MUTED,marginLeft:8}}>
+            {/* A tally, not a sentence: marked chrome and sized by the chrome helper (2026-09-30: a
+                town with walls, forces, a mercenary company, a charter and an arcane post ran it past
+                the phone walk's 45 characters at a raw 12px). */}
+            <span data-sf-chrome style={{fontSize:chromeFontSize(FS.sm, isMobile),fontWeight:400,color:MUTED,marginLeft:8}}>
               {walls.length>0&&`${walls.length} wall${walls.length>1?'s':''}  `}
               {mainForces.length>0&&`${mainForces.length} force${mainForces.length>1?'s':''}  `}
               {mercForces.length>0&&`${mercForces.length} mercenary  `}
