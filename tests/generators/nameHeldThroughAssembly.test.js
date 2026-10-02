@@ -11,8 +11,8 @@
  * no persisted summary can name a town the record does not carry.
  *
  * ⭐ WHY CONSUME AND DISCARD, AND NOT A SKIP (design §22.1 correction 1; §22.2 ruling 11). The
- * mint's two draws land on the ASSEMBLY STEP'S OWN ambient stream, which the pressure sentence
- * and the arrival scene read one to three draws later — not on a named child stream of its own,
+ * mint's two draws land on the ASSEMBLY STEP'S OWN ambient stream (the pressure sentence and the
+ * arrival scene read it until the Voice Program wave 2 gave each a child stream) — not on its own,
  * which is the only place §22.1 admits a skip. A2 prices that: `chooseOrPin` does not advance the
  * stream when a pin is present, so a consult WRAPPING the mint would spend zero where the mint
  * spends two, and the step's whole later phase moves. A3 is the arm that convicts it, and a
