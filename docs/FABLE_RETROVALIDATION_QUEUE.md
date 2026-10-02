@@ -3921,3 +3921,10 @@ No Opus car landed in this act. The twelve rulings, the two recorded owner words
 *Receipts:* CI run 36939893138 (the failed job and its re-run), the base-versus-tip graph count, and ODQ §934.86 addendum 6.
 *Priority:* P3.
 **Status:** enrolled.
+
+### R102 — the native-layer switch measurement and how its choice was framed (Opus 5.5 seat; ODQ §934.87; no code)
+*What was judged:* (a) the instrument: DOM reads of FMG's own groups plus a pixel diff of the map, with a noise floor and a positive control (Biomes); (b) measuring on master as representative of the FP line, on the evidence that the map files are byte-identical; (c) widening the owner's question from State borders to Culture regions as the same class; (d) the sovereignty-bloc design input (16 realms × 24 ticks), whose first run was blind on the wrong patron field and was re-run after a liveness check caught it.
+*What Fable re-derives:* whether 2 tones × 2 sizes × 4 seeds is a representative sample for the bloc counts, and whether the realm-borders lens should be a mode of the Territory lens or its own switch.
+*Receipts:* ODQ §934.87; the kit `/Users/cstokes/Desktop/settlement-engine-kits/realm-borders-2a96255d-2026-10-02/` (probe sources, results.json, blocs2.log, screenshots).
+*Priority:* P3.
+**Status:** enrolled.
