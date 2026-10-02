@@ -91,6 +91,9 @@ export const GRAMMAR_RECEIPTS = Object.freeze({
     'The clerks recopy it when the ink fades, and nothing in the wording has ever changed in the recopying.',
     'Old enough that the roads it opened are simply the roads now.',
     (x) => `Sworn in a year the elders in ${x.counterpart} still name for its winter, and kept every year since.`,
+    (x) => `${x.band} these terms have held, and neither court has yet had to keep them at a cost.`,
+    (x) => `${x.band} since the signing; in ${x.settlement} and in ${x.counterpart} the clerks are still copying out the terms.`,
+    'Both courts keep a sealed copy, and both copies still agree.',
   ],
   treaty_true_state_chip: [
     (x) => `On parchment the ${x.term} is honored; in fact ${x.settlement} has sent less than it swore for ${x.band} seasons, and nobody across the border has weighed it.`,

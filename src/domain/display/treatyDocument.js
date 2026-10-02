@@ -29,7 +29,9 @@ import { treatyDocument, treatyDocumentsForSettlement, treatyLedgerOf, termLabel
 // the ONLY read in this module that touches ground truth, and it is fail-closed: without
 // `includeGroundTruth` it returns null before it reads a single term.
 import { grammarReceipt, grammarSlotRoles } from '../worldPulse/grammarNews.js';
-import { treatyAgeBandWord, treatyAgeClass } from '../worldPulse/treatyLifecycleVoice.js';
+import {
+  TREATY_SUBYEAR_CLASS, treatyAgeBandWord, treatyAgeClass, treatyAgeWeeks, treatySubYearBandWord,
+} from '../worldPulse/treatyLifecycleVoice.js';
 // THE ONE ORIENTATION READER (CR-WR10-G), and it is load-bearing here rather than tidy:
 // the GRAMMAR pools bind their party slots to the OBLIGATION axis (who owes, who is
 // owed), which on a war settlement matches the document's receiver/giver pair and on a
@@ -180,16 +182,25 @@ export function treatyStrainLine(family, complianceState) {
  * @param {{ pairKey?: unknown, signedTick?: unknown, ageYears?: unknown }} doc
  * @param {Record<string, unknown> | null | undefined} [treaty] the raw record, for its
  *   obligation axis; omitted, the line falls to its party-free families.
+ * @param {number} [tick] the world's tick, for an age below a year (TREATY-VOICE-2 U2).
  * @returns {string | null}
  */
-export function treatyAgeLine(doc, treaty) {
+export function treatyAgeLine(doc, treaty, tick) {
   const ageYears = Number(doc?.ageYears);
   if (!Number.isFinite(ageYears)) return null;
+  // BELOW A YEAR (TREATY-VOICE-2 U2): the whole-year read is zero, so the line speaks weeks and
+  // seasons through its own class. Without the world's tick the age is still honestly "less than
+  // a year", never "a few years".
+  const subYear = ageYears < 1;
+  const band = !subYear ? treatyAgeBandWord(ageYears)
+    : Number.isFinite(Number(tick))
+      ? treatySubYearBandWord(treatyAgeWeeks(treaty || { mintedTick: doc.signedTick }, Number(tick)))
+      : 'less than a year';
   const receipt = grammarReceipt(
     'treaty_age_line',
     `${String(doc.pairKey || '')}.${Number(doc.signedTick) || 0}`,
-    { ...partySlots('treaty_age_line', treaty), band: treatyAgeBandWord(ageYears) },
-    treatyAgeClass(ageYears),
+    { ...partySlots('treaty_age_line', treaty), band },
+    subYear ? TREATY_SUBYEAR_CLASS : treatyAgeClass(ageYears),
   );
   return receipt ? receipt.line : null;
 }
@@ -368,7 +379,7 @@ function decorate(doc, treaty = null, worldState = null) {
     coalitionLine,
     // GR-0 THE LONGEVITY VOICE. Null while the flag is dark, because the read-model
     // carries no `ageYears` then — one gate, read once, upstream of every surface.
-    ageLine: treatyAgeLine(doc, treaty),
+    ageLine: treatyAgeLine(doc, treaty, Number(/** @type {{ tick?: unknown }} */ (worldState || {}).tick)),
     // GR-4b-iii-b THE OPEN-QUESTION DOSSIER LINE. ALWAYS PRESENT and `[]` when nothing
     // qualifies — not a style choice: treatyLifecycleVoiceDormancyFence.test.js asserts the
     // lit read-model grows exactly the key set ['ageYears'] over the dark one and that every

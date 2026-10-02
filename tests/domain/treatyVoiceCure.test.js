@@ -21,7 +21,9 @@ import {
 } from '../../src/domain/worldPulse/pactFormation.js';
 import { advanceTreaties, treatyPairKey, TERM_CATALOG } from '../../src/domain/worldPulse/peaceTerms.js';
 import { getSpatialLedger } from '../../src/domain/spatial/distanceRead.js';
-import { renderTreatyDocument } from '../../src/domain/display/treatyDocument.js';
+import { renderTreatyDocument, treatyAgeLine } from '../../src/domain/display/treatyDocument.js';
+import { TREATY_SUBYEAR_BANDS, treatyAgeWeeks, treatySubYearBandWord } from '../../src/domain/worldPulse/treatyLifecycleVoice.js';
+import { GRAMMAR_RECEIPTS } from '../../src/domain/worldPulse/grammarReceiptPools.js';
 import { expectAbsentWithAnchor } from '../helpers/anchoredNegatives.js';
 import { DUE_TICK, OPEN_TICK, pactSnapshot, pactWorld } from '../helpers/pactFixture.js';
 
@@ -164,6 +166,49 @@ describe('TREATY-VOICE-2 U1 — a pact signed in peace is titled by its two cour
     const doc = renderTreatyDocument(worldWith(war, { tick: 12 }), PACT_KEY);
     expect(doc.title).toBe('The Peace of Irontown');
     expectAbsentWithAnchor(Object.keys(doc), 'partyNames', 'title', 'the war document rendered its title, so the missing pact key is the drop-when-absent law');
+  });
+});
+
+describe('TREATY-VOICE-2 U2 — an age below a year speaks weeks and seasons, never years (FPQ-66)', () => {
+  it('the band word at every edge, in words, never a digit', () => {
+    const at = (weeks) => treatySubYearBandWord(weeks);
+    expect([0, 1, 2, 3, 8, 9, 13, 14, 26, 27, 51, 60].map(at)).toEqual([
+      'not yet a week', 'a single week', 'two weeks', 'three weeks', 'eight weeks',
+      'the better part of a season', 'the better part of a season', 'a season and more', 'a season and more',
+      'the better part of a year', 'the better part of a year', 'the better part of a year',
+    ]);
+    for (const band of TREATY_SUBYEAR_BANDS) expect(band.word, band.word).not.toMatch(/\d/);
+  });
+
+  it('the weeks are read on the treaty\'s own clock, from the same start as the years', () => {
+    const record = pactOf(mintPact());
+    const start = Number(record.mintedTick);
+    expect(treatyAgeWeeks(record, start + 21)).toBe(21);
+    expect(treatyAgeWeeks(record, start)).toBe(0);
+  });
+
+  it('a three-week-old pact reads its weeks, and no line it can draw says years', () => {
+    // Twenty pacts, each three weeks old, signed on twenty different weeks: the keyed pick spreads
+    // them over the class's lines, so the band must reach the page and the year words never may.
+    const lines = Array.from({ length: 20 }, (_, i) => {
+      const record = pactOf(mintPact({ signTick: 10 + i }));
+      const tick = Number(record.mintedTick) + 3;
+      return renderTreatyDocument(worldWith(record, { tick }), PACT_KEY);
+    });
+    expect(lines.every((doc) => doc.ageYears === 0), 'every pact is under a year').toBe(true);
+    const said = lines.map((doc) => doc.ageLine);
+    expect(said.some((line) => /Three weeks/.test(line)), `the band reached no line: ${said.join(' | ')}`).toBe(true);
+    expect(said.filter((line) => /years/.test(line))).toEqual([]);
+  });
+
+  it('without the world tick the age is still honestly less than a year', () => {
+    const said = Array.from({ length: 20 }, (_, i) => {
+      const record = pactOf(mintPact({ signTick: 10 + i }));
+      const doc = renderTreatyDocument(worldWith(record, { tick: Number(record.mintedTick) + 3 }), PACT_KEY);
+      return treatyAgeLine({ ...doc }, record);
+    });
+    expect(said.some((line) => /Less than a year/.test(line)), `the fallback reached no line: ${said.join(' | ')}`).toBe(true);
+    expect(said.filter((line) => /years/.test(line))).toEqual([]);
   });
 });
 

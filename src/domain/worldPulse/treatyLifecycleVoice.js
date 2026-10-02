@@ -57,6 +57,7 @@
 import { TERM_CATALOG, termLabel } from './peaceTermsCatalog.js';
 import { treatyLedgerOf } from './treatyEnforcement.js';
 import { treatyTicksPerYearOf } from './treatyClock.js';
+import { INTERVAL_WEEKS } from './intervalWeeks.js';
 import { grammarReceipt, grammarSlotRoles } from './grammarNews.js';
 import { stablePart } from './stablePart.js';
 import { termObligationOf } from './treatyOrientation.js';
@@ -148,6 +149,54 @@ export function treatyAgeClass(ageYears) {
 export function treatyAgeBandWord(ageYears) {
   const years = Number(ageYears) || 0;
   return (TREATY_AGE_BANDS.find((band) => years < band.underYears) || TREATY_AGE_BANDS[2]).word;
+}
+
+/**
+ * THE AGE BELOW A YEAR (TREATY-VOICE-2 U2, FPQ-66). The whole-year read floors a three-week-old
+ * pact to zero, and every year band then calls it "a few years". Below a year the dossier line
+ * speaks WEEKS and SEASONS instead, in words (the corpus carries no digits), through its own age
+ * class `new`. The year bands above are untouched: the lifecycle beats still read them.
+ * Thresholds are whole weeks on the treaty's own clock; the season is INTERVAL_WEEKS.one_season.
+ * @type {ReadonlyArray<Readonly<{ underWeeks: number, word: string }>>}
+ */
+export const TREATY_SUBYEAR_BANDS = Object.freeze([
+  Object.freeze({ underWeeks: 1, word: 'not yet a week' }),
+  Object.freeze({ underWeeks: 2, word: 'a single week' }),
+  Object.freeze({ underWeeks: 3, word: 'two weeks' }),
+  Object.freeze({ underWeeks: 4, word: 'three weeks' }),
+  Object.freeze({ underWeeks: 5, word: 'four weeks' }),
+  Object.freeze({ underWeeks: 6, word: 'five weeks' }),
+  Object.freeze({ underWeeks: 7, word: 'six weeks' }),
+  Object.freeze({ underWeeks: 8, word: 'seven weeks' }),
+  Object.freeze({ underWeeks: 9, word: 'eight weeks' }),
+  Object.freeze({ underWeeks: INTERVAL_WEEKS.one_season + 1, word: 'the better part of a season' }),
+  Object.freeze({ underWeeks: INTERVAL_WEEKS.one_season * 2 + 1, word: 'a season and more' }),
+  Object.freeze({ underWeeks: INTERVAL_WEEKS.one_year, word: 'the better part of a year' }),
+]);
+
+/** The dossier age line's class below a year. */
+export const TREATY_SUBYEAR_CLASS = 'new';
+
+/**
+ * Whole elapsed WEEKS on the treaty's own clock marker (the same start tick as
+ * treatyAgeYears). Zero for a record with no start tick, never a negative.
+ * @param {Record<string, unknown> | null | undefined} treaty @param {number} tick
+ * @returns {number}
+ */
+export function treatyAgeWeeks(treaty, tick) {
+  const signed = Number(/** @type {{ signedTick?: unknown }} */ (treaty || {}).signedTick);
+  const minted = Number(/** @type {{ mintedTick?: unknown }} */ (treaty || {}).mintedTick);
+  const start = Number.isFinite(signed) ? signed : minted;
+  const elapsed = Number(tick) - start;
+  if (!Number.isFinite(start) || !(elapsed > 0)) return 0;
+  return Math.floor((elapsed * INTERVAL_WEEKS.one_year) / treatyTicksPerYearOf(treaty));
+}
+
+/** The band WORD for an age below a year, in weeks (never a digit). @param {number} ageWeeks */
+export function treatySubYearBandWord(ageWeeks) {
+  const weeks = Math.max(0, Number(ageWeeks) || 0);
+  const row = TREATY_SUBYEAR_BANDS.find((band) => weeks < band.underWeeks);
+  return (row || TREATY_SUBYEAR_BANDS[TREATY_SUBYEAR_BANDS.length - 1]).word;
 }
 
 /** @param {unknown} state */
