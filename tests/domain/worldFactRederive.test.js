@@ -128,6 +128,11 @@ const stride = (rows, n) => rows.filter((_, index) => index % n === 0);
  * scan deliberately cannot draw: the scan reports every file that NAMES the fact, and the reading
  * of each name is the chair's. The row is reported as this lane's finding rather than filtered
  * away, because a filter is how a stated radius stops being stated.
+ *
+ * 2026-10-02, the Voice Program wave 3 (ODQ §934.88): TWENTY-THREE. `src/generators/narrative/arrivalScene.js`
+ * reads the culture to choose the arrival scene's PEOPLE beat and its built detail, the reads that lived in
+ * narrativeGenerator.js's retired tier template before it (narrativeGenerator.js still reads culture elsewhere).
+ * A culture change re-composes the arrival paragraph, which is prose and moves no fact.
  */
 const CULTURE_READERS = Object.freeze([
   'src/generators/aiLayer.js',
@@ -141,6 +146,7 @@ const CULTURE_READERS = Object.freeze([
   'src/generators/generationContext.js',
   'src/generators/institutionProbability.js',
   'src/generators/isolationGenerator.js',
+  'src/generators/narrative/arrivalScene.js',
   'src/generators/narrativeGenerator.js',
   'src/generators/npc/generatedNpcTitle.js',
   'src/generators/npcGenerator.js',
@@ -354,8 +360,9 @@ describe('EM-B2b — world facts by consequence: the route, the refusals and the
     // -> bf978de7.. (72c97b788, J33) and aefaf169.. -> 8f02a2e6.. (baebe2cda) -> 7990bbfb.. (960d99a17, J33).
     // Then the Voice Program wave 2 (ODQ §934.88), through the door by the CHAIR: bf978de7.. -> 238a6374.. (a7202d720),
     // the arrival scene and the pressure sentence on their own streams; the prose manifest did not move.
+    // Then wave 3, the arrival scene as a place: 238a6374.. -> 74a4c58d.. (dc8a022e1).
     expect(shaOfFile(GOLDEN), 'tests/fixtures/generator-golden-master.json moved')
-      .toBe('238a637426af63ea66f5192edfb7d72c50eb62774fa685433edca9b6702037ac');
+      .toBe('74a4c58df0155f0d9d1c61c46f1929203160dc5018a2ac95f5001007b58a2584');
     expect(shaOfFile(PROSE_GOLDEN), 'tests/fixtures/dossier-prose-manifest-golden.json moved')
       .toBe('7990bbfbfcfb0672f83d1a37952f45d609dfe7d4835d361696c06c5fe9f5a4d7');
 

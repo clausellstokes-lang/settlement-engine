@@ -120,7 +120,9 @@ const GOLDEN_CONTROL_KEY = 'town|germanic|plains|road|civilized|golden-master-v3
 // signed door (917834e22); b77b5909... -> 95a3de2d..., read from the committed manifest and re-derived under both mocks.
 // 2026-10-02, the Voice Program wave 2 (ODQ §934.88): the row moved again with the re-record through the signed door
 // (a7202d720); 95a3de2d... -> 8f5da975..., its arrival scene and pressure sentence now drawn from their own streams.
-const GOLDEN_CONTROL_HASH = '8f5da975df8251edf1dec8455a9e7e954914b11e50016bb911102f8818733678';
+// Then the Voice Program wave 3 (ODQ §934.88), through the signed door (dc8a022e1): 8f5da975... -> f5f19fea..., the arrival scene
+// composed as a place.
+const GOLDEN_CONTROL_HASH = 'f5f19fea2cbc9879f684834a0eca008caf449d11e7be26de1a7b4b3123c67bee';
 /** EM-P0's own pinned-mode row and its four chooser keys, re-measured here under the mocks. */
 const PIN_ROW = {
   settType: 'town', culture: 'germanic', terrainOverride: 'riverside',
