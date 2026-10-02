@@ -473,13 +473,16 @@ function groundTruthReadiness(worldState, subjectId) {
  * The GROUND-TRUTH belief a fully-informed observer would hold about a subject
  * right now — cold-start seeds this (confidence 1.0), and a fresh report
  * re-anchors toward it. Pure.
+ * EXPORTED for FP IN-6 U3 (J-INF-11): the display-safe banded truth provider
+ * (domain/display/beliefTruthBands.js) projects THIS record's bands for the DM's
+ * divergence join, so the display never re-derives the truth in a second home.
  * @param {string} subjectId
  * @param {string} allianceLabel  the true relationship label (observer↔subject)
  * @param {GroundTruthCtx} ctx
  * @param {number} now
  * @returns {BeliefRecord}
  */
-function groundTruthBelief(subjectId, allianceLabel, ctx, now) {
+export function groundTruthBelief(subjectId, allianceLabel, ctx, now) {
   const item = ctx.byId.get(String(subjectId));
   const strength = item
     ? settlementStrength(item, buildPressureSummary(ctx.pressureIdx, String(subjectId)))
@@ -702,10 +705,12 @@ export function decayedConfidence(confidence01, silentTicks, decayKeep01 = 0) {
  * (the declared informational neighbourhood), and a "a|b" → relType index. Reads
  * the SAME normalized edge + ensured relState the chooser's contextFor reads, so
  * the seed and the read agree. Codepoint-stable.
+ * EXPORTED for FP IN-6 U3: the display truth provider reads the TRUE label from
+ * this one index, as the cold-start seed and the reconcile re-anchor do.
  * @param {BeliefSnapshot | null | undefined} snapshot
  * @param {{ relationshipStates?: unknown } | null | undefined} worldState
  */
-function relationshipNeighbourhood(snapshot, worldState) {
+export function relationshipNeighbourhood(snapshot, worldState) {
   const states = asObject(worldState?.relationshipStates);
   /** @type {Map<string, Map<string, string>>} */
   const neighbours = new Map();

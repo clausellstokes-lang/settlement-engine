@@ -63,8 +63,16 @@ describe('WAVE A — settlementBeliefs player/DM scrub', () => {
     const g = rows.find((row) => row.subjectId === 'grimhold');
     const div = g.divergence.join(' | ');
     expect(div).toMatch(/underestimates/);          // believed negligible, is overwhelming
-    expect(div).toMatch(/trade_partner/);           // stale hostility
+    // FP IN-6 U3 re-records this arm with cause (SR-1; SR-17, the specificity floor): the
+    // relationship token reaches the DM as words, and every line names the subject town.
+    expect(div).toMatch(/trade partner/);           // stale hostility
     expect(div).toMatch(/at peace|mobilizing|in the field/); // readiness gap
+    expect(g.divergence).toEqual([
+      'underestimates Grimhold: overwhelming in strength, believed negligible',
+      'believes Grimhold at peace; it is in the field',
+      'still reads the bond with Grimhold as hostile; it is now trade partner',
+    ]);
+    for (const line of g.divergence) expect(line).toContain('Grimhold');
     // rivermouth (no truth supplied) ⇒ no divergence
     const rm = rows.find((row) => row.subjectId === 'rivermouth');
     expect(rm.divergence).toEqual([]);

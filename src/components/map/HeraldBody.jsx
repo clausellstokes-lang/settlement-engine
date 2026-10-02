@@ -254,7 +254,7 @@ export default function HeraldBody({
           <DoorLensChip section="war" />
           <LiveWarStatus campaign={campaign} nameById={nameById} />
           <RealmIntrigue campaign={campaign} nameById={nameById} />
-          <BeliefDivergenceBand campaign={campaign} nameById={nameById} />
+          <BeliefDivergenceBand campaign={campaign} saves={saves} nameById={nameById} />
           {/* DESK-4 — one observer, its relations in plain words; the believed
               half is DM-gated inside; the omniscient matrix stays refused. */}
           <PerspectiveStandings campaign={campaign} nameById={nameById} />

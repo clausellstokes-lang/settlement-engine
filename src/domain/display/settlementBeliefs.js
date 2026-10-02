@@ -25,6 +25,7 @@
 import { compareCodepoint } from '../deterministicSort.js';
 import { GOVERNING_SEAT_KEY, strengthOfBand } from '../worldPulse/beliefMap.js';
 import { getSpatialLedger } from '../spatial/distanceRead.js';
+import { humanizeToken } from './humanizeEngineTokens.js';
 
 /** @typedef {import('../worldPulse/beliefMap.js').BeliefRecord} BeliefRecord */
 
@@ -91,30 +92,36 @@ function readinessWord(readiness) {
  * The divergence lines between a belief and the supplied truth — plain in-world
  * phrases the DM reads at a glance. Empty when the belief matches (or no truth
  * supplied).
- * @param {BeliefRecord} rec @param {SubjectTruth | null} truth @returns {string[]}
+ *
+ * FP IN-6 U3 (SR-17, the specificity floor): every line NAMES the subject town and
+ * the two bands or labels it sets side by side, e.g. "underestimates Grimhold:
+ * overwhelming in strength, believed negligible", and a relationship token reaches
+ * the DM as words ("trade partner"), never as its schema spelling. The lines first
+ * became visible with the display-safe truth provider (beliefTruthBands.js).
+ * @param {BeliefRecord} rec @param {SubjectTruth | null} truth @param {string} name
+ * @returns {string[]}
  */
-function divergenceOf(rec, truth) {
+function divergenceOf(rec, truth, name) {
   if (!truth) return [];
   /** @type {string[]} */
   const out = [];
   if (Number.isFinite(truth.strengthBand)) {
     const trueBand = Math.round(Number(truth.strengthBand));
     if (trueBand !== rec.strengthBand) {
-      out.push(rec.strengthBand < trueBand
-        ? `underestimates ${strengthBandWord(trueBand)} strength as ${strengthBandWord(rec.strengthBand)}`
-        : `overestimates ${strengthBandWord(trueBand)} strength as ${strengthBandWord(rec.strengthBand)}`);
+      const verb = rec.strengthBand < trueBand ? 'underestimates' : 'overestimates';
+      out.push(`${verb} ${name}: ${strengthBandWord(trueBand)} in strength, believed ${strengthBandWord(rec.strengthBand)}`);
     }
   }
   if (Number.isFinite(truth.readiness)) {
     const believedWord = readinessWord(rec.readiness);
     const trueWord = readinessWord(Number(truth.readiness));
-    if (believedWord !== trueWord) out.push(`believes them ${believedWord}; they are ${trueWord}`);
+    if (believedWord !== trueWord) out.push(`believes ${name} ${believedWord}; it is ${trueWord}`);
   }
   if (typeof truth.allianceLabel === 'string' && truth.allianceLabel && truth.allianceLabel !== rec.allianceLabel) {
-    out.push(`still reads the bond as ${rec.allianceLabel}; it is now ${truth.allianceLabel}`);
+    out.push(`still reads the bond with ${name} as ${humanizeToken(rec.allianceLabel) || 'unknown'}; it is now ${humanizeToken(truth.allianceLabel)}`);
   }
   if ('faithLabel' in truth && (truth.faithLabel ?? null) !== (rec.faithLabel ?? null)) {
-    out.push(`believes their faith ${rec.faithLabel || 'unknown'}; it is ${truth.faithLabel || 'unknown'}`);
+    out.push(`believes ${name} keeps ${rec.faithLabel || 'no named faith'}; it keeps ${truth.faithLabel || 'no named faith'}`);
   }
   return out;
 }
@@ -174,7 +181,7 @@ export function settlementBeliefs({
         confidence: beliefConfidenceBand(rec.confidence01),
         agoTicks,
         staleness: beliefStalenessBand(agoTicks),
-        divergence: divergenceOf(rec, truth),
+        divergence: divergenceOf(rec, truth, nameFor(String(subjectId))),
       };
     })
     .filter((row) => row != null);

@@ -19,13 +19,12 @@
  * ledger ⇒ the band renders nothing ⇒ byte-identical UI). Lazy: mounted inside the
  * already-lazy Realm Inspector chunk, so no first-paint bytes.
  *
- * DIVERGENCE JOIN (truthOf): the read-model reports a per-axis divergence when the
- * caller supplies the current ground truth for a subject. That truth is assembled by
- * the kernel's GroundTruthCtx (settlementStrength + the pressure index); building it
- * in the display layer would duplicate that engine-internal logic (a two-writer
- * hazard), so v1 ships the belief band without the truth join — a documented,
- * scoped follow-up. The divergence rows below are already wired for the day a
- * display-safe truth provider lands.
+ * DIVERGENCE JOIN (truthOf): a per-axis divergence needs the current ground truth,
+ * which is engine math (settlementStrength over the pressure index); v1 shipped without
+ * it rather than rebuild that math here (a two-writer hazard). FP IN-6 U3 closes it:
+ * domain/display/beliefTruthBands.js composes the engine's own snapshot, pressure and
+ * groundTruthBelief functions and hands this band only their BANDS (parity-pinned), so
+ * the DM sees in gold where a belief is wrong. Built only for the DM, on a live world.
  */
 
 import { useMemo } from 'react';
@@ -33,6 +32,7 @@ import { Eye } from 'lucide-react';
 
 import { useStore } from '../../store/index.js';
 import { settlementBeliefs, hasBeliefMaps } from '../../domain/display/settlementBeliefs.js';
+import { beliefTruthProvider } from '../../domain/display/beliefTruthBands.js';
 import { BODY, BORDER, BORDER2, CARD, CARD_ALT, FS, GOLD, GOLD_BG, INK, MUTED, SECOND, SP, sans } from '../theme.js';
 import useIsMobile from '../../hooks/useIsMobile.js';
 import { chromeFontSize, proseFontSize } from '../../design/proseScale.js';
@@ -90,9 +90,9 @@ function BeliefRow({ belief }) {
 }
 
 /**
- * @param {{ campaign: any, nameById?: Map<string, string> }} props
+ * @param {{ campaign: any, saves?: any[], nameById?: Map<string, string> }} props
  */
-export default function BeliefDivergenceBand({ campaign, nameById }) {
+export default function BeliefDivergenceBand({ campaign, saves, nameById }) {
   const mobile = useIsMobile();
   const tier = useStore(s => s.auth?.tier);
   const elevated = useStore(s => (typeof s.isElevated === 'function' ? s.isElevated() : false));
@@ -105,14 +105,19 @@ export default function BeliefDivergenceBand({ campaign, nameById }) {
 
   const observers = useMemo(() => {
     if (!includeGroundTruth || !hasBeliefMaps(worldState)) return [];
+    // FP IN-6 U3: the display-safe truth, built once per campaign + saves for the DM only.
+    const truthFor = beliefTruthProvider({ campaign, saves: saves || [], includeGroundTruth });
     return (campaign?.settlementIds || [])
       .map((/** @type {any} */ id) => ({
         observerId: String(id),
         name: nameFor(id),
-        beliefs: settlementBeliefs({ worldState, observerId: String(id), includeGroundTruth: true, nameFor }),
+        beliefs: settlementBeliefs({
+          worldState, observerId: String(id), includeGroundTruth: true, nameFor,
+          truthOf: truthFor ? truthFor(String(id)) : null,
+        }),
       }))
       .filter((o) => o.beliefs.length > 0);
-  }, [campaign, worldState, includeGroundTruth, nameFor]);
+  }, [campaign, saves, worldState, includeGroundTruth, nameFor]);
 
   // Player projection / dormant world / no modelled beliefs ⇒ render nothing.
   if (!includeGroundTruth || !hasBeliefMaps(worldState) || observers.length === 0) return null;
