@@ -356,9 +356,12 @@ function decorate(doc, treaty = null, worldState = null) {
     // treaties that are purchases. The read-model tells us which; the crier says so. The
     // parties are still whatever the orientation resolved, so neither branch can render
     // the string "undefined" the way `String(treaty.loserId)` once could.
+    // A pact signed in peace (TREATY-VOICE-2 U1) is titled by its two courts, in the record's order.
     title: doc.orientationKind === 'sale'
       ? `The Conveyance of ${conveyedHoldingOf(doc) || 'a holding'}: ${doc.loserName} to ${doc.victorName}`
-      : `The Peace of ${doc.loserName}`,
+      : (doc.orientationKind === 'negotiated' && doc.partyNames
+        ? `The Pact of ${doc.partyNames[0]} and ${doc.partyNames[1]}`
+        : `The Peace of ${doc.loserName}`),
     termLines,
     frayingLine,
     mediatorLine,

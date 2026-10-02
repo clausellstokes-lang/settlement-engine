@@ -137,6 +137,10 @@ export function fracturesAbandoning(worldState, partyId, tick) {
  * @property {{ total: number, honored: number, frayingType: string | null, line: string } | null} summary
  * @property {number} [ageYears]  GR-0: whole elapsed years on the treaty's OWN clock
  *   marker. Present only under `treatyLifecycleVoiceEnabled` — absent, never zero.
+ * @property {string[]} [partyIds]  TREATY-VOICE-2 U1: a NEGOTIATED pact's two courts, in the
+ *   record's own order. Present only on that kind (drop-when-absent), so every war and sale
+ *   document is byte-identical through this read.
+ * @property {string[]} [partyNames]  the same courts' reader names, aligned with partyIds.
  */
 
 /**
@@ -241,12 +245,19 @@ export function treatyDocument(worldState, pairKey) {
   });
   const fr = /** @type {{ deserter?: unknown, abandoned?: unknown[], coalitionSize?: unknown, credibilityHit?: unknown, receipt?: unknown }} */ (
     /** @type {Record<string, unknown>} */ (treaty).fracture);
+  // THE NEGOTIATED PACT'S COURTS (TREATY-VOICE-2 U1, FPQ-65). A pact signed in peace has no
+  // victor and no loser, so the receiver/giver slots above resolve empty for it, and the panel
+  // printed "The Peace of " with nothing after it. Its two courts travel instead, drop-when-absent,
+  // with the LEDGER key: the victor/loser pair key of two empty ids is ">", which finds nothing.
+  const partyIds = orientation.kind === 'negotiated' && Array.isArray(orientation.parties) ? orientation.parties : null;
+  const partyNames = orientation.kind === 'negotiated' && Array.isArray(orientation.partyNames) ? orientation.partyNames : null;
   return {
-    pairKey: treatyPairKey(victorId, loserId),
+    pairKey: partyIds && partyNames ? String(pairKey) : treatyPairKey(victorId, loserId),
     victorId,
     loserId,
     victorName: orientation.receiverName,
     loserName: orientation.giverName,
+    ...(partyIds && partyNames ? { partyIds: [...partyIds], partyNames: [...partyNames] } : {}),
     // THE ORIENTATION, CARRIED FORWARD so a reader is told what kind of instrument this
     // is rather than being handed war vocabulary for a purchase. `receiverRole` /
     // `giverRole` are the four closed words TREATY_ROLE_WORDS knows.

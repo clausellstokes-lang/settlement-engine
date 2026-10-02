@@ -84,6 +84,11 @@ function TreatyCard({ doc, nameById, worldState, includeGroundTruth }) {
   const trueStateChip = treatyTrueStateChip(worldState, doc.pairKey, { includeGroundTruth });
   const victor = nameOf(nameById, doc.victorId, doc.victorName);
   const loser = nameOf(nameById, doc.loserId, doc.loserName);
+  // A PACT SIGNED IN PEACE (TREATY-VOICE-2 U1) has two courts and neither won: it is titled by
+  // both, each resolved live like the victor and the loser, and carries no "under X's terms".
+  const pactCourts = doc.orientationKind === 'negotiated' && doc.partyIds && doc.partyNames
+    ? doc.partyIds.map((id, i) => nameOf(nameById, id, doc.partyNames[i]))
+    : null;
   return (
     <article style={{ border: `1px solid ${BORDER}`, background: CARD_ALT, padding: SP.sm, display: 'flex', flexDirection: 'column', gap: 8 }}>
       <div style={{ display: 'flex', alignItems: 'baseline', gap: 8, flexWrap: 'wrap' }}>
@@ -94,11 +99,14 @@ function TreatyCard({ doc, nameById, worldState, includeGroundTruth }) {
             in the display read-model; the role word beside it comes from the same
             reader, with the historic spelling as the fallback. */}
         <span style={{ color: INK, fontFamily: sans, fontSize: FS.sm, fontWeight: 900 }}>
-          {doc.orientationKind === 'sale' ? doc.title : `The Peace of ${loser}`}
+          {doc.orientationKind === 'sale' ? doc.title
+            : pactCourts ? `The Pact of ${pactCourts[0]} and ${pactCourts[1]}` : `The Peace of ${loser}`}
         </span>
-        <span style={{ color: MUTED, fontFamily: sans, fontSize: chromeFontSize(FS.pico, mobile), fontWeight: 700 }}>
-          {doc.orientationKind === 'sale' ? `${victor} holds it now` : `under ${victor}'s terms`}
-        </span>
+        {!pactCourts && (
+          <span style={{ color: MUTED, fontFamily: sans, fontSize: chromeFontSize(FS.pico, mobile), fontWeight: 700 }}>
+            {doc.orientationKind === 'sale' ? `${victor} holds it now` : `under ${victor}'s terms`}
+          </span>
+        )}
         <span style={{ marginLeft: 'auto' }}><StateChip state={doc.complianceState} /></span>
       </div>
 

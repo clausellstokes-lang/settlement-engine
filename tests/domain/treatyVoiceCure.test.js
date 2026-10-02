@@ -21,6 +21,7 @@ import {
 } from '../../src/domain/worldPulse/pactFormation.js';
 import { advanceTreaties, treatyPairKey, TERM_CATALOG } from '../../src/domain/worldPulse/peaceTerms.js';
 import { getSpatialLedger } from '../../src/domain/spatial/distanceRead.js';
+import { renderTreatyDocument } from '../../src/domain/display/treatyDocument.js';
 import { expectAbsentWithAnchor } from '../helpers/anchoredNegatives.js';
 import { DUE_TICK, OPEN_TICK, pactSnapshot, pactWorld } from '../helpers/pactFixture.js';
 
@@ -143,6 +144,26 @@ describe('TREATY-VOICE U1 — the negotiated orientation', () => {
       + '"obligeeId":"seller","giverName":"Seller Court","receiverName":"Buyer Court","obligorName":"Buyer Court",'
       + '"obligeeName":"Seller Court"}',
     );
+  });
+});
+
+describe('TREATY-VOICE-2 U1 — a pact signed in peace is titled by its two courts (FPQ-65)', () => {
+  it('the document carries both courts and the ledger key, and the title names them in the record\'s order', () => {
+    const doc = renderTreatyDocument(worldWith(pactOf(mintPact()), { tick: 12 }), PACT_KEY);
+    expect(doc.orientationKind).toBe('negotiated');
+    expect(doc.pairKey).toBe(PACT_KEY);
+    expect([doc.partyIds, doc.partyNames]).toEqual([['alder', 'birch'], ['Alderbury', 'Birchmoor']]);
+    expect(doc.title).toBe('The Pact of Alderbury and Birchmoor');
+  });
+
+  it('a war-ending treaty keeps its title, and carries neither new key (drop-when-absent)', () => {
+    const war = {
+      parties: ['victor', 'loser'], victorId: 'victor', loserId: 'loser',
+      victorName: 'Ashford', loserName: 'Irontown', terms: [], mintedTick: 1,
+    };
+    const doc = renderTreatyDocument(worldWith(war, { tick: 12 }), PACT_KEY);
+    expect(doc.title).toBe('The Peace of Irontown');
+    expectAbsentWithAnchor(Object.keys(doc), 'partyNames', 'title', 'the war document rendered its title, so the missing pact key is the drop-when-absent law');
   });
 });
 

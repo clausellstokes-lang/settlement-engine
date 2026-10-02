@@ -91,6 +91,22 @@ describe('TreatyPanel — the realm-wide treaty documents', () => {
     expect(container.textContent).toMatch(/grudgingly/);
   });
 
+  it('TREATY-VOICE-2 U1: a pact signed in peace is titled by both its courts, live, with no victor', () => {
+    // A negotiated pact: two courts, both named on the record, no victor and no loser. The live
+    // names (nameById) win over the saved ones, as they do for a war treaty's two sides.
+    const campaign = campaignWithTreaty();
+    const war = campaign.worldState.spatialLedgers.treaties['iron>weak'];
+    campaign.worldState.spatialLedgers.treaties = { 'alder>birch': {
+      parties: ['alder', 'birch'], partyNames: { alder: 'Alderbury', birch: 'Birchmoor' },
+      mintedTick: 12, budgetGranted: 3, budgetSpent: 2, complianceState: 'honored',
+      treatyTicksPerYear: CURRENT_TREATY_TICKS_PER_YEAR, terms: [war.terms[1]], receipts: [],
+    } };
+    const { container } = render(<TreatyPanel campaign={campaign} nameById={{ alder: 'Alderbury Old Town', birch: 'Birchmoor' }} />);
+    expect(container.textContent).toContain('The Pact of Alderbury Old Town and Birchmoor');
+    // anchored: the pact title one line up proves the card rendered, so the absent war words are real
+    expect(container.textContent).not.toMatch(/The Peace of|'s terms/);
+  });
+
   it('a realm with no treaties shows the honest empty note (the dormancy render)', () => {
     const { container } = render(<TreatyPanel campaign={{ worldState: { tick: 1 } }} nameById={{}} />);
     expect(screen.getByTestId('treaty-panel')).toBeTruthy();
