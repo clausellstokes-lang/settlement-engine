@@ -1,8 +1,32 @@
 # The Voice Program — deeds in the Herald, places in the dossier (plan)
 
 > **Progress** (append after every wave — this blockquote alone must reconstruct program state)
+> - The full gate: PENDING at the time of this note; the run's verbatim result is appended in the next plan note.
+> - Wave 4 block 1 (shipped, `e76ea7f3c`) — the arrival hook names only what the settlement holds: STRUCTURE_CLAIMS (wall or
+>   gate, guard, market, granary, house of worship) draws a stress vignette only where its structures stand, and eleven
+>   structure-free vignettes join the pool (siege, infiltration and monster pressure had none). +3 pins, red-proven (74 of
+>   120 stress cases named a structure they lacked without the filter). Census `07941940c`; signed re-record `6990709a0`
+>   (golden, 516/525) + `310e57f06` (fence, 59/360, zero residue); instruments `eb8cd386f`. Fact shift: NONE.
+> - Wave 3 (shipped, `d2dfd88b5`) — the arrival scene is a place: hook, sight, the SENSE of a trade the settlement practises
+>   (sixteen keys; "dominant" lines where its exports name the trade, the owner's "hammering echo" for a weapons exporter),
+>   its PEOPLE by culture, and one CLOSING truth (a printed danger made visible, else the trace of a Recent or Living-memory
+>   event, else poverty or plenty); the tier template, the slider-keyed magelight line and the restating addon retired.
+>   +21 pins (arrivalScene.test.js, red-proven by four executed mutations). Census `367572f39`; signed re-record
+>   `dc8a022e1` (golden, 525/525) + `ff0d296bf` (fence, 360/360, zero residue); instruments `5c12d56ee`. Fact shift: NONE
+>   (525 rows, every non-prose key byte-identical; pressureSentence unmoved). Text shift: every arrival paragraph.
+> - Wave 2 (shipped, `ed3768dc1`) — the pressure sentence and the arrival scene draw on named child streams. Signed
+>   re-record `a7202d720` (golden, 525/525) + `426c7f7b4` (fence, 360/360, zero residue); instruments `765af37e2` (the fork
+>   census mint bound 36 -> 38, the two new streams). Fact shift: NONE (525 rows). Text shift: arrival 525, pressure 519.
+> - Wave 1 (shipped, `aefc42c2e`) — the Herald speaks in deeds. Cures: `c39bd8c94` (thirteen goals had no aim; "is out to
+>   survive tribute"), `5ae70a4de` (the walkers the deed register opted into), `192861540` (observed-shape re-freeze: the
+>   feed's read of outcome.appliedHeadline gained writers), `a85aa6c10` (landed packet AO-2+3's required symbol re-pointed
+>   from the struck phrase to the de-hedge that keeps it for saved proposals). Signed re-record `619b4f0f7` (Herald desk) +
+>   `78ed2d08c` (preset witness, 7 of 8 rows). Fact shift: NONE (leaf diff: headline, summary, applied headline,
+>   population-history reason only). ⚠ MISS, RECORDED: wave 1 was committed on focused receipts while the shared gate was
+>   held, and the broad run later found six walkers it owed; the cures above are that debt, each attributed.
 > - Program opened 2026-10-02 on `feat/herald-voice-2026-10-02` (cut from `fp/integration-2026-09-23` at `8a6f6b9d3`),
->   the owner's word "build it all" on the chair's prose-system research. Nothing pushed; push, merge and deploy are the owner's.
+>   the owner's word "build it all" on the chair's prose-system research. ODQ §934.88 (ledger `757c928ff`) is the row every
+>   shift record cites. Nothing pushed; push, merge and deploy are the owner's.
 
 ## Sources
 
@@ -92,6 +116,42 @@ its shift-register row and manifest re-recorded through the signed door. Order b
 The voice law as ratchets over every prose family (no modal potential in a Herald line, no mechanic noun in a reader
 line, no tier template), a completion memory.
 
+## Judgments taken under "I leave all judgment to you" (each vetoable)
+
+> Waves 1–3 decisions (delegated 2026-10-02; each vetoable; all favour the owner's "build it all" without a fact shift):
+> - VP-J1 one authored deed form per deed (the strategy-game log's fixedness); variety stays the eventProse pools'. Veto
+>   reverts heraldDeeds.js to pools.
+> - VP-J2 a pending proposal speaks UNDER WAY ("is moving against"), still true if the DM rejects it; its applied twin DONE.
+> - VP-J3 all 26 de-hedge rules kept, inert, for proposals saved before the program (THE PROMISE).
+> - VP-J4 wave 2 keeps the name mint consuming its two shared draws though nothing reads that position now.
+> - VP-J5 the chair signs each wave's text-only re-record under the owner's words (ODQ §934.88). Veto reverts the wave.
+> - VP-J6 heraldDeeds.js admitted as coupling SUBSTRATE (ARGUED_ROSTER_CEILING 31 -> 32, imports nothing). Veto: a layer
+>   family home instead.
+> - VP-J7 the fork census's mint bound 36 -> 38 for wave 2's two named streams (same one-mint slack).
+> - VP-J8 the arrival memory window MIRRORS the History tab's own "Living memory" band (30 years, extracted by the test)
+>   instead of a new tuning number.
+> - VP-J9 under a stress vignette the closing beat and the sight yield: the vignette is the tension.
+> - VP-J10 ARRIVAL_ADDONS retired rather than kept as a second approach sentence.
+> - VP-J11 EM-R2.md's five historical line addresses written as prose (the record keeps its history) rather than giving
+>   the landed packet the HISTORICAL banner.
+> - VP-J12 AO-2+3's required symbol re-pointed to appliedSummaryFor, the de-hedge that still carries the packet's work.
+> - VP-J13 the hook keeps every authored stress vignette and FILTERS by the structures each names, rather than rewriting
+>   the vignettes tier-neutral; eleven structure-free vignettes are the floor. Veto: rewrite the pool instead.
+> - VP-J14 a shared .git/config found at core.bare=true (05:23, written during other sessions' gate and push runs, not by
+>   this session) was restored to false at 05:26 so every checkout worked again; the pre-repair file is kept in the chair's
+>   scratchpad. Veto is moot: bare=true is never valid for a repository with a working tree.
+
+## Slotted, never deferred (the owner's law of 2026-09-19)
+
+- ~~The STRESS_DESCS vignettes name gates, walls and granaries at every tier.~~ LANDED as wave 4 block 1 (`e76ea7f3c`).
+- The dossier desks' corpus (docs/content/RECEIPT_POOLS_*.md, 09-12 law) block by block in exposure order. SLOT: waves 4+,
+  block 2 onward, on the banked rewrite's seated machinery (marker, two drafting lenses, selector, refuter); its first act is
+  the exposure measurement that orders the blocks.
+- The landmark lines (structuralValidator.js checkInstCompat) quote catalogue names whatever the culture (a "great
+  cathedral" spire over an East-Asian metropolis). SLOT: the same block; the catalogue's own culture naming is the
+  setting-vocabulary program's, and the block asks it rather than renaming here.
+
 ## Owner-decision queue
 
-- (none yet)
+- Push and merge of `feat/herald-voice-2026-10-02` into the FP line (the owner's; nothing pushed).
+- The landing-map branch on master (`fix/landing-realm-pins-2026-10-02`): merging to master deploys.
