@@ -114,16 +114,16 @@
  },
  "digests": {
   "corpusMeta": "36f12c8f770cd42dc1234231a27928d443327661c339877936b2aa60b28f2718",
-  "inventory": "782327e420fc499511ed504f560b645a49e4e050ce80d49f283e991540fd076f",
-  "manifests": "37d0cfa204f771e7980381ffb3412d967ec41a8ae6e316cdd2ecdc10c6e0d931",
+  "inventory": "6d32378771a71b45836d2d8f96994b1d59afc465989f775c29eb171d497f08bf",
+  "manifests": "d0657bcb5f6f5514b9f7d90240eac4376c637d9fb93bc463180b3fb7e90ca90b",
   "migrationReview": "b3026f33de8fa89770fe4738d44203381d2af92df282196a7d9cc18610d9f600",
   "rowTags": "f62df84be5fe60b58572d1c6c26b1deb1baafa85d0a4748f4f83e83042cc5c06",
-  "scanStats": "0e21ec7dc15238d14fbb24bd664a8ffaee40524aa2c25ab27072243a19aa0c74",
-  "sentinel": "402f0ed8d8d7183ec4a8afecdcfe2923e718703d0647884f7e3eca6498dfe377"
+  "scanStats": "617f007a0a79f83191c8f9c47527dfa20c7dee83ba41af5d760a4226a0b08c6b",
+  "sentinel": "dd8cc8cb169946ffcd10865922cd0b61748f55bebb30168005b5c7554ae653eb"
  },
- "frozen": "2026-10-01",
- "frozenAtSha": "cc4983916159fca8340efdde98b4ce3db8e54054",
- "identities": 1446,
+ "frozen": "2026-10-02",
+ "frozenAtSha": "5ae70a4deaddedc12d1484673a6fd51a1e8e1fe2",
+ "identities": 1445,
  "inventory": {
   "src/components/BuyThisDossier.jsx": {
    "mapEdits on settlement": 1
@@ -1773,7 +1773,6 @@
    "will on facets": 1
   },
   "src/domain/worldPulse/worldPulseFeedCuration.js": {
-   "appliedHeadline on outcome": 2,
    "curationClass on outcome": 1,
    "lifecyclePatch on outcome": 1,
    "partySourced on outcome": 1,
@@ -2446,7 +2445,7 @@
   },
   "executionTree": {
    "algorithm": "sha256-canonical-path-type-mode-size-content-v2",
-   "digest": "9d31a223eec7196b3f5d45b5e0baaa4f51507f1dddbc4d1b384eceafbb2b2f08",
+   "digest": "69832ab78b976f9fadc1bef99886101e1a3ece03b25649e5c827a32e6e0c794d",
    "entries": [
     {
      "mode": "100644",
@@ -7078,8 +7077,8 @@
     {
      "mode": "100644",
      "path": "src/data/institutionalCatalog.js",
-     "sha256": "283972f5fbf53885b88cc94b4172a8c58c607f9fc5008ca72864ae1ba76534b5",
-     "size": 119248,
+     "sha256": "0741fe9ceacb72840b11d1249aa856beb5557cbe5ead30abd2f76f965b8dc465",
+     "size": 113880,
      "type": "file"
     },
     {
@@ -9542,8 +9541,8 @@
     {
      "mode": "100644",
      "path": "src/domain/edit/recordInvariantFlags.js",
-     "sha256": "17cc9e735032d348e7cdb2c82ecfdf08ee7add7325f312fdef2649f387f0bf83",
-     "size": 4862,
+     "sha256": "6f68781ca262e308909eca0b31c9c4f6a5c936ee5780b7076b6e295171471f4d",
+     "size": 4968,
      "type": "file"
     },
     {
@@ -12202,8 +12201,8 @@
     {
      "mode": "100644",
      "path": "src/domain/worldPulse/candidateEvents.js",
-     "sha256": "c5b93a693645e8fe118b986ef1861889aa31bb4233fabbce8615133758b57cd0",
-     "size": 46017,
+     "sha256": "fe8bb80ade75a387b5da48befab944552e78bd284da8d9b66f0752f446945bd6",
+     "size": 46259,
      "type": "file"
     },
     {
@@ -12216,8 +12215,8 @@
     {
      "mode": "100644",
      "path": "src/domain/worldPulse/causeLifecycle.js",
-     "sha256": "66bb1b6446d5d14fc942e5320ca55b6cbc7b45a3c7a7820a773f4e7550951e0d",
-     "size": 39959,
+     "sha256": "62b92737d7dd684c7ccf30b80a4589a34b7589ec83f1c56e75f3bb4f6ee88e60",
+     "size": 39949,
      "type": "file"
     },
     {
@@ -12972,8 +12971,8 @@
     {
      "mode": "100644",
      "path": "src/domain/worldPulse/factionCompetition.js",
-     "sha256": "d4a6ffb412121a45c0bd7cac771d65607bc0d1218799481479dce322830e25b9",
-     "size": 55607,
+     "sha256": "a8b4869c216bcb817ca12ab726322da154d5e1f8a6854fedfc9475e50e688dab",
+     "size": 55912,
      "type": "file"
     },
     {
@@ -13195,6 +13194,13 @@
     },
     {
      "mode": "100644",
+     "path": "src/domain/worldPulse/heraldDeeds.js",
+     "sha256": "d025da3e03ef4637624e591d5f8254b042f34599a1f232777395a855819775d9",
+     "size": 9162,
+     "type": "file"
+    },
+    {
+     "mode": "100644",
      "path": "src/domain/worldPulse/houseActs.js",
      "sha256": "8de579d43fea76b7ffcf507cfaf155fb5cfc8c5ca2c01d8c4d3438dc13a08540",
      "size": 9350,
@@ -13245,8 +13251,8 @@
     {
      "mode": "100644",
      "path": "src/domain/worldPulse/institutionLifecycle.js",
-     "sha256": "147de1da7c99bd0449ebc0ddc4c91594d84860b274334b8d167e07af805e4034",
-     "size": 60189,
+     "sha256": "7128fafc9aedf10527cf7121b6e91c6feb17f6926c6339db64070700cbd28ab8",
+     "size": 60599,
      "type": "file"
     },
     {
@@ -13483,8 +13489,8 @@
     {
      "mode": "100644",
      "path": "src/domain/worldPulse/moralInstitutionPressure.js",
-     "sha256": "487e861d6bed2f88e1b0feab03bd07f34af5e60023bd4e4581ce0c19062b603e",
-     "size": 33495,
+     "sha256": "b513884c98f7bc8acd920ca9dfbeb4bc15522e872e21c4360491b1839b55318c",
+     "size": 34174,
      "type": "file"
     },
     {
@@ -13546,8 +13552,8 @@
     {
      "mode": "100644",
      "path": "src/domain/worldPulse/npcAgency.js",
-     "sha256": "297be60444371c82263cc1fb6363b4e12a9b6ad81b6fda8236e8efcec820acc2",
-     "size": 59676,
+     "sha256": "a41b36c675946c5ed4c3a5ae7ded7b879abcede2b11f14d2539d8293c2254a59",
+     "size": 59377,
      "type": "file"
     },
     {
@@ -13770,8 +13776,8 @@
     {
      "mode": "100644",
      "path": "src/domain/worldPulse/operations/missionDispatcher.js",
-     "sha256": "fcf62c259346e1942d6f952cc279acf7839135e4959614945e0789dd6495e664",
-     "size": 31335,
+     "sha256": "02b4d4010f0ea58623161174a863515665570c45f43667787ebc55782efc290f",
+     "size": 31652,
      "type": "file"
     },
     {
@@ -13987,8 +13993,8 @@
     {
      "mode": "100644",
      "path": "src/domain/worldPulse/populationDynamics.js",
-     "sha256": "b855505bc40cb904dcddd620cb1931a0c6d5fddc31eb6824437c3eeb29b4293b",
-     "size": 32349,
+     "sha256": "7c884a5f92f2a37fbf244caded31e184b35d8acbed9da9a51a5ba904f9eadb82",
+     "size": 32595,
      "type": "file"
     },
     {
@@ -14176,8 +14182,8 @@
     {
      "mode": "100644",
      "path": "src/domain/worldPulse/relationshipRuleHelpers.js",
-     "sha256": "755bac5128d0ac684149ede9cb133e3aa2fdef2bf51b9013b144448455884246",
-     "size": 30709,
+     "sha256": "c05777c31f07052cfd1ad1f3da37bdb4632118d3025426ca31e34117dbdd8c5e",
+     "size": 32145,
      "type": "file"
     },
     {
@@ -14190,8 +14196,8 @@
     {
      "mode": "100644",
      "path": "src/domain/worldPulse/relationshipRulesCore.js",
-     "sha256": "342378f6aa160cf52f9d5f64449112f44c6cc18e99a8c812febe9a93f82e8839",
-     "size": 40439,
+     "sha256": "cc394b78555f1a2367a59d62a0b26d89a0c4e10a84bafd9730ecc81542fe807e",
+     "size": 40820,
      "type": "file"
     },
     {
@@ -14617,8 +14623,8 @@
     {
      "mode": "100644",
      "path": "src/domain/worldPulse/stressors.js",
-     "sha256": "19a62114d82479aee9fa4e08b455280d2c53370ff6c75f9b039023a2a5e99a3c",
-     "size": 40164,
+     "sha256": "ffe9a92b80d98928ff9380a390e6c911cba85706d6f066dc575d607eb272e196",
+     "size": 40544,
      "type": "file"
     },
     {
@@ -14708,8 +14714,8 @@
     {
      "mode": "100644",
      "path": "src/domain/worldPulse/tierResourceDynamics.js",
-     "sha256": "64822ba79f90d95538b33ec21a56edf08c893393d948a3d4eae5ca51c46152f1",
-     "size": 36617,
+     "sha256": "b14a87b473f0e75d7dc54b4a637694ac8845573c735208740ecb71090a785d7c",
+     "size": 37639,
      "type": "file"
     },
     {
@@ -15779,8 +15785,8 @@
     {
      "mode": "100644",
      "path": "src/generators/steps/assembleSettlement.js",
-     "sha256": "be1a2e820e9c41111cad9194a5c4a32ad6339f5459b0e76220e35eb2cc827fa3",
-     "size": 17652,
+     "sha256": "8ce2a203e7e35a938ba264c4960a4874202b21a5436bf1948e159284e71536bc",
+     "size": 18145,
      "type": "file"
     },
     {
@@ -18720,7 +18726,7 @@
   },
   "scanTree": {
    "algorithm": "sha256-canonical-path-type-mode-size-content-v2",
-   "digest": "16db0ed8be7a97a07991f79fbb3b832f14c41b727eb042bfdc00cdf2130c97bb",
+   "digest": "7099fc2c2b4bda4ee750e20f559a6fcc596be0e42423895e932372c931541241",
    "entries": [
     {
      "mode": "100644",
@@ -23212,8 +23218,8 @@
     {
      "mode": "100644",
      "path": "src/data/institutionalCatalog.js",
-     "sha256": "283972f5fbf53885b88cc94b4172a8c58c607f9fc5008ca72864ae1ba76534b5",
-     "size": 119248,
+     "sha256": "0741fe9ceacb72840b11d1249aa856beb5557cbe5ead30abd2f76f965b8dc465",
+     "size": 113880,
      "type": "file"
     },
     {
@@ -25627,8 +25633,8 @@
     {
      "mode": "100644",
      "path": "src/domain/edit/recordInvariantFlags.js",
-     "sha256": "17cc9e735032d348e7cdb2c82ecfdf08ee7add7325f312fdef2649f387f0bf83",
-     "size": 4862,
+     "sha256": "6f68781ca262e308909eca0b31c9c4f6a5c936ee5780b7076b6e295171471f4d",
+     "size": 4968,
      "type": "file"
     },
     {
@@ -28287,8 +28293,8 @@
     {
      "mode": "100644",
      "path": "src/domain/worldPulse/candidateEvents.js",
-     "sha256": "c5b93a693645e8fe118b986ef1861889aa31bb4233fabbce8615133758b57cd0",
-     "size": 46017,
+     "sha256": "fe8bb80ade75a387b5da48befab944552e78bd284da8d9b66f0752f446945bd6",
+     "size": 46259,
      "type": "file"
     },
     {
@@ -28301,8 +28307,8 @@
     {
      "mode": "100644",
      "path": "src/domain/worldPulse/causeLifecycle.js",
-     "sha256": "66bb1b6446d5d14fc942e5320ca55b6cbc7b45a3c7a7820a773f4e7550951e0d",
-     "size": 39959,
+     "sha256": "62b92737d7dd684c7ccf30b80a4589a34b7589ec83f1c56e75f3bb4f6ee88e60",
+     "size": 39949,
      "type": "file"
     },
     {
@@ -29057,8 +29063,8 @@
     {
      "mode": "100644",
      "path": "src/domain/worldPulse/factionCompetition.js",
-     "sha256": "d4a6ffb412121a45c0bd7cac771d65607bc0d1218799481479dce322830e25b9",
-     "size": 55607,
+     "sha256": "a8b4869c216bcb817ca12ab726322da154d5e1f8a6854fedfc9475e50e688dab",
+     "size": 55912,
      "type": "file"
     },
     {
@@ -29280,6 +29286,13 @@
     },
     {
      "mode": "100644",
+     "path": "src/domain/worldPulse/heraldDeeds.js",
+     "sha256": "d025da3e03ef4637624e591d5f8254b042f34599a1f232777395a855819775d9",
+     "size": 9162,
+     "type": "file"
+    },
+    {
+     "mode": "100644",
      "path": "src/domain/worldPulse/houseActs.js",
      "sha256": "8de579d43fea76b7ffcf507cfaf155fb5cfc8c5ca2c01d8c4d3438dc13a08540",
      "size": 9350,
@@ -29330,8 +29343,8 @@
     {
      "mode": "100644",
      "path": "src/domain/worldPulse/institutionLifecycle.js",
-     "sha256": "147de1da7c99bd0449ebc0ddc4c91594d84860b274334b8d167e07af805e4034",
-     "size": 60189,
+     "sha256": "7128fafc9aedf10527cf7121b6e91c6feb17f6926c6339db64070700cbd28ab8",
+     "size": 60599,
      "type": "file"
     },
     {
@@ -29568,8 +29581,8 @@
     {
      "mode": "100644",
      "path": "src/domain/worldPulse/moralInstitutionPressure.js",
-     "sha256": "487e861d6bed2f88e1b0feab03bd07f34af5e60023bd4e4581ce0c19062b603e",
-     "size": 33495,
+     "sha256": "b513884c98f7bc8acd920ca9dfbeb4bc15522e872e21c4360491b1839b55318c",
+     "size": 34174,
      "type": "file"
     },
     {
@@ -29631,8 +29644,8 @@
     {
      "mode": "100644",
      "path": "src/domain/worldPulse/npcAgency.js",
-     "sha256": "297be60444371c82263cc1fb6363b4e12a9b6ad81b6fda8236e8efcec820acc2",
-     "size": 59676,
+     "sha256": "a41b36c675946c5ed4c3a5ae7ded7b879abcede2b11f14d2539d8293c2254a59",
+     "size": 59377,
      "type": "file"
     },
     {
@@ -29855,8 +29868,8 @@
     {
      "mode": "100644",
      "path": "src/domain/worldPulse/operations/missionDispatcher.js",
-     "sha256": "fcf62c259346e1942d6f952cc279acf7839135e4959614945e0789dd6495e664",
-     "size": 31335,
+     "sha256": "02b4d4010f0ea58623161174a863515665570c45f43667787ebc55782efc290f",
+     "size": 31652,
      "type": "file"
     },
     {
@@ -30072,8 +30085,8 @@
     {
      "mode": "100644",
      "path": "src/domain/worldPulse/populationDynamics.js",
-     "sha256": "b855505bc40cb904dcddd620cb1931a0c6d5fddc31eb6824437c3eeb29b4293b",
-     "size": 32349,
+     "sha256": "7c884a5f92f2a37fbf244caded31e184b35d8acbed9da9a51a5ba904f9eadb82",
+     "size": 32595,
      "type": "file"
     },
     {
@@ -30261,8 +30274,8 @@
     {
      "mode": "100644",
      "path": "src/domain/worldPulse/relationshipRuleHelpers.js",
-     "sha256": "755bac5128d0ac684149ede9cb133e3aa2fdef2bf51b9013b144448455884246",
-     "size": 30709,
+     "sha256": "c05777c31f07052cfd1ad1f3da37bdb4632118d3025426ca31e34117dbdd8c5e",
+     "size": 32145,
      "type": "file"
     },
     {
@@ -30275,8 +30288,8 @@
     {
      "mode": "100644",
      "path": "src/domain/worldPulse/relationshipRulesCore.js",
-     "sha256": "342378f6aa160cf52f9d5f64449112f44c6cc18e99a8c812febe9a93f82e8839",
-     "size": 40439,
+     "sha256": "cc394b78555f1a2367a59d62a0b26d89a0c4e10a84bafd9730ecc81542fe807e",
+     "size": 40820,
      "type": "file"
     },
     {
@@ -30702,8 +30715,8 @@
     {
      "mode": "100644",
      "path": "src/domain/worldPulse/stressors.js",
-     "sha256": "19a62114d82479aee9fa4e08b455280d2c53370ff6c75f9b039023a2a5e99a3c",
-     "size": 40164,
+     "sha256": "ffe9a92b80d98928ff9380a390e6c911cba85706d6f066dc575d607eb272e196",
+     "size": 40544,
      "type": "file"
     },
     {
@@ -30793,8 +30806,8 @@
     {
      "mode": "100644",
      "path": "src/domain/worldPulse/tierResourceDynamics.js",
-     "sha256": "64822ba79f90d95538b33ec21a56edf08c893393d948a3d4eae5ca51c46152f1",
-     "size": 36617,
+     "sha256": "b14a87b473f0e75d7dc54b4a637694ac8845573c735208740ecb71090a785d7c",
+     "size": 37639,
      "type": "file"
     },
     {
@@ -31864,8 +31877,8 @@
     {
      "mode": "100644",
      "path": "src/generators/steps/assembleSettlement.js",
-     "sha256": "be1a2e820e9c41111cad9194a5c4a32ad6339f5459b0e76220e35eb2cc827fa3",
-     "size": 17652,
+     "sha256": "8ce2a203e7e35a938ba264c4960a4874202b21a5436bf1948e159284e71536bc",
+     "size": 18145,
      "type": "file"
     },
     {
@@ -34798,7 +34811,7 @@
   },
   "sourceTree": {
    "algorithm": "sha256-canonical-path-type-mode-size-content-v2",
-   "digest": "c4c1c5422617a3c8b6c61c6b2aa30108364fdfa3c415173e9221c4a6364d4705",
+   "digest": "6a398d30870c6bf9c671c3134332ce185cead97a7cad592ec0441df89a8830a5",
    "entries": [
     {
      "mode": "100644",
@@ -39360,8 +39373,8 @@
     {
      "mode": "100644",
      "path": "src/data/institutionalCatalog.js",
-     "sha256": "283972f5fbf53885b88cc94b4172a8c58c607f9fc5008ca72864ae1ba76534b5",
-     "size": 119248,
+     "sha256": "0741fe9ceacb72840b11d1249aa856beb5557cbe5ead30abd2f76f965b8dc465",
+     "size": 113880,
      "type": "file"
     },
     {
@@ -41824,8 +41837,8 @@
     {
      "mode": "100644",
      "path": "src/domain/edit/recordInvariantFlags.js",
-     "sha256": "17cc9e735032d348e7cdb2c82ecfdf08ee7add7325f312fdef2649f387f0bf83",
-     "size": 4862,
+     "sha256": "6f68781ca262e308909eca0b31c9c4f6a5c936ee5780b7076b6e295171471f4d",
+     "size": 4968,
      "type": "file"
     },
     {
@@ -44484,8 +44497,8 @@
     {
      "mode": "100644",
      "path": "src/domain/worldPulse/candidateEvents.js",
-     "sha256": "c5b93a693645e8fe118b986ef1861889aa31bb4233fabbce8615133758b57cd0",
-     "size": 46017,
+     "sha256": "fe8bb80ade75a387b5da48befab944552e78bd284da8d9b66f0752f446945bd6",
+     "size": 46259,
      "type": "file"
     },
     {
@@ -44498,8 +44511,8 @@
     {
      "mode": "100644",
      "path": "src/domain/worldPulse/causeLifecycle.js",
-     "sha256": "66bb1b6446d5d14fc942e5320ca55b6cbc7b45a3c7a7820a773f4e7550951e0d",
-     "size": 39959,
+     "sha256": "62b92737d7dd684c7ccf30b80a4589a34b7589ec83f1c56e75f3bb4f6ee88e60",
+     "size": 39949,
      "type": "file"
     },
     {
@@ -45254,8 +45267,8 @@
     {
      "mode": "100644",
      "path": "src/domain/worldPulse/factionCompetition.js",
-     "sha256": "d4a6ffb412121a45c0bd7cac771d65607bc0d1218799481479dce322830e25b9",
-     "size": 55607,
+     "sha256": "a8b4869c216bcb817ca12ab726322da154d5e1f8a6854fedfc9475e50e688dab",
+     "size": 55912,
      "type": "file"
     },
     {
@@ -45477,6 +45490,13 @@
     },
     {
      "mode": "100644",
+     "path": "src/domain/worldPulse/heraldDeeds.js",
+     "sha256": "d025da3e03ef4637624e591d5f8254b042f34599a1f232777395a855819775d9",
+     "size": 9162,
+     "type": "file"
+    },
+    {
+     "mode": "100644",
      "path": "src/domain/worldPulse/houseActs.js",
      "sha256": "8de579d43fea76b7ffcf507cfaf155fb5cfc8c5ca2c01d8c4d3438dc13a08540",
      "size": 9350,
@@ -45527,8 +45547,8 @@
     {
      "mode": "100644",
      "path": "src/domain/worldPulse/institutionLifecycle.js",
-     "sha256": "147de1da7c99bd0449ebc0ddc4c91594d84860b274334b8d167e07af805e4034",
-     "size": 60189,
+     "sha256": "7128fafc9aedf10527cf7121b6e91c6feb17f6926c6339db64070700cbd28ab8",
+     "size": 60599,
      "type": "file"
     },
     {
@@ -45765,8 +45785,8 @@
     {
      "mode": "100644",
      "path": "src/domain/worldPulse/moralInstitutionPressure.js",
-     "sha256": "487e861d6bed2f88e1b0feab03bd07f34af5e60023bd4e4581ce0c19062b603e",
-     "size": 33495,
+     "sha256": "b513884c98f7bc8acd920ca9dfbeb4bc15522e872e21c4360491b1839b55318c",
+     "size": 34174,
      "type": "file"
     },
     {
@@ -45828,8 +45848,8 @@
     {
      "mode": "100644",
      "path": "src/domain/worldPulse/npcAgency.js",
-     "sha256": "297be60444371c82263cc1fb6363b4e12a9b6ad81b6fda8236e8efcec820acc2",
-     "size": 59676,
+     "sha256": "a41b36c675946c5ed4c3a5ae7ded7b879abcede2b11f14d2539d8293c2254a59",
+     "size": 59377,
      "type": "file"
     },
     {
@@ -46052,8 +46072,8 @@
     {
      "mode": "100644",
      "path": "src/domain/worldPulse/operations/missionDispatcher.js",
-     "sha256": "fcf62c259346e1942d6f952cc279acf7839135e4959614945e0789dd6495e664",
-     "size": 31335,
+     "sha256": "02b4d4010f0ea58623161174a863515665570c45f43667787ebc55782efc290f",
+     "size": 31652,
      "type": "file"
     },
     {
@@ -46269,8 +46289,8 @@
     {
      "mode": "100644",
      "path": "src/domain/worldPulse/populationDynamics.js",
-     "sha256": "b855505bc40cb904dcddd620cb1931a0c6d5fddc31eb6824437c3eeb29b4293b",
-     "size": 32349,
+     "sha256": "7c884a5f92f2a37fbf244caded31e184b35d8acbed9da9a51a5ba904f9eadb82",
+     "size": 32595,
      "type": "file"
     },
     {
@@ -46458,8 +46478,8 @@
     {
      "mode": "100644",
      "path": "src/domain/worldPulse/relationshipRuleHelpers.js",
-     "sha256": "755bac5128d0ac684149ede9cb133e3aa2fdef2bf51b9013b144448455884246",
-     "size": 30709,
+     "sha256": "c05777c31f07052cfd1ad1f3da37bdb4632118d3025426ca31e34117dbdd8c5e",
+     "size": 32145,
      "type": "file"
     },
     {
@@ -46472,8 +46492,8 @@
     {
      "mode": "100644",
      "path": "src/domain/worldPulse/relationshipRulesCore.js",
-     "sha256": "342378f6aa160cf52f9d5f64449112f44c6cc18e99a8c812febe9a93f82e8839",
-     "size": 40439,
+     "sha256": "cc394b78555f1a2367a59d62a0b26d89a0c4e10a84bafd9730ecc81542fe807e",
+     "size": 40820,
      "type": "file"
     },
     {
@@ -46899,8 +46919,8 @@
     {
      "mode": "100644",
      "path": "src/domain/worldPulse/stressors.js",
-     "sha256": "19a62114d82479aee9fa4e08b455280d2c53370ff6c75f9b039023a2a5e99a3c",
-     "size": 40164,
+     "sha256": "ffe9a92b80d98928ff9380a390e6c911cba85706d6f066dc575d607eb272e196",
+     "size": 40544,
      "type": "file"
     },
     {
@@ -46990,8 +47010,8 @@
     {
      "mode": "100644",
      "path": "src/domain/worldPulse/tierResourceDynamics.js",
-     "sha256": "64822ba79f90d95538b33ec21a56edf08c893393d948a3d4eae5ca51c46152f1",
-     "size": 36617,
+     "sha256": "b14a87b473f0e75d7dc54b4a637694ac8845573c735208740ecb71090a785d7c",
+     "size": 37639,
      "type": "file"
     },
     {
@@ -48061,8 +48081,8 @@
     {
      "mode": "100644",
      "path": "src/generators/steps/assembleSettlement.js",
-     "sha256": "be1a2e820e9c41111cad9194a5c4a32ad6339f5459b0e76220e35eb2cc827fa3",
-     "size": 17652,
+     "sha256": "8ce2a203e7e35a938ba264c4960a4874202b21a5436bf1948e159284e71536bc",
+     "size": 18145,
      "type": "file"
     },
     {
@@ -51285,23 +51305,23 @@
   }
  },
  "scanStats": {
-  "files": 2296,
-  "reads": 132868,
+  "files": 2297,
+  "reads": 132936,
   "resolved": 9961,
-  "unresolved": 122907
+  "unresolved": 122975
  },
  "scannerProvenance": {
   "detectorDigest": "cf63b95d108d7168e1ae5be6148748b7669e03c45c32f083303b5f6f28479ab2",
-  "executionTreeDigest": "9d31a223eec7196b3f5d45b5e0baaa4f51507f1dddbc4d1b384eceafbb2b2f08",
-  "scanTreeDigest": "16db0ed8be7a97a07991f79fbb3b832f14c41b727eb042bfdc00cdf2130c97bb",
-  "sourceTreeDigest": "c4c1c5422617a3c8b6c61c6b2aa30108364fdfa3c415173e9221c4a6364d4705",
+  "executionTreeDigest": "69832ab78b976f9fadc1bef99886101e1a3ece03b25649e5c827a32e6e0c794d",
+  "scanTreeDigest": "7099fc2c2b4bda4ee750e20f559a6fcc596be0e42423895e932372c931541241",
+  "sourceTreeDigest": "6a398d30870c6bf9c671c3134332ce185cead97a7cad592ec0441df89a8830a5",
   "unscannedInputDigest": "7e074a9bf225431bf7a1dca10ede6878eec3a3465ad489735938c453afcb3b9e"
  },
  "schema": 24,
  "sentinel": {
   "resolvedReads": 9961,
-  "totalKeys": 6988,
+  "totalKeys": 6992,
   "usableShapes": 355
  },
- "total": 2041
+ "total": 2039
 }
