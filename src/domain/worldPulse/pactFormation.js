@@ -93,7 +93,9 @@ import { beliefRecord } from './beliefMap.js';
 import { grammarReceipt } from './grammarNews.js';
 import { credibilityScoreOf } from './informationStatecraft.js';
 import { stampSworn } from './oathHolder.js';
-import { amendPactInstrument, closeTermsBrokenByWar, termIdOf } from './pactAmendment.js';
+import {
+  amendPactInstrument, closeTermsBrokenByWar, stackingPartitionOf, termIdOf,
+} from './pactAmendment.js';
 import {
   openPactProposal, pactFormationActive, pactProposalsOf, prunePactProposals, settlePactProposal,
 } from './pactProposals.js';
@@ -499,6 +501,51 @@ function courtNamesOf(ids, settlementOf) {
 }
 
 /**
+ * THE PAIR'S STANDING INSTRUMENT, under either spelling of the directed pair key, or '' when
+ * the pair holds none: the one read the signing below and the crossings' held-clause test share.
+ * @param {Record<string, unknown>} ledger @param {string} a @param {string} b @returns {string}
+ */
+function standingKeyOf(ledger, a, b) {
+  return ledger[treatyPairKey(a, b)] ? treatyPairKey(a, b)
+    : ledger[treatyPairKey(b, a)] ? treatyPairKey(b, a) : '';
+}
+
+/**
+ * AN ASK FOR WHAT THE PAIR ALREADY HOLDS IS NOT AN OCCASION (FPQ-72). True when the pair holds a
+ * standing instrument and EVERY term of the drafted sheet collides with a live clause on it, read
+ * through the ONE stacking test, `pactAmendment.js :: stackingPartitionOf`, the partition
+ * `amendPactInstrument` itself runs (never restated here; its composable pair and its live-clause
+ * filter come with it), asked as a read so the amendment writer is called only to write. Signed,
+ * such a sheet writes nothing: the answer settles `refused` with a stacking receipt and no refusal
+ * memory, so before this read the pair re-asked the same clause at every dwell, held the pair's one
+ * question slot (starving the renewal ask, whose conjuncts refuse a pair with a question standing)
+ * and never reached its next occasion. A pair holding no instrument, or a sheet that adds even one
+ * clause, is an occasion exactly as before. Renewal stays the only road for re-offering a held
+ * clause (`pactRenewal.js :: openRenewalProposals`).
+ * @param {Record<string, unknown>} worldState @param {string} fromId @param {string} toId
+ * @param {ReadonlyArray<Record<string, unknown>>} terms @param {number} tick @returns {boolean}
+ */
+function addsNothingToStanding(worldState, fromId, toId, terms, tick) {
+  const ledger = recordOf(treatyLedgerOf(/** @type {never} */ (worldState)));
+  const key = standingKeyOf(ledger, fromId, toId);
+  return key !== '' && stackingPartitionOf({ treaty: recordOf(ledger[key]), terms, tick }).added.length === 0;
+}
+
+/**
+ * WHY AN OCCASION WAS PASSED OVER (FPQ-72), in the house voice and by NAME (FPQ-71): the clauses
+ * the sheet would have asked for, which the instrument between the pair already carries. A court
+ * known only by its id is not named, so the sentence keeps the seat voice rather than print a slug.
+ * @param {string} fromName @param {string} toName @param {ReadonlyArray<Record<string, unknown>>} terms
+ * @returns {string}
+ */
+function heldAskReceipt(fromName, toName, terms) {
+  const asked = clauseListOf(terms);
+  return fromName && toName
+    ? `${fromName} did not ask ${toName} again for ${asked}, which the instrument between them already carries.`
+    : `This court did not ask its neighbour again for ${asked}, which the instrument between them already carries.`;
+}
+
+/**
  * MINT OR AMEND — the FOURTH transport into the one instrument.
  *
  * Where the pair already holds a document the sheet becomes a LINEAGE ACT on it (one record
@@ -538,8 +585,7 @@ export function signPactProposal({ worldState, proposal, tick, settlementOf = ()
       expiresTick: tick + (Number(term.expiresTick) - Number(term.mintedTick)),
     }));
   const ledger = { ...(treatyLedgerOf(/** @type {never} */ (worldState)) || {}) };
-  const standingKey = ledger[treatyPairKey(a, b)] ? treatyPairKey(a, b)
-    : ledger[treatyPairKey(b, a)] ? treatyPairKey(b, a) : '';
+  const standingKey = standingKeyOf(ledger, a, b);
   if (standingKey) {
     const amendment = amendPactInstrument({
       treaty: recordOf(ledger[standingKey]), terms, tick,
@@ -995,7 +1041,9 @@ export function advancePeacetimePacts({
   const renewals = openRenewalProposals({ worldState: state, ids, tick, snapshot, digest, season });
   state = renewals.worldState; receipts.push(...renewals.receipts);
 
-  // ── 3. THE CROSSINGS. Every ordered pair, best occasion first, one proposal per pair. ──
+  // ── 3. THE CROSSINGS. Every ordered pair, best occasion first, one proposal per pair. An
+  // occasion whose sheet the pair's standing instrument already carries in full is no occasion
+  // (FPQ-72): it is passed over with a receipt, and the pair's next-best occasion is drafted. ──
   for (const fromId of ids) {
     const self = selfOf(fromId);
     for (const toId of ids) {
@@ -1008,14 +1056,27 @@ export function advancePeacetimePacts({
         worldState: state, rows, fromId, toId, self, strengthFor: strength, threatId: threat,
       });
       if (!crossings.length) continue;
-      const best = crossings[0];
-      const reciprocal = crossingsFor({
+      const backs = crossingsFor({
         worldState: state, rows, fromId: toId, toId: fromId,
         self: selfOf(toId), strengthFor: strength, threatId: '',
-      }).some((back) => back.trigger === best.trigger);
-      const sheet = draftPactSheet({
-        trigger: best.trigger, fromId, toId, reciprocal, tick, score01: best.score01,
       });
+      const drafts = crossings.map((occasion) => ({
+        occasion,
+        sheet: draftPactSheet({
+          trigger: occasion.trigger, fromId, toId, tick, score01: occasion.score01,
+          reciprocal: backs.some((back) => back.trigger === occasion.trigger),
+        }),
+      }));
+      const asked = drafts.findIndex((draft) => Boolean(draft.sheet.refusal)
+        || !addsNothingToStanding(state, fromId, toId, draft.sheet.terms, tick));
+      for (const held of drafts.slice(0, asked < 0 ? drafts.length : asked)) {
+        receipts.push({
+          kind: 'pact_not_asked', tick, fromId, toId, trigger: held.occasion.trigger, refusal: 'already_held',
+          receipt: heldAskReceipt(courtNameOf(fromId), courtNameOf(toId), held.sheet.terms),
+        });
+      }
+      if (asked < 0) continue;
+      const { occasion: best, sheet } = drafts[asked];
       if (sheet.refusal) {
         receipts.push({
           kind: 'pact_not_drafted', tick, fromId, toId, trigger: best.trigger,

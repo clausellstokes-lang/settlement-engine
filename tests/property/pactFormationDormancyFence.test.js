@@ -250,11 +250,11 @@ describe('THE LIT-MUTANT CONTROL — the fences are proved to have eyes', () => 
     expect(lit.trace).not.toBe(dark.trace);
     // …and the ledger the flag governs really exists.
     expect(lit.worldState.spatialLedgers.treaties).toBeTruthy();
-    // A QUEUE, NOT AN ARCHIVE — no SETTLED row survives the arc. Open rows may, and one
-    // does: a pair whose demand still crosses asks again the tick after it signs, and the
-    // instrument answers by running out of stacking room a round later. That is the lane
-    // self-limiting in public rather than a leak, so the pin asserts the property that
-    // actually matters instead of a count that would drift with the fixture.
+    // A QUEUE, NOT AN ARCHIVE — no SETTLED row survives the arc. Open rows may (a question
+    // still on the road when the arc ends), so the pin asserts the property that actually
+    // matters instead of a count that would drift with the fixture. This fixture's pair once
+    // re-asked, the tick after it signed, for the clause it had just signed; since FPQ-72
+    // (cure lane PACT-REASK) a pair does not ask for what its instrument already carries.
     expect(pactProposalsOf(lit.worldState).every((row) => row.state === 'open')).toBe(true);
   });
 });

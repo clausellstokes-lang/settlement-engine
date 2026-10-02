@@ -70,6 +70,16 @@
  *   court keeps a faith AND believes a neighbour's devotion. The believed leg is written only by
  *   SP-B's devotion family, lit in no preset, so no preset world moves; dark, nothing moves.
  *
+ * 2026-10-02 — FOURTH RECORD (cure lane PACT-REASK, FPQ-72). ⚠ A DECLARED LIT-PATH SHIFT. CAUSE, in one
+ *   sentence: the crossings drafted a pair's best occasion without asking whether the pair's standing
+ *   instrument already carried it, so a pair re-asked a clause it held at every dwell (every clause
+ *   collided at the signing, the row settled `refused` with no refusal memory) and never reached its next
+ *   occasion. WHAT MOVES: lit, an occasion whose sheet adds nothing to the standing instrument (the ONE
+ *   stacking test, `pactAmendment.js :: stackingPartitionOf`) is passed over with a `pact_not_asked`
+ *   receipt and the next occasion is drafted; a pair holding nothing, and a sheet adding one clause of
+ *   two, propose exactly as before; dark, nothing (the stage returns before any read). The FPQ-72 block
+ *   below pins it; the four reader-corpus runs' before/after counts live in the lane's report.
+ *
  * @enforced-by this file
  */
 import { describe, expect, test } from 'vitest';
@@ -948,6 +958,94 @@ describe('THE ANSWER, driven directly — so both arms are provably separable', 
       worldState: pactWorld({ flag: true }), proposal, responderDemand01: 1, tick: DUE_TICK, edges,
     });
     expect(both.verdict).toBe('signed');
+  });
+});
+
+describe('FPQ-72 — AN ASK FOR WHAT THE PAIR ALREADY HOLDS IS NOT AN OCCASION', () => {
+  /** A COURT WITH A LIT CREED, seeded by the faith subsystem's own constructor (the FPQ-27 block's). */
+  const litCreed = (id) => ensureReligionState(null, {
+    id, name: id, config: { primaryDeitySnapshot: { name: 'The Dawn Warden', _deityRef: 'deity.dawn' } },
+  }, 'town');
+  /** A's SECOND occasion: its own creed, and a belief that B keeps the rites too, beside the fixture's grain. */
+  const withFaith = (worldState) => ({
+    ...worldState,
+    religionStates: { A: litCreed('A') },
+    spatialLedgers: {
+      ...worldState.spatialLedgers,
+      beliefMaps: pactBeliefs({ aSeesB: { scarcityBands: { food: 'plentiful', raw_material: 'scant' }, devotionBand: 'faithful' } }),
+    },
+  });
+  /** The grain-for-ore instrument, SIGNED BY THE STAGE ITSELF (the walkthrough above), so the held clauses are the real ones. */
+  const signedWorld = () => openThenAnswer(pactWorld({ flag: true })).second.worldState;
+  const step = (worldState, tick, snapshot = pactSnapshot()) => advancePeacetimePacts({
+    snapshot, worldState, settlementUpdates: [], tick,
+  });
+  const rowsOf = (pass) => pactProposalsOf(pass.worldState).map((row) => [row.from, row.to, row.trigger]);
+  const heldOf = (pass) => pass.receipts.filter((receipt) => receipt.kind === 'pact_not_asked');
+
+  test('a pair holding the resource share whose best occasion is the resource share proposes its NEXT occasion', () => {
+    // THE PREMISE, asserted: with no instrument, A's best occasion toward B is the grain, so the faith
+    // occasion below is the NEXT one, not a better one the drafter would have reached anyway (the faith
+    // occasion itself is pinned live by the FPQ-27 block).
+    expect(rowsOf(step(withFaith(pactWorld({ flag: true })), OPEN_TICK))).toEqual([['A', 'B', 'trade_demand']]);
+    // At the signing itself the pair no longer asks for what it has just signed (the base re-asked here).
+    const { second } = openThenAnswer(pactWorld({ flag: true }));
+    expect(endingOf(second)).toBe('signed');
+    // anchored: the signing above wrote the grain clause both ways, so the empty queue is the held clause's doing.
+    expect(pactProposalsOf(second.worldState)).toEqual([]);
+    expect(heldOf(second).map((receipt) => [receipt.fromId, receipt.toId, receipt.trigger, receipt.refusal]))
+      .toEqual([['A', 'B', 'trade_demand', 'already_held'], ['B', 'A', 'trade_demand', 'already_held']]);
+    // With a second occasion, the pair asks for THAT: the held grain is passed over and the rite is drafted.
+    const before = treatyLedgerOf(signedWorld());
+    const next = step(withFaith(signedWorld()), DUE_TICK + 1);
+    expect(rowsOf(next)).toEqual([['A', 'B', 'faith_communion']]);
+    const order = next.receipts.filter((receipt) => receipt.fromId === 'A').map((receipt) => [receipt.kind, receipt.trigger]);
+    expect(order).toEqual([['pact_not_asked', 'trade_demand'], ['pact_proposed', 'faith_communion']]);
+    // Passing over an occasion writes nothing: the instrument is exactly as it was signed.
+    expect(treatyLedgerOf(next.worldState)).toEqual(before);
+  });
+
+  test('a pair holding nothing still proposes its best occasion, and passes nothing over', () => {
+    const fresh = step(withFaith(pactWorld({ flag: true })), OPEN_TICK);
+    expect(rowsOf(fresh)).toEqual([['A', 'B', 'trade_demand']]);
+    // anchored: the held-clause arm above receipts its passed-over occasion, so the empty list is the empty instrument's.
+    expect(heldOf(fresh)).toEqual([]);
+  });
+
+  test('a sheet that adds one clause of two is still proposed, whole', () => {
+    // The instrument holds A's grain and not B's ore: the reciprocal sheet re-offers one and adds one.
+    const signed = signedWorld();
+    const ledger = treatyLedgerOf(signed);
+    const half = {
+      ...signed,
+      spatialLedgers: {
+        ...signed.spatialLedgers,
+        treaties: { 'A>B': { ...ledger['A>B'], terms: ledger['A>B'].terms.filter((term) => term.beneficiary === 'A') } },
+      },
+    };
+    const pass = step(half, DUE_TICK + 1);
+    const [row] = pactProposalsOf(pass.worldState);
+    expect([row.from, row.to, row.trigger]).toEqual(['A', 'B', 'trade_demand']);
+    expect(row.sheet.terms.map((term) => [term.type, term.beneficiary])).toEqual([['resource_share', 'A'], ['resource_share', 'B']]);
+    // anchored: the same pair's full instrument passes this occasion over in the first test of this block.
+    expect(heldOf(pass).filter((receipt) => receipt.fromId === 'A')).toEqual([]);
+  });
+
+  test('the receipt says why, by NAME where both courts have one, and in the seat voice where they do not', () => {
+    const named = advancePeacetimePacts({
+      snapshot: namedSnapshot(), worldState: signedWorld(), settlementUpdates: [], tick: DUE_TICK + 1,
+    });
+    expect(heldOf(named).map((receipt) => receipt.receipt)).toEqual([
+      'Ashford did not ask Irontown again for the resource share, which the instrument between them already carries.',
+      'Irontown did not ask Ashford again for the resource share, which the instrument between them already carries.',
+    ]);
+    // The fixture's own courts carry only their ids for names, and a slug is never printed as one.
+    expect(heldOf(step(signedWorld(), DUE_TICK + 1)).map((receipt) => receipt.receipt)).toEqual(Array(2).fill(
+      'This court did not ask its neighbour again for the resource share, which the instrument between them already carries.',
+    ));
+    // It is a receipt of the crossings, never an ending: the formation vocabulary is untouched.
+    // anchored: every receipt in this list carries the kind pinned two assertions above.
+    expect(heldOf(named).some((receipt) => 'ending' in receipt)).toBe(false);
   });
 });
 

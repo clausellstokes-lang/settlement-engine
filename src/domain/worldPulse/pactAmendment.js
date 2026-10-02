@@ -291,20 +291,25 @@ export function appendLineage(treaty, { act, tick, termIds = [], ending = '' }) 
 }
 
 /**
- * AMEND A STANDING INSTRUMENT with a negotiated sheet.
+ * THE STACKING PARTITION — the ONE test of which terms of a sheet a standing instrument
+ * would admit and which it refuses, and the whole of what `amendPactInstrument` decides
+ * before it writes.
  *
  * Every proposed term is tried against the LIVE occupied cells — a term whose own
  * `expiresTick` has passed occupies nothing, so a lapsed grain clause does not block the
- * next one forever. A collision is refused with its cell named. Nothing is added and no
- * lineage act lands when EVERY term collides, so a wholly-refused amendment leaves the
- * record byte-identical.
+ * next one forever. A collision is refused with its cell named.
+ *
+ * EXPORTED FOR A READ (FPQ-72): the pact stage's crossings ask it whether a drafted sheet
+ * would add anything to the pair's instrument, so the question is answered by this one test
+ * rather than a restatement, and without calling the amendment writer, whose every call is
+ * an act. PURE: no write, no rng, no clock; the terms it hands back are the caller's own.
  *
  * @param {{treaty: Record<string, unknown>, terms: ReadonlyArray<Record<string, unknown>>,
- *   tick: number, act?: string}} input
- * @returns {{treaty: Record<string, unknown>, added: Array<Record<string, unknown>>,
+ *   tick: number}} input
+ * @returns {{added: Array<Record<string, unknown>>,
  *   refused: Array<{cell: string, type: string, receipt: string}>}}
  */
-export function amendPactInstrument({ treaty, terms, tick, act = 'amended' }) {
+export function stackingPartitionOf({ treaty, terms, tick }) {
   const live = termsOf(treaty).filter((term) => Number(term.expiresTick) > tick);
   // WHICH TYPES occupy each cell, not merely THAT one does: the composable exception has
   // to ask what is already there, and a bare cell set cannot answer that question.
@@ -330,6 +335,22 @@ export function amendPactInstrument({ treaty, terms, tick, act = 'amended' }) {
     occupants.add(text(term.type));
     added.push(term);
   }
+  return { added, refused };
+}
+
+/**
+ * AMEND A STANDING INSTRUMENT with a negotiated sheet: the stacking partition above, then
+ * the admitted terms merged and the lineage act recorded. Nothing is added and no lineage
+ * act lands when EVERY term collides, so a wholly-refused amendment leaves the record
+ * byte-identical.
+ *
+ * @param {{treaty: Record<string, unknown>, terms: ReadonlyArray<Record<string, unknown>>,
+ *   tick: number, act?: string}} input
+ * @returns {{treaty: Record<string, unknown>, added: Array<Record<string, unknown>>,
+ *   refused: Array<{cell: string, type: string, receipt: string}>}}
+ */
+export function amendPactInstrument({ treaty, terms, tick, act = 'amended' }) {
+  const { added, refused } = stackingPartitionOf({ treaty, terms, tick });
   if (added.length === 0) return { treaty, added, refused };
   const merged = [...termsOf(treaty), ...added]
     .sort((x, y) => (termIdOf(x) < termIdOf(y) ? -1 : termIdOf(x) > termIdOf(y) ? 1 : 0));
