@@ -352,8 +352,10 @@ describe('EM-B2b — world facts by consequence: the route, the refusals and the
     // (the stride loop below passed under the new master), which is the claim; a lane re-recording is still a STOP.
     // Then the druid rulings (ODQ §934.86 addendum 2), each through the door by the CHAIR: fd2cf1db.. -> 48f733d8.. (7c51ffec8)
     // -> bf978de7.. (72c97b788, J33) and aefaf169.. -> 8f02a2e6.. (baebe2cda) -> 7990bbfb.. (960d99a17, J33).
+    // Then the Voice Program wave 2 (ODQ §934.88), through the door by the CHAIR: bf978de7.. -> 238a6374.. (a7202d720),
+    // the arrival scene and the pressure sentence on their own streams; the prose manifest did not move.
     expect(shaOfFile(GOLDEN), 'tests/fixtures/generator-golden-master.json moved')
-      .toBe('bf978de7e574ef862be4b246f1d883ce2b7f6bfa2ee4343cd28792bd3697367e');
+      .toBe('238a637426af63ea66f5192edfb7d72c50eb62774fa685433edca9b6702037ac');
     expect(shaOfFile(PROSE_GOLDEN), 'tests/fixtures/dossier-prose-manifest-golden.json moved')
       .toBe('7990bbfbfcfb0672f83d1a37952f45d609dfe7d4835d361696c06c5fe9f5a4d7');
 

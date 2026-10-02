@@ -118,7 +118,9 @@ const PRNG_SOURCE_PATH = resolve(process.cwd(), 'src', 'kernel', 'prng.js');
 const GOLDEN_CONTROL_KEY = 'town|germanic|plains|road|civilized|golden-master-v3';
 // 2026-10-01, the urban band (ODQ §934.86): this row's hash moved with the golden master's re-record through the
 // signed door (917834e22); b77b5909... -> 95a3de2d..., read from the committed manifest and re-derived under both mocks.
-const GOLDEN_CONTROL_HASH = '95a3de2d59b7352ed1856697163952a202e8d1e67ad2fb98292af43afc37d98a';
+// 2026-10-02, the Voice Program wave 2 (ODQ §934.88): the row moved again with the re-record through the signed door
+// (a7202d720); 95a3de2d... -> 8f5da975..., its arrival scene and pressure sentence now drawn from their own streams.
+const GOLDEN_CONTROL_HASH = '8f5da975df8251edf1dec8455a9e7e954914b11e50016bb911102f8818733678';
 /** EM-P0's own pinned-mode row and its four chooser keys, re-measured here under the mocks. */
 const PIN_ROW = {
   settType: 'town', culture: 'germanic', terrainOverride: 'riverside',
@@ -314,7 +316,10 @@ describe('EM-P2 — generation census by execution: the instrument, the classifi
     expect(direct.length, 'STOP-6: DIRECT mints — a 4 here with a total of 4 is the blind wrapper').toBe(4);
     expect(seen.mints.length, 'STOP-5: total mints below 35 means the mock never reached the graph')
       .toBeGreaterThanOrEqual(35);
-    expect(seen.mints.length, 'total mints is row-dependent but bounded').toBeLessThanOrEqual(36);
+    // 2026-10-02, the Voice Program wave 2 (ODQ §934.88): 36 -> 38, the measured 35 plus the assembly step's two new
+    // named child streams ('pressure-sentence', 'arrival-scene'; ed3768dc1), with the same one mint of slack. Measured
+    // on this row: total 37, direct 4, via fork 33, foreign 0.
+    expect(seen.mints.length, 'total mints is row-dependent but bounded').toBeLessThanOrEqual(38);
     expect(viaFork.length, 'STOP-6: mints via the re-implemented fork').toBeGreaterThanOrEqual(31);
     expect(foreign.map((record) => record.seed), 'every minted seed is root-prefixed').toEqual([]);
   }, 120_000);
