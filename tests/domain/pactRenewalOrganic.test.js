@@ -277,6 +277,10 @@ describe('GR-RENEWAL U1 — the organic renewal proposer: the world asks to rene
   it('U1-A8: the DM\'s verb path is byte-identical to the base, hashed; and dark means byte-identical at the stage', () => {
     // Recorded at the base 90cbf7963 by this same harness, before a line of U1 existed.
     expect(verbDigest(), 'every word on the dial, staged and applied against a peacetime and a war instrument').toBe('e71967020e268f62d8b78b149d2b9fbcb18f558d332cd44064a8852029e020e8');
-    expect(darkDigest(), 'the stage on each window\'s opening day with the renewal layer absent, then false').toBe('cb16785778a4308f78a1612a72b978de23a2c495bcc64f6c977af9e1120d2293');
+    // RE-RECORDED 2026-10-02 by cure lane PACT-REASK (FPQ-72, one cause): with renewal dark the pact layer is
+    // still lit, and each window's instrument holds the clause the crossings draft, so they now pass it over
+    // (`pact_not_asked`) instead of re-asking it. Was cb16785778a4308f78a1612a72b978de23a2c495bcc64f6c977af9e1120d2293;
+    // the skip-removal mutant restores exactly that value (executed), so the move is the skip's alone.
+    expect(darkDigest(), 'the stage on each window\'s opening day with the renewal layer absent, then false').toBe('c9257c1ea952cd871af16d5381eeb81c9fd777997407fc3ed147e139a6c2e811');
   });
 });

@@ -446,11 +446,11 @@
       "suite": "tests/property/npcCredibilityDormancyGolden.test.js",
       "recordEnv": "UPDATE_GOLDEN",
       "proofForm": null,
-      "sha256": "b872e66a2f183d5c6554c8334679e71ef7b2ca8f60d24d70a9867fc60134edbc",
+      "sha256": "c8d6a126e154e2561d1a8c0a6e405910f04b70630d271b6d7f536030d3fdd866",
       "rows": 3,
       "seedSet": null,
       "distinctFloor": null,
-      "ownerRow": "§901",
+      "ownerRow": "§934.89 (FP-46: the chair signs the chain's golden re-records by delegation)",
       "note": "FROZEN AT THE GENESIS 2026-09-16 at the bytes committed at d22ceff01 (the owner's signature 'sign the golden'; record docs/shift-records/2026-09-16-genesis-freeze-generator-golden-master.json); measured, not moved: sha256 = bytes of `path`, rows = the manifest's key count where it is JSON."
     },
     {
@@ -850,11 +850,11 @@
       "suite": "tests/property/heraldKnowledgeDeskGolden.test.js",
       "recordEnv": "UPDATE_GOLDEN",
       "proofForm": null,
-      "sha256": "0844232324379216aebac4bc36e08a201d2a2c9d59f37dd9ce9695d868e2896f",
-      "rows": 383,
+      "sha256": "a4a845af2f5879e215d6f7c5344860945d81a9108f9aef3aef067c609f6b8598",
+      "rows": 387,
       "seedSet": null,
       "distinctFloor": null,
-      "ownerRow": "§934.88 of docs/OWNER_DECISION_QUEUE.md (THE VOICE PROGRAM, recorded 2026-10-02 on the ledger branch review-fixes-2026-07-08 at 757c928ff)",
+      "ownerRow": "§934.89 (FP-46: the chair signs the chain's golden re-records by delegation)",
       "note": "ENROLLED 2026-09-24 by lane FP-I5 (IN-5) under the FP chair's dispatch, record docs/shift-records/2026-09-24-in5-herald-knowledge-desk.json (action enroll, chair-signed). THE NON-OMNISCIENT HERALD GOLDEN of the belief_misjudgment refile (J-INF-6), captured FIRST at the clean base 57b52b510 before the routing table moved: the reader corpus full_simulation row rr-fresh-full after one year, read through buildHeraldFeed campaign lens. Keys: <row>|contentSha256 (every item's content except its desk, sorted by id), <row>|itemCount, and <row>|section|<id> (the desk at capture). tests/property/heraldKnowledgeDeskGolden.test.js holds the digest and count byte-stable and asserts every desk equals its captured desk except the declared refile set, which reads the knowledge desk: the one-time shift, recorded. The single producer is tests/helpers/heraldDeskGolden.js, imported by the suite; the capture ran it byte-identical from outside the tree so the door's clean-tree refusal held."
     }
   ]

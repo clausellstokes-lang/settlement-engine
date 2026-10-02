@@ -33,6 +33,16 @@
  * credibility, disinfo, npcLadder) are unchanged, so the D-2 gate is still the pure
  * no-op this file exists to prove. The hash was re-recorded for that stated cause; do
  * not re-record any future drift without an equivalent field-level attribution.
+ *
+ * SECOND GOLDEN MOVEMENT, 2026-10-02 — `nc-b|8|one_month` only, and DORMANCY DID NOT
+ * BREAK. STATECRAFT-BAND U1 (FPQ-74, ODQ §934.89 FP-43/FP-46) banded
+ * informationStatecraft.js SIGHT_TUNING.EXPOSE_BASE 0.06 -> 0.01, so the one spy fall this
+ * world produced in eight months no longer happens. ATTRIBUTED BY FIELD by the lane (the
+ * base file planted and restored by sha256): `newsKinds` loses `infowar_spy_exposed: 1`
+ * and `credibility` loses midfen's charge of that fall; npcCredibility, disinfo, npcLadder,
+ * tick and rollSummary are byte-identical. Re-recorded through the signed door at batch 7
+ * (record docs/shift-records/2026-10-02-statecraft-band-u1-exposure-band.json):
+ * 0c6a70ff... -> fd2eff1b...; nc-a and nc-c unmoved.
  */
 
 import { describe, it, expect } from 'vitest';

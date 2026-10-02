@@ -20,6 +20,10 @@ import {
   observeBeliefDivergence,
   observeBehavioralYear,
 } from '../../scripts/audit/behavioral-observation.mjs';
+import { advanceBeliefMaps, GOVERNING_SEAT_KEY } from '../../src/domain/worldPulse/beliefMap.js';
+import { buildWorldSnapshot } from '../../src/domain/worldPulse/worldSnapshot.js';
+import { deriveSettlementPressures, pressureIndex } from '../../src/domain/worldPulse/pressureModel.js';
+import { ensureRegionalGraph } from '../../src/domain/region/index.js';
 
 const TICK = 520;
 
@@ -242,5 +246,83 @@ describe('the per-year observation carries the metric', () => {
       'arcCounts', 'motion', 'attentionCounts', 'succession', 'causal',
       'chronicleSample', 'stateVectors', 'beliefDivergence',
     ]));
+  });
+});
+
+/**
+ * FP IN-6 U5 — THE STRENGTH AXIS (J-INF-11; the divergence01-sane envelope "extends to the strength
+ * axis"). A canonized realm whose saves the engine snapshot carries: the adapter compares each
+ * believed strength band against the display-safe banded truth (beliefTruthBands.js), which composes
+ * the engine's own functions. The beliefs are the engine's cold-start seed (truth by construction),
+ * so every band matches until one is planted wrong.
+ */
+describe('FP IN-6 U5: the strength axis, through the display-safe truth provider', () => {
+  const settlement = (name, tier, population) => ({
+    name, tier, population,
+    config: { tradeRouteAccess: 'road', priorityEconomy: 25, priorityMilitary: 40, primaryDeitySnapshot: { name: 'Vareth' } },
+    institutions: [],
+    economicState: { prosperity: 'Prosperous', primaryExports: [], primaryImports: [] },
+    powerStructure: { publicLegitimacy: { score: 62, label: 'Stable' }, factions: [{ faction: 'Council', category: 'civic', power: 60, isGoverning: true }], conflicts: [] },
+    npcs: [], activeConditions: [],
+  });
+  const canonSaves = [
+    { id: 'a', name: 'Ashkar', phase: 'canon', settlement: settlement('Ashkar', 'metropolis', 120000) },
+    { id: 'b', name: 'Belmoor', phase: 'canon', settlement: settlement('Belmoor', 'village', 400) },
+    { id: 'c', name: 'Corvel', phase: 'canon', settlement: settlement('Corvel', 'city', 30000) },
+  ];
+  const canonRealm = () => {
+    const campaign = {
+      id: 'strength-axis', settlementIds: ['a', 'b', 'c'],
+      worldState: { rngSeed: 'strength-axis', tick: TICK, spatialCanonVersion: 1, simulationRules: { infoMode: 'full' }, relationshipStates: {} },
+      regionalGraph: ensureRegionalGraph({ edges: [
+        { id: 'edge.a.b', from: 'a', to: 'b', relationshipType: 'trade_partner' },
+        { id: 'edge.a.c', from: 'a', to: 'c', relationshipType: 'rival' },
+      ] }),
+    };
+    const snapshot = buildWorldSnapshot({ campaign, saves: canonSaves, worldState: campaign.worldState });
+    const { next } = advanceBeliefMaps({
+      snapshot, pressureIdx: pressureIndex(deriveSettlementPressures(snapshot)), worldState: snapshot.worldState, tick: TICK,
+    });
+    return { campaign, beliefMaps: next };
+  };
+  const observe = (beliefMaps, campaign) => observeBeliefDivergence({
+    result: { tick: TICK, worldState: { ...campaign.worldState, spatialLedgers: { beliefMaps } }, regionalGraph: campaign.regionalGraph },
+    afterSaves: canonSaves,
+  });
+
+  it('the cold-start seed is true on every axis, the strength axis included', () => {
+    const { campaign, beliefMaps } = canonRealm();
+    const observed = observe(beliefMaps, campaign);
+    expect(observed.records).toBe(4);
+    expect(observed.strengthComparable).toBe(4);
+    expect(observed.strengthMismatched).toBe(0);
+    expect(observed.axes).toEqual(['relationship', 'faith', 'strength']);
+    expect(observed.divergence01).toBe(0);
+  });
+
+  it('a planted wrong strength band raises the strength rate and only that rate', () => {
+    const { campaign, beliefMaps } = canonRealm();
+    const wrong = beliefMaps.a[GOVERNING_SEAT_KEY].b;
+    const planted = {
+      ...beliefMaps,
+      a: { [GOVERNING_SEAT_KEY]: { ...beliefMaps.a[GOVERNING_SEAT_KEY], b: { ...wrong, strengthBand: wrong.strengthBand === 4 ? 0 : 4 } } },
+    };
+    const observed = observe(planted, campaign);
+    expect(observed.strengthMismatched).toBe(1);
+    expect(observed.relationshipMismatched).toBe(0);
+    expect(observed.faithMismatched).toBe(0);
+    // Three axis rates: relationship 0, faith 0, strength one in four.
+    expect(observed.divergence01).toBe(0.0833);
+  });
+
+  it('a realm whose saves the snapshot cannot carry keeps the axis as a gap, exactly as before', () => {
+    const { campaign, beliefMaps } = canonRealm();
+    const observed = observeBeliefDivergence({
+      result: { tick: TICK, worldState: { ...campaign.worldState, spatialLedgers: { beliefMaps } }, regionalGraph: campaign.regionalGraph },
+      afterSaves: saves,
+    });
+    expect(observed.strengthComparable).toBe(0);
+    // anchored: the same realm with canon saves lists the axis (the first arm above)
+    expect(observed.axes).not.toContain('strength');
   });
 });

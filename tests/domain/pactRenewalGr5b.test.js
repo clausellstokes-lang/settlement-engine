@@ -188,8 +188,20 @@ describe('GR-5b — the renewal window: a treaty inside its window renews throug
   it('A2: every non-renewal road through the verb and the answer step is byte-identical to the base, hashed', () => {
     // Recorded at 0fd6b9209 by this same harness, before a line of GR-5b existed.
     expect(verbDigest(), 'every clause the dial offered at the base, staged and approved').toBe('1c490fa6679d1af95b2166e1f6abebcd3d4e31c78d64ef2a4af006133b3bc14e');
-    expect(tickDigest(), 'the stacking re-offer, the refusal with memory, the organic mint').toBe('f5c54332723e617f3df1191857ebe197a588d63c7710edcfb33500bb815b352f');
-    expect(darkDigest(), 'a renewal row in a world whose renewal layer is absent, then false').toBe('983f4ed91f8cf803f7b9e5cf1fcf516778865777101f199fef3183ac078e6ae5');
+    // RE-RECORDED 2026-10-02 by cure lane PACT-REASK (FPQ-72, one cause), BOTH lines below: every world here
+    // holds the clause its crossings draft, so the tick's crossings now pass the held occasion over
+    // (`pact_not_asked`) instead of re-asking it. Were f5c54332723e617f3df1191857ebe197a588d63c7710edcfb33500bb815b352f
+    // and 983f4ed91f8cf803f7b9e5cf1fcf516778865777101f199fef3183ac078e6ae5; with the skip removed this file's base
+    // pins pass whole (executed), so both moves are the skip's alone. The verb's digest above does not move.
+    // RE-RECORDED 2026-10-02 by cure lane PACT-ANSWER (FP-42 at ODQ §934.89, FPQ-73, one cause), BOTH lines
+    // below: no court in these worlds has learned a risk appetite, and `reserveFor` now spends the appetite
+    // reader's own neutral stock where it read the absence as zero, so the answer step's reserve falls from
+    // 0.5 to 0.375 at a neutral posture and the answers these digests hash move with it. Were PACT-REASK's
+    // 4b1dd7d84ff0d53e806212ac4f3f6dc0472ce6524454d17c6813da5c09627ffe and
+    // 29ce7ddffbade8b89c68465c8e2b58a6e7fbb9009cd06ad35df606801a041f22; with `: 0` restored in `reserveFor` both
+    // pass whole (executed), so both moves are FP-42's alone. The verb's digest above does not move.
+    expect(tickDigest(), 'the stacking re-offer, the refusal with memory, the organic mint').toBe('05dc2d499c9ea9f888a3221fb3da695882054343d001c3f35598315ba0934ba1');
+    expect(darkDigest(), 'a renewal row in a world whose renewal layer is absent, then false').toBe('96ceaacca3a3e04837a601d7636c4fa28a59f492e1a984fdc6cf215f62b6fc9b');
   });
 
   it('A3: a treaty inside the window renews through the verb, the answer step and amendPactInstrument with the lineage act renewed, at the same pair key', () => {

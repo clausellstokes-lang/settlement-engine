@@ -70,6 +70,25 @@
  *   court keeps a faith AND believes a neighbour's devotion. The believed leg is written only by
  *   SP-B's devotion family, lit in no preset, so no preset world moves; dark, nothing moves.
  *
+ * 2026-10-02 — FOURTH RECORD (cure lane PACT-REASK, FPQ-72). ⚠ A DECLARED LIT-PATH SHIFT. CAUSE, in one
+ *   sentence: the crossings drafted a pair's best occasion without asking whether the pair's standing
+ *   instrument already carried it, so a pair re-asked a clause it held at every dwell (every clause
+ *   collided at the signing, the row settled `refused` with no refusal memory) and never reached its next
+ *   occasion. WHAT MOVES: lit, an occasion whose sheet adds nothing to the standing instrument (the ONE
+ *   stacking test, `pactAmendment.js :: stackingPartitionOf`) is passed over with a `pact_not_asked`
+ *   receipt and the next occasion is drafted; a pair holding nothing, and a sheet adding one clause of
+ *   two, propose exactly as before; dark, nothing (the stage returns before any read). The FPQ-72 block
+ *   below pins it; the four reader-corpus runs' before/after counts live in the lane's report.
+ *
+ * 2026-10-02 — FIFTH RECORD (cure lane PACT-ANSWER, U1, FP-42 at ODQ §934.89, FPQ-73). ⚠ A DECLARED LIT-PATH
+ *   SHIFT. CAUSE, in one sentence: `reserveFor` read an UNLEARNED risk appetite as zero appetite, so in every
+ *   world with `strategicPostureEnabled` dark (every preset) each answering court was the most cautious court
+ *   there could be (reserve 0.5) and refused every reciprocal grain-for-ore sheet (offer 0.458). WHAT MOVES:
+ *   lit, an unlearned appetite spends the appetite reader's own neutral stock (`courtRiskAppetiteOf`), so the
+ *   reserve at a neutral posture is 0.375; a court that also needs what the asker has signs, a one-sided ask
+ *   is still refused, and a learned appetite reads exactly as before (THE POSTURE pin above, unchanged); dark,
+ *   nothing (the stage returns before any read). The FP-42 block below pins it.
+ *
  * @enforced-by this file
  */
 import { describe, expect, test } from 'vitest';
@@ -100,6 +119,7 @@ import { edgeIdFor, ensureRegionalGraph } from '../../src/domain/region/graph.js
 import { ensureRelationshipStatesForGraph } from '../../src/domain/worldPulse/relationshipEvolution.js';
 import { ensureRelationshipState, relationshipKeyFromEdge } from '../../src/domain/worldPulse/relationshipState.js';
 import { ensureReligionState } from '../../src/domain/worldPulse/religionState.js';
+import { courtRiskAppetiteOf } from '../../src/domain/worldPulse/strategicPosture.js';
 import {
   DUE_TICK, OPEN_TICK, SEAT, pactBeliefs, pactSnapshot, pactWorld, relKey,
 } from '../helpers/pactFixture.js';
@@ -311,6 +331,72 @@ describe('THE POSTURE — same evidence, two courts, two outcomes, both receipte
       expect(pass.receipts.find((r) => r.ending).receipt).toContain("court's posture reads");
     }
     expect(F.OUT_OF_POSTURE_PRICE01).toBeGreaterThan(0);
+  });
+});
+
+describe('FP-42 — AN UNLEARNED APPETITE IS NEUTRAL, NOT TIMID (ODQ §934.89, FPQ-73)', () => {
+  /** The posture pin's PARTIAL reciprocal demand, with NO appetite learned anywhere: the posture
+   *  flag is dark and no court keeps a disposition row, which is every preset world today. */
+  const unlearned = () => pactWorld({
+    flag: true,
+    beliefs: pactBeliefs({ bSeesA: { scarcityBands: { raw_material: 'sufficient' } } }),
+  });
+  /** What the ONE appetite reader says of B in that world. */
+  const appetiteOfB = (worldState) => courtRiskAppetiteOf({ kind: 'settlement', id: 'B' }, null,
+    { rules: worldState.simulationRules });
+
+  test('an absent-appetite court signs the reciprocal sheet a cautious court refuses', () => {
+    const worldState = unlearned();
+    // THE PREMISE, asserted: B has learned nothing, and its reader says so rather than reading zero.
+    const appetite = appetiteOfB(worldState);
+    expect(appetite.present).toBe(false);
+    expect(appetite.stock01).toBeGreaterThan(0);
+    const { first, second } = openThenAnswer(worldState);
+    // The sheet is the reciprocal grain-for-ore bargain, one clause owed to each court.
+    const [row] = pactProposalsOf(first.worldState);
+    expect(row.sheet.terms.map((term) => [term.type, term.beneficiary])).toEqual([['resource_share', 'A'], ['resource_share', 'B']]);
+    expect(endingOf(second)).toBe('signed');
+    const signed = receiptOf(second, 'pact_signed');
+    // The offer is the measured reciprocal 0.458, and the reserve is the reader's own neutral, spent.
+    expect(signed.offer01).toBeCloseTo(0.458, 3);
+    expect(signed.reserve01).toBeCloseTo(F.RESERVE_BASE01 - F.RISK_APPETITE_RELIEF * appetite.stock01, 10);
+    // The receipt says the appetite was never learned, never that the court is timid.
+    expect(signed.receipt).toContain(appetite.receipt);
+    expect(Object.keys(treatyLedgerOf(second.worldState))).toEqual(['A>B']);
+    // ANTI-VACUITY: the SAME sheet before the SAME court, cautious by a learned appetite of zero, is
+    // still refused, so the signature above is the unlearned appetite's doing and not the offer's.
+    const cautious = openThenAnswer(pactWorld({
+      flag: true,
+      beliefs: pactBeliefs({ bSeesA: { scarcityBands: { raw_material: 'sufficient' } } }),
+      rules: { strategicPostureEnabled: true },
+      dispositionStats: { B: { appetite: { stock01: 0, present: true } } },
+    }));
+    expect(endingOf(cautious.second)).toBe('no_overlap');
+    expect(receiptOf(cautious.second, 'pact_no_overlap').offer01).toBe(signed.offer01);
+  });
+
+  test('and still refuses a 0.25 one-sided ask', () => {
+    const proposal = {
+      id: 'pact.10.a.b.trade_demand', from: 'A', to: 'B', trigger: 'trade_demand',
+      sheet: { terms: [{ type: 'resource_share', family: 'economic', beneficiary: 'A', magnitude: 0.25 }] },
+      openedTick: OPEN_TICK, answerDueTick: DUE_TICK, state: 'open', transport: 'abstract',
+    };
+    const worldState = pactWorld({ flag: true });
+    expect(appetiteOfB(worldState).present).toBe(false);
+    // Half the clause plus half a responder occasion of the same weight: the one-sided ceiling measured live.
+    const answer = answerPactProposal({
+      worldState, proposal, responderDemand01: 0.25, tick: DUE_TICK, edges: pactSnapshot().regionalGraph.edges,
+    });
+    expect(answer.offer01).toBe(0.25);
+    expect(answer.verdict).toBe('no_overlap');
+    // The reserve sits between the two measured offers: above the one-sided ask, at or below the reciprocal sheet.
+    expect(answer.reserve01).toBeGreaterThan(answer.offer01);
+    expect(answer.reserve01).toBeLessThanOrEqual(0.458);
+    // …and the stage's own one-sided world (the NO OVERLAP pin above) is refused through the whole arc too.
+    const oneSided = openThenAnswer(pactWorld({
+      flag: true, beliefs: pactBeliefs({ bSeesA: { scarcityBands: { raw_material: 'scant' } } }),
+    }));
+    expect(endingOf(oneSided.second)).toBe('no_overlap');
   });
 });
 
@@ -948,6 +1034,94 @@ describe('THE ANSWER, driven directly — so both arms are provably separable', 
       worldState: pactWorld({ flag: true }), proposal, responderDemand01: 1, tick: DUE_TICK, edges,
     });
     expect(both.verdict).toBe('signed');
+  });
+});
+
+describe('FPQ-72 — AN ASK FOR WHAT THE PAIR ALREADY HOLDS IS NOT AN OCCASION', () => {
+  /** A COURT WITH A LIT CREED, seeded by the faith subsystem's own constructor (the FPQ-27 block's). */
+  const litCreed = (id) => ensureReligionState(null, {
+    id, name: id, config: { primaryDeitySnapshot: { name: 'The Dawn Warden', _deityRef: 'deity.dawn' } },
+  }, 'town');
+  /** A's SECOND occasion: its own creed, and a belief that B keeps the rites too, beside the fixture's grain. */
+  const withFaith = (worldState) => ({
+    ...worldState,
+    religionStates: { A: litCreed('A') },
+    spatialLedgers: {
+      ...worldState.spatialLedgers,
+      beliefMaps: pactBeliefs({ aSeesB: { scarcityBands: { food: 'plentiful', raw_material: 'scant' }, devotionBand: 'faithful' } }),
+    },
+  });
+  /** The grain-for-ore instrument, SIGNED BY THE STAGE ITSELF (the walkthrough above), so the held clauses are the real ones. */
+  const signedWorld = () => openThenAnswer(pactWorld({ flag: true })).second.worldState;
+  const step = (worldState, tick, snapshot = pactSnapshot()) => advancePeacetimePacts({
+    snapshot, worldState, settlementUpdates: [], tick,
+  });
+  const rowsOf = (pass) => pactProposalsOf(pass.worldState).map((row) => [row.from, row.to, row.trigger]);
+  const heldOf = (pass) => pass.receipts.filter((receipt) => receipt.kind === 'pact_not_asked');
+
+  test('a pair holding the resource share whose best occasion is the resource share proposes its NEXT occasion', () => {
+    // THE PREMISE, asserted: with no instrument, A's best occasion toward B is the grain, so the faith
+    // occasion below is the NEXT one, not a better one the drafter would have reached anyway (the faith
+    // occasion itself is pinned live by the FPQ-27 block).
+    expect(rowsOf(step(withFaith(pactWorld({ flag: true })), OPEN_TICK))).toEqual([['A', 'B', 'trade_demand']]);
+    // At the signing itself the pair no longer asks for what it has just signed (the base re-asked here).
+    const { second } = openThenAnswer(pactWorld({ flag: true }));
+    expect(endingOf(second)).toBe('signed');
+    // anchored: the signing above wrote the grain clause both ways, so the empty queue is the held clause's doing.
+    expect(pactProposalsOf(second.worldState)).toEqual([]);
+    expect(heldOf(second).map((receipt) => [receipt.fromId, receipt.toId, receipt.trigger, receipt.refusal]))
+      .toEqual([['A', 'B', 'trade_demand', 'already_held'], ['B', 'A', 'trade_demand', 'already_held']]);
+    // With a second occasion, the pair asks for THAT: the held grain is passed over and the rite is drafted.
+    const before = treatyLedgerOf(signedWorld());
+    const next = step(withFaith(signedWorld()), DUE_TICK + 1);
+    expect(rowsOf(next)).toEqual([['A', 'B', 'faith_communion']]);
+    const order = next.receipts.filter((receipt) => receipt.fromId === 'A').map((receipt) => [receipt.kind, receipt.trigger]);
+    expect(order).toEqual([['pact_not_asked', 'trade_demand'], ['pact_proposed', 'faith_communion']]);
+    // Passing over an occasion writes nothing: the instrument is exactly as it was signed.
+    expect(treatyLedgerOf(next.worldState)).toEqual(before);
+  });
+
+  test('a pair holding nothing still proposes its best occasion, and passes nothing over', () => {
+    const fresh = step(withFaith(pactWorld({ flag: true })), OPEN_TICK);
+    expect(rowsOf(fresh)).toEqual([['A', 'B', 'trade_demand']]);
+    // anchored: the held-clause arm above receipts its passed-over occasion, so the empty list is the empty instrument's.
+    expect(heldOf(fresh)).toEqual([]);
+  });
+
+  test('a sheet that adds one clause of two is still proposed, whole', () => {
+    // The instrument holds A's grain and not B's ore: the reciprocal sheet re-offers one and adds one.
+    const signed = signedWorld();
+    const ledger = treatyLedgerOf(signed);
+    const half = {
+      ...signed,
+      spatialLedgers: {
+        ...signed.spatialLedgers,
+        treaties: { 'A>B': { ...ledger['A>B'], terms: ledger['A>B'].terms.filter((term) => term.beneficiary === 'A') } },
+      },
+    };
+    const pass = step(half, DUE_TICK + 1);
+    const [row] = pactProposalsOf(pass.worldState);
+    expect([row.from, row.to, row.trigger]).toEqual(['A', 'B', 'trade_demand']);
+    expect(row.sheet.terms.map((term) => [term.type, term.beneficiary])).toEqual([['resource_share', 'A'], ['resource_share', 'B']]);
+    // anchored: the same pair's full instrument passes this occasion over in the first test of this block.
+    expect(heldOf(pass).filter((receipt) => receipt.fromId === 'A')).toEqual([]);
+  });
+
+  test('the receipt says why, by NAME where both courts have one, and in the seat voice where they do not', () => {
+    const named = advancePeacetimePacts({
+      snapshot: namedSnapshot(), worldState: signedWorld(), settlementUpdates: [], tick: DUE_TICK + 1,
+    });
+    expect(heldOf(named).map((receipt) => receipt.receipt)).toEqual([
+      'Ashford did not ask Irontown again for the resource share, which the instrument between them already carries.',
+      'Irontown did not ask Ashford again for the resource share, which the instrument between them already carries.',
+    ]);
+    // The fixture's own courts carry only their ids for names, and a slug is never printed as one.
+    expect(heldOf(step(signedWorld(), DUE_TICK + 1)).map((receipt) => receipt.receipt)).toEqual(Array(2).fill(
+      'This court did not ask its neighbour again for the resource share, which the instrument between them already carries.',
+    ));
+    // It is a receipt of the crossings, never an ending: the formation vocabulary is untouched.
+    // anchored: every receipt in this list carries the kind pinned two assertions above.
+    expect(heldOf(named).some((receipt) => 'ending' in receipt)).toBe(false);
   });
 });
 

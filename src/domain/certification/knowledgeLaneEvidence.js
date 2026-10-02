@@ -28,6 +28,12 @@
  * subsystems' work, which is precisely the vacuity the certification contract
  * forbids.
  *
+ * ⭐ CURED 2026-09-24 BY FP IN-6. U1 re-measured the residual at build (thirty-three
+ * impactKinds and one hundred forty-five routed kinds by then); U2 removed the bare
+ * `news` token and registered the information beats' own vocabulary, so the family
+ * is EARNED and both residual lists below are empty. A knowledge count is still
+ * SHARED by every belief-lane beat, so it corroborates and never proves one row.
+ *
  * ── WHAT TO DECLARE INSTEAD ──────────────────────────────────────────────────
  * KNOWLEDGE_LANE_EVENT_TYPES  the one dispositive vocabulary literal.
  * KNOWLEDGE_LANE_STATE_KEYS   the four worldState containers the lane writes,
@@ -88,11 +94,21 @@ export const KNOWLEDGE_LANE_STATE_KEYS = Object.freeze([
 ]);
 
 /**
- * The FIFTEEN impactKinds that reach the `knowledge` mover family only through
- * the `news` token in their own wizard-news id, having matched no earlier
- * family. Enumerated by executing moverFamilyOf over the estate's impactKind
- * census, not by reading the token lists, so it stays honest about what the
- * classifier actually does.
+ * The impactKinds that reach the `knowledge` mover family only through the
+ * `news` token in their own wizard-news id, having matched no earlier family.
+ * Enumerated by executing moverFamilyOf over the estate's impactKind census, not
+ * by reading the token lists, so it stays honest about what the classifier
+ * actually does. RE-MEASURED AT BUILD by FP IN-6 U1 (2026-09-24, the tree at
+ * 85c170e8e): fifteen at the 2026-07-31 census, THIRTY-THREE now. The census and
+ * the classifier run are tests/helpers/knowledgeResidualCensus.js, and the
+ * decontamination ratchet in tests/domain/subsystemRowsEpistemics.test.js holds
+ * this list EXACTLY equal to the live residual in both directions.
+ *
+ * EMPTY SINCE FP IN-6 U2, THE CURE: the bare `news` token left the knowledge
+ * family's token list, so no kind reaches the family through its id any more, and
+ * the ratchet banks the cure at zero. A kind that lands here again is a regression
+ * the earned-classification walker (tests/lint/earnedClassification.walker.test.js)
+ * reds first.
  *
  * A row must never treat a nonzero knowledge count as its own evidence while
  * this list is non-empty. Shrinking it is a real improvement (give one of these
@@ -100,23 +116,7 @@ export const KNOWLEDGE_LANE_STATE_KEYS = Object.freeze([
  * what makes that improvement visible.
  * @type {ReadonlyArray<string>}
  */
-export const KNOWLEDGE_FAMILY_RESIDUAL_IMPACT_KINDS = Object.freeze([
-  'assize_verdict',
-  'cause_lifecycle',
-  'commons_gathering',
-  'commons_petition',
-  'commons_riot',
-  'diplomacy',
-  'hierarchy_cascade',
-  'hungry_gap',
-  'moral_reckoning',
-  'plague_arrival',
-  'queue_refused',
-  'realm_verb_refused',
-  'roads',
-  'spatial_consequence',
-  'spring_thaw',
-]);
+export const KNOWLEDGE_FAMILY_RESIDUAL_IMPACT_KINDS = Object.freeze([]);
 
 /**
  * The SIBLING census the impactKind list above cannot see: KIND-ONLY producers.
@@ -129,24 +129,27 @@ export const KNOWLEDGE_FAMILY_RESIDUAL_IMPACT_KINDS = Object.freeze([
  * reading token lists), so a nonzero knowledge count is never one row's
  * evidence while either list is non-empty.
  *
+ * RE-MEASURED AT BUILD by FP IN-6 U1 (2026-09-24, the tree at 85c170e8e): seven
+ * at the 2026-07-31 census, which read only the late-lane authors; the live census
+ * now reads every exact Herald routing token that is not an impactKind literal
+ * (tests/helpers/knowledgeResidualCensus.js), and ONE HUNDRED FORTY-FIVE of them
+ * reach the family only through the id. The ratchet holds this list exactly equal
+ * to the live residual, like its impactKind sibling above. EMPTY SINCE FP IN-6 U2,
+ * for the reason stated on the impactKind list.
+ *
  * Deliberately EXCLUDED, with the executed reason:
  *   - webwar_raid: `raid` is a war token, so it classifies `war` on its own
  *     vocabulary — a real (if coarse) family, not residual.
  *   - intel_transfer: `intel` is a knowledge token, so it classifies knowledge
  *     WITHOUT its id — the one late-lane beat whose knowledge filing is
  *     semantically earned (intelligence changing hands).
- *   - treaty_signed: carries impactKind `diplomacy`, already censused above.
+ *   - treaty_signed: WAS excluded at the 2026-07-31 census because its record
+ *     carries impactKind `diplomacy`. The IN-6 U1 census classifies every routed
+ *     token ON ITS OWN, because a producer can mint it as a bare kind, so it is
+ *     listed below with the rest.
  * @type {ReadonlyArray<string>}
  */
-export const KNOWLEDGE_FAMILY_RESIDUAL_KINDS = Object.freeze([
-  'infowar_lie_exposed',
-  'infowar_spy_exposed',
-  'momentum_climb_down',
-  'webwar_campaign_abandoned',
-  'webwar_campaign_complete',
-  'webwar_campaign_minted',
-  'webwar_wrong_village',
-]);
+export const KNOWLEDGE_FAMILY_RESIDUAL_KINDS = Object.freeze([]);
 
 /**
  * Where the belief-versus-ground-truth metric lives in a soak receipt. Added to
@@ -171,3 +174,36 @@ export const BELIEF_GATE_RECEIPT_FIELDS = Object.freeze([
   'behavioral.yearly[].beliefDivergence.spatialCanonized',
   'behavioral.yearly[].beliefDivergence.infoMode',
 ]);
+
+/**
+ * THE INFORMATION FLAGS' DISPOSITIVE LITERALS (FP IN-6 U6; the compiled block #22: "Certification
+ * rows for all four IN flags name their dispositive literals"; DESIGN_FP_INFORMATION.md §5 IN-6:
+ * "each naming its dispositive literals (contamination law) and its differential evidence path").
+ *
+ * Per key, the news kinds ONLY that key's beats mint: every one a row of the INFORMATION kind
+ * registry, disjoint across keys, and EARNED knowledge on its own vocabulary since U2 removed the
+ * bare `news` token. Like KNOWLEDGE_LANE_EVENT_TYPES above they are POST-APPLY news entries: they
+ * land in a receipt's postApplyMoverCounts and never in eventTypeCounts, which is why the four
+ * rows keep their eventTypes channel empty and cite these by name instead. A shared knowledge
+ * count still corroborates every beat at once, so no row may claim the family.
+ *
+ * The mirror has NONE, by design: it writes nothing, and its one registered kind
+ * (mirror_standing_line) is a section-null dossier row no receipt carries.
+ * @type {Readonly<Record<string, ReadonlyArray<string>>>}
+ */
+export const INFO_FLAG_DISPOSITIVE_LITERALS = Object.freeze({
+  // QUOTED KEYS, ON PURPOSE: each flag's gate-polarity census counts every bare code spelling of
+  // its key in src as a read, and a catalog that names the key is not one (codeOnly blanks a
+  // quoted literal, exactly as it blanks a row's `rule:` string).
+  'counterIntelEnabled': Object.freeze(['false_accusation', 'sweep_launched']),
+  'infoLureEnabled': Object.freeze(['lure_sprung']),
+  'reputationRaceEnabled': Object.freeze(['race_person', 'race_story', 'race_together', 'word_came_too_late']),
+  'secondOrderBeliefEnabled': Object.freeze([]),
+});
+
+/**
+ * The differential evidence path every IN row cites (FP IN-6 U4): one seed, the key lit and
+ * dark, the receipts that differ by kind and the arm that holds a key dark, written to a file.
+ * @type {string}
+ */
+export const INFO_FLAG_DIFFERENTIAL_PATH = 'scripts/audit/info-lit-dark-differential.mjs';

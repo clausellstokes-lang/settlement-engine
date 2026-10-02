@@ -801,7 +801,25 @@ export const SIGHT_TUNING = Object.freeze({
 
   // COVERT EXPOSURE (deniable-until-lineage §2.1 + the SEE↔HIDE counterplay): a covert posture
   // on a HIDING target is exposed at odds RISING with the target's secrecy — the blowback triple.
-  EXPOSE_BASE: 0.06,         // baseline per-tick exposure odds for a covert posture
+  // EXPOSE_BASE — BANDED 0.06 -> 0.01 (STATECRAFT-BAND U1, FPQ-74; ODQ §934.89 FP-43, the band
+  // the chair signs by delegation under FP-46; the tuning register row stays `draft` until the
+  // chair runs the signing door). WHAT IT GOVERNS: the per-tick odds that paid eyes in an OPEN
+  // court (no secrecy posture) are found, so a spy's expected life there is 1 / EXPOSE_BASE ticks.
+  // At 0.06 that was about sixteen weeks, and a burned watcher re-buys eyes within a season: a
+  // scandal every few months per pair, the "constant whisper-war hum" DESIGN_INFORMATION_STATECRAFT
+  // §8 forbids, and in the reader corpus's four-court realm the weakest court spying on its own
+  // friend lost its army to the famine the sealed gates hid (FPQ-69). THE MEASURED SPREAD (the FP
+  // kit's findings/STATECRAFT-BAND-REPORT.md; three seeds × dramatic_campaign and full_simulation,
+  // head forced on, twenty yearly advances, values 0.06 / 0.03 / 0.02 / 0.01 / 0.005):
+  // mobilizations reach their plateau at 0.02 in every cell (dramatic_campaign fp-read-2 70 -> 99
+  // against a dark twin's 100; full_simulation fp-read-2 72 -> 83 against 99) and do not move
+  // below it; scandals keep falling to 0.01 and then flatten, because what is left is not this
+  // constant's: falls on a HIDING target (the EXPOSE_SECRECY_GAIN arm, most of full_simulation's
+  // falls at 0.01) and the cadence at which every hostile pair re-buys eyes after a burn (ENGAGE).
+  // 0.01 is the knee: an open-court spy lives about two years (the headless pace pin,
+  // tests/property/statecraftExposureBand.test.js), so its fall reads as an event. The residue
+  // the band cannot cure is recorded in that report by arm, never absorbed here.
+  EXPOSE_BASE: 0.01,         // baseline per-tick exposure odds for a covert posture (banded, see above)
   EXPOSE_SECRECY_GAIN: 0.55, // + the target's secrecy level (HIDE raises exposure odds)
   EXPOSE_CHARGE01: 0.8,      // the exposed-watcher credibility charge (deception-class, the blowback)
   EXPOSE_GRIEVANCE_W: 0.3,   // the resentment the exposed spying banks on the target→watcher edge

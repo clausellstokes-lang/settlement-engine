@@ -242,9 +242,10 @@ describe('FENCE 4 — the gate-polarity census over the real source tree', () =>
     expect(SRC).toContain('src/domain/worldPulse/secondOrderBelief.js');
   });
 
-  test('EXACTLY THREE modules name the key in code, and one of them spells the gate', () => {
-    // TWO NAME IT AS DATA and exactly ONE gates on it: the CQ5 manifest and this lane's
-    // certification row are string members of frozen tables, and they are LISTED rather
+  test('EXACTLY FOUR modules name the key in code, and one of them spells the gate', () => {
+    // THREE NAME IT AS DATA and exactly ONE gates on it: the CQ5 manifest, this lane's
+    // certification row and (FP IN-6 U6) the knowledge-lane evidence catalog are string members
+    // of frozen tables, and they are LISTED rather
     // than excluded by a `certification/` pattern, because a pattern would also swallow a
     // real gate someone later put in a certification module.
     const namers = SRC.filter((rel) => new RegExp(`\\b${FLAG}\\b`).test(codeOf(rel)));
@@ -254,6 +255,11 @@ describe('FENCE 4 — the gate-polarity census over the real source tree', () =>
       // 800/800 ceiling. Measured at the move — every spelling of this key left the old
       // path (0 remaining) and arrived at the new one — so the census is the SAME EXACT
       // SET at a new address, and its FIFTH-file discipline is untouched.
+      // FP IN-6 U6 (SR-1: a count pin moved by design, with cause): the knowledge-lane evidence
+      // catalog names the key as DATA, a quoted member of INFO_FLAG_DISPOSITIVE_LITERALS whose list
+      // is empty by design (the mirror writes nothing). A string member, never a gate; the loop
+      // below still convicts any loose, negated or inequality read in it.
+      'src/domain/certification/knowledgeLaneEvidence.js',
       'src/domain/certification/subsystemRowsBelief.js',
       'src/domain/worldPulse/secondOrderBelief.js',
       'src/domain/worldPulse/simulationRules.js',

@@ -16,9 +16,10 @@
  *   3. VERDICT   each row reaches each verdict it can reach, against receipts
  *                that differ in exactly one field.
  *
- * The knowledge catalog's central claim — that the `knowledge` mover family is a
- * RESIDUAL bucket and therefore cannot carry a verdict — is asserted by RUNNING
- * the production classifier, never by re-reading its token lists.
+ * The knowledge catalog's central claim — once that the `knowledge` mover family was
+ * a RESIDUAL bucket, and since FP IN-6 U2 that the family is EARNED and its residual
+ * is empty — is asserted by RUNNING the production classifier, never by re-reading
+ * its token lists.
  */
 import { readFileSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
@@ -33,13 +34,18 @@ import {
   simulationRuleKeys,
 } from '../../src/domain/certification/subsystemCertification.js';
 import {
+  INFO_FLAG_DIFFERENTIAL_PATH,
+  INFO_FLAG_DISPOSITIVE_LITERALS,
   KNOWLEDGE_FAMILY_RESIDUAL_IMPACT_KINDS,
   KNOWLEDGE_FAMILY_RESIDUAL_KINDS,
   KNOWLEDGE_LANE_EVENT_TYPES,
   KNOWLEDGE_LANE_STATE_KEYS,
 } from '../../src/domain/certification/knowledgeLaneEvidence.js';
+import { INFORMATION_KIND_REGISTRY } from '../../src/domain/worldPulse/informationNews.js';
+import { INFO_FLAG_KEYS } from '../../scripts/audit/info-lit-dark-differential.mjs';
 import { moverFamilyOf } from '../../scripts/audit/behavioral-observation.mjs';
 import { expectAbsentWithAnchor } from '../helpers/anchoredNegatives.js';
+import { impactKindCensus, measuredResidual, routedKindCensus } from '../helpers/knowledgeResidualCensus.js';
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), '../..');
 const sourceOf = (rel) => readFileSync(join(ROOT, rel), 'utf8');
@@ -206,46 +212,62 @@ describe('the knowledge-lane evidence catalog', () => {
     expect(sourceOf('src/domain/worldPulse/beliefMap.js')).toContain("impactKind: 'belief_misjudgment'");
   });
 
-  test('the knowledge family is a RESIDUAL bucket, proven by running the classifier', () => {
-    // THE MECHANISM, asserted directly so this test cannot go vacuous as the
-    // catalog shrinks: a record whose only vocabulary is an unrecognised kind
-    // still lands in `knowledge`, purely because its wizard-news id tokenizes to
-    // include `news`. No length floor is asserted, because SHRINKING the catalog
-    // (giving one of these kinds a family of its own, or narrowing the token) is
-    // the cure, and a ratchet that reds on the cure is a ratchet pointed backwards.
-    expect(moverFamilyOf({ id: 'wizard_news.5.zzz_unrecognised_kind.observer' })).toBe('knowledge');
-    for (const kind of KNOWLEDGE_FAMILY_RESIDUAL_IMPACT_KINDS) {
-      // On its own vocabulary the kind belongs to NO family at all...
-      expect(moverFamilyOf({ impactKind: kind }), `${kind} on its own`).toBeNull();
-      // ...yet the same record carrying its ordinary wizard-news id lands in
-      // `knowledge`, purely because that id tokenizes to include `news`. This is
-      // why no certification row may treat a knowledge count as its evidence.
-      expect(
-        moverFamilyOf({ impactKind: kind, id: `wizard_news.5.${kind}.observer.subject` }),
-        `${kind} with its wizard-news id`,
-      ).toBe('knowledge');
-    }
+  test('the knowledge family is EARNED, proven by running the classifier (FP IN-6 U2)', () => {
+    // THE MECHANISM, asserted directly: until FP IN-6 U2 a record whose only vocabulary was an
+    // unrecognised kind still landed in `knowledge`, purely because its wizard-news id tokenized
+    // to include the bare `news` token. U2 removed the token, so the id scaffold alone now earns
+    // NO family, and the residual catalog banks the cure at zero (the ratchet below re-derives
+    // it from the live census on every run).
+    expect(moverFamilyOf({ id: 'wizard_news.5.zzz_unrecognised_kind.observer' })).toBeNull();
+    expect(KNOWLEDGE_FAMILY_RESIDUAL_IMPACT_KINDS).toEqual([]);
+    // A kind that once rode the id (diplomacy, the old catalog's first example) now has no family
+    // with or without its id: unclassified is the honest reading, never a borrowed one.
+    expect(moverFamilyOf({ impactKind: 'diplomacy', id: 'wizard_news.5.diplomacy.observer.subject' })).toBeNull();
   });
 
-  test('the KIND-ONLY residual sibling holds the same proof, and its exclusions are executed facts', () => {
-    // The late-lane authors (momentum, supply-web warfare, information statecraft)
-    // mint their routing token AS `kind` with no impactKind, so the impactKind
-    // census above cannot see them; this sibling carries the identical residual
-    // proof on the `kind` field.
-    for (const kind of KNOWLEDGE_FAMILY_RESIDUAL_KINDS) {
-      expect(moverFamilyOf({ kind }), `${kind} on its own`).toBeNull();
-      expect(
-        moverFamilyOf({ kind, id: `wizard_news.5.${kind}.actor.target` }),
-        `${kind} with its wizard-news id`,
-      ).toBe('knowledge');
-    }
-    // The catalog's three EXCLUSIONS are claims about the classifier, so they are
-    // executed rather than trusted: raid is `war` on its own vocabulary, intel is
-    // `knowledge` on its own vocabulary (the one earned filing), and the treaty
-    // beat is censused through its impactKind in the list above.
+  test('the KIND-ONLY sibling is cured too, and the catalog exclusions are still executed facts', () => {
+    expect(KNOWLEDGE_FAMILY_RESIDUAL_KINDS).toEqual([]);
+    // The late-lane beats the old sibling listed: the statecraft exposure beats now EARN the
+    // family on their own `infowar` vocabulary, and the momentum beat no longer borrows it.
+    expect(moverFamilyOf({ kind: 'infowar_lie_exposed', id: 'wizard_news.5.infowar_lie_exposed.actor.target' })).toBe('knowledge');
+    expect(moverFamilyOf({ kind: 'momentum_climb_down', id: 'wizard_news.5.momentum_climb_down.actor.target' })).toBeNull();
+    // The catalog's EXCLUSIONS are claims about the classifier, so they are executed rather than
+    // trusted: raid is `war` on its own vocabulary, and intel is `knowledge` on its own vocabulary
+    // (the one late-lane filing that was always earned).
     expect(moverFamilyOf({ kind: 'webwar_raid' })).toBe('war');
     expect(moverFamilyOf({ kind: 'intel_transfer' })).toBe('knowledge');
-    expect(KNOWLEDGE_FAMILY_RESIDUAL_IMPACT_KINDS).toContain('diplomacy');
+  });
+
+  test('THE DECONTAMINATION RATCHET (FP IN-6 U1): the residual catalog is EXACTLY the live census residual', () => {
+    // Re-measured at build, never quoted from a volume (DESIGN_FP_ARCH_IN.md R8): the census
+    // enumerates the estate's impactKind literals and its exact Herald routing tokens and runs the
+    // production classifier on each, so the catalog can neither grow in the tree unseen nor keep a
+    // row the tree has cured. Exact equality in both directions is the ratchet: a new residual kind
+    // reds by name (give it its own vocabulary), and a cured one reds until the catalog banks it.
+    const impact = impactKindCensus();
+    const routed = routedKindCensus();
+    // GUARD-THE-GUARD: an enumerator that silently found nothing would pass the equalities below.
+    expect(impact.length, 'the impactKind census is not vacuous').toBeGreaterThan(40);
+    expect(routed.length, 'the routed-kind census is not vacuous').toBeGreaterThan(200);
+    const measured = measuredResidual();
+    const catalogImpact = [...KNOWLEDGE_FAMILY_RESIDUAL_IMPACT_KINDS];
+    const catalogKinds = [...KNOWLEDGE_FAMILY_RESIDUAL_KINDS];
+    expect(
+      measured.impactKinds.filter((kind) => !catalogImpact.includes(kind)),
+      'impactKinds that reach knowledge only through their wizard-news id and are not catalogued',
+    ).toEqual([]);
+    expect(
+      catalogImpact.filter((kind) => !measured.impactKinds.includes(kind)),
+      'catalogued impactKinds the live census no longer finds residual (the cure: shrink the catalog)',
+    ).toEqual([]);
+    expect(
+      measured.kinds.filter((kind) => !catalogKinds.includes(kind)),
+      'routed kinds that reach knowledge only through their wizard-news id and are not catalogued',
+    ).toEqual([]);
+    expect(
+      catalogKinds.filter((kind) => !measured.kinds.includes(kind)),
+      'catalogued kinds the live census no longer finds residual (the cure: shrink the catalog)',
+    ).toEqual([]);
   });
 
   test('every catalogued knowledge container still has its literal-key writer', () => {
@@ -324,5 +346,64 @@ describe('epistemics rows — the verdicts, one field apart', () => {
     // `unobserved` roster is itself the proof that it reached no other bucket.
     const evaluation = evaluateSubsystemCertification(receiptV5());
     expect(evaluation.unobserved).toContain(DISTANCE);
+  });
+});
+
+/**
+ * FP IN-6 U6 — THE FOUR IN FLAGS' CERTIFICATION ROWS NAME THEIR DISPOSITIVE LITERALS AND THEIR
+ * DIFFERENTIAL EVIDENCE PATH (the compiled block #22; DESIGN_FP_INFORMATION.md §5 IN-6, the
+ * certification-rows bullet; DESIGN_FP_ARCHITECTURE.md §3, pending entries convert at the program's
+ * convergence wave). Every literal is traced to the registry and the classifier, every row's text is
+ * held to the catalog, and the §3 conversion is measured rather than assumed.
+ */
+describe('FP IN-6 U6: the four IN flags name their dispositive literals', () => {
+  const rows = new Map(INFO_FLAG_KEYS.map((key) => [key, SUBSYSTEM_CERTIFICATION_REGISTRY.find((row) => row.rule === key)]));
+  const count = (text, needle) => text.split(needle).length - 1;
+
+  test('the catalog covers exactly the four IN flags, and each has an authored row', () => {
+    expect(Object.keys(INFO_FLAG_DISPOSITIVE_LITERALS).sort()).toEqual([...INFO_FLAG_KEYS]);
+    for (const [key, row] of rows) expect(row, key).toBeDefined();
+  });
+
+  test('§3 conversion, measured: none of the four is a declared-pending entry', () => {
+    for (const key of INFO_FLAG_KEYS) expect(SUBSYSTEM_CERTIFICATION_PENDING_KEYS.includes(key), key).toBe(false);
+  });
+
+  test('every literal is a registered INFORMATION kind, earned knowledge on its own, and claimed by one flag only', () => {
+    const registered = new Set(INFORMATION_KIND_REGISTRY.map((row) => row.kind));
+    const all = Object.values(INFO_FLAG_DISPOSITIVE_LITERALS).flat();
+    expect(all.length).toBe(7);
+    expect(new Set(all).size).toBe(all.length);
+    for (const literal of all) {
+      expect(registered.has(literal), literal).toBe(true);
+      expect(moverFamilyOf({ kind: literal }), literal).toBe('knowledge');
+    }
+  });
+
+  test('each row\'s dispositive section names every one of its literals exactly once, and the differential path once', () => {
+    for (const [key, row] of rows) {
+      const other = row.aliveness.other;
+      // The section the unit appended; the older prose above it may name a beat too.
+      expect(count(other, 'THE DISPOSITIVE LITERAL'), key).toBe(1);
+      const section = other.slice(other.indexOf('THE DISPOSITIVE LITERAL'));
+      for (const literal of INFO_FLAG_DISPOSITIVE_LITERALS[key]) expect(count(section, literal), `${key} names ${literal}`).toBe(1);
+      expect(count(other, INFO_FLAG_DIFFERENTIAL_PATH), `${key} names the differential path`).toBe(1);
+    }
+    expect(rows.get('secondOrderBeliefEnabled').aliveness.other).toContain('NONE, BY DESIGN');
+    expect(readFileSync(join(ROOT, INFO_FLAG_DIFFERENTIAL_PATH), 'utf8')).toContain('export async function measureKey');
+  });
+
+  test('the literals are post-apply news, so every eventTypes channel stays empty and no row claims the family', () => {
+    for (const [key, row] of rows) {
+      expect(row.aliveness.eventTypes, key).toEqual([]);
+      expect(row.aliveness.moverFamilies, key).toEqual([]);
+    }
+  });
+
+  test('the distance-priced row cites the harness it asked for by name', () => {
+    const other = SUBSYSTEM_CERTIFICATION_REGISTRY.find((row) => row.rule === 'distancePricedNewsEnabled').aliveness.other;
+    expect(count(other, INFO_FLAG_DIFFERENTIAL_PATH)).toBe(1);
+    // anchored: the same row names the harness path exactly once (the line above)
+    expect(other).not.toContain('the differential harness does not');
   });
 });

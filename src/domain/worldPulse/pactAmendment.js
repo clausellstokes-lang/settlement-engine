@@ -291,20 +291,25 @@ export function appendLineage(treaty, { act, tick, termIds = [], ending = '' }) 
 }
 
 /**
- * AMEND A STANDING INSTRUMENT with a negotiated sheet.
+ * THE STACKING PARTITION — the ONE test of which terms of a sheet a standing instrument
+ * would admit and which it refuses, and the whole of what `amendPactInstrument` decides
+ * before it writes.
  *
  * Every proposed term is tried against the LIVE occupied cells — a term whose own
  * `expiresTick` has passed occupies nothing, so a lapsed grain clause does not block the
- * next one forever. A collision is refused with its cell named. Nothing is added and no
- * lineage act lands when EVERY term collides, so a wholly-refused amendment leaves the
- * record byte-identical.
+ * next one forever. A collision is refused with its cell named.
+ *
+ * EXPORTED FOR A READ (FPQ-72): the pact stage's crossings ask it whether a drafted sheet
+ * would add anything to the pair's instrument, so the question is answered by this one test
+ * rather than a restatement, and without calling the amendment writer, whose every call is
+ * an act. PURE: no write, no rng, no clock; the terms it hands back are the caller's own.
  *
  * @param {{treaty: Record<string, unknown>, terms: ReadonlyArray<Record<string, unknown>>,
- *   tick: number, act?: string}} input
- * @returns {{treaty: Record<string, unknown>, added: Array<Record<string, unknown>>,
+ *   tick: number}} input
+ * @returns {{added: Array<Record<string, unknown>>,
  *   refused: Array<{cell: string, type: string, receipt: string}>}}
  */
-export function amendPactInstrument({ treaty, terms, tick, act = 'amended' }) {
+export function stackingPartitionOf({ treaty, terms, tick }) {
   const live = termsOf(treaty).filter((term) => Number(term.expiresTick) > tick);
   // WHICH TYPES occupy each cell, not merely THAT one does: the composable exception has
   // to ask what is already there, and a bare cell set cannot answer that question.
@@ -330,10 +335,30 @@ export function amendPactInstrument({ treaty, terms, tick, act = 'amended' }) {
     occupants.add(text(term.type));
     added.push(term);
   }
+  return { added, refused };
+}
+
+/**
+ * AMEND A STANDING INSTRUMENT with a negotiated sheet: the stacking partition above, then
+ * the admitted terms merged and the lineage act recorded. Nothing is added and no lineage
+ * act lands when EVERY term collides, so a wholly-refused amendment leaves the record
+ * byte-identical.
+ *
+ * @param {{treaty: Record<string, unknown>, terms: ReadonlyArray<Record<string, unknown>>,
+ *   tick: number, act?: string}} input
+ * @returns {{treaty: Record<string, unknown>, added: Array<Record<string, unknown>>,
+ *   refused: Array<{cell: string, type: string, receipt: string}>}}
+ */
+export function amendPactInstrument({ treaty, terms, tick, act = 'amended' }) {
+  const { added, refused } = stackingPartitionOf({ treaty, terms, tick });
   if (added.length === 0) return { treaty, added, refused };
   const merged = [...termsOf(treaty), ...added]
     .sort((x, y) => (termIdOf(x) < termIdOf(y) ? -1 : termIdOf(x) > termIdOf(y) ? 1 : 0));
-  const next = appendLineage({ ...treaty, terms: merged }, {
+  // THE LINEAGE IS READ OFF THE RECORD AS IT WAS, before the merge (FPQ-32). A war-door
+  // record carries no lineage, so `appendLineage` writes the act it implies — and reading
+  // that off the MERGED terms listed the new clause twice, once as part of the dictated
+  // making and once as the amendment. `pactRenewal.js`'s supersede path already does this.
+  const next = appendLineage({ ...treaty, lineage: lineageOf(treaty), terms: merged }, {
     act, tick, termIds: added.map(termIdOf),
   });
   return { treaty: next, added, refused };
@@ -351,6 +376,15 @@ export function amendPactInstrument({ treaty, terms, tick, act = 'amended' }) {
  * WHICH TERMS ARE NEGOTIATED IS READ FROM THE LINEAGE, not guessed from the term. A
  * dictated clause on the same instrument survives the war that its own settlement created.
  *
+ * ⚠ THE `formed` ACT IS A PEACE ONLY ON AN INSTRUMENT THAT BEGAN IN PEACE (FPQ-32, measured
+ * live). A war-door record carries no lineage, and `lineageOf` reads its making as one
+ * `formed` act over every dictated clause; the first peacetime amendment writes that act
+ * down. Counting it made a second war close the tribute the first war imposed. So `formed`
+ * counts only where the provenance says the instrument began in peace — `negotiated`, or
+ * `renewed`, which is only ever a negotiated instrument run again. A `converted` instrument
+ * began as a compelled alliance, which only the war door drafts, so its `formed` act is
+ * dictated too; its chosen pair rides the `converted` act and closes with the war.
+ *
  * @param {{worldState: Record<string, unknown>, aId: string, bId: string, tick: number}} input
  * @returns {{worldState: Record<string, unknown>, closed: ReadonlyArray<string>, receipt: string}}
  */
@@ -367,16 +401,17 @@ export function closeTermsBrokenByWar({ worldState, aId, bId, tick }) {
   // war closes it too; without the act here a renewal would quietly make a pact war-proof.
   // GR-5c: a RENEGOTIATED clause was agreed in peace too, so the same war closes it.
   // GR-5d: a CONVERTED alliance was chosen in peace, so a war between the two allies closes it.
+  const beganInPeace = provenanceOf(treaty) === 'negotiated' || provenanceOf(treaty) === 'renewed';
   const negotiated = new Set(lineageOf(treaty)
-    .filter((entry) => entry.act === 'formed' || entry.act === 'amended' || entry.act === 'converted'
-      || entry.act === 'renegotiated' || entry.act === 'renewed')
+    .filter((entry) => (entry.act === 'formed' && beganInPeace) || entry.act === 'amended'
+      || entry.act === 'converted' || entry.act === 'renegotiated' || entry.act === 'renewed')
     .flatMap((entry) => (Array.isArray(entry.termIds) ? entry.termIds.map(String) : [])));
   const doomed = termsOf(treaty)
     .filter((term) => negotiated.has(termIdOf(term)) && Number(term.expiresTick) > tick);
   if (doomed.length === 0) return nothing;
   const closed = doomed.map(termIdOf).sort();
   const survivors = termsOf(treaty).filter((term) => !closed.includes(termIdOf(term)));
-  const next = appendLineage({ ...treaty, terms: survivors }, {
+  const next = appendLineage({ ...treaty, lineage: lineageOf(treaty), terms: survivors }, {
     act: 'broken_by_war', tick, termIds: closed, ending: 'broken_by_war',
   });
   return {

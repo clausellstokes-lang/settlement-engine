@@ -263,14 +263,16 @@ describe('place-and-spatial certification rows — trace to live source', () => 
 
   test('the roads and spatial-consequence beats classify by their ID STRING, not their subsystem', () => {
     // The reason both rows declare no mover family. A roads beat matches no family
-    // on its own vocabulary and falls through to `knowledge` on the bare `news`
-    // token inside `wizard_news.…`; the same beat with a `ransom` seed lands in
-    // `people` instead. One subsystem, two families, neither its own.
-    expect(moverFamilyOf({ id: 'wizard_news.156.roads.a.depart', kind: 'applied', impactKind: 'roads' })).toBe('knowledge');
+    // on its own vocabulary; it fell through to `knowledge` on the bare `news` token
+    // inside `wizard_news.…` until FP IN-6 U2 removed that token (SR-1: the classifier
+    // moved by design), and it is now unclassified. The same beat with a `ransom` seed
+    // lands in `people` instead. One subsystem, two readings, neither its own.
+    expect(moverFamilyOf({ id: 'wizard_news.156.roads.a.depart', kind: 'applied', impactKind: 'roads' })).toBeNull();
     expect(moverFamilyOf({ id: 'wizard_news.156.roads.a.ransom', kind: 'applied', impactKind: 'roads' })).toBe('people');
     // Spatial consequence splits the same way across its own two beats.
     expect(moverFamilyOf({ id: 'wizard_news.156.spatial_consequence.a.calamity_where', kind: 'applied', impactKind: 'spatial_consequence' })).toBe('place');
-    expect(moverFamilyOf({ id: 'wizard_news.156.spatial_consequence.a.covert_diffusion', kind: 'applied', impactKind: 'spatial_consequence' })).toBe('knowledge');
+    // FP IN-6 U2: the covert beat borrowed `knowledge` from the id's `news`; it is unclassified now.
+    expect(moverFamilyOf({ id: 'wizard_news.156.spatial_consequence.a.covert_diffusion', kind: 'applied', impactKind: 'spatial_consequence' })).toBeNull();
   });
 });
 

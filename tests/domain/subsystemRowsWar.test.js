@@ -478,7 +478,11 @@ describe('war-stack rows — the source trace behind every declared literal', ()
       .toContain('demilitarizationCapFor(worldState, id, tick)');
     expect(sourceOf('src/domain/worldPulse/occupation.js'))
       .toContain('occupationHoldFor(worldState, occupiedId, rec.occupierId, t)');
-    expect(peaceTerms).toContain('const draw = computeTreatyGrainDraw({');
+    // FPQ-75 (PACT-COMPLIANCE U2): PASS 2's stream installment now enters treatyTransfer.js through
+    // drawStreamInstallment, which carries the sub-tenth remainder on the clause and draws through
+    // computeTreatyGrainDraw beneath it (SR-4: the pin cites the symbol the tree carries).
+    expect(peaceTerms).toContain('const { draw, carriedMonths } = drawStreamInstallment({');
+    expect(sourceOf('src/domain/worldPulse/treatyTransfer.js')).toContain('const draw = computeTreatyGrainDraw({ payer, payee, takeFraction: (2 * tenths + 1) / 20 / spareable');
     expect(peaceTerms).toContain('const nextUpdates = applyTreatyFoodDeltas(');
     expect(row.aliveness.stateKeys).toEqual([
       'spatialLedgers.peaceReasons',

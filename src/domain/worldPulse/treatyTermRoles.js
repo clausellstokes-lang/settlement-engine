@@ -38,7 +38,7 @@
  * PURE. No rng, no clock, no writes — `peaceTerms.js`'s no-rng law extends here.
  */
 import { termObligationOf } from './treatyOrientation.js';
-import { victorMonitorReach } from './peaceTermsAppraisal.js';
+import { victorMonitorReach, complianceFloorsFor } from './peaceTermsAppraisal.js';
 import { clamp01 } from '../../kernel/math.js';
 
 /**
@@ -57,6 +57,9 @@ import { clamp01 } from '../../kernel/math.js';
  * @property {number} burden01
  * @property {number} capacity01
  * @property {number} reach01
+ * @property {Readonly<import('./peaceTermsAppraisal.js').ComplianceFloors>} floors  FP-44: the line
+ *   this clause's capacity is banded against — the pact band for a clause carrying a
+ *   `beneficiary`, the war door's line for every other clause
  */
 
 /**
@@ -120,6 +123,9 @@ export function makeTermRoleReader({ treaty, orientation, pressureFor, worldStat
         burden01: figures.burden01,
         capacity01: figures.capacity01,
         reach01: figures.reach01,
+        // FP-44 — the CLAUSE decides its line, not the instrument: a negotiated clause is
+        // banded against the pact band even on a record that also carries a war-door clause.
+        floors: complianceFloorsFor(term),
       };
     },
   };

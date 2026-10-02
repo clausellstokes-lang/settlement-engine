@@ -42,7 +42,9 @@ const EXPECTED = Object.freeze([
   ['treaty_lapsed.road_open', 'n/a', 'public', null, 7],
   ['treaty_default_detected', 'notable', 'public', 'trade', 7],
   ['treaty_disclosure_opened', 'notable', 'public', 'trade', 7],
-  ['treaty_age_line', 'n/a', 'public', null, 8],
+  // TREATY-VOICE-2 U2 (2026-10-02) adds two lines that speak an age below a year in weeks and seasons, and one
+  // age-neutral line as the pool's context-free family (variant 1 now speaks years only): 8 -> 11.
+  ['treaty_age_line', 'n/a', 'public', null, 11],
   ['treaty_true_state_chip', 'n/a', 'dm-only', null, 8],
   ['ran_its_term', 'routine', 'public', null, 8],
   ['hollowed_detected', 'notable', 'public', null, 7],

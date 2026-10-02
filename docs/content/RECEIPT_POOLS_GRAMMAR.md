@@ -162,6 +162,9 @@ AUDIENCE: public
 6. The clerks recopy it when the ink fades, and nothing in the wording has ever changed in the recopying.
 7. Old enough that the roads it opened are simply the roads now.
 8. Sworn in a year the elders in {counterpart} still name for its winter, and kept every year since.
+9. {band} these terms have held, and neither court has yet had to keep them at a cost.
+10. {band} since the signing; in {settlement} and in {counterpart} the clerks are still copying out the terms.
+11. Both courts keep a sealed copy, and both copies still agree.
 
 ### treaty_priced_on_a_lie (GR-0 × FP-INFORMATION) — Herald / chronicle — significance: major
 SLOTS: {settlement} {counterpart}

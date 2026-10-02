@@ -30,9 +30,26 @@ export const PEACE_TERMS_TUNING = Object.freeze({
   PRESS_BASE: 0.6,
   PRESS_EVIL_W: 0.8,
   DURATION_CURVE: Object.freeze({ base: 0.5, marginWeight: 1.0, extremityWeight: 1.0 }), // decisive-victory bend; affordability shortens below
-  /** Compliance thresholds on the loser's true per-tick delivery capacity. */
+  /** Compliance thresholds on the loser's true per-tick delivery capacity. THE WAR DOOR'S
+   *  line: a clause with no `beneficiary` (a dictated settlement, a carried sheet, a sale). */
   HONORED_FLOOR: 0.75,
   DEFAULT_FLOOR: 0.4,
+  /** FP-44 (FPQ-67) THE PACT STRAIN BAND — the same capacity read, banded for a NEGOTIATED
+   *  clause (one carrying a `beneficiary`). SIGNED BY DELEGATION: the chair's signature FP-44
+   *  under ODQ §934.89 (the owner, 2026-10-02: "I leave everything to your judgement and leave
+   *  you to build it all"); the tuning register row carries it as draft until the chair runs
+   *  the register's own signing door.
+   *  WHY A SECOND LINE. Capacity is the obligor COURT's (1 − (0.6 economy + 0.4 food)), never
+   *  the clause's, so a peacetime promise read against the war door's 0.75 was strained by the
+   *  weather: 18 of 27 measured pacts read strained the day they were signed. The measured
+   *  day-one hardship falls in TWO HUMPS (findings/PACT-STRAIN-MEASURE.md, 15,140 clause-ticks
+   *  on fp-read-3/4 × dramatic_campaign/full_simulation): an ordinary year at burden 0.15–0.40
+   *  and a famine year at 0.65–0.90. 0.5 capacity (burden one half) sits BETWEEN them, so an
+   *  ordinary year keeps a pact and a famine strains it.
+   *  0.2 capacity (burden past four fifths) is where the famine hump's upper half lives, so a
+   *  pact BREAKS only in the worst of a famine. War treaties keep 0.75 / 0.4 byte for byte. */
+  PACT_HONORED_FLOOR: 0.5,
+  PACT_DEFAULT_FLOOR: 0.2,
   /** §12.2 monitoring: below this reach the victor cannot detect under-delivery. */
   DETECT_FLOOR: 0.6,
   /** §12.3 strain → resentment: annual bump, divided by the treaty's own clock. */
@@ -143,6 +160,10 @@ export const COALITION_BETRAYAL_CHARACTER_TUNING = Object.freeze({
  *   in BOTH directions, and the writer refuses to execute a term that carries none.
  * @property {number} [deliveredToVictor]  cumulative conserved credit (stream terms)
  * @property {number} [extractedFromLoser] cumulative conserved debit (== delivered; tribute never mints)
+ * @property {number} [installmentCarryMonths] FPQ-75: the payer storage-months a stream clause
+ *   owes but has not yet moved, because the granary moves in tenth-months
+ *   (`treatyTransfer.js :: drawStreamInstallment`). Written and read only by `peaceTerms.js`
+ *   PASS 2; drop-when-absent, so a clause that owes nothing carries no key.
  * @property {boolean} [seam]       true ⇒ a typed registration seam (executor unlanded)
  * @property {string} [beneficiary] GR-2: the party a NEGOTIATED term runs to, or the
  *   literal `'both'` for a symmetric clause. Conditional and drop-when-absent on the

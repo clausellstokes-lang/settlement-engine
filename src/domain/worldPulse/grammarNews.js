@@ -122,11 +122,16 @@ export const GRAMMAR_KIND_REGISTRY = Object.freeze([
   ]),
   grammarKindRow('treaty_age_line', 'n/a', 'public', null, [
     ['band'], [], ['settlement', 'counterpart'], [], [], [], [], ['counterpart'],
+    ['band'], ['band', 'settlement', 'counterpart'], [],
   ], [
-    // The age classes each authored line is honest about. Variant 1 speaks the band it
-    // is handed and so fits every class; the rest carry an age claim in the prose.
-    null, ['old'], ['settled', 'old'], ['settled', 'old'],
-    ['young'], ['settled', 'old'], ['old'], ['old'],
+    // The age classes each authored line is honest about. Variant 1 speaks its band in YEARS,
+    // so it fits every class of a year and more; the rest carry an age claim in the prose.
+    // `new` is below a year (TREATY-VOICE-2 U2): its band is weeks or seasons, and only the
+    // lines that say no years (5, 9, 10) are honest about it. Line 11 claims no age at all and
+    // is the pool's context-free family, so no class can empty it.
+    ['young', 'settled', 'old'], ['old'], ['settled', 'old'], ['settled', 'old'],
+    ['new', 'young'], ['settled', 'old'], ['old'], ['old'],
+    ['new'], ['new'], null,
   ]),
   grammarKindRow('treaty_true_state_chip', 'n/a', 'dm-only', null, [
     ['term', 'settlement', 'band'], ['settlement', 'counterpart'], ['counterpart'],

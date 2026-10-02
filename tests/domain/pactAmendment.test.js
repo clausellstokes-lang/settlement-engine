@@ -350,6 +350,51 @@ describe('THE WAR-OVERTAKEN CLOSURE — the `broken_by_war` producer', () => {
     expect(closeTermsBrokenByWar({ worldState: lapsed, aId: 'A', bId: 'B', tick: 60 }).closed)
       .toHaveLength(0);
   });
+
+  // FPQ-32, MEASURED LIVE: the pin above hands the closure a hand-written lineage, so it never
+  // saw the record the war door actually writes — one with NO lineage and NO provenance,
+  // whose making `lineageOf` reads as a single `formed` act over every dictated clause.
+  const dictated = () => legacyTreaty([warTerm('tribute', 'economic', { mintedTick: 1 })]);
+
+  test('FPQ-32: a dictated instrument with no history loses NOTHING to a second war', () => {
+    const world = pactWorld({ flag: true, treaties: { 'A>B': dictated() } });
+    const result = closeTermsBrokenByWar({ worldState: world, aId: 'A', bId: 'B', tick: 60 });
+    expect(result.closed).toHaveLength(0);
+    expect(result.worldState).toBe(world);
+  });
+
+  test('FPQ-32: a dictated instrument amended in peace loses only the clause agreed in peace', () => {
+    const amended = amendPactInstrument({
+      treaty: dictated(), terms: [pactTerm('resource_share', 'economic', 'A', { mintedTick: 20 })], tick: 20,
+    });
+    // The making is read off the record AS IT WAS: the new clause is the amendment's alone.
+    expect(lineageOf(amended.treaty)).toEqual([
+      { act: 'formed', tick: 5, termIds: ['tribute..1'] },
+      { act: 'amended', tick: 20, termIds: ['resource_share.A.20'] },
+    ]);
+    const world = pactWorld({ flag: true, treaties: { 'A>B': amended.treaty } });
+    const result = closeTermsBrokenByWar({ worldState: world, aId: 'A', bId: 'B', tick: 60 });
+    expect(result.closed).toEqual(['resource_share.A.20']);
+    expect(result.worldState.spatialLedgers.treaties['A>B'].terms.map((t) => t.type)).toEqual(['tribute']);
+  });
+
+  test('FPQ-32: a CONVERTED instrument began compelled — its chosen pair closes, its tribute stands', () => {
+    const converted = {
+      ...dictated(),
+      provenance: 'converted',
+      terms: [
+        warTerm('tribute', 'economic', { mintedTick: 1 }),
+        pactTerm('mutual_defense', 'security', 'both', { mintedTick: 30 }),
+      ],
+      lineage: [
+        { act: 'formed', tick: 5, termIds: ['compelled_alliance..1', 'tribute..1'] },
+        { act: 'converted', tick: 30, termIds: ['mutual_defense.both.30'] },
+      ],
+    };
+    const world = pactWorld({ flag: true, treaties: { 'A>B': converted } });
+    expect(closeTermsBrokenByWar({ worldState: world, aId: 'A', bId: 'B', tick: 60 }).closed)
+      .toEqual(['mutual_defense.both.30']);
+  });
 });
 
 describe('THE WAR DOOR SEAM — the one edit peaceTerms.js takes', () => {

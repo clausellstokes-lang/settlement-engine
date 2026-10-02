@@ -17,6 +17,7 @@ import { isPublicOutcome, isStateOnlyOutcome } from '../../src/domain/worldPulse
 import { isSubsystemActive } from '../../src/domain/worldPulse/subsystemActivation.js';
 import { prosperityRank } from '../../src/data/constants.js';
 import { measurePhraseRepetition } from './phrase-repetition.mjs';
+import { beliefTruthProvider } from '../../src/domain/display/beliefTruthBands.js';
 // ⭐ ONE SPELLING (§909 car 3). This bar was an inline literal here and a constant in
 // `tests/domain/demographicsEnvelope.test.js`; the suite grades the SHARE of transitions
 // this line marks as moved, so two homes for one figure meant a drift in either could
@@ -70,8 +71,19 @@ const FAMILY_TOKENS = Object.freeze({
     // the contamination path IN-6's ratchet exists to shrink. Executed census before adding
     // it: exactly one other token in src/ or scripts/ contains the substring, and it is the
     // internal envoy-picture patch `kind: 'plant'`, which is not a news kind.
+    // ⭐ FP IN-6 U2, THE EARNED-CLASSIFICATION CURE: the bare `news` token is REMOVED. Every
+    // wizard-news receipt id is `wizard_news.<tick>.<kind>...`, so `news` filed any receipt no
+    // earlier family matched into this family on its id alone (33 impactKinds and 145 routed kinds
+    // at 85c170e8e, IN-6 U1's re-measure). The family is now earned by its own vocabulary: the
+    // counter-game's `sweep` and `accusation`, the lure's `lure`, the statecraft exposure beats'
+    // `infowar`, IN-0c's `disclosure`, and four COMPOUNDS (a kind's own full name, which outranks a
+    // bare word inside it, see moverFamilyOf) for the race beats, whose `person` is a people word,
+    // and for the truth that arrived too late. tests/lint/earnedClassification.walker.test.js holds
+    // every registered knowledge kind here and reds on any token the id scaffold can satisfy.
     'belief', 'rumor', 'intel', 'information', 'discourse', 'misjudgment',
-    'reconcile', 'credibility', 'news', 'revelation', 'plant',
+    'reconcile', 'credibility', 'revelation', 'plant',
+    'accusation', 'disclosure', 'infowar', 'lure', 'sweep',
+    'race_person', 'race_story', 'race_together', 'word_came_too_late',
   ]),
 });
 
@@ -151,9 +163,23 @@ function containsToken(value, candidates) {
   ));
 }
 
+/** Each family's COMPOUND tokens (a kind's own full name, spelled with an underscore). */
+const FAMILY_COMPOUNDS = Object.freeze(Object.fromEntries(
+  Object.entries(FAMILY_TOKENS).map(([family, tokens]) => [
+    family,
+    Object.freeze(tokens.filter((token) => token.includes('_'))),
+  ]),
+));
+
 /**
  * Classify an outcome into exactly one broad mover family. Unknown records stay
  * unknown instead of being forced into a convenient bucket.
+ *
+ * TWO PASSES (FP IN-6 U2): a registered COMPOUND, a kind's own full name, is matched
+ * first across every family, so `race_person` files where its registration says rather
+ * than under the bare `person` inside it; the bare-word pass then runs exactly as before.
+ * Before IN-6 no family carried a compound, so the first pass adds only the registrations
+ * made with it and moves no other classification.
  */
 export function moverFamilyOf(record) {
   const text = [
@@ -165,6 +191,9 @@ export function moverFamilyOf(record) {
     record?.kind,
     record?.id,
   ].filter(Boolean).join('.');
+  for (const family of BEHAVIORAL_MOVER_FAMILIES) {
+    if (containsToken(text, FAMILY_COMPOUNDS[family] || [])) return family;
+  }
   for (const family of BEHAVIORAL_MOVER_FAMILIES) {
     if (containsToken(text, FAMILY_TOKENS[family] || [])) return family;
   }
@@ -580,11 +609,18 @@ function integrityFailuresOf(settlement) {
 //   faith         the believed faithLabel against the settlement's public
 //                 primaryDeitySnapshot name (the same field groundTruthBelief seeds
 //                 from).
-// The numeric axes (strengthBand, readiness) are DELIBERATELY NOT compared: their
+// The numeric axes (strengthBand, readiness) were DELIBERATELY NOT compared: their
 // ground truth is settlementStrength over a live pressure index, and reconstructing
 // it here would fork the engine's math into an audit adapter, which is exactly the
-// drift this estate has been bitten by. Their absence is reported as an axis gap
+// drift this estate has been bitten by. Their absence was reported as an axis gap
 // rather than folded silently into the mean.
+//   strength      ⭐ FP IN-6 U5 (J-INF-11; the divergence01-sane envelope "extends to the
+//                 strength axis"): the axis the LIE verb actually manipulates is now
+//                 compared, through the display-safe banded truth provider
+//                 (src/domain/display/beliefTruthBands.js), which COMPOSES the engine's own
+//                 snapshot, pressure and groundTruthBelief functions and re-derives nothing.
+//                 A realm whose saves the snapshot cannot carry reports the axis as a gap,
+//                 exactly as before. Readiness stays a gap (no envelope asks for it).
 //
 // Pure and deterministic: sorted key iteration, integer tick arithmetic, no clock,
 // no rng, no locale compare. Observational only; it tunes and mutates nothing.
@@ -647,6 +683,18 @@ export function observeBeliefDivergence({ result, afterSaves }) {
   const tick = finite(worldState.tick ?? result?.tick);
   const relationships = declaredRelationshipIndex(result);
   const faiths = declaredFaithIndex(afterSaves);
+  // FP IN-6 U5: the strength truth, banded, from the engine's own functions (null when the
+  // realm carries no belief map; a subject the snapshot cannot carry answers null).
+  const saveList = Array.isArray(afterSaves) ? afterSaves : [];
+  const truthFor = beliefTruthProvider({
+    campaign: {
+      settlementIds: saveList.map((save) => String(save?.id ?? save?.saveId ?? '')).filter(Boolean),
+      regionalGraph: result?.regionalGraph,
+      worldState: result?.worldState,
+    },
+    saves: saveList,
+    includeGroundTruth: true,
+  });
 
   let observers = 0;
   let slots = 0;
@@ -658,6 +706,8 @@ export function observeBeliefDivergence({ result, afterSaves }) {
   let relationshipMismatched = 0;
   let faithComparable = 0;
   let faithMismatched = 0;
+  let strengthComparable = 0;
+  let strengthMismatched = 0;
 
   for (const observerId of Object.keys(maps).sort()) {
     if (observerId === BELIEF_SEED_SENTINEL) continue;
@@ -690,6 +740,12 @@ export function observeBeliefDivergence({ result, afterSaves }) {
           const believedFaith = typeof record.faithLabel === 'string' ? record.faithLabel : null;
           if (String(believedFaith ?? '') !== String(trueFaith ?? '')) faithMismatched += 1;
         }
+
+        const strengthTruth = truthFor ? truthFor(observerId)(subjectId) : null;
+        if (strengthTruth && Number.isInteger(strengthTruth.strengthBand) && Number.isFinite(record.strengthBand)) {
+          strengthComparable += 1;
+          if (Math.round(record.strengthBand) !== strengthTruth.strengthBand) strengthMismatched += 1;
+        }
       }
     }
   }
@@ -703,6 +759,10 @@ export function observeBeliefDivergence({ result, afterSaves }) {
   if (faithComparable > 0) {
     axes.push('faith');
     rates.push(faithMismatched / faithComparable);
+  }
+  if (strengthComparable > 0) {
+    axes.push('strength');
+    rates.push(strengthMismatched / strengthComparable);
   }
 
   return {
@@ -721,6 +781,8 @@ export function observeBeliefDivergence({ result, afterSaves }) {
     relationshipMismatched,
     faithComparable,
     faithMismatched,
+    strengthComparable,
+    strengthMismatched,
     axes,
     divergence01: rates.length
       ? round4(rates.reduce((total, rate) => total + rate, 0) / rates.length)

@@ -216,7 +216,12 @@ describe('GR-5c — renegotiation from strength: a believed swing past the band 
   it('A2: every road the base already walked is byte-identical, hashed', () => {
     // Recorded at 57b52b510 by this same harness, before a line of GR-5c existed.
     expect(verbDigest(), 'every clause word the dial offered at the base, against the war door instrument').toBe('b93cec824f5b9e21efa985ad00cffada79e98c2fec18d9d48a68208f667ee65f');
-    expect(answerDigest(), 'a trade question and an in-window renewal, answered').toBe('795315b7e9bc796bd7a7eed84790685c95588ec55a113c70531a3955c5808efb');
+    // RE-RECORDED 2026-10-02 by cure lane PACT-ANSWER (FP-42 at ODQ §934.89, FPQ-73, one cause): the answering
+    // court has learned no risk appetite, and `reserveFor` now spends the appetite reader's own neutral stock where
+    // it read the absence as zero (reserve 0.5 to 0.375 at a neutral posture). Was
+    // 795315b7e9bc796bd7a7eed84790685c95588ec55a113c70531a3955c5808efb; with `: 0` restored in `reserveFor` it passes
+    // (executed), so the move is FP-42's alone. The verb, below-band and dark digests do not move.
+    expect(answerDigest(), 'a trade question and an in-window renewal, answered').toBe('d02ee5077c16b2d82c36e5aae313e40d510777643e971b4adf00f9aa9a22d848');
     expect(belowBandDigest(), 'the lit year-turn with the swing below the band').toBe('602f545d44e37a794e4afec55bdecd9f1836a0ffc4a4174cdfd5be1bff48c06a');
     expect(darkDigest(), 'the year-turn past the band with the layer absent, then false').toBe('5a390d1cb673c222be906dbe2b14c0ec07571fd5b45526504b896a656a2280a5');
   });

@@ -362,6 +362,10 @@ export function refuseNonFiniteWorld({ composite, campaignId, year }) {
  * `autoResolve: true` is that it never pauses, and a runner that quietly resumed would render
  * documents for a world the engine refused to advance.
  *
+ * `onYear(capture, live)` receives the year's capture and, as an optional SECOND argument, the live
+ * year end `{ worldState, regionalGraph, saves }` (FP IN-6 U4: the lit/dark differential reads the
+ * per-year belief divergence off it). The capture itself is unchanged, so no document moves.
+ *
  * @param {{ campaign: any, saves: any[], years: number, seed: string, now?: string, onYear?: Function }} input
  * @returns {Promise<{ campaign: any, saves: any[], yearly: any[] }>}
  */
@@ -436,7 +440,9 @@ export async function advanceReaderCampaign({ campaign, saves, years, seed, now 
       simulationRulesAtYear: result.worldState?.simulationRules ?? null,
     };
     yearly.push(capture);
-    if (typeof onYear === 'function') onYear(capture);
+    if (typeof onYear === 'function') {
+      onYear(capture, { worldState: result.worldState, regionalGraph: result.regionalGraph, saves: runningSaves });
+    }
   }
 
   return { campaign: runningCampaign, saves: runningSaves, yearly };

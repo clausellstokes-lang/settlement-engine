@@ -260,19 +260,45 @@ function archetypeTilt(archetype) {
 // ── Compliance evolution (§12 — belief-monitored; a distant victor is cheated) ──
 
 /**
+ * @typedef {Object} ComplianceFloors
+ * @property {number} honored    at or above this capacity the clause is kept
+ * @property {number} defaulted  under this capacity it is broken; between the two, strained
+ */
+
+/** THE WAR DOOR'S LINE — every clause with no `beneficiary`. @type {Readonly<ComplianceFloors>} */
+const WAR_COMPLIANCE_FLOORS = Object.freeze({ honored: PEACE_TERMS_TUNING.HONORED_FLOOR, defaulted: PEACE_TERMS_TUNING.DEFAULT_FLOOR });
+/** FP-44 THE PACT STRAIN BAND — every NEGOTIATED clause. @type {Readonly<ComplianceFloors>} */
+const PACT_COMPLIANCE_FLOORS = Object.freeze({ honored: PEACE_TERMS_TUNING.PACT_HONORED_FLOOR, defaulted: PEACE_TERMS_TUNING.PACT_DEFAULT_FLOOR });
+
+/**
+ * WHICH LINE A CLAUSE IS BANDED AGAINST (FP-44). A clause carrying a `beneficiary` is a
+ * negotiated promise — `pactFormation.js :: draftPactSheet` and `pactRenewal.js` are its only
+ * writers — and takes the pact band; every other clause (war door, carried sheet, sale) takes
+ * the war door's line, which is what keeps every war treaty byte-identical. The predicate is
+ * the measurement seat's own (a non-empty string), applied exactly as measured.
+ * @param {Record<string, unknown> | null | undefined} term @returns {Readonly<ComplianceFloors>}
+ */
+export function complianceFloorsFor(term) {
+  const beneficiary = term?.beneficiary;
+  return typeof beneficiary === 'string' && beneficiary !== '' ? PACT_COMPLIANCE_FLOORS : WAR_COMPLIANCE_FLOORS;
+}
+
+/**
  * Evolve one term's compliance for a tick. The loser's TRUE delivery capacity
  * (its economic headroom) sets the true state; the victor's MONITORING REACH
  * (belief source — truth ⇒ full sight, banded belief ⇒ fog) sets what it
  * OBSERVES. A poorly-informed victor sees 'honored' while the loser cheats
  * (§12.2 — non-detection quietly rewards the informed cheat). Deterministic.
- * @param {{ loserCapacity01: number, monitorReach01: number }} args
+ * `floors` is the line the capacity is banded against (FP-44: the role reader hands a
+ * negotiated clause the pact band); absent, it is the war door's line, unchanged.
+ * @param {{ loserCapacity01: number, monitorReach01: number, floors?: Readonly<ComplianceFloors> }} args
  * @returns {{ trueState: 'honored'|'strained'|'defaulted', observedState: 'honored'|'strained'|'defaulted', trueDelivery01: number }}
  */
-export function evolveCompliance({ loserCapacity01, monitorReach01 }) {
+export function evolveCompliance({ loserCapacity01, monitorReach01, floors = WAR_COMPLIANCE_FLOORS }) {
   const trueDelivery01 = clamp01(Number(loserCapacity01) || 0);
   /** @type {'honored'|'strained'|'defaulted'} */
-  const trueState = trueDelivery01 >= PEACE_TERMS_TUNING.HONORED_FLOOR ? 'honored'
-    : trueDelivery01 >= PEACE_TERMS_TUNING.DEFAULT_FLOOR ? 'strained'
+  const trueState = trueDelivery01 >= floors.honored ? 'honored'
+    : trueDelivery01 >= floors.defaulted ? 'strained'
     : 'defaulted';
   // Detected iff the victor's monitoring reach clears the floor; else it ghosts
   // as 'honored' (the victor believes the treaty kept).

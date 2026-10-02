@@ -7,10 +7,10 @@
     "    npx vitest run tests/lint/tuningRegister.walker.test.js",
     "The refreeze EXITS NON-ZERO by design; the proof is a separate ordinary run."
   ],
-  "measuredAtSha": "0316db3e62cb53e9245b18c8b3113204a732a95e",
-  "measuredBy": "urban-band chair, session 93391427",
-  "date": "2026-10-01",
-  "note": "Base red picked up under the owner do-it-all: the FP line landed pactRenewal.js CONVERSION_TUNING (GR-RENEWAL U3) and moved peaceTermsCatalog dependents without re-measuring the inventory; no tuning value is proposed and nothing is signed.",
+  "measuredAtSha": "f9cb960c8768f0aa4894955bf0481443b6110685",
+  "measuredBy": "fp-batch-7-assembly-93391427",
+  "date": "2026-10-02",
+  "note": "FP batch 7 composed tip, nothing signed (FP-47, FP-53): STATECRAFT-BAND U1 SIGHT_TUNING.EXPOSE_BASE 0.06 to 0.01 (table stays draft); PACT-COMPLIANCE U1 FP-44 PEACE_TERMS_TUNING keys 24 to 26, PACT_HONORED_FLOOR and PACT_DEFAULT_FLOOR (table stays draft); IN-6 U5 INFO_CONVERGENCE_TUNING new table (draft); IN-6 U3 beliefTruthBands a new dependent of BELIEF_TUNING and ALLY_INTEL_TUNING",
   "schemaVersion": 1,
   "trees": {
     "p1": [
@@ -76,6 +76,47 @@
         "src/domain/worldPulse/brokerageServicesFeed.js",
         "src/domain/worldPulse/brokerageStamps.js"
       ]
+    },
+    "src/domain/certification/infoConvergenceContract.js#INFO_CONVERGENCE_TUNING": {
+      "exported": true,
+      "idiom": "literal",
+      "keys": 11,
+      "line": 69,
+      "spanDigest": "ef45259bb4794825245b73e9d176a609a8f7c16e5f81c68464558fdd82e97ba4",
+      "leaves": {
+        "knowledge_share.minShare": 0.02,
+        "knowledge_share.maxShare": 0.2,
+        "plant.minSample": 8,
+        "plant.dominanceMaxShare": 0.85,
+        "plant.floors.exposed": 0.05,
+        "intercept.minSample": 8,
+        "intercept.dominanceMaxShare": 0.9,
+        "intercept.floors.caught": 0.02,
+        "toll_incidence.minShare": 0.01,
+        "toll_incidence.maxShare": 0.35,
+        "lure.minSample": 6,
+        "lure.dominanceMaxShare": 0.8,
+        "lure.floors.resisted": 0.1,
+        "race.minSample": 8,
+        "race.dominanceMaxShare": 0.85,
+        "race.floors.person": 0.01,
+        "race.floors.story": 0.3,
+        "race.ceilings.person": 0.25,
+        "sweep.minSample": 6,
+        "sweep.dominanceMaxShare": 0.85,
+        "sweep.ceilings.false_accusation": 0.5,
+        "house.minSample": 6,
+        "house.dominanceMaxShare": 0.85,
+        "courier_errand.minSample": 8,
+        "courier_errand.dominanceMaxShare": 0.9,
+        "arc.minSample": 6,
+        "arc.dominanceMaxShare": 0.7,
+        "arc.minDistinct": 3,
+        "divergence_sane.finalWindowYears": 10,
+        "divergence_sane.pinnedAt": 1
+      },
+      "dependents": [],
+      "namedDependents": []
     },
     "src/domain/certification/warConvergenceContract.js#WAR_CONVERGENCE_TUNING": {
       "exported": true,
@@ -2422,6 +2463,7 @@
         "MISJUDGE_BAND_DELTA": 2
       },
       "dependents": [
+        "src/domain/display/beliefTruthBands.js",
         "src/domain/display/settlementBeliefs.js",
         "src/domain/edit/directions.js",
         "src/domain/roads/embassyHazard.js",
@@ -2474,7 +2516,7 @@
       "exported": true,
       "idiom": "literal",
       "keys": 8,
-      "line": 943,
+      "line": 948,
       "spanDigest": "8e4e0dec9b4c1ca83f1212585bea1dfeb9988273eefb8de924058703eb6da513",
       "leaves": {
         "SHARE_CONFIDENCE_FLOOR": 0.6,
@@ -2487,6 +2529,7 @@
         "DECEIT_READINESS": 0.75
       },
       "dependents": [
+        "src/domain/display/beliefTruthBands.js",
         "src/domain/display/settlementBeliefs.js",
         "src/domain/edit/directions.js",
         "src/domain/roads/embassyHazard.js",
@@ -4571,7 +4614,7 @@
       "idiom": "literal",
       "keys": 23,
       "line": 771,
-      "spanDigest": "170f4c16c27f0088f860cc97ee7afc207cc0b8fc746e6046c0a5c126bb0e128e",
+      "spanDigest": "ec5bdb3137490bb79a17fa608ad85c7f046edc7dce58e2f49d719c0a253871ad",
       "leaves": {
         "SEE_DECAY_KEEP": 0.8,
         "SEE_ACC_FLOOR": 0.85,
@@ -4586,7 +4629,7 @@
         "UPKEEP_AFFORD_FLOOR": 0.25,
         "UPKEEP_FIDELITY_COST": 0.4,
         "MERCHANT_UPKEEP_RELIEF": 0.6,
-        "EXPOSE_BASE": 0.06,
+        "EXPOSE_BASE": 0.01,
         "EXPOSE_SECRECY_GAIN": 0.55,
         "EXPOSE_CHARGE01": 0.8,
         "EXPOSE_GRIEVANCE_W": 0.3,
@@ -4733,6 +4776,7 @@
         "src/domain/worldPulse/bandedStock.js",
         "src/domain/worldPulse/faithWitnessSource.js",
         "src/domain/worldPulse/treatyClock.js",
+        "src/domain/worldPulse/treatyLifecycleVoice.js",
         "src/domain/worldPulse/vengeanceLicense.js",
         "src/domain/worldPulse/worldState.js"
       ],
@@ -4743,6 +4787,7 @@
         "src/domain/worldPulse/bandedStock.js",
         "src/domain/worldPulse/faithWitnessSource.js",
         "src/domain/worldPulse/treatyClock.js",
+        "src/domain/worldPulse/treatyLifecycleVoice.js",
         "src/domain/worldPulse/vengeanceLicense.js",
         "src/domain/worldPulse/worldState.js"
       ]
@@ -5715,7 +5760,7 @@
       "exported": true,
       "idiom": "literal",
       "keys": 9,
-      "line": 125,
+      "line": 127,
       "spanDigest": "ea39eeb42da761e69792ebcc57028ba6c5babddc1d5f8ce0c6fa559c0f4b8bed",
       "leaves": {
         "RESERVE_BASE01": 0.5,
@@ -5922,9 +5967,9 @@
     "src/domain/worldPulse/peaceTermsCatalog.js#PEACE_TERMS_TUNING": {
       "exported": true,
       "idiom": "mixed",
-      "keys": 24,
+      "keys": 26,
       "line": 17,
-      "spanDigest": "05964fff08d2946d4ddd1328866dea69b89db5dab225e35cfeb03b82bb4aa9c2",
+      "spanDigest": "0e0b31d5fb124a492fcc8ddbbdd78eab4c35d9ab1080d7174d16cdfd586d6b26",
       "leaves": {
         "TICKS_PER_YEAR": {
           "expr": "CURRENT_TREATY_TICKS_PER_YEAR"
@@ -5940,6 +5985,8 @@
         "DURATION_CURVE.extremityWeight": 1,
         "HONORED_FLOOR": 0.75,
         "DEFAULT_FLOOR": 0.4,
+        "PACT_HONORED_FLOOR": 0.5,
+        "PACT_DEFAULT_FLOOR": 0.2,
         "DETECT_FLOOR": 0.6,
         "STRAIN_RESENTMENT_PER_YEAR": 0.6,
         "PEACE_MINT_WINDOW": 3,
@@ -5991,7 +6038,7 @@
       "exported": true,
       "idiom": "literal",
       "keys": 4,
-      "line": 79,
+      "line": 96,
       "spanDigest": "c77652fe2c74a48d24fc439ac21c61871401ae51e114be8478862c63eead308e",
       "leaves": {
         "MIN_MULTIPLIER": 0.8,
@@ -8383,11 +8430,11 @@
   },
   "unclosed": [],
   "totals": {
-    "tables": 256,
-    "keys": 2174,
+    "tables": 257,
+    "keys": 2187,
     "unregisteredNamed": 535,
     "bareDecimals": 6975,
-    "zeroDependentTables": 9,
-    "zeroNamedDependentTables": 167
+    "zeroDependentTables": 10,
+    "zeroNamedDependentTables": 168
   }
 }

@@ -165,7 +165,11 @@ const serialized = (out) => JSON.stringify(ledgerOf(out));
  * The straining fixture at tick 10, serialized exactly as the engine left it. If a dark run
  * ever diverges from this literal by one byte, GR-5A is not dark and the wave is refuted.
  */
-const PRE_WAVE_DARK_GOLDEN = '{"victor>loser":{"parties":["victor","loser"],"victorId":"victor","loserId":"loser","victorName":"Ashford","loserName":"Irontown","mintedTick":0,"believedMarginAtSignature":0.42,"budgetGranted":1,"budgetSpent":1,"treatyTicksPerYear":52,"complianceState":"strained","receipts":[],"terms":[{"type":"tribute","family":"economic","magnitude":0.2,"mintedTick":0,"expiresTick":1040,"weightSpent":1,"complianceState":"strained","trueState":"strained","burden01":0.6,"deliveredToVictor":0,"extractedFromLoser":0,"receipt":"tribute"}]}}';
+// RE-RECORDED ONCE, ONE CAUSE (FPQ-75, PACT-COMPLIANCE U2, 2026-10-02): the fixture's tribute owes a
+// weekly installment the tenth-month granary cannot move yet, and that remainder now stays on the clause
+// as installmentCarryMonths (treatyTransfer.js :: drawStreamInstallment). The key is the renewal flag's
+// business in neither run, so this fence still measures exactly what it did: no worstObservedEver dark.
+const PRE_WAVE_DARK_GOLDEN = '{"victor>loser":{"parties":["victor","loser"],"victorId":"victor","loserId":"loser","victorName":"Ashford","loserName":"Irontown","mintedTick":0,"believedMarginAtSignature":0.42,"budgetGranted":1,"budgetSpent":1,"treatyTicksPerYear":52,"complianceState":"strained","receipts":[],"terms":[{"type":"tribute","family":"economic","magnitude":0.2,"mintedTick":0,"expiresTick":1040,"weightSpent":1,"complianceState":"strained","trueState":"strained","burden01":0.6,"deliveredToVictor":0,"extractedFromLoser":0,"receipt":"tribute","installmentCarryMonths":0.006923076923076924}]}}';
 
 /** Every `.js`/`.jsx` under `src/`, for the two source censuses (A5 and A8). */
 function walkSrc(dir, out = []) {
