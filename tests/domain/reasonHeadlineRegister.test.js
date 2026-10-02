@@ -95,6 +95,7 @@ describe('faction headline register — every faction candidateType has a gramma
       // under way and done differ (the applied twin).
       expect(vp.did, `${type} .did must differ from .doing`).not.toBe(vp.doing);
       expect(vp.doing, `${type} .doing is not under way`).toMatch(/^is \w+ing\b/);
+      // anchored: the two length assertions above prove both phrases are live, non-empty words
       expect(`${vp.doing} ${vp.did}`, `${type} speaks potential`).not.toMatch(/\b(may|might|could)\b/);
       // Not the old mechanical form (the bare candidateType noun).
       const bareNoun = type.replace(/^faction_/, '').replace(/_/g, ' ');

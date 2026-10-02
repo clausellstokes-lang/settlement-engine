@@ -27,8 +27,11 @@ const LEAK = /\$\{|\bundefined\b|\[object|\bNaN\b| {2,}/;
 const clean = (s, where) => {
   expect(s.length, `${where} empty`).toBeGreaterThan(0);
   expect(s, `${where} untrimmed`).toBe(s.trim());
+  // anchored: the length and trim assertions above prove `s` is a live, non-empty rendered line
   expect(s, `${where} leaks`).not.toMatch(LEAK);
+  // anchored: the same live line as above
   expect(s, `${where} speaks potential`).not.toMatch(POTENTIAL);
+  // anchored: the same live line as above
   expect(s, `${where} names the simulation's machinery`).not.toMatch(MECHANIC);
 };
 
@@ -41,6 +44,7 @@ describe('the deed register — every form is a clean deed', () => {
       const [u, done, fact] = [d.underway(NAME), d.done(NAME), d.fact(NAME)];
       for (const [s, f] of [[u, 'underway'], [done, 'done'], [fact, 'fact']]) clean(s, `${kind}.${f}`);
       expect(u, `${kind}.underway is not under way`).toMatch(/\bis \w+ing\b|\bare \w+ing\b|\bare under\b/);
+      // anchored: clean(done) above proves the done form is a live, non-empty line
       expect(done, `${kind}.done reads as still under way`).not.toMatch(/\b(is|are) \w+ing\b/);
       for (const s of [u, done, fact]) expect(s, `${kind} lost the place`).toContain(NAME);
     }
@@ -54,6 +58,7 @@ describe('the deed register — every form is a clean deed', () => {
       clean(d.underway, `${family}.underway`);
       clean(d.done, `${family}.done`);
       expect(d.underway, `${family}.underway is not under way`).toMatch(/^is \w+ing\b/);
+      // anchored: clean(d.done) above proves the done form is a live, non-empty line
       expect(d.done, `${family}.done reads as still under way`).not.toMatch(/^is \w+ing\b/);
     }
     for (const [family, d] of Object.entries(TARGETED_NPC_DEEDS)) {
@@ -72,6 +77,7 @@ describe('the deed register — every form is a clean deed', () => {
       clean(d.underway, `${label}.underway`);
       clean(d.done, `${label}.done`);
       expect(d.underway, `${label}.underway is not under way`).toMatch(/^are \w+ing\b/);
+      // anchored: clean(d.done) above proves the done form is a live, non-empty line
       expect(d.done, `${label}.done reads as still under way`).not.toMatch(/^are \w+ing\b/);
     }
     expect(Object.keys(RELATIONS_MOVE).sort()).toEqual(['de_escalation', 'escalation', 'neutral']);
@@ -80,6 +86,7 @@ describe('the deed register — every form is a clean deed', () => {
   it('aims read as the world would say them, for every goal the planner can hold', () => {
     for (const [key, aim] of Object.entries(NPC_AIMS)) {
       clean(aim, `aim ${key}`);
+      // anchored: clean(aim) above proves the aim is a live, non-empty line
       expect(aim, `${key} is the planner's key, not words`).not.toContain('_');
     }
     // Every goal the catalog and the branch rules can hand an NPC: a missing one printed

@@ -1,6 +1,6 @@
 {
-  "total": 2209,
-  "totalAny": 2171,
+  "total": 2208,
+  "totalAny": 2170,
   "totalSuppress": 38,
   "files": {
     "src/domain/activeConditions.js": {
@@ -432,7 +432,7 @@
       "suppress": 0
     },
     "src/domain/worldPulse/npcAgency.js": {
-      "any": 85,
+      "any": 84,
       "suppress": 0
     },
     "src/domain/worldPulse/npcDmVerbs.js": {

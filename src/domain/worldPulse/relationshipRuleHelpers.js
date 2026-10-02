@@ -251,12 +251,13 @@ function itemFor(/** @type {any} */ snapshot, /** @type {any} */ saveId) {
 /**
  * The relationship candidate's two headlines, both settlements named. The label TURN when the
  * candidate carries a toType, else the relations MOVE by its direction.
- * @param {any} snapshot @param {{ from: any, to: any }} settlements
+ * @param {{ byId?: { get?: (id: string) => ({ name?: string } | null | undefined) } } | null} snapshot
+ * @param {{ from: unknown, to: unknown }} settlements
  * @param {string|null} toType @param {string} direction
  * @returns {{ headline: string, appliedHeadline: string }}
  */
 function relationshipDeedHeadlines(snapshot, settlements, toType, direction) {
-  const nameOf = (/** @type {any} */ id) => itemFor(snapshot, id)?.name || String(id);
+  const nameOf = (/** @type {unknown} */ id) => itemFor(snapshot, id)?.name || String(id);
   const a = nameOf(settlements.from);
   const b = nameOf(settlements.to);
   if (toType) {

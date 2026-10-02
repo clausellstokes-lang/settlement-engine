@@ -828,6 +828,8 @@ export function evaluateInstitutionLifecycle(/** @type {any} */ worldState, /** 
       const severity = clamp01(0.3 + target.contribution * 0.35 + distress * 0.15);
       drift.lastCandidateTick = tick;
       settlementTickStates[item.id] = { ...previous, economyDrift: drift };
+      // One spelling of what is closing, read once, for both aspects of the deed.
+      const closing = `${target.inst.name} in ${item.name || item.id}`;
       candidates.push({
         id: `candidate.institution.close.${stablePart(item.id)}.${stablePart(target.inst.name)}.${tick}`,
         type: 'institution',
@@ -838,8 +840,7 @@ export function evaluateInstitutionLifecycle(/** @type {any} */ worldState, /** 
         severity,
         probability,
         applyMode: rules.majorChangesRequireProposal && severity >= 0.78 ? 'proposal' : 'auto',
-        headline: `${target.inst.name} in ${item.name || item.id} is closing its doors`,
-        appliedHeadline: `${target.inst.name} in ${item.name || item.id} closes its doors`,
+        headline: `${closing} is closing its doors`, appliedHeadline: `${closing} closes its doors`,
         summary: 'Sustained economic decline is squeezing out the institutions the settlement leans on least.',
         reasons: [
           `Economy stably distressed for ${drift.streak} tick(s) (minimum ${t.requiredStreak}).`,
