@@ -67,7 +67,10 @@ describe('the knowledge desk — the non-omniscient Herald golden (captured firs
     // 2026-10-01-urban-band-herald-rows.json): fuller rosters feed the year-one desk 33 more items.
     // 400 → 383 at J33, the Warden's Lodge census (2026-10-01, record docs/shift-records/
     // 2026-10-01-urban-band-warden-census-herald.json): the realm's one lodge town re-deals the year's news.
-    expect(Object.keys(manifest)).toHaveLength(383);
+    // 383 → 379 at PACT-ANSWER U1's pick (FP-42, ODQ §934.89 FP-46, 2026-10-02; record docs/shift-records/
+    // 2026-10-02-pact-answer-fp42-herald-desk.json): an unlearned appetite reads neutral, four refused
+    // sheets sign as amendments, and the year downstream follows (381 → 377 items).
+    expect(Object.keys(manifest)).toHaveLength(379);
   });
 
   it('the declared refile set is exactly the knowledge desk the routing table carries', () => {
