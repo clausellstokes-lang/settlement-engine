@@ -177,6 +177,8 @@ describe('TREATY-VOICE-2 U2 — an age below a year speaks weeks and seasons, ne
       'the better part of a season', 'the better part of a season', 'a season and more', 'a season and more',
       'the better part of a year', 'the better part of a year', 'the better part of a year',
     ]);
+    expect(TREATY_SUBYEAR_BANDS.length).toBeGreaterThan(0);
+    // anchored: the band table is non-empty one line up, so each digit-free word is a real read
     for (const band of TREATY_SUBYEAR_BANDS) expect(band.word, band.word).not.toMatch(/\d/);
   });
 
