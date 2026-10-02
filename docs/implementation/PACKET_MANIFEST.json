@@ -529,8 +529,9 @@
           "symbol": "const APPLIED_HEADLINE_REWRITES"
         },
         {
-          "path": "src/domain/worldPulse/npcAgency.js",
-          "symbol": "goal can advance through"
+          "path": "src/domain/worldPulse/worldPulseFeedCuration.js",
+          "symbol": "function appliedSummaryFor",
+          "_note": "RE-POINTED BY THE VOICE PROGRAM WAVE 1 (2026-10-02, ODQ §934.88). The row pinned npcAgency.js's summary phrase \"goal can advance through\", the producer half of the summary de-hedge this packet landed. The owner struck that phrase from the whole pool (\"all variations of these needs to be removed from the entire pool\"): a live NPC summary now states the aim (\"X is out to …\"). The de-hedge itself, appliedSummaryFor, is KEPT for proposals persisted before the program (THE PROMISE), so the packet's landed work still exists and this row now pins it."
         },
         {
           "path": "scripts/hazard-registry.json",
