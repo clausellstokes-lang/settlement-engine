@@ -1,7 +1,16 @@
 # The Voice Program — deeds in the Herald, places in the dossier (plan)
 
 > **Progress** (append after every wave — this blockquote alone must reconstruct program state)
-> - The full gate: PENDING at the time of this note; the run's verbatim result is appended in the next plan note.
+> - THE FULL GATES. (1) `f33d28798`: 26 of 34,981 red, every one the program's, cured in `8046d1630` (the relationship deed
+>   named its pair in edge order, a real orientation defect; nine instruments re-pinned with leaf-diff attribution),
+>   `07de03bb8` (writer-reach re-frozen, four registered rows), `2b6a44f22` (the desk golden, signed record five) and
+>   `f122dd252` (the edge bundles, one window). (2) `f122dd252`: every validator, typecheck, lint, all 34,981 tests and the
+>   build GREEN; strict dist red on the landing fixture (regenerated at lf-033 and re-grounded, `c39ce8640`) and the generation
+>   worker ceiling (+21,948 B, the arrival pools; THE OWNER RULED "Raise it by ~22 KB (Recommended)" in chat, `413ea4f0a`).
+>   (3) `413ea4f0a`: 34,979 passed, one arm expired under load (flavorFields A2, 24.5 s of 20 s), cured in `3c9264bed`
+>   (patterns compiled once; a measured 60 s budget). (4) The final gate on this note's commit: its verbatim result is
+>   quoted in the pull request. THE OWNER'S WORD (2026-10-02): "When that lands, I want you to commit and then push and do
+>   a pull request", with "--no-verify after green (Recommended)" for the push.
 > - Wave 4 block 1 (shipped, `e76ea7f3c`) — the arrival hook names only what the settlement holds: STRUCTURE_CLAIMS (wall or
 >   gate, guard, market, granary, house of worship) draws a stress vignette only where its structures stand, and eleven
 >   structure-free vignettes join the pool (siege, infiltration and monster pressure had none). +3 pins, red-proven (74 of
@@ -137,6 +146,8 @@ line, no tier template), a completion memory.
 > - VP-J12 AO-2+3's required symbol re-pointed to appliedSummaryFor, the de-hedge that still carries the packet's work.
 > - VP-J13 the hook keeps every authored stress vignette and FILTERS by the structures each names, rather than rewriting
 >   the vignettes tier-neutral; eleven structure-free vignettes are the floor. Veto: rewrite the pool instead.
+> - VP-J15 the flavor census's A2 takes an explicit 60 s budget carrying its measured figure (the gate's own prescribed
+>   cure for a load expiry), beside the composer's own cost cut; the suite-wide timeout is not raised.
 > - VP-J14 a shared .git/config found at core.bare=true (05:23, written during other sessions' gate and push runs, not by
 >   this session) was restored to false at 05:26 so every checkout worked again; the pre-repair file is kept in the chair's
 >   scratchpad. Veto is moot: bare=true is never valid for a repository with a working tree.
@@ -153,5 +164,5 @@ line, no tier template), a completion memory.
 
 ## Owner-decision queue
 
-- Push and merge of `feat/herald-voice-2026-10-02` into the FP line (the owner's; nothing pushed).
+- Merge of the pull request into the FP line (the owner's). The push and the PR were ordered by the owner on 2026-10-02.
 - The landing-map branch on master (`fix/landing-realm-pins-2026-10-02`): merging to master deploys.
