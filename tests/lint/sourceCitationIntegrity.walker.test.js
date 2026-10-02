@@ -47,7 +47,9 @@
  * past-EOF citations this gate deliberately does not see. FOUR rules select them,
  * each checkable, and the full roster is committed in the baseline's
  * `archivalExclusionAtFreeze.files`:
- *   tree (39)    docs/review-r2/**, docs/shift-records/**
+ *   tree (40)    docs/review-r2/**, docs/shift-records/**
+ *                (2026-10-02-statecraft-band-u1-exposure-band.json joined 2026-10-02, 39 -> 40: cure lane
+ *                STATECRAFT-BAND's record for U1, FPQ-74, the spy-exposure band; a GROWTH that hid nothing.)
  *                (2026-10-02-pact-compliance-u2-stream-carry.json joined 2026-10-02, 38 -> 39: cure lane
  *                PACT-COMPLIANCE's record for U2, FPQ-75, clauses that deliver; a GROWTH that hid nothing.)
  *                (2026-10-02-pact-compliance-u1-strain-band.json joined 2026-10-02, 37 -> 38: cure lane

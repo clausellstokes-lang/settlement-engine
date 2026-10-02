@@ -1,0 +1,35 @@
+{
+  "_doc": "PREPARED by the STATECRAFT-BAND seat (Opus 5.5) for the FP chair, who signs golden re-records BY DELEGATION under ODQ §934.89 FP-46 and runs the door. It is NOT applied, NOT committed, and NOT a signature until the chair fills `seat` and runs the capture arm. The tree at 820761b6f is clean apart from this record. The movement is one row, nc-b|8|one_month, of a dormancy golden whose fixture forces the statecraft head on (infoStatecraftEnabled: true, npcCredibility dark). ATTRIBUTED BY FIELD, not assumed, which is the standard the file's own 2026-07-31 movement note sets: with the base file (EXPOSE_BASE 0.06) planted, all three rows reproduce the manifest (nc-a 2b94d9a9, nc-b 0c6a70ff, nc-c 8a3a7029), and it was restored by sha256 fb8d8793. At the tip only nc-b moves, 0c6a70ff -> fd2eff1b, in exactly two fields of its projection: newsKinds loses `infowar_spy_exposed: 1` (the one fall of a spy in an open court, now rarer), and credibility loses midfen's charge {score -3.947}, which is that fall's deception charge. npcCredibility, disinfo, npcLadder, tick and rollSummary are byte-identical, so D-2 dormancy holds. IF THE CHAIR SIGNS THE BAND FIRST as tuning-register v1, this record's cause should begin `tuning-register v1 signed §934.89` (TUNING_SHIFT_CAUSE_RE, the walker's arms 33/33b) so the re-record cites the version that moved it. SIGNED AT THE COMPOSED POINT BY THE BATCH 7 ASSEMBLY SEAT (2026-10-02, FP-46 delegation; the cause above is unchanged; FP-47 rules the SIGHT_TUNING table NOT signed now, so the cause carries no tuning-register prefix): the unit was cherry-picked as 9a1ded02d onto 3dce9c642, with PACT-REASK, PACT-ANSWER and PACT-COMPLIANCE U1/U2 beneath it, which the lane's base f5105fb6f lacked. Re-measured BEFORE the door in a plain node run of the suite's own projection at 9a1ded02d: nc-a 2b94d9a9... and nc-c 8a3a7029... reproduce the manifest, nc-b moves 0c6a70ff4bfa... -> fd2eff1bb1378bde6df02260476b61cf82cd95b31becdc4713660ebdb8a9b187, exactly the lane's prediction; 3 rows. Two fields the lane left for the chair were filled here: `seat`, and `proofForm` (null, which the door refuses; 'derived-artefact', the form the herald desk golden uses for its own simulated-world projection; the register row's proofForm is null, so no form is excluded).",
+  "ownerWords": "I leave everything to your judgement and leave you to build it all",
+  "ownerDate": "2026-10-02",
+  "odqRow": "§934.89 (FP-46: the chair signs the chain's golden re-records by delegation)",
+  "cause": "ONE CAUSE: STATECRAFT-BAND U1 (280dcca9a) banded informationStatecraft.js SIGHT_TUNING.EXPOSE_BASE 0.06 -> 0.01, so a covert posture on an open court is found at one sixth the odds. In this golden's eight monthly ticks on seed nc-b, the one spy fall the head produced at 0.06 no longer happens, and its credibility charge goes with it. Only nc-b|8|one_month moves, and only newsKinds and credibility within it.",
+  "seat": "PREPARED by the STATECRAFT-BAND seat (Opus 5.5, worktree fp-statecraft, branch fp/statecraft-band-2026-10-02 from f5105fb6f); the door executed by the FP batch 7 assembly seat (Opus 5.5, dispatched by the FP chair, session 93391427); the chair signs by delegation under FP-46",
+  "surfaces": [
+    {
+      "surface": "npc-credibility-dormancy-golden",
+      "action": "re-record",
+      "predictedRows": 3,
+      "proofForm": "derived-artefact",
+      "expected": {
+        "movedRows": [
+          "nc-b|8|one_month"
+        ],
+        "unmovedRows": [
+          "nc-a|4|one_month",
+          "nc-c|6|one_week"
+        ],
+        "nc-b": {
+          "from": "0c6a70ff4bfa017e20ab9ee9ecbf61697fbc9cc153f958661c5f24029abb313e",
+          "to": "fd2eff1bb1378bde6df02260476b61cf82cd95b31becdc4713660ebdb8a9b187"
+        }
+      }
+    }
+  ],
+  "doorSequence": [
+    "1. The chair fills `seat` (and the cause prefix, if the band is signed first as tuning-register v1).",
+    "2. GOLDEN_SHIFT_SIGNED=docs/shift-records/2026-10-02-statecraft-band-u1-exposure-band.json UPDATE_GOLDEN=1 npx vitest run tests/property/npcCredibilityDormancyGolden.test.js (fails by design, printing old -> new).",
+    "3. Re-run tests/property/npcCredibilityDormancyGolden.test.js and tests/lint/goldenFreeze.walker.test.js plainly: those greens are the receipt.",
+    "4. Commit the manifest, the register and this record together with the Owner-Signed: §934.89 trailer."
+  ]
+}

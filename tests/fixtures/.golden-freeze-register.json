@@ -446,11 +446,11 @@
       "suite": "tests/property/npcCredibilityDormancyGolden.test.js",
       "recordEnv": "UPDATE_GOLDEN",
       "proofForm": null,
-      "sha256": "b872e66a2f183d5c6554c8334679e71ef7b2ca8f60d24d70a9867fc60134edbc",
+      "sha256": "c8d6a126e154e2561d1a8c0a6e405910f04b70630d271b6d7f536030d3fdd866",
       "rows": 3,
       "seedSet": null,
       "distinctFloor": null,
-      "ownerRow": "§901",
+      "ownerRow": "§934.89 (FP-46: the chair signs the chain's golden re-records by delegation)",
       "note": "FROZEN AT THE GENESIS 2026-09-16 at the bytes committed at d22ceff01 (the owner's signature 'sign the golden'; record docs/shift-records/2026-09-16-genesis-freeze-generator-golden-master.json); measured, not moved: sha256 = bytes of `path`, rows = the manifest's key count where it is JSON."
     },
     {
