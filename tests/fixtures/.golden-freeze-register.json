@@ -850,7 +850,7 @@
       "suite": "tests/property/heraldKnowledgeDeskGolden.test.js",
       "recordEnv": "UPDATE_GOLDEN",
       "proofForm": null,
-      "sha256": "e994665901412896f94d7672213e0e1130395425f1d19d1cf7e5a8929a6f1a5a",
+      "sha256": "0844232324379216aebac4bc36e08a201d2a2c9d59f37dd9ce9695d868e2896f",
       "rows": 383,
       "seedSet": null,
       "distinctFloor": null,
