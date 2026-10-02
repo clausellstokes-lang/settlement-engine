@@ -189,6 +189,16 @@ const THE_CALLER = 'src/domain/worldPulse/operations/missionDispatcher.js';
  * AND NOWHERE ELSE. Most recently at the ENGINE-HYGIENE landing (SHIFT RECORD,
  * 2026-09-01, TE-AGNOSTIC-1 cars `f2c1ad181` / `97d119c9b`); before that at T8.
  *
+ * ── 2026-10-02, THE VOICE PROGRAM WAVE 4 BLOCK 1: THE ARRIVAL HOOK NAMES ONLY WHAT IT HOLDS ──
+ * THE TWELFTH MOVEMENT OF THIS CONSTANT, owner-signed through the door under ODQ §934.88; the
+ * record is docs/shift-records/2026-10-02-voice-program-wave-4-hook-structures.json.
+ * THE MOVER: a stress vignette naming a wall, gate, market, guard, granary or temple is drawn only
+ * where the settlement holds it, and eleven structure-free vignettes join the pool (e76ea7f3c).
+ * The base 5c12d56ee held `5df27d67…` (this file green there) before this value was taken.
+ * On THIS corpus 59 of 360 rows move, the stressed ones; 360/360 hashes stay distinct.
+ * ATTRIBUTION, ZERO RESIDUE: with `arrivalScene` and `pressureSentence` removed, all 360 rows
+ * hash identically at the base and here. `5df27d67…` -> `b9945f18…`.
+ *
  * ── 2026-10-02, THE VOICE PROGRAM WAVE 3: THE ARRIVAL SCENE IS A PLACE ──────────────────
  * THE ELEVENTH MOVEMENT OF THIS CONSTANT, owner-signed through the door under ODQ §934.88; the
  * record is docs/shift-records/2026-10-02-voice-program-wave-3-arrival-place.json.
@@ -405,7 +415,7 @@ const THE_CALLER = 'src/domain/worldPulse/operations/missionDispatcher.js';
  * superseded by the ENGINE-HYGIENE re-record above, which is the record of the
  * one chartered window that has been spent since.
  */
-const PRE_COUPLING_CORPUS_SHA = '5df27d6776677f8028fc1de7b20cfda73bb72b2277fa007f76885e43f57faac2';
+const PRE_COUPLING_CORPUS_SHA = 'b9945f18189f0833f2a0691f5e2da5b7691e0b1b0efe9e437abc8601bf3be128';
 
 const CORPUS_TIERS = Object.freeze(['thorp', 'hamlet', 'village', 'town', 'city', 'metropolis']);
 const CORPUS_ROUTES = Object.freeze(['road', 'isolated', 'port', 'crossroads']);
