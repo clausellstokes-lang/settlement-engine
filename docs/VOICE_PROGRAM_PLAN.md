@@ -8,8 +8,9 @@
 >   build GREEN; strict dist red on the landing fixture (regenerated at lf-033 and re-grounded, `c39ce8640`) and the generation
 >   worker ceiling (+21,948 B, the arrival pools; THE OWNER RULED "Raise it by ~22 KB (Recommended)" in chat, `413ea4f0a`).
 >   (3) `413ea4f0a`: 34,979 passed, one arm expired under load (flavorFields A2, 24.5 s of 20 s), cured in `3c9264bed`
->   (patterns compiled once; a measured 60 s budget). (4) The final gate on this note's commit: its verbatim result is
->   quoted in the pull request. THE OWNER'S WORD (2026-10-02): "When that lands, I want you to commit and then push and do
+>   by a measured 60 s budget. (4) `74fb1b022`: all tests GREEN; strict dist red by 82 B, the pattern cache `3c9264bed` also
+>   added (1,438,599 B against the ruled 1,438,517 B); the cache is withdrawn, src byte-identical to `413ea4f0a` and the
+>   worker back at 1,438,517 B. (5) The final gate on the push commit: its verbatim result is quoted in the pull request. THE OWNER'S WORD (2026-10-02): "When that lands, I want you to commit and then push and do
 >   a pull request", with "--no-verify after green (Recommended)" for the push.
 > - Wave 4 block 1 (shipped, `e76ea7f3c`) — the arrival hook names only what the settlement holds: STRUCTURE_CLAIMS (wall or
 >   gate, guard, market, granary, house of worship) draws a stress vignette only where its structures stand, and eleven
@@ -147,7 +148,8 @@ line, no tier template), a completion memory.
 > - VP-J13 the hook keeps every authored stress vignette and FILTERS by the structures each names, rather than rewriting
 >   the vignettes tier-neutral; eleven structure-free vignettes are the floor. Veto: rewrite the pool instead.
 > - VP-J15 the flavor census's A2 takes an explicit 60 s budget carrying its measured figure (the gate's own prescribed
->   cure for a load expiry), beside the composer's own cost cut; the suite-wide timeout is not raised.
+>   cure for a load expiry); the suite-wide timeout is not raised. A pattern cache tried beside it cost 82 B the owner had
+>   not ruled and bought time inside the noise, so it was withdrawn rather than taken back to the owner.
 > - VP-J14 a shared .git/config found at core.bare=true (05:23, written during other sessions' gate and push runs, not by
 >   this session) was restored to false at 05:26 so every checkout worked again; the pre-repair file is kept in the chair's
 >   scratchpad. Veto is moot: bare=true is never valid for a repository with a working tree.

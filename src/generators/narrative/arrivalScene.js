@@ -92,21 +92,9 @@ const escapeRe = (/** @type {string} */ s) => s.replace(/[.*+?^${}()|[\]\\]/g, '
  */
 function anyAtWordStart(fragments, names) {
   return fragments.some((fragment) => {
-    const re = wordStartPattern(fragment);
+    const re = new RegExp(`(^|[^a-z])${escapeRe(fragment)}`);
     return names.some((name) => re.test(name));
   });
-}
-
-/** One compiled pattern per fragment for the module's life: the composer runs on every generated settlement. */
-const WORD_START_PATTERNS = new Map();
-/** @param {string} fragment */
-function wordStartPattern(fragment) {
-  let re = WORD_START_PATTERNS.get(fragment);
-  if (!re) {
-    re = new RegExp(`(^|[^a-z])${escapeRe(fragment)}`);
-    WORD_START_PATTERNS.set(fragment, re);
-  }
-  return re;
 }
 
 /**
