@@ -113,7 +113,9 @@ import { thresholdFactorOf } from './dispositionProfile.js';
 // THE MATERIAL EXECUTOR: a stream term's installment moves REAL granary months
 // through the conserved sink-only primitive, applied by the existing single
 // food applicator. See treatyTransfer.js for why grain is the honest denomination.
-import { computeTreatyGrainDraw, applyTreatyFoodDeltas, freshestSettlement } from './treatyTransfer.js';
+// FPQ-75: the installment carries its sub-tenth remainder on the clause, so a weekly
+// share the granary cannot move at once is moved when it amounts to a tenth-month.
+import { drawStreamInstallment, applyTreatyFoodDeltas, freshestSettlement } from './treatyTransfer.js';
 // WR-10 — THE CONVEYANCE EXECUTOR. A sovereignty_transfer is `stream:false`, so it
 // fires ONCE at mint (the compelled_alliance precedent) rather than in the per-tick
 // walk. It is invoked from the mint LOOP rather than from inside applyMintEffects,
@@ -722,15 +724,21 @@ export function advanceTreaties({ snapshot, worldState, settlementUpdates = [], 
       // what the payee actually received; they DIVERGE by the road's spoilage, which
       // is the sink. A payer at its reserve floor moves nothing — and that silence is
       // exactly the under-delivery §12's compliance read is watching for.
+      // FPQ-75 THE CARRY: what the clause owes but the tenth-month grain could not move
+      // this week stays ON THE CLAUSE (`installmentCarryMonths`, drop-when-absent: no key
+      // while nothing is owed) and is drawn when it amounts to a tenth. This line is its
+      // one writer and the next installment its one reader.
       const spec = TERM_CATALOG[term.type];
       if (spec?.stream) {
-        const draw = computeTreatyGrainDraw({
+        const { draw, carriedMonths } = drawStreamInstallment({
+          carriedMonths: term.installmentCarryMonths,
           payer: freshestSettlement(workingSettlementUpdates, snapshot, role.obligorId),
           payee: freshestSettlement(workingSettlementUpdates, snapshot, role.obligeeId),
           takeFraction: streamInstallmentFraction(term, comp.trueDelivery01, treaty),
           committedDebit: -(foodDeltas.get(role.obligorId) || 0),
           committedCredit: foodDeltas.get(role.obligeeId) || 0,
         });
+        if (carriedMonths > 0) term.installmentCarryMonths = carriedMonths; else delete term.installmentCarryMonths;
         if (draw && draw.lostMonths > 0) {
           foodDeltas.set(role.obligorId, round4((foodDeltas.get(role.obligorId) || 0) - draw.lostMonths));
           if (draw.gainedMonths > 0) foodDeltas.set(role.obligeeId, round4((foodDeltas.get(role.obligeeId) || 0) + draw.gainedMonths));

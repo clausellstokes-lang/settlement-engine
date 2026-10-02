@@ -160,6 +160,10 @@ export const COALITION_BETRAYAL_CHARACTER_TUNING = Object.freeze({
  *   in BOTH directions, and the writer refuses to execute a term that carries none.
  * @property {number} [deliveredToVictor]  cumulative conserved credit (stream terms)
  * @property {number} [extractedFromLoser] cumulative conserved debit (== delivered; tribute never mints)
+ * @property {number} [installmentCarryMonths] FPQ-75: the payer storage-months a stream clause
+ *   owes but has not yet moved, because the granary moves in tenth-months
+ *   (`treatyTransfer.js :: drawStreamInstallment`). Written and read only by `peaceTerms.js`
+ *   PASS 2; drop-when-absent, so a clause that owes nothing carries no key.
  * @property {boolean} [seam]       true ⇒ a typed registration seam (executor unlanded)
  * @property {string} [beneficiary] GR-2: the party a NEGOTIATED term runs to, or the
  *   literal `'both'` for a symmetric clause. Conditional and drop-when-absent on the
