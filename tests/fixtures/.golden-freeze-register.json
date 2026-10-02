@@ -342,11 +342,11 @@
       "suite": "tests/property/generatorGoldenMaster.test.js",
       "recordEnv": "UPDATE_GOLDEN",
       "proofForm": null,
-      "sha256": "bf978de7e574ef862be4b246f1d883ce2b7f6bfa2ee4343cd28792bd3697367e",
+      "sha256": "238a637426af63ea66f5192edfb7d72c50eb62774fa685433edca9b6702037ac",
       "rows": 525,
       "seedSet": null,
       "distinctFloor": null,
-      "ownerRow": "§934.86 addendum 2 of docs/OWNER_DECISION_QUEUE.md (DRUIDS IN A WORLD WITHOUT MAGIC, recorded 2026-10-01 on the ledger branch review-fixes-2026-07-08 at 381aa20a0)",
+      "ownerRow": "§934.88 of docs/OWNER_DECISION_QUEUE.md (THE VOICE PROGRAM, recorded 2026-10-02 on the ledger branch review-fixes-2026-07-08 at 757c928ff)",
       "note": "RE-RECORDED THROUGH THE SIGNED DOOR at the genesis freeze 2026-09-16 (owner: 'sign the golden'; record docs/shift-records/2026-09-16-genesis-freeze-generator-golden-master.json); 525 rows moved since the em-dash wave e3f6029b2 (banked §901); the key set unchanged."
     },
     {
