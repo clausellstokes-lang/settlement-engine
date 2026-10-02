@@ -3928,3 +3928,10 @@ No Opus car landed in this act. The twelve rulings, the two recorded owner words
 *Receipts:* ODQ §934.87; the kit `/Users/cstokes/Desktop/settlement-engine-kits/realm-borders-2a96255d-2026-10-02/` (probe sources, results.json, blocs2.log, screenshots).
 *Priority:* P3.
 **Status:** enrolled.
+
+### R103 — the Voice Program's chair judgments VP-J1–VP-J5 (Opus 5.5 seat; ODQ §934.88; `feat/herald-voice-2026-10-02`)
+*What was judged:* one fixed deed form per Herald deed; the under-way aspect for pending proposals; all 26 de-hedge rules kept inert for persisted proposals; wave 2's name mint kept consuming; and the chair's signature on each wave's text-only golden re-record under "build it all" and "I leave all judgment to you".
+*What Fable re-derives:* whether the under-way form reads as a claim the DM's rejection could falsify, and whether any moved golden leaf in the program's records is a fact rather than words.
+*Receipts:* ODQ §934.88; `docs/VOICE_PROGRAM_PLAN.md`; the shift records `docs/shift-records/2026-10-02-voice-program-*.json` on the branch.
+*Priority:* P2.
+**Status:** enrolled.
