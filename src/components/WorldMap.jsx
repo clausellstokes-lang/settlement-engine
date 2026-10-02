@@ -21,6 +21,7 @@ import { useStore } from '../store/index.js';
 import { useMapBridge } from '../hooks/useMapBridge.js';
 import { useRealmMapExport } from '../hooks/useRealmMapExport.js';
 import { useInstantWorldMaterialize } from '../hooks/useInstantWorldMaterialize.js';
+import { useNativeFmgLayers } from '../hooks/useNativeFmgLayers.js';
 import { MAP_MODES } from '../store/mapSlice.js';
 import { computeRoadEdges } from '../lib/roadNetwork.js';
 import { isCanonSave } from '../domain/campaign/canon.js';
@@ -279,34 +280,12 @@ export default function WorldMap({ onNavigate } = {}) {
     } catch { /* analytics is best-effort; never block mount */ }
   }, []);
 
-  // ── Native FMG layer toggles ─────────────────────────────────────────
-  // Subscribe to the native-layer flags and push each into the iframe so
-  // toggling the checkbox (or the Biomes button in the terrain toolbar)
-  // actually shows/hides the corresponding FMG SVG group.
-  const nativeStateBorders   = useStore(s => s.mapState.layers.nativeStateBorders);
-  const nativeCultureRegions = useStore(s => s.mapState.layers.nativeCultureRegions);
-  const nativeBiomes         = useStore(s => s.mapState.layers.nativeBiomes);
-  useEffect(() => {
-    if (!bridgeReady) return;
-    const bridge = bridgeRef.current;
-    if (!bridge) return;
-    bridge.call('settlementEngine:setFmgLayer', { layer: 'stateBorders', visible: !!nativeStateBorders })
-      .catch(e => console.warn('[WorldMap] setFmgLayer stateBorders failed', e));
-  }, [bridgeReady, nativeStateBorders]);
-  useEffect(() => {
-    if (!bridgeReady) return;
-    const bridge = bridgeRef.current;
-    if (!bridge) return;
-    bridge.call('settlementEngine:setFmgLayer', { layer: 'cultures', visible: !!nativeCultureRegions })
-      .catch(e => console.warn('[WorldMap] setFmgLayer cultures failed', e));
-  }, [bridgeReady, nativeCultureRegions]);
-  useEffect(() => {
-    if (!bridgeReady) return;
-    const bridge = bridgeRef.current;
-    if (!bridge) return;
-    bridge.call('settlementEngine:setFmgLayer', { layer: 'biomes', visible: !!nativeBiomes })
-      .catch(e => console.warn('[WorldMap] setFmgLayer biomes failed', e));
-  }, [bridgeReady, nativeBiomes]);
+  // ── Native FMG layers (state borders, culture regions, biomes) ────────
+  // Pushed into the iframe on first connection, on every toggle (the Layers
+  // panel, the terrain toolbar's Biomes button) AND after every replacement of
+  // the frame's map (regenerate, Instant World materialize, snapshot load),
+  // which throws the previous push away. The hook owns all three.
+  useNativeFmgLayers({ bridgeRef, bridgeReady });
 
   // ── Drag-drop (settlement palette → map) ──────────────────────────────
   const handleDragOver = useCallback((e) => {

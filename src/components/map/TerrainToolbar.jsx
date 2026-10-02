@@ -15,7 +15,7 @@
  *                 native biomes editor (editBiomes) so users can repaint
  *                 biome regions even while the layer is on. Toggle is wired
  *                 to mapState.layers.nativeBiomes via the standard layer-
- *                 toggle path in WorldMap.jsx.
+ *                 toggle path (src/hooks/useNativeFmgLayers.js).
  *   • Undo / Redo — passed through to FMG's history.
  */
 
@@ -47,8 +47,8 @@ export default function TerrainToolbar({ bridgeRef, bridgeReady = false }) {
   }
 
   // Biomes is a pure visibility toggle — flipping the store flag fires the
-  // setFmgLayer effect in WorldMap.jsx, which shows/hides the #biomes SVG
-  // group. No editor dialog, no per-feature selection required.
+  // setFmgLayer push in src/hooks/useNativeFmgLayers.js, which shows/hides the
+  // #biomes SVG group. No editor dialog, no per-feature selection required.
   function toggleBiomes() {
     toggleLayer('nativeBiomes');
   }
