@@ -465,7 +465,9 @@ describe('writer-with-no-reader ratchet: the live judgment', () => {
     const registeredAndDark = WRITER_DARK_REGISTER
       .filter((row) => cohort.some((entry) => entry.identity === row.identity));
     // CURE-PEACE-1 adds `supersessionReason on proposals` (registered AND dark): four became five.
-    expect(registeredAndDark.length).toBe(5);
+    // The Voice Program wave 1 (2026-10-02, ODQ §934.88) adds the four `appliedHeadline` rows, all written on every
+    // world and so all in the dark cohort: five became nine.
+    expect(registeredAndDark.length).toBe(9);
     expect(baseline.darkUnregistered.length).toBe(cohort.length - registeredAndDark.length);
     expect(reviewableDark(cohort).length).toBe(baseline.reviewableDarkCount);
     expect(reviewableDark(cohort).length).toBeLessThan(cohort.length);
