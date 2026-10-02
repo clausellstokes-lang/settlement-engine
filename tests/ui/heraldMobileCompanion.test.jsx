@@ -111,7 +111,9 @@ describe('flagged mobile Herald companion', () => {
     expect(await screen.findByTestId(
       'realm-dashboard-locked',
       {},
-      { timeout: 3000 },
+      // FPQ-86 (2026-10-02): the lazily loaded realm dashboard gets 15 s under the coverage-floors
+      // job's instrumentation, where a 5 s lazy wait in this suite's sibling failed twice.
+      { timeout: 15000 },
     )).toBeTruthy();
     expect(screen.getByText('The Realm comes alive with Cartographer')).toBeTruthy();
     expect(screen.getByText(/keeps the Realm's locked preview/i)).toBeTruthy();
@@ -141,7 +143,7 @@ describe('flagged mobile Herald companion', () => {
       />,
     );
 
-    expect(await screen.findByTestId('realm-dashboard', {}, { timeout: 3000 })).toBeTruthy();
+    expect(await screen.findByTestId('realm-dashboard', {}, { timeout: 15000 })).toBeTruthy(); // FPQ-86
     expect(screen.getByText(/a read-only look at the living state of your realm/i)).toBeTruthy();
     expect(screen.queryByText(/answer decisions/i)).toBeNull();
     expect(screen.queryByText(/Live decisions are not available on this account/i)).toBeNull();
