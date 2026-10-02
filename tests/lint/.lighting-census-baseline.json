@@ -24,13 +24,13 @@
     "The derivation history — every prior row, its cause, and the census laws — stays in the walker",
     "beside the assertions, deliberately. Only the live tuple moved."
   ],
-  "measuredAtSha": "4f443b647fbf3693ffb3d9c30df93943fa45c589",
-  "measuredBy": "urban-band chair, session 93391427",
-  "date": "2026-10-01",
-  "note": "Six test files since the last refreeze: three the FP line landed at 5d699cc68 without re-measuring (the base red), and three this branch adds (tests/generators/urbanBandInstitutions.test.js, tests/lint/institutionRegistry.walker.test.js, tests/lint/magicShelfGateCensus.walker.test.js) with their titles; no rule widened or narrowed.",
-  "files": 2796,
+  "measuredAtSha": "d2dfd88b51891a37c87b3fddad7bd4e93fe2675e",
+  "measuredBy": "voice-program-chair-93391427",
+  "date": "2026-10-02",
+  "note": "the Voice Program (ODQ §934.88): wave 1 added tests/domain/heraldDeeds.test.js and wave 3 tests/generators/arrivalScene.test.js, two new test files and their titles; wave 1 and wave 3 also re-titled arms in narrativeArrival and heraldDeeds",
+  "files": 2798,
   "parked": 360,
-  "credited": 2436,
-  "titles": 26709,
-  "suiteTitles": 7042
+  "credited": 2438,
+  "titles": 26733,
+  "suiteTitles": 7048
 }
