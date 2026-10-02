@@ -1,7 +1,7 @@
 {
-  "generatedAt": "2026-10-01T12:47:22.919Z",
+  "generatedAt": "2026-10-02T10:50:19.547Z",
   "entry": "src/domain/aiGrounding.js",
-  "sourceHash": "51649d95b13582c1",
+  "sourceHash": "0aa0e250151d9b4e",
   "inputs": [
     "src/data/constants.js",
     "src/data/entityTags.js",
@@ -60,6 +60,7 @@
     "src/domain/worldPulse/bandedStock.js",
     "src/domain/worldPulse/deityAxes.js",
     "src/domain/worldPulse/faithChannelBindings.js",
+    "src/domain/worldPulse/heraldDeeds.js",
     "src/domain/worldPulse/intervalWeeks.js",
     "src/domain/worldPulse/pulseHelpers.js",
     "src/domain/worldPulse/relationshipCompatibility.js",
