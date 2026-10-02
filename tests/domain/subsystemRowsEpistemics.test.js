@@ -34,11 +34,15 @@ import {
   simulationRuleKeys,
 } from '../../src/domain/certification/subsystemCertification.js';
 import {
+  INFO_FLAG_DIFFERENTIAL_PATH,
+  INFO_FLAG_DISPOSITIVE_LITERALS,
   KNOWLEDGE_FAMILY_RESIDUAL_IMPACT_KINDS,
   KNOWLEDGE_FAMILY_RESIDUAL_KINDS,
   KNOWLEDGE_LANE_EVENT_TYPES,
   KNOWLEDGE_LANE_STATE_KEYS,
 } from '../../src/domain/certification/knowledgeLaneEvidence.js';
+import { INFORMATION_KIND_REGISTRY } from '../../src/domain/worldPulse/informationNews.js';
+import { INFO_FLAG_KEYS } from '../../scripts/audit/info-lit-dark-differential.mjs';
 import { moverFamilyOf } from '../../scripts/audit/behavioral-observation.mjs';
 import { expectAbsentWithAnchor } from '../helpers/anchoredNegatives.js';
 import { impactKindCensus, measuredResidual, routedKindCensus } from '../helpers/knowledgeResidualCensus.js';
@@ -342,5 +346,64 @@ describe('epistemics rows — the verdicts, one field apart', () => {
     // `unobserved` roster is itself the proof that it reached no other bucket.
     const evaluation = evaluateSubsystemCertification(receiptV5());
     expect(evaluation.unobserved).toContain(DISTANCE);
+  });
+});
+
+/**
+ * FP IN-6 U6 — THE FOUR IN FLAGS' CERTIFICATION ROWS NAME THEIR DISPOSITIVE LITERALS AND THEIR
+ * DIFFERENTIAL EVIDENCE PATH (the compiled block #22; DESIGN_FP_INFORMATION.md §5 IN-6, the
+ * certification-rows bullet; DESIGN_FP_ARCHITECTURE.md §3, pending entries convert at the program's
+ * convergence wave). Every literal is traced to the registry and the classifier, every row's text is
+ * held to the catalog, and the §3 conversion is measured rather than assumed.
+ */
+describe('FP IN-6 U6: the four IN flags name their dispositive literals', () => {
+  const rows = new Map(INFO_FLAG_KEYS.map((key) => [key, SUBSYSTEM_CERTIFICATION_REGISTRY.find((row) => row.rule === key)]));
+  const count = (text, needle) => text.split(needle).length - 1;
+
+  test('the catalog covers exactly the four IN flags, and each has an authored row', () => {
+    expect(Object.keys(INFO_FLAG_DISPOSITIVE_LITERALS).sort()).toEqual([...INFO_FLAG_KEYS]);
+    for (const [key, row] of rows) expect(row, key).toBeDefined();
+  });
+
+  test('§3 conversion, measured: none of the four is a declared-pending entry', () => {
+    for (const key of INFO_FLAG_KEYS) expect(SUBSYSTEM_CERTIFICATION_PENDING_KEYS.includes(key), key).toBe(false);
+  });
+
+  test('every literal is a registered INFORMATION kind, earned knowledge on its own, and claimed by one flag only', () => {
+    const registered = new Set(INFORMATION_KIND_REGISTRY.map((row) => row.kind));
+    const all = Object.values(INFO_FLAG_DISPOSITIVE_LITERALS).flat();
+    expect(all.length).toBe(7);
+    expect(new Set(all).size).toBe(all.length);
+    for (const literal of all) {
+      expect(registered.has(literal), literal).toBe(true);
+      expect(moverFamilyOf({ kind: literal }), literal).toBe('knowledge');
+    }
+  });
+
+  test('each row\'s dispositive section names every one of its literals exactly once, and the differential path once', () => {
+    for (const [key, row] of rows) {
+      const other = row.aliveness.other;
+      // The section the unit appended; the older prose above it may name a beat too.
+      expect(count(other, 'THE DISPOSITIVE LITERAL'), key).toBe(1);
+      const section = other.slice(other.indexOf('THE DISPOSITIVE LITERAL'));
+      for (const literal of INFO_FLAG_DISPOSITIVE_LITERALS[key]) expect(count(section, literal), `${key} names ${literal}`).toBe(1);
+      expect(count(other, INFO_FLAG_DIFFERENTIAL_PATH), `${key} names the differential path`).toBe(1);
+    }
+    expect(rows.get('secondOrderBeliefEnabled').aliveness.other).toContain('NONE, BY DESIGN');
+    expect(readFileSync(join(ROOT, INFO_FLAG_DIFFERENTIAL_PATH), 'utf8')).toContain('export async function measureKey');
+  });
+
+  test('the literals are post-apply news, so every eventTypes channel stays empty and no row claims the family', () => {
+    for (const [key, row] of rows) {
+      expect(row.aliveness.eventTypes, key).toEqual([]);
+      expect(row.aliveness.moverFamilies, key).toEqual([]);
+    }
+  });
+
+  test('the distance-priced row cites the harness it asked for by name', () => {
+    const other = SUBSYSTEM_CERTIFICATION_REGISTRY.find((row) => row.rule === 'distancePricedNewsEnabled').aliveness.other;
+    expect(count(other, INFO_FLAG_DIFFERENTIAL_PATH)).toBe(1);
+    // anchored: the same row names the harness path exactly once (the line above)
+    expect(other).not.toContain('the differential harness does not');
   });
 });

@@ -174,3 +174,36 @@ export const BELIEF_GATE_RECEIPT_FIELDS = Object.freeze([
   'behavioral.yearly[].beliefDivergence.spatialCanonized',
   'behavioral.yearly[].beliefDivergence.infoMode',
 ]);
+
+/**
+ * THE INFORMATION FLAGS' DISPOSITIVE LITERALS (FP IN-6 U6; the compiled block #22: "Certification
+ * rows for all four IN flags name their dispositive literals"; DESIGN_FP_INFORMATION.md §5 IN-6:
+ * "each naming its dispositive literals (contamination law) and its differential evidence path").
+ *
+ * Per key, the news kinds ONLY that key's beats mint: every one a row of the INFORMATION kind
+ * registry, disjoint across keys, and EARNED knowledge on its own vocabulary since U2 removed the
+ * bare `news` token. Like KNOWLEDGE_LANE_EVENT_TYPES above they are POST-APPLY news entries: they
+ * land in a receipt's postApplyMoverCounts and never in eventTypeCounts, which is why the four
+ * rows keep their eventTypes channel empty and cite these by name instead. A shared knowledge
+ * count still corroborates every beat at once, so no row may claim the family.
+ *
+ * The mirror has NONE, by design: it writes nothing, and its one registered kind
+ * (mirror_standing_line) is a section-null dossier row no receipt carries.
+ * @type {Readonly<Record<string, ReadonlyArray<string>>>}
+ */
+export const INFO_FLAG_DISPOSITIVE_LITERALS = Object.freeze({
+  // QUOTED KEYS, ON PURPOSE: each flag's gate-polarity census counts every bare code spelling of
+  // its key in src as a read, and a catalog that names the key is not one (codeOnly blanks a
+  // quoted literal, exactly as it blanks a row's `rule:` string).
+  'counterIntelEnabled': Object.freeze(['false_accusation', 'sweep_launched']),
+  'infoLureEnabled': Object.freeze(['lure_sprung']),
+  'reputationRaceEnabled': Object.freeze(['race_person', 'race_story', 'race_together', 'word_came_too_late']),
+  'secondOrderBeliefEnabled': Object.freeze([]),
+});
+
+/**
+ * The differential evidence path every IN row cites (FP IN-6 U4): one seed, the key lit and
+ * dark, the receipts that differ by kind and the arm that holds a key dark, written to a file.
+ * @type {string}
+ */
+export const INFO_FLAG_DIFFERENTIAL_PATH = 'scripts/audit/info-lit-dark-differential.mjs';
