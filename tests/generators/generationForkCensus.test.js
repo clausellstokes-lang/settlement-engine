@@ -122,7 +122,8 @@ const GOLDEN_CONTROL_KEY = 'town|germanic|plains|road|civilized|golden-master-v3
 // (a7202d720); 95a3de2d... -> 8f5da975..., its arrival scene and pressure sentence now drawn from their own streams.
 // Then the Voice Program wave 3 (ODQ §934.88), through the signed door (dc8a022e1): 8f5da975... -> f5f19fea..., the arrival scene
 // composed as a place.
-const GOLDEN_CONTROL_HASH = 'f5f19fea2cbc9879f684834a0eca008caf449d11e7be26de1a7b4b3123c67bee';
+// Then wave 4 block 1 (6990709a0): f5f19fea... -> 2a837ce5..., the arrival hook naming only what the settlement holds.
+const GOLDEN_CONTROL_HASH = '2a837ce5f252e356a049727ac1ba9e9212ab68135c79e6ccc1526c7387433838';
 /** EM-P0's own pinned-mode row and its four chooser keys, re-measured here under the mocks. */
 const PIN_ROW = {
   settType: 'town', culture: 'germanic', terrainOverride: 'riverside',

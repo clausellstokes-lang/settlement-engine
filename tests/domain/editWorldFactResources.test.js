@@ -112,16 +112,16 @@ const FIXED = Object.freeze([0, 21, 42]);
  */
 const PRE_CHANGE = Object.freeze({
   0: Object.freeze({
-    derived: '8d2a1d55e5e6267123ba98b2e38695350e1196c0c08af0d0735e28ce7f589f15',
-    replay: 'f54476a36c3eca80bbd73ecce38789a31f6688493c6f61f1974c126aa9dd10d4',
+    derived: '98320fa5649edfe79bfdfeb129163c9f3021dac03d8a2a8557dd0768c79a41eb',
+    replay: 'e79004ad0585bb0c99e127e4019d107fbc4b1560d23f7fe28e71c9fab7b5a607',
   }),
   21: Object.freeze({
-    derived: 'f5f19fea2cbc9879f684834a0eca008caf449d11e7be26de1a7b4b3123c67bee',
-    replay: '838bbf12bf061892a31eba9990a889dcc4f350c13572ef0782683b30f8a77b0e',
+    derived: '2a837ce5f252e356a049727ac1ba9e9212ab68135c79e6ccc1526c7387433838',
+    replay: 'c906a415016c207d856c12d34629b35fa5e22f7296fc8809f6ff851dd789ae88',
   }),
   42: Object.freeze({
-    derived: '6daa753cfc7bb27adde8d7983f4f6146ce3ce0891ce31e1219218f9f373b9b88',
-    replay: '13449b15cfa9ef1cd81a932d3df8f2a98997f88a260fbb8d7d702aebb1353c46',
+    derived: '5f1ffc6717cf3c74855fe541b59aa4eb0ac5ddb77a8ea34709d0931cc6fe11aa',
+    replay: 'a3311d52fd972b3fb2a6549984b0c026d532cd00cc8f1ce1bfbc59b1725efc25',
   }),
 });
 // ── RE-CAPTURED 2026-10-01, the urban band (ODQ §934.86), BY THE SAME PLANT AND NEVER FROM THE LIVE STEP ALONE ─────
@@ -143,6 +143,10 @@ const PRE_CHANGE = Object.freeze({
 // The three rows' arrival scenes are now composed beat by beat (d2dfd88b5), so all six digests moved again. Re-captured
 // as above: the pre-EM-B2b2 step (sha256 62e16d59...) planted over a COPY of this tree at ff0d296bf, and the planted step
 // and the live step produced the SAME six digests. Row 21's `derived` is the re-recorded golden's control row (dc8a022e1).
+// ── RE-CAPTURED 2026-10-02 A THIRD TIME, the Voice Program wave 4 block 1 (ODQ §934.88), BY THE SAME PLANT ─────────────
+// The three rows' arrival hooks now name only structures they hold (e76ea7f3c), so all six digests moved again. The
+// pre-EM-B2b2 step (sha256 62e16d59...) planted over a COPY of this tree at 310e57f06 and the live step produced the SAME
+// six digests. Row 21's `derived` is the re-recorded golden's control row (6990709a0).
 describe('EM-B2b2 — the DM\'s nearby-resources word survives resolveResources', () => {
   it('A1 — THE DM\'S ROSTER STANDS AT ITS OWN DECLARED LEAF: byte-equal on three fixed seeds, and carried on every census row', () => {
     // ANTI-VACUITY FIRST. The leaf is read from EM-R0a's register through the row's own tier1
