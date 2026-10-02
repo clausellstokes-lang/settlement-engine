@@ -3942,3 +3942,10 @@ No Opus car landed in this act. The twelve rulings, the two recorded owner words
 *Receipts:* ODQ §934.88 addendum 1; `docs/VOICE_PROGRAM_PLAN.md`; PR #56; the five gate logs cited there.
 *Priority:* P2.
 **Status:** enrolled.
+
+### R105 — the FP chair's judgments FP-40–FP-46 under "I leave everything to your judgement and leave you to build it all" (Opus 5.5 seat; ODQ §934.89; `fp/treaty-voice-2-2026-10-02` and the 10-02 lanes)
+*What was judged:* the FP order re-cut chain-first; the war closure's origin read from provenance instead of a new lineage act; an unlearned appetite read neutral in the pact reserve; the spy-exposure band and the statecraft head's lighting made conditional on a chain the DM can read; the strain band shaped to leave war treaties byte-identical; pact receipts' ids slotted to their first reader; and the chair signing the chain's bands and re-records by delegation, listed for the owner's end-of-program tuning review.
+*What Fable re-derives:* whether chain-first silently drops a design requirement the family cadence carried (each pair's units still appear in some chain or are closed with a reason), and whether any delegated band moved a figure outside the chain it was measured on.
+*Receipts:* ODQ §934.89; the FP kit's FP-ORDER.md amendment, FP-QUEUE.md rows FPQ-67/71–74 and CLOSURES, findings/PACT-RESERVE-MEASURE.md, findings/STATECRAFT-HEAD-AUDIT.md; `da0810cd9`.
+*Priority:* P2.
+**Status:** enrolled.
