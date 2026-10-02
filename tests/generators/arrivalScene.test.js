@@ -15,14 +15,16 @@ import { afterEach, describe, expect, it } from 'vitest';
 import {
   ARRIVAL_MEMORIES, ARRIVAL_PEOPLE, ARRIVAL_SENSES, ARRIVAL_TENSIONS,
 } from '../../src/data/arrivalProse.js';
-import { ARRIVAL_SCENES } from '../../src/data/narrativeData.js';
+import { ARRIVAL_SCENES, STRESS_DESCS } from '../../src/data/narrativeData.js';
+import { STRESS_TYPE_MAP } from '../../src/data/stressTypes.js';
+import { nativeSemanticNames } from '../../src/domain/content/customContentSemanticAuthority.js';
 import { HISTORICAL_EVENTS_DATA } from '../../src/data/historyData.js';
 import { CULTURES } from '../../src/data/worldFactOptions.js';
 import { resolveCultureProfileKey } from '../../src/data/cultureProfiles.js';
 import { generatedContentTopicsOf } from '../../src/domain/generationContentProfile.js';
 import { textAssertsFunctionalMagic } from '../../src/domain/magicAssertionText.js';
 import { textAssertsMaritimeCapability } from '../../src/generators/generationContext.js';
-import { composeArrivalScene } from '../../src/generators/narrative/arrivalScene.js';
+import { STRUCTURE_CLAIMS, composeArrivalScene, unheldClaims } from '../../src/generators/narrative/arrivalScene.js';
 import { generateSettlementPipeline } from '../../src/generators/generateSettlementPipeline.js';
 import { createPRNG } from '../../src/kernel/prng.js';
 import { clearActiveRng, setActiveRng } from '../../src/kernel/rngContext.js';
@@ -222,6 +224,36 @@ describe('the beats are anchored: drawn where the fact is, never where it is not
   });
 });
 
+describe('the hook names only structures the settlement holds (the Voice Program wave 4)', () => {
+  const STRESSES = Object.keys(STRESS_TYPE_MAP);
+  const vignettesOf = (type) => STRESS_DESCS[type].map((line) => line(NAME));
+
+  it('every registered stress carries at least two structure-free vignettes, the floor the filter stands on', () => {
+    expect(STRESSES.length, 'anti-vacuity').toBeGreaterThan(10);
+    const thin = STRESSES.filter((type) => vignettesOf(type).filter((text) => unheldClaims(text, []).length === 0).length < 2);
+    expect(thin).toEqual([]);
+    // The detector is live: the stock of structure-naming vignettes is the reason the filter exists.
+    expect(STRESSES.flatMap(vignettesOf).filter((text) => unheldClaims(text, []).length > 0).length).toBeGreaterThan(40);
+    expect(STRUCTURE_CLAIMS.map((entry) => entry.family).sort()).toEqual(['faith', 'granary', 'guard', 'market', 'perimeter']);
+  });
+
+  it('a settlement with no wall, gate, market, guard or temple never hears of one, whatever its stress', () => {
+    const cases = STRESSES.flatMap((type) => SEEDS.slice(0, 8).map((seed) => ({ type, seed })));
+    const failures = collectSeedFailures(cases, ({ type, seed }) => {
+      const text = scene(base({ stress: [{ type }], institutions: inst('Subsistence farming', 'Water source') }), `${type}-${seed}`);
+      const hook = vignettesOf(type).find((line) => text.startsWith(line));
+      expect(hook, `${type}: the scene opens on its own stress (anchor): ${text}`).toBeDefined();
+      expect(unheldClaims(hook, ['subsistence farming', 'water source']), `${type}: ${hook}`).toEqual([]);
+    });
+    expectNoSeedFailures(failures, 'a structure-free settlement hears of no structure it lacks');
+  });
+
+  it('a walled, garrisoned town still draws the vignettes that name its walls', () => {
+    const walled = base({ stress: [{ type: 'under_siege' }], institutions: inst('Town walls', 'Garrison', 'Weekly market', 'Town granary') });
+    expect(SEEDS.some((seed) => /\bwalls?\b/i.test(scene(walled, seed))), 'the walls never spoke').toBe(true);
+  });
+});
+
 describe('the closing beat: a printed danger, else a memory, else poverty or plenty, and none under a vignette', () => {
   const event = (over) => ({ yearsAgo: 14, type: 'disaster', templateType: 'great_fire', severity: 'catastrophic', ...over });
   const closingOf = (settlement, seed = 'closing') => {
@@ -301,6 +333,11 @@ describe('the scene on real settlements', () => {
       const findings = checks.flatMap((c) => c.findings || []);
       expect(findings.filter((f) => String(f.path).startsWith('arrivalScene')), `${i}: ${s.arrivalScene}`).toEqual([]);
       expect(s.arrivalScene.length, `${i}: the scene rendered`).toBeGreaterThan(80);
+      // A stressed row's hook names no structure the settlement lacks (wave 4).
+      const names = nativeSemanticNames(s.institutions).map((n) => n.toLowerCase())
+        .filter((n) => !/^(?:access to|traveling|travelling) /.test(n));
+      const vignette = Object.values(STRESS_DESCS).flat().map((line) => line(s.name)).find((line) => s.arrivalScene.startsWith(line));
+      if (vignette) expect(unheldClaims(vignette, names), `${i}: ${vignette}`).toEqual([]);
       for (const retired of ['magelight lamp post', 'A proper village', 'A market town of substance', "region's great urban centre"]) {
         // anchored: the length assertion above proves the scene rendered
         expect(s.arrivalScene, `${i}: retired template`).not.toContain(retired);

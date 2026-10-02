@@ -164,6 +164,11 @@ export const STRESS_DESCS = {
       `The fields around ${r} were harvested early and badly: stubble cut in haste, carts gone. Whatever the walls are waiting for, the granaries inside are already keeping its schedule.`,
     r =>
       `A thrown stone sits half-buried a hundred paces short of ${r}'s wall, left where it landed. Nobody has hauled it away. There are fresher things to attend to.`,
+    // The Voice Program wave 4 (2026-10-02): structure-free, so a settlement with no wall, gate, market or guard
+    // still opens on its stress (src/generators/narrative/arrivalScene.js draws only the vignettes whose structures it holds).
+    (n) => `${n} has drawn in on itself. Every family from the outlying fields is sleeping under a neighbour's roof, the livestock are penned between the houses, and someone is always watching the treeline.`,
+    (n) => `There are campfires on the hill above ${n}, and they are not ${n}'s. The people inside keep their own fires low and their voices lower, and they count the strangers' fires every night.`,
+    (n) => `Carts and timber block the lanes into ${n}, piled in a hurry and manned around the clock. The faces behind them are farmers' faces, and none of them has slept.`,
   ],
   famine: [
     r =>
@@ -178,6 +183,9 @@ export const STRESS_DESCS = {
       `The dogs of ${r} are gone. It takes a while to notice and longer to stop noticing, and nobody in the settlement will discuss it with a stranger.`,
     r =>
       `Prices chalked outside ${r}'s market gate have been rubbed out and rewritten so often the board has gone grey. The numbers on it now are polite fictions; the real trading happens in back rooms, in kind.`,
+    // The Voice Program wave 4 (2026-10-02): structure-free, so a settlement with no wall, gate, market or guard
+    // still opens on its stress (src/generators/narrative/arrivalScene.js draws only the vignettes whose structures it holds).
+    (n) => `The smoke from ${n}'s chimneys is thin. People here look at your pack before they look at your face, and then look away, ashamed of having looked.`,
   ],
   occupied: [
     r =>
@@ -192,6 +200,9 @@ export const STRESS_DESCS = {
       `${r}'s street signs have been repainted in two languages, the local one second. The new lettering is neat, official, and everywhere, which is how you learn the occupation intends to stay.`,
     r =>
       `At ${r}'s gate the queue divides in two: residents with papers, and everyone else. The residents' line is longer and moves slower, and no one in it complains where the soldiers can hear.`,
+    // The Voice Program wave 4 (2026-10-02): structure-free, so a settlement with no wall, gate, market or guard
+    // still opens on its stress (src/generators/narrative/arrivalScene.js draws only the vignettes whose structures it holds).
+    (n) => `Strangers in foreign colours stand where the roads meet in ${n}, and the locals walk around them as if they were furniture nobody wanted.`,
   ],
   politically_fractured: [
     r =>
@@ -248,6 +259,11 @@ export const STRESS_DESCS = {
       `Nothing in ${r} is out of place. The watch changes on the hour, the market closes at dusk, the innkeeper remembers your name on the second morning. It is all exactly as a well-run town should be.`,
     r =>
       `${r} welcomes travellers with practised ease: a good inn, fair prices, incurious guards. A week later you would struggle to say why the ease sat strangely. It was practised.`,
+    // The Voice Program wave 4 (2026-10-02): structure-free, so a settlement with no wall, gate, market or guard
+    // still opens on its stress (src/generators/narrative/arrivalScene.js draws only the vignettes whose structures it holds).
+    (n) => `${n} is friendly. Everyone you meet is helpful, and everyone you meet asks one question more than they need to: where you are going next, and who you know there.`,
+    (n) => `${n} runs smoothly, almost too smoothly. Quarrels that should be loud are settled quietly and fast, and nobody can quite tell you who settled them.`,
+    (n) => `In ${n} the same stranger seems to turn up wherever you go: at the well, on the road, at the edge of every conversation. He never says much. He never needs to.`,
   ],
   plague_onset: [
     r =>
@@ -262,6 +278,9 @@ export const STRESS_DESCS = {
       `${r}'s gate stands open, but the gatekeeper waves you through from a distance, and the well just inside has been roped off under a painted sign too weathered to read from horseback.`,
     r =>
       `Smoke rises from ${r} at midday: not cookfires but something being burned deliberately, bedding or clothes, in a yard behind the healer's house. The street watches it burn and says nothing.`,
+    // The Voice Program wave 4 (2026-10-02): structure-free, so a settlement with no wall, gate, market or guard
+    // still opens on its stress (src/generators/narrative/arrivalScene.js draws only the vignettes whose structures it holds).
+    (n) => `${n} smells of vinegar and woodsmoke. Doors that should be open are shut, and the people who do come out keep a careful distance from one another, and from you.`,
   ],
   succession_void: [
     r =>
@@ -290,6 +309,11 @@ export const STRESS_DESCS = {
       `The road into ${r} runs its last mile between new watchtowers: timber, hasty, manned. Whatever they watch for, the fields between them have been let go to seed.`,
     r =>
       `${r} buys arrows. The fletcher's is the busiest shop in the settlement, and the militia board outside the gate lists a standing bounty in terms that carefully avoid naming what it is for.`,
+    // The Voice Program wave 4 (2026-10-02): structure-free, so a settlement with no wall, gate, market or guard
+    // still opens on its stress (src/generators/narrative/arrivalScene.js draws only the vignettes whose structures it holds).
+    (n) => `${n} keeps its doors barred in daylight. Claw marks score the timber of the outermost houses, old ones and new ones, and the newest have not yet weathered.`,
+    (n) => `Every household in ${n} keeps a spear by the door, and the children know which way to run. Nobody says what they would be running from. They say it is the woods.`,
+    (n) => `Fresh earth marks a row of graves at the edge of ${n}, all dug in the same week. The people who dug them still glance at the treeline while they work.`,
   ],
   insurgency: [
     r =>
@@ -304,6 +328,9 @@ export const STRESS_DESCS = {
       `The garrison of ${r} patrols in daylight only, and along routes a stranger could predict by the third day. After dark the town belongs to whoever it belongs to.`,
     r =>
       `Someone has been chalking a sign on ${r}'s walls faster than the watch can scrub it. By now the scrubbed patches themselves mark every corner. The censorship has become the graffiti.`,
+    // The Voice Program wave 4 (2026-10-02): structure-free, so a settlement with no wall, gate, market or guard
+    // still opens on its stress (src/generators/narrative/arrivalScene.js draws only the vignettes whose structures it holds).
+    (n) => `Slogans have been scratched into the doors of ${n} overnight and half scrubbed away by morning. People read them on the way past without stopping, which is how you know they agree.`,
   ],
   mass_migration: [
     r =>

@@ -10,8 +10,9 @@
  * manner of "Larian entertainment or BioWare".
  *
  * ── THE BEATS, EACH ANCHORED ON A FACT THE SETTLEMENT HOLDS ──────────────────────────────────────────────────────
- *   HOOK     the stress vignette, or the route scene (pre-existing pools). A crossroads opens on its market only
- *            where it has one; otherwise it opens as an ordinary road does.
+ *   HOOK     the stress vignette, or the route scene (pre-existing pools). A vignette is drawn only where the
+ *            settlement holds every structure it names (STRUCTURE_CLAIMS: no walls for a thorp), and a crossroads
+ *            opens on its market only where it has one; otherwise it opens as an ordinary road does.
  *   SIGHT    a landmark its native institutions imply, else its culture's materialized built detail. Yields under
  *            a stress vignette, which is already a sight.
  *   SENSE    a sound or smell of a trade it practises (src/data/arrivalProse.js ARRIVAL_SENSES), the trade that
@@ -60,6 +61,24 @@ export const ROUTE_TO_SCENE = Object.freeze({
 /** Severities that leave a visible trace; a minor event does not mark a settlement. */
 const MEMORY_SEVERITIES = Object.freeze(['major', 'catastrophic']);
 
+/**
+ * The structures a HOOK vignette may name, and the native catalogue fragments that hold each (the Voice Program
+ * wave 4). A stress vignette is drawn only where the settlement holds every structure it names, so a besieged
+ * thorp is never told "there are people on the walls". A household levy is not a guard at a gate.
+ * @type {ReadonlyArray<Readonly<{ family: string, claim: RegExp, held: ReadonlyArray<string> }>>}
+ */
+export const STRUCTURE_CLAIMS = Object.freeze([
+  { family: 'perimeter', claim: /\b(?:gates?|gatehouse|walls?|walled|ramparts?|battlements|watchtowers?)\b/i,
+    held: ['wall', 'walls', 'palisade', 'gates', 'earthworks', 'citadel', 'fortifications'] },
+  { family: 'guard', claim: /\b(?:guards?|garrison|sentr(?:y|ies)|watchmen)\b/i,
+    held: ['town watch', 'city watch', 'professional city watch', 'garrison', 'garrisons', 'barracks', 'militia', 'citizen militia'] },
+  { family: 'market', claim: /\b(?:market|marketplace|square|stalls?)\b/i,
+    held: ['market square', 'market squares', 'weekly market', 'daily markets', 'markets', 'market hall', 'bazaar', 'annual fair', 'fairs', 'fish market'] },
+  { family: 'granary', claim: /\bgranar(?:y|ies)\b/i, held: ['granary', 'granaries'] },
+  { family: 'faith', claim: /\b(?:temples?|church(?:es)?|cathedral|chapel)\b/i,
+    held: ['cathedral', 'temple', 'church', 'churches', 'chapel', 'monastery', 'abbey', 'shrine', 'priory', 'friary'] },
+]);
+
 /** Native names that say the settlement lacks the thing, or only receives it now and then. */
 const ABSENT_PREFIXES = Object.freeze(['access to ', 'traveling ', 'travelling ']);
 
@@ -76,6 +95,18 @@ function anyAtWordStart(fragments, names) {
     const re = new RegExp(`(^|[^a-z])${escapeRe(fragment)}`);
     return names.some((name) => re.test(name));
   });
+}
+
+/**
+ * The structure families a rendered line names that the settlement does not hold.
+ * @param {string} text
+ * @param {string[]} names native institution names, lowercased, absences removed
+ * @returns {string[]}
+ */
+export function unheldClaims(text, names) {
+  return STRUCTURE_CLAIMS
+    .filter((entry) => entry.claim.test(text) && !anyAtWordStart(entry.held, names))
+    .map((entry) => entry.family);
 }
 
 /**
@@ -159,7 +190,14 @@ export function composeArrivalScene(settlement) {
   let sceneKey = riverPort ? 'river' : (/** @type {Record<string, string>} */ (ROUTE_TO_SCENE)[route] || 'ordinary');
   const marketSense = ARRIVAL_SENSES.find((sense) => sense.key === 'market');
   if (sceneKey === 'market' && marketSense && !anyAtWordStart(marketSense.institutions, names)) sceneKey = 'ordinary';
-  const hookTemplate = underStress ? pickRandom(STRESS_DESCS[primaryStress]) : pickRandom(ARRIVAL_SCENES[sceneKey]);
+  // A stress vignette names only structures the settlement holds; the structure-free vignettes every stress
+  // carries are the floor (pinned by the arrival test), so the filter never empties the pool.
+  const vignettes = underStress
+    ? STRESS_DESCS[primaryStress].filter((line) => unheldClaims(line(name), names).length === 0)
+    : [];
+  const hookTemplate = underStress
+    ? pickRandom(vignettes.length ? vignettes : STRESS_DESCS[primaryStress])
+    : pickRandom(ARRIVAL_SCENES[sceneKey]);
   const hook = typeof hookTemplate === 'function' ? hookTemplate(name, tier) : hookTemplate;
 
   // SIGHT: a landmark the native institutions imply, else the culture's built detail.
