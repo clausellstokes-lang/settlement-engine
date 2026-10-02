@@ -38,12 +38,13 @@
     "_rosterGrowth2026-10-02-pact-reask": "ONE document JOINED the roster by being BORN into it, and it hid NOTHING: docs/shift-records/2026-10-02-pact-reask-herald-desk.json (the record prepared by cure lane PACT-REASK for U1, FPQ-72: a pair no longer re-asks a clause its instrument already carries, which moves one year-one relief beat on the knowledge desk golden) joined `tree`, 35 -> 36. A GROWTH, not a class move; no past-EOF citation of its own.",
     "_rosterGrowth2026-10-02-pact-answer": "ONE document JOINED the roster by being BORN into it, and it hid NOTHING: docs/shift-records/2026-10-02-pact-answer-fp42-herald-desk.json (the record prepared by cure lane PACT-ANSWER for U1, FP-42 at ODQ §934.89: an unlearned risk appetite reads neutral in the pact answer's reserve, which moves the knowledge desk golden's year) joined `tree`, 36 -> 37. A GROWTH, not a class move; no past-EOF citation of its own.",
     "_rosterGrowth2026-10-02-pact-compliance-u1": "ONE document JOINED the roster by being BORN into it, and it hid NOTHING: docs/shift-records/2026-10-02-pact-compliance-u1-strain-band.json (the record prepared by cure lane PACT-COMPLIANCE for U1, FP-44 at ODQ §934.89: the pact strain band, re-derived and signed at batch 7's composed point, which moves the knowledge desk golden's year) joined `tree`, 37 -> 38. A GROWTH, not a class move; no past-EOF citation of its own.",
+    "_rosterGrowth2026-10-02-pact-compliance-u2": "ONE document JOINED the roster by being BORN into it, and it hid NOTHING: docs/shift-records/2026-10-02-pact-compliance-u2-stream-carry.json (the record prepared by cure lane PACT-COMPLIANCE for U2, FPQ-75 at ODQ §934.89: a stream clause carries the grain the granary could not move, re-derived and signed at batch 7's composed point, which moves the knowledge desk golden's year) joined `tree`, 38 -> 39. A GROWTH, not a class move; no past-EOF citation of its own.",
     "pastEofCitationsExcluded": 377,
     "byRule": {
       "banner": 8,
       "dated": 5,
       "sha-pin": 1,
-      "tree": 38
+      "tree": 39
     },
     "files": {
       "banner": [
@@ -97,6 +98,7 @@
         "docs/shift-records/2026-10-01-urban-band-warden-census.json",
         "docs/shift-records/2026-10-02-pact-answer-fp42-herald-desk.json",
         "docs/shift-records/2026-10-02-pact-compliance-u1-strain-band.json",
+        "docs/shift-records/2026-10-02-pact-compliance-u2-stream-carry.json",
         "docs/shift-records/2026-10-02-pact-reask-herald-desk.json",
         "docs/shift-records/2026-10-02-voice-program-wave-1-herald-deeds.json",
         "docs/shift-records/2026-10-02-voice-program-wave-1-pair-order.json",

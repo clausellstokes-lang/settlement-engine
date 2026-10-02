@@ -73,7 +73,10 @@ describe('the knowledge desk — the non-omniscient Herald golden (captured firs
     // 379 → 377 at PACT-COMPLIANCE U1's pick (FP-44, ODQ §934.89 FP-46, 2026-10-02; record docs/shift-records/
     // 2026-10-02-pact-compliance-u1-strain-band.json, re-derived at the composed point): the pact strain band
     // lifts the realm's one gathering war storm at weeks 41 and 42, so two tempo beats leave (377 → 375 items).
-    expect(Object.keys(manifest)).toHaveLength(377);
+    // 377 → 387 at PACT-COMPLIANCE U2's pick (FPQ-75, ODQ §934.89 FP-46, FP-54, 2026-10-02; record docs/shift-
+    // records/2026-10-02-pact-compliance-u2-stream-carry.json, re-derived at the composed point): a stream clause
+    // now moves grain between soak-c and soak-d, ten relief beats join and the tempo items re-deal (375 → 385 items).
+    expect(Object.keys(manifest)).toHaveLength(387);
   });
 
   it('the declared refile set is exactly the knowledge desk the routing table carries', () => {
