@@ -268,7 +268,16 @@ const SENTINEL = 'settlementforge:generation:worker-v1';
 // rise above now funds only bytes still spent. The registry's first-paint buy-back (each value spelled once; every export
 // identical across its 518 rows; tests/build/vendorPdfLazy.test.js) shrinks the worker with it: a fresh `vite build` reads
 // 1,416,569 B (generation.worker-BZWdxs0z.js).
-export const WORKER_BUNDLE_CEILING_BYTES = 1416569;
+// 1,416,569 -> 1,438,517 (2026-10-02, the Voice Program chair UNDER THE OWNER'S WORD, ODQ §934.88): A RISE OF 21,948 B, AND IT
+// IS THE OWNER'S, given in chat through the question tool in answer to this exact question ("Raise it by ~22 KB
+// (Recommended)"), never a lane's edit. The cause is the content the owner asked for ("each variant should insight
+// something regarding either senses, culture, about the people …"): the arrival scene's authored pools
+// (src/data/arrivalProse.js, 20,964 B minified) and its composer (src/generators/narrative/arrivalScene.js), less the
+// retired tier template and addon pools. The Herald's deed register is not in this bundle. What could be bought back inside
+// that content was priced at about 1 KB (lines as plain strings rather than functions) and offered against the raise. A
+// fresh `vite build` at c39ce8640 reads 1,438,517 B (generation.worker-aM8fOsDp.js), the second gate's figure to the byte.
+// MONOTONE-DOWN from here.
+export const WORKER_BUNDLE_CEILING_BYTES = 1438517;
 
 const source = (path) => readFileSync(join(ROOT, path), 'utf8');
 
