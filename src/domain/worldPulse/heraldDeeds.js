@@ -76,6 +76,8 @@ export const UNTARGETED_NPC_DEEDS = Object.freeze({
 
 /**
  * What the person is out to win, as the world would say it (the goal KEY is the planner's).
+ * Covers every goal the planner can hold (npcFacetContract.js NPC_GOAL_CATALOG), so no
+ * summary falls back to the key with its underscores spaced ("is out to survive tribute").
  * @type {Readonly<Record<string, string>>}
  */
 export const NPC_AIMS = Object.freeze({
@@ -89,6 +91,19 @@ export const NPC_AIMS = Object.freeze({
   win_public_legitimacy: "win the public's trust",
   bind_external_patron:  'bind an outside patron to their cause',
   survive_crisis:        'come through the crisis',
+  survive_tribute:       'bear the weight of the tribute',
+  secure_tribute:        'secure the tribute owed',
+  organize_autonomy:     'win their people a say of their own',
+  break_vassalage:       "throw off the overlord's yoke",
+  exploit_desperation:   "profit from other people's desperation",
+  join_guild:            'win a place in a guild',
+  expand_trade_house:    'grow their trading house',
+  secure_new_garrison:   'win a new garrison for the town',
+  professionalize_guard: 'make a proper fighting force of the guard',
+  formalize_new_charter: 'set a new charter down in writing',
+  punish_rivals:         'make their rivals pay',
+  mobilize_defenses:     'ready the walls and the watch',
+  consolidate_power:     'tighten their grip on power',
 });
 
 /**

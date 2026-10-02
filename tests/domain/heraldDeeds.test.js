@@ -14,6 +14,8 @@ import {
 } from '../../src/domain/worldPulse/heraldDeeds.js';
 import { NPC_ACTION_FAMILIES } from '../../src/domain/worldPulse/npcAgency.js';
 import { PRIMARY_RELATIONSHIP_TYPES } from '../../src/domain/worldPulse/relationshipCompatibility.js';
+import { NPC_GOALS } from '../../src/domain/npc/npcFacetContract.js';
+import { GOAL_BRANCH_RULES } from '../../src/domain/worldPulse/npcGoalBranches.js';
 import { readFileSync, readdirSync, statSync } from 'node:fs';
 import { join } from 'node:path';
 
@@ -75,11 +77,16 @@ describe('the deed register — every form is a clean deed', () => {
     expect(Object.keys(RELATIONS_MOVE).sort()).toEqual(['de_escalation', 'escalation', 'neutral']);
   });
 
-  it('aims read as the world would say them', () => {
+  it('aims read as the world would say them, for every goal the planner can hold', () => {
     for (const [key, aim] of Object.entries(NPC_AIMS)) {
       clean(aim, `aim ${key}`);
       expect(aim, `${key} is the planner's key, not words`).not.toContain('_');
     }
+    // Every goal the catalog and the branch rules can hand an NPC: a missing one printed
+    // "is out to survive tribute" in the first wave's witness year.
+    const held = new Set([...NPC_GOALS, ...GOAL_BRANCH_RULES.flatMap((rule) => [rule.goals.shortGoal, rule.goals.longGoal])]);
+    expect(held.size, 'anti-vacuity').toBeGreaterThan(20);
+    expect([...held].filter((goal) => !NPC_AIMS[goal]).sort()).toEqual([]);
   });
 });
 
