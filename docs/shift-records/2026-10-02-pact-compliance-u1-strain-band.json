@@ -1,0 +1,16 @@
+{
+  "_doc": "PREPARED, NOT SIGNED: the PACT-COMPLIANCE seat (Opus 5.5) drafted this record for ONE cause, U1 of CURE-FP-PACT-COMPLIANCE (FP-44, the pact strain band, commit 28026cf70 on fp/pact-compliance-2026-10-02), and STOPPED before the door as the brief directs. Destination: docs/shift-records/2026-10-02-pact-compliance-u1-strain-band.json, committed by the chair WITH the re-recorded manifest in the door's own commit (the 619b4f0f7 precedent), which also joins the citation walker's archival roster (tree 35 -> 36). The move, measured in a plain node run of tests/helpers/heraldDeskGolden.js at 28026cf70 BEFORE any door: row rr-fresh-full|1 only; the two treaty_default_detected beats at ticks 39 and 46 (the soak_d to soak_b pact) no longer speak, because that court is strained but not past four fifths spent; contentSha256 eb39449e...62d5 -> fc270c44...2714, itemCount 381 -> 379, manifest rows 383 -> 381. Green at base f5105fb6f by plant-and-restore. A behaviour shift of the pact's compliance words, stated, never silent: the signings are identical and war treaties do not move. The chair signs by delegation under FP-46 (ODQ §934.89), one cause per record; a successor chair does not inherit the signature. RE-DERIVED AT THE COMPOSED POINT BY THE BATCH 7 ASSEMBLY SEAT (2026-10-02, FP-46 delegation; the cause above is unchanged): this record was predicted on f5105fb6f WITHOUT PACT-REASK (FPQ-72) and PACT-ANSWER (FP-42) beneath it. On fp/batch-7-2026-10-02 the unit was cherry-picked as 7461de999 onto 07b8c540e, whose committed manifest is PACT-ANSWER's signed re-record (contentSha256 0350a39e7fd628df7b38d3fae98ae24d9f3a30013848aa8925ddebe9fc52fcd1, 377 items, 379 rows; green on a plain run). At that base the three soak_d to soak_b treaty_default_detected beats are ALREADY gone (FP-42's amendments re-dealt them), so the predicted 383 -> 381 no longer holds. Measured in a plain node run of tests/helpers/heraldDeskGolden.js at 7461de999 BEFORE the door: contentSha256 0350a39e7fd6... -> 566487b13ca4825b55969e0b348c67ace3f80c39dbba6ba78c16f9368033f9da, itemCount 377 -> 375, manifest rows 379 -> 377; the two items that leave are tempo_pressure.41 and tempo_pressure.42 (\"Pressure builds beneath the calm\", the realm's one gathering war storm, events desk), and no other row moves. ATTRIBUTION by construction: the before tree is green against the manifest and the after tree differs from it by this unit's commit alone. predictedRows re-derived 381 -> 377.",
+  "ownerWords": "I leave everything to your judgement and leave you to build it all",
+  "ownerDate": "2026-10-02",
+  "odqRow": "§934.89 (FP-46: the chair signs the chain's golden re-records by delegation)",
+  "cause": "ONE CAUSE: FP-44 THE PACT STRAIN BAND (28026cf70). A clause carrying a beneficiary reads strained only under capacity 0.5 and broken only under 0.2; every other clause keeps 0.75 and 0.4. rr-fresh-full|1's year-one desk loses two treaty_default_detected beats (ticks 39, 46); the row count is measured before the door.",
+  "seat": "PREPARED by the PACT-COMPLIANCE seat (Opus 5.5, dispatched by the FP chair, session 93391427); the FP chair executes the re-record and signs",
+  "surfaces": [
+    {
+      "surface": "herald-knowledge-desk-golden",
+      "action": "re-record",
+      "predictedRows": 377,
+      "proofForm": "derived-artefact"
+    }
+  ]
+}

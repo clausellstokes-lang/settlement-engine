@@ -47,7 +47,9 @@
  * past-EOF citations this gate deliberately does not see. FOUR rules select them,
  * each checkable, and the full roster is committed in the baseline's
  * `archivalExclusionAtFreeze.files`:
- *   tree (37)    docs/review-r2/**, docs/shift-records/**
+ *   tree (38)    docs/review-r2/**, docs/shift-records/**
+ *                (2026-10-02-pact-compliance-u1-strain-band.json joined 2026-10-02, 37 -> 38: cure lane
+ *                PACT-COMPLIANCE's record for U1, FP-44, the pact strain band; a GROWTH that hid nothing.)
  *                (2026-10-02-pact-answer-fp42-herald-desk.json joined 2026-10-02, 36 -> 37: cure lane PACT-ANSWER's
  *                record for U1, FP-42, the unlearned appetite read neutral; a GROWTH that hid nothing.)
  *                (2026-10-02-pact-reask-herald-desk.json joined 2026-10-02, 35 -> 36: cure lane PACT-REASK's

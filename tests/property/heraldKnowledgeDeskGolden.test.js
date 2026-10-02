@@ -70,7 +70,10 @@ describe('the knowledge desk — the non-omniscient Herald golden (captured firs
     // 383 → 379 at PACT-ANSWER U1's pick (FP-42, ODQ §934.89 FP-46, 2026-10-02; record docs/shift-records/
     // 2026-10-02-pact-answer-fp42-herald-desk.json): an unlearned appetite reads neutral, four refused
     // sheets sign as amendments, and the year downstream follows (381 → 377 items).
-    expect(Object.keys(manifest)).toHaveLength(379);
+    // 379 → 377 at PACT-COMPLIANCE U1's pick (FP-44, ODQ §934.89 FP-46, 2026-10-02; record docs/shift-records/
+    // 2026-10-02-pact-compliance-u1-strain-band.json, re-derived at the composed point): the pact strain band
+    // lifts the realm's one gathering war storm at weeks 41 and 42, so two tempo beats leave (377 → 375 items).
+    expect(Object.keys(manifest)).toHaveLength(377);
   });
 
   it('the declared refile set is exactly the knowledge desk the routing table carries', () => {

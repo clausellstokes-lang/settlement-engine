@@ -1,6 +1,6 @@
 {
-  "rr-fresh-full|1|contentSha256": "0350a39e7fd628df7b38d3fae98ae24d9f3a30013848aa8925ddebe9fc52fcd1",
-  "rr-fresh-full|1|itemCount": 377,
+  "rr-fresh-full|1|contentSha256": "566487b13ca4825b55969e0b348c67ace3f80c39dbba6ba78c16f9368033f9da",
+  "rr-fresh-full|1|itemCount": 375,
   "rr-fresh-full|1|section|candidate.relationship.trade_route_disruption.edge.soak-c.soak-d.52": "events",
   "rr-fresh-full|1|section|tempo_pressure.23": "events",
   "rr-fresh-full|1|section|tempo_pressure.28": "events",
@@ -10,8 +10,6 @@
   "rr-fresh-full|1|section|tempo_pressure.37": "events",
   "rr-fresh-full|1|section|tempo_pressure.39": "events",
   "rr-fresh-full|1|section|tempo_pressure.40": "events",
-  "rr-fresh-full|1|section|tempo_pressure.41": "events",
-  "rr-fresh-full|1|section|tempo_pressure.42": "events",
   "rr-fresh-full|1|section|tempo_pressure.45": "events",
   "rr-fresh-full|1|section|tempo_pressure.46": "events",
   "rr-fresh-full|1|section|tempo_pressure.47": "events",
