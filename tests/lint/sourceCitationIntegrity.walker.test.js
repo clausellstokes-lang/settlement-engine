@@ -47,7 +47,9 @@
  * past-EOF citations this gate deliberately does not see. FOUR rules select them,
  * each checkable, and the full roster is committed in the baseline's
  * `archivalExclusionAtFreeze.files`:
- *   tree (32)    docs/review-r2/**, docs/shift-records/**
+ *   tree (33)    docs/review-r2/**, docs/shift-records/**
+ *                (2026-10-02-voice-program-wave-3-arrival-place.json joined 2026-10-02, 32 -> 33: the Voice
+ *                Program's record for wave 3, the arrival scene as a place; a GROWTH that hid nothing.)
  *                (2026-10-02-voice-program-wave-2-substreams.json joined 2026-10-02, 31 -> 32: the Voice
  *                Program's record for wave 2, the arrival and pressure draws on their own streams; a GROWTH that hid nothing.)
  *                (2026-10-02-voice-program-wave-1-herald-deeds.json joined 2026-10-02, 30 -> 31: the Voice
