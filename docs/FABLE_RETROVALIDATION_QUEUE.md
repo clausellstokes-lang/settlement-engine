@@ -3949,3 +3949,10 @@ No Opus car landed in this act. The twelve rulings, the two recorded owner words
 *Receipts:* ODQ §934.89; the FP kit's FP-ORDER.md amendment, FP-QUEUE.md rows FPQ-67/71–74 and CLOSURES, findings/PACT-RESERVE-MEASURE.md, findings/STATECRAFT-HEAD-AUDIT.md; `da0810cd9`.
 *Priority:* P2.
 **Status:** enrolled.
+
+### R106 — the FP chair's judgments FP-47–FP-57 (Opus 5.5 seat; ODQ §934.89 addendum 1; the 10-02 lanes and the two design volumes)
+*What was judged:* tuning tables signed once at a chain's close rather than on one measured leaf (FP-47, FP-53); the hiding verb's cost to war kept as a designed counterforce and banded only in pace (FP-48); a stacking test extracted rather than the writer called as a predicate (FP-49); the generals design's eight questions (FP-50); a nonexistent fourth flag replaced by the design's own (FP-51); a pressed court declining new pacts only (FP-52); war tributes made to deliver too (FP-54) with the lot rule (FP-55); the standing design's questions (FP-56); and the removal of the ten symmetric relationship scalars at the end sweep (FP-57).
+*What Fable re-derives:* whether FP-54's war-world shift and FP-52's renewal exemption each hold the design's intent, and whether the standing's derive-at-read axes reproduce every decision's present input before a decision switches.
+*Receipts:* ODQ §934.89 addendum 1; the FP kit's FP-PROGRESS-BOARD.md (10-02), FP-QUEUE.md (FPQ-71..86), findings/*-REPORT.md; `1b313fadc`, `402a6e2c9`; PR #57.
+*Priority:* P2.
+**Status:** enrolled.
