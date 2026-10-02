@@ -109,7 +109,7 @@ export const NPC_AIMS = Object.freeze({
 /**
  * Two settlements' standing turning to a new label (relationshipRuleHelpers.js): "A and B are
  * turning rivals" under way, "A and B turn rivals" done. Keyed on the TO label of the primary
- * vocabulary (relationshipCompatibility.js PRIMARY_RELATIONSHIP_TYPES).
+ * vocabulary (PRIMARY_RELATIONSHIP_TYPES, which heraldDeeds.test.js pins this table against).
  * @type {Readonly<Record<string, { underway: string, done: string }>>}
  */
 export const RELATIONSHIP_TURNS = Object.freeze({

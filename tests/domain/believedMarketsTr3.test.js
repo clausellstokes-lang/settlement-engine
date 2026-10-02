@@ -100,7 +100,10 @@ const BASE_SHA = Object.freeze({
   // advanceCommodityFlow over the glutted-arrival fixture below.
   glutted: '9cdc1dee37cd4cb8000853e01f3837bb155fe72f06d32557717e927e318e5a6a',
   // the six pulse records of the three-town campaign below.
-  pulse: 'c0f7940a1cdfe9e2c2c5058bfd554ef3072a6301bd437883ed368ae26bb56245',
+  // 2026-10-02 (the Voice Program wave 1, ODQ §934.88: the Herald speaks in deeds): c0f7940a... -> 9bb0e6f4...,
+  // TEXT ONLY, leaf-diffed against 8a6f6b9d3: every moved leaf is a headline, summary or applied headline of the
+  // crime condition and the institution capture; no id, tick, severity or number moved.
+  pulse: '9bb0e6f4f68cec87853233fe02d752007f9dd90c7bb8a8e843a1c878c068827e',
 });
 
 const sha = (value) => createHash('sha256').update(JSON.stringify(value)).digest('hex');

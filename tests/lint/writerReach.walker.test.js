@@ -285,7 +285,10 @@ describe('writer-with-no-reader ratchet: the frozen register', () => {
     // throws. The register's own header carries the retirement.
     // FIVE BECAME SIX (2026-09-24, CURE-PEACE-1): CURE-PEACE-1 adds `supersessionReason on proposals`,
     // engine-internal, the row its docket retirement writer (FP-17) owes.
-    expect(WRITER_DARK_REGISTER.length).toBe(6);
+    // SIX BECAME TEN (2026-10-02, the Voice Program wave 1, ODQ §934.88): `appliedHeadline` on candidates, selected,
+    // autoApplied and outcome, engine-internal. Every producer now writes the deed DONE beside the deed UNDER WAY,
+    // and the feed curation's appliedHeadlineFor is its one reader.
+    expect(WRITER_DARK_REGISTER.length).toBe(10);
     expect(liveEvidence.map((row) => row.identity).sort())
       .toEqual(WRITER_DARK_REGISTER.map((row) => row.identity).sort());
     for (const row of liveEvidence) {

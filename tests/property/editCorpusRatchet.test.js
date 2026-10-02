@@ -350,7 +350,12 @@ describe('the edit corpus ratchet: the re-entry seam and the merge over the 63-r
     // the single-edit corpus, so the ratchet cannot fire here and the arm says so in its own breath.
     expect(census().rows.filter((row) => row.settledLive > 0).length).toBe(0);
     // 2026-10-01 (the urban band + the druid rulings, ODQ §934.86 and its addendum 2; the urban-band chair, measured against the pre-band base 5d699cc68, where this file is 8/8): 213 → 220.
-    expect(census().rows.filter((row) => row.takenLive > 0).length, 'the instrument is not idle').toBe(220);
+    // 2026-10-02 (the Voice Program waves 2-4, ODQ §934.88; measured leaf by leaf against the program's base 8a6f6b9d3):
+    // 220 → 266. Every one of the 46 newly live rows is E6: the pressure sentence now draws on its own stream, and for
+    // the corpus's infiltrated towns that draw is a template naming the governing body ("decisions at the Household
+    // Council level…"), so seating another faction reaches the reading (51 pressureSentence leaves). E7 and E8 add
+    // arrivalScene and pressureSentence leaves the re-composed prose speaks. No world leaf is among them.
+    expect(census().rows.filter((row) => row.takenLive > 0).length, 'the instrument is not idle').toBe(266);
     expect(census().rows.filter((row) => row.groupsJudged > 0).length, 'declared groups ARE judged').toBe(98);
     // THE POSITIVE CONTROL, CONSTRUCTED: one object holding a leaf taken from R1 beside a leaf kept
     // where the record had settled away from R0 IS a MIXED object, and enclosingGroup classes it.
@@ -416,7 +421,8 @@ describe('the edit corpus ratchet: the re-entry seam and the merge over the 63-r
     expect(census().rows.reduce((sum, row) => sum + row.honesty.rideAlong, 0)).toBe(0);
     // 2026-10-01 (the urban band + the druid rulings, ODQ §934.86 and its addendum 2; the urban-band chair, measured against the pre-band base 5d699cc68, where this file is 8/8): [677, 389, 746] → [719, 211, 926], and the
     // ride-along's chain population [11, 11] → [12, 12] below.
-    expect([taken.E1, taken.E5, taken.E6], 'the edits that DO reach a reading').toEqual([719, 211, 926]);
+    // 2026-10-02 (the Voice Program, as A3 above): [719, 211, 926] → [719, 211, 977], E6's +51 pressureSentence readings.
+    expect([taken.E1, taken.E5, taken.E6], 'the edits that DO reach a reading').toEqual([719, 211, 977]);
     // an npc ROLE reaches ZERO readings over the whole corpus, recorded so the zero is not silence
     expect([taken.E2, taken.E3, taken.E4], 'a role and a dormant membership edit reach none').toEqual([0, 0, 0]);
     // AND THE MACHINERY'S FIRST POPULATION, in the chain: the restatement at the first merge lets

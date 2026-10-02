@@ -91,6 +91,10 @@ export const SIMULATION_FLAG_PATTERN = /^[a-z][A-Za-z0-9]*Enabled$/;
  * writer; the three older writers still write it (applyWorldPulse.js twice, candidateEvents.js), out of
  * the corpus's reach.
  *
+ * Rows 7 to 10 (2026-10-02, the Voice Program wave 1, ODQ §934.88) are `appliedHeadline` on candidates, selected,
+ * autoApplied and outcome, engine-internal: every Herald producer now writes the deed DONE beside the deed UNDER
+ * WAY (heraldDeeds.js), and the feed curation's appliedHeadlineFor is the one reader that prints it.
+ *
  * Rows 3 and 6 were Car 1's:
  * Car 0 adjudicated all six at C' (⟦G0-13⟧) and found rows 1–2 are Car 3's
  * (their keys are not written under the dark corpus at all), row 4's key never
@@ -205,6 +209,74 @@ export const WRITER_DARK_REGISTER = Object.freeze([
       + ' explain a supersession would voice the cause in words, never print this code.',
     charter: '§7 WRWALKER, the row CURE-PEACE-1 owes for U1 (the chair ruling FP-17): the retirement writer is the'
       + ' first the executed corpus runs, measured DARK at the integration tip 6cf6920d4',
+  }),
+  Object.freeze({
+    identity: 'appliedHeadline on candidates',
+    key: 'appliedHeadline',
+    shape: 'candidates',
+    writer: 'src/domain/worldPulse/candidateEvents.js',
+    reason: 'engine-internal',
+    consumer: Object.freeze({
+      file: 'src/domain/worldPulse/worldPulseFeedCuration.js',
+      symbol: 'appliedHeadlineFor, which gives an applied outcome its done-form headline in the Herald entry',
+    }),
+    why: 'The applied twin of a Herald headline is plumbing until the feed speaks it. Since the Voice Program wave 1'
+      + ' (the owner, 2026-10-02: "Updates like these need to reflect actions not to potential") every producer writes'
+      + ' the deed DONE beside the deed UNDER WAY ("Famine grips Berghavn" beside "Hunger is closing on Berghavn"), on'
+      + ' the pulse candidates as on every outcome they become. Its one reader is the feed curation, which prints it as the news'
+      + ' entry headline once the outcome applies; what a player sees is that headline, LIT on the Herald.',
+    charter: '§934.88 the Voice Program wave 1 (heraldDeeds.js), measured DARK by the walker at the program tip f33d28798',
+  }),
+  Object.freeze({
+    identity: 'appliedHeadline on selected',
+    key: 'appliedHeadline',
+    shape: 'selected',
+    writer: 'src/domain/worldPulse/candidateEvents.js',
+    reason: 'engine-internal',
+    consumer: Object.freeze({
+      file: 'src/domain/worldPulse/worldPulseFeedCuration.js',
+      symbol: 'appliedHeadlineFor, which gives an applied outcome its done-form headline in the Herald entry',
+    }),
+    why: 'The applied twin of a Herald headline is plumbing until the feed speaks it. Since the Voice Program wave 1'
+      + ' (the owner, 2026-10-02: "Updates like these need to reflect actions not to potential") every producer writes'
+      + ' the deed DONE beside the deed UNDER WAY ("Famine grips Berghavn" beside "Hunger is closing on Berghavn"), on'
+      + ' the selected outcomes as on every outcome they become. Its one reader is the feed curation, which prints it as the news'
+      + ' entry headline once the outcome applies; what a player sees is that headline, LIT on the Herald.',
+    charter: '§934.88 the Voice Program wave 1 (heraldDeeds.js), measured DARK by the walker at the program tip f33d28798',
+  }),
+  Object.freeze({
+    identity: 'appliedHeadline on autoApplied',
+    key: 'appliedHeadline',
+    shape: 'autoApplied',
+    writer: 'src/domain/worldPulse/candidateEvents.js',
+    reason: 'engine-internal',
+    consumer: Object.freeze({
+      file: 'src/domain/worldPulse/worldPulseFeedCuration.js',
+      symbol: 'appliedHeadlineFor, which gives an applied outcome its done-form headline in the Herald entry',
+    }),
+    why: 'The applied twin of a Herald headline is plumbing until the feed speaks it. Since the Voice Program wave 1'
+      + ' (the owner, 2026-10-02: "Updates like these need to reflect actions not to potential") every producer writes'
+      + ' the deed DONE beside the deed UNDER WAY ("Famine grips Berghavn" beside "Hunger is closing on Berghavn"), on'
+      + ' the auto-applied outcomes as on every outcome they become. Its one reader is the feed curation, which prints it as the news'
+      + ' entry headline once the outcome applies; what a player sees is that headline, LIT on the Herald.',
+    charter: '§934.88 the Voice Program wave 1 (heraldDeeds.js), measured DARK by the walker at the program tip f33d28798',
+  }),
+  Object.freeze({
+    identity: 'appliedHeadline on outcome',
+    key: 'appliedHeadline',
+    shape: 'outcome',
+    writer: 'src/domain/worldPulse/candidateEvents.js',
+    reason: 'engine-internal',
+    consumer: Object.freeze({
+      file: 'src/domain/worldPulse/worldPulseFeedCuration.js',
+      symbol: 'appliedHeadlineFor, which gives an applied outcome its done-form headline in the Herald entry',
+    }),
+    why: 'The applied twin of a Herald headline is plumbing until the feed speaks it. Since the Voice Program wave 1'
+      + ' (the owner, 2026-10-02: "Updates like these need to reflect actions not to potential") every producer writes'
+      + ' the deed DONE beside the deed UNDER WAY ("Famine grips Berghavn" beside "Hunger is closing on Berghavn"), on'
+      + ' the stored outcome of a proposal as on every outcome they become. Its one reader is the feed curation, which prints it as the news'
+      + ' entry headline once the outcome applies; what a player sees is that headline, LIT on the Herald.',
+    charter: '§934.88 the Voice Program wave 1 (heraldDeeds.js), measured DARK by the walker at the program tip f33d28798',
   }),
 ]);
 

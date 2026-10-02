@@ -258,8 +258,9 @@ function itemFor(/** @type {any} */ snapshot, /** @type {any} */ saveId) {
  */
 function relationshipDeedHeadlines(snapshot, settlements, toType, direction) {
   const nameOf = (/** @type {unknown} */ id) => itemFor(snapshot, id)?.name || String(id);
-  const a = nameOf(settlements.from);
-  const b = nameOf(settlements.to);
+  // The pair in SAVE-ID order, never the edge's authored orientation: authoring A->B or B->A is the
+  // same relationship and must print the same words (relationshipOrientationInvariance.test.js).
+  const [a, b] = [String(settlements.from), String(settlements.to)].sort().map(nameOf);
   if (toType) {
     const turn = RELATIONSHIP_TURNS[normalizeRelationshipType(toType)]
       || { underway: `are becoming ${toType.replace(/_/g, ' ')}`, done: `become ${toType.replace(/_/g, ' ')}` };

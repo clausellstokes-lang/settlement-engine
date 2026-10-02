@@ -209,6 +209,11 @@ describe('B4 consumers — the overlay is enforced, not parallel', () => {
       // test file's PATH as a string key. Imports nothing from the module —
       // the same string-mention class as the data baselines exempted above.
       'tests/lint/negativeAssertionAnchor.walker.test.js',
+      // The Herald's deed register test (the Voice Program wave 1, 2026-10-02): READ-ONLY vocabulary
+      // import, asserting every primary relationship label has its under-way and done turn in
+      // heraldDeeds.js RELATIONSHIP_TURNS. It evaluates no compatibility and adds no ruleset; the
+      // register itself imports nothing.
+      'tests/domain/heraldDeeds.test.js',
       ...EM_B1A_READERS,
     ];
     const offenders = hits.filter(p => !SANCTIONED.some(s => p.endsWith(s)));
