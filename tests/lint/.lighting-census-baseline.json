@@ -24,13 +24,13 @@
     "The derivation history — every prior row, its cause, and the census laws — stays in the walker",
     "beside the assertions, deliberately. Only the live tuple moved."
   ],
-  "measuredAtSha": "d2dfd88b51891a37c87b3fddad7bd4e93fe2675e",
+  "measuredAtSha": "e76ea7f3c036b986b0573c7b75ef5a47d20561db",
   "measuredBy": "voice-program-chair-93391427",
   "date": "2026-10-02",
-  "note": "the Voice Program (ODQ §934.88): wave 1 added tests/domain/heraldDeeds.test.js and wave 3 tests/generators/arrivalScene.test.js, two new test files and their titles; wave 1 and wave 3 also re-titled arms in narrativeArrival and heraldDeeds",
+  "note": "the Voice Program wave 4 (ODQ §934.88): three new arms and one describe in tests/generators/arrivalScene.test.js, the hook structure pins",
   "files": 2798,
   "parked": 360,
   "credited": 2438,
-  "titles": 26733,
-  "suiteTitles": 7048
+  "titles": 26736,
+  "suiteTitles": 7049
 }
