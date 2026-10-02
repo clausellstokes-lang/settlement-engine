@@ -2584,6 +2584,10 @@
       "kind": "rationale",
       "ref": "generators-tree-admitted-subject-coupled-2026-08-30"
     },
+    "tests/generators/arrivalScene.test.js": {
+      "kind": "rationale",
+      "rationale": "THE ARRIVAL SCENE AS A PLACE (the Voice Program wave 3, ODQ §934.88). Its catching power is EXECUTED, not claimed: five planted mutations of src/generators/narrative/arrivalScene.js on 2026-10-02 (four at wave 3, the fifth at wave 4), each planted from a backup taken before the plant, the file run alone, then restored by copy and cmp-verified byte-identical. (1) Fragment matching at a word start replaced by a bare substring: the arm 'a sawmill is not a mill' reds (a sawmill read as a mill). (2) The absence filter removed, so 'Access to external mill' anchors bread: the same arm reds. (3) The arcane sense's magic gate removed: 'the arcane sense is drawn only where magic is real' reds. (4) The closing beat no longer suppressed under a stress vignette: 'under a stress vignette the vignette is the tension' reds. Each mutation reddened exactly its own arm and no other. (5, the Voice Program wave 4, 2026-10-02) The hook's structure filter replaced by a pass-through: 'a settlement with no wall, gate, market, guard or temple never hears of one' reds with 74 of 120 stress cases naming a structure the settlement lacks, and the corpus arm reds on a stressed row. A standing sweep plant is disproportionate here: the arms read pool text the corpus rewrite will keep re-authoring, so a plant anchored on a line would rot with every authored pass."
+    },
     "tests/generators/narrativeArrival.test.js": {
       "kind": "rationale",
       "ref": "generators-tree-admitted-subject-coupled-2026-08-30"

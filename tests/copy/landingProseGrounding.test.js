@@ -127,12 +127,14 @@ describe('the landing prose quotes the fixture it is about', () => {
     // first expect, and a paragraph that stopped narrating it reds on the second,
     // and neither can pass alone.
     const headlines = advance.map((entry) => `${entry.headline} ${entry.text}`.toLowerCase()).join(' | ');
+    // 2026-10-02, the Voice Program (ODQ §934.88): the engine now writes each beat as a deed ("goes onto a war footing",
+    // "Crime takes hold", "trade routes break down"), so the pairs bind the deed words on both sides.
     for (const [inProse, inFixture] of [
       ['creed', 'creed'],
-      ['wartime', 'wartime'],
+      ['war footing', 'war footing'],
       ['fracture', 'fracture'],
-      ['crime', 'criminal'],
-      ['strain', 'trade'],
+      ['crime', 'crime'],
+      ['trade routes', 'trade routes'],
     ]) {
       expect(
         headlines,

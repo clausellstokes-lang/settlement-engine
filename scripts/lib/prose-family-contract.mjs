@@ -147,13 +147,19 @@ const EXPECTED_CORPUS = Object.freeze({
 const EXPECTED_REGIONAL_ROOTS = Object.freeze([0, 1, 3, 4, 5, 6, 7, 8, 9, 10, 11]);
 const EXPECTED_FAMILY_TOTALS = Object.freeze([
   { family: 'chronicle', identities: 7, distinctValues: 7, occurrences: 7 },
-  { family: 'pulseHistory', identities: 48, distinctValues: 979, occurrences: 4979 },
+  { family: 'pulseHistory', identities: 48, distinctValues: 996, occurrences: 4979 },
   { family: 'regionalLog', identities: 2, distinctValues: 8, occurrences: 180 },
   { family: 'timeline', identities: 4, distinctValues: 8, occurrences: 12 },
 ]);
-const EXPECTED_TOTALS = Object.freeze({ families: 4, identities: 61, distinctValues: 1002, occurrences: 5178 });
+// 2026-10-02 (THE VOICE PROGRAM wave 1, the owner: "Updates like these need to reflect actions not to potential"):
+// distinctValues 1002 → 1019, ONE FAMILY MOVING: pulseHistory 979 → 996. Identities (61) and occurrences (5178) hold, so
+// no record was added or lost; six rows change only how many distinct strings they carry. The three HEADLINE rows grow
+// (+6, +7, +9: both towns named, a deed per kind) and the three SUMMARY rows shrink (−1, −3, −1: the NPC line now states
+// the aim alone, its move having gone to the headline). EXPECTED_ROWS_BYTES holds at 8000 by digit-width coincidence again;
+// the digest below is the pin that convicts.
+const EXPECTED_TOTALS = Object.freeze({ families: 4, identities: 61, distinctValues: 1019, occurrences: 5178 });
 const EXPECTED_ROWS_BYTES = 8000;
-const EXPECTED_ROWS_SHA256 = 'b172d924bcb0564d70bf812e65ba60433e32cdd8484a4ae50bf7816cc8cd5a06';
+const EXPECTED_ROWS_SHA256 = '59c3bb5aae5768bc1eb875183e7c70bc3d8cc398dfd79f0e6b0e11cf32eb1ce0';
 const codepoint = (left, right) => (left < right ? -1 : left > right ? 1 : 0);
 const same = (left, right) => JSON.stringify(left) === JSON.stringify(right);
 const identityOf = (row) => `${row.family}\0${row.path}\0${row.field}`;

@@ -359,9 +359,15 @@ export function evaluateMoralInstitutionPressure(worldState, snapshot, context =
         severity,
         probability: clamp01(0.25 + best.accum * 0.5),
         applyMode: rules.majorChangesRequireProposal && severity >= 0.78 ? 'proposal' : 'auto',
+        // ⛔ THE HERALD SPEAKS IN DEEDS (the owner, 2026-10-02): under way, then done. The feed's
+        // de-hedger carried no rule for "may disband" or "may abolish", so an APPLIED abolition
+        // printed the proposal's "may" until this twin existed.
         headline: best.martial
-          ? `${item.name || item.id} may disband its ${instName}`
-          : `${item.name || item.id} may abolish its ${instName}`,
+          ? `${item.name || item.id} is disbanding its ${instName}`
+          : `${item.name || item.id} is abolishing its ${instName}`,
+        appliedHeadline: best.martial
+          ? `${item.name || item.id} disbands its ${instName}`
+          : `${item.name || item.id} abolishes its ${instName}`,
         summary: best.martial
           ? `Long peace under ${patronName} is letting the ${instName} lapse.`
           : `Under ${patronName}, ${instName} faces abolition: ${cause}.`,
@@ -519,7 +525,9 @@ export function evaluateMoralInstitutionFounding(worldState, snapshot, context =
         severity,
         probability,
         applyMode: rules.majorChangesRequireProposal && severity >= 0.78 ? 'proposal' : 'auto',
-        headline: `${item.name || item.id} may raise ${articleFor(entry.name)} ${nameLower}`,
+        // ⛔ THE HERALD SPEAKS IN DEEDS (owner, 2026-10-02: "Updates like these need to reflect actions not to potential"): under way, then done.
+        headline: `${item.name || item.id} is raising ${articleFor(entry.name)} ${nameLower}`,
+        appliedHeadline: `${item.name || item.id} raises ${articleFor(entry.name)} ${nameLower}`,
         summary: `Under ${patronName}, ${nameLower} rises because ${cause}.`,
         reasons: [
           `${patronName} raises the ${nameLower}: ${cause}.`,

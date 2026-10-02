@@ -76,8 +76,8 @@ export const fixture = {
     "population": 412,
     "tier": "village",
     "eyebrow": "road village · mountain",
-    "prose": "Cnocby smells like bread from the gate: a bakehouse near the entrance, open early, already on the second bake of the day. A proper village, large enough to have a market and small enough that strangers are noticed: earth-banked enclosures and older rounded foundations remain visible between newer halls.",
-    "pressure": "Donnchadh Brennan now operates in ways Odhrán MacCarthy would not approve of. Neither discusses the divergence directly.",
+    "prose": "The first person you meet on the road into Cnocby wants to know your business, and the second already knows it. Earth-banked enclosures and older rounded foundations remain visible between newer halls.",
+    "pressure": "Inghean MacCarthy and Odhrán MacCarthy are connected by something neither discusses openly: Inghean MacCarthy has begun to act like someone who considers the debt paid. Odhrán MacCarthy does not.",
     "hooks": [
       {
         "kind": "NPC",
@@ -147,8 +147,8 @@ export const fixture = {
       {
         "week": "Week 2",
         "season": "the spring of year 1",
-        "headline": "Wartime pressure takes hold",
-        "text": "Cnocby shows enough conflict pressure for a new condition to emerge."
+        "headline": "Cnocby goes onto a war footing",
+        "text": "Cnocby is mustering its levies and doubling its watch."
       },
       {
         "week": "Week 4",
@@ -159,20 +159,20 @@ export const fixture = {
       {
         "week": "Week 7",
         "season": "the spring of year 1",
-        "headline": "Nuada Walsh protects",
-        "text": "Nuada Walsh's protect followers goal advances through protect."
+        "headline": "Nuada Walsh shields their people",
+        "text": "Nuada Walsh is out to protect their followers."
       },
       {
         "week": "Week 10",
         "season": "the spring of year 1",
-        "headline": "Criminal pressure takes hold",
-        "text": "Cnocby shows enough criminal pressure for a new condition to emerge."
+        "headline": "Crime takes hold of Cnocby",
+        "text": "Thieves and racketeers are working Cnocby's streets in the open."
       },
       {
         "week": "Week 12",
         "season": "the spring of year 1",
-        "headline": "Trade route strain takes hold",
-        "text": "Cnocby shows enough trade pressure for a new condition to emerge."
+        "headline": "Cnocby's trade routes break down",
+        "text": "Caravans are passing Cnocby by, and its market stalls stand half empty."
       }
     ],
     "chronicle": [
@@ -192,7 +192,7 @@ export const fixture = {
         "kind": "trade",
         "tone": "economic",
         "week": "Week 2",
-        "text": "Penshaw shows enough trade pressure for a new condition to emerge."
+        "text": "Caravans are passing Penshaw by, and its market stalls stand half empty."
       }
     ],
     "relationships": [

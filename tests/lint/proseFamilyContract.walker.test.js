@@ -172,7 +172,8 @@ describe('four durable prose-family exact-totality contract', () => {
     // test-side and library-side denominators from ever disagreeing.
     // FP BATCH 3 (2026-09-24): 4cf433b2… → 438fe9c4…, re-recorded together with EXPECTED_ROWS_SHA256 (the bytes hold at 8271).
     // 2026-10-01 (the urban band + the druid rulings, ODQ §934.86 and its addendum 2; the urban-band chair): 438fe9c4… → b172d924…, with EXPECTED_ROWS_SHA256.
-    expect(live.rowsSha256).toBe('b172d924bcb0564d70bf812e65ba60433e32cdd8484a4ae50bf7816cc8cd5a06');
+    // 2026-10-02 (THE VOICE PROGRAM wave 1): b172d924… → 59c3bb5a…, with EXPECTED_ROWS_SHA256; the bytes hold at 8000.
+    expect(live.rowsSha256).toBe('59c3bb5aae5768bc1eb875183e7c70bc3d8cc398dfd79f0e6b0e11cf32eb1ce0');
     const counted = live.rows.findIndex((row) => row.occurrences > row.distinctValues);
     const movements = [
       [...clone(live.rows), { family: 'timeline', path: 'zz', field: 'type', distinctValues: 1, occurrences: 1 }],
@@ -197,7 +198,9 @@ describe('four durable prose-family exact-totality contract', () => {
     // byte-identical at 7/7/7 for the fourth re-record running.
     // 2026-10-01 (the urban band + the druid rulings): 1071/5285 → 995/5171, the same seven off the new totals (1002 − 7,
     // 5178 − 7), and identities 56 → 54 (61 − 7); `chronicle` byte-identical at 7/7/7 for the fifth re-record running.
-    counterfeit.totals = { families: 3, identities: 54, distinctValues: 995, occurrences: 5171 };
+    // 2026-10-02 (THE VOICE PROGRAM wave 1): 995/5171 → 1012/5171, the same seven off the new totals (1019 − 7, 5178 − 7);
+    // `chronicle` byte-identical at 7/7/7 for the sixth re-record running.
+    counterfeit.totals = { families: 3, identities: 54, distinctValues: 1012, occurrences: 5171 };
     counterfeit.rowsSha256 = proseFamilyRowsSha256(counterfeit.rows);
     expect(() => validateProseFamilyBaseline(counterfeit)).toThrow(/immutable/);
     for (const mutate of [
@@ -243,14 +246,17 @@ describe('four durable prose-family exact-totality contract', () => {
     // 2026-10-01 (the urban band + the druid rulings, ODQ §934.86 and its addendum 2; the urban-band chair): 50/1055/5097 → 48/979/4979. IDENTITIES MOVE
     // for the first time in this arm's history: consequenceOutcomes[].proposalPayload.reason and resolvedStressors[].type leave,
     // because the re-dealt year resolves no stressor and carries no such proposal.
-    expect(familyTotal(live, 'pulseHistory')).toEqual({ family: 'pulseHistory', identities: 48, distinctValues: 979, occurrences: 4979 });
+    // 2026-10-02 (THE VOICE PROGRAM wave 1): 48/979/4979 → 48/996/4979, the deed forms re-spelling the same records.
+    expect(familyTotal(live, 'pulseHistory')).toEqual({ family: 'pulseHistory', identities: 48, distinctValues: 996, occurrences: 4979 });
     const history = scalarRows.filter((row) => row.root === 'worldState');
     expect([...new Set(history.map((row) => row.path[1].value))]).toEqual([...Array(12).keys()]);
     const headline = (home) => live.rows.find((row) => row.path === `pulseHistory[].${home}[].headline`);
     // FP BATCH 3 (2026-09-24): `selectedOutcomes` 78/153 → 78/154 (one occurrence, no new spelling); `mechanicalOutcomes` HOLDS at
     // 28/53; `consequenceOutcomes` 72/184 → 72/185 (one occurrence, no new spelling).
     // 2026-10-01 (the urban band + the druid rulings, ODQ §934.86 and its addendum 2; the urban-band chair): selected 78/154 → 75/155, mechanical 28/53 → 22/49, consequence 72/185 → 68/181.
-    expect(headline('selectedOutcomes')).toMatchObject({ distinctValues: 75, occurrences: 155 });
+    // 2026-10-02 (THE VOICE PROGRAM wave 1): selected 75/155 → 84/155 and consequence 68/181 → 74/181, more SPELLINGS of the
+    // same occurrences (both towns named, a deed per kind); `mechanicalOutcomes` HOLDS at 22/49.
+    expect(headline('selectedOutcomes')).toMatchObject({ distinctValues: 84, occurrences: 155 });
     // TE36: the two lanes that carried the retired family move; `selectedOutcomes` above does
     // NOT, because ordinary population drift was already `state_only` and never selected.
     // mechanical distinctValues RISES (24 → 29) while its occurrences fall — the retired
@@ -265,7 +271,7 @@ describe('four durable prose-family exact-totality contract', () => {
     // `consequenceOutcomes` 73/184 → 72/184, losing one spelling and no occurrence — the exact
     // mirror image, and between them the arithmetic of a re-deal rather than of a gain or a loss.
     expect(headline('mechanicalOutcomes')).toMatchObject({ distinctValues: 22, occurrences: 49 });
-    expect(headline('consequenceOutcomes')).toMatchObject({ distinctValues: 68, occurrences: 181 });
+    expect(headline('consequenceOutcomes')).toMatchObject({ distinctValues: 74, occurrences: 181 });
   });
 
   it('A6 reaches the regional audit log while proving its selected prose zero', () => {

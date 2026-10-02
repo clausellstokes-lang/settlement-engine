@@ -285,7 +285,11 @@ describe('EM-F2 — promotion replaces the minimal record in place, through the 
     expect(moved, 'THE IDENTITY FIELDS, MEASURED: a promotion carries the DM\'s name into the forge,'
       + ' so the name and the two sentences the pipeline writes around it are the whole difference'
       + ' a name makes. A longer list here is a promotion that changed the WORLD, not its identity')
-      .toEqual(['_config', 'arrivalScene', 'config', 'name', 'pressureSentence']);
+      // 2026-10-02, the Voice Program wave 2 (ODQ §934.88): `pressureSentence` left this list. It used to move
+      // because the generator's name mint (skipped for a held name) spent draws on the assembly step's SHARED
+      // stream; the pressure sentence now draws on its own child stream, so it moves only where it speaks the
+      // name, and this seed's does not. A name re-rolling an unrelated sentence was a coupling, now gone.
+      .toEqual(['_config', 'arrivalScene', 'config', 'name']);
     expect(promoted.name, 'and the name is the DM\'s own word, not the generator\'s').toBe(PHANTOM_NAME);
     expect(unnamed.name === PHANTOM_NAME,
       'the ANTI-VACUITY control: the generator\'s own name for this seed is NOT the DM\'s, so the'

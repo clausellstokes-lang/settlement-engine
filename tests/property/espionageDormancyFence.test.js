@@ -189,6 +189,38 @@ const THE_CALLER = 'src/domain/worldPulse/operations/missionDispatcher.js';
  * AND NOWHERE ELSE. Most recently at the ENGINE-HYGIENE landing (SHIFT RECORD,
  * 2026-09-01, TE-AGNOSTIC-1 cars `f2c1ad181` / `97d119c9b`); before that at T8.
  *
+ * ── 2026-10-02, THE VOICE PROGRAM WAVE 4 BLOCK 1: THE ARRIVAL HOOK NAMES ONLY WHAT IT HOLDS ──
+ * THE TWELFTH MOVEMENT OF THIS CONSTANT, owner-signed through the door under ODQ §934.88; the
+ * record is docs/shift-records/2026-10-02-voice-program-wave-4-hook-structures.json.
+ * THE MOVER: a stress vignette naming a wall, gate, market, guard, granary or temple is drawn only
+ * where the settlement holds it, and eleven structure-free vignettes join the pool (e76ea7f3c).
+ * The base 5c12d56ee held `5df27d67…` (this file green there) before this value was taken.
+ * On THIS corpus 59 of 360 rows move, the stressed ones; 360/360 hashes stay distinct.
+ * ATTRIBUTION, ZERO RESIDUE: with `arrivalScene` and `pressureSentence` removed, all 360 rows
+ * hash identically at the base and here. `5df27d67…` -> `b9945f18…`.
+ *
+ * ── 2026-10-02, THE VOICE PROGRAM WAVE 3: THE ARRIVAL SCENE IS A PLACE ──────────────────
+ * THE ELEVENTH MOVEMENT OF THIS CONSTANT, owner-signed through the door under ODQ §934.88; the
+ * record is docs/shift-records/2026-10-02-voice-program-wave-3-arrival-place.json.
+ * THE MOVER: the arrival scene is composed beat by beat (d2dfd88b5): the tier template, the
+ * slider-keyed magic line and the restating addon retire, and the sense, people and closing
+ * beats speak facts the settlement holds. The base a85aa6c10 held `291e0a1e…` (this file green
+ * there) before this value was taken.
+ * On THIS corpus 360 of 360 rows move; 360/360 hashes stay distinct.
+ * ATTRIBUTION, ZERO RESIDUE: with `arrivalScene` and `pressureSentence` removed, all 360 rows
+ * hash identically at the base and here. `291e0a1e…` -> `5df27d67…`.
+ *
+ * ── 2026-10-02, THE VOICE PROGRAM WAVE 2: THE ARRIVAL AND PRESSURE DRAWS ON THEIR OWN STREAMS ──
+ * THE TENTH MOVEMENT OF THIS CONSTANT, owner-signed through the door under ODQ §934.88; the
+ * record is docs/shift-records/2026-10-02-voice-program-wave-2-substreams.json.
+ * THE MOVER: assembleSettlement.js runs the pressure sentence and the arrival scene each on a
+ * named child stream ('pressure-sentence', 'arrival-scene') instead of the step's shared one
+ * (ed3768dc1), so the same seed prints different words in those two fields. The base 78ed2d08c
+ * held `1c3748cb…` (this file green there) before this value was taken.
+ * On THIS corpus 360 of 360 rows move; 360/360 hashes stay distinct.
+ * ATTRIBUTION, ZERO RESIDUE: with `arrivalScene` and `pressureSentence` removed, all 360 rows
+ * hash identically at the base and here. `1c3748cb…` -> `291e0a1e…`.
+ *
  * ── 2026-10-01, J33: THE WARDEN'S LODGE CENSUS (owner-signed, through the door) ──────────
  * THE NINTH MOVEMENT OF THIS CONSTANT, under the same owner words as the eighth ("Warden's
  * Lodge stays defense, not druid"); the record is
@@ -383,7 +415,7 @@ const THE_CALLER = 'src/domain/worldPulse/operations/missionDispatcher.js';
  * superseded by the ENGINE-HYGIENE re-record above, which is the record of the
  * one chartered window that has been spent since.
  */
-const PRE_COUPLING_CORPUS_SHA = '1c3748cb32e8697d90adcc1e73a046c7380028e951df26098e2fcfbfe7194dfc';
+const PRE_COUPLING_CORPUS_SHA = 'b9945f18189f0833f2a0691f5e2da5b7691e0b1b0efe9e437abc8601bf3be128';
 
 const CORPUS_TIERS = Object.freeze(['thorp', 'hamlet', 'village', 'town', 'city', 'metropolis']);
 const CORPUS_ROUTES = Object.freeze(['road', 'isolated', 'port', 'crossroads']);

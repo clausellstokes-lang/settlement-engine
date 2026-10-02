@@ -999,6 +999,17 @@ const ARGUED_UNLAYERED = Object.freeze({
     reason: 'EM substrate — the head-of-tick SCHEDULE and CAUSE SHAPE for the DM\'s decrees: which staged entries are due at this tick, in the registry\'s own reading order, and the finite receipt each one lands; it decides no port\'s state, rolls nothing and holds no clock, and the subject of a decree is whatever the DM decreed, which is every port by the charter\'s own wave-3 enumeration',
     reads: Object.freeze([]),
   }),
+  // THE VOICE PROGRAM wave 1 (2026-10-02, ODQ §934.88) adds one on the lawWord.js argument. The deed
+  // register is the Herald's ONE spelling of what happened: the under-way and done forms of a
+  // condition, an NPC's move, a relationship's turn. It owns no subject, imports nothing and decides
+  // nothing; it is spoken by the producers of every port's news (the condition candidates, the NPC
+  // planner, the relationship rules), so giving it a family would make each port's own headline a
+  // cross-layer coupling.
+  'src/domain/worldPulse/heraldDeeds.js': Object.freeze({
+    kind: 'substrate',
+    reason: 'shared vocabulary — the Herald\'s ONE spelling of a deed under way and done, spoken by the news producers of every port; no imports, no subject',
+    reads: Object.freeze([]),
+  }),
 });
 
 /** The CLOSED host set. A fifth infrastructure host is a chair conversation. */
@@ -1158,7 +1169,12 @@ const ARGUED_HOSTS = Object.freeze([
 // its one import (intervalWeeks.js) is pre-program baselined, so `reads: []` is measured and no
 // edge leaves the pair scan. OWED BY THE CHARTER'S OWN CREATE, not chosen. Deliberate, in this
 // diff, per this anchor's law.
-const ARGUED_ROSTER_CEILING = 31;
+// 31 -> 32 at the Voice Program wave 1 (ODQ §934.88, the owner's "Updates like these need to reflect
+// actions not to potential"): heraldDeeds.js admitted as substrate — the Herald's one spelling of a deed
+// under way and done, spoken by the news producers of every port and owning no subject (the lawWord.js
+// argument). It imports NOTHING, so `reads: []` is measured and no edge leaves the pair scan. Owed by the
+// wave's own CREATE under src/domain/worldPulse. Deliberate, in this diff, per this anchor's law.
+const ARGUED_ROSTER_CEILING = 32;
 
 /** The FP scope the unlayered census is TOTAL over. */
 const CENSUS_SCOPE_RE = /^src\/domain\/(?:worldPulse|spatial)\//;

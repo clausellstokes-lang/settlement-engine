@@ -530,7 +530,12 @@ describe('EM-A3 — the flavor census: a free field has zero derivation readers,
 
     const { stats } = liveScan();
     expect(stats.files, 'the property-read half inspected nothing, so the dormancy above is vacuous').toBeGreaterThan(0);
-  });
+    // ⏱ AN EXPLICIT BUDGET CARRYING THE MEASURED FIGURE (2026-10-02, the Voice Program's final gate): this arm runs the
+    // generator corpus and the live scan, measured ALONE at 6.2–7.6 s both at the program's base 8a6f6b9d3 and at its tip
+    // (three paired runs, load 7–13), and 24.5 s inside the full gate at load 11–16, which expired the suite-wide 20 s.
+    // The cost is the scan's, near-equal at base and tip; the budget is the gate-load figure with headroom, and the
+    // suite-wide testTimeout is not raised.
+  }, 60_000);
 
   test('A3 — GUARD-THE-GUARD: a free row planted on a declared cascade key REDS, naming the row and the path', () => {
     const carrier = declarationRows().find((row) => row.kind === 'free-cascade' && classifyJoins([row]).joined.length === 1);

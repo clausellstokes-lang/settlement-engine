@@ -468,7 +468,10 @@ const outcomeOf = (records) => records.map(({ worldState, ...rest }) => {
 // committed keystone golden (tests/fixtures/spatial-digest-golden.json), the pulse records are
 // this harness's four ticks. An absent datum must reproduce both, byte for byte.
 const BASE_DIGEST_HASH = '3ddda43a3ff1421c339a4b1922cb0b48895083c6c824f8f246e89871dad59c2c';
-const BASE_PULSE_HASH = '9dfb641e448d95768d2be1d80405a21054a65d5929c3dfec39c2686950275fd0';
+// 2026-10-02 (the Voice Program wave 1, ODQ §934.88: the Herald speaks in deeds): 9dfb641e... -> 0937c69d..., TEXT ONLY,
+// leaf-diffed against 8a6f6b9d3: every moved leaf is a headline, summary, applied headline or population-history
+// reason; no id, tick or number moved. An absent datum still reproduces the base's facts byte for byte.
+const BASE_PULSE_HASH = '0937c69d4712cab5c6a21f148d674cfb9c2bc470694ec3f2b032d87957e850dc';
 
 describe('WY-1 A5 — dark by ABSENT DATA: the digest and the pulse record are byte-identical to the base', () => {
   it('ABSENT or refused datum: the golden digest hashes to the base, whatever refused shape was supplied', () => {

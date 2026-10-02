@@ -776,8 +776,11 @@ function vassalRules(ctx) {
       severity,
       probability: clamp01(0.04 + independencePressure * 0.2 + relState.resentment * 0.12),
       applyMode: severity >= 0.72 ? "proposal" : "auto",
-      headline: `Rebellion may rise in ${itemFor(ctx.snapshot, vassalId)?.name || vassalId}`,
-      summary: "Vassal extraction, low legitimacy, and poor defenses create an independence crisis.",
+      // ⛔ THE HERALD SPEAKS IN DEEDS (owner, 2026-10-02: "Updates like these need to reflect actions not to potential"): under way, then done; the
+      // causes (extraction, legitimacy, defences) stay in `reasons`.
+      headline: `Rebellion is stirring in ${itemFor(ctx.snapshot, vassalId)?.name || vassalId}`,
+      appliedHeadline: `Rebellion breaks out in ${itemFor(ctx.snapshot, vassalId)?.name || vassalId}`,
+      summary: `${itemFor(ctx.snapshot, vassalId)?.name || vassalId} has had enough of its overlord's levies, and talk of independence has turned to arms.`,
       reasons: [
         // CURE-P1 U4 (FPQ-30): a weakness streak that never began is no part of the case, so the
         // clause is suppressed at zero (the base printed *looked weak 0 turns running*); above zero

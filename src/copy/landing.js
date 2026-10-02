@@ -171,7 +171,9 @@ export const landing = {
     // same order, at the same weeks (1 creed · 2 wartime · 4 fracture · 10 crime
     // · 12 trade). It is the most fragile prose on the page and the grounding
     // suite walks it word against field.
-    body2: 'Then advance time. In Cnocby’s first twelve weeks the village took a patron creed, then wartime pressure, then the fracture passed and left its memory; by week ten there was crime, and by week twelve the road itself was strained. Every one of those is a record the engine wrote, and every one carries its cause.',
+    // 2026-10-02, the Voice Program (ODQ §934.88): re-grounded on the regenerated timeline, which now speaks in deeds
+    // ("Cnocby goes onto a war footing", "Crime takes hold of Cnocby", "Cnocby's trade routes break down").
+    body2: 'Then advance time. In Cnocby’s first twelve weeks the village took a patron creed and went onto a war footing, and the fracture the creed brought passed and left its memory; by week ten crime had taken hold of its streets, and by week twelve its trade routes had broken down. Every one of those is a record the engine wrote, and every one carries its cause.',
     // The chronicle beside the realm map is the REGION's band, not the town's —
     // two cards that now say different things, and a reader needs to be told why.
     regionLine: 'Beside it, the region: what the neighbours did while Cnocby was busy.',

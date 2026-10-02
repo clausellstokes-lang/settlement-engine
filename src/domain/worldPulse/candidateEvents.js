@@ -12,6 +12,7 @@ import { authorityFor } from './changeAuthorityPolicy.js';
 import { applyForeignPrimacy } from './foreignPrimacy.js';
 import { applyAnticipatedReactions } from './anticipatedReactions.js';
 import { classifyRecurringConditionCandidate } from './conditionRefreshRecordMode.js';
+import { CONDITION_DEEDS } from './heraldDeeds.js';
 import {
   admitGuaranteedProposalOutcomes,
   buildProposalDocket,
@@ -259,6 +260,10 @@ function pressureConditionCandidate(/** @type {any} */ pressure, /** @type {any}
   };
   const archetype = archetypeByKind[/** @type {keyof typeof archetypeByKind} */ (pressure.kind)];
   if (!archetype) return null;
+  // ⛔ THE HERALD SPEAKS IN DEEDS (the owner, 2026-10-02): under way, done, and the fact both share
+  // (./heraldDeeds.js). The simulation's words stay in `reasons`.
+  const voice = CONDITION_DEEDS[pressure.kind];
+  if (!voice) return null;
   return {
     id: `candidate.condition.${stablePart(pressure.kind)}.${stablePart(pressure.settlementId)}.${tick}`,
     type: 'condition',
@@ -274,11 +279,12 @@ function pressureConditionCandidate(/** @type {any} */ pressure, /** @type {any}
     // authorityFor passes it through untouched under routine/full and forces
     // 'proposal' only under the new dm_only/recommendations autonomy modes.
     applyMode: authorityFor(rules, 'pressure_event', pressure.score >= 0.72 ? 'proposal' : 'auto'),
-    headline: `${labelByKind[/** @type {keyof typeof labelByKind} */ (pressure.kind)]} may take hold`,
+    headline: voice.underway(pressure.settlementName),
+    appliedHeadline: voice.done(pressure.settlementName),
     // SEASONS-A: pressureModel stamps a seasonNote on flag-on winter food
     // pressures ("stores run low…"); its presence IS the gate — absent
     // flag-off, so the legacy summary bytes are untouched.
-    summary: `${pressure.settlementName} shows enough ${pressure.label.toLowerCase()} for a new condition to emerge.${pressure.seasonNote ? ` ${pressure.seasonNote}` : ''}`,
+    summary: `${voice.fact(pressure.settlementName)}${pressure.seasonNote ? ` ${pressure.seasonNote}` : ''}`,
     reasons: [
       ...pressure.reasons,
       'Organic settlement drift is conservative: pressure must pass a gate before it can roll.',

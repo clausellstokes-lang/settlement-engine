@@ -8,7 +8,7 @@
   "The reviewable slice is computed by RULE (reviewableDark), never hand-listed."
  ],
  "schema": 1,
- "frozenAtSha": "58677db7756b6d1eee33c1237830f19e6f9c36c1",
+ "frozenAtSha": "8046d16309d63377b5e70a7ff02056337c5999ff",
  "charter": "§18.1 WRWALKER Car 1 (HORIZON) — chair-signed vetoably at the INSTR-WRW pre-stage",
  "minRows": 40,
  "corpusMeta": {
@@ -22,9 +22,9 @@
   "originCount": 9139,
   "transitionCount": 15248
  },
- "shapesDigest": "957edacc50c0f46ad2ad0e532ef3f62e38cd0f962fe9285b0d51db0bffb7ff31",
- "detectorDigest": "c6ff47ec59b08a91703b4ede8f31f937a14c15ff7eca284e54f8a8f7075ef154",
- "verdictDigest": "a6deadc14a4bb1fba207de6313a234a2187e7254d6094329288749800d4edd1e",
+ "shapesDigest": "7f81feebcd3ecfde04435db8dbc4a6538aa11083579131235e7943d48f7d681e",
+ "detectorDigest": "7b4ca40b4ad4737f761bce08dd865107cba14f2033cecfcf16e6811bc0ce93bb",
+ "verdictDigest": "ce2f905241fe2f17a25bb1e2c77ae6890198fbad021efb3afd0aca379f8dcb9b",
  "surfaceRoots": {
   "web": [
    "src/main.jsx"
@@ -73,37 +73,37 @@
  ],
  "closureSizes": {
   "web-display": 734,
-  "web-transitive": 930,
-  "dossier-pdf": 429,
+  "web-transitive": 931,
+  "dossier-pdf": 430,
   "campaign-pdf": 75,
   "world-book": 92,
-  "foundry": 339,
+  "foundry": 340,
   "json-export": 8,
   "news": 29
  },
  "population": {
-  "judged": 6988,
+  "judged": 6992,
   "lit": 576,
   "litName": 5084,
-  "dark": 1328,
+  "dark": 1332,
   "thinKeys": 9162,
   "thinShapes": 978,
   "knownShapes": 355
  },
  "scanStats": {
-  "files": 1665,
-  "sites": 39698,
-  "propRead": 37571,
+  "files": 1666,
+  "sites": 39740,
+  "propRead": 37613,
   "elemRead": 0,
   "destructure": 2112,
   "inOp": 15,
-  "rGrades": 6054,
-  "nGrades": 953389,
-  "resolvedReceivers": 6841
+  "rGrades": 6056,
+  "nGrades": 957130,
+  "resolvedReceivers": 6843
  },
- "registerDigest": "3f57ab58c6f6803cd5965b29668e268a24db983833a4ab7ee3a167aba29ae1f1",
+ "registerDigest": "4420c68d29c3515008a649c939874bcbbec5621643cd7a862606ac19454b99e7",
  "pendingSurfaceCeiling": 3,
- "reviewableDarkCount": 479,
+ "reviewableDarkCount": 483,
  "darkUnregistered": [
   {
    "identity": "Bulk grain and flour on reasons",
@@ -8121,6 +8121,7 @@
   "affectedSettlementIds on autoApplied": "campaign-pdf=N dossier-pdf=N foundry=N news=N web-display=N web-transitive=N world-book=N",
   "age on autoApplied": "dossier-pdf=N foundry=N web-display=N web-transitive=N",
   "ambitionHeat on autoApplied": "dossier-pdf=N foundry=N web-transitive=N",
+  "appliedHeadline on autoApplied": "web-transitive=N",
   "applyMode on autoApplied": "dossier-pdf=N foundry=N json-export=N news=N web-display=N web-transitive=N",
   "armyId on autoApplied": "dossier-pdf=N foundry=N web-display=N web-transitive=N",
   "candidateType on autoApplied": "campaign-pdf=N dossier-pdf=N foundry=N news=N web-display=N web-transitive=N world-book=N",
@@ -8262,6 +8263,7 @@
   "affectedSettlementIds on candidates": "campaign-pdf=N dossier-pdf=N foundry=N news=N web-display=N web-transitive=N world-book=N",
   "age on candidates": "dossier-pdf=N foundry=N web-display=N web-transitive=N",
   "ambitionHeat on candidates": "dossier-pdf=N foundry=N web-transitive=N",
+  "appliedHeadline on candidates": "web-transitive=N",
   "applyMode on candidates": "dossier-pdf=N foundry=N json-export=N news=N web-display=N web-transitive=N",
   "candidateType on candidates": "campaign-pdf=N dossier-pdf=N foundry=N news=N web-display=N web-transitive=N world-book=N",
   "category on candidates": "campaign-pdf=N dossier-pdf=N foundry=N json-export=N web-display=N web-transitive=N world-book=N",
@@ -13990,6 +13992,7 @@
   "weakness on osr015:npc_8": "",
   "week on osr015:npc_8": "dossier-pdf=N foundry=N web-display=N web-transitive=N",
   "ambitionHeat on outcome": "dossier-pdf=N foundry=N web-transitive=N",
+  "appliedHeadline on outcome": "web-transitive=R",
   "applyMode on outcome": "dossier-pdf=N foundry=N json-export=N news=N web-display=N web-transitive=R",
   "candidateType on outcome": "campaign-pdf=N dossier-pdf=R foundry=R news=N web-display=N web-transitive=R world-book=N",
   "condition on outcome": "campaign-pdf=N dossier-pdf=N foundry=N web-display=N web-transitive=R world-book=N",
@@ -14531,6 +14534,7 @@
   "affectedSettlementIds on selected": "campaign-pdf=N dossier-pdf=N foundry=N news=N web-display=N web-transitive=N world-book=N",
   "age on selected": "dossier-pdf=N foundry=N web-display=N web-transitive=N",
   "ambitionHeat on selected": "dossier-pdf=N foundry=N web-transitive=N",
+  "appliedHeadline on selected": "web-transitive=N",
   "applyMode on selected": "dossier-pdf=N foundry=N json-export=N news=N web-display=N web-transitive=N",
   "armyId on selected": "dossier-pdf=N foundry=N web-display=N web-transitive=N",
   "candidateType on selected": "campaign-pdf=N dossier-pdf=N foundry=N news=N web-display=N web-transitive=N world-book=N",

@@ -47,7 +47,17 @@
  * past-EOF citations this gate deliberately does not see. FOUR rules select them,
  * each checkable, and the full roster is committed in the baseline's
  * `archivalExclusionAtFreeze.files`:
- *   tree (30)    docs/review-r2/**, docs/shift-records/**
+ *   tree (35)    docs/review-r2/**, docs/shift-records/**
+ *                (2026-10-02-voice-program-wave-1-pair-order.json joined 2026-10-02, 34 -> 35: the Voice
+ *                Program's record for the wave 1 pair-order cure; a GROWTH that hid nothing.)
+ *                (2026-10-02-voice-program-wave-4-hook-structures.json joined 2026-10-02, 33 -> 34: the Voice
+ *                Program's record for wave 4 block 1, the arrival hook's structures; a GROWTH that hid nothing.)
+ *                (2026-10-02-voice-program-wave-3-arrival-place.json joined 2026-10-02, 32 -> 33: the Voice
+ *                Program's record for wave 3, the arrival scene as a place; a GROWTH that hid nothing.)
+ *                (2026-10-02-voice-program-wave-2-substreams.json joined 2026-10-02, 31 -> 32: the Voice
+ *                Program's record for wave 2, the arrival and pressure draws on their own streams; a GROWTH that hid nothing.)
+ *                (2026-10-02-voice-program-wave-1-herald-deeds.json joined 2026-10-02, 30 -> 31: the Voice
+ *                Program's record for wave 1, the Herald in deeds; a GROWTH that hid nothing.)
  *                (2026-10-01-urban-band-druid-faith.json joined 2026-10-01, 27 -> 28: the record for the
  *                owner's druid rulings; a GROWTH that hid nothing.)
  *                (2026-10-01-urban-band-warden-census.json joined 2026-10-01, 28 -> 29: the record for J33,

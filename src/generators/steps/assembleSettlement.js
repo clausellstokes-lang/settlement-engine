@@ -182,8 +182,9 @@ registerStep('assembleSettlement', {
 
   // §22 ruling 1 + §22.1 correction 1: the settlement's NAME is a HELD fact. The mint above
   // RUNS at its exact draw position and its result is DISCARDED when the name is held - the two
-  // draws it spends are on the assembly step's SHARED ambient stream, which the pressure
-  // sentence and the arrival scene read 1-3 draws later. Skipping them moves both in 63/63.
+  // draws it spends are on the assembly step's SHARED ambient stream. Since the Voice Program
+  // wave 2 the pressure sentence and the arrival scene no longer read that stream, but the
+  // mint still runs so the shared stream stays where any later reader expects it.
   settlement.name = chooseOrPin(pins, 'name', () => settlementName);
 
   // F8: re-render each stress entry's summary with the real settlement name.
@@ -209,9 +210,12 @@ registerStep('assembleSettlement', {
   rerenderStressSummary(settlement.stress);
   rerenderStressSummary(settlement.stressors);
 
-  // Narrative overlays
-  settlement.pressureSentence = generatePressureSentence(settlement);
-  settlement.arrivalScene     = generateArrivalScene(settlement);
+  // Narrative overlays. The pressure sentence and the arrival scene each draw on their own
+  // named child stream (THE VOICE PROGRAM wave 2, 2026-10-02): their pools and beats can
+  // grow or reorder without any fact moving, because no later draw reads the position
+  // they leave behind. The defense profile takes no draw.
+  settlement.pressureSentence = inAssemblySubstream(rng, 'pressure-sentence', () => generatePressureSentence(settlement));
+  settlement.arrivalScene     = inAssemblySubstream(rng, 'arrival-scene', () => generateArrivalScene(settlement));
   settlement.defenseProfile   = generateDefenseProfile(settlement);
 
   // The final-economy pass already proved that power consumed the final

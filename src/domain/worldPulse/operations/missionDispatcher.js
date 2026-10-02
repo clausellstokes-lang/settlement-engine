@@ -435,8 +435,11 @@ function operationCandidate(demand, tick, roll, frequency01) {
     severity,
     probability: unit(Number(frequency01)),
     applyMode: 'proposal',
-    headline: `${demand.principalId} may send about ${demand.subjectId}`,
-    summary: 'An unconfirmed belief stands before a decision, and the deliberation read allows the wait.',
+    // ⛔ THE HERALD SPEAKS IN DEEDS (owner, 2026-10-02: "Updates like these need to reflect actions not to potential"): under way, then done; the
+    // deliberation itself stays in `reasons`.
+    headline: `${demand.principalId} is sending to learn the truth about ${demand.subjectId}`,
+    appliedHeadline: `${demand.principalId} sends to learn the truth about ${demand.subjectId}`,
+    summary: `${demand.principalId} wants what is said of ${demand.subjectId} confirmed before acting on it.`,
     reasons: [
       `Deliberation verdict dispatch_and_wait for demand ${demand.demandId}.`,
       `Receipt family ${row ? row.receiptFamily : 'unknown'} is verified against the live tree.`,

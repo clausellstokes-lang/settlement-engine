@@ -513,7 +513,9 @@ function candidateForTypeAndPressure(type, pressure, tick, extras = {}) {
     severity,
     probability: Math.min(0.6, Math.max(0.02, Math.min(0.5, Math.max(0.07, pressure.score * 0.34)) * gateMult)),
     applyMode: major ? 'proposal' : 'auto',
-    headline: `${stressor.label} may emerge`,
+    // ⛔ THE HERALD SPEAKS IN DEEDS (owner, 2026-10-02: "Updates like these need to reflect actions not to potential"): under way, then done.
+    headline: `${stressor.label} is taking hold in ${pressure.settlementName}`,
+    appliedHeadline: `${stressor.label} grips ${pressure.settlementName}`,
     summary: `${stressor.label} is beginning to take root in ${pressure.settlementName}.`,
     reasons: [
       ...readerPressureReasons(pressure),
@@ -748,7 +750,8 @@ export function evaluateStressorRules(snapshot, pressureIdx, context = {}) {
         severity,
         probability: Math.min(0.42, 0.08 + strongestPressure * 0.28),
         applyMode: severity >= 0.78 ? 'proposal' : 'auto',
-        headline: `${stressor.label} may intensify`,
+        headline: `${stressor.label} is deepening`,
+        appliedHeadline: `${stressor.label} deepens`,
         summary: `${stressor.label} has not broken, and the forces feeding it are still gathering.`,
         reasons: [
           `${stressor.label} still grips the settlement.`,
@@ -789,8 +792,9 @@ export function evaluateStressorRules(snapshot, pressureIdx, context = {}) {
           // (gating on the attenuated number would make the gate unreachable:
           // 0.78 / 0.72 > 1).
           applyMode: stressor.severity >= 0.78 ? 'proposal' : 'auto',
-          headline: `${stressor.label} may spread`,
-          summary: `${stressor.label} can reach another settlement through the roads and ties that carry it, though it arrives with less force.`,
+          headline: `${stressor.label} is spreading to a neighbour`,
+          appliedHeadline: `${stressor.label} spreads to a neighbour`,
+          summary: `${stressor.label} follows the roads and ties that carry it to a neighbour, though it arrives with less force.`,
           reasons: [
             `${stressor.label} still bears down hard at its source.`,
             'A path to another settlement lies open, and distance dulls the blow.',

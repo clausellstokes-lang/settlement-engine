@@ -112,16 +112,16 @@ const FIXED = Object.freeze([0, 21, 42]);
  */
 const PRE_CHANGE = Object.freeze({
   0: Object.freeze({
-    derived: '6eb2b31ba080d09525519f8120216d855ff88468fd3b4abada9095376e8c4c7e',
-    replay: '0db21c820fafd5fb6adca7ba0c6311f627cf884912dabb2f60caee5b4954a01c',
+    derived: '98320fa5649edfe79bfdfeb129163c9f3021dac03d8a2a8557dd0768c79a41eb',
+    replay: 'e79004ad0585bb0c99e127e4019d107fbc4b1560d23f7fe28e71c9fab7b5a607',
   }),
   21: Object.freeze({
-    derived: '95a3de2d59b7352ed1856697163952a202e8d1e67ad2fb98292af43afc37d98a',
-    replay: '8550ab658b42205db8d14f9a0e74e9c29d58054d4f21dd6695767e1905369151',
+    derived: '2a837ce5f252e356a049727ac1ba9e9212ab68135c79e6ccc1526c7387433838',
+    replay: 'c906a415016c207d856c12d34629b35fa5e22f7296fc8809f6ff851dd789ae88',
   }),
   42: Object.freeze({
-    derived: 'a4e5bc0eb2c1a35ad93e47398c1089354dd16efa16e77e42df8a07a8d7a9ba3e',
-    replay: 'd2c2e321d66122032f8585278ad68ed4c4f9864c5a020c26a8466f33730e6461',
+    derived: '5f1ffc6717cf3c74855fe541b59aa4eb0ac5ddb77a8ea34709d0931cc6fe11aa',
+    replay: 'a3311d52fd972b3fb2a6549984b0c026d532cd00cc8f1ce1bfbc59b1725efc25',
   }),
 });
 // ── RE-CAPTURED 2026-10-01, the urban band (ODQ §934.86), BY THE SAME PLANT AND NEVER FROM THE LIVE STEP ALONE ─────
@@ -133,6 +133,20 @@ const PRE_CHANGE = Object.freeze({
 // re-capture is attributable to the urban band alone. Row 21's `derived` is the re-recorded golden master's own row
 // 'town|germanic|plains|road|civilized|golden-master-v3' (917834e22), which the census arm A1 also pins.
 
+// ── RE-CAPTURED 2026-10-02, the Voice Program wave 2 (ODQ §934.88), BY THE SAME PLANT ─────────────────────────────────
+// The three rows' arrival scene and pressure sentence are now drawn from their own streams (ed3768dc1), so all six digests
+// moved again. Re-captured as above: `git show dde845c15^:src/generators/steps/resolveResources.js` (sha256 62e16d59...)
+// planted over a COPY of this tree at 426c7f7b4 (never over this checkout), and the three rows' fresh generation and
+// replay hashed. The planted step and the live step produced the SAME six digests, so EM-B2b2 still moves no byte of
+// the no-edit path. Row 21's `derived` is the re-recorded golden master's control row (a7202d720).
+// ── RE-CAPTURED 2026-10-02 AGAIN, the Voice Program wave 3 (ODQ §934.88), BY THE SAME PLANT ──────────────────────────
+// The three rows' arrival scenes are now composed beat by beat (d2dfd88b5), so all six digests moved again. Re-captured
+// as above: the pre-EM-B2b2 step (sha256 62e16d59...) planted over a COPY of this tree at ff0d296bf, and the planted step
+// and the live step produced the SAME six digests. Row 21's `derived` is the re-recorded golden's control row (dc8a022e1).
+// ── RE-CAPTURED 2026-10-02 A THIRD TIME, the Voice Program wave 4 block 1 (ODQ §934.88), BY THE SAME PLANT ─────────────
+// The three rows' arrival hooks now name only structures they hold (e76ea7f3c), so all six digests moved again. The
+// pre-EM-B2b2 step (sha256 62e16d59...) planted over a COPY of this tree at 310e57f06 and the live step produced the SAME
+// six digests. Row 21's `derived` is the re-recorded golden's control row (6990709a0).
 describe('EM-B2b2 — the DM\'s nearby-resources word survives resolveResources', () => {
   it('A1 — THE DM\'S ROSTER STANDS AT ITS OWN DECLARED LEAF: byte-equal on three fixed seeds, and carried on every census row', () => {
     // ANTI-VACUITY FIRST. The leaf is read from EM-R0a's register through the row's own tier1

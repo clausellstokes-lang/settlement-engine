@@ -7,8 +7,10 @@
  * settlement opened on the bare '… comes into view.' fallback. ARRIVAL_ADDONS
  * is keyed by ROUTE but was indexed by economicState.tradeCommodity — a field
  * nothing writes on economicState — so addons never fired at all.
- * generateArrivalScene now routes through ROUTE_TO_SCENE and indexes the
- * addons by route.
+ * generateArrivalScene now routes through ROUTE_TO_SCENE. The addons were RETIRED
+ * by the Voice Program wave 3 (2026-10-02): a second approach sentence restated the
+ * first, and the scene's later beats now speak of the place itself
+ * (tests/generators/arrivalScene.test.js pins those beats).
  *
  * Also pins generateSiegeCapability: currentTensions is an ARRAY of tension
  * objects; interpolating it raw printed '[object Object]' and the
@@ -22,7 +24,7 @@ import {
   generateSiegeCapability,
   ROUTE_TO_SCENE,
 } from '../../src/generators/narrativeGenerator.js';
-import { ARRIVAL_SCENES, ARRIVAL_ADDONS } from '../../src/data/narrativeData.js';
+import { ARRIVAL_SCENES } from '../../src/data/narrativeData.js';
 import { CULTURE_PROFILES } from '../../src/data/cultureProfiles.js';
 import { createPRNG } from '../../src/kernel/prng.js';
 import { setActiveRng, clearActiveRng } from '../../src/kernel/rngContext.js';
@@ -38,11 +40,13 @@ afterEach(() => clearActiveRng());
 // The full route vocabulary the config UI / resolveConfig can produce.
 const ROUTES = ['road', 'river', 'port', 'crossroads', 'isolated', 'mountain_pass'];
 
+// A weekly market, so a crossroads may open on its market scene (the Voice Program wave 3: a market
+// opening needs a market; the arm below pins the fallback).
 const settlementFor = (route) => ({
   name: 'Testford',
   tier: 'town',
   config: { tradeRouteAccess: route, culture: 'germanic', priorityMagic: 0 },
-  institutions: [],
+  institutions: [{ name: 'Weekly market' }],
   stress: null,
 });
 
@@ -80,20 +84,17 @@ describe('arrival scene resolves for every route value (no bare fallback)', () =
   });
 });
 
-describe('arrival addons fire keyed by route (tradeCommodity was never written)', () => {
-  test.each(Object.keys(ARRIVAL_ADDONS))('route %s appends one of its addon templates', (route) => {
+describe('the scene approaches once (the Voice Program wave 3 retired the restating addon)', () => {
+  test.each(ROUTES)('route %s carries exactly one opening scene', (route) => {
     const scene = generateArrivalScene(settlementFor(route));
-    const addons = renderPool(ARRIVAL_ADDONS[route], 'Testford', 'town');
-    expect(addons.length).toBeGreaterThan(0);
-    expect(
-      addons.some(a => scene.includes(a)),
-      `route '${route}' must carry one of its ARRIVAL_ADDONS, got: ${scene}`,
-    ).toBe(true);
+    const openings = Object.values(ARRIVAL_SCENES).flatMap((pool) => renderPool(pool, 'Testford', 'town'));
+    expect(openings.filter((opening) => scene.includes(opening)).length, scene).toBe(1);
   });
 
-  test('a route with no addon pool (mountain_pass) stays addon-free without crashing', () => {
-    expect(ARRIVAL_ADDONS.mountain_pass).toBeUndefined();
-    expect(() => generateArrivalScene(settlementFor('mountain_pass'))).not.toThrow();
+  test('a crossroads with no market opens as an ordinary road does, not on a market it lacks', () => {
+    const scene = generateArrivalScene({ ...settlementFor('crossroads'), institutions: [] });
+    const ordinary = renderPool(ARRIVAL_SCENES.ordinary, 'Testford', 'town');
+    expect(ordinary.some((opening) => scene.startsWith(opening)), scene).toBe(true);
   });
 });
 
@@ -120,7 +121,8 @@ describe('port and cultural arrival vocabulary remain semantically grounded', ()
         architecturalDetail: 'blue-glazed brick courts step down toward the civic square',
       },
     });
-    expect(scene).toContain('blue-glazed brick courts step down toward the civic square');
+    // Since the Voice Program wave 3 the detail is its own sentence (the SIGHT beat), so it opens capitalized.
+    expect(scene).toContain('Blue-glazed brick courts step down toward the civic square.');
   });
 
   test('legacy saves use the requested culture profile, never the Germanic fallback', () => {
@@ -132,29 +134,35 @@ describe('port and cultural arrival vocabulary remain semantically grounded', ()
         culture: 'east_asian',
       },
     });
+    // The SIGHT beat sentence-cases the detail, so the comparison ignores case.
+    const lowered = scene.toLowerCase();
     expect(
-      CULTURE_PROFILES.east_asian.architecturalDetails.some(detail => scene.includes(detail)),
+      CULTURE_PROFILES.east_asian.architecturalDetails.some(detail => lowered.includes(detail.toLowerCase())),
     ).toBe(true);
     expect(
-      CULTURE_PROFILES.germanic.architecturalDetails.some(detail => scene.includes(detail)),
+      CULTURE_PROFILES.germanic.architecturalDetails.some(detail => lowered.includes(detail.toLowerCase())),
     ).toBe(false);
   });
 
-  test('metropolis scale reads above an ordinary city', () => {
-    setActiveRng(createPRNG('metropolis-scale'));
-    const scene = generateArrivalScene({
-      ...settlementFor('road'),
-      tier: 'metropolis',
-    });
-    expect(scene).toContain("region's great urban centre");
-    // The metropolis line REPLACES the city line; the metropolis phrase is the sibling
-    // proving the scale sentence rendered at all.
-    expectAbsentWithAnchor(
-      scene,
-      'It is a city in its own right',
-      "region's great urban centre",
-      'metropolis scale line supersedes the city line',
-    );
+  test('no tier template survives: the scene speaks of the place, not of its tier', () => {
+    // The Voice Program wave 3 (2026-10-02) RETIRED the per-tier sentence every settlement of a
+    // tier shared ("A proper village, large enough to have a market…") and the slider-keyed
+    // magelight line. The culture's built detail, which used to ride inside the template, is the
+    // anchor: it proves the SIGHT beat rendered.
+    for (const tier of ['thorp', 'hamlet', 'village', 'town', 'city', 'metropolis']) {
+      setActiveRng(createPRNG(`tier-template-retired-${tier}`));
+      const scene = generateArrivalScene({
+        ...settlementFor('road'),
+        tier,
+        config: { ...settlementFor('road').config, priorityMagic: 70 },
+        culturalIdentity: { architecturalDetail: 'steep roofs mark the older lanes' },
+      });
+      for (const retired of ["region's great urban centre", 'A proper village', 'A market town of substance',
+        'small enough that you can see all of it', 'A dozen buildings around a central green',
+        'A city, properly speaking', 'magelight lamp post', 'Arcane lights burn in several windows']) {
+        expectAbsentWithAnchor(scene, retired, 'Steep roofs mark the older lanes.', `${tier}: the retired tier template`);
+      }
+    }
   });
 
   test('a riverside port is described as an inland river port, never a seaport', () => {

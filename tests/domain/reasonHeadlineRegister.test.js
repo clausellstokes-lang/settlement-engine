@@ -88,15 +88,18 @@ describe('faction headline register — every faction candidateType has a gramma
     expect(missing, `faction candidateType(s) with no verb phrase (add to FACTION_VERB_PHRASES):\n  ${missing.join('\n  ')}`).toEqual([]);
   });
 
-  it('every verb phrase is grammatical (a hedged/applied twin, never a bare noun after "may")', () => {
+  it('every verb phrase is a deed in two aspects (under way / done), never a bare noun (THE HERALD SPEAKS IN DEEDS)', () => {
     for (const [type, vp] of Object.entries(FACTION_VERB_PHRASES)) {
-      expect(vp.may.length, `${type} .may empty`).toBeGreaterThan(0);
+      expect(vp.doing.length, `${type} .doing empty`).toBeGreaterThan(0);
       expect(vp.did.length, `${type} .did empty`).toBeGreaterThan(0);
-      // hedged and applied differ (the de-hedger twin).
-      expect(vp.did, `${type} .did must differ from .may`).not.toBe(vp.may);
+      // under way and done differ (the applied twin).
+      expect(vp.did, `${type} .did must differ from .doing`).not.toBe(vp.doing);
+      expect(vp.doing, `${type} .doing is not under way`).toMatch(/^is \w+ing\b/);
+      // anchored: the two length assertions above prove both phrases are live, non-empty words
+      expect(`${vp.doing} ${vp.did}`, `${type} speaks potential`).not.toMatch(/\b(may|might|could)\b/);
       // Not the old mechanical form (the bare candidateType noun).
       const bareNoun = type.replace(/^faction_/, '').replace(/_/g, ' ');
-      expect(vp.may, `${type} .may is the bare mechanical noun`).not.toBe(bareNoun);
+      expect(vp.doing, `${type} .doing is the bare mechanical noun`).not.toBe(bareNoun);
     }
   });
 

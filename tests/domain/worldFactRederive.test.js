@@ -128,6 +128,11 @@ const stride = (rows, n) => rows.filter((_, index) => index % n === 0);
  * scan deliberately cannot draw: the scan reports every file that NAMES the fact, and the reading
  * of each name is the chair's. The row is reported as this lane's finding rather than filtered
  * away, because a filter is how a stated radius stops being stated.
+ *
+ * 2026-10-02, the Voice Program wave 3 (ODQ §934.88): TWENTY-THREE. `src/generators/narrative/arrivalScene.js`
+ * reads the culture to choose the arrival scene's PEOPLE beat and its built detail, the reads that lived in
+ * narrativeGenerator.js's retired tier template before it (narrativeGenerator.js still reads culture elsewhere).
+ * A culture change re-composes the arrival paragraph, which is prose and moves no fact.
  */
 const CULTURE_READERS = Object.freeze([
   'src/generators/aiLayer.js',
@@ -141,6 +146,7 @@ const CULTURE_READERS = Object.freeze([
   'src/generators/generationContext.js',
   'src/generators/institutionProbability.js',
   'src/generators/isolationGenerator.js',
+  'src/generators/narrative/arrivalScene.js',
   'src/generators/narrativeGenerator.js',
   'src/generators/npc/generatedNpcTitle.js',
   'src/generators/npcGenerator.js',
@@ -352,8 +358,12 @@ describe('EM-B2b — world facts by consequence: the route, the refusals and the
     // (the stride loop below passed under the new master), which is the claim; a lane re-recording is still a STOP.
     // Then the druid rulings (ODQ §934.86 addendum 2), each through the door by the CHAIR: fd2cf1db.. -> 48f733d8.. (7c51ffec8)
     // -> bf978de7.. (72c97b788, J33) and aefaf169.. -> 8f02a2e6.. (baebe2cda) -> 7990bbfb.. (960d99a17, J33).
+    // Then the Voice Program wave 2 (ODQ §934.88), through the door by the CHAIR: bf978de7.. -> 238a6374.. (a7202d720),
+    // the arrival scene and the pressure sentence on their own streams; the prose manifest did not move.
+    // Then wave 3, the arrival scene as a place: 238a6374.. -> 74a4c58d.. (dc8a022e1). Then wave 4 block 1, the hook's
+    // structures: 74a4c58d.. -> f27114ca.. (6990709a0).
     expect(shaOfFile(GOLDEN), 'tests/fixtures/generator-golden-master.json moved')
-      .toBe('bf978de7e574ef862be4b246f1d883ce2b7f6bfa2ee4343cd28792bd3697367e');
+      .toBe('f27114cae7ca43c921061917e66375daf24ce115a147444013b0651251368eae');
     expect(shaOfFile(PROSE_GOLDEN), 'tests/fixtures/dossier-prose-manifest-golden.json moved')
       .toBe('7990bbfbfcfb0672f83d1a37952f45d609dfe7d4835d361696c06c5fe9f5a4d7');
 
