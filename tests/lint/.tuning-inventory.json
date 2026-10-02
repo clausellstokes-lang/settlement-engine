@@ -7,10 +7,10 @@
     "    npx vitest run tests/lint/tuningRegister.walker.test.js",
     "The refreeze EXITS NON-ZERO by design; the proof is a separate ordinary run."
   ],
-  "measuredAtSha": "0316db3e62cb53e9245b18c8b3113204a732a95e",
-  "measuredBy": "urban-band chair, session 93391427",
-  "date": "2026-10-01",
-  "note": "Base red picked up under the owner do-it-all: the FP line landed pactRenewal.js CONVERSION_TUNING (GR-RENEWAL U3) and moved peaceTermsCatalog dependents without re-measuring the inventory; no tuning value is proposed and nothing is signed.",
+  "measuredAtSha": "b616f9b79505372f085ebd3af120da4a1fefdfb3",
+  "measuredBy": "fp-chair-93391427",
+  "date": "2026-10-02",
+  "note": "TREATY-VOICE-2 U2 (27554a388): treatyLifecycleVoice.js reads INTERVAL_WEEKS for the sub-year age bands (weeks and seasons on the treaty clock) — one new dependent, no value moved",
   "schemaVersion": 1,
   "trees": {
     "p1": [
@@ -4733,6 +4733,7 @@
         "src/domain/worldPulse/bandedStock.js",
         "src/domain/worldPulse/faithWitnessSource.js",
         "src/domain/worldPulse/treatyClock.js",
+        "src/domain/worldPulse/treatyLifecycleVoice.js",
         "src/domain/worldPulse/vengeanceLicense.js",
         "src/domain/worldPulse/worldState.js"
       ],
@@ -4743,6 +4744,7 @@
         "src/domain/worldPulse/bandedStock.js",
         "src/domain/worldPulse/faithWitnessSource.js",
         "src/domain/worldPulse/treatyClock.js",
+        "src/domain/worldPulse/treatyLifecycleVoice.js",
         "src/domain/worldPulse/vengeanceLicense.js",
         "src/domain/worldPulse/worldState.js"
       ]
