@@ -135,11 +135,19 @@ const FIXTURE_INPUT_FILES = Object.freeze([
  *     roster.
  *   warRemembranceReader:136 — a UI HEADING used as an `expectAbsentWithAnchor` anchor, which
  *     the matcher aligns against a power-leaf variant by coincidence. Not corpus prose.
+ *   treatyVoiceCure:157 — ADDED 2026-10-01 (the urban-band chair, a base red picked up under the
+ *     owner's "do it all"; vetoable). A NEWS HEADLINE minted by a code template
+ *     (src/domain/worldPulse/treatyLifecycleVoice.js, "The pact between {obligee} and {obligor} has
+ *     run out"), which the matcher aligns against DS-ECO-11's partiallyExploited vid 3 at EXACTLY the
+ *     18-character floor. Generator text, never drawn, the same class as the first two rows. The
+ *     "never add a file" law stops new DRAWN-prose anchors; a false positive is carried with its
+ *     reason rather than split into sub-floor pieces to slip past the matcher.
  */
 const FROZEN_LITERAL_ANCHORS = Object.freeze({
   'tests/domain/magicRegimeLifecycle.test.js': 1,
   'tests/domain/settlementLifecycleFirstClass.test.js': 1,
   'tests/domain/stressorAftermath.test.js': 1,
+  'tests/domain/treatyVoiceCure.test.js': 1,
   'tests/lint/dossierMountRegistry.walker.test.js': 1,
   'tests/lint/economyReadModelCoverage.walker.test.js': 1,
   'tests/lint/envoyKindPools.walker.test.js': 1,

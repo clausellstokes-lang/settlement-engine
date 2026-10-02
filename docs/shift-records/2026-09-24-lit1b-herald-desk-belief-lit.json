@@ -1,0 +1,16 @@
+{
+  "_doc": "SIGNED 2026-09-24 by the FP chair (session 87797a6a, Fable 5.1) under the owner's delegation, quoted verbatim in `ownerWords`: the signature is the chair's execution of this re-record at LIT-1b's pick onto fp/integration-2026-09-23, which names this file, its one cause and its seat. THE SHIFT RECORD FOR ONE LIGHTING CAUSE: LIT-1b (546e1ddb6 on fp/lit-1b) lights FP_LIT_BELIEF (beliefAxes, believedConditions, believedScarcity) in full_simulation (and dramatic_campaign, living_realm), so the belief chain SIGNS a pact in year one of the rr-fresh-full|1 row and a `signed` beat enters the knowledge desk's Herald. The dark run reproduces the recorded value (the LIT-1b seat's measurement with IN-5's own projection, findings/LIT-1b-REPORT.md finding 1). A behaviour shift of the lighting, stated, never silent: no band, weight or threshold moves; the same-seed result of a LIT preset changes because a layer that was dark now acts (J-EM-16, the lit law). predictedRows 243 is the produced row count of the re-captured manifest, measured with tests/helpers/heraldDeskGolden.js (heraldDeskProjection + heraldDeskManifest) in a plain node run BEFORE the door and written here before the write. A successor chair does not inherit this signature: it re-confirms in its own chat.",
+  "ownerWords": "\"no just build it all shipped lit\" · \"then do everything else\" · \"alright do everything according to your judgement.\" (2026-09-23, ODQ §934.84) · \"Again, I leave all judgment to you\" (2026-09-24)",
+  "ownerDate": "2026-09-24",
+  "odqRow": "§934.84 (the FP lighting signature — the cause every FP lighting pick cites) and §934.47 addendum 133 (goldens re-record with their cause stated); the trailer cites §934.84",
+  "cause": "ONE CAUSE: 546e1ddb6, LIT-1b (FP_LIT_BELIEF lit in full_simulation; FP-24's perfect_delayed on dramatic_campaign) — rr-fresh-full|1 contentSha256 d3513ef1… → a69c75ab…, a signed pact beat in year one; the manifest keeps 243 rows: itemCount 240 → 241 and 23 section keys re-dealt (23 leave, 23 join) as the lit belief chain re-orders the year-one news; measured with the projection helper before this record was signed",
+  "seat": "the FP chair (session 87797a6a, Fable 5.1) executes the re-record at the pick; the LIT-1b seat (Opus 5.5, lane fp/lit-1b) measured the move twice (lit and dark) with IN-5's projection helper and reported it as a STOP; judgment FP-28 rules the re-record",
+  "surfaces": [
+    {
+      "surface": "herald-knowledge-desk-golden",
+      "action": "re-record",
+      "predictedRows": 243,
+      "proofForm": "derived-artefact"
+    }
+  ]
+}

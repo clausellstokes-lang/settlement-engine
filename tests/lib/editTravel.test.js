@@ -1,5 +1,5 @@
 /**
- * editTravel.test.js — EM-B3a acceptance cases A3, A7, A8. ARCH §8 instrument 8.
+ * editTravel.test.js — EM-B3a cases A3, A7, A8; EM-B3d case A6. ARCH §8 instrument 8.
  *
  * HZ-TRAVEL, PROVED AT RUNTIME: the settlement editor's two persisted keys —
  * `dmLayer` and `decrees` — travel NOWHERE. Not into a fork, not into an import,
@@ -16,6 +16,8 @@
  * `EM-B2a` (the layer's writer) and `EM-C1` (the registry's) land AFTER this packet and depend on it,
  * which is why every case below runs on HAND-PLANTED fixtures through code that
  * already exists.
+ * ⭐ AMENDED BY EM-C4a: A5b is the ONE case that does not, by design — it drives a layer
+ * WRITTEN BY `src/store/editSlice.js` (never `src/domain/edit/**`) through all five surfaces.
  *
  * @enforced-by this test
  */
@@ -36,6 +38,10 @@ import { buildAccountExport } from '../../src/lib/accountData.js';
 import { SAMPLE_SETTLEMENTS, forkConfigFor, forkSeedFor } from '../../src/data/sampleSettlements.js';
 import { generateSettlementPipeline } from '../../src/generators/generateSettlementPipeline.js';
 import { expectAbsentWithAnchor } from '../helpers/anchoredNegatives.js';
+import { prepareSettlementEntry, ensureNormalizeLoaded } from '../../src/lib/accountImport.js';
+import { partializeStoreState, PERSIST_KEY } from '../../src/store/persistProjection.js';
+import { applyPlainEditToDraft, rootKeyFor } from '../../src/store/editSlice.js';
+import { makeOp } from '../../src/domain/edit/operations.js';
 
 /** An OPAQUE dmLayer: one nested object, one order-observable array. */
 const dmLayerFixture = () => ({
@@ -72,9 +78,24 @@ const saveRow = (id, settlement) => ({
   config: { settType: settlement.tier }, campaignState: null, versionHistory: [],
 });
 
+/** ONE version-history element, the shape `recordSnapshotAction` writes: a whole
+ *  settlement under a labelled, timestamped envelope (EM-B3e). */
+const snapshot = (id, settlement) => ({
+  id, ts: '2026-01-01T00:00:00.000Z', kind: 'manual', label: `snap ${id}`, settlement,
+});
+
 function expectByteEqual(actual, expected) {
   expect(actual).toEqual(expected);
   expect(JSON.stringify(actual)).toBe(JSON.stringify(expected));
+}
+
+/** Freeze a value and everything it nests, children first, so a write into the live store
+ *  THROWS in this module's strict mode instead of being inherited by an expectation taken
+ *  after the call. The fixtures below are acyclic by construction. */
+function deepFreeze(value) {
+  if (!value || typeof value !== 'object') return value;
+  for (const inner of Object.values(value)) deepFreeze(inner);
+  return Object.freeze(value);
 }
 
 describe('EM-B3a — neither editor key reaches a public projection, in either mode', () => {
@@ -214,5 +235,373 @@ describe('EM-B3a — HZ-TRAVEL: a fork, a backup export and a realm snapshot car
     expect(snapshot.chronicle[0].headlines[0].headline).toBe('The market reopens');
     expect(serializedSnapshot.includes('"dmLayer"')).toBe(false);
     expect(serializedSnapshot.includes('"decrees"')).toBe(false);
+  });
+
+  test('A6 — the IMPORT, the fourth surface this suite has always claimed, executed end to end', async () => {
+    // ⭐ THE ARM THE DOCBLOCK ALREADY PROMISED. Design §12 item 4 names a fork, an
+    // IMPORT and the gallery projection; A7 above executes fork, backup export and
+    // realm snapshot. EM-B3a discharged the import row by REASONING ("the source is
+    // already veiled"), which was correct and is not a runtime proof of the surface.
+    // EM-B3d's strip makes it drivable, and this drives it. `prepareSettlementEntry`
+    // is the one import door reachable headlessly, and it is the door the account
+    // file, the reconciliation session and accountImportBody all route through.
+    await ensureNormalizeLoaded();
+    // `importedAt` is PINNED. Unpinned, the door stamps `new Date().toISOString()`, so
+    // two runs differ by a millisecond and the byte-exact half below would be a flake.
+    const META = { importedAt: '2026-01-01T00:00:00.000Z', sourceName: 'keeper-export' };
+    const edited = prepareSettlementEntry(
+      { name: 'Ashford', tier: 'town', settlement: editedSettlement() }, META,
+    );
+    expect(edited.ok).toBe(true);
+
+    // Anchored: the door demonstrably RAN and demonstrably READ the record — the name,
+    // the tier, an institution and the import stamp all survive — so the two absences
+    // below measure an omission rather than an entry that was never built.
+    expect(edited.entry.name).toBe('Ashford');
+    expect(edited.entry.tier).toBe('town');
+    expect(edited.entry.settlement.institutions).toEqual([{ id: 'inst.market', name: 'Market' }]);
+    expect(edited.entry.settlement.importedFrom.source).toBe('account-export');
+
+    // Neither key survives at ANY depth of the prepared entry.
+    const serializedEntry = JSON.stringify(edited.entry);
+    expect(serializedEntry.includes('"dmLayer"')).toBe(false);
+    expect(serializedEntry.includes('"decrees"')).toBe(false);
+
+    // Every sibling survives BYTE-EXACT beside the two omissions: the SAME settlement
+    // imported WITHOUT the editor keys lands on the identical entry, so the strip took
+    // exactly those two and moved nothing else anywhere through the door.
+    const plain = { ...editedSettlement() };
+    delete plain.dmLayer;
+    delete plain.decrees;
+    const unedited = prepareSettlementEntry(
+      { name: 'Ashford', tier: 'town', settlement: plain }, META,
+    );
+    expect(unedited.ok).toBe(true);
+    expectByteEqual(edited.entry, unedited.entry);
+  });
+
+  test('B1 — the IMPORT at the configuration the product uses: every settlement the restored timeline nests is stripped too', async () => {
+    // ⭐ EM-B3e. A6 above drives the door at its DEFAULT, where the lifecycle resets and
+    // no timeline can arrive. The product's own account door (accountImportBody.js) passes
+    // `restoreLifecycle: true`, and on that path the restored history rides in VERBATIM —
+    // a whole settlement per snapshot, one `revertToSnapshot` away from the live record.
+    await ensureNormalizeLoaded();
+    const META = {
+      importedAt: '2026-01-01T00:00:00.000Z', sourceName: 'keeper-export', restoreLifecycle: true,
+    };
+    const prepared = prepareSettlementEntry({
+      name: 'Ashford',
+      tier: 'town',
+      settlement: editedSettlement(),
+      versionHistory: [snapshot('v1', editedSettlement()), snapshot('v2', editedSettlement())],
+    }, META);
+    expect(prepared.ok).toBe(true);
+
+    // Anchored: the keeper's timeline is still THERE and still THEIRS — both snapshots, both
+    // labels, in order, each keeping every other key it arrived with — and the entry itself
+    // demonstrably carries the world, so the two absences below measure an omission rather
+    // than an emptied entry or a dropped history.
+    expect(prepared.entry.versionHistory).toHaveLength(2);
+    expect(prepared.entry.versionHistory.map((element) => element.label)).toEqual(['snap v1', 'snap v2']);
+    expect(prepared.entry.versionHistory[0].settlement.institutions)
+      .toEqual([{ id: 'inst.market', name: 'Market' }]);
+    expect(prepared.entry.name).toBe('Ashford');
+    expect(prepared.entry.tier).toBe('town');
+    expect(prepared.entry.settlement.importedFrom.source).toBe('account-export');
+
+    // Neither key survives at ANY depth of the prepared entry — the live settlement and
+    // both snapshots alike.
+    const serializedEntry = JSON.stringify(prepared.entry);
+    expect(serializedEntry.includes('"dmLayer"')).toBe(false);
+    expect(serializedEntry.includes('"decrees"')).toBe(false);
+  });
+
+  test('B2 — the EXPORT, the parity arm: a timeline leaves the account stripped beside the live settlement', () => {
+    // ⭐ EM-B3e, the way OUT. A7 above proves the live settlement; `withoutEditState`
+    // replaced only that one, so an edited snapshot rode the owner's own backup whole.
+    const edited = {
+      ...saveRow('save-edited', editedSettlement()),
+      versionHistory: [snapshot('v1', editedSettlement())],
+    };
+    const payload = buildAccountExport({
+      auth: { user: { email: 'keeper@example.com' }, displayName: 'Keeper', tier: 'free' },
+      savedSettlements: [edited],
+      campaigns: [],
+    });
+    const serializedExport = JSON.stringify(payload);
+
+    // Anchored: the export demonstrably carries the save, its name and its timeline, so the
+    // two absences below are measuring an omission rather than an empty export.
+    expect(payload.settlements).toHaveLength(1);
+    expect(payload.settlements[0].name).toBe('Ashford');
+    expect(payload.settlements[0].versionHistory).toHaveLength(1);
+    expect(payload.settlements[0].versionHistory[0].label).toBe('snap v1');
+    expect(serializedExport.includes('"dmLayer"')).toBe(false);
+    expect(serializedExport.includes('"decrees"')).toBe(false);
+
+    // Every sibling survives BYTE-EXACT at BOTH levels: the omission is surgical, and the
+    // surviving key order is the entry's own and the snapshot's own.
+    const expectedEdited = JSON.parse(JSON.stringify(edited));
+    delete expectedEdited.settlement.dmLayer;
+    delete expectedEdited.settlement.decrees;
+    delete expectedEdited.versionHistory[0].settlement.dmLayer;
+    delete expectedEdited.versionHistory[0].settlement.decrees;
+    expectByteEqual(payload.settlements[0], expectedEdited);
+  });
+
+  test('B3 — DORMANCY with a timeline present: both doors hand back the very objects they were given', async () => {
+    // ⭐ THE DORMANCY PROOF, now with a history. No writer of either key exists at this
+    // commit, so this is the case 100% of real records take on both doors; a copy-always
+    // walk would silently move the bytes of every export and every import ever taken.
+    await ensureNormalizeLoaded();
+    const META = {
+      importedAt: '2026-01-01T00:00:00.000Z', sourceName: 'keeper-export', restoreLifecycle: true,
+    };
+
+    // (i) an export row carrying neither key anywhere, with a two-element history.
+    const plainHistory = [snapshot('v1', uneditedSettlement()), snapshot('v2', uneditedSettlement())];
+    const unedited = Object.freeze({
+      ...saveRow('save-plain', uneditedSettlement()), versionHistory: plainHistory,
+    });
+    const payload = buildAccountExport({
+      auth: { user: { email: 'keeper@example.com' }, displayName: 'Keeper', tier: 'free' },
+      savedSettlements: [unedited],
+      campaigns: [],
+    });
+    // Anchored: the export really carried the row and its timeline before identity is claimed.
+    expect(payload.settlements[0].versionHistory).toHaveLength(2);
+    expect(payload.settlements[0]).toBe(unedited);
+    expect(payload.settlements[0].versionHistory).toBe(plainHistory);
+    expect(payload.settlements[0].versionHistory[1]).toBe(plainHistory[1]);
+
+    // (ii) the same row with an EMPTY history: the sibling of A7's pin.
+    const emptyHistory = { ...saveRow('save-empty', uneditedSettlement()), versionHistory: [] };
+    const emptied = buildAccountExport({
+      auth: { user: { email: 'keeper@example.com' }, displayName: 'Keeper', tier: 'free' },
+      savedSettlements: [emptyHistory],
+      campaigns: [],
+    });
+    expect(emptied.settlements[0]).toBe(emptyHistory);
+
+    // (iii) the import's admitted timeline, carrying neither key: the VERY array, every
+    // element by reference.
+    const admitted = [snapshot('v1', uneditedSettlement())];
+    const restored = prepareSettlementEntry({
+      name: 'Redhollow', tier: 'village', settlement: uneditedSettlement(), versionHistory: admitted,
+    }, META);
+    expect(restored.ok).toBe(true);
+    expect(restored.entry.versionHistory).toBe(admitted);
+    expect(restored.entry.versionHistory[0]).toBe(admitted[0]);
+
+    // (iv) an ABSENT and a NON-ARRAY history: nothing throws, and the admission's own reset
+    // rides through untouched.
+    const absent = prepareSettlementEntry({
+      name: 'Redhollow', tier: 'village', settlement: uneditedSettlement(),
+    }, META);
+    const nonArray = prepareSettlementEntry({
+      name: 'Redhollow', tier: 'village', settlement: uneditedSettlement(), versionHistory: 'nonsense',
+    }, META);
+    expect(absent.entry.versionHistory).toEqual([]);
+    expect(nonArray.entry.versionHistory).toEqual([]);
+  });
+
+  test('B5 — a MALFORMED timeline never throws and never swallows, on both doors', async () => {
+    // A hostile or legacy file can hand either door an array of anything. A bad neighbour
+    // must never shelter a real one, and no element may be dropped, reordered or copied.
+    await ensureNormalizeLoaded();
+    const malformed = () => ([
+      null, undefined, 'a string', 7, [], { id: 'no-settlement' },
+      { id: 'arr', settlement: [] }, { id: 'nul', settlement: null },
+      snapshot('good', editedSettlement()),
+    ]);
+    const META = {
+      importedAt: '2026-01-01T00:00:00.000Z', sourceName: 'keeper-export', restoreLifecycle: true,
+    };
+
+    const importedSource = malformed();
+    const imported = prepareSettlementEntry({
+      name: 'Ashford', tier: 'town', settlement: uneditedSettlement(), versionHistory: importedSource,
+    }, META);
+    const exportedSource = malformed();
+    const payload = buildAccountExport({
+      auth: { user: { email: 'keeper@example.com' }, displayName: 'Keeper', tier: 'free' },
+      savedSettlements: [{ ...saveRow('save-mal', uneditedSettlement()), versionHistory: exportedSource }],
+      campaigns: [],
+    });
+    const importedOut = imported.entry.versionHistory;
+    const exportedOut = payload.settlements[0].versionHistory;
+
+    // Length and order first: nothing was dropped and nothing was re-ordered.
+    expect(importedOut).toHaveLength(9);
+    expect(exportedOut).toHaveLength(9);
+
+    // The eight malformed elements come back BY REFERENCE on both doors. Collected, then
+    // asserted ONCE: a loop of expects reports a lower bound, never a count.
+    const importedRefs = importedOut.slice(0, 8).map((element, index) => element === importedSource[index]);
+    const exportedRefs = exportedOut.slice(0, 8).map((element, index) => element === exportedSource[index]);
+    expect(importedRefs).toEqual([true, true, true, true, true, true, true, true]);
+    expect(exportedRefs).toEqual([true, true, true, true, true, true, true, true]);
+
+    // Anchored: the one well-formed snapshot is still there, with its label and its world…
+    expect(importedOut[8].label).toBe('snap good');
+    expect(exportedOut[8].label).toBe('snap good');
+    expect(importedOut[8].settlement.institutions).toEqual([{ id: 'inst.market', name: 'Market' }]);
+    // …and it is still STRIPPED, on both doors, beside its eight bad neighbours.
+    expect(JSON.stringify(importedOut[8]).includes('"dmLayer"')).toBe(false);
+    expect(JSON.stringify(importedOut[8]).includes('"decrees"')).toBe(false);
+    expect(JSON.stringify(exportedOut[8]).includes('"dmLayer"')).toBe(false);
+    expect(JSON.stringify(exportedOut[8]).includes('"decrees"')).toBe(false);
+  });
+
+  test('B6 — the strip is a READ of the live store: a deep-frozen edited save exports stripped and comes back unmoved', () => {
+    // B2 above captures its expectation AFTER the export call, so a strip that wrote into
+    // the live rows in place would be inherited by that expectation and pass. Here the
+    // expectation is captured BEFORE the call and the store is DEEP-FROZEN: a read
+    // projection is never a write base, and an export is a read.
+    const live = {
+      ...saveRow('save-edited', editedSettlement()),
+      versionHistory: [snapshot('v1', editedSettlement())],
+    };
+    deepFreeze(live);
+    const beforeSerialized = JSON.stringify(live);
+
+    const payload = buildAccountExport({
+      auth: { user: { email: 'keeper@example.com' }, displayName: 'Keeper', tier: 'free' },
+      savedSettlements: [live],
+      campaigns: [],
+    });
+
+    // Anchored: the export demonstrably ran, carried the save and its timeline, and DID
+    // strip both keys, so the identity below measures a non-mutation and not a no-op.
+    expect(payload.settlements).toHaveLength(1);
+    expect(payload.settlements[0].name).toBe('Ashford');
+    expect(payload.settlements[0].versionHistory).toHaveLength(1);
+    expect(JSON.stringify(payload).includes('"dmLayer"')).toBe(false);
+
+    // The live store is BYTE-UNMOVED, and both keys are still on both of its levels.
+    expect(JSON.stringify(live)).toBe(beforeSerialized);
+    expect([
+      Object.hasOwn(live.settlement, 'dmLayer'),
+      Object.hasOwn(live.settlement, 'decrees'),
+      Object.hasOwn(live.versionHistory[0].settlement, 'dmLayer'),
+      Object.hasOwn(live.versionHistory[0].settlement, 'decrees'),
+    ]).toEqual([true, true, true, true]);
+  });
+
+  test('A5b — a REAL layer, written by EM-C4a\'s own writer, reaches no fork, no import, neither gallery projection, no export and no anonymous envelope', async () => {
+    // ⭐ THE CHARTER'S TRAIN EM-T7 STOP. Every case above plants its layer by hand,
+    // because the veil landed before the writer existed. EM-C4a IS that writer, so this
+    // case asks the only question a fixture cannot: does the layer the PRODUCT writes
+    // travel? The layer below is produced by `applyPlainEditToDraft` through the
+    // declaration table and the real dmLayer leaf; nothing here spells its interior.
+    await ensureNormalizeLoaded();
+    const SAVE_ID = 'save-real-layer';
+    const plain = { ...editedSettlement() };
+    delete plain.dmLayer;
+    delete plain.decrees;
+    const state = {
+      activeSaveId: SAVE_ID,
+      phase: 'draft',
+      savedSettlements: [{ id: SAVE_ID, name: 'Ashford' }],
+      settlement: plain,
+    };
+    const coords = rootKeyFor('npc', 'npc.varn', 'role');
+    const written = await applyPlainEditToDraft(
+      () => state,
+      (recipe) => { recipe(state); },
+      {
+        saveId: SAVE_ID,
+        op: makeOp('set-field', { kind: 'npc', id: 'npc.varn' }, { field: 'role', value: 'Warden' }),
+        rootKey: coords.key,
+        value: 'Warden',
+      },
+    );
+
+    // The writer really wrote, and the layer really is the product's own: its one root
+    // key and its value are the TRACERS every surface below is scanned for, which is a
+    // stronger question than the key NAME alone that the cases above ask.
+    expect(written.ok).toBe(true);
+    expect(written.keys).toEqual([coords.key]);
+    const edited = state.settlement;
+    expect(edited.dmLayer.roots[coords.key]).toBe('Warden');
+    const tracers = (text) => [coords.key, '"dmLayer"'].filter((needle) => text.includes(needle));
+    expect(tracers(JSON.stringify(edited))).toEqual([coords.key, '"dmLayer"']);
+
+    // ── (i) A FORK IS A FRESH GENERATION ────────────────────────────────────────────
+    const sample = SAMPLE_SETTLEMENTS.find((entry) => entry.id === 'sample-cnocby');
+    const forked = generateSettlementPipeline(forkConfigFor(sample), null, {
+      seed: forkSeedFor(sample, 'user-1234'), customContent: {},
+    });
+    expect(typeof forked.name).toBe('string');
+    expect(tracers(JSON.stringify(forked))).toEqual([]);
+
+    // ── (ii) THE IMPORT DOOR, at the configuration the product uses ─────────────────
+    const META = {
+      importedAt: '2026-01-01T00:00:00.000Z', sourceName: 'keeper-export', restoreLifecycle: true,
+    };
+    const imported = prepareSettlementEntry({
+      name: 'Ashford', tier: 'town', settlement: edited, versionHistory: [snapshot('v1', edited)],
+    }, META);
+    expect(imported.ok).toBe(true);
+    expect(imported.entry.name).toBe('Ashford');
+    expect(imported.entry.versionHistory).toHaveLength(1);
+    expect(imported.entry.settlement.institutions).toEqual([{ id: 'inst.market', name: 'Market' }]);
+    expect(tracers(JSON.stringify(imported.entry))).toEqual([]);
+
+    // ── (iii) BOTH GALLERY PROJECTIONS ──────────────────────────────────────────────
+    const shared = toPublicSafe(edited);
+    const full = toPublicSafe(edited, { full: true });
+    expect(shared.name).toBe('Ashford');
+    expect(full.npcs[0].secret).toBe('the reeve weighs the grain twice');
+    expect(full.npcs[0].role).toBe('Warden');
+    expect(tracers(JSON.stringify(shared))).toEqual([]);
+    expect(tracers(JSON.stringify(full))).toEqual([]);
+
+    // ── (iv) THE BACKUP EXPORT ──────────────────────────────────────────────────────
+    const payload = buildAccountExport({
+      auth: { user: { email: 'keeper@example.com' }, displayName: 'Keeper', tier: 'free' },
+      savedSettlements: [{ ...saveRow(SAVE_ID, edited), versionHistory: [snapshot('v1', edited)] }],
+      campaigns: [],
+    });
+    expect(payload.settlements).toHaveLength(1);
+    expect(payload.settlements[0].versionHistory).toHaveLength(1);
+    expect(payload.settlements[0].settlement.npcs[0].role).toBe('Warden');
+    expect(tracers(JSON.stringify(payload))).toEqual([]);
+
+    // ── (v) THE ANONYMOUS ENVELOPE, WHICH IS GATED AND NEVER STRIPPED ───────────────
+    // EM-B3a's own ruling (tests/store/decreeRegistryPersistence.test.js A6): the device
+    // slot is GATED on origin, not scrubbed. A layer can only exist on a SIGNED-IN
+    // account (EM-C4a §2.5: the executor refuses a command with no owner context before
+    // any writer), so the question this arm asks is the real one - does an account's
+    // edited world reach the shared device slot? Another tab's world is planted first,
+    // so the answer is measured against a live slot rather than an empty one.
+    const priorStorage = globalThis.localStorage;
+    const data = new Map();
+    globalThis.localStorage = {
+      getItem: (key) => data.get(String(key)) ?? null,
+      setItem: (key, value) => { data.set(String(key), String(value)); },
+      removeItem: (key) => { data.delete(String(key)); },
+      clear: () => data.clear(),
+    };
+    try {
+      const otherTab = { settlement: uneditedSettlement(), lastSeed: 'seed-other' };
+      globalThis.localStorage.setItem(PERSIST_KEY, JSON.stringify({ state: { anonDraft: otherTab }, version: 2 }));
+      const blob = partializeStoreState({
+        auth: { user: { id: 'keeper' } },
+        draftOrigin: 'account',
+        settlement: edited,
+        lastSeed: 'seed-edited',
+        config: { settType: 'town' },
+        displayPrefs: { theme: 'dark' },
+      });
+      // Anchored: the projection really ran and really re-emitted the OTHER tab's world,
+      // so the absence below is a refusal rather than an empty blob.
+      expect(blob.config).toEqual({ settType: 'town' });
+      expect(blob.anonDraft.settlement.name).toBe('Redhollow');
+      expect(tracers(JSON.stringify(blob))).toEqual([]);
+    } finally {
+      if (priorStorage === undefined) delete globalThis.localStorage;
+      else globalThis.localStorage = priorStorage;
+    }
   });
 });

@@ -153,7 +153,20 @@ function DashboardBody({ campaign, feed = { bySection: {} }, canManageCampaigns,
       {prose && campaign && (
         <div style={{ display: 'grid', gap: SP.md }}>
           <ChroniclersLetterPanel campaign={campaign} />
-          <AdvanceReport campaign={campaign} nameFor={nameFor} />
+          {/* EM-D3c (U43) — WHERE AN APPLIED DECREE'S CHRONICLE LINE LIVES. The report holds
+              the tick's receipt and the MOUNT owns the routing, so the address is supplied
+              here: EM-E2's own reference for a decree that recorded none (`decree:` and the
+              decree's own id) in the estate's hash-anchor form. It is the SAME address the
+              edit-mode registry page gives an applied entry — one decree, one place — and
+              the two spellings are held equal by advanceReportDecrees.test.jsx's own arm.
+              A receipt that names no decree gets no href, and so no dead link. */}
+          <AdvanceReport
+            campaign={campaign}
+            nameFor={nameFor}
+            chronicleHref={(cause) => (typeof cause?.decreeId === 'string' && cause.decreeId !== ''
+              ? `#chronicle-decree:${cause.decreeId}`
+              : null)}
+          />
           <WizardNewsPanel campaign={campaign} />
         </div>
       )}
@@ -223,6 +236,7 @@ export default function HeraldBody({
       war: 'War and diplomacy fills once a campaign is live.',
       faith: 'Faith and the pantheon fill once a campaign is live.',
       trade: 'Trade and treaties fill once a campaign is live.',
+      knowledge: 'What the courts believe fills once a campaign is live.',
       events: 'The realm\'s events fill once a campaign is live.',
       divination: 'The forecast reads a live campaign\'s rising pressures.',
       adjudication: 'Decisions await once a campaign\'s realm is live.',
@@ -281,6 +295,14 @@ export default function HeraldBody({
       <HeraldSection items={bySection.trade} worldState={campaign.worldState} nameById={nameById} emptyLead={focusEmpty('No trade shifted since the last turning. The roads run as they did.')} totalCount={totalFor('trade')} narrowing={narrowing}>
         <TreatyPanel campaign={campaign} nameById={nameById} />
       </HeraldSection>
+    );
+  }
+
+  // FP IN-5 — THE KNOWLEDGE DESK, the seventh routing section: its items render through the same
+  // report surface as the other content doors. It carries no live block of its own.
+  if (section === 'knowledge') {
+    return (
+      <HeraldSection items={bySection.knowledge} worldState={campaign.worldState} nameById={nameById} emptyLead={focusEmpty('No word of what the courts believe since the last turning.')} totalCount={totalFor('knowledge')} narrowing={narrowing} />
     );
   }
 

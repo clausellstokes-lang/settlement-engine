@@ -274,7 +274,11 @@ describe('golden: seeded port settlements across tiers', () => {
     // Seed verified to roll 'Airship docking (high magic)' AND have the
     // cascadePass airship override add 'Docks/port facilities' despite the
     // isolated route — exactly the roster that used to trip the spurious
-    // "Dock facilities require navigable water" viability warning.
+    // "Dock facilities require navigable water" viability warning. Re-probed after the
+    // urban-band registry (2026-09-30, ODQ §934.86) re-ordered the catalog draws: -0 no
+    // longer rolls the airship; -1 is the first seed that rolls both again. Re-probed again on the
+    // window's final source (2026-10-01, the verifier's FIX 1 confined the cascade to its own tier):
+    // -1 no longer adds the docks, and -0 is again the first seed that rolls both.
     const s = gen(
       {
         settType: 'metropolis', culture: 'germanic', terrain: 'mountains',
@@ -290,9 +294,11 @@ describe('golden: seeded port settlements across tiers', () => {
   });
 
   test('river-route city with a barge company does not read as a port', () => {
-    // Re-probed after culture weighting changed institution draws. The roster
-    // carries the barge company and none of the real port institutions — the
-    // transport company itself must not register as harbour infrastructure.
+    // Re-probed after culture weighting changed institution draws, and again after the
+    // urban-band registry (2026-09-30, ODQ §934.86): -60 now rolls docks and a harbour master
+    // (both lawful on a river route), so it no longer isolates the barge company. -11 is the
+    // first seed whose roster carries the barge company and none of the real port
+    // institutions — the transport company itself must not register as harbour infrastructure.
     const s = gen(
       {
         settType: 'city',
@@ -300,7 +306,7 @@ describe('golden: seeded port settlements across tiers', () => {
         terrainOverride: 'riverside',
         tradeRouteAccess: 'river',
       },
-      'ports-river-60',
+      'ports-river-11',
     );
     const names = s.institutions.map((i) => i.name);
     expect(names).toContain('Barge and river transport company');

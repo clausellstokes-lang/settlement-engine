@@ -36,7 +36,9 @@
  * that authority whose only unique power would be to red a neighbouring lane for
  * landing TR-1 correctly. What this file asserts instead is the half of L2 that
  * is TRUE FOREVER: every TR flag is VIRTUAL, absent from DEFAULT_SIMULATION_RULES
- * and from every preset override spread.
+ * and so from every preset's defaults spread. Since LIT-0 (2026-09-24; J-EM-16,
+ * the lit law, LGT-C2 `432ff6441` the precedent) that is NO LONGER absence from
+ * the presets: a lighting unit declares the key `true` in the presets it names.
  *
  * @enforced-by this file
  */
@@ -134,14 +136,13 @@ function endingsWiredBullet(wave) {
 }
 
 /**
- * Every rule key any preset can put into a campaign's rules object.
+ * Every preset's RESOLVED rules object, as `[presetId, rules]` pairs.
  * `SIMULATION_RULE_PRESETS` is an OBJECT keyed by preset id, not an array — the
  * shape the engineGatedRuleKeys walker reads with `Object.values` too.
+ * @type {Array<[string, Record<string, unknown>]>}
  */
-const PRESET_RULE_KEYS = new Set(
-  Object.values(SIMULATION_RULE_PRESETS)
-    .flatMap((preset) => Object.keys(preset?.rules || {})),
-);
+const PRESET_RULES = Object.entries(SIMULATION_RULE_PRESETS)
+  .map(([id, preset]) => [id, preset?.rules || {}]);
 const DEFAULT_RULE_KEYS = new Set(Object.keys(DEFAULT_SIMULATION_RULES));
 
 /**
@@ -364,16 +365,34 @@ describe('TR-9c flag family: eight flags, the charter table, and the VIRTUAL law
     expect(TRADE_FLAG_LIGHTING_ROWS.map((row) => row.order)).toEqual([1, 2, 3, 4, 5, 6, 7, 8]);
   });
 
-  test('every TRADE flag is VIRTUAL — absent from the defaults and from every preset spread', () => {
-    const declared = TRADE_RULINGS_FLAG_KEYS.filter(
-      (key) => DEFAULT_RULE_KEYS.has(key) || PRESET_RULE_KEYS.has(key),
-    );
+  test('every TRADE flag is VIRTUAL — absent from the defaults, and lit only by a strict true in a preset', () => {
+    // ⭐ THE LIT LAW, AMENDED AT LIT-0 (2026-09-24): J-EM-16, the lit law (LGT-C2 `432ff6441` the
+    // precedent). This arm read "absent from the defaults AND from every preset spread" until the
+    // owner's word "shipped lit" (2026-09-23). VIRTUAL means ABSENT FROM DEFAULT_SIMULATION_RULES,
+    // and so from every preset's defaults spread and from the RULE_COMPARISON_KEYS derived from
+    // it, which is why a lit key re-labels no installed save and adds no byte to one; a lighting
+    // unit may then declare the key in the presets it names. A preset may NOT declare it dark:
+    // dark is ABSENT (CR-WR10-C refused the declared-false cure), so a declaration is `true`.
+    expect(DEFAULT_RULE_KEYS.size, 'the defaults surface emptied — the absence below would be vacuous')
+      .toBeGreaterThan(10);
+    expect(PRESET_RULES.length, 'the preset catalog emptied — the declaration scan would be vacuous')
+      .toBeGreaterThanOrEqual(5);
+    const inDefaults = TRADE_RULINGS_FLAG_KEYS.filter((key) => DEFAULT_RULE_KEYS.has(key));
+    // anchored: DEFAULT_RULE_KEYS is asserted populated above, so this is a measurement.
     expect(
-      declared,
+      inDefaults,
       'L2: every FP flag is VIRTUAL. A TRADE key that appears in DEFAULT_SIMULATION_RULES'
-      + ' or in a preset override spread costs every new campaign persisted bytes and'
-      + ' moves preset identity. Keep the key out of both surfaces and let'
-      + ' ENGINE_GATED_VIRTUAL_RULE_KEYS carry it instead.',
+      + ' costs every campaign persisted bytes and moves preset identity. Keep the key out of'
+      + ' the defaults and let ENGINE_GATED_VIRTUAL_RULE_KEYS carry it instead.',
+    ).toEqual([]);
+    const declaredDark = PRESET_RULES.flatMap(([id, rules]) => TRADE_RULINGS_FLAG_KEYS
+      .filter((key) => Object.prototype.hasOwnProperty.call(rules, key) && rules[key] !== true)
+      .map((key) => `${id}.${key} = ${JSON.stringify(rules[key])}`));
+    // anchored: PRESET_RULES is asserted non-empty above, so every preset's rules were read.
+    expect(
+      declaredDark,
+      'the lit law: a preset lights a TRADE key with a strict `true` or leaves it absent;'
+      + ' a declared false (or any non-true value) costs bytes and lights nothing.',
     ).toEqual([]);
   });
 

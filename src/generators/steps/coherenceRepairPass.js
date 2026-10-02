@@ -25,7 +25,7 @@ import { institutionalCatalog } from '../../data/institutionalCatalog.js';
 import { recordTrace } from '../../domain/trace.js';
 import { deriveIsolationSupport } from '../isolationSupport.js';
 import { applyTeleportationInfrastructure } from '../isolationGenerator.js';
-import { checkStructuralValidity } from '../structuralValidator.js';
+import { checkStructuralValidity, SPATIAL_FEATURES } from '../structuralValidator.js';
 import { registerStep } from '../pipeline.js';
 import { collapseUpgradeChains } from './assembleInstitutions.js';
 import {
@@ -38,8 +38,15 @@ import {
   institutionWouldBeImmediatelyEvicted,
 } from '../../data/institutionLadders.js';
 import {
+  nativeSemanticName,
   nativeSemanticNames,
 } from '../../domain/content/customContentSemanticAuthority.js';
+import { druidicFaithRole } from '../../domain/arcaneInstitutionIdentity.js';
+// Shared phrases hoisted once (train EM-T16's worker buy-back, judgment 214c): each is spelled here and referenced below; every emitted value is byte-identical.
+const COHERENCEREPAIRPASS = 'coherenceRepairPass';
+const DEPENDENCY_VIOLATION = 'dependency_violation';
+const EXCLUSION_VIOLATION = 'exclusion_violation';
+
 
 function institutionId(name) {
   return `institution.${slugify(name, { sep: '_', raw: true })}`;
@@ -47,6 +54,37 @@ function institutionId(name) {
 
 function normalizedName(value) {
   return String(value || '').trim().toLowerCase();
+}
+
+/**
+ * THE DEPENDENCY REPAIR'S CANDIDATES: the settlement's OWN tier block only (2026-09-30, the urban
+ * band, ODQ §934.86). Every tier block is complete now, so a lower tier holds only lesser scale
+ * rungs and different kinds, and adding one from there seated a town's 'Adventurers' charter hall'
+ * beside a city's own guilds in 6 of 200 cities and 12 of 200 metropolises. A requirement the
+ * block does not list by name is met by a row the block DOES list that implies it
+ * (SPATIAL_FEATURES: the city's 'Multiple adventurers' guilds' implies the charter hall), which
+ * is the validator's own evidence rule; tests/lint/institutionRegistry.walker.test.js L4 holds
+ * that every gate is satisfiable that way at every tier it rolls. The threat-defense plan keeps
+ * the wider window below: its per-tier fallbacks are authored.
+ * @param {string} tier
+ */
+function ownTierEntries(tier) {
+  const out = [];
+  for (const [category, group] of Object.entries(institutionalCatalog[tier] || {})) {
+    for (const [name, definition] of Object.entries(group || {})) {
+      out.push({ category, name, nativeTier: tier, ...definition });
+    }
+  }
+  return out;
+}
+
+/** Each missing name, then each own-tier row that implies one of them. */
+function dependencyOptions(entries, missing) {
+  const wanted = new Set(missing.map(normalizedName));
+  const implying = entries
+    .filter(entry => (SPATIAL_FEATURES[entry.name] || []).some(name => wanted.has(normalizedName(name))))
+    .map(entry => entry.name);
+  return [...missing, ...implying];
 }
 
 /**
@@ -135,7 +173,7 @@ function recordRepair(ctx, repair) {
   recordTrace(ctx, {
     targetType: 'institution',
     targetId: institutionId(repair.subject),
-    step: 'coherenceRepairPass',
+    step: COHERENCEREPAIRPASS,
     result: repair.action,
     causes: [{
       source: `coherence.${repair.type}`,
@@ -280,7 +318,7 @@ function recordUnrepairable(ctx, violation) {
   recordTrace(ctx, {
     targetType: 'condition',
     targetId: `condition.${violation.type}`,
-    step: 'coherenceRepairPass',
+    step: COHERENCEREPAIRPASS,
     result: 'observed_no_repair',
     causes: [{
       source: `structural.${violation.type}`,
@@ -303,8 +341,8 @@ function recordUnrepairable(ctx, violation) {
  */
 const REPAIRABLE_VIOLATION_TYPES = new Set([
   'access_violation',
-  'dependency_violation',
-  'exclusion_violation',
+  DEPENDENCY_VIOLATION,
+  EXCLUSION_VIOLATION,
 ]);
 
 /**
@@ -341,14 +379,14 @@ function repairHardViolations(ctx, entries, observed) {
         ) || changed;
         continue;
       }
-      if (violation.type === 'dependency_violation') {
+      if (violation.type === DEPENDENCY_VIOLATION) {
         const missing = Array.isArray(violation.missing)
           ? violation.missing
           : [];
         const added = addCandidate(
           ctx,
           entries,
-          missing,
+          dependencyOptions(entries, missing),
           'hard_dependency',
           `${violation.institution} requires a compatible supporting institution.`,
         );
@@ -363,7 +401,7 @@ function repairHardViolations(ctx, entries, observed) {
         }
         continue;
       }
-      if (violation.type === 'exclusion_violation') {
+      if (violation.type === EXCLUSION_VIOLATION) {
         changed = removeUnprotected(
           ctx,
           violation.institution,
@@ -387,6 +425,11 @@ function repairHardViolations(ctx, entries, observed) {
   }
 }
 
+// The step's OWN NAME stays spelled here as a literal, never hoisted to the const above:
+// tests/helpers/generationForkCensus.js :: declaredSymbols counts a step declaration by
+// the form /^[ \t]*registerStep[ \t]*\([ \t]*['\"`]/ and reads the name back from the RAW
+// source between those quotes, so a bound identifier here resolves to no declaration at all
+// (CI run 35826251599: 20 of 22).
 registerStep('coherenceRepairPass', {
   deps: ['factionCorrelationPass'],
   reads: [
@@ -408,6 +451,7 @@ registerStep('coherenceRepairPass', {
 }, ctx => {
   const before = ctx.institutions.map(institution => institution.name);
   const entries = catalogEntriesAtTier(ctx.tier);
+  const dependencyEntries = ownTierEntries(ctx.tier);
   ctx.generationRepairs = Array.isArray(ctx.generationRepairs)
     ? ctx.generationRepairs
     : [];
@@ -415,10 +459,10 @@ registerStep('coherenceRepairPass', {
   // One dedupe set for the whole step run — see repairHardViolations' contract.
   const observedUnrepairable = new Set();
   repairThreatDefense(ctx, entries);
-  repairHardViolations(ctx, entries, observedUnrepairable);
+  repairHardViolations(ctx, dependencyEntries, observedUnrepairable);
 
   applySubsumption(ctx.institutions, ctx, {
-    step: 'coherenceRepairPass',
+    step: COHERENCEREPAIRPASS,
     result: 'subsumed_after_repair',
   });
   collapseUpgradeChains(ctx.institutions);
@@ -454,9 +498,9 @@ registerStep('coherenceRepairPass', {
   // Transit infrastructure has the same dependency laws as every other
   // institution. Repair those dependencies after injection, then normalize the
   // roster once more before taking the persisted support measurement.
-  repairHardViolations(ctx, entries, observedUnrepairable);
+  repairHardViolations(ctx, dependencyEntries, observedUnrepairable);
   applySubsumption(ctx.institutions, ctx, {
-    step: 'coherenceRepairPass',
+    step: COHERENCEREPAIRPASS,
     result: 'subsumed_after_isolation_repair',
   });
   collapseUpgradeChains(ctx.institutions);
@@ -471,6 +515,17 @@ registerStep('coherenceRepairPass', {
   ctx.effectiveConfig._magicTradeOnly = isolationSupport.magicDependent === true;
 
   reconcileAddedRepairReceipts(ctx);
+
+  // J30 — A DRUID IS A PRIEST WHERE MAGIC DOES NOT WORK (the owner, 2026-10-01). The one
+  // chokepoint for the faction role: every catalog row has entered by now (assemble, cascade,
+  // faction correlation, the repairs above), and every reader of `priorityCategory` (the NPC
+  // offices, the history, the dossier, the map, the pulse) runs after it. A custom row is the
+  // author's and keeps its own role (nativeSemanticName answers '' for it).
+  const { magicEnabled } = ctx.generationContext.worldLaw;
+  for (const institution of ctx.institutions) {
+    const role = druidicFaithRole(nativeSemanticName(institution), magicEnabled);
+    if (role && institution.priorityCategory !== role) institution.priorityCategory = role;
+  }
 
   const after = ctx.institutions.map(institution => institution.name);
   if (JSON.stringify(before) !== JSON.stringify(after)) {

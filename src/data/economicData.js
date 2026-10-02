@@ -6,11 +6,26 @@
 // (TRADE_DEPENDENCY_NEEDS[inst.name] in economicGenerator), so every key must
 // be an exact institutionalCatalog.js name — enforced by tests/joins/goods.test.js.
 
+// Shared phrases hoisted once (train EM-T15's worker buy-back, judgment 203): each is spelled here and referenced below; the exported tables are byte-identical.
+const ALCHEMICAL_COMPONENTS = "alchemical components";
+const COMMODITY_EXCHANGE = "commodity exchange";
+const CROSSROADS_POSITION = "crossroads_position";
+const EMERGENCY_RESERVES = "emergency reserves";
+const FERTILE_FLOODPLAIN = "fertile_floodplain";
+const IRON_GRAIN_FUEL = "Iron + grain + fuel";
+const LONG_TERM_RECOVERY = "long-term recovery";
+const MEDICINAL_HERBS_SUPPLIES = "Medicinal herbs + supplies";
+const RELIGIOUS_SERVICES = "religious services";
+const SETTLEMENT_DEFENCE = "settlement defence";
+const SHIPBUILDING_TIMBER = "shipbuilding_timber";
+const TRADE_ACCESS_COMMODITIES = "Trade access + commodities";
+const TRADE_ACCESS_GRAIN = "Trade access + grain";
+
 export const TRADE_DEPENDENCY_NEEDS = {
       "Access to external mill": {
         resources: [
           "grain_fields",
-          "fertile_floodplain"
+          FERTILE_FLOODPLAIN
         ],
         label: "Grain",
         detail: "grain for milling",
@@ -22,7 +37,7 @@ export const TRADE_DEPENDENCY_NEEDS = {
       Mill: {
         resources: [
           "grain_fields",
-          "fertile_floodplain",
+          FERTILE_FLOODPLAIN,
           "river_mills"
         ],
         label: "Grain",
@@ -36,7 +51,7 @@ export const TRADE_DEPENDENCY_NEEDS = {
       "Mills (2-5)": {
         resources: [
           "grain_fields",
-          "fertile_floodplain",
+          FERTILE_FLOODPLAIN,
           "river_mills"
         ],
         label: "Grain + water power",
@@ -50,38 +65,38 @@ export const TRADE_DEPENDENCY_NEEDS = {
       "Town granary": {
         resources: [
           "grain_fields",
-          "fertile_floodplain"
+          FERTILE_FLOODPLAIN
         ],
         label: "Grain",
         detail: "grain reserves for storage",
         svcs: [
           "grain storage",
-          "emergency reserves"
+          EMERGENCY_RESERVES
         ]
       },
       "City granaries": {
         resources: [
           "grain_fields",
-          "fertile_floodplain"
+          FERTILE_FLOODPLAIN
         ],
         label: "Grain",
         detail: "grain reserves at scale",
         svcs: [
           "grain storage",
-          "emergency reserves",
+          EMERGENCY_RESERVES,
           "rationing"
         ]
       },
       "State granary complex": {
         resources: [
           "grain_fields",
-          "fertile_floodplain"
+          FERTILE_FLOODPLAIN
         ],
         label: "Grain",
         detail: "grain at metropolitan scale",
         svcs: [
           "grain storage",
-          "emergency reserves",
+          EMERGENCY_RESERVES,
           "rationing",
           "strategic reserve"
         ]
@@ -89,7 +104,7 @@ export const TRADE_DEPENDENCY_NEEDS = {
       "Subsistence farming": {
         resources: [
           "grain_fields",
-          "fertile_floodplain",
+          FERTILE_FLOODPLAIN,
           "grazing_land"
         ],
         label: "Farmland",
@@ -101,7 +116,7 @@ export const TRADE_DEPENDENCY_NEEDS = {
       "Common grazing land": {
         resources: [
           "grazing_land",
-          "fertile_floodplain"
+          FERTILE_FLOODPLAIN
         ],
         label: "Grazing land",
         detail: "pasture for common livestock",
@@ -114,7 +129,7 @@ export const TRADE_DEPENDENCY_NEEDS = {
       "Bakers (5-15)": {
         resources: [
           "grain_fields",
-          "fertile_floodplain"
+          FERTILE_FLOODPLAIN
         ],
         label: "Grain",
         detail: "grain for baking",
@@ -126,7 +141,7 @@ export const TRADE_DEPENDENCY_NEEDS = {
       Alehouse: {
         resources: [
           "grain_fields",
-          "fertile_floodplain"
+          FERTILE_FLOODPLAIN
         ],
         label: "Grain",
         detail: "grain for brewing",
@@ -138,7 +153,7 @@ export const TRADE_DEPENDENCY_NEEDS = {
       "Ale house": {
         resources: [
           "grain_fields",
-          "fertile_floodplain"
+          FERTILE_FLOODPLAIN
         ],
         label: "Grain",
         detail: "grain for brewing",
@@ -150,7 +165,7 @@ export const TRADE_DEPENDENCY_NEEDS = {
       "Taverns (5-20)": {
         resources: [
           "grain_fields",
-          "fertile_floodplain"
+          FERTILE_FLOODPLAIN
         ],
         label: "Grain",
         detail: "grain for brewing and baking",
@@ -163,7 +178,7 @@ export const TRADE_DEPENDENCY_NEEDS = {
       "Inns and taverns (district)": {
         resources: [
           "grain_fields",
-          "fertile_floodplain"
+          FERTILE_FLOODPLAIN
         ],
         label: "Grain",
         detail: "grain for district-scale hospitality",
@@ -238,7 +253,7 @@ export const TRADE_DEPENDENCY_NEEDS = {
         label: "Iron",
         detail: "iron for weapons and basic armour",
         svcs: [
-          "settlement defence",
+          SETTLEMENT_DEFENCE,
           "border patrol"
         ]
       },
@@ -274,7 +289,7 @@ export const TRADE_DEPENDENCY_NEEDS = {
           "grain_fields",
           "coal_deposits"
         ],
-        label: "Iron + grain + fuel",
+        label: IRON_GRAIN_FUEL,
         detail: "iron for armaments, grain for soldiers, fuel for forges",
         svcs: [
           "military garrison",
@@ -288,7 +303,7 @@ export const TRADE_DEPENDENCY_NEEDS = {
           "grain_fields",
           "coal_deposits"
         ],
-        label: "Iron + grain + fuel",
+        label: IRON_GRAIN_FUEL,
         detail: "iron, grain, and fuel for garrison operations",
         svcs: [
           "military garrison",
@@ -303,7 +318,7 @@ export const TRADE_DEPENDENCY_NEEDS = {
           "grain_fields",
           "coal_deposits"
         ],
-        label: "Iron + grain + fuel",
+        label: IRON_GRAIN_FUEL,
         detail: "iron, grain, and fuel for multiple garrisons",
         svcs: [
           "city defence",
@@ -344,7 +359,7 @@ export const TRADE_DEPENDENCY_NEEDS = {
         label: "Stone",
         detail: "quarried stone for wall construction and repair",
         svcs: [
-          "settlement defence",
+          SETTLEMENT_DEFENCE,
           "gate control"
         ]
       },
@@ -394,7 +409,7 @@ export const TRADE_DEPENDENCY_NEEDS = {
         label: "Stone",
         detail: "quarried stone for cathedral maintenance",
         svcs: [
-          "religious services",
+          RELIGIOUS_SERVICES,
           "pilgrimage",
           "theological education"
         ]
@@ -406,7 +421,7 @@ export const TRADE_DEPENDENCY_NEEDS = {
         label: "Stone",
         detail: "stone for metropolitan cathedral maintenance",
         svcs: [
-          "religious services",
+          RELIGIOUS_SERVICES,
           "pilgrimage centre",
           "diocesan administration"
         ]
@@ -414,7 +429,7 @@ export const TRADE_DEPENDENCY_NEEDS = {
       "Carpenter (part-time)": {
         resources: [
           "managed_forest",
-          "shipbuilding_timber"
+          SHIPBUILDING_TIMBER
         ],
         label: "Timber",
         detail: "raw timber for carpentry",
@@ -427,7 +442,7 @@ export const TRADE_DEPENDENCY_NEEDS = {
       "Carpenters (5-15)": {
         resources: [
           "managed_forest",
-          "shipbuilding_timber"
+          SHIPBUILDING_TIMBER
         ],
         label: "Timber",
         detail: "raw timber for carpentry at scale",
@@ -440,7 +455,7 @@ export const TRADE_DEPENDENCY_NEEDS = {
       },
       "Docks/port facilities": {
         resources: [
-          "shipbuilding_timber",
+          SHIPBUILDING_TIMBER,
           "managed_forest"
         ],
         label: "Timber",
@@ -453,7 +468,7 @@ export const TRADE_DEPENDENCY_NEEDS = {
       },
       Shipyard: {
         resources: [
-          "shipbuilding_timber",
+          SHIPBUILDING_TIMBER,
           "managed_forest",
           "iron_deposits"
         ],
@@ -506,7 +521,7 @@ export const TRADE_DEPENDENCY_NEEDS = {
         resources: [
           "grazing_land",
           "hunting_grounds",
-          "fertile_floodplain"
+          FERTILE_FLOODPLAIN
         ],
         label: "Livestock / game",
         detail: "live animals for slaughter",
@@ -553,7 +568,7 @@ export const TRADE_DEPENDENCY_NEEDS = {
         detail: "foraged herbs and botanical ingredients",
         svcs: [
           "potions",
-          "alchemical components",
+          ALCHEMICAL_COMPONENTS,
           "reagents"
         ]
       },
@@ -568,7 +583,7 @@ export const TRADE_DEPENDENCY_NEEDS = {
         detail: "herbs and metals for alchemical production at scale",
         svcs: [
           "potions",
-          "alchemical components",
+          ALCHEMICAL_COMPONENTS,
           "transmutation"
         ]
       },
@@ -582,7 +597,7 @@ export const TRADE_DEPENDENCY_NEEDS = {
         svcs: [
           "healing",
           "surgical care",
-          "long-term recovery"
+          LONG_TERM_RECOVERY
         ]
       },
       "Major hospital": {
@@ -591,12 +606,12 @@ export const TRADE_DEPENDENCY_NEEDS = {
           "ancient_grove",
           "managed_forest"
         ],
-        label: "Medicinal herbs + supplies",
+        label: MEDICINAL_HERBS_SUPPLIES,
         detail: "herbs and materials for hospital operations",
         svcs: [
           "healing",
           "surgical care",
-          "long-term recovery",
+          LONG_TERM_RECOVERY,
           "quarantine"
         ]
       },
@@ -606,7 +621,7 @@ export const TRADE_DEPENDENCY_NEEDS = {
           "ancient_grove",
           "managed_forest"
         ],
-        label: "Medicinal herbs + supplies",
+        label: MEDICINAL_HERBS_SUPPLIES,
         detail: "herbs and materials for city-wide hospital network",
         svcs: [
           "healing",
@@ -726,7 +741,7 @@ export const TRADE_DEPENDENCY_NEEDS = {
       "Caravan masters' exchange": {
         resources: [
           "precious_metals",
-          "crossroads_position"
+          CROSSROADS_POSITION
         ],
         label: "Capital + trade access",
         detail: "precious metals and trade access for exchange operations",
@@ -749,76 +764,76 @@ export const TRADE_DEPENDENCY_NEEDS = {
       },
       "Periodic market": {
         resources: [
-          "crossroads_position",
+          CROSSROADS_POSITION,
           "grain_fields"
         ],
-        label: "Trade access + grain",
+        label: TRADE_ACCESS_GRAIN,
         detail: "crossroads position and grain as primary traded commodity",
         svcs: [
           "market day trade",
-          "commodity exchange"
+          COMMODITY_EXCHANGE
         ]
       },
       "Weekly market": {
         resources: [
-          "crossroads_position",
+          CROSSROADS_POSITION,
           "grain_fields"
         ],
-        label: "Trade access + grain",
+        label: TRADE_ACCESS_GRAIN,
         detail: "trade access and grain for regular market",
         svcs: [
           "market day trade",
-          "commodity exchange",
+          COMMODITY_EXCHANGE,
           "craft sales"
         ]
       },
       "Market square": {
         resources: [
-          "crossroads_position",
+          CROSSROADS_POSITION,
           "grain_fields"
         ],
         label: "Trade access",
         detail: "trade access for permanent market",
         svcs: [
           "daily trade",
-          "commodity exchange",
+          COMMODITY_EXCHANGE,
           "craft sales"
         ]
       },
       "Multiple market squares": {
         resources: [
-          "crossroads_position",
+          CROSSROADS_POSITION,
           "grain_fields",
           "iron_deposits"
         ],
-        label: "Trade access + commodities",
+        label: TRADE_ACCESS_COMMODITIES,
         detail: "trade access and commodities for city markets",
         svcs: [
           "daily trade",
-          "commodity exchange",
+          COMMODITY_EXCHANGE,
           "wholesale",
           "retail"
         ]
       },
       "Daily markets": {
         resources: [
-          "crossroads_position",
+          CROSSROADS_POSITION,
           "grain_fields"
         ],
-        label: "Trade access + grain",
+        label: TRADE_ACCESS_GRAIN,
         detail: "trade access and grain for daily market operations",
         svcs: [
           "daily trade",
           "fresh produce",
-          "commodity exchange"
+          COMMODITY_EXCHANGE
         ]
       },
       "District markets (5-10)": {
         resources: [
-          "crossroads_position",
+          CROSSROADS_POSITION,
           "grain_fields"
         ],
-        label: "Trade access + commodities",
+        label: TRADE_ACCESS_COMMODITIES,
         detail: "trade access and commodities for district markets",
         svcs: [
           "district-level trade",
@@ -828,7 +843,7 @@ export const TRADE_DEPENDENCY_NEEDS = {
       },
       "International trade center": {
         resources: [
-          "crossroads_position",
+          CROSSROADS_POSITION,
           "deep_harbour"
         ],
         label: "Trade access + harbour",
@@ -843,7 +858,7 @@ export const TRADE_DEPENDENCY_NEEDS = {
         resources: [
           "fishing_grounds",
           "river_fish",
-          "shipbuilding_timber",
+          SHIPBUILDING_TIMBER,
           "managed_forest"
         ],
         label: "Fishing + timber",

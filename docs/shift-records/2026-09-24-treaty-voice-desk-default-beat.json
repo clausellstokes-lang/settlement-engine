@@ -1,0 +1,16 @@
+{
+  "_doc": "SIGNED 2026-09-24 by the FP chair (session 87797a6a, Fable 5.1) under the owner's delegation, quoted verbatim in `ownerWords`: the signature is the chair's execution of this re-record at the treaty-voice pick onto fp/integration-2026-09-23, which names this file, its one cause and its seat. THE SHIFT RECORD FOR ONE TREATY-VOICE CAUSE: CURE-TREATY-VOICE U1 (44591aa7b on fp/cure-treaty-voice, picked as d9c7ecb16) gives a pact signed in peace its own orientation kind ('negotiated', carrying both courts' names and no treaty-level direction), so the lapse and default beats of a peacetime pact now MINT — the knowledge desk's year-one Herald (rr-fresh-full|1) gains one default beat at tick 39 (the seat's measurement, its declared arm). A behaviour shift of the treaty voice, stated, never silent: no band, weight or threshold moves; a sentence that could not be spoken is now spoken. predictedRows (367) is the produced row count measured with tests/helpers/heraldDeskGolden.js in a plain node run BEFORE the door and written here before the write. A successor chair does not inherit this signature: it re-confirms in its own chat.",
+  "ownerWords": "\"no just build it all shipped lit\" · \"then do everything else\" · \"alright do everything according to your judgement.\" (2026-09-23, ODQ §934.84) · \"Again, I leave all judgment to you\" (2026-09-24)",
+  "ownerDate": "2026-09-24",
+  "odqRow": "§934.84 (the FP lighting signature) and §934.47 addendum 133 (goldens re-record with their cause stated); ruling FP-28 (once per cause) on the FP kit's board; the trailer cites §934.84",
+  "cause": "ONE CAUSE: 44591aa7b, CURE-TREATY-VOICE U1 (the negotiated orientation; lapse and default beats mint for peacetime pacts) — rr-fresh-full|1 gains one default beat at tick 39; the row count is measured before the door",
+  "seat": "the FP chair (session 87797a6a, Fable 5.1) executes the re-record at the pick; the TREATY-VOICE seat (Opus 5.5) measured the move at its base and declared it by row",
+  "surfaces": [
+    {
+      "surface": "herald-knowledge-desk-golden",
+      "action": "re-record",
+      "predictedRows": 367,
+      "proofForm": "derived-artefact"
+    }
+  ]
+}

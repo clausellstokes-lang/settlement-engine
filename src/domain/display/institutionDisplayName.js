@@ -89,6 +89,18 @@ export const INSTITUTION_DISPLAY_NAMES = Object.freeze({
   'Parish churches (50-100+)':  'Houses of worship (50-100+)',
   'Access to parish church':    'Access to a house of worship',
   'Parish burial grounds':      'Burial grounds',
+  // THE URBAN BAND (2026-09-30). These trades now carry ONE identity key from town to
+  // metropolis (the registry's cumulative law), and the key's count was only ever true of a
+  // town. The key stays the identifier every table joins on; the reader sees the trade.
+  'Bakers (5-15)':              'Bakers',
+  'Butchers (3-8)':             'Butchers',
+  'Carpenters (5-15)':          'Carpenters',
+  'Blacksmiths (3-10)':         'Blacksmiths',
+  'Mills (2-5)':                'Mills',
+  // The parentheticals below were CONDITIONS, and the registry now enforces both
+  // (`minPopulation: 10000`; `requiresAny: ['Town walls']`), so a reader needs the noun only.
+  'Cathedral (10,000+ only)':   'Cathedral',
+  'Gates (if walled)':          'Town gates',
 });
 
 /** Case-insensitive index, mirroring `identityForInstitution`'s tolerance. */

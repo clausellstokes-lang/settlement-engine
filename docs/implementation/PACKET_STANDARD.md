@@ -72,6 +72,13 @@ Only these statuses are valid:
 `READY except for`, `mostly ready`, and `ready after the implementer decides`
 are not statuses. They mean DRAFT or BLOCKED.
 
+⛔ The `Status` row carries its VALUE ALONE. Every stamp, caveat, condition and date belongs
+on the continuation lines beneath it. `parsePacketHeader` anchors the status at END-OF-LINE
+and takes it only when exactly one row matches, so a row with an appended clause parses as
+`null` and the packet refuses on a disagreement with its own manifest — which is the failure,
+not the annotation. The same law binds the `Verified base` row, and a packet that carried a
+trailing clause there returned `verifiedBase: null` with a real sha stamped.
+
 ## Machine-readable packet manifest
 
 [`PACKET_MANIFEST.json`](./PACKET_MANIFEST.json) is the structured projection of
@@ -86,6 +93,13 @@ and READY packets without executable checks. `npm run implementation:capsule --
 <ID>` emits a deterministic READY-only coding capsule containing hashes and symbol
 evidence. It is the structured component of the sealed dispatch bundle below;
 architecture and queue documents remain coordinator inputs, not coding authority.
+
+⛔ A packet's §7 change-manifest TABLE and its JSON `changeManifest` are SET-EQUAL on paths
+and on actions, and the coordinator's placement refuses when they are not. A path in §7 and
+not in the capsule is a MODIFY the seal never declares, so preflight never proves it clean; a
+path in the capsule and not in §7 is an edit the coding agent was never instructed to make.
+Members are compiled CAPSULE-FIRST and the table is generated from it, never typed twice. One
+waiting packet disagreed on seven paths, including a modify of a file at zero line headroom.
 
 ## Sealed dispatch and handoff lifecycle
 
@@ -115,6 +129,49 @@ symbol was there at dispatch, so `validate:packets` reports such a burn as a pri
 instead of an error, while a seal naming another packet, another worktree, a payload its
 integrity digest no longer matches, or a HEAD that is not an ancestor of this tree licenses
 nothing and the refusal stands.
+
+That same seal also answers the `requiredSymbols` rows OTHER packets hold on the retiree. A
+`READY` packet holding a valid seal in this worktree discharges those rows exactly as its
+`LANDED` state would (§379.2), and each such discharge is a printed note naming the sealing
+packet — a note rather than a silence because the discharge is provisional: it lasts as long
+as the seal and becomes an ordinary `LANDED` discharge at the flip. Without it a sealed build
+that moves a symbol a landed packet requires cannot run `validate:packets`, `check:packet` or
+`implementation:resume` after its own edits, so the packet is unbuildable rather than wrong.
+The five fences above are the same five, applied by the same reader; a `DRAFT` retirement, an
+unsealed `READY` one, and a packet naming one pair as both required and retired discharge
+nothing, and a row whose symbol is still present is never discharged or noted at all.
+
+When the branch has moved under a paused session — dispatch refusing because the capsule
+exists while `check:packet` and `resume` refuse because that capsule's sealed HEAD drifted —
+`npm run implementation:dispatch -- --reseal <ID>` archives the prior capsule by rename under
+`<ID>.sealed-at-<short head>` (never overwriting and never deleting; `-2`, `-3`, … on
+collision) and then runs the ordinary dispatch, sealing afresh at HEAD with `resealedFrom`
+recorded in the new `dispatch.json`; it refuses, before any rename, unless a capsule exists,
+the packet is READY, and the tree is Git-clean.
+
+⛔ **A SEAL BINDS THREE THINGS: THE HEAD IT WAS TAKEN AT, THE BRANCH, AND THE BYTES OF THE WHOLE PACKET MANIFEST**
+(`seal.authority.manifestSha256`). A worktree moved under a live seal refuses at `assertImplementationScope` section
+(e) with `sealed HEAD or branch drifted`, and ANY commit to a live lane branch — even a docs-only one by the
+coordinator — refuses with `implementation authority drifted`. Both were measured on one afternoon: a coordinator
+fast-forward of four live lane worktrees, and a manifest repair on a branch whose lane was mid-build (2026-09-21).
+
+⛔ **A RE-SEAL IS POSSIBLE ONLY WHILE THE BUILD IS UNCOMMITTED.** The cure is to withdraw the staged build to a
+patch, run `--reseal` on the clean tree, and re-apply the patch BYTE-IDENTICAL, proven by the `sha256` of the staged
+diff before and after — never by moving the worktree back, which discards the commit the move was made for. Once the
+staged index has been COMMITTED, the build's own paths are committed substrate — a CREATE target now exists and a
+declared target has moved since the verified base — so `--reseal` refuses with `verified-base descendant changed
+declared substrate`, and a new version needs the branch REWOUND to its last packet commit, the version applied
+there, a fresh seal, and the build re-staged byte-equal. ⭐ A CURE made after that commit is committed ON TOP OF THE
+BUILD COMMIT, as a MODIFY of the file the build created: a cure cut from the rewound seal head is an ADD of the whole
+file and reaches a train as an add/add conflict. Authority: `OWNER_DECISION_QUEUE.md` §934.47 addendum 127.
+
+A sealed build DISPATCHES ON THE PACKET'S OWN LANE BRANCH. The capsule is keyed to the
+WORKTREE's git dir (`.git/worktrees/<lane>/implementation-sessions/<ID>`), never to the
+repository, so parallel lanes cannot collide on it and the "capsule already exists" refusal is
+per-worktree. The branch is read from the packet's own Markdown header and validated only as a
+token; the JSON manifest has no branch field. MEASURED, not reasoned: dispatch on a lane
+branch cut at a train's promotion commit exits 0 with zero bytes of stderr.
+Authority: `OWNER_DECISION_QUEUE.md` §934.47 addendum 124.
 
 Dispatch and resume do not create/delete worktrees, stage, commit, merge, restore,
 clean files, infer affected tests, or interpret or waive semantic line budgets.
@@ -156,8 +213,40 @@ both TypeScript ratchets at their exact floors, the observed-shape count exact,
 scoped eslint, and any walker it touches either green or a **named** red.
 
 **What moves to the terminal, and only these:** the bare full gate, the boot
-smoke, the whole-census re-derivation, and the ledger row — one row narrating the
-train with per-member sub-entries.
+smoke, the whole-census re-derivation — every global aggregate, the lighting
+census and `docs/content/wiring-census.json` alike — ONE SUMMED BYTE PRICE, and
+the ledger row, one row narrating the train with per-member sub-entries.
+
+⛔ **The summed byte price is one real `npm run build` with per-module
+attribution over the composed tip, and at most ONE re-mint of a ceiling, which
+the coordinator approves as a priced act.** A member states its PREDICTED price
+and a membership proof that imports the exported set, reads no `dist` and
+therefore cannot skip; its dist-reading byte ARMS leave the sealed `checks`,
+because a skipped arm proves nothing and a `check:packet` exit 0 does not
+promote it. N members that each proved zero bytes independently can still SUM to
+a refusal — and a refusal truncates the train to its green prefix. It never
+raises a ceiling (ODQ §934.47 addendum 120).
+
+⛔ **ONE BYTE-ARM HOLDER PER TRAIN.** Within one train a budget's own TEST row is
+carried by exactly ONE member, the train's byte-arm holder, named by the
+coordinator at the pre-proof; every other member that moves the same budget
+carries NO row on that path, states its own predicted delta against the holder's
+bound, and names the holder, whose bound covers the train's SUM. A budget test
+is not a row-keyed register, so two members naming it refuse at placement — the
+refusal `duplicate change path across packets` was measured on a four-member
+train before it reached a build. A member compiles as if it is NOT the holder
+unless told otherwise. ⛔ Where a budget's arm RUNS never changes WHO RESERVES
+THE PATH: two packets that each owe a row on one budget file still may not ride
+one train. Authority: `OWNER_DECISION_QUEUE.md` §934.47 addendum 124.
+
+⛔ **A MEMBER THAT CARRIES RETIRED SYMBOLS LANDS LAST, AND ITS FLIP IS THE VERY
+NEXT COMMIT.** Its implementation commit is composed last among its train's
+members, and nothing is validated, checked, pushed or fast-forwarded between the
+code and the flip. There is no squash: no script reads `landedAt`, so the rule
+is the adjacency, not one commit. This is lawful only because the cross-packet
+discharge is seal-aware — see the sealed dispatch lifecycle above — and the
+repair for a landed row that blocks a move is to the INSTRUMENT, never a wrapper
+idiom that keeps the old declaration lines alive.
 
 **Interior reds must be named in the train plan before they exist.** An interior
 commit may carry a precomputed exact red — most commonly a census walker that
@@ -180,6 +269,70 @@ and never land past unexplained red.
 is untouched — so it rides alone or as the FIRST member of a train whose
 remaining members are no-flag slices of that same flag. No cross-volume trains
 until two same-volume trains have landed clean.
+
+⭐ **A PARALLEL TRAIN IS THE STANDING SHAPE, PROVEN BY EXECUTION.** A one-member probe train
+carried its packet through the whole chain on its own lane branch and landed it; the next
+train carried FOUR members built at the same time under four seals on four lane branches and
+landed them as one, with one lighting refreeze, one census regeneration, one summed byte price
+and one full check at its terminal (2026-09-21).
+
+A parallel train cuts a TRAIN BRANCH at the green integration tip and flips N path-disjoint,
+mutually independent members to READY in ONE promotion commit; the lane branches are cut FROM
+that commit, because N separate placements collide in `PACKET_MANIFEST.json`'s array tail and
+in `INDEX.md`'s tables, files in no member's own manifest. Each member's Markdown header names
+ITS OWN lane branch at the train base's sha, each lane's worktree is cut on that branch at
+that commit, and each lane dispatches, builds and seals in its own worktree exactly as a
+serial member does: the capsule is keyed to the WORKTREE's git dir, so parallel lanes cannot
+collide on it, and a lane whose HEAD equals its verified base satisfies the
+ancestry-and-substrate check before it diffs.
+
+⛔ **A LANE MEASURES BEFORE IT SEALS.** Its first act, in plain `node` and `git` with no
+runner: branch, HEAD and base are the three it was given; §7 and the capsule are set-equal;
+every CREATE target is absent and every other target present; every required symbol is found
+verbatim; the count law holds; and every line-addressed register is grepped for every path the
+member will modify. Any failure is a STOP before the seal — a packet-text correction under a
+live seal costs a commit on the train branch, a fast-forward of the lane branch, a capsule
+rotation and a re-dispatch.
+
+AUTHORING overlaps; THE GATE STAYS ONE HOLDER AT A TIME, and a lane that meets a held gate
+pauses rather than waits. A lane runs no gated line itself: it writes one gate script whose
+every test line goes through the mutex, whose every exit is captured from the command and
+never piped, and whose verdict is computed in a plain loop before any `tee`; it stages exactly
+its own manifest paths by explicit path and commits nothing, and the coordinator commits the
+staged index on the lane's own branch under the lane's own message. A lane never regenerates a
+shared register.
+
+Everything the law above keeps with each member stays with it, at its own commit under its own
+seal, because the per-member seal is what carries ATTRIBUTION. The terminal is a BATCH GATE in
+one order: the composition by pick, proven on file-set and blob equality against each lane's
+own commit; one re-derivation per global aggregate; one summed byte price; one bare full gate
+and boot smoke; the N flips as one commit; and only then the integration branch's
+fast-forward. Every terminal act prints its own count line, and a line with no printed count
+DID NOT RUN. A member's focused red truncates the train at the last green boundary, exactly as
+above.
+
+⛔ **The train branch is NEVER PUSHED while it carries a READY row** — a seal licenses a
+retiree burn only in the worktree that dispatched it, so a burned retiree on a pushed branch
+reds CI — and a landing is ONE pull request: where two trains land on one tip, the coverage
+floors and the CI-parity run are run ONCE, at the landed tip, before that one push.
+Authority: `OWNER_DECISION_QUEUE.md` §934.47 addenda 119, 120, 124.
+
+⛔ **THE PROMOTION COMMIT IS PROVEN BEFORE THE LANE BRANCHES ARE CUT.** `git show --stat HEAD` NAMES EVERY MEMBER'S
+PACKET BODY — `git commit -- <dir>` never adds an UNTRACKED file, so each new body is `git add`ed by explicit path
+first, and a placement that committed the entry without the body stopped its build at the seal. A RE-PLACED id is
+UPDATED IN PLACE (status, verified base, the body, both `INDEX.md` rows), never skipped: a placement tool that SKIPs
+an existing id leaves the index rows unwritten and cannot recover. A placed manifest entry is REBUILT FROM THE
+PACKET'S OWN CAPSULE, never patched — a by-hand rebuild that kept an older version's rows put three change rows under
+a five-row capsule. `validate:packets` prints the EXPECTED READY COUNT. And the coordinator NAMES THE TRAIN'S
+BYTE-ARM HOLDER here: the earlier sentence naming the holder "at the pre-proof" is corrected, because the placement
+is the one act every member passes through, and a train placed without a named holder priced its budgets by an extra
+real build after four members had already built.
+
+⛔ **A MEMBER'S PACKET-VERSION COMMITS ARE PICKED WITH ITS BUILD.** A version cut on a lane lives only on that lane,
+so a terminal that picks the build alone lands code at version N+2 under a record still saying version N, and the
+verifier convicts the pair at the composed tip. Where a version commit conflicts on `PACKET_MANIFEST.json` it is
+resolved by keeping the PLACEMENT's rows and proven by PATCH equality of the packet's own paths.
+Authority: `OWNER_DECISION_QUEUE.md` §934.47 addendum 127.
 
 Authority: `DESIGN_BUILD_EFFICIENCY.md` §2.
 
@@ -225,6 +378,51 @@ repository metadata, and the harness is deliberately wired into no npm script so
 mutex can never catch it.
 
 Authority: `DESIGN_BUILD_EFFICIENCY.md` §2.7 · `OWNER_DECISION_QUEUE.md` §74.3.
+
+## The independent pre-proof
+
+⛔ **A COMPILED PACKET MEETS AN INDEPENDENT PRE-PROOF BEFORE IT IS PLACED.** The pre-proof is
+not the compiler and does not read the compile's reasoning for facts: it RE-EXECUTES the
+packet's own claims against the live tree at the placement base — the J-T1 window over every
+declared path, every CREATE target absent and every other target present, every required
+symbol verbatim, the validator run on a scratch estate at each status the packet will pass
+through, the byte and closure memberships by import, and the governing test set re-derived
+rather than inherited. It is the seat that has caught more premise deaths than any other, and
+every train's terminal also carries a VERIFIER's seat whose findings enter by the same rule.
+
+**Three block shapes it hunts, each convicted on live packets:**
+
+1. **A COUNT CONTRADICTION** — a `TEST` or `CREATE` row's own words, the acceptance matrix,
+   the lighting delta and the capsule's row text stating different numbers of tests. The
+   capsule is usually right and the prose lags it, but a build lane that finds them disagreeing
+   STOPS, so the contradiction must die at the pre-proof.
+2. **A HOMELESS ACCEPTANCE CASE** — a sealed case with no file to hold it and no manifest row
+   authorizing that file's edit. Five of six cases in one packet had no authorized file while
+   its step ordering merely said the tests would be written.
+3. **AN UNREACHABLE RULED ARM** — a contract whose declared parameters cannot reach a refusal
+   reason the design requires. The ruled arity was an implementation detail and could not carry
+   the ruled refusal set; the cure widened the contract rather than shrinking the set, because
+   a closed set split across two modules leaves the leaf able to do the thing the set forbids.
+
+**Two standing methods.** A walker's own logic is EXECUTED in plain `node` — import the
+library, run its own regular expressions and its own counters over the tip as it stands and
+over the contract's planned text — rather than reasoned about from its source; and REAL CODE
+is preferred to a sibling's packet the moment it exists, so a pre-proof run after a dependency
+lands re-measures every fact that rested on the dependency's unwritten deliverable.
+
+⭐ A finding the pre-proof or the verifier raises that is not this packet's own is slotted THE
+SAME TURN to the batch, packet or inbox that owns it. It is never recorded as deferred.
+Authority: `OWNER_DECISION_QUEUE.md` §934.47 addendum 124.
+
+⛔ **TWO METHODS, EACH PAID FOR BY A CUT MEMBER.** (i) The pre-proof RE-DERIVES THE GOVERNING SET FOR EVERY MODULE
+THE CONTRACT IMPORTS — `git grep -l -F '<the import target's basename>' -- tests`, one search per import — because
+dormancy arms and consumer rosters key on IMPORTERS and not on the edited file; a packet whose leaves imported two
+modules met the landed arms guarding them at its build and was cut from its train. (ii) The pre-proof MEASURES A
+SIBLING'S LANDED FENCE, NEVER ITS PREDICTED ONE: a member pre-proved against a sibling's predicted shape met that
+sibling's LANDED fence at its pre-seal, where eleven assertions across five landed arms sat outside the three its
+manifest authorized. REAL CODE outranks a sibling's packet the moment it exists, and a pre-proof run before the
+dependency landed is re-run after it lands.
+Authority: `OWNER_DECISION_QUEUE.md` §934.47 addendum 127.
 
 ## Premise maps and scoped truncation
 
@@ -307,23 +505,73 @@ Its mechanism-coverage baseline row, appended with the standard rationale idiom.
 estate-wide rows, and both belong to the minting wave rather than to whichever family happens to
 own the file.
 
-**A new `tests/lint/` file carries one obligation: its mutation-coverage row.** `tests/lint` is
-one of the directories `tests/lint/mutationCoverage.shared.mjs` enumerates, and
+**A new `tests/lint/` file carries one obligation — and so does a CREATE under ANY enforcer directory: its mutation-coverage row.**
+`ENFORCER_DIRS` is exported by `tests/lint/mutationCoverage.shared.mjs`, and
 `tests/lint/mutationCoverageManifest.test.js` asserts that every enumerated file owns an
 `invariants` entry in `scripts/mutation-coverage-manifest.json`. So a wave that adds a file
-there owes that row, and owes it AT COMPILE, inside its own change manifest. It was discovered
-at a terminal twice instead, each time forcing a surgical cure into a train that was otherwise
-proven — which is why it is written down here rather than left to the next author to rediscover.
-⛔ The row is added surgically beside its siblings. That manifest is never re-serialised whole:
-a formatter's diff would bury the one row that matters.
+under one owes that row, and owes it AT COMPILE, inside its own change manifest, with its own
+`rowKey`, its kind (`rationale` or a real mutant) and its anchor, and with that walker among
+its checks. It was discovered at a terminal twice instead, each time forcing a surgical cure
+into a train that was otherwise proven — which is why it is written down here rather than left
+to the next author to rediscover. ⛔ **READ THE SET AT YOUR OWN TIP; NEVER RECALL IT.** It is
+wider than `tests/lint` alone, and a packet that reasoned from memory about which directories
+are enforcers declared the row NOT OWED and would have met the totality arm at its build
+(2026-09-21, ODQ §934.47 addendum 124). ⛔ The row is added surgically beside its siblings.
+That manifest is never re-serialised whole: a formatter's diff would bury the one row that
+matters.
+
+⭐ **THAT MANIFEST IS A ROW-KEYED REGISTER, RESERVED BY ITS ROW AND NOT BY ITS PATH.** It is
+the first and, until the coordinator names another, the only member of that frozen set: its
+`invariants` rows are keyed by test-file path, so several members of one train may each carry
+their own row in their own commit beside their own new test file, and only the validator's
+cross-packet PATH reservation relaxes. ⛔ Two packets naming the SAME row key still refuse, and
+a packet that would move the global scalar `uncoveredBaseline` still refuses. Every other
+shared register keeps the path reservation. Authority: `OWNER_DECISION_QUEUE.md` §934.47
+addenda 119, 124.
 
 **A new `.js` leaf under `src/generators/**` or `src/domain/**` carries one obligation: its
-wiring-census row.** `scripts/wiring-census.mjs` stamps a producer-file COUNT
-(`producerIndexFiles`) over those two roots into `docs/content/wiring-census.json`, so a
-new leaf moves the census even when no pool or variant moved — discovered at a sealed build
-(EM-P2 v4, 2026-09-20) whose checks did not name the register. The wave declares the file
-as a GENERATED row, its build runs `node scripts/wiring-census.mjs` in its last gated batch,
-and the regenerated file lands with the packet.
+PREDICTED wiring-census delta.** `scripts/wiring-census.mjs` stamps a producer-file COUNT
+(`stamp.producerIndexFiles`) over those two roots into `docs/content/wiring-census.json`, so
+a new leaf moves the census even when no pool or variant moved — discovered at a sealed build
+(EM-P2 v4, 2026-09-20) whose checks did not name the register.
+
+⛔ **THE REGENERATION IS THE TRAIN'S TERMINAL ACT, BY THE COORDINATOR, NEVER INSIDE THE
+PACKET** (amended 2026-09-20, reversing the sentence this replaces). The stamp is a GLOBAL
+count, so N members each regenerating it write N conflicting blobs, every one blind to its
+siblings' new leaves; and even serially a member that NAMES the path reserves it against
+every sibling that will name it later, because the validator refuses one change path held by
+two non-terminal packets and DRAFT reserves exactly as READY does. The wave instead carries a
+DEFERRED ROW beside its census row — `stamp.producerIndexFiles` **+N**, its own new leaves
+named one by one, the sha maps and `totals.*` stated unmoved where nothing it touches keys
+them — and names `docs/content/wiring-census.json` in NEITHER its change manifest NOR its
+`checks`. The coordinator regenerates the file once, at the terminal, and the stated delta is
+a prediction that regeneration judges. The same CREATE reds
+`tests/lint/proseWiringCensus.walker.test.js` on exactly two arms until then: the packet's
+verification section excludes that walker from its whole-directory run and runs it alone,
+expected non-zero, with the two arms named.
+
+⛔ **EVERY REGISTER FIGURE A WAVE PREDICTS IS A DELTA. AN ABSOLUTE IS WRONG BY THE TIME
+ANYONE READS IT.** It binds the lighting tuple, the mutation-coverage manifest's `invariants`
+rows and its `uncoveredBaseline`, `stamp.producerIndexFiles`, every byte figure and every
+derived-closure size — and the SHA-256 of any preamble the packet cites, which the compiler
+MEASURES at its own read tip rather than copying from a brief. A predicted RED MESSAGE is the
+same class and spells its shape (`expected <N+1> to be <N>`), never a numeral. ⭐ Executed
+HISTORY is the exception and keeps its figure, carrying an as-of mark naming the sha it was
+measured at: rewriting a figure a receipt executed would falsify the record, and a record is
+annotated, never rewritten. Three waiting packets asserted `704 → 705` against a register
+already twelve rows past it, and a wave's chained absolutes were wrong in all five figures the
+moment a sibling outside the wave landed. What composes across a train is the SUM OF DELTAS.
+Authority: `OWNER_DECISION_QUEUE.md` §934.47 addendum 120.
+
+⛔ **A COMPILE RUNS EACH GOVERNING INSTRUMENT'S OWN LOGIC OVER ITS PLANTED TEXT AND DECLARES THE DISPOSITION AS A
+MANIFEST ROW.** An obligation declared NOT OWED by reasoning is the single most expensive error class the trains have
+paid for: three members of two consecutive trains were refuted by a walker AFTER they were sealed, twice after the
+build had landed on the train, because a census, a roster or a discovery count was reasoned about instead of
+executed. The library is imported in plain `node`, its own regular expressions and counters are run over the tip as
+it stands AND over the contract's planned text, and the result — routed, exempt, moved by N, unmoved — is written as
+a row with its figure AS A DELTA. ⚠ The figure the arm will red with is the ARM'S OWN MESSAGE at the packet's tip,
+never a number adopted by hand: a different figure is a STOP for the coordinator.
+Authority: `OWNER_DECISION_QUEUE.md` §934.47 addendum 127.
 
 Authority: `OWNER_DECISION_QUEUE.md` §49, §50.2, §53.6, §85.4, §102.3, §934.47 addendum 78.
 
@@ -472,12 +720,31 @@ Generated artifacts do not count as handwritten files, but the packet must name
 their generator and expected artifact set. Documentation receipts do not count
 as production lines.
 
+⛔ **EVERY EFFECTIVE-LINE FIGURE IN A PACKET IS MEASURED WITH ONE INSTRUMENT:** eslint's own `Linter` under
+`max-lines` with `skipBlankLines` and `skipComments`, run over the file as it stands and over the planned text. Never
+`wc -l`, never a hand convention, never an inherited or delegated figure. "Hot files" already binds this for a hot
+file; it binds every budget row, because a family that used a second convention produced budget rows that were
+comparable neither to each other nor to the caps above.
+
 An ADDRESSES-ONLY citation row — a production file whose only edit is the
 `path:line` addresses inside its comments or string literals, no logic byte —
 does not count against the three-modified-logic-files cap. It stays a
 change-manifest row with its stated comment-line delta and it runs the
 source-citation walker; it is never a logic home and never splits a packet.
 Authority: `OWNER_DECISION_QUEUE.md` §934.47 addendum 72 (2026-09-20).
+
+A NEW citation of code — in a packet body, a capsule `_note`, a brief, a ruling
+or a commit body — names its target as `path :: symbol` (an exported or
+top-level name; a test's title), never as `path:NNN`. Two exceptions: a register
+that KEYS by line (the dark-guard registry, the prose-numerics baseline), and a
+line QUOTED WITH ITS TEXT as a red-first's evidence. An existing `path:NNN`
+address is not swept (a line does not name its symbol); when a landing moves
+one — the re-address a landing owes on its own rows — it is converted to a
+symbol, permanently, and `tools/cite-drift.mjs <path>` (chair kit) reports every
+citation of a touched path whose quoted text no longer sits at its line, since
+the source-citation walker convicts only a past-EOF address.
+Authority: `OWNER_DECISION_QUEUE.md` §934.47 addendum 128 (2026-09-22; the
+kit's OPERATING-STANDARD rule 32; RETIRED-MECHANISMS.md R-3).
 
 If the work cannot fit, the agent stops and proposes the smallest split. The
 agent may not quietly renegotiate the budget or convert a registration file
@@ -551,6 +818,27 @@ investigation unless it disproves a packet premise. If it disproves a premise,
 the packet stops. If it merely suggests additional product behavior, it belongs
 to a later packet.
 
+⛔ **THE COUNT LAW.** Every `TEST` or `CREATE` row's own words ("adds N `it`s"), the acceptance
+matrix, the lighting delta in the verification and receipt sections, and the capsule's own row
+text state THE SAME NUMBERS — and EVERY acceptance case in the capsule NAMES THE FILE THAT
+HOLDS IT AND THE MANIFEST ROW THAT AUTHORIZES THAT FILE'S EDIT. A case with no authorized file
+is HOMELESS and the packet is BLOCKED. Three of five packets examined in one sitting carried
+one of these two contradictions, and a build lane that meets either STOPS. ⚠ Red-first PLANTS
+are not `it`s: a title delta is bound to the number of `it`s the row declares.
+
+⭐ **A COUNT PROVER SHIPS WITH THE PACKET AS COORDINATOR FURNITURE.** It is a plain-node
+script, `<ID>.count-prover.mjs`, that reads the packet's Markdown and its capsule JSON and
+never a test runner; it prints one line per file — file · arms the row declares · cases the
+matrix homes there · titles delta — and exits non-zero on any inequality, and it is run once
+against a deliberately wrong copy as a failing control. ONE CALLING CONVENTION:
+`node <ID>.count-prover.mjs <packet.md> <capsule.json>`. It lives beside the packet in the
+coordinator's working set, is run by the pre-proof, by the placement (which refuses on a
+non-zero exit) and by the build lane BEFORE its seal. ⛔ It is NEVER placed in the tree, never
+a sealed check and never a manifest row: a sealed check names a file the tree holds, and a new
+file class under `docs/` would meet walkers no pre-proof has run. The packet's verification
+section names it as the build lane's PRE-SEAL instrument.
+Authority: `OWNER_DECISION_QUEUE.md` §934.47 addendum 124.
+
 ## Required verified tree contract
 
 Every READY packet names, by current path and symbol:
@@ -590,6 +878,14 @@ Phrases such as `if useful`, `where natural`, `as appropriate`, `support edge
 cases`, `make robust`, or `choose the best approach` are forbidden in operative
 instructions. The packet author must make the choice or block the packet.
 
+⛔ **A BUILD LANE NEVER INVENTS USER-FACING WORDS.** A packet that adds copy SPELLS every
+string it adds, in the estate's own interpolation idiom and with the estate's own parameter
+names, and the coordinator writes them where the packet's author would be guessing. "The build
+lane writes suitable text" is a contract hole of exactly the same class as `as appropriate`.
+Copy is owner-vetoable and he sees it before the surface opens, which is possible only if the
+words are in the packet rather than in a diff.
+Authority: `OWNER_DECISION_QUEUE.md` §934.47 addendum 124.
+
 ## Change manifest
 
 Every handwritten file appears in the packet before dispatch with:
@@ -603,6 +899,14 @@ Every handwritten file appears in the packet before dispatch with:
 Broad fences such as `src/domain/**`, `src/components/**`, or `tests/**` are not
 allowed. A target outside the manifest is out of scope even when the full gate
 finds an adjacent defect.
+
+⛔ `TEST` is for a test file that EXISTS at the packet's verified base. A NEW test file is
+`CREATE`: the validator resolves every non-`CREATE` row against the live tree and refuses
+`path does not exist for TEST`, and a packet whose §4 already counts the file among its absent
+CREATE targets is contradicting itself. ⚠ The discriminator is EXISTENCE AT THE BASE, not
+newness in the abstract: a path a NAMED SIBLING of the same train creates before this packet
+dispatches is still `TEST`, and the packet names that sibling on the row. Seven instances of
+this one shape were live across five waiting packets on 2026-09-20.
 
 A `requiredSymbols` row names a symbol that is PRESENT IN THE TREE AT THE PACKET'S CURRENT
 STATUS. The validator resolves every row against the live tree at EVERY status — never against
@@ -619,6 +923,29 @@ by the gate.
 A retirement is recorded as a `retiredSymbols` row naming the retiree, and the packet's
 `requiredSymbols` names the **successor** instead — again only once the successor exists. A
 packet that names one symbol in both lists is refused.
+
+⛔ A `_pending` block — the symbols an unlanded sibling will provide, with its `owner` field
+— lives at a SIBLING KEY (`_pendingRequiredSymbols`), never as an element of the
+`requiredSymbols` array. The validator asserts a non-blank `path` and a non-blank `symbol` on
+every element, so the array form refuses TWICE, once on each; the sibling key it does not read
+carries the same content losslessly. Authority: `OWNER_DECISION_QUEUE.md` §934.47 addendum 120.
+
+⛔ A packet that RENAMES or RE-SHAPES a binding, a parameter or a call shape greps the whole
+estate for the OLD spelling and accounts for EVERY hit: `git grep -n -F '<the old spelling>'
+-- tests scripts docs/implementation` at the read tip. A landed packet's `requiredSymbols` row
+that quotes the old call reds the validator at the composed tip, and a test that pins the old
+spelling reds its walker. Each hit is either a row in this packet's own manifest or a named
+row the coordinator re-spells at the terminal, and the packet says which, with the hit's path
+and line. A waiting sibling that calls the changed shape owes a version bump to the new shape,
+slotted to that sibling's own pre-proof rather than made silently.
+Authority: `OWNER_DECISION_QUEUE.md` §934.47 addendum 124.
+
+⛔ **THE SAME GREP BINDS A REWORDED SENTENCE OF A GOVERNING DOCUMENT.** A `requiredSymbols` row may name a heading or
+a sentence of this standard, of a preamble or of the index, and that quoted text is a PIN resolved verbatim against
+the live tree at every status. An amendment of this file that reworded a sentence one LANDED packet's row quotes
+redded `validate:packets` on the amendment's own commit; the cure was to restore the quoted opening VERBATIM, because
+a landed row is never edited to suit a document. Before rewording any sentence here, grep every row for it.
+Authority: `OWNER_DECISION_QUEUE.md` §934.47 addendum 127.
 
 Authority: `OWNER_DECISION_QUEUE.md` §101.4.
 
@@ -650,6 +977,18 @@ shape.
 
 - Never read a gate through a shell pipe. Use `npm run check:tail` or
   `sh scripts/gate-tail.sh <command...>`.
+
+- ⛔ A RED-FIRST WHOSE LOG PRINTS NO TEST COUNT, OR `Tests no tests`, DID NOT
+  RUN. A file that fails to LOAD — a `vi.mock` hoisting error, a bad import, a
+  syntax error — exits non-zero with every step red and not one test executed,
+  which reads exactly like the red a red-first wants. The agent reads the COUNT
+  LINE before it claims any red, and a claim it cannot support is withdrawn
+  rather than carried into a commit message.
+- ⛔ A PACKET THAT EDITS A `src/` PATH MEASURES `tsconfig.full.json`'s ERRORS ON
+  THAT PATH BEFORE IT REPORTS. The TypeScript compiler API over the packet's own
+  paths is a plain-node measurement that takes no gate slot; a pre-seal table
+  carrying eslint without it is incomplete, and one that omitted it reported
+  GATE-READY into a `typecheck:ratchet` red of two errors against a floor of zero.
 - Hold the test slot for the complete process with
   `sh scripts/gate-mutex.sh --run -- npx vitest ...`. An observational preflight
   followed by a separate command is not ownership.
@@ -663,10 +1002,38 @@ shape.
 - If a full gate is red, compare failure identities with a committed-base run
   or an integrity-counted archive. Do not repair unrelated rows.
 - Never raise a baseline, budget, timeout, or ceiling to finish a packet.
-- A `tests/lint` step that excludes the lighting walker
+- ⛔ A sealed `checks` array names FILES, never the `tests/lint` DIRECTORY. The
+  directory run costs three to nine minutes and rising — 69–86% of a sealed
+  build's gate time, measured across seven runs — and inside `check:packet` it
+  buys nothing the lane's own instrument does not already buy. A packet's
+  sealed checks name the GOVERNING WALKER FILES, computed: `node
+  scripts/governing-tests.mjs --dirs <the packet's change paths>` once TOOL-26
+  has landed, and until then `git grep -l -F '<basename>' -- tests` for every
+  file the packet changes and every exported symbol whose call shape it
+  changes, plus every walker that governs a directory in which it CREATEs or
+  RENAMEs a test file. The lighting walker is never among them: it reds by
+  design under a train, so a sealed array naming it can never pass. The array
+  ends with `node scripts/implementation-packets.mjs validate`.
+- The EXCLUDED directory run
   (`npx vitest run --pool=threads --maxWorkers=2 tests/lint --exclude=tests/lint/sovereigntyLightingContract.walker.test.js`)
-  may be a sealed check while that walker reds by design under a train;
-  `tests/lint` whole remains the lane's instrument step (ODQ §934.47 addendum 61).
+  and the lighting walker run ALONE are the build lane's INSTRUMENTS, run at
+  focused verification and quoted in the receipt, never sealed. The excluded
+  run must exit 0. `tests/lint` whole remains mandatory and is no longer
+  sufficient: it is one directory among the nineteen that walk `src/` by path
+  (ODQ §934.47 addenda 61, 114, 117, 120).
+- ⭐ THE BROWSER SUITE IS A GOVERNING TEST. `npm run check` runs no Playwright,
+  and no law named `e2e/` until the first CI run that met that directory came
+  back deterministically red (2026-09-20). A packet that touches
+  `src/components/**`, a route, a `data-testid` or an accessible name names at
+  COMPILE the `e2e/` spec FILES that govern its surface — `git grep -n -F '<the
+  name>' -- e2e` for every such name, each searched on its own — and its build
+  lane runs exactly those files through the gate
+  (`npx playwright test --project=chromium <files>`), in a script of their own,
+  after `lsof -nP -iTCP:5173 -iTCP:5174 -sTCP:LISTEN` prints nothing, because
+  the config reuses an existing dev server when `CI` is unset. A spec is never
+  weakened to pass: no deleted assertion, no widened tolerance, no `test.skip`,
+  no raised timeout, no added retry. A packet that touches none of those
+  surfaces says so and names no spec (ODQ §934.47 addenda 119, 120).
 
 Focused commands and expected exit codes belong in each packet. `Run relevant
 tests` is not an instruction.
@@ -681,6 +1048,14 @@ An unsealed packet check is non-dispatchable. None replaces the final `npm run c
 A coding agent never regenerates a golden unless the packet names the exact
 golden, the expected semantic shift, the owner/manager authorization, and the
 update command. Unexpected motion is always a STOP.
+
+⛔ **NO PACKET QUOTES A GOLDEN DIGEST LITERALLY.** A packet names
+`tests/fixtures/.golden-freeze-register.json` and the ROW it expects UNMOVED, and the
+coordinator greps the waiting estate for digest literals at each placement. A quoted digest is
+the most brittle absolute in the estate: a signed re-record moves it, and unlike a count it
+cannot usefully carry an as-of mark, because a reader takes it for a live assertion. One
+waiting packet carried a digest a signed re-record had already moved.
+Authority: `OWNER_DECISION_QUEUE.md` §934.47 addendum 124.
 
 Tuning, lighting, soak-driven band changes, production migration, deployment,
 pushes, marketplace activation, paid policy, and legal copy are never implied
@@ -732,6 +1107,15 @@ The coordinator, not the coding agent, changes packet status. Any load-bearing
 HEAD or symbol change makes a READY packet STALE until revalidated. When work
 lands, the coordinator records the landing SHA, changes the packet to LANDED,
 and updates `INDEX.md` before opening the next dependent packet.
+
+⛔ EVERY change to a packet's body bumps its `Packet version` row, whether the change is a
+repair, a re-point, a figure converted to a delta or one word. A packet that edits its own
+text under the version that text was written for makes the version row a lie and leaves its
+prose blaming a number that is still its own; where the prose says "version N changed X", the
+re-point names the TRUE prior number or the sentence is reworded. Six waiting packets carried
+that exact defect on 2026-09-20. ⚠ The coordinator's PLACEMENT STAMP is not the body: writing
+`Status`, `Verified base` and the index rows bumps nothing.
+Authority: `OWNER_DECISION_QUEUE.md` §934.47 addendum 120.
 
 `docs/implementation/INDEX.md` is a COORDINATION-LEDGER surface maintained by the
 coordinator at every status transition — never a change-manifest surface. Packets do

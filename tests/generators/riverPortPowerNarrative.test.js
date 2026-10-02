@@ -49,10 +49,22 @@ describe('merchant power narrative maritime grounding', () => {
         tradeRouteAccess: 'port',
         priorityEconomy: 75,
       },
-      'maritime-power-0',
+      // Re-pinned maritime-power-0 to maritime-power-1 on 2026-09-30 (the urban band,
+      // ODQ §934.86): the same-seed shift seated 'Merchant oligarchy' as this seaport's
+      // government, and a merchant-GOVERNED settlement takes the governing-merchant
+      // branch of rulingStructure ("the ruling class and the merchant class are the
+      // same people"), which precedes the maritime branch by design — the base
+      // already took it on maritime-power-4 and -6 (Merchant Guild Council). -1 is
+      // the first sibling whose merchants do not govern; the precondition is now
+      // asserted below instead of being implicit in the seed.
+      'maritime-power-1',
     );
     const description = merchantDescription(settlement);
+    const governing = settlement.powerStructure.factions.find(faction => faction.isGoverning)?.faction || '';
 
+    // The arm's precondition: the merchants are a faction here, not the government
+    // (the same three spellings rulingStructure's merchantGoverns test reads).
+    expect(/Merchant oligarchy|Merchant Guild Council|Merchant Council/.test(governing)).toBe(false);
     expect(description).toMatch(/\bmaritime traders\b|\bport licences?\b/i);
   });
 });

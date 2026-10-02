@@ -188,6 +188,37 @@ registerStep('resolveResources', {
         && depletionRolled
       );
     });
+
+    // ⭐ EM-B2b2 — AND THE DM'S OWN WORLD FACT IS AN AUTHORED PREMISE TOO, read through the one
+    // mark config′ ALREADY CARRIES. EM-B2b routes an edited `worldFact.resources` onto its
+    // declared `inputKey`, which is THIS step's roster key, and the rolls above then re-rolled it
+    // out from under her: measured at 795d2a582, the DM's roster stood on 1 of 63 census rows
+    // while the route reported applied on all 63.
+    //
+    // ⛔ THE MARK IS NOT A NEW FLAG. A new config key would be spread onto effectiveConfig by
+    // resolveConfig and land on record.config, and a persisted shape is the owner's. Inside THIS
+    // branch the roster key is generator-owned and the wizard writes `null` into it (configSlice's
+    // DEFAULT_CONFIG, and the panel's own random toggle), so an ARRAY here was put there by
+    // somebody else. The one other writer of an array here is this step's own write-back, and that
+    // resolved echo ALWAYS carries the native sidecar beside it — a replayed `settlement.config`
+    // and a legacy save's stripped fallback alike, since DERIVED_CONFIG_KEYS strips neither key.
+    // So a roster with NO sidecar is the DM's word and never the generator's own answer read back
+    // in, which is what keeps a replay byte-identical and keeps a custom resource out of the
+    // native roster.
+    //
+    // Honoured AFTER the rolls and AFTER the resolved-magic law, consuming NO rng: a config
+    // without the mark generates byte-identically (golden corpus: 0 of 525 rows carry it). A
+    // resource the DM stated that the rolls never drew took no depletion draw, so it starts open.
+    // Everything downstream derives AROUND the stated roster: native membership, the custom
+    // injection, the editor-event overlay and the per-resource traces all read it.
+    if (
+      Array.isArray(config.nearbyResources)
+      && !Array.isArray(config.nearbyResourcesNative)
+    ) {
+      const authored = config.nearbyResources;
+      nearbyResourcesDepleted = nearbyResourcesDepleted.filter(k => authored.includes(k));
+      nearbyResources = [...authored];
+    }
   } else {
     // Manual mode
     const resourceState = config.nearbyResourcesState || {};

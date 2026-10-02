@@ -193,6 +193,44 @@ describe('keyboard-reachable: no tabbable control is activated by onMouseDown al
   test('the mousedown-activation allowlist is born empty', () => {
     expect(contract.mousedownActivationAllow).toEqual([]);
   });
+
+  // ⭐ THE EDITOR'S PAGES ARE INSIDE THIS SWEEP, AND THE CLAIM IS NOW EXECUTED (U11, the
+  // unfreeze, 2026-09-23). `tests/components/decreeRegistryPage.test.jsx`'s header rules that
+  // this walker "sweeps all of `src/components` already and governs this leaf by construction;
+  // its roster stays EMPTY, which is what this page not needing an exception means" — a claim
+  // no arm executed, in a file that is not this one. It is executed here, because a sweep
+  // narrowed tomorrow would retire that claim without redding anything.
+  //
+  // Measured at 8b5565922 over the five editor surfaces (the shell with EM-F3's counterparties
+  // roster, EM-D0e's door, EM-D3's registry page, the two field controls): 14 tabbable controls,
+  // ZERO mouse-only, zero zIndex literals, no hand-rolled trap — so all three allowlists stay
+  // born-empty on the editor's account too. The planted control below is why the zero is
+  // readable: it drives the SAME detector over the shell's own source with one offender added.
+  test('the sweep reaches the editor pages, and the detector is live on their own source', () => {
+    const editFiles = componentFiles.filter((f) => f.rel.startsWith('src/components/edit/'));
+    expect(
+      editFiles.length,
+      'the sweep reaches no editor page — has src/components/edit moved out of the walk?',
+    ).toBeGreaterThanOrEqual(5);
+    const controls = editFiles.flatMap(({ code }) => interactiveOpeningTags(code));
+    expect(
+      controls.length,
+      'the editor pages render no interactive control — the tag extractor has stopped reading them',
+    ).toBeGreaterThanOrEqual(10);
+    expect(
+      editFiles.flatMap(({ rel: file, code }) => interactiveOpeningTags(code)
+        .filter((t) => isMouseOnlyActivation(t.text)).map(({ name }) => `${file}: <${name}>`)),
+      'a mouse-only control landed on an editor page: the DM reaches these surfaces by keyboard '
+      + 'like any other reader',
+    ).toEqual([]);
+    const shell = editFiles.find((f) => f.rel.endsWith('EditModeShell.jsx'));
+    expect(shell, 'the edit shell is not in the sweep').toBeTruthy();
+    const planted = `${shell.code}\nexport const Probe = () => <button onMouseDown={go}>x</button>;\n`;
+    expect(
+      interactiveOpeningTags(planted).filter((t) => isMouseOnlyActivation(t.text)).length,
+      'the detector no longer fires on a planted mouse-only control in the shell own source',
+    ).toBe(1);
+  });
 });
 
 // ── 3. Single-writer focus trap ──────────────────────────────────────────────

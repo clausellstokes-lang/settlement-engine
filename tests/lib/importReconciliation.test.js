@@ -601,7 +601,7 @@ describe('DEF-3 — reconciliation drops what it cannot re-address', () => {
   // world the product mints carries `_livingContentLawVersion`, and the roster
   // beside it only when the source run's reviewed environment held living
   // content — so the ORDINARY reconciled import is marker-carrying and
-  // roster-less, which is exactly the state `importScrub.js:115-121` forbids: a
+  // roster-less, which is exactly the state `importScrub.js:116-122` forbids: a
   // world that says it was born under the roster law while carrying no roster.
   // This arm drives the real thing through the real admission.
   test('⭐ a world the LIT PRODUCT minted arrives with no roster AND no foreign birth law', async () => {

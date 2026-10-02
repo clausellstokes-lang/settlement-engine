@@ -29,6 +29,10 @@ import { isLiveInstitution } from '../institutions/institutionRoster.js';
 export {
   promoteActiveCustomChainTrade,
 } from './customTradeEndpointProjection.js';
+// Shared phrases hoisted once (train EM-T16's worker buy-back, judgment 214c): each is spelled here and referenced below; every emitted value is byte-identical.
+const MATERIALIZATION_AMBIGUOUS = 'materialization_ambiguous';
+const REVIEW_EVIDENCE_MISSING = 'review_evidence_missing';
+
 
 /** @typedef {'institution'|'resource'|'service'|'good'} CustomChainNodeKind */
 /**
@@ -373,7 +377,7 @@ function revisionReason(node, entry) {
   if (!isCustomNode(node)) return null;
   if (!node.contentHash || !entry?.raw || entry.source !== 'custom') {
     return {
-      code: 'review_evidence_missing',
+      code: REVIEW_EVIDENCE_MISSING,
       component: node.name,
       kind: node.kind,
     };
@@ -384,7 +388,7 @@ function revisionReason(node, entry) {
     current = customSupplyChainDefinitionEvidence(entry.category, entry.raw);
   } catch {
     return {
-      code: 'review_evidence_missing',
+      code: REVIEW_EVIDENCE_MISSING,
       component: node.name,
       kind: node.kind,
     };
@@ -560,7 +564,7 @@ function missingMaterializationReason(node, materialized, entry, registry) {
     }
     if (state === 'ambiguous') {
       return {
-        code: 'materialization_ambiguous',
+        code: MATERIALIZATION_AMBIGUOUS,
         component: node.name,
         kind: node.kind,
       };
@@ -573,7 +577,7 @@ function missingMaterializationReason(node, materialized, entry, registry) {
     }
     if (state === 'ambiguous') {
       return {
-        code: 'materialization_ambiguous',
+        code: MATERIALIZATION_AMBIGUOUS,
         component: node.name,
         kind: node.kind,
       };
@@ -584,7 +588,7 @@ function missingMaterializationReason(node, materialized, entry, registry) {
     }
     if (depletionState === 'ambiguous') {
       return {
-        code: 'materialization_ambiguous',
+        code: MATERIALIZATION_AMBIGUOUS,
         component: node.name,
         kind: node.kind,
       };
@@ -597,7 +601,7 @@ function missingMaterializationReason(node, materialized, entry, registry) {
     }
     if (state === 'ambiguous') {
       return {
-        code: 'materialization_ambiguous',
+        code: MATERIALIZATION_AMBIGUOUS,
         component: node.name,
         kind: node.kind,
       };
@@ -863,7 +867,7 @@ export function evaluateConfirmedCustomSupplyChains(confirmedChains, runtime = {
         || !reviewedFingerprint?.projectionFingerprint
       ) {
         blocked.push({
-          code: 'review_evidence_missing',
+          code: REVIEW_EVIDENCE_MISSING,
           component: chain.label || chain.chainId || 'Custom chain',
           kind: 'chain',
         });

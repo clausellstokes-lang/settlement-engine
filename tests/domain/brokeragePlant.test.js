@@ -183,8 +183,9 @@ describe('W-I I4 — only the market sells a plant', () => {
 
   test('the closed vocabularies hold and the wiring note names its own seam', () => {
     expect(PLANT_INTENTS).toEqual(['inflate', 'deflate']);
+    // six → SEVEN at FP IN-3 (lane FP-I3, 2026-09-24; SR-1): `too_hot` APPENDED, the house's risk arm.
     expect(PLANT_REFUSALS).toEqual([
-      'dormant', 'no_market', 'bad_intent', 'cannot_pay', 'no_channel', 'already_active',
+      'dormant', 'no_market', 'bad_intent', 'cannot_pay', 'no_channel', 'already_active', 'too_hot',
     ]);
     expect(PLANT_WIRING).toMatch(/processLies/);
   });
@@ -596,6 +597,11 @@ describe('W-I I4 — honest refusals and dormancy', () => {
     // in. That is the LIE verb's own rule applied at the counter.
     seen.add(commissionPlant({ ...base, worldState: worldOf(LIT_RULES), audienceBelief: null }).refusal.reason);
     seen.add(commissionPlant({ ...base, worldState: worldOf(LIT_RULES, 0) }).refusal.reason);
+    // TOO HOT (FP IN-3, SR-1: the vocabulary grew by one, so its path joins this census): the
+    // counter-game lit and the TARGET court's suspicion reading at `pressing`.
+    seen.add(commissionPlant({
+      ...base, worldState: worldOf({ ...LIT_RULES, counterIntelEnabled: true }), audienceSuspicion: { band: 'pressing' },
+    }).refusal.reason);
     const active = commissionPlant({ ...base, worldState: worldOf(LIT_RULES) });
     seen.add(commissionPlant({
       ...base,

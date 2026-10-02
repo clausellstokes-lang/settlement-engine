@@ -22,7 +22,7 @@ function instId(name) {
 
 registerStep('cascadePass', {
   deps: ['subsumptionPass', 'buildGenerationContext'],
-  reads: ['generationContext', 'institutionToggles', 'institutions', 'terrainType', 'tier', 'tradeRoute'], // ctx keys this step consumes that another step produces (A+ generators.3 data-flow contract)
+  reads: ['generationContext', 'institutionToggles', 'institutions', 'population', 'terrainType', 'tier', 'tradeRoute'], // ctx keys this step consumes that another step produces (A+ generators.3 data-flow contract)
   provides: [],
   mutates: ['institutions'], // re-rolls/adds catalog entries on the roster in place (A+ P1.7)
   phase: 'institutions',
@@ -36,6 +36,7 @@ registerStep('cascadePass', {
     terrainType,
     institutionToggles,
     generationContext,
+    population,
   } = ctx;
   const { worldLaw } = generationContext;
 
@@ -44,6 +45,7 @@ registerStep('cascadePass', {
     terrainType,
     institutionToggles,
     worldLaw,
+    population: typeof population === 'number' ? population : null,
   });
   if (cascadeAdditions.length > 0) {
     institutions.push(...cascadeAdditions);

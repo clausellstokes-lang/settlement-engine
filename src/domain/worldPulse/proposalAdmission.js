@@ -15,9 +15,16 @@
  * The cap is an attention budget, and a budget may only ration work that can
  * come back. A ONE-SHOT VERDICT cannot: its trigger is consumed in the same tick
  * that produces it, so a deferral is a deletion. Those outcomes are admitted
- * regardless of saturation (ONE_SHOT_VERDICT_RULE_IDS below).
+ * regardless of saturation (ONE_SHOT_VERDICT_RULE_IDS below). A war-time peace
+ * suit is admitted past its own court's minor cap, never past the realm's (FP-22
+ * U2, the same list's second member).
+ *
+ * And an unanswered question does not hold its place forever: a row nobody has answered for
+ * DOCKET_TUNING.expiryWeeks of the world's clock EXPIRES through this module's writer (FP-22 U1,
+ * expireUnansweredDocketRows below), and its lane frees in the tick it expires.
  */
 
+import { isActorInitiatedMajorType } from './actorMajorApproval.js';
 import { isMajorOutcome } from './decisionTier.js';
 import {
   isStateOnlyOutcome,
@@ -32,6 +39,24 @@ export const PROPOSAL_DOCKET_POLICY = Object.freeze({
   perSettlementMinorPending: 3,
   perSettlementMajorPending: 1,
   majorProposalSlotsPerTick: 1,
+});
+
+/**
+ * FP-22 U1 (the chair's ruling of 2026-09-24, taken under the owner's word of that day, "Again, I leave
+ * all judgment to you"; CURE UNIT FP-PEACE-2) — THE DOCKET'S HORIZON. `expiryWeeks`, on the world's
+ * 52-week clock, is how long a pending row may wait unanswered before it expires. DRAFT: its row in
+ * tests/lint/.tuning-register.json carries the measurement, and the owner signs it at the tuning sitting.
+ *
+ * THE FLOOR IS A LAW, NOT A TASTE. No row may expire inside the advance that minted it (the DM-attention
+ * law the actor-major hold keeps, worldpulse-core-3). The seam that retires the row cannot see the
+ * advance's start tick (the kernel threads `intervalStartTick` to expireStaleActorMajors alone, and
+ * pulseKernel.js takes no edit), so the horizon itself must reach past the longest advance: one year of
+ * fifty-two weekly pulses (INTERVAL_WEEKS.one_year), after which every row has had one panel. The docket's
+ * own history measured the same figure from the other side: the longest a row waited before a DM who
+ * rules at every panel answered it is exactly one year.
+ */
+export const DOCKET_TUNING = Object.freeze({
+  expiryWeeks: 52,
 });
 
 /**
@@ -55,6 +80,24 @@ export const PROPOSAL_DOCKET_POLICY = Object.freeze({
  *   - population_growth / _decline / _emigration (populationDynamics.js) apply
  *     no population delta when unadmitted, so the pressure persists and the
  *     candidate re-derives.
+ *
+ * THE LIST'S SECOND MEMBER, FP-22 (the chair's ruling of 2026-09-24, cure unit
+ * FP-PEACE-2 U2): A WAR-TIME PEACE SUIT. Made under the owner's word of
+ * 2026-09-24, "Again, I leave all judgment to you", OVER this 2026-07-30 ruling,
+ * which set the list at the one-shot verdicts alone. It lifts LESS than a
+ * verdict does: the suing court's own minor-lane cap (perSettlementMinorPending)
+ * and nothing else.
+ * THE REALM LANE CAP IS NOT LIFTED: the suit still waits while the realm's minor
+ * lane is full, and a suit read as a major meets its court's one major place.
+ * Why: the courts chose the suit on 11 of 46 attacking-court ticks in 5 of the 6
+ * lit wars, and the docket refused all 11 at the suing court's own minor lane,
+ * held by routine questions of the court's peace (findings/FP-PEACE-SUIT.md,
+ * rung R7). It is no ruleId in this array: the array is read only by the
+ * guaranteed mouth (admitGuaranteedProposalOutcomes), which the suit never passes
+ * and which lifts every cap, and a war's pressure re-derives the suit, so it is
+ * no one-shot verdict. The suit is a stochastic candidate, refused in
+ * candidateEvents.js :: rollCandidates, so this member is read where that refusal
+ * is taken, proposalDocketAllows, through isWarTimePeaceSuit below.
  *
  * @type {ReadonlyArray<string>}
  */
@@ -127,6 +170,224 @@ export function isOneShotVerdictOutcome(candidate) {
   return ONE_SHOT_VERDICT_RULE_IDS.includes(String(record?.ruleId ?? ''));
 }
 
+/**
+ * FP-22 U2: the exemption list's second member (above), the WAR-TIME PEACE SUIT, which is the chooser's
+ * bilateral offer. The three conjuncts are warPeaceDecision.js :: isBilateralPeaceOffer's, spelled here
+ * because that reader's graph is not imported into this light module (a pin holds the two in agreement).
+ * The ONE offer writer, settlementStrategy.js :: peaceSuitCandidate, stamps `peaceOffer` only while
+ * warLayer and warTermination are lit AND the suing court holds a live front against the court it sues,
+ * so the marker is the war's own evidence: a suit written in peacetime never carries it, and with the war
+ * rulings dark no suit does (dark: the docket admits exactly as before).
+ * @param {unknown} candidate
+ * @returns {boolean}
+ */
+export function isWarTimePeaceSuit(candidate) {
+  const record = asRecord(candidate);
+  const payload = asRecord(record?.proposalPayload);
+  return record?.candidateType === 'strategy_sue_for_peace'
+    && payload?.kind === 'relationship_label_change'
+    && payload?.peaceOffer === true;
+}
+
+/**
+ * FP-17 (the chair's ruling of 2026-09-24, CURE LANE FP-PEACE-1 U1; vetoable) — THE STALE
+ * PEACETIME SUIT RETIRES WHEN THE WAR BEGINS. A `strategy_sue_for_peace` row proposed while its
+ * court was at peace asks the DM to step a label down in peacetime. Once a war opens against that
+ * court (a live deployment, the court as attacker OR target, whose opening tick is LATER than the
+ * row's), the question's premise is dead: a war-time peace is the war-time offer's, and the stale row
+ * was holding one of the court's three minor places while nobody could answer it (measured:
+ * findings/FP-PEACE-SUIT.md §0 item 2, four of the five refused wars). The docket reads such a row
+ * as absent, exactly as it reads a row awaiting record-mode supersession, and the tick's docket-row
+ * supersession seam retires it (`retireWarOvertakenPeaceSuits`), so the lane frees at the war's
+ * opening. Rows the ruling does not reach keep their places: a suit proposed in or after the war's
+ * opening tick (the WR-1-dark war-time suit), a bilateral offer (`proposalPayload.peaceOffer`, the
+ * marker `warPeaceDecision.js :: isBilateralPeaceOffer` reads; its reader graph is not imported into
+ * this light module), and every other question. The exemption list above is untouched.
+ *
+ * COURT, NOT PAIR (vetoable): a peacetime row names its counterparty only through the edge id in
+ * `relationshipKey`, and neither worldState nor a relationship record carries that edge's endpoints
+ * (the regional graph does, and no docket seam receives it), so the retirement reads the suing
+ * court's own war. A peacetime suit the court made toward a third court retires with it.
+ */
+export const WAR_OVERTAKEN_PEACE_SUIT_REASON = 'peacetime_suit_overtaken_by_war';
+
+/**
+ * The latest opening tick of a live deployment touching each court, as attacker or as target.
+ * @param {Record<string, unknown>|null} state
+ * @returns {Map<string, number>}
+ */
+function latestWarOpeningByCourt(state) {
+  /** @type {Map<string, number>} */
+  const latest = new Map();
+  const deployments = asRecord(state?.deployments);
+  if (!deployments) return latest;
+  for (const [attackerId, raw] of Object.entries(deployments)) {
+    const deployment = asRecord(raw);
+    const opened = deployment?.sinceTick;
+    if (typeof opened !== 'number' || !Number.isFinite(opened)) continue;
+    const targetId = deployment?.targetId;
+    const courts = [attackerId, typeof targetId === 'string' || typeof targetId === 'number' ? String(targetId) : ''];
+    for (const court of courts) {
+      if (!court) continue;
+      const prior = latest.get(court);
+      if (prior === undefined || opened > prior) latest.set(court, opened);
+    }
+  }
+  return latest;
+}
+
+/**
+ * @param {unknown} raw a proposal row
+ * @param {Map<string, number>} openings from latestWarOpeningByCourt
+ * @returns {boolean}
+ */
+function overtakenByWar(raw, openings) {
+  const proposal = asRecord(raw);
+  if (proposal?.status !== 'pending' || !openings.size) return false;
+  const outcome = asRecord(proposal.outcome);
+  if (outcome?.candidateType !== 'strategy_sue_for_peace') return false;
+  if (asRecord(outcome.proposalPayload)?.peaceOffer === true) return false;
+  const proposedAt = proposal.tick ?? outcome.generatedAtTick;
+  if (typeof proposedAt !== 'number' || !Number.isFinite(proposedAt)) return false;
+  const court = outcome.targetSaveId;
+  const opened = typeof court === 'string' || typeof court === 'number' ? openings.get(String(court)) : undefined;
+  return opened !== undefined && opened > proposedAt;
+}
+
+/**
+ * Whether this pending row is a peacetime suit a war has overtaken (FP-17 above).
+ * @param {unknown} proposal
+ * @param {unknown} worldState
+ * @returns {boolean}
+ */
+export function peacetimeSuitOvertakenByWar(proposal, worldState) {
+  return overtakenByWar(proposal, latestWarOpeningByCourt(asRecord(worldState)));
+}
+
+/**
+ * THE DOCKET'S WRITER FOR FP-17: retire every pending peacetime suit a war has overtaken, as a
+ * terminal 'superseded' row carrying the stamp its readers read, and nothing else: `supersededAt`
+ * (the Herald's resolved log times the row by it) and `supersessionReason` (the feed's reconcile
+ * retires the row's queued question by it; registered engine-internal in
+ * scripts/lib/writer-dark-register.mjs). `supersededAtTick` is deliberately NOT written: no surface
+ * and no engine path reads it, and a generated fact nobody reads is the defect the writer-reach
+ * walker refuses at ceiling 0 (CURE-PEACE-1, the walker's owed registration). The row is kept as an
+ * audit tombstone. The same world reference when nothing is retired.
+ * @template T
+ * @param {T} worldState
+ * @param {{ tick?: number, now?: string|null }} [context]
+ * @returns {T}
+ */
+export function retireWarOvertakenPeaceSuits(worldState, context = {}) {
+  const state = asRecord(worldState);
+  const rows = state?.proposals;
+  if (!state || !Array.isArray(rows) || rows.length === 0) return worldState;
+  const openings = latestWarOpeningByCourt(state);
+  if (!openings.size) return worldState;
+  let changed = false;
+  const next = rows.map((raw) => {
+    if (!overtakenByWar(raw, openings)) return raw;
+    changed = true;
+    const proposal = /** @type {Record<string, unknown>} */ (raw);
+    return {
+      ...proposal,
+      status: 'superseded',
+      updatedAt: context.now ?? proposal.updatedAt ?? proposal.createdAt ?? null,
+      supersededAt: context.now ?? null,
+      supersessionReason: WAR_OVERTAKEN_PEACE_SUIT_REASON,
+    };
+  });
+  return changed
+    ? /** @type {T} */ (/** @type {unknown} */ ({ ...state, proposals: next }))
+    : worldState;
+}
+
+/**
+ * FP-22 U1 — AN UNANSWERED ROW EXPIRES. A pending row that has waited DOCKET_TUNING.expiryWeeks since it
+ * was asked (its own `tick`, else its outcome's `generatedAtTick`) expires: the docket reads it as absent
+ * in that tick, so its lane frees for the tick's own admission, and the tick's docket-row supersession
+ * seam retires it after admission, exactly as FP-17's overtaken suit is read and retired. The row is kept
+ * as an audit tombstone in the estate's retirement shape: 'superseded', with its stamp, its tick and
+ * this reason. The receipt is written ONCE, in that tick, by the feed half of the writer
+ * (worldPulseFeedCuration.js :: reconcileSupersededProposalNews): one 'expired' entry of the question's
+ * own kind. No flag governs the docket, so the horizon binds every campaign.
+ *
+ * Two families are not this horizon's to expire. The DM's own orders (a realm-verb order, its payload
+ * kind DM_ORDER_PAYLOAD_KIND below) are the table's commands, never the docket's questions (the scope in
+ * this module's header). A held actor-initiated major keeps its own, shorter hold-then-expire and its own
+ * terminal (actorMajorApproval.js :: expireStaleActorMajors, which runs first in every pulse).
+ */
+export const UNANSWERED_ROW_EXPIRY_REASON = 'unanswered_row_expired';
+
+/**
+ * The payload kind of a DM realm-verb order: realmVerbExecution.js :: REALM_VERB_PAYLOAD_KIND, spelled
+ * here because that module's graph is not imported into this light one (a pin holds the two equal). Read
+ * through the payload's `kind`, a key the executed corpus carries, rather than the outcome's
+ * `provenance`, which it never does (the observed-shape readers' ratchet).
+ */
+const DM_ORDER_PAYLOAD_KIND = 'realm_verb_order';
+
+/**
+ * @param {unknown} raw a proposal row
+ * @param {unknown} tick the tick being read
+ * @returns {boolean}
+ */
+function expiredUnanswered(raw, tick) {
+  const proposal = asRecord(raw);
+  if (proposal?.status !== 'pending') return false;
+  if (typeof tick !== 'number' || !Number.isFinite(tick)) return false;
+  const outcome = asRecord(proposal.outcome);
+  if (asRecord(outcome?.proposalPayload)?.kind === DM_ORDER_PAYLOAD_KIND) return false;
+  if (isActorInitiatedMajorType(String(outcome?.candidateType ?? ''))) return false;
+  const askedAt = proposal.tick ?? outcome?.generatedAtTick;
+  if (typeof askedAt !== 'number' || !Number.isFinite(askedAt)) return false;
+  return tick - askedAt >= DOCKET_TUNING.expiryWeeks;
+}
+
+/**
+ * Whether this pending row has waited out the docket's horizon unanswered at `tick` (FP-22 U1 above).
+ * @param {unknown} proposal
+ * @param {unknown} tick
+ * @returns {boolean}
+ */
+export function proposalExpiredUnanswered(proposal, tick) {
+  return expiredUnanswered(proposal, tick);
+}
+
+/**
+ * THE DOCKET'S WRITER FOR FP-22 U1: expire every pending row that has waited out the horizon, as a
+ * terminal 'superseded' row carrying the estate's retirement stamp, and nothing else. The same world
+ * reference when nothing expires.
+ * @template T
+ * @param {T} worldState
+ * @param {{ tick?: number, now?: string|null }} [context]
+ * @returns {T}
+ */
+export function expireUnansweredDocketRows(worldState, context = {}) {
+  const state = asRecord(worldState);
+  const rows = state?.proposals;
+  if (!state || !Array.isArray(rows) || rows.length === 0) return worldState;
+  const tick = typeof context.tick === 'number' ? context.tick : state.tick;
+  if (typeof tick !== 'number' || !Number.isFinite(tick)) return worldState;
+  let changed = false;
+  const next = rows.map((raw) => {
+    if (!expiredUnanswered(raw, tick)) return raw;
+    changed = true;
+    const proposal = /** @type {Record<string, unknown>} */ (raw);
+    return {
+      ...proposal,
+      status: 'superseded',
+      updatedAt: context.now ?? proposal.updatedAt ?? proposal.createdAt ?? null,
+      supersededAt: context.now ?? null,
+      supersededAtTick: tick,
+      supersessionReason: UNANSWERED_ROW_EXPIRY_REASON,
+    };
+  });
+  return changed
+    ? /** @type {T} */ (/** @type {unknown} */ ({ ...state, proposals: next }))
+    : worldState;
+}
+
 /** @param {unknown} candidate @returns {string} */
 function stableAdmissionKey(candidate) {
   const record = asRecord(candidate);
@@ -167,11 +428,18 @@ export function buildProposalDocket(worldState, realmSize = 0) {
   const counts = { minor: 0, major: 0 };
   /** @type {Record<string, ProposalLaneCounts>} */
   const bySettlement = {};
+  const openings = latestWarOpeningByCourt(state);
+  const tick = state?.tick;
 
   for (const raw of rows) {
     const proposal = asRecord(raw);
     if (proposal?.status !== 'pending') continue;
     if (proposalRequiresRecordModeSupersession(proposal)) continue;
+    // FP-17: a peacetime suit a war overtook is read as absent in the war's own opening tick; the
+    // tick's supersession seam retires the row after admission.
+    if (overtakenByWar(proposal, openings)) continue;
+    // FP-22 U1: a row past the docket's horizon is read as absent in the tick it expires, the same way.
+    if (expiredUnanswered(proposal, tick)) continue;
     const outcome = proposal?.outcome;
     const lane = isMajorOutcome(outcome) ? 'major' : 'minor';
     const settlementKey = settlementKeyOf(outcome);
@@ -200,7 +468,9 @@ export function buildProposalDocket(worldState, realmSize = 0) {
 /**
  * Whether a proposal candidate has room in both its realm-global lane and its
  * settlement-local lane. Major and minor lanes are independent so a flood of
- * routine questions can never consume major-choice capacity.
+ * routine questions can never consume major-choice capacity. A war-time peace
+ * suit needs room in the realm's minor lane only: its own court's minor cap is
+ * lifted, and nothing else is (FP-22 U2, isWarTimePeaceSuit).
  *
  * @param {ProposalDocket} docket
  * @param {unknown} candidate
@@ -210,12 +480,13 @@ export function proposalDocketAllows(docket, candidate) {
   const lane = isMajorOutcome(candidate) ? 'major' : 'minor';
   const settlementKey = settlementKeyOf(candidate);
   const local = countsAt(docket.bySettlement, settlementKey);
+  const courtCapLifted = lane === 'minor' && isWarTimePeaceSuit(candidate);
   return docket.counts[lane] < docket.caps[lane]
-    && local[lane] < (
+    && (courtCapLifted || local[lane] < (
       lane === 'major'
         ? docket.caps.perSettlementMajor
         : docket.caps.perSettlementMinor
-    );
+    ));
 }
 
 /**

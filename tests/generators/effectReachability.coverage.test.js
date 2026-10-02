@@ -218,7 +218,11 @@ const CORPUS = Object.freeze([
     // hard_dependency, standard subsumption, and magical transit. `-24` is also the seed
     // tests/generators/coherenceRepairPass.test.js pins for the same config, so the two
     // files keep sharing one metropolis specimen as they did before the wave.
-    seed: 'effect-reach-v1-iso-metro-24',
+    // Re-pinned `-24` to `-3` on 2026-09-30 (the urban band, ODQ §934.86, and the verifier's
+    // FIX 1, which confined the dependency repair to the settlement's own tier block): -24 no
+    // longer adds a hard dependency, and -3 is the first sibling that does (32 of 60 do). Its
+    // isolation_support stratum is gone from every config (UNREACHABLE_STRATA below).
+    seed: 'effect-reach-v1-iso-metro-3',
     config: Object.freeze({
       settType: 'metropolis',
       culture: 'greek',
@@ -232,7 +236,9 @@ const CORPUS = Object.freeze([
     id: 'city-with-walls-excluded',
     targets: 'unsupported-institution repair: the DM force-excludes city walls, so '
       + 'a generated Citadel loses its only hard dependency AND every substitute '
-      + 'the tier could offer — the repair pass must remove the dependent',
+      + 'the tier could offer — the repair pass must remove the dependent. Since the '
+      + 'urban band (2026-09-30, ODQ §934.86) a Citadel accepts Town walls as well, so the '
+      + 'specimen excludes BOTH wall rungs a city could reach for; the effect is unchanged',
     seed: 'effect-reach-v1-city-with-walls-excluded',
     config: Object.freeze({
       settType: 'city',
@@ -243,6 +249,7 @@ const CORPUS = Object.freeze([
       priorityMilitary: 95,
       _institutionToggles: Object.freeze({
         'city::Defense::City walls and gates': Object.freeze({ forceExclude: true }),
+        'city::Defense::Town walls': Object.freeze({ forceExclude: true }),
       }),
     }),
   },
@@ -261,7 +268,9 @@ const CORPUS = Object.freeze([
     // Re-pinned `-1` to `-8` on 2026-08-01 (I1 catalog stream translation, see the block
     // note above); `-8` is one of the 14-in-40 seeds where the cart shed seats and the
     // authored `subsumes` reference then removes it, with the paired control still silent.
-    seed: 'effect-reach-v1-custom-subsumption-town-8',
+    // Re-pinned `-8` to `-2` on 2026-09-30 (the urban-band registry re-ordered the town's
+    // catalog draws, ODQ §934.86); `-2` is the first sibling where the same holds again.
+    seed: 'effect-reach-v1-custom-subsumption-town-2',
     config: Object.freeze({
       settType: 'town',
       culture: 'latin',
@@ -303,7 +312,9 @@ const CORPUS = Object.freeze([
       + "every route it does not name, while INSTITUTION_SPATIAL's requiredAccess "
       + 'is an inclusion-list that rejects it), so the Fishmonger seats and the '
       + 'access check removes it — fired on 10 of 40 sibling seeds',
-    seed: 'effect-reach-v1-mountain-pass-fishmonger-6',
+    // Re-pinned `-6` to `-8` on 2026-09-30 (the urban-band registry re-ordered the village's
+    // catalog draws, ODQ §934.86): `-8` is the first sibling that seats the Fishmonger again.
+    seed: 'effect-reach-v1-mountain-pass-fishmonger-8',
     config: Object.freeze({
       settType: 'village',
       culture: 'germanic',
@@ -426,15 +437,6 @@ const EFFECT_MANIFEST = Object.freeze([
     ),
   }),
   Object.freeze({
-    id: 'repair.isolation_support',
-    description:
-      'coherenceRepairPass injected transit infrastructure because roster '
-      + 'reconciliation reopened an isolation-support gap',
-    detect: settlement => repairs(settlement).some(
-      repair => repair?.type === 'isolation_support',
-    ),
-  }),
-  Object.freeze({
     id: 'repair.hard_dependency',
     description:
       'coherenceRepairPass added a real catalog prerequisite after validation '
@@ -482,6 +484,17 @@ const EFFECT_MANIFEST = Object.freeze([
  *   subjects produce permanent unclearable errors). Retirement is the
  *   recommended owner call (queue EP-g1), measured at 0/400 output change.
  *
+ * - `isolation_support` (re-inject transit when roster reconciliation reopens an isolation
+ *   gap): unreachable BY SAMPLING since 2026-09-30, not by construction — the branch stands
+ *   as a safety net. MF-CH2B made the licensed transit rows take the magic multiplier at
+ *   ASSEMBLY ('Airship docking (high magic)' is seated at chance 1 instead of re-injected late;
+ *   its builder traced it on four seeds, final rosters identical), so reconciliation no longer
+ *   reopens the gap. Measured at the urban-band tip c9bf28ca8: 0 fires in 768 isolated
+ *   settlements (village to metropolis x mountain/desert/forest/coastal x magic 100/50/10/off
+ *   x 12 seeds), 0 in 300 isolated greek-mountain metropolises and cities, and 0 in the
+ *   builder's 240 isolated metropolises. The zero-occurrence ratchet below reds the day it
+ *   fires on the corpus again, and that red is the instruction to re-specimen it.
+ *
  * `access_compatibility` was listed here until 2026-07-27 and its recorded
  * evidence was FALSIFIED by the EP-6 INV-A/INV-B probes: the reasoning held for
  * Docks (a true inclusion-list) but not for Fishmonger, whose FORBIDDEN-list
@@ -498,6 +511,7 @@ const EFFECT_MANIFEST = Object.freeze([
  */
 const UNREACHABLE_STRATA = Object.freeze([
   'repair.mutual_exclusion',
+  'repair.isolation_support',
 ]);
 
 // ── execution ───────────────────────────────────────────────────────────────

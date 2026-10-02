@@ -304,6 +304,19 @@
       "band": null,
       "note": ""
     },
+    "src/domain/display/cascadeBraid.js#CASCADE_BRAID_TUNING": {
+      "role": null,
+      "status": "draft",
+      "signedAt": null,
+      "unit": {
+        "DAMPED_SEVERITY": "fraction01",
+        "LAYER_FLOOR": "count",
+        "MEMBER_FLOOR": "count",
+        "WINDOW_WEEKS": "weeks"
+      },
+      "band": null,
+      "note": "FP CW-1 (lane fp/cw-1): the cascade governor's bands, DRAFT, registered in the minting commit because a new tuning table has no silent door. MEMBER_FLOOR 3: the fewest filed receipts a cascade braids (two consequences are a pair, not a cascade). WINDOW_WEEKS 13: the closed window opened at the ancestor's tick, INTERVAL_WEEKS.one_season (held equal in tests/domain/cascadeBraidCw1.test.js). LAYER_FLOOR 3: the charter's depth threshold, the links cross at least three coupling-registry layers (docs/DESIGN_FP_ARCHITECTURE.md §5 block #58). DAMPED_SEVERITY 0.35: the most severity a damped member keeps, inside heraldFilter's routine band (below 0.4, held there by the acceptance). None is measured on a soak: the floors and the depth are the charter's, the window its INTERVAL_WEEKS denomination, the damped value read off the routine band; the owner signs them at the lit soak with the charter's member cap and braid-class bands."
+    },
     "src/domain/dossier/hookRetention.js#DEFAULT_RETENTION_TUNING": {
       "role": null,
       "status": "draft",
@@ -479,6 +492,30 @@
       "unit": null,
       "band": null,
       "note": ""
+    },
+    "src/domain/spatial/modeSpeeds.js#KM_SCALE_TUNING": {
+      "role": null,
+      "status": "draft",
+      "signedAt": null,
+      "unit": {
+        "DEFAULT_KM_SCALE": "mixed"
+      },
+      "band": null,
+      "note": "WY-1 THE SCALE CHARTER (FP lane FP-W; docs/DESIGN_FP_ARCH_WY.md §8, J-D11(b) activated): the default km scale, km per map-coordinate unit, for a map that exposes no scale of its own. PROPOSED = 3, FMG's own default distance scale (public/map distanceScaleInput value 3, km per pixel). Read ONLY by the creation flow's seam modeSpeeds.creationKmScale; no canonize applies it by itself, so the wave stays dark until the creation flow ships the datum. UNIT `mixed`: the unit is km per map unit, and the closed vocabulary has no distance word, so the compound is declared `mixed` rather than coerced. DRAFT — registering is not signing; the owner signs it with MODE_SPEED_TUNING at the sitting."
+    },
+    "src/domain/spatial/modeSpeeds.js#MODE_SPEED_TUNING": {
+      "role": null,
+      "status": "draft",
+      "signedAt": null,
+      "unit": {
+        "MODE_SPEEDS.foot": "mixed",
+        "MODE_SPEEDS.cart": "mixed",
+        "MODE_SPEEDS.river": "mixed",
+        "MODE_SPEEDS.coastal": "mixed",
+        "MODE_SPEEDS.sea": "mixed"
+      },
+      "band": null,
+      "note": "WY-1 THE SCALE CHARTER (FP lane FP-W; docs/DESIGN_FP_ARCH_WY.md §8, J-D11(b)'s one mode-speed table): MODE_SPEEDS, km per week for the closed mode set foot | cart | river | coastal | sea. PROPOSED foot 150 (a walker's ~21 km a day), cart 110, river 280, coastal 450, sea 900 — raw-authored, unsoaked. DATA-GATED by spatialDigest.kmScale (decoupled from the port program's flag): an unscaled world never reads it. `foot` is the base denomination every mover inherits through distanceRead.hopWeeks; a caller names another mode explicitly. UNIT `mixed`: km per week is a compound unit and the closed vocabulary has no distance or speed word, so it is declared `mixed` rather than coerced. DRAFT — registering is not signing; the owner-signing obligation of the war volume §7 parking row is unchanged."
     },
     "src/domain/spatial/moralDrift.js#MORAL_DRIFT_TUNING": {
       "role": null,
@@ -656,6 +693,16 @@
       "band": null,
       "note": ""
     },
+    "src/domain/worldPulse/brokerageServicesPlant.js#PLANT_HEAT_TUNING": {
+      "role": null,
+      "status": "draft",
+      "signedAt": null,
+      "unit": {
+        "tooHotBand": "rank"
+      },
+      "band": null,
+      "note": "FP IN-3 (lane FP-I3): the plant counter's risk arm, the band of the TARGET court's suspicion (a word of the borrowed intensity ladder) at or above which a house refuses a commission as too_hot. DRAFT, registered in the minting commit because a new tuning table has no silent door; the unit is a label read off the source, and nothing here is signed or proposed."
+    },
     "src/domain/worldPulse/brokerageServicesPlant.js#PLANT_PRICE_TUNING": {
       "role": null,
       "status": "draft",
@@ -791,6 +838,31 @@
       "unit": null,
       "band": null,
       "note": ""
+    },
+    "src/domain/worldPulse/counterIntelSweep.js#SEND_TWO_TUNING": {
+      "role": null,
+      "status": "draft",
+      "signedAt": null,
+      "unit": {
+        "toleranceRung": "rank"
+      },
+      "band": null,
+      "note": "FP IN-3 (lane FP-I3): the send-two tolerance, the testimony-ladder rung a divergence's best account must reach before the one divergence reader's signature reads as a traitor, so two honest carriers of weathered hearsay never do. DRAFT, registered in the minting commit; nothing here is signed or proposed."
+    },
+    "src/domain/worldPulse/counterIntelSweep.js#SWEEP_TUNING": {
+      "role": null,
+      "status": "draft",
+      "signedAt": null,
+      "unit": {
+        "accusationSeverity": "fraction01",
+        "affordFloor": "fraction01",
+        "catchOdds": "probability",
+        "falseAccusationCharge": "fraction01",
+        "humSeverity": "fraction01",
+        "unknownProsperity": "fraction01"
+      },
+      "band": null,
+      "note": "FP IN-3 (lane FP-I3): the sweep's dials. catchOdds is the keyed draw per covert watcher; affordFloor is the prosperity rank a court must hold to pay for a hunt (the SEE upkeep idiom, a gate and never a drain); falseAccusationCharge is the deception-class credibility charge a witch-hunt lays on its own court; the two severities are the two beats' Herald weights; unknownProsperity is the rank an absent prosperity reads at (mid, non-blocking, the SEE upkeep's own reading). DRAFT, registered in the minting commit; the units are labels read off the source, and nothing here is signed or proposed."
     },
     "src/domain/worldPulse/deityStance.js#STANCE_TUNING": {
       "role": null,
@@ -1217,6 +1289,40 @@
       "band": null,
       "note": ""
     },
+    "src/domain/worldPulse/houseActs.js#HOUSE_ACT_TUNING": {
+      "role": null,
+      "status": "draft",
+      "signedAt": null,
+      "unit": {
+        "reliefTownAtMost": "rank",
+        "reliefHoldingsAtLeast": "rank",
+        "routeHoldingsAtLeast": "rank",
+        "routeAppetiteAtLeast": "rank",
+        "caravanHoldingsAtLeast": "rank",
+        "creditAtLeast": "rank",
+        "creditAppetiteAtLeast": "rank"
+      },
+      "band": null,
+      "note": "FP TR-2 (lane FP-D): the merchant house's act thresholds. Every key is a band INDEX on the ladder its source comment names (the town fortune band, HOUSE_HOLDINGS_BANDS, HOUSE_APPETITE_BANDS, HOUSE_CREDIT_BANDS), so each names a rung position and its unit is rank. DRAFT, registered by the lane's builder seat at the TR-2 cure because the walker's totality arm convicted the table as unnamed; the units are labels read off the source, and nothing here is signed or proposed."
+    },
+    "src/domain/worldPulse/houseLedger.js#HOUSE_LEDGER_TUNING": {
+      "role": null,
+      "status": "draft",
+      "signedAt": null,
+      "unit": {
+        "maxHousesPerSettlement": "count",
+        "dwellTicks": "ticks",
+        "interestTermTicks": "ticks",
+        "ruinCooldownTicks": "ticks",
+        "absenceGraceTicks": "ticks",
+        "townThinFrom": "fraction01",
+        "townSteadyFrom": "fraction01",
+        "townProsperousFrom": "fraction01",
+        "townDominantFrom": "fraction01"
+      },
+      "band": null,
+      "note": "FP TR-2 (lane FP-D): the merchant house ledger. The cap counts houses per settlement, four keys are pulse ticks, and the four town*From edges are prosperityRank01 readings (zero to one) at which the town's fortune points its houses at each rung above broken; those four were bare decimals in townBandOf and were named into this table by the TR-2 cure, values unmoved. DRAFT, registered by the lane's builder seat because the walker's totality arm convicted the table as unnamed; nothing here is signed or proposed."
+    },
     "src/domain/worldPulse/informationStatecraft.js#CREDIBILITY_TUNING": {
       "role": null,
       "status": "draft",
@@ -1313,6 +1419,16 @@
       "band": null,
       "note": ""
     },
+    "src/domain/worldPulse/marketNews.js#MARKET_NEWS_TUNING": {
+      "role": null,
+      "status": "draft",
+      "signedAt": null,
+      "unit": {
+        "notableSeverity": "fraction01"
+      },
+      "band": null,
+      "note": "FP TR-3 (lane FP-D2): the wrong-market arrival's Herald weight, the trade desk's notable class. A zero-to-one severity the feed turns into its own integer score, read off TR-1's notable commercial weight so one desk ranks one class one way. DRAFT, registered in the minting commit because a new tuning table has no silent door; the unit is a label read off the source, and nothing here is signed or proposed."
+    },
     "src/domain/worldPulse/martialReadiness.js#MARTIAL_READINESS_TUNING": {
       "role": null,
       "status": "draft",
@@ -1320,6 +1436,20 @@
       "unit": null,
       "band": null,
       "note": ""
+    },
+    "src/domain/worldPulse/mediationPressure.js#MEDIATION_TUNING": {
+      "role": null,
+      "status": "draft",
+      "signedAt": null,
+      "unit": {
+        "intentPressureW": "share",
+        "fraySoften": "share",
+        "fraySoftenSlipped": "share",
+        "beatSeverity": "fraction01",
+        "beatScore": "score100"
+      },
+      "band": null,
+      "note": "FP GR-6 (lane FP-B2): mediation generalized. intentPressureW is the share of a would-be besieger's strength a cross-pressured broker's pressure takes off the war opener's soft comparison (the multiplier is one minus it); fraySoften and fraySoftenSlipped are the share of one tick's strain burden a broker takes off a fraying pact, for a clean record and for a record already strained before the tick; beatSeverity and beatScore are the GR-0 lifecycle voice's presentation weight for a beat above routine, re-read for the brokered_back receipt. DRAFT, registered by the wave's builder seat in the minting commit; nothing here is signed or proposed."
     },
     "src/domain/worldPulse/mercenaryMarket.js#MERCENARY_MARKET_TUNING": {
       "role": null,
@@ -1503,6 +1633,37 @@
       "band": null,
       "note": ""
     },
+    "src/domain/worldPulse/pactRenewal.js#CONVERSION_TUNING": {
+      "role": null,
+      "status": "draft",
+      "signedAt": null,
+      "unit": {
+        "TRUST_BAND": "fraction01"
+      },
+      "band": null,
+      "note": "FP GR-5d CONVERSION (lane GR-RENEWAL U3; J-GR-9 the shape, R-24 the court's own act): the trust between the pair, on the relationship plane's 0..1 scale (relationshipStates[edge].trust), at or above which a renewal accepted over a compelled alliance honoured throughout converts it into the composable pair both courts hold. PROPOSED = 0.68. FLOOR: every default below an alliance the plane assigns a pair (RELATIONSHIP_DEFAULTS: vassal 0.34, client 0.38, patron 0.42, neutral 0.45, trade_partner 0.62), so no pair converts on the trust its label alone gives it. CEILING: the default the plane gives an allied pair (0.78), so a pair the plane already reads as allied converts. 0.68 is the trust above which the plane's own rules offer an alliance (relationshipRulesCore.js trade_to_allied: trust > 0.68). MEASURED with the war door's own drafter: the compelled alliance's mint nudge (peaceTermsOverlay.js nudgeCompelledAlliance, 0.15 x the clause's magnitude) adds 0.0135 to 0.0945 trust over 45 drafts (margins 0 to 1, presses 0.6 to 1.4, three budgets), so a client or vassal pair never crosses on the nudge and a trading pair crosses only on a heavy alliance. DRAFT, registered by the lane's builder seat; the owner signs it at the tuning sitting."
+    },
+    "src/domain/worldPulse/pactRenewal.js#RENEGOTIATION_TUNING": {
+      "role": null,
+      "status": "draft",
+      "signedAt": null,
+      "unit": {
+        "ASK_CAP": "fraction01",
+        "DEMAND_SWING": "fraction01"
+      },
+      "band": null,
+      "note": "FP GR-5c RENEGOTIATION FROM STRENGTH (lane FP-B4): the two bands of a mid-term demand. DEMAND_SWING = 0.25 PROPOSED, on the belief map's 0..1 strength scale: how far the demander's believed lead over its counterpart must have moved since the signing (believedMarginAtSignature, read from the demander's side). FLOOR: the swing two FRESH pictures read on the signing day, from the belief map's own quantizer (strengthBandOf / strengthOfBand) over every truth pair on a 101 x 101 grid the war door would sign at: 4686 pairs, max 0.20, p95 0.14, p50 0 (one band stale reaches 0.40: the mistaken court, legal by design). CEILING: the swing a court's recovery from a war's pressure produces, from the one strength derivation (settlementStrength) over 6 tiers x 5 sizes x 3 conflict pressures x 2 exhaustion scars: 180 cases, min 0.09, p50 0.27, max 0.38. 0.25 sits above the floor and at or below the median recovery; the posture colours it to 0.205 .. 0.295 for the court's own demand (still above the fresh floor, still inside the recovery range). ASK_CAP = 0.5 PROPOSED, a fraction of an owed clause's magnitude: at or above the median recovery swing (0.27, so a typical recovery's ask is never capped) and below the relief the war door's own drafter (draftTerms) grants a crushing victory at believed parity (1 - 0.125 / 0.375 = 0.667). DRAFT, registered by the lane's builder seat; the owner signs it at the tuning sitting."
+    },
+    "src/domain/worldPulse/pactRenewal.js#RENEWAL_WINDOW_TUNING": {
+      "role": null,
+      "status": "draft",
+      "signedAt": null,
+      "unit": {
+        "WINDOW_WEEKS": "weeks"
+      },
+      "band": null,
+      "note": "FP GR-5b THE RENEWAL WINDOW (lane FP-B3; ruling FP-15): the last weeks of an instrument's longest live clause in which either court may ask to renew it, on the 52-week clock. PROPOSED = 26. FLOOR: the far court's answer, two legs of the real road plus the deliberation (pactProposals.js answerDueTickFor), measured over real digests of four realm sizes: longest answer 8 / 12 / 18 / 22 weeks at 9 / 20 / 40 / 80 seats, so a renewal asked on the window's first day is answered while the instrument lives. CEILING: below the shortest clause either door mints, 52 weeks (the war door's one-year affordability floor, 21 of 117 clauses over 60 lit mints; peacetime drafts run 156 to 416). DRAFT, registered by the lane's builder seat; the owner signs it at the tuning sitting."
+    },
     "src/domain/worldPulse/pactTriggers.js#PACT_TRIGGER_TUNING": {
       "role": null,
       "status": "draft",
@@ -1518,6 +1679,19 @@
       "unit": null,
       "band": null,
       "note": ""
+    },
+    "src/domain/worldPulse/patronExposure.js#PATRON_EXPOSURE_TUNING": {
+      "role": null,
+      "status": "draft",
+      "signedAt": null,
+      "unit": {
+        "oddsByRank.0": "probability",
+        "oddsByRank.1": "probability",
+        "oddsByRank.2": "probability",
+        "oddsByRank.3": "probability"
+      },
+      "band": null,
+      "note": "FP IN-3 (lane FP-I3): the organic exposure producer's odds by the host court's suspicion rank on the intensity ladder, rising by rank so exposure is monotone in the band; quiet and present expose nothing. DRAFT, registered in the minting commit; nothing here is signed or proposed."
     },
     "src/domain/worldPulse/peaceReasons.js#PEACE_REASON_TUNING": {
       "role": null,
@@ -1558,6 +1732,16 @@
       "unit": null,
       "band": null,
       "note": ""
+    },
+    "src/domain/worldPulse/proposalAdmission.js#DOCKET_TUNING": {
+      "role": null,
+      "status": "draft",
+      "signedAt": null,
+      "unit": {
+        "expiryWeeks": "weeks"
+      },
+      "band": null,
+      "note": "FP-22 U1 THE DOCKET'S HORIZON (cure unit FP-PEACE-2; the chair's ruling of 2026-09-24 under the owner's word 'Again, I leave all judgment to you'): how long a pending proposal row may wait unanswered before it expires through the docket's own writer, on the 52-week clock. PROPOSED = 52. FLOOR, a law: no row may expire inside the advance that minted it (the actor-major DM-attention law, worldpulse-core-3), and the retiring seam cannot see the advance's start, so the horizon must reach past the longest advance, one year (INTERVAL_WEEKS.one_year). MEASURED, the docket's own history in the lit fixture set (the peace-suit realm, seeds fp-lit-map and fp-read-1 to 3, the four envoy keys and the errand spine): a DM ruling at every monthly panel answered 1675 rows, the longest wait 4 weeks; at every yearly panel 1160 rows, the longest wait 52, and 355 of them waited exactly 52, so a horizon of 51 would expire them unseen; a DM who never rules left 62 of the 68 rows the four realms ever asked in twenty years pending at the end, 981 to 1039 weeks old. DRAFT, registered by the unit's builder seat; the owner signs it at the tuning sitting."
     },
     "src/domain/worldPulse/ransomClaim.js#RANSOM_TUNING": {
       "role": null,
@@ -1630,6 +1814,20 @@
       "unit": null,
       "band": null,
       "note": ""
+    },
+    "src/domain/worldPulse/reputationRaceConsumer.js#REPUTATION_RACE_TUNING": {
+      "role": null,
+      "status": "draft",
+      "signedAt": null,
+      "unit": {
+        "GAP_A_SEASON_MAX": "weeks",
+        "GAP_A_WEEK_MAX": "weeks",
+        "GAP_WEEKS_MAX": "weeks",
+        "NOTABLE_SEVERITY": "fraction01",
+        "ROUTINE_SEVERITY": "fraction01"
+      },
+      "band": null,
+      "note": "FP IN-4 commit 2 (lane FP-I2): the reputation race's Herald weights and the three week ceilings that band how far a true account came behind its story. The weights are READ OFF the siblings rather than authored (the notable one is the public misjudgment beat's material weight, the routine one the weight a DM assignment's comings and goings carry); the ceilings are one week, a month and a season. DRAFT, registered in the minting commit because a new tuning table has no silent door; the units are labels read off the source, and nothing here is signed or proposed."
     },
     "src/domain/worldPulse/resourceDynamicsKernel.js#RESOURCE_DYNAMICS_TUNING": {
       "role": null,
@@ -1854,6 +2052,24 @@
       "unit": null,
       "band": null,
       "note": ""
+    },
+    "src/domain/worldPulse/suspicion.js#SUSPICION_TUNING": {
+      "role": null,
+      "status": "draft",
+      "signedAt": null,
+      "unit": {
+        "clearsAt": "fraction01",
+        "decisiveAt": "fraction01",
+        "doubtFloor": "multiplier",
+        "grievanceWeight": "fraction01",
+        "mirrorWeight": "fraction01",
+        "pressingAt": "fraction01",
+        "presentAt": "fraction01",
+        "scandalWeight": "fraction01",
+        "zealAt": "fraction01"
+      },
+      "band": null,
+      "note": "FP IN-3 (lane FP-I3): the suspicion read's dials. Three evidence weights (the scandal condition, the deception-class grievance held, the injected mirror gap), the three cuts onto the borrowed intensity ladder, the two entry thresholds before SP-4's posture factor (clearsAt opens HIDE's answer and the sweep seal, the suspicionAbove band; zealAt turns a fruitless sweep into a witch-hunt), and the floor castDoubt's discount never passes. DRAFT, registered in the minting commit; the units are labels read off the source, and nothing here is signed or proposed."
     },
     "src/domain/worldPulse/tradeSalience.js#TRADE_SALIENCE_TUNING": {
       "role": null,
@@ -2147,6 +2363,26 @@
       },
       "band": null,
       "note": "W-SEAT D10 (SEAT-7a replayed by SEAT-78 at §899→§900): the irregular-force leaf's one dial, SHARE_WEIGHT — the share of the incumbent's political standing a maximal rising takes off the table (the factor spans [1 − SHARE_WEIGHT, 1]); unit `share` from the leaf's own doc block. DRAFT — registered by the Fable chair at the §900 composition because the walker's totality arm convicted the table as unnamed; the lane's receipt predicted this row. Nothing here is signed."
+    },
+    "src/domain/worldPulse/infoLure.js#LURE_NEWS_TUNING": {
+      "role": null,
+      "status": "draft",
+      "signedAt": null,
+      "unit": {
+        "sprungSeverity": "fraction01"
+      },
+      "band": null,
+      "note": "FP IN-2 (lane FP-I): the lure spring's Herald weight, the covert lure_sprung beat's severity. A zero-to-one weight the feed turns into its own integer score, read off the public belief_misjudgment beat's own weight (the same march, read from the street), so one desk ranks one event one way; the beat is covert and reaches only the DM's feed. DRAFT, registered at the IN-2 cure because the walker's P3 arm convicted the bare decimal (infoLure.js 0 -> 1); the unit is a label read off the source, and nothing here is signed or proposed."
+    },
+    "src/domain/region/wizardNews.js#FEED_RETENTION_TUNING": {
+      "role": null,
+      "status": "draft",
+      "signedAt": null,
+      "unit": {
+        "windowWeeks": "weeks"
+      },
+      "band": null,
+      "note": "FP-31 / FP-34 THE FEED'S RETENTION WINDOW (cure unit FP-HERALD-LENS U2, 32315e384; the chair's rulings of 2026-09-24 under the owner's word 'Again, I leave all judgment to you'): the news feed keeps every entry of its newest windowWeeks whole and applies the 240 cap with its major-arc rescue only beyond them, so a year advance's news survives until the DM is shown it. PROPOSED = 52 = INTERVAL_WEEKS.one_year (pinned equal by tests/domain/wizardNewsYearWindow.test.js; kept as its own table so intervalWeeks.js stays out of the first-paint set — FP-34; named *_TUNING because the inventory measures a table by that suffix, TABLE_DEF_RE). MEASURED on read 2's seed: year one minted 434 entries, the bare cap kept 240, the window keeps 433; the persisted feed grows 197 KB → 348 KB after that year (gzip 20 → 37 KB), 263 KB after year two, 248 KB after year three — the owner's decision point FPQ-59 records the growth. DRAFT, registered by the chair at the pick; the owner signs it at the tuning sitting."
     }
   },
   "roles": {

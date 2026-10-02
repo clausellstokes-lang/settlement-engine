@@ -1877,7 +1877,7 @@ are drawn. Measured both ways:
 | tier × route × terrain × magic, seeds varying | 576 | **9** |
 
 Nine authored variants, and **every arm is reachable** — there is no dead arm to
-repair. `generateSettlementReason` (src/generators/narrativeGenerator.js:750) is
+repair. `src/generators/narrativeGenerator.js :: generateSettlementReason` is
 simply thin, and lopsided:
 
 ```
@@ -2309,3 +2309,357 @@ reason, and the diff names where.
 landed on the consist (the cause was composed from a lane and the witness measured at the
 composed tip); no register act — the `preset-lighting-witness` row stays null as the
 freeze discipline requires.
+
+## 2026-09-24 — preset-lighting-witness re-recorded: four rows, five fields each, the first FP lighting unit (LIT-1a)
+
+*Lane FP-L / LIT-1a (the unit's second seat, Opus 5.5), on base `4d2667579` (`fp/lit-0`), at the FP chair's dispatch.*
+
+**Surface:** `tests/fixtures/preset-lighting-witness-golden.json` (registered as
+`preset-lighting-witness`). Re-recorded through the manifest's own RE-RECORD RECIPE, which
+re-runs `tests/simulation/presetLightingWitnessRun.js`, the single writer of these figures.
+The frozen register row is re-stamped through `tests/helpers/goldenRecordDoor.js`
+`recordGolden`: sha256 `7f67ee8e…` -> `17ff68dc…`, rows 15 -> 15.
+
+**Cause (stated, legitimate, signed):** `docs/shift-records/2026-09-24-fp-lighting-1a.json`,
+the owner's word of 2026-09-23, "no just build it all shipped lit" (J-EM-16, the FP lighting
+law). The preset table declares five landed FP flags `true` through two shared fragments in
+`src/domain/worldPulse/simulationRules.js`. `FP_LIT_ALIVE` (`faithUnseatingEnabled`,
+`pactFormationEnabled`) is spread into realistic_regional, dramatic_campaign, living_realm and
+full_simulation. `FP_LIT_WARPEACE` (`oathHolderEnabled`, `treatyLifecycleVoiceEnabled`,
+`treatyRenewalEnabled`) is spread into dramatic_campaign and full_simulation, the two presets
+where `warLayerEnabled` and `peaceEngineEnabled` are both lit. Every key stays VIRTUAL (absent
+from `DEFAULT_SIMULATION_RULES`), so no installed save is re-labelled or gains a byte.
+
+**The row diff, field by field:**
+
+| row | ruleKeyCount | litFlagCount | rulesSha256 | bornWorldSha256 | worldStateSha256 |
+|---|---|---|---|---|---|
+| `realistic_regional` | 58 -> 60 | 33 -> 35 | `5cf7363c…` -> `af6b0bca…` | `df3ba1e5…` -> `ad975aa7…` | `c0654348…` -> `bc9bdd06…` |
+| `dramatic_campaign` | 56 -> 61 | 35 -> 40 | `75cfeb96…` -> `13b46d0d…` | `70e10455…` -> `4d2eae63…` | `bd7fc010…` -> `a5f6297e…` |
+| `living_realm` | 55 -> 57 | 31 -> 33 | `b97fc24d…` -> `2e81baef…` | `1929c532…` -> `79d93cb7…` | `f5f44a26…` -> `b26a79fe…` |
+| `full_simulation` | 70 -> 75 | 45 -> 50 | `32728f51…` -> `36be7529…` | `049d22ea…` -> `9c2ecf59…` | `b03ba26c…` -> `46199b80…` |
+
+Each count moves by exactly the number of keys the preset lit, two or five.
+`worldStateSha256` moves because the rules ride inside the persisted worldState, not because
+the pulse did anything different: `wizardNewsSha256`, `settlementUpdatesSha256` and
+`regionalGraphSha256` are byte-identical in every row, and so are `darkFlagCount`,
+`advanceEpochLit`, the statuses and the tick counts. The witness realm is two aspatial
+settlements over one year, and on it no pulse digest moved, so this witness records the
+lighting without observing these layers act; their own suites and dormancy fences carry that
+proof. `__birth_default__`, `quiet_local`, `static_campaign` and `narrative_campaign` are
+byte-identical. `distinctWorldStateHashes` stays 8, the roster and the birth-successor constant
+(`null`) are unchanged, and the header's `recordedBy` now names this re-record and the two
+before it.
+
+**The one-time shift, stated plainly:** a world BORN into one of the four lit presets now
+carries these layers from its first tick. `__birth_default__` did not move because
+`NEW_CAMPAIGN_SIMULATION_PRESET_ID` is still `null` (ODQ §903 row 1, the owner's), so the plain
+campaign birth receives none of the five keys; the instant-world, dialog-chip and temperament
+births that name a preset do.
+
+**Moved with the same cause, each a declared edit that keeps its old figure:** the birth price
+in `tests/domain/simulationRulesPreset.stability.test.js` (28 -> 30 added keys, 58 -> 60 total,
+21 -> 23 gate keys; born stays 30); `tests/soak-harness/soakRulesBaseline.json`, re-captured by
+executing the 0cbb0177 literal block over the lit table (70 -> 75 keys in each `--seasons`
+variant), with soakScriptSeams ARM 5's `capturedAtHead` pin and ARM 8's leak table beside it;
+three `requires` rows in `scripts/soak/flagConstraints.mjs`; and FENCE 4 of
+`tests/property/oathHolderDormancyFence.test.js`, which now sets aside the preset table's
+strict-true declaration as a declaration rather than a read.
+
+**Unmoved, measured:** the raw-text `*Enabled` token set of `simulationRules.js` (96 before,
+96 after, the same set); the register (36 keys, while the derived dormant list goes 36 -> 31);
+preset identity, checked three ways (a keyless copy of every preset re-infers its own id, an
+installed save carrying none of the five re-infers its own id, and `normalizeSimulationRules({})`
+still infers realistic_regional). All 50 suites of the golden-freeze register ran on the lit
+tree and passed, this witness with its re-recorded rows among them, so no pulse HASH golden
+moved: they drive literal rules, which a preset-table change cannot reach.
+
+**Owed at the landing, and not this unit's to take:** the observed-shape corpus discovers flags
+from the raw text of `src/domain`, and the four new `<flag>: true` lines take it from 81 to 85
+discovered flags (`faithUnseatingEnabled` was already discovered). The corpus lights every flag
+it discovers, so `tests/lint/writerReach.walker.test.js`, which pins its corpus to the
+observed-shape register's frozen `corpusMeta`, reds on three arms (the shapes digest, thinKeys
+9,144 -> 9,148, the lit-dial arm). A control with the five keys spelled as quoted property names
+(the same runtime table, discovery back at 81) turns it green, so the move is the discovery's.
+The governed observed-shape migration rung and the writer-reach rebank are the chair's.
+
+## 2026-09-24 — preset-lighting-witness re-recorded: two rows, one field, CURE-P1 U3's prose cause
+
+*The LIT-1a lane seat (Opus 5.5) for the FP chair, on `fp/witness-rerecord-1` at `df7aeaef4`.*
+
+**Surface:** `tests/fixtures/preset-lighting-witness-golden.json` (registered as
+`preset-lighting-witness`). Re-minted through the manifest's own RE-RECORD RECIPE, which re-runs
+`tests/simulation/presetLightingWitnessRun.js`, the single writer of these figures. The frozen
+register row is re-stamped through `tests/helpers/goldenRecordDoor.js` `recordGolden`: sha256
+`17ff68dc…` -> `8ec8981b…`, rows 15 -> 15.
+
+**Cause (stated, legitimate, signed):** `docs/shift-records/2026-09-24-fp-witness-prose-cure-p1.json`
+(ODQ §934.47 addendum 133 and §934.84): `87d1b1c00`, CURE-P1 U3 (FPQ-23), "the context register
+leaves the page; the rebranch Origin states its cause in words". It rewrote
+`eventProse.js :: NPC_GOAL_NEWS.rebranch.contextReason`, the npc goal-rebranch reason the Herald
+prints as "Origin:", so the sentence states the cause in words instead of listing the context
+key's tokens. The dramatic_campaign and full_simulation rows mint that news within their witnessed
+year; no other row does.
+
+**The row diff, field by field:**
+
+| row | wizardNewsSha256 |
+|---|---|
+| `dramatic_campaign` | `94fc69ef…` -> `3a936351…` |
+| `full_simulation` | `bf07cce8…` -> `74447747…` |
+
+Every other row and every other field (ruleKeyCount, litFlagCount, darkFlagCount, rulesSha256,
+bornWorldSha256, worldStateSha256, settlementUpdatesSha256, regionalGraphSha256, the statuses and
+the tick counts) is byte-identical. `distinctWorldStateHashes` stays 8; the preset roster and the
+birth-successor constant (`null`) are unchanged; `recordedBy` is untouched, as the recipe names
+only the rows and those three header fields.
+
+**Attribution, measured:** with only `87d1b1c00`'s parent copy of `eventProse.js` planted over the
+tip, the witness's single writer reads the two recorded hashes again (`94fc69ef…`, `bf07cce8…`);
+the tip's bytes were restored byte-identical by sha256.
+
+**Discipline:** the record was drafted, with its prediction, before any run; the plain witness run
+red on exactly the two predicted rows before the door; the door re-stamped the register; the plain
+witness run and `tests/lint/goldenFreeze.walker.test.js` are green after it.
+## 2026-09-24 — preset-lighting-witness re-recorded: three rows, five fields each, the second FP lighting unit (LIT-1b)
+
+> **AT THE PICK (the FP chair, 2026-09-24, fp/integration-2026-09-23 @ d53e161cf):** the register row was re-stamped ONCE with the UNION of this re-record and CURE-P1 U3's (54c009fb2): LIT-1b's five lighting fields on its three rows, and CURE-P1's `wizardNewsSha256` on `dramatic_campaign` and `full_simulation` — the seat's prediction that the union equals the lit measurement in every field is proven by the plain witness run at the pick (green), recorded in the FP kit's board. The skeptic's addendum to the signed record (the aspatial tradition-change beats, a second effect of the same cause) is in the record's `_doc`.
+
+
+*The LIT-1b seat (Opus 5.5), on base `6efff620b` (`fp/lit-1b`), at the FP chair's dispatch.*
+
+**Surface:** `tests/fixtures/preset-lighting-witness-golden.json` (registered as
+`preset-lighting-witness`). Re-measured through the manifest's own RE-RECORD RECIPE, which
+re-runs `tests/simulation/presetLightingWitnessRun.js`, the single writer of these figures,
+once at the clean base and once on the lit tree. The frozen register row is re-stamped through
+`tests/helpers/goldenRecordDoor.js` `recordGolden`: sha256 `17ff68dc…` -> `9cb549fd…`, rows
+15 -> 15.
+
+**Cause (stated, legitimate, signed):** `docs/shift-records/2026-09-24-fp-lighting-1b.json`,
+the owner's word, shipped lit (J-EM-16; ODQ §934.84). The preset table declares the belief
+chain the pact stage reads, `beliefAxesEnabled`, `believedConditionsEnabled` and
+`believedScarcityEnabled`, through one shared fragment in
+`src/domain/worldPulse/simulationRules.js` (`FP_LIT_BELIEF`), spread into dramatic_campaign,
+living_realm and full_simulation: the presets that carry `pactFormationEnabled` and an
+infoMode that records beliefs. In the same act, ruling FP-24 (the FP chair, vetoable) gives
+dramatic_campaign living_realm's infoMode `'perfect_delayed'` where it read `'omniscient'`, and
+keeps realistic_regional omniscient, so realistic_regional lights none of the three. Every key
+stays VIRTUAL and infoMode is not a comparison key, so no installed save is re-labelled, gains a
+byte or changes its stored mode on load; a campaign changes only when it is born into one of the
+three presets or when its DM applies one (the toolbar chip or the rules dialog writes the
+preset's current rules as a ruleset change, with its receipt).
+
+**The row diff, field by field:**
+
+| row | ruleKeyCount | litFlagCount | rulesSha256 | bornWorldSha256 | worldStateSha256 |
+|---|---|---|---|---|---|
+| `dramatic_campaign` | 61 -> 64 | 40 -> 43 | `13b46d0d…` -> `1b3929c8…` | `4d2eae63…` -> `695829ad…` | `a5f6297e…` -> `8378430f…` |
+| `living_realm` | 57 -> 60 | 33 -> 36 | `2e81baef…` -> `c581c9b2…` | `79d93cb7…` -> `49523ac6…` | `b26a79fe…` -> `abcd9559…` |
+| `full_simulation` | 75 -> 78 | 50 -> 53 | `36be7529…` -> `a18ff389…` | `9c2ecf59…` -> `2f9a3fdb…` | `46199b80…` -> `2926e9ca…` |
+
+Each count moves by exactly three, the keys the preset lit; dramatic_campaign's infoMode moves
+its rules hash and adds no key (the key was already there at `'omniscient'`).
+`worldStateSha256` moves because the rules ride inside the persisted worldState. The base
+measurement and the lit measurement agree on every pulse digest in every row
+(`wizardNewsSha256`, `settlementUpdatesSha256`, `regionalGraphSha256`), and on
+`darkFlagCount`, `advanceEpochLit`, the statuses and the tick counts: the witness realm is two
+aspatial settlements over one year, where no belief is recorded, so this witness records the
+lighting without observing the chain act (the chain run below is where it acts).
+`__birth_default__`, `quiet_local`, `realistic_regional`, `static_campaign` and
+`narrative_campaign` are unmoved. `distinctWorldStateHashes` stays 8, the roster and the
+birth-successor constant (`null`) are unchanged, and the header's `recordedBy` names this
+re-record and the three before it.
+
+**⚠ WHAT THIS RE-RECORD DOES NOT CARRY, AND WHY THE WITNESS STAYS RED ON TWO FIELDS.** The
+witness was already red at this unit's base: `wizardNewsSha256` of dramatic_campaign
+(`94fc69ef…` -> `3a936351…`) and of full_simulation (`bf07cce8…` -> `74447747…`). Bisected with
+the manifest's own recipe over archives of `src`: `5ca43dc60` (CURE-P1 U2) reproduces the
+recorded manifest and `87d1b1c00` (CURE-P1 U3, FPQ-23, the `npc_goal_rebranch` reason's new
+tellings) does not, and the lighting moves neither field. One record carries one cause, so this
+re-record leaves both fields at their recorded values: the arm "every witnessed row matches the
+recorded witness" is red on exactly those two fields, as it was at the base. Their re-record
+is that cause's own signed record, which landed on the FP tip at `54c009fb2` (the
+fp/witness-rerecord-1 seat, `docs/shift-records/2026-09-24-fp-witness-prose-cure-p1.json`), after
+this unit's base. The two re-records carry disjoint fields: the union (the tip's manifest with this
+entry's five fields per row) equals this tree's lit measurement in every field, sha256
+`b0983ac9…`, and the register row is re-stamped to it once, at the pick.
+
+**The one-time shift, stated plainly:** a world BORN into dramatic_campaign, living_realm or
+full_simulation now runs three more things from its first tick. (1) Where the realm is
+canonized (the belief layer's own gate), its belief records carry the believed scarcity and
+conditions axes, which the pact stage's trade_demand and migration_pressure occasions read.
+(2) `beliefAxesEnabled` is also the D-1 deep-couplings host: belief records gain the
+population-trend and observance axes, and a tradition mutation that reshapes a settlement's
+dominant observance mints its `tradition_change` beat, a gate on the flag alone
+(`beliefAxes.beliefAxesActive`, read by `traditionsKernel.advanceLitTraditions`), canonized or
+not. (3) A world born into dramatic_campaign runs the whole non-omniscient information layer
+(`'perfect_delayed'`: news by travel time, and the belief maps where canonized) instead of
+omniscience. `__birth_default__` did not move because `NEW_CAMPAIGN_SIMULATION_PRESET_ID` is still
+`null` (ODQ §903 row 1, the owner's), and the preset a plain birth resolves, realistic_regional,
+lights none of the three.
+
+**Moved with the same cause, each a declared edit that keeps its old figure:**
+`tests/soak-harness/soakRulesBaseline.json`, re-captured by executing the 0cbb0177 literal block
+over the lit table (75 -> 78 keys in each `--seasons` variant), with soakScriptSeams ARM 5's
+`capturedAtHead` pin and ARM 8's leak table beside it (quiet_local 38 -> 41, narrative_campaign
+38 -> 41, static_campaign 39 -> 42, realistic_regional 15 -> 18; living_realm 18,
+dramatic_campaign 14 and full_simulation 0 unmoved); FENCE 4 of
+`tests/property/believedWorldAxesDormancyFence.test.js`, which now sets aside the preset table's
+strict-true declaration as a declaration rather than a read; the preset roster of
+`tests/domain/infoModeUnlock.test.js` (dramatic_campaign leaves the omniscient roster); a LIT-1b
+arm in `tests/domain/simulationRulesPreset.stability.test.js`; and the citation walker's archival
+roster (this unit's record joins `tree`, 18 -> 19).
+
+**Unmoved, measured:** the birth price (30 added keys, 60 total, 23 gate keys, born 30:
+realistic_regional lights nothing here); the covering array (the three SP-B `requires` rows were
+already present: 78 rows, 17,966 of 17,966 reachable pairs, zero rows crediting a family under
+a dark host, the same rows digest) and the flag-domain census (union 98); the raw-text
+`*Enabled` token set of `simulationRules.js` (101 before, 101 after, the same set); the register
+(41 keys, while the derived dormant list goes 36 -> 33); preset identity, checked three ways (a
+keyless copy of every preset re-infers its own id, an installed save carrying none of the three
+re-infers its own id, `normalizeSimulationRules({})` still infers realistic_regional) and a
+fourth for FP-24 (an installed Dramatic Campaign stored `'omniscient'` keeps its id and its
+mode).
+
+**The chain, run on the lit tree (not a golden; the FP kit's LIT dependency map driver over the
+reader corpus's canonized four-court realm, twenty yearly advances, the preset alone):**
+full_simulation, seed `fp-lit-map`: 759 proposals, 742 without overlap, 11 refused, 1 signed
+(tick 995), and one signed beat on the Herald ("Langenfeld and Dunkelkoppel have set their names
+to terms, in peace"), on the campaign lens and in the letter but not on the advance lens
+(FPQ-29); seed `fp-read-2`: 837 proposals, 1 signed (tick 21), one signed beat.
+dramatic_campaign, seed `fp-lit-map`: 932 proposals, 928 without overlap, 0 signed, no beat;
+seed `fp-read-2`: 853 proposals, 1 signed (tick 21), one signed beat. At the base, seed
+`fp-lit-map` records 0 pact receipts in both presets: dramatic_campaign was omniscient (no belief
+record at all), and full_simulation held up to 39 belief records with no scarcity or conditions
+band on any of them (lit, 36 records carry each family).
+
+**Owed at the landing, and not this unit's to take:**
+- The observed-shape corpus discovers flags from the raw text of `src/domain`, and the three new
+  `<flag>: true` lines take it from 87 to 90 discovered flags. `tests/lint/writerReach.walker.test.js`
+  pins its corpus to the observed-shape register's frozen `corpusMeta` and reds on the same three
+  arms it reds at the base (shapes digest, thinKeys, the lit-dial arm), with thinKeys 9,150 -> 9,153.
+  A control with the fragment's keys spelled as quoted property names (the same runtime table)
+  measures 9,150 again, so the move is the discovery's. The governed observed-shape migration rung
+  and the writer-reach rebank are the chair's.
+- `simulationRules.js` is an input of the edge-shared `aiCharterBundle` and
+  `aiOutputSchemaBundle` (their meta list it), so their freshness arms red until the landing's
+  rebuild at a tip that carries this entry.
+- The lighting census: +1 test title and nothing else (26,489 -> 26,490 under `CENSUS_STASIS=1`,
+  files, parked, credited and suite titles unmoved by this unit).
+- ⛔ A FROZEN GOLDEN THIS ENTRY DOES NOT NAME: IN-5's `herald-knowledge-desk-golden`
+  (`tests/fixtures/herald-knowledge-desk-golden.json`, landed on the FP tip at `6cf6920d4`, after
+  this unit's base) pins the Full Simulation reader-corpus realm `rr-fresh-full` for one year.
+  Measured with IN-5's own projection helper over this tree: with the three keys the content hash
+  reads `a69c75ab…` and a `signed` pact beat enters the realm's first-year Herald (241 items
+  either way); with them removed it reads the recorded `d3513ef1…`. The same cause moves it, and
+  its re-record through the door at the tip is the chair's call.
+- `tests/scripts/readerCorpusManifest.test.js`, the arm "the dossier records the entitlement it
+  was read at…": ruling FP-24 makes the reader corpus's `rr-fresh-dramatic` realm record beliefs,
+  so the arm expects the DM and free dossiers to diverge, and they do not, because the reader
+  corpus renders the DM dossier with the campaign but no `settlementId`
+  (`scripts/review/readerCorpus.mjs` `renderReaderDocuments`), unlike the product's export seam
+  (`resolveExportSeam` passes `settlementId: saveId`); the live-world slice resolves the
+  settlement's generated id, which no ledger keys. A harness defect the lighting exposes, owed a
+  cure where the harness lives.
+
+## 2026-09-24 — preset-lighting-witness re-recorded: two rows, five fields each, the third FP lighting unit (LIT-2)
+
+*The LIT-2 second seat (Opus 5.5), on base `90cbf7963` (`fp/lit-2`), at the FP chair's re-dispatch
+under ruling FP-36, building from the first seat's measurement.*
+
+**Surface:** `tests/fixtures/preset-lighting-witness-golden.json` (registered as
+`preset-lighting-witness`). Re-measured through the manifest's own RE-RECORD RECIPE, which
+re-runs `tests/simulation/presetLightingWitnessRun.js`, the single writer of these figures,
+once at the clean base (which reproduced the recorded rows exactly) and once on the lit tree.
+The frozen register row is re-stamped through `tests/helpers/goldenRecordDoor.js`
+`recordGolden`: sha256 `b0983ac9…` -> `366e8448…`, rows 15 -> 15.
+
+**Cause (stated, legitimate, signed):** `docs/shift-records/2026-09-24-fp-lighting-2.json`, the
+owner's word, shipped lit (J-EM-16; ODQ §934.84). The preset table declares
+`mediationGeneralizedEnabled` inside the existing shared fragment `FP_LIT_WARPEACE` of
+`src/domain/worldPulse/simulationRules.js`, first by codepoint (SR-7), so it lights in
+dramatic_campaign and full_simulation: the two presets where `warLayerEnabled` and
+`peaceEngineEnabled` are both lit, which is the key's own gate
+(`mediationPressure.mediationGeneralizedActive` reads the three in one conjunction). The key
+stays VIRTUAL, so no installed save is re-labelled, gains a byte or changes on load; a campaign
+changes only when it is born into one of the two presets or when its DM applies one (the toolbar
+chip or the rules dialog writes the preset's current rules as a ruleset change, with its
+receipt).
+
+**The row diff, field by field:**
+
+| row | ruleKeyCount | litFlagCount | rulesSha256 | bornWorldSha256 | worldStateSha256 |
+|---|---|---|---|---|---|
+| `dramatic_campaign` | 64 -> 65 | 43 -> 44 | `1b3929c8…` -> `d6b432b0…` | `695829ad…` -> `d578f848…` | `8378430f…` -> `d42e2bd0…` |
+| `full_simulation` | 78 -> 79 | 53 -> 54 | `a18ff389…` -> `d57a8cb8…` | `2f9a3fdb…` -> `dfc191d7…` | `2926e9ca…` -> `387c61ab…` |
+
+Each count moves by exactly one, the key the preset lit; `worldStateSha256` moves because the
+rules ride inside the persisted worldState. The base and lit measurements agree on every pulse
+digest in every row (`wizardNewsSha256`, `settlementUpdatesSha256`, `regionalGraphSha256`), on
+`darkFlagCount`, `advanceEpochLit`, the statuses and the tick counts: the witness realm seats no
+deity, so no broker stands between a pair and the witness records the lighting without
+observing it act. `__birth_default__`, `quiet_local`, `realistic_regional`, `static_campaign`,
+`narrative_campaign` and `living_realm` are unmoved; `distinctWorldStateHashes` stays 8, the
+roster and the birth-successor constant (`null`) are unchanged, and `recordedBy` names this
+re-record and the ones before it.
+
+**The one-time shift, stated plainly:** in a world born into dramatic_campaign or
+full_simulation where a broker stands between two courts, an ordered war can be held back and
+is told as the war that did not happen (the `brokered_back` beat, naming the broker), the broker
+earns the two-edge trust the war-exit broker earns, and a fraying pact with a broker between its
+parties strains one banded notch more slowly. Measured over the reader corpus's canonized
+four-court realm with the WF-0 two-faith seating, twenty yearly advances, seed `fp-read-2`: 1
+`brokered_back` beat in dramatic_campaign and 3 in full_simulation (16 news-kind changes in
+all there, the news total unchanged at 6,422). With no seated deity, or at seed `fp-lit-map`,
+both presets run byte-identical to dark for the twenty years. `__birth_default__` did not move
+because `NEW_CAMPAIGN_SIMULATION_PRESET_ID` is still `null` (ODQ §903 row 1, the owner's).
+
+**Moved with the same cause, each a declared edit that keeps its old figure:**
+`tests/soak-harness/soakRulesBaseline.json`, re-captured by executing the 0cbb0177 literal block
+over the lit table (78 -> 79 keys in each `--seasons` variant; the same block over the parent's
+table reproduced the previous capture byte-for-byte), with soakScriptSeams ARM 5's
+`capturedAtHead` pin (`6efff620b…` -> `90cbf7963…`) and ARM 8's leak table beside it (quiet_local
+41 -> 42, narrative_campaign 41 -> 42, static_campaign 42 -> 43, realistic_regional 18 -> 19,
+living_realm 18 -> 19; dramatic_campaign 14 and full_simulation 0 unmoved); FENCE 4 of
+`tests/domain/mediationGeneralizedGr6.test.js`, which now sets aside the preset table's
+strict-true declaration as a declaration rather than a read, and counts it; a LIT-2 arm in
+`tests/domain/simulationRulesPreset.stability.test.js`; the covering array's `requires` row
+(`scripts/soak/flagConstraints.mjs`: mediation needs war and peace; without it 1 of 71 rows lit
+the key under a dark parent, with it 0 of 74 rows do, and all 18,368 reachable pairs are
+covered); and the citation walker's archival roster (this unit's record joins `tree`, 23 -> 24).
+
+**Unmoved, measured:** the birth price (realistic_regional lights nothing here); the flag-domain
+census (union 99, virtual 42); the raw-text `*Enabled` token set of `simulationRules.js` (102
+before, 102 after, the same set); the register (42 keys, while the derived dormant list goes
+34 -> 33); preset identity, checked three ways (a keyless copy of every preset re-infers its own
+id, an installed save carrying no mediation key re-infers its own id,
+`normalizeSimulationRules({})` still infers realistic_regional); IN-5's
+`herald-knowledge-desk-golden` (`rr-fresh-full|1`, no seated deity: contentSha256 `8941ee55…`,
+364 items, measured on the lit tree).
+
+**⛔ WHAT THIS UNIT HELD, AND WHY (the FP chair's ruling FP-36 asked for more).** FP-36 would
+also have lit the statecraft head, `infoStatecraftEnabled` with `informationBrokeragesEnabled`,
+together with the lure and the counter-intelligence sweep, in the three belief presets, and told
+the seat to STOP if the head's shift is larger than a lighting may carry (a golden of another
+program moving, or a same-seed world diverging beyond news). Measured with the first seat's
+twin-run driver, the head alone against the preset alone over the same realm and seed, the world
+diverges in every one of the twenty years in all three presets, with or without a seated deity,
+and not only in news. The news volume goes 4,757 -> 4,895 (dramatic_campaign), 5,369 -> 5,081
+(living_realm) and 6,422 -> 5,390 (full_simulation, sixteen percent fewer items). Generosity
+refusals fall 1,239 -> 322 (full_simulation) and 616 -> 187 (living_realm), and dramatic_campaign's
+war mobilizations fall 108 -> 3. The same instrument puts the accepted pact chain of LIT-1a and
+LIT-1b at about a quarter of that divergence in full_simulation, and this unit's mediation at 16
+kind-changes against the head's 1,916. So the head stays dark, with the lure and the sweep that
+ride it, and the ruling is the chair's. Under a plant of the chartered table the register's
+goldens stayed green but for the witness and IN-5's desk golden (`rr-fresh-full|1`
+contentSha256 `8941ee55…` -> `e33d2999…`, 364 -> 356 items). `reputationRaceEnabled` stays dark
+(its story leg answers only over the lived route network: the owner's `routeLifecycleEnabled`,
+and a genesis with no caller, FPQ-44) and `errandSpineEnabled` stays dark (its envoy road is the
+owner's envoy keys).
+
+**Owed at the landing, and not this unit's to take:** the observed-shape corpus discovers flags
+from the raw text of `src/domain`, and the new `mediationGeneralizedEnabled: true` line is a
+discovery, so `tests/lint/writerReach.walker.test.js` reds on its thinKeys and digest arms until
+the governed observed-shape rung and the writer-reach rebank (the chair's); `simulationRules.js` is
+an input of the edge-shared `aiCharterBundle` and `aiOutputSchemaBundle`, so their freshness arms
+red until the landing's rebuild; the lighting census moves by this unit's new test titles.

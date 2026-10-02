@@ -189,6 +189,82 @@ const THE_CALLER = 'src/domain/worldPulse/operations/missionDispatcher.js';
  * AND NOWHERE ELSE. Most recently at the ENGINE-HYGIENE landing (SHIFT RECORD,
  * 2026-09-01, TE-AGNOSTIC-1 cars `f2c1ad181` / `97d119c9b`); before that at T8.
  *
+ * ── 2026-10-02, THE VOICE PROGRAM WAVE 4 BLOCK 1: THE ARRIVAL HOOK NAMES ONLY WHAT IT HOLDS ──
+ * THE TWELFTH MOVEMENT OF THIS CONSTANT, owner-signed through the door under ODQ §934.88; the
+ * record is docs/shift-records/2026-10-02-voice-program-wave-4-hook-structures.json.
+ * THE MOVER: a stress vignette naming a wall, gate, market, guard, granary or temple is drawn only
+ * where the settlement holds it, and eleven structure-free vignettes join the pool (e76ea7f3c).
+ * The base 5c12d56ee held `5df27d67…` (this file green there) before this value was taken.
+ * On THIS corpus 59 of 360 rows move, the stressed ones; 360/360 hashes stay distinct.
+ * ATTRIBUTION, ZERO RESIDUE: with `arrivalScene` and `pressureSentence` removed, all 360 rows
+ * hash identically at the base and here. `5df27d67…` -> `b9945f18…`.
+ *
+ * ── 2026-10-02, THE VOICE PROGRAM WAVE 3: THE ARRIVAL SCENE IS A PLACE ──────────────────
+ * THE ELEVENTH MOVEMENT OF THIS CONSTANT, owner-signed through the door under ODQ §934.88; the
+ * record is docs/shift-records/2026-10-02-voice-program-wave-3-arrival-place.json.
+ * THE MOVER: the arrival scene is composed beat by beat (d2dfd88b5): the tier template, the
+ * slider-keyed magic line and the restating addon retire, and the sense, people and closing
+ * beats speak facts the settlement holds. The base a85aa6c10 held `291e0a1e…` (this file green
+ * there) before this value was taken.
+ * On THIS corpus 360 of 360 rows move; 360/360 hashes stay distinct.
+ * ATTRIBUTION, ZERO RESIDUE: with `arrivalScene` and `pressureSentence` removed, all 360 rows
+ * hash identically at the base and here. `291e0a1e…` -> `5df27d67…`.
+ *
+ * ── 2026-10-02, THE VOICE PROGRAM WAVE 2: THE ARRIVAL AND PRESSURE DRAWS ON THEIR OWN STREAMS ──
+ * THE TENTH MOVEMENT OF THIS CONSTANT, owner-signed through the door under ODQ §934.88; the
+ * record is docs/shift-records/2026-10-02-voice-program-wave-2-substreams.json.
+ * THE MOVER: assembleSettlement.js runs the pressure sentence and the arrival scene each on a
+ * named child stream ('pressure-sentence', 'arrival-scene') instead of the step's shared one
+ * (ed3768dc1), so the same seed prints different words in those two fields. The base 78ed2d08c
+ * held `1c3748cb…` (this file green there) before this value was taken.
+ * On THIS corpus 360 of 360 rows move; 360/360 hashes stay distinct.
+ * ATTRIBUTION, ZERO RESIDUE: with `arrivalScene` and `pressureSentence` removed, all 360 rows
+ * hash identically at the base and here. `1c3748cb…` -> `291e0a1e…`.
+ *
+ * ── 2026-10-01, J33: THE WARDEN'S LODGE CENSUS (owner-signed, through the door) ──────────
+ * THE NINTH MOVEMENT OF THIS CONSTANT, under the same owner words as the eighth ("Warden's
+ * Lodge stays defense, not druid"); the record is
+ * docs/shift-records/2026-10-01-urban-band-warden-census.json (odqRow §934.86 addendum 2).
+ * THE MOVER: the census the eighth movement's J31 owed. The lodge leaves every druid and magic
+ * list (the chains' druid tradition, druidic cultivation in both food readers, folk magic
+ * presence, the Druid Elder's seat), so in this magic-world corpus a settlement holding one
+ * loses the druid readings it alone had opened. The base 731e19597 held `4888fd37…` (this
+ * file green there) before this value was taken.
+ * On THIS corpus 29 of 360 rows move, all of them towns; 360/360 hashes stay distinct.
+ * ATTRIBUTION, ZERO RESIDUE: the 29 moved rows are exactly the 29 corpus settlements holding
+ * a Warden's Lodge, and none of the 331 unmoved rows holds one. `4888fd37…` -> `1c3748cb…`.
+ *
+ * ── 2026-10-01, DRUIDS IN A WORLD WITHOUT MAGIC (owner-signed, through the door) ─────────
+ * THE EIGHTH MOVEMENT OF THIS CONSTANT since the genesis freeze, a signed re-record under
+ * tests/helpers/goldenRecordDoor.js like the seventh, and again not a spend of the one
+ * window this file's STOP still names. The owner's words (2026-10-01): "druid is magic" ·
+ * "Warden's Lodge stays defense, not druid"; the record is
+ * docs/shift-records/2026-10-01-urban-band-druid-faith.json (odqRow §934.86 addendum 2).
+ * THE MOVER: Warden's Lodge is defence, not druid. Its description, variants and identity
+ * sentence lose the druid clause, its pairing becomes military, and it defends in every
+ * world with a mundane tracking term (J31/J32). The instrument was re-run at the base
+ * 4b86da68a and reproduced `9dab4460…` exactly before this value was taken.
+ * On THIS corpus 29 of 360 rows move, all of them towns; 360/360 hashes stay distinct.
+ * ATTRIBUTION, ZERO RESIDUE: the 29 moved rows are exactly the 29 corpus settlements
+ * holding a Warden's Lodge, and none of the 331 unmoved rows holds one. `9dab4460…` ->
+ * `4888fd37…`.
+ *
+ * ── 2026-09-30, THE URBAN BAND (owner-signed, through the door) ──────────────────────────
+ * THE SEVENTH MOVEMENT OF THIS CONSTANT since the genesis freeze, and like the ones before
+ * it a signed re-record under tests/helpers/goldenRecordDoor.js rather than a spend of
+ * the one window this file's STOP still names. The owner's rulings: "Urban-band rebuild
+ * (Recommended)" and "Approve + fold in MF-CH2B (Recommended)" (2026-09-30); the record is
+ * docs/shift-records/2026-09-30-urban-band-institutions.json (odqRow §934.86). THE MOVER, IN
+ * THE RECORD'S OWN WORDS: ONE CAUSE: THE URBAN BAND — the institution catalog became a
+ * registry with two cumulative laws and complete tier blocks, and MF-CH2B's gates read the
+ * declared magic licence (folded in by the owner, which is why MF-CH2B — named below as a
+ * constituent of the LIGHTING WAVE — moves this constant here, through the door, and not
+ * as a spend of that window). The registry re-orders the catalog draws, so every same-seed
+ * roster moves. The instrument was re-run at the base 5d699cc68 and reproduced `0d5dac61…`
+ * exactly before this value was taken.
+ * On THIS corpus 360 of 360 rows move; 360/360 hashes stay distinct. `0d5dac61…` ->
+ * `9dab4460…`.
+ *
  * ── 2026-09-19, THE READER MET 'CHURCHES, MONASTERIES' IN A QUARTER CARD (owner-signed, through the door) ────
  * THE SIXTH MOVEMENT OF THIS CONSTANT since the genesis freeze, and like the ones before
  * it a signed re-record under tests/helpers/goldenRecordDoor.js rather than a spend of
@@ -339,7 +415,7 @@ const THE_CALLER = 'src/domain/worldPulse/operations/missionDispatcher.js';
  * superseded by the ENGINE-HYGIENE re-record above, which is the record of the
  * one chartered window that has been spent since.
  */
-const PRE_COUPLING_CORPUS_SHA = '0d5dac61460956399f7a787d8dae6db93a2bddfdb870883ba958125342fbe430';
+const PRE_COUPLING_CORPUS_SHA = 'b9945f18189f0833f2a0691f5e2da5b7691e0b1b0efe9e437abc8601bf3be128';
 
 const CORPUS_TIERS = Object.freeze(['thorp', 'hamlet', 'village', 'town', 'city', 'metropolis']);
 const CORPUS_ROUTES = Object.freeze(['road', 'isolated', 'port', 'crossroads']);

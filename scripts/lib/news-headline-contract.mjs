@@ -13,7 +13,25 @@ const LANES = Object.freeze({ mechanicalOutcomes: 8, selectedOutcomes: 24 });
 // ── RE-RECORDED 2026-09-01 BY THE WAR LANDING (§876) — STILL THE SECOND COPY OF THE SAME TUPLE.
 // 268/28/51 → 272/32/50. The provenance, the five-arm single-variable control and the falsified
 // dispatch causes are recorded once, at the voice contract's copy, exactly as before.
-const CORPUS = Object.freeze({ pulseRoots: 12, introductions: 272, retirements: 32, finalEntries: 240, homes: 50 });
+// ── RE-RECORDED 2026-09-24 BY FP BATCH LANDING 4 (the FP chair, session 87797a6a), IN THE SAME ACT AS THE NEWS-VOICE
+// CONTRACT, THE PROSE-FAMILY CONTRACT AND THE OSR WALKER'S PINS ─────────────────────────────────────────────────────
+// CORPUS 273/33/240/51 → 273/1/272/51 (retirements and finalEntries only). ADDRESS_TOTALS,
+// RAW_LIVENESS and REWRITE_TOTALS HOLD: the addresses are minted at INTRODUCTION and the raw headline rows are the persisted
+// pulse records, neither of which the retention window touches. ONE CAUSE: the Herald lens U2 (32315e384, FP-31 = P1), the
+// 52-week window under the 240 cap; attributed by equality with the U2 seat's own measurement at its base.
+// ── RE-RECORDED 2026-09-24 BY FP BATCH LANDING 3 (the FP chair, session 87797a6a), IN THE SAME ACT AS THE NEWS-VOICE
+// CONTRACT, THE PROSE-FAMILY CONTRACT AND THE OSR WALKER'S PIN ───────────────────────────────────────────────
+// CORPUS 272/32/240/50 → 273/33/240/51; ADDRESS_TOTALS 50/2/100/12/88/393/544 → 51/2/102/13/89/395/546;
+// REWRITE_TOTALS occurrences 144 → 145 (rules 26, active 16, inert 10, distinct 63 HOLD); RAW_LIVENESS: the selectedOutcomes lane
+// gains one headline occurrence and the mechanical lane holds. ONE CAUSE, ATTRIBUTED BY BISECT (the corpus builder run per
+// sha over the fourteen commits since landing 2, then these walkers at the culprit): CURE-PEACE-1 U1 (c9b24fe51) — a
+// peacetime suit retires when a war opens against its court, and the feed's reconcile of the superseded proposal mints
+// ONE new wizard-news id with a home of its own (a new address, prospective voice, one spelling). Every figure here was
+// derived by the walkers' own functions from one corpus build and cross-checked at c9b24fe51 and at the landing tip.
+// ── RE-RECORDED 2026-10-01 BY THE URBAN-BAND CHAIR (session 93391427), IN THE SAME ACT AS THE NEWS-VOICE CONTRACT, THE
+// PROSE-FAMILY CONTRACT AND THE OSR WALKER'S PINS: CORPUS 273/1/272/51 → 265/1/264/44 (the provenance and the named homes
+// are recorded once, at the voice contract's copy); ADDRESS_TOTALS, RAW_LIVENESS and REWRITE_TOTALS below, each noted.
+const CORPUS = Object.freeze({ pulseRoots: 12, introductions: 265, retirements: 1, finalEntries: 264, homes: 44 });
 // ── RE-RECORDED 2026-09-01 BY T8 · SHIFT (ODQ §858 + §860) ─────────────────────────────────────
 // 53/106/14/92/400/544 → 51/102/12/90/393/536. `fields` holds at 2, as it must: the address grammar
 // is still headline-and-summary and nothing was added to it.
@@ -42,7 +60,12 @@ const CORPUS = Object.freeze({ pulseRoots: 12, introductions: 272, retirements: 
 // `applied|stressor_birth_*` homes, and `applied|trade_pressure` +1 occurrence on both fields.
 // The single-variable control and the two falsified dispatch causes are recorded once, at
 // `scripts/lib/news-voice-contract.mjs`.
-const ADDRESS_TOTALS = Object.freeze({ homes: 50, fields: 2, identities: 100, prospectiveIdentities: 12, indicativeIdentities: 88, distinctValues: 393, occurrences: 544 });
+// 2026-10-01 (the urban band + the druid rulings): 51/2/102/13/89/395/546 → 44/2/88/14/74/385/530. `fields` holds at 2.
+// Eleven homes leave with their 22 rows and four arrive with 8 (five of them prospective); no surviving row flips its voice.
+// 2026-10-02 (THE VOICE PROGRAM wave 1, the owner: "Updates like these need to reflect actions not to potential"): 44/2/88/14/74/385/530 → 44/2/88/0/88/392/530.
+// The corpus does not move (12/265/1/264/44); every address keeps its home and field and EVERY prospective row turns
+// indicative, because each producer now writes its pending proposal UNDER WAY and its applied twin DONE (heraldDeeds.js).
+const ADDRESS_TOTALS = Object.freeze({ homes: 44, fields: 2, identities: 88, prospectiveIdentities: 0, indicativeIdentities: 88, distinctValues: 392, occurrences: 530 });
 const RAW_LIVENESS = Object.freeze({
   pulseRecords: 12,
   lanes: Object.freeze([
@@ -59,7 +82,9 @@ const RAW_LIVENESS = Object.freeze({
     // WAR LANDING (§876): 54/28/50/27/4/1 → 53/28/49/27/4/1. ONE mechanical headline leaves and it
     // was prospective; both distinct counts and the whole indicative half hold, so the departing
     // record was a duplicate spelling of one already in the lane.
-    Object.freeze({ field: 'mechanicalOutcomes', capPerPulse: 8, headlineOccurrences: 53, distinctValues: 28, prospectiveOccurrences: 49, prospectiveDistinctValues: 27, indicativeOccurrences: 4, indicativeDistinctValues: 1 }),
+    // 2026-10-01 (the urban band + the druid rulings): 53/28/49/27/4/1 → 49/22/44/21/5/1, the re-dealt year's mechanical beats.
+    // 2026-10-02 (THE VOICE PROGRAM wave 1): every persisted headline in this lane is now a deed; its prospective half is zero.
+    Object.freeze({ field: 'mechanicalOutcomes', capPerPulse: 8, headlineOccurrences: 49, distinctValues: 22, prospectiveOccurrences: 0, prospectiveDistinctValues: 0, indicativeOccurrences: 49, indicativeDistinctValues: 22 }),
     // ⭐ THE CONTROL THAT HELD FOR TWO RE-RECORDS NOW MOVES, AND THAT IS THE POINT OF KEEPING IT.
     // T8 recorded this lane byte-identical twice running because the corruption work never authors
     // into it. WAR LANDING (§876): 151/80/95/66/56/14 → 153/78/95/63/58/15, and the shape names the
@@ -68,7 +93,9 @@ const RAW_LIVENESS = Object.freeze({
     // number of "may" beats in FEWER spellings and two more settled ones. That is `5a529f100`'s
     // upheaval gates re-dealing which seats are fragile when — a lane the corruption work could not
     // reach, and the first cause in three re-records that does.
-    Object.freeze({ field: 'selectedOutcomes', capPerPulse: 24, headlineOccurrences: 153, distinctValues: 78, prospectiveOccurrences: 95, prospectiveDistinctValues: 63, indicativeOccurrences: 58, indicativeDistinctValues: 15 }),
+    // 2026-10-01 (the urban band + the druid rulings): 154/78/96/63/58/15 → 155/75/93/59/62/16.
+    // 2026-10-02 (THE VOICE PROGRAM wave 1): every persisted headline in this lane is now a deed; its prospective half is zero.
+    Object.freeze({ field: 'selectedOutcomes', capPerPulse: 24, headlineOccurrences: 155, distinctValues: 84, prospectiveOccurrences: 0, prospectiveDistinctValues: 0, indicativeOccurrences: 155, indicativeDistinctValues: 84 }),
   ]),
   // TE36: the union follows the mechanical lane alone — 228 → 207 (−21, the same 21),
   // 83 → 80 distinct, 168 → 147 prospective. The indicative halves do not move at all.
@@ -81,7 +108,11 @@ const RAW_LIVENESS = Object.freeze({
   // SELECTED lane's exactly — 80 = 80 before, 78 = 78 now — so the mechanical lane's 28 spellings
   // are still a strict subset of the public lane's. That is what makes the union's distinct half
   // an honest check on the lanes rather than a restatement of them.
-  union: Object.freeze({ headlineOccurrences: 206, distinctValues: 78, prospectiveOccurrences: 144, prospectiveDistinctValues: 63, indicativeOccurrences: 62, indicativeDistinctValues: 15 }),
+  // FP BATCH 3 (2026-09-24): the union follows the selectedOutcomes lane — 206/144 → 207/145; the distinct and indicative halves hold.
+  // 2026-10-01 (the urban band + the druid rulings): 207/78/145/63/62/15 → 204/75/137/59/67/16, and THE STRUCTURAL FACT SURVIVES:
+  // union.distinctValues equals the selected lane's (75 = 75), so the mechanical spellings are still a subset of the public lane's.
+  // 2026-10-02 (THE VOICE PROGRAM wave 1): the union's prospective half is zero for the first time.
+  union: Object.freeze({ headlineOccurrences: 204, distinctValues: 84, prospectiveOccurrences: 0, prospectiveDistinctValues: 0, indicativeOccurrences: 204, indicativeDistinctValues: 84 }),
 });
 // TE36 (ODQ §271): 17/9 → 16/10 and 69/168 → 66/147. THE RULE COUNT IS UNCHANGED AT 26 —
 // no rewrite rule was added or deleted; one CROSSED from active to inert because the corpus
@@ -100,26 +131,45 @@ const RAW_LIVENESS = Object.freeze({
 // `may intensify` 2/4 → 1/2, `may reform` 23/50 → 23/49, `may suppress` 6/12 → 5/11, `may take
 // hold` 5/18 → 5/19. The three that lose a spelling are the −3 distinct; the occurrences net to
 // −1. Every one of them is an upheaval-adjacent verb, which is `5a529f100` read off the registry.
-const REWRITE_TOTALS = Object.freeze({ rules: 26, activeRules: 16, inertRules: 10, distinctValues: 63, occurrences: 144 });
+// 2026-10-01 (the urban band + the druid rulings): 26/16/10/63/145 → 26/15/11/59/137. THREE RULES CROSS, NAMED, and the chair
+// claims the inert-row authority ("New inert rows require authority", ODQ §271) under the owner's "I defer all judgment to
+// you": `may intensify` and `may press a challenge to the government` go INERT (their homes left the re-dealt year), and
+// `may fall` goes ACTIVE through a second seam, a TIER DEMOTION headline ("Llanton may fall to hamlet", tier_change), not the
+// population decline WAVE P4 gated, so its known-inert row leaves the list below.
+// 2026-10-02 (THE VOICE PROGRAM wave 1): 26/15/11/59/137 → 26/0/26/0/0. EVERY RULE IS INERT, and by construction rather
+// than by the corpus's luck: each live producer writes its own applied twin, so the de-hedger reaches only proposals
+// persisted before the program. The rules are KEPT for exactly those (THE PROMISE). The chair claims the inert-row
+// authority ("New inert rows require authority", ODQ §271) under the owner's "I leave all judgment to you", and every
+// row's reason below is re-written to name its producer's deed form.
+const REWRITE_TOTALS = Object.freeze({ rules: 26, activeRules: 0, inertRules: 26, distinctValues: 0, occurrences: 0 });
 
 export const KNOWN_INERT_HEADLINE_REWRITES = Object.freeze([
-  { source: '\\bmay close its doors\\b', flags: '', replacement: 'closes its doors', reason: 'institutionLifecycle.js::evaluateInstitutionLifecycle is the live institution-closure authoring seam; the executed AO-0 12-record persisted public+mechanical union contains no closure headline.' },
-  { source: '\\bmay defect\\b', flags: '', replacement: 'defects', reason: 'npcAgency.js::deriveNpcCandidates exposes NPC_ACTION_FAMILIES.defect through candidateForAction; the executed AO-0 12-record persisted public+mechanical union contains no defect headline.' },
-  // ── TE36 (ODQ §271, CHAIR-AUTHORIZED — "New inert rows require authority", and this is it).
-  // THE SIBLING OF THE ROW BELOW, AND THE SAME MECHANISM ONE WAVE LATER. P1 suppressed bare
-  // GROWTH under `demographicsEnabled` and `may grow` went inert; WAVE P4 suppresses bare
-  // DECLINE under the same flag, for the same reason (design law 1: no growth that is not a
-  // birth, and no shrink that is not a death), and `may fall` follows it. ⚠ READ THE SCOPE:
-  // this corpus lights EVERY `*Enabled` flag, so both rows are inert HERE and nowhere else —
-  // `demographicsEnabled` is false in every shipped preset, where both seams still author.
-  { source: '\\bmay fall\\b', flags: '', replacement: 'falls', reason: 'populationDynamics.js::populationCandidate is the live decline authoring seam, and WAVE P4 (ODQ §219.3) gated it: with demographicsEnabled lit the lane emits population ONLY as a conserved transfer, so bare decline is refused exactly as bare growth already was and the executed AO-0 12-record persisted public+mechanical union contains no fall headline. THE CORPUS LIGHTS EVERY FLAG, so this row reads INERT here and NOWHERE ELSE: demographicsEnabled is false in every shipped preset, where the seam still authors the headline.' },
-  { source: '\\bmay grow\\b', flags: '', replacement: 'grows', reason: 'populationDynamics.js::populationCandidate is the live growth authoring seam; the executed AO-0 12-record persisted public+mechanical union contains no growth headline.' },
-  { source: '\\bmay hoard\\b', flags: '', replacement: 'hoards', reason: 'npcAgency.js::deriveNpcCandidates exposes NPC_ACTION_FAMILIES.hoard through candidateForAction; the executed AO-0 12-record persisted public+mechanical union contains no hoard headline.' },
-  { source: '\\bmay raise a\\b', flags: '', replacement: 'raises a', reason: 'institutionLifecycle.js::evaluateInstitutionLifecycle is the live institution-build authoring seam; the executed AO-0 12-record persisted public+mechanical union contains no build headline.' },
-  { source: '\\bmay recover\\b', flags: '', replacement: 'recovering', reason: 'tierResourceDynamics.js::evaluateTierResourceDynamics is the live resource-recovery authoring seam; the executed AO-0 12-record persisted public+mechanical union contains no recovery headline.' },
-  { source: '\\bmay rise\\b', flags: '', replacement: 'rises', reason: "tierResourceDynamics.js::tierCandidate and relationshipRulesCore.js's vassal-rebellion candidate are live rise authoring seams; the executed AO-0 12-record persisted public+mechanical union contains no rise headline." },
-  { source: '\\bmay spread\\b', flags: '', replacement: 'spreads', reason: 'stressors.js::evaluateStressorRules is the live stressor-spread authoring seam; the executed AO-0 12-record persisted public+mechanical union contains births and escalations but no spread headline.' },
-  { source: '\\bmay undermine\\b', flags: '', replacement: 'undermines', reason: 'npcAgency.js::deriveNpcCandidates exposes TARGETED_ACTION_PHRASING.undermine_rival through candidateForAction; the executed AO-0 12-record persisted public+mechanical union contains no undermine headline.' },
+  { source: '\\bmay bargain\\b', flags: '', replacement: 'bargains', reason: "THE HERALD SPEAKS IN DEEDS (the owner, 2026-10-02; the Voice Program wave 1): npcAgency.js::candidateForAction (heraldDeeds.js UNTARGETED_NPC_DEEDS) writes its own under-way headline and its applied twin, so no new outcome reaches this rule; it is KEPT for proposals persisted before the program, whose \"may bargain\" headline still needs its applied twin (THE PROMISE: lived history is immutable)." },
+  { source: '\\bmay be depleted\\b', flags: '', replacement: 'depleted', reason: "THE HERALD SPEAKS IN DEEDS (the owner, 2026-10-02; the Voice Program wave 1): tierResourceDynamics.js's resource-depletion candidate writes its own under-way headline and its applied twin, so no new outcome reaches this rule; it is KEPT for proposals persisted before the program, whose \"may be depleted\" headline still needs its applied twin (THE PROMISE: lived history is immutable)." },
+  { source: '\\bmay become\\b', flags: '', replacement: 'becomes', reason: "THE HERALD SPEAKS IN DEEDS (the owner, 2026-10-02; the Voice Program wave 1): relationshipRuleHelpers.js::candidateBase (heraldDeeds.js RELATIONSHIP_TURNS) writes its own under-way headline and its applied twin, so no new outcome reaches this rule; it is KEPT for proposals persisted before the program, whose \"may become\" headline still needs its applied twin (THE PROMISE: lived history is immutable)." },
+  { source: '\\bmay close its doors\\b', flags: '', replacement: 'closes its doors', reason: "THE HERALD SPEAKS IN DEEDS (the owner, 2026-10-02; the Voice Program wave 1): institutionLifecycle.js's institution-closure candidate writes its own under-way headline and its applied twin, so no new outcome reaches this rule; it is KEPT for proposals persisted before the program, whose \"may close its doors\" headline still needs its applied twin (THE PROMISE: lived history is immutable)." },
+  { source: '\\bmay defect\\b', flags: '', replacement: 'defects', reason: "THE HERALD SPEAKS IN DEEDS (the owner, 2026-10-02; the Voice Program wave 1): npcAgency.js::candidateForAction (heraldDeeds.js UNTARGETED_NPC_DEEDS) writes its own under-way headline and its applied twin, so no new outcome reaches this rule; it is KEPT for proposals persisted before the program, whose \"may defect\" headline still needs its applied twin (THE PROMISE: lived history is immutable)." },
+  { source: '\\bmay emerge\\b', flags: '', replacement: 'emerges', reason: "THE HERALD SPEAKS IN DEEDS (the owner, 2026-10-02; the Voice Program wave 1): stressors.js's stressor-birth candidate writes its own under-way headline and its applied twin, so no new outcome reaches this rule; it is KEPT for proposals persisted before the program, whose \"may emerge\" headline still needs its applied twin (THE PROMISE: lived history is immutable)." },
+  { source: '\\bmay exploit\\b', flags: '', replacement: 'exploits', reason: "THE HERALD SPEAKS IN DEEDS (the owner, 2026-10-02; the Voice Program wave 1): npcAgency.js::candidateForAction (heraldDeeds.js UNTARGETED_NPC_DEEDS) writes its own under-way headline and its applied twin, so no new outcome reaches this rule; it is KEPT for proposals persisted before the program, whose \"may exploit\" headline still needs its applied twin (THE PROMISE: lived history is immutable)." },
+  { source: '\\bmay expose\\b', flags: '', replacement: 'exposes', reason: "THE HERALD SPEAKS IN DEEDS (the owner, 2026-10-02; the Voice Program wave 1): npcAgency.js::candidateForAction (heraldDeeds.js TARGETED_NPC_DEEDS / UNTARGETED_NPC_DEEDS) writes its own under-way headline and its applied twin, so no new outcome reaches this rule; it is KEPT for proposals persisted before the program, whose \"may expose\" headline still needs its applied twin (THE PROMISE: lived history is immutable)." },
+  { source: '\\bmay fall\\b', flags: '', replacement: 'falls', reason: "THE HERALD SPEAKS IN DEEDS (the owner, 2026-10-02; the Voice Program wave 1): tierResourceDynamics.js::tierCandidate and populationDynamics.js::populationCandidate writes its own under-way headline and its applied twin, so no new outcome reaches this rule; it is KEPT for proposals persisted before the program, whose \"may fall\" headline still needs its applied twin (THE PROMISE: lived history is immutable)." },
+  { source: '\\bmay grow\\b', flags: '', replacement: 'grows', reason: "THE HERALD SPEAKS IN DEEDS (the owner, 2026-10-02; the Voice Program wave 1): populationDynamics.js::populationCandidate writes its own under-way headline and its applied twin, so no new outcome reaches this rule; it is KEPT for proposals persisted before the program, whose \"may grow\" headline still needs its applied twin (THE PROMISE: lived history is immutable)." },
+  { source: '\\bmay hoard\\b', flags: '', replacement: 'hoards', reason: "THE HERALD SPEAKS IN DEEDS (the owner, 2026-10-02; the Voice Program wave 1): npcAgency.js::candidateForAction (heraldDeeds.js UNTARGETED_NPC_DEEDS) writes its own under-way headline and its applied twin, so no new outcome reaches this rule; it is KEPT for proposals persisted before the program, whose \"may hoard\" headline still needs its applied twin (THE PROMISE: lived history is immutable)." },
+  { source: '\\bmay intensify\\b', flags: '', replacement: 'intensifies', reason: "THE HERALD SPEAKS IN DEEDS (the owner, 2026-10-02; the Voice Program wave 1): stressors.js's stressor-escalation candidate writes its own under-way headline and its applied twin, so no new outcome reaches this rule; it is KEPT for proposals persisted before the program, whose \"may intensify\" headline still needs its applied twin (THE PROMISE: lived history is immutable)." },
+  { source: '\\bmay mobilize\\b', flags: '', replacement: 'mobilizes', reason: "THE HERALD SPEAKS IN DEEDS (the owner, 2026-10-02; the Voice Program wave 1): npcAgency.js::candidateForAction (heraldDeeds.js UNTARGETED_NPC_DEEDS) writes its own under-way headline and its applied twin, so no new outcome reaches this rule; it is KEPT for proposals persisted before the program, whose \"may mobilize\" headline still needs its applied twin (THE PROMISE: lived history is immutable)." },
+  { source: '\\bmay press a challenge to the government\\b', flags: '', replacement: 'presses a challenge to the government', reason: "THE HERALD SPEAKS IN DEEDS (the owner, 2026-10-02; the Voice Program wave 1): factionCompetition.js FACTION_VERB_PHRASES.faction_government_challenge writes its own under-way headline and its applied twin, so no new outcome reaches this rule; it is KEPT for proposals persisted before the program, whose \"may press a challenge to the government\" headline still needs its applied twin (THE PROMISE: lived history is immutable)." },
+  { source: '\\bmay protect\\b', flags: '', replacement: 'protects', reason: "THE HERALD SPEAKS IN DEEDS (the owner, 2026-10-02; the Voice Program wave 1): npcAgency.js::candidateForAction (heraldDeeds.js UNTARGETED_NPC_DEEDS) writes its own under-way headline and its applied twin, so no new outcome reaches this rule; it is KEPT for proposals persisted before the program, whose \"may protect\" headline still needs its applied twin (THE PROMISE: lived history is immutable)." },
+  { source: '\\bmay raise a\\b', flags: '', replacement: 'raises a', reason: "THE HERALD SPEAKS IN DEEDS (the owner, 2026-10-02; the Voice Program wave 1): institutionLifecycle.js's institution-build candidate writes its own under-way headline and its applied twin, so no new outcome reaches this rule; it is KEPT for proposals persisted before the program, whose \"may raise a\" headline still needs its applied twin (THE PROMISE: lived history is immutable)." },
+  { source: '\\bmay recover\\b', flags: '', replacement: 'recovering', reason: "THE HERALD SPEAKS IN DEEDS (the owner, 2026-10-02; the Voice Program wave 1): tierResourceDynamics.js's resource-recovery candidate writes its own under-way headline and its applied twin, so no new outcome reaches this rule; it is KEPT for proposals persisted before the program, whose \"may recover\" headline still needs its applied twin (THE PROMISE: lived history is immutable)." },
+  { source: '\\bmay reform\\b', flags: '', replacement: 'reforms', reason: "THE HERALD SPEAKS IN DEEDS (the owner, 2026-10-02; the Voice Program wave 1): npcAgency.js::candidateForAction (heraldDeeds.js UNTARGETED_NPC_DEEDS) writes its own under-way headline and its applied twin, so no new outcome reaches this rule; it is KEPT for proposals persisted before the program, whose \"may reform\" headline still needs its applied twin (THE PROMISE: lived history is immutable)." },
+  { source: '\\bmay rise\\b', flags: '', replacement: 'rises', reason: "THE HERALD SPEAKS IN DEEDS (the owner, 2026-10-02; the Voice Program wave 1): tierResourceDynamics.js::tierCandidate and relationshipRulesCore.js's vassal-rebellion candidate writes its own under-way headline and its applied twin, so no new outcome reaches this rule; it is KEPT for proposals persisted before the program, whose \"may rise\" headline still needs its applied twin (THE PROMISE: lived history is immutable)." },
+  { source: '\\bmay sabotage\\b', flags: '', replacement: 'sabotages', reason: "THE HERALD SPEAKS IN DEEDS (the owner, 2026-10-02; the Voice Program wave 1): npcAgency.js::candidateForAction (heraldDeeds.js TARGETED_NPC_DEEDS / UNTARGETED_NPC_DEEDS) writes its own under-way headline and its applied twin, so no new outcome reaches this rule; it is KEPT for proposals persisted before the program, whose \"may sabotage\" headline still needs its applied twin (THE PROMISE: lived history is immutable)." },
+  { source: '\\bmay seek promotion\\b', flags: '', replacement: 'seeks promotion', reason: "THE HERALD SPEAKS IN DEEDS (the owner, 2026-10-02; the Voice Program wave 1): npcAgency.js::candidateForAction (heraldDeeds.js UNTARGETED_NPC_DEEDS) writes its own under-way headline and its applied twin, so no new outcome reaches this rule; it is KEPT for proposals persisted before the program, whose \"may seek promotion\" headline still needs its applied twin (THE PROMISE: lived history is immutable)." },
+  { source: '\\bmay shift\\b', flags: '', replacement: 'shifts', reason: "THE HERALD SPEAKS IN DEEDS (the owner, 2026-10-02; the Voice Program wave 1): relationshipRuleHelpers.js::candidateBase (heraldDeeds.js RELATIONS_MOVE) writes its own under-way headline and its applied twin, so no new outcome reaches this rule; it is KEPT for proposals persisted before the program, whose \"may shift\" headline still needs its applied twin (THE PROMISE: lived history is immutable)." },
+  { source: '\\bmay spread\\b', flags: '', replacement: 'spreads', reason: "THE HERALD SPEAKS IN DEEDS (the owner, 2026-10-02; the Voice Program wave 1): stressors.js's stressor-spread candidate writes its own under-way headline and its applied twin, so no new outcome reaches this rule; it is KEPT for proposals persisted before the program, whose \"may spread\" headline still needs its applied twin (THE PROMISE: lived history is immutable)." },
+  { source: '\\bmay suppress\\b', flags: '', replacement: 'suppresses', reason: "THE HERALD SPEAKS IN DEEDS (the owner, 2026-10-02; the Voice Program wave 1): npcAgency.js::candidateForAction (heraldDeeds.js TARGETED_NPC_DEEDS / UNTARGETED_NPC_DEEDS) writes its own under-way headline and its applied twin, so no new outcome reaches this rule; it is KEPT for proposals persisted before the program, whose \"may suppress\" headline still needs its applied twin (THE PROMISE: lived history is immutable)." },
+  { source: '\\bmay take hold\\b', flags: '', replacement: 'takes hold', reason: "THE HERALD SPEAKS IN DEEDS (the owner, 2026-10-02; the Voice Program wave 1): candidateEvents.js::pressureConditionCandidate (heraldDeeds.js CONDITION_DEEDS) writes its own under-way headline and its applied twin, so no new outcome reaches this rule; it is KEPT for proposals persisted before the program, whose \"may take hold\" headline still needs its applied twin (THE PROMISE: lived history is immutable)." },
+  { source: '\\bmay undermine\\b', flags: '', replacement: 'undermines', reason: "THE HERALD SPEAKS IN DEEDS (the owner, 2026-10-02; the Voice Program wave 1): npcAgency.js::candidateForAction (heraldDeeds.js TARGETED_NPC_DEEDS / UNTARGETED_NPC_DEEDS) writes its own under-way headline and its applied twin, so no new outcome reaches this rule; it is KEPT for proposals persisted before the program, whose \"may undermine\" headline still needs its applied twin (THE PROMISE: lived history is immutable)." },
 ].map((row) => Object.freeze(row)));
 
 const codepoint = (left, right) => (left < right ? -1 : left > right ? 1 : 0);

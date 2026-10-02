@@ -12,8 +12,9 @@
 import { describe, it, expect } from 'vitest';
 import { createPRNG } from '../../src/kernel/prng.js';
 import {
-  advanceTraditions, successScore, outcomeForDraw, TRADITION_OUTCOME, fairTradePulse,
+  advanceTraditions, successScore, outcomeForDraw, TRADITION_FORK, TRADITION_OUTCOME, fairTradePulse,
 } from '../../src/domain/worldPulse/traditionsKernel.js';
+import { traditionHookCondition } from '../../src/domain/traditions/prose.js';
 
 const NOW = '2026-01-01T00:00:00.000Z';
 const SID = 'a';
@@ -194,6 +195,53 @@ describe('§3 skip — hard stress / desperate economy ⇒ CANCELLED', () => {
     const siege = [{ type: 'siege', lifecycleStage: 'active', affectedSettlementIds: [SID] }];
     const out = runTick({ settlement: town(), recs, weeks: 9, stressors: siege });
     expect(out.ledger[0].lastOutcome).toBe(TRADITION_OUTCOME.CANCELLED);
+  });
+
+  it('U19 — the vocabulary types SIX and the draw makes FIVE: the sixth is the deterministic skip\'s own word, reached and consumed, never a dead entry', () => {
+    // ⛔ MEASURED, NOT TRIMMED. `TRADITION_OUTCOME` types six words while `outcomeForDraw`
+    // can answer only five, which READS like a dead entry and is not one: `cancelled` is
+    // written by the DETERMINISTIC skip arm above — a town under hard stress or a desperate
+    // economy holds no festival — which takes NO draw at all. Deleting the sixth word would
+    // delete a word the mover writes, the beat prints, the effect map prices and the ledger
+    // stores. This arm pins the partition by EXECUTION and then walks every consumer.
+    const typed = Object.values(TRADITION_OUTCOME);
+    const drawn = new Set();
+    for (const score of [0.05, 0.3, 0.55, 0.8, 0.95]) {
+      for (let step = 0; step <= 400; step += 1) drawn.add(outcomeForDraw(score, step / 400));
+    }
+    expect(typed.length, 'the typed vocabulary is SIX words').toBe(6);
+    expect([...drawn].sort(), 'and the DRAW, run across its whole score and draw domain, makes'
+      + ' exactly the five the registered fork may be pinned to').toEqual([...TRADITION_FORK.outcomes].sort());
+    expect(typed.filter((word) => !drawn.has(word)), 'so the sixth word is `cancelled`, by SET'
+      + ' DIFFERENCE over the executed draw and never by transcription')
+      .toEqual([TRADITION_OUTCOME.CANCELLED]);
+
+    // ── THE SIXTH WORD IS REACHED, through the mover rather than argued ──────────────────
+    const set = runTick({ settlement: town({ prosperity: 'Subsistence', legit: 50 }), recs: [makeRec()], weeks: 9 });
+    const held = runTick({ settlement: town({ prosperity: 'Comfortable', legit: 55 }), recs: [makeRec()], weeks: 9 });
+    expect(set.ledger[0].lastOutcome).toBe(TRADITION_OUTCOME.CANCELLED);
+    expect(TRADITION_FORK.outcomes, 'and the control HELD its festival, so every pairing below'
+      + ' measures the WORD rather than the fixture').toContain(held.ledger[0].lastOutcome);
+
+    // ── AND IT IS CONSUMED AT EVERY READER THAT KEYS ON IT, each against its own control ──
+    // 1. the §5 legitimacy hit — the one effect map that carries the word (−1 to the seat).
+    expect(set.updated.powerStructure.publicLegitimacy.score).toBe(49);
+    // 2. the beat's headline, 3. its reason and 4. its severity band.
+    const beat = set.news[0];
+    const heldBeat = held.news[0];
+    expect(beat.headline).toBe('Ashford sets aside The Harvest Feast');
+    expect(heldBeat.headline).not.toBe(beat.headline);
+    expect(beat.reasons[0]).toContain('No observance was held');
+    expect(heldBeat.reasons[0]).toContain('The observance was held');
+    expect(beat.severity, 'a set-aside year carries its OWN severity band').toBe(0.2);
+    expect([0.3, 0.35], 'and a held one carries one of the other two, so the band above is the'
+      + ' word\'s and not the beat builder\'s only answer').toContain(heldBeat.severity);
+    // 5. the beat's own tag, which carries the outcome word verbatim.
+    expect(beat.tags).toContain(TRADITION_OUTCOME.CANCELLED);
+    // 6. the prose leaf's plot-hook condition, at its own declared precedence.
+    expect(traditionHookCondition(set.ledger[0])).toEqual({ condition: 'cancelled', priority: 7 });
+    expect(traditionHookCondition(makeRec()), 'and the hook reader is proved to answer NOTHING'
+      + ' for a record that has held nothing, so the row above is not a constant').toBeNull();
   });
 });
 

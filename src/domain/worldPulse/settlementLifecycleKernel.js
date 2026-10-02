@@ -89,6 +89,7 @@ import { advanceDemographics } from './demographicsKernel.js';
 // a non-crossing forever. Dark ⇒ both input references come straight back.
 import { advanceSovereigntyMarket } from './sovereigntyMarketStage.js';
 import { advancePeacetimePacts } from './pactFormation.js';
+import { advanceReputationRace } from './reputationRaceConsumer.js';
 import { lineageReceipt, pickLine, LIFECYCLE_NEWS } from './eventProse.js';
 import { chooseSteadingSite, deriveSteadingResources, landformPlaceName, resourcePhrase } from './steadingTopography.js';
 import {
@@ -582,6 +583,12 @@ export function advanceSettlementLifecycle({ snapshot, worldState: hostWorldStat
     digest: demoDigest,
     satelliteCaps: /** @type {Record<string, number>} */ (T.SATELLITE_CAPS),
   });
+  // ── FP IN-4: THE REPUTATION RACE (reputationRaceConsumer.js), the host's fourth stage and the
+  // first that only SPEAKS: it reads the arrivals the ledgers kept last tick and writes nothing,
+  // so it hands back the demographic step's own worldState reference and votes `changed` only
+  // when it has a beat. Own flag before this host's gate, like its three siblings, and its beats
+  // ride BOTH return paths below, or applyPulseMover would drop them on a dark host. ──
+  const race = advanceReputationRace({ snapshot, worldState: demo.worldState, tick });
   const worldState = demo.worldState;
   const updates = /** @type {LcUpdate[]} */ (/** @type {unknown} */ (demo.settlementUpdates));
   // ── DORMANCY GATE: flag absent ⇒ an immediate no-op. No fork, no key. ──
@@ -600,11 +607,13 @@ export function advanceSettlementLifecycle({ snapshot, worldState: hostWorldStat
       // folded, and tests/domain/pactKernelMount.test.js pins EACH stage's vote through its
       // OWN door so deleting any one clause reds by name rather than being absorbed by a
       // sibling that happened to be lit in the fixture.
-      changed: demo.changed || market.changed || pacts.changed,
+      changed: demo.changed || market.changed || pacts.changed || race.changed,
       // WAVE P4: the demographic lane's Herald lines are ITS news, gated by ITS flag, so
       // they must survive this module's own dormancy gate. Dark demographics returns an
       // empty array here, which is the same [] this path always returned.
-      newsEntries: [...market.newsEntries, ...pacts.newsEntries, ...demo.newsEntries],
+      // FP IN-4: the race's beats ride BEFORE the demographic lines, so the demographic spread
+      // stays the array's tail, the shape demographicsWorldsHand.test.js's source pin reads.
+      newsEntries: [...market.newsEntries, ...pacts.newsEntries, ...race.newsEntries, ...demo.newsEntries],
       receipts: [
         ...market.receipts,
         ...pacts.receipts,
@@ -648,7 +657,7 @@ export function advanceSettlementLifecycle({ snapshot, worldState: hostWorldStat
   /** @type {Array<Record<string, unknown>>} */
   // WR-10's beats and receipts are ITS flag's, so they survive this module's own gate on
   // both paths — the same law wave P4's demographic lines already obey here.
-  const newsEntries = [...market.newsEntries, ...pacts.newsEntries];
+  const newsEntries = [...market.newsEntries, ...pacts.newsEntries, ...race.newsEntries];
   /** @type {Array<Record<string, unknown>>} */
   const receipts = [
     ...market.receipts,
@@ -1157,7 +1166,7 @@ export function advanceSettlementLifecycle({ snapshot, worldState: hostWorldStat
   // held still, or applyPulseMover would drop its settlementUpdates on the floor.
   // The SAME law binds every sibling stage: market and pacts each ran above, each may have
   // written a ledger, and a lane that held still contributes a harmless `false`.
-  let changed = cloned || demo.changed || market.changed || pacts.changed;
+  let changed = cloned || demo.changed || market.changed || pacts.changed || race.changed;
   if (ledgerChanged) {
     nextWorldState = foldSatellitesLedger(nextWorldState, nextLedger);
     changed = true;

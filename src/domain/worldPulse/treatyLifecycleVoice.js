@@ -39,9 +39,19 @@
  * record carries one and `mintedTick` otherwise. Ages are spoken as BAND WORDS, never
  * integers (the annex's no-digits law).
  *
+ * ── A NEGOTIATED PACT SPEAKS TOO (TREATY-VOICE U1) ──────────────────────────────
+ * A pact two courts signed in peace reads as the orientation kind `negotiated`: its two
+ * courts, and no treaty-level direction. The eulogy binds them in the record's stored
+ * order, because every `treaty_lapsed`, `treaty_lapsed.road_open` and `ran_its_term` family
+ * asserts no direction between its two slots. The two readings that DO assert one (the
+ * detection beat, and the `hollowed_detected` ending line: who let it fail, who weighed
+ * it) bind the broken CLAUSE's own direction through `termObligationOf`, never the party
+ * order, and a clause with none (a mutual one) names nobody (GR-3B-ORIENT §8).
+ *
  * @enforced-by tests/domain/treatyLifecycleVoice.test.js
  *   + tests/lint/grammarLifecycleKindPools.walker.test.js
  *   + tests/property/treatyLifecycleVoiceDormancyFence.test.js
+ *   + tests/domain/treatyVoiceCure.test.js
  */
 
 import { TERM_CATALOG, termLabel } from './peaceTermsCatalog.js';
@@ -49,8 +59,19 @@ import { treatyLedgerOf } from './treatyEnforcement.js';
 import { treatyTicksPerYearOf } from './treatyClock.js';
 import { grammarReceipt, grammarSlotRoles } from './grammarNews.js';
 import { stablePart } from './stablePart.js';
+import { termObligationOf } from './treatyOrientation.js';
 
 /** @typedef {import('./peaceTermsCatalog.js').TermRecord} TermRecord */
+
+/**
+ * The orientation a beat is handed: `treatyOrientationOf`'s answer, of which the voice reads
+ * the obligation axis and, on the negotiated kind only, the two courts.
+ * @typedef {{ obligeeId:string, obligorId:string, obligeeName:string, obligorName:string,
+ *   resolved:boolean, kind?:string, parties?:string[], partyNames?:string[] }} VoiceOrientation
+ */
+
+/** Two courts in slot order: `first` fills the owed slot, `second` the owing one.
+ *  @typedef {{ firstId:string, secondId:string, firstName:string, secondName:string }} VoicePair */
 
 /**
  * THE GATE (§3, the CQ5 law). A virtual key: absent from DEFAULT_SIMULATION_RULES and from
@@ -132,6 +153,55 @@ export function treatyAgeBandWord(ageYears) {
 /** @param {unknown} state */
 function isBroken(state) {
   return state === 'strained' || state === 'defaulted';
+}
+
+/** Codepoint order by clause type, the order every beat here reads its terms in.
+ *  @param {TermRecord} a @param {TermRecord} b */
+function byType(a, b) {
+  return String(a.type) < String(b.type) ? -1 : String(a.type) > String(b.type) ? 1 : 0;
+}
+
+/** @param {VoiceOrientation | null | undefined} orientation */
+function isNegotiated(orientation) {
+  return !orientation?.resolved && orientation?.kind === 'negotiated';
+}
+
+/**
+ * THE TWO COURTS A BEAT NAMES. A resolved instrument binds its obligation axis (owed, then
+ * owing), exactly as it always has. A negotiated one binds its two courts in stored order,
+ * which only the direction-free families read (see the header). Null for anything else.
+ * @param {VoiceOrientation | null | undefined} orientation @returns {VoicePair | null}
+ */
+function voicePairOf(orientation) {
+  if (orientation?.resolved) {
+    return {
+      firstId: orientation.obligeeId,
+      secondId: orientation.obligorId,
+      firstName: readerName(orientation.obligeeId, orientation.obligeeName),
+      secondName: readerName(orientation.obligorId, orientation.obligorName),
+    };
+  }
+  if (!isNegotiated(orientation)) return null;
+  const parties = orientation?.parties || [];
+  const names = orientation?.partyNames || [];
+  const firstId = text(parties[0]);
+  const secondId = text(parties[1]);
+  return { firstId, secondId, firstName: readerName(firstId, text(names[0])), secondName: readerName(secondId, text(names[1])) };
+}
+
+/**
+ * ONE NEGOTIATED CLAUSE'S OWN DIRECTION as a beat pair (owed, then owing), read through the
+ * ONE per-clause reader. Null when the clause has none: a mutual clause binds both courts and
+ * accuses neither, and an unresolvable one names nobody.
+ * @param {VoiceOrientation} orientation @param {TermRecord} term @returns {VoicePair | null}
+ */
+function clausePairOf(orientation, term) {
+  const parties = orientation.parties || [];
+  const names = orientation.partyNames || [];
+  const duty = termObligationOf({ parties }, term);
+  if (!duty.resolved || duty.mutual) return null;
+  const nameOf = (/** @type {string} */ id) => readerName(id, text(names[parties.indexOf(id)]));
+  return { firstId: duty.obligeeId, secondId: duty.obligorId, firstName: nameOf(duty.obligeeId), secondName: nameOf(duty.obligorId) };
 }
 
 /**
@@ -231,14 +301,14 @@ function interpFor(kind, names, extra) {
  * Returns an ARRAY so the caller's hook is one spread: an unresolvable record yields [].
  *
  * @param {{ treaty: Record<string, unknown>, terms: TermRecord[], tick: number,
- *   observedWorst: string, orientation: { obligeeId:string, obligorId:string,
- *   obligeeName:string, obligorName:string, resolved:boolean } }} input
+ *   observedWorst: string, orientation: VoiceOrientation }} input
  * @returns {Array<Record<string, unknown>>}
  */
 export function treatyLapsedBeats({ treaty, terms, tick, observedWorst, orientation }) {
-  if (!orientation?.resolved) return [];
-  const obligeeName = readerName(orientation.obligeeId, orientation.obligeeName);
-  const obligorName = readerName(orientation.obligorId, orientation.obligorName);
+  const pair = voicePairOf(orientation);
+  if (!pair) return [];
+  const obligeeName = pair.firstName;
+  const obligorName = pair.secondName;
   const names = { obligeeName, obligorName };
   const closing = closingTerm(Array.isArray(terms) ? terms : []);
   // The last recorded TRUE states: every term expired before reaching evolveCompliance
@@ -257,14 +327,24 @@ export function treatyLapsedBeats({ treaty, terms, tick, observedWorst, orientat
   };
   const interp = interpFor('treaty_lapsed', names, extra);
   if (!interp) return [];
-  const sourceEventId = `${orientation.obligeeId}.${orientation.obligorId}.${tick}`;
+  const sourceEventId = `${pair.firstId}.${pair.secondId}.${tick}`;
   const eulogy = grammarReceipt('treaty_lapsed', sourceEventId, interp, ending);
   if (!eulogy) return [];
-  const endingLine = grammarReceipt(ending, sourceEventId, interpFor(ending, names, extra) || {}, ending);
+  // WHO LET IT FAIL is a direction. On a negotiated pact the hollowed ending binds the broken
+  // clause's own direction; with no such clause it binds nobody, and only the families that
+  // name no court can speak (TREATY-VOICE U1, GR-3B-ORIENT §8).
+  const brokenPair = isNegotiated(orientation) && ending === 'hollowed_detected' && orientation
+    ? (Array.isArray(terms) ? terms : []).slice().sort(byType)
+      .filter((term) => isBroken(term.complianceState))
+      .map((term) => clausePairOf(orientation, term))
+      .find((clause) => clause !== null) || null
+    : pair;
+  const endingNames = { obligeeName: brokenPair ? brokenPair.firstName : '', obligorName: brokenPair ? brokenPair.secondName : '' };
+  const endingLine = grammarReceipt(ending, sourceEventId, interpFor(ending, endingNames, extra) || {}, ending);
   const roadOpen = grammarReceipt('treaty_lapsed.road_open', sourceEventId, interpFor('treaty_lapsed.road_open', names, extra) || {}, ending);
   const weight = presentationWeight(eulogy.significance);
   return [{
-    id: `wizard_news.${tick}.treaty_lapsed.${stablePart(orientation.obligeeId)}.${stablePart(orientation.obligorId)}`,
+    id: `wizard_news.${tick}.treaty_lapsed.${stablePart(pair.firstId)}.${stablePart(pair.secondId)}`,
     kind: 'treaty_lapsed',
     // ITS OWN impactKind, never `diplomacy`. The Herald's SINGLE_PRODUCER_KEYS walker pins
     // `diplomacy` to the one treaty signing beat, so a second producer of that token would
@@ -282,9 +362,9 @@ export function treatyLapsedBeats({ treaty, terms, tick, observedWorst, orientat
       ...(endingLine ? [endingLine.line] : []),
       ...(roadOpen ? [roadOpen.line] : []),
     ],
-    settlementIds: [orientation.obligeeId, orientation.obligorId],
+    settlementIds: [pair.firstId, pair.secondId],
     settlementNames: [obligeeName, obligorName],
-    parties: [orientation.obligeeId, orientation.obligorId],
+    parties: [pair.firstId, pair.secondId],
     ending,
     ageYears,
     familyId: eulogy.familyId,
@@ -373,29 +453,45 @@ export function treatyDisclosureOpenedBeats({ terms, tick, orientation }) {
  * saw the shortfall; the caller owns the crossing test, this owns the sentence.
  *
  * @param {{ tick: number, observedState: string, terms: TermRecord[],
- *   orientation: { obligeeId:string, obligorId:string, obligeeName:string,
- *   obligorName:string, resolved:boolean } }} input
+ *   orientation: VoiceOrientation }} input
  * @returns {Array<Record<string, unknown>>}
  */
 export function treatyDefaultDetectedBeats({ tick, observedState, terms, orientation }) {
-  if (!orientation?.resolved || !isBroken(observedState)) return [];
-  const obligeeName = readerName(orientation.obligeeId, orientation.obligeeName);
-  const obligorName = readerName(orientation.obligorId, orientation.obligorName);
+  if (!isBroken(observedState)) return [];
+  const live = (Array.isArray(terms) ? terms : []).slice().sort(byType);
+  // A RESOLVED instrument names its one direction and its first clause by type, as it always
+  // has. A NEGOTIATED one names the clause that crossed, in that clause's own direction: the
+  // first by type at the observed state that has one (TREATY-VOICE U1). A pact whose only
+  // broken clause is mutual accuses nobody, so it mints nothing.
+  // ⚠ ONE OBSERVATION IS A LEVEL (this file's header law), and a pact is minted by the pact
+  // stage BEFORE the treaty mover runs in the same tick, so the caller's previous-ledger guard,
+  // which catches a war mint, cannot see that a pact clause is on its first observation: its
+  // recorded `honored` is the mint's default, never a court's reading. A clause minted THIS
+  // tick is therefore refused here (measured on the desk golden: without it a pact signed at
+  // tick eleven was entered in default at tick eleven).
+  const crossed = isNegotiated(orientation) && orientation
+    ? live.filter((term) => String(term.complianceState) === observedState && Number(term.mintedTick) < Number(tick))
+      .map((term) => ({ term, clause: clausePairOf(orientation, term) }))
+      .find((row) => row.clause !== null) || null
+    : null;
+  const pair = crossed ? crossed.clause : isNegotiated(orientation) ? null : voicePairOf(orientation);
+  if (!pair) return [];
+  const obligeeName = pair.firstName;
+  const obligorName = pair.secondName;
   const names = { obligeeName, obligorName };
-  const live = (Array.isArray(terms) ? terms : []).slice()
-    .sort((a, b) => (String(a.type) < String(b.type) ? -1 : String(a.type) > String(b.type) ? 1 : 0));
+  const named = crossed ? crossed.term : live[0];
   // NO FABRICATED BAND: the engine keeps no count of short seasons, so `{band}` is simply
   // never supplied here and the two families that ask for it stay ineligible.
   /** @type {Record<string, string>} */
-  const extra = live.length ? { term: termLabel(String(live[0].type)) } : {};
+  const extra = named ? { term: termLabel(String(named.type)) } : {};
   const interp = interpFor('treaty_default_detected', names, extra);
   if (!interp) return [];
-  const sourceEventId = `${orientation.obligeeId}.${orientation.obligorId}.${tick}`;
+  const sourceEventId = `${pair.firstId}.${pair.secondId}.${tick}`;
   const receipt = grammarReceipt('treaty_default_detected', sourceEventId, interp, observedState);
   if (!receipt) return [];
   const weight = presentationWeight(receipt.significance);
   return [{
-    id: `wizard_news.${tick}.treaty_default_detected.${stablePart(orientation.obligeeId)}.${stablePart(orientation.obligorId)}`,
+    id: `wizard_news.${tick}.treaty_default_detected.${stablePart(pair.firstId)}.${stablePart(pair.secondId)}`,
     kind: 'treaty_default_detected',
     impactKind: 'treaty_default_detected',
     significance: receipt.significance,
@@ -410,9 +506,9 @@ export function treatyDefaultDetectedBeats({ tick, observedState, terms, orienta
     reasons: [
       'The owed court\'s watchers stood close enough to weigh what arrived, and what arrived did not match what was sworn.',
     ],
-    settlementIds: [orientation.obligeeId, orientation.obligorId],
+    settlementIds: [pair.firstId, pair.secondId],
     settlementNames: [obligeeName, obligorName],
-    parties: [orientation.obligeeId, orientation.obligorId],
+    parties: [pair.firstId, pair.secondId],
     observedState,
     familyId: receipt.familyId,
     audience: receipt.audience,

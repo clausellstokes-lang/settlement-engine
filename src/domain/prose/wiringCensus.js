@@ -1400,7 +1400,7 @@ export function objectClassOf(poolKey) {
  *                  which is a wrong verdict rather than a finding.
  *
  * The estate's own case: `economicGates.military` is ABSENT rather than 1.0 when there is
- * no paid stack (`defenseGenerator.js:465-472` writes the key only under `hasAnyDefense`),
+ * no paid stack (`defenseGenerator.js :: computeDefenseScores` writes the key only under `hasAnyDefense`),
  * and `wallRationalePoolKey` guards `typeof === 'number' && Number.isFinite` before `< 1`.
  * That read is `measured`; the same predicate written without the guard would be the
  * projector error ARCH §3.3 names.

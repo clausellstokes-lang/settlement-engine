@@ -20,7 +20,9 @@ import { compareCodepoint } from '../domain/deterministicSort.js';
 import {institutionalCatalog, catalogIdForName} from '../data/institutionalCatalog.js';
 import {
   isMaterializedCustomContent,
+  nativeSemanticName,
 } from '../domain/content/customContentSemanticAuthority.js';
+import { druidicFaithRole } from '../domain/arcaneInstitutionIdentity.js';
 import { resourceKeyForLabel } from '../domain/resourceSemantics.js';
 
 // ── Id-first processor matching (Cohesion Wave 8 — structural prevention) ────
@@ -207,7 +209,7 @@ export function computeActiveChains(institutions = [], resources = [], tier = 'v
   const hasTradition = (...kws) => insts.some(i => kws.some(kw => institutionMatchesKeyword(i, kw)));
 
   const traditions = {
-    druid:   magicPriority >= 30 && hasTradition("druid circle","grove shrine","elder grove","warden's lodge","sacred grove"),
+    druid:   magicPriority >= 30 && hasTradition("druid circle","grove shrine","elder grove","sacred grove"), // J33: Warden's Lodge is defence, not druid (the owner, 2026-10-01)
     // Divine PROVISION is supernatural — it needs a world where magic functions,
     // not just a church. resolveConfig zeroes the magic dial when
     // config.magicExists === false, so magicPriority > 0 is the world's magic
@@ -289,9 +291,14 @@ export function computeActiveChains(institutions = [], resources = [], tier = 'v
         chain.processingInstitutionsByResource?.[resourceInputKey]
         || chain.processingInstitutions
       );
+      // J30 (the owner, 2026-10-01): a druid's "effect of food or defense does not exist in non
+      // magic settings" — where the dial reads no magic, a druidic faith row processes no
+      // food or defence chain. Its herbal remedies stay: healing can be mundane.
+      const druidsIdle = magicPriority <= 0 && (needKey === 'food_security' || needKey === 'defense_security');
       const matchedInsts = processingPatterns.filter(pattern =>
         insts.some(institution => (
           institutionMatchesProcessor(institution, pattern)
+          && !(druidsIdle && druidicFaithRole(nativeSemanticName(institution), false))
         ))
       );
       if (matchedInsts.length === 0) return;

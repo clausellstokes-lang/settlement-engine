@@ -75,7 +75,7 @@ export function finalGraphFindings(settlement) {
   findings.push(...duplicateFindings(
     institutions.map(institution => institution?.name),
     'institutions',
-    'institution identity',
+    INSTITUTION_IDENTITY,
   ));
   findings.push(...duplicateFindings(
     npcs.map(npc => npc?.id),
@@ -146,7 +146,7 @@ export function finalGraphFindings(settlement) {
     .filter(Boolean);
   findings.push(...duplicateFindings(
     powerFactionNames,
-    'powerStructure.factions',
+    POWERSTRUCTURE_FACTIONS,
     'power-faction identity',
   ));
   const powerFactionSet = new Set(powerFactionNames);
@@ -271,7 +271,7 @@ export function conservationFindings(settlement) {
     );
     if (!Number.isFinite(powerTotal) || Math.abs(powerTotal - 100) > EPSILON) {
       findings.push(finding(
-        'powerStructure.factions',
+        POWERSTRUCTURE_FACTIONS,
         'Faction power is not conserved at 100%.',
         powerTotal,
       ));
@@ -425,13 +425,13 @@ export function userIntentAssessment(settlement) {
     const finalRoute = String(finalConfig?.tradeRouteAccess || '');
     if (requestedRoute !== finalRoute) {
       findings.push(finding(
-        '_config.tradeRouteAccess',
+        _CONFIG_TRADEROUTEACCESS,
         'Explicit route intent changed during generation.',
         `${requestedRoute} / ${finalRoute || '(missing)'}`,
       ));
     } else {
       evidence.push(finding(
-        '_config.tradeRouteAccess',
+        _CONFIG_TRADEROUTEACCESS,
         'Explicit route intent is preserved.',
         finalRoute,
       ));
@@ -443,13 +443,13 @@ export function userIntentAssessment(settlement) {
     const finalProfile = String(finalConfig?.contentProfile || '');
     if (requestedProfile !== finalProfile) {
       findings.push(finding(
-        '_config.contentProfile',
+        _CONFIG_CONTENTPROFILE,
         'Selected content profile changed during generation.',
         `${requestedProfile} / ${finalProfile || '(missing)'}`,
       ));
     } else {
       evidence.push(finding(
-        '_config.contentProfile',
+        _CONFIG_CONTENTPROFILE,
         'Selected content profile is preserved.',
         finalProfile,
       ));
@@ -569,7 +569,7 @@ export function repetitionFindings(settlement) {
     ...duplicateFindings(
       (settlement?.institutions || []).map(entry => entry?.name),
       'institutions',
-      'institution identity',
+      INSTITUTION_IDENTITY,
     ),
     ...duplicateFindings(
       (settlement?.npcs || []).map(entry => entry?.name),
@@ -859,3 +859,6 @@ export function buildGenerationReceiptExtension({
 
   return { checks, judgments };
 }
+
+// Shared phrases hoisted once (the generation worker's buy-back, BUY-BACK-LEDGER row 10): each is spelled here and referenced below; every emitted value is byte-identical.
+const INSTITUTION_IDENTITY = 'institution identity', POWERSTRUCTURE_FACTIONS = 'powerStructure.factions', _CONFIG_CONTENTPROFILE = '_config.contentProfile', _CONFIG_TRADEROUTEACCESS = '_config.tradeRouteAccess';

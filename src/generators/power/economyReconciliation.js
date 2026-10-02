@@ -19,22 +19,25 @@
  * created.
  */
 
+import { fingerprintPowerEconomyInput } from '../../data/economyFingerprint.js';
 import { deepClone } from '../../domain/clone.js';
 import { deriveFactionProfile } from '../../domain/factionProfile.js';
-import { fnv1a32 } from '../../kernel/proseHash.js';
 import { createPRNG } from '../../kernel/prng.js';
 import { clearActiveRng, setActiveRng } from '../../kernel/rngContext.js';
 import {
   generatePowerStructure,
   renormalizeFactionPower,
 } from './rulingStructure.js';
+// The runner's pin primitive, at its one exported home. `pipeline.js` is already inside the
+// generation worker's closure and imports nothing from `src/generators/power/**`, so this edge
+// adds no module to any bundle and opens no cycle.
+import { chooseOrPin } from '../pipeline.js';
 
 // v2: the neighbour-relationship slot was renamed off its old `tradeRoute`
 // misnomer. The intent is transient, so the version exists only to reject a
 // stale intent object handed across the seam mid-run — nothing is persisted.
 const POWER_INTENT_VERSION = 2;
 const POWER_PROJECTION_VERSION = 1;
-const ECONOMY_FINGERPRINT_VERSION = 'power-economy-v1';
 const POWER_STREAM = 'power-structure';
 const NEIGHBOUR_SOURCES = new Set([
   'neighbour_mirror',
@@ -45,6 +48,21 @@ const TRANSIENT_PROJECTION_FIELDS = [
   'crisisNote',
   'captureState',
 ];
+
+// THE UNPINNED SENTINEL. `chooseOrPin` returns the thunk's value only when the key is ABSENT
+// from the bag, and a held power structure is an object a `null`/`undefined` sentinel could
+// collide with; a unique Symbol cannot.
+const UNPINNED = Symbol('economyReconciliation:unpinned');
+
+/**
+ * THE ONE SITE THIS CONDITION IS SPELLED. The key is the RECORD PATH the producer writes, per
+ * `runPipeline`'s own `Pins` typedef — never a step name, and never a second spelling of the
+ * runner's own-property rule. The bag is the runner's clone, so nothing here can reach an object
+ * the caller owns.
+ */
+function isHeldPowerStructure(pins) {
+  return chooseOrPin(pins, 'powerStructure', () => UNPINNED) !== UNPINNED;
+}
 
 function deepFreeze(value, seen = new WeakSet()) {
   if (!value || typeof value !== 'object' || seen.has(value)) return value;
@@ -80,34 +98,6 @@ function powerLabelFor(power) {
       : power >= 18 ? 'Significant'
         : power >= 10 ? 'Minor'
           : 'Suppressed';
-}
-
-function economyProjectionInput(economicState, tier) {
-  return {
-    tier: String(tier || ''),
-    prosperity: economicState?.prosperity || 'Moderate',
-    safetyLabel: economicState?.safetyProfile?.safetyLabel || 'Moderate',
-    foodLabel: economicState?.foodSecurity?.label || 'Secure',
-  };
-}
-
-/**
- * Versioned, draw-free fingerprint of every economic field the power projector
- * reads. FNV-1a is appropriate here because this is an internal freshness
- * assertion, not a security boundary; the explicit tuple order avoids object-key
- * ordering ambiguity.
- */
-export function fingerprintPowerEconomyInput(economicState, tier) {
-  const input = economyProjectionInput(economicState, tier);
-  const serialized = JSON.stringify([
-    ECONOMY_FINGERPRINT_VERSION,
-    input.tier,
-    input.prosperity,
-    input.safetyLabel,
-    input.foodLabel,
-  ]);
-  const digest = fnv1a32(serialized).toString(16).padStart(8, '0');
-  return `${ECONOMY_FINGERPRINT_VERSION}:${digest}`;
 }
 
 /**
@@ -226,6 +216,16 @@ export function reconcilePowerStructure(
   assertIntent(intent);
   if (!powerStructure || !Array.isArray(powerStructure.factions)) {
     throw new Error('Power reconciliation requires an existing faction roster.');
+  }
+
+  // A HELD POWER STRUCTURE IS FINAL: the replay does not run, so `assertStableGeneratedRoster`
+  // (which lives inside it) never sees the DM's seat change and the roster comes back untouched.
+  // `assertIntent` still ran above: heldness excuses the REPLAY, never a malformed seam. The
+  // return shape is exactly the unheld path's, which is what keeps `refreshPowerGenerationTraces`
+  // a measured no-op here instead of a second branch.
+  if (isHeldPowerStructure(options.pins)) {
+    const heldFactions = powerStructure.factions.map(faction => ({ ...faction }));
+    return { beforeFactions: heldFactions, afterFactions: powerStructure.factions };
   }
 
   const beforeFactions = powerStructure.factions.map(faction => ({ ...faction }));
@@ -354,7 +354,14 @@ export function assertPowerEconomyFreshness(
   powerStructure,
   economicState,
   tier,
+  options = {},
 ) {
+  // A HELD RECEIPT IS THE RECORD'S. Under a held power structure the fingerprint is the one the
+  // record was generated with, the world may legitimately have moved since, and that is §14's
+  // "incoherence is consequence" rather than a throw. With no pins the comparison below is
+  // today's behaviour byte for byte, which is what keeps the fail-closed arm meaning what it
+  // means; the recompute over the MERGED record belongs to the merge, not here.
+  if (isHeldPowerStructure(options.pins)) return true;
   const expected = fingerprintPowerEconomyInput(economicState, tier);
   const received = powerStructure?.economyInputFingerprint;
   if (received !== expected) {

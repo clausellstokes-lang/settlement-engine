@@ -13,13 +13,17 @@
  * the DM sees one coherent goal derived from the current situation.
  */
 
+
+// Shared phrases hoisted once (train EM-T16's worker buy-back, judgment 214c): each is spelled here and referenced below; every emitted value is byte-identical.
+const GOVERNANCE_FRACTURED = 'governance_fractured';
+const OTHER_STABLE_DOMINANT = 'other__stable__dominant';
 function getPrimaryCondition(settlement) {
   const leg     = settlement.powerStructure?.publicLegitimacy;
   const crimCap = settlement.powerStructure?.criminalCaptureState || 'none';
   const food    = settlement.economicState?.foodSecurity;
   const pros    = (settlement.economicState?.prosperity || '').toLowerCase();
 
-  if (leg?.governanceFractured)                         return 'governance_fractured';
+  if (leg?.governanceFractured)                         return GOVERNANCE_FRACTURED;
   if (crimCap === 'corrupted' || crimCap === 'capture') return 'corruption';
   const fl = (food?.label || '').toLowerCase();
   if (fl.includes('famine') || fl.includes('deficit'))  return 'food_crisis';
@@ -62,7 +66,7 @@ function reg(cat, cond, dom, sub) {
 }
 
 // ── government ────────────────────────────────────────────────────────────────
-reg('government','governance_fractured',
+reg('government',GOVERNANCE_FRACTURED,
   { position:  'Holds nominal governing authority where the legitimacy of that position is in active question. Formal title and real decision-making power are not the same thing.',
     goal:      'Restore enough perceived legitimacy to make the governing role functional, or identify an exit before the gap between title and authority becomes irreversible.',
     constraint:'Cannot take the action most likely to restore legitimacy without exposing the informal arrangements that currently keep governance functional.' },
@@ -112,7 +116,7 @@ reg('government','stable',
 );
 
 // ── military ──────────────────────────────────────────────────────────────────
-reg('military','governance_fractured',
+reg('military',GOVERNANCE_FRACTURED,
   { position:  'Commands enforcement capacity where civilian governance is failing. The military\'s relationship with civilian authority is under pressure.',
     goal:      'Maintain operational cohesion and institutional loyalty while the political situation makes the chain of command ambiguous.',
     constraint:'Cannot act unilaterally to fill the governance vacuum without becoming a political actor in ways that compromise the institutional neutrality the role requires.' },
@@ -163,7 +167,7 @@ reg('military','stable',
 
 // ── economy / crafts ──────────────────────────────────────────────────────────
 for (const cat of ['economy','crafts']) {
-reg(cat,'governance_fractured',
+reg(cat,GOVERNANCE_FRACTURED,
   { position:  'Controls organized commercial infrastructure in a settlement where governance is failing. Economic institutions are currently more functional than civic ones.',
     goal:      'Formalize the independent operational authority that governance failure has created in practice, before reconsolidation reasserts control.',
     constraint:'Formalizing commercial independence too visibly invites a reconsolidated governing authority to treat it as a threat rather than an asset.' },
@@ -214,7 +218,7 @@ reg(cat,'stable',
 }
 
 // ── religious ─────────────────────────────────────────────────────────────────
-reg('religious','governance_fractured',
+reg('religious',GOVERNANCE_FRACTURED,
   { position:  'Holds institutional religious authority in a settlement where civic governance is failing. Religious institutions often absorb civic functions when secular authority contracts.',
     goal:      'Extend the institution\'s civic role in ways that survive whatever governance reconsolidation follows.',
     constraint:'Civic engagement that appears opportunistic risks being reversed by a reconsolidated authority that resents the encroachment.' },
@@ -264,7 +268,7 @@ reg('religious','stable',
 );
 
 // ── criminal ──────────────────────────────────────────────────────────────────
-reg('criminal','governance_fractured',
+reg('criminal',GOVERNANCE_FRACTURED,
   { position:  'Operates criminal interests in a settlement where governance is failing. A governance vacuum is the optimal environment for criminal operations to expand.',
     goal:      'Extend operational scope while governance is weakened in ways that become embedded before reconsolidation.',
     constraint:'Expanding too visibly during governance failure risks triggering a consolidation response specifically aimed at criminal interests.' },
@@ -314,7 +318,7 @@ reg('criminal','stable',
 );
 
 // ── magic ─────────────────────────────────────────────────────────────────────
-reg('magic','governance_fractured',
+reg('magic',GOVERNANCE_FRACTURED,
   { position:  'Holds arcane institutional authority in a settlement with failing civic governance. Arcane services may hold leverage if structurally necessary.',
     goal:      'Convert temporary crisis leverage into more durable institutional standing.',
     constraint:'Arcane authority claimed during a governance crisis is typically the first thing a reconsolidated government constrains.' },
@@ -364,7 +368,7 @@ reg('magic','stable',
 );
 
 // ── other (noble, etc.) ───────────────────────────────────────────────────────
-reg('other','governance_fractured',
+reg('other',GOVERNANCE_FRACTURED,
   { position:  'Holds hereditary or traditional status in a settlement where formal governance is under pressure. Traditional authority often gains relative standing when formal authority loses it.',
     goal:      'Convert governance instability into a restoration of prerogatives that formal governance had constrained.',
     constraint:'Traditional claims that would have been dismissed under stable governance invite more scrutiny under conditions where everyone is watching for illegitimate power grabs.' },
@@ -383,7 +387,7 @@ reg('other','stable',
 // Fill remaining conditions for 'other' with stable variants
 for (const cond of ['corruption','food_crisis','economic_stress','contested']) {
   if (!T[`other__${cond}__dominant`]) {
-    T[`other__${cond}__dominant`]    = T['other__stable__dominant'];
+    T[`other__${cond}__dominant`]    = T[OTHER_STABLE_DOMINANT];
     T[`other__${cond}__subordinate`] = T['other__stable__subordinate'];
   }
 }
@@ -417,7 +421,7 @@ export function enrichNPCsWithStructure(npcs, settlement) {
     const cat  = npc.category || 'other';
     const rank = getRank(npc, powerFactions);
     const key  = `${cat}__${condition}__${rank}`;
-    const tmpl = T[key] || T[`${cat}__stable__${rank}`] || T['other__stable__dominant'];
+    const tmpl = T[key] || T[`${cat}__stable__${rank}`] || T[OTHER_STABLE_DOMINANT];
 
     if (!tmpl) return npc;
 

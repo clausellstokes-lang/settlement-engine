@@ -36,8 +36,8 @@
  * figures live here.
  */
 export const OBSERVED_SHAPE_BANK_LITERAL = Object.freeze({
-  reads: 61,
-  addresses: 40,
+  reads: 69,
+  addresses: 45,
   // Keyed BY THE ROSTER (EXPLAINED_WRITER_EXEMPTIONS). A declaration that banks nothing is
   // written 0/0 rather than omitted — "declared and unexercised" and "retired" are
   // different facts, and the walker refuses a map whose keys are not the roster.
@@ -54,5 +54,12 @@ export const OBSERVED_SHAPE_BANK_LITERAL = Object.freeze({
     'deltas on eventLog': Object.freeze({ reads: 2, addresses: 1 }),
     'event on eventLog': Object.freeze({ reads: 9, addresses: 4 }),
     'narrativeSummary on eventLog': Object.freeze({ reads: 4, addresses: 3 }),
+    // Declared at the schema-23 rung. 0/0 -> 6/3: four reads at the pulse's decree hook, one
+    // at the pulse kernel, and the ONE ordinary row the estate already carried at
+    // personaSlicer.js, which the declaration tags because the roster is keyed by identity.
+    'decrees on settlement': Object.freeze({ reads: 6, addresses: 3 }),
+    // Declared at the same rung. 0/0 -> 2/2: the phantom mint's own shelf predicate and the
+    // quota count that excludes a hidden phantom.
+    'kind on settlement': Object.freeze({ reads: 2, addresses: 2 }),
   }),
 });

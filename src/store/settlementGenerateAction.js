@@ -25,6 +25,13 @@
  * OUTCOME — a fork by the law's own definition. So relayed steps only stamp
  * receipt TIMES; the authoritative list is the one the core returns.
  *
+ * ⭐ THE LANE HAS A SECOND LANDING PLACE, AND ONLY ONE PATH TO IT (EM-F2, design §2.8).
+ * `options.promote` names a phantom SAVE ROW: the forge then takes the phantom's own
+ * seed, traits and name, and the finished world REPLACES that row's minimal record in
+ * place, on the same primary key, carrying whatever the estate had written onto it. There
+ * is no promotion action beside this one — the generation lane is where a world is made,
+ * so it is also where a phantom becomes one, and a second writer could disagree with it.
+ *
  * ⚠ DECLARED TELEMETRY SHIFT (owner row WK-8): `duration_ms` is main's
  * wall-clock around the whole await, so it now includes the transport and, on
  * the first generation of a session, the lazy fetch of the generation core.
@@ -108,9 +115,60 @@ import {
 // on the lazy side with its callers (MEASURED, lane L-MAT: closure 239 -> 238).
 import { birthConfig, loadGenerationLawPayloads } from '../domain/density/densityCreateBoundary.js';
 import { activateFaithIfEntitled, resetSettlementIdentity, retiringDraftOf } from './settlementLifecycleHelpers.js';
+// ⛔ THE DISCRIMINANT IS READ WHERE IT IS SPELLED, AND NOWHERE ELSE. EM-F1 put the
+// phantom's `kind` in ONE place so the shelf's hiding, the registry's badge and the
+// apply-time policy can never disagree; a promotion that re-typed the word here would be
+// the second spelling that makes them drift. The leaf imports nothing at run time, so
+// this lane — itself reached only through settlementSlice.js's dynamic import — gains one
+// zero-dependency module and no transitive closure with it.
+// ⚠ AND IT AGES A LANDED ROSTER, DECLARED RATHER THAN QUIETLY ABSORBED:
+// tests/domain/phantoms.test.js A12 pins the leaf's importers EXACT at one row (the
+// library shelf). This is the second, and the row that arm is owed is
+// 'src/store/settlementGenerateAction.js imports src/domain/edit/phantoms.js'.
+import { PHANTOM_RECORD_KEYS, isPhantomSave } from '../domain/edit/phantoms.js';
 
 /** Request correlation. A counter, never a clock and never a random draw. */
 let _requestSeq = 0;
+
+/**
+ * THE WRITTEN HISTORY OF A PHANTOM IS WHAT THE MINT DID NOT WRITE AND THE FORGE CANNOT
+ * ANSWER (design §2.8, "traits and written history carry over"; §13, "promotion does not
+ * rewrite the past").
+ *
+ * ⛔ IT IS DERIVED, NEVER LISTED. A hand-typed carry list would age the first time the
+ * estate records a new fact against a counterparty, and it is precisely the facts nobody
+ * thought of that a DM would lose. So the rule is read off the two shapes themselves:
+ *   (a) a key of `PHANTOM_RECORD_KEYS` IS the minimal record, and a promotion replaces it
+ *       FULLY — the discriminant, the trait bag and the dm-namespaced id all go, which is
+ *       what makes the promoted row stop reading as a phantom anywhere;
+ *   (b) a key the FORGE writes is the seed's own world, and it always wins. THE PROMISE
+ *       says a seed is a starting world forever, so a carried value may never overwrite
+ *       one the pipeline produced — that is what keeps the promoted record at parity with
+ *       a settlement forged from the same seed;
+ *   (c) everything left was WRITTEN ONTO the phantom after the mint — the neighbour
+ *       back-link's reciprocal edge, the decree registry's rows, whatever the estate
+ *       records against a counterparty next — and it carries.
+ *
+ * ⭐ THE SAVE PATH'S OWN STAMPS FALL OUT OF (b) FOR FREE, MEASURED RATHER THAN DENIED. A
+ * read stamps seven canonical containers onto every blob it sees (activeConditions,
+ * aiOverlays, generatorVersion, schemaVersion, simulationTrace, simulationVersion,
+ * userCanon) and a forged settlement carries all seven of its own, so not one of them can
+ * reach the promoted record. A denylist would have had to name them, and would have aged.
+ *
+ * @param {Record<string, unknown>} record the phantom save's blob, as the library holds it
+ * @param {Record<string, unknown>} forged the settlement the pipeline has just produced
+ * @returns {Record<string, unknown>} the keys folded over the forge; empty for an unwritten phantom
+ */
+function carriedHistoryOf(record, forged) {
+  /** @type {Record<string, unknown>} */
+  const carried = {};
+  for (const key of Object.keys(record)) {
+    if (PHANTOM_RECORD_KEYS.includes(key)) continue;
+    if (Object.hasOwn(forged, key)) continue;
+    carried[key] = record[key];
+  }
+  return carried;
+}
 
 
 /**
@@ -130,7 +188,9 @@ async function inThreadGeneration(request, onStep) {
  * @param {(fn: (draft: any) => void) => void} set
  * @param {() => any} get
  * @param {string} [seedOverride]
- * @param {{ intent?: string, at?: string }} [options] `intent` names WHO is asking
+ * @param {{ intent?: string, at?: string, promote?: string|number }} [options] `promote`
+ *   names a SAVED ROW this forge lands on instead of a fresh draft — the phantom
+ *   promotion of design §2.8, resolved and gated below. `intent` names WHO is asking
  *   (lib/generationIntent.js); only the anonymous daily cap reads it, and only to
  *   exempt a curated sample fork. `at` names WHERE they clicked (REFUSAL_SURFACES in
  *   lib/refusalReasons.js): it changes nothing about the generation and is stamped on
@@ -203,9 +263,46 @@ export async function generateSettlementAction(set, get, seedOverride, options) 
   const canCustomize = isSampleFork || (typeof state.canCustomizePreGeneration === 'function'
     ? state.canCustomizePreGeneration() === true
     : false);
-  const config = canCustomize
+  // ⭐ THE PROMOTION TARGET, RESOLVED ONCE AND FAIL-CLOSED (design §2.8; the charter's
+  // EM-F2 row). `promote` names a SAVE ROW this forge lands on: the phantom the DM has
+  // been playing with becomes the real settlement its own seed names, IN PLACE, on the
+  // row every back-link already points at.
+  //
+  // ⛔ THE COSTLY ERROR IS THE OTHER ONE, so the resolve fails toward NOT WRITING. A row
+  // that is absent, or whose blob is not a phantom record, is never promoted — forging a
+  // world over a real settlement's blob would destroy a town a reader owns, and no
+  // caller's slip may reach that. An unresolved promotion leaves the library untouched
+  // and this call forges an ordinary draft, exactly as it does today.
+  //
+  // ⛔ AND IT ASKS THE CAPABILITY THE DIALS ALREADY ASKED. The trait overlay below AIMS a
+  // forge, which is pre-generation customization by another door (§934.34); a reader who
+  // may not customize may not promote, and the answer is the one `canCustomize` gave
+  // rather than a second, differently-failing reading of the gate.
+  const promoteId = canCustomize && options?.promote != null ? String(options.promote) : null;
+  const promoting = promoteId
+    ? (Array.isArray(state.savedSettlements) ? state.savedSettlements : [])
+      .find(row => String(row?.id) === promoteId && isPhantomSave(row)) || null
+    : null;
+  const phantom = promoting ? promoting.settlement : null;
+  const baseConfig = canCustomize
     ? storedConfig
     : { ...DEFAULT_CONFIG, settType: storedConfig?.settType ?? DEFAULT_CONFIG.settType };
+  // ⭐ A PROMOTION FORGES THE PHANTOM'S OWN FACTS, NOT THE READER'S DIALS (design §2.8:
+  // "forging the phantom as a real settlement takes the phantom's seed, so traits and
+  // written history carry over"). The three rolled traits ARE the generation's three
+  // world dials — the tier, the culture, the terrain — and the DM's free name is the one
+  // the pipeline writes its prose around, so what arrives is the settlement the registry
+  // has been showing rather than a stranger wearing its name. The tier gate below then
+  // judges the size actually being forged, because the overlay lands BEFORE it.
+  const config = phantom
+    ? {
+      ...baseConfig,
+      settType: phantom.traits.size,
+      culture: phantom.traits.culture,
+      terrainOverride: phantom.traits.terrain,
+      customName: phantom.name,
+    }
+    : baseConfig;
   // The four constraint bags are the Deep-constraints grids — the same class of
   // pre-generation input as `config`, persisted beside it (store/toggleSlice.js's own
   // scope contract says so), and each one EMPTY means "force nothing, forbid nothing",
@@ -325,7 +422,13 @@ export async function generateSettlementAction(set, get, seedOverride, options) 
   // (data/sampleSettlements.js forkConfigFor). `seed`
   // stays an ADMITTED key: pruning it would change saved-config loads, which
   // tests/generators/configPatchAllowlistWalker.test.js records as a product call.
-  const seed = seedOverride || generateSeed();
+  //
+  // ⛔ A PROMOTION'S SEED IS THE PHANTOM'S OWN, NEVER THE ARGUMENT. The record carries the
+  // seed precisely so this forge can reproduce the world it names (EM-F1's A1: "the seed
+  // is carried so promotion can forge the same world from it"), and reading a caller's
+  // `seedOverride` here would let one mistyped argument mint a DIFFERENT world onto the
+  // row and still call it the same settlement.
+  const seed = phantom ? String(phantom.seed) : (seedOverride || generateSeed());
 
   const birthInputs = { ...config };
   delete birthInputs.seed;
@@ -518,8 +621,14 @@ export async function generateSettlementAction(set, get, seedOverride, options) 
   // instruction about what to keep, and Phase A's history carry has
   // always crossed that boundary. Only the campaign-layer condition carry
   // below is guarded, because those belong to a save, not to an intent.
+  // ⛔ A PROMOTION TAKES THE GUARDED BRANCH FOR THE GUARD'S OWN REASON. The carry above is
+  // for a reroll OF the on-screen draft; a promotion mints the world of ANOTHER identity —
+  // the phantom's row — so cloning the on-screen town's world/party conditions onto it
+  // would be the same defect the activeSaveId guard exists to prevent, reached through a
+  // second door. (It is also what keeps the promoted record at parity with a fresh forge:
+  // a carried crisis would be a fact the seed never produced.)
   const locked = carryLockedSections(state.locks, state.settlement, withRoster);
-  const reconciled = state.activeSaveId
+  const reconciled = (state.activeSaveId || promoting)
     ? locked
     : reconcileSettlementChange(locked, state.settlement, {
         source: 'regenerate', changeType: 'GENERATE_SETTLEMENT', changeLabel: locked?.name,
@@ -530,13 +639,21 @@ export async function generateSettlementAction(set, get, seedOverride, options) 
   // rng-free, tier-gated — the golden (generator output) is untouched because
   // this fires in the STORE, after the pipeline.
   const withFaith = activateFaithIfEntitled(reconciled, get);
+  // ⭐ THE PROMOTED RECORD IS THE FORGE PLUS THE PHANTOM'S WRITTEN HISTORY, AND IT IS ONE
+  // OBJECT. The world installed on screen, the blob written onto the row, the payload
+  // persisted and the value returned to the caller are the same reference, so no two of
+  // them can ever disagree about what was promoted. On an ordinary generation it IS
+  // `withFaith`, unchanged down to the reference.
+  const promoted = phantom
+    ? { ...withFaith, ...carriedHistoryOf(phantom, withFaith) }
+    : withFaith;
   // Derive the SystemState immediately so the UI never sees a settlement
   // without its accompanying state snapshot. The domain function is
   // pure — no store, no React — and tolerant of partial inputs, so a
   // sparse settlement still produces a usable state.
   let systemState = null;
   try {
-    systemState = deriveSystemState(withFaith);
+    systemState = deriveSystemState(promoted);
   } catch (e) {
     console.warn('[settlementSlice] deriveSystemState failed:', e);
   }
@@ -558,8 +675,24 @@ export async function generateSettlementAction(set, get, seedOverride, options) 
       // that folds the settlement in, so the map and the roster can never
       // disagree. See domain/locksPreservation.js for the identity split.
       remapLocksAfterGenerate(state, _preservation);
-      state.settlement = withFaith;
-      state.activeSaveId = null;
+      state.settlement = promoted;
+      // ⭐ THE RECORD IS REPLACED IN PLACE, ON THE ROW'S OWN PRIMARY KEY. Nothing is
+      // inserted and nothing is deleted, so every edge that already points at this row —
+      // the neighbour back-link's `relationshipTo`, a campaign's membership list — still
+      // resolves, and the shelf simply stops hiding a row that is no longer a phantom.
+      // The envelope's own columns already agree without a write: the name is the DM's,
+      // the seed is the record's, and the tier is the trait this forge was aimed at. The
+      // BLOB is therefore the one column a promotion writes.
+      //
+      // ⛔ AND THE ACTIVE SAVE FOLLOWS THE WORLD. A promotion is not a fresh draft: the
+      // world on screen IS that saved row now, and leaving `activeSaveId` null would tell
+      // the exit guard, the save affordances and the device's draft-retirement rule that
+      // this world belongs to nobody.
+      state.activeSaveId = promoting ? promoteId : null;
+      if (promoting && Array.isArray(state.savedSettlements)) {
+        const row = state.savedSettlements.find(entry => String(entry?.id) === promoteId);
+        if (row) row.settlement = promoted;
+      }
       state.lastSeed = seed;
       // ⭐ THE ORIGIN OF THE WORLD IN THE EDITOR (2026-09-18, ODQ §934.8). A birth is
       // the only moment the answer to "whose session made this?" is known for certain,
@@ -617,6 +750,24 @@ export async function generateSettlementAction(set, get, seedOverride, options) 
       state.editedAt = now;
       state.canonizedAt = null;
   });
+
+  // ⛔ THE ROW IS PERSISTED, OR THE PROMOTION GHOSTS ON THE NEXT HYDRATION. The library
+  // cache written above is SESSION state; the record the device (or the cloud) holds is
+  // still the minimal one until this write lands, and the next `savesService.list()` →
+  // `setSavedSettlements` would put the phantom straight back over the town the DM just
+  // forged — a write that survives one lifecycle path and ghosts another.
+  //
+  // It goes through the estate's ONE save-update chokepoint, the durable outbox, so a
+  // failed write is queued and retried rather than lost; `persistSaveUpdate` never throws
+  // and `settlement` is a column the save path already carries (its `data`, and the
+  // `neighbour_links` it derives from the carried edges), so no shape is widened here.
+  // AWAITED, so a caller that reads the library back sees the promotion rather than a
+  // race, and fetched AT THE SEAM — the idiom this lane already uses for its analytics —
+  // so the generation chunk gains no static edge to the campaign machinery.
+  if (promoting) {
+    const { persistSaveUpdate } = await import('./campaignSliceShared.js');
+    await persistSaveUpdate(promoteId, { settlement: promoted });
+  }
 
   // Count this anonymous generation against the daily cap. A regeneration
   // (a settlement was already on screen) spends a reroll; the first
@@ -706,9 +857,9 @@ export async function generateSettlementAction(set, get, seedOverride, options) 
 
   // Return the activated settlement so a caller that saves the return value
   // persists the SAME faith-active shape the store holds (state.settlement =
-  // withFaith). Generation telemetry above intentionally reads `reconciled`
+  // promoted). Generation telemetry above intentionally reads `reconciled`
   // (generator truth — activation is a post-pipeline store overlay). The draft's
   // ORIGIN is deliberately not here: it describes the session, not the world, so
   // it lives at the store root and never reaches a caller that saves this object.
-  return withFaith;
+  return promoted;
 }

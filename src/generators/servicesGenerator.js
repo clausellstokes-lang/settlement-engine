@@ -11,6 +11,16 @@ import {
 import {
   resolveGenerationWorldLaw,
 } from './generationContext.js';
+// Shared phrases hoisted once (train EM-T16's worker buy-back, judgment 214c): each is spelled here and referenced below; every emitted value is byte-identical.
+const ASK_AROUND_AT_THE_RIGHT_TAVERN_SOMEONE_MOVES_GOODS_WITHOUT_QUESTIONS = 'Ask around at the right tavern. Someone moves goods without questions.';
+const FENCE_WORD_OF_MOUTH = 'Fence (word of mouth)';
+const INFORMAL_NO_CONTRACT_VIOLENCE_AVAILABLE_FOR_COIN_TO_THOSE_WHO_KNOW_WHERE_TO_ASK = 'Informal, no contract. Violence available for coin to those who know where to ask.';
+const NO_LAW_BRING_COIN = 'No law, bring coin';
+const PAY_A_LOCAL_STRONGMAN_A_NEIGHBOR_OR_A_GANG_FOR_SOME_MEASURE_OF_SAFETY_NO_CONTRACTS_NO_GUARANTEES = 'Pay a local strongman, a neighbor, or a gang for some measure of safety. No contracts, no guarantees.';
+const PROTECTION_INFORMAL = 'Protection (informal)';
+const THERE_IS_NO_OFFICIAL_RECOURSE_HERE_DISPUTES_END_WITH_WHOEVER_CAN_APPLY_MORE_VIOLENCE_OR_PAY_MORE_FOR_PROTECTION = 'There is no official recourse here. Disputes end with whoever can apply more violence or pay more for protection.';
+const _ARCANE_UNDERGROUND = '(arcane underground)';
+
 
 /**
  * servicesGenerator.js
@@ -98,26 +108,26 @@ export const generateAvailableServices = (
     if (securityRatio < 0.6) {
       buckets.criminal.push(
         {
-          name: 'No law, bring coin',
-          desc: 'There is no official recourse here. Disputes end with whoever can apply more violence or pay more for protection.',
+          name: NO_LAW_BRING_COIN,
+          desc: THERE_IS_NO_OFFICIAL_RECOURSE_HERE_DISPUTES_END_WITH_WHOEVER_CAN_APPLY_MORE_VIOLENCE_OR_PAY_MORE_FOR_PROTECTION,
           institution: '(lawless)',
         },
         {
-          name: 'Protection (informal)',
-          desc: 'Pay a local strongman, a neighbor, or a gang for some measure of safety. No contracts, no guarantees.',
+          name: PROTECTION_INFORMAL,
+          desc: PAY_A_LOCAL_STRONGMAN_A_NEIGHBOR_OR_A_GANG_FOR_SOME_MEASURE_OF_SAFETY_NO_CONTRACTS_NO_GUARANTEES,
           institution: '(informal)',
         }
       );
     } else {
       buckets.criminal.push(
         {
-          name: 'Fence (word of mouth)',
-          desc: 'Ask around at the right tavern. Someone moves goods without questions.',
+          name: FENCE_WORD_OF_MOUTH,
+          desc: ASK_AROUND_AT_THE_RIGHT_TAVERN_SOMEONE_MOVES_GOODS_WITHOUT_QUESTIONS,
           institution: '(covert)',
         },
         {
           name: 'Hired muscle',
-          desc: 'Informal, no contract. Violence available for coin to those who know where to ask.',
+          desc: INFORMAL_NO_CONTRACT_VIOLENCE_AVAILABLE_FOR_COIN_TO_THOSE_WHO_KNOW_WHERE_TO_ASK,
           institution: '(covert)',
         }
       );
@@ -132,26 +142,26 @@ export const generateAvailableServices = (
       if (securityRatio < 0.4) {
         buckets.criminal.push(
           {
-            name: 'No law, bring coin',
-            desc: 'There is no official recourse here. Disputes end with whoever can apply more violence or pay more for protection.',
+            name: NO_LAW_BRING_COIN,
+            desc: THERE_IS_NO_OFFICIAL_RECOURSE_HERE_DISPUTES_END_WITH_WHOEVER_CAN_APPLY_MORE_VIOLENCE_OR_PAY_MORE_FOR_PROTECTION,
             institution: '(lawless)',
           },
           {
-            name: 'Protection (informal)',
-            desc: 'Pay a local strongman, a neighbor, or a gang for some measure of safety. No contracts, no guarantees.',
+            name: PROTECTION_INFORMAL,
+            desc: PAY_A_LOCAL_STRONGMAN_A_NEIGHBOR_OR_A_GANG_FOR_SOME_MEASURE_OF_SAFETY_NO_CONTRACTS_NO_GUARANTEES,
             institution: '(informal)',
           }
         );
       } else {
         buckets.criminal.push(
           {
-            name: 'Fence (word of mouth)',
-            desc: 'Ask around at the right tavern. Someone moves goods without questions.',
+            name: FENCE_WORD_OF_MOUTH,
+            desc: ASK_AROUND_AT_THE_RIGHT_TAVERN_SOMEONE_MOVES_GOODS_WITHOUT_QUESTIONS,
             institution: '(covert)',
           },
           {
             name: 'Hired muscle',
-            desc: 'Informal, no contract. Violence available for coin to those who know where to ask.',
+            desc: INFORMAL_NO_CONTRACT_VIOLENCE_AVAILABLE_FOR_COIN_TO_THOSE_WHO_KNOW_WHERE_TO_ASK,
             institution: '(covert)',
           }
         );
@@ -231,7 +241,7 @@ export const generateAvailableServices = (
       if (!buckets.criminal.some((existing) => existing.name === item.name)) {
         buckets.criminal.push({
           ...item,
-          institution: '(arcane underground)',
+          institution: _ARCANE_UNDERGROUND,
         });
       }
     });
@@ -298,7 +308,7 @@ export const generateAvailableServices = (
     };
   if (crimeTypes.has('Survival crime')) {
     addCrimeService(
-      'Fence (word of mouth)',
+      FENCE_WORD_OF_MOUTH,
       'No questions asked. Stolen goods move through back channels for a fraction of value.',
       '(covert)'
     );
@@ -326,18 +336,18 @@ export const generateAvailableServices = (
     addCrimeService(
       'Arcane services (illicit)',
       'Magical practitioners outside guild oversight: identity work, scrying, targeted effects. Available if you know where to ask.',
-      '(arcane underground)'
+      _ARCANE_UNDERGROUND
     );
   }
   if (crimeTypes.has('Lawlessness')) {
     addCrimeService(
-      'No law, bring coin',
-      'There is no official recourse here. Disputes end with whoever can apply more violence or pay more for protection.',
+      NO_LAW_BRING_COIN,
+      THERE_IS_NO_OFFICIAL_RECOURSE_HERE_DISPUTES_END_WITH_WHOEVER_CAN_APPLY_MORE_VIOLENCE_OR_PAY_MORE_FOR_PROTECTION,
       '(lawless)'
     );
     addCrimeService(
-      'Protection (informal)',
-      'Pay a local strongman, a neighbor, or a gang for some measure of safety. No contracts, no guarantees.',
+      PROTECTION_INFORMAL,
+      PAY_A_LOCAL_STRONGMAN_A_NEIGHBOR_OR_A_GANG_FOR_SOME_MEASURE_OF_SAFETY_NO_CONTRACTS_NO_GUARANTEES,
       '(informal)'
     );
   }
@@ -346,8 +356,8 @@ export const generateAvailableServices = (
   }
   if (crimeTypes.has('Background crime')) {
     addCrimeService(
-      'Fence (word of mouth)',
-      'Ask around at the right tavern. Someone moves goods without questions.',
+      FENCE_WORD_OF_MOUTH,
+      ASK_AROUND_AT_THE_RIGHT_TAVERN_SOMEONE_MOVES_GOODS_WITHOUT_QUESTIONS,
       '(covert)'
     );
   }

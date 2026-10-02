@@ -37,6 +37,7 @@ import { popToTier, TIER_ORDER } from '../../data/constants.js';
 import { resolveSettlementTerrain } from '../resolveTerrain.js';
 import { withActiveCondition } from '../activeConditions.js';
 import { stablePart } from './stablePart.js';
+import { assertWorldPulseFate } from './worldPulseFates.js';
 import { seasonForTick } from './worldState.js';
 import { collectRealizedEmigrationEvents, dispatchMigrations } from './migrationKernel.js';
 import { migrationActive } from '../spatial/migration.js';
@@ -52,6 +53,11 @@ import {
 import { hasOwnRequiredContract } from '../generationOwnership.js';
 import { lifecycleStatusOf } from './settlementLifecycleFirstClass.js';
 import { pickLine, CALAMITY_TITLES, CALAMITY_SUMMARIES, CALAMITY_REASONS } from './eventProse.js';
+// CURE-P1 U2 (FPQ-22): THE TOLL IN THE ESTATE'S OWN NUMBER IDIOM, never a digit. A small count
+// reads through THE ONE SPELLING OF A SMALL COUNT; a head count through the Herald's closed
+// quantity vocabulary, the words its burial and departure lines already speak.
+import { numberWord } from '../display/numberWords.js';
+import { quantityWords } from './demographicsHerald.js';
 // W-K K3 THE DISASTER BUFFER (docs/DESIGN_MAGIC_ECONOMY.md §5). An EXTENSION of this
 // kernel, never a rewrite of it: every buffer read is behind a `buffer` argument that
 // is null unless magicEconomyEnabled is lit, and a null buffer leaves every expression
@@ -241,6 +247,7 @@ function lastStampYear(s) {
  */
 export function ruinInstitution(inst, { reason, fate }) {
   if (typeof fate !== 'string' || fate === '') throw new TypeError('ruinInstitution: fate is required and must be a non-empty string. A pulse ruin record never defaults its fate.');
+  assertWorldPulseFate(fate, 'ruinInstitution');
   if (typeof reason !== 'string' || reason === '') throw new TypeError('ruinInstitution: reason is required and must be a non-empty string. A pulse ruin record never defaults its cause.');
   return {
     ...inst, status: 'ruined', _worldPulseInactive: true, _worldPulseEconomyClosed: true,
@@ -848,8 +855,8 @@ function strikeNews(id, settlementName, stampName, loss, k, tick, now) {
     headline: stampName,
     summary: pickLine(CALAMITY_SUMMARIES, `${id}::${tick}`, {
       name: settlementName,
-      ruin: `${k === 1 ? 'an institution lies' : `${k} institutions lie`} in ruin`,
-      deaths: loss.deaths,
+      ruin: `${k === 1 ? 'an institution lies' : k > 1 ? `${numberWord(k)} institutions lie` : 'no institution lies'} in ruin`,
+      deaths: quantityWords(loss.deaths),
     }),
     kind: 'applied',
     impactKind: 'calamity',

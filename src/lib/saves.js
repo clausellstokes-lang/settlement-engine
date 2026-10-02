@@ -87,11 +87,35 @@ async function loadNormalize() {
   return _normalize;
 }
 
-/** Generate a client-side UUID for saves we must reference before insert
- *  (the bidirectional link embeds the new save's id in both rows). */
+/**
+ * Generate a client-side UUID for saves we must reference before insert
+ * (the bidirectional link embeds the new save's id in both rows).
+ *
+ * ⛔ U52 — THE FALLBACK USED TO BE THE CLOCK ALONE, WHICH IS U22'S COLLISION SHAPE
+ * WEARING A UUID. `Date.now()` has MILLISECOND resolution, so two saves minted inside one
+ * millisecond took the SAME uuid — and this id is not a label: `supabaseSave` embeds it
+ * in BOTH rows of a bidirectional neighbour link and then creates+updates against it, so
+ * a repeat makes two settlements one primary key on the server exactly as it did on the
+ * device. The local backend's mint was cured at U22; this is the same hole in the other
+ * backend, and it is cured with THE SAME FUNCTION rather than a second spelling of it.
+ *
+ * `newLocalSaveId` is the monotonic source: the clock stays the high part and a counter
+ * sits beside it, so a same-millisecond pair cannot converge. It is called with an EMPTY
+ * row list because there is nothing to avoid here — the device's localStorage rows are
+ * not this backend's keyspace — and what is wanted from it is precisely the half that
+ * does not depend on rows: "a key no earlier mint of this module used". The UUID's
+ * SHAPE is untouched (`00000000-0000-4000-8000-` + twelve hex), so nothing that reads,
+ * stores or validates one of these ids sees a different kind of value.
+ *
+ * `crypto.randomUUID` still wins wherever it exists, which is every browser the product
+ * ships to; the fallback is the one that had no answer.
+ *
+ * @returns {string} a v4-shaped id no earlier mint of this module has produced
+ */
 function newSaveId() {
   if (globalThis.crypto?.randomUUID) return globalThis.crypto.randomUUID();
-  return `00000000-0000-4000-8000-${Date.now().toString(16).padStart(12, '0').slice(-12)}`;
+  const tick = newLocalSaveId([]);
+  return `00000000-0000-4000-8000-${tick.toString(16).padStart(12, '0').slice(-12)}`;
 }
 
 // ── Local storage helpers ───────────────────────────────────────────────────
@@ -123,6 +147,106 @@ async function localLoad() {
 
 function localWrite(saves) {
   localStorage.setItem(LOCAL_KEY, JSON.stringify(saves));
+}
+
+/** The tail of the local library's write queue. Never rejects — see serializeLocalWrite. */
+let _localLibraryTail = Promise.resolve();
+
+/**
+ * ⛔ U69 — EVERY LOCAL READ-MODIFY-WRITE OF THE LIBRARY RUNS ALONE, BECAUSE THE WHOLE
+ * ARRAY IS THE ROW.
+ *
+ * `localStorage.setItem` is atomic; a load/modify/write TRANSACTION over one key is not.
+ * Every mutator below reads the ENTIRE library, patches one entry and writes the whole
+ * array back — and the read is `await localLoad()`, which yields. MEASURED at this cure's
+ * base, over the real advance in local mode: the world-pulse flush hands its member
+ * updates to `Promise.all`, so every call suspended at that same `await` BEFORE any of
+ * them wrote, all read the identical pre-flush array, and the last `localWrite` won. Two
+ * members flushed in one tick came out with one row's write gone ("lost: ["save-2"]");
+ * three came out with two gone. N members ⇒ N−1 rows lose their write, deterministically.
+ * Under THE PROMISE a save is the DM's lived history, so a flush that drops a member's
+ * row is data loss, not a scheduling detail.
+ *
+ * THE CURE IS AT THE BOUNDARY THAT HAS THE DEFECT, not at the one call site that
+ * surfaced it. The fan-out lives in the store's pulse flush, but the broken invariant is
+ * this module's: the library array has ONE writer at a time. Serializing here also covers
+ * the parallel local DELETE fan-out of the same flush and every other concurrent pair on
+ * the device; serializing the caller would have left them.
+ *
+ * ⛔ IT IS A CHAIN AND NOT `withLocalAuthorityLock`, AND THAT IS MEASURED RATHER THAN
+ * STYLISTIC. That mutex refuses an asynchronous critical section by construction — its
+ * `runSynchronous` THROWS on a thenable ("A local authority critical section must be
+ * synchronous.") — and every section here OPENS with `await localLoad()`.
+ * ⛔ AND THE BYTE ARGUMENT IS NOT THE ONE IT LOOKS LIKE, so it is stated as measured:
+ * `src/lib/localAuthorityMutex.js` is ALREADY in `EAGER_FIRST_PAINT_MODULES` (270 modules),
+ * so an edge to it would cost the first paint nothing. What would cost is the SYNCHRONOUS
+ * section the mutex demands: it would have to reach `saveAdmission.js`, which is NOT eager,
+ * and hoisting that parser into the first-paint chain is the one thing this file's lazy
+ * seams exist to prevent.
+ *
+ * ⛔ WHAT IT DOES NOT CLAIM: cross-DOCUMENT exclusion. A second tab runs a second module
+ * instance with its own tail, so two tabs writing at once still race — the hazard
+ * `localAuthorityMutex.js` exists for, wider than the one measured here and not this
+ * cure's to claim.
+ *
+ * ⛔ THE CLOUD PATH NEVER REACHES THIS. The queue wraps the `local*` bodies only; the
+ * exported service still routes to the `supabase*` functions when `isConfigured`, whose
+ * writes are per-row on the server and were never the losing shape.
+ *
+ * ⛔ THE TAIL NEVER CARRIES A REJECTION FORWARD. A refused batch or a quota-exceeded
+ * write is the CALLER's to see (it gets `run`), but a poisoned tail would refuse every
+ * later write on the device, so the queue keeps a settled, handler-attached copy.
+ *
+ * @template T
+ * @param {() => Promise<T>} write the read-modify-write section, run with the queue held
+ * @returns {Promise<T>} the section's own outcome
+ */
+function serializeLocalWrite(write) {
+  const run = _localLibraryTail.then(write);
+  _localLibraryTail = run.then(() => undefined, () => undefined);
+  return run;
+}
+
+/** The highest key this module instance has minted, so the clock cannot repeat itself. */
+let _lastLocalSaveId = 0;
+
+/**
+ * ⛔ THE LOCAL BACKEND'S PRIMARY KEY — AND WHY THE CLOCK ALONE WAS NOT ONE.
+ *
+ * The local save path used to mint `Date.now()` for a row with no id of its own. That
+ * clock has MILLISECOND resolution, so two saves written inside one millisecond took the
+ * SAME key — and every id compare in this module addresses rows by `String(id)`, so the
+ * pair shared one identity: `localUpdate` reached only the first (a rename could land on
+ * the wrong town), `localDelete` filtered by inequality and removed BOTH, and the
+ * neighbour back-link's self-link guard refused the pair by id equality. EM-F1 met it as
+ * a timing-dependent red and cured its FIXTURES by supplying explicit ids; this is the
+ * cure at the mint.
+ *
+ * The clock stays the HIGH PART, so the id's spelling is what it always was — a number
+ * that rises with time — and every `String(id)` compare, every `savedAt` ordering and
+ * every already-persisted row are untouched. Beside it sit the two things a bare clock
+ * cannot supply:
+ *
+ *   • a monotonic counter, so a same-millisecond pair cannot converge within one module
+ *     instance; and
+ *   • a check against the rows ALREADY ON THE DEVICE, because a fresh module instance (a
+ *     reload, a second tab) starts that counter at zero and would otherwise be free to
+ *     re-mint a key a previous instance already wrote.
+ *
+ * Deliberately NOT a UUID: the local id has been a number in every row this estate has
+ * ever written, the Supabase path mints its own key (`newSaveId`) and is untouched here,
+ * and a second id idiom on one table is the divergence this cure exists to close.
+ *
+ * @param {ReadonlyArray<any>} existing the rows already persisted, as `localLoad` returns them
+ * @returns {number} a key no persisted row holds and no earlier mint of this module used
+ */
+function newLocalSaveId(existing) {
+  const taken = new Set((existing || []).map(row => String(row?.id)));
+  const now = Date.now();
+  let candidate = now > _lastLocalSaveId ? now : _lastLocalSaveId + 1;
+  while (taken.has(String(candidate))) candidate += 1;
+  _lastLocalSaveId = candidate;
+  return candidate;
 }
 
 // ── Toggle helpers ─────────────────────────────────────────────────────────
@@ -742,29 +866,69 @@ async function localSaveEntry(
   );
   const v2 = migrateSaveToV2(entry);
   const settlement = withNeighbourNetworkFromRelationship(v2.settlement);
-  const saves = await localLoad();
-  const id = v2.id || Date.now();
-
-  // Bidirectional neighbour link (see supabaseSave): when the named neighbour
-  // already exists as an active save, write the reciprocal back-link onto the
-  // partner row alongside the new save.
-  if (settlement?.neighborRelationship?.name) {
-    const { buildNeighbourBackLink } = await loadNeighbourBackLink();
-    const existing = saves.filter(isSaveActive);
-    const link = buildNeighbourBackLink({ ...v2, id, settlement }, existing);
-    if (link) {
-      const next = saves.map(s => String(s.id) === String(link.partner.id)
-        ? { ...s, settlement: link.partner.settlement }
-        : s);
-      next.unshift({ ...v2, settlement: link.settlement, id, savedAt: Date.now() });
-      localWrite(next);
-      return id;
+  // U69: the section runs alone. It reaches the rows ALREADY ON THE DEVICE twice — once
+  // for the id mint, once for the neighbour partner — so an interleaved writer would both
+  // lose this row and let the mint re-use a key.
+  return serializeLocalWrite(async () => {
+    const saves = await localLoad();
+    // ⛔ EM-F3b — A CALLER'S ID THE LIBRARY ALREADY HOLDS IS REFUSED, BEFORE ANY WRITE.
+    //
+    // This is a CREATE, and it UNSHIFTS. Every id compare in this module is `String(id)`, so a
+    // repeated key does not overwrite the row it repeats — it SHADOWS it: two rows carry one
+    // identity, the newcomer is FIRST, and `localUpdate` reaches only it, `localDelete` filters
+    // by inequality and takes BOTH, and every `find` by id — the detail route, the focus
+    // effect — resolves to the newcomer while the older world becomes unreachable. That is the
+    // data-loss shape cured at the local mint (a clock that repeated inside one millisecond)
+    // and at the batch create (`batch_create_requires_id`); this is the same refusal at the one
+    // create path that accepts a CALLER'S key, and it is this module's answer to a caller whose
+    // own mint has gone wrong rather than a second mint here.
+    //
+    // ⛔ A CALLER THAT MEANS TO WRITE OVER A ROW ALREADY HAS A DOOR: `localUpsert` takes an
+    // explicit id and updates in place, and `localUpdate` patches. Refusing here NAMES the
+    // broken precondition at the boundary that holds the rows — U53's own words — rather than
+    // minting an identity the caller is not holding.
+    //
+    // MEASURED, which is why this is safe to refuse: of the ten `saves.save()` callers in the
+    // tree, nine pass no `id` at all (the service mints), and the tenth — the phantom door's
+    // `store/phantomMintAction.js` — passes its record's own minted id and now walks that id
+    // past every claim before it writes. So the refusal is unreachable on the shipped paths and
+    // fires only on the mistake it is named for.
+    //
+    // The check reads the rows, so it sits INSIDE the serialized section — U69's reason
+    // exactly: between an unqueued read and the write, an interleaved writer could land the
+    // very key this is testing for. It still runs before any `localWrite`, so a refused create
+    // leaves the device exactly as it found it.
+    if (v2.id && saves.some(save => String(save.id) === String(v2.id))) {
+      throw Object.assign(
+        new Error('Explicit-id save create requires an unclaimed id.'),
+        { code: 'save_requires_unclaimed_id' },
+      );
     }
-  }
+    // An explicit id still wins, exactly as before (`||`, so the falsy ids this module has
+    // always re-minted keep being re-minted); only the fallback changed. See newLocalSaveId.
+    const id = v2.id || newLocalSaveId(saves);
 
-  saves.unshift({ ...v2, settlement, id, savedAt: Date.now() });
-  localWrite(saves);
-  return id;
+    // Bidirectional neighbour link (see supabaseSave): when the named neighbour
+    // already exists as an active save, write the reciprocal back-link onto the
+    // partner row alongside the new save.
+    if (settlement?.neighborRelationship?.name) {
+      const { buildNeighbourBackLink } = await loadNeighbourBackLink();
+      const existing = saves.filter(isSaveActive);
+      const link = buildNeighbourBackLink({ ...v2, id, settlement }, existing);
+      if (link) {
+        const next = saves.map(s => String(s.id) === String(link.partner.id)
+          ? { ...s, settlement: link.partner.settlement }
+          : s);
+        next.unshift({ ...v2, settlement: link.settlement, id, savedAt: Date.now() });
+        localWrite(next);
+        return id;
+      }
+    }
+
+    saves.unshift({ ...v2, settlement, id, savedAt: Date.now() });
+    localWrite(saves);
+    return id;
+  });
 }
 
 async function localUpsert(
@@ -775,81 +939,145 @@ async function localUpsert(
   const v2 = migrateSaveToV2(entry);
   if (!v2?.id) throw new Error('Explicit-id save upsert requires an id.');
   const settlement = withNeighbourNetworkFromRelationship(v2.settlement);
-  const rows = await localLoad();
-  const index = rows.findIndex(row => String(row.id) === String(v2.id));
-  const next = {
-    ...(index === -1 ? {} : rows[index]),
-    ...v2,
-    settlement,
-    id: v2.id,
-    savedAt: index === -1 ? Date.now() : rows[index].savedAt,
-  };
-  if (index === -1) rows.unshift(next);
-  else rows[index] = next;
-  localWrite(rows);
-  return v2.id;
+  // U69: a member BIRTH rides the same flush as its siblings' updates, so this section
+  // takes the queue for the same reason `localUpdate` does.
+  return serializeLocalWrite(async () => {
+    const rows = await localLoad();
+    const index = rows.findIndex(row => String(row.id) === String(v2.id));
+    const next = {
+      ...(index === -1 ? {} : rows[index]),
+      ...v2,
+      settlement,
+      id: v2.id,
+      savedAt: index === -1 ? Date.now() : rows[index].savedAt,
+    };
+    if (index === -1) rows.unshift(next);
+    else rows[index] = next;
+    localWrite(rows);
+    return v2.id;
+  });
 }
 
-async function localUpdate(id, partial) {
-  const saves = await localLoad();
-  // String() both sides (ported master fix): a numeric id passed as a string
-  // must still match — the module's other id compares already coerce.
-  const idx = saves.findIndex(s => String(s.id) === String(id));
-  if (idx !== -1) {
-    Object.assign(saves[idx], partial);
-    localWrite(saves);
-  }
+// U69: THE MEASURED PATH. The world-pulse flush hands every member's update to
+// `Promise.all`, so without the queue all of them read one pre-flush array and only the
+// last write survived.
+function localUpdate(id, partial) {
+  return serializeLocalWrite(async () => {
+    const saves = await localLoad();
+    // String() both sides (ported master fix): a numeric id passed as a string
+    // must still match — the module's other id compares already coerce.
+    const idx = saves.findIndex(s => String(s.id) === String(id));
+    if (idx !== -1) {
+      Object.assign(saves[idx], partial);
+      localWrite(saves);
+    }
+  });
 }
 
 async function localDelete(id, expectedOwnerId = null, isSessionCurrent = null) {
   assertSaveSessionCurrent(expectedOwnerId, isSessionCurrent, expectedOwnerId);
-  const saves = await localLoad();
-  const existed = saves.some(save => String(save.id) === String(id));
-  localWrite(saves.filter(save => String(save.id) !== String(id)));
-  return existed ? id : null;
+  // U69: the pulse's own delete fan-out is a second `Promise.all` over this backend, and
+  // a lost delete RESURRECTS a row the DM removed.
+  return serializeLocalWrite(async () => {
+    const saves = await localLoad();
+    const existed = saves.some(save => String(save.id) === String(id));
+    localWrite(saves.filter(save => String(save.id) !== String(id)));
+    return existed ? id : null;
+  });
 }
 
 async function localCount() {
   return activeSaveCount(await localLoad());
 }
 
-async function localReactivateFreeSettlement(id) {
-  const saves = await localLoad();
-  const idx = saves.findIndex(save => String(save.id) === String(id));
-  if (idx === -1) return { ok: false, reason: 'not_found' };
-  saves[idx] = {
-    ...saves[idx],
-    accessState: ACTIVE_SAVE_STATE,
-    inactiveReason: null,
-    inactiveSince: null,
-    retentionExpiresAt: null,
-    reactivatedFreeAt: new Date().toISOString(),
-  };
-  localWrite(saves);
-  return { ok: true };
+function localReactivateFreeSettlement(id) {
+  return serializeLocalWrite(async () => {
+    const saves = await localLoad();
+    const idx = saves.findIndex(save => String(save.id) === String(id));
+    if (idx === -1) return { ok: false, reason: 'not_found' };
+    saves[idx] = {
+      ...saves[idx],
+      accessState: ACTIVE_SAVE_STATE,
+      inactiveReason: null,
+      inactiveSince: null,
+      retentionExpiresAt: null,
+      reactivatedFreeAt: new Date().toISOString(),
+    };
+    localWrite(saves);
+    return { ok: true };
+  });
 }
 
-/** Batch-write the full saves array (local mode only). */
-async function localWriteAll(entries) {
-  localWrite(entries);
+/**
+ * Batch-write the full saves array (local mode only).
+ *
+ * U69: it takes the queue although it READS nothing. Its array was composed from an
+ * earlier read by its caller, so it is a whole-library write like every other section —
+ * landing it BETWEEN another section's read and write would lose that section's row just
+ * as surely, and the caller's own staleness is a separate question this never claimed.
+ */
+function localWriteAll(entries) {
+  return serializeLocalWrite(async () => { localWrite(entries); });
 }
 
+/**
+ * ⛔ U53 — A LOCAL BATCH CREATE CARRIES ITS OWN ID, OR THE WHOLE BATCH IS REFUSED.
+ *
+ * This is the one create path in the module that mints NOTHING: `localSaveEntry` falls
+ * back to `newLocalSaveId`, `supabaseSave` pre-mints `newSaveId` or lets the server
+ * assign, and `localUpsert` refuses outright ("Explicit-id save upsert requires an id.").
+ * Here `migrateSaveToV2` only reshapes, so an unkeyed create used to land a row with
+ * `id: undefined` — and every id compare in this module is `String(entry.id)`, so that
+ * row's identity is the literal string "undefined": two of them are ONE row, `localUpdate`
+ * reaches whichever came first, and `localDelete` filters by inequality and takes both.
+ * The same data-loss shape U22 cured at the local mint.
+ *
+ * MEASURED, which is why this is a refusal and not a mint. Every producer of `creates`
+ * in the tree supplies an id, and the two that can reach THIS backend do so explicitly:
+ *   • `store/importReconciliationCommandTransaction.js` spreads `id: targets.saveId`
+ *     LAST, so the command's own id always wins;
+ *   • `components/settlements/libraryDeleteHandlers.js` passes `options.creates || []`
+ *     through, and every caller of that persister (the panel's three, and the two delete
+ *     handlers) passes deletes only — so the list is empty in the shipped tree;
+ *   • `saves.js`'s own neighbour-link batch pre-mints `newSaveId()` and goes straight to
+ *     the Supabase backend.
+ * The rollback in `createLibraryBatchPersister` already reads `creates[].id` to build its
+ * touched-id set, so the caller's OWN compensation assumes the key is there. Minting one
+ * here would therefore invent an identity the caller is not holding and cannot roll back;
+ * refusing NAMES the broken precondition at the boundary that has it.
+ *
+ * The check runs BEFORE the read and before any write, so a refused batch leaves the
+ * device exactly as it found it — the same atomicity the Supabase backend gets from its
+ * RPC.
+ */
 async function localMutateBatch(
   { updates = [], deletes = [], creates = [] } = {},
   { expectedOwnerId = null, isSessionCurrent = null } = {},
 ) {
   assertSaveSessionCurrent(expectedOwnerId, isSessionCurrent, expectedOwnerId);
+  // `!entry?.id` is `localUpsert`'s own predicate, deliberately: two spellings of "this
+  // row has no key" on one table is the divergence these cures exist to close.
+  if (creates.some(entry => !entry?.id)) {
+    throw Object.assign(
+      new Error('Explicit-id save batch create requires an id.'),
+      { code: 'batch_create_requires_id' },
+    );
+  }
   const deleted = new Set(deletes.map(String));
   const updateMap = new Map(updates.map(entry => [String(entry.id), entry]));
-  const next = (await localLoad())
-    .filter(entry => !deleted.has(String(entry.id)))
-    .map(entry => {
-      const patch = updateMap.get(String(entry.id));
-      return patch ? { ...entry, ...patch } : entry;
-    });
-  for (const entry of creates) next.unshift({ ...migrateSaveToV2(entry), savedAt: Date.now() });
-  localWrite(next);
-  return updates.length + deletes.length + creates.length;
+  // U69: the refusal above still runs BEFORE the read and before any write — and now
+  // before the queue is even taken, so a refused batch waits for nothing either.
+  return serializeLocalWrite(async () => {
+    const next = (await localLoad())
+      .filter(entry => !deleted.has(String(entry.id)))
+      .map(entry => {
+        const patch = updateMap.get(String(entry.id));
+        return patch ? { ...entry, ...patch } : entry;
+      });
+    for (const entry of creates) next.unshift({ ...migrateSaveToV2(entry), savedAt: Date.now() });
+    localWrite(next);
+    return updates.length + deletes.length + creates.length;
+  });
 }
 
 // ── Exported API ────────────────────────────────────────────────────────────

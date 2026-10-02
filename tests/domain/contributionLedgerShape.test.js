@@ -116,8 +116,37 @@ describe('WC-0E · the war-circulation flags, the contribution ledger shape, and
     // literals were read off the live modules (32 and 32) before this line was moved.
     // literals were read off the live modules (33 and 33) before this line was moved.
     // literals were read off the live modules (34 and 34) before this line was moved.
-    expect(ENGINE_GATED_VIRTUAL_RULE_KEYS).toHaveLength(35);
-    expect(VIRTUAL_SUBSYSTEM_ROWS).toHaveLength(35);
+    // 35 → 36 at FP TR-2 (lane FP-D, 2026-09-23): `merchantHousesEnabled`, its row at the tail
+    // of VIRTUAL_SUBSYSTEM_ROWS. Both literals were read off the live modules (36 and 36)
+    // before this line was moved.
+    // 36 → 37 at FP TR-3 (lane FP-D2, 2026-09-24): `believedMarketsEnabled`, its row at the tail
+    // of VIRTUAL_SUBSYSTEM_ROWS after TR-2's. Both literals were read off the live modules (37
+    // and 37) before this line was moved (SR-1: a count the wave grows by its own law).
+    // 36 → 37 at FP IN-2 (lane FP-I, 2026-09-24; SR-1): IN-2 adds `infoLureEnabled`, its row at
+    // the tail of VIRTUAL_SUBSYSTEM_ROWS. Both literals were read off the live modules (37 and 37)
+    // before this line was moved.
+    // 37 → 38 at the FP integration pick (the chair, 2026-09-24): TR-3 and IN-2 each minted one virtual key on a
+    // 36-key base; the tip carries both (SR-1, the union).
+    // 38 → 39 at the FP integration pick (the chair, 2026-09-24): GR-6 minted a third virtual key (SR-1, the union).
+    // 39 → 40 at the FP integration pick (the chair, 2026-09-24): IN-4/1 declared intelTradeEnabled, the fourth tonight (SR-1, the union).
+    // 39 → 40 at FP IN-3 (lane FP-I3, 2026-09-24; SR-1): IN-3 adds `counterIntelEnabled`, its row at
+    // the tail of VIRTUAL_SUBSYSTEM_ROWS. Both literals were read off the live modules (40 and 40)
+    // before this line was moved.
+    // 40 → 41 at the FP integration pick (the chair, 2026-09-24): IN-3 minted counterIntelEnabled, the fifth tonight (SR-1, the union).
+    // 41 → 42 at the FP integration pick (the chair, 2026-09-24): IN-4/2 minted reputationRaceEnabled, the sixth tonight (SR-1, the union).
+    // 42 → 43 at FP CW-1 (lane fp/cw-1, 2026-09-24; SR-1): `cascadeGovernorEnabled`, its row at the
+    // tail of VIRTUAL_SUBSYSTEM_ROWS after IN-4's. Both literals were read off the live modules.
+    expect(ENGINE_GATED_VIRTUAL_RULE_KEYS).toHaveLength(43);
+    expect(VIRTUAL_SUBSYSTEM_ROWS).toHaveLength(43);
+    // 36 → 37 at FP GR-6 (lane FP-B2, 2026-09-24): `mediationGeneralizedEnabled`, its row at the
+    // tail of VIRTUAL_SUBSYSTEM_ROWS. Both literals were read off the live modules (37 and 37)
+    // before this line was moved.
+    // 38 → 39 at FP IN-4 commit 1 (lane FP-I2, 2026-09-24; J-INA-4, SR-1): `intelTradeEnabled`,
+    // the invisible key declared, its row at the tail of VIRTUAL_SUBSYSTEM_ROWS after IN-2's. Both
+    // literals were read off the live modules (39 and 39) before this line was moved.
+    // 39 → 40 at FP IN-4 commit 2 (lane FP-I2, 2026-09-24; SR-1): `reputationRaceEnabled`, its row
+    // at the tail of VIRTUAL_SUBSYSTEM_ROWS after the intel lane's. Both literals were read off the
+    // live modules (40 and 40) before this line was moved.
     // ⭐ THE BIJECTION IS A TRIPLE, NOT A PAIR. The ordered-equality pin in
     // subsystemRowsVirtual.test.js couples the manifest to VIRTUAL_RULES; direction 3 of
     // engineGatedRuleKeys couples the manifest to the certification rows. A flag mint moves
@@ -261,15 +290,24 @@ describe('WC-0E · the war-circulation flags, the contribution ledger shape, and
     expect(contributionLedgerActive({ warCirculationEnabled: 1, contributionLedgerEnabled: 1 })).toBe(false);
     expect(contributionLedgerActive({ warCirculationEnabled: 'true', contributionLedgerEnabled: 'true' })).toBe(false);
 
-    // ⛔ AND BOTH KEYS ARE STRUCTURALLY DARK: absent from the defaults and from every preset's
-    // RESOLVED rules object — not the preset wrapper, which can never own a rule key.
+    // ⛔ AND BOTH KEYS ARE VIRTUAL: absent from the defaults, and read off every preset's RESOLVED
+    // rules object — not the preset wrapper, which can never own a rule key.
+    // ⭐ AMENDED AT LIT-0 (2026-09-24): J-EM-16, the lit law (LGT-C2 `432ff6441` the precedent).
+    // This block read "absent from the defaults AND from every preset" (`carriers` had to be
+    // `[]`) until the owner's word "shipped lit". VIRTUAL means ABSENT FROM
+    // DEFAULT_SIMULATION_RULES, and so from every preset's defaults spread and from the
+    // RULE_COMPARISON_KEYS derived from it; a lighting unit may declare a key in the presets it
+    // names, and dark stays ABSENT (CR-WR10-C), so every carrier carries a strict `true`.
+    expect(Object.keys(DEFAULT_SIMULATION_RULES).length).toBeGreaterThan(10);
     for (const flag of FLAGS) {
       expect(Object.prototype.hasOwnProperty.call(DEFAULT_SIMULATION_RULES, flag)).toBe(false);
       const carriers = Object.entries(SIMULATION_RULE_PRESETS)
         .filter(([, preset]) => preset?.rules
           && Object.prototype.hasOwnProperty.call(preset.rules, flag))
         .map(([id]) => id);
-      expect(carriers).toEqual([]);
+      // anchored: the non-vacuity loop below proves each resolved rules object is readable.
+      expect(carriers.filter((id) => SIMULATION_RULE_PRESETS[id].rules[flag] !== true),
+        `${flag}: a preset declares it without lighting it`).toEqual([]);
     }
     // Non-vacuity: the probe is reading real resolved rule objects and can see a key in them.
     for (const id of Object.keys(SIMULATION_RULE_PRESETS)) {

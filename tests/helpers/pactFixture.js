@@ -40,6 +40,16 @@ import { relationshipKeyFromEdge } from '../../src/domain/worldPulse/relationshi
  * recorded fixture-mirrors-the-deriver class: the arms were dead and self-consistently
  * green. It surfaced only when a REAL consumer (`canonicalAllianceRows`) was driven and
  * returned an empty web.
+ *
+ * ⚠ AND THE THIRD (FPQ-35). The key below is the primitive's answer for an edge that
+ * carries NO id, and the stage used to mint it from a bare pair whether or not any edge
+ * joined the two courts. A live world's edges always carry an id, and every relationship
+ * writer keys its record by it, so the stage now finds a record only through the edge that
+ * joins the pair (`edgeKeyBetween`). This fixture therefore declares that edge in
+ * `pactSnapshot` for every pair whose record it writes, id-less so this key IS its record
+ * key, and tests/domain/pactFormation.test.js drives the production shape (ids minted by
+ * the region graph's own normalizer, records written by the relationship plane's own
+ * writer) beside it.
  */
 export const relKey = (a, b) => String(relationshipKeyFromEdge({ from: a, to: b }));
 
@@ -59,8 +69,10 @@ export const B_ECONOMY = Object.freeze({
 });
 
 /**
- * The snapshot. `edges` carries the alliance edge the depth-two web walks; the pact lane
- * itself reads no edge, so an empty graph is a legal world for every other arm.
+ * The snapshot. `edges` carries the alliance edges the depth-two web walks AND the edge of
+ * every pair whose relationship record `pactWorld` or a suite writes: the lane finds a
+ * record only through the edge that joins the pair (FPQ-35), so a record with no edge is a
+ * record the lane cannot see, exactly as in a live world.
  * @param {{withThreat?: boolean}} [args]
  */
 export function pactSnapshot({ withThreat = false } = {}) {
@@ -90,7 +102,10 @@ export function pactSnapshot({ withThreat = false } = {}) {
   return {
     settlements,
     regionalGraph: {
-      edges: withThreat ? [{ from: 'C', to: 'D' }, { from: 'C', to: 'E' }] : [],
+      edges: [
+        { from: 'A', to: 'B' },
+        ...(withThreat ? [{ from: 'A', to: 'C' }, { from: 'C', to: 'D' }, { from: 'C', to: 'E' }] : []),
+      ],
     },
   };
 }

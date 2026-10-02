@@ -114,10 +114,12 @@ export function proposalDetails(outcome = {}) {
     ].filter(Boolean);
   }
   if (payload.kind === 'government_change') {
+    // The institutions line is the payload's own fact (factionCompetition.js writes
+    // `preserveInstitutions`), never a constant this card asserts on its behalf.
     return [
       humanizeToken(payload.governmentPreference),
       humanizeToken(payload.legitimacyBand),
-      'preserve institutions',
+      ...(payload.preserveInstitutions === true ? ['preserve institutions'] : []),
     ];
   }
   if (payload.kind === 'institution_suppression' || payload.kind === 'institution_capture') {
@@ -214,18 +216,12 @@ export function stressorSummary(stressor = {}) {
 export function attackerEntity(stressor = {}, nameById = new Map()) {
   const ctx = stressor.originContext;
   if (!ctx) return null;
-  // §S3 — a coalition siege names its instigator + supporters. When the resolver
-  // attached a coalition (primaryInstigatorId + supporterIds, codepoint-stable),
-  // surface the whole coalition; a single named force still reads "Attacker".
-  const coalition = unique([ctx.primaryInstigatorId, ...(ctx.supporterIds || [])].filter(Boolean).map(String))
-    .map(id => nameById.get(id) || id);
-  if (coalition.length > 1) {
-    return { label: 'Coalition', value: coalition.slice(0, 4).join(', ') };
-  }
+  // A coalition siege is NAMED BY THE CHRONICLE (chronicle.js unions the besiegers of a war-shaped
+  // stressor's victims). No writer ever stamped a coalition onto `originContext`: the
+  // `primaryInstigatorId` / `supporterIds` branch this function used to carry had no producer in src/
+  // since it arrived (77bd27ae1), so it never fired, and the observed-shape register convicted it as a
+  // reader with no writer (2026-10-01, O12). It is removed rather than banked.
   if (ctx.attackerLabel) return { label: 'Attacker', value: ctx.attackerLabel };
-  if (ctx.primaryInstigatorId) {
-    return { label: 'Attacker', value: nameById.get(String(ctx.primaryInstigatorId)) || String(ctx.primaryInstigatorId) };
-  }
   if (ctx.attackerSettlementId) {
     return { label: 'Attacker', value: nameById.get(String(ctx.attackerSettlementId)) || String(ctx.attackerSettlementId) };
   }

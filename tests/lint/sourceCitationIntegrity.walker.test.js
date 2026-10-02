@@ -40,14 +40,59 @@
  * assertion would red every time a document legitimately restates an address it
  * already carries, and a gate that reds on correct behaviour gets turned off.
  *
- * ⚠ THE ARCHIVAL EXCLUSION, MEASURED AND LISTED. 31 documents are frozen records
+ * ⚠ THE ARCHIVAL EXCLUSION, MEASURED AND LISTED. 33 documents are frozen records
  * of their day, and re-addressing them to today's tree would FALSIFY a record
  * rather than repair it — `docs/review-r2/VERIFY_SUBSYSTEMS_RESULTS.json` pins a
  * sha and states that all its cited lines matched AT THAT SHA. They carry 377
  * past-EOF citations this gate deliberately does not see. FOUR rules select them,
  * each checkable, and the full roster is committed in the baseline's
  * `archivalExclusionAtFreeze.files`:
- *   tree (17)    docs/review-r2/**, docs/shift-records/**
+ *   tree (35)    docs/review-r2/**, docs/shift-records/**
+ *                (2026-10-02-voice-program-wave-1-pair-order.json joined 2026-10-02, 34 -> 35: the Voice
+ *                Program's record for the wave 1 pair-order cure; a GROWTH that hid nothing.)
+ *                (2026-10-02-voice-program-wave-4-hook-structures.json joined 2026-10-02, 33 -> 34: the Voice
+ *                Program's record for wave 4 block 1, the arrival hook's structures; a GROWTH that hid nothing.)
+ *                (2026-10-02-voice-program-wave-3-arrival-place.json joined 2026-10-02, 32 -> 33: the Voice
+ *                Program's record for wave 3, the arrival scene as a place; a GROWTH that hid nothing.)
+ *                (2026-10-02-voice-program-wave-2-substreams.json joined 2026-10-02, 31 -> 32: the Voice
+ *                Program's record for wave 2, the arrival and pressure draws on their own streams; a GROWTH that hid nothing.)
+ *                (2026-10-02-voice-program-wave-1-herald-deeds.json joined 2026-10-02, 30 -> 31: the Voice
+ *                Program's record for wave 1, the Herald in deeds; a GROWTH that hid nothing.)
+ *                (2026-10-01-urban-band-druid-faith.json joined 2026-10-01, 27 -> 28: the record for the
+ *                owner's druid rulings; a GROWTH that hid nothing.)
+ *                (2026-10-01-urban-band-warden-census.json joined 2026-10-01, 28 -> 29: the record for J33,
+ *                the Warden's Lodge census under the same rulings; a GROWTH that hid nothing.)
+ *                (2026-10-01-urban-band-warden-census-herald.json joined 2026-10-01, 29 -> 30: the herald
+ *                desk's superseding prediction under J33's record; a GROWTH that hid nothing.)
+ *                (2026-09-30-urban-band-institutions.json and 2026-10-01-urban-band-herald-rows.json
+ *                joined 2026-10-01, 25 -> 27: the urban band's signed record and the record superseding
+ *                its one herald prediction; a GROWTH that hid nothing, zero past-EOF of their own.)
+ *                (2026-09-24-fp-lighting-2.json joined 2026-09-24, 24 -> 25 at the pick onto
+ *                fp/integration (23 -> 24 at its base): LIT-2's signed record of the preset-lighting-witness
+ *                re-record for mediation, born inside docs/shift-records/; a GROWTH that hid nothing.)
+ *                (2026-09-24-treaty-voice-desk-default-beat.json joined 2026-09-24, 23 -> 24: the chair's
+ *                signed re-record of the herald-knowledge-desk golden at the treaty-voice pick (FP-28,
+ *                once per cause); a GROWTH that hid nothing, zero past-EOF of its own.)
+ *                (2026-09-24-herald-lens-u2-desk-window.json joined 2026-09-24, 22 -> 23: the chair's
+ *                signed re-record of the herald-knowledge-desk golden at the Herald lens U2's pick
+ *                (FP-31, once per cause); a GROWTH that hid nothing, zero past-EOF of its own.)
+ *                (2026-09-24-lit1b-herald-desk-belief-lit.json joined 2026-09-24, 21 -> 22: the chair's
+ *                signed re-record of the herald-knowledge-desk golden at LIT-1b's pick (FP-28), born
+ *                inside docs/shift-records/ with the re-record; a GROWTH that hid nothing, zero
+ *                past-EOF of its own.)
+ *                (2026-09-24-fp-lighting-1b.json joined 2026-09-24, 20 -> 21 at the pick onto
+ *                fp/integration (18 -> 19 at its base): LIT-1b's signed record of the
+ *                preset-lighting-witness re-record, born inside docs/shift-records/; a
+ *                GROWTH that hid nothing, zero past-EOF of its own.)
+ *                (2026-09-24-in5-herald-knowledge-desk.json joined 2026-09-24, 19 -> 20: IN-5's
+ *                signed ENROLL record of the herald-knowledge-desk golden, born inside
+ *                docs/shift-records/ at 6cf6920d4; the roster row owed by the lane, cured at FP
+ *                batch landing 3; a GROWTH that hid nothing, zero past-EOF of its own.)
+ *                (2026-09-24-fp-witness-prose-cure-p1.json joined 2026-09-24, 18 -> 19: the
+ *                witness re-record for CURE-P1 U3's prose cause; a GROWTH that hid nothing.)
+ *                (2026-09-24-fp-lighting-1a.json joined 2026-09-24, 17 -> 18: LIT-1a's
+ *                signed record of the preset-lighting-witness re-record, born inside
+ *                docs/shift-records/; a GROWTH that hid nothing, zero past-EOF of its own.)
  *                (2026-09-20-cure-j-provenance.json joined 2026-09-20, 16 -> 17:
  *                CURE-J's provenance-only re-record of the prose manifest golden,
  *                born inside docs/shift-records/ at 0d0598a75. A GROWTH, not a
@@ -132,7 +177,7 @@
  * ⛔ AND IT HAS A MEASURED FALSE POSITIVE, WHICH IS WHY IT MUST NEVER GATE. Of the
  * 31 findings in its first run, ONE was wrong, and it was wrong in the way this
  * arm is structurally able to be wrong: a NEIGHBOURING backtick wins the
- * attribution. `scripts/wiring-census.mjs` cites `defenseGenerator.js:189-191`
+ * attribution. `scripts/wiring-census.mjs` cites `defenseGenerator.js :: computeDefenseScores`
  * for a `milUpkeepMult` derivation, with `economicGates.military` backticked
  * beside it; the arm attributed `economicGates` (declared far below) to the span
  * and convicted a citation that was TRUE. It was caught only by reading the

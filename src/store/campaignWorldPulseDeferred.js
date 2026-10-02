@@ -30,6 +30,15 @@ import {
   ensureWorldState,
 } from '../domain/worldPulse/worldState.js';
 import { normalizeSimulationRules } from '../domain/worldPulse/simulationRules.js';
+// EM-E1 — the rewind's registry half (design §12.1; ARCH §6). `revertTick` is EM-C1's
+// re-append and `retractDecreesOfTick` is the tick hook's inverse of `markApplied`;
+// neither reaches a writer, and neither is a symbol
+// tests/lint/editMutationPath.walker.test.js watches (that roster is `makeOp`,
+// `validateOp`, `OP_TYPES` and `applyEdit`). This module is NOT in the eager first-paint
+// graph — measured against `EAGER_FIRST_PAINT_MODULES` — so the two leaves it pulls in
+// ride the deferred pulse chunk they already belong to.
+import { DECREE_STATUSES, revertTick } from '../domain/edit/registry.js';
+import { retractDecreesOfTick } from '../domain/worldPulse/decreeHook.js';
 import {
   contentRuntimeFromCampaignBinding,
 } from '../domain/content/contentEnvironment.js';
@@ -461,6 +470,113 @@ function advanceDepthOf(state, campaignId) {
   return Number(state.advanceSeqByCampaign?.[String(campaignId)]) || 0;
 }
 
+/** The one spelling of the applied status, taken from EM-C1 rather than re-typed. */
+const DECREE_APPLIED = DECREE_STATUSES[0];
+
+/**
+ * ⭐ EM-E1 — THE REWIND'S REGISTRY HALF (design §2.5a and §12.1; ARCH §6), for ONE save.
+ *
+ * A whole-state restore alone is not the rewind the design describes. The snapshot's
+ * registry already holds the rewound tick's decrees as PENDING in their own order, which
+ * is most of it — but a restore also throws away every entry the DM staged AFTER the
+ * snapshot, and "a rewind never loses a decree and never reorders one". So EM-C1's
+ * `revertTick` re-appends the later-staged entries from the PRE-UNDO registry, each
+ * keeping its `orderIndex` verbatim, and an id in both takes the RESTORED row because the
+ * snapshot is the authority for anything the tick touched.
+ *
+ * ⛔ WHY THE STALE STAMPS ARE EXACT AND NEED NO TICK ARITHMETIC. A later-staged entry is
+ * one the snapshot does not hold, so it came into being AFTER the state being restored
+ * to; if it is nonetheless APPLIED, it was applied by a tick this restore is undoing —
+ * always, by construction. Those are precisely the `tickRef`s handed to the tick hook's
+ * `retractDecreesOfTick`, which returns them to the waiting sequence with their chronicle
+ * lines retracted. Reading the refs off the rows rather than computing a tick RANGE is
+ * what makes this correct for both callers of the chokepoint at once: the advance undo
+ * rewinds a whole interval (one snapshot, N ticks), while the proposal undo rewinds no
+ * tick at all, and on that path an entry the snapshot already holds as applied is history
+ * and is left exactly as it is (THE PROMISE).
+ *
+ * ⛔ DORMANT BY CONSTRUCTION: a save with no live registry returns `undefined` and its
+ * restored settlement is written back untouched, so no save grows a `decrees` key it did
+ * not have and nothing changes for any world without decrees.
+ *
+ * @param {any} restoredDecrees the snapshot's registry for this save
+ * @param {any} liveDecrees the PRE-UNDO registry for the same save
+ * @returns {any} the merged registry, or undefined when there is nothing to merge
+ */
+function rewoundDecrees(restoredDecrees, liveDecrees) {
+  if (!Array.isArray(liveDecrees) || liveDecrees.length === 0) return undefined;
+  const restored = Array.isArray(restoredDecrees) ? restoredDecrees : [];
+  const held = new Set(restored.map(row => String(row?.id ?? '')));
+  const staleRefs = new Set();
+  for (const row of liveDecrees) {
+    if (row?.status !== DECREE_APPLIED || !row?.tickRef) continue;
+    if (!held.has(String(row?.id ?? ''))) staleRefs.add(String(row.tickRef));
+  }
+  let later = liveDecrees;
+  // The narrowing is the type floor's, not a defence: the verb returns what it was handed
+  // when no entry carried the ref, and a registry is an array on both branches. This file
+  // is baselined at ZERO full-config type errors and a cast would be the wrong cure.
+  for (const tickRef of staleRefs) {
+    const retracted = retractDecreesOfTick(later, tickRef);
+    if (Array.isArray(retracted)) later = retracted;
+  }
+  return cloneJson(revertTick(restored, later));
+}
+
+/**
+ * ⭐ EM-C1c — THE REWIND'S CHRONICLE HALF (U98; judgment 306; design §12.1, §2.6), for ONE
+ * save: the ADDRESSES of the chronicle lines the undone tick wrote.
+ *
+ * EM-C1b gave an applied decree a line in the campaign's own `chronicles[]` and measured
+ * what the rewind then did with it: `[undo=true, chroniclesBefore=1, chroniclesAfter=1,
+ * decreeStatus='pending', chronicleRef=undefined]`. The registry half above was already
+ * right — the decree went back to the waiting sequence and `retractDecreesOfTick` took its
+ * reference off — and that is exactly what made the surviving line an ORPHAN: a sentence
+ * in the realm's scrollback about an act the realm no longer remembers ordering, with
+ * nothing left pointing at it.
+ *
+ * ⛔ BY ADDRESS, NEVER BY LENGTH, AND THE ORDER IS THE MEASUREMENT THAT SAYS SO.
+ * `appendCampaignChronicle` PREPENDS, so a line the wizard's paid AI prose writes AFTER
+ * the advance sits AHEAD of the tick's own line. A retraction that trusted a count, a
+ * length or an index would delete the table's newest paid sentence and keep the one it
+ * meant to remove (case C1c-2 drives exactly that order through the real writer). So the
+ * lines are removed by the addresses the tick minted, and no other hand can collide with
+ * one: the hook writes `decree:<id>` at the instant of application, `decreeChronicleLine`
+ * records the line under that same reference, and every other entry takes the store's own
+ * `chronicle_<campaign>_<tick>_<stamp>` id.
+ *
+ * ⛔ WHY THE SNAPSHOT NEED CARRY NOTHING NEW. The addresses are read off the LIVE rows this
+ * restore is about to replace, by the same reasoning `rewoundDecrees` gives for reading
+ * refs rather than computing a tick RANGE: a decree the snapshot already holds as APPLIED
+ * was applied before the state being restored to, so its line is HISTORY and stays (THE
+ * PROMISE) — which is what keeps the one chokepoint correct for both of its callers at
+ * once, the advance undo rewinding a whole interval and the proposal undo rewinding no
+ * tick at all. Nothing is added to `capturePulseSnapshot`, so the session snapshot's shape
+ * is untouched and the promotion census's `reads:` sentence still describes it exactly.
+ *
+ * ⛔ DORMANT BY CONSTRUCTION, like its sibling: a save with no live registry contributes
+ * nothing, and an empty set leaves the campaign's chronicle untouched — no realm grows a
+ * `chronicles` key it did not have.
+ *
+ * @param {any} restoredDecrees the snapshot's registry for this save
+ * @param {any} liveDecrees the PRE-UNDO registry for the same save
+ * @param {Set<string>} into the campaign-wide address set this save contributes to
+ * @returns {void}
+ */
+function collectRetractedChronicleRefs(restoredDecrees, liveDecrees, into) {
+  if (!Array.isArray(liveDecrees) || liveDecrees.length === 0) return;
+  const restored = Array.isArray(restoredDecrees) ? restoredDecrees : [];
+  const appliedBefore = new Set(restored
+    .filter(row => row?.status === DECREE_APPLIED)
+    .map(row => String(row?.id ?? '')));
+  for (const row of liveDecrees) {
+    if (row?.status !== DECREE_APPLIED) continue;
+    if (typeof row?.chronicleRef !== 'string' || row.chronicleRef === '') continue;
+    if (appliedBefore.has(String(row?.id ?? ''))) continue;
+    into.add(row.chronicleRef);
+  }
+}
+
 /**
  * Restore one full pre-pulse/pre-apply snapshot onto the Immer draft: the
  * campaign world unit (worldState + regionalGraph + wizardNews), every member
@@ -510,6 +626,16 @@ function restorePulseSnapshotOnDraft(
   }
 
   const memberIds = new Set((campaign.settlementIds || []).map(String));
+  // EM-E1: the merged registry per save, kept so the LIVE ACTIVE VIEW below is rewound to
+  // the same rows as its library entry. The layer is applied on write (design §12's
+  // finding 5 — every reader sees one record), so a view and a row that disagreed about
+  // the registry would be exactly the split this estate refuses.
+  const rewoundBySave = new Map();
+  // EM-C1c: the addresses of the chronicle lines the undone tick wrote, gathered across
+  // the saves this restore actually rewinds. A DETACHED member is deliberately absent —
+  // its registry is not rewound either, so its lines are not the tick's to retract.
+  /** @type {Set<string>} */
+  const retractedChronicleRefs = new Set();
   // Membership is read at undo time. A save detached since the snapshot must
   // not be silently rewound by an older campaign snapshot.
   for (const saved of snapshot.saves || []) {
@@ -518,6 +644,15 @@ function restorePulseSnapshotOnDraft(
       .findIndex(item => String(item.id) === String(saved.id));
     if (savedIndex === -1) continue;
     const restoredSettlement = cloneJson(saved.settlement);
+    // Read the PRE-UNDO registry BEFORE the row below is replaced, and lift it out of the
+    // draft: the proxy is revoked when this producer returns, and the merged rows ride
+    // into persistUpdates.
+    const liveDecrees = cloneJson(state.savedSettlements[savedIndex]?.settlement?.decrees);
+    // EM-C1c reads the SAME lifted rows the registry merge reads, before the row below
+    // replaces them: one clone, two halves of one rewind.
+    collectRetractedChronicleRefs(restoredSettlement?.decrees, liveDecrees, retractedChronicleRefs);
+    const rewound = rewoundDecrees(restoredSettlement?.decrees, liveDecrees);
+    if (rewound !== undefined && restoredSettlement) { restoredSettlement.decrees = rewound; rewoundBySave.set(String(saved.id), rewound); }
     const restoredCampaignState = cloneJson(saved.campaignState);
     state.savedSettlements[savedIndex] = {
       ...state.savedSettlements[savedIndex],
@@ -530,6 +665,17 @@ function restorePulseSnapshotOnDraft(
       settlement: cloneJson(restoredSettlement),
       campaignState: cloneJson(restoredCampaignState),
     });
+  }
+
+  // ⭐ EM-C1c — AND THE RECORD OF THE UNDONE ACT GOES WITH IT (U98; judgment 306). The
+  // campaign world, its topology, its news and now its scrollback are ONE undo unit: the
+  // campaign's own `chronicles[]` loses exactly the lines the undone tick filed, by the
+  // addresses gathered above, and keeps every line any other hand wrote. Guarded on a live
+  // list so a realm that never had a chronicle does not grow one at a rewind, and on a
+  // non-empty set so a rewind that retracted no decree does not rewrite the array at all.
+  if (retractedChronicleRefs.size > 0 && Array.isArray(campaign.chronicles)) {
+    campaign.chronicles = campaign.chronicles
+      .filter((/** @type {any} */ line) => !retractedChronicleRefs.has(String(line?.id ?? '')));
   }
 
   if (removedActiveBirth) {
@@ -559,6 +705,9 @@ function restorePulseSnapshotOnDraft(
     // different member opened after the snapshot was taken.
     if (snapshot.active && String(state.activeSaveId) === snapshot.active.saveId) {
       state.settlement = cloneJson(snapshot.active.settlement);
+      // EM-E1: the active view is a SECOND clone of the same save, so it takes the same
+      // merged registry its library row just took.
+      if (state.settlement && rewoundBySave.has(String(state.activeSaveId))) state.settlement.decrees = cloneJson(rewoundBySave.get(String(state.activeSaveId)));
       state.systemState = cloneJson(snapshot.active.systemState);
       state.eventLog = cloneJson(snapshot.active.eventLog);
       state.phase = snapshot.active.phase;
@@ -569,6 +718,8 @@ function restorePulseSnapshotOnDraft(
       if (activeSnapshot && memberIds.has(String(activeSnapshot.id))) {
         const campaignState = activeSnapshot.campaignState || {};
         state.settlement = cloneJson(activeSnapshot.settlement);
+        // EM-E1: the same merge, on the other branch of the same rehydration.
+        if (state.settlement && rewoundBySave.has(String(state.activeSaveId))) state.settlement.decrees = cloneJson(rewoundBySave.get(String(state.activeSaveId)));
         state.systemState = campaignState.systemState != null
           ? cloneJson(campaignState.systemState)
           : null;

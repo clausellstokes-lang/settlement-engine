@@ -527,7 +527,10 @@ describe('the criminal institution vocabulary (TE-CH-7)', () => {
     // None is criminal, so the vocabulary arms below are unmoved — this figure is the
     // non-vacuity anchor that proves they walk the LIVE catalog rather than a fixture, which
     // is exactly why it had to move with it.
-    expect(wholeCatalogAsSettlement().count).toBe(280);
+    // 280 → 281 (2026-09-30, the urban band, ODQ §934.86): one new distinct name,
+    // 'Housing (5000+ structures)' (the metropolis housing rung, which used to read the
+    // city's 'Housing (1000-5000 structures)'). Not criminal; the arms below are unmoved.
+    expect(wholeCatalogAsSettlement().count).toBe(281);
   });
 
   it('criminal name hints reach the criminal catalog institutions and nothing else', () => {

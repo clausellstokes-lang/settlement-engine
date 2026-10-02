@@ -210,22 +210,35 @@ describe('TR-1 fence 4 — gate polarity and purity, censused over the real tree
     expect(reads, 'the flag census found no reads at all').toBeGreaterThanOrEqual(2);
   });
 
-  test('the flag is virtual: it is absent from the rules DEFAULTS and every preset', async () => {
+  test('the flag is virtual: it is absent from the rules DEFAULTS, and a preset declares it only lit', async () => {
     const {
       DEFAULT_SIMULATION_RULES,
       ENGINE_GATED_DORMANT_RULE_KEYS,
       ENGINE_GATED_VIRTUAL_RULE_KEYS,
       SIMULATION_RULE_PRESETS,
     } = await import('../../src/domain/worldPulse/simulationRules.js');
+    // ⭐ AMENDED AT LIT-0 (2026-09-24): J-EM-16, the lit law (LGT-C2 `432ff6441` the precedent).
+    // This arm read "absent from the defaults AND from every preset" until the owner's word
+    // "shipped lit" (2026-09-23). VIRTUAL means ABSENT FROM DEFAULT_SIMULATION_RULES, and so from
+    // every preset's defaults spread and from the RULE_COMPARISON_KEYS derived from it, which is
+    // what keeps preset identity; a lighting unit may then declare the key in the presets it
+    // names. Dark stays ABSENT (CR-WR10-C), never a declared false, so a declaration is `true`.
+    // The dark arms of this fence are unchanged.
+    expect(Object.keys(DEFAULT_SIMULATION_RULES).length).toBeGreaterThan(10);
     expect(FLAG in DEFAULT_SIMULATION_RULES).toBe(false);
     // SIMULATION_RULE_PRESETS is a preset-id-keyed RECORD, not an array — measured, not
     // assumed, after the first draft of this pin tried to iterate it and threw.
     const presets = Object.values(SIMULATION_RULE_PRESETS);
-    expect(presets.length, 'the preset catalog emptied — this absence claim would be vacuous')
+    expect(presets.length, 'the preset catalog emptied — this scan would be vacuous')
       .toBeGreaterThanOrEqual(5);
+    /** @type {string[]} */
+    const declaring = [];
     for (const preset of presets) {
-      expect(FLAG in (preset.rules || {}), `${preset.id} lit the flag`).toBe(false);
-      // anchored: the presets DO carry rule keys, so the absence above is a measurement
+      if (FLAG in (preset.rules || {})) {
+        declaring.push(preset.id);
+        expect(preset.rules[FLAG], `${preset.id} declares the flag without lighting it`).toBe(true);
+      }
+      // anchored: the presets DO carry rule keys, so the scan above is a measurement
       // rather than a lookup into an empty object.
       expect(Object.keys(preset.rules || {}).length, `${preset.id} carries no rules`)
         .toBeGreaterThan(0);
@@ -233,11 +246,12 @@ describe('TR-1 fence 4 — gate polarity and purity, censused over the real tree
     // …and it IS REGISTERED, so the census that demands its certification can see it. This
     // is the CQ5 one-commit law's other half, asserted from the dormancy side.
     expect(ENGINE_GATED_VIRTUAL_RULE_KEYS).toContain(FLAG);
-    // …and the estate's own DERIVED answer to the virtuality question agrees with the
-    // measurement above (LGT-P2-MANIFEST, 2026-09-05: a lit key leaves this list and keeps
-    // its register row, so the two questions stop sharing one answer).
-    expect(ENGINE_GATED_DORMANT_RULE_KEYS, `${FLAG} is registered but a preset has lit it`)
-      .toContain(FLAG);
+    // …and the estate's own DERIVED answer agrees with the presets IN EITHER STATE
+    // (LGT-P2-MANIFEST, 2026-09-05: a lit key leaves this list and keeps its register row, so
+    // the two questions stop sharing one answer).
+    expect(ENGINE_GATED_DORMANT_RULE_KEYS.includes(FLAG),
+      `${FLAG}: the derived dormant list disagrees with the presets that declare it (${declaring.join(', ') || 'none'})`)
+      .toBe(declaring.length === 0);
   });
 
   test('the TR-1 family is PRNG-free and clock-free', () => {

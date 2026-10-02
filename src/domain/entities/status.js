@@ -92,6 +92,23 @@ export const STATUS_DESTROYED = 'destroyed';
 export const STATUS_VACANT    = 'vacant';
 
 /**
+ * THE `EntityStatus` UNION AS VALUES, BUILT FROM THE FIVE CONSTANTS ABOVE.
+ *
+ * ⛔ BY REFERENCE, NEVER AS FRESH LITERALS, and the form is the whole ruling. This file is
+ *    NOT a consumer-roster file of `statusUnionTotality`, so a SCREAMING_SNAKE array of
+ *    quoted words here would read as a FOREIGN vocabulary and could empty that walker's
+ *    derived trigger. Built from the constants, its declaration scan captures no literal.
+ * ⛔ FIVE members in the typedef's own order, which a positionally-consumed pool relies on;
+ *    tests/domain/statusVocabularies.test.js pins the array against the typedef's own
+ *    source text in both directions.
+ *
+ * @type {readonly EntityStatus[]}
+ */
+export const ENTITY_STATUS_VALUES = Object.freeze([
+  STATUS_ACTIVE, STATUS_IMPAIRED, STATUS_REMOVED, STATUS_DESTROYED, STATUS_VACANT,
+]);
+
+/**
  * Construct a typed Impairment object. Centralizing the cast at one
  * call site means mutation handlers in events/mutate.js don't repeat
  * the JSDoc-cast incantation 12 times. Trusts the caller to pick a

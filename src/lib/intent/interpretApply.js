@@ -21,6 +21,50 @@
  * session-command journal prevents a double-submit from executing the writer
  * twice. Command adapters may strengthen that guarantee: the first
  * CUT_TRADE_ROUTE vertical also claims a durable server journal.
+ *
+ * ── THE SURVEYOR BRIDGE (EM-D4, wave 4; design §3's Surveyor row and §12; ARCH §7) ──
+ *
+ * Design §3: "Its compiled proposals land in the registry as decrees `addedBy:
+ * 'surveyor'`; its approve/edit/reject becomes the registry's own controls; the
+ * protected-consent barrier becomes a guard kind." The three functions below are that
+ * sentence, and nothing more.
+ *
+ * ⛔ THE WRITER IS INJECTED, AND THAT IS WHAT KEEPS EM-C1's LEAF DARK. `stage` arrives
+ * on `stageDecree`, exactly as this module's terminal writers arrive on
+ * `context.actions`, so `src/domain/edit/registry.js` keeps ZERO importers under `src/`
+ * — the dark landing its own header claims and the standing law (§P11.1) requires — and
+ * `tests/lib/interpretApply.test.js` injects the REAL `stage` rather than a stand-in, so
+ * the "one writer of `decrees`" law (§P4) is proven against the live leaf and not merely
+ * asserted. A bridge that imported the leaf would light it up for every Surveyor user
+ * before EM-C4b's slice and EM-D1's tier gate exist.
+ *
+ * ⛔ NOTHING HERE READS A CLOCK, TAKES A DRAW OR MINTS AN ID FROM ENTROPY. The decree id
+ * is derived from THE REVIEW ARTIFACT (`reviewRef`, minted once per successful compile in
+ * InterpretApplyPanel) plus the proposal's own review index, so a retry of one Apply
+ * re-derives the same ids and `stage` refuses the duplicates by id — the same replay
+ * protection the command ids already give the writer half. `orderedAt` is the CALLER's
+ * stamp (HZ-STAMP: a clock is read in the command that writes it).
+ *
+ * ⛔ THE OP CATALOGUE IS NOT CONSULTED AND `makeOp` IS NOT IMPORTED. Measured at this
+ * tip: `OP_TYPES` (22 edit ops) is DISJOINT from both `EVENT_TYPES` (41) and
+ * `PARTY_IMPACT_KINDS` (12), so `makeOp` returns null for every op the Surveyor compiles
+ * and importing it would put this module on the `tests/lint/editMutationPath.walker`
+ * OFFENDER list for no gain. The decree carries the compiled op verbatim as
+ * `{ type, target, payload }`; `target` is null because a compiled proposal names no
+ * EntityRef — its payload addresses its own subject. Binding the two event catalogues
+ * into the decree vocabulary is EM-E6's row, not this one.
+ *
+ * ⛔ CONSENT IS RENDERED IN THE GUARD VOCABULARY, NOT ENFORCED A SECOND TIME. The barrier
+ * itself stays exactly where it is — `reviewInterpretation` refuses a flagged op without
+ * an explicit tick, and the review artifact's shape is untouched. What EM-D4 adds is the
+ * WORDS: each blocked proposal is minted as one `Guard` of EM-C2's own shape, `kind` a
+ * member of `GUARD_KINDS` and `offers` members of `GUARD_OFFERS`, so the registry page
+ * and this panel speak one vocabulary. `prerequisite` is the kind because consent is a
+ * thing that must be true FIRST; `self` is the DM's own hand (the review's Edit) and
+ * `proceed` is the explicit tick, which is why proceeding here is not a bypass: it IS the
+ * consent, and design §2.7 records it on the entry as an override. The two words are
+ * joined to their producer by the suite (a renamed kind reds there), never re-derived
+ * here — this module imports no `src/domain/edit` leaf at all.
  */
 
 import { dispatchAcceptedOps, interpretApplyLogRecord } from '../../domain/intent/applyDispatch.js';
@@ -264,6 +308,175 @@ export function mergeCanonEventRecoveryResult(
       ? { ...prior.log, appliedCount: applied.length }
       : prior.log,
   };
+}
+
+/** The author ARCH §2 gives the Surveyor's own entries (`Decree.addedBy`'s third member). */
+const SURVEYOR_AUTHOR = 'surveyor';
+
+/** The rule id half of every consent guard's id; stable across versions, because an
+ *  entry's `overrode` records guard IDS and renaming one orphans a recorded override. */
+const CONSENT_RULE_ID = 'surveyor-consent';
+
+/** The kind and the offers of design §2.7 the consent barrier wears, both members of
+ *  EM-C2's frozen vocabularies and joined to them by the suite. */
+const CONSENT_GUARD_KIND = 'prerequisite';
+const CONSENT_GUARD_OFFERS = Object.freeze(['self', 'proceed']);
+
+/** The herald's voice, one sentence, content-free beyond the verb it names. */
+const CONSENT_MESSAGE = 'the table\'s own consent comes first: tick it, or edit the op by hand.';
+
+/** EM-C2's own id grammar — `<ruleId>:<entryId>:<related or ->:<facet or ->` — so a
+ *  registry page cannot tell a consent guard from one the engine minted. */
+const GUARD_ID_ABSENT = '-';
+
+/**
+ * @typedef {{ opType?: string, params?: Record<string, unknown> }} CompiledProposal
+ * @typedef {{ id: string, entryId: string, ruleId: string, kind: string, message: string,
+ *   offers: readonly string[], fulfil: null, relatedEntryId: null,
+ *   overridden: boolean }} ConsentGuard
+ * @typedef {{ id: string, proposalIndex: number, opType: string }} StagedDecree
+ */
+
+/** @param {unknown} value @returns {value is Record<string, unknown>} plain, never an array */
+function isPlainObject(value) {
+  return !!value && typeof value === 'object' && !Array.isArray(value);
+}
+
+/** @param {unknown} value @returns {value is string} a non-empty string */
+function isText(value) {
+  return typeof value === 'string' && value.length > 0;
+}
+
+/** @param {unknown} value @returns {number|null} a review index, or nothing */
+function reviewIndexOf(value) {
+  return Number.isInteger(value) && /** @type {number} */ (value) >= 0
+    ? /** @type {number} */ (value)
+    : null;
+}
+
+/**
+ * The decree id one reviewed proposal takes. DERIVED from the review artifact and the
+ * proposal's own review index and NOTHING else: stable for every Apply of one review,
+ * distinct from a later compile of identical text, and the same id whether the proposal
+ * is staged now or was blocked for consent a moment ago — which is what lets a consent
+ * guard address the entry it is about before that entry exists.
+ *
+ * @param {unknown} reviewRef @param {unknown} proposalIndex @returns {string}
+ */
+export function surveyorDecreeId(reviewRef, proposalIndex) {
+  const ref = isText(reviewRef) ? reviewRef : 'review:unref';
+  return `decree:${ref}:${reviewIndexOf(proposalIndex) ?? 0}`;
+}
+
+/**
+ * Mint one `Guard` per blocked proposal — design §3's "the protected-consent barrier
+ * becomes a guard kind". PURE and TOTAL: a malformed row is skipped at the narrowest
+ * scope that can skip it (design §9's tie-break), and the barrier itself is untouched —
+ * `reviewInterpretation` already refused these ops and this only says so in the
+ * registry's own words.
+ *
+ * @param {unknown} blocked the review's `blocked` rows (`{ index, reason }`)
+ * @param {{ reviewRef?: unknown, ops?: unknown }} [context]
+ * @returns {readonly ConsentGuard[]} frozen, in the review's own order
+ */
+export function consentGuardsFor(blocked, { reviewRef = null, ops = [] } = {}) {
+  const proposals = Array.isArray(ops) ? ops : [];
+  /** @type {ConsentGuard[]} */
+  const guards = [];
+  for (const row of Array.isArray(blocked) ? blocked : []) {
+    if (!isPlainObject(row)) continue;
+    const index = reviewIndexOf(row.index);
+    if (index === null) continue;
+    const entryId = surveyorDecreeId(reviewRef, index);
+    const proposal = /** @type {CompiledProposal|undefined} */ (proposals[index]);
+    const opType = proposal && isText(proposal.opType) ? proposal.opType : '';
+    guards.push(Object.freeze({
+      id: [CONSENT_RULE_ID, entryId, GUARD_ID_ABSENT, GUARD_ID_ABSENT].join(':'),
+      entryId,
+      ruleId: CONSENT_RULE_ID,
+      kind: CONSENT_GUARD_KIND,
+      message: opType ? `${opType} is protected — ${CONSENT_MESSAGE}` : CONSENT_MESSAGE,
+      offers: CONSENT_GUARD_OFFERS,
+      fulfil: null,
+      relatedEntryId: null,
+      overridden: false,
+    }));
+  }
+  return Object.freeze(guards);
+}
+
+/**
+ * The compiled proposal as a decree's `Op`. The payload is COPIED, so nothing the caller
+ * still holds is shared into a frozen entry.
+ * @param {CompiledProposal} op @returns {{ type: string, target: null, payload: Record<string, unknown> }}
+ */
+function decreeOpFor(op) {
+  return Object.freeze({
+    type: /** @type {string} */ (op.opType),
+    target: null,
+    payload: Object.freeze({ ...(isPlainObject(op.params) ? op.params : {}) }),
+  });
+}
+
+/**
+ * THE BRIDGE. Fold the review's accepted proposals into a decree registry through the
+ * INJECTED `stage`, and mint the consent guards for the blocked ones.
+ *
+ * Every accepted proposal stages, including one the command dispatcher would call
+ * `unroutable`: the registry is the DM's own list of what the table decided, not the
+ * dispatcher's list of what it can land today, and design §3 says the compiled proposals
+ * land there. The fold carries each `stage` result forward, so the registry the caller
+ * gets back is EM-C1's own frozen value and this module writes `decrees` nowhere.
+ *
+ * Refused, with the registry returned exactly as handed in: no injected `stage`, no
+ * review artifact, or no `orderedAt` stamp. Each is the caller's to supply and a decree
+ * minted without one would carry a made-up identity or a made-up time.
+ *
+ * @param {{ accepted?: unknown, blocked?: unknown, ops?: unknown, registry?: unknown,
+ *   reviewRef?: unknown, surveyorCredit?: unknown, orderedAt?: unknown,
+ *   stageDecree?: unknown }} [io]
+ * @returns {{ registry: unknown, staged: readonly StagedDecree[],
+ *   guards: readonly ConsentGuard[] }}
+ */
+export function stageSurveyorDecrees(io = {}) {
+  const input = isPlainObject(io) ? io : {};
+  const reviewRef = isText(input.reviewRef) ? input.reviewRef : null;
+  const orderedAt = isText(input.orderedAt) ? input.orderedAt : null;
+  const credit = typeof input.surveyorCredit === 'number' && Number.isFinite(input.surveyorCredit)
+    ? input.surveyorCredit
+    : null;
+  const guards = consentGuardsFor(input.blocked, { reviewRef, ops: input.ops });
+  /** @type {StagedDecree[]} */
+  const staged = [];
+  /** @type {readonly unknown[]} the caller's registry, and after the fold EM-C1's own frozen value */
+  let registry = Array.isArray(input.registry) ? input.registry : [];
+  const stageDecree = typeof input.stageDecree === 'function'
+    ? /** @type {(r: unknown, op: unknown, meta: unknown) => readonly unknown[]} */ (input.stageDecree)
+    : null;
+  if (stageDecree === null || reviewRef === null || orderedAt === null) {
+    return { registry, staged: Object.freeze(staged), guards };
+  }
+  const entries = Array.isArray(input.accepted) ? input.accepted : [];
+  for (let position = 0; position < entries.length; position += 1) {
+    const entry = entries[position];
+    const op = /** @type {CompiledProposal} */ (
+      isPlainObject(entry) && 'op' in entry ? entry.op : entry
+    );
+    if (!isPlainObject(op) || !isText(op.opType)) continue;
+    const index = isPlainObject(entry) ? (reviewIndexOf(entry.index) ?? position) : position;
+    const id = surveyorDecreeId(reviewRef, index);
+    const before = registry;
+    registry = stageDecree(registry, decreeOpFor(op), {
+      id,
+      orderedAt,
+      addedBy: SURVEYOR_AUTHOR,
+      ...(credit === null ? {} : { surveyorCredit: credit }),
+    });
+    if (registry.length > before.length) {
+      staged.push(Object.freeze({ id, proposalIndex: index, opType: op.opType }));
+    }
+  }
+  return { registry, staged: Object.freeze(staged), guards };
 }
 
 /**

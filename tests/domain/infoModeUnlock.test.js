@@ -68,8 +68,13 @@ describe('preset wiring (§3.2-7)', () => {
   it('living_realm carries perfect_delayed; full_simulation carries full (M10a)', () => {
     expect(SIMULATION_RULE_PRESETS.living_realm.rules.infoMode).toBe('perfect_delayed');
     expect(SIMULATION_RULE_PRESETS.full_simulation.rules.infoMode).toBe('full');
-    // The legacy trio + the quieter §11 presets stay omniscient.
-    for (const id of ['quiet_local', 'realistic_regional', 'dramatic_campaign', 'static_campaign', 'narrative_campaign']) {
+    // ⭐ DECLARED EDIT, NOT A RE-RECORD (LIT-1b, RULING FP-24, 2026-09-24; J-EM-16, ODQ §934.84):
+    // dramatic_campaign now carries living_realm's perfect_delayed, so the belief chain the lit
+    // pact stage reads can act in the DM-facing reference preset. The omniscient roster it left,
+    // verbatim: ['quiet_local', 'realistic_regional', 'dramatic_campaign', 'static_campaign', 'narrative_campaign'].
+    expect(SIMULATION_RULE_PRESETS.dramatic_campaign.rules.infoMode).toBe('perfect_delayed');
+    // The rest of the legacy trio + the quieter §11 presets stay omniscient.
+    for (const id of ['quiet_local', 'realistic_regional', 'static_campaign', 'narrative_campaign']) {
       expect(SIMULATION_RULE_PRESETS[id].rules.infoMode, id).toBe('omniscient');
     }
   });
@@ -81,6 +86,14 @@ describe('preset wiring (§3.2-7)', () => {
     const full = normalizeSimulationRules(SIMULATION_RULE_PRESETS.full_simulation.rules);
     expect(full.infoMode).toBe('full');
     expect(full.presetId).toBe('full_simulation');
+    // LIT-1b (FP-24): the dramatic preset round-trips its new mode, and an installed Dramatic
+    // Campaign stored with the old omniscient mode keeps both its id and its mode (not a comparison key).
+    const dramatic = normalizeSimulationRules(SIMULATION_RULE_PRESETS.dramatic_campaign.rules);
+    expect(dramatic.infoMode).toBe('perfect_delayed');
+    expect(dramatic.presetId).toBe('dramatic_campaign');
+    const storedDramatic = normalizeSimulationRules({ ...SIMULATION_RULE_PRESETS.dramatic_campaign.rules, infoMode: 'omniscient' });
+    expect(storedDramatic.presetId).toBe('dramatic_campaign');
+    expect(storedDramatic.infoMode).toBe('omniscient');
   });
 
   it('a PRE-3.5 living_realm save (old omniscient clamp) keeps its preset identity byte-stably', () => {

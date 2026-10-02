@@ -166,10 +166,17 @@ describe('birth-scale distribution sweep', () => {
   });
 
   it('ordinary villages are overwhelmingly clean', () => {
-    // Degenerate, not derivable: 400/400 ordinary villages read 'none'. baseRate 1.0
-    // gives sigma 0 and an envelope of 399 — a certainty the sample cannot license.
-    // The authored "at most two dirty villages" floor stays, un-derived and labelled.
-    expect(ordinaryVillages.filter(s => capOf(s) === 'none').length).toBeGreaterThanOrEqual(N - 2);
+    // DERIVED since 2026-09-30. Until then the rate was degenerate (400/400 read 'none',
+    // sigma 0) and an authored "at most two dirty" floor stood in. The owner's hamlet ->
+    // village cumulative law (ODQ §934.86) carried the hamlet's 'Smuggling waypoint' into
+    // villages, so a village now reads dirty at birth as often as its hamlet does (392/400
+    // clean), and the floor is a registered envelope (judgment J22).
+    const clean = envelope('capture.ordinaryVillage.clean');
+    expect(
+      ordinaryVillages.filter(s => capOf(s) === 'none').length,
+      `ordinary villages clean: floor ${clean.bound} derived from a measured ${clean.baseRate} `
+      + `at N=${clean.baseMeasurementN} (${clean.margin} sigma). A red means the village rate moved.`,
+    ).toBeGreaterThanOrEqual(clean.bound);
   });
 
   it('overwhelming criminal presence reads contested/influenced at birth', () => {

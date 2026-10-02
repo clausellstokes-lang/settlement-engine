@@ -82,6 +82,23 @@ const EXPECTED_ROOTS = new Map([
 // ⚠ SCOPE, unchanged from the TE36 note above: `demographicsEnabled` is virtual and false in every
 // shipped preset, and this denominator is the ONLY place in the estate that observes the lit
 // engine. No player, no shipped golden and no dark-control cell sees any of this.
+// ── RE-RECORDED 2026-09-24 BY FP BATCH LANDING 4 (the FP chair, session 87797a6a), IN THE SAME ACT AS THE NEWS-VOICE AND
+// NEWS-HEADLINE CONTRACTS AND THE OSR WALKER'S PINS ──────────────────────────────────────────────────────────────────
+// scalarRows 25549 → 26329; wizardNewsFinalEntries 240 → 272; wizardNewsAccumulatedEntries 1567 → 1604;
+// wizardNewsUnique 273 and every FAMILY ROW HOLD (the 63 identities, their counts, the bytes and the digest are unmoved —
+// the kept news entries live under wizardNews.entries, which this contract excludes by law). ONE CAUSE: the Herald lens U2
+// (32315e384, FP-31 = P1), the 52-week window under the 240 cap; attributed by equality with the U2 seat's own measurement.
+// ── RE-RECORDED 2026-09-24 BY FP BATCH LANDING 3 (the FP chair, session 87797a6a), IN THE SAME ACT AS THE OSR
+// WALKER'S PIN AND THE NEWS-VOICE CONTRACT ─────────────────────────────────────────────────────────────────
+// scalarRows 25527 → 25549; wizardNewsUnique 272 → 273; pulseHistory 1051/5075 → 1055/5097; totals
+// 1074/5270 → 1078/5292; rows bytes 8271 → 8271. ⭐ THE SHAPE IS UNTOUCHED FOR THE FOURTH RE-RECORD RUNNING: 63 identities
+// before and after, the same four families, chronicle 7/7/7, regionalLog 2/8/176 and timeline 4/8/12 unmoved —
+// only pulseHistory's counts grow. ONE CAUSE, ATTRIBUTED BY BISECT (the corpus builder run per sha over the
+// fourteen commits since landing 2, then these walkers run at the culprit): CURE-PEACE-1 U1 (c9b24fe51) — a
+// peacetime suit retires when a war opens against its court, and the feed's reconcile of the superseded proposal
+// mints ONE new wizard-news id, whose impact digest lands in the twelve pulse-history records (channelType
+// 150 → 151, the +22 scalar rows). The walkers at c9b24fe51 and at the landing tip 98e0d8664 measure every
+// figure identically; no other batch-3 pick moves any of them.
 // ── RE-RECORDED 2026-09-01 BY THE WAR LANDING (§876), IN THE SAME ACT AS
 // `tests/lint/.prose-family-contract-baseline.json` ────────────────────────────────────────────
 // ⭐ THE SHAPE IS UNTOUCHED FOR THE THIRD RE-RECORD RUNNING: 63 identities before and after, ZERO
@@ -112,20 +129,37 @@ const EXPECTED_ROOTS = new Map([
 // `legitimacyUpheavalEnabled` are virtual and false in every shipped preset, and this denominator
 // is the ONLY place in the estate that observes the lit engine. No player, no shipped golden and
 // no dark-control cell sees any of this.
+// ── RE-RECORDED 2026-10-01 BY THE URBAN-BAND CHAIR (session 93391427, under the owner's "I defer all judgment to you"), IN THE
+// SAME ACT AS THE NEWS-VOICE AND NEWS-HEADLINE CONTRACTS AND THE OSR WALKER'S PINS ───────────────────────────────────────
+// ONE CAUSE, MEASURED AT BOTH ENDS: THE URBAN BAND'S SAME-SEED SHIFT (ODQ §934.86) AND THE DRUID RULINGS (§934.86 addendum 2);
+// the corpus builder at the pre-band base 5d699cc68 reproduces every frozen figure below exactly. scalarRows 26329 → 25724;
+// wizardNews 272/1604/273 → 264/1557/265; regionalEventLog 77 → 79. 63 → 61 identities, and the TWO THAT VANISH ARE NAMED:
+// pulseHistory[].consequenceOutcomes[].proposalPayload.reason and pulseHistory[].resolvedStressors[].type. The re-dealt year
+// resolves no stressor and carries no such proposal (the same year the news contracts read). 40 of the 63 rows moved a count.
+// ⭐ THE REGIONAL LOG'S ROOT REACH IS NOW PINNED AS AN EXACT SET: root 2's pulse logged no regional event (the 79 entries are
+// all unique and all sit on the other eleven roots), so the reach is [0,1,3..11]; it was 0..11. Every root still in the
+// set keeps the contiguity law, and any further change to the set reds with the set named.
 const EXPECTED_CORPUS = Object.freeze({
-  scalarRows: 25527, canonEventLogEntries: 1, wizardNewsFinalEntries: 240,
-  wizardNewsAccumulatedEntries: 1567, wizardNewsUnique: 272, pulseHistory: 12,
-  regionalEventLog: 77, regionalEventLogUnique: 77, aiChronicle: 1,
+  scalarRows: 25724, canonEventLogEntries: 1, wizardNewsFinalEntries: 264,
+  wizardNewsAccumulatedEntries: 1557, wizardNewsUnique: 265, pulseHistory: 12,
+  regionalEventLog: 79, regionalEventLogUnique: 79, aiChronicle: 1,
 });
+const EXPECTED_REGIONAL_ROOTS = Object.freeze([0, 1, 3, 4, 5, 6, 7, 8, 9, 10, 11]);
 const EXPECTED_FAMILY_TOTALS = Object.freeze([
   { family: 'chronicle', identities: 7, distinctValues: 7, occurrences: 7 },
-  { family: 'pulseHistory', identities: 50, distinctValues: 1051, occurrences: 5075 },
-  { family: 'regionalLog', identities: 2, distinctValues: 8, occurrences: 176 },
+  { family: 'pulseHistory', identities: 48, distinctValues: 996, occurrences: 4979 },
+  { family: 'regionalLog', identities: 2, distinctValues: 8, occurrences: 180 },
   { family: 'timeline', identities: 4, distinctValues: 8, occurrences: 12 },
 ]);
-const EXPECTED_TOTALS = Object.freeze({ families: 4, identities: 63, distinctValues: 1074, occurrences: 5270 });
-const EXPECTED_ROWS_BYTES = 8271;
-const EXPECTED_ROWS_SHA256 = '4cf433b2d508986fad5a1afdb8c2bd700751186411e87c179d39b927ff849a39';
+// 2026-10-02 (THE VOICE PROGRAM wave 1, the owner: "Updates like these need to reflect actions not to potential"):
+// distinctValues 1002 → 1019, ONE FAMILY MOVING: pulseHistory 979 → 996. Identities (61) and occurrences (5178) hold, so
+// no record was added or lost; six rows change only how many distinct strings they carry. The three HEADLINE rows grow
+// (+6, +7, +9: both towns named, a deed per kind) and the three SUMMARY rows shrink (−1, −3, −1: the NPC line now states
+// the aim alone, its move having gone to the headline). EXPECTED_ROWS_BYTES holds at 8000 by digit-width coincidence again;
+// the digest below is the pin that convicts.
+const EXPECTED_TOTALS = Object.freeze({ families: 4, identities: 61, distinctValues: 1019, occurrences: 5178 });
+const EXPECTED_ROWS_BYTES = 8000;
+const EXPECTED_ROWS_SHA256 = '59c3bb5aae5768bc1eb875183e7c70bc3d8cc398dfd79f0e6b0e11cf32eb1ce0';
 const codepoint = (left, right) => (left < right ? -1 : left > right ? 1 : 0);
 const same = (left, right) => JSON.stringify(left) === JSON.stringify(right);
 const identityOf = (row) => `${row.family}\0${row.path}\0${row.field}`;
@@ -262,7 +296,9 @@ export function deriveProseFamilyContract(scalarRows, scalarMeta) {
   if (!same([...pulseIndexes].sort((a, b) => a - b), [...Array(12).keys()])) throw new Error('pulseHistory record reach is not exactly 0..11');
   if (regionalRecords.size !== scalarMeta.regionalEventLog || scalarMeta.regionalEventLog !== scalarMeta.regionalEventLogUnique) throw new Error('regionalLog record reach disagrees with scalar meta');
   const regionalRoots = [...new Set(regional.map(({ source }) => source.rootOrdinal))].sort((a, b) => a - b);
-  if (!same(regionalRoots, [...Array(12).keys()])) throw new Error('regionalLog root reach is not exactly 0..11');
+  if (!same(regionalRoots, EXPECTED_REGIONAL_ROOTS)) {
+    throw new Error(`regionalLog root reach is not exactly ${JSON.stringify(EXPECTED_REGIONAL_ROOTS)}: ${JSON.stringify(regionalRoots)}`);
+  }
   for (const rootOrdinal of regionalRoots) {
     const indexes = [...new Set(regional.filter(({ source }) => source.rootOrdinal === rootOrdinal)
       .map(({ source }) => source.path[2].value))].sort((a, b) => a - b);

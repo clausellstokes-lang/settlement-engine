@@ -22,7 +22,7 @@
  * SAME dynamic-import seam tests mock, and this module never gains a static edge to
  * the sim (keeping the lazy chunking + the mockability of the kernel intact).
  */
-import { ensureWorldState } from '../domain/worldPulse/worldState.js';
+import { ensureWorldState, pulseIdFor } from '../domain/worldPulse/worldState.js';
 import { appendWizardNewsEntries } from '../domain/region/index.js';
 // Lane-2 drain-path parity (domain-events-region-1 twin): the LIGHT eager-safe gate
 // deciding whether a queued event is a NON-party canon relationship verb — the SAME
@@ -63,10 +63,237 @@ import {
 import {
   contentRuntimeFromCampaignBinding,
 } from '../domain/content/contentEnvironment.js';
+import { PULSE_UNDO_CAP } from './pulseUndoCap.js';
 
-// Per-campaign cap on retained pre-pulse snapshots (multi-step undo depth). Mirrors
-// the slice's PULSE_UNDO_CAP — the advance body that reads it now lives here.
-const PULSE_UNDO_CAP = 10;
+/**
+ * Per-campaign cap on retained pre-pulse snapshots (multi-step undo depth). The advance
+ * body that evicts past it lives here and reads it from its own leaf; the slice that once
+ * mirrored the number no longer spells it, and nothing else in src/ declares a second one.
+ *
+ * ⛔ THE DECLARATION MOVED DOWN TO A LEAF, AND THE RE-EXPORT IS WHY NOTHING ELSE MOVED
+ * (U73, the verifier's FIX-5). U8 exported the cap from this file so the registry page
+ * could stop parsing this source — and the page still could not read it, because the edit
+ * mount is reached from `src/App.jsx` OUTSIDE every campaignLazy boundary and a static edge
+ * into THIS file would put every runtime-gated campaign action in that mount's transitive
+ * graph (`tests/store/campaignRuntimeCallerCoverage.test.js` derives those boundaries and
+ * convicts exactly that). `./pulseUndoCap.js` is the one home now: it imports nothing, both
+ * sides may reach it, and every reader that already imports the cap FROM HERE — the page's
+ * own A7 arm among them — keeps working unchanged through this line.
+ */
+export { PULSE_UNDO_CAP } from './pulseUndoCap.js';
+/**
+ * ⭐ U72 — §20.3's LIVE CATALOGUES FOR THE HEAD OF THE TICK, COMPOSED AT THE ONE LAYER THAT
+ * CAN COMPOSE THEM (design §20.3; ARCH §1 and §6; the verifier's FIX-3).
+ *
+ * "A pending decree that no longer resolves is WITHDRAWN WITH ITS REASON — never dropped,
+ * never applied … the tick hook calls the resolver before it applies anything." EM-C1's
+ * `resolveDecree` takes `{ opTypes, pools }` HANDED IN and the hook guards its whole
+ * resolution on the bag being present, so until something composed one, every due entry
+ * applied and design §20.3's rejected branch — best-effort application, "a pin on a fork
+ * that no longer means what the DM chose is a lie" — was the shipping behaviour.
+ *
+ * ⛔ THE STORE IS THE ONLY LAYER THAT CAN. The op catalogue may not be imported by the
+ * kernel or by the hook (`editMutationPath.walker` and EM-E1's two-import pin), and a pool's
+ * values are a function of A SETTLEMENT — `npc.role` reads its institutions, `power.holder`
+ * its factions, `institution.class` its tier — so the reading needs the live member saves,
+ * which only this path holds. The bag then travels as an ARGUMENT the whole way down.
+ *
+ * ⛔ THE EDGE IS DYNAMIC, and that is what keeps the edit leaves out of every eager closure
+ * (`EAGER_FIRST_PAINT_MODULES` walks STATIC edges only). It is the same idiom, and the same
+ * reason, as the roster half's own dynamic reach into the edit slice further down this file
+ * — ⛔ WHOSE CALL FORM IS NAMED IN WORDS AND NOT IN ITS OWN SPELLING ON PURPOSE, because
+ * `tests/store/rosterOpsAtTick.test.js` case C4 counts that form over this file's RAW
+ * SOURCE, comments included, and pins the total at ONE. A campaign whose saves hold no
+ * PENDING decree — every world today — reaches no import at all, composes nothing, and
+ * hands the kernel `null`, so the whole path is dormant by construction.
+ *
+ * ⛔ ONLY THE POOLS THE PENDING ENTRIES ACTUALLY NAME ARE READ, and that is a measurement,
+ * not thrift: two of the seventeen (`name.settlement`, `name.npc`) are CROSS PRODUCTS of the
+ * naming bag and would be thousands of strings on a payload that crosses a worker boundary.
+ * The pool ids come from the op catalogue's own payload specs, so a row that grows a pool
+ * field is covered the day it lands and nothing here is transcribed.
+ *
+ * ⭐ EACH SAVE IS JUDGED BY ITS OWN TOWN'S VOCABULARY, AND THAT IS U86's WHOLE MEMBER.
+ * U72 shipped the LAX UNION — one `pools` bag folded across every member — because the hook
+ * took ONE bag for N registries and a union is the only honest reading available to that
+ * shape. Its own header recorded the cost and left the ruling to the chair: a word alive in
+ * SOME member town admitted an order in a town that had never offered it, so a decree could
+ * be applied against a vocabulary that is not its settlement's. It was ruled (U86, lane E's
+ * ruling 2): the bag is keyed BY SAVE ID, `applyDecreesToSaves` hands each registry the
+ * pools of ITS OWN save, and the union is gone rather than merely unread. Design §2.5 is
+ * the reason it can be: `decrees` is a key on the SAVED SETTLEMENT, so the tick's subject
+ * was always N registries and never one.
+ *
+ * ⛔ THE KEY IS THE KERNEL'S OWN `saveId`, IMPORTED RATHER THAN RE-SPELLED, so the word this
+ * bag is filed under is the word the hook looks it up by — one spelling, never a second,
+ * which is the same law E1-8 holds the hook's own import list to. It joins the dynamic
+ * block below rather than this file's static imports for the reason the other two are
+ * there: a campaign with no pending decree must reach no import at all.
+ *
+ * ⛔ AND A MEMBER THIS BAG DOES NOT NAME RESOLVES NOTHING — it is not a member with an empty
+ * vocabulary. That distinction is design §9's tie-break made structural: a caller that
+ * composed for a different realm (or for none) would otherwise have every pool-typed word
+ * in the unnamed town read as stale, which is a FALSE warning on an order nobody judged.
+ * A member NAMED with no words is the other fact, and its orders are resolved and withdrawn.
+ *
+ * PURE apart from the three dynamic imports: it reads no clock, takes no draw and writes
+ * nothing.
+ *
+ * ⭐ AND IT CARRIES DESIGN §13's RESOLVED CONSEQUENCE BESIDE THE VOCABULARY (EM-E4d unit 3,
+ * U88; the verifier's FIX-6). The hook must apply `home-procedures+record` to an act against
+ * a phantom and `world` to one against a saved settlement of this campaign, and it can read
+ * neither: the reality of a counterparty is a fact about the SAVES, and the verb that judges
+ * it lives under `src/domain/edit`, which case E1-8 pins the hook out of (its import list is
+ * EXACTLY TWO). So the reading is composed HERE, in the same dormant block and on the same
+ * member clones, and handed across as the pools are — `consequenceBySave[saveId][entryId]`, a
+ * word the store never spells and only carries. ⛔ IT IS DATA AND NOT A BOUND FUNCTION FOR A
+ * MEASURED REASON: `simAdvanceWorker` defaults TRUE, this bag rides `worker.postMessage`, and
+ * a function in it throws `DataCloneError` out of the client's Promise executor — which
+ * REJECTS the DM's advance rather than falling back (`advanceWorkerClient.js`'s own taxonomy
+ * calls that a sim failure). `offStageConsequencesFor` carries that reason in full.
+ *
+ * @param {unknown} saves the advance's own plain member clones
+ * @returns {Promise<{ opTypes: Record<string, unknown>,
+ *   poolsBySave: Record<string, Record<string, readonly string[]>>,
+ *   consequenceBySave: Record<string, Record<string, string>> }|null>}
+ *   null when nothing is pending anywhere — the kernel then resolves nothing, as before.
+ */
+export async function decreeCataloguesForSaves(saves) {
+  const rows = Array.isArray(saves) ? saves : [];
+  const pending = rows.filter((row) => Array.isArray(row?.settlement?.decrees)
+    && row.settlement.decrees.some((/** @type {any} */ entry) => entry?.status === 'pending'));
+  if (pending.length === 0) return null;
+  const [operations, pools, helpers, reality] = await Promise.all([
+    import('../domain/edit/operations.js'),
+    import('../domain/edit/pools.js'),
+    import('../domain/worldPulse/pulseHelpers.js'),
+    import('./phantomMintAction.js'),
+  ]);
+  const opTypes = operations.OP_TYPES;
+  /** @type {Record<string, Record<string, readonly string[]>>} */
+  const poolsBySave = {};
+  /** @type {Record<string, Record<string, string>>} */
+  const consequenceBySave = {};
+  for (const row of pending) {
+    /** @type {Record<string, readonly string[]>} */
+    const live = {};
+    for (const entry of row.settlement.decrees) {
+      if (entry?.status !== 'pending') continue;
+      const decl = /** @type {any} */ (opTypes)[entry?.op?.type];
+      const specs = decl && typeof decl === 'object' ? decl.payload : null;
+      if (!specs || typeof specs !== 'object') continue;
+      for (const spec of Object.values(specs)) {
+        const poolId = spec && typeof spec === 'object' && /** @type {any} */ (spec).kind === 'pool'
+          ? /** @type {any} */ (spec).pool
+          : null;
+        if (typeof poolId !== 'string' || poolId === '') continue;
+        // Two pending entries in ONE town may name the same pool; the town's own reading of
+        // it is one fact, so the second read is skipped rather than folded.
+        if (!Object.hasOwn(live, poolId)) live[poolId] = pools.poolValues(poolId, row.settlement);
+      }
+    }
+    // ONE key, ONE spelling: the kernel's own `saveId` files both tables, so the word the
+    // hook looks each of them up by is the word they were filed under (E1-8's law for the
+    // pools, unchanged here). §13's REAL is "a saved settlement in the same campaign", so
+    // the roster handed to the resolver is `rows` — every member, not just the pending ones.
+    const saveKey = helpers.saveId(row);
+    poolsBySave[saveKey] = Object.freeze(live);
+    consequenceBySave[saveKey] = reality.offStageConsequencesFor(row.settlement.decrees, rows);
+  }
+  return {
+    opTypes,
+    poolsBySave: Object.freeze(poolsBySave),
+    consequenceBySave: Object.freeze(consequenceBySave),
+  };
+}
+
+/** One frozen empty list, so an advance with no applied decree allocates nothing. */
+const NO_CHRONICLE_ENTRIES = /** @type {readonly Record<string, unknown>[]} */ (Object.freeze([]));
+
+/**
+ * ⭐ U76 — THE APPLIED DECREE'S CHRONICLE LINE, COMPOSED FOR THE CAMPAIGN'S ONE CHRONICLE
+ * (EM-C1b unit 2; the verifier's FIX-7; design §2.6, §11; ARCH §1).
+ *
+ * "The pulse must treat decrees as first-class causes or the chronicle lies" (design §9).
+ * EM-E1's hook applied them and EM-E2 wrote the voice, and nothing joined the two: an
+ * applied decree landed a RECEIPT and an advance-report row and left the realm's actual
+ * scrollback silent about the one act the DM ordered by hand.
+ *
+ * ⛔ WHY THE COMPOSITION IS HERE AND THE REFERENCE IS IN THE HOOK. They are two writes at
+ * two instants and neither may move. The `chronicleRef` can ONLY be written at the instant
+ * of application (`amendPending` amends a pending row and nothing else), so the hook writes
+ * it — see `decreeHook.js`'s `CHRONICLE_REF_PREFIX`. The LINE needs EM-E2's prose leaf and
+ * the campaign, and the hook may reach neither: case E1-8 pins its import list at EXACTLY
+ * TWO, and the prose leaf has no `src/` importer on purpose. So the advance — which already
+ * holds the campaign, the result and the bound writer — composes, and the two halves are
+ * joined by ONE ADDRESS that case C1b-1 holds equal to the producer's own minting.
+ *
+ * ⛔ NO SECOND WRITER AND NO NEW PERSISTED KEY. The entries below are exactly the four keys
+ * `appendCampaignChronicle` already persists (`id`, `tick`, `prose`, `createdAt`) and go
+ * through that one action. The prose leaf's return also carries `decreeId`, `cause` and
+ * `followsFrom`; they are deliberately NOT carried across, because a chronicle entry that
+ * grew a field would be a persisted-shape change and that is the owner's (U93). The CAUSE
+ * is not lost by dropping the key — it is the receipt's own hand word, handed to the
+ * producer below so the sentence it draws is the table's.
+ *
+ * ⛔ THE EDGE IS DYNAMIC and the early return is BEFORE it, so an advance with no applied
+ * decree — every world today — reaches no import, composes nothing and appends nothing.
+ *
+ * ⛔ THE TICK IS RECOVERED WITH THE PRODUCER'S OWN VERB. An entry applied at tick 3 of a
+ * fifty-two week advance must be filed at tick 3, not at the interval's landing tick, or
+ * the scrollback puts the DM's act in the wrong year. `markApplied` wrote `pulseIdFor`'s
+ * output onto the entry, so the ticks of this advance are run back through `pulseIdFor`
+ * and matched — never by parsing the id, which would be a second spelling of its grammar.
+ *
+ * PURE apart from the one dynamic import: no clock, no draw, no write.
+ *
+ * @param {unknown} result the composed pulse result this advance is committing
+ * @param {unknown} campaignId @param {unknown} preTick the world tick before the advance
+ * @returns {Promise<readonly Record<string, unknown>[]>} the entries to append, in the
+ *   order the tick applied them; the shared empty list when the tick applied none.
+ */
+export async function decreeChronicleEntriesForResult(result, campaignId, preTick) {
+  const bag = result && typeof result === 'object' ? /** @type {any} */ (result) : {};
+  const history = Array.isArray(bag.worldState?.pulseHistory) ? bag.worldState.pulseHistory : [];
+  // The tick's own receipt, which the interval collapse deliberately carries across every
+  // tick of the advance (deduped by the (saveId, decreeId) pair) precisely so the DM's act
+  // cannot be applied and erased from the record in one advance.
+  const causes = Array.isArray(history[history.length - 1]?.decreeCauses)
+    ? history[history.length - 1].decreeCauses
+    : [];
+  if (causes.length === 0) return NO_CHRONICLE_ENTRIES;
+  const updates = Array.isArray(bag.settlementUpdates) ? bag.settlementUpdates : [];
+  const bySave = new Map(updates.map((/** @type {any} */ row) => [String(row?.saveId), row]));
+  const endTick = Number.isFinite(bag.tick) ? Number(bag.tick) : null;
+  const startTick = Number.isFinite(preTick) ? Number(preTick) : endTick;
+  /** @type {Map<string, number>} */
+  const tickByRef = new Map();
+  if (endTick !== null && startTick !== null) {
+    for (let t = startTick; t <= endTick; t += 1) tickByRef.set(pulseIdFor(campaignId, t), t);
+  }
+  const { decreeChronicleLine } = await import('../domain/display/stateProse/decreeProse.js');
+  /** @type {Record<string, unknown>[]} */
+  const entries = [];
+  for (const cause of causes) {
+    const update = bySave.get(String(/** @type {any} */ (cause)?.saveId));
+    const registry = Array.isArray(update?.settlement?.decrees) ? update.settlement.decrees : [];
+    const entry = registry.find((/** @type {any} */ row) => row?.id === /** @type {any} */ (cause)?.decreeId);
+    if (!entry) continue;
+    const tick = tickByRef.get(String(entry.tickRef));
+    const line = /** @type {any} */ (decreeChronicleLine(entry, update?.settlement, {
+      registry,
+      cause: /** @type {any} */ (cause)?.cause,
+      ...(tick === undefined ? {} : { tick }),
+    }));
+    // The leaf returns null for a row it cannot say anything true about, and design §11's
+    // own rule is that half a sentence about a decree is worse than none: a silent entry
+    // is skipped rather than filed with an empty line.
+    if (!line || typeof line.prose !== 'string' || line.prose === '') continue;
+    entries.push({ id: line.id, tick: line.tick, prose: line.prose, createdAt: line.createdAt });
+  }
+  return entries.length === 0 ? NO_CHRONICLE_ENTRIES : entries;
+}
+
 const AUTH_SESSION_CHANGED_RESULT = Object.freeze({ ok: false, reason: 'auth_session_changed' });
 
 function sessionCurrent(isSessionCurrent) {
@@ -225,6 +452,123 @@ export function reconcileWizardNewsForCommit(resultWizardNews, liveWizardNews, p
   );
   if (!landed.length) return resultWizardNews;
   return appendWizardNewsEntries(resultWizardNews, cloneJson(landed), { now });
+}
+
+/** One shared frozen empty list, so a campaign that carries no registry names nobody alike. */
+const NO_ROSTER_SAVES = /** @type {readonly string[]} */ (Object.freeze([]));
+
+/**
+ * ⭐ EM-E8b B (U49) — THE MEMBER SAVES THE TICK'S ROSTER HALF IS OWED, IN THE CAMPAIGN'S OWN
+ * MEMBER ORDER: the SAME saves `applyDecreesToSaves` just walked.
+ *
+ * MEASURED at EM-E8's tip: a two-save campaign whose NON-ACTIVE member carried a due
+ * add-decree in ITS registry came out of the tick with that registry `applied` and its roster
+ * holding NOBODY. The kernel's hook is N registries wide (design §2.5: `decrees` is a key on
+ * the SAVED SETTLEMENT, so a campaign's tick is N registries, not one) and the store's binder
+ * was one save wide. This reader is what makes the two the same width.
+ *
+ * ⛔ THE OPEN SAVE IS READ THROUGH THE LIVE VIEW. The hydrated record is the authority for the
+ * save the DM has in front of them — its library row can legitimately lag a staged decree —
+ * so a reader that took the row for it would miss exactly the registry the DM just wrote.
+ *
+ * ⛔ IT IS APPENDED WHEN IT IS NOT A MEMBER of this campaign, so the reach EM-E8 shipped (the
+ * active save, whatever its membership) is never narrowed by this widening.
+ *
+ * ⛔ IT ASKS FOR THE KEY'S PRESENCE AND NEVER READS ITS VALUE, and that is MEASURED rather
+ * than stylistic. `decrees` is one of the record register's NOT_YET_WRITTEN keys — nothing in
+ * generation writes it — so a guarded value read of it here mints an observed-shape
+ * reader-with-no-writer row, and this file holds NO frozen row, which makes every new identity
+ * a ceiling-0 violation. Measured: the value spelling reported
+ * "src/store/campaignAdvanceSession.js: NEW decrees on settlement — 2 read(s) … (ceiling 0)".
+ * `Object.hasOwn` asks the dormancy question exactly — does this save carry a registry at all
+ * — without asking the record for the key's value.
+ *
+ * ⛔ DORMANT BY REFERENCE: a campaign whose members carry no `decrees` key — every world today
+ * — returns ONE shared frozen list and allocates nothing of its own.
+ *
+ * @param {any} state @param {string} campaignId
+ * @returns {readonly string[]} member ids, in campaign order, each carrying a registry key
+ */
+export function rosterTickSaveIds(state, campaignId) {
+  const activeSaveId = String(state?.activeSaveId ?? '');
+  const carriesRegistry = (/** @type {any} */ record) =>
+    record !== null && typeof record === 'object' && Object.hasOwn(record, 'decrees');
+  /** @type {string[]|null} */
+  let ids = null;
+  for (const save of campaignSettlements(state, campaignId)) {
+    const id = String(save?.id ?? '');
+    if (!id) continue;
+    if (carriesRegistry(id === activeSaveId ? state?.settlement : save?.settlement)) {
+      (ids ||= []).push(id);
+    }
+  }
+  if (activeSaveId && carriesRegistry(state?.settlement) && !(ids || []).includes(activeSaveId)) {
+    (ids ||= []).push(activeSaveId);
+  }
+  return ids === null ? NO_ROSTER_SAVES : ids;
+}
+
+/**
+ * ⭐ EM-E8b A (U48) — THE TICK'S MINTED ROSTER STATE, FOLDED INTO THE OUTBOX PAYLOAD THE
+ * ADVANCE ALREADY CARRIES. ONE PERSISTENCE PATH AND NO SECOND WRITER OF A SAVE ROW.
+ *
+ * MEASURED at EM-E8's tip, over the real advance in local mode: the tick minted the newcomer
+ * onto the active view and the DURABLE save came back with the decree `applied` and nobody on
+ * the roster. The roster half ran AFTER `flushWorldPulsePersist`, so the outbox had already
+ * carried the pre-mint record. The cure is not a second write — it is this fold plus the call
+ * site's move to BEFORE that one flush, so the minted record rides the SAME
+ * `persistSaveUpdates` the pulse's own `settlementUpdates` ride.
+ *
+ * ⛔ IT REPLACES, IT NEVER APPENDS A SECOND OP FOR ONE SAVE. `applyWorldPulseResultToState`
+ * already put an entry on this list for every member the pulse updated; a second entry for the
+ * same save would be two ops racing for one row. A save with no entry (a member the pulse left
+ * alone) gets ONE, because a mint that reached no op would not persist at all.
+ *
+ * ⛔ A BIRTH ENVELOPE KEEPS ITS SHAPE. `createSave` is the WR-3 upsert of a first-class birth;
+ * re-reading the whole row is how its minted roster reaches the same envelope without turning
+ * an upsert into a partial update.
+ *
+ * ⛔ BY REFERENCE WHEN NOTHING MINTED, so a dormant advance's payload is the identical array
+ * and two dormant advances compare alike.
+ *
+ * @param {any} state the store AFTER the tick's roster writes (the rows are the source)
+ * @param {any[]} persistUpdates the advance's own outbox payload
+ * @param {any} receipts one receipt from the tick's roster half in `editSlice.js` (its
+ *   `{ok, saveId, minted}` shape), or a list of them. The symbol is deliberately NOT named
+ *   here: `tests/store/rosterOpsAtTick.test.js` case C4 pins this file's reaches at EXACTLY
+ *   ONE, and that walker reads the raw source, so even a doc mention would convict it.
+ * @returns {any[]} the payload, minted state folded in
+ */
+export function withMintedRosterState(state, persistUpdates, receipts) {
+  const rows = Array.isArray(receipts) ? receipts : [receipts];
+  const minting = rows.filter(
+    (receipt) => receipt && receipt.ok === true
+      && Array.isArray(receipt.minted) && receipt.minted.length > 0,
+  );
+  if (minting.length === 0) return persistUpdates;
+  const updates = Array.isArray(persistUpdates) ? [...persistUpdates] : [];
+  for (const receipt of minting) {
+    const saveId = String(receipt.saveId ?? '');
+    const row = (state?.savedSettlements || []).find(
+      (/** @type {any} */ save) => String(save?.id ?? '') === saveId,
+    );
+    if (!saveId || !row || !row.settlement) continue;
+    const idx = updates.findIndex(
+      (/** @type {any} */ update) => String(update?.saveId ?? '') === saveId,
+    );
+    if (idx === -1) {
+      updates.push({
+        saveId,
+        settlement: cloneJson(row.settlement),
+        campaignState: cloneJson(row.campaignState),
+      });
+    } else if (updates[idx].createSave) {
+      updates[idx] = { ...updates[idx], createSave: cloneJson(row) };
+    } else {
+      updates[idx] = { ...updates[idx], settlement: cloneJson(row.settlement) };
+    }
+  }
+  return updates;
 }
 
 /**
@@ -414,6 +758,14 @@ export async function runAdvanceCampaignWorld({
         .map((/** @type {any} */ e) => String(e?.id))
     );
 
+    // U72 (design §20.3) — THE LIVE CATALOGUES, COMPOSED ONCE PER USER ADVANCE AND BEFORE
+    // THE COMPUTE. It is read off the same plain member clones the pulse is about to run
+    // over, so the vocabulary the hook judges by is the vocabulary of the world the tick
+    // enters. Null — and a single flag read's worth of work — for a campaign with no
+    // pending decree, which is every world today.
+    const decreeCatalogues = await decreeCataloguesForSaves(simSaves);
+    if (!sessionCurrent(isSessionCurrent)) return AUTH_SESSION_CHANGED_RESULT;
+
     // Pure, heavy compute OUTSIDE the producer. The multi-tick path is awaited: the
     // orchestrator yields to the event loop between tick batches so a long advance
     // (up to 48 one-week kernel passes) does not freeze the UI. The compute is a pure
@@ -438,6 +790,10 @@ export async function runAdvanceCampaignWorld({
         // payload spread into the worker AND the in-thread fallback alike.
         ...(catchUpWeeks != null ? { weeks: catchUpWeeks } : {}),
         advanceEpoch,
+        // U72: §20.3's live catalogues for the head of every tick of this advance, composed
+        // ONCE here (see `decreeCataloguesForSaves`) and null for a world with no pending
+        // decree — which keeps the flag-OFF and flag-ON paths alike byte-identical there.
+        decreeCatalogues,
       };
       result = useMultiTick
         // The worker runs the SAME simulate function off the main thread; the
@@ -457,6 +813,7 @@ export async function runAdvanceCampaignWorld({
             now,
             customContent: pinnedCustomContent,
             advanceEpoch,
+            decreeCatalogues,
           });
       if (!sessionCurrent(isSessionCurrent)) return AUTH_SESSION_CHANGED_RESULT;
 
@@ -656,6 +1013,77 @@ export async function runAdvanceCampaignWorld({
       }
     }
 
+    // ⭐ EM-E8 — THE ROSTER OPS' TICK HALF (design §2.6's head of the tick, §14's regeneration
+    // from the layer). EM-E1's hook marked every due decree APPLIED inside the pulse and left
+    // "the world effect of each op" to the members that bind the verbs; the roster family's
+    // binder is the store's, because only the store may reach the DM layer's writer and
+    // EM-B2a4's re-derivation seam. It mints every applied add-decree the layer does not
+    // already hold and re-derives ONCE.
+    //
+    // ⭐ EM-E8b A (U48) — AND IT RUNS **BEFORE** THE ONE FLUSH BELOW, WHICH IS THE WHOLE CURE.
+    // At EM-E8's tip this block sat after `flushWorldPulsePersist`, so the outbox had already
+    // carried the PRE-MINT record and the durable save came back with an `applied` decree and
+    // nobody on the roster — the record claiming an order carried out over a world that held no
+    // such person. Moved here, the minted rows ride the SAME `persistSaveUpdates` the pulse's
+    // own `settlementUpdates` ride (`withMintedRosterState` folds them into that payload), so
+    // the tick is ONE durable op per save and the members-before-snapshot barrier still holds.
+    // The two replays below are unaffected: neither reads the roster, and both persist their
+    // own writes through their own actions exactly as before.
+    //
+    // ⛔ DORMANT BY REFERENCE, AND THE GUARD IS WHAT MAKES IT FREE. A save that carries no
+    // `decrees` key — every world today — reaches no import, runs nothing and allocates
+    // nothing, so this line composes exactly what it composed before EM-E8.
+    //
+    // ⛔ THE EDGE IS DYNAMIC, which is the estate's own store idiom and what keeps the edit
+    // leaf out of every eager closure (`EAGER_FIRST_PAINT_MODULES` walks STATIC edges only).
+    // Best-effort and session-fenced, exactly as the two replays are: the roster half never
+    // blocks the advance, and the pre-pulse snapshot already covers it for undo.
+    const liveDecrees = get().settlement?.decrees;
+    const rosterSaveIds = result && result.ok !== false
+      ? rosterTickSaveIds(get(), campaignId)
+      : NO_ROSTER_SAVES;
+    if (result && result.ok !== false
+        && ((Array.isArray(liveDecrees) && liveDecrees.length > 0) || rosterSaveIds.length > 0)) {
+      if (!sessionCurrent(isSessionCurrent)) return AUTH_SESSION_CHANGED_RESULT;
+      try {
+        const editSlice = await import('./editSlice.js');
+        if (!sessionCurrent(isSessionCurrent)) return AUTH_SESSION_CHANGED_RESULT;
+        /** @type {any[]} */
+        const receipts = [];
+        // EM-E8b B (U49): ONE pass over the member saves the tick's hook just walked, in the
+        // campaign's own order, so two ticks over one campaign mint in one order. Each save's
+        // own run is idempotent on ITS layer, so a member that already holds its newcomer
+        // mints nobody and reaches the re-derivation lane not at all.
+        for (const rosterSaveId of rosterSaveIds) {
+          if (!sessionCurrent(isSessionCurrent)) return AUTH_SESSION_CHANGED_RESULT;
+          receipts.push(
+            await editSlice.applyRosterDecreesAtTick(get, set, { saveId: rosterSaveId }),
+          );
+        }
+        persistUpdates = withMintedRosterState(get(), persistUpdates, receipts);
+      } catch { /* best-effort */ }
+      if (!sessionCurrent(isSessionCurrent)) return AUTH_SESSION_CHANGED_RESULT;
+    }
+    // ⭐ U76 — AND THEN THE RECORD OF IT (EM-C1b unit 2; design §2.6, §9, §11). The order
+    // is the act's own: the hook applied the decree, the roster half above carried out its
+    // world effect, and this files the line the realm reads. It runs BEFORE the one flush
+    // below for the reason EM-E8b A moved the roster half there — so the tick's writes are
+    // one durable moment — though `appendCampaignChronicle` also persists on its own, which
+    // is what makes it the single writer of `chronicles[]` rather than a helper.
+    //
+    // ⛔ THE WRITER IS THE CAMPAIGN SLICE'S OWN BOUND ACTION, reached off `get()` exactly as
+    // the two replays below reach theirs, so THERE IS NO NEW IMPORT EDGE from the domain
+    // hook into the store and no second writer of the chronicle. Best-effort and
+    // session-fenced like its neighbours: the record half never blocks the advance.
+    if (result && result.ok !== false) {
+      const chronicleEntries = await decreeChronicleEntriesForResult(result, campaignId, preTick);
+      if (chronicleEntries.length > 0 && typeof get().appendCampaignChronicle === 'function') {
+        for (const chronicleEntry of chronicleEntries) {
+          if (!sessionCurrent(isSessionCurrent)) return AUTH_SESSION_CHANGED_RESULT;
+          try { get().appendCampaignChronicle(campaignId, chronicleEntry); } catch { /* best-effort */ }
+        }
+      }
+    }
     if (!sessionCurrent(isSessionCurrent)) return AUTH_SESSION_CHANGED_RESULT;
     await flushWorldPulsePersist({
       result,
@@ -807,6 +1235,14 @@ export async function runResolveIntervalMajors({
   const contentRuntime = contentRuntimeFromCampaignBinding(
     simCampaign.contentBinding,
   );
+  // U72 (design §20.3) — THE RESUMED SEGMENT'S CATALOGUES ARE THE PAUSED ADVANCE'S OWN.
+  // THE CONSTRAINT IS THE SAME ONE THE EPOCH RE-THREAD OBEYS: a resume re-derives the
+  // paused tick and must land byte-identically, so it may not take a FRESH reading of the
+  // vocabulary. The fresh path composed its bag from the PRE-ADVANCE member clones, and the
+  // cursor parked exactly those (`pre.saves`), so reading them back reproduces that bag
+  // word for word. A legacy cursor that parked no saves falls back to the live clones —
+  // still resolution, still §20.3, and the only reading available on that shape.
+  const decreeCatalogues = await decreeCataloguesForSaves(pre.saves ?? simSaves);
   const resumeArgs = {
     campaign: simCampaign,
     saves: simSaves,
@@ -815,6 +1251,7 @@ export async function runResolveIntervalMajors({
     autoResolve: false,
     customContent: contentRuntime.customContent,
     advanceEpoch: epochTerm,
+    decreeCatalogues,
     resume: {
       interval: cursor.interval,
       ticksTotal: cursor.ticksTotal,

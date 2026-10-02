@@ -25,29 +25,28 @@ import {
 import {
   DEVOTION_BANDS, PULL_BANDS, SCARCITY_BANDS,
 } from '../../src/domain/worldPulse/beliefAxisSubjects.js';
-import { expectAbsentWithAnchor } from '../helpers/anchoredNegatives.js';
 
 const T = PACT_TRIGGER_TUNING;
 
 describe('the closed trigger vocabulary', () => {
-  test('is exactly five words, codepoint-frozen', () => {
+  test('is exactly six words, codepoint-frozen', () => {
+    // GR-5c adds `renegotiation` (SR-1, growth by R-24's ruling), at its codepoint place.
     expect(PACT_TRIGGERS).toEqual([
-      'faith_communion', 'migration_pressure', 'renewal', 'shared_threat', 'trade_demand',
+      'faith_communion', 'migration_pressure', 'renegotiation', 'renewal', 'shared_threat', 'trade_demand',
     ]);
     expect(Object.isFrozen(PACT_TRIGGERS)).toBe(true);
   });
 
-  test('`renewal` is a TOMBSTONE — in the vocabulary, out of the produced set', () => {
-    // The no-orphan-vocabulary law's shape: a word may exist ahead of its producer, but
-    // the two lists must DIFFER by exactly that word, so a reachability pin quantifying
-    // over the produced set cannot absorb a vocabulary word that nothing mints, and a
-    // vocabulary pin cannot absorb a producer that was never written.
-    expect(PACT_TRIGGERS_PRODUCED).toEqual(PACT_TRIGGERS.filter((t) => t !== 'renewal'));
-    expect(PACT_TRIGGERS_PRODUCED).toHaveLength(4);
-    expect(PACT_TRIGGERS).toContain('renewal');
-    // `trade_demand` is the anchor because it travels the SAME list: an emptied, renamed or
-    // re-shaped produced set takes it with it, so the exclusion below cannot go vacuous.
-    expectAbsentWithAnchor(PACT_TRIGGERS_PRODUCED, 'renewal', 'trade_demand', 'the produced set');
+  test('the tombstone is CURED: every word of the vocabulary has a producer (FPQ-33, GR-5c)', () => {
+    // The no-orphan-vocabulary law's shape: a word may exist ahead of its producer, and while
+    // it does the two lists DIFFER by exactly that word. GR-5b gave `renewal` its producer and
+    // GR-5c gives `renegotiation` one (both drafted by the renewal leaf, pactRenewal.js), so
+    // the produced set now equals the vocabulary (SR-1: re-recorded with the cause). A word
+    // minted later ahead of its producer reopens the difference, and this pin reds for it.
+    expect(PACT_TRIGGERS_PRODUCED).toEqual(PACT_TRIGGERS);
+    expect(PACT_TRIGGERS_PRODUCED).toHaveLength(6);
+    expect(PACT_TRIGGERS_PRODUCED).toContain('renewal');
+    expect(PACT_TRIGGERS_PRODUCED).toContain('renegotiation');
   });
 });
 

@@ -27,10 +27,15 @@ registerStep('powerEconomyReconcilePass', {
   mutates: ['powerStructure'],
   phase: 'power',
 }, (ctx) => {
+  // The runner hands the pins through the context under its reserved key; absent pins mean
+  // today's behaviour exactly. The same spelling `generatePopulation.js` and
+  // `assembleInstitutions.js` already carry.
+  const pins = ctx.__pins || null;
   const { beforeFactions } = reconcilePowerStructure(
     ctx.powerStructure,
     ctx.economicState,
     ctx.powerIntent,
+    { pins },
   );
   refreshPowerGenerationTraces(
     ctx,
@@ -42,6 +47,7 @@ registerStep('powerEconomyReconcilePass', {
     ctx.powerStructure,
     ctx.economicState,
     ctx.tier,
+    { pins },
   );
   return {};
 });

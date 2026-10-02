@@ -11,6 +11,9 @@ import { getPriorities, getTradeRouteFeatures, hasTeleportationInfra, evaluateWa
 import { priorityToCategory } from './prosperity.js';
 import { deriveFoodBalanceAnalysis, deriveSupplyRiskAnalysis } from './foodBalance.js';
 import { formatCount } from '../../domain/formatNumber.js';
+// A PRINT goes through the label seam, a match never does (domain/display/institutionDisplayName.js):
+// the sentences below name institutions to a reader, and a city's 'Bakers (5-15)' is its bakers.
+import { institutionDisplayName } from '../../domain/display/institutionDisplayName.js';
 import { deriveIsolationSupport } from '../isolationSupport.js';
 import {
   isMaterializedCustomContent,
@@ -31,9 +34,9 @@ const WATER_ROUTES = ['coastal', 'riverside'];
 
 
 // Tier-plausible institution availability — the SAME model assembleInstitutions
-// uses: a settlement of tier T draws only from institutionalCatalog[T]
-// (metropolis merges the city section in), and an entry whose own minTier sits
-// above T is skipped. Viability suggestions may only name institutions the
+// uses: a settlement of tier T draws only from institutionalCatalog[T] (every tier
+// block is complete since the urban-band registry, so no section is merged in), and
+// an entry whose own minTier sits above T is skipped. Viability suggestions may only name institutions the
 // settlement could actually generate at its tier — a thorp's grain gap reads
 // "Mill", never a hundred-item catalog dump with slave markets in it.
 const tierCatalogNameCache = new Map();
@@ -41,9 +44,7 @@ const tierCatalogNameCache = new Map();
 const catalogNamesAvailableAtTier = (tier) => {
   const t = TIER_ORDER.includes(tier) ? tier : 'village';
   if (tierCatalogNameCache.has(t)) return tierCatalogNameCache.get(t);
-  const sections = t === 'metropolis'
-    ? [institutionalCatalog.city || {}, institutionalCatalog.metropolis || {}]
-    : [institutionalCatalog[t] || {}];
+  const sections = [institutionalCatalog[t] || {}];
   const tierIdx = TIER_ORDER.indexOf(t);
   const names = sections.flatMap((section) =>
     Object.values(section).flatMap((group) =>
@@ -76,10 +77,29 @@ const MAX_CHAIN_SUGGESTIONS = 3;
 
 
 // buildViabilitySummary
-const buildViabilitySummary = (isViable, issues, warnings, plotHooks, foodBalance) => {
+//
+// ⛔ THE SENTENCE COUNTS THE LIST THE RECORD PUBLISHES, AND IT IS HANDED THAT LIST
+// RATHER THAN A POPULATION TO RE-DERIVE (ODQ §934.57, FIX-G1). It used to count
+// DEPENDENCY-severity rows across `[...issues, ...warnings]` while the record
+// published `dependencies` from `warnings` ALONE, so every DEPENDENCY a deriver
+// filed under `issues` was counted by the headline and absent from the list beneath
+// it. `foodBalance.js` has two such arms (Heavy / Severe Food Import Dependency, on
+// the deficitPercent > 40 branch of a connected non-road route), and on
+// `town|germanic|mountain|mountain_pass|civilized` the sentence said SIX beside a
+// list of FIVE. Measured over the 525-row golden corpus: 370 rows state the count,
+// exactly 1 disagreed, and the LIST was right on all 525 (the record's own second
+// counter, `metrics.dependencyCount`, agreed with it everywhere).
+//
+// The parameter is now the published list itself, not the warnings bucket, so the
+// two can no longer be spelled differently: the caller computes `dependencies` ONCE
+// and the publication, the metric and this sentence all read that one array. The
+// 571-574 note below still binds and is honoured — the summary must see dependency
+// warnings so a food-import dependency is never contradicted by a "self-sufficient"
+// headline. It was the `...issues` term that was wrong, never the warnings term.
+const buildViabilitySummary = (isViable, issues, dependencies, plotHooks, foodBalance) => {
   const criticalCount = issues.filter((i) => i.severity === SEVERITY.CRITICAL).length;
   const implausibleCount = issues.filter((i) => i.severity === SEVERITY.IMPLAUSIBLE).length;
-  const dependencyCount = [...issues, ...warnings].filter((i) => i.severity === SEVERITY.DEPENDENCY).length;
+  const dependencyCount = dependencies.length;
   const dailyNeed = Number(foodBalance?.dailyNeed) || 0;
   const uncoveredDeficit = Math.max(0, Number(foodBalance?.deficit) || 0);
   const rawDeficit = Math.max(uncoveredDeficit, Number(foodBalance?.rawDeficit) || 0);
@@ -146,7 +166,7 @@ const deriveResourceChainAnalysis = (institutions, terrain, nearbyResources, con
       suggestions.push({
         category: 'Resource Chain',
         title: `Opportunity: process ${resource}`,
-        description: `${resource} is available locally. Add ${reachable.slice(0, MAX_CHAIN_SUGGESTIONS).join(' or ')} to unlock higher-value exports.`,
+        description: `${resource} is available locally. Add ${reachable.slice(0, MAX_CHAIN_SUGGESTIONS).map(institutionDisplayName).join(' or ')} to unlock higher-value exports.`,
       });
     } else if (processingInsts.length > 0) {
       const missing = reachable
@@ -159,7 +179,7 @@ const deriveResourceChainAnalysis = (institutions, terrain, nearbyResources, con
       suggestions.push({
         category: 'Resource Chain',
         title: `Incomplete chain: ${resource}`,
-        description: `Processing ${resource} but missing ${missing.join(', ')} for the full chain.`,
+        description: `Processing ${resource} but missing ${missing.map(institutionDisplayName).join(', ')} for the full chain.`,
         impact: `Exports intermediate goods instead of final products (${outputs.map((o) => o.label || o).join(', ') || 'finished goods'}). Lower profit margins.`,
         suggestedFixes: [`Add ${missing.join(' and ')} to complete the production chain`],
       });
@@ -211,8 +231,8 @@ const deriveWaterDependencyAnalysis = (institutions, terrain, config) => {
         warnings.push({
           severity: SEVERITY.DEPENDENCY,
           category: 'Water Dependency',
-          title: `${inst.name}: requires water access`,
-          description: `${inst.name} requires ${waterNeed.description || 'water access'} but settlement has no river or port.`,
+          title: `${institutionDisplayName(inst.name)}: requires water access`,
+          description: `${institutionDisplayName(inst.name)} requires ${waterNeed.description || 'water access'} but settlement has no river or port.`,
           impact: 'Severely reduced productivity without water access.',
           suggestedFixes: alternatives.length ? alternatives : ['Establish a river or port trade route'],
         });
@@ -540,7 +560,7 @@ export const generateEconomicViability = (settlement, terrainType = null, nearby
           (isSieged
             ? `${critical.length} institution${critical.length > 1 ? 's' : ''} critically impaired by siege: `
             : `${critical.length} institution${critical.length > 1 ? 's' : ''} operating on stockpiles only (isolated trade): `) +
-          critical.map((d) => d.institution).join(', ') +
+          critical.map((d) => institutionDisplayName(d.institution)).join(', ') +
           '.',
       });
     if (vulnerable.length >= 3)
@@ -557,25 +577,28 @@ export const generateEconomicViability = (settlement, terrainType = null, nearby
   const criticalIssues = issues.filter((i) => i.severity === SEVERITY.CRITICAL);
   const isViable = criticalIssues.length === 0;
 
-  // Split warnings: dependency notes (normal supply chain) vs real structural issues
-  const dependencyWarnings = warnings.filter((w) => w.severity === SEVERITY.DEPENDENCY);
+  // Split warnings: dependency notes (normal supply chain) vs real structural issues.
+  // ONE dependency array, computed once and read by all three of its consumers below —
+  // the published list, the sentence that counts it and the metric that reports it. A
+  // second spelling here is what let the headline and the list disagree (FIX-G1 above).
+  const dependencies = sortBySeverity(warnings.filter((w) => w.severity === SEVERITY.DEPENDENCY));
   const structuralWarnings = warnings.filter((w) => w.severity !== SEVERITY.DEPENDENCY);
 
   return {
     viable: isViable,
     issues: sortBySeverity(issues),
     warnings: sortBySeverity(structuralWarnings), // real problems only
-    dependencies: sortBySeverity(dependencyWarnings), // supply chain notes (informational)
+    dependencies, // supply chain notes (informational)
     suggestions,
     plotHooks,
-    // The summary sees ALL warnings, including dependency warnings that are
-    // presented in their own collection below. Otherwise a food-import
-    // dependency can be correctly itemized and then contradicted one line
-    // later by an "economically self-sufficient" headline.
+    // The summary sees the dependency warnings that are presented in their own
+    // collection above. Otherwise a food-import dependency can be correctly
+    // itemized and then contradicted one line later by an "economically
+    // self-sufficient" headline.
     summary: buildViabilitySummary(
       isViable,
       issues,
-      warnings,
+      dependencies,
       plotHooks,
       foodAnalysis.foodBalance,
     ),
@@ -583,7 +606,7 @@ export const generateEconomicViability = (settlement, terrainType = null, nearby
       foodBalance: foodAnalysis.foodBalance,
       tradeAccess: cfg?.tradeRouteAccess || 'unknown',
       criticalIssueCount: criticalIssues.length,
-      dependencyCount: dependencyWarnings.length,
+      dependencyCount: dependencies.length,
       warningCount: structuralWarnings.length,
     },
   };

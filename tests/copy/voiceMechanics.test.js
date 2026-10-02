@@ -335,8 +335,8 @@ const AUTHORED_VOCABULARY_ALLOWLIST = Object.freeze({
     'Mercenary services — trained companies available for hire': { count: 1, why: 'primary-export band :628 — the mercenary-institution arm of the same militaryExport ladder.' },
     'Military services — garrison contracts and armed escort': { count: 1, why: 'primary-export band :629 — the lower-effectiveness arm of the same militaryExport ladder.' },
   }),
-  'src/generators/foodGenerator.js': Object.freeze({
-    'Deficit — Active Famine': { count: 1, why: 'food-security band :342 — byte-identical to the pool key at src/domain/display/stateProse/generalStateProse.js:266, which transcribes this producer and says so in its own docblock (:40, :255).' },
+  'src/data/bandLadders.js': Object.freeze({
+    'Deficit — Active Famine': { count: 1, why: 'the food-security band ladder FOOD_SECURITY_BANDS.famine :59 — the ladders\' one home since EM-R0d, and byte-identical to the pool key at src/domain/display/stateProse/generalStateProse.js:266, which transcribes this rung and says so in its own docblock (:40, :255).' },
   }),
 
   // ── THE TIER-2 HALF (LT41 car 2): THE EIGHT TRANSCRIBED DASHES ──────────────
@@ -359,7 +359,7 @@ const AUTHORED_VOCABULARY_ALLOWLIST = Object.freeze({
     'Subsistence — survival economy': { count: 1, why: 'COMPLEXITY_LABEL.SUBSISTENCE :135 — transcribes prosperity.js:314 byte for byte.' },
   }),
   'src/domain/display/stateProse/generalStateProse.js': Object.freeze({
-    'Deficit — Active Famine': { count: 1, why: 'the FOOD_POOL_OF key :266 — transcribes src/generators/foodGenerator.js:342 byte for byte, and the map\'s own docblock (:40, :255) names that producer line as its source.' },
+    'Deficit — Active Famine': { count: 1, why: 'the FOOD_POOL_OF key :266 — transcribes src/data/bandLadders.js :: FOOD_SECURITY_BANDS.famine byte for byte (the label\'s one home since EM-R0d; foodGenerator.js reads it through foodSecurityBandOf), and the map\'s own docblock (:40, :255) names that source.' },
     '—': { count: 2, why: 'the two `.split(\'—\')` DELIMITERS at :323 (safetyPoolKey) and :1728 (the Systems Health rung) — the separator they split on is composed by src/generators/safetyProfile.js:235 (`${strain} — ${condition}`). A parser argument, not copy: it burns WITH the producer, the same way Tier 3\'s six banked JSX dashes do.' },
   }),
 });
@@ -1005,7 +1005,7 @@ const AGNOSTIC_TELLS_DEFERRED = Object.freeze({
   'src/data/economicData.js :: spell-level scale':
     'The same institution key, in the economic table that prices it.',
   'src/data/servicesData.js :: spell-level scale':
-    'The three `spellcasting services (1st-Nth level)` LOCALE override SOURCES. MEASURED UNREACHABLE: the lookup is an exact lowercased key access (generators/services/institutionServices.js:111, display/institutionProfile.js:118) and no producer in src/ emits an institution by that name. Their honest disposition is DELETION in a dead-code car, not a rename that invents a differently-dead key.',
+    'The three `spellcasting services (1st-Nth level)` LOCALE override SOURCES. MEASURED UNREACHABLE: the lookup is an exact lowercased key access (src/generators/services/institutionServices.js :: getServicesForInstitution, display/institutionProfile.js:118) and no producer in src/ emits an institution by that name. Their honest disposition is DELETION in a dead-code car, not a rename that invents a differently-dead key.',
   'src/domain/display/institutionVocabulary.js :: spell-level scale':
     'The same institution key, twice, as a display-map key.',
 });

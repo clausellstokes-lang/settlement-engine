@@ -16,7 +16,7 @@
  * so this module never enters the lighting census's denominator.
  *
  * ⛔ TIER 1 NEEDS NO MODULE MOCK, AND THAT IS STRUCTURAL. `runPipeline(initialContext, rng,
- * options)` takes the root PRNG as an ARGUMENT (EM-P2 VF-2) and `pipeline.js:229` hands the
+ * options)` takes the root PRNG as an ARGUMENT (EM-P2 VF-2) and `pipeline.js :: runPipeline` hands the
  * object the root's `fork` returned to `setActiveRng` (VF-3), so a test-side RECURSIVE counting
  * proxy over the root sees every channel a step's own stream carries — the ambient
  * `kernel/rngContext.js` helpers included — because they are all the same `random()`. The MINT

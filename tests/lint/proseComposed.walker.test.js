@@ -1194,7 +1194,9 @@ describe('A13 — the PROVENANCE move, EXECUTABLE since the holder census landed
       culture: 'germanic',
       terrainOverride: 'hills',
     },
-    seed: 'rate-9-2',
+    // rate-9-2 -> rate-11-9 on 2026-09-30, with tests/fixtures/tasteTowns.js INTERESTED_TOWNS: the
+    // same-seed shift left rate-9-2's Town hall without a tax service (urban band, ODQ §934.86).
+    seed: 'rate-11-9',
   });
 
   it('⭐⭐ THE FAIL LIMB IS REACHABLE ON REAL INPUT: a citing variant whose holder this town has captured', () => {

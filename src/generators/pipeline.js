@@ -58,6 +58,39 @@ const _LEDGER_KEYS = new Set(['_traceClock', 'simulationTrace']);
 // scan is stated here BY NAME — a rule, not an accident of when it happens to be seeded.
 const _PINS_KEY = '__pins';
 
+// THE CHOOSERS A RECORD-BUILT BAG CAN NEVER CARRY. `GENERATION_TIER1`'s `recordPath` is `null` for
+// every step that provides one of these keys, which is the register's way of saying the value never
+// lands on the record: a bag built FROM a record cannot hold it, and counting it against that bag
+// refuses a re-derivation that is otherwise complete. So the partial-pin rule below does NOT COUNT a
+// transient chooser, and the step re-rolls it on its own stream exactly as an unpinned run does,
+// while every record-backed chooser the bag lacks is still a partial pin, refused by name.
+// The register is production-unreachable by its own law, so the set is declared here and
+// `tests/lint/transientChooserRegistry.walker.test.js` holds the two equal in both directions.
+// A transient chooser a caller DOES supply is still honoured: `chooseOrPin` is untouched.
+const _TRANSIENT_CHOOSERS = new Set([
+  'catalogForTier', 'categoryToggles', 'generationContentProfile', 'generationContext',
+  'goodsToggles', 'institutionToggles', 'neighbourEconBias', 'neighbourFacBias', 'neighbourProfile',
+  'noMagic', 'powerIntent', 'priorityMagicEffective', 'rawNeighbour', 'resolvedTerrain',
+  'servicesToggles', 'structural', 'threat', 'townPlus', 'tradeRoute',
+]);
+
+const _CHOOSER_RECORD_PATHS = new Map([
+  ['culture', 'record.config.culture'],
+  ['effectiveConfig', 'record.config'],
+  ['generationRepairs', 'record.generationCoherenceReceipt.repairs'],
+  ['magicLevel', 'record.config.magicLevel'],
+  ['nearbyResourceDefinitions', 'record.config.nearbyResourceDefinitions'],
+  ['nearbyResourceDefinitionsDepleted', 'record.config.nearbyResourceDefinitionsDepleted'],
+  ['nearbyResources', 'record.config.nearbyResources'],
+  ['nearbyResourcesCustom', 'record.config.nearbyResourcesCustom'],
+  ['nearbyResourcesDepleted', 'record.config.nearbyResourcesDepleted'],
+  ['nearbyResourcesNative', 'record.config.nearbyResources'],
+  ['nearbyResourcesNativeDepleted', 'record.config.nearbyResourcesNativeDepleted'],
+  ['settlement', 'record'],
+  ['stressTypes', 'record.config.stressTypes'],
+  ['terrainType', 'record.config.terrainType'],
+]);
+
 function _undeclaredWrites(step, before, ctx) {
   const declared = new Set([...(step.provides || []), ...(step.mutates || []), ...(step.scratch || []), ..._LEDGER_KEYS, _PINS_KEY]);
   const offenders = [];
@@ -144,6 +177,17 @@ export function getStepOrder() {
  */
 
 /**
+ * Consult the pins for one chooser. ⛔ It does NOT advance the stream when a pin is present:
+ * in pinned mode nothing draws where the record holds the output, which is what makes a
+ * pinned re-derive reproduce the record. Keyed by the RECORD PATH the chooser writes.
+ * @param {?Record<string, unknown>} pins @param {string} key @param {Function} draw
+ */
+export function chooseOrPin(pins, key, draw) {
+  if (pins && Object.prototype.hasOwnProperty.call(pins, key)) return pins[key];
+  return draw();
+}
+
+/**
  * Run the full pipeline. Edits re-run the WHOLE pipeline with the same seed
  * (see `settlementGenerateAction.generateSettlementAction`, whose `seedOverride`
  * argument replays the saved seed) — deterministic and correct. A step-level
@@ -174,9 +218,25 @@ export function runPipeline(initialContext, rng, options = {}) {
     ?? (typeof globalThis !== 'undefined' && globalThis.__PIPELINE_STRICT__)
     ?? false;
   // `null` reads as absent; anything that is not a plain object is a caller error.
-  const pins = options.pins ?? null;
+  let pins = options.pins ?? null;
   if (pins !== null && (typeof pins !== 'object' || Array.isArray(pins))) {
     throw new Error('Pipeline pins: options.pins must be a plain object');
+  }
+  // EM-R1: THE BAG IS CLONED ON ENTRY, AT THE RUNNER, ONCE, AND PER CHANNEL. A caller hands
+  // its own record in; without this, a mutating pass writes straight through the DM's stored
+  // objects (measured: the caller's record moved in 42 of 63 census rows). The clone is taken
+  // here, before `getStepOrder()` and outside every `setActiveRng` window, so no stream moves,
+  // and `pins === null` takes no clone at all, which is the goldens' protection by construction.
+  // TWO clones, one per channel the runner seeds (design section 22 ruling 6, read as a property
+  // of the CHANNEL): this one becomes the pristine bag at `_PINS_KEY` that every consult reads,
+  // and the context spread below takes its own, so `ctx.__pins[k]` never aliases `ctx[k]` and a
+  // consult placed at a mutator cannot read a mutated value as a held fact.
+  if (pins !== null) {
+    try {
+      pins = structuredClone(pins);
+    } catch (cloneError) {
+      throw new Error(`Pipeline pins: options.pins must be structured-cloneable: ${cloneError.message}`, { cause: cloneError });
+    }
   }
   const pinned = pins !== null && Object.keys(pins).length > 0;
   const stepOrder = getStepOrder();
@@ -184,7 +244,7 @@ export function runPipeline(initialContext, rng, options = {}) {
   // Accumulating context
   const ctx = pins === null
     ? { ...initialContext }
-    : { ...initialContext, ...pins, [_PINS_KEY]: pins };
+    : { ...initialContext, ...structuredClone(pins), [_PINS_KEY]: pins };
 
   for (const name of stepOrder) {
     const step = _steps.get(name);
@@ -192,7 +252,7 @@ export function runPipeline(initialContext, rng, options = {}) {
     // every one of them or none. (A DM's root edit is not a partial pin — the caller builds a
     // pin for every chooser from the record and then overrides a VALUE.)
     if (pinned) {
-      const choosers = step.provides || [];
+      const choosers = (step.provides || []).filter((k) => !_TRANSIENT_CHOOSERS.has(k));
       const supplied = choosers.filter(k => Object.prototype.hasOwnProperty.call(pins, k));
       if (supplied.length && supplied.length < choosers.length) {
         const missing = choosers.filter(k => !supplied.includes(k));
@@ -231,6 +291,18 @@ export function runPipeline(initialContext, rng, options = {}) {
       const patch = step.fn(ctx, stepRng);
       if (patch && typeof patch === 'object') {
         Object.assign(ctx, patch);
+        // EM-R1: A TAKEN PIN IS RE-CLONED AT THE MERGE, AND THAT IS WHAT KEEPS THE TWO CHANNELS
+        // APART. `chooseOrPin` returns the pin BY REFERENCE and stays exactly as landed, so a
+        // producer's patch would otherwise re-point `ctx[key]` at the very object `_PINS_KEY`
+        // holds, and the next in-place mutator would write through the held bag (measured: the
+        // entry clone alone leaves the bag corrupted in 56 of 63 census rows on the institution
+        // channel). Only a value that IS one of the bag's own objects is re-cloned, so the cost
+        // is one clone per held key per run and nothing runs at all in the unpinned path.
+        if (pins !== null) {
+          for (const key of Object.keys(patch)) {
+            if (Object.prototype.hasOwnProperty.call(pins, key) && ctx[key] === pins[key]) ctx[key] = structuredClone(ctx[key]);
+          }
+        }
       }
       if (before) {
         const undeclared = _undeclaredWrites(step, before, ctx);
@@ -266,6 +338,10 @@ export function getStepMeta() {
       reads: step.reads || [],
       mutates: step.mutates || [],
       scratch: step.scratch || [],
+      transient: (step.provides || []).filter((k) => _TRANSIENT_CHOOSERS.has(k)),
+      recordPaths: Object.fromEntries((step.provides || [])
+        .filter((k) => _CHOOSER_RECORD_PATHS.has(k))
+        .map((k) => [k, _CHOOSER_RECORD_PATHS.get(k)])),
       readsVersion: step.readsVersion || {},
       phase: step.phase || 'unknown',
     });

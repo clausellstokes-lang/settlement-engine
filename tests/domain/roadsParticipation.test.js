@@ -337,6 +337,31 @@ describe('participation chokepoint — the .npcs-reader inventory ratchet (§8 c
     // captive seat-holder's standing (and bonds) persist through captivity exactly
     // like the credibility-prune idiom. No roster read exists in the file.
     'src/domain/worldPulse/gratitudeBonds.js',
+    // FP TR-2 THE MERCHANT HOUSE (dark, no mount): ONE roster read, `castHouseFactor`, which
+    // indexes the house faction's members to cast the factor for one act and STORES NO PERSON —
+    // the id rides the returned receipt and the ledger never holds it. It applies the ONE
+    // participation chokepoint itself (`roads/state.js :: isOffStage`, paired with the one
+    // status that chokepoint leaves to its consumers, derived from NPC_UNAVAILABLE_STATUSES), so
+    // it answers the same over the raw roster and over the participation view: the gate filters
+    // the same people twice, never differently. Participation-DEPENDENT by intent — a shelved or
+    // captive member cannot run a house's errand — and correctly so. Dark by default
+    // (`merchantHousesEnabled` is virtual, absent from DEFAULT_SIMULATION_RULES and every
+    // preset) and with NO src/ caller at this wave: `advanceHouses` returns its input world
+    // before the roster is read. Dispositioned by the TR-2 cure (SR-1's cause: the reader the
+    // wave landed, named in the commit that owes it).
+    'src/domain/worldPulse/houseLedger.js',
+    // FP IN-2 (lane FP-I, 2026-09-24): the lure's MOUTHPIECE cast (`castLureMouthpiece`) reads
+    // the liar's PARTICIPATION view — the snapshot item's settlement, which the master gate
+    // already filtered (via-snapshot, protected) — and asks the ONE chokepoint, `isOffStage`,
+    // per person besides, pairing `dead` itself as the chokepoint's consumers do; a captive or a
+    // shelved soul never fronts a commissioned lie. It writes nothing onto any person.
+    'src/domain/worldPulse/infoLure.js',
+    // FP IN-3 (lane FP-I3, 2026-09-24): the witch-hunt's ACCUSED cast (`castAccused`) reads the
+    // home's PARTICIPATION view (the snapshot item's settlement, via-snapshot, protected) and asks
+    // the ONE chokepoint, `isOffStage`, per person besides, pairing `dead` itself as the
+    // chokepoint's consumers do: a captive or a shelved soul is never the one named. It writes
+    // nothing onto any person; the accusation is a reputation, never a fate.
+    'src/domain/worldPulse/counterIntelSweep.js',
     // D-2 (fold batch 3): the statecraft MOUTHPIECE draw reads the participation view (a
     // hostage cannot front a court's bluff — via-snapshot, protected); the credibility PRUNE
     // scan reads the UNTOUCHED item.save roster (the roadsKernel idiom) so a captive's
@@ -458,6 +483,17 @@ describe('participation chokepoint — the .npcs-reader inventory ratchet (§8 c
     // NPCs without a display name, so the fallback is unreachable today and the raw base keeps
     // it that way.
     'src/domain/worldPulse/npcVerdictPulse.js',
+    // FP GR-5b THE RENEWAL'S NEW OATH (dark unless `treatyRenewalEnabled` is lit and a renewal
+    // is accepted): ONE roster read, `onStageSettlementOf`, the cast GR-1's re-stamp picks from
+    // at a `renewed` act, and it STORES NO PERSON beyond the stamp GR-1's own writer lands. It
+    // applies the ONE participation chokepoint itself (`roads/state.js :: isOffStage`, paired
+    // with the status that chokepoint leaves to its consumers, derived from
+    // NPC_UNAVAILABLE_STATUSES by the houseLedger.js idiom), so it answers the same over the raw
+    // roster and over the participation view the answer step hands it in the live pulse: the
+    // gate filters the same people twice, never differently. Participation-DEPENDENT by intent
+    // (R-20): a holder who is off stage or dead does not swear the renewed oath. Dispositioned by
+    // GR-5b in the commit that lands the reader (SR-1's cause).
+    'src/domain/worldPulse/pactRenewal.js',
     'src/domain/worldPulse/partyImpact.js',
     'src/domain/worldPulse/pulseKernel.js',
     'src/domain/worldPulse/religionLegitimacy.js',

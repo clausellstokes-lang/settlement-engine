@@ -237,7 +237,7 @@ function EconomicFlowsSection({ chains, institutionalServices = [], incomeSource
                   {svc.exportable && <span style={{fontSize:chromeFontSize(FS.micro, mobile),color:swatch.success,background:swatch['#E8F5EC'],padding:'0 5px'}}>Export</span>}
                   <span style={{fontSize:chromeFontSize(FS.micro, mobile),fontWeight:800,color:swatch.inkMag3,background:swatch['#EDE3CC'],padding:'0 5px',marginLeft:'auto'}}>○ Operational</span>
                 </div>
-                <div style={{fontSize:chromeFontSize(FS.xs, mobile),color:swatch.inkMag2}}>
+                <div style={{fontSize:proseFontSize(FS.xs, mobile),color:swatch.inkMag2}}>
                   <span style={{color:MUTED,marginRight:4}}>Via:</span>{svc.institutions.map(institutionDisplayName).join(' · ')}
                 </div>
                 <div style={{fontSize:chromeFontSize(FS.xs, mobile),color:swatch.inkMag3,marginTop:1}}>{svc.output}</div>

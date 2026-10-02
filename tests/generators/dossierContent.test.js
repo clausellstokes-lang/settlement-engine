@@ -25,14 +25,9 @@ import { setActiveRng, clearActiveRng } from '../../src/kernel/rngContext.js';
 import { createPRNG } from '../../src/kernel/prng.js';
 import { collectSeedFailures, expectNoSeedFailures } from '../helpers/seedFailures.js';
 
-const mergeCat = (a, b) => {
-  const m = {};
-  for (const [c, i] of Object.entries(a || {})) m[c] = { ...i };
-  for (const [c, i] of Object.entries(b || {})) m[c] = { ...(m[c] || {}), ...i };
-  return m;
-};
-const resolveTierCatalog = (t) =>
-  t === 'metropolis' ? mergeCat(institutionalCatalog.city, institutionalCatalog.metropolis) : institutionalCatalog[t] || {};
+// Every tier block is complete since the urban-band registry (2026-09-30): the metropolis
+// block lists its own rows, so resolving a key never merges the city block in.
+const resolveTierCatalog = (t) => institutionalCatalog[t] || {};
 
 describe('INSTITUTION_DESC_VARIANTS — walker + register laws', () => {
   const entries = Object.entries(INSTITUTION_DESC_VARIANTS);

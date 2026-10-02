@@ -155,8 +155,10 @@ describe('WW-D — the manifest row', () => {
     });
     expect(entry.dials.length).toBeLessThanOrEqual(4);
     expect(entry.dials.map((/** @type {{ key: string }} */ d) => d.key)).toEqual(['assetId', 'buyerId']);
-    expect(realmVerbs()).toHaveLength(16);
-    expect(executableRealmVerbs()).toHaveLength(14);
+    // 16/14 at WR-10's wiring wave; GR-2b adds PROPOSE_PACT (the chair's second amendment of
+    // 2026-09-23, standing ruling SR-1), so the census reads 17/15.
+    expect(realmVerbs()).toHaveLength(17);
+    expect(executableRealmVerbs()).toHaveLength(15);
     expect(Object.keys(REALM_MANIFEST)).toContain('TRANSFER_SOVEREIGNTY');
   });
 

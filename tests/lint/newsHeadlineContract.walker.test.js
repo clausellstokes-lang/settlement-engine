@@ -47,6 +47,21 @@ const outcome = (extra = {}) => ({
   proposalPayload: { kind: 'government_change' },
   ...extra,
 });
+// THE PLANTED CHALLENGE (2026-10-01 (the urban band + the druid rulings, ODQ §934.86 and its addendum 2; the urban-band chair)): the re-dealt year no
+// longer reaches a government challenge (queued|faction_government_challenge left the corpus, and its rewrite rule is now
+// known-inert), so the gap A4 and A6 prove is PLANTED in pulse 2's selected lane (its old witness was 2/selectedOutcomes/0),
+// in the producer's own spelling.
+const CHALLENGE_HEADLINE = 'Military/Guard may press a challenge to the government';
+const plantedChallenge = (rows) => {
+  // APPENDED at the end of pulse 2's selected lane, so every corpus row stays exactly as measured and no other rule
+  // loses an occurrence; returns the rows and the planted row's location.
+  const planted = clone(rows);
+  const lane = planted.filter((row) => row.pulseIndex === 2 && row.field === 'selectedOutcomes');
+  if (lane.length === 0 || lane.length >= 24) throw new Error('the planted challenge has no room in pulse 2\'s selected lane');
+  planted.splice(planted.indexOf(lane.at(-1)) + 1, 0,
+    { rootOrdinal: lane[0].rootOrdinal, pulseIndex: 2, field: 'selectedOutcomes', outcomeIndex: lane.length, headline: CHALLENGE_HEADLINE });
+  return { rows: planted, location: `2/selectedOutcomes/${lane.length}` };
+};
 const addressEntry = (impactKind = 'ordinary') => ({ fields: { kind: 'applied', impactKind, headline: 'The deed is done.', summary: 'The deed now stands.' } });
 
 let baseline;
@@ -100,7 +115,7 @@ describe('complete Wizard News address and headline rewrite contract', () => {
     expect(overlapFields.consequenceOutcomes.filter(isStateOnlyOutcome)).toHaveLength(12);
   });
 
-  it('A2 freezes all 100 address rows and their canonical digest', () => {
+  it('A2 freezes all 88 address rows and their canonical digest', () => {
     expect(compareNewsAddressRows(addressRows, baseline.addressTotality.rows)).toBe(true);
     expect(addressRowsSha256(addressRows)).toBe(baseline.addressTotality.rowsSha256);
     // T8 · SHIFT (§858 + §860): 106 → 102 identities over 53 → 51 homes. The two homes that leave
@@ -112,7 +127,12 @@ describe('complete Wizard News address and headline rewrite contract', () => {
     // ⭐ `distinctValues` HOLDS AT 393 THROUGH ALL OF THAT while occurrences rise 536 → 544: the
     // vocabulary is the same size, dealt to different homes. Provenance and the five-arm control
     // are recorded once, at news-headline-contract.mjs's ADDRESS_TOTALS.
-    expect(baseline.addressTotality.totals).toEqual({ homes: 50, fields: 2, identities: 100, prospectiveIdentities: 12, indicativeIdentities: 88, distinctValues: 393, occurrences: 544 });
+    // FP BATCH 3 (2026-09-24): 50/2/100/12/88/393/544 → 51/2/102/13/89/395/546 — one new home (a new address, prospective),
+    // ATTRIBUTED BY BISECT to CURE-PEACE-1 U1 (c9b24fe51); see scripts/lib/news-headline-contract.mjs's RE-RECORDED block.
+    // 2026-10-01 (the urban band + the druid rulings, ODQ §934.86 and its addendum 2; the urban-band chair): 51/2/102/13/89/395/546 → 44/2/88/14/74/385/530,
+    // eleven homes out and four in, named at news-voice-contract.mjs's RE-RECORDED block.
+    // 2026-10-02 (THE VOICE PROGRAM wave 1): every prospective identity turns indicative; homes, fields and identities hold.
+    expect(baseline.addressTotality.totals).toEqual({ homes: 44, fields: 2, identities: 88, prospectiveIdentities: 0, indicativeIdentities: 88, distinctValues: 392, occurrences: 530 });
   });
 
   it('A3 freezes both raw lanes and all 26 exact rewrite counts', () => {
@@ -130,9 +150,11 @@ describe('complete Wizard News address and headline rewrite contract', () => {
     expect(deriveNewsAddressRows(nullable).map((row) => row.home)).toEqual([
       'applied|null', 'applied|null', 'applied|ordinary', 'applied|ordinary',
     ]);
+    // 2026-10-01 (the urban band + the druid rulings, ODQ §934.86 and its addendum 2; the urban-band chair): the corpus's null-impactKind entries were the
+    // eight web-war campaign beats (minted 4, complete 4), and the re-dealt year mints no web-war campaign, so the corpus carries
+    // NONE. The null-collision law stays pinned by the constructed `nullable` rows just above.
     const nullEntries = reconstruction.entries.filter((entry) => entry.fields.impactKind === null);
-    expect(nullEntries).toHaveLength(8);
-    expect(Object.fromEntries([...new Set(nullEntries.map((entry) => entry.fields.kind))].sort().map((kind) => [kind, nullEntries.filter((entry) => entry.fields.kind === kind).length]))).toEqual({ webwar_campaign_complete: 4, webwar_campaign_minted: 4 });
+    expect(nullEntries).toHaveLength(0);
     expect(() => deriveNewsAddressRows([])).toThrow();
     expect(() => deriveNewsAddressRows([addressEntry(), { ...addressEntry(), fields: { ...addressEntry().fields, headline: 'The deed may happen.' } }])).toThrow(/mixed voice/);
     for (const impactKind of [undefined, '', '   ', 3, true, [], {}, 'null', 'bad|token']) {
@@ -158,33 +180,47 @@ describe('complete Wizard News address and headline rewrite contract', () => {
     ]) {
       const rows = clone(baseline.addressTotality.rows); mutate(rows); sortAddressRows(rows); expect(() => compareNewsAddressRows(rows, baseline.addressTotality.rows)).toThrow();
     }
-    const rewriteRows = clone(baseline.rewriteLiveness.rows); rewriteRows.find((row) => row.occurrences > 0).occurrences += 1;
+    // Since the Voice Program wave 1 (2026-10-02) every rule is inert, so the moved count is CONSTRUCTED on the first
+    // row (a valid 1/1 liveness, so the refusal below is the comparison's, not the row validator's).
+    const rewriteRows = clone(baseline.rewriteLiveness.rows); rewriteRows[0].occurrences += 1; rewriteRows[0].distinctValues = Math.max(1, rewriteRows[0].distinctValues);
     expect(() => compareHeadlineRewriteRows(rewriteRows, baseline.rewriteLiveness.rows)).toThrow();
     const withoutChallenge = APPLIED_HEADLINE_REWRITES.filter(([pattern]) => pattern.source !== '\\bmay press a challenge to the government\\b');
-    expect(() => measureHeadlineRewriteLiveness(rawRows, withoutChallenge)).toThrow(/uncovered 2\/selectedOutcomes\/0/);
+    const challenge = plantedChallenge(rawRows);
+    expect(() => measureHeadlineRewriteLiveness(challenge.rows, withoutChallenge)).toThrow(`uncovered ${challenge.location}: ${CHALLENGE_HEADLINE}`);
     const capBreach = clone(rawRows); const selectedIndex = capBreach.findLastIndex((row) => row.field === 'selectedOutcomes' && row.pulseIndex === 0); capBreach[selectedIndex].outcomeIndex = 24;
     expect(() => rawHeadlineLivenessOf(capBreach)).toThrow(/cap 24/);
   });
 
-  it('A5 keeps exactly nine scoped written reasons on exactly the zero-count rules', () => {
+  it('A5 keeps a scoped written reason on exactly the zero-count rules (all 26 since the Voice Program wave 1)', () => {
     expect(baseline.rewriteLiveness.knownInert).toEqual(KNOWN_INERT_HEADLINE_REWRITES);
     expect(finalLiveness.rows.filter((row) => row.occurrences === 0).map((row) => `${row.source}|${row.flags}|${row.replacement}`)).toEqual(KNOWN_INERT_HEADLINE_REWRITES.map((row) => `${row.source}|${row.flags}|${row.replacement}`));
     const moved = clone(baseline); moved.rewriteLiveness.knownInert[0].reason += ' changed'; expect(() => validateNewsHeadlineBaseline(moved)).toThrow();
     const blank = clone(baseline); blank.rewriteLiveness.knownInert[0].reason = ' '; expect(() => validateNewsHeadlineBaseline(blank)).toThrow();
     const missing = clone(baseline); missing.rewriteLiveness.knownInert.pop(); expect(() => validateNewsHeadlineBaseline(missing)).toThrow();
-    const active = baseline.rewriteLiveness.rows.find((row) => row.occurrences > 0); const quarantined = clone(baseline); quarantined.rewriteLiveness.knownInert[0] = { source: active.source, flags: active.flags, replacement: active.replacement, reason: 'Active rules cannot enter quarantine.' }; sortInertRows(quarantined.rewriteLiveness.knownInert); expect(() => validateNewsHeadlineBaseline(quarantined)).toThrow();
+    // Since the Voice Program wave 1 (2026-10-02) no rule is active in the corpus, so the active rule is CONSTRUCTED: the
+    // challenge rule made live exactly as the planted challenge row makes it, while it stays in quarantine.
+    const quarantined = clone(baseline);
+    const live = quarantined.rewriteLiveness.rows.find((row) => row.source === '\\bmay press a challenge to the government\\b');
+    live.occurrences = 1; live.distinctValues = 1;
+    expect(quarantined.rewriteLiveness.knownInert.some((row) => row.source === live.source), 'the constructed active rule must still sit in quarantine').toBe(true);
+    expect(() => validateNewsHeadlineBaseline(quarantined)).toThrow();
     const added = clone(baseline); added.rewriteLiveness.knownInert.push({ source: 'new', flags: '', replacement: 'new', reason: 'New inert rows require authority.' }); sortInertRows(added.rewriteLiveness.knownInert); expect(() => validateNewsHeadlineBaseline(added)).toThrow();
   });
 
   it('A6 closes the sole live challenge gap with the exact producer twin', () => {
     const withoutChallenge = APPLIED_HEADLINE_REWRITES.filter(([pattern]) => pattern.source !== '\\bmay press a challenge to the government\\b');
-    const pre = analyzeHeadlineRewriteLiveness(rawRows, withoutChallenge);
+    const planted = plantedChallenge(rawRows);
+    const pre = analyzeHeadlineRewriteLiveness(planted.rows, withoutChallenge);
     // TE36 (ODQ §271): 16/9 → 15/10, carrying A3's single crossing through this derived
     // 25-rule scenario. `rules` stays 25 and the gap below is unchanged, so the challenge
     // rule this arm exists to isolate is untouched — only `may fall` moved sides, exactly
     // once, in both the full registry and this one-rule-short twin.
-    expect({ rules: pre.totals.rules, activeRules: pre.totals.activeRules, inertRules: pre.totals.inertRules, overlaps: pre.overlaps.length, indicativeMatches: pre.indicativeMatches.length }).toEqual({ rules: 25, activeRules: 15, inertRules: 10, overlaps: 0, indicativeMatches: 0 });
-    expect(pre.gaps).toEqual([{ location: '2/selectedOutcomes/0', headline: 'Military/Guard may press a challenge to the government' }]);
+    // 2026-10-02 (THE VOICE PROGRAM wave 1): 25/15/10 → 25/0/25. No live producer authors a "may" headline, so the
+    // derived 25-rule twin is all inert too; the planted challenge below is what keeps this arm non-vacuous.
+    expect({ rules: pre.totals.rules, activeRules: pre.totals.activeRules, inertRules: pre.totals.inertRules, overlaps: pre.overlaps.length, indicativeMatches: pre.indicativeMatches.length }).toEqual({ rules: 25, activeRules: 0, inertRules: 25, overlaps: 0, indicativeMatches: 0 });
+    expect(pre.gaps).toEqual([{ location: planted.location, headline: CHALLENGE_HEADLINE }]);
+    // and the full registry closes it: the twin is the rule that covers the planted spelling, and nothing else does.
+    expect(analyzeHeadlineRewriteLiveness(planted.rows, APPLIED_HEADLINE_REWRITES).gaps).toEqual([]);
     const did = FACTION_VERB_PHRASES.faction_government_challenge.did;
     expect(APPLIED_HEADLINE_REWRITES.find(([pattern]) => pattern.source === '\\bmay press a challenge to the government\\b')?.[1]).toBe(did);
     expect(newsEntryForOutcome(outcome(), 7, 'proposal').headline).toBe(outcome().headline);
@@ -218,7 +254,9 @@ describe('complete Wizard News address and headline rewrite contract', () => {
 
   it('A8 fails closed on duplicate, overlapping, indicative, and third-lane inputs', () => {
     expect(() => measureHeadlineRewriteLiveness(rawRows, [...APPLIED_HEADLINE_REWRITES, APPLIED_HEADLINE_REWRITES[0]])).toThrow(/duplicate/);
-    expect(() => measureHeadlineRewriteLiveness(rawRows, [...APPLIED_HEADLINE_REWRITES, [/\bmay\b/, 'acts']])).toThrow(/overlap/);
+    // Since the Voice Program wave 1 no corpus headline says "may", so the overlap is shown on the PLANTED challenge row,
+    // which both the challenge rule and the bare /may/ rule match.
+    expect(() => measureHeadlineRewriteLiveness(plantedChallenge(rawRows).rows, [...APPLIED_HEADLINE_REWRITES, [/\bmay\b/, 'acts']])).toThrow(/overlap/);
     const indicative = clone(rawRows); indicative[0].headline = 'mayless'; expect(() => measureHeadlineRewriteLiveness(indicative, [[/mayless/, 'x']])).toThrow(/indicative/);
     const third = clone(rawRows); third[0].field = 'consequenceOutcomes'; expect(() => rawHeadlineLivenessOf(third)).toThrow(/persisted liveness lane/);
     const duplicate = clone(rawRows); duplicate.splice(1, 0, clone(duplicate[0])); expect(() => rawHeadlineLivenessOf(duplicate)).toThrow();

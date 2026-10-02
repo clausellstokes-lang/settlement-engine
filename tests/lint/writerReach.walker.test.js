@@ -283,7 +283,12 @@ describe('writer-with-no-reader ratchet: the frozen register', () => {
     // dark-by-construction because the living-content dial shipped at 1, the dial
     // is at 2 now, and clause D-dial says what to do about that in the failure it
     // throws. The register's own header carries the retirement.
-    expect(WRITER_DARK_REGISTER.length).toBe(5);
+    // FIVE BECAME SIX (2026-09-24, CURE-PEACE-1): CURE-PEACE-1 adds `supersessionReason on proposals`,
+    // engine-internal, the row its docket retirement writer (FP-17) owes.
+    // SIX BECAME TEN (2026-10-02, the Voice Program wave 1, ODQ §934.88): `appliedHeadline` on candidates, selected,
+    // autoApplied and outcome, engine-internal. Every producer now writes the deed DONE beside the deed UNDER WAY,
+    // and the feed curation's appliedHeadlineFor is its one reader.
+    expect(WRITER_DARK_REGISTER.length).toBe(10);
     expect(liveEvidence.map((row) => row.identity).sort())
       .toEqual(WRITER_DARK_REGISTER.map((row) => row.identity).sort());
     for (const row of liveEvidence) {
@@ -459,7 +464,10 @@ describe('writer-with-no-reader ratchet: the live judgment', () => {
     // they were never in it — the arithmetic has to say so or it would drift by two.
     const registeredAndDark = WRITER_DARK_REGISTER
       .filter((row) => cohort.some((entry) => entry.identity === row.identity));
-    expect(registeredAndDark.length).toBe(4);
+    // CURE-PEACE-1 adds `supersessionReason on proposals` (registered AND dark): four became five.
+    // The Voice Program wave 1 (2026-10-02, ODQ §934.88) adds the four `appliedHeadline` rows, all written on every
+    // world and so all in the dark cohort: five became nine.
+    expect(registeredAndDark.length).toBe(9);
     expect(baseline.darkUnregistered.length).toBe(cohort.length - registeredAndDark.length);
     expect(reviewableDark(cohort).length).toBe(baseline.reviewableDarkCount);
     expect(reviewableDark(cohort).length).toBeLessThan(cohort.length);

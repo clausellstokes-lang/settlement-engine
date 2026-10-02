@@ -325,7 +325,7 @@ export function houseChannelCompetence(houses, channel) {
 // ── The Herald channel read (a section is not a channel) ─────────────────────
 
 /**
- * THE SECTION TO CHANNEL MAP. The Herald files a news item under one of six SECTIONS; a
+ * THE SECTION TO CHANNEL MAP. The Herald files a news item under one of seven SECTIONS; a
  * brokerage is competent in one of six CHANNELS, and the two vocabularies are not the
  * same list. This map is the join, and it is deliberately a table rather than a prose
  * scan of the headline (the Herald's own filing law).
@@ -341,6 +341,9 @@ export const HERALD_SECTION_CHANNEL = Object.freeze({
   war: 'war',
   faith: 'faith',
   trade: 'trade',
+  // FP IN-5. The knowledge desk's beats are courts' beliefs, lies and hunts, read by the same
+  // correspondents who read a court, so they price as politics like the civic lane below.
+  knowledge: 'politics',
   // The realm's civic lane. A ruling, a docket order and a general realm matter are all
   // read by the same correspondents who read a court, so they price as politics.
   politics: 'politics',

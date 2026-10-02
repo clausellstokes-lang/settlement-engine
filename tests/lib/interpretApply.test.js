@@ -7,13 +7,24 @@
  *   PIN B (PER-ITEM ISOLATION): one command failure is recorded in `failed`, and the
  *     rest still land (the review is per-item; so is the apply).
  *   PIN C (LANDED-ONLY LOG): the §3 apply record covers what LANDED, not what was proposed.
+ *   PIN D (EM-D4, THE SURVEYOR BRIDGE): the review's accepted proposals stage as
+ *     `addedBy: 'surveyor'` decrees with their `surveyorCredit` through EM-C1's OWN
+ *     `stage`, and the consent barrier is rendered in EM-C2's OWN guard vocabulary.
+ *     Both producers are IMPORTED here rather than re-typed (the anti-vacuity rule): the
+ *     bridge injects its writer and re-spells its two vocabulary words, so a renamed
+ *     export or a withdrawn kind reds in this file instead of drifting silently.
  */
 import { beforeEach, describe, it, expect, vi } from 'vitest';
 import {
+  consentGuardsFor,
   mergeCanonEventRecoveryResult,
   runInterpretApply,
+  stageSurveyorDecrees,
+  surveyorDecreeId,
 } from '../../src/lib/intent/interpretApply.js';
 import { clearSessionCommandJournal } from '../../src/application/commands/sessionCommandRuntime.js';
+import { DECREE_AUTHORS, stage } from '../../src/domain/edit/registry.js';
+import { GUARD_KINDS, GUARD_OFFERS } from '../../src/domain/edit/guards.js';
 
 const party = (o = {}) => ({ family: 'party_impact', opType: 'resolve_stressor', params: { stressorId: 's1' }, label: 'required', ...o });
 const canon = (o = {}) => ({ family: 'canon_event', opType: 'KILL_NPC', params: { npcId: 'n1' }, label: 'inferred', ...o });
@@ -279,5 +290,143 @@ describe('interpretApply executor — landed-only log (PIN C)', () => {
     });
     expect(out.unroutable).toEqual([{ opType: 'SET_LAW' }]);
     expect(out.applied).toEqual([]);
+  });
+});
+
+describe('interpretApply — the Surveyor bridge (PIN D, EM-D4)', () => {
+  const REVIEW = 'review:9f1b0a2c-0000-4000-8000-000000000001';
+  const STAMP = '2026-09-23T09:30:00.000Z';
+  const CREDIT = 5;
+
+  /** The review's own output shape: `accepted` rows carry their review index. */
+  const bridgeIo = (over = {}) => ({
+    accepted: [{ index: 0, op: canon() }, { index: 1, op: party() }],
+    blocked: [],
+    ops: [canon(), party()],
+    registry: [],
+    reviewRef: REVIEW,
+    surveyorCredit: CREDIT,
+    orderedAt: STAMP,
+    stageDecree: stage,
+    ...over,
+  });
+
+  it('EM-D4 (1): an accepted proposal stages a decree with addedBy surveyor and its surveyorCredit through EM-C1 own stage, folded so the registry is that leaf\'s value and never a second writer\'s', () => {
+    const out = stageSurveyorDecrees(bridgeIo());
+
+    expect(out.registry.map((entry) => entry.addedBy),
+      'ARCH §2 Decree.addedBy: BOTH entries are the Surveyor\'s, and the word is the'
+      + ' registry\'s own third author rather than a string this bridge invented')
+      .toEqual([DECREE_AUTHORS[2], DECREE_AUTHORS[2]]);
+    expect(out.registry.map((entry) => entry.surveyorCredit),
+      'and each carries the credit the compile that proposed it cost — the caller\'s'
+      + ' number, quoted by the panel from config/pricing.js, never re-priced here')
+      .toEqual([CREDIT, CREDIT]);
+    expect(out.registry.map((entry) => [entry.status, entry.orderIndex, entry.orderedAt]),
+      'PENDING, at the end of the DM\'s list, with the CALLER\'s stamp: the bridge reads'
+      + ' no clock (HZ-STAMP) and mints no order of its own')
+      .toEqual([['pending', 0, STAMP], ['pending', 1, STAMP]]);
+    expect(out.registry.map((entry) => entry.op),
+      'the compiled op rides verbatim as { type, target, payload }; target is null because'
+      + ' a compiled proposal names no EntityRef — its payload addresses its own subject')
+      .toEqual([
+        { type: 'KILL_NPC', target: null, payload: { npcId: 'n1' } },
+        { type: 'resolve_stressor', target: null, payload: { stressorId: 's1' } },
+      ]);
+    expect(out.staged.map((row) => [row.proposalIndex, row.opType]),
+      'and the receipt names what landed, by the review index the DM decided on')
+      .toEqual([[0, 'KILL_NPC'], [1, 'resolve_stressor']]);
+
+    // THE ONE-WRITER PROOF: the same two entries reached by calling EM-C1's `stage` by
+    // hand are byte-equal to the bridge's fold, so the bridge adds no key, drops none,
+    // and cannot be a second writer of `decrees` dressed as one.
+    const byHand = stage(
+      stage([], { type: 'KILL_NPC', target: null, payload: { npcId: 'n1' } },
+        { id: surveyorDecreeId(REVIEW, 0), orderedAt: STAMP, addedBy: 'surveyor', surveyorCredit: CREDIT }),
+      { type: 'resolve_stressor', target: null, payload: { stressorId: 's1' } },
+      { id: surveyorDecreeId(REVIEW, 1), orderedAt: STAMP, addedBy: 'surveyor', surveyorCredit: CREDIT },
+    );
+    expect(JSON.stringify(out.registry)).toBe(JSON.stringify(byHand));
+  });
+
+  it('EM-D4 (1b): every accepted proposal stages, including one the dispatcher calls unroutable, and a retry of one review re-derives the same ids so stage refuses the duplicates', () => {
+    const unroutable = { family: 'ruleset_change', opType: 'SET_LAW', params: {} };
+    const first = stageSurveyorDecrees(bridgeIo({
+      accepted: [{ index: 0, op: canon() }, { index: 2, op: unroutable }],
+      ops: [canon(), party(), unroutable],
+    }));
+    expect(first.staged.map((row) => row.opType),
+      'the registry is the DM\'s list of what the table decided, not the dispatcher\'s list'
+      + ' of what it can land today (design §3); binding the event catalogues into the'
+      + ' decree vocabulary is EM-E6\'s row')
+      .toEqual(['KILL_NPC', 'SET_LAW']);
+
+    const retry = stageSurveyorDecrees(bridgeIo({
+      accepted: [{ index: 0, op: canon() }, { index: 2, op: unroutable }],
+      ops: [canon(), party(), unroutable],
+      registry: first.registry,
+    }));
+    expect(retry.registry.length, 'a second Apply of ONE review adds nothing: the ids are'
+      + ' derived from the review artifact, and stage refuses an id already in the registry')
+      .toBe(2);
+    expect(retry.staged, 'and the receipt says so rather than claiming a second landing').toEqual([]);
+  });
+
+  it('EM-D4 (2): consent renders as a guard kind\'s offer — one Guard per blocked proposal, its kind a GUARD_KINDS member and every offer a GUARD_OFFERS member, addressed to the entry it would become', () => {
+    const out = stageSurveyorDecrees(bridgeIo({
+      accepted: [{ index: 0, op: canon() }],
+      blocked: [{ index: 1, reason: 'needs_consent' }],
+      ops: [canon(), canon({ opType: 'EXPOSE_CORRUPTION', protectedFlags: ['canon_identity'] })],
+    }));
+
+    expect(out.guards.length, 'one guard for the one blocked proposal').toBe(1);
+    const [guard] = out.guards;
+    expect(GUARD_KINDS.includes(guard.kind),
+      'THE KIND IS EM-C2\'s OWN: consent is a thing that must be true FIRST, so it wears the'
+      + ' prerequisite kind; a withdrawn or renamed kind reds here rather than drifting')
+      .toBe(true);
+    expect(guard.kind).toBe('prerequisite');
+    expect(guard.offers.filter((offer) => !GUARD_OFFERS.includes(offer)),
+      'and every offer is a member of the seven design §2.7/§2.7a declare — this is the full'
+      + ' offender list').toEqual([]);
+    expect([...guard.offers], 'the DM\'s own hand, then the explicit tick; proceeding on a'
+      + ' consent guard IS the consent, which is why the barrier is not weakened by carrying'
+      + ' design §2.7\'s never-refuse offer').toEqual(['self', 'proceed']);
+    expect(guard.entryId, 'the guard addresses the decree the blocked proposal WOULD become,'
+      + ' so consenting stages that exact id and the guard never re-points')
+      .toBe(surveyorDecreeId(REVIEW, 1));
+    expect(guard.message, 'the herald\'s voice, naming the verb at stake')
+      .toMatch(/^EXPOSE_CORRUPTION is protected — /);
+    expect(out.registry.length, 'and a BLOCKED proposal stages nothing: the barrier is'
+      + ' reviewInterpretation\'s, and this bridge renders it rather than judging it again')
+      .toBe(1);
+    expect(Object.keys(guard).sort(),
+      'the Guard EM-C2 mints, key for key, so a registry page cannot tell a consent guard'
+      + ' from an engine one').toEqual([
+      'entryId', 'fulfil', 'id', 'kind', 'message', 'offers', 'overridden', 'relatedEntryId', 'ruleId',
+    ]);
+  });
+
+  it('EM-D4 (4): the review artifact is the decree\'s identity and its shape is untouched — two reviews of one text give different ids, a malformed blocked row is skipped, and the bridge refuses without a writer, an artifact or a stamp', () => {
+    const later = stageSurveyorDecrees(bridgeIo({ reviewRef: 'review:9f1b0a2c-0000-4000-8000-000000000002' }));
+    // anchored: the two ids above are both non-empty strings from the same accepted op, so a
+    // vacuous read would have to produce two equal ids, which is the very thing refuted.
+    expect(later.staged[0].id).not.toBe(surveyorDecreeId(REVIEW, 0));
+    expect(surveyorDecreeId(REVIEW, 0), 'the artifact is carried verbatim into the id, so the'
+      + ' compile that proposed an entry is readable off the entry').toBe(`decree:${REVIEW}:0`);
+
+    expect(consentGuardsFor([{ reason: 'needs_consent' }, null, 7], { reviewRef: REVIEW, ops: [] }),
+      'design §9\'s tie-break: a row with no review index is skipped at the narrowest scope'
+      + ' that can skip it, never guessed at').toEqual([]);
+
+    const registry = [];
+    for (const missing of [{ stageDecree: null }, { reviewRef: null }, { orderedAt: null }]) {
+      const out = stageSurveyorDecrees(bridgeIo({ registry, ...missing }));
+      expect(out.registry, 'each is the caller\'s to supply, and a decree minted without one'
+        + ' would carry a made-up identity or a made-up time').toBe(registry);
+      expect(out.staged).toEqual([]);
+    }
+    expect(stageSurveyorDecrees().staged, 'and the bridge is TOTAL: no argument at all is an'
+      + ' empty fold, never a throw').toEqual([]);
   });
 });

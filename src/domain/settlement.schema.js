@@ -273,7 +273,7 @@ export const FIELD_ALIASES = Object.freeze({
  *
  * @property {Service[]} [services]
  *   ⛔ DECLARED, NEVER WRITTEN — and that is a MEASUREMENT, not a suspicion. No step in
- *   the generation pipeline writes this key: `assembleSettlement.js:130` writes
+ *   the generation pipeline writes this key: `assembleSettlement.js :: the availableServices key` writes
  *   `availableServices` and the assembled record carries no `services` at all. Re-taken
  *   over the thirty settlements the estate scan walks (seeds `estate-<tier>-0` …
  *   `estate-<tier>-4` across six tiers, culture `germanic`, terrain `grassland`, road

@@ -234,13 +234,61 @@ describe('the covering array and its constraint manifest', () => {
     // composition; this census was met at the composed-tip proof by the landing chair, one
     // landing after SEAT-78's was met the same way. The registry the mint site can enumerate
     // (TE-GUARDS-1) is still the cure.
-    expect(census.virtual.length).toBe(35);
+    // 35 -> 36 at FP TR-2 (lane FP-D, 2026-09-23): `merchantHousesEnabled`, MEASURED by calling
+    // `flagDomainCensus` with this suite's own arguments before the literals moved: virtual 36,
+    // union 93, governed 25 and ungoverned 32 unmoved, nonBoolean 13, overlap empty.
+    // 36 -> 37 at FP IN-2 (lane FP-I, 2026-09-24; SR-1): IN-2 adds `infoLureEnabled`, MEASURED by
+    // calling `flagDomainCensus` with this suite's own arguments before the literals moved:
+    // virtual 37, union 94, governed 25 and ungoverned 32 unmoved, nonBoolean 13, overlap empty.
+    // 36 -> 37 at FP GR-6 (lane FP-B2, 2026-09-24): `mediationGeneralizedEnabled`, MEASURED by
+    // calling `flagDomainCensus` with this suite's own arguments before the literals moved: virtual
+    // 37, union 94, governed 25 and ungoverned 32 unmoved, nonBoolean 13, overlap empty.
+    // LIT-0 (2026-09-24): this arm closes IDENTICALLY with a register key lit in a preset, because a
+    // lit key is enumerated once, by the register, and never again by `ungoverned`; the lit-state
+    // proof is the next arm, which drives the census over a lit copy of the live table.
+    // 36 -> 37 at FP TR-3 (lane FP-D2, 2026-09-24): `believedMarketsEnabled`, MEASURED by calling
+    // `flagDomainCensus` with this suite's own arguments before the literals moved: virtual 37,
+    // union 94, governed 25 and ungoverned 32 unmoved, nonBoolean 13, overlap empty; the key is
+    // absent from DEFAULT_SIMULATION_RULES and from every preset spread (SR-1). Re-measured at the
+    // FP integration pick (the chair, 2026-09-24): the figure below is the tip's own census.
+    // 37 → 38 at the FP integration pick (the chair, 2026-09-24): TR-3 and IN-2 each measured 37 on a 36-key
+    // tree; the tip carries both mints (SR-1, the union; re-measured by this run).
+    // 38 → 39 at the FP integration pick: GR-6's virtual mint, the third tonight (SR-1, the union; re-measured by this run).
+    // 38 -> 39 at FP IN-4 commit 1 (lane FP-I2, 2026-09-24; J-INA-4, SR-1): `intelTradeEnabled`, the
+    // invisible key declared, MEASURED by calling `flagDomainCensus` with this suite's own arguments
+    // before the literals moved: virtual 39, union 96, governed 25 and ungoverned 32 unmoved,
+    // nonBoolean 13, overlap empty. The key was in NO arm before (absent from
+    // DEFAULT_SIMULATION_RULES and from every preset spread, and the census enumerates the register,
+    // never the engine's reads), so it enters the union through the virtual arm alone.
+    // 39 → 40 at the FP integration pick: IN-4/1's declared key, the fourth tonight (SR-1, the union; re-measured by this run).
+    // 39 → 40 at FP IN-3 (lane FP-I3, 2026-09-24; SR-1): `counterIntelEnabled`, measured by this run.
+    // 40 → 41 at the FP integration pick: IN-3's virtual mint, the fifth tonight (SR-1, the union; re-measured by this run).
+    // 41 → 42 at the FP integration pick: IN-4/2's virtual mint, the sixth tonight (SR-1, the union; re-measured by this run).
+    // 42 → 43 at FP CW-1 (lane fp/cw-1, 2026-09-24; SR-1): `cascadeGovernorEnabled`, the virtual mint,
+    // in no rules surface, so it enters the union through the virtual arm alone.
+    expect(census.virtual.length).toBe(43);
+    // 39 -> 40 at FP IN-4 commit 2 (lane FP-I2, 2026-09-24; SR-1): `reputationRaceEnabled`, MEASURED
+    // by calling `flagDomainCensus` with this suite's own arguments on the IN-4 tree: virtual 40,
+    // union 97, governed 25 and ungoverned 32 unmoved, nonBoolean 13, overlap empty.
     expect(census.overlap).toEqual([]);
     // 85 -> 86 at the WAR landing (§876): the same coupled-union key, same re-measure.
     // 86 -> 87 at ENC-3 (§893): the virtual mint above, moving in lockstep.
     // 87 -> 88 at SEAT-78 (§900): the virtual mint above, moving in lockstep.
     // 88 -> 92 at the LIGHTING landing (§901): the four virtual mints above, moving in lockstep.
-    expect(census.union.length).toBe(92);
+    // 92 -> 93 at FP TR-2: the virtual mint above, moving in lockstep.
+    // 93 -> 94 at FP TR-3: the virtual mint above, moving in lockstep.
+    // 93 -> 94 at FP IN-2: the virtual mint above, moving in lockstep.
+    // 94 → 95 at the FP integration pick: both virtual mints, in lockstep.
+    // 95 → 96 at the FP integration pick: GR-6's mint, in lockstep.
+    // 96 → 97 at the FP integration pick: IN-4/1's key, in lockstep.
+    // 96 → 97 at FP IN-3: the virtual mint above, moving in lockstep.
+    // 97 → 98 at the FP integration pick: IN-3's key, in lockstep.
+    // 98 → 99 at the FP integration pick: IN-4/2's key, in lockstep.
+    // 99 → 100 at FP CW-1: the virtual mint above, moving in lockstep.
+    expect(census.union.length).toBe(100);
+    // 93 -> 94 at FP GR-6: the virtual mint above, moving in lockstep.
+    // 95 -> 96 at FP IN-4 commit 1: the virtual mint above, moving in lockstep.
+    // 96 -> 97 at FP IN-4 commit 2: the virtual mint above, moving in lockstep.
     expect(census.governed.length + census.ungoverned.length + census.virtual.length).toBe(census.union.length);
     // 57 of 82 sit outside the normalizer's fail-closed coercion — the measured content of
     // "the normalizer is NOT the oracle", and the reason the manifest had to be minted. It
@@ -249,8 +297,89 @@ describe('the covering array and its constraint manifest', () => {
     // 61 -> 62 at ENC-3 (§893): likewise virtual, so it lands outside the normalizer.
     // 62 -> 63 at SEAT-78 (§900): likewise virtual, so it lands outside the normalizer.
     // 63 -> 67 at the LIGHTING landing (§901): four virtual keys, all outside the normalizer.
-    expect(census.union.length - census.governed.length).toBe(67);
+    // 67 -> 68 at FP TR-2: likewise virtual, so it lands outside the normalizer.
+    // 68 -> 69 at FP TR-3: likewise virtual, so it lands outside the normalizer.
+    // 68 -> 69 at FP IN-2: likewise virtual, so it lands outside the normalizer.
+    // 69 → 70 at the FP integration pick: both virtual keys, outside the normalizer.
+    // 70 → 71 at the FP integration pick: GR-6's key, outside the normalizer.
+    // 71 → 72 at the FP integration pick: IN-4/1's key, outside the normalizer.
+    // 71 → 72 at FP IN-3: likewise virtual, so it lands outside the normalizer.
+    // 72 → 73 at the FP integration pick: IN-3's key, outside the normalizer.
+    // 73 → 74 at the FP integration pick: IN-4/2's key, outside the normalizer.
+    // 74 → 75 at FP CW-1: likewise virtual, so it lands outside the normalizer.
+    expect(census.union.length - census.governed.length).toBe(75);
+    // 68 -> 69 at FP GR-6: likewise virtual, so it lands outside the normalizer.
+    // 70 -> 71 at FP IN-4 commit 1: likewise virtual, so it lands outside the normalizer.
+    // 71 -> 72 at FP IN-4 commit 2: likewise virtual, so it lands outside the normalizer.
     expect(census.nonBoolean.length).toBe(13);
+  });
+
+  it('LIT-0 — a register key a preset LIGHTS is enumerated ONCE, by the register, and the flag domain does not move', () => {
+    // ⛔ THE DEFECT (LIT-1's map, §3a; J-EM-16, the lit law, LGT-C2 `432ff6441` the precedent): the census
+    // was fed the REGISTER as its virtual arm and read every preset boolean the defaults do not govern
+    // as `ungoverned`, so the day a register key lit it was claimed TWICE. One FP key lit in the four
+    // world-alive presets measured `overlap` 0 -> 1 and a sum of 94 against a union of 93; all eighteen
+    // measured 0 -> 18. Lighting is a property of the PRESET, never a second enumeration.
+    const KEY = 'faithUnseatingEnabled';
+    const WORLD_ALIVE = ['realistic_regional', 'dramatic_campaign', 'living_realm', 'full_simulation'];
+    expect(ENGINE_GATED_VIRTUAL_RULE_KEYS).toContain(KEY);
+    expect(WORLD_ALIVE.filter((id) => SIMULATION_RULE_PRESETS[id])).toEqual(WORLD_ALIVE);
+    // The copies are built FROM the live table with KEY first removed everywhere, so this arm reads the
+    // same whether or not a lighting unit has since lit KEY for real — it must never become the
+    // tripwire it exists to retire.
+    /** @param {boolean} value @param {string[]} ids */
+    const tableWith = (value, ids) => Object.fromEntries(Object.entries(SIMULATION_RULE_PRESETS).map(([id, entry]) => {
+      /** @type {Record<string, unknown>} */
+      const rules = { ...entry.rules };
+      delete rules[KEY];
+      if (ids.includes(id)) rules[KEY] = value;
+      return [id, { ...entry, rules }];
+    }));
+    /** @param {Record<string, { rules: Record<string, unknown> }>} presets */
+    const censusOf = (presets) => flagDomainCensus({
+      defaults: DEFAULT_SIMULATION_RULES, presets, virtualKeys: ENGINE_GATED_VIRTUAL_RULE_KEYS,
+    });
+    const darkTable = tableWith(true, []);
+    // anchored: SK.U4's order, the fixture's own shape first — the dark copy declares KEY nowhere, and
+    // the lit copies below are asserted to declare it, so the comparison is dark against lit.
+    expect(Object.values(darkTable).filter((entry) => KEY in entry.rules)).toEqual([]);
+    const dark = censusOf(darkTable);
+    // The live table's census IS the dark copy's, in either lighting state of KEY: lighting moves no arm.
+    expect(liveCensus()).toEqual(dark);
+    const states = [
+      ['lit true in the four world-alive presets', tableWith(true, WORLD_ALIVE)],
+      // Any BOOLEAN is a declaration (deriveDormantRuleKeys reads it the same way), so the WR-9a
+      // declared-false shape must be counted once as well.
+      ['declared false in the ceiling alone', tableWith(false, ['full_simulation'])],
+    ];
+    for (const [label, presets] of states) {
+      // The copy really does declare KEY — without this the loop would re-measure the dark table.
+      expect(Object.values(presets).filter((entry) => KEY in entry.rules).length, label).toBeGreaterThan(0);
+      const census = censusOf(presets);
+      // anchored: the virtual arm is asserted to hold KEY exactly once on the next line.
+      expect(census.overlap, label).toEqual([]);
+      expect(census.virtual.filter((key) => key === KEY), label).toEqual([KEY]);
+      // anchored: `ungoverned` is asserted equal to the dark census's own arm on the line after this.
+      expect(census.ungoverned, label).not.toContain(KEY);
+      expect(census.ungoverned, label).toEqual(dark.ungoverned);
+      expect(census.governed, label).toEqual(dark.governed);
+      expect(census.virtual, label).toEqual(dark.virtual);
+      // The same set IN THE SAME ORDER: the lit key keeps its register position, so the factors the
+      // covering array varies — and therefore its rows — are identical in both states.
+      expect(census.union, label).toEqual(dark.union);
+      expect(varyingFactors(census), label).toEqual(varyingFactors(dark));
+      expect(census.governed.length + census.ungoverned.length + census.virtual.length, label)
+        .toBe(census.union.length);
+    }
+    // ⛔ THE OVERLAP ARM IS NOT BLINDED BY THE CURE: a register key that enters DEFAULT_SIMULATION_RULES
+    // is governed AND registered — the double claim that is still real, because such a key is no
+    // longer virtual — and it is reported.
+    const leaked = flagDomainCensus({
+      defaults: { ...DEFAULT_SIMULATION_RULES, [KEY]: false },
+      presets: SIMULATION_RULE_PRESETS,
+      virtualKeys: ENGINE_GATED_VIRTUAL_RULE_KEYS,
+    });
+    expect(leaked.overlap).toEqual([KEY]);
   });
 
   it('all-on is recast as the MAXIMAL-LAWFUL row, and all-off stays the dark control', () => {

@@ -25,6 +25,8 @@ import {
   RETIRED_EXEMPTION_RETIREMENT_BASELINE_SCHEMA,
   RETIRED_BANK_FENCE_BASELINE_SCHEMA,
   RETIRED_RELATIONSHIPS_MOUNT_BASELINE_SCHEMA,
+  RETIRED_DOMAIN_READER_BASELINE_SCHEMA,
+  RETIRED_EDIT_MODE_READERS_BASELINE_SCHEMA,
   RETIRED_EXACT_BASELINE_SCHEMA,
   validateSchema3Baseline,
   RETIRED_FILTERED_LEAF_BASELINE_SCHEMA,
@@ -49,6 +51,8 @@ import {
   validateSchema20Baseline,
   validateSchema21Baseline,
   validateSchema22Baseline,
+  validateSchema23Baseline,
+  validateSchema24Baseline,
 } from '../../scripts/lib/observed-shape-baseline.mjs';
 import {
   digestOf,
@@ -333,7 +337,20 @@ describe('observed-shape schema-3 baseline envelope', () => {
     // and NO row is added — `crossSettlementConflicts on settlement` reaches zero addresses
     // and leaves the register. The bank does NOT move (61/40), which is the fence's second
     // exercise: 21 proved it catches a growth, 22 proves it does not mistake a MOVE for one.
-    expect(BASELINE_SCHEMA).toBe(22);
+    // ⭐ SCHEMA 23 (2026-09-23, EM-C4b / EM-E1 / EM-F1, judgment 273, under the SAME
+    // ODQ §934.16 ruling rung 22 spent). Schema 22's envelope and tag law UNCHANGED,
+    // re-governed to a register that ADMITS THE EDIT MODE'S SAVE-TIME READERS: four NEW rows
+    // at `kind on settlement` (the phantom counterparty's discriminant, minted by
+    // `mintPhantom`) and `decrees on settlement` (the decree registry, assigned by
+    // `commitRegistry` in the store). BOTH identities are DECLARED, which takes the roster
+    // EIGHT -> TEN — the first growth since 11 and the first ever of two — and, because the
+    // roster is keyed by IDENTITY, tags the one ordinary `decrees on settlement` row the
+    // estate already carried. The bank therefore goes 61/40 -> 69/45, the fence's third
+    // exercise and its first over a ROSTER growth.
+    // ⭐ SCHEMA 24: THE URBAN BAND'S CORPUS RE-DEAL (2026-10-01, ODQ §934.86 and its addendum 2): schema 23's envelope, tag law and ten-identity roster UNCHANGED, re-governed to a register that admits 53 ordinary rows the re-dealt AO-0 year exposes and shrinks one; nothing is declared and the bank holds at 69/45.
+    expect(BASELINE_SCHEMA).toBe(24);
+    expect(RETIRED_EDIT_MODE_READERS_BASELINE_SCHEMA).toBe(23);
+    expect(RETIRED_DOMAIN_READER_BASELINE_SCHEMA).toBe(22);
     expect(RETIRED_RELATIONSHIPS_MOUNT_BASELINE_SCHEMA).toBe(21);
     expect(RETIRED_BANK_FENCE_BASELINE_SCHEMA).toBe(20);
     expect(RETIRED_EXEMPTION_RETIREMENT_BASELINE_SCHEMA).toBe(19);
@@ -576,6 +593,22 @@ function validSchema20Baseline_fixture() {
 function validSchema21Baseline_fixture() {
   const baseline = validSchema7Baseline();
   baseline.schema = RETIRED_RELATIONSHIPS_MOUNT_BASELINE_SCHEMA;
+  return baseline;
+}
+
+/** The RETIRED schema-22 envelope, pinned to its own LITERAL number for the reason the
+ *  schema-10 through schema-21 fixtures above record. */
+function validSchema22Baseline_fixture() {
+  const baseline = validSchema7Baseline();
+  baseline.schema = RETIRED_DOMAIN_READER_BASELINE_SCHEMA;
+  return baseline;
+}
+
+/** The RETIRED schema-23 envelope, pinned to its own LITERAL number for the reason the
+ *  schema-10 through schema-22 fixtures above record. */
+function validSchema23Baseline_fixture() {
+  const baseline = validSchema7Baseline();
+  baseline.schema = RETIRED_EDIT_MODE_READERS_BASELINE_SCHEMA;
   return baseline;
 }
 
@@ -836,13 +869,26 @@ describe('observed-shape schema-7 bank-by-rule envelope', () => {
     // is paired with a fixture rather than with `live`. `live` belongs to 22 now.
     const relationshipsMount = validSchema21Baseline_fixture();
     expect(validateSchema21Baseline(relationshipsMount)).toBe(relationshipsMount);
-    expect(validateSchema22Baseline(live)).toBe(live);
+    // ⭐ 22 IS RETIRED at the schema-23 rung and now validates its OWN literal, so it too
+    // is paired with a fixture rather than with `live`. `live` belongs to 23 now.
+    const domainReader = validSchema22Baseline_fixture();
+    expect(validateSchema22Baseline(domainReader)).toBe(domainReader);
+    // ⭐ 23 IS RETIRED at the schema-24 rung and now validates its OWN literal, so it too
+    // is paired with a fixture rather than with `live`. `live` belongs to 24 now.
+    const editModeReaders = validSchema23Baseline_fixture();
+    expect(validateSchema23Baseline(editModeReaders)).toBe(editModeReaders);
+    expect(validateSchema24Baseline(live)).toBe(live);
+    expect(() => validateSchema23Baseline(live)).toThrow(/is not schema 23/);
+    expect(() => validateSchema24Baseline(editModeReaders)).toThrow(/is not schema 24/);
+    expect(() => validateSchema24Baseline(domainReader)).toThrow(/is not schema 24/);
     expect(() => validateSchema19Baseline(live)).toThrow(/is not schema 19/);
     expect(() => validateSchema20Baseline(live)).toThrow(/is not schema 20/);
     expect(() => validateSchema21Baseline(live)).toThrow(/is not schema 21/);
     expect(() => validateSchema21Baseline(bankFence)).toThrow(/is not schema 21/);
-    expect(() => validateSchema22Baseline(exemptionRetirement)).toThrow(/is not schema 22/);
+    expect(() => validateSchema22Baseline(live)).toThrow(/is not schema 22/);
     expect(() => validateSchema22Baseline(relationshipsMount)).toThrow(/is not schema 22/);
+    expect(() => validateSchema23Baseline(exemptionRetirement)).toThrow(/is not schema 23/);
+    expect(() => validateSchema23Baseline(domainReader)).toThrow(/is not schema 23/);
     expect(() => validateSchema7Baseline(baseline)).toThrow(/is not schema 7/);
     expect(() => validateSchema8Baseline(retired)).toThrow(/is not schema 8/);
     // ⚠ EVERY ADJACENT PAIR IS PINNED IN BOTH DIRECTIONS FOR ONE REASON: FOUR

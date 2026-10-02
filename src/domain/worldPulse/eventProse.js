@@ -41,7 +41,6 @@
  */
 import { ROADS_NEWS } from '../../data/roadsProse.js';
 import { fnv1a32, pickLine } from './proseSelection.js';
-import { humanizeContextSignature } from '../display/humanizeEngineTokens.js';
 import {
   DECREE_DEFAULT_RECEIPTS,
   HEGEMONY_RECEIPTS,
@@ -144,11 +143,19 @@ export const NPC_GOAL_NEWS = Object.freeze({
       (x) => `${x.name} keeps the same character, but new circumstances now demand different aims.`,
       (x) => `New conditions in the settlement have turned ${x.name}'s effort toward another end.`,
     ],
+    // CURE-P1 U3 (FPQ-23) — THE REGISTER LEAVES THE PAGE. `previous` / `next` are npcAgency's
+    // goal-branch KEY (contextForNpc's `tier|relationship|conditions`: archetype ids SORTED and
+    // CAPPED AT THREE, duplicates kept), an instrument's register. Voiced, it read as a token
+    // list with duplicates, and its diff is lossy: a second copy of one archetype pushes a live
+    // condition out of the three-slot window, so even a changed-tokens telling would say a
+    // famine passed that is still there. The Herald prints this line as the events desk's
+    // "Origin:", so it now states the true cause in words; the two keys stay on the record
+    // (metadata.previousContext / nextContext, npcPatch.contextSignature) for the instruments.
     contextReason: [
-      (x) => `Context changed from ${humanizeContextSignature(x.previous)} to ${humanizeContextSignature(x.next)}.`, // canonical
-      (x) => `The settlement context moved from ${humanizeContextSignature(x.previous)} to ${humanizeContextSignature(x.next)}.`,
-      (x) => `${x.name}'s recorded circumstances changed from ${humanizeContextSignature(x.previous)} to ${humanizeContextSignature(x.next)}.`,
-      (x) => `A new context, ${humanizeContextSignature(x.next)}, displaced the old footing, ${humanizeContextSignature(x.previous)}.`,
+      (x) => `The settlement's circumstances have changed since ${x.name}'s aims were set.`, // canonical
+      (x) => `The settlement around ${x.name} is no longer the one those aims were made for.`,
+      (x) => `${x.name}'s old aims answered circumstances the settlement has since left behind.`,
+      (x) => `A shift in the settlement's footing overtook the aims ${x.name} had set.`,
     ],
     personalityReason: [
       (x) => `Personality remains anchored by ideal ${x.ideal} and flaw ${x.flaw}.`, // canonical
@@ -208,13 +215,16 @@ export const CALAMITY_TITLES = Object.freeze([
   (x) => `The Great Calamity of ${x.name} in the year ${x.year}`,
 ]);
 
-/** @type {readonly ProseVariant[]} strike summary — interp {name, ruin, deaths}; contains "calamity". */
+/** @type {readonly ProseVariant[]} strike summary — interp {name, ruin, deaths}; contains "calamity".
+ *  CURE-P1 U2 (FPQ-22): `ruin` is a CLAUSE and `deaths` is a quantity PHRASE, both already in
+ *  words (calamityKernel.js :: strikeNews), so each telling sets them as a list after a colon and
+ *  adds no qualifier of its own ("about several hundred" would read twice approximate). */
 export const CALAMITY_SUMMARIES = Object.freeze([
-  (x) => `A calamity has struck ${x.name}: ${x.ruin}, about ${x.deaths} dead, and many more take to the roads.`, // canonical
-  (x) => `Calamity has come to ${x.name}: ${x.ruin}, near ${x.deaths} dead, and the survivors scatter to the roads.`,
-  (x) => `A great calamity has fallen on ${x.name}. The toll is ${x.ruin}, some ${x.deaths} dead, and many take flight along the roads.`,
-  (x) => `${x.name} lies broken by calamity: ${x.ruin}, about ${x.deaths} dead, and the roads fill with those who remain.`,
-  (x) => `Calamity has undone ${x.name}: ${x.ruin}, roughly ${x.deaths} dead, and the living take what they can to the roads.`,
+  (x) => `A calamity has struck ${x.name}: ${x.ruin}, ${x.deaths} dead, and many more take to the roads.`, // canonical
+  (x) => `Calamity has come to ${x.name}: ${x.ruin}, ${x.deaths} dead, and the survivors scatter to the roads.`,
+  (x) => `A great calamity has fallen on ${x.name}. The toll: ${x.ruin}, ${x.deaths} dead, and many take flight along the roads.`,
+  (x) => `${x.name} lies broken by calamity: ${x.ruin}, ${x.deaths} dead, and the roads fill with those who remain.`,
+  (x) => `Calamity has undone ${x.name}: ${x.ruin}, ${x.deaths} dead, and the living take what they can to the roads.`,
 ]);
 
 /** @type {readonly ProseVariant[]} strike reason — bucket-neutral, geography-of-exposure. */

@@ -85,10 +85,15 @@ import { setSpatialLedger, dropSpatialLedger } from '../spatial/distanceRead.js'
 // historic names are re-exported at the bottom, so callers and the battery are
 // untouched. `streamInstallmentFraction` is the stream terms' per-tick draw.
 import {
-  treatyLedgerOf, demilitarizationCapFor, treatyBlocksWar, occupationHoldFor,
-  streamInstallmentFraction,
+  treatyLedgerOf, demilitarizationCapFor, treatyBlocksWar, occupationHoldFor, streamInstallmentFraction,
 } from './treatyEnforcement.js';
 import { CURRENT_TREATY_TICKS_PER_YEAR } from './treatyClock.js';
+// GR-6 — MEDIATION GENERALIZED. Two net-zero call sites and nothing else: the head folds the war
+// that did not happen onto the succession answer (the order whose window closed unopened, with a
+// broker between the pair), and PASS 2's strain accrual softens where a broker stands between a
+// fraying pact's parties. The line this import costs is paid by the import above, folded onto
+// one line; the head stays at its measured ceiling. Dark ⇒ both return their input verbatim.
+import { mediatedStrainAccrual, withBrokeredWars } from './mediationPressure.js';
 // THE ONE ORIENTATION READER (chair ruling CR-WR10-G) — who gives, who receives, and
 // separately who OWES. WR-10 mints treaties with a seller and a buyer and no war in
 // them, so "the loser" stopped being a field this file may read directly.
@@ -176,7 +181,7 @@ import {
   explicitCongressPlan, persistedCoalitionPeaceContext,
 } from './peaceTermsCoalition.js';
 import {
-  accrueBetrayal, accrueMediationTrust, accrueStrainResentment,
+  accrueBetrayal, accrueMediationTrust,
   markCoalitionSeparatePeace, nudgeCompelledAlliance,
 } from './peaceTermsOverlay.js';
 import {
@@ -315,7 +320,7 @@ export function advanceTreaties({ snapshot, worldState, settlementUpdates = [], 
   // caller's untouched state. A disavowal writes through the family's declared rewriter, so
   // `prevLedger` (pre-answer) and the seed below (post-answer) differ and `changed` is true
   // — which matters, because the pulse discards this mover's state when it says otherwise.
-  let { worldState: workingState, newsEntries: successionBeats } = resolveSuccessionQuestionsWithOpeningVoice(worldState, tick, now);
+  let { worldState: workingState, newsEntries: successionBeats } = withBrokeredWars(resolveSuccessionQuestionsWithOpeningVoice(worldState, tick, now), { snapshot, graph: Array.isArray(graph?.edges) ? graph : snapshot?.regionalGraph, tick, now });
   const liveLedger = treatyLedgerOf(workingState) || {};
   const edges = (graph?.edges && Array.isArray(graph.edges) ? graph.edges : null)
     || (Array.isArray(snapshot?.regionalGraph?.edges) ? snapshot.regionalGraph.edges : []);
@@ -787,7 +792,7 @@ export function advanceTreaties({ snapshot, worldState, settlementUpdates = [], 
     // §12.3 STRAIN → the E1b resentment seam: the paying loser resents its burden;
     // that resentment is the §5 revanchism fuel a future war reads.
     if (anyStrainThisTick && orientation.resolved) {
-      workingState = accrueStrainResentment(workingState, /** @type {Array<Record<string, unknown>>} */ (edges), loserId, victorId, roles.instrument.burden01, now, treaty);
+      workingState = mediatedStrainAccrual({ worldState: workingState, edges: /** @type {Array<Record<string, unknown>>} */ (edges), snapshot, treaty, previous: prevLedger?.[key], loserId, victorId, burden01: roles.instrument.burden01, tick, now });
     }
   }
 

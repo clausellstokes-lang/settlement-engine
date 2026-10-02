@@ -65,7 +65,7 @@
  */
 
 import { describe, expect, test } from 'vitest';
-import { readFileSync } from 'node:fs';
+import { readdirSync, readFileSync } from 'node:fs';
 import { join } from 'node:path';
 
 // ⭐ THE RULE ITSELF LIVES IN ONE PLACE (2026-09-19, ODQ §934.22 item 2). It was
@@ -229,7 +229,38 @@ const CENSUS = (() => {
  * were the pricing page's, and the public-path walk found them on the phone: eleven-pixel
  * prose on the page that asks for money. They are cured, /pricing's row loses its `owner`,
  * and the estate now has 117 sub-floor sites left on the two surfaces lane 28 still owns
- * (98 + 19).
+ * (98 + 19) — 116 as of the re-measure below (97 + 19).
+ *
+ * ⭐⭐ RE-MEASURED WHOLE AT THE CURE DAY'S TIP (2026-09-23, the unfreeze's lane 2; pass 2a's
+ * NOTE-19, which asked for this register RE-MEASURED and never SUMMED from the declared
+ * deltas, because both of that day's moves were made by an IMPORT CLOSURE rather than by
+ * written sites). Every row was re-derived at `8b5565922` by this file's own derivation and
+ * its own scanner — 36 routes and the shell — and the day's declared moves re-measure
+ * EXACTLY: /realm and /map floored 493 ruled 3 (U79's PlacementDetailCard edge), (shell)
+ * floored 144 (U25's two causes composed). `roots`, `floored`, `ruled` and `bare` are exact
+ * on every row but one; no route lacks a row and no row names a route the router retired.
+ *
+ * ⛔ AND ONE ROW WAS STALE IN THE ONE DIRECTION THE ARM CANNOT SEE. /create's `bare` measures
+ * 97, not 98: an OWNED row may only FALL, so the fall passed in silence for four days and the
+ * row carried a spare site nobody had to justify. The cause is named and executed —
+ * `1280cb6bb` (browser pass 3, 2026-09-19) put src/components/generate/WizardOutputToolbar.jsx's
+ * single 10 px line on `chromeFontSize(FS.xxs, isMobile)` and moved that file onto the PUBLIC
+ * roster (tests/components/publicChromeFloor.census.test.js), so lane 28's owed count fell by
+ * one here. Measured by re-running this file's scanner over the /create closure at four shas:
+ * 98 at `16501b699`, 97 at `1280cb6bb`, and per-file IDENTICAL from `5dd5e8e68` to `8b5565922`.
+ * Banking it re-tightens the ratchet — a 98th site reds from now on.
+ *
+ * ⚠ `files` IS A FLOOR AND STAYS ONE; THE GROWTH IS RECORDED, NOT PINNED (this registry's own
+ * rule above: "Growth needs no pin"). Live at this tip against the floors — /settlements 208
+ * (206), /realm 157 (153), /map 157 (153), /signin 13 (11), (shell) 70 (61); every other row
+ * exact. NOT ONE CLOSURE COLLAPSED, which is the only failure this field exists to catch. The
+ * growth is attributable file by file to named members: the editor's five leaves on (shell)
+ * (EM-D0d's two field controls, EM-D0e's door, EM-D1's shell, EM-D3's registry page — all
+ * reached through App.jsx's one lazy edge), primitives/RefusalNotice.jsx (§934.24 car 3),
+ * primitives/DialogClose.jsx (§934.29), primitives/NameColumns.jsx (the Power tab's columns)
+ * and map/RealmPhoneNotice.jsx (§934.26 car 1). Raising the floors to today's counts would red
+ * every in-flight branch that adds an import anywhere inside a 208-file subtree, which is the
+ * cost this field was deliberately shaped to avoid.
  */
 const ROUTE_BASELINE = Object.freeze({
   // ⛔ lane 28 (the create page, the tier picker, the landing and the header nav)
@@ -237,12 +268,28 @@ const ROUTE_BASELINE = Object.freeze({
   // src/components/generate, src/components/home, src/components/pricing or the
   // /create-only panels in src/components — none of it is reachable from any
   // other route except the four ClerkNote sites the Realm shares, named below.
-  '/create':                { roots: 1, files: 165, floored: 750, ruled: 5, bare: 98, owner: 'lane 28 — the create page + the tier picker' },
+  // ⭐ RE-MEASURED AT THE CURE DAY'S TIP (2026-09-23, the unfreeze; NOTE-19), bare 98 -> 97 —
+  // the cause is `1280cb6bb`, quoted in full in the docblock above: one cured 10 px site in
+  // src/components/generate/WizardOutputToolbar.jsx, which is now the public roster's. Nothing
+  // on this surface was floored, written or ruled by the re-measure itself; 97 is the count
+  // lane 28 has left to do.
+  '/create':                { roots: 1, files: 165, floored: 750, ruled: 5, bare: 97, owner: 'lane 28 — the create page + the tier picker' },
   '/home':                  { roots: 1, files: 19, floored: 6, ruled: 4, bare: 19, owner: 'lane 28 — the landing' },
   // The Realm lazily mounts the create flow's ClerkNote for its one advisory
   // line, so lane 28's file lands on a route it does not own. One site.
-  '/realm':                 { roots: 2, files: 153, floored: 484, ruled: 1, bare: 0, owner: 'lane 28 — generate/ClerkNote.jsx, mounted here' },
-  '/map':                   { roots: 2, files: 153, floored: 484, ruled: 1, bare: 0, owner: 'lane 28 — generate/ClerkNote.jsx, mounted here' },
+  // ⭐ RE-MEASURED AT THE TRAIN TIP (2026-09-23, the chair; U25): /realm and /map floored 484 -> 485 —
+  // EM-E3's advance report adds ONE correctly floored anchor line reached by both routes
+  // (src/components/map/AdvanceReport.jsx); attributed by planting the pre-change body.
+  // ⭐ RE-MEASURED AT THE TRAIN TIP (2026-09-23, cure lane D2; U79): /realm and /map floored
+  // 485 -> 493 and ruled 1 -> 3. THE CAUSE IS AN IMPORT, NOT A SIZE. PlacementDetailCard.jsx
+  // resolved a selected settlement by id off the RAW save array, so a selection carrying an
+  // EM-F1 phantom's id opened a card over a row the shelf hides; it now resolves through the
+  // shelf's own filter, `applyLibraryFilters`, which lives in library/LibraryToolbar.jsx. That
+  // one edge brings the toolbar's ALREADY-FLOORED sites (8) and its two written rulings into
+  // the map's closure. `bare` holds at 0 on both rows — nothing sub-floor shipped, and not one
+  // fontSize was written, moved or ruled by this unit.
+  '/realm':                 { roots: 2, files: 153, floored: 493, ruled: 3, bare: 0, owner: 'lane 28 — generate/ClerkNote.jsx, mounted here' },
+  '/map':                   { roots: 2, files: 153, floored: 493, ruled: 3, bare: 0, owner: 'lane 28 — generate/ClerkNote.jsx, mounted here' },
 
   // floored 991 -> 992 (review wave 2 car 3, 2026-09-19): the Library's sample fork used to
   // answer EVERY null with the purchase modal, so it now renders the estate's refusal notice
@@ -311,7 +358,29 @@ const ROUTE_BASELINE = Object.freeze({
 
   // App.jsx's own chrome. It is on the list because it renders on every route and
   // AppViews names none of it — the exact shape of hole this rewrite closes.
-  '(shell)':                { roots: 1, files: 61, floored: 138, ruled: 3, bare: 0 },
+  //
+  // ⭐ RE-MEASURED BY EM-D1 (2026-09-23), floored 138 -> 143, and the cause is a REACH
+  // rather than a new small size. App.jsx's closure now follows one `lazy(() =>
+  // import('./components/edit/EditModeShell.jsx'))` edge, so the shell survey reaches the
+  // settlement editor's volume for the first time: the door, its two field controls and
+  // the two primitives they mount. Every one of the five new sites was ALREADY FLOORED
+  // where it lives, and they attribute exactly —
+  //   src/components/edit/FreeField.jsx          1
+  //   src/components/edit/PoolField.jsx          1
+  //   src/components/generate/ClerkNote.jsx      1
+  //   src/components/primitives/PortablePopup.jsx 2
+  // EM-D1's own leaf contributes ZERO: `EditModeShell.jsx` spells no sub-floor size at
+  // all, so it is neither floored nor bare nor ruled here. `bare` stays 0 and `ruled`
+  // stays 3 for the same reason, and `files` is a FLOOR the grown tree (61 -> 68) still
+  // clears — growth needs no pin, by this registry's own rule above.
+  //
+  // ⭐ RE-MEASURED AT THE TRAIN TIP (2026-09-23, the chair; judgment 271 / U25), floored 143 -> 144:
+  // TWO branches moved this row without seeing each other — EM-D1 re-recorded 138 -> 143 above
+  // (the reach into the editor), and EM-D4's surveyor bridge added ONE floored line in
+  // src/components/surveyor/InterpretApplyPanel.jsx without touching this census. EM-E3 and
+  // EM-F3 were measured at zero for this row with their component bodies planted. `bare`
+  // stays 0 and `ruled` stays 3; `files` is a FLOOR the grown tree still clears.
+  '(shell)':                { roots: 1, files: 61, floored: 144, ruled: 3, bare: 0 },
 });
 
 /**
@@ -587,6 +656,33 @@ describe('THE PHONE CHROME FLOOR — a census of the source, on every route the 
       'the shell closure is as large as the whole census — the AppViews cut stopped working, so the '
       + 'shell row is measuring every route instead of the chrome around them',
     ).toBeLessThan(CENSUS_FILES.length / 2);
+
+    // ⭐ THE EDITOR'S PAGES, AND THE ONE EDGE THEY HANG FROM (U11, the unfreeze, 2026-09-23;
+    // judgment 267(4) reserved this widening until the mount landed, and EM-D3c landed it).
+    // src/components/edit reaches this census ONLY through App.jsx's single
+    // `lazy(() => import('./components/edit/EditModeShell.jsx'))` edge and the shell's own
+    // mount of the registry page, so every editor surface is measured on the (shell) row and
+    // on no route's — AppViews declares no editor view. Measured at 8b5565922: five files,
+    // two floored sites (FreeField.jsx 1, PoolField.jsx 1); the shell, the door and the
+    // registry page spell no sub-floor size at all, so they are neither floored nor bare.
+    //
+    // ⛔ THE EQUALITY IS A REACHABILITY PIN, AND IT NAMES A DEFECT THIS ESTATE ALREADY SHIPPED:
+    // DecreeRegistryPage.jsx lived for five hours with NO importer under src (U46) — no reader
+    // could open it and no floor instrument could see it, because an unmounted page is absent
+    // from every route closure. Such a page is missing from CENSUS_FILES, so it reds HERE, by
+    // name, instead of going unmeasured in silence.
+    const editorTree = readdirSync(join(ROOT, 'src/components/edit'))
+      .filter((f) => /\.jsx?$/.test(f) && !/\.test\./.test(f))
+      .map((f) => `src/components/edit/${f}`)
+      .sort();
+    expect(editorTree.length, 'src/components/edit holds no page — has the editor moved?')
+      .toBeGreaterThanOrEqual(5);
+    expect(
+      editorTree.filter((f) => !CENSUS_FILES.includes(f)),
+      '\nAn editor page is in the tree but reaches NO surface the router declares: nothing mounts '
+      + 'it, so no reader can open it and no phone floor governs it. Mount it (the edit shell is '
+      + 'its home, and App.jsx reaches the shell by one lazy edge) or retire the file:\n',
+    ).toEqual([]);
 
     // The acceptance test this file is the twin of must still reach the census
     // layer, or the two instruments have come apart.

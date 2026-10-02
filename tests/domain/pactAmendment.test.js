@@ -47,8 +47,14 @@ describe('the closed vocabularies', () => {
     // GR-4a joins `disavowed_by_succession` to BOTH lists — an act because the heir's
     // refusal is a thing the instrument had done to it, and an ending because it closes
     // the instrument. Its producer is treatyBreach.js#repudiateTreaty's succession road.
+    // GR-5b adds `renewed` (SR-1, growth by the wave's own law, R-GR5-2): the act an
+    // accepted renewal records through amendPactInstrument, produced by pactRenewal.js.
+    // GR-5c adds `renegotiated` (SR-1, growth by the wave's own law): the act an accepted
+    // mid-term demand records through the same writer, produced by the same leaf.
+    // GR-5d adds `converted` (SR-1, GR-RENEWAL U3): the act a renewal accepted over a compelled
+    // alliance honoured throughout records through the same writer, produced by the same leaf.
     expect(PACT_LINEAGE_ACTS).toEqual([
-      'amended', 'broken_by_war', 'disavowed_by_succession', 'formed', 'war_ended',
+      'amended', 'broken_by_war', 'converted', 'disavowed_by_succession', 'formed', 'renegotiated', 'renewed', 'war_ended',
     ]);
     expect(PACT_ENDINGS).toEqual([
       'broken_by_war', 'disavowed_by_succession', 'expired_unanswered', 'no_overlap',

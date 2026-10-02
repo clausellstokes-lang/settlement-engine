@@ -46,6 +46,7 @@ import {
   WR7_TWO_PICTURE_PARLAY_COUPLING,
   TR1_CASUS_COMMERCII_COUPLINGS,
   TR1_SEVERANCE_PRESSURE_COUPLING,
+  TR3_BELIEVED_MARKETS_COUPLINGS,
   GR2_BELIEVED_DEMAND_COUPLING,
   GR2_PACT_FORMATION_COUPLINGS,
   GR2_SHARED_THREAT_COUPLING,
@@ -55,6 +56,11 @@ import {
   GR3_TERM_FAMILY_COUPLINGS,
   GR4C_BREACH_CREDIBILITY_COUPLING,
   GR4_BREACH_CREDIBILITY_COUPLINGS,
+  GR5C_BELIEVED_SWING_COUPLING,
+  GR5C_RENEGOTIATION_COUPLINGS,
+  GR6_INTENT_BROKER_COUPLING,
+  GR6_MEDIATION_COUPLINGS,
+  GR6_SOFT_GATE_COUPLING,
   ES1_COVERT_MISSION_MINT_COUPLING,
   ES1_HIDDEN_FRANCHISE_COUPLING,
   ES1_MISSION_VOCABULARY_COUPLING,
@@ -73,10 +79,15 @@ import {
   ENC_ENCOUNTERS_COUPLINGS,
   IN0A_PLANT_HANDOFF_COUPLING,
   IN0C_DISCLOSURE_SIGNING_CREDIT_COUPLING,
+  IN4_ARMY_ARRIVAL_COUPLING,
+  IN4_ENVOY_RETURN_COUPLING,
+  IN4_RACE_ROAD_COUPLING,
+  IN4_REPUTATION_RACE_COUPLINGS,
   IN_INFORMATION_COUPLINGS,
   couplingRowFor,
   couplingRowsFor,
 } from '../../src/domain/certification/couplingRegistry.js';
+import { IN3_ENVOY_WORD_COUPLING, IN3_TEMPER_AND_WOUNDS_COUPLING } from '../../src/domain/certification/couplingRegistryInfo.js';
 
 /**
  * The twelve chartered volume prefixes (DESIGN_FP_ARCHITECTURE.md §9 seam row 32 /
@@ -149,6 +160,10 @@ describe('CW-0 coupling registry', () => {
       ...WR6B_WAR_TREASURY_COUPLINGS,
       ...WR7_ENVOY_COUPLINGS,
       ...TR1_CASUS_COMMERCII_COUPLINGS,
+      // FP TR-3 (2026-09-24): the TRADE leaf's second set, composed beside its first (SR-7) —
+      // one row, the WHERE composer's INFO→TRADE read of believed dearness (SR-1: an ordered
+      // registry pin the wave grows by its own law, re-recorded with the cause).
+      ...TR3_BELIEVED_MARKETS_COUPLINGS,
       // FP GR-2 (2026-08-06): the THIRD volume leaf, appended in wave order like the
       // second. Three rows, one per direction peacetime formation reads across.
       ...GR2_PACT_FORMATION_COUPLINGS,
@@ -204,6 +219,16 @@ describe('CW-0 coupling registry', () => {
       // seat belongs to WR4_INSTITUTION_HOME_FRONT_COUPLING, re-proved further down, so this
       // append moves nothing a single-row caller resolves.
       ...WSEAT_D10_IRREGULAR_FORCE_COUPLINGS,
+      // FP GR-6 (2026-09-24): the two mediation rows, appended last on the same tiebreak
+      // argument — CPL-5's first-row seat in each direction belongs to a row composed far above.
+      ...GR6_MEDIATION_COUPLINGS,
+      // FP GR-5c (2026-09-24; SR-1, SR-11): the two renegotiation rows, appended last on the same
+      // tiebreak argument; the first-row seats of CPL-19 and CPL-21 in their directions are unmoved.
+      ...GR5C_RENEGOTIATION_COUPLINGS,
+      // FP IN-4 (2026-09-24; SR-1, an ordered registry pin the wave grows by its own law): the
+      // reputation race's three reads, appended LAST on the same tiebreak argument, so the
+      // CPL-4 / WAR→INFO first-row seat stays ES-5's.
+      ...IN4_REPUTATION_RACE_COUPLINGS,
     ]);
     // The W-SEAT D10 row spelled out, on the WR-3 precedent above: a composition assertion
     // proves ORDER, never CONTENT, and this is the estate's first `irregularForceEnabled`
@@ -663,6 +688,9 @@ describe('CW-0 coupling registry', () => {
         // row on this pair whose owning volume is GRAMMAR rather than WAR. The legacy
         // first-row tiebreak is unaffected, and the line below re-asserts it.
         GR2_SHARED_THREAT_COUPLING,
+        // GR-6 (2026-09-24): the mediation leaf reading the war's march order joins this
+        // bucket LAST, because the registry composes it last; the first-row seat is unmoved.
+        GR6_INTENT_BROKER_COUPLING,
       ]);
     // GR-3's `mutual_defense` is the THIRD read on this direction and the first owned by
     // GRAMMAR. It is deliberately LAST: registration order is the legacy first-row
@@ -676,6 +704,9 @@ describe('CW-0 coupling registry', () => {
         GR3_MUTUAL_DEFENSE_COUPLING,
         WMEM_TREATY_AT_SEAL_COUPLING,
         WMEM_SEAL_GRACE_WINDOW_COUPLING,
+        // GR-6 (2026-09-24): the war opener reading the broker's pressure joins LAST, on the
+        // same composition order; WR-7's home delivery keeps the first-row seat below.
+        GR6_SOFT_GATE_COUPLING,
       ]);
     expect(couplingRowFor('CPL-5', 'GRAMMAR→WAR')).toBe(WR7_HOME_DELIVERY_COUPLING);
     // GR-3's other two open their pairs: nobody had read across CPL-14 or CPL-17 before.
@@ -708,6 +739,9 @@ describe('CW-0 coupling registry', () => {
         // ENCOUNTERS leaf after ESPIONAGE, and the legacy first-row seat below is unchanged
         // — which is the property this test is named for.
         ENC3_MEETING_EXPOSURE_WARINESS_COUPLING,
+        // GR-5c (2026-09-24; SR-1): the renegotiation leaf's read of the demander's picture joins
+        // LAST, because the registry composes it last; the first-row seat below is unmoved.
+        GR5C_BELIEVED_SWING_COUPLING,
       ]);
     expect(couplingRowFor('CPL-19', 'INFO→GRAMMAR')).toBe(WR7_MOVING_PICTURE_COUPLING);
     // IN-0C's disclosure credit is the SECOND read on this direction and the first owned by
@@ -721,6 +755,9 @@ describe('CW-0 coupling registry', () => {
       .toEqual([
         WR7_SILENCE_INFERENCE_COUPLING,
         IN0C_DISCLOSURE_SIGNING_CREDIT_COUPLING,
+        // FP IN-3 (lane FP-I3, 2026-09-24; SR-1): the counter-game's row takes the INFO seat after
+        // IN-0c's, the volume composing ahead of ESPIONAGE; every row below shifts down one.
+        IN3_ENVOY_WORD_COUPLING,
         ES1_COVERT_MISSION_MINT_COUPLING,
         ES1_MISSION_VOCABULARY_COUPLING,
         ES2_GAUNTLET_DWELL_READ_COUPLING,
@@ -737,6 +774,11 @@ describe('CW-0 coupling registry', () => {
         // last precisely so WR-7's silence inference keeps the first-row seat asserted on
         // the next line: a landing act does not move a legacy tiebreak to tidy an ordinal.
         WR6C_ANTICIPATED_REACTION_CASUS_COUPLING,
+        // FP IN-4 is the NINTH (2026-09-24; SR-1, the bucket grows by the registry's own
+        // composition law): the reputation race reads the envoy ledger's HOMECOMINGS, the one
+        // arrival a court-level telling rides home on. It sits LAST because COUPLING_REGISTRY
+        // appends the IN-4 rows last, and WR-7's silence inference keeps the seat on the next line.
+        IN4_ENVOY_RETURN_COUPLING,
       ]);
     expect(couplingRowFor('CPL-19', 'GRAMMAR→INFO')).toBe(WR7_SILENCE_INFERENCE_COUPLING);
     // ES-1's third row OPENS a pair: nobody had read across TRADE and GRAMMAR before, and
@@ -745,7 +787,9 @@ describe('CW-0 coupling registry', () => {
     // ES-3's second row points at the volume's OWN anchor for INFO × INTERIOR rather than
     // minting a twenty-second pair: the standoff's flaw distortion extends the ladder's
     // `riskAppetiteOf` instead of re-parsing personality words.
-    expect(couplingRowsFor('CPL-20', 'INTERIOR→INFO')).toEqual([ES3_FLAW_DISTORTION_COUPLING]);
+    // FP IN-3 (lane FP-I3, 2026-09-24; SR-1): the counter-game's temper-and-wounds row takes the
+    // INFO seat AHEAD of ES-3's, the INFO volume composing ahead of ESPIONAGE (IN-0c's reading above).
+    expect(couplingRowsFor('CPL-20', 'INTERIOR→INFO')).toEqual([IN3_TEMPER_AND_WOUNDS_COUPLING, ES3_FLAW_DISTORTION_COUPLING]);
     // ES-5c is the SECOND INFO→INTERIOR row under CPL-20 and the FIRST touching the ladder.
     // It needs its own row rather than ES-5b's because `licensingRows` joins on the IMPORTER
     // module, and the two rows name different importers — so this pair is licensed here or
@@ -760,8 +804,13 @@ describe('CW-0 coupling registry', () => {
     // both read INFO→WAR across CPL-4, and the doctrine stage is the first read back the
     // other way — the espionage doctrine spelling its moral axis with the estate's ONE
     // exported moral ladder rather than growing a private band inside the ES family.
-    expect(couplingRowsFor('CPL-4', 'WAR→INFO')).toEqual([ES5_DOCTRINE_MORAL_LADDER_COUPLING]);
+    // FP IN-4's army-arrival read is the SECOND WAR→INFO row (2026-09-24; SR-1): the race reads
+    // the army ledger's arrival records. Appended last, so the first-row seat stays ES-5's, which
+    // is the property this test is named for and the reason the IN-4 rows compose last.
+    expect(couplingRowsFor('CPL-4', 'WAR→INFO')).toEqual([ES5_DOCTRINE_MORAL_LADDER_COUPLING, IN4_ARMY_ARRIVAL_COUPLING]);
     expect(couplingRowFor('CPL-4', 'WAR→INFO')).toBe(ES5_DOCTRINE_MORAL_LADDER_COUPLING);
+    // IN-4's road read OPENS a pair+direction: no row had read the lived road network into INFO.
+    expect(couplingRowsFor('CPL-9', 'TRADE→INFO')).toEqual([IN4_RACE_ROAD_COUPLING]);
     // The leaf composes exactly its rows, in wave order.
     expect(ES_ESPIONAGE_COUPLINGS).toEqual([
       ES1_COVERT_MISSION_MINT_COUPLING,

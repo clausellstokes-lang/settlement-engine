@@ -14,6 +14,7 @@ import { deriveDecisionTier } from '../../src/domain/worldPulse/decisionTier.js'
 import { observeRealmSelfSufficiency } from '../../src/domain/worldPulse/routeNetworkFlowsSelfSufficiency.js';
 import { observeRealmDemography } from '../../src/domain/worldPulse/demographicsObservation.js';
 import { isPublicOutcome, isStateOnlyOutcome } from '../../src/domain/worldPulse/pulseHelpers.js';
+import { isSubsystemActive } from '../../src/domain/worldPulse/subsystemActivation.js';
 import { prosperityRank } from '../../src/data/constants.js';
 import { measurePhraseRepetition } from './phrase-repetition.mjs';
 // ⭐ ONE SPELLING (§909 car 3). This bar was an inline literal here and a constant in
@@ -1188,6 +1189,48 @@ export function foldStateKeyCensus(yearlyCensuses) {
 }
 
 /**
+ * ⭐ WF-0 — THE BEARER PREDICATE (DESIGN_FP_ARCH_WF.md "### WF-0 — THE OBSERVATION FLOOR";
+ * the faith volume's J-WF-12: the bearer count is a receipt field, instrument-side, unflagged).
+ *
+ * A BEARER is a settlement that, ON ITS OWN, opens the religion layer's outer data gate: an
+ * embedded patron (`config.primaryDeitySnapshot`, what SET_PRIMARY_DEITY writes) or a
+ * non-empty imposed-cult list (`config.cultDeitySnapshots`, what IMPOSE_CULT writes). The
+ * predicate IS the gate's own — `isSubsystemActive(snapshot, 'religion')`, asked of a
+ * one-settlement snapshot — rather than a second spelling of it, because the one question
+ * the count exists to answer is whether that gate could have opened at all. ⚠ It is NOT
+ * `religiousContest.js`'s private `deityBearers` (the stance lane's PATRON-only id list, which
+ * pairs patrons for the inter-deity stance and rightly ignores a cult): a settlement bearing
+ * only an imposed cult still opens the gate, so it is a bearer here.
+ *
+ * ⛔ NEVER DERIVED FROM NEWS. A wizard-news id carries the `news` token, which the mover
+ * classifier above files under `knowledge` whenever nothing earlier in the family order
+ * matches — the faith volume's §1d moverFamily skew — so a count read off news ids would
+ * inherit that skew. This reads the settlements' own embeds and nothing else.
+ * Req 13: alignment-empty, with the reason — a count instrument reads no deity axis.
+ * Req 14: engine-only, an instrument — it mints no world state and no DM-visible surface.
+ *
+ * @param {{ settlement?: unknown }} save a soak save (`{ id, settlement }`), which is the
+ *   shape of a world-snapshot member
+ * @returns {boolean}
+ */
+export function isDeityBearer(save) {
+  return isSubsystemActive({ settlements: [save] }, 'religion');
+}
+
+/**
+ * How many settlements bear a deity: the v5 `subsystems.deityBearers` figure, which the
+ * whole-world soak takes over run A's FINAL saves (the volume's "at soak end"). A faith
+ * SILENCE (bearers above zero, zero spread events) is thereby told apart from an ABSENT
+ * PRECONDITION (bearers at zero), which no receipt written before WF-0 could do. Pure and
+ * total: anything but an array reads zero.
+ * @param {unknown} saves
+ * @returns {number}
+ */
+export function countDeityBearers(saves) {
+  return (Array.isArray(saves) ? saves : []).filter(isDeityBearer).length;
+}
+
+/**
  * The receipt's `subsystems` section (envelope schema v5). It records WHICH
  * subsystem switches the run actually carried and WHICH worldState containers it
  * ever populated, so evaluateSubsystemCertification can separate "off by config"
@@ -1197,6 +1240,7 @@ export function buildSubsystemConfiguration({
   presetId,
   rules,
   yearlyCensuses,
+  deityBearers,
 }) {
   const booleanRules = {};
   for (const key of Object.keys(asObject(rules)).sort()) {
@@ -1215,6 +1259,16 @@ export function buildSubsystemConfiguration({
     // read absence as zero evidence instead of as an instrument gap.
     stateKeysComplete: true,
     stateKeys,
+    // ⭐ WF-0 — THE BEARER COUNT, and it sits LAST on purpose: every byte before it is the
+    // section a pre-WF-0 writer produced, so a deity-free corpus's section is that section
+    // byte for byte with `"deityBearers":0` appended — the dormancy the wave owes. EMITTED
+    // ONLY WHEN MEASURED: the whole-world soak always passes it (a deity-free realm reads a
+    // POSITIVE zero, never an absence), while a caller that measured nothing gets the old
+    // section unchanged. ADDITIVE on v5, not a schema bump — the `beliefDivergence` /
+    // `yearlyPopulations` precedent this envelope has followed five times; a receipt written
+    // before WF-0 is told apart by the field's absence, which the faith rows' bearer
+    // invariant reads as "not expressible from this receipt".
+    ...(Number.isInteger(deityBearers) && Number(deityBearers) >= 0 ? { deityBearers } : {}),
   };
 }
 

@@ -34,6 +34,7 @@ import { simulateCampaignWorldPulse } from '../../src/domain/worldPulse/index.js
 import { ensureRegionalGraph } from '../../src/domain/region/index.js';
 import { buildSpatialDigest } from '../../src/domain/spatial/index.js';
 import { SIMULATION_RULE_PRESETS } from '../../src/domain/worldPulse/simulationRules.js';
+import { soakAdvanceEpoch } from '../../scripts/audit/soakRules.mjs';
 import {
   __tickIndexStats,
   __resetTickIndexStats,
@@ -134,7 +135,13 @@ function measure(n) {
   let { campaign, saves } = makeFixture(n);
   __resetTickIndexStats();
   for (let t = 0; t < TICKS; t++) {
-    const r = simulateCampaignWorldPulse({ campaign, saves, interval: 'one_week', now: NOW });
+    // LIT-0 (2026-09-24): one pulse here is one ADVANCE, so it threads the flag-gated epoch the
+    // kernel's `assertEpochPinnedInTest` demands once `advanceEpochEnabled` is lit: the soak's own
+    // idiom (`soakAdvanceEpoch`, keyed on seed and advance ordinal). Dark it is null, byte-identical.
+    const r = simulateCampaignWorldPulse({
+      campaign, saves, interval: 'one_week', now: NOW,
+      advanceEpoch: soakAdvanceEpoch({ simulationRules: campaign.worldState?.simulationRules, seed: SEED, year: t + 1 }),
+    });
     const updates = new Map((r.settlementUpdates || []).map((u) => [String(u.saveId), u.settlement]));
     saves = saves.map((s) => (updates.has(s.id) ? { ...s, settlement: updates.get(s.id) } : s));
     campaign = { ...campaign, worldState: r.worldState, regionalGraph: r.regionalGraph || campaign.regionalGraph, wizardNews: r.wizardNews };

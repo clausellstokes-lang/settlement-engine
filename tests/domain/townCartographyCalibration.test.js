@@ -258,6 +258,28 @@
  *   261 while the live layer drew 264, and W2's live re-measure caught it. The constants were
  *   moved and the corpus regenerated a second time; the figures above are that second pass.
  *
+ * ── RE-RECORD 2026-09-30 — THE URBAN BAND (ODQ §934.86, record docs/shift-records/
+ *    2026-09-30-urban-band-institutions.json) ──
+ *   THE CAUSE IS THE ROSTER, AT EVERY TIER. The catalog became a registry with complete tier
+ *   blocks and cumulative laws, so the same seeds seat different and (from town up) fuller
+ *   rosters. Run in the burial ladder's order, twice: the corpus was first drawn against the
+ *   OLD ground, its institution maxima were read off it and moved into
+ *   CARTOGRAPHY_CALIBRATION.MAX_INSTITUTIONS (commit 3a4cb3d7b), and it was drawn again
+ *   against the new caps. The figures below are the second pass, every one a MEASUREMENT.
+ *     (1) `MAX_INSTITUTIONS` / `FROZEN.maxInstitutions` 12/25/41/63/56/65 →
+ *         12/25/42/69/83/86. Thorp and hamlet unmoved; a city now seats up to 83 institutions
+ *         where it seated 56, because its block is no longer smaller than a town's.
+ *     (2) `FROZEN.maxBuildings` 13/27/46/112/198/264 → 12/29/47/122/212/271. ⚠ THORP GOES
+ *         DOWN (13 → 12): its densest row moved to a smaller roster.
+ *     (3) `DUPLICATES.permille` 147/218/78/64/52/58 → 139/212/84/64/50/55; the derived ceilings
+ *         follow the same `Math.ceil(reading × CARTOGRAPHY_HEADROOM_PERMILLE / 1000)` operator.
+ *         Four tiers repeat shapes LESS; village repeats more (78 → 84).
+ *     (4) THE FALSIFIER counts 359 superseded-binding refusals over FIVE tiers (was 286 over
+ *         four): 68 cities now exceed the superseded city binding.
+ *   WHAT DID NOT MOVE, each checked: EXACT duplication stays 0 at every tier; the throw census
+ *   stays 0 of 504; `CORPUS_ROWS` stays 504; W2's live re-measure reproduces every sampled row;
+ *   and the three town-map goldens and eleven other cartography suites are green.
+ *
  * To re-record after an INTENTIONAL change, run:
  *   UPDATE_CARTOGRAPHY_CALIBRATION=1 npx vitest run tests/domain/townCartographyCalibration.test.js
  * and add a row above before committing. Re-recording without adding a row is a
@@ -325,12 +347,12 @@ const TUNING_SOURCE = resolve(
  * would red on every deliberate cap change and say nothing the count cap does not.
  */
 const FROZEN = Object.freeze({
-  thorp: Object.freeze({ throws: 0, maxInstitutions: 12, maxBuildings: 13 }),
-  hamlet: Object.freeze({ throws: 0, maxInstitutions: 25, maxBuildings: 27 }),
-  village: Object.freeze({ throws: 0, maxInstitutions: 41, maxBuildings: 46 }),
-  town: Object.freeze({ throws: 0, maxInstitutions: 63, maxBuildings: 112 }),
-  city: Object.freeze({ throws: 0, maxInstitutions: 56, maxBuildings: 198 }),
-  metropolis: Object.freeze({ throws: 0, maxInstitutions: 65, maxBuildings: 264 }),
+  thorp: Object.freeze({ throws: 0, maxInstitutions: 12, maxBuildings: 12 }),
+  hamlet: Object.freeze({ throws: 0, maxInstitutions: 25, maxBuildings: 29 }),
+  village: Object.freeze({ throws: 0, maxInstitutions: 42, maxBuildings: 47 }),
+  town: Object.freeze({ throws: 0, maxInstitutions: 69, maxBuildings: 122 }),
+  city: Object.freeze({ throws: 0, maxInstitutions: 83, maxBuildings: 212 }),
+  metropolis: Object.freeze({ throws: 0, maxInstitutions: 86, maxBuildings: 271 }),
 });
 
 /**
@@ -375,12 +397,12 @@ const FROZEN = Object.freeze({
  * those, which is the evidence that the census measures the cure rather than nothing.
  */
 const DUPLICATES = Object.freeze({
-  thorp: Object.freeze({ permille: 147 }),
-  hamlet: Object.freeze({ permille: 218 }),
-  village: Object.freeze({ permille: 78 }),
+  thorp: Object.freeze({ permille: 139 }),
+  hamlet: Object.freeze({ permille: 212 }),
+  village: Object.freeze({ permille: 84 }),
   town: Object.freeze({ permille: 64 }),
-  city: Object.freeze({ permille: 52 }),
-  metropolis: Object.freeze({ permille: 58 }),
+  city: Object.freeze({ permille: 50 }),
+  metropolis: Object.freeze({ permille: 55 }),
 });
 
 /**
@@ -998,9 +1020,11 @@ describe('W7 a corpus that outgrows the derived caps is LOUD', () => {
       }
     }
     // The 266 binding-cap throws MF-CG1 recorded at 00e7af61, re-derived here from the
-    // roster counts alone. The four tiers are the four that could not draw.
-    expect(refused).toEqual({ thorp: 47, hamlet: 72, village: 83, town: 84 });
-    expect(Object.values(refused).reduce((sum, count) => sum + count, 0)).toBe(286);
+    // roster counts alone. The four tiers are the four that could not draw. ⚠ FIVE SINCE
+    // 2026-09-30 (the urban band, ODQ §934.86): complete city blocks put 68 of the corpus's
+    // cities over the superseded city binding (64), which no city reached before.
+    expect(refused).toEqual({ thorp: 50, hamlet: 73, village: 84, town: 84, city: 68 });
+    expect(Object.values(refused).reduce((sum, count) => sum + count, 0)).toBe(359);
     // And the superseded per-row byte band is below what the corpus really produces,
     // which is the second premise the cap change alone could never have reached.
     const worstRow = Object.values(manifest)
@@ -1055,7 +1079,8 @@ describe('W8 the drawn corpus does not repeat itself', () => {
     // 95 -> 103, 82 -> 84). The invariant that actually bounds this surface is the headroom
     // constant, which is UNCHANGED; the ceiling is a readout of it, and a reader who wants
     // the bound should read the headroom, not these six numbers.
-    expect(CARTOGRAPHY_TIERS.map(duplicateCeilingPermille)).toEqual([236, 349, 125, 103, 84, 93]);
+    // 236/349/125/103/84/93 -> 223/340/135/103/80/88 on 2026-09-30: the urban band's re-record (header).
+    expect(CARTOGRAPHY_TIERS.map(duplicateCeilingPermille)).toEqual([223, 340, 135, 103, 80, 88]);
     // And the derivation is live — a hypothetical reading derives its own ceiling.
     expect(Math.ceil((100 * CARTOGRAPHY_HEADROOM_PERMILLE) / 1000)).toBe(160);
   });

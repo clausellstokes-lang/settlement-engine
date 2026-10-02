@@ -5,9 +5,9 @@
  * the other one: what makes two courts at peace decide, on their own evidence, that there
  * is something to write down. Four occasions, closed and named — a demand for what one
  * court believes it lacks, a communion of rite, a pressure of people, and a threat both
- * courts believe in — plus `renewal`, which is a member of the vocabulary and GR-5's
- * producer (the `non_intervention` tombstone idiom: a word with no producer is never
- * drafted, so it is byte-identical until its own wave lands).
+ * courts believe in — plus `renegotiation` and `renewal`, members of the vocabulary whose
+ * producer is GR-5's renewal leaf (`pactRenewal.js`), which drafts them from the standing
+ * instrument rather than from a crossing scored here.
  *
  * ── WHY THIS LEAF IS LADDER-AGNOSTIC, AND WHY THAT BEATS MIRRORING ──────────────
  * Every occasion below is a comparison between two BANDED WORDS a court believes about
@@ -52,21 +52,23 @@
 import { clamp01 } from '../../kernel/math.js';
 
 /**
- * THE CLOSED TRIGGER VOCABULARY (codepoint-frozen). Five, and `renewal` is deliberately
- * among them with no producer in this wave: GR-5 mints it, and a proposal row carrying a
+ * THE CLOSED TRIGGER VOCABULARY (codepoint-frozen). Six: the four occasions this leaf scores,
+ * `renewal` (GR-5b) and `renegotiation` (GR-5c, growth by R-24). A proposal row carrying a
  * word outside this set is refused at import rather than stored.
  * @type {readonly string[]}
  */
 export const PACT_TRIGGERS = Object.freeze([
-  'faith_communion', 'migration_pressure', 'renewal', 'shared_threat', 'trade_demand',
+  'faith_communion', 'migration_pressure', 'renegotiation', 'renewal', 'shared_threat', 'trade_demand',
 ]);
 
-/** The four this wave actually produces. `renewal` is GR-5's, and the difference between
- *  these two lists IS the tombstone — a reachability pin quantifies over THIS one and a
- *  vocabulary pin over the other, so neither can absorb the other's failure.
+/** EVERY WORD NOW HAS A PRODUCER (FPQ-33, cured by GR-5c): the four occasions are scored
+ *  here, and `renegotiation` and `renewal` are drafted by the renewal leaf. The two lists stay
+ *  two exports because they answer two questions: a reachability pin quantifies over THIS one
+ *  and a vocabulary pin over the other, so a word minted ahead of its producer reopens the
+ *  difference instead of hiding in either.
  *  @type {readonly string[]} */
 export const PACT_TRIGGERS_PRODUCED = Object.freeze([
-  'faith_communion', 'migration_pressure', 'shared_threat', 'trade_demand',
+  'faith_communion', 'migration_pressure', 'renegotiation', 'renewal', 'shared_threat', 'trade_demand',
 ]);
 
 /** ⚠ UNSOAKED — §7 owns these; the owner signs them at the soak redo. */

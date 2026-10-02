@@ -1,0 +1,16 @@
+{
+  "_doc": "THE FIFTH RECORD OF THE VOICE PROGRAM (ODQ §934.88): a cure to wave 1, found by the full gate at f33d28798. The relationship deed named its two towns in the edge's authored order, so A->B and B->A printed different words for one relationship (relationshipOrientationInvariance). 8046d1630 names the pair in save-id order. One cause, one surface. Text only: the relationship headlines of the Herald desk's year are the only bytes that move; no id, tick or section moves. The chair signs under the owner's \"build it all\" and \"I leave all judgment to you\" (VP-J5, vetoable). A successor chair does not inherit this signature.",
+  "ownerWords": "\"Updates like these need to reflect actions not to potential. Like a definitive actions. Such as X is targeting Y. A has captured B.\" · \"I leave all judgment to you\" · \"build it all\"",
+  "ownerDate": "2026-10-02",
+  "odqRow": "§934.88 of docs/OWNER_DECISION_QUEUE.md (THE VOICE PROGRAM, recorded 2026-10-02 on the ledger branch review-fixes-2026-07-08 at 757c928ff)",
+  "cause": "ONE CAUSE: THE RELATIONSHIP DEED NAMES ITS PAIR ORIENTATION-FREE. The two towns of a relationship headline are named in save-id order rather than the edge's authored order, so one relationship always reads the same words. Only headline text moves.",
+  "seat": "the Voice Program chair, session 93391427 (Opus 5.5), executing the door write itself from the committed tree of feat/herald-voice-2026-10-02",
+  "surfaces": [
+    {
+      "surface": "herald-knowledge-desk-golden",
+      "action": "re-record",
+      "predictedRows": 383,
+      "proofForm": "derived-artefact"
+    }
+  ]
+}

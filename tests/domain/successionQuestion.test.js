@@ -424,6 +424,7 @@ describe('C7 — answered once, and the shell survives to its own horizon', () =
     expect(PACT_ENDINGS).toContain('disavowed_by_succession');
     expect(PACT_LINEAGE_ACTS).toContain('disavowed_by_succession');
     expect([...PACT_ENDINGS]).toEqual([...PACT_ENDINGS].slice().sort());
+    // GR-5c adds `renegotiated` at its codepoint place (SR-1): the order this pin holds is unmoved.
     expect([...PACT_LINEAGE_ACTS]).toEqual([...PACT_LINEAGE_ACTS].slice().sort());
   });
 });

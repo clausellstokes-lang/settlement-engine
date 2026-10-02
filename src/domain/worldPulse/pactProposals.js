@@ -377,3 +377,135 @@ export function prunePactProposals({ worldState }) {
   const open = rows.filter((row) => row.state === 'open');
   return open.length === rows.length ? worldState : writePactProposals(worldState, open);
 }
+
+// ── GR-2b: THE TABLE'S DOOR (the chair's amendment of 2026-09-23; J-EM-11, R-21) ──────────
+// The DM's verb `PROPOSE_PACT` is a REALM_MANIFEST row whose apply arm calls
+// `openPactProposal` above, so the ledger keeps its ONE writer. What lives here is what that
+// row, the editor's seal and the host's answer read — each defined beside the vocabulary it
+// speaks, and each composed into its registry by the chair at the merge, never from here.
+
+/** @param {string} a @param {string} b @returns {number} */
+const byCodepoint = (a, b) => (a < b ? -1 : a > b ? 1 : 0);
+
+/**
+ * THE HERALD'S WORDS FOR THE VERB'S REFUSALS — this module's own feed, merged by
+ * `realmVetoProse` exactly as the war modules' feeds are. One sentence per refusal code and
+ * one for the dark layer, and no other code: a covered code the arm can never emit would be
+ * dead prose.
+ * @type {Readonly<Record<string, string>>}
+ */
+export const PACT_VETO_PROSE = Object.freeze({
+  pact_gate_dark: 'The pact grammar is not active in this campaign. It rides its own rule, and no preset lights it yet.',
+  invalid_term_sheet: 'There was nothing here that could be written into an instrument: a pact needs two different courts and a clause the grammar can draft.',
+  no_cap_headroom: 'That court already has as many offers abroad as it can answer for. One of them must be answered first.',
+  open_proposal_exists: 'Those courts already have a question standing between them, and a second will not be put until the first is answered.',
+});
+
+/**
+ * THE FOUR CONJUNCTS, ONCE. The courts `subject` may put terms before: the layer is lit, the
+ * subject is a campaign court with an offer's worth of headroom left, and no question already
+ * stands between the pair in either direction. "Two courts" needs no line of its own: a
+ * counterparty that is not the subject IS the second court (an executed mutant dropping a
+ * separate count survived, so the count was dead code). Codepoint-ordered; the empty list
+ * whenever any conjunct fails, so a caller's `length > 0` IS the predicate.
+ * @param {unknown} worldState @param {unknown} courtIds @param {unknown} subject
+ * @returns {string[]}
+ */
+export function pactCounterpartiesFor(worldState, courtIds, subject) {
+  if (!pactFormationActive(worldState)) return [];
+  const self = text(subject);
+  const ids = [...new Set((Array.isArray(courtIds) ? courtIds : []).map(String))].filter(Boolean).sort(byCodepoint);
+  if (!self || !ids.includes(self)) return [];
+  const rows = pactProposalsOf(recordOf(worldState));
+  if (openProposalsFrom(rows, self).length >= T.MAX_OPEN_PROPOSALS) return [];
+  return ids.filter((id) => id !== self && !openProposalBetween(rows, self, id));
+}
+
+/** The campaign's lit ledger, or null. @param {unknown} campaignState @returns {Record<string, unknown>|null} */
+function litWorldOf(campaignState) {
+  const world = recordOf(campaignState).worldState;
+  return pactFormationActive(world) ? recordOf(world) : null;
+}
+
+/** The courts THIS card's settlement may ask. @param {unknown} record @param {unknown} campaignState
+ *  @returns {readonly string[]} */
+function proposableCounterparties(record, campaignState) {
+  return pactCounterpartiesFor(litWorldOf(campaignState), recordOf(campaignState).settlementIds, recordOf(record).id);
+}
+
+/** The courts whose question stands before THIS card's settlement, codepoint-ordered.
+ *  @param {unknown} record @param {unknown} campaignState @returns {readonly string[]} */
+function pendingProposers(record, campaignState) {
+  const world = litWorldOf(campaignState);
+  const self = text(String(recordOf(record).id ?? ''));
+  if (!world || !self) return [];
+  const from = pactProposalsOf(world)
+    .filter((row) => row.state === 'open' && String(row.to) === self)
+    .map((row) => String(row.from));
+  return [...new Set(from)].filter(Boolean).sort(byCodepoint);
+}
+
+/**
+ * THE TWO PREDICATES, IN `worldConditions.js`'s LIVE-ROW SHAPE AND NOT SPLICED THERE (the
+ * chair composes `WORLD_CONDITIONS` at the merge). Each names its subjects (J-EM-3, R-38): the
+ * counterparties the card's court may ask, and the proposers whose question stands before it.
+ * The predicate is DERIVED from the subject list, so a seal never opens on a fact it could
+ * not act on. A dark layer answers the empty list (J-EM-4).
+ * @type {Readonly<Record<string, import('../edit/worldConditions.js').WorldConditionRow>>}
+ */
+export const PACT_WORLD_CONDITIONS = Object.freeze({
+  pactProposable: Object.freeze({
+    predicate: (/** @type {unknown} */ record, /** @type {unknown} */ campaignState) =>
+      proposableCounterparties(record, campaignState).length > 0,
+    subjects: proposableCounterparties,
+    readers: Object.freeze([Object.freeze({
+      id: 'pact-proposal-ledger', module: 'src/domain/worldPulse/pactProposals.js', symbol: 'pactCounterpartiesFor', gate: null,
+    })]),
+    source: 'live',
+  }),
+  pactProposalPending: Object.freeze({
+    predicate: (/** @type {unknown} */ record, /** @type {unknown} */ campaignState) =>
+      pendingProposers(record, campaignState).length > 0,
+    subjects: pendingProposers,
+    readers: Object.freeze([Object.freeze({
+      id: 'pact-proposal-ledger', module: 'src/domain/worldPulse/pactProposals.js', symbol: 'pactProposalsOf', gate: null,
+    })]),
+    source: 'live',
+  }),
+});
+
+/** The host's two answers: members of the state vocabulary above, never re-spelled words.
+ *  @type {readonly string[]} */
+export const PACT_ANSWER_STATES = Object.freeze(
+  PACT_PROPOSAL_STATES.filter((state) => state === 'refused' || state === 'signed'),
+);
+
+/** The direction's op type, in the catalogue's own kebab spelling. */
+export const PACT_ANSWER_OP_TYPE = 'answer-pact-proposal';
+
+/**
+ * THE HOST'S ANSWER (R-21): a proposal made TO the DM's town is answered by the DM's town. A
+ * direction in `operations.js`'s declaration shape, over this module's own state vocabulary,
+ * offered only while `pactProposalPending` holds. DEFINED here and composed into
+ * `DIRECTION_OP_TYPES` by the chair; its tick consumer is slot GR-2b-c, which lands when U123
+ * composes the direction transport.
+ * @type {Readonly<Record<string, import('../edit/operations.js').OpTypeDeclaration>>}
+ */
+export const PACT_DIRECTION_OP_TYPES = Object.freeze({
+  [PACT_ANSWER_OP_TYPE]: Object.freeze({
+    target: 'settlement',
+    payload: Object.freeze({
+      proposalId: Object.freeze({ kind: 'ref', required: true }),
+      answer: Object.freeze({ kind: 'enum', values: PACT_ANSWER_STATES, required: true }),
+    }),
+    stage: 'home',
+    consequence: 'home',
+    requires: Object.freeze({ world: Object.freeze(['pactProposalPending']), registry: Object.freeze([]) }),
+    enables: Object.freeze([]),
+    relatedTo: Object.freeze([]),
+    conflictsWith: Object.freeze([]),
+    duration: null,
+    guards: Object.freeze([]),
+    guardsStated: 'No guard is wired here. The seal is offered only while a question stands before this court, and the two answers are the ledger own settled states.',
+  }),
+});

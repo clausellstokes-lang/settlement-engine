@@ -678,7 +678,12 @@ export async function renderReaderDocuments({
           systemState: derived,
           eventLog: save.campaignState?.eventLog ?? [],
           phase: 'canon',
-          campaign: entitlement === 'dm' ? campaign : null,
+          // FP-29 (2026-09-24): the product's export seam hands the view model a campaign that
+          // NAMES THE SETTLEMENT (resolveExportSeam.js :: `campaign = { settlementId: saveId, … }`),
+          // and the live-world slice resolves its id from `campaign.settlementId` first
+          // (liveWorld.js :107). The harness renders the DM dossier the same way, so a
+          // belief-recording infoMode (FP-24) splits the DM and free readings here as in the product.
+          campaign: entitlement === 'dm' ? { ...campaign, settlementId: save.id } : null,
         })),
       })));
     }
@@ -687,7 +692,7 @@ export async function renderReaderDocuments({
     docs.push(guarded(`dossier-${save.id}.text`, () => ({
       format: 'text',
       body: flattenProse(P.viewModel.buildViewModel({
-        settlement: normalized, systemState: derived, phase: 'canon', campaign,
+        settlement: normalized, systemState: derived, phase: 'canon', campaign: { ...campaign, settlementId: save.id },
       })).join('\n'),
     })));
   }

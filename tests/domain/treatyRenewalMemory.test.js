@@ -252,11 +252,15 @@ describe('GR-5A — the monotone memory (treatyRenewalEnabled)', () => {
     expect(spy.calls, 'the spy is not wired to the real fold').toBeGreaterThan(0);
   });
 
-  it('exactly three src files name treatyRenewalEnabled and the only gate is a strict === true read', () => {
+  it('exactly four src files name treatyRenewalEnabled and the only gate is a strict === true read', () => {
     // FENCE 4 — the gate-polarity census. Modelled on the landed GR-0 fence: a FOURTH file
     // naming this key reds until somebody classifies it, which is the point.
     const naming = SRC_FILES.filter(({ src }) => src.includes(FLAG)).map(({ rel }) => rel).sort();
     expect(naming).toEqual([
+      // GR-5c (SR-1, SR-11): the GRAMMAR coupling rows' `flags` column names the key as DATA, a
+      // string member of a frozen table and never a gate, exactly as pactFormationEnabled's census
+      // classifies the same file. The one gate below is still the only read.
+      'src/domain/certification/couplingRegistryGrammar.js',
       // ⚠ RE-AIMED BY TE-VIRT-1 (ODQ §868/§870.4), not admitted as a new namer: the row
       // moved WHOLE out of subsystemRowsVirtual.js when that file was decomposed at its
       // 800/800 ceiling. Measured at the move — every spelling of this key left the old
@@ -395,11 +399,19 @@ describe('GR-5A — the monotone memory (treatyRenewalEnabled)', () => {
     // …and the FOLD has exactly one production consumer, which is the second live control:
     // this wave's own import edge is visible to the very scan that reports the reader unused.
     expect(consumersOf('worstObservedEverAfter')).toEqual(['src/domain/worldPulse/peaceTerms.js']);
+    // ⭐ THE TRIPWIRE FIRED AT GR-6 (2026-09-24), AS DESIGNED: the grammar volume names TWO
+    // by-name readers of this memory — GR-5d's conversion gate and GR-6's fraying occasion — and
+    // GR-6 landed first. Its reachability obligation moved into that wave's own acceptance file
+    // (tests/domain/mediationGeneralizedGr6.test.js, "the fraying read honours worstObservedEver"),
+    // so the pin is re-aimed at the consumer set rather than retired: GR-5d's gate is the next
+    // import this list must name, in that wave's commit.
+    // ⭐ AND GR-5d LANDED (GR-RENEWAL U3, SR-1): the conversion gate in the renewal leaf reads the memory
+    // BY NAME; its reachability arm is tests/domain/pactConversionGr5d.test.js U3-A3 ("the gate is the
+    // RECORDED history").
     expect(
       consumersOf('worstObservedEverOf'),
-      'worstObservedEverOf has gained a src/ consumer. That is GR-5d landing: the conversion '
-      + 'gate is reading the memory BY NAME, so this tripwire has done its job — move the '
-      + 'reachability obligation into that wave and retire this pin.',
-    ).toEqual([]);
+      'worstObservedEverOf has gained a src/ consumer beyond GR-6\'s fraying occasion and GR-5d\'s '
+      + 'conversion gate: name it here, with its own reachability arm in its wave.',
+    ).toEqual(['src/domain/worldPulse/mediationPressure.js', 'src/domain/worldPulse/pactRenewal.js']);
   });
 });

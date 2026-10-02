@@ -50,6 +50,22 @@ import AccountAiKeysSection from './account/AccountAiKeysSection.jsx';
 import AccountMessagesSection from './account/AccountMessagesSection.jsx';
 import { useOperatorMessages } from './account/OperatorMessagesProvider.jsx';
 
+/**
+ * The rows THE DELETE'S EDGE SCRUB moved, by OBJECT IDENTITY against the snapshot this act
+ * took before the chokepoint ran (EM-F3d-c; the Library door's twin is `scrubbedRowIds` in
+ * settlements/libraryDeleteHandlers.js, held separately here so the account page keeps no
+ * import edge into the Library module). `scrubDeletedCounterparty` replaces a row it
+ * withdraws on and leaves every other one the same object, so identity is an exact reading
+ * of what moved; a deep compare would be a second, weaker one. A row this act DELETED is
+ * absent from `afterRows` and is therefore never offered back to the batch.
+ */
+function rowsTheScrubMoved(beforeRows, afterRows) {
+  const before = new Map((beforeRows || []).map(row => [String(row?.id), row]));
+  return (afterRows || []).filter(row => (
+    before.has(String(row?.id)) && before.get(String(row?.id)) !== row
+  ));
+}
+
 export default function AccountPage({ onNavigateAdmin, routeSection, routeMessageId }) {
   const auth = useStore(s => s.auth);
   const creditBalance = useStore(s => s.creditBalance);
@@ -278,10 +294,46 @@ export default function AccountPage({ onNavigateAdmin, routeSection, routeMessag
       }
       const failedIds = ids.filter((_, i) => results[i].status === 'rejected');
       const failed = new Set(failedIds);
-      ids.filter(id => !failed.has(id)).forEach(id => removeSavedSettlement?.(id, { mutationToken }));
+      // ⭐ THE SCRUB'S DURABLE HALF ON THIS DOOR TOO (EM-F3d-c; the verifier's pass 2b FIX-9,
+      // U112). removeSavedSettlement withdraws every PENDING decree naming a row this act
+      // just deleted (EM-F3d), and EM-F3d-b made the Library's act persist what that scrub
+      // moved. This door was declared out on the reason that it deletes EVERY row and then
+      // clears — true on the success path, FALSE on the partial-failure path below, where a
+      // row whose server delete was REJECTED survives holding a registry the scrub has just
+      // withdrawn in the live view. Unpersisted, a reload re-reads a PENDING decree naming an
+      // id that no longer exists, and EM-F3b's claim walk hands it to the next counterparty.
+      //
+      // ⛔ THE RECEIPTS ARE AWAITED RATHER THAN RACED, the Library act's own idiom: the scrub
+      // reaches the edit lane by a dynamic import (that lane is kept out of first paint), so
+      // awaiting it is what makes the rows read below the finished ones.
+      const beforeScrub = useStore.getState().savedSettlements || [];
+      await Promise.all(ids.filter(id => !failed.has(id))
+        .map(id => removeSavedSettlement?.(id, { mutationToken })?.scrubbed));
+      const moved = rowsTheScrubMoved(beforeScrub, useStore.getState().savedSettlements);
+      // The scrub's batch and nothing else's, through the same owner/session fence the
+      // delete legs ran under — so no persisted shape changes and no key is minted.
+      const persistScrub = () => savesService.mutateBatch?.(
+        { updates: moved },
+        { expectedOwnerId: hydration.ownerId, isSessionCurrent },
+      );
       if (failedIds.length === 0) {
+        // ⛔ THE WHOLE-LIBRARY BRANCH, MEASURED RATHER THAN ASSUMED: every cached row was
+        // named by this act, so nothing survives that could still name a deleted id and
+        // `moved` is empty — this path sends exactly the batches it always sent, none.
+        if (moved.length > 0) await persistScrub();
         clearSavedSettlements?.();
         return;
+      }
+      // ⛔ THE PARTIAL-FAILURE BRANCH — the survivors' withdrawn registries must reach the
+      // store inside this act. A refused batch is reported and does NOT replace the message
+      // below: that message names which rows remain, which is the fact the DM must act on,
+      // and the retry re-runs both the delete and the scrub.
+      if (moved.length > 0) {
+        try {
+          await persistScrub();
+        } catch (error) {
+          console.error('Delete-all: the scrub batch was refused:', error);
+        }
       }
       throw new Error(
         `${failedIds.length} of ${ids.length} settlements could not be deleted from the server. `

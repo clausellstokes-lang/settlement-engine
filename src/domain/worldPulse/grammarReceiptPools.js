@@ -10,10 +10,10 @@
  * WHY A SEPARATE FILE FROM warReceiptPools.js / sovereigntyReceiptPools.js. The same
  * measured reason WW-C recorded: a wave-scoped corpus gets a wave-scoped file, so a later
  * content batch never lands its neighbours in a decomposition they did not cause. This one
- * carries the twelve governed pools wired through GR-4b-ii-W2.
+ * carries the sixteen governed pools wired through LIT1b-pre U4.
  *
  * ANNEX-VERBATIM. Every line below is byte-identical to its authored variant in the
- * governed GR-0 and GR-4 blocks of docs/content/RECEIPT_POOLS_GRAMMAR.md, with only the
+ * governed GR-0, GR-2, GR-4 and GR-6 blocks of docs/content/RECEIPT_POOLS_GRAMMAR.md, with only the
  * `{slot}` tokens turned into interpolations and editorial `[exemplar, …]` tags stripped.
  * The pools were EXTRACTED from the annex mechanically rather than transcribed, and
  * tests/lint/grammarLifecycleKindPools.walker.test.js re-derives them from the document on
@@ -112,6 +112,44 @@ export const GRAMMAR_RECEIPTS = Object.freeze({
     (x) => `The last delivery under the ${x.term} went out in autumn, and after that there was simply nothing owed.`,
     (x) => `Neither court marked the day; in ${x.counterpart} the season's work went on exactly as before.`,
   ],
+  // GR-2b — THE DM PROPOSES A PACT. `pact_proposed` is the `# GR-2` block authored with the
+  // formation corpus on 2026-08-02 and wired for the first time here, with the three families
+  // appended to it for this wave (A-24). The families that name a `{reason}`, a `{route}` or a
+  // week `{band}` are ineligible on the DM road, which records none of them, and the registry
+  // row says which. `realm_verb_propose_pact` is the applied order's own receipt, authored for
+  // this wave in the same section. Both speak only once the table has APPROVED the order.
+  pact_proposed: [
+    (x) => `An offer has gone from ${x.settlement} to ${x.counterpart}: ${x.reason}, and an answer is owed by spring.`,
+    (x) => `${x.settlement} has asked, and the asking is public. The market in ${x.counterpart} had it before the court did.`,
+    (x) => `The court of ${x.settlement} has put terms on paper and entered the date the answer falls due.`,
+    (x) => `A rider left ${x.settlement} down the ${x.route} with a sheet of terms; ${x.reason} is what he carries.`,
+    (x) => `They have asked. Whether ${x.counterpart} answers at all is another matter, and ${x.band} weeks will tell.`,
+    (x) => `The innkeepers on the ${x.route} have seen more riders this month than all last season, and they know what that means.`,
+    (x) => `${x.settlement} has asked in a season when asking is cheap and refusing is not.`,
+    (x) => `The offer is made, and the next word in the matter belongs to ${x.counterpart}.`,
+    (x) => `In ${x.settlement} a single clerk keeps the copy of the offer, and asks each morning whether the answer has come.`,
+    'An offer binds nobody; it is only very hard to take back.',
+  ],
+  realm_verb_propose_pact: [
+    (x) => `The ${x.term} is the whole of the offer ${x.settlement} has sent to ${x.counterpart}, and it waits on an answer.`,
+    (x) => `The offer now stands in the book between ${x.settlement} and ${x.counterpart}, and the court asked owes the answer.`,
+    (x) => `The market in ${x.settlement} is already wagering on what ${x.counterpart} will say to the ${x.term}.`,
+    (x) => `If ${x.counterpart} signs, the ${x.term} binds both courts; until then it binds neither.`,
+    (x) => `The answer will take as long as the road does, there and back, and ${x.counterpart} may use every day of it.`,
+    'Terms have been offered. What they are worth is now for the other court to say.',
+    (x) => `In ${x.settlement}'s hall the clerks copied the ${x.term} out fair before the seal went on.`,
+  ],
+  // LIT1b-pre U4 — THE SIGNING BEAT. `signed` is the `# GR-2` formation ending "Herald (the signing
+  // beat)", authored with the formation corpus on 2026-08-02 and wired for the first time here, as
+  // authored (A-26). The repeated `{good}` fills bind in order, the second carried as `goodSecond`
+  // (the slot convention; GR-6's `counterpartSecond` precedent).
+  signed: [
+    (x) => `${x.good} for ${x.goodSecond}: the courts have set their names to it.`,
+    (x) => `It is signed: ${x.settlement} sends ${x.good}, ${x.counterpart} sends ${x.goodSecond}, and the term runs to a named date.`,
+    (x) => `The market in ${x.settlement} had priced the pact before the seals were dry.`,
+    'Neither court gave way and both took something away, which is what a treaty between equals looks like.',
+    'Signed in peace, and the first wagons move at the turn of the season.',
+  ],
   // GR-4b-α — THE SUCCESSION DISAVOWAL, the one `# GR-4` ending whose producer is landed,
   // persisted AND reachable from a mount this wave owns. GR-4b-iii-a now wires the one honest
   // question-opening pool immediately below; GR-4b-ii-W2 wires `reaffirmed`, the HONOR terminal
@@ -185,5 +223,16 @@ export const GRAMMAR_RECEIPTS = Object.freeze({
     'It died of short wagons, and the ledger says so.',
     (x) => `What arrived under the ${x.term} had been shrinking for seasons, and ${x.settlement} has finally weighed a year against a year.`,
     (x) => `No herald in ${x.counterpart} announced a breach; the granaries in ${x.settlement} announced it.`,
+  ],
+  // GR-6 — THE WAR THAT DID NOT HAPPEN, the `# GR-6` block authored with the grammar corpus on
+  // 2026-08-02 and wired for the first time here, as authored. `{settlement}` is the BROKER and
+  // the two `{counterpart}` fills are the pair in the receipt's party order (the annex's slot
+  // convention: repeated slots bind in order), so family 3's second fill is carried as
+  // `counterpartSecond` — the one slot token turned into the second party's interpolation.
+  brokered_back: [
+    (x) => `${x.settlement} stood between them before the first march; there will be no war this spring.`,
+    (x) => `The muster went cold, and ${x.npc}'s name is written into the reason for it.`,
+    (x) => `${x.counterpart} and ${x.counterpartSecond} stood their musters down in the same week, and the carters got their roads back.`,
+    'The war that did not happen has a name attached to it, which is rare enough to record.',
   ],
 });

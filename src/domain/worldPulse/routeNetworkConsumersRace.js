@@ -280,6 +280,30 @@ export function storyArrivalTicks(input) {
 }
 
 /**
+ * WHO REACHED THE GATE FIRST, from the two legs' arrival readings. The ONE spelling of the
+ * race's verdict law, exported so a consumer that holds a STAGED arrival (the ledgers' own
+ * arrival ticks rather than a simulated walk) asks the same question in the same words.
+ * `reputationRace` below answers through it, so there is no second copy to drift.
+ *
+ * The ticks may be elapsed counts from one departure or absolute arrival ticks: the law only
+ * orders them. A leg that does not arrive loses to one that does; neither arriving is
+ * `neither`; a tie is `together`, because reporting a false winner would put a coin flip
+ * inside a function whose whole contract is determinism.
+ *
+ * @param {{ personArrives: boolean, personTicks: number,
+ *   storyArrives: boolean, storyTicks: number }} legs
+ * @returns {string} one of RACE_OUTCOMES
+ */
+export function raceWinner({ personArrives, personTicks, storyArrives, storyTicks }) {
+  return !personArrives && !storyArrives ? 'neither'
+    : !storyArrives ? 'person'
+      : !personArrives ? 'story'
+        : personTicks < storyTicks ? 'person'
+          : storyTicks < personTicks ? 'story'
+            : 'together';
+}
+
+/**
  * @typedef {Object} RaceReading
  * @property {string} winner    one of RACE_OUTCOMES
  * @property {number} personTicks
@@ -341,12 +365,12 @@ export function reputationRace(input) {
     listeners01: input.listeners01,
   });
 
-  const winner = !journey.arrived && !story.arrives ? 'neither'
-    : !story.arrives ? 'person'
-      : !journey.arrived ? 'story'
-        : journey.ticks < story.ticks ? 'person'
-          : story.ticks < journey.ticks ? 'story'
-            : 'together';
+  const winner = raceWinner({
+    personArrives: journey.arrived,
+    personTicks: journey.ticks,
+    storyArrives: story.arrives,
+    storyTicks: story.ticks,
+  });
 
   return {
     winner,

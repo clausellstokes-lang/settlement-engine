@@ -15,7 +15,7 @@
  * registration, the same stream, the same draws in the same order.
  */
 
-import { registerStep } from '../pipeline.js';
+import { chooseOrPin, registerStep } from '../pipeline.js';
 import { generateNPCs, generateRelationships } from '../npcGenerator.js';
 import { generateFactions, generateConflicts } from '../powerGenerator.js';
 import { rollNamedMass } from '../density/applyDensityLaw.js';
@@ -33,28 +33,34 @@ const FACTION_ATTRACTION = {
 };
 
 /**
- * Consult the pins for one chooser. ⛔ It does NOT advance the stream when a pin is present:
- * in pinned mode nothing draws where the record holds the output, which is what makes a
- * pinned re-derive reproduce the record. Keyed by the RECORD PATH the chooser writes.
- * @param {?Record<string, unknown>} pins @param {string} key @param {Function} draw
+ * The category index — the ONE power-faction lookup that is read on EVERY path, including the
+ * held one: the faction-linkage TRACE's direct/attraction classifier reads it after the
+ * chooser has already returned. Lifted out of `powerLinkage` VERBATIM (EM-R2 §0.R), so it is
+ * built once, outside the draw thunk, and a held roster still gets its own trace reading.
+ * Pure — it takes no draw.
  */
-function chooseOrPin(pins, key, draw) {
-  if (pins && Object.prototype.hasOwnProperty.call(pins, key)) return pins[key];
-  return draw();
+function powerFactionsByCategory(pfList) {
+  return pfList.reduce((acc, pf) => {
+    const cat = pf.category || 'other';
+    if (!acc[cat] || pf.power > acc[cat].power) acc[cat] = pf;
+    return acc;
+  }, {});
 }
 
-/** The power-faction lookups the linkage and its trace need. Pure — it takes no draw. */
-function powerLinkage(powerStructure) {
+/**
+ * The FOUR linkage-only lookups — `pfList`, `governingPF`, `pfAttractionMap` and `totalPower`
+ * are read by `linkFactions` and by nothing else, so under a held `factions` key this whole
+ * object is dead work. It is built INSIDE the draw thunk (EM-R2 §0.R: a SPLIT, not a
+ * deletion — the category index above survives because the trace still reads it).
+ * Pure — it takes no draw.
+ */
+function powerLinkage(powerStructure, byCategory) {
   const pfList = powerStructure?.factions || [];
   const topPowerFaction = [...pfList].sort((a, b) => (b.power || 0) - (a.power || 0))[0];
   return {
     pfList,
     governingPF: pfList.find(f => f.isGoverning) || topPowerFaction,
-    powerFactionsByCategory: pfList.reduce((acc, pf) => {
-      const cat = pf.category || 'other';
-      if (!acc[cat] || pf.power > acc[cat].power) acc[cat] = pf;
-      return acc;
-    }, {}),
+    powerFactionsByCategory: byCategory,
     pfAttractionMap: pfList.map(pf => ({
       pf, profile: FACTION_ATTRACTION[pf.category || 'government'] || ['other'],
     })),
@@ -168,9 +174,15 @@ function derivePopulation(ctx, rng, pins, npcs) {
   const relationships = chooseOrPin(pins, 'relationships',
     () => generateRelationships(npcs, effectiveConfig, institutions));
 
-  const power = powerLinkage(powerStructure);
-  const factions = chooseOrPin(pins, 'factions',
-    () => linkFactions(generateFactions(npcs, relationships), power, rng));
+  // The category index is built on EVERY path because the trace below reads it; the four
+  // linkage-only lookups are built INSIDE the thunk, so a held `factions` key never builds
+  // them. `powerLinkage` still evaluates BEFORE `generateFactions`, exactly as it did, so no
+  // draw moves.
+  const byCategory = powerFactionsByCategory(powerStructure?.factions || []);
+  const factions = chooseOrPin(pins, 'factions', () => {
+    const power = powerLinkage(powerStructure, byCategory);
+    return linkFactions(generateFactions(npcs, relationships), power, rng);
+  });
 
   const conflicts = chooseOrPin(pins, 'conflicts',
     () => generateConflicts(factions, relationships, effectiveConfig, institutions));
@@ -198,7 +210,7 @@ function derivePopulation(ctx, rng, pins, npcs) {
   // groups attached to power factions (direct/attraction/scatter).
   const linkCounts = factions.reduce((acc, fg) => {
     const mode = fg.powerFactionFallback ? 'scatter'
-               : power.powerFactionsByCategory[fg.dominantCategory || 'other'] ? 'direct'
+               : byCategory[fg.dominantCategory || 'other'] ? 'direct'
                : 'attraction';
     acc[mode] = (acc[mode] || 0) + 1;
     return acc;

@@ -1819,4 +1819,189 @@ export const en = Object.freeze({
       a: 'The structural layer (population, factions, supply chains, hooks) is a deterministic simulator, not an LLM. Optional Narrative Refinement spends a credit to turn the simulation into prose. You can keep the raw output and skip the LLM entirely.',
     },
   },
+
+  // The settlement editor's field controls (EM-D0d). `limit` takes the estate's
+  // own used-of-limit pair, {actual} and {max}, so one count reads one way.
+  edit: {
+    field: {
+      emptyOption:     'Not set',
+      noOptions:       'No choices available',
+      rollAnother:     'Roll another',
+      rollUnavailable: 'Rolling is unavailable here',
+      limit:           '{actual} of {max} characters',
+      // EM-D2's font-coverage note (U7). The control reports the characters the
+      // printed dossier cannot draw; this is the sentence it will carry.
+      uncovered:       'These characters will not print: {chars}',
+    },
+    dialog: {
+      title:                   'Editor',
+      open:                    'Edit this card',
+      save:                    'Save',
+      canonNotice:             'This settlement is canon, so its fields are read-only at this door.',
+      refusalRubric:           'The edit did not apply',
+      refusalCanonLocked:      'A canon settlement takes no plain edit, so {field} is unchanged.',
+      refusalInvalidOp:        'This build does not accept that edit, so {field} is unchanged.',
+      refusalNoSave:           'This settlement is not the open save, so {field} is unchanged.',
+      refusalNotADraftField:   '{field} is not a field this door edits yet.',
+      refusalRenameNotApplied: 'The new name was not taken, so {field} is unchanged.',
+      refusalUndeclaredField:  '{field} is not declared for this card.',
+      refusalUnknownTarget:    'The record this card names could not be found, so {field} is unchanged.',
+      refusalUnknown:          'The edit did not apply, so {field} is unchanged.',
+
+      // ── The CREATE errand (EM-F3) ──────────────────────────────────────────
+      // The same door, generating the same declared fields, for a subject that does
+      // not exist yet: one Confirm, and its own refusals. `createSubject` is the word
+      // those refusals put where an edit's refusal names the field, because a create
+      // refusal is about the whole form rather than one row of it.
+      confirm:                 'Confirm',
+      createSubject:           'the counterparty',
+      refusalMintFailed:       'The counterparty could not be founded, so nothing was written.',
+      refusalMintInvalidName:  'A counterparty needs a name, so nothing was written.',
+      // ⛔ THE ONE LINE THE TWO CREATE ERRANDS SHARE, AND THEREFORE THE ONE WITHOUT A
+      // SUBJECT (EM-D1c). A save with no seed can found nothing and can order nothing,
+      // so the same sentence answers the counterparty's door and a roster newcomer's;
+      // naming one of them here would make it false on the other.
+      refusalMintNoSeed:       'This settlement has no seed open, so nothing could be founded.',
+      refusalMintOffPool:      'One of the choices is not on its list, so {field} was not founded.',
+      refusalMintSaveFailed:   'The library did not take {field}, so nothing was written.',
+
+      // ── The roster CREATE errand (EM-D1c) ──────────────────────────────────
+      // The plus on a roster root orders a newcomer as a DECREE, so its refusals are
+      // the registry's own closed set and not the mint's. Each line says what was not
+      // written rather than what the DM did wrong, and none of them names a subject:
+      // the door shows them over a form that has not been staged at all.
+      refusalAddInvalidOp:     'This build does not accept that new entry, so nothing was ordered.',
+      refusalAddNoSave:        'This settlement is not the open save, so nothing was ordered.',
+      refusalAddNotStaged:     'The order was not written, so the page of decrees is unchanged.',
+      refusalAddStaleVocabulary: 'One of the choices is not on its list, so nothing was ordered.',
+      refusalAddUnknownTarget: 'This card takes no new entry at this door, so nothing was ordered.',
+    },
+
+    // ── The edit-mode shell (EM-D1) ─────────────────────────────────────────
+    // Design §3 (the mode indicator, the pencils, the pluses, Done), §14 item 3
+    // (the derived card's provenance line) and §17/§18 (the seals by card, and
+    // the herald's reason for a seal the world does not yet offer).
+    //
+    // ⛔ THE REASON LINES ARE KEYED BY THE WORLD CONDITION'S OWN ID, the ten
+    // `WORLD_CONDITIONS` rows of src/domain/edit/worldConditions.js plus the
+    // `always` row §18's table gives the chronicle. That leaf carries predicates
+    // and no prose, so the sentence lives here and the id is the join: a
+    // condition renamed there leaves its key unanswered rather than drifting.
+    //
+    // ⭐ A `reason` LINE IS A READING NOW, AND IT IS DRAWN ONLY WHERE ONE WAS
+    // TAKEN (EM-E4d, U88; the verifier's NOTE-8 closed). The shell asks
+    // `worldConditionsOf` for every row of that roster, so "No peace has been
+    // offered" is an answer about this town rather than the design's entry for
+    // that seal. A seal whose act the catalogue cannot express never reaches
+    // these lines at all: it draws `sealUnbuilt`, because a finding nobody
+    // measured is the lie this member exists to take off the page.
+    shell: {
+      title:          'Edit mode',
+      indicator:      'This settlement is open for editing.',
+      enter:          'Edit',
+      enterNamed:     'Edit {name}',
+      // ⛔ THE ONE HOME FOR THE WAIT LINE, AND THE ONE KEY THE EAGER SHELL MAY NOT
+      // RESOLVE THROUGH `t()`. `src/App.jsx` owns the shell's Suspense boundary and is
+      // EAGER: measured, one `import { t } from './copy/index.js'` there puts THIS FILE
+      // into the first-paint closure (270 -> 272 modules), which reds the editor-train
+      // arm of tests/build/vendorPdfLazy.test.js and moves three owner-signed budgets.
+      // So the root spells the sentence as a literal, exactly as every other narrated
+      // Suspense fallback in the estate does, and tests/components/editModeShell.test.jsx
+      // pins the two BYTE-EQUAL — the sentence still has one home and a locale still
+      // finds it here.
+      opening:        'Opening the editor…',
+      cardsHead:      'Cards',
+      actsHead:       'Acts',
+      derivedHead:    'Derived',
+      pencil:         'Edit the {card} card',
+      plus:           'Add to {card}',
+      // ⭐ RE-WORDED BY EM-D1c, and the cause is that the old sentence became false: the
+      // three roster roots the catalogue carries an add-op for DO write a new entry now,
+      // through the page of decrees. The line survives for the roster that has no such
+      // act, which is the only place the shell still shows it.
+      plusReason:     'No act adds to this card yet, so its plus stays closed.',
+      actsNote:       'Each act names the state it needs. An act opens when that state holds here and the act behind it is built.',
+      // ⭐ THE TWO LINES THAT KEEP THE §18 ROSTER BELOW HONEST (EM-E4d, judgment 296). A seal
+      // is closed for THREE different reasons and only one of them is a finding about this
+      // town, so the other two say what they actually are: no act stands behind the control,
+      // or the condition holds against more than one counterparty and the act names one.
+      sealUnbuilt:    'No act is built behind this seal yet, so it stays closed.',
+      sealAmbiguous:  'More than one counterparty stands here, so this act cannot name which.',
+      provenance:     'Follows from {source}, so change {source}.',
+      counterpartiesHead: 'Counterparties',
+      done:           'Done',
+      refusalRubric:  'The editor is closed',
+      refusalGated:   'The settlement editor is not open on this account.',
+
+      // The card names the register shows. `npc` is the person's card on both
+      // sides: it wears the pencils of §14 and the mission seal of §17.
+      card: {
+        institution: 'Institution',
+        npc:         'Person',
+        faction:     'Faction',
+        powerSeat:   'Power seat',
+        worldFact:   'World facts',
+        goods:       'Goods',
+        services:    'Services',
+        war:         'War',
+        trade:       'Trade',
+        rumour:      'Rumour',
+        chronicle:   'Chronicle',
+      },
+
+      // §17's acts, in the herald's voice, by the card they start on.
+      seal: {
+        suePeace:       'Sue for peace',
+        acceptPeace:    'Accept the peace',
+        refusePeace:    'Refuse the peace',
+        directForce:    'Direct the force',
+        resupply:       'Resupply',
+        letSiegeFall:   'Let the siege fall',
+        letCoupFail:    'Let the coup fail',
+        receiveEnvoy:   'Receive the envoy',
+        turnEnvoyAway:  'Turn the envoy away',
+        directTrade:    'Direct trade',
+        embargo:        'Embargo',
+        confirmRumour:  'Confirm it',
+        castDoubt:      'Cast doubt',
+        twistRumour:    'Twist it',
+        scheduleEvent:  'Schedule an event',
+        sendOnMission:  'Send on a mission',
+      },
+
+      // The fourth roster (EM-F3, design §2.8): the town's neighbour partners and the
+      // DM's own off-stage counterparties. `offStage` and `real` are the two readings
+      // of one fact, so a row marked off-stage is exactly a row the forge may take.
+      counterparty: {
+        add:      'Add a counterparty',
+        // ⭐ THE ONE NEW LINE OF NOTE-11, and it is the register's OWN idiom rather than a
+        // second voice: `plusReason` above says why a roster's plus is shut when no act can
+        // order its newcomer, and this says why THIS plus is shut when there is no settlement
+        // for the newcomer to belong to. Design §1: edit mode is a state of a SAVED
+        // settlement's dossier, never an anonymous draft.
+        addReason: 'This settlement is not saved yet, so the plus stays closed.',
+        forge:    'Forge this counterparty',
+        none:     'No counterparty is named here yet.',
+        note:     'A counterparty off-stage is a name the table keeps, never a world the simulation carries.',
+        offStage: 'Off-stage',
+        real:     'On the map',
+      },
+
+      // §18's preconditions, each naming the act that would create it, or wait.
+      // `pendingPeaceOffer` is the design's own worked sentence, verbatim.
+      reason: {
+        always:            'This act opens once the catalogue behind it is built.',
+        beliefExists:      'No belief is recorded here. Let one spread, or wait.',
+        envoyArrived:      'No envoy has arrived. Send for one, or wait.',
+        forceInField:      'No force is in the field. Muster one, or wait.',
+        npcPresent:        'No one is present to send. Recall someone, or wait.',
+        openRoute:         'No route is open. Open one, or wait.',
+        pendingPeaceOffer: 'No peace has been offered. Make them sue for it, or wait.',
+        plotInMotion:      'No plot is in motion. Stir a coup, or wait.',
+        siegeInProgress:   'No siege is under way. Lay one, or wait.',
+        tradeWith:         'No trade runs with that partner. Open it, or wait.',
+        warInProgress:     'No war is under way. Declare one, or wait.',
+      },
+    },
+  },
 });

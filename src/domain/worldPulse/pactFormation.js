@@ -53,13 +53,15 @@
  * oathbreaker credibility), AND the responder's dependency fear must not win. Dropping
  * either arm is an executed mutant, and the no-overlap pin reds for it.
  *
- * ── WHAT THIS WAVE DELIBERATELY DOES NOT MINT ───────────────────────────────────
- * ZERO new `wizard_news` kinds. The stage's whole story rides RECEIPTS and the relationship
- * record's turning-point archive, and the Herald sentences §8 promises land with GR-3, the
- * second slice of this same flag, which mints the term families those sentences name (a
- * "grain for ore" line is not interesting until the families it announces exist). The
- * choice is recorded, vetoable, and PINNED: a vocabulary pin asserts this module mints no
- * news kind, so it reds the day GR-3 adds one — the seam-2 tripwire shape.
+ * ── WHAT THIS STAGE MINTS, AND WHAT IT STILL DOES NOT ───────────────────────────
+ * ONE `wizard_news` kind: the signing beat, `signed` (cure lane LIT1b-pre U4, the GR-5e voice's
+ * core pulled forward). GR-2 shipped ZERO kinds and pinned it, leaving §8's sentences to GR-3;
+ * GR-3 landed its families and minted none, so a pact signed in peace was a treaty on the
+ * panel that no Herald item ever announced (the LIT DEPENDENCY MAP: signatures, no news). The
+ * beat is the annex's `# GR-2` `signed` block wired as authored, with its five joins in the same
+ * commit. Refusals, no-overlaps, expiries and the war-overtaken closure still ride RECEIPTS and
+ * the turning-point archive alone, and the vocabulary pin now asserts exactly that: one kind,
+ * minted only on a signature.
  *
  * ── K3 ──────────────────────────────────────────────────────────────────────────
  * This file is the COMPOSER and therefore sits OUTSIDE the K3 zero-import set, exactly as
@@ -88,6 +90,7 @@ import {
   conditionsGroundTruth, devotionGroundTruth, scarcityGroundTruth,
 } from './beliefAxisSubjects.js';
 import { beliefRecord } from './beliefMap.js';
+import { grammarReceipt } from './grammarNews.js';
 import { credibilityScoreOf } from './informationStatecraft.js';
 import { stampSworn } from './oathHolder.js';
 import { amendPactInstrument, closeTermsBrokenByWar, termIdOf } from './pactAmendment.js';
@@ -95,18 +98,23 @@ import {
   openPactProposal, pactFormationActive, pactProposalsOf, prunePactProposals, settlePactProposal,
 } from './pactProposals.js';
 import {
+  openRenegotiationDemands, openRenewalProposals, settleRenewalProposal, signingLeadRecordOf,
+} from './pactRenewal.js';
+import {
   dependencyFearOf, scoreFaithCommunion, scoreMigrationPressure, scoreSharedThreat, scoreTradeDemand,
 } from './pactTriggers.js';
 import { PEACE_TERMS_TUNING, TERM_CATALOG, orderTermsByAsk, termLabel } from './peaceTermsCatalog.js';
 import { round4, treatyPairKey } from './peaceTermsPrimitives.js';
 // The estate's ONE strength derivation, imported from the same module the two sibling
 // readers use (mobilizationReactions.js, peaceReasons.js). No new edge: `beliefMap.js`,
-// already imported above, imports these exact two symbols from here.
-import { buildPressureSummary, settlementStrength } from './relationshipEvolution.js';
+// already imported above, imports these exact two symbols from here. `edgeKeyBetween` is
+// the relationship plane's ONE pair reader (FPQ-35), from the same module, so no new edge
+// either.
+import { buildPressureSummary, edgeKeyBetween, settlementStrength } from './relationshipEvolution.js';
 import {
   RELATIONSHIP_DEFAULTS, appendRelationshipTurningPoint, normalizeRelationshipType,
-  relationshipKeyFromEdge,
 } from './relationshipState.js';
+import { stablePart } from './stablePart.js';
 import { courtPostureOf, courtRiskAppetiteOf } from './strategicPosture.js';
 import { CURRENT_TREATY_TICKS_PER_YEAR } from './treatyClock.js';
 import { treatyLedgerOf } from './treatyEnforcement.js';
@@ -142,6 +150,11 @@ export const PACT_FORMATION_TUNING = Object.freeze({
   /** The magnitude a peacetime sheet drafts at, as a fraction of the catalog's base. Peace
    *  asks for less than a victory takes — §1c, NO MARGIN IN PEACE. */
   PEACETIME_MAGNITUDE01: 0.5,
+  /** THE SIGNING BEAT'S WEIGHT ON THE FEED (LIT1b-pre U4): the war door's own `treaty_signed`
+   *  weight (peaceTerms.js signingBeat), so the two doors into the one instrument read alike.
+   *  Presentation only; nothing in the world reads it. */
+  SIGNING_BEAT_SEVERITY01: 0.55,
+  SIGNING_BEAT_SCORE: 66,
 });
 
 const F = PACT_FORMATION_TUNING;
@@ -157,10 +170,11 @@ const F = PACT_FORMATION_TUNING;
  * it. Every produced ladder starts at `min: 0`, which is what preserves the GR-2 promise
  * that a crossed trigger always drafts something.
  *
- * `renewal` is the ONE empty ladder left, and it is a TOMBSTONE rather than an oversight:
- * its family is GR-5's. A trigger with no draftable family scores, crosses, and is then
- * refused at the draft with `no_draftable_family` in its own receipt — visible, never
- * silent — which is the direction the recorded orphan-vocabulary law wants.
+ * `renegotiation` and `renewal` are the two empty ladders, and by design rather than as
+ * tombstones: GR-5's renewal leaf drafts both from the STANDING instrument, never from a lens.
+ * Handed to this drafter, either is refused at the draft with `no_draftable_family` in its own
+ * receipt — visible, never silent — which is the direction the recorded orphan-vocabulary law
+ * wants.
  *
  * ⚠ THE SIX BOUNDS ARE AUTHORED LITERALS AND THEY ARE UNSOAKED, exactly like every band
  * in `PACT_FORMATION_TUNING`. They are NOT derived from catalog weights and no code may
@@ -189,6 +203,7 @@ export const PACT_DRAFT_LENS = Object.freeze({
   trade_demand: Object.freeze([
     Object.freeze({ min: 0, terms: Object.freeze(['resource_share']) }),
   ]),
+  renegotiation: Object.freeze([]),
   renewal: Object.freeze([]),
 });
 
@@ -201,21 +216,43 @@ function text(v) { return typeof v === 'string' && v.length > 0 ? v : ''; }
 /** @param {string} a @param {string} b @returns {number} */
 const codepoint = (a, b) => (a < b ? -1 : a > b ? 1 : 0);
 
+/** One regional graph edge, at the shape `edgeKeyBetween` declares it.
+ *  @typedef {{ from?: unknown, to?: unknown, id?: unknown }} RegionalEdge */
+
 /**
  * WHAT A COURT KNOWS ABOUT ITSELF. Its own granary, its own pull, its own rites — knowledge,
  * not belief, and the reason this composer sits outside the K3 set. `beliefRecord(x, x)` is
  * never written anywhere in this estate (the recorded absent-self-belief hazard), so a
  * self-read routed through the belief map would silently return nothing forever.
+ *
+ * ⚠ ITS OWN RITES ARE READ WHERE THE FAITH SUBSYSTEM KEEPS THEM (FPQ-27). The devotion used
+ * to be read off a `religionState` key on the settlement record, a key NOTHING in the estate
+ * writes (the observed-shape register's banked reader-with-no-writer row for this file), so
+ * every court reported no devotion and the faith_communion occasion could never cross. A court's
+ * religion state lives at `worldState.religionStates[id]`: `religiousContest.js ::
+ * advanceReligionStates` writes it every tick, the pulse kernel folds it into the world, and
+ * the belief map's devotion family bands every subject from the same record through the same
+ * `devotionGroundTruth` (`beliefMap.js`). So what a court knows of its own rites and what
+ * its neighbours come to believe of them are one reading of one record. Writing a
+ * `religionState` onto the settlement instead was REFUSED: a second writer of faith state.
  * @param {unknown} settlement
+ * @param {unknown} religionState the court's own record, from `ownFaithOf`
  * @returns {{scarcity: Record<string, unknown>, pull: string, devotion: string}}
  */
-function selfBandsOf(settlement) {
+function selfBandsOf(settlement, religionState) {
   const row = recordOf(settlement);
   return {
     scarcity: recordOf(scarcityGroundTruth(row)),
     pull: text(recordOf(conditionsGroundTruth(row)).pullBand),
-    devotion: text(devotionGroundTruth(row.religionState)),
+    devotion: text(devotionGroundTruth(religionState)),
   };
+}
+
+/** A COURT'S OWN RELIGION STATE, where the faith subsystem keeps it (FPQ-27): the one read of
+ *  `worldState.religionStates` in this file. The empty record when the court keeps no faith.
+ *  @param {Record<string, unknown>} worldState @param {string} id @returns {Record<string, unknown>} */
+function ownFaithOf(worldState, id) {
+  return recordOf(recordOf(recordOf(worldState).religionStates)[id]);
 }
 
 /** WHAT A COURT BELIEVES ABOUT ITS NEIGHBOUR — only ever through the belief map.
@@ -380,11 +417,15 @@ export function reserveFor({ worldState, responderId, proposerId, tick }) {
 
 /**
  * THE ANSWER. Two arms, both live, and the verdict names which one spoke.
+ *
+ * `edges` is the tick's regional edge list, and it is how the pair's relationship record is
+ * found (FPQ-35): the record is keyed by the edge that joins the two courts. Absent, or with
+ * no edge between them, there is no record and the reliance axes read the neutral defaults.
  * @param {{worldState: Record<string, unknown>, proposal: Record<string, unknown>,
- *   responderDemand01: number, tick: number}} input
+ *   responderDemand01: number, tick: number, edges?: ReadonlyArray<RegionalEdge>}} input
  * @returns {Readonly<{verdict: string, receipt: string, offer01: number, reserve01: number}>}
  */
-export function answerPactProposal({ worldState, proposal, responderDemand01, tick }) {
+export function answerPactProposal({ worldState, proposal, responderDemand01, tick, edges = [] }) {
   const proposerId = String(proposal.from);
   const responderId = String(proposal.to);
   const terms = Array.isArray(recordOf(proposal.sheet).terms)
@@ -400,7 +441,7 @@ export function answerPactProposal({ worldState, proposal, responderDemand01, ti
   const { reserve01, receipt: reserveReceipt } = reserveFor({
     worldState, responderId, proposerId, tick,
   });
-  const relation = relationshipRecordOf(worldState, proposerId, responderId).state;
+  const relation = relationshipRecordOf(worldState, pairKeyReader(edges), proposerId, responderId).state;
   const defaults = RELATIONSHIP_DEFAULTS[normalizeRelationshipType(text(relation.relationshipType))]
     || RELATIONSHIP_DEFAULTS.neutral;
   const posture = courtPostureOf({ kind: 'settlement', id: responderId },
@@ -430,6 +471,34 @@ export function answerPactProposal({ worldState, proposal, responderDemand01, ti
 }
 
 /**
+ * THE SIGNED RECORD'S OWN COURT NAMES (TREATY-VOICE U1; FPQ-36, the owner's decision of
+ * 2026-09-24: the names ride a NEW SAVED KEY on the signed record). A war settlement keeps
+ * `victorName`/`loserName` and a sale `sellerName`/`buyerName`; a pact has no roles to hang
+ * a name on, so the key is keyed by COURT, never by position. Null unless BOTH courts
+ * resolve a real reader name (a name that only echoes the id is not a name), so a nameless
+ * signature writes no key at all and its record is byte-identical to the day before.
+ * READERS: `treatyOrientation.js :: treatyOrientationOf` (the negotiated arm), and through
+ * it the lifecycle voice's lapse and default beats (`treatyLifecycleVoice.js`), which name
+ * both courts on the Herald where they used to mint nothing.
+ * LIFECYCLE: written once at the mint below; every later act (an amendment, a renewal, a
+ * war's closure, a war's end absorbed) spreads the record and so carries it; legacy pacts
+ * carry none and read `unknown`, as they always did (no migration: launch-shape
+ * persistence, the stasis plan's no-preserved-data law).
+ * @param {ReadonlyArray<string>} ids @param {(id: string) => unknown} settlementOf
+ * @returns {Record<string, string> | null}
+ */
+function courtNamesOf(ids, settlementOf) {
+  /** @type {Record<string, string>} */
+  const names = {};
+  for (const id of ids) {
+    const name = text(recordOf(settlementOf(id)).name).trim();
+    if (!name || name === id) return null;
+    names[id] = name;
+  }
+  return names;
+}
+
+/**
  * MINT OR AMEND — the FOURTH transport into the one instrument.
  *
  * Where the pair already holds a document the sheet becomes a LINEAGE ACT on it (one record
@@ -437,11 +506,17 @@ export function answerPactProposal({ worldState, proposal, responderDemand01, ti
  * and the pair gains no second instrument.
  *
  * @param {{worldState: Record<string, unknown>, proposal: Record<string, unknown>,
- *   tick: number, settlementOf?: (id: string) => unknown}} input
+ *   tick: number, settlementOf?: (id: string) => unknown, strengthFor?: ((id: string) => number)|null}} input
+ *   `strengthFor` is the stage's knowledge of each court, read once at a MINT for the lead the
+ *   renewal leaf records (GR-5c-b); absent, the instrument records no lead.
  * @returns {{worldState: Record<string, unknown>, minted: boolean, amended: boolean,
- *   refused: ReadonlyArray<{cell: string, type: string, receipt: string}>, receipt: string}}
+ *   refused: ReadonlyArray<{cell: string, type: string, receipt: string}>, receipt: string,
+ *   added: ReadonlyArray<Record<string, unknown>>}}
  */
-export function signPactProposal({ worldState, proposal, tick, settlementOf = () => null }) {
+export function signPactProposal({ worldState, proposal, tick, settlementOf = () => null, strengthFor = null }) {
+  // `added` (LIT1b-pre U4) is the clauses this signature actually wrote: every drafted term on a
+  // mint, the non-colliding ones on an amendment, none when every clause collided. The signing
+  // beat reads it to know what it may honestly say.
   const a = String(proposal.from);
   const b = String(proposal.to);
   // ⚠ THE INSTRUMENT RUNS FROM THE SIGNATURE, NOT FROM THE ASKING, and re-basing here is
@@ -471,7 +546,7 @@ export function signPactProposal({ worldState, proposal, tick, settlementOf = ()
     });
     if (amendment.added.length === 0) {
       return {
-        worldState, minted: false, amended: false, refused: amendment.refused,
+        worldState, minted: false, amended: false, refused: amendment.refused, added: [],
         receipt: 'Every clause offered collided with one this instrument already carries.',
       };
     }
@@ -481,14 +556,20 @@ export function signPactProposal({ worldState, proposal, tick, settlementOf = ()
       minted: false,
       amended: true,
       refused: amendment.refused,
+      added: amendment.added,
       receipt: `${a} and ${b} have written a new clause into the instrument that already stood between them.`,
     };
   }
   const [first, second] = [a, b].sort(codepoint);
+  const partyNames = courtNamesOf([first, second], settlementOf);
   /** @type {Record<string, unknown>} */
   const treaty = {
     parties: [first, second],
+    // T4, drop-when-absent: the saved court names (TREATY-VOICE U1), see `courtNamesOf`.
+    ...(partyNames ? { partyNames } : {}),
     mintedTick: tick,
+    // GR-5c-b: the first party's believed lead over the second, lit only, drop-when-absent (the renewal leaf's record).
+    ...signingLeadRecordOf({ worldState, parties: [first, second], strengthFor }),
     budgetGranted: 0,
     budgetSpent: round4(terms.reduce((sum, term) => sum + (Number(term.weightSpent) || 0), 0)),
     treatyTicksPerYear: CURRENT_TREATY_TICKS_PER_YEAR,
@@ -512,50 +593,185 @@ export function signPactProposal({ worldState, proposal, tick, settlementOf = ()
     minted: true,
     amended: false,
     refused: Object.freeze([]),
+    added: terms,
     receipt: `${first} and ${second} have set their names to it, in peace and not at a war's end.`,
   };
 }
 
 /**
- * THE ONE PLACE THIS FILE COMPOSES A RELATIONSHIP KEY (the CR-WR10-G one-reader
- * discipline, applied to the other ledger this lane touches).
+ * THE CLAUSES AN AMENDMENT WROTE, in words (TREATY-VOICE U3): each catalogue label once, in the
+ * order written, joined as a sentence joins them. A reciprocal ask writes one clause per court,
+ * and naming the same clause twice would read as two. Never empty on a real amendment (a
+ * wholly refused one mints no beat), and the fallback is still a sentence.
+ * @param {ReadonlyArray<Record<string, unknown>>} terms @returns {string}
+ */
+function clauseListOf(terms) {
+  const labels = [...new Set(terms.map((term) => `the ${termLabel(text(term.type))}`))];
+  if (labels.length === 0) return 'a new clause';
+  return labels.length === 1 ? labels[0] : `${labels.slice(0, -1).join(', ')} and ${labels[labels.length - 1]}`;
+}
+
+/** The signing beat's kind: the annex's `# GR-2` `signed` block, the formation ending spoken on
+ *  the Herald. */
+const PACT_SIGNED_KIND = 'signed';
+
+/**
+ * THE TWO FACTS THE SIGNING'S PROSE MAY LEAN ON (A-26 in the annex): whether every court takes
+ * something away (a clause both hold, or clauses owed to each), and whether a clause moves
+ * goods (a catalogue stream). ONE context token, because the picker filters on one; `null` when
+ * neither holds, so only the families honest about any signature can draw.
+ * @param {ReadonlyArray<Record<string, unknown>>} terms @param {string} fromId @param {string} toId
+ * @returns {string|null}
+ */
+function signingContextOf(terms, fromId, toId) {
+  const owed = new Set(terms.map((term) => text(term.beneficiary)));
+  const bothGain = owed.has('both') || (owed.has(fromId) && owed.has(toId));
+  const goods = terms.some((term) => recordOf(TERM_CATALOG[text(term.type)]).stream === true);
+  if (bothGain && goods) return 'both_gain_goods';
+  if (bothGain) return 'both_gain';
+  return goods ? 'goods' : null;
+}
+
+/**
+ * THE SIGNING BEAT (cure lane LIT1b-pre U4; the GR-5e voice's core, pulled forward). A pact
+ * signed in peace is ONE Herald item: the annex's `# GR-2` `signed` block, "formation ending;
+ * Herald (the signing beat)", wired as authored, so every sentence it can say is annex-verbatim.
+ * Minted and amended signatures both speak through it (the annex's own lineage note), and the
+ * pool line is the annex's either way; the HEADLINE tells them apart (TREATY-VOICE U3): a fresh
+ * signing says the courts set their names to terms, and an amendment names the clauses it wrote
+ * into the instrument that already stood, because READ 3 heard a clause added to a standing
+ * pact announced in the very words of a new one.
+ * `{settlement}` is the court that ASKED and `{counterpart}` the court that answered, bound here
+ * from the proposal row and never through `grammarSlotRoles`, because a negotiated instrument
+ * has no treaty-level obligee. Both names must be real names or nothing is minted: a slug where a
+ * town belongs is the fabrication the address law forbids. ⚠ The volume's "signing beat with
+ * trigger named and transport mode recorded" is NOT carried as two fields: the wizard-news
+ * normalizer names neither key, so both would be dropped at the first append and on every load
+ * (the allowlist-rebuilder walker's DIRECTION 1), and naming them there is a persisted-shape
+ * change, the owner's. The proposal receipt keeps both. `cause` is the cause row (L10): present only when a decree caused the signing, which is
+ * structurally never until the host's answer lands (FPQ-1), and never defaulted.
+ * @param {{tick: number, proposal: Record<string, unknown>, terms: ReadonlyArray<Record<string, unknown>>,
+ *   fromName: string, toName: string, cause?: string, amended?: boolean}} input
+ *   `terms` is what the signature WROTE (`signPactProposal`'s `added`), so on an amendment it is
+ *   exactly the change; `amended` is that signature's own verdict.
+ * @returns {Record<string, unknown>|null}
+ */
+export function pactSignedBeat({ tick, proposal, terms, fromName, toName, cause, amended = false }) {
+  const fromId = String(proposal.from);
+  const toId = String(proposal.to);
+  if (!fromName || !toName) return null;
+  const line = grammarReceipt(PACT_SIGNED_KIND, String(proposal.id),
+    { settlement: fromName, counterpart: toName }, signingContextOf(terms, fromId, toId));
+  if (!line) return null;
+  return {
+    id: `wizard_news.${Math.round(tick)}.${PACT_SIGNED_KIND}.${stablePart(fromId)}.${stablePart(toId)}`,
+    kind: PACT_SIGNED_KIND,
+    // ⛔ LITERAL, the grammar beats' own idiom: the mint scans (the Herald totality walker, the
+    // letter's minter-totality arm, the impactKind voice walker) read `impactKind:` literals.
+    impactKind: 'signed',
+    significance: line.significance,
+    severity: F.SIGNING_BEAT_SEVERITY01,
+    score: F.SIGNING_BEAT_SCORE,
+    tick,
+    scope: 'regional',
+    headline: amended
+      ? `${fromName} and ${toName} have written ${clauseListOf(terms)} into the instrument that already stood between them`
+      : `${fromName} and ${toName} have set their names to terms, in peace`,
+    summary: line.line,
+    reasons: ['The court that was asked weighed the terms on its own evidence, and they met what it asked of them.'],
+    settlementIds: [fromId, toId],
+    settlementNames: [fromName, toName],
+    parties: [fromId, toId],
+    ending: 'signed',
+    familyId: line.familyId,
+    audience: line.audience,
+    section: line.section,
+    tags: ['world_pulse', 'pact_grammar', 'formation'],
+    ...(cause ? { cause } : {}),
+  };
+}
+
+/**
+ * THE ONE PLACE THIS FILE FINDS A RELATIONSHIP RECORD (the CR-WR10-G one-reader discipline,
+ * applied to the other ledger this lane touches).
  *
- * ⚠ THE KEY IS `rel.A.B` AND IT IS DIRECTED, and both halves of that were a measured bug.
- * The first draft spelled it `[a, b].sort().join('|')` — a hand-rolled key that exists
- * nowhere in the estate — and every pin still passed, because the FIXTURE had been written
- * to the same invented spelling. That is the recorded fixture-mirrors-the-deriver class
- * exactly: the arms were dead and self-consistently green, and only driving a REAL
- * consumer (`canonicalAllianceRows`, which returned an empty web) exposed it. The key is
- * now minted by the estate's own primitive, and because that primitive is DIRECTED the
- * record is looked for under both spellings — the same both-directions read the treaty
- * pair key already takes.
+ * ⚠ THE KEY IS THE REGIONAL EDGE'S OWN ID, AND TWO EARLIER SPELLINGS WERE MEASURED BUGS.
+ * The first draft spelled `[a, b].sort().join('|')`, a key that exists nowhere in the
+ * estate, and every pin still passed because the FIXTURE had been written to the same
+ * invented spelling (the recorded fixture-mirrors-the-deriver class). The second minted
+ * `rel.<a>.<b>` through `relationshipKeyFromEdge` on a bare `{from, to}`, which is only that
+ * primitive's fallback for an edge with no id: every relationship writer keys its record by
+ * the graph edge's id (`region/graph.js :: edgeIdFor`, `edge.<a>.<b>`), so the hostility
+ * read, the refusal memory, the cooldown and the reliance axes never hit a live record
+ * (FPQ-35; the LIT DEPENDENCY MAP measured every run's records as `edge.*`). The key now
+ * comes from `keyOf`, the pass's pair reader over `edgeKeyBetween`, which is the reader the
+ * plane's consumers share, so no key is spelled here at all. A pair no edge joins has no
+ * record, and the empty record is the answer.
  *
- * @param {Record<string, unknown>} worldState @param {string} a @param {string} b
+ * @param {Record<string, unknown>} worldState @param {(a: string, b: string) => string|null} keyOf
+ * @param {string} a @param {string} b
  * @returns {{key: string, state: Record<string, unknown>}}
  */
-function relationshipRecordOf(worldState, a, b) {
-  const states = recordOf(recordOf(worldState).relationshipStates);
-  const forward = String(relationshipKeyFromEdge({ from: a, to: b }));
-  const backward = String(relationshipKeyFromEdge({ from: b, to: a }));
-  const key = states[forward] ? forward : backward;
-  return { key, state: recordOf(states[key]) };
+function relationshipRecordOf(worldState, keyOf, a, b) {
+  const key = keyOf(a, b);
+  if (!key) return { key: '', state: {} };
+  return { key, state: recordOf(recordOf(recordOf(worldState).relationshipStates)[key]) };
+}
+
+/**
+ * THE PASS'S PAIR READER: `edgeKeyBetween` over the tick's regional edges, remembered per
+ * unordered pair. The answer depends on the edges alone, which do not move inside the pass,
+ * and the crossing loop asks the same pair many times. `edgeBetween` matches either
+ * direction and returns the first edge in graph order, so one answer serves both.
+ * @param {ReadonlyArray<RegionalEdge>} edges
+ * @returns {(a: string, b: string) => string|null}
+ */
+function pairKeyReader(edges) {
+  /** @type {Map<string, string|null>} */
+  const seen = new Map();
+  return (a, b) => {
+    const pair = a < b ? `${a}\u0000${b}` : `${b}\u0000${a}`;
+    if (!seen.has(pair)) seen.set(pair, edgeKeyBetween(edges, a, b));
+    return seen.get(pair) ?? null;
+  };
+}
+
+/**
+ * EVERY PAIR THE GRAPH JOINS, once each, in its record key's codepoint order. The courts are
+ * the edge's own two ends and never parsed back out of a key, because the key is an id.
+ * @param {ReadonlyArray<RegionalEdge>} edges @param {(a: string, b: string) => string|null} keyOf
+ * @returns {Array<{key: string, aId: string, bId: string}>}
+ */
+function edgePairsOf(edges, keyOf) {
+  /** @type {Map<string, {key: string, aId: string, bId: string}>} */
+  const pairs = new Map();
+  for (const edge of edges) {
+    const row = recordOf(edge);
+    const aId = row.from != null ? String(row.from) : '';
+    const bId = row.to != null ? String(row.to) : '';
+    if (!aId || !bId || aId === bId) continue;
+    const key = keyOf(aId, bId);
+    if (key && !pairs.has(key)) pairs.set(key, { key, aId, bId });
+  }
+  return [...pairs.values()].sort((x, y) => codepoint(x.key, y.key));
 }
 
 /** ARE THESE TWO COURTS AT WAR? The relationship overlay is the estate's own durable
  *  "this is a war" mark — the same read `peaceTerms.js`'s PASS 1 uses to decide a war has
  *  ENDED, consumed here to decide one is on.
- *  @param {Record<string, unknown>} worldState @param {string} a @param {string} b */
-function hostileBetween(worldState, a, b) {
-  const { state } = relationshipRecordOf(worldState, a, b);
+ *  @param {Record<string, unknown>} worldState @param {(a: string, b: string) => string|null} keyOf
+ *  @param {string} a @param {string} b */
+function hostileBetween(worldState, keyOf, a, b) {
+  const { state } = relationshipRecordOf(worldState, keyOf, a, b);
   return normalizeRelationshipType(text(state.relationshipType)) === 'hostile';
 }
 
 /** HAS THIS PAIR ALREADY BEEN REFUSED, RECENTLY? The remembered refusal IS the cooldown;
  *  read off the relationship record's own archive, never stored a second time.
- *  @param {Record<string, unknown>} worldState @param {string} a @param {string} b
- *  @param {number} tick @returns {boolean} */
-function refusedWithinCooldown(worldState, a, b, tick) {
-  const { state } = relationshipRecordOf(worldState, a, b);
+ *  @param {Record<string, unknown>} worldState @param {(a: string, b: string) => string|null} keyOf
+ *  @param {string} a @param {string} b @param {number} tick @returns {boolean} */
+function refusedWithinCooldown(worldState, keyOf, a, b, tick) {
+  const { state } = relationshipRecordOf(worldState, keyOf, a, b);
   const points = Array.isArray(state.turningPoints) ? state.turningPoints : [];
   return points.some((point) => recordOf(point).kind === 'pact_refused'
     && tick - Number(recordOf(point).tick) <= F.REFUSAL_COOLDOWN_TICKS);
@@ -563,11 +779,11 @@ function refusedWithinCooldown(worldState, a, b, tick) {
 
 /** THE REFUSAL, REMEMBERED. A banded trust delta and a turning-point entry — no grievance,
  *  no casus, no ratchet toward war OR toward pacts (J-GR-7's asymmetry).
- *  @param {{worldState: Record<string, unknown>, proposal: Record<string, unknown>,
- *   tick: number}} input @returns {Record<string, unknown>} */
-function rememberRefusal({ worldState, proposal, tick }) {
+ *  @param {{worldState: Record<string, unknown>, keyOf: (a: string, b: string) => string|null,
+ *   proposal: Record<string, unknown>, tick: number}} input @returns {Record<string, unknown>} */
+function rememberRefusal({ worldState, keyOf, proposal, tick }) {
   const states = recordOf(recordOf(worldState).relationshipStates);
-  const { key, state } = relationshipRecordOf(worldState, String(proposal.from), String(proposal.to));
+  const { key, state } = relationshipRecordOf(worldState, keyOf, String(proposal.from), String(proposal.to));
   if (!Object.keys(state).length) return worldState;
   const trust = clamp01(Number(state.trust) + F.REFUSAL_TRUST_DELTA);
   return {
@@ -592,7 +808,7 @@ function rememberRefusal({ worldState, proposal, tick }) {
  * @property {Record<string, unknown>} worldState  the SAME reference when nothing happened
  * @property {Array<Record<string, unknown>>} settlementUpdates  likewise
  * @property {boolean} changed
- * @property {Array<Record<string, unknown>>} newsEntries  ALWAYS empty in GR-2 (see header)
+ * @property {Array<Record<string, unknown>>} newsEntries  the signing beats, and nothing else (see header)
  * @property {Array<Record<string, unknown>>} receipts
  */
 
@@ -632,6 +848,9 @@ export function advancePeacetimePacts({
   const settlementOf = (id) => freshest.get(id)
     || recordOf(recordOf(items.find((it) => String(recordOf(it).id) === id)).settlement);
   const ids = items.map((it) => String(recordOf(it).id)).filter(Boolean).sort(codepoint);
+  /** WHAT A COURT KNOWS OF ITSELF, read ONE way at every site below (FPQ-27): its freshest
+   *  settlement and its own religion state. @param {string} id */
+  const selfOf = (id) => selfBandsOf(settlementOf(id), ownFaithOf(worldState, id));
   /** THE SNAPSHOT ITEM, with the freshest settlement spliced over it — `settlementStrength`
    *  reads `item.settlement` (population, activeConditions) AND `item` (tier), so a bare
    *  record is not enough. @param {string} id @returns {Record<string, unknown>|null} */
@@ -640,6 +859,14 @@ export function advancePeacetimePacts({
     const fresh = freshest.get(id);
     if (fresh) return item ? { ...recordOf(item), settlement: fresh } : { id, settlement: fresh };
     return item ? recordOf(item) : null;
+  };
+  /** A COURT'S READER NAME for the signing beat (U4), from the tick's snapshot item, or '' when
+   *  none resolved: a name that is only the id echoed back is not a name, so the beat stays
+   *  silent rather than print a slug. @param {string} id @returns {string} */
+  const courtNameOf = (id) => {
+    const item = recordOf(itemOf(id));
+    const name = (text(item.name) || text(recordOf(item.settlement).name)).trim();
+    return name && name !== id ? name : '';
   };
   // THE INJECTED STRENGTH READER, for the same reason the market stage injects three: standing
   // a war layer up inside every formation pin would turn this file into a war fixture.
@@ -667,21 +894,27 @@ export function advancePeacetimePacts({
       return value;
     });
   const rows = canonicalAllianceRows({ ...recordOf(snapshot), worldState });
-  const relationshipStates = recordOf(recordOf(worldState).relationshipStates);
+  // THE TICK'S REGIONAL EDGES, read exactly as `canonicalAllianceRows` reads them one line up,
+  // so the alliance web and every relationship read below see the same graph (FPQ-35).
+  const graphEdges = recordOf(recordOf(snapshot).regionalGraph).edges;
+  const bareEdges = recordOf(snapshot).relationships;
+  /** @type {ReadonlyArray<RegionalEdge>} */
+  const edges = Array.isArray(graphEdges) ? graphEdges : Array.isArray(bareEdges) ? bareEdges : [];
+  const keyOf = pairKeyReader(edges);
 
   let state = worldState;
   /** @type {Array<Record<string, unknown>>} */
   const receipts = [];
+  /** @type {Array<Record<string, unknown>>} */
+  const newsEntries = [];
 
   // ── 1. THE WAR-OVERTAKEN CLOSURE. A war has opened between courts who wrote something
-  // down in peace; the negotiated clauses end and the receipt names the war that ate them. ──
-  for (const key of Object.keys(relationshipStates).sort(codepoint)) {
-    if (normalizeRelationshipType(text(recordOf(relationshipStates[key]).relationshipType)) !== 'hostile') continue;
-    // `rel.<a>.<b>` — the estate's own directed spelling, parsed rather than re-derived,
-    // and a key that is not that shape is skipped instead of being guessed at.
-    const parts = key.split('.');
-    const [, aId, bId] = parts;
-    if (parts.length !== 3 || parts[0] !== 'rel' || !aId || !bId) continue;
+  // down in peace; the negotiated clauses end and the receipt names the war that ate them.
+  // The pairs are the GRAPH'S, each read through the one pair reader (FPQ-35). The old walk
+  // parsed `rel.<a>.<b>` out of the record keys and so skipped every live record, whose key
+  // is an edge id. ──
+  for (const { aId, bId } of edgePairsOf(edges, keyOf)) {
+    if (!hostileBetween(state, keyOf, aId, bId)) continue;
     const closure = closeTermsBrokenByWar({ worldState: state, aId, bId, tick });
     if (!closure.closed.length) continue;
     state = closure.worldState;
@@ -702,7 +935,7 @@ export function advancePeacetimePacts({
     // war is a louder answer than any refusal. Its clauses are closed by step 1 above; this
     // closes the QUESTION, which would otherwise be answered mid-war and re-signed forever.
     const unanswerable = !ids.includes(String(proposal.to))
-      || hostileBetween(state, String(proposal.from), String(proposal.to));
+      || hostileBetween(state, keyOf, String(proposal.from), String(proposal.to));
     if (unanswerable) {
       state = settlePactProposal({ worldState: state, id, state: 'expired' }).worldState;
       receipts.push({
@@ -711,16 +944,23 @@ export function advancePeacetimePacts({
       });
       continue;
     }
-    const responderSelf = selfBandsOf(settlementOf(String(proposal.to)));
+    const responderSelf = selfOf(String(proposal.to));
     const back = crossingsFor({
       worldState: state, rows, fromId: String(proposal.to), toId: String(proposal.from),
       self: responderSelf, strengthFor: strength, threatId: '',
     });
     const answer = answerPactProposal({
-      worldState: state, proposal, responderDemand01: back.length ? back[0].score01 : 0, tick,
+      worldState: state, proposal, responderDemand01: back.length ? back[0].score01 : 0, tick, edges,
     });
+    // GR-5b/5c: a renewal or a demand settles in its own leaf (a clean lapse, or a strain for a refused demand); this pass writes what it hands back.
+    const renewal = settleRenewalProposal({ worldState: state, proposal, answer, tick, settlementOf, snapshot });
+    if (renewal) {
+      state = renewal.ledger ? setSpatialLedger(renewal.worldState, 'treaties', renewal.ledger) : renewal.worldState;
+      receipts.push(renewal.receipt);
+      continue;
+    }
     if (answer.verdict === 'signed') {
-      const signed = signPactProposal({ worldState: state, proposal, tick, settlementOf });
+      const signed = signPactProposal({ worldState: state, proposal, tick, settlementOf, strengthFor: strength });
       state = settlePactProposal({
         worldState: signed.worldState, id, state: signed.minted || signed.amended ? 'signed' : 'refused',
       }).worldState;
@@ -731,9 +971,16 @@ export function advancePeacetimePacts({
         offer01: answer.offer01, reserve01: answer.reserve01,
         receipt: `${answer.receipt} ${signed.receipt}`,
       });
+      // U4: THE SIGNING BEAT, one Herald item per signature; TREATY-VOICE U3: an amendment says
+      // what it wrote rather than announcing a new pact.
+      const beat = signed.minted || signed.amended ? pactSignedBeat({
+        tick, proposal, terms: signed.added, amended: signed.amended,
+        fromName: courtNameOf(String(proposal.from)), toName: courtNameOf(String(proposal.to)),
+      }) : null;
+      if (beat) newsEntries.push(beat);
       continue;
     }
-    state = rememberRefusal({ worldState: state, proposal, tick });
+    state = rememberRefusal({ worldState: state, keyOf, proposal, tick });
     // BOTH verdicts settle the row `refused`: the question WAS answered, and which answer it
     // was lives on the ENDING. `expired` is reserved for the proposal nobody could answer.
     state = settlePactProposal({ worldState: state, id, state: 'refused' }).worldState;
@@ -744,15 +991,19 @@ export function advancePeacetimePacts({
     });
   }
 
+  // GR-RENEWAL U1: in an instrument's first window weeks, a court owed something on it asks to renew it, from its own leaf, before any new occasion is read.
+  const renewals = openRenewalProposals({ worldState: state, ids, tick, snapshot, digest, season });
+  state = renewals.worldState; receipts.push(...renewals.receipts);
+
   // ── 3. THE CROSSINGS. Every ordered pair, best occasion first, one proposal per pair. ──
   for (const fromId of ids) {
-    const self = selfBandsOf(settlementOf(fromId));
+    const self = selfOf(fromId);
     for (const toId of ids) {
       if (toId === fromId
-        || hostileBetween(state, fromId, toId)
-        || refusedWithinCooldown(state, fromId, toId, tick)) continue;
+        || hostileBetween(state, keyOf, fromId, toId)
+        || refusedWithinCooldown(state, keyOf, fromId, toId, tick)) continue;
       const threat = ids.find((other) => other !== fromId && other !== toId
-        && hostileBetween(state, fromId, other)) || '';
+        && hostileBetween(state, keyOf, fromId, other)) || '';
       const crossings = crossingsFor({
         worldState: state, rows, fromId, toId, self, strengthFor: strength, threatId: threat,
       });
@@ -760,7 +1011,7 @@ export function advancePeacetimePacts({
       const best = crossings[0];
       const reciprocal = crossingsFor({
         worldState: state, rows, fromId: toId, toId: fromId,
-        self: selfBandsOf(settlementOf(toId)), strengthFor: strength, threatId: '',
+        self: selfOf(toId), strengthFor: strength, threatId: '',
       }).some((back) => back.trigger === best.trigger);
       const sheet = draftPactSheet({
         trigger: best.trigger, fromId, toId, reciprocal, tick, score01: best.score01,
@@ -787,13 +1038,17 @@ export function advancePeacetimePacts({
     }
   }
 
+  // GR-5c: a court whose believed lead has swung past the band demands new terms on its instrument's year-turn, from its own leaf.
+  const demands = openRenegotiationDemands({ worldState: state, ids, strengthFor: strength, tick, digest, season });
+  state = demands.worldState; receipts.push(...demands.receipts);
+
   // ── 4. A QUEUE, NOT AN ARCHIVE. Settled rows are gone once their receipt has landed. ──
   state = prunePactProposals({ worldState: state });
   return {
     worldState: state,
     settlementUpdates,
     changed: state !== worldState,
-    newsEntries: [],
+    newsEntries,
     receipts,
   };
 }

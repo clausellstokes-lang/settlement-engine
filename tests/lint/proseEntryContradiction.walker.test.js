@@ -26,7 +26,7 @@
  * RED at the moment the reconstruction wave does its job. Every anchor below is a SHIPPED
  * BREACH, and the wave's whole purpose is to cure shipped breaches. The first wave car that
  * rewrites `newsVoice.js:97`, `RECEIPT_POOLS_DOSSIER_STATE.md:5233`, its leaf twin
- * `general.generated.js:1323` or `factionDynamics.js:466` reds this file twice: once with the
+ * `general.generated.js:1323` or `factionDynamics.js :: computeFactionRelationships` reds this file twice: once with the
  * named "the breach text is no longer in the corpus" message, and once at the census bound
  * `failing > FAILING_FLOOR`. Neither red is a defect. THE PROCEDURE, in the order a wave car
  * must follow it:
@@ -390,7 +390,7 @@ describe('THE ANTI-VACUITY GUARD — the walker must fail on the corpus it ships
       cure: 'the same trades listed',
     },
     {
-      where: 'src/generators/factionDynamics.js:466 (the merchant-vs-religious `tense` narrative)',
+      where: 'src/generators/factionDynamics.js :: computeFactionRelationships (the merchant-vs-religious `tense` narrative)',
       find: 'Church land exemptions',
       arm: 'exemption on a null column',
       word: 'exemptions',

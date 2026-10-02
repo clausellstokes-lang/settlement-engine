@@ -4,9 +4,24 @@
 > choices in a READY packet.
 
 - **Status:** `DRAFT | READY | BLOCKED | LANDED | STALE | SUPERSEDED`
-- **Packet version:** `<integer>`
-- **Verified base:** `<branch>` at `<full SHA>`
+  — the VALUE ALONE. Every stamp, caveat, condition and date goes on the
+  continuation lines beneath this row: the parser anchors the status at
+  end-of-line and takes it only when exactly one row matches, so an appended
+  clause parses as nothing and the packet refuses against its own manifest.
+  The same rule binds **Verified base**.
+- **Packet version:** `<integer>` — bumped by EVERY change to this body,
+  including a repair, a re-point or one word. Prose that says "version N
+  changed X" names the TRUE prior number, or the sentence is reworded. The
+  coordinator's placement stamp is not the body and bumps nothing.
+- **Verified base:** `<branch>` at `<full SHA>` — under a parallel train this is
+  THIS packet's OWN lane branch at the train base's SHA, stamped at placement.
+- **Preamble:** `<path>` at SHA-256 `<measured at your read tip>` — MEASURED,
+  never copied from a brief or a sibling packet.
 - **Last revalidated:** `<date and SHA>`
+
+  — the THIRD stamp. The coordinator's placement writes `Status`, `Verified base`
+  and this row; a re-placement RE-STAMPS this row too, so a re-placed body does not
+  keep the previous version's date. Nothing reads it, which is exactly why it drifts.
 - **Depends on:** `<exact landed SHAs or NONE>`
 - **Collision group:** `<shared files/waves that must serialize or NONE>`
 - **Commit authority:** `<edits only; manager commits | agent may commit exact manifest>`
@@ -183,6 +198,17 @@ Absence rules:
 - Edit story: `<existing DM verb/proposal path>` or
   `ENGINE-ONLY: <reason>`
 
+### User-facing copy
+
+Every string this packet adds, SPELLED — exact key, exact words, the estate's
+own interpolation idiom and parameter names. `NONE` if it adds none. A build
+lane never invents user-facing words.
+
+⛔ No em dash and no exclamation point in a `src/` string literal: `tests/copy/voiceMechanics.test.js`
+counts both per file and holds a file this packet CREATEs at ZERO, so a literal spelled here with an
+em dash contradicts this packet's own §10. Spell the replacement (`': '` for `' — '`) here — a build
+lane may not choose one — and run the walker's own counter over the planned text at compile.
+
 ## 7. Exact change manifest
 
 | Action | File | Symbol/region | Maximum delta | Coding instruction |
@@ -192,7 +218,51 @@ Absence rules:
 | `REGISTER` | `<path>` | `<registry row>` | `<+eff>` | `<instruction>` |
 | `TEST` | `<path>` | `<cases>` | `n/a` | `<instruction>` |
 
-Generated artifacts: `NONE | <exact command and expected file set>`.
+`TEST` is for a test file that EXISTS at the verified base. A NEW test file is
+`CREATE` — a non-`CREATE` row on an absent path refuses at validation, and §4
+already counts that file among the absent CREATE targets. ⚠ The discriminator is
+existence at YOUR base, not newness: a path a NAMED SIBLING creates before this
+packet dispatches is still `TEST`, and this row names that sibling.
+
+A row that shifts lines in a file holding a LINE-ADDRESSED register row carries
+that re-address as its OWN row here, with the before -> after line numbers; path,
+category and snippet stay byte-identical. Grep every line-addressed register for
+every path this packet modifies, and say `none found` with the command when that
+is the truth.
+
+A row under an ENFORCER directory carries its mutation-coverage row with its own
+`rowKey`; read the enforcer set at your own tip rather than recalling it.
+
+A `CREATE` of a `.js` leaf under `src/domain` or `src/generators` carries, as its own rows, every
+instrument disposition its planted text moves — measured by running each instrument's OWN logic in
+plain `node`, never reasoned about: the entropy-root census's `createPRNG(` SITE COUNT as well as its
+read-site arms when the leaf mints a stream; the ruin-filter roster's disposition (ROUTED or EXEMPT,
+with the reason in that table's own shape) when the leaf's CODE reads `.institutions`; the goods
+roster row when it imports a goods identity half-table. Each row states its figure AS A DELTA, and the
+figure the arm will red with is the ARM'S OWN MESSAGE, never a number adopted by hand.
+
+A row that REGISTERS an application command carries `tests/application/commands/commandRegistry.test.js`
+as a `TEST` row — the reviewed-capability pin reds by construction — with the review sentence written in
+§6. A row that edits a store dispatches by LITERAL names: the dead-operation ratchet cannot see a
+computed `get()[name]` dispatch and convicts the file.
+
+Generated artifacts: `NONE | <exact command and expected file set>`. A global
+aggregate another member also moves — a whole-tree census, a producer count — is
+NOT a generated artifact of this packet: state the predicted DELTA here and leave
+the regeneration to the terminal.
+
+Every register figure stated anywhere in this packet is a DELTA, never an
+absolute; executed history keeps its figure and carries an as-of mark naming the
+SHA it was measured at.
+
+This table and the JSON `changeManifest` are SET-EQUAL on paths and on actions.
+Compile CAPSULE-FIRST and generate the table from it; a path in one and not the
+other is either an edit the seal never declared or an instruction nobody wrote.
+
+A `_pending` block — the symbols an unlanded sibling will provide — lives at the
+sibling key `_pendingRequiredSymbols`, never as an element of `requiredSymbols`:
+every element needs a non-blank `path` and `symbol`, so the array form refuses
+twice.
 
 No other file may be edited.
 
@@ -232,6 +302,11 @@ Bounded algorithm:
 This table is the entire edge-case budget. Omit inapplicable rows; do not add a
 cross-product during implementation.
 
+Every case names the FILE that holds it and the §7 row that authorizes that
+file's edit. A case with no authorized file is homeless and this packet is
+BLOCKED. The row's declared arm count, the cases homed there and §10/§12's title
+delta state the SAME number; red-first plants are not `it`s and are not counted.
+
 ## 10. Verification commands
 
 ```sh
@@ -245,6 +320,28 @@ sh scripts/gate-mutex.sh --run -- npx vitest run <exact test files>
 
 # Named golden/dormancy proof, when applicable
 sh scripts/gate-mutex.sh --run -- npx vitest run <exact oracle files>
+
+# PRE-SEAL, before any of the above: the count prover that ships beside this
+# packet. It reads the Markdown and the capsule and runs no test runner.
+node <ID>.count-prover.mjs <ID>.md <ID>.manifest.json
+
+# The browser suite, when this packet touches src/components/**, a route, a
+# data-testid or an accessible name. Name the spec FILES, never the directory;
+# find them with: git grep -n -F '<the name>' -- e2e
+# Run only after: lsof -nP -iTCP:5173 -iTCP:5174 -sTCP:LISTEN prints nothing,
+# and in a script of its own: the browser suite is an exclusive gate.
+npx playwright test --project=chromium <exact e2e spec files>
+
+# PRE-REPORT, no gate slot: the TypeScript compiler API over THIS packet's own
+# src/ paths, against tsconfig.full.json's floor. eslint alone is not enough.
+node <scratch>/typecheck-paths.mjs <exact src/ paths>
+
+# The instruments a new src/domain or src/generators leaf meets, each run with
+# its OWN logic in plain node at compile and through the gate at the build:
+#   tests/lint/entropyRootCensus.walker.test.js   (site count AND read sites)
+#   tests/lint/ruinFilterRoster.walker.test.js    (a raw .institutions read)
+#   tests/build/vendorPdfLazy.test.js             (the goods ST-2 roster)
+#   tests/copy/voiceMechanics.test.js             (every literal this packet spells)
 
 # Sealed receipt and exact-state handoff; neither is landing authority
 npm run check:packet -- <ID>
@@ -262,6 +359,15 @@ packet's baseline posture. Report actual counts; do not copy historical counts.
 In addition to `PACKET_STANDARD.md`, stop if:
 
 - the dispatch seal is missing, invalid, or belongs to another worktree state;
+- a governing e2e spec, walker or ratchet reds and the packet would weaken,
+  widen or skip it to pass;
+- a sealed acceptance case has no file and no §7 row authorizing that file's
+  edit, or the row's arm count, the matrix's homes and the title delta disagree;
+
+- a governing instrument reds with a figure this packet did not predict (the
+  arm's own message decides; a figure adopted by hand is the failure);
+- a red-first's log prints no test count, or `Tests no tests` — the file did not
+  load, so nothing was proved and no red may be claimed;
 - resume reports authority, HEAD, foreign-work, or receipt-integrity drift;
 - `<packet-specific dependency or collision>`;
 - `<packet-specific forbidden shift>`;

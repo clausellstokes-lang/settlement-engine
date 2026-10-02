@@ -264,6 +264,10 @@ export const WHAT_PHRASES = Object.freeze({
   commercial_casus_suppressed: 'a commercial grievance struck out by the stock book',
   commercial_severance_crossing: 'a trading tie cut',
   commercial_partnership_crossing: 'two towns binding their markets together',
+  // TR-3 BELIEVED MARKETS — the T-1 tellable, the wrong-market arrival (marketNews.js). A noun
+  // phrase like its TR-1 neighbours, so it reads both capitalized-first and after 'word of …';
+  // it names the glut the caravans found and never the band either side believed.
+  market_wrong_market_arrival: 'caravans unloading into a market that no longer wanted them',
   // GR-0 THE LIFECYCLE VOICE — the two moments the pact grammar used to pass over in
   // silence. Phrased world-side while the virtual flag is dark, for the same reason the
   // WR-10 cohort above is: a privileged projection or a later replay must never fall
@@ -293,7 +297,17 @@ export const WHAT_PHRASES = Object.freeze({
   // IN-0a: the week a BOUGHT telling becomes what a court actually reckons. The townsfolk
   // repeating it do not know it was paid for — the phrase is what they think happened.
   plant_took: 'a story taking hold that somebody paid to plant',
+  // IN-2: the week a planted weakness puts the mark's army on the road.
+  lure_sprung: 'a march made on a weakness somebody planted',
+  // IN-3: the sweep that found no spy and named one anyway, and the hum of a quiet sweep.
+  false_accusation: 'a spy named where none was found',
+  sweep_launched: 'strangers questioned at the gates',
   intel_transfer: 'word passing quietly between courts',
+  // IN-4: the reputation race, read at the arrivals the ledgers keep, and its jewel.
+  race_person: 'a traveller arriving ahead of his own story',
+  race_story: 'a story arriving ahead of the man it is about',
+  race_together: 'a traveller and his story arriving together',
+  word_came_too_late: 'a true account arriving after the ruling it would have changed',
   // power / faction / coup
   coup_succeeded: 'a seizure of power',
   coup_suppressed: 'an uprising put down',
@@ -456,6 +470,8 @@ export const WHAT_PHRASES = Object.freeze({
   // ENC-4b — the §C row the chair marked KEPT as drafted. It says the thing the kind is about:
   // not that a refusal happened, but that it did not stay private. Same §886 word order fence.
   chance_meeting_exposed: 'a refusal that did not stay private',
+  // GR-6: the war that did not happen, in the words a market uses for a march that never left.
+  brokered_back: 'a war talked down before the first march',
   npc_arrival: 'a new arrival',
   npc_assignment: 'a post newly filled',
   npc_death: 'a funeral bell',
@@ -464,7 +480,11 @@ export const WHAT_PHRASES = Object.freeze({
   npc_rejection: 'a petitioner turned away',
   npc_verdict: 'a verdict handed down',
   occupation_posture: 'the occupiers changing their bearing',
+  // GR-2b: the DM's PROPOSE_PACT order, as the proposal beat carries it.
+  pact_proposed: 'a pact offered to another court',
   razing: 'buildings put to the torch',
+  // GR-2b: the same order's applied beat, in the words a market would use for it.
+  realm_verb_propose_pact: 'an offer of terms between courts',
   // The regional relief beat. wizardNews intercepts it for its own positive-sign
   // headline; the rumor net had no word for it at all.
   relief: 'the worst of it past',
@@ -473,6 +493,8 @@ export const WHAT_PHRASES = Object.freeze({
   // The lifecycle pair, deliberately answering each other.
   settlement_resettled: 'hearths lit again',
   settlement_terminal_death: 'the last hearths going cold',
+  // LIT1b-pre U4: the signing beat, in the words a market would use for a pact signed in peace.
+  signed: 'a pact signed in peace between courts',
   sovereignty_conveyed: 'a crown passing to another hand',
   steading_forced: 'a new steading founded',
   strategy_sue_for_peace: 'a suit for peace',

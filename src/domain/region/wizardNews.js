@@ -10,15 +10,28 @@ export const WIZARD_NEWS_SIGNIFICANCE = Object.freeze({
   ROUTINE: 'routine',
 });
 
-// The governed section vocabulary mirrors the Herald's six desks without
+// The governed section vocabulary mirrors the Herald's seven desks without
 // importing the reader-only routing module into the regional engine graph.
 // Unknown persisted values fail closed to absence; every valid supplied desk
 // survives normalization unchanged.
 const WIZARD_NEWS_SECTIONS = new Set([
-  'war', 'faith', 'trade', 'events', 'divination', 'adjudication',
+  'war', 'faith', 'trade', 'knowledge', 'events', 'divination', 'adjudication',
 ]);
 
 const MAX_ENTRIES = 240;
+
+// FP-31 (the chair's ruling of 2026-09-24 on FP-21 U2, vetoable by the owner): THE FEED KEEPS
+// THE LAST YEAR WHOLE. Every entry inside the newest windowWeeks ticks of the feed
+// survives the cap; MAX_ENTRIES and the arc rescue govern only what survives beyond it (see
+// capEntries). The span is the estate's own year, IMPORTED from the one interval table rather
+// than mirrored, so the window cannot drift from the calendar the advance menu offers.
+// FP-34 (the FP chair, 2026-09-24): the feed's retention window is a REGISTERED DRAFT TUNING TABLE
+// (tests/lint/.tuning-register.json, like the docket's horizon), pinned equal to INTERVAL_WEEKS.one_year
+// by tests/domain/wizardNewsYearWindow.test.js, so intervalWeeks.js stays OUT of the first-paint set
+// (the import owed about 387 B of eager bytes; a signed budget never rises by the chair's hand) and
+// the tuning inventory sees a table, not a named magic number. The owner signs it at the tuning sitting.
+export const FEED_RETENTION_TUNING = Object.freeze({ windowWeeks: 52 });
+// Read in capEntries, never at module scope: a top-level read held this module in first paint.
 
 // ── Types ──────────────────────────────────────────────────────────────────
 
@@ -771,7 +784,46 @@ function sortEntries(entries) {
 }
 
 /**
- * Cap the feed to `max`. At or below the cap this is the byte-identical recency
+ * Cap the feed. FP-31, A STATED BEHAVIOUR CHANGE (the chair's ruling of 2026-09-24 on FP-21 U2,
+ * vetoable by the owner): THE LAST YEAR IS KEPT WHOLE. Every entry inside the newest
+ * FEED_RETENTION_TUNING.windowWeeks ticks survives; the policy of record (`recencyArcCap`: recency
+ * plus the major-arc rescue) runs unchanged over the whole feed and decides only what survives
+ * BEYOND the window. The two compose as a union:
+ *   - at or below `max` nothing is evicted (unchanged);
+ *   - when the policy already keeps the whole window, the result IS the policy's own array,
+ *     byte-identical to the pre-FP-31 cap (every feed that holds fewer than `max` entries in
+ *     its newest year, rescue room included);
+ *   - otherwise the window entries the policy would evict are restored in global order, and
+ *     every head the policy rescued stays: the biggest burnings still outlive the year, and a
+ *     lesser one is still forgotten once it leaves it (believedRazings.js, THE RECORDED LIMIT,
+ *     now with a one-year floor).
+ * WHY: the kernel appends once per weekly tick and every append re-caps, so at the year grain
+ * the news of the advance in progress was evicted before any surface showed it (FP EXPERIENCE
+ * READ 2 §3 S4: year one minted 426, the feed kept 240). The window is anchored on the NEWEST
+ * ENTRY'S tick and knows nothing of the advance grain, so a one-year advance still composes the
+ * same feed as fifty-two one-week advances (advanceCampaignWorldInterval.test.js EQUIVALENCE).
+ * @param {WizardNewsEntry[]} sortedEntries  already sorted newest-first
+ * @param {number} [max]
+ * @returns {WizardNewsEntry[]}
+ */
+function capEntries(sortedEntries, max = MAX_ENTRIES) {
+  if (sortedEntries.length <= max) return sortedEntries.slice(0, max);
+  const capped = recencyArcCap(sortedEntries, max);
+  // The window is a PREFIX of the newest-first order: sortEntries' first key is the tick.
+  const floorTick = sortedEntries[0].tick - FEED_RETENTION_TUNING.windowWeeks;
+  /** @type {Set<WizardNewsEntry>} */
+  const kept = new Set(capped);
+  let restored = 0;
+  for (const entry of sortedEntries) {
+    if (entry.tick <= floorTick) break;
+    if (!kept.has(entry)) { kept.add(entry); restored += 1; }
+  }
+  return restored === 0 ? capped : sortedEntries.filter(e => kept.has(e));
+}
+
+/**
+ * THE POLICY OF RECORD (the pre-FP-31 capEntries, unchanged; capEntries above adds the
+ * one-year window over it). At or below the cap this is the byte-identical recency
  * slice (`sortedEntries.slice(0, max)`). Above it: keep the most-recent `max`
  * (RECENCY — so recent low-volume notables, e.g. a season marker, always
  * survive), then RESCUE the heads of major arcs that recency would flush — one
@@ -782,10 +834,10 @@ function sortEntries(entries) {
  * deterministic: operates on the pre-sorted array and filters by reference, so
  * the global newest-first order is preserved and the total is always <= max.
  * @param {WizardNewsEntry[]} sortedEntries  already sorted newest-first
- * @param {number} [max]
+ * @param {number} max
  * @returns {WizardNewsEntry[]}
  */
-function capEntries(sortedEntries, max = MAX_ENTRIES) {
+function recencyArcCap(sortedEntries, max) {
   if (sortedEntries.length <= max) return sortedEntries.slice(0, max);
   const recent = sortedEntries.slice(0, max);
   /** @type {Set<WizardNewsEntry>} */

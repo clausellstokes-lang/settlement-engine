@@ -10,6 +10,7 @@ import { createCommandRegistry } from './commandRegistry.js';
 import { canonEventApplySpec } from './adapters/canonEventApply.js';
 import { partyImpactRecordSpec } from './adapters/partyImpactRecord.js';
 import { pendingEditCommitSpec } from './adapters/pendingEditCommit.js';
+import { plainEditApplySpec } from './adapters/plainEditApply.js';
 import {
   importCampaignAttachExistingSpec,
   importSettlementCreateAndAttachSpec,
@@ -20,6 +21,7 @@ export const standardCommandRegistry = createCommandRegistry([
   canonEventApplySpec,
   partyImpactRecordSpec,
   pendingEditCommitSpec,
+  plainEditApplySpec,
   importSettlementCreateAndAttachSpec,
   importCampaignAttachExistingSpec,
   ...customContentCommandSpecs,

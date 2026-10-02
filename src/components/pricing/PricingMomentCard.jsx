@@ -20,7 +20,7 @@
  * for vertical space. On mobile, full-width above the bottom nav.
  */
 
-import { useEffect, useState, useCallback } from 'react';
+import { useEffect, useRef, useState, useCallback } from 'react';
 import { useStore } from '../../store/index.js';
 import { Funnel, EVENTS } from '../../lib/analytics.js';
 import { purchasesOpen } from '../../lib/launchGate.js';
@@ -65,16 +65,35 @@ export default function PricingMomentCard() {
   // this app-wide nudge can reach it).
   const setAuthModalOpen = useStore(s => s.setAuthModalOpen);
   const [exiting, setExiting] = useState(false);
+  // Every exit timer this card has armed and not yet seen fire, held so the card
+  // can release them when it leaves the tree. A 220 ms handle that outlives the
+  // mount dispatches into a torn-down renderer: React reads window inside
+  // resolveUpdatePriority and throws ReferenceError after a jsdom file's teardown
+  // (the CI red, judgment 242). A second dismiss inside the exit window arms a
+  // second handle, so the pending set is a list rather than a single id: keeping
+  // both arms alive is what leaves the arming behaviour exactly as it was.
+  const exitTimers = useRef(/** @type {ReturnType<typeof setTimeout>[]} */ ([]));
 
   // Pre-declare handlers via useCallback so the auto-dismiss effect can
   // depend on a stable reference (react-hooks/exhaustive-deps wants it).
   const handleExit = useCallback(() => {
     setExiting(true);
-    setTimeout(() => {
+    const timer = setTimeout(() => {
+      exitTimers.current = exitTimers.current.filter((pending) => pending !== timer);
       clearMoment?.();
       setExiting(false);
     }, 220);
+    exitTimers.current.push(timer);
   }, [clearMoment]);
+
+  // The release half of the same handle. This effect arms nothing of its own; its
+  // cleanup is the whole point, and it is the discipline the 30 s auto-dismiss
+  // below already keeps. The exit animation, its 220 ms and the clearMoment it
+  // fires are untouched: only a handle whose tree is gone is dropped.
+  useEffect(() => () => {
+    for (const timer of exitTimers.current) clearTimeout(timer);
+    exitTimers.current = [];
+  }, []);
 
   const reason = activeMoment?.reason;
   // One source of truth for the moment's intent — drives accent, eyebrow, label,

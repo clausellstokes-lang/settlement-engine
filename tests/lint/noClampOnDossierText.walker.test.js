@@ -39,10 +39,27 @@
  * found, a planted line clamp is found, and a clean source yields nothing — so a
  * detector that stopped matching reds here rather than passing the whole tree.
  *
- * ⚠ SCOPE. The dossier and its shells only (`src/components/new/**`,
- * `src/components/dossier/**`). Admin panels, pickers and palettes outside the
- * dossier are explicitly out of scope: this rule is about what the PRODUCT prints
+ * ⚠ SCOPE. The dossier, its shells, and THE EDITOR AT ITS FOOT (`src/components/new/**`,
+ * `src/components/dossier/**`, `src/components/edit/**`). Admin panels, pickers and palettes
+ * outside the dossier are explicitly out of scope: this rule is about what the PRODUCT prints
  * to a reader, not about every string in the app.
+ *
+ * ⭐ THE EDITOR JOINED THE SCOPE AT THE UNFREEZE (U11, 2026-09-23). The widening was RULED in
+ * advance and held back on purpose — judgment 267(4) reserved it for "once the mount is
+ * landed", and EM-D3c landed the mount — because a tree whose pages nothing renders cannot be
+ * measured for what it prints. Edit Mode draws written sentences at the dossier's foot: a
+ * decree's authored line, a guard's reason, a counterparty's name, a free field's text. A
+ * clamp there declines to print them exactly as the Economics tab's did.
+ *
+ * ⛔ AND THE GAP WAS MEASURED, NOT ASSUMED. At `8b5565922`, with `textOverflow: 'ellipsis'` and
+ * `whiteSpace: 'nowrap'` planted by copy into `DecreeRegistryPage.jsx`, THIS WALKER STAYED
+ * GREEN ("Test Files 1 passed | Tests 6 passed") while the phone-chrome census and the
+ * keyboard-reachability walker each named that same planted file. Two of the three UI walkers
+ * already governed the editor; this was the one that did not.
+ *
+ * ⭐ THE TREE ARRIVES CLEAN, AND THAT IS A MEASUREMENT: at `8b5565922` the five editor surfaces
+ * carry ZERO clamps and ZERO nowraps, so the widening owes NOWRAP_REGISTRY not one row. The
+ * surfaces and the members that landed them are the roster ARM 0 pins below.
  */
 import { describe, expect, it } from 'vitest';
 import { readFileSync, readdirSync, statSync } from 'node:fs';
@@ -51,7 +68,48 @@ import { fileURLToPath } from 'node:url';
 import { parse } from 'espree';
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), '../..');
-const DOSSIER_TREES = ['src/components/new', 'src/components/dossier'];
+const DOSSIER_TREES = ['src/components/new', 'src/components/dossier', 'src/components/edit'];
+
+/**
+ * ⭐ THE EDITOR'S ROSTER — each surface, what it draws, and the member that landed it.
+ *
+ * A tree name alone would let a page be renamed out of the rule in silence, which is the
+ * failure the phone census's own header describes one level up. These rows are checked
+ * against the walk in ARM 0: a surface that leaves the tree reds and must be re-pointed.
+ * Every count below was measured at `8b5565922` by this file's own detector.
+ */
+const EDITOR_SURFACES = Object.freeze([
+  {
+    path: 'src/components/edit/EditModeShell.jsx',
+    draws: "Edit Mode's shell — the register, the three roster roots, the seal block and EM-F3's counterparties roster",
+    member: 'EM-D1 (the shell), EM-F3 (the counterparties roster), EM-D3c (the registry mount)',
+    clamps: 0, nowraps: 0,
+  },
+  {
+    path: 'src/components/edit/CardEditorDialog.jsx',
+    draws: "the door: one card's fields, the provenance line and the Confirm act",
+    member: 'EM-D0e (the door), EM-D2b (the coverage prop)',
+    clamps: 0, nowraps: 0,
+  },
+  {
+    path: 'src/components/edit/DecreeRegistryPage.jsx',
+    draws: "the page of decrees at the dossier's foot — authored decree lines, guard reasons, chronicle links",
+    member: 'EM-D3 (the page), EM-D3c (its mount)',
+    clamps: 0, nowraps: 0,
+  },
+  {
+    path: 'src/components/edit/PoolField.jsx',
+    draws: "a pooled field's chooser inside the door",
+    member: 'EM-D0e',
+    clamps: 0, nowraps: 0,
+  },
+  {
+    path: 'src/components/edit/FreeField.jsx',
+    draws: "a free-text field inside the door, with EM-D2's uncovered-glyph notice",
+    member: 'EM-D0e (the field), EM-D2/EM-D2b/EM-D2c (the coverage notice)',
+    clamps: 0, nowraps: 0,
+  },
+]);
 
 /**
  * THE NOWRAP REGISTRY — every `whiteSpace: 'nowrap'` the dossier is allowed to carry,
@@ -150,14 +208,40 @@ function scanClampSites(source, path) {
   return { clamps, nowraps };
 }
 
-const LIVE = DOSSIER_TREES
+/** Every file the walk reads, repo-relative — the denominator ARM 0 pins. ONE walk. */
+const SCANNED = DOSSIER_TREES
   .flatMap((tree) => walkFiles(join(ROOT, tree)))
-  .sort()
-  .map((abs) => scanClampSites(readFileSync(abs, 'utf8'), relative(ROOT, abs).replace(/\\/g, '/')))
+  .map((abs) => relative(ROOT, abs).replace(/\\/g, '/'))
+  .sort();
+
+const LIVE = SCANNED
+  .map((rel) => scanClampSites(readFileSync(join(ROOT, rel), 'utf8'), rel))
   .reduce((acc, r) => ({ clamps: [...acc.clamps, ...r.clamps], nowraps: [...acc.nowraps, ...r.nowraps] }),
     { clamps: [], nowraps: [] });
 
 describe('no clamp on dossier text (ODQ §934.23) — the product prints what it wrote', () => {
+  it('ARM 0 — the walk is live over all three declared trees, and the editor surfaces are in it', () => {
+    // ⛔ ANTI-VACUITY FOR THE TREE LIST ITSELF. ARM 1 and ARM 2 both assert against an EMPTY
+    // set, which a walk that read nothing also produces — a tree renamed or a directory moved
+    // would silence the rule rather than red it. That is precisely how the editor went
+    // ungoverned until this car: not by a broken detector, but by a scope nobody re-asked.
+    for (const tree of DOSSIER_TREES) {
+      expect(
+        SCANNED.filter((f) => f.startsWith(`${tree}/`)).length,
+        `${tree} contributed no file to the walk — has the tree moved or been renamed?`,
+      ).toBeGreaterThanOrEqual(2);
+    }
+    expect(
+      EDITOR_SURFACES.map((s) => s.path).filter((p) => !SCANNED.includes(p)),
+      'an editor surface this roster names is no longer in the walk. It was renamed, moved or '
+      + 'retired: re-point the row, rather than letting the surface leave the rule quietly.',
+    ).toEqual([]);
+    for (const row of EDITOR_SURFACES) {
+      expect(row.member.length, `${row.path}: name the member that landed the surface`).toBeGreaterThan(3);
+      expect(row.draws.length, `${row.path}: say what the surface draws`).toBeGreaterThan(20);
+    }
+  });
+
   it('ARM 1 — no ellipsis truncation and no line clamp anywhere on the dossier', () => {
     expect(
       LIVE.clamps.map((c) => `${c.path}:${c.line} ${c.key}`),

@@ -34,10 +34,27 @@ const REQUIRED_FIELDS = Object.freeze(['id', 'settlementIds', 'severity']);
 // site explaining why the preview inherits and never mints; the excluded object
 // literal's own bytes were not touched, which is exactly what the unchanged hash
 // proves. Re-anchored at measured truth, not widened.
+// EXACT RE-PIN 2026-09-23, THE SAME SHAPE A THIRD TIME: the snapshot moved 859 → 936 with
+// its SIGNATURE STILL `f4ac01180f8aaf35` and its COLUMN still 23. CAUSE, named and
+// measured — EM-E1 wired the rewind's registry half into the restore chokepoint
+// (`restorePulseSnapshotOnDraft`), which added a documented `rewoundDecrees` helper, two
+// leaf imports and four lines inside the restore, all of them ABOVE this site and none of
+// them inside the excluded literal. The literal's own bytes were not touched, which is
+// what the unchanged hash proves; the address was measured by running the census, never
+// arithmetic. Re-anchored at measured truth, not widened.
+// EXACT RE-PIN 2026-09-23, THE SAME SHAPE A FOURTH TIME AND THE SECOND TODAY: the snapshot
+// moved 936 → 1010 with its SIGNATURE STILL `f4ac01180f8aaf35` and its COLUMN still 23.
+// CAUSE, named and measured — EM-C1c wired the rewind's CHRONICLE half into the same restore
+// chokepoint EM-E1 wired its registry half into (U98; judgment 306): a documented
+// `collectRetractedChronicleRefs` helper, its call and the address set inside
+// `restorePulseSnapshotOnDraft`, and the filter that drops the undone tick's lines — all of
+// them ABOVE this site and none of them inside the excluded literal, whose bytes therefore
+// still hash the same. The address was MEASURED by running the census, never arithmetic.
+// Re-anchored at measured truth, not widened; the exclusion is still exactly one.
 const NON_AUTHORING_SITE_EXCLUSIONS = Object.freeze([
   Object.freeze({
     path: 'src/store/campaignWorldPulseDeferred.js',
-    line: 859,
+    line: 1010,
     column: 23,
     signature: 'f4ac01180f8aaf35',
     reason: 'proposal-undo-snapshot',

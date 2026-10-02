@@ -1688,7 +1688,7 @@ describe('car 0f — the ALIAS DRAFT: measured, nothing ratified, no leaf writte
       'src/generators/npcGenerator.js',
     ]);
     for (const withdrawn of ['src/generators/structuralValidator.js:588', 'src/generators/stressNarrative.js:80',
-      'src/generators/defenseGenerator.js:608', 'src/generators/narrativeText.js:53',
+      'src/generators/defenseGenerator.js:603', 'src/generators/narrativeText.js:53', // :603 re-derived: generateDefenseProfile's `Disasters & Famine` comment, which EM-R0d shifted -5 from :608
       'src/generators/stressNarrative.js:83']) {
       expect(draft.rows.map((r) => r.at), `${withdrawn} was a comment, a string or an arrow parameter`)
         .not.toContain(withdrawn); // anchored: the four sound citations are asserted above
@@ -1900,7 +1900,9 @@ describe('SEAM car 5b — THE HOLDER CENSUS: the source of each construction (SI
       && sourceOfForTown(row, town).standing === 'INTERESTED')).toEqual([]);
     expect(interested.every((row) => row.source.stateOrgan === true),
       'every interested row names a state organ').toBe(true);
-    expect(interested.length, 'the licensed rows this captured city makes interested').toBe(16);
+    // 16 -> 23 on 2026-09-30 (the urban band, ODQ §934.86): the city's complete block seats more
+    // institutions that keep a state organ's record, so more licensed rows find a holder here.
+    expect(interested.length, 'the licensed rows this captured city makes interested').toBe(23);
     // THE MARK NAMES ITS GROUND rather than asserting a standing nobody can trace.
     const one = sourceOfForTown(interested[0], town);
     expect(one.standing).toBe('INTERESTED');

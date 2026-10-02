@@ -287,3 +287,110 @@ export const GR4C_BREACH_CREDIBILITY_COUPLING = couplingRow({
 
 /** @type {ReadonlyArray<Readonly<CouplingRegistryRow>>} */
 export const GR4_BREACH_CREDIBILITY_COUPLINGS = Object.freeze([GR4C_BREACH_CREDIBILITY_COUPLING]);
+
+/**
+ * ── GR-6's TWO ROWS: ONE BROKER, READ FROM BOTH SIDES OF THE WAR LINE ────────────────────
+ *
+ * GR-6 / WAR→GRAMMAR. THE ORDER THE BROKER STANDS AGAINST. `mediationPressure.js` reads the war
+ * layer's deposited march order (`warIntent.js :: warIntentFor`, and the window its TTL declares)
+ * to find the pair a cross-pressured neighbour stands between, and to tell an order that lapsed
+ * unopened as the war that did not happen.
+ *
+ * THE COUNTERFORCE is in the same module: the pressure is a bounded multiplier on one soft
+ * comparison, so the order it reads can still open whenever its court is strong enough.
+ */
+export const GR6_INTENT_BROKER_COUPLING = couplingRow({
+  couplingId: 'CPL-5.WAR_TO_GRAMMAR.GR-6.intent_broker',
+  pairId: 'CPL-5',
+  direction: 'WAR→GRAMMAR',
+  read: 'src/domain/worldPulse/mediationPressure.js#brokeredWarsThatDidNotHappen',
+  receiptField: 'spatialLedgers.warIntents[].{targetId,tick}',
+  counterforce: 'src/domain/worldPulse/mediationPressure.js#mediationPressureFor',
+  flags: Object.freeze(['mediationGeneralizedEnabled', 'peaceEngineEnabled', 'warLayerEnabled']),
+  owningVolume: 'GRAMMAR',
+  owningWave: 'GR-6',
+  intendedDesk: 'diplomacy',
+});
+
+/**
+ * GR-6 / GRAMMAR→WAR. THE PRESSURE AT THE SOFT GATE. The one war opener
+ * (`warDeployment.js :: evaluateWarLayer`, step 4) reads the broker's multiplier and, below one,
+ * lifts the order's CONQUEST_MARGIN waiver and reads that gate at the scaled strength.
+ *
+ * THE COUNTERFORCE is the rest of the same step: every hard gate — posture, the hostile
+ * confidence floor, the one-army and occupation constraints, the feasibility verdict — runs for
+ * a pressured order exactly as for any other, so mediation never forces a peace.
+ */
+export const GR6_SOFT_GATE_COUPLING = couplingRow({
+  couplingId: 'CPL-5.GRAMMAR_TO_WAR.GR-6.soft_gate',
+  pairId: 'CPL-5',
+  direction: 'GRAMMAR→WAR',
+  read: 'src/domain/worldPulse/warDeployment.js#evaluateWarLayer',
+  receiptField: 'spatialLedgers.warIntents[].{targetId,tick}',
+  counterforce: 'src/domain/worldPulse/warDeployment.js#evaluateWarLayer',
+  flags: Object.freeze(['mediationGeneralizedEnabled', 'peaceEngineEnabled', 'warLayerEnabled']),
+  owningVolume: 'GRAMMAR',
+  owningWave: 'GR-6',
+  intendedDesk: 'diplomacy',
+});
+
+/** @type {ReadonlyArray<Readonly<CouplingRegistryRow>>} */
+export const GR6_MEDIATION_COUPLINGS = Object.freeze([GR6_INTENT_BROKER_COUPLING, GR6_SOFT_GATE_COUPLING]);
+
+/**
+ * ── GR-5c's TWO ROWS: THE DEMAND FROM STRENGTH, READ FROM BOTH SIDES OF THE RATIO ─────────
+ *
+ * GR-5c / INFORMATION→GRAMMAR (CPL-19). THE SWING IS A BELIEF ON THE COUNTERPART'S SIDE. The
+ * renewal leaf (`pactRenewal.js`) reads the demander's OWN picture of its counterpart
+ * (`beliefMap.js :: beliefRecord`, the banded strength at the band's midpoint) against the lead
+ * the war door recorded at the signing, and a court whose believed lead has swung past the band
+ * demands new terms. No picture, no demand: never truth and never the neutral guess.
+ *
+ * THE COUNTERFORCE is the answer: the counterpart weighs the lighter sheet by the one threshold
+ * every pact answer uses, and a refusal is written back on the pair's record as a strain fact,
+ * so the belief that powered the demand is the belief the refusal is remembered against.
+ */
+export const GR5C_BELIEVED_SWING_COUPLING = couplingRow({
+  couplingId: 'CPL-19.INFO_TO_GRAMMAR.GR-5c.believed_swing',
+  pairId: 'CPL-19',
+  direction: 'INFO→GRAMMAR',
+  read: 'src/domain/worldPulse/pactRenewal.js#renegotiationSwingOf',
+  receiptField: 'spatialLedgers.pactProposals[].{trigger,sheet,openedTick,answerDueTick}',
+  counterforce: 'src/domain/worldPulse/pactRenewal.js#settleRenewalProposal',
+  flags: Object.freeze(['pactFormationEnabled', 'treatyRenewalEnabled']),
+  owningVolume: 'GRAMMAR',
+  owningWave: 'GR-5c',
+  intendedDesk: 'diplomacy',
+});
+
+/**
+ * GR-5c / INTERIOR→GRAMMAR (CPL-21). THE COURT'S OWN NERVE AND ITS OWN STRENGTH. The court's
+ * knowledge of itself is the estate's one strength derivation (`relationshipEvolution.js ::
+ * settlementStrength`), and its own demand is coloured by SP-C's posture
+ * (`strategicPosture.js :: courtPostureOf`, which weighs its learned risk appetite), so a timid
+ * rebuilt court sits on its strength and a bold one asks sooner.
+ *
+ * THE COUNTERFORCE is the answering court's own reserve (`pactFormation.js ::
+ * answerPactProposal`: posture and appetite on the other side), and the refusal it can return
+ * lands on the pair's relationship record through the existing strain idiom.
+ */
+export const GR5C_DEMAND_NERVE_COUPLING = couplingRow({
+  couplingId: 'CPL-21.INTERIOR_TO_GRAMMAR.GR-5c.demand_nerve',
+  pairId: 'CPL-21',
+  direction: 'INTERIOR→GRAMMAR',
+  read: 'src/domain/worldPulse/pactRenewal.js#openRenegotiationDemands',
+  receiptField: 'worldState.relationshipStates[...].{resentment,recentIncidents}',
+  counterforce: 'src/domain/worldPulse/pactFormation.js#answerPactProposal',
+  flags: Object.freeze([
+    'dispositionChannelsEnabled',
+    'pactFormationEnabled',
+    'strategicPostureEnabled',
+    'treatyRenewalEnabled',
+  ]),
+  owningVolume: 'GRAMMAR',
+  owningWave: 'GR-5c',
+  intendedDesk: 'diplomacy',
+});
+
+/** @type {ReadonlyArray<Readonly<CouplingRegistryRow>>} */
+export const GR5C_RENEGOTIATION_COUPLINGS = Object.freeze([GR5C_BELIEVED_SWING_COUPLING, GR5C_DEMAND_NERVE_COUPLING]);

@@ -627,10 +627,13 @@ describe('evaluateTierResourceDynamics — pending tier proposal dedupe', () => 
 
     const candidate = result.candidates.find(entry => entry.candidateType === 'tier_promotion');
     expect(candidate).toBeTruthy();
-    expect(candidate.summary).toContain('combined population and support promotion eligibility');
+    // THE HERALD SPEAKS IN DEEDS (the Voice Program wave 1, 2026-10-02): the summary names both halves
+    // of the change in the world's terms, and the eligibility streak stays in the receipt.
+    expect(candidate.summary).toContain('growing steadily, in people and in trade');
+    expect(candidate.reasons.join(' ')).toContain('Minimum streak');
   });
 
-  it('describes demotion as combined population and support eligibility too', () => {
+  it('describes demotion in both halves too, people and trade, with the streak in the receipt', () => {
     const worldState = {
       tick: 8,
       settlementTickStates: {
@@ -646,7 +649,8 @@ describe('evaluateTierResourceDynamics — pending tier proposal dedupe', () => 
     const candidate = result.candidates.find(entry => entry.candidateType === 'tier_demotion');
 
     expect(candidate).toBeTruthy();
-    expect(candidate.summary).toContain('combined population and support demotion eligibility');
+    expect(candidate.summary).toContain('losing people and trade steadily');
+    expect(candidate.reasons.join(' ')).toContain('Minimum streak');
   });
 
   it('skips re-emitting while a pending tier proposal already targets the settlement', () => {

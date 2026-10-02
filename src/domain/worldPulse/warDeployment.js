@@ -129,6 +129,10 @@ import {
   coalitionDecisionEvidence,
   readCoalitionJoinDecisions,
 } from './warCoalitionDecision.js';
+// GR-6 — THE BROKER BEFORE THE BLOOD. A bounded multiplier (below one only when the layer is lit,
+// an order names the target and a cross-pressured neighbour stands between the pair) that lifts
+// the order's CONQUEST_MARGIN waiver and scales the soft comparison. ×1 ⇒ step 4 runs verbatim.
+import { mediationPressureFor } from './mediationPressure.js';
 import {
   joinAnchorOf,
   warCoalitionActive,
@@ -226,6 +230,12 @@ const HARASSMENT_SEVERITY = 0.22;
  * @param {number} args.tick
  * @param {string|null} [args.now]
  * @param {{ warLayerEnabled?: boolean, warTerminationEnabled?: boolean, defenderAttritionEnabled?: boolean, warSupplyQualityEnabled?: boolean }} args.rules
+ * @param {unknown} [args.forkPins] U35 — HBF-86's LAST HOP. The tick's pin bag, folded at
+ *   the pulse's head from the DUE decrees and judged against each registered fork's own
+ *   words, forwarded UNREAD to `resolveSiegeVerdict`, which is the only consult in this
+ *   layer. This head neither reads it nor mints it: the doc is widened rather than the
+ *   value cast, because a closed `args` JSDoc turns an excess property into a type error
+ *   at every call site. Absent (the default) ⇒ every siege draws exactly as before.
  * @returns {{ outcomes: PulseOutcome[], deployments: Record<string, DeploymentRecord>, graphChannels: any[], retiredChannels: string[], resolvedDeployments: any[], dispositionDeltas: Array<{id:string, outcome:'win'|'loss', magnitude?:number, sourceConquestId?:string}>, warExhaustion: Record<string, number>, defenderSiegeLedger?: (Record<string, any>|null), worldStatePatch: Readonly<Record<string, any>> }}
  *   - outcomes: probability-1 condition / power_transfer outcomes for applyWorldPulseOutcomes
  *   - deployments: the UPDATED one-army ledger to persist onto worldState
@@ -237,7 +247,7 @@ const HARASSMENT_SEVERITY = 0.22;
  *   - dispositionDeltas: id-stable win/loss attributions from sieges resolved this tick
  *   - warExhaustion: the UPDATED non-reverting war-exhaustion scar ledger to persist
  */
-export function evaluateWarLayer({ snapshot, worldState, rng, tick = 0, now = null, rules = {} }) {
+export function evaluateWarLayer({ snapshot, worldState, rng, tick = 0, now = null, rules = {}, forkPins = null }) {
   const existing = worldState?.deployments || {};
   // ── Gate: byte-identical no-op when the war layer is OFF. ────────────────────
   if (!rules?.warLayerEnabled) {
@@ -546,7 +556,7 @@ export function evaluateWarLayer({ snapshot, worldState, rng, tick = 0, now = nu
     // M2b: how supply-starved the besieged target is (prior-tick shipment ledger). 0 on
     // the aspatial path (no marker / no ledger) ⇒ the verdict term contributes 0.
     const supplyInterdiction = supplyInterdictionLevel(worldState, targetId);
-    const verdict = resolveSiegeVerdict({ targetId, besiegers, capacityFor, effectiveStrengthFor, defenderItem, rng, tick, siegeAge, defenderStrengthOverride, defenderResolveEnabled, defenderReliefBonus, attackerFidelity, attackerRust, supplyInterdiction, spatialSiege });
+    const verdict = resolveSiegeVerdict({ targetId, besiegers, capacityFor, effectiveStrengthFor, defenderItem, rng, tick, siegeAge, defenderStrengthOverride, defenderResolveEnabled, defenderReliefBonus, attackerFidelity, attackerRust, supplyInterdiction, spatialSiege, forkPins });
 
     // ── ATTRITION: degrade every committed BESIEGER's field army after the
     // engagement. Each army is attrited ONLY when it is the attacker on its OWN front
@@ -1075,7 +1085,7 @@ export function evaluateWarLayer({ snapshot, worldState, rng, tick = 0, now = nu
       // target for which the CONQUEST_MARGIN pre-filter is waived below: that filter
       // stands in for a deliberation the seat has now actually performed. Every HARD
       // gate — occupation, already-besieging, and classifyFeasibility — still applies.
-      const ordered = intentNamesTarget(marchOrder, targetId);
+      const ordered = intentNamesTarget(marchOrder, targetId), mediation = mediationPressureFor(worldState, snapshot, graph, fromId, targetId, marchOrder);
       // worldpulse-war-9: under occupation, the ONLY permissible target is the occupier
       // (the uprising). Any third-party siege is blocked while garrisoned.
       if (occupierOfFrom && String(targetId) !== occupierOfFrom) continue;
@@ -1091,7 +1101,7 @@ export function evaluateWarLayer({ snapshot, worldState, rng, tick = 0, now = nu
       const casusRead = peaceCausalActive(/** @type {{ simulationRules?: Record<string, unknown> }} */ (/** @type {unknown} */ (worldState))) ? openerCasusFor(String(fromId), String(targetId)) : null;
       const casusEntry = casusRead?.entry || null;
       const casusMult = casusEntry ? 1 + REASON_TUNING.WAR_FACTOR_W * aggregateReasons01(casusEntry) : 1;
-      if ((!ordered || casusRead?.opportunismCounterforced) && fromStrength * casusMult <= strengthFor(targetId) + CONQUEST_MARGIN) continue; // a counterforced stale case restores the prefilter even for an old order
+      if ((!ordered || casusRead?.opportunismCounterforced || mediation < 1) && fromStrength * casusMult * mediation <= strengthFor(targetId) + CONQUEST_MARGIN) continue; // a counterforced stale case, or a broker's pressure (GR-6), restores the prefilter even for an old order
       const defenderCap = capacityFor(targetId);
       const { verdict } = classifyFeasibility({
         attackerCurrent: fromCap.offensive,

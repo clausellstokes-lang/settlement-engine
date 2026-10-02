@@ -23,7 +23,7 @@
  */
 
 
-import { BORDER, BORDER2, CARD, CARD_ALT, FS, INK, SECOND, SP, sans } from '../theme.js';
+import { BORDER, BORDER2, CARD, CARD_ALT, EDITOR_GROUND, FS, GOLD, INK, PARCH_100, SECOND, SP, houseBloom, sans } from '../theme.js';
 import IconButton from './IconButton.jsx';
 import { useDialogFocusTrap } from './useDialogFocusTrap.js';
 import useIsMobile from '../../hooks/useIsMobile.js';
@@ -37,10 +37,17 @@ import { chromeFontSize } from '../../design/proseScale.js';
  * @param {import('react').ReactNode} props.children
  * @param {string} [props.testId]
  * @param {number} [props.width]
+ * @param {boolean} [props.editorHalo]  the editor's forge light: the warm-umber ground, the
+ *   GOLD rim and the PARCH_100 bloom of design §3. DEFAULT FALSE, and with it absent this
+ *   component renders byte-identically to its shipped self. ⛔ The halo goes on the editor's
+ *   pop-up and NOWHERE else (design §3 bullet 5).
  */
-export default function PortablePopup({ open, title, onClose, children, testId = 'portable-popup', width = 560 }) {
+export default function PortablePopup({ open, title, onClose, children, testId = 'portable-popup', width = 560, editorHalo = false }) {
   // Shared trap: focus-in on open, Tab cycling, Escape-to-close, focus restore.
   const mobile = useIsMobile();
+  // THE EDITOR'S GROUND, or the house warm-dim this popup has always drawn. The literal is the
+  // token warm-dim value (58% ink-deepest, matching .oc-m-warmdim), kept byte-for-byte.
+  const ground = editorHalo ? EDITOR_GROUND : 'rgba(27,20,8,0.58)';
   const popupRef = useDialogFocusTrap(open, onClose);
   if (!open) return null;
 
@@ -60,7 +67,13 @@ export default function PortablePopup({ open, title, onClose, children, testId =
         alignItems: 'center',
         justifyContent: 'center',
         padding: SP.lg,
-        background: 'rgba(27,20,8,0.58)',
+        background: ground,
+        ...(editorHalo ? {
+          backgroundImage: houseBloom(PARCH_100),
+          backgroundRepeat: 'no-repeat',
+          backgroundPosition: 'center',
+          backgroundSize: `${width * 2}px ${width * 2}px`,
+        } : null),
       }}
       onMouseDown={(event) => {
         // OUTSIDE-CLICK CLOSES. The guard keeps a drag that began inside the body
@@ -79,7 +92,7 @@ export default function PortablePopup({ open, title, onClose, children, testId =
           width: `min(100%, ${width}px)`,
           maxHeight: 'min(88vh, 720px)',
           overflow: 'auto',
-          border: `1px solid ${BORDER}`,
+          border: `1px solid ${editorHalo ? GOLD : BORDER}`,
           borderRadius: 0,
           background: CARD,
           boxShadow: 'none',

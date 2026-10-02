@@ -1,7 +1,7 @@
 {
-  "generatedAt": "2026-09-20T16:20:34.165Z",
+  "generatedAt": "2026-10-02T10:50:19.547Z",
   "entry": "src/domain/aiGrounding.js",
-  "sourceHash": "9788abb8fdb7287e",
+  "sourceHash": "0aa0e250151d9b4e",
   "inputs": [
     "src/data/constants.js",
     "src/data/entityTags.js",
@@ -28,6 +28,7 @@
     "src/domain/density/densityBands.js",
     "src/domain/density/densityLaw.js",
     "src/domain/deterministicSort.js",
+    "src/domain/display/numberWords.js",
     "src/domain/districtProfile.js",
     "src/domain/dossier/hookRetention.js",
     "src/domain/factionArchetypes.js",
@@ -59,6 +60,7 @@
     "src/domain/worldPulse/bandedStock.js",
     "src/domain/worldPulse/deityAxes.js",
     "src/domain/worldPulse/faithChannelBindings.js",
+    "src/domain/worldPulse/heraldDeeds.js",
     "src/domain/worldPulse/intervalWeeks.js",
     "src/domain/worldPulse/pulseHelpers.js",
     "src/domain/worldPulse/relationshipCompatibility.js",

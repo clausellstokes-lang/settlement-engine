@@ -10,10 +10,10 @@
  */
 
 import { saves as savesService } from '../lib/saves.js';
+import { activeSaveCount } from '../lib/saveAccess.js';
 import {
-  scrubImportedConfig,
-  scrubImportedTreasury,
-  scrubGalleryImportLivingContent,
+  scrubImportedConfig, scrubImportedTreasury,
+  scrubGalleryImportLivingContent, scrubImportedEditState,
 } from '../lib/importScrub.js';
 import { track, EVENTS } from '../lib/analytics.js';
 import { remapSettlementParentRefForImport } from '../domain/settlementParentRef.js';
@@ -252,10 +252,10 @@ export async function importGalleryMapWithCampaignImpl(get, set, slug) {
   const maxSaves = typeof initialState.maxSaves === 'function'
     ? initialState.maxSaves()
     : Infinity;
-  const activeSaveCount = (initialState.savedSettlements || []).length;
+  const activeNow = activeSaveCount(initialState.savedSettlements);
   if (
     Number.isFinite(maxSaves)
-    && activeSaveCount + members.length > maxSaves
+    && activeNow + members.length > maxSaves
   ) {
     throw new Error(`Not enough save slots: this campaign needs ${members.length} settlement slot(s).`);
   }
@@ -287,12 +287,12 @@ export async function importGalleryMapWithCampaignImpl(get, set, slug) {
         // leaving it out here would have made "a gallery clone carries no foreign
         // scope record" true on one gallery path of two — the exact
         // one-path-only shape store-4 was, in the module whose header says so.
-        settlement: scrubGalleryImportLivingContent(scrubImportedTreasury(normalizeSettlement({
+        settlement: scrubImportedEditState(scrubGalleryImportLivingContent(scrubImportedTreasury(normalizeSettlement({
           ...sourceSettlement,
           neighbourNetwork: [],
           neighborRelationship: null,
           interSettlementRelationships: [],
-        }))),
+        })))),
         // Imported faith/deity embeds stay dormant; this is the same single
         // scrub seam used by standalone gallery and account imports.
         config: scrubImportedConfig(sourceSettlement.config) || null,

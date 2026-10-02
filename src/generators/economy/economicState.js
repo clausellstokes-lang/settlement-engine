@@ -50,7 +50,7 @@ export const generateEconomicState = (tier, institutions, tradeRoute, goodsToggl
     ecoPriorities = getPriorities(config),
     // ⛔⛔ RAW ROSTER, STAMPED ONCE (`compound:` at :883), NEVER RECOMPUTED ON ADVANCE.
     // `getInstFlags` -> `getInstitutionNames` maps `nativeSemanticNames(institutions)`
-    // (priorityHelpers.js:42), NOT `liveInstitutions()` — so a ruined courthouse still
+    // (priorityHelpers.js :: getInstitutionNames), NOT `liveInstitutions()` — so a ruined courthouse still
     // sets `hasCourtSystem` and a ruined prison still sets `hasPrison`, forever.
     // Measured (city seed `civic-probe`): ruin the 4 civic rows, live roster 46 -> 42, a
     // recompute over `liveInstitutions()` gives false/false, the STAMP still reads

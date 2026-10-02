@@ -327,7 +327,9 @@ describe('D4 ATTEMPT — the escalation beat is REACHABLE, and a sampled corpus 
     expect(beat.ruleId).toBe('stressor_escalate_insurgency');
     expect(beat.ruleFamily).toBe('stressor');
     expect(beat.targetSaveId).toBe('oak');
-    expect(beat.headline).toMatch(/may intensify/);
+    // THE HERALD SPEAKS IN DEEDS (the owner, 2026-10-02): the escalation is under way, its applied twin done.
+    expect(beat.headline).toMatch(/ is deepening$/);
+    expect(beat.appliedHeadline).toMatch(/ deepens$/);
     expect(beat.summary).toMatch(/has not broken/);
     expect(beat.reasons.length).toBeGreaterThan(0);
   });

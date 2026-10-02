@@ -122,7 +122,11 @@ export function findCrossPressuredMediator(snapshot, graph, partyId, foeId) {
 
 /** The exact sue-for-peace de-escalation inside the mint window. The
  *  incident is stamped by applyRelationshipPatch when the peace label change applies
- *  ({ type: 'strategy_sue_for_peace', outcomeId: '…sue_for_peace…' }). Durable —
+ *  ({ type: 'strategy_sue_for_peace', outcomeId: '…sue_for_peace…' }). Its TYPE is the
+ *  mark (FPQ-50): WR-5's refusal writer (a peace_refused row, on the pair and on a
+ *  co-besieging ally's edge) and the coalition writers (betrayal, reimbursement, the
+ *  separate peace) key their own rows by the same outcome id, and none of those is a
+ *  peace, so the id alone never admits a row. Durable —
  *  it survives on recentIncidents long after the deployment recall is consumed.
  *  Imported order is not chronology, so the newest exact row wins
  *  deterministically.
@@ -135,8 +139,7 @@ export function recentSueForPeaceIncident(incidents, tick) {
     const inc = recordOf(raw);
     const at = Number(inc?.tick);
     if (!Number.isFinite(at) || at > tick || tick - at > PEACE_TERMS_TUNING.PEACE_MINT_WINDOW) continue;
-    if (String(inc?.type || '').includes('sue_for_peace')
-      || String(inc?.outcomeId || '').includes('sue_for_peace')) candidates.push(inc);
+    if (String(inc?.type || '').includes('sue_for_peace')) candidates.push(inc);
   }
   candidates.sort((left, right) => (Number(right.tick) - Number(left.tick))
     || (explicitText(left.outcomeId) < explicitText(right.outcomeId) ? -1

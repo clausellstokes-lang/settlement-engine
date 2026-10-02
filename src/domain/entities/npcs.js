@@ -104,6 +104,23 @@ import { slugify as kernelSlugify } from '../../kernel/slugify.js';
  */
 export const NPC_UNAVAILABLE_STATUSES = Object.freeze(['dead', 'exiled', 'jailed', 'removed']);
 
+/**
+ * THE `NpcStatus` UNION AS VALUES. The typedef above is a comment, and a comment cannot be
+ * read at runtime; a card that offers a figure's status needs the members themselves.
+ *
+ * ⛔ HERE, AND NOWHERE ELSE. `statusUnionTotality`'s `foreignVocabularies()` skips
+ *    consumer-roster files and this file is the roster's first row, so a vocabulary minted
+ *    here is the union's OWN. The same seven literals in any other file read as a foreign
+ *    vocabulary and empty that walker's derived trigger.
+ * ⛔ SEVEN members in the typedef's own order — order is load-bearing, because a pool built
+ *    from this array is consumed positionally. The typedef-to-value pin in
+ *    tests/domain/statusVocabularies.test.js reads the typedef's source text and reds in
+ *    both directions if the two ever disagree.
+ *
+ * @type {readonly NpcStatus[]}
+ */
+export const NPC_STATUS_VALUES = Object.freeze(['active', 'dead', 'exiled', 'jailed', 'missing', 'removed', 'retired']);
+
 const IMPORTANCE_WEIGHT = {
   minor:   0.0,  // suppresses propagation entirely
   notable: 0.4,

@@ -81,7 +81,9 @@ export const IN0A_PLANT_HANDOFF_COUPLING = couplingRow({
   ]),
   owningVolume: 'INFORMATION',
   owningWave: 'IN-0a',
-  intendedDesk: 'war',
+  // FP IN-5 moved `plant_took` to the knowledge desk; the row's desk moves in the SAME commit
+  // (seam SC-2, the same-commit obligation), so the desk walker reads agreement through the flip.
+  intendedDesk: 'knowledge',
   kinds: Object.freeze(['plant_took']),
 });
 
@@ -142,8 +144,166 @@ export const IN0C_DISCLOSURE_SIGNING_CREDIT_COUPLING = couplingRow({
   kinds: Object.freeze(['treaty_disclosure_opened']),
 });
 
+/**
+ * IN-3 / GRAMMAR→INFORMATION. THE COURT READS ITS ALARM IN THE ENVOY PROGRAM'S WORDS, AND TESTS
+ * THE ENVOY'S WORD BEFORE IT ACTS (the volume's INFO×GRAMMAR coupling line: VET and SEND-TWO are
+ * shared with the envoy program by cross-reference, never forked).
+ *
+ * THE READ is `suspicionOf`, whose band is spelled in the estate's ONE intensity ladder, borrowed
+ * from the GRAMMAR vocabulary leaf that declares it (`envoyErrandVocabulary.js`). Its REACHABLE
+ * receipt at this wave is the gate the head writes when that band clears: the secrecy posture
+ * opened in answer. THE COUNTERFORCE is VET (`weighEnvoyWord`), the third reception arm: it reads
+ * the testimony ladder (`envoyTestimony.js`), the reception words IN-3 grows by `vet`, and the one
+ * inbound reader (`envoyInbound.js`) the sweep seal's ES arm consults, and it tests a report before
+ * the court acts on it, by the one vetting home's verdict (⟨F8⟩). VET's answer persists when
+ * SP-D2-c's parlay consumer lands; until then this row names only the half the shipped road can
+ * write, and re-aims when that lands.
+ *
+ * DARK ⇒ NOTHING: every door rides `counterIntelEnabled` by name, and the inbound reader answers
+ * empty while the envoy layer or the errand spine is dark.
+ * @type {Readonly<CouplingRegistryRow>}
+ */
+export const IN3_ENVOY_WORD_COUPLING = couplingRow({
+  couplingId: 'CPL-19.GRAMMAR_TO_INFO.IN-3.envoy_word_tested',
+  pairId: 'CPL-19',
+  direction: 'GRAMMAR→INFO',
+  read: 'src/domain/worldPulse/suspicion.js#suspicionOf',
+  receiptField: 'spatialLedgers.secrecyPostures[].{level01,enteredTick}',
+  counterforce: 'src/domain/worldPulse/counterIntelSweep.js#weighEnvoyWord',
+  flags: Object.freeze([
+    'counterIntelEnabled',
+  ]),
+  owningVolume: 'INFORMATION',
+  owningWave: 'IN-3',
+  intendedDesk: 'war',
+});
+
+/**
+ * IN-3 / INTERIOR→INFORMATION. THE COURT'S TEMPER AND ITS OLD WOUNDS DECIDE HOW SOON IT SHUTS ITS
+ * GATES (Spine 13 ENGAGED; the volume's INFO×INTERIOR coupling line).
+ *
+ * `suspicionOf` reads two INTERIOR substrates: the relationship memory on the court's own edges
+ * (the deception-class incidents and the resentment still HELD, keyed by the writer's own
+ * `relationshipKeyFromEdge`) and SP-C's posture (`courtPostureOf`'s factor scales every entry
+ * threshold). Its reachable receipt is the gate the HEAD writes when that suspicion clears: the
+ * secrecy posture opened in answer. THE COUNTERFORCE is the posture's own cap, a posture that
+ * colours and never drowns, so no temper can make a court shut its gates on no evidence.
+ *
+ * DARK ⇒ NOTHING: `secrecyInAnswer` returns the head's own ledger by reference, and the read is
+ * the quiet reading, while `counterIntelEnabled` is anything but true.
+ * @type {Readonly<CouplingRegistryRow>}
+ */
+export const IN3_TEMPER_AND_WOUNDS_COUPLING = couplingRow({
+  couplingId: 'CPL-20.INTERIOR_TO_INFO.IN-3.suspicion_temper',
+  pairId: 'CPL-20',
+  direction: 'INTERIOR→INFO',
+  read: 'src/domain/worldPulse/suspicion.js#suspicionOf',
+  receiptField: 'spatialLedgers.secrecyPostures[].{level01,enteredTick}',
+  counterforce: 'src/domain/worldPulse/strategicPosture.js#courtPostureOf',
+  flags: Object.freeze([
+    'counterIntelEnabled',
+    'infoStatecraftEnabled',
+  ]),
+  owningVolume: 'INFORMATION',
+  owningWave: 'IN-3',
+  intendedDesk: 'war',
+});
+/**
+ * IN-4 / THE ROAD. THE REPUTATION RACE READS THREE LAYERS, AND EACH READ TAKES ITS ROW.
+ *
+ * `reputationRaceConsumer.js` is the race's first consumer: at every arrival a ledger kept last
+ * tick it runs the story over the lived route network against the traveller's own recorded
+ * journey and voices the verdict. Three designed port crossings, one row each, all read at the
+ * leaf (INFO), so the licence join is on the leaf's module half:
+ *   TRADE→INFO — the race substrate itself (`routeNetworkConsumersRace.js`, the TRADE family's
+ *     route-network reads): the story's walk and the verdict law. The counterforce is the
+ *     network's own refusal: a hidden way carries no word (`newsGradeImpedance` answers null).
+ *   WAR→INFO — the army column's arrival record (`spatial/armyTransit.js`). The counterforce is
+ *     the racer's voice: a column that outruns its story has no honest annex sentence, so the
+ *     person-first beat is refused at the producer and only the story and together kinds mint.
+ *   GRAMMAR→INFO — the envoy's homecoming (`envoyErrandRecords.js :: envoyErrandsOf`). The
+ *     counterforce is the BUILT interception stage: an envoy stopped on the road is held, or
+ *     parleys where he was stopped, so no race runs for him until the ledger records his
+ *     homecoming, and until then the story that ran ahead is all his court has.
+ *
+ * THE RACE STORES NO VERDICT (derivation-only over arrival ticks), so each receipt address is
+ * the persisted RECORD the verdict is re-derived from: sampling it re-runs the race.
+ *
+ * ⛔ COMPOSED LAST IN THE HEAD, NOT BESIDE THE IN-0 ROWS, and the reason is the registry's own
+ * tiebreak: composed in wave position the WAR→INFO row would sit ahead of ES-5's and TAKE the
+ * CPL-4 / WAR→INFO first-row seat from `CPL-4.WAR_TO_INFO.ES-5.doctrine_moral_ladder`, changing
+ * what every single-row caller on that pair resolves to. Appended in landing order it moves no seat.
+ */
+export const IN4_RACE_ROAD_COUPLING = couplingRow({
+  couplingId: 'CPL-9.TRADE_TO_INFO.IN-4.reputation_race',
+  pairId: 'CPL-9',
+  direction: 'TRADE→INFO',
+  read: 'src/domain/worldPulse/reputationRaceConsumer.js#raceAtArrival',
+  receiptField: 'spatialLedgers.routeNetwork.edges[].{a,b,grade}',
+  counterforce: 'src/domain/worldPulse/routeNetworkConsumersRace.js#newsGradeImpedance',
+  flags: Object.freeze([
+    'reputationRaceEnabled',
+    'routeLifecycleEnabled',
+  ]),
+  owningVolume: 'INFORMATION',
+  owningWave: 'IN-4',
+  intendedDesk: 'events',
+  kinds: Object.freeze(['race_person', 'race_story', 'race_together', 'word_came_too_late']),
+});
+
+/** IN-4 / WAR→INFO: the army column's kept arrival. @type {Readonly<CouplingRegistryRow>} */
+export const IN4_ARMY_ARRIVAL_COUPLING = couplingRow({
+  couplingId: 'CPL-4.WAR_TO_INFO.IN-4.army_arrival_race',
+  pairId: 'CPL-4',
+  direction: 'WAR→INFO',
+  read: 'src/domain/worldPulse/reputationRaceConsumer.js#stagedArrivals',
+  receiptField: 'spatialLedgers.armyTransit[].{path,destId,departTick,arrivalTick}',
+  counterforce: 'src/domain/worldPulse/reputationRaceConsumer.js#reputationRaceEntries',
+  flags: Object.freeze([
+    'reputationRaceEnabled',
+    'routeLifecycleEnabled',
+    'warLayerEnabled',
+  ]),
+  owningVolume: 'INFORMATION',
+  owningWave: 'IN-4',
+  intendedDesk: 'events',
+  kinds: Object.freeze(['race_story', 'race_together']),
+});
+
+/** IN-4 / GRAMMAR→INFO: the envoy's kept homecoming. @type {Readonly<CouplingRegistryRow>} */
+export const IN4_ENVOY_RETURN_COUPLING = couplingRow({
+  couplingId: 'CPL-19.GRAMMAR_TO_INFO.IN-4.envoy_return_race',
+  pairId: 'CPL-19',
+  direction: 'GRAMMAR→INFO',
+  read: 'src/domain/worldPulse/reputationRaceConsumer.js#stagedArrivals',
+  receiptField: 'worldState.envoyErrands[state=home].{id,from,to,returnStartedTick,homeTick}',
+  counterforce: 'src/domain/worldPulse/envoyInterceptionStage.js#resolveStartInterceptions',
+  flags: Object.freeze([
+    'envoyDiplomacyEnabled',
+    'npcConsequencesEnabled',
+    'peaceEngineEnabled',
+    'reputationRaceEnabled',
+    'routeLifecycleEnabled',
+    'warLayerEnabled',
+    'warTerminationEnabled',
+  ]),
+  owningVolume: 'INFORMATION',
+  owningWave: 'IN-4',
+  intendedDesk: 'events',
+  kinds: Object.freeze(['race_person', 'race_story', 'race_together', 'word_came_too_late']),
+});
+
+/** IN-4's three rows, composed LAST in the head (see above). @type {ReadonlyArray<Readonly<CouplingRegistryRow>>} */
+export const IN4_REPUTATION_RACE_COUPLINGS = Object.freeze([
+  IN4_RACE_ROAD_COUPLING,
+  IN4_ARMY_ARRIVAL_COUPLING,
+  IN4_ENVOY_RETURN_COUPLING,
+]);
+
 /** Every INFORMATION row, in wave order. @type {ReadonlyArray<Readonly<CouplingRegistryRow>>} */
 export const IN_INFORMATION_COUPLINGS = Object.freeze([
   IN0A_PLANT_HANDOFF_COUPLING,
   IN0C_DISCLOSURE_SIGNING_CREDIT_COUPLING,
+  IN3_ENVOY_WORD_COUPLING,
+  IN3_TEMPER_AND_WOUNDS_COUPLING,
 ]);

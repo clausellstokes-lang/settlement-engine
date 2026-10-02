@@ -29,7 +29,10 @@ import { JOINT_KINDS, TEMPERAMENTS, isJointKind, isTemperament } from '../../src
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), '../..');
 
-/** A settlement institution exactly as the generator spreads the catalog entry onto it. */
+/** A settlement institution exactly as the generator spreads the catalog entry onto it.
+ *  (Three fixture rows were re-addressed on 2026-09-30, the urban band, ODQ §934.86: the
+ *  root cellar, the mine and the stone quarry moved to the Economy shelf with the rest of
+ *  primary production. The rows themselves are unchanged.) */
 function real(tier, category, name) {
   const entry = institutionalCatalog[tier]?.[category]?.[name];
   if (!entry) throw new Error(`fixture names a catalog row that does not exist: ${tier}/${category}/${name}`);
@@ -130,7 +133,7 @@ describe('MF-UC0 — the underground existence gate, the substructure facet, and
   });
 
   it('A3 · one modest seed → the sheet exists (the two-level reading\'s FIRST level): a root cellar alone, and a culvert alone', () => {
-    const cellarOnly = { institutions: [real('thorp', 'Government', 'Household elder'), real('thorp', 'Infrastructure', 'Communal root cellar')], config: DRY };
+    const cellarOnly = { institutions: [real('thorp', 'Government', 'Household elder'), real('thorp', 'Economy', 'Communal root cellar')], config: DRY };
     const r = deriveStrataExistence(cellarOnly);
     expect(r.exists).toBe(true);
     expect(r.seeds).toEqual([{
@@ -213,7 +216,7 @@ describe('MF-UC0 — the underground existence gate, the substructure facet, and
   it('A6 · deterministic, closed, pure and dormant: same input → same output; every vocabulary is the frozen literal; no nondeterminism token and no townMap import is reachable; nothing in src imports the leaves', () => {
     const roster = [
       real('city', 'Infrastructure', 'Sewage system'), real('city', 'Religious', 'Cathedral (10,000+ only)'),
-      real('city', 'Economy', 'Warehouse district'), real('village', 'Crafts', 'Mine'), real('city', 'Criminal', 'Underground network'),
+      real('city', 'Economy', 'Warehouse district'), real('village', 'Economy', 'Mine'), real('city', 'Criminal', 'Underground network'),
       { name: 'Legacy Granary' }, { name: 'Old Chapel Crypt', facets: { [SUBSTRUCTURE_FACET_KIND]: 'crypt' } },
     ];
     const a = deriveStrataExistence({ institutions: roster, config: DRY }, { sanitationRung: 'full_web' });
@@ -320,7 +323,7 @@ describe('MF-UC0 — the underground existence gate, the substructure facet, and
   });
 
   it('A7 · G-43 arm: remove the last qualifying institution → exists flips false; restore it → true (directional, pre-declared)', () => {
-    const roster = [real('village', 'Government', 'Village reeve'), real('village', 'Religious', 'Parish church'), real('village', 'Crafts', 'Stone quarry'), real('village', 'Economy', 'Weekly market')];
+    const roster = [real('village', 'Government', 'Village reeve'), real('village', 'Religious', 'Parish church'), real('village', 'Economy', 'Stone quarry'), real('village', 'Economy', 'Weekly market')];
     const at = (insts) => deriveStrataExistence({ institutions: insts, config: DRY });
     expect(at(roster).seeds.map((s) => s.class)).toEqual(['crypt', 'mine']);
     const withoutQuarry = roster.filter((i) => i.name !== 'Stone quarry');

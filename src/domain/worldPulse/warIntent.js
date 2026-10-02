@@ -85,6 +85,13 @@ export const WAR_INTENT_LEDGER_KEY = 'warIntents';
  * retry — the tick after a would-be besieger was blocked by a transient (it had just
  * cleared an army, or its posture ramped a tick late) — and no more. Beyond that the
  * seat must decide again.
+ *
+ * ⭐ DECLARED BY GR-6 (mediation generalized): THE WINDOW IS ONE DELIBERATION. Its two
+ * readings are the whole of the time a broker has to stand between the pair, and
+ * `mediationPressure.js` reads THIS constant, never a copy: an order still standing at the
+ * treaty stage of the tick it reaches exactly this age was neither obeyed nor renewed, can no
+ * longer open, and with a broker between the pair is told as the war that did not happen.
+ * Retuning the window retunes the brokerage with it, by construction.
  */
 export const WAR_INTENT_TTL_TICKS = 2;
 

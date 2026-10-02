@@ -249,7 +249,29 @@ export const ENGINE_GATED_VIRTUAL_RULE_KEYS = Object.freeze([
   // this census.
   'believedConditionsEnabled',
   'believedDevotionEnabled',
+  // Joined 2026-09-24 by FP wave TR-3 (lane FP-D2) under CR-WR10-C item 4 (the compiled
+  // charter's §3 flag law), in the SAME commit as its first real gate read —
+  // `dispatchDestination.believedMarketsActive`, the ONE `=== true` by-name read of this key
+  // in the tree — and its AUTHORED certification row at the tail of VIRTUAL_SUBSYSTEM_ROWS.
+  // Inserted at its codepoint position (SR-7), inside SP-B's run of three because the words
+  // sort there; it is NOT one of SP-B's family flags and joins no subjectAxesActive door.
+  // ⚠ A SINGLE CONJUNCT, deliberately, on TR-2's reading: SP-B's scarcity family and TR-1 are
+  // LIGHTING-ORDER preconditions the trade contract judges
+  // (`tradeConvergenceContract.TRADE_FLAG_LIGHTING_ROWS`), never a door here. Lit over a dark
+  // family the composer hears nothing, every market ties on belief and the truth-side need
+  // alone orders the queue, which is the configuration that lighting table refuses.
+  'believedMarketsEnabled',
   'believedScarcityEnabled',
+  // Joined 2026-09-24 by FP wave CW-1 (lane fp/cw-1, pulled to pair 1's tail by FP-25) under
+  // CR-WR10-C item 4 (the compiled charter's §3 flag law), in the SAME commit as its first real
+  // gate read — `cascadeBraid.cascadeGovernorActive`, the ONE `=== true` by-name read of this key
+  // in the tree — and its AUTHORED certification row at the tail of VIRTUAL_SUBSYSTEM_ROWS.
+  // Inserted at its codepoint-sorted position (SR-7). ⚠ A DISPLAY-SIDE KEY, and still a register
+  // member rather than an exemption, deliberately: docs/DESIGN_FP_ARCH_CW.md §2 manifests it here,
+  // and the braid it gates is a composition over recorded receipts that moves no world byte in
+  // either state. ⚠ A SINGLE CONJUNCT: the provenance ledger it reads is its DATA (an empty or
+  // absent ledger braids nothing), never a door here.
+  'cascadeGovernorEnabled',
   // Joined 2026-08-04 by FP wave TR-1 under CR-WR10-C item 4 (the compiled charter's §3
   // flag law), in the SAME commit as its first real gate reads — commercialReasons.js's
   // own `casusCommerciiActive` and tradeWar.js's severance-magnitude seam, both read by
@@ -258,6 +280,14 @@ export const ENGINE_GATED_VIRTUAL_RULE_KEYS = Object.freeze([
   // certification tracks reality instead of preceding it).
   'casusCommerciiEnabled',
   'conquestDoctrineEnabled',
+  // Joined 2026-09-24 by FP wave IN-3 (lane FP-I3) under CR-WR10-C item 4 (the compiled
+  // charter's §3 flag law), in the SAME commit as its first real gate read —
+  // `suspicion.counterIntelActive`, the ONE `=== true` by-name read of this key in the tree —
+  // and its AUTHORED certification row at the tail of VIRTUAL_SUBSYSTEM_ROWS. Inserted at its
+  // codepoint-sorted position (SR-7). ⚠ A SINGLE CONJUNCT, deliberately (IN-2's shape): the
+  // statecraft head carries the two pulse seams and runs only under infoStatecraftEnabled,
+  // which is a LIGHTING-ORDER precondition the LIT-n unit judges, never a door here.
+  'counterIntelEnabled',
   // Joined 2026-08-06 by FP wave SP-D under CR-WR10-C item 4 (the compiled charter's §3
   // flag law), in the SAME commit as its first real gate read
   // (errandMint.errandSpineActive, the ONE `=== true` by-name read of this key in the
@@ -305,7 +335,43 @@ export const ENGINE_GATED_VIRTUAL_RULE_KEYS = Object.freeze([
   // this census exists: a computed member access attributes to NO key and would be fully wired,
   // genuinely gated, and invisible here.
   'habitConditioningEnabled',
+  // Joined 2026-09-24 by FP wave IN-2 (lane FP-I) under CR-WR10-C item 4 (the compiled
+  // charter's §3 flag law), in the SAME commit as its first real gate read —
+  // `infoLure.infoLureActive`, the ONE `=== true` by-name read of this key in the tree — and
+  // its AUTHORED certification row at the tail of VIRTUAL_SUBSYSTEM_ROWS. Inserted at its
+  // codepoint-sorted position (SR-7). ⚠ A SINGLE CONJUNCT AT THIS WAVE, deliberately: the lure
+  // rides the statecraft head, which runs only under infoStatecraftEnabled, and the brokerages
+  // and the mirror are LIGHTING-ORDER preconditions the LIT-n unit judges, never doors here.
+  'infoLureEnabled',
   'infoStatecraftEnabled',
+  // Joined 2026-09-24 by FP wave IN-4 commit 1 (lane FP-I2; J-INA-4, docs/DESIGN_FP_ARCH_IN.md §2
+  // and §6 Q3) under CR-WR10-C item 4, with its AUTHORED certification row at the tail of
+  // VIRTUAL_SUBSYSTEM_ROWS. ⚠ THE READ IS NOT NEW, THE DECLARATION IS — the
+  // settlementPoliticsEnabled footing: `intelActs.intelTradeActive` has read this key `=== true`
+  // since deep-couplings D-3 landed, the ONE by-name read of it in the tree, and the engine-gated
+  // walker carried it on its measured BACKLOG as an invisible key. Declaring it writes the key
+  // into no rules object and no preset, so no world byte moves on any path.
+  // ⚠ A SINGLE CONJUNCT: the lane's other doors (beliefs live and infoStatecraftEnabled at the
+  // generosity deposit, the statecraft gate at the consume arm) are its CALLERS' conjunctions,
+  // never reads of this key. Inserted at its codepoint-sorted position (SR-7).
+  'intelTradeEnabled',
+  // Joined 2026-09-24 by FP wave GR-6 (lane FP-B2) under CR-WR10-C item 4 (the compiled
+  // charter's §3 flag law), in the SAME commit as its first real gate read —
+  // `mediationPressure.mediationGeneralizedActive`, the ONE `=== true` by-name read of this key
+  // in the tree — and its AUTHORED certification row at the tail of VIRTUAL_SUBSYSTEM_ROWS.
+  // ⚠ A CONJUNCTION with the peace engine's two keys, deliberately: every occasion speaks
+  // through the treaty stage, which is dark without them, so the pressure at the war opener's
+  // soft gate never lights where its receipt cannot.
+  'mediationGeneralizedEnabled',
+  // Joined 2026-09-23 by FP wave TR-2 (lane FP-D) under CR-WR10-C item 4 (the compiled
+  // charter's §3 flag law), in the SAME commit as its first real gate read —
+  // `houseLedger.merchantHousesActive`, the ONE `=== true` by-name read of this key in the
+  // tree — and its AUTHORED certification row at the tail of VIRTUAL_SUBSYSTEM_ROWS. Never a
+  // pending entry: manifesting is itself the act that makes a virtual key censusable.
+  // ⚠ IT IS A SINGLE CONJUNCT AT THIS WAVE, deliberately: the house layer reads no other
+  // layer's ledger, and TR-1 before it is a LIGHTING-ORDER precondition the trade contract
+  // (`tradeConvergenceContract.evaluateTradeFlagLighting`) judges, never a door here.
+  'merchantHousesEnabled',
   'migrationRumorsEnabled',
   // Joined 2026-08-04 by FP wave GR-1 under CR-WR10-C item 4 (the compiled charter's
   // §3 flag law), in the SAME commit as its first real gate read
@@ -322,6 +388,16 @@ export const ENGINE_GATED_VIRTUAL_RULE_KEYS = Object.freeze([
   // from this very census; read ONCE because two doors on one flag is how a deleted guard
   // hides behind a surviving one.
   'pactFormationEnabled',
+  // Joined 2026-09-24 by FP wave IN-4 commit 2 (lane FP-I2) under CR-WR10-C item 4 (the compiled
+  // charter's §3 flag law), in the SAME commit as its first real gate read —
+  // `reputationRaceConsumer.reputationRaceActive`, the ONE `=== true` by-name read of this key in
+  // the tree, spelled in one statement so the observed-shape discovery sees it — and its AUTHORED
+  // certification row at the tail of VIRTUAL_SUBSYSTEM_ROWS. Inserted at its codepoint-sorted
+  // position (SR-7). ⚠ A SINGLE CONJUNCT, deliberately: the race's story leg walks the lived route
+  // network (routeLifecycleEnabled's), its gate listeners are the brokerage layer's own gate, and
+  // the arrivals it reads exist only where their own layers ran; those are the race's DATA, and
+  // distancePricedNewsEnabled is a LIGHTING-ORDER precondition the LIT-n unit judges, never a door.
+  'reputationRaceEnabled',
   // Joined 2026-08-12 by FP wave IN-1a under CR-WR10-C item 4 (the compiled charter's §3
   // flag law), in the SAME commit as its first real gate read
   // (secondOrderBelief.secondOrderBeliefActive, the ONE `=== true` by-name read of this
@@ -675,6 +751,57 @@ const ONE_REGEN = Object.freeze({
   roadsEnabled: true,
 });
 
+// ── THE FP LAYERS, SHIPPED LIT (LIT-1a, 2026-09-24; J-EM-16 under the owner's word ─────
+// of 2026-09-23, "no just build it all shipped lit"). The first REGISTER keys a preset
+// declares. Like WAVES / ONE_REGEN they are VIRTUAL: absent from DEFAULT_SIMULATION_RULES,
+// so outside RULE_COMPARISON_KEYS, so an installed save keeps its preset id and gains no
+// byte. What moves is a world BORN into one of these presets, a declared same-seed shift
+// (docs/shift-records/2026-09-24-fp-lighting-1a.json). The register above keeps every key;
+// ENGINE_GATED_DORMANT_RULE_KEYS drops each by derivation. ONE FRAGMENT PER PRESET SET: a
+// key lights only in the presets that carry every layer it reads, and a later lighting
+// unit inserts its key at its codepoint-sorted place in the fragment whose set it names
+// (SR-7), or cuts a new fragment for a new set.
+//   FP_LIT_ALIVE: the four world-alive presets. Faith unseating's other gate is data (a
+//     deity world); pact formation's shared-threat occasion needs no belief substrate.
+//   FP_LIT_BELIEF (LIT-1b, 2026-09-24): the presets that carry pactFormationEnabled AND an
+//     infoMode that records beliefs, dramatic_campaign and living_realm 'perfect_delayed' and
+//     full_simulation 'full'. The belief axes host and its scarcity and conditions families are
+//     what the pact stage's trade_demand and migration_pressure occasions read (the FP kit's LIT
+//     dependency map, chain 4). realistic_regional carries the pact stage but is omniscient,
+//     where beliefsActive is false and the chain cannot act, so it lights nothing here (ruling
+//     FP-24 keeps it omniscient). believedDevotionEnabled (faith_communion's family) is not a
+//     member: the unit lights the three.
+//   FP_LIT_WARPEACE: the two presets where warLayerEnabled and peaceEngineEnabled are both
+//     lit (peaceCausalActive): that door opens the treaty fold the lifecycle voice and the
+//     renewal memory run inside, and the war-end mint the oath holder stamps. LIT-2
+//     (2026-09-24) adds the generalized mediation, whose one gate is the same conjunction
+//     (mediationPressure.mediationGeneralizedActive): a broker standing between a pair holds
+//     an ordered war back, and the war that did not happen is told. Its signed record:
+//     docs/shift-records/2026-09-24-fp-lighting-2.json.
+// HELD DARK ON PURPOSE: the errand spine, whose envoy arm needs the six envoy keys (dark in
+// every preset) and whose pact arm, lit alone, labels a proposal as carried by an envoy no
+// errand ever sent; the merchant houses, which have no pulse mount yet (vacuous); the lure
+// and the counter-intelligence sweep, whose every arm runs inside the statecraft head
+// (informationStatecraft.infoStatecraftActive, whose own key is lit in no preset: LIT-2
+// measured the head's shift and held it for a ruling); and the reputation race, whose story
+// leg answers only over the lived route network (routeNetworkLedger.routeLifecycleActive,
+// the owner's key, with a genesis that has no caller yet).
+const FP_LIT_ALIVE = Object.freeze({
+  faithUnseatingEnabled: true,
+  pactFormationEnabled: true,
+});
+const FP_LIT_BELIEF = Object.freeze({
+  beliefAxesEnabled: true,
+  believedConditionsEnabled: true,
+  believedScarcityEnabled: true,
+});
+const FP_LIT_WARPEACE = Object.freeze({
+  mediationGeneralizedEnabled: true,
+  oathHolderEnabled: true,
+  treatyLifecycleVoiceEnabled: true,
+  treatyRenewalEnabled: true,
+});
+
 // ── THE NEUTRAL-CONNECTED DEFAULT (realm directive 2 / J-D2, 2026-07-31) ────
 // `neutralNeighborsEnabled` is a VIRTUAL flag of the same class as WAVES /
 // ONE_REGEN / memoryWeaveEnabled: NO entry in DEFAULT_SIMULATION_RULES, read
@@ -768,6 +895,8 @@ export const SIMULATION_RULE_PRESETS = Object.freeze({
     disastersEnabled: true,
     commodityFlowEnabled: true,
     allyIntelSharingEnabled: true,
+    // LIT-1a: the FP layers whose every prerequisite this preset carries (see FP_LIT_ALIVE).
+    ...FP_LIT_ALIVE,
     ...WAVES,
     ...ONE_REGEN,
   }),
@@ -817,6 +946,16 @@ export const SIMULATION_RULE_PRESETS = Object.freeze({
     religionDynamicsEnabled: true,
     seasonsEnabled: true,
     disastersEnabled: true,
+    // LIT-1b, RULING FP-24 (the FP chair, 2026-09-24, under the owner's word "Again, I leave
+    // all judgment to you", vetoable): the belief-recording infoMode living_realm carries, so
+    // the belief chain can act in the DM-facing reference preset. NOT a comparison key, so an
+    // installed Dramatic Campaign (stored omniscient) keeps its preset id and its own mode.
+    infoMode: 'perfect_delayed',
+    // LIT-1a: the FP layers whose every prerequisite this preset carries (war and peace lit).
+    // LIT-1b: the belief chain, now that this preset records beliefs (see FP_LIT_BELIEF).
+    ...FP_LIT_ALIVE,
+    ...FP_LIT_BELIEF,
+    ...FP_LIT_WARPEACE,
     // W-R2-LIGHT: the nine engine-wave gates — dramatic_campaign is a world-alive
     // preset, so it runs the full anti-stasis stack (virtual flags; see WAVES).
     ...WAVES,
@@ -855,6 +994,10 @@ export const SIMULATION_RULE_PRESETS = Object.freeze({
     // the realm canonizes a spatial digest (the engine gate); NOT a comparison
     // key, so pre-3.5 saves carrying this preset keep their identity.
     infoMode: 'perfect_delayed',
+    // LIT-1a: the FP layers whose every prerequisite this preset carries (see FP_LIT_ALIVE).
+    // LIT-1b: the belief chain this preset's infoMode records (see FP_LIT_BELIEF).
+    ...FP_LIT_ALIVE,
+    ...FP_LIT_BELIEF,
     // W-R2-LIGHT: a "living realm" without the living-engine waves would lie — its
     // distinction from full_simulation is APPROVAL POSTURE (routine autonomy), not
     // engine depth, so it runs the same nine engine-wave gates (owner ruling).
@@ -1065,6 +1208,11 @@ export const SIMULATION_RULE_PRESETS = Object.freeze({
     // census is boolean-only (subsystemCertification.simulationRuleKeys), so a
     // string key is invisible to it either way.
     realmMagicDefault: 'magical',
+    // LIT-1a: the FP layers whose every prerequisite this preset carries (war and peace lit).
+    // LIT-1b: the belief chain this preset's infoMode records (see FP_LIT_BELIEF).
+    ...FP_LIT_ALIVE,
+    ...FP_LIT_BELIEF,
+    ...FP_LIT_WARPEACE,
     // W-R2-LIGHT: the ceiling is everything-on by name — it runs the full nine-wave
     // anti-stasis stack (warLayer is lit above, so intervention/peaceEngine/
     // supplyWebWarfare fire here; the composition smoke + whole-world soak drive
@@ -1133,8 +1281,9 @@ export function deriveDormantRuleKeys(register, defaults, presets) {
  * declares it. Its live readers are the five dormancy fences, each asserting this claim
  * about its own key, and the walker that proves the derivation.
  *
- * Today every registered key is still dark, so this equals the register exactly, in
- * register order. That equality is a MEASUREMENT of the tree, not a property of the code.
+ * It is the register less every key a preset lights (LIT-1a lit five, LIT-1b three and LIT-2
+ * one, all 2026-09-24), in register order. That difference is a MEASUREMENT of the tree, not
+ * a property of code.
  *
  * @type {ReadonlyArray<string>}
  */

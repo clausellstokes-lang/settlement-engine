@@ -32,7 +32,7 @@
 import { useCallback, useId, useState } from 'react';
 import { X } from 'lucide-react';
 import {
-  BODY, BORDER, CARD, CARD_ALT, ELEV, FS, INK, MUTED, R, SP, sans,
+  BODY, BORDER, CARD, CARD_ALT, EDITOR_GROUND, ELEV, FS, GOLD, INK, MUTED, PARCH_100, R, SP, houseBloom, sans,
 } from '../theme.js';
 import Button from './Button.jsx';
 import Badge from './Badge.jsx';
@@ -48,6 +48,7 @@ export default function BottomSheet({
   fullWidthTrigger = false,
   onOpen,
   onClose,
+  editorHalo = false,
 }) {
   const [open, setOpen] = useState(false);
   const labelId = useId();
@@ -85,6 +86,7 @@ export default function BottomSheet({
       {open && (
         <div
           role="presentation"
+          className={editorHalo ? 'oc-m-warmdim' : undefined}
           style={{
             position: 'fixed',
             inset: 0,
@@ -92,7 +94,13 @@ export default function BottomSheet({
             display: 'flex',
             flexDirection: 'column',
             justifyContent: 'flex-end',
-            background: 'rgba(27,20,8,0.46)',
+            background: editorHalo ? EDITOR_GROUND : 'rgba(27,20,8,0.46)',
+            ...(editorHalo ? {
+              backgroundImage: houseBloom(PARCH_100),
+              backgroundRepeat: 'no-repeat',
+              backgroundPosition: 'center bottom',
+              backgroundSize: '100% 40vh',
+            } : null),
           }}
           onMouseDown={event => {
             if (event.target === event.currentTarget) close();
@@ -109,7 +117,7 @@ export default function BottomSheet({
               maxHeight: '85vh',
               display: 'flex',
               flexDirection: 'column',
-              borderTop: `1px solid ${BORDER}`,
+              borderTop: `1px solid ${editorHalo ? GOLD : BORDER}`,
               borderTopLeftRadius: R.lg,
               borderTopRightRadius: R.lg,
               background: CARD,

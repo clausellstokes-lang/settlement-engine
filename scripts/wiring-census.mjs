@@ -346,7 +346,7 @@ function identifiersIn(expr) {
 /**
  * Source (c): the generator's own recorded derivations. The estate's canonical instance is
  * `milUpkeepMult = min(1, 0.6 + econOutput/50 * 0.4)` degrading `scores.military` and
- * persisted as `economicGates.military` (`defenseGenerator.js:189-191, :467-472`).
+ * persisted as `economicGates.military` (`defenseGenerator.js :: computeDefenseScores` — the `milUpkeepMult` derivation and the `economicGates` block it feeds).
  * @returns {RelationRow[]}
  */
 export function relationsFromGenerators() {

@@ -20,6 +20,7 @@ import {
   COST_LAW_VERSION,
   SEASONAL_OVERLAY_VERSION,
 } from '../domain/spatial/index.js';
+import { kmScaleForCanonize } from '../domain/spatial/modeSpeeds.js';
 import { canonizeWorldState, deepFreeze } from '../domain/worldPulse/worldState.js';
 import { cacheCampaignState, syncCampaignSnapshot, findActiveCampaign } from './campaignSliceShared.js';
 import { track, EVENTS } from '../lib/analytics.js';
@@ -44,12 +45,15 @@ const SPATIAL_DIGEST_MAX_BYTES = 400_000;
  *   options?: { captureSpatialPack?: (ctx:{campaignId:string, get:Function}) =>
  *     Promise<{pack:any, placements:Array<{id:any,cellId:any}>,
  *       cellResolution?:Array<{id:string, from:number|null, to:number|null, reason:string}>,
- *       sidecar?:object|null}|null> } }} args
+ *       sidecar?:object|null}|null>, kmScale?: number } }} args
  *   The injected capture's reply is declared HERE as well as at its producer, because the
  *   seam is a dependency injection: a test double supplies this shape without ever reaching
  *   `captureSpatialPack`. SEAM-3's `sidecar` is optional on BOTH sides for that reason — an
  *   older double that predates the stamp is still a valid capture.
- * @returns {Promise<{ok:boolean, reason?:string, spatialCanonVersion?:number, digestBytes?:number}>}
+ *   WY-1's `kmScale` is the creation flow's supply of the map's own km scale for the FIRST
+ *   canonize; a re-canonize ignores it and carries the prior digest's value forward.
+ * @returns {Promise<{ok:boolean, reason?:string, spatialCanonVersion?:number, digestBytes?:number,
+ *   kmScaleReceipt?: import('../domain/spatial/modeSpeeds.js').KmScaleHealReceipt}>}
  */
 export async function runSpatialCanonize({
   set,
@@ -84,8 +88,10 @@ export async function runSpatialCanonize({
   // biomeTruthEnabled flag (ABSENT from DEFAULT_SIMULATION_RULES — the npcLadder/heirs idiom).
   // Absent ⇒ biomeTexture false ⇒ NO biomes key ⇒ byte-identical (every existing canon/golden).
   // Lit ⇒ a §V.1 receipted re-canonize freezes the per-settlement/per-leg biome into the canon.
+  const priorWorldState = /** @type {{ simulationRules?: unknown, spatialDigest?: unknown }} */ (
+    findActiveCampaign(get().campaigns, campaignId)?.worldState || {});
   const priorRules = /** @type {{ biomeTruthEnabled?: unknown, climateTruthEnabled?: unknown }} */ (
-    (findActiveCampaign(get().campaigns, campaignId)?.worldState || {}).simulationRules || {});
+    priorWorldState.simulationRules || {});
   const biomeTexture = priorRules.biomeTruthEnabled === true;
   // W-CAP CAP-3 CLIMATE TRUTH (DARK): the additive climate sub-digest lights ONLY under the
   // VIRTUAL climateTruthEnabled flag, on the biomeTruthEnabled idiom above — ABSENT from
@@ -95,6 +101,13 @@ export async function runSpatialCanonize({
   // climate band into the canon, and the seasons food year reads it in place of its
   // terrain-word proxy.
   const climateTexture = priorRules.climateTruthEnabled === true;
+  // WY-1 THE SCALE CHARTER — THE CARRY-FORWARD CLAUSE (WY §1a.1, the ghost-write class):
+  // this body REBUILDS the whole digest on every receipted re-canonize, so the km-scale
+  // datum is RE-RECEIVED from the prior digest in this same prior-worldState read; the
+  // creation flow's supply applies to the FIRST canonize only, and a re-canonize never
+  // mints a scale for a legacy world. Absent stays absent (no key ⇒ byte-identical); a
+  // refused value heals to absent and the result carries the receipt.
+  const scale = kmScaleForCanonize({ priorDigest: priorWorldState.spatialDigest, supplied: options.kmScale });
   const digest = buildSpatialDigest({
     pack: captured.pack,
     placements: captured.placements,
@@ -139,6 +152,8 @@ export async function runSpatialCanonize({
     // now ask "is this the same map?" of a record instead of of a witness row. A capture
     // that produced no stamp (the fixture path) leaves the key absent.
     sidecar: captured.sidecar || null,
+    // WY-1: the admitted scale, or null (no key). See the carry-forward clause above.
+    kmScale: scale.kmScale,
   });
   const digestBytes = JSON.stringify(digest).length;
   if (digestBytes > SPATIAL_DIGEST_MAX_BYTES) {
@@ -205,5 +220,10 @@ export async function runSpatialCanonize({
     throw error;
   }
   if (!sessionStillCurrent()) return { ok: false, reason: 'auth_session_changed' };
-  return { ok: true, spatialCanonVersion: nextVersion, digestBytes };
+  return {
+    ok: true,
+    spatialCanonVersion: nextVersion,
+    digestBytes,
+    ...(scale.receipt ? { kmScaleReceipt: scale.receipt } : {}),
+  };
 }

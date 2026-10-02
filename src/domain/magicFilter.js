@@ -9,6 +9,14 @@
 // one edge closed a chunk-level cycle and made the shipped bundle un-bootable.
 // The full account is in domain/arcaneInstitutionVocabulary.js's header.
 import { ARCANE_INST_KW, ARCANE_INST_TAGS } from './arcaneInstitutionVocabulary.js';
+// MF-CH2B: the licence LADDER only, from the ZERO-IMPORT data leaf that also defines
+// getMagicLevel's four tokens, so the tokens stay spelled once. Deliberately NOT
+// arcaneInstitutionIdentity — that adapter pulls the institution catalog, and this module
+// is routed to the lazy engine-core-lazy chunk (the chunk-cycle hazard above). The edge is
+// lazy -> eager, the safe direction, and a zero-import leaf cannot close a cycle.
+// `filterCatalogForMagic` is handed the catalog ROW already, so it reads the declaration
+// off the row and needs no name index at all.
+import { magicLicenceAtLeast, normaliseMagicLicence } from '../data/constants.js';
 
 export { ARCANE_INST_KW, ARCANE_INST_TAGS };
 
@@ -25,16 +33,28 @@ const ARCANE_GOODS = [
 
 /**
  * Returns true if this institution is arcane-dependent and should be hidden at magic=0.
+ *
+ * THE UI HALF OF THE MAGIC LICENCE (MF-CH2B). This is the read that hid `Great library` — a
+ * repository of books, authored `tags: ['education']` — from a magic-free world's grid,
+ * because it sits on the `Magic` shelf. Where the caller hands over a catalog row that
+ * DECLARES a licence, that declaration decides and the shelf is not consulted; the shelf,
+ * tag and keyword tests remain, the shelf one marked, for everything the catalog does not
+ * describe. It is the same answer the world law gives (`nativeInstitutionRequiresMagic`),
+ * so the grid and generation keep agreeing row by row once neither reads the shelf.
+ *
  * @param {string | null | undefined} name
  * @param {string | null | undefined} category
  * @param {unknown} tags
+ * @param {unknown} [licence]  the row's declared `magicLicense`, when the caller has the row
  * @returns {boolean}
  */
-function isArcaneInst(name, category, tags) {
+function isArcaneInst(name, category, tags, licence) {
+  const declared = normaliseMagicLicence(licence);
+  if (declared !== null) return magicLicenceAtLeast(declared, 'low');
   const n = (name     || '').toLowerCase();
   const c = (category || '').toLowerCase();
   const t = Array.isArray(tags) ? tags : [];
-  if (c === 'magic' || c === 'exotic') return true;
+  if (c === 'magic' || c === 'exotic') return true; // @non-catalog-fallback MF-CH2
   if (t.some(tag => ARCANE_INST_TAGS.includes(tag))) return true;
   if (ARCANE_INST_KW.some(kw => n.includes(kw))) return true;
   return false;
@@ -54,20 +74,21 @@ function noMagicWorld(config) {
 
 /**
  * Filter a catalog tier object, removing arcane institutions when magic is off.
- * @param {Record<string, Record<string, { tags?: unknown[] }>>} catalog
+ * @param {Record<string, Record<string, { tags?: unknown[], magicLicense?: unknown }>>} catalog
  * @param {MagicConfig} config
- * @returns {Record<string, Record<string, { tags?: unknown[] }>>}
+ * @returns {Record<string, Record<string, { tags?: unknown[], magicLicense?: unknown }>>}
  */
 export function filterCatalogForMagic(catalog, config) {
   const cfg = typeof config === 'number' ? { priorityMagic: config } : config;
   if (!noMagicWorld(cfg)) return catalog;
-  /** @type {Record<string, Record<string, { tags?: unknown[] }>>} */
+  /** @type {Record<string, Record<string, { tags?: unknown[], magicLicense?: unknown }>>} */
   const out = {};
   for (const [cat, insts] of Object.entries(catalog || {})) {
-    /** @type {Record<string, { tags?: unknown[] }>} */
+    /** @type {Record<string, { tags?: unknown[], magicLicense?: unknown }>} */
     const filtered = {};
     for (const [name, def] of Object.entries(insts || {})) {
-      if (!isArcaneInst(name, cat, def.tags || [])) {
+      // the ROW is in hand here, so the declaration is read directly off it
+      if (!isArcaneInst(name, cat, def.tags || [], def.magicLicense)) {
         filtered[name] = def;
       }
     }
@@ -78,6 +99,13 @@ export function filterCatalogForMagic(catalog, config) {
 
 /**
  * Filter a services map, removing arcane institutions when magic is off.
+ *
+ * ⚠ NO SHELF READ REACHES THIS FUNCTION AND NONE EVER DID: it passes `''` as the category, so
+ * the shelf test in `isArcaneInst` has always been dead here and only the keyword vocabulary
+ * decides. It is left on that vocabulary DELIBERATELY (J-TECH2-8) — it is handed service
+ * NAMES, not catalog rows, so it has nothing to read a declaration off, and a name lookup
+ * here would put the institution catalog into this lazy module's chunk.
+ *
  * @param {Record<string, unknown>} services
  * @param {MagicConfig} config
  * @returns {Record<string, unknown>}

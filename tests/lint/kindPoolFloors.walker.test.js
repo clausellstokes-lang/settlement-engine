@@ -175,6 +175,12 @@ const LEGACY_UNVOICED_TOKENS = 274;
 // takes `routedTokens` MEASURED from src/domain/realm/heraldRouting.js (:95/:383), never from
 // here. So the literal lives in the roster and nowhere else. (+1 at ENC-4b: `chance_meeting_exposed`,
 // the refusal that travelled — moved IN THE ROSTER, with its attribution, at the §900 composition.)
+// (+2 at GR-2b, in the roster too: GR-2b registers pact_proposed and realm_verb_propose_pact, each
+// routed on its own EXACT_SECTION row, so 381 → 383; +1 at FP TR-3: `market_wrong_market_arrival`,
+// the MARKET family's desk-bearing exact row, 383 → 384 — moved IN THE ROSTER beside
+// REGISTERED_KIND_COUNT below. The union at the FP integration pick, 2026-09-24.)
+// routed on its own EXACT_SECTION row, so 381 → 383.) (+1 at GR-6, in the roster: brokered_back,
+// routed on its own EXACT_SECTION row, so 383 → 384.)
 const ROUTED_TOKENS = KIND_REGISTRATION_FREEZES.routedTokens;
 // +1 at IN-0C: the eighth GR-0 lifecycle pool (`treaty_disclosure_opened`).
 // +1 at GR-4b: the ninth (`disavowed_by_succession`), the registry's first `major` row.
@@ -205,7 +211,35 @@ const ROUTED_TOKENS = KIND_REGISTRATION_FREEZES.routedTokens;
 // +1 at ENC-4b: `chance_meeting_exposed`, the SEVENTH family's second row and the first member
 // of this arc that did not also mint a family. It carries a desk on the same road, so both
 // censuses move together and the divergence below is untouched.
-const REGISTERED_KIND_COUNT = 115;
+// +2 at GR-2b: GR-2b registers pact_proposed and realm_verb_propose_pact, the GRAMMAR family's
+// thirteenth and fourteenth rows and the DM verb PROPOSE_PACT's two news kinds (SR-8). Both carry
+// the treaty cohort's desk, so ROUTED_TOKENS moves with them (381 → 383, in the roster) and the
+// divergence below stays at 8; the unvoiced ceiling holds at 274 because they are REGISTERED.
+// +1 at FP TR-3 (lane FP-D2): `market_wrong_market_arrival`, the whole of the estate's THIRTEENTH
+// registry family (MARKET) and its first row. It carries a desk (an EXACT_SECTION row at trade),
+// so ROUTED_TOKENS moves with it and the divergence below stays at 8 (SR-1, SR-8).
+// The UNION at the FP integration pick (the chair, 2026-09-24): 115 + 2 + 1.
+// +1 at FP IN-2 (SR-1, SR-8): IN-2 registers lure_sprung, the INFORMATION family's second row and
+// the lure's DM-truth spring. It carries the infowar siblings' desk (`war`), so ROUTED_TOKENS moves
+// with it (383 → 384, in the roster) and the divergence below stays at 8; the unvoiced ceiling holds.
+// The UNION at the FP integration pick (the chair, 2026-09-24): 115 + 2 (GR-2b) + 1 (TR-3) + 1 (IN-2).
+// +1 at FP GR-6 (brokered_back) — the UNION at the pick: 115 + 2 + 1 + 1 + 1.
+// 120 → 122 at FP IN-3 (lane FP-I3, 2026-09-24; SR-8): `false_accusation` and `sweep_launched`.
+// +1 at LIT1b-pre U4 (SR-1, SR-8): `signed`, the pact stage's signing beat, the GRAMMAR family's sixteenth
+// row. It carries the treaty cohort's desk, so ROUTED_TOKENS moves with it (386 → 387, in the roster) and
+// the divergence below stays at 8; the unvoiced ceiling holds because the token is REGISTERED.
+// The UNION at the FP integration pick (the chair, 2026-09-24): 122 + 1.
+// +4 at FP IN-4 (the race kinds) — the UNION at the pick: 123 + 4.
+const REGISTERED_KIND_COUNT = 127;
+// +1 at GR-6: GR-6 registers brokered_back (the war that did not happen), the GRAMMAR family's
+// fifteenth row and the mediation leaf's one news kind (SR-8). It carries the treaty cohort's
+// desk, so ROUTED_TOKENS moves with it (383 → 384, in the roster) and the divergence below stays
+// at 8; the unvoiced ceiling holds at 274 because the token is REGISTERED in the commit that
+// routes it.
+// +4 at FP IN-4 (SR-1, SR-8): IN-4 registers race_person, race_story, race_together and
+// word_came_too_late, the INFORMATION family's third to sixth rows. All four carry the envoy comings
+// and goings' desk (`events`), so ROUTED_TOKENS moves with them (385 → 389, in the roster) and the
+// divergence below stays at 8; the unvoiced ceiling holds because all four are REGISTERED.
 
 const violations = floorViolations(ALL_ROWS, { declaredExceptions: DECLARED_EXCEPTIONS });
 const unvoiced = Object.keys(EXACT_SECTION).filter((token) => !REGISTERED_KINDS.has(token));
@@ -214,11 +248,11 @@ describe('SP-E frequency-scaled floors — anti-vacuity anchors', () => {
   test('every registry is live and the denominator is real', () => {
     // Nothing below means anything if a registry emptied or an import went stale: a violation
     // list is trivially short when there is nothing to violate.
-    // ⛔ THE `12` IS PARSED OUT OF THIS LINE by scripts/base-state-capsule.mjs (:388) and
+    // ⛔ THE `13` IS PARSED OUT OF THIS LINE by scripts/base-state-capsule.mjs (:388) and
     // re-read by regex in tests/scripts/baseStateCapsule.test.js (:157). It must stay a bare
     // numeric literal in this exact spelling; the roster equality on the next line is what
     // keeps it from forking away from tests/domain/pantheon.test.js.
-    expect(REGISTRIES).toHaveLength(12);
+    expect(REGISTRIES).toHaveLength(13);
     expect(
       KIND_REGISTRATION_FREEZES.registries,
       'the roster and this walker disagree on the registry count — move BOTH in the registering'

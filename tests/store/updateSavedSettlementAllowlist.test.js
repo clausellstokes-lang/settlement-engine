@@ -117,8 +117,31 @@ describe('updateSavedSettlement allowlist (VI.12 #163b)', () => {
   });
 
   test('an empty or missing patch stays a silent no-op', () => {
-    expect(store.getState().updateSavedSettlement('save-1', {})?.ok).not.toBe(false);
-    expect(store.getState().updateSavedSettlement('save-1', undefined)?.ok).not.toBe(false);
+    // ⛔ THE WRITER IS PROVEN LIVE BEFORE ITS SILENCE IS READ (U109 — lane T2's idiom). This arm
+    // opened on `updateSavedSettlement(…)?.ok).not.toBe(false)` twice. The writer's success path
+    // returns zustand's own `set()` — `undefined` on every clean patch (measured: the live patch,
+    // the empty one and the missing one all return undefined) — so `…?.ok` was `undefined`
+    // whether the patch landed, was ignored, or the write never found the row at all; and
+    // nothing here asserted the NO-OP either. The arm therefore stayed green on a writer that
+    // patches NOTHING (measured: the never-lands plant reds the two patching arms above and
+    // leaves this one alone). So the SAME writer is driven over a census key, on THIS store and
+    // THIS row, before either silence is read.
+    const stamp = '2026-07-27T12:00:00.000Z';
+    store.getState().updateSavedSettlement('save-1', { timestamp: stamp });
+    expect(store.getState().savedSettlements[0].timestamp,
+      'THE CONTROL: the writer RAN and patched this very row, so the silence below is a'
+      + ' decision and not a write that never lands').toBe(stamp);
+    const row = JSON.parse(JSON.stringify(store.getState().savedSettlements[0]));
+    const empty = store.getState().updateSavedSettlement('save-1', {});
+    const missing = store.getState().updateSavedSettlement('save-1', undefined);
+    // Neither was REFUSED — a refusal is the typed `{ ok: false, … }` envelope the three arms
+    // above read, the success path is `undefined` — so this is an equality on the returned
+    // SHAPE rather than a `?.ok` that `undefined` satisfies by accident.
+    expect([empty, missing], 'neither the empty nor the missing patch was refused')
+      .toEqual([undefined, undefined]);
+    // …and the no-op is REAL: the row the control left is unchanged, key for key.
+    expect(store.getState().savedSettlements[0],
+      'and neither patch wrote anything to the row').toEqual(row);
     expect(errorSpy).not.toHaveBeenCalled();
   });
 });

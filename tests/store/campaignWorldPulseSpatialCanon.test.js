@@ -47,6 +47,12 @@ import {
   unregisterSpatialCaptureBridge,
 } from '../../src/lib/spatialCaptureRegistry.js';
 import { makeGridPack, placeSettlements, placePortSettlements, placeTeleportSettlements, makeLakePack } from '../fixtures/spatialPackFixtures.js';
+import { realmReach } from '../../src/domain/spatial/distanceRead.js';
+import { buildSpatialDigest } from '../../src/domain/spatial/index.js';
+import { capturePulseSnapshot } from '../../src/store/campaignPulseHelpers.js';
+import { ensureWorldState } from '../../src/domain/worldPulse/worldState.js';
+import { hydratePersistedCampaignWorld } from '../../src/store/campaignHydration.js';
+import { campaigns as campaignService } from '../../src/lib/campaigns.js';
 
 function installLocalStorage() {
   const data = new Map();
@@ -514,5 +520,113 @@ describe('KEYSTONE — entitled spatial canonize at the store', () => {
     const ws = store.getState().campaigns[0].worldState;
     expect(ws.spatialCanonVersion).toBeUndefined();
     expect(ws.spatialDigest).toBeUndefined();
+  });
+});
+
+// ── FP WY-1 THE SCALE CHARTER — the km-scale datum's canonize lifecycle ─────────────────
+// The datum rides the ONE canonize body (runSpatialCanonize): creation-supplied on the first
+// canonize, RE-RECEIVED from the prior digest on every receipted re-canonize (the rebuild
+// path), healed to absent with a receipt when refused, persisted through the campaign cache,
+// and captured whole by the pulse ring. docs/DESIGN_FP_ARCH_WY.md §1a.1 and §5 WY-1.
+
+/** One fixed geometry, with an optional founding edit that leaves the geometry untouched. */
+function scaleCapture({ founding = false } = {}) {
+  const pack = makeGridPack({ cols: 18, rows: 14 });
+  const placements = placeSettlements(pack, 6).map((row, i) => (
+    founding && i === 2 ? { ...row, institutions: ['Temple of the Dawn'] } : row));
+  return async () => ({ pack, placements });
+}
+
+describe('FP WY-1 — the km-scale datum through the canonize body', () => {
+  beforeEach(() => { installLocalStorage(); localStorage.removeItem('sf_campaigns'); });
+
+  test('WY-1 A4 CREATE: a first canonize stamps the creation-supplied scale; without a supply the digest carries no key', async () => {
+    const store = makeStore();
+    seedStore(store);
+    const result = await store.getState().canonizeCampaignWorldSpatial('camp-1', { captureSpatialPack: scaleCapture(), kmScale: 4 });
+    expect(result.ok).toBe(true);
+    expect(store.getState().campaigns[0].worldState.spatialDigest.kmScale).toBe(4);
+    // anchored: the same result object carries ok/spatialCanonVersion, so a missing receipt is the no-heal case
+    expect(result).not.toHaveProperty('kmScaleReceipt');
+
+    const dark = makeStore();
+    seedStore(dark);
+    const plain = await dark.getState().canonizeCampaignWorldSpatial('camp-1', { captureSpatialPack: scaleCapture() });
+    expect(plain.ok).toBe(true);
+    // anchored: the scaled store above carries the key through the same body, so this absence is the dark arm
+    expect(dark.getState().campaigns[0].worldState.spatialDigest).not.toHaveProperty('kmScale');
+  });
+
+  test('WY-1 A4 REGENERATE: a receipted re-canonize after a founding edit RE-RECEIVES the scale — kmScale and the week spectrum identical, version bumped', async () => {
+    const store = makeStore();
+    seedStore(store);
+    await store.getState().canonizeCampaignWorldSpatial('camp-1', { captureSpatialPack: scaleCapture(), kmScale: 4 });
+    const first = store.getState().campaigns[0].worldState;
+    const again = await store.getState().canonizeCampaignWorldSpatial('camp-1', { captureSpatialPack: scaleCapture({ founding: true }) });
+    expect(again.ok).toBe(true);
+    const second = store.getState().campaigns[0].worldState;
+    expect(second.spatialCanonVersion).toBe(first.spatialCanonVersion + 1);
+    // anchored: the version bump one line up proves a rebuild ran, so a distinct object is the fresh digest
+    expect(second.spatialDigest).not.toBe(first.spatialDigest);
+    expect(second.spatialDigest.kmScale).toBe(4);
+    expect(realmReach(second.spatialDigest)).toEqual(realmReach(first.spatialDigest));
+    expect(realmReach(second.spatialDigest).kmScale).toBe(4);
+    // A supply on a re-canonize is ignored: the prior digest's value is the one carried.
+    await store.getState().canonizeCampaignWorldSpatial('camp-1', { captureSpatialPack: scaleCapture(), kmScale: 9 });
+    expect(store.getState().campaigns[0].worldState.spatialDigest.kmScale).toBe(4);
+  });
+
+  test('WY-1 A4 NO MINT: a re-canonize of an unscaled world never mints a scale, even when one is supplied', async () => {
+    const store = makeStore();
+    seedStore(store);
+    await store.getState().canonizeCampaignWorldSpatial('camp-1', { captureSpatialPack: scaleCapture() });
+    const again = await store.getState().canonizeCampaignWorldSpatial('camp-1', { captureSpatialPack: scaleCapture(), kmScale: 4 });
+    expect(again.spatialCanonVersion).toBe(2);
+    // anchored: the CREATE arm above stamps a supplied scale through this body, so this absence is the no-mint rule
+    expect(store.getState().campaigns[0].worldState.spatialDigest).not.toHaveProperty('kmScale');
+  });
+
+  test('WY-1 A4 IMPORT HEAL: a prior digest carrying a refused scale re-canonizes to ABSENT, and the result carries the receipt', async () => {
+    const store = makeStore();
+    seedStore(store);
+    const pack = makeGridPack({ cols: 18, rows: 14 });
+    const imported = { ...buildSpatialDigest({ pack, placements: placeSettlements(pack, 6) }), kmScale: 'far' };
+    store.setState(state => {
+      state.campaigns[0].worldState = { ...state.campaigns[0].worldState, spatialCanonVersion: 1, spatialDigest: imported };
+    });
+    const result = await store.getState().canonizeCampaignWorldSpatial('camp-1', { captureSpatialPack: scaleCapture(), kmScale: 4 });
+    expect(result.ok).toBe(true);
+    expect(result.kmScaleReceipt).toEqual({ kind: 'kmScale_healed_to_absent', from: 'prior_digest', refusal: 'not_a_number', rawType: 'string' });
+    // anchored: the receipt above names the refused value, so the missing key is the heal, not a lost write
+    expect(store.getState().campaigns[0].worldState.spatialDigest).not.toHaveProperty('kmScale');
+  });
+
+  test('WY-1 A4 PERSIST: the canonize writes the datum into the campaign cache, and the cold hydration reads it back', async () => {
+    const store = makeStore();
+    seedStore(store);
+    campaignService.cache.mockClear();
+    await store.getState().canonizeCampaignWorldSpatial('camp-1', { captureSpatialPack: scaleCapture(), kmScale: 4 });
+    const cachedCalls = campaignService.cache.mock.calls;
+    expect(cachedCalls.length).toBeGreaterThan(0);
+    const persisted = JSON.parse(JSON.stringify(cachedCalls.at(-1)[0])).find(c => c.id === 'camp-1');
+    expect(persisted.worldState.spatialDigest.kmScale).toBe(4);
+    const hydrated = hydratePersistedCampaignWorld(persisted);
+    expect(hydrated.worldState.spatialDigest.kmScale).toBe(4);
+    expect(realmReach(hydrated.worldState.spatialDigest)).toEqual(realmReach(store.getState().campaigns[0].worldState.spatialDigest));
+  });
+
+  test('WY-1 A4 UNDO: the pulse ring captures the datum whole, and the ring\'s restore normalizer carries it back', async () => {
+    const store = makeStore();
+    seedStore(store);
+    await store.getState().canonizeCampaignWorldSpatial('camp-1', { captureSpatialPack: scaleCapture(), kmScale: 4 });
+    const state = store.getState();
+    const campaign = state.campaigns[0];
+    const snapshot = capturePulseSnapshot(state, campaign, '2026-01-02T00:00:00.000Z');
+    expect(snapshot.worldState.spatialDigest.kmScale).toBe(4);
+    // The restore chokepoint (restorePulseSnapshotOnDraft) re-normalizes the snapshot's world
+    // through ensureWorldState; this is that same call over the same snapshot.
+    const restored = ensureWorldState(snapshot.worldState, campaign);
+    expect(restored.spatialDigest.kmScale).toBe(4);
+    expect(JSON.stringify(restored.spatialDigest)).toBe(JSON.stringify(campaign.worldState.spatialDigest));
   });
 });

@@ -48,9 +48,24 @@
  * 25 normalizer-governed booleans + 32 preset-declared-but-ungoverned + 22 engine-gated
  * virtual = 79, with ZERO overlap. 54 of the 79 are outside the normalizer's fail-closed
  * coercion, which is the measured content of "the normalizer is NOT the oracle".
+ *
+ * ⛔ A REGISTER KEY IS ENUMERATED ONCE, BY THE REGISTER, AND LIGHTING IT IS NOT A SECOND
+ * ENUMERATION (LIT-0, 2026-09-24; J-EM-16, the lit law, LGT-C2 `432ff6441` the precedent).
+ * `virtualKeys` is the REGISTER (`ENGINE_GATED_VIRTUAL_RULE_KEYS`), and since LGT-P2-MANIFEST
+ * (`e22b7678c`) a register key may be LIT in a preset without leaving it. Before this cure the
+ * `ungoverned` arm was every preset boolean the defaults do not govern, so a lit register key
+ * was claimed by `virtual` AND `ungoverned`: measured with one FP key lit in the four
+ * world-alive presets, `overlap` went 0 -> 1, `ungoverned` 32 -> 33, and the three arms summed
+ * to 94 against a union of 93 (18 with all eighteen FP flags lit). A key's lit status is a
+ * property of the PRESET, so it moves no arm here: the lit key stays at its register position
+ * in `union`, and the flag domain the covering array varies is the same set, in the same
+ * order, in both states. The overlap arm stays LIVE for the double claim that is still real —
+ * a register key that enters the defaults is governed AND registered, and it is reported.
  */
 export function flagDomainCensus({ defaults, presets, virtualKeys }) {
   const governed = Object.keys(defaults).filter((key) => typeof defaults[key] === 'boolean');
+  const virtual = [...virtualKeys];
+  const registered = new Set(virtual);
   const presetBooleans = new Set();
   const presetKeys = new Set();
   for (const preset of Object.values(presets)) {
@@ -59,8 +74,7 @@ export function flagDomainCensus({ defaults, presets, virtualKeys }) {
       if (typeof value === 'boolean') presetBooleans.add(key);
     }
   }
-  const ungoverned = [...presetBooleans].filter((key) => !governed.includes(key));
-  const virtual = [...virtualKeys];
+  const ungoverned = [...presetBooleans].filter((key) => !governed.includes(key) && !registered.has(key));
   const union = [...new Set([...governed, ...ungoverned, ...virtual])];
   return {
     governed,

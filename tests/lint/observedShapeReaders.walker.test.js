@@ -426,6 +426,18 @@ describe('reader-with-no-writer ratchet: the frozen inventory', () => {
     //     not count, so a register that genuinely moved rows left the bank exactly where it
     //     was. A rung that had reasoned "+1 -1 = 0" instead of measuring would have been
     //     right by luck; `declaredBankOf(22)` is read off the live scan at the subject.
+    //   • 61/40 → 69/45 at the schema-23 rung (2026-09-23, EM-C4b / EM-E1 / EM-F1,
+    //     judgment 273, under the SAME ODQ §934.16 ruling) — the edit mode's save-time
+    //     readers. ⭐ THE FIRST ROSTER GROWTH SINCE 11 AND THE FIRST EVER OF TWO, which is
+    //     the entry worth having beside 21's and 22's: 21 grew the tagged row count under a
+    //     FIXED roster and 22 moved an address under one, while this rung DECLARES
+    //     `decrees on settlement` and `kind on settlement` outright. ⚠ A ROSTER GROWTH IS
+    //     NOT AN ADDRESS GROWTH'S ARITHMETIC: declaring is keyed by IDENTITY, so the four
+    //     new addresses (phantoms.js x1, saveAccess.js x1, decreeHook.js x4, pulseKernel.js
+    //     x1 — 7 reads) arrive WITH the one ordinary `decrees on settlement` row the estate
+    //     already carried at personaSlicer.js x1, which the declaration tags whether or not
+    //     this rung caused it. 61 + 8 = 69 across 40 + 5 = 45, and the pair was MEASURED off
+    //     the live scan before the rung was written rather than derived here.
     const registerBank = {
       reads: persistedTags.reduce((sum, row) => sum + row.count, 0),
       addresses: persistedTags.length,
@@ -615,11 +627,25 @@ describe('reader-with-no-writer ratchet: the EXECUTED corpus', () => {
     // homes in this same act (news-voice 268/28/51 → 272/32/50, conservation 272−32=240;
     // news-headline ADDRESS_TOTALS with distinctValues HOLDING at 393 — redistribution,
     // never inflation; prose-family 25/63 rows, distinctValues holding at 8).
+    // 2026-10-01 (the urban band + the druid rulings, ODQ §934.86 and its addendum 2; the urban-band chair): 272/1604/273/77/77 →
+    // 264/1557/265/79/79. ONE CAUSE, MEASURED AT BOTH ENDS: the corpus builder at the pre-band base 5d699cc68 reproduces the
+    // frozen figures exactly, and at the tip the AO-0 worlds re-deal their year (eleven news homes out, four in, named at
+    // news-voice-contract.mjs; root 2's pulse logs no regional event, named at prose-family-contract.mjs). Cross-recorded in
+    // news-voice, news-headline and prose-family in the same act.
     expect(scalarCorpus.scalarMeta).toEqual({
       canonEventLogEntries: 1,
-      wizardNewsFinalEntries: 240,
-      wizardNewsAccumulatedEntries: 1567,
-      wizardNewsUnique: 272,
+      wizardNewsFinalEntries: 264,
+      wizardNewsAccumulatedEntries: 1557,
+      // FP BATCH 4 (2026-09-24, the FP chair): wizardNewsFinalEntries 240 → 272 and wizardNewsAccumulatedEntries 1567 → 1604 —
+      // the Herald lens U2 (32315e384, FP-31): the feed keeps its newest 52 weeks whole under the 240 cap, so the corpus's
+      // twelve monthly pulses retire one entry instead of thirty-three; unique 273 HOLDS. Attributed by equality with the U2
+      // seat's measurement at its base; cross-recorded in news-voice, news-headline and prose-family in the same act.
+      // FP BATCH 3 (2026-09-24, the FP chair): 272 → 273, ONE new unique wizard-news id. ATTRIBUTED BY BISECT over the
+      // fourteen commits since landing 2, the corpus builder run per sha: 272 at df7aeaef4, 273 at c9b24fe51 = CURE-PEACE-1 U1
+      // (a peacetime suit retires when a war opens against its court; its feed reconcile mints the one id). Accumulated 1567
+      // and final 240 DO NOT MOVE. Cross-recorded in the same act: news-voice (introductions 273), prose-family
+      // (scalarRows 25549, pulseHistory 1055/5097), the OSR register --write at 98e0d8664 (exact, 1970 findings).
+      wizardNewsUnique: 265,
       pulseHistory: 12,
       // TE36 (ODQ §271): 109 → 73, one cause — the regional event log carries the pulse's
       // selected outcomes, and the retired bare-decline family was 36 of them. That mint's
@@ -627,8 +653,8 @@ describe('reader-with-no-writer ratchet: the EXECUTED corpus', () => {
       // OPPOSITE directions, and 73 → 74 here is the state lane picking up exactly what the
       // Chronicle put down. `wizardNewsFinalEntries` staying at 240 through both mints is
       // the control that keeps the two layers legibly apart.
-      regionalEventLog: 77,
-      regionalEventLogUnique: 77,
+      regionalEventLog: 79,
+      regionalEventLogUnique: 79,
       aiChronicle: 1,
     });
     expect(Object.hasOwn(corpus, 'scalarObservations')).toBe(false);
@@ -1307,15 +1333,22 @@ describe('reader-with-no-writer ratchet: the live scan', () => {
     // (`interSettlementRelationships`, `crossSettlementConflicts`) are UNDECLARED and are
     // admitted as ORDINARY rows, so they add nothing here: that is exactly the difference
     // this figure exists to show. MEASURED off this scan.
-    expect(live.explainedWriters.banked).toBe(61);
+    // ⭐ 61 → 69 AT THE SCHEMA-23 RUNG (2026-09-23, EM-C4b / EM-E1 / EM-F1), and it is the
+    // SECOND note's shape rather than the first or third: the ROSTER is what moved, as it
+    // did on 2026-09-17, but upward. `decrees on settlement` and `kind on settlement` are
+    // DECLARED, so their four new addresses (7 reads) and the one ordinary personaSlicer.js
+    // row (1 read) are banked by rule together. MEASURED off this scan.
+    expect(live.explainedWriters.banked).toBe(69);
     expect(Object.entries(corpus.shapes)
       .filter(([, shape]) => shape.keys.includes('source'))
       .map(([name]) => name)).toEqual([
       // ⭐ `stress` and `stressors` JOIN AT THE SCHEMA-17 RUNG, and they are the corpus's
       // own receipt that the stress-loaded topology pass actually executed: neither shape
       // carried an observed `source` while every config ran unstressed.
+      // ⭐ `militia` JOINS AT THE SCHEMA-24 RUNG (2026-10-01, the urban band's corpus re-deal, ODQ §934.86):
+      // the re-dealt year observes a militia reading that carries its `source`.
       'causes', 'changes', 'charter', 'evidence', 'garrison', 'incomeSources',
-      'institutions', 'magicDef', 'mercenary', 'site', 'stress', 'stressors',
+      'institutions', 'magicDef', 'mercenary', 'militia', 'site', 'stress', 'stressors',
       'walls', 'watch',
     ]);
 
@@ -1348,6 +1381,10 @@ describe('reader-with-no-writer ratchet: the live scan', () => {
     // membership is hand-declared rather than derived from a rule.
     expect([...live.explainedWriters.bankedIdentities].sort()).toEqual([
       'appliedAt on eventLog',
+      // ⭐ DECLARED AT THE SCHEMA-23 RUNG, and it sorts HERE rather than at the end because
+      // this list is alphabetical and not roster-ordered — the register pin above is the
+      // one keyed by the roster.
+      'decrees on settlement',
       'deltas on eventLog',
       'event on eventLog',
       // ⛔ `factions on locks` SORTED HERE UNTIL 2026-09-17 AND LEFT BY THE OTHER DOOR:
@@ -1356,8 +1393,11 @@ describe('reader-with-no-writer ratchet: the live scan', () => {
       // identity can leave this list for either reason and the two must not be
       // conflated, which is why both notes sit here.
       // ⚠ `isCriminal on incomeSources` LEFT THIS LIST AT THE SCHEMA-17 RUNG — it is still
-      // DECLARED (the roster is now eight) but banks nothing, because its reads stopped
-      // being findings once the corpus could observe their writer. Banked ⊆ declared, always.
+      // DECLARED (the roster is TEN since the schema-23 rung) but banks nothing, because its
+      // reads stopped being findings once the corpus could observe their writer. Banked ⊆
+      // declared, always.
+      // ⭐ THE SCHEMA-23 RUNG'S OTHER DECLARATION: the phantom counterparty's discriminant.
+      'kind on settlement',
       'narrativeSummary on eventLog',
       'neighbourNetwork on settlement',
       'stresses on settlement',
@@ -1524,23 +1564,33 @@ describe('reader-with-no-writer ratchet: the live scan', () => {
       // corpus never took. Schema 17's stress-loaded topology pass makes the corpus take it,
       // so the reads are no longer findings and there is nothing left to bank. ⛔ THE ENTRY
       // IS PINNED AT 0/0 RATHER THAN REMOVED FROM THIS MAP: the map is built from
-      // EXPLAINED_WRITER_EXEMPTIONS, whose roster is now EIGHT, and a declaration that
-      // banks nothing is precisely what this arm should be able to say out loud.
+      // EXPLAINED_WRITER_EXEMPTIONS, whose roster is TEN since the schema-23 rung, and a
+      // declaration that banks nothing is precisely what this arm should say out loud.
       // ⚠ "THE NINTH" IS ITS HISTORICAL POSITION, NOT ITS INDEX TODAY — it was declared
       // ninth and is now first, because `factions on locks` was retired ahead of it on
       // 2026-09-17. The two cases are worth telling apart: this one keeps its
       // declaration because its WRITER IS STILL THERE and merely became observable;
       // that one lost its writer outright, which gate 0 refuses rather than tolerates.
       'isCriminal on incomeSources': { reads: 0, addresses: 0 },
+      // ⭐ THE SCHEMA-23 RUNG'S TWO, and this is the LIVE side of the register pin above —
+      // measured from the live scan's tagged addresses while that one reads the frozen
+      // rowTags, so a re-freeze that moved one without the other still reds here.
+      // `decrees on settlement` reads 6 across 3: decreeHook.js x4, pulseKernel.js x1, and
+      // the ORDINARY row the estate already carried at personaSlicer.js x1, which the
+      // declaration tags because the roster is keyed by identity. `kind on settlement`
+      // reads 2 across 2: the phantom mint's own shelf predicate and the quota count that
+      // hides a phantom from the viewer's slots.
+      'decrees on settlement': { reads: 6, addresses: 3 },
+      'kind on settlement': { reads: 2, addresses: 2 },
     });
 
     // A7 guard mutant: the retired clear-outright behavior loses exactly the
     // bank and therefore cannot satisfy the live count asserted above.
     const bankedIdentities = new Set(live.explainedWriters.bankedIdentities);
     const clearOutright = live.findings.filter((finding) => !bankedIdentities.has(identityOf(finding)));
-    // − 61 from the schema-21 rung, moving with the banked figure pinned above rather than
+    // − 69 from the schema-23 rung, moving with the banked figure pinned above rather than
     // being a second hand-held copy of it.
-    expect(clearOutright).toHaveLength(live.findings.length - 61);
+    expect(clearOutright).toHaveLength(live.findings.length - 69);
     expect(inventoryOf(clearOutright)).not.toEqual(liveInventory);
   });
 
@@ -1711,7 +1761,13 @@ describe('reader-with-no-writer ratchet: the live scan', () => {
     }, 'the schema-7 filters cleared a DIFFERENT amount of the unreviewed-UI cohort than'
       + ' the frozen gap — this is a filter change, not an estate shrink, and it is'
       + ' governed: re-derive the gap and say which filter moved and why').toEqual({
-      files: 1, identities: 18, counts: 48,
+      // ⭐ 1/18/48 → 1/17/44 AT THE SCHEMA-24 RUNG (2026-10-01), RE-DERIVED AND NAMED: no filter's CODE
+      // moved, its INPUT did. M6's shape-family union clears a read whose key lives anywhere in the
+      // receiver's family, and the re-dealt AO-0 year raises no government challenge, so `factionName`
+      // left the outcome family the corpus observes. Its four reads at src/components/map/WorldPulseData.js
+      // (`factionName on stressors` ×4) therefore left the CLEARED set and became one of the 53 ordinary rows
+      // the rung admitted: exactly −1 identity / −4 counts on the gap, the file count unmoved.
+      files: 1, identities: 17, counts: 44,
     });
     expect(UNREVIEWED_UI_COHORT.tag).toBe('UNREVIEWED-UI');
     expect(UNREVIEWED_UI_COHORT.scopes).toEqual([...EXACT_SCAN_EXCLUDED_SCOPE]);

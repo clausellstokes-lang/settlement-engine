@@ -5132,14 +5132,14 @@ shared letter would collide.*
   *"Generated with {X} as neighbour (trade partner)."* — the generator named
   inside the fiction. (2) `RelationshipsTab.jsx:195-200` prints *"…would not
   exist under neutral **slider** conditions."* — UI vocabulary in world prose.
-  (3) `narrativeGenerator.js:563-668` composes coherence notes that leak
+  (3) `narrativeGenerator.js :: genCoherence` composes coherence notes that leak
   percentage **digits** (`holds {N}% of power`) and refer to the **page layout**
   (*"Trade income **above** reflects pre-siege operations"*). All three are
   content defects, not architecture, so their cures are variants in this file
   and nothing more. Wiring any of them is a **disclosed same-seed prose shift**
   under the legacy clause and lands in its own commit with its own goldens.
 - **R-DST-W4-f — THE `settlementReason` EM DASH IS LAWFUL AND THE INCONSISTENCY IS
-  REAL.** `narrativeGenerator.js:783` uses an em dash inside a woven sentence
+  REAL.** `settlementOriginProse.js :: ORIGIN_POOLS` uses an em dash inside a woven sentence
   (*"…what the land does not give arrives expensively — through sanctioned
   caravans, seasonal access, patronage, or emergency rationing — or not at
   all"*), which the freshness-note voice rules forbid on their own surface. The
@@ -5388,7 +5388,7 @@ unchanged.
 
 ### DS-GEN-5: Overview › Situation (the standing approach) . `settlement.arrivalScene` (frozen) + the LIVE companion keyed on `config.tradeRouteAccess` × primary stress presence
 
-**RECEIPT:** `src/generators/narrativeGenerator.js:876-949` (`generateArrivalScene`, `ROUTE_TO_SCENE`), `:811-859` (`generatePressureSentence`) · rendered `OverviewTab.jsx:253-258`
+**RECEIPT:** `src/generators/narrativeGenerator.js :: ROUTE_TO_SCENE` and `:: generateArrivalScene`, `:: generatePressureSentence` · rendered `OverviewTab.jsx:253-258`
 **STATE-KEY:** `ROUTE_TO_SCENE` key (`market` / `port` / `river` / `smoke` / `ordinary`; `port` + `terrainType === 'riverside'` resolves to `river`) × whether a primary stress resolves
 **SLOTS:** `{settlement}`
 **SECTION-TARGET:** `overview`
@@ -5410,7 +5410,7 @@ unchanged.
 
 ### DS-GEN-6: Overview › Settlement origin (why it exists) . `settlement.settlementReason[]` from `tier` × `config.tradeRouteAccess` × `config.terrainType` × food-deficit ratio × `config.magicExists` / `priorityMagic`, with the arm's authored variant selected draw-free from the settlement seed
 
-**RECEIPT:** `src/generators/narrativeGenerator.js:751-799` (`generateSettlementReason`; the deficit test at `:758-760`, the magic channel list at `:768-774`) · the authored per-arm origin pools `src/generators/narrative/settlementOriginProse.js` (lane RR, 2026-08-03: eight arms × five variants, index 0 of each pool the pre-widening sentence) · rendered `OverviewTab.jsx:260-268`
+**RECEIPT:** `src/generators/narrativeGenerator.js :: generateSettlementReason` (the deficit test at `:762-764`, the magic channel list at `:772-778`) · the authored per-arm origin pools `src/generators/narrative/settlementOriginProse.js` (lane RR, 2026-08-03: eight arms × five variants, index 0 of each pool the pre-widening sentence) · rendered `OverviewTab.jsx:260-268`
 **STATE-KEY:** `route` (`crossroads` / `port` / `river` / `isolated` / `road`) × `hasFoodDeficit` (gap > 0 and gap/need ≥ 0.05) × `tier` (`metropolis` / `city` / `thorp`|`hamlet` / other)
 **SLOTS:** `{settlement}`
 **SECTION-TARGET:** `overview` · also `economy` (the deficit arms)
@@ -5437,7 +5437,7 @@ unchanged.
 
 ### DS-GEN-7: Overview › Warnings & coherence notes . `structuralViolations[]{institution,group,reason,severity}` · `coherenceNotes[]{note,severity,tab,type}` · `structuralSuggestions[]{reason,suggested[]}`
 
-**RECEIPT:** `src/generators/narrativeGenerator.js:563-668` (`genCoherence`, six authored notes) · rendered `OverviewTab.jsx:320-344` and ViabilityTab
+**RECEIPT:** `src/generators/narrativeGenerator.js :: genCoherence` (six authored notes) · rendered `OverviewTab.jsx:320-344` and ViabilityTab
 **STATE-KEY:** note `type` (`power_economic` ×3 instances / `stress_economic` / `power_stress` / `historical_economic`) × `severity` (`contradiction` / `notable` / `context` / `by_design`)
 **SLOTS:** `{settlement}` `{faction}` `{govFaction}` `{band}`
 **SECTION-TARGET:** `overview` · also `economy` · `power` · `history` (the per-note tab field routes the second target)
@@ -5599,7 +5599,7 @@ unchanged.
 
 ### DS-GEN-9: History › Identity header, timeline, founding and major events . `history{age, historicalCharacter, founding{reason,foundedBy,initialChallenge,overcoming,stressNote}, historicalEvents[]{type,name,description,yearsAgo,severity,anchored,lastingEffects[],plotHooks[]}, eventsTimeline[]}`
 
-**RECEIPT:** `src/components/new/tabs/HistoryTab.jsx:56-70` (the `recencyLabel` ladder at `:59-60`), `:229-313` (event cards; `NNy ago` printed at `:296`) · founding composed `src/generators/narrativeGenerator.js:235-446`
+**RECEIPT:** `src/components/new/tabs/HistoryTab.jsx:56-70` (the `recencyLabel` ladder at `:59-60`), `:229-313` (event cards; `NNy ago` printed at `:296`) · founding composed `src/generators/narrativeGenerator.js :: genArrivalDetail`
 **STATE-KEY:** `historicalEvents[].type` (8 via `EVENT_COLORS` plus `demographic` / `exile_return` / `occupation_infiltration`) × `severity` (`minor` / `major` / `catastrophic`) × `anchored` (true/false) × `yearsAgo` → the recency ladder (`Recent` ≤10 / `Living memory` ≤30 / `Last century` ≤80 / `Ancient` ≤200 / `Deep history`) · `founding` field presence · `age`
 **SLOTS:** `{settlement}` `{event}` `{founder}` `{reason}` `{challenge}` `{timeband_since}` `{timeband_age}` `{band}` — `{reason}` fills from `founding.reason` and `{challenge}` from `founding.initialChallenge`; both are offered only where their field is present
 **SECTION-TARGET:** `history`

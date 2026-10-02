@@ -17,6 +17,7 @@
  * across two libraries; owner identity never reaches the composer.
  */
 import { saves as savesService } from '../lib/saves.js';
+import { activeSaveCount } from '../lib/saveAccess.js';
 import { deriveGraphWithDiscoveredCandidates } from '../domain/region/discoverDependencyCandidates.js';
 import { ensureRegionalGraph } from '../domain/region/index.js';
 import {
@@ -181,7 +182,7 @@ export async function runInstantWorld({
   const max = typeof stateAtStart.maxSaves === 'function'
     ? stateAtStart.maxSaves()
     : Infinity;
-  const activeNow = (stateAtStart.savedSettlements || []).length;
+  const activeNow = activeSaveCount(stateAtStart.savedSettlements);
   if (Number.isFinite(max) && activeNow + memberCount > max) {
     return { ok: false, reason: 'not_enough_slots', settlementCount: memberCount };
   }

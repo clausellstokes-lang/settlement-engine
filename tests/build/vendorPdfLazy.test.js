@@ -562,7 +562,7 @@ const requireDistRead = process.env.VERIFY_DIST === '1';
 // terms with their costs): **"do what you recommend"** — and the recommendation on the table
 // was this raise. Ledger §880.8; the seam is RECORDED AS PRICED AND NOT TAKEN, its prototype
 // kept out of the tree. Monotone-down and owner-signed discipline unchanged.
-const CLOSURE_BUDGET_BYTES = 1_048_000;
+const CLOSURE_BUDGET_BYTES = 1_048_000; // 2026-10-01: unchanged, red cleared by the urban band's own bytes (note at file end)
 // Transfer budgets measure each fetched chunk independently, matching CDN
 // compression rather than compressing an artificial concatenation. Recorded
 // 2026-07-24 from the seven-file closure: raw 1,034,954; gzip 321,341;
@@ -789,7 +789,7 @@ describe.runIf(distExists)('Tier 9.7 — vendor-pdf lazy load contract', () => {
     // of true headroom), a `readFileSync(path, 'utf-8').length` here would read 107 B
     // OPTIMISTIC and could pass a build that ships over the line. Read bytes: statSync().size,
     // or readFileSync() with no encoding (a Buffer's .length is bytes — that is the spelling
-    // generationWorkerLazy.test.js:472 uses for the worker ceiling, and it is equally correct).
+    // generationWorkerLazy.test.js :: WORKER_BUNDLE_CEILING_BYTES uses for the ceiling, and it is equally correct).
     // Never a decoded string's .length. (FIX-B2, 2026-09-20; TOOL-12 item 9.)
     const size = statSync(join(assetsDir, engine)).size;
     // It should stay meaningfully large (the generation pipeline lives here).
@@ -1769,5 +1769,83 @@ describe('ARCH car 2 — the three first-paint budgets stay where the owner sign
     expect(CLOSURE_BUDGET_BYTES, 'the raw first-paint budget moved').toBe(1_048_000);
     expect(CLOSURE_GZIP_BUDGET_BYTES, 'the gzip transfer budget moved').toBe(337_000);
     expect(CLOSURE_BROTLI_BUDGET_BYTES, 'the Brotli transfer budget moved').toBe(283_000);
+
+    // ⭐ THE SETTLEMENT-EDITOR TRAIN'S SUMMED FIRST-PAINT PRICE, recorded by the member that
+    // holds this file's row. The three budgets above are unmoved because the train's MEMBERSHIP
+    // delta is ZERO: not one module the train creates or modifies is in the first-paint closure,
+    // so no first-paint byte can have moved. This is a MEMBERSHIP fact read from the build
+    // config's own exported derivation, never a dist read, so it cannot skip and cannot go stale
+    // against a replica. A member that later lands eagerly reds HERE, beside the budgets it
+    // would move, rather than silently inside a build nobody reruns.
+    const eagerRel = new Set(
+      [...EAGER_FIRST_PAINT_MODULES].map((abs) => relative(process.cwd(), abs)),
+    );
+    expect(eagerRel.size, 'the eager graph is non-empty (anti-vacuity)').toBeGreaterThan(50);
+    expect(eagerRel.has('src/main.jsx'), 'and it holds the entry').toBe(true);
+    const editorTrain = [
+      'src/components/edit/CardEditorDialog.jsx',
+      // ⭐ EM-D3's registry page, which EM-D3c mounts FROM THE SHELL BELOW and from nowhere
+      // else. A page is the member most likely to acquire a static edge from a router or a
+      // panel that is already eager, and this row is what convicts that edge on the day it
+      // is written rather than inside a build nobody reruns: the page reaches first paint
+      // only through the shell's one lazy edge, or it does not reach it at all.
+      'src/components/edit/DecreeRegistryPage.jsx',
+      // EM-D1's shell is the train's FIRST MOUNTED member, and it is exactly where a rise
+      // would enter: App.jsx is eager, so a STATIC edge from the root to this file would
+      // drag the shell, EM-A1's table, EM-D0e's door and EM-C4a's slice into first paint
+      // at once. The one `lazy(() => import(...))` edge is what keeps this list empty below.
+      'src/components/edit/EditModeShell.jsx',
+      'src/copy/en.js',
+      // ⭐ EM-E5's direction leaf and EM-E6's catalogue reader, the train's two remaining
+      // dark domain leaves. EM-E6's is the one that would cost the most: it imports
+      // `partyImpact.js` for the single write path, so a static edge into an eager module
+      // would drag the whole party-impact apply pipeline into first paint behind it.
+      'src/domain/edit/directions.js',
+      'src/domain/edit/dmLayer.js',
+      'src/domain/edit/eventCatalogue.js',
+      'src/domain/edit/fieldDeclarations.js',
+      'src/domain/edit/guardRules.js',
+      'src/domain/edit/operations.js',
+      'src/domain/edit/operationsOffStage.js',
+      'src/domain/density/densityCreateBoundary.js',
+      'src/generators/generateSettlementPipeline.js',
+      'src/generators/pipeline.js',
+      // ⭐ EM-D2's font-coverage reader, which EM-D2b wires from the door above and from
+      // nowhere else. It is the train's ONLY member that lives inside src/pdf/, and the
+      // door reaches it through a DYNAMIC import precisely so that it cannot follow the
+      // door anywhere: this row is what convicts the day somebody rewrites that edge as a
+      // static one — a leaf under src/pdf/ in the first-paint closure is the doorway the
+      // whole vendor-pdf stack walks through, and no lane may open it by accident.
+      'src/pdf/lib/fontCoverage.js',
+      'src/store/editSlice.js',
+      // ⭐ EM-F3's phantom mint: the editor's own half of the counterparties roster. It is the
+      // one module of the train that touches the EAGER save service, so it is exactly where a
+      // rise would enter — its only importer under src/ is the shell above, which is reached
+      // through that one lazy edge, and this row is what keeps that true.
+      'src/store/phantomMintAction.js',
+      'src/store/settlementRederiveAction.js',
+    ];
+    const present = editorTrain.filter((rel) => existsSync(resolve(process.cwd(), rel)));
+    expect(present, 'every module this arm prices exists, or the absence below is vacuous')
+      .toEqual(editorTrain);
+    expect(present.filter((rel) => eagerRel.has(rel)),
+      'a settlement-editor module in the first-paint closure is a RISE, and these three ceilings '
+      + 'are the owner\'s signature rather than a lane\'s edit').toEqual([]);
   });
 });
+
+// ── NOTES PLANTED AT THE FILE'S END so no cited `vendorPdfLazy.test.js:<line>` moves ──────────────
+// ── (2026-10-01, THE URBAN BAND, ODQ §934.86) BUDGET UNCHANGED AT 1,048,000; RED CLEARED BY THE
+//    REGISTRY'S OWN BYTES (for CLOSURE_BUDGET_BYTES above) ──
+// The institution registry is GENUINELY EAGER: domain/worldPulse/tierOutcomeApply.js (main.jsx ->
+// store/index.js -> settlementSlice.js -> events/mutateEntities.js -> tierOutcomeApply.js) and
+// domain/institutionClassify.js read it synchronously, so placement cannot move it, and an async seam
+// is the store-API change the T13 block above refuses. Its tip read 1,053,273 B, 5,273 OVER, against
+// the FP base 5d699cc68's 1,037,880 (data +14,436, engine-core +957). The budget was NOT raised: the
+// registry was re-expressed with each value spelled once (deriveRow's two defaults left unwritten,
+// families grouped by shelf, a non-numeric value two entries share moved to `shared`), every export
+// proved identical across all 518 rows, data 129,351 -> 122,369 (-6,982). MEASURED 1,046,291 across
+// the same 8 chunks, 1,709 B under; gzip 333,922 / 337,000 and Brotli 280,095 / 283,000 (base 330,362
+// / 277,233). ⚠ THIS LANDING SPENDS 8,411 B OF THE MARGIN the C5 note reserves for honest
+// registration costs, which is the content the owner approved; 1,709 B remain for every other lane.
+// Monotone-down and owner-signed discipline unchanged.

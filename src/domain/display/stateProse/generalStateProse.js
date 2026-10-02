@@ -37,7 +37,7 @@
  * CORPUS WORD. DS-GEN-3 carries three separate instances of the trap, and a `label` route
  * would have darkened a different pool in each:
  *
- *   1. FOOD. The producer writes `Deficit — Active Famine` (foodGenerator.js:342). The pool
+ *   1. FOOD. The producer writes `Deficit — Active Famine` (`bandLadders.js :: FOOD_SECURITY_BANDS.famine`). The pool
  *      is spelled `foodSecurity.label: Deficit × Active Famine`. An em dash against a
  *      multiplication sign — and the pool it darkens is the FAMINE one, the single most
  *      consequential state the block describes. The other five labels are identities, so a

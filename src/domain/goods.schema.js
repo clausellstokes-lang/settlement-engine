@@ -99,6 +99,7 @@
  * R | l | identity+chains | surface | src/components/settlement/EventComposer.jsx
  * R | l | chains          | direct  | src/components/TradeDynamicsPanel.jsx
  * R | l | chains          | surface | src/domain/display/institutionProfile.js
+ * R | l | identity        | direct  | src/domain/edit/pools.js
  * R | l | identity        | surface | src/domain/resourceSites.js
  * R | l | none            | member  | src/domain/undercity/monotoneComponents.js
  * R | l | identity+chains | surface | src/domain/worldPulse/institutionLifecycle.js

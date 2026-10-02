@@ -9,6 +9,7 @@
  * state core, so both rule modules and the orchestrator depend on it with no cycle.
  */
 import { TIER_ORDER } from '../../data/constants.js';
+import { RELATIONSHIP_TURNS, RELATIONS_MOVE } from './heraldDeeds.js';
 import { detLog10 } from '../../kernel/detMath.js';
 import { clamp01, normalizeRelationshipType, relationshipKeyFromEdge, getRelationshipSettlements, relationshipRoles, normalizeRelationshipEdge, ensureRelationshipState } from './relationshipState.js';
 
@@ -140,6 +141,7 @@ const candidateBase = (/** @type {any} */ {
   conflictTags = [],
   dispositionFactor = EMPTY_DISPOSITION,
   tradeSalienceFactor = EMPTY_TRADE_SALIENCE,
+  snapshot = null,
 }) => {
   const key = relationshipKeyFromEdge(edge);
   const settlements = getRelationshipSettlements(edge);
@@ -178,9 +180,10 @@ const candidateBase = (/** @type {any} */ {
     severity: clamp01(severity * factor * tradeFactor),
     probability: clamp01(probability * factor * tradeFactor),
     applyMode,
-    headline: toType
-      ? `${relState.relationshipType.replace(/_/g, " ")} may become ${toType.replace(/_/g, " ")}`
-      : `${relState.relationshipType.replace(/_/g, " ")} relationship may shift`,
+    // ⛔ THE HERALD SPEAKS IN DEEDS (the owner, 2026-10-02): both settlements named, the move
+    // under way for a pending proposal and done for its applied twin (./heraldDeeds.js). The
+    // old "trade partner may become rival" named neither town.
+    ...relationshipDeedHeadlines(snapshot, settlements, toType, direction),
     summary: summary || reasons?.[0] || "Relationship pressure creates a world pulse outcome.",
     reasons,
     relationshipPatch,
@@ -243,6 +246,28 @@ const hasRecentIncident = (/** @type {any} */ relState, /** @type {any} */ type,
 
 function itemFor(/** @type {any} */ snapshot, /** @type {any} */ saveId) {
   return snapshot?.byId?.get?.(String(saveId)) || null;
+}
+
+/**
+ * The relationship candidate's two headlines, both settlements named. The label TURN when the
+ * candidate carries a toType, else the relations MOVE by its direction.
+ * @param {{ byId?: { get?: (id: string) => ({ name?: string } | null | undefined) } } | null} snapshot
+ * @param {{ from: unknown, to: unknown }} settlements
+ * @param {string|null} toType @param {string} direction
+ * @returns {{ headline: string, appliedHeadline: string }}
+ */
+function relationshipDeedHeadlines(snapshot, settlements, toType, direction) {
+  const nameOf = (/** @type {unknown} */ id) => itemFor(snapshot, id)?.name || String(id);
+  // The pair in SAVE-ID order, never the edge's authored orientation: authoring A->B or B->A is the
+  // same relationship and must print the same words (relationshipOrientationInvariance.test.js).
+  const [a, b] = [String(settlements.from), String(settlements.to)].sort().map(nameOf);
+  if (toType) {
+    const turn = RELATIONSHIP_TURNS[normalizeRelationshipType(toType)]
+      || { underway: `are becoming ${toType.replace(/_/g, ' ')}`, done: `become ${toType.replace(/_/g, ' ')}` };
+    return { headline: `${a} and ${b} ${turn.underway}`, appliedHeadline: `${a} and ${b} ${turn.done}` };
+  }
+  const move = RELATIONS_MOVE[direction] || RELATIONS_MOVE.neutral;
+  return { headline: `Relations between ${a} and ${b} ${move.underway}`, appliedHeadline: `Relations between ${a} and ${b} ${move.done}` };
 }
 
 function tierRankFor(/** @type {any} */ item) {

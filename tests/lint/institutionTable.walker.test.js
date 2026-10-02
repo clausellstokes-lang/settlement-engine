@@ -193,8 +193,14 @@ describe('the column census, measured across the estate', () => {
     // THE LIVENESS ANCHOR, and it is the header's own figure re-taken rather than quoted: the
     // duty source the table really reads is populated on this very walk, so "no `services`"
     // cannot be an empty scan of settlements that carry no services at all.
-    expect(serviceRows, 'the header claims 1,678 instantiated service rows over these thirty')
-      .toBe(1678);
+    // ⭐ RE-MEASURED 2026-09-30, THE URBAN BAND (ODQ §934.86), ONE DECLARED SAME-SEED SHIFT:
+    // 1,678 → 2,228 instantiated service rows over the same thirty settlements (6 tiers × 5
+    // seeds `estate-<tier>-<i>`). The urban-band institution rebuild grew the registry (the
+    // Compendium's institutions.entryCount 316 → 518) and seats more institutions per
+    // settlement, and every seated institution carries its services onto `availableServices`.
+    // The liveness anchor is unchanged in kind: the duty source the table reads is populated.
+    expect(serviceRows, 'the header claims 2,228 instantiated service rows over these thirty')
+      .toBe(2228);
     expect(
       carriers,
       'a generation step began writing `settlement.services`. The schema declares the field and'

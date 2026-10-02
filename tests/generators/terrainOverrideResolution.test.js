@@ -127,9 +127,11 @@ describe('terrainRequired institution filtering (assembleInstitutions terrainReq
   // The filter must ADMIT it on plains and hills and EXCLUDE it everywhere else.
   test('Shepherd collective is admitted on plains and hills', () => {
     const plains = gen({ settType: 'thorp', culture: 'germanic', terrainOverride: 'plains', tradeRouteAccess: 'road' }, 's0');
-    // Culture weighting moved the old k2 probability draw. hill-4 is the
-    // re-probed positive fixture; off-terrain exclusion remains swept below.
-    const hills = gen({ settType: 'thorp', culture: 'germanic', terrainOverride: 'hills', tradeRouteAccess: 'road' }, 'hill-4');
+    // Culture weighting moved the old k2 probability draw. hill-4 was the re-probed
+    // positive fixture until the urban-band registry (2026-09-30, ODQ §934.86) re-ordered the
+    // catalog draws; hill-0 is the first hills seed that rolls the collective now. Off-terrain
+    // exclusion remains swept below.
+    const hills = gen({ settType: 'thorp', culture: 'germanic', terrainOverride: 'hills', tradeRouteAccess: 'road' }, 'hill-0');
     expect(hasInstitution(plains, 'Shepherd collective')).toBe(true);
     expect(hasInstitution(hills, 'Shepherd collective')).toBe(true);
   });

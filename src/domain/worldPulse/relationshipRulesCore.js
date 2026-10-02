@@ -6,6 +6,8 @@
 import { clamp01, relationshipKeyFromEdge, getRelationshipSettlements, relationshipRoles, relationLevelWordFor } from './relationshipState.js';
 import { stablePart, mean, candidateBase, labelProposal, internalDrift, pairStableId, hasRecentIncident, itemFor, settlementStrength, relationshipTypeBetween, patronageEligibility, relationshipThirdParties, activeRebellionAgainstVassal } from './relationshipRuleHelpers.js';
 import { deriveActiveCondition } from '../activeConditions.js';
+// CURE-P1 U4 (FPQ-30): the casus speaks a count in THE ONE SPELLING OF A SMALL COUNT.
+import { numberWord } from '../display/numberWords.js';
 
 // CADENCE DAMPING (E4-2a): per-arc cooldown for the overlord-weakness memory
 // beat. The streak it maintains is still measured every tick (it feeds
@@ -774,10 +776,18 @@ function vassalRules(ctx) {
       severity,
       probability: clamp01(0.04 + independencePressure * 0.2 + relState.resentment * 0.12),
       applyMode: severity >= 0.72 ? "proposal" : "auto",
-      headline: `Rebellion may rise in ${itemFor(ctx.snapshot, vassalId)?.name || vassalId}`,
-      summary: "Vassal extraction, low legitimacy, and poor defenses create an independence crisis.",
+      // ⛔ THE HERALD SPEAKS IN DEEDS (owner, 2026-10-02: "Updates like these need to reflect actions not to potential"): under way, then done; the
+      // causes (extraction, legitimacy, defences) stay in `reasons`.
+      headline: `Rebellion is stirring in ${itemFor(ctx.snapshot, vassalId)?.name || vassalId}`,
+      appliedHeadline: `Rebellion breaks out in ${itemFor(ctx.snapshot, vassalId)?.name || vassalId}`,
+      summary: `${itemFor(ctx.snapshot, vassalId)?.name || vassalId} has had enough of its overlord's levies, and talk of independence has turned to arms.`,
       reasons: [
-        `The pull toward independence is ${relationLevelWordFor(independencePressure)}, and the overlord has looked weak ${weaknessStreak} turn${weaknessStreak === 1 ? '' : 's'} running.`,
+        // CURE-P1 U4 (FPQ-30): a weakness streak that never began is no part of the case, so the
+        // clause is suppressed at zero (the base printed *looked weak 0 turns running*); above zero
+        // the count reads in words. The Herald files this first reason under its war desk's Casus.
+        weaknessStreak > 0
+          ? `The pull toward independence is ${relationLevelWordFor(independencePressure)}, and the overlord has looked weak ${numberWord(weaknessStreak)} turn${weaknessStreak === 1 ? '' : 's'} running.`
+          : `The pull toward independence is ${relationLevelWordFor(independencePressure)}.`,
         `The strain of vassalage is ${relationLevelWordFor(vassalStrain)}; the resentment under it, ${relationLevelWordFor(relState.resentment)}.`,
         "A rebellion can end vassalage if it succeeds, but it does not erase prior structural changes.",
       ],

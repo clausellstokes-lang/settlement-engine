@@ -40,7 +40,14 @@ const REQUIRED_FIELDS = Object.freeze([
   'forkId', 'module', 'symbol', 'discovery', 'disposition', 'arity',
   'circumstanceClasses', 'actionVocabulary', 'closeSource', 'closeOwed', 'domain', 'reason',
 ]);
-const DISCOVERY_KINDS = Object.freeze(['idiom', 'checklist', 'guard-chain']);
+// ⭐ 'bare' JOINS AT U10, AND IT IS THE KIND'S OWN DECLARATION rather than a loosening.
+// The registry's first three kinds each say HOW a row was found; `bare` says the row was
+// DECLARED because nothing can find it — the coup's two unweighted uniforms (judgment
+// 282), the court's hashed verdict and the three processes design §19 ruling 3 named that
+// draw nothing at all (judgment 265 (c)). The kind carries its own totality instrument in
+// the walker beside this file (the U10 arms), which re-derives each row's claim from the
+// tree, so admitting the word here admits a population that is measured, not asserted.
+const DISCOVERY_KINDS = Object.freeze(['idiom', 'checklist', 'guard-chain', 'bare']);
 
 describe('HB-1 — the habit fork registry as a record', () => {
   test('every row carries every field, and the ids are unique', () => {

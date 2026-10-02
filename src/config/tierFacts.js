@@ -181,13 +181,20 @@ const CUSTOM_CONTENT = Object.freeze({ anon: false, free: false, premium: true }
 // contract test.
 const PRE_GEN_OPTIONS = Object.freeze({ anon: false, free: true, premium: true });
 
+// The settlement editor is a premium (Cartographer) capability — never free, never anonymous.
+// Pinned to TIER_GATE.{tier}.settlementEditor by the contract test.
+// ⛔ THE GATE IS NOT THE WHOLE ANSWER: the enforcement predicate carries a second, staff-only
+// conjunct while the door is DARK (authSlice.js#canEditSettlement). These facts describe the
+// TIER's entitlement, which is what the ladder and the copy surfaces will read when it opens.
+const SETTLEMENT_EDITOR = Object.freeze({ anon: false, free: false, premium: true });
+
 /**
  * Per-tier display facts, keyed by the stored auth tier value ('anon' | 'free' |
  * 'premium'). saveLimit / maxSizeLabel derive straight from the pricing catalog;
  * exportMode + customContent from the ruling above. The contract test asserts each
  * agrees with the authSlice enforcement gate.
  *
- * @typedef {{ key: string, saveLimit: number, maxSizeLabel: string, exportMode: 'unlimited'|'per_dossier', customContent: boolean, preGenOptions: boolean }} TierFacts
+ * @typedef {{ key: string, saveLimit: number, maxSizeLabel: string, exportMode: 'unlimited'|'per_dossier', customContent: boolean, preGenOptions: boolean, settlementEditor: boolean }} TierFacts
  * @type {Readonly<Record<'anon'|'free'|'premium', TierFacts>>}
  */
 export const TIER_FACTS = Object.freeze({
@@ -197,6 +204,7 @@ export const TIER_FACTS = Object.freeze({
     maxSizeLabel: ANON_MAX_SIZE_LABEL,
     exportMode: EXPORT_MODE.anon,
     customContent: CUSTOM_CONTENT.anon,
+    settlementEditor: SETTLEMENT_EDITOR.anon,
     preGenOptions: PRE_GEN_OPTIONS.anon,
   }),
   free: Object.freeze({
@@ -205,6 +213,7 @@ export const TIER_FACTS = Object.freeze({
     maxSizeLabel: SIZE_LABEL[TIERS.wanderer.maxSize], // Metropolis (every size)
     exportMode: EXPORT_MODE.free,
     customContent: CUSTOM_CONTENT.free,
+    settlementEditor: SETTLEMENT_EDITOR.free,
     preGenOptions: PRE_GEN_OPTIONS.free,
   }),
   premium: Object.freeze({
@@ -213,6 +222,7 @@ export const TIER_FACTS = Object.freeze({
     maxSizeLabel: SIZE_LABEL[TIERS.cartographer.maxSize],
     exportMode: EXPORT_MODE.premium,
     customContent: CUSTOM_CONTENT.premium,
+    settlementEditor: SETTLEMENT_EDITOR.premium,
     preGenOptions: PRE_GEN_OPTIONS.premium,
   }),
 });

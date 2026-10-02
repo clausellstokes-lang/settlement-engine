@@ -13,6 +13,11 @@
  * once. String.replace only resolves the first occurrence, so this helper makes
  * total substitution an explicit contract.
  */
+
+// Shared phrases hoisted once (train EM-T16's worker buy-back, judgment 214c): each is spelled here and referenced below; every emitted value is byte-identical.
+const THE_LOWER_DISTRICT = 'the lower district';
+const THE_MARKET_QUARTER = 'the market quarter';
+const THE_RIVERSIDE_QUARTER = 'the riverside quarter';
 export const renderHistoryTemplate = (template, tokens = {}) =>
   Object.entries(tokens).reduce(
     (rendered, [token, value]) => rendered.split(token).join(String(value)),
@@ -46,19 +51,19 @@ export const buildCurrentTensionTokens = (context = {}) => {
 
   const location = context.disasterLocation || {
     port: 'the harbour district',
-    river: 'the riverside quarter',
-    crossroads: 'the market quarter',
-    isolated: 'the lower district',
-    mountain_pass: 'the lower district',
-  }[route] || 'the lower district';
+    river: THE_RIVERSIDE_QUARTER,
+    crossroads: THE_MARKET_QUARTER,
+    isolated: THE_LOWER_DISTRICT,
+    mountain_pass: THE_LOWER_DISTRICT,
+  }[route] || THE_LOWER_DISTRICT;
 
   const quarter = context.disasterQuarter || {
     port: 'the dock quarter',
-    river: 'the riverside quarter',
-    crossroads: 'the market quarter',
+    river: THE_RIVERSIDE_QUARTER,
+    crossroads: THE_MARKET_QUARTER,
     isolated: 'the old quarter',
     mountain_pass: 'the old quarter',
-  }[route] || 'the market quarter';
+  }[route] || THE_MARKET_QUARTER;
 
   const buildingType = context.disasterBuildingType || (
     route === 'port'

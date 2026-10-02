@@ -19,6 +19,22 @@ const TOTAL_KEYS = Object.freeze(['identities', 'distinctValues', 'occurrences']
 // `retirements` and `homes`. Anyone re-recording this from a failure message alone would have
 // left two thirds of the drift in place; the figures here are measured from a probe that reports
 // every field instead of throwing on the first.
+// ── RE-RECORDED 2026-09-24 BY FP BATCH LANDING 4 (the FP chair, session 87797a6a), IN THE SAME ACT AS THE NEWS-HEADLINE
+// CONTRACT, THE PROSE-FAMILY CONTRACT AND THE OSR WALKER'S PINS ─────────────────────────────────────────────────────
+// 273/33/240/51 → 273/1/272/51. introductions and homes DO NOT MOVE; retirements 33 → 1 and finalEntries 240 → 272 move
+// TOGETHER and conservation still closes: 273 − 1 = 272. ONE CAUSE: the Herald lens U2 (32315e384, ruling FP-31 = P1) — the
+// feed keeps every entry of its newest 52 weeks whole and applies the 240 cap only beyond them, so within the corpus's
+// twelve monthly pulses nothing but one entry retires. ATTRIBUTED BY EQUALITY: the U2 seat measured exactly these figures
+// at its own base (its report, stated shift (a)); the batch's other picks (WR-RECALL, PEACE-2) move none of them.
+// ── RE-RECORDED 2026-09-24 BY FP BATCH LANDING 3 (the FP chair, session 87797a6a), IN THE SAME ACT AS THE OSR
+// WALKER'S PIN AND THE PROSE-FAMILY CONTRACT ─────────────────────────────────────────────────────────────
+// 272/32/50 → 273/33/51. pulseRoots 12 and finalEntries 240 do not move for the third re-record running, and
+// conservation still closes: 273 − 33 = 240. `homes` 50 → 51: the new id introduces a home of its own (measured, not
+// predicted — the first run of this re-record predicted 50 and the walker corrected it: 'homes drifted: expected 50, got 51'). ONE CAUSE, ATTRIBUTED BY BISECT (the corpus builder run per sha over
+// the fourteen commits since landing 2): CURE-PEACE-1 U1 (c9b24fe51) — a peacetime suit retires when a war opens
+// against its court, and the feed's reconcile of the superseded proposal mints ONE new wizard-news id that the
+// twelve pulse roots introduce and retire within the corpus. Every other batch-3 pick measures 272 before it and
+// 273 after it, identically; nothing else in the batch touches this count.
 // ── RE-RECORDED 2026-09-01 BY THE WAR LANDING (§876), IN THE SAME ACT AS THE OSR WALKER ───────
 // 268/28/51 → 272/32/50. pulseRoots 12 and finalEntries 240 do not move for the second
 // re-record running, and conservation still closes: 272 − 32 = 240.
@@ -49,8 +65,19 @@ const TOTAL_KEYS = Object.freeze(['identities', 'distinctValues', 'occurrences']
 // address book entirely (the occupied insurgency arm the car REPLACES rather than stacks) while
 // four other stressor homes reach further, and the address `distinctValues` total holds at 393
 // exactly. Fewer homes, more occurrences, the same vocabulary size — that is redistribution.
+// ── RE-RECORDED 2026-10-01 BY THE URBAN-BAND CHAIR (session 93391427, under the owner's "I defer all judgment to you"), IN THE
+// SAME ACT AS THE NEWS-HEADLINE CONTRACT, THE PROSE-FAMILY CONTRACT AND THE OSR WALKER'S PINS ──────────────────────────
+// 273/1/272/51 → 265/1/264/44. ONE CAUSE, MEASURED AT BOTH ENDS: THE URBAN BAND'S SAME-SEED SHIFT (ODQ §934.86) AND THE DRUID RULINGS
+// (§934.86 addendum 2). The corpus builder at the pre-band base 5d699cc68 reproduces every frozen figure exactly; at the tip
+// the AO-0 worlds re-deal their year.
+// Conservation closes: 265 − 1 = 264. ELEVEN HOMES LEAVE AND FOUR ARRIVE, NAMED: gone applied|generosity_refusal,
+// applied|stressor_aftermath, applied|stressor_birth_insurgency, applied|stressor_birth_monster_raider_pressure,
+// applied|stressor_escalate_mass_migration, applied|stressor_residual, queued|faction_government_challenge,
+// queued|legitimacy_pressure, queued|npc_reform, webwar_campaign_complete|null, webwar_campaign_minted|null; new
+// applied|reinforcement_cost, queued|npc_exploit, queued|npc_suppress, queued|tier_demotion. The re-dealt year resolves no
+// stressor and mints no web-war campaign; the voice debt stays EMPTY.
 const CORPUS = Object.freeze({
-  pulseRoots: 12, introductions: 272, retirements: 32, finalEntries: 240, homes: 50,
+  pulseRoots: 12, introductions: 265, retirements: 1, finalEntries: 264, homes: 44,
 });
 
 export const NEWS_VOICE_PROTECTED_SUBSTRATE = Object.freeze([

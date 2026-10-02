@@ -233,6 +233,44 @@ const OPERATIONS_VOICE = 'operationsVoiceEnabled';
 // gate lives beside the spine's own door and AND-composes with the SPINE, because the
 // catalog is a menu of business a named person on the road is sent on.
 const ENVOY_TASK_CATALOG = 'envoyTaskCatalogEnabled';
+// FP TR-2 (lane FP-D). The merchant house, minted with its manifest entry, its certification
+// row APPENDED at the tail of VIRTUAL_SUBSYSTEM_ROWS (TR has no family leaf) and its ONE
+// by-name gate read (`houseLedger.merchantHousesActive`) in a single commit — the
+// §49-ruling-3 cost above, paid in these three module-scope edits with ZERO new test titles.
+const MERCHANT_HOUSES = 'merchantHousesEnabled';
+// FP TR-3 (lane FP-D2). Believed markets, minted with its manifest entry at its codepoint
+// position, its certification row APPENDED at the tail after TR-2's (the add-a-row protocol) and
+// its ONE by-name gate read (`dispatchDestination.believedMarketsActive`) in a single commit —
+// the same three module-scope edits, ZERO new test titles.
+const BELIEVED_MARKETS = 'believedMarketsEnabled';
+// FP IN-2 (lane FP-I). The lure, minted with its manifest entry, its certification row
+// APPENDED at the tail after TR-2's and its ONE by-name gate read (`infoLure.infoLureActive`)
+// in a single commit: the same three module-scope edits, ZERO new test titles.
+const INFO_LURE = 'infoLureEnabled';
+// FP GR-6 (lane FP-B2). Mediation generalized, minted on TR-2's protocol: its manifest entry, its
+// certification row APPENDED at the tail of VIRTUAL_SUBSYSTEM_ROWS (the compact-grammar block
+// forbids an append) and its ONE by-name gate read (`mediationPressure.mediationGeneralizedActive`)
+// in a single commit — these three module-scope edits, ZERO new test titles.
+const MEDIATION_GENERALIZED = 'mediationGeneralizedEnabled';
+// FP IN-4 commit 1 (lane FP-I2; J-INA-4). The intel lane's invisible key DECLARED: its manifest
+// entry and its certification row APPENDED at the tail after IN-2's land together, over a gate
+// read (`intelActs.intelTradeActive`) older than both: the same three module-scope edits, ZERO
+// new test titles.
+const INTEL_TRADE = 'intelTradeEnabled';
+// FP IN-3 (lane FP-I3). The counter-game, minted with its manifest entry, its certification row
+// APPENDED at the tail after GR-6's and its ONE by-name gate read (`suspicion.counterIntelActive`)
+// in a single commit: the same three module-scope edits, ZERO new test titles.
+const COUNTER_INTEL = 'counterIntelEnabled';
+// FP IN-4 commit 2 (lane FP-I2). The reputation race, minted with its manifest entry, its
+// certification row APPENDED at the tail after the intel lane's and its ONE by-name gate read
+// (`reputationRaceConsumer.reputationRaceActive`) in a single commit: the same three module-scope
+// edits, ZERO new test titles.
+const REPUTATION_RACE = 'reputationRaceEnabled';
+// FP CW-1 (lane fp/cw-1). The cascade governor, minted with its manifest entry, its certification
+// row APPENDED at the tail after IN-4's and its ONE by-name gate read
+// (`cascadeBraid.cascadeGovernorActive`) in a single commit: the same three module-scope edits,
+// ZERO new test titles (SR-11: a registration the unit's own files trip).
+const CASCADE_GOVERNOR = 'cascadeGovernorEnabled';
 // AUTHORING ORDER, not alphabetical: the assertion below is an exact ordered equality
 // against VIRTUAL_SUBSYSTEM_ROWS, so this list mirrors the file's own section order.
 //
@@ -264,6 +302,14 @@ const VIRTUAL_RULES = Object.freeze([
   FOREIGN_SEAT, LEGITIMACY_UPHEAVAL, IRREGULAR_FORCE, WAR_MEMORY,
   INFILTRATION_DEPTH, MISSION_DISPATCHER, OPERATIONS_VOICE, ENVOY_TASK_CATALOG,
   CHANCE_ENCOUNTERS,
+  MERCHANT_HOUSES,
+  BELIEVED_MARKETS,
+  INFO_LURE,
+  MEDIATION_GENERALIZED,
+  INTEL_TRADE,
+  COUNTER_INTEL,
+  REPUTATION_RACE,
+  CASCADE_GOVERNOR,
 ]);
 
 const rowFor = (rule) => SUBSYSTEM_CERTIFICATION_REGISTRY.find((row) => row.rule === rule);
@@ -442,6 +488,40 @@ const LANE_LEAVES = Object.freeze({
   // relationshipEvolution) are deliberately NOT here: each is a shared mouth minting
   // candidates for a dozen other lanes, so tracing this member's zero-candidate claim
   // through them would measure the whole pulse's vocabulary rather than this lane's.
+  // TR-2. The writer (the gate, the latches, the normalizer) and the chooser leaf.
+  [MERCHANT_HOUSES]: ['src/domain/worldPulse/houseLedger.js', 'src/domain/worldPulse/houseActs.js'],
+  // TR-3. The gate and the composer, the belief-side read, and the Herald voice with its corpus.
+  // commodityFlow.js, the host that consults them, is deliberately NOT here: it is the M6a
+  // orchestrator every trade row shares, so tracing this member's zero-candidate claim through
+  // it would measure the whole commodity layer rather than this lane.
+  [BELIEVED_MARKETS]: [
+    'src/domain/spatial/dispatchDestination.js',
+    'src/domain/worldPulse/beliefScarcity.js',
+    'src/domain/worldPulse/marketNews.js',
+    'src/domain/worldPulse/marketReceiptPools.js',
+  ],
+  // IN-2. The leaf (the gate, the law, the spring) and the head that folds it.
+  [INFO_LURE]: ['src/domain/worldPulse/infoLure.js', 'src/domain/worldPulse/informationStatecraft.js'],
+  // GR-6. The one leaf: the gate, the pressure, the receipt pass and the editor's rows.
+  [MEDIATION_GENERALIZED]: ['src/domain/worldPulse/mediationPressure.js'],
+  // IN-4 commit 1. THE PURE LEAF ALONE: the gate, the decision and the pricing live in intelActs.js.
+  // generosityKernel.js and informationStatecraft.js are in the row's wider `module` list because a
+  // reader needs the two doors' addresses, and are deliberately absent here: they are the generosity
+  // and statecraft layers' own mouths, so tracing this lane's zero-candidate claim through them
+  // would measure two other lanes' vocabulary.
+  [INTEL_TRADE]: ['src/domain/spatial/intelActs.js'],
+  // IN-3. The gate and the read, the sweep, the exposure producer, and the head that carries both seams.
+  [COUNTER_INTEL]: ['src/domain/worldPulse/suspicion.js', 'src/domain/worldPulse/counterIntelSweep.js', 'src/domain/worldPulse/patronExposure.js', 'src/domain/worldPulse/informationStatecraft.js'],
+  // IN-4 commit 2. THE LEAF ALONE: the gate, the arrival reads, the race and the beats live in
+  // reputationRaceConsumer.js. The race module and the lifecycle host are in the row's wider
+  // `module` list because a reader needs them, and are deliberately absent here: the host is the
+  // lifecycle layer's own mouth and mints its own candidate vocabulary.
+  [REPUTATION_RACE]: ['src/domain/worldPulse/reputationRaceConsumer.js'],
+  // CW-1. THE LEAF ALONE: the gate, the detection, the braid and the damping live in
+  // cascadeBraid.js. The composer is in the row's wider `module` list because a reader needs the
+  // seam, and is deliberately absent here: it is the Herald's own normalizer and names every
+  // record field a receipt can carry.
+  [CASCADE_GOVERNOR]: ['src/domain/display/cascadeBraid.js'],
   [CHANCE_ENCOUNTERS]: [
     'src/domain/worldPulse/envoyChanceMeeting.js',
     'src/domain/worldPulse/envoyChanceMeetingLedger.js',

@@ -127,12 +127,14 @@ describe('the landing prose quotes the fixture it is about', () => {
     // first expect, and a paragraph that stopped narrating it reds on the second,
     // and neither can pass alone.
     const headlines = advance.map((entry) => `${entry.headline} ${entry.text}`.toLowerCase()).join(' | ');
+    // 2026-10-02, the Voice Program (ODQ §934.88): the engine now writes each beat as a deed ("goes onto a war footing",
+    // "Crime takes hold", "trade routes break down"), so the pairs bind the deed words on both sides.
     for (const [inProse, inFixture] of [
       ['creed', 'creed'],
-      ['wartime', 'wartime'],
+      ['war footing', 'war footing'],
       ['fracture', 'fracture'],
-      ['crime', 'criminal'],
-      ['strain', 'trade'],
+      ['crime', 'crime'],
+      ['trade routes', 'trade routes'],
     ]) {
       expect(
         headlines,
@@ -148,28 +150,31 @@ describe('the landing prose quotes the fixture it is about', () => {
     const body = landing.forge.body.toLowerCase();
     const receipts = Object.fromEntries(fixture.voice.receipts.map((r) => [r.label, r.text.toLowerCase()]));
     // ANTI-VACUITY: the receipts the sentence is built from must still exist.
-    for (const label of ['route', 'resource', 'conflict']) {
+    // 'conflict' -> 'institution' on 2026-09-30: the urban band's re-emitted fixture prints a
+    // seated travellers' inn where it printed the market quarrel, and the copy was re-grounded.
+    for (const label of ['route', 'resource', 'institution']) {
       expect(receipts[label], `the fixture no longer emits a "${label}" receipt`).toBeTruthy();
     }
     expect(body, 'the road clause lost its receipt').toContain('road');
     expect(receipts.route, 'the fixture town is no longer road-reached').toContain('road');
-    expect(body, 'the market clause lost its receipt').toContain('market');
-    expect(receipts.conflict, 'the fixture conflict is no longer about the market').toContain('market');
+    expect(body, 'the inn clause lost its receipt').toContain('inn');
+    expect(receipts.institution, 'the fixture institution is no longer the travellers\' inn').toContain('inn');
   });
 
   it('the 02 body names the three receipts the card shows', () => {
     const body = landing.voice.body.toLowerCase();
     expect(body).toContain(fixture.town.name.toLowerCase());
-    for (const word of ['road', 'timber', 'licence']) {
+    for (const word of ['road', 'timber', 'inn']) {
       expect(body, `the voice body stopped naming the "${word}" receipt`).toContain(word);
     }
     const receipts = fixture.voice.receipts.map((r) => r.text.toLowerCase()).join(' | ');
-    for (const word of ['road', 'timber']) {
+    for (const word of ['road', 'timber', 'inn']) {
       expect(receipts, `the fixture no longer carries a "${word}" receipt for the voice card`).toContain(word);
     }
-    // The card prints FOUR receipt lines and the sentence says so.
-    expect(fixture.voice.receipts).toHaveLength(4);
-    expect(body, 'the voice body counts a number of facts the card does not print').toContain('four facts');
+    // The card prints THREE receipt lines and the sentence says so (four until the urban band's
+    // re-emitted fixture, 2026-09-30).
+    expect(fixture.voice.receipts).toHaveLength(3);
+    expect(body, 'the voice body counts a number of facts the card does not print').toContain('three facts');
   });
 
   it('the commons body offers a town the curated trio actually carries', () => {

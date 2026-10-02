@@ -58,8 +58,18 @@ describe('claims-parity — each synopsis is proven by the forged world', () => 
     expect(eventsOf(t).filter((e) => e.severity === 'major').length).toBeGreaterThanOrEqual(5);
     // Receipt 2: a major siege in its history.
     expect(eventsOf(t).some((e) => /siege/i.test(e.name) && e.severity === 'major')).toBe(true);
-    // Receipt 3: founded as a seasonal camp beside a dependable river fishery.
+    // Receipt 3: grew from a single logging operation whose owner refused to leave.
     //
+    // RE-VERIFIED 2026-09-30 (the urban band, ODQ §934.86). Same mechanism as the note below:
+    // the founding reason is one draw from a pool the settlement's exports widen, and the
+    // urban band gave this town new trades and so new exports, so the SAME draw now lands on
+    // "grew from a single logging operation whose owner refused to leave when the contract
+    // ended". Every other receipt is byte-identical: the six major upheavals (economic rift
+    // to the siege 25 years ago), the mills (governance re-verified to 'Tolerated' 2026-10-01, below), and a riverside town on a river route,
+    // so "this river town" still holds. The seed is kept and the founding clause re-verified, in
+    // the synopsis and here. No besi- seed in 0-2999 forges all five original receipts.
+    //
+    // (The 2026-07-26 note, for the record:)
     // RE-VERIFIED 2026-07-26 (generation remediation). This receipt previously read
     // "founded on mill rights granted by an absent lord" and matched /mill/. The
     // founding reason moved, and the cause is UPSTREAM of the narrative lane:
@@ -75,13 +85,16 @@ describe('claims-parity — each synopsis is proven by the forged world', () => 
     // foundedBy, initialChallenge, overcoming, legitimacy) is byte-identical to the
     // committed base, which is why only this one assertion moved. The new reason is
     // the truer one: the old roster's lead export came from an exhausted seam.
-    expect(/river fishery/i.test(t.history?.founding?.reason || '')).toBe(true);
+    expect(/single logging operation whose owner refused to leave/i.test(t.history?.founding?.reason || '')).toBe(true);
     // Receipt 4: the mills the title names are still standing. Added with the
     // re-verification above so the seed's title and synopsis keep a proven anchor
     // once the founding clause stopped carrying one (the claims-parity law).
     expect(instNamesOf(t).some((n) => /mill/i.test(n))).toBe(true);
-    // Receipt 5: approved, steady governance today.
-    expect(legitOf(t).label).toBe('Approved');
+    // Receipt 5: governance its people tolerate today. RE-VERIFIED 2026-10-01: the urban band's
+    // final source moved besi-1's legitimacy from 'Approved' to 'Tolerated'; every other receipt
+    // still holds, so the claim was re-verified to the forged world (synopsis line and receipt
+    // with it) rather than the seed re-chosen.
+    expect(legitOf(t).label).toBe('Tolerated');
   });
 
   it('THE ROT BENEATH THE ORE — contested authority, a recent uprising, criminal arrangements', () => {

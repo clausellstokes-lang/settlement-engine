@@ -111,6 +111,23 @@ const REVIEWED_CLOSURE = Object.freeze([
   'src/domain/display/newsBody.js',
   'src/domain/formatNumber.js',
   'src/domain/realm/heraldRouting.js',
+  // THE CASCADE GOVERNOR (FP CW-1): heraldFeed's one guarded delegation reaches the braid leaf and
+  // what it reuses, each reviewed onto the closure deliberately. The braid reads recorded receipts
+  // and the provenance ledger (truth-side, the causeWalk precedent) and composes no belief; the
+  // coupling registry it answers to is RE-SPELLED in the leaf rather than imported precisely so its
+  // receipt addresses, which name the belief ledgers, stay outside this fence.
+  'src/domain/display/cascadeBraid.js',
+  // The recorded-edge primitives (buildRecordedEdges, recordedAncestors) and two record predicates.
+  'src/domain/display/chronicleGraph.js',
+  // The forward prose realization, reused verbatim: finite connectives over recorded headlines.
+  'src/domain/display/discourseKernel.js',
+  // The one spelling of a small count as a word; zero imports.
+  'src/domain/display/numberWords.js',
+  // The codepoint comparator; zero imports.
+  'src/domain/deterministicSort.js',
+  // The significance family (SP-6a), a zero-import vocabulary leaf: the braid ranks classes through
+  // it and never compares a class word by hand.
+  'src/domain/worldPulse/bandFamilies.js',
 ]);
 
 /**

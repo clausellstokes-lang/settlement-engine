@@ -304,7 +304,7 @@ A7 claims `status: 'ruined'` is written in exactly one place in `src/`. **Measur
 
 | strip | hits | why |
 |---|---:|---|
-| **raw bytes** | **4** | three are JSDoc prose *describing* the shape (`defenseInstitutionBuckets.js:41`, `institutionStatusModel.js:29,:303`, `defenseGenerator.js:38`) |
+| **raw bytes** | **4** | three are JSDoc prose *describing* the shape (`defenseInstitutionBuckets.js:41`, `institutionStatusModel.js:29,:303`, `defenseGenerator.js` (the module docblock)) |
 | the estate's shared **`codeOnly`** (`tests/helpers/codeOnlySource.js`) | **0** | its own docblock: it *"blanks comments AND string/template CONTENTS"* ⇒ `'ruined'` → `'      '`. ⛔ **WRONG TOOL — a lane reaching for the shared helper writes a vacuously-green arm** |
 | ⭐ **comment-only strip (KEEPS string contents)** | **1** | `src/domain/worldPulse/calamityKernel.js` — the truth |
 

@@ -40,13 +40,26 @@
  * one party silently standing in for the other. A caller that treats an unresolved
  * orientation as "this term binds nobody" is correct.
  *
+ * `negotiated` IS THE FOURTH KIND, AND IT HAS NO DIRECTION (TREATY-VOICE U1; FPQ-36, the
+ * owner's decision of 2026-09-24, which re-opened GR-3B-ORIENT for a fourth kind when no
+ * path without one existed). A pact two courts signed in peace names its two courts and
+ * nothing more at the treaty level: its clauses are asked for one at a time and point
+ * their own ways (`termObligationOf` below), so a treaty-level giver, receiver, obligor
+ * or obligee would be a direction read off the party list, which GR-3B-ORIENT §8 forbids.
+ * The answer therefore keeps `resolved: false` and every role slot EMPTY, exactly as the
+ * unresolved answer does, and adds the two courts in their stored order as `parties` and
+ * `partyNames`. Every consumer that asks WHO OWES reads what it read before; only a
+ * consumer that asks WHO SIGNED (the lifecycle voice) can hear the difference.
+ *
  * PURE + ZERO IMPORTS. It is reached by `treatyEnforcement.js` — itself extracted to be
  * importable from anywhere in the war layer without closing a cycle — so it must be
  * able to close none of its own.
  */
 
-/** The closed orientation vocabulary. `unknown` is a verdict, not a fallback. */
-export const TREATY_ORIENTATION_KINDS = Object.freeze(['unknown', 'wartime', 'sale']);
+/** The closed orientation vocabulary. `unknown` is a verdict, not a fallback. The order
+ *  is the instruments' arrival order (war, then WR-10's sale, then GR-2's pact), the same
+ *  order TERM_OBLIGATION_KINDS below has always carried. */
+export const TREATY_ORIENTATION_KINDS = Object.freeze(['unknown', 'wartime', 'sale', 'negotiated']);
 
 /** The role words a party can hold in a treaty, per orientation kind. Closed, and
  *  exported so a display never invents a fifth. */
@@ -54,6 +67,10 @@ export const TREATY_ROLE_WORDS = Object.freeze({
   wartime: Object.freeze({ giver: 'the bound party', receiver: 'victor' }),
   sale: Object.freeze({ giver: 'the seller', receiver: 'the buyer' }),
   unknown: Object.freeze({ giver: 'a party', receiver: 'a party' }),
+  // A negotiated instrument has no treaty-level giver or receiver (its role slots are
+  // empty by contract), so its two words are the stranger's, and `treatyRoleWord` answers
+  // exactly what it answered before the kind existed.
+  negotiated: Object.freeze({ giver: 'a party', receiver: 'a party' }),
 });
 
 /** A string, or the empty string — NEVER `String(undefined)`. This one coercion is the
@@ -83,6 +100,9 @@ function recordOf(value) {
  * @property {string} receiverName
  * @property {string} obligorName
  * @property {string} obligeeName
+ * @property {string[]} [parties]     `negotiated` only: the two courts, in the record's
+ *   stored order (an ORDER, never a direction). Absent on every other kind.
+ * @property {string[]} [partyNames]  `negotiated` only: their reader names, aligned.
  */
 
 /** The unresolved orientation. Every field a caller might branch on is present and
@@ -101,6 +121,32 @@ function unresolvedOrientation() {
     obligorName: '',
     obligeeName: '',
   };
+}
+
+/**
+ * THE NEGOTIATED ANSWER, or null (TREATY-VOICE U1). The record must carry
+ * exactly two distinct parties AND the saved `partyNames` key naming both with a real
+ * name, never the id echoed back. That key is written by the pact mint only
+ * (`pactFormation.js :: signPactProposal`), so a war or sale record never reaches here
+ * with it, and a two-party record that names nobody stays `unknown`: a pact that cannot
+ * say who signed it cannot be voiced, and failing closed is what the address law asks.
+ * ⚠ IT BUILDS THE WHOLE ANSWER RATHER THAN HANDING BACK A `{ ids, names }` PAIR, and that is
+ * measured, not taste: this module sits inside the Foundry export's closure, and the
+ * writer-reach walker matches property reads BY KEY NAME, so a `.names` read here moved the
+ * unrelated identity `names on inst` onto the Foundry surface (writerReach, 2026-09-24).
+ * @param {Record<string, unknown>} row
+ * @returns {TreatyOrientation | null}
+ */
+function negotiatedOrientationOf(row) {
+  const parties = Array.isArray(row.parties) ? row.parties.map(text) : [];
+  if (parties.length !== 2) return null;
+  const [first, second] = parties;
+  if (!first || !second || first === second) return null;
+  const names = recordOf(row.partyNames);
+  const firstName = text(names[first]);
+  const secondName = text(names[second]);
+  if (!firstName || !secondName || firstName === first || secondName === second) return null;
+  return { ...unresolvedOrientation(), kind: 'negotiated', parties: [first, second], partyNames: [firstName, secondName] };
 }
 
 /**
@@ -158,6 +204,11 @@ export function treatyOrientationOf(treaty) {
     };
   }
 
+  // THE FOURTH KIND, checked LAST so a war or sale pair always wins (see the header). The
+  // role slots stay empty and `resolved` stays false: only the two courts are added.
+  const negotiated = negotiatedOrientationOf(row);
+  if (negotiated) return negotiated;
+
   return unresolvedOrientation();
 }
 
@@ -206,14 +257,16 @@ export function documentSideOf(doc, partyId) {
   return null;
 }
 
-/** THE PER-TERM OBLIGATION VOCABULARY (chair ruling CR-GR3B-3-R1). A SUPERSET of
- *  TREATY_ORIENTATION_KINDS by exactly one member: the three instrument kinds pass
- *  through from the delegation arm below, and `negotiated` is the only kind this reader
- *  can add.
- *  ⚠ TREATY_ORIENTATION_KINDS and TREATY_ROLE_WORDS are NOT widened, and must not be —
- *  both are pinned exactly by tests/domain/treatyOrientationWr10g.test.js. A negotiated
- *  instrument stays `unknown` at the TREATY level, because §3.2's multi-round record
- *  makes a treaty-level direction ill-defined: one record, two clauses, opposite ways. */
+/** THE PER-TERM OBLIGATION VOCABULARY (chair ruling CR-GR3B-3-R1). The same four members
+ *  as TREATY_ORIENTATION_KINDS since TREATY-VOICE U1 widened that list by `negotiated`
+ *  (FPQ-36). Before it, this list was a superset by exactly that member; the instrument
+ *  kind now names the pact too, but it still carries NO treaty-level direction, because
+ *  §3.2's multi-round record makes one ill-defined (one record, two clauses, opposite
+ *  ways). A beneficiary-bearing clause resolves its own direction in the first arm below;
+ *  a clause with none delegates, and on a negotiated instrument that answer is kind
+ *  `negotiated` with the empty pair and `resolved: false`, which binds nobody exactly as
+ *  the unresolved answer does. Both lists are pinned by
+ *  tests/domain/treatyOrientationWr10g.test.js. */
 export const TERM_OBLIGATION_KINDS = Object.freeze(['unknown', 'wartime', 'sale', 'negotiated']);
 
 /**

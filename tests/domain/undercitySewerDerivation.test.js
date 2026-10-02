@@ -133,7 +133,10 @@ describe('MF-UC1 — the undercity sanitation ladder and its wells', () => {
   });
 
   it("the owner's own example: a FLAT DRY town honestly gets cesspits — the gradient/outfall cause reads a full impediment and the ladder refuses to lie — and giving the same town falling ground with an outfall lifts it", () => {
-    const flatDry = withoutSanitation(world('town', 'plains', 'uc1-flat-dry'));
+    // Seed `uc1-flat-dry` → `uc1-flat-dry-1` on 2026-09-30 (the urban band, ODQ §934.86): the
+    // town roster grew, so the old seed's town no longer sits at the ABSENT floor; `-1` is the
+    // first sibling whose flat, dry, sanitation-stripped town does, as this arm requires.
+    const flatDry = withoutSanitation(world('town', 'plains', 'uc1-flat-dry-1'));
     const cause = sewerCauses(flatDry, { population: flatDry.population }).find((c) => c.cause === 'GRADIENT_OUTFALL');
     expect(cause.value).toBe(1);
     expect(cause.direction).toBe('LOWERS');

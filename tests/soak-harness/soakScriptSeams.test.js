@@ -146,7 +146,21 @@ describe("the soak script's extracted seams", () => {
   it('ARM 5 — with no overlay the extraction is byte-identical to the literal it replaced', () => {
     // The golden was CAPTURED by executing the pre-change literal block at 0cbb0177,
     // never hand-authored: a hand-written expectation would only mirror the new code.
-    expect(BASELINE.capturedAtHead).toBe('0cbb0177b177717873804200e908a27d42363ed4');
+    // ⭐ DECLARED EDIT, NOT A HAND RE-RECORD (LIT-1a, 2026-09-24; J-EM-16): full_simulation
+    // now declares five FP keys, so that SAME literal block (git show 0cbb0177, never
+    // retyped) was executed again over the LIT-1a preset table, and capturedAtHead names
+    // that capture's parent commit. The pin it replaces, verbatim:
+    // '0cbb0177b177717873804200e908a27d42363ed4'.
+    // ⭐ AND AGAIN (LIT-1b, 2026-09-24; J-EM-16, ODQ §934.84): full_simulation also declares the
+    // three belief keys of FP_LIT_BELIEF, so the same literal block was executed a third time over
+    // the LIT-1b table (75 -> 78 keys per variant). The pin it replaces, verbatim:
+    // '4d2667579686bcc329b331cfa99c61c6b9dff2c7'.
+    // ⭐ AND AGAIN (LIT-2, 2026-09-24; J-EM-16, ODQ §934.84, ruling FP-36): full_simulation also
+    // declares mediationGeneralizedEnabled (FP_LIT_WARPEACE), so the same literal block was
+    // executed a fourth time over the LIT-2 table (78 -> 79 keys per variant; the same block over
+    // the parent's table reproduced the previous capture byte-for-byte). The pin it replaces,
+    // verbatim: '6efff620b5bcbdb293393d7945e1b6437a2d163b'.
+    expect(BASELINE.capturedAtHead).toBe('90cbf7963526a467a6db20b6a7c6d56ebf9aea0f');
     for (const seasons of ['preset', 'on', 'off']) {
       const composed = composeSoakRules({ preset: PRESET, seasons, overlay: {} });
       expect(composed.fullRules, `fullRules moved for --seasons ${seasons}`)
@@ -376,12 +390,27 @@ describe("the soak script's extracted seams", () => {
     // The figure is arithmetic on the two key sets, not a captured hash: 33 - 21 = 12,
     // and it is stated that way here so the next lighting car can predict its own move
     // instead of running the arm to discover it.
+    // ⭐ DECLARED EDIT AGAIN (LIT-1a, 2026-09-24; J-EM-16): full_simulation took five FP
+    // keys (FP_LIT_ALIVE's two, FP_LIT_WARPEACE's three), so a preset declaring none of them
+    // leaks five more: quiet_local 33 + 5 = 38, narrative_campaign 33 + 5 = 38,
+    // static_campaign 34 + 5 = 39. realistic_regional and living_realm declare the two alive
+    // keys, so + 3: 12 + 3 = 15 and 15 + 3 = 18. dramatic_campaign declares all five: 14.
+    // ⭐ AND AGAIN (LIT-1b, 2026-09-24; J-EM-16, ODQ §934.84): full_simulation took the three
+    // belief keys (FP_LIT_BELIEF), and so did dramatic_campaign and living_realm, so a preset
+    // declaring none of them leaks three more: quiet_local 38 + 3 = 41, narrative_campaign
+    // 38 + 3 = 41, static_campaign 39 + 3 = 42, realistic_regional 15 + 3 = 18. living_realm
+    // stays 18 and dramatic_campaign 14 (both declare the three); full_simulation stays 0.
+    // ⭐ AND AGAIN (LIT-2, 2026-09-24; J-EM-16, ODQ §934.84, ruling FP-36): full_simulation and
+    // dramatic_campaign took mediationGeneralizedEnabled (FP_LIT_WARPEACE), so every preset that
+    // does not declare it leaks one more: quiet_local 41 + 1 = 42, narrative_campaign 41 + 1 = 42,
+    // static_campaign 42 + 1 = 43, realistic_regional 18 + 1 = 19, living_realm 18 + 1 = 19.
+    // dramatic_campaign stays 14 (it declares the key) and full_simulation stays 0.
     expect(leakedUnderOverlay).toEqual({
-      quiet_local: 33,
-      realistic_regional: 12,
-      narrative_campaign: 33,
-      static_campaign: 34,
-      living_realm: 15,
+      quiet_local: 42,
+      realistic_regional: 19,
+      narrative_campaign: 42,
+      static_campaign: 43,
+      living_realm: 19,
       dramatic_campaign: 14,
       full_simulation: 0,
     });

@@ -137,7 +137,7 @@ export const COLUMN_SOURCES = Object.freeze({
     }),
   ]),
   whatItCounts: Object.freeze([
-    Object.freeze({ source: 'the settlement\'s INSTANTIATED service rows, on a LIVE institution', cite: 'institutionServices.js:23, :41, :45, …', read: true }),
+    Object.freeze({ source: 'the settlement\'s INSTANTIATED service rows, on a LIVE institution', cite: 'institutionServices.js :: INSTITUTION_SERVICES', read: true }),
     Object.freeze({ source: 'the fired economy income rows', cite: 'economicState.js:226-244 ("Church Tithes", gated on religionInfluence > 55 && hasReligiousInst)', read: true }),
     Object.freeze({
       source: 'economicState.treasury.coinFlows.taxed',

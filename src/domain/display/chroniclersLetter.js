@@ -103,6 +103,14 @@ export const KIND_SECTION = Object.freeze({
   disavowed_by_succession: 'courts',
   succession_question_opened: 'courts',
   reaffirmed: 'courts',
+  // GR-2b — one court putting terms before another is a court act, so the letter files the
+  // proposal beat and the applied order that opened it here; the Herald's own desk for both
+  // diverges to trade with the treaty cohort, recorded in KIND_SECTION_DIVERGENCES.
+  pact_proposed: 'courts', realm_verb_propose_pact: 'courts',
+  // LIT1b-pre U4 — a pact signed between two courts is a court act, as the offer it answers is.
+  signed: 'courts',
+  // GR-6 — a court standing between two others is a court act, as the pact beats are.
+  brokered_back: 'courts',
   vassal_tribute_extraction: 'courts', reconsideration_forced: 'courts',
   commons_gathering: 'courts', commons_petition: 'courts', commons_riot: 'courts',
   npc_goal_culmination: 'courts', npc_goal_rebranch: 'courts', npc_growth: 'courts',

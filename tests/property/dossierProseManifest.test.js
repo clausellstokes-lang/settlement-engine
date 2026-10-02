@@ -135,11 +135,16 @@ describe('the composed-prose manifest — the DRIFT corpus, both audiences', () 
     // composes over a record carrying a major or catastrophic row: twelve golden-master-v3
     // hamlets and the three gm-seed-c towns lose that one cell (71,076 -> 71,052; 398 -> 392).
     // The fixture moves only through the signed door (scripts/prose-manifest-cells.mjs --record).
+    // 2026-09-30, the urban band's re-record (ODQ §934.86): the moved worlds compose a different
+    // number of cells (71,052 -> 71,266; 400/396/392 -> 404/400/390). Towns unmoved at 516/3/3/3.
+    // 71,266 -> 71,268 at the druid rulings' re-record (2026-10-01, §934.86 addendum 2): Warden's Lodge's
+    // towns compose two more cells. 71,268 -> 71,262 at J33's re-record (2026-10-01, the same rulings): a magic town
+    // holding the lodge loses the druid readings it alone had opened, and six cells with them.
     expect(tally, 'the DRIFT corpus by seed, cells and towns').toEqual({
-      'golden-master-v3': { cells: 71_052, towns: 516 },
-      'gm-seed-a': { cells: 400, towns: 3 },
-      'gm-seed-b': { cells: 396, towns: 3 },
-      'gm-seed-c': { cells: 392, towns: 3 },
+      'golden-master-v3': { cells: 71_262, towns: 516 },
+      'gm-seed-a': { cells: 404, towns: 3 },
+      'gm-seed-b': { cells: 400, towns: 3 },
+      'gm-seed-c': { cells: 390, towns: 3 },
     });
     // The two halves must close against the figures every other arm here reads.
     expect(Object.values(tally).reduce((n, r) => n + r.cells, 0)).toBe(run.cells.length);
@@ -464,7 +469,9 @@ describe('the two controls no one-audience manifest can see', () => {
     // which is what made an error load-bearing. DRIFT already carries a small seed family, so
     // no new recorder mode is owed; ADDENDUM 1 ruling 8's routing of that widening to a
     // CAPACITY-train car is WITHDRAWN. The tally is a driven arm below, not a sentence.
-    expect(differ.length, 'positions where the two faces draw differently').toBe(309);
+    // 309 -> 296 at the urban band's re-record (2026-09-30, ODQ §934.86): the moved worlds draw
+    // from mixed pools at 13 fewer positions.
+    expect(differ.length, 'positions where the two faces draw differently').toBe(296);
     expect(new Set(differ.map((row) => `${row.dm.block} :: ${row.dm.pool}`)).size,
       'over this many of the twelve mixed pools').toBe(1);
     // ⛔ REFUSAL 3: THE ONE-SIDED POSITIONS, WITH THEIR DIRECTION (the fold's P9). The leak

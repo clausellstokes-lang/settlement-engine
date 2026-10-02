@@ -1,9 +1,11 @@
 import { execFileSync } from 'node:child_process';
 import {
   chmodSync,
+  existsSync,
   mkdirSync,
   mkdtempSync,
   readFileSync,
+  readdirSync,
   realpathSync,
   rmSync,
   statSync,
@@ -32,6 +34,7 @@ import {
   readSessionState,
   readStepReceipts,
   releaseSessionRunLock,
+  resealImplementationSession,
   runImplementationSessionCli,
   writeSessionHeartbeat,
   writeSessionState,
@@ -477,6 +480,99 @@ describe('IA-2 implementation sessions', () => {
     }
     expect(stdout).toBe('');
   }, 60_000); // measured 1,218 ms isolated 2026-08-31 (4,479 ms at load 27) — measured budget, never debt
+
+  /**
+   * ⭐ THE SANCTIONED RE-SEAL (TOOL-22). A branch moving under a paused sealed build is
+   * routine under pause-and-resume, and it deadlocks the packet at BOTH ends at once:
+   * dispatch refuses because the capsule exists, while `check:packet` and `resume` refuse
+   * because that capsule's sealed HEAD drifted. The two rows below are the six arms of the
+   * door — the happy path with its collision rule first, then the two refusals that must
+   * archive nothing at all.
+   */
+  it('re-seals a drifted capsule under its sealed head and never overwrites an archive', () => {
+    const repo = makeRepo();
+    // (a) DISPATCH — one capsule, sealed at the head it was dispatched on.
+    const first = create(repo);
+    const sessionsDir = dirname(first.sessionDir);
+    expect(readdirSync(sessionsDir)).toEqual(['IA-2T']);
+    expect(first.seal.head).toBe(repo.head);
+
+    // (b) A SECOND PLAIN DISPATCH — refused, with its message unchanged by this door.
+    expect(() => create(repo)).toThrow(/implementation session already exists: IA-2T/);
+
+    // (c) THE BRANCH ADVANCES — the gate's own two steps in the gate's own order
+    //     (implementation-gate.mjs opens the session, then asserts scope, for both `packet`
+    //     and `resume`): the session still OPENS, and the scope assertion is what refuses.
+    git(repo.root, ['commit', '--allow-empty', '-q', '-m', 'move head under the paused build']);
+    const secondHead = git(repo.root, ['rev-parse', 'HEAD']);
+    const reopened = openImplementationSession({ rootDir: repo.root, packetId: 'IA-2T' });
+    expect(() => assertImplementationScope(reopened))
+      .toThrow(/sealed HEAD or branch drifted for IA-2T/);
+
+    // (d) --reseal — the prior capsule is ARCHIVED under the head IT pinned, its own seal
+    //     still readable there, while the fresh capsule is sealed at the new HEAD and names
+    //     where its predecessor went.
+    const resealed = resealImplementationSession({ rootDir: repo.root, packetId: 'IA-2T' });
+    const firstArchive = `IA-2T.sealed-at-${repo.head.slice(0, 9)}`;
+    expect(readdirSync(sessionsDir).sort()).toEqual(['IA-2T', firstArchive]);
+    expect(readEnvelope(join(sessionsDir, firstArchive, 'seal.json')).head).toBe(repo.head);
+    expect(resealed.seal.head).toBe(secondHead);
+    expect(resealed.dispatch.resealedFrom).toBe(firstArchive);
+    expect(() => assertImplementationScope(resealed)).not.toThrow();
+
+    // ⛔ THE COLLISION RULE. An archive of that head ALREADY THERE — an earlier rotation, or
+    //    the chair's own hand rotation — is never replaced and never emptied. The stand-in
+    //    carries a file deliberately: that is what makes an overwrite both detectable here
+    //    and refusable by rename(2), so removing the `-2` suffix reds this arm rather than
+    //    destroying evidence quietly.
+    const secondArchive = `IA-2T.sealed-at-${secondHead.slice(0, 9)}`;
+    write(sessionsDir, `${secondArchive}/rotated-by-hand.txt`, 'the chair rotated this aside\n');
+    git(repo.root, ['commit', '--allow-empty', '-q', '-m', 'move head again']);
+    const third = resealImplementationSession({ rootDir: repo.root, packetId: 'IA-2T' });
+    expect(third.dispatch.resealedFrom).toBe(`${secondArchive}-2`);
+    expect(readFileSync(join(sessionsDir, secondArchive, 'rotated-by-hand.txt'), 'utf8'))
+      .toBe('the chair rotated this aside\n');
+    expect(readEnvelope(join(sessionsDir, `${secondArchive}-2`, 'seal.json')).head)
+      .toBe(secondHead);
+
+    // ⛔ AND THE HARDER HALF, which is the only one that convicts the mechanism rather than
+    //    the platform: an EMPTY occupant. rename(2) refuses to replace a directory that has
+    //    contents, so the arm above would still red if the collision rule were deleted — for
+    //    the platform's reason, not this code's. Onto an EMPTY directory the same rename
+    //    SUCCEEDS and the archive is gone without a word, so only this arm proves the name is
+    //    reserved before the move.
+    const thirdHead = git(repo.root, ['rev-parse', 'HEAD']);
+    const thirdArchive = `IA-2T.sealed-at-${thirdHead.slice(0, 9)}`;
+    mkdirSync(join(sessionsDir, thirdArchive), { mode: 0o700 });
+    git(repo.root, ['commit', '--allow-empty', '-q', '-m', 'move head a third time']);
+    const fourth = resealImplementationSession({ rootDir: repo.root, packetId: 'IA-2T' });
+    expect(fourth.dispatch.resealedFrom).toBe(`${thirdArchive}-2`);
+    expect(readdirSync(join(sessionsDir, thirdArchive))).toEqual([]);
+  }, 60_000); // measured budget, never debt — the file's TE-BUDGET-1 grain, four repos' worth of spawn
+
+  it('refuses a re-seal on a dirty tree or with no capsule, and archives nothing either way', () => {
+    // (e) A DIRTY TREE — refused by dispatch's OWN preflight, BEFORE any rename. The capsule
+    //     and its seal are byte-for-byte what they were and the directory holds nothing new:
+    //     an archive whose fresh seal cannot follow it would strand the packet with neither.
+    const dirty = makeRepo();
+    const session = create(dirty);
+    const sessionsDir = dirname(session.sessionDir);
+    const sealedBefore = readFileSync(session.sealPath, 'utf8');
+    git(dirty.root, ['commit', '--allow-empty', '-q', '-m', 'move head under the paused build']);
+    write(dirty.root, 'scripts/target.mjs', 'export const target = 2;\n');
+    expect(() => resealImplementationSession({ rootDir: dirty.root, packetId: 'IA-2T' }))
+      .toThrow(/non-CREATE target must be Git-clean: scripts\/target\.mjs/);
+    expect(readdirSync(sessionsDir)).toEqual(['IA-2T']);
+    expect(readFileSync(session.sealPath, 'utf8')).toBe(sealedBefore);
+
+    // (f) NO CAPSULE — refused, naming plain dispatch as the door, and the session home is
+    //     never even created.
+    const fresh = makeRepo();
+    expect(() => resealImplementationSession({ rootDir: fresh.root, packetId: 'IA-2T' }))
+      .toThrow(/no implementation session to re-seal: IA-2T\..*dispatch IA-2T/);
+    const freshGitDir = resolve(git(fresh.root, ['rev-parse', '--path-format=absolute', '--git-dir']));
+    expect(existsSync(join(freshGitDir, 'implementation-sessions'))).toBe(false);
+  }, 60_000); // measured budget, never debt — the file's TE-BUDGET-1 grain, two repos' worth of spawn
 
   it('accepts only the exact dispatch CLI form before publishing a session', () => {
     const repo = makeRepo();

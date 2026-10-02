@@ -15,7 +15,6 @@
  *  - genPressureDetail         — structured pressure context object
  *  - genCoherence              — coherence note array
  *  - getSettReason             — safety label → flavour sentence
- *  - buildTradeNarrative       — culture-appropriate architectural detail
  *  - generateSiegeCapability   — history → tension string
  *
  * Shared with the history REROLL path, so they live in ./narrative/historyCoherence.js
@@ -37,21 +36,16 @@ import { resolvePrimaryStress } from './stressPriority.js';
 import { pick, pickRandom, pickRandom2, random01 } from './helpers.js';
 import { resolveTerrain } from '../domain/resolveTerrain.js';
 import { deriveTradeCommodity } from './tradeCommodity.js';
-import {
-  sentenceCase,
-} from './narrativeProse.js';
-import {
-  CULTURE_PROFILES,
-  resolveCultureProfileKey,
-} from '../data/cultureProfiles.js';
 
 import {
-  ARRIVAL_SCENES,
-  ARRIVAL_ADDONS,
   TERRAIN_NARRATIVE_HOOKS,
   STRESS_DESCS,
   STRESS_NOTES,
 } from '../data/narrativeData.js';
+// The runner's ONE pin primitive (EM-B2a2's landed export). This module consults a pin
+// through it and nowhere else: no local clone (EM-R1 clones the bag on entry at the runner)
+// and no second spelling of the own-property rule.
+import { chooseOrPin } from './pipeline.js';
 
 // Re-export: STRESS_DESCS' public import path stays THIS module (tests + UI import it
 // from here); the table itself now lives in the data leaf.
@@ -60,7 +54,7 @@ export { STRESS_DESCS };
 // so they live in the generators layer (A+ Track H data-schema.3), not src/data.
 // POLITICAL_FLAVOR is read by the history-coherence leaf now, not here.
 import { PRESSURE_SENTENCES } from './narrativeText.js';
-import { checkInstCompat } from './structuralValidator.js';
+import { composeArrivalScene, ROUTE_TO_SCENE } from './narrative/arrivalScene.js';
 import { genRelNarrative, genSuccessionNarr } from './powerGenerator.js';
 import { mergeNPCLists } from './npcGenerator.js';
 import { enrichNPCsWithStructure } from './npcStructure.js';
@@ -80,49 +74,12 @@ import { deriveHistoryChallengeRoute } from './history/historyRouteContext.js';
 export { generateSiegeCapability };
 
 // ─── buildTradeNarrative ─────────────────────────────────────────────────────
-/**
- * Return a culture-specific architectural detail string for the arrival scene.
- *
- * @param {string} tier
- * @param {string} culture
- * @param {number} magicPriority - 0–100
- * @param {string|null} materializedDetail - Seed-stable cultural identity detail
- */
-const buildTradeNarrative = (tier, culture, magicPriority, materializedDetail = null) => {
-  // New settlements carry the exact detail chosen while resolving their
-  // cultural identity. Legacy saves do not, so fall back to the complete
-  // canonical profile vocabulary rather than silently presenting newer or
-  // unknown culture keys as Germanic.
-  const profileKey = resolveCultureProfileKey(culture);
-  const legacyDetails = CULTURE_PROFILES[profileKey]?.architecturalDetails || [
-    'local materials and inherited building methods distinguish the older wards',
-    'workshops, homes, and civic buildings follow a practical regional grammar',
-    'the settlement has grown in layers around its busiest public ground',
-  ];
-  const detail =
-    typeof materializedDetail === 'string' && materializedDetail.trim()
-      ? materializedDetail.trim()
-      : pick(legacyDetails);
-  const sentenceDetail = sentenceCase(detail);
-
-  const TIER_BASE = {
-    thorp: `The settlement is small enough that you can see all of it from the road: ${detail}.`,
-    hamlet: `A dozen buildings around a central green, most of them old. ${sentenceDetail}.`,
-    village: `A proper village, large enough to have a market and small enough that strangers are noticed: ${detail}.`,
-    town: `A market town of substance: multiple streets, a visible guild quarter, ${detail}.`,
-    city: `A city, properly speaking: dense, layered, too large to take in at once. ${sentenceDetail}.`,
-    metropolis: `The scale of the place takes a moment to register. This is not one city so much as several districts, markets, and old settlements grown together into the region's great urban centre. ${sentenceDetail}.`,
-  };
-
-  const magicSuffix =
-    magicPriority >= 66
-      ? ' Arcane lights burn in several windows in the middle of the day.'
-      : magicPriority >= 40
-        ? ' A magelight lamp post marks the main gate.'
-        : '';
-
-  return (TIER_BASE[tier] || '') + magicSuffix;
-};
+// RETIRED 2026-10-02 (the Voice Program wave 3). It produced the arrival scene's
+// tier template, one sentence shared by every settlement of a tier ("A proper
+// village, large enough to have a market…"), and a magic line keyed only to the
+// magic slider ("A magelight lamp post marks the main gate"). The scene is now
+// composed beat by beat in ./narrative/arrivalScene.js, every beat keyed on a
+// fact the settlement holds; the culture's built detail survives as its SIGHT.
 
 // ─── buildStressProfile ───────────────────────────────────────────────────────
 // Moved to ./narrative/historyCoherence.js (max-lines leaf rule, the STRESS_DESCS
@@ -856,94 +813,18 @@ export const generatePressureSentence = settlement => {
 };
 
 // ─── generateArrivalScene ─────────────────────────────────────────────────────
-/**
- * ARRIVAL_SCENES is keyed by SCENE (market/port/river/smoke/guild/ordinary), not
- * by route — indexing it with the raw route meant only 'river' ever hit and
- * every other settlement opened on the bare '… comes into view.' fallback.
- * Deterministic route → scene mapping:
- *   crossroads             → market  (roads converge on the market square)
- *   port                   → port    (coastal harbour approach)
- *   river                  → river   (inland working-waterfront approach)
- *   isolated/mountain_pass → smoke   (you see the smoke long before the buildings)
- *   road + anything else   → ordinary (the default in generateArrivalScene)
- * 'guild' has no route that implies it; it stays reserved for a future
- * craft-economy key. Exported so the joins harness can assert the mapping
- * lands on real ARRIVAL_SCENES keys.
- */
-export const ROUTE_TO_SCENE = Object.freeze({
-  crossroads: 'market',
-  port: 'port',
-  river: 'river',
-  isolated: 'smoke',
-  mountain_pass: 'smoke',
-});
+// The route → scene mapping moved with the scene; its public import path stays
+// THIS module (the joins harness and the general desk's mirror import it here).
+export { ROUTE_TO_SCENE };
 
 /**
- * Generate the arrival scene text shown at the top of the Overview tab.
- * Combines a stress-specific vignette (or generic arrival) with an
- * architectural detail and landmark description.
+ * Generate the arrival scene text shown at the top of the Overview tab: the
+ * stress or route hook, a sight, the sound or smell of a trade the settlement
+ * practises, its people, and one closing truth, each keyed on a fact it holds
+ * (./narrative/arrivalScene.js). Runs on the assembly step's 'arrival-scene'
+ * substream.
  */
-export const generateArrivalScene = settlement => {
-  if (!settlement) return null;
-
-  const {
-    name,
-    tier,
-    config = {},
-    institutions = [],
-    stress,
-    culturalIdentity = null,
-  } = settlement;
-
-  const stresses = (stress ? (Array.isArray(stress) ? stress : [stress]) : []).map(s => s.type);
-  const primaryStress = resolvePrimaryStress(stresses);
-
-  const culture = config.culture || 'germanic';
-  const magicPriority = config.priorityMagic ?? 50;
-  const route = config.tradeRouteAccess || 'road';
-
-  // Try stress-specific vignette first
-  let openingLine;
-  // `port` describes infrastructure/connectivity, while terrain describes
-  // geography. A port on explicitly riverside terrain is an inland river port,
-  // not a seaport; route-only defaults remain coastal for backwards
-  // compatibility because getTerrainType('port') resolves to coastal.
-  const riverPort = route === 'port' && config.terrainType === 'riverside';
-  const sceneKey = riverPort ? 'river' : (ROUTE_TO_SCENE[route] || 'ordinary');
-  if (primaryStress && STRESS_DESCS[primaryStress]) {
-    openingLine = pickRandom2(STRESS_DESCS[primaryStress])(name);
-  } else if (ARRIVAL_SCENES[sceneKey]) {
-    // Generic route-based arrival, via the route → scene mapping above
-    const template = pickRandom2(ARRIVAL_SCENES[sceneKey]);
-    openingLine = typeof template === 'function' ? template(name, tier) : template;
-  } else {
-    openingLine = `${name} comes into view.`;
-  }
-
-  // Culture-specific architectural detail
-  const architecturalNote = buildTradeNarrative(
-    tier,
-    culture,
-    magicPriority,
-    culturalIdentity?.architecturalDetail,
-  );
-
-  // Landmark from institution presence
-  const landmarkNote = checkInstCompat(institutions, tier, magicPriority);
-
-  // Route-flavour addon. ARRIVAL_ADDONS is keyed by ROUTE (port/river/
-  // crossroads/road/isolated) but was indexed by economicState.tradeCommodity
-  // — a field nothing writes on economicState (historyGenerator computes
-  // tradeCommodity into history context only), so addons never fired. Index
-  // by route; templates take (name, tier). mountain_pass has no addon pool
-  // yet — the ?.length guard keeps that honest.
-  let addon = null;
-  const addonPool = ARRIVAL_ADDONS?.[riverPort ? 'river' : route];
-  if (addonPool?.length) addon = pickRandom2(addonPool)(name, tier);
-
-  const parts = [openingLine, architecturalNote, landmarkNote, addon].filter(Boolean);
-  return parts.join(' ');
-};
+export const generateArrivalScene = settlement => composeArrivalScene(settlement);
 
 // ─── generateCoherence ────────────────────────────────────────────────────────
 /**
@@ -1053,17 +934,32 @@ function inCoherenceSubstream(rng, label, operation) {
   }
 }
 
-export const generateCoherence = (settlement, coherenceRng = null) => {
+export const generateCoherence = (settlement, coherenceRng = null, pins = null) => {
   if (!settlement) return settlement;
 
   // Each output owns a stable draw budget. Conditional work in NPC enrichment
   // (for example a stress overlay) cannot move the prominent-relationship
   // selection, and narrative-only work cannot rewrite canonical NPC state.
-  const mergedNpcs = inCoherenceSubstream(
+  //
+  // ── THE ROSTER IS FINAL UNDER A HELD KEY (design §22 ruling 1, EM-R2). The key is the
+  // RECORD PATH the producer writes, per `runPipeline`'s `@typedef Pins` — never a step name
+  // and never an entity id. With `npcs` held, `enrichNpcCoherence` and its four producers
+  // (buildPoliticalNarrative, mergeNPCLists, disperseNamedRoster, enrichNPCsWithStructure) do
+  // not run and the `npc-enrichment` child stream is never forked.
+  //
+  // THE SKIP IS LAWFUL BECAUSE THE STREAM IS NAMED AND FORKED. `prng.js :: fork` derives a
+  // child from (seed, label) alone, so a child that is never created cannot move a sibling
+  // (§22.1 correction 1 admits a skip ONLY inside a writer's own named child stream; a writer
+  // on a SHARED ambient stream must consume and discard instead). `relinkFactionMembers`
+  // below is a MIRROR, not a producer, and is never gated (§22.1 correction 2).
+  //
+  // `pins` absent or null means today's behaviour EXACTLY: every existing caller keeps its
+  // arity and `chooseOrPin` calls the thunk.
+  const mergedNpcs = chooseOrPin(pins, 'npcs', () => inCoherenceSubstream(
     coherenceRng,
     'npc-enrichment',
     () => enrichNpcCoherence(settlement),
-  );
+  ));
 
   const history = settlement.history || {};
 

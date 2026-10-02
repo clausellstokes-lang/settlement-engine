@@ -82,6 +82,155 @@ export function draftTerms({ ranked, budget, margin01, press, tick }) {
 }
 
 /**
+ * ⭐ THE STANDING PEACE OFFER — the record design §19 ruling 7 found missing, and the ONE
+ * key it needs (EM-E4, wave 3; the chair's judgment 265 (d)).
+ *
+ * MEASURED BEFORE IT WAS WRITTEN: `draftTerms` above is pure and both of its callers
+ * consume its output inside the same call stack (`mintTreaty` and the negotiation
+ * evaluation), and the peace family persists only `treaties` and `envoyErrands`. So no
+ * draft ever STANDS, and ruling 7's finding is exact: without a standing record, design
+ * §17's "Write the terms" collapses into the moment of acceptance, and §18's condition for
+ * the "Accept the peace" and "Refuse it" seals — a PENDING offer from the counterparty —
+ * has nothing to read.
+ *
+ * ⛔ ONE RECORD IS BOTH, AND THAT IS THE POINT. The offer IS the draft: an offer with no
+ * terms is precisely the collapse ruling 7 names, so the terms ride on the offer rather
+ * than in a second key that could go missing beside it.
+ *
+ * ⛔ THE KEY LANDS ON THE SETTLEMENT RECORD, WHICH IS A MEASUREMENT AND A RULING. The save
+ * path writes the settlement blob WHOLE (`src/lib/saves.js` assigns the settlement to the
+ * row's data field on both the insert and the update), and EM-B3a's landed persistence
+ * suite proves the sibling `decrees` key survives save, list and write-all byte-exact, so
+ * this key needs no column and no migration. Judgment 265 (d) rules it the launch shape
+ * rather than a migration of anyone's data.
+ *
+ * ⛔ THE KEY IS NEVER MINTED ON A RECORD THAT HOLDS NO OFFER. `withPeaceOffer` returns its
+ * argument BY REFERENCE for anything that is not a real offer, because the preset lighting
+ * witness hashes a serialized year and a key minted with no cause moves a byte golden with
+ * no cause (design §12.11).
+ *
+ * ⛔ THE OFFERS ARE KEYED BY THE COUNTERPARTY, NOT LISTED, AND THE WALKER IS WHY THE SHAPE
+ * WAS RE-READ RATHER THAN THE REASON IT CHANGED. "At most one standing offer per
+ * counterparty" (design §18's condition names exactly one) was enforced by a find-then-
+ * replace over a list; keyed by the sender it is structural, the read is a lookup, and
+ * withdrawal is the removal of one key. `observedShapeReaders.walker.test.js` reported the
+ * list form as `fromId on settlement`: its documented resolution rules carry a receiver's
+ * shape through a computed member access and through an array method into the callback, so
+ * an element of `settlement[PEACE_OFFER_KEY]` grounds to the SETTLEMENT and every literal
+ * key read off it is a read of a key no settlement writer produces. That reading is true of
+ * the corpus and it is also true of the code as it was written: the counterparty's id was
+ * being asked of a settlement-shaped value. Keyed, nothing reads a literal key off an
+ * element at all. ⚠ FOR THE NEXT MEMBER: `withPeaceOffer` reads `offer.fromId` off its own
+ * BARE PARAMETER, which the scanner leaves ungrounded only while no `src/` caller hands it
+ * a settlement-derived value; the first live caller should pass an offer built by
+ * `draftPeaceOffer` rather than one read back out of a record.
+ *
+ * ⛔ THE KEY ORDER IS CODEPOINT, NOT ARRIVAL, which is this module's own convention
+ * (`draftTerms` sorts its terms for exactly this reason): two histories that reach the same
+ * standing set must serialize alike, or a save's bytes would carry the order in which its
+ * wars happened to be sued.
+ *
+ * PURE. No clock, no draw, no id: the tick and the parties are the caller's, exactly as
+ * EM-C1's `stage` takes its own stamp.
+ */
+export const PEACE_OFFER_KEY = 'peaceOffers';
+
+/**
+ * @typedef {{ fromId: string, toId: string, terms: readonly TermRecord[],
+ *   budgetSpent: number, draftedTick: number }} PeaceOffer
+ */
+
+/** @param {unknown} value @returns {value is Record<string, unknown>} a plain object, never an array and never null */
+function isBag(value) {
+  return !!value && typeof value === 'object' && !Array.isArray(value);
+}
+
+/** @param {unknown} value @returns {value is string} a non-empty string */
+function isId(value) {
+  return typeof value === 'string' && value.length > 0;
+}
+
+/** One frozen empty record, so a settlement with no offer allocates nothing and compares alike. */
+const EMPTY_OFFERS = Object.freeze({});
+
+/** @param {Record<string, unknown>} bag @returns {Readonly<Record<string, unknown>>} the same entries, codepoint-keyed */
+function sealByKey(bag) {
+  /** @type {Record<string, unknown>} */
+  const sorted = {};
+  for (const key of Object.keys(bag).sort()) sorted[key] = bag[key];
+  return Object.freeze(sorted);
+}
+
+/**
+ * Draft one standing offer from the drafting table's own output. REFUSED, with nothing
+ * returned: a missing party, a party offering peace to itself, or a draft with no term at
+ * all. A term list is copied, so the offer cannot be edited through the caller's array.
+ *
+ * @param {{ fromId: unknown, toId: unknown, terms: unknown, budgetSpent?: unknown, tick?: unknown }} args
+ * @returns {PeaceOffer|null}
+ */
+export function draftPeaceOffer({ fromId, toId, terms, budgetSpent, tick }) {
+  if (!isId(fromId) || !isId(toId) || fromId === toId) return null;
+  if (!Array.isArray(terms) || terms.length === 0) return null;
+  const spent = Number(budgetSpent);
+  const at = Number(tick);
+  return /** @type {PeaceOffer} */ (Object.freeze({
+    fromId,
+    toId,
+    terms: Object.freeze([...terms]),
+    budgetSpent: Number.isFinite(spent) ? spent : 0,
+    draftedTick: Number.isFinite(at) ? at : 0,
+  }));
+}
+
+/**
+ * The offers standing on one settlement record, KEYED BY THE COUNTERPARTY that made each.
+ * Total on garbage and on absence: anything that is not a plain bag reads as none.
+ * @param {unknown} settlement @returns {Readonly<Record<string, PeaceOffer>>}
+ */
+export function peaceOffersOf(settlement) {
+  const held = isBag(settlement) ? settlement[PEACE_OFFER_KEY] : undefined;
+  return /** @type {Readonly<Record<string, PeaceOffer>>} */ (isBag(held) ? held : EMPTY_OFFERS);
+}
+
+/**
+ * ⭐ DESIGN §18's WORLD-STATE CONDITION, READ FROM THE RECORD. "Accept the peace" and
+ * "Refuse it" are offered only where a PENDING offer from that counterparty stands; this
+ * is the read that decides it, and a card that finds nothing says so in the herald's voice
+ * and names the act that would create the condition rather than refusing anything.
+ * @param {unknown} settlement @param {unknown} fromId @returns {PeaceOffer|null}
+ */
+export function pendingPeaceOfferFrom(settlement, fromId) {
+  if (!isId(fromId)) return null;
+  const offers = peaceOffersOf(settlement);
+  return Object.hasOwn(offers, fromId) ? offers[fromId] : null;
+}
+
+/**
+ * Stand one offer on the record, under the counterparty that made it. A second suing by
+ * the same counterparty REPLACES its own standing offer and touches no other. Returns the
+ * record BY REFERENCE when the offer is not a real one.
+ * @param {unknown} settlement @param {unknown} offer @returns {unknown}
+ */
+export function withPeaceOffer(settlement, offer) {
+  if (!isBag(settlement) || !isBag(offer) || !isId(offer.fromId)) return settlement;
+  return { ...settlement, [PEACE_OFFER_KEY]: sealByKey({ ...peaceOffersOf(settlement), [offer.fromId]: offer }) };
+}
+
+/**
+ * Take one counterparty's offer off the record, which is what acceptance and refusal both
+ * do to it. Returns the record BY REFERENCE when no such offer stands, so a settlement
+ * that never held one never gains the key.
+ * @param {unknown} settlement @param {unknown} fromId @returns {unknown}
+ */
+export function withoutPeaceOffer(settlement, fromId) {
+  if (!isBag(settlement) || !pendingPeaceOfferFrom(settlement, fromId)) return settlement;
+  const kept = { ...peaceOffersOf(settlement) };
+  delete kept[String(fromId)];
+  return { ...settlement, [PEACE_OFFER_KEY]: sealByKey(kept) };
+}
+
+/**
  * A TERM'S SHARE IN WORDS, smallest first (TE-HERALD-1). A treaty term's magnitude is a
  * share of a treasury or an export — a fraction of a quantity no reader can see, so the
  * ruled boundary retires the percentage. The YEARS beside it STAY: a term of three years

@@ -5580,7 +5580,7 @@ SOAK.**
 
 The stop question — *does adding a service move generated output?* — was the whole wave, and
 the answer is CONDITIONAL. Service selection draws from the SHARED seeded stream at two
-sites: `institutionServices.js:177` per candidate service, and
+sites: `src/generators/services/institutionServices.js :: getServicesForInstitution` per candidate service, and
 `serviceRollMaterialization.js:224` again for any criminal-category service from a criminal
 provider. **Four scratch probes, each regenerating all 525 golden-master settlements as
 OBJECTS and deep-diffing field by field with array indices collapsed:**
@@ -5648,7 +5648,7 @@ criminal keyword. It is now host-independent.
 ### TWO MORE UNREACHABILITIES, RECORDED NOT FIXED
 
 **`requiredTradeRoute` is set ZERO times** across all 961 authored defs — the vocabulary is
-exactly `{on, p, desc}` — so the conjunction at `institutionServices.js:178` is unreachable
+exactly `{on, p, desc}` — so the conjunction at `src/generators/services/institutionServices.js :: getServicesForInstitution` is unreachable
 from native data. Same class as the estate's recorded unreachable-predicate-conjunction
 hazard. And **`on` is a plain boolean in 961/961 authored defs** (591 true / 370 false); the
 `{allow, force}` object form is reachable only through the DM override channel.

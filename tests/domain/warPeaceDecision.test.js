@@ -772,3 +772,42 @@ describe('WR-6 live peace closure parity', () => {
     ))).toHaveLength(2);
   });
 });
+
+// FPQ-49 (cure lane WR-RECALL, unit U1): the WR-1 lane of the same cure. An accepted offer
+// reaches the one recall line through the existing label writer, and on a 'rival' war edge
+// that line used to stamp nothing: the label stepped, the treaty followed, and the siege
+// ground on (findings/FP-PEACE-SUIT.md §0 item 6 d, run E-m-s2: a treaty at t9, the siege to t66).
+describe('FPQ-49 — two yeses recall the army on a rival war edge too', () => {
+  function rivalWar(f) {
+    const graph = ensureRegionalGraph({ edges: [{ ...EDGE, relationshipType: 'rival' }], channels: [] }, { now: NOW });
+    const worldState = {
+      ...f.worldState,
+      relationshipStates: { [KEY]: { ...f.worldState.relationshipStates[KEY], relationshipType: 'rival' } },
+    };
+    const offer = outcome({
+      relationshipPatch: { proposedRelationshipType: 'trade_partner', trajectory: 'transitioning' },
+      proposalPayload: { fromType: 'rival', toType: 'trade_partner' },
+    });
+    return { graph, worldState, offer };
+  }
+  const labelOf = (result) => result.regionalGraph.edges.find((edge) => edge.id === EDGE.id).relationshipType;
+
+  it('an accepted rival→trade_partner offer steps the label AND recalls the besieging army', () => {
+    const f = fixture({ targetPopulation: 12000, targetExhaustion: 1 });
+    const { graph, worldState, offer } = rivalWar(f);
+    const result = apply(f, worldState, f.saves, graph, offer);
+    expect(result.autoApplied[0].metadata.peaceDecision.decision).toBe('accept');
+    expect(labelOf(result)).toBe('trade_partner');
+    expect(result.worldState.deployments.offerer.recalled).toMatchObject({ cause: 'sue_for_peace', tick: 12 });
+  });
+
+  it('CONTROL: a refused rival offer keeps the label and the army at the walls (a no never reaches the recall)', () => {
+    const f = fixture({ targetPopulation: 120, targetExhaustion: 0 });
+    const { graph, worldState, offer } = rivalWar(f);
+    const result = apply(f, worldState, f.saves, graph, offer);
+    expect(result.autoApplied[0].candidateType).toBe('peace_refused');
+    expect(labelOf(result)).toBe('rival');
+    // anchored: the refusal is priced on the first line of this arm, so the unstamped army is the refusal's.
+    expect(result.worldState.deployments.offerer.recalled).toBeUndefined();
+  });
+});

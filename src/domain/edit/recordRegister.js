@@ -31,10 +31,14 @@ export const RECORD_CLASSES = Object.freeze({
   structuralSuggestions: 'READING', structuralViolations: 'READING', tier: 'READING',
   // AUTHORED (2 live) — the DM's and the clerk's words, untouched BY CLASS.
   userCanon: 'AUTHORED', aiOverlays: 'AUTHORED',
-  // SAVED-ONLY (4) — generation produces none of these; see SAVED_ONLY_KEYS.
+  // SAVED-ONLY (7) — generation produces none of these; see SAVED_ONLY_KEYS.
   neighbourNetwork: 'HELD', interSettlementRelationships: 'HELD',
   crossSettlementConflicts: 'HELD', populationHistory: 'HISTORY',
-  // THE EDITOR'S (2) — declared ahead; asserted ABSENT until an editor packet writes them.
+  // ⭐ NOTE-14: EM-E4's standing peace offers, keyed by the counterparty that made each. HELD
+  //    with its three cross-settlement neighbours above and for their reason: it is a
+  //    first-hand relational fact the simulation states and generation never re-derives.
+  peaceOffers: 'HELD',
+  // THE EDITOR'S (2) — SAVED-ONLY since the editor landed its writers; see SAVED_ONLY_KEYS.
   dmLayer: 'AUTHORED', decrees: 'AUTHORED',
 });
 
@@ -49,14 +53,115 @@ export const GENERATED_KEYS = Object.freeze([
   'settlementReason', 'simulationTrace', 'simulationVersion', 'spatialLayout', 'stress',
   'stressors', 'structuralSuggestions', 'structuralViolations', 'tier', 'userCanon',
 ]);
-/** Written only by the save path, the campaign or the pulse — never by generation. */
+/** Written only by the save path, the campaign, the pulse or the EDITOR — never by generation.
+ *  ⭐ THE EDITOR'S TWO JOINED THIS CLASS AT THE OBSERVED-SHAPE REGISTER'S SCHEMA-23 RUNG, which
+ *  is where the claim is PROVED rather than merely asserted: that rung's gate 0 re-reads each
+ *  named writer out of the scanned tree on every scan, so a key listed here whose writer is
+ *  deleted or renamed reds the register instead of leaving a stale row. Their writers are no
+ *  longer named in this sentence — they are DATA, in `SAVED_KEY_WRITERS` below, so that the
+ *  claim is re-derived from source by an arm rather than believed from a comment (U62).
+ *  The other four keep the writers they always had (the save path's neighbour back-link, the
+ *  link/undo/import paths, and the campaign's population history). `peaceOffers` joined at
+ *  NOTE-14 through the same door and carries its writers in that same table. */
 export const SAVED_ONLY_KEYS = Object.freeze([
   'neighbourNetwork', 'interSettlementRelationships', 'crossSettlementConflicts', 'populationHistory',
+  'dmLayer', 'decrees', 'peaceOffers',
 ]);
-/** Declared but not yet written anywhere. Arm A1 asserts their ABSENCE, never their shape.
- *  ⚠ `crossSettlementConflicts` is here because NOTHING IN src/ WRITES IT: two readers merge it
- *  and the public allow-list names it (RelationshipsTab.jsx:59; relationshipsDeskRead.js:156). */
-export const NOT_YET_WRITTEN_KEYS = Object.freeze(['dmLayer', 'decrees', 'crossSettlementConflicts']);
+
+/**
+ * ⭐ EVERY WRITER OF THE SAVED-ONLY KEYS THAT HAVE ONE, BY FILE AND BY SYMBOL — U62, and the row
+ * it closes said this register "names ONE writer per save-time key" while the tree carried more.
+ * A claim about who writes a key is exactly the kind that rots between landings: EM-E8 added a
+ * whole-record write of `dmLayer` at the roster tick, EM-E1's rewind added three `decrees`
+ * writes on the undo path, and EM-C1b's per-save resolution added a fourth in the pulse's own
+ * hook — none of which a prose sentence naming two sites could notice.
+ *
+ * ⛔ THE ROW IS NOT THE PROOF; THE ARM IS. `tests/lint/heldKeyWriterCensus.walker.test.js`'s A7
+ * RE-DERIVES this set out of `src/` on every run and holds it equal BOTH WAYS — a writer that
+ * appears, moves symbol, moves file or retires reds by name, and a row here that resolves to no
+ * site reds too. That is the promotion census's A3 idiom: a claim re-derived every run, never
+ * believed. This table is therefore a MEASUREMENT of the tree, not an intention about it.
+ *
+ * `sites` is the number of write sites of that key inside that symbol, so the undo path's two
+ * rehydration branches cannot silently collapse into one. `spelling` is the shape the arm's
+ * scanner matches: `assign` is `<expr>.<key> = …`, `literal` is `<key>: …` inside an object
+ * literal that rebuilds the record, and `computed` is `[<CONST>]: …` opening a property of one.
+ *
+ * ⚠ `reachedFromSrc` IS THE SECOND MEASUREMENT AND IT IS THE ONE THAT KEEPS THIS TABLE HONEST.
+ * A declared writer is not a live one: NOTE-14's `peaceOffers` has two writers in `src/` and NO
+ * `src/` caller reaches either, so no save carries the key today. `false` says exactly that, the
+ * arm re-derives it from the call graph, and the day a caller lands the row reds until it is
+ * told the truth. That is a different fact from `NOT_YET_WRITTEN_KEYS`, which is for a key with
+ * no writer at all.
+ */
+export const SAVED_KEY_WRITERS = Object.freeze([
+  Object.freeze({
+    key: 'dmLayer', file: 'src/store/editSlice.js', symbol: 'applyCascadeEdit',
+    sites: 1, spelling: 'assign', reachedFromSrc: true,
+  }),
+  Object.freeze({
+    key: 'dmLayer', file: 'src/store/editSlice.js', symbol: 'applyPlainEditToDraft',
+    sites: 1, spelling: 'assign', reachedFromSrc: true,
+  }),
+  // EM-E8's whole-record write: the roster tick re-derives the world and carries the layer onto
+  // the fresh record, so the key is written on an object that is not `state.settlement` yet.
+  Object.freeze({
+    key: 'dmLayer', file: 'src/store/editSlice.js', symbol: 'applyRosterDecreesAtTick',
+    sites: 1, spelling: 'assign', reachedFromSrc: true,
+  }),
+  Object.freeze({
+    key: 'decrees', file: 'src/store/editSlice.js', symbol: 'commitRegistry',
+    sites: 1, spelling: 'assign', reachedFromSrc: true,
+  }),
+  // EM-E4d unit 1 (97f18610b): a seal's click stages the act it names — the seal writer commits
+  // its decree row through the registry, a second `decrees` write in editSlice.js beside
+  // commitRegistry. Re-recorded at the train tip by the chair, 2026-09-23 (judgment 271's idiom).
+  Object.freeze({
+    key: 'decrees', file: 'src/store/editSlice.js', symbol: 'stageSealDecreeIntent',
+    sites: 1, spelling: 'literal', reachedFromSrc: true,
+  }),
+  // EM-F3d (b5d5ca71f): the delete scrubs every edge that names the deleted save — the scrub
+  // withdraws the pending rows naming the counterparty through the registry's typed verb, a
+  // third `decrees` write in editSlice.js. Re-recorded at the train tip by the chair, 2026-09-23.
+  Object.freeze({
+    key: 'decrees', file: 'src/store/editSlice.js', symbol: 'scrubDeletedCounterparty',
+    sites: 1, spelling: 'literal', reachedFromSrc: true,
+  }),
+  // EM-E1's rewind, three sites in one symbol: the library row, and the live view on EACH of the
+  // two rehydration branches. The `sites: 3` is what keeps the pair of branches visible.
+  Object.freeze({
+    key: 'decrees', file: 'src/store/campaignWorldPulseDeferred.js', symbol: 'restorePulseSnapshotOnDraft',
+    sites: 3, spelling: 'assign', reachedFromSrc: true,
+  }),
+  // EM-C1b's per-save resolution: the pulse's own hook rebuilds the save around a new registry.
+  Object.freeze({
+    key: 'decrees', file: 'src/domain/worldPulse/decreeHook.js', symbol: 'applyDecreesToSaves',
+    sites: 1, spelling: 'literal', reachedFromSrc: true,
+  }),
+  // ⭐ NOTE-14's two, and they are the reason `reachedFromSrc` exists. Both stand or lift one
+  // counterparty's offer by rebuilding the record around `PEACE_OFFER_KEY`, and BOTH ARE
+  // UNREACHED: measured at this tip, nothing in `src/` calls either one, so the key is declared
+  // and classed but no save carries it yet.
+  Object.freeze({
+    key: 'peaceOffers', file: 'src/domain/worldPulse/peaceTermsDrafting.js', symbol: 'withPeaceOffer',
+    sites: 1, spelling: 'computed', reachedFromSrc: false,
+  }),
+  Object.freeze({
+    key: 'peaceOffers', file: 'src/domain/worldPulse/peaceTermsDrafting.js', symbol: 'withoutPeaceOffer',
+    sites: 1, spelling: 'computed', reachedFromSrc: false,
+  }),
+]);
+/** Declared, classed SAVED-ONLY, and still written by NOTHING IN src/ — an OVERLAY on the list
+ *  above rather than a class of its own, so arm A1 asserts both the partition and this subset.
+ *  ⚠ `crossSettlementConflicts` is the whole of it because nothing in src/ writes the key: two
+ *  readers merge it and the public allow-list names it (RelationshipsTab.jsx:59;
+ *  relationshipsDeskRead.js:156), and the observed-shape register drove the identity
+ *  `crossSettlementConflicts on settlement` to ZERO addresses at its schema-22 rung.
+ *  ⛔ `dmLayer` and `decrees` LEFT THIS LIST AT THE SCHEMA-23 RUNG, and the distinction is the
+ *  point: they are no longer declared-ahead, they are WRITTEN — by the store, one lifecycle step
+ *  outside generation — which is exactly why their reads had to be admitted to that register
+ *  rather than refused by it. */
+export const NOT_YET_WRITTEN_KEYS = Object.freeze(['crossSettlementConflicts']);
 
 /** Sub-paths whose class differs from their parent's. The WHOLE exception list. */
 export const CLASS_EXCEPTIONS = Object.freeze({
@@ -64,6 +169,15 @@ export const CLASS_EXCEPTIONS = Object.freeze({
   'factions[].members[]': 'MIRROR',
   // ⭐ MEASURED, not named: the ONLY receipt sub-path that reads an input the record lacks.
   'generationCoherenceReceipt.repairs': 'HISTORY',
+  // ⛔ ONE PATH, TWO DECLARATIONS, TWO DIFFERENT ACTS -- and it is in both tables on purpose.
+  //    ATOMIC_COLLECTIONS governs THE MERGE: the evidence array has no sound key, so the tree
+  //    merge takes it from R1 as ONE value, exactly as it always has.
+  //    This MIRROR row governs THE POST-PASS: the two PROSE-COUNT rows the receipt carries
+  //    (finalGraph's NPC and relationship counts, narrative's historical-event count) are a pure
+  //    function of the MERGED record's own HELD rosters, RESTATED after the merge and never
+  //    merged. Only the digits those two patterns capture move; no other character does.
+  //    generationCoherenceReceipt.repairs stays HISTORY and is neither read nor written by it.
+  'generationCoherenceReceipt.judgments[].evidence': 'MIRROR',
 });
 
 /** Collections merged BY a declared key (48). A string is one field; an array is a composite. */
@@ -146,7 +260,11 @@ export const CROSS_ENTRY_TOTALS = Object.freeze({
 });
 
 /** ⚠ Rows whose longest observed array is ONE entry: the corpus cannot test uniqueness there,
- *  so the key is declared on its STABILITY and NAMED as unproven. */
+ *  so the key is declared on its STABILITY and NAMED as unproven.
+ *  2026-10-01, the urban band (ODQ §934.86): `generationCoherenceReceipt.repairs` JOINS (9 -> 10). Over the
+ *  re-generated corpus no world carries more than one repair, so the corpus can no longer test that collection's key
+ *  for uniqueness; the arm's own words are "a row that loses its multi-entry observations must JOIN it". The set is
+ *  the one tests/lint/recordRegisterTotality.walker.test.js A4 measures and prints. */
 export const KEY_UNPROVEN_AT_LENGTH_ONE = Object.freeze([
   'activeConditions',
   'activeConditions[].causes',
@@ -156,6 +274,7 @@ export const KEY_UNPROVEN_AT_LENGTH_ONE = Object.freeze([
   'defenseProfile.institutions.watch',
   'economicViability.warnings',
   'generationCoherenceReceipt.authoredTensions',
+  'generationCoherenceReceipt.repairs',
   'structuralSuggestions',
 ]);
 

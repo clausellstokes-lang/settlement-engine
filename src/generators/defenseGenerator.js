@@ -17,6 +17,7 @@ import {
 import { hasTradeRouteConnection } from '../domain/tradeRouteSemantics.js';
 import { partitionDefenseInstitutions } from '../domain/institutions/defenseInstitutionBuckets.js';
 import { resolveGenerationWorldLaw } from './generationContext.js';
+import { readinessBandOf } from '../data/bandLadders.js';
 
 // ─── getDefenseInstitutions ───────────────────────────────────────────────────
 /**
@@ -78,7 +79,11 @@ const computeDefenseScores = (
 ) => {
   const hasStress = (type) => stressTypes.includes(type);
   const route     = config.tradeRouteAccess || 'road';
-  const magicOn   = config.magicExists !== false; // no-magic mode suppresses supernatural effects
+  // J32 (2026-10-01): the WORLD LAW's reading, not the bare switch: magic exists AND its dial is above 0. A divine
+  // tradition is gated by religion, not the dial, so at dial 0 it opened magical defence the owner ruled out ("faith is
+  // not magic only applies to the institutions, but not divine magic substitute services").
+  const worldLaw  = resolveGenerationWorldLaw(null, config);
+  const magicOn   = worldLaw.magicEnabled; // no-magic mode suppresses supernatural effects
   const magPri    = magicOn ? (config.priorityMagic ?? 50) : 0;
   const relPri    = config.priorityReligion ?? 50;
   const TIER_ORD  = ['thorp','hamlet','village','town','city','metropolis'];
@@ -110,8 +115,11 @@ const computeDefenseScores = (
 
   // Druid/nature tradition — not route-gated, but more likely in certain contexts
   const hasDruid    = magicOn && magPri >= 30 && hasInst(
-    'druid circle','grove shrine','elder grove','warden\'s lodge','sacred grove'
+    'druid circle','grove shrine','elder grove','sacred grove'
   );
+  // Warden's Lodge is DEFENCE, NOT DRUID (the owner, 2026-10-01): a ranger post, not a druid tradition, so it
+  // defends in every world, magic or not, with the druid tradition's own +12 for beast lore and tracking (J31).
+  const hasWardens  = hasInst('warden\'s lodge');
 
   // Alchemy — amplifier tradition, lower magic threshold
   const hasAlchemy  = magicOn && magPri >= 15 && hasInst(
@@ -202,6 +210,7 @@ const computeDefenseScores = (
   if (inst.hasWalls)       monster += 20;
   if (inst.hasMilitia)     monster += 12;
   if (inst.hasHospital)    monster +=  5;
+  if (hasWardens)          monster += 12; // rangers: beast lore, tracking (mundane)
 
   // Tradition bonuses — capped at +35 combined
   let monsterMagicBonus = 0;
@@ -261,7 +270,6 @@ const computeDefenseScores = (
   // gates the ability to mobilize it (see econHealthMult below) — a destitute
   // town does not get "Strong economic base" for owning a granary building.
   const foodSec = config._foodSecurity;
-  const worldLaw = resolveGenerationWorldLaw(null, config);
   const storageMonths = foodSec?.storageMonths ?? (inst.hasGranary ? 4 : 1);
   // Storage → score: 0mo=0, 1mo=10, 3mo=25, 6mo=45, 12mo=70 (diminishing returns)
   const storageScore = Math.min(70, Math.round(storageMonths <= 1 ? storageMonths * 10
@@ -297,7 +305,8 @@ const computeDefenseScores = (
   const _isSmallTier = ['thorp','hamlet','village'].includes(tier);
   // For the tier gate: hasDivine means actual miracle/healing presence, not just a standard parish.
   // Parish church is universal at village+ — it shouldn't unlock magical defense on its own.
-  // Use hasInst() which is already available in this scope.
+  // J30: a druid opens none where the world law reads no magic ("their effect of food or defense does not exist in non
+  // magic settings") — `!magicOn` below is that reading (J32), so the druid needs no gate of its own here.
   const _hasActualMagic = inst.hasMagicInst || hasDruid || hasArcane
     || hasInst('healer','monastery','cathedral','divine','healing','druid','wizard','mage','arcane','enchant');
   const _hasMagicInstitution = _hasActualMagic;
@@ -512,14 +521,8 @@ const computeDefenseReadiness = (scores, threat, tier, magicExists = true) => {
   // Persist the numeric readiness alongside the label. It was previously computed
   // here and discarded (only the label survived), which left causalState's measured
   // readiness read permanently dead. Additive: existing consumers use .label/.color.
-  const band =
-    readiness >= 76 ? { label: 'Fortress',         color: '#1a4a2a', background: '#f0faf2', border: '#a8d8b0' } :
-    readiness >= 55 ? { label: 'Well-Defended',    color: '#1a3a6a', background: '#f0f4fa', border: '#a8c0d8' } :
-    readiness >= 38 ? { label: 'Defensible',       color: '#5a6a1a', background: '#f4f8ec', border: '#b8d0a8' } :
-    readiness >= 24 ? { label: 'Lightly Defended', color: '#7a5010', background: '#faf6ec', border: '#e0c880' } :
-    readiness >= 12 ? { label: 'Vulnerable',       color: '#8a3010', background: '#fdf8ec', border: '#e8c080' } :
-                      { label: 'Undefended',       color: '#8b1a1a', background: '#fdf4f4', border: '#e8c0c0' };
-  return { score: readiness, ...band };
+  const band = readinessBandOf(readiness);
+  return { score: readiness, label: band.label, color: band.color, background: band.background, border: band.border };
 };
 
 // ─── generateDefenseProfile ───────────────────────────────────────────────────

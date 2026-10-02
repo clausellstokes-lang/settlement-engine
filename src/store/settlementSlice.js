@@ -627,7 +627,19 @@ export const createSettlementSlice = (set, get) => ({
     set(state => {
       state.savedSettlements = state.savedSettlements.filter(s => String(s.id) !== String(id));
     });
-    return { ok: true, settlementId: id };
+    // ⛔ THE EDGE SCRUB, IN THE SAME ACT (EM-F3d; the verifier's STOP-2, judgments 291/308).
+    // A PENDING decree whose off-stage op names the deleted row used to OUTLIVE its target,
+    // and EM-F3b's claim walk re-mints a deleted phantom's id for the next counterparty — so
+    // the DM's decree against Greymoor silently began reading against a stranger. This act is
+    // the one that knows the id is gone, so it withdraws those entries with §20.3's
+    // `target_deleted` rather than leaving three readers to each guard the same fact.
+    // ⛔ DYNAMIC, AND FIRE-AND-FORGET, exactly as notePersistedSave's lanes are: this slice is
+    // EAGER and editSlice.js is not, so a static edge would drag the whole edit layer and its
+    // registry into first paint (EAGER_FIRST_PAINT_MODULES, measured at 270 either way). The
+    // promise rides the receipt so a caller — and the acceptance suite — can await the scrub
+    // instead of guessing at a microtask; a lane that cannot load leaves the delete itself
+    // untouched and never throws into it. The return's own `ok` contract is unchanged.
+    return { ok: true, settlementId: id, scrubbed: import('./editSlice.js').then(lane => lane.scrubDeletedCounterparty(get, set, id)).catch(() => null) };
   },
 
   // Shapeless-patch cure (R-3, atlas VI.12 #163b): the patchable surface is the

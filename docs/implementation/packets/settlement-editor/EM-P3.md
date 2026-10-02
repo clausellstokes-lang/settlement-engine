@@ -364,7 +364,7 @@ node tools/attrib.config.mjs  # the chair kit's per-module rendered-length attri
                               # swept over EVERY emitted chunk, both builds
 
 # ⛔ VERIFY_DIST=1 IS LOAD-BEARING, NOT DECORATION. Both files' dist arms are
-#    describe.runIf(DIST_EXISTS) (generationWorkerLazy.test.js:327): without it the
+#    describe.runIf(DIST_EXISTS) (generationWorkerLazy.test.js :: 'generation worker — production boundary'): without it the
 #    ceiling arm SILENTLY SKIPS and the green means nothing.
 # ⭐ HOW THE ENV REACHES THE GATE. The manifest's `checks` are argv arrays spawned
 #    with `shell: false` (implementation-gate.mjs:186-194), so no row can carry an

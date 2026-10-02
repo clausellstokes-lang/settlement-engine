@@ -57,4 +57,29 @@ describe('PricingMomentCard — anon signup/unlock routing (#16)', () => {
     expect(state.setPurchaseModalOpen).toHaveBeenCalledWith(true);
     expect(state.setAuthModalOpen).not.toHaveBeenCalled();
   });
+
+  // THE TEARDOWN LEAK (GitHub run 35846674831, job "Coverage floors (money /
+  // security)", 2026-09-23: 489 files and 4,294 tests PASSED and vitest still
+  // exited 1). Dismissing arms a 220 ms exit-animation timer whose callback
+  // dispatches setState. Unreleased, it outlives the unmount that afterEach
+  // (cleanup) performs and fires after the jsdom environment is torn down, where
+  // React's resolveUpdatePriority reads window and throws "ReferenceError: window
+  // is not defined" as an UNHANDLED error no test owns. Fake timers turn that
+  // race into a readable count: the pin is the pending-handle count at unmount,
+  // which is deterministic, rather than the throw, which is timing-dependent.
+  // The other cases in this file keep real timers - the finally restores them.
+  test('the exit timer is released on unmount, so nothing dispatches into a torn-down tree', () => {
+    vi.useFakeTimers();
+    try {
+      const view = mount('signup_unlock');
+      fireEvent.click(screen.getByRole('button', { name: /Not now/i }));
+      // Liveness: the dismiss really armed a handle, so the zero below is the
+      // release and not a case that quietly stopped exercising the exit path.
+      expect(vi.getTimerCount()).toBeGreaterThan(0);
+      view.unmount();
+      expect(vi.getTimerCount()).toBe(0);
+    } finally {
+      vi.useRealTimers();
+    }
+  });
 });

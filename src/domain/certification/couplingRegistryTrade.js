@@ -68,3 +68,52 @@ export const TR1_SEVERANCE_PRESSURE_COUPLING = couplingRow({
 export const TR1_CASUS_COMMERCII_COUPLINGS = Object.freeze([
   TR1_SEVERANCE_PRESSURE_COUPLING,
 ]);
+
+/**
+ * TR-3 / CPL-9 INFO→TRADE. THE BELIEVED MARKET'S ONE READ.
+ *
+ * The WHERE composer (spatial/dispatchDestination.js, TRADE) reads what the supplying court
+ * BELIEVES of each market's plenty in a good's class, through the INFO leaf that reads SP-B's
+ * scarcity family (worldPulse/beliefScarcity.js), and orders the destination loop by it: the
+ * markets believed dearest are served first. That import is the pair this row licenses, landing
+ * in the same commit as the read (the same-commit obligation). Seam Three's whitelist makes this
+ * the ONE module that reads the belief side beside a truth-side read, and it never merges them.
+ *
+ * THE COUNTERFORCE READS THE SAME EVIDENCE WITH THE OTHER SIGN: the wrong-market arrival
+ * (`wrongMarketArrival`) takes the very belief that ordered the queue and convicts it against the
+ * glut the caravan found — "the crowd is the correction; arrivals write the glut home" — so the
+ * row that says belief moves caravans also says where belief is caught out.
+ *
+ * WHERE THE RECEIPT LIVES. The order is transient and the tellable is RETURNED, so neither can be
+ * sampled from state; the persisted evidence of the read is the belief record itself, the one the
+ * composer read, addressed at the family's field with its confidence and its age. It is
+ * state-rooted, which the CW-0w sampler requires of a new row.
+ *
+ * WHAT THIS ROW DOES NOT CLAIM. It declares no `kinds`: the read moves a queue order, and the
+ * Herald kind that voices the counterforce's evidence (marketNews.js) belongs to the evidence,
+ * not to this coupling.
+ */
+export const TR3_BELIEVED_DEARNESS_COUPLING = couplingRow({
+  couplingId: 'CPL-9.INFO_TO_TRADE.TR-3.believed_dearness',
+  pairId: 'CPL-9',
+  direction: 'INFO→TRADE',
+  read: 'src/domain/spatial/dispatchDestination.js#composeDispatchOrder',
+  receiptField: 'spatialLedgers.beliefMaps[...].seat[...].{scarcityBands,confidence01,lastUpdateTick}',
+  counterforce: 'src/domain/spatial/dispatchDestination.js#wrongMarketArrival',
+  // Every conjunct the read needs to see anything: the commodity layer that hosts the loop,
+  // SP-B's door for the scarcity family (the axes AND the family), and this wave's own key.
+  flags: Object.freeze([
+    'beliefAxesEnabled',
+    'believedMarketsEnabled',
+    'believedScarcityEnabled',
+    'commodityFlowEnabled',
+  ]),
+  owningVolume: 'TRADE',
+  owningWave: 'TR-3',
+  intendedDesk: 'trade',
+});
+
+/** The TR-3 cross-layer reads, in decision-flow order. */
+export const TR3_BELIEVED_MARKETS_COUPLINGS = Object.freeze([
+  TR3_BELIEVED_DEARNESS_COUPLING,
+]);

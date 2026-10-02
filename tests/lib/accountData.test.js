@@ -83,6 +83,25 @@ function archiveFor(items = []) {
   });
 }
 
+/**
+ * One PAUSED campaign, shaped as `buildPausedAdvanceCursor` parks it: the pre-interval
+ * undo cursor nests a WHOLE settlement per member plus one for the live view (EM-B3f).
+ */
+function pausedCampaign(saves, active) {
+  return {
+    id: 'c1',
+    name: 'Riverhold',
+    settlementIds: ['a', 'b'],
+    worldState: {
+      tick: 4,
+      pausedAdvance: {
+        interval: 'one_year',
+        preIntervalUndo: { campaignId: 'c1', saves, active },
+      },
+    },
+  };
+}
+
 describe('buildAccountExport', () => {
   it('captures portable account state plus export-only operator/compliance records', async () => {
     const { buildAccountExport, ACCOUNT_EXPORT_VERSION } = await load();
@@ -359,6 +378,168 @@ describe('buildAccountExport', () => {
     expect(downloads[1].filename).toMatch(/-service-records\.json$/);
     expect(JSON.parse(downloads[0].json).serviceRecords.operatorMessages).toEqual([]);
     expect(JSON.parse(downloads[1].json).serviceRecords.operatorMessages[0].id).toBe('large-message');
+  });
+
+  it('strips the editor keys from a paused campaign parked snapshot, in saves and in active', async () => {
+    const { buildAccountExport } = await load();
+    const ash = {
+      id: 'a', name: 'Ash', population: 120, dmLayer: { note: 'private' }, decrees: [{ id: 'd1' }],
+    };
+    const birch = {
+      id: 'b', name: 'Birch', population: 340, dmLayer: { note: 'private' }, decrees: [{ id: 'd2' }],
+    };
+    const live = pausedCampaign(
+      [
+        { id: 'a', settlement: ash, campaignState: { phase: 'season' } },
+        { id: 'b', settlement: birch, campaignState: { phase: 'season' } },
+      ],
+      { saveId: 'a', settlement: ash },
+    );
+
+    const out = buildAccountExport({ auth: { user: { email: 'me@x.test' } }, campaigns: [live] });
+    const cursor = out.campaigns[0].worldState.pausedAdvance;
+    const snapshot = cursor.preIntervalUndo;
+    const serialized = JSON.stringify(out);
+
+    // LIVENESS: the cursor, both members, their order and every sibling survive the
+    // strip. Without these the two absences below could be true of an emptied export.
+    expect(snapshot.saves.map(member => member.id)).toEqual(['a', 'b']);
+    expect(snapshot.active.saveId).toBe('a');
+    expect(cursor.interval).toBe('one_year');
+    expect(out.campaigns[0].worldState.tick).toBe(4);
+    expect(out.campaigns[0].name).toBe('Riverhold');
+    expect(out.campaigns[0].settlementIds).toEqual(['a', 'b']);
+    expect(snapshot.saves.map(member => member.campaignState.phase)).toEqual(['season', 'season']);
+    expect(snapshot.saves.map(member => member.settlement.population)).toEqual([120, 340]);
+    expect(snapshot.active.settlement.population).toBe(120);
+    // …and neither private key leaves the account, at any depth.
+    expect(serialized.includes('"dmLayer"')).toBe(false);
+    expect(serialized.includes('"decrees"')).toBe(false);
+  });
+
+  it('returns the identical campaign object when nothing is dropped', async () => {
+    const { buildAccountExport } = await load();
+    const ash = { id: 'a', name: 'Ash', population: 120 };
+    const paused = pausedCampaign([{ id: 'a', settlement: ash }], { saveId: 'a', settlement: ash });
+    const unpaused = { id: 'c2', name: 'Stillwater', worldState: { tick: 9 } };
+    const worldless = { id: 'c3', name: 'Nowhere' };
+    const oldShapeCursor = {
+      id: 'c4', name: 'Elder', worldState: { tick: 2, pausedAdvance: { interval: 'one_year' } },
+    };
+
+    const out = buildAccountExport({
+      auth: { user: { email: 'me@x.test' } },
+      campaigns: [paused, unpaused, worldless, oldShapeCursor],
+    });
+
+    // DORMANCY, which is 100% of real records at this landing: the walk copies nothing,
+    // so an unedited account's export is byte-identical to the one it had before.
+    expect(out.campaigns).toHaveLength(4);
+    expect(out.campaigns[0]).toBe(paused);
+    expect(out.campaigns[1]).toBe(unpaused);
+    expect(out.campaigns[2]).toBe(worldless);
+    expect(out.campaigns[3]).toBe(oldShapeCursor);
+  });
+
+  it('never throws on a malformed parked snapshot and never shelters a real member', async () => {
+    const { buildAccountExport } = await load();
+    const real = {
+      id: 'real', name: 'Real', population: 7, dmLayer: { note: 'private' }, decrees: [{ id: 'd' }],
+    };
+    const saves = [
+      null, 'x', 5, [], { id: 'n' }, { id: 'z', settlement: [] }, { id: 'y', settlement: null },
+      { id: 'real', settlement: real },
+    ];
+    const malformed = pausedCampaign(saves, null);
+    const arrayWorld = { id: 'c5', name: 'ArrayWorld', worldState: [] };
+    const stringCursor = { id: 'c6', name: 'StringCursor', worldState: { pausedAdvance: 'x' } };
+    const nullUndo = {
+      id: 'c7', name: 'NullUndo', worldState: { pausedAdvance: { preIntervalUndo: null } },
+    };
+
+    const out = buildAccountExport({
+      auth: { user: { email: 'me@x.test' } },
+      campaigns: [malformed, arrayWorld, stringCursor, nullUndo],
+    });
+    const walked = out.campaigns[0].worldState.pausedAdvance.preIntervalUndo;
+    const malformedByReference = [0, 1, 2, 3, 4, 5, 6]
+      .map(index => walked.saves[index] === saves[index]);
+    const serialized = JSON.stringify(out.campaigns[0]);
+
+    expect(walked.saves).toHaveLength(8);
+    expect(malformedByReference).toEqual([true, true, true, true, true, true, true]);
+    expect(walked.active).toBeNull();
+    // LIVENESS: the one well-formed member is still there, and still stripped.
+    expect(walked.saves[7].settlement.population).toBe(7);
+    expect(serialized.includes('"dmLayer"')).toBe(false);
+    expect(out.campaigns[1]).toBe(arrayWorld);
+    expect(out.campaigns[2]).toBe(stringCursor);
+    expect(out.campaigns[3]).toBe(nullUndo);
+  });
+
+  it('veils the saved settlements and the parked campaign snapshot in one export', async () => {
+    const { preflightAccountExport } = await load();
+    const ash = {
+      id: 'a', name: 'Ash', population: 120, dmLayer: { note: 'private' }, decrees: [{ id: 'd1' }],
+    };
+    const campaign = pausedCampaign([{ id: 'a', settlement: ash }], { saveId: 'a', settlement: ash });
+
+    const preflight = preflightAccountExport({
+      auth: { user: { email: 'me@x.test' } },
+      savedSettlements: [{ id: 'a', settlement: ash }],
+      campaigns: [campaign],
+    });
+    const savedSerialized = JSON.stringify(preflight.value.settlements);
+    const campaignSerialized = JSON.stringify(preflight.value.campaigns);
+    const serialized = JSON.stringify(preflight.value);
+
+    expect(preflight.ok).toBe(true);
+    // LIVENESS: no record was dropped on the way out, and both halves still carry a
+    // settlement — the parity anchor for the two absences below.
+    expect(preflight.value.preflight.counts.settlements).toBe(1);
+    expect(preflight.value.preflight.counts.campaigns).toBe(1);
+    expect(preflight.value.settlements[0].settlement.population).toBe(120);
+    expect(
+      preflight.value.campaigns[0].worldState.pausedAdvance.preIntervalUndo.saves[0]
+        .settlement.population,
+    ).toBe(120);
+    expect(savedSerialized.includes('"dmLayer"')).toBe(false);
+    expect(campaignSerialized.includes('"dmLayer"')).toBe(false);
+    expect(serialized.includes('"decrees"')).toBe(false);
+  });
+
+  it('never writes through the live campaign array while veiling the export', async () => {
+    const { buildAccountExport } = await load();
+    const ash = {
+      id: 'a', name: 'Ash', population: 120, dmLayer: { note: 'private' }, decrees: [{ id: 'd1' }],
+    };
+    const live = pausedCampaign([{ id: 'a', settlement: ash }], { saveId: 'a', settlement: ash });
+    const deepFreeze = (value) => {
+      if (value === null || typeof value !== 'object' || Object.isFrozen(value)) return value;
+      Object.freeze(value);
+      Object.values(value).forEach(child => deepFreeze(child));
+      return value;
+    };
+    deepFreeze(live);
+
+    const out = buildAccountExport({
+      auth: { user: { email: 'me@x.test' } },
+      campaigns: Object.freeze([live]),
+    });
+    const exported = JSON.stringify(out.campaigns);
+    const stillLive = JSON.stringify(live);
+
+    // The fixture really is frozen, so a write-through would have THROWN rather than
+    // passed quietly; the export still came back clean.
+    expect(Object.isFrozen(live.worldState.pausedAdvance.preIntervalUndo.saves[0].settlement))
+      .toBe(true);
+    expect(out.campaigns[0].worldState.pausedAdvance.preIntervalUndo.saves[0].settlement.population)
+      .toBe(120);
+    expect(exported.includes('"dmLayer"')).toBe(false);
+    // ⛔ AND THE DM's RUNNING PARKED SNAPSHOT SURVIVES: the strip is a door act, so the
+    // account's own session state keeps the layer `runUndoLastPulse` must restore.
+    expect(stillLive.includes('"dmLayer"')).toBe(true);
+    expect(stillLive.includes('"decrees"')).toBe(true);
   });
 });
 

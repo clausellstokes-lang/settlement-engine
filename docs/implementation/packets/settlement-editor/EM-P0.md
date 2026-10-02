@@ -31,8 +31,8 @@ roster"*. **True of its ARGUMENTS, false of its DRAWS.** The build lane counted:
 
 Two channels, both re-verified statically at this base: **ambiently**, because
 `npcGenerator.js:16` imports `random` and `pick` from `src/kernel/rngContext.js` and
-`pipeline.js:187` binds the step's stream with `setActiveRng(stepRng)` for the whole step body; and
-**directly**, at `generatePopulation.js:123`'s `rng.random()` power-weighted scatter.
+`pipeline.js :: runPipeline` binds the step's stream with `setActiveRng(stepRng)` for the whole step body; and
+**directly**, at `generatePopulation.js :: linkFactions`'s `rng.random()` power-weighted scatter.
 
 ### §0R.2 · ⛔ Why the split could never have worked — `fork` mints at position 0
 
@@ -97,7 +97,7 @@ The pin a chooser consults is keyed by the RECORD PATH it writes (`npcs[].role`,
 1. **ODQ §934.47** — Wave 0; this is its first car.
 2. **`docs/DESIGN_EDIT_MODE_AND_DECREES.md` §14 final** — one engine, re-derive with pins; fresh
    generation with no pins is the golden and cannot move.
-3. **THE PROMISE** — a seed is a starting world forever. ⚠ `prng.js:84`'s own header records that
+3. **THE PROMISE** — a seed is a starting world forever. ⚠ `prng.js :: fork`'s own header records that
    changing the fork derivation *"re-rolls every seeded stream in the product and is owner-gated
    under THE PROMISE"*. **This packet does not touch it**, which is exactly why the seam moved
    inside the step.

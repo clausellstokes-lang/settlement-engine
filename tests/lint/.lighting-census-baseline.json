@@ -24,13 +24,13 @@
     "The derivation history — every prior row, its cause, and the census laws — stays in the walker",
     "beside the assertions, deliberately. Only the live tuple moved."
   ],
-  "measuredAtSha": "e53e2e1d987971fe323da283ad26ca78078cc54d",
-  "measuredBy": "chair-fable-4a1823e2",
-  "date": "2026-09-21",
-  "note": "the refreeze for PR #53 second push: CURE-Q adds one title and one suite title in tests/build/ciGateHardening.test.js (the three-list drift guard); CURE-P touches e2e only (outside the census); the applied-head bump and the CLAUDE.md pointer add no title",
-  "files": 2665,
-  "parked": 359,
-  "credited": 2306,
-  "titles": 25552,
-  "suiteTitles": 6817
+  "measuredAtSha": "e76ea7f3c036b986b0573c7b75ef5a47d20561db",
+  "measuredBy": "voice-program-chair-93391427",
+  "date": "2026-10-02",
+  "note": "the Voice Program wave 4 (ODQ §934.88): three new arms and one describe in tests/generators/arrivalScene.test.js, the hook structure pins",
+  "files": 2798,
+  "parked": 360,
+  "credited": 2438,
+  "titles": 26736,
+  "suiteTitles": 7049
 }

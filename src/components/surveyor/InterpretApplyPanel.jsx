@@ -8,6 +8,17 @@
  * `unroutable`, not silently swallowed). Every proposal has a stable command id and every run
  * carries the reproducibility summary (engine version + seed). Transport, review, and command
  * execution remain dynamic-imported (off first paint).
+ *
+ * EM-D4 (wave 4, design §3's Surveyor row): the barrier now speaks the REGISTRY's vocabulary.
+ * A blocked proposal is rendered as one `Guard` of EM-C2's shape — a kind and its offers —
+ * rather than a bare count, so the words a DM reads here are the words the decree registry
+ * page will read beside the same entry. The barrier itself is untouched: `reviewInterpretation`
+ * still refuses a flagged op without an explicit tick, the review artifact's shape is
+ * unchanged, and the guard is a RENDERING of that refusal, never a second judge of it. The
+ * staging half of the bridge (`stageSurveyorDecrees`) is built and proven beside it and is
+ * deliberately NOT wired here: turning a compiled proposal into a pending decree instead of a
+ * landed command changes a paid surface's behaviour, so it waits behind EM-D1's tier gate and
+ * EM-C4b's slice rather than shipping un-gated.
  */
 
 import { useState, useCallback, useMemo } from 'react';
@@ -24,6 +35,16 @@ import useIsMobile from '../../hooks/useIsMobile.js';
 import { chromeFontSize, proseFontSize } from '../../design/proseScale.js';
 
 let reviewSequence = 0;
+
+/**
+ * EM-D4: the DM-facing phrase for each guard OFFER this panel can show. The token itself
+ * rides `data-offer`, so the vocabulary stays observable and an offer this panel has no
+ * phrase for renders as its own word rather than vanishing.
+ */
+const CONSENT_OFFER_WORDS = Object.freeze({
+  self: 'edit it yourself',
+  proceed: 'tick to consent',
+});
 
 /**
  * One successful compile creates one review artifact. Its local reference is
@@ -209,7 +230,7 @@ export default function InterpretApplyPanel({ initialPrompt = '' }) {
     setRecoveryError(null);
     try {
       const { reviewInterpretation } = await import('../../domain/intent/interpretReview.js');
-      const { runInterpretApply } = await import('../../lib/intent/interpretApply.js');
+      const { consentGuardsFor, runInterpretApply } = await import('../../lib/intent/interpretApply.js');
       const { accepted, blocked, corrections } = reviewInterpretation(interpretation, decisions);
       const { EVENTS, track } = await import('../../lib/analytics.js');
       for (const correction of corrections) {
@@ -232,7 +253,17 @@ export default function InterpretApplyPanel({ initialPrompt = '' }) {
         now: new Date().toISOString(),
         actions: { applyEvent, recordPartyImpact },
       });
-      setApplyResult({ ...res, blocked });
+      // EM-D4: the barrier's own words, addressed to the decree id each blocked proposal
+      // WOULD take — derived from the review artifact, so the guard names the entry it is
+      // about before that entry exists and keeps naming it once consent stages one.
+      setApplyResult({
+        ...res,
+        blocked,
+        consentGuards: consentGuardsFor(blocked, {
+          reviewRef: result.reviewRef,
+          ops: interpretation.ops,
+        }),
+      });
     } catch {
       setApplyResult({ error: 'Apply failed.' });
     } finally {
@@ -351,6 +382,28 @@ export default function InterpretApplyPanel({ initialPrompt = '' }) {
               {applyResult.unroutable?.length > 0 && (
                 <div data-testid="apply-unroutable" style={{ fontSize: chromeFontSize(FS.xs, mobile), color: MUTED, fontFamily: sans }}>
                   Unroutable (no verb, surfaced not dropped): {applyResult.unroutable.map((u) => operationLabel(u.opType)).join(', ')}
+                </div>
+              )}
+              {applyResult.consentGuards?.length > 0 && (
+                <div data-testid="apply-consent-guards" style={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
+                  {applyResult.consentGuards.map((guard) => (
+                    <div
+                      key={guard.id}
+                      // The kind and the entry are surfaced so the guard vocabulary is
+                      // observable rather than merely prose: the registry page addresses
+                      // the same entry id with the same kind.
+                      data-guard-kind={guard.kind}
+                      data-guard-entry={guard.entryId}
+                      style={{ fontSize: chromeFontSize(FS.xs, mobile), color: MUTED, fontFamily: sans }}
+                    >
+                      {guard.message}
+                      {guard.offers.map((offer) => (
+                        <span key={offer} data-offer={offer} style={{ color: GOLD }}>
+                          {' · '}{CONSENT_OFFER_WORDS[offer] || offer}
+                        </span>
+                      ))}
+                    </div>
+                  ))}
                 </div>
               )}
               {applyResult.failed?.length > 0 && (

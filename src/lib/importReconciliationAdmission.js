@@ -439,7 +439,7 @@ function selectedCampaignMechanics(ingest, selected) {
  * shape a future reader cannot distinguish from an oversight.
  *
  * ⭐⭐ AND THE THIRD STRIP: THE FOREIGN BIRTH LAW, ON THE RULE THIS MODULE'S
- * OWN HEADER ALREADY CITES. `importScrub.js:115-121` states it for the sibling
+ * OWN HEADER ALREADY CITES. `importScrub.js:116-122` states it for the sibling
  * archive-less importer, in its own words: an ingest that kept the marker would
  * import "a world that says it was born under the roster law while carrying no
  * roster — a world that lies about its own scope, permanently, because nothing
@@ -546,7 +546,7 @@ function dropReconciledSettlementContentRecords(entry) {
   }
 
   // THE FOREIGN BIRTH LAW, on BOTH of the marker's echoes, in the shape
-  // `importScrub.js:158-166` already ships for the same act rather than a second
+  // `importScrub.js:159-167` already ships for the same act rather than a second
   // one invented here. No message: see the headline above for why the asymmetry
   // with the two records is deliberate.
   for (const echo of ['config', '_config']) {

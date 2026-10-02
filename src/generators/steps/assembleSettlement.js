@@ -8,7 +8,7 @@
  * Final assembly step for the settlement generation pipeline.
  */
 
-import { registerStep } from '../pipeline.js';
+import { chooseOrPin, registerStep } from '../pipeline.js';
 import { generateSettlementName } from '../npcGenerator.js';
 // F8: re-render stress summaries with the real settlement name. resolveStress
 // (step 3) rolled them 16 steps ago with an empty name and stashed the
@@ -76,6 +76,12 @@ function inAssemblySubstream(stepRng, label, operation) {
   }
 }
 
+// The sentinel the appender's gate consults `chooseOrPin` with (EM-B2a3's landed idiom).
+// `chooseOrPin` hands back the HELD ARRAY while `ensureFactionStructuralNpcs` returns a
+// SETTLEMENT, so the gate cannot read the pinned value itself; a `null` or `undefined`
+// sentinel could collide with a bag value, and a unique Symbol cannot.
+const UNPINNED = Symbol('assembleSettlement:unpinned');
+
 registerStep('assembleSettlement', {
   // structuralValidationPass provides ctx.structural — the coherence receipt
   // for the FINAL roster (Wave 4b moved it out of assembleInstitutions).
@@ -92,6 +98,10 @@ registerStep('assembleSettlement', {
   mutates: ['powerStructure', 'stress'],
   phase: 'assembly',
 }, (ctx, rng) => {
+  // The runner hands the pins through the context under its reserved key; absent pins mean
+  // today's behaviour exactly, and the partial-pin refusal already fired in the runner. The
+  // same spelling `generatePopulation.js` and `assembleInstitutions.js` already carry.
+  const pins = ctx.__pins || null;
   const {
     tier, population, institutions, effectiveConfig,
     neighbourProfile, rawNeighbour,
@@ -170,6 +180,13 @@ registerStep('assembleSettlement', {
     _config: { ...config },
   };
 
+  // §22 ruling 1 + §22.1 correction 1: the settlement's NAME is a HELD fact. The mint above
+  // RUNS at its exact draw position and its result is DISCARDED when the name is held - the two
+  // draws it spends are on the assembly step's SHARED ambient stream. Since the Voice Program
+  // wave 2 the pressure sentence and the arrival scene no longer read that stream, but the
+  // mint still runs so the shared stream stays where any later reader expects it.
+  settlement.name = chooseOrPin(pins, 'name', () => settlementName);
+
   // F8: re-render each stress entry's summary with the real settlement name.
   // resolveStress baked a PROVISIONAL empty-name summary (leading-space prose
   // like " is under active siege…") and stashed the sole rng-derived choice
@@ -185,7 +202,7 @@ registerStep('assembleSettlement', {
     for (const e of entries) {
       if (e && typeof e === 'object'
           && Object.prototype.hasOwnProperty.call(e, 'summaryRoll')) {
-        e.summary = renderStressSummary(e.type, settlementName, e.summaryRoll);
+        e.summary = renderStressSummary(e.type, settlement.name, e.summaryRoll);
         delete e.summaryRoll;
       }
     }
@@ -193,9 +210,12 @@ registerStep('assembleSettlement', {
   rerenderStressSummary(settlement.stress);
   rerenderStressSummary(settlement.stressors);
 
-  // Narrative overlays
-  settlement.pressureSentence = generatePressureSentence(settlement);
-  settlement.arrivalScene     = generateArrivalScene(settlement);
+  // Narrative overlays. The pressure sentence and the arrival scene each draw on their own
+  // named child stream (THE VOICE PROGRAM wave 2, 2026-10-02): their pools and beats can
+  // grow or reorder without any fact moving, because no later draw reads the position
+  // they leave behind. The defense profile takes no draw.
+  settlement.pressureSentence = inAssemblySubstream(rng, 'pressure-sentence', () => generatePressureSentence(settlement));
+  settlement.arrivalScene     = inAssemblySubstream(rng, 'arrival-scene', () => generateArrivalScene(settlement));
   settlement.defenseProfile   = generateDefenseProfile(settlement);
 
   // The final-economy pass already proved that power consumed the final
@@ -205,13 +225,14 @@ registerStep('assembleSettlement', {
     settlement.powerStructure,
     settlement.economicState,
     tier,
+    { pins },
   );
   if (settlement.defenseProfile?.readiness?.label) {
     const { beforeFactions } = reconcilePowerStructure(
       settlement.powerStructure,
       settlement.economicState,
       ctx.powerIntent,
-      { defenseLabel: settlement.defenseProfile.readiness.label },
+      { defenseLabel: settlement.defenseProfile.readiness.label, pins },
     );
     refreshPowerGenerationTraces(
       ctx,
@@ -224,6 +245,7 @@ registerStep('assembleSettlement', {
     settlement.powerStructure,
     settlement.economicState,
     tier,
+    { pins },
   );
 
   // ── ODQ §810 SEAM 1b: size the political roster to the tier's faction band.
@@ -260,7 +282,7 @@ registerStep('assembleSettlement', {
   const coherenceUpdates = inAssemblySubstream(
     rng,
     'canonical-coherence',
-    coherenceRng => generateCoherence(settlement, coherenceRng),
+    coherenceRng => generateCoherence(settlement, coherenceRng, pins),
   );
   Object.assign(settlement, coherenceUpdates);
 
@@ -269,11 +291,20 @@ registerStep('assembleSettlement', {
   // implied structural NPCs exist with the right importance tier and
   // institution/faction linkage. Idempotent — won't duplicate NPCs
   // the population step already generated for the same role + faction.
-  const withStructural = ensureFactionStructuralNpcs(
-    settlement,
-    ctx.generationContext,
-  );
-  Object.assign(settlement, withStructural);
+  //
+  // ── GATED AS A PRODUCER (EM-R2). It APPENDS to `npcs`, so under a held roster it is a
+  // producer writing into a record the edit calls final: a DM op that removes a seat-holder
+  // is exactly the uncovered case, and an ungated appender would mint the seat back. The
+  // gate is the same key and the same primitive the coherence seam uses, so the two cannot
+  // disagree about what "held" means. It takes NO draw at any tier, so skipping it consumes
+  // nothing and moves no stream.
+  if (chooseOrPin(pins, 'npcs', () => UNPINNED) === UNPINNED) {
+    const withStructural = ensureFactionStructuralNpcs(
+      settlement,
+      ctx.generationContext,
+    );
+    Object.assign(settlement, withStructural);
+  }
 
   // A durable, seed-stable receipt over the FINAL player-facing dossier.
   // Repairs happen in their owning passes; this boundary proves that the

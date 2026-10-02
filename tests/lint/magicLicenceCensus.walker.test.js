@@ -10,11 +10,14 @@
  * is the guard on the declaration half: the field exists on every row that needs one, means
  * one thing, and is spelled from ONE vocabulary.
  *
- * ⚠ THIS CAR CHANGES NO GENERATED ROSTER, AND ARM A7 IS THAT CLAIM AS A TEST. The gates are
+ * ⚠ MF-CH2A CHANGED NO GENERATED ROSTER, AND ARM A7 WAS THAT CLAIM AS A TEST. The gates were
  * MF-CH2b's business. Measured over the golden master's own grid × the five magic cases —
  * 504 × 5 = 2,520 settlements — MF-CH2a moves ZERO rosters and 657 record hashes, and the
  * 657 are the `magicLicense` key itself being spread onto the record by `assembleInstitutions`
  * (ODQ §503.2's second law). That is a DECLARED golden re-record, not a behaviour change.
+ * ⭐ MF-CH2B (2026-09-30) made the gates read the licence and RE-POINTED A7 and A10 rather than
+ * deleting them: A7 now pins the rows a dead-magic world keeps, A10 the gap it closed. The
+ * gate half's own walker is tests/lint/magicShelfGateCensus.walker.test.js.
  *
  * ── MF-CH6 — THE FAITH WORDS LEAVE, AND THE KEYWORD LIST WAS NEVER WHAT DECIDED (ODQ §541.8) ──
  * ODQ §541.8 recorded a shipped deity-doctrine violation: `ARCANE_INST_KW` carried
@@ -28,7 +31,7 @@
  *   rows among them — is over-determined: struck two, three or four ways over by the `Magic`
  *   SHELF inside `carriesExplicitMagicMetadata`, by an `arcane` TAG, by this keyword list and
  *   by the declared licence itself. Deleting a keyword from an over-determined gate frees
- *   nothing, and A7 below is that fact as a test.
+ *   nothing, and A7 below was that fact as a test until MF-CH2B made the licence decide.
  *
  * So this car cures the two halves it CAN cure completely, and pins the rest as a measured
  * gap rather than a half-flipped gate:
@@ -107,36 +110,67 @@ const SHELF_ROWS = ROWS.filter(r => r.category === 'Magic' || r.category === 'Ex
  * narrower, whether the entry can stand at all in a world without functioning magic. A circle
  * of druids who "regulate the seasons, mediate disputes with wild creatures, and know which
  * streams run clean" can. See DEITY_DOCTRINE_RELICENSED.
+ *
+ * ⭐ RE-KEYED 2026-09-30, THE URBAN BAND (ODQ §934.86), ONE DECLARED SAME-SEED SHIFT. 28 → 39
+ * declared rows, and the movement is the registry's, row for row, never a new verdict: the
+ * urban-band rebuild (6efa6be61) re-shelves each institution to its natural shelf and makes
+ * every tier block complete (a metropolis block is a complete city block, a city block a
+ * complete town block), and MF-CH2B (94e40b900) had already made the licence govern by NAME
+ * and never by shelf or tier. Measured against the previous table (13 keys left, 24 arrived):
+ *  (a) EIGHT `none` rows left the gated shelves for their own and KEEP their `none` — the
+ *      Adventurers' charter hall at hamlet and village (Adventuring), Druid Circle (village)
+ *      and Elder Grove Council (town) (Religious), Alchemist shop (town) and Alchemist quarter
+ *      (city) (Crafts), Warden's Lodge (Defense), Great library (Infrastructure);
+ *  (b) FIVE Exotic rows moved from city to metropolis (Planar traders, Dragon resident, Dream
+ *      parlors, Airship docking, Message network) and the registry seats Golem workforce and
+ *      Undead labor at both; (c) Mages' guild and Scroll scribe now also stand at town, and
+ *      Wizard's tower, Enchanter's shop, Scroll scribe and Teleportation circle at metropolis;
+ *  (d) THREE `none` rows are cumulative REPEATS of a name ruled at a lower tier
+ *      (CUMULATIVE_REPEATS below): Elder Grove Council at city and metropolis, Alchemist
+ *      quarter at metropolis. Those, with (a), are the eleven licensed rows that sit OFF the
+ *      Magic/Exotic shelves, every one `none`. The four tokens and every value for a name
+ *      that existed before are unchanged: no verdict moved.
  */
 const DECLARED_LICENCES = Object.freeze({
   "hamlet|Magic|Traveling hedge wizard": 'low',
-  "hamlet|Magic|Adventurers' charter hall": 'none',
+  "hamlet|Adventuring|Adventurers' charter hall": 'none',
+  "village|Religious|Druid Circle": 'none',
   "village|Magic|Hedge wizard": 'low',
-  "village|Magic|Druid Circle": 'none',
-  "village|Magic|Adventurers' charter hall": 'none',
   "village|Magic|Healer (divine, 1st level)": 'low',
+  "village|Adventuring|Adventurers' charter hall": 'none',
+  "town|Crafts|Alchemist shop": 'none',
+  "town|Religious|Elder Grove Council": 'none',
+  "town|Defense|Warden's Lodge": 'none',
   "town|Magic|Wizard's tower": 'medium',
-  "town|Magic|Elder Grove Council": 'none',
-  "town|Magic|Alchemist shop": 'none',
-  "town|Magic|Warden's Lodge": 'none',
+  "town|Magic|Mages' guild": 'medium',
+  "town|Magic|Scroll scribe": 'medium',
   "town|Magic|Teleportation circle": 'high',
+  "city|Crafts|Alchemist quarter": 'none',
+  "city|Religious|Elder Grove Council": 'none',
   "city|Magic|Wizard's tower": 'medium',
   "city|Magic|Mages' guild": 'medium',
-  "city|Magic|Alchemist quarter": 'none',
   "city|Magic|Enchanter's shop": 'high',
   "city|Magic|Scroll scribe": 'medium',
   "city|Magic|Teleportation circle": 'high',
-  "city|Exotic|Planar traders": 'high',
-  "city|Exotic|Dragon resident": 'none',
   "city|Exotic|Golem workforce": 'high',
   "city|Exotic|Undead labor": 'high',
-  "city|Exotic|Dream parlors (high magic)": 'high',
-  "city|Exotic|Airship docking (high magic)": 'high',
-  "city|Exotic|Message network (high magic)": 'high',
-  "metropolis|Magic|Academy of magic": 'high',
+  "metropolis|Crafts|Alchemist quarter": 'none',
+  "metropolis|Religious|Elder Grove Council": 'none',
+  "metropolis|Infrastructure|Great library": 'none',
+  "metropolis|Magic|Wizard's tower": 'medium',
   "metropolis|Magic|Mages' district": 'high',
-  "metropolis|Magic|Great library": 'none',
+  "metropolis|Magic|Academy of magic": 'high',
+  "metropolis|Magic|Enchanter's shop": 'high',
+  "metropolis|Magic|Scroll scribe": 'medium',
+  "metropolis|Magic|Teleportation circle": 'high',
   "metropolis|Magic|Planar embassy": 'high',
+  "metropolis|Exotic|Planar traders": 'high',
+  "metropolis|Exotic|Dragon resident": 'none',
+  "metropolis|Exotic|Golem workforce": 'high',
+  "metropolis|Exotic|Undead labor": 'high',
+  "metropolis|Exotic|Dream parlors (high magic)": 'high',
+  "metropolis|Exotic|Airship docking (high magic)": 'high',
+  "metropolis|Exotic|Message network (high magic)": 'high',
 });
 
 /**
@@ -178,6 +212,18 @@ const LICENCE_OVERRIDES_TAG = Object.freeze({
  * circle finds the reason beside the value instead of in a commit message.
  */
 const DEITY_DOCTRINE_RELICENSED = Object.freeze(['Druid Circle', 'Elder Grove Council']);
+
+/**
+ * THE THREE ROWS THE URBAN BAND ADDED ONLY BY MAKING A TIER BLOCK COMPLETE (ODQ §934.86). Each is
+ * a `none` row whose NAME the dossier (R-INST-5) already ruled at a lower tier; the city and
+ * metropolis blocks now repeat it. Named as data so A2's cross-check against R-INST-5 can
+ * subtract exactly these and attributes the movement, rather than absorbing it.
+ */
+const CUMULATIVE_REPEATS = Object.freeze([
+  'city|Religious|Elder Grove Council',
+  'metropolis|Religious|Elder Grove Council',
+  'metropolis|Crafts|Alchemist quarter',
+]);
 
 /**
  * The six words that left `ARCANE_INST_KW` with them. A magic-dependence list is no place for
@@ -231,12 +277,27 @@ describe('MF-CH2a — the magic licence is declared, single-vocabulary and inert
     // be a list compared with itself — the pin-vacuity shape this estate has been bitten by
     // — and would pass on a catalog whose values had all moved.
     const dist = { none: 0, low: 0, medium: 0, high: 0 };
-    for (const { def } of ROWS) {
+    const shelfDist = { none: 0, low: 0, medium: 0, high: 0 };
+    const offShelfKeys = [];
+    for (const { tier, category, name, def } of ROWS) {
       const licence = normaliseMagicLicence(def.magicLicense);
-      if (licence !== null) dist[licence] += 1;
+      if (licence === null) continue;
+      dist[licence] += 1;
+      if (category === 'Magic' || category === 'Exotic') shelfDist[licence] += 1;
+      else offShelfKeys.push(`${tier}|${category}|${name}`);
     }
-    expect(dist).toEqual({ none: 9, low: 3, medium: 4, high: 12 });
-    expect(dist.none + dist.low + dist.medium + dist.high).toBe(SHELF_ROWS.length);
+    // ⭐ RE-MEASURED 2026-09-30, THE URBAN BAND (ODQ §934.86): whole-catalog 9/3/4/12 → 12/3/8/16.
+    // The registry re-shelves each institution to its natural shelf, so the licence rows no longer
+    // all sit on the Magic/Exotic shelves: the SHELF distribution is 1/3/8/16 over the 28 shelf
+    // rows (the eight faith, craft, defence and library rows left them) and ELEVEN licensed rows
+    // stand off-shelf, every one `none` — eight re-shelved, three cumulative repeats. Counted by
+    // a walk of the catalog (above), the closure now reads: licensed = shelf rows + off-shelf rows.
+    expect(dist).toEqual({ none: 12, low: 3, medium: 8, high: 16 });
+    expect(shelfDist).toEqual({ none: 1, low: 3, medium: 8, high: 16 });
+    expect(shelfDist.none + shelfDist.low + shelfDist.medium + shelfDist.high).toBe(SHELF_ROWS.length);
+    expect(dist.none + dist.low + dist.medium + dist.high).toBe(SHELF_ROWS.length + offShelfKeys.length);
+    expect(offShelfKeys.length).toBe(11);
+    for (const key of offShelfKeys) expect(DECLARED_LICENCES[key], key).toBe('none');
     // 7 → 9 and 5 → 3 on 2026-08-24 (TE-CH-6, ODQ §541.8). ATTRIBUTED, not absorbed: exactly
     // these two rows moved, each is named, and the arm reds if a third joins them quietly.
     expect(DEITY_DOCTRINE_RELICENSED.length).toBe(2);
@@ -245,8 +306,15 @@ describe('MF-CH2a — the magic licence is declared, single-vocabulary and inert
     }
     // The dossier's own whole-table figure stays reachable, which is what keeps this arm a
     // cross-check against R-INST-5 rather than a number copied back off the catalog: add its
-    // four Adventuring hand-offs, subtract the rows the estate overruled it on.
-    expect(dist.none + 4 - DEITY_DOCTRINE_RELICENSED.length).toBe(11);
+    // four Adventuring hand-offs, subtract the rows the estate overruled it on — and, since the
+    // urban band, subtract the three rows that are only a complete tier block repeating a name
+    // the dossier had already ruled (CUMULATIVE_REPEATS, each asserted present and `none`).
+    expect(CUMULATIVE_REPEATS.length).toBe(3);
+    for (const key of CUMULATIVE_REPEATS) {
+      expect(offShelfKeys, key).toContain(key);
+      expect(DECLARED_LICENCES[key], key).toBe('none');
+    }
+    expect(dist.none - CUMULATIVE_REPEATS.length + 4 - DEITY_DOCTRINE_RELICENSED.length).toBe(11);
   });
 
   it('A3 — the licence is keyed by NAME, and every repeated name agrees across its tiers', () => {
@@ -318,34 +386,63 @@ describe('MF-CH2a — the magic licence is declared, single-vocabulary and inert
     for (const level of emitted) expect(normaliseMagicLicence(level)).toBe(level);
   });
 
-  it('A7 — THE NEGATIVE CLAIM: the world law still strikes all 28 at magicExists:false', () => {
-    // MF-CH2a declares the licence and routes `isArcaneInstitution` through it. It does NOT
-    // touch the world law, which still reads the SHELF off the record every call site spreads
-    // onto it — so a dead-magic world is decided exactly as it was, and no roster moves.
-    // MF-CH2b deliberately flips this arm; until then it is what makes this car inert.
+  it('A7 — the world law admits a dead-magic world EXACTLY the licence-none rows, and strikes every other licensed row', () => {
+    // ⭐ THE ARM MF-CH2B FLIPPED, AND THE WHOLE POINT OF THE PAIR IN ONE ASSERTION. At MF-CH2A
+    // this read "the world law still strikes all 28" — the negative claim that made the
+    // declaration inert, with mutant M11 (making the world law licence-aware, which IS
+    // MF-CH2B) driving it red. MF-CH2B landed that mutant as the car, so the arm is RE-POINTED
+    // rather than deleted: the striking is no longer by SHELF, it is by DECLARED LICENCE, and
+    // the set that survives a world with no magic in it is exactly the rows an author licensed
+    // `none`. A name moving between the two lists below is a content decision and comes back
+    // here for it.
+    // ⚠ KEYED ON NAME AND LICENCE, NEVER ON SHELF OR TIER. The walk covers every row that
+    // DECLARES a licence, wherever it is filed, so a row re-shelved or re-tiered by a later
+    // catalog car leaves this arm green and a row RE-LICENSED reds it.
     const law = createGenerationWorldLaw(
       { magicExists: false, priorityMagic: 0, tradeRouteAccess: 'port', terrainType: 'coastal' },
       { tradeRoute: 'port', terrainType: 'coastal' },
     );
     expect(law.magicEnabled).toBe(false);
     expect(law.supportsMaritime()).toBe(true);
-    const allowed = SHELF_ROWS.filter(
-      r => law.allowsInstitution({ category: r.category, name: r.name, ...r.def }),
+    const key = r => `${r.tier}/${r.category}/${r.name}`;
+    const record = r => ({ category: r.category, name: r.name, ...r.def });
+    const LICENSED = ROWS.filter(r => normaliseMagicLicence(r.def.magicLicense) !== null);
+    const allowed = LICENSED.filter(r => law.allowsInstitution(record(r)));
+    const struck = LICENSED.filter(r => !law.allowsInstitution(record(r)));
+    // STATED, by NAME: the eight names a magic-free world now keeps.
+    expect([...new Set(allowed.map(r => r.name))].sort()).toEqual([
+      "Adventurers' charter hall",
+      'Alchemist quarter',
+      'Alchemist shop',
+      'Dragon resident',
+      'Druid Circle',
+      'Elder Grove Council',
+      'Great library',
+      "Warden's Lodge",
+    ]);
+    // DERIVED, NOT RESTATED: the admitted rows ARE the licence-`none` rows and the struck rows
+    // ARE every other licensed row, computed from the catalog rather than typed twice, so the
+    // pin above and the data can never drift apart silently.
+    expect(allowed.map(key)).toEqual(
+      LICENSED.filter(r => normaliseMagicLicence(r.def.magicLicense) === 'none').map(key),
     );
-    expect(allowed.map(r => `${r.tier}/${r.category}/${r.name}`)).toEqual([]);
-    // non-vacuity: the same law says YES to a mundane row, so the empty list above is a
-    // verdict and not a predicate that answers false to everything
+    expect(struck.map(key)).toEqual(
+      LICENSED.filter(r => normaliseMagicLicence(r.def.magicLicense) !== 'none').map(key),
+    );
+    expect(allowed.length).toBeGreaterThan(0);
+    expect(struck.length).toBeGreaterThan(0);
+    // non-vacuity, both polarities: the same law says YES to a mundane row and NO to an
+    // unlicensed-for-this-world arcane one, so neither list above is a predicate that answers
+    // one way to everything
     expect(law.allowsInstitution({ category: 'Defense', name: 'Citizen militia' })).toBe(true);
-    // ⭐ AND THE ARM STILL HOLDS AFTER TE-CH-6 REMOVED SIX KEYWORDS, which is the finding that
-    // car exists to record: the empty list above is NOT held up by the keyword list. Each row
-    // is struck by the SHELF or the TAG as well, so the list decides exactly one of the 28 on
-    // its own. A successor who plans to free a row by editing the vocabulary should read this.
-    const decidedByKeywordAlone = SHELF_ROWS.filter((r) => {
-      const entity = { category: r.category, name: r.name, ...r.def };
-      return !law.allowsInstitution(entity)
-        && law.allowsInstitution({ ...entity, name: 'Zzz Placeholder' });
-    });
-    expect(decidedByKeywordAlone.map(r => r.name)).toEqual(['Dragon resident']);
+    expect(law.allowsInstitution({ category: 'Magic', name: 'Academy of magic' })).toBe(false);
+    // ⭐ AND THE LICENCE ALONE DECIDES. At MF-CH2A this arm measured that the keyword list
+    // decided exactly one row (`Dragon resident`) and the SHELF or TAG decided the rest. Now
+    // every licensed row keeps its verdict with its shelf neutralised AND its tags stripped —
+    // the declaration is the whole answer for a catalog name.
+    const shelfAndTagDecided = LICENSED.filter(r => law.allowsInstitution(record(r))
+      !== law.allowsInstitution({ ...record(r), category: 'Religious', tags: [] }));
+    expect(shelfAndTagDecided.map(key)).toEqual([]);
   });
 
   it('A8 — the customContent seam is untouched: the TAG surface still answers from the TAG', () => {
@@ -411,32 +508,32 @@ describe('MF-CH2a — the magic licence is declared, single-vocabulary and inert
     }
   });
 
-  it('A10 — THE MEASURED GAP: the declaration is read by ONE gate of four, and the shelf still decides', () => {
-    // The car this walker guards declared the licence and wired it into `isArcaneInstitution`.
-    // Three gates never learned it, and TE-CH-6 measured what that costs rather than flipping
-    // them: freeing the rows in the gates alone puts `Magic`-shelf institutions into magic-free
-    // worlds, and the shipped `world_law_magic` coherence receipt convicts the record's own
-    // taxonomy fields — 264 of 504 magic-free settlements, against 0 today. The remaining cure
-    // is therefore the gates AND the receipt's vocabulary AND two rows of authored prose, which
-    // is a train and not this car. This arm is that gap, pinned, so it cannot be mistaken for
-    // an oversight and cannot be "fixed" halfway without a red.
+  it('A10 — THE GAP CLOSED: the declaration is read by every gate, and the shelf no longer decides', () => {
+    // At MF-CH2A this arm was THE MEASURED GAP: the declaration was read by ONE gate of four
+    // and the world law still struck the deity-doctrine pair on the SHELF, with the keyword
+    // gone. TE-CH-6 measured why it could not be closed halfway — freeing the rows in the gates
+    // alone put `Magic`-shelf institutions into magic-free worlds and the `world_law_magic`
+    // receipt convicted the record's own taxonomy fields. MF-CH2B closes it whole: the gates
+    // read the licence (P1/P3/P5/UI) AND the receipt no longer reads a bare bucket name as a
+    // claim (the sixth surface, arm B7b of tests/lint/magicShelfGateCensus.walker.test.js).
     const law = createGenerationWorldLaw({ magicExists: false, priorityMagic: 0 }, {});
     for (const name of DEITY_DOCTRINE_RELICENSED) {
       const row = ROWS.find(r => r.name === name);
+      expect(row, `${name}: still in the catalog`).toBeTruthy();
       const entity = { category: row.category, name: row.name, ...row.def };
-      // the DECLARATION is now honest on all three of its own readers …
+      // the DECLARATION is honest on all three of its own readers …
       expect(normaliseMagicLicence(row.def.magicLicense), `${name}: licence`).toBe('none');
       expect(institutionCatalogArcaneTag(name), `${name}: tag`).toBe(ARCANE_IDENTITY.MUNDANE);
       expect(isArcaneInstitution(entity, row.category), `${name}: identity`).toBe(false);
-      // … and the world law still strikes it, on the SHELF, with the keyword gone.
-      expect(law.allowsInstitution(entity), `${name}: world law still strikes`).toBe(false);
+      // … and the world law now keeps it, on whatever shelf it is filed — the shelf is inert.
+      expect(law.allowsInstitution(entity), `${name}: world law keeps it`).toBe(true);
       expect(law.allowsInstitution({ ...entity, category: 'Religious' }),
-        `${name}: and the shelf is what does it`).toBe(true);
+        `${name}: and on a faith shelf too`).toBe(true);
     }
-    // THE CONTROL THAT MAKES THE GAP ATTRIBUTABLE: move the shelf on a genuinely
-    // magic-dependent row and it is STILL struck, by its tag. The line above is the shelf
-    // deciding, not a predicate that answers whatever it is handed last.
-    const tower = ROWS.find(r => r.tier === 'city' && r.name === "Wizard's tower");
+    // THE CONTROL THAT MAKES THE VERDICT ATTRIBUTABLE: move the shelf on a genuinely
+    // magic-dependent row and it is STILL struck, by its licence. The lines above are the
+    // licence deciding, not a predicate that now answers yes to whatever it is handed.
+    const tower = ROWS.find(r => r.name === "Wizard's tower");
     expect(law.allowsInstitution({
       category: 'Religious', name: tower.name, ...tower.def,
     })).toBe(false);

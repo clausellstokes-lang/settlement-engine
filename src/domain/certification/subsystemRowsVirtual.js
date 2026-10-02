@@ -582,6 +582,308 @@ export const VIRTUAL_SUBSYSTEM_ROWS = Object.freeze([
   // ENC-3 appends LAST, which shifts no existing row — the whole point of putting a
   // growing family's home at the tail (§864's append-last precedent).
   ...ENCOUNTERS_SUBSYSTEM_ROWS,
+  // ── TR-2 · THE MERCHANT HOUSE (FP TR-2, docs/DESIGN_FP_TRADE.md §TR-2; block #24) ──────
+  // APPENDED AT THE TAIL, the add-a-row protocol above: TR has no family leaf (TR-1's row
+  // sits inside the compact BODY block, whose own header forbids an append there), and an
+  // append here shifts no existing row's index.
+  Object.freeze({
+    rule: 'merchantHousesEnabled',
+    title: 'The merchant house (books, the ruin latch, the threshold acts)',
+    module: 'src/domain/worldPulse/houseLedger.js,src/domain/worldPulse/houseActs.js',
+    aliveness: Object.freeze({
+      // DELIBERATELY EMPTY: the ledger mints no pulse candidate; its formations, ruins and
+      // acts are RETURNED receipts, and the house news kinds are not minted at this wave.
+      eventTypes: Object.freeze([]),
+      // DELIBERATELY EMPTY: no behavioural family can carry a house without grading this
+      // row alive off the trade layer's ordinary traffic in worlds where it never ran.
+      moverFamilies: Object.freeze([]),
+      // DELIBERATELY EMPTY, on TR-1's reasoning: `spatialLedgers.houses` is real, this lane's
+      // own, and has exactly ONE writer (advanceHouses), but the writer has NO CALLER in src/,
+      // so a declared channel would grade this row SILENT for a layer that never ran.
+      stateKeys: Object.freeze([]),
+      other: 'A DARK INSTRUMENT WITH NO MOUNT, WHICH IS WHY EVERY CHANNEL IS EMPTY AND WHY THAT IS THE CORRECT READING. ONE GATE, by name and strict: merchantHousesActive (houseLedger.js) is the only read of the key in src/, and advanceHouses returns its input world by reference before it reads anything else. WHAT IT DOES: a faction whose canonical archetype reads merchant (factionArchetypes.factionArchetype, the only eligibility door, whose name-regex fallback makes a rename able to break it) in a town with a live commercial institution (institutionRoster.liveInstitutions) earns BOOKS in spatialLedgers.houses: banded holdings and credit, typed interests, an appetite band. Formation is deterministic (institution seniority, then the faction id by codepoint) under a per-town cap; holdings step one band per season toward the town\'s own fortune, raised one rung while an interest is live, so there is no wealth ratchet and a town fallen to its bottom band carries its houses to ruin. RUIN closes the books and leaves a tombstone whose cooldown refuses an undead house; eligibility loss (a rename, the last market ruined) sends the entry DORMANT WITH ITS BOOKS, and restored eligibility wakes the same entry. The threshold chooser (houseActs.js, import list pinned empty) picks one of four closed verbs and never names a victim; the factor is cast per act through roads/state.isOffStage and never stored. WHAT IT NEVER DOES: it draws no random number, reads no relationship graph, and moves no other layer\'s state. THE OBSERVATION NEEDED to close the gap is a WIRING WAVE: mount advanceHouses on the pulse and the v5 census over spatialLedgers.houses grades this row directly, at which point the stateKeys channel is owed. Until then the lane is pinned in tests/domain/houseLedgerTr2.test.js, which carries its four dormancy fences and the lit-mutant control.',
+    }),
+    // Formation and ruin are season-grade state crossings, and an act fires only when an
+    // interest lapses, so the layer's expected output is sparse and driven by its world.
+    expectedTempo: 'reactive',
+    invariants: Object.freeze([
+      Object.freeze({
+        name: 'dark_is_byte_identical',
+        description: 'With the key absent, false, or any truthy non-true value, advanceHouses returns its input world by reference over a fixture that forms two houses the moment the key is lit, so a dark world carries zero bytes of the layer in spatialLedgers.',
+        check: 'Expressible from state and asserted that way in tests/domain/houseLedgerTr2.test.js fence 1, with the lit-mutant control on the same fixture.',
+      }),
+      Object.freeze({
+        name: 'no_undead_house',
+        description: 'A ruined house whose faction is still eligible does not re-open inside the ruin cooldown, and re-forms after it as a NEW entry with fresh books and a lineage count.',
+        check: 'Expressible from state and asserted that way in tests/domain/houseLedgerTr2.test.js on a fixture driven from the top holdings band to ruin and back.',
+      }),
+    ]),
+    // No channel at all, so the row can never be ALIVE and says so honestly.
+    soakEvidence: 'unobserved',
+  }),
+  // ── TR-3 · BELIEVED MARKETS (FP TR-3, docs/DESIGN_FP_TRADE.md §TR-3; block #25) ────────────
+  // APPENDED AT THE TAIL, after TR-2's row, by the add-a-row protocol above: TR still has no
+  // family leaf, and a row inserted before TR-2's would shift that row's index and move
+  // certification output (the ODQ §864 ordinal class). The flag MANIFEST takes its codepoint
+  // position (SR-7); this ordered array keeps the protocol's append.
+  Object.freeze({
+    rule: 'believedMarketsEnabled',
+    title: 'Believed markets (the WHERE composer, the wrong-market tellable)',
+    module: 'src/domain/spatial/dispatchDestination.js,src/domain/worldPulse/beliefScarcity.js,src/domain/worldPulse/marketNews.js',
+    aliveness: Object.freeze({
+      // DELIBERATELY EMPTY: the layer mints no pulse candidate; the wrong-market arrival is
+      // RETURNED evidence the orchestrator hands back, voiced by a Herald kind no mount feeds yet.
+      eventTypes: Object.freeze([]),
+      // DELIBERATELY EMPTY: no behavioural family can carry a queue order without grading this
+      // row alive off the trade layer's ordinary traffic in worlds where it never ran.
+      moverFamilies: Object.freeze([]),
+      // DELIBERATELY EMPTY: the wave persists NOTHING (the TR volume: receipts only). The belief
+      // pictures it reads are SP-B's and the stocks and shipments it orders are M6a's.
+      stateKeys: Object.freeze([]),
+      other: 'A QUEUE ORDER AND A RETURNED RECEIPT, WHICH IS WHY EVERY CHANNEL IS EMPTY AND WHY THAT IS THE CORRECT READING. ONE GATE, by name and strict: believedMarketsActive (dispatchDestination.js) is the only read of the key in src/, made once per tick by the commodity-flow orchestrator. WHAT IT DOES: when an origin\'s finite stock cannot fill every market that wants it, the destination loop stops walking its links in codepoint order and walks them in the order the WHERE composer returns, through dispatchEV.js\'s destination-consumer seam: the markets the supplying court BELIEVES dearest in the good\'s class first (SP-B\'s own believed plenty, read by the sibling leaf beliefScarcity.js), a tie between two believed markets going to the deeper TRUE need, and the loop\'s key last. The seam admits a permutation of the loop\'s own keys and nothing else, so no caravan is created, lost or duplicated. A caravan that lands and leaves its market in the truth-side surplus band while its origin still believes that market dear is returned as the wrong-market arrival, naming both bands side by side (the T-1 tellable). WHAT IT NEVER DOES: it never merges the two scarcities into one number (Seam Three: the order is lexicographic, and the acceptance file\'s token scan convicts any mixing expression), never touches the three need-premium reads the EV, the spill and the trickle make, never writes a belief, and draws no random number. THE OBSERVATION NEEDED to close the gap is a WIRING WAVE: mount the wrong-market voice on the pulse\'s news and a receipt can count the arrivals; until then the lane is pinned in tests/domain/believedMarketsTr3.test.js, which carries its four dormancy fences, the pulse hash arm and the lit-mutant control.',
+    }),
+    // A queue order moves only when an origin is short of stock, and a wrong-market arrival only
+    // when a believed market has turned, so the layer's output is sparse and driven by its world.
+    expectedTempo: 'reactive',
+    invariants: Object.freeze([
+      Object.freeze({
+        name: 'dark_is_byte_identical',
+        description: 'With the key absent, false, or any truthy non-true value, the orchestrator\'s whole output and six real pulse records are the pre-wave output and records byte for byte, over fixtures that send the caravan to the other market and tell a wrong-market arrival the moment the key is lit.',
+        check: 'Expressible from state and asserted that way in tests/domain/believedMarketsTr3.test.js fences 1 and 2 and the hash arm, against sha256 figures measured at the lane\'s base, with the lit-mutant control on the same fixtures.',
+      }),
+      Object.freeze({
+        name: 'the_two_scarcities_never_merge',
+        description: 'The believed band and the truth-side need are read in one module only, the whitelisted dispatch composer, and no expression there combines them arithmetically: belief decides the order, truth only breaks a belief tie.',
+        check: 'NOT expressible from a receipt. Pinned in tests/domain/believedMarketsTr3.test.js by a token scan with a seeded deliberate-average control and a co-import census with a planted third co-importer.',
+      }),
+    ]),
+    // No channel at all, so the row can never be ALIVE and says so honestly.
+    soakEvidence: 'unobserved',
+  }),
+  // ── IN-2 · THE LURE (FP IN-2, docs/DESIGN_FP_INFORMATION.md §5 IN-2; block #18) ─────────
+  // APPENDED AT THE TAIL, the add-a-row protocol above (the belief block's header forbids an
+  // append there, where IN-1a's mirror sits); an append here shifts no existing row's index.
+  Object.freeze({
+    rule: 'infoLureEnabled',
+    title: 'The lure (axis-typed lies, the spring, bluff against bluff)',
+    module: 'src/domain/worldPulse/infoLure.js,src/domain/worldPulse/informationStatecraft.js',
+    aliveness: Object.freeze({
+      // DELIBERATELY EMPTY: the lure mints no pulse candidate; its one beat, lure_sprung, is a
+      // statecraft news entry, and a candidate channel would grade this row off nothing.
+      eventTypes: Object.freeze([]),
+      // DELIBERATELY EMPTY: the knowledge family is a residual bucket (IN-6's decontamination),
+      // so no behavioural family can grade the lure alive without grading every bluff with it.
+      moverFamilies: Object.freeze([]),
+      // DELIBERATELY EMPTY: the lure writes through spatialLedgers.disinfo, whose ONE writer is
+      // the statecraft head, and ordinary bluffs keep that key alive in worlds the lure never lit.
+      stateKeys: Object.freeze([]),
+      other: 'A LIT-ONLY SET OF ARMS ON AN EXISTING LEDGER, WHICH IS WHY EVERY CHANNEL IS EMPTY AND WHY THAT IS THE CORRECT READING. ONE GATE, by name and strict: infoLureActive (infoLure.js) is the only read of the key in src/, and processLies asks it once, before the spring, the bluff collision and the exposure clause. The axis-typed exposure law it consults is the ONE law for every record, legacy included, and moves no legacy byte: an absent axis is the head\'s own strength law, moved verbatim, and an axis record is judged on its own ladder at the same tolerance or, for the faith label, by inequality. WHAT IT DOES, LIT: a weakness bait (a deflate strength lie about a court) that stood in a mark\'s reckoning when the mark chose to march on that court, on exactly the band it asserted, becomes the DM-truth lure_sprung beat, covert and addressed to all three courts; an aged-out bluff whose audience\'s own counter-bluff was standing in the liar\'s court is exposed naming both lies; and a bought strength plant about a third court names that court and its direction at exposure. The leaf also DEFINES the commission-lie direction and the plantChannel predicate headless (IN-2-c: the consumer lands when U123 composes the direction transport), with the producer that consumer will call. WHAT IT NEVER DOES: it draws no random number and hashes nothing, reads the phantom discriminant nowhere (a phantom never enters the snapshot), and writes no ledger of its own. THE OBSERVATION NEEDED to close the gap is a lit soak in which a bought deflate plant meets its mark\'s misjudged march; until then the lane is pinned in tests/domain/infoLureIn2.test.js, which carries its four dormancy fences and the lit-mutant control.',
+    }),
+    // A spring needs a bought lie AND the mark's own march on the same court: sparse by design.
+    expectedTempo: 'reactive',
+    invariants: Object.freeze([
+      Object.freeze({
+        name: 'dark_is_byte_identical',
+        description: 'With the key absent, false, or any truthy non-true value, processLies over a fixture that springs a lure and collides two bluffs the moment the key is lit returns exactly the bytes it returned before IN-2.',
+        check: 'Expressible from state and asserted that way in tests/domain/infoLureIn2.test.js fence 1 (a pinned digest of the dark output), with the lit-mutant control on the same fixture.',
+      }),
+      Object.freeze({
+        name: 'legacy_records_read_as_strength',
+        description: 'A disinfo record with no axis field is judged by the strength law alone, so every save written before IN-2 exposes on exactly the tick it would have.',
+        check: 'Expressible from state and asserted that way in tests/domain/infoLureIn2.test.js over a table of legacy records, beside the head\'s own pins.',
+      }),
+    ]),
+    // No channel at all, so the row can never be ALIVE and says so honestly.
+    soakEvidence: 'unobserved',
+  }),
+  // ── GR-6 · MEDIATION GENERALIZED (FP GR-6, docs/DESIGN_FP_GRAMMAR.md §GR-6; block #14) ─────
+  // APPENDED AT THE TAIL, the add-a-row protocol above: the compact-grammar block that holds the
+  // other GR rows forbids an append in its own header, and an append here shifts no index.
+  Object.freeze({
+    rule: 'mediationGeneralizedEnabled',
+    title: 'Mediation generalized (the broker before the blood)',
+    module: 'src/domain/worldPulse/mediationPressure.js',
+    aliveness: Object.freeze({
+      // DELIBERATELY EMPTY: the layer mints no pulse candidate. Its one receipt is a news entry
+      // the treaty stage returns, and no behavioural family carries it.
+      eventTypes: Object.freeze([]),
+      // DELIBERATELY EMPTY: a mediation leaves no mover of its own, and the war layer's and the
+      // treaty layer's ordinary traffic would grade this row alive in worlds where it never ran.
+      moverFamilies: Object.freeze([]),
+      // DELIBERATELY EMPTY, and structural: the layer owns NO state key. It reads the war-intent
+      // and treaty ledgers and writes only trust, through the overlay's own writer.
+      stateKeys: Object.freeze([]),
+      other: 'A PRESSURE WITH NO STATE OF ITS OWN, WHICH IS WHY EVERY CHANNEL IS EMPTY AND WHY THAT IS THE CORRECT READING. ONE GATE, by name and strict: mediationGeneralizedActive (mediationPressure.js) is the only read of the key in src/, a conjunction with the peace engine\'s two keys because every occasion speaks through the treaty stage. WHAT IT DOES: the one cross-pressured finder (peaceTermsGraph.findCrossPressuredMediator), which named a broker only at a war\'s exit, gains two occasions. At the intent stage a broker standing between a pair whose seat left a march order hands the one war opener a bounded multiplier below one, which lifts the order\'s CONQUEST_MARGIN waiver and scales that soft comparison; every hard gate still runs and a strong enough court still marches. An order that reaches the end of its window still standing, with a broker between the pair, is told as the war that did not happen (the brokered_back receipt, naming the broker) and the broker earns the two-edge trust the war-exit broker does (accrueMediationTrust, reused). At a fraying pact a broker between the parties softens the strain accrual one banded notch, a smaller notch for a record already strained. WHAT IT NEVER DOES: it forces nothing, draws nothing, mints no ledger, and names no temple (the temple arm waits on a ruling). THE OBSERVATION NEEDED to close the gap is the mediation mix GR-7 owes: brokered_back beats counted per soak year against the war-intent orders that lapsed, and the decree-caused ones counted apart. Until then the lane is pinned in tests/domain/mediationGeneralizedGr6.test.js, which carries its four dormancy fences and the lit-mutant control.',
+    }),
+    // The pressure reads a live order and the receipt waits on a closing window, so the layer's
+    // output is sparse and driven entirely by its world.
+    expectedTempo: 'reactive',
+    invariants: Object.freeze([
+      Object.freeze({
+        name: 'dark_is_byte_identical',
+        description: 'With the key absent, false, or any truthy non-true value, the opener opens exactly the war it opens without the layer, and the treaty stage returns its input result by reference, over a fixture that holds a war back and mints a receipt the moment the key is lit.',
+        check: 'Expressible from state and asserted that way in tests/domain/mediationGeneralizedGr6.test.js fences 1 and 2, with the lit-mutant control on the same fixture.',
+      }),
+      Object.freeze({
+        name: 'mediation_never_forces',
+        description: 'A pair with a broker and no standing order is untouched, and a pressured order whose court is strong enough still opens its war: the multiplier scales one soft comparison and blocks nothing.',
+        check: 'Expressible from state and asserted that way in tests/domain/mediationGeneralizedGr6.test.js on two fixtures, one held back and one that still marches.',
+      }),
+    ]),
+    // No channel at all, so the row can never be ALIVE and says so honestly.
+    soakEvidence: 'unobserved',
+  }),
+  // ── THE INTEL LANE (deep-couplings D-3, docs/DESIGN_DEEP_COUPLINGS.md §7; FP IN-4 commit 1,
+  // J-INA-4) ──────────────────────────────────────────────────────────────────────────────
+  // APPENDED AT THE TAIL, the add-a-row protocol above. The gate is OLDER than this row: the key
+  // sat on the engine-gated walker's measured backlog as an invisible read until IN-4 declared it,
+  // and manifesting it is the act that makes the row come due.
+  Object.freeze({
+    rule: 'intelTradeEnabled',
+    title: 'The intel lane (a belief given or sold between courts)',
+    module: 'src/domain/spatial/intelActs.js,src/domain/worldPulse/generosityKernel.js,src/domain/worldPulse/informationStatecraft.js',
+    aliveness: Object.freeze({
+      // DELIBERATELY EMPTY per the evidence law: the lane mints no pulse candidate. Its one beat,
+      // intel_transfer, is a statecraft news entry, and its obligations fold through the
+      // generosity writer's own ledger.
+      eventTypes: Object.freeze([]),
+      // DELIBERATELY EMPTY: the beat classifies into `knowledge`, the contaminated residual.
+      moverFamilies: Object.freeze([]),
+      // ONE channel, and it is exact: generosityKernel.advanceGenerosity is the ONE writer of
+      // the per-pair cooldown, it materializes only when a lit transfer fires, and it outlives
+      // the one-tick deposit by the whole cooldown horizon, so a yearly census can see a lane
+      // whose deposit ledger (pruned the tick after it lands) it would almost never catch.
+      stateKeys: Object.freeze(['spatialLedgers.intelCooldown']),
+      other: 'ONE GATE, BY NAME AND STRICT, AND IT IS OLDER THAN THIS ROW. intelActs.intelTradeActive is the only read of the key in src/, and exactly two doors call it: the deposit in generosityKernel.advanceGenerosity, conjoined there with beliefs live and infoStatecraftEnabled and reached only while the generosity movers run at all, and the consume arm in informationStatecraft.advanceInformationStatecraft, behind the statecraft gate. WHAT IT DOES, LIT: when a court updates a belief this tick and a bonded ally or a trade partner with a stake in the subject knows it less well, a rare act (a trigger, a per-pair cooldown, a yearly eligibility draw and a per-tick cap) deposits the seller snapshot. A gift binds the receiver in gratitude; a sale repays a debt the seller owes the buyer or mints one the other way. On the next tick the one-tick deposit courier injects the read into the receiver seat at the seller fidelity, voices an intel_transfer beat, and the self-policing resolver credits or charges the seller credibility against the subject true band. WHAT IT NEVER DOES: it runs no per-tick scanner, so no trigger means no act; the generosity side writes no belief; and nobody sells to an enemy. THE ONE-TICK DEPOSIT COURIER IS THE SHAPE FP IN-4 CHARTERS TO RETIRE behind this key and errandSpineEnabled together, and that retirement is not part of this row. THE OBSERVATION NEEDED to grade the lane: a receipt whose rules record this key true and whose yearly census carries spatialLedgers.intelCooldown. Until then it is pinned in tests/domain/intelActs.test.js, tests/domain/intelSelfPolicing.test.js and tests/property/intelTradeDormancyGolden.test.js.',
+    }),
+    // A handful of transfers a year at most, each answering a fresh belief: sparse and reactive.
+    expectedTempo: 'reactive',
+    invariants: Object.freeze([
+      Object.freeze({
+        name: 'dark_deposits_nothing',
+        description: 'With the key absent, false, or any truthy non-true value, advanceGenerosity deposits no transfer and writes no cooldown, and the consume arm injects nothing, even in a fully lit substrate of beliefs, statecraft and constructive flows.',
+        check: 'Pinned in tests/property/intelTradeDormancyGolden.test.js (the dormancy manifest and its contract arm). Expressible from state: a receipt whose rules keep this key dark for the whole run never carries spatialLedgers.intelCooldown in its census.',
+      }),
+      Object.freeze({
+        name: 'a_deposit_is_consumed_once',
+        description: 'A deposited transfer is injected exactly once, on the tick after its deposit, and pruned by its own writer that same tick, so a read reaches its receiver at most once whatever the save cadence.',
+        check: 'NOT expressible from a receipt: the deposit ledger lives one tick. Pinned at the movers in tests/domain/intelActs.test.js and tests/domain/intelSelfPolicing.test.js.',
+      }),
+    ]),
+    // One exact channel the v5 census can read the day a receipt carries the flag: `indirect`.
+    soakEvidence: 'indirect',
+  }),
+  // ── IN-3 · THE COUNTER-GAME (FP IN-3, docs/DESIGN_FP_INFORMATION.md §5 IN-3; block #19) ─────
+  // APPENDED AT THE TAIL, the add-a-row protocol above; an append here shifts no existing index.
+  Object.freeze({
+    rule: 'counterIntelEnabled',
+    title: 'The counter-game (suspicion, the sweep, the gates closed in answer)',
+    module: 'src/domain/worldPulse/suspicion.js,src/domain/worldPulse/counterIntelSweep.js,src/domain/worldPulse/patronExposure.js,src/domain/worldPulse/informationStatecraft.js',
+    aliveness: Object.freeze({
+      // DELIBERATELY EMPTY: the counter-game mints no pulse candidate; its two beats are news
+      // entries of the sweep producer, whose consumer lands with the direction transport.
+      eventTypes: Object.freeze([]),
+      // DELIBERATELY EMPTY: the knowledge family is a residual bucket, so no behavioural family
+      // can grade the counter-game alive without grading every ordinary bluff with it.
+      moverFamilies: Object.freeze([]),
+      // DELIBERATELY EMPTY: the answer writes through spatialLedgers.secrecyPostures, whose ONE
+      // writer is the statecraft head, and ambient paranoia keeps that key alive in dark worlds.
+      stateKeys: Object.freeze([]),
+      other: 'A DERIVED READ AND TWO PULSE SEAMS ON EXISTING LEDGERS, WHICH IS WHY EVERY CHANNEL IS EMPTY AND WHY THAT IS THE CORRECT READING. ONE GATE, by name and strict: counterIntelActive (suspicion.js) is the only read of the key in src/, a conjunction with the belief gate. WHAT IT DOES, LIT: suspicionOf reads how hard the receipts a court holds press it (the corruption scandal on its own record, the deception-class scars on its own edges weighted by the resentment still held, and an injected mirror gap), banded on the estate intensity ladder and never reading truth. Two seams in the statecraft head: a court whose suspicion clears its posture-scaled threshold closes its gates by decision and reopens them by the ambient exit law once the evidence decays, and a suspicious court believes a planted claim less, the discount composed on the mouthpiece plane weight. The houses: a covert patronage stands exposed while its host is suspicious enough that a keyed reading of the house falls under the band odds, which supplies projectPatronBindings its exposed list at last, and the plant counter refuses a story too hot to sell (too_hot). The leaves also DEFINE the sweep-for-agents direction and the suspicionAbove predicate headless (IN-3-c: the consumer lands when U123 composes the direction transport), the sweep producer and its three outcomes, VET as the third reception arm and SEND-TWO over the one divergence reader. WHAT IT NEVER DOES: it stores no suspicion, reads no truth in the suspicion read, fates no one (the accused is named, never removed), and forks no stream but the keyed catch. THE OBSERVATION NEEDED to close the gap is a lit soak in which a scarred court closes its gates in answer and reopens them; until then the lane is pinned in tests/domain/counterIntelIn3.test.js, which carries its four dormancy fences and the lit-mutant control.',
+    }),
+    // The read answers only to receipts a court already holds, so its output is sparse and
+    // driven entirely by its world.
+    expectedTempo: 'reactive',
+    invariants: Object.freeze([
+      Object.freeze({
+        name: 'dark_is_byte_identical',
+        description: 'With the key absent, false, or any truthy non-true value, the statecraft head over a fixture that closes a gate in answer and doubts a planted claim the moment the key is lit returns exactly the bytes it returned before IN-3.',
+        check: 'Expressible from state and asserted that way in tests/domain/counterIntelIn3.test.js fence 1 (a pinned digest of the dark output), with the lit-mutant control on the same fixture.',
+      }),
+      Object.freeze({
+        name: 'suspicion_never_reads_truth',
+        description: 'The suspicion read imports no truth reader and names no truth ledger, so a court can be rightly suspicious with no spy present and wrongly calm with several.',
+        check: 'Expressible from source and asserted that way in tests/domain/counterIntelIn3.test.js by an import pin and a token scan, with a planted truth read convicted and the sweep, which reads truth, convicted as the guard-the-guard control.',
+      }),
+    ]),
+    // No channel at all, so the row can never be ALIVE and says so honestly.
+    soakEvidence: 'unobserved',
+  }),
+  // ── IN-4 · THE ROAD (FP IN-4 commit 2, docs/DESIGN_FP_ARCH_IN.md §4 IN-4; block #20) ─────────
+  // APPENDED AT THE TAIL after the intel lane's row, the add-a-row protocol above.
+  Object.freeze({
+    rule: 'reputationRaceEnabled',
+    title: 'The reputation race (the traveller against his own story, at the gate)',
+    module: 'src/domain/worldPulse/reputationRaceConsumer.js,src/domain/worldPulse/routeNetworkConsumersRace.js,src/domain/worldPulse/settlementLifecycleKernel.js',
+    aliveness: Object.freeze({
+      // DELIBERATELY EMPTY per the evidence law: the stage mints no pulse candidate; its four
+      // beats are news entries the lifecycle host hands to the pulse.
+      eventTypes: Object.freeze([]),
+      // DELIBERATELY EMPTY: the beats classify into `knowledge`, the contaminated residual.
+      moverFamilies: Object.freeze([]),
+      // DELIBERATELY EMPTY: the stage writes nothing at all. It reads the army, envoy and npc
+      // ledgers, whose containers stay alive in worlds where the race never ran.
+      stateKeys: Object.freeze([]),
+      other: 'A NEWS-ONLY STAGE OVER LEDGERS OTHER LAYERS WRITE, WHICH IS WHY EVERY CHANNEL IS EMPTY AND WHY THAT IS THE CORRECT READING. ONE GATE, by name and strict: reputationRaceActive (reputationRaceConsumer.js) is the only read of the key in src/, and advanceReputationRace asks it before any ledger is read. The stage is mounted in the lifecycle host, own flag before the host gate, and its beats ride both of the host return paths. WHAT IT DOES, LIT: at every arrival a ledger kept last tick (an army column landing at its destination, an envoy coming home from a parlay, a DM-assigned roamer placed at his new host), it runs the reputation race, the story walking the lived route network from the same seat and departure while the traveller keeps the timing his own ledger recorded, and voices the built RACE_OUTCOMES token through the INFORMATION registry: race_person, race_story or race_together, each honest for its racer. An envoy whose story beat him home after his court resolved a misjudged decision about the very court he parleyed with is voiced word_came_too_late instead, the truth that arrived too late. WHAT IT NEVER DOES: it writes no ledger and no field, draws no random number, stores no verdict, and mints nothing when no story is in flight (the trivial race is silent) or when neither telling can arrive. REFUGEE COLUMNS ARE NOT READ: the release deletes a landed column and keeps no origin anywhere in the world. THE OBSERVATION NEEDED to close the gap is a lit soak whose route network is lit and whose armies, envoys or DM-assigned roamers arrive with a story on the road; until then the lane is pinned in tests/domain/reputationRaceIn4.test.js, which carries its four dormancy fences and the lit-mutant control.',
+    }),
+    // A beat needs an arrival with a story in flight over open road: sparse by design.
+    expectedTempo: 'reactive',
+    invariants: Object.freeze([
+      Object.freeze({
+        name: 'dark_is_byte_identical',
+        description: 'With the key absent, false, or any truthy non-true value, the lifecycle host over a world whose arrivals race the moment the key is lit returns exactly what it returned before IN-4: the same worldState reference, the same vote and the same news.',
+        check: 'Expressible from state and asserted that way in tests/domain/reputationRaceIn4.test.js fence 1 (a pinned digest of the dark host output, computed with the pre-IN-4 host planted), with the lit-mutant control on the same fixture.',
+      }),
+      Object.freeze({
+        name: 'the_race_writes_nothing',
+        description: 'Lit, the stage hands back the very worldState it was given and adds only news entries: no ledger, no field, no stored verdict, so the act a late true account arrives after is never rewritten.',
+        check: 'Asserted by reference identity and a byte comparison of pulseHistory in tests/domain/reputationRaceIn4.test.js (the jewel and the mount pins).',
+      }),
+    ]),
+    // No channel at all, so the row can never be ALIVE and says so honestly.
+    soakEvidence: 'unobserved',
+  }),
+  // ── CW-1 · THE CASCADE GOVERNOR (FP CW-1, docs/DESIGN_FP_ARCH_CW.md §CW-1; block #58) ─────────
+  // APPENDED AT THE TAIL after IN-4's row, the add-a-row protocol above. A DISPLAY-SIDE layer:
+  // every channel is empty because it writes nothing, and the row says what it gates, what it
+  // never does and the observation that would grade it.
+  Object.freeze({
+    rule: 'cascadeGovernorEnabled',
+    title: 'The cascade governor (the braid of causes at Herald composition)',
+    module: 'src/domain/display/cascadeBraid.js,src/components/map/heraldFeed.js',
+    aliveness: Object.freeze({
+      // DELIBERATELY EMPTY per the evidence law: the braid mints no pulse candidate; it composes
+      // view items over receipts other layers recorded.
+      eventTypes: Object.freeze([]),
+      // DELIBERATELY EMPTY: no mover family carries a display composition.
+      moverFamilies: Object.freeze([]),
+      // DELIBERATELY EMPTY: the braid writes nothing at all. It reads the provenance ledger and the
+      // durable records the feed files from, whose containers live in worlds it never braids.
+      stateKeys: Object.freeze([]),
+      other: 'A DISPLAY COMPOSITION OVER RECORDED RECEIPTS, WHICH IS WHY EVERY CHANNEL IS EMPTY AND WHY THAT IS THE CORRECT READING. ONE GATE, by name and strict: cascadeGovernorActive (cascadeBraid.js) is the only read of the key in src, and the Herald feed composer (heraldFeed.js, buildHeraldFeed) asks it on one guarded line before the braid is entered. WHAT IT DOES, LIT: at Herald composition it finds a cascade, the member floor or more filed receipts inside a closed window of one season that share one causal ancestor by identity through a recorded provenance edge and whose links cross the layer floor or more coupling registry layers, and it files one story item at the top significance of the cascade. Its sentence names the ancestor in its own recorded words, the layers crossed and the count; its body is the chain rendered forward by the discourse kernel. Every member stays in its desk with its id, damped to the routine class, and a major member is never damped. WHAT IT NEVER DOES: it writes no ledger, no record and no save byte, draws nothing, braids no covert receipt and no decision awaiting the DM, and braids nothing without a recorded common parent. THE OBSERVATION NEEDED to close the gap is a lit soak whose volumes record their causes at the mint, so that chains across layers exist to braid; until then the lane is pinned in tests/domain/cascadeBraidCw1.test.js, which carries its four dormancy fences and the lit-mutant control.',
+    }),
+    // A braid needs a recorded chain across layers: sparse by design, and only where one exists.
+    expectedTempo: 'reactive',
+    invariants: Object.freeze([
+      Object.freeze({
+        name: 'dark_is_byte_identical',
+        description: 'With the key absent, false, or any truthy non-true value, the Herald feed over a world whose receipts braid the moment the key is lit is exactly the feed the composer built before the braid existed: the same items, the same order, the same bytes.',
+        check: 'Expressible from state and asserted that way in tests/domain/cascadeBraidCw1.test.js fence one (a pinned digest of the dark feed, computed with the pre-braid composer planted), under every shipped preset, with the lit-mutant control on the same fixture.',
+      }),
+      Object.freeze({
+        name: 'damped_never_dropped',
+        description: 'Lit, the feed is the dark feed item for item plus the story items: every member keeps its id, its desk and its place, damped to the routine class, and a major member keeps its severity and its class.',
+        check: 'Asserted by an item count and a per-desk id order in tests/domain/cascadeBraidCw1.test.js (the cascade pin and the major member pin).',
+      }),
+      Object.freeze({
+        name: 'the_braid_writes_nothing',
+        description: 'The braid reads the campaign and the provenance ledger and writes only into the fresh section map of the composer: no record, ledger or save key changes, and a second composition returns the same bytes.',
+        check: 'Asserted by a serialized comparison of the campaign before and after, and by a second composition, in tests/domain/cascadeBraidCw1.test.js.',
+      }),
+    ]),
+    // No channel at all, so the row can never be ALIVE and says so honestly.
+    soakEvidence: 'unobserved',
+  }),
 ]);
 
 /**

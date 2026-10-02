@@ -150,6 +150,7 @@ const TRACKED_TO_MOVER = Object.freeze({
   pactProposals: 'pact_formation',
   missionCreditEvents: 'mission_credit',
   habits: 'habit_conditioning',
+  houses: 'merchant_houses',
 });
 
 // Mover rows that carry NO tracked ledger key of their own, recorded by name with the

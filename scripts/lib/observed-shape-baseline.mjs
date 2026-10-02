@@ -7,7 +7,34 @@
  *
  * ── ⭐⭐ EIGHT IDENTITY DEFINITIONS LIVE HERE, AND ONLY ONE IS THE AUTHORITY ──
  *
- * `BASELINE_SCHEMA` is **15**: schema 14's tagged numeric heuristic-leaf envelope
+ * `BASELINE_SCHEMA` is **24**: schema 23's tagged numeric heuristic-leaf envelope, tag law
+ * and ten-identity roster UNCHANGED, re-governed to a register that ADMITS THE URBAN BAND'S
+ * CORPUS RE-DEAL (ODQ §934.86 and its addendum 2). The same-seed shift re-dealt the AO-0
+ * corpus's year, so the heuristic now OBSERVES shapes it bound differently before — the
+ * institution-flags `inst`, the undercity's `facets`, a partial `originContext` — and 53 rows
+ * of reads land against them: name collisions with same-named records and keys written only
+ * on branches this year does not reach. They are ADMITTED as ordinary debt under the
+ * migration review's per-row notes; nothing is declared, so the roster and the bank (69/45)
+ * hold. One row shrinks. Its full rationale lives beside `CORPUS_REDEAL_TARGET_SCHEMA` in
+ * `migrate-observed-shape-readers.mjs`.
+ *
+ * `RETIRED_EDIT_MODE_READERS_BASELINE_SCHEMA` is **23**: schema 22's tagged numeric heuristic-leaf envelope
+ * re-governed to a register that ADMITS THE EDIT MODE'S SAVE-TIME READERS. Four rows
+ * land at two identities the GENERATION corpus can never observe a writer for —
+ * `kind on settlement`, the phantom counterparty's discriminant, minted by
+ * `mintPhantom` onto the record that IS the save blob; and `decrees on settlement`,
+ * the decree registry, assigned by `commitRegistry` in the store — and BOTH are
+ * DECLARED, which makes it the first rung since 11 to grow the roster and the first
+ * ever to grow it by two. Declaring by IDENTITY also tags the one ordinary
+ * `decrees on settlement` row the estate already carried, so the bank goes 61/40 to
+ * 69/45 over a roster of ten. Its full rationale lives beside
+ * `EDIT_MODE_READERS_TARGET_SCHEMA` in `migrate-observed-shape-readers.mjs`.
+ *
+ * ⚠ THIS SENTENCE NAMED **15** THROUGH EIGHT RUNGS, which is the stale-twin class the
+ * bank fence exists to refuse elsewhere; the schema-15 paragraph it displaced is kept
+ * verbatim below under its own retired name rather than deleted.
+ *
+ * `RETIRED_STABLE_CORE_BASELINE_SCHEMA` is **15**: schema 14's tagged numeric heuristic-leaf envelope
  * re-governed to a DETECTOR THAT NO LONGER CALLS A RECORD A MAP. Like 11 and 14,
  * this rung binds a repaired detector; unlike either, the repair is to the
  * CLASSIFIER the corpus is built from rather than to a door the gate consults,
@@ -326,7 +353,23 @@ export const RETIRED_BANK_FENCE_BASELINE_SCHEMA = 20;
  *  so a schema-21 PREDECESSOR is still validated as schema 21 after the live number moves
  *  past it. */
 export const RETIRED_RELATIONSHIPS_MOUNT_BASELINE_SCHEMA = 21;
-export const BASELINE_SCHEMA = 22;
+/** The RETIRED domain-reader definition — schema 23's predecessor. Same tagged topology
+ *  envelope and the same fence on the write; schema 23 re-governs it to a register that ADMITS
+ *  THE EDIT MODE'S SAVE-TIME READERS — four rows at `kind on settlement` and
+ *  `decrees on settlement`, both of them DECLARED, which takes the roster from EIGHT to TEN and
+ *  the bank from 61/40 to 69/45. Unlike 22 it adds rows rather than moving them, and unlike 21
+ *  it grows the ROSTER rather than only the tagged row count. Never redefined, never deleted — a
+ *  live baseline is validated against BASELINE_SCHEMA, and this constant exists so a schema-22
+ *  PREDECESSOR is still validated as schema 22 after the live number moves past it. */
+export const RETIRED_DOMAIN_READER_BASELINE_SCHEMA = 22;
+/** The RETIRED edit-mode-readers definition — schema 24's predecessor. Same tagged topology
+ *  envelope, roster and fence; schema 24 re-governs it to a register that ADMITS THE URBAN BAND'S
+ *  CORPUS RE-DEAL — 53 ordinary rows the re-dealt AO-0 year exposes, one shrunk row, no
+ *  declaration, the bank unmoved at 69/45. Never redefined, never deleted — a live baseline is
+ *  validated against BASELINE_SCHEMA, and this constant exists so a schema-23 PREDECESSOR is
+ *  still validated as schema 23 after the live number moves past it. */
+export const RETIRED_EDIT_MODE_READERS_BASELINE_SCHEMA = 23;
+export const BASELINE_SCHEMA = 24;
 /** The RETIRED exact per-site definition. Never redefined, never deleted. */
 export const RETIRED_EXACT_BASELINE_SCHEMA = 3;
 /** The RETIRED UNFILTERED heuristic-leaf definition — schema 5's predecessor.
@@ -922,10 +965,33 @@ export function validateSchema21Baseline(baseline) {
   );
 }
 
+/** The RETIRED authority — schema 22's tagged envelope, re-governed by schema 23 to a register
+ *  that admits the edit mode's four save-time reads and declares their two identities. Re-bound
+ *  to its own LITERAL now that the authority has moved to 23, for the same reason as every
+ *  retired validator above. */
+export function validateSchema22Baseline(baseline) {
+  return validateLeafBaseline(
+    baseline,
+    RETIRED_DOMAIN_READER_BASELINE_SCHEMA,
+    { tagged: true },
+  );
+}
+
+/** The RETIRED authority — schema 23's tagged envelope, re-governed by schema 24 to a register
+ *  that admits the urban band's corpus re-deal. Re-bound to its own LITERAL now that the
+ *  authority has moved to 24, for the same reason as every retired validator above. */
+export function validateSchema23Baseline(baseline) {
+  return validateLeafBaseline(
+    baseline,
+    RETIRED_EDIT_MODE_READERS_BASELINE_SCHEMA,
+    { tagged: true },
+  );
+}
+
 /** The LIVE envelope validator. Bound to `BASELINE_SCHEMA` rather than a literal,
  *  so the retired rungs above keep validating their own numbers while this one
  *  always names the authority. */
-export function validateSchema22Baseline(baseline) {
+export function validateSchema24Baseline(baseline) {
   return validateLeafBaseline(baseline, BASELINE_SCHEMA, { tagged: true });
 }
 

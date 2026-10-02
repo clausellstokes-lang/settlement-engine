@@ -23,6 +23,7 @@ import IconButton from '../primitives/IconButton.jsx';
 import DeleteConfirmation from '../DeleteConfirmation';
 import { emblem } from '../../design/organic/ornament/compose.js';
 import { useStore } from '../../store/index.js';
+import { t } from '../../copy/index.js';
 import { relColor } from '../../domain/display/relationshipColors.js';
 import { track, EVENTS } from '../../lib/analytics.js';
 import { purchasesOpen } from '../../lib/launchGate.js';
@@ -46,6 +47,18 @@ const rubric = (mobile) => ({ fontFamily: sans, fontSize: chromeFontSize(FS.xs, 
 // margin tally. The label wraps both input + glyph, so a click on the glyph (or
 // keyboard focus + space) toggles the input; the tally is a pure visual re-vehicle.
 const TALLY_INPUT_HIDDEN = { position: 'absolute', width: 1, height: 1, margin: -1, padding: 0, overflow: 'hidden', clip: 'rect(0 0 0 0)', border: 0, whiteSpace: 'nowrap' };
+
+/**
+ * ⛔ THE EDITOR'S PLAIN MODE, SELECTED OUT OF THE SLICE'S OWN FROZEN VOCABULARY AND NEVER
+ * RETYPED AS A BARE STRING (EM-D1). `EDITOR_MODES` is written in `compareCodepoint` order,
+ * so a positional read would follow a splice; the member is therefore matched by name, and
+ * a vocabulary that no longer carries it falls back to the slice's own NAMED off — which
+ * leaves the mode closed rather than storing a word the slice's reader cannot answer.
+ * @param {{ EDITOR_MODES: readonly string[], EDITOR_MODE_OFF: string }} editor
+ * @returns {string}
+ */
+const plainModeOf = (editor) =>
+  editor.EDITOR_MODES.filter((mode) => mode === 'plain')[0] || editor.EDITOR_MODE_OFF;
 
 // ── Settlement Card — a ledger row (reused in campaigns + unassigned) ──────────
 // Renders a <tr>: both call sites (the unassigned pile + each CampaignFolder) wrap
@@ -87,6 +100,27 @@ export function SettlementCard({ s, allModifiers, onView, deleteId, setDeleteId,
     const deletions = (state.campaignMutationLocks || []).map(lock => lock.token).join(',');
     return `${advances}|${deletions}`;
   });
+  // ── Edit mode's door (EM-D1, design §3: "A saved settlement's card offers Edit
+  //    when the tier allows it. Entering opens the dossier in edit mode.") ───────
+  // ⛔ THE GATE IS READ EXACTLY AS IT STANDS and no tier is named here. The predicate
+  // is authSlice's own `canEditSettlement`, whose second conjunct is an owner-signed
+  // act (design §20.4, judgment 268): while it answers false for every account this
+  // control simply is not offered, and it appears the day the owner opens the door.
+  const canEditSettlement = useStore(state => (
+    typeof state.canEditSettlement === 'function' ? state.canEditSettlement() : false
+  ));
+  const setUserPref = useStore(state => state.setUserPref);
+  // ⛔ THE SLICE IS REACHED DYNAMICALLY, which is this file's own idiom for a chunk it
+  // must not carry (the destroy control and the PDF export above) and is what keeps the
+  // whole edit volume out of the Library's closure: the KEY and the MODE are read out of
+  // `editSlice.js`'s frozen exports at the click, never spelled twice. A slice that fails
+  // to load still opens the dossier, simply not in edit mode.
+  const enterEditMode = () => {
+    import('../../store/editSlice.js').then(
+      (editor) => setUserPref?.(editor.EDITOR_MODE_PREF_KEY, plainModeOf(editor)),
+      () => null,
+    ).then(() => onView(s));
+  };
   const mutationBlocks = useMemo(() => {
     // The version string is a cheap subscription trigger; the actual guarded
     // actions are read fresh so this card never closes over stale store methods.
@@ -468,6 +502,17 @@ export function SettlementCard({ s, allModifiers, onView, deleteId, setDeleteId,
               {/* The whole row is the primary open target; this is the explicit,
                   subordinate echo of that action — outline, not solid. */}
               <Button variant="info" size="sm" disabled={!active} onClick={() => active && onView(s)} aria-label={`Open ${s.name}`}>Open</Button>
+
+              {/* Edit mode's door. It sets the editor's transient mode and opens the
+                  same dossier the row already opens, so no new prop crosses the three
+                  call sites this card has. */}
+              {canEditSettlement && (
+                <Button variant="secondary" size="sm" disabled={!active}
+                  onClick={() => active && enterEditMode()}
+                  aria-label={t('edit.shell.enterNamed', { name: s.name })}>
+                  {t('edit.shell.enter')}
+                </Button>
+              )}
 
               {/* Overflow: campaign / canonize / advance — infrequent, disclosed. */}
               {active && (

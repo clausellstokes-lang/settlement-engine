@@ -12,7 +12,7 @@
  * work follows.
  */
 
-import { registerStep } from '../pipeline.js';
+import { chooseOrPin, registerStep } from '../pipeline.js';
 import { recordTrace } from '../../domain/trace.js';
 import { deriveFactionProfile } from '../../domain/factionProfile.js';
 import { isAdversarialRelationship } from '../../domain/relationships/canonicalRelationship.js';
@@ -20,6 +20,14 @@ import {
   createPowerGenerationIntent,
   projectPowerGenerationIntent,
 } from '../power/economyReconciliation.js';
+
+/**
+ * THE UNPINNED SENTINEL. `chooseOrPin` returns the thunk's value only when the key is ABSENT
+ * from the bag, so returning this symbol is how the step asks the SHARED primitive whether a
+ * chooser is held without re-spelling its own-property rule. It is module-private, so no pin
+ * value can ever equal it.
+ */
+const UNPINNED = Symbol(); // The description was removed to buy the generation worker's bytes back at train EM-T13's terminal (judgment 187); the sentinel's IDENTITY is what the code compares, never its description, which nothing in src or tests reads.
 
 registerStep('generatePower', {
   deps: ['generateEconomy', 'resolveNeighbour'],
@@ -37,6 +45,9 @@ registerStep('generatePower', {
   const {
     tier, economicState, effectiveConfig, institutions,
   } = ctx;
+  // THE PIN CONSULT (EM-B2a3). Both of this step's choosers are gated through the runner's
+  // shared primitive at the call that produces them, so a held key costs no draw and no call.
+  const pins = ctx.__pins || null;
 
   // Note: neighbour faction influence is consumed by the separate
   // neighbourFactions step (ctx.neighbourFacBias); generatePowerStructure
@@ -57,17 +68,23 @@ registerStep('generatePower', {
   const neighbourRelationshipArg = neighbourRel && isAdversarialRelationship(neighbourRel.relationshipType)
     ? neighbourRel
     : null;
-  const powerIntent = createPowerGenerationIntent({
-    stepRng: rng,
-    tier,
-    neighbourRelationship: neighbourRelationshipArg,
-    config: effectiveConfig,
-    institutions,
-  });
-  const powerStructure = projectPowerGenerationIntent(
-    powerIntent,
-    economicState,
-  );
+  // A held value leaves this step BY REFERENCE (design §22 ruling 6, re-homed by EM-R1): the
+  // bytes are already the runner's, because `runPipeline` deep-clones the pin bag on entry,
+  // once, per channel, so nothing here can reach an object the caller owns. Local clone retired.
+  const heldIntent = chooseOrPin(pins, 'powerIntent', () => UNPINNED);
+  const powerIntent = heldIntent === UNPINNED
+    ? createPowerGenerationIntent({
+      stepRng: rng,
+      tier,
+      neighbourRelationship: neighbourRelationshipArg,
+      config: effectiveConfig,
+      institutions,
+    })
+    : heldIntent;
+  const heldStructure = chooseOrPin(pins, 'powerStructure', () => UNPINNED);
+  const powerStructure = heldStructure === UNPINNED
+    ? projectPowerGenerationIntent(powerIntent, economicState)
+    : heldStructure;
 
   // ── Trace recording (Tier 4.1) ───────────────────────────────────────
   // Emit one trace per faction the generator produced. Causes describe

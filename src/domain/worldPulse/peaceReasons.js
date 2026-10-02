@@ -693,6 +693,17 @@ function thirdThreatRead(deployments, graph, partyId, foeId) {
 // (the same stamp shape applyWorldPulse's sue_for_peace apply arm writes).
 // The verb pins prove the war layer executes a decree-stamped recall end to
 // end, so the contract cannot silently drift.
+//
+// THE VERB'S GUARDS, STATED (CURE-PEACE-1 U4, the chair's ruling FP-19, vetoable):
+// the order's refusals are exactly the three codes below, all this function's. The
+// recall is only half the order: its executor (realmVerbExecution.js, case
+// SUE_FOR_PEACE :: decreePeaceOffer) also puts the court's own peace offer before
+// the foe, written by the ONE offer writer the chooser uses
+// (settlementStrategy.js :: peaceSuitCandidate), and the apply mouth's standing
+// lanes answer it. With warLayer AND warTermination lit, WR-5's target court
+// decides, and an offer that cannot be made bilateral is not made; dark, the
+// approval is the peace, as an approved organic suit is. No offer (no edge on the
+// hostile axis to step down) leaves the recall alone, never a refusal.
 
 /** The DM-facing refusal prose per veto code (W-COMPOSER-2's VETO_PROSE feed). */
 export const PEACE_VETO_PROSE = Object.freeze({

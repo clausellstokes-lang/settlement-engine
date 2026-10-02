@@ -596,6 +596,7 @@ await loadGenerationLawPayloads();
 const { simulateCampaignWorldInterval } = await import('../../src/domain/worldPulse/advanceInterval.js');
 const { ensureRegionalGraph } = await import('../../src/domain/region/graph.js');
 const { SIMULATION_RULE_PRESETS } = await import('../../src/domain/worldPulse/simulationRules.js');
+const { soakAdvanceEpoch } = await import('../../scripts/audit/soakRules.mjs');
 
 const PINNED_NOW = '2024-01-01T00:00:00.000Z';
 
@@ -646,6 +647,10 @@ async function runAdvance(seed, years) {
   for (let y = 1; y <= years; y += 1) {
     const result = await simulateCampaignWorldInterval({
       campaign, saves, interval: 'one_year', commit: true, now: PINNED_NOW, autoResolve: true,
+      // LIT-0 (2026-09-24): each yearly interval is one ADVANCE, so it threads the flag-gated epoch the
+      // kernel demands once `advanceEpochEnabled` is lit (the soak's own `soakAdvanceEpoch`, keyed on
+      // seed and year). Dark it is null, byte-identical; the epoch reads no clock either way.
+      advanceEpoch: soakAdvanceEpoch({ simulationRules: campaign.worldState?.simulationRules, seed, year: y }),
     });
     campaign = {
       ...campaign,

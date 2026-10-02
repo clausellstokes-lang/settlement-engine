@@ -297,29 +297,43 @@ describe('FENCE 4 — the gate-polarity census over the real source tree', () =>
     );
   });
 
-  test('the key is VIRTUAL: absent from the rules DEFAULTS and every preset', async () => {
+  test('the key is VIRTUAL: absent from the rules DEFAULTS, and a preset declares it only lit', async () => {
     const {
       DEFAULT_SIMULATION_RULES,
       ENGINE_GATED_DORMANT_RULE_KEYS,
       ENGINE_GATED_VIRTUAL_RULE_KEYS,
       SIMULATION_RULE_PRESETS,
     } = await import('../../src/domain/worldPulse/simulationRules.js');
+    // ⭐ AMENDED AT LIT-0 (2026-09-24): J-EM-16, the lit law (LGT-C2 `432ff6441` the precedent).
+    // This arm read "absent from the defaults AND from every preset" until the owner's word
+    // "shipped lit" (2026-09-23). VIRTUAL means ABSENT FROM DEFAULT_SIMULATION_RULES, and so from
+    // every preset's defaults spread and from the RULE_COMPARISON_KEYS derived from it, which is
+    // what keeps preset identity; a lighting unit may then declare the key in the presets it
+    // names. Dark stays ABSENT (CR-WR10-C), never a declared false, so a declaration is `true`.
+    // The dark arms of this fence are unchanged.
     const presets = Object.values(SIMULATION_RULE_PRESETS);
-    expect(presets.length, 'the preset catalog emptied — this absence claim would be vacuous')
+    expect(presets.length, 'the preset catalog emptied — this scan would be vacuous')
       .toBeGreaterThanOrEqual(5);
+    expect(Object.keys(DEFAULT_SIMULATION_RULES).length).toBeGreaterThan(10);
     expect(FLAG in DEFAULT_SIMULATION_RULES).toBe(false);
+    /** @type {string[]} */
+    const declaring = [];
     for (const preset of presets) {
-      expect(FLAG in (preset.rules || {}), `${preset.id} lit ${FLAG}`).toBe(false);
-      // anchored: the presets DO carry rule keys, so the absence above is a measurement
+      if (FLAG in (preset.rules || {})) {
+        declaring.push(preset.id);
+        expect(preset.rules[FLAG], `${preset.id} declares ${FLAG} without lighting it`).toBe(true);
+      }
+      // anchored: the presets DO carry rule keys, so the scan above is a measurement
       // rather than a lookup into an empty object.
       expect(Object.keys(preset.rules || {}).length, `${preset.id} carries no rules`).toBeGreaterThan(0);
     }
     // …and it IS REGISTERED, so the census that demands its certification can see it.
     expect(ENGINE_GATED_VIRTUAL_RULE_KEYS).toContain(FLAG);
-    // …and the estate's own DERIVED virtuality answer agrees (LGT-P2-MANIFEST, 2026-09-05:
-    // a lit key leaves this list and keeps its register row).
-    expect(ENGINE_GATED_DORMANT_RULE_KEYS, `${FLAG} is registered but a preset has lit it`)
-      .toContain(FLAG);
+    // …and the estate's own DERIVED virtuality answer agrees with the presets IN EITHER STATE
+    // (LGT-P2-MANIFEST, 2026-09-05: a lit key leaves this list and keeps its register row).
+    expect(ENGINE_GATED_DORMANT_RULE_KEYS.includes(FLAG),
+      `${FLAG}: the derived dormant list disagrees with the presets that declare it (${declaring.join(', ') || 'none'})`)
+      .toBe(declaring.length === 0);
   });
 });
 

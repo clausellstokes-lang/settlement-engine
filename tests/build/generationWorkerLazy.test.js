@@ -156,7 +156,128 @@ const SENTINEL = 'settlementforge:generation:worker-v1';
 // chunk hash did not move; the lazy engine SHRANK 678,131 → 677,935 B. A buy-back inside
 // resolveConfig.js is the named alternative; the rise is offered for the owner's ratification like
 // the mints it follows. The ceiling stays MONOTONE-DOWN from this value.
-export const WORKER_BUNDLE_CEILING_BYTES = 1401208;
+// 1,401,208 → 1,396,015 (2026-09-22, the chair, judgment 160): train EM-T12 read +565 B at its
+// terminal, ATTRIBUTED PER MODULE by the chair's control build at efd0eb448 against the cured tip
+// bfca6b7d6 — 231 modules both sides, nothing entered or left, and exactly TWO moved:
+// src/generators/steps/assembleInstitutions.js 31,117 → 32,656 rendered bytes and
+// src/generators/steps/generatePower.js 6,656 → 7,820, which are EM-B2a3's two pin-seam consults. A
+// shave inside those consults was measured INFEASIBLE (the rise is the whole minified size of the
+// addition, so no shave that keeps the mechanism — two gated consults with clones over five keys —
+// reaches zero), so the bytes were BOUGHT BACK where the ceiling's own message says to buy them:
+// src/kernel/prng.js now imports seedrandom's ARC4 core alone instead of the package's umbrella
+// index, and six generators this estate never names (alea, xor128, xorwow, xorshift7, xor4096,
+// tychei) leave every bundle that reaches it. THE DRAWS ARE BYTE-IDENTICAL, measured, not argued:
+// the umbrella IS the core object (index.js hangs the six off it and re-exports it), and 150,000
+// draws — 30,000 over each of five seeds — plus int32(), quick() and double() agree exactly on both
+// sides. The worker 1,401,773 → 1,396,015 (−5,758 B); the other chunks that carried them:
+// advanceInterval.worker 2,657,906 → 2,652,094 (−5,812 B); pdfRender.worker 2,303,451 → 2,297,639
+// (−5,812 B); customContentPreview.worker 1,628,487 → 1,622,729 (−5,758 B); kernel 10,465 → 4,722
+// (−5,743 B). The ceiling follows the measurement DOWN and stays MONOTONE-DOWN from this value; the
+// buy-back is offered for the owner's ratification like the mints it follows (vetoable: the
+// umbrella import returns and the ceiling re-mints upward, which is his).
+// 1,396,015 → 1,395,972 (2026-09-22, the chair, judgment 187): train EM-T13's terminal read +12 B
+// at the composed tip 335aa3367 — a control build there measured generation.worker-B0dgeHYd.js at
+// 1,396,027 B — and the 12 B are EM-B2a4's entry forwarding of `pins`
+// (generateSettlementPipeline.js :: generateSettlementPipeline hands `{ onStep, pins }` to
+// runPipeline; minified `,pins:o.pins`), exactly BUY-BACK-LEDGER row 5's predicted cost. That
+// forwarding is EM-B2a4's mechanism and stays byte-for-byte, so the bytes were BOUGHT BACK by row
+// 2's shave instead: EM-B2a3's two unpinned-sentinel Symbol descriptions are removed
+// (generatePower.js, assembleInstitutions.js). They are identity-compared, never read — measured,
+// not argued: neither literal occurs anywhere else in the tracked tree, `chooseOrPin` returns its
+// argument untouched, and no test, fixture or walker reads a Symbol description. The worker
+// 1,396,027 → 1,395,972 (−55 B) on a real `npm run build` in the cure lane. Across all 552 emitted
+// chunks exactly TWO OTHERS moved, both by the same −55 B and for the same two literals: engine
+// 643,798 → 643,743 and customContentPreview.worker 1,622,741 → 1,622,686; nothing entered or left
+// a bundle, and the other worker bundles did not move at all. The ceiling follows the measurement
+// DOWN and stays MONOTONE-DOWN from this value.
+// EM-R0d, 2026-09-22 (the band ladders get one home; train EM-T14): THE CEILING IS NOT MOVED HERE.
+// Four modules of this member sit in the generation worker's static closure: src/data/bandLadders.js
+// is NEW (+6,722 B rendered) and the three producers SHED bytes (factionDynamics.js -503,
+// defenseGenerator.js -576, foodGenerator.js -642 rendered): +5,001 B rendered net, judgment 198e's
+// attribution build at the composed tip. Two measurements, each true of its OWN tree (judgment 198):
+// at the stacked base 0b9d3ec8d the measurement seat's control read 1,396,015 B (that base's ceiling,
+// zero slack) and 1,397,370 B with this member — +1,355 B; the buy-back lane's control at the EM-T14
+// base 35a031ac7 read 1,395,972 B (after judgment 187's -55 B), so the same member reads +1,398 B
+// against it. A rise is the OWNER's (EM-PREAMBLE §P11.2), so the bytes were BOUGHT BACK AHEAD of
+// this member (judgment 191; the cure 006aa3442 in this train's base): repeated string literals in
+// three src/data tables hoisted once to named module-local consts, 1,395,972 -> 1,392,071 B at the
+// landed tip (-3,901 B; the nine exported tables byte-identical). The ledger's row 4
+// (resolveConfig.js, 8,198 B) is REFUTED as a buy-back: a live registered step. This constant is
+// LOWERED at train EM-T14's terminal to the composed measurement -- never here, never upward.
+// 1,395,972 -> 1,393,432 (2026-09-22, the chair, judgment 194): train EM-T14's terminal read the worker at its composed tip
+// c69d16a5d on a fresh build in consist (queue window 63). Against the placement base dc2e52d6f (with the hoist:
+// 1,392,071 B) the composed tip is +1,361 B, and judgment 198e's attribution build names EXACTLY SIX moved modules in
+// two members: EM-R0d's four (bandLadders.js new; the three producers shed) and EM-R0f's two (src/data/economyFingerprint.js
+// NEW in the closure, +2,218 B rendered; economyReconciliation.js -1,027 rendered) -- EM-R0f's "+0" at build was a
+// MEMBERSHIP fact, its bytes are real; EM-R6 moved nothing in the closure. The holder's sum (judgment 160d) is this
+// attribution, not the members' membership claims. The ceiling follows the measurement DOWN to the byte and stays
+// MONOTONE-DOWN from this value; no member of the train read a rise against it (the buy-back landed first).
+// 1,393,432 -> 1,392,364 (2026-09-22, the chair, judgment 194 (the T15 reading)): train EM-T15's terminal read the worker at its composed tip
+// c7d472ec2 on a fresh build in consist: EM-R1's merge clone and its retired step clones, EM-R2's roster consult and EM-R5's
+// pure leaf (outside the worker) measured TOGETHER at the composed tip. The ceiling follows the measurement DOWN to the byte and stays MONOTONE-DOWN from
+// this value; no member of the train read a rise against it (the buy-back landed first).
+// 1,392,364 -> 1,391,327 (2026-09-23, the chair, judgment 194 (the T16 reading)): train EM-T16's terminal read the worker at its composed tip
+// 36d82a469 on a fresh build in consist: EM-R2's roster consult (+161 B by CI), EM-R1b's nineteen-key declaration, EM-R3's and EM-R4's
+// consults and the early buy-back's eleven literal hoists (-1,916 B) measured TOGETHER at the composed tip. The ceiling follows the measurement DOWN to the byte
+// and stays MONOTONE-DOWN from this value; every rise of the train was bought back before this reading (BUY-BACK-LEDGER row 9).
+// 1,391,327 -> 1,391,256 (2026-09-23, the buy-back cure seat, BUY-BACK-LEDGER row 10): the train tip's real build
+// read the worker at 1,391,472 B against this zero-slack ceiling — +145 B, EM-B2b2's resolveResources.js, and a rise
+// is never a lane's edit — so the bytes were BOUGHT BACK by row 7's literal-hoist shape on two modules of the
+// worker's own static closure and the ceiling follows the composed measurement DOWN:
+// src/generators/structuralValidator.js (5 consts of 33 over 14 sites) and
+// src/generators/generationReceiptJudgments.js (4 of 10 over 8 sites, folded into ONE statement so the F31 800-line
+// ratchet is unmoved). ⛔ THE OTHER 28 AND 6 ARE NOT A CHOICE: a const planted at a file's END is in its TEMPORAL
+// DEAD ZONE for any site evaluated at MODULE TOP LEVEL — `import()` of the unpruned variant threw
+// `ReferenceError: Cannot access 'MULTIPLE_MARKET_SQUARES' before initialization` at SPATIAL_FEATURES — so each was
+// pruned BY EXECUTION until the module imported clean. Both blocks ARE planted at their file's end, which is what
+// keeps every `path:line` citation true: the prose-numerics baseline's rows at structuralValidator.js:679/686/694 and
+// the record-register walker's cite to generationReceiptJudgments.js:654-660 still name the same bytes (every
+// original line asserted byte-identical IN PLACE; only literal->identifier substitutions moved). The emitted values
+// cannot move — JS strings are immutable primitives — and each file round-trips to its previous blob BYTE FOR BYTE
+// when the identifiers are put back.
+// ⛔ AND THE PLAN'S THIRD MODULE IS REFUSED BY MEASUREMENT, WHICH IS WHY THIS BUYS -216 B AND NOT -1,132 B.
+// src/generators/power/rulingStructure.js prices -766 B and its hoist is clean (19 consts, 61 sites, TDZ-free,
+// round-trip identical), but the file is 800 raw lines against `MODULE_LINE_CEILING = 800` in
+// tests/generators/powerStructure.test.js — ZERO slack on a SECOND ceiling the buy-back's own measurement did not
+// read (it read eslint's effective-line room, 732 of 800, and the size baseline, which has no row). One added line
+// reds that arm ("rulingStructure.js: 821 lines"), and a hoist cannot add none; raising a size ratchet is not a
+// cure seat's edit, so the bytes stay unbought and the ledger keeps them.
+// Measured, not argued: a CONTROL build at the base 56b085fc5 reproduced 1,391,472 B
+// (generation.worker-MbKUCYhb.js), CI run 35892227226's figure to the byte and the chunk name; the cured build reads
+// 1,391,256 B (generation.worker-DusCNPis.js) = -216 B, and esbuild's per-module pricing predicted -212 B. The
+// ceiling follows the measurement DOWN and stays MONOTONE-DOWN from this value.
+// 1,391,256 -> 1,423,431 (2026-10-01, the urban-band chair UNDER THE OWNER'S WORD, ODQ §934.86): A RISE, AND IT
+// IS THE OWNER'S, TAKEN BY THE OWNER'S OWN WORD IN CHAT (2026-09-30, "I defer all judgment to you", given in answer to this
+// exact question) — never a lane's edit. The cause is the content the owner approved: the institution catalog became
+// a registry of 179 families and 518 tier entries (215 new tier entries, 28 new descriptions with their variants), plus
+// MF-CH2B's licence reads and the window's cure (J19-J24, the verifier's fixes). Every byte that could go WAS BOUGHT
+// BACK FIRST (4fccffd60: each repeated description and each variant pair spelled once, every derived structure
+// fingerprint-identical): the combined tip read 1,475,470 B, the buy-back 1,422,127 B, and the window's final source
+// 1,423,431 B on a fresh `vite build` (generation.worker-DCUBvpYr.js). The ceiling follows that measurement to the byte
+// and stays MONOTONE-DOWN from here.
+// 1,423,431 -> 1,423,648 (2026-10-01, the urban-band chair, UNDER THE SAME WORD, ODQ §934.86 addendum 2): A RISE OF 217 B, and
+// its cause is the content the owner ordered in this chat ("druid is magic" … "Warden's Lodge stays defense, not druid"): J30's
+// druid faith role, its chokepoint stamp and its chain idle, and J32's world-law read and the wardens' mundane term. The owner's
+// "I defer all judgment to you" was given in answer to this exact question (J29), and the rise is taken under it, VETOABLE.
+// Measured: a control build at 4b86da68a reproduced 1,423,431 B (generation.worker-DCUBvpYr.js); J30–J32 read 1,423,786 B;
+// the buy-back (731e19597: one world-law resolution, J30's redundant gate folded) and J33's seven list trims bought 138 B back;
+// the window's final source reads 1,423,648 B (generation.worker-TUOc-4XJ.js) on a fresh `vite build`. MONOTONE-DOWN from here.
+// 1,423,648 -> 1,423,600 (2026-10-01, the urban-band chair): DOWN 48 B, the monotone-down rule followed. FIX-G1 (4f4747a2b)
+// counts the published dependency list at one site; a fresh `vite build` reads 1,423,600 B (generation.worker-BXVm63G5.js).
+// 1,423,600 -> 1,416,569 (2026-10-01, the urban-band chair): DOWN 7,031 B, the monotone-down rule followed, and the owner's
+// rise above now funds only bytes still spent. The registry's first-paint buy-back (each value spelled once; every export
+// identical across its 518 rows; tests/build/vendorPdfLazy.test.js) shrinks the worker with it: a fresh `vite build` reads
+// 1,416,569 B (generation.worker-BZWdxs0z.js).
+// 1,416,569 -> 1,438,517 (2026-10-02, the Voice Program chair UNDER THE OWNER'S WORD, ODQ §934.88): A RISE OF 21,948 B, AND IT
+// IS THE OWNER'S, given in chat through the question tool in answer to this exact question ("Raise it by ~22 KB
+// (Recommended)"), never a lane's edit. The cause is the content the owner asked for ("each variant should insight
+// something regarding either senses, culture, about the people …"): the arrival scene's authored pools
+// (src/data/arrivalProse.js, 20,964 B minified) and its composer (src/generators/narrative/arrivalScene.js), less the
+// retired tier template and addon pools. The Herald's deed register is not in this bundle. What could be bought back inside
+// that content was priced at about 1 KB (lines as plain strings rather than functions) and offered against the raise. A
+// fresh `vite build` at c39ce8640 reads 1,438,517 B (generation.worker-aM8fOsDp.js), the second gate's figure to the byte.
+// MONOTONE-DOWN from here.
+export const WORKER_BUNDLE_CEILING_BYTES = 1438517;
 
 const source = (path) => readFileSync(join(ROOT, path), 'utf8');
 

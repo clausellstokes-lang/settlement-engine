@@ -135,7 +135,7 @@ export function generateSettlementPipeline(config = {}, importedNeighbour = null
     _traceClock: 0,
   };
 
-  const run = () => runPipeline(initialContext, rng, { onStep: options.onStep });
+  const run = () => runPipeline(initialContext, rng, { onStep: options.onStep, pins: /** @type {{ pins?: Record<string, unknown> }} */ (options).pins });
 
   const finalCtx = options.customContent !== undefined
     ? withCustomContent(options.customContent, run)

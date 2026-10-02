@@ -181,7 +181,22 @@ const LAYER_PATTERNS = Object.freeze({
     // CR-FP-11 arm A: TR-1's casus-commercii family. Four leaves landed in FP cycle 1
     // matching NO pattern here, which made them invisible on BOTH sides of the scan.
     /^src\/domain\/worldPulse\/commercial[A-Z]/,
-    /^src\/domain\/spatial\/(?:tradeFlow|commodityFlow|supplyShipments|entrepots|dispatchEV|smuggle|seaLanes)\.js$/,
+    // FP TR-2 (lane FP-D, 2026-09-23): the merchant house — the ledger writer and the chooser
+    // leaf. A house is a TRADE subject (commerce at faction grain), and both leaves read only
+    // unlayered substrate: the faction-plane id comes through dossier/realmEntityWeb.js, never
+    // from INTERIOR's factionCompetition.js, so the family owes no coupling row at this wave.
+    /^src\/domain\/worldPulse\/house[A-Z]/,
+    // FP TR-3 (lane FP-D2, 2026-09-24): the believed market's Herald voice and its corpus. A
+    // `market[A-Z]` prefix on TR-1's and TR-2's reading: the TRADE annex authors eight `market.*`
+    // kinds for this wave's family, so the prefix claims leaves that ARE designed, and no module
+    // in the tree matched it before this line (measured). Both leaves read only unlayered
+    // substrate and TR-1's own reader fence, so the family owes no coupling row of its own.
+    /^src\/domain\/worldPulse\/market[A-Z]/,
+    // FP TR-3 adds `dispatchDestination` — the WHERE composer — to the spatial dispatch family
+    // beside dispatchEV. It reads worldPulse/beliefScarcity.js (INFO), the one INFO→TRADE pair
+    // this wave mints, licensed in the same commit by
+    // `CPL-9.INFO_TO_TRADE.TR-3.believed_dearness` in couplingRegistryTrade.js.
+    /^src\/domain\/spatial\/(?:tradeFlow|commodityFlow|supplyShipments|entrepots|dispatchEV|dispatchDestination|smuggle|seaLanes)\.js$/,
   ],
   FAITH: [
     /^src\/domain\/worldPulse\/(?:faith|sacred|religion|pantheon|conversion|piety|deity|temple)/,
@@ -240,6 +255,21 @@ const LAYER_PATTERNS = Object.freeze({
     // ⛔ AN EXACT-PATH REGEX, NOT A `second[A-Z]` PREFIX: a prefix would claim files nobody
     // has designed and silently widen a frozen family.
     /^src\/domain\/worldPulse\/secondOrderBelief\.js$/,
+    // IN-2: the lure. A lie that baits is INFORMATION's own subject (the layer mints the lie,
+    // owns its ledger and its one exposure law), so the leaf takes INFO on the IN-1 reading
+    // above. ⛔ EXACT-PATH, NOT an `info[A-Z]` prefix, for the same reason.
+    /^src\/domain\/worldPulse\/infoLure\.js$/,
+    // IN-3: the counter-game. Suspicion, the sweep and the house exposure are INFORMATION's own
+    // subject (the court defending its own mind), so the three leaves take INFO on the same reading.
+    // ⛔ EXACT-PATH, for the same reason.
+    /^src\/domain\/worldPulse\/suspicion\.js$/,
+    /^src\/domain\/worldPulse\/counterIntelSweep\.js$/,
+    /^src\/domain\/worldPulse\/patronExposure\.js$/,
+    // IN-4: the reputation race's consumer. Who knew first, the traveller or his story, is
+    // INFORMATION's own subject (the medium racing the man), so the leaf takes INFO on the IN-1
+    // and IN-2 readings above; its three foreign reads (the route network, the army ledger, the
+    // envoy errands) are licensed by IN-4's three rows. ⛔ EXACT-PATH, for the same reason.
+    /^src\/domain\/worldPulse\/reputationRaceConsumer\.js$/,
     /^src\/domain\/spatial\/(?:rumorNetwork|intelActs)\.js$/,
     // W-SEAT SEAT-4: the anticipated-reaction forecast. HOMED BY CHAIR DECLARATION
     // (ODQ §861, the SEAT-A2 landing) rather than by the landing lane's judgment, because
@@ -283,6 +313,11 @@ const LAYER_PATTERNS = Object.freeze({
     // posture and errand mint, INFORMATION's credibility — are exactly the couplings this
     // ratchet exists to make visible, and burying them in an argument would hide them.
     /^src\/domain\/worldPulse\/pact[A-Z]/,
+    // FP GR-6 (lane FP-B2, 2026-09-24): the mediation leaf. The broker before the blood is a
+    // GRAMMAR subject (the pact grammar's one cross-pressured finder, given new occasions), so
+    // its read of the war layer's march order and the opener's read of its pressure are the two
+    // CPL-5 rows couplingRegistryGrammar.js mints in the same commit.
+    /^src\/domain\/worldPulse\/mediation[A-Z]/,
   ],
   INTERIOR: [
     /^src\/domain\/worldPulse\/(?:faction|legitimacy|relationship|institution|commons|disposition|generosity|grievance|rulingPower|npcLadder|seatBooks)/,
@@ -686,6 +721,24 @@ const ARGUED_UNLAYERED = Object.freeze({
     reason: 'map-geometry substrate — the provenance stamp answering "is the pack in hand the geometry these coordinates came from" (W-SEAM SEAM-3), asked by every port that reads a stored coordinate; a port here would make a pure map-provenance read a cross-layer coupling into whichever family won the name',
     reads: Object.freeze([]),
   }),
+  // ── FP WY-1 (THE SCALE CHARTER): the one mode-speed table, argued as substrate ──
+  //
+  // OWED BY THE CHARTER'S OWN CREATE (docs/DESIGN_FP_ARCHITECTURE.md §5, CR-FP-11 arm B:
+  // a new .js under src/domain/spatial/ takes an ARGUED_UNLAYERED entry in the same commit,
+  // never a baseline row). The lawWord.js / bandFamilies.js argument, one rung down: the
+  // leaf owns no subject. It holds J-D11(b)'s ONE mode-speed table, the admission of the
+  // map's km-scale datum and the reach-band words, and every mover of every port reads its
+  // distance through it (armies, envoys, wanderers, columns, caravans, via
+  // distanceRead.hopWeeks), so a family here would make each port's own march a cross-layer
+  // coupling. MEASURED: its one import is intervalWeeks.js, which sits in the pre-program
+  // baseline (unlayered), so its layered reach is 0 and `reads: []` is structural; its
+  // importers (distanceRead.js, spatialDigest.js, the store's canonize body) are unlayered
+  // or outside the census scope, so no edge leaves the pair scan.
+  'src/domain/spatial/modeSpeeds.js': Object.freeze({
+    kind: 'substrate',
+    reason: 'WY-1 spine substrate — the ONE mode-speed table and the km-scale admission every mover\'s distance is read through (J-D11(b)); owns no subject',
+    reads: Object.freeze([]),
+  }),
   // ── 2026-08-10: THREE LEAVES THAT LANDED WITHOUT THEIR CLASSIFICATION ──────────
   //
   // These three are not new arguments. They are the SAME two arguments already on this
@@ -908,6 +961,55 @@ const ARGUED_UNLAYERED = Object.freeze({
     reason: 'W-OPS substrate — the ACCEPTANCE verdict of the ONE typed operation record: the vetting/willingness/risk seam order, the closed refusal vocabulary, and the register-rooted pricing a principal answers an offer with, spelled by every port that wills an operation (INTERIOR wills goals, INFORMATION and the corruption web will missions, GRAMMAR wills errands); it owns no subject, decides no port\'s state, holds no clock, rolls nothing and walks no WORLD roster, taking every world fact as an argument, so what it owns is the VERDICT SHAPE rather than any port\'s subject',
     reads: Object.freeze([]),
   }),
+  // EM-B1h: the pulse's fate words become a CLOSED, KINDED vocabulary. The leaf is the
+  // FINITE-SEMANTICS answer to an open one — eighteen words, each with a declared kind,
+  // derived from what the six pulse writers already stamp — and it owns no subject: the
+  // writers keep every decision, the leaf only holds the spelling and refuses a foreign
+  // word on their behalf. Like bandFamilies.js above, a LAYER_PATTERNS home would claim
+  // a family for a vocabulary that belongs to all of them at once.
+  'src/domain/worldPulse/worldPulseFates.js': Object.freeze({
+    kind: 'substrate',
+    reason: 'FP substrate — the pulse\'s CLOSED fate vocabulary: the one spelling of every word the world pulse may stamp on worldPulseFate, with the kind each writer\'s own record literal earns it, spoken by every layer that closes, raises or renames an institution; it imports nothing at all, which is what makes its empty reads structural rather than argued',
+    reads: Object.freeze([]),
+  }),
+  // EM-E1: the head-of-tick application of the DM's decrees. THE ARGUMENT IS THE ONE
+  // worldPulseFates.js carries one row up, and it is the clearest case the roster has for
+  // "spoken by every port, speaking none back": a decree's SUBJECT is whatever the DM
+  // decreed, and the charter's own wave-3 rows say so by enumeration — EM-E4 pins forks
+  // across WAR (the siege verdict), FAITH (the festival), POP (the court's verdict, the
+  // exile's landing) and GRAMMAR (the envoy's road); EM-E5 binds the realm verbs and the
+  // information ops; EM-E6 the event catalogue; EM-E7 missions. Filing the hook under any
+  // one of those would make every OTHER port's decree a cross-layer coupling into that
+  // port — the inversion the substrate reading exists to prevent — and it is not the HOST
+  // kind either: that set is closed at four by exact equality, and this leaf mounts no
+  // stage. What it owns is the SCHEDULE and the CAUSE SHAPE (which staged entries are due
+  // at this tick, in EM-C1's reading order, and the finite receipt each one lands), which
+  // is a verdict shape rather than any port's subject — missionAcceptance.js's reading,
+  // one volume across.
+  // MEASURED AT THE RAISE, never copied: the leaf imports TWO modules and NEITHER is
+  // layered. `../edit/registry.js` sits outside CENSUS_SCOPE_RE (worldPulse + spatial) and
+  // therefore carries no layer at all; `./pulseHelpers.js` is in the PRE-PROGRAM unlayered
+  // baseline, and an unlayered read is not a cross-layer reach. Its layered reach is
+  // therefore 0, it is declared `reads: []`, and NO edge leaves the pair scan. What the
+  // raise buys is that the FIRST port this leaf ever reaches reds by name — which matters
+  // more here than usual, because wave 3's whole remaining programme is bindings between
+  // this leaf and the ports.
+  'src/domain/worldPulse/decreeHook.js': Object.freeze({
+    kind: 'substrate',
+    reason: 'EM substrate — the head-of-tick SCHEDULE and CAUSE SHAPE for the DM\'s decrees: which staged entries are due at this tick, in the registry\'s own reading order, and the finite receipt each one lands; it decides no port\'s state, rolls nothing and holds no clock, and the subject of a decree is whatever the DM decreed, which is every port by the charter\'s own wave-3 enumeration',
+    reads: Object.freeze([]),
+  }),
+  // THE VOICE PROGRAM wave 1 (2026-10-02, ODQ §934.88) adds one on the lawWord.js argument. The deed
+  // register is the Herald's ONE spelling of what happened: the under-way and done forms of a
+  // condition, an NPC's move, a relationship's turn. It owns no subject, imports nothing and decides
+  // nothing; it is spoken by the producers of every port's news (the condition candidates, the NPC
+  // planner, the relationship rules), so giving it a family would make each port's own headline a
+  // cross-layer coupling.
+  'src/domain/worldPulse/heraldDeeds.js': Object.freeze({
+    kind: 'substrate',
+    reason: 'shared vocabulary — the Herald\'s ONE spelling of a deed under way and done, spoken by the news producers of every port; no imports, no subject',
+    reads: Object.freeze([]),
+  }),
 });
 
 /** The CLOSED host set. A fifth infrastructure host is a chair conversation. */
@@ -1048,7 +1150,31 @@ const ARGUED_HOSTS = Object.freeze([
 // L5's rule table, extracted verbatim from the pre-program-baselined npcAgency.js; owns no
 // subject, one delegate consumer, zero cross-layer pairs proven at the coupling (the full
 // argument sits on its roster entry above). Deliberate, in this diff, per this anchor's law.
-const ARGUED_ROSTER_CEILING = 28;
+// 28 -> 29 at EM-B1h: worldPulseFates.js admitted as substrate — the pulse's CLOSED, kinded
+// fate vocabulary, a ZERO-IMPORT leaf, so its `reads: []` is structural rather than argued
+// and it mints no cross-layer pair in either direction (scanCrossLayerPairs iterates LAYERED
+// importers and skips unlayered deps, and its one consumer, calamityKernel.js, is itself
+// unlayered). Deliberate, in this diff, per this anchor's law.
+// 29 -> 30 at EM-E1: decreeHook.js admitted as substrate — the head-of-tick schedule and
+// cause shape for the DM's decrees, whose subject is whatever the DM decreed and therefore
+// every port at once (the full argument sits on its roster entry above). Its two imports
+// are BOTH unlayered — one outside CENSUS_SCOPE_RE, one in the pre-program baseline — so
+// `reads: []` is measured rather than asserted and no edge leaves the pair scan. THE RAISE
+// IS OWED BY THE CHARTER'S OWN CREATE, not chosen: this header's law is that a new .js
+// under src/domain/worldPulse takes a family or an argued entry in the SAME commit, and
+// wave 3's row puts the leaf at exactly that address. Deliberate, in this diff, per this
+// anchor's law.
+// 30 -> 31 at WY-1 (SR-1: a count pin the wave's own CREATE moves): modeSpeeds.js admitted as
+// substrate — J-D11(b)'s one mode-speed table and the km-scale admission, owning no subject;
+// its one import (intervalWeeks.js) is pre-program baselined, so `reads: []` is measured and no
+// edge leaves the pair scan. OWED BY THE CHARTER'S OWN CREATE, not chosen. Deliberate, in this
+// diff, per this anchor's law.
+// 31 -> 32 at the Voice Program wave 1 (ODQ §934.88, the owner's "Updates like these need to reflect
+// actions not to potential"): heraldDeeds.js admitted as substrate — the Herald's one spelling of a deed
+// under way and done, spoken by the news producers of every port and owning no subject (the lawWord.js
+// argument). It imports NOTHING, so `reads: []` is measured and no edge leaves the pair scan. Owed by the
+// wave's own CREATE under src/domain/worldPulse. Deliberate, in this diff, per this anchor's law.
+const ARGUED_ROSTER_CEILING = 32;
 
 /** The FP scope the unlayered census is TOTAL over. */
 const CENSUS_SCOPE_RE = /^src\/domain\/(?:worldPulse|spatial)\//;

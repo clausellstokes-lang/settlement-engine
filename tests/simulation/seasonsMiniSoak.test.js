@@ -143,10 +143,26 @@ describe('SEASONS-A 3-year mini-soak — the annual drama curve emerges', () => 
     expect(Math.max(...series.fatfield.map((p) => p.deficit))).toBeLessThan(20);
   });
 
-  it('spring recovers: the weak town\'s deficit is back under control by late spring, every year', () => {
+  it('spring recovers: the weak town\'s deficit is back under control every year — by late spring unless the year opened in a carried-over winter famine, and by midsummer regardless', () => {
+    // RE-SCOPED 2026-09-24 (FP-32, the FP chair, measured over five years — the FP kit's board):
+    // the original 'under 10 by late spring, every year' was green at base only because an
+    // unanswered famine question froze the docket and held off every later famine birth for
+    // good (the defect PEACE-2's expiry cures). With the docket lapsing when no one rules, a
+    // bad winter can follow a bad winter: in the probe year 3 OPENED at a 64.4 deficit carried
+    // over from year 2's late winter and cleared by week 26; years 1, 2, 4 and 5 were relieved
+    // by late spring as before (7 at week 12, a minimum of 0 by week 13-18). The mechanism the
+    // arm tests — the weak town RECOVERS every year — holds in every year; the premise that
+    // recovery always lands by late spring did not survive the cure, so the arm names the
+    // carried-over case instead of pretending it cannot happen.
     for (let y = 1; y <= YEARS; y += 1) {
+      const opening = atWeekOfYear(series.gauntcrag, y, 1);
       const lateSpring = atWeekOfYear(series.gauntcrag, y, 12);
-      expect(lateSpring.deficit, `year ${y}: spring relief`).toBeLessThan(10);
+      const byMidsummer = Math.min(...series.gauntcrag
+        .filter((p) => p.week > (y - 1) * 52 && p.week <= (y - 1) * 52 + 26)
+        .map((p) => p.deficit));
+      expect(byMidsummer, `year ${y}: recovery by midsummer`).toBeLessThan(10);
+      if (opening.deficit < 20) expect(lateSpring.deficit, `year ${y}: spring relief`).toBeLessThan(10);
+      else expect(lateSpring.deficit, `year ${y}: a carried-over winter famine still falling by late spring`).toBeLessThan(opening.deficit);
     }
   });
 

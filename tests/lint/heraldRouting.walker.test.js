@@ -121,8 +121,9 @@ function minterlessKeys(sections, minted, rulings) {
 }
 
 describe('Herald routing table — totality + single-home + consistency', () => {
-  test('the six sections are exactly the frozen set', () => {
-    expect(HERALD_SECTIONS).toEqual(['war', 'faith', 'trade', 'events', 'divination', 'adjudication']);
+  test('the seven sections are exactly the frozen set', () => {
+    // 6 -> 7 at FP IN-5 (SR-1): the knowledge desk (J-INF-7), after trade and before the catch-all.
+    expect(HERALD_SECTIONS).toEqual(['war', 'faith', 'trade', 'knowledge', 'events', 'divination', 'adjudication']);
   });
 
   test('the mint scan is non-vacuous (the source scan actually reached the producers)', () => {

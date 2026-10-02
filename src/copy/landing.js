@@ -52,10 +52,12 @@ export const landing = {
     waypoint: '01 · Forge',
     h2:    'A living town in one click. Twenty dials when you want them.',
     // Every concrete noun here is a FACT THE FIXTURE CARRIES, so §02 can print
-    // the same four receipts a screen later and the reader recognises them:
-    // the road roll (voice.receipts.route), the market licensing quarrel
-    // (voice.receipts.conflict), the cleared stands (voice.receipts.resource).
-    body:  'Pick a size and forge. Everything after that is derived, not drawn from a table: where the road goes, who holds the market, which faction is owed a favour, what was cut down a generation ago and never grew back. Open the Advanced panel and set terrain, age, wealth and trouble yourself.',
+    // the same three receipts a screen later and the reader recognises them:
+    // the road roll (voice.receipts.route), the travellers' inn the roster seated
+    // (voice.receipts.institution), the cleared stands (voice.receipts.resource).
+    // (Re-grounded 2026-09-30: the urban band's re-emitted fixture no longer carries
+    // the market licensing quarrel, ODQ §934.86.)
+    body:  'Pick a size and forge. Everything after that is derived, not drawn from a table: where the road goes, which inn takes the travellers, which faction is owed a favour, what was cut down a generation ago and never grew back. Open the Advanced panel and set terrain, age, wealth and trouble yourself.',
     axiom: 'Every dossier answers the same question: given these constraints, what must this place be?',
     // ⛔ THE SECTION-LEVEL ASK IS GONE (owner, 2026-09-19, taking the draft's
     // recommendation): ONE ask at the top and ONE at the end. `cta` ("Forge a
@@ -130,8 +132,9 @@ export const landing = {
     h2:     'The same town, in a voice for the table.',
     // ⚓ "never invents facts" is carried VERBATIM — tests/copy/landingClaimsParity
     // binds it to src/domain/aiGrounding.js and its suites. ⚑ The three named
-    // receipts are voice.receipts[1], [2] and [0], in the order the card prints.
-    body:   'Left is what the engine derived about Cnocby: the road it rolled, the timber it marked out, the licence the two factions want. Right is the same four facts for the table. The Narrative Layer never invents facts. Everything it needs is already in the brief.',
+    // receipts are voice.receipts[0], [1] and [2], in the order the card prints
+    // (re-grounded 2026-09-30 with forge.body above).
+    body:   'Left is what the engine derived about Cnocby: the road it rolled, the timber it marked out, the inn it seated for travellers. Right is the same three facts for the table. The Narrative Layer never invents facts. Everything it needs is already in the brief.',
     // Owner directive: disclose the AI up front (not prominent). The Narrative
     // Layer is no longer the ONLY AI surface (the Surveyor workshop is another),
     // so this line evolved (W-DOC reconcile, brief §4) from the stale "only AI
@@ -168,7 +171,9 @@ export const landing = {
     // same order, at the same weeks (1 creed · 2 wartime · 4 fracture · 10 crime
     // · 12 trade). It is the most fragile prose on the page and the grounding
     // suite walks it word against field.
-    body2: 'Then advance time. In Cnocby’s first twelve weeks the village took a patron creed, then wartime pressure, then the fracture passed and left its memory; by week ten there was crime, and by week twelve the road itself was strained. Every one of those is a record the engine wrote, and every one carries its cause.',
+    // 2026-10-02, the Voice Program (ODQ §934.88): re-grounded on the regenerated timeline, which now speaks in deeds
+    // ("Cnocby goes onto a war footing", "Crime takes hold of Cnocby", "Cnocby's trade routes break down").
+    body2: 'Then advance time. In Cnocby’s first twelve weeks the village took a patron creed and went onto a war footing, and the fracture the creed brought passed and left its memory; by week ten crime had taken hold of its streets, and by week twelve its trade routes had broken down. Every one of those is a record the engine wrote, and every one carries its cause.',
     // The chronicle beside the realm map is the REGION's band, not the town's —
     // two cards that now say different things, and a reader needs to be told why.
     regionLine: 'Beside it, the region: what the neighbours did while Cnocby was busy.',
