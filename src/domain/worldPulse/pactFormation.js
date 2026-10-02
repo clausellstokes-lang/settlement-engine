@@ -127,7 +127,8 @@ import { canonicalAllianceRows } from './warCoalitionGraph.js';
 export const PACT_FORMATION_TUNING = Object.freeze({
   /** The value a court asks for before it will set its name to anything. */
   RESERVE_BASE01: 0.5,
-  /** How much of that a bold court gives up — SP-C's learned appetite, spent. */
+  /** How much of that a bold court gives up — SP-C's learned appetite, spent. A court that has
+   *  learned none spends the appetite reader's own neutral stock, never zero (FP-42, `reserveFor`). */
   RISK_APPETITE_RELIEF: 0.25,
   /** What a lineage that has disavowed before must make up in substance. Read off the ONE
    *  credibility reader, so GR-4's charge bites HERE the day it lands and reads
@@ -394,6 +395,21 @@ export function draftPactSheet({ trigger, fromId, toId, reciprocal, tick, score0
 
 /**
  * THE RESPONDER'S RESERVE — posture, appetite, and what the asker's word is worth.
+ *
+ * ⚠ AN UNLEARNED APPETITE IS NEUTRAL, NOT TIMID (FP-42, ODQ §934.89; FPQ-73). The relief is
+ * spent from `appetite.stock01` as the ONE appetite reader hands it back, and that reader already
+ * answers an absent appetite with its own neutral stock: "a court that has learned nothing reads
+ * `present: false` and neutral, and the receipt says the outcomes never came rather than implying
+ * the court is timid" (`strategicPosture.js :: courtRiskAppetiteOf`). This line used to read the
+ * absence as ZERO appetite (`appetite.present ? appetite.stock01 : 0`, GR-2, with no stated
+ * reason), so in every world where `strategicPostureEnabled` is dark, which is every preset, each
+ * court answered as the most cautious court there could be: reserve 0.5, above the 0.458 every
+ * reciprocal grain-for-ore sheet offers, and 174 of 174 such sheets refused (PACT-RESERVE MEASURE).
+ * The SP volume's degraded-arms law says the same of the posture's own terms, "ABSENT (not zero)"
+ * (docs/DESIGN_FP_ARCH_SP.md, SP-C). An unlearned court now reserves 0.375 at a neutral posture,
+ * inside the measured working band 0.31 to 0.46: a court that also needs what the asker has signs,
+ * and a one-sided ask (an offer of at most 0.25) is still refused. A learned appetite is read
+ * exactly as before.
  * @param {{worldState: Record<string, unknown>, responderId: string, proposerId: string,
  *   tick: number}} input
  * @returns {Readonly<{reserve01: number, receipt: string}>}
@@ -407,7 +423,7 @@ export function reserveFor({ worldState, responderId, proposerId, tick }) {
   const disavowal = clamp01(-Number(credibilityScoreOf(worldState, proposerId, tick)) || 0);
   const reserve = clamp01(
     F.RESERVE_BASE01 * posture.factor
-    - F.RISK_APPETITE_RELIEF * (appetite.present ? appetite.stock01 : 0)
+    - F.RISK_APPETITE_RELIEF * appetite.stock01
     + F.OATHBREAKER_PENALTY * disavowal,
   );
   return Object.freeze({

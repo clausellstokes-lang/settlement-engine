@@ -36,12 +36,13 @@
     "_rosterGrowth2026-10-02-voice-wave-4": "ONE document JOINED the roster by being BORN into it, and it hid NOTHING: docs/shift-records/2026-10-02-voice-program-wave-4-hook-structures.json (the Voice Program's record for wave 4 block 1, the arrival hook's structures, ODQ §934.88) joined `tree`, 33 -> 34. A GROWTH, not a class move; no past-EOF citation of its own.",
     "_rosterGrowth2026-10-02-voice-pair-order": "ONE document JOINED the roster by being BORN into it, and it hid NOTHING: docs/shift-records/2026-10-02-voice-program-wave-1-pair-order.json (the Voice Program's record for the wave 1 cure that names a relationship's pair orientation-free, ODQ §934.88) joined `tree`, 34 -> 35. A GROWTH, not a class move; no past-EOF citation of its own.",
     "_rosterGrowth2026-10-02-pact-reask": "ONE document JOINED the roster by being BORN into it, and it hid NOTHING: docs/shift-records/2026-10-02-pact-reask-herald-desk.json (the record prepared by cure lane PACT-REASK for U1, FPQ-72: a pair no longer re-asks a clause its instrument already carries, which moves one year-one relief beat on the knowledge desk golden) joined `tree`, 35 -> 36. A GROWTH, not a class move; no past-EOF citation of its own.",
+    "_rosterGrowth2026-10-02-pact-answer": "ONE document JOINED the roster by being BORN into it, and it hid NOTHING: docs/shift-records/2026-10-02-pact-answer-fp42-herald-desk.json (the record prepared by cure lane PACT-ANSWER for U1, FP-42 at ODQ §934.89: an unlearned risk appetite reads neutral in the pact answer's reserve, which moves the knowledge desk golden's year) joined `tree`, 36 -> 37. A GROWTH, not a class move; no past-EOF citation of its own.",
     "pastEofCitationsExcluded": 377,
     "byRule": {
       "banner": 8,
       "dated": 5,
       "sha-pin": 1,
-      "tree": 36
+      "tree": 37
     },
     "files": {
       "banner": [
@@ -93,6 +94,7 @@
         "docs/shift-records/2026-10-01-urban-band-herald-rows.json",
         "docs/shift-records/2026-10-01-urban-band-warden-census-herald.json",
         "docs/shift-records/2026-10-01-urban-band-warden-census.json",
+        "docs/shift-records/2026-10-02-pact-answer-fp42-herald-desk.json",
         "docs/shift-records/2026-10-02-pact-reask-herald-desk.json",
         "docs/shift-records/2026-10-02-voice-program-wave-1-herald-deeds.json",
         "docs/shift-records/2026-10-02-voice-program-wave-1-pair-order.json",

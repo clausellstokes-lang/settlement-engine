@@ -80,6 +80,15 @@
  *   two, propose exactly as before; dark, nothing (the stage returns before any read). The FPQ-72 block
  *   below pins it; the four reader-corpus runs' before/after counts live in the lane's report.
  *
+ * 2026-10-02 — FIFTH RECORD (cure lane PACT-ANSWER, U1, FP-42 at ODQ §934.89, FPQ-73). ⚠ A DECLARED LIT-PATH
+ *   SHIFT. CAUSE, in one sentence: `reserveFor` read an UNLEARNED risk appetite as zero appetite, so in every
+ *   world with `strategicPostureEnabled` dark (every preset) each answering court was the most cautious court
+ *   there could be (reserve 0.5) and refused every reciprocal grain-for-ore sheet (offer 0.458). WHAT MOVES:
+ *   lit, an unlearned appetite spends the appetite reader's own neutral stock (`courtRiskAppetiteOf`), so the
+ *   reserve at a neutral posture is 0.375; a court that also needs what the asker has signs, a one-sided ask
+ *   is still refused, and a learned appetite reads exactly as before (THE POSTURE pin above, unchanged); dark,
+ *   nothing (the stage returns before any read). The FP-42 block below pins it.
+ *
  * @enforced-by this file
  */
 import { describe, expect, test } from 'vitest';
@@ -110,6 +119,7 @@ import { edgeIdFor, ensureRegionalGraph } from '../../src/domain/region/graph.js
 import { ensureRelationshipStatesForGraph } from '../../src/domain/worldPulse/relationshipEvolution.js';
 import { ensureRelationshipState, relationshipKeyFromEdge } from '../../src/domain/worldPulse/relationshipState.js';
 import { ensureReligionState } from '../../src/domain/worldPulse/religionState.js';
+import { courtRiskAppetiteOf } from '../../src/domain/worldPulse/strategicPosture.js';
 import {
   DUE_TICK, OPEN_TICK, SEAT, pactBeliefs, pactSnapshot, pactWorld, relKey,
 } from '../helpers/pactFixture.js';
@@ -321,6 +331,72 @@ describe('THE POSTURE — same evidence, two courts, two outcomes, both receipte
       expect(pass.receipts.find((r) => r.ending).receipt).toContain("court's posture reads");
     }
     expect(F.OUT_OF_POSTURE_PRICE01).toBeGreaterThan(0);
+  });
+});
+
+describe('FP-42 — AN UNLEARNED APPETITE IS NEUTRAL, NOT TIMID (ODQ §934.89, FPQ-73)', () => {
+  /** The posture pin's PARTIAL reciprocal demand, with NO appetite learned anywhere: the posture
+   *  flag is dark and no court keeps a disposition row, which is every preset world today. */
+  const unlearned = () => pactWorld({
+    flag: true,
+    beliefs: pactBeliefs({ bSeesA: { scarcityBands: { raw_material: 'sufficient' } } }),
+  });
+  /** What the ONE appetite reader says of B in that world. */
+  const appetiteOfB = (worldState) => courtRiskAppetiteOf({ kind: 'settlement', id: 'B' }, null,
+    { rules: worldState.simulationRules });
+
+  test('an absent-appetite court signs the reciprocal sheet a cautious court refuses', () => {
+    const worldState = unlearned();
+    // THE PREMISE, asserted: B has learned nothing, and its reader says so rather than reading zero.
+    const appetite = appetiteOfB(worldState);
+    expect(appetite.present).toBe(false);
+    expect(appetite.stock01).toBeGreaterThan(0);
+    const { first, second } = openThenAnswer(worldState);
+    // The sheet is the reciprocal grain-for-ore bargain, one clause owed to each court.
+    const [row] = pactProposalsOf(first.worldState);
+    expect(row.sheet.terms.map((term) => [term.type, term.beneficiary])).toEqual([['resource_share', 'A'], ['resource_share', 'B']]);
+    expect(endingOf(second)).toBe('signed');
+    const signed = receiptOf(second, 'pact_signed');
+    // The offer is the measured reciprocal 0.458, and the reserve is the reader's own neutral, spent.
+    expect(signed.offer01).toBeCloseTo(0.458, 3);
+    expect(signed.reserve01).toBeCloseTo(F.RESERVE_BASE01 - F.RISK_APPETITE_RELIEF * appetite.stock01, 10);
+    // The receipt says the appetite was never learned, never that the court is timid.
+    expect(signed.receipt).toContain(appetite.receipt);
+    expect(Object.keys(treatyLedgerOf(second.worldState))).toEqual(['A>B']);
+    // ANTI-VACUITY: the SAME sheet before the SAME court, cautious by a learned appetite of zero, is
+    // still refused, so the signature above is the unlearned appetite's doing and not the offer's.
+    const cautious = openThenAnswer(pactWorld({
+      flag: true,
+      beliefs: pactBeliefs({ bSeesA: { scarcityBands: { raw_material: 'sufficient' } } }),
+      rules: { strategicPostureEnabled: true },
+      dispositionStats: { B: { appetite: { stock01: 0, present: true } } },
+    }));
+    expect(endingOf(cautious.second)).toBe('no_overlap');
+    expect(receiptOf(cautious.second, 'pact_no_overlap').offer01).toBe(signed.offer01);
+  });
+
+  test('and still refuses a 0.25 one-sided ask', () => {
+    const proposal = {
+      id: 'pact.10.a.b.trade_demand', from: 'A', to: 'B', trigger: 'trade_demand',
+      sheet: { terms: [{ type: 'resource_share', family: 'economic', beneficiary: 'A', magnitude: 0.25 }] },
+      openedTick: OPEN_TICK, answerDueTick: DUE_TICK, state: 'open', transport: 'abstract',
+    };
+    const worldState = pactWorld({ flag: true });
+    expect(appetiteOfB(worldState).present).toBe(false);
+    // Half the clause plus half a responder occasion of the same weight: the one-sided ceiling measured live.
+    const answer = answerPactProposal({
+      worldState, proposal, responderDemand01: 0.25, tick: DUE_TICK, edges: pactSnapshot().regionalGraph.edges,
+    });
+    expect(answer.offer01).toBe(0.25);
+    expect(answer.verdict).toBe('no_overlap');
+    // The reserve sits between the two measured offers: above the one-sided ask, at or below the reciprocal sheet.
+    expect(answer.reserve01).toBeGreaterThan(answer.offer01);
+    expect(answer.reserve01).toBeLessThanOrEqual(0.458);
+    // …and the stage's own one-sided world (the NO OVERLAP pin above) is refused through the whole arc too.
+    const oneSided = openThenAnswer(pactWorld({
+      flag: true, beliefs: pactBeliefs({ bSeesA: { scarcityBands: { raw_material: 'scant' } } }),
+    }));
+    expect(endingOf(oneSided.second)).toBe('no_overlap');
   });
 });
 
