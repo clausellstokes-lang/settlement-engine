@@ -3935,3 +3935,10 @@ No Opus car landed in this act. The twelve rulings, the two recorded owner words
 *Receipts:* ODQ §934.88; `docs/VOICE_PROGRAM_PLAN.md`; the shift records `docs/shift-records/2026-10-02-voice-program-*.json` on the branch.
 *Priority:* P2.
 **Status:** enrolled.
+
+### R104 — the Voice Program's chair judgments VP-J6–VP-J15 (Opus 5.5 seat; ODQ §934.88 addendum 1; PR #56)
+*What was judged:* heraldDeeds.js as coupling substrate (argued roster 31 → 32); the fork-census mint bound 36 → 38; the arrival memory window mirroring the History tab's 30-year band; the closing beat yielding under a stress vignette; ARRIVAL_ADDONS retired; EM-R2.md's historical addresses written as prose; AO-2+3's required symbol re-pointed; the hook FILTERED by named structures rather than the vignettes rewritten; the shared .git/config restored from core.bare=true; flavorFields A2's measured 60 s budget; the 82 B pattern cache withdrawn rather than taken to the owner.
+*What Fable re-derives:* whether any structure family in STRUCTURE_CLAIMS misses a catalogue name that holds it (a false 'lacks'), and whether the edit census's newly live E6 readings are the right consequence of re-seating a faction.
+*Receipts:* ODQ §934.88 addendum 1; `docs/VOICE_PROGRAM_PLAN.md`; PR #56; the five gate logs cited there.
+*Priority:* P2.
+**Status:** enrolled.
