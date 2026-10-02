@@ -30,12 +30,13 @@
     "_rosterGrowth2026-10-01-druid-faith": "ONE document JOINED the roster by being BORN into it, and it hid NOTHING: docs/shift-records/2026-10-01-urban-band-druid-faith.json (the record for the owner's druid rulings, ODQ §934.86 addendum 2) joined `tree`, 27 -> 28. A GROWTH, not a class move; no past-EOF citation of its own.",
     "_rosterGrowth2026-10-01-warden-census": "ONE document JOINED the roster by being BORN into it, and it hid NOTHING: docs/shift-records/2026-10-01-urban-band-warden-census.json (the record for J33, the Warden's Lodge census under the same druid rulings, ODQ §934.86 addendum 2) joined `tree`, 28 -> 29. A GROWTH, not a class move; no past-EOF citation of its own.",
     "_rosterGrowth2026-10-01-warden-census-herald": "ONE document JOINED the roster by being BORN into it, and it hid NOTHING: docs/shift-records/2026-10-01-urban-band-warden-census-herald.json (the superseding prediction for the herald desk's act under J33's record, ODQ §934.86 addendum 2) joined `tree`, 29 -> 30. A GROWTH, not a class move; no past-EOF citation of its own.",
+    "_rosterGrowth2026-10-02-voice-wave-1": "ONE document JOINED the roster by being BORN into it, and it hid NOTHING: docs/shift-records/2026-10-02-voice-program-wave-1-herald-deeds.json (the Voice Program's record for wave 1, the Herald in deeds, ODQ §934.88) joined `tree`, 30 -> 31. A GROWTH, not a class move; no past-EOF citation of its own.",
     "pastEofCitationsExcluded": 377,
     "byRule": {
       "banner": 8,
       "dated": 5,
       "sha-pin": 1,
-      "tree": 30
+      "tree": 31
     },
     "files": {
       "banner": [
@@ -87,6 +88,7 @@
         "docs/shift-records/2026-10-01-urban-band-herald-rows.json",
         "docs/shift-records/2026-10-01-urban-band-warden-census-herald.json",
         "docs/shift-records/2026-10-01-urban-band-warden-census.json",
+        "docs/shift-records/2026-10-02-voice-program-wave-1-herald-deeds.json",
         "docs/shift-records/README.md",
         "docs/shift-records/_TEMPLATE.json"
       ]
