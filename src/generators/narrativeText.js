@@ -13,7 +13,7 @@
  * The closure bodies are moved VERBATIM, so every rng / pickRandom2 call fires at
  * the same point in the same order — byte-identical, same-seed output preserved.
  *
- * The pure string tables (ARRIVAL_SCENES, ARRIVAL_ADDONS, TERRAIN_NARRATIVE_HOOKS)
+ * The pure string tables (ARRIVAL_SCENES, TERRAIN_NARRATIVE_HOOKS)
  * stay in src/data/narrativeData.js.
  */
 

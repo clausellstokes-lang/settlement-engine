@@ -111,7 +111,7 @@
     FIVE rows — `defenseGenerator.js` `:458→:459` and `:467→:468`, `factionDynamics.js`
     `:127→:109`, `:133→:115`, `:179→:161` — and NOT ONE of this member's four. The four rows
     this member re-takes are still at `:169 :237 :238 :239` with their addresses
-    `assembleSettlement.js:100`, `:119`, `:120` and `narrativeGenerator.js:1113` byte-identical
+    `assembleSettlement.js:100`, `:119`, `:120` and `narrativeGenerator.js` (line 1113 at this packet's tip) byte-identical
     (judgment 174c, executed). EM-R0d rides EM-T14, so a placement on EM-T15 discharges the
     reservation, and the validator run above proves it with the flip simulated.
 - **Collision group:** **EM-R0d** on `src/domain/prose/holderTable.js` (above; a placement-order
@@ -468,7 +468,7 @@ validator over a copy of `PACKET_MANIFEST.json`: with EM-R2 and EM-R0d both non-
 EM-R0d LANDED, that error is gone and EM-R2's only errors are the two a `__BASE__` DRAFT always
 carries.
 ⭐ **RE-EXECUTED AT `64b75240c` (version 5): the four rows are STILL at `:169 :237 :238 :239`
-with their addresses `assembleSettlement.js:100`, `:119`, `:120` and `narrativeGenerator.js:1113`
+with their addresses `assembleSettlement.js:100`, `:119`, `:120` and `narrativeGenerator.js` (line 1113 at this packet's tip)
 byte-identical, and the J-T1 window `f76bd62ab..64b75240c` moves NOT ONE of this member's twelve
 paths.** The reservation is discharged twice over.
 **Recommend: place EM-R2 on a train whose promotion commit follows EM-R0d's LANDED flip** —
@@ -477,7 +477,7 @@ addresses at the then-tip rather than copy §7's predictions (§P2.16).
 ⭐ **VERSION 2, EXECUTED AT `c69d16a5d` (train EM-T14's composed tip, EM-R0d's commit): DONE,
 AND THE ANSWER IS "UNMOVED".** EM-R0d re-addressed five rows of `HOLDER_SOURCES` and none of
 this member's four; the four still read `:169 assembleSettlement.js:100`,
-`:237 …:119`, `:238 …:120`, `:239 narrativeGenerator.js:1113`. The validator run with EM-T14's
+`:237 …:119`, `:238 …:120`, `:239 narrativeGenerator.js` (line 1113 at this packet's tip). The validator run with EM-T14's
 three members flipped LANDED returns ZERO duplicate change-path errors and ONE EM-R2 error,
 `packetPath does not exist`, which the placement writes away. **The question is now a
 placement-order note, not an open ruling.**
@@ -548,7 +548,7 @@ line quoted with its own text as evidence.
 | ⭐ THE FORK LAW | `src/kernel/prng.js` | `fork: (label) => createPRNG(`${seed}::${label}`),` (count 1) | a fork is a FRESH stream derived from (seed, label) — it takes nothing from the parent, so a skipped child cannot move a sibling. ⛔ Changing this derivation is owner-gated under THE PROMISE | PRESERVE. It is the reason §0.A's skip is lawful, and the battery executes it |
 | ⭐ THE CLASS REGISTER | `src/domain/edit/recordRegister.js` | `export const RECORD_CLASSES = Object.freeze({` and `export const CLASS_EXCEPTIONS = Object.freeze({` count 1 each | EM-R0a's LANDED data: `npcs: 'HELD'`, `factions: 'HELD'`, `'factions[].members[]': 'MIRROR'`. ⛔ Its own header forbids any `src/generators/**` module importing it, so only the BATTERY reads it | IMPORT in the test, never in `src/`. The battery asserts the gate against the register rather than re-typing it (`contractTestAntiVacuity` Rule 2) |
 | THE LINKAGE'S OTHER READER | `src/generators/steps/generatePopulation.js` | `const roll = rng.random() * totalPower;` (count 1) | EM-P0's own required row, inside `linkFactions`, which this member's split does not enter | PRESERVE VERBATIM |
-| THE CITATION TABLE | `src/domain/prose/holderTable.js` | `export const HOLDER_SOURCES` (count 1) | four live `cite:` rows address lines this member shifts: `:169`→`assembleSettlement.js:100`, `:237`→`:119`, `:238`→`:120`, `:239`→`narrativeGenerator.js:1113`. `tests/lint/proseWiringCensus.walker.test.js`'s SEAM car 5b arm re-derives every producer write from a live syntax-tree pass and reds on a stale one | RE-ADDRESS in the same commit, addresses only (§7). Also EM-R0d's own required row, and it survives byte-identical |
+| THE CITATION TABLE | `src/domain/prose/holderTable.js` | `export const HOLDER_SOURCES` (count 1) | four live `cite:` rows address lines this member shifts: `:169`→`assembleSettlement.js:100`, `:237`→`:119`, `:238`→`:120`, `:239`→`narrativeGenerator.js` (line 1113 at this packet's tip). `tests/lint/proseWiringCensus.walker.test.js`'s SEAM car 5b arm re-derives every producer write from a live syntax-tree pass and reds on a stale one | RE-ADDRESS in the same commit, addresses only (§7). Also EM-R0d's own required row, and it survives byte-identical |
 | Test precedent (the stream) | `tests/generators/assemblyCoherenceRngIsolation.test.js` | its `generateCoherence` isolation arms | the shape the battery's A3 copies: two runs, the same coherence rng, the sibling outputs compared |
 | Test precedent (the pin) | `tests/generators/pipelinePinnedMode.test.js` | `describe('EM-P0 — the pipeline seam: pins are consulted per chooser, on one stream')`, arms A1–A7 | A1 hashes a golden stride against the committed fixture; A3 counts raw draws on a step's own stream. The battery copies both arm for arm |
 | Test precedent (the appender) | `tests/generators/factionStructuralOfficeCoverage.test.js` | its office-coverage arms | the shape A5 copies, with the uncovered-roster control it already establishes |
@@ -678,7 +678,7 @@ BY THE BUILD LANE AT DISPATCH** (§P2.16 — a predicted number is never copied)
 | `:169` `economicViability` | `src/generators/steps/assembleSettlement.js:100` | `…:111` |
 | `:237` `structuralViolations` | `…assembleSettlement.js:119` | `…:130` |
 | `:238` `structuralSuggestions` | `…assembleSettlement.js:120` | `…:131` |
-| `:239` `prominentRelationship` | `src/generators/narrativeGenerator.js:1113` | `…:1126` |
+| `:239` `prominentRelationship` | `src/generators/narrativeGenerator.js` (line 1113 at this packet's tip) | `…:1126` |
 
 ⛔ No `kind`, no `read` flag, no key and no row is added, removed or reordered;
 `export const HOLDER_SOURCES` stays byte-identical, which is also EM-R0d's required row.

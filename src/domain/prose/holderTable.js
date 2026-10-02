@@ -236,7 +236,7 @@ export const HOLDER_SOURCES = Object.freeze({
   // ── the office itself: the record's own audit of the record ──
   structuralViolations: Object.freeze({ kind: 'office', cite: 'src/generators/steps/assembleSettlement.js:129', read: true }),
   structuralSuggestions: Object.freeze({ kind: 'office', cite: 'src/generators/steps/assembleSettlement.js:130', read: true }),
-  prominentRelationship: Object.freeze({ kind: 'office', cite: 'src/generators/narrativeGenerator.js:1132', read: true }),
+  prominentRelationship: Object.freeze({ kind: 'office', cite: 'src/generators/narrativeGenerator.js:1009', read: true }),
 });
 
 /**

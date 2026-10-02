@@ -10,16 +10,15 @@
  *    mapping; this harness pins that every mapped value lands on a real,
  *    non-empty scene pool and that the 'ordinary' default exists.
  *
- * 2. ARRIVAL_ADDONS is keyed by ROUTE but was indexed by
- *    economicState.tradeCommodity — a field nothing writes on economicState
- *    (historyGenerator computes tradeCommodity into history context only).
- *    Now indexed by route; this harness pins that every addon key IS a route
- *    the config vocabulary can produce, so every pool is reachable.
+ * 2. ARRIVAL_ADDONS was keyed by ROUTE but indexed by a field nothing wrote.
+ *    It was repaired here, then RETIRED by the Voice Program wave 3
+ *    (2026-10-02): a second approach sentence that restated the first. Its
+ *    joins left with it.
  */
 
 import { describe, test, expect } from 'vitest';
 import { ROUTE_TO_SCENE } from '../../src/generators/narrativeGenerator.js';
-import { ARRIVAL_SCENES, ARRIVAL_ADDONS } from '../../src/data/narrativeData.js';
+import { ARRIVAL_SCENES } from '../../src/data/narrativeData.js';
 
 // The route vocabulary: ConfigurationPanel options (minus the 'random_trade'
 // sentinel, which resolveConfig resolves away) + resolveConfig pool values.
@@ -48,25 +47,6 @@ describe('join: ROUTE_TO_SCENE values are real ARRIVAL_SCENES keys', () => {
   test('mapped routes only use the route vocabulary (no phantom keys)', () => {
     for (const route of Object.keys(ROUTE_TO_SCENE)) {
       expect(ROUTE_VOCABULARY, `ROUTE_TO_SCENE key '${route}' is not a real route`).toContain(route);
-    }
-  });
-});
-
-describe('join: ARRIVAL_ADDONS is keyed by reachable routes', () => {
-  test('every addon key is a route the config vocabulary can produce', () => {
-    for (const key of Object.keys(ARRIVAL_ADDONS)) {
-      expect(ROUTE_VOCABULARY, `addon key '${key}' is unreachable by route`).toContain(key);
-    }
-  });
-
-  test('every addon template renders a non-empty string for (name, tier)', () => {
-    for (const [key, pool] of Object.entries(ARRIVAL_ADDONS)) {
-      expect(pool.length, `addon pool '${key}'`).toBeGreaterThan(0);
-      for (const template of pool) {
-        const rendered = template('Testford', 'town');
-        expect(typeof rendered).toBe('string');
-        expect(rendered.length, `addon template under '${key}'`).toBeGreaterThan(0);
-      }
     }
   });
 });

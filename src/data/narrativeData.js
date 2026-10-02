@@ -66,62 +66,16 @@ export const ARRIVAL_SCENES = {
     (r) =>
       `A child runs past you on the road into ${r}, chasing something or being chased by something (unclear which). Nobody in the street pays attention.`,
     (r) =>
-      `A merchant argues with a carter at the gate of ${r} about the size of a load. The guard is ignoring both of them. This is clearly a daily occurrence.`,
+      `A merchant argues with a carter on the road into ${r} about the size of a load. Nobody else pays them any attention. This is clearly a daily occurrence.`,
     (r) =>
-      `${r} smells like bread from the gate: a bakehouse near the entrance, open early, already on the second bake of the day.`,
+      `The first person you meet on the road into ${r} wants to know your business, and the second already knows it.`,
   ],
 };
 
-export const ARRIVAL_ADDONS = {
-  port: [
-    (r, s) =>
-      `The ${s === "metropolis" ? "great harbour" : "harbour"} of ${r} announces itself before the settlement does: masts above the treeline, the smell of tar and salt, the cries of gulls working the fishing boats.`,
-    (r, s) =>
-      `${r} appears as a smear of colour above the water: pennants, sail canvas, the white of new-washed walls catching the light from the sea.`,
-    (r, s) =>
-      `The approach to ${r} is along the quayside road, which means threading through loaded carts and dock workers before the settlement itself comes into view.`,
-    (r, s) => `You smell ${r} before you see it: smoke, fish, the mineral bite of the harbour at low tide.`,
-  ],
-  river: [
-    (r, s) =>
-      `${r} sits in the bend of the river, its rooftops visible above the willows from a quarter mile out. The mill wheel turns.`,
-    (r, s) =>
-      `The river road into ${r} runs alongside the water, and the settlement grows out of the bank on both sides: older buildings on the high ground, newer ones crowding the waterfront.`,
-    (r, s) =>
-      `You cross the river at the ford half a mile out and the road becomes a proper street almost immediately. ${r} has been expanding toward the water.`,
-    (r, s) => `The bridge into ${r} is old stone, wide enough for two carts, and there is already a queue to cross it.`,
-  ],
-  crossroads: [
-    (r, s) =>
-      `${r} is visible from the junction itself. The roads converge on a market square that seems to be the settlement's reason for existing.`,
-    (r, s) =>
-      `Four roads, and ${r} at the centre of all of them. Travellers in three directions. The fourth road is yours.`,
-    (r, s) =>
-      `The waymarker stone at the crossroads half a league out has ${r}'s name carved into it four times, facing each direction. Someone keeps repainting the distances.`,
-    (r, s) =>
-      `${r} sprawls along all four roads from the central square. The part you see first depends on which direction you came from.`,
-  ],
-  road: [
-    (r, s) =>
-      `${r} appears around a bend in the road, its ${s === "city" || s === "metropolis" ? "walls and towers" : "main street"} coming into view all at once.`,
-    (r, s) =>
-      `The road widens into ${r}'s main thoroughfare without announcing the transition. You are in the settlement before you realised you arrived.`,
-    (r, s) =>
-      `A mile marker, then a second, then the outlying farms of ${r} begin. The settlement proper is still a quarter hour ahead.`,
-    (r, s) =>
-      `${r} is announced by the smoke of its cookfires and the sound of its market before its buildings are visible.`,
-  ],
-  isolated: [
-    (r, s) =>
-      `${r} appears at the end of a track that stopped pretending to be a road some time ago. It exists here because someone decided to stay, not because the terrain made it easy.`,
-    (r, s) =>
-      `The last real road ended two hours back. ${r} is visible now: a cluster of buildings in the middle distance that the surrounding terrain seems indifferent to.`,
-    (r, s) =>
-      `The track into ${r} is maintained by the people who need it, which means it is exactly wide enough and no wider.`,
-    (r, s) =>
-      `${r} sits in a natural fold of the terrain, protected on three sides. You see the smoke before the buildings, and the buildings before you find the path down.`,
-  ],
-};
+// ARRIVAL_ADDONS RETIRED 2026-10-02 (the Voice Program wave 3): a second approach
+// sentence appended after the arrival scene's opener, which restated it ("The harbour
+// at X announces itself…" then "The harbour of X announces itself…"). The scene's
+// beats after the opener now speak of the place itself (src/generators/narrative/arrivalScene.js).
 
 // ─── Terrain narrative hooks ─────────────────────────────────────────────────
 // Used by narrativeGenerator.js to build settlement founding descriptions.
