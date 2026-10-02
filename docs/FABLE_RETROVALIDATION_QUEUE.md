@@ -3914,3 +3914,10 @@ No Opus car landed in this act. The twelve rulings, the two recorded owner words
 *Receipts:* the commit message (the 518-row export identity and the build measurements), tests/build/vendorPdfLazy.test.js (its end note), and docs/URBAN_BAND_INSTITUTIONS.md §4e.
 *Priority:* P2.
 **Status:** enrolled.
+
+### R101 — J46, a coverage-job timeout re-run rather than its wait raised (Opus 5.5 seat; PR #55, merged as `8a6f6b9d3`)
+*What was judged:* tests/ui/realmHeraldGate.test.jsx's living-world-gates arm expired its 5,000 ms lazy-chunk wait once in CI's v8-coverage job; the failed job was re-run rather than the wait raised, on the measurement that the chunk's module graph is unchanged by the branch (212 modules, +0.39 % source) and the arm passes in 2.2 s alone under the same coverage flags.
+*What Fable re-derives:* whether a second CI expiry of this arm should now become a measured per-wait budget (the file's own doctrine) rather than another re-run.
+*Receipts:* CI run 36939893138 (the failed job and its re-run), the base-versus-tip graph count, and ODQ §934.86 addendum 6.
+*Priority:* P3.
+**Status:** enrolled.
