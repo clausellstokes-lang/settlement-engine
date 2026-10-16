@@ -19,7 +19,9 @@ RULED (the owner, 2026-10-16 15:07 EDT, ODQ §934.90 addendum 1: "Go with the ch
 recommendations on OD-EC-1 through OD-EC-18 … Still nothing dispatches before
 the release is pushed and deployed."). THE DISPATCH GATE: no EC lane, car or
 slice dispatches until the UI + prose release is PUSHED AND DEPLOYED — the
-owner's word, not a sequencing judgment. Every wave ships DARK behind a virtual flag; no flag
+owner's word, not a sequencing judgment. AMENDED 2026-10-16 15:21 EDT by the owner's
+word on EXPECTATION — "belief should also play a role in this as well as if there is an impending war that is believed... for example, the prices of weapons would still go up and the capacity growing towards its capacity following the market / that should complicate or foil what you've already built rather than replace" — as law E13 and wave EC-16 (ODQ §934.90 addendum 2):
+belief COMPLICATES and FOILS the physics; it never replaces a band. Every wave ships DARK behind a virtual flag; no flag
 lights, no soak runs, no band ratifies outside the owner-signed schedule. THIS
 VOLUME ABSORBS THE TR PROGRAM (DESIGN_FP_ARCH_TR.md) as its compiled layer — the
 TR waves keep their OWNER-SETTLED flag names, endings vocabulary and wave texts
@@ -64,10 +66,18 @@ refute its brief (OPERATING_STANDARD rule 5).
    `causalDossierProse` with no caller, the legibility `detail` rung never
    rendered, `previewCampaignWorldPulse` as the counterfactual seam). EC-2
    mounts them before any new physics lands.
-4. The program is a FAMILY, not a lane: eleven EC waves plus the five absorbed
+4. Belief plays — through ACTS, never through bands (E13): a court that
+   BELIEVES war is coming fills its armoury, raises its reserve, lets its
+   houses hoard and builds the second smithy on the rumour; the stocks move,
+   the band follows the stocks, and the record names the belief as the cause.
+   A belief that was wrong leaves the world holding what it bought — the
+   foil. The believed picture is each court's own (K3), so neighbours react
+   differently to one rumour, and INFO's plants can start a run on arms.
+5. The program is a FAMILY, not a lane: twelve EC waves plus the five absorbed
    TR waves, each dark, each with lit-preconditions, each honouring the SPINE's
    twelve requirements, priced on the order of the TR program and above it. It
-   cannot start before the release the owner is composing (§13 OD-EC-4).
+   cannot start before the release is pushed and deployed (§13 OD-EC-4, the
+   owner's word).
 
 ### 0b Reading order for the implementer
 
@@ -199,6 +209,20 @@ banded; no float reaches a surface; the AI is a bucketing clerk.
   idiom), not as a sentence. A condition that cannot say why
   does not exist (SPINE §1.6, the dossier coherence law: open the town, find the
   trace where a DM would look).
+- **E13 — BELIEF ACTS, NEVER BANDS (the owner, 2026-10-16 15:21 EDT: "belief should also play a role in this as well as if there is an impending war that is believed... for example, the prices of weapons would still go up and the capacity growing towards its capacity following the market / that should complicate or foil what you've already built rather than replace"):** a believed
+  condition of the world — a neighbour's believed war readiness, a believed
+  scarcity trajectory, a believed danger — moves the market ONLY by moving an
+  ACTOR to an ACT on its OWN picture (K3, the two-picture law): the crown's
+  precautionary draw, the seat's reserve notch, the house's position, the
+  speculative founding, the merchant's destination. Each act moves a real
+  stock, claim or candidate; the band follows the stocks; the record carries
+  an `expectation` pressure naming WHO believed WHAT at what confidence.
+  No expression reads a belief record inside the condition derivation; the
+  acts live in the physics waves' seams. A belief that proves wrong is not
+  undone — the world holds what it bought on the rumour (the FOIL), and the
+  receipt says so. Belief complicates and foils the physics; it never
+  replaces a band (T8 held in substance: the band is from stocks; the slot
+  records a believed rung as a CAUSE LABEL, never as an operand).
 - **E12 — THE CLERK READS BANDS:** the AI grounding for economy — the client
   payload AND the edge function's prompt summary — carries condition bands,
   pressures and believed bands; never a stock integer, never an income
@@ -503,6 +527,7 @@ flag order).
 | EC-7 GRADES | `gradeLadderEnabled` | NEW | `requiresLandedWork('EC-2')` + EC-1; the crown classes additionally EC-4 | YES |
 | EC-8 SLOW VERDICTS | `marketStructureEnabled` | NEW | `requiresLandedWork('EC-2')` + EC-1 + `institutionLifecycleEnabled` (DEFAULT TRUE — `simulationRules.js:76`; false only in `static_campaign` `:978`; read at `institutionLifecycle.js:669`, called from `pulseKernel.js:1463`); the envelope arm additionally EC-7 | YES |
 | EC-9 COUNTERFACTUAL | — (read-only lazy leaf; no persistence) | — | EC-1 (it diffs condition records) | YES |
+| EC-16 EXPECTATION | `marketExpectationEnabled` | NEW (the owner's 2026-10-16 amendment) | `requiresLandedWork('EC-2')` + EC-1 + the belief map's own activation gate (`beliefMap.js:196`, orthogonal to `settlementStrategyEnabled` — verify its key at build); the crown arm EC-4; the reserve arm EC-3; the founding arm EC-8; the house arm EC-11 (dark ⇒ that arm empty, declared); the merchant arm is TR-3's own | YES (the posture arm + the founding arm) |
 | EC-10 CONVERGENCE INSTRUMENTATION | — (measurement; absorbs TR-9) | — | — | — |
 | EC-11 THE HOUSE (= TR-2) | `merchantHousesEnabled` | existing (the ONE TR flag with a gate read: `houseLedger.js:173`) | TR-1 (as TR §2) | per TR |
 | EC-12 THE GRAIN ROAD (= TR-4) | `foodCaravansEnabled` | NAMED ONLY (`tradeConvergenceContract.js`; no gate read) | `commodityFlowEnabled` + `demographicsEnabled`; collapse arm `routeLifecycleEnabled` (dark ⇒ honest permanent zero) | per TR |
@@ -714,14 +739,18 @@ every good was public knowledge, and the crier said why.*
   `reserve_held`). **Arm rule:** where both arms speak for one good the
   PHYSICAL arm sets the band and the structural arm contributes pressures
   only (one quantity, one denomination — E4); the record names its `arm`.
-  **Pressures:** `PRESSURE_KINDS` (CLOSED at 27; a 28th is a volume
-  amendment, never a lane's mint): `source_severed · gate_hostile ·
+  **Pressures:** `PRESSURE_KINDS` (CLOSED at 28 — the 28th, `expectation`,
+  is the 2026-10-16 owner amendment, E13; a 29th is a volume amendment, never a
+  lane's mint): `source_severed · gate_hostile ·
   route_danger · inflow_cut · starving · relief_inbound · input_short ·
   processor_lost · resource_depleted · substitute_active · substitute_draw ·
   competing_use · crown_draw · export_draw · reserve_held · glut_refill ·
   corner · stance_closed · stance_restricted · stance_taxed · harvest_short ·
   harvest_rich · famine · blockade · plague_load · grade_mismatch ·
-  rough_for_common`; each with a magnitude rung
+  rough_for_common · expectation` (the 28th: slots actor class {crown, seat,
+  house, founder}, the believed subject settlement, the believed readiness rung
+  {alert, preparing, mobilized}, the confidence rung {faint, fair, firm}, and
+  once resolved `outcome ∈ {borne_out, unfounded}`); each with a magnitude rung
   {slight, marked, severe} and id slots. Every kind registers a phrase row
   (the WHAT_PHRASES totality) and a corpus pool line (RECEIPT_POOLS_TRADE.md
   annex, verbatim walker).
@@ -805,13 +834,20 @@ every good was public knowledge, and the crier said why.*
   RECORDED decision, not silence.
 - **Collision:** `marketPrices.js` (T10's car, source-scan pinned against a
   coin revival) — EC-1 rewrites it to READ the ledger and keeps the scan; the
-  MOVEMENTS enum stays FIVE: `desperate` speaks SCARCITY, not price ("not to
-  be had") because no magnitude stands behind it (§776.3's "honest derivation,
-  never flavor"); the five price phrases render ONLY for a record whose arm is
-  PHYSICAL (a stock stands behind the magnitude); a STRUCTURAL record renders
-  its band WORD and its causes, never a price phrase — whether structural bands
-  may speak price phrases is OD-EC-14. A declared rendered-copy change under
-  the flag (dark ⇒ today's five over the mirror). `economyReadModelCoverage` gains the
+  MOVEMENTS enum stays FIVE and EVERY rung speaks relative to THE DM'S OWN
+  STANDARD (the owner, 2026-10-16, "also i see that you are avoiding things like \"the price is triple or more than the standard\". in this, we still don't set an absolute price, but we give the DM a reference to their own determined standard price. what are your thoughts to that?"): `glut` "a third under its usual
+  price" · `soft` "a shade under" · `fair` "its usual price" · `dear` "nearly
+  double" · `desperate` "triple or more its usual price" — the owner's own
+  phrase, and an OPEN-TOPPED rung ("or more" is a floor, not a fabricated
+  magnitude, which is what makes an empty warehouse honest to speak of). The
+  phrases render for BOTH arms: a rung is honest derivation whichever arm set
+  it (the structural rung is derived from chain, stressor and ledger evidence
+  exactly as the old ×1.8/×0.7 multipliers were heuristics over bands, never
+  measurements), and "usual" IS the DM's determined standard, never ours
+  (§776.1 verbatim: "heuristic relative percentages… 'the price of bread has
+  doubled'"). Words, never numerals (the §0d digit ban stands: "triple", not
+  "3×"). OD-EC-14 is RULED by the owner's word. A declared rendered-copy
+  change under the flag (dark ⇒ today's five over the mirror). `economyReadModelCoverage` gains the
   new reader row. The DS-ECO-4 corpus block (SCARCITY pools, unmounted today)
   becomes MOUNTABLE on this ledger — that mount is the PROSE lane's act, not
   EC's (the corpus freeze).
@@ -1668,6 +1704,165 @@ harvest before it declared.*
 
 ---
 
+### EC-16 — EXPECTATION (`marketExpectationEnabled`) — the owner's 2026-10-16 amendment; buildable after EC-1/EC-2, arm by arm as its hosts land
+*Historical archetype: the Antwerp exchange in 1557 — the Spanish default was
+rumoured for a year, and the merchants who believed it were the ones left
+standing; the ones who believed it wrongly in 1552 were ruined by a peace.*
+- **The owner's word (verbatim):** "belief should also play a role in this as well as if there is an impending war that is believed... for example, the prices of weapons would still go up and the capacity growing towards its capacity following the market / that should complicate or foil what you've already built rather than replace"
+- **Scope (E13 made mechanism):** belief moves the market through FIVE ACTS,
+  each by an actor on ITS OWN believed picture, each a real movement in a
+  physics wave's seam, each stamping an `expectation` pressure on the records
+  it moves. The believed subject is the court's EXISTING belief record of a
+  rival or hostile neighbour — `beliefRecord(ws, observer, subject).readiness`
+  (`beliefMap.js:225,:337`: believed war readiness 0..1 from the subject's
+  warPosture, `war_preparation` 0.5 · `mobilized` 0.75, decaying with distance
+  and silence, confidence-weighted, and FORGEABLE by INFO's deceptive-outward
+  plant, `beliefMap.js:993`) — read through an authored bar (`EXPECTATION_
+  TUNING.readinessBar` ≥ preparing, `confidenceBar` ≥ fair). "Impending war"
+  is therefore a believed rung on a record that already exists, never a new
+  subject.
+  **Arm 1 — the crown fills the armoury (EC-4 seam):** a seat whose believed
+  readiness of any rival ≥ the bars begins EC-4's mobilization-arm draw on the
+  drawable kit BEFORE its own readiness rises, at the garrison trickle × an
+  authored precaution factor; `crown_draw` and `expectation` (actor crown,
+  subject, rung, confidence). It stops the tick the belief decays below the
+  bar or the war opens (then EC-4's real arm takes over, and the stock already
+  drawn is the counterforce to EC-4's war tellable — the band at war's start
+  sits one rung LOWER than in a town that did not believe).
+  **Arm 2 — the seat holds back (EC-3 seam):** believed war ≥ bars for a
+  season raises the reserve one notch on the kit goods (`reserve_held` +
+  `expectation`, actor seat); the notch reverses on its own clock when the
+  belief decays.
+  **Arm 3 — the house takes a position (EC-11/TR-2 seam, dark ⇒ empty):** a
+  house with a `stock` interest in a kit good, reading its OWN seat's picture
+  (houses believe what their court believes — K3; never the subject's record),
+  sponsors caravans to BUY into its warehouse stock below the corner band (a
+  POSITION, TR-6's purchase mechanics without the corner gate; a position that
+  crosses the corner band IS a corner and TR-6 governs it); `expectation`
+  (actor house). The position is sold only ever as a SALE (T5): into the war
+  at dear, or into the peace at glut — the ruin arm.
+  **Arm 4 — the speculative founding (EC-8 seam):** EC-8's market-streak
+  governor gains an EXPECTED-DEMAND streak: believed readiness ≥ bars for
+  BUILD_STREAK ticks with a tier-legal kit-good processor missing (health ≥
+  strained as EC-8 requires) → an `institution_build` candidate with the
+  reason slot "the war that is coming" — capacity grows toward the market
+  BEFORE the demand arrives (the owner's "capacity growing towards its
+  capacity following the market"). When the war comes, the mill stands; when
+  it does not, EC-8's `idle_capacity` streak closes it (26 ticks of glut) with
+  the receipt "built for a war that never came".
+  **Arm 5 — the merchant sails on the rumour (TR-3, existing):** believed-dear
+  destination choice is TR-3's; EC-16 adds nothing there and declares it.
+  **The posture arm (aspatial worlds, where no stock exists):** the seat's
+  OWN warPosture is a TRUE act that belief already moves (`settlementStrategy`
+  under its flag): a seat at `alert`/`war_preparation` stamps `expectation`
+  (actor seat, subject = itself, rung) as a `slight` structural pressure on
+  its kit-good records — "the duke musters; arms are wanted" — so the Economy
+  tab speaks the expectation in every world, band moving only where a stock
+  does.
+  **THE FOIL (the owner's word: complicate or foil, never replace):** when the
+  believed war does not open and the belief decays below the bar, every
+  `expectation` pressure on the records it touched resolves `outcome:
+  unfounded` and stays for one season as the receipt's memory ("the armoury
+  filled for a war that never came; iron goes for a third under"); the drawn
+  stock sits; the reserve notch reverses; the position is sold into the glut;
+  the speculative mill waits for its 26 ticks. When the war does open, the
+  pressures resolve `borne_out` and the band at war's start is one rung lower
+  than the unbelieving fixture — foresight is rewarded by the physics, never
+  by a bonus. **Deception:** an INFO plant that forges a neighbour's
+  mobilization (`beliefMap.js:993`) starts a real run on arms in the deceived
+  court — the LURE's economic cost (TRADE×INFO coupling, INFO writes the
+  belief, EC-16 pays) — and the plant's exposure resolves the pressures
+  `unfounded` with the planter named in the slot when INFO's existing
+  exposure path names one. **Two pictures, two towns:** the town that heard
+  the rumour arms and the one that did not does not; the resilience law by
+  belief (§9d).
+- **Force/counterforce (same evidence):** the precautionary draw that
+  protects the crown empties the smithy for the household (EC-3's ladder,
+  legitimacy bleed); the position that profits the house in war ruins it in
+  peace; the speculative mill that saves the town in war closes in peace; a
+  belief that decays stops every arm (no ratchet — T5); the posture arm's
+  pressure is `slight` and never moves a band alone.
+- **Belief posture (the heart of the wave):** EVERY read is belief-side and
+  per-observer — `beliefRecord(ws, OBSERVER, subject)`, never the subject's
+  own record (the K3 fence is structural: the arms receive the observer's
+  rows, never `worldState`, the `secondOrderBelief` idiom); no arm reads a
+  truth-side readiness; the condition derivation (`marketCondition.js`)
+  imports NOTHING belief-side (the no-band-from-belief scan); the only
+  belief-to-truth crossing is an ACT (a draw, a notch, a purchase, a
+  candidate) recorded in physics ledgers.
+- **Casting:** the seat NPC ("the duke") in arms 1–2; the house's factor in
+  arm 3; the founding faction in arm 4.
+- **Receipts:** "Harrow's duke believes Aldenmoor is arming and has filled his
+  armoury; iron is dear in Harrow though no war has come" · "A year of
+  rumoured war: Mossgate's smiths have raised a second forge against the
+  march they expect" · "The war Harrow armed for never came; its racks are
+  full and iron goes for a third under" · "The Mossgate house bought iron on
+  the rumour and sold it into the peace at a loss".
+- **Pins (negative hardest):** dormancy (dark ⇒ no arm runs, byte-identical);
+  the no-band-from-belief token scan on `marketCondition.js` (guard-the-guard
+  seeds a `beliefRecord` import and asserts red); the observer-only pin (every
+  arm reads `beliefRecord(ws, observer, …)` — a planted swapped-argument read
+  reds, the secondOrderBelief structural fence); the WRONG-WAR TELLABLE (a
+  belief ≥ bars, no war opens, the belief decays: arms `fair`→`dear`
+  (`expectation`, crown) → `glut` with `outcome: unfounded`; the mill built
+  and closed; the house's position sold at glut — ruin reachable); the
+  RIGHT-WAR TELLABLE (belief then war: the band at war's start reads one rung
+  lower than the EC-4 war fixture without EC-16 — the counterforce pinned
+  POSITIVELY); the TWO-TOWNS TELLABLE (one rumour, one hearer: two different
+  band sequences); the DECEPTION TELLABLE (a planted mobilization ⇒ a real
+  draw ⇒ `unfounded` with the planter named on exposure); the stop pin (the
+  belief decaying below the bar stops every arm the next tick); the posture-
+  arm pin (aspatial: `expectation` slight, band unmoved); the resolution pin
+  (`outcome` set exactly once, kept one season, then dropped); the tuning-
+  register row (`EXPECTATION_TUNING`).
+- **Bands:** `readinessBar`, `confidenceBar`, the precaution factor, the
+  position ceiling (below the corner band), the memory season (13).
+- **Clock:** fast = the arms re-read belief weekly; slow = the reserve notch
+  and the founding streak (13), the contraction (26), the belief's own silence
+  decay (0.92/tick, ~8-tick half-life — SP-B's, unchanged).
+- **Posture:** the seat's risk appetite (`courtRiskAppetiteOf`, dark) tints
+  the precaution factor when lit; the disposition channel orders the ladder
+  as EC-3.
+- **Couplings (registry rows):** EC-16 ⇐ beliefMap (readiness, confidence),
+  ⇐ INFO plants (through beliefMap only), ⇐ warPosture (the posture arm);
+  EC-16 ⇒ EC-4 (the precautionary draw), ⇒ EC-3 (the notch), ⇒ EC-11/TR-6
+  (the position), ⇒ EC-8 (the expected-demand streak), ⇒ EC-1
+  (`expectation` pressures and their resolution).
+- **Endings wired:** `fortune` (the house that believed rightly) and `ruin`
+  (the house that believed wrongly) — the brief's "expectations" input, and
+  TR-3's "wrong-market tragedy" generalized from markets to wars.
+- **Herald contract:** the expectation crossing; the resolution receipts
+  (`borne_out` / `unfounded`); the speculative founding and its closure with
+  their reason slots.
+- **Lifecycle line:** NO new ledger — the acts live in EC-3/4/8/11's state;
+  the `expectation` pressure and its `outcome` live on `marketConditions`
+  (re-derived; the `outcome` memory is carried by `atTick` for one season).
+- **Dossier round-trip (crown):** Economy → arms: "dear — the duke believes
+  war is coming and has filled the armoury"; the Realm's pair card shows the
+  believed readiness that drove it ("Aldenmoor: arming, they say"); the DM's
+  includeGroundTruth toggle shows whether it is true.
+- **Req 13 Alignment:** ENGAGED — a lawful seat requisitions on the rumour
+  with receipt; a malicious one lets the house profiteer on the fear (TR-6's
+  moral pricing when the position meets need).
+- **Req 14 Edit-verb:** engine-only with reason — the DM moves belief
+  through INFO's existing verbs (plant, reveal) and war through the war verbs;
+  the acts follow.
+- **Collision:** `beliefMap.js` is 771/800 (TR §6 Q3) and is NOT touched (the
+  arms read its exports); `marketCondition.js` gains the resolution arm only
+  (+8, no belief import); EC-4's draw (+6), EC-3's notch (+4), EC-8's streak
+  (+10), EC-11's position (TR-2's purchase verb, +0 until TR-2 lands) carry
+  the arms in their own leaves.
+- **Mutants:** planted belief import in `marketCondition.js` ⇒ scan reds;
+  planted swapped-argument read ⇒ the observer pin reds; planted arm running
+  under a decayed belief ⇒ the stop pin reds; planted band move from the
+  posture arm alone ⇒ reds.
+- **New leaves:** `marketExpectation.js` (the five arms' belief reads + the
+  resolution; ~300 eff), `expectationPressures.js` (phrase rows; ~60 eff).
+  **Files touched:** `procurementDraw.js` (+6), `allocationLadder.js` (+4),
+  `marketStructureKernel.js` (+10), `marketCondition.js` (+8), `simulationRules.js`
+  (+1 key), `couplingRegistryTrade.js` (+5), `pulseKernel.js` (+0), the
+  tuning register (+1 `draft` row).
+
 ## §7 THE SCENARIO MATRIX (every row is a future soak pin: DIRECTION and ORDER, never magnitude)
 
 Each row becomes, in EC-10, a fixture (it names its birth door, §1c) plus an assertion in `behavioral-observation`'s idiom of which way each band moves and in what order the effects arrive. No row asserts a count, a rate or a price. "today" means the tree at `00b648c9d` already does it, and the row cites the §2 census row that proves it. A wave cell names what must be lit; "degraded" names what happens when a precondition is dark.
@@ -1765,7 +1960,13 @@ Notation: bands are the CONDITION_BANDS {glut, soft, fair, dear, desperate}. A b
 | M54 | Resilience: single-sourced | The same siege, in a town whose only source is the severed one. | Unchanged. | No source remains. | Today the link is `fragile`, and a single-sourced critical input can NEVER starve (S33, the inversion). Under EC-3 it starves after 4 dwell ticks, and the receipt names it single-sourced. | No source is clear. | Downstream hops after starvation. | Today it reads as falsely shielded. Under EC-3 the good moves `dear`, then the latch takes it to `desperate` at tick 4: not at tick 1, and not never. **It must diverge from M53.** | `supply_starved` impairment, and an EC-8 build if the dear streak reaches 13. | "The smithy of Cnocby starves of iron: it had one road, and that road has been cut for four weeks." | EC-3 cures the inversion. Degraded: with EC-3 dark the town is shielded today. |
 | M55 | Quality-specific shock (exceptional goods stable under mass demand) | A mass levy mustered by EC-4. | The levy's demand lands on rough and common, never on fine. | The court armourer's fine stock sits unused. | Levy-class draws only. | Unchanged. | None. | Common moves two rungs over two ticks while fine moves zero (the EC-7 test). | The master smith hammers munition blades: the standardization pressure (EC-7). | "The muster has emptied Aldenmoor of common blades; the court armourer's fine work is untouched and sells at its usual price." | EC-7 and EC-4. |
 
+| M57 | Believed impending war | A court's belief record shows a rival at `preparing`+ with confidence ≥ fair (`beliefMap.js:337`); no front exists. | The crown's precautionary draw on {arms, iron, leather} begins; household demand unchanged; the court class unchanged. | Production unchanged; stock falls at the precaution rate. | Crown first under a martial channel; the reserve notch after a season. | No stance change (no front). | Iron's draw raises the smithy's input target (EC-5 household). | `fair`→`dear` with `expectation` (crown, subject, rung, confidence) then `crown_draw`; one rung per tick. | A build candidate after 13 ticks of dear (EC-8, expected-demand streak); the house takes a position (EC-11 lit). | "Harrow's duke believes Aldenmoor is arming and has filled his armoury; iron is dear in Harrow though no war has come." | EC-16 + EC-4 + EC-3 (+EC-8, +EC-11); aspatial: the posture arm only, band unmoved |
+| M58 | The war that never came | M57's belief decays below the bar (silence decay 0.92/tick) and no front opens. | The draw stops the next tick. | Refill toward cap. | The notch reverses on its clock. | — | `glut_refill` downstream. | `dear`→`soft`→`glut` with `outcome: unfounded` kept one season; the speculative mill closes after 26 glut ticks; the house sells its position at glut (ruin). | Legitimacy bleed from the household's lean season; TR-1 `supply_withheld` evidence against the seat. | "The war Harrow armed for never came; its racks are full and iron goes for a third under." | EC-16 |
+| M59 | The war that came (foresight rewarded) | M57 then a front opens. | EC-4's real arm takes over the draw. | The stock already drawn and the mill already proposed. | — | `closed` by war. | — | The band at war's start reads ONE RUNG LOWER than M1's unbelieving fixture; `outcome: borne_out`. | The house's position sells at dear (fortune). | "Harrow marched with full racks; its smiths had seen the war coming." | EC-16 + EC-4 |
+
 ### 7a The resilience law: pairs that MUST diverge under one shock
+
+- M57 against a twin town that never heard the rumour: one rumour, one hearer, two band sequences (the two-picture law, EC-16).
 
 Each pair below becomes ONE soak fixture with two subjects. The pin is red if both subjects show the same band sequence.
 
@@ -1803,11 +2004,11 @@ projection of `marketConditions`: one row per cried good — `{label} — {band
 phrase}` where the phrase is the MOVEMENTS enum (five today, six under EC-1):
 `glut`→"a third under its usual price" · `soft`→"a shade under" · `fair`→"at
 its usual price" (rendered only when a pressure exists) · `dear`→"nearly double
-its usual price" · `desperate`→"not to be had" (scarcity, not a price — no
-magnitude stands behind an empty warehouse) — five movements, never a digit,
-never a coin (§776; the source-scan pin stays); a price phrase renders ONLY
-for a PHYSICAL-arm record; a structural record shows its band word and its
-causes (OD-EC-14 asks whether that may change). Under it, the crier line keeps
+its usual price" · `desperate`→"triple or more its usual price" (the owner's
+phrase; open-topped, so an empty warehouse speaks honestly) — five movements
+relative to THE DM'S OWN STANDARD, never a digit, never a coin (§776; the
+source-scan pin stays); the phrases render for both arms, since a rung is an
+honest derivation whichever evidence set it (OD-EC-14, ruled 2026-10-16). Under it, the crier line keeps
 its frame pool with the receipt clause now sourced from the strongest pressure's
 phrase row (EC-0 car 2 removed the invented ones). **The Why panel**
 (EC-2 car 3) opens per good: the `detail` rung rows (built, never rendered)
@@ -1902,6 +2103,7 @@ wave except through OD-EC-2/OD-EC-8 (owner rows).
 | Grade envelope | yearly | 26 ticks sustained | EC-8 |
 | Monopoly dwell | yearly | 52 ticks | EC-8/EC-13 |
 | Belief | weekly / seasonal | SP-B's own decay (0.92) and adoption bar | SP-B (unchanged) |
+| Expectation arms | weekly | re-read belief each tick; stop the tick it decays below the bar; `outcome` memory one season (13) | EC-16 |
 No SP-7 temporal walker exists on master (GRAMMAR §224: "SPINE WORK …
 VERIFY-AT-BUILD"); EC-10 BUILDS it scoped to EC modules (every clock constant
 above read through INTERVAL_WEEKS; a bare integer tick literal in an EC module
@@ -1970,6 +2172,8 @@ file class).
 | Substitution | staple `dear` with a declared substitute | substitute's household draw up one notch; `substitute_draw` pressure | EC-5 |
 | Services | plague fixture | healing `dear` via capacityModel ratio, no stock, no caravan; provisions respond by stock | EC-1 |
 | Resilience | two towns, one siege | the Mossgate/Cnocby TELLABLE (§9d) — different band sequences | EC-3 + EC-1 |
+| Believed war (the owner's case) | a court believes a rival is mobilizing (readiness ≥ preparing, confidence ≥ fair); no war exists | arms `fair`→`dear` with `expectation` (crown) and `crown_draw`; the reserve notch after a season; a build candidate after 13 ticks; the band moves ONLY because stock was drawn — a planted belief import in the derivation reds | EC-16 + EC-4 + EC-3 + EC-8 |
+| The war that never came (the foil) | the same fixture; the belief decays, no war opens | the draw stops; arms pass `soft` into `glut` with `outcome: unfounded`; the speculative mill closes at 26; the house's position is sold at glut (ruin reachable); the right-war twin fixture reads one rung LOWER at war's start than EC-4's unbelieving fixture | EC-16 |
 | Quality-specific shocks | mass levy under a `fine` profile | the arms band moves two rungs while the `fine` PROFILE is unchanged and the court mismatch stays `slight`; an elite affliction loads the `medical` record with a `fine`-class slot while the plague fixture loads it with `common` — the class in the sentence differs, the stock does not | EC-7 |
 
 ### 10c Acceptance criteria (the closed matrix; a wave is DONE when every row holds)
@@ -2044,8 +2248,10 @@ file class).
   price" is the condition band + pressures; the multiplier form ("3.0×
   standard") is not built — the §776 register speaks in phrases, and a
   multiplier the engine reads is T1's price engine. The MOVEMENTS enum stays at
-  five; `desperate` speaks scarcity ("not to be had"), and a price phrase
-  renders only where a stock stands behind it (OD-EC-14).
+  five and every rung is spoken RELATIVE TO THE DM'S OWN STANDARD — up to
+  "triple or more its usual price" for `desperate`, the owner's phrase, open-
+  topped — for both arms (OD-EC-14 ruled by the owner, 2026-10-16). What is
+  refused is only the NUMERAL ("3×") and the engine READING the ratio back.
 - **J-EC-3 — NO SECOND SUBSTRATE.** The brief's twenty-two 0–100 indices are
   refused; `causalState`'s scale is the one 0–100 and EC adds no persisted
   scalar. Where an index would have been persisted, a band + pressures is.
@@ -2093,6 +2299,16 @@ file class).
   posture SELECTING a partner, victim or market among SETTLEMENTS; EC-3
   orders USES (household/crown/road) by the seat's dominant disposition
   channel and returns no settlement list. Vetoable by one owner clause.
+- **J-EC-18 — EXPECTATION IS AN ACT (E13 made a ruling).** Belief enters the
+  market only through actors' acts on their own pictures; no belief record is
+  read inside the condition derivation; the `expectation` pressure is a cause
+  label with an `outcome`, never an operand. The owner's word is the law; the
+  shape (five arms, the foil, the resolution memory) is the chair's and
+  vetoable.
+- **J-EC-19 — THE POSTURE ARM.** In worlds without stock the seat's own
+  warPosture (a true act belief already moves) carries the expectation as a
+  `slight` structural pressure that never moves a band alone — so the
+  sentence exists everywhere and the band moves only where a stock does.
 - **J-EC-17 — TWO VOCABULARIES, ONE LAW.** FP-TRADE T1 wrote ONE five-word
   scarcity vocabulary in two non-merging forms; the tree minted a DIFFERENT
   four-word ladder for the belief side (SP-B's zero-collision ruling,
@@ -2120,7 +2336,7 @@ file class).
 | **OD-EC-11** | The fragile-link starvation INVERSION (S33): cure it UNDER EC-3's flag (dark = today) or as an unconditional REPAIR in the lit presets (a same-seed shift for every lit spatial world)? | A1.1.2 forbids a predicate swap on the "0-when-dark" argument; promotion to a repair is an owner ruling with the measurement in hand | Under the flag; EC-10 measures how many lit fixtures the repair would move and reports the figure | Under the flag (byte-neutral) |
 | **OD-EC-12** | The lifecycle re-stamp (S18: a founded mill produces nothing until the next resource change) — under EC-8's flag or as a repair? | Same class as OD-EC-11 | Under the flag; the measurement in EC-10 | Under the flag (byte-neutral) |
 | **OD-EC-13** | The AI prompt's raw economy figures replaced by `economyCausalDossier` (E12) on BOTH sides — the client grounding and the edge function's own summary (`prompts.ts`, the real leak) — a change to the paid AI surface's prompt and a Supabase function DEPLOY; now GATED on EC-1's flag | Paid-surface behaviour; the edge deploy is the owner's | YES in EC-2 when EC-1 lights, coordinated with the prose chair's refuter fixtures; the edge half behind the owner's deploy | HELD — car 4 does not land; dark ⇒ today's prompt |
-| **OD-EC-14** | May a STRUCTURAL-arm record (no stock behind it — every aspatial world) speak a PRICE PHRASE ("nearly double its usual price") from categorical causes, or only its band word and causes (as written)? | §776.3's "honest derivation, never flavor" is the owner's own boundary note | Band word and causes only; a price phrase needs a stock (the physical arm) | Band word + causes (as written) |
+| **OD-EC-14** | May a STRUCTURAL-arm record (no stock behind it — every aspatial world) speak a PRICE PHRASE relative to the DM's standard, and may `desperate` say "triple or more"? | §776.3's "honest derivation, never flavor" is the owner's own boundary note | (superseded) | **RULED BY THE OWNER 2026-10-16:** YES — every rung speaks relative to the DM's own determined standard, both arms; `desperate` = "triple or more its usual price" (open-topped); words, never numerals; the engine never reads the ratio |
 | **OD-EC-15** | May EC-1 READ `capacityModel`'s `labor`, `craft`, `transport` and `religious_welfare` ratios (they exist, `:148-158`, hidden by `VISIBLE_CAPACITY_LENSES`) into condition records — the brief's "labor availability" ask — given the standing noise ruling forbade LEDGERS for them, not reads? | The noise ruling is the owner's (`SIMULATION_LOGIC_AUDIT.md:48`); the 10-16 brief postdates it | READ them as a `labor_short`/`transport_short` PRESSURE on affected goods (no new ledger, no new lens), dark behind EC-1; never a labour stock | Not read (as written) |
 | **OD-EC-16** | OLIGOPOLY: `syndicateHousesEnabled` is RESERVED by the TR-2b chair amendment; the brief asks for oligopoly. Draft TR-2b into EC-11's family, or leave reserved? | The owner sequences TR-2b | Leave reserved; EC-8's `competition ∈ {sole, few, many}` read carries the Economy tab's sentence until TR-2b is drafted | Reserved |
 | **OD-EC-17** | CURRENCY/CREDIT DISRUPTION: the brief asks for it "if supported"; W-COIN's treasury is built dark. Does EC own a credit-shock scenario (treasury band crossing → `credit_tight` pressure on imports) or is it W-COIN's? | W-COIN is the owner's program | W-COIN's; EC-1 declares a reserved pressure slot for it | Not built |
@@ -2136,7 +2352,8 @@ text-only re-record with its cause · 8 the derived graph; the fold batched to
 T8's next signed window · 9 the three sub-keys YES; no history series · 10 no
 REQUISITION verb · 11 under the flag, EC-10 measures the repair's reach · 12
 under the flag, EC-10 measures · 13 YES in EC-2 gated on EC-1; the edge half
-behind the owner's deploy · 14 band word + causes only · 15 READ the four
+behind the owner's deploy · 14 RE-RULED by the owner 2026-10-16: every rung speaks
+relative to the DM's own standard on both arms, `desperate` "triple or more" · 15 READ the four
 capacity ratios as pressures, dark behind EC-1, never a labour stock · 16 TR-2b
 stays reserved; the competition read carries the sentence · 17 W-COIN's; a
 reserved pressure slot · 18 YES as written. Every row is recorded in ODQ
@@ -2179,7 +2396,7 @@ its reason. Nothing is left as "the lane will see".
 | 24 | The SP-7 temporal walker is not on master | CURED — EC-10 builds it scoped to EC |
 | 25 | The war kit includes food; "after the draw" needs a war-writer rewrite | CURED — drawable basket {arms, iron, leather}; `procuredQuality.js` beside the multiplier as a declared WR seam |
 | 26 | EC-5 clashes with the arm rule, EC-4's pins and itself | CURED — hop lag 1; the upstream draw is a link-target notch (household), never crown; physical records move through the engine by target notch; no double count |
-| 27 | `several_times` and aspatial price phrases are flavor | CURED — MOVEMENTS stays five; `desperate` speaks scarcity; price phrases only on the physical arm; OD-EC-14 |
+| 27 | `several_times` and aspatial price phrases are flavor | CURED then RE-RULED by the owner (2026-10-16): MOVEMENTS stays five; every rung is relative to the DM's own standard on both arms; `desperate` = "triple or more" (open-topped, honest); words not numerals; the engine never reads the ratio |
 | 28 | EC-0's cure re-invents a season; frame pool shift | CURED — "of late"; a separate receipt-less pool |
 | 29 | Three defaults decide on silence | CURED — OD-EC-1, -9, -13 (and -4, -7) default HELD |
 | 30 | E11 unenforceable | CURED — `requiresLandedWork('EC-2')` precondition on EC-3..EC-8 in §4 |
@@ -2210,6 +2427,11 @@ its reason. Nothing is left as "the lane will see".
 | 55 | Most TR flags are names only | CURED — §4 marks them "named only"; only `merchantHousesEnabled` has a gate read |
 | 56 | No pact-compliance module on master | CURED — the absorption ruling names the units and the modules they landed in |
 | 57 | `economicsSlice` not found | CURED — `viewModel.js` / `viewModelBodySlices.js` |
+
+**Post-review amendment (2026-10-16):** EC-16 EXPECTATION was added on the
+owner's word AFTER the skeptic pass; it has had no skeptic seat of its own and
+is the first thing the next adversarial pass reads (the five arms' hosts, the
+belief map's activation key, the observer-only fence, the resolution memory).
 
 What the review could NOT settle and the first lane measures (STOP-and-report
 is a success mode): the unconditional per-settlement host with headroom for
@@ -2295,8 +2517,9 @@ family.
 
 **Consequences.** Enables: an Economy tab that answers "why" from records in
 every world (aspatial included); war, export pressure, postwar glut,
-embargoes, tariffs, quality-specific shocks, and prosperity-built specialists
-as EMERGENT outcomes with named causes; counterfactuals on the existing
+embargoes, tariffs, quality-specific shocks, prosperity-built specialists,
+and BELIEVED wars that arm a town, found its second forge and ruin the house
+that guessed wrong (E13) as EMERGENT outcomes with named causes; counterfactuals on the existing
 preview seam; a clerk that reads bands. Introduces: three drop-when-empty
 ledgers with regen rules; a claimant ladder inside the M6a writer family
 (conservation grows four rows); 27 pressure kinds that each owe phrase, pool,
@@ -2323,7 +2546,9 @@ J-EC-15):**
   allocation, procurement, propagation; aspatial worlds gain the propagation's
   structural arm.
 - **Phase C — Borders and craft:** EC-6 → EC-7. Embargoes bite; grades exist.
-- **Phase D — Structure and the what-if:** EC-8 → EC-9.
+- **Phase D — Structure, the what-if, and expectation:** EC-8 → EC-9 →
+  EC-16 (its house arm waits for EC-11 in Phase E; the other four arms land
+  here).
 - **Phase E — The agency layer (TR absorbed):** EC-11 (house) → EC-12
   (grain road) → EC-14 (ventures) → EC-15 (factor) → EC-13 (the corner,
   LAST — J-EC-15), each on its TR preconditions.
