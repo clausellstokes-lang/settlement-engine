@@ -14,9 +14,12 @@
 ## JUDGMENT and are vetoable by the owner; owner decision points are RULING ROWS
 ## in §13 and are NOT a lane's to decide.
 
-**Status: IMPLEMENTATION ARCHITECTURE, DARK. Nothing here is scheduled until the
-owner sequences it; the owner's standing order is the UI + prose release first,
-"everything else after". Every wave ships DARK behind a virtual flag; no flag
+**Status: IMPLEMENTATION ARCHITECTURE, DARK — ITS EIGHTEEN RULING ROWS ARE
+RULED (the owner, 2026-10-16 15:07 EDT, ODQ §934.90 addendum 1: "Go with the chair's
+recommendations on OD-EC-1 through OD-EC-18 … Still nothing dispatches before
+the release is pushed and deployed."). THE DISPATCH GATE: no EC lane, car or
+slice dispatches until the UI + prose release is PUSHED AND DEPLOYED — the
+owner's word, not a sequencing judgment. Every wave ships DARK behind a virtual flag; no flag
 lights, no soak runs, no band ratifies outside the owner-signed schedule. THIS
 VOLUME ABSORBS THE TR PROGRAM (DESIGN_FP_ARCH_TR.md) as its compiled layer — the
 TR waves keep their OWNER-SETTLED flag names, endings vocabulary and wave texts
@@ -522,8 +525,8 @@ chair amendment left it.
 **Lighting law for the two lit presets.** Nothing in `realistic_regional` or
 `full_simulation` changes until an EC flag is lit at the signed soak; EC-0's
 cures are the ONLY pre-lighting behaviour change and each is declared (§6
-EC-0). The birth door (OD-EC-5) is a separate owner row and is not an EC
-precondition.
+EC-0). The birth door (OD-EC-5, RULED yes) is a separate one-car landing
+outside EC, after the release, and is not an EC precondition.
 
 ---
 
@@ -2100,7 +2103,7 @@ file class).
 
 ---
 
-## §13 OWNER DECISION POINTS — RULING ROWS (each is the owner's; the chair's recommendation is recorded, never executed; NO row decides on silence — every default is HELD unless the row names a byte-neutral default)
+## §13 OWNER DECISION POINTS — RULING ROWS — ALL EIGHTEEN RULED 2026-10-16 15:07 EDT (the owner: "Go with the chair's recommendations on OD-EC-1 through OD-EC-18; record them as an ODQ addendum with my words. Still nothing dispatches before the release is pushed and deployed." — each row's RECOMMENDATION column is now the RULING; the "If silent" column is history; ODQ §934.90 addendum 1 carries the words verbatim)
 
 | Row | The decision | Why it is the owner's | Chair's recommendation (vetoable) | If silent |
 |---|---|---|---|---|
@@ -2123,9 +2126,22 @@ file class).
 | **OD-EC-17** | CURRENCY/CREDIT DISRUPTION: the brief asks for it "if supported"; W-COIN's treasury is built dark. Does EC own a credit-shock scenario (treasury band crossing → `credit_tight` pressure on imports) or is it W-COIN's? | W-COIN is the owner's program | W-COIN's; EC-1 declares a reserved pressure slot for it | Not built |
 | **OD-EC-18** | MARKET COMPETITION as a read: `competition ∈ {sole, few, many}` per (settlement, category) from processor count (EC-8), never stored — accepted as the brief's "market competition" index? | A brief ask with no prior ruling | YES as written (a derived read for the Why panel and the monopoly dwell) | As written (byte-neutral) |
 
-Every row above is ALSO an ODQ §934.90 addendum candidate; the chair records
-them there at the first collection after the owner reads this volume, with his
-words verbatim.
+**THE RULINGS, TAKEN (OD-EC-1..18, 2026-10-16 15:07 EDT):** 1 ABSORB TR · 2 tick-derived
+profile first (no golden moves) · 3 BANDS · 4 after the release — sharpened by
+the owner's word to PUSHED AND DEPLOYED · 5 YES, light the birth door as its
+own one-car landing outside EC after the release (a declared same-seed shift
+for NEW worlds, +7 keys, the BIRTH SEAM block re-pinned) · 6 the tolls INPUT
+to the one mint, dark behind `treasuryEnabled` · 7 the chair signs EC-0 car 2's
+text-only re-record with its cause · 8 the derived graph; the fold batched to
+T8's next signed window · 9 the three sub-keys YES; no history series · 10 no
+REQUISITION verb · 11 under the flag, EC-10 measures the repair's reach · 12
+under the flag, EC-10 measures · 13 YES in EC-2 gated on EC-1; the edge half
+behind the owner's deploy · 14 band word + causes only · 15 READ the four
+capacity ratios as pressures, dark behind EC-1, never a labour stock · 16 TR-2b
+stays reserved; the competition read carries the sentence · 17 W-COIN's; a
+reserved pressure slot · 18 YES as written. Every row is recorded in ODQ
+§934.90 addendum 1 with the owner's words verbatim; a later veto by one owner
+clause re-opens exactly that row.
 
 ---
 
@@ -2318,7 +2334,7 @@ A2: EC-1's three slices + EC-2's forwarders; EC-2's display cars follow A2) and
 Phase B is two (B1: EC-3 + EC-4; B2: EC-5), each ≤5 units under the batching
 standard (one brief, one agent, each unit its own commit and red-first
 proof); EC-6 is three slices, EC-8 two cars. Nothing dispatches before
-OD-EC-4.
+the release is PUSHED AND DEPLOYED (the owner, 2026-10-16 15:07 EDT).
 
 **Implementer protocol:** DESIGN_WAR_RULINGS_ARCHITECTURE.md §10 verbatim +
 FP_TRADE §10's deltas + these EC deltas: (1) every wave's first act is the
