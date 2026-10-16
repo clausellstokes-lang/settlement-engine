@@ -27,7 +27,10 @@ wave EC-17 (ODQ §934.90 addendum 4): a PERSISTENT condition on a critical
 need is a MOTIVE the courts' existing deciders read; it colours their choices
 and never makes them. AND 2026-10-16 on THE OPEN ROAD — "it should also partially influence the flow of trade as well from capacity to pricing between settlements and how and where caravans travel to if they are not under contract to a specific settlement" — as law E15 and
 wave EC-18 (addendum 5): the condition partially steers UNCONTRACTED flow;
-contracted flow is never redirected. Every wave ships DARK behind a virtual flag; no flag
+contracted flow is never redirected. REFINED 2026-10-16 on the owner's "do those"
+(addendum 6, §18): the prophecy fenced, the market given a memory, the
+seasons a draw, the contract made visible, two overlaps cut, the quality
+reopen path recorded, and THE FIRST SOAK's minimum lit set ruled. Every wave ships DARK behind a virtual flag; no flag
 lights, no soak runs, no band ratifies outside the owner-signed schedule. THIS
 VOLUME ABSORBS THE TR PROGRAM (DESIGN_FP_ARCH_TR.md) as its compiled layer — the
 TR waves keep their OWNER-SETTLED flag names, endings vocabulary and wave texts
@@ -777,15 +780,16 @@ every good was public knowledge, and the crier said why.*
   `reserve_held`). **Arm rule:** where both arms speak for one good the
   PHYSICAL arm sets the band and the structural arm contributes pressures
   only (one quantity, one denomination — E4); the record names its `arm`.
-  **Pressures:** `PRESSURE_KINDS` (CLOSED at 28 — the 28th, `expectation`,
-  is the 2026-10-16 owner amendment, E13; a 29th is a volume amendment, never a
-  lane's mint): `source_severed · gate_hostile ·
+  **Pressures:** `PRESSURE_KINDS` (CLOSED at 29 — the 28th, `expectation`,
+  is the 2026-10-16 owner amendment E13; the 29th, `season_draw`, is §18's
+  refinement 3; a 30th is a volume amendment, never a lane's mint): `source_severed · gate_hostile ·
   route_danger · inflow_cut · starving · relief_inbound · input_short ·
   processor_lost · resource_depleted · substitute_active · substitute_draw ·
   competing_use · crown_draw · export_draw · reserve_held · glut_refill ·
   corner · stance_closed · stance_restricted · stance_taxed · harvest_short ·
   harvest_rich · famine · blockade · plague_load · grade_mismatch ·
-  rough_for_common · expectation` (the 28th: slots actor class {crown, seat,
+  rough_for_common · expectation · season_draw` (`season_draw`: slots season,
+  category — §18 R3) (`expectation`: slots actor class {crown, seat,
   house, founder}, the believed subject settlement, the believed readiness rung
   {alert, preparing, mobilized}, the confidence rung {faint, fair, firm}, and
   once resolved `outcome ∈ {borne_out, unfounded}`); each with a magnitude rung
@@ -1811,7 +1815,13 @@ standing; the ones who believed it wrongly in 1552 were ruined by a peace.*
   court — the LURE's economic cost (TRADE×INFO coupling, INFO writes the
   belief, EC-16 pays) — and the plant's exposure resolves the pressures
   `unfounded` with the planter named in the slot when INFO's existing
-  exposure path names one. **Two pictures, two towns:** the town that heard
+  exposure path names one — and (§18 R1) an `unfounded` resolution that names
+  a planter is EVIDENCE for a TR-1 commercial reason against the planter's
+  court: TR-1's taxonomy is registration-first with authored mirrors
+  (`commercialReasons.js:10-47`), so the reason pair `false_alarm` ↔ its
+  partnership mirror `fair_warning` is a TR-1 TAXONOMY AMENDMENT the owner
+  sequences (recorded, not minted here); until it lands, INFO's own exposure
+  grievance carries the cost and the resolution receipt names the planter. **Two pictures, two towns:** the town that heard
   the rumour arms and the one that did not does not; the resilience law by
   belief (§9d).
 - **Force/counterforce (same evidence):** the precautionary draw that
@@ -1919,8 +1929,18 @@ Chioggia marshes.*
   profile · adequate}; and the symmetric MARKET NEEDS: an export at `glut` ≥
   26 ticks. Never stored; re-derived each tick; empty for most towns most of
   the time (a need is rare by construction — a season of dear on a critical
-  good). **Four remedy arms, each a seam into a decider that EXISTS, each
-  colouring that decider's OWN signals, never choosing for it:**
+  good). **THE PROPHECY FENCE (§18 R1):** a dearness whose strongest pressures are
+  the court's OWN expectation acts (`crown_draw`/`reserve_held` carrying an
+  `expectation` slot naming THIS court) is SELF-INFLICTED and does NOT count
+  toward a need for as long as those pressures stand plus one season after
+  they resolve — a rumour cannot talk a court into its own casus belli; a
+  need is counted only from evidence the court did not make. Pinned: the
+  rumour fixture mints no need and no casus for a season; the same fixture
+  with a real severed road mints the need from the road's pressure alone.
+  **Three remedy arms (the overture arm FOLDED into the partner arm — §18 R5:
+  an overture is a pact's first step, one arm, two clocks), each a seam into
+  a decider that EXISTS, each colouring that decider's OWN signals, never
+  choosing for it:**
   **Arm 1 — EXPAND (EC-8 seam):** a need with capacity `none`/`thin` is the
   market-streak governor's `unmet_demand` with the criticality as weight —
   EC-8 already builds on a dear streak; EC-17 adds the CRITICAL-NEED priority
@@ -1936,12 +1956,11 @@ Chioggia marshes.*
   Seam Three held (two inputs to one DECISION, never one band); the crossing
   gains a `need` slot so the pact's receipt says "for the iron Mossgate has
   wanted a year". Partner CHOICE stays the trigger's own ranking.
-  **Arm 3 — ALLY (the overture/generosity lane and GRAMMAR's alliance
-  occasions):** a persistent need raises the `trade_overture` propensity
-  toward courts believed to have the good (the overture is the existing
-  receipted act, `generosityKernel`) and, where an alliance occasion already
-  scores (SP-3/GR), adds the need as one signal — "an ally who has iron".
-  **Arm 4 — CONQUEST (the war motive, `warReasons.js` `resource_pressure` via
+  Within the PARTNER arm the `trade_overture` propensity (`generosityKernel`,
+  the pact's first step) carries the need first and the pact trigger second;
+  where an alliance occasion already scores (SP-3/GR) the need is one signal
+  there too — "an ally who has iron" is the partner arm at its slow clock.
+  **Arm 3 — CONQUEST (the war motive, `warReasons.js` `resource_pressure` via
   `perceivedScarcityOf`, `demographicsWar.js:206,:302`):** the casus belli
   that already exists reads, under the flag, the need's shortfall rung as its
   own-side scarcity term (today it reads `perceivedScarcityOf`'s food-and-
@@ -2074,7 +2093,13 @@ letters were a season old.*
   differ ("came for the famine, found the harvest"), and the origin's
   appetite learns from the outcome (M6c's existing reversal). This is the
   UNCONTRACTED caravan: nobody ordered it.
-  **Arm 2 — THE PREFERENCE (destination-side, a weight on the existing pull):**
+  **Arm 2 — THE PREFERENCE (destination-side, a weight on the existing pull)
+  — CONDITIONAL (§18 R5): EC-18's CAR 0 is a MEASUREMENT: whether TR-3's
+  destination order (`dispatchDestination.js`, permutation-only, belief
+  first) already yields the source-side preference once its lit; if it does,
+  this arm is DELETED before it is built and TR-3's order is the preference;
+  if it does not (TR-3 orders destinations, not sources — the likely finding),
+  the arm lands as written:**
   a consumer choosing among its K ranked clear-and-stocked sources adds ONE
   term, `conditionBias` — it prefers the source BELIEVED softest for the good
   (cheaper to buy from, in the §776 register) — weighted by an authored
@@ -2087,6 +2112,13 @@ letters were a season old.*
   (belief-side) set how far the push reaches. Capacity therefore shapes
   flow before any phrase is spoken, which is the owner's "from capacity to
   pricing".
+  **THE CONTRACT MADE VISIBLE (§18 R4):** `contractOf(link)` → `{kind ∈
+  {exclusivity, pact_stream, tribute, must_go, household, dm_pinned}, reason}`
+  or null, a derived read over the same records the fence names; the Realm's
+  PAIR CARD renders "under contract — <reason>" for each fenced link (a
+  sibling leaf, one `DOSSIER_MOUNTS` row, net-zero on the card host), so the
+  wagon that did not divert is explicable; the Why panel's "who supplies" row
+  shows the same word. No new state.
   **WHAT IS NEVER REDIRECTED (the contract fence):** supply links whose pair
   carries an `exclusivity` term (EC-6), pact streams (TR-4/TR-5), treaty
   tribute (`treatyTransfer`), the vassal must-go (`supplyKernel.js:666-668`),
@@ -2650,7 +2682,7 @@ file class).
 | Row | The decision | Why it is the owner's | Chair's recommendation (vetoable) | If silent |
 |---|---|---|---|---|
 | **OD-EC-1** | Does this volume ABSORB the TR program (TR's five unbuilt waves become EC-11..15; TR-1/3/9 mounted here) or sit beside it? | Re-sequencing a program the owner sequenced; the TR endings vocabulary is owner-settled | ABSORB (J-EC-1): one writer family, one compiled layer; names, texts, endings kept verbatim | HELD — the volume stands as ARCHITECTURE; nothing dispatches |
-| **OD-EC-2** | A GENERATION-SIDE grade stamp (`economicState.gradeProfile` + a DM verb) — one signed generator-golden shift — or tick-derived profile only (EC-7 as written)? | THE PROMISE: a golden re-record is the owner's signature | Tick-derived FIRST (no golden moves); revisit after the soak | Tick-derived only (byte-neutral) |
+| **OD-EC-2** | A GENERATION-SIDE grade stamp (`economicState.gradeProfile` + a DM verb) — one signed generator-golden shift — or tick-derived profile only (EC-7 as written)? | THE PROMISE: a golden re-record is the owner's signature | Tick-derived FIRST (no golden moves); revisit after the soak. §18 R6 — THE REOPEN PATH, if the demand-side sentence proves thin at the table: a `fineShare` BAND on the origin's warehouse {none, little, some, most}, DERIVED from the profile and the recent draw history (never a second conserved stock), spoken as "the fine blades sit while the munition swords leave" — cheaper than a split, built only on the owner's word after the first soak | Tick-derived only (byte-neutral) |
 | **OD-EC-3** | Internal language: closed BANDS with 0–100 confined to `causalState` (E3) or the brief's ~22 new indices? | A new persisted index family is a schema shape | BANDS (J-EC-3) | Bands (byte-neutral) |
 | **OD-EC-4** | Sequencing: EC after the UI + prose release and the push/deploy, behind the parked lanes, or interleaved? | The owner's standing order ("everything else after") | After the release; Phase A1/A2 may be the FIRST post-release family (the Economy tab's "why" with no physics shift) | HELD — nothing dispatches |
 | **OD-EC-5** | Light the plain birth door — `NEW_CAMPAIGN_SIMULATION_PRESET_ID` from `null` to `'realistic_regional'` (a declared same-seed shift for NEW worlds only; +7 persisted keys; the composer path already does it)? | A new-campaign envelope change owed to the register | YES, as its own one-car landing OUTSIDE EC, the stability test's BIRTH SEAM block re-pinned; otherwise every EC soak fixture is born through the composer | Unchanged (null; byte-neutral) |
@@ -2756,8 +2788,8 @@ its reason. Nothing is left as "the lane will see".
 
 **Post-review amendments (2026-10-16):** EC-16 EXPECTATION, EC-17 THE COURT'S REMEDY and
 EC-18 THE OPEN ROAD were added on the owner's word AFTER the skeptic pass;
-none has had a skeptic seat of its own and they are the first things the next
-adversarial pass reads (the five arms' hosts, the
+none has had a skeptic seat of its own; with §18's seven refinements they are
+the first things the next adversarial pass reads (the five arms' hosts, the
 belief map's activation key, the observer-only fence, the resolution memory).
 
 What the review could NOT settle and the first lane measures (STOP-and-report
@@ -2883,8 +2915,21 @@ J-EC-15):**
 - **Phase E — The agency layer (TR absorbed):** EC-11 (house) → EC-12
   (grain road) → EC-14 (ventures) → EC-15 (factor) → EC-13 (the corner,
   LAST — J-EC-15), each on its TR preconditions.
-- **Phase F — The soak:** EC-10's envelopes authored and owner-signed; the
-  lighting signature; THE PROMISE's tuning review.
+- **Phase F — THE FIRST SOAK (§18 R7, the minimum lit set):** the war economy
+  end to end and NOTHING ELSE — `marketConditionEnabled` (EC-1), EC-2's
+  mounts, `allocationLadderEnabled` (EC-3), `procurementEnabled` (EC-4),
+  `marketExpectationEnabled` with its CROWN arm only (EC-16; the house,
+  founding and reserve arms stay dark by an authored arm mask), plus EC-10's
+  instruments — lit together in `full_simulation` at the signed soak; EC-5,
+  EC-6, EC-7, EC-8, EC-17, EC-18 and the absorbed TR waves stay DARK until
+  this loop's envelopes are measured and signed. THE LOOP ENVELOPE (the first
+  the soak authors): over a campaign-decade, the share of wars whose
+  resource_pressure casus traces to a need born of the court's OWN expectation
+  draw must be ZERO (the prophecy fence), and the share of expectation
+  pressures resolving `unfounded` must sit inside an authored band (a world
+  where every rumour comes true is as broken as one where none does). Then
+  THE PROMISE's tuning review; then the next phase lights by what the soak
+  showed.
 Phase A is TWO area lanes (A1: EC-0's five cars + EC-10's contract module;
 A2: EC-1's three slices + EC-2's forwarders; EC-2's display cars follow A2) and
 Phase B is two (B1: EC-3 + EC-4; B2: EC-5), each ≤5 units under the batching
@@ -2911,3 +2956,24 @@ HISTORY the day a wave re-measures them.
 
 *STOP-and-report on a measured blocker is a SUCCESS mode. A lane that finds
 §2 wrong has done its job.*
+
+
+---
+
+## §18 REFINEMENTS (the owner, 2026-10-16 15:34 EDT: "how would you refine it further?" → the chair's six refinements and the first-soak discipline → "do those") — seven, each applied in place above and summarized here
+
+| # | Refinement | Applied where | Law it rides |
+|---|---|---|---|
+| R1 | **Fence the prophecy.** A dearness the court made itself (its own expectation draw or reserve) does not count toward its need for as long as the pressures stand plus one season; a rumour cannot become its own casus belli. An `unfounded` expectation that names a planter is evidence for a TR-1 reason against the planter's court — a taxonomy amendment (`false_alarm` ↔ `fair_warning`) the owner sequences; INFO's exposure grievance carries it until then. | EC-17 (the fence + pin), EC-16 (the planter line), §17 Phase F (the loop envelope) | T5 no ratchet; TR-1 registration-first mirrors |
+| R2 | **Give the market a memory — DERIVED, never a second decay.** SP-B's law forbids a second decay law (`beliefAxisSubjects.js:5-10`), so market reputation is NOT a new belief stock: `marketMemoryOf(observer, market, goodClass)` counts the `market_condition_crossed` entries the observer court has HEARD (the distance-priced newsLog is already per-reach) over the last N years and speaks `{unremembered, sometimes dear, often dear, dear as long as anyone remembers}` — a read over persisted news, no state. A house whose caravans twice found the harvest loses `credibility` (SP-5, TR-2) and its origin's `merchantAppetite` falls (M6c) — both exist. | EC-2's Why panel ("they say" gains the memory line); EC-18's push reads the memory as one more belief-side input | SP-B no second decay; K3 (heard, not known) |
+| R3 | **Let the seasons pull.** `SEASONAL_DRAW` — a closed table per category over `seasons.js`'s vocabulary (spring/summer/autumn/winter, hard winter): fuel one target notch up as winter closes, provisions before the marching season, textiles before autumn; applied to the household link's target (EC-3) or, structurally, as the 29th pressure `season_draw` (slight) on the record. The granary's seasonal arithmetic is untouched (T7). | EC-3 (the target notch), EC-1 (the pressure), the pressure list (29) | E6 band arithmetic; the temporal contract |
+| R4 | **Make the contract visible.** `contractOf(link)` derived; the Realm pair card and the Why panel say "under contract — <reason>" for every fenced link. | EC-18 | SPINE §1.6 dossier round-trip |
+| R5 | **Cut where two arms are one.** The overture arm folds into the partner arm (EC-17: three arms); EC-18's preference arm becomes a car-0 MEASUREMENT against TR-3's destination order and is deleted if redundant. | EC-17, EC-18 | measure first (OPERATING_STANDARD rule 5) |
+| R6 | **The quality reopen path, recorded not built.** A derived `fineShare` band on the origin's warehouse, if the demand-side sentence proves thin at the table — on the owner's word after the first soak. | OD-EC-2 | J-EC-5 as corrected |
+| R7 | **THE FIRST SOAK — the minimum lit set.** EC-1, EC-2, EC-3, EC-4, EC-16's crown arm, EC-10. Everything else dark until the loop envelope is measured and signed. | §17 Phase F | THE PROMISE; the lighting signature is the owner's |
+
+None of R1–R7 adds a persisted key, a kernel line, or a decider. Each is a
+read, a fence, a table, a mount row or a measurement; the two that touch a
+program outside EC (R1's TR-1 pair, R2's SP-5 read) are recorded as the other
+program's acts. All seven await the same skeptic pass as EC-16/17/18 and the
+same dispatch gate.
