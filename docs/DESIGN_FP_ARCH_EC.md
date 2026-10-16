@@ -21,7 +21,13 @@ the release is pushed and deployed."). THE DISPATCH GATE: no EC lane, car or
 slice dispatches until the UI + prose release is PUSHED AND DEPLOYED — the
 owner's word, not a sequencing judgment. AMENDED 2026-10-16 15:21 EDT by the owner's
 word on EXPECTATION — "belief should also play a role in this as well as if there is an impending war that is believed... for example, the prices of weapons would still go up and the capacity growing towards its capacity following the market / that should complicate or foil what you've already built rather than replace" — as law E13 and wave EC-16 (ODQ §934.90 addendum 2):
-belief COMPLICATES and FOILS the physics; it never replaces a band. Every wave ships DARK behind a virtual flag; no flag
+belief COMPLICATES and FOILS the physics; it never replaces a band. AMENDED
+AGAIN 2026-10-16 by the owner's word on STATECRAFT — "persistent price heuristics should also be included in what moves courts and settlements in most if not all aspects of foreign trade... take the mosgate for example, if the price of iron remains low and it impacts their needs and if their capacity is low in comparison, that pushes them to attempt to expand that capacity to meet critical needs or seek out new trade partners, allies, or to go on conquest for example." — as law E14 and
+wave EC-17 (ODQ §934.90 addendum 4): a PERSISTENT condition on a critical
+need is a MOTIVE the courts' existing deciders read; it colours their choices
+and never makes them. AND 2026-10-16 on THE OPEN ROAD — "it should also partially influence the flow of trade as well from capacity to pricing between settlements and how and where caravans travel to if they are not under contract to a specific settlement" — as law E15 and
+wave EC-18 (addendum 5): the condition partially steers UNCONTRACTED flow;
+contracted flow is never redirected. Every wave ships DARK behind a virtual flag; no flag
 lights, no soak runs, no band ratifies outside the owner-signed schedule. THIS
 VOLUME ABSORBS THE TR PROGRAM (DESIGN_FP_ARCH_TR.md) as its compiled layer — the
 TR waves keep their OWNER-SETTLED flag names, endings vocabulary and wave texts
@@ -223,6 +229,36 @@ banded; no float reaches a surface; the AI is a bucketing clerk.
   receipt says so. Belief complicates and foils the physics; it never
   replaces a band (T8 held in substance: the band is from stocks; the slot
   records a believed rung as a CAUSE LABEL, never as an operand).
+- **E14 — A PERSISTENT CONDITION IS A MOTIVE (the owner, 2026-10-16: "persistent price heuristics should also be included in what moves courts and settlements in most if not all aspects of foreign trade... take the mosgate for example, if the price of iron remains low and it impacts their needs and if their capacity is low in comparison, that pushes them to attempt to expand that capacity to meet critical needs or seek out new trade partners, allies, or to go on conquest for example."):** a
+  condition on a CRITICAL need (catalog `criticality` ≥ 0.5 — the scalar that
+  exists) that has held `dear`+ for a season or more, where the settlement's
+  own capacity is low against it (no processor, one processor, or a `rough`
+  profile), is a NEED the court's deciders READ: the lifecycle's build
+  governor (expand capacity), the pact lane's `trade_demand` trigger (a new
+  trade partner), the alliance/overture occasions (an ally who has it), and
+  the war motive's `resource_pressure` casus (conquest of where it is). The
+  need COLOURS each existing decider's own signals and never picks a target
+  (T4, SPINE §1.10: one character, not seven dice); the target remains the
+  decider's own, the feasibility gates stand (a hopeless war still does not
+  open), and each remedy is a receipted ACT whose outcome the physics then
+  deliver or deny. The glut side is symmetric: a persistent `glut` on an
+  export is a MARKET-SEEKING motive (ventures, market_access). The need is
+  DERIVED from `marketConditions` (band, `sinceTick`, criticality, chain
+  count) and never stored.
+- **E15 — THE CONDITION STEERS THE OPEN ROAD, NEVER THE CONTRACT (the owner,
+  2026-10-16: "it should also partially influence the flow of trade as well from capacity to pricing between settlements and how and where caravans travel to if they are not under contract to a specific settlement"):** trade FLOW between settlements is partially steered by
+  conditions at both ends — an origin's capacity and glut PUSH surplus down
+  the open road, a destination's believed dearness PULLS it, and a consumer
+  choosing among its ranked sources prefers the one believed softest — but
+  only for flow that is NOT under contract: supply links bound by exclusivity,
+  pact streams, treaty tribute, the vassal must-go and household links are
+  never redirected. The pull side reads BELIEF (TR-3's law: a caravan sails
+  on last month's letters) and the push side reads the origin's own TRUTH
+  (its warehouse); they meet as two inputs to a dispatch decision, never as a
+  band. The weight is PARTIAL and authored: path cost, danger, stance and
+  appetite keep their terms; the condition is one more. Law One holds: the
+  actor is the origin's merchant faction (faction grain), never a caravan
+  with a mind.
 - **E12 — THE CLERK READS BANDS:** the AI grounding for economy — the client
   payload AND the edge function's prompt summary — carries condition bands,
   pressures and believed bands; never a stock integer, never an income
@@ -527,6 +563,8 @@ flag order).
 | EC-7 GRADES | `gradeLadderEnabled` | NEW | `requiresLandedWork('EC-2')` + EC-1; the crown classes additionally EC-4 | YES |
 | EC-8 SLOW VERDICTS | `marketStructureEnabled` | NEW | `requiresLandedWork('EC-2')` + EC-1 + `institutionLifecycleEnabled` (DEFAULT TRUE — `simulationRules.js:76`; false only in `static_campaign` `:978`; read at `institutionLifecycle.js:669`, called from `pulseKernel.js:1463`); the envelope arm additionally EC-7 | YES |
 | EC-9 COUNTERFACTUAL | — (read-only lazy leaf; no persistence) | — | EC-1 (it diffs condition records) | YES |
+| EC-17 THE COURT'S REMEDY | `marketStatecraftEnabled` | NEW (the owner's 2026-10-16 amendment) | `requiresLandedWork('EC-2')` + EC-1; the build arm EC-8; the partner arm `pactFormationEnabled` (FP_LIT_ALIVE — lit in four presets) + SP-B's scarcity family; the ally arm the generosity/overture lane (`constructiveFlowsEnabled`, WAVES); the conquest arm `warLayerEnabled` + `settlementStrategyEnabled` (the chooser) — each arm empty when its decider is dark, declared | YES (the need is structural; every arm except the physics-fed ones runs aspatially) |
+| EC-18 THE OPEN ROAD | `openRoadEnabled` | NEW (the owner's 2026-10-16 amendment) | `requiresLandedWork('EC-2')` + EC-1 + `commodityFlowEnabled` ∧ spatial canon (caravans exist nowhere else) + SP-B's scarcity family for the believed pull (dark belief ⇒ push-only on truth, declared); EC-6 for the stance gate when lit (dark ⇒ war/blockade only); TR-7 ventures are the HOUSE's sibling of this (declared, not duplicated) | NO — declared: no caravans aspatially; the cascade is untouched |
 | EC-16 EXPECTATION | `marketExpectationEnabled` | NEW (the owner's 2026-10-16 amendment) | `requiresLandedWork('EC-2')` + EC-1 + the belief map's own activation gate (`beliefMap.js:196`, orthogonal to `settlementStrategyEnabled` — verify its key at build); the crown arm EC-4; the reserve arm EC-3; the founding arm EC-8; the house arm EC-11 (dark ⇒ that arm empty, declared); the merchant arm is TR-3's own | YES (the posture arm + the founding arm) |
 | EC-10 CONVERGENCE INSTRUMENTATION | — (measurement; absorbs TR-9) | — | — | — |
 | EC-11 THE HOUSE (= TR-2) | `merchantHousesEnabled` | existing (the ONE TR flag with a gate read: `houseLedger.js:173`) | TR-1 (as TR §2) | per TR |
@@ -1863,6 +1901,272 @@ standing; the ones who believed it wrongly in 1552 were ruined by a peace.*
   (+1 key), `couplingRegistryTrade.js` (+5), `pulseKernel.js` (+0), the
   tuning register (+1 `draft` row).
 
+### EC-17 — THE COURT'S REMEDY (`marketStatecraftEnabled`) — the owner's 2026-10-16 amendment; buildable after EC-1/EC-2, arm by arm as its deciders stand
+*Historical archetype: Venice and the salt — a republic that could not make
+what it needed bought it, allied for it, and when both failed, took the
+Chioggia marshes.*
+- **The owner's word (verbatim):** "persistent price heuristics should also be included in what moves courts and settlements in most if not all aspects of foreign trade... take the mosgate for example, if the price of iron remains low and it impacts their needs and if their capacity is low in comparison, that pushes them to attempt to expand that capacity to meet critical needs or seek out new trade partners, allies, or to go on conquest for example."
+  **The chair's reading, recorded:** "the price of iron remains low" is read as
+  the SUPPLY remaining low — the condition persistently `dear`/`desperate` on
+  a need (the "impacts their needs" clause); the glut reading (iron cheap and
+  the smithy idle) is the symmetric MARKET-SEEKING arm below. If the owner
+  meant only the second, one clause narrows it.
+- **Scope (E14 made mechanism):** ONE derived read, `marketNeedOf(ws, sid)` →
+  the settlement's CRITICAL NEEDS: for each good with catalog `criticality` ≥
+  0.5 whose record has held `dear`+ for ≥ NEED_STREAK (13) ticks (from
+  `sinceTick`), the shortfall rung {marked, severe} and the CAPACITY reading
+  {none: no tier-legal processor chain · thin: one processor or a `rough`
+  profile · adequate}; and the symmetric MARKET NEEDS: an export at `glut` ≥
+  26 ticks. Never stored; re-derived each tick; empty for most towns most of
+  the time (a need is rare by construction — a season of dear on a critical
+  good). **Four remedy arms, each a seam into a decider that EXISTS, each
+  colouring that decider's OWN signals, never choosing for it:**
+  **Arm 1 — EXPAND (EC-8 seam):** a need with capacity `none`/`thin` is the
+  market-streak governor's `unmet_demand` with the criticality as weight —
+  EC-8 already builds on a dear streak; EC-17 adds the CRITICAL-NEED priority
+  (a critical need's candidate ranks ahead of a luxury's) and the receipt
+  slot "to meet the need". When the tier forbids the processor, the arm
+  yields and the others carry (the thorp cannot build the smelter; it must
+  buy, ally or take).
+  **Arm 2 — PARTNER (the pact lane's `trade_demand`, `pactTriggers.js:186-214`
+  — "A believes it lacks what it believes B has dear"):** the trigger today
+  prices a demand against SP-B's believed-scarcity ladder; under EC-17 the
+  OWN-side lack reads the condition (truth: the need's shortfall rung) while
+  the COUNTERPART side stays BELIEVED (SP-B `plentiful` on the good class) —
+  Seam Three held (two inputs to one DECISION, never one band); the crossing
+  gains a `need` slot so the pact's receipt says "for the iron Mossgate has
+  wanted a year". Partner CHOICE stays the trigger's own ranking.
+  **Arm 3 — ALLY (the overture/generosity lane and GRAMMAR's alliance
+  occasions):** a persistent need raises the `trade_overture` propensity
+  toward courts believed to have the good (the overture is the existing
+  receipted act, `generosityKernel`) and, where an alliance occasion already
+  scores (SP-3/GR), adds the need as one signal — "an ally who has iron".
+  **Arm 4 — CONQUEST (the war motive, `warReasons.js` `resource_pressure` via
+  `perceivedScarcityOf`, `demographicsWar.js:206,:302`):** the casus belli
+  that already exists reads, under the flag, the need's shortfall rung as its
+  own-side scarcity term (today it reads `perceivedScarcityOf`'s food-and-
+  realm inputs) — the OTHER side (that the target has the good) stays the
+  war program's believed read; the HARD gates are untouched (`warIntent.js`:
+  one army, the posture gate, HOSTILE_CONFIDENCE, feasibility — "a HOPELESS
+  WAR STILL DOES NOT OPEN"); the strategy chooser (`settlementStrategy.js`,
+  up to six legal moves over ~10 signals) gains ONE signal, `marketNeed01`,
+  that colours `deploy`/`reroute`/`credit`/`embargo` by the disposition
+  channel (martial: toward deploy; mercantile: toward reroute/credit; the
+  formula owns the arithmetic — "functions of the same signals", `:664`).
+  **The order is the character's, not a ladder:** no arm precedes another by
+  rule; each decider fires on its own occasion and clock, and the need is one
+  more signal in each. A mercantile court will usually have bought before a
+  martial one has marched; that is the dice falling by character, not a
+  sequence EC imposes.
+  **THE MARKET-SEEKING ARM (glut):** a persistent `glut` on an export raises
+  the venture propensity toward `far_market` (TR-7 when lit) and a pact
+  `market_access` demand (the TR-5 catalog row) — the symmetric motive.
+  **The physics deliver or deny:** a pact signed brings grain-month or (EC-6)
+  stance-opened caravans; an occupation brings the must-go tribute (vassal
+  supply, existing); a founding brings the chain next tick (EC-8); a refused
+  overture leaves the need standing and raises the casus — the counterforce
+  chain the owner's example names, end to end, receipted at each link.
+- **Force/counterforce (same evidence):** the need that pushes toward
+  conquest is the same need that makes the war unaffordable (the home
+  granary and the kit are the deployment's own inputs — a town short of iron
+  marches with a thin kit, `procuredQuality`); a pact that answers the need
+  removes the casus next season; a founding that answers it closes the arm;
+  a conquest that fails bleeds the need deeper (occupation burden, exhaustion
+  — existing). No ratchet: the need is re-derived; the day the band eases the
+  motive is gone (T5).
+- **Belief posture:** the OWN need is truth (the court knows its own shelves);
+  the counterpart's abundance is BELIEVED (SP-B); the two meet only inside a
+  decider as separate inputs (T8: "consumed by every decision", never merged
+  into a band). INFO's lure applies: a planted "Harrow has iron to spare" aims
+  a real pact overture or a real march (TRADE×INFO).
+- **Casting:** the seat; the envoy on the overture (SP-1 when lit); the
+  general on the march.
+- **Receipts:** "Iron has been dear in Mossgate for a year and its one smithy
+  cannot meet the need; the council has sent envoys to Harrow for a pact" ·
+  "Mossgate's overture refused, its smiths idle for want of ore, the duke
+  marches on the Aldenmoor mines" · "With the Aldenmoor mines under Mossgate's
+  hand, iron flows by tribute and the forges run; the need that started the
+  war is answered" · "Cnocby's wool has rotted on the quay two seasons; its
+  factors seek a market beyond the pass".
+- **Pins (negative hardest):** dormancy (dark ⇒ every decider's signals
+  byte-identical); the need-is-rare pin (a calm lit world: zero needs on a
+  seeded fixture); the never-stored pin; the colour-not-select pin (no EC-17
+  read returns a settlement list; a planted target choice reds); the
+  feasibility pin (a need plus a hopeless target ⇒ no war opens — the
+  existing gate, re-pinned under the flag); the Seam-Three pin on arm 2 (the
+  own side is a condition rung, the counterpart side a believed rung, no
+  expression combines them); the REMEDY TELLABLE (the owner's example, four
+  fixtures: Mossgate thin on iron, dear 13 ticks — mercantile channel ⇒ the
+  pact trigger crosses with the `need` slot; martial channel + hostile
+  neighbour with believed iron ⇒ the casus scores and the chooser leans to
+  deploy; a tier that allows the smelter ⇒ the build candidate ranks first;
+  refused overture ⇒ the casus rises next season); the glut-arm tellable; the
+  answered-need pin (a signed pact or a founding ⇒ the need gone within the
+  physics' own lag, the motive gone with it); the tuning-register row.
+- **Bands:** NEED_STREAK (13), the glut streak (26), the criticality bar
+  (0.5, the catalog's own), the capacity readings, the `marketNeed01` weight
+  per channel.
+- **Clock:** fast = none (the need is a season by definition); slow = the
+  deciders' own clocks (the pact window, the war opener's next tick, the
+  lifecycle's proposal clock).
+- **Posture:** the disposition channel colours which arm the chooser leans
+  to; `courtRiskAppetiteOf` (dark) tints the conquest lean when lit.
+- **Couplings (registry rows):** EC-17 ⇐ EC-1 (band, sinceTick), ⇐ catalog
+  criticality, ⇐ chain count / EC-7 profile, ⇐ SP-B (counterpart belief);
+  EC-17 ⇒ EC-8 governor (priority), ⇒ pactTriggers (own-side need),
+  ⇒ generosity overture propensity, ⇒ warReasons resource_pressure (own-side
+  term), ⇒ settlementStrategy (one signal), ⇒ TR-7 ventures (glut).
+- **Endings wired:** feeds `severance`/partnership casus (TR-1's
+  `supply_withheld`), `fortune` (the venture that found the market), and the
+  war program's own endings through its opener.
+- **Herald contract:** the need crossing ("Mossgate wants iron and cannot
+  make it"); each remedy's receipt carries the `need` slot.
+- **Lifecycle line:** NO new state (derived); the deciders' own ledgers carry
+  their acts.
+- **Dossier round-trip (crown):** Economy → the Why panel's "what would reduce
+  it" row shows the court's REMEDY in motion ("envoys sent to Harrow"); the
+  Realm's court card shows the need among the seat's concerns; the Herald's
+  war receipt names the iron.
+- **Req 13 Alignment:** ENGAGED — the conquest arm is priced by the war
+  program's alignment reads (WR-8 razing, the world's judgment); a lawful
+  court exhausts pact and ally before the casus weighs (the channel tables),
+  never by prohibition (T6).
+- **Req 14 Edit-verb:** engine-only with reason — the DM moves needs by
+  moving causes (cut the road, deplete the mine) and remedies through the
+  existing pact/war/overture verbs.
+- **Collision:** `warReasons.js` and `settlementStrategy.js` are WAR-PROGRAM
+  surfaces (T9): EC-17 lands its reads as a leaf `marketNeed.js` and the two
+  war files gain ONE net-zero seam line each (the signal handed in as data,
+  the K3/VI.3 idiom), reported to the war chair as a seam row — never a
+  branch; `pactTriggers.js` gains the own-side fork behind the flag (+4);
+  `generosityKernel.js` (+3). EC-17 chooses NO target anywhere.
+- **Mutants:** planted target list ⇒ reds; planted feasibility bypass ⇒ the
+  existing gate's pin reds; planted stored need ⇒ scan reds; planted merge of
+  own rung and believed rung ⇒ Seam-Three reds.
+- **New leaves:** `marketNeed.js` (~220 eff), `marketNeedReceipts.js` (~60
+  eff). **Files touched:** `marketStructureKernel.js` (+6: the priority),
+  `pactTriggers.js` (+4), `generosityKernel.js` (+3), `warReasons.js` (+1
+  seam), `settlementStrategy.js` (+1 seam), `simulationRules.js` (+1 key),
+  `couplingRegistryTrade.js` (+6), `pulseKernel.js` (+0), the tuning
+  register (+1 `draft` row).
+
+### EC-18 — THE OPEN ROAD (`openRoadEnabled`) — the owner's 2026-10-16 amendment; spatial worlds only; buildable after EC-1/EC-2 (+ EC-3 for the reserve floor, + EC-6 for stances)
+*Historical archetype: the Champagne fairs — nobody ordered the Flemish cloth
+to Troyes; it went where the letters said the buyers were, and sometimes the
+letters were a season old.*
+- **The owner's word (verbatim):** "it should also partially influence the flow of trade as well from capacity to pricing between settlements and how and where caravans travel to if they are not under contract to a specific settlement"
+- **Scope (E15 made mechanism), three arms over M6a's EXISTING dispatch, which
+  is destination-side pull from K=3 ranked sources (S30):**
+  **Arm 1 — THE PUSH (origin-side, new):** an origin whose record for a good
+  reads `glut` (warehouse at cap, no claimant, EC-1's origin arm) and whose
+  merchant faction's `merchantAppetite` is above baseline dispatches ONE
+  SPECULATIVE caravan per good per tick, load `min(MAX_SHIP, stock above the
+  reserve)` (EC-3's reserve is the floor; dark EC-3 ⇒ a flat authored floor),
+  toward the reachable consuming settlement whose BELIEVED condition for the
+  good's class is dearest (SP-B `scant`/`pinched`, the origin court's OWN
+  picture — K3), under an `open`/`taxed` stance (EC-6) and the M6c EV (danger
+  vs need); ties by codepoint. The caravan rides the SAME physics (taps,
+  banditry, interception, smuggle roll, conservation rows) and lands in the
+  destination's stock for that good ONLY if the destination consumes it (a
+  household or supply link exists) — otherwise it is not sent (no phantom
+  stock, no transit warehouse: entrepôts are M6b's). On arrival the TR-3
+  wrong-market receipt fires when the believed band and the true condition
+  differ ("came for the famine, found the harvest"), and the origin's
+  appetite learns from the outcome (M6c's existing reversal). This is the
+  UNCONTRACTED caravan: nobody ordered it.
+  **Arm 2 — THE PREFERENCE (destination-side, a weight on the existing pull):**
+  a consumer choosing among its K ranked clear-and-stocked sources adds ONE
+  term, `conditionBias` — it prefers the source BELIEVED softest for the good
+  (cheaper to buy from, in the §776 register) — weighted by an authored
+  `PREFERENCE_WEIGHT` beside path cost, danger and toll; never above them
+  (PARTIAL, the owner's word). Dark belief ⇒ the term is zero.
+  **Arm 3 — CAPACITY TO PRICING (the volume the road can carry):** an
+  origin's push is bounded by its production rate and warehouse (S12) — a
+  deep origin (many chains) can push every tick, a shallow one rarely; the
+  destination's `needPremium` (truth-side, existing) and believed dearness
+  (belief-side) set how far the push reaches. Capacity therefore shapes
+  flow before any phrase is spoken, which is the owner's "from capacity to
+  pricing".
+  **WHAT IS NEVER REDIRECTED (the contract fence):** supply links whose pair
+  carries an `exclusivity` term (EC-6), pact streams (TR-4/TR-5), treaty
+  tribute (`treatyTransfer`), the vassal must-go (`supplyKernel.js:666-668`),
+  household links (EC-3), and any link a DM pinned by verb. A source-scan pin
+  names each as outside EC-18's reach; a planted redirect of a must-go reds.
+  **The house's sibling:** TR-7's `far_market` venture is the SAME act at
+  HOUSE grain with a stake and a receipted return; when TR-7 is lit the
+  house's venture takes precedence for its interest goods and EC-18's faction
+  push yields (one caravan, not two — the double-dispatch pin).
+- **Force/counterforce (same evidence):** the push that empties a glut raises
+  the origin's own record toward `fair` (good) and, past the reserve, toward
+  `dear` (the household's complaint, EC-3's `export_draw`); the crowd
+  correction is TR-3's — every origin believing Harrow dear sends to Harrow,
+  and the arrivals write the glut home; a push into a `closed` stance never
+  departs; a push on a stale belief arrives into a glut and the appetite
+  falls (M6c), so the road quiets by itself (T5: appetite learns DOWN).
+- **Belief posture:** the PULL is belief (the origin court's picture of the
+  destination's market — SP-B); the PUSH is truth (the origin's own
+  warehouse); the two are inputs to one DISPATCH decision in `dispatchEV`'s
+  composer idiom (TR-3's Seam Three whitelist grows by this one composer,
+  enumerated) and never a band.
+- **Casting:** the origin's merchant faction (its named factor when TR-2 is
+  lit) in the departure receipt.
+- **Receipts:** "Mossgate's iron, cheap at home, went up the Harrow road on
+  word that it was dear there" · "The Mossgate wagons came to Harrow for a
+  dear market and found the Aldenmoor iron already in the yards" · "No wagon
+  leaves Cnocby for Harrow while the gates are shut".
+- **Pins (negative hardest):** dormancy (dark ⇒ pull-only physics,
+  byte-identical); conservation with push rows (the five-term pin runs with
+  a speculative caravan in flight and reds on a planted leak); the contract
+  fence pin (each named flow unredirected on a fixture where the push would
+  have preferred otherwise); the consumes-only pin (no caravan to a town
+  that does not consume the good); the one-per-tick pin; the partial-weight
+  pin (a fixture where path cost and the condition disagree: the nearer
+  source wins when the weight is below the authored cap — the owner's
+  "partially"); the wrong-market TELLABLE (stale `pinched` belief, true
+  `glut` ⇒ the receipt names both); the crowd TELLABLE (two origins, one
+  believed-dear destination ⇒ two arrivals ⇒ the destination's record passes
+  into `soft` and the origins' appetites fall); the double-dispatch pin (TR-7
+  lit ⇒ the house's venture, not the faction push, for its interest goods);
+  the stance pin (closed ⇒ no departure); the tuning-register row.
+- **Bands:** `PREFERENCE_WEIGHT` (and its cap below path cost), the appetite
+  bar for a push, the flat reserve floor (dark EC-3), the push cadence (1 per
+  good per tick).
+- **Clock:** fast = departures weekly, arrivals on the route's own weeks
+  (1..52); slow = appetite learning (M6c, 10%/tick toward baseline) and
+  belief decay (SP-B).
+- **Posture:** `merchantAppetite` (existing, per-origin, learned) is the
+  push's courage; `courtRiskAppetiteOf` (dark) tints it when lit.
+- **Couplings (registry rows):** EC-18 ⇐ EC-1 (origin glut, destination
+  need), ⇐ SP-B (believed dearness), ⇐ merchantAppetite, ⇐ EC-6 stance,
+  ⇐ EC-3 reserve; EC-18 ⇒ M6a (a dispatch), ⇒ EC-1 (`export_draw`,
+  `relief_inbound`), ⇒ TR-3's wrong-market kind, ⇒ M6c appetite learning.
+- **Endings wired:** `fortune`/`ruin` through TR-7 when the house carries it;
+  none minted here.
+- **Herald contract:** the departure and the wrong-market arrival (TR-3's
+  kind, existing), pacing-registered.
+- **Lifecycle line:** NO new state — a speculative caravan is a
+  `supplyShipments` record with `speculative: true` (drop-when-false), in the
+  existing ledger, the existing writer family.
+- **Dossier round-trip (crown):** Economy → the Why panel's "who supplies"
+  row shows a speculative arrival as "unasked, on word of a dear market"; the
+  origin's "who consumes" row shows "the Harrow road took the surplus".
+- **Req 13 Alignment:** ENGAGED through M6c's existing lawfulness seed of the
+  appetite baseline; a push of contraband is M7's roll.
+- **Req 14 Edit-verb:** engine-only with reason — the DM pins a link by the
+  existing verbs; a pinned link is contracted and never redirected.
+- **Collision:** `dispatchEV.js` (+6: the composer gains the push and the
+  preference term — the Seam Three whitelist entry), `commodityFlow.js` (+8:
+  the speculative dispatch in the DISPATCH step, same conservation rows),
+  `supplyKernel.js` (+4: the departure receipt), `dispatchDestination.js`
+  (+0: TR-3's order is reused, not forked); `tradeWar.js` NOT touched (T9).
+- **Mutants:** planted redirect of a must-go ⇒ the fence pin reds; planted
+  push to a non-consumer ⇒ reds; planted weight above path cost ⇒ the partial
+  pin reds; planted second dispatch beside a venture ⇒ reds.
+- **New leaves:** `openRoad.js` (~260 eff). **Files touched:** `dispatchEV.js`
+  (+6), `commodityFlow.js` (+8), `supplyKernel.js` (+4), `simulationRules.js`
+  (+1 key), `couplingRegistryTrade.js` (+5), `pulseKernel.js` (+0), the
+  tuning register (+1 `draft` row).
+
 ## §7 THE SCENARIO MATRIX (every row is a future soak pin: DIRECTION and ORDER, never magnitude)
 
 Each row becomes, in EC-10, a fixture (it names its birth door, §1c) plus an assertion in `behavioral-observation`'s idiom of which way each band moves and in what order the effects arrive. No row asserts a count, a rate or a price. "today" means the tree at `00b648c9d` already does it, and the row cites the §2 census row that proves it. A wave cell names what must be lit; "degraded" names what happens when a precondition is dark.
@@ -1963,6 +2267,11 @@ Notation: bands are the CONDITION_BANDS {glut, soft, fair, dear, desperate}. A b
 | M57 | Believed impending war | A court's belief record shows a rival at `preparing`+ with confidence ≥ fair (`beliefMap.js:337`); no front exists. | The crown's precautionary draw on {arms, iron, leather} begins; household demand unchanged; the court class unchanged. | Production unchanged; stock falls at the precaution rate. | Crown first under a martial channel; the reserve notch after a season. | No stance change (no front). | Iron's draw raises the smithy's input target (EC-5 household). | `fair`→`dear` with `expectation` (crown, subject, rung, confidence) then `crown_draw`; one rung per tick. | A build candidate after 13 ticks of dear (EC-8, expected-demand streak); the house takes a position (EC-11 lit). | "Harrow's duke believes Aldenmoor is arming and has filled his armoury; iron is dear in Harrow though no war has come." | EC-16 + EC-4 + EC-3 (+EC-8, +EC-11); aspatial: the posture arm only, band unmoved |
 | M58 | The war that never came | M57's belief decays below the bar (silence decay 0.92/tick) and no front opens. | The draw stops the next tick. | Refill toward cap. | The notch reverses on its clock. | — | `glut_refill` downstream. | `dear`→`soft`→`glut` with `outcome: unfounded` kept one season; the speculative mill closes after 26 glut ticks; the house sells its position at glut (ruin). | Legitimacy bleed from the household's lean season; TR-1 `supply_withheld` evidence against the seat. | "The war Harrow armed for never came; its racks are full and iron goes for a third under." | EC-16 |
 | M59 | The war that came (foresight rewarded) | M57 then a front opens. | EC-4's real arm takes over the draw. | The stock already drawn and the mill already proposed. | — | `closed` by war. | — | The band at war's start reads ONE RUNG LOWER than M1's unbelieving fixture; `outcome: borne_out`. | The house's position sells at dear (fortune). | "Harrow marched with full racks; its smiths had seen the war coming." | EC-16 + EC-4 |
+
+| M60 | The court's remedy (persistent critical need) | Iron `dear` for 13+ ticks at a town with one smithy (criticality 0.72); `marketNeedOf` returns a need with capacity `thin`. | The need itself; grade unchanged. | Unchanged until a remedy lands. | Unchanged. | The pact trigger's own-side lack reads the condition; the counterpart's abundance stays believed. | — | The band holds `dear` while the court acts; eases within the physics' lag once a pact, founding or tribute delivers. | Mercantile channel: envoys and a pact (`need` slot); martial + a hostile neighbour believed to have iron: `resource_pressure` scores, the chooser leans to deploy, the hard gates still run; smelter-legal tier: the build candidate ranks first; refused overture: the casus rises next season. | "Iron has been dear in Mossgate for a year and its one smithy cannot meet the need; the council has sent envoys to Harrow for a pact." | EC-17 (+EC-8, pact lane, war layer); degraded: an arm whose decider is dark is silent |
+| M61 | Market-seeking (persistent glut) | Wool `glut` 26+ ticks at a weaving town. | — | Full warehouse. | The reserve notch down. | A `market_access` pact demand; a `far_market` venture (TR-7 lit). | `glut_refill` downstream. | `glut` holds until a market is found. | The house's venture (fortune/ruin); EC-8's contraction if no market comes. | "Cnocby's wool has rotted on the quay two seasons; its factors seek a market beyond the pass." | EC-17 (+TR-5 row, TR-7) |
+
+| M62 | The open road (uncontracted flow) | Mossgate's iron at `glut`; Harrow believed `pinched` for metal by Mossgate's court; stance `open`. | Harrow's need premium (truth) and Mossgate's believed picture of it. | Mossgate's warehouse at cap; its push bounded by rate and the reserve. | The road claimant takes above the reserve; a must-go to Mossgate's occupier (if any) leaves first and is never redirected. | Stance `open`/`taxed` admits the caravan; `closed` holds it. | — | Mossgate `glut`→`soft`; Harrow `dear`→`fair` with `relief_inbound` then the arrival; a stale belief mints the wrong-market kind. | Appetite learns from the outcome; a second origin's caravan to the same belief writes the glut home (the crowd). | "Mossgate's iron, cheap at home, went up the Harrow road on word that it was dear there." | EC-18 (+SP-B, EC-6, EC-3); aspatial: nothing moves |
 
 ### 7a The resilience law: pairs that MUST diverge under one shock
 
@@ -2103,6 +2412,8 @@ wave except through OD-EC-2/OD-EC-8 (owner rows).
 | Grade envelope | yearly | 26 ticks sustained | EC-8 |
 | Monopoly dwell | yearly | 52 ticks | EC-8/EC-13 |
 | Belief | weekly / seasonal | SP-B's own decay (0.92) and adoption bar | SP-B (unchanged) |
+| The open road | weekly | a push per good per tick; arrivals on the route's weeks; appetite learns 10%/tick | EC-18 |
+| The court's remedy | seasonal | a need exists after 13 ticks dear (26 glut); the deciders' own clocks after | EC-17 |
 | Expectation arms | weekly | re-read belief each tick; stop the tick it decays below the bar; `outcome` memory one season (13) | EC-16 |
 No SP-7 temporal walker exists on master (GRAMMAR §224: "SPINE WORK …
 VERIFY-AT-BUILD"); EC-10 BUILDS it scoped to EC modules (every clock constant
@@ -2174,6 +2485,8 @@ file class).
 | Resilience | two towns, one siege | the Mossgate/Cnocby TELLABLE (§9d) — different band sequences | EC-3 + EC-1 |
 | Believed war (the owner's case) | a court believes a rival is mobilizing (readiness ≥ preparing, confidence ≥ fair); no war exists | arms `fair`→`dear` with `expectation` (crown) and `crown_draw`; the reserve notch after a season; a build candidate after 13 ticks; the band moves ONLY because stock was drawn — a planted belief import in the derivation reds | EC-16 + EC-4 + EC-3 + EC-8 |
 | The war that never came (the foil) | the same fixture; the belief decays, no war opens | the draw stops; arms pass `soft` into `glut` with `outcome: unfounded`; the speculative mill closes at 26; the house's position is sold at glut (ruin reachable); the right-war twin fixture reads one rung LOWER at war's start than EC-4's unbelieving fixture | EC-16 |
+| The court's remedy (the owner's Mossgate case) | iron `dear` 13 ticks, one smithy, four fixtures by channel/tier/neighbour | mercantile ⇒ the pact trigger crosses with the `need` slot; martial + hostile neighbour believed to have iron ⇒ `resource_pressure` scores and the chooser leans to deploy; a smelter-legal tier ⇒ the build candidate ranks first; a refused overture ⇒ the casus rises next season; a hopeless target ⇒ no war opens; a signed pact or a founding ⇒ the need and the motive gone within the physics' lag | EC-17 (+EC-8, pacts, war) |
+| The open road (the owner's flow case) | origin at `glut`, two consuming destinations, one believed `pinched` | one speculative caravan to the believed-dear destination; a must-go and an exclusivity link on the same fixture unmoved; the nearer source still wins a pull when the preference weight is capped; the stale-belief arrival mints the wrong-market kind and lowers the origin's appetite | EC-18 (+SP-B, EC-6) |
 | Quality-specific shocks | mass levy under a `fine` profile | the arms band moves two rungs while the `fine` PROFILE is unchanged and the court mismatch stays `slight`; an elite affliction loads the `medical` record with a `fine`-class slot while the plague fixture loads it with `common` — the class in the sentence differs, the stock does not | EC-7 |
 
 ### 10c Acceptance criteria (the closed matrix; a wave is DONE when every row holds)
@@ -2309,6 +2622,19 @@ file class).
   warPosture (a true act belief already moves) carries the expectation as a
   `slight` structural pressure that never moves a band alone — so the
   sentence exists everywhere and the band moves only where a stock does.
+- **J-EC-20 — THE NEED COLOURS, THE CHARACTER CHOOSES (E14 made a ruling).**
+  A persistent critical need is one signal in each existing decider — the
+  build governor, the pact trigger, the overture, the war motive, the chooser
+  — never a ladder of remedies EC imposes and never a target EC picks; the
+  feasibility gates stand. The owner's "low" is read as low SUPPLY (dear),
+  with the glut side carried symmetrically as market-seeking; one clause
+  narrows it.
+- **J-EC-21 — THE OPEN ROAD IS PARTIAL AND UNCONTRACTED (E15 made a ruling).**
+  The condition is one weighted term in the existing dispatch decision and the
+  actor of a speculative caravan is the origin's merchant faction; contracted
+  flows are fenced by name; the house's venture (TR-7) takes precedence where
+  lit. The weight's cap below path cost is the chair's reading of "partially"
+  and is a tuning band the owner signs at the soak.
 - **J-EC-17 — TWO VOCABULARIES, ONE LAW.** FP-TRADE T1 wrote ONE five-word
   scarcity vocabulary in two non-merging forms; the tree minted a DIFFERENT
   four-word ladder for the belief side (SP-B's zero-collision ruling,
@@ -2428,9 +2754,10 @@ its reason. Nothing is left as "the lane will see".
 | 56 | No pact-compliance module on master | CURED — the absorption ruling names the units and the modules they landed in |
 | 57 | `economicsSlice` not found | CURED — `viewModel.js` / `viewModelBodySlices.js` |
 
-**Post-review amendment (2026-10-16):** EC-16 EXPECTATION was added on the
-owner's word AFTER the skeptic pass; it has had no skeptic seat of its own and
-is the first thing the next adversarial pass reads (the five arms' hosts, the
+**Post-review amendments (2026-10-16):** EC-16 EXPECTATION, EC-17 THE COURT'S REMEDY and
+EC-18 THE OPEN ROAD were added on the owner's word AFTER the skeptic pass;
+none has had a skeptic seat of its own and they are the first things the next
+adversarial pass reads (the five arms' hosts, the
 belief map's activation key, the observer-only fence, the resolution memory).
 
 What the review could NOT settle and the first lane measures (STOP-and-report
@@ -2518,8 +2845,10 @@ family.
 **Consequences.** Enables: an Economy tab that answers "why" from records in
 every world (aspatial included); war, export pressure, postwar glut,
 embargoes, tariffs, quality-specific shocks, prosperity-built specialists,
-and BELIEVED wars that arm a town, found its second forge and ruin the house
-that guessed wrong (E13) as EMERGENT outcomes with named causes; counterfactuals on the existing
+BELIEVED wars that arm a town, found its second forge and ruin the house
+that guessed wrong (E13), a year of dear iron that sends envoys, makes an ally, or
+starts a war (E14), and surplus that finds its own road to where it is
+believed dear (E15) as EMERGENT outcomes with named causes; counterfactuals on the existing
 preview seam; a clerk that reads bands. Introduces: three drop-when-empty
 ledgers with regen rules; a claimant ladder inside the M6a writer family
 (conservation grows four rows); 27 pressure kinds that each owe phrase, pool,
@@ -2546,9 +2875,11 @@ J-EC-15):**
   allocation, procurement, propagation; aspatial worlds gain the propagation's
   structural arm.
 - **Phase C — Borders and craft:** EC-6 → EC-7. Embargoes bite; grades exist.
-- **Phase D — Structure, the what-if, and expectation:** EC-8 → EC-9 →
-  EC-16 (its house arm waits for EC-11 in Phase E; the other four arms land
-  here).
+- **Phase D — Structure, the what-if, expectation and the remedy:** EC-8 →
+  EC-9 → EC-16 (its house arm waits for EC-11 in Phase E; the other four arms
+  land here) → EC-17 (its partner, ally and conquest arms land on their
+  deciders' flags; the build arm with EC-8) → EC-18 (spatial worlds; before
+  EC-14 ventures so the house's precedence pin lands on a built push).
 - **Phase E — The agency layer (TR absorbed):** EC-11 (house) → EC-12
   (grain road) → EC-14 (ventures) → EC-15 (factor) → EC-13 (the corner,
   LAST — J-EC-15), each on its TR preconditions.
