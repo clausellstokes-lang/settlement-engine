@@ -7,6 +7,11 @@
 ## landing is the chair's act, not this lane's** — this file is delivered to
 ## scratchpad and no docs/ path was written. Until the chair lands it, the
 ## CHARTER remains the citable home and this draft is the proposed fold.
+
+[CORRECTED 2026-10-16 (coherence fold) — THE STATUS OF RECORD IS docs/DESIGN_FP_COHERENCE_FOLD.md §2; this header is history. LANDED on the ledger at 1d77ceb67 (2026-08-16); NOT on master; NOT in the compiled order; carries none of the spine's obligations (no Req 13/14 or L10 line, no coupling prefix, no annex). In one line: LIT: none · BUILT DARK: none · UNBUILT: cn-1..cn-6 entire (zero code at 00b648c9d: `stressorPinsEnabled`, `externalBesiegersEnabled`, `warCouncilModel` — 0 hits).]
+
+[RULED BY DELEGATION 2026-10-16 (OD-FC-38 — (coherence fold §3.1.20, §7; vetoable): CN is FOLDED INTO THE EDIT MODE PROGRAM — it is a DM surface written in the pre-Edit-Mode Change-Dock idiom L10 replaced (the compiled fold's L10, J-EM-2). cn-1/cn-2 (the read model and the tab) are KEPT; cn-3's verbs become `REALM_MANIFEST` / `DIRECTION_OP_TYPES` rows under L10, never command specs of their own; cn-4's persisted stressor pin is NOT minted — the DM's hold is Edit Mode seal 6 `letSiegeFall` (a `pin-fork` over HBF-86 `SIEGE_VERDICT_BANDS`) plus an HBF-84 `STRESSOR_LIFECYCLE_STAGES` stage directive; cn-5's external host reconciles with L10(c)'s PHANTOM. OQ-1 (are command powers tier-gated, and is AUTHOR priced apart from ORDER) is a paid-surface question inside this row and stays OPEN. Vocabulary (§5): CN's 'pin' is not minted; read 'seal' for an Edit Mode hold and 'pin' for a test.]
+
 ##
 ## LANDS as a member of the docs/DESIGN_FP_ARCH_* family — the per-program file
 ## for the CN console cluster, sibling to
@@ -42,7 +47,7 @@
   advisory, every judgment vetoable.
 - **Code of record:** `refs/heads/claude/composite-r4` @ `30638bb7` (2026-08-15).
   Ledger branch for the law corpus: `review-fixes-2026-07-08` @ `c0b78e92`.
-- **SLOTTING (§130.2):** the charter banks on completion. The family **COMPILES
+- **SLOTTING (§130.2):** [superseded by OD-FC-38 at the head: re-sequenced into the Edit Mode program] the charter banks on completion. The family **COMPILES
   when WY lands** (its prime feeder — `armySupplyEnabled`) and **EXECUTES in the
   family-train tail, before tm-core and build-complete-dark**, so the console,
   the pin, and the LG-fed sections enter the diagnostic soak as built machinery
@@ -99,17 +104,17 @@ own HEAD (the SPV staleness clause).
 | C4 | DM-edit / provenance / undo | `pendingEditCommit.js` (command facade over the G-1 coordinator — payload admission, freshness preflight, saga, **snapshot undo** — per its own header; kind `'settlement.pending-edits.commit'` :20); `canonEventApply.js:158` (log entry, condition, undo record, regional consequence all provenance-carried); `commandReceipts.js:65` (`undoToken`) | cn-3/cn-4 ops inherit provenance + undo from this machinery; the AUTHOR hat is an authorship-marked provenance value on the same rails |
 | C5 | Typed-op consent surface | `src/components/surveyor/ProposalCard.jsx` (ONE proposed typed op's review row; protected-consent barrier; "consent never approves, and approve never silently consents"; extracted precisely so the review row has ONE home) | cn-3's console renders order review with THIS card family — no second consent idiom |
 | C6 | Stressor lifecycle | `stressorsCore.js`: `STRESSOR_LIFECYCLE_STAGES` :34, `STRESSOR_CATALOG` :54, `normalizeStressor` :325 (the record shape home), `resolveStressorById` :512. `stressors.js`: `resolutionChance` :145, `ageRoamingStressors` :306 with the resolution roll :393–419, **`blockFloor` :363 and `blockedBySynergy` :400 — the landed blocked-stressor idiom**, `setStressorAttacker` :603 (the dyadic attacker participant). `stressorDynamics.js`: counterforce assessment; `STRESSOR_SYNERGIES` with `blocksResolution: true` for siege :469. `warStressorTypes.js:14`: `WAR_STRESSOR_TYPES = ['siege','wartime','occupation','betrayal']`. Settlement-side conditions: `src/domain/activeConditions.js` (`deriveActiveCondition` :609, `withEventConditionsSynced` :784, ticked durations :859, expiry :920). Aftermath/chronicle graduation: `stressorAftermath.js` | cn-4's pin is a DM-authority sibling of the synergy block: same read, same floor idiom, new authority source (see J-CNC-4) |
-| C7 | Siege terminal arms | `warSiegeVerdict.js`: `resolveSiegeVerdict` :124 (`falls`/`pFall`/`forcedLift`); **`SIEGE_MAX_AGE = 60` :101 — a backstop that force-ends long sieges** | cn-4 must gate BOTH the stressor resolution roll AND the verdict/backstop pair — a pin that missed `SIEGE_MAX_AGE` would lift the eternal siege at tick 60 |
+| C7 | Siege terminal arms | `warSiegeVerdict.js`: `resolveSiegeVerdict` :124 (`falls`/`pFall`/`forcedLift`); **`SIEGE_MAX_AGE = 60` :101 — a backstop that force-ends long sieges** [CORRECTED 2026-10-16 (coherence fold) — address rot: `warSiegeVerdict.js:179` at 00b648c9d; the value is still 60.] | cn-4 must gate BOTH the stressor resolution roll AND the verdict/backstop pair — a pin that missed `SIEGE_MAX_AGE` would lift the eternal siege at tick 60 |
 | C8 | Belief plane | `beliefMap.js`: `beliefsActive` :203, `beliefRecord` :224, `BELIEF_TUNING` :109, `strengthBandOf` :183. Second order: `secondOrderBelief.js`: `secondOrderBeliefActive` :132, `mirrorInputsAt` :160, `secondOrderMirrorOf` :240, `MIRROR_BANDS` :64, `MIRROR_STALENESS_BANDS` :72, `MIRROR_PERCEPTION_BANNED` :79 | cn-1 renders belief records with staleness/confidence; "what they likely know of us" is `secondOrderMirrorOf` VERBATIM; the banned-perception-words pin extends to all new tab copy |
 | C9 | Army-supply one-truth (§94.2i) | At the tip there is **NO `src/domain/worldPulse/armySupply.js`** — that file is WY-8a's signed FUTURE binding (C-WYF-3; the rename executes at WY's compile). Live substrate: `warArmyRecord.js:69` (facets supply/morale/equipment/magic, 0..1), :127 (`supplyIntegrity`); `supplyWebWarfare.js`; `supplyKernel.js` (the caravans kernel adapter); `spatial/supplyShipments.js` (the never-per-wagon cardinality law, header) | cn-1's supply/reinforcement section reads WY's landed surfaces — this is WHY the compile trigger is WY. The volume asserts nothing about armySupply.js's final shape; the compile re-verifies |
 | C10 | Army transit kernel | `armyTransitKernel.js`: `advanceArmyTransit` :639; envoy-encounter projections :474/:506; `deriveArmyEnvoyIntent` :247 | cn-3's ORDER-hat deploy/recall enters transit here — armies MARCH from where they stand; no teleporting orders |
 | C11 | The DM-reveal seam | `src/domain/display/settlementBeliefs.js:8–15` — the `includeGroundTruth` convention: player projection fail-closed (default false), DM projection true | cn-1's ground-truth overlay sits BEHIND this seam; the tab defaults to the belief projection |
 | C12 | The one edit mode | store `setEditMode` (`src/store/settlementSlice.js`; consumed at `src/components/SettlementDetail.jsx:300/:314`) | §126a verbatim: the console is what the war tab BECOMES under the EXISTING toggle — no second toggle, no parallel edit machinery |
-| C13 | The war tab today + the belligerence read | `WarFaithTab.jsx:1–27` (light read models; "renders NOTHING for a peaceful or non-campaign town" — the dormancy-as-absence precedent; the pantheon-leak refusal is constitutional); lazy-mounted at `dossierLazyTabs.js:27–52`; war state reads at `src/domain/display/warStatus.js` (`liveSieges` :88, `activeDeployments` :133, **`hasLiveWarState` :262**, `settlementWarStatus` :283) | `hasLiveWarState` (settlement-scoped via `settlementWarStatus`) is the §126a war-gate; the WarFaithTab absence idiom is the model for every unlit section |
+| C13 | The war tab today + the belligerence read | `WarFaithTab.jsx:1–27` [CORRECTED 2026-10-16 (coherence fold §3.3.9) — WarFaithTab no longer exists: the §805 split moved the war half to `src/components/new/tabs/WarTab.jsx` and the faith half to `FaithTab.jsx` (dossierLazyTabs.js:27, :50).] (light read models; "renders NOTHING for a peaceful or non-campaign town" — the dormancy-as-absence precedent; the pantheon-leak refusal is constitutional); lazy-mounted at `dossierLazyTabs.js:27–52`; war state reads at `src/domain/display/warStatus.js` (`liveSieges` :88, `activeDeployments` :133, **`hasLiveWarState` :262**, `settlementWarStatus` :283) | `hasLiveWarState` (settlement-scoped via `settlementWarStatus`) is the §126a war-gate; the WarFaithTab absence idiom is the model for every unlit section |
 | C14 | The PDF war chapter | `src/pdf/sections/FaithWar.jsx:1–18` (chapter 03D; "mirrors that tab from the SAME pure selectors (via vm.liveWorld)"; premium + canon-only + self-gating); the live slice at `src/pdf/lib/viewModel.js:137` | today the parity is shared-selector; cn-1 tightens it to ONE view model both import, and cn-6 re-points the chapter |
 | C15 | The da-cured display chokepoints | tick translator: `tickCalendarLabel` `humanizeEngineTokens.js:41` + `tickDurationLabel` (with the ⛔ not-interchangeable note :72); palette: `relColor`/`relRgb` `relationshipColors.js:79/:84`; `formatCount` `src/domain/formatNumber.js:64`; the lexicon: `humanizeEngineTokens.js` (the ONE presentation-boundary chokepoint; `tests/copy/proseLeak.test.js` walks it) | consumed FROM BIRTH by cn-2/cn-6 (§126.3) — no bare ticks, no engine tokens, no console-local colors |
 | C16 | Feeder flags + the virtual-key machinery | WY: `armySupplyEnabled` (DESIGN_FP_ARCH_WY.md:36, ledger); LG: `circleNetworkEnabled` + `vesselFleetsEnabled` (LG volume §3); POP: `migrationFlowsEnabled` (spelling per WY volume :162); the engine-gated virtual-row machinery at `tests/domain/subsystemRowsVirtual.test.js:418/:455/:670` | the cn-2 section-mounting keys and the cn-4/cn-5 mint substrate |
-| C17 | Closed band vocabularies | `armyStrength.js`: `CONDITION_BANDS` :94, `ARMY_STRENGTH_PHRASES` (STRENGTH/REMAINING/CONDITION) :198 | cn-5's authored-host strength band REUSES the closed army vocabulary — never a new scale (J-CNC-5) |
+| C17 | Closed band vocabularies | `armyStrength.js`: `CONDITION_BANDS` :94 [RULED 2026-10-16 (coherence fold §5) — `CONDITION_BANDS` is armyStrength.js's own (module-local at :133 at 00b648c9d, exported through `ARMY_STRENGTH_PHRASES` :237); EC's market ladder is `MARKET_CONDITION_BANDS`; WY-8b reuses this ladder.], `ARMY_STRENGTH_PHRASES` (STRENGTH/REMAINING/CONDITION) :198 | cn-5's authored-host strength band REUSES the closed army vocabulary — never a new scale (J-CNC-5) |
 
 Adjacent design record found at the tip root: `DESIGN_STRESSOR_DYNAMICS.md` (status
 IMPLEMENTED) — documents the counterforce/synergy program including "blocked stressors
@@ -126,7 +131,7 @@ hold a severity floor instead of zombie-decaying." cn-4's compile cites it as su
 2. **Edit mode = typed ops only (§126.2):** every verb is a consented typed op through
    C3's `execute`, becoming a world-input event the next tick consumes —
    provenance-carried, undo-covered, honest per THE PROMISE (orders are events, never
-   rewrites).
+   rewrites). [RULED 2026-10-16 (coherence fold §3.1.20; OD-FC-38) — see the bracket at cn-3: under L10 a console verb is a REALM_MANIFEST / DIRECTION_OP_TYPES row through the one mutation boundary, not a command spec through C3's `execute`.]
 3. **One edit mode, war-gated (§126a):** the console is the war tab under the C12
    toggle; the command surface ACTIVATES only when `hasLiveWarState` is true for this
    settlement; at peace, edit mode on the war tab carries no command center — rendered
@@ -173,7 +178,7 @@ hold a severity floor instead of zombie-decaying." cn-4's compile cites it as su
 
 ## §3 · THE FLAG FAMILY (law-2 shape and mint timing)
 
-TWO engine-gated virtual flags mint in this family, each on a solo train per the
+TWO engine-gated virtual flags mint in this family, [CLARIFIED 2026-10-16 (coherence fold) — the count of THIS family's flags as chartered 2026-08-15; neither is minted at 00b648c9d (0 hits).] each on a solo train per the
 flag-boundary law (J-CNC-3):
 
 | Flag | Wave | Why it is its own flag | Dormancy proof |
@@ -206,6 +211,7 @@ external host in cn-5 because the valve's output IS a §128a host record — the
 capability with one dormancy proof (J-CNC-3).
 
 ### cn-1 — THE WAR READ MODEL (one view model, belief-first)
+[ADDED 2026-10-16 (coherence fold, req 16/17) — FIRST-VISIBLE: none — instrumentation (a headless view model; felt only through cn-2's tab and cn-6's chapter) · TIER: host flags: war-gated (`hasLiveWarState`, warStatus.js:262; the war layer `warLayerEnabled` lights only in dramatic_campaign and full_simulation, compiled fold §12.8); belief sections need belief infoMode (spatial canon ∧ infoMode ≠ omniscient) · DEGRADED ARM: omniscient or aspatial worlds render the fact plane, no mirror (cn-2's feeder map)]
 - **Produces:** one pure, headless view model in `src/domain/display/` (proposed
   `warCouncilModel.js`; the compile fixes the name against the neighborhood) composing:
   belligerents + their allies (coalition graph reads), THIS settlement's BELIEF of each
@@ -229,6 +235,7 @@ capability with one dormancy proof (J-CNC-3).
   a two-census red (new-file law) with the ceiling doors named at compile.
 
 ### cn-2 — THE WAR TAB READ SURFACES (dormancy-as-absence mounting)
+[ADDED 2026-10-16 (coherence fold, req 16/17) — FIRST-VISIBLE: UNMEASURED (a read surface shown whenever the war tab opens on a war-live settlement; no advance clock measured) · TIER: as cn-1; the LG-fed sections need `circleNetworkEnabled` ∧ `vesselFleetsEnabled` (unminted) and spatial canon · DEGRADED ARM: in-fiction absence per section until its feeder lights (CN law 4)]
 - **Produces:** the world-tab war tab upgrade consuming cn-1: belligerents panel, the
   belief-plane position board (confidence + staleness visible), the second-order "their
   picture of us" panel, army status, supply/reinforcement flows, adjacent LG renders as
@@ -251,9 +258,10 @@ capability with one dormancy proof (J-CNC-3).
   priced as two-census red.
 
 ### cn-3 — THE CONSOLE (typed ops through the one dispatch point; every verb two-hatted)
+[ADDED 2026-10-16 (coherence fold, req 16/17) — FIRST-VISIBLE: WEEKLY — an ORDER moves on weekly legs (law M) and becomes a world-input event the next tick consumes; the order receipt is its first sign (FOLD-SMALL §7: the one family whose drama lives at the session clock) · TIER: host flags: war-gated (`hasLiveWarState`, warStatus.js:262; the war layer `warLayerEnabled` lights only in dramatic_campaign and full_simulation, compiled fold §12.8); order-class message latency needs a non-omniscient infoMode; paid tier: OQ-1 (inside OD-FC-38) · DEGRADED ARM: dark — no live war, no console (in-fiction absence, CN law 3); omniscient worlds carry orders without message physics]
 - **Produces:** the war-gated command surface in the ONE edit mode (C12 + C13's
   `hasLiveWarState`). v1 verb set, each a registered command spec dispatched through
-  C3's `execute`, each with its ORDER and AUTHOR variants (§129.2):
+  C3's `execute`, each with its ORDER and AUTHOR variants (§129.2): [RULED 2026-10-16 (coherence fold §3.1.20; OD-FC-38, by delegation) — under L10 each verb below is a `REALM_MANIFEST` row (realm-scale: deploy/recall toward a court, the envoy, the peace proposal) or a `DIRECTION_OP_TYPES` row (settlement-scale), through the one mutation boundary and `authorityFor` — never a bespoke command spec or a third registry (J-EM-2). The two-hat law (§2 law 10) stands as the content of those rows.]
   1. deploy/recall army (ORDER: enters C10 transit from where it stands; AUTHOR:
      placement with authorship provenance, discovered via the belief plane);
   2. supply request to an ally (order-class comms — rides message physics in
@@ -278,6 +286,8 @@ capability with one dormancy proof (J-CNC-3).
   clause generalized).
 
 ### cn-4 — THE STRESSOR PIN (mints `stressorPinsEnabled`; solo train per the flag-boundary law)
+[ADDED 2026-10-16 (coherence fold, req 16/17) — FIRST-VISIBLE: per tick — the DM's own hand; the held state shows from the first advance after the toggle (FOLD-SMALL §7: session clock) · TIER: aspatial-safe (a stressor-record read) · DEGRADED ARM: dark (flag off ⇒ byte-identical)]
+[NOTED 2026-10-16 (coherence fold) — overlaps Edit Mode seal 6 `letSiegeFall` (HBF-86 `SIEGE_VERDICT_BANDS`, the compiled fold's §12.2) and HBF-84 `STRESSOR_LIFECYCLE_STAGES`; and L10 requires the verb as a REALM_MANIFEST / DIRECTION row, not a command spec. RULED (§3.1.20; OD-FC-38, by delegation): the persisted pin field is NOT minted — the DM's hold is seal 6 plus an HBF-84 stage directive; this charter stands as the design record of what the hold must do (§2 laws 5–7: the resolution arm only, clamped floors, the dyadic clause) and is re-read against Edit Mode at its compile.]
 - **Produces:**
   1. the pin field on the stressor record (`normalizeStressor` C6 is the shape home) —
      a persisted-shape widening, DECLARED for the standing veto surface;
@@ -319,6 +329,8 @@ capability with one dormancy proof (J-CNC-3).
   the operating doctrine: the shift is the feature).
 
 ### cn-5 — THE EXTERNAL HOST + THE CONVERSION VALVE (mints `externalBesiegersEnabled`; solo train)
+[ADDED 2026-10-16 (coherence fold, req 16/17) — FIRST-VISIBLE: UNMEASURED · TIER: host flags: war-gated (`hasLiveWarState`, warStatus.js:262; the war layer `warLayerEnabled` lights only in dramatic_campaign and full_simulation, compiled fold §12.8); a siege needs the war layer · DEGRADED ARM: dark (flag off ⇒ byte-identical; unpinned external sieges resolve organically when lit)]
+[RULED 2026-10-16 (coherence fold §3.1.20; OD-FC-38, by delegation) — the external authored host reconciles with L10(c)'s PHANTOM (a minimal save record, `kind: 'phantom'`, no simulated side) rather than minting a second record kind. The conversion valve is pin-conditional; with cn-4's pin not minted its trigger must be re-read against seal 6 (FOLD-SMALL §8: CUT-TO-SENTENCE until a held siege exists in a shipped world) — owed a chair ruling at the Edit Mode fold.] [RE-RULED 2026-10-16 after skeptic S4 B1 — cn-4's STRESSOR PIN IS KEPT: ODQ §128.1/.5 (the owner) gives every stressor a DM-authority PIN persisting through ALL advances that the resolution arms read each tick; a pin-fork replaces only a draw and `SIEGE_MAX_AGE 60` (warSiegeVerdict.js:179/293) is not a roll. The pin is an Edit Mode SEAL whose arm gates the roll AND the backstop/terminal arms (§128.3–.4); seal 6 `letSiegeFall` is its siege instance; cn-4 folds into Edit Mode as that seal's charter. The conversion valve's trigger reads the KEPT pin (lane H item H6 as corrected).]
 - **Produces:**
   1. the besieger union (§128a): the siege stressor's attacker becomes
      settlement-faction army OR external authored host — a typed record (name; strength
@@ -352,6 +364,7 @@ capability with one dormancy proof (J-CNC-3).
   killing the train.
 
 ### cn-6 — PDF ALIGNMENT + POLISH (the projection closes)
+[ADDED 2026-10-16 (coherence fold, req 16/17) — FIRST-VISIBLE: UNMEASURED (a PDF projection; no advance clock) · TIER: the PDF war chapter is premium + canon-only (C14); host flags as cn-1 · DEGRADED ARM: the chapter's existing shared-selector projection]
 - **Produces:** the C14 war chapter re-pointed to cn-1's ONE view model (parity pinned
   by test: tab and PDF import the same symbol — the §126.3 law becomes machinery);
   pinned/held-state and external-besieger rendering in the PDF ("the DM's monster is a
@@ -417,7 +430,7 @@ EXECUTED proof, not a prediction.
   if so, is AUTHOR gated separately from ORDER? Recommendation to record with the §71.2
   family: console read surfaces follow the existing DM-reveal tiering; command dispatch
   DM-tier; hat parity within the tier (one price for the console, hats are grammar not
-  upsell). Owner signs at cn-3's compile at the latest.
+  upsell). Owner signs at cn-3's compile at the latest. [RULED BY DELEGATION 2026-10-16 (OD-FC-38 — this paid-surface question sits inside OD-FC-38 and is RULED by delegation (lane H item H8; the owner's 18:5x word "The simulator is gated for premium"): command powers are premium (the Edit Mode surface, U16); AUTHOR is not priced apart from ORDER.]
 - **OQ-2 (lifecycle, cn-4):** the pin's REGENERATION path — the pin is DM world-input
   state; the regen-edit-loss hazard class (authored entries with no id to preserve by)
   is standing. The compile must prove the pin rides the replay/delta path that survives

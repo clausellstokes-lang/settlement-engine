@@ -6,11 +6,11 @@
 ## INTERIOR (books + memory). War is complete; this program brings the other six
 ## layers to war's grade — robust AND dramatic — after which foreign policy EMERGES
 ## and no seventh module is ever built. Implementation = the external implementer
-## (Sol), sequenced behind the sim-proof path. Every wave dark, every band authored,
-## every claim receipted. The six program volumes (DESIGN_FP_{TRADE,FAITH,
+## (Sol), sequenced behind the sim-proof path. [CORRECTED 2026-10-16 (coherence fold) — implementation runs as chair-dispatched lane seats under docs/OPERATING_STANDARD.md; "Sol" is historical.] Every wave dark, every band authored,
+## every claim receipted. [CORRECTED 2026-10-16 (coherence fold) — THE STATUS OF RECORD IS docs/DESIGN_FP_COHERENCE_FOLD.md §2; this header is history. In one line: LIT: SP-B scarcity + conditions (FP_LIT_BELIEF, 3 presets); SP-3 via GRAMMAR (pactFormationEnabled, 4 presets incl. the default) · BUILT DARK: SP-A stocks; SP-B devotion; SP-B2 legs (sovereigntyTradeEnabled lit nowhere); SP-C posture (strategicPostureEnabled dark; appetite STARVED, SEAM-0 owed); SP-D errand spine (held dark on purpose); SP-E narration kit; second-order belief; lanes H/HG/HR/CF the causal headline (heraldCausalVoiceEnabled dark); lanes P/PR state-prose WIRED and live · UNBUILT: SP-7 temporal walker (fold §4); SP-8 age layer (OD-FC-17); SP-F era marking corpus-wide] The six program volumes (DESIGN_FP_{TRADE,FAITH,
 ## POPULATIONS,INFORMATION,GRAMMAR,INTERIOR}.md) and the coupling volume
 ## (DESIGN_FP_COUPLINGS.md) are BOUND BY THIS DOCUMENT; where they conflict with it,
-## this document wins and the conflict is a bug to report.
+## this document wins and the conflict is a bug to report. [CORRECTED 2026-10-16 (coherence fold §1, requirement 15) — THE BINDING-SCOPE LAW: the binding extends to every FP volume, present and future — every DESIGN_FP_ARCH_* volume, the later programs (ES, WY, HB, WC, EP, EC, MF, LG, PG, CN, POP, INT, and W-SEAT, W-OPS, W-COIN, W-FAITH where they touch an FP seam) and their successors; a volume that declares itself outside says so in its header with the reason. And under requirement 22b "a bug to report" is not a disposition: an erratum lands as a dated bracket in the same commit as the ruling that makes it true.]
 
 ---
 
@@ -77,9 +77,11 @@
     2026-08-02 under full owner delegation — vetoable; the corpus's "twelve
     requirements" phrases refer to the ratified core above, and waves pick
     13–14 up at build]:** the settlement's alignment is a DERIVED two-axis
-    read — `alignmentOf(id) → { lawfulness01, malice01 }` (beliefMap.js:915,
-    informationStatecraft.js:584) — composed from its people; it is never a
-    stored settlement stock and gains NO writer (never-store-a-derivable).
+    read — `settlementAlignment(item, worldState) → { lawfulness01, malice01 }`
+    (`src/domain/worldPulse/settlementAlignment.js`, navigated by symbol; the
+    earlier `alignmentOf(id)` citation named an injected port, and both of its
+    line addresses have rotted) — composed from its people; it is never a
+    stored settlement stock and gains NO writer (never-store-a-derivable). [CLARIFIED 2026-10-16 (coherence fold §3.3.5) — master's sentence above is the text of record (`export function settlementAlignment(item, worldState)`, settlementAlignment.js:44); the ledger copy's `alignmentOf(id)` citation is retired with it. DESIGN_FP_ARCH_EC §6 EC-3 still cites "the exported `alignmentOf`" — no such export exists; EC is amended under §3.3.5.]
     Every mechanism names its READ engagement — which axes colour it
     (quadrant reads, contraband/conscience gates, the extremity and
     just-razing gates, the world's judgment on the observer's axis) — or
@@ -105,6 +107,126 @@
     never silence. GRAMMAR's approval-lane rows and INTERIOR's burial verb
     are the house pattern; TRADE/POP/INFO currently name no verbs and pick
     theirs up at build under this requirement.
+   [ADDED 2026-10-16 (coherence fold §1) — requirements 15–23 follow]
+15. **THE BINDING-SCOPE LAW.** Every FP volume, present and future — the
+    thirteen the compiled fold names, the later programs (EC, MF, LG, PG, CN,
+    W-SEAT, W-OPS, W-COIN, W-FAITH where they touch an FP seam) and their
+    successors — is bound by requirements 1–24. A volume that declares itself
+    outside says so in its header with the reason. (Today the spine binds "the
+    six program volumes and the coupling volume" by name; nine later volumes
+    cite the spine zero times.)
+16. **THE FIRST-VISIBLE-LATENCY LAW** ⛔ RULED BY DELEGATION 2026-10-16, OD-FC-1 (the spine reader
+    rightly says a product rule about what a DM must see is the owner's).
+    Proposed text: every mechanism declares, beside its clock, its FIRST-VISIBLE
+    LATENCY in DM advances — the DM's advance unit is week / month / season /
+    year — and a one-month advance must surface at least the mechanism's
+    fast-layer sign (a band word, a beat, a dossier line); the slow verdict is
+    named separately. A mechanism whose first-visible latency is a year or
+    more is built only behind one that is felt in a month, or behind the epoch
+    program. (The four experience reads of 10-02 found the lit layers "nearly
+    silent at the table"; the family reads found most felt drama at the
+    seasonal or yearly clock.)
+17. **THE TIER DECLARATION LAW.** Every wave carries a TIER line: aspatial-safe
+    / spatial canon / belief-recording infoMode / host flags it needs, and its
+    DEGRADED ARM in the lesser tier — exactly as requirement 13 forces an
+    Alignment line. The paid-tier sense (anonymous = town, free = village +
+    town, premium = deities and spatial canon) is declared where it governs the
+    felt sentence. (Belief, and therefore all of INFO/ES/TR-3/HB-6..8 and
+    EC-16/18, runs only under spatial canon with a non-omniscient infoMode;
+    faith runs only on deity-bearing premium worlds; no volume says so at the
+    top.)
+18. **THE TUNING-EVIDENCE LAW.** A band row carries its measured spread (seed
+    family, preset, window) or the word UNMEASURED; the owner signs measured
+    rows only; "absent means zero" needs a dormancy reason written down. (The
+    board counts 255 tuning tables; the chain-first amendment had to add this
+    outside the constitution.)
+19. **THE FELT-PROOF LAW.** A mechanism is DONE when its DM-felt sentence fires
+    in a lit preset on a seeded world and an experience read scores it — not
+    when its fixture pin is green. Every wave names that sentence in its
+    charter; a wave with no sentence is instrumentation and says so. (The
+    chain-first rule, constitutionalised; seven families carry mechanisms with
+    no DM sentence anywhere.)
+20. **THE PROVENANCE-ADOPTION LAW.** Requirement 7's "walks backward link by
+    named link" names its seam: every child receipt of a known outcome
+    populates `causedBy` at its mint (the provenanceKernel road). (ARCH_CW's SC-6
+    pre-pin is cited by zero volumes; the tree has two engine writers of
+    `causedBy`, unchanged since August; CW-3's chain-depth envelope reds by
+    design.)
+21. **THE COUPLING-IDENTITY AND VOCABULARY LAW.** (a) Each program's modules
+    belong to ONE of the seven coupling layers, declared once (ES→INFO, EC→TRADE,
+    WC→WAR, HB→INFO, WY→the carriers of TRADE/POP/WAR, EP→all as a clock, INT
+    stays INTERIOR); (b) pair ids are closed at CPL-1..21 with a declared
+    extension family for within-layer and new-program rows (the registry's
+    CPL-22/23 are re-anchored, §3.3); (c) a new volume prefix is chartered in
+    the same commit as its first registry row; (d) a closed ladder is minted
+    into the corpus VOCABULARY REGISTER (§5) with a homonym check — one word,
+    one meaning per surface, the J-WR-10-B borrow census generalised.
+22. **THE ENGINE-STATE LIFECYCLE AND ERRATUM LAW.** (a) ARCH_SP's L4
+    lifecycle-paths clause (create / read / persist / regenerate / undo /
+    import / migrate / dark-after-lit / death / veil) binds every engine-written
+    state, not only DM edits (requirement 14b); (b) an erratum reported against
+    the constitution or a volume lands as a dated bracket in the same commit as
+    the ruling that makes it true — "a bug to report" is not a disposition
+    (three constitution errata stood unapplied for ten weeks: the alignment
+    read, the errand ledger's home, the posture names); (c) requirement 11
+    points at the owner's EVIDENCE LAW (2026-10-02/03, "complete, not cryptic";
+    pillar 10) and the voice program ("actions, not potential") as binding on
+    every phrased kind — COUPLINGS §9's contract sentences and §8 of every
+    family are re-authored at build under it.
+23. **THE RETENTION-HORIZON LAW.** Every ring (pulseHistory 80, wizardNews
+    240, turningPoints 24, the provenance edge cap) declares its horizon in
+    INTERVAL_WEEKS at a measured event rate, and every advance unit declares
+    what it evicts: a `one_year` advance appends 52 records into the 80-ring
+    before collapsing to one, so the ring nets to 29 (findings EP §6 S1, read
+    from `historyRingCollapse.test.js:150-159`) — a year-cadence DM's receipt
+    and replay horizon is about 29 advances, not 80, and requirement 7's cause
+    walk ages out 2.7× faster at that clock. The ring policy itself (collapse
+    before eviction, or raise the cap) is RULED BY DELEGATION 2026-10-16, OD-FC-33.
+   [ADDED 2026-10-16 18:5x (coherence fold §1, the owner's own law) — requirement 24 follows; its text is re-stated in the fold §1 after skeptic S1-01 (SP-9 builds on the LANDED majors docket: decisionTier.js, advanceInterval.js:601, J-D7's adjudication screen; month/season/year advances force auto-resolve by the owner's word), S1-08 (the demo cap is temporary, not a tier) and S1-13 (at a month-or-longer advance the receipt is the sign), and after skeptic S5 (no pause cursor — the tick completes and the next advance resolves the held docket first; the HEARING SEAL is its own seal kind keyed by engagement id, read first in the resolver's module, the frozen kernel untouched; directive 7's majors pause and its DM switch untouched; the registry seeded from the live-act census, nineteen kinds becoming thirty-one; the DM's forced outcome is a VERDICT, never a "decree") — the fold's §1 is the text of record]
+24. **THE HEARING WEEK** (the owner, 2026-10-16, 18:5x EDT, verbatim: "When it
+    comes to conflict, spying, treatise, etc, anything that involves one
+    settlement with another, the height of that engagement, regardless of where
+    it is at, is paused at a week so that the user can always fix them however
+    they want. … two antagonistic armies meet in a road. Their result is not
+    instant and scrapped as part of advance time in the same week where the DM
+    can't do anything. Instead, they pause at the 'start of battle' and the DM
+    is given choice to optionally weight in on who is to win. Same with NPCs in
+    other settlements or with other settlement's NPCs for any act of foreign
+    policy. An envoy must stay a week in a settlement before the decision is
+    made. A spy must stay a week as well, and anything related." — and the
+    three clarifications: "this only applies to week by week advancements.
+    months seasons and years go by automatically." · "The simulator is gated
+    for premium" · "some options aren't just settled in a week. For example a
+    siege. a siege takes a long time and either side may get allies to turn the
+    tide over the course of weeks. still the DM can decide who wins during any
+    one of those weeks forcing the hand.")
+    (a) Every ENGAGEMENT between two settlements — an act of one court, army,
+    envoy, spy, caravan, column, legate or house upon another — is a row in ONE
+    closed ENGAGEMENT REGISTRY (kind · owning program · its CLIMAX tick · its
+    verdict vocabulary · whether it is a CLIMAX kind, settled in one hearing, or
+    a STANDING kind that holds for weeks). (b) At a one-week advance the engine
+    never resolves a climax in the tick it arrives: it MINTS a pending verdict
+    (its own default, computed deterministically with its epoch) into the
+    PENDING LEDGER and stops; the DM may leave it to the engine, TILT it (a
+    bounded thumb for one side: slight · heavy) or DECREE the outcome; the next
+    week resolves it from the seal or the default. A STANDING engagement (a
+    siege, a long negotiation, an occupation's contest, a blockade) offers the
+    same three choices EVERY week it stands, and the decree forces the hand that
+    week. (c) A month, season or year advance runs every hearing on the engine's
+    default without stopping; each still mints its pending record for one tick
+    and leaves its receipt ("resolved by the engine's default verdict"), so the
+    cause walk and the Herald see the same world either way. (d) The seal is a
+    typed DM edit (requirement 14; L10's one door) with provenance
+    (`causedBy: dm_seal`), replayed exactly as an order in the world (EP B2's
+    reading), surviving every lifecycle path (requirement 22a). (e) The
+    simulator is PREMIUM: the hearing, the tilt and the decree are premium
+    surfaces (U16's gate), with no free-tier arm to design. (f) Dark-identical
+    behind `hearingWeekEnabled`; lit, every climax resolves one tick later than
+    today — a declared same-seed shift signed once at lighting. (g) Every
+    engagement kind's pending card is its FIRST-VISIBLE sign (requirement 16)
+    and is written under the Evidence Law: who, upon whom, where, the default
+    verdict, and nothing about what the DM might do.
+[end of the 2026-10-16 addition]
 
 ## §2 THE SHARED SPINE INFRASTRUCTURE (built once, consumed by all six —
 ## width through reuse is how constant density stays affordable)
@@ -123,7 +245,7 @@ authored here so "SP-N landed" resolves corpus-wide.]
   lifecycle). Consumers: envoys (GRAMMAR), factors (TRADE), legates + pilgrims
   (FAITH), the ambitious (INTERIOR), couriers + double agents (INFORMATION),
   and column-adjacent movers stay in their existing ledgers (migration is not
-  an errand; it is a flow).
+  an errand; it is a flow). [CORRECTED 2026-10-16 (coherence fold §3.3.4) — the ledger lives at top-level `worldState.envoyErrands` (worldState.js:483); SP-1 generalizes it IN PLACE per J-SP-2 / DESIGN_FP_ARCH_SP seam ruling 2; `spatialLedgers.errands` is descriptive, never an address.] [RULED BY DELEGATION 2026-10-16 (OD-FC-14 — confirm keep (chair recommendation KEEP: 14 consumers; migrating the key is owner-gated persistence churn); the erratum is then settled]
 - **SP-2 THE BELIEVED-WORLD EXTENSION:** the beliefMap's per-observer,
   per-faction-slot partition (BUILT, rigorous) gains three banded subject
   families: BELIEVED SCARCITY (trade — "grain is dear in the east, they say"),
@@ -143,7 +265,7 @@ authored here so "SP-N landed" resolves corpus-wide.]
   faith communion, a migration pressure, a shared threat), drafting is
   TWO-SIDED via the two-picture contract (negotiationPictures — WR-7's seam,
   built once, used for war-end AND peacetime), and FAITH + POPULATION TERM
-  FAMILIES join the catalog. [CORRECTED 2026-08-02 (fp-audit) — two chair
+  FAMILIES join the catalog. [RULED BY DELEGATION 2026-10-16 (OD-FC-5 — the two-picture law is unbuilt in peacetime: no pact module imports `negotiationPictures`; acceptance is the responder's own value-vs-reserve plus dependency fear (pactFormation.js:446-494). CHAIR RECOMMENDATION (coherence fold §3.2.1): AMEND for PEACETIME — the proposer's own-picture arm is the OFFER it chose to make (it already values before asking), the responder's is the answer; two pictures, one at each end, no merged estimate; the war-end path keeps the full contract. The law's text stands until the owner answers.] [CORRECTED 2026-08-02 (fp-audit) — two chair
   rulings recorded at the constitution: **R1, ONE INSTRUMENT PER PAIR IS
   LAW** — the treaty ledger's one-per-pair key is not a bug; peacetime
   formation AMENDS the pair's standing instrument, minting one only where
@@ -169,16 +291,16 @@ authored here so "SP-N landed" resolves corpus-wide.]
   third stock in a volume) with strategic posture bands (SP-4b: derived from
   state × disposition channels × the ruler's books) exposing
   `postureOf(settlement)` + `riskToleranceOf(actor)` — threshold-shaped
-  reads only (E3's law: posture colours, never selects targets).
+  reads only (E3's law: posture colours, never selects targets). [CORRECTED 2026-10-16 (coherence fold §3.3.3) — built as `courtPostureOf` / `courtRiskAppetiteOf` (strategicPosture.js:222, :303) under chair ruling CR-C4-1; `riskToleranceOf` is the roads NPC read (roads/state.js:334) and is held single-definition by tests/lint/postureNameCollision.walker.test.js. Every `postureOf` / `riskToleranceOf(actor)` below means the court reads.]
   [CORRECTED 2026-08-02 (fp-audit) — the sequencing hole the cohesion audit
   named: the ruler's books land LAST (INTERIOR INT-1, `seatBooksEnabled`)
-  while five programs consume `postureOf` from their first flagged wave.
+  while five programs consume `postureOf` from their first flagged wave. [see the bracket at :250 — the read is `courtPostureOf` (CR-C4-1)]
   THE DEGRADED ARM, declared: until seatBooks lands, SP-4b composes state ×
   disposition channels only — the books term is ABSENT, not zero, and the
   posture receipt names which inputs it had; the SP-4 wave carries the
   matching golden (posture with and without the books term), and lighting
   `seatBooksEnabled` is a DISCLOSED same-seed shift for every posture
-  consumer in five programs (INT-1's disclosed-shift list carries it).]
+  consumer in five programs (INT-1's disclosed-shift list carries it).] [CLARIFIED 2026-10-16 (coherence fold) — no such disclosed-shift sentence was found in DESIGN_FP_ARCH_INT by grep (findings SP-CW §4 X3; ARCH_INT:133 spells `courtPostureOf` / `courtRiskAppetiteOf`); the disclosure is owed at INT-1's charter.]
   Dossier-rendered as band words.
 - **SP-5 THE CONFIDENCE-STOCK FAMILY:** one idiom (banded stock, event-moved,
   decay toward neutral, receipts on band crossings) instantiated as:
@@ -299,7 +421,7 @@ authored here so "SP-N landed" resolves corpus-wide.]
   REGISTER — behind the click, a NEW narrative tier between headline and
   the cause-walk table: the full composed chain (multi-link cascades,
   the complete join molds), coherent and entailed per-link but freed
-  from headline compression. (3) THE TABLE stands beneath both — the
+  from headline compression. [RULED 2026-10-16 (coherence fold §5) — "telling" is also SP-6b's SEVERITY rung (glancing · telling · grave · ruinous, landed) and the verb family `degradeTelling` / "worn in the telling"; the rung stands; prose says "the telling register" and "worn in the telling" only with those nouns, and a bare "telling" in a design sentence means the rung.] (3) THE TABLE stands beneath both — the
   cause walk's receipts remain the ground truth the telling projects.
   The causal annex labels every mold HEADLINE or TELLING; every join
   family carries both registers; the pacing governor reads headlines
@@ -465,7 +587,7 @@ authored here so "SP-N landed" resolves corpus-wide.]
   fully wired (the hardest negative — machine prose must be provably
   incapable of touching the pen's ground).
 - **SP-7 THE TEMPORAL WALKER:** the INTERVAL_WEEKS trace assertion + the
-  mode-speed table (J-D11(b)) landed as spine infrastructure ahead of all six.
+  mode-speed table (J-D11(b)) landed as spine infrastructure ahead of all six. [RULED 2026-10-16 (coherence fold §3.1.11) — WY-1 owns the mode-speed TABLE (landed, dark: src/domain/spatial/modeSpeeds.js); SP-7 owns the TEMPORAL WALKER only — unbuilt, and re-chartered by the coherence fold §4 as tests/lint/timeBase.walker.test.js (a shrink-only exemption list seeded from the Class A/B/C census, a RED on any new bare 12/13/26/52 in src/domain outside it, zero behaviour, no constant moved in its commit; it rides the next spine unit).]
 - **SP-8 THE AGE LAYER [CORRECTED 2026-08-02 (fp-audit) — new, per the
   chair's assignment: J-D12 cross-wired into the corpus as its era layer,
   which J-D12(e) schedules "after the audit lands" — this is that
@@ -487,7 +609,7 @@ authored here so "SP-N landed" resolves corpus-wide.]
   which of its bands are ERA-PRESET-ELIGIBLE (a preset may move only
   marked bands), and the dossier round-trip reads the age through each
   settlement's own posture. One paragraph here is the law; the preset
-  tables land with the age wave itself, owner-signed.
+  tables land with the age wave itself, owner-signed. [RULED BY DELEGATION 2026-10-16 (OD-FC-17 — SP-8 / J-D12 is unbuilt and absent from FP-ORDER: keep in sequence, defer past launch, or retire; chair recommendation DEFER past launch with the slot "THE AGES". The ERA-PRESET-ELIGIBLE marking (unmet in every non-SP volume) stands or falls with it (coherence fold §5).]
 
 ## §3 CRUX RULINGS PER PROGRAM (binding; the volumes elaborate, never re-open)
 
@@ -509,7 +631,7 @@ authored here so "SP-N landed" resolves corpus-wide.]
   omen reads (calamities interpreted through the local faith lens as BELIEF
   writes — famine-as-wrath becomes tellable, heuristically); schism completes
   (a temple can actually split; suppression can actually go underground via
-  the covert seam); faith terms join SP-3; tithe coupling to TRADE; the
+  the covert seam); faith terms join SP-3; tithe coupling to TRADE; [RULED 2026-10-16 (coherence fold §3.1.5) — ONE tithe: W-COIN's `tithe_share` tax form is the coin arm; WF-7's `templeWealth` is NOT a second stock but a BAND derived from the treasury's `tithe_share` row where the treasury is lit and from the piety × temple-presence heuristic where it is dark (the named degraded arm); the house-fortune source (TRADE:610) is struck. This crux line stands: "tithe coupling to TRADE" is the treasury read.] [RE-RULED 2026-10-16 after skeptic S1-02 — the tithe is the CHURCH's (ODQ:32488): WF-7's piety × presence → `templeWealth` band is the flow's source; W-COIN's `tithe_share` is the CROWN's cut of it (treasury.js:269-320), read from WF-7's band, never a source — one flow, two ends; the fold §3.1.5 carries the text of record.] the
   narration 3× program.
 - **FP-POPULATIONS:** BELIEVED-CONDITIONS MIGRATION (the gold rush: a banded
   belief arm joins the pull evaluation; counterforce = the bust — arrivals'
@@ -533,7 +655,7 @@ authored here so "SP-N landed" resolves corpus-wide.]
   parity (the 1.5% → war-class density; the spy gains an arc, not a beat).
 - **FP-GRAMMAR:** SP-3 IS this program's core (peacetime formation, two-sided
   drafting, the two new term families, expiry receipts, succession-
-  repudiation, the standalone NAP, renegotiation); plus THE OATH-HOLDER
+  repudiation, the standalone NAP, renegotiation); [see the bracket at :224 — RULED BY DELEGATION 2026-10-16, OD-FC-5 on "two-sided drafting"] plus THE OATH-HOLDER
   IDENTITY (treaties/obligations record WHO swore — the heir who breaks the
   father's oath becomes tellable, and succession-repudiation gains its human
   face); mediation generalizes (any cross-pressured neighbour, the temple arm
@@ -558,7 +680,7 @@ the volume walks each with reads, receipts, counterforce, and a named
 historical archetype (the tax dispute that becomes a reformation; the
 pilgrimage route that becomes a war target; the bank broken by a believed
 rumor; the diaspora that funds the reconquest). Pairs with no designed
-coupling are DECLARED empty (silence is a decision, not an omission).
+coupling are DECLARED empty (silence is a decision, not an omission). [CORRECTED 2026-10-16 (coherence fold) — no pair is empty at direction grain (DESIGN_FP_COUPLINGS §3 grades all 42 directions LIVE/DARK/ADDS and none EMPTY); declared-empty lives at SUB-coupling grain inside COUPLINGS §4 (about 45 of them), and the registry enforces it only as absent (module, module) pairs.]
 
 ## §5 SEQUENCING + DISCIPLINE
 Behind the sim-proof path (WR waves → lighting → soaks → tuning), programs
@@ -571,7 +693,7 @@ registry row (pairId, direction, read, receiptField, counterforce, flags,
 owningVolume, owningWave, intendedDesk) in the SAME commit — the walker
 asserts it; the audit found the obligation lived only in the coupling
 volume, so its inclusion ratchet would have redded the waves it guards.
-The AUDIT STAGE is part of the build: no volume ships to Sol unaudited.
+The AUDIT STAGE is part of the build: no volume ships to Sol unaudited. [see the bracket at :9]
 Tuning debt is acknowledged: the band count grows into the hundreds (the
 audit's census: roughly 270 named bands plus ~70 envelope shapes across the
 seven volumes); band FAMILIES (spine-shared, SP-6's table) keep the owner's
@@ -582,7 +704,7 @@ priced cost of the ambition.
 ## §6 PROGRESS
 
 > **LANE H — THE HERALD CAUSAL-VOICE SURFACE (SOL_QUEUE item 24): the DISPLAY
-> SLICE IS BUILT AND DARK, 2026-08-03.** Five commits on
+> SLICE IS BUILT AND DARK, 2026-08-03.** [RULED BY DELEGATION 2026-10-16 (OD-FC-16 — light SP-6's causal headline (with CW-1's braid) in the belief presets; chair recommendation YES; a disclosed display shift. At 00b648c9d `heraldCausalVoiceEnabled` is read only at heraldCausalVoice.js:119 and set by no preset or store path.] Five commits on
 > `claude/composite-r4` in the minifold worktree, nothing pushed, everything
 > behind `simulationRules.heraldCausalVoiceEnabled` — dark renders the surface
 > that shipped, byte for byte.
@@ -793,7 +915,7 @@ priced cost of the ambition.
 > **LANE P — THE DOSSIER-NATIVE STATE-PROSE PROJECTION: THE READER IS BUILT AND
 > DARK, 2026-08-03.** Five commits on `claude/composite-r4` in the minifold
 > worktree, nothing pushed. Dark by construction rather than by flag: no
-> component imports any of it, so the page is byte-identical.
+> component imports any of it, so the page is byte-identical. [see the bracket at :911 — superseded: the reader is wired]
 >
 > | Commit | What landed |
 > |---|---|
@@ -827,10 +949,10 @@ priced cost of the ambition.
 >    and general have their corpus projected and their leaves in place; their
 >    state→pool-key maps are not written. The economy desk is the reference
 >    shape and the pin pattern (every emittable key asserted against the shipped
->    corpus) transfers verbatim.
+>    corpus) transfers verbatim. [see the bracket at :911]
 > 2. **NO COMPONENT CONSUMES THE READER.** The panels, the flag, and the
 >    section composition are a wave of their own. The reader's contract is
->    settled and pinned, so that wave is wiring rather than design.
+>    settled and pinned, so that wave is wiring rather than design. [SUPERSEDED BY EVENT 2026-10-16 (coherence fold) — stale: the state-prose reader is WIRED and live. At 00b648c9d src/domain/display/stateProse/ holds the power, defense, general, stressors and warFaith desks with their candidate maps, and twelve src/components files import it — EconomicsTab.jsx, WarFaithDesk.jsx and ProseBlock.jsx among them. Items 1 and 2 are history.]
 > 3. **THE JOIN DERIVATION IS NOT WRITTEN.** `causalDossierProse` renders only
 >    joins it is handed; deriving them from `causes[]` / `sourceEventId` / CW-0's
 >    `receiptField` map is the caller's job and is unbuilt. This is deliberate —
@@ -987,7 +1109,7 @@ priced cost of the ambition.
 > | What landed | Where |
 > |---|---|
 > | **THE BANDED-STOCK FAMILY (SP-5b).** One half-life ladder — `a_season` 13 · `a_year` 52 · `a_few_years` 156 · `a_decade` 520 · `a_generation` 1040 — DERIVED from `INTERVAL_WEEKS` rather than hand-keyed, and every rung a duration the tree already keeps memory on. One decay shape. One crossing-receipt grammar that refuses any non-integer number, so L5 is structural rather than hoped for. | `src/domain/worldPulse/bandedStock.js` (100 effective) |
-> | **THE TWO BAND FAMILIES (SP-6a/6b).** Significance `routine / notable / major` with the section-cap and significance-floor shapes; the severity ladder `glancing / telling / grave / ruinous`. | `src/domain/worldPulse/bandFamilies.js` (41 effective) |
+> | **THE TWO BAND FAMILIES (SP-6a/6b).** Significance `routine / notable / major` with the section-cap and significance-floor shapes; the severity ladder `glancing / telling / grave / ruinous`. [RULED 2026-10-16 (coherence fold §5) — two rungs here are homonyms: "telling" (see the bracket at :380) and "grave", which is also rumorNetwork.js:245's rumor magnitude (faint/notable/serious/grave); both rungs stand, and prose says "a grave rumor" never for severity.] | `src/domain/worldPulse/bandFamilies.js` (41 effective) |
 > | **THE RECONCILIATION WALKER + THE MINT SCANS.** Bands-line ↔ tuning-table totality both directions with a shrink-only backlog; the SP no-term-literal scan; J-FP-2's pressure-ladder mint census. | `tests/lint/{spBandFamilies,spTermLiteral,pressureLadderMints}.walker.test.js` |
 > | The progress record. | `<this row>` |
 >
@@ -1082,7 +1204,7 @@ priced cost of the ambition.
 >    the family the resulting band WORDS.
 > 2. **THE SIGNIFICANCE MIGRATION IS SP-E's.** `heraldFeed.js:95` still mixes a banded
 >    `significance === 'major'` with a raw `severity >= 0.72` float, and every consumer
->    still spells the classes inline. This wave supplies the thing they migrate ONTO
+>    still spells the classes inline. [CORRECTED 2026-10-16 (coherence fold) — the address moved to heraldFeed.js:120 at 00b648c9d; the premise still holds — SP-E's named migration is still owed.] This wave supplies the thing they migrate ONTO
 >    and edits no existing source; SP-E lands the census that names the debt, and each
 >    surface migrates in its own small wave.
 > 3. **THE FREQUENCY-CADENCE MAPPING IS NOT EXPORTED.** SP-E's floor walker derives a

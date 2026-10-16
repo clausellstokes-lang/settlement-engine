@@ -17,7 +17,8 @@
 **Status: IMPLEMENTATION ARCHITECTURE, DARK — ITS EIGHTEEN RULING ROWS ARE
 RULED (the owner, 2026-10-16 15:07 EDT, ODQ §934.90 addendum 1: "Go with the chair's
 recommendations on OD-EC-1 through OD-EC-18 … Still nothing dispatches before
-the release is pushed and deployed."). THE DISPATCH GATE: no EC lane, car or
+the release is pushed and deployed."). [CORRECTED 2026-10-16 (coherence fold) — THE STATUS OF RECORD IS docs/DESIGN_FP_COHERENCE_FOLD.md §2; this header is history. In one line: LIT: none · BUILT DARK: none of EC's own — of the absorbed TR waves, TR-1 (d7ea69a4b, writer unmounted), TR-2 (c8c21a9f3, no pulse mount), TR-3 (0fd6b9209, wrong-market evidence dropped) and TR-9c's contract (c7933e845, no collectors) · UNBUILT: EC-0…EC-18 entire (the ten EC flag names and `marketConditions` return zero src hits at 00b648c9d) and TR-4…TR-8; the dispatch gate is the release PUSHED AND DEPLOYED (OD-EC-4)] THE DISPATCH GATE: no EC lane, car or
+[ADDED 2026-10-16 (coherence fold §3.4, requirement 24 — the owner's HEARING WEEK) — ENGAGEMENT KINDS this program registers in the wave that builds each: `caravan_seized` on the open road (EC-18, shared with WY-6); EC's market conditions are NOT engagements (a condition is a state, not an act upon another settlement) — EC-17's partner/conquest arms reach a hearing only through GRAMMAR's and the war volume's kinds. Once `hearingWeekEnabled` is lit no kind resolves in the tick it arrives at a one-week advance: it mints its pending verdict and the DM may leave it, tilt it or give a verdict (never a "decree" — the Decree Registry's word); month/season/year advances run the engine default; the hearing never parks the advance cursor (skeptic S5). Each kind's pending card is its FIRST-VISIBLE sign.] [ADDED 2026-10-16 after skeptic S2-13/S2-15 — this program also registers `factor_parlay` (EC-15 / TR-8: the factor's one-week dwell at the host; `agreed · refused · deferred`). RULED BY DELEGATION 2026-10-16 (OD-FC-35): an ally's SUPPLIES ride WY-8a's F9 `supplyCargo`, the only army-endpoint consignment; EC mints none (EC-18 fences contracts, EC-12 is settlement-to-settlement); EC-4 stays the OWN army's kit. RULED BY DELEGATION 2026-10-16 (OD-FC-37): the court's NEED is EC-17's derived read, never persisted; SEAM-2 (the compiled fold §13) reads it by name; THE STANDING owns the REGARD.]
 slice dispatches until the UI + prose release is PUSHED AND DEPLOYED — the
 owner's word, not a sequencing judgment. AMENDED 2026-10-16 15:21 EDT by the owner's
 word on EXPECTATION — "belief should also play a role in this as well as if there is an impending war that is believed... for example, the prices of weapons would still go up and the capacity growing towards its capacity following the market / that should complicate or foil what you've already built rather than replace" — as law E13 and wave EC-16 (ODQ §934.90 addendum 2):
@@ -84,7 +85,7 @@ refute its brief (OPERATING_STANDARD rule 5).
    differently to one rumour, and INFO's plants can start a run on arms.
 5. The program is a FAMILY, not a lane: twelve EC waves plus the five absorbed
    TR waves, each dark, each with lit-preconditions, each honouring the SPINE's
-   twelve requirements, priced on the order of the TR program and above it. It
+   twelve requirements, priced on the order of the TR program and above it. [CORRECTED 2026-10-16 (coherence fold) — the volume charters FOURTEEN EC waves (EC-0…EC-10 + EC-16/17/18) plus the five absorbed TR waves (EC-11…15); §16's "eleven EC waves" is the same count in an older reading (findings TR-EC §5B-41)] It
    cannot start before the release is pushed and deployed (§13 OD-EC-4, the
    owner's word).
 
@@ -146,7 +147,7 @@ banded; no float reaches a surface; the AI is a bucketing clerk.
 
 - **E1 — THE CONDITION LAW (Law One and T1 made economic):** the canonical
   market reading is a CONDITION BAND, never a price. `CONDITION_BANDS = {glut,
-  soft, fair, dear, desperate}` — FP-TRADE T1's own five words, adopted here
+  soft, fair, dear, desperate}` [RULED 2026-10-16 (coherence fold §5) — the identifier is MARKET_CONDITION_BANDS; armyStrength.js:133 owns CONDITION_BANDS (and WY-8b reuses that ladder, minting none). Prose that says "the condition" stands; every token in this volume's unlanded code reads MARKET_CONDITION_BANDS] — FP-TRADE T1's own five words, adopted here
   for the TRUTH side exactly as the design law wrote them. A condition is
   derived from physical evidence (stocks, arrivals, starvation — M6a when lit)
   and structural evidence (chain status, dependencies, conditions, stressors,
@@ -158,7 +159,7 @@ banded; no float reaches a surface; the AI is a bucketing clerk.
   plentiful}` as SP-B minted it (built, lit in three presets; different words
   BY DESIGN so a token scan can see a merge). No expression anywhere combines a
   condition band and a believed band; the two are shown side by side ("fair
-  here; dear in Aldenmoor, they say"). Every belief-side module keeps the K3
+  here; dear in Aldenmoor, they say"). [CORRECTED 2026-10-16 (coherence fold §5 / J-EC-17) — a BELIEVED band renders in SP-B's own words — "fair here; pinched in Aldenmoor, they say" — never in a condition word: `dear` is a truth-ladder rung and putting it on a belief is the very homonym J-EC-17 exists to prevent (findings TR-EC §5B-43). Every "they say" surface in this volume reads SP-B's ladder {scant, pinched, sufficient, plentiful}] Every belief-side module keeps the K3
   structural pin set.
 - **E3 — NO SECOND SUBSTRATE (the brief's §4 refused):** EC mints NO new 0–100
   index. Continuous quantities stay where they live (integer stocks, the 0..1
@@ -169,7 +170,7 @@ banded; no float reaches a surface; the AI is a bucketing clerk.
   (`goodsCatalog.js`, 27 entries, exact-alias subsumption); chains are
   `SUPPLY_CHAIN_NEEDS` rows; stocks are M6a integer units; food is grain-months
   at the granary and never a commodity unit (the T7 double-count law holds: EC
-  adds NO second food arm; TR-4's grain road is the only lawful physical arm).
+  adds NO second food arm; TR-4's grain road is the only lawful physical arm). [CORRECTED 2026-10-16 (coherence fold) — except grain under EC-12/TR-4, whose integer units ride the M6a balance (§6 EC-12); the fence is T7's one-arm walker, not the denomination (findings TR-EC §5B-32)]
   The three overlapping chain-dependency encodings (data `upstreamChains`, the
   hard-coded `CHAIN_DEPS`, `UPSTREAM_IMPORT_LABELS`) are read through ONE
   derived graph module (EC-5) with a drift walker; folding them into one data
@@ -177,7 +178,7 @@ banded; no float reaches a surface; the AI is a bucketing clerk.
 - **E5 — FINITE SUPPLY, CLAIMED IN ORDER (the brief's §6–§8, lawful shape):**
   a producer's stock is one finite conserved quantity (M6a); it is CLAIMED by
   a closed ladder of claimant classes {household, crown, road, reserve} in a
-  posture-ordered sequence (EC-3), never served first-come by codepoint. The
+  posture-ordered sequence (EC-3), never served first-come by codepoint. [CLARIFIED 2026-10-16 (coherence fold) — EC-3 as corrected orders THREE claimant classes {household, crown, road}; the reserve is a PRE-DEDUCTION, not a rung (skeptic #10). The law's four-member set reads as three classes plus the pre-deduction] The
   five-term integer conservation (`assertGoodsConservation`) extends to every
   new mover; a mover that cannot show its row in the balance does not land.
 - **E6 — PROPAGATION IS BAND ARITHMETIC ALONG THE DATA GRAPH (the brief's §14,
@@ -229,7 +230,7 @@ banded; no float reaches a surface; the AI is a bucketing clerk.
   No expression reads a belief record inside the condition derivation; the
   acts live in the physics waves' seams. A belief that proves wrong is not
   undone — the world holds what it bought on the rumour (the FOIL), and the
-  receipt says so. Belief complicates and foils the physics; it never
+  receipt says so. [CLARIFIED 2026-10-16 (coherence fold §3.2.11) — for the CROWN's precautionary draw nothing is held: crown draws are `consumed` in the M6a balance (E5; §5 'procurement draws — rows in the M6a balance'), so the world 'holds what it bought' only through the house's position, the reserve notch and the speculative mill — an armoury holding is a `held` partition on `commodityStocks` and waits on RULED BY DELEGATION 2026-10-16, OD-FC-11] Belief complicates and foils the physics; it never
   replaces a band (T8 held in substance: the band is from stocks; the slot
   records a believed rung as a CAUSE LABEL, never as an operand).
 - **E14 — A PERSISTENT CONDITION IS A MOTIVE (the owner, 2026-10-16: "persistent price heuristics should also be included in what moves courts and settlements in most if not all aspects of foreign trade... take the mosgate for example, if the price of iron remains low and it impacts their needs and if their capacity is low in comparison, that pushes them to attempt to expand that capacity to meet critical needs or seek out new trade partners, allies, or to go on conquest for example."):** a
@@ -261,7 +262,7 @@ banded; no float reaches a surface; the AI is a bucketing clerk.
   band. The weight is PARTIAL and authored: path cost, danger, stance and
   appetite keep their terms; the condition is one more. Law One holds: the
   actor is the origin's merchant faction (faction grain), never a caravan
-  with a mind.
+  with a mind. [see the bracket at :2103]
 - **E12 — THE CLERK READS BANDS:** the AI grounding for economy — the client
   payload AND the edge function's prompt summary — carries condition bands,
   pressures and believed bands; never a stock integer, never an income
@@ -295,7 +296,7 @@ banded; no float reaches a surface; the AI is a bucketing clerk.
 - **The frozen-kernel class:** `pulseKernel.js` measures 1581 effective and is
   FROZEN at 1581 (`scripts/.size-baseline.json`, R-BLD-10: the stage order and
   stream identity may not move); `institutionLifecycle.js` is 800/800;
-  `EconomicsTab.jsx` 599/600; `peaceTerms.js` 799/800. EC adds ZERO lines to
+  `EconomicsTab.jsx` 599/600; `peaceTerms.js` 799/800. [CORRECTED 2026-10-16 (coherence fold §3.3.8) — `generosityKernel.js` is also AT its ceiling (≈800/800 effective, findings TR-EC §6 row 7). Every size in this volume cites `scripts/.size-baseline.json` and eslint's EFFECTIVE count, never a raw `wc`; a host file AT ceiling (institutionLifecycle, generosityKernel, peaceTerms, EconomicsTab) takes ZERO lines from any wave without a leaf-first decomposition car] EC adds ZERO lines to
   the kernel: every mount is a net-zero seam inside an existing stage host
   with headroom (§6 EC-1's mount rule). Effective lines are eslint's
   `max-lines(skipBlankLines, skipComments)` count — the census's raw counts
@@ -413,8 +414,8 @@ the tip on 2026-10-16 (43 hold, 11 corrected in place and marked "re-verified
 |---|---|---|---|
 | S41 | War is CAUSAL and LOCAL: besieged source severed; hostile gate intercepts (or smuggle roll); route danger reroutes + banditry; granary import share cut (siege/occupation stressor ≥0.4); deployment drain 12%; sack/levy conserved | `supplyKernel.js:254-257` ✓; `embattlement.js:340-430`; `foodStockpile.js:207-218,:322-335,:490-537` | VERIFIED — "war = universal price modifier" is FALSE in the tree |
 | S42 | Severance predicates read WAR FRONTS and NAVAL BLOCKADE ONLY — an embargo or hostile relationship does NOT cut caravans unless it is a war front; `NO_TRADE_RELATIONSHIPS={'hostile'}` acts only at GENERATION (`tradeLinks.js:26`) | `supplyKernel.js:254-257` ✓ | VERIFIED — EC-6 is NEW WORK |
-| S43 | Five embargo paths, ALL MODIFIER (conscience multiplier in tradeWar; `trade_embargo` condition absent from pressureModel's TRADE_ARCHETYPES; strategy lever; supply-web strangulation score; an `embargo` status word nothing assigns); sanctions = one condition; **TARIFFS DO NOT EXIST** (a secrecy "trade tax" multiplier has zero consumers). Correction at re-verification: the `embargo` status word IS assigned (`relationshipRulesAdversarial.js:629`) — nothing READS it | kit `parts/D-embargo-routes-merchants.md`; `relationshipRulesAdversarial.js:629` | VERIFIED (re-verified 10-16) |
-| S44 | Treaties move GRAIN ONLY (tribute, reparations, restitution, resource_share + two faith/settlement rows; reserve floor 1.5 months, 60% captured); trade-rights terms (exclusivity, market_access, toll_exemption) are PLACEHOLDERS with no drafter or executor; no commodity code reads the treaty ledger | `treatyTransfer.js:56-82`; kit `parts/D-occupation-treaty.md` | VERIFIED — EC-6 lands the executors (absorbing TR-5's residue) |
+| S43 | Five embargo paths, ALL MODIFIER (conscience multiplier in tradeWar; `trade_embargo` condition absent from pressureModel's TRADE_ARCHETYPES; strategy lever; supply-web strangulation score; an `embargo` status word nothing assigns); sanctions = one condition; **TARIFFS DO NOT EXIST** (a secrecy "trade tax" multiplier has zero consumers) [see the bracket at :1320]. Correction at re-verification: the `embargo` status word IS assigned (`relationshipRulesAdversarial.js:629`) — nothing READS it | kit `parts/D-embargo-routes-merchants.md`; `relationshipRulesAdversarial.js:629` | VERIFIED (re-verified 10-16) |
+| S44 | Treaties move GRAIN ONLY (tribute, reparations, restitution, resource_share + two faith/settlement rows; reserve floor 1.5 months, 60% captured); trade-rights terms (exclusivity, market_access, toll_exemption) are PLACEHOLDERS with no drafter or executor; no commodity code reads the treaty ledger | `treatyTransfer.js:56-82`; kit `parts/D-occupation-treaty.md` | VERIFIED — EC-6 lands the executors (absorbing TR-5's residue) [see the bracket at :1327] |
 | S45 | T2 "NO COIN" was REVERSED by the owner (ODQ §731.1, Q-W8): a conserved treasury exists (W-COIN 1a, with W-COIN-2 and -3 also landed), lit in NO preset; `treatyTransfer.js:11-17` and `generosityEV.js:116-123` headers are STALE | `subsystemRowsCoin.js:76`; `treasury.js:10-11,:33-37` | VERIFIED — binds E9 (OD-EC-6) |
 | S46 | Occupation: vassal must-go tribute (causal); occupation counts as blockade for food; `sovereigntyMarketStage` rewrites holders, moves no goods (dark) | `supplyKernel.js:666-668`; `foodStockpile.js:99` | VERIFIED |
 | S47 | Military: the kit basket is READ (`supplyCompleteness` → deployed quality), NEVER DEBITED; armies consume FOOD only (drain, levy, sack); `rg -i procure src` → one service desc | `warDeployment.js:482-485`; `supplyQuality.js` | VERIFIED — EC-4 is NEW WORK |
@@ -547,7 +548,7 @@ DEFAULT_SIMULATION_RULES (virtual); every gate read strict `=== true`;
 dark-never-permissive; at least ONE by-name read per flag; the flag joins
 `ENGINE_GATED_VIRTUAL_RULE_KEYS` in the SAME commit as its first real gate read,
 with the walker asserting that one-key delta and a certification row or
-DECLARED-PENDING entry in the same commit; the four-fence dormancy set per flag
+DECLARED-PENDING entry in the same commit; [STRUCK 2026-10-16 (coherence fold §3.2.14) — the declared-pending certification door is struck: `VIRTUAL_PENDING_RULE_KEYS = Object.freeze([])`, shrink-only (subsystemRowsVirtual.js:889-897; the ledger copy of TR S38). Every EC flag lands its AUTHORED certification row in the same commit as its first gate read; EC-10 converts nothing] the four-fence dormancy set per flag
 (own-footprint golden · absent-vs-false differential · call-path spy ·
 gate-polarity census) plus the lit-mutant control. Lit only at the
 owner-signed soak, in build order. A flag lit out of order is an invalid config
@@ -568,13 +569,13 @@ flag order).
 | EC-9 COUNTERFACTUAL | — (read-only lazy leaf; no persistence) | — | EC-1 (it diffs condition records) | YES |
 | EC-17 THE COURT'S REMEDY | `marketStatecraftEnabled` | NEW (the owner's 2026-10-16 amendment) | `requiresLandedWork('EC-2')` + EC-1; the build arm EC-8; the partner arm `pactFormationEnabled` (FP_LIT_ALIVE — lit in four presets) + SP-B's scarcity family; the ally arm the generosity/overture lane (`constructiveFlowsEnabled`, WAVES); the conquest arm `warLayerEnabled` + `settlementStrategyEnabled` (the chooser) — each arm empty when its decider is dark, declared | YES (the need is structural; every arm except the physics-fed ones runs aspatially) |
 | EC-18 THE OPEN ROAD | `openRoadEnabled` | NEW (the owner's 2026-10-16 amendment) | `requiresLandedWork('EC-2')` + EC-1 + `commodityFlowEnabled` ∧ spatial canon (caravans exist nowhere else) + SP-B's scarcity family for the believed pull (dark belief ⇒ push-only on truth, declared); EC-6 for the stance gate when lit (dark ⇒ war/blockade only); TR-7 ventures are the HOUSE's sibling of this (declared, not duplicated) | NO — declared: no caravans aspatially; the cascade is untouched |
-| EC-16 EXPECTATION | `marketExpectationEnabled` | NEW (the owner's 2026-10-16 amendment) | `requiresLandedWork('EC-2')` + EC-1 + the belief map's own activation gate (`beliefMap.js:196`, orthogonal to `settlementStrategyEnabled` — verify its key at build); the crown arm EC-4; the reserve arm EC-3; the founding arm EC-8; the house arm EC-11 (dark ⇒ that arm empty, declared); the merchant arm is TR-3's own | YES (the posture arm + the founding arm) |
+| EC-16 EXPECTATION | `marketExpectationEnabled` | NEW (the owner's 2026-10-16 amendment) | `requiresLandedWork('EC-2')` + EC-1 + the belief map's own activation gate (`beliefMap.js:196`, orthogonal to `settlementStrategyEnabled` — verify its key at build); the crown arm EC-4; the reserve arm EC-3; the founding arm EC-8; the house arm EC-11 (dark ⇒ that arm empty, declared); the merchant arm is TR-3's own | YES (the posture arm + the founding arm) [CORRECTED 2026-10-16 (coherence fold) — `beliefsActive` is `spatialCanonVersion > 0 ∧ infoMode ≠ 'omniscient'` (beliefMap.js:196-209) with NO rule key, and in an aspatial world `belief()` returns `{source:'truth'}` (beliefMap.js:361-366): the founding arm is EMPTY aspatially (or would read truth through that fallback, which the observer-only pin must forbid). ONLY the posture arm is aspatial] |
 | EC-10 CONVERGENCE INSTRUMENTATION | — (measurement; absorbs TR-9) | — | — | — |
-| EC-11 THE HOUSE (= TR-2) | `merchantHousesEnabled` | existing (the ONE TR flag with a gate read: `houseLedger.js:173`) | TR-1 (as TR §2) | per TR |
+| EC-11 THE HOUSE (= TR-2) | `merchantHousesEnabled` | existing (the ONE TR flag with a gate read: `houseLedger.js:173`) [CORRECTED 2026-10-16 (coherence fold) — THREE TR flags carry gate reads and sit in ENGINE_GATED_VIRTUAL_RULE_KEYS: `casusCommerciiEnabled` (commercialReasons.js:133 + tradeWar.js:335), `believedMarketsEnabled` (dispatchDestination.js:93), `merchantHousesEnabled` (houseLedger.js:173). Skeptic #55's cure is itself refuted] | TR-1 (as TR §2) | per TR |
 | EC-12 THE GRAIN ROAD (= TR-4) | `foodCaravansEnabled` | NAMED ONLY (`tradeConvergenceContract.js`; no gate read) | `commodityFlowEnabled` + `demographicsEnabled`; collapse arm `routeLifecycleEnabled` (dark ⇒ honest permanent zero) | per TR |
 | EC-13 THE CORNER (= TR-6) | `corneringEnabled` | named only | TR-2 + TR-3 + TR-4 + `commonsVoiceEnabled` + **EC-1** (the forced band is a `corner` PRESSURE on the condition, never a second band) | per TR |
 | EC-14 VENTURES (= TR-7) | `venturesEnabled` | named only | TR-2 + TR-3 + `commodityFlowEnabled` | per TR |
-| EC-15 THE FACTOR (= TR-8) | `factorErrandsEnabled` | named only | SP-1 + TR-5 + TR-7 + WR-7b | per TR |
+| EC-15 THE FACTOR (= TR-8) | `factorErrandsEnabled` | named only | SP-1 + TR-5 + TR-7 + WR-7b [CORRECTED 2026-10-16 (coherence fold) — TR-5's flag `tradePactsEnabled` has no gate read and this volume builds none (§4 absorption ruling), so EC-15 can never light validly until RULED BY DELEGATION 2026-10-16, OD-FC-2 rules TR-5's trade half; slot: OD-FC-2] | per TR |
 
 **THE ABSORPTION RULING (J-EC-1, vetoable; OD-EC-1 confirms):** the five TR
 flags keep their names and their TR §4 wave texts as the normative detail;
@@ -584,7 +585,7 @@ re-built: EC-2 MOUNTS what exists. TR-5's pact lane is GRAMMAR's (the PACT-COMPL
 batch 7 landed INSIDE the pact modules — `pactFormation`, `pactRenewal`,
 `pactAmendment`, `pactTriggers`; no module is named "compliance" and
 `tradePactsEnabled` has no gate read); EC-6 lands only the trade-rights SEAM
-executor over the three catalog rows that already exist.
+executor over the three catalog rows that already exist. [see the bracket at :1327]
 TR-9 is EC-10. `syndicateHousesEnabled` stays RESERVED exactly as the TR
 chair amendment left it.
 
@@ -613,9 +614,9 @@ observation the next tick cannot rebuild, or a clock.
 spatialLedgers.marketConditions      — EC-1, writer marketConditionKernel.js
   { [settlementId]: { [goodId]: {
       band,                 // CONDITION_BANDS rung (E1) — ONE band per record (the household's availability)
-      sinceTick,            // the tick the band was entered — the ONE dwell clock (EC-8 derives its streaks from it)
+      sinceTick,            // the tick the band was entered — the ONE dwell clock (EC-8 derives its streaks from it) [ADDED 2026-10-16 (coherence fold) — a `dear`+ STREAK (EC-8's build, EC-17's need) cannot come from a band-entered tick: dear→desperate→dear resets `sinceTick` at each crossing, so the streak needs a SIDE-entered tick — a shape question under OD-EC-9's sub-key ruling, the first EC-1 lane's measurement (findings TR-EC §5A-14)]
       pressures: [          // ≤ 6, strongest first, codepoint tie-break; the WHY
-        { kind, magnitude,  // kind ∈ PRESSURE_KINDS (closed, 27 — §6 EC-1); magnitude ∈ {slight, marked, severe}
+        { kind, magnitude,  // kind ∈ PRESSURE_KINDS (closed, 27 — §6 EC-1) [CORRECTED 2026-10-16 (coherence fold) — the list at §6 EC-1 counts 29 ("CLOSED at 29"), and OD-EC-15/OD-EC-17 RULED two more kinds (`labor_short`, `transport_short`) and a reserved `credit_tight` slot that the closed list never received; every count in this volume (27 / 29 / 32) DERIVES from the live `PRESSURE_KINDS` at build, and the volume amendment admitting the three ruled kinds lands with EC-1 slice 2]; magnitude ∈ {slight, marked, severe}
           atTick,           // the tick the pressure was last observed (the freshness rule, §5 path f)
           slots }           // { cause?, settlementId?, pairKey?, chainId?, resourceKey?, armyId?, class?, demanded?, available? } — ids and rung words, never prose
       ],
@@ -628,7 +629,7 @@ spatialLedgers.marketConditions      — EC-1, writer marketConditionKernel.js
 
 spatialLedgers.allocation            — EC-3, writer allocationLedger.js
   { [settlementId]: { [goodId]: {
-      reserve: { band, since },   // {none, tithe, prudent, hoard} + the tick the notch was set — THE path-dependent
+      reserve: { band, since },   // {none, tithe, prudent, hoard} [RULED 2026-10-16 (coherence fold §5) — the rung is renamed `tenth` — `none · tenth · prudent · hoard`; `tithe` is W-COIN's `tithe_share` and the one tithe of §3.1.5] + the tick the notch was set — THE path-dependent
                                   // notch clock (a season of sustained condition moves it); not re-derivable
       starveDwell,                // integer ticks below zero with no source (0 drops) — the honest STARVE_AFTER_WEEKS
       lastDraws                   // { household?, crown?, road? } integer units drawn LAST tick (drop-when-zero) —
@@ -650,7 +651,7 @@ NOT new state (rulings):
   believed scarcity  — SP-B's beliefMap family (E2); EC writes nothing belief-side
   procurement draws  — rows in the M6a balance (E5), not a ledger
   the chain GRAPH    — EC-5, derived from the three encodings at module load, NEVER stored
-  history            — the crossing NEWS (newsLog, pacing-registered) + pulseHistory; no per-good series (S53; OD-EC-9)
+  history            — the crossing NEWS (newsLog, pacing-registered) + pulseHistory; no per-good series (S53; OD-EC-9) [CORRECTED 2026-10-16 (coherence fold) — there is no `newsLog` identifier in src: pulse news lands in the store-side `wizardNews` feed (campaignWorldPulseDeferred.js:1244-1246), `MAX_ENTRIES = 240` WORLD-WIDE (wizardNews.js:21), and `pulseHistory` keeps 80 (worldState.js:16,:798). Neither is per-observer or multi-year; every "newsLog" in this volume means those two stores]
   houses/ventures/commercialReasons — TR §3 verbatim
 ```
 
@@ -692,6 +693,7 @@ Mutants · New leaves + files touched (effective-line counts are the census
 seats' reads; re-measure at build).
 
 ### EC-0 — THE CURES (no flag; the only pre-lighting changes, each DECLARED) — buildable today
+[ADDED 2026-10-16 (coherence fold, req 16/17) — FIRST-VISIBLE: the reworded crier clause ("of late", car 2) on the first render after landing; cars 1, 3, 4, 5 none — instrumentation · TIER: the crier line renders only where the M6a band exists (spatial canon + `commodityFlowEnabled`: `realistic_regional`/`full_simulation`, absent from the birth door, S28); headers, walker and pins are tier-free · dispatch: after the release is PUSHED AND DEPLOYED (OD-EC-4) · DEGRADED ARM: none — the cures are tier-free]
 *Historical archetype: the assize of bread — before the market is regulated, the
 weights are checked.*
 - **Scope (five cures, five cars, one commit each):**
@@ -736,6 +738,7 @@ weights are checked.*
   tip (the only EC car that can touch a release file).
 
 ### EC-1 — THE CONDITION (`marketConditionEnabled`) — buildable today
+[ADDED 2026-10-16 (coherence fold, req 16/17) — FIRST-VISIBLE: a band word on the Economy tab and a `market_condition_crossed` receipt the tick the evidence moves (one rung per tick — a one-month advance of four ticks can carry a good from `fair` to `desperate`, the latch included); no slow verdict here · TIER: aspatial-safe (the structural arm); the physical arm needs spatial canon + `commodityFlowEnabled` · dispatch: after the release is PUSHED AND DEPLOYED (OD-EC-4) · DEGRADED ARM: the structural arm alone — bands from chain status, live conditions, stressors and the live `deficitPct`; no warehouse reading]
 *Historical archetype: the market cross and the town crier — the condition of
 every good was public knowledge, and the crier said why.*
 - **Scope:** the canonical per-(settlement, good) CONDITION record (E1) with
@@ -780,7 +783,7 @@ every good was public knowledge, and the crier said why.*
   `reserve_held`). **Arm rule:** where both arms speak for one good the
   PHYSICAL arm sets the band and the structural arm contributes pressures
   only (one quantity, one denomination — E4); the record names its `arm`.
-  **Pressures:** `PRESSURE_KINDS` (CLOSED at 29 — the 28th, `expectation`,
+  **Pressures:** `PRESSURE_KINDS` (CLOSED at 29 [see the bracket at :618] — the 28th, `expectation`,
   is the 2026-10-16 owner amendment E13; the 29th, `season_draw`, is §18's
   refinement 3; a 30th is a volume amendment, never a lane's mint): `source_severed · gate_hostile ·
   route_danger · inflow_cut · starving · relief_inbound · input_short ·
@@ -817,8 +820,8 @@ every good was public knowledge, and the crier said why.*
   fair→sufficient, dear→pinched, desperate→scant) — the Seam Three
   "whitelisted thin composer" idiom, enumerated by name in E2's token scan as
   the ONLY module that may name both ladders; truth still reaches belief ONLY
-  as a REPORT through the adoption bar (no K3/T8 breach); dark ⇒ today's
-  generation-frozen truth, byte-identical (S25's cure, declared).
+  as a REPORT through the adoption bar (no K3/T8 breach); dark ⇒ today's [RE-RULED 2026-10-16 after skeptic S2-06 — EC-1's lit fork here (the condition into `scoreTradeDemand`'s operand) is GATED on EC-17's need read (fold §3.2.12: a gate, never an operand — one rule at both sites); until EC-17 lights the fork stays on today's belief-only path.]
+  generation-frozen truth, byte-identical (S25's cure, declared). [CORRECTED 2026-10-16 (coherence fold) — a SECOND scarcity truth read exists: `pactFormation.js:248` calls `scarcityGroundTruth` directly (also `beliefAxisSubjects.js:389`), bypassing `axisGroundTruth`. EC-1's lit fork must cover both reads, or the pact trigger's self-read stays generation-frozen while beliefs move to the condition (split-brain)]
 - **Casting:** none (no person acts; the condition is a reading).
 - **Receipts:** a band CROSSING mints `market_condition_crossed` — "Grain is
   dear in Mossgate: the Aldenmoor road is cut at the siege of Harrow, and the
@@ -845,7 +848,7 @@ every good was public knowledge, and the crier said why.*
   bands public; a FOREIGN settlement's band absent from the player payload —
   the believed picture renders instead; a covert pressure drops, the band
   survives); the regen pin
-  (regen → records rebuilt identical except `sinceTick`, receipted once).
+  (regen → records rebuilt identical except `sinceTick`, receipted once). [see the bracket at :866]
 - **Bands (tuning surface):** the structural ladder thresholds per evidence
   class; the pressure magnitude cuts; the crossing significance ladder;
   MAX_PRESSURES (6).
@@ -861,11 +864,11 @@ every good was public knowledge, and the crier said why.*
   house's stock interests reading conditions (EC-13 seam).
 - **Herald contract:** the crossing kind; the Why panel's sentences (EC-2);
   the tab's Market Prices line becomes a projection of this record.
-- **Lifecycle line:** §5 (rebuildable ledger; `sinceTick` lossy on regen).
+- **Lifecycle line:** §5 (rebuildable ledger; `sinceTick` lossy on regen). [CORRECTED 2026-10-16 (coherence fold) — `sinceTick` IS carried where the band is unchanged — NOT lossy, per the §5 lifecycle table and skeptic #22; this line, the regen pin's "except `sinceTick`" and §11a's "lossy `sinceTick`" are struck (the reader's pick, findings TR-EC §10.19 — PLAUSIBLE until the regen pin executes)]
 - **Dossier round-trip (crown):** open the town → Economy → every cried good
   shows its band word and, under EC-2, its two strongest pressures as a
   sentence; the neighbours' markets render as the town's BELIEVED picture
-  ("dear in Aldenmoor, they say"), and the DM's includeGroundTruth toggle
+  ("dear in Aldenmoor, they say") [see the bracket at :161], and the DM's includeGroundTruth toggle
   shows the foreign TRUTH beside the belief.
 - **Req 13 Alignment:** alignment-empty WITH REASON — a condition is a
   reading of stocks and roads; the moral weight lives in who caused the
@@ -910,7 +913,7 @@ every good was public knowledge, and the crier said why.*
   mount are calls FROM the EC kernel, never from the pulse kernel.
 - **Three slices (the skeptic's feasibility finding; "one commit" could not
   hold):** slice 1 — the derivation + ledger + kernel + dormancy fences; slice
-  2 — PRESSURE_KINDS with their 27 phrase rows, pool lines, routing rows and
+  2 — PRESSURE_KINDS with their 27 phrase rows [see the bracket at :618], pool lines, routing rows and
   coupling rows + the crossing kind; slice 3 — the `marketPrices.js`
   projection + the SP-B seam leaf.
 - **New leaves:** `src/domain/worldPulse/marketCondition.js` (the pure
@@ -925,9 +928,10 @@ every good was public knowledge, and the crier said why.*
   WHAT_PHRASES (+1 kind), `heraldRouting.js` (+1), `RECEIPT_POOLS_TRADE.md`
   (+1 pool), `couplingRegistryTrade.js` (+7 rows), `spatialUsage.js` (+1
   manifest row), `simulationRules.js` (+1 key, +1 manifest entry + declared-
-  pending row), the tuning register (+1 `draft` row).
+  pending row) [see the bracket at :550], the tuning register (+1 `draft` row).
 
 ### EC-2 — RECEIPTS MOUNTED (display joins + two existing flags) — buildable after EC-1
+[ADDED 2026-10-16 (coherence fold, req 16/17) — FIRST-VISIBLE: on render — the Why panel answers "why is grain dear?" from the record with no advance; TR-1's crossings within a month once mounted; TR-3's wrong-market arrivals on the route's own weeks · TIER: aspatial-safe (panel, clerk dossier, TR-1 mount); TR-3's forwarding needs spatial canon + belief infoMode (beliefMap.js:204-209) + `commodityFlowEnabled` · dispatch: after the release is PUSHED AND DEPLOYED (OD-EC-4) · DEGRADED ARM: the Why panel and TR-1's reasons; no wrong-market kind]
 *Historical archetype: the Venetian avvisi — the news-letters that told
 merchants WHY a price had moved, weeks before the price did.*
 - **Scope (four cars):**
@@ -936,7 +940,7 @@ merchants WHY a price had moved, weeks before the price did.*
      kernel lines), fed the seam reads it already declares; the volume DECLARES that 6 of 16 reasons can
      score until TR-5/TR-6/M7/TR-9 producers land (the 09-15 census finding),
      and the certification row states the 6 by name. The `market closed`
-     reason reads EC-6's stance when lit (else `hostile` as today).
+     reason reads EC-6's stance when lit (else `hostile` as today). [see the bracket at :1047]
   2. **TR-3's evidence kept** under `believedMarketsEnabled`:
      `advanceCommodityContinuity` forwards `wrongMarketArrivals` to the pulse
      result; `marketNews.js`'s already-written kind mints ("came for the
@@ -999,6 +1003,7 @@ merchants WHY a price had moved, weeks before the price did.*
   `supabase/functions/…/prompts.ts` (+8, gated; deploy is the owner's).
 
 ### EC-3 — THE LADDER (`allocationLadderEnabled`) — buildable after EC-1 and EC-2's landed mounts; spatial worlds only; NON-FOOD goods only (food is the granary's, T7; grain joins only under EC-12)
+[ADDED 2026-10-16 (coherence fold, req 16/17) — FIRST-VISIBLE: within a month — draw receipts, the `export_draw` crossing and dwell starvation (2 ticks; fragile 4: "single road, four weeks cut"); the reserve notch is seasonal (13 ticks) and NOT visible in a one-month advance · TIER: spatial canon + `commodityFlowEnabled` (stocks exist nowhere else) · dispatch: after the release is PUSHED AND DEPLOYED (OD-EC-4) · DEGRADED ARM: dark — declared in §4: the condition's structural pressures stand in]
 *Historical archetype: the Roman annona and the medieval forestaller laws — the
 city's goods were claimed in order, and the order was politics.*
 - **Scope:** M6a's origin stock serves CLAIMANT CLASSES in an ordered ladder
@@ -1040,7 +1045,7 @@ city's goods were claimed in order, and the order was politics.*
 - **Force/counterforce (same evidence):** the reserve that protects the
   household starves the road, and a starved road is a believed-dear broadcast
   (TR-3) that summons caravans AND a severance casus (TR-1 `supply_withheld`
-  — one of the six); the crown that eats first bleeds legitimacy while the
+  — one of the six); [CORRECTED 2026-10-16 (coherence fold) — no such TR-1 types exist: the taxonomy (commercialReasonTaxonomy.js:46-67) has `market_exclusion` and `toll_extortion` and NOTHING for withheld supply, and `toll_war` is a live key of supplyWebWarfare.js:211. Read `toll_war` → `toll_extortion` and `market_closed` → `market_exclusion`. `supply_withheld` has NO home and is not "one of the six": it is mapped to an existing pair or registered first as a TR-1 taxonomy amendment beside §18 R1's `false_alarm` pair — recorded with this bracket as its slot (the never-deferred law)] the crown that eats first bleeds legitimacy while the
   household wants tools (INTERIOR coupling, the TR-6 counterforce 4 idiom); a
   hoard that sits at `glut` for a season loses the reserve notch. No claimant
   can take below zero (conservation).
@@ -1077,7 +1082,7 @@ city's goods were claimed in order, and the order was politics.*
   (dark) as a tint; never writes either.
 - **Couplings:** EC-3 ⇐ EC-1 (the own band for the reserve clock), ⇐
   dispositionLedger, ⇐ EC-4 (crown draws), ⇐ TR-5 streams; EC-3 ⇒ EC-1
-  (pressures), ⇒ TR-1 (`supply_withheld` evidence), ⇒ INTERIOR (legitimacy
+  (pressures), ⇒ TR-1 (`supply_withheld` evidence) [see the bracket at :1047], ⇒ INTERIOR (legitimacy
   bleed via the existing writer).
 - **Endings wired:** feeds `ruin` (a house's route interest on a withheld
   road).
@@ -1092,7 +1097,7 @@ city's goods were claimed in order, and the order was politics.*
   priced by conscience (TR-6's moral pricing idiom), never forbidden (T6);
   the alignment read is the SPINE's exported `alignmentOf` (beliefMap.js /
   informationStatecraft.js per SPINE §1.13 — NOT the kernel-local closure at
-  `pulseKernel.js:2161`; verify the export at build).
+  `pulseKernel.js:2161`; verify the export at build). [RULED 2026-10-16 (coherence fold §3.3.5) — the alignment read is `settlementAlignment(item, worldState)` (settlementAlignment.js:44; master SPINE §1.13's sentence is the text); `alignmentOf` is the kit SPINE's stale spelling]
 - **Req 14 Edit-verb:** `SET_RESERVE` is a REALM VERB (`realmManifest.js` +
   `realmVerbExecution.js`, the REPUDIATE_TREATY pattern — NOT
   `operationRegistry`, which is a manifest with no action lane), approval-
@@ -1117,6 +1122,7 @@ city's goods were claimed in order, and the order was politics.*
   `pulseKernel.js` (+0 — frozen at 1581, R-BLD-10).
 
 ### EC-4 — PROCUREMENT (`procurementEnabled`) — buildable after EC-3 (+ warLayerEnabled for the deployment arm)
+[ADDED 2026-10-16 (coherence fold, req 16/17) — FIRST-VISIBLE: within a month of a deployment or readiness rise — `crown_draw` on arms ("the march took the last of Cnocby's arms"); the postwar glut reads by peace+6 · TIER: spatial canon + `commodityFlowEnabled`; host flag `warLayerEnabled` for the deployment arm · dispatch: after the release is PUSHED AND DEPLOYED (OD-EC-4) · DEGRADED ARM: dark — the kit is read and never emptied (today)]
 *Historical archetype: the Hundred Years' War purveyance — the crown's buyers
 emptied the counties before the army marched, and the counties remembered.*
 - **Scope:** the CROWN claimant draws the DRAWABLE kit `{arms, iron, leather}`
@@ -1150,7 +1156,7 @@ emptied the counties before the army marched, and the counties remembered.*
   founds a second smithy (EC-8), and bleeds the seat's legitimacy while the
   commons want tools (INTERIOR); the war that ends refills to glut and
   closes the second smithy (EC-8's contraction). No draw below zero; no draw
-  without a deployment or readiness rise.
+  without a deployment or readiness rise. [see the bracket at :1784]
 - **Belief posture:** truth side; the enemy's belief about our stores is
   INFO's (plants); EC-4 writes no belief.
 - **Casting:** the army's named commander (existing deployment reads) is the
@@ -1186,7 +1192,7 @@ emptied the counties before the army marched, and the counties remembered.*
   the army's own card shows kit completeness falling (existing surface).
 - **Req 13 Alignment:** ENGAGED — a lawful seat requisitions with receipt (a
   grievance against the seat is minted when the household starves for the
-  crown: TR-1's `supply_withheld` pointed inward); a malicious seat takes
+  crown: TR-1's `supply_withheld` pointed inward) [see the bracket at :1047]; a malicious seat takes
   without (the conscience arm, priced).
 - **Req 14 Edit-verb:** engine-only with reason — procurement follows the
   DM's war verbs (deploy, besiege, muster) which exist; a DM "requisition"
@@ -1203,6 +1209,7 @@ emptied the counties before the army marched, and the counties remembered.*
   (+1 `draft` row).
 
 ### EC-5 — PROPAGATION (`chainPropagationEnabled`) — buildable after EC-1 (+ EC-3 for the upstream-draw arm)
+[ADDED 2026-10-16 (coherence fold, req 16/17) — FIRST-VISIBLE: within a month — up to four hops, one per tick (grain → flour → provisions by t+2) · TIER: aspatial-safe (downstream, structural); the physical arm (link-target notches) needs spatial canon + `commodityFlowEnabled`; the upstream-draw arm needs EC-3 · dispatch: after the release is PUSHED AND DEPLOYED (OD-EC-4) · DEGRADED ARM: downstream band moves on structural records only]
 *Historical archetype: the 1315 famine — dear grain made dear flour, dear
 flour made idle bakers, idle bakers made dear fuel in the next town over.*
 - **Scope:** ONE derived chain graph and a band pass along it (E6).
@@ -1289,6 +1296,8 @@ flour made idle bakers, idle bakers made dear fuel in the next town over.*
   (+0), `simulationRules.js` (+1 key), `pulseKernel.js` (+0).
 
 ### EC-6 — STANCES (`tradeStancesEnabled`) — three slices; slice 1 buildable today (stance + condition pressures), slice 2 after EC-1 (caravan effects), slice 3 after the treasury's own flag (coin arm); absorbs TR-5's trade-rights residue
+[ADDED 2026-10-16 (coherence fold, req 16/17) — FIRST-VISIBLE: within a tick of the cause — the stance word on the pair card and a `stance_*` pressure on the buyer's record ("Harrow closed its gates to Mossgate's wool"); the severance evidence needs a season's dwell · TIER: slice 1 aspatial-safe (the buyer's stance pressures); slice 2 spatial canon + `commodityFlowEnabled` (caravan effects); slice 3 host flag `treasuryEnabled` (OD-EC-6) · dispatch: after the release is PUSHED AND DEPLOYED (OD-EC-4) · DEGRADED ARM: the buyer's `stance_*` pressure without caravan effects; dark treasury ⇒ the route cost alone]
+[CORRECTED 2026-10-16 (coherence fold) — "slice 1 buildable today" is refuted by §4's own row: slice 1 is `requiresLandedWork('EC-2')` + EC-1 (findings TR-EC §5B-42)]
 *Historical archetype: the Hanseatic Kontor — the league did not fight the
 city; it closed the Kontor, and the city's cloth rotted on the quay.*
 - **Scope:** ONE derived trade STANCE per directed pair (A→B: how A's goods
@@ -1309,14 +1318,14 @@ city; it closed the Kontor, and the city's cloth rotted on the quay.*
   seat tariff policy (`tariffBand ∈ {none, light, heavy}` — read from the
   dominant disposition channel: mercantile seats tax rivals' goods light,
   insular seats heavy, diplomatic/martial seats by treaty only) → `taxed`;
-  else `open`. **The three trade-rights terms ALREADY EXIST** in
+  else `open`. [RULED 2026-10-16 (coherence fold §3.1.4) — the HIDE trade toll (IN-0d `secrecyTradeFactor.js`, zero consumers) is EC-6's: a `HIDE` posture is a `restricted` STANCE on every pair into the hiding court — the derivation reads `secrecyTradeFactorOf` as ONE input, its bands {unhindered, curtailed, throttled, choked} mapping onto {open, taxed, restricted, closed}. One read, no new join, no machinery (fold §6: CUT-TO-SENTENCE); dark-identical, a lit-world shift only when EC-6 lights] [RULED BY DELEGATION 2026-10-16 (OD-FC-2 — `route_wardenship` is recommended as an EC-6 STANCE term: a pair whose roads the other wardens is `open` with a toll exemption and a danger discount; recorded-not-deferred with OD-FC-2 as its slot (coherence fold, 2026-10-16)] **The three trade-rights terms ALREADY EXIST** in
   `peaceTermsCatalog.js:306-308` — `exclusivity`, `market_access`,
   `toll_exemption`, family `commercial`, executor `'seam'` (S44's "placeholder"
   is their executor slot) — EC-6 lands ZERO catalog rows, uses those three
   spellings exactly, and lands the SEAM EXECUTOR: a read in the stance
   derivation (the executor IS the read; no ledger write). The two further
   GR-3 commercial rows `tradeConvergenceContract.js:334-337` expects remain
-  GRAMMAR's (name them at build from that line; EC owes neither).
+  GRAMMAR's (name them at build from that line; EC owes neither). [RULED 2026-10-16 (coherence fold §3.1.1) — GRAMMAR's canonical commercial family is THREE rows (DESIGN_FP_GRAMMAR.md:461), ARCH_GR says "TR-5 lands executors + producers" (DESIGN_FP_ARCH_GR.md:533-537), and the "five" of `tradeConvergenceContract.js:334-337` is a stale code comment: the "two further rows" are owned by nobody. RULING: EC-6 owns the READ-side executor (the stance derivation IS the executor — one read, no ledger); the PRODUCER (the drafter's commercial lens) is GRAMMAR's `PACT_DRAFT_LENS` row, keyed on EC-17's need read when lit and on TR-3's believed dearness when dark] [RULED BY DELEGATION 2026-10-16 (OD-FC-2 — TR-5's trade half — `grain_provision`, `route_wardenship`, the `realmPressure01` trade consumer ("buy the grain before you bleed for it"; code: consumed only by war, warReasons.js:803) and the food-export quantity debt — is the owner's to place; the chair recommends `grain_provision` → EC-12, `route_wardenship` → an EC-6 stance term, the `realmPressure01` consumer → EC-17's partner arm. Until ruled all three are RECORDED-NOT-DEFERRED with this row as their slot (§3.1.2) (coherence fold, 2026-10-16)]
   **Consumers (slice 2):** `supplyKernel`'s severance/hostile predicates read
   the stance (`closed` = severed like a war front; `restricted` = the EV gains
   a danger term `+STANCE_DANGER` in `dispatchEV.js` and the smuggle warrant in
@@ -1343,10 +1352,10 @@ city; it closed the Kontor, and the city's cloth rotted on the quay.*
 - **Force/counterforce:** the stance that closes a gate opens the smugglers'
   road (M7) and summons the hidden path (J4 when lit); a `heavy` tariff
   raises the seat's tolls AND the buyer's condition AND a TR-1 `toll_war`
-  casus against the seat (the second of the six); exclusivity granted to one
-  partner mints grievance in every excluded one (`market_closed`); a seat's
+  casus against the seat (the second of the six); [see the bracket at :1047] exclusivity granted to one
+  partner mints grievance in every excluded one (`market_closed`); [see the bracket at :1047] a seat's
   embargo under famine is priced by conscience (T6) — the commons riot rung
-  reads a `restricted` food stance as a petition cause.
+  reads a `restricted` food stance as a petition cause. [RULED 2026-10-16 (coherence fold §3.1.3) — this petition cause lands as a ROW in POP's closed `GRIEVANCE_INPUTS` registry (kind · owning program · weight · cap, in `commonsVoiceKernel.js`) in EC-6's own commit, never as an added term; the composite's clamp and POP-2's pins re-run on the row. Lighting `commonsVoiceEnabled` is RULED BY DELEGATION 2026-10-16, OD-FC-3]
 - **Belief posture:** the stance is TRUTH (an edict is public); whether the
   OTHER side knows of it before the caravan is turned back is INFO's (the
   envoy snapshot, K.2) — a caravan dispatched on a stale `open` belief
@@ -1389,7 +1398,7 @@ city; it closed the Kontor, and the city's cloth rotted on the quay.*
   commodityFlow's smuggle warrant, dispatchDestination, EC-1 pressures,
   treasury tolls input (lit), TR-1 evidence.
 - **Endings wired:** `severance` (a `closed` stance dwelling a season — read
-  as above — is the severance ending's evidence; EC-10's envelope).
+  as above — is the severance ending's evidence; EC-10's envelope). [CLARIFIED 2026-10-16 (coherence fold) — TR-9 binds `severance` as "the formal cut with casus" (DESIGN_FP_TRADE.md TR-9 definitions); a `closed` stance's season dwell is EVIDENCE beside the named casus, never a replacement definition of an owner-settled ending (findings TR-EC §4A)]
 - **Herald contract:** edict receipts; tariff receipts; the exclusivity
   grievance.
 - **Lifecycle line:** NO new persisted state (derived); the tariff band is a
@@ -1426,6 +1435,7 @@ city; it closed the Kontor, and the city's cloth rotted on the quay.*
   verb), `simulationRules.js` (+1 key), `pulseKernel.js` (+0).
 
 ### EC-7 — GRADES (`gradeLadderEnabled`) — buildable after EC-1 (+ EC-4 for the crown classes)
+[ADDED 2026-10-16 (coherence fold, req 16/17) — FIRST-VISIBLE: within a month where a court-tagged institution stands — the `grade_mismatch` line ("the court wants what the smithy cannot make"); the envelope verdict is EC-8's (26 ticks) · TIER: aspatial-safe; the crown classes need EC-4 (spatial) · dispatch: after the release is PUSHED AND DEPLOYED (OD-EC-4) · DEGRADED ARM: household grade demand only, no crown classes]
 *Historical archetype: the Toledo blade and the munition sword — the same forge
 town sold both, to different buyers, at different scarcities.*
 - **Scope:** `GRADES = {rough, common, fine}` per CATEGORY (E7), applied to
@@ -1471,7 +1481,7 @@ town sold both, to different buyers, at different scarcities.*
   **Substitution by spec:** a class substitutes DOWN to its minimum and never
   below (EC-4); the household substitutes down freely with a `rough_for_
   common` pressure that reads as grievance on the seat when sustained
-  (INTERIOR coupling).
+  (INTERIOR coupling). [see the bracket at :1357]
 - **Force/counterforce:** a `fine` profile without `fine` demand is idle
   capability (EC-8 demotes the envelope on a sustained glut); `fine` demand
   without a profile summons the specialist (EC-8's build kind, the guild
@@ -1529,6 +1539,7 @@ town sold both, to different buyers, at different scarcities.*
   (+0).
 
 ### EC-8 — SLOW VERDICTS (`marketStructureEnabled`) — two cars; car 0 is a byte-identical decomposition; buildable after EC-1 (+ `institutionLifecycleEnabled`, default true; + EC-7 for the envelope arm)
+[ADDED 2026-10-16 (coherence fold, req 16/17) — FIRST-VISIBLE: none inside a month — the first sign is a build candidate after 13 ticks of `dear` (a season), closure 26, the monopoly dwell 52; a one-month advance shows only the EC-1 band it reads (requirement 16: built behind EC-1's weekly sign) · TIER: aspatial-safe; host flag `institutionLifecycleEnabled` (default true) · dispatch: after the release is PUSHED AND DEPLOYED (OD-EC-4) · DEGRADED ARM: n/a — aspatial-safe]
 *Historical archetype: Lyon's silk — a century of dear cloth founded the
 weavers; a decade of cheap cloth closed them.*
 - **Car 0 — THE DECOMPOSITION (no behaviour):** `institutionLifecycle.js`
@@ -1583,7 +1594,7 @@ weavers; a decade of cheap cloth closed them.*
   stands under sustained `dear` with no build candidate possible (tier-
   illegal second processor) for ≥ 52 ticks is the monopoly DWELL — processor
   COUNT alone, no grade requirement; EC-10 records its envelope; EC-13's
-  corner reads it (absorbing TR-6's R5 correction). **Market competition
+  corner reads it (absorbing TR-6's R5 correction). [RULED 2026-10-16 (coherence fold §3.2.10a) — MONOPOLY KEEPS TR-6's DEFINITION — a house's held share of reachable supply past MONOPOLY_DWELL (seasons), the independent census, ENTRY as counterforce (DESIGN_FP_TRADE.md TR-6 and TR-9 "Definitions bind here"). The processor-count reading above requires entry be impossible (T5's ratchet) and redefined an owner-settled ending; it survives ONLY as the Why panel's `competition` read, never as the ending's evidence] **Market competition
   (the brief's ask, OD-EC-18):** a derived `competition ∈ {sole, few, many}`
   per (settlement, category) from processor count — a read for the Why panel
   and the monopoly dwell; never stored.
@@ -1616,7 +1627,7 @@ weavers; a decade of cheap cloth closed them.*
   prosperity, ⇐ institutionLifecycle (health score, candidate shape, close
   pick); EC-8 ⇒ institutionLifecycle candidates (its own branch), ⇒
   economicState (re-stamp through the reconciler), ⇒ EC-7 (envelope).
-- **Endings wired:** `monopoly` (the dwell).
+- **Endings wired:** `monopoly` (the dwell). [see the bracket at :1596]
 - **Herald contract:** the founding and the closure, in the lifecycle's
   existing kinds with a new reason slot.
 - **Lifecycle line:** §5 (`gradeEnvelope` preserved and clamped; no streaks).
@@ -1638,6 +1649,7 @@ weavers; a decade of cheap cloth closed them.*
   `simulationRules.js` (+1 key), `pulseKernel.js` (+0).
 
 ### EC-9 — THE COUNTERFACTUAL (no flag; read-only lazy leaf) — buildable after EC-1
+[ADDED 2026-10-16 (coherence fold, req 16/17) — FIRST-VISIBLE: on click — no advance needed (h ≤ 13 pulses on a clone, default 4) · TIER: aspatial-safe · dispatch: after the release is PUSHED AND DEPLOYED (OD-EC-4) · DEGRADED ARM: n/a]
 *Historical archetype: the council's "what if" — every court war-gamed the
 harvest before it declared.*
 - **Scope:** `economyCounterfactual.js`: a CLOSED op vocabulary
@@ -1690,6 +1702,7 @@ harvest before it declared.*
   (+30), the clerk's typed-op catalog (+1 family), `pulseKernel.js` (+0).
 
 ### EC-10 — CONVERGENCE INSTRUMENTATION (no flag; absorbs TR-9) — lands with EC-1 and grows with every wave
+[ADDED 2026-10-16 (coherence fold, req 16/17) — FIRST-VISIBLE: none — instrumentation · TIER: n/a (measurement) · dispatch: after the release is PUSHED AND DEPLOYED (OD-EC-4) · DEGRADED ARM: an envelope over a dark family reads an honest permanent zero]
 - **Scope:** `economyConvergenceContract.js` extends `tradeConvergenceContract`
   (its six endings and eight TR flags stay; the EC flags join the acyclic
   lighting order with their §4 preconditions; the walker asserts
@@ -1707,39 +1720,40 @@ harvest before it declared.*
   becomes soak pins:** each row is a fixture + an assertion of DIRECTION and
   ORDER (never magnitude) in `behavioral-observation`'s idiom. Certification
   rows for every EC flag convert from declared-pending to real here (TR §6
-  Q4's pattern).
+  Q4's pattern). [see the bracket at :550] [RULED 2026-10-16 (coherence fold §3.2.10e) — the seven TR-9 instruments EC had dropped are slotted: tickScanBudget lanes, house-Gini, the corner frequency/duration envelope, the pact-mix guard and the deciding-component histogram are EC-10 ROWS; the self-sufficiency trend envelope is J's (dark — an honest zero); the route_* Herald debt (T-11) is J's lighting unit]
 - **Pins:** the contract's own validator failure modes (TR-9's fifteen +
   EC's: a flag whose precondition is dark lights nothing; an envelope read
   from a dark family is an HONEST PERMANENT ZERO, never a tuning failure).
 
 ### EC-11 … EC-15 — THE ABSORBED TR WAVES (flags, texts and pins per DESIGN_FP_ARCH_TR.md §4; ONE seam line each)
-- **EC-11 THE HOUSE (TR-2, `merchantHousesEnabled`):** a house's `interests`
+[ADDED 2026-10-16 (coherence fold §3.2.10) — not carried by EC-6/EC-10 and now SLOTTED: TR-5's `realmPressure01` trade consumer ("THE DEAD CONSUMER LANDS", DESIGN_FP_TRADE.md TR-5; tellable T-5) and T-7's `contract_default` producer ride RULED BY DELEGATION 2026-10-16, OD-FC-2; TR-9's instruments and T-11 are slotted at EC-10 (see the bracket at :1722)]
+- **EC-11 THE HOUSE (TR-2, `merchantHousesEnabled`):** [ADDED 2026-10-16 (coherence fold, req 16/17) — FIRST-VISIBLE: within a month once mounted — a house act receipt ("House Verren took an interest in the river road"); books bands move on season-grade dwell · TIER: aspatial-safe (books, acts); sponsored caravans need spatial canon + `commodityFlowEnabled` · dispatch: after the release is PUSHED AND DEPLOYED (OD-EC-4) · DEGRADED ARM: books and acts without caravans] a house's `interests`
   of kind `stock` read EC-1's condition for the interest's good (a `dear`
   interest marks the house's `holdings` band up one on the next books pass;
   `glut` down) — the first live feed into the books; the mount TR-2 lacks
   ("no pulse mount yet") lands in the same kernel slot as EC-1, after it.
-- **EC-12 THE GRAIN ROAD (TR-4, `foodCaravansEnabled`):** food's condition
+- **EC-12 THE GRAIN ROAD (TR-4, `foodCaravansEnabled`):** [ADDED 2026-10-16 (coherence fold, req 16/17) — FIRST-VISIBLE: within a month — the food-security line names its physical sources and wagon droughts week by week; the storageMonths verdict is seasonal · TIER: spatial canon + `commodityFlowEnabled` + `demographicsEnabled`; lands after WY-3 (§3.2.10f) · dispatch: after the release is PUSHED AND DEPLOYED (OD-EC-4) · DEGRADED ARM: the conserved rate arithmetic (dark ⇒ byte-identical)] food's condition
   gains a PHYSICAL arm only here (grain rows in the M6a balance → the
   structural food band yields to the physical one per EC-1's arm rule);
   T7's exactly-one-arm walker is unchanged; EC-3's ladder treats grain as a
   good ONLY under this flag and its household claimant is the granary's own
   `applyFoodDeltasToUpdates` applicator (the one lawful credit path — never
-  a sixth writer).
-- **EC-13 THE CORNER (TR-6, `corneringEnabled`):** the corner's "forced
+  a sixth writer). [RULED BY DELEGATION 2026-10-16 (OD-FC-2 — the chair recommends `grain_provision` is EC-12's: a standing grain pact IS a caravan stream — one physical arm, T7 kept; recorded-not-deferred with OD-FC-2 as its slot (§3.1.2) (coherence fold, 2026-10-16)] [see the bracket at :2657]
+- **EC-13 THE CORNER (TR-6, `corneringEnabled`):** [ADDED 2026-10-16 (coherence fold, req 16/17) — FIRST-VISIBLE: within a month — purchase receipts and the `corner` pressure; the cornered/monopoly verdicts are seasonal to yearly · TIER: spatial canon + belief infoMode + `commodityFlowEnabled` + `commonsVoiceEnabled` (OD-FC-3) · dispatch: after the release is PUSHED AND DEPLOYED (OD-EC-4) · DEGRADED ARM: dark — DESIGN_FP_TRADE.md §3 rules no degraded arm (a dark mandatory counterforce is an invalid config)] the corner's "forced
   band" is NOT a second band: it is a `corner` PRESSURE (slots: houseId,
   share band) on EC-1's record that the condition derivation reads as one
   rung up while the held share crosses the corner band (TR-6's gate verbatim,
   denominator from the independent census = EC-1's physical arm plus EC-6's
   admitted inbound routes); EC-8's monopoly dwell is the `monopoly` ending's
-  evidence (the R5 correction discharged); the warehouse seizure writer
+  evidence (the R5 correction discharged); [see the bracket at :1596] the warehouse seizure writer
   (TR-6 counterforce 3) is a TRANSFER into the HOUSEHOLD class through the
   ladder's conservation rows (M6a has no holder concept: the seized stock
-  becomes household-available stock, never a crown draw and never destroyed).
-- **EC-14 VENTURES (TR-7, `venturesEnabled`):** a venture's `far_market`
+  becomes household-available stock, never a crown draw and never destroyed). [RULED 2026-10-16 (coherence fold §3.2.10c) — the HOLDER: TR-6's purchases land as house `interests` of kind `stock` whose HOLDING is a `held` sub-count on the origin's `commodityStocks` record — one stock, one record, a held partition, never a second ledger; the same partition carries the crown's precautionary stock (§3.2.11). The corner gate's numerator is that partition] [RULED BY DELEGATION 2026-10-16 (OD-FC-11 — the held partition is a persisted-shape change; until ruled, no holder exists, the corner gate has no numerator and EC-13 cannot land (coherence fold, 2026-10-16)]
+- **EC-14 VENTURES (TR-7, `venturesEnabled`):** [ADDED 2026-10-16 (coherence fold, req 16/17) — FIRST-VISIBLE: within a month — the departure receipt; the return on the route's own weeks (a season's circuit) · TIER: spatial canon + `commodityFlowEnabled`; the believed-dear choice needs belief infoMode; `new_route` needs `routeLifecycleEnabled` · dispatch: after the release is PUSHED AND DEPLOYED (OD-EC-4) · DEGRADED ARM: `new_route` suppresses to {far_market, joint_venture} while J is dark] a venture's `far_market`
   destination is chosen on believed scarcity (TR-3) and its RETURN is judged
   against the destination's TRUE condition at arrival (EC-1) — the two
   shown side by side in the venture's receipt, never combined (E2).
-- **EC-15 THE FACTOR (TR-8, `factorErrandsEnabled`):** a commercial errand's
+- **EC-15 THE FACTOR (TR-8, `factorErrandsEnabled`):** [ADDED 2026-10-16 (coherence fold, req 16/17) — FIRST-VISIBLE: within a month — departure and "no word from the salt road" receipts; the circuit and the ransom arc are seasonal · TIER: spatial canon + the errand spine (`errandSpineEnabled`, dark) + belief infoMode for the snapshot · dispatch: after the release is PUSHED AND DEPLOYED (OD-EC-4) · DEGRADED ARM: the abstract bounded-rounds pact transport (dark ⇒ byte-identical)] a commercial errand's
   snapshot (K.2) carries the origin's condition bands at departure; the
   parlay compares snapshot to the destination's live condition — the
   Antwerp letters, made structural.
@@ -1747,6 +1761,7 @@ harvest before it declared.*
 ---
 
 ### EC-16 — EXPECTATION (`marketExpectationEnabled`) — the owner's 2026-10-16 amendment; buildable after EC-1/EC-2, arm by arm as its hosts land
+[ADDED 2026-10-16 (coherence fold, req 16/17) — FIRST-VISIBLE: within a month under belief infoMode — the crown arm's `expectation` + `crown_draw` ("Harrow's duke believes Aldenmoor is arming…"); aspatially the posture arm's slight pressure ("the duke musters; arms are wanted", band unmoved); the reserve notch and the founding are seasonal (13), the founding's close 26 · TIER: belief infoMode (spatial canon ∧ infoMode ≠ omniscient, beliefMap.js:204-209) + `commodityFlowEnabled` for arms 1–4; the posture arm aspatial-safe (host flag `settlementStrategyEnabled` moves warPosture) · dispatch: after the release is PUSHED AND DEPLOYED (OD-EC-4) · DEGRADED ARM: the posture arm only]
 *Historical archetype: the Antwerp exchange in 1557 — the Spanish default was
 rumoured for a year, and the merchants who believed it were the ones left
 standing; the ones who believed it wrongly in 1552 were ruined by a peace.*
@@ -1767,10 +1782,10 @@ standing; the ones who believed it wrongly in 1552 were ruined by a peace.*
   readiness of any rival ≥ the bars begins EC-4's mobilization-arm draw on the
   drawable kit BEFORE its own readiness rises, at the garrison trickle × an
   authored precaution factor; `crown_draw` and `expectation` (actor crown,
-  subject, rung, confidence). It stops the tick the belief decays below the
+  subject, rung, confidence). [ADDED 2026-10-16 (coherence fold) — this arm EXEMPTS EC-4's "no draw without a deployment or readiness rise" (EC-4 Force line) and its mutant "planted draw without deployment ⇒ reds" (EC-4 Mutants), which EC-5 re-affirms: EC-4's pin gains an explicit expectation carve-out (a draw carrying an `expectation` slot naming this court's believed rung), or this arm reds it (findings TR-EC §5A-2)] It stops the tick the belief decays below the
   bar or the war opens (then EC-4's real arm takes over, and the stock already
   drawn is the counterforce to EC-4's war tellable — the band at war's start
-  sits one rung LOWER than in a town that did not believe).
+  sits one rung LOWER than in a town that did not believe). [RULED 2026-10-16 (coherence fold §3.2.11) — this RUNS BACKWARDS under the written physics: crown draws are `consumed` (E5) and nothing holds an armoury, so the believing court meets war with LESS stock (a DEARER band) and lower `procuredQuality` — foresight penalised, not rewarded. The honest tellable NOW is "paid early, gained the second smithy" (EC-8's arm); the reward arm lands only when an armoury holding exists — a `held` partition on the origin's `commodityStocks` (the same partition as TR-6's holder)] [RULED BY DELEGATION 2026-10-16 (OD-FC-11 — the held partition (one mechanism for the house's position and the crown's precautionary stock) is a persisted-shape change; EC-16's reward arm waits on it (coherence fold, 2026-10-16)] [ADDED 2026-10-16 (coherence fold) — PLAUSIBLE (findings TR-EC §5A-5): the stop rule has no arm for a true-but-quiet threat — a neighbour truly at `war_preparation` keeps readiness truth-anchored on every report (beliefMap.js:628), confidence never decays, and the precautionary draw runs for as long as the armed peace stands: T5's ratchet in cold-war form. The arm owes a counterforce (amendment A) and a standing-armed-peace fixture]
   **Arm 2 — the seat holds back (EC-3 seam):** believed war ≥ bars for a
   season raises the reserve one notch on the kit goods (`reserve_held` +
   `expectation`, actor seat); the notch reverses on its own clock when the
@@ -1782,7 +1797,7 @@ standing; the ones who believed it wrongly in 1552 were ruined by a peace.*
   POSITION, TR-6's purchase mechanics without the corner gate; a position that
   crosses the corner band IS a corner and TR-6 governs it); `expectation`
   (actor house). The position is sold only ever as a SALE (T5): into the war
-  at dear, or into the peace at glut — the ruin arm.
+  at dear, or into the peace at glut — the ruin arm. [RULED 2026-10-16 (coherence fold §3.2.10c) — a "position" is an act OUTSIDE TR-2's CLOSED verb set (DESIGN_FP_TRADE.md TR-2) and needs a holder M6a lacks: it lands as TR-6's `corner_attempt` below the corner band or as a recorded TR-2 verb amendment (the findings recommend the fold, §8), its holding the `held` partition of OD-FC-11 — dark until that row rules] [see the bracket at :1750]
   **Arm 4 — the speculative founding (EC-8 seam):** EC-8's market-streak
   governor gains an EXPECTED-DEMAND streak: believed readiness ≥ bars for
   BUILD_STREAK ticks with a tier-legal kit-good processor missing (health ≥
@@ -1800,7 +1815,7 @@ standing; the ones who believed it wrongly in 1552 were ruined by a peace.*
   (actor seat, subject = itself, rung) as a `slight` structural pressure on
   its kit-good records — "the duke musters; arms are wanted" — so the Economy
   tab speaks the expectation in every world, band moving only where a stock
-  does.
+  does. [CLARIFIED 2026-10-16 (coherence fold §5) — the posture arm's self-read carries NO belief: its readiness slot is the seat's OWN true warPosture and it has no confidence, so its `expectation` pressure marks the self-read (subject = itself, confidence slot absent) rather than borrowing belief rungs; and `fair` is both a confidence rung and a condition band in one expectation sentence — the phrase rows say "a fair confidence", never a bare `fair` (findings TR-EC §5A-8)]
   **THE FOIL (the owner's word: complicate or foil, never replace):** when the
   believed war does not open and the belief decays below the bar, every
   `expectation` pressure on the records it touched resolves `outcome:
@@ -1810,7 +1825,7 @@ standing; the ones who believed it wrongly in 1552 were ruined by a peace.*
   the speculative mill waits for its 26 ticks. When the war does open, the
   pressures resolve `borne_out` and the band at war's start is one rung lower
   than the unbelieving fixture — foresight is rewarded by the physics, never
-  by a bonus. **Deception:** an INFO plant that forges a neighbour's
+  by a bonus. [see the bracket at :1787] **Deception:** an INFO plant that forges a neighbour's
   mobilization (`beliefMap.js:993`) starts a real run on arms in the deceived
   court — the LURE's economic cost (TRADE×INFO coupling, INFO writes the
   belief, EC-16 pays) — and the plant's exposure resolves the pressures
@@ -1856,7 +1871,7 @@ standing; the ones who believed it wrongly in 1552 were ruined by a peace.*
   and closed; the house's position sold at glut — ruin reachable); the
   RIGHT-WAR TELLABLE (belief then war: the band at war's start reads one rung
   lower than the EC-4 war fixture without EC-16 — the counterforce pinned
-  POSITIVELY); the TWO-TOWNS TELLABLE (one rumour, one hearer: two different
+  POSITIVELY); [see the bracket at :1787] the TWO-TOWNS TELLABLE (one rumour, one hearer: two different
   band sequences); the DECEPTION TELLABLE (a planted mobilization ⇒ a real
   draw ⇒ `unfounded` with the planter named on exposure); the stop pin (the
   belief decaying below the bar stops every arm the next tick); the posture-
@@ -1867,13 +1882,13 @@ standing; the ones who believed it wrongly in 1552 were ruined by a peace.*
   position ceiling (below the corner band), the memory season (13).
 - **Clock:** fast = the arms re-read belief weekly; slow = the reserve notch
   and the founding streak (13), the contraction (26), the belief's own silence
-  decay (0.92/tick, ~8-tick half-life — SP-B's, unchanged).
+  decay (0.92/tick, ~8-tick half-life — SP-B's, unchanged). [CORRECTED 2026-10-16 (coherence fold) — the 0.92 is the CORE belief map's `BELIEF_TUNING.SILENCE_DECAY` (beliefMap.js:110-113), and it decays CONFIDENCE, not readiness; the bar logic names confidence as the decaying operand]
 - **Posture:** the seat's risk appetite (`courtRiskAppetiteOf`, dark) tints
   the precaution factor when lit; the disposition channel orders the ladder
   as EC-3.
 - **Couplings (registry rows):** EC-16 ⇐ beliefMap (readiness, confidence),
   ⇐ INFO plants (through beliefMap only), ⇐ warPosture (the posture arm);
-  EC-16 ⇒ EC-4 (the precautionary draw), ⇒ EC-3 (the notch), ⇒ EC-11/TR-6
+  EC-16 ⇒ EC-4 (the precautionary draw), ⇒ EC-3 (the notch), ⇒ EC-11/TR-6 [CORRECTED 2026-10-16 (S2 minor) — EC-11 absorbs TR-2 (the house), EC-13 absorbs TR-6]
   (the position), ⇒ EC-8 (the expected-demand streak), ⇒ EC-1
   (`expectation` pressures and their resolution).
 - **Endings wired:** `fortune` (the house that believed rightly) and `ruin`
@@ -1895,10 +1910,10 @@ standing; the ones who believed it wrongly in 1552 were ruined by a peace.*
 - **Req 14 Edit-verb:** engine-only with reason — the DM moves belief
   through INFO's existing verbs (plant, reveal) and war through the war verbs;
   the acts follow.
-- **Collision:** `beliefMap.js` is 771/800 (TR §6 Q3) and is NOT touched (the
+- **Collision:** `beliefMap.js` is 771/800 (TR §6 Q3) [CORRECTED 2026-10-16 (coherence fold §3.3.8) — ≈781/800 effective at 00b648c9d (raw 1602; the ledger copy of TR S41 read 778)] and is NOT touched (the
   arms read its exports); `marketCondition.js` gains the resolution arm only
   (+8, no belief import); EC-4's draw (+6), EC-3's notch (+4), EC-8's streak
-  (+10), EC-11's position (TR-2's purchase verb, +0 until TR-2 lands) carry
+  (+10), EC-11's position (TR-2's purchase verb, +0 until TR-2 lands) [CORRECTED 2026-10-16 (coherence fold) — TR-2 LANDED on 09-24 (c8c21a9f3) with NO purchase verb; see the bracket at :1750] carry
   the arms in their own leaves.
 - **Mutants:** planted belief import in `marketCondition.js` ⇒ scan reds;
   planted swapped-argument read ⇒ the observer pin reds; planted arm running
@@ -1912,6 +1927,7 @@ standing; the ones who believed it wrongly in 1552 were ruined by a peace.*
   tuning register (+1 `draft` row).
 
 ### EC-17 — THE COURT'S REMEDY (`marketStatecraftEnabled`) — the owner's 2026-10-16 amendment; buildable after EC-1/EC-2, arm by arm as its deciders stand
+[ADDED 2026-10-16 (coherence fold, req 16/17) — FIRST-VISIBLE: none inside a month — a need exists only after 13 ticks of `dear` (26 of glut); the Herald must carry the need-crossing sentence at that moment or the DM never joins cause to remedy (findings TR-EC §7) · TIER: aspatial-safe (the need is structural); each arm needs its decider's host flags — `pactFormationEnabled` (partner), `constructiveFlowsEnabled` (overture), `warLayerEnabled` + `settlementStrategyEnabled` (conquest), EC-8 (expand) · dispatch: after the release is PUSHED AND DEPLOYED (OD-EC-4) · DEGRADED ARM: an arm whose decider is dark is silent (declared §4)] [CORRECTED 2026-10-16 after skeptic S2-14 — the PLANTING LINE (fold §4) is EC-17's first-visible entry: the week a condition crosses to `dear` on a critical need, the Why panel and the dossier say so in the record's voice ("iron has been dear at Mosgate three winters"); the slow verdict names it as cause.]
 *Historical archetype: Venice and the salt — a republic that could not make
 what it needed bought it, allied for it, and when both failed, took the
 Chioggia marshes.*
@@ -1936,9 +1952,9 @@ Chioggia marshes.*
   they resolve — a rumour cannot talk a court into its own casus belli; a
   need is counted only from evidence the court did not make. Pinned: the
   rumour fixture mints no need and no casus for a season; the same fixture
-  with a real severed road mints the need from the road's pressure alone.
-  **Three remedy arms (the overture arm FOLDED into the partner arm — §18 R5:
-  an overture is a pact's first step, one arm, two clocks), each a seam into
+  with a real severed road mints the need from the road's pressure alone. [ADDED 2026-10-16 (coherence fold) — PLAUSIBLE leak (findings TR-EC §5A-15): the fence covers the court's crown/reserve acts only as the STRONGEST pressures; it does not cover arm 3 (a house of this court buying a position), arm 4 (the speculative founding), or a self-made pressure that is second-strongest — the pin owes those three fixtures]
+  **Three remedy arms (the overture arm FOLDED into the partner arm — §18 R5: [CORRECTED 2026-10-16 after skeptic S2-08 — any later bracket that keeps the overture as a separate signal is struck: R5 ("do those") ruled THREE arms, and the overture's host is at the 800 ceiling.]
+  an overture is a pact's first step, one arm, two clocks) [CORRECTED 2026-10-16 (coherence fold) — no pact module reads `tradeOverture` (`rg tradeOverture` over pactFormation/pactTriggers/pactProposals = 0); it is a separate generosity corridor (generosityKernel.js:574), so "a pact's first step" names a link that does not exist. The overture propensity stays generosity's own decider with the need as one more signal, and its host is AT ceiling (see the bracket at :2076)], each a seam into
   a decider that EXISTS, each colouring that decider's OWN signals, never
   choosing for it:**
   **Arm 1 — EXPAND (EC-8 seam):** a need with capacity `none`/`thin` is the
@@ -1955,9 +1971,9 @@ Chioggia marshes.*
   the COUNTERPART side stays BELIEVED (SP-B `plentiful` on the good class) —
   Seam Three held (two inputs to one DECISION, never one band); the crossing
   gains a `need` slot so the pact's receipt says "for the iron Mossgate has
-  wanted a year". Partner CHOICE stays the trigger's own ranking.
+  wanted a year". Partner CHOICE stays the trigger's own ranking. [RULED 2026-10-16 (coherence fold §3.2.12) — as built `scoreTradeDemand` is `rungGap(ladder, own, counterpart)` on ONE ladder (pactTriggers.js:206) with the own side already truth (`scarcityGroundTruth`, pactFormation.js:248), so feeding a condition rung in would be arithmetic across Seam Three, and "two inputs, never one band" is false for this decider. RULING: the own-side need is a GATE on the trigger (a need exists ⇒ the occasion is admitted; the counterpart's believed rung still prices it alone), never an operand; `pactTriggers` is NOT added to Seam Three's whitelist. The trigger's docstring "BOTH ENDS ARE BELIEFS" (pactTriggers.js:189) is wrong as built — a cure row for GRAMMAR. The reader's alternative (enumerate pactTriggers by TRADE amendment) is superseded] [RULED BY DELEGATION 2026-10-16 (OD-FC-2 — the chair recommends this arm also carries TR-5's `realmPressure01` trade consumer — realm strain is one input to the own-side need — recorded-not-deferred with OD-FC-2 as its slot (coherence fold, 2026-10-16)]
   Within the PARTNER arm the `trade_overture` propensity (`generosityKernel`,
-  the pact's first step) carries the need first and the pact trigger second;
+  the pact's first step) [see the bracket at :1956] carries the need first and the pact trigger second;
   where an alliance occasion already scores (SP-3/GR) the need is one signal
   there too — "an ally who has iron" is the partner arm at its slow clock.
   **Arm 3 — CONQUEST (the war motive, `warReasons.js` `resource_pressure` via
@@ -1971,7 +1987,7 @@ Chioggia marshes.*
   up to six legal moves over ~10 signals) gains ONE signal, `marketNeed01`,
   that colours `deploy`/`reroute`/`credit`/`embargo` by the disposition
   channel (martial: toward deploy; mercantile: toward reroute/credit; the
-  formula owns the arithmetic — "functions of the same signals", `:664`).
+  formula owns the arithmetic — "functions of the same signals", `:664`). [RULED 2026-10-16 (coherence fold §3.2.13) — this arm SWAPS THE SIDES: `perceivedScarcityOf` is the FOE term (observer = fromId, subject = toId, the foe's believed population trend, demographicsWar.js:206-231,:302-307); the own side is `foldDemographicMotive` (truth, :317-321); no per-good foe read exists, and an own-side need raises `gap = own01 − foe01` (warReasons.js:518) toward EVERY neighbour equally. RULING: the own-side need enters `foldDemographicMotive` as one truth input (lawful — the court's own shelves); the "a neighbour believed to have iron" selector is NOT built (no read exists, and T4 forbids a selector); the war chooser's own target choice stands (`bestTargetId`, settlementStrategy.js:782)] [RULED BY DELEGATION 2026-10-16 (OD-FC-10 — a per-good FOE-side read in the war program (a war-chair surface) is the owner's; the chair recommends recording the second door and NOT building the selector (coherence fold, 2026-10-16)] [RULED 2026-10-16 (coherence fold §3.2.10b) — J-TR-2's "commerce reaches war ONLY through tradeWar's existing intent deposit" (DESIGN_FP_TRADE.md §6; code: subsystemRowsCompact.js:293) is SUPERSEDED IN PART by the owner's E14 ("go on conquest"): the second door is the need read into `resource_pressure`, recorded here] [CORRECTED 2026-10-16 (coherence fold) — `reroute`/`embargo`/`credit` exist only when the scoring OBJECTIVE carries a `levers` bag (the merchant archetype, settlementStrategy.js:660-676), not by disposition channel; "functions of the same signals" (:664) holds] [RE-RULED 2026-10-16 after skeptic S2-05 — `foldDemographicMotive` runs only when `demographicsEnabled` is lit (false in every preset, warReasons.js:802/846); the own-side need enters `ownPressure` (warReasons.js:840) instead; this arm's TIER names no demographics host.]
   **The order is the character's, not a ladder:** no arm precedes another by
   rule; each decider fires on its own occasion and clock, and the need is one
   more signal in each. A mercantile court will usually have bought before a
@@ -1979,7 +1995,7 @@ Chioggia marshes.*
   sequence EC imposes.
   **THE MARKET-SEEKING ARM (glut):** a persistent `glut` on an export raises
   the venture propensity toward `far_market` (TR-7 when lit) and a pact
-  `market_access` demand (the TR-5 catalog row) — the symmetric motive.
+  `market_access` demand (the TR-5 catalog row) — the symmetric motive. [CORRECTED 2026-10-16 (coherence fold §3.1.1) — nothing drafts commercial terms today (`rg 'market_access|toll_exemption'` finds the catalog only): the producer is GRAMMAR's `PACT_DRAFT_LENS` row (see the bracket at :1327); until it lands the glut arm's pact half is empty, declared]
   **The physics deliver or deny:** a pact signed brings grain-month or (EC-6)
   stance-opened caravans; an occupation brings the must-go tribute (vassal
   supply, existing); a founding brings the chain next tick (EC-8); a refused
@@ -1995,15 +2011,15 @@ Chioggia marshes.*
   motive is gone (T5).
 - **Belief posture:** the OWN need is truth (the court knows its own shelves);
   the counterpart's abundance is BELIEVED (SP-B); the two meet only inside a
-  decider as separate inputs (T8: "consumed by every decision", never merged
-  into a band). INFO's lure applies: a planted "Harrow has iron to spare" aims
+  decider as separate inputs (T8: "consumed by every decision", never merged [RE-RULED 2026-10-16 after skeptic S2-07 — the authority for the court's OWN condition colouring its deciders is the owner's E14 (ODQ §934.90 addenda 4/5), not a K3 self-read exception (K3 grants none: "NO NEGOTIATION PATH MAY EVER READ TRUE WORLD STATE"); NEGOTIATION paths are fenced out — the need never enters pact valuation or any counterpart read.]
+  into a band). [RULED 2026-10-16 (coherence fold §3.2.10d) — T1's consumption rule ("TRUTH-SIDE scarcity … consumed only by physics") is AMENDED with this reason: truth-side conditions may drive the OWN court's decisions — the court knows its own shelves, the self-read exception K3 already grants `pactFormation` — never a counterpart's. It covers EC-3's reserve notch, EC-8's build governor, EC-17's need and EC-18's push, and is recorded against DESIGN_FP_TRADE.md T1] INFO's lure applies: a planted "Harrow has iron to spare" aims
   a real pact overture or a real march (TRADE×INFO).
 - **Casting:** the seat; the envoy on the overture (SP-1 when lit); the
   general on the march.
 - **Receipts:** "Iron has been dear in Mossgate for a year and its one smithy
   cannot meet the need; the council has sent envoys to Harrow for a pact" ·
   "Mossgate's overture refused, its smiths idle for want of ore, the duke
-  marches on the Aldenmoor mines" · "With the Aldenmoor mines under Mossgate's
+  marches on the Aldenmoor mines" [RULED 2026-10-16 (coherence fold §3.2.13) — re-authored to what the record can show: "…the duke marches on Aldenmoor; its smiths want for iron" (the target is the chooser's own; no read names the mines — the Evidence Law)] · "With the Aldenmoor mines under Mossgate's
   hand, iron flows by tribute and the forges run; the need that started the
   war is answered" · "Cnocby's wool has rotted on the quay two seasons; its
   factors seek a market beyond the pass".
@@ -2014,11 +2030,11 @@ Chioggia marshes.*
   feasibility pin (a need plus a hopeless target ⇒ no war opens — the
   existing gate, re-pinned under the flag); the Seam-Three pin on arm 2 (the
   own side is a condition rung, the counterpart side a believed rung, no
-  expression combines them); the REMEDY TELLABLE (the owner's example, four
+  expression combines them); [see the bracket at :1973] the REMEDY TELLABLE (the owner's example, four
   fixtures: Mossgate thin on iron, dear 13 ticks — mercantile channel ⇒ the
   pact trigger crosses with the `need` slot; martial channel + hostile
   neighbour with believed iron ⇒ the casus scores and the chooser leans to
-  deploy; a tier that allows the smelter ⇒ the build candidate ranks first;
+  deploy; [see the bracket at :1989] a tier that allows the smelter ⇒ the build candidate ranks first;
   refused overture ⇒ the casus rises next season); the glut-arm tellable; the
   answered-need pin (a signed pact or a founding ⇒ the need gone within the
   physics' own lag, the motive gone with it); the tuning-register row.
@@ -2036,7 +2052,7 @@ Chioggia marshes.*
   ⇒ generosity overture propensity, ⇒ warReasons resource_pressure (own-side
   term), ⇒ settlementStrategy (one signal), ⇒ TR-7 ventures (glut).
 - **Endings wired:** feeds `severance`/partnership casus (TR-1's
-  `supply_withheld`), `fortune` (the venture that found the market), and the
+  `supply_withheld`) [see the bracket at :1047], `fortune` (the venture that found the market), and the
   war program's own endings through its opener.
 - **Herald contract:** the need crossing ("Mossgate wants iron and cannot
   make it"); each remedy's receipt carries the `need` slot.
@@ -2057,19 +2073,20 @@ Chioggia marshes.*
   surfaces (T9): EC-17 lands its reads as a leaf `marketNeed.js` and the two
   war files gain ONE net-zero seam line each (the signal handed in as data,
   the K3/VI.3 idiom), reported to the war chair as a seam row — never a
-  branch; `pactTriggers.js` gains the own-side fork behind the flag (+4);
-  `generosityKernel.js` (+3). EC-17 chooses NO target anywhere.
+  branch; [CORRECTED 2026-10-16 (coherence fold) — ONE figure: +1 each, as the file list says ("net-zero" is struck) — settlementStrategy ≈763 effective (its baseline entry deleted at 760, headroom 37), warReasons ≈515; both under the 800 ceiling (findings TR-EC §6 row 16, §5A-13)] `pactTriggers.js` gains the own-side fork behind the flag (+4);
+  `generosityKernel.js` (+3). [CORRECTED 2026-10-16 (coherence fold §3.3.8) — generosityKernel.js measures ≈800/800 effective (findings TR-EC §6 row 7, a calibrated counter; the currency is `scripts/.size-baseline.json` + eslint's EFFECTIVE count): a host AT ceiling takes ZERO lines from any wave without a leaf-first decomposition car (EC-8 car 0's idiom) — or this seam STOPs] EC-17 chooses NO target anywhere.
 - **Mutants:** planted target list ⇒ reds; planted feasibility bypass ⇒ the
   existing gate's pin reds; planted stored need ⇒ scan reds; planted merge of
   own rung and believed rung ⇒ Seam-Three reds.
 - **New leaves:** `marketNeed.js` (~220 eff), `marketNeedReceipts.js` (~60
   eff). **Files touched:** `marketStructureKernel.js` (+6: the priority),
   `pactTriggers.js` (+4), `generosityKernel.js` (+3), `warReasons.js` (+1
-  seam), `settlementStrategy.js` (+1 seam), `simulationRules.js` (+1 key),
+  seam) [see the bracket at :2076], `settlementStrategy.js` (+1 seam), `simulationRules.js` (+1 key),
   `couplingRegistryTrade.js` (+6), `pulseKernel.js` (+0), the tuning
   register (+1 `draft` row).
 
 ### EC-18 — THE OPEN ROAD (`openRoadEnabled`) — the owner's 2026-10-16 amendment; spatial worlds only; buildable after EC-1/EC-2 (+ EC-3 for the reserve floor, + EC-6 for stances)
+[ADDED 2026-10-16 (coherence fold, req 16/17) — FIRST-VISIBLE: within a tick of a `glut` — the departure receipt ("Mossgate's iron … went up the Harrow road"); the arrival on the route's own weeks · TIER: spatial canon + `commodityFlowEnabled`; the believed pull needs belief infoMode · dispatch: after the release is PUSHED AND DEPLOYED (OD-EC-4) · DEGRADED ARM: push-only on the origin's own truth (declared §4)]
 *Historical archetype: the Champagne fairs — nobody ordered the Flemish cloth
 to Troyes; it went where the letters said the buyers were, and sometimes the
 letters were a season old.*
@@ -2084,7 +2101,7 @@ letters were a season old.*
   toward the reachable consuming settlement whose BELIEVED condition for the
   good's class is dearest (SP-B `scant`/`pinched`, the origin court's OWN
   picture — K3), under an `open`/`taxed` stance (EC-6) and the M6c EV (danger
-  vs need); ties by codepoint. The caravan rides the SAME physics (taps,
+  vs need); ties by codepoint. [CORRECTED 2026-10-16 (coherence fold) — `merchantAppetite` is a per-ORIGIN-SETTLEMENT scalar (dispatchEV.js:47, :259 `appetiteOf(appetiteLedger, originId, …)`), not a faction's; the merchant faction is the receipt's VOICE, never the scalar's owner, and an origin with no merchant faction still pushes on its own appetite] The caravan rides the SAME physics (taps,
   banditry, interception, smuggle roll, conservation rows) and lands in the
   destination's stock for that good ONLY if the destination consumes it (a
   household or supply link exists) — otherwise it is not sent (no phantom
@@ -2092,7 +2109,7 @@ letters were a season old.*
   wrong-market receipt fires when the believed band and the true condition
   differ ("came for the famine, found the harvest"), and the origin's
   appetite learns from the outcome (M6c's existing reversal). This is the
-  UNCONTRACTED caravan: nobody ordered it.
+  UNCONTRACTED caravan: nobody ordered it. [ADDED 2026-10-16 (coherence fold) — PLAUSIBLE (findings TR-EC §5A-20): bands move one rung per tick toward target, so a record still reads `glut` for ticks after the warehouse falls below cap and the one-per-tick pin does not bound pushes on a stale band — the push re-checks the warehouse (`stock/cap`) at dispatch]
   **Arm 2 — THE PREFERENCE (destination-side, a weight on the existing pull)
   — CONDITIONAL (§18 R5): EC-18's CAR 0 is a MEASUREMENT: whether TR-3's
   destination order (`dispatchDestination.js`, permutation-only, belief
@@ -2122,7 +2139,7 @@ letters were a season old.*
   **WHAT IS NEVER REDIRECTED (the contract fence):** supply links whose pair
   carries an `exclusivity` term (EC-6), pact streams (TR-4/TR-5), treaty
   tribute (`treatyTransfer`), the vassal must-go (`supplyKernel.js:666-668`),
-  household links (EC-3), and any link a DM pinned by verb. A source-scan pin
+  household links (EC-3), and any link a DM pinned by verb. [CLARIFIED 2026-10-16 (coherence fold) — pact streams and treaty tribute are GRAIN, which M6a excludes (S29): their fence is honest but vacuous until EC-12; and no DM link-pin verb is named or verified in the tree (PLAUSIBLE absent) — `dm_pinned` waits on a verb that exists] A source-scan pin
   names each as outside EC-18's reach; a planted redirect of a must-go reds.
   **The house's sibling:** TR-7's `far_market` venture is the SAME act at
   HOUSE grain with a stake and a receipted return; when TR-7 is lit the
@@ -2139,7 +2156,7 @@ letters were a season old.*
   destination's market — SP-B); the PUSH is truth (the origin's own
   warehouse); the two are inputs to one DISPATCH decision in `dispatchEV`'s
   composer idiom (TR-3's Seam Three whitelist grows by this one composer,
-  enumerated) and never a band.
+  enumerated) and never a band. [CORRECTED 2026-10-16 (coherence fold) — the whitelist is enumerated in DESIGN_FP_TRADE.md §3 Seam Three "HERE and only here", and EC-1 pins `conditionToScarcityTruth.js` as the ONLY module that may name both ladders: this composer's entry lands as a TRADE §3 amendment AND an EC-1 pin amendment in EC-18's own commit, or the push reads truth only (the declared dark-belief arm); no lane widens the list silently (findings TR-EC §5A-18)]
 - **Casting:** the origin's merchant faction (its named factor when TR-2 is
   lit) in the departure receipt.
 - **Receipts:** "Mossgate's iron, cheap at home, went up the Harrow road on
@@ -2209,18 +2226,18 @@ Notation: bands are the CONDITION_BANDS {glut, soft, fair, dear, desperate}. A b
 
 | # | Scenario | Trigger | Demand & grade demand | Supply side | Claimants & allocation | Trade & accessibility | Propagation | Condition path | Secondary → tertiary effects | Dossier sentence | Wave(s) required |
 |---|---|---|---|---|---|---|---|---|---|---|---|
-| M1 | War begins | A war front opens between two seats, plus the `war_pressure` and `army_deployed` conditions; a besieged source is severed (`supplyKernel.js:254-257`, S41). | The crown begins to demand the kit: `levy` will take rough or better, `guard` common or better (EC-4). The granary loses its 12% deployment drain (S41). Household demand does not change. | Production holds until a processor is razed. The besieged producer stops shipping, so the buyer's M6a stock drains at its consumption rate. | Today caravans are served first-come in codepoint order and nothing military draws on stock (S31, S47). Under EC-3, a martial seat puts the crown first and the household eats what the march leaves. | Hostile gates intercept the caravan, or the smuggle roll lets it through (M7). Route danger reroutes among the K=3 sources. Under EC-6 the pair's stance is `closed`, because a war front outranks every other rule. | Under EC-5, dear `iron` raises `arms` one hop per tick wherever a smithy stands. When EC-3 is lit, the crown's upstream draw also falls on iron and `fuel`. | `fair`, then `dear` once stock falls below the shortage fraction (`source_severed`, `crown_draw`). It reaches `desperate` only when the stock is empty with no clear source; that is the `starving` latch, the single instant step. | Today the `supply_starved` impairment is stamped naming "the siege of X" (S50). Under EC-3 legitimacy bleeds while the crown eats first, and TR-1 records a `supply_withheld` casus. | "Iron is dear in Mossgate: the war has closed the Harrow road, and the duke's levy has drawn the smithy's stock for the march." | Today: severance, interception, the food drain and the starvation stamp. EC-1 adds the band and its pressures; EC-4 adds the crown draw (degraded: the kit is read and never emptied); EC-6 adds the stance; with EC-3 dark the order stays codepoint. |
+| M1 | War begins | A war front opens between two seats, plus the `war_pressure` and `army_deployed` conditions; a besieged source is severed (`supplyKernel.js:254-257`, S41). | The crown begins to demand the kit: `levy` will take rough or better, `guard` common or better (EC-4). The granary loses its 12% deployment drain (S41). Household demand does not change. | Production holds until a processor is razed. The besieged producer stops shipping, so the buyer's M6a stock drains at its consumption rate. | Today caravans are served first-come in codepoint order and nothing military draws on stock (S31, S47). Under EC-3, a martial seat puts the crown first and the household eats what the march leaves. | Hostile gates intercept the caravan, or the smuggle roll lets it through (M7). Route danger reroutes among the K=3 sources. Under EC-6 the pair's stance is `closed`, because a war front outranks every other rule. | Under EC-5, dear `iron` raises `arms` one hop per tick wherever a smithy stands. When EC-3 is lit, the crown's upstream draw also falls on iron and `fuel`. [CORRECTED 2026-10-16 (coherence fold) — EC-5's upstream draw is a HOUSEHOLD-class link-target notch, never a crown draw (§6 EC-5 Scope; skeptic #26)] | `fair`, then `dear` once stock falls below the shortage fraction (`source_severed`, `crown_draw`). It reaches `desperate` only when the stock is empty with no clear source; that is the `starving` latch, the single instant step. | Today the `supply_starved` impairment is stamped naming "the siege of X" (S50). Under EC-3 legitimacy bleeds while the crown eats first, and TR-1 records a `supply_withheld` casus. [see the bracket at :1047] | "Iron is dear in Mossgate: the war has closed the Harrow road, and the duke's levy has drawn the smithy's stock for the march." | Today: severance, interception, the food drain and the starvation stamp. EC-1 adds the band and its pressures; EC-4 adds the crown draw (degraded: the kit is read and never emptied); EC-6 adds the stance; with EC-3 dark the order stays codepoint. |
 | M2 | Prolonged war | The front persists; the `war_drain` and `war_exhaustion` conditions; mobilization reaches `war_exhaustion` (`mobilization.js`). | The crown draws every tick for each army band. When common stock runs out, the levy's draw falls on rough stock, because the levy accepts rough (EC-7). | Refill at `productionRateFor` cannot keep pace with the draw, so stock stays near zero. `supplyQuality` reads kit completeness after the draw, so deployed quality degrades (EC-4). | Under a martial posture the crown keeps the first rung. Sustained dear raises the reserve one notch per season (EC-3's slow layer). | The closed stance persists and only smuggling leaks through. TR-3's believed-dear broadcast draws caravans from pairs that are still open. | Upstream draw on iron and fuel deepens (EC-5 with EC-3). Where bakers and smelters share fuel, `competing_use` is minted. | `dear` holds and the EC-8 streak accrues. It becomes `desperate` only when the stock is empty and no source is clear. | After 13 dear ticks, EC-8 proposes a second smithy. The lifecycle runs its proposal, underway and completed clock, and arms stay dear while it builds. A season of closed stance is evidence for the `severance` ending. | "A year of war has kept arms dear in Cnocby: the levy takes the forge's output every week, and the town has begun building a second smithy on the river road." | EC-1, EC-3, EC-4 and EC-8. With EC-8 dark, no new smithy is ever founded. Today the kit is never drawn down. |
 | M3 | War ends (postwar) | The front closes; the `siege_lifted` and `occupation_lifted` conditions; the deployment ends. | The crown's draw stops on the tick the deployment ends (EC-4). Household grade demand returns to its prosperity band. | Forges keep their rate, and with nothing drawing, stock refills toward the cap (rate × 6). | On glut the reserve drops a notch (EC-3). The road takes whatever stands above the reserve. | The stance is recomputed from the relationship: still `closed` if the parties remain hostile, otherwise `open` or `taxed`. Caravans resume to the K sources. | `glut_refill` lowers downstream outputs one rung per hop. | `dear`, then `fair`, `soft` and `glut`, one rung per tick. The postwar test (EC-4) expects glut by peace+6 and finds no discount token anywhere in the source. | After 26 glut ticks, EC-8 closes the newer smithy, reversing the wartime build. Peace terms move grain only today (S44). | "Peace with Harrow has ended the levy's buying; Cnocby's forges still run, the racks fill, and iron sells well under its usual price." | EC-4 and EC-1; EC-8 for the closure. Today nothing changes, because there was never a draw to stop. |
 | M4 | Mobilization | `mobilization.js` ramps through `war_preparation` to `mobilized`; the `war_mobilization` condition; `martialReadiness` rises. | The crown starts drawing before the march. The draw is based on the last two ticks of readiness, never a forecast (EC-4's no-lookahead pin). The guard class demands common or better. | Production is unchanged, and stock begins to fall before any front exists. | The crown claimant becomes active, and under a martial order it ranks first. | No stance changes, because no front has opened yet. | EC-5 with EC-3 adds an upstream draw on iron. | `fair` holds while refill covers the draw. The good turns `dear` (`crown_draw`) only once the draw outpaces refill, and never before readiness rises. | If the household goes short for the crown, a grievance is minted against the seat (EC-4, Req 13). What the enemy believes about our stores belongs to INFO; EC writes no belief. | "Harrow's muster is buying arms ahead of the march, and the smithy's racks stand thinner each week." | EC-4 and EC-3, with `warLayerEnabled`. Today the effect is display only: `mobilizationStatus.js` says "gearing" and no stock moves. |
 | M5 | Demobilization | The `demobilizing` state ("standing down, the war economy unwinding", `mobilizationStatus.js:34`). | The crown's draw falls to the garrison trickle. | Stock refills. | The crown rung empties down to the trickle, and the reserve drops a notch on glut. | Unchanged. | `glut_refill` moves downstream. | The bands follow M3's direction from wherever the draw left them. Demobilization always comes before glut and never on the same tick. | EC-8 contraction waits for 26 glut ticks. No workers return to the trades, because no labour stock exists (7b). | "Harrow's levy has stood down; the crown no longer buys arms, and the smithy's stock is rising." | EC-4. Today the effect is display only. |
-| M6 | Postwar surplus | The tail of M3: the crown's draw has stopped while forges still run at full chain count. | Only the household and the road still demand arms, and the household's grade is set by prosperity. | The warehouse sits at its cap. | The road takes everything above the reserve, and the reserve drops a notch on glut. | Open stances carry the surplus out, and TR-3 sends it toward believed-dear destinations. | `glut_refill` lowers downstream outputs one rung per hop; the crown's upstream draw on `iron` has ceased. | `glut` holds and the streak accrues. Glut never arrives before the draw has stopped. | After 26 glut ticks EC-8 closes the more vulnerable processor (the lifecycle's own pick); the reversal is pinned in both directions. | "Two seasons after the peace, Cnocby's arms racks are still full, and the newer of its two smithies has shut its doors." | EC-4 and EC-8. Today nothing happens. |
+| M6 | Postwar surplus | The tail of M3: the crown's draw has stopped while forges still run at full chain count. | Only the household and the road still demand arms, and the household's grade is set by prosperity. | The warehouse sits at its cap. | The road takes everything above the reserve, and the reserve drops a notch on glut. | Open stances carry the surplus out, and TR-3 sends it toward believed-dear destinations. | `glut_refill` lowers downstream outputs one rung per hop; the crown's upstream draw on `iron` has ceased. [see the bracket at :2228] | `glut` holds and the streak accrues. Glut never arrives before the draw has stopped. | After 26 glut ticks EC-8 closes the more vulnerable processor (the lifecycle's own pick); the reversal is pinned in both directions. | "Two seasons after the peace, Cnocby's arms racks are still full, and the newer of its two smithies has shut its doors." | EC-4 and EC-8. Today nothing happens. |
 
 ### 7.2 Harvest, weather and the body
 
 | # | Scenario | Trigger | Demand & grade demand | Supply side | Claimants & allocation | Trade & accessibility | Propagation | Condition path | Secondary → tertiary effects | Dossier sentence | Wave(s) required |
 |---|---|---|---|---|---|---|---|---|---|---|---|
-| M7 | Famine | The `famine` condition (`conditionPromotion.js:30` maps famine, crop failure and blight text to it) and the live food-ledger `deficitPct` (`foodStockpile.js`). | Household need is population × 2 lb/day (S14). Food carries no grade. | `storageMonths` drains. Food lives only in the granary (T7) and has no M6a stock unless EC-12 is lit. | There is no ladder on food, because EC-3 never touches the granary. Under EC-12 the household claimant is the granary's own applicator. | The granary's import share applies. Neighbours receive `regional_import_shortage` through `trade_dependency` channels (S40). Under EC-6, a `restricted` food stance becomes a petition cause for the commons. | Under EC-5, dear `grain` raises `flour`, then `provisions`, one hop per tick, wherever a mill or bakery stands. | The structural arm takes food from `fair` to `dear` and then to `desperate`, one rung per tick, as `deficitPct` crosses the band cuts (`famine`, `harvest_short`). Food never jumps, because the latch belongs to M6a links. | Today causal scores and the condition cascade run, and prosperity falls one way (S16). A hoard kept during a famine is priced by conscience (EC-3, T6). Belief falls separately on the `scant` ladder. | "Provisions sell at several times their usual price in Mossgate: the granary holds less than a season's need, and the millers have little grain to grind." | Today: `deficitPct`, the conditions and the cascade. EC-1 adds the band, EC-5 the hops, EC-12 the physical arm. |
+| M7 | Famine | The `famine` condition (`conditionPromotion.js:30` maps famine, crop failure and blight text to it) and the live food-ledger `deficitPct` (`foodStockpile.js`). | Household need is population × 2 lb/day (S14). Food carries no grade. | `storageMonths` drains. Food lives only in the granary (T7) and has no M6a stock unless EC-12 is lit. | There is no ladder on food, because EC-3 never touches the granary. Under EC-12 the household claimant is the granary's own applicator. | The granary's import share applies. Neighbours receive `regional_import_shortage` through `trade_dependency` channels (S40). Under EC-6, a `restricted` food stance becomes a petition cause for the commons. | Under EC-5, dear `grain` raises `flour`, then `provisions`, one hop per tick, wherever a mill or bakery stands. | The structural arm takes food from `fair` to `dear` and then to `desperate`, one rung per tick, as `deficitPct` crosses the band cuts (`famine`, `harvest_short`). Food never jumps, because the latch belongs to M6a links. | Today causal scores and the condition cascade run, and prosperity falls one way (S16). A hoard kept during a famine is priced by conscience (EC-3, T6). Belief falls separately on the `scant` ladder. | "Provisions sell at several times their usual price in Mossgate: the granary holds less than a season's need, and the millers have little grain to grind." [CORRECTED 2026-10-16 (coherence fold) — "several times" is not a phrase of the MOVEMENTS enum; `desperate` reads "triple or more its usual price" (OD-EC-14, ruled by the owner) and `dear` "nearly double"] | Today: `deficitPct`, the conditions and the cascade. EC-1 adds the band, EC-5 the hops, EC-12 the physical arm. |
 | M8 | Bumper harvest | `seasons.js` returns `bountiful` (summer and autumn replenishment × 1.3, once per settlement-year); the pressure is `harvest_rich`. | Demand is unchanged. Food security lifts prosperity one way (S16). | `storageMonths` rises on the autumn-weighted swing and recedes through winter. | There is no food ladder (T7). Under EC-12 the grain road carries the surplus out. | Under EC-12, TR-3 caravans head for neighbours believed to be dear. | `glut_refill` lowers `flour` one hop later where a mill stands. | `fair`, then `soft`, then `glut` only if storage passes the ladder's top, before easing back over winter. A single bountiful season (13 weeks) can never reach EC-8's 26-tick contraction. That is an ORDER pin: a good harvest closes no mill. | Under EC-2 car 2, TR-3's wrong-market receipt can fire ("came for the famine, found the harvest"). | "The harvest came in heavy at Mossgate this autumn; the granary is full past need, and flour sells under its usual price." | Today: the seasonal replenishment and `storageMonths`. EC-1 adds the band, EC-5 the hop, EC-12 the export. |
 | M9 | Drought | `seasons.js` returns `drought` (replenishment × 0.55); `conditionPromotion.js:30` maps drought text to the famine archetype. | Unchanged. | The granary sags, but one drought does not starve a town holding at least a month of stores; two bad years in a row run it dry (`seasons.js:58-64`). | As M7. | As M7. | As M7, later and weaker. | `fair`, then `soft` or `dear` through the winter draw-down (`harvest_short`). M7's famine path follows only after a second bad year. That ORDER is pinned: drought comes before famine and never in the same season. | Same as M7, one year later. | "Drought cut Mossgate's harvest this summer; the granary will not last the winter at the usual ration, and grain is dear." | Today, plus EC-1. |
 | M10 | Flood | A calamity of type `flood`, which strikes riverside terrain (`DISASTER_TYPE_BY_TERRAIN`, `spatial/calamity.js:87-96`) at a severity band. `calamityKernel.js:335-381` re-stamps `activeChains` and `primaryExports` (S18). | Unchanged. | A razed or impaired processor lowers the chain count, so `productionRateFor` falls toward `PRODUCTION_FLOOR`. | Unchanged; the reserve rises a notch on dear (EC-3). | No route is cut, because there is no writer for edges (see M23b and 7b). | `processor_lost` propagates downstream (EC-5). | `fair`, then `dear` for every good the lost processor bore. A good reaches `desperate` only if no other source is clear. | The `reconstruction` condition. EC-8 proposes a rebuild after 13 dear ticks. | "The flood took Harrow's mill on the east race; flour is dear there until the millers rebuild or the Aldenmoor road brings more." | Today: the calamity and the re-stamp. EC-1, EC-5 and EC-8 add the rest. |
@@ -2234,7 +2251,7 @@ Notation: bands are the CONDITION_BANDS {glut, soft, fair, dear, desperate}. A b
 | M13 | Population boom | Growth from `demographicsKernel` (`demographicsEnabled`) or inward migration. | Food need scales with population. Non-food demand scales with TIER only (S14, S15), so a boom inside one tier adds no non-food demand. | Production is unchanged, because it depends on chain count, not on hands. | Household food draw at the granary. | The granary import share; EC-12's grain road. | The food hops of M7. | Food moves `fair` to `dear` as `deficitPct` rises. Non-food goods stay where they are. | A tier crossing is the only route to new non-food demand, and generation-stamped lists do not re-stamp (S18). | "Mossgate has grown faster than its fields: the granary feeds more mouths each season, and grain is dear." | Today: food. EC-1. The per-head non-food arm is 7b. |
 | M14 | Population collapse | Mortality or outward migration in `demographicsKernel`. | Food need falls. Non-food demand is unchanged unless the tier falls. | Unchanged. | Unchanged. | Unchanged. | Food `glut_refill` moves downstream. | Food moves `fair` to `soft`, then to `glut` only if storage passes the top. Non-food goods do not move. | The lifecycle's economy-health gate refuses builds in a collapsing town (an existing counterforce). EC-8 contraction follows sustained glut. | "Many of Harrow's houses stand empty since the plague years; the granary holds more than the living need, and grain sells under its usual price." | Today, plus EC-1 and EC-8. |
 | M15 | Migration (in/out) | `demographicsMigration.js` and `migrationKernel.js`; the `regional_migration_pressure` and `relief_burden` conditions. | Food need rises at the destination and falls at the origin. | Unchanged. | Unchanged. | Unchanged. | Food hops at both ends, in opposite directions. | **The two ends must diverge:** the destination's food moves toward `dear` and the origin's toward `soft`, in the same week. | `relief_burden` weighs on the receiving seat. | "Refugees from the Harrow war crowd Cnocby's bread lines; the granary now feeds them too, and grain is dear." | Today, plus EC-1. |
-| M16 | Political instability | The conditions `rebellion`, `government_overthrown`, `coup_suppressed`, `regional_authority_instability` and `regional_tax_revenue_disruption` (`activeConditions.js`). | Unchanged. | Unchanged. | No pressure kind names instability. A new seat's posture re-orders the ladder (EC-3, read through SP-4's `postureOf` or the declared `alignmentOf` substitute). | The new posture sets the seat's `tariffBand` and grievance closures (EC-6). | None directly. | No band moves until posture changes. That ORDER is pinned: the posture change comes first, then a ladder or stance pressure. | Under EC-1 alone, instability has no market consequence, and the volume says so. | "Since the coup at Harrow, the new regent's quartermasters buy salt for the garrison before the townsfolk are served, and salt is dear." | EC-3 and EC-6. Degraded: with SP-4 dark the posture read is the substitute. |
+| M16 | Political instability | The conditions `rebellion`, `government_overthrown`, `coup_suppressed`, `regional_authority_instability` and `regional_tax_revenue_disruption` (`activeConditions.js`). | Unchanged. | Unchanged. | No pressure kind names instability. A new seat's posture re-orders the ladder (EC-3, read through SP-4's `postureOf` or the declared `alignmentOf` substitute). [CORRECTED 2026-10-16 (coherence fold §3.3.3) — the posture read is `courtPostureOf` (strategicPosture.js:222, CR-C4-1)] [see the bracket at :1099] | The new posture sets the seat's `tariffBand` and grievance closures (EC-6). | None directly. | No band moves until posture changes. That ORDER is pinned: the posture change comes first, then a ladder or stance pressure. | Under EC-1 alone, instability has no market consequence, and the volume says so. | "Since the coup at Harrow, the new regent's quartermasters buy salt for the garrison before the townsfolk are served, and salt is dear." | EC-3 and EC-6. Degraded: with SP-4 dark the posture read is the substitute. |
 
 ### 7.4 Roads, gates and edicts
 
@@ -2242,10 +2259,10 @@ Notation: bands are the CONDITION_BANDS {glut, soft, fair, dear, desperate}. A b
 |---|---|---|---|---|---|---|---|---|---|---|---|
 | M17 | Occupation | An occupation stressor of 0.4 or more cuts the granary's import share. Occupation counts as a blockade for food (`foodStockpile.js:99`), and vassal tribute must ship (`supplyKernel.js:666-668`, S46). | The occupier's garrison trickle draws for whoever holds the seat (EC-4). | Tribute ships stock to the overlord. | Under EC-3 a pact-stream obligation sits on the crown rung, so tribute leaves before the household is served. | Food is blockaded. The stance follows the occupier's relationship. `sovereigntyMarketStage` is dark. | `export_draw` at home; food hops. | Food moves `fair` to `dear`; the tribute good moves to `dear` at home (`export_draw`) while it reads `soft` at the overlord. **The two bands must diverge.** | `occupation_burden` and `occupation_resistance`; a grievance against the occupier. | "Under Harrow's garrison, Mossgate's textiles go north as tribute before its weavers are served, and the town's granary is shut to outside grain." | Today: the tribute and the food blockade. EC-1, EC-3 and EC-4 add the rest. |
 | M18 | Naval blockade | A naval blockade record; the severance predicate reads it (S42). | Unchanged. | Producers reached by sea are severed. Land producers are unaffected, and sea-lane capacity limits only naval convoys (S35). | Unchanged. | The stance is `closed` (EC-6 precedence); M7 rolls smuggling against the worst gate. | Downstream hops from the cut good. | Sea-imported goods move `fair` to `dear` (`blockade`). Goods arriving overland do not move. **The divergence is by route kind.** | The starvation stamp names its cause (S50). | "Harrow's galleys hold the mouth of Cnocby's harbour; no salt has come by sea since, and salt is dear." | Today: the severance and the stamp. EC-1 and EC-6. |
-| M19 | Embargo | `trade_embargo`, the conscience embargo (`institutionTolerance`) and the strategy lever all act as MODIFIERS today. An embargo cuts no caravan unless it is a war front (S42, S43). | Unchanged. | Unchanged. | Unchanged. | Under EC-6 the pair is `restricted`. EV gains a danger term (`STANCE_DANGER`) and the smuggle warrant opens (the gray market). In an aspatial world the cascade channel is halved. | Downstream hops from the cut good. | Today nothing moves physically, which is the honest gap. Under EC-6 the good moves `fair` to `dear` (`stance_restricted`), and never to `closed` without a war or a hostile relationship. **Unlike M1, goods are cut with no front and no crown draw.** | Grievance accrues. Under famine the embargo is priced by conscience. It ends on its own existing hysteresis (`EMBARGO_FLOOR`). | "Aldenmoor's council has forbidden trade with Mossgate over the broken pact; Mossgate's textiles reach Aldenmoor only by smugglers, and cloth is dear there." | EC-6 with EC-1. Today: a modifier only. |
-| M20 | Sanctions | The `cold_war_sanctions` condition, minted by the rule `cold_war_supply_sanctions` (`relationshipRulesAdversarial.js:190-211`). | Unchanged. | Unchanged. | Unchanged. | Under EC-6, `restricted`, as in M19. | As M19. | `fair`, then `dear` for imported goods. FLAG: EC-1's structural archetype table and EC-6's `stance_restricted` both read this one condition. §6 does not say which yields, so with both lit one cause would count twice. | As M19. | "Under Harrow's sanctions, Aldenmoor's merchants will not sell iron to Mossgate, and iron is dear in Mossgate." | EC-1's structural arm, then EC-6. |
-| M21 | Tariff imposed | Nothing today: tariffs do not exist (S43). Under EC-6 the seat's `tariffBand` is none, light or heavy, derived from posture. | Unchanged. | The load arrives intact; no goods are taken (the pin). | Unchanged. | The `taxed` stance adds a route-cost surcharge in median-hop units (the M6b toll idiom), so the route ranks lower. `toll_exemption` cancels it. With `treasuryEnabled` lit, a typed `tariff` row credits the taxing seat; with it dark, only the route cost applies. | None. | The buyer's condition gains `stance_taxed`. It never moves below where it would sit without the tariff. | TR-1 records a `toll_war` casus against the taxing seat, and the customs house is named in the receipt. | "The duke's customs house at Harrow takes a heavy toll of Aldenmoor's iron; Aldenmoor's factors call it a toll war, and iron is dear in Harrow." | EC-6. Coin also needs `treasuryEnabled` (OD-EC-6). |
-| M22 | Route opening | Political: a treaty `market_access` term (an EC-6 executor). Physical: a new road would need J, which is dark and unmounted (S37). | Unchanged. | K=3 sources are ranked by FROZEN path cost, so a new road never enters the ranking. | Unchanged. | The stance moves from `restricted` to `open` and admits a source that was barred. | Downstream relief. | `dear`, then `fair` once caravans arrive. The `relief_inbound` pressure comes first and the band eases only on arrival. That ORDER is pinned. | Grievance against the seat clears (`market_closed`). | "By the new treaty Aldenmoor's market is open to Cnocby's salt; the first caravans are on the road, and salt stays dear in Aldenmoor until they arrive." | EC-6. The physical form is in 7b. |
+| M19 | Embargo | `trade_embargo`, the conscience embargo (`institutionTolerance`) and the strategy lever all act as MODIFIERS today. An embargo cuts no caravan unless it is a war front (S42, S43). | Unchanged. | Unchanged. | Unchanged. | Under EC-6 the pair is `restricted`. EV gains a danger term (`STANCE_DANGER`) and the smuggle warrant opens (the gray market). In an aspatial world the cascade channel is halved. [CORRECTED 2026-10-16 (coherence fold) — struck at §6 EC-6: the `flows.js` cascade is NOT re-weighted; the aspatial bite is the buyer's `stance_*` pressure] | Downstream hops from the cut good. | Today nothing moves physically, which is the honest gap. Under EC-6 the good moves `fair` to `dear` (`stance_restricted`), and never to `closed` without a war or a hostile relationship. **Unlike M1, goods are cut with no front and no crown draw.** | Grievance accrues. Under famine the embargo is priced by conscience. It ends on its own existing hysteresis (`EMBARGO_FLOOR`). | "Aldenmoor's council has forbidden trade with Mossgate over the broken pact; Mossgate's textiles reach Aldenmoor only by smugglers, and cloth is dear there." | EC-6 with EC-1. Today: a modifier only. |
+| M20 | Sanctions | The `cold_war_sanctions` condition, minted by the rule `cold_war_supply_sanctions` (`relationshipRulesAdversarial.js:190-211`). | Unchanged. | Unchanged. | Unchanged. | Under EC-6, `restricted`, as in M19. | As M19. | `fair`, then `dear` for imported goods. FLAG: EC-1's structural archetype table and EC-6's `stance_restricted` both read this one condition. §6 does not say which yields, so with both lit one cause would count twice. [CORRECTED 2026-10-16 (coherence fold) — resolved: EC-6's ONE SOURCE PER CAUSE — with EC-6 lit the stance pressure supersedes EC-1's condition-derived sanction pressure] | As M19. | "Under Harrow's sanctions, Aldenmoor's merchants will not sell iron to Mossgate, and iron is dear in Mossgate." | EC-1's structural arm, then EC-6. |
+| M21 | Tariff imposed | Nothing today: tariffs do not exist (S43). Under EC-6 the seat's `tariffBand` is none, light or heavy, derived from posture. | Unchanged. | The load arrives intact; no goods are taken (the pin). | Unchanged. | The `taxed` stance adds a route-cost surcharge in median-hop units (the M6b toll idiom), so the route ranks lower. `toll_exemption` cancels it. With `treasuryEnabled` lit, a typed `tariff` row credits the taxing seat; with it dark, only the route cost applies. [CORRECTED 2026-10-16 (coherence fold) — no typed or per-caravan tariff credit exists: slice 3 raises the taxing seat's `market_tolls`/`port_customs` INPUT to the treasury's one taxation mint by an authored notch (§6 EC-6 slice 3; OD-EC-6)] | None. | The buyer's condition gains `stance_taxed`. It never moves below where it would sit without the tariff. | TR-1 records a `toll_war` casus against the taxing seat [see the bracket at :1047], and the customs house is named in the receipt. | "The duke's customs house at Harrow takes a heavy toll of Aldenmoor's iron; Aldenmoor's factors call it a toll war, and iron is dear in Harrow." | EC-6. Coin also needs `treasuryEnabled` (OD-EC-6). |
+| M22 | Route opening | Political: a treaty `market_access` term (an EC-6 executor). Physical: a new road would need J, which is dark and unmounted (S37). | Unchanged. | K=3 sources are ranked by FROZEN path cost, so a new road never enters the ranking. | Unchanged. | The stance moves from `restricted` to `open` and admits a source that was barred. | Downstream relief. | `dear`, then `fair` once caravans arrive. The `relief_inbound` pressure comes first and the band eases only on arrival. That ORDER is pinned. | Grievance against the seat clears (`market_closed`). [see the bracket at :1047] | "By the new treaty Aldenmoor's market is open to Cnocby's salt; the first caravans are on the road, and salt stays dear in Aldenmoor until they arrive." | EC-6. The physical form is in 7b. |
 | M23a | Route closure | Route danger (banditry up to 20%, rerouting among K=3) and the `trade_route_cut` and `regional_route_disruption` conditions. A physical road closure would need J, which is dark (7b). | Unchanged. | Unchanged. | Unchanged. | Today M6a pulls from the next clear source. In an aspatial world the cascade carries the cut. | Downstream hops if every source is cut. | `fair` holds if a second source is clear (`relief_inbound`). Otherwise the good moves to `dear` (`route_danger`, `source_severed`). | Under EC-6 the closure can also be a political `closed` stance on the pair. | "Bandits on the Harrow road have turned Mossgate's textile buyers back; the weavers now buy from Aldenmoor, and cloth is dear while those caravans are on the road." | Today: the reroute and the danger. EC-1. Physical edge closure is in 7b. |
 | M23b | Bridge destruction | None physical: the tree has no bridge entity and no edge-cost writer outside J (7b). The nearest honest record is a `trade_route_cut` condition stamped on the settlement, carrying the cause slot. | Unchanged. | Unchanged. | Unchanged. | No edge cost changes, so the K ranking is untouched. Only the structural arm sees the cut. | Downstream hops from the cut good. | The structural arm moves the good `fair` to `dear` (`source_severed` with the condition's cause slot). A good with a clear second source still holds `fair` under the physical arm. | EC-9's `repair_route` has no edge damage to undo (7b). | "The Harrow bridge is down; Mossgate's iron buyers have turned back, and iron is dear in Mossgate." | EC-1 structural arm (degraded). The physical form is in **7b**. |
 | M24 | Port closure | An enemy blockade (M18), or the seat's own edict. The stance is per DIRECTED PAIR, so a port closed by edict is `SET_TRADE_STANCE` applied to each sea pair (the EC-6 DM verb). That is a declared approximation. | Unchanged. | As M18. | Unchanged. | Under the edict form, every sea pair is `closed`. | As M18. | As M18, on the excluded pairs only. | The seat bears the grievance of the excluded partners. | "Cnocby's council has shut its harbour to Harrow's ships; Harrow's iron no longer reaches Cnocby by sea, and iron is dear there." | Today: the blockade form. EC-6: the edict form. |
@@ -2257,7 +2274,7 @@ Notation: bands are the CONDITION_BANDS {glut, soft, fair, dear, desperate}. A b
 |---|---|---|---|---|---|---|---|---|---|---|---|
 | M26 | Resource discovery | `resourceDynamicsKernel.js`'s `resource_discovery`: the years-scale integrator plus a cooldown, then its reconciler re-stamps (S18). | Unchanged. | A chain activates only where its processor stands, because activation requires both the resource and the processor (S11). | The new export goes to the road; under EC-3 the household takes its share. | Unchanged. | A former import is now made locally, so its downstream eases. | A good the settlement used to buy moves `fair` to `soft`. A good it never makes, buys or needs has no key at all. | The lifecycle's existing `extraction` gap (affinity 0.9) may propose a working site. EC-8 adds nothing here, because nothing is dear. | "Prospectors have struck iron above Cnocby; the town's smelter has begun working it, and iron no longer comes dear from Harrow." | Today: the discovery and the re-stamp. EC-1. |
 | M27 | Mine exhaustion | The resource DEPLETE verb (binary, S5), then REMOVE after `REMOVAL_DWELL`; the reconciler re-stamps. | Unchanged. | The chain becomes depleted-but-visible. MEASURE at build whether such a chain still counts toward `productionRateFor`, since S11 lists it as active. | The road's share shrinks first under a lawful order. | Unchanged. | `resource_depleted` propagates downstream (EC-5). | `fair` to `dear` to `desperate` as the stock drains, by dwell. Exports drop from the lists on the re-stamp. | The lifecycle's existing bankruptcy path (`institutionLifecycle.js:654`). EC-8's build kind does not fire, because the processor still stands. | "Cnocby's iron vein is worked out; its smelters have no ore, and the town no longer sends iron down the Harrow road." | Today: the depletion, the removal and the re-stamp. EC-1 and EC-5. |
-| M28 | Resource shortage (upstream) | An input resource is depleted, or an input good is dear at the settlement. | Unchanged. | The output chain stands but goes short of input. | Under EC-3 the crown's upstream draw competes for the input. | Downstream effects cross to other settlements only through physics, never by copying a band (EC-5's pin). | `input_short`, one hop per tick, only where the chain is ACTIVE. | The input turns `dear` at tick t and the output turns `dear` at t+1. | Downstream buyers feel it only when the caravan fails to arrive. | "Ore is short at Cnocby since the vein thinned; its smiths work less iron, and iron is dear in the town." | EC-5 with EC-1. Today only the chain's status is enriched. |
+| M28 | Resource shortage (upstream) | An input resource is depleted, or an input good is dear at the settlement. | Unchanged. | The output chain stands but goes short of input. | Under EC-3 the crown's upstream draw competes for the input. [see the bracket at :2228] | Downstream effects cross to other settlements only through physics, never by copying a band (EC-5's pin). | `input_short`, one hop per tick, only where the chain is ACTIVE. | The input turns `dear` at tick t and the output turns `dear` at t+1. | Downstream buyers feel it only when the caravan fails to arrive. | "Ore is short at Cnocby since the vein thinned; its smiths work less iron, and iron is dear in the town." | EC-5 with EC-1. Today only the chain's status is enriched. |
 | M29 | Production failure (processor razed) | A sack, a calamity or a DM raze. The calamity path re-stamps `activeChains` today, but a lifecycle closure does NOT (S18), until EC-8 adds the re-stamp. | Unchanged. | The chain is impaired and `productionRateFor` falls. | Unchanged. | Unchanged. | `processor_lost`, then `input_short` at buyers, via physics. | `fair`, then `dear`. **The lifecycle-path law applies:** a calamity raze moves the band today, while a lifecycle closure leaves the chain producing as a ghost until EC-8. | The `reconstruction` condition (see M33). | "Harrow's tannery burned in the raid; leather is dear there, and the Mossgate saddlers who bought from it now wait on the Aldenmoor road." | Today: the calamity path. EC-8 adds the closure path. EC-1 and EC-5. |
 | M30 | Production surplus | Chain count × `PRODUCTION_PER_CHAIN` exceeds every draw, and the warehouse sits at its cap (S12). | Unchanged. | At the cap. | The road takes all stock above the reserve, and the reserve drops a notch on glut. | Open stances carry the surplus. | `glut_refill` downstream. | `soft`, then `glut`. | The arrivals tally lifts buyers' prosperity (upswing). EC-8 contracts after 26 glut ticks, but only if more than one processor stands. | "Cnocby's salt-pans make more than its buyers take; the stores are full, and salt sells under its usual price." | Today: the stocks at cap. EC-1 and EC-8. |
 | M31 | Industrial expansion | A lifecycle processor build, or EC-8's `unmet_demand` gap. | Unchanged. | Today a founded mill produces NOTHING (S18). Under EC-8's re-stamp, its chain is active the next tick, raising the chain count. | The road gains surplus. | Unchanged. | Upstream `competing_use` for the input. | The good stays `dear` through construction (the proposal, underway and completed clock), then moves to `fair`. It never eases before completion. | EC-7's profile rises if a FINE processor is built. | "Mossgate's millers have raised a second mill on the east race; flour, dear for a year, sells at its usual price again." | EC-8 with EC-1. Degraded: the institution appears but production does not change. |
@@ -2271,15 +2288,15 @@ Notation: bands are the CONDITION_BANDS {glut, soft, fair, dear, desperate}. A b
 
 | # | Scenario | Trigger | Demand & grade demand | Supply side | Claimants & allocation | Trade & accessibility | Propagation | Condition path | Secondary → tertiary effects | Dossier sentence | Wave(s) required |
 |---|---|---|---|---|---|---|---|---|---|---|---|
-| M37 | Monopoly | EC-8's monopoly dwell: a category's ONLY processor, at `fine`, under sustained `dear`, with no tier-legal second processor possible, for 52 ticks or more. EC-13 adds a `corner` pressure when a house holds the share. | Unchanged. | One processor. | The commons' warehouse seizure is a crown-class claimant (EC-13). | The K sources and admitted inbound routes form the corner's denominator. | None. | `dear` is sustained. While the held share is above the corner band, the band reads one rung higher (`corner`). | The `monopoly` ending's evidence (an EC-10 envelope). | "For a year Aldenmoor's one armoury has been the only maker of fine blades within reach, and no rival forge can be founded in a town its size; fine arms stay dear." | EC-8 and EC-13. Today only a generation hook text exists (`foodBalance.js:656`). |
+| M37 | Monopoly | EC-8's monopoly dwell: a category's ONLY processor, at `fine`, under sustained `dear`, with no tier-legal second processor possible, for 52 ticks or more. [see the bracket at :1596] EC-13 adds a `corner` pressure when a house holds the share. | Unchanged. | One processor. | The commons' warehouse seizure is a crown-class claimant (EC-13). [CORRECTED 2026-10-16 (coherence fold) — the seizure is a HOUSEHOLD-class TRANSFER (§6 EC-13; skeptic #43)] | The K sources and admitted inbound routes form the corner's denominator. | None. | `dear` is sustained. While the held share is above the corner band, the band reads one rung higher (`corner`). | The `monopoly` ending's evidence (an EC-10 envelope). | "For a year Aldenmoor's one armoury has been the only maker of fine blades within reach, and no rival forge can be founded in a town its size; fine arms stay dear." | EC-8 and EC-13. Today only a generation hook text exists (`foodBalance.js:656`). |
 | M38 | Oligopoly | None: `syndicateHousesEnabled` is RESERVED (§4), and nothing models more than one holder of a share. | — | — | — | — | — | — | — | No sentence. | **7b** |
-| M39 | Market collapse | The `market_shock` condition (EC-1's archetype table) and `regional_export_market_loss`; today upswing's bust on the tally. | The road's destinations stop drawing. | Production continues and stock climbs to the cap. | The road rung empties, and the reserve drops a notch on glut. | Unchanged. | `glut_refill` downstream. | The export good moves `soft`, then `glut`. Goods sold at home do not move. | Today prosperity −0.9 and legitimacy −3. EC-8 contracts the newest processor after 26 glut ticks. A house's `ruin` follows (EC-11). | "Aldenmoor's buyers no longer take Harrow's cloth; bales stack in the weavers' halls, and cloth sells well under its usual price." | Today: the bust. EC-1, EC-8 and EC-11. |
+| M39 | Market collapse | The `market_shock` condition (EC-1's archetype table) and `regional_export_market_loss`; today upswing's bust on the tally. | The road's destinations stop drawing. | Production continues and stock climbs to the cap. | The road rung empties, and the reserve drops a notch on glut. | Unchanged. | `glut_refill` downstream. | The export good moves `soft`, then `glut`. Goods sold at home do not move. | Today prosperity −0.9 and legitimacy −3. EC-8 contracts the newest processor after 26 glut ticks. [CORRECTED 2026-10-16 (coherence fold) — by `vulnerability` with a codepoint tie-break — "newest first" is struck (§6 EC-8)] A house's `ruin` follows (EC-11). | "Aldenmoor's buyers no longer take Harrow's cloth; bales stack in the weavers' halls, and cloth sells well under its usual price." | Today: the bust. EC-1, EC-8 and EC-11. |
 | M40 | Merchant (house) arrival | A TR-2 house founding (EC-11, `merchantHousesEnabled`). | Unchanged. | A house moves no goods except through ventures (EC-14) or a corner (EC-13). Its `holdings` band rises on its dear interests. | Unchanged. | Unchanged. | None. | No band moves when a house arrives. Movement comes only when its first venture arrives (`relief_inbound`). That ORDER is pinned. | The house's books open. | "The house of Venn has opened a counting-house in Mossgate to deal in its dear salt; it has not yet brought any." | EC-11. EC-14 is needed to move goods. Degraded: the books only. |
 | M41 | Merchant departure | The house's `ruin` ending (TR's vocabulary); EC-3's withheld road feeds `ruin`. | Unchanged. | The venture supply stops. | Unchanged. | Unchanged. | None. | If the house's ventures fed the good, `relief_inbound` drops and the band returns to what physics dictates. Otherwise nothing moves. | Its interests close. | "The house of Venn has closed its Mossgate counting-house after the toll war; its salt caravans no longer come, and salt is dear again." | EC-11 and EC-14. |
-| M42 | Strategic stockpiling (reserve hoard) | EC-3's `reserveBand` reaches `hoard`, from an insular posture, a dear own-condition notch, or the DM's `SET_RESERVE`. | Unchanged. | The stock is held, not spent. Reserve is not a conservation term. | The insular order is reserve, household, crown, road, so the road starves first. | Buyers lose this source. TR-3's believed-dear broadcast sends caravans elsewhere, and TR-1 records a `supply_withheld` casus. | Hops at buyers that lose their source. | The origin reads `fair` or `soft` (`reserve_held`) while its former buyers move to `dear`. **The two bands move opposite ways.** A hoard sitting at glut loses its notch. | Under famine the hoard is priced by conscience (T6). The seat's legitimacy reacts. | "Harrow's duke is hoarding salt against the siege season; Mossgate's salters, who bought from Harrow, now find salt dear." | EC-3 with EC-1. Today nothing happens (`triageAllocation` has no caller). |
+| M42 | Strategic stockpiling (reserve hoard) | EC-3's `reserveBand` reaches `hoard`, from an insular posture, a dear own-condition notch, or the DM's `SET_RESERVE`. | Unchanged. | The stock is held, not spent. Reserve is not a conservation term. | The insular order is reserve, household, crown, road, so the road starves first. | Buyers lose this source. TR-3's believed-dear broadcast sends caravans elsewhere, and TR-1 records a `supply_withheld` casus. [see the bracket at :1047] | Hops at buyers that lose their source. | The origin reads `fair` or `soft` (`reserve_held`) while its former buyers move to `dear`. **The two bands move opposite ways.** A hoard sitting at glut loses its notch. | Under famine the hoard is priced by conscience (T6). The seat's legitimacy reacts. | "Harrow's duke is hoarding salt against the siege season; Mossgate's salters, who bought from Harrow, now find salt dear." | EC-3 with EC-1. Today nothing happens (`triageAllocation` has no caller). |
 | M43 | Labor shortage | None: there is no labour stock. Population enters only through food (S14), and the owner ruled labour noise for this audience (§3b). | — | — | — | — | — | — | — | No sentence. | **7b** |
 | M44 | Labor surplus | None, as M43. | — | — | — | — | — | — | — | No sentence. | **7b** |
-| M45 | Currency/credit disruption (treasury lit) | `treasuryEnabled` is lit in no preset (S45). The `indebtedness` and `market_shock` conditions exist. | Unchanged. | Coin buys no goods, because the treasury has no exchange rate by its own law, and debt is an owner-gated new capability. | Unchanged. | Only EC-6's `tariff` rows move coin. | None. | Only `market_shock` moves a band, through EC-1's archetype table, and that band carries no credit pressure. | — | No sentence on credit itself. The tariff arm speaks as in M21. | EC-1 and EC-6 with `treasuryEnabled`. Currency and credit themselves are **7b**. |
+| M45 | Currency/credit disruption (treasury lit) | `treasuryEnabled` is lit in no preset (S45). The `indebtedness` and `market_shock` conditions exist. | Unchanged. | Coin buys no goods, because the treasury has no exchange rate by its own law, and debt is an owner-gated new capability. | Unchanged. | Only EC-6's `tariff` rows move coin. [see the bracket at :2263] | None. | Only `market_shock` moves a band, through EC-1's archetype table, and that band carries no credit pressure. | — | No sentence on credit itself. The tariff arm speaks as in M21. | EC-1 and EC-6 with `treasuryEnabled`. Currency and credit themselves are **7b**. |
 
 ### 7.7 The brief's §30 adversarial cases
 
@@ -2287,7 +2304,7 @@ Notation: bands are the CONDITION_BANDS {glut, soft, fair, dear, desperate}. A b
 |---|---|---|---|---|---|---|---|---|---|---|---|
 | M46 | Quality substitution (standard arms scarce, so the levy takes rough) | An EC-4 levy draw while common-arms stock or profile is empty. | The levy accepts rough or better and the guard common or better; the court accepts only fine. | One record holds three rungs (the `grade_mismatch` class slot); there is no second stock. | Each class substitutes DOWN to its minimum and never below it. The court never substitutes and mints `grade_mismatch`. | Unchanged. | None. | Common moves to `dear`, and rough moves toward `dear` one rung later as the levy's draw lands on it. Fine does not move. | `supplyQuality` reads completeness after the draw, so the deployed quality reflects the substitution. | "Common blades are gone from Cnocby's racks; the levy marches with rough-forged ones, and the guard keeps what is left." | EC-4 and EC-7. Degraded: with EC-7 dark every class accepts common, nothing substitutes, and the draw simply runs dry. |
 | M47 | Prosperity (poor vs prosperous demand) | Prosperity's six labels (`prosperity.js`), written each tick by upswing, roads, traditions and generosity (S17). | Struggling and Poor lean rough; Moderate and Comfortable want common; Prosperous and Wealthy lean fine; a court adds one notch (EC-7). | The same roster supplies both towns. | Unchanged. | Unchanged. | None. | **Two towns with the same roster diverge:** in the Wealthy town, fine moves to `dear` (`grade_mismatch`); in the Poor town, fine stays `fair` while common carries the load. | EC-8 moves the envelope one grade after 26 sustained ticks. Today prosperity changes no consumption and no grade (S16). | "Harrow's merchants have grown rich enough to want fine cloth that its weavers do not make, so fine cloth is dear in Harrow; in poorer Cnocby, common cloth sells at its usual price." | EC-7 with EC-1, and EC-8 for the slow move. |
-| M48 | External supply (wealthy town, no native production, secure trade) | A good in `primaryImports` or `necessityImports`, with three clear K sources and open stances. | Unchanged. | No native chain: the stock is whatever arrives. | The household is served from arrivals. | Open stances, three ranked sources. | None. | Physical arm: `fair` at target, which DROPS the record, because fair-and-quiet is the absent default. FLAG for the aspatial arm: EC-1 maps `tradeDependencies` severity `critical` to `desperate`, but that severity is GENERATION-stamped ("under stress or effectively isolated", `economicState.js:715`). A secure importer would read desperate forever, which is the §1c stale-field class. | None. | "Aldenmoor mines no iron, but three roads bring it from Harrow, Cnocby and the coast, and iron sells at its usual price." | Today, physical (the M6a pull). EC-1. The structural arm is FLAGGED for the chair. |
+| M48 | External supply (wealthy town, no native production, secure trade) | A good in `primaryImports` or `necessityImports`, with three clear K sources and open stances. | Unchanged. | No native chain: the stock is whatever arrives. | The household is served from arrivals. | Open stances, three ranked sources. | None. | Physical arm: `fair` at target, which DROPS the record, because fair-and-quiet is the absent default. FLAG for the aspatial arm: EC-1 maps `tradeDependencies` severity `critical` to `desperate`, but that severity is GENERATION-stamped ("under stress or effectively isolated", `economicState.js:715`). A secure importer would read desperate forever, which is the §1c stale-field class. [CORRECTED 2026-10-16 (coherence fold) — cured at §6 EC-1: `tradeDependencies` severity is a GENERATION STAMP that contributes only a standing `input_short` (slight) pressure and never sets the band] | None. | "Aldenmoor mines no iron, but three roads bring it from Harrow, Cnocby and the coast, and iron sells at its usual price." | Today, physical (the M6a pull). EC-1. The structural arm is FLAGGED for the chair. |
 | M49 | Trade disruption (same town loses its supplier) | M48's town; a siege severs one of the three sources. | Unchanged. | Arrivals stop from the cut source. | Unchanged. | The pull moves to the next clear source. | Only if every source is cut. | `fair` holds with `relief_inbound` while two sources remain. With all three cut, the good moves `dear`, then `desperate`. **The same shock must give a different outcome than for a single-sourced town (M54).** | The starvation stamp, only if every source is cut. | "The Harrow road is cut at the siege; Aldenmoor's iron now comes only from Cnocby and the coast, and still sells at its usual price." | Today: the reroute. EC-1. |
 | M50 | Upstream propagation (grain → flour → bread) | `grain` from the structural food arm (`deficitPct`, `harvest_short`). `flour` and `provisions` are structural only, because M2 and M6a exclude food (S29); `bread` folds into `provisions` (`goodsCatalog.js:69`). | Unchanged. | Mills and bakeries must stand. | No ladder (T7). | Unchanged. | EC-5 input edges, one hop per tick. FLAG: `COMPLEMENT_PAIRS` also lists flour↔grain and bread↔flour, so the same edge would co-move twice. And `bread` is not a catalog id, while §3a says EC adds no goods. | Grain turns `dear` at t, flour at t+1, and provisions at t+2, never at t+1. There is no movement where the chain is inactive. | Today's food cascade. | "Provisions are dear in Mossgate because flour is, and flour because the Aldenmoor grain road is cut at Harrow." | EC-5 with EC-1. EC-12 adds physical grain. |
 | M51 | Substitution (staple scarce, so a substitute is used) | A chain's `resourceSubstitutes` (16 rows, S7). They are RESOURCE-level: another resource keeps the chain alive (`substitute_active`, or `magically_sustained`). | The household switching between goods has no declared good→good table. EC-5's `substitute_draw` is sourced from resource-level data (FLAG). | The chain stays active on its substitute resource. | Unchanged. | Unchanged. | The supply-side substitute holds the output. | The output holds `fair`, with `substitute_active`, while the original resource reads depleted. | The household-side arm is in 7b. | "Cnocby's salt mine is worked out, but the salt pans on the shore keep the salt works going, and salt sells at its usual price." | Today: chain activation on the substitute resource (S11). EC-1. |
@@ -2297,10 +2314,10 @@ Notation: bands are the CONDITION_BANDS {glut, soft, fair, dear, desperate}. A b
 | M55 | Quality-specific shock (exceptional goods stable under mass demand) | A mass levy mustered by EC-4. | The levy's demand lands on rough and common, never on fine. | The court armourer's fine stock sits unused. | Levy-class draws only. | Unchanged. | None. | Common moves two rungs over two ticks while fine moves zero (the EC-7 test). | The master smith hammers munition blades: the standardization pressure (EC-7). | "The muster has emptied Aldenmoor of common blades; the court armourer's fine work is untouched and sells at its usual price." | EC-7 and EC-4. |
 
 | M57 | Believed impending war | A court's belief record shows a rival at `preparing`+ with confidence ≥ fair (`beliefMap.js:337`); no front exists. | The crown's precautionary draw on {arms, iron, leather} begins; household demand unchanged; the court class unchanged. | Production unchanged; stock falls at the precaution rate. | Crown first under a martial channel; the reserve notch after a season. | No stance change (no front). | Iron's draw raises the smithy's input target (EC-5 household). | `fair`→`dear` with `expectation` (crown, subject, rung, confidence) then `crown_draw`; one rung per tick. | A build candidate after 13 ticks of dear (EC-8, expected-demand streak); the house takes a position (EC-11 lit). | "Harrow's duke believes Aldenmoor is arming and has filled his armoury; iron is dear in Harrow though no war has come." | EC-16 + EC-4 + EC-3 (+EC-8, +EC-11); aspatial: the posture arm only, band unmoved |
-| M58 | The war that never came | M57's belief decays below the bar (silence decay 0.92/tick) and no front opens. | The draw stops the next tick. | Refill toward cap. | The notch reverses on its clock. | — | `glut_refill` downstream. | `dear`→`soft`→`glut` with `outcome: unfounded` kept one season; the speculative mill closes after 26 glut ticks; the house sells its position at glut (ruin). | Legitimacy bleed from the household's lean season; TR-1 `supply_withheld` evidence against the seat. | "The war Harrow armed for never came; its racks are full and iron goes for a third under." | EC-16 |
-| M59 | The war that came (foresight rewarded) | M57 then a front opens. | EC-4's real arm takes over the draw. | The stock already drawn and the mill already proposed. | — | `closed` by war. | — | The band at war's start reads ONE RUNG LOWER than M1's unbelieving fixture; `outcome: borne_out`. | The house's position sells at dear (fortune). | "Harrow marched with full racks; its smiths had seen the war coming." | EC-16 + EC-4 |
+| M58 | The war that never came | M57's belief decays below the bar (silence decay 0.92/tick) [see the bracket at :1884] and no front opens. | The draw stops the next tick. | Refill toward cap. | The notch reverses on its clock. | — | `glut_refill` downstream. | `dear`→`soft`→`glut` with `outcome: unfounded` kept one season; the speculative mill closes after 26 glut ticks; the house sells its position at glut (ruin). | Legitimacy bleed from the household's lean season; TR-1 `supply_withheld` evidence against the seat. [see the bracket at :1047] | "The war Harrow armed for never came; its racks are full and iron goes for a third under." | EC-16 |
+| M59 | The war that came (foresight rewarded) | M57 then a front opens. | EC-4's real arm takes over the draw. | The stock already drawn and the mill already proposed. | — | `closed` by war. | — | The band at war's start reads ONE RUNG LOWER than M1's unbelieving fixture; `outcome: borne_out`. | The house's position sells at dear (fortune). | "Harrow marched with full racks; its smiths had seen the war coming." [see the bracket at :1787] [CORRECTED 2026-10-16 (coherence fold §3.2.11) — no record stands behind "full racks" (crown draws are consumed) — an Evidence Law breach until OD-FC-11's held partition exists] | EC-16 + EC-4 | [CORRECTED 2026-10-16 after skeptic S2-04 — in the FIRST SOAK (ODQ §934.90 addendum 6) EC-8 is DARK, so the crown arm is the FOIL only (a cost, no reward); "rewarded" is struck from the soak's claims; the HELD stock (OD-FC-11) lands outside the soak.]
 
-| M60 | The court's remedy (persistent critical need) | Iron `dear` for 13+ ticks at a town with one smithy (criticality 0.72); `marketNeedOf` returns a need with capacity `thin`. | The need itself; grade unchanged. | Unchanged until a remedy lands. | Unchanged. | The pact trigger's own-side lack reads the condition; the counterpart's abundance stays believed. | — | The band holds `dear` while the court acts; eases within the physics' lag once a pact, founding or tribute delivers. | Mercantile channel: envoys and a pact (`need` slot); martial + a hostile neighbour believed to have iron: `resource_pressure` scores, the chooser leans to deploy, the hard gates still run; smelter-legal tier: the build candidate ranks first; refused overture: the casus rises next season. | "Iron has been dear in Mossgate for a year and its one smithy cannot meet the need; the council has sent envoys to Harrow for a pact." | EC-17 (+EC-8, pact lane, war layer); degraded: an arm whose decider is dark is silent |
+| M60 | The court's remedy (persistent critical need) | Iron `dear` for 13+ ticks at a town with one smithy (criticality 0.72); `marketNeedOf` returns a need with capacity `thin`. | The need itself; grade unchanged. | Unchanged until a remedy lands. | Unchanged. | The pact trigger's own-side lack reads the condition; the counterpart's abundance stays believed. | — | The band holds `dear` while the court acts; eases within the physics' lag once a pact, founding or tribute delivers. | Mercantile channel: envoys and a pact (`need` slot); martial + a hostile neighbour believed to have iron: `resource_pressure` scores, the chooser leans to deploy, the hard gates still run; [see the bracket at :1989] smelter-legal tier: the build candidate ranks first; refused overture: the casus rises next season. | "Iron has been dear in Mossgate for a year and its one smithy cannot meet the need; the council has sent envoys to Harrow for a pact." | EC-17 (+EC-8, pact lane, war layer); degraded: an arm whose decider is dark is silent |
 | M61 | Market-seeking (persistent glut) | Wool `glut` 26+ ticks at a weaving town. | — | Full warehouse. | The reserve notch down. | A `market_access` pact demand; a `far_market` venture (TR-7 lit). | `glut_refill` downstream. | `glut` holds until a market is found. | The house's venture (fortune/ruin); EC-8's contraction if no market comes. | "Cnocby's wool has rotted on the quay two seasons; its factors seek a market beyond the pass." | EC-17 (+TR-5 row, TR-7) |
 
 | M62 | The open road (uncontracted flow) | Mossgate's iron at `glut`; Harrow believed `pinched` for metal by Mossgate's court; stance `open`. | Harrow's need premium (truth) and Mossgate's believed picture of it. | Mossgate's warehouse at cap; its push bounded by rate and the reserve. | The road claimant takes above the reserve; a must-go to Mossgate's occupier (if any) leaves first and is never redirected. | Stance `open`/`taxed` admits the caravan; `closed` holds it. | — | Mossgate `glut`→`soft`; Harrow `dear`→`fair` with `relief_inbound` then the arrival; a stale belief mints the wrong-market kind. | Appetite learns from the outcome; a second origin's caravan to the same belief writes the glut home (the crowd). | "Mossgate's iron, cheap at home, went up the Harrow road on word that it was dear there." | EC-18 (+SP-B, EC-6, EC-3); aspatial: nothing moves |
@@ -2342,7 +2359,7 @@ These rows name no invented mechanism. Each is listed with the ruling that exclu
 The Economy tab is AT its 600-line ceiling (S55); every EC surface is a
 sibling leaf mounted by one line. **The Market Prices line** becomes a
 projection of `marketConditions`: one row per cried good — `{label} — {band
-phrase}` where the phrase is the MOVEMENTS enum (five today, six under EC-1):
+phrase}` where the phrase is the MOVEMENTS enum (five today, six under EC-1) [CORRECTED 2026-10-16 (coherence fold) — FIVE (J-EC-2; §6 EC-1 Collision)]:
 `glut`→"a third under its usual price" · `soft`→"a shade under" · `fair`→"at
 its usual price" (rendered only when a pressure exists) · `dear`→"nearly double
 its usual price" · `desperate`→"triple or more its usual price" (the owner's
@@ -2387,7 +2404,7 @@ condition, explain the chain (walking pressures and `input_short` slots),
 summarize a scenario, answer "why", answer a counterfactual by PROPOSING an
 EC-9 op (the DM runs it), propose a DM verb from the closed set
 (`SET_RESERVE`, `SET_TRADE_STANCE`) through the operation lane, explain a
-crossing's history from the newsLog. It may NOT establish a band, a pressure,
+crossing's history from the newsLog. [see the bracket at :653] It may NOT establish a band, a pressure,
 a stance or a draw; no path exists from AI output to any EC ledger (the
 `aiSettlement` overlay is prose-only and EC adds no writer the overlay can
 reach — pinned by an import fence on every EC writer against `src/lib/ai*`).
@@ -2410,7 +2427,7 @@ Three sub-keys (§5), each drop-when-empty, each with one writer, each
 JSON-round-trip pinned, each with its regen rule stated (rebuilt · preserved ·
 dropped). History is the NEWS: every crossing, draw receipt, stance edict,
 founding and closure is a newsLog entry with id and address chain, pacing-
-registered; `pulseHistory`'s 80-cap digest carries the crossings' kinds. A
+registered; [see the bracket at :653] `pulseHistory`'s 80-cap digest carries the crossings' kinds. A
 per-good time series is NOT built (S53): the brief's "historical change" is
 answered by the newsLog filtered by (settlement, good) in the Why panel's
 "history" row — if the owner wants a per-good series (OD-EC-9) it lands as a
@@ -2450,7 +2467,7 @@ wave except through OD-EC-2/OD-EC-8 (owner rows).
 No SP-7 temporal walker exists on master (GRAMMAR §224: "SPINE WORK …
 VERIFY-AT-BUILD"); EC-10 BUILDS it scoped to EC modules (every clock constant
 above read through INTERVAL_WEEKS; a bare integer tick literal in an EC module
-reds) and offers it to the SPINE as the estate-wide walker.
+reds) and offers it to the SPINE as the estate-wide walker. [RULED 2026-10-16 (coherence fold §4 / §3.1.11) — the temporal walker is SP-7's, re-chartered as `tests/lint/timeBase.walker.test.js` — a shrink-only exemption list seeded from the Class A/B/C census, a RED on any new bare 12/13/26/52 in `src/domain`, zero behaviour — riding the next spine unit; EC-10 builds no second, EC-scoped walker, and EC modules opt into the estate one]
 
 ### 9d Resilience (brief §23) — what makes two towns differ under one shock
 Already structural (S30, F1–F8 of the kit's B census): K=3 supplier ranking,
@@ -2516,8 +2533,8 @@ file class).
 | Services | plague fixture | healing `dear` via capacityModel ratio, no stock, no caravan; provisions respond by stock | EC-1 |
 | Resilience | two towns, one siege | the Mossgate/Cnocby TELLABLE (§9d) — different band sequences | EC-3 + EC-1 |
 | Believed war (the owner's case) | a court believes a rival is mobilizing (readiness ≥ preparing, confidence ≥ fair); no war exists | arms `fair`→`dear` with `expectation` (crown) and `crown_draw`; the reserve notch after a season; a build candidate after 13 ticks; the band moves ONLY because stock was drawn — a planted belief import in the derivation reds | EC-16 + EC-4 + EC-3 + EC-8 |
-| The war that never came (the foil) | the same fixture; the belief decays, no war opens | the draw stops; arms pass `soft` into `glut` with `outcome: unfounded`; the speculative mill closes at 26; the house's position is sold at glut (ruin reachable); the right-war twin fixture reads one rung LOWER at war's start than EC-4's unbelieving fixture | EC-16 |
-| The court's remedy (the owner's Mossgate case) | iron `dear` 13 ticks, one smithy, four fixtures by channel/tier/neighbour | mercantile ⇒ the pact trigger crosses with the `need` slot; martial + hostile neighbour believed to have iron ⇒ `resource_pressure` scores and the chooser leans to deploy; a smelter-legal tier ⇒ the build candidate ranks first; a refused overture ⇒ the casus rises next season; a hopeless target ⇒ no war opens; a signed pact or a founding ⇒ the need and the motive gone within the physics' lag | EC-17 (+EC-8, pacts, war) |
+| The war that never came (the foil) | the same fixture; the belief decays, no war opens | the draw stops; arms pass `soft` into `glut` with `outcome: unfounded`; the speculative mill closes at 26; the house's position is sold at glut (ruin reachable); the right-war twin fixture reads one rung LOWER at war's start than EC-4's unbelieving fixture [see the bracket at :1787] | EC-16 |
+| The court's remedy (the owner's Mossgate case) | iron `dear` 13 ticks, one smithy, four fixtures by channel/tier/neighbour | mercantile ⇒ the pact trigger crosses with the `need` slot; martial + hostile neighbour believed to have iron ⇒ `resource_pressure` scores and the chooser leans to deploy; [see the bracket at :1989] a smelter-legal tier ⇒ the build candidate ranks first; a refused overture ⇒ the casus rises next season; a hopeless target ⇒ no war opens; a signed pact or a founding ⇒ the need and the motive gone within the physics' lag | EC-17 (+EC-8, pacts, war) |
 | The open road (the owner's flow case) | origin at `glut`, two consuming destinations, one believed `pinched` | one speculative caravan to the believed-dear destination; a must-go and an exclusivity link on the same fixture unmoved; the nearer source still wins a pull when the preference weight is capped; the stale-belief arrival mints the wrong-market kind and lowers the origin's appetite | EC-18 (+SP-B, EC-6) |
 | Quality-specific shocks | mass levy under a `fine` profile | the arms band moves two rungs while the `fine` PROFILE is unchanged and the court mismatch stays `slight`; an elite affliction loads the `medical` record with a `fine`-class slot while the plague fixture loads it with `common` — the class in the sentence differs, the stock does not | EC-7 |
 
@@ -2559,7 +2576,7 @@ file class).
   options and each is ONE signed regen in T8's shift window with its cause.
 - A regen under THE PROMISE rebuilds `marketConditions` (rebuildable) and
   preserves `reserveBand` and `gradeEnvelope` (acts and verdicts); the
-  lossy `sinceTick` is receipted once.
+  lossy `sinceTick` is receipted once. [see the bracket at :866]
 
 ### 11b Deletion / replacement — only after a consumer census proves zero
 - `marketPrices.js`'s band mirror (`BAND_STOCKPILE_TARGET`, `commodityBandForGood`)
@@ -2638,7 +2655,7 @@ file class).
 - **J-EC-15 — THE SEQUENCE IS RECEIPTS → LADDER → PROPAGATION → STANCES →
   GRADES → VERDICTS,** physics after receipts (E11, enforced as a landed-work
   precondition), and the absorbed TR waves slot where their TR preconditions
-  allow (TR-2 after EC-1's mount; TR-4 any time after EC-3; the corner TR-6
+  allow (TR-2 after EC-1's mount; TR-4 any time after EC-3; [CORRECTED 2026-10-16 (coherence fold §3.2.10f) — the fold and FP-ORDER order TR-4 AFTER WY-3 — the caravan body and the commodity round-trip pin (DESIGN_FP_ARCHITECTURE.md:1613-1628; FP-ORDER:5)] the corner TR-6
   LAST of all, after the factor — §17 Phase E agrees).
 - **J-EC-16 — A CLAIMANT CLASS IS NOT A PARTY (the T4 reading).** T4 forbids
   posture SELECTING a partner, victim or market among SETTLEMENTS; EC-3
@@ -2663,7 +2680,7 @@ file class).
   narrows it.
 - **J-EC-21 — THE OPEN ROAD IS PARTIAL AND UNCONTRACTED (E15 made a ruling).**
   The condition is one weighted term in the existing dispatch decision and the
-  actor of a speculative caravan is the origin's merchant faction; contracted
+  actor of a speculative caravan is the origin's merchant faction; [see the bracket at :2103] contracted
   flows are fenced by name; the house's venture (TR-7) takes precedence where
   lit. The weight's cap below path cost is the chair's reading of "partially"
   and is a tuning band the owner signs at the soak.
@@ -2751,7 +2768,7 @@ its reason. Nothing is left as "the lane will see".
 | 21 | Dark-after-lit unhandled | CURED — each writer drops its ledger on the first dark tick, receipted, pinned lit→dark→absent |
 | 22 | Regen and death asserted with no hook (a–f) | CURED — the §5 lifecycle TABLE: full re-derivation (no hook; `sinceTick` NOT lossy), the regen marker read (verify its name), the envelope clamp at read, the writer's own death prune, undo/import stated, the `atTick` freshness rule |
 | 23 | Two walkers missing (spatialUsage manifest; tuning register) | CURED — added to §1c, S55, and every wave's files-touched |
-| 24 | The SP-7 temporal walker is not on master | CURED — EC-10 builds it scoped to EC |
+| 24 | The SP-7 temporal walker is not on master | CURED — EC-10 builds it scoped to EC [RULED 2026-10-16 (coherence fold §4) — re-chartered as SP-7's estate walker; see §9c] |
 | 25 | The war kit includes food; "after the draw" needs a war-writer rewrite | CURED — drawable basket {arms, iron, leather}; `procuredQuality.js` beside the multiplier as a declared WR seam |
 | 26 | EC-5 clashes with the arm rule, EC-4's pins and itself | CURED — hop lag 1; the upstream draw is a link-target notch (household), never crown; physical records move through the engine by target notch; no double count |
 | 27 | `several_times` and aspatial price phrases are flavor | CURED then RE-RULED by the owner (2026-10-16): MOVEMENTS stays five; every rung is relative to the DM's own standard on both arms; `desperate` = "triple or more" (open-topped, honest); words not numerals; the engine never reads the ratio |
@@ -2763,10 +2780,10 @@ its reason. Nothing is left as "the lane will see".
 | 33 | A refuted premise (transport/religious reads exist) and four asks without rows | CURED — §3b corrected; OD-EC-15 (labour reads), OD-EC-16 (oligopoly), OD-EC-17 (credit), OD-EC-18 (competition); §0c banner "mapped or declared" |
 | 34 | "One commit each" and the Phase A lane cap cannot hold | CURED — slices named for EC-1 (3), EC-6 (3), EC-8 (2), EC-2 (2 lanes); Phase A/B each two lanes |
 | 35 | The stance dwell needs storage | CURED — read from the buyer record's `stance_*` pressure `atTick` |
-| 36 | EC-8 omits EC-7; monopoly needs `fine` | CURED — EC-7 precondition on the envelope arm; monopoly on processor count alone |
+| 36 | EC-8 omits EC-7; monopoly needs `fine` | CURED — EC-7 precondition on the envelope arm; monopoly on processor count alone [see the bracket at :1596] |
 | 37 | Two brief numberings mixed | CURED — B§ / D§ prefixes in §0 |
 | 38 | §0c rows point at nothing | CURED — rows 7, 22, 23 corrected |
-| 39 | Pressure count disagrees (24 vs 27) | CURED — 27 everywhere |
+| 39 | Pressure count disagrees (24 vs 27) | CURED — 27 everywhere [see the bracket at :618] |
 | 40 | "TR-6 last" vs §17 | CURED — Phase E ends on the corner |
 | 41 | `EMBARGO_FLOOR` is not a hysteresis | CURED — an authored enter/exit deadband on the conscience mult |
 | 42 | `FINE_PROCESSORS` names are not in the catalog; `court: fine` unsatisfiable | CURED — tag-keyed table pinned to the catalog; the court class exists only where a court institution stands, its draw small; the no-wallpaper pin |
@@ -2782,7 +2799,7 @@ its reason. Nothing is left as "the lane will see".
 | 52 | `EconomicsTab.jsx` has one line left | CURED — EC-2's +1 is declared the last; later mounts net-zero |
 | 53 | `peaceTerms.js` at 799/800 | HELD AS WRITTEN — zero lines (the rows exist) |
 | 54 | "T10's car" ambiguous | CURED — "the TRAIN T10 product-surface car (§776.3)" |
-| 55 | Most TR flags are names only | CURED — §4 marks them "named only"; only `merchantHousesEnabled` has a gate read |
+| 55 | Most TR flags are names only | CURED — §4 marks them "named only"; only `merchantHousesEnabled` has a gate read [see the bracket at :573] |
 | 56 | No pact-compliance module on master | CURED — the absorption ruling names the units and the modules they landed in |
 | 57 | `economicsSlice` not found | CURED — `viewModel.js` / `viewModelBodySlices.js` |
 
@@ -2833,7 +2850,7 @@ realm verbs.
   inventories (one stock per (settlement, good));
 - AI-authored canonical economic facts (no writer reachable from AI output);
 - false precision anywhere a DM reads ("several times its usual price" is
-  the ceiling of specificity).
+  the ceiling of specificity). [see the bracket at :2239]
 
 ---
 
@@ -2883,8 +2900,8 @@ starts a war (E14), and surplus that finds its own road to where it is
 believed dear (E15) as EMERGENT outcomes with named causes; counterfactuals on the existing
 preview seam; a clerk that reads bands. Introduces: three drop-when-empty
 ledgers with regen rules; a claimant ladder inside the M6a writer family
-(conservation grows four rows); 27 pressure kinds that each owe phrase, pool,
-routing and registry rows; a family-sized build (eleven EC waves + five TR)
+(conservation grows four rows); 27 pressure kinds [see the bracket at :618] that each owe phrase, pool,
+routing and registry rows; a family-sized build (eleven EC waves + five TR [see the bracket at :87])
 on the order of forty-plus cars, behind the release; two owner-gated
 generation options (grade stamp, graph fold) that are NOT required for any
 wave to light.
@@ -2919,13 +2936,13 @@ J-EC-15):**
   end to end and NOTHING ELSE — `marketConditionEnabled` (EC-1), EC-2's
   mounts, `allocationLadderEnabled` (EC-3), `procurementEnabled` (EC-4),
   `marketExpectationEnabled` with its CROWN arm only (EC-16; the house,
-  founding and reserve arms stay dark by an authored arm mask), plus EC-10's
+  founding and reserve arms stay dark by an authored arm mask), [CLARIFIED 2026-10-16 (coherence fold) — the mask's SHAPE — a tuning row, a rule key or a persisted shape — is unspecified, and on a one-key flag it is a flag-shape change under §4's law-2 shape: it is specified before Phase F lights (findings TR-EC §5A-24)] plus EC-10's
   instruments — lit together in `full_simulation` at the signed soak; EC-5,
   EC-6, EC-7, EC-8, EC-17, EC-18 and the absorbed TR waves stay DARK until
   this loop's envelopes are measured and signed. THE LOOP ENVELOPE (the first
   the soak authors): over a campaign-decade, the share of wars whose
   resource_pressure casus traces to a need born of the court's OWN expectation
-  draw must be ZERO (the prophecy fence), and the share of expectation
+  draw must be ZERO (the prophecy fence), [CORRECTED 2026-10-16 (coherence fold) — with EC-17 DARK in this lit set no need ever reaches `resource_pressure`, so this share is structurally zero — the vacuous-pin class (DESIGN_FP_TRADE.md §1c) — and the prophecy fence goes untested at the first soak. Either EC-17's need read (no arms) joins the lit set — an amendment of the owner's R7 lit set, his — or the soak authors an envelope the lit set can move (e.g. the precautionary-draw share of crown draws)] and the share of expectation
   pressures resolving `unfounded` must sit inside an authored band (a world
   where every rumour comes true is as broken as one where none does). Then
   THE PROMISE's tuning review; then the next phase lights by what the soak
@@ -2964,15 +2981,15 @@ HISTORY the day a wave re-measures them.
 
 | # | Refinement | Applied where | Law it rides |
 |---|---|---|---|
-| R1 | **Fence the prophecy.** A dearness the court made itself (its own expectation draw or reserve) does not count toward its need for as long as the pressures stand plus one season; a rumour cannot become its own casus belli. An `unfounded` expectation that names a planter is evidence for a TR-1 reason against the planter's court — a taxonomy amendment (`false_alarm` ↔ `fair_warning`) the owner sequences; INFO's exposure grievance carries it until then. | EC-17 (the fence + pin), EC-16 (the planter line), §17 Phase F (the loop envelope) | T5 no ratchet; TR-1 registration-first mirrors |
-| R2 | **Give the market a memory — DERIVED, never a second decay.** SP-B's law forbids a second decay law (`beliefAxisSubjects.js:5-10`), so market reputation is NOT a new belief stock: `marketMemoryOf(observer, market, goodClass)` counts the `market_condition_crossed` entries the observer court has HEARD (the distance-priced newsLog is already per-reach) over the last N years and speaks `{unremembered, sometimes dear, often dear, dear as long as anyone remembers}` — a read over persisted news, no state. A house whose caravans twice found the harvest loses `credibility` (SP-5, TR-2) and its origin's `merchantAppetite` falls (M6c) — both exist. | EC-2's Why panel ("they say" gains the memory line); EC-18's push reads the memory as one more belief-side input | SP-B no second decay; K3 (heard, not known) |
-| R3 | **Let the seasons pull.** `SEASONAL_DRAW` — a closed table per category over `seasons.js`'s vocabulary (spring/summer/autumn/winter, hard winter): fuel one target notch up as winter closes, provisions before the marching season, textiles before autumn; applied to the household link's target (EC-3) or, structurally, as the 29th pressure `season_draw` (slight) on the record. The granary's seasonal arithmetic is untouched (T7). | EC-3 (the target notch), EC-1 (the pressure), the pressure list (29) | E6 band arithmetic; the temporal contract |
+| R1 | **Fence the prophecy.** A dearness the court made itself (its own expectation draw or reserve) does not count toward its need for as long as the pressures stand plus one season; a rumour cannot become its own casus belli. An `unfounded` expectation that names a planter is evidence for a TR-1 reason against the planter's court — a taxonomy amendment (`false_alarm` ↔ `fair_warning`) the owner sequences; INFO's exposure grievance carries it until then. [CLARIFIED 2026-10-16 (coherence fold) — a commercial reason for a grievance about a WAR rumour is war material entering the commerce taxonomy (J-TR-2's boundary, superseded in part by E14 only for the need read, §3.2.10b): the pair's sequencing is the owner's — recorded, not minted] | EC-17 (the fence + pin), EC-16 (the planter line), §17 Phase F (the loop envelope) | T5 no ratchet; TR-1 registration-first mirrors |
+| R2 | **Give the market a memory — DERIVED, never a second decay.** SP-B's law forbids a second decay law (`beliefAxisSubjects.js:5-10`), so market reputation is NOT a new belief stock: `marketMemoryOf(observer, market, goodClass)` counts the `market_condition_crossed` entries the observer court has HEARD (the distance-priced newsLog is already per-reach) over the last N years and speaks `{unremembered, sometimes dear, often dear, dear as long as anyone remembers}` — a read over persisted news, no state. A house whose caravans twice found the harvest loses `credibility` (SP-5, TR-2) and its origin's `merchantAppetite` falls (M6c) — both exist. [RULED 2026-10-16 (coherence fold §5) — the market memory is a TRUTH-side DISPLAY over the town's own record — display-only over `pulseHistory` until RULED BY DELEGATION 2026-10-16, OD-FC-27 — so condition words are lawful; it speaks in the record's voice ("by the ledger, iron was dear three winters of the last five"), never "they say"; and as display-only it is NOT an input EC-18's engine push may read] [see the bracket at :653] | EC-2's Why panel ("they say" gains the memory line); EC-18's push reads the memory as one more belief-side input | SP-B no second decay; K3 (heard, not known) |
+| R3 | **Let the seasons pull.** `SEASONAL_DRAW` — a closed table per category over `seasons.js`'s vocabulary (spring/summer/autumn/winter, hard winter): fuel one target notch up as winter closes, provisions before the marching season, textiles before autumn; applied to the household link's target (EC-3) or, structurally, as the 29th pressure `season_draw` (slight) on the record. The granary's seasonal arithmetic is untouched (T7). [CORRECTED 2026-10-16 (coherence fold) — `provisions` is food and NON_SHIPPED and EC-3's no-food pin forbids its household link: the `provisions` row is struck to a STRUCTURAL pressure only, named against the granary's own seasonal swing (T7); "marching season" is not a seasons.js term (only a comment, spatialCost.js:92)] | EC-3 (the target notch), EC-1 (the pressure), the pressure list (29) | E6 band arithmetic; the temporal contract |
 | R4 | **Make the contract visible.** `contractOf(link)` derived; the Realm pair card and the Why panel say "under contract — <reason>" for every fenced link. | EC-18 | SPINE §1.6 dossier round-trip |
-| R5 | **Cut where two arms are one.** The overture arm folds into the partner arm (EC-17: three arms); EC-18's preference arm becomes a car-0 MEASUREMENT against TR-3's destination order and is deleted if redundant. | EC-17, EC-18 | measure first (OPERATING_STANDARD rule 5) |
+| R5 | **Cut where two arms are one.** The overture arm folds into the partner arm (EC-17: three arms); EC-18's preference arm becomes a car-0 MEASUREMENT against TR-3's destination order and is deleted if redundant. [see the bracket at :1956] | EC-17, EC-18 | measure first (OPERATING_STANDARD rule 5) |
 | R6 | **The quality reopen path, recorded not built.** A derived `fineShare` band on the origin's warehouse, if the demand-side sentence proves thin at the table — on the owner's word after the first soak. | OD-EC-2 | J-EC-5 as corrected |
 | R7 | **THE FIRST SOAK — the minimum lit set.** EC-1, EC-2, EC-3, EC-4, EC-16's crown arm, EC-10. Everything else dark until the loop envelope is measured and signed. | §17 Phase F | THE PROMISE; the lighting signature is the owner's |
 
-None of R1–R7 adds a persisted key, a kernel line, or a decider. Each is a
+None of R1–R7 adds a persisted key, a kernel line, or a decider. [CLARIFIED 2026-10-16 (coherence fold) — true only with R2 display-only (OD-FC-27); R2's credibility and appetite consequences are writer-input changes to landed TR-2 / M6c modules, recorded as those programs' acts] Each is a
 read, a fence, a table, a mount row or a measurement; the two that touch a
 program outside EC (R1's TR-1 pair, R2's SP-5 read) are recorded as the other
 program's acts. All seven await the same skeptic pass as EC-16/17/18 and the

@@ -13,7 +13,7 @@
 ## this compile — three points on a moving tree; LIVE CODE OUTRANKS EVERY TABLE
 ## IN THIS DOCUMENT). The template and protocol authority is
 ## docs/DESIGN_WAR_RULINGS_ARCHITECTURE.md (its section discipline is copied
-## here; its §10 binds verbatim in §10 below). This document is self-contained:
+## here; its §10 binds verbatim in §10 below) [see the bracket at §10's heading: an amended superset, not verbatim]. This document is self-contained:
 ## an implementer with zero session context and this document can build every
 ## wave — the per-program architecture files (docs/DESIGN_FP_ARCH_{SP, GR,
 ## IN, TR, WF, POP, INT, CW}.md, plus docs/DESIGN_FP_ARCH_ES.md and
@@ -35,11 +35,14 @@
 ## WC is ARCHITECTED, NOT STARTED with all 22 chair questions RULED but one
 ## owner escalation standing (CR-WC-9, the persisted field batch). Each
 ## volume's own header states its status; a reader who reads "landed" as
-## "sealed" has been warned here first.
+## "sealed" has been warned here first. [CORRECTED 2026-10-16 (coherence fold) — the sealing statement is not re-measured here; its 'not started' and 'standing escalation' halves are stale: HB-0..2, EP-0..3 and WC-0 LANDED (coherence fold §2); CR-WC-9 is ruled PARKED until chain 2 asks for a field (OD-FC-20, by delegation; see the bracket at §4's 2026-08-07 sub-key paragraph).]
+
+**⭐ THE EDIT MODE FOLD, chair 2026-09-23 (session 87797a6a, Fable 5.1; measured at `8b5565922`): §1 gains L10 — THE EDITOR; §12 carries the fold (the seam measured, the seal ledger, the rulings, the order under tests-only mode); §5's progress is RE-DERIVED at that tip (28 landed · 10 partial · 73 not started) [RE-DERIVED 2026-10-16 (coherence fold) — see the bracket at §5's 2026-09-23 progress block: 37 · 12 · 62 at 00b648c9d]; the per-wave detail volume docs/DESIGN_FP_ARCH_EDITOR.md is NORMATIVE where §12 compresses it. Spine requirement 14's MECHANICS are superseded by L10; its totality survives.**
 
 **Status: ARCHITECTURE. Nothing here is scheduled until the owner sequences it
 against the standing pipeline. Every wave ships DARK; no flag lights, no soak
-runs, no band ratifies outside the owner-signed schedule. Where this document
+runs, no band ratifies outside the owner-signed schedule. [CORRECTED 2026-10-16 (coherence fold) — THE STATUS OF RECORD IS docs/DESIGN_FP_COHERENCE_FOLD.md §2; this header is history. 'Every wave ships DARK; no flag lights' is SUPERSEDED for FP by §12.8 (J-EM-15/16, ODQ §934.84 "shipped lit"). In one line: nine FP keys lit; 37 landed · 12 partial · 62 not started of 111 at 00b648c9d (65 not started of 114 with §13) — LIT: `pactFormationEnabled` + `faithUnseatingEnabled` in the four world-alive presets incl. the realistic_regional default chip; `beliefAxesEnabled` + `believedConditionsEnabled` + `believedScarcityEnabled` in dramatic_campaign, living_realm and full_simulation; `mediationGeneralizedEnabled` + `oathHolderEnabled` + `treatyLifecycleVoiceEnabled` + `treatyRenewalEnabled` in dramatic_campaign and full_simulation (simulationRules.js FP_LIT_*, :789–802) · BUILT DARK: every other minted FP layer (24 of §3's 63 flags are minted; errandSpine, merchantHouses, espionage, the IN four, cascadeGovernor, habitConditioning, the WC pair and advanceEpoch among them) · UNBUILT: the rest, per the coherence fold's §2 table.] Where this document
+[ADDED 2026-10-16 (coherence fold §3.4, requirement 24 — the owner's HEARING WEEK) — ENGAGEMENT KINDS this program registers in the wave that builds each: the compiled fold's seal 6 `letSiegeFall` is generalised into the STANDING `siege` kind (every week the siege stands, the DM may leave, tilt or decree); `raid`, `war_declaration`, `blockade` are the war volume's rows; the Edit Mode seal family (§12.2) gains ONE kind, the hearing seal, with its three choices. Once `hearingWeekEnabled` is lit no kind resolves in the tick it arrives at a one-week advance: it mints its pending verdict and the DM may leave it, tilt it or give a verdict (never a "decree" — the Decree Registry's word); month/season/year advances run the engine default; the hearing never parks the advance cursor (skeptic S5). Each kind's pending card is its FIRST-VISIBLE sign.]
 and a program architecture disagree on SUBSTRATE, the fresher measurement wins
 and the disagreement is a bug to report; where they disagree on DESIGN, the
 source volume (DESIGN_FP_*.md) wins. Judgments are labeled JUDGMENT and are
@@ -84,13 +87,15 @@ whole realm spans 2..8 march weeks so a band >= 9 refuses nothing).
 and `applyWorldPulse.js` (941, zero headroom) receive ZERO edits ever — FP
 stages mount via the lifecycle host (`settlementLifecycleKernel.js`,
 own-flag-before-host-gate — the advanceSovereigntyMarket precedent), the
-treaty mint folds, or the mover seam. Provenance: the WR-10 wiring wave
+treaty mint folds, or the mover seam. [CORRECTED 2026-10-16 (coherence fold) — two sanctioned exceptions exist: EP-1's six-token seam (§5 EP-1) and Edit Mode's `applyDecreesAtTick` hook (L10(d)), which moved the enforcer baseline 1580 → 1581 (`scripts/.size-baseline.json:13`); applyWorldPulse stands at 907, not 941 (`:9`). The law reads: no FP stage mounts in the kernel; EP-1 is the one FP edit.] Provenance: the WR-10 wiring wave
 measured that mounting the market stage in the lifecycle kernel the wrong way
 would have minted a 35-module dist chunk-cycle (the TDZ boot class), and
 R-BLD-10 proved the kernel's PRNG call order IS the stream identity.
 
 **L2 — FLAGS.** Every FP flag is VIRTUAL: absent from
-DEFAULT_SIMULATION_RULES and every preset spread, strict `=== true` reads,
+DEFAULT_SIMULATION_RULES and so from every preset's defaults spread (never
+from the presets its LIT-n lighting unit names — J-EM-16, the lit law,
+LGT-C2 `432ff6441` the precedent), strict `=== true` reads,
 dark-never-permissive. Manifest timing is MECHANICAL (CR-WR10-C): the flag
 joins `ENGINE_GATED_VIRTUAL_RULE_KEYS` (`simulationRules.js:185`) in the SAME
 commit as its first real gate read, with its certification row (or a
@@ -200,6 +205,21 @@ the agent-stash incident, the NUL class, and the WR chain of honest STOPs.
 
 ---
 
+**L10 — THE EDITOR.** Edit Mode and the Decree Registry landed on the build branch between 2026-09-19 and 2026-09-23 (docs/DESIGN_EDIT_MODE_AND_DECREES.md §13–§22 and docs/ARCH_EDIT_MODE_AND_DECREES.md are the design and the build contract; docs/implementation/surveys/SIM-SEALS-SURVEY-2026-09-19.md is the measured map of every simulation option a DM could direct; the Edit Mode charter docs/implementation/charters/EDIT-MODE-TRAIN.md carries the members). The editor is ONE door into ONE queue applied at ONE moment: the DM edits FACTS from POOLS, every change is a typed OP through the one mutation boundary, a canonized town takes its changes as DECREES applied at the head of the tick as first-class causes, GUARDS inform and never refuse, a process card wears a SEAL (a directive — a `pin-fork` over a registered fork's own outcome vocabulary, or a DIRECTION over a layer's own action), an off-stage counterparty is a PHANTOM that can absorb an act and never return one, and entity states (an NPC's `status`, an institution's `state`) are typed roots with one writer each. Spine requirement 14 (the Edit-verb story) was written against the Change Dock and the operationRegistry lane; the editor REPLACED the Change Dock, so requirement 14's MECHANICS are superseded by this law and its TOTALITY survives verbatim: a state with no verb is a RECORDED decision ("engine-only, because X"), never silence. Every remaining FP wave carries an EDITOR line with five members (§12 carries the lines; a landed wave's old Edit-verb clause is history):
+
+(a) **FORKS.** Every stochastic choice the wave mints — a `w * hash01` race, a keyed roll, a softmax over candidates — registers its row in `HABIT_FORK_REGISTRY` (`src/domain/worldPulse/habitForkRegistry.js`) IN THE SAME COMMIT, with its `actionVocabulary` declared when the outcome is a closed word set (so `pin-fork` can direct it the day it exists) or classed STAY / derivation-only WITH THE REASON; the chooser-totality walker's figures are re-measured by execution, never inherited. The survey's three dangerous classes are never pinnable and are declared as such where they occur: a receipt-prose pick (it would pin the herald's sentence, not the world), an observation's noise (the world would lie with provenance reading `observed`), and a verdict's band without its roll (a pinned verdict carries its band — §19 ruling 3). Extends L1: the hash key stays the stream identity; the registry row names it. A wave whose fork has no symbol (the `piety` class) registers nothing and says so.
+
+(b) **SEALS AND CONDITIONS.** A wave that mints a PROCESS a DM could direct — a pact proposal, a mission, a tithe, a pilgrimage, an omen read, a schism, a venture, a corner, a seizure, a call-in, a relay, a fission, a renewal, a mediation — lands in the same wave: (i) its §18 WORLD-STATE PREDICATE in `src/domain/edit/worldConditions.js` by symbol, read from the record and the campaign and TRUE in a real world (a writer reaches it from `src/`, measured — never a predicate that is "absent until" a later wave; that is the standing-offer defect, U105); (ii) the ACT the seal binds, which is the layer's OWN action, found by THIS LADDER and never minted before the ladder is exhausted: a realm-manifest verb where one exists (`src/domain/events/realmManifest.js :: REALM_MANIFEST`, its own predicate as the condition and `realmVetoProse(code, detail)` as the herald's reason); else a declared direction where one exists (`src/domain/edit/directions.js :: DIRECTION_OP_TYPES` — the force, the muster, the levy, the occupier's posture, the tempo, the brokerage menu, the channel status, the three belief ops, the credibility kinds); else a registered fork's pin (`HABIT_FORK_REGISTRY`, a row WITH `actionVocabulary`); else an off-stage op (`operationsOffStage.js :: OFF_STAGE_OP_TYPES`); else a NEW direction row DEFINED in the wave's own module in `operations.js`'s `OpTypeDeclaration` shape with its vocabulary imported from the module that owns it (`directions.js`'s law: not one word of vocabulary is spelled in the registry) and imported by the registry at the merge — the chair's composition. The same holds for a NEW world-state predicate: defined in the owning module in `worldConditions.js`'s `liveRow` shape and composed into `WORLD_CONDITIONS` by the chair at the merge, the partition arm re-recorded with the cause. Every act routes through `changeAuthorityPolicy.js :: authorityFor` / `actorMajorApproval.js :: ACTOR_INITIATED_MAJOR_TYPES`; a `pin-fork` or a direction that bypasses the approval queue is a second write path and is refused at compile; (iii) its seal row on the card's per-card table with the herald's reason line for the missing condition; or (iv) the record "no seal, by design" with the survey's Table 2 class. A seal is never a wall: the missing condition names the act that creates it ("No peace has been offered. Make them sue for it, or wait."). The phantom column is law (§19 ruling 10): a two-sided act is `real-only`; a home act is `home+record`.
+
+(c) **THE COUNTERPARTY.** Every inter-settlement mechanism the wave builds declares its phantom policy AT THE SEAM: `real-only` (a treaty, a pact, a route, a contest, a coalition, a channel, a war state — §13: nothing of these is ever derived from a phantom; not offered on one, and the card says why) or `home+record` (the home procedures act on the home's own state; the chronicle carries the declaration or the outcome, marked off-stage). Every reader of neighbour rows the wave adds accepts a phantom partner — a minimal save record, `kind: 'phantom'`, no simulated side — without throwing: one pin per reader. Promotion never rewrites the past: a phantom's record-only outcomes stay record-only after it is forged (THE PROMISE).
+
+(d) **THE TICK AND THE STATES.** Decrees apply at the HEAD of the tick as first-class causes (`applyDecreesAtTick`, the one hook `pulseKernel.js` gained — L1's zero-edit law on the kernel stands: FP mounts nothing there), before every FP stage; an FP stage reads the post-decree world and never caches a fact across the head. An FP stage that CASTS a person — an envoy, a spy, a factor, a pilgrim, a legate, a mediator — reads the ONE participation chokepoint, `src/domain/roads/state.js :: isOffStage` over `OFF_STAGE_STATUSES` (derived from `src/domain/entities/npcs.js :: NPC_UNAVAILABLE_STATUSES`; `dead` is paired by each consumer; `missing` and `retired` are DELIBERATELY absent, per that module's own words — a wave cites the symbols and never restates the list), and never a filter of its own; away-on-mission is the errand record's position, read from it, never a status. An FP stage that moves an institution's standing writes through the writer the `set-institution-state` op uses (`calamityKernel.js :: ruinInstitution` for ruin), never a parallel state; an FP stage that moves a person out of play writes through the writers the `set-npc-status` op uses (the ops layer's existing writers — no single exported NPC-status symbol exists at the base; the first wave that needs one names it and lands it once). An applied decree's chronicle line comes from the decree pools with `cause: 'table' | 'party'` — L6's five joins gain a sixth for any FP news kind a decree can cause: the cause vocabulary row. Pins, directions and off-stage acts reopen READ-ONLY once applied; the rewind is `undoLastPulse` and retracts the tick's lines (THE PROMISE, §12.1 of the design).
+
+(e) **THE RECORD AND THE VOCABULARIES.** An FP wave that writes a first-hand fact on the SETTLEMENT RECORD (a `creedRef`, an appetite, a house's standing, a doctrine sheet) classes it BY PATH in the record register (`src/domain/edit/recordRegister.js`: HELD · WORLD · CONSTANT · READING · MIRROR · RECEIPT · HISTORY · AUTHORED) in the same commit — the totality walker reds an unclassed key — and a HELD fact is either a ROOT (a field declaration with its pool, on the card's table) or wears a provenance note. worldState-side state — the fourteen `spatialLedgers` sub-keys of §4, the conditional fields on pulse records — is LIVED HISTORY outside the record register and outside `rederive`: FP never adds to the held set generation re-derives, and this clause is the statement of it. A vocabulary a decree can point into (an op type, a fork id, an outcome word, a pool value, a catalogue event, a mission kind) is SAVE-DATA CONTRACT: renaming or removing a member is a vocabulary move that §20.3's resolver withdraws pending decrees on with a reason — the wave names the move and lands the arm that proves the withdrawal, never a silent rename.
+[RULED 2026-10-16 (coherence fold §5, the vocabulary register) — in this volume: 'pin' means a test assertion and 'seal' the Edit Mode directive (the landed op token `pin-fork` stands; prose never says 'pinned' for a seal); HB's 'doctrine sheet' is 'the habit sheet' in prose and in every unlanded token (`habitSheet`, `habit_sheet_shifted`; the flag `believedDoctrineEnabled` stands); there is ONE tithe (§3.1.5 — see the bracket at #39 WF-7); the phantom policies are L10's two, `real-only` and `home+record` — §12.2's 'home-only' is not a policy (see the bracket at §12.2 row 4).]
+
+**Precedence.** Where this law and the Edit Mode design disagree on the EDITOR'S MODEL, the design governs and the disagreement is a bug to report; where they disagree on FP SUBSTANCE (what a treaty, a mission, a tithe IS), the FP volumes govern. Provenance: the seal survey (146 candidate rows; at the survey 1 of 42 registry rows carried a vocabulary, at this fold 6 of 86 [CORRECTED 2026-10-16 (coherence fold) — 104 distinct `HBF-` ids and 10 `actionVocabulary:` rows at 00b648c9d (habitForkRegistry.js)]; the owner's named acts were unregistered draws), the cure day's measurement that twelve of the shell's sixteen seals name an act no catalogue can express and one bound seal could never light in a real world (U104, U105), and the standing-offer STOP (E4e v1) — each a defect this law prevents at the wave, not at the surface.
+
 ## §2 SUBSTRATE CENSUS (merged; refutations PROMINENT; live code outranks
 ## every row — re-verify anything you build on, with the multi-spelling grep
 ## that found it; J-WR-13's standing STOP rule binds: an implementer finding
@@ -219,7 +239,7 @@ class:
 **CLASS 1 — MOVED / EXTRACTED SUBSTRATE (navigate by symbol, land in the new
 home):**
 - `TERM_CATALOG` no longer lives in peaceTerms.js. It was EXTRACTED to
-  `peaceTermsCatalog.js` (:141-192): now **12 terms / 8 families**,
+  `peaceTermsCatalog.js` (:141-192): now **12 terms / 8 families**, [CORRECTED 2026-10-16 (coherence fold) — 26 terms / 13 families at 00b648c9d (node import of peaceTermsCatalog.js); derive from the live export, as this row says.]
   `sovereignty_transfer` landed with WR-10, and `TERM_FAMILIES` is **DERIVED**
   from the catalog at :192 — every sizing pin derives its census from the live
   export, never a hand count. GR-3's "extract the catalog" slice is VOID
@@ -347,7 +367,7 @@ if it existed):**
   writer, pinned by a round-trip-THROUGH-ENQUEUE test, not a save/load test.
   Columns persist fine — serialization was never the hazard. [POP RF-1]
 - An UNCLASSED return column is landed by M4's releaseArrivals with the wrong
-  story and no clearing — the closed class set gains `'returning'` (J-FP-POP
+  story and no clearing — the closed class set gains `'returning'` [RULED 2026-10-16 (coherence fold §3.1.7, §5) — the return class is `column_return`, ruled once across POP/WC/LG/ES (not `returning`, which collides with three existing states); ONE union with one `columnOf` whitelist — POP owns the CIVILIAN classes, WC the MILITARY classes (WC-0 landed `MILITARY_COLUMN_CLASSES`).] (J-FP-POP
   ruling, §6; POP Q1's recommendation adopted). [POP RF-2]
 - CR-WR10-C (2026-08-04) SUPERSEDES every volume's flag-manifest mechanics:
   manifest membership + certification row (or declared-pending) + first
@@ -399,7 +419,7 @@ if it existed):**
    wrong one is a silent semantic error no walker catches.
 5. **The flag manifests, verbatim:** ENGINE_GATED_VIRTUAL_RULE_KEYS = five
    members (beliefAxes, conquestDoctrine, infoStatecraft, migrationRumors,
-   sovereigntyTrade — all with certification rows);
+   sovereigntyTrade — all with certification rows); [CORRECTED 2026-10-16 (coherence fold) — 43 entries at 00b648c9d (simulationRules.js:230–668), and nine FP keys are LIT (see the status bracket at the head).]
    PENDING_MANIFEST_KEYS empty (WW-A drained it — the atomicity mechanism
    working); EXEMPT = routineMajorApproval alone, by recorded rationale;
    BACKLOG_RULE_KEYS = 17, shrink-only, asserted exact, new keys forbidden.
@@ -429,7 +449,7 @@ if it existed):**
 
 Raw `wc -l` and enforcer-effective lines are DIFFERENT CURRENCIES: pulseKernel
 is 2,820 raw / **1580 effective-banked**; applyWorldPulse 1,291 raw / **941
-effective**; settlementStrategy 1,360 raw / 812; warTermination 818 effective
+effective**; settlementStrategy 1,360 raw / 812; [CORRECTED 2026-10-16 (coherence fold) — at 00b648c9d: pulseKernel 1581 effective (the decree hook), applyWorldPulse 907, and settlementStrategy's baseline entry is DELETED (812 → 760, under the ceiling; J-EM-6) — `scripts/.size-baseline.json`.] warTermination 818 effective
 FROZEN. Only enforcer-effective figures are load-bearing, only at the
 publishing commit. Counts rot like line numbers: the Herald routes 354 kind
 tokens today (not 269; knowledge starvation ~1.1%, worse); WF-8's 3x census
@@ -442,8 +462,10 @@ build. Never quote a figure from a volume — including this one.
 ## contract)
 
 **The law (all 63, no exceptions — CR-WR10-C, superseding every volume's §3
-mechanics):** VIRTUAL (absent from DEFAULT_SIMULATION_RULES and every preset
-spread); strict `=== true` reads, dark-never-permissive; at least one BY-NAME
+mechanics):** VIRTUAL (absent from DEFAULT_SIMULATION_RULES and so from every
+preset's defaults spread, and PRESENT, strictly `true`, in the presets a LIT-n
+lighting unit names — J-EM-16, the lit law, LGT-C2 `432ff6441` the precedent);
+strict `=== true` reads, dark-never-permissive; at least one BY-NAME
 read (the conjunction-gate hole, §1 L2); the flag joins
 `ENGINE_GATED_VIRTUAL_RULE_KEYS` + its certification row OR declared-pending
 entry + its first real gate read in ONE COMMIT (pending entries convert to
@@ -452,7 +474,7 @@ engineGatedRuleKeys walker asserts the exact one-key delta); the four-fence
 dormancy set + lit-mutant control per flag; display-side flags take
 EXEMPT_RULE_KEYS rationale rows instead (the heraldCausalVoiceEnabled
 precedent). Certification lanes: each program certifies in its own
-subsystemRows lane file (INT mints subsystemRowsInterior.js; others follow
+subsystemRows lane file (INT mints subsystemRowsInterior.js; others follow [see the bracket at #56 INT-7: subsystemRowsVirtual.js, J-EM-6]
 the WW-A/virtual-rows pattern) — the totality walker asserts the PARTITION,
 not the address. The five WR flags predate the manifest and certify
 lane-only; that history-vs-doctrine nonuniformity is chair question Q5.
@@ -469,7 +491,7 @@ lane-only; that history-vs-doctrine nonuniformity is chair question Q5.
 | 8 | `pactFormationEnabled` | GR-2/GR-3 | proposal ledger, triggers, two-sided drafting, standalone NAP, new term families' producers |
 | 9 | `treatyRenewalEnabled` | GR-5 | renewal window, renegotiation, conversion, worstObservedEver writer |
 | 10 | `mediationGeneralizedEnabled` | GR-6 | intent-stage pressure, fraying-pact pass, temple arm |
-| 11 | `secondOrderBeliefEnabled` | IN-1 | mirrorOf + every consumer |
+| 11 | `secondOrderBeliefEnabled` | IN-1 | `secondOrderMirrorOf` + every consumer |
 | 12 | `infoLureEnabled` | IN-2 | axis-typed plant subjects + bait receipts |
 | 13 | `counterIntelEnabled` | IN-3 | sweep/vet/send-two/hide-as-answer + suspicionOf + house exposure producer |
 | 14 | `reputationRaceEnabled` | IN-4 | race-at-arrivals + who-knew-first outcome keys |
@@ -518,7 +540,7 @@ lane-only; that history-vs-doctrine nonuniformity is chair question Q5.
 | 57 | `warCirculationEnabled` | WC-0 | the WC ROOT CONJUNCT — every war-circulation gate reads it FIRST and BY NAME, `!== true` fails closed; it gates no behaviour of its own |
 | 58 | `contributionLedgerEnabled` | WC-1 | ARC A's engine (WC-1..WC-5): the arrival-credit ledger, the derived war stance, the lawful relay and the chaotic skim, call-ins/exits and the doctrine page |
 | 59 | `compositeArmiesEnabled` | WC-6 | ARC B's rosters, forks and integrals (WC-6..WC-9): `blocks[]` on deployment records, the realized share, the comradeship pair integrals |
-| 60 | `freeCompaniesEnabled` | WC-10 | WC-10..WC-12: the endurance/concentration envelopes, fission and free units, brigandage and the embattled state |
+| 60 | `freeCompaniesEnabled` | WC-10 | WC-10..WC-12: the endurance/concentration envelopes, fission and free units, brigandage and the embattled state [RULED 2026-10-16 (coherence fold §3.1.16, §5) — 'embattled' is ONE thing: the live `embattlement` ledger phase (spatial/embattlement.js); a brigand siege is one more ramp term on that ledger, never a parallel stressor.] |
 | 61 | `moverAbsorptionEnabled` | WC-13 | WC-13..WC-14: hop-and-shed, the ONE absorption market, homecoming and the demobilization pulse |
 | 62 | `veteranCohortsEnabled` | WC-15 | WC-15..WC-16: the resident-cohort reads, diaspora bonds, and the domestic order dividend |
 | 63 | `advanceEpochEnabled` | EP-1 | the advance-epoch stream segment: living futures on every user advance, recorded nonces for byte-exact replay |
@@ -608,7 +630,7 @@ of order is an invalid config each program's convergence walker reds. SP-B's
 axis flags require `beliefAxesEnabled` lit first; WF SPREAD-lane flags AND
 with `isFaithSpreadEnabled`; POP flags require `demographicsEnabled`;
 `faithNarrationEnabled` lights last within WF. All lighting is owner-held at
-the signed soak redo. THE WR-10 CONVERGENCE (amended at the 2026-08-05 fold,
+the signed soak redo. [SUPERSEDED BY EVENT 2026-10-16 (coherence fold) — the owner's 2026-09-23 word "no just build it all shipped lit" (§12.8 J-EM-15/16, ODQ §934.84) superseded owner-held lighting at the soak redo; LIT-n units light in dependency order, each with its re-record cause.] THE WR-10 CONVERGENCE (amended at the 2026-08-05 fold,
 ES ⟨F9⟩): the `sovereigntyTradeEnabled` lighting condition is satisfied by
 **SP-B + SP-B2 + ES-4 landed**: SP-B mints the leg SURFACES, SP-B2 wires the
 SEAM, and ES-4 proves the SOURCE — a non-neighbor (court, holding) pair
@@ -664,18 +686,23 @@ ordinal goes stale at the next fold while a derivable one cannot. THE TWO
 PROGRAMS HOLD THE LINE AND ADD NOTHING TO (a): between them ES and WY mint
 ZERO new top-level keys, ZERO new spatialLedgers sub-keys and ZERO new
 mapState keys — ES one conditional sub-record, WY nine conditional fields on
-existing records plus the frozen-digest datum `spatialDigest.kmScale`. WY's
+existing records plus the frozen-digest datum `spatialDigest.kmScale`. [RULED 2026-10-16 (coherence fold §5) — `kmScale` is the WORLD scale (km per realm map unit; WY-1 `bfe4830d0` minted the datum, which nothing writes yet — FPQ-37); the town map's scale bar is MF's distinct `viewMetersPerUnit`; prose says 'the world scale' / 'the map's scale bar'. Its default is the map's implied scale (OD-FC-22, by delegation).] [CORRECTED 2026-10-16 (OD-FC-22 as finally ruled, after lane F and skeptic S3 M1) — the default is the map's EXPORTED `distanceScale` + `distanceUnit` converted to km (FMG's default unit is MILES, public/map/index.html:5231); `DEFAULT_KM_SCALE` is the fallback for maps without a scale, unit km, on the FP-46 tuning roster; FP-10's "implied scale" sentence on the FP board is amended by this bracket's pointer.] WY's
 nine are an OWNER-GATED BATCH SIGN-OFF (persisted-record shape;
-docs/DESIGN_FP_ARCH_WY.md §2a IS the request). F9 `supplyCargo`: ⏱
-SIGNED — released at its queue position; see the SOL_QUEUE header
-reconciliation of 2026-08-09 (the grant's RELEASED-TO-BUILD list names
-F9; WC-10 HARD-GATES on WY-8a's BUILD, not on the signature). Every
-field remains drop-when-absent and flag-gated.
+docs/DESIGN_FP_ARCH_WY.md §2a IS the request). F9 `supplyCargo` is UNSIGNED
+at this fold — no wave mints it until the owner signs its row; every field is
+drop-when-absent and flag-gated, so an unsigned row stalls exactly one wave,
+never the program.
+⚠ F9: status governed by the SOL_QUEUE reconciliation of 2026-08-09 (`docs/SOL_QUEUE.md`
+header), which applies the owner's blanket queue sign-off granted 2026-08-05 and recorded
+in `docs/FABLE_VALIDATION_QUEUE.md` — **SIGNED, released at its queue position; this older
+spelling is superseded** (noted 2026-08-11 per chair order, session `c42c8924`).
+This file's own WC-10 charter already carries the reconciled reading: "F9
+`supplyCargo` is owner-SIGNED under the blanket sign-off but UNBUILT".
 
 **THE 2026-08-07 FOLD ADDS SIX SUB-KEYS AND STILL ZERO TOP-LEVEL KEYS.** HB
 one, WC four, EP one — each conditionally materialized, each with exactly ONE
 writer, each drop-when-absent. ⛔ **WC's four are an OWNER-GATED BATCH
-SIGN-OFF and the escalation is LIVE (CR-WC-9), on the WY §2a precedent:** the
+SIGN-OFF and the escalation is LIVE (CR-WC-9), on the WY §2a precedent:** [RULED 2026-10-16 (coherence fold §7 OD-FC-20, by delegation, vetoable) — five records disagreed; CR-WC-9 is read PARKED until chain 2 asks for a field, and WC-0E's two normalizers stand (writer-less, no byte persisted).] the
 batch is `deployment.blocks[]` including `blocks[].drawnCohorts`, the transit
 blocks projection, the shipment relay buckets (consumed/skimmed/destroyed),
 the column cohort tag + military classes, the FOUR spatialLedgers below, and
@@ -693,7 +720,7 @@ unsigned batch stalls WC-6 onward, never WC-0/WC-1.
 | `ventures` | TR-7 | ventureLedger.js | PRESERVED in flight; dangling shipmentRefs close `failed` with receipt |
 | `omenReadings` | WF-4 | omenReading.js | history — preserved with religionStates; readings never re-derive |
 | `departureMemory` | POP-3 | departureMemory.js | RE-DERIVED (pure function of ticks and flows); terminal death freezes pairs |
-| `calamityArcs` | POP-4 | calamityArc.js | RE-DERIVED from replayed evidence; pruned after aftermath window |
+| `calamityArcs` | POP-4 | calamityArc.js | RE-DERIVED from replayed evidence; pruned after aftermath window [RULED 2026-10-16 (coherence fold §3.1.9) — POP-4 FOLDS INTO PG; `calamityArcs` is NOT minted (the name collided with the lit calamityKernel); PG owns the arc.] |
 | `burials` | INT-6 | burialLedger.js | PRESERVED (campaign state); a regen that removes a pair lapses its burials through the writer |
 | (`pendingPlants`) | IN-0a fallback ONLY | act-apply lane | drop-when-empty deposit under the D-3 contract — exists only if Q3's primary road fails |
 | `habits` | HB-2 | habitLedger.js `writeHabits` | RE-DERIVED is IMPOSSIBLE and not attempted — learned stocks are accrued history. Sub-key versioned by its own `v` with HEAL-TO-ABSENT on an unknown version; NO world migration and NO `WORLD_STATE_SCHEMA_VERSION` bump, because absent-habit worlds ARE the legacy shape |
@@ -728,7 +755,7 @@ writer):**
   spelling is BOUND to the pre-authored DS-FTH dossier corpus (R8) — one
   exactly-once doc pin lands with WF-1; divergence is a STOP; a wave amending
   a DS row re-runs `npm run gen:dossier-prose` in the same commit.
-- POP: migration column extensions `travelClass:'returning'` + `believedBand`
+- POP: migration column extensions `travelClass:'returning'` [see the bracket at §2a class 4: `column_return`] + `believedBand`
   + `events[]` — each REQUIRES the columnOf conditional carry-through
   amendment in the same commit (RF-1), pinned through-enqueue; commonsVoice
   rung-extension fields through the one kernel writer.
@@ -825,11 +852,42 @@ payload builder returns through veilPublicPayload (standing law).
 
 ---
 
-## §5 THE WAVES (109 waves, dependency-ordered ACROSS programs; each: one
+## §5 THE WAVES (111 waves, dependency-ordered ACROSS programs; each: one
 ## commit per wave/slice, focused gates per slice, full gate at wave end
 ## through check:tail / gate-tail.sh, ledger row; every flagged wave DARK per
 ## §3; the per-program architecture file carries the full spec — the block
 ## here is the binding charter, order, and cross-program deltas)
+[RULED 2026-10-16 (coherence fold §3.2.21) — the §5 charters below are declared the INVENTORY: the program volumes are normative, and a CUT-TO-SENTENCE (one line per wave plus a status column) is recorded, executed when this volume is next re-compiled, not now. They carry no FIRST-VISIBLE/TIER lines; the program volumes do. Where J-EM-6 (§12.3) corrected a charter, the charter now carries a pointer.]
+
+⚠⚠ **THE WAVE COUNT IS 111, AND THE DERIVATION IS STATED HERE SO NO READER
+RE-DERIVES IT UNDER PRESSURE.** Three figures appear in this document's history
+and all three are arithmetically correct under their own ES-5 convention. The
+common base is `60 + WY-engine 7 = 67`, plus the ES family, plus the 2026-08-07
+fold's `10 (HB) + 17 (WC) + 6 (EP) = 33`:
+
+| ES-5 counted as | ES family | total | where it appears |
+|---|---:|---:|---|
+| one wave (`ES-5`) | 8 | **108** | the `= **108**` arithmetic line below, from the 2026-08-07 fold |
+| two slices (`ES-5a`, `ES-5b`) | 9 | **109** | the heading and closing clause, after CR-ES5B-1 |
+| **four slices (`ES-5a/5b/5c/5d`)** | **11** | **111** | ⭐ **the live charter, and the figure now stated above** |
+
+MEASURED 2026-08-14 at `60083174` by extraction over this section's own charter
+blocks: ES 11, HB 10, WC 17, EP 6, WY-engine 7. §5 charters `ES-5a`, `ES-5b`,
+`ES-5c` and `ES-5d` as four separate blocks, so 11 is the live ES family and 111
+is the live total. `109` was written when only the a/b slice existed and was
+never reconciled against the `108` line it sits above.
+
+⛔ **THE `= **108**` ARITHMETIC LINE BELOW IS LEFT EXACTLY AS IT STANDS.** It is a
+correct statement of the 2026-08-07 fold's own arithmetic under that fold's own
+ES-5 convention, and it is the evidence that reconciles all three figures.
+Overwriting it to match the live total would destroy that evidence and leave a
+later reader with a number and no way to check it.
+
+⚠ Unchanged by this correction: WY's five SURFACE waves stay excluded by this
+section's own clause (counting them would give 116); SP-F is declared NON-WAVE;
+and ES-Da is a slice of the REFUSED ES-D, so it raises neither numerator nor
+denominator.
+
 
 Numbering is the compiled build order. "Early-eligible" marks the measured
 buildable-now set whose early motion is chair question Q2; absent that
@@ -865,7 +923,7 @@ terminal-phase gate, so its block sits at the FOOT of this section rather than
 with its family. ⚠ EP §5 item 3's second ordering half ("before WY-2") is a
 REPORTED ERRATUM struck in the EP volume, not here: WY-2 sits BEFORE ES-0 in
 this order, so "after ES-4" and "before WY-2" cannot both hold; the surviving
-half is the one carrying the argument.
+half is the one carrying the argument. [CORRECTED 2026-10-16 (coherence fold) — EP §5 item 3: EP-0 EARLY-ELIGIBLE; EP-1..3 after CR-WR10-H (all LANDED 2026-08-16); EP-4 an independent lane whose slice 2 may not light before EP-1; FP-ORDER pair 7 now carries EP-4 slices 2–3 ‖ EP-5 LAST.]
 **WC-0..WC-16** land as a CONTIGUOUS FAMILY at the PHASE 4 TAIL, after WY-11.
 ⚠⚠ **THIS ONE POSITION IS A JUDGMENT, NOT A TRANSCRIPTION, AND IT IS VETOABLE**
 (J-FP-13, recorded here rather than taken silently): the WC volume is the ONLY
@@ -886,9 +944,11 @@ MEASURED FACT (pure leaves and vocabulary mints, no flag) and WC-0 is
 buildable-now on the rulings it needs none of. Eligibility is a measurement;
 membership in an authorized early-motion set is a RULING; the two are never the
 same sentence. The CQ2 set stays exactly GR-0 + GR-1 + TR-1 + TR-9-contract,
-and all four of these run in STRICT ORDER at the positions above.
+and all four of these run in STRICT ORDER at the positions above. [SUPERSEDED BY EVENT 2026-10-16 (coherence fold) — the CQ2 early-motion set is moot: overtaken by the tests-only area lanes (J-EM-10) and then FP-40 CHAIN-FIRST (2026-10-02, FP-ORDER.md); GR-0 and TR-1 landed, GR-1 and TR-9 are partial.]
 
-> **PROGRESS — HISTORICAL CORROBORATION; RE-DERIVED 2026-08-09.**
+> **PROGRESS — RE-DERIVED 2026-09-23 23:17 EDT at `8b5565922`** (the build branch `em-train-17-2026-09-23`'s tip at the Edit Mode fold; three census seats, every disposition CONFIRMED by commit, packet and live symbol — the tables are docs/DESIGN_FP_ARCH_EDITOR.md PART E; "LANDED" means present at the base, not proven green). **LANDED (28):** SP-A, CW-0w, SP-B, SP-B2, SP-C, SP-D, SP-E, GR-0, GR-3, IN-0, TR-1, WF-1, ES-0, ES-1, ES-3, ES-4, ES-5a, ES-5b, ES-5c, ES-5d, HB-0, HB-1, HB-2, WC-0, EP-0, EP-1, EP-2, EP-3 (+ the slices ES-6a, ES-Da). **PARTIAL (10):** GR-1 (the generosity stamp), GR-2 (GR-2b `PROPOSE_PACT`), GR-4 (two voice slices), GR-5 (5b..5f), IN-1 (1c-b), TR-9 (the collector), WF-8 (the arcs and ~19 kinds), INT-3 (3a and 3b's successors), ES-2 (ES-2b the custody write), ES-6 (ES-6b vetting quality). **NOT STARTED (73):** GR-6, GR-7, IN-2..IN-6, TR-2..TR-8, CW-1, CW-2x, CW-3, WF-0, WF-2..WF-7, WF-9, POP-1..POP-7, INT-1, INT-2, INT-4..INT-8, WY-1..WY-6, WY-11, ES-7 (parked), HB-3..HB-9 (HB Q1), WC-1..WC-16, EP-4, EP-5. The 2026-08-09 block below overstated GR-1 and GR-2 as landed (J-EM-6). The LG volume was absent from the build branch until this fold (J-EM-12). Dispatch is §12.5's, under tests-only mode; a design row is not a coding assignment. [RE-DERIVED 2026-10-16 (coherence fold) at 00b648c9d — 37 landed · 12 partial · 62 not started of 111 (114 with §13: 65 not started); moved since this block: GR-2 (partial → landed, GR-2b `3f05e36e0`); GR-6, IN-2, IN-3, IN-6, TR-3, CW-1, WF-0, WY-1 (not started → landed); IN-4, IN-5, TR-2 (not started → partial); SP-D2 landed as a §12 member (`3fd25f5df`). '(HB Q1)' is stale: HB Q1 is SIGNED by the owner's word as read at J-EM-15(2) (§12.8), so HB-3..HB-9 are released. The LG volume is on master (J-EM-12 discharged; zero LG code). The count is derived (PLAUSIBLE as a count; each row CONFIRMED by symbol or commit — findings FOLD-SMALL §2b). The table is the coherence fold's §2; this block is history (fold §3.3.11).]
+
+> **PROGRESS — HISTORICAL CORROBORATION; RE-DERIVED 2026-08-09.** [see the bracket at the 2026-09-23 block above; the status of record is the coherence fold §2]
 > Measured on `claude/composite-r4` at
 > `2c810d167d016302e641fc9cfe74fff57475b14e`. Live code and commit bodies decide what
 > exists; [`implementation/INDEX.md`](./implementation/INDEX.md) is the only current
@@ -925,7 +985,7 @@ guard-the-guard against peaceTermsCatalog.js itself). COMPILED ADDITION
 OVERFLOW_BANDS single-ladder discipline gets structural enforcement before
 seven programs read pressure, and the LEVEL-vs-DIRECTION distinction is
 doc-pinned. Alignment: declared-empty with reason. Edit-verb: engine-only,
-recorded. Zero existing-src edits.
+recorded. Zero existing-src edits. [SUPERSEDED BY EVENT 2026-09-23 (L10, J-EM-1); bracket added 2026-10-16 (coherence fold) — every §5 'Edit-verb:' clause below is history: a remaining wave's editor obligation is its §12.4 EDITOR row, and a DM verb is a `REALM_MANIFEST` or `DIRECTION_OP_TYPES` row (J-EM-2), never the operationRegistry/store-action lane these clauses name.]
 
 **#2 CW-0w — THE WALKERS THE REGISTRY IS OWED** (no flag; four slices; CW §4;
 pulled forward per Q2-CW ratified here as J-FP-3). Charter: slice 1 widens the
@@ -1002,7 +1062,7 @@ absent while dispositionChannelsEnabled dark; the posture receipt NAMES its
 input set (tripwire: a receipt that fails to reds). **BLOCKED ON Q1:** the
 export naming (riskToleranceOf collision with roads/state.js:319) must be
 ruled before this wave lands — whichever arm, the import-source pin set and
-both-site header documentation land with it. Consumers: GR-2+, TR-2/5/7,
+both-site header documentation land with it. [CORRECTED 2026-10-16 (coherence fold) — Q1 RULED (CR-FP-3, then CR-C4-1): the build spells `courtPostureOf` / `courtRiskAppetiteOf` (strategicPosture.js:222, :303); SP-C LANDED `cbd348a50`, dark; its appetite writer is unmounted — SEAM-0 (§13) owes the mount.] Consumers: GR-2+, TR-2/5/7,
 WF-3/5/7, POP-1/2/5b, INT-1 — lighting seatBooksEnabled later is a
 pre-declared disclosed shift carried on INT-1's list.
 
@@ -1018,7 +1078,7 @@ K.2 snapshot, interceptability, and the M speed floor apply to every class BY
 CONSTRUCTION (same writer, same transit kernel — the totality walker extends
 to the new leaf). THE CONSUMER REGISTRATION TRIPWIRE: a frozen consumer map
 (GRAMMAR envoys; factors/legates/pilgrims/couriers/ambitious as volumes land)
-with a both-ways walker. **This wave unblocks:** WF-2b (purpose `religious`),
+with a both-ways walker. **This wave unblocks:** WF-2b (purpose `religious`) [CORRECTED 2026-09-23 by J-EM-6 (§12.3); pointer added 2026-10-16 (coherence fold) — WF-2's pilgrims travel with purpose `personal`, not `religious`; see §12.3.],
 TR-8 (`commercial`), IN-4's courier retirement (`covert`/`commercial`),
 INT-3b (the emigre — INT Q1's HOLD dissolves by this sequencing: the
 chair-commissioned generalization IS this wave). Collision: the envoy family
@@ -1106,7 +1166,7 @@ treatyEnforcement.js), PLUS the three trade-rights rows (`exclusivity`,
 `market_access`, `toll_exemption`) as executor:'seam' under GRAMMAR-canonical
 spellings (the V-4 non_intervention mechanism: no producer = never drafted =
 byte-identical) — GR Q1 and TR's recommendation AGREE; TR-5 lands executors
-and producers later. **THE DISCHARGE (J-FP-1, binding):** this commit is the
+and producers later. [RULED 2026-10-16 (coherence fold §3.1.1) — EC-6 owns the READ-side executor and GRAMMAR's `PACT_DRAFT_LENS` row owns the producer; see the bracket at #27 TR-5] **THE DISCHARGE (J-FP-1, binding):** this commit is the
 FIRST catalog growth past WR-10's landing set, so `catalogGrewSinceWr10()`
 reds HERE by recorded design, and THIS commit executes the tripwire's full
 instruction ONCE: re-read the war volume's §5 degradation note, assert the
@@ -1188,7 +1248,7 @@ the WR-7b negotiation pictures we handed across a table (J-INA-5); allow-list
 import fence; K3 exclusion of the counterpart's beliefMap unchanged;
 EMPTY-RECORD = UNKNOWN at zero confidence (seeded non-empty sibling); THE
 REVERSAL PIN; the phrase scan ("the record suggests", never "they believe");
-mirrorOf's returned shape FROZEN with a shape pin (GRAMMAR consumes by that
+`secondOrderMirrorOf`'s returned shape FROZEN with a shape pin (GRAMMAR consumes by that
 pin — one reader shape, two programs).
 
 **#18 IN-2 — THE LURE** (flag `infoLureEnabled`). The §4 axis model + the
@@ -1433,7 +1493,7 @@ lit-arm errand contract (typed covert/commercial errand, K.2 decaying
 snapshot as cargo) is BUILDABLE and the retirement pin reads SP-D's flag by
 name; J-INA-4 lands in commit 1 (intelTradeEnabled joins the manifest + row
 — its real gate reads are the membership test). NOTHING touches the chooser
-(settlementStrategy at its 812 baseline). Cross-pins point at the BUILT
+(settlementStrategy at its 812 baseline) [see the bracket at §2c: the entry is deleted, ≈760]. Cross-pins point at the BUILT
 envoyInterceptionStage.
 
 **#21 IN-5 — THE VOICE** (no engine state). The SEVENTH Herald section
@@ -1496,7 +1556,7 @@ trio, ONE commit; HB §4). Charter: `habitLedger.js` — the sub-ledger,
 total-on-garbage normalizer (an unrecognized `v` heals to ABSENT). ⚠ **THIS
 WAVE LANDS HB'S FIRST CROSS-LAYER ROW AND THEREFORE THE TWELFTH CHARTERED
 COUPLING PREFIX** (HB Q4, RULED): `HB` joins `CHARTERED_VOLUME_PREFIXES` with
-its own `couplingRegistryHabit.js` leaf, in the same commit as the row. NO
+its own `couplingRegistryHabit.js` leaf, in the same commit as the row. [CORRECTED 2026-09-23 by J-EM-6 (§12.3); pointer added 2026-10-16 (coherence fold) — HB's first coupling row lands with HB-4 (the first cross-layer read) and `couplingRegistryHabit.js` is minted then; no such leaf exists at 00b648c9d. `HB` is admitted, and the closed set is now THIRTEEN (see seam row 32).] NO
 eighth `LAYER_PATTERNS` family is owed — the habit SUBSTRATE leaves take
 `ARGUED_UNLAYERED` rows on the argument already carrying four entries, and the
 ANTICIPATION leaf joins INFO BY NAME (`beliefDoctrineAnticipation.js` matches
@@ -1672,7 +1732,7 @@ through commodityFlow's ONE stock-write seam (the same door F9's supply uses;
 a store write outside that seam reds the stock-write source scan).
 
 **#27 TR-5 — THE PACT LANE** (flag `tradePactsEnabled`; needs GR-2/GR-3).
-commercialTermExecutors (five executors as lazy peaceTerms-family siblings)
+commercialTermExecutors (five executors as lazy peaceTerms-family siblings) [CORRECTED 2026-09-23 by J-EM-6 (§12.3); pointer added 2026-10-16 (coherence fold) — TR-5 builds executors for the THREE commercial term rows GR-3 minted (`exclusivity`, `market_access`, `toll_exemption`), not five, and mints no term family. RULED (coherence fold §3.1.1): EC-6 owns the READ-side executor (the trade-stance derivation IS the executor), and the PRODUCER is GRAMMAR's `PACT_DRAFT_LENS` row; TR-5's 'lands executors + producers' points there. RULED (§3.1.2, OD-FC-2 by delegation): `realmPressure01`'s consumer is EC-17's partner arm, so 'the DEAD CONSUMER finally lands' is no longer TR-5's sentence.]
 + tradeDemandTrigger (believed-dear x salient good x realmPressure01 hunger
 arm x posture — the DEAD CONSUMER of realmPressure01 finally lands);
 peaceTermsCatalog gains NOTHING new here if GR-3 minted the five commercial
@@ -1756,7 +1816,7 @@ producer exists yet — and the `isDemographicColumn` RELEASE FORK, without whic
 every WC column would be released by M4's arrival pass into a settlement's
 census. ⚠ CROSS-PROGRAM DELTA: WY-4 and #42 POP-1 amend `columnOf` LATER in
 PHASE 6 and compose ON TOP of this union; an amendment that drops the WC
-classes reds WC-0's pins.
+classes reds WC-0's pins. [RULED 2026-10-16 (coherence fold §3.1.7) — the union stays (it shipped): POP owns the CIVILIAN classes, WC the MILITARY classes, ONE union, one `columnOf` whitelist; the return class is `column_return` across POP/WC/LG/ES.]
 
 **WC-1 — THE ARRIVAL LEDGER** (rides `contributionLedgerEnabled`; needs WC-0;
 WC SECTION 3). Charter: credit at ARRIVAL, not at pledge. ⚠⚠ **CORPUS NOTE,
@@ -1767,19 +1827,19 @@ on the seeded corpus.** The sender-elected contribution is a NEW road, not an
 extension of the receiver-side levy sweep.
 
 **WC-2 — THE DERIVED STANCE** (rides the flag; needs WC-1; WC SECTION 3).
-Charter: `warStanceOf` live (a derivation over deployments + credit; the share
+Charter: `warStanceOf` live (a derivation over deployments + credit; [CORRECTED 2026-09-23 by J-EM-6 (§12.3); pointer added 2026-10-16 (coherence fold) — the derivation is `derivedWarStanceOf`; `warStance.js :: warStanceOf(rung)` keeps its accessor meaning. RULED (coherence fold §3.2.19): the spelling carries the episode key — `derivedWarStanceOf(worldState, partyId, warEpisodeKey)` (L-WC-8's per-episode law).] the share
 integral degenerates to own-army = 1.0 for non-composite worlds, so ARC A needs
 no roster); `stanceScalars` at three sites; the K5 `termsWeightRead` (credit +
 stance, comradeship joining at WC-9); priced shielding through
 `peaceTermsAppraisal`'s existing consumer chain; the stance chip and the
-crossing beat.
+crossing beat. [RULED 2026-10-16 (coherence fold §5) — prose qualifies: this is the 'stance crossing'; the 'entrepot crossing' is WC-3's counter.]
 
 **WC-3 — THE RELAY** (rides the flag; needs WC-1; WC SECTION 3). Charter:
 `relayNetwork.js` — staging via `candidateRoutes`, entrepot crossing
 registration, law-band per-hop efficiency via `lawWordFor` and the ONE
 modulation table, skim credited to staging stores and booked as shortfall; THE
 COMRADESHIP TERM PRESENT AND NEUTRAL in the per-hop read (zero bond = today's
-arithmetic exactly; it lights at WC-9). ⚠ GATE: physical interdiction rows
+arithmetic exactly; it lights at WC-9). [RULED 2026-10-16 (coherence fold §5) — prose says 'service bond' (WC's `serviceBonds`), 'diaspora bond' (WC-15) or 'court bond' (§13), never bare 'bond'.] ⚠ GATE: physical interdiction rows
 require WY's encounter TABLE; the relay lands with the pressure-side shortfall
 only and the E-row slice is a pre-pinned seam that reds when the table lands
 without the rows.
@@ -1846,7 +1906,7 @@ SECTION 3). Charter: `serviceIntegrals.js` — blend absorbed/imparted
 `spatialLedgers.serviceBonds` (the per-PAIR accumulator FOUR consumers read
 MID-WAR); `CONTRIBUTION_CLOSE_GRADES`; the relay comradeship term lit; the
 1.6.4 fidelity rider. ⚠ Three edges, not one — WC-3 supplies `betrayed`'s skim
-input and WC-5 supplies `partial`'s askedBand and `unanswered`'s live call-in.
+input and WC-5 supplies `partial`'s askedBand [CLARIFIED 2026-10-16 (coherence fold §5) — here `partial` is the `CONTRIBUTION_CLOSE_GRADES` rung; the `CALL_IN_ANSWERS` rung of the same spelling is renamed `half_answered`.] and `unanswered`'s live call-in.
 The fidelity rider runs THREE mutants — term-deleted, cap-removed, and
 DEPTH-RAISED — the last proving accuracy improves while HB's anticipation LEVEL
 never does.
@@ -1872,7 +1932,7 @@ header and its signature untouched** (CR-WC-10), and the new manifest carries a
 DISJOINTNESS PROOF: a planted named-person token does NOT enter it.
 
 **WC-12 — BRIGANDAGE AND THE EMBATTLED STATE** (rides the flag; needs WC-11; WC
-SECTION 3). Charter: `brigandContest.js`; the embattled stressor injected
+SECTION 3). Charter: `brigandContest.js`; the embattled stressor injected [see the bracket at §3 flag row 60: one more ramp term on `embattlement.js`, §3.1.16]
 through `stressorsCore.normalizeStressor` as a CATALOG-ORDINARY stressor with a
 typed source reference (the `pestilenceKernel` precedent); the embattled crime
 coupling; `NETWORK_CARRYING_CAPACITY` live; buy-off as a graded close — tribute
@@ -1948,7 +2008,7 @@ aspatial / unmapped) each its own seeded arm; the subsumption-seam
 disclosure pin (lit vs dark observance-success delta measured on one seed).
 2b THE MOVERS: legates/pilgrims mint through SP-D's writer with purpose
 `religious` (the red-until-built existence probe from the WF side is GREEN
-by order — war's closed ENVOY_PURPOSES was never widened); interception
+by order — war's closed ENVOY_PURPOSES was never widened); [CORRECTED 2026-09-23 by J-EM-6 (§12.3); pointer added 2026-10-16 (coherence fold) — WF-2's pilgrims travel with purpose `personal`, not `religious`.] interception
 rides WR-7b's foreignGuestHold; envoyDiplomacyEnabled dark = the declared
 harassment/turn-back degraded arm. Never-resolve absolute (no named fate).
 
@@ -1990,7 +2050,7 @@ one added herald sentence for the faith-consideration sale); dictated +
 negotiated arms both reachable; pilgrimage_right cannot form with
 pilgrimageEnabled dark (refusal receipted, no dead guarantee certified).
 
-**#39 WF-7 — THE TITHE** (flag `titheEnabled`). tithe.js (draw + wealth fold
+**#39 WF-7 — THE TITHE** (flag `titheEnabled`). [RULED 2026-10-16 (coherence fold §3.1.5) — ONE tithe: W-COIN's `tithe_share` is the coin arm; `templeWealth` is NOT a second stock but a BAND derived from the treasury's `tithe_share` row where the treasury is lit and from piety × temple presence where it is dark (the named degraded arm); the house-fortune source is struck.] tithe.js (draw + wealth fold
 + disposition; quarterly = 13 weeks off intervalWeeks.js — the 12-tick trap
 is cured law, the pin names 13); templeWealth banded stock through the one
 writer (coffers-at-the-fall: inherit named / dispersal conserved); THE
@@ -2015,7 +2075,7 @@ under the pacing caps (SP-A's classes registered).
 grown to a grid; the eight-token endings walker (faith_converted qualified);
 instrument-arc vocabularies OUTSIDE the mix with roads_closed + plundered
 floors; tenure tail; per-mechanism envelopes incl. the subsumption-seam
-delta; the NINE-row counterforce audit + sack lure; the invalid-config
+delta; the NINE-row counterforce audit + sack lure; [RULED 2026-10-16 (coherence fold §5) — FAITH prose says 'the sack's draw'; 'lure' is IN-2's bought lie.] the invalid-config
 walker (SPREAD flag lit while faithSpreadEnabled dark = red); certification
 rows grown from WF-0 shells and rendered from a fixture. DONE = envelopes
 hold on the owner-ordered soak.
@@ -2027,7 +2087,7 @@ SP-B + migrationRumorsEnabled). believedMigrationRead.js (ONLY the
 attraction axes resolve belief-side lit; admission/spare/capacity/viability
 stay truth BOTH arms — the over-send guard untouched); THE ARRIVAL CLEARING
 (capacity re-read at the wall, `refused_at_the_wall`, return column class
-`'returning'` — the closed set extended per RF-2/Q-resolved, with the
+`'returning'` — the closed set extended per RF-2/Q-resolved, [see the bracket at §2a class 4 — `column_return`, not `'returning'`] with the
 executed wrong-lane mutant proving M4 no longer steals it); disappointment =
 frozen believedBand vs lived reading, gap >= band = the letter home
 (news-speed correction); columnOf carry-through for BOTH new fields
@@ -2083,7 +2143,7 @@ loop converges through the counterforce); adoption double-count negative
 reopen-at-resettlement; the read API pinned band-words-only (the
 diaspora-reconquest coupling consumes a stable surface).
 
-**#45 POP-4 — THE PLAGUE ARC** (flag `calamityArcEnabled`). calamityArc.js
+**#45 POP-4 — THE PLAGUE ARC** (flag `calamityArcEnabled`). [RULED 2026-10-16 (coherence fold §3.1.9) — POP-4 FOLDS INTO PG (docs/DESIGN_FP_ARCH_PG.md): PG owns the arc, the resistance and contagion-on-arrival under its ONE PLAGUE TRUTH; POP keeps the burial LINE (THE BELLS, a Herald generalisation) and the disaster cause; the `calamityArcs` ledger is not minted.] calamityArc.js
 (staging + prune + attribution); ZERO-NEW-MORTALITY is the defining pin (lit
 vs dark identical death totals); THE BELLS pin (plague year sans famine =
 sickness line, not hunger — the food gate preserved); attribution covers
@@ -2218,7 +2278,7 @@ is load-bearing).
 `legitimacyCrossingsEnabled`). legitimacyCrossings.js (reads the stock AFTER
 existing writers; hysteresis on the existing band edges; NEVER a second
 legitimacy writer); the crossing-has-a-hit walker (typed-hit vocabulary from
-the writer census); subsystemRowsInterior.js — the new certification lane
+the writer census); subsystemRowsInterior.js — the new certification lane [CORRECTED 2026-09-23 by J-EM-6 (§12.3); pointer added 2026-10-16 (coherence fold) — INT-7 reads `subsystemRowsVirtual.js`, not the superseded `subsystemRowsInterior.js`.]
 (joins the partition registry same commit); the interior envelopes TOTAL
 over all 20 declared endings tokens + the two-part tempo envelope; adopt the
 landed WR-9 harness pattern (verify its location at build).
@@ -2392,17 +2452,17 @@ registers no flag · stance consequences land in a leaf, the lane file
 untouched.
 
 **POPULATIONS:** the return column extends DEMOGRAPHIC_COLUMN_CLASSES with
-`'returning'` (Q-resolved: the class IS the ownership mark) · POP-7 lands
+`'returning'` (Q-resolved: the class IS the ownership mark) [see the bracket at §2a class 4: the class is `column_return`] · POP-7 lands
 the commonsVoiceEnabled certification row and shrinks the backlog
 (Q-resolved; check-first) · the homeward flight-vocabulary rumor accepted
 for v1, recorded (Q-resolved) · arrivals do NOT feed mass_migration in this
-program (deferred beside J-POP-14 — Q6 carries it to the owner) ·
+program (deferred beside J-POP-14 — Q6 carries it to the owner) [see the bracket at CR-FP-6: slotted in chain 3, OD-FC-40] ·
 commonsArc's petition-side independence from demographicsEnabled kept.
 
 **INTERIOR:** warSeatBooks.js IS seatBooks.js (no rename, no facade) ·
 decision grievances are SIBLING types through the one landed writer, never a
 re-type (THE PROMISE) · the six INT flags join the manifest + a new
-subsystemRowsInterior.js lane (Q5 owns the war-flag uniformity half) ·
+subsystemRowsInterior.js lane (Q5 owns the war-flag uniformity half) [see the bracket at #56 INT-7] ·
 INT-6 speaks burial/dug_up only · INT-3b unblocked by SP-D (Q-resolved by
 sequencing) · J-INT-13's lit-kind arm goes to Q4 for pre-recording.
 
@@ -2422,6 +2482,7 @@ braids would be a new key and a new L4 fight, priced later).
 ## ratified; every SP band row carries the ERA-PRESET-ELIGIBLE column — SP-F's
 ## one obligation; the SP-A reconciliation walker enforces Bands-line <->
 ## tuning-table totality both directions, growing one volume at a time)
+[RULED 2026-10-16 (coherence fold §5; OD-FC-17 by delegation, vetoable) — ERA-PRESET-ELIGIBLE stands or falls with SP-8 / J-D12, the age layer, which is DEFERRED past launch with the slot "THE AGES".]
 
 - **SP:** the shared half-life band table · the SP-6a significance family and
   SP-6b severity ladder (the scales themselves, owner-signed ONCE) ·
@@ -2508,7 +2569,7 @@ rename).
 **The five joins per kind (L6), restated as the per-program checklist:**
 annex pool row (verbatim) · registry row with requiredSlots + slotless
 fallback · WHAT_PHRASES · section authority (EXACT_SECTION/SECTION_OF; the
-knowledge desk exists only after IN-5) · full address chain with id, typed
+knowledge desk exists only after IN-5) [CORRECTED 2026-10-16 (coherence fold) — DISCHARGED: IN-5/1 `6cf6920d4` landed the seventh Herald desk (knowledge).] · full address chain with id, typed
 action, settlements BY NAME, recorded reason, audience projection. Every
 kind gets its own walker file; frequency floors from SP-E's shared helper;
 the pacing class assigned at mint from SP-A's family.
@@ -2624,7 +2685,7 @@ already exists; PRE-PIN = this volume lands both sides.
 | 11 | secrecyTradeFactorOf | IN-0d -> TR | PRE-PIN: identity-1.0-outside-HIDE + band/cap both sides; secrecyTradeContractChangedSinceIn0d() |
 | 12 | Axis families census | IN-2 <-> SP-B | PRE-PIN: axisFamiliesGrewSinceIn2() authored against the at-build set (J-FP-5) |
 | 13 | Courier retirement | IN-4 <-> SP-D | PRE-PIN: dark arm byte-identical + lit-arm errand contract; the retirement pin reads errandSpineEnabled BY NAME |
-| 14 | mirrorOf shape | IN-1 -> GR negotiation posture | PRE-PIN: frozen return shape (closed keys, banded) — one reader shape, two programs |
+| 14 | `secondOrderMirrorOf` shape | IN-1 -> GR negotiation posture | PRE-PIN: frozen return shape (closed keys, banded) — one reader shape, two programs |
 | 15 | Knowledge desk | IN-5 <-> every volume's knowledge kinds | PRE-PIN: mint-time registration only; IN-6's earned-classification walker is the standing tripwire |
 | 16 | Testimony ladder | IN-3 <-> WR-7c | HONORED: TESTIMONY_LADDER == RELIABILITY_LADDER equality pin; vet composes, never re-spells |
 | 17 | Divergence reader | IN-3 <-> WR-7d | HONORED: sendTwoDivergence one home; source scan reds a fork |
@@ -2642,7 +2703,7 @@ already exists; PRE-PIN = this volume lands both sides.
 | 29 | Significance family | SP-A -> CW-1 + every mint | SC-3: braid classes derive WITHIN the family; building against the two-valued vocabulary is a STOP |
 | 30 | Engine/display pacing split | CW-1 <-> narrativeTempo | SC-4: zero-engine-import census on cascadeBraid |
 | 31 | causedBy adoption | every state-writing FP wave -> CW | SC-6: each mint populates causedBy at the writer; CW-1 depth fixtures + CW-3's chainDepthDegenerate red are the double tripwire |
-| 32 | couplingId prefix closure | CW-0w <-> all volumes | SC-7: the closed TWELVE-prefix alternation (WR \| TR \| GR \| WF \| POP \| IN \| INT \| SP \| CW \| ES \| WY \| HB — ES tenth and WY eleventh, consciously admitted at the 2026-08-05 fold; **HB TWELFTH at the 2026-08-07 fold** under HB Q4, RULED, with its own couplingRegistryHabit.js leaf and its first row at HB-2); a THIRTEENTH prefix reds until consciously admitted. ⛔ **THE OTHER TWO VOLUMES OF THE 2026-08-07 FOLD DECLINED, AND BOTH ABSTENTIONS ARE REASONED SO NEITHER READS LATER AS A MISSED EDIT:** EP declines explicitly (its §5 item 7 — `couplingInclusion.walker` scopes its census to `src/domain/{worldPulse,spatial}/`, so `src/store` and `src/kernel` are outside it, `pulseKernel.js` and `worldState.js` are ARGUED_UNLAYERED, and an epoch is SUBSTRATE rather than a subject any layer family owns), and WC mints no coupling id of its own. ⚠ **FOUR EDIT SITES IN ONE FILE MOVE TOGETHER** — `tests/domain/couplingRegistry.test.js` pins the closed set TWICE (the const the id-shape regex is BUILT FROM, and the literal `toEqual`), plus the docstring and the CLOSED-alternation comment: editing only the const leaves the `toEqual` red, editing only the `toEqual` leaves the regex rejecting the new ids. ADMISSION IS DOCUMENT-ONLY: no walker demands a registry row per admitted prefix, so ES, WY and HB carry zero rows until their first cross-layer read — which owes its row SAME-COMMIT, and whose owningVolume also widens that file's owningVolume set assertion in the same commit |
+| 32 | couplingId prefix closure | CW-0w <-> all volumes | SC-7: the closed TWELVE-prefix alternation [CORRECTED 2026-10-16 (coherence fold) — THIRTEEN at 00b648c9d: `ENC` admitted (`tests/domain/couplingRegistry.test.js:119`), whose own header (:94) requires this row's amendment; EC, WC, EP, LG, PG, MF and CN are not chartered — each is chartered in the same commit as its first registry row (coherence fold §3.3.2, requirement 21c).] (WR \| TR \| GR \| WF \| POP \| IN \| INT \| SP \| CW \| ES \| WY \| HB — ES tenth and WY eleventh, consciously admitted at the 2026-08-05 fold; **HB TWELFTH at the 2026-08-07 fold** under HB Q4, RULED, with its own couplingRegistryHabit.js leaf and its first row at HB-2); a THIRTEENTH prefix reds until consciously admitted. ⛔ **THE OTHER TWO VOLUMES OF THE 2026-08-07 FOLD DECLINED, AND BOTH ABSTENTIONS ARE REASONED SO NEITHER READS LATER AS A MISSED EDIT:** EP declines explicitly (its §5 item 7 — `couplingInclusion.walker` scopes its census to `src/domain/{worldPulse,spatial}/`, so `src/store` and `src/kernel` are outside it, `pulseKernel.js` and `worldState.js` are ARGUED_UNLAYERED, and an epoch is SUBSTRATE rather than a subject any layer family owns), and WC mints no coupling id of its own. ⚠ **FOUR EDIT SITES IN ONE FILE MOVE TOGETHER** — `tests/domain/couplingRegistry.test.js` pins the closed set TWICE (the const the id-shape regex is BUILT FROM, and the literal `toEqual`), plus the docstring and the CLOSED-alternation comment: editing only the const leaves the `toEqual` red, editing only the `toEqual` leaves the regex rejecting the new ids. ADMISSION IS DOCUMENT-ONLY: no walker demands a registry row per admitted prefix, so ES, WY and HB carry zero rows until their first cross-layer read — which owes its row SAME-COMMIT, and whose owningVolume also widens that file's owningVolume set assertion in the same commit |
 | 33 | Braided entity refs | CW-1 <-> heraldIndex | SC-8: facetAvailability PENDING -> available is the tripwire |
 | 34 | Receipt-field sampling | CW-0w helper <-> TR-9/GR-7/POP-7/WF-9/IN-6/INT-7 | SC-9: each convergence wave samples its OWN rows; CW-3 reds never-sampled rows as UNOBSERVED |
 | 35 | DS-FTH spelling law | Lane-P corpus <-> WF-1/5/7 | HONORED: the exactly-once doc pin lands with WF-1; divergence is a STOP; DS edits re-run gen:dossier-prose |
@@ -2660,7 +2721,7 @@ already exists; PRE-PIN = this volume lands both sides.
 | 59-66 | THE WAYFARE BLOCK (8 rows) | WY <-> WAR · TR · POP · WF · IN · SP · ES · SURFACES | PER-ROW IN docs/DESIGN_FP_ARCH_WY.md §6, which is normative for all eight. Their pins in one line: the UNIT_SOURCES sixth-ledger census + the F9 single-writer scan + conservation identity, and the war volume's two J-D11(b) sites amended IN THE FOLD COMMIT or the fold is incomplete (WAR); the grain pre-pin rows + the shrink-only T7 census + the one stock-write seam (TR); THROUGH-ENQUEUE + proposal-accept + the double-send and wrong-lane mutants (POP); the single-writer census on share writes (WF); the fork-key-set census + the other-consumer stream golden (IN); law M's second-speed-floor walker (SP); the fail-closed export mutant on covert movers + the plant-site pricing pin citing WY-2 (ES); the mirror walker both directions + the map-only import census + the size ratchet (SURFACES) |
 | 67-79 | THE HABIT BLOCK (13 rows) | HB <-> SP-A substrate · SP-B belief axes · ES (the tap ladder + plants) · THE PLANT ROAD · WAR (settlementStrategy/warTermination/warPeaceDecision/warIntent/warDeployment) · INFO counterintelligence · TRADE/FAITH/POP/GRAMMAR/INTERIOR choosers · `momentum.js` · `spatialUsage.js` · THE CERTIFICATION ESTATE · THE PUBLIC-PAYLOAD VEIL · THE EPOCH VOLUME (EP) · THE CAMPAIGN CLOCK | PER-ROW IN docs/DESIGN_FP_ARCH_HB.md §8.1, which is NORMATIVE for all thirteen. Their pins in one line: the shrink-only mint census and the no-second-decay-law scan (SP-A); the closed-vocabulary axis pin on the fourth subject family (SP-B); the seventh tap product registered, never an eighth tap LEVEL (ES); the writer-boundary scan (PLANT ROAD); the ONE move-vocabulary leaf and the frozen surface's size ratchet at tolerance zero, 812 EFFECTIVE lines and never the 1,360 raw (WAR); the one-derivation handshake (INFO); the per-idiom application law, pinned at each load point (CHOOSERS); the frozen-file diff tripwire at tolerance zero (`momentum.js`); the coverage-manifest row same-commit (`spatialUsage.js`); the pending-to-authored certification row (CERT); no habit fact in a public payload (VEIL); ⭐ the HB<->EP row is INTERNAL TO THIS FOLD — both volumes landed together and neither may cite the other as unlanded (CLOCK: weeks, never ticks, at all four residual sites) |
 | 80-102 | THE WAR-CIRCULATION BLOCK (23 rows) | WC <-> HABIT(×4) · WAYFARE(×7) · ESPIONAGE(×2) · the built WR surfaces(×6) · traditions/demographics/pressure(×3) · SPINE/SP-D | PER-ROW IN docs/DESIGN_FP_ARCH_WC.md SECTION 8 §8.1, which is NORMATIVE for all twenty-three. Twenty-two are TRANSCRIBED from that volume's SECTION 4 (whose 25 contracts = 22 rowed + 3 with no expressible tripwire, named in §8.2 rather than given manufactured ones — a row without a real tripwire is decoration, and decoration in a seam table is worse than an absence because it reads as coverage). ⭐ **ROW 23 (SPINE / SP-D — the CALL-IN CARRIAGE) IS NOT A SECTION 4 CONTRACT** and was added by the 2026-08-07 chair ruling from the volume's three other homes; SECTION 4 still OWES an SP-D subsection, and a WC revision that adds one should POINT AT row 23 rather than restate it. ⚠⚠ Row 23 is also the one row whose tripwire is MEASURED against live code rather than transcribed, because the pin WC names cannot be written at all — see §5's WC-5 block. ⛔ RULING 2 stands beside them: the three tripwire-less contracts (`TAP PRODUCTS`, the `wc_*` half of `KIND PREFIXES`, and the `espionageActive` GATES conjunction — which appears EXACTLY ONCE in all 6,492 lines, in its own contract sentence) are WAVE obligations OWED, not fold blockers, and two have a natural INBOUND home on the ES side |
-| 103-112 | THE ADVANCE-EPOCH BLOCK (10 rows) | EP <-> `src/kernel/prng.js` (the delimiter law) · `pulseKernel.js` (R-BLD-10) · `advanceMultiTick` · THE DORMANCY ESTATE (⚠ RE-DERIVE-AT-COMPILE — published set refuted by fresh census; 53 · 16 · 49 · 12 measured at the EP-F round; count at EP-1's own base) · the two cross-store byte-equality claims · THE OUT-OF-DENOMINATOR CLASS · pulse-record consumers · THE WY/ES FOLDS · `warTermination.js`'s SYNTHETIC pulseHistory record · `src/lib/spatialUsage.js` | PER-ROW IN docs/DESIGN_FP_ARCH_EP.md §8.1, which is NORMATIVE for all ten. ⚠ **THE FIGURE IS TEN AND MOVED FROM NINE AT CHAIR RULING T1** (§8.1 row 10, the `spatialLedgers` coverage manifest, re-attributed to EP-3 SLICE A in revision 6) — an implementer inheriting +9 writes a wrong total into this volume. Their pins in one line: the delimiter-alias row (PRNG); the six-token exhaustive edit table with the R-BLD-10 citation (KERNEL); explicit state-fixing in every fence (`advanceMultiTick`); dark-world byte-identity across the whole estate (DORMANCY); `options.epoch` taught to both claims (CROSS-STORE); the enumerated out-of-denominator families (ENTROPY); index-stability for record consumers (TOOLS); ⭐ row 8's premise is DISCHARGED — the ES/WY fold LANDED at `7794cb4a`, so this row records a completed dependency rather than a pending one; the synthetic-record arm (R9); and the coverage-manifest row same-commit as the writer |
+| 103-112 | THE ADVANCE-EPOCH BLOCK (10 rows) | EP <-> `src/kernel/prng.js` (the delimiter law) · `pulseKernel.js` (R-BLD-10) · `advanceMultiTick` · THE DORMANCY ESTATE (32 goldens · 27 fixtures · 8 oracle suites · 4 four-fence sets) [CORRECTED 2026-10-16 (coherence fold) — refuted by EP §8.1 row 4: 53 · 16 · 49 · 12 at the EP-F round; re-derive at any re-use.] · the two cross-store byte-equality claims · THE OUT-OF-DENOMINATOR CLASS · pulse-record consumers · THE WY/ES FOLDS · `warTermination.js`'s SYNTHETIC pulseHistory record · `src/lib/spatialUsage.js` | PER-ROW IN docs/DESIGN_FP_ARCH_EP.md §8.1, which is NORMATIVE for all ten. ⚠ **THE FIGURE IS TEN AND MOVED FROM NINE AT CHAIR RULING T1** (§8.1 row 10, the `spatialLedgers` coverage manifest, re-attributed to EP-3 SLICE A in revision 6) — an implementer inheriting +9 writes a wrong total into this volume. Their pins in one line: the delimiter-alias row (PRNG); the six-token exhaustive edit table with the R-BLD-10 citation (KERNEL); explicit state-fixing in every fence (`advanceMultiTick`); dark-world byte-identity across the whole estate (DORMANCY); `options.epoch` taught to both claims (CROSS-STORE); the enumerated out-of-denominator families (ENTROPY); index-stability for record consumers (TOOLS); ⭐ row 8's premise is DISCHARGED — the ES/WY fold LANDED at `7794cb4a`, so this row records a completed dependency rather than a pending one; the synthetic-record arm (R9); and the coverage-manifest row same-commit as the writer |
 
 **THE 2026-08-05 FOLD: 45 -> 66.** The two owner-amendment volumes bring
 twenty-one further seams — ES rows 46-58 (thirteen) and WY rows 59-66 (eight)
@@ -2698,7 +2759,7 @@ failure mode, and the state WC was in before its table was transcribed. (The
 ES and WY volumes spell it `Neighbor`; their counts here are the fold
 package's, not this parser's, and re-deriving them is a separate act.)
 TWO fold obligations sat OUTSIDE any wave and are DISCHARGED by the fold
-commit itself: the twelfth chartered coupling prefix (`HB`, HB Q4 RULED — and
+commit itself: the twelfth chartered coupling prefix (`HB`, HB Q4 RULED [see the bracket at seam row 32: thirteen, `ENC` admitted] — and
 ⛔ **NEITHER `EP` NOR `WC` JOINS IT**, EP because an epoch is SUBSTRATE and its
 files sit outside `couplingInclusion`'s scope, WC because it mints no coupling
 id of its own); and the SP-D discharge that WC row 23 replaces its own
@@ -2708,6 +2769,7 @@ unwritable pre-pin with.
 
 ## §10 IMPLEMENTER PROTOCOL (binding; the war volume's §10 verbatim, plus
 ## the FP compile's additions — L7/L9 at verbatim strength)
+[CORRECTED 2026-10-16 (coherence fold) — not verbatim: an AMENDED SUPERSET of the war volume's §10 (seven clauses → ten; clauses 1, 3, 4, 5, 6 and 8 re-worded); read THIS section as the FP protocol and the war §10 as its ancestor. Clause 1's branch gate names `claude/composite-r4`, which no FP lane has built on since 2026-09-23 (FP lanes build on `fp/*` and train branches) — read it as "the lane's own branch, hard-gated". Clause 4's "never a re-record" is superseded for FP by the signed-door re-records WITH THE CAUSE (J-EM-16); clause 6's operationRegistry lane for DM verbs by L10/J-EM-2 (see the bracket at 6). Every volume that "inherits §10 verbatim" inherits this bracket.]
 
 1. **Worktree + branch:** all work in the minifold worktree
    (`.claude/worktrees/minifold`, branch `claude/composite-r4`). Hard-gate
@@ -2768,7 +2830,7 @@ unwritable pre-pin with.
 6. **Registration:** every new news kind = the L6 five joins in its mint
    commit + its own walker file; every new store action registers in
    operationRegistry + `npm run gen:compendium-data` (diff exactly the new
-   operations); every cross-layer read adds its couplingRegistry row in the
+   operations); [CORRECTED 2026-10-16 (coherence fold) — for DM verbs read L10/J-EM-2: a `REALM_MANIFEST` or `DIRECTION_OP_TYPES` row; operationRegistry remains for store actions only.] every cross-layer read adds its couplingRegistry row in the
    SAME commit; every new flag follows §3's one-commit manifest law; any
    edit to a DOSSIER_STATE/CAUSAL_DOSSIER annex row re-runs
    `npm run gen:dossier-prose` in the same commit; any lane touching
@@ -2794,7 +2856,7 @@ unwritable pre-pin with.
     (executed, output quoted) or PLAUSIBLE (labeled). "Should work" is not a
     state of the world. Nothing here lights a flag, runs a soak, ratifies a
     band, or pushes — the owner's boundary is unchanged (soaks, lighting,
-    tuning, pushes are the terminal phase).
+    tuning, pushes are the terminal phase). [SUPERSEDED BY EVENT 2026-09-23 for lighting — see §12.8 ("shipped lit"); pushes stay the owner's]
 
 ---
 
@@ -2827,7 +2889,7 @@ CR-WC-1..CR-WC-22, in its SECTION 6 — **ALL RULED 2026-08-06** (`b75e8c4d`;
 the rulings themselves live in
 `docs/architected-volumes-pending-fold/WC_CHAIR_RULINGS.md` on the ledger
 branch), with ONE escalation held for the owner: **CR-WC-9, the persisted field
-batch**, which blocks WAVES (WC-6 onward) and never blocked the fold. ⚠ WC's
+batch**, which blocks WAVES (WC-6 onward) and never blocked the fold. [see the bracket at §4: CR-WC-9 is read PARKED, OD-FC-20] ⚠ WC's
 own closing line still reads "CR-WC-1..CR-WC-22 await rulings" — a REPORTED
 ERRATUM, struck text preserved in place at that volume's head rather than
 rewritten.
@@ -2921,23 +2983,23 @@ were restored; no word was added, removed, softened, or extended.
 **CR-FP-3 (Q1, posture-read naming) — RULED.** ACCEPT the synthesis
 recommendation — keep `postureOf`; rename ONLY the colliding second export to
 `courtRiskAppetiteOf` at SP-C's module; one-row constitution erratum;
-import-source pin set + both-site headers land regardless of arm.
+import-source pin set + both-site headers land regardless of arm. [CLARIFIED 2026-10-16 (coherence fold) — DISCHARGED and later amended: the build spells `courtPostureOf` / `courtRiskAppetiteOf` (CR-C4-1; strategicPosture.js:222, :303), not `postureOf`; the constitution erratum is applied (coherence fold §3.3.3).]
 
 **CR-FP-4 (Q3, IN-0a envelope transport) — RULED.** ACCEPT — primary road:
 each consumer reads the PRIOR tick's applied `brokerage_plant` events at its
 own head (zero new keys, zero kernel edits, law-M one-week lag);
 VERIFY-AT-BUILD the metadata retention; fallback = the `pendingPlants`
 conditional deposit under the D-3 contract; both fail = STOP for a
-chair-signed kernel seam.
+chair-signed kernel seam. [CLARIFIED 2026-10-16 (coherence fold) — DISCHARGED: IN-0 landed.]
 
 **CR-FP-5 (Q4, J-INT-13 pre-recording) — RULED.** ACCEPT — pre-record the
 DARK arm now in FABLE_VALIDATION_QUEUE.md (lit-kind pools ship behind a
 prose-version flag; every existing golden byte-identical); the owner may
-later take the re-record arm with the WR-0b field-level diff.
+later take the re-record arm with the WR-0b field-level diff. [CLARIFIED 2026-10-16 (coherence fold) — INT-8 is not started; the owner's ODQ §934.88 signs text-only re-records wave by wave, so the "every existing golden byte-identical" premise is PLAUSIBLY overtaken — re-read at INT-8's compile.]
 
 **CR-FP-6 (Q6, arrivals feeding mass_migration) — RULED.** ACCEPT NO —
 deliberately deferred beside J-POP-14; ONE owner ruling covers both
-arrival-side couplings; this goes on the owner queue, not into any wave.
+arrival-side couplings; this goes on the owner queue, not into any wave. [CORRECTED 2026-10-16 (coherence fold §7 OD-FC-40, by delegation, vetoable) — no ODQ row was ever written for Q6 / J-POP-14; the coherence fold SLOTS it as a row of chain 3's clearing (POP-1) under the 2026-09-19 never-deferred law.] [CORRECTED after skeptic S4 M5 — an owner act exists: the 08-05 grant RATIFIED Q6/J-POP-14 as deferred (FVQ:2626-2629); OD-FC-40 CONVERTS that ratified deferral into a slot (chain C3's clearing) under the 09-19 never-deferred law, by delegation.]
 
 **CR-FP-7 (Q7, D-W3 formal close) — RULED.** COUNTERSIGN the cap-raise arm —
 the trim arm is forbidden by the spine floor law (measured: five puts all
@@ -2947,7 +3009,7 @@ formally CLOSED.
 
 **CR-FP-8 (Q8, sale door vs one-instrument law) — RULED.** ACCEPT — not in
 this build; GR-2 pins the refusal UNCHANGED (fenced baseline); harmonization
-recorded as a post-GR-2 candidate owned jointly with the war chair.
+recorded as a post-GR-2 candidate owned jointly with the war chair. [CORRECTED 2026-10-16 (coherence fold) — the trigger has fired: GR-2 is COMPLETE (GR-2b `3f05e36e0`), and no record names the harmonization's slot; under the 2026-09-19 never-deferred law it is owed a slot or a CLOSED-with-reason (reported to the chair, not ruled here).] [RULED 2026-10-16 (coherence fold §9, lane H item H5 as corrected by skeptic S4 M7) — CR-FP-8 takes its SLOT as its OWN car in chain C2 (not inside GR-7's zero-behaviour instrumentation): a lit-default behaviour shift (the refusal is pinned unchanged), owned JOINTLY with the war chair (FVQ:2453-2455), recorded in §7's same-seed list.]
 
 **CR-FP-9 (Q9, applyWorldPulse second storageMonths fold) — RULED.**
 PRE-RULED REPORTED-NOT-DEFECT — the banked file's own treaty fold; TR-4
@@ -2957,7 +3019,7 @@ row is filed at the fold so the lane never stalls.
 **CR-FP-10 (Q10, errand ledger address) — RULED.** CONFIRM keep-in-place —
 SP-D generalizes `worldState.envoyErrands` IN PLACE; the migration arm is
 DECLINED (owner-gated persistence churn on a live save shape, zero
-behavioral payoff); the constitution owes the erratum row.
+behavioral payoff); the constitution owes the erratum row. [CLARIFIED 2026-10-16 (coherence fold) — DISCHARGED: `worldState.envoyErrands` is kept (OD-FC-14 KEEP, by delegation); the constitution erratum is applied (coherence fold §3.3.4).]
 
 **CR-FP-12 (NOT a question answer — a ruling on Q2's SCOPE, raised at this
 fold) — RULED.** ES-0's early MOTION is **DECLINED**; the CQ2 authorized set
@@ -2973,7 +3035,7 @@ change with declared golden-shift exposure. CQ2's four members share the
 opposite profile — pure density, zero foreign-lane collision. ES-0 sits early
 in cycle 2 under strict order regardless, so the decline costs no real motion.
 One owner clause admits ES-0 to CQ2 if the owner reads the collision risk
-differently.
+differently. [CLARIFIED 2026-10-16 (coherence fold) — MOOT: ES-0 landed.]
 
 **STANDING — ruled earlier this era, recorded here, NOT re-opened.**
 CR-FP-1: the desk-agreement seam is authority-routed (LANDED at commit
@@ -2983,7 +3045,7 @@ the cross-layer inclusion ratchet reaches the modules no family claimed
 (ruled and LANDED this era at commit `1137f935` — recorded here so the jump
 from CR-FP-10 to CR-FP-12 reads as a taken number, never a dropped ruling).
 CQ2 (Q2): early motion authorized for GR-0 + GR-1 + TR-1 + TR-9-contract —
-**exactly those four; CR-FP-12 above declined widening it to ES-0.** CQ5
+**exactly those four; CR-FP-12 above declined widening it to ES-0.** [see the bracket at §5's 2026-08-07 fold paragraph: CQ2 is moot] CQ5
 (Q5): the flag one-commit law is affirmed; the five WR flags are recorded as
 pre-manifest history, not doctrine.
 
@@ -3004,10 +3066,8 @@ survive every edit — FOREIGN_GUEST_HOLD_CLOSE_REASONS already contains death,
 so an unqualified no-fates clause would outlaw the war lane's authored
 closes. ONE OWNER CLAUSE RESTORES THE OLD HEADER.
 
-**OWNER-GATED — RECORDED, PARKED, NEVER BUILT BY THIS FOLD.** ⏱ The F9
-`supplyCargo` sign-off row — SIGNED SINCE (released at its queue
-position; see the SOL_QUEUE header reconciliation of 2026-08-09 — a
-successor stopping at this line has been redirected); the ES Q5
+**OWNER-GATED — RECORDED, PARKED, NEVER BUILT BY THIS FOLD.** The F9
+`supplyCargo` sign-off row (no build until the owner signs it); the ES Q5
 alliance-topology ACQUIRE (PARKED — ship without it; the pairwise
 allianceLabel REFUTE covers the drama; the new persisted key family goes to
 the owner as a one-line future-widening row, and no surface is ever smuggled
@@ -3015,7 +3075,217 @@ into the SP-B family); the WAR-CHOOSER spy wiring (settlementStrategy, frozen
 surface — DEFERRED to a future owner ruling, owner queue row; this program
 wires the sovereignty buyer, GR-2 pact answers, and its own cadence only);
 the Q6 / J-POP-14 arrival couplings; and every tuning band (raw-authored
-until owner-signed, per THE PROMISE).
+until owner-signed, per THE PROMISE). [CORRECTED 2026-10-16 (coherence fold) — F9 is SIGNED (§4's F9 note; J-EM-9); the war-chooser spy wiring was RELEASED by the 2026-08-05 grant (the HB-5 block: CR-ES-4's deferred arm); ES-0's CR-FP-12 is moot (ES-0 landed). Still parked: the ES Q5 alliance-topology ACQUIRE and the tuning bands (the owner's signature). Q6 / J-POP-14 is SLOTTED as a row of chain 3's clearing (POP-1) under the never-deferred law (OD-FC-40, by delegation, vetoable).]
+
+---
+
+## §12 THE EDIT MODE FOLD — every remaining wave's obligations to the editor, the seals FP supplies, the order re-derived (the chair, session 87797a6a, Fable 5.1, 2026-09-23; measured read-only at the build branch's tip `8b5565922`; written 2026-09-23 23:09 EDT; every ruling vetoable by one owner clause)
+
+**The owner's word (2026-09-23 ~22:2x EDT, in session 87797a6a, verbatim): "can you continue the architecture and implimentation work for FP?" and, the same turn: "as you take into account the FP, also make sure it nows covers, where appropriate, any additions to edit mode".** This section is that fold. It adds ONE law family (§1 L10 — THE EDITOR), re-derives §5's progress at the tip, rules the census's open questions, charters the members the editor's seals need from FP, and re-derives the build order under the tests-only mode of 2026-09-23 (`docs/OPERATING_STANDARD.md` rule 39). The four measurements it rests on were executed read-only at `8b5565922` by four seats and live in the FP kit (`/Users/cstokes/Desktop/settlement-engine-kits/fp-kit-87797a6a-2026-09-23/findings/`: `FP-CENSUS-SP-CW-GR-IN-TR.md` · `FP-CENSUS-WF-POP-INT-WY.md` · `FP-CENSUS-ES-HB-WC-EP.md` · `EM-FP-SEAM-MEASUREMENT.md`, with their probe scripts and outputs beside them). LIVE CODE OUTRANKS EVERY TABLE HERE, as it does every table above.
+
+### §12.0 What Edit Mode is, and where it stands (the base)
+
+Edit Mode and the Decree Registry (`docs/DESIGN_EDIT_MODE_AND_DECREES.md` §0–§22 and `docs/ARCH_EDIT_MODE_AND_DECREES.md`; the charter `docs/implementation/charters/EDIT-MODE-TRAIN.md`; the seal survey `docs/implementation/surveys/SIM-SEALS-SURVEY-2026-09-19.md`) landed on the build branch between 2026-09-19 and 2026-09-23 — waves 0–5 and the cure day, train `em-train-17-2026-09-23`. In one breath: the DM edits FACTS from POOLS on a saved settlement's dossier; every change is a typed OP through ONE mutation boundary; a canonized town takes its changes as DECREES applied at the head of the tick as first-class causes (`src/domain/worldPulse/decreeHook.js :: applyDecreesAtTick`); GUARDS inform and never refuse; a card that shows a PROCESS wears a SEAL — a DIRECTIVE (`pin-fork`: a registered fork's own outcome, `src/domain/edit/directives.js`) or a DIRECTION (a layer's own verb, `src/domain/edit/directions.js`); an off-stage counterparty is a PHANTOM (a minimal save record, `src/domain/edit/phantoms.js`) that absorbs an act and never returns one (design §13); entity states are typed roots with one writer each (design §15: `NpcStatus` gained `jailed`; the institution `state` pool); the world-state half of an act's `requires` is a named predicate in `src/domain/edit/worldConditions.js` (design §18), and the record's keys are classed by path in `src/domain/edit/recordRegister.js` (design §22.2 item 7).
+
+**Where the seam stands at `8b5565922` (the seam seat; every row CONFIRMED by an executed probe of the base's own modules unless marked PLAUSIBLE):**
+1. **No seal can open in a real world.** Of the shell's sixteen seals (`src/components/edit/EditModeShell.jsx :: SEALS`) ONE is bound (`src/store/editSlice.js :: SEAL_ACTS`: `acceptPeace` → `make-peace`) and its predicate `pendingPeaceOffer` has no reachable `src/` writer (`peaceTermsDrafting.js :: withPeaceOffer`, zero callers — U105; EM-E4e v2 is chartered to write it); the fifteen others are SHUT. The shell reads the conditions with `campaignState = null` (`phantomMintAction.js :: worldConditionsOf`), so every campaign-reading predicate is false at the mount by construction, and a seal opens only over a condition that names EXACTLY ONE subject, which only `pendingPeaceOffer` does.
+2. **Eleven of the sixteen predicates ARE satisfiable by live `src/` writers** (the war layer's fronts and deployments, the coup stressor, the regional graph's confirmed `trade_route`, the `trade_partner` relationship state, the belief maps, generation's roster); four are not (`acceptPeace`/`refusePeace`: no offer writer; `receiveEnvoy`/`turnEnvoyAway`: `envoyArrived` is the stub `ABSENT_UNTIL_E4`) [CORRECTED 2026-10-16 (coherence fold) — DISCHARGED by SP-D2: `envoyArrived` is a `liveRow` at 00b648c9d (src/domain/edit/worldConditions.js:241).]; `scheduleEvent`'s `always` is no condition row.
+3. **The editor binds NONE of the fourteen proposal-lane realm verbs.** `directions.js :: DIRECTION_OP_TYPES` declares `direct-realm` over exactly those fourteen (`src/domain/events/realmManifest.js :: executableRealmVerbs`) plus eleven settlement-scale directions (the force, the muster, the levy, the occupier's posture, the tempo, the brokerage menu, the channels, the three belief ops, the credibility kinds), but the leaf has zero `src/` importers and none of its types is in `operations.js :: OP_TYPES` (twenty-two rows). Its own header says why: the composition into one catalogue is the chair's, at the unfreeze. The realm verbs are directable today only through the map's `RealmVerbComposer.jsx` → `campaignWorldPulseSlice.js :: stageRealmVerb` (the proposal lane).
+4. **The decision-fork registry has 86 rows and SIX outcome vocabularies** [see the bracket at L10's provenance: 104 ids and 10 vocabularies at 00b648c9d] (`src/domain/worldPulse/habitForkRegistry.js :: HABIT_FORK_REGISTRY`; EM-E0 grew it from 42): HBF-05 `STAY_DETECTION_OUTCOMES`, HBF-17 `STRATEGY_MOVES`, HBF-69 `RETURN_ODDS_WORDS`, HBF-84 `STRESSOR_LIFECYCLE_STAGES`, HBF-85 `TRADITION_OUTCOME`, HBF-86 `SIEGE_VERDICT_BANDS`. Seventeen rows are FP-owned (populations HBF-01/02/03/12/54/68 · espionage HBF-04/05/06/31 · information HBF-33/58/71/72/73/74 · faith HBF-34); only HBF-05 carries a vocabulary. **The deterministic families take ZERO draws:** `treaty*`, `peace*`, `oathHolder.js`, `warPeace*`, the seat (`seatIntervention.js`, `warSeatBooks.js`, `rulingPowerSeat.js`), `contributionLedger.js`, `peopleLedger.js`, `warStance.js`, `advanceEpochLedger.js`, `habit/*` — a pin has nothing to take there, and DIRECTION is their only lever. **The FP-side registration debt** is nine unregistered symbols in `src/domain/traditions/*` (23 draw sites: `politics.js :: claimRoll · driftDue · pickOwner · reexpressed`; `genesis.js :: deriveFoundingTraditions · buildWindow · composeName · pickTrappings`; `customFounding.js :: adaptCustomTradition`) — PRNG-method draws the survey's idiom set could not see — plus two keyed-hash choosers outside every idiom (`npcCirculationBelief.js :: rumourReinforcesAt`, `brokeragePatronage.js :: genesisPatronOf`).
+5. **Pins: two forks are consultable** (HBF-86 in `warSiegeVerdict.js :: resolveSiegeVerdict` and HBF-85 in `traditionsKernel.js :: advanceLitTraditions`), HBF-05's seam is built and unfed (`envoyPulse.js` passes no `pinnedCatch`), `pin-fork` ∉ `OP_TYPES` and no `src/` module produces one; a hand-built pending pin enters the bag and is honoured, then WITHDRAWN by the tick's resolver as `vocabulary-moved / op-type` (PLAUSIBLE that both happen in one tick — read, not run); the bag is keyed by fork id alone, so a pin is realm-wide for its tick (PLAUSIBLE).
+6. **Roots: no FP family is a root or a derived card.** `fieldDeclarations.js :: FIELD_DECLARATIONS` has six card types and nineteen rows, none FP's; the record register classes 48 top-level keys and knows exactly one FP key, `peaceOffers` (HELD, saved-only, unwritten). Every other FP ledger lives on the CAMPAIGN (`worldState` / `spatialLedgers`), where §14's root/derived classification has no row to put it.
+7. **Missions are dark end to end.** `send-on-mission` (EM-E7; `operations/missionDispatcher.js :: SEND_ON_MISSION_TYPE · sendOnMissionOf · dispatchDirectedMissions`) has no `SEAL_ACTS` row, is not in `OP_TYPES`, and the dispatcher has zero `src/` importers; `espionageMissions.js :: mintCovertMission` and `castCovertOperative` have zero callers (the only spy path is the rider on a peace embassy, ES-Da); and every envoy and espionage flag those paths need (`envoyErrandVocabulary.js :: ENVOY_REQUIRED_RULES`; `espionageGate.js :: espionageActive`) is lit by no `src/` site, no preset and no DM toggle.
+
+**The census at the tip (three seats; every disposition CONFIRMED by commit, packet and live symbol; "LANDED" means present at the base, not proven green — no gate was run):** of §5's 111 waves, **28 LANDED · 10 PARTIAL · 73 NOT STARTED.** LANDED: SP-A, CW-0w, SP-B, SP-B2, SP-C, SP-D, SP-E, GR-0, GR-3, IN-0, TR-1, WF-1, ES-0, ES-1, ES-3, ES-4, ES-5a, ES-5b, ES-5c, ES-5d, HB-0, HB-1, HB-2, WC-0, EP-0, EP-1, EP-2, EP-3 (plus the slices ES-6a and ES-Da). PARTIAL, with what each still owes: GR-1 (the generosity credit-obligation stamp; `generosityKernel.js` is exactly 800/800), GR-2 (GR-2b, the `PROPOSE_PACT` verb — a comment in `pactProposals.js`, no handler), GR-4 (two voice slices: GR-4b-β `repudiated`, `honored_by_silence`), GR-5 (GR-5b..5f), IN-1 (IN-1c-b, the `mirror_shift` hum), TR-9 (the collector, the five `route_*` Herald rows, the tick-budget lanes), WF-8 (WF-8A is WF-1's moved obituary plus one phrase kind; the five realm arcs, `faithNarrationEnabled` and ~19 kinds remain), INT-3 (only the 3b émigré seam, no caller, no flag), ES-2 (ES-2b, the custody write), ES-6 (ES-6b, vetting quality). NOT STARTED: GR-6, GR-7, IN-2..IN-6, TR-2..TR-8, CW-1, CW-2x, CW-3, WF-0, WF-2..WF-7, WF-9, POP-1..POP-7, INT-1, INT-2, INT-4..INT-8, WY-1..WY-6, WY-11, ES-7 (refused/parked), HB-3..HB-9, WC-1..WC-16, EP-4, EP-5. The LG volume (`docs/DESIGN_FP_ARCH_LG.md`) exists only on the ledger branch — its fold obligation to the build branch was never met; nothing of LG is on the tree. The last FP landing was EP-3B on 2026-08-16. [CORRECTED 2026-10-16 (coherence fold) — true at 2026-09-23; 60+ FP commits landed 09-24..10-02 (coherence fold §2), and the LG volume is now on master (J-EM-12 discharged; zero LG code). This census is re-derived at the bracket on §5's 2026-09-23 block.]
+
+### §12.1 The shape of the seam — FP HAS NO PENCILS; FP HAS SEALS, DIRECTIONS, COUNTERPARTIES AND STATES (ruled)
+
+The editor's pencil edits a HELD fact on the settlement record and re-derives its readings (design §14, §22). FP's state is campaign-side: the fourteen `spatialLedgers` sub-keys of §4, the conditional fields on pulse records, the treaties, the errands, the habits, the epoch. None of it is a record root, and none of it should be — a treaty is lived history between two towns, not a fact one dossier holds first. So FP meets the editor at exactly five places, and L10 names the obligation at each:
+- **SEALS over FP processes** — a PIN where the process is a registered fork with a declared vocabulary (the drawing families: faith and traditions, populations, information, espionage, the envoys' road), a DIRECTION where the process is a deterministic layer's own verb (the treaty, the pact, the peace, the seat, the muster, the levy, the house, the tithe).
+- **THE TWO DIRECTION REGISTRIES, and no third** — `src/domain/events/realmManifest.js :: REALM_MANIFEST` for realm-scale verbs (a court acts toward a court: the proposal lane, `authorityFor`, the veto prose, the dials) and `src/domain/edit/directions.js :: DIRECTION_OP_TYPES` for settlement-scale directions (the home's own levers). An FP wave's DM verb is a ROW in one of the two, never a bespoke op type; spine requirement 14(a)'s "operationRegistry lane" is READ AS these two registries from this fold on. A direction row is DEFINED in the wave's own module in `operations.js`'s `OpTypeDeclaration` shape with its vocabulary imported from the module that owns it (`directions.js`'s own law: not one word of vocabulary is spelled in the registry), and the registry gains its import at the merge — the chair's composition, exactly as `directions.js`'s header reserves it. A realm verb row is authored in `REALM_MANIFEST` by the wave that owns the verb (one lane at a time on that file: the ownership table). ⚠ MEASURED BY LANE FP-B AT `2d0696df9`: no transport exists yet for a settlement-scale direction to reach a pulse layer at the tick — `decreeTick.causes` is in hand at the kernel's head (which FP never edits) and is spread onto the pulse record at the END; the only bags that reach layers today are `forkPins` and the realm lane's proposals. So an FP wave DEFINES its direction and predicate rows and proves them headless; a CONSUMER inside a pulse layer lands only after the Edit Mode program composes the direction transport (its U123), as a one-unit FP member per row (the FP kit's queue FPQ-1, FPQ-6, FPQ-7). A realm verb needs no such wait: the realm lane already applies at the tick through `applyRealmVerbOrder`.
+- **THE COUNTERPARTY** — every FP mechanism that takes a partner declares `real-only` or `home+record` at the seam (design §13, §19 ruling 10), and every reader of neighbour rows the wave adds accepts a phantom record without throwing.
+- **THE STATES AT THE CHOKEPOINT** — an FP stage that casts a person reads `NpcStatus` at the one participation chokepoint (`entities/npcs.js :: NPC_UNAVAILABLE_STATUSES`; EM-B1f), never a filter of its own; an FP stage that moves an institution's standing writes through the one state writer.
+- **THE CAUSE** — an applied decree's chronicle line comes from the decree pools with `cause: 'table' | 'party'`; an FP news kind a decree can cause carries the cause row beside L6's five joins.
+
+**The predicate law (ruled; the seam seat's finding 1 is its provenance).** A seal opens only over a condition that names EXACTLY ONE SUBJECT. Every predicate an FP wave lands in `worldConditions.js` is a `liveRow` WITH a `subjects` reader (the counterparties it holds for — the offerer, the sender, the partner, the operative) — never a bare boolean row. A predicate that cannot name its subject is a predicate for no seal, and the wave says so.
+
+**The dark-layer law (ruled).** Every FP flag is virtual and dark (§3), lit only at the soak redo under the pre-signed lighting signatures (the blanket grant of 2026-08-05, consumed when each instrument reads SATISFIED). A seal over a dark layer is not offered: the layer's own gate (`espionageGate.js :: espionageActive`, `pactProposals.js :: pactFormationActive`, `envoyErrandVocabulary.js :: ENVOY_REQUIRED_RULES`, …) is part of every FP predicate by construction, because the predicate reads the layer's ledger and a dark layer has none. This fold therefore lands SEALS THAT LIGHT WITH THEIR LAYERS, and puts the LAUNCH LINE — which FP flags light before the first real world — to the owner as a decision point (§12.7), where it already stood. [SUPERSEDED BY EVENT 2026-09-23 — see §12.8 (J-EM-15/16, "shipped lit") and its 2026-10-16 bracket]
+
+### §12.2 THE SEAL LEDGER — the shell's sixteen seals: what Edit Mode still owes, what FP supplies
+
+| # | card · seal | condition (`worldConditions.js`) | at the base | what the Edit Mode program still owes (its own members) | what FP supplies (this fold's members) | phantom |
+|---|---|---|---|---|---|---|
+| 1 | war · `suePeace` | `warInProgress` (satisfiable: `warDeployment.js :: evaluateWarLayer` mints `war_front` behind `warLayerEnabled`) | SHUT; the act exists as the realm verb `SUE_FOR_PEACE` (`peaceReasons.js`, predicate `belligerentOptions`) | EM-E4e v2 (judgment 320: `sue-for-peace` as the eighth off-stage act + `draftStandingOffer`), EM-D1b/U30 (the direction panel binding `direct-realm`), the §18 row moved to the verb's own predicate (design §19 ruling 2) | nothing new: the war layer (WR, landed) is the process; GR-2's `pactProposals` is its peacetime sibling | real-only (a phantom's "make them sue" is a record-only offer, §18) |
+| 2 | war · `acceptPeace` | `pendingPeaceOffer` (subjects: `standingPeaceOffers`) | BOUND, unopenable (no writer) | EM-E4e v2 writes the standing offer from the war layer's `sue_for_peace` move (`warPeaceDecision.js :: isBilateralPeaceOffer` in the proposal lane); `withoutPeaceOffer` on acceptance | nothing new | real-only |
+| 3 | war · `refusePeace` | `pendingPeaceOffer` | SHUT (no act; `withoutPeaceOffer` has no caller) | EM-E4e v2 / E4f: the refusal act over `warPeaceDecision.js` | nothing new | real-only |
+| 4 | war · `directForce` | `forceInField` (satisfiable: `deployments`) | SHUT; the act exists as `DIRECTION_OP_TYPES['direct-force']` over `convergence.js :: ENGAGEMENT_MOVES` | EM-D1b/U30 binds it | WC-4 (strategy and coercion) and WC-3 (the relay) widen the force's verbs when they land; each lands its row in the wave's own module | home-only [CORRECTED 2026-10-16 (coherence fold §5) — 'home-only' is not an L10 policy: read `home+record` (L10(b)/(c)) until L10(c) mints a third policy by ruling; the code carries none of the three literals.] |
+| 5 | war · `resupply` | `forceInField` | SHUT; no act in the tree (the land resupply is unbuilt; `ORDER_CONVOY` is naval and needs a canonized map) | — | **WY-8a / WC-9's supply train** (F9 `supplyCargo`, signed): the resupply act is that wave's, a realm verb `ORDER_RESUPPLY` over `armySupply.js` — until it lands the seal stays shut with the herald's reason "no supply line" | home-only [read `home+record`; see row 4] |
+| 6 | war · `letSiegeFall` (or hold) | `siegeInProgress` (satisfiable: `display/warStatus.js :: liveSieges`) | SHUT; the pin seam is live (HBF-86 consulted with `SIEGE_VERDICT_BANDS`) but nothing mints a `pin-fork` | EM-E4f: `pin-fork` composed into the catalogue and the seal bound (the tick's withdrawal of a pending pin, §12.6 item 3) | nothing new | home+record |
+| 7 | factions · `letCoupFail` (or succeed) | `plotInMotion` (satisfiable: `coup.js :: COUP_STRESSOR_TYPE`) | SHUT; `rulingPowerCoup.js :: resolveCoupVerdict` has NO registry row; the realm verb `ORDER_INTERVENTION` is a third court's act, not the home's | EM-E0's next cut registers the coup verdict with its vocabulary; E4f binds the pin | nothing new (the coup is the interior's; INT-2's positions wired read the same seat) | home-only [read `home+record`; see row 4's bracket] |
+| 8 | trade · `receiveEnvoy` | `envoyArrived` = `ABSENT_UNTIL_E4` (unsatisfiable by construction) [see the bracket at §12.0 item 2: discharged by SP-D2] | SHUT; no act | the shell row, once the predicate is real | **SP-D2 — THE INBOUND READ AND THE RECEPTION** (§12.5): `envoyArrived` re-pointed to a live reader over the campaign's `envoyErrands` (the SENDER's errand at position `arrived` whose target is this settlement; `envoyErrandVocabulary.js :: ENVOY_POSITION_BANDS`) with the sender as subject; the reception as a direction over the parlay (`ENVOY_PARLAY_REFUSAL_REASONS` for the refusal) | real-only for a real sender; a phantom's envoy is record-only until it "arrives" at the tick (§18) |
+| 9 | trade · `turnEnvoyAway` | `envoyArrived` | SHUT | the shell row | SP-D2 (the refusal half) | as 8 |
+| 10 | trade · `directTrade` | `openRoute` (satisfiable: `region/graph.js :: activeChannelsFrom`) | SHUT; the acts exist as `['set-channel-status']` and `['offer-brokerage']` | EM-D1b/U30 binds them | TR-5 (the pact lane: the commercial-term executors as directions), TR-8 (the factor errand); each lands its row in its own module | real-only |
+| 11 | trade · `embargo` | `tradeWith` (satisfiable: `relationshipStates[].relationshipType === 'trade_partner'`) | SHUT; the act exists as the realm verb `DECLARE_TRADE_EMBARGO` (`supplyWebWarfare.js`, HBF-18 registered without a vocabulary) | EM-D1b/U30 binds `direct-realm`; the §18 row moves to the verb's predicate (supply-web lit ∧ two courts) | TR-6 (the corner) and TR-1's severance reasons read the embargo; nothing new to mint | real-only |
+| 12 | rumour · `confirmRumour` | `beliefExists` (satisfiable under `beliefMap.js :: beliefsActive`: a canonized realm, `infoMode` ≠ omniscient) | SHUT; the act exists as `['correct-belief']` | EM-D1b/U30 | **IN-2 (the lure)** lands the lie-commission verb beside it and **IN-3 (the counter-game)** the sweep; the belief writer they share is `beliefMap.js`'s | home+record |
+| 13 | rumour · `castDoubt` | `beliefExists` | SHUT; `['set-belief-confidence']` | EM-D1b/U30 | IN-3's `suspicionOf` is the reading that makes doubt honest | home+record |
+| 14 | rumour · `twistRumour` | `beliefExists` | SHUT; `['mutate-belief']` over `BELIEF_STRENGTH_BANDS` | EM-D1b/U30 | IN-2: the axis-typed variants (`axis` ∈ strengthBand · faithLabel · the SP-2 family) are the recorded variants a twist may take | home+record |
+| 15 | chronicle · `scheduleEvent` | `always` (no row) | SHUT; `eventCatalogue.js :: stageScheduledEvent` has zero importers | EM-E6's binding (U-row) | every FP wave that mints a typed settlement event registers it in `affordanceManifest.js` (or `NON_AUTHORABLE_EVENTS`) — WF-2's pilgrimage, WF-4's omen, POP-4's plague arc, TR-6's corner, POP-5a's road drama | per event |
+| 16 | npc · `sendOnMission` | `npcPresent` (true at the shell but names no subject) | SHUT; `SEND_ON_MISSION_TYPE` declared, zero callers; the layers dark | EM-E7's op row composed (U26: the catalogue row spelled from a shared constant leaf) and the row given a subject (the person) | **ES-Db — THE DIRECTED DISPATCH** (§12.5): the pulse consumes `dispatchDirectedMissions` for due `send-on-mission` decrees and MINTS the mission — `mintCovertMission` for the covert kinds cast through `vetVolunteerEnvoy`, the envoy layer for the diplomatic ones — behind `espionageActive ∧ missionDispatcherActive`; the errand record carries the position; **ES-2b — THE CUSTODY WRITE** lands the capture (`openForeignGuestHold`, cause `caught_spying`, through the EP-q shape) so "Is the spy taken?" (HBF-05, the one FP fork with a vocabulary) has a consequence | home+record |
+
+**The survey's thirty FP-owned candidate seals** (`EM-FP-SEAM-MEASUREMENT.md` §7: T1-8, 14, 18, 29, 58, 60, 75, 76, 90–94, 100–103, 105, 106, 108, 110, 115, 119–125) keep their measured conditions and are assigned to the wave that mints or completes each process in §12.4's table (the peace draft and terms → E4's draft record + GR; the heir's oath → GR-4's landed `treatySuccessionDecision.js` + a registry row; the muster → WC-1; the patron contest and fall → WF-1 (landed) + registry rows; the council schism → IN-3; the covert missions → ES-Db/ES-2b; the information ops → IN-2/IN-3; the treaty's keeping → GR-5b; the demographic answers → POP-2/POP-3; the migration → POP-1/WY-4). A survey row on a LANDED process with no registry row is registration debt and is paid by the next wave in that family (the FORKS clause), never by a wave of its own.
+
+### §12.3 THE RULINGS OF THIS FOLD (J-EM-1..J-EM-14; each vetoable by one owner clause; an implementer never re-rules one silently)
+
+- **J-EM-1 — L10 binds every remaining wave; the EDITOR line replaces the Edit-verb clause.** §12.4's row is the wave's Edit-verb story from this fold on; a landed wave's old clause is history. The per-program volumes' Req 14 lines are read through L10.
+- **J-EM-2 — ONE CATALOGUE OF ACTS, TWO REGISTRIES.** An FP DM verb is a `REALM_MANIFEST` row (realm-scale) or a `DIRECTION_OP_TYPES` row (settlement-scale); a pin only over a registered fork with a declared vocabulary; never a bespoke op type, never a third registry, never a second write path around `authorityFor`. Rejected: a per-volume direction leaf composed like `couplingRegistry*.js` (it would be a third registry the shell must learn); rejected: splicing rows into `OP_TYPES` from FP (a landed arm pins the catalogue at twenty-two rows; the composition is the chair's at the unfreeze, `directions.js`'s own header).
+- **J-EM-3 — THE PREDICATE NAMES ITS SUBJECT** (§12.1). Rejected: a boolean predicate with the subject chosen at the shell (the shell cannot know which of two wars the card means).
+- **J-EM-4 — SEALS LIGHT WITH THEIR LAYERS** (§12.1's dark-layer law). Rejected: lighting an FP flag for the editor's sake (a golden-moving act under THE PROMISE, the owner's at the soak redo).
+- **J-EM-5 — THE DETERMINISTIC FAMILIES ARE DIRECTED, NEVER PINNED**; their EDITOR lines carry `(a) none — deterministic` and the weight moves to (b). The FP registration debt (nine `traditions/*` symbols, `rumourReinforcesAt`, `genesisPatronOf`) is paid by the next wave of each family: WF-0's observation floor registers the traditions politics forks (`claimRoll`, `driftDue`, `pickOwner`, `reexpressed`) with their outcome words where a closed set exists and STAY where the draw is a founding derivation (`genesis.js`, `customFounding.js`: root-shaped, the survey's U-29/U-30 class); IN-2 registers `rumourReinforcesAt`; TR-2 registers `genesisPatronOf`.
+- **J-EM-6 — THE CENSUS'S CORRECTIONS.** §5's 2026-08-09 progress block overstated GR-1 and GR-2 as landed; both are PARTIAL (their own landing commits say so). TR-5 builds executors for the THREE commercial term rows GR-3 minted (`exclusivity`, `market_access`, `toll_exemption`); its charter's "five" is superseded, and TR-5 mints no term family (the catalogue is GR's). ES-6c is re-filed to the corruption volume as `docs/implementation/INDEX.md` records (the later record governs; the ES volume's "folded into ES-7" is struck). EP-4 slice 1's removal half is STRUCK: `9f75594fc` (2026-09-16) keeps `seed` admitted as a product call; EP-4 is slices 2 and 3. HB's first coupling row lands with HB-4 (the first cross-layer read), and `couplingRegistryHabit.js` is minted then, not retroactively. WC-2's derivation is spelled `derivedWarStanceOf(deployments, credit)` — `warStance.js :: warStanceOf(rung)` keeps its accessor meaning. POP-4's attribution scope is RE-DERIVED at its compile because its own STOP condition fired (`0f59d0ead` closed the decline double-shed). Clergy casting on the fall receipt, orphaned across WF-1A → WF-1B → WF-8A, is slotted as **WF-8b** (the second obituary member). INT-8's charter SHRINKS to the pools (TE-HERALD-1 `2b8f47e26` and CW-0w slice 4 `e30770bd0` discharged its voice cures and walker habitat). INT-7 reads `subsystemRowsVirtual.js`, not the superseded `subsystemRowsInterior.js`; WF-2's pilgrims travel with purpose `personal`, not `religious`; the "near ceiling" premises of IN-4, HB-1, HB-5 and CW-1 are refuted (`settlementStrategy.js` ≈760, `realmItemReadModel.js` ≈784, `envoyErrand.js` 714 — none baselined) while `peaceTerms.js` 797/800, `generosityKernel.js` 800/800, `factionCompetition.js` ≈775, `armyTransitKernel.js` ≈798 and `roadsKernel.js` 838 (baselined over the ceiling) hold the decomposition-first premise wherever a wave touches them. [RULED 2026-10-16 (coherence fold §3.2.19, §3.1.1, §3.1.9) — WC-2's derivation is spelled `derivedWarStanceOf(worldState, partyId, warEpisodeKey)` (the episode key is part of the spelling, L-WC-8's per-episode law); TR-5's executor sentence is superseded by §3.1.1 (EC-6 owns the read-side executor; GRAMMAR's `PACT_DRAFT_LENS` owns the producer); POP-4 FOLDS INTO PG (PG owns the arc; POP keeps the burial line and the disaster cause; `calamityArcs` is not minted). J-EM-6's other corrections stand and are now pointed from the §5 charters they correct.]
+- **J-EM-7 — ES-2b IS UNBLOCKED.** The owner pick EP-q (`218aa5ff1`, 2026-08-10, signed under the 2026-08-10 grant) ruled the encounter shape ES-2b waited on: a court can hold an envoy (`host_settlement`, the carrier-kind-conditional `armyId`), and the persist seam was widened without a migration. ES-2b lands the write. Re-measured at build: the DTO accepts the hold with cause `caught_spying`; if it does not, STOP with the contradiction.
+- **J-EM-8 — ES-7 STAYS PARKED until the espionage layer has traffic.** Its refusal ("five of six Herald kinds have no reachable producer") holds because nothing mints a standalone mission. ES-Db (the directed dispatch) and ES-6b (vetting quality, whose "dispatcher wave nobody chartered" is now W-OPS's `missionDispatcher.js` plus ES-Db's consumer) produce the traffic; ES-7 is re-measured after both land, at its queue position.
+- **J-EM-9 — THE BLANKET GRANT, READ FOR THE FIELD ROWS.** The owner's grant of 2026-08-05 ("I give permission for everything that requires my sign off in the full queue") signed every queued owner-gated item per the chair's recommendation. `docs/SOL_QUEUE.md`'s 2026-08-09 header applies it to WY F9 and WC CR-WC-9. This fold reads the same grant over WY §2a's whole table — F1..F9 are ONE request, recommended whole by the volume, and F9 was the row named UNSIGNED — so **F1..F9 and CR-WC-9 are SIGNED, released at their queue positions** (WY-3, WY-4, WY-6, WY-8a; WC-6 onward), each still a persisted-shape change that lands as the launch shape (rule 38: no preserved data before launch). **HB Q1 (`deployment.habitEpisode`, `treaty.habitEpisode`) post-dates the grant (folded 2026-08-07) and stays the OWNER'S** — it blocks the fields and therefore HB-3 onward (§12.7). Veto surface: one word on F1..F8 re-parks WY-3/4/6. [RULED 2026-10-16 (coherence fold §7 OD-FC-20, by delegation, vetoable) — CR-WC-9 is read PARKED until chain 2 asks for a field (five records disagreed; the grant pre-dates the escalation); WC-0E's two normalizers stand. HB Q1 is no longer the owner's open gate: J-EM-15(2) read "build it all" as its signature (§12.8).]
+- **J-EM-10 — THE ORDER UNDER TESTS-ONLY MODE** (§12.5): AREA LANES of two to three waves each, path-disjoint, each a chain built back to back on one branch by one builder with the compiled block plus the volume's wave spec as its brief; the editor-critical members first; the flag-minting waves serialized on `simulationRules.js` (one lane at a time owns the manifest, the rows files and the walker); the fork-registering waves wait for the unfreeze's lane 3 (the chooser walker's re-record) to merge.
+- **J-EM-11 — NEW MEMBERS CHARTERED BY THIS FOLD, EACH AN FP WAVE THAT SUPPLIES AN EDITOR SEAL:** SP-D2 (the inbound read and the reception), ES-Db (the directed dispatch — the DM's hand, not the autonomous cadence the ES-7 refusal parked; the refusal is cited and stands), WF-8b (clergy casting on the fall receipt), GR-2b RE-CUT as a `REALM_MANIFEST` row (`PROPOSE_PACT`: the proposal lane, `pactProposals.js :: openPactProposal` as its executor, predicate = `pactFormationActive` ∧ two courts ∧ no open proposal of that family, `PACT_PROPOSAL_REFUSALS` as its veto prose), IN-2's lie commission and IN-3's sweep as realm rows (re-cut of their Edit-verb clauses under J-EM-2).
+- **J-EM-12 — THE LG VOLUME'S FOLD OBLIGATION IS DISCHARGED AS A DOCS MEMBER** (`docs/DESIGN_FP_ARCH_LG.md` copied whole to the build branch at the next docs merge; LG-1.. waits on POP-1 as its §D says). [CORRECTED 2026-10-16 (coherence fold) — LG §D: LG-0..LG-8 are unblocked; only LG-9+ waits on POP-1. LG-0's willingness gate (a LIVE routing defect) is pulled forward alone (OD-FC-38, by delegation). The docs member is discharged: DESIGN_FP_ARCH_LG.md is on master; zero LG code.]
+- **J-EM-13 — WHAT FP NEVER TOUCHES:** `pulseKernel.js` and `applyWorldPulse.js` (L1; the decree hook is EM's one call) [see the bracket at L1: EP-1's seam is the one FP edit], the shell (`EditModeShell.jsx`, EM-D1b/E4f's), `OP_TYPES` (EM-C1's), the goldens (re-recorded only with the cause stated, by the chair).
+- **J-EM-14 — THE FOLD'S OWN LIFECYCLE:** this section lives in the compiled volume on the build branch; the ledger's copy of the volume receives the same text at the ledger's next docs pass (the historian's, or the chair's) — until then the ledger's copy is one fold behind, and this sentence says so. [SUPERSEDED BY EVENT 2026-10-16 (coherence fold) — the ledger's copy now carries master's text (coherence fold §0: the base is master; the two copies are one truth after the fold).]
+
+### §12.4 THE PER-WAVE EDITOR LINES (the remaining 83 waves)
+
+**The lines, compressed to one row per wave (the FULL five-member lines, every ▪/⚖ mark and the drafters' anchors are in `docs/DESIGN_FP_ARCH_EDITOR.md` PART C, which is NORMATIVE where this table compresses; the chair's rulings over every ⚖ are its PART B, R-1..R-40).**
+
+| wave / remainder | disposition · gate | seals it supplies (shell seals · survey rows · new candidates) | the ⚖ items, ruled in PART B |
+|---|---|---|---|
+| GR-1 (remainder: the generosity credit-obligation stamp) | PARTIAL remainder — the landing's own "one charter item outstanding". No owner gate. It is blocked on `genero… | none | (1) Whether the pick filters through `isOffStage`, and whether the landed stamp doors are retrofitted (a golden shift).… |
+| GR-2b (the `PROPOSE_PACT` verb, deferred by J-GR-2-6) | PARTIAL remainder of GR-2. No owner gate; lighting `pactFormationEnabled` stays owner-held at the soak. | receiveEnvoy + turnEnvoyAway, pact envoys (⚖) · Table 1 row 114 "Do they sign?", as a direction and not a pin (⚖) · sendOnMission's "envoy … about alliance" business (⚖) | (1) A realm-manifest row or a new op type (ARCH_GR says manifest row). (2) Whether the host's answer is DM-directable o… |
+| GR-4b-β (the `repudiated` open-road line) | PARTIAL remainder of GR-4, "recorded, not scheduled". Gate: a chair ruling on double-voicing plus a fifteenth… | none of the sixteen (Table 1 row 14's first arm is the built `REPUDIATE_TREATY`) | The double-voicing ruling itself. |
+| GR-4b-ii remainder (`honored_by_silence` and the expiry / ring-overflow / undo / replay voices) | PARTIAL remainder of GR-4. Gate: OWNER (persisted-shape class). Its expiry road has no transition-site compar… | none | (1) The persisted key (the owner's call). (2) The cause word for silence. |
+| GR-5b (the renewal window) | NOT STARTED successor (`GR-5A.md` §2.3). Gate: a chair-signed band for the renewal window length (the OQ §42/… | none of the sixteen (Table 1 rows 114/115 adjacent, ⚖) | The herald words, and whether a DM may open a renewal (yes, via GR-2b). |
+| GR-5c (renegotiation from strength) | NOT STARTED successor. Gate: chair-signed bands for the demand threshold and the ask cap. | none | The trigger member. |
+| GR-5d (conversion) | NOT STARTED successor. Gate: a chair-signed conversion trust band. | none | Whether conversion is DM-directable at all or stays the court's (J-GR-9 makes it a label plus a lineage act). |
+| GR-5e + GR-5f (the voice and the dossier) | NOT STARTED successors. They follow GR-5b..5d. | none | — |
+| GR-6 (mediation generalized) | NOT STARTED. No owner gate beyond lighting. | none of the sixteen; supplies Table 1 row 29's `mediation` reason as a directable cause (⚖) | Direction or mission. The charter's hardest pin is "never forces", so a DM mediation can only add pressure. |
+| GR-7 (grammar measurement and certification) | NOT STARTED. Gate: OWNER. It is done only when the envelopes hold on an owner-ordered soak. | none | The decree partition of the mixes. |
+| IN-1c-b (the `mirror_shift` staleness hum) | PARTIAL remainder of IN-1. Gate: chair Q3/Q5 (`IN-1C-A.md`). IN-1c-c is REFUSED and is not counted. | none | The reclassification of row 105, and the interim desk (section null) until IN-5. |
+| IN-2 (the lure) | NOT STARTED. Scope is J-INA-3's (vetoable); lighting is owner-held. | twistRumour (world side) · Table 1 rows 100 ("Plant it.") and 106 ("Plant the story.") | A direction over the plant road, or a widening of EM's `mutate-belief` payload beyond `BELIEF_STRENGTH_BANDS`. |
+| IN-3 (the counter-game) | NOT STARTED | castDoubt (world side) · receiveEnvoy / turnEnvoyAway (the VET arm) · Table 1 row 107 | Which rumour seal the SWEEP binds, and VET as a reception arm. |
+| IN-4 (the road: couriers and the race) | NOT STARTED | sendOnMission (courier) · Table 1 row 41 (reclass to no seal) | The reclassification of row 41, and the courier mission kind. |
+| IN-5 (the voice) | NOT STARTED | the herald home for the lines of confirmRumour, castDoubt and twistRumour (⚖) | Whether section tokens are decree-addressable. |
+| IN-6 (the measure) | NOT STARTED. Gate: envelopes over a soak (the owner's). | confirmRumour (preview only) | The decree partition. |
+| TR-2 (the house) | NOT STARTED | none of the sixteen (a new house seal) | Whether house acts are DM-directable at all. |
+| TR-3 (believed markets) | NOT STARTED. Its SP-B blocker has landed. | directTrade (⚖) | Bind directTrade to the WHERE composer, or to EM-E5's `set-channel-status`. |
+| TR-4 (the grain road) | NOT STARTED. Gate: WY-3 lands the round-trip pin first. | directTrade (grain) · Table 1 row 56 adjacent | — |
+| TR-5 (the pact lane) | NOT STARTED. Needs GR-3 (landed) and GR-2b's verb. | directTrade (⚖) · receiveEnvoy / turnEnvoyAway (⚖) · Table 1 rows 34/35 (the reason words, from landed TR-1) | Which arm directTrade binds first. |
+| TR-6 (the corner and the famine speculator) | NOT STARTED | none of the sixteen (new seals) | Whether a corner is DM-directable. Alignment never gates it, so a DM-directed corner still pays the moral price. |
+| TR-7 (ventures) | NOT STARTED | directTrade (venture arm) · sendOnMission (supercargo) | — |
+| TR-8 (the traveling factor) | NOT STARTED. Needs TR-5 and TR-7. | sendOnMission (⚖) · receiveEnvoy / turnEnvoyAway (a factor's arrival) | Module name: `factorErrand.js` in the registry or `commercialErrands.js` in the charter. |
+| TR-9 (remainder: the collector work) | PARTIAL remainder. Gate: the envelopes' bands are owner-signed at the soak. | none | The decree partition of the endings-share envelope. |
+| CW-1 (the cascade governor) | NOT STARTED. Gate: bands owner-signed at the lit soak. | none | How a decree renders as an ancestor, and how phantom members render. |
+| CW-2x (the cause-walk extension) | NOT STARTED | none | Decree roots. |
+| CW-3 (the coupling measure) | NOT STARTED. Gate: RUNNING the instruments is the owner's terminal phase. | none | The decree partition. |
+| WF-0 | NOT STARTED · no flag, no gate | none | J1 |
+| WF-2 | NOT STARTED · two slices · lighting is the owner's | sendOnMission (act, religious errand) · receiveEnvoy / turnEnvoyAway (predicate plus act for arriving legates) · Table 1 #61 (reads), #95, #99 | J2, J3 |
+| WF-3 | NOT STARTED | Table 1 #64 (reads) · #115 "Do they keep it?" (supplies the fraying reason) | — |
+| WF-4 | NOT STARTED | NEW FP candidate "How do they read the sign?" (not in the survey) · supports scheduleEvent downstream of `FORCE_CALAMITY` | J4 |
+| WF-5 | NOT STARTED · two slices | Table 1 #58 (the split's road) · #62 (the imposed flip seeds the covert share) · NOT #60 (that is beliefMap's council schism) | J5, J6 |
+| WF-6 | NOT STARTED · GR-2/GR-3 preconditions met | acceptPeace / refusePeace (term content) · Table 1 #8, #114 | J7 |
+| WF-7 | NOT STARTED · STOP if warDeployment has no headroom (≈684/800 at base, so it does not fire) | Table 1 #46 (`set-levy`), #47 | J8 |
+| WF-8 (remainder) | PARTIAL (WF-8A landed) · lights LAST in WF; the flag is the owner's to light | none | J9 |
+| WF-9 | NOT STARTED · no flag | none | J10 |
+| POP-1 | NOT STARTED · SP-B ✓, `migrationRumorsEnabled` ✓ | Table 1 #122 (inputs), #123 | J11 |
+| WY-4 | NOT STARTED · ⛔ OWNER sign-off rows F4/F5 (persisted shape) | Table 1 #123, #59 | — |
+| WY-5 | NOT STARTED | none | J12 |
+| POP-2 | NOT STARTED | NEW FP candidate "Answer the commons." · Table 1 #18, #119–#121 (refusal reason) · #20 | J13, J14 |
+| POP-3 | NOT STARTED | none | — |
+| POP-4 | NOT STARTED · ⛔ its own STOP FIRED (the decline double-shed was closed by `0f59d0ead`), so the chair must re-… | Table 1 #126 (reads) | — |
+| POP-5a | NOT STARTED | NEW FP candidate "What befalls the column on the road?" (survey #42 covers roads only) · #123 | J15 |
+| POP-5b | NOT STARTED | Table 1 #18, #121 and `FORCE_FOUND_STEADING`'s refusal (reasons) | — |
+| POP-6 | NOT STARTED · J-POP-12: prose goldens are re-recorded only under a recorded ruling | supports set-tempo (#140) | J16 |
+| POP-7 | NOT STARTED · no flag · the `commonsVoiceEnabled` certification row is still owed (BACKLOG) | none | J10 |
+| INT-1 | NOT STARTED | supplies reasons already consumed by `SUE_FOR_PEACE`'s warPeaceDecision | — |
+| INT-2 | NOT STARTED · completes `settlementPoliticsEnabled` (registered by GAP-1) | Table 1 #69 (reason) | — |
+| INT-3 (remainder) | PARTIAL (INT-3B seam landed) · 3a is unbuilt · 3b's successors are gated: ⛔ OWNER Q-TC12-1 (where an émigré r… | letCoupFail (reason) · Table 1 #3/#4 (reason) · #84 | J17, J18 |
+| INT-4 | NOT STARTED | reason for letCoupFail | — |
+| INT-5 | NOT STARTED | none | — |
+| INT-6 | NOT STARTED · two slices | NEW realm verb (burial) · Table 1 #28 ('revanchism'/'grievance' suppressed), #113 | J19 |
+| INT-7 | NOT STARTED | none | J20 |
+| INT-8 | NOT STARTED · LIT-KIND upgrades gated by OWNER J-INT-13 | none | — |
+| WY-1 | NOT STARTED · OWNER-signed `MODE_SPEEDS` table and default scale (§8 tuning rows) | none | J21 |
+| WY-2 | NOT STARTED | none; this declares survey #108 NEVER-PINNABLE, against the survey's candidacy | J12 |
+| WY-3 | NOT STARTED · ⛔ OWNER sign-off rows F1/F2/F3 before the fields mint | directTrade (act) · Table 1 #56, #57 | J22 |
+| WY-6 | NOT STARTED · ⛔ OWNER sign-off row F8 · after TR-4, which is unbuilt | directForce (a caravan as the engage target) · Table 1 #22 (sibling encounter) | J23 |
+| WY-11 | NOT STARTED · after TR-9 | #57's floor (no seal) | — |
+| ES-2b | PARTIAL-remaining: the custody write for a caught spy. Owner-gated on the persisted encounter shape. The live… | T1 row 91 (the catch becomes real) · T1 row 99 `FOREIGN_GUEST_HOLD_CLOSE_REASONS` ("Do they let them go?") · T1 rows 24/25 `ransomChoices.js :: CAPTOR_CHOICES` / `HOME_A… | The owner's ruling on the encounter shape comes first. Which chokepoint reading `isOffStage` uses for a held spy. The g… |
+| ES-6b | PARTIAL-remaining: vetting quality. Blocked on a cast site. The dispatcher it waited on now exists in two par… | `sendOnMission` (the covert cast's vetting, supplying a predicate, not an act) | Whether EM-E7's direction should cast through `castCovertOperative`; that would un-block ES-6b. The two-word threshold… |
+| ES-7 | NOT STARTED: refused on measurement, parked by owner gate (five of six Herald kinds had no reachable producer… | `sendOnMission` (the voice for directed missions) · T1 row 90 `COVERT_MISSION_VOCABULARY` ("Send them quietly.") | Drop `DISPATCH_CONFIRMATION_MISSION` in favour of `send-on-mission`. Compose the voice onto W-OPS `espionage/operations… |
+| HB-3 | NOT STARTED. Gated: HB Q1's two owner-gated persisted fields are unsigned [CORRECTED 2026-10-16 (coherence fold) — HB Q1 is SIGNED by the owner's word as read at J-EM-15(2) (§12.8); HB-3..HB-9 are released.], and INDEX says "that seal binds HB… | none | No pledge on a pinned or directed choice. Episodes lapse against a phantom. |
+| HB-4 | NOT STARTED. Gated as HB-3. | T1 row 119 (`selectResponse`) · row 12 (the ballot, still ABSENT until a ballot record exists) · row 33 (`evaluateTradeWar`). These become pin-ready once their vocabular… | Whether the ballot site is a fork (register it) or a threshold (STAY with reason), decided by the four-idiom scan the H… |
+| HB-5 | NOT STARTED. Gated (HB Q1), [HB Q1 signed — see the HB-3 row] and a joint landing with the signed war-chooser spy-before-decision wiring. The "… | `suePeace` · `acceptPeace` · `refusePeace` (it composes with these and supplies none) · T1 rows 117, 74 | Sealed answers open no pledge. Whether to mint the {accept, refuse} spelling or reuse `BALLOT_DECISIONS`. |
+| HB-6 | NOT STARTED. Flag `believedDoctrineEnabled` (CQ5 trio; ABSENT at base; needs `habitConditioningEnabled` and `… | `confirmRumour` · `castDoubt` · `twistRumour` (content for a new belief family) | Doctrine rows are editable at record level only until a per-family address is measured. |
+| HB-7 | NOT STARTED. Flag `habitAnticipationEnabled` (ABSENT). Gated as HB-3. | none | Anticipation is inert on pinned ticks, the same rule as the habit load. |
+| HB-8 | NOT STARTED. Flag `doctrineTapEnabled` (ABSENT; the SP-D gate is discharged). Gated as HB-3. | `sendOnMission` (the tap) · T1 row 106 (the plant) · `confirmRumour`/`castDoubt`/`twistRumour` (doctrine rows) | The plant goes through `offer-brokerage`, never a new op. The doctrine family is plantable content. |
+| HB-9 | NOT STARTED. Gated as HB-3. | none new. It makes T1 rows 36, 15, 116 pin-ready through declared vocabularies. | How to export `STATE_LADDER`. |
+| WC-1 | NOT STARTED. Buildable: both flags were minted at WC-0E. | none (it is the ledger behind `resupply`'s receipts) | The annotation is the layer's, not an op. |
+| WC-2 | NOT STARTED. | none | Change the signature of `warStanceOf`, or give the derivation another name. [RULED 2026-10-16 (coherence fold §3.2.19) — another name: `derivedWarStanceOf(worldState, partyId, warEpisodeKey)`; `warStanceOf(rung)` keeps its accessor meaning.] |
+| WC-3 | NOT STARTED. | `directTrade` (the act) · `resupply` (the "with a supply line" half of its predicate) ⚖ | Bind the relay to `directTrade` rather than mint a relay seal. |
+| WC-4 | NOT STARTED. | `resupply` · realm verb `REINFORCE` · T1 row 117 (HBF-17's vocabulary) | Take `REINFORCE` (bind what is built) or `resupply`. [RULED 2026-10-16 (coherence fold §5, the §3.2 addendum, vetoable) — WC-4's executor LIGHTS the greyed realm verb `REINFORCE` (realmManifest.js:471–487) and routes the reactive `reinforce` move and the own-army flow (`reinforcement.js`) through one commitment seam; no separate `resupply` seal is minted.] The authority class for a directed dispatch. |
+| WC-5 | NOT STARTED. | New FP seals (none in the 16 or in Table 1): call in · answer/refuse · forgive · realm verb `TRANSFER_SOVEREIGNTY` · T1 row 8 (`TERM_TYPES`) | Where the request record lives (ledger or record). Forgiveness as an op. `lapsed` stays unpinnable. |
+| WC-6 | NOT STARTED. Gated: CR-WC-9, the persisted field batch, is owner-gated, and this wave is its signing point. | `REINFORCE` / `INTERCEPT` (the column seam) · T1 row 18 (the muster/dispatch events) | How the conservation identity treats a war against a phantom. |
+| WC-7 | NOT STARTED. Gated with WC-6. | `sendOnMission` (the composition tap) ⚖ | — |
+| WC-8 | NOT STARTED. Gated with WC-6. | New candidate (the block fork, on the war card) | A pin applies to the whole block. |
+| WC-9 | NOT STARTED. Gated with WC-6. | none | — |
+| WC-10 | NOT STARTED, a SPEC ROW. HARD GATE: WY-8a (`supplyCargo` has zero hits). Also gated with WC-6. | `resupply` (the predicate half) ⚖ | Words for the temporal fork. |
+| WC-11 | NOT STARTED. Gated with WC-6. | New candidate (the free company's fate) · T1 row 19 is adjacent | Whether `removeFreeUnit` is an op or a pin. |
+| WC-12 | NOT STARTED. Gated with WC-6. | `scheduleEvent` (content) · new candidate (the embattled resolution) · T1 row 131 (the stressor ages via HBF-84) · T1 row 40 is adjacent (HBF-50 `banditryLoss`) | One pin, not a verb. |
+| WC-13 | NOT STARTED. Flag `moverAbsorptionEnabled` (ABSENT). Gated with WC-6. | T1 row 123 · new candidate (host rejection) | The rejection vocabulary. |
+| WC-14 | NOT STARTED. Gated with WC-6. | T1 row 18 ("Stand them down.") · new candidate (introduction) · T1 row 62 is adjacent | The founding path. |
+| WC-15 | NOT STARTED. Flag `veteranCohortsEnabled` (ABSENT). Gated with WC-6. CR-WC-21 is ruled. | none | — |
+| WC-16 | NOT STARTED. Gated with WC-6. | T1 row 18 (muster selections) | A pin, a direction, or a HELD root. |
+| EP-4 | NOT STARTED, an independent lane with three slices. Two slices are parked as owner rows (§7a: A4/A5 paid surf… | none | Record Req 14 as generator-only. Retire H1's removal half. |
+| EP-5 | NOT STARTED; it lands LAST, at the terminal-phase gate. | none | Add the decree clause. Widen the home list. |
+
+
+### §12.5 THE ORDER RE-DERIVED — FP TRAINS UNDER TESTS-ONLY MODE
+
+**FP-T1 (dispatched from this fold; four area lanes; each a branch from the integration line's tip; the FP kit's `briefs/BUILD-FP-tests-only.md` binds each builder):**
+- **LANE FP-A — THE ENVOY SEAM** (no flag minted; the editor-critical lane): unit 1 **SP-D2** (the inbound read — `worldConditions.js :: envoyArrived` re-pointed to a live reader with subjects; the reception direction row defined in `envoyErrandVocabulary.js`'s family and offered through `directions.js` at the merge; the herald's reason for a missing envoy) · unit 2 **ES-2b** (the custody write) · unit 3 **ES-Db** (the directed dispatch).
+- **LANE FP-B — THE GRAMMAR** (one flag, `mediationGeneralizedEnabled`, minted in unit 2): unit 1 **GR-2b** (`PROPOSE_PACT` as a `REALM_MANIFEST` row) · unit 2 **GR-6** (mediation generalized; `peaceTerms.js` at 797/800 holds any opener-site edit to net zero — the leaf carries the logic).
+- **LANE FP-D — THE HOUSE AND THE MARKET** (two flags, serialized after FP-B's on the manifest): unit 1 **TR-2** (the house; registers `genesisPatronOf`) · unit 2 **TR-3** (believed markets; SP-B's scarcity family is live).
+- **LANE FP-C — THE INFORMATION GAME** (two flags; dispatched after the unfreeze's lane 3 merges, because it registers forks): unit 0 the headroom measurement of `informationStatecraft.js` (L8) · unit 1 **IN-2** (the lure; the lie-commission realm verb) · unit 2 **IN-3** (the counter-game; the sweep verb; `suspicionOf`, which ES-5a's handshake wants).
+**FP-T2 and after** (in §5's compiled order, by family, the gates named): WF-0 → WF-2 → WF-3 (faith; WF-0 pays the traditions registration debt) · POP-1 → WY-4 → WY-5 → POP-2 (populations; POP-1 unlocks WY-4/5 and LG) [LG-9+ only — see the bracket at J-EM-12] · INT-1 → INT-2 → INT-3's remainder (interior; INT-1 unlocks TR-7) · WY-1 → WY-2 → WY-3 (wayfare; WY-3 unlocks TR-4) · GR-5b..5f → GR-4's voice slices → GR-1's stamp (after `generosityKernel.js`'s extraction) → GR-7 · IN-4 → IN-5 → IN-6 · TR-4 → TR-5 → TR-6 → TR-7 → TR-8 · WC-1 → WC-2 → WC-3 (WC-3's E-row slice after WY-6) → WC-4 → WC-5 (its doctrine page after HB-6) → WC-6 onward (CR-WC-9 signed) [read PARKED — OD-FC-20, see the bracket at J-EM-9] · HB-3..HB-9 **after the owner signs HB Q1** [signed — J-EM-15(2)] · ES-6b → ES-7 (re-measured) · EP-4 (slices 2–3) · CW-1 → CW-2x → CW-3 · EP-5 LAST, at the terminal-phase gate, as chartered.
+
+### §12.6 NOTICED IN THE EDIT MODE PROGRAM (measured here; reported to that program's chair the same turn; not FP's to cure)
+1. The shell reads the world conditions with no campaign (`phantomMintAction.js :: worldConditionsOf` → `worldConditionHolds(id, settlement, null)`), so seven campaign-reading predicates are false at the mount by construction — deliberate per the shell's header (the `campaignRuntimeCallerCoverage` fence), but it means no campaign seal can ever open there.
+2. Nine of the ten condition rows declare no `subjects`, so binding any further seal also needs a subjects reader on its row (the one-subject rule at `EditModeShell.jsx :: sealRow`).
+3. `pin-fork` ∉ `OP_TYPES`: a pending pin is honoured by the kernel's fold and WITHDRAWN by the tick's resolver (`vocabulary-moved / op-type`) on the same composed line (PLAUSIBLE that both happen in one tick — read, not run); and `forkPinsFor` keys the bag by fork id alone, so a pin is realm-wide for its tick rather than the card's subject's.
+4. `directions.js`, `eventCatalogue.js` and `missionDispatcher.js` have zero `src/` importers (U26, U29, U30 already hold the first and last); the realm verbs' own predicates differ from the shell's hand-written §18 rows for `suePeace`, `embargo` and `letCoupFail` (design §19 ruling 2 says the verb's predicate IS the condition).
+5. `scheduleEvent` has no `WORLD_CONDITIONS` row (`always`); `rulingPowerCoup.js :: resolveCoupVerdict`, `readWarTerminations`, `VERDICTS`, `ADMISSION_OUTCOMES`, `ENVOY_ERRAND_STATES` and `foldNarrativeTempo` — six of design §19 ruling 3's first-cut forks — have no registry row at the base.
+6. The bound `make-peace` cause has no tick consumer: the literal appears only in `operationsOffStage.js` and `SEAL_ACTS`.
+7. No transport carries a settlement-scale direction into a pulse layer at the tick (the finding of §12.1's registry bullet): EM-E5's twelve rows are declared and uncomposed, and until U123 lands every FP direction's consumer waits with a slot.
+
+### §12.7 THE OWNER'S DECISION POINTS THIS FOLD OPENS OR TOUCHES (each with the chair's recommendation; nothing here is decided by the chair)
+1. **THE LAUNCH LINE FOR FP.** Which FP flags light before the first real world. Recommendation: light the layers whose seals the editor offers on every war card — the errand spine and envoy diplomacy (`errandSpineEnabled`, `envoyDiplomacyEnabled`), the pact grammar (`pactFormationEnabled`, `treatyLifecycleVoiceEnabled`, `oathHolderEnabled`), the belief axes — at the soak redo under their SATISFIED instruments; keep espionage, habit, war circulation and the epoch dark for the first world. The signatures are pre-signed; the act is the owner's at the soak. [CORRECTED 2026-10-16 (coherence fold) — CLOSED by J-EM-15(1) (§12.8): THE LAUNCH LINE IS EVERYTHING; at 00b648c9d nine FP keys are lit and the rest stay dark for want of layers or prerequisites.]
+2. **HB Q1** — the two persisted fields `deployment.habitEpisode` and `treaty.habitEpisode` (drop-when-absent, flag-gated). Recommendation: sign; it releases HB-3..HB-9. [CORRECTED 2026-10-16 (coherence fold) — CLOSED: signed by J-EM-15(2).]
+3. **J-EM-9's reading of the blanket grant over WY F1..F8** — a one-word veto re-parks WY-3/WY-4/WY-6.
+4. **U104's roster** (the Edit Mode program's decision point on the twelve inexpressible seals): this fold supplies acts for `receiveEnvoy`, `turnEnvoyAway` (SP-D2), `sendOnMission` (ES-Db), `resupply` (WY-8a/WC-9, later) and leaves `directForce`, `directTrade`, `embargo`, `suePeace`, `letSiegeFall`, `letCoupFail` and the three rumour seals to the Edit Mode program's own binder (their acts already exist as directions or verbs) — so the twelve "cut at the launch line unless built" become at most two (`resupply` and the coup pin) if FP-T1 lands.
+
+### §12.8 THE OWNER'S WORD OF 2026-09-23 ~23:4x EDT — "no just build it all shipped lit" · "then do everything else" (typed in session 87797a6a; recorded verbatim; the chair's reading of it below is VETOABLE by one word)
+
+**The reading (J-EM-15).** (1) THE LAUNCH LINE IS EVERYTHING: all 83 remaining units build before launch; nothing is deferred to a versioned generator after it; §12.7 item 1 is CLOSED by this word. (2) "Build it all" SIGNS HB Q1's two persisted fields (`deployment.habitEpisode`, `treaty.habitEpisode`) — the only owner gate inside the build — so HB-3..HB-9 are released; §12.7 item 2 is CLOSED (say one word to re-park them). (3) SHIPPED LIT: every FP layer LIGHTS. The August shipping law ("every wave ships DARK; no flag lights outside the owner-signed schedule" — §1 L2's dark shipping, §3's virtual-only preset law) is SUPERSEDED for FP by this word, which restates the owner's lighting law of 2026-09-02 ("light everything, including the default, as declared shifts" — the LGT-C2-DEFAULT lighting wave of 2026-09-06, `432ff6441`, recorded in `src/domain/worldPulse/simulationRules.js :: SIMULATION_RULE_PRESETS`, is the precedent and the method). (4) "Everything else": the efficiency program of §12.9 runs under the standing delegation.
+
+**The lighting law for FP, as applied (J-EM-16, vetoable).** A wave's commit is unchanged: its flag stays VIRTUAL there with every member of the flag law (the manifest key, the certification row, the by-name strict read, the four-fence dormancy set, the lit-mutant control) — those members are exactly what makes lighting safe to do and safe to undo. LIGHTING is a separate unit per landing (LIT-n): it adds the key to the presets the lighting map names and moves it out of the dormant manifest the way the LGT-C2 wave did, in DEPENDENCY ORDER (a layer lights only after every layer it reads is lit in that preset and its own lighting instrument reads SATISFIED — the `src/domain/certification/warConvergenceContract.js :: SOVEREIGNTY_LIGHTING_EVIDENCE` idiom; a flag whose instrument reads UNSATISFIED stays dark with the reason recorded and lights with the wave that satisfies it), and it re-records every preset witness, golden and register the lit behaviour moves WITH THE CAUSE "the owner's word of 2026-09-23, shipped lit" — one cause per shift, through the signed door, routine before launch under the owner's stasis word (no preserved data). MEASURED AT `2d0696df9`: every one of the 35 keys in `ENGINE_GATED_VIRTUAL_RULE_KEYS` is dark in all seven presets [CORRECTED 2026-10-16 (coherence fold) — at 00b648c9d the manifest holds 43 entries (simulationRules.js:230–668) and NINE FP keys are lit (FP_LIT_ALIVE / FP_LIT_BELIEF / FP_LIT_WARPEACE, :789–802; see the status bracket at the head). RULED (coherence fold §3.2.20): ODQ §934.84's "errandSpine and merchantHouses light at LIT-2" (FPQ-19) was declined by the code — LIT-2 lit mediation only, and both are HELD DARK on purpose (:783–787: the envoy keys are dark everywhere; the houses have no pulse mount until TR-2b); FPQ-19's slot moves to TR-2b's lighting (EC Phase B) and to the envoy-key ruling OD-FC-39 (by delegation: the envoy pair and the statecraft head light in the belief presets with chain 1; `demographicsEnabled` / `routeLifecycleEnabled` with OD-FC-18; `warTerminationEnabled` with chain 2). No re-light without the owner's word (a same-seed shift).], and the envoy layer's own prerequisites (`envoyDiplomacyEnabled`, `routeLifecycleEnabled`, `warTerminationEnabled`, `npcConsequencesEnabled`, `demographicsEnabled`) are lit in NO preset while `warLayerEnabled` lights only in `dramatic_campaign` and `full_simulation` — so LIT-1's first act is a read-only map of every FP flag's prerequisites, instrument and moved witnesses (`findings/LIT-1-MEASUREMENT.md`, dispatched at this fold), and the non-FP prerequisites it needs lit are put to the owner by name if any is outside FP's remit. The seals of §12.2 therefore light with their layers as each lands, and §12.1's dark-layer law reads: a seal over a layer that is dark IN THAT PRESET is not offered.
+
+**What survives the word — the constitution, not the chair's caution.** The tuning signature: §7's band set is presented to the owner as the versioned release document when it exists (the blanket grant's carve-out 3; this word is recorded as the owner's INTENT to sign it); the three-leg soak still runs before the endgame; PR, merge, deploy and every migration stay the owner's hand, re-confirmed in chat.
+
+### §12.9 THE EFFICIENCY PROGRAM (the chair's, under "do everything else"; each item lands as its own unit, quality-neutral by construction)
+1. THE STRUCTURAL UNLOCK (after lane FP-D lands its two flags): keys inserted at their codepoint-sorted position in the flag manifest, the certification rows and every shared registry, so two lanes' additions land on different lines and merge without conflict; literal count pins on registries that grow BY DESIGN ("exactly 16 verbs") replaced by totality arms derived from the registry's own length plus a shrink-only baseline — the walker still convicts an unregistered row, and a lane no longer re-records a foreign pin. This is what makes eight lanes real.
+2. MEASUREMENT AS SCRIPTS: the seam probes and a per-wave probe kept in the FP kit as one command (`tools/fp-measure.sh`), run before every dispatch, so a builder receives a MEASURED brief (the delta between the August block and the base) and builds instead of measuring for 300k tokens.
+3. STANDING RULINGS in the FP build brief for the recurrent STOP shapes (a count pin moved by design → re-record with the cause; a direction with no transport → define headless with a slot; a hot file → extract first; a symbol renamed → cite the new one and report the drift).
+4. Every lane branch pushed as TRANSPORT at its first commit (rule 24a), so GitHub's whole-directory runs proceed in parallel while the builder continues.
+5. The gate admits SMALL runs concurrently under a load cap while full-suite runs stay exclusive (proposed to the Edit Mode chair; `scripts/gate-mutex.sh` is shared).
+6. EIGHT LANES across two chairs once item 1 lands: one lane per independent family chain, the shared files handed lane to lane in a fixed order.
+
 
 ---
 
@@ -3026,10 +3296,29 @@ docs/DESIGN_FP_ARCH_WY.md (WAYFARE), and — folded 2026-08-07 — the three
 further owner-amendment volumes docs/DESIGN_FP_ARCH_HB.md (HABIT),
 docs/DESIGN_FP_ARCH_WC.md (WAR CIRCULATION) and docs/DESIGN_FP_ARCH_EP.md
 (ADVANCE EPOCH), each normative where this volume
-compresses it. 45 refuted premises bound, 109 waves ordered, 63 flags
-manifested, 14 new sub-ledgers priced, 112 seams pinned (45 here, ES 46-58, WY
+compresses it. 45 refuted premises bound, 111 waves ordered, 63 flags
+manifested, 14 new sub-ledgers priced, 112 seams pinned; the Edit Mode fold of 2026-09-23 adds L10 and §12 (the per-wave detail in docs/DESIGN_FP_ARCH_EDITOR.md) (45 here, ES 46-58, WY
 59-66, HB 67-79, WC 80-102, EP 103-112 — per-row in the five volumes). Where
 this volume compresses, the
 program files govern; where any document disagrees with the tree, the tree
 wins and the disagreement is reported. Nothing is scheduled until the owner
-sequences it.*
+sequences it.* [CORRECTED 2026-10-16 (coherence fold) — the owner sequenced it: §12.5 dispatched FP-T1 and §12.8 records "no just build it all shipped lit"; the status of record is the coherence fold's §2.]
+
+## §13 THE SEAM FAMILY — three waves, one flavour and one mount owed, added by the owner's word (the chair, session 87797a6a, Fable 5.1, 2026-09-24 11:38 EDT; every ruling vetoable by one owner clause)
+[RULED 2026-10-16 (coherence fold §5) — 'SEAM-n' here means this section's family (SEAM-0..3); prose says "the SEAM family (§13)", "seam row n" for §9's matrix and "the T5 cars" for the landed TE-NET-1 "car SEAM-3/4/5" commits; a new seam id is spelled `SEAM-<family>-<n>`.]
+
+**The word.** Asked "how complete and comprehensive is the FP simulation in your opinion? am i missing anything relevant and within the constraints of the overall project?", the chair named four gaps (the FP kit's FPQ-54..57) and the owner answered, verbatim: **"then i approve of your suggestions, add them to the sequence"**. That word is recorded as OWNER_DECISION_QUEUE.md §934.85; it is the CAUSE every SEAM pick cites, and the FP lighting signature §934.84 ("shipped lit") covers the family's lighting. New capability is granted only by such a word; nothing here was the chair's to add alone.
+
+**Why these four (the measurement, 2026-09-24 11:38 EDT).** A grep of the 25 FP design documents for 25 topics a settlement-scale foreign policy could miss found every topic present; the thinnest were territory / hinterland / water / grazing (7 lines in 6 files, against 110 for border/raid and 857 for coalition), marriage / dynasty (12), guilds (11), sabotage / assassination (17) and extradition / sanctuary / exile (32). The lit dependency map (the FP kit, findings/LIT-DEPENDENCY-MAP.md :124, :202, :214) records that a neighbour court decides from its legacy standing, `credibilityScoreOf` and SP-C's appetite, and that the appetite facet has NO DATA (its writer uncalled — B4, one of the no-mount five). Excluded on purpose: assassination (a named fate — the product scope); guilds (the merchant houses of TR by another name); sabotage of works (ES's product family); a second simulation per neighbour (world-only; the settlement is the subject); theology (faith is culture). The remaining four are chartered below at CHARTER grain — the per-unit briefs are written when their pair opens, never earlier (the two-landings rule).
+
+**SEAM-0 — SP-C's MOUNT (owed, not new; rides pair 2 as a small unit of the spine's files).** [ADDED 2026-10-16 (coherence fold, req 16/17) — FIRST-VISIBLE: none — instrumentation (the appetite facet's mount; felt only through SEAM-2's readers and SP-C's posture colour) · TIER: aspatial-safe; host flag `strategicPostureEnabled` (dark in every preset) · DEGRADED ARM: dark (the facet stays without data)] The settlement appetite stock's learn/decay writer (wave #5 THE POSTURE READ, `strategicPostureEnabled`, SP §5; SEAM RULING 4 THE APPETITE HOME in DESIGN_FP_ARCH_SP.md) is mounted in the pulse so the facet carries data before SEAM-2 reads it. No new flag, no new state; the mount car, its pulseStageContracts row and its lit-mutant control land in one commit.
+
+**SEAM-1 — THE STANDING DISPUTE** (flag `standingDisputeEnabled`, virtual per §3; SP with CW's exits). [ADDED 2026-10-16 (coherence fold, req 16/17) — FIRST-VISIBLE: SEASONAL/YEARLY (the charter's own read: a dispute heats and exits within twenty advances — FOLD-SMALL §7); the fast-layer sign is the heat's news kind · TIER: aspatial-safe (a typed bucket); host flag `standingDisputeEnabled` (unminted) · DEGRADED ARM: dark] At most one record per pair of settlements, keyed by the pair under the existing relationship record (drop-when-empty; ONE writer, the dispute stage; the seven-path lifecycle clause lands in DESIGN_FP_ARCH_SP.md before the writer builds). Fields: `object` (a typed, setting-agnostic bucket — a field, a mill, a ford, a well, a road toll, a fishing water, a march's allegiance; the bucket is the fact, the prose names it), `temperature` (banded: cold · simmering · hot · open), `since` (tick), `lastExit`. Heat comes from a scarcity signal on either side (TR's believed scarcity when lit; the interior's strain), a raid or brigandage on the seam (WC-12 when lit), a rumour (IN), a refused mediation, a refused demand (SEAM-3). Exits, every one a mechanism that already exists — the dispute is never a second engine: mediation (GR-6, `mediationPressure.js`); a purchase or a lease (a pact kind of GR-7); a casus belli into the war layer (the war program's cause vocabulary); a DM offer to settle it (PEACE-1's docket road); and a banded half-life that cools it alone. Every heat and every exit mints a news kind (IN's pools, codepoint-sorted) and a Herald sentence under §8's contract (the sentence names the object and both towns). Bands DRAFT until the tuning document is signed. The read: a lit dramatic_campaign realm shows at least one dispute heating and exiting within twenty advances, scored felt + specificity (briefs/READ-SCORING.md).
+
+**SEAM-2 — THE NEIGHBOUR'S OWN DRIVERS** (flag `neighbourDriversEnabled`; SP). [ADDED 2026-10-16 (coherence fold, req 16/17) — FIRST-VISIBLE: UNMEASURED · TIER: host flag `neighbourDriversEnabled` (unminted); the beliefs ABOUT the drivers need belief infoMode (spatial canon ∧ infoMode ≠ omniscient) · DEGRADED ARM: dark] [RULED BY DELEGATION 2026-10-16 (OD-FC-37), AMENDING §934.85 (skeptic S4 M4) — SEAM-2 keeps ONE persisted driver family under the court record for `warWeariness` (fed by the war volume's exhaustion read) and `successionClock` (fed by GR-4's heir clock); `scarcity` is EC-17's need READ and `appetite` SP-C's READ — no second home for either; SEAM-2 is sequenced after EC-17 lights.] Each neighbour court carries three or four banded TRUE drivers under its existing court record (drop-when-empty; ONE writer with learn/decay, the appetite idiom generalized — SP V14): `scarcity` (its own, not the subject's belief), `warWeariness` (fed by the war layer's tallies against it), `successionClock` (a banded age of the court's seat — an unnamed clock, never a person), `appetite` (SP-C's stock, mounted by SEAM-0). The belief axes (LIT-1b) become beliefs ABOUT these: a belief can now be wrong, and the error is a fact the Herald can voice. The responder's choosers (the pact answer, the peace answer, the mediation answer, SEAM-3's demand answer) read the drivers BY NAME (§1 L2). Deliberately NOT a second simulation: no interior, no populations, no books for a neighbour. The read: two neighbours of equal standing answer the same proposal differently, for a reason the Herald says. [RULED BY DELEGATION 2026-10-16 (OD-FC-37 — (coherence fold §3.1.19, §7; vetoable): one court-side truth, no third home. The NEED is EC's derived read (EC-17's need read, never persisted — the court knows its own shelves); the REGARD is THE STANDING's one centre (the owner's 2026-10-02 directive, STANDING-U0); SEAM-2's driver set is a READER of both — its `scarcity` is EC-17's need read by name and its `appetite` is SP-C's stock (mounted by SEAM-0). What this moves is what the STANDING lane persists.]
+
+**SEAM-3 — LAW ACROSS THE SEAM** (flag `seamLawEnabled`; GR + IN). [ADDED 2026-10-16 (coherence fold, req 16/17) — FIRST-VISIBLE: UNMEASURED · TIER: host flags `seamLawEnabled` (unminted) + the errand spine (`errandSpineEnabled`, dark in every preset — FOLD-SMALL §8: DEFER) · DEGRADED ARM: the outlaw band is a news fact before POP is lit (the charter's own arm); otherwise dark] Three demand kinds in the grammar — an extradition demand; a sanctuary claim at a shrine (faith as custom, never doctrine); a levy for an outlaw band that crossed — on the existing answer road (accept · refuse · counter) with their news kinds. A refusal heats SEAM-1's record where one exists; a grant is a favour on the relationship. No new top-level state: the demand is an errand on the errand spine (SP-D); the outlaw band is a POP column kind once POP is lit and a news fact before.
+
+**COURT BONDS — a treaty FLAVOUR, no wave** (rides GR-7 in pair 1's tail, or FP-23's court-name key on pact treaties). A match, a fosterage, an adoption, a hostage exchange are `bond` flavours of a treaty kind carrying the two court names and a banded strength; the bond is between COURTS and names no person's fate. The Herald voices the sealing ("a match sealed between the two courts") and its breaking as a cause. [prose: "court bond", never bare "bond" — see the bracket at WC-3]
+
+**The order re-derived.** Pair 6 = the couplings · THE SEAM (CW-2x · CW-3 ‖ SEAM-1 · SEAM-2 · SEAM-3; CW-1 already at pair 1's tail by FP-25); pair 7 = the epoch (EP-4 slices 2–3; EP-5 LAST, unchanged). SEAM-0 rides pair 2; court bonds ride pair 1's tail. Pull-forward clause (the FP-25 instrument): if read 3 or read 4 scores peacetime friction below the specificity floor, SEAM-1 moves to the tail of pair 3. Every unit lands in tests-only mode, red-first, with its own walker registrations, the §3 flag law in ONE commit, lit under §934.84 with §934.85 as the cause. The wave count from this section on is 114 (the §5 header's 111 is the compile's figure and stays). [CORRECTED 2026-10-16 (coherence fold) — the pair cadence is the INVENTORY since FP-40 CHAIN-FIRST (2026-10-02, FP-ORDER.md), so this clause no longer orders anything: SEAM-0..3 are taken in the order of the chains they unlock (the coherence fold's §6, OD-FC-19); SEAM-0 is OWED and unslotted until a chain asks for SP-C's appetite. SEAM-2 overlaps THE STANDING (FPQ-78) and EC's persistent condition (ODQ §934.90 addendum 4): one court-side truth, ruled once — see the OD-FC-37 row at SEAM-2.] [RULED 2026-10-16 (coherence fold §9, lane H item H7) — SEAM-0 (SP-C's appetite mount) is SLOTTED at the head of coherence chain C2 (THE AUXILIARY): allies' send/keep deciders read appetite first; the pair cadence is the inventory under FP-40.]

@@ -1,5 +1,24 @@
 # DESIGN — HABIT CONDITIONING (HB: actors learn, and being known is the price)
 
+⚠⚠ **"LANDED" IN THE HEADER BELOW NAMES THE *DOCUMENT*, NOT THE CODE.** This
+volume is **ARCHITECTED, NOT BUILT**. MEASURED 2026-08-14 at `60083174` by lane
+TE3, and stated as a measurement rather than an impression:
+**11 of the 18 `*Enabled` flags this volume names are unminted**, including
+its signature `habitConditioningEnabled` and `habitAnticipationEnabled` — the
+live engine-gated flag manifest holds 16 rows and none of the 11 is among them.
+The 7 that are minted (`beliefAxesEnabled`, `believedConditionsEnabled`,
+`believedDevotionEnabled`, `believedScarcityEnabled`, `errandSpineEnabled`,
+`infoStatecraftEnabled`, `secondOrderBeliefEnabled`) are pre-existing flags this
+volume reads, not flags it minted. **Zero files under `src/` carry `habit` in
+their name.**
+[CORRECTED 2026-10-16 (coherence fold) — THE STATUS OF RECORD IS docs/DESIGN_FP_COHERENCE_FOLD.md §2; this header is history. In one line: LIT: none (`habitConditioningEnabled` is manifested and lit in no preset; HB Q1's two fields are signed only by the chair's J-EM-15(2) reading of the owner's 2026-09-23 word, vetoable) · BUILT DARK: HB-0 substrate (`e188760b8` + HB-0B `c777a158d`, 2026-08-14: `habit/habitVocabulary.js`, `habit/habitCurve.js`), HB-1 vocabularies + fork registry (`1013d58ba`: `strategyMoves.js`; `habitForkRegistry.js` holds 104 rows — 84 DEFER, 20 STAY, 0 LEARN; two charter clauses REVERSED by the build, see :397), HB-2 ledger (`de214782b`: `habit/habitLedger.js` + `habit/habitGate.js`; the persisted shape differs from §1.1, see :759, and `writeHabits` has ZERO src callers, habitLedger.js:7) · UNBUILT: HB-3..HB-9 (no `habitCredit.js`; `habitFactorFor`, `doctrineBands`, `anticipationFactorFor` and `doctrine_shifted` return zero src hits at 00b648c9d). The 08-14 measurement above was taken at `60083174`, before those three landings, and is refuted at the code of record.]
+
+⛔ Module PRESENCE never promotes a wave. Several modules this volume names are
+already in `src/` because they are pre-existing MODIFY targets, and several flags
+it names are already minted because it READS them; neither fact is progress on
+this volume's own waves. The `LANDING IS NOT SEALING` warning further down covers
+a *different* confusion and does not cover this one.
+
 ## LANDED 2026-08-07 as a member of the docs/DESIGN_FP_ARCH_* family — the
 ## per-program file for the HB owner-amendment program, sibling to
 ## docs/DESIGN_FP_ARCH_{SP,GR,IN,TR,WF,POP,INT,CW,ES,WY,WC,EP}.md and NORMATIVE
@@ -17,6 +36,7 @@
 ## fourth. Open at landing: 5 chair questions (§7) and a 43-row deferral book;
 ## Q1 — two owner-gated persisted fields plus a third ruled deferred-and-visible
 ## — is the blocker. Do NOT upgrade this volume to "sealed".
+## [CORRECTED 2026-10-16 (coherence fold) — Q1's two fields (`deployment.habitEpisode`, `treaty.habitEpisode`) are SIGNED by the chair's reading J-EM-15(2) of the owner's 2026-09-23 word "no just build it all shipped lit" (DESIGN_FP_ARCHITECTURE.md:3270), vetoable by one word; ODQ §34 had already narrowed the seal so Q1 binds HB-3 onward only. The coherence fold then ruled Q-HB-C: OD-FC-24, the FIRST field only (see :3935). The volume itself remains UNSEALED: round four has no recorded close.]
 ## ⚠ THE COUNT LEDGER IS A REPO-ABSENT INSTRUMENT. `HABIT_countsweep.py` and
 ## `HABIT_VERIFY_oddsratio.py` live beside the snapshot on the ledger branch and
 ## did NOT land here; §9's census is re-run there, and its `seams()` (L327) is
@@ -37,7 +57,7 @@
 ## `[(1−s)/(1+s), (1+s)/(1−s)]`, so the pin the volume made "the law's proof" REDS on
 ## reachable states; the odds-ratio form is true BY CONSTRUCTION because the factor
 ## ratio `f_i/f_j` survives renormalization untouched, and it is HAND-WALKED at the
-## anchor site's real `STRATEGY_K = 3.5`). `bestTargetId` is MEASURED **deploy-only**,
+## anchor site's real `STRATEGY_K = 3.5`). [RULED 2026-10-16 (coherence fold §5) — in this volume "pin" is ALWAYS a test pin; an Edit Mode act is a "seal", never "pinned".] `bestTargetId` is MEASURED **deploy-only**,
 ## so arity at site 7 becomes **PER-ACTION** and the anticipation term reaches exactly
 ## one move (P2), which bounds close 1's coverage to `deploy` alone (P3) — closed by a
 ## new **ACTION-COVERAGE LAW** and a per-action CLOSE-COVERAGE TABLE that mints close 8
@@ -46,7 +66,7 @@
 ## closeless sites to DEFER with written `closeOwed`. Believed doctrine now decays on
 ## the **OBSERVER'S BELIEVED law band of the target**, through the per-PAIR
 ## `decayKeep01` modifier that already exists — belief-routed, no per-target parameter,
-## no second decay law, and it makes SHELF LIFE ITSELF DECEIVABLE (P4). The traditions
+## no second decay law, and it makes SHELF LIFE ITSELF DECEIVABLE (P4). [RULED 2026-10-16 (coherence fold §5) — "doctrine" is a four-way homonym (ES `espionageDoctrine`, WC's reliability page, `conquestDoctrineStage`, and HB's sheet). HB's is "the habit sheet" in prose and in every UNLANDED token (the register's spellings: `habitSheet`, `habit_sheet_shifted` for `doctrine_shifted`); the flag `believedDoctrineEnabled` stands because three volumes key on it. Every "doctrine" below means the habit sheet; the text is not rewritten.] The traditions
 ## row reclassifies to STAY-DETERMINISTIC and the true upstream fork is NAMED (P5). The
 ## weeks-never-ticks sweep is completed at all four residual sites including the
 ## verbatim-landing text and the walker-tripwire contradiction (P6); the checklist is
@@ -277,6 +297,7 @@ because they retrofit the same frozen surface and a second visit to `settlementS
 costs a second size-ratchet negotiation.** ⚠ The queue documents still read
 "deferred"; the fold that records the grant is queue task #53, PENDING. This volume's
 §5 carries the correcting clause so the two never disagree in the tree.
+[RULED 2026-10-16 (coherence fold §3.2.9) — the release is RECORDED fold-wide: CR-ES-4's war-chooser deferral was RELEASED by the owner's 2026-08-05 blanket grant, DESIGN_FP_ARCH_ES.md is amended to stop reading "deferred", and the joint unit is HB-5 + the ES spy-before-decision wiring (both unbuilt at 00b648c9d).]
 
 **R2 — "MISSION_GRADES is the credit-at-close precedent to inherit." SHAPE ONLY.**
 Census 2 measured it: `missionGradeFor({ bestConfidence01, demand })` grades a RESULT
@@ -289,7 +310,7 @@ built here (§3a, the pledge book). No wave brief may say "as MISSION_GRADES doe
 about join behaviour.
 
 **R3 — "Habits ride the existing decay law." TRUE, BUT THE FAMILY HAS NO RIDERS.**
-MEASURED: `grep -rn "from '.*bandedStock.js'" src/` returns ZERO hits.
+MEASURED: `grep -rn "from '.*bandedStock.js'" src/` returns ZERO hits. [CORRECTED 2026-10-16 (coherence fold) — STALE at 00b648c9d: 13 `src` modules import bandedStock.js (among them dispositionLedger.js:52, momentum.js:42, secondOrderBelief.js:53 and HB-0's own habitCurve.js:73). The ruling's intent — habit rides `decayTowardNeutral`, no sixteenth fork — holds.]
 `decayTowardNeutral` is consumed only by tests. Meanwhile `dispositionLedger`
 hand-rolls `Math.pow(0.5, age / CHANNEL_HALF_LIFE_TICKS)` with
 `CHANNEL_HALF_LIFE_TICKS = 1040`, and `bandedStock`'s own header names FIFTEEN such
@@ -329,7 +350,7 @@ nine. MEASURED at HEAD, `tests/domain/couplingRegistry.test.js`:
 `CHARTERED_VOLUME_PREFIXES = Object.freeze(['WR','TR','GR','WF','POP','IN','INT','SP','CW','ES','WY'])`
 — **ELEVEN.** `HB` is the TWELFTH, and because `COUPLING_ID_SHAPE` is BUILT from that
 array, the first `CPL-<n>.<DIR>.HB-<n>.<facet>` row REDS until the prefix joins. One
-array member, one new leaf, same commit.
+array member, one new leaf, same commit. [CORRECTED 2026-10-16 (coherence fold) — DISCHARGED in the code: `CHARTERED_VOLUME_PREFIXES` holds THIRTEEN, ending `'WY', 'HB', 'ENC'` (tests/domain/couplingRegistry.test.js:119); HB joined by document-only admission (`6ee83e3e7`, 2026-08-07). No `couplingRegistryHabit.js` and zero `CPL-*.HB-*` rows exist; the habit leaves took ARGUED_UNLAYERED rows (kit census FP-CENSUS-ES-HB-WC-EP row 16). Requirement 21(c) now binds: a prefix is chartered in the same commit as its first registry row.]
 
 **R6 — "`convergence.reactiveResponse` is structurally `habitStrength(actor, class,
 action)` already, minus the learning." REFUTED, AND THE SEAM IS STRUCK.** MEASURED at
@@ -373,7 +394,7 @@ cannot change an output" (false: the arm fires) but "**for every move
 `enumerateMoves` emits, the disjunction's truth value is unchanged by removing a
 disjunct that no emitted move satisfies**", which the same-seed goldens then confirm
 rather than assume. ⛔ An implementer who deletes the whole `else if` deletes live
-behaviour and will read the resulting golden red as an error somewhere else.
+behaviour and will read the resulting golden red as an error somewhere else. [CORRECTED 2026-10-16 (coherence fold) — REFUTED BY THE BUILD (HB-1 `1013d58ba`; ODQ §38): the `move === 'fortify' ||` disjunct is LIVE — tests/property/espionageAbsenceDormancy.test.js's LOAD_BEARING_MOVES passes 'fortify' directly and two RATIFIED same-seed goldens record its value — and it is registered as the one foreign move token (settlementPolitics.js:618-624; `MOVE_TOKEN_BRANCHERS`, tests/lint/strategyMoveVocabulary.walker.test.js:94). Neither the arm nor the disjunct is deleted. And `martialMoves` was NOT retired: it became `MARTIAL_HISTORY_MOVES`, a named derived subset of the frozen zero-import leaf (strategyMoves.js header; settlementStrategy.js:79 imports it).]
 
 **R8 — "`proseNumerics` is RED AT BASE (401 vs 410), awaiting a RULED re-record."
 DISCHARGED AT HEAD.** MEASURED: `tests/lint/proseNumerics.test.js` carries
@@ -387,7 +408,7 @@ value whose "count" is not an integer anyone can honestly print — but it no lo
 leans on a red that does not exist. ⚠ The live discipline that DOES bind: the scanner is
 an exact-equality ceiling in BOTH directions, so an HB wave that adds prose must
 **re-record its own delta against 413 with an attribution**, never inherit and never
-raise.
+raise. [CORRECTED 2026-10-16 (coherence fold) — STALE: the live ceiling is `REVIEWED_TOTAL_CEILING = 218` (tests/lint/proseNumerics.test.js:484). An HB wave re-records its delta against the ceiling standing at its own commit, never against 413.]
 
 **R9 — "`HABIT_HOLD_BANDS` borrows `CHANNEL_BANDS`; a walker imports BOTH sides and
 asserts verbatim equality in BOTH directions; ⚠ the array is codepoint-sorted."
@@ -399,7 +420,7 @@ const`** — there is no both-sides import to make. (ii) It is an array of **OBJ
 ORDERED ASCENDING BY THRESHOLD**, consumed as `CHANNEL_BANDS.find((band) => stock <
 band.maxExclusive)?.name`, which only works because the order IS the rank — **the index
 IS the rank, the exact opposite of the warning**, and the rung words
-restrained/measured/settled/marked/dominant are not codepoint-sorted (d<m<m<r<s).
+restrained/measured/settled/marked/dominant are not codepoint-sorted (d<m<m<r<s). [RULED 2026-10-16 (coherence fold §5) — `measured` is a landed `HABIT_HOLD_BANDS` rung, a landed IN-3 `ZEAL_POSTURES` rung (suspicion.js:86) and the estate's evidence-class word; design prose never uses it bare for either rung ("a measured hold", "a measured zeal"). The capitalised MEASURED throughout this volume is the evidence word.]
 (iii) Its only outward path is `BANDS: CHANNEL_BANDS` inside the exported
 `DISPOSITION_CHANNEL_TUNING`. **RESPELLED (§3d): the borrow is ONE-DIRECTIONAL.** HB
 imports `DISPOSITION_CHANNEL_TUNING` and DERIVES its rungs by projection; one walker
@@ -575,7 +596,7 @@ CONSEQUENCE, SAID PLAINLY RATHER THAN DISCOVERED AT BUILD: the anticipation term
 anchor site can modulate `deploy` and nothing else.** "A knows B will hold, so A does X"
 is NOT expressible at this seam today, and making it expressible means emitting a
 counterpart on more moves — an emitter change to the estate's most contended function,
-**owner-gated, NOT taken here**, and recorded as a named future widening.
+**owner-gated, NOT taken here**, and recorded as a named future widening. [see the OD-FC-23 bracket at :2619]
 
 **R18 — "The twelve joined sites all satisfy the graded-close precondition." REFUTED —
 THE SEVEN-CLOSE TABLE AND THE JOINED-SITE TABLE WERE NEVER RECONCILED.** The volume
@@ -663,7 +684,7 @@ its accessors (`distanceRead.{has,get,set,drop}SpatialLedger`).
    is the dead thing, and the defect is a cross-vocabulary collision** — precisely the
    class a frozen exported totality prevents. HB-1 mints `STRATEGY_MOVES`, retires the
    local `Set`, deletes the dead DISJUNCT alone, and lands the walker that reds any
-   module branching on a strategy-move token outside the frozen export.
+   module branching on a strategy-move token outside the frozen export. [CORRECTED 2026-10-16 (coherence fold) — see :397: the disjunct is live and stays; the Set became a derived subset.]
 4. **THE BELIEVED-DOCTRINE AXIS** — a fourth SP-B subject family, `doctrineBands`.
 5. **THE CHOOSER-TOTALITY REGISTRY AND ITS WALKER** — the structural enforcement of
    the owner's TOTAL SCOPE, so no future decision fork joins the tree unclassified.
@@ -675,7 +696,7 @@ surface — and NOT as an extension of `dispositionLedger`. Reasons, in order: (
 by SIXTEEN modules; adding a dimension to it would put every habit read behind a
 foreign flag and every disposition read at risk from a habit bug; (b) the two have
 different KEYS (channel vs class×action), different SOURCES (13 outcome kinds vs
-seven graded closes), different DECAY RATIONALES (appetite vs memory), and different
+seven graded closes) [CORRECTED 2026-10-16 (coherence fold) — EIGHT (§3a's table; close 8 enumerated at R18); this home escaped countsweep's `closes` sweep.], different DECAY RATIONALES (appetite vs memory), and different
 GRAINS (four channels vs twelve classes); (c) `dispositionLedger` is itself one of
 `bandedStock`'s fifteen forks, so extending it would make the habit stock a sixteenth
 fork by inheritance — the exact thing refinement 1 forbids. THE COST OF THE VETO:
@@ -692,7 +713,7 @@ choices and the NPC ladder's goal machinery (`npcLadderGoals`, the estate's ONLY
 existing open→graded-close loop keyed to an individual actor AND an action). Every
 other NPC-grain fork is a STAY or DEFER row with a written reason. This is the
 ledger-explosion fence: the actor denominator is settlements plus a bounded, named
-NPC set, never the roster.
+NPC set, never the roster. [CORRECTED 2026-10-16 (coherence fold) — the owner's 2026-10-02 generals messages ("with habits forming from success and failures and their reputation regarding as well"; enemies "remember how that general acts") and the chair's rulings 14a/14d/14d′ (fp-kit owner-words/2026-10-02-the-generals.md:65-88, vetoable) route a PER-GENERAL habit, and a per-court belief about how a general acts, through THIS family ("never a second habit model"), accrued by the AFFECTED enemies only. Three seams are unreconciled: an NPC grain this ruling permits only where machinery exists (no general-dial fork is in the registry), a court→NPC subject where the habit sheet is court→court, and affected-only accrual where refinement 13 accrues from any hop-worn report. A person-grain extension is a persisted-shape question the fold did not rule (findings HB Q-HB-B); the generals' loop is also the fold's chosen home for the felt anticipation (OD-FC-23, :2619).]
 
 ---
 
@@ -735,6 +756,8 @@ worldState.spatialLedgers.habits           // HABIT_LEDGER_KEY = 'habits'
 }
 ```
 
+[CORRECTED 2026-10-16 (coherence fold) — BUILT DIFFERENTLY at HB-2 (`de214782b`): `spatialLedgers.habits = { rows: { <actorId>: { <class>: { <action>: [stockInt, weekStamp] } } }, open: { <pledgeId>: [actorId, class, action, weekStamp] } }` — NO `v` and NO `seat` (habitLedger.js:15-18; spatialUsage.js:175 counts `habits.rows`). So §1.5's heal-to-ABSENT on an unknown `v` and the seat stamp the seat shock reads (§3b) have no field to act on: either a later HB unit amends the ledger (a persisted-shape change, the owner's class) or the seat-shock arm ships DARK-DECLARED, which §3b already allows. The compiled fold's §4 HB entry carries the same stale shape.]
+
 ⭐⭐ **THE CLOCK CONTRACT, STATED AS A SEAM (R10 / J-HB-17 / §8.1 row 13) — this is the
 one place the amendment changed the persisted shape.** The habit family reads exactly
 one time symbol and it is **`worldState.calendar.elapsedWeeks`**: an integer, seeded 0
@@ -762,7 +785,7 @@ campaign** — §1.4 stated its own half correctly and §1.1 did not, and a chai
 legibility trade was being shown two wrong numbers. The RULING is unaffected (the pair is
 still ~2.4× cheaper, and 2.43× is the exact ratio 34/14), which is precisely why the
 error could sit unnoticed: **an arithmetic slip that does not move a conclusion is the
-kind this estate catches only by executing it.** The pair is
+kind this estate catches only by executing it.** [see :917 — the signed cap is 24 rows, and the ~14-byte cost was refuted] The pair is
 positional and therefore ILLEGIBLE, so it is validated by an exact-arity normalizer
 and never read by hand — the `[weight, tieKey]` idiom the contest family already uses.
 ⚠ The positional shape is a real legibility cost and it is taken deliberately; the
@@ -872,6 +895,7 @@ MEASURED at HEAD, the joined sites' action vocabularies split three ways:
   alone, and lands the walker that reds any module branching on a strategy-move token
   outside the frozen export — the structural cure, of which the deletion is only the
   first instance.
+  [CORRECTED 2026-10-16 (coherence fold) — see :397 (the disjunct is live and stays; the Set became `MARTIAL_HISTORY_MOVES`). ALSO (findings HB C7/X17): site 8's `{accept, refuse}` is in neither the frozen list above nor this mint list; whether it is minted or reuses `BALLOT_DECISIONS` is an open vocabulary question (the compiled fold's HB-5 row asks it; DESIGN_FP_ARCH_GR.md is silent) that HB-5 settles before its load lands.]
 - **OPEN BY NATURE, THEREFORE NEVER A HABIT AXIS:** target ids, supplier ids, buyer ×
   asset pairs, destination ids, route paths. **RULING J-HB-4: habits key on TYPED
   CIRCUMSTANCE CLASSES and TYPED ACTIONS only, never on counterpart identity.** Three
@@ -890,7 +914,7 @@ bound is enforced three ways, all deterministic:
 - **CLASSES ≤ 12** by the closed vocabulary.
 - **ACTIONS PER CLASS ≤ the site vocabulary's own size** — the largest joined
   vocabulary is `STRATEGY_MOVES` at eleven, so ≤ 11.
-- **ROWS PER ACTOR ≤ `HABIT_ROWS_PER_ACTOR_CAP`** (proposed 48, raw-authored). When a
+- **ROWS PER ACTOR ≤ `HABIT_ROWS_PER_ACTOR_CAP`** (proposed 48, raw-authored). [CORRECTED 2026-10-16 (coherence fold) — CHAIR-SIGNED 2026-08-15 (ODQ §43) and LANDED at HB-0B (`c777a158d`): `HABIT_ROWS_PER_ACTOR_CAP = 24`, `PLEDGE_MAX_AGE_WEEKS = 156` (`a_few_years`, indexed off `HALF_LIFE_BANDS`), `PLEDGE_BOOK_CAP = 256` (habitCurve.js:149, :158, :168). The volume's 48 and 208 and the ~14-byte row cost are REFUTED on R33/R34's measurements; the worked bounds here and at §1.1 are history.] When a
   write would exceed the cap, the row NEAREST NEUTRAL is evicted, ties broken by
   codepoint on `<class>.<action>`. **Deterministic eviction is load-bearing** — a cap
   enforced by insertion order would make the ledger depend on iteration order and
@@ -956,7 +980,7 @@ habit ledger's answer on each; §8.5 carries the full table with the writers nam
   owed.** Absent-habit worlds ARE the legacy shape and read as habit-absent. The
   sub-ledger's own `v` field versions the sub-key independently, and a `v` the reader
   does not recognize heals the whole sub-ledger to ABSENT with a receipt (never
-  partially) — the total-on-garbage discipline.
+  partially) — the total-on-garbage discipline. [CORRECTED 2026-10-16 (coherence fold) — no `v` field was built; see :759.]
 - **public payload / share / gallery** — ⛔ **NO, and NO NEW STRIP IS OWED.**
   MEASURED: `spatialLedgers` is already in `WORLD_SNAPSHOT_HARD_DENY`
   (`worldSnapshotPublic.js`), and `WORLD_SNAPSHOT_PUBLIC_LEDGER_ALLOWLIST` is
@@ -976,7 +1000,7 @@ EXACT SET both ways, so the declaration can never rot; (2) FUNCTION SCOPE — ev
 form sits inside `writeHabits`'s own body, because a second function in the ledger leaf
 would satisfy a file-level scan while breaking the law; (3) THE READERS READ — the
 mention census must be strictly wider than the writer set, so the narrow WRITE regex is
-provably not a broken pattern matching nothing.
+provably not a broken pattern matching nothing. [CORRECTED 2026-10-16 (coherence fold) — `writeHabits` LANDED at HB-2 with ZERO `src` callers (habitLedger.js:7, "nothing in `src/` calls it"): the single writer exists and writes nothing in any world until HB-3 mounts a close.]
 
 **Coverage manifest.** `src/lib/spatialUsage.js` must classify `habits` as TRACKED or
 EXEMPT **in the same commit as the first write**, or
@@ -1000,7 +1024,7 @@ prevent.
 **Name collision census, EXECUTED at HEAD.** All seven candidate tokens return ZERO
 hits across `src/`: `habitStrength` · `habitConditioningEnabled` ·
 `anticipationEnabled` · `doctrineTapEnabled` · `doctrineBands` · `circumstanceClass` ·
-`HABIT_`. The namespace is free. ⚠ **BUT `momentum.js` WILL BE MISTAKEN FOR IT.**
+`HABIT_`. The namespace is free. [CORRECTED 2026-10-16 (coherence fold) — history, measured before HB-0..HB-2 landed; see :14.] ⚠ **BUT `momentum.js` WILL BE MISTAKEN FOR IT.**
 `momentum` already ships a per-`(actorId, courseKey)` stock with its own decay, its own
 cliff, and a bounded move multiplier consumed at the very seam habit wants
 (`settlementStrategy`'s load block). The distinction must be stated in one sentence in
@@ -1018,7 +1042,7 @@ distinction sentence is how a future lane is stopped from "unifying" them.
 | `habitConditioningEnabled` | HB-2 | the ledger, the pledge book, the credit fold, and every chooser's habit term |
 | `believedDoctrineEnabled` | HB-6 | the fourth SP-B subject family — `doctrineBands` on the belief record |
 | `habitAnticipationEnabled` | HB-7 | the level-one anticipation term at the choosers, and the deviation damper |
-| `doctrineTapEnabled` | HB-8 | the ES doctrine tap product, planted doctrine, and the doctrine-sheet Herald kind |
+| `doctrineTapEnabled` | HB-8 | the ES doctrine tap product, planted doctrine, and the doctrine-sheet Herald kind | [RULED 2026-10-16 (coherence fold §5) — every UNLANDED `doctrine*` token renames at minting: `habitTapEnabled`, `habitSheet`, `habitSheetOf`, `HABIT_SHEET_ADOPT`; only `believedDoctrineEnabled` keeps its name (three volumes key on it).]
 
 **Why four and not one.** Each flag gates a surface with a DIFFERENT owner and a
 DIFFERENT risk profile: the ledger is engine state; the axis is a belief-record shape
@@ -1100,6 +1124,7 @@ so no wave is architected on sand: `doctrineTapEnabled` is UNREACHABLE until SP-
 lands, and HB-8's tap arm therefore ships dark-forever until then.** That is why the
 doctrine sheet's PRIMARY road is the SP-B axis fold and the dossier (both reachable
 today), and the ES tap is the LATER enrichment, never the carrier.
+[CORRECTED 2026-10-16 (coherence fold) — SP-D LANDED (`0aac6792`): `errandSpineEnabled` is declared as a rule key (simulationRules.js:301), so `doctrineTapActive` is reachable through `espionageActive` and the ordering risk is DISCHARGED (DESIGN_FP_ARCHITECTURE.md:568-573). What holds the tap dark now is lighting, not reachability: `errandSpineEnabled` is held dark in every preset on purpose and missions are dark end to end (coherence fold §2's ES row; OD-FC-39). The SP-B axis fold and the dossier remain the primary road.] [QUALIFIED 2026-10-16 (S3 m2) — "discharged" is the ORDERING risk only; HB-8's arms (a)/(d) are NOT reachable in any shipped preset while `espionageActive` is dark (see :3349).]
 
 ### 2.3 The CQ5 trio, four times
 
@@ -1859,6 +1884,7 @@ per-class sheet:
 doctrineBands: {
   law:   <a LAW_WORDS member — the observer's BELIEVED law band of the subject>,
   sheet: { <circumstanceClass>: { move: <actionToken>, hold: <holdRung> } }
+  // [RULED 2026-10-16 (coherence fold §5) — `hold` is a triple homonym inside HB (the strategy move `hold`, this sheet field, `HABIT_HOLD_BANDS`); the UNLANDED sheet field is renamed `firmness` ({ move, firmness }); the move and the band family stand. Read every later spelling of this field as `firmness`.]
 }
 ```
 
@@ -1886,7 +1912,7 @@ compile did not know it had, and it is the first mechanism in this estate where 
 INFORMATION about information is itself a weapon. **The plant road that carries it is the
 one HB-8 already builds** (a synthetic `BeliefReport` asserting a `doctrineBands` value —
 now including its `law` member — with the `plant:*` disinfo lineage row), so there is no
-fourth road and no new commission shape.
+fourth road and no new commission shape. [STRUCK 2026-10-16 (coherence fold §3.2.8) — the report road is struck; see :2726.]
 
 ⚠ **THE ONE THING THIS DOES NOT BUY, said plainly:** the target's OWN learning rate and
 half-life still key on the target's TRUE law word (§3b's curve), because that is the
@@ -1903,6 +1929,7 @@ trust — and the dossier's divergence line already has the grammar to say so.
 unified vocabulary and there is no second spelling to pick. ⚠ The array is CODEPOINT-
 SORTED; the volatility ORDER (lawless → balanced → lawful) is semantic and lives in the
 tuning maps, never in an index.
+[RULED 2026-10-16 (coherence fold §3.1.13) — ONE law-band table. HB-0 landed its learning curves PRIVATELY a day before WC-0C: `habitCurve.js:84` `LAW_WORD_VOLATILITY` and `:101` `LEARN_RATES` build `HABIT_TUNING.LEARN_RATE` / `.HALF_LIFE`, and tests/lint/lawBandTable.walker.test.js:70-73 records habitCurve.js in `C3_LEGACY` as a private table ("breached before WC existed … recorded rather than repaired") — so "no second spelling" is false as a cohesion claim. RULED: HB's `learning` row is REGISTERED in `lawBandModulation.js` (`registerLawBandCurve`, :79) at the next HB unit and `habitCurve.js` reads it from there; `C3_LEGACY` shrinks by one; the WC-0C fence pattern is widened to catch `LEARN_RATES`-shaped private tables. Dark-identical (nothing imports either today).]
 
 **THE SEAT SHOCK (refinement 8), and the read/write agreement trap it creates.** A
 change of the deciding seat applies a ONE-TIME shock toward neutral: the new seat has
@@ -1919,7 +1946,7 @@ world equals the factor computed after the next write, for every seeded seat cha
 ⚠ The seat identity resolves through the ONE existing resolver, **never `.name`** — the
 FACTION-KEY DEFECT CLASS has bitten four times. VERIFY-AT-BUILD that a stable seat id
 exists; **if it does not, the seat-shock arm ships DARK-DECLARED rather than keyed on an
-unstable value.**
+unstable value.** [CORRECTED 2026-10-16 (coherence fold) — the built ledger stores NO seat (see :759); until a later unit adds one under the owner's persisted-shape class, this arm is DARK-DECLARED.]
 
 **⚠⚠ THE ROUNDING FENCE — the one real threat to replay, named and fenced.**
 `decayTowardNeutral` computes `Math.pow(0.5, age / weeks)`, and `Math.pow` is
@@ -1954,7 +1981,7 @@ chooser until tick N+1.** ⛔ **A design that re-derives `habitStrength` by scan
 `pulseHistory` BREAKS THE PROMISE** and is forbidden in writing: `MAX_HISTORY = 80`,
 `collapseIntervalHistory` destroys N-1 interior records, and the war-convergence
 collector's own receipt records the resulting 1-in-52 loss of termination reads. The
-stream is a fine TRIGGER (a close happened this tick) and a fatal LEDGER.
+stream is a fine TRIGGER (a close happened this tick) and a fatal LEDGER. [CORRECTED 2026-10-16 (coherence fold, req 23) — sharper than stated: at the year clock the 80-record ring nets to 29 advances; see :4217.]
 
 ⭐⭐ **THE BANDS LAW, REWRITTEN AGAINST THE REAL CONVENTION (the P8 closure). THE §7
 SPELLING IS STRUCK AS INCOHERENT.**
@@ -2026,7 +2053,7 @@ reds instead of vanishing. **A scan whose miss looks identical to a clean pass i
 instrument; the count assertion is what makes it one.**
 
 ⚠ `SOAK_COUPLINGS` is a
-closed six-member vocabulary; a habit band would need a SEVENTH member and therefore a ⏱ (EP-r cut 'exports' 2026-08-10: doctrine now lands as the SIXTH member, and the mint's refusal test gains its row against a FIVE-member base — the arithmetic below shifts by one.)
+closed six-member vocabulary; a habit band would need a SEVENTH member and therefore a ⏱ (EP-r cut 'exports' 2026-08-10: doctrine now lands as the SIXTH member, and the mint's refusal test gains its row against a FIVE-member base — the arithmetic below shifts by one.) [CORRECTED 2026-10-16 (coherence fold) — this parenthesis is MISPLACED: the EP-r erratum belongs to the ES `legRefs` sentence (§3e, :2709), because 'exports' was a legRef and never a soak coupling. `SOAK_COUPLINGS` is still SIX (proposedSoakBands.js:37-39) and a habit band is still its SEVENTH member, as §8.2 says.]
 `SOAK_BAND_MANIFEST_VERSION` bump 2 → 3 — **which does not happen until the owner signs
 at the soak redo.** Until then every value here is raw-authored in `HABIT_TUNING` and
 nothing enters the manifest.
@@ -2262,6 +2289,7 @@ Set is a net RATCHET-DOWN, and the baseline moves down in HB-1's commit. HB-5's 
 then lands inside the bought headroom with a DECLARED per-wave delta. ⚠ A wave that
 discovers it needs more lines than it declared STOPS; it does not renegotiate the
 baseline mid-flight.
+[CORRECTED 2026-10-16 (coherence fold) — STALE: the 812 entry was DELETED 2026-08-31 (scripts/.size-baseline.json `_te_ceil_settlement_strategy_2026_08_31`: "812 -> 760, ENTRY DELETED"; the file now falls under the 800 domain-layer ceiling). The buy-the-headroom sequence is moot; HB-5 and HB-7 declare their deltas against that ceiling, citing the baseline file and eslint's effective count, never a raw `wc` (coherence fold §3.3.8).]
 
 ⚠ **SITE 2 ALREADY HAS A FEEDBACK LOOP AND HABIT MUST NOT DUPLICATE IT.**
 `generosityEV`'s `historyTerm` / `betrayalKill` is the estate's ONE existing
@@ -2471,6 +2499,7 @@ doctrineBands: {
                                     // has never had a clear-eyed look carries no law
                                     // reading and contributes exactly 0 to decayKeep01.
   sheet: { <circumstanceClass>: { move: <actionToken>, hold: <holdRung> } }
+  // [see :1887 — this field is renamed `firmness`]
 }
 ```
 
@@ -2577,16 +2606,17 @@ believe I believe about their habits") is NOT built, NOT approximated, and NOT r
 ⚠ MEASURED and stated so no wave assumes otherwise: `secondOrderBeliefEnabled` returns
 ZERO hits in `src` — IN-1's mirror has not landed. HB does not depend on it and does not
 anticipate it.
+[CORRECTED 2026-10-16 (coherence fold) — IN-1 LANDED: `secondOrderBeliefEnabled` is manifested (simulationRules.js:411) and `secondOrderBelief.js :: secondOrderMirrorOf` exists (:240; a display-only mirror, coherence fold §2's IN row). HB-7 must state whether the level-one "what do they believe MY habits are" read composes with `secondOrderMirrorOf` or stays on `outboundImpression` — one derivation, never two (PLAUSIBLE overlap, findings HB X5).]
 
 **THE SIX ANTICIPATION SEAMS**, ranked by fit, from census 3:
 
 | Rank | Seam | How the term enters | Belief routing |
 |---|---|---|---|
 | 1 | `conquestFeasibility.readConquestFeasibility` | as a FOURTH banded ARGUMENT with its own weight, the three legs re-normalized — ⚠ **it CANNOT be imported**: the module has ZERO IMPORTS, pinned in `tests/domain/envoyK3BeliefSeam.test.js`. The gathering belongs to `conquestDoctrineStage.js`, which already calls `beliefRecord(worldState, observer, rival)` | CONFIRMED — the counterparty term is already belief-routed |
-| 2 | `beliefMap`'s injected closures | ⭐ **THE ESTABLISHED INJECTION SHAPE**: `advanceBeliefMaps({…, credibilityOf, sightOf, commitmentDiscountFor})` already takes THREE per-pair typed factor closures, each `null ⇒ byte-identical`. A `habitAnticipationOf` closure built by the habit module and passed by the kernel — exactly as `sightOf: makeSightFn(memoryState)` is passed today — is the lowest-risk seam in the tree and closes no import cycle | structural |
+| 2 | `beliefMap`'s injected closures | ⭐ **THE ESTABLISHED INJECTION SHAPE**: `advanceBeliefMaps({…, credibilityOf, sightOf, commitmentDiscountFor})` already takes THREE per-pair typed factor closures, each `null ⇒ byte-identical`. A `habitAnticipationOf` closure built by the habit module and passed by the kernel — exactly as `sightOf: makeSightFn(memoryState)` is passed today — is the lowest-risk seam in the tree and closes no import cycle [CORRECTED 2026-10-16 (coherence fold) — these closures modulate belief RECONCILIATION, not a chooser; see :2641 (PLAUSIBLE)] | structural |
 | 3 | `envoyNegotiationPictureBuilder` | a sibling `believedOpponentDoctrineBand` reading `held.doctrineBands` with the same held-or-fall-back shape `believedOpponentStrengthBand` uses | CONFIRMED belief-first with a declared fallback |
 | 4 | ⛔ ~~`convergence.reactiveResponse`~~ **STRUCK (R6).** The compile ranked it 4 on a signature reading and it does not survive an executed one: a total constant dispatch on `relation`, no `worldState`, no actor id, ZERO `src` callers, and `ev` computed but never used to choose. A term here would multiply an unused number | — | — |
-| ⭐ 4′ | **`settlementStrategy`'s post-softmax weights — THE WAR CHOOSER (the replacement, released by A2) — ⚠⚠ CORRECTED AT THE POLISH (R17 / P2)** | The habit load is already landing here, and the anticipation factor is **the second term of a product the wave has already built** — zero new seam, zero new signature, one gated multiplicand. ⚠⚠ **BUT THE ARITY CLAIM THE AMENDMENT RANKED IT ON IS REFUTED: `bestTargetId` is emitted on `deploy` ALONE**, not "on every emitted move" (MEASURED: both emission paths are ternaries keyed on `move === 'deploy'`, and the return type already spelled it `bestTargetId?:string`). **THE SEAM IS STILL THE RIGHT ONE and it is still better than the struck seam 4 — live, called, a real fork, the owner's own sentence — but its REACH IS ONE MOVE.** The anticipation term modulates the `deploy` candidate and nothing else. ⛔ **"A knows B will hold, so A does X" IS NOT EXPRESSIBLE HERE TODAY**, and the volume says so rather than letting an implementer find it at the seam. ⭐ **THE FUTURE WIDENING IS NAMED AND PRICED, NOT TAKEN:** emitting a counterpart on more moves is an emitter change to `enumerateMoves` — the estate's most contended function, under a tolerance-zero size ratchet — and it is a BEHAVIOUR-ADJACENT change to a chooser this program does not own. **Owner-gated, recorded, NOT in any HB wave** | CONFIRMED — belief-routed by the §2.2 gate ladder, which cannot admit the term without a belief record; the subject's doctrine is read from the OBSERVER's belief row, never from the ledger |
+| ⭐ 4′ | **`settlementStrategy`'s post-softmax weights — THE WAR CHOOSER (the replacement, released by A2) — ⚠⚠ CORRECTED AT THE POLISH (R17 / P2)** | The habit load is already landing here, and the anticipation factor is **the second term of a product the wave has already built** — zero new seam, zero new signature, one gated multiplicand. ⚠⚠ **BUT THE ARITY CLAIM THE AMENDMENT RANKED IT ON IS REFUTED: `bestTargetId` is emitted on `deploy` ALONE**, not "on every emitted move" (MEASURED: both emission paths are ternaries keyed on `move === 'deploy'`, and the return type already spelled it `bestTargetId?:string`). **THE SEAM IS STILL THE RIGHT ONE and it is still better than the struck seam 4 — live, called, a real fork, the owner's own sentence — but its REACH IS ONE MOVE.** The anticipation term modulates the `deploy` candidate and nothing else. ⛔ **"A knows B will hold, so A does X" IS NOT EXPRESSIBLE HERE TODAY**, and the volume says so rather than letting an implementer find it at the seam. ⭐ **THE FUTURE WIDENING IS NAMED AND PRICED, NOT TAKEN:** emitting a counterpart on more moves is an emitter change to `enumerateMoves` — the estate's most contended function, under a tolerance-zero size ratchet — and it is a BEHAVIOUR-ADJACENT change to a chooser this program does not own. **Owner-gated, recorded, NOT in any HB wave** [RULED BY DELEGATION 2026-10-16 (OD-FC-23 — ruled by delegation 2026-10-16 (coherence fold §7, Q-HB-A), vetoable: the owner's own example ("If settlement [A] knows that settlement B genuinely does action Z …") is NOT expressible at the war chooser, because only `deploy` carries a counterpart. RULING: the generals' person-keyed loop (the 2026-10-02 rulings 14a/14d) carries the felt anticipation FIRST; the emitter change on `enumerateMoves` is taken only if the sentence still cannot fire after it.] | CONFIRMED — belief-routed by the §2.2 gate ladder, which cannot admit the term without a belief record; the subject's doctrine is read from the OBSERVER's belief row, never from the ledger |
 | 5 | `envoyErrandParlay.negotiateEnvoyParlay` | ⚠ K3-STRUCTURAL: it reads FROZEN PICTURES and no world at all. A habit belief must ride ON THE FROZEN PICTURE (seam 3's mint), **never as a live world read**, or K3 breaks | structural |
 | 6 | `negotiationPictures.evaluateNegotiationPicture` | ⚠ **AVOID IN v1.** `SUBJECT_KEYS`/`PICTURE_KEYS` are `hasExactKeys`-validated and the normalizer REWINDS the mutation chain; a new subject field is a `NEGOTIATION_PICTURE_SCHEMA_VERSION` bump and every persisted picture is rejected until migrated | — |
 
@@ -2608,6 +2638,7 @@ therefore emit no expression for a second term to be missing from.** ⚠ A DEFER
 `arity` is banked registry metadata for its promotion, never a claim about shipped code.
 ⚠ That is the difference between a declared future and a dead arm, and the amendment had
 five of the latter without knowing it.
+[CORRECTED 2026-10-16 (coherence fold) — UNRESOLVED WIRING (findings HB C4/X20): this paragraph makes site 8 (the pact answers) non-null at HB-7, but HB-7's charter wires only seams 2 and 4′ and never names the code path that carries anticipation to `warPeaceDecision`'s accept threshold; HB-7 must name it. And seam 2 — the `beliefMap` closures `credibilityOf` / `sightOf` / `commitmentDiscountFor` (beliefMap.js:1252) — modulates belief RECONCILIATION, what a court BELIEVES, not what it CHOOSES; wiring a chooser term there is a category error (PLAUSIBLE). The anticipation term belongs at the choosers: seam 4′ and site 8's own threshold.]
 
 ⭐ **SEAM 2 IS THE VOLUME'S STRONGEST AND IT IS RE-CONFIRMED AT THE AMENDMENT.**
 MEASURED: `export function advanceBeliefMaps({ snapshot, pressureIdx, worldState, tick,
@@ -2633,7 +2664,7 @@ HB-1's ratchet-down, and a wave that needs more STOPS.
 ### 3e THE DOCTRINE SHEET — dossier, tap product, planted doctrine
 
 Three surfaces in build order. **Nothing about (1) and (2) needs (3)**, which matters
-because (3) is blocked on SP-D (§2.2).
+because (3) is blocked on SP-D (§2.2). [CORRECTED 2026-10-16 (coherence fold) — no longer blocked by reachability; see :1127.]
 
 **(1) THE DOSSIER PROJECTION — reachable today.** The pattern is landed and complete:
 `src/domain/display/settlementBeliefs.js` (the read model, fail-closed:
@@ -2647,6 +2678,7 @@ same grammar, divergence prose in the same `<ul>`, the same premium/elevated gat
 same self-gate on field presence, the same codepoint sort. **NO new panel, NO new tier
 gate, NO new sort.** The divergence line writes itself and is the payoff sentence of the
 whole program: *"believes they always march first; they have twice waited."*
+[CORRECTED 2026-10-16 (coherence fold) — this sentence BREAKS J-HB-8 (rungs, never counts): "twice" is a tally. Spell it in rungs and under the owner's EVIDENCE LAW (who · which circumstance · which move), e.g. "Ostmark believes Hale marches first when besieged; Hale has grown restrained" (PLAUSIBLE form, authored at HB-8). The `delta` row below takes the same correction (:2702).]
 
 ⚠ **REFINEMENT 14 — OWN-SHEET TRUTH — lands HERE and nowhere else.** An actor's own
 doctrine sheet IS its own truth (the settlement knows itself), so the DM's view of a
@@ -2656,7 +2688,7 @@ drama. ⚠ **The DM-only fail-closed default is load-bearing and inherited, not
 re-litigated:** a player who could read doctrine sheets would have perfect
 counter-intelligence for free.
 
-**(2) THE ES TAP PRODUCT — by ACCESS DEPTH (owner addition H), blocked on SP-D.**
+**(2) THE ES TAP PRODUCT — by ACCESS DEPTH (owner addition H), blocked on SP-D.** [CORRECTED 2026-10-16 (coherence fold) — see :1127.]
 `TAP_LEVELS = ['beliefs','delta','performance']` with
 `TAP_DEPTH = { performance: 0, beliefs: 1, delta: 2 }` — ⚠ the array is CODEPOINT-sorted
 and the SEMANTIC depth is `performance < beliefs < delta`; a consumer using the array
@@ -2667,13 +2699,14 @@ mapping falls out of own-sheet truth exactly:
 |---|---|---|
 | `performance` | a `face:'declared'` stop, and EVERY standoff read | **THE PERFORMED SHEET** — what the court is willing to be SEEN doing, poisoned by `perfPoison01` and **REPLACED, line by line, by any live planted doctrine** the host is asserting |
 | `beliefs` | a `face:'covert'` stop the agent has ENTERED | **THE REAL SHEET** — own-sheet truth, so the host's true doctrine IS its self-belief. Cap 1.0 only at the target stop |
-| `delta` | embedded WITH a live inside asset | **THE DISINFORMATION DETECTOR** — both layers plus the plant exposed: *"they say they always march; they have twice waited."* The ONLY tap that distinguishes a planted sheet from a real one |
+| `delta` | embedded WITH a live inside asset | **THE DISINFORMATION DETECTOR** — both layers plus the plant exposed: *"they say they always march; they have twice waited."* [CORRECTED 2026-10-16 (coherence fold) — a tally; see :2681.] The ONLY tap that distinguishes a planted sheet from a real one |
 
 **`doctrine` joins the ES `legRefs` closed set as a SEVENTH member.** ⚠ ES §1 enumerates
 SIX EXACTLY and the mint REFUSES anything outside them, so this is an ES-SIDE vocabulary
 change and a seam obligation on that volume (§8 row 3), landed in the SAME commit as
 HB-8's tap arm — never smuggled. Products write through `reconcileBelief` as synthetic
 BeliefReports (J-ES-5), never through `applyBeliefOverrides`.
+[CORRECTED 2026-10-16 (coherence fold) — STALE COUNT: `ENVOY_COVERT_LEG_REFS` has FIVE members (`readiness, routePositionBand, storesBand, strength, tierBand`, envoyErrandVocabulary.js:207-213; EP-r cut 'exports' 2026-08-10, DESIGN_FP_ARCH_ES.md ES-1). The habit-sheet member would be the SIXTH, and DESIGN_FP_ARCH_ES.md carries no pin or mention of it yet — the seam is one-sided until HB-8's commit lands the ES amendment.]
 
 **(3) PLANTED DOCTRINE — the road is RULED and the wrong road is a SILENT DROP.**
 
@@ -2690,7 +2723,7 @@ NEGATIVE: an override carrying a doctrine field must be asserted to return null.
 accounting. It inherits, for free: one writer (the information-statecraft family head),
 seed/propagate/corroborate/contradict/expose, the credibility closure (a discredited
 liar's plant is worth less), and the exposure arm's `EXPOSE_GRIEVANCE_W` resentment plus
-its credibility charge — **the cost of being caught forging your own reputation.**
+its credibility charge — **the cost of being caught forging your own reputation.** [STRUCK 2026-10-16 (coherence fold §3.2.8) — this road is struck: it conflicts with J-INA-2 EXTENDED ("plants ride the plant roads; the two never share a writer", DESIGN_FP_ARCH_ES.md §8 row 9) and J-INF-3 (the commission fold is the ONLY entry for commissioned falsehoods). A planted habit sheet enters as an AXIS-TYPED DISINFO RECORD through the commission fold (`processLies`' `commissionedPlants`, informationStatecraft.js:549-658) and reaches belief by that lifecycle (seed, propagate, corroborate, expose, the credibility charge, `EXPOSE_GRIEVANCE_W`). The existing scan (tests/domain/espionageProducts.test.js:243, "NO espionage module names applyBeliefOverrides") is one-directional and would pass this road green; HB-8 owes the REVERSE scan: no plant symbol on the report road.]
 
 ⛔ The ephemeral in-errand PICTURE channel (`ENVOY_PICTURE_PLANT_FIELDS`) is the WAR
 lane's and is NOT touched by an information-side product — J-INA-2's two-channel ruling,
@@ -2721,7 +2754,7 @@ acting on.
 | `lawful` | if truly lawful: slow accretion, long retention | decays SLOWLY (`decayKeep01` positive) | ⭐ **DURABLE TREASURE** — worth a deep tap and worth paying for. ⚠ **AND WORTH FORGING:** see the deception row |
 | `balanced` | the base curve | the base curve (`decayKeep01` contribution 0 — the byte-identity anchor) | ordinary intelligence with an ordinary shelf life |
 | `lawless` | if truly lawless: hot learning, fast forgetting | decays FAST (`decayKeep01` negative) | ⚠ **FRESH FISH** — a tap on a court you believe chaotic is a PERISHABLE purchase, and buying one early is buying a sheet you will stop trusting before you use it |
-| ⭐ **anything, PLANTED** | whatever it actually is | decays at the rate of the PLANTED image | ⭐⭐ **THE DECEPTION ROW — the thing the truth-clock version could not have.** A court that cultivates a chaotic image makes everyone's intelligence about it rot in their hands, **including intelligence that is perfectly accurate.** A court that plants a LAWFUL image makes STALE intelligence feel durable — the sharper attack, because the mark keeps acting on a sheet it has stopped checking. It rides the plant road HB-8 already builds; no fourth road, no new commission shape |
+| ⭐ **anything, PLANTED** | whatever it actually is | decays at the rate of the PLANTED image | ⭐⭐ **THE DECEPTION ROW — the thing the truth-clock version could not have.** A court that cultivates a chaotic image makes everyone's intelligence about it rot in their hands, **including intelligence that is perfectly accurate.** A court that plants a LAWFUL image makes STALE intelligence feel durable — the sharper attack, because the mark keeps acting on a sheet it has stopped checking. It rides the plant road HB-8 already builds; no fourth road, no new commission shape [STRUCK 2026-10-16 (coherence fold §3.2.8) — the plant road is the commission fold, not the report road; see :2726] |
 
 **PREDICTABILITY BECOMES A CULTURAL TRAIT, AND BOTH LEGIBILITY AND ILLEGIBILITY BECOME
 WEAPONS — AND SO DOES THE APPEARANCE OF EITHER.** The lawful court is reliable and
@@ -2749,7 +2782,7 @@ ordinary news-road reports (hop-worn, low accuracy) rarely clear it, so doctrine
 converges SLOWLY from public actions; a tap product (accuracy near 1.0 at a `beliefs` or
 `delta` tap) clears it immediately, so espionage JUMPS it. **The counterforce is emergent
 before espionage lights, and spying stays the sharp edge — with ZERO new machinery, one
-tuning constant, and no second accrual road.**
+tuning constant, and no second accrual road.** [CORRECTED 2026-10-16 (coherence fold) — the generals rulings want AFFECTED-only accrual for a general's conduct; see :716.]
 
 ### 3f THE DEVIATION DAMPER — the self-balancing loop, keyed on awareness
 
@@ -2780,7 +2813,7 @@ awareness01 = clamp01( sightPressure01(worldState, actorId)      // who is watch
 Both come from the ONE live watched-ness substrate:
 `spatialLedgers.sightPostures[watcher][target].fidelity01` and
 `spatialLedgers.secrecyPostures[id].level01`, written by `informationStatecraft.js` and
-read today through `makeSightFn` / `sightFidelityOf`, all under `infoStatecraftEnabled`.
+read today through `makeSightFn` / `sightFidelityOf`, all under `infoStatecraftEnabled`. [STRUCK 2026-10-16 (coherence fold §3.1.12) — ONE suspicion derivation, IN-3's `suspicionOf` (suspicion.js:152), whose law is "IT NEVER READS TRUTH" and "never names the sight ledger" (suspicion.js:12-18). This `sightPostures` truth read is struck: `awareness01` is a CONSUMER of `suspicionOf` — the banded suspicion of the actor, one derivation, no truth term (the composing lane is ES-5's next unit; ES's `wariness01Core` consumes it too). The product form below and HB-7's both-sides-live mutant are re-cut against it.]
 
 ⚠⚠ **THE OMNISCIENCE HOLE, NAMED AND CLOSED.** "Who is watching me" is a TRUTH read over
 other actors' postures. Taken bare, it would hand every court perfect counterintelligence
@@ -2805,6 +2838,7 @@ assumes them ships a dead arm.**
 CANNOT close on `suspicionOf`.** When IN-3 eventually lands, `awareness01` composes it as
 a THIRD term through the one derivation — a widening, never a second spelling. The seam
 is pre-pinned from both sides (§8 row 6).
+[CORRECTED 2026-10-16 (coherence fold) — IN-3 LANDED: `suspicionOf` (suspicion.js:152) and `counterIntelEnabled` (simulationRules.js:290) exist. The loop does NOT close on the sight/secrecy pair (struck, :2816); it closes on `suspicionOf`, through one derivation.]
 
 ⚠ `infoStatecraftEnabled` dark ⇒ no posture ledgers ⇒ `awareness01` is 0 ⇒ the damper is
 inert and DECLARED-DEGRADED, never silently absent. The receipt names the missing family
@@ -2819,6 +2853,7 @@ inert and DECLARED-DEGRADED, never silently absent. The receipt names the missin
   circumstanceClass: <one of 12>,
   action:            <the site's own action token>,
   hold:              <one of HABIT_HOLD_BANDS>,
+  // [see :1887 — the same rename applies to this unlanded receipt field (PLAUSIBLE extension of §5's ruling)]
   source:            'own' | 'anticipated' }
 ```
 
@@ -2840,7 +2875,7 @@ and the baseline file holds exactly **413** rows. **THE LIVE DISCIPLINE — whic
 an HB wave actually meets — is stricter, not looser:** the scanner is an EXACT-EQUALITY
 ceiling in BOTH directions with the in-file instruction "never raise a ceiling", so an
 HB wave that adds prose **re-records its own delta against 413 with an authored
-attribution naming the wave**. It inherits no red and it raises no ceiling. ⚠ An
+attribution naming the wave**. [CORRECTED 2026-10-16 (coherence fold) — the ceiling is now 218; see :411.] It inherits no red and it raises no ceiling. ⚠ An
 implementer sent chasing a red that does not exist would attribute correct new prose to
 a phantom and leave the real re-record unwritten — which is why this correction is made
 at the source sentence rather than footnoted.
@@ -2853,7 +2888,7 @@ cannot see composers.
 **3. ONE BAND PER CLAUSE, COMPARISONS IN WORDS.** Banding is LOSSY: two stocks
 straddling a rung edge share a rung, and printing both mints a visible contradiction.
 The divergence line therefore says *"reads them as decisive; they have grown
-restrained"* and never juxtaposes two same-rung readings as if they differed.
+restrained"* [CORRECTED 2026-10-16 (coherence fold) — "decisive" is not a `HABIT_HOLD_BANDS` rung (it is the suspicion intensity ladder's word, suspicion.js:82); use "dominant" or "marked".] and never juxtaposes two same-rung readings as if they differed.
 
 **4. THE NEWS ADDRESS LAW, discharged for the one new kind.** HB mints exactly ONE
 Herald kind: **`doctrine_shifted`** — an actor's own doctrine crossing a band in a
@@ -2872,7 +2907,7 @@ The kind lands the **FIVE JOINS** in its mint commit (L6): the annex-verbatim po
 the registry row with `requiredSlots` + a slotless fallback · `WHAT_PHRASES` ·
 `EXACT_SECTION`/`sectionAuthority` (the knowledge desk) · the full address chain (id +
 settlementIds + typed action + recorded reasons + audience). Missing identities return
-null, never throw. It gets its OWN walker file — never rows in a foreign walker.
+null, never throw. It gets its OWN walker file — never rows in a foreign walker. [CORRECTED 2026-10-16 (coherence fold) — NO SENTENCE is authored for this kind and no pacing/significance registration is named (spine requirement 12). It is the ONLY habit surface a non-premium DM could ever read and the family's fast-layer sign (requirement 16). Author the slotless fallback under the EVIDENCE LAW — who · which circumstance · which move ("Hale now marches first when besieged", PLAUSIBLE form) — and register its significance class at HB-8. Its UNLANDED token is renamed `habit_sheet_shifted` (§5, :69).]
 ⚠ **PAIR-ONLY ≠ SLOTLESS:** a slotless fallback is REQUIRED, and "empty interp returns
 null" is a WRONG pin (11 of 20 TRADE pools have no slotless variant — the recorded trap).
 
@@ -2883,18 +2918,19 @@ byte-identical. ⚠ Several sites SLICE their reasons (`compactOutcomeForHistory
 `reasons` **SLICED TO 4**), so a habit reason can silently displace a causal one in the
 pulse record. **The habit reason sorts LAST in the site's own ordering**, so it is the
 first thing dropped by a slice rather than the thing that drops a cause — declared,
-pinned, and the reason the ordering is not left to chance.
+pinned, and the reason the ordering is not left to chance. [CORRECTED 2026-10-16 (coherence fold) — at the flagship (site 7 `deploy`) the habit reason is the family's only DM-visible chooser sentence: it takes a RESERVED slot on the deploy receipt rather than the first-dropped one, or it is also projected to the dossier (findings HB §8). Elsewhere the last-sort stands.]
 
 **THE DM-EDIT STORY (spine req 14), discharged for the family:** habit state is
 ENGINE-ONLY and carries no DM verb in v1 — a DM who could hand-edit a doctrine sheet
 would be authoring the past, which is the lived-history law's exact prohibition. The DM's
 surface is the DOSSIER (read), the divergence band (read), and — through the ES program's
 existing `DISPATCH_CONFIRMATION_MISSION` proposal verb — the ability to GO AND LOOK.
-Recorded, with the rationale, in every wave's ledger row.
+Recorded, with the rationale, in every wave's ledger row. [CORRECTED 2026-10-16 (coherence fold) — SUPERSEDED IN PART by Edit Mode's L10 (DESIGN_FP_ARCHITECTURE.md:205-211): the fork registry is Edit Mode's seal substrate (the compiled fold's `pin-fork`); HB-3 opens NO pledge on a sealed or directed choice; HB-7's anticipation is inert on sealed ticks; habit-sheet rows are editable at RECORD level through the belief ops `confirmRumour` / `castDoubt` / `twistRumour` (DESIGN_FP_ARCHITECTURE.md:3217-3221). Whether the habit STOCK itself stays engine-only under L10 is unstated there (PLAUSIBLE: yes, by the lived-history law).]
 
 ---
 
 ## §4 THE WAVES — HB-0..HB-9, dependency-ordered, every one DARK
+[CORRECTED 2026-10-16 (coherence fold) — each wave COMMITS dark under the flag law (J-EM-16 keeps the dark-commit law); FP SHIPS LIT by LIT-n units per the owner's 2026-09-23 word "no just build it all shipped lit" (DESIGN_FP_ARCHITECTURE.md:3270-3272), so lighting `habitConditioningEnabled` is a same-seed shift signed at its LIT unit (OD-FC-30, :4291). Every wave below carries a FIRST-VISIBLE/TIER line (requirements 16/17). The family's felt beats all live at the yearly or epoch clock (findings HB §7): a DM advancing weeks per session sees no habit for many sessions, and a fresh campaign shows none at all.]
 
 House discipline per wave (FP §10, binding): one wave = one commit (sliced waves one
 per slice); focused gates per slice + full gate at wave end through
@@ -2908,6 +2944,8 @@ the Opus succession carries the era marker in its ledger row and its judgment ro
 `FABLE_VALIDATION_QUEUE.md` as vetoable, exactly as the ES and SP waves did.
 
 **HB-0 — THE PURE SUBSTRATE (no flag; dark by construction).**
+[ADDED 2026-10-16 (coherence fold, req 16/17) — FIRST-VISIBLE: none — instrumentation (pure leaves; no flag, no caller) · TIER: aspatial-safe (no flag, no world read) · DEGRADED ARM: dark (by construction)]
+[CORRECTED 2026-10-16 (coherence fold) — LANDED `e188760b8` + HB-0B `c777a158d` (2026-08-14), dark; see :14.]
 Charter: `src/domain/worldPulse/habit/habitVocabulary.js` — `CIRCUMSTANCE_CLASSES` (12,
 codepoint-sorted) + `CIRCUMSTANCE_PRECEDENCE` (semantic) + `HABIT_HOLD_BANDS` (the
 `CHANNEL_BANDS` borrow) + `HOLD_RANK` + the borrow census in the header;
@@ -2915,9 +2953,9 @@ codepoint-sorted) + `CIRCUMSTANCE_PRECEDENCE` (semantic) + `HABIT_HOLD_BANDS` (t
 `severityWeightOf(rung)`, `applyCredit`, `habitFactor`, `seatAdjusted`, `roundToUnits`
 (THE ONE ROUNDING DOOR). PURE: no world, no store, no PRNG; imports exactly
 `decayTowardNeutral`/`HALF_LIFE_BANDS` from `bandedStock.js`, `SEVERITY_LADDER` from
-`bandFamilies.js`, and `LAW_WORDS` from `lawWord.js`. ⭐ **THIS WAVE MAKES HB THE FIRST
+`bandFamilies.js`, and `LAW_WORDS` from `lawWord.js`. [RULED 2026-10-16 (coherence fold §3.1.13) — the law-word curves built here are a C3 LEGACY private table; the learning row registers in `lawBandModulation.js` at the next HB unit (see :1932).] ⭐ **THIS WAVE MAKES HB THE FIRST
 `src` RIDER OF `bandedStock` AND THE FIRST CONSUMER OF `SEVERITY_LADDER`** — both leaves
-are measured to have ZERO src consumers today, and both were minted for exactly this.
+are measured to have ZERO src consumers today, and both were minted for exactly this. [CORRECTED 2026-10-16 (coherence fold) — `bandedStock` had riders before HB-0; see :313.]
 Also: the HB `**Bands:**`/**§8.2** reconciliation walker (the `spBandFamilies` sibling,
 since that one does not generalize) — ⭐ **CORRECTED AT THE POLISH (P8): its subject set
 is the TUNING-BEARING waves and its target is §8.2 THE TUNING SEAM, never §7, which is
@@ -2934,7 +2972,7 @@ neutral identity (absent ⇒ factor EXACTLY the number 1); the anti-ratchet prop
 inherited from `bandedStock` re-asserted at HB's own call shape; **all five hold rungs
 and all four severity rungs measured REACHABLE on real generated corpora with the counts
 recorded in the module header** (the dead-band law — an unreachable rung is a lie the
-tuning table tells the owner); the `CHANNEL_BANDS` both-directions equality pin; the
+tuning table tells the owner); the `CHANNEL_BANDS` both-directions equality pin; [CORRECTED 2026-10-16 (coherence fold) — R9 made the borrow ONE-DIRECTIONAL: the pin is projection-equals-the-literal-five-rungs plus threshold-ASCENDING (§3d), never a two-way equality.] the
 precedence-vs-sorted permutation pin; monotonicity of the curve in severity within a
 direction; the codepoint-tiebreak determinism pin; mutants on `severityWeightOf` (flatten
 it ⇒ a fixture's stock stops distinguishing outcomes) and on `learnRateFor` (collapse the
@@ -2947,16 +2985,17 @@ weights · tilt cap and floor · chooser span · anticipation span · deviation 
 shock keep.
 
 **HB-1 — THE ACTION VOCABULARIES + THE FORK REGISTRY (no flag; buys the headroom).**
+[ADDED 2026-10-16 (coherence fold, req 16/17) — FIRST-VISIBLE: none — instrumentation (vocabularies and a registry; behaviour-identical) · TIER: aspatial-safe (no flag) · DEGRADED ARM: dark]
 **Bands:** NONE BY DESIGN — this wave authors vocabularies and a registry, no tuning value.
 Charter: mint `src/domain/worldPulse/strategyMoves.js` — `STRATEGY_MOVES` as a frozen
 totality in exactly the shape `convergence.js` uses for `ENGAGEMENT_MOVES`; retire
 `settlementStrategy`'s local `martialMoves` Set to it and retire `scoringObjective`'s
-implicit lever set to a derived export; ⭐ **CORRECTED AT THE AMENDMENT (R7) — DELETE
+implicit lever set to a derived export; [CORRECTED 2026-10-16 (coherence fold) — REVERSED by the build: the leaf stays frozen and zero-import and `martialMoves` became the derived subset `MARTIAL_HISTORY_MOVES` (strategyMoves.js header); see :397.] ⭐ **CORRECTED AT THE AMENDMENT (R7) — DELETE
 THE DEAD `'fortify'` DISJUNCT, NOT THE ARM.** `settlementPolitics.blocDecisionFactor`
 reads `} else if (move === 'fortify' || move === 'defend') { … }`. The ARM IS LIVE
 through `defend`, which `enumerateMoves` emits unconditionally, and
 `blocDecisionFactor` is wired live from `settlementStrategy`. **RULED: delete the
-`move === 'fortify' ||` DISJUNCT ALONE and record it.** ⛔ The compile's ruling ("delete
+`move === 'fortify' ||` DISJUNCT ALONE and record it.** [CORRECTED 2026-10-16 (coherence fold) — REVERSED by the build: the disjunct is live and stays; see :397.] ⛔ The compile's ruling ("delete
 the arm") would have removed behaviour that fires for every settlement with a ruling
 bloc, and its proof ("an arm that never fired cannot change an output") is FALSE.
 **THE CORRECTED PROOF, which the goldens then confirm rather than assume:** for every
@@ -2975,7 +3014,7 @@ arity, circumstanceClasses, actionVocabulary, closeSource, closeOwed, reason}` �
 row, §3a) are ADDED AT THE AMENDMENT**, because the M5 and refinement-15 closures both
 turn on a decision that must be recorded per row rather than made per implementer.
 **Every row DEFER at this wave** so the registry is born seeing the whole surface and
-later waves only shrink the defer list. Land
+later waves only shrink the defer list. [CORRECTED 2026-10-16 (coherence fold) — AS BUILT (`1013d58ba`): 86 rows at landing (77 DEFER, 9 STAY); at 00b648c9d `habitForkRegistry.js` holds 104 rows — 84 DEFER, 20 STAY, 0 LEARN — under `FORK_DISPOSITIONS = ['LEARN', 'STAY', 'DEFER', 'DEAD_CODE']` (habitForkRegistry.js:53; the code spells `DEAD_CODE`, this volume `DEAD-CODE`). The walker's roots include `src/domain/traditions` (tests/lint/chooserTotality.walker.test.js:95-97). The registry is also Edit Mode's seal substrate (:2928).] Land
 `tests/lint/chooserTotality.walker.test.js` (exact set equality both directions; DEFER
 shrink-only; **every DEFER row's `closeOwed` non-empty**; the declared blind-spot clause;
 ⭐ **THE THREE ASSERTIONS OF J-HB-23, verbatim from §3c: (a) THE FOURTEEN NAMED-DOMAIN
@@ -3011,7 +3050,7 @@ matrix named at §5 clause 4) is the document-side instance of exactly this law.
 MOVE:** `settlementStrategy.js` is baselined at EXACTLY 812 and
 the ratchet is tolerance-zero in BOTH directions — this wave's net effect on it is a
 RATCHET-DOWN, and `scripts/.size-baseline.json` moves down in this commit. HB-5 spends
-the bought headroom against a DECLARED delta.
+the bought headroom against a DECLARED delta. [CORRECTED 2026-10-16 (coherence fold) — the 812 entry was deleted 2026-08-31; see :2292.]
 Pins: the `STRATEGY_MOVES` totality against `enumerateMoves`' real emissions on generated
 worlds (**the emitter is the denominator, never a hand list**); a walker asserting no
 module spells a strategy move outside the frozen export — ⭐ **and its GUARD-THE-GUARD:
@@ -3026,9 +3065,11 @@ meaningless). Collision: `settlementStrategy` + `settlementPolitics` (war lane �
 CHECK-GIT-FIRST mandatory). Req 13: declared-empty (vocabulary work); req 14: engine-only.
 
 **HB-2 — THE LEDGER + THE FLAG (`habitConditioningEnabled`, full CQ5 trio, ONE commit).**
+[ADDED 2026-10-16 (coherence fold, req 16/17) — FIRST-VISIBLE: none — instrumentation (a ledger whose one writer has no caller) · TIER: aspatial-safe · host flag: `habitConditioningEnabled` (manifested, simulationRules.js:337; lit in no preset) · DEGRADED ARM: dark (byte-identical: the writer returns the input reference)]
 **Bands:** NONE BY DESIGN — a ledger, a gate ladder and a manifest row; the row cap and
 the pledge max age are STRUCTURAL bounds declared in `HABIT_TUNING` at HB-0, not this
 wave's dials.
+[CORRECTED 2026-10-16 (coherence fold) — LANDED DARK `de214782b` (2026-08-14) with a DIFFERENT shape from this charter — `{ rows, open }`, no `v`, no `seat` (see :759) — and `writeHabits` has ZERO src callers (habitLedger.js:7); `habitGate.js` lands door one only; `habits` is TRACKED (spatialUsage.js:329); the cert row reads "NO CALLER AT THIS WAVE". The structural bounds are as chair-signed (:917).]
 Charter: `habitLedger.js` — the sub-ledger, `HABIT_LEDGER_KEY = 'habits'`, the ONE writer
 `writeHabits`, the total-on-garbage normalizer (a `v` it does not recognize heals the
 whole sub-ledger to ABSENT, never partially), drop-when-neutral at four levels,
@@ -3058,10 +3099,11 @@ rationale. Collision: `spatialUsage` + `simulationRules` + `subsystemRowsVirtual
 (EVERY flag and ledger wave — serialize).
 
 **HB-3 — THE CREDIT FOLD (rides HB-2's flag).**
+[ADDED 2026-10-16 (coherence fold, req 16/17) — FIRST-VISIBLE: none of its own — the credit is a slow stock whose felt conditioning is YEARLY TO EPOCH (findings HB §7: a war close takes months and a meaningful tilt several closes; cold-start = neutral). Under coherence fold §4 its fast-layer sign is a PLANTING LINE at each graded close — the close's own outcome sentence naming the court, the circumstance and the move — UNAUTHORED; the slow verdict is the habit-sheet shift beat (HB-8) · TIER: aspatial-capable in principle · host flags: `habitConditioningEnabled` AND each close's producer — the war layer lit only in dramatic_campaign / full_simulation, `demographicsEnabled` in no preset (OD-FC-18), coalition and trade per their own presets · DEGRADED ARM: dark (a close whose producer is dark opens no pledge; factor exactly 1)]
 **Bands:** NONE BY DESIGN — grade maps are frozen DATA over existing vocabularies, and
 refinement 12 forbids this wave from authoring a judgment scale. ⚠ The ONE exception it
 must NOT quietly become: close 8's continuous-progress BANDING EDGES are `HABIT_TUNING`
-members authored at HB-0, never here.
+members authored at HB-0, never here. [CORRECTED 2026-10-16 (coherence fold) — HB-0 did NOT land them: `HABIT_TUNING` (habitCurve.js:116-169) carries neither close 8's banding edges, nor close 1's `magnitude` edges, nor HB-8's `SHEET_FLOOR`. HB-3 (the edges) and HB-8 (`SHEET_FLOOR`) author them as `HABIT_TUNING` members, and those waves' `**Bands:**` lines change from NONE BY DESIGN (J-HB-21's tuning-bearing count rises; §8.2 reconciles them).]
 Charter: `habitCredit.js` — ⭐⭐ **THE EIGHT GRADE MAPS (§3a's table) as frozen data —
 EIGHT, NOT SEVEN: close 8's map was enumerated at the polish (R18) and this charter was
 never re-parsed against the table it builds from**, each
@@ -3070,7 +3112,7 @@ is SIX rungs, R12, with `cancelled ⇒ LAPSE`). ⭐ **CLOSE 8's MAP GAINS ITS BU
 HERE, AND IT IS NAMED AS A BANDING, NOT A LOOKUP:** the goal close returns a CONTINUOUS
 `progress ∈ [0,1]` plus `fired`, so the map is `fired === true ⇒ reinforce` and
 `abandoned-below-threshold ⇒ decay`, **each banded into `SEVERITY_LADDER` by FROZEN EDGES
-that are `HABIT_TUNING` members authored at HB-0 — never authored here** — with
+that are `HABIT_TUNING` members authored at HB-0 — never authored here** [see :3106] — with
 `readable === false ⇒ LAPSE` on the `lane_dark` precedent. ⛔ **A float grade may never
 enter the curve un-banded**, and the totality assertion for this one map is over
 `SEVERITY_LADDER ∪ {LAPSE}` rather than over a closing word set, because there is no
@@ -3080,7 +3122,7 @@ the audited carry road (H3 / J-HB-13), RE-PARSED AT THE ATTESTATION: CARRIED for
 close — RECOMPUTED for closes 3 and 7; ⭐⭐ CLOSE 2 TAKES BOTH ROADS AND THEREFORE BOTH
 BUILDS — RECOMPUTED for site 8's accept/refuse episodes (`terms:<treatyId>`, both sides
 hold the id, nothing stamped) AND CARRIED for site 7's keyed sue episodes
-(`treaty.habitEpisode`, stamped at treaty mint from the sue arm's key); close 5 is a
+(`treaty.habitEpisode`, stamped at treaty mint from the sue arm's key); close 5 is a [RULED 2026-10-16 (coherence fold, OD-FC-24) — HB-3's charter DROPS the `treaty.habitEpisode` carry pin until close 2 asks for it; J-HB-24's road stays recorded, not built; the `hold:` receipt field takes the register's `firmness` with the sheet field.]
 declared VERIFY-AT-BUILD that CARRIES or does not join.** ⚠ **THE OLD "RECOMPUTED FOR
 CLOSES 2, 3 AND 7" WAS A HALF-TRUTH THAT WOULD HAVE BUILT ONE MECHANISM WHERE TWO ARE
 OWED** — an implementer reading it builds a recompute for close 2 and never writes
@@ -3090,7 +3132,7 @@ FOREIGN FIELDS THIS WAVE WRITES ARE TWO, NOT ONE (corrected at the attestation �
 polish widened Q1 to two fields and left this charter saying "the one"):**
 `deployment.habitEpisode`, copied at `warDeployment` step 4 from the `warIntentFor` order
 the opener is already reading; and `treaty.habitEpisode`, stamped at treaty mint from the
-`sue_for_peace` arm's key. Both drop-when-absent and flag-gated. ⭐ **AND THE SECOND IS
+`sue_for_peace` arm's key. Both drop-when-absent and flag-gated. [see the OD-FC-24 bracket at :3935 — the first field only] ⭐ **AND THE SECOND IS
 CONDITIONAL BY LAW (J-HB-24): `treaty.habitEpisode` is written IFF `bilateralOffer` was
 true at the open** — the gate MEASURED verbatim at §3a's coverage row — **so this wave
 builds a WRITE-WHEN-KEYED stamp, never an unconditional one, and an unkeyed suit opens no
@@ -3141,6 +3183,7 @@ until-next-tick timing pin (a chooser at tick N sees the tick N-1 stock). Req 13
 declared-empty; req 14: engine-only.
 
 **HB-4 — THE CHOOSER READ, WAVE ONE: OUTSIDE THE WAR LANE (rides the flag).**
+[ADDED 2026-10-16 (coherence fold, req 16/17) — FIRST-VISIBLE: none of its own — a weekly read of a yearly stock: the habit reason row on each site's receipt appears only after a graded close has moved the stock (findings HB §7/§8: sites 1, 3 and 6 carry no DM sentence); a one-month advance on a fresh campaign shows nothing · TIER: per site — demographics needs `demographicsEnabled` (lit in no preset, OD-FC-18); site 3 has no ballot record yet; the trade contest per its own preset · host flag: `habitConditioningEnabled` · DEGRADED ARM: dark (factor exactly 1)]
 **Bands:** NONE BY DESIGN — load points only; the span they multiply is HB-0's.
 Charter: ⭐⭐ **CORRECTED AT THE POLISH — THREE SITES, NOT SIX: 1 (demographics), 3
 (coalition ratification) and 6 (the trade contest).** Sites 4 and 5 are STRUCK as
@@ -3159,16 +3202,17 @@ Budgets: ≤ 8 lines per site plus its registry row.
 Pins: per site, a same-seed lit/dark differential proving the tilt is REAL and bounded;
 the stream-identity pin (draw COUNT and drawn VALUES identical lit vs dark — the claim
 §2.4 rests on, executed per idiom rather than argued once); the `historyTerm`
-non-duplication differential at site 2; the reason-ordering pin (habit sorts last, so a
+non-duplication differential at site 2; [CORRECTED 2026-10-16 (coherence fold) — site 2 is DEFER (R18) and leaves this wave; the pin moves to HB-9 with site 2's close.] the reason-ordering pin (habit sorts last, so a
 4-slice drops it first); the byte-identity fence per site. Req 13: declared-empty; req
 14: engine-only.
 
 **HB-5 — THE CHOOSER READ, WAVE TWO: ⭐ THE WAR-CHOOSER JOINT (rides the flag).**
+[ADDED 2026-10-16 (coherence fold, req 16/17) — FIRST-VISIBLE: the habit reason on the `deploy` receipt ("as this court reliably does when …", rung-spelled, :2921) — a weekly read of a YEARLY stock (a balanced court winning one telling war a year settles near a ×1.15 factor, p(deploy) ≈ 0.32 → 0.35, findings HB §7, PLAUSIBLE); nothing in a fresh campaign's first months. The goal-kind arm (site 13, close 8) is the co-flagship a DM can read as character · TIER: aspatial-capable · host flags: `habitConditioningEnabled` + the war layer (lit only in dramatic_campaign / full_simulation); the keyed sue arm also needs `warTerminationEnabled` (dark everywhere) · DEGRADED ARM: dark (factor exactly 1; no habit reason on any receipt)]
 **Bands:** NONE BY DESIGN — one load point, one signed spy read, zero authored constants.
 ⭐⭐ **THIS WAVE LANDS JOINTLY WITH THE SIGNED WAR-CHOOSER SPY-BEFORE-DECISION WIRING**
-(CR-ES-4's deferred arm, RELEASED by the owner's blanket sign-off 2026-08-05 — R1). **The
+(CR-ES-4's deferred arm, RELEASED by the owner's blanket sign-off 2026-08-05 — R1). [RULED 2026-10-16 (coherence fold §3.2.9) — the release is recorded fold-wide and DESIGN_FP_ARCH_ES.md is amended to stop reading "deferred"; THE JOINT UNIT IS HB-5 + the ES spy-before-decision wiring, both unbuilt at 00b648c9d, inside chain 1 (THE STATECRAFT BAND) of the coherence fold's §6 order.] **The
 joint landing is the whole point and it is an engineering argument, not a convenience:**
-both retrofit the SAME frozen 812-line surface; both add a gated read to the same
+both retrofit the SAME frozen 812-line surface; [see :2292] both add a gated read to the same
 candidate-scoring block; a second visit costs a second size-ratchet negotiation, a second
 four-fence run against the same file, and a second CHECK-GIT-FIRST window on the estate's
 most contended module. Four programs have declined to touch this chooser in writing
@@ -3228,6 +3272,7 @@ most-edited files — CHECK-GIT-FIRST mandatory, and the wave is serialized agai
 in-flight war wave. Req 13: ENGAGED; req 14: engine-only.
 
 **HB-6 — THE BELIEVED-DOCTRINE AXIS (`believedDoctrineEnabled`, CQ5 trio).**
+[ADDED 2026-10-16 (coherence fold, req 16/17) — FIRST-VISIBLE: the habit-sheet divergence row in the DM's Realm Inspector (premium/elevated only, BeliefDivergenceBand.jsx:101) — SEASONAL TO YEARLY from hop-worn news, which rarely clears `DOCTRINE_ADOPT`; a tap jumps it (findings HB §7). Its sentence is not yet authored in rungs (:2681) · TIER: belief infoMode (spatial canon ∧ infoMode ≠ omniscient; three presets record beliefs) · host flags: `habitConditioningEnabled` + `beliefAxesEnabled` + `believedDoctrineEnabled` · premium-only surface · DEGRADED ARM: dark (no habit-sheet key on any belief record; aspatial and omniscient worlds show nothing)]
 **Bands:** ⭐ doctrine adoption bar · believed-law-band decay contribution. ⚠ **THE SECOND
 TUNING-BEARING WAVE (P8), and both its values are owed a reachability measurement rather
 than an authored guess:** the adoption bar because refinement 13's whole mechanism is the
@@ -3255,6 +3300,7 @@ the cost is quadratic in a realm's size). Req 13: declared-empty; req 14: engine
 
 **HB-7 — THE ANTICIPATION TERM + THE DEVIATION DAMPER (`habitAnticipationEnabled`, CQ5
 trio).**
+[ADDED 2026-10-16 (coherence fold, req 16/17) — FIRST-VISIBLE: none authored — no anticipation or damper sentence exists in the volume or the code (findings HB §1/§8), so under requirement 19 this wave is instrumentation until one is; the felt form is routed to the generals' loop (OD-FC-23, :2619) · TIER: belief infoMode (spatial canon ∧ infoMode ≠ omniscient; three presets record beliefs) · host flags: the full ladder (`habitConditioningEnabled` + `beliefAxesEnabled` + `believedDoctrineEnabled` + `habitAnticipationEnabled`); the damper also needs IN-3's `suspicionOf` (§3.1.12) and `infoStatecraftEnabled` (dark everywhere) · DEGRADED ARM: anticipation factor exactly 1; the damper DECLARED-DEGRADED (awareness 0)]
 **Bands:** NONE BY DESIGN — `ANTICIPATION_SPAN` and `DEVIATE_W` are declared in
 `HABIT_TUNING` at HB-0; the `counterWeight` cells are AUTHORED DESIGN KNOWLEDGE over a
 closed vocabulary, which is not a band and never enters a soak manifest.
@@ -3269,7 +3315,7 @@ CHOOSER, whose belief-routed read A2 releases. Seam 4 (`convergence.reactiveResp
 is STRUCK (R6): forkless, worldless, and uncalled in `src`.** At the war chooser the
 anticipation term is the SECOND factor of the dyadic product HB-5 already built
 (`subjectId = bestTargetId`), so this wave adds a multiplicand and no new seam. Seams 1
-and 3 PRE-PINNED from both sides; 5 and 6 declared-deferred with reasons.
+and 3 PRE-PINNED from both sides; 5 and 6 declared-deferred with reasons. [CORRECTED 2026-10-16 (coherence fold) — the site-8 path is unnamed and seam 2 is mis-aimed; see :2641.]
 ⚠ **`counterWeight` TABLES ARE OWED ONLY FOR THE DYADIC VOCABULARIES** (§3c's arity
 ruling) — `STRATEGY_MOVES` and the pact answers, not `RESPONSES` or the goal kinds — and
 the totality assertion is scoped to those, so an authored-cell census over a monadic
@@ -3280,26 +3326,27 @@ Pins: ⭐ **THE ZERO-IMPORT SCAN on the anticipation leaf** — it may not impor
 `outboundImpression` geometry, with a guard-the-guard positive control pointing at a
 legitimate truth reader OUTSIDE the set); the level-one negative (no module reads a
 belief-about-a-belief); the `counterWeight` totality (every (believed move, candidate)
-pair in every joined vocabulary has an authored cell — a missing cell is a red, never a
+pair in every joined vocabulary has an authored cell [CORRECTED 2026-10-16 (coherence fold) — scoped as §3d rules: the census denominator is `dyadicActions × believedVocabulary` (11 cells at site 7, NOT 121), as this charter's own paragraph above says (findings HB C9)] — a missing cell is a red, never a
 zero default); the damper's both-sides-live mutant (drop the secrecy factor ⇒ a fixture's
-span stops responding, proving `awareness01` is a product and not a truth read); the
+span stops responding, proving `awareness01` is a product and not a truth read); [STRUCK 2026-10-16 (coherence fold §3.1.12) — re-cut against `suspicionOf`; see :2816.] the
 `infoStatecraftEnabled`-dark declared-degradation pin; the closure `null ⇒
 byte-identical` anchor (the `sightOf` precedent). Req 13: declared-empty; req 14:
 engine-only.
 
 **HB-8 — THE DOCTRINE SHEET: DOSSIER + TAP + PLANT (`doctrineTapEnabled`, CQ5 trio).**
+[ADDED 2026-10-16 (coherence fold, req 16/17) — FIRST-VISIBLE: the habit-sheet shift beat (`doctrine_shifted`, renamed `habit_sheet_shifted`) — YEARLY (a five-rung ladder over a slow stock, findings HB §7), and no sentence is authored for it yet (:2910); the dossier rows (a) run seasonal to yearly as at HB-6 · TIER: belief infoMode (spatial canon ∧ infoMode ≠ omniscient; three presets record beliefs) · host flags: the HB ladder + `doctrineTapEnabled` (renamed `habitTapEnabled` at minting, §5); (b) and (c) also need `espionageEnabled` over `errandSpineEnabled` (held dark in every preset; missions dark end to end) · (a) premium/elevated only · DEGRADED ARM: (b) and (c) dark; (a) and (d) per the charter's own reachability claim, else dark]
 **Bands:** NONE BY DESIGN — display, tap mappings and a plant road; `SHEET_FLOOR` is
-HB-0's.
+HB-0's. [CORRECTED 2026-10-16 (coherence fold) — HB-0 did not land it; HB-8 authors it and this wave becomes tuning-bearing (see :3106).]
 Charter: **(a) THE DOSSIER** — the sheet row family inside `settlementBeliefs` and
 `BeliefDivergenceBand`'s existing premium/elevated band, plus the OWN-SHEET TRUTH row
 (refinement 14); no new panel, no new gate. **(b) THE TAP** — `doctrine` as the SEVENTH
-ES `legRef` (an ES-volume vocabulary amendment landed in THIS commit, §8 row 3), the
+ES `legRef` (an ES-volume vocabulary amendment landed in THIS commit, §8 row 3), [CORRECTED 2026-10-16 (coherence fold) — the SIXTH; see :2709] the
 three tap mappings, products through `reconcileBelief` as synthetic reports. **(c) THE
-PLANT** — planted doctrine on the REPORT road with the disinfo lineage row. **(d) THE
-VOICE** — the `doctrine_shifted` Herald kind with its five joins and its own walker file.
+PLANT** — planted doctrine on the REPORT road with the disinfo lineage row. [STRUCK 2026-10-16 (coherence fold §3.2.8) — the commission fold carries it, and HB-8 owes the reverse scan; see :2726.] **(d) THE
+VOICE** — the `doctrine_shifted` Herald kind with its five joins and its own walker file. [CORRECTED 2026-10-16 (coherence fold) — no sentence is authored; see :2910.]
 ⚠ **(b) and (c) SHIP DARK-FOREVER UNTIL SP-D LANDS** (`errandSpineEnabled` does not
 exist — §2.2), which is DECLARED in the cert row rather than discovered at soak; (a) and
-(d) are reachable the day this lands.
+(d) are reachable the day this lands. [CORRECTED 2026-10-16 (coherence fold) — the SP-D premise is STALE; see :1127.] [RULED 2026-10-16 (coherence fold, lane F item 6) — NOT reachable: `doctrineTapActive` gates the whole flag on `espionageActive`, which is lit nowhere; HB-8's DEGRADED ARM is DARK until chain 1 lights espionage.]
 Budgets: display read ≤ 80 added; the band component ≤ 60; tap/plant leaf ≤ 200.
 Pins: ⭐ **THE PLANT-OVERRIDE NEGATIVE** — an override carrying a doctrine field must be
 asserted to return `null` (the exact-six-key silent drop); the writer-boundary scan (no
@@ -3315,6 +3362,7 @@ crossing-receipt fail-closed pin (a non-crossing THROWS). Req 13: declared-empty
 sheet-editing verb recorded with its rationale.
 
 **HB-9 — THE CLOSES OWED + THE MEASURE (no flag).**
+[ADDED 2026-10-16 (coherence fold, req 16/17) — FIRST-VISIBLE: UNMEASURED — the findings give this wave no clock and none of its closes has an authored sentence; the envelopes are instrument · TIER: per close — the route closes need spatial canon and a written route network (nothing writes one in a shipped world, OD-FC-18); the occupation, generosity, intervention and sovereignty-market closes per their producers' presets · host flag: `habitConditioningEnabled` · DEGRADED ARM: dark]
 **Bands:** NONE BY DESIGN. ⚠⚠ **THE ENVELOPES ARE INSTRUMENT, NOT TUNING, AND THE
 DISTINCTION IS LOAD-BEARING (P8):** an envelope is a measured expectation the soak checks;
 a band is a dial the owner signs. Filing the six HB envelopes under `**Bands:**` would put
@@ -3352,7 +3400,7 @@ it. Req 13: declared-empty; req 14: engine-only.
 
 **Wave count: 10.** Dependency spine: HB-0 (free) → HB-1 (free) → HB-2 (flag 1) → HB-3 →
 HB-4 → HB-5 (⭐ JOINT with the signed war-chooser wiring) → HB-6 (flag 2; needs SP-B,
-LANDED) → HB-7 (flag 3) → HB-8 (flag 4; tap arm needs SP-D) → HB-9. **No wave edits
+LANDED) → HB-7 (flag 3) → HB-8 (flag 4; tap arm needs SP-D) [CORRECTED 2026-10-16 (coherence fold) — SP-D landed; see :1127] → HB-9. **No wave edits
 `pulseKernel.js` or `applyWorldPulse.js`** (banked, zero headroom — L1); every mount is a
 site's own stage or the lifecycle host.
 
@@ -3382,9 +3430,10 @@ instrument-hardening wave and the soak.** Four reasons, in order of force:
    anything — HB-8's tap arm simply ships dark-forever — but it would spend the wave's
    verification budget on an arm nobody can reach, and it would put the doctrine sheet's
    sharpest surface in a commit whose fences cannot see it.
+   [CORRECTED 2026-10-16 (coherence fold) — the premise is stale (SP-D landed); see :1127.]
 2. **JOINT WITH THE WAR-CHOOSER WIRING, because they retrofit the same frozen surface.**
    The owner's blanket sign-off (2026-08-05) released CR-ES-4's deferred arm and queued it
-   "after the ES spine as its own wave". HB-5 needs the same 812-line file, the same
+   "after the ES spine as its own wave". HB-5 needs the same 812-line file, [see :2292] the same
    candidate-scoring block, the same size-ratchet negotiation, and the same
    CHECK-GIT-FIRST window. Two waves would pay twice and would leave the chooser in an
    intermediate state nobody designed.
@@ -3400,7 +3449,7 @@ instrument-hardening wave and the soak.** Four reasons, in order of force:
 ⚠ **THE ONE ORDERING RISK, stated:** HB-6 needs SP-B (LANDED, 2026-08-05) and HB-8's tap
 needs SP-D (NOT landed). If SP-D slips past the soak, HB-8 ships with two of its four
 arms permanently dark. That is acceptable and is DECLARED in the cert row; it is not a
-reason to hold the family.
+reason to hold the family. [CORRECTED 2026-10-16 (coherence fold) — DISCHARGED (SP-D landed); see :1127.]
 
 **The following text folds into `docs/DESIGN_FP_ARCHITECTURE.md`. Each clause names its
 landing section. It is written to be landed VERBATIM.**
@@ -3418,14 +3467,14 @@ landing section. It is written to be landed VERBATIM.**
    — and the existing-flags paragraph gains: "`believedDoctrineEnabled` requires
    `habitConditioningEnabled` AND `beliefAxesEnabled`; `habitAnticipationEnabled`
    requires `believedDoctrineEnabled`; `doctrineTapEnabled` additionally requires the
-   full `espionageActive` conjunction and is therefore UNREACHABLE until SP-D lands."
+   full `espionageActive` conjunction and is therefore UNREACHABLE until SP-D lands." [CORRECTED 2026-10-16 (coherence fold) — see :1127]
 2. **§4 CANONICAL MODELS — the HB entry (sub-ledger family):** "HB:
    `spatialLedgers.habits` (conditionally materialized; ONE writer `writeHabits`; two
    sections — `stocks` keyed (actorId → seat + circumstanceClass → actionToken →
    [integerStock, elapsedWeek]) and `open`, the pledge book keyed
    `<class>.<actorId>.<episodeKey>`; drop-when-neutral at four levels; deterministic
    nearest-neutral eviction at the row cap; sub-key versioned by its own `v` with
-   heal-to-ABSENT on an unknown version). ZERO new top-level keys; NO world migration and
+   heal-to-ABSENT on an unknown version). [CORRECTED 2026-10-16 (coherence fold) — not the built shape; see :759.] ZERO new top-level keys; NO world migration and
    NO `WORLD_STATE_SCHEMA_VERSION` bump — absent-habit worlds ARE the legacy shape.
    Vocabulary: `CIRCUMSTANCE_CLASSES` (12, closed, owner-signed growth);
    `HABIT_HOLD_BANDS` (a `CHANNEL_BANDS` borrow); action tokens are the DECIDING SITE's
@@ -3452,7 +3501,7 @@ landing section. It is written to be landed VERBATIM.**
    HB-7's seam 4′ lands there under the same grant** (§3d)." ⚠ This clause exists
    because the queue documents still read "deferred" at this compile — queue task #53
    (the blanket sign-off ledger row) is PENDING, and until it lands a reader of
-   `FABLE_VALIDATION_QUEUE.md` alone would conclude HB-5 is illegal. ⛔ **THE VOLUME
+   `FABLE_VALIDATION_QUEUE.md` alone would conclude HB-5 is illegal. [RULED 2026-10-16 (coherence fold §3.2.9) — the release is recorded; see :3213.] ⛔ **THE VOLUME
    NOW TREATS THE WIRING AS SIGNED EVERYWHERE (A2)** — §0.3 R1, §3d seam 4′, §4 HB-5 and
    HB-7, §7 Q1's discharged half, and §8.1 row 5 — and no clause in this document
    describes it as parked.
@@ -3477,7 +3526,7 @@ the habit stock inherits `dispositionLedger`'s hand-rolled decay as a sixteenth 
 seat-change decay shock; per-NPC habits ONLY where per-NPC decision machinery already
 exists (measured: the errand/espionage person choices and `npcLadderGoals`). **Veto
 cost:** a roster-grain ledger is two orders of magnitude larger and lands in
-`npcLadderState`, an already-busy persisted surface.
+`npcLadderState`, an already-busy persisted surface. [CORRECTED 2026-10-16 (coherence fold) — see :716 (the generals rulings).]
 
 **J-HB-3 — THE DECAY LAW.** HB becomes `bandedStock.decayTowardNeutral`'s FIRST `src`
 rider. It does NOT hand-roll a sixteenth `Math.pow(0.5, …)`, and it does NOT migrate
@@ -3540,7 +3589,7 @@ has thrice before" is realized as a firmness phrase, not a tally. Reasoning at �
 **Veto cost, RE-GROUNDED at the amendment (R8):** the underlying stock is a DECAYED
 CONTINUOUS VALUE whose "count" nobody can honestly print — that is the whole of the
 argument and it stands alone. ⚠ The compile's second reason ("a live `proseNumerics`
-scanner that is already red at base") is **STRUCK: the scanner is GREEN at 413** and the
+scanner that is already red at base") is **STRUCK: the scanner is GREEN at 413** [CORRECTED 2026-10-16 (coherence fold) — now 218; see :411] and the
 ruled re-record landed at CR-FP-2. A veto here costs a prose surface that would have to
 invent an integer the model does not have; it no longer costs anything to do with a red.
 
@@ -3883,6 +3932,7 @@ denominator wearing a guard's clothing.
 campaign records — carry the owner's signature, or do closes 1 and the sue arm wait?
 (BLOCKS HB-3's close 1, therefore the flagship close, AND the `sue_for_peace` join the
 chair ruled at P3.)**
+[RULED BY DELEGATION 2026-10-16 (OD-FC-24 — ruled by delegation 2026-10-16 (coherence fold §7, Q-HB-C), vetoable: of the two foreign fields the chair's J-EM-15(2) reading signed (DESIGN_FP_ARCHITECTURE.md:3270), SIGN THE FIRST ONLY — `deployment.habitEpisode`. `treaty.habitEpisode` waits until close 2's keyed sue road asks for it: it buys one conditional arm of one move, and close 2 survives without it on its recompute road (this question's own decline arithmetic below). Either field still lands at its own unit with its own re-confirmation in chat.]
 
 ⭐ **WHY IT WIDENED, said before the recommendation rather than after it.** P3 ruled that
 where an existing grade already covers an action, the action JOINS rather than defers —
@@ -3995,7 +4045,7 @@ recommendation takes on: the HB envelopes include a same-input cross-run stock-i
 check, so if the residual ever bites, the instrument sees it.**
 
 **Q4 — Does HB earn the twelfth chartered coupling prefix, or ride an existing one?
-(BLOCKS HB-2's first cross-layer row.)** `CHARTERED_VOLUME_PREFIXES` is ELEVEN at HEAD
+(BLOCKS HB-2's first cross-layer row.)** [CORRECTED 2026-10-16 (coherence fold) — DISCHARGED in code; see :353.] `CHARTERED_VOLUME_PREFIXES` is ELEVEN at HEAD
 and `COUPLING_ID_SHAPE` is BUILT from it, so the first `CPL-<n>.<DIR>.HB-<n>.<facet>` row
 REDS until the prefix joins. **RECOMMENDATION: YES — add `HB` as the twelfth, with its
 own `couplingRegistryHabit.js` leaf.** The habit substrate is read by WAR (the chooser),
@@ -4032,10 +4082,10 @@ exists to hold.
 |---|---|---|---|
 | 1 | **SP-A substrate** (`bandedStock`, `bandFamilies`) | HB is the FIRST `src` rider of `decayTowardNeutral` and the FIRST consumer of `SEVERITY_LADDER`. It picks a `HALF_LIFE_BANDS` member; it never authors a rate. It reads `SEVERITY_LADDER` rungs; it never authors a scale. Half two of `spBandFamilies.walker` already enforces the singularity — no module but the family's own may speak a severity rung | a second `Math.pow(0.5, …)` anywhere in the HB module set REDS the decay-singularity scan; a habit-local severity spelling REDS the existing walker |
 | 2 | **SP-B belief axes** | `doctrineBands` is a FOURTH subject family through the five joins — one by-name gate line, one derivation behind THE ONE TRUTH DOOR, one droppable arm, one `@property`, one `SUBJECT_AXIS_FIELDS` member. J-SP-1 binds: no second fold, no second decay law, no parallel believed-doctrine ledger | the SP axis-vocabulary walker extended to import BOTH sides and assert equality in BOTH directions; a doctrine token spelled outside the axis leaf REDS |
-| 3 | **ES (the tap ladder + plants)** | `doctrine` joins the ES `legRefs` closed set as a SEVENTH member — an ES-VOLUME vocabulary amendment landed in HB-8's own commit, never smuggled. Products ride `reconcileBelief` as synthetic reports (J-ES-5). Tap depth maps to sheet fidelity via `TAP_DEPTH`, never the array index. ⚠ The whole arm is UNREACHABLE until SP-D lands `errandSpineEnabled` | the ES mint's six-member refusal test gains a seventh row and REDS if the sets disagree; the `applyBeliefOverrides` writer-boundary scan; the asset-less-delta anchored negative |
-| 4 | **The plant road** (`disinformationPlant`, `brokerageServicesPlant`) | Planted doctrine rides the REPORT road with a `plant:*` disinfo lineage row. ⛔ The OVERRIDE road is NAMED AND REFUSED: `PAID_PLANT_OVERRIDE_KEYS` is an exact-six-key equality and a seventh field is a SILENT DROP. Transport follows the ruled CR-FP-4 road (prior-tick applied events at each consumer's own head), never a third answer | the anchored negative asserting an override carrying a doctrine field returns `null`; a scan asserting no HB module imports `applyBeliefOverrides` |
+| 3 | **ES (the tap ladder + plants)** | `doctrine` joins the ES `legRefs` closed set as a SEVENTH member — an ES-VOLUME vocabulary amendment landed in HB-8's own commit, never smuggled. Products ride `reconcileBelief` as synthetic reports (J-ES-5). Tap depth maps to sheet fidelity via `TAP_DEPTH`, never the array index. ⚠ The whole arm is UNREACHABLE until SP-D lands `errandSpineEnabled` [CORRECTED 2026-10-16 (coherence fold) — the member would be the SIXTH (:2709) and SP-D has landed (:1127)] | the ES mint's six-member refusal test gains a seventh row and REDS if the sets disagree; the `applyBeliefOverrides` writer-boundary scan; the asset-less-delta anchored negative |
+| 4 | **The plant road** (`disinformationPlant`, `brokerageServicesPlant`) | Planted doctrine rides the REPORT road with a `plant:*` disinfo lineage row. [STRUCK 2026-10-16 (coherence fold §3.2.8) — see :2726] ⛔ The OVERRIDE road is NAMED AND REFUSED: `PAID_PLANT_OVERRIDE_KEYS` is an exact-six-key equality and a seventh field is a SILENT DROP. Transport follows the ruled CR-FP-4 road (prior-tick applied events at each consumer's own head), never a third answer | the anchored negative asserting an override carrying a doctrine field returns `null`; a scan asserting no HB module imports `applyBeliefOverrides` |
 | 5 | **WAR (`settlementStrategy`, `warTermination`, `warPeaceDecision`, `warIntent`, `warDeployment`)** | ⭐ THE JOINT LANDING: HB-5 lands with the SIGNED spy-before-decision wiring, one visit to the frozen surface, **and HB-7's anticipation multiplicand lands at the SAME block under the same grant (A2)** — three reads, one file, one negotiation. ⚠ **CORRECTED (H1/H2): the habit term is the RENORMALIZED POST-SOFTMAX multiplicand at the softmax caller, NOT a seventh entry in `enumerateMoves`' `factorFor` list** — the six existing loads are byte-identical lit vs dark. ⭐ **NEW AT THE AMENDMENT: the CARRY seam (J-HB-13)** — the chooser stamps the episode key on the warIntent order and `warDeployment` step 4 copies it to `deployment.habitEpisode` from the `warIntentFor` order it already reads. ⭐⭐ **AND A SECOND CARRY AT THE POLISH (P3 / Q1 widened), ⚠⚠ NOW HONESTLY GATED (J-HB-24): the `sue_for_peace` arm's key `terms:<offererId>:<targetId>:<peaceFrontSinceTick>` — three values MEASURED present in `emitMove`'s sue branch ONLY inside the `bilateralOffer` spread (`...(bilateralOffer ? { peaceOffer: true, offererId, targetId, peaceFrontOwnerId, peaceFrontSinceTick } : {})`) — stamped onto the treaty record at mint, so the arm joins close 2's existing treaty grades WHERE IT IS KEYED and defers with a written `closeOwed` where it is not.** ⭐ **THE CARRY IS LEARN-WHEN-KEYED: the episode is minted IFF `bilateralOffer`, and the seam's pin is the ANCHORED NEGATIVE that an unkeyed sue mints ZERO pledges.** ⚠ TWO foreign fields, not one, and both are Q1 — the gate narrows WHEN `treaty.habitEpisode` is written, never WHETHER the schema carries it. ⛔ **AND `deploy` IS THE ONLY UNCONDITIONALLY COVERED MOVE:** MEASURED, `applyWarIntentOutcome` stamps only under `metadata.strategyMove === 'deploy' && metadata.deployTargetId != null`, so nine of eleven strategy moves carry NEEDS-A-CLOSE rows outright, the unkeyed sue path carries a tenth, and the anticipation term reaches `deploy` alone (R17/R18). ⛔ `warTermination`'s evaluator is UNTOUCHED — WR-1 owns all four disposition inputs on the sue arm singly | the size baseline, tolerance-zero, against HB-1's declared ratchet-down; a source scan asserting ZERO habit imports in `warTermination.js`; **the positional scan asserting no habit symbol upstream of `softmaxWeights(`, with a planted pre-softmax multiplicand as its mutant**; the carry round-trip + the refused-order LAPSE negative; the `return_home` hard-override anchored negative |
-| 6 | **INFO / counterintelligence** | `awareness01` reads ONLY the live sight/secrecy posture pair under `infoStatecraftEnabled`. ⚠ `suspicionOf`, `counterIntelEnabled`, `overdueForeignNotables` and `recentCovertHolds` are REFUTED at HEAD (zero `src` hits) and HB depends on NONE of them. When IN-3 lands, its read composes as a THIRD term through the ONE derivation — a widening, never a second spelling | the both-sides-live mutant on the awareness product; a declared-degradation pin when the posture ledgers are absent; IN-3's own walker takes the pre-pinned row and its red is the lift signal |
+| 6 | **INFO / counterintelligence** | `awareness01` reads ONLY the live sight/secrecy posture pair under `infoStatecraftEnabled`. ⚠ `suspicionOf`, `counterIntelEnabled`, `overdueForeignNotables` and `recentCovertHolds` are REFUTED at HEAD (zero `src` hits) and HB depends on NONE of them. [CORRECTED 2026-10-16 (coherence fold) — IN-3 landed and `suspicionOf` REPLACES the posture pair (§3.1.12); see :2816] When IN-3 lands, its read composes as a THIRD term through the ONE derivation — a widening, never a second spelling | the both-sides-live mutant on the awareness product; a declared-degradation pin when the posture ledgers are absent; IN-3's own walker takes the pre-pinned row and its red is the lift signal |
 | 7 | **TRADE / FAITH / POP / GRAMMAR / INTERIOR choosers** | Each joined site keeps its OWN action vocabulary, its OWN load point, and its OWN receipt. HB appends one factor and one reason row, sorted LAST. HB mints no action word and no outcome word anywhere | per-site lit/dark byte-identity fences; the reason-ordering pin (habit drops first under a 4-slice); the fork-registry row is the join key and a missing row REDS the totality walker |
 | 8 | **`momentum.js`** | ⛔ UNTOUCHED (FP §10: "Never touch `momentum.js`"). Momentum is SUNK COST in a course; habit is LEARNED SUCCESS of an action in a class. They compose multiplicatively at the same seam and neither is the other's proxy. The distinction sentence appears in every HB module header and in the registry | a diff in `momentum.js` from an HB wave is a tripwire; the composition pin proves the commitment load is unchanged lit-vs-dark |
 | 9 | **`spatialUsage.js` — the coverage manifest** | `habits` is classified TRACKED in the SAME COMMIT as the first write, or `tests/lib/spatialLedgerCoverage.walker.test.js` REDS on day one (`expect(classified).toEqual(written)`, exact set equality both directions). ⛔ The store-layer escape is NAMED AND REFUSED. ⚠ The key constant must be named `HABIT_LEDGER_KEY` — the walker resolves only `_LEDGER` / `_KEY` / `_LEDGER_KEY` suffixes and goes BLIND to any other spelling (that blindness has bitten three times) | the walker itself; ⚠⚠ CQ5-CLASS SHARED FILE — serialized against every other ledger-minting and flag wave, CHECK-GIT-FIRST before staging |
@@ -4083,12 +4133,13 @@ whose GUARD-THE-GUARD reds on a `**Bands:**` line planted on a NONE-BY-DESIGN wa
 
 `settlementStrategy.js` is baselined at EXACTLY 812 effective lines with tolerance ZERO
 in both directions — ABOVE FAILS and BELOW DEMANDS RATCHET-DOWN. HB-1 buys headroom
-(ratchet-down, baseline moved in that commit); HB-5 spends it against a DECLARED delta.
+(ratchet-down, baseline moved in that commit); HB-5 spends it against a DECLARED delta. [see :2292]
 ⚠ A wave that discovers it needs more than it declared STOPS. Sizes are measured with the
 ENFORCER (eslint `max-lines`, skipBlankLines + skipComments) AT the publishing commit —
 never `wc -l`, never inherited, including from this document.
 
 ### 8.4 ⭐⭐ THE EPOCH JOINT LAW — stated identically in both volumes
+[CORRECTED 2026-10-16 (coherence fold) — not identically: DESIGN_FP_ARCH_EP.md carries NO habit text (zero hits). The joint law is stated HERE only, and EP §8.4 owes one cross-reference line to it (findings HB X6).]
 
 > **HABITS ARE DERIVED STATE OVER LIVED HISTORY. THE EPOCH IS THE ADDRESS OF THE FUTURE
 > LIVED FROM A POINT. Same lived history ⇒ same habits, always. A re-drawn future
@@ -4163,7 +4214,7 @@ Four mechanisms make it true rather than merely compatible, each measured:
   previewed tick, never on an empty harness.
 - **THE REPLAY HORIZON.** Habit replay reconstructed from recorded history is bounded at
   `MAX_HISTORY = 80` advances exactly as epoch replay is — a declared deferral, not a
-  discovery, stated in-file.
+  discovery, stated in-file. [CORRECTED 2026-10-16 (coherence fold, req 23) — 80 RECORDS, not 80 advances: a `one_year` advance appends 52 records into the 80-ring before collapsing to one, so the ring nets to 29 (tests/domain/historyRingCollapse.test.js:150-159; findings EP S1/X11). A year-cadence DM's habit replay and receipt horizon is about 29 advances, and requirement 7's cause walk ages out 2.7× faster at that clock. The ring policy is RULED BY DELEGATION 2026-10-16, OD-FC-33 — ruled by delegation, vetoable: collapse BEFORE eviction, so a year costs one slot; until that unit lands the horizon is 29.]
 
 ⚠ **SELF-INVALIDATION DOES NOT TRANSFER.** The epoch's `latest` stamp needs no lifecycle
 exception because any path that drops, rewinds, or outruns it makes it UNSELECTABLE.
@@ -4237,7 +4288,7 @@ PROMISE already governs: owner-signed, versioned per release, disclosed as a sam
 shift, never silent, never a re-record without a ruling. Existing campaigns are unaffected
 until the flag lights in their rules, and an existing campaign with an absent ledger reads
 a factor of exactly 1.0 — **byte-identity for legacy campaigns is a property of the
-neutral-identity door, not of a compatibility shim.**
+neutral-identity door, not of a compatibility shim.** [RULED BY DELEGATION 2026-10-16 (OD-FC-30 — ruled by delegation 2026-10-16 (coherence fold §7), vetoable: HB-D, the lighting shift of `habitConditioningEnabled`, is SIGNED AT ITS LIT UNIT, never discovered — under "shipped lit" (DESIGN_FP_ARCHITECTURE.md:3272) that unit re-records its witnesses with the cause stated. Nothing has moved yet, because nothing past HB-2 exists.]
 
 **(e) THE STRONGEST FORM OF THE CLAIM, and it is worth stating because it is
 counterintuitive.** Habit does not make worlds LESS reproducible; it makes them MORE
@@ -4280,6 +4331,7 @@ and 27 at round three, ⭐ 28 at round four, and the census re-parsed rather tha
 incremented); FIVE questions to
 the chair, Q1 re-aimed and widened to two fields, with a third field ruled DEFERRED AND
 VISIBLE.*
+[CORRECTED 2026-10-16 (coherence fold) — this census is history: the status of record is docs/DESIGN_FP_COHERENCE_FOLD.md §2 (:14); "TEN waves, all dark" reads per :2933; Q1's two fields per OD-FC-24 (:3935); and "EIGHTEEN premises" is no longer the count (ODQ §43 cites the R33/R34 refutations).]
 
 *⭐⭐ **THE ONE SENTENCE A SUCCESSOR SHOULD CARRY OUT OF THIS DOCUMENT.** Across three
 rounds this volume lost eighteen premises, and **every single one fell to the same
@@ -4294,6 +4346,7 @@ and eighteen times now, it was.*
 ---
 
 ## §9 THE COUNT CENSUS — EXECUTED (J-HB-27 + J-HB-28)
+[CLARIFIED 2026-10-16 (coherence fold) — CUT-TO-SIDECAR RECORDED, NOT EXECUTED: the readers judged §9 and the document-hygiene rulings J-HB-23..28 instruments with no product content (findings HB §8, refinement 25: move them to a `HABIT_COUNT_CENSUS.md` sidecar beside the repo-absent scripts, leaving a pointer). This amendment is insertion-only, so nothing moves here; the move rides the volume's next re-compile. ⚠ The body md5, line count and home phrases below describe the PRE-FOLD body: the 2026-10-16 brackets change the body, so a re-run of countsweep.py reports different hashes and may report home diffs it was never taught to license.]
 
 **SCRIPT: `countsweep.py`, md5 `0aa8d27dbe8b786ab55c38df7d03a337`, run as `python3 countsweep.py`
 from the volume's own directory. EXIT CODE 0.**
@@ -4391,6 +4444,8 @@ struck_R18                 PASS     2 ok (2 reg, 0 struck, 0 quoted) / 0 unli...
 TOTAL PROSE HOMES DIFFED: 131 ; TOTAL STRUCTURAL CROSS-CHECKS: 71 ; SIGNATURE PHRASES SCANNED: 42
 ZERO DIFFS — every counted quantity agrees with every prose home that states it, and no refuted premise is restated unmarked.
 ```
+
+[CORRECTED 2026-10-16 (coherence fold) — "every counted quantity agrees with every prose home" is over-claimed: J-HB-1's "seven graded closes" (:699) escaped the `closes` sweep; the claim holds over the DECLARED homes only.]
 
 **HOW TO READ A FAILURE.** A `FAIL` is never "the script is out of date". It is exactly one
 of two things: a table was edited and a sentence was not, or a sentence was edited and the

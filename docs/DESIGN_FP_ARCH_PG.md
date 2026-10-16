@@ -7,6 +7,11 @@
 ## chair's act, not this lane's** — this file is delivered to scratchpad and no
 ## docs/ path was written. Until the chair lands it, the CHARTER remains the
 ## citable home and this draft is the proposed fold.
+
+[CORRECTED 2026-10-16 (coherence fold) — THE STATUS OF RECORD IS docs/DESIGN_FP_COHERENCE_FOLD.md §2; this header is history. LANDED on the ledger at 1d77ceb67 (2026-08-16); NOT on master; NOT in the compiled order; carries none of the spine's obligations (no Req 13/14 or L10 line, no coupling prefix, no annex). In one line: LIT: none · BUILT DARK: none · UNBUILT: pg-0..pg-4 entire (zero code at 00b648c9d: `contagionEnabled`, `afflictionBand`, `plagueTouched` — 0 hits; `CONDITIONS_KEYS` still four, beliefAxisSubjects.js:123).]
+
+[RULED BY DELEGATION 2026-10-16 (OD-FC-38 — (coherence fold §3.1.20, §7; vetoable): PG stays FP-ADJACENT and takes requirement 15's obligations before any wave compiles — a requirement-13 Alignment line and an L10 EDITOR line per wave, a coupling prefix chartered in the same commit as its first registry row (§3.3.2; see the bracket at §5 item 5), and a named receipt annex (today it rides POP's).]
+
 ##
 ## LANDS as a member of the docs/DESIGN_FP_ARCH_* family — the per-program file
 ## for the pg pestilence-coherence family, sibling to
@@ -19,6 +24,9 @@
 ## (`lanePGC-census.md`) is this volume's premise: it charters ONLY the absent
 ## arms and mounts everything on the landed machinery. A wave that mints a
 ## second plague system has failed, however green its gate.
+
+[RULED 2026-10-16 (coherence fold §3.1.9) — ONE PLAGUE TRUTH now names POP-4: POP-4 (THE PLAGUE ARC — DESIGN_FP_ARCH_POP.md, the compiled fold's #45) FOLDS INTO PG — PG owns the arc, the resistance and contagion-on-arrival; POP keeps the burial LINE (THE BELLS, a Herald generalisation) and the disaster cause; the `calamityArcs` ledger is not minted (its name collided with the lit calamityKernel).]
+
 ##
 ## ⛔ **LIVE CODE OUTRANKS EVERY TABLE IN THIS FILE.** Chartered against
 ## `b49a7daf` per ODQ §136. ⚠⚠ **RE-DERIVE AT THE COMPILE'S OWN HEAD; DO NOT
@@ -43,7 +51,7 @@
 
 ### §0.2 SLOT (§136.3, elaborated)
 
-The pg family compiles beside cn in the family-train tail, **after POP's
+The pg family compiles beside cn in the family-train tail, [re-read under OD-FC-38 at the head: cn is folded into Edit Mode, and pg compiles only after requirement 15's obligations land] **after POP's
 reception producer**. Concretely: pg-0 (solo flag train) → pg-1 → pg-2 may
 compile as soon as a lane frees, since none of the three touches reception; pg-3
 compiles only after POP-1 lands (its packet carries the lighting-order row);
@@ -64,7 +72,7 @@ members, **SPLIT PROMOTION** per the packet-validator reservation law).
 | ODQ §131 | heuristic bands only — no real epidemiology | §0.1, §7 |
 | ODQ §49 (the correction) | the column vocabulary/carry-through, ruled JOINTLY across POP/LG/ES at the LG sitting | §3 (pg-1 ruling 2), §5.6 |
 | ODQ §46c / §46d | reception relaxations; the caravan belief-carrier chains | §3 (pg-3 rulings 2, 4, 6) |
-| ODQ §128 / §128.2 / §128.3 | the stressor pin interplay — CITE-ONLY, already ruled | §3 (pg-4), §5.7 |
+| ODQ §128 / §128.2 / §128.3 | the stressor pin interplay — CITE-ONLY, already ruled [RULED 2026-10-16 (coherence fold §5, §3.1.20) — CN's persisted stressor pin is not minted; the DM's hold on a stressor is an Edit Mode seal (a `pin-fork` directive), and 'pin' in prose means a test. Every §128 interplay row in this volume is re-read against the seal at its compile.] | §3 (pg-4), §5.7 |
 | C-POPF-2 / C-POPF-5 | reception terms are POP-OWNED; chair-signed derivations | §3 (pg-3 ruling 2) |
 | Estate §49/§50 | flag mint, the three obligations | §2, §5.1 |
 | Estate §85.4 | registry-mint two-obligation law | §5.2 |
@@ -101,6 +109,7 @@ members, **SPLIT PROMOTION** per the packet-validator reservation law).
 ---
 
 ## §2 · pg-0 — THE FLAG
+[ADDED 2026-10-16 (coherence fold, req 16/17) — FIRST-VISIBLE: none — instrumentation (a flag mint) · TIER: n/a (gates pg-1/pg-2) · DEGRADED ARM: dark]
 
 `contagionEnabled`: VIRTUAL (absent from `DEFAULT_SIMULATION_RULES`), the house dormancy
 idiom (`=== true` reads; absent ⇒ every pg seam byte-identical). One flag for pg-1+pg-2:
@@ -123,6 +132,7 @@ the SAME train, so the first gate run can be green.
 ## §3 · THE WAVES
 
 ### pg-1 — CONTAGION-ON-ARRIVAL
+[ADDED 2026-10-16 (coherence fold, req 16/17) — FIRST-VISIBLE: SEASONAL (plague fronts, FOLD-SMALL §7) — the landed "Plague reaches X" (`plague_arrival`) when a plague-touched column lands and the onset takes · TIER: spatial canon (the marker: migrationActive and epidemicActive — ruling 5); the P2 arm also needs `demographicsEnabled` (lit in no preset, OD-FC-18) · DEGRADED ARM: dark — marker absent ⇒ zero writes, byte-identical (ruling 5)]
 
 **The mechanism (one sentence): a migration column dispatched FROM a settlement whose
 plague front is active is stamped plague-touched at DISPATCH; at LANDING it places an
@@ -149,7 +159,7 @@ Design rulings, each with its alternative recorded:
    across POP/LG/ES at the LG sitting. pg-1's field must be tabled there (it is a
    FIELD, not a class — it does not enter the column KEY — but the carry-through
    whitelist in `columnOf` is the same choke point, and the ES-Da couplingId lesson
-   says the shape refusals surface at compile, not at design).
+   says the shape refusals surface at compile, not at design). [CLARIFIED 2026-10-16 (coherence fold §3.1.7) — the column union is ruled: POP owns the civilian classes, WC the military, one `columnOf` whitelist; `plagueTouched` is a FIELD and still owes its carry-through row there.]
 3. **Seeding lands in the epidemic ledger, never a second system.** At the two landing
    seams (M4 `releaseMigrationArrivals`; P2 Stage 1), a landed plague-touched column
    writes an `incubating` EpidemicRecord at the destination (`sourceId` = the column's
@@ -187,6 +197,7 @@ Design rulings, each with its alternative recorded:
 | COLUMN_SEED_CAP | per-tick cap on column seedings | PG_TUNING; mirrors SPREAD_CASCADE_CAP=6, recommend ≤ half of it |
 
 ### pg-2 — RESISTANCE AND DURATION
+[ADDED 2026-10-16 (coherence fold, req 16/17) — FIRST-VISIBLE: SEASONAL (plague duration, FOLD-SMALL §7) · TIER: aspatial-safe for the birth-gate arm (`diseaseOutbreakGate`); spatial canon for the onset arm (M11a, the epidemic ledger) · DEGRADED ARM: aspatial worlds get the birth-gate arm only (FOLD-SMALL §7); the counterforce decay arm's tier is UNMEASURED]
 
 The owner names four resistances: **priests, healing, prosperity, order.** The census
 found priests+healing already landed in BOTH seams (M11a care; the counterforce), and
@@ -238,6 +249,7 @@ existing seams — never a third seam.
 | counterforce source weights (economic_capacity, order) | two rows ≤0.2 each | flag-aware profile resolver; soak-signed |
 
 ### pg-3 — BELIEF-BASED REFUSAL AT THE GATES
+[ADDED 2026-10-16 (coherence fold, req 16/17) — FIRST-VISIBLE: SEASONAL (belief decay, FOLD-SMALL §7) — "refused at the wall" with the plague reason · TIER: belief infoMode (spatial canon ∧ infoMode ≠ omniscient); host flags `believedMigrationEnabled` (POP-1, unbuilt) ∧ `beliefAxesEnabled` ∧ `believedConditionsEnabled` ∧ `contagionEnabled` · DEGRADED ARM: contagion lit, belief dark ⇒ plague seeds and nobody refuses (ruling 5)]
 
 **The mechanism: the observer's BELIEVED affliction of the group's ORIGIN — stale,
 wrong, or true — feeds a POP-owned suspicion term in C-POPF-2's reception contract;
@@ -261,7 +273,7 @@ news); the §46d caravan chains carry the plague word onward.**
    refuses a now-clean town's caravan" fiction — pg-3 writes zero staleness code.
    The alternative (a separate believed-affliction family with its own flag) is
    recorded and recommended against: a fourth subject family for one band re-runs
-   SP-B's whole gate machinery for no added fiction.
+   SP-B's whole gate machinery for no added fiction. [RULED 2026-10-16 (coherence fold §3.1.21) — an axis addition is SP-B's by its one-writer-family rule: pg-3 lands `afflictionBand` as a ROW in `beliefAxisSubjects.js` under SP-B's extension clause, with the ES-1 legRefs census amended in the same commit; `CONDITIONS_KEYS` holds four keys at 00b648c9d (beliefAxisSubjects.js:123).]
 2. **The refusal term is POP's, not pg's.** C-POPF-2(2) is explicit: reception terms
    are POP-OWNED, land only with a chair-signed derivation (C-POPF-5), and "LG/ES never
    author a term." pg-3 therefore DELIVERS: the chair-signable derivation of the
@@ -301,6 +313,7 @@ news); the §46d caravan chains carry the plague word onward.**
 | REFUSAL_BAND + the scarcity/wartime composition | banded threshold inside the POP term | C-POPF-5 chair-signed derivation (POP-owned) |
 
 ### pg-4 — OTHER COHERENCES, priced as candidates (none in pg-1..3 scope)
+[ADDED 2026-10-16 (coherence fold, req 16/17) — FIRST-VISIBLE: UNMEASURED (candidates, each its own act) · TIER: per item · DEGRADED ARM: per item]
 
 | Candidate | Price sketch | Owner-gate? |
 |---|---|---|
@@ -348,7 +361,7 @@ news); the §46d caravan chains carry the plague word onward.**
    (c) belief→reception (the suspicion term, at pg-3). A new per-volume leaf
    (`couplingRegistryPestilence.js` or riding POP's leaf when it exists) composed into
    COUPLING_REGISTRY with named re-exports (the registry's own public-surface law).
-   ⚠ ONE new coupling row moves THREE pins (the ES-Da lesson) — priced per row.
+   ⚠ ONE new coupling row moves THREE pins (the ES-Da lesson) — priced per row. [RULED 2026-10-16 (coherence fold §3.3.2, requirement 21c) — `CHARTERED_VOLUME_PREFIXES` excludes PG (tests/domain/couplingRegistry.test.js:119); the PG prefix is chartered in the SAME commit as its first registry row.]
 6. **Column shape (pg-1)**: the `plagueTouched` field — tabled at the LG joint sitting
    per §49's correction; `columnOf` carry-through + `deepCloneConditionalLedger`
    round-trip + the full lifecycle proof (create → persist → regenerate → undo — the

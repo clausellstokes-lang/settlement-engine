@@ -11,7 +11,7 @@
 ## session context, this volume, and the SPINE can build every wave.
 
 **Status: ARCHITECTURE. Nothing here is scheduled until the owner sequences it per
-SPINE §5 (SP → GRAMMAR → INFO → TRADE → …), behind the sim-proof path. Every wave
+SPINE §5 (SP → GRAMMAR → INFO → TRADE → …), behind the sim-proof path. [CORRECTED 2026-10-16 (coherence fold) — THE STATUS OF RECORD IS docs/DESIGN_FP_COHERENCE_FOLD.md §2; this header is history. In one line: LIT: none · BUILT DARK: TR-1 casus commercii (d7ea69a4b, 08-04; writer UNMOUNTED, spatialUsage.js:362), TR-2 house (c8c21a9f3, 09-24; no pulse mount), TR-3 believed markets (0fd6b9209, 09-24; wrong-market evidence computed and dropped), TR-9c contract (c7933e845, 08-04; collectors absent) · UNBUILT: TR-4…TR-8 (absorbed by DESIGN_FP_ARCH_EC.md as EC-12 / EC-6's read side / EC-13 / EC-14 / EC-15 under OD-EC-1; TR-5's trade half unowned, RULED BY DELEGATION 2026-10-16, OD-FC-2), TR-2b reserved (OD-EC-16), and EC-0…EC-18 entire; the compiled layer is now DESIGN_FP_ARCH_EC.md and its dispatch gate is the release PUSHED AND DEPLOYED (OD-EC-4)] Every wave
 ships DARK. The judgment blocks in §6 are the drafting chair's rulings under
 delegation — vetoable here. The endings vocabulary {fortune, ruin, monopoly,
 collapse, severance, cornered} is OWNER-SETTLED (SPINE §3) — names not vetoable;
@@ -59,12 +59,12 @@ cross-program shorthand to its source document.
   fair, dear, desperate}` — and it exists in exactly two non-merging forms:
   TRUTH-SIDE scarcity (derived from physical stocks and the food ledger, consumed
   only by physics) and BELIEVED scarcity (an SP-2 belief subject, consumed by every
-  decision). A DM can reflavor any band; the engine never contradicts a DM's economy.
+  decision). A DM can reflavor any band; the engine never contradicts a DM's economy. [RULED 2026-10-16 (coherence fold §3.3.7 / §5) — ONE identifier, TWO ladders is retired: `SCARCITY_BANDS` is SP-B's FOUR-word BELIEF ladder {scant, pinched, sufficient, plentiful} as built (beliefAxisSubjects.js:85, lit in three presets); the five-word TRUTH ladder written here is `MARKET_CONDITION_BANDS` {glut, soft, fair, dear, desperate} (DESIGN_FP_ARCH_EC.md E1; armyStrength.js:133 owns `CONDITION_BANDS`) — J-EC-17 records the deviation from this law's letter] [RULED 2026-10-16 (coherence fold §3.2.10d) — the consumption rule is AMENDED with a reason: truth-side conditions may drive the OWN court's decisions — the court knows its own shelves, the self-read exception K3 already grants `pactFormation` — never a counterpart's (EC-3's reserve, EC-8's build governor, EC-17's need, EC-18's push)] [CORRECTED 2026-10-16 (coherence fold) — as built, SP-B's believed scarcity reads GENERATION data (localProduction/exports/imports + the frozen `foodRatio`), never physical stocks (DESIGN_FP_ARCH_EC.md S25); EC-1's condition becomes that truth when lit]
 - **T2 — NO COIN (standing owner ruling, recorded at treatyTransfer.js:11-20, the
   f3cf639e judgment):** no conserved coin primitive exists or may be introduced.
   House books, tolls, credit, stakes, and fortunes are BANDS. Conservation applies
   exactly where objects move: goods units in the M6a balance, grain-months at the
-  granary. Money-shaped drama is band drama.
+  granary. Money-shaped drama is band drama. [SUPERSEDED BY EVENT 2026-10-16 (coherence fold) — the owner REVERSED this ruling (ODQ §731.1, Q-W8): a conserved treasury exists, W-COIN built dark and lit in no preset (treasury.js:10-11, :33-37; DESIGN_FP_ARCH_EC.md S45); coin reaches commerce only through the treasury's one taxation mint (EC E9, OD-EC-6)]
 - **T3 — SINGLE WRITERS, EXTENDED NEVER FORKED [CORRECTED 2026-08-02 (fp-audit)]:**
   "extend never fork" means ONE WRITER FAMILY, never one file. `peaceTerms.js`
   remains the terms AUTHORITY, but all new commercial capability lands in LAZY
@@ -75,7 +75,7 @@ cross-program shorthand to its source document.
   applicator `generosityUpdates.applyFoodDeltasToUpdates` at generosityUpdates.js
   :65, which treatyTransfer.js:32/:121-136 names "the existing single applicator"
   FOR ITS LANE; a second near-identical delta fold at applyWorldPulse.js:322; the
-  magic-buffer draw magicBufferApply.js:357; a DM event leg mutateWorld.js:1143).
+  magic-buffer draw magicBufferApply.js:357; a DM event leg mutateWorld.js:1143). [CORRECTED 2026-10-16 (coherence fold) — the second near-identical fold lives at `applyWorldPulse.js:92-110` (DESIGN_FP_ARCH_TR.md S15 — the :322 address REFUTED, the fold confirmed)]
   TR-4 routes ALL new grain-arrival credit through `applyFoodDeltasToUpdates` and
   lands a source-scan pin: no SIXTH writer of storageMonths lands with this
   program — the five existing sites are the fence the T7 walker covers. Whether
@@ -128,7 +128,7 @@ cross-program shorthand to its source document.
   generationally (pact verdicts, house fortunes, the corner's breaking, diaspora-
   grade memory of the gouge). Every wave below names its fast layer and its slow
   verdict; every clock is denominated against INTERVAL_WEEKS and asserted by the
-  SP-7 temporal walker; treaty-years are 52-week years (WR-0c item 4, LANDED).
+  SP-7 temporal walker; treaty-years are 52-week years (WR-0c item 4, LANDED). [CLARIFIED 2026-10-16 (coherence fold §4 / §3.1.11) — the SP-7 temporal walker is unbuilt; the fold re-charters it as `tests/lint/timeBase.walker.test.js` riding the next spine unit (WY-1 owns the mode-speed table)]
 
 ### 1c Recorded hazards that WILL bite these waves (each has bitten this estate)
 - **JSON-alias trap:** factors and house members ARE `npcs[]` objects in memory;
@@ -197,7 +197,7 @@ cross-program shorthand to its source document.
 | Substrate | Where (survey-verified) | State |
 |---|---|---|
 | M2 supply shipments: routed non-food inputs, K=3 ranked producers, hostile-gate interception, banditry, starvation latch + mandatory causal receipt, siege interdiction feedback | `spatial/supplyShipments.js` (interception :209, starvation :404-406, receipt :227, interdiction :504); adapter `worldPulse/supplyKernel.js` | BUILT, LIT under spatial canon; FOOD EXCLUDED by design |
-| M6a commodity flow: finite origin stocks, integer caravan loads (MAX_SHIP 12), en-route taps, banditry, EXACT five-term integer conservation, kernel refuses to persist imbalance; seizures conserve loot to the seizer | `spatial/commodityFlow.js` (assertGoodsConservation :260, seizure :613-617); guard `supplyKernel.js:488-493` | BUILT; gated `commodityFlowEnabled`, lit only in full_simulation (simulationRules.js:424). **Stricter conservation than war's.** |
+| M6a commodity flow: finite origin stocks, integer caravan loads (MAX_SHIP 12), en-route taps, banditry, EXACT five-term integer conservation, kernel refuses to persist imbalance; seizures conserve loot to the seizer | `spatial/commodityFlow.js` (assertGoodsConservation :260, seizure :613-617); guard `supplyKernel.js:488-493` | BUILT; gated `commodityFlowEnabled`, lit only in full_simulation (simulationRules.js:424). [CORRECTED 2026-10-16 (coherence fold) — lit in `realistic_regional` AND `full_simulation` (simulationRules.js:896, :910-912) and ABSENT from the birth door (DESIGN_FP_ARCH_EC.md S28)] **Stricter conservation than war's.** |
 | M6b entrepôts: earned EWMA centrality, derived toll (TOLL_MAX cap), four co-built brakes, transshipment institution founding, centralityGini soak guard | `spatial/entrepots.js` (:112-116 foundings, :370 gini), `entrepotKernel.js` | BUILT. Toll is a DERIVATION — no seat chooses a rate; no actor owns the income (T2) |
 | M6c dispatch EV: belief-gated go/no-go (`netDanger = believedDanger·caution − needPremium·appetite`), REFUSE/RESUME deadband, dynamic per-origin appetite with "emboldened" receipts, vassal must-go overrides | `spatial/dispatchEV.js` (:12-31, :75, :185-190); appetite receipts supplyKernel.js:599-602; ledgers `merchantAppetite` + `dispatchWillingness` | BUILT — **the SP-4a seed pattern**; belief gates WHETHER, nothing yet chooses WHERE by believed markets |
 | M6d trade flow tally + display bands (shortage/adequate/surplus) beside the sacred generation baseline; blockade ⇒ decay to autarky | `spatial/tradeFlow.js` (:13-18), `display/tradeFlowEconomics.js` | BUILT — display substrate, deliberately unconserved |
@@ -214,12 +214,12 @@ cross-program shorthand to its source document.
 | Embargo entries (three organic): conscience embargo (EMBARGO_FLOOR 0.15, auto-exit), weaponized-dependency collapse rule, merchant lever (±0.05, mean-reverting) | `institutionTolerance.js:52-61,112-119`; `relationshipRulesAdversarial.js:535-627`; `settlementStrategy.js:193-201` | BUILT — organic, hysteresis-guarded; **no typed grievance record names WHY** |
 | Merchant agency today: MERCHANT_OBJECTIVE seat bias, commerce blocs damp deploy/lift sue_for_peace, faction interest domains ['wealth','trade_connectivity','debt'], institution-founding contests | `scoringObjective.js:71-114`, `settlementPolitics.js:595-617`, `factionCompetition.js:32,661-729`, `factionArchetypes.js:63` | BUILT — biased choosers and intra-town contests; **no faction holds assets, owns a route, or acts across settlements** |
 | Commons voice ladder [CORRECTED 2026-08-02 (fp-audit) — omitted at drafting; TR-6's riot counterforce consumes it]: petition → gathering → riot-band escalation (RUNG_KIND :155), deterministic from existing legitimacy/corruption/unrest reads; **binding COHESION LAW in its header: a CONSUMER + REFRAMER — no new effect vocabulary, no new writer; consequences route EXCLUSIVELY through existing writers (legitimacy + stressors)** | `worldPulse/commonsVoiceKernel.js` (virtual flag `commonsVoiceEnabled`) | BUILT, DARK — censused BUILT/DARK by DESIGN_FP_POPULATIONS.md as well; the crowd may TRIGGER, never move goods |
-| realmPressure01: designed for three consumers (war motive, trade-agreement propensity, expansion); ONLY the war path consumes it | consumer `warReasons.js:696-698,747` → `demographicsWar.js:172,295-312`; design DESIGN_DEMOGRAPHIC_ENGINE.md:373-377 | BUILT, half-wired — **"buy the grain before you bleed for it" has no code path. TR-5 lands it.** |
+| realmPressure01: designed for three consumers (war motive, trade-agreement propensity, expansion); ONLY the war path consumes it | consumer `warReasons.js:696-698,747` → `demographicsWar.js:172,295-312`; design DESIGN_DEMOGRAPHIC_ENGINE.md:373-377 | BUILT, half-wired — **"buy the grain before you bleed for it" has no code path. TR-5 lands it.** [see the bracket at :872] |
 | perceivedScarcityOf: exists; sole consumer is the war-motive path | `demographicsWar.js:206` (consumer :302) | BUILT — the peace-side read this program generalizes via SP-2 |
 | Generosity estate + trade overture: relief/refusal/credit_default/purchase/refuge/trade_overture receipts, warmth-carrying overture news, EV + reactions | `worldPulse/generosityKernel.js`, `generosityNews.js` (tradeOvertureNews :173), `spatial/generosityEV.js`, `generosityReactions.js`; ledger `spatialLedgers.tradeOverture` (census row subsystemRowsWaves.js:172 — [CORRECTED 2026-08-02 (fp-audit)]: the prior :379 citation was the routeNetwork row; the survey's pairing was routeNetwork:379 + tradeOverture:172 and the volume split it the wrong way) | BUILT — the famine_relief mirror's evidence lane already exists |
 | The plan lane: band-crossing draw, ONE persistent plan per settlement, proposed→underway→completed/failed/abandoned, startup cost, duration, named failures, cooldown, receipt | `worldPulse/demographicsPlans.js` (header contract) | BUILT — TR-7 reuses the GRAMMAR only (the file's own fence forbids generalizing the writer) |
 | Belief machinery: per-observer beliefMap, distance-priced news, rumor network, credibility ladder | `worldPulse/beliefMap.js` + wave-A spatial | BUILT (SPINE: SP-2 extends with the BELIEVED SCARCITY subject family) |
-| Posture/appetite: merchantAppetite (per-origin, outcome-learned, reversal-live) | `spatialLedgers.merchantAppetite` | BUILT — SP-4a generalizes it; this program CONSUMES `postureOf`/`riskToleranceOf` |
+| Posture/appetite: merchantAppetite (per-origin, outcome-learned, reversal-live) | `spatialLedgers.merchantAppetite` | BUILT — SP-4a generalizes it; this program CONSUMES `postureOf`/`riskToleranceOf` [RULED 2026-10-16 (coherence fold §3.3.3) — the build spells `courtPostureOf` / `courtRiskAppetiteOf` (CR-C4-1, strategicPosture.js:222); `riskToleranceOf` is the roads' NPC read (roads/state.js:319), not SP-4's. Every `postureOf`/`riskToleranceOf` in this volume reads as the court read] |
 | Moral substrate: moral drift referenced from pulseKernel.js + disposition.js; moralInstitutionPressure.js, moralMartialLean.js present | grep-verified references; exact drift module path **VERIFY-AT-BUILD** | PRESENT — TR-6's moral pricing reads it, never rebuilds it |
 | Measurement estate: 9 trade/economy certification rows (routeLifecycleEnabled alone carries 7 invariants); realmSelfSufficiency additive v5 yearly field, bounds-pinned; economy-family aliveness floors + diversity gates + prosperity motion | `certification/subsystemRows*.js` (:268,:320,:398,:136,:247,:347,:444,:163,:157), `behavioralContract.js:150-191`, `behavioral-observation.mjs:855,911` | BUILT — **detects a DEAD economy, not a MONOTONOUS one**; no endings vocabulary, no dedicated receipt section, prose-only trend envelope, tickScanBudget blind to every trade lane, route_* absent from WHAT_PHRASES |
 
@@ -231,7 +231,7 @@ price/scarcity reads in the commerce core (nine modules, zero belief imports) ·
 actor books at faction grain (no house holds anything) · the trade endings
 vocabulary + envelopes + receipt section · WHAT_PHRASES rows for the five route_*
 kinds · the realmPressure trade-agreement consumer · the standing food-export
-quantity · trade_exclusivity/market_access/toll_exemption terms · tickScanBudget
+quantity · trade_exclusivity/market_access/toll_exemption terms [RULED 2026-10-16 (coherence fold §3.3.1) — the spelling is `exclusivity` (J-GR3-C2); the three rows EXIST since GR-3 (peaceTermsCatalog.js:306-308, family `commercial`, executor `'seam'`), so "absent" is history; this is the pointer the war volume promised beside this row] [see the bracket at :872] · tickScanBudget
 coverage of trade lanes.
 
 **FORBIDDEN (ruled, not merely absent):** conserved coin (T2) · numeric prices
@@ -305,7 +305,7 @@ through the abstract bounded-rounds path; LIT (TR-8), the crossing mints a
 commercial errand and the same evaluators run at parlay on each party's own
 picture. One evaluator, two transports. CROSS-PROGRAM NOTE (report-worthy, not
 vetoable here): WR-10's bundle names trade rights (exclusivity/market access/toll
-exemption) as composable components; those terms DO NOT EXIST (survey-verified) and
+exemption) as composable components; those terms DO NOT EXIST (survey-verified) and [CORRECTED 2026-10-16 after skeptic S2 seat C — the three trade-rights rows EXIST at peaceTermsCatalog.js:306-308 (`exclusivity`, `market_access`, `toll_exemption`), producer-less; neither the trade walker nor PIN-6 parses this phrase (replayed), so the bracket is lawful here.]
 land in TR-5 — until TR-5 lands, WR-10's bundle composes streams/stores/allyship/
 settlements/peace only. Neither program forks the other's writer.
 
@@ -413,7 +413,7 @@ worldState.spatialLedgers.ventures            — TR-7, writer ventureLedger.js
 Pacts             — NO new ledger: the existing treaties artifact (SP-3 law).
 Believed scarcity — NO new ledger: beliefMap subject family (SP-2).
 Factor errands    — NO new ledger: SP-1 spatialLedgers.errands, purpose commercial.
-Corner positions  — NO new ledger: house books stock interests over real M6a stocks.
+Corner positions  — NO new ledger: house books stock interests over real M6a stocks. [see the bracket at :955]
 Grain flows       — NO new ledger: M6a commodityStocks/supplyShipments + granary.
 ```
 
@@ -451,6 +451,8 @@ price in her head (TR-8) · T-9 the tribute taken on the road (TR-4) · T-10 the
 ruin of the house (TR-7) · T-11 the silent road estate speaks (TR-9).
 
 ### TR-1 — THE CASUS COMMERCII (flag `casusCommerciiEnabled`)
+[ADDED 2026-10-16 (coherence fold, req 16/17) — FIRST-VISIBLE: within a month once mounted (EC-2 car 1) — a severance/partnership band-crossing receipt on the relations line; today NONE (the writer is unmounted, spatialUsage.js:362); the honored-record verdict (T-7) is multi-year · TIER: aspatial-safe (3 of 8 pairs read live state, commercialReasons.js:58-61) · mount: EC-2 car 1, after the release is pushed and deployed (OD-EC-4) · DEGRADED ARM: n/a — aspatial-safe; the belief-scored pairs (contraband_injury, famine_profiteering) score off a belief only under belief infoMode (PLAUSIBLE)]
+[CORRECTED 2026-10-16 (coherence fold §3.2.10) — ABSORBED BY DESIGN_FP_ARCH_EC.md: not rebuilt — DESIGN_FP_ARCH_EC.md EC-2 car 1 MOUNTS it (J-EC-1, OD-EC-1); BUILT DARK at d7ea69a4b (2026-08-04), the writer UNMOUNTED (spatialUsage.js:362: advanceCommercialReasons has no caller in src/); 3 of 8 pairs read live state (commercialReasons.js:58-61)]
 *Historical archetype: the Hanse's grievance rolls — every embargo of Novgorod
 carried a written reason.*
 - **Scope:** a typed commercial-grievance/partnership ledger paralleling war's
@@ -531,6 +533,8 @@ carried a written reason.*
   (covert-sourced entries ride includeCovert).
 
 ### TR-2 — THE HOUSE (flag `merchantHousesEnabled`)
+[ADDED 2026-10-16 (coherence fold, req 16/17) — FIRST-VISIBLE: within a month once mounted (EC-11) — a house act receipt ("House Verren took an interest in the river road"); books bands move on season-grade dwell; today NONE (no pulse mount) · TIER: aspatial-safe (books, acts); sponsored caravans need spatial canon + `commodityFlowEnabled` · dispatch: as EC's absorbed wave, after the release is pushed and deployed (OD-EC-4) · DEGRADED ARM: books and acts without caravans]
+[CORRECTED 2026-10-16 (coherence fold §3.2.10) — ABSORBED BY DESIGN_FP_ARCH_EC.md: cleanly, as EC-11 (OD-EC-1); BUILT DARK at c8c21a9f3 (09-24; cures d36f43c21), no pulse mount — EC-11 lands it from the EC kernel]
 *Historical archetype: the Fugger, who financed emperors and were a family, a firm,
 and a faction at once.*
 - **Scope:** the merchant actor at FACTION grain (Law One: no micro-agents). An
@@ -615,7 +619,7 @@ and a faction at once.*
   writers, its own receipts; TRADE builds NO stream-physics API for external
   consumers (no TR wave ever specced one — audit-verified); the TRADE side is a
   READ SURFACE only — house books/fortune bands read by FAITH's executor.
-  Owning-wave reconciliation lands in COUPLINGS CPL-7/CPL-12).
+  Owning-wave reconciliation lands in COUPLINGS CPL-7/CPL-12). [STRUCK 2026-10-16 (coherence fold §3.1.5) — the house-fortune tithe SOURCE is struck: there is ONE tithe — W-COIN's `tithe_share` is the coin arm, WF-7's `templeWealth` is a BAND derived from it (or from piety × temple presence where the treasury is dark); houses pay the seat's tax, and the temple reads the SEAT's books through INT, never a house's]
 - **Endings wired:** `fortune` and `ruin` at house grain (envelopes in TR-9).
 - **Herald contract:** house rise/fall band-crossings and act receipts in the
   house voice; pacing-registered.
@@ -633,7 +637,7 @@ and a faction at once.*
 under full owner delegation — vetoable; a RECORDED DECISION + SHAPE, not a
 drafted wave: the full spec (all requirements, pins, bands) is drafted when the
 owner sequences it, as its own audited slice behind its own flag
-`syndicateHousesEnabled`, after TR-2]:** the criminal syndicate is A HOUSE, not
+`syndicateHousesEnabled`, after TR-2]:** [ADDED 2026-10-16 (coherence fold, req 16/17) — FIRST-VISIBLE: UNMEASURED (reserved, undrafted — OD-EC-16) · TIER: UNMEASURED · DEGRADED ARM: dark] [CORRECTED 2026-10-16 (coherence fold §3.2.10) — ABSORBED BY DESIGN_FP_ARCH_EC.md: it stays RESERVED (OD-EC-16 RULED: leave reserved; EC-8's `competition` read carries the Economy tab's sentence)] the criminal syndicate is A HOUSE, not
 a new actor class — SP-4a's closure holds; it binds to the house appetite
 class. Shape, all riding built machinery: a house at the existing `criminal`
 faction type (factionCatalog.js:32) carries PUBLIC books (the front — a
@@ -669,10 +673,12 @@ temple's wealth is believer-side (WF-7), the syndicate's books are covert
 its instance THERE, with its own twelve, never a default wallet.
 
 ### TR-3 — BELIEVED MARKETS (flag `believedMarketsEnabled`)
+[ADDED 2026-10-16 (coherence fold, req 16/17) — FIRST-VISIBLE: within a month — a believed-band line on the market row; the wrong-market arrival on the route's own weeks (computed and dropped today; EC-2 car 2 forwards it); conviction decays seasonally · TIER: spatial canon + belief infoMode (`beliefsActive`, beliefMap.js:204-209) + `commodityFlowEnabled` · dispatch: as EC's absorbed wave, after the release is pushed and deployed (OD-EC-4) · DEGRADED ARM: dark — the omniscient dispatch path, byte-identical]
+[CORRECTED 2026-10-16 (coherence fold §3.2.10) — ABSORBED BY DESIGN_FP_ARCH_EC.md: cleanly — EC-2 car 2 forwards `wrongMarketArrivals`, EC-14/EC-18 consume it; BUILT DARK at 0fd6b9209 (09-24), the wrong-market evidence computed and DROPPED today (EC S26)]
 *Historical archetype: the Antwerp price letters — merchants sailed on last
 month's prices and found this month's.*
 - **Scope:** SP-2's BELIEVED SCARCITY subject family consumed. Per-observer,
-  per-(market, good-class) banded beliefs ("grain is dear in the east, they say")
+  per-(market, good-class) banded beliefs ("grain is dear in the east, they say") [RULED 2026-10-16 (coherence fold §3.3.7 / J-EC-17) — a BELIEVED band renders in SP-B's words — "grain is pinched in the east, they say"; a condition word (`dear`) on a belief is the homonym the fold retires]
   riding the beliefMap's existing decay/update/forgetting laws. Writers: arrivals
   (a returning caravan writes the origin's true band home — the letters-home
   idiom), distance-priced rumor, INFO's plants (the LURE consumes this surface;
@@ -693,7 +699,7 @@ month's prices and found this month's.*
 - **Casting:** the arriving caravan's receipt may name the sponsoring house's
   factor as the letter's voice (read-wired, TR-2).
 - **Receipts:** "Grain is dear in Aldenmoor, they say — and dearer for the
-  saying" · "The caravans came for the famine and found the harvest."
+  saying" [see the bracket at :681] · "The caravans came for the famine and found the harvest."
 - **Pins (negative hardest):** dark ⇒ the omniscient dispatch path byte-identical
   (dormancy golden); the K3 structural set on every consumer module (import pin +
   token scan + guard-the-guard with the positive control at the truth-side
@@ -730,11 +736,13 @@ month's prices and found this month's.*
   lifecycle (serialize/regen/undo already pinned there); receipts only.
 - **Dossier round-trip (crown):** town page → the market line renders the LOCAL
   truth band and the town's believed picture of its neighbours in band words
-  ("Grain: fair here; dear in Aldenmoor, they say") — the "they say" is
+  ("Grain: fair here; dear in Aldenmoor, they say") [see the bracket at :681] — the "they say" is
   structural honesty, not flavor. DM toggle shows truth beside belief
   (includeGroundTruth).
 
 ### TR-4 — THE GRAIN ROAD (flag `foodCaravansEnabled`; two slices, one commit each)
+[ADDED 2026-10-16 (coherence fold, req 16/17) — FIRST-VISIBLE: within a month — the food-security line names its physical sources and wagon droughts week by week; the storageMonths verdict is seasonal · TIER: spatial canon + `commodityFlowEnabled` + `demographicsEnabled`; after WY-3 (§3.2.10f) · dispatch: as EC's absorbed wave, after the release is pushed and deployed (OD-EC-4) · DEGRADED ARM: the conserved rate arithmetic (dark ⇒ byte-identical)]
+[CORRECTED 2026-10-16 (coherence fold §3.2.10) — ABSORBED BY DESIGN_FP_ARCH_EC.md: as EC-12, and it lands AFTER WY-3 (§3.2.10f — the caravan body and the commodity round-trip pin; FP-ORDER pair 2; DESIGN_FP_ARCHITECTURE.md:1613-1628), not "any time after EC-3"; UNBUILT]
 *Historical archetype: the Roman annona — the state's grain physically sailed, and
 Rome starved when it didn't.*
 - **Slice 1 — grain rides the pipeline [CORRECTED 2026-08-02 (fp-audit) — the
@@ -842,6 +850,8 @@ Rome starved when it didn't.*
   DM cutting that road on the map sees the line change within the season.
 
 ### TR-5 — THE PACT LANE (flag `tradePactsEnabled`)
+[ADDED 2026-10-16 (coherence fold, req 16/17) — FIRST-VISIBLE: the formation receipt at its weekly crossing — but the trade half has NO OWNER (OD-FC-2), so no sentence can fire; installments and the honored record are yearly · TIER: aspatial-safe; `grain_provision`'s physical arm needs spatial canon via TR-4/EC-12 · dispatch: as EC's absorbed wave, after the release is pushed and deployed (OD-EC-4) · DEGRADED ARM: `grain_provision` on the conserved rate-stream arithmetic (§3's named degraded read)]
+[CORRECTED 2026-10-16 (coherence fold §3.2.10) — ABSORBED BY DESIGN_FP_ARCH_EC.md: PARTIALLY: EC-6 owns the READ-side executor of the three landed rows (§3.1.1; peaceTermsCatalog.js:306-308); the PRODUCER is GRAMMAR's `PACT_DRAFT_LENS` row (§3.1.1); the trade half — `grain_provision`, `route_wardenship`, the `realmPressure01` consumer, the food-export quantity debt — is RULED BY DELEGATION 2026-10-16, OD-FC-2 (recommended: EC-12 / an EC-6 stance term / EC-17's partner arm), recorded-not-deferred with that row as its slot; `tradePactsEnabled` has no gate read; UNBUILT]
 *Historical archetype: the Hanseatic kontor charter — access, tolls, and grain,
 written, sworn, and renewed or broken.*
 - **Scope [CORRECTED 2026-08-02 (fp-audit) — the chair's R1/R2/R3 rulings folded
@@ -850,21 +860,21 @@ written, sworn, and renewed or broken.*
   GRAMMAR §4 per R3: one list, one spelling, one closure contract, this volume
   points and never re-derives; and per R2 this wave lands its EXECUTORS in LAZY
   LEAF SIBLINGS consuming peaceTerms' exports — peaceTerms itself, at 794/800
-  lines, gains only net-zero seam lines): `market_access` (opens
+  lines, gains only net-zero seam lines) [CORRECTED 2026-10-16 (coherence fold §3.3.8) — peaceTerms.js measures 799/800 effective at 00b648c9d — AT ceiling: zero lines without a leaf-first car]: `market_access` (opens
   NO_TRADE/exclusion — the
   market_opened casus's instrument), `toll_exemption` (a named-pair discount on
   the entrepôt read — the derivation stays a derivation, the exemption is a
-  transfer of the band, T2), `trade_exclusivity` (primacy pledged: the
+  transfer of the band, T2), `trade_exclusivity` [see the bracket at :234] (primacy pledged: the
   trade_dependency channel points here while honored — tradeWar's contest gains a
   treaty-shaped incumbent), `grain_provision` (the standing food-export quantity —
   the demographicsRates.js:271-277 debt PAID: grain-months per 52-week year,
   delivered physically when TR-4 is lit, conserved arithmetic when dark),
-  `route_wardenship` (a patrol obligation priced against leg loss rates).
+  `route_wardenship` (a patrol obligation priced against leg loss rates). [RULED 2026-10-16 (coherence fold §3.1.1) — this wave's "executors + producers" now point elsewhere: DESIGN_FP_ARCH_EC.md EC-6 owns the READ-side executor of the three landed rows (`exclusivity`, `market_access`, `toll_exemption`, peaceTermsCatalog.js:306-308 — the stance derivation IS the executor, one read, no ledger), and the PRODUCER (the drafter's commercial lens) is GRAMMAR's `PACT_DRAFT_LENS` row, keyed on EC-17's need read when lit and on TR-3's believed dearness when dark] [RULED BY DELEGATION 2026-10-16 (OD-FC-2 — TR-5's trade half — `grain_provision`, `route_wardenship` (neither catalogued), the `realmPressure01` trade-agreement consumer ("buy the grain before you bleed for it"; code: consumed only by war, warReasons.js:803) and the food-export quantity debt (demographicsRates.js:271-277) — is OWNED BY NOBODY today: EC hands it to GRAMMAR and GRAMMAR's commercial family is three rows naming TR-5. The chair recommends `grain_provision` → EC-12, `route_wardenship` → an EC-6 stance term, the `realmPressure01` consumer → EC-17's partner arm; until ruled all three are RECORDED-NOT-DEFERRED with this row as their slot (§3.1.2) (coherence fold, 2026-10-16)]
   FORMATION is SP-3's peacetime lane: typed trigger = the trade-demand crossing —
   composed of believed scarcity ≥ dear on a salient good (TR-3 × tradeSalience),
   realmPressure01's hunger arm (THE DEAD CONSUMER LANDS: "buy the grain before
   you bleed for it" — DESIGN_DEMOGRAPHIC_ENGINE.md:373-377's named intent, wired
-  at last), and posture (SP-4). FORMATION IS AMENDMENT-SHAPED (the chair's R1
+  at last), and posture (SP-4). [see the bracket at :872] FORMATION IS AMENDMENT-SHAPED (the chair's R1
   ruling [CORRECTED 2026-08-02 (fp-audit)]): the treaty ledger's
   one-instrument-per-pair key is LAW, not a bug — a peacetime proposal AMENDS
   the pair's standing instrument, minting it when absent; reciprocal/two-sided
@@ -894,7 +904,7 @@ written, sworn, and renewed or broken.*
   kept these nine years, and the ninth year broke it."
 - **Pins (negative hardest):** below-threshold pressure mints NO proposal (pact
   spam's negative — reachability both arms on generated corpora); T-5 TELLABLE
-  executed end-to-end: one fixture, hunger-pressured realm, lit lane ⇒ pact forms,
+  executed end-to-end: [see the bracket at :872] one fixture, hunger-pressured realm, lit lane ⇒ pact forms,
   delivery lands, realmPressure falls, the demographic war-motive weight falls —
   five subsystems, one causal chain, receipts at every link (the composition-pin
   idiom); the same fixture DARK ⇒ the war path unchanged byte-identical;
@@ -911,7 +921,7 @@ written, sworn, and renewed or broken.*
 - **Couplings:** TRADE×GRAMMAR (this wave IS SP-3's trade consumer — formation
   triggers and the term family are declared there, elaborated here; [CORRECTED
   2026-08-02 (fp-audit)] this wave SUPPLIES the commercial family that GR-2's
-  `trade_demand` trigger drafts — until TR-5 lands, trade_demand runs GR-2's
+  `trade_demand` trigger drafts [see the bracket at :872] — until TR-5 lands, trade_demand runs GR-2's
   declared dark arm, and the trigger's reachability pin scopes to TR-5's commit;
   GRAMMAR §4's `labor_compact` names a TRADE production arm as its consumer —
   DEFERRED here, a decision not an omission [CORRECTED 2026-08-02 (fp-audit)]:
@@ -934,13 +944,15 @@ written, sworn, and renewed or broken.*
   renders the same row red-worded with the casus.
 
 ### TR-6 — THE CORNER + THE FAMINE SPECULATOR (flag `corneringEnabled`)
+[ADDED 2026-10-16 (coherence fold, req 16/17) — FIRST-VISIBLE: within a month — purchase receipts and the `corner` pressure; the cornered/monopoly verdicts are seasonal to yearly · TIER: spatial canon + belief infoMode + `commodityFlowEnabled` + `commonsVoiceEnabled` (OD-FC-3) · dispatch: as EC's absorbed wave, after the release is pushed and deployed (OD-EC-4) · DEGRADED ARM: dark — §3 rules no degraded arm (a dark mandatory counterforce is an invalid config)]
+[CORRECTED 2026-10-16 (coherence fold §3.2.10) — ABSORBED BY DESIGN_FP_ARCH_EC.md: PARTIALLY, as EC-13: MONOPOLY keeps THIS wave's definition (§3.2.10a — EC-8's processor count is the Why panel's `competition` read, never the ending); the holder is a `held` partition on the origin's `commodityStocks` record (§3.2.10c, RULED BY DELEGATION 2026-10-16, OD-FC-11); UNBUILT]
 *Historical archetype: the forestaller of the medieval assize laws — and Joseph
 Leiter, whose wheat corner broke him in a season.*
 - **Scope (the program's crown drama — full depth by owner instruction):** a house
   (TR-2) reading a believed scarcity TRAJECTORY toward dear/desperate (TR-3) may
   act `corner_attempt`: sponsored caravans BUY at believed-soft markets (real M6a
   purchases into house-interest warehouse stocks — physical, conserved, ceiling-
-  capped), accumulating a stock interest. THE CORNER GATE: the house's held share
+  capped), accumulating a stock interest. [RULED 2026-10-16 (coherence fold §3.2.10c) — "M6a has no holder concept" (DESIGN_FP_ARCH_EC.md EC-13): the purchases land as house `interests` of kind `stock` whose HOLDING is a `held` sub-count on the origin's `commodityStocks` record — one stock, one record, a held partition, never a second ledger (J-TR-5 holds); the corner gate's numerator is that partition] [RULED BY DELEGATION 2026-10-16 (OD-FC-11 — the held partition is a persisted-shape change (it also carries the crown's precautionary stock, EC-16); until ruled this wave has no holder (coherence fold, 2026-10-16)] THE CORNER GATE: the house's held share
   of the settlement's REACHABLE supply of that good — denominator from an
   INDEPENDENT supply census (truth-side: local stocks + inbound route capacity;
   the self-referential-pin hazard is the reason this sentence exists) — crosses
@@ -972,7 +984,7 @@ Leiter, whose wheat corner broke him in a season.*
      and the built seizure physics (commodityFlow.js:605-620) seizes a CARAVAN'S
      CARRIED LOAD at a gate mid-route — no stationary-stock arm exists]:**
      famine_profiteering at magnitude feeds the BUILT commons ladder: petition →
-     gathering → riot rung. The riot TRIGGERS — it never moves goods (the
+     gathering → riot rung. [RULED 2026-10-16 (coherence fold §3.1.3) — this term lands as a ROW in POP's closed `GRIEVANCE_INPUTS` registry (kind · owning program · weight · cap, in `commonsVoiceKernel.js`) in this wave's own commit, never as an added term; the composite's clamp and POP-2's pins re-run on the row; lighting `commonsVoiceEnabled` is RULED BY DELEGATION 2026-10-16, OD-FC-3] The riot TRIGGERS — it never moves goods (the
      kernel's own cohesion law is preserved: it invents no writer): TR-6's own
      house-side machinery READS the riot rung against the house's granary and
      executes THE WAREHOUSE SEIZURE — NEW conserved machinery extending the same
@@ -1012,7 +1024,7 @@ Leiter, whose wheat corner broke him in a season.*
   (TR-2's formation rule); the smugglers' road (hidden paths cannot be
   monopolized — the house holds the gate, never the woods); the pact lane
   (`market_access` opens what the monopolist holds shut). Ending: `monopoly`
-  mints on the dwell crossing — envelope RARE, policed in TR-9 (J-TR-11).
+  mints on the dwell crossing — envelope RARE, policed in TR-9 (J-TR-11). [RULED 2026-10-16 (coherence fold §3.2.10a) — THIS definition stands: DESIGN_FP_ARCH_EC.md EC-8's processor-count reading (a sole processor, entry impossible, 52 ticks) is the Why panel's `competition` read, never the ending — it had no entry counterforce (T5) and silently redefined an owner-settled ending]
 - **Belief posture:** the MOTIVE is belief (the speculator can be wrong — a
   cornered good whose famine never comes is carry-cost ruin); the GATE is truth
   (no phantom corners — you hold wagons or you hold nothing); the two never
@@ -1084,7 +1096,7 @@ Leiter, whose wheat corner broke him in a season.*
   the break — headline-class, the pacing governor's significance scaling is
   MANDATORY here (this arc can flood a season).
 - **Lifecycle line:** corner positions are house-book stock interests over real
-  M6a stocks — they serialize/regen/undo with the houses ledger and the
+  M6a stocks [see the bracket at :955] — they serialize/regen/undo with the houses ledger and the
   commodity stocks; no separate corner object exists to leak.
 - **Dossier round-trip (crown):** town page → the market line + the house entry
   together tell it: "Grain: desperate — House Verren holds the granaries" with
@@ -1092,6 +1104,8 @@ Leiter, whose wheat corner broke him in a season.*
   after the break, the chronicle keeps it ("the winter of the Verren corner").
 
 ### TR-7 — VENTURES (flag `venturesEnabled`)
+[ADDED 2026-10-16 (coherence fold, req 16/17) — FIRST-VISIBLE: within a month — the departure receipt; the return on the route's own weeks (a season's circuit) · TIER: spatial canon + `commodityFlowEnabled`; the believed-dear choice needs belief infoMode; `new_route` needs `routeLifecycleEnabled` · dispatch: as EC's absorbed wave, after the release is pushed and deployed (OD-EC-4) · DEGRADED ARM: `new_route` suppresses to {far_market, joint_venture} while J is dark]
+[CORRECTED 2026-10-16 (coherence fold §3.2.10) — ABSORBED BY DESIGN_FP_ARCH_EC.md: cleanly, as EC-14; UNBUILT]
 *Historical archetype: the joint-stock voyage — the Muscovy Company sailed on
 subscribed shares and sank or paid twentyfold.*
 - **Scope:** the receipted risk instrument through the plan lane's GRAMMAR (T9:
@@ -1160,6 +1174,8 @@ subscribed shares and sank or paid twentyfold.*
   autumn"); the chronicle keeps concluded ventures as the house's story.
 
 ### TR-8 — THE TRAVELING FACTOR (flag `factorErrandsEnabled`; two slices)
+[ADDED 2026-10-16 (coherence fold, req 16/17) — FIRST-VISIBLE: within a month — departure and "no word from the salt road" receipts; the circuit and the ransom arc are seasonal · TIER: spatial canon + the errand spine (`errandSpineEnabled`, dark) + belief infoMode for the snapshot · dispatch: as EC's absorbed wave, after the release is pushed and deployed (OD-EC-4) · DEGRADED ARM: the abstract bounded-rounds pact transport (dark ⇒ byte-identical)]
+[CORRECTED 2026-10-16 (coherence fold §3.2.10) — ABSORBED BY DESIGN_FP_ARCH_EC.md: as EC-15; it cannot light validly while TR-5's flag has no gate read (OD-FC-2); UNBUILT]
 *Historical archetype: the Medici branch factor — the firm's man abroad, carrying
 prices in his head and the family's credit in his name.*
 - **Slice 1 — commercial errands.** SP-1 consumed: purpose `commercial`, the
@@ -1231,6 +1247,8 @@ prices in his head and the family's credit in his name.*
 
 ### TR-9 — TRADE CONVERGENCE INSTRUMENTATION (no flag — measurement, envelopes,
 certification; the program's acceptance harness)
+[ADDED 2026-10-16 (coherence fold, req 16/17) — FIRST-VISIBLE: none — instrumentation · TIER: n/a (measurement) · as EC-10 · DEGRADED ARM: an envelope over a dark family reports an honest zero]
+[CORRECTED 2026-10-16 (coherence fold §3.2.10) — ABSORBED BY DESIGN_FP_ARCH_EC.md: as EC-10 — TR-9c's contract BUILT at c7933e845 (2026-08-04), its collectors, envelopes and eight certification rows ABSENT; the seven instruments are slotted by §3.2.10e: tickScanBudget lanes, house-Gini, the corner envelope, the pact-mix guard and the deciding-component histogram are EC-10 rows; the self-sufficiency trend envelope is J's (dark, an honest zero); the route_* Herald debt (T-11) is J's lighting unit]
 *Historical archetype: the Domesday survey — the realm audited what it built.*
 - **The tradeConvergence contract, contract-first** (the warConvergenceContract.js
   pattern, survey-named as directly reusable): `TRADE_ENDING_KEYS = {fortune,
@@ -1248,7 +1266,7 @@ certification; the program's acceptance harness)
   route-decay evidence) — an HONEST PERMANENT ZERO while `routeLifecycleEnabled`
   is dark, per §3 [CORRECTED 2026-08-02 (fp-audit)]; severance = the formal cut
   with casus; cornered = TR-6's
-  seasonal hold (envelope RAREST).
+  seasonal hold (envelope RAREST). [see the bracket at :1027]
 - **The deciding-component histogram:** which of provision/circulation/sustenance
   moved realmSelfSufficiency each year (the data exists in receipts today and
   never reaches a field — survey-verified); plus the SELF-SUFFICIENCY TREND
@@ -1313,7 +1331,7 @@ certification; the program's acceptance harness)
 - **J-TR-2 (two ledgers, one boundary):** commercialReasons is SEPARATE from
   warReasons; commerce reaches war ONLY through tradeWar's existing intent
   deposit reading severance magnitude. VETO merges the taxonomies or mints a
-  commercial casus directly into the war ledger.
+  commercial casus directly into the war ledger. [RULED 2026-10-16 (coherence fold §3.2.10b) — SUPERSEDED IN PART by the owner's E14 ("go on conquest", DESIGN_FP_ARCH_EC.md): commerce gains a SECOND door to war — a persistent critical need read into `resource_pressure` as one own-side truth input (§3.2.13); the per-good FOE-side read is RULED BY DELEGATION 2026-10-16, OD-FC-10 (recommended: record the door, build no selector — T4)]
 - **J-TR-3 (the house is a faction with books):** no new actor class; books are
   event-accrued persisted bands — the second disclosed exception to
   never-store-a-derivable (J-WR-3's idiom). VETO re-derives books from the
@@ -1330,7 +1348,7 @@ certification; the program's acceptance harness)
   generation stash.
 - **J-TR-5 (the corner is books, not a ledger):** corner positions are house
   stock interests over real M6a stocks; no corner object. VETO a dedicated
-  corner ledger.
+  corner ledger. [see the bracket at :955]
 - **J-TR-6 (robbed tribute becomes a claim):** slice-2 compliance credits
   arrival; a receipted robbery converts the balance into a claim against the
   robber, and the creditor's picture decides what it believes happened. VETO
@@ -1395,7 +1413,7 @@ R5 ruling) and are signed there.]
 ## in the house voice, at the Bound-Book register floor; every one with id + full
 ## address chain + typed action + named settlements + recorded reason)
 
-- "Grain is dear in Aldenmoor, they say — and dearer for the saying" (TR-3)
+- "Grain is dear in Aldenmoor, they say — and dearer for the saying" (TR-3) [see the bracket at :681]
 - "The caravans came for the famine and found the harvest" (TR-3)
 - "They shut their market to us and called it prudence" (TR-1)
 - "Nine years the grain compact held; the ninth year broke it" (TR-1/TR-5)
@@ -1423,7 +1441,7 @@ most likely to flood a season, and the governor is the editor by law.
    negotiationPictures (WR-7's), TR-8 consumes SP-1 + WR-7b's hold writer.
 2. Build order: TR-1 → TR-2 → TR-3 → TR-4 → TR-5 → TR-6 → TR-7 → TR-8 → TR-9
    (TR-9's contract module may land contract-first any time after TR-1 — the
-   war precedent — but its envelopes close the program).
+   war precedent — but its envelopes close the program). [SUPERSEDED BY EVENT 2026-10-16 (coherence fold) — the build and lighting order is DESIGN_FP_ARCH_EC.md §17's phases (OD-EC-1 ABSORB, OD-EC-4): no TR flag lights before EC's Phase E, TR-4 after WY-3, the corner LAST; FP-ORDER pair 2's trade half is history]
 3. Lighting order = build order, after `demographicsEnabled` and
    `commodityFlowEnabled` per §3's dependency ruling; no TR flag joins the
    standing lighting batch; all light at the owner-signed soak.
