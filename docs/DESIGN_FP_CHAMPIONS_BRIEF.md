@@ -13,6 +13,7 @@
 3. "also to state that these NPCs may decide to act (activate their amplifiers) or not for whatever personal reasons. Just because a beast master walks into a town doesn't mean that they are going to automatically breakdown defences. Just because a captain is in a city under siege doesn't mean they are goingto help either or. Some may seek employment first, others are more capricious. and maybe some are simply charitable. I think these should depend on personality and traits largely. Also they should form habits."
 4. "what are your thoughts on this system as we are discussing it? can you save it right now after you share your thoughts? … i'm excited about it."
 5. "oh and champions can still be refused and refused at the gate to cirucmsuance or reputation"
+6. On the chair's four open decisions (death in the engine's hands; how many per world; may courts hire villains; may a champion leave a successor): "courts can hire villains. but such hiring is clandestine. there should be a system of confirmation based on our spy system that if let out, would damage thecourt's repuation. everything else is no, champions is left to the DM on the number. no on a successor because that is entering into the fate area."
 
 ---
 
@@ -53,6 +54,12 @@
 
 **Contests.** A champion and villain of one domain in one town contest it (a hearing); repeated contests make a nemesis arc.
 
+**The owner's rulings (message 6).**
+- **Death is never the engine's.** A champion may fail, lose renown and be captured; dying is the DM's alone.
+- **The number is the DM's.** No engine cap; the DM authors as many as the story wants.
+- **No successor.** A champion leaves no heir, apprentice or name-bearer: that is the fate area.
+- **Courts may hire villains, clandestinely.** The hire is a SECRET of the employing court. It can leak through the information and espionage systems: rumor; an enemy spy's `confirm` product (one of ES's three landed products, `acquire · confirm · refute`); a handler's meeting caught at the territory's edge; the villain itself, captured, giving up its employer by its own nature (loyal or greedy). Exposure is a SCANDAL: the employer's standing falls at home and with every court that comes to believe it, and the court the villain worked against gains a grievance. The confirmation is belief-decided, so a court can be accused by rumor before it is confirmed, and a deceiver can fake the trail.
+
 **Refusal (owner, message 5).** A champion can be refused: an employment offer refused by either side, and ENTRY refused at the gate. A court bars a character for CIRCUMSTANCE (a quarantine in plague, a war, a rival creed's saint or a heretic in a pious town, a rival's captain, a known enemy's envoy) or for RENOWN (infamy known by report, a disgraced champion, a villain whose deeds have reached it). The gate decides on what the court BELIEVES, so a villain whose deeds have not reached the town walks in, and a hero slandered by a deceiver can be turned away. The answer is `admitted · refused · admitted under watch`, a hearing (`champion_at_the_gate`), reusing the populations program's gate idiom (the column at the wall, `MIGRATION_REFUSALS`). A refused character reroutes, waits outside, or, by its own nature, tries another way in.
 
 **Hearings to register** (requirement 24): employment offer · champion–villain contest · ransom · a failure severe enough to matter · a bound character resigning; and the character's participation shown on every engagement card it touches ("Captain Vey is in Kell and has not taken up arms").
@@ -80,4 +87,4 @@
 6. The owner-parked mercenary force market (WC (e)) — keep champion hire distinct from it, or ask.
 7. Movement and belief: the errand spine, the roamer belief, migrant columns, armies; a per-character belief store, capped.
 8. Cost: a few characters deciding weekly; the per-snapshot memo idiom.
-9. Owner questions to put: death (engine never, or DM-configurable?); how many per world; whether villains may be employed by courts; the free-tier question (none: premium).
+9. ANSWERED by the owner (message 6): death never the engine's · the number the DM's · courts may hire villains clandestinely, exposure through the spy system damages the court · no successors. Still to research: which landed quantity carries a court's damaged standing at home and abroad (legitimacy, credibility, relationship trust) — one reading, no new reputation law.
