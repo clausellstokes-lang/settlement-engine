@@ -2,8 +2,9 @@
 
 - **Status:** ARCHITECTED 2026-08-15 (Fable chair, the §46 sitting). Lands on
   the ledger branch (the build branch is mid-train); **fold obligation:** to
-  the build branch, CLAIM_RE-checked, at the next integration point. Compiles
+  the build branch, CLAIM_RE-checked, at the next integration point. [CORRECTED 2026-10-16 (coherence fold) — THE STATUS OF RECORD IS docs/DESIGN_FP_COHERENCE_FOLD.md §2; this header is history. The fold obligation is DISCHARGED: this volume is on master (J-EM-12). It is NOT in the compiled order and carries none of the spine's obligations (no Req 13/14 or L10 line, no coupling prefix, no annex). In one line: LIT: none · BUILT DARK: none · UNBUILT: LG-0..LG-13+ entire (zero code at 00b648c9d: `circleNetworkEnabled`, `vesselFleetsEnabled` — 0 hits).] Compiles
   cite THIS volume plus the graded substrate — never the volume alone.
+- [RULED BY DELEGATION 2026-10-16 (OD-FC-38 — (coherence fold §3.1.20, §7; vetoable): LG stays FP-ADJACENT and takes requirement 15's obligations before any wave compiles — a requirement-13 Alignment line and an L10 EDITOR line per wave, a coupling prefix chartered in the same commit as its first registry row (§3.3.2, requirement 21c; `CHARTERED_VOLUME_PREFIXES` excludes LG today), and a named receipt annex; LG-0's willingness gate (Q2: a LIVE defect, hostile routing through a target's circle) is PULLED FORWARD ALONE, ahead of the rest of the family.]
 - **The owner's directives are the constitution of this family and are bound
   BY REFERENCE, verbatim at their recorded homes:** OWNER_DECISION_QUEUE §46
   (circles, airships, the wartime one-way law, capacity bounds; addendum:
@@ -107,32 +108,32 @@ waves ride `vesselFleetsEnabled` ∧ the ES mission flags they extend.
 
 ## §4 · THE WAVE LADDER (declared; ≤4-member trains; flag waves are boundaries)
 
-- **LG-0 — THE WILLINGNESS GATE** (mints `circleNetworkEnabled`): the
+- **LG-0 — THE WILLINGNESS GATE** [ADDED 2026-10-16 (coherence fold, req 16/17) — FIRST-VISIBLE: UNMEASURED (the repair is a refusal — a hostile route that no longer crosses a target's circle; LG travel is felt at the weekly clock, FOLD-SMALL §7) · TIER: spatial canon (one graph over `distanceRead`) · DEGRADED ARM: dark (no graph in an aspatial world)] (mints `circleNetworkEnabled`): the
   diplomatic predicate on teleport edges (the landed-defect repair, Q2's
   ruling); circle capacity attribute; the DM-tier reveal untouched.
-- **LG-1 — GRAPH FORMALIZATION**: the political predicate plumbed as an
+- **LG-1 — GRAPH FORMALIZATION** [ADDED 2026-10-16 (coherence fold, req 16/17) — FIRST-VISIBLE: none — instrumentation (the political predicate and capacity as edge attributes; the relay becomes guarded) · TIER: spatial canon · DEGRADED ARM: dark]: the political predicate plumbed as an
   edge attribute; capacity as edge cost; the transitive relay pinned by
   test (it exists; it becomes GUARDED).
-- **LG-2 — FLEETS** (mints `vesselFleetsEnabled`): derived counts, stored
+- **LG-2 — FLEETS** [ADDED 2026-10-16 (coherence fold, req 16/17) — FIRST-VISIBLE: UNMEASURED (rebuild timers run at the seasonal clock, FOLD-SMALL §7) · TIER: spatial canon · DEGRADED ARM: dark] (mints `vesselFleetsEnabled`): derived counts, stored
   commitments, the rebuild timer (`cooldownUntil` spelling), economic
   rebuild speed (§46a addendum).
-- **LG-3 — AIRSHIP TRAVEL**: the one-origin-port law, the speed factor
+- **LG-3 — AIRSHIP TRAVEL** [ADDED 2026-10-16 (coherence fold, req 16/17) — FIRST-VISIBLE: WEEKLY (travel, FOLD-SMALL §7) · TIER: spatial canon; host flag `vesselFleetsEnabled` · DEGRADED ARM: dark (the existing roads and sea lanes)]: the one-origin-port law, the speed factor
   (chair band), ground-force immunity, trade round-trips.
-- **LG-4 — INTERCEPTION**: air battles via the naval template; loss →
+- **LG-4 — INTERCEPTION** [ADDED 2026-10-16 (coherence fold, req 16/17) — FIRST-VISIBLE: none until LG-13+ (producers land here, prose after — the GR law) · TIER: spatial canon; host flag `vesselFleetsEnabled` · DEGRADED ARM: dark]: air battles via the naval template; loss →
   rebuild window; the news kinds (producers land here, prose after).
-- **LG-5 — WAR LOGISTICS**: reinforcement/supply through the network;
+- **LG-5 — WAR LOGISTICS** [ADDED 2026-10-16 (coherence fold, req 16/17) — FIRST-VISIBLE: WEEKLY (travel, FOLD-SMALL §7) · TIER: spatial canon; host flags: the war layer (`warLayerEnabled`, lit only in dramatic_campaign and full_simulation) · DEGRADED ARM: dark]: reinforcement/supply through the network;
   settlement-derived volume (§46 addendum: capacity vs throughput as two
   typed reads); the wartime one-way law; confiscation events with the
   inspection split (L-LG-5) — the army's belief read, the supply gain,
   the reroute arm.
-- **LG-6 — THE RESCUE EXCEPTION**: route-absence-triggered evacuation,
+- **LG-6 — THE RESCUE EXCEPTION** [ADDED 2026-10-16 (coherence fold, req 16/17) — FIRST-VISIBLE: UNMEASURED · TIER: spatial canon (route-absence is a graph query); war-gated · DEGRADED ARM: dark]: route-absence-triggered evacuation,
   capacity-bound, interceptable (the contested-evacuation composition is
   emergent, not authored).
-- **LG-7 — ENVOY VESSELS**: the landed envoy machinery + the ES-Da rider
+- **LG-7 — ENVOY VESSELS** [ADDED 2026-10-16 (coherence fold, req 16/17) — FIRST-VISIBLE: WEEKLY (travel, FOLD-SMALL §7) · TIER: spatial canon; host flags: the envoy keys (`envoyDiplomacyEnabled`, dark in every preset — OD-FC-39) · DEGRADED ARM: dark]: the landed envoy machinery + the ES-Da rider
   seam; interception = a credibility/casus event via the GR-4c substrate.
-- **LG-8 — NEWS CARRIAGE**: vessel arrivals deliver origin news
+- **LG-8 — NEWS CARRIAGE** [ADDED 2026-10-16 (coherence fold, req 16/17) — FIRST-VISIBLE: WEEKLY (vessel arrivals) · TIER: belief infoMode (spatial canon ∧ infoMode ≠ omniscient) · DEGRADED ARM: a proven no-op under omniscient (Q8)]: vessel arrivals deliver origin news
   (non-omniscient worlds; omniscient no-op proven).
-- **LG-9..12 — THE JOURNEY WAVES** (§46b/§46c whole): the infiltration
+- **LG-9..12 — THE JOURNEY WAVES** [ADDED 2026-10-16 (coherence fold, req 16/17) — FIRST-VISIBLE: UNMEASURED · TIER: spatial canon; host flags: `vesselFleetsEnabled` ∧ the ES mission flags (`errandSpineEnabled`, `espionageEnabled` — dark in every preset); BLOCKED-ON POP-1 · DEGRADED ARM: dark (a missing producer blocks the wave, L-LG-6)] (§46b/§46c whole): the infiltration
   channel (knowledge-gated, much-smaller multiplier); caravan cover with
   the scaling laws, refusal-by-suspicion, group fate inheritance,
   encounter shielding; wartime gate relaxation; siege lockdown with the
@@ -141,7 +142,7 @@ waves ride `vesselFleetsEnabled` ∧ the ES mission flags they extend.
   (the ransom substrate graded against the parked WR-era arm before
   chartering); refusal-continuation. **ALL BLOCKED-ON POP-1** (the
   reception producer) per §D.
-- **LG-13+ — PROSE/DOSSIER WAVES**: strictly after their producers, per
+- **LG-13+ — PROSE/DOSSIER WAVES** [ADDED 2026-10-16 (coherence fold, req 16/17) — FIRST-VISIBLE: UNMEASURED (the producers' sentences; no DM-felt sentence is authored anywhere in this volume yet — FOLD-SMALL §1) · TIER: as their producers · DEGRADED ARM: dark]: strictly after their producers, per
   the GR law.
 
 ## §46d · THE FIFTH DIRECTIVE FAMILY (owner, 2026-08-15; ODQ §125)
@@ -160,7 +161,7 @@ waves ride `vesselFleetsEnabled` ∧ the ES mission flags they extend.
   carriers — the Q8 idiom extended.
 - **Size-scaled speed**: armies AND migrating population columns travel
   slower with size (chair-derived bands, §42/§43; the transit kernels
-  gain the read).
+  gain the read). [CLARIFIED 2026-10-16 (coherence fold §3.2.16; OD-FC-13, by delegation) — the owner's §125.4 size-scaled speed binds: for columns it is a WY-4 band (column speed by size band, the army idiom), not an LG mechanism; LG consumes it.]
 - **Roaming captivity, no ransom**: settlement-less NPCs are capturable
   by bandit-class encounters, held a bounded time, released — the ransom
   machinery never mints for the untied. The LG-9+ compile grades whether
@@ -175,6 +176,7 @@ POP-family wave. Neither LG nor ES ever forks or extends it locally. The
 spy-in-column representation (§46c's map-position rule) is a PROJECTION of
 the group's column — public surfaces render the column, the DM-tier reveal
 follows the existing includeGroundTruth seam.
+[NOTED 2026-10-16 (coherence fold) — WC-0 (landed) widened the column predicates with `MILITARY_COLUMN_CLASSES` outside a POP-family wave. RULED (§3.1.7): the union stays (it shipped); ownership reads "POP owns the CIVILIAN classes, WC the MILITARY classes, ONE union, one `columnOf` whitelist"; the return class is ruled ONCE across POP/WC/LG/ES as `column_return` (not `returning`).]
 
 ## §D · SEQUENCING
 
@@ -184,6 +186,7 @@ willingness gate (LG-0) is the family's first train; its compile preflights
 the §49/§50 three obligations. Every LG band waits on Q10's prefix landing
 (the next infra act). EP/WC ordering is unaffected — LG trains interleave
 with other families under the standard dependency rules.
+[CLARIFIED 2026-10-16 (coherence fold) — this section is right and the compiled fold's J-EM-12 ("LG-1.. waits on POP-1") is the stale text (bracketed there). Before any wave compiles, the OD-FC-38 obligations at the head bind; LG-0 goes first and alone.]
 
 ## §5 · REFUSALS (recorded with reasons)
 

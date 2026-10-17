@@ -11,6 +11,8 @@
 ## census — its own rule). Where they disagree on DESIGN, the volume wins and the
 ## disagreement is a bug to report. Every judgment below is labeled JUDGMENT
 ## (vetoable). Nothing here is scheduled; every wave ships DARK.
+[CORRECTED 2026-10-16 (coherence fold) — THE STATUS OF RECORD IS docs/DESIGN_FP_COHERENCE_FOLD.md §2; this header is history. In one line: LIT: WF-0 observation floor (no flag; LANDED 09-24, 217ff1700…06025d546), WF-1 as WF-1a..1F (66fda66d4…5d18b4a0c) with the settlement obituary re-filed as WF-8a (47ea9c9ba) — `faithUnseatingEnabled` in 4 presets incl. the default (FP_LIT_ALIVE, simulationRules.js:789-792; ODQ §934.84), vacuous on every born world because the birth preset seats no deity (FPQ-62, the owner's open word) · BUILT DARK: WF-1d dissolution-names-the-fall (unreachable — `warTerminationEnabled` dark in every preset), WF-6's five term rows (GR-3a; drafting unreachable — `believedDevotionEnabled` lit nowhere, OD-FC-7) · UNBUILT: WF-2 pilgrims/legates, WF-3, WF-4 (OD-FC-8), WF-5, WF-6 executors, WF-7 tithe (§3.1.5), WF-8 remainder, WF-9]
+[ADDED 2026-10-16 (coherence fold §3.4, requirement 24 — the owner's HEARING WEEK) — ENGAGEMENT KINDS this program registers in the wave that builds each: `legate_received` / `pilgrims_received` (WF-2). Once `hearingWeekEnabled` is lit no kind resolves in the tick it arrives at a one-week advance: it mints its pending verdict and the DM may leave it, tilt it or give a verdict (never a "decree" — the Decree Registry's word); month/season/year advances run the engine default; the hearing never parks the advance cursor (skeptic S5). Each kind's pending card is its FIRST-VISIBLE sign.]
 
 **Build placement:** FAITH is FP program 5 of 6 (SP → GRAMMAR → INFO → TRADE →
 FAITH → POP → INTERIOR → COUPLINGS). Nothing in this program lights a flag, runs a
@@ -36,7 +38,7 @@ The volume cites "TERM_CATALOG (peaceTerms.js:164-188), eleven TERMS across SEVE
 families." Executed: the catalog was EXTRACTED to
 `src/domain/worldPulse/peaceTermsCatalog.js` (235 raw / ~80 effective lines);
 peaceTerms.js:126 re-imports `TERM_FAMILIES, TERM_TYPES, termLabel` from it. At
-HEAD the catalog holds **TWELVE terms across EIGHT families** —
+HEAD the catalog holds **TWELVE terms across EIGHT families** [CORRECTED 2026-10-16 (coherence fold §3.3.6) — 26 rows / 13 families at 00b648c9d (peaceTermsCatalog.js:181-342), the five faith rows at :249-266 (GR-3a); every count derives from live TERM_FAMILIES (this R1's own rule), and DESIGN_FP_GRAMMAR.md §4 lists every landed row by pointer.] —
 `sovereignty_transfer` (family `sovereignty_transfer`, peaceTermsCatalog.js:185)
 landed with WR-10 — and `TERM_FAMILIES` is **DERIVED** from the catalog at
 peaceTermsCatalog.js:192 (`[...new Set(TERM_TYPES.map(t => catalog[t].family))]`).
@@ -75,7 +77,7 @@ warReasonTaxonomy.js by symbol.
 invoked at pulseKernel.js:1183 (imported :23; the volume said :1106-1141 — the
 lane-gate comment block now sits at :1138-1145); `advancePantheon` at :1556
 (volume: :1662-1675); `collectFaithDeltas` at :1197. Symbols verified, addresses
-dead. pulseKernel.js is FROZEN at 1580 effective (scripts/.size-baseline.json)
+dead. pulseKernel.js is FROZEN at 1580 effective (scripts/.size-baseline.json) [CORRECTED 2026-10-16 (coherence fold §3.3.8) — 1581 effective (scripts/.size-baseline.json:13); warTermination.js 818 holds.]
 and receives ZERO edits ever (L1) — every WF fold mounts through the leaves
 `advanceReligionStates` already calls, never a kernel edit.
 
@@ -87,7 +89,7 @@ one is closed against reuse.** Verified on disk: `envoyErrand.js` (823 raw),
 ledger's purpose vocabulary is CLOSED and narrow: `ENVOY_PURPOSES =
 ['sue', 'self_parlay']` (envoyErrandVocabulary.js:119). **SP-1 (the generalized
 errand ledger, `spatialLedgers.errands`, typed purpose `religious`) remains
-ABSENT tree-wide** (grep: zero hits). WF-2b's movers ride SP-1 when it exists;
+ABSENT tree-wide** (grep: zero hits). [CORRECTED 2026-10-16 (coherence fold) — superseded by WF-2's DISCHARGED precondition below: SP-1 is built (errandMint.js) on worldState.envoyErrands (CR-FP-10; RULED BY DELEGATION 2026-10-16, OD-FC-14 confirms "keep"), and spatialLedgers.errands never existed.] WF-2b's movers ride SP-1 when it exists;
 they must NOT be built by widening war's envoy vocabulary (that ledger's
 walkers pin its closure). Hard precondition, restated in WF-2.
 
@@ -155,8 +157,8 @@ diverge is a STOP-and-report, and any wave that amends a DS-FTH row re-runs
 | V24 | pilgrimage.js: deity-agnostic draw (scaleBand + act only), aspatial ⇒ 0, bounded [0, 0.1] lift, who-from-where discarded | pilgrimage.js:31-38 (dials incl. PILGRIM_MAX 0.1, GRAND_SCALE_MIN 3, PILGRIM_ACTS {procession, offering, fair}), :59-62 (drawsPilgrims), :82 (aspatial guard), header :1-22 (returns only the host lift) | VERIFIED — WF-2a's co-location gate is genuinely new work |
 | V25 | Institution rows creed-agnostic presence records; backing lends to the SEAT; no congregation concept | religionLegitimacy.js:175-185 (INSTITUTION_SCALE, "creed-agnostic", STANDING_BACKING); foundingCatalog.js:36-55 (FoundingEntry shape — no creed field); `grep congregation` over worldPulse/institutions: zero | VERIFIED — WF-5a's creedRef + creed-aware backing are new, and the anti-entrenchment hazard is real |
 | V26 | clandestineFacet criminal-only, zero faith references | clandestineFacet.js — grep faith/deity/religio: 0 hits in 53 lines | VERIFIED |
-| V27 | The only "tithe" is the granary reserve; tithe_rights is a prize token; no temple wealth anywhere | foodStockpile.js:12-21; factionCompetition.js:74; grep templeWealth in src/domain: 0 (only the DS-FTH-3 prose title, R8) | VERIFIED |
-| V28 | gods_abandonment = coincidence recognition (three co-present stressors), not a reading | realmEvents.js:26-35 (types: famine, disease_outbreak, religious_conversion_fracture) | VERIFIED |
+| V27 | The only "tithe" is the granary reserve; tithe_rights is a prize token; no temple wealth anywhere | foodStockpile.js:12-21; factionCompetition.js:74; grep templeWealth in src/domain: 0 (only the DS-FTH-3 prose title, R8) [CORRECTED 2026-10-16 (coherence fold) — the coin reversal (ODQ §731.1) landed W-COIN's `tithe_share` tax form (treasury.js:271, dark); see the bracket at :281.] | VERIFIED |
+| V28 | gods_abandonment = coincidence recognition (three co-present stressors), not a reading | realmEvents.js:26-35 (types: famine, disease_outbreak, religious_conversion_fracture) [RULED 2026-10-16 (coherence fold §3.2.6) — its shipped label "God's Abandonment" (realmEvents.js:28) is a deity-doctrine stray; the rename is a declared text shift under RULED BY DELEGATION 2026-10-16, OD-FC-8.] | VERIFIED |
 | V29 | Five dedicated religion soaks; release corpus deity-free; certification names the missing observation + bearer census | scripts/audit/religion-{balance,coup-soak,plane-soak,soak}.mjs; subsystemRowsBaseline.js:38-60 (FAITH_SPREAD_OTHER verdict UNOBSERVED, names the needed soak case + "v5 subsystems.stateKeys census"); whole-world-soak.mjs:131 | VERIFIED — WF-0's premise exact |
 | V30 | D3 crown-commitment amplifier deliberately deferred, owner-gated | religiousContest.js:773-781 (the seam comment, verbatim) | VERIFIED (J-WF-14 stands) |
 | V31 | Temple mediation narrow + scalar; faithTerm temple 0.4; mediator machinery reads faith proximity | generosityEV.js:243-253 (faithTerm); peaceTerms.js:115 (imports faithProximityOf from sacredClaim), :550/:782-786 (mediator) | VERIFIED |
@@ -168,9 +170,9 @@ diverge is a STOP-and-report, and any wave that amends a DS-FTH row re-runs
 | V37 | Herald totality walkers + WHAT_PHRASES home | settlementRumors.js (WHAT_PHRASES; faith tokens :263-267); tests/lint/{heraldRouting.walker,phrasedKindPools.walker,wizardNewsAuthoring.walker}.test.js | VERIFIED |
 | V38 | mutationCoverageManifest exists (L7's register) | tests/lint/mutationCoverageManifest.test.js + mutationCoverage.shared.mjs | VERIFIED |
 | V39 | Size law: domain ceiling 800 effective; over-ceiling files frozen in a shrink-only JSON map | eslint.config.js:42-52 + :537-560; scripts/.size-baseline.json; tests/lint/sizeBaseline.test.js | VERIFIED — figures in §4's per-wave rows |
-| V40 | SP substrate ABSENT: no spatialLedgers.errands (SP-1), no postureOf/pacing governor/significance registry (SP-4/SP-6), no peacetime formation (SP-3), no believed-devotion family (SP-2) | tree-wide greps, zero hits each; alignmentOf (spine req 13) DOES exist: beliefMap.js:915, informationStatecraft.js:584 | VERIFIED — FAITH builds after SP by construction, and every SP-consuming line below is precondition-marked |
+| V40 | SP substrate ABSENT: no spatialLedgers.errands (SP-1), no postureOf/pacing governor/significance registry (SP-4/SP-6), no peacetime formation (SP-3), no believed-devotion family (SP-2) | tree-wide greps, zero hits each; alignmentOf (spine req 13) DOES exist: beliefMap.js:915, informationStatecraft.js:584 | VERIFIED — FAITH builds after SP by construction, and every SP-consuming line below is precondition-marked [SUPERSEDED BY EVENT 2026-10-16 (coherence fold) — SP-1 built (errandMint.js, worldState.envoyErrands; errandSpineEnabled dark in every preset); SP-3 peacetime formation built and lit (pactFormation.js; 4 presets); SP-C posture built as courtPostureOf / courtRiskAppetiteOf (strategicPosture.js:222, :303; POSTURE_ACTOR_KINDS = settlement only, no temple actor); SP-B believed scarcity and conditions lit in 3 presets, believed DEVOTION lit nowhere (OD-FC-7); the alignment read is settlementAlignment (settlementAlignment.js:44), not alignmentOf (§3.3.5).] |
 | V41 | Spine reqs 13/14 exist as chair amendments with receipts | DESIGN_FP_SPINE.md:76-107 | VERIFIED |
-| V42 | Name-collision hazard, new: `riskToleranceOf` is ALREADY an export of src/domain/roads/state.js:319 (npc-scoped, roads lane) | grep | VERIFIED — SP-4a's temple-appetite read must take a distinct name or namespace; a faith wave importing the roads symbol would typecheck and be silently wrong (§5 seam 4, §6 Q2) |
+| V42 | Name-collision hazard, new: `riskToleranceOf` is ALREADY an export of src/domain/roads/state.js:319 (npc-scoped, roads lane) | grep | VERIFIED — SP-4a's temple-appetite read must take a distinct name or namespace; a faith wave importing the roads symbol would typecheck and be silently wrong (§5 seam 4, §6 Q2) [CORRECTED 2026-10-16 (coherence fold §3.3.3) — the roads export now sits at roads/state.js:334; SP-4 landed as courtPostureOf / courtRiskAppetiteOf with ONE actor kind, `settlement` (strategicPosture.js:97), so no temple appetite read exists to collide.] |
 
 **Tally: 42 verified (7 with line-rot noted in R7), 8 refuted/moved/undeclared
 (R1–R8).** Standing rule imported from J-WR-13: any implementer finding another
@@ -196,7 +198,7 @@ The eight flags and their lanes are the volume's §3, unchanged:
 **Law-2 shape (all eight):** VIRTUAL — absent from DEFAULT_SIMULATION_RULES;
 read `worldState.simulationRules.<flag> === true` (strict, dark-never-permissive
 — the live war idiom, e.g. disposition.js:248, applyWorldPulse.js:536); never
-normalized into a preset by default. **They do NOT copy `faithSpreadEnabled`'s
+normalized into a preset by default. [SUPERSEDED BY EVENT 2026-10-16 (coherence fold) — LIT-1a (f473b94ad, 09-24, under ODQ §934.84) spreads `faithUnseatingEnabled` into four presets incl. the default (FP_LIT_ALIVE, simulationRules.js:789-792); the other seven flags are unbuilt.] **They do NOT copy `faithSpreadEnabled`'s
 shape** — that is a REAL default-false key with a legacy alias (V2);
 `religionDynamicsEnabled` gains NO new consumers (volume law, re-affirmed).
 
@@ -262,10 +264,10 @@ array is a key and a key is a byte), each with exactly ONE writer, every
 spelling ALREADY BOUND by the DS-FTH corpus where it names them (R8):
 
 ```
-worldState.religionStates[cid]          EXISTS (one writer: the advanceReligionStates
+worldState.religionStates[cid]          EXISTS (one writer: the advanceReligionStates [RULED 2026-10-16 (coherence fold §3.1.6) — two write paths as built (religionState.js and traditionsKernel.applyFaithNudges, traditionsKernel.js:444-455, used by WC/WY faith exposure); RULED: the nudge routes THROUGH religionState's writer family as a declared ±1 share transition — one writer FAMILY per field family; the code cure is slotted to the next faith unit.] [CORRECTED 2026-10-16 after skeptic S1-07 — `applyFaithNudges`' only caller is the observances pass, traditionsKernel.js:860; WC/WY faith exposure and `faithCargo` are UNBUILT (zero hits).]
                                         fold, pulseKernel.js:1183 call site — V/R4)
   .patronFalls[]                        WF-1  { ref, cause, atTick } ring, cause in the
-                                              closed five-token vocabulary (J-WF-5);
+                                              closed five-token vocabulary (J-WF-5); [CORRECTED 2026-10-16 (coherence fold) — FOUR tokens ship (PATRON_FALL_CAUSES, patronFall.js:76); `abandoned` was cut on zero producers (ODQ §215.2); a sink-crossing unseat is its own wave.]
                                               capped <= 3 (the pruneSuppressed idiom)
   .deities[ref].suppressedAtTick        WF-1  stamped at EVERY suppression write site
                                               (comment-stripped source scan for the
@@ -273,11 +275,11 @@ worldState.religionStates[cid]          EXISTS (one writer: the advanceReligionS
                                               IS the list; three at the WF-F stamp:
                                               :262/:277/:485 incl. the patron-siege
                                               loop) when lit; absent => legacy
-                                              codepoint prune
+                                              codepoint prune [CORRECTED 2026-10-16 (coherence fold) — one writer stamps (religionState.js:239, its header: the one writer of each deity entry's suppressed and suppressedAtTick fields); the scan's three sites route through it.]
   .deities[ref].covert                  WF-5b { share(band), sinceTick, shepherdRef? }
                                               (J-WF-4: in place, never a parallel ledger)
   .templeWealth                         WF-7  { band, movedTick } — banded stock, not
-                                              books (J-WF-3); PER-SETTLEMENT (J-WF-15)
+                                              books (J-WF-3); PER-SETTLEMENT (J-WF-15) [RULED 2026-10-16 (coherence fold §3.1.5) — ONE TITHE: W-COIN's `tithe_share` (treasury.js:271, dark) is the coin arm; templeWealth is NOT a second stock but a BAND derived from the treasury's `tithe_share` row where the treasury is lit, and from the piety × temple-presence heuristic where it is dark; the house-fortune source (DESIGN_FP_TRADE.md:610) is struck. The stored shape is re-derived at WF-7's compile.] [RE-RULED 2026-10-16 after skeptic S1-02 — the tithe is the CHURCH's (ODQ:32488): WF-7's piety × presence → `templeWealth` band is the flow's source; W-COIN's `tithe_share` is the CROWN's cut of it (treasury.js:269-320), read from WF-7's band, never a source — one flow, two ends; the fold §3.1.5 carries the text of record.]
 settlement.institutions[] rows
   .creedRef                             WF-5a minted ONLY by the split's reduced-ceremony
                                               founding call; absent => creed-agnostic,
@@ -372,12 +374,13 @@ heraldRouting with their OWN walker rows (V37) and carry id + full address
 chain + typed action + settlements by name + reason (L6).
 
 ### WF-0 — THE OBSERVATION FLOOR (no flag; instrument-side)
+[ADDED 2026-10-16 (coherence fold, req 16/17) — FIRST-VISIBLE: none — instrumentation · TIER: the soak receipt; the authored deity-bearing case is premium custom content · DEGRADED ARM: dark (deityBearers 0 on the deity-free release corpus)]
 - **Files touched (measured eff/ceiling):** subsystemRowsBaseline.js (469 raw;
   certification layer) — the two faith rows (:38-60 area) gain the bearer-count
   invariant; the v5 receipt schema gains `deityBearers`; ONE authored
   deity-bearing soak case beside whole-world-soak.mjs:131's grid (spatial canon
   + two opposed-quadrant deities + a qualifying grand observance scaleBand ≥ 3
-  with act ∈ {procession, offering, fair} at the patron host + ≥1 mapped
+  with act ∈ {procession, offering, fair} at the patron host [CORRECTED 2026-10-16 (coherence fold) — the live bar is wider: a spectacle-scale rite qualifies with any act (traditions/pilgrimage.js:62).] + ≥1 mapped
   reachable neighbour — pilgrimage.js:31-38's own bar, V24).
 - **New leaves:** none (fixture + receipt fields).
 - **Pins:** bearer field correct on the bearing fixture; ZERO on the deity-free
@@ -397,12 +400,13 @@ chain + typed action + settlements by name + reason (L6).
   envelope — spelling of the case id is program-owned.
 
 ### WF-1 — THE UNSEATING (`faithUnseatingEnabled`; LOCAL)
+[ADDED 2026-10-16 (coherence fold, req 16/17) — FIRST-VISIBLE: the town FaithSection's cause-only fall line in the advance the patron flips (PATRON_FLIP_TICKS 3 weeks — felt inside a month); the settlement obituary is slow (the ≥4-suppressed prune, years); the flagship receipt has no producer · TIER: aspatial-safe (LOCAL lane); premium deity-bearing worlds only (the birth preset seats no deity, FPQ-62); host flags: `faithUnseatingEnabled` (4 presets incl. the default) · DEGRADED ARM: a free or deity-free world mints nothing (inert by construction, D.0)]
 - **Files (measured):** religionState.js 356 eff/800 (~440 headroom — the
   suppressedAtTick stamps at EVERY suppression write site — derived by
   comment-stripped source scan, never hand-listed (three at the WF-F
   stamp: :262/:277/:485, the patron-siege loop included), with a census
   pin: scanned write-site count EQUALS stamped-site count, exact
-  (currently 3), so a future fourth site reds the pin instead of
+  (currently 3), [see the bracket at :277] so a future fourth site reds the pin instead of
   minting a stamp-less entry — and the prune's flag-forked narrative
   sort key at :353-357 are small in-place edits, legal); NEW leaf
   `patronFall.js` (classification + ring writer helper consumed by the fold;
@@ -411,17 +415,17 @@ chain + typed action + settlements by name + reason (L6).
   the WF-1 leaf's `fallCauseFor(religionStates, ref)`) at NET-ZERO effective
   lines in warTermination.js, or the wave STOPS and proposes the extraction
   recipe (L8) — no silent growth against a frozen ceiling.
-- **Mechanism deltas from the volume:** none — five closed causes; the
+- **Mechanism deltas from the volume:** none — five closed causes; [see the bracket at :269] the
   settlement-scoped obituary fires only at the ≥4-suppressed prune bar with
   narrative (longest-dormant) selection when lit, codepoint when dark
   (flag-forked, dormancy golden covers the fork; V4 verified the substrate);
   realm last-seat beat joins the tier-change beats (realmEvents.js:270-294
   site, realmEvents 283 eff/800).
 - **Pins:** the volume's list stands (fall-names-its-cause walker over all five
-  fire sites; pressured-patron-holds negative; last-altar narrative-key +
+  fire sites; [see the bracket at :269] pressured-patron-holds negative; last-altar narrative-key +
   never-prune-the-cellar sequencing; dissolution-names-the-fall TWO-FLAG
   fixture — `warTerminationEnabled` + `faithUnseatingEnabled`, the join surface
-  verified live at warTermination.js:320-345; anchor_unavailable legacy arm gets
+  verified live at warTermination.js:320-345; [CORRECTED 2026-10-16 (coherence fold) — WF-1d LANDED (1a90b5639; fallCauseFor at warTermination.js:869) and is unreachable in shipped play: warTerminationEnabled is dark in every preset (simulationRules.js:1031-1036).] anchor_unavailable legacy arm gets
   NO invented cause; no-clergy office-voice fixture; dormancy golden).
 - **Mutants:** cause-classifier collapse (all falls → `displaced`) must red the
   histogram pin; prune-key mutant (narrative sort reversed) must red the
@@ -440,6 +444,7 @@ chain + typed action + settlements by name + reason (L6).
   (Reformation detector reads the ring).
 
 ### WF-2 — PILGRIMS + LEGATES (`pilgrimageEnabled`; SPREAD; two slices)
+[ADDED 2026-10-16 (coherence fold, req 16/17) — FIRST-VISIBLE: yearly — one feast season a year (a one-month advance sees it only in feast weeks); the named movers' legs are weeks, but the errand spine is dark everywhere · TIER: spatial canon + belief infoMode (believed devotion — `believedDevotionEnabled` lit nowhere, OD-FC-7); host flags: `faithSpreadEnabled` (dramatic_campaign + full_simulation), `errandSpineEnabled` (dark in every preset); premium deity-bearing worlds only (the birth preset seats no deity, FPQ-62) · DEGRADED ARM: aspatial or unmapped worlds draw zero; dark, pilgrimage.js's bounded scalar stands]
 - **HARD PRECONDITION — DISCHARGED (WF-F round):** SP-1 is BUILT
   (`src/domain/worldPulse/errandMint.js`; substrate
   `worldState.envoyErrands` per chair ruling CR-FP-10 keep-in-place;
@@ -492,9 +497,10 @@ chain + typed action + settlements by name + reason (L6).
 - **Collisions:** traditions lane (J-WF-13 disclosed shift at lighting); war
   (WR-7b consumption read-only); TRADE (CPL-12 port only when lit — §5 seam 2);
   GRAMMAR (pilgrimage_right forms only with WF-2 lit — §3 precondition, both
-  docs).
+  docs). [CORRECTED 2026-10-16 (coherence fold) — NOT "both docs": GRAMMAR carries no pilgrimage gate and PACT_DRAFT_LENS drafts pilgrimage_right ungated (pactFormation.js:193); the gate lands with WF-2 in FAITH's commit, or the claim is struck.]
 
 ### WF-3 — STANCE CONSEQUENCES (`faithStanceConsequencesEnabled`; SPREAD)
+[ADDED 2026-10-16 (coherence fold, req 16/17) — FIRST-VISIBLE: none inside a month — the threshold colour is invisible and durability frays at the seasonal–yearly clock · TIER: aspatial-safe; host flags: `faithSpreadEnabled` (2 presets); premium deity-bearing worlds only (the birth preset seats no deity, FPQ-62) · DEGRADED ARM: dark — the stance lanes stay news-only as today]
 - **Files (measured):** deityStance.js 60 eff (READ-ONLY — the deferral comment
   :160-174 stays; fields stay); deityStanceLane.js 235 eff/800 (the three
   consumptions mount here or in a NEW leaf `stanceConsequences.js` ≤ 200 eff —
@@ -523,6 +529,7 @@ chain + typed action + settlements by name + reason (L6).
   otherwise).
 
 ### WF-4 — OMEN READS (`omenReadsEnabled`; LOCAL)
+[ADDED 2026-10-16 (coherence fold, req 16/17) — FIRST-VISIBLE: the reading beat in the advance a qualifying calamity lands (fast — the family's most tellable beat); expectations resolve in banded weeks · TIER: aspatial-safe (LOCAL lane); premium deity-bearing worlds only (the birth preset seats no deity, FPQ-62); the mechanism's shape waits on OD-FC-8 · DEGRADED ARM: dark]
 - **Files (measured):** NEW leaf `omenReading.js` (ONE writer for
   spatialLedgers.omenReadings; budget ≤ 300 eff — five kinds, five opposable
   arms, the lens, the caps); religionState/piety/religionLegitimacy UNTOUCHED
@@ -531,7 +538,7 @@ chain + typed action + settlements by name + reason (L6).
   → divination — V20's structural doctrine honored).
 - **Deltas:** none from the volume (every kind carries its opposable arm on the
   SAME row; the credibility echo is a pure read off the ring — no new stock,
-  SP-5 closure honored; the INFO source-credibility coupling deferred-declared).
+  SP-5 closure honored; the INFO source-credibility coupling deferred-declared). [RULED BY DELEGATION 2026-10-16 (OD-FC-8 — WF-4 is rebased on THE ATTRIBUTED EDIT if the owner answers YES [NOW RULED by delegation 2026-10-16 — the fold §7 is the ruling of record] (a DM's attribution starts a reading; the engine never originates one; coherence fold §3.2.5); see DESIGN_FP_FAITH.md WF-4 and §6's brackets.]
 - **Pins:** volume's list stands (two-towns-one-famine TELLABLE; secular-town
   negative non-vacuous; NO-PHYSICS byte-diff over physical ledgers with the
   import pin on omenReading.js excluding every physical-state writer — the K3
@@ -553,6 +560,7 @@ chain + typed action + settlements by name + reason (L6).
   resolution beats).
 
 ### WF-5 — SCHISM + UNDERGROUND (`faithSchismEnabled`; LOCAL + covert seam; two slices)
+[ADDED 2026-10-16 (coherence fold, req 16/17) — FIRST-VISIBLE: 5a — the split line in the advance a contest resolves at a temple-bearing town (rare); 5b — none inside a month (520-week growth, 156-week assimilation; DM-only until exposed) · TIER: aspatial-safe (LOCAL lane); covert receipts behind includeCovert; premium deity-bearing worlds only (the birth preset seats no deity, FPQ-62) · DEGRADED ARM: dark — suppression stays inert dormancy]
 - **Files (measured):** religionState.js 356 eff (covert field folds through
   the existing suppression/resurgence arms — in-place, small);
   religionLegitimacy.js 222 eff (the creed-aware backing fork for creedRef rows
@@ -594,9 +602,10 @@ chain + typed action + settlements by name + reason (L6).
   declared fallback if GR-3 declines the term).
 
 ### WF-6 — FAITH TERMS (`faithTermsEnabled`; SPREAD; needs SP-3 lit + GR-3 rows)
+[ADDED 2026-10-16 (coherence fold, req 16/17) — FIRST-VISIBLE: none in shipped play (`faith_communion` cannot cross while `believedDevotionEnabled` is lit nowhere, OD-FC-7); once lit, yearly at SP-3's proposal cadence · TIER: belief infoMode + `believedDevotionEnabled` (OD-FC-7); host flags: `faithSpreadEnabled`, `pactFormationEnabled`; premium deity-bearing worlds only (the birth preset seats no deity, FPQ-62) · DEGRADED ARM: the rows stand as legal parchment with no executor; only the DM's PROPOSE_PACT can name a faith term]
 - **Files (measured — CORRECTED, WF-F round):** GR-3's five faith rows
   are LANDED (GR-3a @ `0be4800d`; catalog `family:'faith'` rows at
-  `peaceTermsCatalog.js:228-245`; catalog now 24 terms / 11 families) —
+  `peaceTermsCatalog.js:228-245`; catalog now 24 terms / 11 families) [see the bracket at :40] —
   WF-6 compiles as a CONSUMER and mints NO catalog row (a re-mint
   collides with GR-3a's walkers); peaceTerms.js is a
   **ZERO-HEADROOM-CLASS file (797/800 at the WF-F stamp)**: net-zero
@@ -607,14 +616,14 @@ chain + typed action + settlements by name + reason (L6).
   ≤ 300 eff total); negotiationPictures.js (BUILT, R5) consumed never forked.
 - **Deltas from the volume (compiled):** (i) the SIZING pin derives from the
   LIVE `TERM_FAMILIES` (twelve terms / eight families today + faith's rows —
-  R1), and the families walker + TREATY_COMPLIANCE_VOICE family×state table
+  R1) [see the bracket at :40], and the families walker + TREATY_COMPLIANCE_VOICE family×state table
   update in GR-3's same-commit discipline; (ii) the GR-3 landing commit TRIPS
   `catalogGrewSinceWr10()` — handled per §5 seam 1, in THAT commit, by the
   landing lane; (iii) per-term compliance vocabulary is peaceTermsCatalog.js:
   122-123's own union (observed complianceState {honored, strained, defaulted,
   expired} + trueState fog twin) — cited, never re-minted.
 - **Pins:** volume's list stands (the GUARD pin — sacredClaim.js:39-49's
-  both-patrons gate imported verbatim as the formation gate; executor honesty —
+  both-patrons gate imported verbatim as the formation gate; [RULED 2026-10-16 (coherence fold §3.2.4) — unhonoured at drafting as built; the guard lands as a gate in scoreFaithCommunion over the code's believed-devotion parity read (ONE definition), and the trigger stays unreachable until RULED BY DELEGATION 2026-10-16, OD-FC-7 lights `believedDevotionEnabled`.] executor honesty —
   missionary_access moves the CHANNEL never share; breach reachability under
   tolerance_guarantee; dictated + negotiated arms both reachable; Law One
   walker over executor writes; dormancy — dark ⇒ the catalog rows are
@@ -636,11 +645,12 @@ chain + typed action + settlements by name + reason (L6).
   land — §5 seam 1); WAR (negotiationPictures consumed; peaceTerms stays the
   single terms writer — the seam ruling extends verbatim); WF-2
   (pilgrimage_right cannot form with `pilgrimageEnabled` dark — refusal
-  receipted, no dead guarantee certified).
+  receipted, no dead guarantee certified). [see the bracket at :499]
 
 ### WF-7 — THE TITHE (`titheEnabled`; LOCAL)
+[ADDED 2026-10-16 (coherence fold, req 16/17) — FIRST-VISIBLE: none inside a month — the fold is quarterly (13 weeks), the first tithe line a season in · TIER: aspatial-safe (LOCAL lane); the coin arm needs `treasuryEnabled` (dark) per §3.1.5; premium deity-bearing worlds only (the birth preset seats no deity, FPQ-62) · DEGRADED ARM: the piety × temple-presence heuristic band where the treasury is dark (§3.1.5's named arm)]
 - **Files (measured):** NEW leaf `tithe.js` (draw + wealth fold + disposition;
-  budget ≤ 250 eff); religionState.js (the fold applies through the one writer
+  budget ≤ 250 eff); [see the bracket at :281] religionState.js (the fold applies through the one writer
   — in-place, small); generosityEV.js 401 eff (wealth-band scaling of the
   existing templeMediated 0.4 arm — small read); religionLegitimacy.js (the
   splendor term rides INSIDE W_INSTITUTION's existing 0.12 slot, banded within
@@ -670,6 +680,7 @@ chain + typed action + settlements by name + reason (L6).
   → commons voice, read-only); DS-FTH-3 (`templeWealth` spelling bound — R8).
 
 ### WF-8 — NARRATION 3× (`faithNarrationEnabled`; LOCAL; lights LAST)
+[ADDED 2026-10-16 (coherence fold, req 16/17) — FIRST-VISIBLE: the voices of transitions that already happen weekly (entry, eviction, suppression, resurgence, standing) — inside a month where lit; the realm arcs at the epoch clock (260-week window) · TIER: aspatial-safe (LOCAL lane); premium deity-bearing worlds only (the birth preset seats no deity, FPQ-62); host flags: `faithNarrationEnabled`, or the producer's own flag (WF-8a rides `faithUnseatingEnabled`) · DEGRADED ARM: silent, byte-identical]
 - **Files (measured):** settlementRumors.js 482 eff/800 (WHAT_PHRASES rows —
   ~20 new kinds; headroom real but watch the ceiling — extraction of the faith
   pool to a leaf is the fallback, budgeted now); heraldRouting.js 246 eff
@@ -708,6 +719,7 @@ chain + typed action + settlements by name + reason (L6).
   WF-8 gathers and adds only its own).
 
 ### WF-9 — CONVERGENCE INSTRUMENTATION (no flag; the acceptance harness)
+[ADDED 2026-10-16 (coherence fold, req 16/17) — FIRST-VISIBLE: none — instrumentation · TIER: the deity-bearing soak grid (premium custom content) · DEGRADED ARM: dark]
 - **Files:** the WF-0 case grown to a small grid; envelope + certification-row
   modules beside the war program's WR-9 instruments; the invalid-config walker
   (SPREAD flag lit while faithSpreadEnabled dark ⇒ red; lighting order = build
@@ -748,7 +760,7 @@ chain + typed action + settlements by name + reason (L6).
    directions — the sovereigntyBundle idiom), so faith terms become
    sovereignty-bundle-composable the day they land without an edit (§6 Q3).
 2. **TRADE (TR-5 executors unbuilt; CPL-7 / CPL-12 ports unbuilt).** WF-2a and
-   WF-7 own their executors END TO END; the TRADE-lit lane registers stream
+   WF-7 own their executors END TO END; [see the bracket at :281] the TRADE-lit lane registers stream
    entries ONLY through TRADE's own writer at the couplings volume's declared
    ports. Pre-pins: (i) source-scan — tithe.js / pilgrimSeason.js import
    nothing from TRADE's internals (K3-shape, both directions with a
@@ -767,7 +779,7 @@ chain + typed action + settlements by name + reason (L6).
    precondition), walker-policed both directions — the registry row,
    not a probe, is the seam.
 4. **SP-4 posture (absent) — the name-collision tripwire.** `riskToleranceOf`
-   already exports from src/domain/roads/state.js:319 (npc-scoped). Pre-pin:
+   already exports from src/domain/roads/state.js:319 (npc-scoped). [see the bracket at :174] Pre-pin:
    every WF posture-consuming spec names the SP-4 module PATH it expects and
    carries an import-source pin (the read resolves to SP-4's module, never
    roads/state.js); until SP-4 lands, posture reads are declared-dark arms
@@ -805,7 +817,7 @@ religionState.js:371-450) supplies the compound signature's ingredients; the
 arc is the same class of new work as the other four, and cutting it would
 leave the program's namesake drama voiceless at realm scale.
 
-**Q2 — SP-4 posture absence (V40/V42).** Build WF waves with declared-dark
+**Q2 — SP-4 posture absence (V40/V42).** [see the bracket at :172] Build WF waves with declared-dark
 posture arms (neutral fallback, receipted) or hard-block posture-consuming
 waves on SP-4? **Recommendation: declared-dark arms with the §5-4 import-source
 tripwire.** The spine's build order already puts SP first; the arms exist so a

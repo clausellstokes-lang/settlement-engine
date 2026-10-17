@@ -1,7 +1,8 @@
 # DESIGN — THE ADVANCE EPOCH (EP: living futures, immutable pasts)
+[CLARIFIED 2026-10-16 (coherence fold §5) — "epoch" in this volume always means THE ADVANCE EPOCH: the per-user-advance entropy nonce (`advanceEpoch` the argument and cursor field, `pulseHistory[].epoch` the record field, `spatialLedgers.advanceEpoch` the ledger). It is NOT the town-map construction "epoch" of ODQ §240 ("EPOCH GENERATION — CORE, WALL, RING", the version/epoch axis of MF-ARCH-2): the advance-epoch ledger is a simulation stamp, never a construction date. Prose in other volumes says "the advance epoch" for this program (findings EP §9).]
 
 ⚠⚠ **"LANDED" IN THE HEADER BELOW NAMES THE *DOCUMENT*, NOT THE CODE.** This
-volume is **ARCHITECTED, NOT BUILT**. MEASURED 2026-08-14 at `60083174` by lane
+volume is **ARCHITECTED, NOT BUILT**. [CORRECTED 2026-10-16 (coherence fold) — THE STATUS OF RECORD IS docs/DESIGN_FP_COHERENCE_FOLD.md §2; this header is history. In one line: LIT: none (`advanceEpochEnabled` is in the manifest, `ENGINE_GATED_VIRTUAL_RULE_KEYS` at simulationRules.js:241, and lit in no preset; L-DEFAULT "decision (ii) unspent") · BUILT DARK: EP-0 segment (6e4f9c3de; `epochSuffix` at prng.js:112), EP-1 kernel seam + flag (01388030b, cures da8207f3e and 0cf18bed1), EP-2 fork semantics (20df088ba), EP-3A/B ledger + year anchor (9e8ea20bd, 0fa3ac541), all LANDED 2026-08-16, two days after the 08-14 measurement below; the census walker (tests/lint/entropyRootCensus.walker.test.js: 23 read sites, 15 composing modules) · UNBUILT: EP-4 (slice 1 cured elsewhere by 9f75594fc and its removal half reversed by that commit's "product call"), EP-5 copy, the persisted undo ring (escalation E1, RULED BY DELEGATION 2026-10-16, OD-FC-32). STALE BY EVENT: the flag is no longer "zero occurrences" (read at pulseKernel.js:338 and campaignAdvanceSession.js:672), and `epochSegment.js` was never a chartered module: the function is prng.js#epochSuffix and the leaf is src/domain/advanceEpochLedger.js (findings EP §2, S5, C8; refinement 1).] MEASURED 2026-08-14 at `60083174` by lane
 TE3, and stated as a measurement rather than an impression:
 **14 of the 17 `*Enabled` flags this volume names are unminted**, including its
 signature `advanceEpochEnabled`, which has **zero occurrences anywhere under
@@ -32,7 +33,7 @@ a *different* confusion and does not cover this one.
 ## incoming volume's own sections.
 ## ⛔⛔ **LANDING IS NOT SEALING, AND THIS VOLUME IS NOT SEALED.** It is a DRAFT
 ## AT ROUND SEVEN — line 3 below says `DRAFT for the validation chair`, there is
-## no §9 and no attestation block. ⏱ SUPERSEDED BY THE SEVENTH PASS
+## no §9 and no attestation block. [CORRECTED 2026-10-16 (coherence fold) — still NOT SEALED and now also BUILT (waves 0-3, LANDED 2026-08-16): the draft is the spec of landed code, and where they differ the code's in-file corrections govern (advanceEpochLedger.js:133-138: the accessors take `base`, not `absent`). The memory row calling this volume CHAIR-ATTESTED is false (EP_CHAIR_RULINGS §1.2(g): "A document is not sealed because a memory file says so").] ⏱ SUPERSEDED BY THE SEVENTH PASS
 ## (2026-08-07, recorded below the REVISION 6 block): REVISION 6's four
 ## rulings were adversarially confirmed and E5 is CLOSED under binding
 ## conditions C1/C2/C3 (`EP_CHAIR_RULINGS.md` + the round-7 confirm are
@@ -60,7 +61,7 @@ a *different* confusion and does not cover this one.
 ## docs/DESIGN_FP_ARCH_EP.md — this file — and its §5 queue insertion LANDED
 ## VERBATIM 2026-08-07 in
 ## docs/DESIGN_FP_ARCHITECTURE.md, whose §1 laws L1-L9, §3 flag law, §5 wave order,
-## §9 seam matrix and §10 protocol BIND VERBATIM here; the war volume
+## §9 seam matrix and §10 protocol BIND VERBATIM here; [CLARIFIED 2026-10-16 (coherence fold §5, req 21d) — TWO L-NUMBER FAMILIES live in this volume and collide by name. The compiled fold's §1 laws (DESIGN_FP_ARCHITECTURE.md: L1 DETERMINISM · L2 FLAGS · L3 EPISTEMICS · L4 PERSISTENCE · L5 RECEIPTS · L6 HERALD · L7 VERIFICATION · L8 SIZE · L9 PROCESS, and since 2026-09-23 L10 THE EDITOR) are what "L1-L9" here, "FP §1 L1" (§3b.1), "L2 shape" (§2.2), "the L4-sanctioned conditional sub-key" (§1.2, §3b.2 Arm A) and "the L4 idiom" (§3b.1a, §4 EP-3, §8.4) cite. "(L1)" to "(L5)" of THE EPOCH INVARIANT CHAIN (§2.3c) and every "chain link Ln" are EP's OWN links. Read "chain link Ln" for EP's and "fold law Ln" for the fold's; no text is renamed.] the war volume
 ## docs/DESIGN_WAR_RULINGS_ARCHITECTURE.md §1/§10 is the canon behind both.
 ##
 ## COMPILE PROVENANCE. Compiled from FOUR substrate censuses (stream identity + kernel
@@ -306,7 +307,7 @@ a *different* confusion and does not cover this one.
 
 ⚠ **MARKETING GUARD (owner, standing):** "the same world can tell entirely different
 histories" becomes TRUE only when this program SHIPS LIT — not claimable in copy before
-then. §8.3 makes that a pinned gate, not a memo.
+then. §8.3 makes that a pinned gate, not a memo. [see the bracket at :3865]
 
 ### 0.2 What is genuinely new — exactly four things
 
@@ -337,6 +338,7 @@ overwhelmingly a THREADING problem with one seam and one instrument.
    revision 3; a composition is *what* is drawn, a read site is *where the value must be
    re-rooted*, and the two denominators are NOT the same number). This is the real body
    of the program, and it is NOT what the directive assumed (§0.3 R1/R7/R9).
+   [CORRECTED 2026-10-16 (coherence fold) — the walker is the record: 23 runtime read sites (RS-23, `envoyChanceMeetingStage.js`, joined at ENC-3 2026-09-03) and 15 modules composing a root, with the 25 compositions unchanged (tests/lint/entropyRootCensus.walker.test.js:348-350 and :672-676, the latter in its own words: "THE VOLUME SAYS SIXTEEN MODULES AND THE MEASURED FIGURE IS FIFTEEN"). Every "twenty-two read sites" and "sixteen modules" below is the revision-3 figure.]
 4. **The affordance law made structural** (§3e) — a walker plus **FIVE** small repairs
    (H1 · A3 · H7 · A17's door · A18's door — recounted in revision 3 after H7 moved into
    the flagged slice, chair ruling P8), not a pipeline change. **FOUR further rows are
@@ -349,7 +351,7 @@ identity."** MEASURED: `simulateCampaignWorldPulse` composes exactly one root (t
 `createPRNG` call in the file) and every kernel sub-stream descends from it via
 `rng.fork(label)` — but **TWENTY-FIVE further root compositions across SIXTEEN modules
 build their draw key from `worldState.rngSeed` DIRECTLY and are never handed the root
-`rng`.** SIXTEEN of them use `createPRNG`; EIGHT use `hash01`; ONE uses `fnv1a32`.
+`rng`.** [see the bracket at :341] SIXTEEN of them use `createPRNG`; EIGHT use `hash01`; ONE uses `fnv1a32`.
 The `createPRNG` family (rows 1–16; the `hash01`/`fnv1a32` family is R7's table):
 
 | # | Module (symbol home) | Composition | Family |
@@ -786,7 +788,7 @@ therefore carry the same epoch.** The counts are DECLARED free to differ; a pin 
 
 **RECOMMENDED: `advanceEpochEnabled`** (chair question Q4). MEASURED: zero hits in
 `src`/`tests` for `advanceEpochEnabled|epochEnabled|advanceEpoch|epochSuffix|
-livingFutures`. It names the MECHANISM, reads correctly in the strict idiom, and sits
+livingFutures`. [see the bracket at :5] It names the MECHANISM, reads correctly in the strict idiom, and sits
 beside the estate's advance vocabulary. `livingFuturesEnabled` names the marketing claim
 and is rejected for the reason `magicFunctionsAt` was: a flag named after the claim
 invites a sweep to conflate the gate with the copy. ⚠ ONE LIVE NEIGHBOUR:
@@ -808,7 +810,7 @@ hard-codes `const VIRTUAL_RULES = Object.freeze([AXES, CONQUEST, STATECRAFT, RUM
 OATH, SOVEREIGNTY, LIFECYCLE_VOICE, CASUS]);` and asserts three exact bijections plus
 `expect(VIRTUAL_PENDING_RULE_KEYS).toEqual([])`. A ninth VIRTUAL-lane member forces an
 edit to that file — the red that bit TR-1 ("one-line remedy REFUTED"). **J-EP-1: EP
-mints its own lane `subsystemRowsEpoch.js`**, which FP §3 permits in terms ("the
+mints its own lane `subsystemRowsEpoch.js`** [see the bracket at :3460], which FP §3 permits in terms ("the
 totality walker asserts the PARTITION, not the address").
 
 **THE GATE-READ SPELLING IS LOAD-BEARING.** MEASURED: the walker anchors on
@@ -959,7 +961,7 @@ revision 2 left open, widened in revision 4 by the third materialization R11 add
 Revision 3 proved dark identity in prose spread across four sections and keyed two of the
 three materializations on `epochTerm` — the third, EP-3 slice B's `byYear` stamp, did not
 exist yet (§0.3 R11). **The contract is now ONE named chain, and every EP fence asserts a
-link of it BY NAME rather than asserting "dark is identical" as a mood:**
+link of it BY NAME rather than asserting "dark is identical" as a mood:** [see the bracket at :64]
 
 > **THE EPOCH INVARIANT CHAIN (binding; cited by link number in every EP pin).**
 >
@@ -1236,7 +1238,7 @@ is a no-op in production and dark by construction when the flag is absent.
 `pulseKernel.js` is BANKED PERMANENTLY at 1580 effective lines under R-BLD-10,
 `sizeBaseline` is TOLERANCE-ZERO IN BOTH DIRECTIONS, and FP §1 L1 says the file "receives
 ZERO edits ever." **This program is the one chair-signed exception the directive itself
-commissions.**
+commissions.** [CORRECTED 2026-10-16 (coherence fold) — the J-EP-11 +1 was SPENT at EP-3A: the baseline reads 1581 (scripts/.size-baseline.json:13; ODQ "kernel ledger SPENT at 1581, +0 enforced"). Any further kernel line is a new chair-signed ratchet, and "never inherit the 1580 figure" below now means never inherit 1581 either (findings EP S6).]
 
 > ⭐⭐ **THE SEAM CONTRACT IS THE LIST BELOW, NOT A SLOGAN (chair ruling P1, revision 3).**
 > Revision 2 said "three token-level edits on three existing lines … zero other kernel
@@ -1267,7 +1269,7 @@ while slice B is Q1-gated. **The edit LIST is unchanged; only the slice column i
 | # | Existing line (by SYMBOL) | The token-level edit | Cost | Slice |
 |---|---|---|---|---|
 | ⭐ **9** | `let worldState = { ...nextWorldStateForPulse(startingWorldState, campaign, tickInterval), simulationRules };` — **THE CALENDAR-ADVANCE BOUNDARY**, the line at which the new year comes into existence AND at which `tick` becomes `current.tick + 1` | `;`-joined: `if (epochTerm) worldState = stampAdvanceEpochYear(worldState, epochTerm);` — **THE ONE WRITER'S ONE CALL SITE** (§3b.1a) | +0 lines | ⭐ **A** |
-| 7 | `const seasonClock = seasonsOn ? seasonForTick(worldState.calendar.elapsedWeeks) : null;` — MEASURED loop-INVARIANT, computed once per tick ABOVE the `for (const item of snapshot.settlements)` loop | `;`-joined: `const seasonSeed = seasonClock ? yearStreamSeedOf(worldState, seasonClock.year, { absent: undefined, yearBase: 1 }) : undefined;` ⭐ **RE-AIMED IN REVISION 4 at `worldState` (POST-advance, POST-stamp), not `startingWorldState`** — §0.3 R11; and carrying its `yearBase` — §0.3 R12 | +0 lines | **B** |
+| 7 | `const seasonClock = seasonsOn ? seasonForTick(worldState.calendar.elapsedWeeks) : null;` — MEASURED loop-INVARIANT, computed once per tick ABOVE the `for (const item of snapshot.settlements)` loop | `;`-joined: `const seasonSeed = seasonClock ? yearStreamSeedOf(worldState, seasonClock.year, { absent: undefined, yearBase: 1 }) : undefined;` [see the bracket at :1819] ⭐ **RE-AIMED IN REVISION 4 at `worldState` (POST-advance, POST-stamp), not `startingWorldState`** — §0.3 R11; and carrying its `yearBase` — §0.3 R12 | +0 lines | **B** |
 | 8 | the `seasonalContextFor({ … })` argument object's `rngSeed: startingWorldState.rngSeed,` — **R9's missing read site, ROW 1's in-pulse consumer** | becomes `rngSeed: seasonSeed,` | +0 lines | **B** |
 | — | **the leaf's import** | ONE new import line from the single-writer leaf, carrying `stampAdvanceEpochYear` (edit 9) in slice A and GAINING `yearStreamSeedOf` as a token edit in slice B | ⚠ **+1 LINE IN SLICE A — a PLANNED, chair-signed one-line ratchet-up (J-EP-11); slice B adds a SYMBOL to a line that already exists, at +0** ⭐ **(the split is revision 6's; the total is unchanged, and the one-leaf home is what keeps it at one line rather than two)** | ⭐ **A** (+1) / **B** (+0) |
 
@@ -1285,7 +1287,7 @@ correct layer and costs pulseKernel one import line. **J-EP-11 rules the trade a
 the veto cost.**
 
 **Measure with the enforcer AT the publishing commit; never inherit the 1580 figure,
-including from here.** If the effective count moves anywhere other than EP-3's declared
+including from here.** [see the bracket at :1241] If the effective count moves anywhere other than EP-3's declared
 +1, **STOP and report** rather than restructuring the kernel or dropping a gate.
 
 **⚠ THE SEAM MUST CITE R-BLD-10.** MEASURED: that ruling (FABLE_VALIDATION_QUEUE.md and
@@ -1379,7 +1381,7 @@ source scan with an executed second-writer plant):
 | Symbol | Role | Lands in |
 |---|---|---|
 | `stampAdvanceEpochYear(worldState, epochTerm)` | THE ONE WRITER. Stamps `latest` for THIS tick (always, lit) and applies FIRST-WINS to `byYear` (slice B's half). ⚠ **The name is kept deliberately** — it is the year stamp AND the tick stamp, one call, one write, and a rename would cost a second sweep for no fact | ⭐ **SLICE A** (its `latest` half + seam edit 9 + the leaf + the +1 import + the manifest row); slice B GROWS it with the `byYear` half |
-| `tickStreamSeedOf(worldState, { absent })` | the family-1 accessor — reads `latest` under the CURRENT-TICK SELECTION RULE (§3b.1b) | ⭐ **SLICE A** |
+| `tickStreamSeedOf(worldState, { absent })` [see the bracket at :1819] | the family-1 accessor — reads `latest` under the CURRENT-TICK SELECTION RULE (§3b.1b) | ⭐ **SLICE A** |
 | `yearStreamSeedOf(worldState, year, { absent, yearBase })` | the family-2 accessor (§3b.3's explicit-coercion rule + §0.3 R12's `yearBase`) — reads `byYear` | **SLICE B** (Arm A only) |
 
 ⭐⭐ **THE SLICE COLUMN IS NEW IN REVISION 6 AND IT MOVES A BOUNDARY (chair ruling G1,
@@ -1814,6 +1816,7 @@ export function tickStreamSeedOf(worldState, { absent }) {
   return `${base}${epochSuffix(latest.epoch)}`;
 }
 ```
+[CORRECTED 2026-10-16 (coherence fold) — AS BUILT the accessors take `{ base }` (the site's OWN coerced seed, handed in) and `{ base, yearBase }`: `export function tickStreamSeedOf(worldState, { base })` and `export function yearStreamSeedOf(worldState, year, { base, yearBase })` (advanceEpochLedger.js:160, :213). The `{ absent }` sketch above could not reproduce five of six coercions (the leaf's own header, advanceEpochLedger.js:133-138, "a correction to the volume's sketched signature"). The in-pulse call site is `yearStreamSeedOf(worldState, seasonClock.year, { base: startingWorldState.rngSeed, yearBase: 1 })` (pulseKernel.js:568), not `{ absent: undefined, yearBase: 1 }`. §3b.3's per-site fidelity law is met by construction at each call site. This is the ODQ "docs act" that never came (findings EP S3).]
 
 ⚠⚠ **THE `absent` ARM IS BYTE-VERBATIM AND THAT IS A HARD CONSTRAINT, NOT A STYLE NOTE.**
 `base` must reproduce the calling site's coercion CHARACTER-FOR-CHARACTER — §3b.3's nine
@@ -1870,7 +1873,7 @@ itself, is mounted with `worldState: memoryState` and therefore inherits the sta
 
 **MEASURED: `applyWorldPulseOutcomes` has FIVE call sites, and only ONE is the pulse.** The
 others hand it a world the pulse did not compose, and two of them can reach
-`applyRealmVerbOrder` and therefore rows 14/15/16:
+`applyRealmVerbOrder` and therefore rows 14/15/16: [CORRECTED 2026-10-16 (coherence fold) — REFUTED (EP_CHAIR_RULINGS B2, measured at cbd348a5): `mintRealmVerbProposal` composes NO seed — it routes through the `applyMode === 'proposal'` `continue` (applyWorldPulse.js:372) and never reaches `applyRealmVerbOrder` — so there is ONE DM door, `applyWorldPulseProposal`; "two of them" and every "TWO DM doors" below are history ("The DM door count is ONE, not TWO, everywhere"). B2 is RULED reading (a); reading (b) is owner escalation E3, kept at (a) by RULED BY DELEGATION 2026-10-16, OD-FC-34 (findings EP C5, S9).]
 
 | Door | Symbol | World it passes | Reaches a family-1 draw? |
 |---|---|---|---|
@@ -1972,7 +1975,7 @@ string rather than as a differential.
 Revision 2 dispositioned twenty-five compositions and named only SOME of the reads that
 feed them, which is how §0.3 R9's three misses survived two adversarial passes. The two
 denominators are different numbers and both are now frozen: **TWENTY-FIVE compositions ·
-TWENTY-TWO runtime read sites.**
+TWENTY-TWO runtime read sites.** [see the bracket at :341]
 
 **DEFINITION (binding on the walker).** A READ SITE is a runtime expression in `src` that
 takes `rngSeed` off a world-shaped object (`worldState` · `state` · `startingWorldState` ·
@@ -2271,7 +2274,7 @@ the unit moved; the compositions are still nine.
 > advance that FIRST ENTERED that year. Home: `spatialLedgers.advanceEpoch =
 > { byYear: { '<canonical 1-based year>': '<epoch>' } }` — the L4-sanctioned conditional
 > sub-key, ONE writer, drop-when-absent, bounded by product scope (sub-century: ≤ ~100 rows
-> of ~14 bytes). ⭐ **`current` IS STRUCK IN REVISION 4 (J-EP-12): it had no reader and would
+> of ~14 bytes). [see the bracket at :3348] ⭐ **`current` IS STRUCK IN REVISION 4 (J-EP-12): it had no reader and would
 > have been a fourth flag-dark leak surface.** Accessor
 > `yearStreamSeedOf(worldState, year, { absent, yearBase })` returns the site's own `absent`
 > coercion of `rngSeed` when the ledger is absent and
@@ -2395,7 +2398,7 @@ class. `tests/lint/entropyRootCensus.walker.test.js` instead:
 4. **IS A SHRINK-ONLY INVENTORY WITH TWO BASELINES, NOT ONE (revision 3).** Baseline A:
    the **twenty-five** measured compositions across sixteen modules. Baseline B: the
    **twenty-two** measured READ SITES of §3b.2a, each with its coercion string and its
-   disposition. A new composition OR a new read landing unclassified REDS; both baselines
+   disposition. [see the bracket at :341] A new composition OR a new read landing unclassified REDS; both baselines
    may only shrink. **Revision 2 carried only baseline A**, which is precisely why three
    reads could go missing while the composition count reproduced exactly — the instrument
    could not have caught its own gap.
@@ -2481,7 +2484,7 @@ on which of its THREE callers is running.
 **THE RULE.** The accessor takes each site's OWN absent-seed coercion as an EXPLICIT
 argument — `tickStreamSeedOf(worldState, { absent })` (⭐ **whose SOURCE, SELECTION RULE and
 BODY are §3b.1b's, new in revision 6 — before it, this signature had none, §0.3 R13**) /
-`yearStreamSeedOf(worldState, year, { absent, yearBase })`
+`yearStreamSeedOf(worldState, year, { absent, yearBase })` [see the bracket at :1819]
 — or, if the chair prefers, PER-FAMILY accessors that each reproduce one coercion
 exactly. **There is no default.** Omitting the argument is a type error, not a fallback:
 this is §1.4's own law ("absent ⇒ the term is not concatenated at all, NEVER `epoch:0`")
@@ -2505,7 +2508,7 @@ diffable, not restorable.
 
 | # | Fork point | Store symbol | Epoch behaviour |
 |---|---|---|---|
-| 1 | **Undo the last advance** (primary) | `undoLastPulse` → `runUndoLastPulse` | **NOTHING IS OWED.** MEASURED: undo does not splice a record out of an array — it restores the whole pre-advance `worldState` via `restorePulseSnapshotOnDraft`, and that snapshot carries the pre-advance `pulseHistory`. The undone entry and its epoch vanish with the world; the next advance mints fresh. ⚠ `pulseUndoStack` is SESSION-ONLY (`PULSE_UNDO_CAP = 10` per campaign, absent from `partialize`) — the headline story is reload-fragile TODAY, independent of this program (Q2 note) |
+| 1 | **Undo the last advance** (primary) | `undoLastPulse` → `runUndoLastPulse` | **NOTHING IS OWED.** MEASURED: undo does not splice a record out of an array — it restores the whole pre-advance `worldState` via `restorePulseSnapshotOnDraft`, and that snapshot carries the pre-advance `pulseHistory`. The undone entry and its epoch vanish with the world; the next advance mints fresh. ⚠ `pulseUndoStack` is SESSION-ONLY (`PULSE_UNDO_CAP = 10` per campaign, absent from `partialize`) — the headline story is reload-fragile TODAY, independent of this program (Q2 note) [CORRECTED 2026-10-16 (coherence fold) — ESCALATED as E1 (EP_CHAIR_RULINGS §9) and never answered by the owner; confirmed session-only at 00b648c9d (campaignWorldPulseSlice.js:16, "NOT persisted; a reload clears it"; `PULSE_UNDO_CAP = 10` at pulseUndoCap.js:32). Until a persisted ring lands, the directive's undo-and-re-advance story holds within a session only (findings EP S2). The row is now ruled by delegation: RULED BY DELEGATION 2026-10-16, OD-FC-32, beside.] [RULED BY DELEGATION 2026-10-16 (OD-FC-32 — escalation E1: persist the undo ring (today session-only, `pulseUndoStack` with `PULSE_UNDO_CAP = 10`). The directive's own sentence ("he undos and advances time again") works only within a session; findings EP §8 calls the persisted ring "the highest felt value per line in this family; not chartered anywhere". RULED BY DELEGATION 2026-10-16 (fold §7, vetoable): persist the newest TWO entries, the ruling's cheaper arm (the whole ring costs a 2-4 MB upsert). A persisted shape and an upsert-size change, owed before `advanceEpochEnabled` lights (RULED BY DELEGATION 2026-10-16, OD-FC-34); no wave in §4 charters it yet, and fold §2 records it UNBUILT. SLOT (the never-deferred law): EP-6 THE REMEMBERED UNDO — persist the newest two undo entries; lands after EP-4, before EP-5's copy, in the chain that lights the advance epoch] |
 | 2 | **Undo the last applied proposal** | `undoLastProposalApply` → `runUndoLastProposalApply` | **NOTHING IS OWED, and the epoch must not disturb it.** It rewinds an adjudication; the tick does not move. The only coupling is `runUndoLastPulse`'s ring-coherence prune (`entry.advanceDepth <= depth`); EP touches neither `advanceSeqByCampaign` nor `proposalUndoStack`. Pinned as a negative |
 | 3 | **Abandon a PAUSED advance** (reload-safe) | `parkedIntervalUndoSnapshot` via `canUndoLastPulse` / `runUndoLastPulse` | **THE WHOLE advance's epoch is invalidated, never half of it.** Abandoning restores `preSnapshot.worldState`, which predates the epoch; the cursor and its `advanceEpoch` are cleared with it |
 | 4 | **Resume a paused advance with different verdicts** | `resolveIntervalMajors` → `runResolveIntervalMajors` | **THE CONSTRAINT, NOT THE OPPORTUNITY: the SAME epoch is reused, never re-minted.** The resume RE-DERIVES the paused tick from the cursor's pre-tick inputs and must land byte-identically to the pause's committed minors — the invariant `RESIDUE_STRIP_SITES` / `assertNoResidueLeak` exist to protect. Threaded exactly like `now`: `options.epoch \|\| cursor.advanceEpoch \|\| null` |
@@ -2515,8 +2518,8 @@ diffable, not restorable.
 
 | Consumer | Symbol chain | Epoch ruling |
 |---|---|---|
-| ⭐ **The rules-dialog PREVIEW (USER-FACING; added by chair ruling R2)** | `SimulationRulesDialog.jsx` → `campaignWorldPulseSlice.js#previewCampaignWorldPulse` → `campaignWorldPulseDeferred.js#runPreviewCampaignWorldPulse` → `advanceCampaignWorld.js#previewCampaignWorldPulse` → `runWithPinnedContent(args, false)` → `simulateCampaignWorldPulse({ …pulseArgs, commit })` | **INHERIT, NEVER MINT — it must be threaded the SAME epoch the committed advance would use.** Predicting the actual future is its entire job |
-| The forecast | `forecastRun.js` (forecast over drained clones) | **INHERIT, NEVER MINT** — a forecast that mints stops predicting the advance it forecasts; it receives the current pending epoch or `null` |
+| ⭐ **The rules-dialog PREVIEW (USER-FACING; added by chair ruling R2)** | `SimulationRulesDialog.jsx` → `campaignWorldPulseSlice.js#previewCampaignWorldPulse` → `campaignWorldPulseDeferred.js#runPreviewCampaignWorldPulse` → `advanceCampaignWorld.js#previewCampaignWorldPulse` → `runWithPinnedContent(args, false)` → `simulateCampaignWorldPulse({ …pulseArgs, commit })` | **INHERIT, NEVER MINT — it must be threaded the SAME epoch the committed advance would use.** Predicting the actual future is its entire job [CORRECTED 2026-10-16 (coherence fold) — UNSATISFIABLE ON AN UNPAUSED LIT WORLD: no pending epoch exists there (the advance mints at the store, §2.2, and J-EP-12 struck the only persisted home a pending epoch could have had), so the preview and the forecast compose the LEGACY stream while the Advance composes a fresh epoch-bearing one (campaignWorldPulseDeferred.js:124 `previewCampaign.worldState?.pausedAdvance?.advanceEpoch \|\| null`; forecastRun.js:111 `ws.pausedAdvance?.advanceEpoch ?? null`). The code comment at campaignWorldPulseDeferred.js:118-122 names this exact failure as the reason not to mint; not minting produces the same failure. EP-2's agreement pin hands both runs one epoch and cannot see it. The ruling the reader called owed (findings EP C1, §11 Q-A) is RULED BY DELEGATION 2026-10-16, OD-FC-31, beside.] [RULED BY DELEGATION 2026-10-16 (OD-FC-31 — the living future vs the forecast. Once lit, no pending epoch exists on an unpaused world, so the Auspice "A year" forecast (AuspicePanel.jsx, `simulatePendingFuture`) runs the legacy stream and the Advance runs a fresh one. Options: (a) pre-mint and PERSIST the NEXT pending epoch at each advance, so the preview, the forecast and the Advance share it and an undo RE-MINTS (a persisted field; it partly revives J-EP-12's struck `current`, so its build owes J-EP-12's three grounds an answer); (b) relabel the lit forecast "a plausible year", copy only; (c) keep the forecast dark-only under the flag. RULED BY DELEGATION 2026-10-16 (fold §7, vetoable): (a) pre-mint — "the only reading under which 'predicting the actual future is its entire job' stays true". It moves a persisted shape and must land before `advanceEpochEnabled` lights (RULED BY DELEGATION 2026-10-16, OD-FC-34). The law beside this bracket is not altered. BUILD ANSWER to J-EP-12 (as rebuilt after skeptic S3 B1): the pending epoch is homed in THIS ledger beside `latest` — `spatialLedgers.advanceEpoch.pending = { forTick, epoch }` — never on `pausedAdvance`, whose presence IS the pause signal (realmItemReadModel.js:975 and four more readers); read only when lit and `forTick === tick + 1`; minted at the end of every lit advance and at the first lit advance of a born or imported world; a lit→dark flip leaves it unread and the next lit write replaces it; undo restores the snapshot's own `pending`; replay reads the recorded epoch — J-EP-12's three grounds (no `current` under a dark flag, no survival across a flip, no second mint site) are each answered] |
+| The forecast | `forecastRun.js` (forecast over drained clones) | **INHERIT, NEVER MINT** — a forecast that mints stops predicting the advance it forecasts; it receives the current pending epoch or `null` [see the brackets at :2521] |
 | The R-18 paranoia re-run | `simulateCampaignWorldInterval(cloneJson(multiTickArgs))` + diff | **FREE** (args-borne; an ambient epoch would red it on every advance) |
 | Catch-up | `runCatchUpCampaignWorld` | **MINT** (J-EP-5) — advances a world not yet lived |
 | Surveyor autonomy | `AutonomyPanel.jsx`'s loop → `lib/surveyorAutonomy.js#runAutonomousAdvance` | **MINT** (J-EP-5); its receipt already carries `String(startCampaign?.worldState?.rngSeed ?? '')` and gains the epoch beside it |
@@ -2526,7 +2529,7 @@ through `advanceInterval.js`'s `tickArgs`, where revision 1 threaded the value: 
 deferred body calls the domain function directly with
 `{ campaign: previewCampaign, saves, interval, now, customContent }`. The epoch must be
 added to THAT literal, sourced from the same place the committed advance sources it —
-the campaign's pending epoch (`worldState.pausedAdvance?.advanceEpoch`) or `null`. The
+the campaign's pending epoch (`worldState.pausedAdvance?.advanceEpoch`) or `null`. [see the brackets at :2521 — on an unpaused lit world this source is `null`] The
 preview also builds `previewCampaign = cloneJson(campaign)` and may overwrite
 `worldState.simulationRules` from `options.simulationRules`, so **§2.3b's kernel flag
 read sees the PREVIEWED rules, not the campaign's** — which is correct and is the
@@ -2634,7 +2637,7 @@ the same pinned-inputs set, proving a string epoch survives `structuredClone`.
 `ensureWorldState` (`cloneArray(raw?.pulseHistory).slice(-MAX_HISTORY)`). The 81st-oldest
 advance's epoch is EVICTED — for exactly the long-lived worlds most worth debugging. The
 declaration lands in this volume, in the ledger row, and as an in-file comment at
-`appendPulseHistory`, so the next reader finds a ruling.
+`appendPulseHistory`, so the next reader finds a ruling. [CORRECTED 2026-10-16 (coherence fold) — 80 RECORDS, not 80 advances: a `one_year` advance appends 52 records into the 80-ring before collapsing to one, so the ring nets to 29 (tests/domain/historyRingCollapse.test.js:150-159, "52 appended, collapsed to 1 ⇒ ring nets to 80 - 51 = 29"; the slice is per tick, advanceInterval.js:132-137). A year-cadence DM's replay and receipt horizon is about 29 advances, and requirement 7's cause walk ages out about 2.7 times faster at that clock (coherence fold §1 requirement 23, THE RETENTION-HORIZON LAW). EP-5's replay sentence and HB's inheritance of "80 advances" must carry this figure (findings EP S1, C7, X11).] [RULED BY DELEGATION 2026-10-16 (OD-FC-33 — 2026-10-16 (coherence fold §7, requirement 23) — the ring policy at the year clock: accept 29; raise the cap for collapsed intervals (persistence size); or collapse BEFORE eviction so a year costs one slot. RULED BY DELEGATION 2026-10-16 (fold §7, vetoable): collapse before eviction (every family's receipts benefit; one ring-policy change on a persisted array, `pulseHistory`). Until that lands, Q3's declared bound reads "80 records, about 29 year advances".]
 
 Replay is a DM/owner-private door; §8.2 proves the epoch reaches no public payload.
 
@@ -2718,7 +2721,7 @@ argument is the generation config, and it carries a `seed` key"). `state.config`
 persisted (the `partialize` allowlist), so one sample-fork click makes EVERY subsequent
 generation on that device throw until the config is cleared. The throw is CONFIRMED by an
 executed node probe; the end-to-end browser symptom is PLAUSIBLE-HIGH. EP-4 repairs it
-first, and Q5's ruling removes two of its three callers anyway.
+first, and Q5's ruling removes two of its three callers anyway. [see the bracket at :3201]
 
 **⭐⭐ H1's OWNER-GATED CLASSIFICATION — RULED, NOT LEFT ARGUABLE (chair ruling P5,
 revision 3).** Revision 2 flagged the hazard ("removing an admitted key SHRINKS a
@@ -2875,6 +2878,7 @@ publishing commit.
 
 **EP-0 — THE PURE SEGMENT + THE ROOT CENSUS** (no flag; dark by construction;
 EARLY-ELIGIBLE — zero spine reads, zero engine behaviour).
+[ADDED 2026-10-16 (coherence fold, req 16/17) — FIRST-VISIBLE: none — instrumentation (the pure segment, the stream-identity pin and the entropy-root census walker; LANDED 6e4f9c3de 2026-08-16) · TIER: aspatial-safe (findings EP §7: every EP mechanism is aspatial, needs no spatial canon and no belief infoMode; LIT-1 reports RUN in all seven presets) · host flags: none · DEGRADED ARM: n/a — dark by construction (no flag, no caller)]
 *Charter:* `epochSuffix` minted in `src/kernel/prng.js` beside `fork`'s delimiter
 docblock (J-EP-2), docblock verbatim at §2.3; the delimiter-alias pin extending
 `tests/kernel/prngForkLabelDelimiter.test.js` with an `epoch`-family row;
@@ -2884,13 +2888,13 @@ strings as hard-coded literals; **the ENTROPY-ROOT census walker** (§3b.2, re-c
 one per measured read spelling (up from eight — revision 3 added the `?? ''` spelling and
 the RAW UNCOERCED ARGUMENT-POSITION read, neither of which revision 2's set could match),
 plus the ONE mandatory negative control (`personaSlicer.js`'s entity-seeded `rngSeed:`
-key must NOT match)**. *Budgets:* `prng.js` ≤ +12 effective (far under its layer ceiling —
+key must NOT match)**. [CORRECTED 2026-10-16 (coherence fold) — superseded by T6: the MANDATORY negative control is NC-1 `economyReconciliation.js`; `personaSlicer.js` is the WEAK secondary, zero `src` importers (§3b.2a; the walker agrees, entropyRootCensus.walker.test.js:182-185; findings EP C2).] *Budgets:* `prng.js` ≤ +12 effective (far under its layer ceiling —
 VERIFY-AT-BUILD); walker ≤ **380** (up from 320: three consumer idioms, nine positive
 controls, one negative control, TWO baselines, and the re-run closure record). *Pins:*
 empty-string identity (`x + epochSuffix(null) === x`) over a table of real seeds; **the
 walker's TWO shrink-only frozen baselines — twenty-five classified compositions across
 sixteen modules AND twenty-two classified READ SITES with their coercion strings
-(§3b.2a)**; a planted twenty-sixth composition REDS (executed mutant); **a second executed
+(§3b.2a)**; [see the bracket at :341] a planted twenty-sixth composition REDS (executed mutant); **a second executed
 mutant plants it in the `hash01` idiom specifically**, because a walker that only catches
 `createPRNG` is the exact failure revision 1 shipped; **and a THIRD executed mutant plants
 a twenty-THIRD READ SITE in the uncoerced argument-position spelling
@@ -2904,6 +2908,7 @@ institutionalises, and states that R7 refuted this wave's own first charter.
 
 **EP-1 — THE KERNEL SEAM + THE FLAG** (flag `advanceEpochEnabled` + manifest +
 certification lane, ONE commit; needs EP-0).
+[ADDED 2026-10-16 (coherence fold, req 16/17) — FIRST-VISIBLE: lit, "a re-advanced interval differing" at the pulse root (findings EP §8: "a re-advanced interval differs"), felt most at season or year; PLAUSIBLE per §7, a one-week re-advance mostly re-draws the same quiet week. Undo then re-advance holds within one session only until RULED BY DELEGATION 2026-10-16, OD-FC-32 lands. LANDED 01388030b 2026-08-16 · TIER: aspatial-safe (findings EP §7: every EP mechanism is aspatial, needs no spatial canon and no belief infoMode; LIT-1 reports RUN in all seven presets) · host flags: `advanceEpochEnabled` (in the manifest, simulationRules.js:241; lit in no preset) · DEGRADED ARM: dark — the legacy same-seed stream, character-for-character (chain link L5: `epochSuffix(null) === ''`)]
 *Charter:* **the SIX enumerated token-level edits at `pulseKernel.js` (§3b.1's EP-1 table
 — the exhaustive list, including the `../clock.js` import token and the record-literal
 fold revision 2 omitted)**, with the verbatim seam comment and the R-BLD-10 citation;
@@ -2913,7 +2918,7 @@ threaded through `advanceInterval.js`'s per-tick `tickArgs` and
 gate spelling (§2.2); the conditional `epoch` field on `pulseRecord` (§1.2);
 `assertEpochPinnedInTest` in `src/domain/clock.js` called at the same two entry points;
 manifest join in alphabetical position + the NEW lane `subsystemRowsEpoch.js` + the first
-by-name gate read, all in this commit.
+by-name gate read, all in this commit. [see the bracket at :3460]
 *Budgets:* pulseKernel ZERO new lines across ALL SIX edits (STOP-and-report if the
 enforcer disagrees — three statements now fold onto §3b.1's measured target line and one
 spread folds onto `createdAt: now,`, so this is the likeliest budget to move and the
@@ -2928,7 +2933,7 @@ composition pin (a row with no `epoch` composes the literal legacy string); JSON
 round-trip through REAL serialization; an executed mutant on `epochSuffix`'s truthiness
 branch. *Dormancy:* flag dark ⇒ `epochSuffix` returns `''` ⇒ the pre-wave string ⇒ 32
 property dormancy goldens, 27 golden fixtures, 8 `dormancyOracle` byte-identity suites,
-87 direct-kernel tests and 11 soak fixtures untouched — VERIFY, do not assume.
+87 direct-kernel tests and 11 soak fixtures untouched — VERIFY, do not assume. [CORRECTED 2026-10-16 (coherence fold) — the 32 · 27 · 8 figures here are the set this volume's own §8.1 row 4 records as REFUTED: 53 goldens · 16 fixtures · 49 oracle suites · 12 four-fence sets measured at the EP-F round; re-derive at the base of any re-use (findings EP X10, S10; the compiled fold carries the same refuted set, which is lane H's).]
 *Req 13:* declared-empty (substrate). *Req 14:* engine-only, recorded. *Collision:*
 `pulseKernel.js` is the pulse mouth — CHECK-GIT-FIRST mandatory, quiet window required.
 ⚠⚠ ⭐ **AND EP-1 IS ITSELF A CQ5 FLAG WAVE (stated here in revision 5 beside EP-3 slice B's
@@ -2940,6 +2945,7 @@ SERIALIZED against every other flag wave: serialize, or one worktree each. Non-f
 parallelize fine.
 
 **EP-2 — THE FORK SEMANTICS** (second slice of the flag; needs EP-1).
+[ADDED 2026-10-16 (coherence fold, req 16/17) — FIRST-VISIBLE: none — correctness (the cursor, the resume re-thread, the preview and forecast INHERIT, the catch-up and surveyor MINT; findings EP §8 "nothing (correctness)"). ⚠ Under lit, the Auspice "A year" forecast does not match the advance until RULED BY DELEGATION 2026-10-16, OD-FC-31 is built. LANDED 20df088ba 2026-08-16 · TIER: aspatial-safe (findings EP §7: every EP mechanism is aspatial, needs no spatial canon and no belief infoMode; LIT-1 reports RUN in all seven presets) · host flags: `advanceEpochEnabled` (in the manifest, simulationRules.js:241; lit in no preset) · DEGRADED ARM: dark — no cursor key; the preview and the forecast compose the legacy stream, which is what the dark advance composes]
 *Charter:* the cursor field at `buildPausedAdvanceCursor` + the three-term re-thread at
 `runResolveIntervalMajors` (§1.3); **the PREVIEW thread (chair ruling R2) — the epoch
 added to `campaignWorldPulseDeferred.js`'s `previewCampaignWorldPulse({…})` argument
@@ -2949,7 +2955,7 @@ byte-equality tests (teaching, never weakening); the five-affordance undo table 
 five-row consumer table (§3c) pinned row by row including both NEGATIVES.
 *Budgets:* campaignAdvanceSession ≤ +30; forecastRun ≤ 8; campaignWorldPulseDeferred ≤ 4.
 *Pins:* **preview↔commit agreement from identical state with the same pending epoch,
-executed in BOTH flag states, with the drop-the-epoch-from-preview mutant RED**;
+executed in BOTH flag states, with the drop-the-epoch-from-preview mutant RED**; [see the brackets at :2521 — this pin hands both runs one epoch, so it cannot see the unpaused-world gap]
 pause→reload→resume byte-equivalence WITH the cursor epoch, and its RED without
 it as an executed mutant — the program's highest-risk claim; a legacy cursor with no
 `advanceEpoch` resumes as epoch-absent; undo→re-advance draws a DIFFERENT world (lit) and
@@ -2962,6 +2968,7 @@ undo verb is UNCHANGED in shape and CHANGED in meaning — recorded, and it is t
 **EP-3 — THE SIDE-CHANNEL DISPOSITION** (rides the flag; needs EP-1; **TWO SLICES, and
 only slice B is CHAIR-GATED ON Q1** — a revision-2 split: family 1 no longer waits on the
 year-anchor decision).
+[ADDED 2026-10-16 (coherence fold, req 16/17) — FIRST-VISIBLE: "a re-advanced interval differing": undo then re-advance yields a different interval — slice A, another succession winner (`npcLadderContest.js#tieBreak`) or another city choice (`demographicsResponses.js#selectResponse`), resolving at season or year; slice B, lived winters hold while un-lived years re-draw, at the yearly clock (findings EP §7, §8). Within one session only until RULED BY DELEGATION 2026-10-16, OD-FC-32. LANDED 9e8ea20bd (slice A) and 0fa3ac541 (slice B, Q1 = Arm A) 2026-08-16 · TIER: aspatial-safe (findings EP §7: every EP mechanism is aspatial, needs no spatial canon and no belief infoMode; LIT-1 reports RUN in all seven presets) · host flags: `advanceEpochEnabled` (in the manifest, simulationRules.js:241; lit in no preset); slice B also needs Q1 = Arm A (ruled) · DEGRADED ARM: dark — the legacy same-seed stream, character-for-character (chain link L5: `epochSuffix(null) === ''`) at all twenty-five compositions (the per-site dormancy suite of §3b.3); under Arm B slice B never builds and family 2 stays epoch-invariant]
 *Charter, slice A (either arm) — ⭐⭐ **THE WRITER AND THE STAMP FIRST (§3b.1b, chair ruling G1,
 revision 6 — revisions 2–5 chartered this slice around an accessor with NO EPOCH SOURCE, §0.3
 R13), THEN THE FOURTEEN TICK-VARYING RE-ROOTS + THE TICK-FREE ONE (fifteen compositions at
@@ -3154,6 +3161,7 @@ travels with it.
 
 **EP-4 — THE GENERATOR-SIDE LAW** (⭐ **RE-SCOPED IN REVISION 2, chair ruling R7**;
 INDEPENDENT LANE; three slices).
+[ADDED 2026-10-16 (coherence fold, req 16/17) — FIRST-VISIBLE: none on any advance — generator-side and NOT STARTED; its sign, lit, is per CLICK (slice 2: two instant-world Generate clicks give two realms; findings EP §7 "immediate (generation)"). Slice 1 is cured elsewhere (see the bracket at :3201) · TIER: aspatial-safe (findings EP §7: every EP mechanism is aspatial, needs no spatial canon and no belief infoMode; LIT-1 reports RUN in all seven presets) · host flags: `advanceEpochEnabled` for slice 2 only (slice 1 unflagged; slice 3 is door swaps with no behaviour change); A4/A5 is a paid/founder surface parked at §7a row 1 · DEGRADED ARM: dark — today's generate behaviour exactly (A3 mints once at mount; `bridge.resetMap()` is called argument-free)]
 
 **⛔ TWO SLICES ARE EXTRACTED FROM THIS WAVE ENTIRELY AND PARKED AS OWNER-QUEUE ROWS**
 (§7a rows 1 and 2). ⚠ **TWO SLICES EXTRACTED, FOUR ROWS PARKED** — §7a also carries H5
@@ -3190,7 +3198,7 @@ the five-part measured argument and its two recorded residuals are in §3e**):*
 `generateSettlement`'s `fullConfig` build AND remove `seed` from
 `CONFIG_PATCH_EXTRA_KEYS`, with `tests/store/updateConfigPatchValidation.test.js` amended
 in the same commit since it currently ASSERTS the admission (its two assertions are
-REPLACED WITH THEIR INVERSES plus a fork-shape pin, never deleted). ⚠ Removing an admitted
+REPLACED WITH THEIR INVERSES plus a fork-shape pin, never deleted). [CORRECTED 2026-10-16 (coherence fold) — H1's break was CURED outside EP (9f75594fc, 2026-09-16: "a config-level `seed` is dropped where the store config and saved configs reach the pipeline, and the two fork surfaces stop writing it"), and that commit deliberately KEEPS `seed` admitted in `CONFIG_PATCH_EXTRA_KEYS` (src/store/configSlice.js:80) because "pruning it would change saved-config loads, which tests/generators/configPatchAllowlistWalker.test.js records as a product call". Slice 1's removal half is withdrawn unless that product call is reversed (findings EP S8, §11 Q-G).] ⚠ Removing an admitted
 key SHRINKS an admission predicate, **not a persisted shape** — `updateConfig` is a patch
 loop that cannot delete, `partialize` is untouched, and `state.config.seed` has ZERO
 readers in `src`. Pin `state.config`'s serialized KEY SET before and after anyway and
@@ -3229,7 +3237,7 @@ that earns it, not a softening.
 *Req 14:* ENGAGED — every row IS a DM verb; the table is the edit-verb story.
 
 **EP-5 — THE PROMISE AMENDMENT** (no code behaviour; lands LAST, at the terminal-phase
-gate). *Charter:* the amended-in-place sentences at every home §8.5 enumerates — **now
+gate). [ADDED 2026-10-16 (coherence fold, req 16/17) — FIRST-VISIBLE: none — copy (the amended promise sentences and the marketing guard's release, at lighting time only; NOT STARTED). Its replay sentence must carry Q3's bound at the year clock (RULED BY DELEGATION 2026-10-16, OD-FC-33) · TIER: aspatial-safe (findings EP §7: every EP mechanism is aspatial, needs no spatial canon and no belief infoMode; LIT-1 reports RUN in all seven presets) · host flags: `advanceEpochEnabled` lit in a shipped build (§8.3, RULED BY DELEGATION 2026-10-16, OD-FC-34) · DEGRADED ARM: dark — the old promise copy stands and the living-futures claim stays unclaimable] *Charter:* the amended-in-place sentences at every home §8.5 enumerates — **now
 FORTY-FIVE across four tiers, not forty-seven across five: the TIER-5 MEMORY PAIR IS
 ALREADY DISCHARGED BY THE CHAIR** (§8.6) — tier 1 copy 7 · tier 2 docs/law 15 · tier 3
 code headers 10 · tier 4 tests 13; the marketing guard released (§8.3). *Pins:* every doc-reading
@@ -3250,7 +3258,7 @@ red IS the owner's review checkpoint.
 > clause below was applied to `docs/DESIGN_FP_ARCHITECTURE.md` at the EP/HB/WC
 > integration fold, with EP's rows composed LAST in every table (binding
 > condition C3 of the E5 ruling). **THE VERIFY-AT-FOLD BELOW WAS DISCHARGED BY
-> EXECUTION, NOT INHERITED:** the parent was re-counted at `%(head)s` before any
+> EXECUTION, NOT INHERITED:** the parent was re-counted at `%(head)s` [CORRECTED 2026-10-16 (coherence fold) — an unrendered template stamp: the landing HEAD is eca65c8a, as the promotion banner in this volume's header records (findings EP C9).] before any
 > row was placed and reads **52 flags · 75 waves · 66 logical seams (47 physical
 > rows, two of them compressed ranges)** — the fold package's PLAUSIBLE 75/66
 > CONFIRMED, so no STOP fired. Post-fold: **63 flags · 108 waves · 112 seams**,
@@ -3295,7 +3303,7 @@ flag row 44 (`espionageEnabled | ES-1`); WY adds rows 45–52
 (`severityDurableRumorsEnabled` · `caravanBodiesEnabled` · `flowMigrationPhysicalEnabled` ·
 `migrationCargoEnabled` · `moversCarryNewsEnabled` · `caravanSeizureEnabled` ·
 `caravanFloorEnabled` · `armySupplyEnabled`). **Post-fold flag count = 52, and EP's row is
-53 — that arithmetic is MEASURED-AT-BOTH-ENDS and survives.** The fold package also
+53 — that arithmetic is MEASURED-AT-BOTH-ENDS and survives.** [CORRECTED 2026-10-16 (coherence fold) — HISTORY: the landed row is 63 (item 1 below; DESIGN_FP_ARCHITECTURE.md §3), so this sentence is false in the present tense (findings EP C6).] The fold package also
 amends waves 60 → 68 → 75 and seams 45 → 58 → 66, **but its own anomaly A6 labels those
 deltas PLAUSIBLE, not measured** ("this pass did not COUNT the waves, seams, or flags in
 the live volume … a wrong count in a header is exactly the kind of inherited phantom").
@@ -3337,7 +3345,7 @@ the live volume … a wrong count in a header is exactly the kind of inherited p
    is owed (`ensureWorldState`'s `cloneArray` is a shallow per-record spread, not an
    allowlist — VERIFY-AT-BUILD); absent ⇒ the stream segment is not concatenated at all,
    NEVER `epoch:0`. Lifecycle-paths clause: docs/DESIGN_FP_ARCH_EP.md §8.4 (FOURTEEN
-   paths, the account-IMPORT drop declared)."
+   paths, the account-IMPORT drop declared)." [CORRECTED 2026-10-16 (coherence fold) — the ledger is `{ latest, byYear }`: `latest`, the writer, seam edit 9 and the `EXEMPT_LEDGER_KEYS` row are SLICE A (either arm, J-EP-14); `byYear` is Arm A (ruled, built 0fa3ac541). advanceEpochLedger.js writes both. The `{byYear}` spelling and "EP-3/Arm A" above are revision-4 history, and the compiled fold carries the same stale text (findings EP X9, C4).]
 3. **FP §5 THE WAVES — insertions.** EP-0 joins the EARLY-ELIGIBLE set. **EP-1, EP-2 and
    EP-3 land AFTER THE LIGHTING ROAD** — immediately after the CR-WR10-H discharge, which
    the fold package defines verbatim as "**SP-B + SP-B2 + ES-4 landed**" (that sentence is
@@ -3449,7 +3457,7 @@ the live volume … a wrong count in a header is exactly the kind of inherited p
 the frozen EIGHT and asserts three exact bijections plus
 `VIRTUAL_PENDING_RULE_KEYS.toEqual([])` — a ninth member forces an edit there (the red
 that bit TR-1). Veto cost: editing that test in EP-1's commit, legal but coupling this
-program to a file three other programs also want.
+program to a file three other programs also want. [CORRECTED 2026-10-16 (coherence fold) — NOT FOLLOWED at EP-1: the certification row landed in src/domain/certification/subsystemRowsVirtual.js:405 (`rule: 'advanceEpochEnabled'`) and that file's test was edited, which is the veto cost above, paid; no `subsystemRowsEpoch.js` exists at 00b648c9d (findings EP S7). The ruling text stands as history.]
 
 **J-EP-2 — `epochSuffix` LIVES IN `src/kernel/prng.js`.** Three measured reasons: (a)
 `pulseKernel.js` already imports from `prng.js`, so the seam costs ZERO new import lines
@@ -3558,7 +3566,7 @@ cost: leaving the row epoch-blind, which reintroduces exactly the "the fresh fut
 old future" failure for one DM verb.
 
 **⭐⭐ J-EP-11 — EP-3 SLICE B BUYS ONE LINE ON `pulseKernel.js`, DECLARED IN ADVANCE
-(chair ruling P1; revision 3).** MEASURED (§0.3 R9): row 1's IN-PULSE read site is
+(chair ruling P1; revision 3).** [CORRECTED 2026-10-16 (coherence fold) — SLICE A bought it (G1, J-EP-14); the body below already says so, and the heading was never amended (findings EP C3).] MEASURED (§0.3 R9): row 1's IN-PULSE read site is
 `pulseKernel.js`'s `seasonalContextFor({ rngSeed: startingWorldState.rngSeed, … })` — the
 severity the simulation actually runs on. Under Arm A it must be re-rooted, which needs
 `yearStreamSeedOf` in scope, which needs **one new import line on a file banked at
@@ -3597,7 +3605,7 @@ rather than re-deriving it.
 
 **⭐⭐ J-EP-12 — `current` IS STRUCK FROM THE ARM-A LEDGER (chair ruling T1, revision 4).**
 Revision 3 declared `spatialLedgers.advanceEpoch = { current, byYear }`. **The ledger is
-`{ byYear }` only.** THREE measured reasons, and the third is the one that decides it.
+`{ byYear }` only.** [CORRECTED 2026-10-16 (coherence fold) — superseded by G1: the ledger is `{ latest, byYear }`, with `latest` written under EITHER arm (§3b.1a). J-EP-12's strike of `current` stands (findings EP C4).] THREE measured reasons, and the third is the one that decides it.
 (a) **`current` has no reader.** The pending epoch is ARGS-BORNE by §3a's own law — a
 module-scoped or ambient read reds R-18 paranoia mode on every advance — so every consumer
 that needs it already has it as an argument. (b) **It duplicates a value that already has
@@ -3660,7 +3668,7 @@ entanglement revision 2 removed and makes the whole side-channel disposition wai
 OVERSIGHT (chair ruling G1's "name it" clause; revision 6).** MEASURED,
 `applyWorldPulseOutcomes` has FIVE call sites and only one is the pulse; two of the others
 (`mintRealmVerbProposal`, `applyWorldPulseProposal`) reach `applyRealmVerbOrder` and therefore
-family-1 rows 14/15/16 with a world the pulse did not compose. **RULED: they read the same
+family-1 rows 14/15/16 with a world the pulse did not compose. [see the bracket at :1876] **RULED: they read the same
 `latest` under the same selection rule, which on a committed world holds because the last
 advance stamped at exactly the tick that world sits at.** A DM order therefore resolves in the
 epoch the world it acts on is living in — coherent, stable for a given world (re-approving the
@@ -3721,14 +3729,14 @@ different product, and the directive's own framing ("undo deletes the history en
 linear. ⚠ Related live limitation, INDEPENDENT of this program: `pulseUndoStack` is
 SESSION-ONLY (not in `partialize`), so the headline user story works only WITHIN a session
 unless the advance was paused. Whether to persist the undo ring is an owner-gated
-persistence-shape question — **flagged, not decided here.**
+persistence-shape question — **flagged, not decided here.** [see the brackets at :2511]
 
 **Q3 — The replay horizon.** `MAX_HISTORY = 80` evicts old records and their epochs, so
 byte-exact replay is bounded to the newest 80 advances — for exactly the long-lived worlds
 most worth debugging. **RECOMMENDATION: accept and DECLARE the bound** (volume + ledger
 row + an in-file comment at `appendPulseHistory`). A parallel uncapped epoch log is a new
 persisted structure whose own size story must then be told, on a ring already carrying
-2-4MB through every Supabase upsert and every undo snapshot.
+2-4MB through every Supabase upsert and every undo snapshot. [see the brackets at :2640]
 
 **Q4 — The flag name.** `advanceEpochEnabled` (the seam) vs `livingFuturesEnabled` (the
 product). **RECOMMENDATION: `advanceEpochEnabled`.** Zero collisions measured for either,
@@ -3779,7 +3787,7 @@ sentence disagreeing with the table is a defect in this volume, not a judgement 
 | 1 | **A4/A5 — the sample-fork seed.** `src/data/sampleSettlements.js#forkSeedFor` is `` `${sample.config.seed}-${suffix}` ``, a pure function of (card, user), so the same user forking the same card gets the same town forever. Consumers: `generate/FoundingWorlds.jsx` (reads `s.auth.tier`; the fork is tier-gated above town) and `SettlementsPanel.jsx#forkSample` (a tier-gated sample "opens the purchase modal") | **PAID / FOUNDER SURFACE BEHAVIOUR** | **LIVING DOOR** — the fork button mints fresh; the sample's own seed stays typeable in the `SeedField`, which is the address. The existing docstring's justification ("so two users forking the same sample get mechanically-different towns") is about different USERS, never a second click. ⚠ This ruling also removes two of the three callers that poison `state.config.seed` (H1), so if it is DECLINED, H1's repair must still stand on its own |
 | 2 | **A11 — the town-map layout reroll.** MEASURED `export function nextLayoutVariant(edits) { return readLayoutVariant(edits) + 1; }`; `normalizeMapEdits` writes `if (variant > 0) out.layoutVariant = variant;`, and `doReset` zeroes it — so reset-then-reroll replays variant 1 forever | **PERSISTED SHAPE** (a key in a normalizer whose own docblock exists for "a stable stringify … byte-identity") | **MINT A SEED, DO NOT WIDEN THE COUNTER.** A counter that reset zeroes cannot be a living door; a seed field is the shape the rest of the estate already uses. Requires a `mapEdits` KEY-ORDER byte-identity proof and a migration story for existing `layoutVariant` values, which is why it is not a passing repair |
 | 3 | **H5 — `_regenSeed` holds only the LAST reroll** (`regenHistoryPipeline`'s own docstring: "ROOT `_regenSeed` HOLDS THE LAST SECTION REROLL, whichever section it was"), so an earlier reroll in a chain is unreplayable | **PERSISTED SHAPE on a DM-share blob** (migration 121 + `publicSafe.js`; the gallery strip is a top-level KEY list) | Widen to a per-action list at the ROOT only, with the gallery key-list impact measured first. **Already chair-gated in revision 1; recorded here so all FOUR parked rows sit in one place** |
-| 4 | **J-EP-10's separate finding — FORCE_RESETTLE's stream is TICK-INVARIANT** (`` `${rngSeed}:realm_verb` ``, no tick, no entity) | **SAME-SEED SHIFT / THE PROMISE** | Add the tick term as its OWN owner-signed change with a recorded golden shift. EP deliberately does not, in either flag state (J-EP-10) |
+| 4 | **J-EP-10's separate finding — FORCE_RESETTLE's stream is TICK-INVARIANT** (`` `${rngSeed}:realm_verb` ``, no tick, no entity) | **SAME-SEED SHIFT / THE PROMISE** | Add the tick term as its OWN owner-signed change with a recorded golden shift. EP deliberately does not, in either flag state (J-EP-10) [see the bracket at :3865 — E2 ruled DEFER] |
 
 ## §7b CHAIR-OWED DISPOSITIONS (revision 4 — NOT owner-gated, NOT extracted from any wave;
 ## reported here because EP measured them and nothing else in the estate has)
@@ -3793,7 +3801,7 @@ revision 6 on** (B1 and B2), and every statement of it in this volume says TWO.
 
 | # | Row | What EP measured | Recommendation |
 |---|---|---|---|
-| **B2** ⭐ | **SHOULD A DM ORDER RE-ISSUED ON THE SAME WORLD DRAW FRESH?** (new in revision 6, chair ruling G1's "name it" clause; J-EP-15 rules the epoch READ and deliberately does not rule this) | MEASURED at HEAD, independent of this program: `mintRealmVerbProposal` composes `` `${String(state.rngSeed ?? 'realm')}:realm_verb:${nowTick}` `` off the COMMITTED world, so **two identical DM orders issued on the same tick already draw identically today**, and undoing an order and re-issuing it replays the same outcome. Under J-EP-15 the epoch enters that key, so the draw changes across a re-ADVANCE — but not across a re-ISSUE on the same world. The directive's engine clause governs time advances and its generator clause governs generate/reroll affordances; **a DM verb that mints an outcome is neither, and §3e's eighteen-affordance census does not carry it** | **REPORT, DO NOT BUILD.** Two readings are live and the chair owns the choice: (a) a DM order is an ACTION IN THE WORLD, so replaying it identically is correct and the current behaviour stands; (b) it is a user-facing draw and the directive's "every click" clause reaches it, in which case it needs a mint of its own at the store layer and joins the §3e affordance manifest as a NINETEENTH row. ⚠ **EP changes it in neither flag state**, and the pre-existing same-tick collision is recorded here so the next auditor finds a ruling rather than a fresh bug |
+| **B2** ⭐ | **SHOULD A DM ORDER RE-ISSUED ON THE SAME WORLD DRAW FRESH?** (new in revision 6, chair ruling G1's "name it" clause; J-EP-15 rules the epoch READ and deliberately does not rule this) | MEASURED at HEAD, independent of this program: `mintRealmVerbProposal` composes `` `${String(state.rngSeed ?? 'realm')}:realm_verb:${nowTick}` `` off the COMMITTED world, [see the bracket at :1876 — this premise is the refuted one; E3 is ruled at RULED BY DELEGATION 2026-10-16, OD-FC-34] so **two identical DM orders issued on the same tick already draw identically today**, and undoing an order and re-issuing it replays the same outcome. Under J-EP-15 the epoch enters that key, so the draw changes across a re-ADVANCE — but not across a re-ISSUE on the same world. The directive's engine clause governs time advances and its generator clause governs generate/reroll affordances; **a DM verb that mints an outcome is neither, and §3e's eighteen-affordance census does not carry it** | **REPORT, DO NOT BUILD.** Two readings are live and the chair owns the choice: (a) a DM order is an ACTION IN THE WORLD, so replaying it identically is correct and the current behaviour stands; (b) it is a user-facing draw and the directive's "every click" clause reaches it, in which case it needs a mint of its own at the store layer and joins the §3e affordance manifest as a NINETEENTH row. ⚠ **EP changes it in neither flag state**, and the pre-existing same-tick collision is recorded here so the next auditor finds a ruling rather than a fresh bug |
 | **B1** | ⭐ **`src/domain/ai/personaSlicer.js` HAS ZERO IMPORTERS IN `src` — a DEAD MODULE by production reach** | MEASURED at HEAD: `grep -rn "personaSlicer" src tests scripts` (excluding the file itself) returns **only TEST importers** — `tests/domain/personaSlicer.test.js`, `tests/domain/personaSlicerFactionRoster.test.js`, `tests/domain/factionNamePrecedence.test.js` — plus two `tests/lint/negativeAssertionAnchor.walker.test.js` manifest rows and two comment mentions in `tests/lint/factionNamePrecedenceScan.test.js`. **No `src` file imports it.** It is exercised, pinned and maintained by three test files and reached by no product path | ⛔ **REPORT, NEVER DELETE — and EP has no standing to touch it.** Two readings are live and the chair owns the choice: (a) it is AI-grounding infrastructure staged AHEAD of the surface that will consume it, in which case the right act is a one-line in-file note saying so, so the next auditor does not "clean it up"; (b) it is a genuinely orphaned module, in which case its removal is a separate decision with its own consumer census and its own test-estate consequences (three test files and two walker manifest rows move with it). ⚠ **What EP DOES do about it is bounded and already done:** the entropy-root census walker's MANDATORY negative control is RE-ANCHORED off it onto a LIVE module (§3b.2a NC-1), because a control anchored on unreachable code passes by absence rather than by discrimination — the pin-vacuity class this program has banked five times. personaSlicer's control is RETAINED as the labelled WEAK secondary, never deleted |
 
 ---
@@ -3854,7 +3862,7 @@ output keys asserting the epoch never appears.
 The claim "the same world can tell entirely different histories" (and the Reddit line
 "don't like where the decade went? wind back and let it happen differently — it will, and
 it will still make sense") is **UNLOCKED ONLY WHEN `advanceEpochEnabled` IS LIT IN A
-SHIPPED BUILD** — not when EP-1 lands dark, not when EP-5 amends the docs. Two shipped
+SHIPPED BUILD** — not when EP-1 lands dark, not when EP-5 amends the docs. [RULED BY DELEGATION 2026-10-16 (OD-FC-34 — lighting `advanceEpochEnabled` ends same-seed FUTURE replay for every world born into the preset ("Every user advance draws a fresh random nonce, so same-seed replay of the future ends for every world born into the preset", LIT-1-MEASUREMENT.md:291 (d)) and releases this marketing claim; lit soaks must thread `soakAdvanceEpoch` (ODQ §213 ruling (a)). Two escalations had stood unanswered since August: E2, the FORCE_RESETTLE tick term (§7a row 4, a same-seed shift), and E3, whether DM orders mint fresh (§7b B2 reading (b), new capability). RULED BY DELEGATION 2026-10-16 (fold §7, vetoable): light only after OWNER ROWS OD-FC-31 and OD-FC-32 are ruled (both now are) and built; E2 DEFER; E3 keep reading (a). The lighting is a same-seed shift signed at its own lighting unit with its re-record and re-confirmed in chat; nothing here lights the flag.] Two shipped
 copy strings sit one careless sentence from becoming false and must be re-read at EP-5
 without being rewritten into a promise the dark build cannot keep:
 `src/components/howto/ForgeExactDemo.jsx` — "Same seed, same world. No re-roll behind your
@@ -4052,7 +4060,7 @@ which is R11's shape in the LARGER half of the side-channel program**); **six wa
 (EP-3 two slices, only one chair-gated — ⭐ **and the slice BOUNDARY moved in revision 6: the
 writer, seam edit 9, the +1 import and the manifest row are SLICE A's, J-EP-14**); **one flag manifested**, read TWICE by design; **twenty-five stream
 compositions across sixteen modules** dispositioned in three entropy idioms and two
-families; **twenty-two READ SITES dispositioned** (§3b.2a) across **nine absent-seed
+families; **twenty-two READ SITES dispositioned** [see the bracket at :341] (§3b.2a) across **nine absent-seed
 coercions plus one call-suppression — TEN behaviours** (§3b.3), ⭐ **with BOTH families now
 carrying a per-site re-root table — family 1's EIGHT read sites are new in revision 6 (§3b.2,
 §0.3 R13)** and ⭐ **TWO year
@@ -4115,3 +4123,5 @@ compresses, live code
 governs; where any document disagrees with the tree, the tree wins and the disagreement is a
 STOP-and-report. Nothing here lights a flag, runs a soak, ratifies a band, re-records a
 golden, or pushes.*
+
+[CORRECTED 2026-10-16 (coherence fold) — CUT-TO-POINTER candidate (findings EP §8, depth vs felt value): the header revision blocks (REVISION 2 to 6 and the SEVENTH PASS) and §0.3 R1-R13 are revision archaeology for waves now LANDED (EP-0 to EP-3, 2026-08-16), and the five fences and four-mutant matrices of §2.5, §3b.1a and §3b.1b (about 900 lines) duplicate executed tests (tests/lint/entropyRootCensus.walker.test.js, tests/property/advanceEpochDormancyFence.test.js, tests/domain/advanceEpochStampSurvival.test.js). RECORDED, not executed: the chair may fold them to a ten-line pointer when this volume is next re-compiled; nothing is cut here.]

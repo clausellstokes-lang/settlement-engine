@@ -3,6 +3,8 @@
 ## docs/DESIGN_FP_ARCH_WY.md — A LANDED MEMBER OF THE docs/DESIGN_FP_ARCH_*
 ## FAMILY; WY is the ELEVENTH chartered volume prefix (admitted at §5b item 7,
 ## in the same commit as this program's first cross-layer registry row).
+## [CORRECTED 2026-10-16 (coherence fold) — THE STATUS OF RECORD IS docs/DESIGN_FP_COHERENCE_FOLD.md §2; this header is history ("A LANDED MEMBER" is the VOLUME, never a wave). In one line: LIT: none · BUILT DARK: WY-1's engine half (d0c135f20, picked bfe4830d0 — modeSpeeds.js, the absolute arm distanceRead.js:597-627, the carry-forward campaignSpatialCanonize.js:110, the digest stamp spatialDigest.js:898,921), dark in EVERY world: `kmScale` is never written (FPQ-37), `creationKmScale` has zero src callers, no caller passes hopWeeks' `mode` argument, `realmReach` has zero consumers · UNBUILT: WY-0 (the "first commit" never happened), WY-1's Lane B creation-flow slice + spectrum lint census, WY-2..WY-11 (the eight WY flags and the nine fields F1..F9 have zero src hits; F9 `supplyCargo` is unbuilt while a SCALAR army supply is LIVE — RULED BY DELEGATION 2026-10-16, OD-FC-21)]
+[ADDED 2026-10-16 (coherence fold §3.4, requirement 24 — the owner's HEARING WEEK) — ENGAGEMENT KINDS this program registers in the wave that builds each: `caravan_seized` (WY-6, shared with EC-18's open road). Once `hearingWeekEnabled` is lit no kind resolves in the tick it arrives at a one-week advance: it mints its pending verdict and the DM may leave it, tilt it or give a verdict (never a "decree" — the Decree Registry's word); month/season/year advances run the engine default; the hearing never parks the advance cursor (skeptic S5). Each kind's pending card is its FIRST-VISIBLE sign.]
 ## Master architect, 2026-08-05; PROMOTED TO REPO FORM AT THE QUEUE FOLD,
 ## 32cc17f7 (stamped by the landing lane). THE OWNER-AMENDMENT VOLUME that refines and
 ## coheres the full directive set of 2026-08-05 (memory/
@@ -95,7 +97,7 @@
 ## top-level worldState keys, zero new spatialLedgers keys, zero new mapState
 ## keys). Persisted-record shape is an owner-gated class (judgment-ledger §3).
 ## The §2 table IS the batch sign-off request; no wave that mints a field
-## builds until its row is signed. Every field is drop-when-absent and
+## builds until its row is signed. [CORRECTED 2026-10-16 (coherence fold) — F1..F9 are SIGNED by J-EM-9's reading of the 2026-08-05 blanket grant ("I give permission for everything that requires my sign off in the full queue"; the 09-23 fold kit FP-ARCHITECTURE-FOLD-2026-09-23.md:66; DESIGN_FP_ARCHITECTURE.md:3142); veto surface: one owner word on F1..F8 re-parks WY-3/4/6. DESIGN_FP_ARCHITECTURE.md:689 ("F9 `supplyCargo` is UNSIGNED") and its ⛔ sign-off rows at :3192/:3211/:3212 are superseded. F9's SHAPE is still open — one army-supply truth, RULED BY DELEGATION 2026-10-16, OD-FC-21 (see the bracket at :574)] Every field is drop-when-absent and
 ## flag-gated, so an unsigned row stalls exactly one wave, never the program.
 
 ---
@@ -161,7 +163,7 @@ reshape the build. Each is CONFIRMED in its census; each changes scope:
   spatialActive check — a netted regime running concurrently with the
   physical one in any spatial world with `migrationFlowsEnabled` lit. The
   exactly-one law is violated in the tree TODAY; the fence lands in the same
-  program that writes the law (§5 WY-4).
+  program that writes the law (§5 WY-4). [CLARIFIED 2026-10-16 (coherence fold) — still LIVE at 00b648c9d: `populationFlows` (worldPulse/flows.js:57-62) walks the displacement stressors with no spatialActive check; WY-4 is unbuilt and `flowMigrationPhysicalEnabled` has zero src hits — the fence is the REPAIR of a live law violation]
 - **C4 — The caravan is the ONE mover that cannot be positioned.**
   `ShipmentRecord` carries no `path` and no `departTick`; the route is known
   at dispatch and thrown away, then re-solved at arrival against LIVE
@@ -174,7 +176,7 @@ reshape the build. Each is CONFIRMED in its census; each changes scope:
   re-census: comment anchors and claims across components/pdf/domain plus
   four test files — the retirement sweeps the FULL grep census at build,
   never a fixed count), and two of the four B-track selectors have zero
-  screen consumers tree-wide — a green pin guarding nothing. No projection-builder layer
+  screen consumers tree-wide — a green pin guarding nothing. [RULED 2026-10-16 (coherence fold §5) — in this volume "pin" always means a TEST pin; an Edit Mode DM hold is a "seal", never "pinned" (R-4 / J12's "NEVER PINNABLE" for WY-2's per-hop roll and WY-5's mover hop reads: never sealable by a DM)] No projection-builder layer
   exists for any entity kind; the two working prototypes (`projectNpcPool`
   with `includeCovert`; `parityContract` as data) are the shapes to copy
   (§3e, §5 WY-7/WY-8).
@@ -217,11 +219,11 @@ normalization dies for scaled worlds.
 **The socket, measured:** the war volume §7 parks "the map km-scale for the
 transit kernel's mode table (J-D11(b); does not exist in the tree —
 owner-signed when the mode table lands)." Grep confirms zero hits for
-`kmPerWeek|MODE_SPEED|milesPerWeek|scaleKm` across src. The transit kernel
+`kmPerWeek|MODE_SPEED|milesPerWeek|scaleKm` across src. [SUPERSEDED BY EVENT 2026-10-16 (coherence fold) — history: WY-1 landed `MODE_SPEEDS` / `MODE_SPEED_TUNING` (spatial/modeSpeeds.js:47-64, d0c135f20); `kmScale` is live in four src files and written by none (FPQ-37)] The transit kernel
 (`namedPersonTransit.js`) already exposes the injection point: its
 `gradeMultiplier` parameter is documented in-file as the seam "a later
 mode-speed table can supply another multiplier without creating a second
-floor or position model." `hopWeeks`/`calibration` (`distanceRead.js`) is
+floor or position model." [CORRECTED 2026-10-16 (coherence fold) — as built (d0c135f20) the absolute arm is the CALIBRATION constant (`distanceRead.calibration` → `absoluteCalibration`, distanceRead.js:597-627), which every mover inherits; the `gradeMultiplier` socket is untouched (still `1` or grade-derived, npcCirculationTransit.js:141, routeNetworkConsumersTransit.js:147). The build chose the better mount; this socket sentence and seam 6's are history] `hopWeeks`/`calibration` (`distanceRead.js`) is
 the per-digest normalizer every consumer rides.
 
 **THE CHARTER SUPERSESSION, RECORDED (chair-ruled, vetoable; the r2
@@ -238,7 +240,7 @@ HERE: the owner's 2026-08-05 absolute-distance directive ACTIVATES J-D11(b)
 as the Wayfare scale charter, and the mode-speed table lands DATA-GATED by
 `spatialDigest.kmScale` (absent = legacy, forever), DECOUPLED from
 `portOpportunityEnabled` — which remains the port/water-corridor program's
-flag (J-D11 (a)/(c)), unbuilt and unbound today (zero src hits). Owner-
+flag (J-D11 (a)/(c)), unbuilt and unbound today (zero src hits). [RULED 2026-10-16 (coherence fold §5) — `kmScale` is the WORLD scale (the realm digest's km per map-coordinate unit); the town-map scale bar of the FABRIC program (DESIGN_FP_ARCH_MF) is a distinct identifier (`viewMetersPerUnit`); prose says "the world scale" / "the map's scale bar", never one word for both] Owner-
 directive activation outranks the port-opportunity charter; the mode
 table's owner-signing obligation from the war §7 row is PRESERVED verbatim
 (the §8 tuning rows). §5b amends the war volume's two sites by name so the
@@ -251,7 +253,7 @@ charter is superseded on the record, never silently contradicted (seam 1).
    (`buildSpatialDigest`) stamps `spatialDigest.kmScale` (km per
    map-coordinate unit; the creation flow supplies it on FIRST canonize —
    from the FMG map's own distance scale where the bridge exposes one, else
-   the owner-signed default). The digest is deepFrozen per canon VERSION,
+   the owner-signed default). [CORRECTED 2026-10-16 (coherence fold) — no src caller supplies it: `creationKmScale` (modeSpeeds.js:178) has ZERO src callers, and the one canonize caller forwards `options` with no `kmScale` in them (FPQ-37 OPEN) — WY-1 is dark in every world, new or old, until the creation-flow slice ships. The default itself is RULED BY DELEGATION 2026-10-16, OD-FC-22 (see the bracket at :1157)] The digest is deepFrozen per canon VERSION,
    but it is NOT written once: `runSpatialCanonize`
    (src/store/campaignSpatialCanonize.js) documents a §V.1 RECEIPTED
    RE-CANONIZE that rebuilds the whole digest on founding events (ports and
@@ -276,9 +278,9 @@ charter is superseded on the record, never silently contradicted (seam 1).
    coastal, sea}` (J-D11(b)'s own list), consumed by `hopWeeks` when
    `kmScale` is present: weeks = km / speed, composed with the existing
    grade multiplier, floored at law M's one week (`MIN_LEG_TICKS` — the
-   floor binds in every denomination). Every mover inherits through the one
+   floor binds in every denomination). [see the bracket at :225 — the built arm is the calibration constant, not a grade-multiplier composition] Every mover inherits through the one
    kernel: armies (`armyMarchWeeks` composes its `ARMY_SPEED_FACTOR` on top),
-   envoys, wanderers, columns, caravans. The constants are OWNER-SIGNED
+   envoys, wanderers, columns, caravans. [CORRECTED 2026-10-16 (coherence fold) — the FOOT speed is inherited by all (every mover reads `calibration().weeksPerCost`); the other four modes are read by NO caller — no src call passes `hopWeeks`' fifth `mode` argument (distanceRead.js:728), so river/coastal/sea/cart speeds affect nothing; naval convoys keep their own mode factor (navalLayer.js:77-82); news rides `distancePricedNews`'s own `NEWS_SPEED_FACTOR` 0.5 outside the table] The constants are OWNER-SIGNED
    tuning rows (§5 WY-1's table) per J-D11(b)'s stipulation.
 3. **THE PER-MAP SPECTRUM LAW (the dead-band law applied per map).** The
    standing hazard is proven: `hopWeeks` is calibrated per digest — a whole
@@ -291,10 +293,10 @@ charter is superseded on the record, never silently contradicted (seam 1).
    staleness saturations — derives from that spectrum or carries an
    in-file justification. WY-1 lands the spectrum surface plus a shrink-only
    lint census over the named consumer set (an authored week-literal in a
-   mover module reds unless derived-or-justified). The
+   mover module reds unless derived-or-justified). [CORRECTED 2026-10-16 (coherence fold) — the surface landed as `realmReach` (distanceRead.js:783) with ZERO consumers; the lint census did NOT land (modeSpeedsWy1.test.js covers A1-A7 only); `MAX_REINFORCEMENT_WEEKS: 5` (sovereigntyReach.js:81), the first band named above, is still an authored literal with an "UNSOAKED BAND" note (:39)] The
    `MAX_MARCH_WEEKS 52 < SIEGE_MAX_AGE` invariant is preserved by CLAMPING
    the march at 52 weeks with a receipt ("the far shore is beyond a year's
-   march") — the clamp is pinned, the invariant never silently re-derived.
+   march") — the clamp is pinned, the invariant never silently re-derived. [ADDED 2026-10-16 (coherence fold §4, §3.3.10; requirement 9) — THE CLOCK CENSUS, bracketed ONCE for this volume. WY never names `INTERVAL_WEEKS` (zero hits): its clocks are hopWeeks-derived or phrased ("first thaw", "one caravan per two months"), never declared against the interval grid as requirement 9 binds. At 00b648c9d ~12 src modules read `INTERVAL_WEEKS` and ~60 time constants in ~45 modules are hand-keyed (findings WY §7, CONFIRMED by read): CLASS A, the 12-tick year (12 constants — `STARVE_FULL_TICKS = 12` "a season" at worldPulse/warSiegeVerdict.js:141 and `CREDIT_TERM: 12` "a season or two" at spatial/generosityReactions.js:72 are wrong by their own comment; ten unlabeled 12s are measured one by one at the walker's first run, each a cure row or an exemption with a reason); CLASS B, shadow clocks (~20 modules — the frozen kernel's inline table pulseKernel.js:850 is an exemption WITH the frozen-file reason; the two same-named `INTERVAL_WEEKS` shadows populationDynamics.js:19 and foodStockpile.js:66 are cure rows (fold §5); this volume's own host distanceRead.js:82,87 carries `SEASON_WEEKS = 13` and `MAX_HOP_WEEKS = 52`); CLASS C, authored 13/26/52 durations as bare literals (~60 constants), including FOUR independent 52-week mover caps (distanceRead.js:87, armyTransit.js:59, navalLayer.js:82, supplyShipments.js:144 — FPQ-18). The cure path is fold §4: SP-7 is re-chartered as the temporal walker `tests/lint/timeBase.walker.test.js` (a shrink-only exemption list seeded from this census, a RED on any new bare 12/13/26/52 in src/domain, zero behaviour, no constant moved in its commit); the mode-speed table stays WY-1's (§3.1.11). Every WY wave declares its clock against `INTERVAL_WEEKS` at build, and its first-visible latency beside it (requirement 16).] [RULED BY DELEGATION 2026-10-16 (OD-FC-15 — `STARVE_FULL_TICKS 12→13` and `CREDIT_TERM 12→13` (Class A, wrong by their own comment) are same-seed shifts in every preset; chair recommendation: sign both]
 4. **The consequences ride, correctly, and are named:** war duration scales
    with theater size; fog scales with real distance (big realms foggier —
    spies and magic worth more, the espionage economy sharpens); large maps
@@ -303,7 +305,7 @@ charter is superseded on the record, never silently contradicted (seam 1).
    scale-vs-mystery disclosure** (a small-scale map is an open book; a
    continental one is a fog bank — the choice is the player's, stated
    plainly, never mechanically distorted). That copy lands with WY-1's Lane
-   B slice.
+   B slice. [ADDED 2026-10-16 (coherence fold) — a consequence this list did not name: under kmScale, `distancePricedNews`'s hop delay (`NEWS_SPEED_FACTOR = 0.5` of hopWeeks, distancePricedNews.js:20,29-34) and `routeAwareHopDelayTicks` (:65-76; read by beliefMap, believedRazings, brokerageFidelity, settlementRumors) rescale with the absolute arm — belief staleness becomes distance-true. The disclosure copy names it]
 5. **The map-side coupling, recorded:** mover marker positions derive from
    hopWeeks-shaped clocks, so for NEWLY canonized scaled worlds the same
    geometry renders different positions than a legacy world would — by
@@ -375,7 +377,7 @@ HEAD).
    (`magnitudeBandOf`) while `SEVERITY_LADDER` spells
    glancing/telling/GRAVE/ruinous — 'grave' sits at different rungs in the
    two vocabularies, so the pinned derivation maps by index/table and an
-   anchored negative reds any word-keyed join.
+   anchored negative reds any word-keyed join. [RULED 2026-10-16 (coherence fold §5) — both `grave`s are landed (the SEVERITY rung, bandFamilies.js:85; rumor magnitude, rumorNetwork.js:245); WY-2's multipliers key on the SEVERITY rung ONLY, and design prose says "a grave rumor" never for severity]
 3. **Manipulation bypasses the floor.** A deliberately planted telling (the
    `disinfo:` lineage — the only plant marker, per the Herald slot-class
    law) weathers per the planter's design, not the durability floor. And
@@ -387,7 +389,7 @@ HEAD).
    accumulates at least the contradiction pressure of a glancing one), and
    the espionage program's covert manipulation (ES amendment I) becomes the
    law's AGENT — "unless deliberately manipulated" now has a face, and the
-   severity-durability pricing composes at the plant site (ES seam, §6).
+   severity-durability pricing composes at the plant site (ES seam, §6). [CORRECTED 2026-10-16 (coherence fold) — ES carries owner additions A–H; there is no amendment I, and ES's double agent is LEAK-ONLY (J-ES-11, DESIGN_FP_ARCH_ES.md:1227-1229; the one double-agent law is RULED BY DELEGATION 2026-10-16, OD-FC-9, chair recommendation leak-only). The manipulation agent is INFO's plant road (the `disinfo:` lineage — disinformationPlant.js / brokerageServicesPlant.js, live); the plant-site pricing pin lands IN-side]
 4. **The espionage economy sharpens correctly, and the receipts say so:**
    spies matter most for drift-prone small facts and for auditing
    suspicious severe claims; catastrophes stay commonly known. Fog belongs
@@ -414,6 +416,8 @@ same-seed shift owner-held.
 > binds the surface to the physics: if it is on the map it is REAL, and if
 > it is real it is CONSERVED — a marker is never a lie, and a flow with no
 > marker is either declared-netted or dark.
+
+[CLARIFIED 2026-10-16 (coherence fold) — the idiom bends once, knowingly: faith cargo under the Q1 BLEND ruling is an influence, not a conserved quantity ("the origin loses no faith by sending people away"); the column's PEOPLE are conserved. Disclosed at §7 Q1 — a recorded tension, not a hidden one]
 
 **Instantiation I — TRADE (generalizing TR-4 per good class).** The
 measured truth (C2): M6a non-food goods are ALREADY the physical regime,
@@ -568,7 +572,7 @@ ledger held at departTick, reconstructed from arrival records, zero fields.
 | F6 | `experience` | `worldState.deployments[homeId]` | warArmyRecord seed/refresh (beside `readiness`, same conditional idiom — omitted when no martial record) | none needed: conditional beside an existing conditional; byte-identical for every world without a martial record | WY-8 |
 | F7 | `experience` | `spatialLedgers.armyTransit[]` | armyTransitKernel's existing copy site | same | WY-8 |
 | F8 | `prizeCargo` ({good: units} integer map, conserved) | `spatialLedgers.armyTransit[]` | armyCaravanSeizure (this program's new encounter arm, E14) | `caravanSeizureEnabled` | WY-6 |
-| F9 | `supplyCargo` ({goodClass: units} integer map over the CLOSED goods vocabulary — food = grain class, armor = crafted class, no new resource type; conserved, F8's shape precedent) | `spatialLedgers.armyTransit[]` | NEW `worldPulse/armySupply.js` (C-WYF-2: `src/domain/war/` does not exist and is not minted for a one-module family — the writer homes beside `supplyWebWarfare.js`, the twin-note pairing) — the ONE writer module; every mint (march dispatch from origin stores, debited), decrement (consumption), and credit (reinforcement cargo, rest replenishment) routes through it | `armySupplyEnabled` | WY-8 (slice 8a) |
+| F9 | `supplyCargo` ({goodClass: units} integer map over the CLOSED goods vocabulary — food = grain class, armor = crafted class, no new resource type; conserved, F8's shape precedent) | `spatialLedgers.armyTransit[]` | NEW `worldPulse/armySupply.js` (C-WYF-2: `src/domain/war/` does not exist and is not minted for a one-module family — the writer homes beside `supplyWebWarfare.js`, the twin-note pairing) — the ONE writer module; every mint (march dispatch from origin stores, debited), decrement (consumption), and credit (reinforcement cargo, rest replenishment) routes through it | `armySupplyEnabled` | WY-8 (slice 8a) [ADDED 2026-10-16 (coherence fold) — a SCALAR army supply is LIVE on these records: `supplyIntegrity` + `foodReserve` seeded per deployment (warArmyRecord.js:127,132), eroded per battle (attrition.js:312), mitigating attrition (attrition.js:226,229), lifted by reinforcement (reinforcement.js:213), carried in transit (armyTransitKernel.js:316-318), displayed through `CONDITION_BANDS` (armyStrength.js:133,148). F9 as specced is a SECOND supply truth on one record (CN C9's army-supply one-truth). Genuinely missing: march consumption, rest-debits on real host stores, requisition→resistance, the 2i real-store debit. RULED BY DELEGATION 2026-10-16, OD-FC-21 rules the one truth (see the bracket at :1382)] |
 
 Plus ONE frozen-digest datum, not a record field: `spatialDigest.kmScale`
 (WY-1; stamped at canonization by the digest builder AND CARRIED FORWARD
@@ -697,7 +701,7 @@ presentation). Lifecycle: the persisted-filter values migrate by a
 load-time normalize (old `'migrants'` → `'populations'`, `'envoys'` →
 `'persons'`) in the mapSlice merge — pinned, because `mapState.layers` is
 persisted per campaign and merged on load (the census-1 hazard: verify the
-spread order gives new sub-layer defaults their default, and pin it).
+spread order gives new sub-layer defaults their default, and pin it). [CORRECTED 2026-10-16 (coherence fold) — addresses drifted: `setLayerFilter` is now mapSlice.js:382 and the `DEFAULT_LAYERS` comment :109; and operationRegistry.js:531 records `setLayerFilter` as "layer display filter; NOT part of saved campaign mapState", against this paragraph's premise that `travelersFilter` is persisted per campaign and merged on load — a PLAUSIBLE contradiction (the registry entry is read; the persistence path is not traced): WY-0 traces it before writing the merge pin]
 
 ### 2d THE ROUTE-POSITION GUARD (2b's obligation, corrected by C6)
 
@@ -799,7 +803,7 @@ a public payload. The DM popup shows the declared face AND the true purpose
 marked covert (envoyIntent private goals; ES covert sub-records when the
 espionage program lands); the player surface omits the ENTITY, not the
 field — no redacted stubs (the CausalityPopup precedent). The espionage
-volume's covert law is the parent; WY adds no second spelling (§6 seam 7).
+volume's covert law is the parent; WY adds no second spelling (§6 seam 7). [CLARIFIED 2026-10-16 (coherence fold) — the census-1 hole is still LIVE at 00b648c9d and wider than three sites: `viewerSeesDmSecrets({ isOwner: !!auth?.user, … })` at SIX map call sites — HeraldWanderers.jsx:142, HeraldGazetteer.jsx:195, TimelapseLayer.jsx:46, TravelersLayer.jsx:51, HeraldRemembrance.jsx:217, RoadScenePanel.jsx:64 (lane F re-measure; the reader cited three). WY-9 is unbuilt; its covert tightening covers every site the build-day grep finds]
 
 ### 3d THE POPUP GRAMMAR (the legibility law embodied)
 
@@ -1118,12 +1122,13 @@ from this document). ⚠ COLLISION LAW for the whole program: the FP build
 lanes are LIVE in this tree (GR/TR lanes had WarFaithTab.jsx,
 treatyDocument.js, TreatyPanel.jsx, liveWorld.js, tradeWar.js DIRTY at this
 compile) — CHECK-GIT-FIRST is mandatory before every wave, and WY-7/WY-8
-land only in a quiet window for those files.
+land only in a quiet window for those files. [CORRECTED 2026-10-16 (coherence fold §3.3.9) — `WarFaithTab.jsx` no longer exists; the surfaces are `components/new/tabs/WarTab.jsx` and `FaithTab.jsx`. The `WarFaithSection` census is still TWELVE files with changed membership: 8 src (LivingWorldTab.jsx, liveWorld.js, faithPanelModel.js, FaithWar.jsx, FaithTab.jsx, livingWorldSignals.js, dossier/entityLinks.js, dossierLazyTabs.js) + 4 tests — FaithTab.jsx replaces the named WarFaithTab]
 
 ### LANE E — THE ENGINE (slots into FP §5; positions in §5b)
 
 **WY-1 — THE SCALE CHARTER** (J-D11(b) activated; no flag — data-gated by
 `spatialDigest.kmScale`, absent on every existing world).
+[ADDED 2026-10-16 (coherence fold, req 16/17) — FIRST-VISIBLE: none today — no world carries `kmScale` (FPQ-37); once a writer ships, a newly canonized scaled world's hop and march week spectra differ from a legacy world's at its first advance (per hop 1..52 weeks; the "beyond a year's march" clamp receipt on continental maps), while the felt consequences (war duration, fog by distance) are seasonal-to-yearly (findings WY §7) · TIER: spatial canon + a `kmScale` writer (absent); data-gated by `spatialDigest.kmScale`, no flag · DEGRADED ARM: absent scale = legacy normalized behavior, byte-identical, forever]
 Files: NEW `src/domain/spatial/modeSpeeds.js` (~60 eff); `distanceRead.js`
 hopWeeks/calibration gain the kmScale arm + the spectrum surface (budget
 the leaf split if the file is near ceiling — measure first); the digest
@@ -1148,12 +1153,13 @@ mutant); floor-severed plant (a sub-week leg mints ⇒ law-M pin reds).
 Dormancy: absent-datum worlds are the dark arm by construction.
 Owner-signed: the MODE_SPEEDS table + the default scale (the §8 tuning
 rows); the wave BUILDS dark and the datum starts flowing only when the
-creation flow ships it. Charter note: the flag-home supersession (§1a —
+creation flow ships it. [see the bracket at :255] Charter note: the flag-home supersession (§1a —
 decoupled from `portOpportunityEnabled`, chair-ruled, vetoable) rides
-this wave's ledger row.
+this wave's ledger row. [RULED 2026-10-16 (coherence fold §3.1.11) — WY-1 OWNS the mode-speed TABLE (landed dark); SP-7 owns the TEMPORAL WALKER (unbuilt; fold §4 re-charters it as `tests/lint/timeBase.walker.test.js`); SPINE:469-470 and ARCH_SP V21 are amended to match] [CORRECTED 2026-10-16 (coherence fold) — as built (d0c135f20, picked bfe4830d0): the engine half landed (modeSpeeds.js; the absolute arm distanceRead.js:597-627; the carry-forward campaignSpatialCanonize.js:110; the digest stamp spatialDigest.js:898,921). NOT landed: the creation-flow disclosure copy (the Lane B slice), the spectrum-derivation lint census, and any `kmScale` writer — `creationKmScale` has zero src callers and no caller passes `options.kmScale` (FPQ-37), and hopWeeks' `mode` argument is passed by nobody — so the mode table lights in NO world, new or old] [RULED BY DELEGATION 2026-10-16 (OD-FC-22 — the `kmScale` default: FP-10 ratified "'default scale' = each map's implied scale" while the code defaults to `DEFAULT_KM_SCALE: 3` (FMG's own default distance scale, modeSpeeds.js:66-77, `creationKmScale` falling back to it at :178-181); at the implied scale the absolute read equals the legacy read to the bit (distanceRead.js:607-612); `MODE_SPEEDS` (foot 150 … sea 900 km/week) and `DEFAULT_KM_SCALE 3` are unsigned DRAFT rows. Chair recommendation: the map's implied scale; sign the table at WY-3's soak. The answer lights absolute distance for NEW worlds — RULING AS TAKEN: the default is the code's FMG default DEFAULT_KM_SCALE 3 (the implied scale equals the legacy read to the bit, distanceRead.js:607-612, and would light nothing), signed with MODE_SPEEDS at WY-3's soak; the creation flow may override per world]
 
 **WY-2 — THE DURABLE TRUTH** (`severityDurableRumorsEnabled`; mechanism
 REBUILT in r2 on the keyed-hash01 discipline — §1b.2 is the spec).
+[ADDED 2026-10-16 (coherence fold, req 16/17) — FIRST-VISIBLE: none — the mechanism acts per relay hop (fast) but is invisible: no §9 receipt line exists (findings WY §1, §7); see the bracket at :1715 · TIER: spatial canon (rumorNetwork) under a distorting belief infoMode ('unreliable' or 'full'; hiFi carriers never weather); host flag `severityDurableRumorsEnabled` · DEGRADED ARM: dark = today's organic weathering verbatim, byte-identical]
 Files: NEW `src/domain/spatial/severityDurability.js` (~90 eff — the rung
 multipliers AND the closed-outcome-table degrade: ONE `hash01` roll per
 hop over the fork-key tuple, zero conditional draws, the name-swap index
@@ -1178,6 +1184,7 @@ composes at the plant site when it lands (§6 seam 7).
 
 **WY-3 — THE MOVER BODIES** (`caravanBodiesEnabled`; owner sign-off rows
 F1/F2/F3; slices: 3a fields + normalizers, 3b cadence + contract).
+[ADDED 2026-10-16 (coherence fold, req 16/17) — FIRST-VISIBLE: monthly (dispatch 1..52 weeks; the cadence "one caravan per two months"; "stopped three weeks ago" reads weekly — findings WY §7), shown only through WY-9/WY-10's caravan markers and WY-5's going-dark read; the engine half alone shows a DM nothing · TIER: spatial canon (M6a commodityFlow); host flag `caravanBodiesEnabled` · DEGRADED ARM: old records and dark worlds carry no body — no caravan marker is drawn, never a lying one; MIN_SHIP refuses sub-floor needs as today]
 Files: `spatial/commodityFlow.js` dispatch write stamps F1/F2 lit-only
 (values already in hand — no new solve) AND its OWN ARRIVE-LOOP
 RECONSTRUCTION is taught the two fields in the same commit (r2
@@ -1211,6 +1218,7 @@ before TR-4 (§5b) so grain inherits the body.
 
 **WY-4 — THE POPULATION CARGO + THE FENCE** (`flowMigrationPhysicalEnabled`
 + `migrationCargoEnabled`; owner sign-off rows F4/F5).
+[ADDED 2026-10-16 (coherence fold, req 16/17) — FIRST-VISIBLE: within a one-month advance the refugees leave as a COLUMN, not a same-tick teleport, and the dispatch is the planting line (fold §4) — "A column of the Lakefaith marches toward a town of the Flame" (§9); the faith verdict at the destination is yearly ("next year's religious tension", findings WY §7) · TIER: spatial canon (spatialActive); host flags `flowMigrationPhysicalEnabled`, `migrationCargoEnabled` over `migrationFlowsEnabled`; the faith-credit arm also needs the faith-spread pair (`faithSpreadEnabled` with the legacy `religionDynamicsEnabled` mirror) and a deity-bearing (premium) world · DEGRADED ARM: aspatial or dark ⇒ the netted `flow_migration` arm runs as today (same-tick deltas); no faith cargo, no credit]
 Files: `flows.js` populationFlows gains the lit physical fork (columns
 through the M4 writer path, travelClass ABSENT so M4 lands them — RF-2
 mutex untouched) COVERING BOTH APPLY ARMS (r2: the auto arm at mint AND
@@ -1241,9 +1249,10 @@ pin reds); cargo-stripped plant (columnOf reverted ⇒ THROUGH-ENQUEUE
 reds); wrong-lane plant (a fence column minted WITH a demographic class ⇒
 attribution pin reds). Order: after POP-1 (shared normalizer; §5b). The
 uncredited-exit hole is RECORDED beside the walker, not fixed here (POP's
-documented deferral).
+documented deferral). [ADDED 2026-10-16 (coherence fold §3.2.16; reconciled by OD-FC-13 after S3 M14: the band is POP's row per ODQ §130.3, WY-4 READS it) — the owner's size-scaled speed for migrating populations (ODQ §125.4) is absent from POP's volumes and from the code; it is recorded as a WY-4 BAND — column speed by size band, the army idiom (a factor on top of the one kernel, law M's floor binding), landing in this wave] [RULED BY DELEGATION 2026-10-16 (OD-FC-13 — confirm §125.4's size-scaled column speed (this WY-4 band) and `tribute_population` (a GR-3 row + POP-5b's conservation identity) still bind; chair recommendation YES both; they shift goldens at their landing]
 
 **WY-5 — THE CARRIED WORD** (`moversCarryNewsEnabled`).
+[ADDED 2026-10-16 (coherence fold, req 16/17) — FIRST-VISIBLE: seasonal — `no_word_from` ("No word has come from Alderford since the thaw") fires only after a season of silence; inside a one-month advance the fidelity injection is invisible, so the wave owes requirement 16 a fast-layer sign or rides behind WY-3's monthly caravan read · TIER: spatial canon; host flag `moversCarryNewsEnabled` (over WY-3's bodies and WY-4's column estate) · DEGRADED ARM: dark ⇒ the ambient rumor relay only; no going-dark line]
 Files: NEW `moverTidings.js` (~150 eff): at caravan arrival and column
 release, reconstruct the origin's telling set as-at departTick (arrival
 records with arrivalTick <= departTick — fully derived, zero fields),
@@ -1270,6 +1279,7 @@ and POP-1/WY-4 (column estate settled).
 
 **WY-6 — THE PRIZE ARM + THE PAIRS TABLE** (`caravanSeizureEnabled`;
 owner sign-off row F8).
+[ADDED 2026-10-16 (coherence fold, req 16/17) — FIRST-VISIBLE: weekly — the `caravan_seized` Herald line ("They took the wagons at the ford; the grain feeds the besiegers now") at the seizure tick wherever a hostile army and a caravan share a node inside the advance (findings WY §7) · TIER: spatial canon + war (armyTransit); host flags `caravanSeizureEnabled` over `caravanBodiesEnabled` · DEGRADED ARM: dark ⇒ caravans pass armies untouched, as today]
 Files: NEW `armyCaravanSeizure.js` (~120 eff — E14 as specced in §4);
 armyTransit normalizer taught F8; the home-credit release at column
 arrival through commodityFlow's one stock-write seam; NEW
@@ -1288,12 +1298,13 @@ Math.round, documented); the E15-PRESENT pin (the manifest carries the
 espionage resolver and its `caught_spying` outcome — if ES-2 has not landed
 when this wave builds, the row is still authored and the resolver-side scan
 is what waits, never the row). Mutants: sixteenth-arm plant (walker reds —
-the count moved with CR-ES-6);
+the count moved with CR-ES-6); [CORRECTED 2026-10-16 (coherence fold) — superseded by the §4 erratum (the 2026-08-07 note above the E-table): DERIVE the count from the table's own length and prove reddenability with the UNTABLED-RESOLVER PLANT; this mutant line was never struck in place]
 prize-teleport plant (home credited at seizure tick ⇒ timing pin reds).
 Order: after WY-3.
 
 **WY-11 — THE LIFEBLOOD ENVELOPE** (`caravanFloorEnabled` + instrument;
 the trade tail).
+[ADDED 2026-10-16 (coherence fold, req 16/17) — FIRST-VISIBLE: UNMEASURED at one month (a floor-eligible dispatch is a caravan marker only once WY-10 draws it); the felt density read ("thick with wagons once") is yearly (findings WY §7) · TIER: spatial canon over the TR-9 EV/pact substrate; host flag `caravanFloorEnabled`; the envelope is a soak instrument · DEGRADED ARM: dark ⇒ no floor (the MIN_SHIP refusal stands); the instrument reports, nothing moves]
 Files: THE FLOOR LAW (2h): per-region subsistence circulation — a
 peddler-grade minimum dispatch eligibility derived from settlement
 quantity × tier diversity, owner-signed band; ECONOMIC never physical
@@ -1319,7 +1330,8 @@ substrate complete); degraded arms declared if built earlier.
 ### LANE S — THE SURFACES (SOL_QUEUE Lane B; beside the LD ladder)
 
 **WY-0 — THE LAWFUL CANVAS** (no flag; buildable NOW; the program's first
-commit in either lane).
+commit in either lane). [CORRECTED 2026-10-16 (coherence fold) — history, not order: WY-1 landed first (d0c135f20, 2026-09-24; the 09-23 fold kit's order WY-1 → WY-2 → WY-3); WY-0 remains buildable and is UNBUILT — chevrons and 180° flips are LIVE (TravelersLayer.jsx:87,126,148; `chevronPoints` travelersGeometry.js:84) and no `mapLayerManifest` walker exists]
+[ADDED 2026-10-16 (coherence fold, req 16/17) — FIRST-VISIBLE: immediate at render — markers stop pointing at their destinations (no chevrons, no flips, presence-only tooltips) on the next map paint; no advance needed · TIER: spatial canon (the travelers layer draws spatial ledgers); no flag — a store/DM-gated surface · DEGRADED ARM: an aspatial world draws no travelers layer: nothing shown, nothing lies]
 Files: TravelersLayer chevron/flip/tooltip deletion (C1);
 WarFaithMapOverlay arrow deletion per the Q3 RULING (r2: RULED, vetoable
 — the deletion is wave-assigned HERE; both halves land together, the
@@ -1336,6 +1348,7 @@ instrument).
 
 **WY-7 — THE PROJECTION SPINE** (no flag; behavior-preserving except
 declared unifications).
+[ADDED 2026-10-16 (coherence fold, req 16/17) — FIRST-VISIBLE: immediate at render — the popup, the dossier tab and the PDF print one facet set per kind (the declared wording and print shifts, disclosed in the commit); no advance needed · TIER: dossier/PDF surfaces (no spatial dependency; findings WY §7); no flag · DEGRADED ARM: n/a — behaviour-preserving; a dormant projection returns null/[] and the off-state is byte-identical]
 Files: entityLinks KIND_PREFIX extension; NEW `treatyProjection.js`
 (decorate consumed whole; both surfaces stop post-shaping — D3/D4/D5 die;
 the PDF scope/role/term shifts are DISCLOSED print changes, each named in
@@ -1348,7 +1361,7 @@ person rows; PHANTOM RETIREMENT (C5, r2 census): the retirement clause is
 THE FULL `WarFaithSection` GREP CENSUS AT BUILD, never a fixed count —
 TWELVE files spell it at this HEAD (comment anchors + claims across
 components/pdf/domain incl. dossierLazyTabs, entityLinks, faithPanelModel,
-FaithWar.jsx, livingWorldSignals, LivingWorldTab, WarFaithTab, liveWorld
+FaithWar.jsx, livingWorldSignals, LivingWorldTab, WarFaithTab [see the bracket at :1124], liveWorld
 + four test files incl. summaryTabPhase2 and entityIndex) — every member
 re-anchored to the real surface or SURFACE_EXEMPT'd; liveWorldBTrack's
 screen half re-pointed or SURFACE_EXEMPT'd print-only until WY-8; a
@@ -1356,7 +1369,7 @@ retirement-completeness grep pin (zero `WarFaithSection` spellings
 tree-wide after the wave, or each survivor carries its declared reason)
 lands in the same commit. Pins: before/after parity goldens
 on every touched surface, with the declared unifications listed and
-re-recorded under this ruling. Budget: OutputContainer and WarFaithTab are
+re-recorded under this ruling. Budget: OutputContainer and WarFaithTab [see the bracket at :1124] are
 near their ceilings — every consumption lands in tab-body leaves, never
 the host (the useFogLayer hook-bundling trick where a host must grow).
 Collision: ⚠⚠ the dirtiest files in the live tree — quiet window
@@ -1366,7 +1379,8 @@ MANDATORY.
 army-facets wave — 2k lands HERE, r3; slices: 8a the supply train
 [engine, `armySupplyEnabled`], 8b the mirror [surface; the wave's original
 body plus the supply facet]).
-**Slice 8a — THE SUPPLY TRAIN (2k; engine; flag `armySupplyEnabled`; F9).**
+[ADDED 2026-10-16 (coherence fold, req 16/17) — FIRST-VISIBLE: 8a weekly — the supply band falls within weeks on a cut road ("Three weeks of bread in the wagons, and the road home is cut"); 8b immediate at render — one army truth across the war tab, the popup and the PDF · TIER: 8a spatial canon + war, host flag `armySupplyEnabled` (after WY-3's stock-write seam); 8b dossier surface, no flag · DEGRADED ARM: 8a dark ⇒ the supply facet renders declared-absent, never full, and the live `supplyIntegrity` scalar keeps its present role (OD-FC-21); 8b n/a (behaviour-preserving)]
+**Slice 8a — THE SUPPLY TRAIN (2k; engine; flag `armySupplyEnabled`; F9).** [RULED BY DELEGATION 2026-10-16 (OD-FC-21 — one army-supply truth: grow the live `supplyIntegrity`/`foodReserve` scalars with march consumption and rest-debits, or keep F9 `supplyCargo` as the integer stock with the scalar DERIVED from it. Chair recommendation: F9 as the stock, the scalar derived (one truth, the band a read). Persisted shape; it moves WC-10 and this slice (see the bracket at :574)]
 Files: NEW `src/domain/worldPulse/armySupply.js` (C-WYF-2 re-home — `src/domain/war/` does not exist; no new top-level domain directory for a one-module family; ~140 eff — the ONE writer for
 every F9 mutation, §2b's clause is the spec): march-dispatch mint debiting
 origin stores through commodityFlow's one stock-write seam (2i grounding —
@@ -1385,7 +1399,7 @@ supply lines become strategy by COMPOSITION — cut the road behind an army
 and its reinforcement cargo stops arriving (interdiction + the existing
 encounter table; §4 stays CLOSED — at FIFTEEN since the 2026-08-05 fold
 admitted the espionage gauntlet as E15 per CR-ES-6 — stated as a pin, and
-this slice mints no sixteenth) — the
+this slice mints no sixteenth) [see the bracket at :1300 — the count is derived from the table, never stated] — the
 supply-web layer's army-side half; the twin-note lands in
 supplyWebWarfare.js and armySupply.js both (its pressure-instrument
 deferral stays untouched). Pins: four-fence + lit-mutant; the conservation
@@ -1409,18 +1423,18 @@ conditional stamp lines (warArmyRecord + armyTransitKernel); the
 `hasMartialRecord` absence predicate (M2 — ⚠ NOT NEW: the spelling
 already exists module-local at `opportunism.js:122` with the volume's
 exact intent documented in-file; EXPORT-AND-REUSE, never a second
-spelling — C-WYF-2 item 2); the ARMY CONDITION band ladder
+spelling — C-WYF-2 item 2); [CORRECTED 2026-10-16 (coherence fold) — an EXPORTED `hasMartialRecord(settlement)` already lives at worldPulse/martialReadiness.js:256 (the honest presence read for the WAR tab; WarTab.jsx consumes it); opportunism.js:122 keeps a private twin reading `config.faithProfile.martial` — the cure is retiring that twin onto the export (semantic equality PLAUSIBLE, proven at build)] the ARMY CONDITION band ladder
 (M4 — ⛔ COLLISION RECORDED (C-WYF-3): `armyStrength.js:94-98` already
 exports a supply-worded `CONDITION_BANDS` deriving from a DIFFERENT
 quantity; the collision is three layers deep (name / quantity / model)
 and the rename is measured FREE (zero external consumers) — the M4
 mint executes C-WYF-3's cure, never lands a second same-name
-vocabulary; owner tuning row); the SUPPLY band (2k: F9 through
+vocabulary; owner tuning row); [RULED 2026-10-16 (coherence fold §5) — WY-8b REUSES `armyStrength`'s `CONDITION_BANDS` ladder, minting no army-condition ladder of its own; the ladder now sits at armyStrength.js:133, a module-local const exported only through `ARMY_STRENGTH_PHRASES` (:237), so the "zero external consumers" claim is re-measured through that export; EC's market ladder is `MARKET_CONDITION_BANDS`. Today the ladder reads the live `supplyIntegrity` scalar (armyStrength.js:148) — how condition and supply share it rides RULED BY DELEGATION 2026-10-16, OD-FC-21 (see the bracket at :574)] the SUPPLY band (2k: F9 through
 the WY-8 band ladder for field armies; home arm derives fresh from the
 town's own stores — "provisioned from stores"; declared-absent where the
 flag is dark or the record is old) joins the army popup facet table AND
 the mirror-law war tab in the same commit — the mirror walker's army row
-gains the facet on both surfaces at once, never one; WarFaithTab consumes
+gains the facet on both surfaces at once, never one; WarFaithTab consumes [see the bracket at :1124]
 the projection for ALL units (home + field per the Q2 ruling); the B-track
 pin re-anchored (deployedArmyStatus gains its first screen consumer — the
 vacuity dies). Pins: mirror-walker army rows (now including supply); the
@@ -1433,6 +1447,7 @@ anchored negative reds). Order: after WY-7 (8b); 8a additionally after
 engine WY-3.
 
 **WY-9 — THE CLICKABLE CANVAS** (store-gated; the four sub-layers live).
+[ADDED 2026-10-16 (coherence fold, req 16/17) — FIRST-VISIBLE: immediate at render — click a marker, read its sentence; no advance needed · TIER: spatial canon (the map canvas); store-gated, no flag · DEGRADED ARM: aspatial ⇒ no canvas; caravans and populations render "no bodies to draw" until WY-10's bindings]
 Files: the Wayfare layer family restructure (§3a — four sub-layers;
 armies absorb navalTransit; persons widen to all three person ledgers;
 populations positioned from `rec.departTick` — the census-4 defect cure,
@@ -1442,7 +1457,7 @@ popup family over PortablePopup with the projection renderers
 (armies/persons live; caravans/populations render "no bodies to draw"
 until WY-10's bindings); the marker→Herald query (`linesForEntity`); THE
 COVERT TIGHTENING (ownerUserId/viewerUserId supplied at every map call
-site — §3c); covert markers DM-only with the covert ring, fail-closed.
+site — §3c); [see the bracket at :805 — six sites at 00b648c9d] covert markers DM-only with the covert ring, fail-closed.
 Pins: declared-absent rendering pin (an absent facet renders the absence
 row); the ambiguity anchored negatives (§3b); pan-preserved pointer test;
 the a11y row (keyboard open/close, focus trap, sr-only counts). Mutants:
@@ -1450,7 +1465,8 @@ covert-leak plant (a hidden leg rendered without DM ctx ⇒ fail-closed pin
 reds). Order: after WY-0 (lawful canvas) and WY-8 (army projection);
 persons need WY-7.
 
-**WY-10 — THE FLOW LAYERS** (store-gated; blocks on WY-3 + WY-4).
+**WY-10 — THE FLOW LAYERS** (store-gated; blocks on WY-3 + WY-4). [CORRECTED 2026-10-16 (coherence fold §6 chain 7) — split per Q5: the CARAVAN binding ships on WY-3 (+ WY-9's popup family) — "WY-10 markers on WY-3" is chain 7 of the fold's felt core; only the POPULATIONS binding waits on WY-4. As written the caravan layer waited past TR-4 (WY-4 sits in phase 6 after POP-1), the outcome Q5 ruled against]
+[ADDED 2026-10-16 (coherence fold, req 16/17) — FIRST-VISIBLE: immediate at render once bodies exist — a caravan marker at its true road position (non-food goods now; grain when TR-4/EC-12 lights) and population columns · TIER: spatial canon (the map canvas); store-gated, no flag; bodies need `caravanBodiesEnabled` (WY-3) and, for populations, `migrationCargoEnabled` (WY-4) · DEGRADED ARM: a bodiless shipment renders nothing — a marker is never a lie]
 Files: caravan sub-layer binds ONLY to F1/F2-bearing shipments (the WY-3
 source scan already fences re-solves; recordless shipments simply do not
 draw — a marker is never a lie); populations popup facets read F4/F5;
@@ -1521,8 +1537,8 @@ from this section's 68 → 75
 4. **SOL_QUEUE §2 LANE B — the WY surface block** joins beside the LD
    ladder as its own named sub-block: "WY surfaces: WY-0 (early opener —
    independent, buildable now) → WY-7 → WY-8 → WY-9 → WY-10 (serial;
-   WY-10 additionally waits on engine WY-3/WY-4; WY-7/WY-8 require a quiet
-   window on WarFaithTab/treatyDocument/liveWorld — CHECK-GIT-FIRST)." The
+   WY-10 additionally waits on engine WY-3/WY-4; [see the bracket at :1467 — only the populations binding waits on WY-4] WY-7/WY-8 require a quiet
+   window on WarFaithTab [see the bracket at :1124]/treatyDocument/liveWorld — CHECK-GIT-FIRST)." The
    LD ladder's own size-ratchet gate binds: no WY surface item grows a
    host file at ceiling; every consumption is a lazy tab-body leaf. r3:
    the WY-8 row gains "(slice 8a is ENGINE — the 2k supply train, F9,
@@ -1547,7 +1563,7 @@ from this section's 68 → 75
 8. **The severity-durability cross-reference:** DESIGN_FP_ARCH_IN gains one
    line at its rumor-adjacent waves naming WY-2 as the fidelity amendment's
    home; the espionage volume's §3 manipulation mechanics cite WY-2's
-   multiplier as the durability floor they bypass.
+   multiplier as the durability floor they bypass. [CORRECTED 2026-10-16 (coherence fold) — re-routed: the citation belongs in DESIGN_FP_ARCH_IN beside IN's plant waves (IN:471-473 already names WY-2); ES has no manipulation mechanic to amend and zero WY-2 hits (see the bracket at :391)]
 9. **THE WAR-VOLUME AMENDMENT (the J-D11(b) supersession, recorded with
    the war chair — r2):** DESIGN_WAR_RULINGS_ARCHITECTURE gains one
    pointer sentence at EACH of its two J-D11(b) sites — the §7 km-scale
@@ -1587,12 +1603,12 @@ from this section's 68 → 75
 | # | Neighbor | The contract | Tripwire |
 |---|---|---|---|
 | 1 | WAR | armyProjection READS the war estate (deployments/armyTransit/naval/interventions/defenderSiege) through the frozen UNIT_SOURCES registry; F6/F7/F8 ride war-owned records with the war lane's normalizers taught same-commit; the commander-name boundary and the one-army law bind every facet; the deployment-arrow deletion is RULED (§7 Q3, vetoable) and lands as a war-surface change with the war chair's nod; the J-D11(b) flag-home supersession (§1a) is RECORDED WITH THE WAR CHAIR via §5b item 9's two pointer sentences in the war volume, same queue-fold commit; the co-location divergence (three snap laws) is FILED to the war/roads chairs, not unified here; r3 — F9 supply rides the war-owned armyTransit record with its normalizer taught same-commit, the consumption coupling writes ONLY the army's own `accumulatedAttrition` (never the realm's exhaustion — the three-exhaustions labeling is the contract), WY-8a's requisition receipts FEED the war program's occupation-resistance quantity through its existing writer, and the 2l both-sided occupation register is a VERIFY-THEN-PIN fold obligation routed WAR-side (§5b item 10: census benefitYield/war-economy drains/any occupier-side cost; pin the occupier holding cost where missing; feeds hold/release/sell + both dossiers' risk registers; the sovereignty-market firesale is the named exit) | the UNIT_SOURCES census reds a sixth army-bearing ledger; the commander anchored negative; the Q3 ruling + veto window recorded in WY-0's ledger row before the wave lands; the war volume's two J-D11(b) sites amended or the fold commit is incomplete; the F9 single-writer scan + conservation identity; the §5b item 10 census executed at the fold or the fold commit is incomplete |
-| 2 | TR (trade) | WY-3 lands BEFORE TR-4 and hands it the caravan body + the flowRegimeContract grain pre-pins + the FP #26 one-line delta (the shipment round-trip pin landed at WY-3 — TR-4 verifies, never re-lands); the T7 correction is REPORTED CENSUS-SHAPED as a TR queue row ("fence the grep-derived importDependency consumer census of the food ledger, shrink-only" — foodCapacityOf and substitutedImportDependency live at this HEAD; the tierResourceDynamics same-name local excluded by symbol-home), never re-ruled here and never a count; commodityFlow edits are serial with the TR lanes (CHECK-GIT-FIRST); the quantization cadence composes with TR-4's authored grain constant; WY-11's floor is EV-side only; r3 — WY-8a's supply mints, rest-debits, and requisitions move REAL stores exclusively through commodityFlow's one stock-write seam (the same door F8's prize credit uses; supply uses the CLOSED goods vocabulary — food = grain class, armor = crafted class, no new resource type), serial with the TR lanes, CHECK-GIT-FIRST | the grain pre-pin rows red when TR-4 lands without consuming them; the T7 walker's census pin is shrink-only (a consumer leaving the census without a fence receipt reds); a store write outside the one seam reds the stock-write source scan |
+| 2 | TR (trade) | WY-3 lands BEFORE TR-4 and hands it the caravan body [CLARIFIED 2026-10-16 (coherence fold §3.2.10 (f)) — TR-4 is absorbed into EC-12 (fold §2); the order WY-3 first stands (fold §6 chain 7: WY-3 then TR-4/EC-12); the FP #26 one-line delta was never written into DESIGN_FP_ARCH_TR or DESIGN_FP_TRADE (zero WY mentions there)] + the flowRegimeContract grain pre-pins + the FP #26 one-line delta (the shipment round-trip pin landed at WY-3 — TR-4 verifies, never re-lands); the T7 correction is REPORTED CENSUS-SHAPED as a TR queue row ("fence the grep-derived importDependency consumer census of the food ledger, shrink-only" — foodCapacityOf and substitutedImportDependency live at this HEAD; the tierResourceDynamics same-name local excluded by symbol-home), never re-ruled here and never a count; commodityFlow edits are serial with the TR lanes (CHECK-GIT-FIRST); the quantization cadence composes with TR-4's authored grain constant; WY-11's floor is EV-side only; r3 — WY-8a's supply mints, rest-debits, and requisitions move REAL stores exclusively through commodityFlow's one stock-write seam (the same door F8's prize credit uses; supply uses the CLOSED goods vocabulary — food = grain class, armor = crafted class, no new resource type), serial with the TR lanes, CHECK-GIT-FIRST | the grain pre-pin rows red when TR-4 lands without consuming them; the T7 walker's census pin is shrink-only (a consumer leaving the census without a fence receipt reds); a store write outside the one seam reds the stock-write source scan |
 | 3 | POP | WY-4 composes with POP-1's columnOf carry-through by ORDER (POP-1 first); the fence's columns land through M4's writer with travelClass absent (RF-2 mutex untouched) and COVER BOTH APPLY ARMS (auto + proposal-accept — r2); the producer overlap with M4's own crisis lane is MEASURED at build and fenced by attribution + the dedup precedence (the fence yields to a same-tick M4 dispatch); conservation identities extended-unweakened; the uncredited-exit hole recorded beside the walker as POP's documented deferral | the THROUGH-ENQUEUE pin; the proposal-accept pin; the double-send mutant against the dedup pin; the wrong-lane mutant; a columnOf edit that drops either program's fields reds both programs' pins |
 | 4 | WF (faith) | the F4 credit writes ONLY through religionState's writer family (single-writer law; occupationFaithPull is the shape precedent); gated on the faith-spread pair with the legacy-mirror handling (both spellings); the HEADS/BLEND ruling (Q1) gates the arm's arithmetic; the WF×POP tellable is the shared fixture | a share write outside the writer family reds the single-writer census; the both-spellings lighting pin |
 | 5 | IN (information) | WY-2 amends the rumor estate IN's waves ride — the lit arm on the keyed-hash01 closed table, the dark arm verbatim (r2 mechanism); WY-5's tap-order law is the mover instance of ES-H's ruling; the going-dark Herald kind lands with the five joins and IN-5's desk routing honored | the fork-key-set census + the other-consumer stream golden (fork isolation is the stream guarantee — stream theft dies at birth); the kind's own walker file |
-| 6 | SP (spine) | WY-1 consumes the transit kernel's documented gradeMultiplier socket — ONE position model, no second floor (law M binds in every denomination); the movement-site manifest is NOT widened here, but the armyTransit exemption (the persisted-position stepper outside MOVEMENT_SITES) is FILED as a structural-prevention candidate — ⭐ **ANSWERED AT THE 2026-08-07 FOLD, AND NOT BY AN EDIT TO THIS VOLUME'S GUARD (CR-WC-10):** docs/DESIGN_FP_ARCH_WC.md SECTION 8 row 10 mints a SECOND, COUNTS-MOVER manifest at WC-11 with its own discovery signature, because `MOVEMENT_SITES` is a NAMED-PERSON leg-physics census by its own header and signature and `armyTransit` is OUT OF ITS SCOPE rather than exempt from it; **law M keeps its scope, its header and its signature UNTOUCHED**, and the second manifest carries a DISJOINTNESS PROOF (a planted named-person token does NOT enter it) so it cannot quietly become a fork of the first; the per-map spectrum surface is SP-consumable | the totality walker's existing rows stay green; a second speed floor anywhere reds law M's walker |
-| 7 | ES (espionage) | Wayfare covert rendering RIDES the espionage covert law — one covert predicate chain (hidden legs, covert errand sub-records, viewerSeesDmSecrets, includeCovert-at-the-projection), zero second spellings; the persons layer renders covert operatives DM-only marked covert the day ES lands, with no ES-side surface work; WY-2's durability floor is the thing ES-I's manipulation bypasses, priced at the plant site; the missing-NPC tell composes with the persons layer (absence is visible on the map the way it is in the ledger); **AND THE ENCOUNTER REGISTRY (added at the 2026-08-05 fold, chair ruling CR-ES-6 — this seam row gains the clause; the seam COUNT is unchanged at eight):** ES-2's `espionageGauntlet.js` is an ENCOUNTER RESOLVER, so it carries §4 row **E15** (covert operative × host settlement watch) in ES-2's OWN commit, a phase before WY-6 — the registry is ONE (this volume's §4 table, closed, walker-scanned), while the catch/probability MATH stays ES-side (§3.3) and no shared graded-outcome helper is minted; WY-6's walker VERIFIES E15 rather than re-closing the table, and anti-vacuity is FIFTEEN | the fail-closed export mutant (a covert mover in a player render reds); the plant-site pricing pin lands ES-side and cites WY-2; the encounter walker's resolver-set scan is the tripwire in BOTH directions (an untabled resolver reds; a table row without a resolver reds) and the sixteenth-arm mutant proves the count moved |
+| 6 | SP (spine) | WY-1 consumes the transit kernel's documented gradeMultiplier socket [see the bracket at :225 — as built, the calibration constant] — ONE position model, no second floor (law M binds in every denomination); the movement-site manifest is NOT widened here, but the armyTransit exemption (the persisted-position stepper outside MOVEMENT_SITES) is FILED as a structural-prevention candidate — ⭐ **ANSWERED AT THE 2026-08-07 FOLD, AND NOT BY AN EDIT TO THIS VOLUME'S GUARD (CR-WC-10):** docs/DESIGN_FP_ARCH_WC.md SECTION 8 row 10 mints a SECOND, COUNTS-MOVER manifest at WC-11 with its own discovery signature, because `MOVEMENT_SITES` is a NAMED-PERSON leg-physics census by its own header and signature and `armyTransit` is OUT OF ITS SCOPE rather than exempt from it; **law M keeps its scope, its header and its signature UNTOUCHED**, and the second manifest carries a DISJOINTNESS PROOF (a planted named-person token does NOT enter it) so it cannot quietly become a fork of the first; the per-map spectrum surface is SP-consumable | the totality walker's existing rows stay green; a second speed floor anywhere reds law M's walker [CORRECTED 2026-10-16 (coherence fold) — false at 00b648c9d: four floor/cap pairs live outside the walker (distanceRead.js:742 1..52, supplyShipments.js:144 1..52, armyTransit.js:300 1..MAX_MARCH_WEEKS 52, navalLayer.js:267 1..MAX_CONVOY_WEEKS 52); the values agree today; FPQ-18 routes the guard to WC-11's counts-mover manifest (CR-WC-10)] |
+| 7 | ES (espionage) | Wayfare covert rendering RIDES the espionage covert law — one covert predicate chain (hidden legs, covert errand sub-records, viewerSeesDmSecrets, includeCovert-at-the-projection), zero second spellings; the persons layer renders covert operatives DM-only marked covert the day ES lands, with no ES-side surface work; WY-2's durability floor is the thing ES-I's manipulation bypasses, priced at the plant site; the missing-NPC tell composes with the persons layer (absence is visible on the map the way it is in the ledger); **AND THE ENCOUNTER REGISTRY (added at the 2026-08-05 fold, chair ruling CR-ES-6 — this seam row gains the clause; the seam COUNT is unchanged at eight):** ES-2's `espionageGauntlet.js` is an ENCOUNTER RESOLVER, so it carries §4 row **E15** (covert operative × host settlement watch) in ES-2's OWN commit, a phase before WY-6 — the registry is ONE (this volume's §4 table, closed, walker-scanned), while the catch/probability MATH stays ES-side (§3.3) and no shared graded-outcome helper is minted; WY-6's walker VERIFIES E15 rather than re-closing the table, and anti-vacuity is FIFTEEN [CORRECTED 2026-10-16 (coherence fold) — the bypassing agent is IN's plant road, not "ES-I" (see the bracket at :391); and per the §4 erratum the count is DERIVED and the proof is the untabled-resolver plant — this clause was missed by the erratum's strike list] | the fail-closed export mutant (a covert mover in a player render reds); the plant-site pricing pin lands ES-side and cites WY-2; the encounter walker's resolver-set scan is the tripwire in BOTH directions (an untabled resolver reds; a table row without a resolver reds) and the sixteenth-arm mutant proves the count moved [CORRECTED 2026-10-16 (coherence fold) — the plant-site pricing pin lands IN-side; the proof is the untabled-resolver plant (see this row's contract-cell bracket)] |
 | 8 | SURFACES (map/dossier/PDF estate) | the mirror walker is the standing gate for every new facet on any kind; populations/caravans map-only is enforced structurally (import census + publicSafe rows); the premium-gate census (D14) gains a row for any priced Wayfare affordance (the mapChains three-site pattern, gate the affordance never the derivation); host files at ceiling never grow (lazy leaves; the hook-bundling trick); the sr-only summary and keyboard reach are part of every layer wave's done bar | the mirror walker's both-direction reds; the map-only import census; the size ratchet itself |
 
 ---
@@ -1697,7 +1713,7 @@ derived from hopWeeks spectra carries the PER-MAP derivation obligation
 
 Every one carries id + full address chain + typed action + named
 settlements + recorded reasons per the news address law; every new kind
-lands the five joins in its mint commit (L6).
+lands the five joins in its mint commit (L6). [ADDED 2026-10-16 (coherence fold; requirements 19 and 22c) — WY-2 owes a §9 receipt line (it has none; "Fog belongs on details…" is doctrine, not a receipt). "Aldmere remembers" is a riddle clause (its effect, occupation resistance, is unnamed) and "thick with wagons once" names neither road nor parties: both are re-authored at build to name who, which power, what effect under the owner's EVIDENCE LAW (2026-10-02/03, "complete, not cryptic"; voice bible pillar 10), which requirement 22c binds on every phrased kind]
 
 ## §10 WHAT THIS VOLUME DID NOT DECIDE (routed, not dropped)
 

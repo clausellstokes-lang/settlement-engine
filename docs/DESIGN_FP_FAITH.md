@@ -7,7 +7,8 @@
 ## (Sol 5.6); the war volume's §10 implementer protocol binds here verbatim
 ## (DESIGN_WAR_RULINGS_ARCHITECTURE.md §10), with the faith addenda in §10 below.
 
-**Status: ARCHITECTURE. Nothing here is scheduled until the owner sequences it against
+**Status: ARCHITECTURE. [CORRECTED 2026-10-16 (coherence fold) — THE STATUS OF RECORD IS docs/DESIGN_FP_COHERENCE_FOLD.md §2; this header is history. In one line: LIT: WF-0 observation floor (no flag; LANDED 09-24, 217ff1700…06025d546), WF-1 as WF-1a..1F (66fda66d4…5d18b4a0c) with the settlement obituary re-filed as WF-8a (47ea9c9ba) — `faithUnseatingEnabled` in 4 presets incl. the default (FP_LIT_ALIVE, simulationRules.js:789-792; ODQ §934.84), vacuous on every born world because the birth preset seats no deity (FPQ-62, the owner's open word) · BUILT DARK: WF-1d dissolution-names-the-fall (unreachable — `warTerminationEnabled` dark in every preset), WF-6's five term rows (GR-3a; drafting unreachable — `believedDevotionEnabled` lit nowhere, OD-FC-7) · UNBUILT: WF-2 pilgrims/legates, WF-3, WF-4 (OD-FC-8), WF-5, WF-6 executors, WF-7 tithe (§3.1.5), WF-8 remainder, WF-9] Nothing here is scheduled until the owner sequences it against
+[ADDED 2026-10-16 (coherence fold §3.4, requirement 24 — the owner's HEARING WEEK) — ENGAGEMENT KINDS this program registers in the wave that builds each: `legate_received` / `pilgrims_received` (WF-2): the arrival's one-week dwell is the hearing. Once `hearingWeekEnabled` is lit no kind resolves in the tick it arrives at a one-week advance: it mints its pending verdict and the DM may leave it, tilt it or give a verdict (never a "decree" — the Decree Registry's word); month/season/year advances run the engine default; the hearing never parks the advance cursor (skeptic S5). Each kind's pending card is its FIRST-VISIBLE sign.]
 the standing pipeline; the FP programs build behind the sim-proof path in spine §5
 order (SP → GRAMMAR → INFO → TRADE → FAITH → POP → INTERIOR → COUPLINGS). Every wave
 ships DARK. The judgment blocks in §6 are the drafting chair's rulings under
@@ -51,7 +52,7 @@ finite semantics (closed banded vocabularies; no float ever reaches a surface).
 2. **FORCES AND COUNTERFORCES:** every faith force names its opposition off the SAME
    evidence: unseating pressure ↔ incumbency (hold + tenure + backing); pilgrimage
    pull ↔ road danger; suppression zeal ↔ the martyr's backfire; the tithe ↔ tithe
-   resentment; the wrath-reading ↔ the failed prophecy; the pact's accumulation ↔
+   resentment; [RULED 2026-10-16 (coherence fold §5) — one tithe (§3.1.5): the word means the W-COIN `tithe_share` coin arm and the templeWealth band derived from it; EC's reserve rung is renamed `tenth`; the granary reserve and the `tithe_rights` prize token are other nouns, and prose qualifies them.] the wrath-reading ↔ the failed prophecy; the pact's accumulation ↔
    over-extension fraying [CORRECTED 2026-08-02 (fp-audit): WF-3's opposition is a
    force off the pact ledger, not the caps — caps and cooldowns are CONTAINMENT and
    this law does not accept containment as counterforce]. A faith without
@@ -75,7 +76,7 @@ finite semantics (closed banded vocabularies; no float ever reaches a surface).
    reads well without a named minister.
 5. **THE ERRAND SPINE:** legates and named pilgrims ride SP-1 with typed purpose
    `religious`, DECLARED vs TRUE purpose on the covert/revealed seam, the K.2
-   decaying snapshot, interceptability, and law M's week floor. The pilgrim SEASON
+   decaying snapshot, interceptability, and law M's week floor. [CORRECTED 2026-10-16 (coherence fold) — legates ride purposeClass `religious`, pilgrims `personal` (envoyErrandVocabulary.js:320-334, both rows `built: false`; DESIGN_FP_ARCH_WF.md WF-2); the ledger is worldState.envoyErrands (CR-FP-10), not spatialLedgers.errands; the errand spine is held dark in every preset (simulationRules.js:781-783).] The pilgrim SEASON
    is a flow read, not an errand (J-WF-2).
 6. **DOSSIER COHERENCE (the crown):** every WF mechanism sources from settlement
    state and lands back in FaithSection / PantheonPanel / the Chronicle / the
@@ -102,7 +103,7 @@ finite semantics (closed banded vocabularies; no float ever reaches a surface).
 10. **THE RISK POSTURE:** every faith decision surface consumes SP-4 —
     `postureOf(settlement)` for the seat's verbs (suppress vs tolerate, purge vs
     procession), `riskToleranceOf(temple)` for the temple actor class (SP-4a names
-    per-house/temple appetite). Out-of-posture acts are priced and receipted news,
+    per-house/temple appetite). [CORRECTED 2026-10-16 (coherence fold §3.3.3) — SP-4 landed as `courtPostureOf` / `courtRiskAppetiteOf` with ONE actor kind, `settlement` (POSTURE_ACTOR_KINDS, strategicPosture.js:97, :222, :303); no temple appetite exists, so every temple-posture read in WF-2/3/5/6/7 falls back to the seat's posture or waits for a new actor kind (owner-gated new capability); `riskToleranceOf` is the roads NPC read (roads/state.js:334).] Out-of-posture acts are priced and receipted news,
     never forbidden.
 11. **NARRATION PARITY:** the survey measured faith at ~9 phrased tokens from ~7
     emission sites against war's ~27 from ~25+ (settlementRumors.js:127-135 vs
@@ -146,7 +147,7 @@ finite semantics (closed banded vocabularies; no float ever reaches a surface).
    never resolve.
 5. **PREMIUM INHERITANCE (Feature D.0, LOCKED — GEOPOLITICAL_WAR_LAYER.md:335-341):**
    deities are premium custom content end-to-end; the pulse is premium by
-   inheritance; a free user's god can never act. EVERYTHING in this program is
+   inheritance; a free user's god can never act. [CORRECTED 2026-10-16 (coherence fold §3.2.6) — a deity-doctrine wording stray: no god acts in any tier (§1c-1; the doctrine record's law that the engine simulates faith sociologically and never theologically); read "a free user's world mints no faith event".] EVERYTHING in this program is
    therefore inert on free tier by construction. What each wave adds to the gate
    surface is stated in its dossier line and gathered in §3c. The two documented
    residuals stand unchanged and are NOT this program's to fix: the composer-lane
@@ -158,7 +159,7 @@ finite semantics (closed banded vocabularies; no float ever reaches a surface).
 7. **EXTEND, NEVER DUPLICATE (J-WR-11's idiom, imported):** worldState.religionStates
    and worldState.pantheon keep their ONE writer each; every WF state addition is
    an in-place conditional extension or a new conditional ledger with one new
-   writer — never a parallel copy of an existing ledger.
+   writer — never a parallel copy of an existing ledger. [RULED 2026-10-16 (coherence fold §3.1.6) — religionStates has TWO write paths as built: religionState.js's writer and traditionsKernel.applyFaithNudges (a ±1 share nudge that "returns the possibly-new religionStates object", traditionsKernel.js:444-455), used by WC/WY faith exposure. RULED: the nudge is routed THROUGH religionState's writer family as a declared ±1 share transition (one writer family, two entry points — the T3 "extend never fork" reading); this law reads "one writer FAMILY per field family". The code cure is slotted to the next faith unit; WC/WY faith exposure is amended to name the transition.] [CORRECTED 2026-10-16 after skeptic S1-07 — `applyFaithNudges`' only caller is the observances pass, traditionsKernel.js:860; WC/WY faith exposure and `faithCargo` are UNBUILT (zero hits).]
 
 ### 1d Recorded hazards that WILL bite these waves (each has bitten this estate)
 - **THE DEITY-FREE VACUOUS PIN (this program's own №1):** the release corpus is
@@ -205,13 +206,14 @@ finite semantics (closed banded vocabularies; no float ever reaches a surface).
 | Amendment C's dissolution: sacred_claim dies on patron-anchor change; legacy anchors read anchor_unavailable | warTermination.js:88/:105/:308-322 | BUILT, flag-dark (war program's flag) — WF-1 supplies the typed cause its receipt will name |
 | Realm pantheon: wins/losses/seats/tier with dwell+hysteresis; zero-seat entries persist forever; Twilight/Ascendancy arcs | pantheon.js:299-312/:331-384/:166-171, pulseKernel.js:1662-1675, realmEvents.js:284/:307 | BUILT — no deletion path, no realm-level unseating transition exists (by finding, and by ruling it never will — J-WF-1) |
 | Church agency: CHURCH_OBJECTIVE levers missionize/legitimacy; religious factions compete for temple_authority; clergy NPC roles + preferredActions; DM verbs behind fail-closed deityWriteGate | scoringObjective.js:85-96, settlementStrategy.js:177/:197, factionCompetition.js:56/:68, npcAgency.js:42-46, settlementDeityHelpers.js:98-111 | BUILT |
-| Piety: lagged stock (PIETY_LAG 0.06, DRIFT_ASYMMETRY 2, W_INSTITUTION 0.35), banded secular→devout — the SP-5 confidence-in-god instance, EXISTS and extends | piety.js:44/:57-70, faithPanelModel.js:34-49 | BUILT |
+| Piety: lagged stock (PIETY_LAG 0.06, DRIFT_ASYMMETRY 2, W_INSTITUTION 0.35), banded secular→devout [RULED 2026-10-16 (coherence fold §5) — the five piety words are REUSED by DEVOTION_BANDS keyed on STANDING (subsystemRowsBelief.js:292; beliefAxisSubjects.js:356-373): "piety" names the substrate scalar, "standing" (believed devotion) the belief axis — the words are shared, the nouns never.] — the SP-5 confidence-in-god instance, EXISTS and extends | piety.js:44/:57-70, faithPanelModel.js:34-49 | BUILT |
 | Institutions: backing (+0.12), moral viability pressure, tolerance ledger, faith-gated founding/abolition arcs, roster rows with status | moralInstitutionPressure.js:1-88/:292-295/:461, institutionTolerance.js:1-25, institutionRoster.js:1-56 | BUILT |
 | Temple mediation: generosity relief warmth +0.4; peace mediation reads the mediator's quadrant toward BOTH parties | generosityEV.js:243-253, peaceTerms.js:1121-1140 | BUILT (narrow, scalar — stays scalar) |
 | Divine mandate → publicLegitimacy (theocracy 1.0 / royal 0.45), the coup coupling SOAK-PROVEN | religionState.js:557-630, religion-coup-soak.mjs | BUILT — FP-INTERIOR's coupling substrate |
 | Stale rite beliefs: beliefMap faithLabel + observanceLabel — a settlement can hold a wrong belief about a neighbour's rite | beliefAxes.js:10-16 | BUILT — SP-2 BELIEVED DEVOTION's seed |
 | Display pipeline: Herald 'faith' + 'divination' sections, ~15 routes, prefix rules; PantheonPanel, WarFaithTab→FaithSection (ACTIVE/TEASER/HIDDEN), map overlay, PDF | heraldRouting.js:64/:116-121/:239-240, FaithSection.jsx:11-24, faithPanelModel.js:12-15 | BUILT — the pipe is wide; the supply is thin |
 | Five dedicated religion soaks with PASS receipts (300 seeds × 80 ticks; schism unresolved 0%; coup coupling proven) | scripts/audit/religion-*.mjs, docs/evidence/phase4-wf7-certification/CERTIFICATION.md | BUILT — a separate lane from the release corpus |
+[CORRECTED 2026-10-16 (coherence fold) — the census omits a LANDED faith layer: W-FAITH F1c–F7c (authored deity character, boon/bane channel bindings, the influence field, the tuning surface — faithField.js, faithChannelBindings.js, faithTuningSurface.js, faithWitnessSource.js; a8673e3e9..4c7d59d1e, 08-31/09-01), and faith's two sociological producers WY-4 `faithCargo` and WC veteran faith exposure (DOCTRINE:81-84). Every WF lens reading "patron temper" reads the DERIVED `deityTemper`; the stored `temperamentAxis` is INERT (ADDENDUM 15).]
 
 ### 2b Verified ABSENT (NEW WORK, each homed in a wave; never build on these as if
 ### they existed)
@@ -228,7 +230,7 @@ finite semantics (closed banded vocabularies; no float ever reaches a surface).
   → WF-3.
 - **Any interpretation layer** — no event kind attributes a calamity to a deity;
   gods_abandonment (realmEvents.js:26-35) is coincidence recognition (three
-  co-present stressors), not a reading; the Auspice is a DM-facing forecast with
+  co-present stressors), not a reading; [RULED 2026-10-16 (coherence fold §3.2.6) — its shipped headline label "God's Abandonment" (realmEvents.js:28, rendered as the headline at :198) predicates abandonment of a god with no believer subject — a deity-doctrine stray in shipped code; the rename ("The Forsaken Altars") is a declared TEXT shift the owner signs under RULED BY DELEGATION 2026-10-16, OD-FC-8. Also PLAUSIBLE: "A false prophet is gathering the desperate" (:34) adjudicates a prophecy.] the Auspice is a DM-facing forecast with
   an honest label, not believer interpretation → WF-4.
 - **Any covert congregation** — suppressed = share 0, inert dormancy;
   clandestineFacet.js is criminal-only with zero faith references; no path today
@@ -242,11 +244,11 @@ finite semantics (closed banded vocabularies; no float ever reaches a surface).
   (fp-audit): the prior "eleven families" miscount would have mis-sized the
   families walker and the TREATY_COMPLIANCE_VOICE family×state table]) — a victor
   cannot demand a creed, missionary access, or pilgrim passage at any table; holy
-  wars start over gods and can never end with terms about them → WF-6.
+  wars start over gods and can never end with terms about them → WF-6. [SUPERSEDED BY EVENT 2026-10-16 (coherence fold §3.3.6) — the catalog moved to peaceTermsCatalog.js and at 00b648c9d holds 26 rows / 13 families; the five faith rows LANDED (GR-3a, :249-266); every count derives from live TERM_FAMILIES (DESIGN_FP_ARCH_WF.md R1's rule), and DESIGN_FP_GRAMMAR.md §4 lists every landed row by pointer.]
 - **Any tithe/temple-economy stream** — the only "tithe" is the granary reserve
   mechanism (foodStockpile.js:12-83); 'tithe_rights' is a competition prize
   token; no treasury, no temple wealth, no gold touches a temple anywhere in
-  src/domain → WF-7.
+  src/domain → WF-7. [CORRECTED 2026-10-16 (coherence fold) — the coin reversal (ODQ §731.1) landed W-COIN: treasury.js mints a `tithe_share` tax form (:271; "a theocracy takes its tithe and little else"), dark behind treasuryEnabled; see the bracket at :1207.]
 - **A persisted faith-relationship ledger** — stanceOf is a pure recompute; no
   typed persistent relationship taxonomy between faiths (war's edge-label parity
   gap). DELIBERATELY NOT BUILT in this program (§4 what-is-not-modeled): WF-3's
@@ -272,7 +274,7 @@ finite semantics (closed banded vocabularies; no float ever reaches a surface).
 ## §3 THE FLAG FAMILY + THE LANE RULING
 
 Eight new virtual flags, all absent from DEFAULT_SIMULATION_RULES, lit only at the
-owner-signed soak redo, in build order:
+owner-signed soak redo, in build order: [SUPERSEDED BY EVENT 2026-10-16 (coherence fold) — the "lit only at the soak redo" law is superseded by ODQ §934.84 ("no just build it all shipped lit"): LIT-1a (f473b94ad, 09-24) lit `faithUnseatingEnabled` in four presets incl. the default (FP_LIT_ALIVE, simulationRules.js:789-792); the other seven flags are unbuilt. The certification prose subsystemRowsVirtual.js:480 ("no preset declares this key") is now false — a code cure row for the next faith unit.]
 
 | Flag | Gates | Lane (ANDs with) | Wave |
 |---|---|---|---|
@@ -282,7 +284,7 @@ owner-signed soak redo, in build order:
 | `omenReadsEnabled` | calamity readings as belief writes + the failed-prophecy ledger | LOCAL | WF-4 |
 | `faithSchismEnabled` | the temple split (5a) + the covert congregation (5b) | LOCAL, with 5b's exposure arm reading the covert/revealed seam | WF-5 |
 | `faithTermsEnabled` | the faith-side term EXECUTORS + formation triggers + the communion trigger (family membership lives in GRAMMAR's canonical catalog, GR-3 — R3) | SPREAD + SP-3 lit + GR-3's catalog rows landed | WF-6 |
-| `titheEnabled` | the tithe stream, temple wealth band, relief lever, sack-lure coupling | LOCAL | WF-7 |
+| `titheEnabled` | the tithe stream, temple wealth band, relief lever, sack-lure coupling [RULED 2026-10-16 (coherence fold §5) — `lure` is INFORMATION's bought lie; FAITH prose says "the sack's draw" for temple wealth as loot weight.] | LOCAL | WF-7 |
 | `faithNarrationEnabled` | the 3× receipt program over EXISTING silent transitions (entry/eviction/suppression/resurgence voices) | LOCAL | WF-8 |
 
 **THE LANE RULING (binding):** LOCAL-lane flags key on deity presence via the
@@ -306,12 +308,12 @@ decision, not an omission):**
   cross-corpus ownership correction; see the waves). Where TRADE's stream physics
   is LIT they additionally register stream entries through the couplings volume's
   declared ports (CPL-12 / CPL-7); TRADE dark ⇒ wealth-fold + receipts only, no
-  economy-surface stream row — declared both places.
+  economy-surface stream row — declared both places. [see the bracket at :1207]
 - WF-6 requires SP-3 (peacetime formation) lit AND GR-3's canonical catalog rows
   landed (R3 — membership lives in GRAMMAR) AND WF-2 lit for `pilgrimage_right`
   specifically: with `pilgrimageEnabled` dark that term CANNOT FORM (dictated or
   negotiated — the drafting pool excludes it; a proposal naming it is refused
-  with a receipt), so no dead guarantee is ever certified as kept.
+  with a receipt), so no dead guarantee is ever certified as kept. [CORRECTED 2026-10-16 (coherence fold) — it does not: PACT_DRAFT_LENS drafts pilgrimage_right at ≥0.45 unconditionally (pactFormation.js:193), and `pilgrimageEnabled` does not exist. Latent while faith_communion cannot cross; the fence lands in WF-2's commit before devotion lights (DESIGN_FP_ARCH_WF.md WF-2's bracket).]
 - WF-1's `pin:dissolution-names-the-fall` fixture requires `warTerminationEnabled`
   (war's flag, already built, owner-sequenced) — the one cross-program fixture
   this program authors.
@@ -377,7 +379,7 @@ worldState.religionStates[cid]              — EXISTS; WF-1/WF-5/WF-7 EXTEND IN
                                             // capped ≤3 (the pruneSuppressed idiom)
   .deities[ref].suppressedAtTick            // WF-1 [CORRECTED 2026-08-02 (fp-audit)]:
                                             // stamped by the existing suppression
-                                            // transitions (religionState.js:262/:277)
+                                            // transitions (religionState.js:262/:277) [CORRECTED 2026-10-16 (coherence fold) — one writer stamps (religionState.js:239-277, its header: the one writer of each deity entry's suppressed and suppressedAtTick fields); WF-1b landed 39d0ad7c8.]
                                             // when lit — the prune NARRATIVE KEY
                                             // (suppressed entries carry no timestamp
                                             // today, verified); absent ⇒ legacy,
@@ -387,7 +389,7 @@ worldState.religionStates[cid]              — EXISTS; WF-1/WF-5/WF-7 EXTEND IN
                                             // capped; shepherdRef is read-wiring to
                                             // an existing clergy npc, never new NPC
                                             // state
-  .templeWealth: { band, movedTick }        // WF-7: a BANDED stock, not books
+  .templeWealth: { band, movedTick }        // WF-7: a BANDED stock, not books [see the bracket at :1207]
                                             // (J-WF-3); fold computed by tithe.js
                                             // (pure leaf), applied by the one writer.
                                             // [CORRECTED 2026-08-02 (fp-audit)]
@@ -436,7 +438,7 @@ worldState.spatialLedgers.omenReadings      — WF-4, writer omenReading.js (ONE
                                             // capped per settlement (≤2 open), realm
                                             // cap per tick (containment idiom)
 
-legate + named-pilgrim errands              — SP-1's ledger (spatialLedgers.errands),
+legate + named-pilgrim errands              — SP-1's ledger (spatialLedgers.errands), [CORRECTED 2026-10-16 (coherence fold §3.3.4) — the errand ledger is worldState.envoyErrands (CR-FP-10, applied as the constitution erratum); RULED BY DELEGATION 2026-10-16, OD-FC-14 confirms "keep"; pilgrims ride purposeClass `personal`, see the bracket at :78.]
                                             // purpose `religious`, declared/true
                                             // split; NO faith-owned mover state ever
 pilgrim season                              — NEVER STORED: pure evaluator
@@ -468,6 +470,7 @@ J-WF-4).
 ## every wave DARK per §3; every fixture deity-bearing per §1d)
 
 ### WF-0 — THE OBSERVATION FLOOR (no flag; instrument-side only)
+[ADDED 2026-10-16 (coherence fold, req 16/17) — FIRST-VISIBLE: none — instrumentation · TIER: the soak receipt; the authored deity-bearing case is premium custom content · DEGRADED ARM: dark (deityBearers 0 on the deity-free release corpus)]
 **Historical archetype:** the parish register — before the story, the count.
 **Scope:** cure the certifiability gap BEFORE any mechanism lands, so every later
 wave's soak evidence is readable.
@@ -486,7 +489,7 @@ wave's soak evidence is readable.
   otherwise absent for all time (pilgrimage.js:12-16/:31-33/:58-62 — the draw is
   deity-agnostic and aspatially zero): a SPATIAL CANON (the case is mapped, never
   aspatial), a QUALIFYING GRAND OBSERVANCE (scaleBand ≥ 3 with act ∈ {procession,
-  offering, fair} — the tree's own drawsPilgrims bar) authored AT the
+  offering, fair} — the tree's own drawsPilgrims bar) [CORRECTED 2026-10-16 (coherence fold) — the live bar is wider: `scaleBand >= GRAND_SCALE_MIN && (PILGRIM_ACTS.has(act) || scaleBand >= SPECTACLE_SCALE)` (traditions/pilgrimage.js:62) — a spectacle-scale rite qualifies with any act.] authored AT the
   patron-bearing host, and ≥1 mapped reachable neighbour. Without these,
   `pin:the-roads-fill-at-the-feast` and WF-9's season envelopes are vacuous on
   the program's own corpus — the §1d №1 hazard in a second dress.
@@ -511,6 +514,7 @@ then the trace lands.
 
 ### WF-1 — THE UNSEATING (crux ruling 1, SETTLED: believer-side; flag
 `faithUnseatingEnabled`; LOCAL lane)
+[ADDED 2026-10-16 (coherence fold, req 16/17) — FIRST-VISIBLE: the town FaithSection's cause-only fall line in the advance the patron flips (PATRON_FLIP_TICKS 3 weeks — felt inside a month); the settlement obituary is slow (the ≥4-suppressed prune, years); the flagship receipt has no producer · TIER: aspatial-safe (LOCAL lane); premium deity-bearing worlds only (the birth preset seats no deity, FPQ-62); host flags: `faithUnseatingEnabled` (4 presets incl. the default) · DEGRADED ARM: a free or deity-free world mints nothing (inert by construction, D.0)]
 **Historical archetype:** Akhenaten's Aten eclipsing Amun and Amun's return — both
 movements entirely priesthood-and-populace, the gods never testifying.
 **Law:** a patron's fall is a BELIEVER-SIDE transition — a typed share/legitimacy
@@ -527,7 +531,7 @@ at the moment it fires into a CLOSED cause vocabulary and records it on the new
   - `displaced` — organic share flip (FLIP_MARGIN crossed, a rival took the pews)
   - `discredited` — legitimacy-floor contest loss (the schism arm; scandal,
     stain, conduct drift named in the receipt's amplifiers)
-  - `abandoned` — the sink crossing (share lost to `none`, nobody took the seat)
+  - `abandoned` — the sink crossing (share lost to `none`, nobody took the seat) [STRUCK 2026-10-16 (coherence fold) — `abandoned` does not ship: PATRON_FALL_CAUSES = discredited · displaced · imposed · suppressed (patronFall.js:76), cut on zero producers, and the four-cause vocabulary was ACCEPTED (ODQ §215.2, chair 08-16); a sink-crossing unseat is a NEW ENGINE BEHAVIOUR and its own wave. J-WF-5's closure and one-cause law stand; the membership is four. WF-1a landed 66fda66d4.]
   - `imposed` — occupation/warbound/DM flip (the creed followed the garrison)
   - `suppressed` — eviction to suppressed standing (the seat emptied by force)
 **THE EXTINCTION BEAT [CORRECTED 2026-08-02 (fp-audit) — the prior spec could not
@@ -568,7 +572,7 @@ names the scandal's named amplifiers exactly as conversionOutcome already names
 amplifiers (religiousContest.js:392-436's legibility discipline).
 **Receipts (house voice):** "The Lady of Harvests fell discredited in Greyfen — a
 decade of stain, an empty nave, and the Deep Forge's bell now rings the hour." Full
-address chain, typed action, cause named.
+address chain, typed action, cause named. [CORRECTED 2026-10-16 (coherence fold) — NO PRODUCER: the landed reader is the town faith panel's cause-only line ("The patron fell. Discredited: …", faithPanelModel.js:112-117, :226-230), which cannot name the creed and carries no amplifier; no Herald kind for a fall exists (heraldRouting.js:148-169). The flagship sentence is owed a kind (WF-8 voice, the fold's chain 5).]
 **Clock:** falls are FAST (the flip tick); the ring and the obituary are SLOW
 (tenure and prune cadence). Denominated per-tick against INTERVAL_WEEKS; SP-7
 registered.
@@ -585,7 +589,7 @@ GRAMMAR's closed pact-endings vocabulary also carries a `converted` token; FAITH
 side takes the qualified spelling before the two endings histograms land in one
 receipt family).
 **Pins (negative hardest):** `pin:fall-names-its-cause` — every fall carries
-exactly one cause from the closed set, walker-asserted over all five fire sites;
+exactly one cause from the closed set, walker-asserted over all five fire sites; [see the bracket at :533]
 the NEGATIVE — a pressured patron above the hold does NOT fall and no record
 mints; `pin:last-altar-goes-dark` [CORRECTED 2026-08-02 (fp-audit)] — the seeded
 fixture authors ≥4 suppressed entries (the prune's own fire bar; the prior
@@ -610,7 +614,7 @@ the ring with it, by design); undo restores with the entry; import validates cau
 tokens against the closed set.
 **Dossier round-trip (the crown pin):** open the town → FaithSection ACTIVE state →
 the cause-chain line renders "the patron fell: discredited (scandal of the
-granary tithe)" from patronFalls[0]; the Chronicle carries the obituary row. The
+granary tithe)" from patronFalls[0]; [see the bracket at :574] the Chronicle carries the obituary row. The
 pin renders both from a fixture world and asserts the sentences.
 **Bands:** fall-classification thresholds ride the EXISTING tuning constants (no
 new dials for the causes — they are readings of built transitions); obituary
@@ -619,6 +623,7 @@ significance class; ring depth (default 3).
 
 ### WF-2 — PILGRIMS + LEGATES (crux ruling 2, SETTLED: SP-1 movers; flag
 `pilgrimageEnabled`; SPREAD lane; two slices)
+[ADDED 2026-10-16 (coherence fold, req 16/17) — FIRST-VISIBLE: yearly — one feast season a year (a one-month advance sees it only in feast weeks); the named movers' legs are weeks, but the errand spine is dark everywhere · TIER: spatial canon + belief infoMode (believed devotion — `believedDevotionEnabled` lit nowhere, OD-FC-7); host flags: `faithSpreadEnabled` (dramatic_campaign + full_simulation), `errandSpineEnabled` (dark in every preset); premium deity-bearing worlds only (the birth preset seats no deity, FPQ-62) · DEGRADED ARM: aspatial or unmapped worlds draw zero; dark, pilgrimage.js's bounded scalar stands]
 **Historical archetype:** the Camino de Santiago — a road economy with saints at
 one end and innkeepers the whole way; the legate a latere for the named traveler.
 
@@ -658,7 +663,7 @@ distance-weighted who-would-come-from-where, :81-104).
   The counterforce pin proves a war on the pilgrim road empties the season on a
   real fixture.
 **WF-2b — THE NAMED (the errand half).** Named movers ride SP-1, purpose
-`religious`, law M's week floor, the K.2 snapshot, full interceptability:
+`religious`, [see the bracket at :78] law M's week floor, the K.2 snapshot, full interceptability:
 - **Legates:** a temple dispatches its named ranking clergy (casting via rankings
   + clergyTraitPlane) on typed faith business — the foothold approach, the
   communion summons (WF-6's trigger), schism mediation, the tithe dispute. A
@@ -684,7 +689,7 @@ court, and did not say all of why."
 52-week year, INTERVAL_WEEKS-derived, never a 12-tick "year"); the errand is FAST
 (legs, week floor). Travel physics: SP-1's kernel, law M absolute.
 **Posture:** dispatching a legate onto dangerous roads consumes
-riskToleranceOf(temple); a cautious temple waits out the war and THAT is receipted
+riskToleranceOf(temple); [see the bracket at :105] a cautious temple waits out the war and THAT is receipted
 ("no legate came; the Forge keeps its counsel").
 **Couplings:** FAITH×TRADE (feast commerce), FAITH×WAR (the road as target; the
 intercepted legate), FAITH×INFO (declared/true purpose), all walked in
@@ -729,6 +734,7 @@ season-beat significance class (SP-6's family, at mint per §1b-12).
 ### WF-3 — THE STANCE LANES' DEFERRED HALVES LAND (crux ruling 3, SETTLED:
 scheduled here, VETO OPEN at the owner; flag `faithStanceConsequencesEnabled`;
 SPREAD lane)
+[ADDED 2026-10-16 (coherence fold, req 16/17) — FIRST-VISIBLE: none inside a month — the threshold colour is invisible and durability frays at the seasonal–yearly clock · TIER: aspatial-safe; host flags: `faithSpreadEnabled` (2 presets); premium deity-bearing worlds only (the birth preset seats no deity, FPQ-62) · DEGRADED ARM: dark — the stance lanes stay news-only as today]
 **Historical archetype:** the Investiture Controversy — the foothold in another's
 court stops being a letter and starts being a lever.
 **Law:** this wave executes the owner-gated deferral the tree itself records
@@ -747,7 +753,7 @@ LIGHTING-day disclosure, not a build-day one.
 - **treatyDurability consumed:** faith pacts gain a durability read — a
   lawful-faith pact frays slower, a chaotic one faster — consumed by the pact's
   fraying clock (the existing compliance/fraying machinery via SP-3, never a
-  fork).
+  fork). [CLARIFIED 2026-10-16 (coherence fold) — two objects share the word "pact": the stance lane's `faith_pact` is a creed-to-creed news beat with no treaty instrument (deityStanceLane.js:233), while the SP-3 instrument is a court-to-court treaty. The volume never says which one this durability attaches to (PLAUSIBLE design gap); it is resolved at WF-3's compile, not here.]
 - **Pact + foothold gain consequences:** `faith_pact` writes its deferred
   relationship-weight nudge (banded, capped, reversible — the trust +0.05
   missionary precedent is the scale class); a recruited foothold minister seeds a
@@ -805,18 +811,19 @@ mint per §1b-12).
 
 ### WF-4 — OMEN READS (crux ruling 4, SETTLED: belief writes; flag
 `omenReadsEnabled`; LOCAL lane)
+[ADDED 2026-10-16 (coherence fold, req 16/17) — FIRST-VISIBLE: the reading beat in the advance a qualifying calamity lands (fast — the family's most tellable beat); expectations resolve in banded weeks · TIER: aspatial-safe (LOCAL lane); premium deity-bearing worlds only (the birth preset seats no deity, FPQ-62); the mechanism's shape waits on OD-FC-8 · DEGRADED ARM: dark]
 **Historical archetype:** Rome's prodigy lists — the Senate never asked whether
 the sky truly rained blood; it asked which rite answers it — and the flagellants
 of 1348 for the reading that becomes a movement.
 **Law:** calamities are interpreted through the LOCAL faith lens as BELIEF WRITES.
 A reading attributes; it never confirms (§1c-1). The engine's own causality is
 untouched — famine physics stay famine physics; the reading is what the pulpit
-SAYS, written into believer state through existing laws.
+SAYS, written into believer state through existing laws. [RULED BY DELEGATION 2026-10-16 (OD-FC-8 — WF-4 has the ENGINE originate the attribution (the pulpit reads a famine as wrath; a `portent` is engine-adjudicated "fulfilled"), in tension with the owner's 08-06 word: "The users have to determine whether a divine act happens and whether to attribute any meaning to it. Not our faith system." Chair recommendation (coherence fold §3.2.5): REBASE WF-4 on THE ATTRIBUTED EDIT — a DM's attribution starts a reading, believers' voices contest it, and the engine never originates the attribution (its slot: §6, the bracket at :1478). Until ruled, nothing builds [NOW RULED by delegation 2026-10-16 — the fold §7 is the ruling of record] on this mechanism text. The same row carries the shipped "God's Abandonment" headline rename (§3.2.6).]
 **Mechanism:** new module `omenReading.js` (ONE writer for
 spatialLedgers.omenReadings). When a qualifying calamity lands on a deity-bearing
 settlement (famine, plague, disaster, siege — the existing stressor/disaster
 event classes; a CLOSED qualifying list), the local lens composes a READING:
-- **The lens:** patron temper × alignment quadrant × piety band × the reader's
+- **The lens:** patron temper [see the bracket at :215] × alignment quadrant × piety band × the reader's
   character (the ranking cleric's traits — a zealous reader leans `wrath`, a
   gentle one `test`; read-wiring, casting law). Kind ∈ {wrath, test, abandonment,
   vindication, portent} (closed, J-WF-6).
@@ -861,7 +868,7 @@ sink acceleration, the damped lens) — one ledger row carries both arms, FOR EV
 KIND (the correction above); WF-9 measures fulfilled/failed PER KIND, not in
 aggregate.
 **Belief posture:** readings are pure believer speech; SP-2's BELIEVED CONDITIONS
-may carry the reading OUTWARD ("they say the gods have abandoned Greyfen") at news
+may carry the reading OUTWARD ("they say the gods have abandoned Greyfen") [CORRECTED 2026-10-16 (coherence fold §3.2.6) — deity-doctrine stray: the subject is the followers (ADDENDUM 15; the landed faith corpus "never says a god died, departed, abandoned anyone or failed", faithNews.js:14-17); read "they say Greyfen's altars stand empty".] at news
 speed, feeding POP's flight belief — coupling, declared.
 **Casting:** the reader is the settlement's ranking cleric via existing planes;
 the receipt names them.
@@ -885,7 +892,7 @@ existing lanes); the cautious seat waits; out-of-posture response priced.
 **Couplings:** FAITH×POP (a wrath reading accelerates believed-conditions flight),
 FAITH×INTERIOR (a reading against the seat feeds legitimacy pressure),
 FAITH×INFO (a PLANTED calamity rumor can bait a reading — THE LURE's sacred arm,
-built in FP-INFORMATION, consumed here; the false omen is INFO's story). All in
+built in FP-INFORMATION, consumed here; the false omen is INFO's story). [CLARIFIED 2026-10-16 (coherence fold) — INFO's volumes carry no omen, calamity or heresy arm (zero hits; INFO's devotion bait rides `faithLabel` and feeds sacred tension, DESIGN_FP_ARCH_IN.md:407-408); the sacred arm is unslotted on INFO's side.] All in
 the couplings volume.
 **Endings entries:** feeds {resurgent, hollowed} (readings move both directions).
 **Pins (negative hardest):** `pin:two-towns-one-famine` — one regional calamity,
@@ -916,6 +923,7 @@ reading cooldown, reading significance class (SP-6's family, at mint per §1b-12
 
 ### WF-5 — SCHISM COMPLETES + THE UNDERGROUND (crux ruling 5, SETTLED; flag
 `faithSchismEnabled`; LOCAL lane with a covert-seam exposure arm; two slices)
+[ADDED 2026-10-16 (coherence fold, req 16/17) — FIRST-VISIBLE: 5a — the split line in the advance a contest resolves at a temple-bearing town (rare); 5b — none inside a month (520-week growth, 156-week assimilation; DM-only until exposed) · TIER: aspatial-safe (LOCAL lane); covert receipts behind includeCovert; premium deity-bearing worlds only (the birth preset seats no deity, FPQ-62) · DEGRADED ARM: dark — suppression stays inert dormancy]
 **Historical archetype:** the Great Western Schism for the split temple — two
 seats, one god, and every court forced to choose; the Kakure Kirishitan for the
 underground — a faith kept alive in cellars for two centuries and still there
@@ -1007,7 +1015,7 @@ a week of bells.
 **Posture [CORRECTED 2026-08-02 (fp-audit): "shaped for the congregation" minted
 a third appetite class SP-4a does not define — the read had no subject]:** purge
 intensity consumes postureOf(seat); covert recruitment consumes
-`riskToleranceOf(temple)` OF THE SUPPRESSED CREED'S OWN TEMPLE ACTOR — and where
+`riskToleranceOf(temple)` OF THE SUPPRESSED CREED'S OWN TEMPLE ACTOR [see the bracket at :105] — and where
 the suppressed creed holds no temple (the usual cellar case), the read falls
 back to `postureOf(settlement)`, declared — never a new appetite stock (bold
 undergrounds grow faster and expose likelier — priced both ways, the reversal
@@ -1018,7 +1026,7 @@ FAITH×WAR (occupation → imposed flip → underground: the duress story comple
 FAITH×POP (flight of the faithful as believed-conditions push), FAITH×GRAMMAR
 (the treaty-surfacing arm — `tolerance_guarantee` held opens the doors; DEPENDENT
 on GRAMMAR's canonical catalog carrying that term, with the declared fallback:
-catalog declines ⇒ surfacing rides the suppression-lift path only [CORRECTED
+catalog declines ⇒ surfacing rides the suppression-lift path only [see the bracket at :1108] [CORRECTED
 2026-08-02 (fp-audit)]). Declared in the couplings volume.
 **Endings entries:** {gone_underground, resurgent, extinct, split} — four of the
 program's eight endings live here.
@@ -1072,13 +1080,14 @@ per §1b-12).
 
 ### WF-6 — FAITH TERMS JOIN THE PACT GRAMMAR (crux ruling 6, SETTLED: via SP-3;
 flag `faithTermsEnabled`; SPREAD lane; requires SP-3 lit)
+[ADDED 2026-10-16 (coherence fold, req 16/17) — FIRST-VISIBLE: none in shipped play (`faith_communion` cannot cross while `believedDevotionEnabled` is lit nowhere, OD-FC-7); once lit, yearly at SP-3's proposal cadence · TIER: belief infoMode + `believedDevotionEnabled` (OD-FC-7); host flags: `faithSpreadEnabled`, `pactFormationEnabled`; premium deity-bearing worlds only (the birth preset seats no deity, FPQ-62) · DEGRADED ARM: the rows stand as legal parchment with no executor; only the DM's PROPOSE_PACT can name a faith term]
 **Historical archetype:** the Peace of Augsburg — cuius regio, eius religio: the
 first time the table could say what the pulpit does — and the 1229 Treaty of
 Jaffa for pilgrim passage bought with ink instead of blood.
 **Law:** the survey's sharpest asymmetry — "holy wars can start over gods but
 never end with terms about them" (TERM_CATALOG carries eleven TERMS across SEVEN
 families, zero religious [CORRECTED 2026-08-02 (fp-audit): the "eleven families"
-miscount is dead — see §2b]) — dies here. Faith becomes DEMANDABLE AND GRANTABLE
+miscount is dead — see §2b]) [see the bracket at :246] — dies here. Faith becomes DEMANDABLE AND GRANTABLE
 at the table. peaceTerms.js stays the single terms writer; SP-3's peacetime
 formation carries the families; the war volume's seam ruling extends verbatim.
 **THE CATALOG CONSUMERSHIP [CORRECTED 2026-08-02 (fp-audit) — chair ruling R3
@@ -1097,7 +1106,7 @@ retired). The two terms beyond the spine's original three —
 to GR-3 carrying their faith-side rationale (WF-5b's treaty-surfacing arm
 depends on `tolerance_guarantee`; `temple_restitution` is the war-damage
 mirror); if the canonical catalog declines them, their executors do not build
-and WF-5b's surfacing arm rides its declared fallback. A faith term forms and
+and WF-5b's surfacing arm rides its declared fallback. [CORRECTED 2026-10-16 (coherence fold) — all five faith rows LANDED (GR-3a; peaceTermsCatalog.js:249-266); the decline branch is dead.] A faith term forms and
 executes only where GR-3's rows are landed AND this wave's executors are lit
 (§3's precondition row).
 **R1 COMPLIANCE (one instrument per pair):** faith terms are DIRECTIONAL terms —
@@ -1122,17 +1131,17 @@ spelling are GRAMMAR's, J-WF-7 amended accordingly):**
   made contractual) and feeds WF-3's pact durability read. The COMMUNION
   TRIGGER: a faith communion (same patron or brothers-quadrant proximity,
   sacredClaim's faithProximityOf) is a typed SP-3 PROPOSAL trigger — the spine's
-  peacetime formation consumes it, drafting amendment-shaped per R1.
+  peacetime formation consumes it, drafting amendment-shaped per R1. [RULED 2026-10-16 (coherence fold §3.2.4) — ONE DEFINITION. Three stood (this line; DESIGN_FP_GRAMMAR.md:694-696's faith-facet quadrant read; the shipped believed-devotion parity, pactTriggers.js:221-246, with no creed-identity read). The ruled trigger is the code's PARITY READ PLUS the both-patrons guard — J-WF-7's non-vetoable clause lands as a gate in scoreFaithCommunion; creed identity (same patron, brothers-quadrant proximity) is a FAITH-side colour, not the trigger. As shipped it is unreachable: `believedDevotionEnabled` is lit nowhere.] [RULED BY DELEGATION 2026-10-16 (OD-FC-7 — light `believedDevotionEnabled` (3 presets)? Without it no faith pact can cross in shipped play. Chair recommendation: YES; a same-seed shift in dramatic_campaign, living_realm and full_simulation.]
 - `tolerance_guarantee` — the grantor forswears suppression of a named creed:
   executor gates the eviction/purge lanes for that creed (suppression becomes
   breach); the underground surfaces safely where this holds (WF-5 coupling —
-  "the doors opened").
+  "the doors opened"). [CLARIFIED 2026-10-16 (coherence fold) — as built the grant keys on a court PAIR ("Has grantorId forsworn suppressing granteeId's creed?", treatyEnforcement.js:289-293) with no creed ref; PLAUSIBLE that a patron fall would silently re-target it. Recorded for WF-6's compile.]
 - `temple_restitution` — post-war repair: a named impaired/shell temple-class
   institution is restored on the payer's stream (institution status machinery +
   transfer physics; the war-damage mirror).
 **The guard (sacredClaim's own idiom):** no faith term forms unless BOTH parties'
 relevant settlements name a patron — absence of a faith is not a shared faith
-(sacredClaim.js:39-49's guard, imported verbatim as the family's formation gate).
+(sacredClaim.js:39-49's guard, imported verbatim as the family's formation gate). [CORRECTED 2026-10-16 (coherence fold §3.2.4) — UNHONOURED at drafting today: pact drafting carries no guard and devotionGroundTruth returns a band for a cult-only settlement with no patron (beliefAxisSubjects.js:356-373), so a patronless pair could draft faith terms once devotion lights (PLAUSIBLE); the ruling lands the guard in scoreFaithCommunion — see the bracket at :1133.]
 **Force / counterforce:** the term's demand ↔ the host's backlash — imposed
 missionary access under low tolerance feeds resentment through the existing
 tolerance/legitimacy reads (an Augsburg that pleases no one), and the breach
@@ -1140,7 +1149,7 @@ lanes are priced exits, never silent ones. Dictated-vs-negotiated both arms:
 victors may DEMAND (war-end terms), equals may TRADE (SP-3 peacetime formation).
 **Belief posture:** formation triggers and appraisals read each party's OWN
 picture through SP-3's two-picture contract (the war volume's negotiationPictures
-seam — built there, consumed here; no faith-side evaluator forks it).
+seam — built there, consumed here; no faith-side evaluator forks it). [CORRECTED 2026-10-16 (coherence fold §3.2.1) — as built no pact module imports negotiationPictures.js; peacetime acceptance is responder-only (pactFormation.js:446-494); the two-picture law's peacetime reading is RULED BY DELEGATION 2026-10-16, OD-FC-5.]
 **Casting:** the communion's officiants and the legate who carries the proposal
 (WF-2b) are named through existing planes.
 **Receipts:** "Peace signed at Greyfen: the Forge's missionaries may preach
@@ -1172,7 +1181,7 @@ dictated arm (war-end demand) and the negotiated arm (SP-3 proposal) BOTH
 reachable on fixtures; the SIZING pin [CORRECTED 2026-08-02 (fp-audit)] — the
 families walker and the TREATY_COMPLIANCE_VOICE family×state totality table are
 sized against the TREE's SEVEN existing families plus the faith family's rows
-(eleven TERMS today, never "eleven families"), updated in GR-3's same-commit
+(eleven TERMS today, never "eleven families") [see the bracket at :246], updated in GR-3's same-commit
 discipline; Law One — no executor confirms a god (walker over executor writes:
 believer/gate state only); dormancy golden (dark ⇒ TERM_CATALOG byte-identical —
 the catalog extension itself is flag-shaped and lands via GR-3; VERIFY-AT-BUILD
@@ -1190,12 +1199,13 @@ restitution rate, formation trigger thresholds, term-beat significance class
 
 ### WF-7 — THE TITHE COUPLING (crux ruling 7, SETTLED; flag `titheEnabled`;
 LOCAL lane)
+[ADDED 2026-10-16 (coherence fold, req 16/17) — FIRST-VISIBLE: none inside a month — the fold is quarterly (13 weeks), the first tithe line a season in · TIER: aspatial-safe (LOCAL lane); the coin arm needs `treasuryEnabled` (dark) per §3.1.5; premium deity-bearing worlds only (the birth preset seats no deity, FPQ-62) · DEGRADED ARM: the piety × temple-presence heuristic band where the treasury is dark (§3.1.5's named arm)]
 **Historical archetype:** the medieval tithe — one part in ten, and cathedrals
 rose from it; Lindisfarne 793 for what wealth on an altar summons.
 **Law:** faith gains its economy stream — banded, believer-side, Law One intact:
 the tithe is what BELIEVERS RENDER, a function of piety and rank, never a price
 engine. Temples get a WEALTH BAND, not books (J-WF-3): the HOUSE keeps books in
-FP-TRADE; the temple's coffer is a banded stock with one writer.
+FP-TRADE; the temple's coffer is a banded stock with one writer. [RULED 2026-10-16 (coherence fold §3.1.5) — ONE TITHE. W-COIN's `tithe_share` tax form (treasury.js:271, dark behind treasuryEnabled; the coin reversal ODQ §731.1 made a theocracy's take lawful) is the COIN ARM; WF-7's `templeWealth` is NOT a second stock — it is a BAND DERIVED from the treasury's `tithe_share` row where the treasury is lit, and from the piety × temple-presence heuristic where it is dark (the named degraded arm). The house-fortune source (DESIGN_FP_TRADE.md:610, "a band of house fortune flows to the temple") is STRUCK: houses pay the seat's tax, and the temple reads the seat's books through INT, never a house's. The spine crux's "tithe coupling to TRADE" stands as the treasury read. J-WF-3's "wealth band, not books" was argued against a coinless estate; its conclusion survives as a band derived from the coin arm, and §4's stored shape is re-derived at WF-7's compile under this ruling.] [RE-RULED 2026-10-16 after skeptic S1-02 — the tithe is the CHURCH's (ODQ:32488): WF-7's piety × presence → `templeWealth` band is the flow's source; W-COIN's `tithe_share` is the CROWN's cut of it (treasury.js:269-320), read from WF-7's band, never a source — one flow, two ends; the fold §3.1.5 carries the text of record.]
 **Mechanism:** new pure leaf `tithe.js` computing the per-settlement tithe fold,
 applied through religionStates' one writer (§4):
 - **The stream [CORRECTED 2026-08-02 (fp-audit) — the ownership was circular
@@ -1210,7 +1220,7 @@ applied through religionStates' one writer (§4):
   at its own chokepoint — consumed, never forked); TRADE dark ⇒ wealth fold +
   receipts only, no economy-surface stream row (the degraded arm, declared in
   §3). Devout metropolis with a major patron: a real stream. Lukewarm thorp: a
-  trickle.
+  trickle. [see the bracket at :1207]
 - **Temple wealth consumed, three ways:** institution durability (a rich temple
   weathers impairment — feeds the existing status machinery's repair side);
   charity (the generosity templeMediated arm, +0.4 warmth EXISTS — wealth bands
@@ -1225,7 +1235,7 @@ applied through religionStates' one writer (§4):
   reformation, the couplings volume's own named archetype). TITHE RELIEF is the
   seat/temple's lever: forgone stream buys piety + legitimacy (the famine-year
   remission — receipted mercy).
-- **The sack lure (FAITH×WAR):** temple wealth joins sack arithmetic as loot
+- **The sack lure (FAITH×WAR):** [see the bracket at :286] temple wealth joins sack arithmetic as loot
   weight — a rich shrine raises the raid's take and the moral price together
   (the world judges by the observer's axis; robbing a temple is monumental on
   the good observer's ledger). Conservation pinned: sacked wealth moves, never
@@ -1294,6 +1304,7 @@ INTERVAL_WEEKS), tithe-beat significance class (SP-6's family, at mint per
 
 ### WF-8 — NARRATION 3× (crux ruling 8, SETTLED; flag `faithNarrationEnabled`;
 LOCAL lane; lights LAST among faith flags)
+[ADDED 2026-10-16 (coherence fold, req 16/17) — FIRST-VISIBLE: the voices of transitions that already happen weekly (entry, eviction, suppression, resurgence, standing) — inside a month where lit; the realm arcs at the epoch clock (260-week window) · TIER: aspatial-safe (LOCAL lane); premium deity-bearing worlds only (the birth preset seats no deity, FPQ-62); host flags: `faithNarrationEnabled`, or the producer's own flag (WF-8a rides `faithUnseatingEnabled`) · DEGRADED ARM: silent, byte-identical]
 **Historical archetype:** the monastic chronicle — the Anglo-Saxon Chronicle kept
 by the very faith it narrates; the deep engine finally keeps its own annals.
 **Law:** the survey's verdict — a deep engine with a thin voice, ~9 tokens from
@@ -1309,11 +1320,11 @@ is the mouth.
   law), niche contests short of the patron seat, tolerance shifts, mandate band
   moves. Dark ⇒ silent as today, byte-identical.
 - **Carry the new mechanisms' kinds (landed with their waves, gathered here):**
-  fall causes ×5, the two obituaries, season bands, legate arrivals/returns,
+  fall causes ×5, [see the bracket at :533] the two obituaries, season bands, legate arrivals/returns,
   reading kinds ×5 + fulfilled/failed, split, covert surfacing/exposure/backfire
   (covert-gated), term formations/breaches ×5, tithe pressure/remission/plunder.
 - **The realm-arc expansion:** the Ascendancy/Twilight pair grows to a battery:
-  the Schism realm arc EXISTS (realmEvents.js:104) — joined by the Great
+  the Schism realm arc EXISTS (realmEvents.js:104) [CORRECTED 2026-10-16 (coherence fold) — it does not: COMPOUND_SIGNATURES holds five keys, gods_abandonment / the_wasting / starving_city / calling_of_debts / shadow_court (realmEvents.js:25-68); DESIGN_FP_ARCH_WF.md R2 re-scoped the battery to FIVE new arcs, Schism among them.] — joined by the Great
   Pilgrimage (a flood season), the Persecution (coordinated suppression), the
   Awakening (sink revival cresting — "crisis calls the faithful home" finally
   narrated at realm scale), the Reformation (a cluster of falls sharing a
@@ -1325,14 +1336,14 @@ is the mouth.
   falls sharing ONE cause token, across ≥3 settlements, inside a rolling
   260-week window (five years; INTERVAL_WEEKS-denominated) — window, spread,
   and cause-identity all banded in §7; the realmEvents compound-signature
-  surface it rides is a §10.5 VERIFY-AT-BUILD row. Each of the four new arcs
+  surface it rides is a §10.5 VERIFY-AT-BUILD row. Each of the four new arcs [see the bracket at :1326]
   carries a REACHABILITY pin on a seeded cluster fixture and an occurrence-rate
   envelope in WF-9 — four realm-scale story generators no longer ship
   unmeasured.
 - **The honesty fix:** the Ascendancy headline's "the faithful walk the roads in
   numbers" keys to WF-2's season read where lit (the sentence becomes true) and
   drops the clause where dark (the sentence stops lying — a one-line fork,
-  disclosed).
+  disclosed). [CLARIFIED 2026-10-16 (coherence fold) — not landed: the Ascendancy still reads "Temples multiply, rivals bend the knee, and the faithful walk the roads in numbers." (realmEvents.js:336).]
 **SP-6 compliance (the checklist IS the acceptance):** every kind — id, address
 chain, typed action, settlements by name, reason; WHAT_PHRASES + heraldRouting
 registration (faith section; the expectation record alone to divination, per
@@ -1396,6 +1407,7 @@ bands (window 260 weeks, spread ≥3 settlements, cause-identity).
 
 ### WF-9 — FAITH CONVERGENCE INSTRUMENTATION (no flag; the program's acceptance
 harness — the war volume's WR-9 discipline applied to faith)
+[ADDED 2026-10-16 (coherence fold, req 16/17) — FIRST-VISIBLE: none — instrumentation · TIER: the deity-bearing soak grid (premium custom content) · DEGRADED ARM: dark]
 - **The endings mix:** {faith_converted, hollowed, gone_underground, resurgent,
   extinct, split, communion, imposed_held} — each with a share envelope over the
   deity-bearing corpus (WF-0's case grown to a small grid); one path carrying
@@ -1416,7 +1428,7 @@ harness — the war volume's WR-9 discipline applied to faith)
   no eternal incumbent (the hold too strong), no revolving door (the hold too
   weak); the religion-soak's proven 0%-unresolved-schism discipline extends to
   the new transitions.
-- **Per-mechanism envelopes:** fall-cause histogram (all five causes REACHED;
+- **Per-mechanism envelopes:** fall-cause histogram (all five causes REACHED [see the bracket at :533];
   `imposed` not dominant in a peaceful corpus); season band distribution +
   war-suppression measured, PLUS the subsumption-seam delta [CORRECTED
   2026-08-02 (fp-audit)] — the observance-success shift between scalar and
@@ -1429,7 +1441,7 @@ harness — the war volume's WR-9 discipline applied to faith)
   half-life proven able to empty a cellar in-horizon); term-family formation
   counts (each family forms somewhere; breach reachable); tithe pressure
   distribution + resentment coupling measured; realm-arc occurrence rates (the
-  four new WF-8 arcs each fire at soak scale, none dominates); narration flood
+  four new WF-8 arcs [see the bracket at :1326] each fire at soak scale, none dominates); narration flood
   test (WF-8's governor holds at soak scale).
 - **Counterforce audit (the §1b-2 law, measured) [CORRECTED 2026-08-02
   (fp-audit): the audit previously measured 6 of the program's 9 declared
@@ -1464,6 +1476,7 @@ not before.**
 ## §6 JUDGMENT BLOCKS (the drafting chair's rulings under delegation — vetoable
 ## here; an implementer NEVER re-rules these silently; the eight crux mechanisms
 ## themselves are spine law, NOT listed here)
+[ADDED 2026-10-16 (coherence fold §3.2.5) — THE ATTRIBUTED EDIT IS SLOTTED HERE. The owner's 2026-08-06 doctrine record (chair refinement, accepted, vetoable — DOCTRINE:86-93) charters it — "Slots as a small wave beside the WF sociological set" — and no WF volume or the compiled fold ever slotted it (a dropped thread under the never-deferred law). Its shape: a DM edits a settlement or state and attributes the change to a god; that attribution starts a believers' READING; believers' voices contest it; the engine never originates the attribution. SLOT: WF-4's position in §5's order, as the base WF-4 rebases on if RULED BY DELEGATION 2026-10-16, OD-FC-8 is answered YES; its spec is owed at WF-4's compile. The fold's §6 assigns WF-4 to no chain — reported for the fold to assign.]
 
 - **J-WF-1 (no pantheon coup, ever):** the believer-side ruling is implemented as
   typed classification of the EXISTING settlement transitions; no realm-level
@@ -1476,7 +1489,7 @@ not before.**
   every-pilgrim-an-errand (cap explosion, per-head simulation against Law One)
   or no-errands (no interception surface, the drama dies).
 - **J-WF-3 (wealth band, not books):** temples get a banded stock with one
-  writer; double-entry stays the HOUSE's (FP-TRADE). VETO gives temples
+  writer; double-entry stays the HOUSE's (FP-TRADE). [see the bracket at :1207] VETO gives temples
   house-grade books (and prices the added tuning surface consciously).
 - **J-WF-4 (covert-in-place):** the covert congregation is a field on the
   existing religionStates suppressed entry, one writer preserved; no parallel
@@ -1484,7 +1497,7 @@ not before.**
   dual-writer drift risk J-WR-11 exists to prevent).
 - **J-WF-5 (the fall vocabulary):** {displaced, discredited, abandoned, imposed,
   suppressed} — names vetoable; the closure and the one-cause-per-fall law are
-  not.
+  not. [see the bracket at :533]
 - **J-WF-6 (the reading vocabulary):** {wrath, test, abandonment, vindication,
   portent} — names vetoable; closure, the no-physics law, and the falsifiable
   expectation arm are not.
@@ -1492,9 +1505,9 @@ not before.**
   under chair ruling R3]:** membership and spelling belong to GRAMMAR's
   canonical catalog (GR-3) — {missionary_access, pilgrimage_right, shared_rite,
   tolerance_guarantee, temple_restitution} as consumed here, the last two as
-  catalog-addition requests with declared fallbacks (WF-6). What remains THIS
+  catalog-addition requests with declared fallbacks (WF-6). [see the bracket at :1108] What remains THIS
   volume's and is not vetoable here: the walker-enforced compliance executors
-  and the both-patrons guard. Vetoing membership happens at GR-3, not here.
+  and the both-patrons guard. Vetoing membership happens at GR-3, not here. [see the bracket at :1133]
 - **J-WF-8 (the G1c handling):** WF-3 lands behind the NEW flag so build-time
   goldens never move; the G1c golden shift becomes a lighting-day disclosure at
   the owner-signed soak redo. VETO wires consumption under the existing spread
@@ -1503,7 +1516,7 @@ not before.**
 - **J-WF-9 (voicing the silent machinery is flag-gated):** WF-8's receipts over
   EXISTING transitions land behind `faithNarrationEnabled` — dark worlds stay
   silent and byte-identical; no retroactive narration of past ticks, ever. VETO
-  narrates unconditionally (and moves every deity-bearing golden at build time).
+  narrates unconditionally (and moves every deity-bearing golden at build time). [CORRECTED 2026-10-16 (coherence fold) — WF-8a shipped on its PRODUCER's flag (faithUnseatingEnabled, "Behind the SAME hoisted `unseating` local WF-1b lit — no second flag read", religiousContest.js:810-811); faithNarrationEnabled gates only the voices of PRE-EXISTING silent transitions.]
 - **J-WF-10 (the tithe clock):** quarterly fold — 13 weeks, INTERVAL_WEEKS-
   derived, pinned. VETO picks annual (slower story) or weekly (noise); the
   pin-to-INTERVAL_WEEKS is law either way.
@@ -1589,7 +1602,7 @@ None a bare float on a surface; all in one tuning table per wave.
 ## §8 HERALD + LEGIBILITY CONTRACT (the sentences this program must be able to
 ## say, in the house voice, at the Bound-Book register floor)
 - "The Lady of Harvests fell discredited in Greyfen — a decade of stain, and the
-  Forge's bell now rings the hour." (WF-1)
+  Forge's bell now rings the hour." (WF-1) [see the bracket at :574]
 - "The last altar of the Pale Warden in Marrow's Ford went dark; none there now
   keep the rite." (WF-1 — settlement-voiced [CORRECTED 2026-08-02 (fp-audit)]:
   the beat is settlement-scoped; no realm census exists and none is claimed)
@@ -1628,7 +1641,7 @@ event-log gate and takes no news kinds].
 after SP (the errand system, believed-world extension, pact grammar, posture,
 confidence family, narration kit, temporal walker), GRAMMAR, INFO, and TRADE;
 before POP and the INTERIOR completions. All behind the sim-proof path; nothing
-here lights a flag, runs a soak, or ratifies a band — those are owner-held.
+here lights a flag, runs a soak, or ratifies a band — those are owner-held. [see the bracket at :276]
 
 **Internal order:** WF-0 first (the instrument precedes the mechanism) → WF-1
 (the fall vocabulary is consumed by WF-5's endings and WF-8's voices) → WF-2
@@ -1639,15 +1652,15 @@ reconciled table is this order's mirror [CORRECTED 2026-08-02 (fp-audit): §3 an
 §9 previously disagreed; §3 now carries the superset]) → WF-7 → WF-8 (narrates
 everything; builds last) → WF-9 closes. WF-4 and WF-7 are order-slack against their neighbours (LOCAL-lane,
 no WF dependencies beyond WF-0) and may interleave by implementer convenience
-WITHIN the one-wave-one-commit discipline.
+WITHIN the one-wave-one-commit discipline. [ADDED 2026-10-16 (coherence fold §6, OD-FC-29) — the owner's 08-06 "slimmer system" word post-dates this volume and the ten-wave order never answered it. The fold's recommended FELT CORE (chain 5: WF-8's voices, WF-1's finishing — creed name, amplifier — and WF-6's two consumers once `believedDevotionEnabled` is lit) with WF-2/3/5b/7 recorded with a slot is RULED BY DELEGATION 2026-10-16, OD-FC-29; nothing here is re-sequenced until he rules.]
 
-**Lighting order = build order,** at the owner-signed soak redo, after
+**Lighting order = build order,** at the owner-signed soak redo, [see the bracket at :276] after
 `faithSpreadEnabled` for the SPREAD-lane flags (§3's lane ruling); WF-8's flag
 lights last. A WF flag lit out of order is an invalid config WF-9's walker reds.
 
 **Cross-program joins:** WF-1's typed causes are consumed by war's WR-1
 dissolution receipts when `warTerminationEnabled` lights (that flag is war's,
-already built, owner-sequenced); WF-6 consumes SP-3 + the war volume's
+already built, owner-sequenced); [CORRECTED 2026-10-16 (coherence fold) — WF-1d is BUILT (warTermination.js:538, :869; 1a90b5639) and dark in every preset: warTerminationEnabled is "deliberately absent from DEFAULT_SIMULATION_RULES and every other preset" and declared false in full_simulation (simulationRules.js:1031-1036), so the sentence reaches no DM until war termination lights.] WF-6 consumes SP-3 + the war volume's
 negotiationPictures seam; WF-2b consumes WR-7b's foreign-guest hold for
 intercepted named movers. Each join is read-only from this side; conflicts are
 STOP-and-report.

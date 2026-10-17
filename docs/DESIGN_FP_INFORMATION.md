@@ -10,6 +10,9 @@
 
 **Status: ARCHITECTURE. Nothing here is scheduled until the owner sequences it
 (spine §5: SP → GRAMMAR → INFO → …). Every wave ships DARK. The §6 judgment
+[CORRECTED 2026-10-16 (coherence fold) — THE STATUS OF RECORD IS docs/DESIGN_FP_COHERENCE_FOLD.md §2; this header is history. In one line: LIT: none (no IN flag, and neither host flag `infoStatecraftEnabled` nor `informationBrokeragesEnabled`, is true in any preset) · BUILT DARK at 00b648c9d: IN-0a/0b/0c/0d (the HIDE toll INERT, zero consumers), IN-1a/1b (a DM display only; `wealthShown`/`devotionShown` hard-wired 'unknown'), IN-2 (the axis law; `lureCommission` has no production caller), IN-3 (reads + Watch panel + Houses block; every verb unmounted pending U123), IN-4/1-2 (the race; couriers not), IN-5/1 (the seventh desk + refile), IN-6 (the instrument) · UNBUILT: IN-1c-b, IN-2-c (the commission's consumer, U123), IN-3's verbs, IN-4b couriers, IN-5/2 (the arc) and `court_sat_still` (zero hits in src).] [CORRECTED 2026-10-16 after skeptic S2 seat B — four FIRST-VISIBLE/TIER lines below are corrected here, the sites keeping their text: (1) IN-0b's intercept cadence follows `brokerageServicesRules.js:94-97`, not `intelActs.js:62-70`; (2) the treaty disclosure is SPOKEN AT SIGNING under `treatyLifecycleVoiceEnabled` (peaceTerms.js:611-613), the T+1 credit is the ledger's, not the DM's first sight; (3) the race is MOUNTED but `reputationRaceEnabled` is lit NOWHERE, so its first-visible sign is dark in every shipped world; (4) `simulationRules.js:897` is inside `realistic_regional`, not `quiet_local` — the allyIntel tier line reads the default preset.]
+[ADDED 2026-10-16 (coherence fold §3.4, requirement 24 — the owner's HEARING WEEK) — ENGAGEMENT KINDS this program registers in the wave that builds each: `lure_sprung` (IN-2) and `plant_taken` (IN-0a): the take tick is the hearing. Once `hearingWeekEnabled` is lit no kind resolves in the tick it arrives at a one-week advance: it mints its pending verdict and the DM may leave it, tilt it or give a verdict (never a "decree" — the Decree Registry's word); month/season/year advances run the engine default; the hearing never parks the advance cursor (skeptic S5). Each kind's pending card is its FIRST-VISIBLE sign.]
+[ADDED 2026-10-16 (coherence fold, req 17) — TIER DECLARATION for every wave in this volume: the medium runs only where `beliefsActive` holds — the spatial canon marker AND `infoMode !== 'omniscient'` (beliefMap.js:204-209); the default infoMode is 'omniscient' (simulationRules.js:56), so no IN mechanism runs in an aspatial world nor in a spatial world under the default rules. Only three presets record beliefs: dramatic_campaign and living_realm ('perfect_delayed', simulationRules.js:953, :996) and full_simulation ('full', :1073). On top of that every IN wave needs `infoStatecraftEnabled` and/or `informationBrokeragesEnabled`, dark in every preset, and ES (DESIGN_FP_ARCH_ES.md) needs `errandSpineEnabled`, dark everywhere. Paid-tier sense: the spatial canon is the premium tier (anonymous = town, free = village + town), so this whole family is premium-only by construction. Each wave below carries its own FIRST-VISIBLE/TIER line.]
 blocks are the drafting chair's rulings under delegation — vetoable here.**
 
 **The thesis, from the three-survey substrate (2026-08-02, executed against
@@ -22,9 +25,10 @@ VOICE. The deliberative chooser enumerates zero information verbs
 belief is structurally absent; the signature read (the reputation race) has zero
 consumers; the bought lie charges the buyer and plants nothing (PLANT_WIRING
 reported-not-made); and the whole knowledge lane speaks 4 beats among 269 routed
+[CORRECTED 2026-10-16 (coherence fold) — HISTORICAL (the 2026-08-02 survey). The fold was already built (DESIGN_FP_ARCH_IN.md §1b R1) and IN-0a landed the pulse handoff (`brokeragePlantHandoff.js`; `appliedPlantEnvelopesAt` consumed at informationStatecraft.js:1387 and envoyPulse.js:207): the bought lie plants wherever both host flags are lit. The race has a consumer too (see the bracket at §2's race row). Read §5 IN-0a's Model as superseded by AIN §4 IN-0a.]
 Herald tokens (~1.5%, war carries 68) — a medium that only talks at the moment a
 secret dies. This volume adds almost no state. It is reads, wirings, acts, and
-narration: a mirror (second-order belief), a bait (the lure), a counter-game
+narration: a mirror (second-order belief), a bait (the lure) [RULED 2026-10-16 (coherence fold §5) — in this volume "lure" is ONLY the bought lie (IN-2); FAITH's sack lure is "the sack's draw" in prose.], a counter-game
 (deliberate counter-intelligence), a road (couriers and the race), a voice (the
 spy's arc and the knowledge desk), and a measure (decontamination + envelopes).
 
@@ -164,41 +168,41 @@ requirements are the density contract for every mechanism below.
 | Belief maps: per-observer, per-faction-slot, decay/update/forgetting laws, fog-preserving seed sentinel, misjudgment detection | `beliefMap.js` (1,458 lines; BELIEF_TUNING: SILENCE_DECAY 0.92/tick ≈ 8-tick half-life, MIN_CONFIDENCE 0.03 prune, HOP_DECAY 0.75; reconcileBelief :485-550; detectMisjudgment :1362-1386), wired pulseKernel.js:1821 | BUILT, rigorous — SP-2's foundation |
 | Rumor physics: six carriers, hop latency (`arrivalTick += hopWeeks`, seasonal), per-hop weathering with 0.05 fidelity floor, 12% name-swap to REAL ids, TTL 26/13, top-K 24, echo-independence cap 1 | `rumorNetwork.js`, `migrationRumors.js` (banded magnitudes, 80/300 floors) | BUILT |
 | Distance priced once through one shared reader; five consumers incl. the player rumor display | `distancePricedNews.js` (hopDelay = floor(hopWeeks×0.5); V-24b impedance), `settlementRumors.js:574-590` | BUILT |
-| Brokerage stack I1–I4: measured stamp ladder (truth bands 0.90/0.60/0.40/0.15 under an 18,377-record corpus; hop count predicts truth 1.000→0.465, corroboration does NOT), fidelity floor competence/(1+0.75×delay), query priced in patron political capital (cap 0.30, five-token refusal, claimFrom the ONLY claim constructor), bounded feed (≤0.6×competence; confidence never outruns accuracy), derived patronage (no persisted key), plant act charging the patron | `brokerageStamps.js`, `brokerageFidelity.js`, `brokerageServices.js`, `brokerageServicesFeed.js`, `brokeragePatronage.js`, `brokerageServicesPlant.js`, `brokerageServicesRules.js`, wired candidateEvents.js:5 | BUILT — with the ONE recorded unwired seam: **PLANT_WIRING** (`brokerageServicesPlant.js:87`: "informationStatecraft.processLies: fold commissionPlants() into nextDisinfo") — the bought lie charges the buyer and plants NOTHING |
+| Brokerage stack I1–I4: measured stamp ladder (truth bands 0.90/0.60/0.40/0.15 under an 18,377-record corpus; hop count predicts truth 1.000→0.465, corroboration does NOT), fidelity floor competence/(1+0.75×delay), query priced in patron political capital (cap 0.30, five-token refusal, claimFrom the ONLY claim constructor), bounded feed (≤0.6×competence; confidence never outruns accuracy), derived patronage (no persisted key), plant act charging the patron | `brokerageStamps.js`, `brokerageFidelity.js`, `brokerageServices.js`, `brokerageServicesFeed.js`, `brokeragePatronage.js`, `brokerageServicesPlant.js`, `brokerageServicesRules.js`, wired candidateEvents.js:5 | BUILT — with the ONE recorded unwired seam: **PLANT_WIRING** (`brokerageServicesPlant.js:87`: "informationStatecraft.processLies: fold commissionPlants() into nextDisinfo") — the bought lie charges the buyer and plants NOTHING [CORRECTED 2026-10-16 (coherence fold) — see the bracket at the thesis: IN-0a landed and PLANT_WIRING now names the landing.] |
 | Intel gift/sale (D-3): gift priced by the teller's SACRIFICE, sale by fidelity×stakes credibility-discounted, self-policing ±2 bands at courier arrival, 26-week pair cooldown, 12/tick cap | `intelActs.js`, consume arm informationStatecraft.js:1334-1399 (a ONE-TICK deposit courier — the anti-law-M shape IN-4 retires) | BUILT |
-| M9b ally-intel with alignment-styled deception (evil paints hostile at full presented confidence; chaotic garbles ×0.5; lawful ×0.95) + the turned-ally leak at 0.9 | `beliefMap.js:801-1009` | BUILT |
-| SEE / HIDE / LIE movers: paid covert sight (upkeep = prosperity affordability GATE, accuracy floor 0.85), secrecy hysteresis on paranoia+weakness pressure, the garrison bluff (+2 bands at 0.7×credW; expose on 2-band contradiction or 8-tick age; blowback triple), credibility stock (rise 0.6 / fall 5 / half-life 52 / weight [0.35, 1.15]) consumed by four independent readers incl. the Blainey discount (wars against proven liars converge slower — pinned) | `informationStatecraft.js`, wired pulseKernel.js:1875 | BUILT — with recorded deferred seams at the file foot (:1444-1472): **HIDE's trade tax** (narrated, unwired), SEE gate-not-drain, the disclosure DEMAND lane, the deliberately-absent SELL spammer |
-| Compelled intel: 'disclosure' peace term minted + recorded, executor `'seam'`; intel is an appraised war-spoil asset class (merchant tilt 1.2) | `peaceTerms.js:180,381,492`; seam notes informationStatecraft.js:1460-1464 | PARTIAL — minted, strains, expires; the feed effect never executes |
+| M9b ally-intel with alignment-styled deception (evil paints hostile at full presented confidence; chaotic garbles ×0.5; lawful ×0.95) + the turned-ally leak at 0.9 | `beliefMap.js:801-1009` | BUILT [RULED BY DELEGATION 2026-10-16 (OD-FC-12 — 2026-10-16 (coherence fold §3.2.15) — a MEASUREMENT CAR is owed (PLAUSIBLE, reasoned from code): an adopted ally share REPLACES the receiver's whole seat record (beliefMap.js:1117) and carries only the six core keys, dropping believed scarcity/conditions/devotion and the D-1 axes; the next report re-seeds an absent axis from GROUND TRUTH (beliefAxes.js:225) — a K3 truth leak in full_simulation. The fixture (ally share → adoption → next report; the axes survive or re-seed from the prior, never from truth) rides the next spine lane; a confirmed cure is a one-time full_simulation belief shift the owner signs.] |
+| SEE / HIDE / LIE movers: paid covert sight (upkeep = prosperity affordability GATE, accuracy floor 0.85), secrecy hysteresis on paranoia+weakness pressure, the garrison bluff (+2 bands at 0.7×credW; expose on 2-band contradiction or 8-tick age; blowback triple), credibility stock (rise 0.6 / fall 5 / half-life 52 / weight [0.35, 1.15]) consumed by four independent readers incl. the Blainey discount (wars against proven liars converge slower — pinned) | `informationStatecraft.js`, wired pulseKernel.js:1875 | BUILT — with recorded deferred seams at the file foot (:1444-1472): **HIDE's trade tax** (narrated, unwired) [CORRECTED 2026-10-16 (coherence fold) — IN-0d landed the read (`secrecyTradeFactor.js`, zero consumers by design); its home is RULED at coherence fold §3.1.4 — see the bracket at IN-0d.], SEE gate-not-drain, the disclosure DEMAND lane, the deliberately-absent SELL spammer |
+| Compelled intel: 'disclosure' peace term minted + recorded, executor `'seam'`; intel is an appraised war-spoil asset class (merchant tilt 1.2) | `peaceTerms.js:180,381,492`; seam notes informationStatecraft.js:1460-1464 | PARTIAL — minted, strains, expires; the feed effect never executes [CORRECTED 2026-10-16 (coherence fold) — IN-0c LANDED after this volume and after DESIGN_FP_ARCH_IN.md's first handoff: `peaceTermsDisclosure.js` (the signing credit at T+1, mounted informationStatecraft.js:1487) + `disclosureFidelityFor`; `treaty_disclosure_opened` is GRAMMAR-voiced (grammarNews.js:118) and routes 'trade' (heraldRouting.js:270).] |
 | Foreign-asset scandal: exposure fires the full blowback triple + exposedCorruption casus ledger + corruption_exposed condition with named reason; organic exposure ousts and reseats | `pulseKernel.js:540-627`, `corruptionWeb.js:891-960`, warReasonTaxonomy.js:18 | BUILT — but no composer joins secret → break → fall (the beats are disjoint) |
 | Irony surfaces: dramaticIronyBrief (cured dead branch), settlementBrief "What they say (vs. what is)", WarCausalBrief's dying-war line, council_schism condition, rumor-mill voices for all four beats | `composers.js:262-318`, `BeliefDivergenceBand.jsx`, `WarCausalBrief.jsx`, pulseKernel.js:564-591, settlementRumors.js:111-132 | BUILT — **BeliefDivergenceBand v1 ships WITHOUT its truth join** (documented follow-up in-file): it shows belief, not wrongness |
-| The reputation race: deterministic person-vs-story race over the lived network, RACE_OUTCOMES {person, story, together, neither}, pinned | `routeNetworkConsumersRace.js:322`, tests/domain/routeNetworkConsumersRace.test.js | BUILT, **ZERO consumers in src/** (executed grep) — "the thing the machinery is for" narrates nothing |
+| The reputation race: deterministic person-vs-story race over the lived network, RACE_OUTCOMES {person, story, together, neither}, pinned | `routeNetworkConsumersRace.js:322`, tests/domain/routeNetworkConsumersRace.test.js | BUILT, **ZERO consumers in src/** (executed grep) — "the thing the machinery is for" narrates nothing [CORRECTED 2026-10-16 (coherence fold) — first consumer `reputationRaceConsumer.js` (IN-4/2), mounted in the lifecycle host (settlementLifecycleKernel.js:591). Refugee columns are NOT raced (`RACE_ARRIVAL_KINDS = ['army','envoy','exile']`, reputationRaceConsumer.js:103; the column is deleted at release): a declared gap, not the degraded arm §3 names. The race kinds route 'events' (heraldRouting.js:338).] |
 | Knowledge-lane certification honesty: exactly ONE dispositive literal (belief_misjudgment); 15 impactKinds + 7 kind-only producers reach the family only through the bare `news` id token; per-year beliefDivergence envelope (relationship+faith axes only — **the strength axis the LIE manipulates is a declared gap**); the lit/dark differential instrument is asked for and absent | `knowledgeLaneEvidence.js` (:12-29, :101-147, :159), behavioral-observation.mjs:630-717, subsystemRowsRegen.js:59,79 | BUILT (the honesty), ABSENT (the instrument) |
-| Herald presence: 4 knowledge-native beats / 269 routed tokens (~1.5%); no knowledge section; beats scatter war/war/trade/faith; belief_misjudgment filed under the FAITH desk (word-association misfile, walker-pinned); all four late-lane only; ceiling 'notable' | `heraldRouting.js:110,118,140`, heraldFeed.js:163-178 | BUILT, THIN — war carries 68 tokens and a section |
+| Herald presence: 4 knowledge-native beats / 269 routed tokens (~1.5%); no knowledge section; beats scatter war/war/trade/faith; belief_misjudgment filed under the FAITH desk (word-association misfile, walker-pinned); all four late-lane only; ceiling 'notable' | `heraldRouting.js:110,118,140`, heraldFeed.js:163-178 | BUILT, THIN — war carries 68 tokens and a section [CORRECTED 2026-10-16 (coherence fold) — see the bracket at IN-5(a): the seventh section `knowledge` landed at IN-5/1.] |
 | The chooser: pure information CONSUMER (belief-wrapped strength, belief-aware siege, misjudgment stamping on deploy) — enumerates NO information verb | `settlementStrategy.js:65-71,227-268,310,576-728,843` | The verbs live in parallel autonomous movers only |
-| Sight postures ledger | `spatialLedgers.sightPostures` | BUILT, **no UI consumer** — the DM cannot see standing espionage even as DM truth |
-| Covert patronage / live-plant projections | `brokeragePatronage.js:319-328`, `brokerageServicesPlant.js:369-373` | BUILT, **zero non-test consumers**; covert patronage has NO organic exposure producer — the 'exposed' list is a parameter nothing supplies |
-| Gate stack: seven dark virtual flags, none in DEFAULT_SIMULATION_RULES; NO completed soak case lights `informationBrokeragesEnabled`; the completed soak's "knowledge: 28" was measured contamination | `infoStatecraftEnabled`, `informationBrokeragesEnabled`, `distancePricedNewsEnabled`, `allyIntelSharingEnabled`, `intelTradeEnabled`, `beliefAxesEnabled`, `migrationRumorsEnabled`; subsystemRowsWaves.js:573-610 | The whole medium is soak-unobserved; knowledge-lane starvation is FIRST on the owner-held tuning agenda (DESIGN_REALM_DIRECTIVES.md:49) |
+| Sight postures ledger | `spatialLedgers.sightPostures` | BUILT, **no UI consumer** — the DM cannot see standing espionage even as DM truth [CORRECTED 2026-10-16 (coherence fold) — HISTORICAL: IN-3 mounted `WatchPanel.jsx` (5731d4052).] |
+| Covert patronage / live-plant projections | `brokeragePatronage.js:319-328`, `brokerageServicesPlant.js:369-373` | BUILT, **zero non-test consumers**; covert patronage has NO organic exposure producer — the 'exposed' list is a parameter nothing supplies [CORRECTED 2026-10-16 (coherence fold) — HISTORICAL: `HousesBlock.jsx:40` projects patron bindings and `projectPlants` (now brokerageServicesPlant.js:577) is mounted at briefs/composers.js:97, still fail-OPEN on its default (J-INF-17 stands).] |
+| Gate stack: seven dark virtual flags, none in DEFAULT_SIMULATION_RULES; NO completed soak case lights `informationBrokeragesEnabled`; the completed soak's "knowledge: 28" was measured contamination | `infoStatecraftEnabled`, `informationBrokeragesEnabled`, `distancePricedNewsEnabled`, `allyIntelSharingEnabled`, `intelTradeEnabled`, `beliefAxesEnabled`, `migrationRumorsEnabled`; subsystemRowsWaves.js:573-610 | The whole medium is soak-unobserved; knowledge-lane starvation is FIRST on the owner-held tuning agenda (DESIGN_REALM_DIRECTIVES.md:49) [CORRECTED 2026-10-16 (coherence fold) — the four IN flags and `espionageEnabled` are manifested (simulationRules.js:290-411) and `intelTradeEnabled` joined the manifest (IN-4/1 `9e916163b`); `distancePricedNewsEnabled` (:743) and `allyIntelSharingEnabled` (quiet_local :897, full_simulation :1082) are LIT in shipped presets; no IN wave flag and neither host flag is lit anywhere. See the Tier declaration at the head.] |
 
 **Verified ABSENT (the surveys' executed negatives — NEW WORK, each homed in a
 wave; never build on these as if they existed):** any second-order belief
 structure (the belief schema stores world-attributes only; every deception
-targets minds through engine omniscience) · any reputationRace consumer · the
+targets minds through engine omniscience) · any reputationRace consumer [CORRECTED 2026-10-16 (coherence fold) — see the bracket at §2's race row.] · the
 plant's fold into the disinfo lifecycle · a brokerage_intercept consumer (no
 metadata reader; narrative-only) · a house-side chooser (acts are fnv1a32
 rotation-picked; houses never decline on risk-calculus) · HIDE entered as a
 RESPONSE to detected espionage (entry pressure is generic paranoia+weakness) ·
-any informational casus belli (the 13 WAR_REASON_TYPES carry none; corruption_
+any informational casus belli (the 13 WAR_REASON_TYPES carry none [CORRECTED 2026-10-16 (coherence fold) — sixteen (warReasonTaxonomy.js:24-41); J-INF-9's substance holds.]; corruption_
 exposed is revelation-as-grievance) · an inaction receipt (the pulse narrates
 selections, never refusals-to-select) · any arc machinery (the spy is one tick,
 exposure-only) · a knowledge Herald desk · the strength-axis divergence measure ·
 the lit/dark differential harness · WR-7d's SEND-TWO / envoy-vetting reader
 (SPEC-ONLY in DESIGN_WAR_RULINGS_ARCHITECTURE.md — executed grep 2026-08-02:
-zero `envoyErrand|sendTwo|SEND_TWO` hits in src/) · any non-strength belief
+zero `envoyErrand|sendTwo|SEND_TWO` hits in src/) [CORRECTED 2026-10-16 (coherence fold) — DISCHARGED: WR-7d built first; `sendTwoDivergence.js` is the one home (DESIGN_FP_ARCH_IN.md §1b R2, J-INF-15 discharged) and IN-3 consumes it (counterIntelSweep.js:44). VET's vocabulary is built there too (VETTING_QUALITIES).] · any non-strength belief
 axis for lies (DisinfoRecord is strength-typed in its own fields,
 informationStatecraft.js:500-509; the exposure comparator reads
 `belief.strengthBand` exclusively, :626-628; `CHANNEL_BELIEF_AXES.trade` is
 frozen EMPTY — BELIEVED SCARCITY / CONDITIONS / DEVOTION are SP-2 work that
-does not exist yet). [CORRECTED 2026-08-02 (fp-audit)]
+does not exist yet). [CORRECTED 2026-08-02 (fp-audit)] [CORRECTED 2026-10-16 (coherence fold) — UNBLOCKED by SP-B (ARCH J-FP-5): `SCARCITY_BANDS` and `DEVOTION_BANDS` are live (beliefAxisSubjects.js:85, :115) and every family's lure axis is built (infoLure.js:157-199). What is missing is the commission's CONSUMER (U123), not the substrate. The DisinfoRecord comparator is axis-typed as built. `CHANNEL_BELIEF_AXES.trade` is STILL empty (brokerageServices.js:129), so brokerage houses vouch for no SP-B belief.]
 
 **Cross-volume bug notes (report, not build — spine: conflicts are bugs to
 report):** (1) `peaceTerms.js` avgTieStrength (:1231-1241, consumed :852-856)
@@ -253,7 +257,7 @@ but the compositions were undeclared — a defect, now ruled):*
 the mirror) — AND, for the WEALTH and DEVOTION baits only, SP-2's
 subject-family extension (`beliefAxesEnabled` + the BELIEVED
 SCARCITY/CONDITIONS/DEVOTION families landing) is a HARD precondition: those
-axes do not exist in the tree (§2's Verified-ABSENT) and the weakness bait is
+axes do not exist in the tree (§2's Verified-ABSENT) [CORRECTED 2026-10-16 (coherence fold) — unblocked by SP-B; see the bracket at §2's Verified-ABSENT list.] and the weakness bait is
 the only one buildable ahead of them (§5 IN-2, J-INF-14). The war-side
 `enforceLiveStrength` constraint (WR-1, Amendment B) is an INTERACTION the
 lure must survive in BOTH states — named in IN-2's counterforces and ruled in
@@ -263,11 +267,11 @@ degrades dark (named degraded read: suspicion scores from
 exposure/contradiction evidence only when the mirror is dark — silence
 elsewhere means preconditions are hard); IN-3's SEND-TWO verb additionally
 depends on the WR-7d divergence reader, which is SPEC-ONLY today — J-INF-15
-rules ownership if INFO lights first.
+rules ownership if INFO lights first. [CORRECTED 2026-10-16 (coherence fold) — DISCHARGED; see the bracket at §2's Verified-ABSENT list.]
 `reputationRaceEnabled` ⇒ `distancePricedNewsEnabled` (the story's leg of the
 race IS that machinery) + SP-1's flag for person legs (until SP-1 lights, the
 race runs only at arrivals the existing ledgers already stage: armies, exiles,
-refugee columns — a named degraded arm). Courier migration (IN-4) rides
+refugee columns — a named degraded arm). [CORRECTED 2026-10-16 (coherence fold) — refugee columns are NOT raced as built; see the bracket at §2's race row.] Courier migration (IN-4) rides
 `intelTradeEnabled` × SP-1's flag, both lit.
 IN-5's DESK CONFIG is dark-safe (routing config moves no bytes while
 producers are dark) — but the `belief_misjudgment` REFILE is NOT dark-safe:
@@ -282,7 +286,7 @@ ledger (§5 IN-5(a)). IN-6 has no flag.
 **SEAM CONTRACT ONE — THE FOLD (PLANT_WIRING, settled to land):** the bought lie
 enters the world through EXACTLY the existing lifecycle: `processLies` folds
 `commissionPlants()` into `nextDisinfo` — one lifecycle, one writer, one
-exposure law (2-band contradiction or shelf-life), one blowback triple. The fold
+exposure law (2-band contradiction or shelf-life), one blowback triple. [CORRECTED 2026-10-16 (coherence fold) — the contract HOLDS; its spelling moved: `processLies` takes `commissionedPlants` (AIN R1) and IN-0a carries the envelope through `brokeragePlantHandoff.js`. See the bracket at the thesis.] The fold
 is the ONLY entry for commissioned falsehoods; a parallel lure ledger or second
 disinfo writer is a design defect (J-INF-3). The plant's collateral stays as
 built: liarId = the market's host settlement — the seller wears the exposure.
@@ -300,7 +304,7 @@ flow, not a person; the spine's migration distinction applied to words).
 READ over the outbound record — what was shared (intelTransfers), fed
 (brokerage feeds), planted (disinfo ledger), shown (ally shares, treaty
 disclosures), and withheld (HIDE postures) toward that observer, all already
-ledgered and all already decaying on their own laws. No mirror state is ever
+ledgered and all already decaying on their own laws. [CORRECTED 2026-10-16 (coherence fold) — false for three of the seven families; see CR-IN1-7 and the bracket at IN-1's Model.] No mirror state is ever
 persisted; no read ever touches the observer's actual belief map (K3-grade
 structural enforcement, §1b). Derivation is bounded because every input ledger
 prunes (J-INF-1).
@@ -335,11 +339,13 @@ worldState.spatialLedgers.disinfo[]         — EXISTING ledger, EXISTING writer
   // never a strength sentence on a scarcity plant); devotion targets a
   // categorical label (faithLabel), so its contradiction test is
   // label-inequality, not band distance — stated, not discovered. Each
+  // [CORRECTED 2026-10-16 (coherence fold) — TWO axes: faithLabel (which god; label-inequality) and SP-B's devotionBand (how devout; rung distance on DEVOTION_BANDS). The spine's "planted devotion feeding sacred tension" is the RUNG; both are lure axes in code (infoLure.js:176-180). §5 register: "devotion" names the belief axis, "piety" the substrate scalar.]
   // piece carries its own pin, incl. "a non-strength plant exposes by
   // CONTRADICTION on a real fixture, not only by age." STILL ONE writer,
   // ONE lifecycle, ONE exposure LAW (J-INF-3) — the law is now axis-typed;
   // there is still no parallel ledger. The wealth/devotion baits are HARD
   // BLOCKED on SP-2's families landing (§3 LIT-PRECONDITIONS).
+  // [CORRECTED 2026-10-16 (coherence fold) — UNBLOCKED by SP-B; the SP-B axes exist and the comparator is axis-typed as built. See the bracket at §2's Verified-ABSENT list.]
   // intent: 'inflate' | 'deflate' stands as built.
 
 worldState.spatialLedgers.sightPostures     — EXISTING; IN-3 adds NO fields.
@@ -374,16 +380,19 @@ surface; the binary idiom is proven; revisit only on owner ask) · no arc state
 
 ### IN-0 — THE PRICES BECOME LAW (four seam closures; rides existing flags;
 ### four slices, each its own commit)
+[ADDED 2026-10-16 (coherence fold, req 16/17) — FIRST-VISIBLE: per slice below · TIER: belief infoMode (spatial canon ∧ infoMode ≠ omniscient), plus each slice's host flags (§3) · DEGRADED ARM: per slice]
 The survey found four cost laws narrated but unenforced. A narrated price is a
 ratchet wearing a costume — the force exists, the counterforce is prose. This
 wave lands them. Historical archetype, one clause each below.
 
+[ADDED 2026-10-16 (coherence fold, req 16/17) — FIRST-VISIBLE: the lie's take inside its 8-week shelf (`EXPOSE_MAX_AGE_TICKS: 8`, disinformationPlant.js:93) — the DM-truth `plant_took` line and the town page's "Stories standing against this town" within a month of a commission landing; the credibility verdict is yearly (52-tick half-life) · TIER: belief infoMode (spatial canon ∧ infoMode ≠ omniscient) · host flags: `informationBrokeragesEnabled` × `infoStatecraftEnabled` · DEGRADED ARM: dark (byte-identical)]
 **IN-0a — THE FOLD (PLANT_WIRING).** The one-call fold per SEAM CONTRACT ONE.
 - **Model:** `processLies` gains the `commissionPlants()` fold into
   `nextDisinfo`; `brokerageServicesPlant.js` stays the commission writer;
   the disinfo ledger stays the lifecycle owner. VERIFY-AT-BUILD: the exact
   fold-point signature against live `processLies` — the survey confirms it
   takes no commissionedPlants param today.
+  [CORRECTED 2026-10-16 (coherence fold) — SUPERSEDED: the fold was already built when DESIGN_FP_ARCH_IN.md was compiled (AIN §1b R1); IN-0a re-scoped to THE HANDOFF and landed it (`brokeragePlantHandoff.js`). Read AIN §4 IN-0a for the landed shape.]
 - **Law / force / counterforce:** the force is the bought story entering a real
   court's belief; the NAMED counterforce off the same evidence is the exposure
   machinery it inherits — the same 2-band contradiction test, the same 8-tick
@@ -420,7 +429,7 @@ wave lands them. Historical archetype, one clause each below.
   comparator's NEXT pass, ONE TICK AFTER the fold (reconcile's contradiction
   arm wins — the lure is resistible by good sourcing) (amended 2026-08-09
   F-S1; previously overstated as dying at the fold itself); THE SPENT
-  MARKET [CORRECTED 2026-08-02 (fp-audit)]: the same plant from a
+  MARKET [CORRECTED 2026-08-02 (fp-audit)] [RULED 2026-10-16 (coherence fold §5) — `spent` is also a landed `MIRROR_BANDS` rung (secondOrderBelief.js:64); prose says "spent credibility" here and "a spent mirror" for the rung, never bare.]: the same plant from a
   spent-credibility market moves the mark's belief STRICTLY LESS than from an
   unmarked one, by a banded margin the fixture asserts (§7 names the expected
   band) — NOT "by ~nothing": WEIGHT_FLOOR 0.35 is a discount, not silence
@@ -458,6 +467,7 @@ wave lands them. Historical archetype, one clause each below.
 - Archetype: the Fugger newsletters' paid falsehoods — the market that sold
   word and wore the shame when word broke.
 
+[ADDED 2026-10-16 (coherence fold, req 16/17) — FIRST-VISIBLE: the bought claim on the patron's intelligence surface the tick the act resolves; the act lane runs at INTEL_TRADE cadence (26-week pair cooldown, 12/tick cap), so a month shows at most a first claim. Built endings are `read`/`refused` (`INTERCEPT_ENDINGS`, brokerageServices.js:588); `caught` stays UNMOUNTED with IN-3's sweep · TIER: belief infoMode (spatial canon ∧ infoMode ≠ omniscient) · host flag: `informationBrokeragesEnabled` · DEGRADED ARM: dark]
 **IN-0b — THE INTERCEPT CONSUMER.** brokerage_intercept stops being
 narrative-only.
 [The whole slice rewritten to instantiated fields — it discharged seven of the
@@ -523,6 +533,7 @@ mechanism. CORRECTED 2026-08-02 (fp-audit).]
 - **Bands:** intercept vagueness band, reach radius (rides the existing market
   reach read), the act cooldown/cap — all in §7.
 
+[ADDED 2026-10-16 (coherence fold, req 16/17) — FIRST-VISIBLE: `treaty_disclosure_opened` one tick after signing (the credit at T+1, peaceTermsDisclosure.js:10-14; routed 'trade', voiced by GRAMMAR); the term's verdict runs on 52-week treaty years. LANDED — see the bracket at §2's disclosure row · TIER: host flags: peaceCausalActive (`warLayerEnabled` ∧ `peaceEngineEnabled`) × `allyIntelSharingEnabled` (lit in quiet_local and full_simulation) for the feed, × `infoStatecraftEnabled` for the credit; the feed is a belief write (belief infoMode) · DEGRADED ARM: the term mints, strains and expires with no feed (named, pinned)]
 **IN-0c — THE DISCLOSURE EXECUTOR (compelled intel).** The 'disclosure' peace
 term executes. Archetype: the opened arsenals of a dictated peace — inspection
 as a treaty article.
@@ -588,6 +599,7 @@ as a treaty article.
   the mark and the fallback.]
 - **Bands:** disclosure fidelity band, strain→fidelity map.
 
+[ADDED 2026-10-16 (coherence fold, req 16/17) — FIRST-VISIBLE: none — the read has zero consumers (secrecyTradeFactor.js:17-23); once EC-6 consumes it (§3.1.4), the toll's band word at the counting-house the week the gates shut · TIER: host flag `infoStatecraftEnabled` (+ EC-6 lit for any effect) · DEGRADED ARM: the 1.0 identity (dark-identical)]
 **IN-0d — HIDE'S TRADE TAX.** The narrated toll becomes an enforced read.
 Archetype: sakoku — seclusion priced in trade.
 - **Model:** a pure read exported from the statecraft layer:
@@ -595,6 +607,7 @@ Archetype: sakoku — seclusion priced in trade.
   (the consuming join is TRADE's; the read and its receipt are OURS; the
   coupling row in DESIGN_FP_COUPLINGS.md names both sides — built here,
   consumed there, the WR-6/WR-8 pointer discipline).
+  [RULED 2026-10-16 (coherence fold §3.1.4) — "the consuming join is TRADE's" is SUPERSEDED: no TRADE or EC volume names the join and COUPLINGS CPL-9 said the opposite, so the toll was homeless. The read is EC-6's STANCE INPUT: a HIDE posture is a `restricted` STANCE on every pair into the hiding court; the stance derivation reads `secrecyTradeFactorOf` as one input, and the factor's bands {unhindered, curtailed, throttled, choked} map onto {open, taxed, restricted, closed}. One read, no new join; a lit-world shift only when EC-6 lights (dark-identical). The fold's §6 keeps it CUT-TO-SENTENCE: the law "sealed gates cost trade" and the band word.]
 - **Force / counterforce:** HIDE's force is fog (−0.7 rivals' reads); its
   counterforce is now REAL off the same posture record: the sealed gate pays at
   the counting-house, and the self-blinding arm (−0.5 own reads) stands as
@@ -633,6 +646,7 @@ never given. CORRECTED 2026-08-02 (fp-audit).]
   sentence). [R9]
 
 ### IN-1 — THE MIRROR (second-order belief; flag `secondOrderBeliefEnabled`)
+[ADDED 2026-10-16 (coherence fold, req 16/17) — FIRST-VISIBLE: the DM standing line under "WHAT THE NEIGHBOURS HAVE BEEN SHOWN" (display/neighbourMirror.js:202), moving the tick we show something — strength only; `mirror_shift` has no producer; staleness runs seasonal to generational (HALF_LIFE_BANDS) · TIER: belief infoMode (spatial canon ∧ infoMode ≠ omniscient) · host flags: `secondOrderBeliefEnabled` + `infoStatecraftEnabled` · DEGRADED ARM: dark (no line)]
 SP-2's settled ruling elaborated: a banded "what they likely believe of us"
 read DERIVED from the outbound record, never a nested map. Archetype: the
 Bureau of Barbarians — the empire's standing file of what each foreign court
@@ -646,6 +660,7 @@ had been shown.
   OUR record of what we did), ally shares along their edges, disclosure terms,
   and our own HIDE spans (a sealed season lowers confidence — they've seen
   nothing new). Each input already ledgered, already decaying.
+  [CORRECTED 2026-10-16 (coherence fold) — CR-IN1-7 below is the reading. What it leaves unsaid: the mirror cannot yet degrade on our exposure receipts (that counterforce is IN-1c-b's), so until then it is a read without its counterforce; `wealthShown`/`devotionShown` have no producer and always read 'unknown' (secondOrderBelief.js:292, :297); and no engine consumer exists — GRAMMAR's negotiation posture, IN-2's aim and IN-3's mirror gap are injected readers nobody injects (infoLure.js:418-437, suspicion.js:152).]
   - ⛔ **[CORRECTED 2026-08-12 (CR-IN1-3, at the IN-1a promotion)] THE EXPORT
     IS `secondOrderMirrorOf`, NOT `mirrorOf`.** The name is already taken:
     `npcLadderState.js` exports a `mirrorOf` that `npcLadderKernel.js`
@@ -714,6 +729,7 @@ had been shown.
   "in [Y]'s eyes" wording asserted the observer's perception, exactly the
   claim Law One forbids; the record voice is the fixed acceptance string,
   §8 matches verbatim.]
+  [CORRECTED 2026-10-16 (coherence fold) — unproduced; see the bracket at §8's mirror sentence.]
 - **Clock:** staleness bands denominate in weekly ticks against each input
   ledger's own half-life; the fast layer is the outbound act (the mirror moves
   the tick we show something); the slow verdict is staleness — an unshown year
@@ -775,6 +791,7 @@ had been shown.
   degradation step per inconsistent-act evidence, confidence caps.
 
 ### IN-2 — THE LURE (flag `infoLureEnabled`; the program's signature)
+[ADDED 2026-10-16 (coherence fold, req 16/17) — FIRST-VISIBLE: `lure_sprung` a tick after the planted story lands, inside the 8-week shelf — the fastest felt beat in the family, and UNREACHABLE today: `lureCommission` has no production caller (infoLure.js:45-48), so the axis-typed lie can never be minted; only the built strength bluffs and brokerage plants can spring · TIER: belief infoMode (spatial canon ∧ infoMode ≠ omniscient) · host flags: `infoLureEnabled` + `informationBrokeragesEnabled` + `infoStatecraftEnabled` + `secondOrderBeliefEnabled` + the U123 direction transport · DEGRADED ARM: dark; with the war restraint (`warLayerEnabled` ∧ `warTerminationEnabled`) lit, the degree-and-timing channel only]
 Settled: lies that BAIT, not only deter. Three baits, one tragedy. Archetypes,
 one clause each: planted weakness — the feigned rout at Hastings that emptied
 the shield-wall; planted wealth — the Seven Cities of Gold that marched
@@ -791,7 +808,7 @@ pattern, two courts marching on each other's theatre.
   (c) DEVOTION — a devotion plant writing SP-2's BELIEVED DEVOTION (sacred
   tension's food). Baits (b) and (c) are HARD BLOCKED on SP-2's
   subject-family extension landing (§3 LIT-PRECONDITIONS; §2
-  Verified-ABSENT: those axes do not exist) — a recorded deferral, not an
+  Verified-ABSENT: those axes do not exist) [CORRECTED 2026-10-16 (coherence fold) — UNBLOCKED by SP-B; see the bracket at §2's Verified-ABSENT list.] — a recorded deferral, not an
   omission; the endings and envelopes below cover all three so nothing
   re-opens when SP-2 lands. The audience pick runs through IN-1's mirror
   (what has the mark been shown — aim where the record says the ground is
@@ -799,7 +816,7 @@ pattern, two courts marching on each other's theatre.
   machinery — opportunism's foe-half already scores believed weakness
   (survey-verified: the casus reads belief). THE LANDED LAW, STATED
   HONESTLY (R8; the earlier "WR-1 dissolves it when belief corrects" was a
-  mischaracterization): WR-1's optional coherence restraint
+  mischaracterization): WR-1's optional coherence restraint [CORRECTED 2026-10-16 (coherence fold) — a derived conjunction; see the bracket at J-INF-14.]
   (`enforceLiveStrength`, Amendment B) suppresses the casus at SCORING TIME
   on a GROUND-TRUTH comparison — whenever the victim's LIVE strength is at
   least the aggressor's, immediately, regardless of belief
@@ -855,7 +872,7 @@ pattern, two courts marching on each other's theatre.
   state; the double-reader schism IS the casting.
 - **Receipts (house voice):** commission (exists, DM-gated); spring:
   `lure_sprung` (DM-truth beat joining the plant to the mark's act — "They
-  marched on a weakness that was bought for them"); public-side, the world
+  marched on a weakness that was bought for them") [CORRECTED 2026-10-16 (coherence fold) — see the bracket at §8: no commission path.]; public-side, the world
   sees only the march and the misjudgment beat (audience law — the irony is
   the DM's until exposure); exposure: the extended lie-exposed beat names
   bait, market, and — lineage permitting — buyer.
@@ -929,6 +946,7 @@ pattern, two courts marching on each other's theatre.
   posture.
 
 ### IN-3 — THE COUNTER-GAME (flag `counterIntelEnabled`; joined to SP-4)
+[ADDED 2026-10-16 (coherence fold, req 16/17) — FIRST-VISIBLE: the DM Watch panel and Houses block (WatchPanel.jsx, HousesBlock.jsx) at any advance; the sweep's catch beat would be the fast sign, but every verb is UNMOUNTED pending U123 (`resolveSweep` has no production caller); the sweep cooldown (~26 weeks) and the witch-hunt's remembered grievance are seasonal-to-yearly, and the spy exposure the counter-game prices against runs at `EXPOSE_BASE 0.01`/tick (informationStatecraft.js:822, FP-43) ≈ a two-year spy life — a clock shift this volume never recorded · TIER: belief infoMode (spatial canon ∧ infoMode ≠ omniscient) · host flags: `counterIntelEnabled` + `infoStatecraftEnabled` (+ U123 for the verbs) · DEGRADED ARM: mirror-gap arm dark ⇒ suspicion from exposure/contradiction evidence only]
 Settled: counter-intelligence as DELIBERATE agency. Today the counter-game is
 emergent only (HIDE burns spies by arithmetic, never by decision —
 survey-verified). Archetype: Walsingham — the vetted channel, the doubled
@@ -942,7 +960,7 @@ courier, the swept court that hanged a plot by reading it first.
   (anti-hum law: trigger-only, cooldown, cap): (1) SWEEP — a paid hunt over
   the town's OWN sightPostures-directed-at-us and covert patron bindings; on
   catch: the existing exposure path fires (the built beat + blowback); on
-  MISS: the sweep still costs, and above a zeal band mints the witch-hunt
+  MISS: the sweep still costs, and above a zeal band [RULED 2026-10-16 (coherence fold §5) — the built zeal ladder is `ZEAL_POSTURES = measured · paranoid · trusting` (suspicion.js:86); `measured` is also a `HABIT_HOLD_BANDS` rung and the estate's evidence word, so prose says "a measured zeal", never "measured" bare.] mints the witch-hunt
   (below); (2) VET — a source-vetting read composing I2 credibility ×
   loyalty/facets/associations — the WR-7d vetting SHAPE, which is
   SPECIFIED in DESIGN_WAR_RULINGS_ARCHITECTURE.md §WR-7d and UNBUILT as of
@@ -950,7 +968,7 @@ courier, the swept court that hanged a plot by reading it first.
   for any info source: courier, factor, house, informant [CORRECTED
   2026-08-02 (fp-audit) — the earlier "generalized from envoys" read as
   built-there]; (3) SEND-TWO — two carriers for one cargo, divergent
-  accounts caught by the corroboration ladder. SPEC-ONLY UPSTREAM
+  accounts caught by the corroboration ladder. SPEC-ONLY UPSTREAM [CORRECTED 2026-10-16 (coherence fold) — DISCHARGED; see the bracket at §2's Verified-ABSENT list.]
   [CORRECTED 2026-08-02 (fp-audit) — the earlier "built THERE for envoys"
   was a substrate error]: no envoyErrand/send-two code exists in src
   (executed grep 2026-08-02), so there is no existing read to extend —
@@ -962,6 +980,7 @@ courier, the swept court that hanged a plot by reading it first.
   generic paranoia+weakness pressure stands; this adds the deliberate arm),
   entered through SP-4 (a paranoid posture crosses earlier; a trusting one
   needs harder evidence).
+  [CORRECTED 2026-10-16 (coherence fold) — AS BUILT (IN-3, 582527f13/5731d4052): `suspicionOf` (suspicion.js) and the DM panels are built; all four verbs are UNMOUNTED pending U123's direction transport (`resolveSweep` has no production caller; the sweep endings are UNMOUNTED, infoConvergenceContract.js:135-137). VET and SEND-TWO consume the built one-home readers (counterIntelSweep.js:44).] [RULED 2026-10-16 (coherence fold §3.1.12) — ONE suspicion derivation for the family: IN-3's `suspicionOf`; ES's `wariness01Core` and HB's awareness become its consumers.]
 - **Law / force / counterforce:** the force is the court that defends its own
   mind. The NAMED counterforce off the same evidence is THE WITCH-HUNT: a
   sweep that finds nothing above the zeal band accuses SOMEONE — an existing
@@ -969,7 +988,7 @@ courier, the swept court that hanged a plot by reading it first.
   and the accusation is a REPUTATION event (no-fates law: shamed, never
   removed) minting a people-held grievance against the seat, a legitimacy
   charge, and a false_accusation receipt. Paranoia is priced by the same
-  machinery that makes vigilance work; HIDE-as-answer pays IN-0d's trade tax.
+  machinery that makes vigilance work; HIDE-as-answer pays IN-0d's trade tax. [RULED 2026-10-16 (coherence fold §3.1.4) — through EC-6's stance; see the bracket at IN-0d.]
   The counter-game must be winnable AND losable or it is decoration.
 - **Belief posture:** suspicion is a read over evidence, never over truth — a
   court can be rightly suspicious with no spy present (the evidence was a
@@ -1000,7 +1019,7 @@ courier, the swept court that hanged a plot by reading it first.
   counter. THE REFUSAL LANDS IN `PLANT_REFUSALS` [CORRECTED 2026-08-02
   (fp-audit) — two frozen refusal vocabularies exist and the earlier text
   conflated them]: the COMMISSION-side frozen five
-  (brokerageServicesPlant.js:98-101) grows by ONE to `too_hot`;
+  (brokerageServicesPlant.js:98-101) grows by ONE to `too_hot`; [CORRECTED 2026-10-16 (coherence fold) — SEVEN at 00b648c9d, `too_hot` included (brokerageServicesPlant.js:98-100); the base was six, not five (AIN R5).]
   QUERY_REFUSALS (brokerageServices.js:320-322) is UNTOUCHED; the
   closed-vocabulary pin update lands in this wave's pin list; (c) BOTH-SIDES
   SERVICE is legal and receipted — a house feeding two rivals is neutrality
@@ -1015,10 +1034,10 @@ courier, the swept court that hanged a plot by reading it first.
   out-of-posture sweeps (a trusting town suddenly hunting) are priced
   receipted news.
 - **Endings entries:** engagement (watcher-side, closing IN-5's arc):
-  {burned, withdrawn, gone_quiet}; sweep: {catch, clean_miss, witch_hunt};
+  {burned, withdrawn, gone_quiet}; sweep: {catch, clean_miss, witch_hunt}; [CORRECTED 2026-10-16 (coherence fold) — the built sweep tokens are `caught · clean_miss · false_accusation` (`SWEEP_OUTCOMES`, counterIntelSweep.js:65); the long forms are prose, as J-INF-16's discipline requires. The house endings `weathered`/`ruined_name` have no producer.]
   house: {unmasked, weathered, ruined_name}.
 - **Couplings:** INFO×INTERIOR (the witch-hunt feeds the commons-voice
-  grievance ladder — DESIGN_FP_COUPLINGS.md), INFO×GRAMMAR (vet/send-two
+  grievance ladder — DESIGN_FP_COUPLINGS.md) [RULED 2026-10-16 (coherence fold §3.1.3) — the witch-hunt LANDS A ROW in POP's `GRIEVANCE_INPUTS` registry (kind · owning program · weight · cap, in `commonsVoiceKernel.js`), never "adds a term" to `commonsGrievance01`; the composite's clamp and POP-2's pins re-run on that row. Lighting `commonsVoiceEnabled` is RULED BY DELEGATION 2026-10-16, OD-FC-3.], INFO×GRAMMAR (vet/send-two
   shared with the envoy program — the cross-reference discipline).
 - **Pins (negative hardest):** THE CLEAN MISS — a sweep against a town with
   NO live posture finds nothing, costs its price, and mints NO spy (the
@@ -1059,6 +1078,7 @@ courier, the swept court that hanged a plot by reading it first.
   `too_hot` appetite threshold.
 
 ### IN-4 — THE ROAD (couriers, double agents, and the race; flags per §3)
+[ADDED 2026-10-16 (coherence fold, req 16/17) — FIRST-VISIBLE: the race at the gate — instantaneous at an army, envoy or exile arrival (`race_person`/`race_story`/`race_together`/`word_came_too_late`, routed 'events'), the fastest MOUNTED beat in the family; courier legs would be weekly (law M) but couriers are not built · TIER: belief infoMode (spatial canon ∧ infoMode ≠ omniscient) · host flags: `reputationRaceEnabled` + `distancePricedNewsEnabled` (lit in the ONE_REGEN spread); couriers additionally `intelTradeEnabled` × `errandSpineEnabled` (both dark) · DEGRADED ARM: the race only at arrivals the ledgers already stage (army, envoy, exile — refugee columns NOT raced)]
 Settled: the reputation race GAINS CONSUMERS; the errand spine carries the
 medium's people. Archetypes: the Thurn-und-Taxis post rider — and Rothschild's
 pigeon, the legend of who-knew-first at Waterloo.
@@ -1075,9 +1095,10 @@ pigeon, the legend of who-knew-first at Waterloo.
   ticks), then delivers a mutated telling onward — caught, if caught, by
   SEND-TWO or the stamp ladder's divergence; the WR-7d compromised-envoy
   discipline cross-referenced, never duplicated.
+  [RULED BY DELEGATION 2026-10-16 (OD-FC-9 — 2026-10-16 (coherence fold §3.2.7) — TWO DOUBLE AGENTS WITH OPPOSITE HONESTY LAWS: this courier delivers "a mutated telling onward"; ES's double agent is LEAK-ONLY (J-ES-11, inside CR-ES-2's amendment of the owner's 2026-07-19 ruling; DESIGN_FP_ARCH_ES.md §3.13). Widening or narrowing that amendment is the owner's. CHAIR RECOMMENDATION: ONE law, leak-only — a courier that falsifies its cargo is the plant road (J-INF-3) wearing a courier, so a mutated telling enters only through the commission fold. Until ruled, nothing builds [NOW RULED by delegation 2026-10-16 — the fold §7 is the ruling of record] this clause.]
 - **Model, race half:** at every arrival the existing ledgers stage — SP-1
   errand arrivals, army approaches, exile/wanderer arrivals, refugee
-  columns — run `reputationRace` (the built, pinned, zero-consumer read)
+  columns — run `reputationRace` (the built, pinned, zero-consumer read) [CORRECTED 2026-10-16 (coherence fold) — consumed since IN-4/2; refugee columns are not raced; see the bracket at §2's race row.]
   between the person and their story. Outcomes key REAL differences (the
   built RACE_OUTCOMES tokens [CORRECTED 2026-08-02 (fp-audit)]):
   `person` — the person first ⇒ the court hears it from the mouth
@@ -1151,6 +1172,7 @@ pigeon, the legend of who-knew-first at Waterloo.
 
 ### IN-5 — THE VOICE (narration to war-class; the spy's ARC; no new engine
 ### state — beats ride their producing flags, routing is dark-safe)
+[ADDED 2026-10-16 (coherence fold, req 16/17) — FIRST-VISIBLE: the seventh Herald section `knowledge` (heraldRouting.js:74) carrying `belief_misjudgment` and `plant_took` at the weekly clock; the arc spans years and is UNBUILT (IN-5/2 owed); `court_sat_still` has zero hits in src · TIER: belief infoMode (spatial canon ∧ infoMode ≠ omniscient) for the refile (beliefsActive); the desk config is dark-safe; each beat rides its producer's host flags · DEGRADED ARM: the desk present, its beats absent while producers are dark]
 Settled: 1.5% → war-class density, and the spy gains an arc, not a beat.
 War's density came from giving both its hums and its moments a vocabulary
 (the survey's diagnosis: every knowledge beat today is an EXPOSURE beat —
@@ -1160,12 +1182,12 @@ suspected, then caught, the plans long since sold — a story that is nothing
 BUT its quiet phases.
 - **Model:** (a) THE KNOWLEDGE DESK — a SEVENTH Herald section, priced as
   what it is [CORRECTED 2026-08-02 (fp-audit) — "routing only" understated
-  the surface]: `HERALD_SECTIONS` is a FROZEN closed vocabulary of six with
+  the surface]: `HERALD_SECTIONS` is a FROZEN closed vocabulary of six [CORRECTED 2026-10-16 (coherence fold) — seven since IN-5/1: 'knowledge' after 'trade' (heraldRouting.js:74).] with
   a walker-pinned KIND_SECTION_CORRESPONDENCE (heraldRouting.js:61-68,
   :40-43, :401) — the desk GROWS that vocabulary, which is finite-semantics
   work: the new section token, its correspondence row, the walker update,
   and every HERALD_SECTIONS consumer audited (J-INF-7). The kinds routed
-  there: every kind THIS program mints (each registered at its own mint per
+  there: every kind THIS program mints [CORRECTED 2026-10-16 (coherence fold) — at 00b648c9d the race kinds route 'events' (heraldRouting.js:338), `treaty_disclosure_opened` routes 'trade' (:270, GRAMMAR-minted) and `infowar_*` stay 'war' (:139); either refile them under J-INF-6's goldens-first discipline or record why they stay.] (each registered at its own mint per
   §1c), plus the `belief_misjudgment` REFILE from the faith desk (the
   survey's word-association misfile — a conscious, walker-pinned move under
   §3's goldens-first discipline, J-INF-6). `intel_transfer` STAYS UNDER
@@ -1202,7 +1224,7 @@ BUT its quiet phases.
   above a strength band) AND (no defensive/offensive selection this pulse)
   — all inputs exist (survey-verified: confidence01, staleness,
   allianceLabel, the strategy chooser's selections); minted sparingly
-  (significance-gated) as `court_sat_still`; (f) REGISTRATION DISCIPLINE
+  (significance-gated) as `court_sat_still`; [CORRECTED 2026-10-16 (coherence fold) — UNBUILT: zero hits for `court_sat_still` in src at 00b648c9d; the fold's felt-value read keeps it (cheap; every input exists).] (f) REGISTRATION DISCIPLINE
   RESTATED [CORRECTED 2026-08-02 (fp-audit) — this wave is NOT the
   registration home]: every wave registers its OWN kinds at mint (§1c's
   mint-time rule — WHAT_PHRASES + heraldRouting + the pacing governor +
@@ -1260,6 +1282,7 @@ BUT its quiet phases.
 ### IN-6 — THE MEASURE (observability + certification; no flag — the WR-9
 ### sibling; the program is DONE when these envelopes hold on the owner-signed
 ### lit soak, and not before)
+[ADDED 2026-10-16 (coherence fold, req 16/17) — FIRST-VISIBLE: none — instrumentation (`infoConvergenceContract.js`; IN-6 r2 landed 2026-10-02); the lit/dark differential's presence was not traced (PLAUSIBLE) · TIER: none of its own; it grades the lit soak · DEGRADED ARM: n/a]
 - **The decontamination ratchet:** knowledgeLaneEvidence's residual lists
   (15 impactKinds + 7 kind-only, survey-verified) become an only-shrinks
   baseline — every new kind this program mints classifies on its own
@@ -1299,7 +1322,7 @@ BUT its quiet phases.
   must carry real share); race outcome mix over the BUILT tokens {person,
   story, together, neither} (`person` rare-but-present;
   `story` dominant at distance — the physics say so); sweep outcome
-  mix {catch, clean_miss, witch_hunt} (witch_hunt share is the paranoia
+  mix {catch, clean_miss, witch_hunt} [CORRECTED 2026-10-16 (coherence fold) — the built tokens differ; see the bracket at IN-3's Endings.] (witch_hunt share is the paranoia
   health metric); the HOUSE outcome mix {unmasked, weathered, ruined_name}
   (IN-3's promise — the both-sides drama's health metric); the COURIER
   ERRAND mix {delivered, intercepted, lost, turned} (IN-4's promise); arc
@@ -1390,6 +1413,7 @@ BUT its quiet phases.
   live strength is at least the aggressor's (opportunism.js:174-186; the
   header law: fog may overstate the DEGREE of a real advantage, never
   reverse the live sign). The lure is NOT exempted, and the veto is NOT
+  [CORRECTED 2026-10-16 (coherence fold) — the lure reads the restraint as `warLayerEnabled ∧ warTerminationEnabled` (infoLure.js:383-399, held equal to warReasons' `predationCounterforcesLit` by a source pin), not as a free option; the ruling's substance stands.]
   relaxed to a belief comparison. The weakness bait re-scopes to the
   compliant channels ruled in IN-2's Model: degree-and-timing where the
   live sign already favors the aggressor, and the misjudgment-refusal
@@ -1403,7 +1427,7 @@ BUT its quiet phases.
 - **J-INF-15 (the send-two divergence reader's ownership) [CORRECTED
   2026-08-02 (fp-audit)]:** WR-7d's SEND-TWO and envoy vetting are
   SPEC-ONLY (executed grep 2026-08-02: no envoyErrand/sendTwo code in
-  src/). If INFO lights before the war program builds WR-7d, the
+  src/). [CORRECTED 2026-10-16 (coherence fold) — DISCHARGED: WR-7d built first (AIN R2); this block's own last arm applies — IN-3 consumes `sendTwoDivergence.js`.] If INFO lights before the war program builds WR-7d, the
   corroboration-divergence reader builds HERE, as a shared lazy leaf under
   `counterIntelEnabled`, and WR-7d later CONSUMES it (one reader, two
   programs — the cross-reference discipline; forking a second reader is
@@ -1462,12 +1486,14 @@ that tuning legible, and does not pre-empt it.
 - "A story is bought in the lower market. It is not true. Nobody there knows
   that yet." (built — IN-0 gives it consequence)
 - "They marched on a weakness that was bought for them." (IN-2)
+  [CORRECTED 2026-10-16 (coherence fold) — CANNOT FIRE at 00b648c9d: `lureCommission` has no production caller ("the commission's consumer lands when U123 composes the direction transport", infoLure.js:45-48), so the lie cannot be commissioned; `resisted`/`exposed_first`/`backfired` are OWED. The sentence belongs to chain 1, THE STATECRAFT BAND (coherence fold §6).]
 - "Two courts, two bluffs, one war neither wanted." (IN-2)
 - "The ledger of grievances opens with a forgery, and now it is named." (IN-2/IN-5)
 - "By its own ledger, [X] has shown [Y] less than it did a year ago — and
   shown it nothing since [season]." (IN-1) [CORRECTED 2026-08-02 (fp-audit)
   — the record voice, matching IN-1's receipt VERBATIM; the earlier "in
   [Y]'s eyes" asserted the observer's perception, which Law One forbids]
+  [CORRECTED 2026-10-16 (coherence fold) — UNSAYABLE at 00b648c9d: `mirror_shift` has no honest producer (informationNews.js:113-118). It stays the acceptance string; IN-1c-b owes the producer.]
 - "The gates grow teeth; every stranger is twice questioned." (IN-3)
 - "They found no spy, and named one anyway — the town remembers whose name
   it was." (IN-3) [CORRECTED 2026-08-02 (fp-audit) — no fate verb on a
@@ -1480,6 +1506,7 @@ that tuning legible, and does not pre-empt it.
 - "Word of the fall reached the market a day before the survivors did." (IN-4)
 - "The lie is old enough now that men who repeat it believe they saw it." (IN-5)
 - "The court knew, and sat still; the knowing is part of the account now." (IN-5)
+  [CORRECTED 2026-10-16 (coherence fold) — UNSAYABLE today; see the bracket at IN-5(e).]
 - "The court at [X] stands open to [Y]'s eyes, by the terms signed at [Z]." (IN-0c)
 
 ## §9 SEQUENCING + DISCIPLINE
@@ -1492,7 +1519,7 @@ that tuning legible, and does not pre-empt it.
    mirror aims it; the counter-game answers it). IN-4 after SP-1 lands
    (its degraded race arm may build alongside IN-3). IN-3's SEND-TWO verb
    is additionally sequenced on the WR-7d divergence reader, which is
-   SPEC-ONLY today — J-INF-15 rules its ownership if INFO lights first
+   SPEC-ONLY today — J-INF-15 rules its ownership if INFO lights first [CORRECTED 2026-10-16 (coherence fold) — DISCHARGED; see the bracket at J-INF-15.]
    [CORRECTED 2026-08-02 (fp-audit)]. IN-5 after every
    producer it narrates. IN-6 closes the program and is its acceptance
    harness.

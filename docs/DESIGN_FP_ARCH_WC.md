@@ -15,7 +15,7 @@ per this volume's own erratum idiom (see the `cbd348a5` re-measure warning
 below); re-derive the flag census at each wave's own base.
 
 ⚠⚠ **"LANDED" IN THE HEADER BELOW NAMES THE *DOCUMENT*, NOT THE CODE.** This
-volume is **ARCHITECTED, NOT BUILT**. MEASURED 2026-08-14 at `60083174` by lane
+volume is **ARCHITECTED, NOT BUILT**. [SUPERSEDED BY EVENT 2026-10-16 (coherence fold) — WC-0A..WC-0E landed 2026-08-15; the status of record is the bracket in the PROGRESS blockquote below, which points at docs/DESIGN_FP_COHERENCE_FOLD.md §2.] MEASURED 2026-08-14 at `60083174` by lane
 TE3, and stated as a measurement rather than an impression:
 **7 of the 9 `*Enabled` flags this volume names are unminted**, including its
 signature `warCirculationEnabled` — the live engine-gated flag manifest holds 16
@@ -59,6 +59,7 @@ a *different* confusion and does not cover this one.
 ## branch) and **all 17 waves are DISPATCHABLE**. CR-WC-21 was ruled Position B
 ## and **UNBLOCKS** WC-15. ONE escalation stands — CR-WC-9, the field batch,
 ## owner-gated on persisted shape — and it blocks WAVES, not the fold.
+## [RULED BY DELEGATION 2026-10-16 (OD-FC-20 — first ruled PARKED; RE-RULED after skeptic S4 B3: SIGNED by delegation under the 10-16 word, as the 09-23 word was read to sign HB Q1 (J-EM-15(2)); the gate binds at the FIRST WRITER, WC-1, so the four-ledger table is signed at chain C2's dispatch; WC-0E's two normalizers stand writer-less)] [CLARIFIED 2026-10-16 (coherence fold) — CR-WC-9's status was spelled five ways (SOL_QUEUE:3-7 superseded-by-the-grant; SOL_QUEUE:413-414 OWNER-GATED and LIVE; ODQ §73.4 owner-parked; fold J-EM-9 ARCH:3142 SIGNED against the same fold's ARCH:3229 gated; GENERALS:270 "signed with the batch"); no owner word specific to it exists and the 08-05 grant pre-dates the escalation; the fold routes it to OD-FC-20 (findings WC-1 §2, WC-2 C6).]
 ## ⚠⚠ **THE MEASUREMENT BASE IS `cbd348a5` AND IS MANY COMMITS STALE. RE-MEASURE
 ## AT BUILD; DO NOT INHERIT.** §8.4 records five premises worth re-checking and
 ## the ONE premise the fold REFUTES: §1.9.1's and WC-5's "`errandMint.js` is
@@ -91,7 +92,8 @@ war-auxiliary-contribution-directive.md, 331 lines, sections (a)-(p)
 plus chair refinements K1-K8 and the numbered refinements R1-R9) as ONE
 WAR/WY amendment volume, per the directive's own fold instruction.
 
-> **PROGRESS**: ARCHITECTED, NOT STARTED. No wave has landed. This
+> **PROGRESS**: ARCHITECTED, NOT STARTED. No wave has landed. [CORRECTED 2026-10-16 (coherence fold) — THE STATUS OF RECORD IS docs/DESIGN_FP_COHERENCE_FOLD.md §2; this header is history. In one line: LIT: none · BUILT DARK: WC-0A..WC-0E (warStance.js, peopleLedger.js, lawBandModulation.js shape-only, the column union + isMilitaryColumn + the widened release guard, the amnesty/jubilee catalog rows, both root flags, contributionLedger.js's record shape and the blocks[] normalizer; 511d2ceb7 · 4c87bae45 · cf7e64660 · e47d67631 · 9602952ba, landed 2026-08-15, no writer, no src importer) · UNBUILT: WC-1..WC-16 (no board row; FP-ORDER pair 5; the fold recommends chain 2 THE AUXILIARY = WC-1, WC-2, WC-4, WC-5 minus the reliability page and WC-14's homecoming sentence, Arcs B-D recorded with the slot "THE HOST", OD-FC-19). CR-WC-9: [RULED BY DELEGATION 2026-10-16 (OD-FC-20 — PARKED until chain 2 asks for a field; WC-0E's two normalizers stand writer-less]] This
+[ADDED 2026-10-16 (coherence fold §3.4, requirement 24 — the owner's HEARING WEEK) — ENGAGEMENT KINDS this program registers in the wave that builds each: `armies_meet` (Arc A, one of the four kinds SP-9 lights first), `call_in_answer` (WC-5), `contribution_dispatch` (WC-4), and the STANDING `occupation_contest` (R6). Once `hearingWeekEnabled` is lit no kind resolves in the tick it arrives at a one-week advance: it mints its pending verdict and the DM may leave it, tilt it or give a verdict (never a "decree" — the Decree Registry's word); month/season/year advances run the engine default; the hearing never parks the advance cursor (skeptic S5). Each kind's pending card is its FIRST-VISIBLE sign.]
 > volume was drafted against worktree
 > /Users/cstokes/Desktop/settlement-engine/.claude/worktrees/minifold,
 > branch claude/composite-r4, HEAD 3e2bd3092a7cc2d57e34b6f8ba0b7bc8d8b7196c
@@ -220,7 +222,7 @@ resolved here by fiat (CR-WC-2, CR-WC-3, CR-WC-4, CR-WC-5). A FIFTH
 collision sits INSIDE the directive itself -- mortality versus recency
 as the cohort decay law, where either repair edits an owner word --
 and it is parked the same way, at CR-WC-21, with both positions stated
-and neither taken. A SIXTH is a collision with the BUILT TREE rather
+and neither taken. [CORRECTED 2026-10-16 (coherence fold) — RULED 2026-08-06, Position B as ruled (calendar bands, a floored recency modulation, not a decay law); see 1.13.2's bracket.] A SIXTH is a collision with the BUILT TREE rather
 than with a law: two live gates on the receiver-side levy sweep forbid
 the directive's allied and self-deploying cases outright (1.1). This
 volume routes around them rather than editing a war-layer subsystem,
@@ -250,6 +252,7 @@ tick:
     census        settlement.population (the existing integer)
     block         an origin-tagged block inside a deployed army
                   (deployment.blocks[], extending leviedPopulationBySource)
+                  [CORRECTED 2026-10-16 (coherence fold) — shaped like, and reconciled DIRECTIONALLY against, the levy map; never written to it (0.3's one-mouth ruling, 1.4.1's pin). The same retired equality form survives at 4.4 and seam row 14 ("reconciles to it exactly") and in DESIGN_WAR_RULINGS_ARCHITECTURE.md §9 item 7 (WAR:1735-1737), which takes this bracket at its own fold (findings WC-1 C-11, X-22).]
     column        an in-transit column (the migration column ledger,
                   travelClass-discriminated; military and demographic
                   columns are ONE object class per directive (m))
@@ -264,6 +267,7 @@ labels over census, never an addition to it:
 
     cohort        an origin-tagged resident cohort at a host settlement
                   ('veteran' | 'settled'); the diaspora/veteran read.
+                  [RULED 2026-10-16 (coherence fold §5) — the cohort KIND 'settled' collides with COHORT_AGE_BANDS' 'settled' on the same row (findings WC-1 C-12); the unlanded kind is renamed **'civilian'** ('veteran' | 'civilian'). Every later 'settled' KIND in this volume reads 'civilian'; the age band keeps 'settled'.]
                   A PERSON CARRIES AT MOST ONE. Both origin and kind
                   are fixed at the crediting event and never re-keyed:
                   a person has exactly one origin, and `kind` records
@@ -513,6 +517,7 @@ TAG EVENTS (no counts move):
     demobilize    (none) -> free_lance_tag (a resident becomes hireable:
                                             the pulse of 1.12.5)
     brigand       free_unit state change   (counts unchanged)
+    [RULED 2026-10-16 (coherence fold §5) — `brigand` here is the LANDED TAG_EVENTS member (peopleLedger.js:98) and stands; the UNLANDED FREE_UNIT_STATES member of the same spelling (1.7.2, 7.A.6) is renamed **`raiding`**, so this event moves a free unit INTO state `raiding`.]
     reclass       column class change      (a LIVE column's travelClass
                                             moves within
                                             MILITARY_COLUMN_CLASSES:
@@ -694,7 +699,7 @@ is culture; the engine is never theological. COMPLIANCE: cultural
 blend and introduction attempts carry faiths as CULTURE through the
 existing traditions adoption machinery (src/domain/traditions/
 relations.js) and bounded religionState share nudges through the ONE
-existing writer (traditionsKernel's sanctioned nudge); adoption is a
+existing writer (traditionsKernel's sanctioned nudge); [RULED 2026-10-16 (coherence fold §3.1.6) — the nudge (traditionsKernel.applyFaithNudges) is routed THROUGH religionState's writer family as a declared ±1 share transition: one writer FAMILY per field family, two entry points; the code cure is slotted to the next faith unit.] adoption is a
 contest, most attempts fail; no outcome is ever attributed to divine
 action except by DM edit with attribution.
 
@@ -817,21 +822,21 @@ modules; section 3 cuts them into waves.
 ## 1.1 Contribution credit: the arrival ledger (R1)
 
 THE SENDER-ELECTED CONTRIBUTION IS A NEW ROAD, NOT A WIDENING OF THE
-LEVY SWEEP. This is the single most load-bearing correction in the
+LEVY SWEEP. [CLARIFIED 2026-10-16 (coherence fold §5 addendum) — new beside the levy sweep, but NOT the estate's first reinforcement road: reinforcement.js (the own-army flow), convergenceReactive.js's `reinforce` and the greyed realm verb `REINFORCE` already exist; WC-4 BINDS all three into one road (see WC-4's bracket; findings WC-1 X-26, WC-2 S2).] This is the single most load-bearing correction in the
 volume and it is stated first, because an earlier drafting built the
 whole ledger on `deployment.leviedPopulationBySource` as "the
 origin-tagged precursor that already exists" and thereby inherited a
 receiver-side sweep that cannot carry the owner's spine. MEASURED AT
 3e2bd309, four facts, each verified:
 
-1. THE DEPLOYER EXCLUSION. warHomeCosts.js:391 builds the exclude set
+1. THE DEPLOYER EXCLUSION. warHomeCosts.js:391 [CORRECTED 2026-10-16 (coherence fold) — now :393 at 00b648c9d (`excludeSet`); navigate by symbol.] builds the exclude set
    as `new Set([...targets, ...Object.keys(deployments).map(String),
    ...leviedThisTick])`. ANY settlement fielding its own army is
    excluded from levy. That makes this volume's own `belligerent` rung
    (1.2.2: minority share AND an army of its own) and the directive's
    core strategy tension ("own-troops-for-own-army vs supporting
    others") STRUCTURALLY UNREACHABLE through the levy surface.
-2. THE WR-6 PEER-LEVY REMOVAL. warHomeCosts.js:115-116 reads
+2. THE WR-6 PEER-LEVY REMOVAL. warHomeCosts.js:115-116 [CORRECTED 2026-10-16 (coherence fold) — the WR-6 comment and its skip now sit at :116-118; navigate by symbol.] reads
    `if (coalitionLit && relState.relationshipType !== 'vassal')
    continue;`, with the in-file comment "WR-6 removes free peer levies:
    a canonical ally either joins with its own army or refuses." With
@@ -841,7 +846,7 @@ receiver-side sweep that cannot carry the owner's spine. MEASURED AT
    serve under another party's banner") have NO live road at all
    through the sweep.
 3. NO OCCUPATION EDGE. LEVY_SUPPORT_TYPES (warHomeCosts.js:79) is
-   `new Set(['vassal', 'allied', 'ally', 'defensive_pact'])`. There is
+   `new Set(['vassal', 'allied', 'ally', 'defensive_pact'])`. [CORRECTED 2026-10-16 (coherence fold) — now `new Set(['vassal', 'allied', 'defensive_pact'])` at warHomeCosts.js:81 (`'ally'` removed); re-read CR-WC-13's dead-arm finding against it; navigate by symbol.] There is
    no occupation edge in it, so the occupied -> occupier arm has no
    road through the sweep either; coercive requisition reads the
    occupation ladder instead (1.17).
@@ -850,7 +855,7 @@ receiver-side sweep that cannot carry the owner's spine. MEASURED AT
    mechanism as DEAD: subsystemRowsWar.js:55 states that "war_levy
    fires ZERO times in every case while its siblings fire", and the row
    at :196/:202 is titled MEASURED SILENT -- LEVY_POP_RATE_PER_TICK
-   0.004 (:80) against LEVY_POP_FLOOR 300 (:81) means a source under
+   0.004 (:80) against LEVY_POP_FLOOR 300 (:81) [CORRECTED 2026-10-16 (coherence fold) — now :82 / :83 (values unchanged); navigate by symbol.] means a source under
    roughly 550 people levies nobody at all, and every one of the seven
    completed release cases reads war_levy exactly zero.
 
@@ -884,6 +889,7 @@ ladder, and deliberately NOT the levy sweep's:
     the occupier)                    ladder, never through a
                                      relationship edge: occupation.js's
                                      STATE_LADDER (:117,
+                                     [CORRECTED 2026-10-16 (coherence fold) — occupation.js STATE_LADDER is now :125 and NOT exported (HB-9 owes the export, R-14); navigate by symbol.]
                                      ['contested', 'unstable',
                                      'extractive', 'stabilized',
                                      'vassalized'] -- verified) is the
@@ -950,7 +956,7 @@ arithmetic needs of the writer: the PHYSICAL quantities are conserved
 by the systems that move them (people by the people ledger, grain by
 the treaty-transfer / commodityFlow stock seams), and the credit record
 is the banded MEMORY of those conserved transfers. Bands are authored
-in this volume's tuning table and owner-signed at soak.
+in this volume's tuning table and owner-signed at soak. [RULED 2026-10-16 (coherence fold §3.2.17) — WC-0E landed a DIFFERENT shape: flat {amount, kind, sinceTick, toPartyId} with a raw `amount` (contributionLedger.js:54-56, 9602952ba), not the nested pair>anchor banded record above. The CODE is the shape of record (writer-less, no byte persisted); WC-1 reconciles this section to it with each band DERIVED from `amount` at read (a read, not a second stored field). Inside OD-FC-20's batch.]
 
 ### 1.1.2 The arrival law, and what "arrival" is
 
@@ -960,7 +966,7 @@ Credit is written at the moment of EFFECT, never at pledge:
   column's arrivalTick fires and the headcount is banked into the
   receiving army's record; supplies-delivered credit is written when
   the shipment arrives at the army (WY F9 supplyCargo road when built;
-  the supplyShipments link arrival before then). The arrival edge is
+  the supplyShipments link arrival before then). [RULED 2026-10-16 (coherence fold §3.1.14) — no built road carries supplies to an army: food is NON_SHIPPED (supplyKernel.js:73) and supplyShipments records are quantity-free institution links that never route food (supplyShipments.js:17-21, :32-33). EC-4 PROCUREMENT is THE army-draw (own army); a contribution of supplies to an ALLY's army is a CONTRACTED caravan stream under EC-12/EC-18 whose ARRIVAL WC-1 credits, one physical arm credited once; arms/iron/leather only until EC-12's grain road. RULED BY DELEGATION 2026-10-16, OD-FC-35 (wait on EC, or WC builds its own goods road; recommendation: wait).] The arrival edge is
   detected by the kernel that steps the column (the
   releaseMigrationArrivals / hasArrived transition), the one existing
   first-arrival precedent being vassalizationOutcomes' arrivedThisTick
@@ -988,7 +994,7 @@ Credit is written at the moment of EFFECT, never at pledge:
   outflow, and the aspatial world's single `muster` debit is the
   degenerate case where the two events collapse into one tick. This is
   a lit-only behavior shift, declared in WC-6's alignment line, never
-  silent.
+  silent. [RULED 2026-10-16 (coherence fold §5) — this volume's "alignment line" is renamed **"the DOC ROW"**; it is not the spine's requirement-13 Alignment line (see the bracket at SECTION 3's EVERY WAVE CARRIES).]
 
 An interdicted or skimmed shipment that never arrives writes NO credit;
 it writes shortfallBand instead. The shortfall is itself a receipt (the
@@ -1015,7 +1021,7 @@ that war folds into TWO durable homes and then drops:
    RELATIONSHIP_ALLIANCE_CALL_CAP :141,
    RELATIONSHIP_COALITION_SETTLEMENT_CAP :145; all 24), and exact-once
    is carried by a SEPARATE recorded-action predicate,
-   coalitionSettlementActionWasRecorded(state, actionId) (:266), which
+   coalitionSettlementActionWasRecorded(state, actionId) (:266) [CORRECTED 2026-10-16 (coherence fold) — relationshipState.js is 540 lines at 00b648c9d; the appenders are now :251/:335/:356, the caps :198/:203/:207, the predicate :328; navigate by symbol.], which
    callers consult before applying a value-moving action -- it is not a
    property of an append helper. This volume follows that shape
    verbatim, minting three symbols where the estate has three:
@@ -1109,7 +1115,7 @@ way -- by naming one.
 Three-altitude read: GLANCE a credit chip on the relationship surface
 (banded, one word); SENTENCE "Emberford's grain fed Thornhold's siege
 lines through the winter; the debt stands"; TABLE the per-war rows from
-the edge archive.
+the edge archive. [CORRECTED 2026-10-16 (coherence fold §3.1.14) — undeliverable as written: no built road carries grain to an army (see 1.1.2's bracket). Until EC-12/EC-18 (OD-FC-35) the authored example is troops: "Emberford's levy held Thornhold's siege lines through the winter; the debt stands" (findings WC-1 S-1, refinement 4).]
 
 ### 1.1.5 The elected dispatch: the chooser, the executor, the reservation
 
@@ -1126,7 +1132,7 @@ ONLY writer that turns a chosen move into a named count event. It is a
 leaf re-exported through the warDeployment.js:158-162 block (the
 thin-head rule of 2.1), so warDeployment.js gains no logic.
 
-THE CALL SITE, NAMED. warDeployment.js:1263 calls applyHomeWarCosts
+THE CALL SITE, NAMED. warDeployment.js:1263 [CORRECTED 2026-10-16 (coherence fold) — the call is now warDeployment.js:1317 (the "Steps 5 + 5b" comment :1312); navigate by symbol.] calls applyHomeWarCosts
 under the in-file comment "Steps 5 + 5b -- WHAT THE WAR COSTS THE
 HOME" (verified at HEAD). The elected dispatch is STEP 5c: immediately
 AFTER applyHomeWarCosts returns and BEFORE the tick's return
@@ -1213,6 +1219,7 @@ conservation walker covers WC-4's events the day it lands without a
 migration -- and WC-6's walker landing is the first commit in which
 those events are PROVEN conserved, which WC-4's alignment line says in
 terms.
+[RULED 2026-10-16 (coherence fold §3.2.18, §6 chain 2) — the executor's ASPATIAL arm (the `muster` road with muster-time credit, and the reservation) lands WITH WC-1, not at WC-4: the levy sweep is measured silent, so without it WC-1..WC-3 credit nothing on any seeded world. WC-4 keeps the chooser and the coercion arms; the SPATIAL arm still follows at WC-6. The executor is BOUND to the three live reinforcement roads (see WC-4's bracket).]
 
 ## 1.2 The war-stance ladder, derived (R2 + f)
 
@@ -1220,6 +1227,7 @@ terms.
 
     WAR_STANCE_LADDER = ['neutral', 'materiel', 'auxiliary',
                          'belligerent', 'principal']
+                         [RULED 2026-10-16 (coherence fold §5) — `stance` names two ladders in the corpus, this WAR stance ladder and EC's TRADE stance {open, taxed, restricted, closed}: prose always says "war stance" / "trade stance". The rung `materiel` stands (it also names reinforcement.js's W_MATERIEL; WC-4 binds the reinforcement roads and mints no fourth name). `principal` collides with W-OPS's mission principal, which is unsanctioned (OD-FC-4).]
 
 Closed, codepoint-stable order is NOT the semantic order; the ladder is
 exported in semantic order with an accompanying rank map (the
@@ -1261,6 +1269,7 @@ whole purpose of directive (f). The rule is now stated once:
                       anchors, never stored.
 
     warStanceOf(worldState, partyId, warEpisodeKey)
+    [RULED 2026-10-16 (coherence fold §3.2.19) — `warStanceOf(rung)` is the LANDED accessor (warStance.js:116) and keeps that meaning; the derivation is spelled `derivedWarStanceOf(worldState, partyId, warEpisodeKey)`, carrying the episode key this section's law requires, and fold J-EM-6's `derivedWarStanceOf(deployments, credit)` is amended to carry it. Every later DERIVING `warStanceOf` in this volume reads `derivedWarStanceOf`.]
 
 REALIZED SHARE IS DEFINED OVER THE EPISODE'S SIDE, NOT OVER ONE
 ROSTER. For a party P in episode E, let S be the side P's people serve
@@ -1318,7 +1327,7 @@ then shielding it by contributing nothing. Directive (f) forbids
 exactly that ("never from a declared label"), and the declarer who has
 drifted below majority is not an exception to mission creep but its
 sharpest case: the war he started is now someone else's war, and the
-crossing beat says so on both sides of the ledger.
+crossing beat says so on both sides of the ledger. [RULED 2026-10-16 (coherence fold §3.1.18) — THE GENERALS FOLD (FPQ-77; docs/DESIGN_FP_GENERALS.md:270 on its branch): a named general's standing may scale the SIZE of what is sent (an input to the contributionMoves chooser) and NEVER the stance, which stays derived from what arrived under this law; GENERALS:270 is amended when that volume folds. A general colouring the stance word itself is RULED BY DELEGATION 2026-10-16, OD-FC-36 (a change to directive (f)'s reading; recommendation NO).]
 
 Realized share is TIME-INTEGRATED (directive (f)) and accumulated at
 TWO altitudes from ONE arithmetic: the per-roster integral above
@@ -1377,8 +1386,8 @@ crossing 0.50 against a DECLARER-OWNER, and it asserts that the two
 rungs EXCHANGE at the same read -- the reinforcer to principal, the
 declarer-owner to belligerent -- and that all four scalars (exhaustion,
 casus exposure, terms weight, spoils) re-derive from that one read for
-both parties. The crossing is edge-detected (previous band != current
-band) and emits the mission-creep beat, addressed.
+both parties. [CORRECTED 2026-10-16 (coherence fold) — three landed scalar axes, not four; see 1.2.4's opening bracket.] The crossing is edge-detected (previous band != current
+band) and emits the mission-creep beat, addressed. [RULED 2026-10-16 (coherence fold §5) — prose always qualifies "crossing": "stance crossing" (this beat) vs "entrepot crossing" (1.3.1's crossing accounting, WC-3).]
 
 The raw share is never surfaced; every consumer reads the band.
 
@@ -1392,7 +1401,7 @@ believed-record machinery, census D section D). The update moment --
 the enemy court learns who really fields the force -- is itself a
 beat. Army-composition intelligence is an ES tap PRODUCT (a new
 product, never a new tap level; TAP_LEVELS is closed at three, census
-D section G): spies count banners (section 4.3).
+D section G): spies count banners (section 4.3). [RULED 2026-10-16 (coherence fold §3.1.17) — NO ES product: ES products are CLOSED at three (`ENVOY_COVERT_PRODUCTS = ['acquire','confirm','refute']`, envoyErrandVocabulary.js:168) and the target read carries no strength band by design (espionageProducts.js:28-31). The enemy's believed share rides the ordinary rumor road only (L-WC-9 stands); composition intel is WC-7's own hop-worn composition news, not an ES row.]
 
 ### 1.2.4 What scales by rung
 
@@ -1401,10 +1410,10 @@ takes (partyId, warEpisodeKey) and gets back exactly one rung (1.2.2).
 Where a consumer holds only an anchor -- the credit fold, the terms
 read -- it resolves the anchor to its episode through the derived map
 before asking. A consumer that asks per anchor is a defect, and the
-WC-2 source scan says so.
+WC-2 source scan says so. [RULED 2026-10-16 (coherence fold §3.2.19) — the per-episode consumer reads `derivedWarStanceOf(worldState, partyId, warEpisodeKey)`; see 1.2.2's bracket.]
 
 All three quantities below, in both directions, each at its EXISTING
-write or read site, never a new writer:
+write or read site, never a new writer: [CORRECTED 2026-10-16 (coherence fold) — FOUR bullets follow; the landed STANCE_SCALAR_AXES is THREE (`['casus','exhaustion','terms']`, warStance.js:89) with spoils folded into terms, and WC-7's swap pin (1.2.2, WC-7 PINS) names the same three (findings WC-1 C-2).]
 
 - EXHAUSTION: warHomeCosts' accrual severity for the contributing home
   scales by its rung (materiel accrues a small fraction of a
@@ -1444,7 +1453,7 @@ document.
 ### 1.3.1 Composition, not invention
 
 The relay is a COMPOSITION of three existing substrates (census D
-section F), forking none of them:
+section F), forking none of them: [RULED 2026-10-16 (coherence fold §3.1.15, §6) — not a composition: supplyShipments records are quantity-free links, one per active institution link, food never routed (supplyShipments.js:17-21, :32-33), and an entrepot toll is a route COST that takes no goods (entrepots.js:13-16). The skim, the staging credit and the four-term stores identity (1.3.3) are NEW mechanism and NEW persisted shape (CR-WC-9's "shipment relay buckets", OD-FC-20). WC-3 is CUT-TO-SENTENCE: L10/L11 (people are not stores; shortfall immediate, attribution lagged) stand; the per-hop staging network is RECORDED with the slot "THE HOST" (chain 2's successor).] [WITHDRAWN 2026-10-16 after skeptic S4 B5 — no clause of this volume is cut: a cut narrows the owner's own words (the lawful-side support network; (h) COMRADES KNOW EACH OTHER; R6; K6 CORE, accepted in-chat 2026-08-06) against "build it all"; the wave is RECORDED WITH THE SLOT "THE HOST", charter kept whole.]
 
 1. ROUTING: candidateRoutes / shortestPath (distanceRead.js) pick the
    staging path -- deterministic Dijkstra, memoized, blocked-edge
@@ -1496,7 +1505,7 @@ and the three-word vocabulary is:
               as theft: the transfer is real and readable, census D
               question 6's "credit to the skimming settlement" arm,
               chosen deliberately) and booked as shortfallBand on the
-              contribution record (the grievance fact)
+              contribution record (the grievance fact) [CLARIFIED 2026-10-16 (coherence fold §3.1.15) — the staging-stores credit has no substrate; see 1.3.1's bracket.]
 
 THE SHORTFALL IS IMMEDIATE; THE THIEF'S NAME TRAVELS. These are TWO
 facts and an earlier drafting published them as one. `wc_relay_skim`
@@ -1566,7 +1575,7 @@ There is ONE law-band modulation table for the whole program family
 drift expression all read the same three-word vocabulary through one
 frozen table of curves) -- the C3 collision, resolved by contract in
 section 4.1: one dependency-free leaf, minted once, by whichever volume
-builds first.
+builds first. [RULED 2026-10-16 (coherence fold §3.1.13) — the single-table contract is UNMET in code: HB-0 landed its learning curves PRIVATELY a day before WC-0C (habitCurve.js:84 `LAW_WORD_VOLATILITY`, :101 `LEARN_RATES`), lawBandModulation.js has zero importers, and the WC-0C fence's pattern (tests/lint/lawBandTable.walker.test.js:8-11) cannot see habitCurve's names. RULED: ONE table; HB's `learning` row is REGISTERED in lawBandModulation.js (`registerLawBandCurve`) at the next HB unit and habitCurve.js reads it; the fence pattern widens to catch LEARN_RATES-shaped private tables. Dark-identical.]
 
 ### 1.3.3 The two relay conservation identities
 
@@ -1579,7 +1588,7 @@ STORES term. For every dispatched STORES consignment:
       = arrived(army credit) + consumed(carriage cost)
         + skimmed(staging settlement stores) + destroyed(interdiction)
 
-Every term is a named bucket on the shipment record (taught to the
+Every term is a named bucket on the shipment record [CORRECTED 2026-10-16 (coherence fold §3.1.15) — the shipment record carries no quantity to bucket (supplyShipments.js:17-21); see 1.3.1's bracket.] (taught to the
 arrive-loop rebuild IN THE SAME COMMIT as the stamp -- the
 commodityFlow.js:558 smuggle:true loss class, section 5.7), and the pin
 runs through at least one in-transit tick, never save/load only.
@@ -1629,7 +1638,7 @@ SHAPE follows the origin-tagged map that already exists
 verified). BORROWED FOR SHAPE AND RECONCILIATION, NOT FOR ROAD: per
 1.1's estate truth, the levy sweep that writes that map admits neither
 a self-deploying sender (the :391 exclusion), nor a lit-coalition peer
-(the :115-116 WR-6 clause), nor an occupation edge (:79), and is
+(the :115-116 WR-6 clause), nor an occupation edge (:79) [CORRECTED 2026-10-16 (coherence fold) — warHomeCosts.js addresses at 00b648c9d: :391 -> :393, :115-116 -> :116-118, :79 -> :81, :443-450 -> :445-452; navigate by symbol.], and is
 MEASURED SILENT on the completed release corpus. blocks[] therefore
 reconciles to the map wherever the map has rows, and is filled by THIS
 volume's own arrival road (1.1.5) wherever it does not:
@@ -1658,7 +1667,7 @@ deployedPopulation AND per-origin equals leviedPopulationBySource,
 every tick, every seeded war", and MEASURED AT HEAD it was unpassable
 against this volume's own design on BOTH clauses.
 
-1. THE DEPLOYER'S OWN CONSCRIPTS HAD NO BLOCK. deploymentReturn.js:273
+1. THE DEPLOYER'S OWN CONSCRIPTS HAD NO BLOCK. deploymentReturn.js:273 [CORRECTED 2026-10-16 (coherence fold) — now :367 (and :302 -> :396); navigate by symbol.]
    states that deployedPopulation is "the overlord's OWN conscripts
    PLUS every vassal's levied", and :302 computes
    `conscripted = Math.max(0, deployedPopulation - leviedTotal)`
@@ -1701,7 +1710,7 @@ the levy map never becomes a source of truth for the ELECTED one.
 normalizeDeployments gains a fail-closed blocks[] arm IN THE
 SAME COMMIT (census A hazard 3: an unvalidated persisted array is a
 save-file smuggling surface), and that arm covers drawnCohorts by the
-same fail-closed rule.
+same fail-closed rule. [RULED 2026-10-16 (coherence fold §3.2.17) — the landed WC-0E arm (worldState.js:163-174) KEEPS any row with a non-empty originId and an integer headcount and passes every other field through unexamined: `drawnCohorts`, `shareIntegral` and unknown keys are never checked. The CODE is the shape of record (writer-less, no byte persisted); WC-6 owes the FIELD-CLOSED row normalizer before any writer lands. Inside OD-FC-20's batch.]
 
 armyTransit projection: the transit record gains the same conditional
 blocks projection under the WY seam pattern (a new conditional field on
@@ -1733,7 +1742,7 @@ census rather than adding a fifth pool to it (section 0.2):
     free_lance   a counts field on the same tag ledger's settlement row
 
 The walker (section 0.2) is the enforcement, and the tag ledger's
-sum(tags) <= census law is its sibling. Answering census D question 4
+sum(tags) <= census law is its sibling. [CORRECTED 2026-10-16 (coherence fold) — superseded by 0.2's TWO totality laws (LAW 1 the cohort partition, LAW 2 the overlay bound, the named overlap); the single sum is retired (findings WC-1 C-1).] Answering census D question 4
 directly: the people ledger is the JOIN plus the walker, not a third
 structure.
 
@@ -1761,7 +1770,7 @@ before the news arrival record exists at the block's location is RED.
 - stay: keep fighting; the block still EARNS ITS HOME contribution
   credit toward the peace table (directive (c), verbatim intent) --
   occupied homes' blocks remain formally allied but WATCHED (an ES
-  taint read, section 4.3).
+  taint read, section 4.3). [RULED 2026-10-16 (coherence fold §5, §3.1.17) — renamed **"the watched block"** (ES's "taint" is §3.5's journey exposure, a different object); it is the block's army owner's read, not an ES product row.]
 - return: the block departs as a return column (a named people-ledger
   event).
 - defect: the block joins another army (conserved, block -> block';
@@ -1866,7 +1875,7 @@ three siblings:
     engagement closes only (K7's "event-driven updates +
     drop-when-neutral mandatory (never per-tick integrals)" -- this
     shape is what that cost clause prescribes, not an exception to it).
-    `bondOf` reads THIS ledger and nothing else.
+    `bondOf` reads THIS ledger and nothing else. [RULED 2026-10-16 (coherence fold §5) — prose never says bare "bond": "service bond" (this ledger), "diaspora bond" (1.13.3), "court bond" (the compiled fold's §13).]
     THE RELATIONSHIP WRITE IS UNCHANGED. applyRelationshipPatch stays
     the relationship plane's one mouth and still carries the warmth to
     the axes at the fold points, which is where directive (h)'s "written
@@ -1900,7 +1909,7 @@ owes:
    join appetite in readCoalitionJoinDecisions
    (warCoalitionDecision.js:59) is composed from
    clamp01(relation.pactStrength) * 0.5 + clamp01(relation.trust) * 0.3
-   (:108-109, verified), which are exactly the two axes the
+   (:108-109, verified) [CORRECTED 2026-10-16 (coherence fold) — now warCoalitionDecision.js:77 / :126-127 (weights 0.5 / 0.3 hold); navigate by symbol.], which are exactly the two axes the
    comradeship patch moves. No new term; a WC-9 pin asserts the
    movement rather than assuming it.
 3. CALL-IN ANSWER WEIGHTS -- explicit. The answer fork of section 1.9
@@ -2092,6 +2101,7 @@ FREE UNITS:
     }
 
     FREE_UNIT_STATES = ['operating', 'foraging', 'brigand', 'dissolving']
+    [RULED 2026-10-16 (coherence fold §5) — the unlanded member `brigand` is renamed **`raiding`** (`['operating', 'foraging', 'raiding', 'dissolving']`); the landed TAG_EVENTS member `brigand` (peopleLedger.js:98) is the event that moves a unit INTO `raiding`.]
 
 ### 1.7.3 The free unit's life and the three fates
 
@@ -2170,9 +2180,9 @@ WHAT THIS VOLUME OWES INSTEAD: a SECOND totality manifest, for
 COUNTS-MOVERS, with its own discovery signature (the counts-stepper
 and column-release tokens, not the named-person ones), registering the
 sites that exist today -- armyTransitKernel.js's stepArmyPosition calls
-(:467, :502, :698, :742, the symbol imported at :33),
+(:467, :502, :698, :742, the symbol imported at :33), [CORRECTED 2026-10-16 (coherence fold) — the live calls are armyTransitKernel.js:482/:517/:738/:789 at 00b648c9d, AND an OMITTED counts stepper navalKernel.js:302 (`stepArmyPosition(rec, nowTick)`) the manifest's discovery signature must find; FPQ-18 also routes four speed-floor pairs here; navigate by symbol.]
 migrationKernel.js's releaseMigrationArrivals (:336) over
-spatial/migration.js's releaseArrivals (:578) -- plus this volume's new
+spatial/migration.js's releaseArrivals (:578) [CORRECTED 2026-10-16 (coherence fold) — declared :616, its guard :641 (already widened by WC-0B); navigate by symbol.] -- plus this volume's new
 freeUnitKernel.js when it lands. Law M keeps its scope and its header;
 the counts plane gains the coverage it never had. The manifest lands
 in WC-11's opener, and CR-WC-10 asks the chair to approve a SECOND
@@ -2196,10 +2206,11 @@ the contest resolves:
   pestilenceKernel precedent verbatim: "we drive that stressor, never
   a parallel one." Effects: local trade interdicted, fear in the risk
   register, the brigand envelope refilling by theft -- the relay
-  network's dark mirror.
+  network's dark mirror. [RULED 2026-10-16 (coherence fold §3.1.16, §5) — a persisted `embattlement` region ledger already exists, phase `embattled`, ramping on occupation + siege + war exhaustion + high crime − security (spatial/embattlement.js:1-30; its row in spatialUsage.js). A brigand siege is ONE MORE RAMP TERM on embattlement.js, never a parallel stressor; "embattled" means that ledger's phase; CR-WC-11 is re-read against it at build.]
 
     EMBATTLED_RESOLUTIONS = ['suppression', 'attrition', 'absorption',
                              'buy_off']
+                             [RULED 2026-10-16 (coherence fold §5) — the unlanded rungs `attrition` / `absorption` collide with attrition.js / `accumulatedAttrition` and moverAbsorption; they are renamed **`worn_down`** / **`absorbed`** (`['suppression', 'worn_down', 'absorbed', 'buy_off']`).]
 
 Suppression is the mercenary market's demand side (1.12.5); attrition
 starves the unit (deaths through fell); absorption sheds it into the
@@ -2220,7 +2231,7 @@ needs a third event type (CR-WC-11 parks the fallback).
 Fear + disrupted trade breed opportunists: the embattled stressor
 joins the crime-pressure archetype set (a new member of the existing
 CRIME_ARCHETYPES read, pressureModel.js -- an extension of a frozen
-set, walked). SMUGGLING TO THE BESIEGERS: crime feeds the pressure
+set, walked). [RULED 2026-10-16 (coherence fold §3.1.16) — "embattled" is the embattlement.js ledger's phase; the crime coupling reads that phase (whose ramp already carries high crime) rather than a parallel stressor; see 1.8.1's bracket.] SMUGGLING TO THE BESIEGERS: crime feeds the pressure
 that bred it, broken only by suppression, relief, or absorption. The
 espionage composition: crime eases infiltration (the EXISTING
 COMP_CRIME_W term, espionageMath.js -- no second spelling minted), so
@@ -2265,6 +2276,7 @@ is that fact.
     }
 
     CALL_IN_ANSWERS = ['answered', 'partial', 'refused', 'lapsed']
+    [RULED 2026-10-16 (coherence fold §5) — the answer rung `partial` is renamed **`half_answered`** (`['answered', 'half_answered', 'refused', 'lapsed']`); `partial` stays CONTRIBUTION_CLOSE_GRADES' member (7.A.3), so the composed pair never carries one word twice.]
 
 It rides the errand spine as a typed envoy PURPOSE CLASS. ESTATE
 TRUTH, MEASURED AT HEAD: ENVOY_PURPOSES is closed at TWO members today
@@ -2385,7 +2397,7 @@ rows.
   COORDINATION: the queued TB tribute family also amends this catalog;
   CR-WC-12 assigns the order (recommendation: WC registers its two
   rows; TB proceeds independently; the catalog's one-owner discipline
-  is preserved by both landing as catalog rows through the same floor).
+  is preserved by both landing as catalog rows through the same floor). [ADDED 2026-10-16 (coherence fold) — PREMISE OVERTAKEN: the owner reversed the no-treasury record (ODQ §731.1, 2026-08-29, Q-W8 GRANTED; `treasuryEnabled` minted, simulationRules.js:478), so the buy-off and the debt exits now have a possible coin road this volume never considered (PLAUSIBLE coupling, findings WC-1 S-19).]
 
 ## 1.11 The doctrine reliability page (R9)
 
@@ -2396,7 +2408,7 @@ axis (the C2 collision, resolved: HABIT mints, WC feeds and reads).
 Until the HABIT axes land, the reliability rows are a deferred-with-
 reason row in WC-5, pre-pinned as a seam (the TR-5 pattern: a pin that
 reds when HABIT lands without consuming the contribution feed). Spies
-steal ally-reliability as an ES tap PRODUCT (section 4.3).
+steal ally-reliability as an ES tap PRODUCT (section 4.3). [CORRECTED 2026-10-16 (coherence fold §3.1.17, §6) — no ES product road exists (closed at three, envoyErrandVocabulary.js:168); see 1.2.3's bracket. The reliability page itself is HB-6-gated and is cut from chain 2.]
 
 ## 1.12 Dissolution: homecoming, hop-and-shed, and the one absorption market (e, j, l, m)
 
@@ -2586,6 +2598,7 @@ people-conservation identity.
     spatialLedgers.residentCohorts = {
       '<settlementId>': {
         '<originId>:<kind>': {       // kind: 'veteran' | 'settled'
+        [RULED 2026-10-16 (coherence fold §5) — the KIND reads 'veteran' | 'civilian' (see 0.2's cohort-row bracket); 'settled' is the AGE BAND only (COHORT_AGE_BANDS below).]
           count,                     // integer; a SUBSET of census here
           ageBand,                   // COHORT_AGE_BANDS
           lastEventTick
@@ -2703,7 +2716,7 @@ not constants. This is deliberately NOT a bandedStock decay (section
 5.1): bandedStock owns half-life-toward-neutral shapes; mortality is a
 population process and rides population machinery.
 
-PARKED, NOT RESOLVED (CR-WC-21): WHAT STEPS THE AGE BAND. Two things
+PARKED, NOT RESOLVED (CR-WC-21): WHAT STEPS THE AGE BAND. [CORRECTED 2026-10-16 (coherence fold) — RULED 2026-08-06 (b75e8c4d; WC_CHAIR_RULINGS.md:1434), Position B as ruled: calendar bands kept (AGE_BAND_EDGES_YEARS 5 / 20); RECENCY_WEIGHTS reclassified as a BOUNDED, FLOORED band modulation registered with its consumer, NOT a decay law; only mortality zeroes a bond; 5.1 stands un-narrowed (5.1's RULED paragraph). WC-15 carries ONE three-pin set, not two variants, and is not gated on CR-WC-21. This section below is the pre-ruling record.] Two things
 this volume says cannot both be true as written.
 
 - The age band steps by CALENDAR: 7.A.9 and this section's ledger give
@@ -2730,7 +2743,7 @@ mortality-realized composition narrows "how long ago"; keeping calendar
 bands makes RECENCY_WEIGHTS a second, calendar-driven decay term and
 falsifies both "no new constant" and section 5.1's "authors ZERO decay
 constants". CR-WC-21 states both positions in full. Until it is ruled,
-the WC-15 pin is carried in BOTH variants and the wave does not land on
+the WC-15 pin is carried in BOTH variants [CORRECTED 2026-10-16 (coherence fold) — ruled; see this section's PARKED-line bracket.] and the wave does not land on
 a coin flip; no amendment is made here to 1.13.3, 5.1, 7.A.9, or 7.B's
 RECENCY_WEIGHTS row. The volume's "zero new decay laws" claim is
 therefore CONDITIONAL on that ruling, and section 5.1 says so.
@@ -2748,7 +2761,7 @@ count, banded), HOW FAR (the origin's distance read through
 calibration(digest)/hopWeeks at read time -- a far-flung cohort binds
 harder than a neighboring one, per the owner's framing; the band
 derives per-digest, section 5.3), and HOW LONG AGO (recency-weighted
-by age band -- WHAT STEPS THAT BAND IS UNRULED: CR-WC-21): the
+by age band -- WHAT STEPS THAT BAND IS UNRULED: CR-WC-21) [CORRECTED 2026-10-16 (coherence fold) — RULED: calendar edges 5 / 20 years with a floored recency modulation; see 1.13.2's bracket.]: the
 relationship fades with the
 carriers, while the introduced traditions and faiths persist
 independently (bonds embodied vs culture institutional -- sixty years
@@ -2878,7 +2891,7 @@ market); chronic under-delivery feeds resistance narrative."
     REQUISITION      the coerced baseline. An occupied settlement's
                      expected contribution reads the occupation
                      ladder's rung directly (occupation.js's
-                     STATE_LADDER, :117, verified: contested /
+                     STATE_LADDER, :117, verified: contested / [CORRECTED 2026-10-16 (coherence fold) — STATE_LADDER is now :125; see 1.17.2's bracket.]
                      unstable / extractive / stabilized / vassalized).
                      4.4's one-authority rule binds: coercion reads the
                      occupation surface, the RELAY does not, and
@@ -2923,7 +2936,7 @@ modelling. All three are named here with their read sites.
                      stabilizationSuitability (:386), the EXISTING input
                      to advanceOccupationState (:442), raising the
                      suitability an over-deliverer's occupier reads and
-                     so accelerating the climb toward `vassalized`.
+                     so accelerating the climb toward `vassalized`. [CORRECTED 2026-10-16 (coherence fold) — occupation.js addresses at 00b648c9d: STATE_LADDER :117 -> :125 (and NOT exported; HB-9 owes the export, R-14), stabilizationSuitability :386 -> :645, advanceOccupationState :442 -> :724, vassalizationOutcomes :724 -> :1059, so the old :724 now names advanceOccupationState; navigate by symbol.]
                      For an already-VASSAL sender, release means the
                      vassal edge dissolving, which is the sovereignty
                      market's business and rides the same intent road as
@@ -2996,6 +3009,7 @@ Measured near-ceiling files this volume must NOT grow:
     beliefMap.js            775 eff        (25 lines)
     relationshipRulesCore.js 740 eff       (60 lines)
     warCoalitionSettlement.js 742 eff      (58 lines)
+    [CORRECTED 2026-10-16 (coherence fold §3.3.8) — re-measured at 00b648c9d: cite scripts/.size-baseline.json and eslint's EFFECTIVE count, never a raw wc. Baselines: applyWorldPulse 907, pulseKernel 1581 (frozen), roadsKernel 838, warTermination 818; stressorDynamics.js is no longer baselined. Approx eff (PLAUSIBLE precision): peaceTerms ≈799 (ONE line of headroom: AT CEILING, it takes ZERO lines from any wave without a leaf-first decomposition car), envoyDiplomacy ≈762, beliefMap ≈781, settlementStrategy ≈763 (no per-file override needed), armyTransitKernel ≈798.]
 
 RULE: no wave adds a net line to any file above without stating the
 budget in its wave plan; WC-6 OPENS with the armyTransitKernel
@@ -3042,6 +3056,7 @@ new module may join the first paint).
                                         home-alignment blended with
                                         drifted-self-alignment by drift
                                         depth, typed reasons out.
+                                        [CORRECTED 2026-10-16 (coherence fold) — THREE consumers (block-fork defect, army rejoin, unit merge), per 1.7.3 (findings WC-1 C-8).]
     lawBandModulation.js       ~60 eff  ONE frozen modulation table's
                                         SHAPE ONLY: the closed key set
                                         (cohesion / relay / drift /
@@ -3142,7 +3157,7 @@ new module may join the first paint).
                                         positions, staleness, peace
                                         news arrival; the ONLY stepper,
                                         covered by the widened law-M
-                                        manifest (CR-WC-10).
+                                        manifest (CR-WC-10). [CORRECTED 2026-10-16 (coherence fold) — CR-WC-10 RULED: law M is NOT widened; freeUnitKernel.js registers in the SECOND counts-mover manifest (1.7.3).]
     brigandContest.js         ~200 eff  nearest-settlement targeting,
                                         the repel/embattled contest
                                         (defenseLedger reads), the
@@ -3167,7 +3182,7 @@ new module may join the first paint).
                                         each homecoming IN THE SAME
                                         EVENT (lands WC-13, not WC-15),
                                         the tag-totality law, absorb/
-                                        demobilize tag events, and at
+                                        demobilize tag events, [CORRECTED 2026-10-16 (coherence fold) — `absorb` is retired into `untag` kind 'cohort' (0.2); read "untag/demobilize".] and at
                                         WC-15 the year-fold mortality
                                         debit and age-band steps.
     homecomingEffects.js      ~120 eff  the 1.12.1 double arithmetic
@@ -3266,7 +3281,7 @@ ADDITION at round 3: the pre-round-3 24-leaf table summed to exactly
 armyTransitEnvoy's 200 is 4,960. `4,780` had no derivation anywhere in
 this volume and is DELETED. The round-3 amendments then added the +130
 itemised above, so the live triple is 4,960 / 5,290 / 5,090 -- one
-genuinely-new figure, used in both sentences, with every part shown.
+genuinely-new figure, used in both sentences, with every part shown. [CLARIFIED 2026-10-16 (coherence fold) — "4,960" still names TWO quantities in adjacent paragraphs: the post-round-3 24-leaf DOMAIN total (which includes the 200-eff extraction) and the pre-round-3 genuinely-new total (5,160 − 200). The post-round-3 genuinely-new figure is 5,090; a reader citing "4,960 genuinely new" is citing the pre-round-3 number (findings WC-1 C-9).]
 
 ## 2.3 Extensions to existing surfaces (the attachment table)
 
@@ -3411,6 +3426,7 @@ genuinely-new figure, used in both sentences, with every part shown.
                                502/698/742; releaseMigrationArrivals  manifest is minted in
                                at migrationKernel.js:336;             WC-11's opener
                                freeUnitKernel.js when it lands)       (CR-WC-10)
+                               [CORRECTED 2026-10-16 (coherence fold) — this table's line addresses were measured at 3e2bd309/cbd348a5 and have drifted (00b648c9d: warDeployment.js:1263 -> :1317; warHomeCosts.js :391 -> :393, :115-116 -> :116-118, :79 -> :81, :443-450 -> :445-452; warCoalitionDecision.js :59 / :108-109 -> :77 / :126-127; migration.js :520 -> :558, :553 -> :591, :578 -> :616, :598 -> :641 (guard already widened); stepArmyPosition calls armyTransitKernel.js:482/:517/:738/:789 plus navalKernel.js:302); navigate by symbol. Three rows are RULED: "arrival credit (supplies)" (§3.1.14, OD-FC-35), "relay staging" / "relay links" (§3.1.15, CUT-TO-SENTENCE), "composition intel" (§3.1.17, no ES product).] [WITHDRAWN 2026-10-16 after skeptic S4 B5 — no clause of this volume is cut: a cut narrows the owner's own words (the lawful-side support network; (h) COMRADES KNOW EACH OTHER; R6; K6 CORE, accepted in-chat 2026-08-06) against "build it all"; the wave is RECORDED WITH THE SLOT "THE HOST", charter kept whole.]
 
 ## 2.4 What this volume does NOT touch
 
@@ -3446,6 +3462,7 @@ ARC MAP:
     ARC A  THE CIRCULATION CORE   WC-0..WC-5   (R1-R9; rides existing
                                                 machinery; ships value
                                                 early -- K6 CORE)
+                                                [CORRECTED 2026-10-16 (coherence fold §3.2.18, §6) — with the levy sweep measured silent and the executor at WC-4, WC-1..WC-3 credit nothing on any seeded world; RULED: the dispatch executor's ASPATIAL arm lands WITH WC-1. The felt chain is fold §6 chain 2 THE AUXILIARY (WC-1, WC-2, WC-4 bound to REINFORCE, WC-5 minus the reliability page, WC-14's homecoming sentence on the live return; OD-FC-19); WC-3 is CUT-TO-SENTENCE and Arcs B-D are RECORDED with the slot "THE HOST".] [WITHDRAWN 2026-10-16 after skeptic S4 B5 — no clause of this volume is cut: a cut narrows the owner's own words (the lawful-side support network; (h) COMRADES KNOW EACH OTHER; R6; K6 CORE, accepted in-chat 2026-08-06) against "build it all"; the wave is RECORDED WITH THE SLOT "THE HOST", charter kept whole.] [RE-RULED 2026-10-16 after skeptic S4 B2 — nothing at WC-1 can choose a send (the chooser and the move tokens land at WC-4; wc-1b is signed, not built) and the aspatial `muster` may write only `blocks[]` (L-WC-19), which needs WC-6's field-closed normalizer first: chain C2's order is WC-6's normalizer car → WC-4's chooser + executor with WC-1 ALONGSIDE; WC-1's first-visible beat fires in that unit, not alone.]
     ARC B  THE COMPOSITE          WC-6..WC-12  (a-c, f-i + l's brigand
                                                 half -- K6 EPIC)
     ARC C  THE PEACE'S PEOPLE     WC-13..WC-14 (d, e, j homecoming, l-m
@@ -3496,12 +3513,14 @@ EVERY WAVE CARRIES (stated once here, specialized per wave below):
   DM-edited values are never machine-dropped.
 - ALIGNMENT LINE: the wave's doc row lands in this volume's PROGRESS
   blockquote and FABLE_VALIDATION_QUEUE.md in the landing commit.
+  [RULED 2026-10-16 (coherence fold §5) — this "ALIGNMENT LINE" is renamed **"the DOC ROW"** (the wave's doc-alignment row); it is NOT the spine's requirement-13 Alignment line (SPINE:92). Each wave still owes its requirement-13 read: lawfulness via lawWordFor (relay, cohesion, drift, rejection); malice is unengaged, and the reason is owed (findings WC-2 refinement 21).] [ADDED 2026-10-16 (coherence fold) — THE DOSSIER ROUND-TRIP (SPINE §1 requirement 6, the crown law): "dossier" appears ZERO times in this volume. Every wave that writes a DM-facing fact owes its DOSSIER ROUND-TRIP pin in its landing commit: the credit (WC-1), the war stance (WC-2/WC-7), the call-in answer (WC-5), the roster (WC-6), the cohort (WC-15) and the veteran read (WC-16) each land on the town's dossier where a DM looks and read back from it (findings WC-2 refinement 22). Each charter below also carries its requirement-16/17 FIRST-VISIBLE/TIER line and, per requirement 19, its DM-felt sentence or the word instrumentation.]
 
 ## ARC A -- THE CIRCULATION CORE
 
 ### WC-0 REGISTRATION (the vocabulary wave)
+[ADDED 2026-10-16 (coherence fold, req 16/17) — FIRST-VISIBLE: none — instrumentation (registration; LANDED dark 2026-08-15) · TIER: aspatial-safe · DEGRADED ARM: dark]
 
-Dependencies: none. Buildable now.
+Dependencies: none. Buildable now. [SUPERSEDED BY EVENT 2026-10-16 (coherence fold) — LANDED 2026-08-15 as WC-0A..WC-0E (511d2ceb7, 4c87bae45, cf7e64660, e47d67631, 9602952ba), dark, no writer; this charter is the record of what landed.]
 
 LANDS: warStance.js (ladder + rank map, no consumers), peopleLedger.js
 (POOLS / RESIDENCY_TAGS / COUNT_EVENTS incl. `merge` / TAG_EVENTS incl.
@@ -3553,7 +3572,7 @@ destId's population as an ordinary migration arrival -- outside
 walker, delivering lent troops into a settlement's census instead of
 into a block. It is the single defect in this volume most likely to
 have shipped GREEN, because WC-0's byte-identity pin holds perfectly
-(no producer yet) and the failure surfaces only at WC-6.
+(no producer yet) and the failure surfaces only at WC-6. [SUPERSEDED BY EVENT 2026-10-16 (coherence fold) — LANDED by WC-0B (4c87bae45): the guard reads `if (isDemographicColumn(col) || isMilitaryColumn(col))` at migration.js:641 (releaseArrivals declared :616; class spread :520 -> :558, key :553 -> :591; :474 and :483 exact); this paragraph is history; navigate by symbol.]
 
     THE DISCRIMINATOR IS THREE-WAY, NOT TWO-WAY:
     `isDemographicColumn` | a NEW `isMilitaryColumn` (over
@@ -3575,11 +3594,11 @@ have shipped GREEN, because WC-0's byte-identity pin holds perfectly
 
 Also contributionLedger.js record shapes +
 normalizer (no writer calls yet), the normalizeDeployments blocks[]
-fail-closed arm (rejecting, since nothing writes it), the two
+fail-closed arm (rejecting, since nothing writes it), [CORRECTED 2026-10-16 (coherence fold §3.2.17) — the landed arm KEEPS rows with originId + integer headcount and passes other fields through (worldState.js:163-174); see 1.4.1's bracket.] the two
 TERM_CATALOG rows (amnesty, jubilee -- own families, no producers:
 byte-identical registration, the proven recipe), spatialUsage TRACKED
 rows for warContributions/freeUnits/residentCohorts (counts-banded
-emission note), certification pending rows, the root
+emission note), [CORRECTED 2026-10-16 (coherence fold) — overruled by ODQ §73.3 F-1: TRACKED rows land only WITH their live setSpatialLedger writers (WC-1, WC-11, WC-13); the code agrees (subsystemRowsVirtual.js:373, "refusing a TRACKED row for a key nothing writes").] certification pending rows, the root
 warCirculationEnabled + contributionLedgerEnabled CQ5 trios, and THE
 TWO SINGLE-EXPORTER FENCES (the structural half of the HB-1
 arbitration, 4.1): a source-scan walker asserting that the strategist
@@ -3638,6 +3657,7 @@ them move:
         [...WR10_FAMILIES_AT_LANDING].sort()) -- AN EXACT-EQUALITY PIN
       THAT REDS OUTRIGHT. WR10_FAMILIES_AT_LANDING is the eight-member
       landing record at sovereigntyBundle.js:91.
+      [SUPERSEDED BY EVENT 2026-10-16 (coherence fold) — LANDED by WC-0D (e47d67631): TERM_FAMILIES is now at peaceTermsCatalog.js:349; sovereigntyBundle.js :91/:156/:167 -> :116/:179/:191; the exact-equality pin at sovereigntyBundleWr10.test.js:322 is now the consumed grown-set pin at :347-348 (`toEqual(['amnesty','commercial','faith','jubilee','population'])`); navigate by symbol.]
 
 WHAT WC-0 THEREFORE OWES, IN ITS OWN COMMIT: (a) the enumerated
 consumer census above, taken at the BUILDING commit and recorded in the
@@ -3660,12 +3680,12 @@ THE
 SINGLE-EXPORTER FENCES ARE PINNED AT AT-MOST-ONE, not exactly-one:
 zero exporters is the legal state of the tree today (verified at HEAD:
 settlementStrategy.js keeps enumerateMoves module-private at :634 with
-a bare re-export at :1360, and no closed STRATEGIST move list is
+a bare re-export at :1360, [CORRECTED 2026-10-16 (coherence fold) — settlementStrategy.js:569 / :1314 at 00b648c9d; navigate by symbol. The zero-exporter premise is SUPERSEDED BY EVENT: HB-1 minted STRATEGY_MOVES (strategyMoves.js:61, 1013d58ba); see 4.1.1's bracket.] and no closed STRATEGIST move list is
 exported anywhere), two is never legal, and the row that tightens the
 walker to EXACTLY-ONE lands in whichever volume mints. The discovery
 signature must exclude the battle-resolution vocabularies by name --
 convergence.js's ENGAGEMENT_MOVES (:185) and REACTIVE_MOVES (:743) are
-a different question and would red this walker on day one otherwise;
+a different question and would red this walker on day one otherwise; [CORRECTED 2026-10-16 (coherence fold) — REACTIVE_MOVES now lives at convergenceReactive.js:40 (re-exported at convergence.js:774; ENGAGEMENT_MOVES :185 -> :190) and holds `'reinforce'`, the ally-relief move (ALLY_UNDER_SIEGE -> REINFORCE, :44): THAT is this volume's question. The fence exclusion stands for the scan (it names identifiers); the semantic overlap is owed at WC-4 (see WC-4's bracket).]
 that exclusion is itself pinned, so a later strategist list cannot hide
 behind it. Red proof executed at this landing: a second exporter
 planted, caught, removed.
@@ -3687,7 +3707,7 @@ law):
       EXCLUDES  by exact identifier, and the exclusion list is itself
                 pinned: ENGAGEMENT_MOVES (convergence.js:185) and
                 REACTIVE_MOVES (convergence.js:743) -- battle
-                resolution, a different question
+                resolution, a different question [CORRECTED 2026-10-16 (coherence fold) — not for `reinforce`; see the bracket at the AT-MOST-ONE paragraph above.]
       ASSERTS   at most one match tree-wide; the count is asserted with
                 toEqual against a named list, never a bare `<= 1`, so a
                 signature that has gone blind reads as an empty list
@@ -3712,13 +3732,14 @@ volume mints (4.1). Both run the planted-second-exporter mutant at this
 landing.
 
 DORMANCY: total (nothing reads anything). TUNING: none, and NOW TRULY
-NONE -- registration mints no constants, which is why
+NONE [CORRECTED 2026-10-16 (coherence fold) — WC-0D's catalog rows landed with four authored numbers each (`weight: 0.5`, baseYears, maxYears, `baseMag: 1.0`; peaceTermsCatalog.js:341-342): producer-less and dark, but not zero constants (PLAUSIBLE that the catalog floor requires them; they are UNMEASURED rows under requirement 18; findings WC-1 S-18).] -- registration mints no constants, which is why
 lawBandModulation.js lands as a shape with a registration entry point
 and its four curves land with their movers (WC-3's relay row, WC-8's
 cohesion row, WC-9's drift row, HABIT's learning row), each in that
 wave's 7.B block. 7.B therefore carries no WC-0 row, correctly.
 
 ### WC-1 THE ARRIVAL LEDGER
+[ADDED 2026-10-16 (coherence fold, req 16/17) — FIRST-VISIBLE: the arrival beat (`wc_contribution_arrival`) and the credit chip in the WEEK a contingent is sent (aspatial: credit at muster, which needs the dispatch executor's aspatial arm landing with this wave, §3.2.18) — weekly, chain 2 · TIER: aspatial-safe; the spatial arrival edge needs spatial canon (WC-6) · DEGRADED ARM: aspatial effect-time = muster-time (the bank)]
 
 Dependencies: WC-0.
 
@@ -3729,7 +3750,7 @@ fires ZERO times in every case while its siblings fire", and the row at
 release cases reads war_levy exactly zero (against war_conscription 8,
 army_deployed 7, conquest 2 in the 30-year 12-settlement seed1 case),
 with LEVY_POP_RATE_PER_TICK 0.004 (warHomeCosts.js:80) against
-LEVY_POP_FLOOR 300 (:81) meaning a source under roughly 550 people
+LEVY_POP_FLOOR 300 (:81) [CORRECTED 2026-10-16 (coherence fold) — now :82 / :83 (values unchanged); navigate by symbol.] meaning a source under roughly 550 people
 levies nobody. CONSEQUENCE FOR THIS WAVE: no pin here may be authored
 against levy-produced rows on the seeded corpus, because there are
 none, and a pin whose fixture never fires is a green that proves
@@ -3741,7 +3762,7 @@ not depend on the sweep ever firing; if a later hygiene wave revives
 it, this volume's arithmetic already covers it.
 
 LANDS: the contributionLedger.js writer live: troops-lent credit at
-the levy/reinforcement effect edge (aspatial: the bank; spatial: the
+the levy/reinforcement effect edge [RULED 2026-10-16 (coherence fold §3.2.18) — the dispatch executor's ASPATIAL arm (contributionDispatch.js's `muster` road and the reservation, 1.1.5) lands IN THIS WAVE, since the levy edge is measured silent; supplies credit waits on EC-12/EC-18 (§3.1.14, OD-FC-35); the record shape is WC-0E's (§3.2.17).] (aspatial: the bank; spatial: the
 arrival edge minted in the mover kernel), supplies credit at shipment
 arrival, shortfall booking, arrivals cap, the close fold (the THREE archive
 symbols of 1.1.3 -- appendRelationshipContributionClose,
@@ -3782,6 +3803,7 @@ troops/supplies band edges (4 bands each); OBLIGATION deposit
 magnitude curve (rides the existing obligation cap 1.0).
 
 ### WC-2 THE DERIVED STANCE
+[ADDED 2026-10-16 (coherence fold, req 16/17) — FIRST-VISIBLE: the war stance word on the war chip in the same week the first credit lands ("Millbrook has joined the war in materiel only"); the mission-creep stance-crossing beat is SEASONAL · TIER: aspatial-safe · DEGRADED ARM: non-composite worlds read own-army share 1.0 (no roster)]
 
 Dependencies: WC-1.
 
@@ -3826,6 +3848,7 @@ majority edge for principal), the three scalar curves (exhaustion /
 casus / terms by rung -- 5 values each, raw).
 
 ### WC-3 THE RELAY
+[ADDED 2026-10-16 (coherence fold, req 16/17) — FIRST-VISIBLE: none — CUT-TO-SENTENCE (§3.1.15); once a goods road exists, the immediate `wc_relay_shortfall` beat in the week of arrival · TIER: spatial canon + CR-WC-9's shipment relay buckets (OD-FC-20) + a goods road (EC-12/EC-18, OD-FC-35) · DEGRADED ARM: dark] [WITHDRAWN 2026-10-16 after skeptic S4 B5 — no clause of this volume is cut: a cut narrows the owner's own words (the lawful-side support network; (h) COMRADES KNOW EACH OTHER; R6; K6 CORE, accepted in-chat 2026-08-06) against "build it all"; the wave is RECORDED WITH THE SLOT "THE HOST", charter kept whole.]
 
 Dependencies: WC-1. Gate note: physical interdiction rows require the
 WY encounter TABLE to exist (WY-6 unbuilt at architecture time); the
@@ -3835,7 +3858,7 @@ is a pre-pinned seam that reds when the table lands without the rows.
 LANDS: relayNetwork.js (staging path via candidateRoutes, nearest-ally
 staging, entrepot crossing registration, law-band per-hop efficiency
 via lawWordFor + the one modulation table, skim credited to staging
-stores + booked as shortfall), THE COMRADESHIP TERM PRESENT AND
+stores + booked as shortfall), [RULED 2026-10-16 (coherence fold §3.1.15) — CUT-TO-SENTENCE: the staging credit and the relay identity have no substrate (supplyShipments.js:17-21, :31-33: one QUANTITY-LESS record per active institution link, food excluded); they need CR-WC-9's "shipment relay buckets" (OD-FC-20), so WC-3 depends on CR-WC-9 and 7.F's WC-3 edge says so. L10/L11 stand; the network is RECORDED with the slot "THE HOST".] [WITHDRAWN 2026-10-16 after skeptic S4 B5 — no clause of this volume is cut: a cut narrows the owner's own words (the lawful-side support network; (h) COMRADES KNOW EACH OTHER; R6; K6 CORE, accepted in-chat 2026-08-06) against "build it all"; the wave is RECORDED WITH THE SLOT "THE HOST", charter kept whole.] THE COMRADESHIP TERM PRESENT AND
 NEUTRAL in the per-hop read (zero bond = today's arithmetic exactly; it
 lights at WC-9, 1.3.2), THE TROOP/STORES FORK (troop columns route the
 same roads and take the same interdiction exposure but neither stage
@@ -3877,6 +3900,7 @@ TUNING: per-band loss fractions (3), skim fraction (1), staging search
 depth; all raw, one-law-band-modulated pattern (K7).
 
 ### WC-4 STRATEGY AND COERCION
+[ADDED 2026-10-16 (coherence fold, req 16/17) — FIRST-VISIBLE: the ally's send-or-keep decision as a beat in the week it is made ("Aldmere sent a company to Thornhold's army"), through the lit REINFORCE verb (§5 addendum) — weekly, chain 2; R6's release standing is YEARLY (CUT-TO-SENTENCE, fold §6) and its fast-layer sign is a PLANTING LINE (fold §4) at the over-delivery ("Brenmoor delivered above Kell's requisition through the winter") · TIER: aspatial-safe (the muster arm; the spatial `dispatch` arm at WC-6) · DEGRADED ARM: the aspatial muster-time road] [WITHDRAWN 2026-10-16 after skeptic S4 B5 — no clause of this volume is cut: a cut narrows the owner's own words (the lawful-side support network; (h) COMRADES KNOW EACH OTHER; R6; K6 CORE, accepted in-chat 2026-08-06) against "build it all"; the wave is RECORDED WITH THE SLOT "THE HOST", charter kept whole.]
 
 Dependencies: WC-2. Coordination gate: the move VOCABULARY contract
 with HB-1 (4.1) -- if HABIT has minted, join; if not, this wave mints
@@ -3886,7 +3910,7 @@ LANDS: contributionMoves.js -- THE CHOOSER (send-reinforcements-to /
 send-supplies-to / recall-support), weighted by relationship, treaty
 obligation, distance feasibility (hopWeeks-derived bands, 5.3), own
 threat, favor balance, law band, contribution habit (a HABIT read
-where lit, neutral where dark).
+where lit, neutral where dark). [RULED 2026-10-16 (coherence fold §5 addendum, the REINFORCE binding) — three live reinforcement mechanisms precede this wave: reinforcement.js (the own-army per-tick flow, called from warHomeCosts.js), convergenceReactive.js's `reinforce` (REACTIVE_MOVES :40; ALLY_UNDER_SIEGE -> REINFORCE, the relief column, :44) and realmManifest.js's greyed realm verb `REINFORCE` ("Reinforce a treaty-ally", lane 'deferred', :471-487); beside them `computeAllyRelief` (warCapacityReads.js:74), the `reinforcement_cost` condition (activeConditions.js:371) and `ARMY_ROLES.REINFORCEMENT` (armyTransit.js:110). WC-4's executor BINDS them: it LIGHTS the greyed REINFORCE verb and routes the reactive `reinforce` move and the own-army flow through ONE commitment seam (three entry points, one road, one Herald family); no fourth road and no separate `resupply` seal is minted (answers ARCH:3227; RULINGS-OVER-THE-DRAFTS R-9). Edit Mode's visibility (U16) is untouched.] [RE-RULED 2026-10-16 after skeptic S4 M1/M2/M8 — the binding moves to WC-6 (the spatial arm): `REINFORCE` is W-CONVERGENCE's verb (dial `allyId`, a besieged SETTLEMENT) and WC credits an ARMY, so WC-6 re-targets the dial, declares `real-only` and the authority class "directed dispatch", adds the `reinforce_deferred` veto-code move and names W-CONVERGENCE's seam as taken; the own-army flow `reinforcement.js` stays OUTSIDE the seam as a read (it moves strength and `supplyIntegrity`, not headcount, and is live where `warLayerEnabled`); WC-4's `send_supplies_to` stores road is DARK until the army-endpoint consignment exists (WY-8a's F9, OD-FC-35); the `resupply` seal (§12.2 row 5) is a different seal and stands.]
 
 AND contributionDispatch.js -- THE EXECUTOR (1.1.5), which the volume
 named nowhere before round 2 and without which this wave is
@@ -3897,7 +3921,7 @@ relay, `recall_support`'s reservation clearing, and the RESERVATION
 ARITHMETIC (a banded fraction of the sender's own per-tick muster
 capacity, held for RESERVATION_HORIZON ticks, summed and clamped at
 CONTRIBUTION_RESERVATION_CAP). Its call site is warDeployment.js's STEP
-5c -- after applyHomeWarCosts (:1263, verified) and before the tick
+5c -- after applyHomeWarCosts (:1263, verified) [CORRECTED 2026-10-16 (coherence fold) — the call is now warDeployment.js:1317; navigate by symbol.] and before the tick
 return, so a column dispatched this tick cannot arrive this tick. Its
 SPATIAL arm (`dispatch` -> `arrival` over a `reinforcement_column`)
 lands at WC-6 with the arrival-edge detector. Every event uses WC-0's
@@ -3946,6 +3970,7 @@ TUNING: the seven move weights; overshoot/under-delivery edges;
 CONTRIBUTION_RESERVATION_CAP; RESERVATION_HORIZON.
 
 ### WC-5 CALL-INS, EXITS, AND THE DOCTRINE PAGE
+[ADDED 2026-10-16 (coherence fold, req 16/17) — FIRST-VISIBLE: the call-in answer beat within the weeks of the ask ("Thornhold called on Aldmere; Aldmere refused with the debt standing"); a lapse shows at 26 weeks; the exits at war end — weeks to a season, chain 2 minus the reliability page (HB-6-gated) · TIER: aspatial-safe; the envoy CARRIAGE needs errandSpineEnabled (held dark, OD-FC-39) · DEGRADED ARM: a standing ask that lapses on its horizon]
 
 Dependencies: WC-1, WC-2. Gates: only the call-in CARRIAGE is gated.
 SP-D is BUILT (the absence premise this block carried is REFUTED --
@@ -4013,6 +4038,7 @@ weights.
 ## ARC B -- THE COMPOSITE
 
 ### WC-6 BLOCK ROSTERS AND THE CONSERVATION WALKER
+[ADDED 2026-10-16 (coherence fold, req 16/17) — FIRST-VISIBLE: the block roster table and the "who really fields this force" chip on the war card, the week a foreign block arrives · TIER: spatial canon + compositeArmiesEnabled; CR-WC-9-gated (OD-FC-20) · DEGRADED ARM: dark (aspatial worlds keep WC-1's bank at muster)]
 
 Dependencies: WC-1, WC-4 (this wave takes contributionDispatch.js's
 SPATIAL arm; the aspatial arm landed at WC-4). OPENS with the
@@ -4101,6 +4127,7 @@ TUNING: none new (the roster carries no constants; bands come with
 their readers).
 
 ### WC-7 REALIZED STANCE AND THE CROSSING
+[ADDED 2026-10-16 (coherence fold, req 16/17) — FIRST-VISIBLE: the stance-crossing beat (SEASONAL) and `wc_composition_revealed` at news speed weeks after it · TIER: spatial canon + belief infoMode (non-omniscient); CR-WC-9-gated via WC-6 · DEGRADED ARM: omniscient collapses the lag; aspatial worlds keep WC-2's crossing]
 
 Dependencies: WC-2, WC-6.
 
@@ -4112,14 +4139,14 @@ own army" -- and get forks about it); the enemy's BELIEVED share
 (composition news entries at crossings, hop-worn; the enemy casus read
 takes the believed band); the ES composition-intelligence tap PRODUCT
 row (spies count banners -- gated on espionageEnabled, the existing
-gate conjunction).
+gate conjunction). [RULED 2026-10-16 (coherence fold §3.1.17) — NO ES product row: composition intel is this wave's own hop-worn composition news (above); see 1.2.3's bracket.]
 
 PINS: THE RUNG-SWAP PIN (the flagship negative of the derived ladder,
 1.2.2): a reinforcer's integrated share crosses 0.50 against a
 DECLARER-OWNER, and the pin asserts that the two rungs EXCHANGE -- the
 reinforcer reads `principal`, the declarer-owner reads `belligerent` --
 and that ALL FOUR scalars (exhaustion accrual, casus exposure, terms
-weight, spoils split) re-derive from that one read, for BOTH parties,
+weight, spoils split) [CORRECTED 2026-10-16 (coherence fold) — THREE landed axes (casus, exhaustion, terms; spoils folded into terms, warStance.js:89); see 1.2.4's bracket.] re-derive from that one read, for BOTH parties,
 in the same tick. The declarer-disjunct mutant -- restoring "or is the
 war's original declarer with a fielded army" -- must red it: that
 mutant IS the priced-shielding hole the derived ladder exists to close;
@@ -4148,6 +4175,7 @@ band, shared shape with K2), composition-news significance class
 (BORROWED from SIGNIFICANCE_CLASSES, never minted).
 
 ### WC-8 THE BLOCK FORKS
+[ADDED 2026-10-16 (coherence fold, req 16/17) — FIRST-VISIBLE: the block-fork beat on news arrival ("Word reached the Emberford company that Emberford had fallen; by morning they were marching home") — weeks to a season · TIER: spatial canon (the news gate) + belief infoMode; CR-WC-9-gated via WC-6 · DEGRADED ARM: omniscient = an immediate fork; aspatial dark]
 
 Dependencies: WC-6. (WC-7 not required: forks read stance only through
 banked facts.)
@@ -4161,7 +4189,7 @@ PLUS joinPreference.js -- the shared join scorer (1.5.2) minted HERE
 because WC-8 is the first consumer, with the closed defect-candidate
 set (co-located or one hop; holds the block's home, or is at war with
 the block's current owner) and its typed reasons; WC-11's free units
-consume the same leaf unchanged, occupied-block WATCHED taint (ES read),
+consume the same leaf unchanged, occupied-block WATCHED taint (ES read), [RULED 2026-10-16 (coherence fold §5) — "the watched block", the army owner's read, not an ES product; see 1.5.2's bracket.]
 occupied-home credit continuation (a stay block still earns home
 credit), fork receipts with loading factors as typed reasons, fork
 beats.
@@ -4198,6 +4226,7 @@ TUNING: fork loading weights (six factors); cohesion fragmentation
 curve (the law-band table row).
 
 ### WC-9 THE SERVICE INTEGRALS
+[ADDED 2026-10-16 (coherence fold, req 16/17) — FIRST-VISIBLE: the PLANTING LINE (fold §4) at the war close, in the record's voice ("the Emberford company served beside Thornhold's through the winter siege"); the comradeship verdict arrives a war later and names the planting as its cause (requirement 20) · TIER: spatial canon (CR-WC-9-gated via WC-6); the fidelity rider HB-6-gated · DEGRADED ARM: dark] [RULED 2026-10-16 (coherence fold §6) — CUT-TO-SENTENCE: keep ONE comradeship integral folded at war close (it already writes `shared_service`); blend, drift and the fidelity rider keep their laws and one line each and build no machinery until a chain asks; recorded with the slot "THE HOST".] [WITHDRAWN 2026-10-16 after skeptic S4 B5 — no clause of this volume is cut: a cut narrows the owner's own words (the lawful-side support network; (h) COMRADES KNOW EACH OTHER; R6; K6 CORE, accepted in-chat 2026-08-06) against "build it all"; the wave is RECORDED WITH THE SLOT "THE HOST", charter kept whole.]
 
 Dependencies: WC-3, WC-5, WC-6 -- CORRECTED IN ROUND 2 (7.F). WC-3
 supplies `betrayed`'s skim input; WC-5 supplies `partial`'s askedBand
@@ -4258,7 +4287,7 @@ reds; (b) the ANSWER-WEIGHT pin -- the 1.9.2 fork's comrade fixture
 answers measurably more often than its stranger twin; (c) the
 ALLIANCE-ODDS pin -- a comradeship fold moves
 readCoalitionJoinDecisions' appetite through pactStrength/trust
-(warCoalitionDecision.js:108-109), asserted as a real read, not
+(warCoalitionDecision.js:108-109), asserted as a real read [CORRECTED 2026-10-16 (coherence fold) — now :126-127; navigate by symbol.], not
 assumed; (d) the CARAVAN-DENSITY row -- a WY-3 seam row with its
 executed red-capability proof, since the consumer does not exist yet.
 THE COMRADE-FIDELITY PIN (1.6.4, differentiated and BOUNDED, both
@@ -4293,11 +4322,12 @@ the volume's densest tuning cluster; every constant carries its in-file
 one-liner.
 
 ### WC-10 ENDURANCE AND CONCENTRATION
+[ADDED 2026-10-16 (coherence fold, req 16/17) — FIRST-VISIBLE: during a siege, the two envelope words racing in the siege document each week; the massing tell at news speed — season · TIER: spatial canon + WY-8a (OD-FC-21) · DEGRADED ARM: dark]
 
 Dependencies: WC-3, WC-6. HARD GATE: WY-8a built (armySupply.js, F9
 supplyCargo -- owner-SIGNED under the blanket sign-off of 2026-08-05,
 but UNBUILT at architecture time; the envelope needs carried supply
-to exist). This wave is a spec row until the gate clears (CR-WC-14).
+to exist). This wave is a spec row until the gate clears (CR-WC-14). [ADDED 2026-10-16 (coherence fold) — a carried supply ALREADY exists on the army record: `supplyIntegrity` / `foodReserve` (warArmyRecord.js:127, :132), eroded at attrition.js:312, mitigating loss at attrition.js:226, fed at reinforcement.js:213. The envelope reads THAT quantity or the owner rules F9's relation to it, never a third supply truth.] [RULED BY DELEGATION 2026-10-16 (OD-FC-21 — one army-supply truth: grow the live scalar, or keep F9 `supplyCargo` as the integer stock with the scalar DERIVED from it (recommendation: F9 the stock, the band a read); "F9 is owner-SIGNED" is itself contested (ARCH:689 UNSIGNED vs J-EM-9 SIGNED) and rides the same row.]
 
 LANDS: enduranceEnvelope.js (carried + relay throughput over
 mass-and-season-scaled burn), the carrying-capacity network read, the
@@ -4323,6 +4353,7 @@ TUNING: burn-rate curve, mass scaling, the never-hit renderer guard
 ceiling (documented as a guard with its not-load-bearing pin).
 
 ### WC-11 FISSION AND FREE UNITS
+[ADDED 2026-10-16 (coherence fold, req 16/17) — FIRST-VISIBLE: `wc_fission` ("the host broke along its weakest bonds") when an envelope closes, weeks to seasons; `wc_stand_down` at road speed · TIER: spatial canon + WY-8a (via WC-10) + CR-WC-9 · DEGRADED ARM: dark]
 
 Dependencies: WC-8, WC-9, WC-10 -- CORRECTED IN ROUND 2 (7.F): WC-8
 mints the ONE joinPreference.js scorer this wave consumes unchanged,
@@ -4334,7 +4365,7 @@ own header and discovery signature, and pushing a counts-mover into it
 would contradict CR-WC-2). The new manifest carries its own discovery
 signature over the counts steppers that exist today
 (armyTransitKernel.js's stepArmyPosition calls at :467/:502/:698/:742,
-migrationKernel.js's releaseMigrationArrivals at :336) and gains
+migrationKernel.js's releaseMigrationArrivals at :336) [CORRECTED 2026-10-16 (coherence fold) — the live calls are armyTransitKernel.js:482/:517/:738/:789 AND navalKernel.js:302 (omitted); the manifest's discovery signature must find the naval stepper; migrationKernel.js:336 is exact; FPQ-18 also routes four speed-floor pairs here; navigate by symbol.] and gains
 freeUnitKernel.js in this wave, BEFORE the stepper lands. CR-WC-10
 carries the chair ask.
 
@@ -4388,6 +4419,7 @@ TUNING: fission threshold slack, forage escalation bands, join
 preference drift weighting.
 
 ### WC-12 BRIGANDAGE AND THE EMBATTLED STATE
+[ADDED 2026-10-16 (coherence fold, req 16/17) — FIRST-VISIBLE: `wc_brigand_arrival` and the embattled phase ("the free company came down on Kell; Kell is embattled") within weeks, as an embattlement.js ramp term (§3.1.16) · TIER: spatial canon (nearest by road) + WY-8a via WC-11 · DEGRADED ARM: dark]
 
 Dependencies: WC-11. Encounter rows E16 (brigand x settlement) and
 E17 (column x host) land in the SAME COMMIT as their resolvers if the
@@ -4396,7 +4428,7 @@ WY table exists; else pre-pinned seam rows (as WC-3).
 LANDS: brigandContest.js (nearest-settlement targeting by road +
 warmth; hostile = prey never parking; the repel/embattled contest on
 defenseLedger military + internal; the embattled stressor injected
-through normalizeStressor with a typed source reference;
+through normalizeStressor with a typed source reference; [RULED 2026-10-16 (coherence fold §3.1.16) — a ramp term on spatial/embattlement.js, not a parallel stressor; see 1.8.1's bracket.]
 EMBATTLED_RESOLUTIONS; buy-off as a graded close -- tribute teaches
 raiding pays), embattled crime coupling (the CRIME_ARCHETYPES member +
 the smuggling-to-besiegers loop; espionage porosity composes through
@@ -4434,6 +4466,7 @@ buy-off price bands, embattled trade-interdiction severity.
 ## ARC C -- THE PEACE'S PEOPLE
 
 ### WC-13 HOP-AND-SHED AND THE ONE ABSORPTION MARKET
+[ADDED 2026-10-16 (coherence fold, req 16/17) — FIRST-VISIBLE: `wc_shed_homecoming` at war end ("300 of Aldmere's people stopped at Brenmoor") — once per war · TIER: spatial canon (migration columns) + WY-8a via WC-11 · DEGRADED ARM: dark]
 
 Dependencies: WC-11. (Migrant-side machinery exists; the military
 column classes join it.)
@@ -4495,6 +4528,7 @@ TUNING: density-capacity edges (derived from the measured absorption
 distribution), rejection loading weights, shed quantum bands.
 
 ### WC-14 HOMECOMING AND THE PULSE
+[ADDED 2026-10-16 (coherence fold, req 16/17) — FIRST-VISIBLE: the homecoming double sentence on the LIVE return (deploymentReturn and the existing `army_homecoming` Herald kind, chain 2's homecoming sentence) in the week a company comes home; the institutions and introduction attempts are YEARS, so their fast-layer sign is a PLANTING LINE (fold §4) at the founding cause ("two hundred of Emberford's disbanded company stayed on at Kell") · TIER: the homecoming sentence aspatial-safe; the rest spatial (via WC-13) · DEGRADED ARM: the homecoming sentence alone]
 
 Dependencies: WC-13. (Also lights the (d) landing and (e).)
 
@@ -4531,20 +4565,21 @@ destabilization severity curve.
 ## ARC D -- THE DOMESTIC DIVIDEND
 
 ### WC-15 RESIDENT COHORTS AND DIASPORA BONDS
+[ADDED 2026-10-16 (coherence fold, req 16/17) — FIRST-VISIBLE: a PLANTING LINE (fold §4) at the shed or homecoming that writes the cohort ("two hundred of Emberford's people settled at Thornhold after the war"); the diaspora bond (EPOCH, a 20-40 year arc) names that planting when it speaks · TIER: aspatial-safe reads over a tag ledger WC-13 writes spatially · DEGRADED ARM: dark]
 
 Dependencies: WC-13 (sheds; and the tag LEDGER itself, whose one
 writer landed there under moverAbsorptionEnabled), WC-14 (returns).
 veteranCohortsEnabled trio gates the READS this wave adds -- mortality
 fade, age bands, and the four bond expressions -- not the ledger, which
 already exists and is already conserved. GATED ON CR-WC-21 for the
-age-band stepping rule (1.13.2).
+age-band stepping rule (1.13.2). [CORRECTED 2026-10-16 (coherence fold) — RULED 2026-08-06 (5.1's RULED paragraph): calendar bands 5 / 20 with a FLOORED recency modulation, not a decay law; WC-15 is NOT gated on CR-WC-21.]
 
 LANDS: over the tag ledger WC-13 already writes (residentCohorts.js
 gains no new people arithmetic here): the year-fold mortality debit
 pro-rata by the settlement's own realized death fraction, in the same
 fold as the census `mortality` event it partitions; COHORT_AGE_BANDS
 steps -- WHOSE STEPPING RULE IS UNRULED, see the pin note below and
-CR-WC-21; the `untag` and `demobilize` tag events (`untag` carrying
+CR-WC-21; [CORRECTED 2026-10-16 (coherence fold) — ruled; see this wave's Dependencies bracket.] the `untag` and `demobilize` tag events (`untag` carrying
 its RESIDENCY_TAGS kind: the naturalization the earlier drafting
 called `absorb`, AND the free-lance retirement that had no named event
 at all -- 0.2);
@@ -4575,7 +4610,7 @@ STILL PRESENT in the traditions mirror -- both facts asserted); the
 no-new-decay-law fence (source-scan: no Math.pow half-life and no
 bandedStock call in the cohort path -- the decay is demographic, 5.1;
 under variant B this fence keeps its source-scan shape but its DOC claim
-narrows, which is the honest cost of that arm); cohort conservation at
+narrows, which is the honest cost of that arm [CORRECTED 2026-10-16 (coherence fold) — under the ruling the DOC claim does NOT narrow: RECENCY_WEIGHTS is a floored band modulation, not a decay constant (5.1).]); cohort conservation at
 the year fold (tag debits equal the pro-rata share, integer, the
 tag-totality walker closes and the people walker never moved); THE
 SELF-ORIGIN PIN, BOTH HALVES IN ONE FIXTURE (1.13.1): a settlement with
@@ -4593,11 +4628,12 @@ TUNING: age-band edges (year-denominated, inside the sub-century
 ruling CR-WC-4), recency weights, the espionage-ease magnitude.
 
 ### WC-16 VETERANS AND THE ORDER DIVIDEND
+[ADDED 2026-10-16 (coherence fold, req 16/17) — FIRST-VISIBLE: a PLANTING LINE (fold §4) at the return ("Thornhold's company came home and stood the wall watch"); the veteran dividend is felt at the NEXT muster (years) · TIER: aspatial-safe (via WC-15) · DEGRADED ARM: dark]
 
 Dependencies: WC-15.
 
 LANDS: veteranReads.js (the three reads: readiness term at
-warCapabilityOf + martialReadiness; defense term at the defenseLedger
+warCapabilityOf + martialReadiness; [ADDED 2026-10-16 (coherence fold) — martialReadiness.readiness01 already accrues from war and decays through peace (martialReadiness.js:1-31); VETERAN_READINESS_MAX composes WITH it under one cap over both, or is not added; measure double counting at build (findings WC-2 X19, PLAUSIBLE).] defense term at the defenseLedger
 read sites; crime-suppression term at the live crime read -- ALL THREE
 over the SELF-ORIGIN cohort row that 1.13.1 now states exists and that
 WC-13 already writes),
@@ -4667,7 +4703,7 @@ move-vocabulary mint") is contract 4.1.1.
 MEASURED FACT (verified at HEAD): settlementStrategy.js has NO closed
 exported move vocabulary today -- enumerateMoves is module-private at
 :634 with a bare re-export at :1360. Both volumes want to mint the
-closed list.
+closed list. [SUPERSEDED BY EVENT 2026-10-16 (coherence fold) — HB-1 MINTED STRATEGY_MOVES + the ALL_MOVE_TOKENS union (strategyMoves.js:61, 1013d58ba) with the cure "an amending volume adds its dispatched-but-unemitted moves to the UNION and not to the emitted set" (:29-31); WC-4 AMENDS the union; CR-WC-1 is closed by build order; wc-1b is SIGNED, not built (ODQ §186). Addresses: settlementStrategy.js:569 / :1314; navigate by symbol.]
 
 THE CONTRACT: exactly ONE module exports the closed move vocabulary,
 whichever volume BUILDS ITS STRATEGY WAVE FIRST mints it as a
@@ -4707,6 +4743,7 @@ subject matter; WC's three moves are an amendment), with WC-4
 re-slotting after HB-1 if the build order says HABIT first.
 
 ### 4.1.2 The law-band modulation table (collision C3)
+[RULED 2026-10-16 (coherence fold §3.1.13) — HB's learning row is NOT yet in the one table; see 1.3.2's bracket.]
 
 ONE frozen table, four consumer families: HABIT r16 learning
 rate/decay, WC relay efficiency (1.3.2), WC block cohesion (1.5.2),
@@ -4760,14 +4797,14 @@ WC-12, WC-13, WC-16 for that checklist to consume.
 
 - SUPPLY IS WY'S: F9 supplyCargo on armyTransit records, ONE writer
   armySupply.js, flag armySupplyEnabled, wave WY-8a. F9 is
-  owner-SIGNED under the blanket sign-off (2026-08-05) but UNBUILT.
+  owner-SIGNED under the blanket sign-off (2026-08-05) but UNBUILT. [RULED BY DELEGATION 2026-10-16 (OD-FC-21 — one army-supply truth: the live scalar `supplyIntegrity`/`foodReserve` (warArmyRecord.js:127, :132) already exists; F9's signature is contested (ARCH:689 UNSIGNED vs J-EM-9 SIGNED); recommendation: F9 the integer stock, the scalar DERIVED; see WC-10's bracket.]
   This volume's carried-supply consumers (WC-10 envelopes, WC-11
   starvation) HARD-GATE on WY-8a's build; the relay (WC-3) moves
   stores through supplyShipments and does not touch F9. Auxiliary
   supply rides the supplyShipments link chain for settlement-to-army
   consignments and F9 for what the army CARRIES -- two different
   conservation identities, deliberately not merged (census D question
-  5, resolved: carrier = shipments, cargo = F9).
+  5, resolved: carrier = shipments, cargo = F9). [RULED 2026-10-16 (coherence fold §3.1.14, §3.1.15) — supplyShipments carries no quantity, no army endpoint and no food (supplyShipments.js:17-21, :31-33); the settlement-to-army carrier is EC-12/EC-18's contracted caravan stream, credited by WC-1 (RULED BY DELEGATION 2026-10-16, OD-FC-35).]
 - THE THREE-EXHAUSTIONS CLAUSE: restated as this volume's one-clause
   veto in section 0.3; every supply consequence writes the army's own
   accumulatedAttrition, never realm warExhaustion.
@@ -4778,7 +4815,7 @@ WC-12, WC-13, WC-16 for that checklist to consume.
 - DISTANCE: hopWeeks/calibration is the ONLY distance law (per-digest
   calibration; every WC band derives from the published calibration
   or carries the WY-1 ordering note, 5.3). kmScale does not exist at
-  HEAD; if WC bands land before WY-1's spectrum surface, each carries
+  HEAD; [CORRECTED 2026-10-16 (coherence fold) — kmScale is LIVE (WY-1, d0c135f20: spatialDigest.js, distanceRead.js, modeSpeeds.js, campaignSpatialCanonize.js), though no world writes it yet (FPQ-37); CR-WC-15's ordering note now reads against the published scale.] if WC bands land before WY-1's spectrum surface, each carries
   an in-file derivation note and a shrink-only census row that WY-1
   closes (CR-WC-15).
 - COLUMNS: MigrationColumn is WY/POP's object; this volume WIDENS the
@@ -4804,7 +4841,7 @@ WC-12, WC-13, WC-16 for that checklist to consume.
   ally-reliability (R9), army-composition intelligence ((f) -- spies
   count banners), and the WATCHED taint read on occupied-origin
   blocks ((c)). Each is a product row through ES's existing product
-  registration, ranked by TAP_DEPTH, never by array index.
+  registration, ranked by TAP_DEPTH, never by array index. [STRUCK 2026-10-16 (coherence fold §3.1.17) — no product road: ES products are CLOSED at three (envoyErrandVocabulary.js:168), the target read carries no strength band (espionageProducts.js:28-31), and there is no registry to add a product to. Composition intel is WC-7's own news; ally-reliability rides HB-6's doctrine page; "the watched block" is the army owner's read (§5).]
 - THE CASUS DISCIPLINE (ES section 5 row 1): a new casus is a
   war-surface change costing the full six surfaces + scorer + mirror.
   This volume mints NO new casus (1.2.4) -- the discipline is
@@ -4827,7 +4864,7 @@ WC-12, WC-13, WC-16 for that checklist to consume.
   warCosts.js:367, warCoalitionExpenditure.js:159,
   deploymentReturn.js:284; cert row subsystemRowsWar.js:199): the
   people ledger EXTENDS it (blocks[] reconciles to it exactly) and
-  never forks it. Attribution by RECONSTRUCTION from the banked map,
+  never forks it. [CORRECTED 2026-10-16 (coherence fold) — the retired equality form: blocks[] reconciles DIRECTIONALLY (1.4.1's pin) and never writes the map (0.3); see 0.2's POOLS bracket. The writer address drifted (warHomeCosts.js:443/450 -> :445/:452); re-measure the reader addresses and navigate by symbol.] Attribution by RECONSTRUCTION from the banked map,
   never id-splitting -- the WR-8 law, pinned in WC-6.
 - deploymentReturn's conservation identity (fell the sole combat
   sink, largest-remainder apportionment, deploymentReturn.js:270-346
@@ -4845,7 +4882,7 @@ WC-12, WC-13, WC-16 for that checklist to consume.
   buyerId/sellerId drop-when-absent and NEVER victor fields (the
   standing WR-10 law; the conveyance-value read the overshoot
   signaling feeds is the market's existing read).
-- occupation.js: owns the five-rung ladder (STATE_LADDER :117,
+- occupation.js: owns the five-rung ladder (STATE_LADDER :117, [CORRECTED 2026-10-16 (coherence fold) — occupation.js addresses :117/:386/:442/:724 are now :125/:645/:724/:1059; navigate by symbol.]
   verified: contested / unstable / extractive / stabilized /
   vassalized) and resistance; this volume's R6 and resist-fork are
   consumer inputs to existing advances, never new writers. Requisition
@@ -4873,7 +4910,7 @@ WC-12, WC-13, WC-16 for that checklist to consume.
   timing law (origin captured at max(departTick, arrivalTick-1)
   because release destroys origin) is inherited unchanged -- the
   cohort tag banked in the column record is the same pattern, stated
-  in WC-13. DESIGN_TRADITIONS.md lives on the ledger branch only
+  in WC-13. [CORRECTED 2026-10-16 (coherence fold) — the column carries the ORIGIN (the capture-timing law); the cohort TAG is written by `shed` in the same event (WC-13, 0.2). No tag is banked for a later transfer (findings WC-2 C3).] DESIGN_TRADITIONS.md lives on the ledger branch only
   (census E hazard 1): the WC-14 build brief must carry the pointer.
 - demographics: cohort mortality rides the settlement's realized
   death fraction at the year fold (1.13.2); the two-lane
@@ -4884,7 +4921,7 @@ WC-12, WC-13, WC-16 for that checklist to consume.
 - pressureModel/stressors: the embattled member joins
   CRIME_ARCHETYPES; the stressor is catalog-ordinary; any counterforce
   row stressorDynamics needs (at ~759 eff) forces the leaf extraction
-  FIRST (census B question 6's answer: extract, never baseline-grow).
+  FIRST (census B question 6's answer: extract, never baseline-grow). [CORRECTED 2026-10-16 (coherence fold) — moot as stated: stressorDynamics.js is no longer in scripts/.size-baseline.json; the 800 layer ceiling still binds; re-measure its EFFECTIVE count before WC-12.]
 
 ---
 
@@ -5058,7 +5095,7 @@ vocabulary -- HB-1 or WC-4? RECOMMENDATION: build-order decides
 (first builder mints the shared dependency-free leaf; the other
 amends); if the chair schedules HABIT first, WC-4 re-slots after
 HB-1. The directive itself defers; the contract (4.1.1) makes either
-order safe.
+order safe. [SUPERSEDED BY EVENT 2026-10-16 (coherence fold) — HB-1 minted first (strategyMoves.js:61); CR-WC-1 is closed by build order; WC-4 amends the union (see 4.1.1's bracket).]
 
 CR-WC-2 COUNTS OR NAMES. The people ledger is architected as COUNTS
 (world-only boundary; the sanctioned named-mover is the roads layer;
@@ -5094,7 +5131,7 @@ separate owner-gated widening.
 CR-WC-7 THE coalitionShares SHIFT. Lit-only replacement of the
 strength split by the contribution split (WC-2). RECOMMENDATION:
 approve as a declared lit-only behavior shift with a one-time golden
-record at lighting; dark worlds untouched.
+record at lighting; dark worlds untouched. [RULED BY DELEGATION 2026-10-16 (OD-FC-30 — the lit-only coalitionShares golden shift is signed by the owner at its LIT unit (chain 2's lighting), recorded now so it is not discovered.]
 
 CR-WC-8 LAW-BAND EDGES, THE RELAY'S PARTICIPANTS, AND WHETHER THE RELAY
 IS LAW-BAND-PURE. Three
@@ -5150,6 +5187,7 @@ four-ledger list up front or serviceBonds carries a one-row addendum at
 its own landing; the recommendation is the full list up front, because a
 field batch signed in two pieces is the shape a later wave cites without
 re-reading.
+[RULED BY DELEGATION 2026-10-16 (OD-FC-20 — PARKED until chain 2 asks for a field; WC-0E's two normalizers stand writer-less] [CLARIFIED 2026-10-16 (coherence fold) — this question's status was spelled five ways (see the header bracket); WC-0E has already fixed two members' normalizer shapes (contributionLedger.js:54, worldState.js:163-174; §3.2.17); the list's "shipment relay buckets" is what WC-3 depends on (§3.1.15); the generals' `deployment.general` would join it (§3.1.18); the batch gates WC-3 and WC-6 onward.]
 
 CR-WC-10 THE SECOND (COUNTS-MOVER) MANIFEST. The earlier form of this
 question asked whether to WIDEN MOVEMENT_SITES to army-style steppers.
@@ -5173,7 +5211,7 @@ CR-WC-11 THE CRISIS TRIPLE. Is embattled expressible as the existing
 APPLY_STRESSOR/RESOLVE_STRESSOR pair? RECOMMENDATION: yes (an
 ordinary catalog stressor with a typed source reference); if build
 finds otherwise, the third event type is a store-consumer change and
-comes back to the chair before landing.
+comes back to the chair before landing. [RULED 2026-10-16 (coherence fold §3.1.16) — re-read against spatial/embattlement.js: a brigand siege is one more ramp term on the existing ledger, not a new stressor.]
 
 CR-WC-12 CATALOG ORDER. Amnesty/jubilee rows vs the queued TB tribute
 family (SOL_QUEUE row 23a). RECOMMENDATION: WC-0 registers its two
@@ -5185,13 +5223,13 @@ CR-WC-13 THE DEAD ARMS. readAllianceWebRisk's 'ally'/'defensive_pact'
 weights are dead under normalizeRelationshipType (census C hazard).
 RECOMMENDATION: record as a deliberate deferral in this volume;
 repair in a hygiene wave outside WC (behavior-neutral today; not
-this volume's scope).
+this volume's scope). [CORRECTED 2026-10-16 (coherence fold) — `'ally'` is now gone from LEVY_SUPPORT_TYPES (warHomeCosts.js:81); re-read this dead-arm finding against the live sets.]
 
 CR-WC-14 THE WY-8a GATE. WC-10/WC-11 hard-gate on armySupply.js.
 RECOMMENDATION: hold the gate (ARC A + WC-6..WC-9 deliver value
 without it; WC-11..WC-16 queue behind it); if WY-8a slips
 badly, the chair may re-scope WC-10 to a relay-throughput-only
-envelope (declared as v1) -- but the recommendation is to wait.
+envelope (declared as v1) -- but the recommendation is to wait. [RULED BY DELEGATION 2026-10-16 (OD-FC-21 — the gate's premise is contested: a carried-supply scalar already exists (see WC-10's bracket).]
 
 CR-WC-15 THE WY-1 ORDERING. Distance bands before the calibration
 spectrum surface exists. RECOMMENDATION: do not block; author bands
@@ -5210,7 +5248,7 @@ slotted WHOLE (WC-0..WC-5) rather than as a WC-0..WC-3 opener with
 call-ins deferred, which the old graph would have permitted and which
 would have stalled the entire composite arc at WC-9. Likewise WC-8 must
 precede WC-11, so the block forks cannot be deferred past the fission
-wave.
+wave. [SUPERSEDED BY EVENT 2026-10-16 (coherence fold §6) — FP-40 CHAIN-FIRST (FP-ORDER:12-17) replaced the queue slot: the unit of work is the next felt chain, and the fold recommends chain 2 THE AUXILIARY (WC-1, WC-2, WC-4 bound to REINFORCE, WC-5 minus the reliability page, WC-14's homecoming sentence on the live return) after the UI + prose release, with Arcs B-D RECORDED with the slot "THE HOST". RULED BY DELEGATION 2026-10-16, OD-FC-19 (the re-sequencing is the owner's).]
 
 CR-WC-17 K1 SCOPE. Do the peace-capable exercisers (famine aid,
 joint ventures, temple-raisings, trade drift) ship inside this
@@ -5271,7 +5309,7 @@ WC-15's hardest negative demands that a zero-mortality world decay NO
 bond and that a calendar-decay mutant RED. In a world with no deaths
 the count never moves but the band still steps and the bond falls to a
 quarter: the pin is unpassable against the design's own behavior.
-BOTH POSITIONS, NEITHER TAKEN:
+BOTH POSITIONS, NEITHER TAKEN: [RULED 2026-08-06 (b75e8c4d; WC_CHAIR_RULINGS.md:1434), recorded 2026-10-16 (coherence fold) — neither A nor B as drafted: B's calendar bands, with RECENCY_WEIGHTS reclassified as a BOUNDED, FLOORED band modulation (not a decay constant); 5.1 stands un-narrowed; WC-15 lands the three-pin set. The text below is the pre-ruling record.]
 
   POSITION A -- BAND BY MORTALITY-REALIZED COMPOSITION. A cohort reaches
   `rooted` as its arrival generation is thinned, not as the calendar
@@ -5289,10 +5327,10 @@ BOTH POSITIONS, NEITHER TAKEN:
   so directive (n)'s "no new constant", 1.13.2's "no new decay law",
   and 5.1's "authors ZERO decay constants" must all be amended in the
   same commit, and the WC-15 pin must be rewritten to assert only that
-  the COUNT-driven term is mortality-driven.
+  the COUNT-driven term is mortality-driven. [CORRECTED 2026-10-16 (coherence fold) — the RULED reading is NOT this Position B as drafted: RECENCY_WEIGHTS was reclassified a bounded floored modulation, so none of these amendments is owed (5.1; findings WC-2 C2).]
 
 The chair rules; until then WC-15 carries the pin in both variants and
-the wave does not land. The volume states no preference here, because
+the wave does not land. [CORRECTED 2026-10-16 (coherence fold) — ruled; see this question's opening bracket.] The volume states no preference here, because
 the directive's own sentence supports each arm and picking one is an
 owner-facing narrowing either way.
 
@@ -5301,7 +5339,7 @@ around rather than answers). 1.1's estate truth measured two live gates
 on the receiver-side levy sweep that between them forbid the directive's
 central cases:
 
-  GATE 1 -- THE DEPLOYER EXCLUSION. warHomeCosts.js:391 excludes from
+  GATE 1 -- THE DEPLOYER EXCLUSION. warHomeCosts.js:391 [CORRECTED 2026-10-16 (coherence fold) — now :393 (and :115-116 -> :116-118); navigate by symbol.] excludes from
   levy any settlement that is itself fielding an army
   (`...Object.keys(deployments).map(String)` in the exclude set). Its
   in-file rationale (:386-390) is about DOUBLE-LEVY across overlords
@@ -5418,7 +5456,7 @@ row gains its `grade` field there:
                   intimacy-priced grade (needs comradeship, WC-9)
 
 CALL_IN_ANSWERS (callInErrand.js, WC-5): answered | partial | refused |
-lapsed -- `lapsed` is silence past the horizon and is NOT a refusal.
+lapsed -- `lapsed` is silence past the horizon and is NOT a refusal. [RULED 2026-10-16 (coherence fold §5) — the answer rung reads `half_answered`; see 1.9.1's bracket.]
 
 CALL_IN_OUTCOMES (callInErrand.js, WC-5): prevailed | stalemated |
 lost -- did the SUPPORTED SIDE win, read off readWarTerminations'
@@ -5608,6 +5646,7 @@ be exactly the two-arity failure 7.A.8's sibling correction closes.
     foraging     unsupplied, drawing down the countryside
     brigand      the located predation state (WC-12's contest body)
     dissolving   hop-and-shed in progress; sheds until empty
+    [RULED 2026-10-16 (coherence fold §5) — `brigand` reads `raiding`; see 1.7.2's bracket.]
 
 ### 7.A.7 EMBATTLED_RESOLUTIONS (brigandContest.js)
 
@@ -5616,6 +5655,7 @@ be exactly the two-arity failure 7.A.8's sibling correction closes.
     absorption    the town takes them: sheds into cohorts
     buy_off       tribute resolves it AND teaches raiding pays
                   (graded close into the habit system)
+                  [RULED 2026-10-16 (coherence fold §5) — `attrition` / `absorption` read `worn_down` / `absorbed`; see 1.8.1's bracket.]
 
 ### 7.A.8 COLUMN CLASSES (spatial/migration.js widening) -- ALL AT WC-0
 
@@ -5626,6 +5666,7 @@ be exactly the two-arity failure 7.A.8's sibling correction closes.
                                                             verified)
     MILITARY_COLUMN_CLASSES    = ['reinforcement_column', 'shed_column',
                                   'veteran_return']
+                                  [RULED 2026-10-16 (coherence fold §3.1.7) — ownership: POP owns the CIVILIAN classes, WC the MILITARY classes, ONE union, one `columnOf` whitelist (migration.js:504-511, landed by WC-0B); POP-1's return class is ruled ONCE across POP/WC/LG/ES as `column_return` (not `returning`); WC's landed `veteran_return` stands (landed tokens never rename).]
     COLUMN_CLASSES             = frozen union of both, the totality
                                  export; the class is part of the
                                  column KEY (migration.js:553,
@@ -5683,7 +5724,7 @@ half lands with the WC-6 producer). isDemographicColumn's other three
 consumers -- demographicsMigration.js:458, :505, :636 -- are read-side
 and unchanged, verified at HEAD. WC-0 carries the executed
 widening-omitted mutant, and it is the highest-value pin in that wave
-because everything else there is byte-identical.
+because everything else there is byte-identical. [SUPERSEDED BY EVENT 2026-10-16 (coherence fold) — landed (WC-0B); the addresses drifted as WC-0's bracket records; navigate by symbol.]
 
 ### 7.A.9 COHORT_AGE_BANDS (residentCohorts.js)
 
@@ -5691,7 +5732,7 @@ because everything else there is byte-identical.
     settled         the working generation
     rooted          the generation that has become the town
 
-WHAT STEPS THESE BANDS IS UNRULED (CR-WC-21). Under position A they
+WHAT STEPS THESE BANDS IS UNRULED (CR-WC-21). [CORRECTED 2026-10-16 (coherence fold) — RULED: calendar edges AGE_BAND_EDGES_YEARS 5 / 20; RECENCY_WEIGHTS a floored band modulation; mortality is the only zeroing road (5.1).] Under position A they
 step as the arrival generation is thinned by mortality; under position
 B they step on the calendar at AGE_BAND_EDGES_YEARS 5 / 20 (the values
 7.B carries). The earlier wording of this appendix asserted BOTH -- "~5
@@ -5758,7 +5799,7 @@ rationales; every one is vetoable at soak; none enters
 proposedSoakBands.js before ratification. Derived-then-frozen entries
 (marked DERIVE) are measured against the seeded corpus at their
 wave's landing and recorded in-file with range and date (the
-dead-band discipline, 5.5).
+dead-band discipline, 5.5). [ADDED 2026-10-16 (coherence fold §4, §3.3.10, req 18) — the pulse tick is ONE WEEK and this volume cites INTERVAL_WEEKS zero times: every tick-denominated row here (RESERVATION_HORIZON 13, CALL_IN_HORIZON_TICKS 26, FORAGE_ESCALATE_TICKS 3, the year-denominated age bands) is authored as a named constant whose comment names its season / half-year / year and reads INTERVAL_WEEKS where its file is not frozen; the time-base walker (SP-7, tests/lint/timeBase.walker.test.js) REDS a bare 13/26/52 in an expression. Every row of this table is UNMEASURED under requirement 18 until its soak.]
 
 THERE IS NO WC-0 ROW AND THAT IS NOW TRUE RATHER THAN ASSERTED. WC-0's
 closing line reads "TUNING: none (registration mints no constants)"
@@ -6018,6 +6059,7 @@ at WC-8, drift at WC-9, learning at HABIT's own fold.
                                                        claim narrows in
                                                        the same commit
                                                        (1.13.2)
+                                                       [CORRECTED 2026-10-16 (coherence fold) — under the CR-WC-21 ruling AGE_BAND_EDGES_YEARS (the row above) is LIVE (calendar bands kept) and RECENCY_WEIGHTS is a floored band modulation, NOT a decay constant: 5.1 does not narrow; the floor is the last weight (.25).]
     WC-15 ESPIONAGE_EASE_MAX              0.15         a term, never a
                                                        dominator
     WC-16 VETERAN_READINESS_MAX           0.25         caps beside
@@ -6037,7 +6079,7 @@ settlement, counterparty, war anchor where live), a typed action, and
 a typed reason (the loading factors); significance is BORROWED. The
 sentence families ship in the same wave as the kind (K7); pools are
 script-extracted and never hand-edited after extraction (the TR-1
-pool law).
+pool law). [ADDED 2026-10-16 (coherence fold, req 22c) — every shape here is re-authored at build under THE EVIDENCE LAW (owner 10-02/10-03, "complete, not cryptic") and the voice program ("actions, not potential"): rung words (principal / belligerent / materiel) never reach a DM sentence raw; wc_relay_shortfall names the consignment, the loss and the road and stays silent on the hand; a PLANTING LINE (fold §4) names a cause in the record's voice and nothing about the future.]
 
     KIND                        WAVE   SHAPE (one authored family each)
     wc_contribution_arrival     WC-1   [sender] fed/reinforced
@@ -6045,6 +6087,7 @@ pool law).
                                        [target]; the kind and band
     wc_contribution_close       WC-1   the war done, the ledger read
                                        aloud: grade + band
+                                       [CORRECTED 2026-10-16 (coherence fold) — at WC-1 the grade is the deliveryGrade; the CONTRIBUTION_CLOSE_GRADES grade joins at WC-9 (findings WC-2 C9).]
     wc_relay_shortfall          WC-3   the sender's book came up short
                                        on the [receiver] consignment;
                                        NOBODY IS NAMED. Fires at the
@@ -6525,6 +6568,7 @@ corrected graph rather than the old one.
     WC-1  <- WC-0
     WC-2  <- WC-1
     WC-3  <- WC-1            [E-row slice gated: WY encounter table]
+    [ADDED 2026-10-16 (coherence fold §3.1.15) — WC-3 also depends on CR-WC-9's "shipment relay buckets" (OD-FC-20); it is CUT-TO-SENTENCE and RECORDED with the slot "THE HOST".] [WITHDRAWN 2026-10-16 after skeptic S4 B5 — no clause of this volume is cut: a cut narrows the owner's own words (the lawful-side support network; (h) COMRADES KNOW EACH OTHER; R6; K6 CORE, accepted in-chat 2026-08-06) against "build it all"; the wave is RECORDED WITH THE SLOT "THE HOST", charter kept whole.]
     WC-4  <- WC-2            [vocabulary contract: HB-1 arbitration;
                               lands the EXECUTOR's aspatial arm]
     WC-5  <- WC-1, WC-2      [call-in slice gated: SP-D; doctrine
@@ -6573,7 +6617,7 @@ than one, so it can no longer run beside WC-5 -- which is correct,
 because it consumes WC-5's request record. WC-8 must precede WC-11,
 which removes the old graph's licence to defer WC-8 indefinitely.
 WC-7 and WC-8 remain parallel after WC-6. Both flags and both trios are
-unchanged, so the CQ5 serialization constraint still binds only the
+unchanged, [CORRECTED 2026-10-16 (coherence fold) — SIX flags (SECTION 3's FLAG FAMILY); the five flag-landing commits carry six trios, WC-0 carrying two (findings WC-2 C5).] so the CQ5 serialization constraint still binds only the
 five flag-landing commits (WC-0's two trios, WC-6's, WC-10's, WC-13's,
 WC-15's), which serialize; all other wave commits parallelize under
 the shared-tree discipline.
@@ -6679,27 +6723,27 @@ A count taken from that phrase would be a fabricated number.
 
 | # | Neighbour | The contract | The tripwire |
 |---|---|---|---|
-| 1 | **HABIT / HB-1 — the strategist move vocabulary** (collision C1) | MEASURED at HEAD: `settlementStrategy.js` exports NO closed move vocabulary — `enumerateMoves` is module-private at `:634` with a bare re-export at `:1360`. Exactly ONE module exports the closed list; whichever volume builds its strategy wave FIRST mints it as a dependency-free leaf, the second AMENDS the same leaf. WC's three auxiliary moves (`send_reinforcements_to` / `send_supplies_to` / `recall_support`) register in WC-4 ONLY through that shared leaf. ⚠ Until the reciprocal clause is written INTO the habit directive's memory file and `FABLE_VALIDATION_QUEUE.md`, this is a RECOMMENDATION WITH A FENCE, not a contract — a contract written in one of two volumes has one signature | **THE MOVE VOCABULARY FENCE, WC-0** (the registration wave, so it exists BEFORE either volume's strategy wave): matches an exported const against `/^[A-Z0-9_]*(STRATEGIST\|SETTLEMENT)?_?MOVES?$/` plus the frozen alias list `['STRATEGY_MOVES','STRATEGIST_MOVES','MOVE_TYPES','SETTLEMENT_MOVES','MOVE_VOCABULARY']`; EXCLUDES `ENGAGEMENT_MOVES` (`convergence.js:185`) and `REACTIVE_MOVES` (`:743`) by exact identifier, and that exclusion is itself pinned. ASSERTS at-most-one tree-wide **with `toEqual` against a named list, never a bare `<= 1`**, so a signature gone blind reads as an empty list rather than a pass. NON-VACUITY arm: the scan must FIND the excluded pair. Red proof: a second exporter planted, caught, removed |
+| 1 | **HABIT / HB-1 — the strategist move vocabulary** (collision C1) | MEASURED at HEAD: `settlementStrategy.js` exports NO closed move vocabulary — `enumerateMoves` is module-private at `:634` with a bare re-export at `:1360`. [CORRECTED 2026-10-16 (coherence fold) — settlementStrategy.js:569 / :1314; navigate by symbol; HB-1 minted STRATEGY_MOVES (strategyMoves.js:61), so WC-4 amends the union.] Exactly ONE module exports the closed list; whichever volume builds its strategy wave FIRST mints it as a dependency-free leaf, the second AMENDS the same leaf. WC's three auxiliary moves (`send_reinforcements_to` / `send_supplies_to` / `recall_support`) register in WC-4 ONLY through that shared leaf. ⚠ Until the reciprocal clause is written INTO the habit directive's memory file and `FABLE_VALIDATION_QUEUE.md`, this is a RECOMMENDATION WITH A FENCE, not a contract — a contract written in one of two volumes has one signature | **THE MOVE VOCABULARY FENCE, WC-0** (the registration wave, so it exists BEFORE either volume's strategy wave): matches an exported const against `/^[A-Z0-9_]*(STRATEGIST\|SETTLEMENT)?_?MOVES?$/` plus the frozen alias list `['STRATEGY_MOVES','STRATEGIST_MOVES','MOVE_TYPES','SETTLEMENT_MOVES','MOVE_VOCABULARY']`; EXCLUDES `ENGAGEMENT_MOVES` (`convergence.js:185`) and `REACTIVE_MOVES` (`:743`) [CORRECTED 2026-10-16 (coherence fold) — now convergenceReactive.js:40 (ENGAGEMENT_MOVES convergence.js:190); REACTIVE_MOVES holds `reinforce`, which WC-4 binds.] by exact identifier, and that exclusion is itself pinned. ASSERTS at-most-one tree-wide **with `toEqual` against a named list, never a bare `<= 1`**, so a signature gone blind reads as an empty list rather than a pass. NON-VACUITY arm: the scan must FIND the excluded pair. Red proof: a second exporter planted, caught, removed |
 | 2 | **HABIT r16 / the law-band modulation table** (collision C3) — four consumer families: HABIT learning rate-decay, WC relay efficiency (1.3.2), WC block cohesion (1.5.2), WC drift expression (1.6.3) | ONE frozen zero-import leaf; same mint-first arbitration as row 1 and the same two repairs. Each consumer may carry its own CURVE ROW in the one table; none may carry a private table. ⛔ **AND THE ROW LANDS WITH ITS CONSUMER, NOT WITH THE TABLE**: WC-0 registers the table's SHAPE (closed key set, throw-on-unknown, totality export, registration entry point) and **NO VALUES**, because a curve is a constant and constants are owner-signature surface under THE PROMISE — landing four of them in the wave whose closing line reads "TUNING: none" is exactly the drift the versioned-tuning carve-out exists to stop. `lawWordFor`'s three words are the only vocabulary it may key on; no fourth word ever | **THE LAW-BAND TABLE FENCE, WC-0**: matches `/LAW_BAND[A-Z0-9_]*\|[A-Z0-9_]*MODULATION_TABLE$/` plus any module exporting `registerLawBandCurve`; EXCLUDES `LAW_WORDS` and `LAW_WORD_EDGES` (`lawWord.js`) — the fence guards the CURVE TABLE, not the words. ASSERTS at-most-one exporting module. NON-VACUITY arm: the scan must FIND `lawWord.js`'s excluded pair. Plus the table's TOTALITY pin, stated in the direction that survives a partly-filled table: **every REGISTERED key has a curve and every curve names a registered key — never that the table is full at WC-0** |
 | 3 | **HABIT r5 — the believed-doctrine axis family** (collision C2), minted on SP-B's machinery | HABIT MINTS; **this volume CONSUMES and mints no axis** — R9's reliability page, clause (f)'s believed share, clause (h)'s comrade accuracy. ⚠ COMRADE ACCURACY IS ARCHITECTED AT 1.6.4, NOT IN THE COORDINATION NOTE: it is a bounded fidelity modifier on the existing belief reads (`comradeFidelity01`, capped by `COMRADE_FIDELITY_MAX < 1.0`), not a new channel, and it improves the ACCURACY of HABIT's level-one anticipation **without raising the LEVEL** — the composition with the habit directive's "anticipation bounded at level ONE" is stated in 1.6.4 | Until HABIT lands, PRE-PINNED SEAM ROWS: WC-5 for the reliability page and WC-9 for the fidelity term, **each with an executed red-capability proof** (WC-5's PINS block names "the two seam rows (SP-D, HABIT)"). At WC-9 the comrade-fidelity rider runs THREE mutants — **term-deleted, cap-removed, and depth-raised** — the last being the one that proves accuracy improves while the anticipation LEVEL never does |
 | 4 | **HABIT r17's named-domain checklist — graded closes** | Every WC fork that should teach (the call-in answer, the block fork, the host rejection, the buy-off, the muster fork) emits a HABIT-shaped graded close where HABIT is lit, **and a deferred-with-reason row where it is not**. HABIT's checklist gains the auxiliary rows at ITS fold; this volume's closes are enumerated in WC-5, WC-8, WC-12, WC-13 and WC-16 for that checklist to consume | The buy-off-teaches pin at WC-12: a buy-off close writes the graded close the habit system will read, and **the no-close mutant reds the seam row** |
-| 5 | **WAYFARE / WY-8a — carried supply (F9 `supplyCargo`)**, ONE writer `armySupply.js`, flag `armySupplyEnabled` | SUPPLY IS WY'S. F9 is owner-SIGNED under the blanket sign-off (2026-08-05) but **UNBUILT**. WC's carried-supply consumers (WC-10 envelopes, WC-11 starvation) HARD-GATE on WY-8a's build; the relay (WC-3) moves stores through `supplyShipments` and does not touch F9. ⭐ Auxiliary supply rides the `supplyShipments` link chain for settlement-to-army consignments and F9 for what the army CARRIES — **two different conservation identities, deliberately not merged** (carrier = shipments, cargo = F9) | The dependency graph's own gate: `WC-10 <- WC-3, WC-6 [HARD GATE: WY-8a built]`. WC-10 is undispatchable until WY-8a lands, so the seam cannot be crossed by a wave that merely assumes the field |
+| 5 | **WAYFARE / WY-8a — carried supply (F9 `supplyCargo`)**, ONE writer `armySupply.js`, flag `armySupplyEnabled` | SUPPLY IS WY'S. F9 is owner-SIGNED under the blanket sign-off (2026-08-05) but **UNBUILT**. [RULED BY DELEGATION 2026-10-16 (OD-FC-21 — one army-supply truth; the live `supplyIntegrity`/`foodReserve` scalar already exists (warArmyRecord.js:127, :132); see WC-10's bracket.] WC's carried-supply consumers (WC-10 envelopes, WC-11 starvation) HARD-GATE on WY-8a's build; the relay (WC-3) moves stores through `supplyShipments` and does not touch F9. ⭐ Auxiliary supply rides the `supplyShipments` link chain for settlement-to-army consignments and F9 for what the army CARRIES — **two different conservation identities, deliberately not merged** (carrier = shipments, cargo = F9) | The dependency graph's own gate: `WC-10 <- WC-3, WC-6 [HARD GATE: WY-8a built]`. WC-10 is undispatchable until WY-8a lands, so the seam cannot be crossed by a wave that merely assumes the field |
 | 6 | **WY's THREE-EXHAUSTIONS law** (`accumulatedAttrition` vs realm `warExhaustion`) | Restated as this volume's ONE-CLAUSE VETO in §0.3: **every supply consequence writes the army's OWN `accumulatedAttrition`, never realm `warExhaustion`** | The envelope exhaustion WRITE-SET pin at WC-10, whose red proof is **the realm-exhaustion-write mutant — the one-clause veto, executed**. A write-set pin rather than a value pin is what makes the veto testable rather than aspirational |
 | 7 | **WY's closed ENCOUNTER TABLE** (E14 exists; E16 brigand × settlement and E17 column × host are this volume's) | The table is WY's; the rows are this volume's. **Every new co-location resolver adds its row IN ITS OWN COMMIT**, moving the closed table's anti-vacuity count | Row and resolver land in the SAME COMMIT, and the table's existing ANTI-VACUITY COUNT moves with them — a row admitted without its resolver leaves the count unmoved. Graph: `WC-12 <- WC-11 [E16/E17 rows with resolvers]`. ⚠ Where the WY table does not yet exist, the arm falls back to pre-pinned seam rows on the WC-3 pattern |
-| 8 | **WY-1 — `hopWeeks` / per-digest calibration, and `kmScale`** | `hopWeeks`/calibration is the ONLY distance law; every WC band derives from the published calibration at READ TIME or carries the WY-1 ordering note. ⚠ **MEASURED: `kmScale` does not exist at HEAD.** If WC bands land before WY-1's spectrum surface, each carries an in-file derivation note. ⚠⚠ Never an authored absolute week literal: a realm spans roughly 2..8 march weeks under per-digest calibration, so any authored band ≥ 9 refuses nothing (the dead-band class) | A SHRINK-ONLY CENSUS ROW per band (CR-WC-15), which reds if the population of un-calibrated bands GROWS, closed by WY-1 when it publishes; plus, when `kmScale` lights, a declared one-time behavior shift under the golden-shift law rather than a silent re-record |
+| 8 | **WY-1 — `hopWeeks` / per-digest calibration, and `kmScale`** | `hopWeeks`/calibration is the ONLY distance law; every WC band derives from the published calibration at READ TIME or carries the WY-1 ordering note. ⚠ **MEASURED: `kmScale` does not exist at HEAD.** [CORRECTED 2026-10-16 (coherence fold) — kmScale is live (WY-1, d0c135f20).] If WC bands land before WY-1's spectrum surface, each carries an in-file derivation note. ⚠⚠ Never an authored absolute week literal: a realm spans roughly 2..8 march weeks under per-digest calibration, so any authored band ≥ 9 refuses nothing (the dead-band class) | A SHRINK-ONLY CENSUS ROW per band (CR-WC-15), which reds if the population of un-calibrated bands GROWS, closed by WY-1 when it publishes; plus, when `kmScale` lights, a declared one-time behavior shift under the golden-shift law rather than a silent re-record |
 | 9 | **`MigrationColumn`** — WY/POP's object (`spatial/migration.js`) | This volume WIDENS the class list and **adds no second column ledger**. `MILITARY_COLUMN_CLASSES` (3 members incl. `reinforcement_column`) plus the frozen union land ALL AT WC-0; the stamp and key predicates widen from the DEMOGRAPHIC list to the union in the same commit, byte-identical because no producer exists yet. **The `travelClass`-in-the-key discipline is preserved verbatim** | The column key-collision pin, FIRST at WC-6 (**the class-out-of-key mutant on a `reinforcement_column`**) and RE-RUN at WC-13 on a `shed_column` — ⚠ the re-run is NON-VACUOUS only because `reclass` is the first producer that ever stamps the class; before it, the re-run passed happily over a member nothing minted |
 | 10 | **WY's LAW M — the movement manifest** (`tests/lint/namedPersonTransitTotality.walker.test.js`, `MOVEMENT_SITES`) | ⛔ **LAW M IS NOT WIDENED.** MEASURED at HEAD: `MOVEMENT_SITES` is a NAMED-PERSON leg-physics census by its own header and by its discovery signature; `armyTransit` is OUT OF ITS SCOPE, not exempt from it, because it moves COUNTS. WC-11 therefore mints a SECOND, counts-mover manifest with its own signature, **leaving WY's law and its header untouched**. WY seam 6's filed candidate is answered by the second manifest, not by an edit to WY's guard (CR-WC-10) | The counts-mover manifest at WC-11: **the stepper-without-row plant**, plus **the DISJOINTNESS PROOF — a planted named-person token does NOT enter this manifest, and law M is unedited**. The disjointness arm is the half that keeps the second manifest from quietly becoming a fork of the first |
 | 11 | **WY-8a — the shared ARRIVAL EDGE detector** | The army-side arrival edge detector minted in WC-6 is **offered back to WY-8a as the shared edge — one detector, two consumers** — coordinated at the fold | Pre-pinned per §7.E's closing law: "WY-8a arrival sharing" is a seam row carrying **an executed proof that the pin CAN red (the planted-consumption test), per the TR-5 pattern** |
 | 12 | **ESPIONAGE — the casus discipline** (ES §5 row 1) | A new casus is a war-surface change costing the full six surfaces + scorer + mirror. **This volume mints NO new casus** — the discipline is honored by SCALING EXISTING READS | §2.4's stated fence, a one-line veto surface: **"The casus taxonomy: zero new `WAR_REASON_TYPES` members."** MEASURED: `WAR_REASON_TYPES` is named exactly ONCE in the whole 6,492-line volume, and it is in that fence — so a WC diff introducing a member is visible by inspection against a surface with no competing mentions |
 | 13 | **ESPIONAGE — the competence/porosity terms** (`COMP_CRIME_W`, `criminalStrength01Of`) | Clause (p)'s crime-eases-infiltration composes through the EXISTING competence terms; **no second spelling of the catch model**. The diaspora-ease term (1.13.3) enters the same composition as one more named term, and **the worse-of discipline for security reads is preserved** | The crime-composition pin at WC-12: **the worse-of discipline holds — no blended fourth spelling — enforced by source scan** |
-| 14 | **`leviedPopulationBySource`** (writer `warHomeCosts.js:443/450`; readers `warCosts.js:367`, `warCoalitionExpenditure.js:159`, `deploymentReturn.js:284`; cert row `subsystemRowsWar.js:199`) | The people ledger **EXTENDS it — `blocks[]` reconciles to it exactly — and never forks it.** ⚠⚠ Attribution by RECONSTRUCTION from the banked map, **never by splitting an id on `.`** (the standing WR-8 law) | The blocks/levied reconciliation pin at WC-6, now DIRECTIONAL, with **THREE mutants**: headcount-skew; MISSING-SELF-BLOCK (reds clause (i)'s total identity); and ELECTED-ROW-WRITTEN-INTO-THE-LEVY-MAP (reds clause (ii)'s equality arm). ⚠ The old equality-everywhere form is recorded UNPASSABLE so no wave restores it as a "tightening". Plus the reconstruction-attribution scan at WC-6: **an id-split call planted and caught** |
+| 14 | **`leviedPopulationBySource`** (writer `warHomeCosts.js:443/450`; readers `warCosts.js:367`, `warCoalitionExpenditure.js:159`, `deploymentReturn.js:284`; cert row `subsystemRowsWar.js:199`) | The people ledger **EXTENDS it — `blocks[]` reconciles to it exactly — and never forks it.** [CORRECTED 2026-10-16 (coherence fold) — the retired equality form; the reconciliation is DIRECTIONAL (1.4.1) and blocks[] never writes the map (0.3).] ⚠⚠ Attribution by RECONSTRUCTION from the banked map, **never by splitting an id on `.`** (the standing WR-8 law) | The blocks/levied reconciliation pin at WC-6, now DIRECTIONAL, with **THREE mutants**: headcount-skew; MISSING-SELF-BLOCK (reds clause (i)'s total identity); and ELECTED-ROW-WRITTEN-INTO-THE-LEVY-MAP (reds clause (ii)'s equality arm). ⚠ The old equality-everywhere form is recorded UNPASSABLE so no wave restores it as a "tightening". Plus the reconstruction-attribution scan at WC-6: **an id-split call planted and caught** |
 | 15 | **`deploymentReturn`'s conservation identity** (`fell` the sole combat sink; largest-remainder apportionment; `:270-346` verified) | Every new branch this volume adds — defect, orphan, shed, and the tag arms of the census-debiting events — **preserves the identity by naming its event in the walker's closed list**. The identity's statement WIDENS and never weakens. `untag` moves no counts and is inert to this identity by construction | The conservation walker at WC-6: **a one-count-drop mutant PER BRANCH**, with per-event coverage growing at each wave's closed-list addition. ⚠⚠ Plus THE SOURCE BRANCH's **BIRTH-INFLATION mutant**, run beside the three sink-drop mutants — before round 3 `births` was a bare term and an invented birth was invisible by construction: **a walker that can see a stolen death and not an invented birth is a guard with one eye** |
 | 16 | **WR-6 — `warCoalitionLedger.js:5-6`** | **No membership list, no stored expenditure total on deployments; `joinLedger` stays single-anchor.** Contribution is its own ledger; balances are DERIVED READS | §2.4's stated fence ("`joinLedger`: stays single-anchor; no second anchor kind") plus **THE ONE-BALANCE FENCE at WC-5**: a source scan asserting the answer fork, the breach grade and the K5 terms weight all call `contributionReads.js`'s ONE balance read and never reach into `warContributions` or the edge archive. ⭐ **THE PIN THAT PROVES THEY ARE ONE QUANTITY**: forgiving the obligation moves the answer fork AND the K5 terms weight in the SAME TICK — the forgiveness-invisible-to-the-fork mutant reds, and that mutant is exactly what a second reading of "the balance" would have shipped |
 | 17 | **WR-10 — the sovereignty market** | WR-10 owns the debt-to-vassalage transaction shape; **this volume adds the intent road only.** ⚠⚠ Sale treaties keep `buyerId`/`sellerId` drop-when-absent and **NEVER victor fields** (the standing WR-10 law); the conveyance-value read the overshoot signaling feeds is the market's EXISTING read | The `TERM_FAMILIES` consumer census at WC-0: **a planted iteration over `TERM_FAMILIES` caught**; plus the grown set recorded in `sovereigntyBundleWr10`'s expectations (`WR10_FAMILIES_AT_LANDING` NEVER widened — the §52.1 struck-widening law) and PIN 1b consumed AS ITS OWN DOCSTRING INSTRUCTS, in the same commit with the reason quoted. ⚠ The family list is DERIVED (`peaceTermsCatalog.js:192`), so the no-producer recipe does not reach it |
-| 18 | **`occupation.js`** — owner of the five-rung ladder (`STATE_LADDER :117`: contested / unstable / extractive / stabilized / vassalized) and of resistance | WC's R6 and resist-fork are **consumer inputs to existing advances, never new writers.** RELEASE STANDING composes into `stabilizationSuitability (:386)`, the existing input to `advanceOccupationState (:442)`, so a loyal over-deliverer climbs sooner to `vassalized` through `vassalizationOutcomes (:724)`. ⛔ **THE REGRESSION AND LIBERATION ARMS ARE NOT TOUCHED**: the collapse arm, the regress-below-contested arm and the `MAX_CONTESTED_DWELL` valve are RESISTANCE's, and routing loyalty standing into them would put loyalty and revolt on ONE LEVER WHERE THEY CANCEL | The three-deliverer coercion pin at WC-4: **the standing-deleted mutant (all three arms)** and **the STANDING-INTO-REGRESSION mutant — the neutral arm, in which a loyal town's occupation collapses.** The second mutant is the executable form of the "arms not touched" clause: it reds precisely when loyalty has been wired into the revolt lever |
+| 18 | **`occupation.js`** — owner of the five-rung ladder (`STATE_LADDER :117`: contested / unstable / extractive / stabilized / vassalized) [CORRECTED 2026-10-16 (coherence fold) — addresses :117/:386/:442/:724 are now :125/:645/:724/:1059; navigate by symbol.] and of resistance | WC's R6 and resist-fork are **consumer inputs to existing advances, never new writers.** RELEASE STANDING composes into `stabilizationSuitability (:386)`, the existing input to `advanceOccupationState (:442)`, so a loyal over-deliverer climbs sooner to `vassalized` through `vassalizationOutcomes (:724)`. ⛔ **THE REGRESSION AND LIBERATION ARMS ARE NOT TOUCHED**: the collapse arm, the regress-below-contested arm and the `MAX_CONTESTED_DWELL` valve are RESISTANCE's, and routing loyalty standing into them would put loyalty and revolt on ONE LEVER WHERE THEY CANCEL | The three-deliverer coercion pin at WC-4: **the standing-deleted mutant (all three arms)** and **the STANDING-INTO-REGRESSION mutant — the neutral arm, in which a loyal town's occupation collapses.** The second mutant is the executable form of the "arms not touched" clause: it reds precisely when loyalty has been wired into the revolt lever |
 | 19 | **`warTermination.js`** — frozen at 818 eff, BASELINED shrink-only | The close EVENT this volume folds on is `readWarTerminations`' EXISTING output; **the contribution fold is a CONSUMER. Zero edits to the frozen file.** Stance scaling reads happen in consumers | §2.4's stated fence ("`warTermination.js`: zero edits (frozen)") standing on the shrink-only size baseline at tolerance zero — **any diff to this file originating in a WC wave is the tripwire** (the `momentum.js` precedent from HB §8.1 row 8, applied to WC's own frozen surface) |
-| 20 | **`traditions/relations.js`** — `advanceRelations` | The introduction attempt is a **FOURTH pass with its own `mutationLog` kind**. The influx-read TIMING LAW is inherited unchanged: **origin captured at `max(departTick, arrivalTick-1)` because release destroys origin** — the cohort tag banked in the column record is the same pattern. ⚠ `DESIGN_TRADITIONS.md` lives on the LEDGER BRANCH ONLY, so the WC-14 build brief must carry the pointer | The most-attempts-fail pin at WC-14: across the seeded corpus the introduction adoption rate lands inside an authored band, and **the always-adopt mutant reds**. Plus the double-effect single-call pin (one fixture, both effects, the SAME share value read from ONE call — the two-computations mutant reds) |
-| 21 | **DEMOGRAPHICS** — cohort mortality and the two-lane double-answer hazard | Cohort mortality rides the settlement's REALIZED death fraction at the year fold. ⚠ The two-lane hazard (`populationDynamics` + `demographics` both moving people) is **NOT WORSENED: every WC outflow is a people-ledger event through the column machinery, NEITHER PRESSURE LANE**; the wave P4 reconciliation stays deferred and untouched | The mortality-decay fence at WC-15: **the calendar-decay mutant plus the zero-death-rate no-fade fixture** — ⚠ CARRIED IN BOTH VARIANTS until CR-WC-21 is ruled, so **the wave does not land on a coin flip.** The people-ledger half is held by WC-6's conservation walker, which admits no count that moves outside a named event |
+| 20 | **`traditions/relations.js`** — `advanceRelations` | The introduction attempt is a **FOURTH pass with its own `mutationLog` kind**. The influx-read TIMING LAW is inherited unchanged: **origin captured at `max(departTick, arrivalTick-1)` because release destroys origin** — the cohort tag banked in the column record is the same pattern. [CORRECTED 2026-10-16 (coherence fold) — the column carries the ORIGIN; the cohort TAG is written by `shed` in the same event (WC-13); see 4.5's bracket.] ⚠ `DESIGN_TRADITIONS.md` lives on the LEDGER BRANCH ONLY, so the WC-14 build brief must carry the pointer | The most-attempts-fail pin at WC-14: across the seeded corpus the introduction adoption rate lands inside an authored band, and **the always-adopt mutant reds**. Plus the double-effect single-call pin (one fixture, both effects, the SAME share value read from ONE call — the two-computations mutant reds) |
+| 21 | **DEMOGRAPHICS** — cohort mortality and the two-lane double-answer hazard | Cohort mortality rides the settlement's REALIZED death fraction at the year fold. ⚠ The two-lane hazard (`populationDynamics` + `demographics` both moving people) is **NOT WORSENED: every WC outflow is a people-ledger event through the column machinery, NEITHER PRESSURE LANE**; the wave P4 reconciliation stays deferred and untouched | The mortality-decay fence at WC-15: **the calendar-decay mutant plus the zero-death-rate no-fade fixture** — ⚠ CARRIED IN BOTH VARIANTS until CR-WC-21 is ruled, so **the wave does not land on a coin flip.** [CORRECTED 2026-10-16 (coherence fold) — CR-WC-21 is ruled; the three-pin set of WC-15 is the tripwire.] The people-ledger half is held by WC-6's conservation walker, which admits no count that moves outside a named event |
 | 22 | **`pressureModel` / `stressorDynamics`** | The embattled member joins `CRIME_ARCHETYPES`; **the stressor is CATALOG-ORDINARY** (the `pestilenceKernel` precedent), injected through `stressorsCore.normalizeStressor`. ⛔ Any counterforce row `stressorDynamics` needs **forces the leaf extraction FIRST — extract, never baseline-grow** | The ONE-STRESSOR pin at WC-12: the embattled stressor is the ordinary catalog stressor, deduped by canonical id, and **the parallel-stressor mutant reds.** The extraction half is held by the ceiling ledger: a WC wave that grows the baselined file fails the size ratchet at tolerance zero before it can add the row |
 | 23 | ⭐ **SPINE / SP-D — the errand spine, and the CALL-IN CARRIAGE.** ⚠ **NOT A SECTION 4 CONTRACT.** Added by the 2026-08-07 chair ruling below, which held that a seam is a contract with a neighbour plus a tripwire, that SP-D has both, and that the absence from SECTION 4 is A GAP IN THE SECTION rather than an absence of the seam. Its three homes in the volume, each cited: §7.E names "SP-D call-ins" as the FIRST of four pre-pinned seam rows (L6400); §7.F gates the wave on it, `WC-5 <- WC-1, WC-2 [call-in slice gated: SP-D...]` (L6424); §2.3's attachment table rows it explicitly — "call-ins (the carriage) / SP-D errand purpose classes (`ENVOY_PURPOSES` closed at 2 today, `envoyErrandVocabulary.js:119`) / purpose class + registry row; pre-pinned seam until SP-D lands" (L3306-3308) | **THE RECORD AND THE CARRIAGE ARE SPLIT, AND ONLY THE CARRIAGE IS SEAMED.** §1.9.1: the `CALL_IN_REQUEST` record is ordinary bounded state on WC's own contribution ledger, drop-when-empty, capped at `CALL_IN_REQUESTS_CAP`, and **it needs no errand to exist** — "a call-in without the errand is a standing ask that lapses on its horizon; a call-in with the errand is an envoy at the gate", and nothing in the grading depends on which the world has. The CARRIAGE is the seam: a call-in rides SP-D's spine as a typed purpose, and **WC mints no second purposeful-travel substrate** (J-SP-2: there is exactly one). ⚠⚠ **AND THE COUNTERPART HAS LANDED, SO THIS IS A DISCHARGEABLE PRE-PIN, NOT A PENDING ONE.** MEASURED at build HEAD `eca65c8a` on `claude/composite-r4`, against §1.9.1's premise "the purpose-CLASS machinery is SP-D's mint — `errandMint.js` is ABSENT at HEAD", which is now REFUTED: `errandMint.js` exists and its gate `errandSpineEnabled === true` is read at `errandMint.js:76`, the only such read in the tree; the mint landed `ENVOY_PURPOSE_CLASSES` — six frozen classes (commercial, covert, diplomatic, factional, personal, religious) at `envoyErrandVocabulary.js:130` — plus `PURPOSE_CLASS_BY_PURPOSE` (`:147`) as DATA rather than inference, and `ERRAND_CONSUMERS` (`:276`), the consumer registry. ⭐ **WC's own cited address is STILL EXACT: `ENVOY_PURPOSES` is still `Object.freeze(['sue', 'self_parlay'])` at `envoyErrandVocabulary.js:119`** — closed at TWO, exactly as §2.3 and WC-5 state | ⛔ **THE PRE-PIN AS WORDED CANNOT FIRE, AND MUST BE REPLACED RATHER THAN CARRIED.** §7.E specifies "a pin that reds when SP-D lands without consuming it" (the TR-5 pattern). SP-D HAS LANDED. A pin authored now to red on that event is authored PAST its own trigger — it is green forever and certifies nothing, which is precisely the vacuity §8.4 item 3 warned of. **THE DISCHARGE, AND IT USES MACHINERY THAT ALREADY EXISTS AND ALREADY HAS FIVE USERS:** WC-5 takes its own row in `ERRAND_CONSUMERS` — `{ consumer, purposeClass, module, wave: 'WC-5', built: false }` — in the wave that mints the call-in record, and flips `built: true` in the SAME COMMIT as the carriage. `tests/lint/errandConsumerRegistry.walker.test.js` measures that row BOTH WAYS against the tree, continuously: DIRECTION 1 reds when a module mints through the spine with no registry row ("an unregistered minter is how a second purposeful-travel substrate gets built by accident"), DIRECTION 2 reds both when a `built:true` row does not reach `mintErrandSpine` AND when a `built:false` row does. Five rows already sit at `built:false` for unbuilt volumes (TR-8 factors, WF-2b legates, WF-2b pilgrims, IN-4 couriers, INT-3b ambitious), so the shape is established, not invented. ⚠⚠ **WC TAKES ITS OWN ROW AND NEVER SHARES ONE** — the registry's own ES-1 comment records that the shared `couriers … wave: 'ES-1/IN-4'` row had to be SPLIT because `built` is a single boolean and `module` a single address, so landing one program against a shared row "would have declared IN-4 built and pointed the registry at a file that does not exist". ⚠ TWO FURTHER LIVE PINS BIND WHATEVER WC-5 CHOOSES: the walker's class-TOTALITY arm asserts the set of claimed `purposeClass` values EQUALS `ENVOY_PURPOSE_CLASSES` with `toEqual` both ways, so a NEW class must arrive with a claiming consumer in the same commit; and `tests/domain/errandMint.test.js:51` asserts `Object.keys(PURPOSE_CLASS_BY_PURPOSE)` EQUALS `ENVOY_PURPOSES`, so a new call-in PURPOSE landing without its mapping row resolves to NO class rather than to a guess, and reds |
 
@@ -6811,6 +6855,7 @@ symbol WC names):
 
     settlementStrategy.js:634    function enumerateMoves({ sId, ctx, ... })
     settlementStrategy.js:1294   export { enumerateMoves };
+    [CORRECTED 2026-10-16 (coherence fold) — settlementStrategy.js:569 / :1314 at 00b648c9d; the occupation.js rows below drifted to :125 / :645 / :724 / :1059; navigate by symbol.]
     warHomeCosts.js:443/450      bankedBySource / leviedPopulationBySource
     warCosts.js:367              record.leviedPopulationBySource
     warCoalitionExpenditure:159  record.leviedPopulationBySource
@@ -6830,10 +6875,10 @@ rows had they moved):
 - **Row 1's C1 premise HOLDS.** `STRATEGY_MOVES`, `strategyMoveVocabulary` and
   `MOVE_VOCABULARY` return **ZERO hits across `src/` and `tests/`.** Neither
   volume has minted; "zero is the tree's legal state today" is still true and
-  the AT-MOST-ONE fence is still the right pin rather than EXACTLY-ONE.
+  the AT-MOST-ONE fence is still the right pin rather than EXACTLY-ONE. [SUPERSEDED BY EVENT 2026-10-16 (coherence fold) — HB-1 MINTED STRATEGY_MOVES + ALL_MOVE_TOKENS (strategyMoves.js:61, 1013d58ba); WC-4 AMENDS the UNION, never the emitted set (:29-31); CR-WC-1 is closed by build order; HB-1's single-exporter fence is tests/lint/strategyMoveVocabulary.walker.test.js.]
 - **Row 5's premise HOLDS.** `supplyCargo` and `armySupplyEnabled` return
-  **ZERO hits in `src/`.** F9 is still unbuilt; WC-10's hard gate still binds.
-- **Row 8's premise HOLDS.** `kmScale` returns **ZERO hits in `src/`.**
+  **ZERO hits in `src/`.** F9 is still unbuilt; WC-10's hard gate still binds. [RULED BY DELEGATION 2026-10-16 (OD-FC-21 — still true of `supplyCargo`, but a live scalar supply exists; see WC-10's bracket.]
+- **Row 8's premise HOLDS.** `kmScale` returns **ZERO hits in `src/`.** [CORRECTED 2026-10-16 (coherence fold) — refuted by event: kmScale is live in four src files (WY-1, d0c135f20).]
 
 **⚠ FIVE PREMISES WORTH RE-CHECKING AT THE FOLD**, with the reason each is
 worth the minute:
@@ -6997,7 +7042,7 @@ taken PRE-fold, per C3 of the E5 ruling.
 
 ---
 
-END OF VOLUME. Chair questions CR-WC-1..CR-WC-22 await rulings;
+END OF VOLUME. Chair questions CR-WC-1..CR-WC-22 await rulings; [CORRECTED 2026-10-16 (coherence fold) — THE STATUS OF RECORD IS docs/DESIGN_FP_COHERENCE_FOLD.md §2. All 22 were RULED 2026-08-06 (b75e8c4d; WC_CHAIR_RULINGS.md) except CR-WC-9, which escalated unruled and is RULED BY DELEGATION 2026-10-16, OD-FC-20 (PARKED until chain 2 asks for a field; WC-0E's two normalizers stand writer-less). WC-0 has LANDED (WC-0A..WC-0E, dark). The first felt chain is fold §6 chain 2 THE AUXILIARY (WC-1, WC-2, WC-4 bound to REINFORCE, WC-5 minus the reliability page, WC-14's homecoming sentence on the live return; OD-FC-19); WC-10's showcase and WC-14's institutions sit in Arcs B-D, RECORDED with the slot "THE HOST".]
 WC-0 is buildable on the rulings it needs none of (its pins are
 registration-only, its world-level result is byte-identical, and its
 one declared movement -- the TERM_FAMILIES ratchet and tripwire -- is
